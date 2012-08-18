@@ -5,8 +5,14 @@
 .Spotlight-V100
 .Trashes
 
-# prolog compiler temporary files
+# Logtalk distribution files and directories
+/TODO.txt
+tester_results/
+
+# Prolog compiler temporary files
 .pl-history
 *.out
 *.xwam
 
+# Text editors
+*~
