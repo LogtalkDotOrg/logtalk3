@@ -1,0 +1,67 @@
+.TH ciaolgt 1 "July 15, 2010" "Logtalk 3.00.0" "Logtalk Documentation"
+
+.SH NAME
+ciaolgt \-- Logtalk integration script for Ciao Prolog
+
+.SH SYNOPSIS
+.B ciaolgt
+[
+.BI \-e\ goal
+]
+
+.SH DESCRIPTION
+\f3ciaolgt\f1 is a Logtalk integration script for Ciao Prolog. It automatically loads the Ciao Prolog adapter file, the Logtalk compiler and runtime, the Logtalk default table of library names and paths, and any existing settings file found on the startup directory or in the Logtalk user directory.
+
+.SH OPTIONS
+.TP
+.BI \-e\ goal
+Initialization goal, written between double quotes, to be executed after Logtalk startup.
+
+.SH REQUIREMENTS
+Ciao Prolog 1.13.1 is required.
+
+.SH ENVIRONMENT
+.TP
+.B LOGTALKHOME
+Specifies the location of the Logtalk installation.
+.TP
+.B LOGTALKUSER
+Specifies the location of the Logtalk user directory.
+
+.SH FILES
+.TP
+.BI $LOGTALKHOME/integration/logtalk_ciao.pl
+Prolog file used for loading the necessary files for starting Logtalk using Ciao Prolog as the back-end compiler.
+.TP
+.BI $LOGTALKHOME/adapters/ciao.pl
+The Ciao Prolog adapter files.
+.TP
+.BI $LOGTALKHOME/core/core.pl
+The Logtalk core compiler and runtime file.
+.TP
+.BI $LOGTALKHOME/paths/paths.pl
+The default table of library names and paths.
+.TP
+.BI ./settings.lgt
+Logtalk settings file (for overriding default settings in the adapter files). May not exist.
+.TP
+.BI $LOGTALKUSER/settings.lgt
+Logtalk settings file (for overriding default settings in the adapter files). May not exist.
+
+.SH CAVEATS
+The first run of this script must be made using sudo.
+
+.SH "SEE ALSO"
+The Logtalk website at http://logtalk.org/
+.PP
+The Logtalk User and Reference Manuals at $LOGTALKHOME/manuals/index.html
+.PP
+The Ciao Prolog website at http://www.clip.dia.fi.upm.es/Software/Ciao/index.html
+.PP
+logtalk_user_setup(1),\ logtalk_version_select(1),\ logtalk_backend_select(1)
+
+.SH AUTHOR
+Paulo Moura <pmoura@logtalk.org>
+
+.SH COPYRIGHT
+Copyright (c) 1998-2012 Paulo Moura.

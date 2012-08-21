@@ -1,0 +1,18 @@
+Document: logtalk-docs
+Title: Logtalk
+Author: Paulo Moura
+Abstract: Logtalk documentation.
+ Logtalk is an object-oriented logic programming language that can use
+ most Prolog implementations as a back-end compiler. As a multi-paradigm
+ language, it includes support for both prototypes and classes, protocols
+ (interfaces), component-based programming through category-based composition,
+ event-driven programming, and high-level multi-threading programming.
+Section: Apps/Programming
+
+Format: HTML
+Index: /usr/share/logtalk/manuals/index.html
+Files: /usr/share/logtalk/manuals/*
+
+Format: text
+Files: /usr/share/logtalk/BIBLIOGRAPHY.bib /usr/share/logtalk/CUSTOMIZE.md /usr/share/logtalk/INSTALL.md /usr/share/logtalk/LICENSE.txt /usr/share/logtalk/QUICK_START.md /usr/share/logtalk/README.md /usr/share/logtalk/RELEASE_NOTES.txt /usr/share/logtalk/UPGRADING.md
+

@@ -1,0 +1,71 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  
+%  This file is part of Logtalk <http://logtalk.org/>    
+%  
+%  Logtalk is free software. You can redistribute it and/or modify it under
+%  the terms of the FSF GNU General Public License 3  (plus some additional
+%  terms per section 7).        Consult the "LICENSE.txt" file for details.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+:- object(attvars_hook,
+	implements(expanding)).
+
+	:- info([
+		version is 0.4,
+		author is 'Paulo Moura',
+		date is 2011/03/02,
+		comment is 'Hook object for compiling objects and categories using attributed variables.']).
+
+	:- if(current_logtalk_flag(prolog_dialect, b)).
+
+		term_expansion((attr_unify_hook(Attr, Var) :- Body), [(:- multifile(attr_unify_hook/3)), ({attr_unify_hook(Var, Object, Attr)} :- Body)]) :-
+			logtalk_load_context(entity_name, Object).
+		term_expansion((attribute_goals(_) --> _), []).
+
+	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
+
+		goal_expansion(get_attr(Var, Attr, Value), Module:get_atts(Var, Term)) :-
+			logtalk_load_context(entity_name, Module),
+			Term =.. [Attr, Value].
+		goal_expansion(put_attr(Var, Attr, Value), Module:put_atts(Var, Term)) :-
+			logtalk_load_context(entity_name, Module),
+			Term =.. [Attr, Value].
+
+		term_expansion((:- end_object), [(:- end_object), {(:- module(Module, []))}, {(:- attribute(Module/1))}]) :-
+			logtalk_load_context(entity_name, Module).
+/*		term_expansion((:- Directive), [(:- Directive), {(:- attribute(Module:Module/1))}]) :-
+			nonvar(Directive),
+			functor(Directive, Functor, Arity),
+			Arity >= 1,
+			(	Functor == object, Arity =< 5 ->
+				true
+			;	Functor == category, Arity =< 3
+			),
+			arg(1, Directive, Module).
+*/		term_expansion((attr_unify_hook(Attr, Var) :- Body), [(:- multifile(Module:verify_attributes/3)), (Module:verify_attributes(Var, Term, []) :- Body)]) :-
+			logtalk_load_context(entity_name, Module),
+			Term =.. [Module, Attr].
+		term_expansion((attribute_goals(_) --> _), []).
+
+	:- elif(current_logtalk_flag(prolog_dialect, xsb)).
+
+		term_expansion((attr_unify_hook(Att, Var) :- Body), [{(:- import(from(/(install_verify_attribute_handler,4), machine)))},{(:- install_verify_attribute_handler(Module,Att,Var,TAttrUnifyHookHead))},(attr_unify_hook(Att, Var) :- Body)]) :-
+			logtalk_load_context(entity_name, Module),
+			logtalk::compile_predicate_heads(attr_unify_hook(Att, Var), TAttrUnifyHookHead).
+		term_expansion((attribute_goals(X) --> Body), [{(:- import(from(/(install_attribute_portray_hook,3), machine)))},{(:- install_attribute_portray_hook(Module,X,TAttrUnifyHookHead))},(attribute_goals(X) --> Body)]) :-
+			logtalk_load_context(entity_name, Module),
+			logtalk::expand_term((attribute_goals(X) --> Body), (AttrUnifyHookHead :- _)),
+			logtalk::compile_predicate_heads(AttrUnifyHookHead, TAttrUnifyHookHead).
+
+	:- else.
+
+		term_expansion((attr_unify_hook(Att, Var) :- Body), [(:- multifile(Module:attr_unify_hook/2)), (Module:attr_unify_hook(Att, Var) :- Body)]) :-
+			logtalk_load_context(entity_name, Module).
+		term_expansion((attribute_goals(X) --> Body), [(:- multifile(Module:attribute_goals//1)), (Module:attribute_goals(X) --> Body)]) :-
+			logtalk_load_context(entity_name, Module).
+
+	:- endif.
+
+:- end_object.

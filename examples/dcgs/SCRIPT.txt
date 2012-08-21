@@ -1,0 +1,197 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example:
+
+| ?- logtalk_load(dcgs(loader)).
+...
+
+
+% DCG rules implementing a simple calculator:
+
+| ?- calculator::parse("1+2-3*4", Result).
+
+Result = -9
+yes
+
+
+% recognize MAC addresses:
+
+| ?- macaddr::valid("00:1e:4a:ef:72:8b").
+
+yes
+
+
+% decode Morse code messages (as phrase/2-3 are private methods, we use the
+% "logtalk" built-in object and the <</2 control construct to invoke the foo//0
+% public grammar rule non-terminal):
+
+?- logtalk << phrase(morse::morse(Message), "... --- ...").
+
+Message = [sos] 
+yes
+
+
+% solve a cellphone keypad encoded enigma:
+
+| ?- enigma::solve("4 96853 5683 86 4283 346637 9484 968 8664448", Message).
+
+Message = [i, would, love, to, have, dinner, with, you, tonight] 
+yes
+
+
+% recognizing gramatically correct sentences:
+
+| ?- sentence::parse([the, girl, likes, the, boy], Result).
+
+Result = true
+yes
+
+| ?- sentence::parse([the, girl, scares, the, boy], Result).
+
+Result = false
+yes
+
+
+% generating parse trees for sentences:
+
+| ?- parsetree::parse([the, girl, likes, the, boy], Tree).
+
+Tree = s(np(d(the), n(girl)), vp(v(likes), np(d(the), n(boy))))
+yes
+
+
+% bill of materials example:
+
+| ?- bom::parts(bike, L).
+
+L = [frame, crank, pedal, pedal, chain, spokes, rim, hub, spokes, rim, hub]
+yes
+
+| ?- bom::parts(wheel, L).
+
+L = [spokes, rim, hub]
+yes
+
+
+% parsing command-line shell input:
+
+| ?- shell::parse("pwd; cd ..; ls -a", L).
+
+L = [pwd,'cd ..','ls -a'] ? 
+
+yes
+
+
+% convert a string to a list of tokens (words, numbers, ponctuation):
+
+| ?- tokenizer::tokens(" We owe $1,048,576.24 to Agent 007 for Version 3.14159! ", Tokens).
+
+Tokens = [we,owe,$,1048576.24,to,agent,7,for,version,3.14159,!] ? 
+
+yes
+
+
+% walker movements:
+
+| ?- walker::walk([n(5), e(4), s(2), nw(8), s(5), se(1), n(4)], Ending).
+
+Ending = -0.94974746830583223,6.9497474683058318 ? 
+
+yes
+
+
+% conversion between compound terms and XML:
+
+| ?- xml::convert(word(child, children), word(singular, plural), XML).
+
+XML = '<word><singular>child</singular><plural>children</plural></word>' 
+yes
+
+| ?- xml::convert(Term, Interpretation, '<word><singular>child</singular><plural>children</plural></word>').
+
+Term = word(child, children)
+Interpretation = word(singular, plural) 
+yes
+
+
+% parsing URLs:
+
+| ?- url::parse("http://logtalk.org", Components).
+
+Components = [protocol(http), address([logtalk, org]), path([]), file('')] 
+yes
+
+| ?- url::parse("http://logtalk.org/", Components).
+
+Components = [protocol(http), address([logtalk, org]), path(['']), file('')] 
+yes
+
+| ?- url::parse("http://logtalk.org/cvs", Components).
+
+Components = [protocol(http), address([logtalk, org]), path([cvs]), file('')] 
+yes
+
+| ?- url::parse("http://logtalk.org/cvs.html", Components).
+
+Components = [protocol(http), address([logtalk, org]), path([]), file('cvs.html')] 
+yes
+
+| ?- url::parse("http://193.136.64.5/files/update", Components).
+
+Components = [protocol(http), address([193, 136, 64, 5]), path([files, update]), file('')] 
+yes
+
+
+% command language example:
+
+| ?- faa::main.
+Fly Amzi! Air
+enter command> list flights
+aa101
+aa102
+aa103
+enter command> book elana aa102
+enter command> book tom aa102
+enter command> list passengers aa102
+elana
+tom
+enter command> exit
+yes
+
+
+% double bypass using the {}/1 control constructs of grammar rules and Logtalk
+% (as phrase/2-3 are private methods, we use the "logtalk" built-in object and the
+% <</2 control construct to invoke the foo//0 public grammar rule non-terminal):
+
+| ?- logtalk << phrase(bypass::foo, _, _).
+
+bar predicate called
+yes
+
+
+% run the Logtalk DCG translator on the test cases:
+
+| ?- dcgtest::run.
+
+...
+
+
+% try the meta_non_terminal/1 + call//N example:
+
+| ?- client::print.
+
+1-one
+2-two
+3-three
+a-one
+b-two
+c-three
+yes

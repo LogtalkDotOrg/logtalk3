@@ -1,0 +1,20 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+The entities on this example are divided in two sets. The first set 
+results on compiler warning messages, while the second set results 
+in compiler error messages. To load each sets of entities, compile 
+and load the corresponding loader files:
+
+| ?- logtalk_load(errors(warnings_loader)).
+...
+
+| ?- logtalk_load(errors(errors_loader)).
+...

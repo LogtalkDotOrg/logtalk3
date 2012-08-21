@@ -1,0 +1,268 @@
+if()
+elif()
+else
+endif
+object(, , , , ).
+object(, , , ).
+object(, , ).
+object(, ).
+object().
+protocol(, extends()).
+protocol().
+category(, complements()).
+category(, extends()).
+category(, implements()).
+category().
+encoding()
+complements()
+extends()
+implements()
+imports()
+instantiates()
+specializes()
+end_object.
+end_protocol.
+end_category.
+public(/).
+protected(/).
+private(/).
+uses(, [/]).
+uses().
+use_module(, [/]).
+export(/).
+reexport(/).
+calls().
+info([]).
+info(/, []).
+mode(, one).
+mode(, zero).
+mode(, zero_or_one).
+mode(, zero_or_more).
+mode(, one_or_more).
+mode(, error).
+multifile(/).
+coinductive(/).
+dynamic(/).
+dynamic.
+discontiguous(/).
+meta_predicate().
+meta_non_terminal().
+op(, , ).
+initialization().
+encoding().
+ensure_loaded().
+include().
+synchronized(/).
+synchronized.
+threaded.
+
+asserta()
+assertz()
+clause(, )
+retract()
+retractall()
+abolish()
+
+forall(, )
+findall(, , )
+bagof(, , )
+setof(, , )
+
+threaded()
+threaded_call()
+threaded_once()
+threaded_ignore()
+threaded_exit()
+threaded_peek()
+threaded_wait()
+threaded_notify()
+
+true
+fail
+call()
+ignore()
+once()
+catch(, , )
+throw()
+
+parameter(, )
+self()
+sender()
+this()
+
+current_predicate()
+predicate_property(, )
+
+before(, , )
+after(, , )
+
+phrase(, )
+phrase(, , )
+goal_expansion(, )
+term_expansion(, )
+expand_term(, )
+expand_goal(, )
+
+subsumes_term(, )
+unify_with_occurs_check(, )
+
+atom()
+atomic()
+integer()
+float()
+callable()
+compound()
+nonvar()
+var()
+number()
+ground()
+acyclic_term()
+
+compare()
+
+current_object()
+current_protocol()
+current_category()
+
+create_object(, , , )
+create_protocol(, , )
+create_category(, , , )
+
+object_property(, )
+protocol_property(, )
+category_property(, )
+
+abolish_object()
+abolish_protocol()
+abolish_category()
+
+complements_object(, )
+conforms_to_protocol(, , )
+conforms_to_protocol(, )
+extends_object(, , )
+extends_object(, )
+extends_protocol(, , )
+extends_protocol(, )
+extends_category(, , )
+extends_category(, )
+implements_protocol(, , )
+implements_protocol(, )
+instantiates_class(, , )
+instantiates_class(, )
+specializes_class(, , )
+specializes_class(, )
+imports_category(, , )
+imports_category(, )
+
+current_event(, , , , )
+define_events(, , , , )
+abolish_events(, , , , )
+
+set_logtalk_flag(, )
+current_logtalk_flag(, )
+
+logtalk_compile(, [])
+logtalk_compile()
+logtalk_load(, [])
+logtalk_load()
+logtalk_library_path(, )
+logtalk_load_context(, )
+
+current_input()
+current_output()
+set_input()
+set_output()
+open(, , , )
+open(, , )
+close(, )
+close()
+flush_output()
+flush_output
+stream_property(, )
+set_stream_position(, )
+at_end_of_stream()
+at_end_of_stream
+
+get_char(, )
+get_char()
+get_code(, )
+get_code()
+peek_char(, )
+peek_char()
+peek_code(, )
+peek_code()
+put_char(, )
+put_char()
+put_code(, )
+put_code()
+nl()
+nl
+
+get_byte(, )
+get_byte()
+peek_byte(, )
+peek_byte()
+put_byte(, )
+put_byte()
+
+read(, )
+read()
+read_term(, , )
+read_term(, )
+write(, )
+write()
+writeq(, )
+writeq()
+write_canonical(, )
+write_canonical()
+write_term()
+current_op(, , )
+current_char_conversion()
+char_conversion()
+
+repeat
+
+atom_length(, )
+atom_concat(, , )
+atom_chars(, )
+atom_codes(, )
+sub_atom(, , , , )
+char_code(, )
+number_chars(, )
+number_codes(, )
+
+set_prolog_flag(, )
+current_prolog_flag(, )
+
+arg(, , )
+copy_term(, )
+functor(, , )
+numbervars(, , )
+term_variables(, )
+
+keysort(, )
+sort(, )
+
+halt().
+halt.
+
+abs()
+acos()
+asin()
+atan()
+ceiling()
+cos()
+exp()
+float_fractional_part()
+float_integer_part()
+floor()
+log()
+max(, )
+min(, )
+mod(, )
+rem(, )
+round()
+sign()
+sin()
+sqrt()
+truncate()

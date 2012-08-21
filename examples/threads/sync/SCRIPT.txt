@@ -1,0 +1,59 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the loading the example:
+
+| ?- logtalk_load(sync(loader)).
+...
+
+
+% send three asynchronous messages whose corresponding methods perform output operations:
+
+| ?- threaded_ignore(nasty1::io(alpha)), threaded_ignore(nasty1::io(digit)), threaded_ignore(nasty1::io(alpha)).
+
+a0ab1bc2c3ddefef45gg6hh7ii8jkjk9
+llmmnnopopqqrrsstztzyyxxwwuv
+uv
+
+Yes
+
+
+% send three asynchronous messages whose corresponding methods perform database updates
+% (this may or may not work, most likely will throw an exception):
+
+| ?- threaded_ignore(nasty1::update_db(_)), threaded_ignore(nasty1::update_db(_)), threaded_ignore(nasty1::update_db(_)).
+
+No
+
+
+% the best solution is to declare predicates that need to be thread synchronized as "synchronized",
+% as exemplified in object "nasty2":
+
+| ?- threaded_ignore(nasty2::io(alpha)), threaded_ignore(nasty2::io(digit)), threaded_ignore(nasty2::io(alpha)).
+
+abcdefghijklmnopqrstzyxwuv
+0123456789
+abcdefghijklmnopqrstzyxwuv
+
+Yes
+
+
+| ?- threaded_call(nasty2::update_db(_)), threaded_call(nasty2::update_db(_)), threaded_call(nasty2::update_db(_)).
+
+Yes
+
+| ?- threaded_exit(nasty2::update_db(X)), threaded_exit(nasty2::update_db(Y)), threaded_exit(nasty2::update_db(Z)).
+
+
+X = 1
+Y = 2
+Z = 3 
+
+Yes

@@ -1,0 +1,50 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% load the example:
+
+| ?- logtalk_load(delegates(loader)).
+...
+
+
+% without a delegate:
+
+| ?- a_delegator::operation(String).
+
+String = 'default implementation'
+yes
+
+
+% with a delegate that does not implement thing/1:
+| ?- a_delegator::set_delegate(an_object), a_delegator::operation(String).
+
+String = 'default implementation'
+yes
+
+
+% with a delegate that implements thing/1:
+
+| ?- a_delegator::set_delegate(a_delegate), a_delegator::operation(String).
+
+String = 'delegate implementation'
+yes
+
+
+% same queries but using the parametric object implementation:
+
+| ?- a_delegator(an_object)::operation(String).
+
+String = 'default implementation'
+yes
+
+| ?- a_delegator(a_delegate)::operation(String).
+
+String = 'delegate implementation'
+yes

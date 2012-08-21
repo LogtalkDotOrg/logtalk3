@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<?xml-stylesheet href="logtalk.css" type="text/css"?><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>randomp</title>
+    <link rel="stylesheet" href="logtalk.css" type="text/css"/>
+  </head>
+  <body>
+    <div class="header">
+      <p class="type">protocol</p>
+      <h1 class="code">randomp</h1>
+      <blockquote>
+        <p class="comment">Random number generator protocol.</p>
+      </blockquote>
+    </div>
+    <div class="entity">
+      <div class="section">
+        <dl class="properties">
+          <dt class="key">author:</dt>
+          <dd class="value">
+            <code>Paulo Moura</code>
+          </dd>
+          <dt class="key">version:</dt>
+          <dd class="value">
+            <code>1.1</code>
+          </dd>
+          <dt class="key">date:</dt>
+          <dd class="value">
+            <code>2008/10/31</code>
+          </dd>
+        </dl>
+        <dl class="properties">
+          <dt class="key">compilation:</dt>
+          <dd class="value">
+            <code>static, context_switching_calls</code>
+          </dd>
+        </dl>
+        <p class="comment">(no dependencies on other files)</p>
+      </div>
+    </div>
+    <div class="predicates">
+      <div class="public">
+        <h2>Public interface</h2>
+        <div class="section">
+          <h3 class="code">random/1</h3>
+          <blockquote>
+            <p class="comment">Returns a new random float value in the interval [0.0, 1.0[.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation:</dt>
+            <dd class="value">
+              <code>static, synchronized</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>random(Random)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>random(-float) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">random/3</h3>
+          <blockquote>
+            <p class="comment">Returns a new random value in the interval [Lower, Upper[.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation:</dt>
+            <dd class="value">
+              <code>static, synchronized</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>random(Lower,Upper,Random)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>random(+integer,+integer,-integer) &ndash; zero_or_one</code>
+            </dd>
+            <dd class="value">
+              <code>random(+float,+float,-float) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">randseq/4</h3>
+          <blockquote>
+            <p class="comment">Returns a list of Length random values in the interval [Lower, Upper[.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation:</dt>
+            <dd class="value">
+              <code>static, synchronized</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>randseq(Length,Lower,Upper,List)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>randseq(+integer,+integer,+integer,-list(integer)) &ndash; zero_or_one</code>
+            </dd>
+            <dd class="value">
+              <code>randseq(+integer,+float,+float,-list(float)) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">randset/4</h3>
+          <blockquote>
+            <p class="comment">Returns an ordered set of Length random values in the interval [Lower, Upper[.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation:</dt>
+            <dd class="value">
+              <code>static, synchronized</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>randset(Length,Lower,Upper,Set)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>randset(+integer,+integer,+integer,-list(integer)) &ndash; zero_or_one</code>
+            </dd>
+            <dd class="value">
+              <code>randset(+integer,+float,+float,-list(float)) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">reset_seed/0</h3>
+          <blockquote>
+            <p class="comment">Resets the random seed to its default value.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation:</dt>
+            <dd class="value">
+              <code>static, synchronized</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>reset_seed &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">set_seed/1</h3>
+          <blockquote>
+            <p class="comment">Sets the random seed to the given value.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation:</dt>
+            <dd class="value">
+              <code>static, synchronized</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>set_seed(Seed)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>set_seed(+integer) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="protected">
+        <h2>Protected interface</h2>
+        <div class="section">
+          <p class="comment">(none)</p>
+        </div>
+      </div>
+      <div class="private">
+        <h2>Private predicates</h2>
+        <div class="section">
+          <p class="comment">(none)</p>
+        </div>
+      </div>
+    </div>
+    <div class="operators">
+      <h2>Operators</h2>
+      <div class="section">
+        <h3 class="comment">(none)</h3>
+      </div>
+    </div>
+    <div class="remarks">
+      <h2>Remarks</h2>
+      <div class="section">
+        <h3 class="comment">(none)</h3>
+      </div>
+    </div>
+  </body>
+</html>

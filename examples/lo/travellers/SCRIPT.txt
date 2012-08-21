@@ -1,0 +1,46 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example:
+
+| ?- logtalk_load(lo_travellers(loader)).
+...
+
+
+% build a route by adding one town at a time:
+
+| ?- incremental::route([london, brighton, portsmouth, exeter, oxford, aberystwyth], Route).
+
+Route = oxford-london-portsmouth-brighton-exeter-aberystwyth ;
+...
+
+
+% presort towns by geographical distance before using the incremental algorithm:
+
+| ?- presort::route([london, brighton, portsmouth, exeter, oxford, aberystwyth], Route).
+
+Route = brighton-london-oxford-portsmouth-exeter-aberystwyth ;
+...
+
+
+% come home after the journey:
+
+| ?- circular::route([london, brighton, portsmouth, exeter, oxford, aberystwyth], Route).
+
+Route = london-brighton-portsmouth-exeter-aberystwyth-oxford-london ;
+...
+
+
+% blind search by generating permutations of the list of towns:
+
+| ?- permute::route([london, brighton, portsmouth, exeter, oxford, aberystwyth], Route).
+
+Route = (aberystwyth-exeter-portsmouth-brighton-london-oxford,273.6237583942784)
+yes

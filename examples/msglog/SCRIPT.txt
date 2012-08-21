@@ -1,0 +1,55 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example and the required library files:
+
+| ?- logtalk_load(msglog(loader)).
+...
+
+
+% assume that all library entities have been loaded...
+
+% start recording user messages:
+
+| ?- msglog::record.
+
+yes
+
+% send some messages:
+
+| ?- list::member(X, [1, 2, 3]).
+
+X = 1 ;
+X = 2 ;
+X = 3 ;
+no
+
+| ?- character::is_alpha(p).
+
+yes
+
+| ?- integer::between(1, 4, N).
+
+N = 1 ;
+N = 2 ;
+N = 3 ;
+N = 4 ;
+no
+
+% stop recording and print message log:
+
+| ?- msglog::(stop, print).
+
+list::member(X, [1, 2, 3]).
+character::is_alpha(p).
+integer::between(1, 4, N).
+
+yes
+

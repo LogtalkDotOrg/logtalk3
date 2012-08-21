@@ -1,0 +1,35 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+This directory contains files that provide basic syntax highlighting 
+and entity index for editing Logtalk source files with the Bare Bones
+BBEdit 8.5 (and later versions) or TextWrangler 2.x text editors:
+
+	http://www.barebones.com/
+
+To install copy the file "logtalk.plist" either to the folders:
+
+	~/Library/Application Support/BBEdit/Language Modules/
+	~/Library/Application Support/TextWrangler/Language Modules/
+
+or to the folders:
+
+	/Library/Application Support/BBEdit/Language Modules/
+	/Library/Application Support/TextWrangler/Language Modules/
+
+(create the folder if it does not exist).
+
+Logtalk source files (including the library entities and the programming
+examples) are formatted using tabs (the recommended setting is a tab width
+equivalent to 4 spaces); you may set the tab width on the editor preference
+panel.
+
+
+THESE SYNTAX COLORING SUPPORT FILES ARE UNDER DEVELOPMENT.

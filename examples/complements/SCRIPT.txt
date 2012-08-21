@@ -1,0 +1,71 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example:
+
+| ?- logtalk_load(complements(loader)).
+...
+
+
+% find categories that complement objects:
+
+| ?- complements_object(Category, Object).
+Category = add_on,
+Object = employee.
+yes 
+
+
+% turn event support on for messages sent at the command-line
+% (i.e. for messages sent from the pseudo-object "user"):
+
+| ?- set_logtalk_flag(events, allow).
+
+yes
+
+
+% use the event handler defined in the "add_on" category for the object "employee":
+
+| ?- employee::name(Name).
+Received message name(_16) from user
+
+Name = john
+yes
+
+
+% check the protocol of the object "employee":
+
+| ?- employee::predicates(Predicates).
+Received message predicates(_G180) from user
+
+Predicates = [after/3, age/1, before/3, income/1, name/1, predicates/1, salary/1]
+yes
+
+| ?- employee::predicate_property(predicates(_), Property).
+
+Property = public ;
+Property = static ;
+Property = declared_in(add_on) ;
+Property = defined_in(add_on)
+yes
+
+| ?- employee::predicate_property(income(_), Property).
+
+Property = public ;
+Property = static ;
+Property = declared_in(employee) ;
+Property = alias_of(salary(_70)) ;
+Property = defined_in(employee)
+
+
+% turn event support off:
+
+| ?- set_logtalk_flag(events, deny).
+
+yes

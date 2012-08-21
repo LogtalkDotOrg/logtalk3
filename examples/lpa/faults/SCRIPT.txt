@@ -1,0 +1,29 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example and the required library files:
+
+| ?- logtalk_load(lpa_faults(loader)).
+...
+
+
+| ?- fault::findall.
+
+Please answer all questions with yes or no.
+
+The starter turns but the engine doesnt fire?   no.
+The engine has difficulty starting?     yes.
+The engine cuts out shortly after starting?     yes.
+
+Location      : distributor
+Possible Fault: Worn distributor brushes
+
+No (more) explanations found.
+yes.

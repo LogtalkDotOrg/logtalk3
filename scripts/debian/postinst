@@ -1,0 +1,92 @@
+#!/bin/sh
+
+#############################################################################
+## 
+##   This file is part of Logtalk <http://logtalk.org/>  
+##   Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
+## 
+##   Logtalk Debian package auxiliary script
+## 
+##   This program is free software: you can redistribute it and/or modify
+##   it under the terms of the GNU General Public License as published by
+##   the Free Software Foundation, either version 3 of the License, or
+##   (at your option) any later version.
+##   
+##   This program is distributed in the hope that it will be useful,
+##   but WITHOUT ANY WARRANTY; without even the implied warranty of
+##   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+##   GNU General Public License for more details.
+##   
+##   You should have received a copy of the GNU General Public License
+##   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+##   
+##   Additional licensing terms apply per Section 7 of the GNU General
+##   Public License 3. Consult the "LICENSE.txt" file for details.
+## 
+#############################################################################
+
+echo ""
+echo "Installed Logtalk on \"/usr/share\"."
+
+chown -f -R -L root:root /usr/share/logtalk
+
+echo ""
+echo "Installing and registering Logtalk online documentation..."
+
+if [ "$1" = "configure" ] ; then
+	if which install-docs > /dev/null 2>&1 ; then
+		install-docs -i /usr/share/doc-base/logtalk-docs
+	fi
+fi
+
+chown -f -R -L root:root /usr/share/doc/logtalk
+
+echo "Adding menu entries for some of the Logtalk integration scripts..."
+
+if [ -x /usr/bin/update-menus ] ; then
+	update-menus
+fi
+
+echo
+echo "Links to the \"logtalk_user_setup\", \"logtalk_backend_select\","
+echo "\"logtalk_version_select\", \"lgt2pdf\", \"lgt2html\", \"lgt2xml\","
+echo "and \"lgt2txt\" scripts have been created on \"/usr/bin\"."
+echo
+echo "The following integration scripts are installed for running Logtalk"
+echo "with selected back-end Prolog compilers:"
+echo
+echo "* B-Prolog (version 7.8 or later):         bplgt"
+echo "* CxProlog (version 0.97.5 or later):      cxlgt"
+echo "* ECLiPSe (version 6.0#141 or later):      eclipselgt"
+echo "* GNU Prolog (version 1.4.1 or later):     gplgt"
+echo "* Lean Prolog (version 3.7.10 or later):   lplgt"
+echo "* Qu-Prolog (version 8.12 or later):       qplgt"
+echo "* SICStus Prolog (version 4.1.0 or later): sicstuslgt"
+echo "* SWI-Prolog (version 6.0.0 or later):     swilgt"
+echo "* XSB (version 3.3 or later):              xsblgt     (first run must use sudo)"
+echo "* XSB 64 bits (version 3.3 or later):      xsb64lgt   (first run must use sudo)"
+echo "* XSB MT (version 3.3 or later):           xsbmtlgt   (first run must use sudo)"
+echo "* XSB MT 64 bits (version 3.3 or later):   xsbmt64lgt (first run must use sudo)"
+echo "* YAP (version 6.0.2 or later):            yaplgt"
+echo
+echo "Links to the Prolog integration scripts can be found on \"/usr/bin\"."
+echo "Make sure that the Prolog compilers are properly installed and available"
+echo "on your execution path."
+echo
+echo "Users should run the \"logtalk_user_setup\" shell script once before using"
+echo "the integration scripts."
+echo
+echo "If you get an unexpected failure when using one of the Prolog integration"
+echo "scripts, consult see the \"/usr/share/logtalk/adapters/NOTES.txt\" file"
+echo "for compatibility notes or consult the integration script man page."
+echo
+if [ -x /usr/bin/update-mime-database ]; then
+	mkdir -p /usr/share/mime/packages
+	rm -f /usr/share/mime/packages/logtalk.xml
+	cp /usr/share/lgt3000/scripts/freedesktop/logtalk.xml /usr/share/mime/packages/logtalk.xml
+	update-mime-database /usr/share/mime
+	echo "Added the Logtalk mime-type to the Shared MIME-info Database."
+	echo
+fi
+echo "Logtalk basic installation completed."
+echo

@@ -1,0 +1,35 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+This directory contains the Logtalk.plist file that provides basic syntax 
+coloring, code completion, and entity index (using the "function" list)
+for editing Logtalk source files with the Smultron 2.2 text editor:
+
+	http://smultron.sourceforge.net/
+
+These support files are dual-licensed under the GNU General Public License 3
+and the Smultron license.
+
+To install:
+
+1. Copy the file "logtalk.plist" to the application bundle (ctrl-click on 
+Smultron and choose Show Package Contents and then navigate to the folder
+Contents/Resources/Syntax Definitions/).
+
+2. Copy the file "SyntaxDefinitions.plist" to the folder:
+
+	~/Library/Application Support/Smultron
+
+If the file already exists, merge the contents of the two files.
+
+Logtalk source files (including the library entities and the programming
+examples) are formatted using tabs (the recommended setting is a tab width
+equivalent to 4 spaces); you may set the tab width on the editor preference
+panel.

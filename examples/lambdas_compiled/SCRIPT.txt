@@ -1,0 +1,34 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example:
+
+| ?- logtalk_load(lambdas_compiled(loader)).
+...
+
+
+% the following lambda benchmarks are so far only available when using
+% SWI-Prolog, XSB, or YAP as the Logtalk back-end compilers:
+
+?- lambda_benchmarks::bench1.
+Using map/2 with a closure for testing less(0, X) with X in [1..100000]: 
+% 200,002 inferences, 0.030 CPU in 0.024 seconds (123% CPU, 6666733 Lips)
+Using map/2 with a lambda for testing less(0, X) with X in [1..100000]:  
+% 300,002 inferences, 0.010 CPU in 0.017 seconds (60% CPU, 30000200 Lips)
+true.
+
+?- lambda_benchmarks::bench2.
+Adding 1 to every integer in the list [1..100000] using a local add1/2 predicate:
+% 100,002 inferences, 0.020 CPU in 0.020 seconds (101% CPU, 5000100 Lips)
+Adding 1 to every integer in the list [1..100000] using map/3 with the integer::plus/3 predicate:
+% 300,003 inferences, 0.100 CPU in 0.102 seconds (98% CPU, 3000030 Lips)
+Adding 1 to every integer in the list [1..100000] using map/3 with a lambda argument with a is/2 goal:
+% 200,002 inferences, 0.020 CPU in 0.025 seconds (80% CPU, 10000100 Lips)
+true.

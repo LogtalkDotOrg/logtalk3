@@ -1,0 +1,26 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example and the required library files:
+
+| ?- logtalk_load(attvarsp(loader)).
+...
+
+
+% simple finite, typed, domain reasoner:
+
+| ?- domain(atom)::domain(X, [a,b]), X = c.
+false.
+
+| ?- domain(integer)::domain(X, [1,2]), domain(integer)::domain(X, [1,3]).
+X = 1.
+
+| ?- domain(integer)::domain(X, [1,2,3]), domain(integer)::domain(X, [1,3]).
+domain(X, [1, 3]).

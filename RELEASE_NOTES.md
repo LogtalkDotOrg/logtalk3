@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
-This file is part of Logtalk http://logtalk.org/
-Copyright (c) 1998-2012 Paulo Moura   pmoura@logtalk.org
+This file is part of Logtalk http://logtalk.org/  
+Copyright (c) 1998-2012 Paulo Moura   pmoura@logtalk.org  
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -25,14 +25,14 @@ RELEASE NOTES
 =============
 
 
-3.00.0 Alpha 1 - August ??, 2012
+3.00.0 Alpha 1 - August 21, 2012
 ================================
 
 Logtalk license
 ---------------
 
-Logtalk is now distributed under the GNU General Public License 3, plus
-additional terms as per Section 7 of this license. See the `LICENSE.txt`
+* MODIFIED: Logtalk is now distributed under the GNU General Public License 3,
+plus additional terms as per Section 7 of this license. See the `LICENSE.txt`
 file for details.
 
 Logtalk distribution
@@ -47,6 +47,11 @@ customization.
 * MODIFIED: Renamed the sample `settings.lgt` file to `settings-sample.lgt`,
 thus simplifying backing up and upgrading the Logtalk user directory.
 
+* MODIFIED: The `paths` directory is now symbolically linked instead
+of copied to the Logtalk user folder when using the installers or the
+install scripts. User-defined library paths should be declared in the
+user `settings.lgt` file.
+
 Logtalk compiler and runtime
 ----------------------------
 
@@ -58,8 +63,10 @@ a subset of the message tokens supported by SWI-Prolog and YAP: `flush`,
 `Format-Arguments`, `at_same_line`, and `nl`. Despite being based on the
 support for structured message printing found originally on Quintus Prolog,
 Logtalk's implementation allows tagging of messages not only by kind but
-also by component to allow libraries to define their own messages without
-fear of conflicts with messages from other libraries.
+also by component. This allows libraries to define their own messages
+without fear of conflicts with messages from other libraries. It also
+allows library clients a simple way to refer to all messages from a
+specific library.
 
 * NEW: Support for relative and absolute source file paths in the compiling
 and loading built-in predicates.
@@ -158,8 +165,16 @@ and dynamic entity creation.
 * FIXED: Reporting of the coinduction stack when debugging the preflight
 goals.
 
+* IMPROVED: Use the Logtalk extension specified in the used adapter file when
+loading a settings file.
+
 Prolog adapter and integration files
 ------------------------------------
+
+* IMPROVED: When the `LOGTALKHOME` environment variable is not defined and
+we cannot locate the Logtalk installation directory at the usual places,
+try to use a location relative to the directory where the integration script
+is found.
 
 * MODIFIED: SWI-Prolog adapter file to make it easier to generate and use .qlf
 files for the Logtalk source files. See the default settings file for an usage
@@ -200,7 +215,10 @@ Documentation
 -------------
 
 * CHANGED: The release notes and most informative text files are now formatted
-using GitHub Flavored Markdown syntax for easy conversion to HTML.
+using GitHub Flavored Markdown syntax for easy conversion to e.g. HTML.
+
+* IMPROVED: Change sets in release notes are now prefixed with the change
+type, following the example of the SWI-Prolog release notes.
 
 Library
 -------
@@ -234,8 +252,8 @@ the `tools` directory.
 * UPDATED: The unit tests of several examples to allow printing of predicate
 clause coverage.
 
-* UPDATED: Added an usage example of the meta_non_terminal/1 directive plus
-the call//N built-in non-terminal to the `dcgs` example. Based on a Richard
+* UPDATED: Added an usage example of the `meta_non_terminal/1` directive plus
+the `call//N` built-in non-terminal to the `dcgs` example. Based on a Richard
 O'Keefe post on the SWI-Prolog mailing list.
 
 Installers and installation scripts
@@ -246,6 +264,9 @@ packages that was introduced as a new default in recent MacPorts versions.
 
 * UPDATED: The Windows installer script to generate an integration shortcut
 for the window-based YAP executable introduced in version 6.3.2.
+
+* ADDED: RTF versions of the README and LICENSE files and an icon for use on
+the Windows installer.
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
@@ -3163,7 +3184,7 @@ Added a set of double-clickable *.command Terminal.app files for starting
 Logtalk with selected back-end Prolog compilers on MacOS X.
 
 Updated the MacOS X installer postflight script to open the Logtalk
-installation folder, the *.command files folder, and the "README.txt"
+installation folder, the *.command files folder, and the "README.md"
 file.
 
 Updated the "BIBLIOGRAPHY.bib" file with recent Logtalk publications.

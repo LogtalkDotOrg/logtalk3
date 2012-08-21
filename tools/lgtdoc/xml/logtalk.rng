@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  This file is part of Logtalk <http://logtalk.org/>  
+%  Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
+%
+%  This program is free software: you can redistribute it and/or modify
+%  it under the terms of the GNU General Public License as published by
+%  the Free Software Foundation, either version 3 of the License, or
+%  (at your option) any later version.
+%  
+%  This program is distributed in the hope that it will be useful,
+%  but WITHOUT ANY WARRANTY; without even the implied warranty of
+%  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%  GNU General Public License for more details.
+%  
+%  You should have received a copy of the GNU General Public License
+%  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+%  
+%  Additional licensing terms apply per Section 7 of the GNU General
+%  Public License 3. Consult the "LICENSE.txt" file for details.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+-->
+
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+
+	<define name="logtalk">
+		<element name="logtalk">
+			<ref name="entity"/>
+			<ref name="relations"/>
+			<ref name="predicates"/>
+			<ref name="operators"/>
+			<ref name="remarks"/>
+		</element>
+	</define>
+
+	<define name="entity">
+		<element name="entity">
+			<ref name="name"/>
+			<ref name="type"/>
+			<ref name="entity_compilation"/>
+			<optional>
+				<ref name="comment"/>
+			</optional>
+			<optional>
+				<choice>
+					<ref name="parnames"/>
+					<ref name="parameters"/>
+				</choice>
+			</optional>
+			<optional>
+				<ref name="author"/>
+			</optional>
+			<optional>
+				<ref name="version"/>
+			</optional>
+			<optional>
+				<ref name="date"/>
+			</optional>
+			<optional>
+				<ref name="copyright"/>
+			</optional>
+			<optional>
+				<ref name="license"/>
+			</optional>
+			<zeroOrMore>
+				<ref name="info"/>
+			</zeroOrMore>
+		</element>
+	</define>
+
+	<define name="name">
+		<element name="name">
+			<text/>
+		</element>
+	</define>
+
+	<define name="original">
+		<element name="original">
+			<text/>
+		</element>
+	</define>
+
+	<define name="alternative">
+		<element name="alternative">
+			<text/>
+		</element>
+	</define>
+
+	<define name="type">
+		<element name="type">
+			<choice>
+				<value>category</value>
+				<value>object</value>
+				<value>protocol</value>
+			</choice>
+		</element>
+	</define>
+
+	<define name="entity_compilation">
+		<element name="compilation">
+			<choice>
+				<value>static</value>
+				<value>static, threaded</value>
+				<value>static, synchronized</value>
+				<value>static, threaded, synchronized</value>
+				<value>dynamic</value>
+				<value>dynamic, threaded</value>
+				<value>dynamic, threaded, synchronized</value>
+			</choice>
+		</element>
+	</define>
+
+	<define name="predicate_compilation">
+		<element name="compilation">
+			<choice>
+				<value>static</value>
+				<value>static, synchronized</value>
+				<value>dynamic</value>
+			</choice>
+		</element>
+	</define>
+
+	<define name="comment">
+		<element name="comment">
+			<text/>
+		</element>
+	</define>
+
+	<define name="parnames">
+		<element name="parnames">
+			<text/>
+		</element>
+	</define>
+
+	<define name="parameters">
+		<element name="parameters">
+			<zeroOrMore>
+				<ref name="parameter"/>
+			</zeroOrMore>
+		</element>
+	</define>
+
+	<define name="parameter">
+		<element name="parameter">
+			<ref name="name"/>
+			<ref name="description"/>
+		</element>
+	</define>
+
+	<define name="description">
+		<element name="description">
+			<text/>
+		</element>
+	</define>
+
+	<define name="author">
+		<element name="author">
+			<text/>
+		</element>
+	</define>
+
+	<define name="version">
+		<element name="version">
+			<text/>
+		</element>
+	</define>
+
+	<define name="date">
+		<element name="date">
+			<text/>
+		</element>
+	</define>
+
+	<define name="copyright">
+		<element name="copyright">
+			<text/>
+		</element>
+	</define>
+
+	<define name="license">
+		<element name="license">
+			<text/>
+		</element>
+	</define>
+
+	<define name="info">
+		<element name="info">
+			<ref name="key"/>
+			<ref name="value"/>
+		</element>
+	</define>
+
+	<define name="key">
+		<element name="key">
+			<text/>
+		</element>
+	</define>
+
+	<define name="value">
+		<element name="value">
+			<text/>
+		</element>
+	</define>
+
+	<define name="relations">
+		<element name="relations">
+			<zeroOrMore>
+				<ref name="implements"/>
+			</zeroOrMore>
+			<zeroOrMore>
+				<ref name="imports"/>
+			</zeroOrMore>
+			<zeroOrMore>
+				<ref name="extends"/>
+			</zeroOrMore>
+			<zeroOrMore>
+				<ref name="instantiates"/>
+			</zeroOrMore>
+			<zeroOrMore>
+				<ref name="specializes"/>
+			</zeroOrMore>
+			<zeroOrMore>
+				<ref name="uses"/>
+			</zeroOrMore>
+			<zeroOrMore>
+				<ref name="calls"/>
+			</zeroOrMore>
+			<zeroOrMore>
+				<ref name="alias"/>
+			</zeroOrMore>
+		</element>
+	</define>
+
+	<define name="implements">
+		<element name="implements">
+			<ref name="name"/>
+			<ref name="scope"/>
+			<ref name="file"/>
+		</element>
+	</define>
+
+	<define name="imports">
+		<element name="imports">
+			<ref name="name"/>
+			<ref name="scope"/>
+			<ref name="file"/>
+		</element>
+	</define>
+
+	<define name="extends">
+		<element name="extends">
+			<ref name="name"/>
+			<ref name="scope"/>
+			<ref name="file"/>
+		</element>
+	</define>
+
+	<define name="instantiates">
+		<element name="instantiates">
+			<ref name="name"/>
+			<ref name="scope"/>
+			<ref name="file"/>
+		</element>
+	</define>
+
+	<define name="specializes">
+		<element name="specializes">
+			<ref name="name"/>
+			<ref name="scope"/>
+			<ref name="file"/>
+		</element>
+	</define>
+
+	<define name="uses">
+		<element name="uses">
+			<ref name="name"/>
+			<ref name="file"/>
+		</element>
+	</define>
+
+	<define name="calls">
+		<element name="calls">
+			<ref name="name"/>
+			<ref name="file"/>
+		</element>
+	</define>
+
+	<define name="alias">
+		<element name="alias">
+			<ref name="name"/>
+			<ref name="original"/>
+			<ref name="alternative"/>
+		</element>
+	</define>
+
+	<define name="scope">
+		<element name="scope">
+			<choice>
+				<value>public</value>
+				<value>protected</value>
+				<value>private</value>
+			</choice>
+		</element>
+	</define>
+
+	<define name="file">
+		<element name="file">
+			<text/>
+		</element>
+	</define>
+
+	<define name="predicates">
+		<element name="predicates">
+			<ref name="public"/>
+			<ref name="protected"/>
+			<ref name="private"/>
+		</element>
+	</define>
+
+	<define name="public">
+		<element name="public">
+			<zeroOrMore>
+				<ref name="predicate"/>
+			</zeroOrMore>
+		</element>
+	</define>
+
+	<define name="protected">
+		<element name="protected">
+			<zeroOrMore>
+				<ref name="predicate"/>
+			</zeroOrMore>
+		</element>
+	</define>
+
+
+	<define name="private">
+		<element name="private">
+			<zeroOrMore>
+				<ref name="predicate"/>
+			</zeroOrMore>
+		</element>
+	</define>
+
+	<define name="predicate">
+		<element name="predicate">
+			<ref name="name"/>
+			<ref name="scope"/>
+			<ref name="predicate_compilation"/>
+			<optional>
+				<ref name="meta"/>
+			</optional>
+			<zeroOrMore>
+				<ref name="mode"/>
+			</zeroOrMore>
+			<optional>
+				<ref name="comment"/>
+			</optional>
+			<optional>
+				<ref name="template"/>
+			</optional>
+			<optional>
+				<choice>
+					<ref name="argnames"/>
+					<ref name="arguments"/>
+				</choice>
+			</optional>
+			<optional>
+				<ref name="exceptions"/>
+			</optional>
+			<zeroOrMore>
+				<ref name="info"/>
+			</zeroOrMore>
+			<optional>
+				<ref name="examples"/>
+			</optional>
+		</element>
+	</define>
+
+	<define name="meta">
+		<element name="meta">
+			<text/>
+		</element>
+	</define>
+
+	<define name="mode">
+		<element name="mode">
+			<ref name="template"/>
+			<ref name="solutions"/>
+		</element>
+	</define>
+
+	<define name="template">
+		<element name="template">
+			<text/>
+		</element>
+	</define>
+
+	<define name="solutions">
+		<element name="solutions">
+			<choice>
+				<value>zero</value>
+				<value>zero_or_one</value>
+				<value>zero_or_more</value>
+				<value>one</value>
+				<value>one_or_more</value>
+				<value>error</value>
+			</choice>
+		</element>
+	</define>
+
+	<define name="argnames">
+		<element name="argnames">
+			<text/>
+		</element>
+	</define>
+
+	<define name="arguments">
+		<element name="arguments">
+			<zeroOrMore>
+				<ref name="argument"/>
+			</zeroOrMore>
+		</element>
+	</define>
+
+	<define name="argument">
+		<element name="argument">
+			<ref name="name"/>
+			<ref name="description"/>
+		</element>
+	</define>
+
+	<define name="exceptions">
+		<element name="exceptions">
+			<zeroOrMore>
+				<ref name="exception"/>
+			</zeroOrMore>
+		</element>
+	</define>
+
+	<define name="exception">
+		<element name="exception">
+			<ref name="condition"/>
+			<ref name="term"/>
+		</element>
+	</define>
+
+	<define name="condition">
+		<element name="condition">
+			<text/>
+		</element>
+	</define>
+
+	<define name="term">
+		<element name="term">
+			<text/>
+		</element>
+	</define>
+
+	<define name="examples">
+		<element name="examples">
+			<zeroOrMore>
+				<ref name="example"/>
+			</zeroOrMore>
+		</element>
+	</define>
+
+	<define name="example">
+		<element name="example">
+			<ref name="description"/>
+			<ref name="call"/>
+			<ref name="bindings"/>
+		</element>
+	</define>
+
+	<define name="call">
+		<element name="call">
+			<text/>
+		</element>
+	</define>
+
+	<define name="bindings">
+		<element name="bindings">
+			<text/>
+		</element>
+	</define>
+
+	<define name="operators">
+		<element name="operators">
+			<zeroOrMore>
+				<ref name="operator"/>
+			</zeroOrMore>
+		</element>
+	</define>
+
+	<define name="operator">
+		<element name="operator">
+			<ref name="term"/>
+			<ref name="scope"/>
+		</element>
+	</define>
+
+	<define name="remarks">
+		<element name="remarks">
+			<zeroOrMore>
+				<ref name="remark"/>
+			</zeroOrMore>
+		</element>
+	</define>
+
+	<define name="remark">
+		<element name="remark">
+			<ref name="topic"/>
+			<ref name="text"/>
+		</element>
+	</define>
+
+	<define name="topic">
+		<element name="topic">
+			<text/>
+		</element>
+	</define>
+
+	<define name="text">
+		<element name="text">
+			<text/>
+		</element>
+	</define>
+
+	<start>
+		<choice>
+			<ref name="logtalk"/>
+		</choice>
+	</start>
+
+</grammar>

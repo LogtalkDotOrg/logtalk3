@@ -1,0 +1,218 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example and the required library files:
+
+| ?- logtalk_load(bricks(loader)).
+...
+
+
+% create four bricks, all standing on the "ground" (use your imagination... ;-)
+% (don't use message broadcasting syntax in order to workaround a XSB parser bug)
+
+| ?- brick::new(a, [position-(8, 1)]), brick::new(b, [position-(6, 1)]), brick::new(c, [position-(4, 1)]), brick::new(d, [position-(2, 1)]).
+yes
+
+% set up ascii stack monitor so we can watch the bricks moving
+
+| ?- after_event_registry::set_monitor(_, move(_,_), _, stack_monitor).
+yes
+
+
+% make the stack (don't use message broadcasting syntax in order to workaround a XSB parser bug)
+
+| ?- brick_stack::add_tuple([c,d]), brick_stack::add_tuple([b,c]), brick_stack::add_tuple([a,b]).
+|.c......
+|.d...b.a
+---------
+|.b......
+|.c......
+|.d.....a
+---------
+|.a
+|.b
+|.c
+|.d
+---
+yes
+
+
+% check results
+
+| ?- brick_stack::tuple(Tuple), write(Tuple), nl, fail.
+[c,d]
+[b,c]
+[a,b]
+no
+
+| ?- before_event_registry::monitors(Mb), after_event_registry::monitors(Ma).
+Ma = [brick_stack, stack_monitor] 
+Mb = [brick_stack]
+yes
+
+
+% move all stack to new position by moving bottom brick; check results
+
+| ?- d::move(9, 1).
+|.a.......
+|.b.......
+|.c.......
+|........d
+----------
+|.a.......
+|.b.......
+|........c
+|........d
+----------
+|.a.......
+|........b
+|........c
+|........d
+----------
+|........a
+|........b
+|........c
+|........d
+----------
+yes
+
+| ?- a::position(Xa, Ya), b::position(Xb, Yb), c::position(Xc, Yc), d::position(Xd, Yd).
+Xa = 9,
+Xb = 9,
+Xc = 9,
+Xd = 9,
+Ya = 4,
+Yb = 3,
+Yc = 2,
+Yd = 1
+yes
+
+| ?- brick_stack::tuple(Tuple), write(Tuple), nl, fail.
+[c,d]
+[b,c]
+[a,b]
+no
+
+
+% break stack in half by moving b to the "ground"; check results
+
+| ?- b::move(3, 1).
+|........a
+|.........
+|........c
+|..b.....d
+----------
+|..a.....c
+|..b.....d
+----------
+yes
+
+| ?- a::position(Xa, Ya), b::position(Xb, Yb), c::position(Xc, Yc), d::position(Xd, Yd).
+Xa = 3,
+Xb = 3,
+Xc = 9,
+Xd = 9,
+Ya = 2,
+Yb = 1,
+Yc = 2,
+Yd = 1
+yes
+
+| ?- brick_stack::tuple(Tuple), write(Tuple), nl, fail.
+[c,d]
+[a,b]
+no
+
+
+% create new brick_stack tuple ; check results
+
+| ?- brick_stack::add_tuple([d, a]).
+|..d......
+|..a.....c
+|..b......
+----------
+|..c
+|..d
+|..a
+|..b
+----
+yes
+
+| ?- a::position(Xa, Ya), b::position(Xb, Yb), c::position(Xc, Yc), d::position(Xd, Yd).
+Xa = 3,
+Xb = 3,
+Xc = 3,
+Xd = 3,
+Ya = 2,
+Yb = 1,
+Yc = 4,
+Yd = 3
+yes
+
+| ?- brick_stack::tuple(Tuple), write(Tuple), nl, fail.
+[c,d]
+[a,b]
+[d,a]
+no
+
+
+% move all stack to new position by moving bottom brick; check results
+
+| ?- b::move(5, 1).
+|..c..
+|..d..
+|..a..
+|....b
+------
+|..c..
+|..d..
+|....a
+|....b
+------
+|..c..
+|....d
+|....a
+|....b
+------
+|....c
+|....d
+|....a
+|....b
+------
+yes
+
+| ?- a::position(Xa, Ya), b::position(Xb, Yb), c::position(Xc, Yc), d::position(Xd, Yd).
+Xa = 5,
+Xb = 5,
+Xc = 5,
+Xd = 5,
+Ya = 2,
+Yb = 1,
+Yc = 4,
+Yd = 3
+yes
+
+| ?- brick_stack::tuple(Tuple), write(Tuple), nl, fail.
+[c,d]
+[a,b]
+[d,a]
+no
+
+
+% clean up instances, tuples and monitors
+
+| ?- brick_stack::remove_all_tuples.
+yes
+
+| ?- after_event_registry::del_monitors(_, _, _, stack_monitor).
+yes
+
+| ?- brick::delete_all.
+yes

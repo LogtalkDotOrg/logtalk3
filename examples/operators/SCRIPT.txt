@@ -1,0 +1,108 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example:
+
+| ?- logtalk_load(operators(loader)).
+...
+
+
+% operators declared inside an object are not visible outside:
+
+| ?- double::(I double J).
+
+Syntax error: Operator expected
+
+
+% you must use instead functor notation:
+
+| ?- double::double(I, J).
+
+I = 1
+J = 2 ;
+
+I = 2
+J = 4 ;
+
+I = 3
+J = 6 
+
+yes
+
+
+% operators also affect inputing of terms, enabling this example to work:
+
+| ?- triple::read_from_file.
+
+yes
+
+| ?- triple::triple(I, J).
+
+I = 1
+J = 3 ;
+
+I = 2
+J = 6 ;
+
+I = 3
+J = 9 
+
+yes
+
+
+% local operators are used when reading terms (check the file "previous.txt"
+% generated from the file "next.txt" by the object "reverse" by opening the
+% files on a text editor):
+
+| ?- reverse::reverse_file.
+
+yes
+
+
+% the "edge" operator on the "local.lgt" source file is not globally visible:
+
+| ?- graph1::(N1 edge N2).
+uncaught exception: error(syntax_error('user_input:10 (char:13) ) or operator expected'),read_term/3)
+
+
+% you must use instead functor notation:
+
+| ?- graph1::edge(N1, N2).
+
+N1 = a
+N2 = b ;
+
+N1 = a
+N2 = c ;
+
+N1 = b
+N2 = d ;
+
+N1 = c
+N2 = d
+
+yes
+
+
+| ?- graph1::path(a, d, Path).
+
+Path = [a, b, d] ;
+
+Path = [a, c, d] 
+
+yes
+
+
+% confirm that the "edge" operator have not became global:
+
+| ?- current_op(P, T, edge).
+
+no
+

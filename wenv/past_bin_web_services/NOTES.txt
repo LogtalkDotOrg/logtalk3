@@ -1,0 +1,22 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+Some paste bin web services support Logtalk/Prolog syntax highlighting.
+These include:
+
+http://dumpz.org/ 
+http://pzt.me/ 
+http://plakkert.nl/ 
+http://pastebin.com/ 
+http://love.paste.to/
+
+There are likely a few others (most paste web services seem to use the
+GeSHi syntax highlighter, which includes support for Logtalk/Prolog in
+its latest releases).

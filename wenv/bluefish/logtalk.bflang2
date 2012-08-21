@@ -1,0 +1,164 @@
+<?xml version="1.0" ?>
+<!--
+		Bluefish HTML Editor
+		logtalk.bflang2 $Revision:  $
+ 
+		Copyright (C) 2008-2009 Olivier Sessink
+
+	    This program is free software: you can redistribute it and/or modify
+		it under the terms of the GNU General Public License as published by
+		the Free Software Foundation, either version 3 of the License, or
+		(at your option) any later version.
+
+		This program is distributed in the hope that it will be useful,
+		but WITHOUT ANY WARRANTY; without even the implied warranty of
+		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+		GNU General Public License for more details.
+
+		You should have received a copy of the GNU General Public License
+		along with this program.  If not, see <http://www.gnu.org/licenses/>.		
+-->
+
+<bflang name="Logtalk" version="2.0" table="1043" contexts="2" matches="43">
+
+<header>
+	<mime type="text/x-logtalk"/>
+	<highlight name="keyword" style="keyword" />
+	<highlight name="OO-keyword" style="special-keyword"  />
+	<highlight name="brackets" style="brackets"  />
+	<highlight name="type" style="type"  />
+	<highlight name="comment" style="comment"  />
+	<highlight name="string" style="string"  />
+	<highlight name="variable" style="value"   />
+	<highlight name="directive" style="preprocessor"  />
+	<highlight name="numbers" style="value"  />
+</header>
+
+<properties>
+	<comment type="block" start="/*" end="*/" />
+	<comment type="line" start="%" />
+	<smartindent characters=":-" />
+	<smartoutdent characters="." />
+</properties>
+
+<!--
+<block-group id="blocks">
+	<block id="external call" begin="{" end="}" scanned="true" foldable="false" markup="false" case="true" />
+	<block id="block comment" begin="/*" end="*/" scanned="false" foldable="true" markup="false" case="true" defaultstyle="comment"/>
+</block-group>
+-->
+
+<definition>
+<context symbols=" ;(){}[]:\&#34;\\',&gt;&lt;*&amp;^%!+=-|/?#&#9;&#10;&#13;">
+
+<element pattern="\b[_A-Z][_a-zA-Z0-9]*\b" is_regex="1" highlight="variable" />
+
+
+<group autocomplete="0" is_regex="1" highlight="string">
+	<!-- strings -->
+	<element pattern=">&quot;[^&quot;]*&quot;" />
+	<!-- quoted atoms -->
+	<element pattern="&apos;[^&apos;]*&apos;" />
+</group>
+
+<!-- directives -->
+<group autocomplete="1" is_regex="1" highlight="preprocessor">
+	<!-- entity opening directives -->
+	<element pattern="^\s*\:-\s(object|protocol|category)(?=[(])" />
+	<!-- entity relations -->
+	<element pattern="\b(complements|extends|i(mp(orts|lements)|nstantiates)|specializes)(?=[(])" />
+	<!-- entity closing directives -->
+	<element pattern="^\s*\:-\send_(object|protocol|category)(?=[.])" />
+	<!-- entity directives -->
+	<element pattern="^\s*\:-\sin(clude|fo|icialization)(?=[(])" />
+	<!-- entity directives (no args) -->
+	<element pattern="^\s*\:-\s(dynamic|synchronized|threaded)(?=[.])" />
+	<!-- predicate scope directives -->
+	<element pattern="^\s*\:-\sp(ublic|r(ivate|otected))(?=[(])" />
+	<!-- other predicate directives -->
+	<element pattern="^\s*\:-\s(alias|d(ynamic|iscontiguous)|m(eta_predicate|ode|ultifile)|synchronized)(?=[(])" />
+</group>
+
+<!-- logtalk built-in methods -->
+<group autocomplete="1" is_regex="1" highlight="keyword">
+	<!-- event handlers -->
+	<element pattern="\b(after|before)(?=[(])" />
+	<!-- execution context methods -->
+	<element pattern="\b(parameter|this|se(lf|nder))(?=[(])" />
+	<!-- reflection methods -->
+	<element pattern="\b(current_predicate|predicate_property)(?=[(])" />
+	<!-- DCGs -->
+	<element pattern="\b(expand_term|(goal|term)_expansion|phrase)(?=[(])" />
+	<!-- database methods -->
+	<element pattern="\b(a(bolish|ssert(a|z))|clause|retract(all)?)(?=[(])" />
+	<!-- all solutions -->
+	<element pattern="\b((bag|set)of|f(ind|or)all)(?=[(])" />
+</group>
+
+<!-- logtalk built-in predicates -->
+<group autocomplete="1" is_regex="1" highlight="keyword">
+	<!-- entity -->
+	<element pattern="\b((abolish|c(reate|urrent))_(object|protocol|category)|(object|protocol|category)_property)(?=[(])" />
+	<!-- entity relation predicates -->
+	<element pattern="\b(complements_object|extends_(object|protocol|category)|imp(lements_protocol|orts_category)|(instantiates|specializes)_class)(?=[(])" />
+	<!-- events -->
+	<element pattern="\b(current_event|(abolish|define)_events)(?=[(])" />
+	<!-- flags -->
+	<element pattern="\b(curren|se)t_(prolog|logtalk)_flag(?=[(])" />
+	<!-- compiling, loading, and library paths -->
+	<element pattern="\blogtalk_(compile|l(ibrary_path|oad|oad_context))(?=[(])" />
+	<!-- multi-threading -->
+	<element pattern="\b(threaded(_(call|once|ignore|race|exit|peek|wait|notify))?)(?=[(])" />
+</group>
+
+<!-- numbers -->
+<group autocomplete="0" is_regex="1" highlight="numbers">
+	<!-- binary numbers -->
+	<element pattern="(?&lt;=[^[A-Za-z_0-9]]|^)(0b[0-1]+)" />
+	<!-- octal numbers -->
+	<element pattern="(?&lt;=[^[A-Za-z_0-9]]|^)(0o[0-7]+)" />
+	<!-- hexadecimal numbers -->
+	<element pattern="(?&lt;=[^[A-Za-z_0-9]]|^)(0x\h+)" />
+	<!-- decimal numbers -->
+	<element pattern="(?&lt;=[^[A-Za-z_0-9]]|^)(\d+((\.\d+)?([eE]([-+])?\d+)?)?)" />
+	<!-- character codes -->
+	<element pattern="(?&lt;=[^[A-Za-z_0-9]]|^)(0'.)" />
+</group>
+
+<!-- prolog built-in predicates -->
+<group autocomplete="1" is_regex="1" highlight="keyword">
+	<!-- term unification -->
+	<element pattern="\bunify_with_occurs_check(?=[(])" />
+	<!-- term creation and decomposition -->
+	<element pattern="\b(functor|arg|copy_term)(?=[(])" />
+	<!-- evaluable functors -->
+	<element pattern="\b(rem|mod|abs|sign|flo(at|or)|truncate|round|ceiling|float_(integer|fractional)_part)(?=[(])" />
+	<!-- other arithemtic functors -->
+	<element pattern="\b(cos|atan|exp|log|s(in|qrt))(?=[(])" />
+	<!-- term testing -->
+	<element pattern="\b(var|atom(ic)?|integer|float|compound|n(onvar|umber))(?=[(])" />
+	<!-- stream selection and control -->
+	<element pattern="\b((curren|se)t_(in|out)put|open|close|flush_output|stream_property|at_end_of_stream|set_stream_position)(?=[(])" />
+	<!-- stream selection and control (no args) -->
+	<element pattern="\bflush_output\b" />
+	<!-- character and byte input/output -->
+	<element pattern="\b(nl|(get|p(eek|ut))_(byte|c(har|ode)))(?=[(])" />
+	<!-- character and byte input/output (no args) -->
+	<element pattern="\bnl\b" />
+	<!-- term input/output -->
+	<element pattern="\b(read(_term)?|write(q|_(canonical|term))?|(current_)?op|(current_)?char_conversion)(?=[(])" />
+	<!-- atomic term processing -->
+	<element pattern="\b(atom_(length|c(hars|o(ncat|des)))|char_code|sub_atom|number_c(har|ode)s)(?=[(])" />
+	<!-- implementation defined hooks functions -->
+	<element pattern="\b((se|curren)t_prolog_flag|halt)(?=[(])" />
+	<!-- implementation defined hooks functions (no args) -->
+	<element pattern="\bhalt\b" />
+	<!-- logic and control -->
+	<element pattern="\b(once|ignore)(?=[(])" />
+	<!-- logic and control (no args) -->
+	<element pattern="\brepeat\b" />
+</group>
+
+</context>
+</definition>
+</bflang>

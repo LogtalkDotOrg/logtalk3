@@ -1,0 +1,29 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+This directory contains files that provide syntax highlighting 
+for editing Logtalk source files with the SubEthaEdit 1.x text 
+editor (http://www.codingmonkeys.de/subethaedit/).
+
+
+To install copy the file "logtalk.plist" either to the folder:
+
+	~/Library/Application Support/SubEthaEdit/Syntax Definitions/
+
+or to the folder:
+
+	/Library/Application Support/SubEthaEdit/Syntax Definitions/
+
+(create the folder if it does not exist).
+
+Logtalk source files (including the library entities and the programming
+examples) are formatted using tabs (the recommended setting is a tab width
+equivalent to 4 spaces); you may set the tab width on the editor preference
+panel.

@@ -1,0 +1,44 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example:
+
+| ?- logtalk_load(instmethods(loader)).
+...
+
+
+% instance1 definition for method "method" is found in its class:
+
+| ?- instance1::method.
+
+This is the default definition for the method, stored in class root.
+
+yes
+
+
+% instance2 overrides definition of method "method"
+
+| ?- instance2::method.
+
+This is an overriding definition stored in the instance2 instance itself.
+
+yes
+
+
+% instance3 specializes definition of method "method"
+
+| ?- instance3::method.
+
+This is a specializing definition stored in the instance3 instance itself.
+It makes a super call to execute the default definition:
+
+This is the default definition for the method, stored in class root.
+
+yes

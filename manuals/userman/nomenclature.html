@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<!--
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  
+%  This file is part of Logtalk <http://logtalk.org/>    
+%  Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
+%  
+%  Logtalk is free software. You can redistribute it and/or modify it under
+%  the terms of the FSF GNU General Public License 3  (plus some additional
+%  terms per section 7).        Consult the "LICENSE.txt" file for details.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="application/xml+xhtml; charset=utf-8" />
+	<title>Logtalk user manual: nomenclature</title>
+	<link rel="stylesheet" href="../screen.css" type="text/css" media="screen"/>
+	<link rel="stylesheet" href="../print.css" type="text/css" media="print"/>
+</head>
+
+<body>
+
+<div class="top-left">Logtalk user manual</div> 
+<div class="top-right">Nomenclature</div>
+<div class="bottom-left"><span class="page"/></div> 
+<div class="bottom-right"><span class="page"/></div>
+<div class="navtop"><a href="../index.html">Contents</a> &gt; <a href="index.html">User Manual</a> &gt; Nomenclature</div>
+
+<h1 id="nomenclature_nomenclature">Nomenclature</h1>
+
+<p>
+Depending on your Object-oriented Programming background (or lack of it), you may find Logtalk nomenclature either familiar or at odds with the terms used in other languages. In addition, being a superset of Prolog, terms such as <em>predicate</em> and <em>method</em> are often used interchangeably. Logtalk inherits most of its nomenclature from Smalltalk, arguably (and somehow sadly) not the most popular OOP language nowadays. In this section, we map nomenclatures from popular OOP languages such as C++ and Java to the Logtalk nomenclature.
+</p>
+
+<h2 id="nomenclature_cpp">C++ nomenclature</h2>
+
+<p>
+There are several C++ glossaries available on the Internet. The list that follows relates the most commonly used C++ terms with their Logtalk equivalents.
+</p>
+
+<dl>
+	<dt><strong>abstract class</strong></dt>
+		<dd>Logtalk uses a <em>operational</em> definition of abstract class: any class that does not inherit a method for creating new instances is an abstract class. Moreover, Logtalk supports <em>interfaces</em>/<em>protocols</em>, which are often a better way to provide the functionality of C++ abstract classes.</dd>
+</dl>
+<dl>
+	<dt><strong>base class</strong></dt>
+		<dd>Logtalk uses the term <em>superclass</em> with the same meaning.</dd>
+</dl>
+<dl>
+	<dt><strong>data member</strong></dt>
+		<dd>Logtalk uses <em>predicates</em> for representing both behavior and data.</dd>
+</dl>
+<dl>
+	<dt><strong>constructor function</strong></dt>
+		<dd>There are no special methods for creating new objects in Logtalk. Instead, Logtalk provides a built-in predicate, <code>create_object/4</code>, which is often used to define more sophisticated object creation predicates.</dd>
+</dl>
+<dl>
+	<dt><strong>derived class</strong></dt>
+		<dd>Logtalk uses the term <em>subclass</em> with the same meaning.</dd>
+</dl>
+<dl>
+	<dt><strong>destructor function</strong></dt>
+		<dd>There are no special methods for deleting new objects in Logtalk. Instead, Logtalk provides a built-in predicate, <code>abolish_object/1</code>, which is often used to define more sophisticated object deletion predicates.</dd>
+</dl>
+<dl>
+	<dt><strong>friend function</strong></dt>
+		<dd>Not supported in Logtalk. Nevertheless, see the manual section on <em>meta-predicates.</em></dd>
+</dl>
+<dl>
+	<dt><strong>instance</strong></dt>
+		<dd>In Logtalk, an instance can be either created dynamically at runtime or defined statically in a source file in the same way as classes.</dd>
+</dl>
+<dl>
+	<dt><strong>member</strong></dt>
+		<dd>Logtalk uses the term predicate.</dd>
+</dl>
+<dl>
+	<dt><strong>member function</strong></dt>
+		<dd>Logtalk uses predicates for representing both behavior and data.</dd>
+</dl>
+<dl>
+	<dt><strong>namespace</strong></dt>
+		<dd>Logtalk does not support multiple identifier namespaces. All Logtalk entity identifiers share the same namespace (Logtalk entities are objects, categories, and protocols).</dd>
+</dl>
+<dl>
+	<dt><strong>nested class</strong></dt>
+		<dd>Logtalk does not support nested classes.</dd>
+</dl>
+<dl>
+	<dt><strong>template</strong></dt>
+		<dd>Logtalk supports <em>parametric objects</em>, which allows you to get the similar functionality of templates at runtime.</dd>
+</dl>
+<dl>
+	<dt><strong>this</strong></dt>
+		<dd>Logtalk uses the built-in context method <code>self/1</code> for retrieving the current instance. Logtalk also provides a <code>this/1</code> method but for returning the class containing the method being executed. Why the name clashes? Well, the notion of <em>self</em> was inherited from Smalltalk, which predates C++.</dd>
+</dl>
+<dl>
+	<dt><strong>virtual member function</strong></dt>
+		<dd>There is no <code>virtual</code> keyword in Logtalk. By default, Logtalk uses dynamic binding for locating both method declarations and method definitions. Moreover, methods that are declared but not defined simply fail when called.</dd>
+</dl>
+
+<h2 id="nomenclature_java">Java nomenclature</h2>
+
+<p>
+There are several Java glossaries available on the Internet. The list that follows relates the most commonly used Java terms with their Logtalk equivalents.
+</p>
+
+<dl>
+	<dt><strong>abstract class</strong></dt>
+		<dd>Logtalk uses a <em>operational</em> definition of abstract class: any class that does not inherit a method for creating new instances is an abstract class. I.e. there is no <code>abstract</code> keyword in Logtalk.</dd>
+</dl>
+<dl>
+	<dt><strong>abstract method</strong></dt>
+		<dd>In Logtalk, you may simply declare a method (predicate) in a class without defining it, leaving its definition to some descendant sub-class.</dd>
+</dl>
+<dl>
+	<dt><strong>assertion</strong></dt>
+		<dd>There is no <code>assertion</code> keyword in Logtalk. Assertions are supported using Logtalk compilation hooks.</dd>
+</dl>
+<dl>
+	<dt><strong>extends</strong></dt>
+		<dd>There is no <code>extends</code> keyword in Logtalk. Class inheritance is indicated using <em>specialization</em> relations. Moreover, the <em>extends</em> relation is used in Logtalk to indicate protocol or prototype extension.</dd>
+</dl>
+<dl>
+	<dt><strong>interface</strong></dt>
+		<dd>Logtalk uses the term <em>protocol</em> with the same meaning.</dd>
+</dl>
+<dl>
+	<dt><strong>callback method</strong></dt>
+		<dd>Logtalk supports <em>event-driven programming</em>, the most common use context of callback methods.</dd>
+</dl>
+<dl>
+	<dt><strong>class method</strong></dt>
+		<dd>Class methods may be implemented in Logtalk by using a metaclass for the class and defining the class methods in the metaclass. I.e. class methods are simply instance methods of the class metaclass.</dd>
+</dl>
+<dl>
+	<dt><strong>class variable</strong></dt>
+		<dd>True class variables may be implemented in Logtalk by using a metaclass for the class and defining the class variables in the class. I.e. class variables are simply instance variables of the class metaclass. Shared instance variables may be implemented by using the built-in database methods (which can be used to implement variable assignment) to access and updated a single occurrence of the variable stored in the class (there is no <code>static</code> keyword in Logtalk).</dd>
+</dl>
+<dl>
+	<dt><strong>constructor</strong></dt>
+		<dd>There are no special methods for creating new objects in Logtalk. Instead, Logtalk provides a built-in predicate, <code>create_object/4</code>, which is often used to define more sophisticated object creation predicates.</dd>
+</dl>
+<dl>
+	<dt><strong>final</strong></dt>
+		<dd>There is no <code>final</code> keyword in Logtalk; methods may always be redefined in subclasses (and instances!).</dd>
+</dl>
+<dl>
+	<dt><strong>inner class</strong></dt>
+		<dd>Inner classes are not supported in Logtalk.</dd>
+</dl>
+<dl>
+	<dt><strong>instance</strong></dt>
+		<dd>In Logtalk, an instance can be either created dynamically at runtime or defined statically in a source file in the same way as classes.</dd>
+</dl>
+<dl>
+	<dt><strong>method</strong></dt>
+		<dd>Logtalk uses the term <em>predicate</em> interchangeably with the term <em>method</em>.</dd>
+</dl>
+<dl>
+	<dt><strong>method call</strong></dt>
+		<dd>Logtalk usually uses the expression <em>message sending</em> for method calls, true to its Smalltalk heritage.</dd>
+</dl>
+<dl>
+	<dt><strong>method signature</strong></dt>
+		<dd>Logtalk selects the method/predicate to execute in order to answer a method call based only on the method name (functor) and number of arguments (arity). Logtalk (and Prolog) are not typed languages in the same sense as Java.</dd>
+</dl>
+<dl>
+	<dt><strong>reflection</strong></dt>
+		<dd>Logtalk supports both <em>structural reflection</em> (using a set of built-in predicates and built-in methods) and <em>behavioral reflection</em> (using event-driven programming).</dd>
+</dl>
+<dl>
+	<dt><strong>static</strong></dt>
+		<dd>There is no <code>static</code> keyword in Logtalk. See the entries on <em>class methods</em> and <em>class variables</em>.</dd>
+</dl>
+<dl>
+	<dt><strong>super</strong></dt>
+		<dd>Instead of a <code>super</code> keyword, Logtalk provides a <em>super</em> operator, <code>^^/1</code>, for calling overridden methods.</dd>
+</dl>
+<dl>
+	<dt><strong>synchronized</strong></dt>
+		<dd>Logtalk supports <em>multi-threading programming</em> in selected Prolog compilers, including a <code>synchronized/1</code> predicate directive and a <code>synchronized/0</code> object (and category) directive. Logtalk allows you to synchronize a predicate, a set of predicates, or all object predicates using  per-predicate and per-object <em>locks</em>.</dd>
+</dl>
+<dl>
+	<dt><strong>this</strong></dt>
+		<dd>Logtalk uses the built-in context method <code>self/1</code> for retrieving the current instance. Logtalk also provides a <code>this/1</code> method but for returning the class containing the method being executed. Why the name clashes? Well, the notion of <em>self</em> was inherited from Smalltalk, which predates Java.</dd>
+</dl>
+
+<div class="footer">
+	<div class="copyright">
+		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
+		<span>Last updated on: October 16, 2008</span>
+	</div>
+	<div class="navbottom">
+		<span><a href="features.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="messages.html">next</a></span><br/>
+		<span><a href="http://validator.w3.org/check/referer">XHTML</a> + <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a></span>
+	</div>
+</div>
+
+</body>
+
+</html>

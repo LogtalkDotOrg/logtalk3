@@ -1,0 +1,64 @@
+.TH gplgt 1 "June 20, 2010" "Logtalk 3.00.0" "Logtalk Documentation"
+
+.SH NAME
+gplgt \-- Logtalk integration script for GNU Prolog
+
+.SH SYNOPSIS
+.B gplgt
+[
+.BI \--query-goal\ goal
+]
+
+.SH DESCRIPTION
+\f3gplgt\f1 is a Logtalk integration script for GNU Prolog. It automatically loads the GNU Prolog adapter file, the Logtalk compiler and runtime, the Logtalk default table of library names and paths, and any existing settings file found on the startup directory or in the Logtalk user directory.
+
+.SH OPTIONS
+.TP
+.BI \--query-goal\ goal
+Initialization goal, written between double quotes, to be executed after Logtalk startup.
+
+.SH REQUIREMENTS
+GNU Prolog 1.4.1 or a later version is required.
+
+.SH ENVIRONMENT
+.TP
+.B LOGTALKHOME
+Specifies the location of the Logtalk installation.
+.TP
+.B LOGTALKUSER
+Specifies the location of the Logtalk user directory.
+
+.SH FILES
+.TP
+.BI $LOGTALKHOME/integration/logtalk_gp.pl
+Prolog file used for loading the necessary files for starting Logtalk using GNU Prolog as the back-end compiler.
+.TP
+.BI $LOGTALKHOME/adapters/gnu.pl
+The GNU Prolog adapter file.
+.TP
+.BI $LOGTALKHOME/core/core.pl
+The Logtalk core compiler and runtime file.
+.TP
+.BI $LOGTALKHOME/paths/paths.pl
+The default table of library names and paths.
+.TP
+.BI ./settings.lgt
+Logtalk settings file (for overriding default settings in the adapter files). May not exist.
+.TP
+.BI $LOGTALKUSER/settings.lgt
+Logtalk settings file (for overriding default settings in the adapter files). May not exist.
+
+.SH "SEE ALSO"
+The Logtalk website at http://logtalk.org/
+.PP
+The Logtalk User and Reference Manuals at $LOGTALKHOME/manuals/index.html
+.PP
+The GNU Prolog website at http://www.gprolog.org/
+.PP
+logtalk_user_setup(1),\ logtalk_version_select(1),\ logtalk_backend_select(1)
+
+.SH AUTHOR
+Paulo Moura <pmoura@logtalk.org>
+
+.SH COPYRIGHT
+Copyright (c) 1998-2012 Paulo Moura.

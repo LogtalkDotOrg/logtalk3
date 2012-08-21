@@ -1,0 +1,300 @@
+/*
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  This file is part of Logtalk <http://logtalk.org/>  
+%  Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
+%
+%  This program is free software: you can redistribute it and/or modify
+%  it under the terms of the GNU General Public License as published by
+%  the Free Software Foundation, either version 3 of the License, or
+%  (at your option) any later version.
+%  
+%  This program is distributed in the hope that it will be useful,
+%  but WITHOUT ANY WARRANTY; without even the implied warranty of
+%  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%  GNU General Public License for more details.
+%  
+%  You should have received a copy of the GNU General Public License
+%  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+%  
+%  Additional licensing terms apply per Section 7 of the GNU General
+%  Public License 3. Consult the "LICENSE.txt" file for details.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+
+
+div.bottom-left > span.page:before {
+	content: counter(page, decimal);
+}
+
+div.bottom-right > span.page:before {
+	content: counter(page, decimal);
+}
+
+div.toc-bottom-left > span.page:before {
+    content: counter(page, lower-roman);
+}
+
+div.toc-bottom-right > span.page:before {
+    content: counter(page, lower-roman);
+}
+
+@page title {
+	margin-left: 25mm;
+	margin-right: 15mm;
+	margin-top: 15mm;
+	margin-bottom: 15mm;
+}
+
+@page toc {
+	counter-reset: page;
+}
+
+@page body {
+	counter-reset: page;
+}
+
+@page :left {
+	margin-left: 15mm;
+	margin-right: 25mm;
+	margin-top: 15mm;
+	margin-bottom: 15mm;
+}
+
+@page :right {
+	margin-left: 25mm;
+	margin-right: 15mm;
+	margin-top: 15mm;
+	margin-bottom: 15mm;
+}
+
+body {
+	color: black;
+	font-size: 10pt;
+	font-family: Times, serif;
+	padding-top: 18pt;
+	padding-bottom: 18pt;
+	background: white;
+	region: body;
+	hyphenate: true;
+}
+
+.navtop {
+	display: none;
+}
+
+.toc-top-left, .toc-top-right, .top-left, .top-right { 
+	font-size: 9pt;
+	font-weight: bold;
+	font-family: Helvetica, Arial, Verdana, sans-serif;
+	border-color: black;
+	border-left: 0pt;
+	border-top: 0pt;
+	border-right: 0pt;
+	border-bottom: 1pt;
+	border-style: solid;
+	region: top;
+}
+
+.toc-top-left { 
+	page: left-toc;
+	text-align: left;
+}
+
+.toc-top-right { 
+	page: right-toc;
+	text-align: right;
+}
+
+.top-left { 
+	page: left-body;
+	text-align: left;
+}
+
+.top-right { 
+	display: none;
+	page: right-body;
+	text-align: right;
+}
+
+div.top-right > span.chapter:before {
+	content: string(chapter);
+}
+
+.toc-bottom-left, .toc-bottom-right, .bottom-left, .bottom-right { 
+	region: bottom;
+	font-size: 9pt;
+	font-weight: bold;
+	font-family: Helvetica, Arial, Verdana, sans-serif;
+	border-color: black;
+	border-left: 0pt;
+	border-top: 1pt;
+	border-right: 0pt;
+	border-bottom: 0pt;
+	border-style: solid;
+}
+
+.toc-bottom-left { 
+	page: left-toc;
+	text-align: left;
+}
+
+.toc-bottom-right { 
+	page: right-toc;
+	text-align: right;
+}
+
+.bottom-left { 
+	page: left-body;
+	text-align: left;
+}
+
+.bottom-right { 
+	page: right-body;
+	text-align: right;
+}
+
+a {
+	color: black;
+	text-decoration: none;
+	outline: none;
+}
+
+a[href] {
+	link: href;
+}
+
+a[id] {
+	anchor: name;
+}
+
+.footer {
+	text-align: right;
+	font-size: 9pt;
+	page-break-before: avoid;
+	page-break-inside: avoid;
+}
+
+.navbottom {
+	display: none;
+}
+
+.copyright {
+	display: block;
+	padding-top: 18pt;
+}
+
+.footnote {
+}
+
+span.leader { 
+	display: leader; 
+	leader-pattern: dots; 
+	leader-pattern-width: 5pt; 
+} 
+
+span.page-ref > span:before { 
+	content: page-ref(class); 
+}
+
+.title-page {
+	page: title;
+	page-break-after: always;
+	font-family: Helvetica, Arial, Verdana, sans-serif;
+}
+
+.title-top {
+	page: first-title;
+	region: top;
+}
+
+.title-bottom {
+	page: first-title;
+	region: bottom;
+}
+
+.title {
+	text-align: center;
+	font-size: 36pt;
+}
+
+.sub-title {
+	text-align: center;
+	font-size: 24pt;
+}
+
+.credits {
+	text-align: center;
+	font-size: 18pt;
+}
+
+.date {
+	text-align: center;
+	font-size: 14pt;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: Helvetica, Arial, Verdana, sans-serif;
+	text-align: left;
+	page-break-after: avoid;
+}
+
+h1 {
+	padding-top: 96pt;
+	page-break-before: right;
+	string-set: chapter contents;
+}
+
+.toc {
+    page: toc;
+}
+
+div.toc > h1 {
+    text-align-last: left;
+}
+
+.toc-entries {
+	page-break-before: avoid;
+	text-align-last: justify;
+}
+
+.body {
+	page: body;
+}
+
+pre, code, .code, .codenp {
+	color: maroon;
+	font-family: Monaco, 'Courier New', Courier, monospace;
+}
+
+code {
+	font-size: 9pt;
+	hyphenate: false;
+}
+
+.codenp {
+	padding-top: 24pt;
+	page-break-before: always;
+}
+
+pre {
+	font-size: 9pt;
+	text-align: left;
+	background-color: #efefef;
+	border-color: #111111;
+	border-width: 1pt;
+	border-style: double;	
+	padding: 8pt;
+	page-break-before: avoid;
+}
+
+ul, ol {
+	display: compact;
+	page-break-before: avoid;
+}
+
+dl {
+	page-break-before: avoid;
+	padding-left: 2em;
+}

@@ -1,0 +1,65 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Additional licensing terms apply per Section 7 of the GNU General
+Public License 3. Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example:
+
+| ?- logtalk_load(diagrams(loader)).
+...
+
+
+% check the default list of options used when generating a diagram:
+
+| ?- diagram::default_options(DefaultOptions).
+DefaultOptions = ...
+yes
+
+
+% load an example for testing but be sure that the "source_data" flag is on:
+
+| ?- set_logtalk_flag(source_data, on), logtalk_load(points(loader)).
+...
+
+% generating an entity diagram for a source file using default options:
+
+| ?- diagram::file(points).
+yes
+
+
+% load another example for testing:
+
+| ?- logtalk_load(searching(loader)).
+...
+
+% generating an entity diagram for all source files in a library using default options:
+
+| ?- diagram::library(searching).
+yes
+
+
+% it's also possible to generate an entity diagram for a library and
+% all its sub-libraries using the rlibrary/1 method instead of the
+% library/1 method
+
+
+% the methods rlibrary/2, library/2, and file/2 allows the specification
+% of the options to be used when generating a diagram

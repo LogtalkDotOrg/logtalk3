@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<?xml-stylesheet href="logtalk.css" type="text/css"?><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>assignvars</title>
+    <link rel="stylesheet" href="logtalk.css" type="text/css"/>
+  </head>
+  <body>
+    <div class="header">
+      <p class="type">category</p>
+      <h1 class="code">assignvars</h1>
+      <blockquote>
+        <p class="comment">Assignable variables (supporting logical, backtracable assignement of non-variable terms).</p>
+      </blockquote>
+    </div>
+    <div class="entity">
+      <div class="section">
+        <dl class="properties">
+          <dt class="key">author:</dt>
+          <dd class="value">
+            <code>Nobukuni Kino and Paulo Moura</code>
+          </dd>
+          <dt class="key">version:</dt>
+          <dd class="value">
+            <code>1.0</code>
+          </dd>
+          <dt class="key">date:</dt>
+          <dd class="value">
+            <code>2005/1/7</code>
+          </dd>
+        </dl>
+        <dl class="properties">
+          <dt class="key">compilation:</dt>
+          <dd class="value">
+            <code>static, context_switching_calls</code>
+          </dd>
+        </dl>
+        <p class="comment">(no dependencies on other files)</p>
+      </div>
+    </div>
+    <div class="predicates">
+      <div class="public">
+        <h2>Public interface</h2>
+        <div class="section">
+          <h3 class="code">assignable/1</h3>
+          <blockquote>
+            <p class="comment">Makes Variable an assignable variable. Initial state will be empty.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>assignable(Variable)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>assignable(-assignvar) &ndash; one</code>
+            </dd>
+            <dt class="key">exceptions:</dt>
+            <dd class="value">Variable is not a variable: <code>type_error(variable,Variable)</code></dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">assignable/2</h3>
+          <blockquote>
+            <p class="comment">Makes Variable an assignable variable and sets its initial state to Value.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>assignable(Variable,Value)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>assignable(-assignvar,@nonvar) &ndash; one</code>
+            </dd>
+            <dt class="key">exceptions:</dt>
+            <dd class="value">Variable is not a variable: <code>type_error(variable,Variable)</code></dd>
+            <dd class="value">Value is not instantiated: <code>instantiation_error</code></dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">(&lt;=)/2</h3>
+          <blockquote>
+            <p class="comment">Sets the state of the assignable variable Variable to Value (initializing the variable if needed).</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>Variable&lt;=Value</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>(?assignvar)&lt;= (@nonvar) &ndash; one</code>
+            </dd>
+            <dt class="key">exceptions:</dt>
+            <dd class="value">Value is not instantiated: <code>instantiation_error</code></dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">(=&gt;)/2</h3>
+          <blockquote>
+            <p class="comment">Unifies Value with the current state of the assignable variable Variable.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>Variable=&gt;Value</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>(+assignvar)=&gt; (?nonvar) &ndash; zero_or_one</code>
+            </dd>
+            <dt class="key">exceptions:</dt>
+            <dd class="value">Variable is not instantiated: <code>instantiation_error</code></dd>
+          </dl>
+        </div>
+      </div>
+      <div class="protected">
+        <h2>Protected interface</h2>
+        <div class="section">
+          <p class="comment">(none)</p>
+        </div>
+      </div>
+      <div class="private">
+        <h2>Private predicates</h2>
+        <div class="section">
+          <p class="comment">(none)</p>
+        </div>
+      </div>
+    </div>
+    <div class="operators">
+      <h2>Operators</h2>
+      <div class="section">
+        <h3 class="comment">(none)</h3>
+      </div>
+    </div>
+    <div class="remarks">
+      <h2>Remarks</h2>
+      <div class="section">
+        <h3 class="comment">(none)</h3>
+      </div>
+    </div>
+  </body>
+</html>

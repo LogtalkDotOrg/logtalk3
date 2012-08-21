@@ -1,0 +1,25 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+This directory contains a file that provides basic syntax highlighting 
+for editing Logtalk source files with the text editor TextPad 4.5 and 
+later versions (http://www.textpad.com).
+
+
+To install:
+
+	First, copy the file "logtalk.syn" to the TextPad syntax folder and the 
+	file "Logtalk.tcl" to the clip library folder (see the preferences pane 
+	from within the TextPad application for the folders location). Second, 
+	define a new document class for Logtalk source files (whose extension is 
+	.lgt) and for Prolog adapter files (whose extension is .pl).
+
+
+THE SYNTAX FILE AND THE CLIP LIBRARY ARE UNDER DEVELOPMENT.

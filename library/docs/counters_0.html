@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<?xml-stylesheet href="logtalk.css" type="text/css"?><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>counters</title>
+    <link rel="stylesheet" href="logtalk.css" type="text/css"/>
+  </head>
+  <body>
+    <div class="header">
+      <p class="type">category</p>
+      <h1 class="code">counters</h1>
+      <blockquote>
+        <p class="comment">Named integer counters. Counter names can be any nonvar term.</p>
+      </blockquote>
+    </div>
+    <div class="entity">
+      <div class="section">
+        <dl class="properties">
+          <dt class="key">author:</dt>
+          <dd class="value">
+            <code>Paulo Moura</code>
+          </dd>
+          <dt class="key">version:</dt>
+          <dd class="value">
+            <code>1.0</code>
+          </dd>
+          <dt class="key">date:</dt>
+          <dd class="value">
+            <code>2011/1/3</code>
+          </dd>
+        </dl>
+        <dl class="properties">
+          <dt class="key">compilation:</dt>
+          <dd class="value">
+            <code>static, context_switching_calls</code>
+          </dd>
+        </dl>
+        <p class="comment">(no dependencies on other files)</p>
+      </div>
+    </div>
+    <div class="predicates">
+      <div class="public">
+        <h2>Public interface</h2>
+        <div class="section">
+          <h3 class="code">counter/2</h3>
+          <blockquote>
+            <p class="comment">True if Counter is a counter with value Value.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>counter(Counter,Value)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>counter(?nonvar,?integer) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">increment_counter/1</h3>
+          <blockquote>
+            <p class="comment">Increments the named counter.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>increment_counter(Counter)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>increment_counter(+nonvar) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">decrement_counter/1</h3>
+          <blockquote>
+            <p class="comment">Decrements the named counter.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>decrement_counter(Counter)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>decrement_counter(+nonvar) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">reset_counter/1</h3>
+          <blockquote>
+            <p class="comment">Resets the named counter to zero. Creates the counter if it does not exist.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>reset_counter(Counter)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>reset_counter(+nonvar) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">reset_counters/0</h3>
+          <dl class="properties">
+            <dt class="key">compilation:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>reset_counters &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="protected">
+        <h2>Protected interface</h2>
+        <div class="section">
+          <p class="comment">(none)</p>
+        </div>
+      </div>
+      <div class="private">
+        <h2>Private predicates</h2>
+        <div class="section">
+          <h3 class="code">counter_/2</h3>
+          <blockquote>
+            <p class="comment">Table of named counters.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation:</dt>
+            <dd class="value">
+              <code>dynamic</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>counter_(Counter,Value)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>counter_(?nonvar,?integer) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+    <div class="remarks">
+      <h2>Remarks</h2>
+      <div class="section">
+        <h3 class="code">(none)</h3>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,62 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example with the debug statements activated:
+
+| ?- logtalk_load(debug_hooks(loader_debug)).
+...
+
+
+% debug the definition of the "object" predicate append/3:
+
+| ?- object::append([1,2,3], [4,5], List).
+Recursive case: append([2, 3], [4, 5], _G340)
+Recursive case: append([3], [4, 5], _G347)
+Recursive case: append([], [4, 5], _G354)
+Base case: append([], [4, 5], [4, 5])
+List = [1, 2, 3, 4, 5].
+yes
+
+
+% debug calls to the "object" predicate sum/2:
+
+| ?- object::sum([1,2,3,_], S).
+Exception: error(instantiation_error, number::check(_G433), object)
+
+| ?- object::sum([1,2,3,a], S).
+Exception: error(type_error(number, a), number::check(a), object)
+
+| ?- object::sum(wrong, S).
+Exception: error(type_error(list, wrong), list::check(wrong), object)
+
+
+% load the example with the debug statements discarded:
+
+| ?- logtalk_load(debug_hooks(loader_production)).
+...
+
+
+% call the "object" predicate append/3 without the debugging statements:
+
+| ?- object::append([1,2,3], [4,5], List).
+List = [1, 2, 3, 4, 5].
+yes
+
+
+% call the "object" predicate sum/2 without the debugging statements:
+
+| ?- object::sum([1,2,3,_], S).
+Exception: instantiation_error
+
+| ?- object::sum([1,2,3,a], S).
+Exception: type_error(evaluable, a/0)
+
+| ?- object::sum(wrong, S).
+no

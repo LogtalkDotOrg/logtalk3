@@ -1,0 +1,55 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example:
+
+| ?- logtalk_load(proxies(loader)).
+...
+
+
+% print the area and the perimeter for all circle proxies:
+
+| ?- forall(circle(Id, R, C), circle(Id, R, C)::print).
+
+id: #1, area: 4.75291, perimeter: 7.72831, color: blue
+id: #2, area: 43.2412, perimeter: 23.3106, color: yellow
+id: #3, area: 0.477836, perimeter: 2.45044, color: green
+id: #4, area: 103.508, perimeter: 36.0655, color: black
+id: #5, area: 217.468, perimeter: 52.2761, color: cyan
+true.
+
+
+% Logtalk provides a convenient notation for accessing proxies
+% represented as Prolog facts when sending a message:
+
+| ?- {circle(_, _, _)}::print, fail; true.
+
+id: #1, area: 4.75291, perimeter: 7.72831, color: blue
+id: #2, area: 43.2412, perimeter: 23.3106, color: yellow
+id: #3, area: 0.477836, perimeter: 2.45044, color: green
+id: #4, area: 103.508, perimeter: 36.0655, color: black
+id: #5, area: 217.468, perimeter: 52.2761, color: cyan
+true.
+
+
+% print the area and the perimeter for the circle #2:
+
+| ?- {circle('#2', R, C)}::print.
+
+id: #2, area: 43.2412, perimeter: 23.3106, color: yellow
+R = 3.71,
+C = yellow.
+
+
+% construct a list with the areas of all circles:
+
+| ?- findall(Area, {circle(_, _, _)}::area(Area), Areas).
+
+Areas = [4.75291, 43.2412, 0.477836, 103.508, 217.468].

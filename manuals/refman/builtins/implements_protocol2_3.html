@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<!--
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  
+%  This file is part of Logtalk <http://logtalk.org/>    
+%  Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
+%  
+%  Logtalk is free software. You can redistribute it and/or modify it under
+%  the terms of the FSF GNU General Public License 3  (plus some additional
+%  terms per section 7).        Consult the "LICENSE.txt" file for details.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="application/xml+xhtml; charset=utf-8" />
+	<title>Logtalk built-in predicate: implements_protocol/2-3</title>
+	<link rel="stylesheet" href="../../screen.css" type="text/css" media="screen"/>
+	<link rel="stylesheet" href="../../print.css" type="text/css" media="print"/>
+</head>
+
+<body>
+
+<div class="top-left">Logtalk reference manual</div> 
+<div class="top-right">Built-in predicate: implements_protocol/2-3</div>
+<div class="bottom-left"><span class="page"/></div> 
+<div class="bottom-right"><span class="page"/></div>
+<div class="navtop"><a href="../../index.html">Contents</a> &gt; <a href="../index.html">Reference Manual</a> &gt; <a href="../index.html#builtins">Built-in Predicates</a> &gt; implements_protocol/2-3</div>
+
+<h2 id="builtins_implements_protocol2_3" class="codenp">implements_protocol/2-3</h2>
+
+<h4>Description</h4>
+
+<pre>implements_protocol(Object, Protocol)
+implements_protocol(Category, Protocol)
+
+implements_protocol(Object, Protocol, Scope)
+implements_protocol(Category, Protocol, Scope)</pre>
+<p>
+Enumerates, by backtracking, all pairs of entities such that an object or a category implements a protocol. The relation scope is represented by the atoms <code>public</code>, <code>protected</code>, and <code>private</code>. This predicate only returns direct implementation relations; it does not implement a transitive closure.
+</p>
+
+<h4>Template and modes</h4>
+
+<pre>implements_protocol(?object_identifier, ?protocol_identifier)
+implements_protocol(?category_identifier, ?protocol_identifier)
+
+implements_protocol(?object_identifier, ?protocol_identifier, ?scope)
+implements_protocol(?category_identifier, ?protocol_identifier, ?scope)</pre>
+
+<h4>Errors</h4>
+
+<dl>
+	<dt>Object is neither a variable nor a valid object identifier:</dt>
+		<dd><code>type_error(object_identifier, Object)</code></dd>
+	<dt>Category is neither a variable nor a valid category identifier:</dt>
+		<dd><code>type_error(category_identifier, Category)</code></dd>
+	<dt>Protocol is neither a variable nor a valid protocol identifier:</dt>
+		<dd><code>type_error(protocol_identifier, Protocol)</code></dd>
+	<dt>Scope is neither a variable nor a valid entity scope:</dt>
+		<dd><code>type_error(scope, Scope)</code></dd>
+</dl>
+
+<h4>Examples</h4>
+
+<pre>| ?- implements_protocol(list, listp).
+
+| ?- implements_protocol(list, listp, public).</pre>
+
+<div class="footer">
+	<div class="copyright">
+		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
+		<span>Last updated on: November 22, 2010</span>
+	</div>
+	<div class="navbottom">
+		<span><a href="extends_category2_3.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="conforms_to_protocol2_3.html">next</a></span><br/>
+		<span><a href="http://validator.w3.org/check/referer">XHTML</a> + <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a></span>
+	</div>
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+Kod is a free MacOS X text editor available from:
+
+	http://kodapp.com/
+
+Kod already includes support for syntax highlight of Logtalk source files.
+The syntax highlighting support uses GNU Syntax Highlight, which is also
+supported by Logtalk. In order to check if Kod built-in support for Logtalk
+is out-of-date, control-click on the Kod application icon, select the "Show
+Package Contents" menu item, and compare the modification date of the
+"Contents/Resources/lang/logtalk.lang" file with the GNU Syntax Highlight
+"logtalk.lang" distributed with Logtalk. Be aware that Kod adds a header to
+the "*.lang" files that you must preserve when updating. In the Kod 0.0.2
+beta version this header is:
+
+# @title Logtalk
+# @matchuti public.logtalk-source
+# @matchext lgt

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundlePackageType</key>
+	<string>BNDL</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>lgt</string>
+			</array>
+			<key>CFBundleTypeMIMETypes</key>
+			<array>
+				<string>text/x-logtalk</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>Logtalk source</string>
+		</dict>
+	</array>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeIdentifier</key>
+			<string>org.logtalk.lgt</string>
+			<key>UTTypeDescription</key>
+			<string>Logtalk source</string>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.plain-text</string>
+			</array>
+			<key>UTTypeReferenceURL</key>
+			<string>http://logtalk.org/</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>lgt</string>
+				</array>
+				<key>public.mime-type</key>
+				<array>
+					<string>text/x-logtalk</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>

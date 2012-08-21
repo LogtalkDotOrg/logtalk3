@@ -1,0 +1,31 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+To load this example and for sample queries, please see the SCRIPT.txt
+file.
+
+This folder contains a set of source files for testing Logtalk secure
+implementation of meta-predicates. For full details on this example 
+and on the safety rules used by Logtalk when compiling and executing
+meta-predicates, please see the paper:
+
+@inproceedings{pmoura09b,
+	author = {Paulo Moura},
+	title = "{Secure Implementation of Meta-predicates}",
+	booktitle = {Proceedings of the Eleventh International Symposium on Practical Aspects of Declarative Languages},
+	editor = "Andy Gill and Terrance Swift",
+	series = "Lecture Notes in Computer Science",
+	volume = "5418",
+	month = jan,
+	year = {2009},
+	pages = {269--283},
+	publisher = "Springer-Verlag",
+	address = "Berlin Heidelberg",
+}

@@ -1,0 +1,40 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% load the example:
+
+| ?- logtalk_load(hailstone(loader)).
+...
+
+
+% generating a sequence:
+
+| ?- hailstone::generate_sequence(10, Sequence).
+Sequence = [10, 5, 16, 8, 4, 2, 1]
+true
+
+
+| ?- hailstone::write_sequence(10).
+10 5 16 8 4 2 1
+true
+
+
+% calculating the length of a sequence:
+
+| ?- hailstone::sequence_length(27, Length).
+Length = 112
+true
+
+
+% finding the longest sequence in an interval:
+ 
+| ?- hailstone::longest_sequence(1, 100000, N, Length).
+N = 77031, Length = 351
+true

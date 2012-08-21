@@ -1,0 +1,47 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+This directory contains the Logtalk.tmbundle bundle, which provides code 
+folding, code completion, syntax coloring, entity index, auto-indentation, 
+and snippets of code for editing Logtalk source files with the TextMate 1.x 
+text editor: 
+
+	http://macromates.com/
+
+To install copy the bundle "Logtalk.tmbundle" to one of the following 
+folders:
+
+	~/Library/Application Support/TextMate/Bundles/
+	/Library/Application Support/TextMate/Bundles/
+
+(create the chosen folder if it does not exist).
+
+In order to use the Logtalk bundle commands to compile and automatically 
+generate (X)HTML documentation for the frontmost source file window, open 
+the TextMate Preferences window, select the "Advanced" tab, click on the 
+"Shell Variables" button and add the following new variables:
+
+LOGTALK_COMMAND
+	set to the name of the shell script you use to launch Logtalk 
+	followed by the option to run a goal at startup (e.g. "yaplgt -g")
+LOGTALK_HTML_COMMAND
+	set to the name of the shell script you use to generate the (X)HTML 
+	documentation (e.g. lgt2html)
+LOGTALK_PDF_COMMAND
+	set to the name of the shell script you use to generate the PDF 
+	documentation (e.g. lgt2pdf)
+LOGTALK_TXT_COMMAND
+	set to the name of the shell script you use to generate the TXT 
+	documentation (e.g. lgt2txt)
+
+Logtalk source files (including the library entities and the programming
+examples) are formatted using tabs (the recommended setting is a tab width
+equivalent to 4 spaces); you may set the tab width on the editor preference
+panel.

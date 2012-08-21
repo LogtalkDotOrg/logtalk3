@@ -1,0 +1,29 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+This directory contains files that provides basic syntax coloring and 
+code completion for editing Logtalk source files with the text editor 
+Notepad++ 3.9 or later version:
+
+	http://notepad-plus.sourceforge.net/
+
+These support files are dual-licensed under the GNU General Public
+License 3 and the Notepad++ license.
+
+Install the supporting files by performing the following steps:
+
+1.	Copy the file "userDefineLang.xml" to the folder "%APPDATA%\Notepad++".
+	If the file already exists, merge the contents of the two files.
+
+2.	In order to use auto-completion, copy the file "logtalk.api" to the 
+	directory YOUR_NPP_INSTALL_DIR\plugins\APIs.
+
+
+THESE SYNTAX COLORING SUPPORT FILES ARE UNDER DEVELOPMENT.

@@ -1,0 +1,311 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Additional licensing terms apply per Section 7 of the GNU General
+Public License 3. Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+This folder contains adapter files for Prolog compilers that are no longer
+supported. Follows some historical notes for these compilers.
+
+
+ALS Prolog 3.1
+
+	als.pl
+
+	Only a few tests have been done with this compiler. One known problem: an
+	ALS bug in operator handling that make calls like "\+ ::Pred" be 
+	interpreted like "::(\+ Pred)" instead of "\+ (::Pred)". A workaround is 
+	to replace all occurrences of "\+ ::Pred" by "\+ (::Pred)" and all 
+	occurrences of "\+ Obj::Pred" by "\+ (Obj::Pred)". Please report any other 
+	problems that you might find. Don't forget to use the cd/1 predicate to 
+	set the working directory before loading the library or an example. Consult 
+	the file builtins/comp_d10.pro in the ALS Prolog installation directory in 
+	order to get the definition of predicate numbervars/3 needed by the Logtalk 
+	built-in debugger. Supports smart compilation of source files. Does not 
+	support the "altdirs" compiler flag. Support for settings files not tested.
+
+
+Amzi! Prolog 7.6.1 and later versions
+
+	amzi.pl
+
+	For Amzi! Prolog 7.6.1 and later versions. You need to patch the Logtalk 
+	compiler (the "core/core.pl" file) by searching for all calls of 
+	':'/2 and wrap them inside call/1 (search for the text "':'(" to locate
+	the calls). For better performance, use the Amzi! "acmp" command-line 
+	compiler to compile the files "adapters/amzi.pl", "core/core.pl", 
+	and "paths/paths.pl" and then load the resulting ".plm" files 
+	using the predicate load/1 (you will need to edit the "paths.pl" file 
+	by following the instructions on the "paths/NOTES.txt" file).
+
+	You will probably need to increase some of the default values (e.g. the 
+	"control" parameter) in the "amzi.cfg" file in order to be able to load 
+	some of the libraries or some of the examples.
+
+	One potential problem is that the compiler definition of the compare/3 
+	built-in predicate returns the atom == instead of = for identical terms 
+	(contrary to every other Prolog compiler!). Search the library files for 
+	all calls of the compare/3 predicate and make the necessary changes.
+	The built-in sort/2 predicate does not eliminate duplicates, which may 
+	result in problems with some of the examples. Don't forget to use the 
+	chdir/1 predicate to set the working directory before loading a library 
+	or an example. Support for settings files not tested.
+
+
+Bin-Prolog 8.x~10.x
+
+	bin.pl
+
+	Start BinProlog using "bp -l4". You will need to create project files to 
+	workaround the restriction of only one top-level file per interactive 
+	session. For instance, the project file for the "metapredicates" example
+	will look like (in the Unix version):
+	
+		:- ['$LOGTALKHOME/adapters/bin.pl'].
+		:- ['$LOGTALKHOME/core/core.pl'].
+		
+		:- ['$LOGTALKUSER/examples/metapredicates/meta.pl'].
+		:- ['$LOGTALKUSER/examples/metapredicates/sort1.pl'].
+		...
+	
+	You will probably want to have a project file including only the adapter
+	and the pre-processor/runtime files (core.pl) in order to compile the
+	examples using logtalk_compile/1-2 (do NOT use logtalk_load/1-2 or the 
+	provided loader files). Don't forget to call the cd/1 predicate to set 
+	the working directory before compiling the library or an example. 
+	Supports smart compilation of source files. Support for settings files 
+	not tested.
+
+	Updated and tested with help of Arun Majumdar.
+
+
+CIAO Prolog 1.13.1
+
+	ciao.pl
+
+	The definition of the predicate '$lgt_predicate_property'/2 in the 
+	file "ciao_aux.pl" is a bit of a hack, but should enable you to run 
+	the Logtalk companion examples and to try out your own Logtalk 
+	programs. 
+
+	Don't forget to call the cd/1 predicate to set the working directory 
+	before compiling the library or an example (you will need first to 
+	load the library system that exports the cd/1 predicate by calling 
+	the goal use_module(library(system)).
+
+
+ECLiPSe 5.10#26 or later 5.10 versions
+
+	eclipse5.pl
+	eclipse5iso.pl
+
+	There are two adapters files for this compiler. The first one, named 
+	"eclipse5.pl", should be used when, for some reason, you don't want 
+	to load the "iso" library. The second file, "eclipse5iso.pl" contains 
+	a call to load the "iso" library. Both adapter files may be used with
+	ECLiPSe 5.10#26 or later versions.
+
+	You should use the "eclipse5iso.pl" adapter file whenever possible.
+	The "eclipse5.pl" adapter file may not contain all the necessary 
+	definitions for ISO Prolog predicates that are needed for compiling 
+	Logtalk itself, the Logtalk library, or the Logtalk examples. On the 
+	other hand, some of the ECLiPSE features (e.g. array notation or using
+	do/2 as an operator in logical loops) are not available when using the
+	"iso" library.
+
+	There is a clash between Logtalk and ECLiPSe regarding the ::/2 operator.
+	You may still use the ::/2 operator defined on the ECLiPSe constraint 
+	solver libraries by using explicit module qualification by writing 
+	"{library:(Var::Domain)}" (replace "library" by the actual library name; 
+	the {}/1 control construct allows you to bypass the Logtalk compiler).
+
+	For improved performance, add the following calls to the top of all the 
+	files in the "compiler" sub-directory:
+	
+		:- pragma(system).
+		:- pragma(nodebug).
+
+	These calls disables debugging support for the Logtalk compiler/runtime 
+	Prolog code and mark the Logtalk predicates as built-ins. Make sure that 
+	the library top-level is loaded if you want to use the Logtalk built-in 
+	debugger.
+
+	Adopted from a adapter file written and tested with help of Taner Bilgic 
+	for Logtalk 1.x. Don't forget to use the cd/1 predicate to set the 
+	working directory before loading the library or an example. Supports 
+	smart compilation of source files.
+
+	With this Prolog compiler, avoid reloading Logtalk source files declaring
+	and defining dynamic predicates. Due to the semantics of the ECLiPSe 
+	built-in predicate compile/1, new clauses for dynamic predicates are 
+	appended to the old ones instead of replacing them.
+
+	Full support for settings files on POSIX operating-systems. On Windows,
+	only supports settings files on the Logtalk user folder. Doesn't support
+	the "altdirs" flag.
+
+
+IF/Prolog 5.3 and later versions
+
+	if.pl
+
+	IF/Prolog 5.3 supports the ISO Prolog standard. No problems expected
+	but not tested (my email requests for an evaluation version were never
+	answered). Don't forget to use the chdir/1 predicate to set the 
+	working directory before loading the library or an example. Supports 
+	smart compilation of source files. Does not support the "altdirs" 
+	compiler flag. Full support for settings files on POSIX operating-
+	systems. Support for settings files on Windows unknown.
+
+
+JIProlog 3.0.2-6 and later versions
+
+	ji.pl
+
+	Written with the help of the JIProlog author (but if you find any Logtalk 
+	problem please report it to me). Don't forget to use the cd/1 predicate to 
+	set the working directory before loading the library or an example. Some 
+	examples may not compile or run due to work in progress regarding ISO 
+	Prolog standard compliance. Supports smart compilation of source files.
+	Settings files are not supported (must be manually loaded after starting 
+	Logtalk).
+
+
+K-Prolog 5.1.5 and later 5.1.x versions
+
+	k5.pl
+
+	K-Prolog 5.1.5 supports the ISO Prolog standard (except the ISO
+	Prolog standard multifile/1 directive, therefore forcing the use of
+	the "paths/paths_no_multifile.pl" file). No problems expected. 
+	Adapter file written and tested with the help of Nobukuni Kino. Don't 
+	forget to use the cd/1 predicate to set the working directory before 
+	loading the library or an example. Smart compilation of source files
+	is not supported on Windows. Full support for settings files on POSIX
+	operating-systems. On Windows, only supports settings files on the 
+	Logtalk user folder. Does not support the "altdirs" compiler flag.
+
+
+K-Prolog 6.0.4 and later versions
+
+	k6.pl
+
+	K-Prolog 6.0.4 supports the current ISO Prolog standard (except the ISO
+	Prolog standard multifile/1 directive, therefore forcing the use of the
+	"paths/paths_no_multifile.pl" file) and features from the draft
+	core revision proposal.
+
+	Don't forget to use the cd/1 predicate to set the working directory
+	before loading the library or an example. Smart compilation of source
+	files is not supported on Windows. Full support for settings files on
+	POSIX operating-systems. On Windows, only supports settings files on
+	the Logtalk user folder. Does not support the "altdirs" compiler flag.
+
+
+LPA MacProlog32 1.25
+
+	lpamac.pl
+
+	This is my old Prolog development environment. Two known problems: (1) an
+	LPA bug in operator handling that make calls like "\+ ::Pred" be 
+	interpreted like "::(\+ Pred)" instead of "\+ (::Pred)". A workaround is 
+	to replace all occurrences of "\+ ::Pred" by "\+ (::Pred)"; (2) If you call
+	the \+ operator in your code the writeq/1 built-in don't always output a 
+	space after the operator resulting in calls like "\+(...)". Because \+ is 
+	not defined as a predicate this will fail. Don't forget to use the dvol/1 
+	predicate to set the working directory before loading an example.
+	Due to the size of the Logtalk pre-processor file, you must load it by 
+	using the consult/1 predicate instead of using the File:Open menu option.
+	Be aware that this adapter file redefines some built-ins that
+	you may use in your own programs. You must be careful to not consult the 
+	adapter file twice. Supports smart compilation of source files. Does not 
+	support the "altdirs" compiler flag. Settings files are not supported 
+	(must be manually loaded after starting Logtalk).
+
+
+LPA WinProlog32 4.0x
+
+	lpawin.pl
+
+	Written with the help of the LPA support team. Of course, if you find
+	any bugs please direct your flames to me ;-). Be aware that this adapter
+	file redefines some built-ins that you may use in your programs. Don't 
+	forget to use the chdir/1 predicate to set the working directory before 
+	loading the library or an example. Be careful to not consult the adapter 
+	file twice. Supports smart compilation of source files. Does not support 
+	the "altdirs" compiler flag. Settings files are not supported (must be 
+	manually loaded).
+
+
+MasterProlog 4.1
+
+	master.pl
+
+	Written with the help of the MasterProlog support team (but if you find 
+	any Logtalk problem please report it to me). 
+	If in the MasterProlog version that you are using the implementation of 
+	the close/1 predicate does not follow the ISO standard, you will have to
+	apply the following patch to the Logtalk pre-processor: replace every 
+	call of close(...) with fclose(...).  Does not support the "altdirs" 
+	compiler flag. Support for settings files not tested.
+
+
+Open Prolog 1.1b5
+
+	open.pl
+
+	Limited test done. Please report any problems that you may find.
+	Don't forget to use the set_folder/1 predicate to set the working 
+	directory before loading the library or an example. Does not support 
+	the "altdirs" compiler flag. Settings files are not supported (must 
+	be manually loaded).
+
+
+PrologII+ 4.5 and later versions
+
+	prologII.pl
+
+	Written and tested with the help of Claude Lai from PrologIA. You need
+	to apply the following patches to the Logtalk pre-processor/runtime:
+	Search and replace every instance of "quoted(true)" with "quoted(:true)";
+	"open(File, write, Stream)" with "open(File, :write, Stream)",
+	"catch(close(Stream), _, true)" with "catch(close(Stream), _, :true)",
+	"open(File, read, Stream)" with "open(File, :read, Stream, [eof_action(eof_code)])".
+	Remember that you need to use the set_import_dir/1 built-in predicate to
+	set the working directory before loading the library or an example.
+	Does not support the "altdirs" compiler flag. Settings files are not 
+	supported (must be manually loaded after starting Logtalk).
+
+
+Quintus Prolog 3.3~3.5
+
+	quintus.pl
+
+	Written and tested with help of a friend of mine, Paulo Urbano, for a 
+	previous version. Adopted for the current release using the Windows 
+	version for testing. You must patch the Logtalk compiler due to the 
+	different argument order of the built-in predicates read_term/3 and 
+	open/4: for all calls of both predicates, exchange the last two 
+	arguments (these patches render Logtalk incompatible with all the
+	other compilers). Don't forget to use the unix(cd(Dir)) predicate to
+	set the working directory before loading the library or an example.
+	Supports smart compilation of source files. Settings files are not
+	supported (must be manually loaded after starting Logtalk).
+

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<!--
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  
+%  This file is part of Logtalk <http://logtalk.org/>    
+%  Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
+%  
+%  Logtalk is free software. You can redistribute it and/or modify it under
+%  the terms of the FSF GNU General Public License 3  (plus some additional
+%  terms per section 7).        Consult the "LICENSE.txt" file for details.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="application/xml+xhtml; charset=utf-8" />
+	<title>Logtalk built-in predicate: threaded/1</title>
+	<link rel="stylesheet" href="../../screen.css" type="text/css" media="screen"/>
+	<link rel="stylesheet" href="../../print.css" type="text/css" media="print"/>
+</head>
+
+<body>
+
+<div class="top-left">Logtalk reference manual</div> 
+<div class="top-right">Built-in predicate: threaded/1</div>
+<div class="bottom-left"><span class="page"/></div> 
+<div class="bottom-right"><span class="page"/></div>
+<div class="navtop"><a href="../../index.html">Contents</a> &gt; <a href="../index.html">Reference Manual</a> &gt; <a href="../index.html#builtins">Built-in Predicates</a> &gt; threaded/1</div>
+
+<h2 id="builtins_threaded1" class="codenp">threaded/1</h2>
+
+<h4>Description</h4>
+
+<pre>threaded(Goals)
+
+threaded(Conjunction)
+threaded(Disjunction)</pre>
+<p>
+Proves each goal in a conjunction (disjunction) of goals in its own thread. This predicate is deterministic and opaque to cuts. The predicate argument is <strong>not</strong> flattened.
+</p>
+<p>
+When the argument is a conjunction of goals, a call to this predicate blocks until either all goals succeed, one of the goals fail, or one of the goals generate an exception; the failure of one of the goals or an exception on the execution of one of the goals results in the termination of the remaining threads. The predicate call is true <em>iff</em> all goals are true.
+</p>
+<p>
+When the argument is a disjunction of goals, a call to this predicate blocks until either one of the goals succeeds, all the goals fail, or one of the goals generate an exception; the success of one of the goals or an exception on the execution of one of the goals results in the termination of the remaining threads. The predicate call is true <em>iff</em> one of the goals is true.
+</p>
+<p>
+When the predicate argument is neither a conjunction not a disjunction of goals, no threads are used. In this case, the predicate call is equivalent to a <code>once/1</code> predicate call.
+</p>
+
+<h4>Template and modes</h4>
+
+<pre>threaded(+callable)</pre>
+
+<h4>Errors</h4>
+
+<dl>
+	<dt>Goals is a variable:</dt>
+		<dd><code>instantiation_error</code></dd>
+	<dt>A goal in Goals is a variable:</dt>
+		<dd><code>instantiation_error</code></dd>
+	<dt>Goals is neither a variable nor a callable term:</dt>
+		<dd><code>type_error(callable, Goals)</code></dd>
+	<dt>A goal Goal in Goals is neither a variable nor a callable term:</dt>
+		<dd><code>type_error(callable, Goal)</code></dd>
+</dl>
+
+<h4>Examples</h4>
+
+<dl>
+	<dt>Prove a conjunction of goals, each one in its own thread:</dt>
+		<dd><code>threaded((Goal, Goals))</code></dd>
+	<dt>Prove a disjunction of goals, each one in its own thread:</dt>
+		<dd><code>threaded((Goal; Goals))</code></dd>
+</dl>
+
+<div class="footer">
+	<div class="copyright">
+		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
+		<span>Last updated on: June 30, 2009</span>
+	</div>
+	<div class="navbottom">
+		<span><a href="../index.html#builtins">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="threaded_once1_2.html">next</a></span><br/>
+		<span><a href="http://validator.w3.org/check/referer">XHTML</a> + <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a></span>
+	</div>
+</div>
+
+</body>
+
+</html>

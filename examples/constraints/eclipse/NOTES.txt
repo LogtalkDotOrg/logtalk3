@@ -1,0 +1,32 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+To load this example and for sample queries, please see the SCRIPT.txt file.
+
+This folder contains a set of simple examples illustrating how to use the IC 
+Constraint Solver library distributed with ECLiPSe with Logtalk.
+
+These examples are adapted with permission from the examples found at:
+
+	http://www.eclipse-clp.org/examples
+
+The examples code was changed to avoid using ECLiPSe special features (e.g. 
+array notation or the do/2 loop operator) as they do not work when the "iso" 
+library is loaded (this library is loaded by the "eclipse*iso.pl" config 
+file, which is used in the Logtalk integration scripts and shortcuts).
+
+The Constraint Solver libraries are loaded from the "loader.lgt" auxiliary 
+loader file. These libraries must always be loaded prior to compilation of 
+the individual example files.
+
+We must define an alias for the ECLiPSe "ic" library operator ::/2 in order 
+to avoid conflicts with the ::/2 Logtalk message sending operator. In the 
+examples, the operator ins/2 was chosen as the alias for the ::/2 operator.
+ECLiPSE 6.0#78 adds an alias in_set_range/2 for ::/2 that could also be used.

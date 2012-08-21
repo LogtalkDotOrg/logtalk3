@@ -1,0 +1,64 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example:
+
+| ?- logtalk_load(engines(loader)).
+...
+
+
+% both cars provide the same interface, declared in the protocol
+% that is implemented by the categories imported by each object:
+
+| ?- sedan::current_predicate(P).
+
+P = reference/1 ;
+P = capacity/1 ;
+P = cylinders/1 ;
+P = horsepower_rpm/2 ;
+P = bore_stroke/2 ;
+P = fuel/1
+yes
+
+
+| ?- coupe::current_predicate(P).
+
+P = reference/1 ;
+P = capacity/1 ;
+P = cylinders/1 ;
+P = horsepower_rpm/2 ;
+P = bore_stroke/2 ;
+P = fuel/1 ;
+yes
+
+
+% the sedan engine properties are the ones defined in the corresponding 
+% imported category (classic):
+
+| ?- sedan::(reference(Name), cylinders(Cylinders), horsepower_rpm(HP, RPM)).
+
+Name = 'M180.940'
+Cylinders = 6
+HP = 94
+RPM = 4800 
+yes
+
+
+% the coupe engine properties are the ones defined in the corresponding 
+% imported category (sport) plus the ones inherited from the top category 
+% (classic) which are not overridden:
+
+| ?- coupe::(reference(Name), cylinders(Cylinders), horsepower_rpm(HP, RPM)).
+
+Name = 'M180.941'
+Cylinders = 6
+HP = 115
+RPM = 3657 
+yes

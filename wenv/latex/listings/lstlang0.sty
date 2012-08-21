@@ -1,0 +1,46 @@
+%% 
+%% The listings package is copyright 1996--2004 Carsten Heinz, and
+%% continued maintenance on the package is copyright 2006--2007 Brooks Moses.
+%% The drivers are copyright 1997/1998/1999/2000/2001/2002/2003/2004/2006/
+%% 2007 any individual author listed in this file.
+%%
+%% This file is distributed under the terms of the LaTeX Project Public
+%% License from CTAN archives in directory  macros/latex/base/lppl.txt.
+%% Either version 1.3 or, at your option, any later version.
+%%
+%% This file is completely free and comes without any warranty.
+%%
+%% Send comments and ideas on the package, error reports and additional
+%% programming languages to Brooks Moses at <bmoses@dpdx.net>.
+%%
+\ProvidesFile{lstlang0.sty}
+    [2012/05/07 listings language file]
+
+%%
+%% Logtalk definition (c) 2012 Paulo Moura
+%%
+\lst@definelanguage{Logtalk}{%
+	tabsize=4,%
+	upquote=true,%
+	morekeywords={},%
+	otherkeywords={::,\^\^,\{,\}},%
+	moredirectives={
+		object,end_object,protocol,end_protocol,category,end_category,%
+		public,protected,private,%
+		alias,dynamic,discontiguous,synchronized,multifile,%
+		annotation,%
+		meta_predicate,mete_non_terminal,%
+		initialization,set_logtalk_flag,%
+		info,mode,%
+		if,elif,else,endif%
+	},%
+	moredelim=*[directive]:-,%
+	sensitive=true,%
+	morecomment=[l]\%,%
+	morecomment=[s]{/*}{*/},%
+	morestring=[bd]",%
+	morestring=[bd]'%
+}[keywords,comments,strings,directives]%
+\endinput
+%%
+%% End of file `lstlang0.sty'.

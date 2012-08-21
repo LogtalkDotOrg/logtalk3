@@ -1,0 +1,31 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+This directory contains files that provides basic syntax coloring, 
+entity and public predicate index, and code completion for editing 
+Logtalk source files with the text editor SuperEdi 3.8.1 or later 
+version:
+
+	http://www.wolosoft.com/en/superedi/index.html
+
+Install the supporting files by performing the following steps:
+
+1.	Copy the file "Logtalk.syn" to the "Syntax" directory in your 
+	SuperEdi installation directory (replacing any existing older file).
+
+2.	Copy the file "Logtalk.col" to the "Syntax" directory in your 
+	SuperEdi installation directory (replacing any existing older file).
+
+3.	Go to the Tools/Options dialog and create a new file type named 
+	"Logtalk". Set the file extension to "lgt" and the syntax and color 
+	scheme to "Logtalk". Set the tab size to "4".
+
+
+THESE SYNTAX COLORING SUPPORT FILES ARE UNDER DEVELOPMENT.

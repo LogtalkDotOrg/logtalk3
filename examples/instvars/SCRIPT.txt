@@ -1,0 +1,42 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example:
+
+| ?- logtalk_load(instvars(loader)).
+...
+
+
+% get the value of the instance variable for each instance (the default value,
+% stored in the instances class, is returned):
+
+| ?- instance1::ivar(Value1), instance2::ivar(Value2), instance3::ivar(Value3).
+
+Value1 = 0
+Value2 = 0
+Value3 = 0
+yes
+
+
+% change the value of the instance variable for instance1:
+
+| ?- instance1::set_ivar(1).
+
+yes
+
+
+% get the value of the instance variable for each instance:
+
+| ?- instance1::ivar(Value1), instance2::ivar(Value2), instance3::ivar(Value3).
+
+Value1 = 1
+Value2 = 0
+Value3 = 0
+yes

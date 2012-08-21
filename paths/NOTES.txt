@@ -1,0 +1,44 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Additional licensing terms apply per Section 7 of the GNU General
+Public License 3. Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+This folder contains a Prolog file, `paths.pl` file, that is automatically
+loaded by the Prolog integration scripts and shortcuts. This file defines
+essential library paths for starting Logtalk and library paths for the
+Logtalk standard library and for the supplied examples and contributions.
+
+You might need to edit the `paths.pl` file in order to adapt it to 
+reflect your Logtalk installation, Prolog compiler, and operating-system 
+requirements. However, as defined, the provided `paths.pl` file is already
+compatible with the supported back-end Prolog compilers running on MacOS X,
+Windows, Linux, Unix, and Unix-like operating-systems.
+
+Although you could customize this file by adding the paths to your own
+"libraries" (in order to easily load your own source code), this is
+preferably accomplished by customizing the settings file in the Logtalk
+user directory.
+
+When manually loading Logtalk (instead of using the provided integration
+scripts and shortcuts), you will need to load the `paths.pl` into your
+Prolog compiler before loading the Logtalk compiler/runtime to ensure
+Logtalk proper startup and to easily compile and load library and example
+source files using the notation `<library>(<entity>)`.

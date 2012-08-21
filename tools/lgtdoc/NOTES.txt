@@ -1,0 +1,45 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Additional licensing terms apply per Section 7 of the GNU General
+Public License 3. Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+This folder contains the default Logtalk documenting tool. It can
+be loaded by typing:
+
+	| ?- logtalk_load(lgtdoc(loader)).
+
+Documenting Logtalk source code (with this tool) requires compiling
+source files using the `source_data(on)` compiler option. For example:
+
+	| ?- logtalk_load(my_shining_code, [source_data(on)]).
+
+In alternative, you may also set the `source_data` flag to `on` by
+typing:
+
+	| ?- set_logtalk_flag(source_data, on).
+
+This documenting tool uses Logtalk's structural reflection support
+to extract and output in XML format relevant documentation about a
+source code file, a library of source files, or all loaded source
+files.
+
+All source files are formatted using tabs (the recommended setting
+is a tab width equivalent to 4 spaces).

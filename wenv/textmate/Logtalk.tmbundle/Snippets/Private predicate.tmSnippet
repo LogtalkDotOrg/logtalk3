@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>	:- private(${1:Functor}/${2:Arity}).
+	:- mode(${1:Functor}(${3:Arguments}), ${4:Solutions}).
+	:- info(${1:Functor}/${2:Arity}, [
+		comment is '${5:Description}',
+		arguments is ['$6'-'$7']]).
+
+$0</string>
+	<key>name</key>
+	<string>Private predicate</string>
+	<key>scope</key>
+	<string>source.logtalk</string>
+	<key>tabTrigger</key>
+	<string>private</string>
+	<key>uuid</key>
+	<string>8A284660-73F7-11D9-8083-000D93589AF6</string>
+</dict>
+</plist>

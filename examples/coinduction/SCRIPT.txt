@@ -1,0 +1,266 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example:
+
+| ?- logtalk_load(coinduction(loader)).
+...
+
+
+% an elementary coinductive predicate:
+
+| ?- simple::p.
+true ;
+false.
+
+% similar:
+
+| ?- simple::p(hoho).
+true ;
+false.
+
+| ?- simple::p(hoho, X).
+X = hoho ;
+false.
+
+
+% the following goal is true for any cyclic list containing only ones:
+
+| ?- L = [1| L], binary::p(L).
+L = [1|L] ;
+false.
+
+% ... or zeros:
+
+| ?- L = [0| L], binary::p(L).
+L = [0|L] ;
+false.
+
+% or a repetition of a pattern of ones and zeros:
+
+| ?- L = [1,0,1| L], binary::p(L).
+L = [1, 0, 1|L] ;
+false.
+
+% but not all solutions can be returned:
+
+| ?- binary::p(X).
+X = [0|_S1], % where
+    _S1 = [0|_S1] ;
+X = [0, 1|_S1], % where
+    _S1 = [1|_S1] ;
+X = [0|_S1], % where
+    _S1 = [1, 0|_S1] ;
+X = [1|_S1], % where
+    _S1 = [1|_S1] ;
+X = [1, 0|_S1], % where
+    _S1 = [0|_S1] ;
+X = [1|_S1], % where
+    _S1 = [0, 1|_S1] ;
+false.
+
+
+% infinite streams example:
+
+| ?- streams::nat_stream([0, s(0), s(s(0))| T]).
+T = [s(s(0))|T] ;
+T = [s(0), s(s(0))|T] ;
+T = [0, s(0), s(s(0))|T] ;
+false.
+
+| ?- X = [0, 1, 1, 0| X], streams::bit_stream(X).
+X = [0, 1, 1, 0|X] ;
+false.
+
+
+% filtering odd numbers from a list:
+
+| ?- L = [0, s(0), s(s(0))| L], filter::filter(L, F).
+L = [0, s(0), s(s(0))|L],
+F = [0, s(s(0))|F] ;
+false.
+
+
+% using the Sieve of Eratosthenes to find prime numbers:
+
+| ?- sieve::primes(20, P).
+P = [2, 3|_S1], % where
+    _S1 = [5, 7, 11, 13, 17, 19, 2, 3|_S1] ;
+false.
+
+
+% list membership example:
+
+| ?- X = [1, 2, 3| X], lists::comember(2, X).
+?- X = [1, 2, 3| X], lists::comember(2, X).
+X = [1, 2, 3|X] ;
+X = [1, 2, 3|X] ;
+X = [1, 2, 3|X] ;
+...
+
+| ?- X = [1, 2, 3, 1, 2, 3], lists::comember(2, X).
+false.
+
+% lack of Prolog support for tabling of rational terms prevents getting
+% the three recurring list members (1, 2, and 3) in the following query:
+
+| ?- X = [1, 2, 3| X], lists::comember(Y, X).
+X = [1, 2, 3|X],
+Y = 1 ;
+X = [1, 2, 3|X],
+Y = 1 ;
+X = [1, 2, 3|X],
+Y = 1 ;
+...
+
+| ?- X = [0, s(0), s(s(0))], lists::comember(s(0), X).
+false.
+
+| ?- X = [0, s(0), s(s(0))| X], lists::comember(s(0), X).
+X = [0, s(0), s(s(0))|X] ;
+X = [0, s(0), s(s(0))|X] ;
+X = [0, s(0), s(s(0))|X] ;
+...
+
+% list append example:
+
+| ?- Y = [4,5,6| Y], lists::append([1,2,3], Y, Z).
+Y = [4, 5, 6|Y],
+Z = [1, 2, 3, 4, 5, 6|Y].
+
+| ?- X = [1,2,3| X], Y = [3,4| Y], lists::append(X, Y, Z).
+X = [1, 2, 3|X],
+Y = [3, 4|Y],
+Z = [1|_S1], % where
+    _S1 = [2, 3, 1|_S1] ;
+false.
+
+| ?- Z = [1,2| Z], lists::append(X, Y, Z).
+Z = [1, 2|Z],
+X = [],
+Y = [1, 2|Z] ;
+Z = [1, 2|Z],
+X = [1],
+Y = [2|Z] ;
+Z = X, X = [1|_S1], % where
+    _S1 = [2, 1|_S1] ;
+Z = [1, 2|Z],
+X = [1, 2],
+Y = [1, 2|Z] ;
+false.
+
+
+% list non-membership example:
+
+| ?- X = [1,2,3], lists::absent(2, X).
+false.
+
+| ?- X = [1,2,3], lists::absent(4, X).
+false.
+
+| ?- X = [1,2,3| X], lists::absent(4, X).
+X = [1, 2, 3|X] ;
+false.
+
+| ?- X = [1,2,3| X], lists::absent(2, X).
+false.
+
+
+% sorting example:
+
+?- X=[1-2,2-3,1-4|X], sorting::keysort(X, L).
+X = [1-2, 2-3, 1-4|X],
+L = [1-2|_S1], % where
+    _S1 = [1-2|_S1] .
+
+?- X=[1-2,2-3|Y], Y = [1-4|Y], sorting::keysort(X, L).
+X = [1-2, 2-3|_S1], % where
+    _S1 = [1-4|_S1],
+Y = [1-4|_S1],
+L = [1-2|_S2], % where
+    _S2 = [1-4|_S2] .
+
+
+% omega-automaton example:
+
+?- automaton::automaton(s0, X).
+X = [a, b, c, d|X] ;
+X = [a, b, e|X] ;
+false.
+
+
+% module 4 counter example:
+% (not working; needs a Prolog tabling implementation supporting rational terms!)
+
+| ?- counter::verify.
+true.
+
+
+% nested automata example:
+% (partially working; needs a Prolog tabling implementation supporting rational terms!)
+
+| ?- nested::state(s0, X), lists::absent(s2, X).
+X = [s0, s1, s1|**] ;
+X = [s0, s3|**] ;
+false.
+
+
+% timed automata example:
+
+| ?- train::driver(s0, s0, s0, X, R).
+X = [approach, lower|_S1], % where
+    _S1 = [down, in, out, exit, raise, approach, up, lower|_S1],
+R = [ (approach, 0), (lower, 1.0)|_S2], % where
+    _S2 = [ (down, _G4969), (in, _G4975), (out, _G4981), (exit, _G4987), (raise, _G4993), (approach, _G4999), (up, _G5005), (lower, 1.0)|_S2],
+{_G5024>0.0, _G5033= ... + ... + _G5049+_G5046+_G5043-_G5040+_G5024, _G5040> -1.0, _G5040<0.0, _G5078= ... + ... + _G5046+_G5043, _G5093>0.0, _G5005= ... - ..., ... = ..., ..., ...} ;
+X = [approach|_S1], % where
+    _S1 = [lower, down, in, out, exit, raise, up, approach|_S1],
+R = [ (approach, 0)|_S2], % where
+    _S2 = [ (lower, 1.0), (down, _G4919), (in, _G4925), (out, _G4931), (exit, _G4937), (raise, _G4943), (up, _G4949), (approach, 0)|_S2],
+{_G4965>0.0, _G4974=_G4925+_G4990+_G4987+_G4984+_G4981+_G4965, _G4995=_G4925+_G4990+_G4987+_G4984, _G4981>1.0, _G4981<2.0, _G4949= ... + ... + _G4981, _G5046= ... + ..., ... > ..., ..., ...} ;
+false.
+
+
+% timed automata coroutining example:
+
+| ?- cotrain::comain(A, B, C).
+A = [approach, in, out, exit|A],
+B = [approach, exit|B],
+C = [lower, raise|C] ;
+false.
+
+| ?- cotrain::test_max(M, N, R).
+R = [ (approach, 0), (lower, 1.0), (down, _G3563), (in, _G3569), (out, _G3575), (exit, _G3581), (raise, _G3587), (up, _G3593)],
+{_G3600>0.0, M= ... + ... + _G3625+_G3622+_G3619+_G3616+_G3600, _G3635>0.0, N= ... + ... + _G3619+_G3616-_G3635, ... - ... - _G3616+_G3635< -0.0, _G3697>0.0, _G3706= ... + ..., ... > ..., ..., ...} ;
+false.
+
+
+% finding the cyclic paths in graphs:
+
+?- cp1::path(a, Path).
+Path = [a, b|_S1], % where
+    _S1 = [b|_S1] ;
+Path = [a, b, c, d|_S1], % where
+    _S1 = [d|_S1] ;
+Path = [a|_S1], % where
+    _S1 = [b, c, a|_S1] ;
+false.
+
+?- cp2::path(a, Path).
+Path = [a|_S1], % where
+    _S1 = [b, c, a|_S1] ;
+Path = [a|_S1], % where
+    _S1 = [b, c, d, a|_S1] ;
+false.
+
+?- cp3::path(a, Path, 3).
+Path = [a|_S1], % where
+    _S1 = [b, c, a|_S1] ;
+false.

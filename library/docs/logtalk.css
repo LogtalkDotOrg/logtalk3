@@ -1,0 +1,173 @@
+
+body {
+	color: black;
+	background-color: #e6e6e6;
+	font-family: sans-serif;
+	margin: 1.5em;
+}
+
+blockquote {
+	margin-left: 2em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: teal;
+	background-color: inherit;
+}
+
+a:link {
+	color: blue;
+	background-color: inherit;
+	text-decoration: none
+}
+
+a:visited {
+	color: navy;
+	background-color: inherit;
+	text-decoration: none
+}
+
+a:hover {
+	color: blue;
+	background-color: inherit;
+	text-decoration: underline
+} 
+
+a:active {
+	color: red;
+	background-color: inherit;
+	text-decoration: underline
+}
+
+.header {
+	color: inherit;
+	background-color: #dfdfdf;
+	margin-left: 0em;
+	margin-right: 0em;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	padding: 1em;
+}
+
+.header p {
+	margin: 0em;
+	padding: 0em;
+}
+
+.header h1 {
+	margin-top: 0em;
+	padding: 0em;
+}
+
+.header blockquote {
+	margin-bottom: 0em;
+	padding: 0em;
+}
+
+.section {
+	color: inherit;
+	background-color: #f3f3f3;
+	margin-left: 0em;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	padding-top: 0.5em;
+	padding-left: 1em;
+	padding-bottom: 0.5em;
+	padding-right: 1em;
+}
+
+.section h3 {
+	margin-top: 0.5em;
+	padding: 0em;
+}
+
+.predicates {
+}
+
+.public {
+}
+
+.protected {
+}
+
+.private {
+}
+
+.examples {
+}
+
+.example {
+	padding: 0.25em;
+}
+
+.comment {
+	color: navy;
+	background-color: inherit;
+	font-family: sans-serif;
+	font-style: italic;
+}
+
+.code, code, pre {
+	color: navy;
+	background-color: inherit;
+	font-family: monospace;
+}
+
+.type {
+	color: maroon;
+	background-color: inherit;
+	text-align: right;
+	font-weight: bold;
+}
+
+dl.relations {
+	padding-left: 0em;
+}
+
+dl.properties {
+	padding-left: 0em;
+}
+
+.key {
+	color: teal;
+	background-color: inherit;
+	padding-top: 0.5em;
+}
+
+.value {
+	color: navy;
+	background-color: inherit;
+	padding-left: 0em;
+}
+
+ul.parameters {
+	list-style-type: none;
+	padding-left: 0em;
+}
+
+ul.arguments {
+	list-style-type: none;
+	padding-left: 0em;
+	padding-top: 0.5em;
+	margin-top: 0em;
+	margin-bottom: 0em;
+}
+
+dl.examples {
+	list-style-type: none;
+	padding-left: 0em;
+	padding-top: 0.25em;
+	margin-top: 0em;
+	margin-bottom: 0em;
+}
+
+dl.examples .code {
+	color: maroon;
+	background-color: inherit;
+}
+
+dl.remarks {
+}
+
+.text {
+}

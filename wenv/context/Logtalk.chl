@@ -1,0 +1,57 @@
+//////////////////////////////////////////////////////////////////////////////
+//
+//	Logtalk highlighter
+//	Paulo Moura
+//
+//	http://logtalk.org/
+//
+//	Last updated on: June 10, 2007
+//
+//////////////////////////////////////////////////////////////////////////////
+
+
+
+Language:               Logtalk
+
+Filter:                 Logtalk files (*.lgt)|*.lgt
+
+HelpFile:
+
+CaseSensitive:          1
+
+LineComment:            %
+
+BlockCommentBeg:        /*
+BlockCommentEnd:        */
+
+IdentifierBegChars:
+IdentifierChars:
+
+NumConstBegChars:
+NumConstChars:
+
+EscapeChar:             \
+
+
+KeyWords1:              :: ^^ { } : <<
+
+
+StringBegChar:          "
+StringEndChar:          "
+MultilineStrings:       0
+
+UsePreprocessor:        0
+
+CurrLineHighlighted:    0
+
+
+SpaceCol:               clWindowText clWindow
+Keyword1Col:            clNavy clWindow B
+IdentifierCol:          clBlue clWindow
+CommentCol:             clGray clWindow I
+NumberCol:              clWindowText clWindow
+StringCol:              clMaroon clWindow
+SymbolCol:              clPurple clWindow
+PreprocessorCol:        clBlue clWindow
+SelectionCol:           clWhite clNavy
+CurrentLineCol:         clBlack clYellow

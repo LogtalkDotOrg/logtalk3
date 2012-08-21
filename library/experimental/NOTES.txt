@@ -1,0 +1,15 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+This folder contains objects, categories, and protocols whose 
+implementation is Prolog-compiler dependent. Each sub-folder 
+contains files specific for a Prolog compiler. All code in this 
+folder is under development, incomplete, and should be considered 
+highly experimental.

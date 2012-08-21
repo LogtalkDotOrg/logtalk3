@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN"  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BBEditDocumentType</key>
+	<string>CodelessLanguageModule</string>
+	<key>BBLMLanguageDisplayName</key>
+	<string>Logtalk</string>
+	<key>BBLMLanguageCode</key>
+	<string>LGT2</string>
+	<key>BBLMColorsSyntax</key>
+	<true/>
+	<key>BBLMScansFunctions</key>
+	<true/>
+	<key>BBLMIsCaseSensitive</key>
+	<true/>
+	<key>BBLMKeywordList</key>
+	<array>
+		<string></string>
+	</array>
+	<key>BBLMSuffixMap</key>
+	<array>
+		<dict>
+			<key>BBLMLanguageSuffix</key>
+			<string>.lgt</string>
+		</dict>
+	</array>
+	<key>Language Features</key> 
+	<dict> 
+		<key>Comment Pattern</key>
+		<string><![CDATA[(?x:
+			(?>	%			.*			$					) |
+			(?>  /\*    (?s:.*?)    (?>\*/)  )
+		)]]></string>
+		<key>Function Pattern</key>
+		<string><![CDATA[(?x:
+			(?P<function>
+				:-\s(object|protocol|category)\(
+				(?P<function_name>
+					[a-z][a-zA-Z_]+
+		)))]]></string>
+		<key>Identifier and Keyword Character Class</key>
+		<string><![CDATA[a-zA-Z0-9_:{}^]]></string>
+		<key>Skip Pattern</key>
+		<string></string>
+		<key>String Pattern</key>
+		<string><![CDATA[(?x:
+			(?> '			(?s: \\. | [^'] )*?		(?> '		| \z )     ) |
+			(?>	"			(?s: \\. | [^"] )*?		(?> " )		)
+		)]]></string>
+	</dict> 
+</dict>
+</plist>

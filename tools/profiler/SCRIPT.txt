@@ -1,0 +1,48 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example:
+
+| ?- logtalk_load(profilers(loader)).
+...
+
+
+% compile a source file generating instrumented code; for example:
+
+| ?- profiler::load(searching(loader)).
+
+yes
+
+
+% reset the profiling data before trying a goal:
+
+
+% choose an object to spy:
+
+| ?- profiler::reset.
+yes
+
+
+% prove the goal that you want to profile; for example:
+
+| ?- profiler::profile((salt(100, 250, 550)::initial_state(Initial), breadth_first(11)::solve(salt(100, 250, 550), Initial, Path), salt(100, 250, 550)::print_path(Path))).
+...
+
+
+% print all the collected profiling information:
+
+| ?- profiler::data.
+...
+
+
+% print the collected profiling information for a given entity:
+
+| ?- profiler::data(salt(_,_,_)).
+...

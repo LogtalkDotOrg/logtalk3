@@ -1,0 +1,22 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+To load this example and for sample queries, please see the SCRIPT.txt file.
+
+This folder contains an example that shows how to implement class variables 
+as defined in Smalltalk. The name shared instance variables is however much
+more accurate. In systems like Logtalk, which enables the use of explicit 
+metaclasses, true class variables are just the class (as an object) own 
+instance variables!
+
+This example defines a root class (root) and three instances (instance1, 
+instance2, and instance3). The root class defines a shared instance variable 
+(using a dynamic predicate) and the setter and getter methods which implement 
+the variable sharing behavior.

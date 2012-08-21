@@ -1,0 +1,137 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example:
+
+| ?- logtalk_load(reflection(loader)).
+...
+
+
+% print the (public and protected) interface of each class:
+
+| ?- object::print, abstract_class::print, class::print.
+
+Object: object
+
+  interface:
+    new/1
+    delete/1
+    instances/1
+    metaclass/0
+    abstract_class/0
+    strict_instance/0
+    print/0
+
+Object: abstract_class
+
+  interface:
+    new/1
+    delete/1
+    instances/1
+    metaclass/0
+    abstract_class/0
+    strict_instance/0
+    print/0
+
+Object: class
+
+  interface:
+    new/1
+    delete/1
+    instances/1
+    metaclass/0
+    abstract_class/0
+    strict_instance/0
+    print/0
+
+yes
+
+
+% class is the metaclass of all classes:
+
+| ?- class::instances(Instances), class::metaclass.
+
+Instances = [class,abstract_class,object]
+yes
+
+
+% create an abstract_class, check it and print its interface:
+
+| ?- abstract_class::new(ac), ac::abstract_class, ac::print.
+
+Object: ac
+
+  interface:
+    metaclass/0
+    abstract_class/0
+    strict_instance/0
+    print/0
+
+yes
+
+
+% try to create an instance of the abstract class:
+
+| ?- ac::new(i).
+
+uncaught exception: error(existence_error(predicate_declaration,new(i)),ac::new(i),user)
+
+
+% create a new instantiable class and print its interface:
+
+| ?- class::new(c), c::print.
+
+Object: c
+
+  interface:
+    new/1
+    delete/1
+    instances/1
+    metaclass/0
+    abstract_class/0
+    strict_instance/0
+    print/0
+
+yes
+
+
+% create an instance of the new class:
+
+| ?- c::new(i), c::instances(Instances).
+
+Instances = [i]
+yes
+
+
+% because c does not declare any predicates, its instances have no interface:
+
+| ?- i::current_predicate(Predicate).
+
+no
+
+
+% create an instance of object, root of the inheritance graph, and print its interface:
+
+| ?- object::new(j), j::print.
+
+Object: j
+
+  interface:
+    strict_instance/0
+    print/0
+
+yes
+
+
+% delete the dynamic objects that we created:
+
+| ?- c::delete(i), class::delete(c), abstract_class::delete(ac), object::delete(j).
+
+yes

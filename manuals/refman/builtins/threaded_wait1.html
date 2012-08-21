@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<!--
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  
+%  This file is part of Logtalk <http://logtalk.org/>    
+%  Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
+%  
+%  Logtalk is free software. You can redistribute it and/or modify it under
+%  the terms of the FSF GNU General Public License 3  (plus some additional
+%  terms per section 7).        Consult the "LICENSE.txt" file for details.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="application/xml+xhtml; charset=utf-8" />
+	<title>Logtalk built-in predicate: threaded_wait/1</title>
+	<link rel="stylesheet" href="../../screen.css" type="text/css" media="screen"/>
+	<link rel="stylesheet" href="../../print.css" type="text/css" media="print"/>
+</head>
+
+<body>
+
+<div class="top-left">Logtalk reference manual</div> 
+<div class="top-right">Built-in predicate: threaded_wait/1</div>
+<div class="bottom-left"><span class="page"/></div> 
+<div class="bottom-right"><span class="page"/></div>
+<div class="navtop"><a href="../../index.html">Contents</a> &gt; <a href="../index.html">Reference Manual</a> &gt; <a href="../index.html#builtins">Built-in Predicates</a> &gt; threaded_wait/1</div>
+
+<h2 id="builtins_threaded_wait1" class="codenp">threaded_wait/1</h2>
+
+<h4>Description</h4>
+
+<pre>threaded_wait(Term)
+threaded_wait([Term| Terms])</pre>
+<p>
+Suspends the thread making the call until a notification is received that unifies with <code>Term</code>. The call must be made within the same object (<a class="glossary" title="Go to glossary definition" href="../../glossary.html#this"><em>this</em></a>) containing the calls to the <a title="Consult reference manual" href="threaded_notify1.html"><code>threaded_notify/1</code></a> predicate that will eventually send the notification. The argument may also be a list of notifications, <code>[Term| Terms]</code>. In this case, the thread making the call will suspend until all notifications in the list are received.
+</p>
+
+<h4>Template and modes</h4>
+
+<pre>threaded_wait(?term)
+threaded_wait(+list(term))</pre>
+
+<h4>Errors</h4>
+
+<dl>
+	<code>(none)</code>
+</dl>
+
+<h4>Examples</h4>
+
+<dl>
+	<dt>Wait until the <code>data_available</code> notification is received:</dt>
+		<dd><code>threaded_wait(data_available)</code></dd>
+</dl>
+
+<div class="footer">
+	<div class="copyright">
+		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
+		<span>Last updated on: October 24, 2007</span>
+	</div>
+	<div class="navbottom">
+		<span><a href="threaded_peek1_2.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="threaded_notify1.html">next</a></span><br/>
+		<span><a href="http://validator.w3.org/check/referer">XHTML</a> + <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a></span>
+	</div>
+</div>
+
+</body>
+
+</html>

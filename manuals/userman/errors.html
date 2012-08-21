@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<!--
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  
+%  This file is part of Logtalk <http://logtalk.org/>    
+%  Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
+%  
+%  Logtalk is free software. You can redistribute it and/or modify it under
+%  the terms of the FSF GNU General Public License 3  (plus some additional
+%  terms per section 7).        Consult the "LICENSE.txt" file for details.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="application/xml+xhtml; charset=utf-8" />
+	<title>Logtalk user manual: error handling</title>
+	<link rel="stylesheet" href="../screen.css" type="text/css" media="screen"/>
+	<link rel="stylesheet" href="../print.css" type="text/css" media="print"/>
+</head>
+
+<body>
+
+<div class="top-left">Logtalk user manual</div> 
+<div class="top-right">Error handling</div>
+<div class="bottom-left"><span class="page"/></div> 
+<div class="bottom-right"><span class="page"/></div>
+<div class="navtop"><a href="../index.html">Contents</a> &gt; <a href="index.html">User Manual</a> &gt; Error handling</div>
+
+<h1 id="errors_errors">Error handling</h1>
+
+<p>
+All error handling is done in Logtalk by using the ISO defined <code>catch/3</code> and <code>throw/1</code> predicates <a title="ISO Prolog Standard" href="../bibliography.html#ISO95">[ISO 95]</a>. Errors thrown by Logtalk have the following format:
+</p>
+<pre>error(Error, logtalk(Goal, Entity))</pre>
+<p>
+In this exception term, <code>Goal</code> is the goal that triggered the error <code>Error</code> and <code>Entity</code> is the entity in whose context <code>Goal</code> is called. For example:
+</p>
+<pre>error(permission_error(modify, private_predicate, p(_)), logtalk(foo::abolish(p/1), user))</pre>
+<p>
+Note, however, that <code>Goal</code> and <code>Entity</code> can be variables when the corresponding information is not available (usually due to compiler optimizations that throw away the necessary error context information).
+</p>
+
+<h2>Compiler warnings and errors<a id="errors_compiler"></a></h2>
+
+<p>
+The current Logtalk compiler uses the <code>read_term/3</code> ISO Prolog defined built-in predicate to read and process a Logtalk source file. One consequence of this is that invalid Prolog terms or syntax errors may abort the compilation process with limited information given to the user (due to the inherent limitations of the <code>read_term/3</code> predicate). 
+</p>
+<p>
+If all the terms in a source file are valid, then there is a set of errors or potential errors, described below, that the compiler will try to detect and report, depending on the used compiler flags (see the <a href="installing.html#options">Installing and running Logtalk</a> section of this manual for details).
+</p>
+
+<h3 id="errors_unknown">Unknown entities</h3>
+
+<p>
+The Logtalk compiler will warn us of any referenced entity that is not currently loaded. The warning may reveal a misspell entity name or just an entity that it will be loaded next.
+</p>
+
+<h3 id="errors_singletons">Singleton variables</h3>
+
+<p>
+Singleton variables in a clause are often misspell variables and, as such, one of the most common errors when programming in Prolog. If your Prolog compiler complies with the Prolog ISO standard or at least supports the ISO predicate <code>read_term/3</code> called with the option <code>singletons(S)</code>, then the Logtalk compiler will warn us of any singleton it finds while compiling a Logtalk entity.
+</p>
+
+<h3 id="errors_prolog">Redefinition of Prolog built-in predicates</h3>
+
+<p>
+The Logtalk compiler will warn us of any redefinition of a Prolog built-in predicate inside an object or category. Sometimes the redefinition is intended. In other cases, the user may not be aware that the subjacent Prolog compiler may already provide the predicate as a built-in or we may want to ensure code portability among several Prolog compilers with different sets of built-in predicates.
+</p>
+
+<h3 id="errors_predicates">Redefinition of Logtalk built-in predicates</h3>
+
+<p>
+Similar to the redefinition of Prolog built-in predicates, the Logtalk compiler will warn us if we try to redefine a Logtalk built-in. The redefinition will probably be an error in almost all (if not all) cases.
+</p>
+
+<h3 id="errors_methods">Redefinition of Logtalk built-in methods</h3>
+
+<p>
+An error will be thrown if we attempt to redefine a Logtalk built-in method inside an entity. The default behavior is to report the error and abort the compilation of the offending entity. 
+</p>
+
+<h3 id="errors_misspell">Misspell calls of local predicates</h3>
+
+<p>
+A warning will be reported if Logtalk finds (in the body of a predicate definition) a call to a local predicate that is not defined, built-in (either in Prolog or in Logtalk) or declared dynamic. In most cases these calls are simple misspell errors.
+</p>
+
+<h3 id="errors_portability">Portability warnings</h3>
+
+<p>
+A warning will be reported if a predicate clause contains a call to a non-ISO specified built-in predicate or to a non-ISO specified arithmetic function.
+</p>
+
+<h3 id="errors_others">Other warnings and errors</h3>
+
+<p>
+The Logtalk compiler will throw an error if it finds a predicate clause or a directive that cannot be parsed. The default behavior is to report the error and abort the compilation of the offending entity.
+</p>
+
+<h2 id="errors_runtime">Runtime errors</h2>
+
+<p>
+This session briefly describes runtime errors that result from misuse of Logtalk built-in predicates, built-in methods or from message sending. For a complete and detailed description of runtime errors please consult the <a title="Consult reference manual" href="../refman/index.html">Reference Manual</a>.
+</p>
+
+<h3 id="errors_predicates">Logtalk built-in predicates</h3>
+
+<p>
+All Logtalk built-in predicates checks the type and mode of the calling arguments, throwing an exception in case of misuse.
+</p>
+
+<h3 id="errors_methods">Logtalk built-in methods</h3>
+
+<p>
+All Logtalk built-in method checks the type and mode of the calling arguments, throwing an exception in case of misuse.
+</p>
+
+<h3 id="errors_sending">Message sending</h3>
+
+<p>
+The message sending mechanisms always check if the receiver of a message is a defined object and if the message corresponds to a declared predicate within the scope of the sender.
+</p>
+
+<div class="footer">
+	<div class="copyright">
+		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
+		<span>Last updated on: May 7, 2011</span>
+	</div>
+	<div class="navbottom">
+		<span><a href="threads.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="documenting.html">next</a></span><br/>
+		<span><a href="http://validator.w3.org/check/referer">XHTML</a> + <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a></span>
+	</div>
+</div>
+
+</body>
+
+</html>
+

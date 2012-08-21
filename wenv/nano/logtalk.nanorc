@@ -1,0 +1,19 @@
+## Here is an example for Logtalk.
+##
+syntax "logtalk" "\.lgt$"
+
+color magenta "::"
+color magenta ":"
+color magenta "\^\^"
+color magenta "<<"
+color magenta "[{}]"
+color black ":-"
+
+color brightblack start="^[[:space:]]*:- (object|category|protocol)\(" end="\)\."
+color brightblack "^[[:space:]]*:- end_(object|category|protocol)\."
+
+color green ""[^"]*""
+color green "'[^']*'"
+
+color blue "%.*"
+color blue start="/\*" end="\*/"

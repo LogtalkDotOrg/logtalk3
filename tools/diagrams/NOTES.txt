@@ -1,0 +1,79 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Additional licensing terms apply per Section 7 of the GNU General
+Public License 3. Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+To load this example and for sample queries, please see the `SCRIPT.txt`
+file.
+
+This example illustrates how to generate entity diagrams for source files
+and for libraries of source files using the Logtalk reflection features to
+collect the relevant information and the DOT language for representing the
+diagrams.
+
+The diagrams `.dot` files are created on the current directory by default.
+These files can be easily converted into a printable format such as PDF
+or Postscript. For example, using the `dot` command-line executable we can
+simply type:
+
+	dot -Tpdf diagram.dot > diagram.pdf
+
+When generating diagrams for libraries, is possible to split a diagram with
+several disconnected entity graphs using the `ccomps` command-line executable.
+For example:
+
+	ccomps -x -o subdiagram.dot diagram.dot
+
+For more information on the DOT language and related tools see:
+
+	http://www.graphviz.org/
+
+When using Windows, there are know issues with some Prolog compilers due
+to the internal representation of paths. If you encounter problems with a
+specific back-end Prolog compiler, try to use another supported back-end
+Prolog compiler when generating diagrams.
+
+For printing large diagrams, you will need to either use a tool to slice
+the diagram in page-sized pieces or, preferably, use software capable of
+tiled printing (e.g. Adobe Reader).
+
+A set of options are available to specify the details to include in the
+generated diagrams:
+
+- `date(Boolean)`
+	print/omit current date (`true` or `false`; default is `true`)
+- `library_paths(Boolean)`
+	print/omit library paths (`true` or `false`; default is `true`)
+- `file_names(Boolean)`
+	print/omit source file names (`true` or `false`; default is `true`)
+- `interface(Boolean)`
+	print/omit public predicates (`true` or `false`; default is `true`)
+- `output_path(OutputPath)`
+	directory for the .dot files (an atom; default is `.`)
+- `exclude_files(Files)`
+	list of source files (without the `.lgt` extension) to exclude (default is `[]`)
+- `exclude_paths(Paths)`
+	list of relative paths to exclude (default is `[]`)
+- `exclude_entities(Entities)`
+	list of entities to exclude (default is `[]`)
+
+Be sure to set the `source_data` flag on before compiling the libraries or
+files for which you want to generated diagrams.

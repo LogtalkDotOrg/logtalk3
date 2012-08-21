@@ -1,0 +1,34 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Additional licensing terms apply per Section 7 of the GNU General
+Public License 3. Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+This folder contains a single Prolog file, `core.pl`, which implements
+both the Logtalk compiler and the Logtalk runtime. There is also a
+single Logtalk file, `core_messages.lgt`, which defines default
+translations for Logtalk core messages.
+
+Before loading the `core.pl` file into your favorite Prolog compiler,
+you must first load the appropriated adapter file for your Prolog
+compiler that you will find in the `adapters` directory.
+
+The source files are formatted using tabs (the recommended setting is
+a tab width equivalent to 4 spaces).

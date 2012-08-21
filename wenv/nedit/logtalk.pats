@@ -1,0 +1,76 @@
+! Syntax highlighting patterns file for Logtalk (http://logtalk.org/)
+!
+! Author: Paulo Moura (pmoura at logtalk.org)
+!
+! Last changed in: May 3, 2012
+!
+!
+! To install this patterns file:
+!
+! 1. Load this file by starting nedit from the command line:
+!
+! 	% nedit -import logtalk.pats
+!
+! 2. Go to the Preferences menu and verify that the patterns were loaded 
+!    correctly.
+!
+! 3. If everything is correct, choose the option Save Defaults from the 
+!    Preferences menu.
+!
+!
+nedit.fileVersion: 5.2
+
+nedit.highlightPatterns: Logtalk:1:0{\n\
+	Variables:"[A-Z_]\\w*":::Identifier2::\n\
+	Opening Entity directives:"(?<=:\\-\\s)(object|protocol|category|module)(?=[(])":::Preprocessor::\n\
+	Closing Entity directives:"(?<=:\\-\\s)(end_object|end_protocol|end_category)(?=[.])":::Preprocessor::\n\
+	Entity relations:"<(complements|instantiates|specializes|extends|imports|implements)(?=[(])":::Preprocessor::\n\
+	Directives:"(?<=:\\-\\s)(alias|set_logtalk_flag|set_prolog_flag|synchronized|elif|encoding|ensure_loaded|export|if|include|initialization|info|mode|dynamic|discontiguous|public|protected|private|meta_predicate|meta_non_terminal|multifile|coinductive|op|calls|uses|use_module|reexport)(?=[(])":::Preprocessor::\n\
+	Directives:"(?<=:\\-\\s)(else|endif|dynamic|synchronized|threaded)>":::Preprocessor::\n\
+	Clause operators:":\\-|\\.|,":::Keyword::\n\
+	Term testing:"(?<![+?@-])(var|atom|integer|float|atomic|callable|compound|nonvar|number|ground|acyclic_term)(?=[(])":::Subroutine::\n\
+	Term comparison:"(?<![+?@-])(compare)(?=[(])":::Subroutine::\n\
+	Message sending operators:"::|\\^\\^":::Keyword::\n\
+	Category predicate direct call:":":::Keyword::\n\
+	External call:"[{}]":::Keyword::\n\
+	Control constructs:"!|;|\\-\\-\\>|\\-\\>|<(true|fail)>":::Subroutine::\n\
+	Control constructs:"<(call|catch|throw)(?=[(])":::Subroutine::\n\
+	Block comment:"/\\*":"\\*/"::Comment::\n\
+	Line comment:"%":"$"::Comment::\n\
+	Number:"0'.":::Numeric Const::\n\
+	Number:"0b[0-1]+":::Numeric Const::\n\
+	Number:"0o[0-7]+":::Numeric Const::\n\
+	Number:"0x[A-Fa-f0-9]+":::Numeric Const::\n\
+	Number:"[0-9]+(\.[0-9]+)?([eE][-+][0-9]+)?":::Numeric Const::\n\
+	String:"""":""""::String::\n\
+	Quoted atoms:"'":"'"::String::\n\
+	Escape sequences:"\\\\([\\\\abfnrtv""']|(x[a-fA-F0-9]+|[0-7]+)\\\\)":::String1:Quoted atoms:\n\
+	Built-in methods:"<(parameter|self|sender|this|current_predicate|predicate_property|abolish|asserta|assertz|clause|retractall|retract|bagof|findall|forall|setof|before|after|expand_goal|expand_term|goal_expansion|term_expansion|phrase|threaded|threaded_call|threaded_once|threaded_ignore|threaded_exit|threaded_peek|threaded_wait|threaded_notify)(?=[(])":::Subroutine::\n\
+	Arithmetic operators:"<is>|\\+|\\*|\\-|/|=:=|=\\\\=|=\\<|\\>=|\\<|\\>":::Subroutine::\n\
+	Built-in predicates:"<(current_object|current_protocol|current_category|create_object|create_protocol|create_category|object_property|protocol_property|category_property|abolish_object|abolish_protocol|abolish_category|complements_object|conforms_to_protocol|extends_object|extends_protocol|extends_category|implements_protocol|instantiates_class|specializes_class|imports_category|abolish_events|current_event|define_events|current_logtalk_flag|set_logtalk_flag|logtalk_compile|logtalk_load|logtalk_library_path|logtalk_load_context|forall|retractall)(?=[(])":::Subroutine::\n\
+	Term unification:"=|\\\\=":::Subroutine::\n\
+	Term unification:"<(subsumes_term|unify_with_occurs_check)(?=[(])":::Subroutine::\n\
+	Term comparison:"@=\\<|==|\\\\==|@\\>=|@\\<|@\\>":::Subroutine::\n\
+	Term creation and decomposition:"<(functor|arg|copy_term|numbervars|term_variables)(?=[(])":::Subroutine::\n\
+	Term creation and decomposition:"=\\.\\.":::Subroutine::\n\
+	Mode operators:"\\?|@":::Subroutine::\n\
+	Stream selection and control:"<(current_input|current_output|set_input|set_output|open|close|flush_output|stream_property|at_end_of_stream|set_stream_position)(?=[(])":::Subroutine::\n\
+	Stream selection and control:"<(flush_output|at_end_of_stream)>":::Subroutine::\n\
+	Character input-output:"<(get_char|get_code|peek_char|peek_code|put_char|put_code|nl)(?=[(])":::Subroutine::\n\
+	Character input-output:"<nl>":::Subroutine::\n\
+	Byte input-output:"<(get_byte|peek_byte|put_byte)(?=[(])":::Subroutine::\n\
+	Term input-output:"<(read_term|read|write_canonical|write_term|writeq|write|current_op|op|current_char_conversion|char_conversion)(?=[(])":::Subroutine::\n\
+	Logic and control:"<(ignore|once)(?=[(])":::Subroutine::\n\
+	Logic and control:"\\\\\\+|<repeat>":::Subroutine::\n\
+	Atomic term processing:"<(atom_length|atom_concat|sub_atom|atom_chars|atom_codes|char_code|number_chars|number_codes)(?=[(])":::Subroutine::\n\
+	Implementation defined hooks:"<(set_prolog_flag|current_prolog_flag|halt)(?=[(])":::Subroutine::\n\
+	Implementation defined hooks:"<halt>":::Subroutine::\n\
+	Sorting:"<(keysort|sort)(?=[(])":::Subroutine::\n\
+	Evaluable functors:"<(max|min|rem|mod|abs|sign|float_integer_part|float_fractional_part|float|floor|truncate|round|ceiling)(?=[(])":::Subroutine::\n\
+	Evaluable functors:"\\+|-|\\*|//|/":::Subroutine::\n\
+	Other arithemtic functors:"\\*\\*|<e>|<pi>|<rem>|<mod>":::Subroutine::\n\
+	Other arithemtic functors:"\\*\\*|<(sin|cos|acos|asin|atan|exp|log|sqrt)(?=[(])":::Subroutine::\n\
+	Bitwise functors:">>|<<|/\\\\|\\\\/|\\\\":::Subroutine::\n\
+	Atoms:"[a-z]\\w*":::Plain::\n\
+}
+nedit.languageModes:	Logtalk: .lgt ::::4:4:\n\

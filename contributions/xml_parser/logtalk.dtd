@@ -1,0 +1,152 @@
+
+<!--
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  This file is part of Logtalk <http://logtalk.org/>  
+%  Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
+%
+%  This program is free software: you can redistribute it and/or modify
+%  it under the terms of the GNU General Public License as published by
+%  the Free Software Foundation, either version 3 of the License, or
+%  (at your option) any later version.
+%  
+%  This program is distributed in the hope that it will be useful,
+%  but WITHOUT ANY WARRANTY; without even the implied warranty of
+%  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%  GNU General Public License for more details.
+%  
+%  You should have received a copy of the GNU General Public License
+%  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+%  
+%  Additional licensing terms apply per Section 7 of the GNU General
+%  Public License 3. Consult the "LICENSE.txt" file for details.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+-->
+
+
+<!ELEMENT logtalk (entity, relations, predicates, operators, remarks)>
+
+
+<!ELEMENT entity (name, type, compilation, comment?, (parnames|parameters)?, author?, version?, date?, copyright?, license?, info*)>
+
+<!ELEMENT name (#PCDATA)>
+
+<!ELEMENT type (#PCDATA)>
+
+<!ELEMENT compilation (#PCDATA)>
+
+<!ELEMENT comment (#PCDATA)>
+
+<!ELEMENT parnames (#PCDATA)>
+
+<!ELEMENT parameters (parameter*)>
+
+<!ELEMENT parameter (name, description)>
+
+<!ELEMENT description (#PCDATA)>
+
+<!ELEMENT author (#PCDATA)>
+
+<!ELEMENT version (#PCDATA)>
+
+<!ELEMENT date (#PCDATA)>
+
+<!ELEMENT copyright (#PCDATA)>
+
+<!ELEMENT license (#PCDATA)>
+
+<!ELEMENT info (key, value)>
+
+
+<!ELEMENT key (#PCDATA)>
+
+<!ELEMENT value (#PCDATA)>
+
+
+<!ELEMENT relations (implements*, imports*, extends*, instantiates*, specializes*, uses*, calls*, alias*)>
+
+<!ELEMENT implements (name, scope, file)>
+
+<!ELEMENT imports (name, scope, file)>
+
+<!ELEMENT extends (name, scope, file)>
+
+<!ELEMENT instantiates (name, scope, file)>
+
+<!ELEMENT specializes (name, scope, file)>
+
+<!ELEMENT uses (name, file)>
+
+<!ELEMENT calls (name, file)>
+
+<!ELEMENT alias (name, original, alternative)>
+
+
+<!ELEMENT scope (#PCDATA)>
+
+<!ELEMENT file (#PCDATA)>
+
+<!ELEMENT original (#PCDATA)>
+
+<!ELEMENT alternative (#PCDATA)>
+
+
+<!ELEMENT predicates (public, protected, private)>
+
+
+<!ELEMENT public (predicate*)>
+
+<!ELEMENT protected (predicate*)>
+
+<!ELEMENT private (predicate*)>
+
+
+<!ELEMENT predicate (name, scope, compilation, meta?, mode*, comment?, template?, (argnames|arguments)?, exceptions?, info*, examples?)>
+
+<!ELEMENT meta (#PCDATA)>
+
+<!ELEMENT mode (template, solutions)>
+
+<!ELEMENT template (#PCDATA)>
+
+<!ELEMENT solutions (#PCDATA)>
+
+<!ELEMENT argnames (#PCDATA)>
+
+<!ELEMENT arguments (argument*)>
+
+<!ELEMENT argument (name, description)>
+
+<!ELEMENT exceptions (exception*)>
+
+<!ELEMENT exception (condition, term)>
+
+<!ELEMENT condition (#PCDATA)>
+
+<!ELEMENT term (#PCDATA)>
+
+<!ELEMENT examples (example*)>
+
+<!ELEMENT example (description, call, bindings)>
+
+<!ELEMENT call (#PCDATA)>
+
+<!ELEMENT bindings (#PCDATA)>
+
+<!ELEMENT operators (operator*)>
+
+<!ELEMENT operator (term, scope)>
+
+<!ELEMENT remarks (remark*)>
+
+<!ELEMENT remark (topic, text)>
+
+<!ELEMENT topic (#PCDATA)>
+
+<!ELEMENT text (#PCDATA)>
+
+
+<!ENTITY % custom SYSTEM "custom.ent">
+
+%custom;

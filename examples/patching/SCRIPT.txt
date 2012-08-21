@@ -1,0 +1,43 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example:
+
+| ?- logtalk_load(patching(loader)).
+...
+
+
+% find categories that complement objects:
+
+| ?- complements_object(Category, Object).
+Category = patch,
+Object = broken.
+yes 
+
+
+% verify the patch in the "patch" category for the predicate is_proper_list/1
+% defined in the object "broken":
+
+| ?- broken::is_proper_list([1,2,3]).
+yes
+
+| ?- broken::is_proper_list(_).
+no
+
+| ?- broken::is_proper_list([a,b,c|_]).
+no
+
+% verify the patch in the "patch" category for the wrong scope of the last/3
+% predicate declared in the object "broken":
+
+| ?- broken::last(_, _, _).
+    permission_error(access, private_predicate, last/3),
+    broken::last(_, _, _),
+    user)

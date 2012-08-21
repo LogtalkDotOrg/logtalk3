@@ -1,0 +1,106 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the loading the example:
+
+| ?- logtalk_load(nondet(loader)).
+...
+
+
+% make a threaded call with a non-deterministic goal:
+
+| ?- threaded_call(lists::member(X, [1,2,3])).
+
+X = _G189 
+yes
+
+% retrieve through backtracking all solutions for the non-deterministic goal:
+
+| ?- threaded_exit(lists::member(X, [1,2,3])).
+
+X = 1 ;
+X = 2 ;
+X = 3 ;
+no
+
+
+% make a threaded call by commiting to the first solution found:
+
+| ?- threaded_once(lists::member(X, [1,2,3])).
+
+X = _G189 
+yes
+
+% retrieve through backtracking the goal solution:
+
+| ?- threaded_exit(lists::member(X, [1,2,3])).
+
+X = 1 ;
+no
+
+
+% when two or more variant calls are made...
+
+| ?- threaded_call(lists::member(X, [1,2,3])), threaded_call(lists::member(Y, [1,2,3])).
+
+X = _G189 Y =_G190
+yes
+
+% ...the first threaded_exit/1 call will pick one of them:
+
+| ?- threaded_exit(lists::member(X, [1,2,3])).
+
+X = 1 ;
+X = 2 ;
+X = 3 ;
+no
+
+% ...and a second threaded_exit/1 call will pick the remaining one:
+
+| ?- threaded_exit(lists::member(X, [1,2,3])).
+
+X = 1 ;
+X = 2 ;
+X = 3 ;
+no
+
+
+% tags may be used to distinguish between threaded calls if needed:
+
+| ?- threaded_call(lists::member(X, [1,2,3]), Tag).
+
+Tag = 1
+yes
+
+| ?- threaded_call(lists::member(X, [1,2,3]), Tag).
+
+Tag = 2
+yes
+
+| ?- threaded_exit(lists::member(X, [1,2,3]), 2).
+
+X = 1 ;
+X = 2 ;
+X = 3 ;
+no
+
+
+% use a subsumed goal instead of a variant of the original goal:
+
+| ?- threaded_call(lists::member(X, [1,2,3,2])).
+
+X = _G189 
+yes
+
+| ?- threaded_exit(lists::member(2, [1,2,3,2])).
+
+More ;
+More ;
+no

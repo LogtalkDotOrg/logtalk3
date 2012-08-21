@@ -1,0 +1,40 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+This directory contains some files that provide basic syntax highlighting 
+and project and template files for editing Logtalk source files with MacOS X 
+Xcode 1.1 or later version.
+
+
+To install:
+
+1. Copy the files "logtalk.pbfilespec" and "logtalk.pblangspec" to the 
+directory:
+
+	~/Library/Application Support/Apple/Developer Tools/Specifications 
+
+2. Copy the directory "Logtalk" to the directory:
+ 
+	~/Library/Application Support/Apple/Developer Tools/File Templates 
+
+3. Create (if it does not exist) the directory:
+
+	~/Library/Application Support/Apple/Developer Tools/Project Templates/Logtalk
+
+and copy to it the directory Logtalk Application
+
+
+Although the file logtalk.pblangspec provides basic syntax coloring for the 
+Logtalk language, it is recommended that you configure Xcode to use an 
+external text editor such as SubEthaEdit or TextMate for editing Logtalk 
+source files.
+
+
+SUPPORT FOR THIS IDE IS A WORK IN PROGRESS.

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<!--
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  
+%  This file is part of Logtalk <http://logtalk.org/>    
+%  Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
+%  
+%  Logtalk is free software. You can redistribute it and/or modify it under
+%  the terms of the FSF GNU General Public License 3  (plus some additional
+%  terms per section 7).        Consult the "LICENSE.txt" file for details.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="application/xml+xhtml; charset=utf-8" />
+	<title>Logtalk tutorial: list predicates</title>
+	<link rel="stylesheet" href="../screen.css" type="text/css" media="screen"/>
+	<link rel="stylesheet" href="../print.css" type="text/css" media="print"/>
+</head>
+
+<body>
+
+<div class="top-left">Logtalk tutorial</div> 
+<div class="top-right">List predicates</div>
+<div class="bottom-left"><span class="page"/></div> 
+<div class="bottom-right"><span class="page"/></div>
+<div class="navtop"><a href="../index.html">Contents</a> &gt; <a href="index.html">Tutorial</a></div>
+
+<h1>List predicates</h1>
+
+<p>
+In this example, we will illustrate the use of:
+</p>
+<ul>
+	<li>objects</li>
+	<li>protocols</li>
+</ul>
+<p>
+by using common list utility predicates.
+</p>
+
+<h2 id="object">Defining a list object</h2>
+
+<p>
+We will start by defining an object, <code>list</code>, containing predicate definitions for some common list predicates like <code>append/3</code>, <code>length/2</code> and <code>member/2</code>:
+</p>
+<pre>:- object(list).
+
+    :- public(append/3).
+    :- public(length/2).
+    :- public(member/2).
+
+    append([], List, List).
+    append([Head| Tail], List, [Head| Tail2]) :-
+        append(Tail, List, Tail2).
+
+    length(List, Length) :-
+        length(List, 0, Length).
+
+    length([], Length, Length).
+    length([_| Tail], Acc, Length) :-
+        Acc2 is Acc + 1,
+        length(Tail, Acc2, Length).
+
+    member(Element, [Element| _]).
+    member(Element, [_| List]) :-
+        member(Element, List).
+
+:- end_object.</pre>
+<p>
+What is different here from a regular Prolog program? The definitions of the list predicates are the usual ones. We have two new directives, <a title="Consult reference manual" href="../refman/directives/object1_5.html"><code>object/1</code></a> and <a title="Consult reference manual" href="../refman/directives/end_object0.html"><code>end_object/0</code></a>, that encapsulate the object's code. In Logtalk, by default, all object predicates are private; therefore, we have to explicitly declare all predicates that we want to be public, that is, that we want to call from outside the object. This is done using the <a title="Consult reference manual" href="../refman/directives/public1.html"><code>public/1</code></a> scope directive.
+</p>
+<p>
+After we copy the object code to a text file and saved it under the name <code>list.lgt</code>, we need to change the Prolog working directory to the one used to save our file (consult your Prolog compiler reference manual). Then, after starting Logtalk (see the <a title="Consult user manual" href="../userman/installing.html#programming">Installing and running Logtalk</a> session on the User Manual), we can compile and load the object using the <a title="Consult reference manual" href="../refman/builtins/logtalk_load1.html"><code>logtalk_load/1</code></a> Logtalk built-in predicate:
+</p>
+<pre>| ?- logtalk_load(list).
+
+object list loaded
+yes</pre>
+<p>
+We can now try goals like:
+</p>
+<pre>| ?- list::member(X, [1, 2, 3]).
+
+X = 1;
+X = 2;
+X = 3;
+no</pre>
+<p>
+or:
+</p>
+<pre>| ?- list::length([1, 2, 3], L).
+
+L = 3
+yes</pre>
+<p>
+The infix operator <a title="Consult reference manual" href="../refman/control/to_object2.html"><code>::/2</code></a> is used in Logtalk to send a message to an object. The message must match a public object predicate. If we try to call a non-public predicate such as the <code>length/3</code> auxiliary predicate an exception will be generated:
+</p>
+<pre>| ?- list::length([1, 2, 3], 0, L).
+
+uncaught exception:
+    error(
+        existence_error(predicate_declaration, length([1, 2, 3], 0, L)),
+        list::length([1, 2, 3], 0, L),
+        user)</pre>
+<p>
+The error term describes the type of error, the message that caused the exception, and the sender of the message (in this case, the pseudo-object <code>user</code>  because we are sending the message from the top-level interpreter).
+</p>
+
+<h2 id="protocol">Defining a list protocol</h2>
+
+<p>
+As we saw in the above example, a Logtalk object may contain predicate directives and predicate definitions (clauses). The set of predicate directives defines what we call the object's <em>protocol</em> or interface. An interface may have several implementations. For instance, we may want to define a new object that implements the list predicates using difference lists. However, we do not want to repeat the predicate directives in the new object. Therefore, what we need is to split the object's protocol from the object's implementation by defining a new Logtalk entity known as a protocol. Logtalk protocols are compilations units, at the same level as objects and categories. That said, let us define a <code>listp</code> protocol:
+</p>
+<pre>:- protocol(listp).
+
+    :- public(append/3).
+    :- public(length/2).
+    :- public(member/2).
+
+:- end_protocol.</pre>
+<p>
+Similar to what we have done for objects, we use the directives <a title="Consult reference manual" href="../refman/directives/protocol1_2.html"><code>protocol/1</code></a> and <a title="Consult reference manual" href="../refman/directives/end_protocol0.html"><code>end_protocol/0</code></a> to encapsulate the predicate directives. We can improve this protocol by documenting the call/return modes and the number of solutions of each predicate using the <a title="Consult reference manual" href="../refman/directives/mode2.html"><code>mode/2</code></a> directive:
+</p>
+<pre>:- protocol(listp).
+
+    :- public(append/3).
+    :- mode(append(?list, ?list, ?list), zero_or_more).
+
+    :- public(length/2).
+    :- mode(length(?list, ?integer), zero_or_more).
+
+    :- public(member/2).
+    :- mode(member(?term, ?list), zero_or_more).
+
+:- end_protocol.</pre>
+<p>
+We now need to change our definition of the <code>list</code> object by removing the predicate directives and by declaring that the object implements the <code>listp</code> protocol:
+</p>
+<pre>:- object(list,
+	implements(listp)).
+
+    append([], List, List).
+    append([Head| Tail], List, [Head| Tail2]) :-
+        append(Tail, List, Tail2).
+
+    ...
+
+:- end_object.</pre>
+<p>
+The protocol declared in <code>listp</code> may now be alternatively implemented using difference lists by defining a new object, <code>difflist</code>:
+</p>
+<pre>:- object(difflist,
+    implements(listp).
+
+    append(L1-X, X-L2, L1-L2).
+    ...
+
+:- end_object.</pre>
+
+<h2 id="summary">Summary</h2>
+
+<ul>
+	<li>It is easy to define a simple object: just put your Prolog code inside starting and ending object directives and add the necessary scope directives. The object will be self-defining and ready to use.</li>
+</ul>
+<ul>
+	<li>Define a protocol when you may want to provide or enable several alternative definitions to a given set of predicates. This way we avoid needless repetition of predicate directives.</li>
+</ul>
+
+<div class="footer">
+	<div class="copyright">
+		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
+		<span>Last updated on: October 26, 2006</span>
+	</div>
+	<div class="navbottom">
+		<span><a href="index.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="attributes.html">next</a></span><br/>
+		<span><a href="http://validator.w3.org/check/referer">XHTML</a> + <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a></span>
+	</div>
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,19 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+Anjuta is a GNOME IDE available from:
+
+	http://anjuta.org/
+
+In order to use Anjuta 2.4.x for Logtalk development, install the 
+GtkSourceView 2.x support files and select the GtkSourceView editor 
+plug-in at startup. After opening a Logtalk source file, you may need 
+to go to the View > Editor > Highlight Mode menu and select "logtalk" 
+from the list of supported files in order to get correct highlighting.

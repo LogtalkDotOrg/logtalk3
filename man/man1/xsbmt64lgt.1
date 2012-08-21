@@ -1,0 +1,67 @@
+.TH xsbmt64lgt 1 "May 27, 2012" "Logtalk 3.00.0" "Logtalk Documentation"
+
+.SH NAME
+xsbmt64lgt \-- Logtalk integration script for XSB-MT 64 bits
+
+.SH SYNOPSIS
+.B xsbmt64lgt
+[
+.BI \-e\ goal
+]
+
+.SH DESCRIPTION
+\f3xsbmt64lgt\f1 is a Logtalk integration script for XSB-MT 64 bits. It automatically loads the XSB adapter file, the Logtalk compiler and runtime, the Logtalk default table of library names and paths, and any existing settings file found on the startup directory or in the Logtalk user directory.
+
+.SH OPTIONS
+.TP
+.BI \-e\ goal
+Initialization goal, written between double quotes, to be executed after Logtalk startup.
+
+.SH REQUIREMENTS
+XSB 3.3 or later is required, compiled 64 bits and with multi-threading support. This integration script assumes that the XSB-MT executable is named "xsb-bits64-mt".
+
+.SH ENVIRONMENT
+.TP
+.B LOGTALKHOME
+Specifies the location of the Logtalk installation.
+.TP
+.B LOGTALKUSER
+Specifies the location of the Logtalk user directory.
+
+.SH FILES
+.TP
+.BI $LOGTALKHOME/integration/logtalk_xsbmt.pl
+Prolog file used for loading the necessary files for starting Logtalk using XSB-MT 64 bits as the back-end compiler.
+.TP
+.BI $LOGTALKHOME/adapters/xsb.pl
+The XSB adapter file.
+.TP
+.BI $LOGTALKHOME/core/core.pl
+The Logtalk core compiler and runtime file.
+.TP
+.BI $LOGTALKHOME/paths/paths.pl
+The default table of library names and paths.
+.TP
+.BI ./settings.lgt
+Logtalk settings file (for overriding default settings in the adapter files). May not exist.
+.TP
+.BI $LOGTALKUSER/settings.lgt
+Logtalk settings file (for overriding default settings in the adapter files). May not exist.
+
+.SH CAVEATS
+The first run of this script must be made using sudo.
+
+.SH "SEE ALSO"
+The Logtalk website at http://logtalk.org/
+.PP
+The Logtalk User and Reference Manuals at $LOGTALKHOME/manuals/index.html
+.PP
+The XSB website at http://xsb.sourceforge.net/
+.PP
+logtalk_user_setup(1),\ logtalk_version_select(1),\ logtalk_backend_select(1)
+
+.SH AUTHOR
+Paulo Moura <pmoura@logtalk.org>
+
+.SH COPYRIGHT
+Copyright (c) 1998-2012 Paulo Moura.

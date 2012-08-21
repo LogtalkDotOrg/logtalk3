@@ -1,0 +1,200 @@
+; woodworking 'not everything worthwhile' task with 11 parts
+; Machines:
+;   1 grinder
+;   1 glazer
+;   1 immersion-varnisher
+;   1 planer
+;   1 highspeed-saw
+;   1 spray-varnisher
+;   1 saw
+; random seed: 346445
+
+(define (problem wood-prob)
+  (:domain woodworking)
+  (:objects
+    grinder0 - grinder
+    glazer0 - glazer
+    immersion-varnisher0 - immersion-varnisher
+    planer0 - planer
+    highspeed-saw0 - highspeed-saw
+    spray-varnisher0 - spray-varnisher
+    saw0 - saw
+    white red mauve green black blue - acolour
+    walnut teak pine - awood
+    p0 p1 p2 p3 p4 p5 p6 p7 p8 p9 p10 - part
+    b0 b1 b2 b3 - board
+  )
+  (:init
+    (grind-treatment-change varnished colourfragments)
+    (grind-treatment-change glazed untreated)
+    (grind-treatment-change untreated untreated)
+    (grind-treatment-change colourfragments untreated)
+    (is-smooth smooth)
+    (is-smooth verysmooth)
+    (= (total-cost) 0)
+    (has-colour glazer0 blue)
+    (has-colour glazer0 mauve)
+    (has-colour glazer0 white)
+    (has-colour glazer0 natural)
+    (has-colour glazer0 green)
+    (has-colour immersion-varnisher0 blue)
+    (has-colour immersion-varnisher0 green)
+    (empty highspeed-saw0)
+    (has-colour spray-varnisher0 blue)
+    (has-colour spray-varnisher0 green)
+    (unused p0)
+    (= (goal-size p0) 5)
+    (= (glaze-cost p0) 10)
+    (= (grind-cost p0) 15)
+    (= (plane-cost p0) 10)
+    (unused p1)
+    (= (goal-size p1) 6)
+    (= (glaze-cost p1) 11)
+    (= (grind-cost p1) 18)
+    (= (plane-cost p1) 12)
+    (unused p2)
+    (= (goal-size p2) 7)
+    (= (glaze-cost p2) 12)
+    (= (grind-cost p2) 21)
+    (= (plane-cost p2) 14)
+    (unused p3)
+    (= (goal-size p3) 12)
+    (= (glaze-cost p3) 17)
+    (= (grind-cost p3) 36)
+    (= (plane-cost p3) 24)
+    (unused p4)
+    (= (goal-size p4) 12)
+    (= (glaze-cost p4) 17)
+    (= (grind-cost p4) 36)
+    (= (plane-cost p4) 24)
+    (unused p5)
+    (= (goal-size p5) 7)
+    (= (glaze-cost p5) 12)
+    (= (grind-cost p5) 21)
+    (= (plane-cost p5) 14)
+    (unused p6)
+    (= (goal-size p6) 7)
+    (= (glaze-cost p6) 12)
+    (= (grind-cost p6) 21)
+    (= (plane-cost p6) 14)
+    (unused p7)
+    (= (goal-size p7) 12)
+    (= (glaze-cost p7) 17)
+    (= (grind-cost p7) 36)
+    (= (plane-cost p7) 24)
+    (unused p8)
+    (= (goal-size p8) 6)
+    (= (glaze-cost p8) 11)
+    (= (grind-cost p8) 18)
+    (= (plane-cost p8) 12)
+    (unused p9)
+    (= (goal-size p9) 10)
+    (= (glaze-cost p9) 15)
+    (= (grind-cost p9) 30)
+    (= (plane-cost p9) 20)
+    (unused p10)
+    (= (goal-size p10) 6)
+    (= (glaze-cost p10) 11)
+    (= (grind-cost p10) 18)
+    (= (plane-cost p10) 12)
+    (= (board-size b0) 30)
+    (wood b0 teak)
+    (surface-condition b0 smooth)
+    (available b0)
+    (= (board-size b1) 19)
+    (wood b1 pine)
+    (surface-condition b1 smooth)
+    (available b1)
+    (= (board-size b2) 35)
+    (wood b2 walnut)
+    (surface-condition b2 rough)
+    (available b2)
+    (= (board-size b3) 6)
+    (wood b3 walnut)
+    (surface-condition b3 rough)
+    (available b3)
+  )
+  (:goal
+    (and
+      (preference g_p0_0 (and
+          (colour p0 blue)
+          (wood p0 teak)
+          (surface-condition p0 verysmooth)
+          (available p0)
+      ))
+      (preference g_p1_0 (and
+          (colour p1 natural)
+          (surface-condition p1 verysmooth)
+          (treatment p1 glazed)
+          (available p1)
+      ))
+      (preference g_p2_0 (and
+          (colour p2 mauve)
+          (wood p2 teak)
+          (surface-condition p2 verysmooth)
+          (treatment p2 glazed)
+          (available p2)
+      ))
+      (preference g_p3_0 (and
+          (surface-condition p3 smooth)
+          (treatment p3 varnished)
+          (available p3)
+      ))
+      (preference g_p4_0 (and
+          (wood p4 walnut)
+          (treatment p4 varnished)
+          (available p4)
+      ))
+      (preference g_p5_0 (and
+          (colour p5 blue)
+          (wood p5 walnut)
+          (surface-condition p5 smooth)
+          (treatment p5 glazed)
+          (available p5)
+      ))
+      (preference g_p6_0 (and
+          (colour p6 white)
+          (wood p6 pine)
+          (surface-condition p6 verysmooth)
+          (treatment p6 glazed)
+          (available p6)
+      ))
+      (preference g_p7_0 (and
+          (wood p7 pine)
+          (surface-condition p7 smooth)
+          (available p7)
+      ))
+      (preference g_p8_0 (and
+          (colour p8 green)
+          (wood p8 walnut)
+          (available p8)
+      ))
+      (preference g_p9_0 (and
+          (wood p9 walnut)
+          (treatment p9 varnished)
+          (available p9)
+      ))
+      (preference g_p10_0 (and
+          (colour p10 blue)
+          (wood p10 walnut)
+          (surface-condition p10 verysmooth)
+          (available p10)
+      ))
+    )
+  )
+  (:metric maximize
+    (- 662
+      (+ (total-cost)
+         (* (is-violated g_p0_0) 57)
+         (* (is-violated g_p1_0) 56)
+         (* (is-violated g_p2_0) 62)
+         (* (is-violated g_p3_0) 92)
+         (* (is-violated g_p4_0) 48)
+         (* (is-violated g_p5_0) 80)
+         (* (is-violated g_p6_0) 64)
+         (* (is-violated g_p7_0) 57)
+         (* (is-violated g_p8_0) 39)
+         (* (is-violated g_p9_0) 47)
+         (* (is-violated g_p10_0) 60)
+  )))
+)

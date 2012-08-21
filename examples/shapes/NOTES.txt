@@ -1,0 +1,30 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+This directory contains two versions, one prototype-based and the 
+other one class-based, of a very simple geometric shapes hierarchy.
+
+The aim of this example is to compare the pros and cons of using 
+either prototypes or classes for defining object hierarchies.
+
+ph
+	prototype-based version
+
+ch
+	class-based version
+
+Both versions define the following hierarchy of objects:
+
+	shape
+		polygon
+			regular_polygon
+				square
+					q1
+					q2

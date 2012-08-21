@@ -1,0 +1,39 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example and the required library files:
+
+| ?- logtalk_load(roots(loader)).
+...
+
+
+% some queries dealing with instance/class hierarchies:
+
+| ?- object::ancestors(Ancestors).
+
+Ancestors = [class, abstract_class, object] 
+
+Yes
+
+
+| ?- class::instances(Instances).
+
+Instances = [object, abstract_class, class] 
+
+Yes
+
+
+| ?- class::superclass(Super).
+
+Super = abstract_class ;
+
+Super = object ;
+
+No

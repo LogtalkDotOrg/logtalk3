@@ -1,0 +1,56 @@
+/L20"Logtalk" Line Comment = % Block Comment On = /* Block Comment Off = */ Escape Char = \ File Extensions = LGT
+/TGBegin "Objects"
+/TGFindStr = "[ ^t^b]object(^(?+^))"
+/TGFindStr = "[ ^t^b]object(^(?+^),[^p^r^n]"
+/TGFindStr = "[ ^t^b]object(^(?+^)),[^p^r^n]"
+/TGFindBStart = "%[ ^t]++:-"
+/TGFindBEnd = "^."
+/TGEnd
+/TGBegin "Protocols"
+/TGFindStr = "[ ^t^b]protocol(^(?+^))"
+/TGFindStr = "[ ^t^b]protocol(^(?+^),[^p^r^n]"
+/TGFindStr = "[ ^t^b]protocol(^(?+^)),[^p^r^n]"
+/TGFindBStart = "%[ ^t]++:-"
+/TGFindBEnd = "^."
+/TGEnd
+/TGBegin "Categories"
+/TGFindStr = "[ ^t^b]category(^(?+^))"
+/TGFindStr = "[ ^t^b]category(^(?+^),[^p^r^n]"
+/TGFindStr = "[ ^t^b]category(^(?+^)),[^p^r^n]"
+/TGFindBStart = "%[ ^t]++:-"
+/TGFindBEnd = "^."
+/TGEnd
+/Delimiters = []|(){} 	,;!^:|
+/Open Brace Strings =  "{" "(" "[" ":- if("
+/Close Brace Strings = "}" ")" "]" ":- endif."
+/Open Fold Strings = ":- object(" ":- protocol(" ":- category(" ":- if(" ":- if(" ":- if(" ":- elif(" ":- elif(" ":- elif(" ":- else."
+/Close Fold Strings = ":- end_object." ":- end_protocol." ":- end_category." ":- elif(" ":- else." ":- endif." ":- elif(" ":- else." ":- endif." ":- endif."
+/C5
+:: :
+^^ ^
+<<
+>>
+{
+}
+[
+]
+,
+;
+->
+:-
+!
+\+
+=.. =
+\=
+.
+|
+is
++
+-
+\
+// / /\
+\/ \==
+< <<
+> >= >>
+=< == =\= =:=
+@< @> @=< @>=

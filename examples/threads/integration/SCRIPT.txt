@@ -1,0 +1,32 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example:
+
+| ?- logtalk_load(integration(loader)).
+...
+
+
+% integrate the function "quiver" using the recursive adaptive trapezio method with 4 threads
+
+?- quadrec(4)::integrate(quiver, 0.001, 0.999, 0, 1.0e-10, Integral).
+Integral = 6.66134e-16.
+
+
+% integrate the function "quiver" using the recursive adaptive 4 point gaussian scheme with 8 threads
+
+?- quadrec(8)::integrate(quiver, 0.001, 0.999, 4, 1.0e-10, Integral).
+Integral = 2.70827e-10 
+
+
+% the other versions
+
+?- quadsplit(8)::integrate(quiver, 0.001, 0.999, 4, 1.0e-10, Integral).
+Integral = 2.70827e-10.

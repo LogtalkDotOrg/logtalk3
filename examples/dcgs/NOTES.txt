@@ -1,0 +1,59 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+To load this example and for sample queries, please see the SCRIPT.txt file.
+
+This folder contains the following examples of using DCGs inside 
+objects and categories:
+
+	calculator
+		canonical DCG example of parsing arithmetic expressions
+	enigma
+		solve a cellphone enigma against a dictionary of words
+	bom
+		bill of materials DCG example (see below for original source)
+	sentences
+		simple parsing of natural language sentences
+	parsetree
+		same as above but building and returning the parse tree
+	xml
+		conversion between XML and Prolog terms
+	url
+		parsing of URLs, decomposing them in components
+	shell
+		parsing of command-line shell commands
+	faa
+		command language DCG example (see below for original source)
+	walker
+		parsing of walker movements and calculation of distance
+		travelled
+	bypass
+		using the {} DCG construct together with the {} Logtalk control 
+		construct
+	tokenizer
+		natural language tokenizer example
+	macaddr
+		validator for MAC addresses
+	morse
+		decoder for Morse code messages; illustrate how to use scope 
+		directives to declare grammar rule non-terminals
+
+This folder contains an example ("tokenizer") adapted with permission from 
+a Michael A. Covington example (http://www.ai.uga.edu/~mc/). See the file 
+"tokenizer.lgt" for more details.
+
+This folder contains two examples of DCGs ("bom" and "faa") adapted with 
+permission from the Amzi! Prolog documentation. The documentation is 
+available on-line in HTML format at the URL:
+
+	http://www.amzi.com/
+
+Please refer to the Amzi! Prolog documentation for more information on the 
+original examples.

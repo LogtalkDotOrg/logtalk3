@@ -1,0 +1,73 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% load the example:
+
+| ?- logtalk_load(birthdays(loader)).
+...
+
+
+% create two new agents, Paul and Nathalie:
+
+| ?- agent::(new(paul, 40, male), new(nathalie, 32, female)).
+
+yes
+
+
+% make them friends:
+
+| ?- paul::new_friend(nathalie).
+
+yes
+
+
+% turn event support on for messages sent at the command-line
+% (i.e. for messages sent from the pseudo-object "user"):
+
+| ?- set_logtalk_flag(events, allow).
+
+yes
+
+
+% it's birthday for Nathalie:
+
+| ?- nathalie::birthday.
+
+Happy birthday from paul!
+Thanks! Here, have a slice of cake, paul.
+Thanks for the cake nathalie!
+Say goodbye to your 32's!
+yes
+
+
+% ask Nathalie her age:
+
+| ?- nathalie::age(Age).
+
+Age = 33
+yes
+
+
+% a year goes by...
+
+| ?- nathalie::birthday.
+
+Happy birthday from paul!
+Thanks! Here, have a slice of cake, paul.
+Thanks for the cake nathalie!
+Say goodbye to your 33's!
+yes
+
+
+% turn event support off:
+
+| ?- set_logtalk_flag(events, deny).
+
+yes

@@ -1,0 +1,79 @@
+.TH lgt2pdf 1 "May 27, 2012" "Logtalk 3.00.0" "Logtalk Documentation"
+
+.SH NAME
+lgt2pdf \-- Logtalk script for converting XML documenting files into PDF files
+
+.SH SYNOPSIS
+.B lgt2pdf
+[
+.BI \-f\ format
+]
+[
+.BI \-d\ directory
+]
+[
+.BI \-p\ processor
+]
+.br
+.B lgt2pdf
+[
+.BI \-h
+]
+
+.SH DESCRIPTION
+\f3lgt2pdf\f1 is a Logtalk script for converting all XML documenting files in the current directory into PDF files.
+
+.SH OPTIONS
+.TP
+.BI \-f\ format
+Paper format (either a4 or us).
+.TP
+.BI \-d\ directory
+Output directory for the generated PDF files.
+.TP
+.BI \-p\ processor
+XSL-FO processor.
+.TP
+.BI \-h
+Prints a summary of the script options.
+
+.SH REQUIREMENTS
+Requires a compatible XSL-FO processor. See the script help screen for more information.
+
+.SH ENVIRONMENT
+.TP
+.B LOGTALKHOME
+Specifies the location of the Logtalk installation.
+.TP
+.B LOGTALKUSER
+Specifies the location of the Logtalk user directory.
+
+.SH FILES
+.TP
+.BI $LOGTALKHOME/tools/lgtdoc/xml/logtalk.dtd
+The Logtalk DTD file.
+.TP
+.BI $LOGTALKUSER/tools/lgtdoc/xml/custom.ent
+The Logtalk custom entities file.
+.TP
+.BI $LOGTALKHOME/tools/lgtdoc/xml/logtalk.xsd
+The Logtalk XML Schema file.
+.TP
+.BI $LOGTALKUSER/tools/lgtdoc/xml/lgtpdfa4.xsl
+The default XSLT file for generating PDF A4 files.
+.TP
+.BI $LOGTALKUSER/tools/lgtdoc/xml/lgtpdfus.xsl
+The default XSLT file for generating PDF US Letter files.
+
+.SH "SEE ALSO"
+The Logtalk website at http://logtalk.org/
+.PP
+The Logtalk User and Reference Manuals at $LOGTALKHOME/manuals/index.html
+.PP
+logtalk_user_setup(1),\ lgt2html(1),\ lgt2xml(1),\ lgt2txt(1)
+
+.SH AUTHOR
+Paulo Moura <pmoura@logtalk.org>
+
+.SH COPYRIGHT
+Copyright (c) 1998-2012 Paulo Moura.

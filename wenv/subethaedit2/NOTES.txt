@@ -1,0 +1,29 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+This directory contains the Logtalk.mode bundle, which provides syntax 
+highlighting, code folding, code completion, and entity index for editing
+Logtalk source files with the SubEthaEdit 2.x text editor:
+
+	http://www.codingmonkeys.de/subethaedit/
+
+To install copy the bundle "Logtalk.mode" to one of the following 
+folders:
+
+	~/Library/Application Support/SubEthaEdit/Modes/
+	/Library/Application Support/SubEthaEdit/Modes/
+	/Network/Library/Application Support/SubEthaEdit/Modes/
+
+(create the chosen folder if it does not exist).
+
+Logtalk source files (including the library entities and the programming
+examples) are formatted using tabs (the recommended setting is a tab width
+equivalent to 4 spaces); you may set the tab width on the editor preference
+panel.

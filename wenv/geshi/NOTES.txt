@@ -1,0 +1,27 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+This directory contains files that provide syntax highlighting for 
+GeSHi 1.0.8.6 or later versions:
+
+	http://geshi.org/
+
+These support files are dual-licensed under the GNU General Public
+License 3 and the GeSHi license.
+
+To install, copy the file "logtalk.php" to the GeSHi languages folder.
+
+The file "source.php" is a test file. After copying it to your web
+server documents folder, open the following URL with a web browser:
+
+	http://127.0.0.1/source.php
+
+The file assumes that GeSHi is installed in "/usr/share/php-geshi/".
+Edit the file (line 2) if GeSHi is installed elsewhere.

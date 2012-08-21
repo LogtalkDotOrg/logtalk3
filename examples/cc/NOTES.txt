@@ -1,0 +1,21 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+To load this example and for sample queries, please see the SCRIPT.txt file.
+
+This folder contains an example of using conditional compilation to implement
+a portable operating-system interface for the following Prolog compilers: YAP,
+SWI-Prolog, XSB, GNU-Prolog, B-Prolog, SICStus Prolog, ECLiPSe, Ciao, CxProlog,
+Qu-Prolog, and Lean Prolog. For other back-end Prolog compilers, a warning is
+printed.
+
+Note that this is just an example of using the conditional compilation
+directives. This code should not be used without careful testing in a
+production environment.

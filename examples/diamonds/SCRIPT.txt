@@ -1,0 +1,48 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example:
+
+| ?- logtalk_load(diamonds(loader)).
+...
+
+
+% first variant of the "diamond problem", defined in the "diamond1" source file:
+
+| ?- d1::m.
+
+Redefinition of method m/0 in object b1
+yes
+
+
+% second variant of the "diamond problem", defined in the "diamond2" source file:
+
+| ?- d2::m.
+
+Redefinition of method m/0 in object c2
+yes
+
+
+% third variant of the "diamond problem", defined in the "diamond3" source file:
+
+| ?- d3::b3_m.
+
+Redefinition of method m/0 in object b3
+yes
+
+| ?- d3::c3_m.
+
+Redefinition of method m/0 in object c3
+yes
+
+| ?- d3::m.
+
+Redefinition of method m/0 in object b3
+yes

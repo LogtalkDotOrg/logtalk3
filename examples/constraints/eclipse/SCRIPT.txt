@@ -1,0 +1,52 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example:
+
+| ?- logtalk_load(clp_eclipse(loader)).
+...
+
+
+| ?- puzzle::sendmore1(Digits).
+Digits = [9, 5, 6, 7, 1, 0, 8, 2]
+Yes
+
+| ?- puzzle::sendmore2(Digits).
+Digits = [9, 5, 6, 7, 1, 0, 8, 2]
+Yes
+
+
+| ?- steiner::steiner(9,X).
+X = [[1, 2, 3], [1, 4, 5], [1, 6, 7], [1, 8, 9], [2, 4, 6], [2, 5, 8], [2, 7, 9], [3, 4, 9], [3, 5, 7], [3, 6, 8], [4, 7, 8], [5, 6, 9]] ;
+X = [[1, 2, 3], [1, 4, 5], [1, 6, 7], [1, 8, 9], [2, 4, 6], [2, 5, 8], [2, 7, 9], [3, 4, 9], [3, 5, 7], [3, 6, 8], [4, 7, 8], [5, 6, 9]] ;
+X = [[1, 2, 3], [1, 4, 5], [1, 6, 7], [1, 8, 9], [2, 4, 6], [2, 5, 8], [2, 7, 9], [3, 4, 9], [3, 5, 7], [3, 6, 8], [5, 6, 9], [4, 7, 8]] ;
+(etc)
+
+
+| ?- tomography::go.
+    0 0 7 1 6 3 4 5 2 7 0 0
+ 0                         
+ 0                         
+ 8      * * * * * * * *    
+ 2      *             *    
+ 6      *   * * * *   *    
+ 4      *   *     *   *    
+ 5      *   *   * *   *    
+ 3      *   *         *    
+ 7      *   * * * * * *    
+ 0                         
+ 0                         
+Yes
+
+
+| ?- zebra::zebra.
+The japanese owns the zebra
+The norwegian drinks water
+Yes

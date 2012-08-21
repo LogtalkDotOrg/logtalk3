@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<?xml-stylesheet href="logtalk.css" type="text/css"?><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>heapp</title>
+    <link rel="stylesheet" href="logtalk.css" type="text/css"/>
+  </head>
+  <body>
+    <div class="header">
+      <p class="type">protocol</p>
+      <h1 class="code">heapp</h1>
+      <blockquote>
+        <p class="comment">Heap protocol.</p>
+      </blockquote>
+    </div>
+    <div class="entity">
+      <div class="section">
+        <dl class="properties">
+          <dt class="key">author:</dt>
+          <dd class="value">
+            <code>Richard O'Keefe; adapted to Logtalk by Paulo Moura and Victor Lagerkvist.</code>
+          </dd>
+          <dt class="key">version:</dt>
+          <dd class="value">
+            <code>1.01</code>
+          </dd>
+          <dt class="key">date:</dt>
+          <dd class="value">
+            <code>2010/11/13</code>
+          </dd>
+        </dl>
+        <dl class="properties">
+          <dt class="key">compilation:</dt>
+          <dd class="value">
+            <code>static, context_switching_calls</code>
+          </dd>
+        </dl>
+        <p class="comment">(no dependencies on other files)</p>
+      </div>
+    </div>
+    <div class="predicates">
+      <div class="public">
+        <h2>Public interface</h2>
+        <div class="section">
+          <h3 class="code">insert/4</h3>
+          <blockquote>
+            <p class="comment">Inserts the new Key-Value pair into a heap, returning the updated heap.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>insert(Key,Value,Heap,NewHeap)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>insert(+key,+value,+heap,-heap) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">insert_all/3</h3>
+          <blockquote>
+            <p class="comment">Inserts a list of Key-Value pairs into a heap, returning the updated heap.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>insert_all(List,Heap,NewHeap)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>insert_all(@list(pairs),+heap,-heap) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">delete/4</h3>
+          <blockquote>
+            <p class="comment">Deletes and returns the top Key-Value pair in OldHeap and the resulting NewHeap.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>delete(Heap,Key,Value,NewHeap)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>delete(+heap,?key,?value,-heap) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">merge/3</h3>
+          <blockquote>
+            <p class="comment">Merges two heaps.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>merge(Heap1,Heap2,NewHeap)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>merge(+heap,+heap,-heap) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">empty/1</h3>
+          <blockquote>
+            <p class="comment">True if the heap is empty.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>empty(Heap)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>empty(@heap) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">size/2</h3>
+          <blockquote>
+            <p class="comment">Returns the number of heap elements.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>size(Heap,Size)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>size(+heap,?integer) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">as_list/2</h3>
+          <blockquote>
+            <p class="comment">Returns the current set of Key-Value pairs in the Heap as a List, sorted into ascending order of Keys.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>as_list(Heap,List)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>as_list(+heap,-list) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">as_heap/2</h3>
+          <blockquote>
+            <p class="comment">Constructs a Heap from a list of Key-Value pairs.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>as_heap(List,Heap)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>as_heap(+list,-heap) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">top/3</h3>
+          <blockquote>
+            <p class="comment">Returns the top Key-Value pair in Heap. Fails if the heap is empty.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>top(Heap,Key,Value)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>top(+heap,?key,?value) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">top_next/5</h3>
+          <blockquote>
+            <p class="comment">Returns the top pair, Key1-Value1, and the next pair, Key2-Value2, in Heap. Fails if the heap does not have at least two elements.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>top_next(Heap,Key1,Value1,Key2,Value2)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>top_next(+heap,?key,?value,?key,?value) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="protected">
+        <h2>Protected interface</h2>
+        <div class="section">
+          <p class="comment">(none)</p>
+        </div>
+      </div>
+      <div class="private">
+        <h2>Private predicates</h2>
+        <div class="section">
+          <p class="comment">(none)</p>
+        </div>
+      </div>
+    </div>
+    <div class="operators">
+      <h2>Operators</h2>
+      <div class="section">
+        <h3 class="comment">(none)</h3>
+      </div>
+    </div>
+    <div class="remarks">
+      <h2>Remarks</h2>
+      <div class="section">
+        <h3 class="comment">(none)</h3>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example:
+
+| ?- logtalk_load(tabling(loader)).
+...
+
+
+% use tabling to cope with a left-recursive path finding predicate
+% (the order of the solutions may depend on the tabling strategy):
+
+| ?- paths::path(1, Y).
+
+Y = 2 ? ;
+Y = 4 ? ;
+Y = 3 ? ;
+Y = 5 ?
+yes
+
+
+% use tabling to avoid repeated calculation of Fibonacci numbers:
+
+| ?- fibonacci::fib(30, F).
+
+F = 1346269
+yes

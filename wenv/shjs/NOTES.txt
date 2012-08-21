@@ -1,0 +1,30 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+This directory contains the "sh_logtalk.js" file that provides syntax 
+coloring support for SHJS (version 0.6 or later):
+
+	http://shjs.sourceforge.net/
+
+
+This support file is dual-licensed under the GNU General Public License 3
+and the SHJS license.
+
+If support for Logtalk is not included or if it is outdated in your SHJS
+distribution, just replace the file "sh_logtalk.js" in the SHJS distribution
+"lang" directory with the newer file from this directory.
+
+The file "source.html" is a test file based on the "../tests/source.lgt"
+file. To use this test file, copy it to the root of your SHJS distribution
+directory and open it in your favorite web browser.
+
+SHJS expects the source code to be wrapped in "pre" tags and doesn't seem to
+provide any control over tab settings. Therefore, for best results, convert
+the tabs in your source code to spaces before copying it to your HTML files.

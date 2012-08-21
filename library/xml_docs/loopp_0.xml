@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE logtalk SYSTEM "logtalk.dtd">
+<?xml-stylesheet type="text/xsl" href="lgtxml.xsl"?>
+<logtalk>
+<entity>
+<name><![CDATA[loopp]]></name>
+<type>protocol</type>
+<compilation>static, context_switching_calls</compilation>
+<comment><![CDATA[Loop control constructs protocol.]]></comment>
+<author><![CDATA[Paulo Moura]]></author>
+<version>1.21</version>
+<date>2009/5/19</date>
+</entity>
+<relations>
+</relations>
+<predicates>
+<public>
+<predicate>
+<name><![CDATA[whiledo/2]]></name>
+<scope>public</scope>
+<compilation>static</compilation>
+<meta><![CDATA[whiledo(0,0)]]></meta>
+<mode>
+<template><![CDATA[whiledo(+callable,@callable)]]></template>
+<solutions>zero_or_one</solutions>
+</mode>
+<comment><![CDATA[While Condition is true do Action.]]></comment>
+<template><![CDATA[whiledo(Condition,Action)]]></template>
+</predicate>
+<predicate>
+<name><![CDATA[dowhile/2]]></name>
+<scope>public</scope>
+<compilation>static</compilation>
+<meta><![CDATA[dowhile(0,0)]]></meta>
+<mode>
+<template><![CDATA[dowhile(@callable,+callable)]]></template>
+<solutions>zero_or_one</solutions>
+</mode>
+<comment><![CDATA[Do Action while Condition is true.]]></comment>
+<template><![CDATA[dowhile(Action,Condition)]]></template>
+</predicate>
+<predicate>
+<name><![CDATA[foreach/3]]></name>
+<scope>public</scope>
+<compilation>static</compilation>
+<meta><![CDATA[foreach(*,*,0)]]></meta>
+<mode>
+<template><![CDATA[foreach(@var,+list(term),@callable)]]></template>
+<solutions>zero_or_one</solutions>
+</mode>
+<comment><![CDATA[For each element Element in List call Goal.]]></comment>
+<template><![CDATA[foreach(Element,List,Goal)]]></template>
+</predicate>
+<predicate>
+<name><![CDATA[forto/3]]></name>
+<scope>public</scope>
+<compilation>static</compilation>
+<meta><![CDATA[forto(*,*,0)]]></meta>
+<mode>
+<template><![CDATA[forto(+number,+number,@callable)]]></template>
+<solutions>zero_or_one</solutions>
+</mode>
+<comment><![CDATA[Call Goal counting up from First to Last. Increment is 1. For convenience and clarity, First and Last can be arithmetic expressions. This predicate fails iff the Goal fails.]]></comment>
+<template><![CDATA[forto(First,Last,Goal)]]></template>
+</predicate>
+<predicate>
+<name><![CDATA[forto/4]]></name>
+<scope>public</scope>
+<compilation>static</compilation>
+<meta><![CDATA[forto(*,*,*,0)]]></meta>
+<mode>
+<template><![CDATA[forto(@var,+number,+number,@callable)]]></template>
+<solutions>zero_or_one</solutions>
+</mode>
+<comment><![CDATA[Call Goal counting up from First to Last and instantiating Count to each successive value. Increment is 1. For convenience and clarity, First and Last can be arithmetic expressions. This predicate fails iff the Goal fails.]]></comment>
+<template><![CDATA[forto(Count,First,Last,Goal)]]></template>
+</predicate>
+<predicate>
+<name><![CDATA[forto/5]]></name>
+<scope>public</scope>
+<compilation>static</compilation>
+<meta><![CDATA[forto(*,*,*,*,0)]]></meta>
+<mode>
+<template><![CDATA[forto(@var,+number,+number,+number,@callable)]]></template>
+<solutions>zero_or_one</solutions>
+</mode>
+<comment><![CDATA[Call Goal counting up from First to Last and instantiating Count to each successive value. For convenience and clarity, First, Last, and Increment can be arithmetic expressions (uses Increment absolute value). This predicate fails iff the Goal fails.]]></comment>
+<template><![CDATA[forto(Count,First,Last,Increment,Goal)]]></template>
+</predicate>
+<predicate>
+<name><![CDATA[fordownto/3]]></name>
+<scope>public</scope>
+<compilation>static</compilation>
+<meta><![CDATA[fordownto(*,*,0)]]></meta>
+<mode>
+<template><![CDATA[fordownto(+number,+number,@callable)]]></template>
+<solutions>zero_or_one</solutions>
+</mode>
+<comment><![CDATA[Call Goal counting down from First to Last. Decrement is 1. For convenience and clarity, First and Last can be arithmetic expressions. This predicate fails iff the Goal fails.]]></comment>
+<template><![CDATA[fordownto(First,Last,Goal)]]></template>
+</predicate>
+<predicate>
+<name><![CDATA[fordownto/4]]></name>
+<scope>public</scope>
+<compilation>static</compilation>
+<meta><![CDATA[fordownto(*,*,*,0)]]></meta>
+<mode>
+<template><![CDATA[fordownto(@var,+number,+number,@callable)]]></template>
+<solutions>zero_or_one</solutions>
+</mode>
+<comment><![CDATA[Call Goal counting down from First to Last and instantiating Count to each successive value. Decrement is 1. For convenience and clarity, First and Last can be arithmetic expressions. This predicate fails iff the Goal fails.]]></comment>
+<template><![CDATA[fordownto(Count,First,Last,Goal)]]></template>
+</predicate>
+<predicate>
+<name><![CDATA[fordownto/5]]></name>
+<scope>public</scope>
+<compilation>static</compilation>
+<meta><![CDATA[fordownto(*,*,*,*,0)]]></meta>
+<mode>
+<template><![CDATA[fordownto(@var,+number,+number,+number,@callable)]]></template>
+<solutions>zero_or_one</solutions>
+</mode>
+<comment><![CDATA[Call Goal counting down from First to Last and instantiating Count to each successive value. For convenience and clarity, First, Last, and Decrement can be arithmetic expressions (uses Decrement absolute value). This predicate fails iff the Goal fails.]]></comment>
+<template><![CDATA[fordownto(Count,First,Last,Decrement,Goal)]]></template>
+</predicate>
+</public>
+<protected>
+</protected>
+<private>
+</private>
+</predicates>
+<operators>
+</operators>
+<remarks>
+</remarks>
+</logtalk>

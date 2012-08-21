@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>
+:- object(${1:Class},
+	implements(${2:Protocol}),
+	specializes(${3:Superclass})).
+
+	:- info([
+		version is 1.0,
+		author is '$TM_FULLNAME',
+		date is `date +%Y/%m/%d`,
+		comment is '${4:Description}']).
+
+$0
+
+:- end_object.
+</string>
+	<key>name</key>
+	<string>    Class with protocol</string>
+	<key>scope</key>
+	<string>source.logtalk</string>
+	<key>uuid</key>
+	<string>8A272A62-73F7-11D9-8083-000D93589AF6</string>
+</dict>
+</plist>

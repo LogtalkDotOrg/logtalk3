@@ -1,0 +1,100 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example:
+
+| ?- logtalk_load(logic(loader)).
+...
+
+
+% translate a single logic proposition:
+
+| ?- translator::translate((p v ~q) => (r & k), Cs).
+r :- p.
+k :- p.
+q; r :- .
+q; k :- .
+
+
+Cs = [cl([r],[p]),cl([k],[p]),cl([q,r],[]),cl([q,k],[])]
+yes
+
+
+% translate a single logic proposition printing each translation step:
+
+| ?- translator::step_by_step((p v ~q) => (r & k), Cs).
+
+Processing proposition: p v ~q=>r&k
+
+  1. Remove implications: ~ (p v ~q) v r&k
+  2. Distribute negation: ~p&q v r&k
+  3. Remove existential quantifiers: ~p&q v r&k
+  4. Convert to prenex normal form: ~p&q v r&k
+  5. Remove universal quantifiers: ~p&q v r&k
+  6. Convert to conjunctive normal form: (~p v r)&(~p v k)&((q v r)&(q v k))
+  7. Convert to clauses: [cl([r],[p]),cl([k],[p]),cl([q,r],[]),cl([q,k],[])]
+
+Clauses in Prolog-like notation:
+r :- p.
+k :- p.
+q; r :- .
+q; k :- .
+
+
+Cs = [cl([r],[p]),cl([k],[p]),cl([q,r],[]),cl([q,k],[])]
+yes
+
+
+% translate a single logic proposition printing each translation step:
+
+| ?- translator::step_by_step(all(X, exists(Y, p(X) v ~q(X) => r(X, Y))), Cs).
+
+Processing proposition: all(X, exists(Y, p(X)v~q(X)=>r(X, Y)))
+
+  1. Remove implications: all(X, exists(Y, ~ (p(X)v~q(X))v r(X, Y)))
+  2. Distribute negation: all(X, exists(Y, ~p(X)&q(X)v r(X, Y)))
+  3. Remove existential quantifiers: all(X, ~p(X)&q(X)v r(X, f1(X)))
+  4. Convert to prenex normal form: all(X, ~p(X)&q(X)v r(X, f1(X)))
+  5. Remove universal quantifiers: ~p(X)&q(X)v r(X, f1(X))
+  6. Convert to conjunctive normal form: (~p(X)v r(X, f1(X)))& (q(X)v r(X, f1(X)))
+  7. Convert to clauses: [cl([r(X, f1(X))], [p(X)]), cl([q(X), r(X, f1(X))], [])]
+
+Clauses in Prolog-like notation:
+r(X, f1(X)) :- p(X).
+q(X); r(X, f1(X)) :- .
+
+
+X = X
+Y = f1(X)
+Cs = [cl([r(X, f1(X))], [p(X)]), cl([q(X), r(X, f1(X))], [])] 
+yes
+
+
+% translate a single logic proposition printing each translation step:
+
+| ?- translator::step_by_step(all(X, men(X) => mortal(X)), Cs).
+
+Processing proposition: all(X, men(X)=>mortal(X))
+
+  1. Remove implications: all(X, ~men(X)v mortal(X))
+  2. Distribute negation: all(X, ~men(X)v mortal(X))
+  3. Remove existential quantifiers: all(X, ~men(X)v mortal(X))
+  4. Convert to prenex normal form: all(X, ~men(X)v mortal(X))
+  5. Remove universal quantifiers: ~men(X)v mortal(X)
+  6. Convert to conjunctive normal form: ~men(X)v mortal(X)
+  7. Convert to clauses: [cl([mortal(X)], [men(X)])]
+
+Clauses in Prolog-like notation:
+mortal(X) :- men(X).
+
+
+X = X
+Cs = [cl([mortal(X)], [men(X)])] 
+yes

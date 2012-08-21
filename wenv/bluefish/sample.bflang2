@@ -1,0 +1,335 @@
+<?xml version="1.0"?>
+<!-- $Revision$ -->
+<!-- a bflang2 file should start with a xml declaration -->
+
+<!-- 
+the root tag of the bflang2 file is <bflang name="NAME"> 
+it should have attribute 'name', which is a human readable name of the 
+language that is defined  
+-->
+<bflang name="Sample">
+<!-- within the bflang tag is first a <header> and then a <definition> tag.
+the header tag is parsed during bluefish startup.
+the definition tag is parsed only on-demand. if a file of this type is opened -->
+<header>
+<!-- the <header> tag can have <mime> and <highlight> -->
+
+<!-- <mime type="TYPE"> defines which mime-types are described by this language file. 
+There can be multiple mime tags in the header section (for example C source and 
+C header files have a different mimetype and can be described by the same
+language file) -->
+	<mime type="fake/sample"/>
+<!-- <highlight name="NAME" style="STYLE"> defines which element-types that are defined in 
+the file, and which styles should be applied for each of these types. So if an element 
+in this file has attribute highlight="foo", this section should have <highlight name="foo"
+style="somestyle"/>. Look at other language files and try to re-use styles !!!!!!!!!
+
+For the end-user it is convenient if styles are re-used. All languages that define a comment
+should use style 'comment' by default. 
+-->
+	<highlight name="comment" style="comment" />
+
+<!-- <option> defines an option that can be set for this language --> 
+	<option name="allphpfunctions" default="1" description="All php functions" />
+<!-- this example adds the option 'allphpfunctions' to the language file
+if in the <definition> section of this file we have a <group class="allphpfunctions"> the user
+can enable/disable this complete section with this option  
+ -->	
+<!-- there are a couple of hardcoded option names for options that the user may set --> 
+	<option name="load_reference" default="1" />
+	<!-- whether or not to load the reference data for this language -->
+	<option name="load_completion" default="1" />
+	<!-- whether or not to load the auto completion data for this language -->
+	<option name="autocomplete_tags" default="1" />
+	<!-- whether or not to close <tag> -->
+
+</header>
+<properties>
+<!-- properties are parsed after the first file with this mime type has been loaded -->
+	<comment id="/**/" type="block" start="/*" end="*/" />
+	<comment id="//" type="line" start="//" />
+	<!-- the comment tag specifies which line and block comments that are possible for the smart comment function -->
+	<smartindent characters="{" />
+	<!-- smartindent characters specify which characters, followed by a return, should increase the indenting -->
+	<default_spellcheck enabled="1" />
+	<!-- default_spellcheck defines if regions that are not highlighted will be checked by the spell checker. 
+	This is typically enabled for HTML/XML like languages, and disabled (or ignored, because the default=0)
+	for all programming languages
+	-->
+</properties>
+<definition>
+<!-- within <definition> the actual language description is found. A language definition always
+starts with a <context> tag.
+ -->
+<context symbols="&gt;&lt;&amp;; &#9;&#10;&#13;">
+<!-- <context symbols="LIST OF CHARACTERS" highlight="HIGHLIGHT-TYPE" id="IDENTIFIER"
+a <context> tag should always define "symbols". Symbols are those characters that may start or end an element.
+
+To detect function strlen in the following examples (language C): 
+i=strlen(a);   
+i+strlen(a);
+i*strlen (a);
+we need at least symbols =+*( 
+
+In most languages all whitespace is a symbol ( =space, &#9;=tab, &#10;=newline, &#13;=carriange return).
+
+In xml/sgml/html only '<>&;' are symbols, but withtin a tag also "' are symbols.  
+
+The optional attribute highlight may specify a highlight type that is valid for the complete text region
+that has this context. Useful for 'comment' or 'string' type of contexts where the complete context is 
+highlighted 
+
+The optional attribute 'id' is used to define an identifier which can be used to re-use this context.
+
+To re-use a context, use <context idref="IDENTIFIER" /> where IDENTIFIER refers to a previously defined 
+context. The file is parsed top to bottom.
+
+Within <context> there can be <element> <tag> and <group> tags.
+-->
+<element pattern="while" highlight="keyword"/>
+<!--
+<element> defines an element that is highlighted, or can be autocompleted, or an element that starts a new context
+
+it always needs attribute 'pattern' which defines the pattern that will be looked for in this context
+
+the pattern can be defined in 'regular expression' style, to do this add attribute is_regex="1". however, there is
+only limited regular expression support. you may use 
+- a range of characters such as [a-z0-9;']
+- an inverted range such as [^0-9]
+- operators such as ? (zero or one), + (one or more), and * (zero or more)
+- subpatterns such as ab(fg)?
+-->
+<element pattern="'[^']*'" is_regex="1" highlight="string"/>
+<!--
+
+a pattern may be case insensitive, set case_insens="1"
+
+to highlight the pattern use attribute highlight="TYPE", where TYPE should be defined within the <header> 
+section of the language file
+
+<element> may have attribute 'id' so this element may be referred to later. To re-use element 'foo' later in the file
+use <element idref="foo" />
+-->
+
+<!-- next is a block detection example -->
+<element id="bracket{" pattern="{" starts_block="1" highlight="brackets" />
+<element pattern="}" ends_block="1" blockstartelement="bracket{" highlight="brackets" />
+<!--
+an element may start or end a block. a block consists of two patterns (start and end) where the contents between
+the start and the end may be hidden when the block is 'folded'.
+
+to make a pattern a block start define starts_block="1" and use the 'id' attribute
+
+to specify a pattern that ends a block use ends_block="1" and use blockstartelement="FOO" where FOO is the id of 
+the start-of-block-element
+
+-->
+
+<!-- next is an context example, a javascript comment -->
+<element pattern="/*" highlight="c-style-comment">
+	<context symbols="*/&#9;&#10;&#13;" highlight="c-style-comment">
+		<element pattern="*/" highlight="c-style-comment" ends_context="1" />
+	</context>
+</element>
+<!--
+an element may also start a new context. whenever this pattern is found the engine switches to this context
+and starts scanning only the patterns defined in this context. To do this define <context></context> 
+between <element> and </element>. within this <context> there can be entirely different patterns.  
+
+often there is an end of the context too. in order to do this have an element INSIDE the inner context that
+has ends_context="NUM" where NUM specifies the number of contexts that are ended by this element. Because
+context may be nested there may be several contexts inside each other.
+-->
+
+<!-- next is a nested context example, inside a php comment, there may be the end of the php block. Note that
+this element has ends_context=2 -->
+<element pattern="&lt;?php" highlight="php-block">
+	<context symbols="?*/+-=*&amp;&lt;&gt;&#9;&#10;&#13;">
+		<element pattern="?&gt;" highlight="php-block" ends_context="1" />
+		<element pattern="/*" highlight="c-style-comment">
+			<context symbols="*/&#9;&#10;&#13;" highlight="c-style-comment">
+				<element pattern="*/" highlight="c-style-comment" ends_context="1" />
+				<element pattern="?&gt;" highlight="php-block" ends_context="2" />
+			</context>
+		</element> 
+	</context>
+</element>
+
+<!-- next example shows autocompletion options -->
+<element pattern="while" highlight="keyword" autocomplete="1" autocomplete_append="() {" autocomplete_backup_cursor="3"/>
+<!--
+an pattern may also be autocompletable. to enable this use autocomplete="1"
+often it is convenient if not only the pattern itself can be completed but some common
+characters are appended. use autocomplete_append="STRING" to define any characters that
+will be autocompleted. The cursor position AFTER auto completion can be set back a couple
+of characters. This is defined by attribute autocomplete_backup_cursor
+
+a regular expession pattern may be autocompletable as well. but to autocomplete the pattern
+itself usually makes no sense because it matches various other patterns. use 
+autocomplete_string="STRING" to autocomplete STRING in this context -->
+
+
+<!-- next example shows a xml/sgml tag with attributes -->
+<tag name="body" highlight="tag" attributes="style,class,id" attribhighlight="attribute" />
+<!--
+because there are many languages that use sgml/xml/html style patterns there is <tag> for convenience. 
+
+it should have attribute 'name' to specify the name of the tag
+
+the attribute 'attributes' defines attributes that are valid for this tag
+
+to highlight the tag use highlight="TYPE" where TYPE is the highlight type defined in the <header> section
+to highlight attributes use attrib_highlight="TYPE" 
+-->
+<!-- next example show the equivalent of the above <tag. as you can see a single tag
+needs a lot of configuration. That's why the convenience <tag was created.  -->
+<element id="&lt;body" pattern="&lt;body" highlight="tag" starts_block="1">
+	<context symbols="&gt;\&quot;=' &#9;&#10;&#13;" >
+		<element pattern="style" highlight="attribute" />
+		<element pattern="class" highlight="attribute" />
+		<element pattern="id" highlight="attribute" />
+		<element id="__internal_tag_string_d__" pattern="&quot;[^&quot;]*&quot;" is_regex="1" highlight="string" />
+		<element id="__internal_tag_string_s__" pattern="'[^']*'" is_regex="1" highlight="string" />
+		<element pattern="/&gt;" ends_context="1" highlight="tag" />
+	</context>
+</element>
+<element pattern="&lt;/body&lt;" highlight="tag" ends_block="1" blockstartelement="&lt;body" />
+
+<!--
+a <tag> may also start a new context just as <element> does
+-->
+<!-- next example shows autocompletion for tags -->
+<tag name="img" attributes="style,class,id,src,width,height" 
+		autocomplete_append="&gt;" attrib_autocomplete_append="=&quot;&quot;" attrib_autocomplete_backup_cursor="2"/>
+<!--
+a <tag> automatically autocompletes. it also has a 'autocomplete_append' attribute, but
+also an 'attrib_autocomplete_append' atribute.
+-->
+<!-- next example shows auto closing options for tags -->
+<tag name="br" no_close="1" />
+<!--
+a <tag> will automaticaly autoclose (if not disabled for the complete language file).
+some tags don't need a closing tag. use no_close="1"
+-->
+<!-- next example shows how to set SGML short tags -->
+<tag name="img" sgml_shorttag="1" />
+<!--
+in XML or XHTML a tag always needs to be closed, either <img /> or <img></img>
+in SGML <img> is also allowed. set sgml_shorttag="1" to enable this  
+-->
+
+<group highlight="keyword" autocomplete="1">
+	<element pattern="for"/>
+	<element pattern="while"/>
+</group>	
+<!-- 
+often there are many elements that need the same attribute such as highlight or autocomplete
+
+to make this easier you can group these elements inside <group>.  
+
+supported atributes are:
+- highlight
+- autocomplete
+- autocomplete_append
+- class
+- case_insens
+- is_regex
+
+-->
+<group  attribhighlight="attribute" highlight="tag" 
+		autocomplete_append="&gt;" attrib_autocomplete_append="=&quot;&quot;"  >
+	<tag name="p" attributes="style,id,width"/>
+	<tag name="div" attributes="style,id" />
+</group>	
+<!--
+also many <tag> entries can have the same attributes, so these can also be 
+grouped inside <group>
+
+supported attributes are:
+- highlight
+- attribhighlight
+- autocomplete_append
+- attrib_autocomplete_append
+- class 
+-->
+
+<!-- 
+a special usage of <group is to allow the user to disable/enable a section of the file.
+if the <header> section has <option name="allphpfunctions" default="1" description="All php functions" />
+we can put this option into effect like this:  
+-->
+<group class="allphpfunctions">
+	<element pattern="mysql_query" />
+	<element pattern="mysql_fetch_row" />
+	<element pattern="mysql_fetch_array" />
+</group>
+<!-- the reverse is also supported, using the notclass attribute, this can be used to make a 
+option that disables one section but enables a different section -->
+<group notclass="mysetting">
+	<element pattern="foo" />
+<group>
+<group class="mysetting">
+	<element pattern="bar" />
+<group>
+
+<!-- -------- OPTIMISATIONS ---------
+context re-use (<context idref=""/>) is more important than element or tag re-use 
+(<element idref=""/> or <tag idref=""/>). 
+
+element or tag re-use saves memory when the reference documentation is large, 
+and saves a few bytes when the same element/tag is used multiple times. 
+
+A re-used element is still compiled into every DFA table from every context it is 
+used in, and the DFA table uses most memory.
+
+context re-use saves more bytes: although the contexts themlseves are tiny, 
+the same DFA table is re-used when a context is re-used (and the DFA table 
+is the largest memory object, easily 500 times larger than the elements).
+
+As illustration here the sizes from html.bflang2
+table     7906 (1976.50 Kbytes) --- the DFA tables, compiled patterns for each context
+contexts   100 (4.69 Kbytes)    --- context metadata
+matches   1752 (123.19 Kbytes)  --- element/tag metadata
+--> 
+
+<!-- --------------------- END OF DOCUMENTATION ------------------------------------------------ -->
+
+<element pattern="[0-9.]+" is_regex="1" highlight="value"/>
+<element pattern="TRUE" autocomplete="1" highlight="value"/>
+<element pattern="FALSE" autocomplete="1" highlight="value"/>
+
+<element pattern="[" starts_block="1" mayfold="1" highlight="brackets" />
+<element pattern="]" ends_block="1" blockstartelement="[" highlight="brackets" />
+<element pattern="(" starts_block="1" mayfold="1" highlight="brackets" />
+<element pattern=")" ends_block="1" blockstartelement="(" highlight="brackets" />
+<element pattern="&#34;" highlight="string">
+	<context symbols="\&#34;" highlight="string">
+		<element pattern="\&#34;" highlight="string" />
+		<element pattern="&#34;" highlight="string" ends_context="1" />
+	</context>
+</element>
+<element pattern="'" highlight="string">
+	<context symbols="\'" highlight="string">
+		<element pattern="\'" highlight="string" />
+		<element pattern="'" highlight="string" ends_context="1" />
+	</context>
+</element>
+
+<element pattern="$[a-z0-9._]+" is_regex="1" case_insens="1" highlight="variable"/>
+<element pattern="(//|#)" is_regex="1" highlight="php-comment">
+	<context symbols="?&gt;&#10;" highlight="php-comment">
+		<element pattern="&#10;" ends_context="1" />
+		<element pattern="?&gt;" ends_context="2" ends_block="1" blockstartelement="&lt;?php" highlight="php-tag" mayfold="1" />
+	</context>
+</element>
+<element pattern="?&gt;" ends_block="1" blockstartelement="&lt;?php" highlight="php-tag" mayfold="1" ends_context="1" />
+
+<element pattern="&lt;!--" highlight="html-comment" starts_block="1">
+	<context symbols="-&gt; &#9;&#10;&#13;" highlight="html-comment">
+		<element pattern="--&gt;" ends_block="1" blockstartelement="&lt;!--" highlight="html-comment" mayfold="1" ends_context="1" />
+	</context>
+</element>
+<element pattern="&amp;[a-z0-9#]+;" is_regex="1" highlight="value" />
+</context>
+</definition>
+</bflang>

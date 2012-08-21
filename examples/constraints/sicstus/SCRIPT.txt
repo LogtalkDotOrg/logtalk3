@@ -1,0 +1,88 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example:
+
+| ?- logtalk_load(clp_sicstus(loader)).
+...
+
+
+| ?- cars_ix::cars_ix([ff], X).
+X = [1,2,6,3,5,4,4,5,3,6] ? ;
+X = [1,3,6,2,5,4,3,5,4,6] ? ;
+X = [1,3,6,2,6,4,5,3,4,5] ? ;
+X = [5,4,3,5,4,6,2,6,3,1] ? ;
+X = [6,3,5,4,4,5,3,6,2,1] ? ;
+X = [6,4,5,3,4,5,2,6,3,1] ? ;
+no
+
+| ?- cars_ix::cars_ix2([ff], X).
+X = [1,2,6,3,5,4,4,5,3,6] ? ;
+X = [1,3,6,2,5,4,3,5,4,6] ? ;
+X = [1,3,6,2,6,4,5,3,4,5] ? ;
+X = [5,4,3,5,4,6,2,6,3,1] ? ;
+X = [6,3,5,4,4,5,3,6,2,1] ? ;
+X = [6,4,5,3,4,5,2,6,3,1] ? ;
+no
+
+| ?- cars_ix::cars_ix3([ff], X).
+X = [1,2,6,3,5,4,4,5,3,6] ? ;
+X = [1,3,6,2,5,4,3,5,4,6] ? ;
+X = [1,3,6,2,6,4,5,3,4,5] ? ;
+X = [5,4,3,5,4,6,2,6,3,1] ? ;
+X = [6,3,5,4,4,5,3,6,2,1] ? ;
+X = [6,4,5,3,4,5,2,6,3,1] ? ;
+no
+
+
+| ?- squares::squares(dual,card).
+[1,1,5,7,7,9,9,9]
+[1,7,7,1,5,5,7,9]
+yes
+
+| ?- squares::squares(dual,spec).
+[1,7,7,1,7,9,5,5]
+[1,1,5,7,9,9,7,9]
+yes
+
+| ?- squares::squares(dual,wcd).
+[1,1,5,7,7,9,9,9]
+[1,7,7,1,5,5,7,9]
+yes
+
+| ?- squares::squares(dual,disjoint).
+[1,1,5,7,7,9,9,9]
+[1,7,7,1,5,5,7,9]
+yes
+
+
+| ?- torpedo::torpedo(id113).
++----------+
+| #  #     |
+| #    ## #|
+| # ##     |
+| #     ## |
+|   # #    |
+|     # ###|
+|     #    |
+| #        |
+|          |
+|          |
++----------+
+yes
+
+
+| ?- smm::smm([leftmost],value).
+[9,5,6,7,1,0,8,2]
+yes
+
+| ?- smm::smm_ix([leftmost],value).
+[9,5,6,7,1,0,8,2]
+yes

@@ -1,0 +1,42 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+To load this example and for sample queries, please see the SCRIPT.txt file.
+
+This example shows the use of meta-predicates in Logtalk. Meta-predicates are 
+predicates whose head contains arguments that will be called as goals in the 
+body of the predicate definition.
+
+This example defines the following objects:
+
+    company
+        usage example of the map_reduce/5 meta-predicate
+
+    fibonacci
+        example of calculating Fibonacci numbers using the fold_left/4
+        meta-predicate
+
+	sort(_)
+		this is a parametric object containing a method that implements the
+		quicksort sorting algorithm; the parameter is interpreted as the type
+		of the elements being sorted
+	
+	tracer
+		this object implements a meta-predicate that is used by sort(_) to 
+		trace the sorting algorithm steps
+
+	metapreds
+	descendant
+	test
+		objects used for illustrating the use of clusures as meta-arguments
+
+	predicates
+		object defining some predicates for testing meta-predicates defined 
+		in the Logtalk library

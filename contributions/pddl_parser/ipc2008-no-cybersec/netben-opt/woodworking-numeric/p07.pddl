@@ -1,0 +1,113 @@
+; woodworking 'sawing' task with 9 parts
+; Machines:
+;   1 highspeed-saw
+;   1 saw
+; random seed: 569987
+
+(define (problem wood-prob)
+  (:domain woodworking)
+  (:objects
+    highspeed-saw0 - highspeed-saw
+    saw0 - saw
+    white black mauve red green blue - acolour
+    walnut pine - awood
+    p0 p1 p2 p3 p4 p5 p6 p7 p8 - part
+    b0 b1 b2 - board
+  )
+  (:init
+    (= (total-cost) 0)
+    (empty highspeed-saw0)
+    (unused p0)
+    (= (goal-size p0) 13)
+    (= (glaze-cost p0) 18)
+    (= (grind-cost p0) 39)
+    (= (plane-cost p0) 26)
+    (unused p1)
+    (= (goal-size p1) 13)
+    (= (glaze-cost p1) 18)
+    (= (grind-cost p1) 39)
+    (= (plane-cost p1) 26)
+    (unused p2)
+    (= (goal-size p2) 5)
+    (= (glaze-cost p2) 10)
+    (= (grind-cost p2) 15)
+    (= (plane-cost p2) 10)
+    (unused p3)
+    (= (goal-size p3) 6)
+    (= (glaze-cost p3) 11)
+    (= (grind-cost p3) 18)
+    (= (plane-cost p3) 12)
+    (unused p4)
+    (= (goal-size p4) 13)
+    (= (glaze-cost p4) 18)
+    (= (grind-cost p4) 39)
+    (= (plane-cost p4) 26)
+    (unused p5)
+    (= (goal-size p5) 9)
+    (= (glaze-cost p5) 14)
+    (= (grind-cost p5) 27)
+    (= (plane-cost p5) 18)
+    (unused p6)
+    (= (goal-size p6) 14)
+    (= (glaze-cost p6) 19)
+    (= (grind-cost p6) 42)
+    (= (plane-cost p6) 28)
+    (unused p7)
+    (= (goal-size p7) 6)
+    (= (glaze-cost p7) 11)
+    (= (grind-cost p7) 18)
+    (= (plane-cost p7) 12)
+    (unused p8)
+    (= (goal-size p8) 9)
+    (= (glaze-cost p8) 14)
+    (= (grind-cost p8) 27)
+    (= (plane-cost p8) 18)
+    (= (board-size b0) 34)
+    (wood b0 pine)
+    (surface-condition b0 rough)
+    (available b0)
+    (= (board-size b1) 35)
+    (wood b1 pine)
+    (surface-condition b1 rough)
+    (available b1)
+    (= (board-size b2) 12)
+    (wood b2 walnut)
+    (surface-condition b2 rough)
+    (available b2)
+  )
+  (:goal
+    (and
+      (preference g_p0_0 (and
+          (wood p0 walnut)
+          (available p0)
+      ))
+      (preference g_p1_0 (available p1))
+      (preference g_p2_0 (available p2))
+      (preference g_p3_0 (available p3))
+      (preference g_p4_0 (available p4))
+      (preference g_p5_0 (available p5))
+      (preference g_p6_0 (and
+          (wood p6 pine)
+          (available p6)
+      ))
+      (preference g_p7_0 (available p7))
+      (preference g_p8_0 (and
+          (wood p8 pine)
+          (available p8)
+      ))
+    )
+  )
+  (:metric maximize
+    (- 344
+      (+ (total-cost)
+         (* (is-violated g_p0_0) 50)
+         (* (is-violated g_p1_0) 31)
+         (* (is-violated g_p2_0) 33)
+         (* (is-violated g_p3_0) 34)
+         (* (is-violated g_p4_0) 36)
+         (* (is-violated g_p5_0) 40)
+         (* (is-violated g_p6_0) 50)
+         (* (is-violated g_p7_0) 34)
+         (* (is-violated g_p8_0) 36)
+  )))
+)

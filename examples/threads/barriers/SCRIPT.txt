@@ -1,0 +1,25 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the loading the example:
+
+| ?- logtalk_load(barriers(loader)).
+...
+
+
+% run example:
+
+| ?- beatles::sing_along.
+
+hello(1)hello(4)hello(2)hello(3)
+Enough of hellos! Time for goodbyes!
+goodbye(2)goodbye(1)goodbye(3)goodbye(4)
+
+Yes

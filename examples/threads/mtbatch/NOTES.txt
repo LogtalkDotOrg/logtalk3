@@ -1,0 +1,40 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+To load this example and for sample queries, please see the SCRIPT.txt file.
+
+This folder provides an object for running multi-threading benchmarks. The
+supported back-end Prolog compilers are	SWI-Prolog, YAP, and XSB.
+
+For example, the following goal will run all benchmark tests:
+
+	| ?- mtbatch::run.
+
+You may also run just a single benchmark test a given number of times.
+For example:
+
+	| ?- mtbatch::run(primes, 10).
+
+The following tests are available:
+
+	primes			(independent and-parallelism)
+	msort			(independent and-parallelism)
+	qsort			(independent and-parallelism)
+	fib				(independent and-parallelism)
+	hanoi			(independent and-parallelism)
+	tak				(independent and-parallelism)
+	fft				(independent and-parallelism)
+	integration		(independent and-parallelism)
+	integration2d	(independent and-parallelism)
+	search			(competitive or-parallelism)
+
+For the same back-end Prolog compiler, the benchmark results can show 
+significant variation depending on the operating-system and if you're 
+using a 32 bits or a 64 bits version.

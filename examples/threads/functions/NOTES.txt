@@ -1,0 +1,16 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+To load this example and for sample queries, please see the SCRIPT.txt file.
+
+This folder contains a simple multi-threading example illustrating how 
+to create threads for competing goals, which one performing the same 
+task using diferent methods. The first goal to complete leads to the 
+immediate termination of the threads running the remaining goals.

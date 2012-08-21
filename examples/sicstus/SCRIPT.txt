@@ -1,0 +1,115 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example and necessary library supporting files:
+
+| ?- logtalk_load(sicstus(loader)).
+...
+
+
+% try some simple queries:
+
+
+| ?- sort(rational)::sort([1/8, 2/7, 6/5, 2/9, 1/3], Sorted).
+
+Sorted = [1/8, 2/9, 2/7, 1/3, 6/5]
+yes
+
+
+| ?- sort(colours)::sort([orange, indigo, red, yellow, violet, blue, green], Sorted).
+
+Sorted = [red, orange, yellow, green, blue, indigo, violet]
+yes
+
+
+% using the pseudo-object user implies using the Prolog built-in standard 
+% order operators:
+
+| ?- sort(user)::sort([3, 1, 4, 2, 9], Sorted).
+
+Sorted = [1, 2, 3, 4, 9]
+yes
+
+
+% some messages testing object parameter passing and using:
+
+| ?- red_circle(3)::color(Color).
+
+Color = red
+yes
+
+
+| ?- red_circle(3)::area(Area).
+
+Area = 28.274334
+yes
+
+
+| ?- red_circle(3)::ancestors(As).
+
+As = [circle(3, red), ellipse(3, 3, red)]
+yes
+
+
+% show the execution context using a method (context/3) that is defined in the
+% hierarchy root and specialized (using super calls) in each descendant:
+
+| ?- red_circle(3)::context.
+
+red_circle1
+self: red_circle(3)
+this: red_circle(3)
+sender: user
+
+circle2
+self: red_circle(3)
+this: circle(3,red)
+sender: user
+
+ellipse3
+self: red_circle(3)
+this: ellipse(3,3,red)
+sender: user
+
+yes
+
+
+% send a conjunction of messages/goals to an object; just some useful syntax sugar
+% (don't use message broadcasting syntax in order to workaround a XSB parser bug):
+
+| ?- square(2)::side(Side), square(2)::width(Width), square(2)::height(Height), square(2)::area(Area).
+
+Side = 2
+Width = 2
+Height = 2
+Area = 4
+yes
+
+
+% find all messages accepted by an object:
+
+| ?- square(2)::current_predicate(Pred).
+
+Pred = side/1 ; 
+Pred = width/1 ;
+Pred = height/1 ;
+Pred = area/1
+yes
+
+
+% find all data on a specific message accepted by an object:
+
+| ?- square(_)::predicate_property(side(_), Prop).
+
+Prop = public ;
+Prop = static ;
+Prop = declared_in(square(_133)) ;
+Prop = defined_in(square(_164))
+yes

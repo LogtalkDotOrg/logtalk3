@@ -1,0 +1,114 @@
+
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Additional licensing terms apply per Section 7 of the GNU General
+Public License 3. Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+The `lgtunit.lgt` file contains a simple framework for defining and
+running unit tests in Logtalk. The `lgtunit_messages.lgt` file defines
+the default message translations.
+
+To compile and load this framework type:
+
+	| ?- logtalk_load(lgtunit(loader)).
+
+The unit tests framework is inspired on the works of Joachim Schimpf 
+(ECLiPSe library `test_util`) and Jan Wielemaker (SWI-Prolog `plunit` 
+package).
+
+In order to write your own unit tests, define objects extending the 
+`lgtunit` object. These objects must be compiled using the compiler
+option `hook(lgtunit)`. For example:
+
+	| ?- logtalk_load(my_tests, [hook(lgtunit)]).
+
+Unit tests can be written using any of the following dialects:
+
+    test(Test) :- Goal.
+
+This is the most simple dialect, allowing the specification of tests
+that are expected to succeed. However, tests that are expected to throw
+an error cannot be specified. A more versatile dialect is:
+
+    succeeds(Test) :- Goal.
+	fails(Test) :- Goal.
+	throws(Test, Error) :- Goal.
+
+This is a straightforward dialect. For `succeeds/1` tests, `Goal` is
+expected to succeed. For `fails/1` tests, `Goal` is expected to fail.
+For `throws/2` tests, `Goal` is expected to throw `Error`. An alternative
+that can be used with the same expressive power is:
+
+    test(Test, Outcome) :- Goal.
+
+In this case, `Outcome` can be the atom `true`, the atom `fail`, or the
+exception term that the test is expected to throw.
+
+In all dialects, `Test` is an atom, uniquely identifying a test.
+
+The "units" (objects, protocols, and categories) being tested by an unit test
+object are declared using the `unit/1` predicate. A single unit test object my
+included tests for one or more "units".
+
+For examples of how to write unit tests check the `testing` example in the
+`examples` folder in the Logtalk distribution.
+
+Note: when using the `(<<)/2` control construct to access and test an object
+internal predicates, make sure that the `context_switching_calls` compiler
+flag is set to `allow` for those objects.
+
+In order to debug failed unit tests, you can compile the unit test objects
+without using the `hook/1` option and use the `(<<)/2` control construct to
+call the individual tests. For example, if you have a `test(test_n)` unit
+test that is failing, you can type:
+
+	| ?- logtalk_load(my_tests).
+	...
+
+	| ?- my_tests << test(test_n).
+	...
+
+You may also compile the unit test objects in debug mode and use the Logtalk
+debugger. For example:
+
+	| ?- logtalk_load(my_tests, [debug(on)]).
+	...
+
+	| ?- debugger::trace.
+	...
+
+	| ?- my_tests << test(test_n).
+	...
+
+If you want entity predicate clause coverage information to be collected
+and printed, you will need to compile the entities that you're testing
+using the options `debug(on)` and `source_data(on)`. Be aware, however,
+that compiling in debug mode results in a performance penalty. Your unit
+test objects must also define facts for the predicate `unit/1`, whose
+argument is the identifier of an entity being tested.
+
+In the printed predicate clause coverage information, you may get a total
+number of clauses smaller than the covered clauses. This results from the
+use of dynamic predicates with clauses asserted at runtime. You may easily
+identify dynamic predicates in the results as their clauses have an index
+equal to zero.
+
+Parameterized unit tests can be easily defined by using parametric objects.

@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<!--
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  
+%  This file is part of Logtalk <http://logtalk.org/>    
+%  Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
+%  
+%  Logtalk is free software. You can redistribute it and/or modify it under
+%  the terms of the FSF GNU General Public License 3  (plus some additional
+%  terms per section 7).        Consult the "LICENSE.txt" file for details.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="application/xml+xhtml; charset=utf-8" />
+	<title>Logtalk user manual: objects</title>
+	<link rel="stylesheet" href="../screen.css" type="text/css" media="screen"/>
+	<link rel="stylesheet" href="../print.css" type="text/css" media="print"/>
+</head>
+
+<body>
+
+<div class="top-left">Logtalk user manual</div> 
+<div class="top-right">Objects</div>
+<div class="bottom-left"><span class="page"/></div> 
+<div class="bottom-right"><span class="page"/></div>
+<div class="navtop"><a href="../index.html">Contents</a> &gt; <a href="index.html">User Manual</a> &gt; Objects</div>
+
+<h1 id="objects_objects">Objects</h1>
+
+<p>
+The main goal of Logtalk objects is the encapsulation and reuse of predicates. Instead of a single database containing all your code, Logtalk objects provide separated namespaces or databases allowing the partitioning of code in more manageable parts. Logtalk does not aim to bring some sort of new dynamic state change concept to Logic Programming or Prolog.
+</p>
+<p>
+In Logtalk, the only pre-defined objects are the built-in objects <code>user</code> and <code>logtalk</code>, which are described at the end of this section.
+</p>
+
+<h2 id="objects_kind">Objects, prototypes, classes, and instances</h2>
+
+<p>
+There are only three kinds of encapsulation entities in Logtalk: objects, protocols, and categories. Logtalk uses the term <em>object</em> in a broad sense. The terms <em>prototype</em>, <em>parent</em>, <em>class</em>, <em>subclass</em>, <em>superclass</em>, <em>metaclass</em>, and <em>instance</em> always designate an object. Different names are used to emphasize the <em>role</em> played by an object in a particular context. I.e. we use a term other than object when we want to make the relationship with other objects explicit. For example, an object with an <em>instantiation</em> relation with other object plays the role of an <em>instance</em>, while the instantiated object plays the role of a <em>class</em>; an object with a <em>specialization</em> relation other object plays the role of a <em>subclass</em>, while the specialized object plays the role of a <em>superclass</em>; an object with an <em>extension</em> relation with other object plays the role of a <em>prototype</em>, the same for the extended object. A <em>stand-alone</em> object, i.e. an object with no relations with other objects, is always interpreted as a prototype. In Logtalk, entity relations essentially define <em>patterns</em> of code reuse. An entity is compiled accordingly to the roles it plays.
+</p>
+<p>
+Logtalk allows you to work from standalone objects to any kind of hierarchy, either class-based or prototype-based. You may use single or multiple inheritance, use or forgo metaclasses, implement reflective designs, use parametric objects, and take advantage of protocols and categories (think components).
+</p>
+
+<h3 id="objects_prototypes">Prototypes</h3>
+
+<p>
+Prototypes are either self-defined objects or objects defined as extensions to other prototypes with whom they share common properties. Prototypes are ideal for representing one-of-a-kind objects. Prototypes usually represent concrete objects in the application domain. When linking prototypes using <em>extension</em> relations, Logtalk uses the term <em>prototype hierarchies</em> although most authors prefer to use the term <em>hierarchy</em> only with class generalization/specialization relations. In the context of logic programming, prototypes are often the ideal replacement for modules.
+</p>
+
+<h3 id="objects_classes">Classes</h3>
+
+<p>
+Classes are used to represent abstractions of common properties of sets of objects. Classes provide an ideal structuring solution when you want to express hierarchies of abstractions or work with many similar objects. Classes are used indirectly through <em>instantiation</em>. Contrary to most object-oriented programming languages, instances can be created both dynamically at runtime or defined in a source file like other objects.
+</p>
+
+<h2 id="objects_defining">Defining a new object</h2>
+
+<p>
+We can define a new object in the same way we write Prolog code: by using a text editor. Logtalk source files may contain one or more objects, categories, or protocols. If you prefer to define each entity in its own source file, it is recommended that the file be named after the object. By default, all Logtalk source files use the extension <code>.lgt</code> but this is optional and can be set in the adapter files. Intermediate Prolog source files (generated by the Logtalk compiler) have, by default, a <code>.pl</code> extension. Again, this can be set to match the needs of a particular Prolog compiler in the corresponding adapter file. For instance, we may define an object named <code>vehicle</code> and save it in a <code>vehicle.lgt</code> source file which will be compiled to a <code>vehicle.pl</code> Prolog file.
+</p>
+<p>
+Object names can be atoms or compound terms (when defining parametric objects, see below). Objects, categories, and protocols share the same name space: we cannot have an object with the same name as a protocol or a category.
+</p>
+<p>
+Object code (directives and predicates) is textually encapsulated by using two Logtalk directives: <a title="Consult reference manual" href="../refman/directives/object1_5.html"><code>object/1-5</code></a> and <a title="Consult reference manual" href="../refman/directives/end_object0.html"><code>end_object/0</code></a>. The most simple object will be one that is self-contained, not depending on any other Logtalk entity:
+</p>
+<pre>:- object(Object).
+    ...
+:- end_object.</pre>
+<p>
+If an object implements one or more protocols then the opening directive will be:
+</p>
+<pre>:- object(Object,
+    implements(Protocol)).
+    ...
+:- end_object.</pre>
+<p>
+An object can import one or more categories:
+</p>
+<pre>:- object(Object,
+    imports(Category)).
+    ...
+:- end_object.</pre>
+<p>
+If an object both implements protocols and imports categories then we will write:
+</p>
+<pre>:- object(Object,
+    implements(Protocol),
+    imports(Category)).
+    ...
+:- end_object.</pre>
+<p>
+In object-oriented programming objects are usually organized in hierarchies that enable interface and code sharing by inheritance. In Logtalk, we can construct prototype-based hierarchies by writing:
+</p>
+<pre>:- object(Prototype,
+    extends(Parent)).
+    ...
+:- end_object.</pre>
+<p>
+We can also have class-based hierarchies by defining instantiation and specialization relations between objects. To define an object as a class instance we will write: 
+</p>
+<pre>:- object(Object,
+    instantiates(Class)).
+    ...
+:- end_object.</pre>
+<p>
+A class may specialize another class, its superclass:
+</p>
+<pre>:- object(Class,
+    specializes(Superclass)).
+    ...
+:- end_object.</pre>
+<p>
+If we are defining a reflexive system where every class is also an instance, we will probably be using the following pattern:
+</p>
+<pre>:- object(Class,
+    instantiates(Metaclass),
+    specializes(Superclass)).
+    ...
+:- end_object.</pre>
+<p>
+In short, an object can be a <em>stand-alone</em> object or be part of an object hierarchy. The hierarchy can be prototype-based (defined by extending other objects) or class-based (with instantiation and specialization relations). An object may also implement one or more protocols or import one or more categories.
+</p>
+<p>
+A <em>stand-alone</em> object (i.e. an object with no extension, instantiation, or specialization relations with other objects) is always compiled as a prototype, that is, a self-describing object. If we want to use classes and instances, then we will need to specify at least one instantiation or specialization relation. The best way to do this is to define a set of objects that provide the basis of a reflective system <a href="../bibliography.html#Cointe87">[Cointe 87</a>, <a href="../bibliography.html#Moura94">Moura 94]</a>. For example:
+</p>
+<pre>:- object(object,               % default root of the inheritance graph
+    instantiates(class)).       % predicates common to all objects
+    ...
+:- end_object.
+
+
+:- object(class,                % default metaclass for all classes
+    instantiates(class),        % predicates common to all instantiable classes
+    specializes(abstract_class)).
+    ...
+:- end_object.
+
+
+:- object(abstract_class,       % default metaclass for all abstract classes
+    instantiates(class),        % predicates common to all classes
+    specializes(object)).
+    ...
+:- end_object.</pre>
+<p>
+Note that with these instantiation and specialization relations, <code>object</code>, <code>class</code>, and <code>abstract_class</code> are, at the same time, classes and instances of some class. In addition, each object inherits its own predicates and the predicates of the other two objects without any inheritance loop problems.
+</p>
+<p>
+When a full-blown reflective system solution is not needed, the above scheme can be simplified by making an object an instance of itself, i.e. by making a class its own metaclass. For example:
+</p>
+<pre>:- object(class,
+    instantiates(class)).
+    ...
+:- end_object.</pre>
+<p>
+We can use, in the same application, both prototype and class-based hierarchies (and freely exchange messages between all objects). We cannot however mix the two types of hierarchies by, e.g., specializing an object that extends another object in this current Logtalk version.
+</p>
+
+<h2 id="objects_parametric">Parametric objects</h2>
+
+<p>
+Parametric objects have a compound term for name instead of an atom. This compound term usually contains free variables that can be instantiated when sending a message to the object, thus acting as object parameters. The object predicates can then be coded to depend on the parameter values. When an object state is set at object creation and never changed, parameters provide a better solution than using the object's database via asserts. Parametric objects can also be used to associate a set of predicates to terms that share a common functor and arity.
+</p>
+<p>
+In order to give access to an object parameters, Logtalk provides the <a title="Consult reference manual" href="../refman/methods/parameter2.html"><code>parameter/2</code></a> built-in local method:
+</p>
+<pre>:- object(Functor(Arg1, Arg2, ...)).
+
+    ...
+
+    Predicate :-
+        ...,
+        parameter(Number, Value),
+        ... .</pre>
+<p>
+An alternative solution is to use the built-in local method <a title="Consult reference manual" href="../refman/methods/this1.html"><code>this/1</code></a>. For example:
+</p>
+<pre>:- object(foo(Arg)).
+
+    ...
+
+    bar :-
+        ...,
+        this(foo(Arg)),
+        ... .</pre>
+<p>
+Both solutions are equally efficient because the runtime cost of the methods <code>this/1</code> and <code>parameter/2</code> is negligible. The drawback of this second solution is that we must check all calls of <code>this/1</code> if we change the object name. Note that we can't use these method with the message sending operators (<a title="Consult reference manual" href="../refman/control/to_object2.html"><code>::/2</code></a>, <a title="Consult reference manual" href="../refman/control/to_self1.html"><code>::/1</code></a>, or <a title="Consult reference manual" href="../refman/control/to_object2.html"><code>^^/1</code></a>).
+</p>
+<p>
+When storing a parametric object in its own source file, the convention is to name the file after the object, with the object arity appended. For instance, when defining an object named <code>sort(Type)</code>, we may save it in a <code>sort_1.lgt</code> text file. This way it is easy to avoid file name clashes when saving Logtalk entities that have the same functor but different arity.
+</p>
+<p>
+Compound terms with the same functor and with the same number of arguments as a parametric object identifier may act as <em>proxies</em> to a parametric object. Proxies may be stored on the database as Prolog facts and be used to represent different instantiations of a parametric object identifier. Logtalk provides a convenient notation for accessing proxies represented as Prolog facts when sending a message:
+</p>
+<pre>{Proxy}::Message</pre>
+<p>
+In this context, the proxy argument is proved as a plain Prolog goal. If successful, the message is sent to the corresponding parametric object. Typically, the proof allows retrieving of parameter instantiations. This construct can either be used with a proxy argument that is sufficiently instantiated in order to unify with a single Prolog fact or with a proxy argument that unifies with several facts on backtracking.
+</p>
+
+<h2 id="objects_finding">Finding defined objects</h2>
+
+<p>
+We can find, by backtracking, all defined objects by calling the <a title="Consult reference manual" href="../refman/builtins/current_object1.html"><code>current_object/1</code></a> built-in predicate with a non-instantiated variable:
+</p>
+<pre>| ?- current_object(Object).</pre>
+<p>
+This predicate can also be used to test if an object is defined by calling it with a valid object identifier (an atom or a compound term).
+</p>
+
+<h2 id="objects_creating">Creating a new object in runtime</h2>
+
+<p>
+An object can be dynamically created at runtime by using the <a title="Consult reference manual" href="../refman/builtins/create_object4.html"><code>create_object/4</code></a> built-in predicate:
+</p>
+<pre>| ?- create_object(Object, Relations, Directives, Clauses).</pre>
+<p>
+The first argument should be either a variable or the name of the new object (a Prolog atom or compound term, which must not match any existing entity name). The remaining three arguments correspond to the relations described in the opening object directive and to the object code contents (directives and clauses).
+</p>
+<p>
+For instance, the call:
+</p>
+<pre>| ?- create_object(foo, [extends(bar)], [public(foo/1)], [foo(1), foo(2)]).</pre>
+<p>
+is equivalent to compiling and loading the object:
+</p>
+<pre>:- object(foo,
+    extends(bar)).
+
+    :- dynamic.
+
+    :- public(foo/1).
+
+    foo(1).
+    foo(2).
+
+:- end_object.</pre>
+<p>
+If we need to create a lot of (dynamic) objects at runtime, then is best to define a metaclass or a prototype with a predicate that will call this built-in predicate to make new objects. This predicate may provide automatic object name generation, name checking, and accept object initialization options.
+</p>
+
+<h2 id="objects_abolishing">Abolishing an existing object</h2>
+
+<p>
+Dynamic objects can be abolished using the <a title="Consult reference manual" href="../refman/builtins/abolish_object1.html"><code>abolish_object/1</code></a> built-in predicate:
+</p>
+<pre>| ?- abolish_object(Object).</pre>
+<p>
+The argument must be an identifier of a defined dynamic object, otherwise an error will be thrown.
+</p>
+
+<h2 id="objects_directives">Object directives</h2>
+
+<p>
+Object directives are used to set initialization goals and object properties and to document an object dependencies on other Logtalk entities.
+</p>
+
+<h3 id="objects_initialization">Object initialization</h3>
+
+<p>
+We can define a goal to be executed as soon as an object is (compiled and) loaded to memory with the <a title="Consult reference manual" href="../refman/directives/initialization1.html"><code>initialization/1</code></a> directive:
+</p>
+<pre>:- initialization(Goal).</pre>
+<p>
+The argument can be any valid Prolog or Logtalk goal, including a message to other object. For example:
+</p>
+<pre>:- object(foo).
+
+    :- initialization(init).
+    :- private(init/0).
+
+    init :-
+        ... .
+
+    ...
+
+:- end_object.</pre>
+<p>
+Or:
+</p>
+<pre>:- object(assembler).
+
+    :- initialization(control::start).
+    ...
+
+:- end_object.</pre>
+<p>
+The initialization goal can also be a message to <i>self</i> in order to call an inherited or imported predicate. For example, assuming that we have a <code>monitor</code> category defining a <code>reset/0</code> predicate:
+</p>
+<pre>:- object(profiler,
+    imports(monitor)).
+
+    :- initialization(::reset).
+    ...
+
+:- end_object.</pre>
+<p>
+Note, however, that descendant objects do not inherit initialization directives. In this context, <i>self</i> denotes the object that contains the directive. Also note that by initialization we do not necessarily mean setting an object dynamic state.
+</p>
+ 
+<h3 id="objects_synchronized">Synchronized objects</h3>
+
+<p>
+When doing multi-threading programming, is possible to synchronize all the predicates of an object using the <a title="Consult reference manual" href="../refman/directives/synchronized0.html"><code>synchronized/0</code></a> directive in the object source code:
+</p>
+<pre>:- synchronized.</pre>
+<p>
+This directive results in using internally the same mutex for synchronizing the execution of all defined object predicates. For fine-grained predicate synchronization, the <a title="Consult reference manual" href="../refman/directives/synchronized1.html"><code>synchronized/1</code></a> directive may be used instead.
+</p>
+
+<h3 id="objects_dynamic">Dynamic objects</h3>
+
+<p>
+Similar to Prolog predicates, an object can be either static or dynamic. An object created during the execution of a program is always dynamic. An object defined in a file can be either dynamic or static. Dynamic objects are declared by using the <a title="Consult reference manual" href="../refman/directives/dynamic0.html"><code>dynamic/0</code></a> directive in the object source code:
+</p>
+<pre>:- dynamic.</pre>
+<p>
+The directive must precede any predicate directives or clauses. Please be aware that using dynamic code results in a performance hit when compared to static code. We should only use dynamic objects when these need to be abolished during program execution. In addition, note that we can declare and define dynamic predicates within a static object.
+</p>
+
+<h3 id="objects_dependencies">Object dependencies</h3>
+
+<p>
+Besides the relations declared in the object opening directive, the predicate definitions contained in the object may imply other dependencies. These can be documented by using the <a title="Consult reference manual" href="../refman/directives/calls1.html"><code>calls/1</code></a> and the <a title="Consult reference manual" href="../refman/directives/uses1.html"><code>uses/1</code></a> directives.
+</p>
+<p>
+The <code>calls/1</code> directive can be used when a predicate definition sends a message that is declared in a specific protocol:
+</p>
+<pre>:- calls(Protocol).</pre>
+<p>
+If a predicate definition sends a message to a specific object, this dependence can be declared with the <code>uses/1</code> directive:
+</p>
+<pre>:- uses(Object).</pre>
+<p>
+These two directives may be used by the Logtalk runtime to ensure that all needed entities are loaded when running an application.
+</p>
+
+<h3 id="objects_documentation">Object documentation</h3>
+
+<p>
+An object can be documented with arbitrary user-defined information by using the <a title="Consult reference manual" href="../refman/directives/info1.html"><code>info/1</code></a> directive:
+</p>
+<pre>:- info(List).</pre>
+<p>
+See the <a href="documenting.html">documenting Logtalk programs</a> session for details.
+</p>
+
+<h2 id="objects_relationships">Object relationships</h2>
+
+<p>
+Logtalk provides six sets of built-in predicates that enable us to query the system about the possible relationships that an object may have with other entities.
+</p>
+<p>
+The built-in predicates <a title="Consult reference manual" href="../refman/builtins/instantiates_class2_3.html"><code>instantiates_class/2</code></a> and <a title="Consult reference manual" href="../refman/builtins/instantiates_class2_3.html"><code>instantiates_class/3</code></a> can be used to query all instantiation relations:
+</p>
+<pre>| ?- instantiates_class(Instance, Class).</pre>
+<p>
+or, if we want to know the instantiation scope:
+</p>
+<pre>| ?- instantiates_class(Instance, Class, Scope).</pre>
+<p>
+Specialization relations can be found by using either the <a title="Consult reference manual" href="../refman/builtins/specializes_class2_3.html"><code>specializes_class/2</code></a> or the <a title="Consult reference manual" href="../refman/builtins/specializes_class2_3.html"><code>specializes_class/3</code></a> built-in predicates:
+</p>
+<pre>| ?- specializes_class(Class, Superclass).</pre>
+<p>
+or, if we want to know the specialization scope:
+</p>
+<pre>| ?- specializes_class(Class, Superclass, Scope).</pre>
+<p>
+For prototypes, we can query extension relations with the <a title="Consult reference manual" href="../refman/builtins/extends_object2_3.html"><code>extends_object/2</code></a> or the <a title="Consult reference manual" href="../refman/builtins/extends_object2_3.html"><code>extends_object/3</code></a> built-in predicates:
+</p>
+<pre>| ?- extends_object(Object, Parent).</pre>
+<p>
+or, if we want to know the extension scope:
+</p>
+<pre>| ?- extends_object(Object, Parent, Scope).</pre>
+<p>
+In order to find which objects import which categories we can use the built-in predicates <a title="Consult reference manual" href="../refman/builtins/imports_category2_3.html"><code>imports_category/2</code></a> or <a title="Consult reference manual" href="../refman/builtins/imports_category2_3.html"><code>imports_category/3</code></a>:
+</p>
+<pre>| ?- imports_category(Object, Category).</pre>
+<p>
+or, if we want to know the importation scope:
+</p>
+<pre>| ?- imports_category(Object, Category, Scope).</pre>
+<p>
+To find which objects implements which protocols we can use the <a title="Consult reference manual" href="../refman/builtins/implements_protocol2_3.html"><code>implements_protocol/2-3</code></a> and <a title="Consult reference manual" href="../refman/builtins/conforms_to_protocol2_3.html"><code>conforms_to_protocol/2-3</code></a> built-in predicates:
+</p>
+<pre>| ?- implements_protocol(Object, Protocol, Scope).</pre>
+<p>
+or, if we also want inherited protocols:
+</p>
+<pre>| ?- conforms_to_protocol(Object, Protocol, Scope).</pre>
+<p>
+Note that, if we use a non-instantiated variable for the first argument, we will need to use the <a title="Consult reference manual" href="../refman/builtins/current_object1.html"><code>current_object/1</code></a> built-in predicate to ensure that the entity returned is an object and not a category.
+</p>
+<p>
+To find which objects are explicitly complement by categories we can use the 
+<a title="Consult reference manual" href="../refman/builtins/complements_object2.html"><code>complements_object/2</code></a> built-in predicate:
+</p>
+<pre>| ?- complements_object(Category, Object).</pre>
+<p>
+Note that more than one category may explicitly complement a single object.
+</p>
+
+
+<h2 id="objects_properties">Object properties</h2>
+
+<p>
+We can find the properties of defined objects by calling the built-in predicate <a title="Consult reference manual" href="../refman/builtins/object_property2.html"><code>object_property/2</code></a>:
+</p>
+<pre>| ?- object_property(Object, Property).</pre>
+<p>
+An object may have the property <code>static</code>, <code>dynamic</code>, or <code>built_in</code>. Dynamic objects can be abolished in runtime by calling the <a title="Consult reference manual" href="../refman/builtins/abolish_object1.html"><code>abolish_object/1</code></a> built-in predicate. An object may also have the properties <code>synchronized</code> and <code>threaded</code>, which are related to multi-threading programming. Depending on the back-end Prolog compiler, an object may have additional properties related to the source file where it is defined.
+</p>
+
+<h2 id="objects_built_in">Built-in objects</h2>
+
+<p>
+Logtalk defines some built-in objects that are always available for any application.
+</p>
+
+<h3 id="objects_user">The built-in pseudo-object <em>user</em></h3>
+
+<p>
+Logtalk defines a built-in, pseudo-object named <code>user</code> that contains all user predicate definitions not encapsulated in a Logtalk entity. These predicates are assumed to be implicitly declared public.
+</p>
+
+<h3 id="objects_logtalk">The built-in object <em>logtalk</em></h3>
+
+<p>
+Logtalk defines a built-in object named <code>logtalk</code>, which defines a set of low-level utility predicates (usually used when defining hook objects). This object implements the built-in protocols <a href="protocols.html#protocols_expanding"><code>expanding</code></a> and <a href="protocols.html#protocols_monitoring"><code>monitoring</code></a>. It also supports the dynamic declaration and definition of predicates (using the dynamic database built-in methods).
+</p>
+<p>
+The following predicates are defined:
+</p>
+<dl>
+	<dt><code>expand_library_path(Library, Path)</code></dt>
+		<dd>Expands a file specification in library notation to a full operating-system path.</dd>
+	<dt><code>loaded_file(File, Directory)</code></dt>
+		<dd>Returns the name of currently loaded source files (with extension) and the source file directories.</dd>
+	<dt><code>loaded_file(File, Directory, Options)</code></dt>
+		<dd>Returns the name of currently loaded source files (with extension) and the source file directories, plus the explicit options used for compiling and loading the files.</dd>
+</dl>
+<dl>
+	<dt><code>compile_aux_clauses(Clauses)</code></dt>
+		<dd>Compiles a list of clauses in the context of the entity under compilation. This method is usually called from <code>goal_expansion/2</code> hooks in order to compile auxiliary clauses generated for supporting an expanded goal. The compilation of the clauses avoids the risk of making the predicate whose clause is being goal-expanded discontiguous by accident.</dd>
+</dl>
+<dl>
+	<dt><code>entity_prefix(Entity, Prefix)</code></dt>
+		<dd>Converts an entity identifier into its internal prefix or an internal prefix into an entity identifier.</dd>
+</dl>
+<dl>
+	<dt><code>compile_predicate_heads(Heads, TranslatedHeads)</code></dt>
+		<dd>Compiles a predicate head or a list of predicate heads in the context of the entity being compiled.</dd>
+	<dt><code>compile_predicate_heads(Heads, TranslatedHeads, ContextArgument)</code></dt>
+		<dd>Compiles a predicate head or a list of predicate heads in the context of the entity being compiled.</dd>
+	<dt><code>compile_predicate_heads(Heads, Entity, TranslatedHeads, ContextArgument)</code></dt>
+		<dd>Compiles a predicate head or a list of predicate heads in the context of the specified entity or in the context of the entity being compiled when <code>Entity</code> is not instantiated.</dd>
+</dl>
+<dl>
+	<dt><code>compile_predicate_indicators(PredicateIndicators, TranslatedPredicateIndicators)</code></dt>
+		<dd>Compiles a predicate indicator or a list of predicate indicators in the context of the entity being compiled.</dd>
+	<dt><code>compile_predicate_indicators(PredicateIndicators, Entity, TranslatedPredicateIndicators)</code></dt>
+		<dd>Compiles a predicate indicator or a list of predicate indicators in the context of the specified entity or in the context of the entity being compiled when <code>Entity</code> is not instantiated.</dd>
+</dl>
+<dl>
+	<dt><code>decompile_predicate_heads(TranslatedHeads, Heads)</code></dt>
+		<dd>Decompiles a compiled predicate head or a list of compiled predicate heads returning the source level predicate heads. Requires the implicit entity to be currently loaded.</dd>
+	<dt><code>decompile_predicate_heads(TranslatedHeads, Entity, Heads)</code></dt>
+		<dd>Decompiles a compiled predicate head or a list of compiled predicate heads returning the entity and source level heads. Requires the entity to be currently loaded.</dd>
+	<dt><code>decompile_predicate_heads(TranslatedHeads, Entity, EntityType, Heads)</code></dt>
+		<dd>Decompiles a compiled predicate head or a list of compiled predicate heads returning the entity, entity type, and source level heads. Requires the entity to be currently loaded.</dd>
+</dl>
+<dl>
+	<dt><code>decompile_predicate_indicators(TranslatedPredicateIndicators, PredicateIndicators)</code></dt>
+		<dd>Decompiles a compiled predicate indicator or a list of compiled predicate indicators returning source level predicate indicators. Requires the implicit entity to be currently loaded.</dd>
+	<dt><code>decompile_predicate_indicators(TranslatedPredicateIndicators, Entity, PredicateIndicators)</code></dt>
+		<dd>Decompiles a compiled predicate indicator or a list of compiled predicate indicators returning the entity and source level predicate indicators. Requires the entity to be currently loaded.</dd>
+	<dt><code>decompile_predicate_indicators(TranslatedPredicateIndicators, Entity, EntityType, PredicateIndicators)</code></dt>
+		<dd>Decompiles a compiled predicate indicator or a list of compiled predicate indicators returning the entity, entity type, and source level predicate indicators. Requires the entity to be currently loaded.</dd>
+</dl>
+<p>
+The following predicates are still defined but should be considered <strong>deprecated</strong> and will be removed in the next release:
+</p>
+<dl>
+	<dt><code>decompile_predicate_head(TranslatedHead, Entity, EntityType, Head)</code></dt>
+		<dd>Decompiles a compiled predicate head, returning the entity, entity type, and source level head. Requires the entity to be currently loaded.</dd>
+	<dt><code>decompile_predicate_indicator(TranslatedPredicateIndicator, Entity, EntityType, PredicateIndicator)</code></dt>
+		<dd>Decompiles a compiled predicate indicator, returning the entity, entity type, and source level predicate indicator. Requires the entity to be currently loaded.</dd>
+</dl>
+<p>
+In order to use these predicates, simply send the corresponding message to the <code>logtalk</code> object.
+</p>
+
+<div class="footer">
+	<div class="copyright">
+		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
+		<span>Last updated on: May 30, 2012</span>
+	</div>
+	<div class="navbottom">
+		<span><a href="messages.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="protocols.html">next</a></span><br/>
+		<span><a href="http://validator.w3.org/check/referer">XHTML</a> + <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a></span>
+	</div>
+</div>
+
+</body>
+
+</html>

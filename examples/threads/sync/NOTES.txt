@@ -1,0 +1,21 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+To load this example and for sample queries, please see the SCRIPT.txt file.
+
+This folder contains a simple multi-threading example illustrating the 
+use of the "synchronized" predicate directive to cope with methods that 
+have side-effects.
+
+The object defined in the example source file, "sync.lgt", defines a 
+predicate named waste_time/0 that is used to delay the execuion of goals 
+in order to better illustrate the semantics of the "synchronized" predicate 
+directive. This predicate uses a counter that you might need to adjust, 
+depending on your Prolog compiler and computer performance.

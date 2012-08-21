@@ -1,0 +1,43 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Additional licensing terms apply per Section 7 of the GNU General
+Public License 3. Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+To load this example and for sample queries, please see the `SCRIPT.txt`
+file.
+
+This example provides basic on-line help for Logtalk when running in
+a limited set of operating-systems and back-end Prolog compilers.
+Currently, support is limited to:
+
+- Operating-systems:
+	Linux, MacOS X, and Windows
+	
+- Prolog compilers:
+	B-Prolog, Ciao Prolog, CxProlog, ECLiPSe, GNU Prolog,
+	Qu-Prolog, SICStus Prolog, SWI-Prolog, XSB, and YAP
+
+On Windows, the `start` command must be available. On Linux, the
+`xdg-open` command must be available.
+
+The limited support for back-end Prolog compilers is due to the lack
+of portable access to the operating-system. This example relies on the
+`cc` example to provide a portable operating-system access abstraction.

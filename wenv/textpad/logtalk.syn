@@ -1,0 +1,365 @@
+; TextPad syntax definitions for Logtalk (http://logtalk.org/)
+; 
+; Author: 			Paulo Moura
+; Last changed in: 	May 3, 2012
+;
+; Tags used and sugested colors:
+;   Keywords 1	message sending operators	blue
+;   Keywords 2	entity enclosing directives	purple
+;   Keywords 3	entity  directives		purple
+;   Keywords 4	built-in predicates
+;   Keywords 5	built-in methods
+
+
+C=1
+
+[Syntax]
+Namespace1 = 6
+IgnoreCase = NO
+InitKeyWordChars = 
+KeyWordChars = a-zA-Z0-9_:^;*+,-./;<=>?@[\]^{|}
+KeyWordLength =
+BracketChars = 
+OperatorChars = <=>?@[\]|
+PreprocStart =
+SyntaxStart =
+SyntaxEnd =
+HexPrefix = 0x
+CommentStart = /*
+CommentEnd = */
+CommentStartAlt =
+CommentEndAlt =
+SingleComment = %
+SingleCommentCol =
+SingleCommentAlt =
+SingleCommentColAlt =
+SingleCommentEsc =
+StringsSpanLines = Yes
+StringStart = "
+StringEnd = "
+StringAlt = 
+StringEsc = \
+CharStart = '
+CharEnd = '
+CharEsc = \
+
+
+[Keywords 1]
+
+; Logtalk message sending operators
+
+^^
+:-
+.
+,
+;
+::
+
+
+; Logtalk category predicate direct call operator
+
+:
+
+
+; Logtalk external call
+{
+}
+
+
+[Keywords 2]
+
+; Logtalk conditional compilation directives
+if
+elif
+else
+endif
+
+; Logtalk opening entity directives
+object
+protocol
+category
+module
+
+
+; Logtalk closing entity directives
+end_object
+end_protocol
+end_category
+
+; Logtalk entity relations
+complements
+instantiates
+specializes
+extends
+imports
+implements
+
+
+[Keywords 3]
+
+; Logtalk directives
+alias
+calls
+discontiguous
+dynamic
+encoding
+export
+initialization
+info
+mode
+meta_predicate
+meta_non_terminal
+multifile
+coinductive
+public
+protected
+private
+op
+reexport
+synchronized
+threaded
+uses
+use_module
+
+
+[Keywords 4]
+
+; Logtalk built-in predicates
+current_object
+current_protocol
+current_category
+create_object
+create_protocol
+create_category
+object_property
+protocol_property
+category_property
+abolish_object
+abolish_protocol
+abolish_category
+complements_object
+conforms_to_protocol
+extends_object
+extends_protocol
+extends_category
+implements_protocol
+instantiates_class
+specializes_class
+imports_category
+abolish_events
+current_event
+define_events
+current_logtalk_flag
+set_logtalk_flag
+logtalk_compile
+logtalk_load
+logtalk_library_path
+threaded
+threaded_call
+threaded_once
+threaded_ignore
+threaded_exit
+threaded_peek
+threaded_wait
+threaded_notify
+forall
+retractall
+
+
+[Keywords 5]
+
+; Logtalk built-in methods
+parameter
+self
+sender
+this
+current_predicate
+predicate_property
+abolish
+asserta
+assertz
+clause
+retract
+retractall
+bagof
+findall
+forall
+setof
+before
+after
+expand_term
+expand_goal
+goal_expansion
+term_expansion
+phrase
+
+; Mode operators
+?
+@
+
+; Control constructs
+true
+fail
+call
+!
+,
+;
+-->
+->
+catch
+throw
+
+; Term unification
+=
+subsumes_term
+unify_with_occurs_check
+\=
+
+; Term testing
+var
+atom
+integer
+float
+atomic
+callable
+compound
+nonvar
+number
+acyclic_term
+
+; Term comparison
+compare
+@=<
+==
+\==
+@<
+@>
+@>=
+
+; Term creation and decomposition
+functor
+arg
+=..
+copy_term
+numbervars
+term_variables
+
+; Arithemtic evaluation
+is
+
+; Arithemtic comparison
+=:=
+=\=
+<
+=<
+>
+>=
+
+; Sorting
+keysort
+sort
+
+; Stream selection and control
+current_input
+current_output
+set_input
+set_output
+open
+close
+flush_output
+stream_property
+at_end_of_stream
+set_stream_position
+
+; Character input/output
+get_char
+get_code
+peek_char
+peek_code
+put_char
+put_code
+nl
+
+; Byte input/output
+get_byte
+peek_byte
+put_byte
+
+; Term input/output
+read_term
+read
+write_term
+write
+writeq
+write_canonical
+op
+current_op
+char_conversion
+current_char_conversion
+
+; Logic and control
+\+
+ignore
+once
+repeat
+
+; Atomic term processing
+atom_length
+atom_concat
+sub_atom
+atom_chars
+atom_codes
+char_code
+number_chars
+number_codes
+
+; Implementation defined hooks functions
+set_prolog_flag
+current_prolog_flag
+halt
+
+; Evaluable functors
++
+-
+*
+//
+/
+max
+min
+rem
+mod
+abs
+sign
+float_integer_part
+float_fractional_part
+float
+floor
+truncate
+round
+ceiling
+
+; Other arithemtic functors
+**
+sin
+cos
+acos
+asin
+atan
+exp
+log
+sqrt
+
+; Bitwise functors
+>>
+<<
+/\
+\/
+\
+
+; Logtalk end-of-clause
+.
+
+; Logtalk list operator
+|
+
+

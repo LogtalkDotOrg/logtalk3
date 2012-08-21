@@ -1,0 +1,33 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example and the required library files:
+
+| ?- logtalk_load(multifile(loader)).
+...
+
+
+% call the a/1 multifile predicate:
+
+| ?- main::a(X).
+X = 1 ;
+X = 2 ;
+X = 3 ;
+X = 4 ;
+X = 5
+true
+
+% call the b/1 multifile predicate:
+
+| ?- main::b(X).
+X = one ;
+X = two ;
+X = three
+true

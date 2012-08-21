@@ -1,0 +1,214 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example and the required library files:
+
+| ?- logtalk_load(metapredicates(loader)).
+...
+
+
+% note that "user" is a pseudo-object representing the Prolog database;
+% therefore, the integer comparisons are performed using the standard
+% Prolog built-in predicates
+
+| ?- sort(user)::sort([3, 1, 4, 2, 9], Sorted).
+
+call: partition([1,4,2,9],3,_358,_359)
+exit: partition([1,4,2,9],3,[1,2],[4,9])
+call: sort([1,2],_740)
+call: partition([2],1,_967,_968)
+exit: partition([2],1,[],[2])
+call: sort([],_1300)
+exit: sort([],[])
+call: sort([2],_1539)
+call: partition([],2,_1765,_1766)
+exit: partition([],2,[],[])
+call: sort([],_2093)
+exit: sort([],[])
+call: sort([],_2332)
+exit: sort([],[])
+exit: sort([2],[2])
+exit: sort([1,2],[1,2])
+call: sort([4,9],_2831)
+call: partition([9],4,_3058,_3059)
+exit: partition([9],4,[],[9])
+call: sort([],_3391)
+exit: sort([],[])
+call: sort([9],_3630)
+call: partition([],9,_3856,_3857)
+exit: partition([],9,[],[])
+call: sort([],_4184)
+exit: sort([],[])
+call: sort([],_4423)
+exit: sort([],[])
+exit: sort([9],[9])
+exit: sort([4,9],[4,9])
+
+Sorted = [1,2,3,4,9]
+yes
+
+
+% test the setof/3 wrapper:
+
+| ?- object::p(L).
+
+L = [1, 2, 3]
+yes
+
+| ?- object::q(L).
+
+L = [1, 2, 3]
+yes
+
+
+% call the meta-predicate apply/2 directly:
+
+| ?- metapreds::test_this.
+
+1, metapreds
+yes
+
+
+% send an apply/2 message to self:
+
+| ?- descendant::test_self.
+
+2, descendant
+yes
+
+
+% send an apply/2 message from another object:
+
+| ?- test::test_obj.
+
+3, test
+yes
+
+
+% use the partition/4 meta-predicate with a predicate defined in the
+% pseudo-object "user":
+
+| ?- meta::partition(even_integer, [1,2,3,4,5], Included, Excluded).
+
+Included = [2, 4]
+Excluded = [1, 3, 5]
+yes
+
+
+% use the fold_left/4 meta-predicate with a predicate defined in the
+% pseudo-object "user":
+
+| ?- meta::fold_left(sum_squares, 0, [1,2,3], Result).
+
+Result = 34
+yes
+
+
+% use the fold_left/4 and fold_right/4 meta-predicates with the atom_concat/3
+% Prolog built-in predicate:
+
+| ?- meta::fold_left(atom_concat, 'PREFIX', [abc,def,ghi], Result).
+
+Result = 'PREFIXabcdefghi'
+yes
+
+| ?- meta::fold_right(atom_concat, 'SUFIX', [abc,def,ghi], Result).
+
+Result = abcdefghiSUFIX
+yes
+
+
+% use the fold_left/4 meta-predicate with predicates defined in the object
+% "predicates":
+
+| ?- meta::fold_left(predicates::sum, 0, [1,2,3,4,5], Result).
+
+Result = 15
+yes
+
+| ?- meta::fold_left(predicates::product, 1, [1,2,3,4,5], Result).
+
+Result = 120
+yes
+
+| ?- meta::fold_left(predicates::tuple, (0,0), [(1,2), (3,4), (6,4)], Result).
+
+Result = (10, 10)
+yes
+
+
+% use the scan_left/4 and scan_right/4 meta-predicates with predicates
+% defined in the object "predicates":
+
+| ?- meta::scan_left(sum_squares, 0, [1,2,3], Result).
+Result = [0, 1, 5, 34]
+yes
+
+| ?- meta::scan_right(predicates::sum, 5, [1,2,3,4], Result).
+Result = [15, 14, 12, 9, 5]
+yes
+
+
+% use the map/2-3 meta-predicates with some Prolog built-in predicates:
+
+| ?- meta::map(integer, [1,2,3,4,5]).
+
+yes
+
+| ?- meta::map(char_code, [a,b,c,d,e], Codes).
+
+Codes = [97, 98, 99, 100, 101]
+yes
+
+
+% use the fold_left/4 meta-predicate to calculate Fibonacci numbers:
+
+| ?- fibonacci::nth(10, Fib).
+
+Fib = 55
+yes
+
+| ?- fibonacci::nth(Nth, Fib).
+
+Fib = 0
+Nth = 0 ? ;
+
+Fib = 1
+Nth = 1 ? ;
+
+Fib = 1
+Nth = 2 ? ;
+
+Fib = 2
+Nth = 3 ? ;
+
+Fib = 3
+Nth = 4 ? ;
+
+Fib = 5
+Nth = 5 ? 
+...
+
+
+% use the map_reduce/5 meta-predicate to give bad news to a company employees:
+
+| ?- company::(company(C1), get_salary(company(C1),S1)).
+
+C1 = [topdept(name('Human Resources'),manager(name('Lisa'),salary(123456)),[]),topdept(name('Development'),manager(name('Anders'),salary(43210)),[subdept(name('Visual Basic'),manager(name('Amanda'),salary(8888)),[]),subdept(name('Visual C#'),manager(name('Erik'),salary(4444)),[])])]
+S1 = 179998
+yes
+
+
+| ?- company::(company(C1), cut_salary(company(C1), C2), get_salary(C2, S2)).
+
+C1 = [topdept(name('Human Resources'),manager(name('Lisa'),salary(123456)),[]),topdept(name('Development'),manager(name('Anders'),salary(43210)),[subdept(name('Visual Basic'),manager(name('Amanda'),salary(8888)),[]),subdept(name('Visual C#'),manager(name('Erik'),salary(4444)),[])])]
+C2 = company([topdept(name('Human Resources'),manager(name('Lisa'),salary(61728)),[]),topdept(name('Development'),manager(name('Anders'),salary(21605)),[subdept(name('Visual Basic'),manager(name('Amanda'),salary(4444)),[]),subdept(name('Visual C#'),manager(name('Erik'),salary(2222)),[])])])
+S2 = 89999
+yes

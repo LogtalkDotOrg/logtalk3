@@ -1,0 +1,53 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+This directory contains files that provides syntax highlighting, code 
+folding, code completion, and auto-indentation for editing Logtalk 
+source files with the text editor Vim 7.0 or later version:
+
+	http://www.vim.org/
+
+These support files are dual-licensed under the GNU General Public
+License 3 and the Vim charityware license.
+
+Recent versions of Vim already contain support for Logtalk. However, 
+this directory may contain updated support files. If that is the case,
+install the Logtalk support files by performing the following steps:
+
+1. Copy the file "syntax/logtalk.vim" to the "syntax" sub-directory in 
+your VIM installation directory (replacing any existing older file).
+
+2. Add the following entry to the "filetype.vim" configuration file 
+(only if not already present):
+
+" Logtalk source files
+au BufNewFile,BufRead *.lgt                     setf logtalk
+
+3. Copy the file "indent/logtalk.vim" to the "indent" sub-directory in 
+your VIM installation directory (replacing any existing older file).
+
+4. Copy the files "completion/logtalk.dict" and "ftplugin/logtalk.vim" 
+to the "ftplugin" sub-directory in your Vim installation directory 
+(replacing any existing files; current Vim versions are distributed
+with a "ftplugin/logtalk.vim" that comments out some of the necessary
+settings despite their local scope!).
+
+5. Add the following lines to your ~/.vimrc file:
+
+	syntax on
+	filetype indent on
+	filetype plugin on
+
+You may then perform code completion by typing CTRL-X, CTRL-K and then 
+CTRL-P or CTRL-N to cycle between all the completion choices.
+
+6. Check the "wenv/ctags" in the Logtalk installation directory for
+instructions on how to enable a source code browser for Logtalk source
+files using the Vim plugin Taglist.

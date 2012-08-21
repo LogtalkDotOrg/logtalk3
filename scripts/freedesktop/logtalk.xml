@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+	<mime-type type="text/x-logtalk">
+		<comment>Logtalk source code</comment>
+		<comment xml:lang="be@latin">Kryničny kod Logtalk</comment>
+		<comment xml:lang="bg">Изходен код — Logtalk</comment>
+		<comment xml:lang="ca">codi font en Logtalk</comment>
+		<comment xml:lang="cs">Zdrojový kód v Logtalk</comment>
+		<comment xml:lang="da">Logtalk-kildekode</comment>
+		<comment xml:lang="de">Logtalk-Quelltext</comment>
+		<comment xml:lang="el">πηγαίος κώδικας Logtalk</comment>
+		<comment xml:lang="en_GB">Logtalk source code</comment>
+		<comment xml:lang="eo">Logtalk-fontkodo</comment>
+		<comment xml:lang="es">código fuente en Logtalk</comment>
+		<comment xml:lang="eu">Logtalk iturburu-kodea</comment>
+		<comment xml:lang="fi">Logtalk-lähdekoodi</comment>
+		<comment xml:lang="fr">code source Logtalk</comment>
+		<comment xml:lang="ga">cód foinseach Logtalk</comment>
+		<comment xml:lang="hu">Logtalk-forráskód</comment>
+		<comment xml:lang="it">Codice sorgente Logtalk</comment>
+		<comment xml:lang="ja">Logtalk ソースコード</comment>
+		<comment xml:lang="ko">Logtalk 소스 코드</comment>
+		<comment xml:lang="lt">Logtalk pradinis kodas</comment>
+		<comment xml:lang="ms">Kod sumber Logtalk</comment>
+		<comment xml:lang="nb">Logtalk-kildekode</comment>
+		<comment xml:lang="nl">Logtalk-broncode</comment>
+		<comment xml:lang="nn">Logtalk-kjeldekode</comment>
+		<comment xml:lang="pl">Kod źródłowy w Logtalk</comment>
+		<comment xml:lang="pt">código fonte Logtalk</comment>
+		<comment xml:lang="pt_BR">Código fonte Logtalk</comment>
+		<comment xml:lang="ru">программа на языке Logtalk</comment>
+		<comment xml:lang="sq">Kod burues Logtalk</comment>
+		<comment xml:lang="sr">Logtalk изворни ко̂д</comment>
+		<comment xml:lang="sv">Logtalk-källkod</comment>
+		<comment xml:lang="uk">Вихідний код на мові Logtalk</comment>
+		<comment xml:lang="vi">Mã nguồn Logtalk</comment>
+		<comment xml:lang="zh_CN">Logtalk 源代码</comment>
+		<comment xml:lang="zh_TW">Logtalk 源代碼</comment>
+		<sub-class-of type="text/plain"/>
+		<magic priority="50">
+			<match value=":- object(" type="string" offset="0"/>
+			<match value=":- protocol(" type="string" offset="0"/>
+			<match value=":- category(" type="string" offset="0"/>
+		</magic>
+		<glob pattern="*.lgt"/>
+	</mime-type>
+</mime-info>

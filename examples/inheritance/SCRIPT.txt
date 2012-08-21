@@ -1,0 +1,120 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example:
+
+| ?- logtalk_load(inheritance(loader)).
+...
+
+
+% parent interface
+
+| ?- parent::interface.
+
+public/0 - public
+protected/0 - protected
+private/0 - private
+
+yes
+
+
+% prototype1 extends public::parent
+
+| ?- prototype1::interface.
+
+public/0 - public
+protected/0 - protected
+
+yes
+
+
+% prototype2 extends protected::parent
+
+| ?- prototype2::interface.
+
+public/0 - protected
+protected/0 - protected
+
+yes
+
+
+% prototype3 extends private::parent
+
+| ?- prototype3::interface.
+
+public/0 - private
+protected/0 - private
+
+yes
+
+
+% descendant1 extends public::prototype1
+
+| ?- descendant1::interface.
+
+public/0 - public
+protected/0 - protected
+
+yes
+
+
+% descendant2 extends public::prototype2
+
+| ?- descendant2::interface.
+
+public/0 - protected
+protected/0 - protected
+
+yes
+
+
+% descendant3 extends public::prototype3
+
+| ?- descendant3::interface.
+
+yes
+
+
+% object (root of the inheritance graph) interface
+
+| ?- root::interface.
+
+public/0 - public
+protected/0 - protected
+private/0 - private
+
+yes
+
+
+% instance1 instantiates subclass1 that specializes public::root
+
+| ?- instance1::interface.
+
+public/0 - public
+protected/0 - protected
+
+yes
+
+
+% instance2 instantiates subclass2 that specializes protected::root
+
+| ?- instance2::interface.
+
+public/0 - protected
+protected/0 - protected
+
+yes
+
+
+% instance3 instantiates subclass3 that specializes private::root
+
+| ?- instance3::interface.
+
+yes

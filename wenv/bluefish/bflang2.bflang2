@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+		Bluefish HTML Editor
+		bflang2.bflang2 $Revision: 6215 $
+ 
+		Copyright (C) 2008-2010 Olivier Sessink
+
+	    This program is free software: you can redistribute it and/or modify
+		it under the terms of the GNU General Public License as published by
+		the Free Software Foundation, either version 3 of the License, or
+		(at your option) any later version.
+
+		This program is distributed in the hope that it will be useful,
+		but WITHOUT ANY WARRANTY; without even the implied warranty of
+		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+		GNU General Public License for more details.
+
+		You should have received a copy of the GNU General Public License
+		along with this program.  If not, see <http://www.gnu.org/licenses/>.		
+-->
+
+<bflang name="Bflang2" version="2.0" table="1157" contexts="26" matches="143">
+<header>
+	<mime type="application/x-bluefish-language2"/>
+	<option name="load_reference" default="1" description="load reference data"/>
+	<option name="load_completion" default="1" description="load completion data"/>
+	<highlight name="attribute" style="attribute"   />
+	<highlight name="comment" style="comment"  />
+	<highlight name="entity" style="value"  />
+	<highlight name="pattern-tag" style="special-tag"  />
+	<highlight name="string" style="string"  />
+	<highlight name="tag" style="tag" />
+</header>
+<properties>
+	<comment type="block" start="&lt;!--" end="--&gt;" />
+	<default_spellcheck enabled="1" />
+</properties>
+<definition>
+<context symbols="&gt;&lt;&amp;; &#9;&#10;&#13;">
+<element id="e.comment" pattern="&lt;!--" highlight="comment" starts_block="1">
+	<context id="c.comment" symbols="-&gt; &#9;&#10;&#13;" highlight="comment">
+	<element pattern="--&gt;" ends_block="1" blockstartelement="e.comment" highlight="comment" mayfold="1" ends_context="1" />
+	</context>
+</element>
+<element id="e.entity" pattern="&amp;[a-z0-9#]+;" is_regex="1" highlight="entity" />
+<tag name="bflang" highlight="tag" autocomplete_append="name=&quot;&quot; version=&quot;1&quot;&gt;" attributes="name,version,table,matches,contexts" attribhighlight="attribute" attrib_autocomplete_append="=&quot;&quot;" >
+<reference>the <i>bflang</i> tag is the root tag of the bluefish language file. It should have attribute <i>name</i> and <i>version</i>.</reference>
+	<context symbols="&gt;&lt;&amp;; &#9;&#10;&#13;">
+	<element idref="e.comment"/>
+	<element idref="e.entity" />
+	<tag name="header" highlight="tag" autocomplete_append="&gt;" >
+	<reference>The <i>header</i> tag is the region of the language file that is always loaded, regardless if the language is used or not. </reference>
+		<context symbols="&gt;&lt;&amp;; &#9;&#10;&#13;">
+		<element idref="e.comment"/>
+		<element idref="e.entity" />
+		<tag name="mime" highlight="tag" autocomplete_append=" type=&quot;&quot; /&gt;" attributes="type" attribhighlight="attribute" attrib_autocomplete_append="=&quot;&quot;">
+		<reference>The <i>mime</i> tag should have attribute <i>type</i> which has the mime type. The mime type is used to find the correct language definition for a file in the editor. There can be multiple mime tags in the heading section.</reference>
+		</tag>
+		<tag name="option" highlight="tag" autocomplete_append=" name=&quot;&quot; /&gt;" attributes="default,description,name" attribhighlight="attribute" attrib_autocomplete_append="=&quot;&quot;">
+		<reference></reference>
+		</tag>
+		<tag name="highlight" highlight="tag" autocomplete_append=" name=&quot;&quot; style=&quot;&quot; /&gt;" attributes="name,style" attribhighlight="attribute" attrib_autocomplete_append="=&quot;&quot;">
+		<reference>The <i>highlight</i> tag should have attributes <i>name</i> and <i>style</i>. The tag links the types of elements that can be highlighted (called <i>highlights</i>) and <i>styles</i> that are used by multiple languages. Default styles are hardcoded in bftexdtview2_langmgr.c A user may override each highlight / style combination in the configuration and may change the looks of each style.</reference>
+		</tag>		
+		</context>
+	</tag>
+	<tag name="properties" highlight="tag" autocomplete_append="&gt;&#10;&lt;/properties&gt;" autocomplete_backup_cursor="13">
+		<context symbols="&gt;&lt;&amp;; &#9;&#10;&#13;" >
+			<element idref="e.comment"/>
+			<element idref="e.entity" />
+			<tag id="t.tagcomment" name="comment" highlight="tag" attributes="type,start,end,id" autocomplete_append=" type=&quot;&quot; start=&quot;&quot; /&gt;" attribhighlight="attribute" attrib_autocomplete_append="=&quot;&quot;">
+			<reference>The comment tag specifies which comment syntax is possible in this language. This is used by the 'toggle comment' feature. In some languages this is context specific (for example Javascript inside HTML has a different comment than HTML). The id attribute can be used to set a certain comment type for a certain context.</reference>
+			</tag>
+			<tag name="smartindent" highlight="tag" attributes="characters" autocomplete_append=" characters=&quot;&quot; /&gt;" attribhighlight="attribute" attrib_autocomplete_append="=&quot;&quot;"/>
+			<tag name="smartoutdent" highlight="tag" attributes="characters" autocomplete_append=" characters=&quot;&quot; /&gt;" attribhighlight="attribute" attrib_autocomplete_append="=&quot;&quot;"/>
+			<tag name="default_spellcheck" highlight="tag" attributes="enabled,spell_decode_entities" autocomplete_append=" enabled=&quot;1&quot; /&gt;" attribhighlight="attribute" attrib_autocomplete_append="=&quot;1&quot;"/>
+		</context>
+	</tag>
+	<tag name="definition" highlight="tag" autocomplete_append="&gt;">
+	<reference>The <i>definition</i> tag is the region of the language file that actually defines the language. This region is only loaded when a file of this type is opened in the editor.</reference>
+		<context symbols="&gt;&lt;&amp;; &#9;&#10;&#13;" >
+		<element idref="e.comment"/>
+		<element idref="e.entity" />
+		<tag name="context" id="t.context" highlight="tag" autocomplete_append=" symbols=&quot;&quot; &gt;" attributes="id,idref,symbols,highlight,commentid_block,commentid_line" attribhighlight="attribute" attrib_autocomplete_append="=&quot;&quot;">
+			<reference>Every definition starts with a context. The most important attribute of a context are the symbols. Symbols is a string with all characters that may be at the start or end of a pattern (for example whitespace in most programming languages, or &lt; and &gt; in XML, SGML and HTML), or characters that are a pattern themselves (for example a bracket [ ).</reference>
+			<context symbols="&gt;&lt;&amp;; &#9;&#10;&#13;">
+			<element idref="e.comment"/>
+			<element idref="e.entity" />
+			<tag id="t.element" name="element" highlight="pattern-tag" autocomplete_append=" pattern=&quot;&quot; /&gt;" attributes="id,idref,pattern,starts_block,ends_block,ends_context,highlight,blockstartelement,blockhighlight,class,notclass,is_regex,case_insens,autocomplete,autocomplete_append,autocomplete_string,autocomplete_backup_cursor,mayfold,identifier_mode" attribhighlight="attribute" attrib_autocomplete_append="=&quot;&quot;"  autocomplete_backup_cursor="4">
+			<reference>Element is an actual language element that is syntax highlighted, autocompleted or has reference information. The most important attribute is pattern. The pattern may be a keyword (such as <b>function</b>) or a regular expression pattern (such as <b>[0-9]+</b>) if attribute is_regex is set to 1.  </reference>
+				<context id="c.innerpattern" symbols="&gt;&lt;&amp;; &#9;&#10;&#13;">
+					<element idref="e.comment"/>
+					<element idref="e.entity" />
+					<tag name="reference" highlight="tag" autocomplete_append="&gt;&lt;/reference&gt;">
+						<reference>reference is a tag that can be added to tag or to element. The text within the reference opening/closing is the reference information about the pertinent tag or element. Simple layout is available because the string is passed to Pango.</reference>
+					</tag>
+					<tag idref="t.context" />
+				</context>
+			</tag>
+			<tag id="t.tag" name="tag" highlight="pattern-tag" autocomplete_append=" name=&quot;&quot; /&gt;" attributes="id,idref,name,highlight,class,notclass,attributes,autocomplete,autocomplete_append,autocomplete_backup_cursor,attribhighlight,attrib_autocomplete_append,attrib_autocomplete_backup_cursor,case_insens,sgml_shorttag,no_close" attribhighlight="attribute" attrib_autocomplete_append="=&quot;&quot;">
+			<reference>tag is added for convenience. Everything within tag is possible with a combination of multiple element and context tags.  </reference>
+				<context idref="c.innerpattern" />
+			</tag>
+			<tag name="group" id="t.group" highlight="tag" autocomplete_append="&gt;" attributes="highlight,autocomplete,autocomplete_append,autocomplete_backup_cursor,class,notclass,case_insens,is_regex,attrib_autocomplete_append,attrib_autocomplete_backup_cursor,attribhighlight,no_close,sgml_shorttag" attribhighlight="attribute" attrib_autocomplete_append="=&quot;&quot;">
+			<reference>group is a tag that can be used to group multiple tags or multiple elements that share the same attribute values for the attributes highlight, autocomplete, autocomplete_append, class, case_insens, is_regex, attrib_autocomplete_append or attribhighlight. These attributes are then only set for the group tag, and not for the elements or tags immediately within this group tag.</reference>
+				<context id="c.group" symbols="&gt;&lt;&amp;; &#9;&#10;&#13;">
+				<element idref="e.comment"/>
+				<element idref="e.entity" />
+				<tag idref="t.element"/>
+				<tag idref="t.tag"/>
+				<tag idref="t.group"/>
+				</context>
+			</tag>			
+			</context>
+		</tag>
+		</context>
+	</tag>
+	</context>
+</tag>
+</context>
+</definition>
+</bflang>

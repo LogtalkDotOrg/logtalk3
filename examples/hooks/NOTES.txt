@@ -1,0 +1,16 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+To load this example and for sample queries, please see the SCRIPT.txt file.
+
+This folder contains a very simple example of using the Logtalk compiler 
+hook support to (1) expand abbreviations in info/1 directives; (2) convert
+write/1 goals into write_term/3 goals where the terms written are quoted
+and pre-processed by using numbervars/3.

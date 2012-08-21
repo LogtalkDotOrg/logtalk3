@@ -1,0 +1,123 @@
+/*
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  This file is part of Logtalk <http://logtalk.org/>  
+%  Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
+%
+%  This program is free software: you can redistribute it and/or modify
+%  it under the terms of the GNU General Public License as published by
+%  the Free Software Foundation, either version 3 of the License, or
+%  (at your option) any later version.
+%  
+%  This program is distributed in the hope that it will be useful,
+%  but WITHOUT ANY WARRANTY; without even the implied warranty of
+%  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%  GNU General Public License for more details.
+%  
+%  You should have received a copy of the GNU General Public License
+%  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+%  
+%  Additional licensing terms apply per Section 7 of the GNU General
+%  Public License 3. Consult the "LICENSE.txt" file for details.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+
+
+body {
+	color: black;
+	font-size: 12pt;
+	font-family: verdana, arial, sans-serif;
+	background: white;
+	margin: 12pt;
+}
+
+.navtop {
+	font-size: 9pt;
+	text-align: right;
+	border-color: #000000;
+	border-width: 1pt 0pt 0pt 0pt;
+	border-style: solid;
+	padding: 3pt 0pt 12pt 0pt;
+}
+
+.toc-top-left, .toc-top-right, .toc-bottom-left, .toc-bottom-right {
+	display: none;
+}
+
+.top-left, .top-right, .bottom-left, .bottom-right {
+	display: none;
+}
+
+.footer {
+	font-size: 9pt;
+	margin-top: 24pt;
+	padding: 3pt 0pt 18pt 0pt;
+	border-width: 1pt 0pt 0pt 0pt;
+	border-style: solid;
+}
+
+.navbottom {
+	text-align: right;
+	float: right;
+	position: relative;
+	width: 50%;
+}
+
+.copyright {
+	text-align: left;
+	float: left;
+	position: relative;
+	width: 50%;
+}
+
+.toc {
+}
+
+.toc-entries {
+}
+
+.leader {
+	display: none;
+}
+
+.page-ref {
+	display: none;
+}
+
+a {
+	text-decoration: none;
+	color: #bb0000;
+	outline: none;
+}
+
+a:hover {
+	color: #bb0000;
+	background: #c8c7cc;
+}
+
+
+pre, code, .code, .codenp {
+	color: black;
+	font-family: Monaco, 'Courier New', Courier, monospace;
+	font-size: 10pt;
+}
+
+a > code {
+	color: #bb0000;
+	font-family: Monaco, 'Courier New', Courier, monospace;
+	font-size: 10pt;
+}
+
+code {
+	font-size: 10pt;
+}
+
+pre {
+	font-size: 10pt;
+	padding: 6pt 24pt 6pt 24pt;
+}
+
+dl {
+	padding-left: 2em;
+}

@@ -1,0 +1,55 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% load the example:
+
+| ?- logtalk_load(tak(loader)).
+...
+
+% NOTE: the example queries below use a SWI-Prolog proprietary predicate 
+% time/1 in order to get accurate goal times. This predicate is also found 
+% on recent development versions of YAP and XSB. For other Prolog compilers, 
+% replace the time/1 call by any appropriate timing calls (e.g. cputime/0).
+
+
+% single-threaded version:
+
+| ?- time(tak(1)::tak(18, 12, 6, R)).
+% 254,476 inferences, 0.06 CPU in 0.07 seconds (91% CPU, 4241267 Lips)
+
+R = 7
+yes
+
+
+% multi-threaded version:
+
+| ?- time(tak(3)::tak(18, 12, 6, R)).
+% 714 inferences, 0.06 CPU in 0.05 seconds (121% CPU, 11900 Lips)
+
+R = 7
+yes
+
+
+% single-threaded version:
+
+| ?- time(tak(1)::tak(21, 14, 7, R)).
+% 1,583,068 inferences, 0.52 CPU in 0.61 seconds (86% CPU, 3044362 Lips)
+
+R = 14
+yes
+
+
+% multi-threaded version:
+
+| ?- time(tak(3)::tak(21, 14, 7, R)).
+% 106 inferences, 0.48 CPU in 0.38 seconds (127% CPU, 221 Lips)
+
+R = 14
+yes

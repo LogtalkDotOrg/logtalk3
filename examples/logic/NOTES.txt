@@ -1,0 +1,37 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+To load this example and for sample queries, please see the SCRIPT 
+file.
+
+This folder contains an object which implements a translator from 
+first-order predicate logic propositions to conjunctive normal form 
+and to clausal form. The translator code is partially based on code 
+published in the book "Programming in Prolog" by W. F. Clocksin and 
+C. S. Mellish.
+
+The following operators are used for representing logic connectives:
+
+	negation: ~
+	disjunction: v
+	conjunction: &
+	implication: =>
+	equivalence: <=>
+
+Quantifiers are represented using the following notation:
+
+	universal: all(X, P)
+	existential: exists(X, P)
+
+The two main object predicates are translate/2 and step_by_step/2.
+The first predicate, translate/2, translate a logic proposition to 
+a list of clauses. The second predicate, step_by_step/2, performs 
+the same translations as translate/2 but also prints the results 
+of each conversion step.

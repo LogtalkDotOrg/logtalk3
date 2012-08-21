@@ -1,0 +1,44 @@
+digraph G {
+rankdir=BT
+ranksep=1.25
+compound=true
+clusterrank=local
+labeljust=l
+margin=1.0
+fontname="Courier"
+fontsize=10
+fontcolor=snow4
+pencolor=snow4
+node [style=filled,fillcolor=white,fontname="Courier",fontsize=9]
+edge [fontname="Courier",fontsize=9]
+label="Generated on 2011/5/24, 15:27:11"
+subgraph "cluster_/Users/pmoura/logtalk/examples/parametric/" {
+bgcolor=snow2
+label="/Users/pmoura/logtalk/examples/parametric/"
+subgraph "cluster_parametric.lgt" {
+bgcolor=snow
+label="parametric.lgt"
+"[_|_]" [shape=box,label="[_|_]\n\nlast/1\nmember/1\nnextto/2"]
+"[]" [shape=box,label="[]\n"]
+"[]" -> "[_|_]" [arrowhead=vee,label="extends"]
+"date(Year,Month,Day)" [shape=box,label="date(Year,Month,Day)\n\nyear/1\nmonth/1\nday/1\ntoday/0\nleap_year/0"]
+"time(Hours,Mins,Secs)" [shape=box,label="time(Hours,Mins,Secs)\n\nhours/1\nmins/1\nsecs/1\nnow/0"]
+"rectangle(Width,Height,X,Y)" [shape=box,label="rectangle(Width,Height,X,Y)\n\ninit/0\narea/1\nmove/3\nposition/2"]
+"person(Name,Age)" [shape=box,label="person(Name,Age)\n\ngrow_older/1"]
+"employee(Name,Age,Salary)" [shape=box,label="employee(Name,Age,Salary)\n\ngive_raise/2"]
+"employee(Name,Age,Salary)" -> "person(Name,Age)" [arrowhead=vee,label="extends"]
+"speech(Season,Event)" [shape=box,label="speech(Season,Event)\n\nadvice/0"]
+"speech(Season,Event)" -> "dress(Season)" [arrowhead=box,label="imports"]
+"speech(Season,Event)" -> "speech(Event)" [arrowhead=box,label="imports"]
+"dress(Season)" [shape=component,label="dress(Season)\n\nclothes/1"]
+"speech(Event)" [shape=component,label="speech(Event)\n\nspeech/1"]
+}
+
+subgraph "cluster_loader.lgt" {
+bgcolor=snow
+label="loader.lgt"
+}
+
+}
+
+}

@@ -1,0 +1,80 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example and the required library files:
+
+| ?- logtalk_load(points(loader)).
+...
+
+
+% let's start with a simple point:
+
+| ?- point::new(Point, [position-(1, 3)]), Point::(print, move(7, 4), print).
+
+p1 @ (1, 3)
+p1 @ (7, 4)
+
+Point = p1 ? 
+
+yes
+
+
+% same problem but with bounds on coordinate values:
+
+| ?- bounded_point::new(Point, [position-(1, 3), bounds(x)-(0, 13), bounds(y)-(-7, 7)]), Point::(print, move(7, 4), print).
+
+bounds(x) : 0,13
+bounds(y) : -7,7
+bp2 @ (1, 3)
+bounds(x) : 0,13
+bounds(y) : -7,7
+bp2 @ (7, 4)
+
+Point = bp2 ? 
+
+yes
+
+
+% same problem but storing the history of coordinate values:
+
+| ?- history_point::new(Point, [position-(1, 3)]), Point::(print, move(7, 4), print).
+
+location history: []
+hp3 @ (1, 3)
+location history: [(1,3)]
+hp3 @ (7, 4)
+
+Point = hp3 ? 
+
+yes
+
+
+% same problem but with bounds on coordinate values and storing past values:
+
+| ?- bounded_history_point::new(Point, [position-(1, 3), bounds(x)-(0, 13), bounds(y)-(-7, 7)]), Point::(print, move(7, 4), print).
+
+bounds(x) : 0,13
+bounds(y) : -7,7
+location history: []
+bhp4 @ (1, 3)
+bounds(x) : 0,13
+bounds(y) : -7,7
+location history: [(1,3)]
+bhp4 @ (7, 4)
+
+Point = bhp4 ? 
+
+yes
+
+
+% clean up instances:
+
+| ?- point::delete_all, bounded_point::delete_all, history_point::delete_all, bounded_history_point::delete_all.
+yes

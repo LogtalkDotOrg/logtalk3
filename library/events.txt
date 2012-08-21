@@ -1,0 +1,27 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+To load all entities in this library load the events_loader.lgt utility 
+file:
+
+	| ?- logtalk_load(library(events_loader)).
+
+The objects event_registry, before_event_registry, and after_event_registry 
+implement convenient predicates for registering before and after events.
+
+The outdated protocol event_handlersp declares the two basic event handler 
+predicates (before/3 and after/3). New code should use instead the built-in 
+protocol "monitoring". You will need to refer this protocol in your objects
+if you want to use the super control structure (^^/1) with these predicates.
+
+The monitor object implements more sophisticated event handling predicates.
+
+Some of the objects assume that the chosen Prolog compiler defines the 
+usual sort/2 built-in predicate.

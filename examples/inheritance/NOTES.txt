@@ -1,0 +1,41 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+To load this example and for sample queries, please see the SCRIPT.txt file.
+
+This folder contains examples of public, protected, and private inheritance,
+for both prototype-based and class-based hierarchies.
+
+This example defines a category named "predicates" which specifies three 
+predicates, one public, one protected, and one private. This category is 
+imported by the root objects: "parent" for the prototype hierarchy and 
+"root" for the class hierarchy. Each root object have a set of three 
+descendants, each one using one of the inheritance types.
+
+The two object hierarchies are organized as follows:
+
+	parent
+		prototype1				% public inheritance
+			descendant1
+		prototype2				% protected inheritance
+			descendant2
+		prototype3				% private inheritance
+			descendant3
+
+	root
+		subclass1				% public inheritance
+			instance1
+		subclass2				% protected inheritance
+			instance2
+		subclass3				% private inheritance
+			instance3
+
+A second category named "interface", imported by all objects except the 
+sub-class instances, allows us to query the objects about their interfaces.

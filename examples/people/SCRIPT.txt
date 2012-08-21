@@ -1,0 +1,61 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% load the example:
+
+| ?- logtalk_load(people(loader)).
+...
+
+
+% create two new persons:
+
+| ?- person::new(Id1, 'Oscar the Grouch', '1969/11/10'), person::new(Id2, 'Cookie Monster', '1969/12/02').
+
+Id1 = o1,
+Id2 = o2
+yes
+
+
+% print a description of a person:
+
+| ?- o2::print.
+
+Name:   Cookie Monster
+Birth:  1969/12/02
+yes
+
+
+% create a new teacher and a new student:
+
+| ?- teacher::new(Id3, 'Gordon Robinson', '1969/11/10', '3.2'), student::new(Id4, 'Roosevelt Franklin', '1969/11/10', 'Blue').
+
+Id3 = o3,
+Id4 = o4
+yes
+
+% print a description of a student:
+
+
+| ?- o4::print.
+
+Name:   Roosevelt Franklin
+Birth:  1969/11/10
+Dorm:   Blue
+yes
+
+
+% try the alternative object representations using the object proxies:
+
+| ?- {student('Roosevelt Franklin', _, _)}::print.
+
+Name:   Roosevelt Franklin
+Birth:  1969/11/10
+Dorm:   Blue
+yes

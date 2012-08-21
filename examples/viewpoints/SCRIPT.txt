@@ -1,0 +1,112 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example:
+
+| ?- logtalk_load(viewpoints(loader)).
+...
+
+
+% we can start by asking joe its age:
+
+| ?- joePerson::age(Age).
+
+Age = 30
+yes
+
+
+% the same question could be made via any of its viewpoints:
+
+| ?- joeSportsman::age(Age).
+
+Age = 30
+yes
+
+
+% now let's tell joe to get older:
+
+| ?- joePerson::getOlder.
+
+yes
+
+
+% we can verify the effect of the above message from any of the viewpoints:
+
+| ?- joeChessPlayer::age(Age).
+
+Age = 31
+yes
+
+
+% because the growOld/0 and the age/1 predicates are implemented using 
+% property sharing, we can send the getOlder/0 message to any viewpoint:
+
+| ?- joeEmployee::getOlder.
+
+yes
+
+
+% we can check this by asking joe its age:
+
+
+| ?- joePerson::age(Age).
+
+Age = 32
+yes
+
+
+% as you can see, although the modification message have been sent to a 
+% descendant, its the predicate age/1 in the parent that got updated
+
+
+% to illustrate value sharing we use a couple of predicates, score/1 and
+% setScore/0, defined in joePerson:
+
+
+| ?- joePerson::score(Score).
+
+Score = 0
+yes
+
+
+% initially, score/1 is only defined for joePerson, so every descendant 
+% or viewpoint will share its value/definition:
+
+| ?- joeEmployee::score(Score).
+
+Score = 0
+yes
+
+
+% but if we decide to increment the counter by sending the setScore/0 message to a descendant
+% (don't use message broadcasting syntax in order to workaround a XSB parser bug):
+
+| ?- joeChessPlayer::setScore(2200), joeChessPlayer::score(Score).
+
+Score = 2200
+yes
+
+
+% then the descendant will now have a local definition for counter/1,
+% independent of the definition in its parent, joePerson:
+
+| ?- joePerson::score(Score).
+
+Score = 0
+yes
+
+
+% the other descendants/viewpoints will continue to share the definition 
+% in joePerson:
+
+| ?- joeSportsman::score(Score).
+
+Score = 0
+yes

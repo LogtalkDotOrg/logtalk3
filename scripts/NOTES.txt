@@ -1,0 +1,95 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Additional licensing terms apply per Section 7 of the GNU General
+Public License 3. Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+This directory contains some shell scripts used for Logtalk packaging, 
+installation, and integration with Prolog compilers. Those with extension 
+`.sh` are bash shells scripts for MacOS X, Linux, and similar systems.
+Those with extension `.js` are JScript command-line scripts for Windows;
+they require WSH 5.6 or later version to be installed and should be run
+using `cscript.exe` from a DOS command line shell (you may download WSH 5.6
+from `http://msdn.microsoft.com/downloads/list/webdev.asp`).
+
+- `build_release.sh`  
+	helper script for building most of the distribution files of a new 
+	Logtalk release
+
+- `cleandist.sh`  
+	script for cleaning a Logtalk distribution in preparation for packaging
+
+- `install.sh`  
+	shell script for installing Logtalk in a system-wide location for Unix 
+	and Unix-like operating systems (must be run from this directory by a 
+	user with administration privileges; accepts as an optional argument 
+	a prefix for the installation directory: default is `/opt/local` on 
+	Darwin (MacOS X), `/usr` on Debian systems, and `/usr/local` on other 
+	POSIX systems, resulting in Logtalk being installed in `$prefix/share`
+	with useful scripts written to `$prefix/bin`, which should be in your
+	path)
+
+- `uninstall.sh`  
+	shell script for de-installing Logtalk in Unix and Unix-like operating 
+	systems (must be run from this directory by a user with administration 
+	privileges)
+
+- `logtalk_version_select.sh`  
+	experimental shell script for switching between installed Logtalk
+	versions for POSIX operating-systems; works with version 2.36.0 or
+	later; doesn't change the Logtalk user folder; this script is loosely
+	based on the `python_select` script
+
+- `logtalk_backend_select.sh`  
+	experimental shell script for defining an alias, logtalk, to a chosen
+	back-end Prolog integration script for POSIX operating-systems; the
+	alias is created in same directory where the `*lgt` integration scripts
+	are found
+
+- `debian`  
+	directory containing support files for building a Debian package
+	(work in progress; experimental)
+
+- `freedesktop`  
+	directory containing support files for adding the Logtalk mime-type
+	to the freedesktop.org shared mime-info database
+
+- `linux`  
+	directory containing files used when building
+
+- `macosx`  
+	directory containing files used when building MacOS X installer 
+	packages
+
+- `windows`  
+	directory containing files used when building Windows GUI installers
+
+- `logtalk_user_setup.sh`  
+- `logtalk_user_setup.js`  
+	end-user scripts for copying the Logtalk user-modifiable files and 
+	directories to the location pointed by the environment variable 
+	LOGTALKUSER (defaults to `~/logtalk` on POSIX operating-systems 
+	and to `My Documents\Logtalk` on Windows when the variable is not 
+	defined); must be run by each end-user in order to ensure proper 
+	permissions for the copied files; the `LOGTALKHOME` environment 
+	variable must be defined (pointing to the Logtalk installation 
+	directory)
+- `logtalk_user_setup.bat`  
+    wrapper for the logtalk_user_setup.js script to simplify its use

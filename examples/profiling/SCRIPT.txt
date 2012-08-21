@@ -1,0 +1,127 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example and the required library files:
+
+| ?- logtalk_load(profiling(loader)).
+...
+
+
+% turn event support on for messages sent at the command-line
+% (i.e. for messages sent from the pseudo-object "user"):
+
+| ?- set_logtalk_flag(events, allow).
+
+yes
+
+
+%% message_counter example
+
+
+% choose an object to spy:
+
+| ?- message_counter::set_spy_point(_, list, _, _).
+yes
+
+
+% activate the monitor:
+
+| ?- message_counter::activate_monitor.
+yes
+
+
+% send some messages to the spied object; get all the answers for ancestor/1:
+
+| ?- list::empty([]).
+yes
+
+| ?- list::member(X, [1, 2, 3]).
+X = 1 ? ;
+X = 2 ? ;
+X = 3 ? ;
+no
+
+
+% print a report of the data collected by the monitor:
+
+| ?- message_counter::report.
+list
+  total of calls: 2
+  total of exits: 4
+
+  empty/1
+    calls: 1
+    exits: 1
+
+  member/2
+    calls: 1
+    exits: 3
+
+yes
+
+
+% stop and reset the message counter monitor:
+
+| ?- message_counter::stop.
+yes
+
+
+
+%% stop_watch example
+
+
+% choose a pair object/message to spy:
+
+| ?- stop_watch::set_spy_point(_, list, length(_, _), _).
+yes
+
+
+% activate the monitor:
+
+| ?- stop_watch::activate_monitor.
+yes
+
+
+% send a message to the spied object:
+
+| ?- list::length([1, 2, 3], Length).
+list <-- length([1,2,3],_277) from user
+STARTING at 755.69000005 seconds
+list <-- length([1,2,3],3) from user
+ENDING at 755.69000235 seconds
+
+Length = 3
+
+yes
+
+
+% clean up:
+
+| ?- stop_watch::reset_monitor.
+yes
+
+
+
+%% timer example
+
+
+% try a message 1000 times and return the average time:
+
+| ?- timer::timer(list::length([1, 2, 3], _), 1000, Time).
+Time = 0.00003
+
+yes
+
+
+% turn event support off:
+
+| ?- set_logtalk_flag(events, deny).
+
+yes

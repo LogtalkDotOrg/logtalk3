@@ -1,0 +1,35 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+This directory contains files that provides basic syntax coloring 
+for editing Logtalk source files with Crimson Editor V3.60 or later 
+version:
+
+	http://www.crimsoneditor.com/
+
+To install these files do the following:
+
+1. Copy the file extension.lgt to the "link" folder on the Crimson
+installation directory.
+
+2. Copy the files logtalk.key and logtalk.spc to the "spec" folder on 
+the Crimson installation directory.
+
+Note: The Crimson installation directory is usually:
+
+	C:\Program Files\Crimson Editor
+
+Logtalk source files (including the library entities and the programming
+examples) are formatted using tabs (the recommended setting is a tab width
+equivalent to 4 spaces); you may set the tab width on the editor preference
+panel.
+
+
+THESE SYNTAX COLORING SUPPORT FILES ARE UNDER DEVELOPMENT.

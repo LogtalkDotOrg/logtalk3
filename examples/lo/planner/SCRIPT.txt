@@ -1,0 +1,23 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example:
+
+| ?- logtalk_load(lo_planner(loader)).
+...
+
+
+% plan a trip from london to the aiai conference in edinburgh:
+
+| ?- plan(london)::from(imperial, aiai, L).
+
+L = [[taxi(imperial,lhr)]-[fly(lhr,edin)]-[taxi(edin,aiai)]] ? 
+
+yes

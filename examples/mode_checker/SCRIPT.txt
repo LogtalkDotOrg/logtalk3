@@ -1,0 +1,62 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by compiling and loading the Prolog module files as objects:
+
+| ?- logtalk_load(modules(loader)).
+...
+
+
+% call one of the module exported predicates using message sending:
+
+| ?- test::names.
+
+paulo
+carlos
+helena
+yes
+
+
+% same goal as above but the call is made using a meta-predicate
+% imported from other module:
+
+| ?- test::test.
+
+paulo
+carlos
+helena
+yes
+
+
+% test the compilation of the module export/1 directive; module 
+% exported predicates become public predicates:
+
+| ?- exports::current_predicate(Pred).
+
+Pred = p/1
+yes
+
+| ?- exports::predicate_property(p(_), Prop).
+
+Prop = public ;
+Prop = static ;
+Prop = declared_in(exports) ;
+Prop = defined_in(exports)
+yes
+
+
+% call the module exported/public predicate using message sending:
+
+| ?- exports::p(N).
+
+N = 1 ;
+N = 2 ;
+N = 3
+yes

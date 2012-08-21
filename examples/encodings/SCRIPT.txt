@@ -1,0 +1,111 @@
+﻿________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example:
+
+| ?- logtalk_load(encodings(loader)).
+...
+
+
+% query the table of "Hello world!" messages:
+
+| ?- babel::hello_world(Code, Text).
+
+Code = el
+Text = 'Γειάσου κόσμος!' ;
+
+Code = en
+Text = 'Hello world!' ;
+
+Code = es
+Text = '¡Hola mundo!' ;
+
+Code = ja
+Text = 'こんにちは世界!' ;
+
+Code = ko
+Text = '여보세요 세계!' ;
+
+Code = nl
+Text = 'Hallo wereld!' ;
+
+Code = pt
+Text = 'Olá mundo!' ;
+
+Code = ru
+Text = 'Здравствулте! мир!' ;
+
+Code = zh
+Text = '你好世界!'
+
+Yes
+
+
+% query the table of names:
+
+| ?- latin::name(Name).
+
+Name = 'António Simões' ;
+
+Name = 'Cátia Conceição' ;
+
+Name = 'João Raínho' ;
+
+Name = 'Luís Araújo'
+
+Yes
+
+
+% query the table of countries:
+
+| ?- asian::country(Country, Name, Capital).
+
+Name = '中国'
+Capital = '北京'
+Country = china ;
+
+Name = '日本'
+Capital = '東京'
+Country = japan ;
+
+Name = 'Монгол Улс'
+Capital = 'Улаанбатаар'
+Country = mongolia ? ;
+
+Name = '臺灣'
+Capital = '臺北'
+Country = taiwan ;
+
+Name = 'Тоҷикистон'
+Capital = 'Душанбе'
+Country = tajikistan
+
+Yes
+
+
+% query the table of greek mythology divinities:
+
+| ?- mythology::divinity(English, Greek).
+Greek = 'Ηρα'
+English = hera ? ;
+
+Greek = 'Καλυψω'
+English = kalypso ? ;
+
+Greek = 'Μορφευς'
+English = morpheus ? ;
+
+Greek = 'Ποσειδων'
+English = poseidon ? ;
+
+Greek = 'Ζευς'
+English = zeus
+
+Yes

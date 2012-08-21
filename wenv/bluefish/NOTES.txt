@@ -1,0 +1,26 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+This directory contains a file that provides code folding and syntax 
+highlighting for editing Logtalk source files with the text editor 
+Bluefish 1.3.7 or later version:
+
+	http://bluefish.openoffice.nl/index.html
+
+This support file is dual-licensed under the GNU General Public License 3
+and the Bluefish license.
+
+To install, copy the file "logtalk.bflang2" to the following system-wide
+directory:
+	
+	${prefix}/share/bluefish/bflang/
+
+The ${prefix} can be "/usr", "/usr/local", or "/opt", depending on your 
+system configuration.

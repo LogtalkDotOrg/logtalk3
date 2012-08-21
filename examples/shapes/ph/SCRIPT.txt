@@ -1,0 +1,50 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example:
+
+| ?- logtalk_load(shapes_ph(loader)).
+...
+
+
+% try some simple queries:
+
+
+| ?- square::nsides(N).
+
+N = 4
+yes
+
+
+| ?- square::area(A).
+
+A = 1
+yes
+
+
+% don't use message broadcasting syntax in order to workaround a XSB parser bug
+
+| ?- q1::color(Color), q1::side(Side), q1::position(X, Y).
+
+Color = red
+Side = 1
+X = 0
+Y = 0
+yes
+
+
+% don't use message broadcasting syntax in order to workaround a XSB parser bug
+
+| ?- q2::side(Side), q2::area(Area), q2::perimeter(Perimeter).
+
+Side = 3
+Area = 9
+Perimeter = 12
+yes

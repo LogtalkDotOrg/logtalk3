@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<!--
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  
+%  This file is part of Logtalk <http://logtalk.org/>    
+%  Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
+%  
+%  Logtalk is free software. You can redistribute it and/or modify it under
+%  the terms of the FSF GNU General Public License 3  (plus some additional
+%  terms per section 7).        Consult the "LICENSE.txt" file for details.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="application/xml+xhtml; charset=utf-8" />
+	<title>Logtalk entity directive: object/1-5</title>
+	<link rel="stylesheet" href="../../screen.css" type="text/css" media="screen"/>
+	<link rel="stylesheet" href="../../print.css" type="text/css" media="print"/>
+</head>
+
+<body>
+
+<div class="top-left">Logtalk reference manual</div> 
+<div class="top-right">Entity directive: object/1-5</div>
+<div class="bottom-left"><span class="page"/></div> 
+<div class="bottom-right"><span class="page"/></div>
+<div class="navtop"><a href="../../index.html">Contents</a> &gt; <a href="../index.html">Reference Manual</a> &gt; <a href="../index.html#directives">Directives</a> &gt; object/1-5</div>
+
+<h2 id="directives_object1_5" class="codenp">object/1-5</h2>
+
+<h4>Description</h4>
+
+<p>
+<em>Stand-alone objects (prototypes)</em>
+</p>
+<pre>object(Object)
+
+object(Object,
+    implements(Protocols))
+
+object(Object,
+    imports(Categories))
+
+object(Object,
+    implements(Protocols),
+    imports(Categories))</pre>
+<p>
+<em>Prototype extensions</em>
+</p>
+<pre>object(Object,
+    extends(Objects))
+
+object(Object,
+    implements(Protocols),
+    extends(Objects))
+
+object(Object,
+    imports(Categories),
+    extends(Objects))
+
+object(Object,
+    implements(Protocols),
+    imports(Categories),
+    extends(Objects))</pre>
+<p>
+	<em>Class instances</em>
+</p>
+<pre>object(Object,
+    instantiates(Classes))
+
+object(Object,
+    implements(Protocols),
+    instantiates(Classes))
+
+object(Object,
+    imports(Categories),
+    instantiates(Classes))
+
+object(Object,
+    implements(Protocols),
+    imports(Categories),
+    instantiates(Classes))</pre>
+<p>
+	<em>Classes</em>
+</p>
+<pre>object(Object,
+    specializes(Classes))
+
+object(Object,
+    implements(Protocols),
+    specializes(Classes))
+
+object(Object,
+    imports(Categories),
+    specializes(Classes))
+
+object(Object,
+    implements(Protocols),
+    imports(Categories),
+    specializes(Classes))</pre>
+<p>
+<em>Classes with metaclasses</em>
+</p>
+<pre>object(Object,
+    instantiates(Classes),
+    specializes(Classes))
+
+object(Object,
+    implements(Protocols),
+    instantiates(Classes),
+    specializes(Classes))
+
+object(Object,
+    imports(Categories),
+    instantiates(Classes),
+    specializes(Classes))
+
+object(Object,
+    implements(Protocols),
+    imports(Categories),
+    instantiates(Classes),
+    specializes(Classes))</pre>
+<p>
+Starting object directive.
+</p>
+
+<h4>Template and modes</h4>
+
+<p>
+<em>Stand-alone objects (prototypes)</em>
+</p>
+<pre>object(+object_identifier)
+
+object(+object_identifier,
+    implements(+implemented_protocols))
+
+object(+object_identifier,
+    imports(+imported_categories))
+
+object(+object_identifier,
+    implements(+implemented_protocols),
+    imports(+imported_categories))</pre>
+<p>
+<em>Prototype extensions</em>
+</p>
+<pre>object(+object_identifier,
+    extends(+extended_objects))
+
+object(+object_identifier,
+    implements(+implemented_protocols),
+    extends(+extended_objects))
+
+object(+object_identifier,
+    imports(+imported_categories),
+    extends(+extended_objects))
+
+object(+object_identifier,
+    implements(+implemented_protocols),
+    imports(+imported_categories),
+    extends(+extended_objects))</pre>
+<p>
+<em>Class instances</em>
+</p>
+<pre>object(+object_identifier,
+    instantiates(+instantiated_objects))
+
+object(+object_identifier,
+    implements(+implemented_protocols),
+    instantiates(+instantiated_objects))
+
+object(+object_identifier,
+    imports(+imported_categories),
+    instantiates(+instantiated_objects))
+
+object(+object_identifier,
+    implements(+implemented_protocols),
+    imports(+imported_categories),
+    instantiates(+instantiated_objects))</pre>
+<p>
+<em>Classes</em>
+</p>
+<pre>object(+object_identifier,
+    specializes(+specialized_objects))
+
+object(+object_identifier,
+    implements(+implemented_protocols),
+    specializes(+specialized_objects))
+
+object(+object_identifier,
+    imports(+imported_categories),
+    specializes(+specialized_objects))
+
+object(+object_identifier,
+    implements(+implemented_protocols),
+    imports(+imported_categories),
+    specializes(+specialized_objects))</pre>
+<p>
+	<em>Class with metaclasses</em>
+</p>
+<pre>object(+object_identifier,
+    instantiates(+instantiated_objects),
+    specializes(+specialized_objects))
+
+object(+object_identifier,
+    implements(+implemented_protocols),
+    instantiates(+instantiated_objects),
+    specializes(+specialized_objects))
+
+object(+object_identifier,
+    imports(+imported_categories),
+    instantiates(+instantiated_objects),
+    specializes(+specialized_objects))
+
+object(+object_identifier,
+    implements(+implemented_protocols),
+    imports(+imported_categories),
+    instantiates(+instantiated_objects),
+    specializes(+specialized_objects))</pre>
+
+
+<h4>Examples</h4>
+
+<pre>:- object(list).
+
+:- object(list,
+    implements(listp)).
+
+:- object(list,
+    extends(compound)).
+
+:- object(list,
+    implements(listp),
+    extends(compound)).
+
+:- object(object,
+    imports(initialization),
+    instantiates(class)).
+
+:- object(abstract_class,
+    instantiates(class),
+    specializes(object)).
+
+:- object(agent,
+    imports(private::attributes)).</pre>
+
+<div class="footer">
+	<div class="copyright">
+		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
+		<span>Last updated on: December 11, 2006</span>
+	</div>
+	<div class="navbottom">
+		<span><a href="initialization1.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="protocol1_2.html">next</a></span><br/>
+		<span><a href="http://validator.w3.org/check/referer">XHTML</a> + <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a></span>
+	</div>
+</div>
+
+</body>
+
+</html>

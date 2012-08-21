@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE logtalk SYSTEM "logtalk.dtd">
+<?xml-stylesheet type="text/xsl" href="lgtxml.xsl"?>
+<logtalk>
+<entity>
+<name><![CDATA[meta]]></name>
+<type>object</type>
+<compilation>static, context_switching_calls</compilation>
+<comment><![CDATA[Some useful meta-predicates.]]></comment>
+<author><![CDATA[Paulo Moura]]></author>
+<version>4.0</version>
+<date>2011/1/18</date>
+</entity>
+<relations>
+<implements>
+<name><![CDATA[metap]]></name>
+<scope>public</scope>
+<file><![CDATA[metap_0]]></file>
+</implements>
+<alias>
+<name><![CDATA[metap]]></name>
+<original><![CDATA[map/2]]></original>
+<alternative><![CDATA[succeeds/2]]></alternative>
+</alias>
+<alias>
+<name><![CDATA[metap]]></name>
+<original><![CDATA[include/3]]></original>
+<alternative><![CDATA[filter/3]]></alternative>
+</alias>
+<alias>
+<name><![CDATA[metap]]></name>
+<original><![CDATA[fold_left/4]]></original>
+<alternative><![CDATA[foldl/4]]></alternative>
+</alias>
+<alias>
+<name><![CDATA[metap]]></name>
+<original><![CDATA[fold_right/4]]></original>
+<alternative><![CDATA[foldr/4]]></alternative>
+</alias>
+<alias>
+<name><![CDATA[metap]]></name>
+<original><![CDATA[scan_left/4]]></original>
+<alternative><![CDATA[scanl/4]]></alternative>
+</alias>
+<alias>
+<name><![CDATA[metap]]></name>
+<original><![CDATA[scan_right/4]]></original>
+<alternative><![CDATA[scanr/4]]></alternative>
+</alias>
+</relations>
+<predicates>
+<public>
+</public>
+<protected>
+</protected>
+<private>
+</private>
+</predicates>
+<operators>
+</operators>
+<remarks>
+</remarks>
+</logtalk>

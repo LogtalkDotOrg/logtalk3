@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
-This file is part of Logtalk (http://logtalk.org/)  
-Copyright (c) 1998-2012 Paulo Moura (pmoura@logtalk.org)  
+This file is part of Logtalk <http://logtalk.org/>  
+Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -85,7 +85,7 @@ with the following information:
 email address, first and last name, organization, organization type 
 (education, commercial, government, ...), Prolog compilers you use 
 (optional), platforms (mac, pc, unix,...) (optional), projects where 
-you intend to use Logtak (optional)
+you intend to use Logtalk (optional)
 
 
 4. SUPPORT
@@ -101,7 +101,7 @@ For support options, please consult the page:
 
 Logtalk can be installed either from sources by running a few shell scripts 
 or by using one of the provided installers, depending on your operating 
-system. For manual installation, see the file `INSTALL.txt` for detailed 
+system. For manual installation, see the file `INSTALL.md` for detailed 
 instructions.
 
 See the user manual for a description of the source files organization 
@@ -113,14 +113,14 @@ tabs (the recommended setting is a tab width equivalent to 4 spaces).
 6. CUSTOMIZATION
 ----------------
 
-The file `CUSTOMIZE.txt` provides detailed instructions for customizing the
+The file `CUSTOMIZE.md` provides detailed instructions for customizing the
 Logtalk installation and working environment.
 
 
 7. RUNNING
 ----------
 
-The file `QUICK_START.txt` provides quick instructions for those of you
+The file `QUICK_START.md` provides quick instructions for those of you
 in a hurry to run Logtalk, provided that your favorite Prolog compiler
 is supported.
 
@@ -130,7 +130,7 @@ is supported.
 
 The reference and user manuals and the tutorial are provided in XHTML format 
 and can be found in the `manuals` directory. PDF versions of the reference
-and user manualscan be downloaded from the Logtalk web site.
+and user manuals can be downloaded from the Logtalk web site.
 
 The file `RELEASE_NOTES.txt` contains descriptions of all Logtalk updates 
 since the first public version. Read it carefully if you have been using a 
@@ -144,7 +144,7 @@ can be found in the `library/docs` directory.
 ------------
 
 If you are upgrading from a previous Logtalk version, please check the file 
-`UPGRADING.txt` for instructions on how to upgrade your programs or your 
+`UPGRADING.md` for instructions on how to upgrade your programs or your 
 custom adapter files to run under this new version.
 
 

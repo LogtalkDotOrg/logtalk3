@@ -1,0 +1,14 @@
+Package: logtalk
+Version: 3.00.0
+Maintainer: Paulo Moura <pmoura@logtalk.org>
+Section: devel
+Priority: optional
+Architecture: all
+Essential: no
+Description: Open source object-oriented logic programming language.
+ Logtalk is an open source object-oriented logic programming language 
+ that can use most Prolog implementations as a back-end compiler.
+ As a multi-paradigm language, Logtalk includes support for both 
+ prototypes and classes, protocols (interfaces), component-based
+ programming through category-based composition, event-driven
+ programming, and high-level multi-threading programming.

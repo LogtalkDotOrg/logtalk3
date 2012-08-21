@@ -1,0 +1,97 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Additional licensing terms apply per Section 7 of the GNU General
+Public License 3. Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+This folder contains some useful objects, categories, and protocols. 
+
+To load a group of objects, protocols, and categories in this library 
+either change your Prolog working directory to this folder and then 
+compile and load the corresponding loader utility file or simply use 
+the notation `library(<loader file>)` as argument for the compiling
+and loading predicates. For example:
+
+	| ?- logtalk_load(library(random_loader)).
+
+Currently, there are ten groups of entities defined, each one with its 
+own loader and notes files:
+
+* dates
+	`dates_loader.lgt`
+	`dates.txt`
+
+* dependents
+	`dependents_loader.lgt`
+	`dependents.txt`
+
+* events
+	`events_loader.lgt`
+	`events.txt`
+
+* hierarchies
+	`hierarchies_loader.lgt`
+	`hierarchies.txt`
+
+* metapredicates
+	`metapredicates_loader.lgt`
+	`metapredicates.txt`
+
+* random
+	`random_loader.lgt`
+	`random.txt`
+
+* statistics
+	`statistics_loader.lgt`
+	`statistics.txt`
+
+* types
+	`types_loader.lgt`
+	`types.txt`
+
+There is also a file named all_loader.lgt that will load all entities in the 
+groups listed above. Simply type the goal:
+
+	| ?- logtalk_load(library(all_loader)).
+
+Specific notes about each group of objects, categories, and protocols can be 
+found in the corresponding `*.txt` files.
+
+Some of the files contained in this directory represent work in progress and 
+are not loaded by default by any loader utility file.
+
+Some of the code in this library is based on public domain Prolog code, in 
+particular, code adopted from the Edinburgh Prolog library. The definition 
+of predicate `reverse/2` in object list is from Richard O'Keefe and can be
+found in its book "The Craft of Prolog".
+
+All source files are formatted using tabs (the recommended setting is a tab
+width equivalent to 4 spaces).
+
+This folder includes a XHTML version of the library documentation on the
+directory `docs`. To regenerate documentation of the Logtalk libraries,
+start Logtalk with your favorite back-end Prolog compiler and type the
+query:
+
+    | ?- {library(all_loader)}.
+
+Next, run the command `lgt2html` on the "library" directory inside your
+Logtalk user directory to generate (X)HTML documentation or the command
+`lgt2pdf` to generate PDF documentation.

@@ -1,0 +1,357 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example:
+
+| ?- logtalk_load(lambdas(loader)).
+...
+
+
+% some sample queries using the call/N built-in methods (note that these
+% methods are private, hence the use of the context switching <</2 control
+% construct):
+
+| ?- logtalk << call([X,Y]>>(Y is X*X), 5, R).
+R = 25
+yes
+
+| ?- logtalk << call([Z]>>(call([X,Y]>>(Y is X*X), 5, R), Z is R*R), T).
+T = 625
+yes
+
+
+% some sample queries using the "metapredicates" library predicates:
+
+| ?- meta::map([X]>>(X>3),[4,5,9]).
+yes
+
+| ?- meta::map([X,Y]>>(X=A-B,Y=B-A), [1-a,2-b,3-c], Zs).
+Zs = [a-1,b-2,c-3]
+yes
+
+| ?- meta::map([X,B-A]>>(X=A-B), [1-a,2-b,3-c], Zs).
+Zs = [a-1,b-2,c-3]
+yes
+
+| ?- meta::map([A-B,B-A]>>true, [1-a,2-b,3-c], Zs).
+Zs = [a-1,b-2,c-3]
+yes
+
+| ?- meta::map([A-B]>>([B-A]>>true), [1-a,2-b,3-c], Zs).
+Zs = [a-1,b-2,c-3]
+yes
+
+| ?- Points = [(1,4),(2,5),(8,3)], meta::map([(X,Y),Z]>>(Z is sqrt(X*X + Y*Y)), Points, Distances).     
+
+Distances = [4.1231056256176606,5.3851648071345037,8.5440037453175304]
+Points = [(1,4),(2,5),(8,3)]
+yes
+
+| ?- Points = [(1,4),(2,5),(8,3)], meta::map([(X,Y)]>>([Z]>>(Z is sqrt(X*X + Y*Y))), Points, Distances).
+
+Distances = [4.1231056256176606,5.3851648071345037,8.5440037453175304]
+Points = [(1,4),(2,5),(8,3)]
+yes
+
+| ?- meta::map([[X,Y],Z]>>(Z is X*X + Y*Y), [[1,2],[3,4],[5,6]], Result).
+Result = [5,25,61]
+yes
+
+| ?- meta::map([[X,Y]]>>([Z]>>(Z is X*X + Y*Y)), [[1,2],[3,4],[5,6]], Result).
+Result = [5,25,61]
+yes
+
+| ?- Xsss = [[[1,2,3],[4]],[[5]]], meta::map(meta::map(meta::map([X,Y]>>(Y is X+3))), Xsss,  Ysss).
+Xsss = [[[1,2,3],[4]],[[5]]]
+Ysss = [[[4,5,6],[7]],[[8]]]
+yes
+
+| ?- meta::map([X,[X]]>>true,[1,2],Ys).     
+Ys = [[1],[2]]
+yes
+
+| ?- meta::map([X,[X]]>>true,Xs,[[1],[2]]).
+Xs = [1,2] ? 
+yes
+
+| ?- meta::map([N,M]>>(list::length(L, N), list::length([_|L], M)), [999,123],R).
+R = [1000,124]
+yes
+
+| ?- meta::map([N]>>([M]>>(list::length(L, N), list::length([_|L], M))), [999,123],R).
+R = [1000,124]
+yes
+
+
+% some sample queries using lambda expressions as goals (not closures):
+
+| ?- logtalk<<([]>>true).
+yes
+
+| ?- logtalk<<({}/true). 
+yes
+
+| ?- logtalk<<({}/[]>>true).
+yes
+
+| ?- logtalk<<({X}/true).     
+yes
+
+
+% some error cases:
+
+| ?- logtalk << ({X}/[X]>>true).
+uncaught exception: error(representation_error(lambda_parameters),{_282}/[_282]>>true,logtalk)
+
+| ?- meta::map({X}/[X]>>char_code(X), [a,b,c], R).
+uncaught exception: error(representation_error(lambda_parameters),{a}/[a]>>char_code(a),meta)
+
+| ?- meta::map([X,Y,Z]>>char_code(X), [a,b,c], R).
+uncaught exception: error(representation_error(lambda_parameters),[_278,_280,_282]>>char_code(_278),meta)
+
+
+% some examples with constraints using GNU Prolog as the back-end compiler:
+
+| ?- Xss = [[1,2],[3]], meta::map(meta::map([X,Y,Z]>>(X+Y#=Z)), Xss, Yss, Zss).
+
+Xss = [[1,2],[3]]
+Yss = [[_#3(0..268435454),_#54(0..268435453)],[_#105(0..268435452)]]
+Zss = [[_#22(1..268435455),_#73(2..268435455)],[_#124(3..268435455)]]
+
+(1 ms) yes
+| ?- Xss= [[1,2],[3]], meta::map(meta::map({Y}/[X,Z]>>(X+Y#=Z)), Xss, Zss).
+
+Xss = [[1,2],[3]]
+Y = _#3(0..268435452)
+Zss = [[_#22(1..268435453),_#66(2..268435454)],[_#110(3..268435455)]]
+
+(1 ms) yes
+
+| ?- meta::map({Y}/[X,Z]>>(Z#=X+Y), Xs, Ys).        
+
+Xs = []
+Ys = [] ? ;
+
+Xs = [_#3(0..268435455)]
+Y = _#22(0..268435455)
+Ys = [_#41(0..268435455)] ? ;
+
+Xs = [_#3(0..268435455),_#96(0..268435455)]
+Y = _#22(0..268435455)
+Ys = [_#41(0..268435455),_#115(0..268435455)] ? ;
+
+Xs = [_#3(0..268435455),_#96(0..268435455),_#170(0..268435455)]
+Y = _#22(0..268435455)
+Ys = [_#41(0..268435455),_#115(0..268435455),_#189(0..268435455)] ? ;
+
+Xs = [_#3(0..268435455),_#96(0..268435455),_#170(0..268435455),_#244(0..268435455)]
+Y = _#22(0..268435455)
+Ys = [_#41(0..268435455),_#115(0..268435455),_#189(0..268435455),_#263(0..268435455)] ? 
+...
+
+
+% some examples with constraints using SWI-Prolog or YAP as the back-end compiler:
+
+| ?- use_module(library(clpfd)).
+
+| ?- Xs = [A,B], meta::map({Y}/[X,Z]>>(clpfd:(X+Y #= Z)), Xs, Zs).
+Xs = [A, B],
+Zs = [_G1114, _G1117],
+A+Y#=_G1114,
+B+Y#=_G1117.
+
+| ?- meta::map({Z}/[X,Y]>>(clpfd:(Z#=X+Y)), Xs, Ys).
+Xs = [],
+Ys = [] ;
+Xs = [_G1369],
+Ys = [_G1378],
+_G1369+_G1378#=Z ;
+Xs = [_G1579, _G1582],
+Ys = [_G1591, _G1594],
+_G1582+_G1594#=Z,
+_G1579+_G1591#=Z ;
+Xs = [_G1789, _G1792, _G1795],
+Ys = [_G1804, _G1807, _G1810],
+_G1795+_G1810#=Z,
+_G1792+_G1807#=Z,
+_G1789+_G1804#=Z ;
+Xs = [_G1999, _G2002, _G2005, _G2008],
+Ys = [_G2017, _G2020, _G2023, _G2026],
+_G2008+_G2026#=Z,
+_G2005+_G2023#=Z,
+_G2002+_G2020#=Z,
+_G1999+_G2017#=Z ;
+Xs = [_G2209, _G2212, _G2215, _G2218, _G2221],
+Ys = [_G2230, _G2233, _G2236, _G2239, _G2242],
+_G2221+_G2242#=Z,
+_G2218+_G2239#=Z,
+_G2215+_G2236#=Z,
+_G2212+_G2233#=Z,
+_G2209+_G2230#=Z
+...
+
+
+% some examples with constraints using B-Prolog as the back-end compiler:
+
+| ?- Xss= [[1,2],[3]], meta::map(meta::map([X,Y,Z]>>(X+Y#=Z)), Xss, Yss, Zss).
+Xss = [[1,2],[3]]
+Yss = [[_01acd0:[-268435455..268435455],_0348d0:[-268435455..268435455]],[_04e5dc:[-268435455..268435455]]]
+Zss = [[_01ac9c:[-268435455..268435455],_03489c:[-268435455..268435455]],[_04e5a8:[-268435455..268435455]]]
+yes
+
+| ?- Xss= [[1,2],[3]], meta::map(meta::map({Y}/[X,Z]>>(X+Y#=Z)), Xss, Zss).
+Xss = [[1,2],[3]]
+Zss = [[_01aca4:[-268435455..268435455],_0348cc:[-268435455..268435455]],[_04e5c4:[-268435455..268435455]]]
+yes
+
+
+% some examples with constraints using SICStus Prolog as the back-end compiler:
+
+| ?- use_module(library(clpfd)).
+
+| ?- Xss= [[1,2],[3]], meta::map(meta::map([X,Y,Z]>>(clpfd:(X+Y#=Z))), Xss, Yss, Zss).
+Xss = [[1,2],[3]],
+Yss = [[_A,_B],[_C]],
+Zss = [[_D,_E],[_F]],
+_D in inf..sup,
+_A in inf..sup,
+_E in inf..sup,
+_B in inf..sup,
+_F in inf..sup,
+_C in inf..sup ? 
+yes
+
+| ?- Xs = [A,B], meta::map({Y}/[X,Z]>>(clpfd:(X+Y #= Z)), Xs, Zs).
+Xs = [A,B],
+Zs = [_A,_B],
+A in inf..sup,
+Y in inf..sup,
+_A in inf..sup,
+B in inf..sup,
+_B in inf..sup ? 
+yes
+
+
+% examples on symplifying setof/3 and similar predicates usage:
+
+| ?- countries::currencies_wrong(Currencies).
+Currencies = [pound_sterling] ;
+Currencies = [dinar] ;
+Currencies = [ringgit] ;
+Currencies = [euro] ;
+Currencies = [euro] ;
+Currencies = [dinar]
+yes
+
+| ?- countries::currencies_no_lambda(Currencies).
+Currencies = [dinar, euro, pound_sterling, ringgit].
+yes
+
+| ?- countries::currencies_lambda(Currencies).
+Currencies = [dinar, euro, pound_sterling, ringgit].
+yes
+
+
+% example of using a custom implementation of fold left in disguise:
+
+| ?- sigma::sum([X,Y]>>(Y is X), 0, 9, R).
+R = 45
+yes
+
+| ?- sigma::sum([X,Y]>>(Y is X*X), 0, 9, R).
+R = 285
+yes
+
+
+% remember that closures are called in the context of the "sender" when
+% used as arguments to meta-predicates:
+
+| ?- sigma::sum([X,Y]>>(sigma::sum([W,Z]>>(Z is W), X, 9, Y)), 0, 9, R).
+R = 330
+yes
+
+
+% use the fold_left/4 meta-predicate to calculate Fibonacci numbers:
+
+| ?- meta::fold_left([N1-[F1,F2],_,N2-[F2,F3]]>>(F3 is F1+F2, N2 is N1+1), 0-[0,1], _, 10-[F, _]).
+F = 55
+yes
+
+| ?- meta::fold_left([N1-[F1,F2],_,N2-[F2,F3]]>>(F3 is F1+F2, N2 is N1+1), 0-[0,1], _, N-[F, _]).
+
+F = 0
+N = 0 ? ;
+F = 1
+N = 1 ? ;
+F = 1
+N = 2 ? ;
+F = 2
+N = 3 ? ;
+F = 3
+N = 4 ? ;
+F = 5
+N = 5 ? 
+...
+
+
+% miscellaneous tests of using lambda expressions:
+
+| ?- misc::common_prefix([1], Xs, Ys).
+
+Xs = []
+Ys = [] ? ;
+
+Xs = [A]
+Ys = [[1|A]] ? ;
+
+Xs = [A,B]
+Ys = [[1|A],[1|B]] ? ;
+
+Xs = [A,B,C]
+Ys = [[1|A],[1|B],[1|C]] ? 
+...
+
+
+| ?- misc::call_n.
+This test should print f(x,y) in all lines:
+f(x,y)
+f(x,y)
+f(x,y)
+f(x,y)
+f(x,y)
+f(x,y)
+yes
+
+
+| ?- misc::local.
+yes
+
+
+% the following lambda benchmarks are so far only available when using
+% SWI-Prolog, XSB, or YAP as the Logtalk back-end compilers:
+
+?- lambda_benchmarks::bench1.
+Using map/2 with a closure for testing less(0, X) with X in [1..100000]: 
+% 1,500,027 inferences, 0.430 CPU in 0.435 seconds (99% CPU, 3488435 Lips)
+Using map/2 with a lambda for testing less(0, X) with X in [1..100000]:  
+% 2,500,002 inferences, 0.870 CPU in 0.874 seconds (99% CPU, 2873566 Lips)
+true.
+
+% the second benchmarks is based on code posted by Jan Wielemaker in
+% the SWI-Prolog mailing list:
+
+?- lambda_benchmarks::bench2.
+Adding 1 to every integer in the list [1..100000] using a local add1/2 predicate:
+% 100,000 inferences, 0.020 CPU in 0.022 seconds (91% CPU, 5000000 Lips)
+Adding 1 to every integer in the list [1..100000] using map/3 with the integer::plus/3 predicate:
+% 1,500,045 inferences, 0.390 CPU in 0.395 seconds (99% CPU, 3846269 Lips)
+Adding 1 to every integer in the list [1..100000] using map/3 with a lambda argument with a is/2 goal:
+% 2,100,002 inferences, 0.750 CPU in 0.754 seconds (99% CPU, 2800003 Lips)
+true.

@@ -1,0 +1,76 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 39;
+	objects = {
+		AD25192005ACEA45001855A0 = {
+			children = (
+				ADA6FF7305AF767B0016869E,
+				ADA6FF7405AF767B0016869E,
+				AD4A3DF605ACEB7500DB6C8F,
+			);
+			isa = PBXGroup;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		AD25192205ACEA45001855A0 = {
+			buildRules = (
+			);
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			isa = PBXBuildStyle;
+			name = Development;
+		};
+		AD25192305ACEA45001855A0 = {
+			buildRules = (
+			);
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+			};
+			isa = PBXBuildStyle;
+			name = Deployment;
+		};
+		AD25192405ACEA45001855A0 = {
+			buildSettings = {
+			};
+			buildStyles = (
+				AD25192205ACEA45001855A0,
+				AD25192305ACEA45001855A0,
+			);
+			hasScannedForEncodings = 1;
+			isa = PBXProject;
+			mainGroup = AD25192005ACEA45001855A0;
+			projectDirPath = "";
+			targets = (
+			);
+		};
+		AD4A3DF605ACEB7500DB6C8F = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.logtalk.loader;
+			path = "«PROJECTNAMEASIDENTIFIER».loader";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		ADA6FF7305AF767B0016869E = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = text;
+			path = NOTES;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		ADA6FF7405AF767B0016869E = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = text;
+			path = SCRIPT;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+	};
+	rootObject = AD25192405ACEA45001855A0;
+}

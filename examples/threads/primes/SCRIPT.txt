@@ -1,0 +1,63 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the loading the example:
+
+| ?- logtalk_load(primes(loader)).
+...
+
+
+% NOTE: the example queries below use a SWI-Prolog proprietary predicate 
+% time/1 in order to get accurate goal times. This predicate is also found 
+% on recent development versions of YAP and XSB. For other Prolog compilers, 
+% replace the time/1 call by any appropriate timing calls (e.g. cputime/0).
+
+
+% calculate the prime numbers in a given interval using a single thread:
+
+?- time(primes(1)::primes(1, 500000, Primes)).
+% 67,657,303 inferences, 11.98 CPU in 12.31 seconds (97% CPU, 5647521 Lips)
+
+Primes = [2, 3, 5, 7, 11, 13, 17, 19, 23|...]
+
+Yes
+
+
+% calculate the prime numbers in a given interval by splitting the interval 
+% in two sub-intervals and using a thread per sub-interval:
+
+?- time(primes(2)::primes(1, 500000, Primes)).
+% 77 inferences, 11.73 CPU in 7.48 seconds (157% CPU, 7 Lips)
+
+Primes = [2, 3, 5, 7, 11, 13, 17, 19, 23|...]
+
+Yes
+
+
+% calculate the prime numbers in a given interval by splitting the interval 
+% in four sub-intervals and using a thread per sub-interval:
+
+?- time(primes(4)::primes(1, 500000, Primes)).
+% 143 inferences, 11.62 CPU in 4.00 seconds (290% CPU, 12 Lips)
+
+Primes = [2, 3, 5, 7, 11, 13, 17, 19, 23|...]
+
+Yes
+
+
+% calculate the prime numbers in a given interval by splitting the interval 
+% in eight sub-intervals and using a thread per sub-interval:
+
+?- time(primes(8)::primes(1, 500000, Primes)).
+% 323 inferences, 11.56 CPU in 3.30 seconds (350% CPU, 28 Lips)
+
+Primes = [2, 3, 5, 7, 11, 13, 17, 19, 23|...]
+
+Yes

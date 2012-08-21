@@ -1,0 +1,28 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+This folder contains a Logtalk version of John Fletcher's Prolog XML 
+parser:
+
+	http://www.binding-time.co.uk/xmlpl.html
+
+To load this XML parser and for sample queries, please see the SCRIPT 
+file.
+
+For a detailed description of this XML parser, please see the comments 
+in the "xml.lgt" source file or convert the automatically generated 
+documentation to HTML or PDF.
+
+See the copyright and license information on the contributed files for 
+usage and distributions conditions.
+
+When using GNU Prolog as the back-end compiler, you may need to to use a
+larger default global stack size (see the GNU Prolog documentation on the
+environment variable GLOBALSZ).

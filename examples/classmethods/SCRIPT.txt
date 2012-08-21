@@ -1,0 +1,42 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example:
+
+| ?- logtalk_load(classmethods(loader)).
+...
+
+
+% use the "class method" area/2 to calculate the are of a circle given its radius:
+
+| ?- circle::area(1.0, Area).
+Area = 3.14159
+yes
+
+
+% ask our static instance, c42, its area:
+
+?- c42::area(Area).
+Area = 24.6301
+yes
+
+
+% create a dynamic instance of class circle using the "class method" new/4:
+
+| ?- circle::new(1.2, 7.9, 2.0, Circle).
+Circle = o1
+yes
+
+
+% ask the circle o1 its area:
+
+| ?- o1::area(Area).
+Area = 4.52389
+yes

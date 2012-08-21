@@ -1,0 +1,36 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the XML parser and the necessary library files:
+
+| ?- logtalk_load(xml_parser(loader)).
+...
+
+
+% let's try some examples (the goals generate XML files named qi.xml):
+
+| ?- logtalk_load(xml_parser(examples)).
+...
+
+
+% change working directory to "$LOGTALKUSER/contributions/xml_parser";
+% (there is no standard predicate for changing the working directory)
+
+| ?- '$lgt_change_directory'('$LOGTALKUSER/contributions/xml_parser').
+
+
+|  ?- test(q1).
+...
+
+|  ?- test(q2).
+...
+
+|  ?- test(q12).
+...

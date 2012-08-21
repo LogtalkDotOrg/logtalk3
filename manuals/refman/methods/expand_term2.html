@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<!--
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  
+%  This file is part of Logtalk <http://logtalk.org/>    
+%  Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
+%  
+%  Logtalk is free software. You can redistribute it and/or modify it under
+%  the terms of the FSF GNU General Public License 3  (plus some additional
+%  terms per section 7).        Consult the "LICENSE.txt" file for details.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="application/xml+xhtml; charset=utf-8" />
+	<title>Logtalk built-in method: expand_term/2</title>
+	<link rel="stylesheet" href="../../screen.css" type="text/css" media="screen"/>
+	<link rel="stylesheet" href="../../print.css" type="text/css" media="print"/>
+</head>
+
+<body>
+
+<div class="top-left">Logtalk reference manual</div> 
+<div class="top-right">Built-in method: expand_term/2</div>
+<div class="bottom-left"><span class="page"/></div> 
+<div class="bottom-right"><span class="page"/></div>
+<div class="navtop"><a href="../../index.html">Contents</a> &gt; <a href="../index.html">Reference Manual</a> &gt; <a href="../index.html#methods">Built-in Methods</a> &gt; expand_term/2</div>
+
+<h2 id="methods_expand_term2" class="codenp">expand_term/2</h2>
+
+<h4>Description</h4>
+
+<pre>expand_term(Term, Expansion)</pre>
+<p>
+Expands a term. The most common use is to expand a grammar rule into a clause. Users may override the default Logtalk grammar rule translator by defining clauses for the predicate <a href="term_expansion2.html"><code>term_expansion/2</code></a>.
+</p>
+<p>
+The expansion works as follows: if the first argument is a variable, then it is unified with the second argument; if the first argument is not a variable and clauses for the <code>term_expansion/2</code> predicate are within scope, then this predicate is called to provide an expansion that is then unified with the second argument; if the <code>term_expansion/2</code> predicate is not used and the first argument is a compound term with functor <code>--&gt;/2</code> then the default Logtalk grammar rule translator is used, with the resulting clause being unified with the second argument; when the translator is not used, the two arguments are unified. The <code>expand_term/2</code> predicate may return a list of terms.
+</p>
+<p>
+This built-in method may be used to expand a grammar rule into a clause for use with the built-in database methods.
+</p>
+<p>
+Term expansion is only performed by the Logtalk compiler to expand terms read from a source file.
+</p>
+
+
+<h4>Template and modes</h4>
+
+<pre>expand_term(?term, ?term)</pre>
+
+<h4>Errors</h4>
+
+<dl>
+	<code>(none)</code>
+</dl>
+
+<h4>Examples</h4>
+
+<dl>
+	<code>(none)</code>
+</dl>
+
+<div class="footer">
+	<div class="copyright">
+		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
+		<span>Last updated on: May 18, 2010</span>
+	</div>
+	<div class="navbottom">
+		<span><a href="../index.html#methods">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="term_expansion2.html">next</a></span><br/>
+		<span><a href="http://validator.w3.org/check/referer">XHTML</a> + <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a></span>
+	</div>
+</div>
+
+</body>
+
+</html>

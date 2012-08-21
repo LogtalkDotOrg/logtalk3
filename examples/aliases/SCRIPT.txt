@@ -1,0 +1,86 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+% start by loading the example:
+
+| ?- logtalk_load(aliases(loader)).
+...
+
+
+% check the object square(_) public protocol:
+
+| ?- square(_)::current_predicate(Predicate).
+
+Predicate = side/1 ;
+Predicate = width/1 ;
+Predicate = height/1 ;
+Predicate = area/1
+yes
+
+
+% test the side/1 alias:
+
+| ?- square(2)::side(Side).
+
+Side = 2 
+yes
+
+| ?- square(2)::predicate_property(side(_), Property).
+
+Property = public ;
+Property = static ;
+Property = declared_in(rectangle(_G264, _G265)) ;
+Property = defined_in(rectangle(_G297, _G298)) ;
+Property = alias_of(width(_G182))
+yes
+
+| ?- square(2)::predicate_property(width(_), Property).
+
+Property = public ;
+Property = static ;
+Property = declared_in(rectangle(_G262, _G263)) ;
+Property = defined_in(rectangle(_G293, _G294))
+yes
+
+
+% check the object circle(_) public protocol:
+
+| ?- circle(_)::current_predicate(Predicate).
+
+Predicate = r/1 ;
+Predicate = rx/1 ;
+Predicate = ry/1 ;
+Predicate = area/1
+yes
+
+
+% test the r/1 alias:
+
+| ?- circle(3)::r(Radius).
+
+Radius = 3 
+yes
+
+| ?- circle(3)::predicate_property(r(_), Property).
+
+Property = public ;
+Property = static ;
+Property = declared_in(ellipse(_G266, _G267)) ;
+Property = defined_in(ellipse(_G299, _G300)) ;
+Property = alias_of(rx(_G177))
+yes
+
+| ?- circle(3)::predicate_property(rx(_), Property).
+
+Property = public ;
+Property = static ;
+Property = declared_in(ellipse(_G261, _G262)) ;
+Property = defined_in(ellipse(_G292, _G293))
+yes

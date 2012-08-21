@@ -1,0 +1,63 @@
+#!/bin/bash
+
+#############################################################################
+## 
+##   This file is part of Logtalk <http://logtalk.org/>  
+##   Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
+## 
+##   Logtalk MacOS X installer package auxiliary script
+## 
+##   This program is free software: you can redistribute it and/or modify
+##   it under the terms of the GNU General Public License as published by
+##   the Free Software Foundation, either version 3 of the License, or
+##   (at your option) any later version.
+##   
+##   This program is distributed in the hope that it will be useful,
+##   but WITHOUT ANY WARRANTY; without even the implied warranty of
+##   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+##   GNU General Public License for more details.
+##   
+##   You should have received a copy of the GNU General Public License
+##   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+##   
+##   Additional licensing terms apply per Section 7 of the GNU General
+##   Public License 3. Consult the "LICENSE.txt" file for details.
+## 
+#############################################################################
+
+echo ""
+echo "Checking for the Logtalk environment variable definitions..."
+echo ""
+
+if grep "LOGTALKHOME=/opt/local/share/logtalk" /etc/profile >/dev/null 2>&1; then
+	echo "Logtalk environment variables default values already set for bash!"
+else
+	/bin/cp -fp /etc/profile /etc/profile.lgtsaved
+	echo '' >> /etc/profile
+	echo '# Logtalk environment variables default values' >> /etc/profile
+	echo 'LOGTALKHOME=/opt/local/share/logtalk' >> /etc/profile
+	echo 'LOGTALKUSER=$HOME/logtalk' >> /etc/profile
+	echo 'export LOGTALKHOME LOGTALKUSER' >> /etc/profile
+fi
+
+if grep "setenv LOGTALKHOME /opt/local/share/logtalk" /etc/csh.cshrc >/dev/null 2>&1; then
+	echo "Logtalk environment variables default values already set for csh!"
+else
+	/bin/cp -fp /etc/csh.cshrc /etc/csh.cshrc.lgtsaved
+	echo '' >> /etc/csh.cshrc
+	echo '# Logtalk environment variables default values' >> /etc/csh.cshrc
+	echo "setenv LOGTALKHOME /opt/local/share/logtalk" >> /etc/csh.cshrc
+	echo 'setenv LOGTALKUSER $HOME/logtalk' >> /etc/csh.cshrc
+fi
+
+echo ""
+echo "Creating a link to the Logtalk installation folder in the /Applications folder..."
+/bin/ln -sf /opt/local/share/logtalk /Applications/Logtalk
+/usr/bin/open /Applications/Logtalk/
+/usr/bin/open /Applications/Logtalk/scripts/macosx/command_files
+/usr/bin/open /Applications/Logtalk/QUICK_START.md
+/usr/bin/open /Applications/Logtalk/RELEASE_NOTES.txt
+
+echo ""
+echo "You have succesfully installed Logtalk!"
+echo ""

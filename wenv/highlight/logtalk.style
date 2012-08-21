@@ -1,0 +1,22 @@
+# logtalk.style
+# This file is part of highlight, a universal source code converter.
+# See README in the highlight directory for documentation.
+
+$DEFAULTCOLOUR=00 00 00
+$BGCOLOUR=ff da b9
+$FONTSIZE=10
+
+$KW-GROUP(directives1)=a5 2a 2a bold
+$KW-GROUP(directives2)=a5 2a 2a bold
+$KW-GROUP(builtins1)=2e 8b 57 bold
+$KW-GROUP(methods)=27 5f ec bold
+$KW-GROUP(kwd)=52 1c c7
+$NUMBER=c0 00 58
+$ESCAPECHAR=6a 5a cd
+$STRING=c0 00 58
+$STRING-DIRECTIVE=c0 00 58
+$COMMENT=40 60 90
+$DIRECTIVE=cd 00 cd
+$LINE=40 60 90
+$SYMBOL=00 00 00
+$MARK-LINE=ff ff bb

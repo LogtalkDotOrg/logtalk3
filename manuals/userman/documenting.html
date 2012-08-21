@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<!--
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  
+%  This file is part of Logtalk <http://logtalk.org/>    
+%  Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
+%  
+%  Logtalk is free software. You can redistribute it and/or modify it under
+%  the terms of the FSF GNU General Public License 3  (plus some additional
+%  terms per section 7).        Consult the "LICENSE.txt" file for details.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="application/xml+xhtml; charset=utf-8" />
+	<title>Logtalk user manual: documenting programs</title>
+	<link rel="stylesheet" href="../screen.css" type="text/css" media="screen"/>
+	<link rel="stylesheet" href="../print.css" type="text/css" media="print"/>
+</head>
+
+<body>
+
+<div class="top-left">Logtalk user manual</div> 
+<div class="top-right">Documenting programs</div>
+<div class="bottom-left"><span class="page"/></div> 
+<div class="bottom-right"><span class="page"/></div>
+<div class="navtop"><a href="../index.html">Contents</a> &gt; <a href="index.html">User Manual</a> &gt; Documenting Logtalk programs</div>
+
+<h1 id="documenting_documenting">Documenting Logtalk programs</h1>
+
+<p>
+Logtalk automatically generates a documentation file for each compiled entity (object, protocol, or category) in <a href="http://www.w3.org/XML/">XML</a> format. Contents of the XML file include the entity name, type, and compilation mode (static or dynamic), the entity relations with other entities, and a description of any declared predicates (name, compilation mode, scope, ...).
+</p>
+<p>
+The XML documentation files can be enriched with arbitrary user-defined information, either about an entity or about its predicates, by using the two directives described below.
+</p>
+
+<h2 id="documenting_directives">Documenting directives</h2>
+
+<p>
+Logtalk supports two documentation directives for providing arbitrary user-defined information about an entity or a predicate. These two directives complement other Logtalk directives that also provide important documentation information like <a title="Consult reference manual" href="../refman/directives/uses1.html"><code>uses/1</code></a>, <a title="Consult reference manual" href="../refman/directives/calls1.html"><code>calls/1</code></a>, or <a title="Consult reference manual" href="../refman/directives/mode2.html"><code>mode/2</code></a>.
+</p>
+
+<h3 id="documenting_entity">Entity directives</h3>
+
+<p>
+Arbitrary user-defined entity information can be represented using the <a title="Consult reference manual" href="../refman/directives/info1.html"><code>info/1</code></a> directive:
+</p>
+<pre>:- info([
+    Key1 is Value1,
+    Key2 is Value2,
+    ...]).</pre>
+<p>
+In this pattern, keys should be atoms and values should be ground terms. The following keys are pre-defined and may be processed specially by Logtalk:
+</p>
+<dl>
+	<dt><code>comment</code></dt>
+		<dd>Comment describing entity purpose (an atom).</dd>
+	<dt><code>author</code></dt>
+		<dd>Entity author(s) (an atom or a compound term <code>{entity}</code> where <code>entity</code> is the name of a XML entity defined in the <code>custom.ent</code> file).</dd>
+	<dt><code>version</code></dt>
+		<dd>Version number (a number).</dd>
+	<dt><code>date</code></dt>
+		<dd>Date of last modification (formatted as Year/Month/Day).</dd>
+	<dt><code>parameters</code></dt>
+		<dd>Parameter names and descriptions for parametric entities (a list of key-values where both keys and values are atoms).</dd>
+	<dt><code>parnames</code></dt>
+		<dd>Parameter names for parametric entities (a list of atoms; a simpler version of the previous key, used when parameter descriptions are deemed unnecessary).</dd>
+	<dt><code>copyright</code></dt>
+		<dd>Copyright notice for the entity source code (an atom or a compound term <code>{entity}</code> where <code>entity</code> is the name of a XML entity defined in the <code>custom.ent</code> file).</dd>
+	<dt><code>license</code></dt>
+		<dd>License terms for the entity source code; usually, just the license name (an atom or a compound term <code>{entity}</code> where <code>entity</code> is the name of a XML entity defined in the <code>custom.ent</code> file).</dd>
+	<dt><code>remarks</code></dt>
+		<dd>List of general remarks about the entity using the format <em>Topic</em> <code>-</code> <em>Text</em>. Both the topic and the text must be atoms.</dd>
+</dl>
+<p>
+For example:
+</p>
+<pre>:- info([
+    version is 2.1,
+    author is 'Paulo Moura',
+    date is 2000/4/20,
+    comment is 'Building representation.',
+    diagram is 'UML Class Diagram #312']).</pre>
+<p>
+Use only the keywords that make sense for your application and remember that you are free to invent your own keywords.
+</p>
+
+<h3 id="documenting_predicate">Predicate directives</h3>
+
+<p>
+Arbitrary user-defined predicate information can be represented using the
+<a title="Consult reference manual" href="../refman/directives/info2.html"><code>info/2</code></a> directive:
+</p>
+<pre>:- info(Functor/Arity, [
+    Key1 is Value1,
+    Key2 is Value2,
+    ...]).</pre>
+<p>
+Keys should be atoms and values should be ground terms. The following keys are pre-defined and may be processed specially by Logtalk:
+</p>
+<dl>
+	<dt><code>comment</code></dt>
+		<dd>Comment describing predicate purpose (an atom).</dd>
+	<dt><code>arguments</code></dt>
+		<dd>Names and descriptions of predicate arguments for pretty print output (a list of key-values where both keys and values are atoms).</dd>
+	<dt><code>argnames</code></dt>
+		<dd>Names of predicate arguments for pretty print output (a list of atoms; a simpler version of the previous key, used when argument descriptions are deemed unnecessary).</dd>
+	<dt><code>allocation</code></dt>
+		<dd>Objects where we should define the predicate. Some possible values are <code>container</code>, <code>descendants</code>, <code>instances</code>, <code>classes</code>, <code>subclasses</code>, and <code>any</code>.</dd>
+	<dt><code>redefinition</code></dt>
+		<dd>Describes if the predicate can be redefined and, if so, in what way. Some possible values are <code>never</code>, <code>free</code>, <code>specialize</code>, <code>call_super_first</code>, <code>call_super_last</code>.</dd>
+	<dt><code>exceptions</code></dt>
+		<dd>List of possible exceptions throw by the predicate using the format <em>Description</em> <code>-</code> <em>Exception term</em>. The description must be an atom. The exception term must be a non-variable term.</dd>
+	<dt><code>examples</code></dt>
+		<dd>List of typical predicate call examples using the format <em>Description</em> <code>-</code> <em>Predicate call</em> <code>-</code> <em>Variable bindings</em>. The description must be an atom. The predicate call term must be a non-variable term. The variable bindings term uses the format <code>{</code><em>Variable</em><code>=</code><em>Term</em>, ...<code>}</code>. When there are no variable bindings, the success or failure of the predicate call should be represented by the terms <code>{yes}</code> or <code>{no}</code>, respectively.</dd>
+</dl>
+<p>
+For example:
+</p>
+<pre>:- info(color/1, [
+    comment is 'Table of defined colors.',
+    argnames is ['Color'],
+    constraint is 'Only a maximum of four visible colors allowed.']).</pre>
+<p>
+Use only the keywords that make sense for your application and remember that you are free to invent your own keywords.
+</p>
+
+<h2 id="documenting_processing">Processing and viewing documenting files</h2>
+
+<p>
+The XML documenting files are (by default) automatically generated when you compile a Logtalk entity. For example, assuming the default filename extensions, compiling a <code>trace</code> object and a <code>sort(_)</code> parametric object contained in a source file will result in <code>trace_0.xml</code> and <code>sort_1.xml</code> XML files.
+</p>
+<p>
+Each XML file contains references to two other files, a XML specification file and a XSL style-sheet file. The XML specification file can be either a DTD file (<code>logtalk.dtd</code>) or a XML Scheme file (<code>logtalk.xsd</code>). The <a href="http://www.w3.org/Style/XSL/">XSL</a> style-sheet file is responsible for converting the XML files to some desired format such as HTML or PDF. The default names for the XML specification file and the XSL style-sheet file are defined in the adapter files. The <code>xml</code> sub-directory in the Logtalk installation directory contains the XML specification files described above, along with several sample XSL style-sheet files and sample scripts for converting XML documenting files to several formats. Please read the <code>NOTES</code> file included in the directory for details. You may use the supplied sample files as a starting point for generating the documentation of your Logtalk applications.
+</p>
+<p>
+The Logtalk DTD file, <code>logtalk.dtd</code>, contains a reference to a user-customizable file, <code>custom.ent</code>, which declares XML entities for source code author names, license terms, and copyright string. After editing the <code>custom.ent</code> file to reflect your personal data, you may use the XML entities on <code>info/1</code> documenting directives. For example, assuming that the XML entities are named <em>author</em>, <em>license</em>, and <em>copyright</em> we may write:
+</p>
+<pre>:- info([
+    version is 1.1,
+    author is {author},
+    license is {license},
+    copyright is {copyright}).</pre>
+<p>
+The entity references are replaced by the value of the corresponding XML entity when the XML documenting files are processed (<strong>not</strong> when they are generated; this notation is just a shortcut to take advantage of XML entities).
+</p>
+<p>
+There is a set of compilers options, used with the Logtalk <a title="Consult reference manual" href="../refman/builtins/logtalk_load2.html"><code>logtalk_load/2</code></a> or the <a title="Consult reference manual" href="../refman/builtins/logtalk_compile2.html"><code>logtalk_compile/2</code></a> built-in predicates, that can be used to control the generation of the XML documentation files. Please see the <a href="programming.html#options">Running Logtalk</a> section of this manual for details.
+</p>
+
+<div class="footer">
+	<div class="copyright">
+		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
+		<span>Last updated on: October 26, 2006</span>
+	</div>
+	<div class="navbottom">
+		<span><a href="errors.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="installing.html">next</a></span><br/>
+		<span><a href="http://validator.w3.org/check/referer">XHTML</a> + <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a></span>
+	</div>
+</div>
+
+</body>
+
+</html>

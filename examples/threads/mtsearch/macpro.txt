@@ -1,0 +1,615 @@
+?- between(1, 17, M), Obj = hsalt(M, 5, 12), Obj::initial_state(Initial), time(catch((threaded((call_with_time_limit(60, (depth_first(17)::solve(Obj, Initial, Path), A = depth_first)); call_with_time_limit(60, (breadth_first(17)::solve(Obj, Initial, Path), A = breadth_first)); call_with_time_limit(60, (hill_climbing(17)::solve(Obj, Initial, Path, Cost), A = hill_climbing)))), write(M-A), nl, Obj::print_path(Path)), _, write(M-time_out))), nl, flush_output, fail; true.
+1-hill_climbing
+(0, 0, 0)	all_empty
+(0, 0, 12)	fill(m2)
+(0, 5, 7)	transfer(m2, m1)
+(0, 0, 7)	empty(m1)
+(0, 0, 0)	empty(m2)
+(0, 5, 0)	fill(m1)
+(0, 0, 5)	transfer(m1, m2)
+(0, 5, 5)	fill(m1)
+(0, 0, 10)	transfer(m1, m2)
+(0, 5, 10)	fill(m1)
+(0, 3, 12)	transfer(m1, m2)
+(0, 3, 0)	empty(m2)
+(0, 0, 3)	transfer(m1, m2)
+(0, 5, 3)	fill(m1)
+(0, 0, 8)	transfer(m1, m2)
+(0, 5, 8)	fill(m1)
+(0, 1, 12)	transfer(m1, m2)
+(1, 0, 12)	transfer(m1, acc)
+% 382 inferences, 15.04 CPU in 5.69 seconds (265% CPU, 25 Lips)
+
+2-breadth_first
+(0, 0, 0)	all_empty
+(0, 0, 12)	fill(m2)
+(0, 5, 7)	transfer(m2, m1)
+(0, 0, 7)	empty(m1)
+(0, 5, 2)	transfer(m2, m1)
+(2, 5, 0)	transfer(m2, acc)
+% 216 inferences, 0.04 CPU in 0.02 seconds (245% CPU, 5400 Lips)
+
+3-breadth_first
+(0, 0, 0)	all_empty
+(0, 5, 0)	fill(m1)
+(0, 0, 5)	transfer(m1, m2)
+(0, 5, 5)	fill(m1)
+(0, 0, 10)	transfer(m1, m2)
+(0, 5, 10)	fill(m1)
+(0, 3, 12)	transfer(m1, m2)
+(3, 0, 12)	transfer(m1, acc)
+% 236 inferences, 0.19 CPU in 0.07 seconds (256% CPU, 1242 Lips)
+
+4-breadth_first
+(0, 0, 0)	all_empty
+(0, 0, 12)	fill(m2)
+(0, 5, 7)	transfer(m2, m1)
+(0, 0, 7)	empty(m1)
+(0, 5, 2)	transfer(m2, m1)
+(2, 5, 0)	transfer(m2, acc)
+(2, 0, 0)	empty(m1)
+(2, 0, 12)	fill(m2)
+(2, 5, 7)	transfer(m2, m1)
+(2, 0, 7)	empty(m1)
+(2, 5, 2)	transfer(m2, m1)
+(4, 5, 0)	transfer(m2, acc)
+% 276 inferences, 49.94 CPU in 18.74 seconds (267% CPU, 6 Lips)
+
+5-depth_first
+(0, 0, 0)	all_empty
+(0, 5, 0)	fill(m1)
+(5, 0, 0)	transfer(m1, acc)
+% 184 inferences, 0.00 CPU in 0.00 seconds (0% CPU, Infinite Lips)
+
+6-time_out
+% 132 inferences, 94.49 CPU in 35.41 seconds (267% CPU, 1 Lips)
+
+7-hill_climbing
+(0, 0, 0)	all_empty
+(0, 0, 12)	fill(m2)
+(0, 5, 7)	transfer(m2, m1)
+(7, 5, 0)	transfer(m2, acc)
+% 198 inferences, 0.00 CPU in 0.00 seconds (0% CPU, Infinite Lips)
+
+8-hill_climbing
+(0, 0, 0)	all_empty
+(0, 0, 12)	fill(m2)
+(0, 5, 7)	transfer(m2, m1)
+(0, 0, 7)	empty(m1)
+(0, 0, 0)	empty(m2)
+(0, 5, 0)	fill(m1)
+(0, 0, 5)	transfer(m1, m2)
+(0, 5, 0)	transfer(m2, m1)
+(0, 5, 12)	fill(m2)
+(5, 0, 12)	transfer(m1, acc)
+(5, 0, 0)	empty(m2)
+(5, 5, 0)	fill(m1)
+(5, 0, 5)	transfer(m1, m2)
+(5, 5, 5)	fill(m1)
+(5, 0, 10)	transfer(m1, m2)
+(5, 5, 10)	fill(m1)
+(5, 3, 12)	transfer(m1, m2)
+(8, 0, 12)	transfer(m1, acc)
+% 338 inferences, 0.59 CPU in 0.22 seconds (264% CPU, 573 Lips)
+
+9-breadth_first
+(0, 0, 0)	all_empty
+(0, 0, 12)	fill(m2)
+(0, 5, 7)	transfer(m2, m1)
+(7, 5, 0)	transfer(m2, acc)
+(7, 0, 0)	empty(m1)
+(7, 0, 12)	fill(m2)
+(7, 5, 7)	transfer(m2, m1)
+(7, 0, 7)	empty(m1)
+(7, 5, 2)	transfer(m2, m1)
+(9, 5, 0)	transfer(m2, acc)
+% 256 inferences, 4.12 CPU in 1.54 seconds (268% CPU, 62 Lips)
+
+10-depth_first
+(0, 0, 0)	all_empty
+(0, 5, 0)	fill(m1)
+(5, 0, 0)	transfer(m1, acc)
+(5, 5, 0)	fill(m1)
+(10, 0, 0)	transfer(m1, acc)
+% 204 inferences, 0.00 CPU in 0.00 seconds (0% CPU, Infinite Lips)
+
+11-depth_first
+(0, 0, 0)	all_empty
+(0, 5, 0)	fill(m1)
+(5, 0, 0)	transfer(m1, acc)
+(5, 5, 0)	fill(m1)
+(10, 0, 0)	transfer(m1, acc)
+(10, 5, 0)	fill(m1)
+(10, 0, 5)	transfer(m1, m2)
+(10, 5, 5)	fill(m1)
+(10, 0, 10)	transfer(m1, m2)
+(10, 5, 10)	fill(m1)
+(10, 3, 12)	transfer(m1, m2)
+(10, 3, 0)	empty(m2)
+(10, 0, 3)	transfer(m1, m2)
+(10, 5, 3)	fill(m1)
+(10, 0, 8)	transfer(m1, m2)
+(10, 5, 8)	fill(m1)
+(10, 1, 12)	transfer(m1, m2)
+(11, 0, 12)	transfer(m1, acc)
+% 334 inferences, 35.48 CPU in 13.41 seconds (265% CPU, 9 Lips)
+
+12-hill_climbing
+(0, 0, 0)	all_empty
+(0, 0, 12)	fill(m2)
+(12, 0, 0)	transfer(m2, acc)
+% 188 inferences, 0.00 CPU in 0.00 seconds (0% CPU, Infinite Lips)
+
+13-hill_climbing
+(0, 0, 0)	all_empty
+(0, 0, 12)	fill(m2)
+(0, 5, 7)	transfer(m2, m1)
+(0, 0, 7)	empty(m1)
+(0, 0, 0)	empty(m2)
+(0, 5, 0)	fill(m1)
+(0, 0, 5)	transfer(m1, m2)
+(0, 5, 0)	transfer(m2, m1)
+(5, 0, 0)	transfer(m1, acc)
+(5, 5, 0)	fill(m1)
+(5, 0, 5)	transfer(m1, m2)
+(5, 5, 5)	fill(m1)
+(5, 0, 10)	transfer(m1, m2)
+(5, 5, 10)	fill(m1)
+(5, 3, 12)	transfer(m1, m2)
+(8, 0, 12)	transfer(m1, acc)
+(8, 5, 7)	transfer(m2, m1)
+(13, 0, 7)	transfer(m1, acc)
+% 338 inferences, 10.08 CPU in 3.78 seconds (266% CPU, 34 Lips)
+
+14-hill_climbing
+(0, 0, 0)	all_empty
+(0, 0, 12)	fill(m2)
+(0, 5, 7)	transfer(m2, m1)
+(0, 0, 7)	empty(m1)
+(0, 0, 0)	empty(m2)
+(0, 5, 0)	fill(m1)
+(0, 0, 5)	transfer(m1, m2)
+(0, 5, 0)	transfer(m2, m1)
+(0, 5, 12)	fill(m2)
+(0, 0, 12)	empty(m1)
+(12, 0, 0)	transfer(m2, acc)
+(12, 0, 12)	fill(m2)
+(12, 5, 7)	transfer(m2, m1)
+(12, 0, 7)	empty(m1)
+(12, 5, 2)	transfer(m2, m1)
+(14, 5, 0)	transfer(m2, acc)
+% 318 inferences, 0.00 CPU in 0.00 seconds (0% CPU, Infinite Lips)
+
+15-depth_first
+(0, 0, 0)	all_empty
+(0, 5, 0)	fill(m1)
+(5, 0, 0)	transfer(m1, acc)
+(5, 5, 0)	fill(m1)
+(10, 0, 0)	transfer(m1, acc)
+(10, 5, 0)	fill(m1)
+(15, 0, 0)	transfer(m1, acc)
+% 224 inferences, 0.00 CPU in 0.00 seconds (0% CPU, Infinite Lips)
+
+16-time_out
+% 132 inferences, 95.00 CPU in 35.71 seconds (266% CPU, 1 Lips)
+
+17-hill_climbing
+(0, 0, 0)	all_empty
+(0, 0, 12)	fill(m2)
+(0, 5, 7)	transfer(m2, m1)
+(0, 0, 7)	empty(m1)
+(0, 0, 0)	empty(m2)
+(0, 5, 0)	fill(m1)
+(0, 0, 5)	transfer(m1, m2)
+(0, 5, 0)	transfer(m2, m1)
+(0, 5, 12)	fill(m2)
+(0, 0, 12)	empty(m1)
+(12, 0, 0)	transfer(m2, acc)
+(12, 0, 12)	fill(m2)
+(12, 5, 7)	transfer(m2, m1)
+(17, 0, 7)	transfer(m1, acc)
+% 298 inferences, 0.00 CPU in 0.00 seconds (0% CPU, Infinite Lips)
+
+true.
+
+?- between(1, 14, M), Obj = hsalt(M, 5, 9), Obj::initial_state(Initial), time(catch((threaded((call_with_time_limit(60, (depth_first(14)::solve(Obj, Initial, Path), A = depth_first)); call_with_time_limit(60, (breadth_first(14)::solve(Obj, Initial, Path), A = breadth_first)); call_with_time_limit(60, (hill_climbing(14)::solve(Obj, Initial, Path, Cost), A = hill_climbing)))), write(M-A), nl, Obj::print_path(Path)), _, write(M-time_out))), nl, flush_output, fail; true.
+1-breadth_first
+(0, 0, 0)	all_empty
+(0, 5, 0)	fill(m1)
+(0, 0, 5)	transfer(m1, m2)
+(0, 5, 5)	fill(m1)
+(0, 1, 9)	transfer(m1, m2)
+(1, 0, 9)	transfer(m1, acc)
+% 216 inferences, 0.01 CPU in 0.01 seconds (117% CPU, 21600 Lips)
+
+2-breadth_first
+(0, 0, 0)	all_empty
+(0, 5, 0)	fill(m1)
+(0, 0, 5)	transfer(m1, m2)
+(0, 5, 5)	fill(m1)
+(0, 1, 9)	transfer(m1, m2)
+(1, 0, 9)	transfer(m1, acc)
+(1, 0, 0)	empty(m2)
+(1, 5, 0)	fill(m1)
+(1, 0, 5)	transfer(m1, m2)
+(1, 5, 5)	fill(m1)
+(1, 1, 9)	transfer(m1, m2)
+(2, 0, 9)	transfer(m1, acc)
+% 276 inferences, 19.83 CPU in 7.52 seconds (264% CPU, 14 Lips)
+
+3-breadth_first
+(0, 0, 0)	all_empty
+(0, 0, 9)	fill(m2)
+(0, 5, 4)	transfer(m2, m1)
+(0, 0, 4)	empty(m1)
+(0, 4, 0)	transfer(m2, m1)
+(0, 4, 9)	fill(m2)
+(0, 5, 8)	transfer(m2, m1)
+(0, 0, 8)	empty(m1)
+(0, 5, 3)	transfer(m2, m1)
+(3, 5, 0)	transfer(m2, acc)
+% 256 inferences, 4.62 CPU in 1.75 seconds (264% CPU, 55 Lips)
+
+4-hill_climbing
+(0, 0, 0)	all_empty
+(0, 0, 9)	fill(m2)
+(0, 5, 4)	transfer(m2, m1)
+(4, 5, 0)	transfer(m2, acc)
+% 198 inferences, 0.00 CPU in 0.00 seconds (0% CPU, Infinite Lips)
+
+5-depth_first
+(0, 0, 0)	all_empty
+(0, 5, 0)	fill(m1)
+(5, 0, 0)	transfer(m1, acc)
+% 184 inferences, 0.01 CPU in 0.00 seconds (774% CPU, 18400 Lips)
+
+6-breadth_first
+(0, 0, 0)	all_empty
+(0, 5, 0)	fill(m1)
+(0, 0, 5)	transfer(m1, m2)
+(0, 5, 5)	fill(m1)
+(0, 1, 9)	transfer(m1, m2)
+(1, 0, 9)	transfer(m1, acc)
+(1, 5, 4)	transfer(m2, m1)
+(6, 0, 4)	transfer(m1, acc)
+% 236 inferences, 0.19 CPU in 0.07 seconds (259% CPU, 1242 Lips)
+
+7-depth_first
+(0, 0, 0)	all_empty
+(0, 5, 0)	fill(m1)
+(5, 0, 0)	transfer(m1, acc)
+(5, 5, 0)	fill(m1)
+(5, 0, 5)	transfer(m1, m2)
+(5, 5, 5)	fill(m1)
+(5, 1, 9)	transfer(m1, m2)
+(6, 0, 9)	transfer(m1, acc)
+(6, 5, 9)	fill(m1)
+(6, 5, 0)	empty(m2)
+(6, 0, 5)	transfer(m1, m2)
+(6, 5, 5)	fill(m1)
+(6, 1, 9)	transfer(m1, m2)
+(7, 0, 9)	transfer(m1, acc)
+% 294 inferences, 10.56 CPU in 4.02 seconds (262% CPU, 28 Lips)
+
+8-breadth_first
+(0, 0, 0)	all_empty
+(0, 0, 9)	fill(m2)
+(0, 5, 4)	transfer(m2, m1)
+(4, 5, 0)	transfer(m2, acc)
+(4, 0, 0)	empty(m1)
+(4, 0, 9)	fill(m2)
+(4, 5, 4)	transfer(m2, m1)
+(8, 5, 0)	transfer(m2, acc)
+% 236 inferences, 0.37 CPU in 0.14 seconds (261% CPU, 638 Lips)
+
+9-hill_climbing
+(0, 0, 0)	all_empty
+(0, 0, 9)	fill(m2)
+(9, 0, 0)	transfer(m2, acc)
+% 188 inferences, 0.00 CPU in 0.00 seconds (0% CPU, Infinite Lips)
+
+10-depth_first
+(0, 0, 0)	all_empty
+(0, 5, 0)	fill(m1)
+(5, 0, 0)	transfer(m1, acc)
+(5, 5, 0)	fill(m1)
+(10, 0, 0)	transfer(m1, acc)
+% 204 inferences, 0.00 CPU in 0.00 seconds (0% CPU, Infinite Lips)
+
+11-hill_climbing
+(0, 0, 0)	all_empty
+(0, 0, 9)	fill(m2)
+(0, 5, 4)	transfer(m2, m1)
+(0, 0, 4)	empty(m1)
+(0, 0, 0)	empty(m2)
+(0, 5, 0)	fill(m1)
+(0, 0, 5)	transfer(m1, m2)
+(0, 5, 5)	fill(m1)
+(0, 1, 9)	transfer(m1, m2)
+(0, 1, 0)	empty(m2)
+(1, 0, 0)	transfer(m1, acc)
+(1, 5, 0)	fill(m1)
+(6, 0, 0)	transfer(m1, acc)
+(6, 5, 0)	fill(m1)
+(11, 0, 0)	transfer(m1, acc)
+% 308 inferences, 0.43 CPU in 0.16 seconds (263% CPU, 716 Lips)
+
+12-hill_climbing
+(0, 0, 0)	all_empty
+(0, 0, 9)	fill(m2)
+(0, 5, 4)	transfer(m2, m1)
+(0, 0, 4)	empty(m1)
+(0, 4, 0)	transfer(m2, m1)
+(0, 0, 4)	transfer(m1, m2)
+(4, 0, 0)	transfer(m2, acc)
+(4, 0, 9)	fill(m2)
+(4, 5, 4)	transfer(m2, m1)
+(4, 0, 4)	empty(m1)
+(4, 4, 0)	transfer(m2, m1)
+(4, 4, 9)	fill(m2)
+(4, 5, 8)	transfer(m2, m1)
+(12, 5, 0)	transfer(m2, acc)
+% 298 inferences, 10.26 CPU in 3.90 seconds (263% CPU, 29 Lips)
+
+13-hill_climbing
+(0, 0, 0)	all_empty
+(0, 0, 9)	fill(m2)
+(0, 5, 4)	transfer(m2, m1)
+(0, 0, 4)	empty(m1)
+(0, 0, 0)	empty(m2)
+(0, 5, 0)	fill(m1)
+(0, 0, 5)	transfer(m1, m2)
+(0, 5, 0)	transfer(m2, m1)
+(0, 5, 9)	fill(m2)
+(0, 0, 9)	empty(m1)
+(9, 0, 0)	transfer(m2, acc)
+(9, 0, 9)	fill(m2)
+(9, 5, 4)	transfer(m2, m1)
+(13, 5, 0)	transfer(m2, acc)
+% 298 inferences, 0.01 CPU in 0.00 seconds (369% CPU, 29800 Lips)
+
+14-hill_climbing
+(0, 0, 0)	all_empty
+(0, 0, 9)	fill(m2)
+(0, 5, 4)	transfer(m2, m1)
+(0, 0, 4)	empty(m1)
+(0, 0, 0)	empty(m2)
+(0, 5, 0)	fill(m1)
+(0, 0, 5)	transfer(m1, m2)
+(0, 5, 0)	transfer(m2, m1)
+(0, 5, 9)	fill(m2)
+(0, 0, 9)	empty(m1)
+(9, 0, 0)	transfer(m2, acc)
+(9, 0, 9)	fill(m2)
+(9, 5, 4)	transfer(m2, m1)
+(14, 0, 4)	transfer(m1, acc)
+% 298 inferences, 0.00 CPU in 0.00 seconds (0% CPU, Infinite Lips)
+
+true.
+
+?- between(1, 26, M), Obj = hsalt(M, 7, 19), Obj::initial_state(Initial), time(catch((threaded((call_with_time_limit(60, (depth_first(13)::solve(Obj, Initial, Path), A = depth_first)); call_with_time_limit(60, (breadth_first(13)::solve(Obj, Initial, Path), A = breadth_first)); call_with_time_limit(60, (hill_climbing(13)::solve(Obj, Initial, Path, Cost), A = hill_climbing)))), write(M-A), nl, Obj::print_path(Path)), _, write(M-time_out))), nl, flush_output, fail; true.
+1-time_out
+% 142 inferences, 93.61 CPU in 36.07 seconds (259% CPU, 2 Lips)
+
+2-hill_climbing
+(0, 0, 0)	all_empty
+(0, 0, 19)	fill(m2)
+(0, 7, 12)	transfer(m2, m1)
+(0, 0, 12)	empty(m1)
+(0, 0, 0)	empty(m2)
+(0, 7, 0)	fill(m1)
+(0, 0, 7)	transfer(m1, m2)
+(0, 7, 7)	fill(m1)
+(0, 0, 14)	transfer(m1, m2)
+(0, 7, 14)	fill(m1)
+(0, 2, 19)	transfer(m1, m2)
+(2, 0, 19)	transfer(m1, acc)
+% 278 inferences, 0.15 CPU in 0.06 seconds (244% CPU, 1853 Lips)
+
+3-hill_climbing
+(0, 0, 0)	all_empty
+(0, 0, 19)	fill(m2)
+(0, 7, 12)	transfer(m2, m1)
+(0, 0, 12)	empty(m1)
+(0, 7, 5)	transfer(m2, m1)
+(0, 0, 5)	empty(m1)
+(0, 5, 0)	transfer(m2, m1)
+(0, 5, 19)	fill(m2)
+(0, 7, 17)	transfer(m2, m1)
+(0, 0, 17)	empty(m1)
+(0, 7, 10)	transfer(m2, m1)
+(0, 0, 10)	empty(m1)
+(0, 7, 3)	transfer(m2, m1)
+(3, 7, 0)	transfer(m2, acc)
+% 298 inferences, 2.31 CPU in 0.88 seconds (261% CPU, 129 Lips)
+
+4-time_out
+% 142 inferences, 93.34 CPU in 36.06 seconds (259% CPU, 2 Lips)
+
+5-breadth_first
+(0, 0, 0)	all_empty
+(0, 0, 19)	fill(m2)
+(0, 7, 12)	transfer(m2, m1)
+(0, 0, 12)	empty(m1)
+(0, 7, 5)	transfer(m2, m1)
+(5, 7, 0)	transfer(m2, acc)
+% 216 inferences, 0.04 CPU in 0.02 seconds (223% CPU, 5400 Lips)
+
+6-time_out
+% 142 inferences, 93.54 CPU in 36.19 seconds (258% CPU, 2 Lips)
+
+7-depth_first
+(0, 0, 0)	all_empty
+(0, 7, 0)	fill(m1)
+(7, 0, 0)	transfer(m1, acc)
+% 186 inferences, 0.00 CPU in 0.00 seconds (0% CPU, Infinite Lips)
+
+8-time_out
+% 142 inferences, 93.80 CPU in 36.19 seconds (259% CPU, 2 Lips)
+
+9-hill_climbing
+(0, 0, 0)	all_empty
+(0, 0, 19)	fill(m2)
+(0, 7, 12)	transfer(m2, m1)
+(0, 0, 12)	empty(m1)
+(0, 0, 0)	empty(m2)
+(0, 7, 0)	fill(m1)
+(0, 0, 7)	transfer(m1, m2)
+(0, 7, 7)	fill(m1)
+(0, 0, 14)	transfer(m1, m2)
+(0, 7, 14)	fill(m1)
+(0, 2, 19)	transfer(m1, m2)
+(2, 0, 19)	transfer(m1, acc)
+(2, 7, 12)	transfer(m2, m1)
+(9, 0, 12)	transfer(m1, acc)
+% 298 inferences, 0.16 CPU in 0.07 seconds (244% CPU, 1863 Lips)
+
+10-hill_climbing
+(0, 0, 0)	all_empty
+(0, 0, 19)	fill(m2)
+(0, 7, 12)	transfer(m2, m1)
+(0, 0, 12)	empty(m1)
+(0, 7, 5)	transfer(m2, m1)
+(0, 0, 5)	empty(m1)
+(0, 5, 0)	transfer(m2, m1)
+(0, 0, 5)	transfer(m1, m2)
+(5, 0, 0)	transfer(m2, acc)
+(5, 0, 19)	fill(m2)
+(5, 7, 12)	transfer(m2, m1)
+(5, 0, 12)	empty(m1)
+(5, 7, 5)	transfer(m2, m1)
+(10, 7, 0)	transfer(m2, acc)
+% 298 inferences, 2.19 CPU in 0.84 seconds (262% CPU, 136 Lips)
+
+11-time_out
+% 142 inferences, 93.54 CPU in 36.18 seconds (259% CPU, 2 Lips)
+
+12-hill_climbing
+(0, 0, 0)	all_empty
+(0, 0, 19)	fill(m2)
+(0, 7, 12)	transfer(m2, m1)
+(12, 7, 0)	transfer(m2, acc)
+% 198 inferences, 0.00 CPU in 0.00 seconds (0% CPU, Infinite Lips)
+
+13-time_out
+% 142 inferences, 93.46 CPU in 36.12 seconds (259% CPU, 2 Lips)
+
+14-depth_first
+(0, 0, 0)	all_empty
+(0, 7, 0)	fill(m1)
+(7, 0, 0)	transfer(m1, acc)
+(7, 7, 0)	fill(m1)
+(14, 0, 0)	transfer(m1, acc)
+% 204 inferences, 0.01 CPU in 0.00 seconds (541% CPU, 20400 Lips)
+
+15-time_out
+% 142 inferences, 93.33 CPU in 36.06 seconds (259% CPU, 2 Lips)
+
+16-depth_first
+(0, 0, 0)	all_empty
+(0, 7, 0)	fill(m1)
+(7, 0, 0)	transfer(m1, acc)
+(7, 7, 0)	fill(m1)
+(14, 0, 0)	transfer(m1, acc)
+(14, 7, 0)	fill(m1)
+(14, 0, 7)	transfer(m1, m2)
+(14, 7, 7)	fill(m1)
+(14, 0, 14)	transfer(m1, m2)
+(14, 7, 14)	fill(m1)
+(14, 2, 19)	transfer(m1, m2)
+(16, 0, 19)	transfer(m1, acc)
+% 274 inferences, 0.36 CPU in 0.14 seconds (257% CPU, 761 Lips)
+
+17-hill_climbing
+(0, 0, 0)	all_empty
+(0, 0, 19)	fill(m2)
+(0, 7, 12)	transfer(m2, m1)
+(0, 0, 12)	empty(m1)
+(0, 7, 5)	transfer(m2, m1)
+(0, 0, 5)	empty(m1)
+(0, 5, 0)	transfer(m2, m1)
+(0, 0, 5)	transfer(m1, m2)
+(0, 7, 5)	fill(m1)
+(5, 7, 0)	transfer(m2, acc)
+(5, 0, 0)	empty(m1)
+(5, 0, 19)	fill(m2)
+(5, 7, 12)	transfer(m2, m1)
+(17, 7, 0)	transfer(m2, acc)
+% 298 inferences, 2.10 CPU in 0.80 seconds (263% CPU, 142 Lips)
+
+18-time_out
+% 142 inferences, 93.52 CPU in 36.14 seconds (259% CPU, 2 Lips)
+
+19-hill_climbing
+(0, 0, 0)	all_empty
+(0, 0, 19)	fill(m2)
+(19, 0, 0)	transfer(m2, acc)
+% 188 inferences, 0.00 CPU in 0.00 seconds (0% CPU, Infinite Lips)
+
+20-time_out
+% 142 inferences, 93.60 CPU in 36.13 seconds (259% CPU, 2 Lips)
+
+21-depth_first
+(0, 0, 0)	all_empty
+(0, 7, 0)	fill(m1)
+(7, 0, 0)	transfer(m1, acc)
+(7, 7, 0)	fill(m1)
+(14, 0, 0)	transfer(m1, acc)
+(14, 7, 0)	fill(m1)
+(21, 0, 0)	transfer(m1, acc)
+% 224 inferences, 0.00 CPU in 0.00 seconds (0% CPU, Infinite Lips)
+
+22-time_out
+% 142 inferences, 93.31 CPU in 36.02 seconds (259% CPU, 2 Lips)
+
+23-depth_first
+(0, 0, 0)	all_empty
+(0, 7, 0)	fill(m1)
+(7, 0, 0)	transfer(m1, acc)
+(7, 7, 0)	fill(m1)
+(14, 0, 0)	transfer(m1, acc)
+(14, 7, 0)	fill(m1)
+(21, 0, 0)	transfer(m1, acc)
+(21, 7, 0)	fill(m1)
+(21, 0, 7)	transfer(m1, m2)
+(21, 7, 7)	fill(m1)
+(21, 0, 14)	transfer(m1, m2)
+(21, 7, 14)	fill(m1)
+(21, 2, 19)	transfer(m1, m2)
+(23, 0, 19)	transfer(m1, acc)
+% 294 inferences, 0.04 CPU in 0.02 seconds (241% CPU, 7350 Lips)
+
+24-breadth_first
+(0, 0, 0)	all_empty
+(0, 0, 19)	fill(m2)
+(0, 7, 12)	transfer(m2, m1)
+(12, 7, 0)	transfer(m2, acc)
+(12, 0, 0)	empty(m1)
+(12, 0, 19)	fill(m2)
+(12, 7, 12)	transfer(m2, m1)
+(24, 7, 0)	transfer(m2, acc)
+% 236 inferences, 0.37 CPU in 0.14 seconds (258% CPU, 638 Lips)
+
+25-time_out
+% 142 inferences, 93.51 CPU in 36.07 seconds (259% CPU, 2 Lips)
+
+26-hill_climbing
+(0, 0, 0)	all_empty
+(0, 0, 19)	fill(m2)
+(0, 7, 12)	transfer(m2, m1)
+(0, 0, 12)	empty(m1)
+(0, 0, 0)	empty(m2)
+(0, 7, 0)	fill(m1)
+(0, 0, 7)	transfer(m1, m2)
+(0, 7, 0)	transfer(m2, m1)
+(0, 7, 19)	fill(m2)
+(0, 0, 19)	empty(m1)
+(19, 0, 0)	transfer(m2, acc)
+(19, 0, 19)	fill(m2)
+(19, 7, 12)	transfer(m2, m1)
+(26, 0, 12)	transfer(m1, acc)
+% 298 inferences, 0.00 CPU in 0.00 seconds (0% CPU, Infinite Lips)
+
+true.
+
+?- 

@@ -1,0 +1,52 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the "LICENSE.txt" file for details.
+________________________________________________________________________
+
+
+To load this example and for sample queries, please see the SCRIPT 
+file.
+
+This example illustrates some variants of the "diamond problem" 
+(multi-inheritance conflicts and ambiguities) and its respective 
+solutions on Logtalk.
+
+This classical problem can be simply described by constructing a 
+"diamond" of objects and inheritance links as follows:
+
+        A       -- contains default definition for a predicate m/0
+	  /   \
+    B       C   -- contains redefinitions of the predicate m/0
+      \   /
+        D       -- inherits both redefinitions of the predicate m/0
+
+As such, the object D inherits two conflicting definitions for the 
+predicate m/0, one from object B and one from object C. If we send 
+the message m/0 to object D, is ambiguous which inherited definition 
+should be used to answer it. Depending on the nature of the objects 
+A, B, C, and D, the correct answer can be the redefinition of m/0 in 
+object B, the redefinition m/0 in object C, or both redefinitions.
+A programming language supporting multi-inheritance should provide 
+programming mechanisms allowing easy implementation of each possible 
+solution.
+
+Note that, in the context of Logtalk, the diamond problem may occur with 
+prototype hierarchies, class hierarchies, protocol hierarchies, or when 
+using category composition.
+
+This example deals with three variants of the diamond problem, illustrated 
+using prototype hierarchies:
+
+	diamond1
+		illustrates the inherited definition which is visible due to the
+		Logtalk predicate lookup algorithm
+	diamond2
+		presents a solution for making the overridden inherited definition 
+		the visible one
+	diamond3
+		presents a solution which allows both inherited definitions to be 
+		used in D
