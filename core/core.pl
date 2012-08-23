@@ -14835,11 +14835,17 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 % '$lgt_category_parameter'(This, Ctg, Arg, Value)
 %
-% runtime access to category parameters
+% runtime access to category parameters; in the most common case, the
+% category parameters are shared with the parameters of the object that
+% imports the category; in some rare cases, a parametric category may
+% not be imported by any object and be used e.g. to hold definitions
+% for multifile predicates
 
 '$lgt_category_parameter'(This, Ctg, Arg, Value) :-
-	'$lgt_imports_category_'(This, Ctg, _), !,
-	arg(Arg, Ctg, Value).
+	(	'$lgt_imports_category_'(This, Ctg, _) ->
+		arg(Arg, Ctg, Value)
+	;	arg(Arg, Ctg, Value)
+	).
 
 
 

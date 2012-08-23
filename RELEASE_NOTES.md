@@ -168,6 +168,11 @@ goals.
 * IMPROVED: Use the Logtalk extension specified in the used adapter file when
 loading a settings file.
 
+* CHANGED: Ensure that a call to the `parameter/2` built-in method doesn't
+fail when called from within a category that is not imported by any object.
+This may happen e.g. when a parametric category is used to hold definitions
+for multifile predicates.
+
 Prolog adapter and integration files
 ------------------------------------
 
