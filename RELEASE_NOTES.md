@@ -41,6 +41,10 @@ fail when called from within a category that is not imported by any object.
 This may happen e.g. when a parametric category is used to hold definitions
 for multifile predicates.
 
+* FIXED: When the `report` flag is `off`, only suppress `core` component
+messages. Likewise, when the `report` flag is set to `warnings`, only
+suppress `information/0-1` messages from the `core` component.
+
 
 3.00.0 Alpha 1 - August 21, 2012
 ================================
