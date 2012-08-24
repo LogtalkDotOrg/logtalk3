@@ -141,9 +141,9 @@ link.Description = "Shortcut to Logtalk default library and example paths";
 link.TargetPath = logtalk_home + "\\paths";
 link.Save();
 
-link = WshShell.CreateShortcut(logtalk_user + "\\wenv.lnk");
+link = WshShell.CreateShortcut(logtalk_user + "\\coding.lnk");
 link.Description = "Shortcut to Logtalk text editing support";
-link.TargetPath = logtalk_home + "\\wenv";
+link.TargetPath = logtalk_home + "\\coding";
 link.Save();
 
 link = WshShell.CreateShortcut(logtalk_user + "\\tools\\lgtdoc\\xml\\lgt2html.js.lnk");

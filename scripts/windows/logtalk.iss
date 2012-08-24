@@ -154,7 +154,7 @@ Name: "{code:GetLgtUserDir}\Customization instructions"; Filename: "{app}\CUSTOM
 Name: "{code:GetLgtUserDir}\adapters"; Filename: "{app}\adapters"; Components: user
 Name: "{code:GetLgtUserDir}\manuals"; Filename: "{app}\manuals"; Components: user
 Name: "{code:GetLgtUserDir}\paths"; Filename: "{app}\paths"; Components: user
-Name: "{code:GetLgtUserDir}\wenv"; Filename: "{app}\wenv"; Components: user
+Name: "{code:GetLgtUserDir}\coding"; Filename: "{app}\coding"; Components: user
 
 Name: "{userdesktop}\Logtalk user files"; Filename: "{code:GetLgtUserDir}"; Components: user; Tasks: shortcut
 

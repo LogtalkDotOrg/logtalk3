@@ -134,7 +134,7 @@ ln -sf "$LOGTALKHOME"/UPGRADING.md "$LOGTALKUSER"/UPGRADING.md
 ln -sf "$LOGTALKHOME"/adapters "$LOGTALKUSER"/adapters
 ln -sf "$LOGTALKHOME"/manuals "$LOGTALKUSER"/manuals
 ln -sf "$LOGTALKHOME"/paths "$LOGTALKUSER"/paths
-ln -sf "$LOGTALKHOME"/wenv "$LOGTALKUSER"/wenv
+ln -sf "$LOGTALKHOME"/coding "$LOGTALKUSER"/coding
 ln -sf "$LOGTALKHOME"/tools/lgtdoc/xml/lgt2html.sh "$LOGTALKUSER"/tools/lgtdoc/xml/lgt2html
 ln -sf "$LOGTALKHOME"/tools/lgtdoc/xml/lgt2pdf.sh "$LOGTALKUSER"/tools/lgtdoc/xml/lgt2pdf
 ln -sf "$LOGTALKHOME"/tools/lgtdoc/xml/lgt2xml.sh "$LOGTALKUSER"/tools/lgtdoc/xml/lgt2xml

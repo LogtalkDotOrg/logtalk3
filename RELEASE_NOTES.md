@@ -25,6 +25,23 @@ RELEASE NOTES
 =============
 
 
+3.00.0 Alpha 2 - September ??, 2012
+===================================
+
+Logtalk distribution
+--------------------
+
+* RENAMED: The `wenv` directory is renamed to `coding`.
+
+Logtalk compiler and runtime
+----------------------------
+
+* CHANGED: Ensure that a call to the `parameter/2` built-in method doesn't
+fail when called from within a category that is not imported by any object.
+This may happen e.g. when a parametric category is used to hold definitions
+for multifile predicates.
+
+
 3.00.0 Alpha 1 - August 21, 2012
 ================================
 
@@ -167,11 +184,6 @@ goals.
 
 * IMPROVED: Use the Logtalk extension specified in the used adapter file when
 loading a settings file.
-
-* CHANGED: Ensure that a call to the `parameter/2` built-in method doesn't
-fail when called from within a category that is not imported by any object.
-This may happen e.g. when a parametric category is used to hold definitions
-for multifile predicates.
 
 Prolog adapter and integration files
 ------------------------------------
@@ -2475,7 +2487,7 @@ editing Logtalk source files.
 
 Added a set of Logtalk source code snippets and a set of compilation
 and documenting tools for the Gnome's Gedit text editor (see the file 
-"wenv/gedit/NOTES.txt" for details).
+"coding/gedit/NOTES.txt" for details).
 
 Replaced GeSHi support with a new language file written from scratch.
 
@@ -4992,7 +5004,7 @@ Added support for code completion and for listing entity names on the
 symbol pop-up menu to the MacOS X TextMate text editor.
 
 Updated the "cplgtdirs.*" scripts to also create an alias/shortcut to the 
-"wenv" directory.
+"coding" directory.
 
 Renamed the alternative compilation and documentation directory names on 
 all config files to be compatible across operating-systems. Removed unused

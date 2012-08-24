@@ -112,8 +112,8 @@ details, see the `tools/lgtdoc/NOTES.txt` file.
 5. ADDING LOGTALK SUPPORT TO TEXT EDITORS
 -----------------------------------------
 
-Inside your Logtalk user folder, you will find a `wenv` folder, containing 
+Inside your Logtalk user folder, you will find a `coding` folder, containing 
 support files for several text editors, which add support for syntax 
 highlighting and other text editing services for Logtalk source files.
 Support for several syntax highlighters (used e.g. by wikis and issue
-trackers) is also included. For details, see the `wenv/NOTES.txt` file.
+trackers) is also included. For details, see the `coding/NOTES.txt` file.

@@ -49,7 +49,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr/local/share/lgt3000/scripts
 /usr/local/share/lgt3000/settings-sample.lgt
 /usr/local/share/lgt3000/tools
-/usr/local/share/lgt3000/wenv
+/usr/local/share/lgt3000/coding
 /usr/local/share/logtalk
 /usr/local/bin/logtalk_user_setup
 /usr/local/bin/lgt2pdf

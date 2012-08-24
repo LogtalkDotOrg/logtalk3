@@ -102,9 +102,10 @@ Ready to start writing your own programs?
 1. Read the User Manual sections on `Programming in Logtalk` and `Running 
 and debugging Logtalk programs`.
 
-2. Take a look at the `wenv` sub-directory. There you will find syntax 
+2. Take a look at the `coding` sub-directory. There you will find syntax 
 support files for popular text editors which enable syntax coloring and
-other text services when editing Logtalk source files.
+other text services when editing Logtalk source files. There's also
+support for syntax highlighters used for publishing code.
 
 3. Create a sub-directory with a suitable name to hold all the files of 
 your application. You may want to define the application directory path
