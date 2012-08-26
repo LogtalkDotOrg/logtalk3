@@ -24,15 +24,20 @@ ________________________________________________________________________
 UPGRADING
 =========
 
-* Always check carefully the release notes when updating to a new version.
+* Always check carefully the release notes when updating to a new version,
+specially, CHANGED and RENAMED items.
 
 * Changes in the Logtalk compiler between releases may render some files from
 older versions incompatible with new ones. You may need to update your local
 Logtalk user folder by running the `logtalk_user_setup` shell script.
 
 * If your Logtalk applications depend on some of the example files, it is
-advisable that you check your code against the new version before throwing
-away the older release.
+advisable that you check your code against the new version before deleting
+the older release.
 
 * It's usually a good idea to recompile your source files with the compiler
 flag `smart_compilation` turned off after upgrading to a new Logtalk release.
+
+* In the case of incompatible changes between major Logtalk versions, you
+may be able to use conditional compilation directives to allow you code to
+compile and run under multiple versions.

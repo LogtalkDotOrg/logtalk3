@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
-This file is part of Logtalk http://logtalk.org/  
-Copyright (c) 1998-2012 Paulo Moura   pmoura@logtalk.org  
+This file is part of Logtalk <http://logtalk.org/>  
+Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -60,7 +60,7 @@ license for language bundles instead of the Logtalk distribution license.
 Logtalk license
 ---------------
 
-* MODIFIED: Logtalk is now distributed under the GNU General Public License 3,
+* CHANGED: Logtalk is now distributed under the GNU General Public License 3,
 plus additional terms as per Section 7 of this license. See the `LICENSE.txt`
 file for details.
 
@@ -73,10 +73,10 @@ directories. When performing a system-wide Logtalk installation, each user
 gets its own copy of the `tools` directory thus facilitating per-user
 customization.
 
-* MODIFIED: Renamed the sample `settings.lgt` file to `settings-sample.lgt`,
+* CHANGED: Renamed the sample `settings.lgt` file to `settings-sample.lgt`,
 thus simplifying backing up and upgrading the Logtalk user directory.
 
-* MODIFIED: The `paths` directory is now symbolically linked instead
+* CHANGED: The `paths` directory is now symbolically linked instead
 of copied to the Logtalk user folder when using the installers or the
 install scripts. User-defined library paths should be declared in the
 user `settings.lgt` file.
@@ -205,7 +205,7 @@ we cannot locate the Logtalk installation directory at the usual places,
 try to use a location relative to the directory where the integration script
 is found.
 
-* MODIFIED: SWI-Prolog adapter file to make it easier to generate and use `.qlf`
+* CHANGED: SWI-Prolog adapter file to make it easier to generate and use `.qlf`
 files for the Logtalk source files. See the default settings file for an usage
 example.
 
@@ -213,7 +213,7 @@ example.
 `::/2` calls within modules other than `user`. Also added `goal_expansion/2`
 rules for optimizing `::/2` calls made from within modules.
 
-* MODIFIED: Set the default scratch directory for SICStus Prolog to the current
+* CHANGED: Set the default scratch directory for SICStus Prolog to the current
 directory to avoid broken example unit tests due to differences regarding other
 Prolog compilers in the management of the working directory.
 
@@ -262,7 +262,7 @@ coverage information for the tested entities. In addition, it uses structured
 message printing for all output, for easy integration with other development
 tools.
 
-* UPDATED: The unit test framework is now more resilient to failed unit tests
+* IMPROVED: The unit test framework is now more resilient to failed unit tests
 that redirect the standard output stream.
 
 * UPDATED: The `lgtdoc` tool now uses reflection to access all relevant entity
@@ -309,7 +309,7 @@ highlighting.
 
 * NEW: Notes on the Chocolat MacOS X text editor.
 
-* MODIFIED: Updated the SyntaxHighlighter support to match the contribution to
+* CHANGED: Updated the SyntaxHighlighter support to match the contribution to
 the original software.
 
 
