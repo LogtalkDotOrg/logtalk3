@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>name</key>
+	<string>Miscellaneous</string>
+	<key>scope</key>
+	<string>source.logtalk</string>
+	<key>settings</key>
+	<dict>
+		<key>disableIndentCorrections</key>
+		<true/>
+		<key>highlightPairs</key>
+		<array>
+			<array>
+				<string>(</string>
+				<string>)</string>
+			</array>
+			<array>
+				<string>{</string>
+				<string>}</string>
+			</array>
+			<array>
+				<string>[</string>
+				<string>]</string>
+			</array>
+		</array>
+		<key>increaseIndentPattern</key>
+		<string>(:-|-->)$</string>
+		<key>smartTypingPairs</key>
+		<array>
+			<array>
+				<string>"</string>
+				<string>"</string>
+			</array>
+			<array>
+				<string>(</string>
+				<string>)</string>
+			</array>
+			<array>
+				<string>{</string>
+				<string>}</string>
+			</array>
+			<array>
+				<string>[</string>
+				<string>]</string>
+			</array>
+			<array>
+				<string>'</string>
+				<string>'</string>
+			</array>
+		</array>
+	</dict>
+	<key>uuid</key>
+	<string>B25054C4-CAA1-4F80-9864-0F5E12B5E741</string>
+</dict>
+</plist>
