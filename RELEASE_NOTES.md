@@ -45,6 +45,14 @@ for multifile predicates.
 messages. Likewise, when the `report` flag is set to `warnings`, only
 suppress `information/0-1` messages from the `core` component.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* NEW: Logtalk language bundle for TextMate 2.
+
+* CHANGED: The TextMate Logtalk language bundles now use the default TextMate
+license for language bundles instead of the Logtalk distribution license.
+
 
 3.00.0 Alpha 1 - August 21, 2012
 ================================
