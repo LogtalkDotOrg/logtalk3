@@ -152,12 +152,12 @@ used as a message broadcasting control construct.
 * NEW: When compiling a coinductive predicate, save the extended coinductive
 template as a predicate property.
 
-* CHANGED: Intercept the messages current_predicate/1 and predicate_property/2
-sent to the pseudo-object "user". This allows consistent behavior across
-back-end Prolog compilers.
+* CHANGED: Intercept the `current_predicate/1` and `predicate_property/2`
+messages sent to the pseudo-object `user`. This allows consistent behavior
+across back-end Prolog compilers.
 
 * NEW: Added a `loaded_file/4` predicate to the `logtalk` built-in object,
-which complements the existing loaded_file/2-3 predicates and gives access
+which complements the existing `loaded_file/2-3` predicates and gives access
 to the stream options (`encoding/1` and `bom/1`) used when the file was
 compiled and loaded.
 
@@ -197,7 +197,7 @@ we cannot locate the Logtalk installation directory at the usual places,
 try to use a location relative to the directory where the integration script
 is found.
 
-* MODIFIED: SWI-Prolog adapter file to make it easier to generate and use .qlf
+* MODIFIED: SWI-Prolog adapter file to make it easier to generate and use `.qlf`
 files for the Logtalk source files. See the default settings file for an usage
 example.
 
@@ -219,7 +219,7 @@ built-in predicates.
 * IMPROVED: YAP integration files to better hide Logtalk compiler and runtime
 internal predicates.
 
-* IMPROVED: Updated the XSB integration files to use index/2 directives for
+* IMPROVED: Updated the XSB integration files to use `index/2` directives for
 the dynamic predicates implementing the dynamic binding lookup predicate
 caches.
 
