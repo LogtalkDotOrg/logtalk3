@@ -20,7 +20,7 @@
 %  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 %  
 %  Additional licensing terms apply per Section 7 of the GNU General
-%  Public License 3. Consult the "LICENSE.txt" file for details.
+%  Public License 3. Consult the `LICENSE.txt` file for details.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
