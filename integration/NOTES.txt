@@ -48,7 +48,7 @@ shortcuts available from the `Start Menu/Programs/Logtalk` menu.
 
 The first run of the XSB integration scripts must be made by an user with
 administrative rights (on POSIX systems, run them once as root or using
-sudo; in Windows systems run them once from an administrative account).
+`sudo`; in Windows systems run them once from an administrative account).
 
 The GNU Prolog integration script provides adequate performance for 
 development. For production environments, improved performance may be 

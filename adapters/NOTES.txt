@@ -217,7 +217,7 @@ SWI Prolog 6.0.0 and later versions
 	If you want SWI-Prolog to automatically load Logtalk at startup, then 
 	add the following lines to your pl.ini (on Windows):
 
-		:- ['drive:\\path to logtalk user folder\\adapters\\swi.pl'].
+		:- ['drive:\\path to logtalk installation\\adapters\\swi.pl'].
 		:- ['drive:\\path to logtalk installation\\compiler\\core.pl'].
 		:- ['drive:\\path to logtalk installation\\paths\\paths.pl'].
 

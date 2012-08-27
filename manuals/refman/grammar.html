@@ -35,7 +35,7 @@
 <h1 id="grammar_grammar">Grammar</h1>
 
 <p>
-The Logtalk grammar is here described using Backus-Naur Form syntax. Non-terminal symbols in <em>italics</em> have the definition found in the ISO Prolog Standard. Terminal symbols are represented in a <code>fixed width font</code> and between "".
+The Logtalk grammar is here described using Backus-Naur Form syntax. Non-terminal symbols in <em>italics</em> have the definition found in the ISO Prolog Standard. Terminal symbols are represented in a <code>fixed width font</code> and between double-quotes.
 </p>
 
 
@@ -52,11 +52,11 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 
 	<dl>
 		<dt>object ::=</dt>
-			<dd>begin_object_directive [object_directives] [clauses] end_object_directive.</dd>
+			<dd>begin_object_directive [ object_directives ] [ clauses ] end_object_directive.</dd>
 	</dl>
 	<dl>
 		<dt>begin_object_directive ::=</dt>
-			<dd>"<code>:- object(</code>" object_identifier [ "<code>,</code>" object_relations] "<code>).</code>"</dd>
+			<dd>"<code>:- object(</code>" object_identifier [ "<code>,</code>" object_relations ] "<code>).</code>"</dd>
 	</dl>
 	<dl>
 		<dt>end_object_directive ::=</dt>
@@ -96,11 +96,11 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 
 	<dl>
 		<dt>category ::=</dt>
-			<dd>begin_category_directive [category_directives] [clauses] end_category_directive.</dd>
+			<dd>begin_category_directive [ category_directives ] [ clauses ] end_category_directive.</dd>
 	</dl>
 	<dl>
 		<dt>begin_category_directive ::=</dt>
-			<dd>"<code>:- category(</code>" category_identifier [ "<code>,</code>" category_relations] "<code>).</code>"</dd>
+			<dd>"<code>:- category(</code>" category_identifier [ "<code>,</code>" category_relations ] "<code>).</code>"</dd>
 	</dl>
 	<dl>
 		<dt>end_category_directive ::=</dt>
@@ -123,11 +123,11 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 
 	<dl>
 		<dt>protocol ::=</dt>
-			<dd>begin_protocol_directive [protocol_directives] end_protocol_directive.</dd>
+			<dd>begin_protocol_directive [ protocol_directives ] end_protocol_directive.</dd>
 	</dl>
 	<dl>
 		<dt>begin_protocol_directive ::=</dt>
-			<dd>"<code>:- protocol(</code>" protocol_identifier [ "<code>,</code>" extends_protocols] "<code>).</code>"</dd>
+			<dd>"<code>:- protocol(</code>" protocol_identifier [ "<code>,</code>" extends_protocols ] "<code>).</code>"</dd>
 	</dl>
 	<dl>
 		<dt>end_protocol_directive ::=</dt>
@@ -736,7 +736,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 		</dl>
 		<dl>
 			<dt>mode_term ::=</dt>
-				<dd>"<code>@</code>" [type] | "<code>+</code>" [type] | "<code>-</code>" [type] | "<code>?</code>" [type]</dd>
+				<dd>"<code>@</code>" [ type ] | "<code>+</code>" [ type ] | "<code>-</code>" [ type ] | "<code>?</code>" [ type ]</dd>
 		</dl>
 		<dl>
 			<dt>type ::=</dt>
