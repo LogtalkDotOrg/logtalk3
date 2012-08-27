@@ -317,7 +317,7 @@
 
 	:- multifile(logtalk::debug_handler_provider/1).
 
-	% there can only be one debug handler provided loaded at the same time;
+	% there can only be one debug handler provider loaded at the same time;
 	% the Logtalk runtime uses the logtalk::debug_handler_provider/1 hook
 	% predicate for detecting multiple instances of the handler and for
 	% better error reporting
