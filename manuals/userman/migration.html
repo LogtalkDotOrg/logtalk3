@@ -171,27 +171,27 @@ The symbolic links or shortcuts can also be easily created on most operating-sys
 </p>
 
 
-<h2 id="migration_proprietary">Dealing with proprietary Prolog directives</h2>
+<h2 id="migration_proprietary">Dealing with proprietary Prolog directives and predicates</h2>
 
 <p>
-Most Prolog compilers define proprietary, non-standard directives that may be used in both plain code and module code. Logtalk will generate compilation errors on source files containing these directives unless you first specify how the directives should be handled. Three actions are possible and can be specified, on a per-directive basis, on the Prolog adapter files: ignoring the directive (i.e. do not copy the directive, although a goal can be proved as a consequence), rewriting and copy the directive to the generated Prolog files, or rewriting and recompiling the resulting directive. Each action is specified using, respectively, the predicates: <code>'$lgt_ignore_pl_directive'/1</code>, <code>'$lgt_rewrite_and_copy_pl_directive'/2</code>, and <code>'$lgt_rewrite_and_recompile_pl_directive'/2</code>. For example, assume that a given Prolog compiler defines a <code>comment/2</code> directive for predicates using the format:
+Most Prolog compilers define proprietary, non-standard directives and predicates that may be used in both plain code and module code. Non-standard Prolog built-in predicates are usually not problematic, as Logtalk is usually able to identify and compile them correctly (but see the notes on built-in meta-predicates for some caveats). However, Logtalk will generate compilation errors on source files containing proprietary directives unless you first specify how the directives should be handled. Several actions are possible on a per-directive basis: ignoring the directive (i.e. do not copy the directive, although a goal can be proved as a consequence), rewriting and copy the directive to the generated Prolog files, or rewriting and recompiling the resulting directive. To specify these actions, the adapter files contain clauses for the <code>'$lgt_pl_term_expansion'/2</code> predicate. For example, assume that a given Prolog compiler defines a <code>comment/2</code> directive for predicates using the format:
 </p>
 <pre>:- comment(foo/2, "Brief description of the predicate").</pre>
 <p>
-We can rewrite this predicate into a Logtalk <code>info/2</code> directive by defining a suitable clause for the <code>'$lgt_rewrite_and_recompile_pl_directive'/2</code> predicate:
+We can rewrite this predicate into a Logtalk <code>info/2</code> directive by defining a suitable clause for the <code>'$lgt_pl_term_expansion'/2</code> predicate:
 </p>
-<pre>'$lgt_rewrite_and_recompile_pl_directive'(comment(F/A, String), info(F/A, [comment is Atom])) :-
+<pre>'$lgt_pl_term_expansion'(comment(F/A, String), info(F/A, [comment is Atom])) :-
     atom_codes(Atom, String).</pre>
 <p>
 This Logtalk feature can be used to allow compilation of legacy Prolog code without the need of changing the sources. When used, is advisable to set the <code>portability/1</code> compiler flag to <code>warning</code> in order to more easily identify source files that are likely non-portable across Prolog compilers. 
 </p>
 <p>
-A second example, using the <code>'$lgt_ignore_pl_directive'/1</code> hook predicate:
+A second example, where a proprietary Prolog directive is discarded after triggering a side-effect:
 </p>
-<pre>'$lgt_ignore_pl_directive'(load_foreign_files(Files,Libs,InitRoutine)) :-
+<pre>'$lgt_pl_term_expansion'(load_foreign_files(Files,Libs,InitRoutine), []) :-
     load_foreign_files(Files,Libs,InitRoutine).</pre>
 <p>
-In this case, although the directive is not copied to the generated Prolog file, the foreign library files are loaded as a side-effect of calling the hook predicate.
+In this case, although the directive is not copied to the generated Prolog file, the foreign library files are loaded as a side-effect of the Logtalk compiler calling the <code>'$lgt_pl_term_expansion'/2</code> hook predicate.
 </p>
 
 
@@ -270,7 +270,7 @@ The Logtalk compiler will print a warning if the <code>multifile/1</code> direct
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: June 13, 2012</span>
+		<span>Last updated on: August 27, 2012</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="programming.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="index.html">next</a></span><br/>
