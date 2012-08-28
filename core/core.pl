@@ -4300,7 +4300,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_logtalk._dcl'(print_message(_, _, _), p(p(p)), no, 0).
 '$lgt_logtalk._dcl'(print_message_tokens(_, _, _), p(p(p)), no, 0).
-'$lgt_logtalk._dcl'(print_message_token(_, _), p(p(p)), no, 0).
+'$lgt_logtalk._dcl'(print_message_token(_, _), p(p(p)), no, 18).
 '$lgt_logtalk._dcl'(message_tokens(_, _, _, _), p(p(p)), no, 26).
 '$lgt_logtalk._dcl'(message_prefix_stream(_, _, _, _), p(p(p)), no, 18).
 '$lgt_logtalk._dcl'(message_hook(_, _, _, _), p(p(p)), no, 18).
