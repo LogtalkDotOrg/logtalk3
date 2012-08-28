@@ -24,7 +24,7 @@ ________________________________________________________________________
 AUTHORS
 =======
 
-* Paulo Moura (developer and maintainer)
+* Paulo Moura (language designer, developer, and maintainer)
 
 
 CONTRIBUTORS
@@ -92,3 +92,9 @@ OPEN-SOURCE SOFTWARE USED IN LOGTALK DEVELOPMENT AND DISTRIBUTION
 * FOP (PDF documentation)
 * phpBB (discussion forums)
 * WordPress (blog)
+
+
+SPONSORS
+========
+
+VivoMind Research, LLC (testing and library suggestions)
