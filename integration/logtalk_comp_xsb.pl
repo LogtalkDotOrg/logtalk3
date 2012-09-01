@@ -41,7 +41,7 @@
 
 :- compiler_options([xpp_on]).
 
-#include ../core/core.pl
+#include ./.core.pl
 
 % workaround the lack of support for static multifile predicates
 :- dynamic('$lgt_logtalk.debug_handler_provider'/2).

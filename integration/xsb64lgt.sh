@@ -95,4 +95,6 @@ echo
 
 export LOGTALK_STARTUP_DIRECTORY=`pwd`
 
-exec xsb-bits64 -l -e "['$LOGTALKHOME/integration/logtalk_xsb.pl']." "$@"
+exec
+	ln -sf "$LOGTALKHOME/integration/logtalk_xsb.pl" "$LOGTALKUSER/.logtalk_xsb.pl" && \
+	xsb-bits64 -l -e "['$LOGTALKUSER/.logtalk_xsb.pl']." "$@"

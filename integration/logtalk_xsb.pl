@@ -24,6 +24,14 @@
 
 :- import expand_atom/2 from standard.
 % load Logtalk core files
-:- expand_atom('$LOGTALKHOME/adapters/xsb.pl', Adapter), reconsult(Adapter).
-:- expand_atom('$LOGTALKHOME/paths/paths.pl', Paths), reconsult(Paths).
-:- expand_atom('$LOGTALKHOME/integration/logtalk_comp_xsb.pl', Compiler), reconsult(Compiler).
+:-	(	shell('ln -sf $LOGTALKHOME/adapters/xsb.pl $LOGTALKUSER/.xsb.pl'),
+		expand_atom('$LOGTALKUSER/.xsb.pl', Adapter),
+		reconsult(Adapter),
+		shell('ln -sf $LOGTALKHOME/paths/paths.pl $LOGTALKUSER/.paths.pl'),
+		expand_atom('$LOGTALKUSER/.paths.pl', Paths),
+		reconsult(Paths),
+		shell('ln -sf $LOGTALKHOME/core/core.pl $LOGTALKUSER/.core.pl'),
+		shell('ln -sf $LOGTALKHOME/integration/logtalk_comp_xsb.pl $LOGTALKUSER/.logtalk_comp_xsb.pl'),
+		expand_atom('$LOGTALKUSER/.logtalk_comp_xsb.pl', Core),
+		reconsult(Core)
+	).

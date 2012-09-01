@@ -45,6 +45,12 @@ for multifile predicates.
 messages. Likewise, when the `report` flag is set to `warnings`, only
 suppress `information/0-1` messages from the `core` component.
 
+Prolog adapter and integration files
+------------------------------------
+
+* IMPROVED: On POSIX systems, it's no longer necessary to use `sudo` the
+first time that the XSB integration scripts are used.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

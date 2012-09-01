@@ -37,18 +37,17 @@ system path):
 * Qu-Prolog (version 8.12 or later):       `qplgt`
 * SICStus Prolog (version 4.1.0 or later): `sicstuslgt`
 * SWI-Prolog (version 6.0.0 or later):     `swilgt`
-* XSB (version 3.3 or later):              `xsblgt`     (first run must use `sudo`)
-* XSB 64 bits (version 3.3 or later):      `xsb64lgt`   (first run must use `sudo`)
-* XSB MT (version 3.3 or later):           `xsbmtlgt`   (first run must use `sudo`)
-* XSB MT 64 bits (version 3.3 or later):   `xsbmt64lgt` (first run must use `sudo`)
+* XSB (version 3.3 or later):              `xsblgt`
+* XSB 64 bits (version 3.3 or later):      `xsb64lgt`
+* XSB MT (version 3.3 or later):           `xsbmtlgt`
+* XSB MT 64 bits (version 3.3 or later):   `xsbmt64lgt`
 * YAP (version 6.0.2 or later):            `yaplgt`
 
 On Windows systems, the Logtalk installer makes the Prolog integration 
 shortcuts available from the `Start Menu/Programs/Logtalk` menu.
 
-The first run of the XSB integration scripts must be made by an user with
-administrative rights (on POSIX systems, run them once as root or using
-`sudo`; in Windows systems run them once from an administrative account).
+In Windows systems, the first run of the XSB integration shortcuts must
+be made from an administrative account.
 
 The GNU Prolog integration script provides adequate performance for 
 development. For production environments, improved performance may be 
