@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2012/05/23,
+		date is 2012/09/01,
 		comment is 'Debugger.']).
 
 	% avoid a catch-22...
@@ -316,6 +316,9 @@
 		\+ \+ spying_(Sender, This, Self, Goal).
 
 	:- multifile(logtalk::debug_handler_provider/1).
+	:- if(current_logtalk_flag(prolog_dialect, qp)).
+		:- dynamic(logtalk::debug_handler_provider/1).
+	:- endif.
 
 	% there can only be one debug handler provider loaded at the same time;
 	% the Logtalk runtime uses the logtalk::debug_handler_provider/1 hook
@@ -325,6 +328,9 @@
 		this(This).
 
 	:- multifile(logtalk::debug_handler/2).
+	:- if(current_logtalk_flag(prolog_dialect, qp)).
+		:- dynamic(logtalk::debug_handler/2).
+	:- endif.
 
 	logtalk::debug_handler(fact(_, Fact, N), ExCtx) :-
 		(	debugging_, \+ skipping_ ->
