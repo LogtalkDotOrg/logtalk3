@@ -26,6 +26,8 @@
 :- import stat_set_flag/2 from machine.
 :- stat_set_flag(79, 1).
 
+:- import format/3 from format.
+
 :- index('$lgt_send_to_obj_'/4, [1 + *(2)]).
 :- index('$lgt_send_to_obj_ne_'/4, [1 + *(2)]).
 :- index('$lgt_send_to_self_'/4, [1 + *(2)]).

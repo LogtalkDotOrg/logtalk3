@@ -54,6 +54,9 @@ Prolog adapter and integration files
 * IMPROVED: On POSIX systems, it's no longer necessary to use `sudo` the
 first time that the XSB integration scripts are used.
 
+* FIXED: Missing import of the `format/3` predicate in the XSB-MT integration
+files.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
