@@ -15876,6 +15876,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!,
 	'$lgt_dcg_body'(GRBody, S0, _, Goal).
 
+'$lgt_dcg_body'(phrase(GRBody), S0, S, phrase(GRBody, S0, S)) :-
+	!.
+
 '$lgt_dcg_body'(GRBody, S0, S, Goal) :-
 	functor(GRBody, call, _),
 	!,

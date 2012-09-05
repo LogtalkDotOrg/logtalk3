@@ -45,6 +45,9 @@ for multifile predicates.
 messages. Likewise, when the `report` flag is set to `warnings`, only
 suppress `information/0-1` messages from the `core` component.
 
+* NEW: Accept phrase//1 as a built-in non-terminal in the body of grammar
+rules. From Richard O'Keefe feedback on the SWI-Prolog mailing list.
+
 Prolog adapter and integration files
 ------------------------------------
 
