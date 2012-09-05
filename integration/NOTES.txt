@@ -47,7 +47,8 @@ On Windows systems, the Logtalk installer makes the Prolog integration
 shortcuts available from the `Start Menu/Programs/Logtalk` menu.
 
 In Windows systems, the first run of the XSB integration shortcuts must
-be made from an administrative account.
+be made from an administrative account (right-click on the shortcut and
+select the "Run as administrator" option).
 
 The GNU Prolog integration script provides adequate performance for 
 development. For production environments, improved performance may be 

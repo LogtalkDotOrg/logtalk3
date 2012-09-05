@@ -62,6 +62,8 @@ installer creates an alias to the Logtalk folder in the Applications folder.
 
 On Windows systems, shortcuts for running Logtalk with selected back-end 
 Prolog compilers are created on the `Start Menu/Programs/Logtalk` menu.
+The first run of the XSB integration shortcuts must be as an administrator
+(right-click on the shortcut and select the "Run as administrator" option).
 If you get an unexpected failure when using one of the Prolog integration
 shortcuts, consult the `adapters/NOTES.txt` file in the Logtalk installation
 folder for compatibility notes.
