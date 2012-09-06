@@ -44,10 +44,10 @@ scripts!):
 * Qu-Prolog:      `qplgt`
 * SICStus Prolog: `sicstuslgt`
 * SWI-Prolog:     `swilgt`
-* XSB:            `xsblgt`
-* XSB 64 bits:    `xsb64lgt`
-* XSB MT:         `xsbmtlgt`
-* XSB MT 64 bits: `xsbmt64lgt`
+* XSB:            `xsblgt`     (first run must use `sudo`)
+* XSB 64 bits:    `xsb64lgt`   (first run must use `sudo`)
+* XSB MT:         `xsbmtlgt`   (first run must use `sudo`)
+* XSB MT 64 bits: `xsbmt64lgt` (first run must use `sudo`)
 * YAP:            `yaplgt`
 
 If you get an unexpected failure when using one of the Prolog integration

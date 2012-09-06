@@ -95,6 +95,4 @@ echo
 
 export LOGTALK_STARTUP_DIRECTORY=`pwd`
 
-exec
-	ln -sf "$LOGTALKHOME/integration/logtalk_xsbmt.pl" "$LOGTALKUSER/.logtalk_xsbmt.pl" && \
-	xsb-mt --shared_predicates -l -e "['$LOGTALKUSER/.logtalk_xsbmt.pl']." "$@"
+exec xsb-mt --shared_predicates -l -e "['$LOGTALKHOME/integration/logtalk_xsbmt.pl']." "$@"

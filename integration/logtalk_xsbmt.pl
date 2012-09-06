@@ -23,26 +23,11 @@
 
 
 :- import expand_atom/2 from standard.
-:- import xsb_configuration/2 from xsb_configuration.
 % load Logtalk core files
-:- if(xsb_configuration(os_type, windows)).
-	:-	(	expand_atom('$LOGTALKHOME/adapters/xsb.pl', Adapter),
-			reconsult(Adapter),
-			expand_atom('$LOGTALKHOME/paths/paths.pl', Paths),
-			reconsult(Paths),
-			expand_atom('$LOGTALKHOME/integration/logtalk_comp_xsbmt.pl', Core),
-			reconsult(Core)
-		).
-:- elseif(true).
-	:-	(	shell('ln -sf $LOGTALKHOME/adapters/xsb.pl $LOGTALKUSER/.xsb.pl'),
-			expand_atom('$LOGTALKUSER/.xsb.pl', Adapter),
-			reconsult(Adapter),
-			shell('ln -sf $LOGTALKHOME/paths/paths.pl $LOGTALKUSER/.paths.pl'),
-			expand_atom('$LOGTALKUSER/.paths.pl', Paths),
-			reconsult(Paths),
-			shell('ln -sf $LOGTALKHOME/core/core.pl $LOGTALKUSER/.core.pl'),
-			shell('ln -sf $LOGTALKHOME/integration/logtalk_comp_xsbmt.pl $LOGTALKUSER/.logtalk_comp_xsbmt.pl'),
-			expand_atom('$LOGTALKUSER/.logtalk_comp_xsb.pl', Core),
-			reconsult(Core)
-		).
-:- endif.
+:-	(	expand_atom('$LOGTALKHOME/adapters/xsb.pl', Adapter),
+		reconsult(Adapter),
+		expand_atom('$LOGTALKHOME/paths/paths.pl', Paths),
+		reconsult(Paths),
+		expand_atom('$LOGTALKHOME/integration/logtalk_comp_xsbmt.pl', Core),
+		reconsult(Core)
+	).
