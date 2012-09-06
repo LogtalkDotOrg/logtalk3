@@ -24,14 +24,19 @@
 
 :- import expand_atom/2 from standard.
 % load Logtalk core files
-:-	(	shell('ln -sf $LOGTALKHOME/adapters/xsb.pl $LOGTALKUSER/.xsb.pl'),
-		expand_atom('$LOGTALKUSER/.xsb.pl', Adapter),
-		reconsult(Adapter),
-		shell('ln -sf $LOGTALKHOME/paths/paths.pl $LOGTALKUSER/.paths.pl'),
-		expand_atom('$LOGTALKUSER/.paths.pl', Paths),
-		reconsult(Paths),
-		shell('ln -sf $LOGTALKHOME/core/core.pl $LOGTALKUSER/.core.pl'),
-		shell('ln -sf $LOGTALKHOME/integration/logtalk_comp_xsbmt.pl $LOGTALKUSER/.logtalk_comp_xsbmt.pl'),
-		expand_atom('$LOGTALKUSER/.logtalk_comp_xsb.pl', Core),
-		reconsult(Core)
+:-	(	expand_atom('$LOGTALKHOME/adapters/xsb.pl', AdapterSource),
+		expand_atom('$LOGTALKUSER/.xsb.pl', AdapterDestination),
+		(path_sysop(link, AdapterSource, AdapterDestination) -> true; true),
+		reconsult(AdapterDestination),
+		expand_atom('$LOGTALKHOME/paths/paths.pl', PathsSource),
+		expand_atom('$LOGTALKUSER/.paths.pl', PathsDestination),
+		(path_sysop(link, PathsSource, PathsDestination) -> true; true),
+		reconsult(PathsDestination),
+		expand_atom('$LOGTALKHOME/core/core.pl', CoreSource),
+		expand_atom('$LOGTALKUSER/.core.pl', CoreDestination),
+		(path_sysop(link, CoreSource, CoreDestination) -> true; true),
+		expand_atom('$LOGTALKHOME/integration/logtalk_comp_xsbmt.pl', IntegrationSource),
+		expand_atom('$LOGTALKUSER/.logtalk_comp_xsbmt.pl', IntegrationDestination),
+		(path_sysop(link, IntegrationSource, IntegrationDestination) -> true; true),
+		reconsult(IntegrationDestination)
 	).
