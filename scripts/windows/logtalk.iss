@@ -13,7 +13,7 @@
 #define MyAppRegURL "http://logtalk.org/regform.html"
 #define MyAppRegUrlName "Logtalk Registration.url"
 
-#define MyBaseDir "C:\lgt3svn"
+#define MyBaseDir "C:\lgt3git"
 
 [Setup]
 AppName={#MyAppName}
