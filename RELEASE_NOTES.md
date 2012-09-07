@@ -54,6 +54,8 @@ Prolog adapter and integration files
 * FIXED: Missing import of the `format/3` predicate in the XSB-MT integration
 files.
 
+* NEW: Support for the extended table/1 directive in XSB.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

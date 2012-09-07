@@ -493,6 +493,10 @@ setup_call_catcher_cleanup(Setup, Call, Catcher, Cleanup) :-
 	logtalk_load_context(entity_type, _),
 	'$lgt_compile_predicate_indicators'(PIs, CPIs).
 
+'$lgt_xsb_directive_expansion'(as(table(PIs),ShareMode), {as(table(CPIs),ShareMode)}) :-
+	logtalk_load_context(entity_type, _),
+	'$lgt_compile_predicate_indicators'(PIs, CPIs).
+
 '$lgt_xsb_directive_expansion'(thread_private(PIs), {thread_private(CPIs)}) :-
 	logtalk_load_context(entity_type, _),
 	'$lgt_compile_predicate_indicators'(PIs, CPIs).
