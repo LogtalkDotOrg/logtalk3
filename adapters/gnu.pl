@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for GNU Prolog 1.4.1 (and later versions)
-%  Last updated on August 2, 2012
+%  Last updated on September 7, 2012
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -110,10 +110,13 @@ setup_call_cleanup(_, _, _) :-
 	),
 	!.
 
+'$lgt_pl_meta_predicate'(*->(_, _), *->(0, 0), control_construct).
+
 
 % '$lgt_pl_meta_directive'(@callable)
 
-'$lgt_pl_meta_predicate'(*->(_, _), *->(0, 0), control_construct).
+'$lgt_pl_meta_directive'(_) :-
+	fail.
 
 
 
