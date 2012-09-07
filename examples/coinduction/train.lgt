@@ -22,11 +22,11 @@
 			comment is 'Timed automata example.']).
 
 		:- public(driver/5).
-			driver(S0, S1, S2, [X| Rest], [(X,T)| R]) :-
-				driver(S0, S1, S2, [X| Rest], [(X,T)| R], 0, 0, 0, 0).
+		driver(S0, S1, S2, [X| Rest], [(X,T)| R]) :-
+			driver(S0, S1, S2, [X| Rest], [(X,T)| R], 0, 0, 0, 0).
 
 		:- coinductive(driver(+,+,+,+,+,-,-,-,-)).
-			driver(S0, S1, S2, [X| Rest], [(X,T)| R], T, T0, T1, T2) :-
+		driver(S0, S1, S2, [X| Rest], [(X,T)| R], T, T0, T1, T2) :-
 			train(S0, X, S00, T, T0, T00),
 			gate(S1, X, S10, T, T1, T10),
 			controller(S2, X, S20, T, T2, T20),
@@ -85,11 +85,11 @@
 			comment is 'Timed automata example.']).
 
 		:- public(driver/5).
-			driver(S0, S1, S2, [X| Rest], [(X,T)| R]) :-
-				driver(S0, S1, S2, [X| Rest], [(X,T)| R], 0, 0, 0, 0).
+		driver(S0, S1, S2, [X| Rest], [(X,T)| R]) :-
+			driver(S0, S1, S2, [X| Rest], [(X,T)| R], 0, 0, 0, 0).
 
 		:- coinductive(driver(+,+,+,+,+,-,-,-,-)).
-			driver(S0, S1, S2, [X| Rest], [(X,T)| R], T, T0, T1, T2) :-
+		driver(S0, S1, S2, [X| Rest], [(X,T)| R], T, T0, T1, T2) :-
 			train(S0, X, S00, T, T0, T00),
 			gate(S1, X, S10, T, T1, T10),
 			controller(S2, X, S20, T, T2, T20),
