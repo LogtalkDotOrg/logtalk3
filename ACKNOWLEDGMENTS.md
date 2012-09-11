@@ -77,6 +77,12 @@ Contact us also if, for some reason, you don't want your name on this
 list.
 
 
+SPONSORS
+========
+
+VivoMind Research, LLC (testing and library suggestions)
+
+
 OPEN-SOURCE SOFTWARE USED IN LOGTALK DEVELOPMENT AND DISTRIBUTION
 =================================================================
 
@@ -92,9 +98,3 @@ OPEN-SOURCE SOFTWARE USED IN LOGTALK DEVELOPMENT AND DISTRIBUTION
 * FOP (PDF documentation)
 * phpBB (discussion forums)
 * WordPress (blog)
-
-
-SPONSORS
-========
-
-VivoMind Research, LLC (testing and library suggestions)
