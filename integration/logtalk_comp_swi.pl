@@ -51,16 +51,16 @@
 	'$lgt_prolog_feature'/2,
 	'$lgt_exec_ctx'/6, '$lgt_pred_meta_vars'/3,
 	'$lgt_send_to_self_nv'/3,
-	'$lgt_send_to_self'/3, '$lgt_send_to_self_'/4,
-	'$lgt_send_to_obj'/3, '$lgt_send_to_obj_'/4,
+	'$lgt_send_to_self'/3, '$lgt_send_to_self_'/3,
+	'$lgt_send_to_obj'/3, '$lgt_send_to_obj_'/3,
 	'$lgt_send_to_obj_nv'/3,
 	'$lgt_send_to_obj_ne_nv'/3,
-	'$lgt_send_to_obj_ne'/3, '$lgt_send_to_obj_ne_'/4,
-	'$lgt_obj_super_call_same'/3, '$lgt_obj_super_call_same_'/4,
-	'$lgt_obj_super_call_other'/3, '$lgt_obj_super_call_other_'/4,
-	'$lgt_ctg_super_call_same'/3, '$lgt_ctg_super_call_same_'/4,
-	'$lgt_ctg_super_call_other'/3, '$lgt_ctg_super_call_other_'/4,
-	'$lgt_ctg_call'/3, '$lgt_ctg_call_'/4,
+	'$lgt_send_to_obj_ne'/3, '$lgt_send_to_obj_ne_'/3,
+	'$lgt_obj_super_call_same'/3, '$lgt_obj_super_call_same_'/3,
+	'$lgt_obj_super_call_other'/3, '$lgt_obj_super_call_other_'/3,
+	'$lgt_ctg_super_call_same'/3, '$lgt_ctg_super_call_same_'/3,
+	'$lgt_ctg_super_call_other'/3, '$lgt_ctg_super_call_other_'/3,
+	'$lgt_ctg_call'/3, '$lgt_ctg_call_'/3,
 	'$lgt_db_lookup_cache_'/5,
 	'$lgt_hook_term_expansion_'/2, '$lgt_hook_goal_expansion_'/2,
 	'$lgt_threaded_tag_counter_'/1,
@@ -72,14 +72,14 @@
 % also note that the index/1 directive is deprecated in recent SWI-Prolog
 % versions, which add support for multiple argument indexing
 :- if(current_predicate(system:index/1)).
-	:- index('$lgt_send_to_obj_'(1, 1, 0, 0)).
-	:- index('$lgt_send_to_obj_ne_'(1, 1, 0, 0)).
-	:- index('$lgt_send_to_self_'(1, 1, 0, 0)).
-	:- index('$lgt_obj_super_call_same_'(1, 1, 0, 0)).
-	:- index('$lgt_obj_super_call_other_'(1, 1, 0, 0)).
-	:- index('$lgt_ctg_super_call_same_'(1, 1, 0, 0)).
-	:- index('$lgt_ctg_super_call_other_'(1, 1, 0, 0)).
-	:- index('$lgt_ctg_call_'(1, 1, 0, 0)).
+	:- index('$lgt_send_to_obj_'(1, 1, 0)).
+	:- index('$lgt_send_to_obj_ne_'(1, 1, 0)).
+	:- index('$lgt_send_to_self_'(1, 1, 0)).
+	:- index('$lgt_obj_super_call_same_'(1, 1, 0)).
+	:- index('$lgt_obj_super_call_other_'(1, 1, 0)).
+	:- index('$lgt_ctg_super_call_same_'(1, 1, 0)).
+	:- index('$lgt_ctg_super_call_other_'(1, 1, 0)).
+	:- index('$lgt_ctg_call_'(1, 1, 0)).
 	:- index('$lgt_db_lookup_cache_'(1, 1, 0, 0, 0)).
 :- endif.
 

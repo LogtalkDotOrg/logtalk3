@@ -7,7 +7,7 @@
 %  load Logtalk files using SWI Prolog consult/1, to support edit/1 and
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
-%  Last updated on August 7, 2012
+%  Last updated on September 11, 2012
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -95,14 +95,14 @@ prolog_edit:locate(Spec, source_file(Source), [file(Source)]) :-
 
 :- multifile(user:prolog_predicate_name/2).	% for e.g. the call stack in the SWI-Prolog graphical tracer
 
-user:prolog_predicate_name(user:'$lgt_send_to_obj_'(_, _, _, _), '::/2 (event-aware)') :- !.
-user:prolog_predicate_name(user:'$lgt_send_to_obj_ne_'(_, _, _, _), '::/2 (event transparent)') :- !.
-user:prolog_predicate_name(user:'$lgt_send_to_self_'(_, _, _, _), '::/1') :- !.
-user:prolog_predicate_name(user:'$lgt_obj_super_call_same_'(_, _, _, _), '^^/2 (from obj; same pred)') :- !.
-user:prolog_predicate_name(user:'$lgt_obj_super_call_other_'(_, _, _, _), '^^/2 (from obj; diff pred)') :- !.
-user:prolog_predicate_name(user:'$lgt_ctg_super_call_same_'(_, _, _, _), '^^/2 (from ctg; same pred)') :- !.
-user:prolog_predicate_name(user:'$lgt_ctg_super_call_other_'(_, _, _, _), '^^/2 (from ctg; diff pred)') :- !.
-user:prolog_predicate_name(user:'$lgt_ctg_call_'(_, _, _, _), ':/1 (cached)') :- !.
+user:prolog_predicate_name(user:'$lgt_send_to_obj_'(_, _, _), '::/2 (event-aware)') :- !.
+user:prolog_predicate_name(user:'$lgt_send_to_obj_ne_'(_, _, _), '::/2 (event transparent)') :- !.
+user:prolog_predicate_name(user:'$lgt_send_to_self_'(_, _, _), '::/1') :- !.
+user:prolog_predicate_name(user:'$lgt_obj_super_call_same_'(_, _, _), '^^/2 (from obj; same pred)') :- !.
+user:prolog_predicate_name(user:'$lgt_obj_super_call_other_'(_, _, _), '^^/2 (from obj; diff pred)') :- !.
+user:prolog_predicate_name(user:'$lgt_ctg_super_call_same_'(_, _, _), '^^/2 (from ctg; same pred)') :- !.
+user:prolog_predicate_name(user:'$lgt_ctg_super_call_other_'(_, _, _), '^^/2 (from ctg; diff pred)') :- !.
+user:prolog_predicate_name(user:'$lgt_ctg_call_'(_, _, _), ':/1 (cached)') :- !.
 user:prolog_predicate_name(user:'$lgt_call_in_this'(_, _), 'call/1') :- !.
 
 user:prolog_predicate_name(user:'$lgt_send_to_obj'(_, _, _), '::/2 (event transparent)') :- !.
@@ -318,23 +318,23 @@ user:portray(c(This, r(Sender, Self, MetaVars, CoinductionStack))) :-
 
 '$lgt_swi_unify_clause_body'(Obj::Msg, _, '$lgt_send_to_obj_ne_nv'(Obj, Msg, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(Obj::Msg, _, '$lgt_send_to_obj_ne'(Obj, Msg, _), TermPos, TermPos) :- !.
-'$lgt_swi_unify_clause_body'(Obj::Msg, _, '$lgt_send_to_obj_ne_'(Obj, Msg, _, _), TermPos, TermPos) :- !.
-'$lgt_swi_unify_clause_body'(Obj::Msg, _, '$lgt_send_to_obj_'(Obj, Msg, _, _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(Obj::Msg, _, '$lgt_send_to_obj_ne_'(Obj, Msg, _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(Obj::Msg, _, '$lgt_send_to_obj_'(Obj, Msg, _), TermPos, TermPos) :- !.
 
 '$lgt_swi_unify_clause_body'(::Msg, _, '$lgt_send_to_self'(_, Msg, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(::Msg, _, '$lgt_send_to_self_nv'(_, Msg, _), TermPos, TermPos) :- !.
-'$lgt_swi_unify_clause_body'(::Msg, _, '$lgt_send_to_self_'(_, Msg, _, _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(::Msg, _, '$lgt_send_to_self_'(_, Msg, _), TermPos, TermPos) :- !.
 
 '$lgt_swi_unify_clause_body'(^^Msg, _, '$lgt_obj_super_call_same'(_, Msg, _), TermPos, TermPos) :- !.
-'$lgt_swi_unify_clause_body'(^^Msg, _, '$lgt_obj_super_call_same_'(_, Msg, _, _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(^^Msg, _, '$lgt_obj_super_call_same_'(_, Msg, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(^^Msg, _, '$lgt_obj_super_call_other'(_, Msg, _), TermPos, TermPos) :- !.
-'$lgt_swi_unify_clause_body'(^^Msg, _, '$lgt_obj_super_call_other_'(_, Msg, _, _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(^^Msg, _, '$lgt_obj_super_call_other_'(_, Msg, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(^^Msg, _, '$lgt_ctg_super_call_same'(_, Msg, _), TermPos, TermPos) :- !.
-'$lgt_swi_unify_clause_body'(^^Msg, _, '$lgt_ctg_super_call_same_'(_, Msg, _, _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(^^Msg, _, '$lgt_ctg_super_call_same_'(_, Msg, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(^^Msg, _, '$lgt_ctg_super_call_other'(_, Msg, _), TermPos, TermPos) :- !.
-'$lgt_swi_unify_clause_body'(^^Msg, _, '$lgt_ctg_super_call_other_'(_, Msg, _, _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(^^Msg, _, '$lgt_ctg_super_call_other_'(_, Msg, _), TermPos, TermPos) :- !.
 
-'$lgt_swi_unify_clause_body'(:Msg, _, '$lgt_ctg_call_'(_, Msg, _, _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(:Msg, _, '$lgt_ctg_call_'(_, Msg, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(Goal, _, '$lgt_call_in_this'(Goal, _), TermPos, TermPos) :- !.
 
 '$lgt_swi_unify_clause_body'(Obj<<Goal, _, '$lgt_call_within_context'(Obj, Goal, _), TermPos, TermPos) :- !.
@@ -557,23 +557,23 @@ user:portray(c(This, r(Sender, Self, MetaVars, CoinductionStack))) :-
 % default a "notrace" property
 :- '$set_predicate_attribute'('$lgt_send_to_self_nv'/3, trace, 1).
 :- '$set_predicate_attribute'('$lgt_send_to_self'/3, trace, 1).
-:- '$set_predicate_attribute'('$lgt_send_to_self_'/4, trace, 1).
+:- '$set_predicate_attribute'('$lgt_send_to_self_'/3, trace, 1).
 :- '$set_predicate_attribute'('$lgt_send_to_obj'/3, trace, 1).
-:- '$set_predicate_attribute'('$lgt_send_to_obj_'/4, trace, 1).
+:- '$set_predicate_attribute'('$lgt_send_to_obj_'/3, trace, 1).
 :- '$set_predicate_attribute'('$lgt_send_to_obj_nv'/3, trace, 1).
 :- '$set_predicate_attribute'('$lgt_send_to_obj_ne_nv'/3, trace, 1).
 :- '$set_predicate_attribute'('$lgt_send_to_obj_ne'/3, trace, 1).
-:- '$set_predicate_attribute'('$lgt_send_to_obj_ne_'/4, trace, 1).
+:- '$set_predicate_attribute'('$lgt_send_to_obj_ne_'/3, trace, 1).
 :- '$set_predicate_attribute'('$lgt_obj_super_call_same'/3, trace, 1).
-:- '$set_predicate_attribute'('$lgt_obj_super_call_same_'/4, trace, 1).
+:- '$set_predicate_attribute'('$lgt_obj_super_call_same_'/3, trace, 1).
 :- '$set_predicate_attribute'('$lgt_obj_super_call_other'/3, trace, 1).
-:- '$set_predicate_attribute'('$lgt_obj_super_call_other_'/4, trace, 1).
+:- '$set_predicate_attribute'('$lgt_obj_super_call_other_'/3, trace, 1).
 :- '$set_predicate_attribute'('$lgt_ctg_super_call_same'/3, trace, 1).
-:- '$set_predicate_attribute'('$lgt_ctg_super_call_same_'/4, trace, 1).
+:- '$set_predicate_attribute'('$lgt_ctg_super_call_same_'/3, trace, 1).
 :- '$set_predicate_attribute'('$lgt_ctg_super_call_other'/3, trace, 1).
-:- '$set_predicate_attribute'('$lgt_ctg_super_call_other_'/4, trace, 1).
+:- '$set_predicate_attribute'('$lgt_ctg_super_call_other_'/3, trace, 1).
 :- '$set_predicate_attribute'('$lgt_ctg_call'/3, trace, 1).
-:- '$set_predicate_attribute'('$lgt_ctg_call_'/4, trace, 1).
+:- '$set_predicate_attribute'('$lgt_ctg_call_'/3, trace, 1).
 :- '$set_predicate_attribute'('$lgt_call_in_this'/2, trace, 1).
 
 :- '$set_predicate_attribute'('$lgt_metacall'/6, trace, 1).

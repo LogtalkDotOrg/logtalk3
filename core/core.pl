@@ -142,14 +142,14 @@
 
 % lookup caches for messages to an object, messages to self, and super calls
 
-:- dynamic('$lgt_send_to_obj_'/4).					% '$lgt_send_to_obj_'(Obj, Pred, Sender, Mark)
-:- dynamic('$lgt_send_to_obj_ne_'/4).				% '$lgt_send_to_obj_ne_'(Obj, Pred, Sender, Mark)
-:- dynamic('$lgt_send_to_self_'/4).					% '$lgt_send_to_self_'(Obj, Pred, Sender, Mark)
-:- dynamic('$lgt_obj_super_call_same_'/4).			% '$lgt_obj_super_call_same_'(Obj, Pred, ExCtx, Mark)
-:- dynamic('$lgt_obj_super_call_other_'/4).			% '$lgt_obj_super_call_other_'(Obj, Pred, ExCtx, Mark)
-:- dynamic('$lgt_ctg_super_call_same_'/4).			% '$lgt_ctg_super_call_same_'(Ctg, Pred, ExCtx, Mark)
-:- dynamic('$lgt_ctg_super_call_other_'/4).			% '$lgt_ctg_super_call_other_'(Ctg, Pred, ExCtx, Mark)
-:- dynamic('$lgt_ctg_call_'/4).						% '$lgt_ctg_call_'(Dcl, Pred, ExCtx, Mark)
+:- dynamic('$lgt_send_to_obj_'/3).					% '$lgt_send_to_obj_'(Obj, Pred, Sender)
+:- dynamic('$lgt_send_to_obj_ne_'/3).				% '$lgt_send_to_obj_ne_'(Obj, Pred, Sender)
+:- dynamic('$lgt_send_to_self_'/3).					% '$lgt_send_to_self_'(Obj, Pred, Sender)
+:- dynamic('$lgt_obj_super_call_same_'/3).			% '$lgt_obj_super_call_same_'(Obj, Pred, ExCtx)
+:- dynamic('$lgt_obj_super_call_other_'/3).			% '$lgt_obj_super_call_other_'(Obj, Pred, ExCtx)
+:- dynamic('$lgt_ctg_super_call_same_'/3).			% '$lgt_ctg_super_call_same_'(Ctg, Pred, ExCtx)
+:- dynamic('$lgt_ctg_super_call_other_'/3).			% '$lgt_ctg_super_call_other_'(Ctg, Pred, ExCtx)
+:- dynamic('$lgt_ctg_call_'/3).						% '$lgt_ctg_call_'(Dcl, Pred, ExCtx)
 
 
 % lookup cache for asserting and retracting dynamic facts
@@ -3161,7 +3161,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_send_to_self'(Obj, Pred, Sender) :-
 	'$lgt_must_be'(callable, Pred, logtalk(::Pred, Sender)),
-	'$lgt_send_to_self_'(Obj, Pred, Sender, _).
+	'$lgt_send_to_self_'(Obj, Pred, Sender).
 
 
 
@@ -3170,7 +3170,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % the last clause of this cache predicate must always exist and must
 % call the predicate that generates the missing cache entry
 
-'$lgt_send_to_self_'(Obj, Pred, Sender, 1) :-
+'$lgt_send_to_self_'(Obj, Pred, Sender) :-
 	'$lgt_send_to_self_nv'(Obj, Pred, Sender).
 
 
@@ -3196,7 +3196,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 				'$lgt_exec_ctx'(ExCtx, GSender, GObj, GObj, GMetaVars, []),
 				call(Def, GPred, ExCtx, GCall, _) ->
 				% cache lookup result
-				asserta(('$lgt_send_to_self_'(GObj, GPred, GSender, 0) :- !, GCall)),
+				asserta(('$lgt_send_to_self_'(GObj, GPred, GSender) :- !, GCall)),
 				% unify message arguments and call method
 				GObj = Obj, GPred = Pred, GSender = Sender,
 				call(GCall)
@@ -3228,7 +3228,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_send_to_obj'(Obj, Pred, Sender) :-
 	'$lgt_must_be'(object_identifier, Obj, logtalk(Obj::Pred, Sender)),
 	'$lgt_must_be'(callable, Pred, logtalk(Obj::Pred, Sender)),
-	'$lgt_send_to_obj_'(Obj, Pred, Sender, _).
+	'$lgt_send_to_obj_'(Obj, Pred, Sender).
 
 
 
@@ -3237,7 +3237,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % the last clause of this cache predicate must always exist and must
 % call the predicate that generates the missing cache entry
 
-'$lgt_send_to_obj_'(Obj, Pred, Sender, 1) :-
+'$lgt_send_to_obj_'(Obj, Pred, Sender) :-
 	'$lgt_send_to_obj_nv'(Obj, Pred, Sender).
 
 
@@ -3273,7 +3273,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 				call(Def, GPred, ExCtx, GCall, _) ->
 				GGCall = '$lgt_guarded_method_call'(GObj, GPred, GSender, GCall),
 				% cache lookup result
-				asserta(('$lgt_send_to_obj_'(GObj, GPred, GSender, 0) :- !, GGCall)),
+				asserta(('$lgt_send_to_obj_'(GObj, GPred, GSender) :- !, GGCall)),
 				% unify message arguments and call method
 				GObj = Obj, GPred = Pred, GSender = Sender,
 				call(GCall)
@@ -3291,7 +3291,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 				call(Def, GPred, ExCtx, GCall, _) ->
 				GGCall = '$lgt_guarded_method_call'(GObj, GPred, GSender, GCall),
 				% cache lookup result
-				asserta(('$lgt_send_to_obj_'(GObj, GPred, GSender, 0) :- !, GGCall)),
+				asserta(('$lgt_send_to_obj_'(GObj, GPred, GSender) :- !, GGCall)),
 				% unify message arguments and call method
 				GObj = Obj, GPred = Pred, GSender = Sender,
 				call(GCall)
@@ -3320,7 +3320,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!,
 	% parametric object proxy
 	catch(Proxy, error(Error, _), throw(error(Error, logtalk({Proxy}::Pred, Sender)))),
-	'$lgt_send_to_obj_'(Proxy, Pred, Sender, _).
+	'$lgt_send_to_obj_'(Proxy, Pred, Sender).
 
 '$lgt_send_to_obj_nv_inner'(Obj, Pred, _) :-
 	atom(Obj),
@@ -3359,7 +3359,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_send_to_obj_ne'(Obj, Pred, Sender) :-
 	'$lgt_must_be'(object_identifier, Obj, logtalk(Obj::Pred, Sender)),
 	'$lgt_must_be'(callable, Pred, logtalk(Obj::Pred, Sender)),
-	'$lgt_send_to_obj_ne_'(Obj, Pred, Sender, _).
+	'$lgt_send_to_obj_ne_'(Obj, Pred, Sender).
 
 
 
@@ -3368,7 +3368,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % the last clause of this cache predicate must always exist and must
 % call the predicate that generates the missing cache entry
 
-'$lgt_send_to_obj_ne_'(Obj, Pred, Sender, 1) :-
+'$lgt_send_to_obj_ne_'(Obj, Pred, Sender) :-
 	'$lgt_send_to_obj_ne_nv'(Obj, Pred, Sender).
 
 
@@ -3394,7 +3394,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 				'$lgt_exec_ctx'(ExCtx, GSender, GObj, GObj, GMetaVars, []),
 				call(Def, GPred, ExCtx, GCall, _) ->
 				% cache lookup result
-				asserta(('$lgt_send_to_obj_ne_'(GObj, GPred, GSender, 0) :- !, GCall)),
+				asserta(('$lgt_send_to_obj_ne_'(GObj, GPred, GSender) :- !, GCall)),
 				% unify message arguments and call method
 				GObj = Obj, GPred = Pred, GSender = Sender,
 				call(GCall)
@@ -3411,7 +3411,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 				'$lgt_exec_ctx'(ExCtx, GSender, GObj, GObj, _, []),
 				call(Def, GPred, ExCtx, GCall, _) ->
 				% cache lookup result
-				asserta(('$lgt_send_to_obj_ne_'(GObj, GPred, GSender, 0) :- !, GCall)),
+				asserta(('$lgt_send_to_obj_ne_'(GObj, GPred, GSender) :- !, GCall)),
 				% unify message arguments and call method
 				GObj = Obj, GPred = Pred, GSender = Sender,
 				call(GCall)
@@ -3440,7 +3440,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!,
 	% parametric object proxy
 	catch(Proxy, error(Error, _), throw(error(Error, logtalk({Proxy}::Pred, Sender)))),
-	'$lgt_send_to_obj_ne_'(Proxy, Pred, Sender, _).
+	'$lgt_send_to_obj_ne_'(Proxy, Pred, Sender).
 
 '$lgt_send_to_obj_ne_nv'(Obj, Pred, _) :-
 	atom(Obj),
@@ -3460,7 +3460,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % the last clause of this cache predicate must always exist and must
 % call the predicate that generates the missing cache entry
 
-'$lgt_obj_super_call_same_'(Super, Pred, ExCtx, 1) :-
+'$lgt_obj_super_call_same_'(Super, Pred, ExCtx) :-
 	'$lgt_obj_super_call_same'(Super, Pred, ExCtx).
 
 
@@ -3487,7 +3487,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		% lookup predicate definition
 		call(Super, GPred, GExCtx, GCall, Ctn), Ctn \= GThis ->
 		% cache lookup result
-		asserta(('$lgt_obj_super_call_same_'(Super, GPred, GExCtx, 0) :- !, GCall)),
+		asserta(('$lgt_obj_super_call_same_'(Super, GPred, GExCtx) :- !, GCall)),
 		% unify message arguments and call inherited definition
 		GPred = Pred, GExCtx = ExCtx,
 		call(GCall)
@@ -3502,7 +3502,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % the last clause of this cache predicate must always exist and must
 % call the predicate that generates the missing cache entry
 
-'$lgt_ctg_super_call_same_'(Ctg, Pred, ExCtx, 1) :-
+'$lgt_ctg_super_call_same_'(Ctg, Pred, ExCtx) :-
 	'$lgt_ctg_super_call_same'(Ctg, Pred, ExCtx).
 
 
@@ -3520,7 +3520,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		% lookup predicate definition
 		call(Def, GPred, GExCtx, GCall, Ctn), Ctn \= Ctg ->
 		% cache lookup result
-		asserta(('$lgt_ctg_super_call_same_'(GCtg, GPred, GExCtx, 0) :- !, GCall)),
+		asserta(('$lgt_ctg_super_call_same_'(GCtg, GPred, GExCtx) :- !, GCall)),
 		% unify message arguments and call inherited definition
 		GCtg = Ctg, GPred = Pred, GExCtx = ExCtx,
 		call(GCall)
@@ -3538,7 +3538,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_obj_super_call_other'(Super, Pred, ExCtx) :-
 	'$lgt_exec_ctx_this'(ExCtx, This),
 	'$lgt_must_be'(callable, Pred, logtalk(^^Pred, This)),
-	'$lgt_obj_super_call_other_'(Super, Pred, ExCtx, _).
+	'$lgt_obj_super_call_other_'(Super, Pred, ExCtx).
 
 
 
@@ -3547,7 +3547,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % the last clause of this cache predicate must always exist and must
 % call the predicate that generates the missing cache entry
 
-'$lgt_obj_super_call_other_'(Super, Pred, ExCtx, 1) :-
+'$lgt_obj_super_call_other_'(Super, Pred, ExCtx) :-
 	'$lgt_obj_super_call_other_nv'(Super, Pred, ExCtx).
 
 
@@ -3579,7 +3579,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 				% lookup predicate definition
 				call(Super, GPred, GExCtx, GCall, Ctn), Ctn \= GThis ->
 				% cache lookup result
-				asserta(('$lgt_obj_super_call_other_'(Super, GPred, GExCtx, 0) :- !, GCall)),
+				asserta(('$lgt_obj_super_call_other_'(Super, GPred, GExCtx) :- !, GCall)),
 				% unify message arguments and call inherited definition
 				GPred = Pred, GExCtx = ExCtx,
 				call(GCall)
@@ -3610,7 +3610,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_ctg_super_call_other'(Ctg, Pred, ExCtx) :-
 	'$lgt_must_be'(callable, Pred, logtalk(^^Pred, Ctg)),
-	'$lgt_ctg_super_call_other_'(Ctg, Pred, ExCtx, _).
+	'$lgt_ctg_super_call_other_'(Ctg, Pred, ExCtx).
 
 
 
@@ -3619,7 +3619,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % the last clause of this cache predicate must always exist and must
 % call the predicate that generates the missing cache entry
 
-'$lgt_ctg_super_call_other_'(Ctg, Pred, ExCtx, 1) :-
+'$lgt_ctg_super_call_other_'(Ctg, Pred, ExCtx) :-
 	'$lgt_ctg_super_call_other_nv'(Ctg, Pred, ExCtx).
 
 
@@ -3640,7 +3640,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 				% lookup predicate definition
 				call(Def, GPred, GExCtx, GCall, Ctn), Ctn \= Ctg ->
 				% cache lookup result
-				asserta(('$lgt_ctg_super_call_other_'(GCtg, GPred, GExCtx, 0) :- !, GCall)),
+				asserta(('$lgt_ctg_super_call_other_'(GCtg, GPred, GExCtx) :- !, GCall)),
 				% unify message arguments and call inherited definition
 				GCtg = Ctg, GPred = Pred, GExCtx = ExCtx,
 				call(GCall)
@@ -3732,7 +3732,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		Closure =.. [Functor| Args],
 		'$lgt_append'(Args, ExtraArgs, FullArgs),
 		Goal =.. [Functor| FullArgs],
-		'$lgt_send_to_self_'(Self, Goal, Sender, _)
+		'$lgt_send_to_self_'(Self, Goal, Sender)
 	;	Call =.. [call, ::Closure| ExtraArgs],
 		throw(error(type_error(callable, Closure), logtalk(Call, Sender)))
 	).
@@ -3754,8 +3754,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		'$lgt_append'(Args, ExtraArgs, FullArgs),
 		Goal =.. [Functor| FullArgs],
 		(	'$lgt_current_object_'(Sender, _, _, _, _, _, _, _, _, _, Flags), Flags /\ 16 =:= 16 ->
-			'$lgt_send_to_obj_'(Obj, Goal, Sender, _)
-		;	'$lgt_send_to_obj_ne_'(Obj, Goal, Sender, _)
+			'$lgt_send_to_obj_'(Obj, Goal, Sender)
+		;	'$lgt_send_to_obj_ne_'(Obj, Goal, Sender)
 		)
 	;	Call =.. [call, Obj::Closure| ExtraArgs],
 		throw(error(type_error(callable, Closure), logtalk(Call, Sender)))
@@ -4072,7 +4072,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_ctg_call'(Dcl, Pred, ExCtx) :-
 	'$lgt_exec_ctx_this'(ExCtx, This),
 	'$lgt_must_be'(callable, Pred, logtalk(:Pred, This)),
-	'$lgt_ctg_call_'(Dcl, Pred, ExCtx, _).
+	'$lgt_ctg_call_'(Dcl, Pred, ExCtx).
 
 
 
@@ -4081,7 +4081,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % the last clause of this cache predicate must always exist and must
 % call the predicate that generates the missing cache entry
 
-'$lgt_ctg_call_'(Dcl, Pred, ExCtx, 1) :-
+'$lgt_ctg_call_'(Dcl, Pred, ExCtx) :-
 	'$lgt_ctg_call_nv'(Dcl, Pred, ExCtx).
 
 
@@ -4102,7 +4102,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 			'$lgt_current_category_'(GCtg, _, _, Def, _, _),
 			call(Def, GPred, GExCtx, GCall, _) ->
 			% cache lookup result
-			asserta(('$lgt_ctg_call_'(Dcl, GAlias, GExCtx, 0) :- !, GCall)),
+			asserta(('$lgt_ctg_call_'(Dcl, GAlias, GExCtx) :- !, GCall)),
 			% unify message arguments and call inherited definition
 			GAlias = Alias, GExCtx = ExCtx,
 			call(GCall)
@@ -5511,29 +5511,42 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % '$lgt_clean_lookup_caches'
 
 '$lgt_clean_lookup_caches' :-
-	retractall('$lgt_send_to_obj_'(_, _, _, 0)),
-	retractall('$lgt_send_to_obj_ne_'(_, _, _, 0)),
-	retractall('$lgt_send_to_self_'(_, _, _, 0)),
-	retractall('$lgt_obj_super_call_same_'(_, _, _, 0)),
-	retractall('$lgt_obj_super_call_other_'(_, _, _, 0)),
-	retractall('$lgt_ctg_super_call_same_'(_, _, _, 0)),
-	retractall('$lgt_ctg_super_call_other_'(_, _, _, 0)),
-	retractall('$lgt_ctg_call_'(_, _, _, 0)),
-	retractall('$lgt_db_lookup_cache_'(_, _, _, _, _)).
+	retractall('$lgt_send_to_obj_'(_, _, _)),
+	retractall('$lgt_send_to_obj_ne_'(_, _, _)),
+	retractall('$lgt_send_to_self_'(_, _, _)),
+	retractall('$lgt_obj_super_call_same_'(_, _, _)),
+	retractall('$lgt_obj_super_call_other_'(_, _, _)),
+	retractall('$lgt_ctg_super_call_same_'(_, _, _)),
+	retractall('$lgt_ctg_super_call_other_'(_, _, _)),
+	retractall('$lgt_ctg_call_'(_, _, _)),
+	retractall('$lgt_db_lookup_cache_'(_, _, _, _, _)),
+	'$lgt_reassert_lookup_cache_catchall_clauses'.
 
 
 % '$lgt_clean_lookup_caches'(@callable)
 
 '$lgt_clean_lookup_caches'(Pred) :-
-	retractall('$lgt_send_to_obj_'(_, Pred, _, 0)),
-	retractall('$lgt_send_to_obj_ne_'(_, Pred, _, 0)),
-	retractall('$lgt_send_to_self_'(_, Pred, _, 0)),
-	retractall('$lgt_obj_super_call_same_'(_, Pred, _, 0)),
-	retractall('$lgt_obj_super_call_other_'(_, Pred, _, 0)),
-	retractall('$lgt_ctg_super_call_same_'(_, Pred, _, 0)),
-	retractall('$lgt_ctg_super_call_other_'(_, Pred, _, 0)),
-	retractall('$lgt_ctg_call_'(_, Pred, _, 0)),
-	retractall('$lgt_db_lookup_cache_'(_, Pred, _, _, _)).
+	retractall('$lgt_send_to_obj_'(_, Pred, _)),
+	retractall('$lgt_send_to_obj_ne_'(_, Pred, _)),
+	retractall('$lgt_send_to_self_'(_, Pred, _)),
+	retractall('$lgt_obj_super_call_same_'(_, Pred, _)),
+	retractall('$lgt_obj_super_call_other_'(_, Pred, _)),
+	retractall('$lgt_ctg_super_call_same_'(_, Pred, _)),
+	retractall('$lgt_ctg_super_call_other_'(_, Pred, _)),
+	retractall('$lgt_ctg_call_'(_, Pred, _)),
+	retractall('$lgt_db_lookup_cache_'(_, Pred, _, _, _)),
+	'$lgt_reassert_lookup_cache_catchall_clauses'.
+
+
+'$lgt_reassert_lookup_cache_catchall_clauses' :-
+	assertz(('$lgt_send_to_obj_'(Obj, Pred, Sender) :- '$lgt_send_to_obj_nv'(Obj, Pred, Sender))),
+	assertz(('$lgt_send_to_obj_ne_'(Obj, Pred, Sender) :- '$lgt_send_to_obj_ne_nv'(Obj, Pred, Sender))),
+	assertz(('$lgt_send_to_self_'(Obj, Pred, Sender) :- '$lgt_send_to_self_nv'(Obj, Pred, Sender))),
+	assertz(('$lgt_obj_super_call_same_'(Super, Pred, ExCtx) :- '$lgt_obj_super_call_same'(Super, Pred, ExCtx))),
+	assertz(('$lgt_obj_super_call_other_'(Super, Pred, ExCtx) :- '$lgt_obj_super_call_other_nv'(Super, Pred, ExCtx))),
+	assertz(('$lgt_ctg_super_call_same_'(Ctg, Pred, ExCtx) :- '$lgt_ctg_super_call_same'(Ctg, Pred, ExCtx))),
+	assertz(('$lgt_ctg_super_call_other_'(Ctg, Pred, ExCtx) :- '$lgt_ctg_super_call_other_nv'(Ctg, Pred, ExCtx))),
+	assertz(('$lgt_ctg_call_'(Dcl, Pred, ExCtx) :- '$lgt_ctg_call_nv'(Dcl, Pred, ExCtx))).
 
 
 
@@ -9259,8 +9272,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		'$lgt_pp_object_'(_, _, Dcl, _, _, IDcl, _, _, _, _, _),
 		(	\+ '$lgt_pp_instantiated_class_'(_, _, _, _, _, _, _, _, _, _),
 			\+ '$lgt_pp_specialized_class_'(_, _, _, _, _, _, _, _, _, _) ->
-			TPred = '$lgt_ctg_call_'(Dcl, Alias, ExCtx, _)
-		;	TPred = '$lgt_ctg_call_'(IDcl, Alias, ExCtx, _)
+			TPred = '$lgt_ctg_call_'(Dcl, Alias, ExCtx)
+		;	TPred = '$lgt_ctg_call_'(IDcl, Alias, ExCtx)
 		)
 	).
 
@@ -10851,8 +10864,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		;	TPred = '$lgt_send_to_obj_ne'(Obj, Pred, This)
 		)
 	;	(	'$lgt_compiler_flag'(events, allow) ->
-			TPred = '$lgt_send_to_obj_'(Obj, Pred, This, _)
-		;	TPred = '$lgt_send_to_obj_ne_'(Obj, Pred, This, _)
+			TPred = '$lgt_send_to_obj_'(Obj, Pred, This)
+		;	TPred = '$lgt_send_to_obj_ne_'(Obj, Pred, This)
 		)
 	).
 
@@ -11013,7 +11026,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % message is not a built-in control construct or a call to a built-in
 % (meta-)predicate: translation performed at runtime
 
-'$lgt_tr_self_msg'(Pred, '$lgt_send_to_self_'(Self, Pred, This, _), This, Self) :-
+'$lgt_tr_self_msg'(Pred, '$lgt_send_to_self_'(Self, Pred, This), This, Self) :-
 	!.
 
 
@@ -11049,9 +11062,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	(	'$lgt_pp_object_'(_, _, _, _, Super, _, _, _, _, _, _) ->
-		TPred = '$lgt_obj_super_call_same_'(Super, Pred, ExCtx, _)
+		TPred = '$lgt_obj_super_call_same_'(Super, Pred, ExCtx)
 	;	'$lgt_pp_category_'(Ctg, _, _, _, _, _),
-		TPred = '$lgt_ctg_super_call_same_'(Ctg, Pred, ExCtx, _)
+		TPred = '$lgt_ctg_super_call_same_'(Ctg, Pred, ExCtx)
 	).
 
 '$lgt_tr_super_call'(Pred, TPred, Ctx) :-		% "super" call to a predicate other than the one being
@@ -11059,12 +11072,12 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	(	'$lgt_pp_object_'(_, _, _, _, Super, _, _, _, _, _, _) ->
 		(	var(Pred) ->
 			TPred = '$lgt_obj_super_call_other'(Super, Pred, ExCtx)
-		;	TPred = '$lgt_obj_super_call_other_'(Super, Pred, ExCtx, _)
+		;	TPred = '$lgt_obj_super_call_other_'(Super, Pred, ExCtx)
 		)
 	;	'$lgt_pp_category_'(Ctg, _, _, _, _, _),
 		(	var(Pred) ->
 			TPred = '$lgt_ctg_super_call_other'(Ctg, Pred, ExCtx)
-		;	TPred = '$lgt_ctg_super_call_other_'(Ctg, Pred, ExCtx, _)
+		;	TPred = '$lgt_ctg_super_call_other_'(Ctg, Pred, ExCtx)
 		)
 	).
 
@@ -13409,12 +13422,12 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!,
 	'$lgt_fix_predicate_calls'(Pred, TPred, Annotation).
 
-'$lgt_fix_predicate_calls'('$lgt_send_to_obj_'(Obj, Pred, This, _), TPred, _) :-
+'$lgt_fix_predicate_calls'('$lgt_send_to_obj_'(Obj, Pred, This), TPred, _) :-
 	'$lgt_send_to_obj_static_binding_cache'(Obj, Pred, This, Call),
 	!,
 	TPred = '$lgt_guarded_method_call'(Obj, Pred, This, Call).
 
-'$lgt_fix_predicate_calls'('$lgt_send_to_obj_ne_'(Obj, Pred, This, _), TPred, _) :-
+'$lgt_fix_predicate_calls'('$lgt_send_to_obj_ne_'(Obj, Pred, This), TPred, _) :-
 	'$lgt_send_to_obj_static_binding_cache'(Obj, Pred, This, Call),
 	!,
 	TPred = Call.

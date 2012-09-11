@@ -36,6 +36,10 @@ Logtalk distribution
 Logtalk compiler and runtime
 ----------------------------
 
+* FIXED: Revert the new dynamic binding cache handling code (introduced
+in the previous alpha version) to the previous version as the new one can
+break `bagof/3` and `setof/3` calls.
+
 * CHANGED: Ensure that a call to the `parameter/2` built-in method doesn't
 fail when called from within a category that is not imported by any object.
 This may happen e.g. when a parametric category is used to hold definitions
