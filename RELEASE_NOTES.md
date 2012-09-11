@@ -56,6 +56,11 @@ files.
 
 * NEW: Support for the extended `table/1` directive in XSB.
 
+Examples
+--------
+
+* FIXED: `nested` coinduction example.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

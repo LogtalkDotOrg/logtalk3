@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.21,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2012/08/17,
+		date is 2012/09/11,
 		comment is 'Unit tests for the "coinduction" example.']).
 
 	:- discontiguous(succeeds/1).
@@ -69,6 +69,11 @@
 		bagof(X, automaton::automaton(s0, X), [X1, X2]),
 		X1 == [a, b, c, d| X1],
 		X2 == [a, b, e| X2].
+
+	succeeds(coinduction_nested_1) :-
+		bagof(X, (nested::state(s0, X), lists::absent(s2, X)), [X1, X2]),
+		L = [s1| L], X1 == [s0| L],
+		X2 == [s0, s3| X2].
 
 	:- if(\+ current_logtalk_flag(prolog_dialect, eclipse)).
 
