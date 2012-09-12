@@ -12,9 +12,9 @@
 :- object(lists).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Gopal Gupta et al. Adapted to Logtalk by Paulo Moura.',
-		date is 2010/07/23,
+		date is 2012/09/11,
 		comment is 'Coinductive infinite list predicates example.']).
 
 	:- public(append/3).
@@ -24,33 +24,33 @@
 	append([H| T], Y, [H| Z]) :-
 		append(T, Y, Z).
 
-	% Similar to member/2.
-	:- coinductive(member1/2).
+	% Are there "occurrences" of arg1 in arg2?
+	:- public(member/2).
+	:- coinductive(member/2).
 
-	member1(X, [X| _]).
-	member1(X, [_| T]) :-
-		member1(X, T).
-
-	% Ditto, but not coinductive
-	member2(X, [X| _]).
-	member2(X, [_| T]) :-
-		member2(X, T).
+	member(X, [X| _]).
+	member(X, [_| T]) :-
+		member(X, T).
 
 	% Are there infinitely many "occurrences" of arg1 in arg2?
 	:- public(comember/2).
 	:- coinductive(comember/2).
 
-	comember(X, L) :-
-		drop(X, L, L1),
-		comember(X, L1).
+	% definition contributed by Davide Ancona
+	comember(X, [_| T]) :-
+		comember(X, T).
 
-	% Drop some prefix of arg2 upto an "occurrence" of arg1 from arg2,
-	% yielding arg3.
-	% ("Occurrence" of X = something unifiable with X.)
-	%:- table(drop/3).	% not working; needs tabling supporting cyclic terms!
-	drop(H, [H| T], T).
-	drop(H, [_| T], T1) :-
-		drop(H, T, T1).
+%	comember(X, L) :-
+%		drop(X, L, L1),
+%		comember(X, L1).
+%
+%	% Drop some prefix of arg2 upto an "occurrence" of arg1 from arg2,
+%	% yielding arg3.
+%	% ("Occurrence" of X = something unifiable with X.)
+%	%:- table(drop/3).	% not working; needs tabling supporting cyclic terms!
+%	drop(H, [H| T], T).
+%	drop(H, [_| T], T1) :-
+%		drop(H, T, T1).
 
 	:- public(absent/2).
 	:- coinductive(absent/2).
@@ -58,6 +58,15 @@
 	absent(X, [Y| T]) :-
 		X \= Y,
 		absent(X, T).
+
+	% see the CO-LP 2012 paper by Davide Ancona and Elena Zucca
+	% for the idea behind this hook predicate
+	coinductive_success_hook(append(_, _, _)).
+	coinductive_success_hook(member(_, _)) :-
+		fail.
+	coinductive_success_hook(comember(X, L)) :-
+		member(X, L).
+	coinductive_success_hook(absent(_, _)).
 
 :- end_object.
 

@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2012/09/11,
+		date is 2012/09/12,
 		comment is 'Unit tests for the "coinduction" example.']).
 
 	:- discontiguous(succeeds/1).
@@ -65,6 +65,16 @@
 	succeeds(coinduction_lists_4) :-
 		X = [0, s(0), s(s(0))| X], lists::comember(s(0), X).
 
+	succeeds(coinduction_lists_5) :-
+		X = [1, 2, 3| X],
+		bagof(E, lists::comember(E, X), [E1, E2, E3]),
+		E1 == 1, E2 == 2, E3 == 3.
+
+	succeeds(coinduction_lists_6) :-
+		Y = [1, 2, 3| Y], X = [0| Y],
+		bagof(E, lists::comember(E, X), [E1, E2, E3]),
+		E1 == 1, E2 == 2, E3 == 3.
+
 	succeeds(coinduction_automata_1) :-
 		bagof(X, automaton::automaton(s0, X), [X1, X2]),
 		X1 == [a, b, c, d| X1],
@@ -74,6 +84,9 @@
 		bagof(X, (nested::state(s0, X), lists::absent(s2, X)), [X1, X2]),
 		L = [s1| L], X1 == [s0| L],
 		X2 == [s0, s3| X2].
+
+	succeeds(coinduction_counter_1) :-
+		counter::verify.
 
 	:- if(\+ current_logtalk_flag(prolog_dialect, eclipse)).
 

@@ -33,6 +33,7 @@ CONTRIBUTORS
 * Artur Miguel Dias (testing, lambda expression examples)
 * Clara Dimene (GeSHi syntax highlighter)
 * Daniel L. Dudley (made the ISO 8601 library object available)
+* Davide Ancona (coinduction examples)
 * Feliks Kluzniak (coinduction examples and bug reports)
 * François Fages (meta-predicate safety bug reports)
 * Gopal Gupta (coinduction examples)

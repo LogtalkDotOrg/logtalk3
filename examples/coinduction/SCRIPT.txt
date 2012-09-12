@@ -197,7 +197,6 @@ false.
 
 
 % module 4 counter example:
-% (not working; needs a Prolog tabling implementation supporting rational terms!)
 
 | ?- counter::verify.
 true.

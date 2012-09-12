@@ -36,6 +36,10 @@ Logtalk distribution
 Logtalk compiler and runtime
 ----------------------------
 
+* NEW: Implemented support for a `coinductive_success_hook/1` predicate,
+following the idea of `finally/1` clauses presented by Davide Ancona and
+Elena Zucca in their CO-LP 2012 paper.
+
 * FIXED: Revert the new dynamic binding cache handling code (introduced
 in the previous alpha version) to the previous version as the new one can
 break `bagof/3` and `setof/3` calls.
@@ -63,7 +67,11 @@ files.
 Examples
 --------
 
-* FIXED: `nested` coinduction example.
+* FIXED: `nested` coinduction example and added corresponding unit tests.
+
+* NEW: alternative definition of the coinductive predicate `comember/2` that
+doesn't require tabling. Contributed by Davide Ancona. This definition enables
+the `counter` example to work. Also added corresponding unit tests.
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
