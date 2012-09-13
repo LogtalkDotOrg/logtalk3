@@ -73,6 +73,9 @@ Examples
 doesn't require tabling. Contributed by Davide Ancona. This definition enables
 the `counter` example to work. Also added corresponding unit tests.
 
+* NEW: coinductive example `arithmetic`, adapted from Davide Ancona paper
+"Regular corecursion in Prolog".
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

@@ -27,6 +27,7 @@
 
 	:- initialization(
 		logtalk_load([
+			arithmetic,
 			simple,
 			binary,
 			streams,

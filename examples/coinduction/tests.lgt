@@ -13,13 +13,25 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2012/09/12,
+		date is 2012/09/13,
 		comment is 'Unit tests for the "coinduction" example.']).
 
 	:- discontiguous(succeeds/1).
 	:- discontiguous(fails/1).
+
+	succeeds(coinduction_arithmetic_1) :-
+		N1 = [0| Eights], Eights=[8| Eights],
+		N2 = [0| Ones], Ones =[1| Ones],
+		bagof((R, O), arithmetic::add(N1, N2, R, O), [(R1, O1), (R2, O2)]),
+		T1 = [9| T1], R1 == [0| T1], O1 == 0,
+		T2 = [0| T2], R2 == [1| T2], O2 == 0.
+
+	succeeds(coinduction_arithmetic_2) :-
+		L = [1,2,3,2,1| L],
+		arithmetic::max(L, M),
+		M == 3.
 
 	succeeds(coinduction_simple_1) :-
 		simple::p.
