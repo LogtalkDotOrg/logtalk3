@@ -7330,10 +7330,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	% compile the auxiliary clause(s) used to implement coinduction
 	(	'$lgt_pl_meta_predicate'('*->'(_, _), _, _) ->
 		% back-end Prolog compiler supports the soft-cut control construct
-		'$lgt_tr_clause'((Head :- '*->'({'$lgt_check_coinductive_success'(TestHead, HeadStack)}, (HeadStack = BodyStack, coinductive_success_hook(Head))); {'$lgt_push_coinductive_hypothesis'(TestHead, HeadStack, BodyStack)}, CoinductiveHead), HeadCtx, BodyCtx)
+		'$lgt_tr_clause'((Head :- '*->'({'$lgt_check_coinductive_success'(TestHead, HeadStack, Hypothesis)}, {'$lgt_coinductive_success_hook'(Head, Hypothesis, HeadExCtx, HeadStack, BodyStack)}); {'$lgt_push_coinductive_hypothesis'(TestHead, HeadStack, BodyStack)}, CoinductiveHead), HeadCtx, BodyCtx)
 	;	'$lgt_pl_meta_predicate'(if(_, _, _), _, _) ->
 		% back-end Prolog compiler supports the if/3 soft-cut built-in meta-predicate
-		'$lgt_tr_clause'((Head :- if({'$lgt_check_coinductive_success'(TestHead, HeadStack)}, (HeadStack = BodyStack, coinductive_success_hook(Head)), ({'$lgt_push_coinductive_hypothesis'(TestHead, HeadStack, BodyStack)}, CoinductiveHead))), HeadCtx, BodyCtx)
+		'$lgt_tr_clause'((Head :- if({'$lgt_check_coinductive_success'(TestHead, HeadStack, Hypothesis)}, {'$lgt_coinductive_success_hook'(Head, Hypothesis, HeadExCtx, HeadStack, BodyStack)}, ({'$lgt_push_coinductive_hypothesis'(TestHead, HeadStack, BodyStack)}, CoinductiveHead))), HeadCtx, BodyCtx)
 	;	throw(resource_error(soft_cut_support))
 	),
 	'$lgt_tr_coinductive_directive'(Preds, Ctx).
@@ -7342,10 +7342,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	throw(type_error(predicate_indicator, Pred)).
 
 
-'$lgt_check_coinductive_success'(Hypothesis, [Hypothesis| _]).
+'$lgt_check_coinductive_success'(Hypothesis, [Hypothesis| _], Hypothesis).
 
-'$lgt_check_coinductive_success'(Hypothesis, [_| Stack]) :-
-	'$lgt_check_coinductive_success'(Hypothesis, Stack).
+'$lgt_check_coinductive_success'(TestHead, [_| Stack], Hypothesis) :-
+	'$lgt_check_coinductive_success'(TestHead, Stack, Hypothesis).
 
 
 '$lgt_push_coinductive_hypothesis'(Hypothesis, Stack, [Hypothesis| Stack]).
@@ -8671,9 +8671,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
 
-'$lgt_tr_body'({'$lgt_check_coinductive_success'(TestHead, HeadStack)}, TPred, '$lgt_debug'(goal(DPred, TPred), DExCtx), Ctx) :-
+'$lgt_tr_body'({'$lgt_check_coinductive_success'(TestHead, HeadStack, Hypothesis)}, TPred, '$lgt_debug'(goal(DPred, TPred), DExCtx), Ctx) :-
 	!,
-	TPred = '$lgt_check_coinductive_success'(TestHead, HeadStack),
+	TPred = '$lgt_check_coinductive_success'(TestHead, HeadStack, Hypothesis),
 	DPred = check_coinductive_success(TestHead, HeadStack),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_comp_ctx_stack'(Ctx, BodyStack),
@@ -13328,14 +13328,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	assertz('$lgt_pp_final_entity_initialization_'(Fixed)),
 	fail.
 
-'$lgt_fix_predicate_calls' :-
-	'$lgt_pp_calls_predicate_'(coinductive_success_hook, 1, TFunctor, TArity, _),
-	\+ '$lgt_pp_defines_predicate_'(coinductive_success_hook, 1, _, _),
-	functor(THead, TFunctor, TArity),
-	assertz('$lgt_pp_final_entity_aux_clause_'((THead))),
-	assertz('$lgt_pp_defines_predicate_'(coinductive_success_hook, 1, TFunctor, TArity)),
-	fail.
-
 '$lgt_fix_predicate_calls'.
 
 
@@ -13348,6 +13340,28 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_fix_predicate_calls'(Pred, Pred, _) :-
 	var(Pred),
 	!.
+
+'$lgt_fix_predicate_calls'('$lgt_coinductive_success_hook'(Head, Hypothesis, ExCtx, HeadStack, BodyStack), Pred, _) :-
+	!,
+	(	'$lgt_pp_defines_predicate_'(coinductive_success_hook, 2, TFunctor, TArity) ->
+		(	functor(THead, TFunctor, TArity),
+			arg(1, THead, Head),
+			arg(2, THead, Hypothesis),
+			arg(3, THead, ExCtx),
+			\+ \+ ('$lgt_pp_entity_clause_'(THead, _); '$lgt_pp_entity_clause_'((THead :- _), _)) ->
+			Pred = ((HeadStack = BodyStack), THead)
+		;	Pred = (HeadStack = BodyStack)
+		)
+	;	'$lgt_pp_defines_predicate_'(coinductive_success_hook, 1, TFunctor, TArity) ->
+		(	functor(THead, TFunctor, TArity),
+			arg(1, THead, Head),
+			arg(2, THead, ExCtx),
+			\+ \+ ('$lgt_pp_entity_clause_'(THead, _); '$lgt_pp_entity_clause_'((THead :- _), _)) ->
+			Pred = ((HeadStack = BodyStack), THead)
+		;	Pred = (HeadStack = BodyStack)
+		)
+	;	Pred = (HeadStack = BodyStack)
+	).
 
 '$lgt_fix_predicate_calls'('$lgt_final_goal'(Pred), Pred, _) :-
 	!.

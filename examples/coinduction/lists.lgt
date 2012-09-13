@@ -61,12 +61,10 @@
 
 	% see the CO-LP 2012 paper by Davide Ancona and Elena Zucca
 	% for the idea behind this hook predicate
-	coinductive_success_hook(append(_, _, _)).
 	coinductive_success_hook(member(_, _)) :-
 		fail.
 	coinductive_success_hook(comember(X, L)) :-
 		member(X, L).
-	coinductive_success_hook(absent(_, _)).
 
 :- end_object.
 
