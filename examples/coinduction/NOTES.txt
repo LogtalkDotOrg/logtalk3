@@ -15,7 +15,7 @@ or YAP as the back-end Prolog compiler.
 Note that Logtalk support for coinduction is still experimental. The two major
 issues are lack of robust Prolog support for cyclic terms and lack of support
 for tabling of cyclic terms. The first issue prevents using of some back-end
-Prolog compilers. The second issue prevents some coinductive predicates to
+Prolog compilers. The second issue may prevent some coinductive predicates to
 behave as (theoretically) expected.
 
 This folder contains several examples of coinductive predicates, adapted from
@@ -59,4 +59,13 @@ For more information see:
 	URL = {http://drops.dagstuhl.de/opus/volltexte/2010/2599},
 	doi = {http://dx.doi.org/10.4230/LIPIcs.ICLP.2010.212},
 	annote = {Keywords: Constraint Logic Programming over reals, Co-induction, Context-Free Grammars, Omega-Grammars}
+}
+
+@inproceedings{AnconaSAC12,
+  author = {Ancona, D.},
+  title = {Regular corecursion in {P}rolog},
+  booktitle = {A{CM} {S}ymposium on {A}pplied {C}omputing ({SAC} 2012)},
+  ftp = {ftp://ftp.disi.unige.it/person/AnconaD/AnconaSAC12.pdf},
+  keywords = {coinduction,corecursion},
+  year = 2012
 }
