@@ -30,17 +30,4 @@
 	coinductive_success_hook(no_odd_cycle(_,N1), no_odd_cycle(_,N2)) :-
 		N1 == N2.
 
-	% test graph; taken from the Wikipedia page on bipartite graphs
-	% left set of vertices
-	v(a, [f]).
-	v(b, [f, g]).
-	v(c, [h, i]).
-	v(d, [g]).
-	v(e, [f, i]).
-	% right set of vertex
-	v(f, [a, b]).
-	v(g, [b, d]).
-	v(h, [c]).
-	v(i, [c, e]).
-
 :- end_object.

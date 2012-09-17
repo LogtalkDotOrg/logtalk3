@@ -263,3 +263,22 @@ false.
 Path = [a|_S1], % where
     _S1 = [b, c, a|_S1] ;
 false.
+
+
+% testing for bipartite graphs:
+
+?- A = v(a, [F]), B = v(b, [F, G]), C = v(c, [H, I]), D = v(d, [G]), E = v(e, [F, I]), F = v(f, [A, B]), G = v(g, [B, D]), H = v(h, [C]), I = v(i, [C, E]), graph::bipartite(A).
+A = v(a, [_S1]), % where
+    _S1 = v(f, [v(a, [_S1]), v(b, [_S1, _S2])]),
+    _S2 = v(g, [v(b, [_S1, _S2]), v(d, [_S2])]),
+F = v(f, [v(a, [_S1]), v(b, [_S1, _S2])]),
+B = v(b, [_S1, _S2]),
+G = v(g, [v(b, [_S1, _S2]), v(d, [_S2])]),
+C = _S3, % where
+    _S3 = v(c, [v(h, [_S3]), _S4]),
+    _S4 = v(i, [_S3, v(e, [_S1, _S4])]),
+H = v(h, [_S3]),
+I = v(i, [_S3, v(e, [_S1, _S4])]),
+D = v(d, [_S2]),
+E = v(e, [_S1, _S4]) ;
+false.
