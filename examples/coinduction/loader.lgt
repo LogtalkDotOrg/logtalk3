@@ -40,7 +40,8 @@
 			nested,
 			cyclic_paths,
 			shared_paths,
-			tangle
+			tangle,
+			graph
 		])
 	).
 

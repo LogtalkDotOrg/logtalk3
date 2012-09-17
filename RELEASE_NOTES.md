@@ -40,6 +40,9 @@ Logtalk compiler and runtime
 following the idea of `finally/1-2` clauses presented by Davide Ancona
 and Elena Zucca in their SAC 2012 paper.
 
+* CHANGED: Internal representation of the coinductive hypotheses to support
+the new `coinductive_success_hook/2` hook predicate.
+
 * FIXED: Revert the new dynamic binding cache handling code (introduced
 in the previous alpha version) to the previous version as the new one can
 break `bagof/3` and `setof/3` calls.
@@ -73,8 +76,8 @@ Examples
 doesn't require tabling. Contributed by Davide Ancona. This definition enables
 the `counter` example to work. Also added corresponding unit tests.
 
-* NEW: coinductive example `arithmetic`, adapted from Davide Ancona paper
-"Regular corecursion in Prolog".
+* NEW: coinductive examples `arithmetic` and `graph`, adapted from Davide
+Ancona's SAC 2012 paper "Regular corecursion in Prolog".
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------

@@ -129,6 +129,25 @@
 		X1 = [a, b| X1], P1 == X1,
 		X2 = [c, d| X2], P2 == X2.
 
+	succeeds(coinduction_graph_1) :-
+		% graph found on the Wikipedia page http://en.wikipedia.org/wiki/Bipartite_graph
+		A = v(a, [F]), B = v(b, [F, G]), C = v(c, [H, I]), D = v(d, [G]), E = v(e, [F, I]),
+		F = v(f, [A, B]), G = v(g, [B, D]), H = v(h, [C]), I = v(i, [C, E]),
+		graph::bipartite(A).
+
+	succeeds(coinduction_graph_2) :-
+		V0 = v(0, [V1, V3, V5, V7]), V1 = v(1, [V0, V2, V4, V6]), V2 = v(2, [V1, V3, V5, V7]), V3 = v(3, [V0, V2, V4, V6]),
+		V4 = v(4, [V1, V3, V5, V7]), V5 = v(5, [V0, V2, V4, V6]), V6 = v(6, [V1, V3, V5, V7]), V7 = v(7, [V0, V2, V4, V6]),
+		graph::bipartite(V0).
+
+	fails(coinduction_graph_3) :-
+		V0 = v(0, [V0]),
+		graph::bipartite(V0).
+
+	fails(coinduction_graph_4) :-
+		V0 = v(0, [V1, V4]), V1 = v(1, [V0, V2]), V2 = v(2, [V1, V3]), V3 = v(3, [V2, V4]), V4 = v(4, [V0, V3]),
+		graph::bipartite(V4).
+
 	:- if(current_object(train)).
 	succeeds(coinduction_train_1) :-
 		bagof((X, R), train::driver(s0, s0, s0, X, R), [(X1, R1), (X2, R2)]),

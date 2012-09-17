@@ -7330,10 +7330,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	% compile the auxiliary clause(s) used to implement coinduction
 	(	'$lgt_pl_meta_predicate'('*->'(_, _), _, _) ->
 		% back-end Prolog compiler supports the soft-cut control construct
-		'$lgt_tr_clause'((Head :- '*->'({'$lgt_check_coinductive_success'(TestHead, HeadStack, Hypothesis)}, {'$lgt_coinductive_success_hook'(Head, Hypothesis, HeadExCtx, HeadStack, BodyStack)}); {'$lgt_push_coinductive_hypothesis'(TestHead, HeadStack, BodyStack)}, CoinductiveHead), HeadCtx, BodyCtx)
+		'$lgt_tr_clause'((Head :- '*->'({'$lgt_check_coinductive_success'(TestHead, HeadStack, Hypothesis)}, {'$lgt_coinductive_success_hook'(Head, Hypothesis, HeadExCtx, HeadStack, BodyStack)}); {'$lgt_push_coinductive_hypothesis'(Head, HeadStack, BodyStack)}, CoinductiveHead), HeadCtx, BodyCtx)
 	;	'$lgt_pl_meta_predicate'(if(_, _, _), _, _) ->
 		% back-end Prolog compiler supports the if/3 soft-cut built-in meta-predicate
-		'$lgt_tr_clause'((Head :- if({'$lgt_check_coinductive_success'(TestHead, HeadStack, Hypothesis)}, {'$lgt_coinductive_success_hook'(Head, Hypothesis, HeadExCtx, HeadStack, BodyStack)}, ({'$lgt_push_coinductive_hypothesis'(TestHead, HeadStack, BodyStack)}, CoinductiveHead))), HeadCtx, BodyCtx)
+		'$lgt_tr_clause'((Head :- if({'$lgt_check_coinductive_success'(TestHead, HeadStack, Hypothesis)}, {'$lgt_coinductive_success_hook'(Head, Hypothesis, HeadExCtx, HeadStack, BodyStack)}, ({'$lgt_push_coinductive_hypothesis'(Head, HeadStack, BodyStack)}, CoinductiveHead))), HeadCtx, BodyCtx)
 	;	throw(resource_error(soft_cut_support))
 	),
 	'$lgt_tr_coinductive_directive'(Preds, Ctx).
@@ -7385,7 +7385,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_map_coinductive_template_args'([(+)| TemplateArgs], [Arg| HeadArgs], [Arg| TestHeadArgs]) :-
 	'$lgt_map_coinductive_template_args'(TemplateArgs, HeadArgs, TestHeadArgs).
 
-'$lgt_map_coinductive_template_args'([(-)| TemplateArgs], [_| HeadArgs], TestHeadArgs) :-
+'$lgt_map_coinductive_template_args'([(-)| TemplateArgs], [_| HeadArgs], [_| TestHeadArgs]) :-
 	'$lgt_map_coinductive_template_args'(TemplateArgs, HeadArgs, TestHeadArgs).
 
 
