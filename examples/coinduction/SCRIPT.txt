@@ -265,7 +265,7 @@ Path = [a|_S1], % where
 false.
 
 
-% testing for bipartite graphs:
+% testing for bipartite graphs (vertex adjacency lists must be ordered):
 
 ?- A = v(a, [F]), B = v(b, [F, G]), C = v(c, [H, I]), D = v(d, [G]), E = v(e, [F, I]), F = v(f, [A, B]), G = v(g, [B, D]), H = v(h, [C]), I = v(i, [C, E]), graph::bipartite(A).
 A = v(a, [_S1]), % where

@@ -40,6 +40,7 @@
 	comember(X, [_| T]) :-
 		comember(X, T).
 
+%	% alternative definition by Gopal et al; requires tabling of rational terms
 %	comember(X, L) :-
 %		drop(X, L, L1),
 %		comember(X, L1).
