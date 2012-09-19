@@ -36,6 +36,12 @@ Logtalk distribution
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: Simplified the optimization steps for the clauses resulting
+from the translation of grammar rules.
+
+* FIXED: Calls to the `expand_term/2` built-in method when the argument
+is a grammar rule and the `optimize` compiler flag if turned off.
+
 * NEW: Add support for `coinductive_success_hook/1-2` hook predicates,
 following the idea of `finally/1-2` clauses presented by Davide Ancona
 and Elena Zucca in their SAC 2012 paper.
