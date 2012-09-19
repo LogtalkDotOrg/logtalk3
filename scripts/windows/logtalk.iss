@@ -362,22 +362,28 @@ function SWIConExePath: String;
 var
   Home: String;
 begin
-  if RegQueryStringValue(HKLM, 'Software\SWI\Prolog64\', 'home', Home) then
-    if FileExists(Home + '\bin\plcon.exe') then
-      Result := Home + '\bin\plcon.exe'
-    else if FileExists(Home + '\bin\swipl.exe') then
-      Result := Home + '\bin\swipl.exe'
-    else
-      Result := 'prolog_compiler_not_installed'
+  if IsWin64 then
+    if RegQueryStringValue(HKLM64, 'Software\SWI\Prolog64\', 'home', Home) or
+       RegQueryStringValue(HKLM64, 'Software\SWI\Prolog\', 'home', Home) or
+       RegQueryStringValue(HKLM32, 'Software\SWI\Prolog64\', 'home', Home) or
+       RegQueryStringValue(HKLM32, 'Software\SWI\Prolog\', 'home', Home)
+    then
+      if FileExists(Home + '\bin\plcon.exe') then
+        Result := Home + '\bin\plcon.exe'
+      else if FileExists(Home + '\bin\swipl.exe') then
+        Result := Home + '\bin\swipl.exe'
+      else
+        Result := 'prolog_compiler_not_installed'
   else
-      Result := 'prolog_compiler_not_installed';
-  if (Result = 'prolog_compiler_not_installed') and RegQueryStringValue(HKLM, 'Software\SWI\Prolog\', 'home', Home) then
-    if FileExists(Home + '\bin\plcon.exe') then
-      Result := Home + '\bin\plcon.exe'
-    else if FileExists(Home + '\bin\swipl.exe') then
-      Result := Home + '\bin\swipl.exe'
-    else
-      Result := 'prolog_compiler_not_installed'
+    if RegQueryStringValue(HKLM, 'Software\SWI\Prolog64\', 'home', Home) or
+       RegQueryStringValue(HKLM, 'Software\SWI\Prolog\', 'home', Home)
+    then
+      if FileExists(Home + '\bin\plcon.exe') then
+        Result := Home + '\bin\plcon.exe'
+      else if FileExists(Home + '\bin\swipl.exe') then
+        Result := Home + '\bin\swipl.exe'
+      else
+        Result := 'prolog_compiler_not_installed'
 end;
 
 function GetSWIConExePath(Param: String): String;
@@ -396,22 +402,28 @@ function SWIWinExePath: String;
 var
   Home: String;
 begin
-  if RegQueryStringValue(HKLM, 'Software\SWI\Prolog64\', 'home', Home) then
-    if FileExists(Home + '\bin\plwin.exe') then
-      Result := Home + '\bin\plwin.exe'
-    else if FileExists(Home + '\bin\swipl-win.exe') then
-      Result := Home + '\bin\swipl-win.exe'
-    else
-      Result := 'prolog_compiler_not_installed'
+  if IsWin64 then
+    if RegQueryStringValue(HKLM64, 'Software\SWI\Prolog64\', 'home', Home) or
+       RegQueryStringValue(HKLM64, 'Software\SWI\Prolog\', 'home', Home) or
+       RegQueryStringValue(HKLM32, 'Software\SWI\Prolog64\', 'home', Home) or
+       RegQueryStringValue(HKLM32, 'Software\SWI\Prolog\', 'home', Home)
+    then
+      if FileExists(Home + '\bin\plwin.exe') then
+        Result := Home + '\bin\plwin.exe'
+      else if FileExists(Home + '\bin\swipl-win.exe') then
+        Result := Home + '\bin\swipl-win.exe'
+      else
+        Result := 'prolog_compiler_not_installed'
   else
-      Result := 'prolog_compiler_not_installed';
-  if (Result = 'prolog_compiler_not_installed') and RegQueryStringValue(HKLM, 'Software\SWI\Prolog\', 'home', Home) then
-    if FileExists(Home + '\bin\plwin.exe') then
-      Result := Home + '\bin\plwin.exe'
-    else if FileExists(Home + '\bin\swipl-win.exe') then
-      Result := Home + '\bin\swipl-win.exe'
-    else
-      Result := 'prolog_compiler_not_installed'
+    if RegQueryStringValue(HKLM, 'Software\SWI\Prolog64\', 'home', Home) or
+       RegQueryStringValue(HKLM, 'Software\SWI\Prolog\', 'home', Home)
+    then
+      if FileExists(Home + '\bin\plwin.exe') then
+        Result := Home + '\bin\plwin.exe'
+      else if FileExists(Home + '\bin\swipl-win.exe') then
+        Result := Home + '\bin\swipl-win.exe'
+      else
+        Result := 'prolog_compiler_not_installed'
 end;
 
 function GetSWIWinExePath(Param: String): String;

@@ -85,6 +85,12 @@ the `counter` example to work. Also added corresponding unit tests.
 * NEW: coinductive examples `arithmetic` and `graph`, adapted from Davide
 Ancona's SAC 2012 paper "Regular corecursion in Prolog".
 
+Installers and installation scripts
+-----------------------------------
+
+* UPDATED: The Windows installer for detecting SWI-Prolog 6.3.1 (and hopefully
+later versions) due to changes to the registry keys used by this compiler.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
