@@ -974,6 +974,16 @@ user:goal_expansion('::'(Object, Message), Goal) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+%:- multifile('$lgt_logtalk.message_hook'/5).
+%:- dynamic('$lgt_logtalk.message_hook'/5).
+%
+%'$lgt_logtalk.message_hook'(_, Kind, Component, Tokens, ExCtx) :-
+%	functor(Kind, Functor, _),
+%	'$lgt_append'([begin(Functor,Ctx)| Tokens], [end(Ctx)], ExpandedTokens),
+%	'$lgt_logtalk.message_prefix_stream'(Kind, Component, Prefix, Stream, ExCtx),
+%	'$lgt_logtalk.print_message_tokens'(Stream, Prefix, ExpandedTokens, ExCtx).
+
+
 :- multifile('$lgt_logtalk.print_message_token'/3).
 :- dynamic('$lgt_logtalk.print_message_token'/3).
 
