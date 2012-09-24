@@ -4498,11 +4498,14 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_logtalk.print_message_tokens'(Stream, Prefix, Tokens, ExCtx) :-
 	(	Tokens = [at_same_line| _] ->
 		% continuation message
-		true
+		'$lgt_print_message_tokens'(Tokens, Stream, Prefix, ExCtx)
+	;	Tokens = [begin(Kind, Context)| Rest] ->
+		% write the prefix after the begin/2 token
+		'$lgt_print_message_tokens'([begin(Kind, Context), Prefix-[]| Rest], Stream, Prefix, ExCtx)
 	;	% write first line prefix
-		write(Stream, Prefix)
-	),
-	'$lgt_print_message_tokens'(Tokens, Stream, Prefix, ExCtx).
+		write(Stream, Prefix),
+		'$lgt_print_message_tokens'(Tokens, Stream, Prefix, ExCtx)
+	).
 
 
 '$lgt_print_message_tokens'([], _, _, _).
