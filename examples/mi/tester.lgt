@@ -19,6 +19,5 @@
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(mi, [debug(on), source_data(on)]),
 	logtalk_load(tests, [hook(lgtunit)]),
-	set_logtalk_flag(report, on),
 	tests::run
 )).

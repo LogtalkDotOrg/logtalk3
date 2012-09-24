@@ -15,6 +15,5 @@
 %	logtalk_load(errors_loader),
 %	logtalk_load(warnings_loader),
 	logtalk_load(tests, [hook(lgtunit)]),
-	set_logtalk_flag(report, on),
 	tests::run
 )).

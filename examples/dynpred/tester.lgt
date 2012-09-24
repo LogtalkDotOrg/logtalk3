@@ -14,6 +14,5 @@
 	logtalk_load(lgtunit(loader)),
 	logtalk_load([protos, classes, prototype, categories], [dynamic_declarations(allow), debug(on), source_data(on)]),
 	logtalk_load(tests, [hook(lgtunit)]),
-	set_logtalk_flag(report, on),
 	tests::run
 )).

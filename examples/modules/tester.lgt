@@ -17,6 +17,5 @@
 	catch(logtalk_load(client), _,	true),	% also test parsing of use_module/1 directives
 	logtalk_load(library(types_loader)),
 	logtalk_load(tests, [hook(lgtunit)]),
-	set_logtalk_flag(report, on),
 	tests::run
 )).

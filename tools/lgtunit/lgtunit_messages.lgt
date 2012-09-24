@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/08/09,
+		date is 2012/09/24,
 		comment is 'Logtalk unit test framework default message translations.']).
 
 	% structured message printing predicates;
@@ -48,7 +48,7 @@
 	% messages for tests handling
 
 	logtalk::message_tokens(tests_start_date_time(Year, Month, Day, Hours, Minutes, Seconds), lgtunit) -->
-		['tests started at ~w/~w/~w, ~w:~w:~w'-[Year, Month, Day, Hours, Minutes, Seconds], nl].
+		[nl, 'tests started at ~w/~w/~w, ~w:~w:~w'-[Year, Month, Day, Hours, Minutes, Seconds], nl].
 
 	logtalk::message_tokens(tests_end_date_time(Year, Month, Day, Hours, Minutes, Seconds), lgtunit) -->
 		['tests ended at ~w/~w/~w, ~w:~w:~w'-[Year, Month, Day, Hours, Minutes, Seconds], nl, nl].

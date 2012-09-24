@@ -19,6 +19,5 @@
 	logtalk_load(relations(loader), [reload(skip)]),	% allow for static binding
 	logtalk_load(points, [source_data(on), debug(on)]),	% allow coverage information to be collected
 	logtalk_load(tests, [hook(lgtunit)]),
-	set_logtalk_flag(report, on),
 	tests::run
 )).

@@ -4428,7 +4428,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 %
 % print a message that was not intercepted by the user
 
-'$lgt_default_print_message'(_, core, _, _) :-
+'$lgt_default_print_message'(_, _, _, _) :-
 	'$lgt_compiler_flag'(report, off),
 	!.
 
@@ -4438,11 +4438,12 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_default_print_message'(silent(_), _, _, _) :-
 	!.
 
-'$lgt_default_print_message'(information, core, _, _) :-
+'$lgt_default_print_message'(information, _, _, _) :-
 	'$lgt_compiler_flag'(report, warnings),
 	!.
 
-'$lgt_default_print_message'(information(_), core, _, _) :-
+'$lgt_default_print_message'(information(Key), _, _, _) :-
+	Key \== requested,
 	'$lgt_compiler_flag'(report, warnings),
 	!.
 

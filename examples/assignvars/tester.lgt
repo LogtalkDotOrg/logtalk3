@@ -15,6 +15,5 @@
 	logtalk_load(library(assignvars), [reload(skip)]),	% allow for static binding
 	logtalk_load([fsm3, rectangle3], [debug(on), source_data(on)]),
 	logtalk_load(tests, [hook(lgtunit)]),
-	set_logtalk_flag(report, on),
 	tests::run
 )).

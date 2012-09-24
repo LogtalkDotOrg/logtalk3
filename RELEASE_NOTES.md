@@ -58,9 +58,8 @@ fail when called from within a category that is not imported by any object.
 This may happen e.g. when a parametric category is used to hold definitions
 for multifile predicates.
 
-* FIXED: When the `report` flag is `off`, only suppress `core` component
-messages. Likewise, when the `report` flag is set to `warnings`, only
-suppress `information/0-1` messages from the `core` component.
+* IMPROVED: When the `report` flag value is set to `warnings`, only suppress
+`information/1` messages whose argument is not the the atom `requested`.
 
 * NEW: Accept `phrase//1` as a built-in non-terminal in the body of grammar
 rules. From Richard O'Keefe feedback on the SWI-Prolog mailing list.
