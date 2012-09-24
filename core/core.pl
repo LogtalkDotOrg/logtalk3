@@ -4517,8 +4517,12 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_print_message_tokens'(Tokens, Stream, Prefix, ExCtx).
 
 
+'$lgt_print_message_token'(at_same_line, _, _, _).
+
 '$lgt_print_message_token'(nl, Tokens, Stream, Prefix) :-
 	(	Tokens == [] ->
+		nl(Stream)
+	;	Tokens = [end(_)] ->
 		nl(Stream)
 	;	nl(Stream),
 		write(Stream, Prefix)
