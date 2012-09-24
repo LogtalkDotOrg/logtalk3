@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SWI Prolog 6.0.0 and later versions
-%  Last updated on August 2, 2012
+%  Last updated on September 24, 2012
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -964,6 +964,27 @@ user:goal_expansion('::'(Object, Message), Goal) :-
 	Error,
 	Error
 ).
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  message token printing
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+:- multifile('$lgt_logtalk.print_message_token'/3).
+:- dynamic('$lgt_logtalk.print_message_token'/3).
+
+'$lgt_logtalk.print_message_token'(Stream, ansi(Attributes, Format, Arguments), _) :-
+	prolog:message_line_element(Stream, ansi(Attributes, Format, Arguments)).
+
+'$lgt_logtalk.print_message_token'(Stream, begin(Kind, Var), _) :-
+	prolog:message_line_element(Stream, begin(Kind, Var)).
+
+'$lgt_logtalk.print_message_token'(Stream, end(Var), _) :-
+	prolog:message_line_element(Stream, end(Var)).
 
 
 

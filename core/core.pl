@@ -4530,6 +4530,12 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_print_message_token'(Format-Arguments, _, Stream, _) :-
 	format(Stream, Format, Arguments).
 
+'$lgt_print_message_token'(ansi(_, Format, Arguments), _, Stream, _) :-
+	format(Stream, Format, Arguments).
+
+'$lgt_print_message_token'(begin(_, _), _, _, _).
+
+'$lgt_print_message_token'(end(_), _, _, _).
 
 
 

@@ -64,6 +64,9 @@ for multifile predicates.
 * NEW: Accept `phrase//1` as a built-in non-terminal in the body of grammar
 rules. From Richard O'Keefe feedback on the SWI-Prolog mailing list.
 
+* ADDED: Support for the SWI-Prolog message tokens `ansi/3`, `begin/2`, and
+`end/1`. By default, these tokens are ignored.
+
 Prolog adapter and integration files
 ------------------------------------
 
@@ -71,6 +74,10 @@ Prolog adapter and integration files
 files.
 
 * NEW: Support for the extended `table/1` directive in XSB.
+
+* ADDED: Definition for the `logtalk::print_message_token/2` hook predicate to
+the SWI-Prolog adapter file to process the `ansi/3`, `begin/2`, and `end/1`
+tokens.
 
 Examples
 --------
