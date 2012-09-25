@@ -25,6 +25,16 @@ RELEASE NOTES
 =============
 
 
+3.00.0 Alpha 3 - October ??, 2012
+===================================
+
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Compile-time type-checking of the first argument of calls to the
+`parameter/2` built-in method.
+
+
 3.00.0 Alpha 2 - September 24, 2012
 ===================================
 

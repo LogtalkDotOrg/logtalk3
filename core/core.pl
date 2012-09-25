@@ -9780,14 +9780,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_exec_ctx'(ExCtx, _, _, Self, _, _).
 
-'$lgt_tr_body'(parameter(_, _), _, _, _) :-
+'$lgt_tr_body'(parameter(Arg, _), _, _, _) :-
+	'$lgt_must_be'(integer, Arg),
 	'$lgt_pp_entity'(_, Entity, _, _, _),
 	\+ compound(Entity),
 	throw(type_error(parametric_entity, Entity)).
-
-'$lgt_tr_body'(parameter(Arg, _), _, _, _) :-
-	var(Arg),
-	throw(instantiation_error).
 
 '$lgt_tr_body'(parameter(Arg, Value), TPred, '$lgt_debug'(goal(parameter(Arg, Temp), DPred), ExCtx), Ctx) :-
 	'$lgt_pp_entity'(object, _, _, _, _),
@@ -9815,7 +9812,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		DPred = (TPred, Temp=Value)
 	;	throw(domain_error(out_of_range, Arg))
 	).
-
 
 
 % term input predicates that need to be operator aware
@@ -17246,6 +17242,26 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	throw(error(type_error(integer, Term), Context))
 	).
 
+'$lgt_must_be'(non_negative_integer, Term, Context) :-
+	(	var(Term) ->
+		throw(error(instantiation_error, Context))
+	;	\+ integer(Term) ->
+		throw(error(type_error(integer, Term), Context))
+	;	Term < 0 ->
+		throw(error(domain_error(not_less_than_zero, Term), Context))	
+	;	true
+	).
+
+'$lgt_must_be'(var_or_non_negative_integer, Term, Context) :-
+	(	var(Term) ->
+		true
+	;	\+ integer(Term) ->
+		throw(error(type_error(integer, Term), Context))
+	;	Term < 0 ->
+		throw(error(domain_error(not_less_than_zero, Term), Context))	
+	;	true
+	).
+
 '$lgt_must_be'(float, Term, Context) :-
 	(	var(Term) ->
 		throw(error(instantiation_error, Context))
@@ -17449,11 +17465,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		throw(error(type_error(predicate_indicator, Term), Context))
 	;	Term = Functor/Arity,
 		'$lgt_must_be'(atom, Functor),
-		'$lgt_must_be'(integer, Arity),
-		(	Arity < 0,
-			throw(error(domain_error(not_less_than_zero, Arity), Context))
-		;	true
-		)
+		'$lgt_must_be'(non_negative_integer, Arity)
 	).
 
 '$lgt_must_be'(var_or_predicate_indicator, Term, Context) :-
@@ -17463,12 +17475,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		throw(error(type_error(predicate_indicator, Term), Context))
 	;	Term = Functor/Arity,
 		'$lgt_must_be'(var_or_atom, Functor),
-		'$lgt_must_be'(var_or_integer, Arity),
-		(	integer(Arity),
-			Arity < 0 ->
-			throw(error(domain_error(not_less_than_zero, Arity), Context))
-		;	true
-		)
+		'$lgt_must_be'(var_or_non_negative_integer, Arity)
 	).
 
 '$lgt_must_be'(scope, Term, Context) :-

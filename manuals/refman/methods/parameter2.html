@@ -52,10 +52,10 @@ Used in <a class="glossary" title="Go to glossary definition" href="../../glossa
 		<dd><code>instantiation_error</code></dd>
 	<dt>Number is neither a variable nor an integer value:</dt>
 		<dd><code>type_error(integer, Number)</code></dd>
-	<dt>Object identifier is not a compound term:</dt>
-		<dd><code>type_error(compound, Object)</code></dd>
-	<dt>Number is a negative integer value:</dt>
-		<dd><code>domain_error(not_less_than_zero, Number)</code></dd>
+	<dt>Number is smaller than one or greater than the parametric entity identifier arity:</dt>
+		<dd><code>domain_error(out_of_range, Number)</code></dd>
+	<dt>Entity identifier is not a compound term:</dt>
+		<dd><code>type_error(compound, Entity)</code></dd>
 </dl>
 
 <h4>Examples</h4>
@@ -76,7 +76,7 @@ Used in <a class="glossary" title="Go to glossary definition" href="../../glossa
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: April 7, 2010</span>
+		<span>Last updated on: September 25, 2012</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="../index.html#methods">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="self1.html">next</a></span><br/>
