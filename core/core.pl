@@ -11399,92 +11399,128 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 % '$lgt_simplify_body'(+callable, -callable)
 %
+% simplify the body of a compiled clause by folding left unifications, usually
+% resulting from inlined calls to the execution-context built-in methods, and
+% by removing redundant calls to true/0 (but we must be careful with control
+% constructs that are opaque to cuts such as call/1 and once/1)
+
+'$lgt_simplify_body'(G, SG) :-
+	'$lgt_fold_left_unifications'(G, SG0),
+	'$lgt_remove_redundant_calls'(SG0, SG).
+
+
+
+% '$lgt_fold_left_unifications'(+goal, -goal)
+%
+% folds left unifications; right unifications cannot
+% be folded otherwise we may loose steadfastness
+
+'$lgt_fold_left_unifications'((Term1 = Term2), Folded) :-
+	!,
+	(	Term1 = Term2 ->
+		Folded = true
+	;	Folded = fail
+	).
+
+'$lgt_fold_left_unifications'(((Term1 = Term2), Goal), Folded) :-
+	!,
+	(	Term1 = Term2 ->
+		'$lgt_fold_left_unifications'(Goal, Folded)
+	;	Folded = fail
+	).
+
+'$lgt_fold_left_unifications'(Goal, Goal).
+
+
+
+% '$lgt_remove_redundant_calls'(+callable, -callable)
+%
 % removes redundant calls to true/0 from a translated clause body;
 % we must be careful with control constructs that are opaque to
 % cuts such as call/1 and once/1
 
-'$lgt_simplify_body'(G, G) :-
+'$lgt_remove_redundant_calls'(G, G) :-
 	var(G),
 	!.
 
-'$lgt_simplify_body'(catch(G, E, R), catch(SG, E, SR)) :-
+'$lgt_remove_redundant_calls'(catch(G, E, R), catch(SG, E, SR)) :-
 	!,
-	'$lgt_simplify_body'(G, SG),
-	'$lgt_simplify_body'(R, SR).
+	'$lgt_remove_redundant_calls'(G, SG),
+	'$lgt_remove_redundant_calls'(R, SR).
 
-'$lgt_simplify_body'(call(G), true) :-
+'$lgt_remove_redundant_calls'(call(G), true) :-
 	G == !,
 	!.
-'$lgt_simplify_body'(call(G), G) :-
+'$lgt_remove_redundant_calls'(call(G), G) :-
 	nonvar(G),
 	functor(G, '$lgt_metacall', _),
 	!.
-'$lgt_simplify_body'(call(G), call(SG)) :-
+'$lgt_remove_redundant_calls'(call(G), call(SG)) :-
 	!,
-	'$lgt_simplify_body'(G, SG).
+	'$lgt_remove_redundant_calls'(G, SG).
 
-'$lgt_simplify_body'(once(G), true) :-
+'$lgt_remove_redundant_calls'(once(G), true) :-
 	G == !,
 	!.
-'$lgt_simplify_body'(once(G), once(SG)) :-
+'$lgt_remove_redundant_calls'(once(G), once(SG)) :-
 	!,
-	'$lgt_simplify_body'(G, SG).
+	'$lgt_remove_redundant_calls'(G, SG).
 
-'$lgt_simplify_body'(ignore(G), ignore(SG)) :-
+'$lgt_remove_redundant_calls'(ignore(G), ignore(SG)) :-
 	!,
-	'$lgt_simplify_body'(G, SG).
+	'$lgt_remove_redundant_calls'(G, SG).
 
-'$lgt_simplify_body'(bagof(T, G, L), bagof(T, SG, L)) :-
+'$lgt_remove_redundant_calls'(bagof(T, G, L), bagof(T, SG, L)) :-
 	!,
-	'$lgt_simplify_body'(G, SG).
+	'$lgt_remove_redundant_calls'(G, SG).
 
-'$lgt_simplify_body'(setof(T, G, L), setof(T, SG, L)) :-
+'$lgt_remove_redundant_calls'(setof(T, G, L), setof(T, SG, L)) :-
 	!,
-	'$lgt_simplify_body'(G, SG).
+	'$lgt_remove_redundant_calls'(G, SG).
 
-'$lgt_simplify_body'(findall(T, G, L), findall(T, SG, L)) :-
+'$lgt_remove_redundant_calls'(findall(T, G, L), findall(T, SG, L)) :-
 	!,
-	'$lgt_simplify_body'(G, SG).
+	'$lgt_remove_redundant_calls'(G, SG).
 
-'$lgt_simplify_body'(forall(G, T), forall(SG, ST)) :-
+'$lgt_remove_redundant_calls'(forall(G, T), forall(SG, ST)) :-
 	!,
-	'$lgt_simplify_body'(G, SG),
-	'$lgt_simplify_body'(T, ST).
+	'$lgt_remove_redundant_calls'(G, SG),
+	'$lgt_remove_redundant_calls'(T, ST).
 
-'$lgt_simplify_body'((A; B), (SA; SB)) :-
+'$lgt_remove_redundant_calls'((A; B), (SA; SB)) :-
 	!,
-	'$lgt_simplify_body'(A, SA),
-	'$lgt_simplify_body'(B, SB).
+	'$lgt_remove_redundant_calls'(A, SA),
+	'$lgt_remove_redundant_calls'(B, SB).
 
-'$lgt_simplify_body'((A -> B), (SA -> SB)) :-
+'$lgt_remove_redundant_calls'((A -> B), (SA -> SB)) :-
 	!,
-	'$lgt_simplify_body'(A, SA),
-	'$lgt_simplify_body'(B, SB).
+	'$lgt_remove_redundant_calls'(A, SA),
+	'$lgt_remove_redundant_calls'(B, SB).
 
-'$lgt_simplify_body'('*->'(A, B), '*->'(SA, SB)) :-
+'$lgt_remove_redundant_calls'('*->'(A, B), '*->'(SA, SB)) :-
 	'$lgt_pl_built_in'('*->'(_, _)),
 	!,
-	'$lgt_simplify_body'(A, SA),
-	'$lgt_simplify_body'(B, SB).
+	'$lgt_remove_redundant_calls'(A, SA),
+	'$lgt_remove_redundant_calls'(B, SB).
 
-'$lgt_simplify_body'((true, B), SB) :-
+'$lgt_remove_redundant_calls'((true, B), SB) :-
 	!,
-	'$lgt_simplify_body'(B, SB).
+	'$lgt_remove_redundant_calls'(B, SB).
 
-'$lgt_simplify_body'((B, true), SB) :-
+'$lgt_remove_redundant_calls'((B, true), SB) :-
 	!,
-	'$lgt_simplify_body'(B, SB).
+	'$lgt_remove_redundant_calls'(B, SB).
 
-'$lgt_simplify_body'((A, B), (SA, SB)) :-
+'$lgt_remove_redundant_calls'((A, B), (SA, SB)) :-
 	!,
-	'$lgt_simplify_body'(A, SA),
-	'$lgt_simplify_body'(B, SB).
+	'$lgt_remove_redundant_calls'(A, SA),
+	'$lgt_remove_redundant_calls'(B, SB).
 
-'$lgt_simplify_body'(\+ G, \+ SG) :-
+'$lgt_remove_redundant_calls'(\+ G, \+ SG) :-
 	!,
-	'$lgt_simplify_body'(G, SG).
+	'$lgt_remove_redundant_calls'(G, SG).
 
-'$lgt_simplify_body'(G, G).
+'$lgt_remove_redundant_calls'(G, G).
 
 
 
@@ -15998,7 +16034,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_dcg_simplify'((Head :- Body), _, _, Clause) :-
 	'$lgt_dcg_flatten_conjunctions'(Body, Flatted),
-	'$lgt_dcg_fold_left_unifications'(Flatted, Folded),
+	'$lgt_fold_left_unifications'(Flatted, Folded),
 	'$lgt_dcg_fold_unification_pairs'(Folded, FoldedPairs),
 	(	FoldedPairs == true ->
 		Clause = Head
@@ -16061,29 +16097,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_dcg_flatten_conjunctions'(Goal, SGoal).
 
 '$lgt_dcg_flatten_conjunctions'(Goal, Goal).
-
-
-
-% '$lgt_dcg_fold_left_unifications'(+goal, -goal)
-%
-% folds left unifications; right unifications cannot
-% be folded otherwise we may loose steadfastness
-
-'$lgt_dcg_fold_left_unifications'((Term1 = Term2), Folded) :-
-	!,
-	(	Term1 = Term2 ->
-		Folded = true
-	;	Folded = fail
-	).
-
-'$lgt_dcg_fold_left_unifications'(((Term1 = Term2), Goal), Folded) :-
-	!,
-	(	Term1 = Term2 ->
-		'$lgt_dcg_fold_left_unifications'(Goal, Folded)
-	;	Folded = fail
-	).
-
-'$lgt_dcg_fold_left_unifications'(Goal, Goal).
 
 
 

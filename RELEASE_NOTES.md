@@ -31,6 +31,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: Simplification of generated clauses when compiling source
+code by folding left unifications (usually resulting from calls to the
+execution-context built-in methods that cannot be immediately inlined).
+
 * FIXED: A bug in the compile-time type-checking of the first argument
 of calls to the `parameter/2` built-in method, which could result in a
 misleading instantiation error in an arithmetic comparison expression. 
