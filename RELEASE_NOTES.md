@@ -31,8 +31,14 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* FIXED: Compile-time type-checking of the first argument of calls to the
-`parameter/2` built-in method.
+* FIXED: A bug in the compile-time type-checking of the first argument
+of calls to the `parameter/2` built-in method, which could result in a
+misleading instantiation error in an arithmetic comparison expression. 
+
+* FIXED: Compilation of the execution-context built-in methods whenever
+their arguments are bound at compile-time. In this case, the calls are
+no longer compiled inline to prevent a bug when the calls are used e.g.
+as conditions in if-then-else control constructs.
 
 
 3.00.0 Alpha 2 - September 24, 2012

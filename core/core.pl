@@ -9756,29 +9756,59 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_tr_body'(Pred, TPred0, DPred0, Ctx).
 
 
-% inline methods (usually translated to a single unification with the corresponding context argument)
+% execution-context methods
+%
+% calls to these methods are compiled inline whenever possible by unifying
+% the method argument with the corresponding execution context argument;
+% calls with instantiated arguments are not inlined as the call may be used
+% as e.g. a condition in an if-then-else control construct
 
-'$lgt_tr_body'(sender(Sender), true, '$lgt_debug'(goal(sender(Temp), Sender=Temp), ExCtx), Ctx) :-
+'$lgt_tr_body'(sender(Sender), TPred, '$lgt_debug'(goal(sender(Sender), DPred), ExCtx), Ctx) :-
 	!,
-	'$lgt_comp_ctx_sender'(Ctx, Sender),
+	'$lgt_comp_ctx_sender'(Ctx, Sender0),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	'$lgt_exec_ctx'(ExCtx, Sender, _, _, _, _).
-
-'$lgt_tr_body'(this(This), true, '$lgt_debug'(goal(this(Temp), This=Temp), ExCtx), Ctx) :-
-	!,
-	(	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-		'$lgt_comp_ctx_this'(Ctx, This),
-		'$lgt_exec_ctx_this'(ExCtx, This) ->
-		true
-	;	% mismatch between the argument of this/1 and the parametric object identifier
-		throw(domain_error(object_identifier, This))
+	'$lgt_exec_ctx'(ExCtx, Sender0, _, _, _, _),
+	(	var(Sender) ->
+		Sender0 = Sender,
+		TPred = true,
+		DPred = (Sender0 = Sender)
+	;	TPred = (Sender0 = Sender),
+		DPred = TPred
 	).
 
-'$lgt_tr_body'(self(Self), true, '$lgt_debug'(goal(self(Temp), Self=Temp), ExCtx), Ctx) :-
+'$lgt_tr_body'(this(This), TPred, '$lgt_debug'(goal(this(This), DPred), ExCtx), Ctx) :-
 	!,
-	'$lgt_comp_ctx_self'(Ctx, Self),
+	'$lgt_comp_ctx_this'(Ctx, This0),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	'$lgt_exec_ctx'(ExCtx, _, _, Self, _, _).
+	'$lgt_exec_ctx_this'(ExCtx, This0),
+	(	var(This) ->
+		This0 = This,
+		TPred = true,
+		DPred = (This0 = This)
+	;	TPred = (This0 = This),
+		DPred = TPred
+	),
+	(	nonvar(This0),
+		nonvar(This),
+		functor(This0, Functor, Arity),
+		\+ functor(This,  Functor, Arity) ->
+		% mismatch between the argument of this/1 and the parametric object identifier
+		throw(domain_error(object_identifier, This))
+	;	true
+	).
+
+'$lgt_tr_body'(self(Self), TPred, '$lgt_debug'(goal(self(Self), DPred), ExCtx), Ctx) :-
+	!,
+	'$lgt_comp_ctx_self'(Ctx, Self0),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	'$lgt_exec_ctx'(ExCtx, _, _, Self0, _, _),
+	(	var(Self) ->
+		Self0 = Self,
+		TPred = true,
+		DPred = (Self0 = Self)
+	;	TPred = (Self0 = Self),
+		DPred = TPred
+	).
 
 '$lgt_tr_body'(parameter(Arg, _), _, _, _) :-
 	'$lgt_must_be'(integer, Arg),
@@ -9786,7 +9816,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	\+ compound(Entity),
 	throw(type_error(parametric_entity, Entity)).
 
-'$lgt_tr_body'(parameter(Arg, Value), TPred, '$lgt_debug'(goal(parameter(Arg, Temp), DPred), ExCtx), Ctx) :-
+'$lgt_tr_body'(parameter(Arg, Value), TPred, '$lgt_debug'(goal(parameter(Arg, Value), DPred), ExCtx), Ctx) :-
 	'$lgt_pp_entity'(object, _, _, _, _),
 	!,
 	'$lgt_comp_ctx_this'(Ctx, This),
@@ -9794,13 +9824,18 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_exec_ctx_this'(ExCtx, This),
 	functor(This, _, Arity),
 	(	1 =< Arg, Arg =< Arity ->
-		arg(Arg, This, Value),
-		TPred = true,
-		DPred = (Temp=Value)
+		arg(Arg, This, Value0),
+		(	var(Value) ->
+			Value0 = Value,
+			TPred = true,
+			DPred = (Value0=Value)
+		;	TPred = (Value0 = Value),
+			DPred = TPred
+		)
 	;	throw(domain_error(out_of_range, Arg))
 	).
 
-'$lgt_tr_body'(parameter(Arg, Value), TPred, '$lgt_debug'(goal(parameter(Arg, Temp), DPred), ExCtx), Ctx) :-
+'$lgt_tr_body'(parameter(Arg, Value), TPred, '$lgt_debug'(goal(parameter(Arg, Value), TPred), ExCtx), Ctx) :-
 	'$lgt_pp_entity'(category, Ctg, _, _, _),
 	!,
 	'$lgt_comp_ctx_this'(Ctx, This),
@@ -9808,8 +9843,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_exec_ctx_this'(ExCtx, This),
 	functor(Ctg, _, Arity),
 	(	1 =< Arg, Arg =< Arity ->
-		TPred = '$lgt_category_parameter'(This, Ctg, Arg, Value),
-		DPred = (TPred, Temp=Value)
+		TPred = '$lgt_category_parameter'(This, Ctg, Arg, Value)
 	;	throw(domain_error(out_of_range, Arg))
 	).
 
