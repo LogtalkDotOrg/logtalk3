@@ -43,6 +43,12 @@ their arguments are bound at compile-time. In this case, the calls are
 no longer compiled inline to prevent a bug when the calls are used e.g.
 as conditions in if-then-else control constructs.
 
+Examples
+--------
+
+* FIXED: The definition of the predicate `make_directory/1` for GNU Prolog
+in the `cc` example would fail if the directory already existed.
+
 
 3.00.0 Alpha 2 - September 24, 2012
 ===================================

@@ -21,10 +21,11 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2012/05/01,
-		comment is 'Simple example of using conditional compilation to implement a portable operating-system interface for selected back-end Prolog compilers.']).
+		date is 2012/09/27,
+		comment is 'Simple example of using conditional compilation to implement a portable operating-system interface for selected back-end Prolog compilers.'
+	]).
 
 	:- if(current_logtalk_flag(prolog_dialect, swi)).
 
@@ -289,7 +290,10 @@
 			{absolute_file_name(Path, ExpandedPath)}.
 
 		make_directory(Directory) :-
-			{make_directory(Directory)}.
+			(	directory_exists(Directory) ->
+				true
+			;	{make_directory(Directory)}
+			).
 
 		delete_directory(Directory) :-
 			{delete_directory(Directory)}.
