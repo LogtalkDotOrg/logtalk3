@@ -22,31 +22,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-/*
-
-
-<h4>Documenting flags</h4>
-
-	<dl>
-		<dt><code>xmlspec(Option)</code></dt>
-			<dd>Defines the XML documenting files specification format. Possible option values are <code>dtd</code> (for the DTD specification; the usual default) and <code>xsd</code> (for the XML Schema specification). Most XSL processors support DTDs but only some of them support XML Schemas.</dd>
-	</dl>
-	<dl>
-		<dt><code>xmlsref(Option)</code></dt>
-			<dd>Sets the reference to the XML specification file in the automatically generated XML documenting files. The default value is <code>local</code>, that is, the reference points to a local DTD or XSD file (respectively, <code>logtalk.dtd</code> or <code>logtalk.xsd</code>), residing in the same directory as the XML file. Other possible values are <code>web</code> (the reference points to an web location, either <code>http://logtalk.org/xml/1.3/logtalk.dtd</code> or <code>http://logtalk.org/xml/1.3/logtalk.xsd</code>), and <code>standalone</code> (no reference to specification files in the XML documenting files). The most appropriated option value depends on the XSL processor you intend to use. Some of them are buggy an may not work with the default option value.</dd>
-	</dl>
-	<dl>
-		<dt><code>xslfile(File)</code></dt>
-			<dd>Sets the XSLT file to be used with the automatically generated XML documenting files. The default value is <code>lgtxml.xsl</code>, which allows the XML files to be viewed by simply opening them with recent versions of web navigators which support XSLT transformations (after copying the <code>lgtxml.xsl</code> and of the <code>logtalk.css</code> files to the directory containing the XML files).</dd>
-	</dl>
-
-	<dl>
-		<dt><code>xmldir(Directory)</code></dt>
-			<dd>Sets the directory to be used to store the automatically generated XML documenting files. The default value is <code>xml_docs</code>, a sub-directory of the source files directory. Use of this flag requires that the read-only flag <code>altdirs</code> be set to <code>on</code> (not supported in some back-end Prolog compilers).</dd>
-	</dl>
-
-*/
-
 :- object(lgtdoc,
 	implements(lgtdocp)).
 
@@ -54,7 +29,19 @@
 		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2012/09/27,
-		comment is 'Documenting tool.'
+		comment is 'Documenting tool.',
+		remarks is [
+			'Compiling files for generating XML documentation' - 'All source files must be compiled with the "source_data" compiler flag turned on.',
+			'xmlspec(Specification) option' - 'XML documenting files specification format. Possible option values are "dtd" (for the DTD specification; the usual default) and "xsd" (for the XML Schema specification). Most XSL processors support DTDs but only some of them support XML Schemas.',
+			'xmlsref(Reference) option' - 'Reference to the XML specification file in the generated XML documenting files. The default value is "local", i.e. the reference points to a local DTD or XSD file (respectively, "logtalk.dtd" or "logtalk.xsd"), residing in the same directory as the XML file. Other possible values are "web" (the reference points to an web location, either "http://logtalk.org/xml/3.0/logtalk.dtd" or "http://logtalk.org/xml/3.0/logtalk.xsd"), and "standalone" (no reference to specification files in the XML documenting files). The most appropriated option value depends on the XSL processor you intend to use. Some of them are buggy an may not work with the default option value.',
+			'xslfile(File) option' - 'XSLT file to be used with the generated XML documenting files. The default value is "lgtxml.xsl", which allows the XML files to be viewed by simply opening them with recent versions of web navigators which support XSLT transformations (after copying the "lgtxml.xsl" and of the "logtalk.css" files to the directory containing the XML files).',
+			'xmldir(Directory) option' - 'Directory where the XML documenting files will be generated. The default value is "xml_docs", a sub-directory of the source files directory.',
+			'bom(Boolean) option' - 'Defines if a BOM should be added to the generated XML documenting files.',
+			'encoding(Encoding) option' - 'Encoding to be used for the generated XML documenting files.',
+			'exclude_files(List) option' - 'List of files to exclude when generating the XML documenting files.',
+			'exclude_paths(List) option' - 'List of (relative) library paths to exclude when generating the XML documenting files.',
+			'exclude_entities(List) option' - 'List of entities to exclude when generating the XML documenting files.'
+		]
 	]).
 
 	:- private(option_/2).
@@ -260,7 +247,7 @@
 		xml_header_text('1.0', Encoding, no, Text),
 		write_xml_open_tag(Stream, Text, []),
 		(	XMLSpec == dtd ->
-			write(Stream, '<!DOCTYPE logtalk SYSTEM "http://logtalk.org/xml/2.0/logtalk.dtd">'), nl(Stream)
+			write(Stream, '<!DOCTYPE logtalk SYSTEM "http://logtalk.org/xml/3.0/logtalk.dtd">'), nl(Stream)
 		;	true
 		),
 		write(Stream, '<?xml-stylesheet type="text/xsl" href="'),
@@ -270,7 +257,7 @@
 			write_xml_open_tag(Stream, logtalk, [])
 		;	write_xml_open_tag(Stream, logtalk,
 				['xmlns:xsi'-'http://www.w3.org/2001/XMLSchema-instance',
-				 'xsi:noNamespaceSchemaLocation'-'http://logtalk.org/xml/2.0/logtalk.xsd'])
+				 'xsi:noNamespaceSchemaLocation'-'http://logtalk.org/xml/3.0/logtalk.xsd'])
 		).
 
 	write_xml_header(standalone, Encoding, _, XSL, Stream) :-
@@ -831,16 +818,6 @@
 			write_xml_relation(Stream, Entity, Object, complements),
 		fail.
 	write_xml_category_relations(_, _).
-
-
-%	write_xml_relations(Stream, Entity) :-
-%			pp_uses_(Obj),
-%			write_xml_relation(Stream, Entity, Obj, uses),
-%		fail.
-%	write_xml_relations(Stream) :-
-%			pp_calls_(Ptc),
-%			write_xml_relation(Stream, Entity, Protocol, calls),
-%		fail.
 
 	write_xml_relation(Stream, Entity, Relation, Tag, Scope) :-
 		relation_to_xml_term(Entity, Relation),
