@@ -27,7 +27,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2012/04/23,
+		date is 2012/09/27,
 		comment is 'Documenting tool protocol.']).
 
 	:- public(rlibrary/2).
@@ -76,5 +76,17 @@
 	:- mode(all, one).
 	:- info(all/0, [
 		comment is 'Creates XML documenting files for all loaded entities using default options.']).
+
+	:- public(option/2).
+	:- mode(option(?atom, ?nonvar), zero_or_more).
+	:- info(option/2, [
+		comment is 'Returns, by backtracking, all options and their values.',
+		argnames is ['Option', 'Value']]).
+
+	:- public(set_option/2).
+	:- mode(set_option(+atom, +nonvar), zero_or_one).
+	:- info(set_option/2, [
+		comment is 'Sets an option value.',
+		argnames is ['Option', 'Value']]).
 
 :- end_protocol.

@@ -53,39 +53,80 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2012/04/23,
+		date is 2012/09/27,
 		comment is 'Documenting tool.']).
 
-	:- private(flag_value_/2).
-	:- dynamic(flag_value_/2).
+	:- private(option_/2).
+	:- dynamic(option_/2).
+	:- mode(option_(?atom, ?nonvar), zero_or_more).
+	:- info(option_/2,
+		[comment is 'Table of option values.',
+		 argnames is ['Option', 'Value']]).
 
-	default_flag_value(xslfile, 'lgtxml.xsl').
-	default_flag_value(xmlspec, dtd).
-	default_flag_value(xmlsref, local).
-	default_flag_value(xmldir, 'xml_docs/').
-	default_flag_value(bom, true).
-	default_flag_value(encoding, 'UTF-8').
+	default_option(xslfile, 'lgtxml.xsl').
+	default_option(xmlspec, dtd).
+	default_option(xmlsref, local).
+	default_option(xmldir, 'xml_docs/').
+	default_option(bom, true).
+	default_option(encoding, 'UTF-8').
+	default_option(exclude_files, []).
+	default_option(exclude_paths, []).
+	default_option(exclude_entities, []).
 
-	valid_flag_value(xslfile, File) :-
+	valid_option(xslfile).
+	valid_option(xmlsref).
+	valid_option(xmlspec).
+	valid_option(xmldir).
+	valid_option(bom).
+	valid_option(encoding).
+	valid_option(exclude_files).
+	valid_option(exclude_paths).
+	valid_option(exclude_entities).
+
+	valid_option(xslfile, File) :-
 		atom(File).
+	valid_option(xmlsref, standalone) :- !.
+	valid_option(xmlsref, (local)) :- !.
+	valid_option(xmlsref, web) :- !.
+	valid_option(xmlspec, dtd) :- !.
+	valid_option(xmlspec, xsd) :- !.
+	valid_option(xmldir, Directory) :-
+		atom(Directory).
+	valid_option(bom, true) :- !.
+	valid_option(bom, false) :- !.
+	valid_option(encoding, Encoding) :-
+		atom(Encoding).
+	valid_option(exclude_files, List) :-
+		is_atom_list(List).
+	valid_option(exclude_paths, List) :-
+		is_atom_list(List).
+	valid_option(exclude_entities, List) :-
+		is_atom_list(List).
 
-	valid_flag_value(xmlsref, standalone) :- !.
-	valid_flag_value(xmlsref, (local)) :- !.
-	valid_flag_value(xmlsref, web) :- !.
-                    
-	valid_flag_value(xmlspec, dtd) :- !.
-	valid_flag_value(xmlspec, xsd) :- !.
-
-	flag_value(Flag, Value) :-
-		(	flag_value_(Flag, Value) ->
-			true
-		;	default_flag_value(Flag, Value)
+	option(Option, Value) :-
+		valid_option(Option),
+		(	option_(Option, Value2) ->
+			Value = Value2
+		;	default_option(Option, Value2) ->
+			Value = Value2
 		).
+
+	set_option(Option, Value) :-
+		atom(Option),
+		ground(Value),
+		valid_option(Option, Value),
+		retractall(option_(Option, _)),
+		assertz(option_(Option, Value)).
 
 	rlibrary(Library, UserOptions) :-
 		merge_options(UserOptions, Options),
 		logtalk::expand_library_path(Library, TopPath),
-		output_rlibrary(TopPath, Options).
+		member(xmldir(Directory), Options), !,
+		os::working_directory(Current),
+		os::make_directory(Directory),
+		os::change_directory(Directory),
+		output_rlibrary(TopPath, Options),
+		os::change_directory(Current).
 
 	rlibrary(Library) :-
 		rlibrary(Library, []).
@@ -106,7 +147,12 @@
 	library(Library, UserOptions) :-
 		merge_options(UserOptions, Options),
 		logtalk::expand_library_path(Library, Path),
-		output_library_files(Path, Options).
+		member(xmldir(Directory), Options), !,
+		os::working_directory(Current),
+		os::make_directory(Directory),
+		os::change_directory(Directory),
+		output_library_files(Path, Options),
+		os::change_directory(Current).
 
 	library(Library) :-
 		library(Library, []).
@@ -1008,26 +1054,21 @@
 		category_property(Entity, Property).
 
 	merge_options(UserOptions, Options) :-
-		% by default, print library paths:
-		(member(xmldir(Directory), UserOptions) -> true; Directory = 'xml_docs/'),
-		% by default, print file names:
-		(member(xmlsref(XMLSRef), UserOptions) -> true; XMLSRef = local),
-		% by default, print current date:
-		(member(xmlspec(XMLSpec), UserOptions) -> true; XMLSpec = dtd),
-		% by default, print entity public predicates:
-		(member(xslfile(XSL), UserOptions) -> true; XSL = 'lgtxml.xsl'),
-		% by default, write diagram to the current directory:
-%		(member(encoding(Encoding), UserOptions) -> true; Encoding = utf8),
-%		(member(bom(BOM), UserOptions) -> true; BOM = true),
+		(member(xmldir(Directory), UserOptions) -> true; option(xmldir, Directory)),
+		(member(xmlsref(XMLSRef), UserOptions) -> true; option(xmlsref, XMLSRef)),
+		(member(xmlspec(XMLSpec), UserOptions) -> true; option(xmlspec, XMLSpec)),
+		(member(xslfile(XSL), UserOptions) -> true; option(xslfile, XSL)),
+		(member(encoding(Encoding), UserOptions) -> true; option(encoding, Encoding)),
+		(member(bom(BOM), UserOptions) -> true; option(bom, BOM)),
 		% by default, don't exclude any source files:
-		(member(exclude_files(ExcludedFiles), UserOptions) -> true; ExcludedFiles = []),
+		(member(exclude_files(ExcludedFiles), UserOptions) -> true; option(exclude_files, ExcludedFiles)),
 		% by default, don't exclude any library sub-directories:
-		(member(exclude_paths(ExcludedPaths), UserOptions) -> true; ExcludedPaths = []),
+		(member(exclude_paths(ExcludedPaths), UserOptions) -> true; option(exclude_paths, ExcludedPaths)),
 		% by default, don't exclude any entities:
-		(member(exclude_entities(ExcludedEntities), UserOptions) -> true; ExcludedEntities = []),
+		(member(exclude_entities(ExcludedEntities), UserOptions) -> true; option(exclude_entities, ExcludedEntities)),
 		Options = [
 			xmldir(Directory), xmlsref(XMLSRef), xmlspec(XMLSpec), xslfile(XSL),
-%			encoding(Encoding), bom(BOM),
+			encoding(Encoding), bom(BOM),
 			exclude_files(ExcludedFiles), exclude_paths(ExcludedPaths), exclude_entities(ExcludedEntities)
 		].
 
@@ -1040,6 +1081,8 @@
 	default_options(DefaultOptions) :-
 		merge_options([], DefaultOptions).
 
+	% we don't want any dependencies on other entities, including library objects
+
 	member(Element, [Element| _]).
 	member(Element, [_| List]) :-
 		member(Element, List).
@@ -1048,6 +1091,14 @@
 		V == H.
 	member_var(V, [_| T]) :-
 		member_var(V, T).
+
+	is_atom_list(-) :-
+		!,
+		fail.
+	is_atom_list([]).
+	is_atom_list([Atom| Atoms]) :-
+		atom(Atom),
+		is_atom_list(Atoms).
 
 	pretty_print_vars(Stream, Term) :-
 		\+ \+ (
