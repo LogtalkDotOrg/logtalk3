@@ -43,6 +43,12 @@ their arguments are bound at compile-time. In this case, the calls are
 no longer compiled inline to prevent a bug when the calls are used e.g.
 as conditions in if-then-else control constructs.
 
+Tools
+-----
+
+* FIXED: The `lgtdoc` tool, broken in previous alpha releases, is now
+fully functional.
+
 Examples
 --------
 

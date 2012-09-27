@@ -199,6 +199,17 @@
 		convert_encoding('UTF-8', utf8).
 		convert_encoding('UCS-2BE', unicode_be).
 		convert_encoding('UCS-2LE', unicode_le).
+		convert_encoding('UTF-16BE', unicode_be).
+		convert_encoding('UTF-16LE', unicode_le).
+		convert_encoding('UTF-16', Encoding) :-
+			os::operating_system_type(Type),
+			(	Type == windows ->
+				Encoding = unicode_le
+			;	% other operating-systems can be either big-endian or little-endian
+				% but most Prolog back-end compilers don't provide the reflection
+				% support to query about the operating-system and the architecture
+				Encoding = unicode_be
+			).
 	:- else.
 		convert_stream_option(StreamOption, StreamOption).
 	:- endif.
