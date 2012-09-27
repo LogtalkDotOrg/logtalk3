@@ -54,69 +54,16 @@
 		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2012/09/27,
-		comment is 'Documenting tool.']).
+		comment is 'Documenting tool.'
+	]).
 
 	:- private(option_/2).
 	:- dynamic(option_/2).
 	:- mode(option_(?atom, ?nonvar), zero_or_more).
-	:- info(option_/2,
-		[comment is 'Table of option values.',
-		 argnames is ['Option', 'Value']]).
-
-	default_option(xslfile, 'lgtxml.xsl').
-	default_option(xmlspec, dtd).
-	default_option(xmlsref, local).
-	default_option(xmldir, 'xml_docs/').
-	default_option(bom, true).
-	default_option(encoding, 'UTF-8').
-	default_option(exclude_files, []).
-	default_option(exclude_paths, []).
-	default_option(exclude_entities, []).
-
-	valid_option(xslfile).
-	valid_option(xmlsref).
-	valid_option(xmlspec).
-	valid_option(xmldir).
-	valid_option(bom).
-	valid_option(encoding).
-	valid_option(exclude_files).
-	valid_option(exclude_paths).
-	valid_option(exclude_entities).
-
-	valid_option(xslfile, File) :-
-		atom(File).
-	valid_option(xmlsref, standalone) :- !.
-	valid_option(xmlsref, (local)) :- !.
-	valid_option(xmlsref, web) :- !.
-	valid_option(xmlspec, dtd) :- !.
-	valid_option(xmlspec, xsd) :- !.
-	valid_option(xmldir, Directory) :-
-		atom(Directory).
-	valid_option(bom, true) :- !.
-	valid_option(bom, false) :- !.
-	valid_option(encoding, Encoding) :-
-		atom(Encoding).
-	valid_option(exclude_files, List) :-
-		is_atom_list(List).
-	valid_option(exclude_paths, List) :-
-		is_atom_list(List).
-	valid_option(exclude_entities, List) :-
-		is_atom_list(List).
-
-	option(Option, Value) :-
-		valid_option(Option),
-		(	option_(Option, Value2) ->
-			Value = Value2
-		;	default_option(Option, Value2) ->
-			Value = Value2
-		).
-
-	set_option(Option, Value) :-
-		atom(Option),
-		ground(Value),
-		valid_option(Option, Value),
-		retractall(option_(Option, _)),
-		assertz(option_(Option, Value)).
+	:- info(option_/2, [
+		comment is 'Table of option values.',
+		argnames is ['Option', 'Value']
+	]).
 
 	rlibrary(Library, UserOptions) :-
 		merge_options(UserOptions, Options),
@@ -397,11 +344,11 @@
 	% in the order specified in the Logtalk DTD file
 
 	write_xml_entity_info(Stream, Info) :-
-		(	member(comment is Comment, Info) ->
+		(	member(comment(Comment), Info) ->
 			write_xml_cdata_element(Stream, comment, [], Comment)
 		;	true
 		),
-		(	member(parameters is Parameters, Info) ->
+		(	member(parameters(Parameters), Info) ->
 			write_xml_open_tag(Stream, parameters, []),
 			forall(
 				member(Parname-Description, Parameters),
@@ -412,7 +359,7 @@
 			write_xml_close_tag(Stream, parameters)
 		;	true
 		),
-		(	member(author is Author, Info) ->
+		(	member(author(Author), Info) ->
 			(	atom(Author) ->
 				write_xml_cdata_element(Stream, author, [], Author)
 			;	entity_name_to_xml_entity(Author, AuthorEntity),
@@ -420,17 +367,17 @@
 			)
 		;	true
 		),
-		(	member(version is Version, Info) ->
+		(	member(version(Version), Info) ->
 			number_codes(Version, VersionCodes),
 			atom_codes(VersionAtom, VersionCodes),
 			write_xml_element(Stream, version, [], VersionAtom)
 		;	true
 		),
-		(	member(date is Date, Info) ->
+		(	member(date(Date), Info) ->
 			write_xml_element(Stream, date, [], Date)
 		;	true
 		),
-		(	member(copyright is Copyright, Info) ->
+		(	member(copyright(Copyright), Info) ->
 			(	atom(Copyright) ->
 				write_xml_element(Stream, copyright, [], Copyright)
 			;	entity_name_to_xml_entity(Copyright, CopyrightEntity),
@@ -438,7 +385,7 @@
 			)
 		;	true
 		),
-		(	member(license is License, Info) ->
+		(	member(license(License), Info) ->
 			(	atom(License) ->
 				write_xml_element(Stream, license, [], License)
 			;	entity_name_to_xml_entity(License, LicenseEntity),
@@ -447,7 +394,8 @@
 		;	true
 		),
 		forall(
-			(member(Key is Value, Info),
+			(member(KeyValue, Info),
+			 KeyValue =.. [Key, Value],
 			 \+ member(Key, [comment, author, version, date, parameters, parnames, copyright, license, remarks])),
 			(write_xml_open_tag(Stream, info, []),
 			 write_xml_element(Stream, key, [], Key),
@@ -470,9 +418,9 @@
 
 	entity_to_xml_term(Entity) :-
 		entity_property(Entity, info(List)),
-		(	member(parnames is Names, List) ->
+		(	member(parnames(Names), List) ->
 			true
-		;	member(parameters is Parameters, List),
+		;	member(parameters(Parameters), List),
 			findall(Name, member(Name - _, Parameters), Names)
 		),
 		!,
@@ -492,24 +440,24 @@
 		Relation =.. [_| Args],
 		vars_to_underscore(Args).
 
-	% pred_call_to_xml_term(+atom, +integer, +nonvar, +nonvar, -nonvar, -nonvar)
+	% pred_call_to_xml_term(+entity_identifier, +atom, +integer, +nonvar, +nonvar, -nonvar, -nonvar)
 	%
 	% instantiates the arguments in a predicate call to user defined names or to the atom '_'
 
-	pred_call_to_xml_term(Functor, Arity, Call, Bindings, QCall, QBindings) :-
+	pred_call_to_xml_term(Entity, Functor, Arity, Call, Bindings, QCall, QBindings) :-
 		double_quote_atoms(Call, QCall),
 		double_quote_atoms(Bindings, QBindings),
-		pred_qcall_to_xml_term(Functor, Arity, QCall, QBindings).
+		pred_qcall_to_xml_term(Entity, Functor, Arity, QCall, QBindings).
 
-	pred_qcall_to_xml_term(Functor, Arity, Call, Bindings) :-
-		functor(Predicate, Functor, Arity),
-		(	predicate_property(Predicate, info(List)) ->
+	pred_qcall_to_xml_term(Entity, Functor, Arity, Call, Bindings) :-
+		(	entity_property(Entity, declares(Functor/Arity, Properties)),
+			member(info(List), Properties) ->
 			true
-		;	fail	%pp_info_(Functor//Arity, List)
+		;	fail
 		),
-		(	member(argnames is Names, List) ->
+		(	member(argnames(Names), List) ->
 			true
-		;	member(arguments is Arguments, List),
+		;	member(arguments(Arguments), List),
 			findall(Name, member(Name - _, Arguments), Names)
 		),
 		!,
@@ -517,7 +465,7 @@
 		binding_vars(Bindings, Vars),
 		vars_to_atoms(Args, Vars, Names).
 
-	pred_qcall_to_xml_term(Functor, _, Call, _) :-
+	pred_qcall_to_xml_term(_, Functor, _, Call, _) :-
 		Call =.. [Functor| Args],
 		vars_to_underscore(Args).
 
@@ -740,7 +688,7 @@
 			 write_xml_close_tag(Stream, (mode)))
 		),
 		(	member(info(Info), Properties) ->
-			write_xml_predicate_info(Stream, Functor, Arity, Info)
+			write_xml_predicate_info(Stream, Entity, Functor, Arity, Info)
 		;	true
 		),
 		write_xml_close_tag(Stream, predicate).
@@ -760,12 +708,12 @@
 		),
 	convert_meta_predicate_to_meta_non_terminal_args(MetaArgs, NonTerminalArgs).
 
-	write_xml_predicate_info(Stream, Functor, Arity, Info) :-
-		(	member(comment is Comment, Info) ->
+	write_xml_predicate_info(Stream, Entity, Functor, Arity, Info) :-
+		(	member(comment(Comment), Info) ->
 			write_xml_cdata_element(Stream, comment, [], Comment)
 		;	true
 		),
-		(	member(arguments is Arguments, Info) ->
+		(	member(arguments(Arguments), Info) ->
 			findall(Name, member(Name - _, Arguments), Names),
 			Template =.. [Functor| Names],
 			write_xml_cdata_element(Stream, template, [], Template),
@@ -779,12 +727,12 @@
 			write_xml_close_tag(Stream, arguments)
 		;	true
 		),
-		(	member(argnames is Names, Info) ->
+		(	member(argnames(Names), Info) ->
 			Template =.. [Functor| Names],
 			write_xml_cdata_element(Stream, template, [], Template)
 		;	true
 		),
-		(	member(exceptions is Exceptions, Info) ->
+		(	member(exceptions(Exceptions), Info) ->
 			write_xml_open_tag(Stream, exceptions, []),
 			forall(
 				member(Cond-Term, Exceptions),
@@ -796,17 +744,18 @@
 		;	true
 		),
 		forall(
-			(member(Key is Value, Info),
+			(member(KeyValue, Info),
+			 KeyValue =.. [Key, Value],
 			 \+ member(Key, [comment, arguments, argnames, exceptions, examples])),
 			(write_xml_open_tag(Stream, info, []),
 			 write_xml_element(Stream, key, [], Key),
 			 write_xml_cdata_element(Stream, value, [], Value),
 			 write_xml_close_tag(Stream, info))),
-		(	member(examples is Examples, Info) ->
+		(	member(examples(Examples), Info) ->
 			write_xml_open_tag(Stream, examples, []),
 			forall(
 				member((Description - Call - {Bindings}), Examples),
-				(pred_call_to_xml_term(Functor, Arity, Call, Bindings, QCall, QBindings),
+				(pred_call_to_xml_term(Entity, Functor, Arity, Call, Bindings, QCall, QBindings),
 				 write_xml_open_tag(Stream, example, []),
 				 write_xml_cdata_element(Stream, description, [], Description),
 				 write_xml_cdata_element(Stream, call, [], QCall),
@@ -937,7 +886,7 @@
 
 	write_xml_remarks(Stream, Entity) :-
 		write_xml_open_tag(Stream, remarks, []),
-		(	entity_property(Entity, info(Info)), member(remarks is Remarks, Info) ->
+		(	entity_property(Entity, info(Info)), member(remarks(Remarks), Info) ->
 			forall(
 				member((Topic - Text), Remarks),
 				(write_xml_open_tag(Stream, remark, []),
@@ -1053,6 +1002,60 @@
 		current_category(Entity),
 		category_property(Entity, Property).
 
+	default_option(xslfile, 'lgtxml.xsl').
+	default_option(xmlspec, dtd).
+	default_option(xmlsref, local).
+	default_option(xmldir, 'xml_docs/').
+	default_option(bom, true).
+	default_option(encoding, 'UTF-8').
+	default_option(exclude_files, []).
+	default_option(exclude_paths, []).
+	default_option(exclude_entities, []).
+
+	valid_option(xslfile).
+	valid_option(xmlsref).
+	valid_option(xmlspec).
+	valid_option(xmldir).
+	valid_option(bom).
+	valid_option(encoding).
+	valid_option(exclude_files).
+	valid_option(exclude_paths).
+	valid_option(exclude_entities).
+
+	valid_option(xslfile, File) :-
+		atom(File).
+	valid_option(xmlsref, standalone) :- !.
+	valid_option(xmlsref, (local)) :- !.
+	valid_option(xmlsref, web) :- !.
+	valid_option(xmlspec, dtd) :- !.
+	valid_option(xmlspec, xsd) :- !.
+	valid_option(xmldir, Directory) :-
+		atom(Directory).
+	valid_option(bom, true) :- !.
+	valid_option(bom, false) :- !.
+	valid_option(encoding, Encoding) :-
+		atom(Encoding).
+	valid_option(exclude_files, List) :-
+		is_atom_list(List).
+	valid_option(exclude_paths, List) :-
+		is_atom_list(List).
+	valid_option(exclude_entities, List) :-
+		is_atom_list(List).
+
+	option(Option, Value) :-
+		valid_option(Option),
+		(	option_(Option, Value2) ->
+			Value = Value2
+		;	default_option(Option, Value2) ->
+			Value = Value2
+		).
+	set_option(Option, Value) :-
+		atom(Option),
+		ground(Value),
+		valid_option(Option, Value),
+		retractall(option_(Option, _)),
+		assertz(option_(Option, Value)).
+
 	merge_options(UserOptions, Options) :-
 		(member(xmldir(Directory), UserOptions) -> true; option(xmldir, Directory)),
 		(member(xmlsref(XMLSRef), UserOptions) -> true; option(xmlsref, XMLSRef)),
@@ -1072,16 +1075,7 @@
 			exclude_files(ExcludedFiles), exclude_paths(ExcludedPaths), exclude_entities(ExcludedEntities)
 		].
 
-	:- public(default_options/1).
-	:- mode(default_options(-list), one).
-	:- info(default_options/1, [
-		comment is 'Returns a list of the default options used when generating a diagram.',
-		argnames is ['DefaultOptions']]).
-
-	default_options(DefaultOptions) :-
-		merge_options([], DefaultOptions).
-
-	% we don't want any dependencies on other entities, including library objects
+	% we want to minimize any dependencies on other entities, including library objects
 
 	member(Element, [Element| _]).
 	member(Element, [_| List]) :-
