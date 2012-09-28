@@ -4898,8 +4898,23 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	% file extensions are defined in the Prolog adapter files
 	'$lgt_file_extension'(Type, TypeExtension),
 	(	Extension = TypeExtension ->
+		% declared extension for this type of file is present
 		atom_concat(Name, Extension, Basename)
-	;	atom_concat(Name, TypeExtension, Basename)
+	;	% declared extension for this type of file is missing
+		(	Type == logtalk ->
+			% simply add the missing extension
+			atom_concat(Name, Extension, Basename0),
+			atom_concat(Basename0, TypeExtension, Basename)
+		;	% we need to check if we are adding or replacing an extension
+			(	'$lgt_file_extension'(logtalk, Extension) ->
+				% simply replace the extension
+				atom_concat(Name, TypeExtension, Basename)
+			;	% assume that the original file name didn't contain a
+			 	% true extension but have one or more '.' in its name
+				atom_concat(Name, Extension, Basename0),
+				atom_concat(Basename0, TypeExtension, Basename)
+			)
+		)
 	),
 	atom_concat(Directory1, Basename, Path),
 	'$lgt_expand_path'(Path, FullPath),

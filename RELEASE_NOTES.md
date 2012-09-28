@@ -43,6 +43,10 @@ their arguments are bound at compile-time. In this case, the calls are
 no longer compiled inline to prevent a bug when the calls are used e.g.
 as conditions in if-then-else control constructs.
 
+* ADDED: Support for compiling and loading of source file names without
+the defined Logtalk extension but containing one of more `.` in their
+names. Requested by Günter Kniesel and Andreas Becker.
+
 Tools
 -----
 
