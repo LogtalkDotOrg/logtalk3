@@ -55,6 +55,12 @@ Examples
 * FIXED: The definition of the predicate `make_directory/1` for GNU Prolog
 in the `cc` example would fail if the directory already existed.
 
+Installers and installation scripts
+-----------------------------------
+
+* FIXED: Bug in the `logtalk_user_setup.sh` script when creating a symbolic
+link to the `RELEASE_NOTES.md` file.
+
 
 3.00.0 Alpha 2 - September 24, 2012
 ===================================
