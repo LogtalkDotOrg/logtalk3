@@ -80,7 +80,7 @@ Bin-Prolog 8.x~10.x
 	
 		:- ['$LOGTALKHOME/adapters/bin.pl'].
 		:- ['$LOGTALKHOME/core/core.pl'].
-		
+		...
 		:- ['$LOGTALKUSER/examples/metapredicates/meta.pl'].
 		:- ['$LOGTALKUSER/examples/metapredicates/sort1.pl'].
 		...
@@ -135,17 +135,6 @@ ECLiPSe 5.10#26 or later 5.10 versions
 	solver libraries by using explicit module qualification by writing 
 	"{library:(Var::Domain)}" (replace "library" by the actual library name; 
 	the {}/1 control construct allows you to bypass the Logtalk compiler).
-
-	For improved performance, add the following calls to the top of all the 
-	files in the "compiler" sub-directory:
-	
-		:- pragma(system).
-		:- pragma(nodebug).
-
-	These calls disables debugging support for the Logtalk compiler/runtime 
-	Prolog code and mark the Logtalk predicates as built-ins. Make sure that 
-	the library top-level is loaded if you want to use the Logtalk built-in 
-	debugger.
 
 	Adopted from a adapter file written and tested with help of Taner Bilgic 
 	for Logtalk 1.x. Don't forget to use the cd/1 predicate to set the 

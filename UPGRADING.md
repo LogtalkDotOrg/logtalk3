@@ -32,8 +32,7 @@ older versions incompatible with new ones. You may need to update your local
 Logtalk user folder by running the `logtalk_user_setup` shell script.
 
 * If your Logtalk applications depend on some of the example files, it is
-advisable that you check your code against the new version before deleting
-the older release.
+advisable that you check your code against the new version.
 
 * It's usually a good idea to recompile your source files with the compiler
 flag `smart_compilation` turned off after upgrading to a new Logtalk release.

@@ -23,7 +23,7 @@ ________________________________________________________________________
 
 This file contains some notes about the adapter files provided. The folder
 "unsupported" contains adapter filers for Prolog compilers that are no longer
-supported.
+officially supported.
 
 If you improve or correct some of these files, or write new ones for other
 Prolog compilers, please send me a copy. It is not feasible for me to 
@@ -38,9 +38,8 @@ may imply use of development versions. Most Prolog compilers are moving
 towards better ISO Standard compatibility and, as a consequence, improved 
 Logtalk compatibility.
 
-Most of the suggestions you will find in this file for integrating Logtalk 
-with specific Prolog compilers are already implemented and available in the 
-"integration" directory of the Logtalk distribution.
+For details on how to integrate Logtalk with specific Prolog compilers,
+see the files in the "integration" directory of the Logtalk distribution.
 
 The adapter files may include hacked definitions for missing ISO Prolog
 standard and de-facto standard built-in predicates. These definitions aim
@@ -72,21 +71,8 @@ B-Prolog 7.8 and later versions
 	predicates. The solution is to encapsulate calls to these predicates 
 	within objects and categories using the Logtalk {}/1 control construct.
 
-	You can generate a new Prolog top level that includes the adapter file, the
-	Logtalk compiler/runtime, and the library paths file by doing something 
-	like:
-
-		| ?- set_prolog_flag(redefined, off).
-
-		| ?- compile(['adapters/b.pl', 'core/core.pl', 'paths/paths.pl']).
-	
-	These calls will result in the creation of three files, "b.out", 
-	"logtalk.out", and "paths.out". Place these files on the $BPDIR 
-	directory and then copy the "bp" script to a "bplgt" file and modify it 
-	by adding the names of the three *.out files after the "$BPDIR/bp.out" 
-	file (prefixing them with $BPDIR/). You will probably need to increase 
-	the sizes of the code areas on the "bplgt" script if you run into 
-	out-of-memory errors with complex applications.
+    You may need to increase the sizes of the code areas on the integration
+    scripts if you run into out-of-memory errors with complex applications.
 
 
 CxProlog 0.97.5 or later versions
@@ -110,17 +96,6 @@ ECLiPSe 6.0#141 or later versions
 	ECLiPSE 6.0#78 adds an alias in_set_range/2 for ::/2 that can be used
 	to avoid conflicts with Logtalk ::/2 message sending operator.
 
-	For improved performance, add the following calls to the top of all the 
-	files in the "compiler" sub-directory:
-	
-		:- pragma(system).
-		:- pragma(nodebug).
-
-	These calls disables debugging support for the Logtalk compiler/runtime 
-	Prolog code and mark the Logtalk predicates as built-ins. Make sure that 
-	the library top-level is loaded if you want to use the Logtalk built-in 
-	debugger.
-
 	Adopted from a adapter file written and tested with help of Taner Bilgic 
 	for Logtalk 1.x.
 
@@ -129,7 +104,7 @@ ECLiPSe 6.0#141 or later versions
 	built-in predicate compile/1, new clauses for dynamic predicates are 
 	appended to the old ones instead of replacing them.
 
-	On Windows, only supports settings files on the Logtalk user folder.
+	On Windows, settings files are only supported on the Logtalk user folder.
 
 
 GNU Prolog 1.4.1 and later versions
@@ -137,22 +112,6 @@ GNU Prolog 1.4.1 and later versions
 	gnu.pl
 
 	GNU Prolog supports the ISO Prolog standard. No problems expected. 
-
-	You can generate a new Prolog top level that includes the adapter file
-	and the Logtalk compiler/runtime by doing something like:
-
-		% cd $LOGTALKHOME
-
-	Edit the core/core.pl file and add the line ":- built_in." to 
-	the top. Then:
-
-		% gplc -o logtalk adapters/gnu.pl core/core.pl
-		% mv logtalk /usr/local/bin/
-
-	This way, every time you want to work with Logtalk you will just need 
-	to type:
-
-		% logtalk
 
 
 Lean Prolog 3.7.10 and later versions
@@ -168,25 +127,6 @@ Qu-Prolog 8.12 and later versions
 
 	Know issue in Qu-Prolog 8.12: this version doesn't support static multifile
 	predicates. This limitation may be fixed in later versions.
-
-	In order to compile and load both the adapter file and the Logtalk compiler,
-	the following sequence of steps is advised.
-
-	First, start Qu-Prolog using adequate switches. For example:
-
-		% qp -s 3072 -d 3072 -h 2048 -e 256 -C 256 -H 1536
-
-	Second, compile and load the adapter file using:
-
-		| ?- fcompile('qu.ql', [assemble_only(true)]), load(qu).
-
-	Next, compile and load the Logtalk compiler:
-
-		| ?- chdir('../compiler/'), fcompile('core.pl', [assemble_only(true), string_table(256)]), load(logtalk).
-
-	Finally, compile and load the library paths file:
-
-		| ?- chdir('../paths/'), fcompile('paths.pl', [assemble_only(true)]), load(paths).
 
 	Written and tested with the help of Peter Robinson.
 
@@ -207,28 +147,10 @@ SWI Prolog 6.0.0 and later versions
 	No problems expected. Please report any problem found (with a solution 
 	if possible).
 	
-	To improve the integration between Logtalk and SWI-Prolog edit the 
-	core/core.pl file and add the line ":- system_module." to the top
-	of the file. You may also load the file swihooks.pl in order to be able
-	to load Logtalk entities using SWI-Prolog load_files/2 and consult/1
-	predicates and to support edit/1, make/0, the XPCE profiler, and the XPCE
-	graphical tracer.
-
-	If you want SWI-Prolog to automatically load Logtalk at startup, then 
-	add the following lines to your pl.ini (on Windows):
-
-		:- ['drive:\\path to logtalk installation\\adapters\\swi.pl'].
-		:- ['drive:\\path to logtalk installation\\compiler\\core.pl'].
-		:- ['drive:\\path to logtalk installation\\paths\\paths.pl'].
-
-	 or to your .plrc (on MacOS X, Linux, Unix, and similar systems):
-	
-		:- ['$LOGTALKHOME/adapters/swi.pl'].
-		:- ['$LOGTALKHOME/core/core.pl'].
-		:- ['$LOGTALKHOME/paths/paths.pl'].
-
-	See the SWI-Prolog documentation for further information on the .plrc 
-	and pl.ini user initialization files.
+	To improve the integration between Logtalk and SWI-Prolog, the file
+	"swihooks.pl" allows loading of Logtalk source files using SWI-Prolog
+	load_files/2 and consult/1 predicates and adds support edit/1, make/0,
+	the XPCE profiler, and the XPCE graphical tracer.
 
 	The adapter file may set the "iso" SWI-Prolog flag to "true". This setting
 	may improve compatibility of Logtalk code across different back-end 
@@ -265,7 +187,7 @@ XSB 3.3 and later versions
 
 	xsb.pl
 
-	XSB generates intermediate files (with a .xwam extension) when compiling
+	XSB generates intermediate files (with a ".xwam" extension) when compiling
 	Prolog source files (thus including the Logtalk core files). Thus, you
 	must either install Logtalk on on a location where you have write access
 	or perform the first run of the integration scripts from an admin account.
@@ -283,7 +205,7 @@ YAP 6.0.2 and later versions
 	recommended and should not be needed to run Logtalk as some of the YAP
 	libraries may not be compatible with this flag setting.
 
-	The yaphooks.pl file defines YAP hook predicates for improving the
+	The "yaphooks.pl" file defines YAP hook predicates for improving the
 	integration between Logtalk and YAP.
 
 	Note that YAP can be compiled with or without support for features like
