@@ -106,7 +106,7 @@
 	</xsl:if>
 	</dl>
 	<dl class="properties">
-		<dt class ="key">compilation:</dt>
+		<dt class ="key">compilation flags:</dt>
 			<dd class ="value"><code><xsl:value-of select="compilation" /></code></dd>
 	</dl>
 	<xsl:if test="info">
@@ -252,7 +252,7 @@
 	</xsl:if>
 	</blockquote>
 	<dl class="properties">
-		<dt class ="key">compilation:</dt>
+		<dt class ="key">compilation flags:</dt>
 			<dd class ="value"><code><xsl:value-of select="compilation" /></code></dd>
 		<xsl:if test="template">
 		<dt class ="key">template:</dt>

@@ -97,7 +97,7 @@
 	<xsl:if test="license">
 		<xsl:value-of select="$tab" /><xsl:text>license: </xsl:text><xsl:value-of select="license" /><xsl:value-of select="$nl" />
 	</xsl:if>
-	<xsl:value-of select="$tab" /><xsl:text>compilation: </xsl:text><xsl:value-of select="compilation" /><xsl:value-of select="$nl" />
+	<xsl:value-of select="$tab" /><xsl:text>compilation flags: </xsl:text><xsl:value-of select="compilation" /><xsl:value-of select="$nl" />
 	<xsl:if test="info">
 		<xsl:for-each select="info">
 			<xsl:value-of select="$tab" /><xsl:value-of select="key" /><xsl:text>: </xsl:text><xsl:value-of select="value" /><xsl:value-of select="$nl" />
@@ -219,7 +219,7 @@
 	<xsl:if test="comment">
 		<xsl:value-of select="$tab" /><xsl:value-of select="comment" /><xsl:value-of select="$nl" />
 	</xsl:if>
-	<xsl:text>compilation: </xsl:text><xsl:value-of select="$nl" />
+	<xsl:text>compilation flags: </xsl:text><xsl:value-of select="$nl" />
 	<xsl:value-of select="$tab" /><xsl:value-of select="compilation" /><xsl:value-of select="$nl" />
 	<xsl:if test="template">
 		<xsl:text>template: </xsl:text><xsl:value-of select="$nl" />

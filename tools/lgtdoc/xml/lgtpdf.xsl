@@ -236,7 +236,7 @@
 			font-family="serif"
 			space-before="8pt"
 			keep-with-next="always">
-		compilation:
+		compilation flags:
 	</fo:block>
 	<fo:block
 			font-size="9pt"
@@ -529,7 +529,7 @@
 			font-size="10pt"
 			font-family="serif"
 			keep-with-next="always">
-		compilation:
+		compilation flags:
 	</fo:block>
 	<fo:block
 			font-size="9pt"

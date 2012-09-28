@@ -70,7 +70,7 @@
 	</xsl:if>
 	</dl>
 	<dl>
-		<dt>compilation:</dt>
+		<dt>compilation flags:</dt>
 			<dd><code><xsl:value-of select="compilation" /></code></dd>
 	</dl>
 	<dl>
@@ -196,7 +196,7 @@
 		<blockquote><xsl:value-of select="comment" /></blockquote>
 	</xsl:if>
 	<dl class="predicate">
-		<dt>compilation:</dt>
+		<dt>compilation flags:</dt>
 			<dd><code><xsl:value-of select="compilation" /></code></dd>
 		<xsl:if test="template">
 		<dt>template:</dt>

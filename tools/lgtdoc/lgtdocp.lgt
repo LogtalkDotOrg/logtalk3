@@ -33,7 +33,7 @@
 	:- public(rlibrary/2).
 	:- mode(rlibrary(+atom, +list), one).
 	:- info(rlibrary/2, [
-		comment is 'Creates XML documenting files for all entities in a library its sub-libraries using the specified options.',
+		comment is 'Creates XML documenting files for all entities in a library and its sub-libraries using the specified options.',
 		argnames is ['Library', 'Options']]).
 
 	:- public(rlibrary/1).
