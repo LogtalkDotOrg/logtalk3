@@ -8450,6 +8450,15 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_head'(!, _, _) :-
 	throw(permission_error(modify, control_construct, !/0)).
 
+'$lgt_tr_head'(true, _, _) :-
+	throw(permission_error(modify, control_construct, true/0)).
+
+'$lgt_tr_head'(fail, _, _) :-
+	throw(permission_error(modify, control_construct, fail/0)).
+
+'$lgt_tr_head'(repeat, _, _) :-
+	throw(permission_error(modify, control_construct, repeat/0)).
+
 
 % redefinition of Logtalk built-in methods
 
@@ -14869,48 +14878,54 @@ current_logtalk_flag(version, version(3, 0, 0)).
 %
 % '$lgt_built_in_method'(+callable, ?scope, ?callable, ?integer)
 
+'$lgt_built_in_method'(Method, Scope, Meta, Flags) :-
+	functor(Method, Functor, Arity),
+	'$lgt_built_in_method'(Functor, Arity, Scope, Meta, Flags).
+
+
 % reflection methods
-'$lgt_built_in_method'(current_predicate(_), p(p(p)), no, 1) :- !.
-'$lgt_built_in_method'(predicate_property(_, _), p(p(p)), no, 1) :- !.
+'$lgt_built_in_method'(current_predicate, 1, p(p(p)), no, 1).
+'$lgt_built_in_method'(predicate_property, 2, p(p(p)), no, 1).
 % database methods
-'$lgt_built_in_method'(abolish(_), p(p(p)), abolish((::)), 1) :- !.
-'$lgt_built_in_method'(asserta(_), p(p(p)), asserta((::)), 1) :- !.
-'$lgt_built_in_method'(assertz(_), p(p(p)), assertz((::)), 1) :- !.
-'$lgt_built_in_method'(clause(_, _), p(p(p)), clause((::), *), 1) :- !.
-'$lgt_built_in_method'(retract(_), p(p(p)), retract((::)), 1) :- !.
-'$lgt_built_in_method'(retractall(_), p(p(p)), retractall((::)), 1) :- !.
+'$lgt_built_in_method'(abolish, 1, p(p(p)), abolish((::)), 1).
+'$lgt_built_in_method'(asserta, 1, p(p(p)), asserta((::)), 1).
+'$lgt_built_in_method'(assertz, 1, p(p(p)), assertz((::)), 1).
+'$lgt_built_in_method'(clause, 2, p(p(p)), clause((::), *), 1).
+'$lgt_built_in_method'(retract, 1, p(p(p)), retract((::)), 1).
+'$lgt_built_in_method'(retractall, 1, p(p(p)), retractall((::)), 1).
 % term expansion methods
-'$lgt_built_in_method'(expand_term(_, _), p(p(p)), no, 1) :- !.
-'$lgt_built_in_method'(expand_goal(_, _), p(p(p)), no, 1) :- !.
+'$lgt_built_in_method'(expand_term, 2, p(p(p)), no, 1).
+'$lgt_built_in_method'(expand_goal, 2, p(p(p)), no, 1).
 % DCGs methods
-'$lgt_built_in_method'(phrase(_, _), p, phrase(2, *), 1) :- !.
-'$lgt_built_in_method'(phrase(_, _, _), p, phrase(2, *, *), 1) :- !.
+'$lgt_built_in_method'(phrase, Arity, p, Meta, 1) :-
+	(	Arity =:= 2 ->
+		Meta = phrase(2, *)
+	;	Arity =:= 3,
+		Meta = phrase(2, *, *)
+	).
 % meta-calls plus logic and control methods
-'$lgt_built_in_method'(\+ _, p, \+ (0), 1) :- !.
-'$lgt_built_in_method'(Method, p, Meta, 1) :-  % call/1-N
-	compound(Method),
-	functor(Method, call, Arity),
+'$lgt_built_in_method'((\+) , 1, p, \+ (0), 1).
+'$lgt_built_in_method'(call, Arity, p, Meta, 1) :-  % call/1-N
 	Arity > 0,
-	!,
 	functor(Meta, call, Arity),
 	Closure is Arity - 1,
 	arg(1, Meta, Closure),
 	'$lgt_lgt_meta_predicate_call_n_args'(Arity, Meta).
-'$lgt_built_in_method'(once(_), p, once(0), 1) :- !.
-'$lgt_built_in_method'(ignore(_), p, ignore(0), 1) :- !.
+'$lgt_built_in_method'(once, 1, p, once(0), 1).
+'$lgt_built_in_method'(ignore, 1, p, ignore(0), 1).
 % exception handling methods
-'$lgt_built_in_method'(catch(_, _, _), p, catch(0, *, 0), 1) :- !.
-'$lgt_built_in_method'(throw(_), p, no, 1) :- !.
+'$lgt_built_in_method'(catch, 3, p, catch(0, *, 0), 1).
+'$lgt_built_in_method'(throw, 1, p, no, 1).
 % execution context methods
-'$lgt_built_in_method'(parameter(_, _), p, no, 1) :- !.
-'$lgt_built_in_method'(self(_), p, no, 1) :- !.
-'$lgt_built_in_method'(sender(_), p, no, 1) :- !.
-'$lgt_built_in_method'(this(_), p, no, 1) :- !.
+'$lgt_built_in_method'(parameter, 2, p, no, 1).
+'$lgt_built_in_method'(self, 1, p, no, 1).
+'$lgt_built_in_method'(sender, 1, p, no, 1).
+'$lgt_built_in_method'(this, 1, p, no, 1).
 % all solutions methods
-'$lgt_built_in_method'(bagof(_, _, _), p, bagof(*, ^, *), 1) :- !.
-'$lgt_built_in_method'(findall(_, _, _), p, findall(*, 0, *), 1) :- !.
-'$lgt_built_in_method'(forall(_, _), p, forall(0, 0), 1) :- !.
-'$lgt_built_in_method'(setof(_, _, _), p, setof(*, ^, *), 1) :- !.
+'$lgt_built_in_method'(bagof, 3, p, bagof(*, ^, *), 1).
+'$lgt_built_in_method'(findall, 3, p, findall(*, 0, *), 1).
+'$lgt_built_in_method'(forall, 2, p, forall(0, 0), 1).
+'$lgt_built_in_method'(setof, 3, p, setof(*, ^, *), 1).
 
 
 '$lgt_lgt_meta_predicate_call_n_args'(1, _) :-

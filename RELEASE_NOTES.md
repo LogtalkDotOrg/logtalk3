@@ -31,6 +31,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: Modified the compiler to generate an error for redefinitions
+of the built-in control constructs `true/0`, `fail/0`, and `repeat/0`.
+In previous versions, the redefinitions were accepted but ignored.
+
 * IMPROVED: Unified the optimization steps for compiled grammar rules
 and clauses.
 
