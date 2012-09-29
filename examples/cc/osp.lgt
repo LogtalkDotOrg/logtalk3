@@ -12,15 +12,15 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1.7,
+		version is 1.8,
 		author is 'Paulo Moura',
-		date is 2011/02/04,
+		date is 2012/09/29,
 		comment is 'Portable operating-system access protocol.']).
 
 	:- public(shell/2).
 	:- mode(shell(+atom, -integer), one).
 	:- info(shell/2, [
-		comment is 'Runs an operating-system shell command. Unifies Status with the exit status of Command.',
+		comment is 'Runs an operating-system shell command, returning in Status the exit status of Command.',
 		argnames is ['Command', 'Status']]).
 
 	:- public(shell/1).
@@ -32,7 +32,7 @@
 	:- public(expand_path/2).
 	:- mode(expand_path(+atom, -atom), one).
 	:- info(expand_path/2, [
-		comment is 'Expands a file path to a full file path.',
+		comment is 'Expands a file path to an absolute file path.',
 		argnames is ['Path', 'ExpandedPath']]).
 
 	:- public(make_directory/1).
@@ -74,7 +74,7 @@
 	:- public(file_modification_time/2).
 	:- mode(file_modification_time(+atom, -integer), zero_or_one).
 	:- info(file_modification_time/2, [
-		comment is 'File modification time.',
+		comment is 'File modification time (which can be used for comparison).',
 		argnames is ['File', 'Time']]).
 
 	:- public(file_size/2).
@@ -86,13 +86,13 @@
 	:- public(file_permission/2).
 	:- mode(file_permission(+atom, ?atom), zero_or_one).
 	:- info(file_permission/2, [
-		comment is 'True if the specified file has a base name.',
+		comment is 'True if the specified file has the specified permission.',
 		argnames is ['File', 'Permission']]).
 
 	:- public(rename_file/2).
 	:- mode(rename_file(+atom, +atom), zero_or_one).
 	:- info(rename_file/2, [
-		comment is 'Renames a file (or a directory).',
+		comment is 'Renames a file or a directory.',
 		argnames is ['Old', 'New']]).
 
 	:- public(delete_file/1).
@@ -104,7 +104,7 @@
 	:- public(environment_variable/2).
 	:- mode(environment_variable(+atom, ?atom), zero_or_one).
 	:- info(environment_variable/2, [
-		comment is 'Argument is a currently defined environment variable. Fails if the variable does not exists.',
+		comment is 'Returns an environment variable value. Fails if the variable does not exists.',
 		argnames is ['Variable', 'Value']]).
 
 	:- public(time_stamp/1).
@@ -116,7 +116,7 @@
 	:- public(date_time/7).
 	:- mode(date_time(-integer, -integer, -integer, -integer, -integer, -integer, -integer), one).
 	:- info(date_time/7, [
-		comment is 'Returns a system-dependent time stamp (which can be used for sorting).',
+		comment is 'Returns the current date and time.',
 		argnames is ['Year', 'Month', 'Day', 'Hours', 'Mins', 'Secs', 'Milisecs']]).
 
 	:- public(cpu_time/1).

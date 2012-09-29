@@ -21,9 +21,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.5,
+		version is 1.6,
 		author is 'Paulo Moura',
-		date is 2012/09/27,
+		date is 2012/09/29,
 		comment is 'Simple example of using conditional compilation to implement a portable operating-system interface for selected back-end Prolog compilers.'
 	]).
 
@@ -36,11 +36,11 @@
 			{shell(Command)}.
 
 		expand_path(Path, ExpandedPath) :-
-			{working_directory(Current, Current),
-			 (	absolute_file_name(Path, [expand(true), relative_to(Current), file_errors(fail)], ExpandedPath) ->
+			{working_directory(Current, Current)},
+			(	{absolute_file_name(Path, [expand(true), relative_to(Current), file_errors(fail)], ExpandedPath)} ->
 				true
-			 ;	absolute_file_name(Path, [expand(true), relative_to(Current), file_type(directory), file_errors(fail)], ExpandedPath)
-			 )}.
+			;	{absolute_file_name(Path, [expand(true), relative_to(Current), file_type(directory), file_errors(fail)], ExpandedPath)}
+			).
 
 		make_directory(Directory) :-
 			(	{exists_directory(Directory)} ->
@@ -126,11 +126,11 @@
 			 absolute_file_name(Path, [access(none), file_type(txt), relative_to(Current)], ExpandedPath)}.
 		:- else.
 		expand_path(Path, ExpandedPath) :-
-			{working_directory(Current, Current),
-			 (	absolute_file_name(Path, [expand(true), relative_to(Current), file_errors(fail)], ExpandedPath) ->
+			{working_directory(Current, Current)},
+			(	{absolute_file_name(Path, [expand(true), relative_to(Current), file_errors(fail)], ExpandedPath)} ->
 				true
-			 ;	absolute_file_name(Path, [expand(true), relative_to(Current), file_type(directory), file_errors(fail)], ExpandedPath)
-			 )}.
+			;	{absolute_file_name(Path, [expand(true), relative_to(Current), file_type(directory), file_errors(fail)], ExpandedPath)}
+			).
 		:- endif.
 
 		make_directory(Directory) :-
@@ -808,7 +808,7 @@
 			).
 
 		command_line_arguments(Arguments) :-
-			get_args(Arguments).
+			{get_args(Arguments)}.
 
 	:- elif(current_logtalk_flag(prolog_dialect, lean)).
 
@@ -821,19 +821,19 @@
 			 system(List, _)}.
 
 		expand_path(Path, ExpandedPath) :-
-			{(	\+ atom_concat('/', _, Path),
-				\+ atom_concat('$', _, Path),
-				working_directory(Current, Current),
+			(	\+ atom_concat('/', _, Path),
+				\+ atom_concat('$', _, Path) ->
+				{working_directory(Current, Current)},
 				atom_concat(Current, '/', ExpandedPath0),
 				atom_concat(ExpandedPath0, Path, ExpandedPath)
-			;	absolute_file_name(Path, ExpandedPath)
-			)}.
+			;	{absolute_file_name(Path, ExpandedPath)}
+			).
 
 		make_directory(Directory) :-
-			{(	exists_dir(Directory) ->
+			(	{exists_dir(Directory)} ->
 				true
-			;	make_directory(Directory)
-			)}.
+			;	{make_directory(Directory)}
+			).
 
 		delete_directory(_) :-
 			throw(not_available(delete_directory/1)).
@@ -849,10 +849,10 @@
 			{exists_dir(Directory)}.
 
 		file_exists(File) :-
-			{working_directory(Path0, Path0),
-			 atom_concat(Path0, '/', Path1),
-			 atom_concat(Path1, File, Path),
-			 exists_file(Path)}.
+			{working_directory(Path0, Path0)},
+			atom_concat(Path0, '/', Path1),
+			atom_concat(Path1, File, Path),
+			{exists_file(Path)}.
 
 		file_modification_time(_, _) :-
 			throw(not_available(file_modification_time/2)).
@@ -861,10 +861,10 @@
 			throw(not_available(file_size/2)).
 
 		delete_file(File) :-
-			{working_directory(Path0, Path0),
-			 atom_concat(Path0, '/', Path1),
-			 atom_concat(Path1, File, Path),
-			 delete_file(Path)}.
+			{working_directory(Path0, Path0)},
+			atom_concat(Path0, '/', Path1),
+			atom_concat(Path1, File, Path),
+			{delete_file(Path)}.
 
 		rename_file(Old, New) :-
 			{rename_file(Old, New)}.

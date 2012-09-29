@@ -56,8 +56,10 @@ fully functional.
 Examples
 --------
 
-* FIXED: The definition of the predicate `make_directory/1` for GNU Prolog
-in the `cc` example would fail if the directory already existed.
+* FIXED: Two bugs in the `cc` example: the definition of the predicate
+`make_directory/1` for GNU Prolog would fail if the directory already
+existed; the definition of the predicate `expand_path/2` for Lean Prolog
+could leave a choice point.
 
 Installers and installation scripts
 -----------------------------------
