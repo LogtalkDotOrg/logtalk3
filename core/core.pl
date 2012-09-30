@@ -14862,7 +14862,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_built_in_control_construct'((_; _)).
 '$lgt_built_in_control_construct'((_ -> _)).
 '$lgt_built_in_control_construct'(!).
-'$lgt_built_in_control_construct'(true) :-
+'$lgt_built_in_control_construct'(true).
 '$lgt_built_in_control_construct'(fail).
 '$lgt_built_in_control_construct'(repeat).
 
