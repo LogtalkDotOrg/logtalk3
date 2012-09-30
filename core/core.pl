@@ -8423,41 +8423,12 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % (note that ::/2 can be used in a clause head when defining multifile predicates
 % and that {}/1 can be used to represent a pre-compiled clause head)
 
-'$lgt_tr_head'(::_, _, _) :-
-	throw(permission_error(modify, control_construct, (::)/1)).
-
-'$lgt_tr_head'(^^_, _, _) :-
-	throw(permission_error(modify, control_construct, (^^)/1)).
-
-'$lgt_tr_head'(_<<_, _, _) :-
-	throw(permission_error(modify, control_construct, (<<)/2)).
-
-'$lgt_tr_head'(_>>_, _, _) :-
-	throw(permission_error(modify, control_construct, (>>)/2)).
-
-'$lgt_tr_head'(':'(_), _, _) :-
-	throw(permission_error(modify, control_construct, (:)/1)).
-
-'$lgt_tr_head'((_, _), _, _) :-
-	throw(permission_error(modify, control_construct, (',')/2)).
-
-'$lgt_tr_head'((_; _), _, _) :-
-	throw(permission_error(modify, control_construct, (;)/2)).
-
-'$lgt_tr_head'((_ -> _), _, _) :-
-	throw(permission_error(modify, control_construct, (->)/2)).
-
-'$lgt_tr_head'(!, _, _) :-
-	throw(permission_error(modify, control_construct, !/0)).
-
-'$lgt_tr_head'(true, _, _) :-
-	throw(permission_error(modify, control_construct, true/0)).
-
-'$lgt_tr_head'(fail, _, _) :-
-	throw(permission_error(modify, control_construct, fail/0)).
-
-'$lgt_tr_head'(repeat, _, _) :-
-	throw(permission_error(modify, control_construct, repeat/0)).
+'$lgt_tr_head'(Head, _, _) :-
+	'$lgt_built_in_control_construct'(Head),
+	Head \= _::_,
+	Head \= {_},
+	functor(Head, Functor, Arity),
+	throw(permission_error(modify, control_construct, Functor/Arity)).
 
 
 % redefinition of Logtalk built-in methods
@@ -14874,9 +14845,32 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% logtalk built-in methods
+% Logtalk built-in control constructs (includes standard Prolog control constructs)
 %
-% '$lgt_built_in_method'(+callable, ?scope, ?callable, ?integer)
+% '$lgt_built_in_control_construct'(@callable)
+
+% Logtalk
+'$lgt_built_in_control_construct'(_::_).	% message to object
+'$lgt_built_in_control_construct'(::_).		% message to self
+'$lgt_built_in_control_construct'(^^_).		% "super" call
+'$lgt_built_in_control_construct'(_<<_).	% context-switching call
+'$lgt_built_in_control_construct'(_>>_).	% lambda expression
+'$lgt_built_in_control_construct'(:_).		% category predicate call
+'$lgt_built_in_control_construct'({_}).		% compiler bypass
+% Prolog
+'$lgt_built_in_control_construct'((_, _)).
+'$lgt_built_in_control_construct'((_; _)).
+'$lgt_built_in_control_construct'((_ -> _)).
+'$lgt_built_in_control_construct'(!).
+'$lgt_built_in_control_construct'(true) :-
+'$lgt_built_in_control_construct'(fail).
+'$lgt_built_in_control_construct'(repeat).
+
+
+
+% Logtalk built-in methods
+%
+% '$lgt_built_in_method'(@callable, ?scope, ?callable, ?integer)
 
 '$lgt_built_in_method'(Method, Scope, Meta, Flags) :-
 	functor(Method, Functor, Arity),
@@ -14937,7 +14931,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% logtalk built-in meta-predicates
+% Logtalk built-in meta-predicates
 %
 % '$lgt_lgt_meta_predicate'(+callable, ?callable, ?atom)
 
