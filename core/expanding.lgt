@@ -27,20 +27,20 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/04/15,
+		date is 2012/10/01,
 		comment is 'Term and goal expansion protocol.']).
 
 	:- public(goal_expansion/2).
 	:- mode(goal_expansion(+callable, -callable), zero_or_one).
 	:- info(goal_expansion/2, [
-		comment is 'Expands a goal.',
+		comment is 'Defines a goal expansion. This predicate is called recursively until a fixed point is reached on goals found while compiling a source file (including clause body goals, initialization goals, and conditional compilation goals).',
 		argnames is ['Goal', 'ExpandedGoal']]).
 
 	:- public(term_expansion/2).
 	:- mode(term_expansion(+term, -term), zero_or_one).
 	:- mode(term_expansion(+term, -list(term)), zero_or_one).
 	:- info(term_expansion/2, [
-		comment is 'Expands a term.',
+		comment is 'Defines a term expansion. This predicate is called on all terms read while compiling a source file except those skipped by using the conditional compilation directives.',
 		argnames is ['Term', 'ExpandedTerms']]).
 
 :- end_protocol.
