@@ -176,21 +176,21 @@ format_spec_('~', Stream, Arguments, Arguments) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_pl_meta_predicate'(+callable, ?callable, ?atom)
+% '$lgt_prolog_meta_predicate'(+callable, ?callable, ?atom)
 %
 % table of meta-predicate patterns for proprietary built-in predicates;
 % the third argument, which must be either "predicate" or "control_construct",
 % is used to guide the compilation of these meta-predicates in debug mode
 
-'$lgt_pl_meta_predicate'(Callable, Template, predicate) :-
+'$lgt_prolog_meta_predicate'(Callable, Template, predicate) :-
 	predicate_property(Callable, built_in),
 	predicate_property(Callable, meta_predicate(Template)),
 	!.
 
 
-% '$lgt_pl_meta_directive'(@callable)
+% '$lgt_prolog_meta_directive'(@callable)
 
-'$lgt_pl_meta_directive'(inline(0, 0)).
+'$lgt_prolog_meta_directive'(inline(0, 0)).
 
 
 

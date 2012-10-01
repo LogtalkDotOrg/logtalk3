@@ -157,18 +157,18 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_pl_meta_predicate'(+callable, ?callable, ?atom)
+% '$lgt_prolog_meta_predicate'(+callable, ?callable, ?atom)
 %
 % table of meta-predicate patterns for proprietary built-in predicates;
 % the third argument, which must be either "predicate" or "control_construct",
 % is used to guide the compilation of these meta-predicates in debug mode
 
-'$lgt_pl_meta_predicate'(if(_, _, _), if(0, 0, 0), predicate).
+'$lgt_prolog_meta_predicate'(if(_, _, _), if(0, 0, 0), predicate).
 
 
-% '$lgt_pl_meta_directive'(@callable)
+% '$lgt_prolog_meta_directive'(@callable)
 
-'$lgt_pl_meta_directive'(_) :-
+'$lgt_prolog_meta_directive'(_) :-
 	fail.
 
 

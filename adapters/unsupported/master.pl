@@ -157,15 +157,15 @@ forall(Generate, Test) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_pl_meta_predicate'(?callable, ?atom).
+% '$lgt_prolog_meta_predicate'(?callable, ?atom).
 
-'$lgt_pl_meta_predicate'(_, _) :-
+'$lgt_prolog_meta_predicate'(_, _) :-
 	fail.
 
 
-% '$lgt_pl_meta_directive'(@callable)
+% '$lgt_prolog_meta_directive'(@callable)
 
-'$lgt_pl_meta_directive'(_) :-
+'$lgt_prolog_meta_directive'(_) :-
 	fail.
 
 

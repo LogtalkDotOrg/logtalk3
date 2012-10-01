@@ -182,60 +182,60 @@ setup_call_cleanup(_, _, _) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_pl_meta_predicate'(+callable, ?callable, ?atom)
+% '$lgt_prolog_meta_predicate'(+callable, ?callable, ?atom)
 %
 % table of meta-predicate patterns for proprietary built-in predicates;
 % the third argument, which must be either "predicate" or "control_construct",
 % is used to guide the compilation of these meta-predicates in debug mode
 
-'$lgt_pl_meta_predicate'('?'(_), '?'(0), predicate).
-'$lgt_pl_meta_predicate'(':'(_, _), ':'(*, 0), predicate).
-'$lgt_pl_meta_predicate'('@'(_, _), '@'(*, 0), predicate).
-'$lgt_pl_meta_predicate'(add_task(_), add_task(0), predicate).
-'$lgt_pl_meta_predicate'(add_task(_, _), add_task(*, 0), predicate).
-'$lgt_pl_meta_predicate'(add_task(_, _, _), add_task(*, 0, *), predicate).
-'$lgt_pl_meta_predicate'(all(_, _), all(0, *), predicate).
-'$lgt_pl_meta_predicate'(all(_, _, _, _), all(*, *,0, *), predicate).
-'$lgt_pl_meta_predicate'(alt_findall(_, _, _), alt_findall(*, 0, *), predicate).
-'$lgt_pl_meta_predicate'(ask_agent(_, _), ask_agent(*, 0), predicate).
-'$lgt_pl_meta_predicate'(ask_broker(_), ask_broker(0), predicate).
-'$lgt_pl_meta_predicate'(ask_engine(_, _, _), ask_engine(* ,0, *), predicate).
-'$lgt_pl_meta_predicate'(ask_interactor(_, _), ask_interactor(*, 0), predicate).
-'$lgt_pl_meta_predicate'(ask_linda(_, _,_), ask_linda(*, *, 0), predicate).
-'$lgt_pl_meta_predicate'(ask_peer(_, _, _, _, _), ask_peer(*, *, *, 0, *), predicate).
-'$lgt_pl_meta_predicate'(bg(_, _), bg(0, *), predicate).
-'$lgt_pl_meta_predicate'(bg_clone(_, _), bg_clone(0, *), predicate).
-'$lgt_pl_meta_predicate'(bg_with(_, _, _), bg_with(*, 0, *), predicate).
-'$lgt_pl_meta_predicate'(call_ifdef(_, _), call_ifdef(0, 0), predicate).
-'$lgt_pl_meta_predicate'(call_with_time_limit(_, _), call_with_time_limit(*, 0), predicate).
-'$lgt_pl_meta_predicate'(ccall(_, _, _, _, _), ccall(*, *, *, 0, *), predicate).
-'$lgt_pl_meta_predicate'(det_call(_), det_call(0), predicate).
-'$lgt_pl_meta_predicate'(drop_at_least(_, _), drop_at_least(*, 0), predicate).
-'$lgt_pl_meta_predicate'(find_at_most(_, _, _, _), find_at_most(*, *, 0, *), predicate).
-'$lgt_pl_meta_predicate'(find_while(_, _, _, _), find_while(*, *, 0, *), predicate).
-'$lgt_pl_meta_predicate'(findall(_, _, _, _), findall(*, 0, *, *), predicate).
-'$lgt_pl_meta_predicate'(foreach(_, _), foreach(0, 0), predicate).
-'$lgt_pl_meta_predicate'(init_engine(_, _, _, _), init_engine(*, *, 0, *), predicate).
-'$lgt_pl_meta_predicate'(linda_client(_, _, _,_ , _), linda_client(*, *, *, *, 0), predicate).
-'$lgt_pl_meta_predicate'(mbg(_), mbg([0]), predicate).
-'$lgt_pl_meta_predicate'(new_engine(_, _, _), new_engine(*, 0, *), predicate).
-'$lgt_pl_meta_predicate'(nth_answer(_, _), nth_answer(*, 0), predicate).
-'$lgt_pl_meta_predicate'(rli_call(_, _, _, _, _), rli_call(*, *, _, 0, *), predicate).
-'$lgt_pl_meta_predicate'(take_at_most(_, _), take_at_most(*, 0), predicate).
-'$lgt_pl_meta_predicate'(tell_agent_at(_, _), tell_agent_at(*, 0), predicate).
-'$lgt_pl_meta_predicate'(time(_), time(0), predicate).
-'$lgt_pl_meta_predicate'(time(_, _), time(0, *), predicate).
-'$lgt_pl_meta_predicate'(to_engine(_, _, _), to_engine(*, *, 0), predicate).
-'$lgt_pl_meta_predicate'(topcall(_), topcall(0), predicate).
-'$lgt_pl_meta_predicate'(while(_, _), while(0, 0), predicate).
+'$lgt_prolog_meta_predicate'('?'(_), '?'(0), predicate).
+'$lgt_prolog_meta_predicate'(':'(_, _), ':'(*, 0), predicate).
+'$lgt_prolog_meta_predicate'('@'(_, _), '@'(*, 0), predicate).
+'$lgt_prolog_meta_predicate'(add_task(_), add_task(0), predicate).
+'$lgt_prolog_meta_predicate'(add_task(_, _), add_task(*, 0), predicate).
+'$lgt_prolog_meta_predicate'(add_task(_, _, _), add_task(*, 0, *), predicate).
+'$lgt_prolog_meta_predicate'(all(_, _), all(0, *), predicate).
+'$lgt_prolog_meta_predicate'(all(_, _, _, _), all(*, *,0, *), predicate).
+'$lgt_prolog_meta_predicate'(alt_findall(_, _, _), alt_findall(*, 0, *), predicate).
+'$lgt_prolog_meta_predicate'(ask_agent(_, _), ask_agent(*, 0), predicate).
+'$lgt_prolog_meta_predicate'(ask_broker(_), ask_broker(0), predicate).
+'$lgt_prolog_meta_predicate'(ask_engine(_, _, _), ask_engine(* ,0, *), predicate).
+'$lgt_prolog_meta_predicate'(ask_interactor(_, _), ask_interactor(*, 0), predicate).
+'$lgt_prolog_meta_predicate'(ask_linda(_, _,_), ask_linda(*, *, 0), predicate).
+'$lgt_prolog_meta_predicate'(ask_peer(_, _, _, _, _), ask_peer(*, *, *, 0, *), predicate).
+'$lgt_prolog_meta_predicate'(bg(_, _), bg(0, *), predicate).
+'$lgt_prolog_meta_predicate'(bg_clone(_, _), bg_clone(0, *), predicate).
+'$lgt_prolog_meta_predicate'(bg_with(_, _, _), bg_with(*, 0, *), predicate).
+'$lgt_prolog_meta_predicate'(call_ifdef(_, _), call_ifdef(0, 0), predicate).
+'$lgt_prolog_meta_predicate'(call_with_time_limit(_, _), call_with_time_limit(*, 0), predicate).
+'$lgt_prolog_meta_predicate'(ccall(_, _, _, _, _), ccall(*, *, *, 0, *), predicate).
+'$lgt_prolog_meta_predicate'(det_call(_), det_call(0), predicate).
+'$lgt_prolog_meta_predicate'(drop_at_least(_, _), drop_at_least(*, 0), predicate).
+'$lgt_prolog_meta_predicate'(find_at_most(_, _, _, _), find_at_most(*, *, 0, *), predicate).
+'$lgt_prolog_meta_predicate'(find_while(_, _, _, _), find_while(*, *, 0, *), predicate).
+'$lgt_prolog_meta_predicate'(findall(_, _, _, _), findall(*, 0, *, *), predicate).
+'$lgt_prolog_meta_predicate'(foreach(_, _), foreach(0, 0), predicate).
+'$lgt_prolog_meta_predicate'(init_engine(_, _, _, _), init_engine(*, *, 0, *), predicate).
+'$lgt_prolog_meta_predicate'(linda_client(_, _, _,_ , _), linda_client(*, *, *, *, 0), predicate).
+'$lgt_prolog_meta_predicate'(mbg(_), mbg([0]), predicate).
+'$lgt_prolog_meta_predicate'(new_engine(_, _, _), new_engine(*, 0, *), predicate).
+'$lgt_prolog_meta_predicate'(nth_answer(_, _), nth_answer(*, 0), predicate).
+'$lgt_prolog_meta_predicate'(rli_call(_, _, _, _, _), rli_call(*, *, _, 0, *), predicate).
+'$lgt_prolog_meta_predicate'(take_at_most(_, _), take_at_most(*, 0), predicate).
+'$lgt_prolog_meta_predicate'(tell_agent_at(_, _), tell_agent_at(*, 0), predicate).
+'$lgt_prolog_meta_predicate'(time(_), time(0), predicate).
+'$lgt_prolog_meta_predicate'(time(_, _), time(0, *), predicate).
+'$lgt_prolog_meta_predicate'(to_engine(_, _, _), to_engine(*, *, 0), predicate).
+'$lgt_prolog_meta_predicate'(topcall(_), topcall(0), predicate).
+'$lgt_prolog_meta_predicate'(while(_, _), while(0, 0), predicate).
 
 to_engine(Interactor, Pattern, Goal) :-
 	to_engine(Interactor, (Pattern:-Goal)).
 
 
-% '$lgt_pl_meta_directive'(@callable)
+% '$lgt_prolog_meta_directive'(@callable)
 
-'$lgt_pl_meta_directive'(_) :-
+'$lgt_prolog_meta_directive'(_) :-
 	fail.
 
 

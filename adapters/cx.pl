@@ -134,27 +134,27 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_pl_meta_predicate'(+callable, ?callable, ?atom)
+% '$lgt_prolog_meta_predicate'(+callable, ?callable, ?atom)
 %
 % table of meta-predicate patterns for proprietary built-in predicates;
 % the third argument, which must be either "predicate" or "control_construct",
 % is used to guide the compilation of these meta-predicates in debug mode
 
-'$lgt_pl_meta_predicate'(catch(_, _, _, _), catch(0, *, *, 0), predicate).
-'$lgt_pl_meta_predicate'(gen(_), gen(0), predicate).
-'$lgt_pl_meta_predicate'(possible(_), possible(0), predicate).
-'$lgt_pl_meta_predicate'(question(_, _), question(0, *), predicate).
-'$lgt_pl_meta_predicate'(not(_), not(0), predicate).
-'$lgt_pl_meta_predicate'(on_exception(_, _, _), on_exception(*, 0, 0), predicate).
-'$lgt_pl_meta_predicate'(process_new(_, _, _), process_new(*, 0, 0), predicate).
-'$lgt_pl_meta_predicate'(thread_new(_, _, _), thread_new(*, 0, 0), predicate).
-'$lgt_pl_meta_predicate'(try(_), try(0), predicate).
-'$lgt_pl_meta_predicate'(with_ivar(_, _, _), with_ivar(*, *, 0), predicate).
+'$lgt_prolog_meta_predicate'(catch(_, _, _, _), catch(0, *, *, 0), predicate).
+'$lgt_prolog_meta_predicate'(gen(_), gen(0), predicate).
+'$lgt_prolog_meta_predicate'(possible(_), possible(0), predicate).
+'$lgt_prolog_meta_predicate'(question(_, _), question(0, *), predicate).
+'$lgt_prolog_meta_predicate'(not(_), not(0), predicate).
+'$lgt_prolog_meta_predicate'(on_exception(_, _, _), on_exception(*, 0, 0), predicate).
+'$lgt_prolog_meta_predicate'(process_new(_, _, _), process_new(*, 0, 0), predicate).
+'$lgt_prolog_meta_predicate'(thread_new(_, _, _), thread_new(*, 0, 0), predicate).
+'$lgt_prolog_meta_predicate'(try(_), try(0), predicate).
+'$lgt_prolog_meta_predicate'(with_ivar(_, _, _), with_ivar(*, *, 0), predicate).
 
 
-% '$lgt_pl_meta_directive'(@callable)
+% '$lgt_prolog_meta_directive'(@callable)
 
-'$lgt_pl_meta_directive'(_) :-
+'$lgt_prolog_meta_directive'(_) :-
 	fail.
 
 

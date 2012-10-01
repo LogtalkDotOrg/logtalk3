@@ -253,21 +253,21 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_pl_meta_predicate'(?callable, ?atom).
+% '$lgt_prolog_meta_predicate'(?callable, ?atom).
 
-'$lgt_pl_meta_predicate'(*->(0, 0), control_construct).
-'$lgt_pl_meta_predicate'(~(0), control_construct).
-'$lgt_pl_meta_predicate'(-?->(0), control_construct).
-'$lgt_pl_meta_predicate'(block(0, *, 0), predicate).
-'$lgt_pl_meta_predicate'(call_priority(0, *), predicate).
-'$lgt_pl_meta_predicate'(coverof(*, 0, *), predicate).
-'$lgt_pl_meta_predicate'(do(*, 0), predicate).
-'$lgt_pl_meta_predicate'(event_create(0, *, *), predicate).
-'$lgt_pl_meta_predicate'(make_suspension(0, *, *), predicate).
-'$lgt_pl_meta_predicate'(mutex(*, 0), predicate).
-'$lgt_pl_meta_predicate'(not(0), predicate).
-'$lgt_pl_meta_predicate'(suspend(0, *, *), predicate).
-'$lgt_pl_meta_predicate'(suspend(0, *, *, *), predicate).
+'$lgt_prolog_meta_predicate'(*->(0, 0), control_construct).
+'$lgt_prolog_meta_predicate'(~(0), control_construct).
+'$lgt_prolog_meta_predicate'(-?->(0), control_construct).
+'$lgt_prolog_meta_predicate'(block(0, *, 0), predicate).
+'$lgt_prolog_meta_predicate'(call_priority(0, *), predicate).
+'$lgt_prolog_meta_predicate'(coverof(*, 0, *), predicate).
+'$lgt_prolog_meta_predicate'(do(*, 0), predicate).
+'$lgt_prolog_meta_predicate'(event_create(0, *, *), predicate).
+'$lgt_prolog_meta_predicate'(make_suspension(0, *, *), predicate).
+'$lgt_prolog_meta_predicate'(mutex(*, 0), predicate).
+'$lgt_prolog_meta_predicate'(not(0), predicate).
+'$lgt_prolog_meta_predicate'(suspend(0, *, *), predicate).
+'$lgt_prolog_meta_predicate'(suspend(0, *, *, *), predicate).
 
 
 
@@ -632,9 +632,9 @@ callable(Term) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_pl_meta_directive'(@callable)
+% '$lgt_prolog_meta_directive'(@callable)
 
-'$lgt_pl_meta_directive'(_) :-
+'$lgt_prolog_meta_directive'(_) :-
 	fail.
 
 

@@ -164,50 +164,50 @@ setup_call_cleanup(_, _, _) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_pl_meta_predicate'(?callable, ?atom).
+% '$lgt_prolog_meta_predicate'(?callable, ?atom).
 
-'$lgt_pl_meta_predicate'(all_answers(*, 0, *), predicate).
-'$lgt_pl_meta_predicate'(all_but_at_least(*, *, 0, *), predicate).
-'$lgt_pl_meta_predicate'(answer_of(*, 0), predicate).
+'$lgt_prolog_meta_predicate'(all_answers(*, 0, *), predicate).
+'$lgt_prolog_meta_predicate'(all_but_at_least(*, *, 0, *), predicate).
+'$lgt_prolog_meta_predicate'(answer_of(*, 0), predicate).
 
-'$lgt_pl_meta_predicate'(bg(0), predicate).
-'$lgt_pl_meta_predicate'(bg(0, *), predicate).
-'$lgt_pl_meta_predicate'(bg(0, *, *), predicate).
-'$lgt_pl_meta_predicate'(bg(0, *, *, *), predicate).
-'$lgt_pl_meta_predicate'(bg(0, *, *, *, *, *, *), predicate).
+'$lgt_prolog_meta_predicate'(bg(0), predicate).
+'$lgt_prolog_meta_predicate'(bg(0, *), predicate).
+'$lgt_prolog_meta_predicate'(bg(0, *, *), predicate).
+'$lgt_prolog_meta_predicate'(bg(0, *, *, *), predicate).
+'$lgt_prolog_meta_predicate'(bg(0, *, *, *, *, *, *), predicate).
 
-'$lgt_pl_meta_predicate'(bp_only(0), predicate).
-'$lgt_pl_meta_predicate'(bp_only(0, 0), predicate).
+'$lgt_prolog_meta_predicate'(bp_only(0), predicate).
+'$lgt_prolog_meta_predicate'(bp_only(0, 0), predicate).
 
-'$lgt_pl_meta_predicate'(calls_cont(0), predicate).
-'$lgt_pl_meta_predicate'(call_ifdef(0, 0), predicate).
+'$lgt_prolog_meta_predicate'(calls_cont(0), predicate).
+'$lgt_prolog_meta_predicate'(call_ifdef(0, 0), predicate).
 
-'$lgt_pl_meta_predicate'(det_call(0), predicate).
+'$lgt_prolog_meta_predicate'(det_call(0), predicate).
 
-'$lgt_pl_meta_predicate'(find_at_most(*, *, 0, *), predicate).
-'$lgt_pl_meta_predicate'(findall(*, 0, *, *), predicate).
+'$lgt_prolog_meta_predicate'(find_at_most(*, *, 0, *), predicate).
+'$lgt_prolog_meta_predicate'(findall(*, 0, *, *), predicate).
 
-'$lgt_pl_meta_predicate'(forall(0), predicate).
+'$lgt_prolog_meta_predicate'(forall(0), predicate).
 
-'$lgt_pl_meta_predicate'(gc_call(0), predicate).
+'$lgt_prolog_meta_predicate'(gc_call(0), predicate).
 
-'$lgt_pl_meta_predicate'(if_any(0, 0, 0), predicate).
+'$lgt_prolog_meta_predicate'(if_any(0, 0, 0), predicate).
 
-'$lgt_pl_meta_predicate'(new_engine(0, *, *), predicate).
-'$lgt_pl_meta_predicate'(open_engine(0, *, *), predicate).
+'$lgt_prolog_meta_predicate'(new_engine(0, *, *), predicate).
+'$lgt_prolog_meta_predicate'(open_engine(0, *, *), predicate).
 
-'$lgt_pl_meta_predicate'(not(0), predicate).
+'$lgt_prolog_meta_predicate'(not(0), predicate).
 
-'$lgt_pl_meta_predicate'(nth_answer(*, 0), predicate).
+'$lgt_prolog_meta_predicate'(nth_answer(*, 0), predicate).
 
-'$lgt_pl_meta_predicate'(timed_call(*, 0, *, *), predicate).
+'$lgt_prolog_meta_predicate'(timed_call(*, 0, *, *), predicate).
 
-'$lgt_pl_meta_predicate'(topcall(0), predicate).
+'$lgt_prolog_meta_predicate'(topcall(0), predicate).
 
 
-% '$lgt_pl_meta_directive'(@callable)
+% '$lgt_prolog_meta_directive'(@callable)
 
-'$lgt_pl_meta_directive'(_) :-
+'$lgt_prolog_meta_directive'(_) :-
 	fail.
 
 

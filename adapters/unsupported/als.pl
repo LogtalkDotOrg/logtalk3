@@ -156,17 +156,17 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_pl_meta_predicate'(?callable, ?atom).
+% '$lgt_prolog_meta_predicate'(?callable, ?atom).
 
-'$lgt_pl_meta_predicate'(b_findall(*, 0, *, *), predicate).
-'$lgt_pl_meta_predicate'(bagOf(*, 0, *), predicate).
-'$lgt_pl_meta_predicate'(setOf(*, 0, *), predicate).
-'$lgt_pl_meta_predicate'(not(0), predicate).
+'$lgt_prolog_meta_predicate'(b_findall(*, 0, *, *), predicate).
+'$lgt_prolog_meta_predicate'(bagOf(*, 0, *), predicate).
+'$lgt_prolog_meta_predicate'(setOf(*, 0, *), predicate).
+'$lgt_prolog_meta_predicate'(not(0), predicate).
 
 
-% '$lgt_pl_meta_directive'(@callable)
+% '$lgt_prolog_meta_directive'(@callable)
 
-'$lgt_pl_meta_directive'(_) :-
+'$lgt_prolog_meta_directive'(_) :-
 	fail.
 
 
@@ -511,15 +511,15 @@ callable(Term) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_pl_meta_predicate'(?callable, ?atom).
+% '$lgt_prolog_meta_predicate'(?callable, ?atom).
 
-'$lgt_pl_meta_predicate'(_, _) :-
+'$lgt_prolog_meta_predicate'(_, _) :-
 	fail.
 
 
-% '$lgt_pl_meta_directive'(@callable)
+% '$lgt_prolog_meta_directive'(@callable)
 
-'$lgt_pl_meta_directive'(_) :-
+'$lgt_prolog_meta_directive'(_) :-
 	fail.
 
 

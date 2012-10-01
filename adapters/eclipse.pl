@@ -186,31 +186,31 @@ forall(Generate, Test) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_pl_meta_predicate'(+callable, ?callable, ?atom)
+% '$lgt_prolog_meta_predicate'(+callable, ?callable, ?atom)
 %
 % table of meta-predicate patterns for proprietary built-in predicates;
 % the third argument, which must be either "predicate" or "control_construct",
 % is used to guide the compilation of these meta-predicates in debug mode
 
-'$lgt_pl_meta_predicate'(*->(_, _), *->(0, 0), control_construct).
-'$lgt_pl_meta_predicate'(~(_), ~(0), control_construct).
-'$lgt_pl_meta_predicate'(block(_, _, _), block(0, *, 0), predicate).
-'$lgt_pl_meta_predicate'(call_priority(_, _), call_priority(0, *), predicate).
-'$lgt_pl_meta_predicate'(coverof(_, _, _), coverof(*, 0, *), predicate).
-'$lgt_pl_meta_predicate'(do(_, _), do(*, 0), predicate).
-'$lgt_pl_meta_predicate'(event_create(_, _, _), event_create(0, *, *), predicate).
-'$lgt_pl_meta_predicate'(fail_if(_), fail_if(0), predicate).
-'$lgt_pl_meta_predicate'(make_suspension(_, _, _), make_suspension(0, *, *), predicate).
-'$lgt_pl_meta_predicate'(mutex(_, _), mutex(*, 0), predicate).
-'$lgt_pl_meta_predicate'(not(_), not(0), predicate).
-'$lgt_pl_meta_predicate'(subcall(_, _), subcall(0, *), predicate).
-'$lgt_pl_meta_predicate'(suspend(_, _, _), suspend(0, *, *), predicate).
-'$lgt_pl_meta_predicate'(suspend(_, _, _, _), suspend(0, *, *, *), predicate).
+'$lgt_prolog_meta_predicate'(*->(_, _), *->(0, 0), control_construct).
+'$lgt_prolog_meta_predicate'(~(_), ~(0), control_construct).
+'$lgt_prolog_meta_predicate'(block(_, _, _), block(0, *, 0), predicate).
+'$lgt_prolog_meta_predicate'(call_priority(_, _), call_priority(0, *), predicate).
+'$lgt_prolog_meta_predicate'(coverof(_, _, _), coverof(*, 0, *), predicate).
+'$lgt_prolog_meta_predicate'(do(_, _), do(*, 0), predicate).
+'$lgt_prolog_meta_predicate'(event_create(_, _, _), event_create(0, *, *), predicate).
+'$lgt_prolog_meta_predicate'(fail_if(_), fail_if(0), predicate).
+'$lgt_prolog_meta_predicate'(make_suspension(_, _, _), make_suspension(0, *, *), predicate).
+'$lgt_prolog_meta_predicate'(mutex(_, _), mutex(*, 0), predicate).
+'$lgt_prolog_meta_predicate'(not(_), not(0), predicate).
+'$lgt_prolog_meta_predicate'(subcall(_, _), subcall(0, *), predicate).
+'$lgt_prolog_meta_predicate'(suspend(_, _, _), suspend(0, *, *), predicate).
+'$lgt_prolog_meta_predicate'(suspend(_, _, _, _), suspend(0, *, *, *), predicate).
 
 
-% '$lgt_pl_meta_directive'(@callable)
+% '$lgt_prolog_meta_directive'(@callable)
 
-'$lgt_pl_meta_directive'(_) :-
+'$lgt_prolog_meta_directive'(_) :-
 	fail.
 
 

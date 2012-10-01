@@ -115,40 +115,40 @@ forall(Generate, Test) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_pl_meta_predicate'(+callable, ?callable, ?atom)
+% '$lgt_prolog_meta_predicate'(+callable, ?callable, ?atom)
 %
 % table of meta-predicate patterns for proprietary built-in predicates;
 % the third argument, which must be either "predicate" or "control_construct",
 % is used to guide the compilation of these meta-predicates in debug mode
 
-'$lgt_pl_meta_predicate'(call_cleanup(_, _), call_cleanup(0, 0), predicate).
-'$lgt_pl_meta_predicate'(call_residue_vars(_, _), call_residue_vars(0, *), predicate).
-'$lgt_pl_meta_predicate'(do(_, _), do(*, 0), predicate) :-
+'$lgt_prolog_meta_predicate'(call_cleanup(_, _), call_cleanup(0, 0), predicate).
+'$lgt_prolog_meta_predicate'(call_residue_vars(_, _), call_residue_vars(0, *), predicate).
+'$lgt_prolog_meta_predicate'(do(_, _), do(*, 0), predicate) :-
 	predicate_property(do(_, _), built_in).
-'$lgt_pl_meta_predicate'(findall(_, _, _, _), findall(*, 0, *, *), predicate).
-'$lgt_pl_meta_predicate'(freeze(_, _), freeze(*, 0), predicate).
-'$lgt_pl_meta_predicate'(if(_, _, _), if(0, 0, 0), predicate).
-'$lgt_pl_meta_predicate'(on_exception(_, _, _), on_exception(*, 0, 0), predicate).
-'$lgt_pl_meta_predicate'(save_predicates(_, _), save_predicates([/], *), predicate).
-'$lgt_pl_meta_predicate'(undo(_), undo(0), predicate).
-'$lgt_pl_meta_predicate'(when(_, _), when(*, 0), predicate).
+'$lgt_prolog_meta_predicate'(findall(_, _, _, _), findall(*, 0, *, *), predicate).
+'$lgt_prolog_meta_predicate'(freeze(_, _), freeze(*, 0), predicate).
+'$lgt_prolog_meta_predicate'(if(_, _, _), if(0, 0, 0), predicate).
+'$lgt_prolog_meta_predicate'(on_exception(_, _, _), on_exception(*, 0, 0), predicate).
+'$lgt_prolog_meta_predicate'(save_predicates(_, _), save_predicates([/], *), predicate).
+'$lgt_prolog_meta_predicate'(undo(_), undo(0), predicate).
+'$lgt_prolog_meta_predicate'(when(_, _), when(*, 0), predicate).
 % workaround problematic meta-predicate declarations:
-'$lgt_pl_meta_predicate'(compile(_), compile(*), predicate).
-'$lgt_pl_meta_predicate'(consult(_), consult(*), predicate).
-'$lgt_pl_meta_predicate'(ensure_loaded(_), ensure_loaded(*), predicate).
-'$lgt_pl_meta_predicate'(format(_, _), format(*, *), predicate).
-'$lgt_pl_meta_predicate'(format(_, _, _), format(*, *, *), predicate).
-'$lgt_pl_meta_predicate'(load_files(_), load_files(*), predicate).
-'$lgt_pl_meta_predicate'(load_files(_, _), load_files(*, *), predicate).
-'$lgt_pl_meta_predicate'(load_foreign_resource(_), load_foreign_resource(*), predicate).
-'$lgt_pl_meta_predicate'(use_module(_), use_module(*), predicate).
-'$lgt_pl_meta_predicate'(use_module(_, _), use_module(*, *), predicate).
-'$lgt_pl_meta_predicate'(use_module(_, _, _), use_module(*, *, *), predicate).
+'$lgt_prolog_meta_predicate'(compile(_), compile(*), predicate).
+'$lgt_prolog_meta_predicate'(consult(_), consult(*), predicate).
+'$lgt_prolog_meta_predicate'(ensure_loaded(_), ensure_loaded(*), predicate).
+'$lgt_prolog_meta_predicate'(format(_, _), format(*, *), predicate).
+'$lgt_prolog_meta_predicate'(format(_, _, _), format(*, *, *), predicate).
+'$lgt_prolog_meta_predicate'(load_files(_), load_files(*), predicate).
+'$lgt_prolog_meta_predicate'(load_files(_, _), load_files(*, *), predicate).
+'$lgt_prolog_meta_predicate'(load_foreign_resource(_), load_foreign_resource(*), predicate).
+'$lgt_prolog_meta_predicate'(use_module(_), use_module(*), predicate).
+'$lgt_prolog_meta_predicate'(use_module(_, _), use_module(*, *), predicate).
+'$lgt_prolog_meta_predicate'(use_module(_, _, _), use_module(*, *, *), predicate).
 
 
-% '$lgt_pl_meta_directive'(@callable)
+% '$lgt_prolog_meta_directive'(@callable)
 
-'$lgt_pl_meta_directive'(_) :-
+'$lgt_prolog_meta_directive'(_) :-
 	fail.
 
 

@@ -104,37 +104,37 @@ setup_call_catcher_cleanup(Setup, Call, Catcher, Cleanup) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_pl_meta_predicate'(+callable, ?callable, ?atom)
+% '$lgt_prolog_meta_predicate'(+callable, ?callable, ?atom)
 %
 % table of meta-predicate patterns for proprietary built-in predicates;
 % the third argument, which must be either "predicate" or "control_construct",
 % is used to guide the compilation of these meta-predicates in debug mode
 
-'$lgt_pl_meta_predicate'(fail_if(_), fail_if(0), predicate).
-'$lgt_pl_meta_predicate'(findall(_, _, _, _), findall(*, 0, *, *), predicate).
-'$lgt_pl_meta_predicate'(not(_), not(0), predicate).
-'$lgt_pl_meta_predicate'(sk_not(_), sk_not(0), predicate).
-'$lgt_pl_meta_predicate'(table_once(_), table_once(0), predicate).
-'$lgt_pl_meta_predicate'(tfindall(_, _, _), tfindall(*, 0, *), predicate).
-'$lgt_pl_meta_predicate'(tnot(_), tnot(0), predicate).
+'$lgt_prolog_meta_predicate'(fail_if(_), fail_if(0), predicate).
+'$lgt_prolog_meta_predicate'(findall(_, _, _, _), findall(*, 0, *, *), predicate).
+'$lgt_prolog_meta_predicate'(not(_), not(0), predicate).
+'$lgt_prolog_meta_predicate'(sk_not(_), sk_not(0), predicate).
+'$lgt_prolog_meta_predicate'(table_once(_), table_once(0), predicate).
+'$lgt_prolog_meta_predicate'(tfindall(_, _, _), tfindall(*, 0, *), predicate).
+'$lgt_prolog_meta_predicate'(tnot(_), tnot(0), predicate).
 
-'$lgt_pl_meta_predicate'(time(_), time(0), predicate).
+'$lgt_prolog_meta_predicate'(time(_), time(0), predicate).
 
-'$lgt_pl_meta_predicate'(abolish_table_call(_), abolish_table_call(0), predicate).
-'$lgt_pl_meta_predicate'(abolish_table_call(_, _), abolish_table_call(0, *), predicate).
-'$lgt_pl_meta_predicate'(abolish_table_pred(_), abolish_table_pred(0), predicate).
-'$lgt_pl_meta_predicate'(abolish_table_pred(_, _), abolish_table_pred(0, *), predicate).
+'$lgt_prolog_meta_predicate'(abolish_table_call(_), abolish_table_call(0), predicate).
+'$lgt_prolog_meta_predicate'(abolish_table_call(_, _), abolish_table_call(0, *), predicate).
+'$lgt_prolog_meta_predicate'(abolish_table_pred(_), abolish_table_pred(0), predicate).
+'$lgt_prolog_meta_predicate'(abolish_table_pred(_, _), abolish_table_pred(0, *), predicate).
 
-'$lgt_pl_meta_predicate'(thread_create(_, _, _), thread_create(0, *, *), predicate).
-'$lgt_pl_meta_predicate'(thread_create(_, _), thread_create(0, *), predicate).
-'$lgt_pl_meta_predicate'(thread_create(_), thread_create(0), predicate).
-'$lgt_pl_meta_predicate'(thread_signal(_, _), thread_signal(*, 0), predicate).
-'$lgt_pl_meta_predicate'(with_mutex(_, _), with_mutex(*, 0), predicate).
+'$lgt_prolog_meta_predicate'(thread_create(_, _, _), thread_create(0, *, *), predicate).
+'$lgt_prolog_meta_predicate'(thread_create(_, _), thread_create(0, *), predicate).
+'$lgt_prolog_meta_predicate'(thread_create(_), thread_create(0), predicate).
+'$lgt_prolog_meta_predicate'(thread_signal(_, _), thread_signal(*, 0), predicate).
+'$lgt_prolog_meta_predicate'(with_mutex(_, _), with_mutex(*, 0), predicate).
 
 
-% '$lgt_pl_meta_directive'(@callable)
+% '$lgt_prolog_meta_directive'(@callable)
 
-'$lgt_pl_meta_directive'(_) :-
+'$lgt_prolog_meta_directive'(_) :-
 	fail.
 
 

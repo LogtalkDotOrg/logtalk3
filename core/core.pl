@@ -2130,12 +2130,12 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_predicate_property_built_in_method'(Prop, Pred, CScope, Meta, Flags).
 
 '$lgt_predicate_property'(_, Pred, Prop, _, _) :-
-	'$lgt_lgt_built_in'(Pred),
+	'$lgt_logtalk_built_in_predicate'(Pred),
 	!,
 	'$lgt_predicate_property_lgt_built_in'(Prop).
 
 '$lgt_predicate_property'(_, Pred, Prop, _, _) :-
-	'$lgt_pl_built_in'(Pred),
+	'$lgt_prolog_built_in_predicate'(Pred),
 	!,
 	'$lgt_predicate_property_pl_built_in'(Prop, Pred).
 
@@ -2257,11 +2257,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_predicate_property_pl_built_in'(prolog, _).
 '$lgt_predicate_property_pl_built_in'(private, Pred) :-
-	'$lgt_pl_meta_predicate'(Pred, _, _).
+	'$lgt_prolog_meta_predicate'(Pred, _, _).
 '$lgt_predicate_property_pl_built_in'(meta_predicate(Meta), Pred) :-
-	'$lgt_pl_meta_predicate'(Pred, Meta, _).
+	'$lgt_prolog_meta_predicate'(Pred, Meta, _).
 '$lgt_predicate_property_pl_built_in'((public), Pred) :-
-	\+ '$lgt_pl_meta_predicate'(Pred, _, _).
+	\+ '$lgt_prolog_meta_predicate'(Pred, _, _).
 '$lgt_predicate_property_pl_built_in'(built_in, _).
 '$lgt_predicate_property_pl_built_in'((dynamic), Pred) :-
 	'$lgt_predicate_property'(Pred, (dynamic)).
@@ -3208,11 +3208,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 			throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(::Pred, Sender)))
 		)
 	;	% no predicate declaration, check if it's a private built-in method or a Prolog built-in meta-predicate:
-		('$lgt_built_in_method'(Pred, _, _, _); '$lgt_pl_meta_predicate'(Pred, _, _)) ->
+		('$lgt_built_in_method'(Pred, _, _, _); '$lgt_prolog_meta_predicate'(Pred, _, _)) ->
 		functor(Pred, Functor, Arity),
 		throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(::Pred, Sender)))
 	;	% no predicate declaration, check if it's a built-in predicate:
-		'$lgt_is_built_in'(Pred) ->
+		'$lgt_is_built_in_predicate'(Pred) ->
 		call(Pred)
 	;	functor(Pred, Functor, Arity),
 		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(::Pred, Sender)))
@@ -3306,11 +3306,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 			)
 		)
 	;	% no predicate declaration, check if it's a private built-in method or a Prolog built-in meta-predicate:
-		('$lgt_built_in_method'(Pred, _, _, _); '$lgt_pl_meta_predicate'(Pred, _, _)) ->
+		('$lgt_built_in_method'(Pred, _, _, _); '$lgt_prolog_meta_predicate'(Pred, _, _)) ->
 		functor(Pred, Functor, Arity),
 		throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(Obj::Pred, Sender)))
 	;	% no predicate declaration, check if it's a built-in predicate:
-		'$lgt_is_built_in'(Pred) ->
+		'$lgt_is_built_in_predicate'(Pred) ->
 		call(Pred)
 	;	functor(Pred, Functor, Arity),
 		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(Obj::Pred, Sender)))
@@ -3426,11 +3426,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 			)
 		)
 	;	% no predicate declaration, check if it's a private built-in method or a Prolog built-in meta-predicate:
-		('$lgt_built_in_method'(Pred, _, _, _); '$lgt_pl_meta_predicate'(Pred, _, _)) ->
+		('$lgt_built_in_method'(Pred, _, _, _); '$lgt_prolog_meta_predicate'(Pred, _, _)) ->
 		functor(Pred, Functor, Arity),
 		throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(Obj::Pred, Sender)))
 	;	% no predicate declaration, check if it's a built-in predicate:
-		'$lgt_is_built_in'(Pred) ->
+		'$lgt_is_built_in_predicate'(Pred) ->
 		call(Pred)
 	;	functor(Pred, Functor, Arity),
 		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(Obj::Pred, Sender)))
@@ -3591,11 +3591,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 			throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(^^Pred, This)))
 		)
 	;	% no predicate declaration, check if it's a private built-in method or a Prolog built-in meta-predicate:
-		('$lgt_built_in_method'(Pred, _, _, _); '$lgt_pl_meta_predicate'(Pred, _, _)) ->
+		('$lgt_built_in_method'(Pred, _, _, _); '$lgt_prolog_meta_predicate'(Pred, _, _)) ->
 		functor(Pred, Functor, Arity),
 		throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(^^Pred, This)))
 	;	% no predicate declaration, check if it's a built-in predicate:
-		'$lgt_is_built_in'(Pred) ->
+		'$lgt_is_built_in_predicate'(Pred) ->
 		call(Pred)
 	;	functor(Pred, Functor, Arity),
 		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(^^Pred, This)))
@@ -3652,11 +3652,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 			throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(^^Pred, Ctg)))
 		)
 	;	% no predicate declaration, check if it's a private built-in method or a Prolog built-in meta-predicate:
-		('$lgt_built_in_method'(Pred, _, _, _); '$lgt_pl_meta_predicate'(Pred, _, _)) ->
+		('$lgt_built_in_method'(Pred, _, _, _); '$lgt_prolog_meta_predicate'(Pred, _, _)) ->
 		functor(Pred, Functor, Arity),
 		throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(^^Pred, Ctg)))
 	;	% no predicate declaration, check if it's a built-in predicate:
-		'$lgt_is_built_in'(Pred) ->
+		'$lgt_is_built_in_predicate'(Pred) ->
 		call(Pred)
 	;	functor(Pred, Functor, Arity),
 		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(^^Pred, Ctg)))
@@ -4110,7 +4110,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 			fail
 		)
 	;	% no predicate declaration, check if it's a built-in predicate:
-		'$lgt_is_built_in'(Alias) ->
+		'$lgt_is_built_in_predicate'(Alias) ->
 		call(Alias)
 	;	functor(Alias, Functor, Arity),
 		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(:Alias, This)))
@@ -4568,12 +4568,12 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_user._dcl'(Pred, p(p(p)), no, Flags) :-
 	(	nonvar(Pred) ->
-		\+ '$lgt_is_built_in'(Pred),
+		\+ '$lgt_is_built_in_predicate'(Pred),
 		functor(Pred, Functor, Arity),
 		current_predicate(Functor/Arity)
 	;	current_predicate(Functor/Arity),
 		functor(Pred, Functor, Arity),
-		\+ '$lgt_is_built_in'(Pred),
+		\+ '$lgt_is_built_in_predicate'(Pred),
 		\+ '$lgt_hidden_functor'(Functor)
 	),
 	(	'$lgt_predicate_property'(Pred, (dynamic)) ->
@@ -4587,7 +4587,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 '$lgt_user._def'(Pred, _, Pred) :-
-	\+ '$lgt_is_built_in'(Pred),
+	\+ '$lgt_is_built_in_predicate'(Pred),
 	functor(Pred, Functor, Arity),
 	current_predicate(Functor/Arity).
 
@@ -6055,7 +6055,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_tr_directive'(Dir, Ctx) :-
 	'$lgt_term_template'(Dir, Meta),
-	'$lgt_pl_meta_directive'(Meta),						% defined in the Prolog adapter files
+	'$lgt_prolog_meta_directive'(Meta),					% defined in the Prolog adapter files
 	!,
 	'$lgt_inc_compile_warnings_counter'(portability),
 	'$lgt_warning_context'(Path, Lines, Type, Entity),
@@ -6064,14 +6064,14 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	Meta =.. [Functor| MArgs],
 	'$lgt_pp_entity'(_, Entity, Prefix, _, _),
 	'$lgt_comp_ctx'(Ctx, _, Entity, Entity, Entity, Prefix, [], _, _, _, _),	% MetaVars = [] as we're compiling a local call
-	(	'$lgt_tr_pl_meta_args'(Args, MArgs, Ctx, TArgs, DArgs) ->
+	(	'$lgt_tr_prolog_meta_arguments'(Args, MArgs, Ctx, TArgs, DArgs) ->
 		(	'$lgt_compiler_flag'(debug, on) ->
 			TDir =.. [Functor| DArgs]
 		;	TDir =.. [Functor| TArgs]
 		),
 		assertz('$lgt_pp_directive_'(TDir))
 	;	% the template is not usable, report it as an error
-		'$lgt_pl_meta_directive'(Meta),
+		'$lgt_prolog_meta_directive'(Meta),
 		throw(error(domain_error(meta_predicate_template, Meta), directive(Dir)))
 	).
 
@@ -6081,7 +6081,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	(	functor(Dir, Functor, Arity), '$lgt_pp_defines_predicate_'(Functor, Arity, _, _)
 	;	'$lgt_pp_uses_predicate_'(_, _, Dir)			% directive is a query for a locally defined predicate
 	;	'$lgt_pp_use_module_predicate_'(_, _, Dir)		% or a predicate referenced in a use_module/2 directive
-	;	'$lgt_is_built_in'(Dir)							% or a built-in predicate
+	;	'$lgt_is_built_in_predicate'(Dir)							% or a built-in predicate
 	),
 	!,
 	% translate query as an initialization goal
@@ -7357,10 +7357,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_pp_entity'(_, Entity, _, _, _),
 	assertz('$lgt_pp_entity_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/Arity, coinductive(Template)))),
 	% compile the auxiliary clause(s) used to implement coinduction
-	(	'$lgt_pl_meta_predicate'('*->'(_, _), _, _) ->
+	(	'$lgt_prolog_meta_predicate'('*->'(_, _), _, _) ->
 		% back-end Prolog compiler supports the soft-cut control construct
 		'$lgt_tr_clause'((Head :- '*->'({'$lgt_check_coinductive_success'(TestHead, HeadStack, Hypothesis)}, {'$lgt_coinductive_success_hook'(Head, Hypothesis, HeadExCtx, HeadStack, BodyStack)}); {'$lgt_push_coinductive_hypothesis'(Head, HeadStack, BodyStack)}, CoinductiveHead), HeadCtx, BodyCtx)
-	;	'$lgt_pl_meta_predicate'(if(_, _, _), _, _) ->
+	;	'$lgt_prolog_meta_predicate'(if(_, _, _), _, _) ->
 		% back-end Prolog compiler supports the if/3 soft-cut built-in meta-predicate
 		'$lgt_tr_clause'((Head :- if({'$lgt_check_coinductive_success'(TestHead, HeadStack, Hypothesis)}, {'$lgt_coinductive_success_hook'(Head, Hypothesis, HeadExCtx, HeadStack, BodyStack)}, ({'$lgt_push_coinductive_hypothesis'(Head, HeadStack, BodyStack)}, CoinductiveHead))), HeadCtx, BodyCtx)
 	;	throw(resource_error(soft_cut_support))
@@ -8460,7 +8460,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % redefinition of Logtalk built-in predicates
 
 '$lgt_tr_head'(Head, _, _) :-
-	'$lgt_lgt_built_in'(Head),
+	'$lgt_logtalk_built_in_predicate'(Head),
 	\+ functor(Head, '::', 2),
 	% not the head of a multifile entity predicate
 	\+ '$lgt_pp_redefined_built_in_'(Head, _, _),
@@ -8475,7 +8475,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % redefinition of Prolog built-in predicates
 
 '$lgt_tr_head'(Head, _, _) :-
-	'$lgt_pl_built_in'(Head),
+	'$lgt_prolog_built_in_predicate'(Head),
 	\+ functor(Head, ':', 2),
 	% not the head of a multifile module predicate
 	\+ '$lgt_pp_redefined_built_in_'(Head, _, _),
@@ -8720,7 +8720,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_tr_body'(Pred2, TPred2, DPred2, Ctx).
 
 '$lgt_tr_body'('*->'(Pred1, Pred2), '*->'(TPred1, TPred2), '*->'(DPred1, DPred2), Ctx) :-
-	'$lgt_pl_built_in'('*->'(_, _)),
+	'$lgt_prolog_built_in_predicate'('*->'(_, _)),
 	!,
 	'$lgt_tr_body'(Pred1, TPred1, DPred1, Ctx),
 	'$lgt_tr_body'(Pred2, TPred2, DPred2, Ctx).
@@ -9318,7 +9318,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_tr_body'('@'(Pred, Module), TPred, '$lgt_debug'(goal('@'(Pred, Module), TPred), ExCtx), Ctx) :-
 	'$lgt_compiler_flag'(modules, supported),
-	'$lgt_pl_built_in'('@'(_, _)),
+	'$lgt_prolog_built_in_predicate'('@'(_, _)),
 	'$lgt_pp_module_'(_),
 	% we're compiling a module as an object
 	!,
@@ -9326,8 +9326,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_must_be'(var_or_callable, Pred),
 	'$lgt_term_template'(Pred, Meta),
 	(	\+ '$lgt_pp_meta_predicate_'(Meta),
-		\+ '$lgt_pl_meta_predicate'(Pred, Meta, predicate),
-		\+ '$lgt_lgt_meta_predicate'(Pred, Meta, predicate),
+		\+ '$lgt_prolog_meta_predicate'(Pred, Meta, predicate),
+		\+ '$lgt_logtalk_meta_predicate'(Pred, Meta, predicate),
 		\+ '$lgt_predicate_property'(Pred, meta_predicate(Meta)) ->
 		\+ (	'$lgt_pp_use_module_predicate_'(Module, Original, Pred),
 				nl, write(use_module), nl,
@@ -9444,7 +9444,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	DCond = '$lgt_debug'(goal(abolish(Pred), TCond), ExCtx).
 
 '$lgt_tr_body'(assert(Clause), TCond, DCond, Ctx) :-
-	'$lgt_pl_built_in'(assert(_)),
+	'$lgt_prolog_built_in_predicate'(assert(_)),
 	!,
 	(	'$lgt_pp_non_portable_call_'(assert, 1, _) ->
 		true
@@ -9922,7 +9922,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		'$lgt_pp_meta_predicate_'(Meta) ->
 		% user-defined meta-predicate
 		true
-	;	'$lgt_pl_meta_predicate'(Pred, Meta, predicate) ->
+	;	'$lgt_prolog_meta_predicate'(Pred, Meta, predicate) ->
 		% proprietary built-in meta-predicates declared in the adapter files
 		true
 	;	% non-declared proprietary built-in meta-predicates (fragile hack
@@ -10044,8 +10044,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_body'(Pred, _, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 	'$lgt_compiler_flag'(portability, warning),
-	'$lgt_pl_built_in'(Pred),
-	\+ '$lgt_lgt_built_in'(Pred),
+	'$lgt_prolog_built_in_predicate'(Pred),
+	\+ '$lgt_logtalk_built_in_predicate'(Pred),
 	\+ '$lgt_iso_spec_pred'(Pred),
 	functor(Pred, Functor, Arity),
 	\+ '$lgt_pp_public_'(Functor, Arity),		% not a
@@ -10060,7 +10060,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % blackboard predicates (requires a back-end Prolog compiler natively supporting these built-in predicates)
 
 '$lgt_tr_body'(bb_put(Key, Term), TPred, DPred, Ctx) :-
-	'$lgt_pl_built_in'(bb_put(_, _)),
+	'$lgt_prolog_built_in_predicate'(bb_put(_, _)),
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_comp_ctx_prefix'(Ctx, Prefix),
@@ -10076,7 +10076,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	).
 
 '$lgt_tr_body'(bb_get(Key, Term), TPred, DPred, Ctx) :-
-	'$lgt_pl_built_in'(bb_get(_, _)),
+	'$lgt_prolog_built_in_predicate'(bb_get(_, _)),
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_comp_ctx_prefix'(Ctx, Prefix),
@@ -10092,7 +10092,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	).
 
 '$lgt_tr_body'(bb_delete(Key, Term), TPred, DPred, Ctx) :-
-	'$lgt_pl_built_in'(bb_delete(_, _)),
+	'$lgt_prolog_built_in_predicate'(bb_delete(_, _)),
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_comp_ctx_prefix'(Ctx, Prefix),
@@ -10108,7 +10108,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	).
 
 '$lgt_tr_body'(bb_update(Key, Term, New), TPred, DPred, Ctx) :-
-	'$lgt_pl_built_in'(bb_update(_, _, _)),
+	'$lgt_prolog_built_in_predicate'(bb_update(_, _, _)),
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_comp_ctx_prefix'(Ctx, Prefix),
@@ -10127,7 +10127,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % Prolog proprietary built-in meta-predicates (must be declared in the adapter files)
 
 '$lgt_tr_body'(Pred, TPred, DPred, Ctx) :-
-	'$lgt_pl_meta_predicate'(Pred, _, _),
+	'$lgt_prolog_meta_predicate'(Pred, _, _),
 	functor(Pred, Functor, Arity),
 	(	'$lgt_comp_ctx_mode'(Ctx, runtime) ->
 		true
@@ -10138,10 +10138,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		\+ '$lgt_pp_redefined_built_in_'(Pred, _, _)	% yet to be compiled
 	),
 	!,
-	(	'$lgt_pl_meta_predicate'(Pred, Meta, Type),		% we can have multiple templates for
+	(	'$lgt_prolog_meta_predicate'(Pred, Meta, Type),	% we can have multiple templates for
 		Pred =.. [_| Args],								% the same meta-predicate; look for
 		Meta =.. [_| MArgs],							% one that matches the predicate call
-		'$lgt_tr_pl_meta_args'(Args, MArgs, Ctx, TArgs, DArgs) ->
+		'$lgt_tr_prolog_meta_arguments'(Args, MArgs, Ctx, TArgs, DArgs) ->
 		TGoal =.. [Functor| TArgs],
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		(	'$lgt_comp_ctx_mode'(Ctx, runtime) ->
@@ -10158,7 +10158,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 			)
 		)
 	;	% none of the templates is usable, report as an error the first one
-		'$lgt_pl_meta_predicate'(Pred, Meta, _),
+		'$lgt_prolog_meta_predicate'(Pred, Meta, _),
 		throw(domain_error(meta_predicate_template, Meta))
 	).
 
@@ -10166,7 +10166,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % Logtalk and Prolog built-in predicates
 
 '$lgt_tr_body'(Pred, TPred, DPred, Ctx) :-
-	'$lgt_is_built_in'(Pred),
+	'$lgt_is_built_in_predicate'(Pred),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	(	'$lgt_comp_ctx_mode'(Ctx, runtime) ->
 		TPred = Pred
@@ -10341,25 +10341,25 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_tr_pl_meta_args'(@list, @list, +compilation_context, -list, -list)
+% '$lgt_tr_prolog_meta_arguments'(@list, @list, +compilation_context, -list, -list)
 %
 % translates the meta-arguments contained in the list of arguments of a
 % call to a Prolog meta-predicate or meta-directive (assumes Logtalk
 % meta-predicate notation)
 
-'$lgt_tr_pl_meta_args'([], [], _, [], []).
+'$lgt_tr_prolog_meta_arguments'([], [], _, [], []).
 
-'$lgt_tr_pl_meta_args'([Arg| Args], [MArg| MArgs], Ctx, [TArg| TArgs], [DArg| DArgs]) :-
-	'$lgt_tr_pl_meta_arg'(MArg, Arg, Ctx, TArg, DArg),
-	'$lgt_tr_pl_meta_args'(Args, MArgs, Ctx, TArgs, DArgs).
+'$lgt_tr_prolog_meta_arguments'([Arg| Args], [MArg| MArgs], Ctx, [TArg| TArgs], [DArg| DArgs]) :-
+	'$lgt_tr_prolog_meta_argument'(MArg, Arg, Ctx, TArg, DArg),
+	'$lgt_tr_prolog_meta_arguments'(Args, MArgs, Ctx, TArgs, DArgs).
 
 
-'$lgt_tr_pl_meta_arg'((*), Arg, _, Arg, Arg).
+'$lgt_tr_prolog_meta_argument'((*), Arg, _, Arg, Arg).
 
-'$lgt_tr_pl_meta_arg'((0), Arg, Ctx, TArg, DArg) :-
+'$lgt_tr_prolog_meta_argument'((0), Arg, Ctx, TArg, DArg) :-
 	'$lgt_tr_body'(Arg, TArg, DArg, Ctx).
 
-'$lgt_tr_pl_meta_arg'((^), Arg, Ctx, TArg, DArg) :-
+'$lgt_tr_prolog_meta_argument'((^), Arg, Ctx, TArg, DArg) :-
 	(	Arg = Vars^Arg0 ->
 		'$lgt_tr_body'(Arg0, TArg0, DArg0, Ctx),
 		TArg = Vars^TArg0,
@@ -10367,18 +10367,18 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	'$lgt_tr_body'(Arg, TArg, DArg, Ctx)
 	).
 
-'$lgt_tr_pl_meta_arg'([0], [], _, [], []) :- !.
-'$lgt_tr_pl_meta_arg'([0], [Arg| Args], Ctx, [TArg| TArgs], [DArg| DArgs]) :-
-	'$lgt_tr_pl_meta_arg'((0), Arg, Ctx, TArg, DArg),
-	'$lgt_tr_pl_meta_arg'([0], Args, Ctx, TArgs, DArgs).
+'$lgt_tr_prolog_meta_argument'([0], [], _, [], []) :- !.
+'$lgt_tr_prolog_meta_argument'([0], [Arg| Args], Ctx, [TArg| TArgs], [DArg| DArgs]) :-
+	'$lgt_tr_prolog_meta_argument'((0), Arg, Ctx, TArg, DArg),
+	'$lgt_tr_prolog_meta_argument'([0], Args, Ctx, TArgs, DArgs).
 
-'$lgt_tr_pl_meta_arg'((/), Arg, _, TArg, TArg) :-
+'$lgt_tr_prolog_meta_argument'((/), Arg, _, TArg, TArg) :-
 	'$lgt_compile_predicate_indicators'(Arg, TArg).
 
-'$lgt_tr_pl_meta_arg'([/], [], _, [], []) :- !.
-'$lgt_tr_pl_meta_arg'([/], [Arg| Args], Ctx, [TArg| TArgs], [DArg| DArgs]) :-
-	'$lgt_tr_pl_meta_arg'((/), Arg, Ctx, TArg, DArg),
-	'$lgt_tr_pl_meta_arg'([/], Args, Ctx, TArgs, DArgs).
+'$lgt_tr_prolog_meta_argument'([/], [], _, [], []) :- !.
+'$lgt_tr_prolog_meta_argument'([/], [Arg| Args], Ctx, [TArg| TArgs], [DArg| DArgs]) :-
+	'$lgt_tr_prolog_meta_argument'((/), Arg, Ctx, TArg, DArg),
+	'$lgt_tr_prolog_meta_argument'([/], Args, Ctx, TArgs, DArgs).
 
 
 
@@ -10764,7 +10764,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_tr_msg'(Pred2, Obj, TPred2, This).
 
 '$lgt_tr_msg'('*->'(Pred1, Pred2), Obj, '*->'(TPred1, TPred2), This) :-
-	'$lgt_pl_built_in'('*->'(_, _)),
+	'$lgt_prolog_built_in_predicate'('*->'(_, _)),
 	!,
 	'$lgt_tr_msg'(Pred1, Obj, TPred1, This),
 	'$lgt_tr_msg'(Pred2, Obj, TPred2, This).
@@ -10805,7 +10805,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	).
 
 '$lgt_tr_msg'(assert(Clause), Obj, TPred, This) :-
-	'$lgt_pl_built_in'(assert(_)),
+	'$lgt_prolog_built_in_predicate'(assert(_)),
 	!,
 	'$lgt_tr_msg'(assertz(Clause), Obj, TPred, This).
 
@@ -10933,7 +10933,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_tr_self_msg'(Pred2, TPred2, This, Self).
 
 '$lgt_tr_self_msg'('*->'(Pred1, Pred2), '*->'(TPred1, TPred2), This, Self) :-
-	'$lgt_pl_built_in'('*->'(_, _)),
+	'$lgt_prolog_built_in_predicate'('*->'(_, _)),
 	!,
 	'$lgt_tr_self_msg'(Pred1, TPred1, This, Self),
 	'$lgt_tr_self_msg'(Pred2, TPred2, This, Self).
@@ -10974,7 +10974,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	).
 
 '$lgt_tr_self_msg'(assert(Clause), TPred, This, Self) :-
-	'$lgt_pl_built_in'(assert(_)),
+	'$lgt_prolog_built_in_predicate'(assert(_)),
 	!,
 	'$lgt_tr_self_msg'(assertz(Clause), TPred, This, Self).
 
@@ -11404,7 +11404,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!.
 
 '$lgt_flatten_conjunctions'('*->'(Goal1, Goal2), '*->'(SGoal1, SGoal2)) :-
-	'$lgt_pl_built_in'('*->'(_, _)),
+	'$lgt_prolog_built_in_predicate'('*->'(_, _)),
 	!,
 	'$lgt_flatten_conjunctions'(Goal1, SGoal1),
 	'$lgt_flatten_conjunctions'(Goal2, SGoal2).
@@ -11533,7 +11533,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_remove_redundant_calls'(Goal2, SGoal2).
 
 '$lgt_remove_redundant_calls'('*->'(Goal1, Goal2), '*->'(SGoal1, SGoal2)) :-
-	'$lgt_pl_built_in'('*->'(_, _)),
+	'$lgt_prolog_built_in_predicate'('*->'(_, _)),
 	!,
 	'$lgt_remove_redundant_calls'(Goal1, SGoal1),
 	'$lgt_remove_redundant_calls'(Goal2, SGoal2).
@@ -12102,7 +12102,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		true
 	;	assertz('$lgt_pp_def_'(Clause))
 	),
-	(	'$lgt_is_built_in'(Head) ->
+	(	'$lgt_is_built_in_predicate'(Head) ->
 		(	'$lgt_pp_redefined_built_in_'(HeadTemplate, _, _) ->
 			true
 		;	assertz('$lgt_pp_redefined_built_in_'(HeadTemplate, ExCtxTemplate, HeadDefTemplate)),
@@ -12138,7 +12138,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		true
 	;	assertz('$lgt_pp_ddef_'(Clause))
 	),
-	(	'$lgt_is_built_in'(Head) ->
+	(	'$lgt_is_built_in_predicate'(Head) ->
 		(	'$lgt_pp_redefined_built_in_'(HeadTemplate, _, _) ->
 			true
 		;	assertz('$lgt_pp_redefined_built_in_'(HeadTemplate, ExCtxTemplate, HeadDefTemplate)),
@@ -13507,7 +13507,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_fix_predicate_calls'(Pred2, TPred2, Annotation).
 
 '$lgt_fix_predicate_calls'('*->'(Pred1, Pred2), '*->'(TPred1, TPred2), Annotation) :-
-	'$lgt_pl_built_in'('*->'(_, _)),
+	'$lgt_prolog_built_in_predicate'('*->'(_, _)),
 	!,
 	'$lgt_fix_predicate_calls'(Pred1, TPred1, Annotation),
 	'$lgt_fix_predicate_calls'(Pred2, TPred2, Annotation).
@@ -13621,7 +13621,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_goal_annotation'(TPred, Functor, TGoal1, TGoal2, _).
 
 '$lgt_fix_predicate_calls'(Pred, Pred, _) :-
-	'$lgt_lgt_built_in'(Pred),
+	'$lgt_logtalk_built_in_predicate'(Pred),
 	!.
 
 '$lgt_fix_predicate_calls'(Pred, Pred, _) :-
@@ -13629,8 +13629,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!.
 
 '$lgt_fix_predicate_calls'(Pred, TPred, _) :-
-	'$lgt_pl_built_in'(Pred),
-	'$lgt_pl_meta_predicate'(Pred, Meta, _),
+	'$lgt_prolog_built_in_predicate'(Pred),
+	'$lgt_prolog_meta_predicate'(Pred, Meta, _),
 	% call to a non-standard Prolog built-in meta-predicate
 	!,
 	Pred =.. [Functor| Args],
@@ -14806,32 +14806,34 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_is_built_in'(+callable)
+% '$lgt_is_built_in_predicate'(@callable)
 %
 % checks if the argument is either a Prolog or Logtalk built-in predicate
 
-'$lgt_is_built_in'(Pred) :-
-	(	'$lgt_pl_built_in'(Pred) ->
+'$lgt_is_built_in_predicate'(Pred) :-
+	(	'$lgt_prolog_built_in_predicate'(Pred) ->
 		true
-	;	'$lgt_lgt_built_in'(Pred) ->
+	;	'$lgt_logtalk_built_in_predicate'(Pred) ->
 		true
 	;	fail
 	).
 
 
 
-% '$lgt_pl_built_in'(+callable)
+% '$lgt_prolog_built_in_predicate'(+callable)
 %
 % either host Prolog native built-ins or missing ISO built-ins
 % that we have defined in the correspondent adapter file
 
-'$lgt_pl_built_in'(Pred) :-
-	\+ '$lgt_lgt_built_in'(Pred),	% Logtalk built-ins may also have the property built_in
+'$lgt_prolog_built_in_predicate'(Pred) :-
+	% Logtalk built-ins may also have the property built_in
+	\+ '$lgt_logtalk_built_in_predicate'(Pred),
 	'$lgt_predicate_property'(Pred, built_in),
 	!.
 
-'$lgt_pl_built_in'(Pred) :-
-	'$lgt_iso_predicate'(Pred).		% ISO Prolog built-in predicate (defined in the adapter files)
+'$lgt_prolog_built_in_predicate'(Pred) :-
+	% ISO Prolog built-in predicate (defined in the adapter files)
+	'$lgt_iso_predicate'(Pred).
 
 
 
@@ -14866,7 +14868,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_built_in_method'((;), 2, p(p(p)), ';'(0, 0), 1).
 '$lgt_built_in_method'((->), 2, p(p(p)), '->'(0, 0), 1).
 '$lgt_built_in_method'((*->), 2, p(p(p)), '*->'(0, 0), 1) :-
-	'$lgt_pl_built_in'('*->'(_, _)).
+	'$lgt_prolog_built_in_predicate'('*->'(_, _)).
 % reflection methods
 '$lgt_built_in_method'(current_predicate, 1, p(p(p)), no, 1).
 '$lgt_built_in_method'(predicate_property, 2, p(p(p)), no, 1).
@@ -14927,9 +14929,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 % Logtalk built-in meta-predicates
 %
-% '$lgt_lgt_meta_predicate'(+callable, ?callable, ?atom)
+% '$lgt_logtalk_meta_predicate'(+callable, ?callable, ?atom)
 
-'$lgt_lgt_meta_predicate'(Pred, Meta, predicate) :-
+'$lgt_logtalk_meta_predicate'(Pred, Meta, predicate) :-
 	'$lgt_built_in_method'(Pred, _, Meta, _),
 	Meta \== no.
 
@@ -15731,75 +15733,75 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 % Logtalk built-in predicates
 %
-% '$lgt_lgt_built_in'(?callable)
+% '$lgt_logtalk_built_in_predicate'(?callable)
 
-'$lgt_lgt_built_in'(_ :: _).
-'$lgt_lgt_built_in'(_ << _).
+'$lgt_logtalk_built_in_predicate'(_ :: _).
+'$lgt_logtalk_built_in_predicate'(_ << _).
 
-'$lgt_lgt_built_in'(forall(_, _)).
-'$lgt_lgt_built_in'(retractall(_)).
+'$lgt_logtalk_built_in_predicate'(forall(_, _)).
+'$lgt_logtalk_built_in_predicate'(retractall(_)).
 
-'$lgt_lgt_built_in'(logtalk_compile(_)).
-'$lgt_lgt_built_in'(logtalk_compile(_, _)).
-'$lgt_lgt_built_in'(logtalk_load(_)).
-'$lgt_lgt_built_in'(logtalk_load(_, _)).
-'$lgt_lgt_built_in'(logtalk_load_context(_, _)).
-'$lgt_lgt_built_in'(logtalk_library_path(_, _)).
+'$lgt_logtalk_built_in_predicate'(logtalk_compile(_)).
+'$lgt_logtalk_built_in_predicate'(logtalk_compile(_, _)).
+'$lgt_logtalk_built_in_predicate'(logtalk_load(_)).
+'$lgt_logtalk_built_in_predicate'(logtalk_load(_, _)).
+'$lgt_logtalk_built_in_predicate'(logtalk_load_context(_, _)).
+'$lgt_logtalk_built_in_predicate'(logtalk_library_path(_, _)).
 
-'$lgt_lgt_built_in'(protocol_property(_, _)).
-'$lgt_lgt_built_in'(category_property(_, _)).
-'$lgt_lgt_built_in'(object_property(_, _)).
+'$lgt_logtalk_built_in_predicate'(protocol_property(_, _)).
+'$lgt_logtalk_built_in_predicate'(category_property(_, _)).
+'$lgt_logtalk_built_in_predicate'(object_property(_, _)).
 
-'$lgt_lgt_built_in'(current_protocol(_)).
-'$lgt_lgt_built_in'(current_category(_)).
-'$lgt_lgt_built_in'(current_object(_)).
+'$lgt_logtalk_built_in_predicate'(current_protocol(_)).
+'$lgt_logtalk_built_in_predicate'(current_category(_)).
+'$lgt_logtalk_built_in_predicate'(current_object(_)).
 
-'$lgt_lgt_built_in'(create_object(_, _, _, _)).
-'$lgt_lgt_built_in'(create_category(_, _, _, _)).
-'$lgt_lgt_built_in'(create_protocol(_, _, _)).
+'$lgt_logtalk_built_in_predicate'(create_object(_, _, _, _)).
+'$lgt_logtalk_built_in_predicate'(create_category(_, _, _, _)).
+'$lgt_logtalk_built_in_predicate'(create_protocol(_, _, _)).
 
-'$lgt_lgt_built_in'(abolish_object(_)).
-'$lgt_lgt_built_in'(abolish_category(_)).
-'$lgt_lgt_built_in'(abolish_protocol(_)).
+'$lgt_logtalk_built_in_predicate'(abolish_object(_)).
+'$lgt_logtalk_built_in_predicate'(abolish_category(_)).
+'$lgt_logtalk_built_in_predicate'(abolish_protocol(_)).
 
-'$lgt_lgt_built_in'(implements_protocol(_, _)).
-'$lgt_lgt_built_in'(implements_protocol(_, _, _)).
-'$lgt_lgt_built_in'(imports_category(_, _)).
-'$lgt_lgt_built_in'(imports_category(_, _, _)).
-'$lgt_lgt_built_in'(instantiates_class(_, _)).
-'$lgt_lgt_built_in'(instantiates_class(_, _, _)).
-'$lgt_lgt_built_in'(specializes_class(_, _)).
-'$lgt_lgt_built_in'(specializes_class(_, _, _)).
-'$lgt_lgt_built_in'(extends_protocol(_, _)).
-'$lgt_lgt_built_in'(extends_protocol(_, _, _)).
-'$lgt_lgt_built_in'(extends_object(_, _)).
-'$lgt_lgt_built_in'(extends_object(_, _, _)).
-'$lgt_lgt_built_in'(extends_category(_, _)).
-'$lgt_lgt_built_in'(extends_category(_, _, _)).
-'$lgt_lgt_built_in'(complements_object(_, _)).
+'$lgt_logtalk_built_in_predicate'(implements_protocol(_, _)).
+'$lgt_logtalk_built_in_predicate'(implements_protocol(_, _, _)).
+'$lgt_logtalk_built_in_predicate'(imports_category(_, _)).
+'$lgt_logtalk_built_in_predicate'(imports_category(_, _, _)).
+'$lgt_logtalk_built_in_predicate'(instantiates_class(_, _)).
+'$lgt_logtalk_built_in_predicate'(instantiates_class(_, _, _)).
+'$lgt_logtalk_built_in_predicate'(specializes_class(_, _)).
+'$lgt_logtalk_built_in_predicate'(specializes_class(_, _, _)).
+'$lgt_logtalk_built_in_predicate'(extends_protocol(_, _)).
+'$lgt_logtalk_built_in_predicate'(extends_protocol(_, _, _)).
+'$lgt_logtalk_built_in_predicate'(extends_object(_, _)).
+'$lgt_logtalk_built_in_predicate'(extends_object(_, _, _)).
+'$lgt_logtalk_built_in_predicate'(extends_category(_, _)).
+'$lgt_logtalk_built_in_predicate'(extends_category(_, _, _)).
+'$lgt_logtalk_built_in_predicate'(complements_object(_, _)).
 
-'$lgt_lgt_built_in'(conforms_to_protocol(_, _)).
-'$lgt_lgt_built_in'(conforms_to_protocol(_, _, _)).
+'$lgt_logtalk_built_in_predicate'(conforms_to_protocol(_, _)).
+'$lgt_logtalk_built_in_predicate'(conforms_to_protocol(_, _, _)).
 
-'$lgt_lgt_built_in'(abolish_events(_, _, _, _, _)).
-'$lgt_lgt_built_in'(define_events(_, _, _, _, _)).
-'$lgt_lgt_built_in'(current_event(_, _, _, _, _)).
+'$lgt_logtalk_built_in_predicate'(abolish_events(_, _, _, _, _)).
+'$lgt_logtalk_built_in_predicate'(define_events(_, _, _, _, _)).
+'$lgt_logtalk_built_in_predicate'(current_event(_, _, _, _, _)).
 
-'$lgt_lgt_built_in'(current_logtalk_flag(_, _)).
-'$lgt_lgt_built_in'(set_logtalk_flag(_, _)).
+'$lgt_logtalk_built_in_predicate'(current_logtalk_flag(_, _)).
+'$lgt_logtalk_built_in_predicate'(set_logtalk_flag(_, _)).
 
-'$lgt_lgt_built_in'(threaded(_)).
-'$lgt_lgt_built_in'(threaded_call(_, _)).
-'$lgt_lgt_built_in'(threaded_call(_)).
-'$lgt_lgt_built_in'(threaded_once(_, _)).
-'$lgt_lgt_built_in'(threaded_once(_)).
-'$lgt_lgt_built_in'(threaded_ignore(_)).
-'$lgt_lgt_built_in'(threaded_exit(_, _)).
-'$lgt_lgt_built_in'(threaded_exit(_)).
-'$lgt_lgt_built_in'(threaded_peek(_, _)).
-'$lgt_lgt_built_in'(threaded_peek(_)).
-'$lgt_lgt_built_in'(threaded_wait(_)).
-'$lgt_lgt_built_in'(threaded_notify(_)).
+'$lgt_logtalk_built_in_predicate'(threaded(_)).
+'$lgt_logtalk_built_in_predicate'(threaded_call(_, _)).
+'$lgt_logtalk_built_in_predicate'(threaded_call(_)).
+'$lgt_logtalk_built_in_predicate'(threaded_once(_, _)).
+'$lgt_logtalk_built_in_predicate'(threaded_once(_)).
+'$lgt_logtalk_built_in_predicate'(threaded_ignore(_)).
+'$lgt_logtalk_built_in_predicate'(threaded_exit(_, _)).
+'$lgt_logtalk_built_in_predicate'(threaded_exit(_)).
+'$lgt_logtalk_built_in_predicate'(threaded_peek(_, _)).
+'$lgt_logtalk_built_in_predicate'(threaded_peek(_)).
+'$lgt_logtalk_built_in_predicate'(threaded_wait(_)).
+'$lgt_logtalk_built_in_predicate'(threaded_notify(_)).
 
 
 
@@ -15935,7 +15937,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!.
 
 '$lgt_dcg_msg'('*->'(GRIf, GRThen), Obj, S0, S, '*->'(If, Then)) :-
-	'$lgt_pl_built_in'('*->'(_, _)),
+	'$lgt_prolog_built_in_predicate'('*->'(_, _)),
 	!,
 	'$lgt_dcg_msg'(GRIf, Obj, S0, S1, If),
 	'$lgt_dcg_msg'(GRThen, Obj, S1, S, Then).
@@ -15972,7 +15974,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!.
 
 '$lgt_dcg_self_msg'('*->'(GRIf, GRThen), S0, S, '*->'(If, Then)) :-
-	'$lgt_pl_built_in'('*->'(_, _)),
+	'$lgt_prolog_built_in_predicate'('*->'(_, _)),
 	!,
 	'$lgt_dcg_self_msg'(GRIf, S0, S1, If),
 	'$lgt_dcg_self_msg'(GRThen, S1, S, Then).
@@ -16037,7 +16039,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!.
 
 '$lgt_dcg_body'('*->'(GRIf, GRThen), S0, S, '*->'(If, Then)) :-
-	'$lgt_pl_built_in'('*->'(_, _)),
+	'$lgt_prolog_built_in_predicate'('*->'(_, _)),
 	!,
 	'$lgt_dcg_body'(GRIf, S0, S1, If),
 	'$lgt_dcg_body'(GRThen, S1, S, Then).

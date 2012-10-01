@@ -95,7 +95,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_pl_meta_predicate'(+callable, ?callable, ?atom)
+% '$lgt_prolog_meta_predicate'(+callable, ?callable, ?atom)
 %
 % table of meta-predicate patterns for proprietary built-in predicates;
 % the third argument, which must be either "predicate" or "control_construct",
@@ -105,7 +105,7 @@
 % the third argument, which must be either "predicate" or "control_construct",
 % is used to guide the compilation of these meta-predicates in debug mode
 
-'$lgt_pl_meta_predicate'(ForEach, Meta, predicate) :-  % foreach/2-N
+'$lgt_prolog_meta_predicate'(ForEach, Meta, predicate) :-  % foreach/2-N
 	compound(ForEach),
 	functor(ForEach, foreach, Arity),
 	Arity >= 2,
@@ -114,19 +114,19 @@
 	arg(Arity, Meta, 0),
 	N is Arity - 1,
 	'$lgt_bp_foreach_n_args'(N, Meta).
-'$lgt_pl_meta_predicate'(setup_call_cleanup(_, _, _), setup_call_cleanup(0, 0, 0), predicate).
-'$lgt_pl_meta_predicate'(call_cleanup(_, _), call_cleanup(0, 0), predicate).
-'$lgt_pl_meta_predicate'(fd_minimize(_, _), fd_minimize(0, *), predicate).
-'$lgt_pl_meta_predicate'(fd_maximize(_, _), fd_maximize(0, *), predicate).
-'$lgt_pl_meta_predicate'(freeze(_, _), freeze(*, 0), predicate).
-'$lgt_pl_meta_predicate'(minof(_, _), minof(0, *), predicate).
-'$lgt_pl_meta_predicate'(maxof(_, _), maxof(0, *), predicate).
-'$lgt_pl_meta_predicate'(not(_), not(0), predicate).
-'$lgt_pl_meta_predicate'(table_cardinality_limit(_, _), table_cardinality_limit(/, *), predicate).
-'$lgt_pl_meta_predicate'(table_find_all(_, _), table_find_all(0, *), predicate).
-'$lgt_pl_meta_predicate'(table_find_one(_), table_find_one(0), predicate).
-'$lgt_pl_meta_predicate'(table_remove(_), table_remove(0), predicate).
-'$lgt_pl_meta_predicate'(time_out(_, _, _), time_out(0, *, *), predicate).
+'$lgt_prolog_meta_predicate'(setup_call_cleanup(_, _, _), setup_call_cleanup(0, 0, 0), predicate).
+'$lgt_prolog_meta_predicate'(call_cleanup(_, _), call_cleanup(0, 0), predicate).
+'$lgt_prolog_meta_predicate'(fd_minimize(_, _), fd_minimize(0, *), predicate).
+'$lgt_prolog_meta_predicate'(fd_maximize(_, _), fd_maximize(0, *), predicate).
+'$lgt_prolog_meta_predicate'(freeze(_, _), freeze(*, 0), predicate).
+'$lgt_prolog_meta_predicate'(minof(_, _), minof(0, *), predicate).
+'$lgt_prolog_meta_predicate'(maxof(_, _), maxof(0, *), predicate).
+'$lgt_prolog_meta_predicate'(not(_), not(0), predicate).
+'$lgt_prolog_meta_predicate'(table_cardinality_limit(_, _), table_cardinality_limit(/, *), predicate).
+'$lgt_prolog_meta_predicate'(table_find_all(_, _), table_find_all(0, *), predicate).
+'$lgt_prolog_meta_predicate'(table_find_one(_), table_find_one(0), predicate).
+'$lgt_prolog_meta_predicate'(table_remove(_), table_remove(0), predicate).
+'$lgt_prolog_meta_predicate'(time_out(_, _, _), time_out(0, *, *), predicate).
 
 
 '$lgt_bp_foreach_n_args'(0, _) :-
@@ -137,9 +137,9 @@
 	'$lgt_bp_foreach_n_args'(N2, Meta).
 
 
-% '$lgt_pl_meta_directive'(@callable)
+% '$lgt_prolog_meta_directive'(@callable)
 
-'$lgt_pl_meta_directive'(_) :-
+'$lgt_prolog_meta_directive'(_) :-
 	fail.
 
 
