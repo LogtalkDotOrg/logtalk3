@@ -515,9 +515,9 @@ message_hook(discontiguous(_), _, _) :-		% SWI-Prolog discontiguous predicate
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_pl_term_expansion'(@callable, -callable)
+% '$lgt_prolog_term_expansion'(@callable, -callable)
 
-'$lgt_pl_term_expansion'((:- Directive), Expanded) :-
+'$lgt_prolog_term_expansion'((:- Directive), Expanded) :-
 	'$lgt_swi_directive_expansion'(Directive, Expanded0),
 	(	Expanded0 == [] ->
 		Expanded  == []
@@ -642,9 +642,9 @@ message_hook(discontiguous(_), _, _) :-		% SWI-Prolog discontiguous predicate
 '$lgt_swi_encoding_to_logtalk_encoding'(unicode_le, 'UCS-2LE').
 
 
-% '$lgt_pl_goal_expansion'(@callable, -callable)
+% '$lgt_prolog_goal_expansion'(@callable, -callable)
 
-'$lgt_pl_goal_expansion'(_, _) :-
+'$lgt_prolog_goal_expansion'(_, _) :-
 	fail.
 
 

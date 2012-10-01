@@ -440,9 +440,9 @@ setup_call_cleanup(_, _, _) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_pl_term_expansion'(@callable, -callable)
+% '$lgt_prolog_term_expansion'(@callable, -callable)
 
-'$lgt_pl_term_expansion'((:- Directive), Expanded) :-
+'$lgt_prolog_term_expansion'((:- Directive), Expanded) :-
 	'$lgt_gnu_directive_expansion'(Directive, Expanded0),
 	(	Expanded0 == [] ->
 		Expanded  == []
@@ -467,9 +467,9 @@ setup_call_cleanup(_, _, _) :-
 '$lgt_gnu_directive_expansion'(foreign(Template), {foreign(Template)}).
 
 
-% '$lgt_pl_goal_expansion'(@callable, -callable)
+% '$lgt_prolog_goal_expansion'(@callable, -callable)
 
-'$lgt_pl_goal_expansion'(_, _) :-
+'$lgt_prolog_goal_expansion'(_, _) :-
 	fail.
 
 

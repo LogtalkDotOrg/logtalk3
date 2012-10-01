@@ -551,9 +551,9 @@ forall(Generate, Test) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_pl_term_expansion'(@callable, -callable)
+% '$lgt_prolog_term_expansion'(@callable, -callable)
 
-%'$lgt_pl_term_expansion'(
+%'$lgt_prolog_term_expansion'(
 %		(:- tool(Functor1/Arity1, Functor2/Arity2)),
 %		[(:- meta_predicate(Template1)), (:- meta_predicate(Template2)), (Callable1 :- sender(Sender), Callable2)]) :-
 %	!,
@@ -570,7 +570,7 @@ forall(Generate, Test) :-
 %	Template2 =.. [Functor2| MetaArgs2],
 %	'$lgt_eclipse_meta_args2'(MetaArgs2).
 
-'$lgt_pl_term_expansion'((:- Directive), Expanded) :-
+'$lgt_prolog_term_expansion'((:- Directive), Expanded) :-
 	'$lgt_eclipse_directive_expansion'(Directive, Expanded0),
 	(	Expanded0 == [] ->
 		Expanded  == []
@@ -684,9 +684,9 @@ forall(Generate, Test) :-
 	'$lgt_eclipse_filter_exports'(Interface, Exports).
 
 
-% '$lgt_pl_goal_expansion'(@callable, -callable)
+% '$lgt_prolog_goal_expansion'(@callable, -callable)
 
-'$lgt_pl_goal_expansion'(_, _) :-
+'$lgt_prolog_goal_expansion'(_, _) :-
 	fail.
 
 

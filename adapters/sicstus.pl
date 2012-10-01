@@ -515,9 +515,9 @@ forall(Generate, Test) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_pl_term_expansion'(@callable, -callable)
+% '$lgt_prolog_term_expansion'(@callable, -callable)
 
-'$lgt_pl_term_expansion'((:- Directive), Expanded) :-
+'$lgt_prolog_term_expansion'((:- Directive), Expanded) :-
 	'$lgt_sicstus_directive_expansion'(Directive, Expanded0),
 	(	Expanded0 == [] ->
 		Expanded  == []
@@ -579,9 +579,9 @@ forall(Generate, Test) :-
 	ModuleDecl = (:- module(Module, Exports)).
 
 
-% '$lgt_pl_goal_expansion'(@callable, -callable)
+% '$lgt_prolog_goal_expansion'(@callable, -callable)
 
-'$lgt_pl_goal_expansion'(_, _) :-
+'$lgt_prolog_goal_expansion'(_, _) :-
 	fail.
 
 

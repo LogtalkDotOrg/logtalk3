@@ -536,9 +536,9 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_pl_term_expansion'(@callable, -callable)
+% '$lgt_prolog_term_expansion'(@callable, -callable)
 
-'$lgt_pl_term_expansion'((:- Directive), Expanded) :-
+'$lgt_prolog_term_expansion'((:- Directive), Expanded) :-
 	'$lgt_sicstus_directive_expansion'(Directive, Expanded0),
 	(	Expanded0 == [] ->
 		Expanded  == []
@@ -600,9 +600,9 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 	ModuleDecl = (:- module(Module, Exports)).
 
 
-% '$lgt_pl_goal_expansion'(@callable, -callable)
+% '$lgt_prolog_goal_expansion'(@callable, -callable)
 
-'$lgt_pl_goal_expansion'(_, _) :-
+'$lgt_prolog_goal_expansion'(_, _) :-
 	fail.
 
 

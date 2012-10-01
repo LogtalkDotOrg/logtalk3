@@ -2132,12 +2132,12 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_predicate_property'(_, Pred, Prop, _, _) :-
 	'$lgt_logtalk_built_in_predicate'(Pred),
 	!,
-	'$lgt_predicate_property_lgt_built_in'(Prop).
+	'$lgt_predicate_property_logtalk_built_in'(Prop).
 
 '$lgt_predicate_property'(_, Pred, Prop, _, _) :-
 	'$lgt_prolog_built_in_predicate'(Pred),
 	!,
-	'$lgt_predicate_property_pl_built_in'(Prop, Pred).
+	'$lgt_predicate_property_prolog_built_in'(Prop, Pred).
 
 
 '$lgt_predicate_property_user'(logtalk, _, _, _, _, _, _, _, _).
@@ -2249,25 +2249,25 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	Flags /\ 4 =:= 4.
 
 
-'$lgt_predicate_property_lgt_built_in'(logtalk).
-'$lgt_predicate_property_lgt_built_in'((public)).
-'$lgt_predicate_property_lgt_built_in'(built_in).
-'$lgt_predicate_property_lgt_built_in'(static).
+'$lgt_predicate_property_logtalk_built_in'(logtalk).
+'$lgt_predicate_property_logtalk_built_in'((public)).
+'$lgt_predicate_property_logtalk_built_in'(built_in).
+'$lgt_predicate_property_logtalk_built_in'(static).
 
 
-'$lgt_predicate_property_pl_built_in'(prolog, _).
-'$lgt_predicate_property_pl_built_in'(private, Pred) :-
+'$lgt_predicate_property_prolog_built_in'(prolog, _).
+'$lgt_predicate_property_prolog_built_in'(private, Pred) :-
 	'$lgt_prolog_meta_predicate'(Pred, _, _).
-'$lgt_predicate_property_pl_built_in'(meta_predicate(Meta), Pred) :-
+'$lgt_predicate_property_prolog_built_in'(meta_predicate(Meta), Pred) :-
 	'$lgt_prolog_meta_predicate'(Pred, Meta, _).
-'$lgt_predicate_property_pl_built_in'((public), Pred) :-
+'$lgt_predicate_property_prolog_built_in'((public), Pred) :-
 	\+ '$lgt_prolog_meta_predicate'(Pred, _, _).
-'$lgt_predicate_property_pl_built_in'(built_in, _).
-'$lgt_predicate_property_pl_built_in'((dynamic), Pred) :-
+'$lgt_predicate_property_prolog_built_in'(built_in, _).
+'$lgt_predicate_property_prolog_built_in'((dynamic), Pred) :-
 	'$lgt_predicate_property'(Pred, (dynamic)).
-'$lgt_predicate_property_pl_built_in'(static, Pred) :-
+'$lgt_predicate_property_prolog_built_in'(static, Pred) :-
 	'$lgt_predicate_property'(Pred, static).
-'$lgt_predicate_property_pl_built_in'((multifile), Pred) :-
+'$lgt_predicate_property_prolog_built_in'((multifile), Pred) :-
 	'$lgt_predicate_property'(Pred, (multifile)).
 
 
@@ -5061,7 +5061,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_tr_file_term'(Term, _, Input) :-
 	'$lgt_pp_cc_skipping_',
-	\+ '$lgt_lgt_cc_directive'(Term),
+	\+ '$lgt_conditional_compilation_directive'(Term),
 	% we're performing conditional compilation and skipping terms
 	% except for conditional compilation directives itself
 	!,
@@ -5737,14 +5737,14 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		'$lgt_hook_goal_expansion_'(Goal, ExpandedGoal) ->
 		true
 	;	% dialect specific expansion:
-		'$lgt_pl_goal_expansion'(Goal, ExpandedGoal) ->
-		'$lgt_pl_expanded_goal_portability_warnings'(Goal, ExpandedGoal)
+		'$lgt_prolog_goal_expansion'(Goal, ExpandedGoal) ->
+		'$lgt_prolog_goal_expansion_portability_warnings'(Goal, ExpandedGoal)
 	;	% no compiler hook defined:
 		fail
 	).
 
 
-'$lgt_pl_expanded_goal_portability_warnings'(Goal, ExpandedGoal) :-
+'$lgt_prolog_goal_expansion_portability_warnings'(Goal, ExpandedGoal) :-
 	'$lgt_inc_compile_warnings_counter'(portability),
 	'$lgt_pp_file_path_flags_'(File, Directory, _),
 	atom_concat(Directory, File, Path),
@@ -5788,15 +5788,15 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		'$lgt_hook_term_expansion_'(Term, Terms) ->
 		'$lgt_tr_expanded_terms'(Terms, Ctx)
 	;	% dialect specific expansion:
-		'$lgt_pl_term_expansion'(Term, Terms) ->
-		'$lgt_pl_expanded_term_portability_warnings'(Term, Terms),
+		'$lgt_prolog_term_expansion'(Term, Terms) ->
+		'$lgt_prolog_term_expansion_portability_warnings'(Term, Terms),
 		'$lgt_tr_expanded_terms'(Terms, Ctx)
 	;	% no compiler hook defined:
 		'$lgt_tr_expanded_term'(Term, Ctx)
 	).
 
 
-'$lgt_pl_expanded_term_portability_warnings'(Term, ExpandedTerms) :-
+'$lgt_prolog_term_expansion_portability_warnings'(Term, ExpandedTerms) :-
 	'$lgt_inc_compile_warnings_counter'(portability),
 	'$lgt_pp_file_path_flags_'(File, Directory, _),
 	atom_concat(Directory, File, Path),
@@ -6014,7 +6014,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_directive'(Dir, _) :-							% closing entity directive occurs before the opening
 	\+ '$lgt_pp_entity'(_, _, _, _, _),					% entity directive; the opening directive is probably
 	functor(Dir, Functor, Arity),						% missing or misspelt
-	'$lgt_lgt_closing_directive'(Functor, Arity),
+	'$lgt_logtalk_closing_directive'(Functor, Arity),
 	(	Functor = end_object ->
 		throw(error(existence_error(opening_directive, object/1), directive(Dir)))
 	;	Functor = end_protocol ->
@@ -6026,13 +6026,13 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_directive'(Dir, Ctx) :-
 	\+ '$lgt_pp_entity'(_, _, _, _, _),					% directive occurs before opening entity directive
 	functor(Dir, Functor, Arity),
-	\+ '$lgt_lgt_opening_directive'(Functor, Arity),
+	\+ '$lgt_logtalk_opening_directive'(Functor, Arity),
 	!,
 	'$lgt_tr_file_directive'(Dir, Ctx).					% translate it as a source file-level directive
 
 '$lgt_tr_directive'(Dir, Ctx) :-						% entity closing directive
 	functor(Dir, Functor, Arity),
-	'$lgt_lgt_closing_directive'(Functor, Arity),
+	'$lgt_logtalk_closing_directive'(Functor, Arity),
 	Dir =.. [Functor| Args],
 	catch(
 		'$lgt_tr_directive'(Functor, Args, Ctx),
@@ -6045,7 +6045,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_tr_directive'(Dir, Ctx) :-						% entity opening directive or entity directive
 	functor(Dir, Functor, Arity),
-	'$lgt_lgt_directive'(Functor, Arity),
+	'$lgt_logtalk_directive'(Functor, Arity),
 	Dir =.. [Functor| Args],
 	catch(
 		'$lgt_tr_directive'(Functor, Args, Ctx),
@@ -14896,7 +14896,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	functor(Meta, call, Arity),
 	Closure is Arity - 1,
 	arg(1, Meta, Closure),
-	'$lgt_lgt_meta_predicate_call_n_args'(Arity, Meta).
+	'$lgt_built_in_method_call_n_args'(Arity, Meta).
 '$lgt_built_in_method'(once, 1, p, once(0), 1).
 '$lgt_built_in_method'(ignore, 1, p, ignore(0), 1).
 '$lgt_built_in_method'(!, 0, p(p(p)), no, 1).
@@ -14918,12 +14918,12 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_built_in_method'(setof, 3, p, setof(*, ^, *), 1).
 
 
-'$lgt_lgt_meta_predicate_call_n_args'(1, _) :-
+'$lgt_built_in_method_call_n_args'(1, _) :-
 	!.
-'$lgt_lgt_meta_predicate_call_n_args'(N, Meta) :-
+'$lgt_built_in_method_call_n_args'(N, Meta) :-
 	arg(N, Meta, *),
 	N2 is N - 1,
-	'$lgt_lgt_meta_predicate_call_n_args'(N2, Meta).
+	'$lgt_built_in_method_call_n_args'(N2, Meta).
 
 
 
@@ -14937,101 +14937,102 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-%'$lgt_lgt_directive'(+atom, +integer)
+%'$lgt_logtalk_directive'(+atom, +integer)
 %
 % valid Logtalk directives
 
-'$lgt_lgt_directive'(Functor, Arity) :-
-	'$lgt_lgt_opening_directive'(Functor, Arity),
+'$lgt_logtalk_directive'(Functor, Arity) :-
+	'$lgt_logtalk_opening_directive'(Functor, Arity),
 	!.
 
-'$lgt_lgt_directive'(Functor, Arity) :-
-	'$lgt_lgt_closing_directive'(Functor, Arity),
+'$lgt_logtalk_directive'(Functor, Arity) :-
+	'$lgt_logtalk_closing_directive'(Functor, Arity),
 	!.
 
-'$lgt_lgt_directive'(Functor, Arity) :-
-	'$lgt_lgt_entity_directive'(Functor, Arity),
+'$lgt_logtalk_directive'(Functor, Arity) :-
+	'$lgt_logtalk_entity_directive'(Functor, Arity),
 	!.
 
-'$lgt_lgt_directive'(Functor, Arity) :-
-	'$lgt_lgt_predicate_directive'(Functor, Arity).
+'$lgt_logtalk_directive'(Functor, Arity) :-
+	'$lgt_logtalk_predicate_directive'(Functor, Arity).
 
 
-'$lgt_lgt_opening_directive'(object, N) :-
+'$lgt_logtalk_opening_directive'(object, N) :-
 	N >= 1, N =< 5.
-'$lgt_lgt_opening_directive'(category, N) :-
+'$lgt_logtalk_opening_directive'(category, N) :-
 	N >= 1, N =< 3.
-'$lgt_lgt_opening_directive'(protocol, N) :-
+'$lgt_logtalk_opening_directive'(protocol, N) :-
 	N >= 1, N =< 2.
-'$lgt_lgt_opening_directive'(module, N) :-				% Prolog module directives; module/3 directives
-	N >= 1, N =< 3.										% are not supported but must be recognized as
-														% entity opening directives
-
-'$lgt_lgt_closing_directive'(end_object, 0).
-'$lgt_lgt_closing_directive'(end_category, 0).
-'$lgt_lgt_closing_directive'(end_protocol, 0).
+'$lgt_logtalk_opening_directive'(module, N) :-
+	% Prolog module directives; module/3 directives
+	% are not supported but must be recognized as
+	% entity opening directives
+	N >= 1, N =< 3.									
 
 
-'$lgt_lgt_entity_directive'(encoding, 1).
-'$lgt_lgt_entity_directive'(calls, N) :-
+'$lgt_logtalk_closing_directive'(end_object, 0).
+'$lgt_logtalk_closing_directive'(end_category, 0).
+'$lgt_logtalk_closing_directive'(end_protocol, 0).
+
+
+'$lgt_logtalk_entity_directive'(encoding, 1).
+'$lgt_logtalk_entity_directive'(calls, N) :-
 	N >= 1.
-'$lgt_lgt_entity_directive'(uses, N) :-
+'$lgt_logtalk_entity_directive'(uses, N) :-
 	N >= 1, N =< 2.
-'$lgt_lgt_entity_directive'(use_module, 2).				% Prolog module directive
-'$lgt_lgt_entity_directive'((initialization), 1).
-'$lgt_lgt_entity_directive'((dynamic), 0).
-'$lgt_lgt_entity_directive'(op, 3).
-'$lgt_lgt_entity_directive'(info, 1).
-'$lgt_lgt_entity_directive'(synchronized, 0).
-'$lgt_lgt_entity_directive'(threaded, 0).
-'$lgt_lgt_entity_directive'(set_logtalk_flag, 2).
+'$lgt_logtalk_entity_directive'(use_module, 2).				% Prolog module directive
+'$lgt_logtalk_entity_directive'((initialization), 1).
+'$lgt_logtalk_entity_directive'((dynamic), 0).
+'$lgt_logtalk_entity_directive'(op, 3).
+'$lgt_logtalk_entity_directive'(info, 1).
+'$lgt_logtalk_entity_directive'(synchronized, 0).
+'$lgt_logtalk_entity_directive'(threaded, 0).
+'$lgt_logtalk_entity_directive'(set_logtalk_flag, 2).
 
 
-'$lgt_lgt_predicate_directive'(synchronized, N) :-
+'$lgt_logtalk_predicate_directive'(synchronized, N) :-
 	N >= 1.
-'$lgt_lgt_predicate_directive'((dynamic), N) :-
+'$lgt_logtalk_predicate_directive'((dynamic), N) :-
 	N >= 1.
-'$lgt_lgt_predicate_directive'((meta_predicate), N) :-	% Logtalk directive
+'$lgt_logtalk_predicate_directive'((meta_predicate), N) :-	% Logtalk directive
 	N >= 1.
-'$lgt_lgt_predicate_directive'((meta_non_terminal), N) :-
+'$lgt_logtalk_predicate_directive'((meta_non_terminal), N) :-
 	N >= 1.
-'$lgt_lgt_predicate_directive'((discontiguous), N) :-
+'$lgt_logtalk_predicate_directive'((discontiguous), N) :-
 	N >= 1.
-'$lgt_lgt_predicate_directive'((public), N) :-
+'$lgt_logtalk_predicate_directive'((public), N) :-
 	N >= 1.
-'$lgt_lgt_predicate_directive'(protected, N) :-
+'$lgt_logtalk_predicate_directive'(protected, N) :-
 	N >= 1.
-'$lgt_lgt_predicate_directive'(private, N) :-
+'$lgt_logtalk_predicate_directive'(private, N) :-
 	N >= 1.
-'$lgt_lgt_predicate_directive'((export), N) :-			% Prolog module directive
+'$lgt_logtalk_predicate_directive'((export), N) :-			% Prolog module directive
 	N >= 1.
-'$lgt_lgt_predicate_directive'(reexport, 2).			% Prolog module directive
-'$lgt_lgt_predicate_directive'((mode), 2).
-'$lgt_lgt_predicate_directive'(info, 2).
-'$lgt_lgt_predicate_directive'(alias, 3).
-'$lgt_lgt_predicate_directive'((multifile), N) :-
+'$lgt_logtalk_predicate_directive'(reexport, 2).			% Prolog module directive
+'$lgt_logtalk_predicate_directive'((mode), 2).
+'$lgt_logtalk_predicate_directive'(info, 2).
+'$lgt_logtalk_predicate_directive'(alias, 3).
+'$lgt_logtalk_predicate_directive'((multifile), N) :-
 	N >= 1.
-'$lgt_lgt_predicate_directive'((coinductive), N) :-
+'$lgt_logtalk_predicate_directive'((coinductive), N) :-
 	N >= 1.
-'$lgt_lgt_predicate_directive'(annotation, N) :-		% experimental directive
+'$lgt_logtalk_predicate_directive'(annotation, N) :-		% experimental directive
 	N >= 1.
 
 
 
 % conditional compilation directives
 
-'$lgt_lgt_cc_directive'(Term) :-
-	nonvar(Term),
-	Term = (:- Directive),
+'$lgt_conditional_compilation_directive'((:- Directive)) :-
 	nonvar(Directive),
 	functor(Directive, Functor, Arity),
-	'$lgt_lgt_cc_directive'(Functor, Arity).
+	'$lgt_conditional_compilation_directive'(Functor, Arity).
 
 
-'$lgt_lgt_cc_directive'(if,    1).
-'$lgt_lgt_cc_directive'(elif,  1).
-'$lgt_lgt_cc_directive'(else,  0).
-'$lgt_lgt_cc_directive'(endif, 0).
+'$lgt_conditional_compilation_directive'(if,    1).
+'$lgt_conditional_compilation_directive'(elif,  1).
+'$lgt_conditional_compilation_directive'(else,  0).
+'$lgt_conditional_compilation_directive'(endif, 0).
 
 
 

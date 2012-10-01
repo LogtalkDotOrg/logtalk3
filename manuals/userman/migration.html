@@ -174,13 +174,13 @@ The symbolic links or shortcuts can also be easily created on most operating-sys
 <h2 id="migration_proprietary">Dealing with proprietary Prolog directives and predicates</h2>
 
 <p>
-Most Prolog compilers define proprietary, non-standard directives and predicates that may be used in both plain code and module code. Non-standard Prolog built-in predicates are usually not problematic, as Logtalk is usually able to identify and compile them correctly (but see the notes on built-in meta-predicates for some caveats). However, Logtalk will generate compilation errors on source files containing proprietary directives unless you first specify how the directives should be handled. Several actions are possible on a per-directive basis: ignoring the directive (i.e. do not copy the directive, although a goal can be proved as a consequence), rewriting and copy the directive to the generated Prolog files, or rewriting and recompiling the resulting directive. To specify these actions, the adapter files contain clauses for the <code>'$lgt_pl_term_expansion'/2</code> predicate. For example, assume that a given Prolog compiler defines a <code>comment/2</code> directive for predicates using the format:
+Most Prolog compilers define proprietary, non-standard directives and predicates that may be used in both plain code and module code. Non-standard Prolog built-in predicates are usually not problematic, as Logtalk is usually able to identify and compile them correctly (but see the notes on built-in meta-predicates for some caveats). However, Logtalk will generate compilation errors on source files containing proprietary directives unless you first specify how the directives should be handled. Several actions are possible on a per-directive basis: ignoring the directive (i.e. do not copy the directive, although a goal can be proved as a consequence), rewriting and copy the directive to the generated Prolog files, or rewriting and recompiling the resulting directive. To specify these actions, the adapter files contain clauses for the <code>'$lgt_prolog_term_expansion'/2</code> predicate. For example, assume that a given Prolog compiler defines a <code>comment/2</code> directive for predicates using the format:
 </p>
 <pre>:- comment(foo/2, "Brief description of the predicate").</pre>
 <p>
-We can rewrite this predicate into a Logtalk <code>info/2</code> directive by defining a suitable clause for the <code>'$lgt_pl_term_expansion'/2</code> predicate:
+We can rewrite this predicate into a Logtalk <code>info/2</code> directive by defining a suitable clause for the <code>'$lgt_prolog_term_expansion'/2</code> predicate:
 </p>
-<pre>'$lgt_pl_term_expansion'(comment(F/A, String), info(F/A, [comment is Atom])) :-
+<pre>'$lgt_prolog_term_expansion'(comment(F/A, String), info(F/A, [comment is Atom])) :-
     atom_codes(Atom, String).</pre>
 <p>
 This Logtalk feature can be used to allow compilation of legacy Prolog code without the need of changing the sources. When used, is advisable to set the <code>portability/1</code> compiler flag to <code>warning</code> in order to more easily identify source files that are likely non-portable across Prolog compilers. 
@@ -188,10 +188,10 @@ This Logtalk feature can be used to allow compilation of legacy Prolog code with
 <p>
 A second example, where a proprietary Prolog directive is discarded after triggering a side-effect:
 </p>
-<pre>'$lgt_pl_term_expansion'(load_foreign_files(Files,Libs,InitRoutine), []) :-
+<pre>'$lgt_prolog_term_expansion'(load_foreign_files(Files,Libs,InitRoutine), []) :-
     load_foreign_files(Files,Libs,InitRoutine).</pre>
 <p>
-In this case, although the directive is not copied to the generated Prolog file, the foreign library files are loaded as a side-effect of the Logtalk compiler calling the <code>'$lgt_pl_term_expansion'/2</code> hook predicate.
+In this case, although the directive is not copied to the generated Prolog file, the foreign library files are loaded as a side-effect of the Logtalk compiler calling the <code>'$lgt_prolog_term_expansion'/2</code> hook predicate.
 </p>
 
 
