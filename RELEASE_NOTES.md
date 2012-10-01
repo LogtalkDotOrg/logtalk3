@@ -31,6 +31,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: Defined all Logtalk and Prolog control constructs as built-in
+methods. This allows better error messages when trying to use private
+control constructs as messages without changing the operational semantics.
+
 * IMPROVED: Modified the compiler to generate an error for redefinitions
 of the built-in control constructs `true/0`, `fail/0`, and `repeat/0`.
 In previous versions, the redefinitions were accepted but ignored.

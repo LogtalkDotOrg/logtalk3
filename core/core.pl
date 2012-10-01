@@ -8419,22 +8419,12 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	throw(permission_error(define, dynamic_predicate, Functor/Arity)).
 
 
-% redefinition of Logtalk message sending and remaining control constructs
-% (note that ::/2 can be used in a clause head when defining multifile predicates
-% and that {}/1 can be used to represent a pre-compiled clause head)
-
-'$lgt_tr_head'(Head, _, _) :-
-	'$lgt_built_in_control_construct'(Head),
-	Head \= _::_,
-	Head \= {_},
-	functor(Head, Functor, Arity),
-	throw(permission_error(modify, control_construct, Functor/Arity)).
-
-
 % redefinition of Logtalk built-in methods
+% (note that ::/2 can be used in a clause head when defining multifile predicates)
 
 '$lgt_tr_head'(Head, _, _) :-
 	'$lgt_built_in_method'(Head, _, _, Flags),
+	Head \= _::_,
 	Flags /\ 2 =\= 2,	% static built-in predicate
 	functor(Head, Functor, Arity),
 	throw(permission_error(modify, built_in_method, Functor/Arity)).
@@ -14845,29 +14835,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% Logtalk built-in control constructs (includes standard Prolog control constructs)
-%
-% '$lgt_built_in_control_construct'(@callable)
-
-% Logtalk
-'$lgt_built_in_control_construct'(_::_).	% message to object
-'$lgt_built_in_control_construct'(::_).		% message to self
-'$lgt_built_in_control_construct'(^^_).		% "super" call
-'$lgt_built_in_control_construct'(_<<_).	% context-switching call
-'$lgt_built_in_control_construct'(_>>_).	% lambda expression
-'$lgt_built_in_control_construct'(:_).		% category predicate call
-'$lgt_built_in_control_construct'({_}).		% compiler bypass
-% Prolog
-'$lgt_built_in_control_construct'((_, _)).
-'$lgt_built_in_control_construct'((_; _)).
-'$lgt_built_in_control_construct'((_ -> _)).
-'$lgt_built_in_control_construct'(!).
-'$lgt_built_in_control_construct'(true).
-'$lgt_built_in_control_construct'(fail).
-'$lgt_built_in_control_construct'(repeat).
-
-
-
 % Logtalk built-in methods
 %
 % '$lgt_built_in_method'(@callable, ?scope, ?callable, ?integer)
@@ -14877,6 +14844,29 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_built_in_method'(Functor, Arity, Scope, Meta, Flags).
 
 
+% control constructs
+'$lgt_built_in_method'((::), Arity, p, Meta, 1) :-
+	(	Arity =:= 2 ->
+		Meta = '::'(*, 0)
+	;	Arity =:= 1,
+		Meta = '::'(0)
+	).
+'$lgt_built_in_method'((^^), 1, p, '^^'(0), 1).
+'$lgt_built_in_method'((<<), 2, p, '<<'(*, 0), 1).
+'$lgt_built_in_method'((>>), 2, p, '>>'(*, 0), 1).
+'$lgt_built_in_method'((:), Arity, p, Meta, 1) :-
+	(	Arity =:= 2,
+		'$lgt_compiler_flag'(modules, supported) ->
+		Meta = ':'(*, 0)
+	;	Arity =:= 1,
+		Meta = ':'(0)
+	).
+'$lgt_built_in_method'(({}), 1, p, '{}'(0), 1).
+'$lgt_built_in_method'((,), 2, p(p(p)), ','(0, 0), 1).
+'$lgt_built_in_method'((;), 2, p(p(p)), ';'(0, 0), 1).
+'$lgt_built_in_method'((->), 2, p(p(p)), '->'(0, 0), 1).
+'$lgt_built_in_method'((*->), 2, p(p(p)), '*->'(0, 0), 1) :-
+	'$lgt_pl_built_in'('*->'(_, _)).
 % reflection methods
 '$lgt_built_in_method'(current_predicate, 1, p(p(p)), no, 1).
 '$lgt_built_in_method'(predicate_property, 2, p(p(p)), no, 1).
@@ -14898,7 +14888,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		Meta = phrase(2, *, *)
 	).
 % meta-calls plus logic and control methods
-'$lgt_built_in_method'((\+) , 1, p, \+ (0), 1).
+'$lgt_built_in_method'((\+) , 1, p, '\+'(0), 1).
 '$lgt_built_in_method'(call, Arity, p, Meta, 1) :-  % call/1-N
 	Arity > 0,
 	functor(Meta, call, Arity),
@@ -14907,6 +14897,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_lgt_meta_predicate_call_n_args'(Arity, Meta).
 '$lgt_built_in_method'(once, 1, p, once(0), 1).
 '$lgt_built_in_method'(ignore, 1, p, ignore(0), 1).
+'$lgt_built_in_method'(!, 0, p(p(p)), no, 1).
+'$lgt_built_in_method'(true, 0, p(p(p)), no, 1).
+'$lgt_built_in_method'(fail, 0, p(p(p)), no, 1).
+'$lgt_built_in_method'(repeat, 0, p(p(p)), no, 1).
 % exception handling methods
 '$lgt_built_in_method'(catch, 3, p, catch(0, *, 0), 1).
 '$lgt_built_in_method'(throw, 1, p, no, 1).
