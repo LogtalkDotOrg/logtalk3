@@ -14862,7 +14862,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		Meta = ':'(0)
 	).
 '$lgt_built_in_method'(({}), 1, p, '{}'(0), 1).
-'$lgt_built_in_method'((,), 2, p(p(p)), ','(0, 0), 1).
+'$lgt_built_in_method'((','), 2, p(p(p)), ','(0, 0), 1).
 '$lgt_built_in_method'((;), 2, p(p(p)), ';'(0, 0), 1).
 '$lgt_built_in_method'((->), 2, p(p(p)), '->'(0, 0), 1).
 '$lgt_built_in_method'((*->), 2, p(p(p)), '*->'(0, 0), 1) :-
@@ -14888,7 +14888,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		Meta = phrase(2, *, *)
 	).
 % meta-calls plus logic and control methods
-'$lgt_built_in_method'((\+) , 1, p, '\+'(0), 1).
+'$lgt_built_in_method'((\+), 1, p, \+ 0, 1).
 '$lgt_built_in_method'(call, Arity, p, Meta, 1) :-  % call/1-N
 	Arity > 0,
 	functor(Meta, call, Arity),
