@@ -1903,9 +1903,11 @@ logtalk_compile(Files, Flags) :-
 % clears the compiler flag options
 
 '$lgt_clear_compiler_flags' :-
-	retractall('$lgt_pp_file_compiler_flag_'(_, _)),	% retract file flag values
-	retractall('$lgt_pp_hook_term_expansion_'(_, _)),	% plus any term and
-	retractall('$lgt_pp_hook_goal_expansion_'(_, _)).	% goal expansion hooks
+	% retract file flag values
+	retractall('$lgt_pp_file_compiler_flag_'(_, _)),
+	% plus any term and goal expansion hooks
+	retractall('$lgt_pp_hook_term_expansion_'(_, _)),
+	retractall('$lgt_pp_hook_goal_expansion_'(_, _)).
 
 
 
@@ -6019,10 +6021,12 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 % remaining directives
 
-'$lgt_tr_directive'(Dir, _) :-							% closing entity directive occurs before the opening
-	\+ '$lgt_pp_entity'(_, _, _, _, _),					% entity directive; the opening directive is probably
-	functor(Dir, Functor, Arity),						% missing or misspelt
+'$lgt_tr_directive'(Dir, _) :-
+	\+ '$lgt_pp_entity'(_, _, _, _, _),
+	functor(Dir, Functor, Arity),
 	'$lgt_logtalk_closing_directive'(Functor, Arity),
+	% closing entity directive occurs before the opening entity directive;
+	% the opening directive is probably missing or misspelt
 	(	Functor = end_object ->
 		throw(error(existence_error(opening_directive, object/1), directive(Dir)))
 	;	Functor = end_protocol ->
@@ -6032,15 +6036,18 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	).
 
 '$lgt_tr_directive'(Dir, Ctx) :-
-	\+ '$lgt_pp_entity'(_, _, _, _, _),					% directive occurs before opening entity directive
+	\+ '$lgt_pp_entity'(_, _, _, _, _),
+	% directive occurs before opening entity directive
 	functor(Dir, Functor, Arity),
 	\+ '$lgt_logtalk_opening_directive'(Functor, Arity),
 	!,
-	'$lgt_tr_file_directive'(Dir, Ctx).					% translate it as a source file-level directive
+	% translate it as a source file-level directive
+	'$lgt_tr_file_directive'(Dir, Ctx).
 
-'$lgt_tr_directive'(Dir, Ctx) :-						% entity closing directive
+'$lgt_tr_directive'(Dir, Ctx) :-
 	functor(Dir, Functor, Arity),
 	'$lgt_logtalk_closing_directive'(Functor, Arity),
+	% entity closing directive
 	Dir =.. [Functor| Args],
 	catch(
 		'$lgt_tr_directive'(Functor, Args, Ctx),
@@ -6051,9 +6058,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		)),
 	!.
 
-'$lgt_tr_directive'(Dir, Ctx) :-						% entity opening directive or entity directive
+'$lgt_tr_directive'(Dir, Ctx) :-
 	functor(Dir, Functor, Arity),
 	'$lgt_logtalk_directive'(Functor, Arity),
+	% entity opening directive or entity directive
 	Dir =.. [Functor| Args],
 	catch(
 		'$lgt_tr_directive'(Functor, Args, Ctx),
@@ -6071,7 +6079,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	Dir =.. [Functor| Args],
 	Meta =.. [Functor| MArgs],
 	'$lgt_pp_entity'(_, Entity, Prefix, _, _),
-	'$lgt_comp_ctx'(Ctx, _, Entity, Entity, Entity, Prefix, [], _, _, _, _),	% MetaVars = [] as we're compiling a local call
+	% MetaVars = [] as we're compiling a local call
+	'$lgt_comp_ctx'(Ctx, _, Entity, Entity, Entity, Prefix, [], _, _, _, _),
 	(	'$lgt_tr_prolog_meta_arguments'(Args, MArgs, Ctx, TArgs, DArgs) ->
 		(	'$lgt_compiler_flag'(debug, on) ->
 			TDir =.. [Functor| DArgs]
@@ -6087,9 +6096,12 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_pp_module_'(_),
 	% we're compiling a module as an object
 	(	functor(Dir, Functor, Arity), '$lgt_pp_defines_predicate_'(Functor, Arity, _, _)
-	;	'$lgt_pp_uses_predicate_'(_, _, Dir)			% directive is a query for a locally defined predicate
-	;	'$lgt_pp_use_module_predicate_'(_, _, Dir)		% or a predicate referenced in a use_module/2 directive
-	;	'$lgt_is_built_in_predicate'(Dir)							% or a built-in predicate
+	;	'$lgt_pp_uses_predicate_'(_, _, Dir)
+		% directive is a query for a locally defined predicate
+	;	'$lgt_pp_use_module_predicate_'(_, _, Dir)
+		% or a predicate referenced in a use_module/2 directive
+	;	'$lgt_is_built_in_predicate'(Dir)
+		% or a built-in predicate
 	),
 	!,
 	% translate query as an initialization goal
@@ -6289,7 +6301,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_tr_directive'(module, [Module], Ctx) :-
 	!,
-	'$lgt_tr_directive'(module, [Module, []], Ctx).		% empty export list
+	% empty export list
+	'$lgt_tr_directive'(module, [Module, []], Ctx).
 
 '$lgt_tr_directive'(module, [Module, Exports], Ctx) :-
 	'$lgt_must_be'(module_identifier, Module),
@@ -8428,11 +8441,12 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 % redefinition of Logtalk built-in methods
-% (note that ::/2 can be used in a clause head when defining multifile predicates)
+% (note that ::/2 and :/2 can be used in a clause head when defining multifile predicates)
 
 '$lgt_tr_head'(Head, _, _) :-
 	'$lgt_built_in_method'(Head, _, _, Flags),
 	Head \= _::_,
+	Head \= ':'(_, _),
 	Flags /\ 2 =\= 2,	% static built-in predicate
 	functor(Head, Functor, Arity),
 	throw(permission_error(modify, built_in_method, Functor/Arity)).
