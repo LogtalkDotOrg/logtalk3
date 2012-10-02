@@ -271,7 +271,7 @@
 :- dynamic('$lgt_pp_redefined_built_in_'/3).				% '$lgt_pp_redefined_built_in_'(Head, ExCtx, THead)
 
 :- dynamic('$lgt_pp_directive_'/1).							% '$lgt_pp_directive_'(Dir)
-:- dynamic('$lgt_pp_prolog_term_'/2).						% '$lgt_pp_prolog_term_'(Clause, Location)
+:- dynamic('$lgt_pp_prolog_term_'/2).						% '$lgt_pp_prolog_term_'(Term, Location)
 :- dynamic('$lgt_pp_entity_runtime_clause_'/1).				% '$lgt_pp_entity_runtime_clause_'(Clause)
 :- dynamic('$lgt_pp_entity_clause_'/2).						% '$lgt_pp_entity_clause_'(Clause, Location)
 :- dynamic('$lgt_pp_final_entity_clause_'/2).				% '$lgt_pp_final_entity_clause_'(Clause, Location)
@@ -3106,42 +3106,50 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % '$lgt_expand_goal'(+object_identifier, ?term, ?term, +object_identifier, @scope)
 %
 % expand_goal/2 built-in method
+%
+% it calls the goal_expansion/2 user-defined method if the sender is within scope;
+% when there is no scope directive but the sender and the target objects are the
+% same, it calls any local definition of the goal_expansion/2 user-defined method
 
 '$lgt_expand_goal'(Obj, Goal, ExpandedGoal, Sender, Scope) :-
-	(	var(Goal) ->
-		ExpandedGoal = Goal
-	;	'$lgt_goal_expansion'(Obj, Goal, Expanded, Sender, Scope) ->
-		'$lgt_expand_goal'(Obj, Expanded, ExpandedGoal, Sender, Scope)
-	;	ExpandedGoal = Goal
-	).
-
-
-
-% '$lgt_goal_expansion'(+object_identifier, ?term, ?term, +object_identifier, @scope)
-%
-% calls the goal_expansion/2 user-defined predicate
-%
-% if there is a scope directive, then the call fails if the sender is not within scope;
-% when there is no scope directive, then we call any local definition when the sender
-% and the target object are the same
-
-'$lgt_goal_expansion'(Obj, Goal, Expansion, Sender, Scope) :-
 	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, _, DDef, _, _),
 	(	call(Dcl, goal_expansion(_, _), PScope, _, _, SCtn, _) ->
 		(	(\+ \+ PScope = Scope; Sender = SCtn) ->
 			'$lgt_exec_ctx'(ExCtx, Sender, Obj, Obj, _, _),
-			call(Def, goal_expansion(Goal, Expansion), ExCtx, Call, _)
-		;	fail
+			'$lgt_expand_goal_scoped'(Obj, Goal, ExpandedGoal, Sender, Scope, Def, ExCtx)
+		;	ExpandedGoal = Goal
 		)
-	;	Obj = Sender,
+	;	Obj = Sender ->
 		'$lgt_exec_ctx'(ExCtx, Obj, Obj, Obj, _, _),
-		(	call(Def, goal_expansion(Goal, Expansion), ExCtx, Call) ->
-			true
-		;	call(DDef, goal_expansion(Goal, Expansion), ExCtx, Call)
+		'$lgt_expand_goal_local'(Obj, Goal, ExpandedGoal, Sender, Scope, Def, DDef, ExCtx)
+	;	ExpandedGoal = Goal
+	).
+
+
+'$lgt_expand_goal_scoped'(Obj, Goal, ExpandedGoal, Sender, Scope, Def, ExCtx) :-
+	(	var(Goal) ->
+		ExpandedGoal = Goal
+	;	call(Def, goal_expansion(Goal, ExpandedGoal0), ExCtx, Call, _) ->
+		(	call(Call) ->
+			'$lgt_expand_goal_scoped'(Obj, ExpandedGoal0, ExpandedGoal, Sender, Scope, Def, ExCtx)
+		;	ExpandedGoal = Goal
 		)
-	),
-	!,
-	once(Call).
+	;	ExpandedGoal = Goal
+	).
+
+
+'$lgt_expand_goal_local'(Obj, Goal, ExpandedGoal, Sender, Scope, Def, DDef, ExCtx) :-
+	(	var(Goal) ->
+		ExpandedGoal = Goal
+	;	(	call(Def, goal_expansion(Goal, ExpandedGoal0), ExCtx, Call)
+		;	call(DDef, goal_expansion(Goal, ExpandedGoal0), ExCtx, Call)
+		) ->
+		(	call(Call) ->
+			'$lgt_expand_goal_local'(Obj, ExpandedGoal0, ExpandedGoal, Sender, Scope, Def, DDef, ExCtx)
+		;	ExpandedGoal = Goal
+		)
+	;	ExpandedGoal = Goal
+	).
 
 
 

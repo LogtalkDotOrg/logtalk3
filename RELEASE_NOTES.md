@@ -31,6 +31,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: Optimized the implementation of the `expand_goal/2` built-in
+method by avoiding repeated lookups of the declaration of the user-defined
+`goal_expansion/2` method.
+
 * CHANGED: Defined all Logtalk and Prolog control constructs as built-in
 methods. This allows better error messages when trying to use private
 control constructs as messages without changing the operational semantics.
