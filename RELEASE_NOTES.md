@@ -31,9 +31,6 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* FIXED: Don't supress generation of entity compilation warning messages
-when the `report` flag is turned off.
-
 * IMPROVED: Optimized the implementation of the `expand_goal/2` built-in
 method by avoiding repeated lookups of the declaration of the user-defined
 `goal_expansion/2` method.
