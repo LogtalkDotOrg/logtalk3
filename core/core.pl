@@ -11955,9 +11955,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % reports any potential problem found while compiling an entity
 
 '$lgt_report_problems'(Type, Entity) :-
-	(	'$lgt_compiler_flag'(report, off) ->
-		true
-	;	Type == protocol ->
+	(	Type == protocol ->
 		'$lgt_report_unknown_entities'(Type, Entity)
 	;	'$lgt_report_undefined_predicate_calls'(Type, Entity),
 		'$lgt_report_undefined_non_terminal_calls'(Type, Entity),
