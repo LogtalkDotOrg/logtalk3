@@ -1413,7 +1413,7 @@ abolish_events(Event, Obj, Msg, Sender, Monitor) :-
 % threaded(+callable)
 
 threaded(Goals) :-
-	\+ '$lgt_compiler_flag'(threads, supported),
+	\+ '$lgt_prolog_feature'(threads, supported),
 	throw(error(resource_error(threads), logtalk(threaded(Goals), _))).
 
 threaded(Goals) :-
@@ -1425,7 +1425,7 @@ threaded(Goals) :-
 % threaded_call(@callable, -nonvar)
 
 threaded_call(Goal, Tag) :-
-	\+ '$lgt_compiler_flag'(threads, supported),
+	\+ '$lgt_prolog_feature'(threads, supported),
 	throw(error(resource_error(threads), logtalk(threaded_call(Goal, Tag), _))).
 
 threaded_call(Goal, Tag) :-
@@ -1438,7 +1438,7 @@ threaded_call(Goal, Tag) :-
 % threaded_call(@callable)
 
 threaded_call(Goal) :-
-	\+ '$lgt_compiler_flag'(threads, supported),
+	\+ '$lgt_prolog_feature'(threads, supported),
 	throw(error(resource_error(threads), logtalk(threaded_call(Goal), _))).
 
 threaded_call(Goal) :-
@@ -1450,7 +1450,7 @@ threaded_call(Goal) :-
 % threaded_once(@callable, -nonvar)
 
 threaded_once(Goal, Tag) :-
-	\+ '$lgt_compiler_flag'(threads, supported),
+	\+ '$lgt_prolog_feature'(threads, supported),
 	throw(error(resource_error(threads), logtalk(threaded_once(Goal, Tag), _))).
 
 threaded_once(Goal, Tag) :-
@@ -1463,7 +1463,7 @@ threaded_once(Goal, Tag) :-
 % threaded_once(@callable)
 
 threaded_once(Goal) :-
-	\+ '$lgt_compiler_flag'(threads, supported),
+	\+ '$lgt_prolog_feature'(threads, supported),
 	throw(error(resource_error(threads), logtalk(threaded_once(Goal), _))).
 
 threaded_once(Goal) :-
@@ -1475,7 +1475,7 @@ threaded_once(Goal) :-
 % threaded_ignore(@callable)
 
 threaded_ignore(Goal) :-
-	\+ '$lgt_compiler_flag'(threads, supported),
+	\+ '$lgt_prolog_feature'(threads, supported),
 	throw(error(resource_error(threads), logtalk(threaded_ignore(Goal), _))).
 
 threaded_ignore(Goal) :-
@@ -1486,7 +1486,7 @@ threaded_ignore(Goal) :-
 % threaded_exit(+callable, +nonvar)
 
 threaded_exit(Goal, Tag) :-
-	\+ '$lgt_compiler_flag'(threads, supported),
+	\+ '$lgt_prolog_feature'(threads, supported),
 	throw(error(resource_error(threads), logtalk(threaded_exit(Goal, Tag), _))).
 
 threaded_exit(Goal, Tag) :-
@@ -1499,7 +1499,7 @@ threaded_exit(Goal, Tag) :-
 % threaded_exit(+callable)
 
 threaded_exit(Goal) :-
-	\+ '$lgt_compiler_flag'(threads, supported),
+	\+ '$lgt_prolog_feature'(threads, supported),
 	throw(error(resource_error(threads), logtalk(threaded_exit(Goal), _))).
 
 threaded_exit(Goal) :-
@@ -1511,7 +1511,7 @@ threaded_exit(Goal) :-
 % threaded_peek(+callable, +nonvar)
 
 threaded_peek(Goal, Tag) :-
-	\+ '$lgt_compiler_flag'(threads, supported),
+	\+ '$lgt_prolog_feature'(threads, supported),
 	throw(error(resource_error(threads), logtalk(threaded_peek(Goal, Tag), _))).
 
 threaded_peek(Goal, Tag) :-
@@ -1524,7 +1524,7 @@ threaded_peek(Goal, Tag) :-
 % threaded_peek(+callable)
 
 threaded_peek(Goal) :-
-	\+ '$lgt_compiler_flag'(threads, supported),
+	\+ '$lgt_prolog_feature'(threads, supported),
 	throw(error(resource_error(threads), logtalk(threaded_peek(Goal), _))).
 
 threaded_peek(Goal) :-
@@ -1536,7 +1536,7 @@ threaded_peek(Goal) :-
 % threaded_wait(?nonvar)
 
 threaded_wait(Message) :-
-	\+ '$lgt_compiler_flag'(threads, supported),
+	\+ '$lgt_prolog_feature'(threads, supported),
 	throw(error(resource_error(threads), logtalk(threaded_wait(Message), _))).
 
 threaded_wait(Message) :-
@@ -1547,7 +1547,7 @@ threaded_wait(Message) :-
 % threaded_notify(@term)
 
 threaded_notify(Message) :-
-	\+ '$lgt_compiler_flag'(threads, supported),
+	\+ '$lgt_prolog_feature'(threads, supported),
 	throw(error(resource_error(threads), logtalk(threaded_notify(Message), _))).
 
 threaded_notify(Message) :-
@@ -1869,7 +1869,7 @@ logtalk_compile(Files, Flags) :-
 			GoalExpansionGoal = goal_expansion(Goal, ExpandedGoal)
 		;	atom(Object),
 			\+ current_object(Object),
-			'$lgt_compiler_flag'(modules, supported),
+			'$lgt_prolog_feature'(modules, supported),
 			current_module(Object) ->
 			TermExpansionGoal = ':'(Object, term_expansion(Term, Terms)),
 			GoalExpansionGoal = ':'(Object, goal_expansion(Goal, ExpandedGoal))
@@ -3334,7 +3334,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_send_to_obj_nv_inner'(Obj, Pred, _) :-
 	atom(Obj),
-	'$lgt_compiler_flag'(modules, supported),
+	'$lgt_prolog_feature'(modules, supported),
 	current_module(Obj),
 	!,
 	% allow Obj::Pred to be used as a shortcut for calling module predicates
@@ -3454,7 +3454,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_send_to_obj_ne_nv'(Obj, Pred, _) :-
 	atom(Obj),
-	'$lgt_compiler_flag'(modules, supported),
+	'$lgt_prolog_feature'(modules, supported),
 	current_module(Obj),
 	!,
 	% allow Obj::Pred to be used as a shortcut for calling module predicates
@@ -4263,12 +4263,12 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 '$lgt_current_object_'(logtalk, '$lgt_logtalk.', '$lgt_logtalk._dcl', '$lgt_logtalk._def', '$lgt_logtalk._super', '$lgt_logtalk._idcl', '$lgt_logtalk._idef', '$lgt_logtalk._ddcl', '$lgt_logtalk._ddef', '$lgt_logtalk._alias', Flags) :-
-	(	'$lgt_compiler_flag'(threads, supported) ->
+	(	'$lgt_prolog_feature'(threads, supported) ->
 		Flags = 249		% 0b11111001
 	;	Flags = 241		% 0b11110001
 	).
 '$lgt_current_object_'(user, '$lgt_user.', '$lgt_user._dcl', '$lgt_user._def', '$lgt_user._super', '$lgt_user._idcl', '$lgt_user._idef', '$lgt_user._ddcl', '$lgt_user._ddef', '$lgt_user._alias', Flags) :-
-	(	'$lgt_compiler_flag'(threads, supported) ->
+	(	'$lgt_prolog_feature'(threads, supported) ->
 		Flags = 249		% 0b11111001
 	;	Flags = 241		% 0b11110001
 	).
@@ -5000,7 +5000,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_check_for_encoding_directive'((:- encoding(LogtalkEncoding)), Source, Input, NewInput, [encoding(PrologEncoding)|BOM]) :-
 	!,
-	(	\+ '$lgt_compiler_flag'(encoding_directive, unsupported) ->
+	(	\+ '$lgt_prolog_feature'(encoding_directive, unsupported) ->
 		(	% the conversion between Logtalk and Prolog encodings is defined in the adapter files
 			'$lgt_logtalk_prolog_encoding'(LogtalkEncoding, PrologEncoding, Input) ->
 			assertz('$lgt_pp_file_encoding_'(LogtalkEncoding, PrologEncoding)),
@@ -6332,7 +6332,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % create a message queue at object initialization
 
 '$lgt_tr_directive'(threaded, [], _) :-
-	\+ '$lgt_compiler_flag'(threads, supported),
+	\+ '$lgt_prolog_feature'(threads, supported),
 	throw(resource_error(threads)).
 
 '$lgt_tr_directive'(threaded, [], _) :-
@@ -6352,7 +6352,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_tr_directive'(synchronized, [], _) :-
 	!,
-	(	'$lgt_compiler_flag'(threads, supported) ->
+	(	'$lgt_prolog_feature'(threads, supported) ->
 		'$lgt_pp_entity'(_, _, Prefix, _, _),
 		atom_concat(Prefix, 'mutex_', Mutex),
 		assertz('$lgt_pp_synchronized_'),
@@ -6495,7 +6495,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % synchronized/1 predicate directive
 
 '$lgt_tr_directive'(synchronized, Preds, _) :-
-	(	'$lgt_compiler_flag'(threads, supported) ->
+	(	'$lgt_prolog_feature'(threads, supported) ->
 		(	'$lgt_pp_synchronized_' ->
 			'$lgt_inc_compile_warnings_counter'(general),
 			'$lgt_warning_context'(Path, Lines, Type, Entity),
@@ -6589,7 +6589,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 '$lgt_tr_directive'((coinductive), Preds, Ctx) :-
-	(	'$lgt_compiler_flag'(coinduction, supported) ->
+	(	'$lgt_prolog_feature'(coinduction, supported) ->
 		'$lgt_flatten_list'(Preds, Preds2),
 		'$lgt_tr_coinductive_directive'(Preds2, Ctx)
 	;	throw(resource_error(coinduction))
@@ -8598,7 +8598,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % translate the head of a clause of a module predicate (which we assume declared multifile)
 
 '$lgt_tr_head'(':'(Module, Head), THead, Ctx) :-
-	'$lgt_compiler_flag'(modules, supported),
+	'$lgt_prolog_feature'(modules, supported),
 	!,
 	'$lgt_must_be'(module_identifier, Module),
 	'$lgt_must_be'(callable, Head),
@@ -9301,7 +9301,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % calling explicitly qualified module predicates
 
 '$lgt_tr_body'(':'(Module, Pred), TPred, DPred, Ctx) :-
-	'$lgt_compiler_flag'(modules, supported),
+	'$lgt_prolog_feature'(modules, supported),
 	!,
 	'$lgt_must_be'(var_or_module_identifier, Module),
 	'$lgt_must_be'(var_or_callable, Pred),
@@ -9339,7 +9339,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	).
 
 '$lgt_tr_body'('@'(Pred, Module), TPred, '$lgt_debug'(goal('@'(Pred, Module), TPred), ExCtx), Ctx) :-
-	'$lgt_compiler_flag'(modules, supported),
+	'$lgt_prolog_feature'(modules, supported),
 	'$lgt_prolog_built_in_predicate'('@'(_, _)),
 	'$lgt_pp_module_'(_),
 	% we're compiling a module as an object
@@ -9369,7 +9369,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_body'(current_predicate(Term), TPred, DPred, Ctx) :-
 	nonvar(Term),
 	Term = ':'(Module, Pred),
-	'$lgt_compiler_flag'(modules, supported),
+	'$lgt_prolog_feature'(modules, supported),
 	!,
 	(	'$lgt_pp_module_'(_) ->
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
@@ -9398,7 +9398,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_body'(predicate_property(Term, Prop), TPred, DPred, Ctx) :-
 	nonvar(Term),
 	Term = ':'(Module, Pred),
-	'$lgt_compiler_flag'(modules, supported),
+	'$lgt_prolog_feature'(modules, supported),
 	!,
 	(	'$lgt_pp_module_'(_) ->
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
@@ -9428,7 +9428,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_body'(abolish(Term), TCond, DCond, Ctx) :-
 	nonvar(Term),
 	Term = ':'(Module, Pred),
-	'$lgt_compiler_flag'(modules, supported),
+	'$lgt_prolog_feature'(modules, supported),
 	!,
 	(	'$lgt_pp_module_'(_) ->
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
@@ -9478,7 +9478,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_body'(asserta(QClause), TCond, DCond, Ctx) :-
 	nonvar(QClause),
 	QClause = ':'(Module, Clause),
-	'$lgt_compiler_flag'(modules, supported),
+	'$lgt_prolog_feature'(modules, supported),
 	!,
 	(	'$lgt_pp_module_'(_) ->
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
@@ -9531,7 +9531,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_body'(assertz(QClause), TCond, DCond, Ctx) :-
 	nonvar(QClause),
 	QClause = ':'(Module, Clause),
-	'$lgt_compiler_flag'(modules, supported),
+	'$lgt_prolog_feature'(modules, supported),
 	!,
 	(	'$lgt_pp_module_'(_) ->
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
@@ -9584,7 +9584,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_body'(clause(QHead, Body), TCond, DCond, Ctx) :-
 	nonvar(QHead),
 	QHead = ':'(Module, Head),
-	'$lgt_compiler_flag'(modules, supported),
+	'$lgt_prolog_feature'(modules, supported),
 	!,
 	(	'$lgt_pp_module_'(_) ->
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
@@ -9624,7 +9624,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_body'(retract(QClause), TCond, DCond, Ctx) :-
 	nonvar(QClause),
 	QClause = ':'(Module, Clause),
-	'$lgt_compiler_flag'(modules, supported),
+	'$lgt_prolog_feature'(modules, supported),
 	!,
 	(	'$lgt_pp_module_'(_) ->
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
@@ -9679,7 +9679,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_body'(retractall(QHead), TCond, DCond, Ctx) :-
 	nonvar(QHead),
 	QHead = ':'(Module, Head),
-	'$lgt_compiler_flag'(modules, supported),
+	'$lgt_prolog_feature'(modules, supported),
 	!,
 	(	'$lgt_pp_module_'(_) ->
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
@@ -10791,11 +10791,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_tr_msg'(Pred1, Obj, TPred1, This),
 	'$lgt_tr_msg'(Pred2, Obj, TPred2, This).
 
-'$lgt_tr_msg'(!, Obj, ('$lgt_object_exists'(Obj, !, This), !), This) :-
-	!.
-
 
 % built-in methods that cannot be redefined
+
+'$lgt_tr_msg'(!, Obj, ('$lgt_object_exists'(Obj, !, This), !), This) :-
+	!.
 
 '$lgt_tr_msg'(true, Obj, ('$lgt_object_exists'(Obj, true, This), true), This) :-
 	!.
@@ -10960,11 +10960,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_tr_self_msg'(Pred1, TPred1, This, Self),
 	'$lgt_tr_self_msg'(Pred2, TPred2, This, Self).
 
-'$lgt_tr_self_msg'(!, !, _, _) :-
-	!.
-
 
 % built-in methods that cannot be redefined
+
+'$lgt_tr_self_msg'(!, !, _, _) :-
+	!.
 
 '$lgt_tr_self_msg'(true, true, _, _) :-
 	!.
@@ -12028,7 +12028,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		\+ '$lgt_pp_entity_initialization_'(object, Object, _),
 		\+ '$lgt_pp_file_runtime_clause_'('$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _)),
 		% not a currently loaded module:
-		\+ (atom(Object), '$lgt_compiler_flag'(modules, supported), current_module(Object)),
+		\+ (atom(Object), '$lgt_prolog_feature'(modules, supported), current_module(Object)),
 		'$lgt_inc_compile_warnings_counter'(unknown_entities),
 		'$lgt_print_message'(warning(unknown_entities), core, reference_to_unknown_object(Path, Lines, Type, Entity, Object)),
 	fail.
@@ -13359,7 +13359,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % synchronized predicates are compiled as normal predicates
 
 '$lgt_fix_synchronized_predicates' :-
-	\+ '$lgt_compiler_flag'(threads, supported),
+	\+ '$lgt_prolog_feature'(threads, supported),
 	!,
 	(	retract('$lgt_pp_def_'(Def)),
 		assertz('$lgt_pp_final_def_'(Def)),
@@ -13938,7 +13938,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % writes the encoding/1 directive (if it exists); must be the first term in the file
 
 '$lgt_write_encoding_directive'(Stream) :-
-	(	'$lgt_compiler_flag'(encoding_directive, full),
+	(	'$lgt_prolog_feature'(encoding_directive, full),
 		'$lgt_pp_file_encoding_'(_, Encoding) ->
 		write_canonical(Stream, (:- encoding(Encoding))),
 		write(Stream, '.'),
@@ -14880,7 +14880,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_built_in_method'((>>), 2, p, '>>'(*, 0), 1).
 '$lgt_built_in_method'((:), Arity, p, Meta, 1) :-
 	(	Arity =:= 2,
-		'$lgt_compiler_flag'(modules, supported) ->
+		'$lgt_prolog_feature'(modules, supported) ->
 		Meta = ':'(*, 0)
 	;	Arity =:= 1,
 		Meta = ':'(0)
@@ -17793,7 +17793,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % back-end Prolog compilers with bounded integers)
 
 '$lgt_start_runtime_threading' :-
-	(	'$lgt_compiler_flag'(threads, supported),
+	(	'$lgt_prolog_feature'(threads, supported),
 		'$lgt_current_object_'(user, Prefix, _, _, _, _, _, _, _, _, _) ->
 		'$lgt_init_object_message_queue'(Prefix),
 		mutex_create(_, [alias('$lgt_threaded_tag')]),
@@ -17812,8 +17812,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % checks for a compatible back-end Prolog compiler version
 
 '$lgt_check_prolog_version' :-
-	'$lgt_compiler_flag'(prolog_version, Current),
-	'$lgt_compiler_flag'(prolog_compatible_version, Check),
+	'$lgt_prolog_feature'(prolog_version, Current),
+	'$lgt_prolog_feature'(prolog_compatible_version, Check),
 	Check =.. [Operator, Compatible] ->
 	(	call(Operator, Current, Compatible) ->
 		true
