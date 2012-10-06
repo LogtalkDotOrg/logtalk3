@@ -4518,6 +4518,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	).
 
 
+% if the list of tokens unifies with (-), assume it's a variable and ignore it
+
+'$lgt_print_message_tokens'((-), _, _, _).
+
 '$lgt_print_message_tokens'([], _, _, _).
 
 '$lgt_print_message_tokens'([Token| Tokens], Stream, Prefix, ExCtx) :-
@@ -4525,10 +4529,17 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		% token printing intercepted by user-defined code
 		true
 	;	% no user-defined token printing; use Logtalk default
-		'$lgt_print_message_token'(Token, Tokens, Stream, Prefix)
+		'$lgt_print_message_token'(Token, Tokens, Stream, Prefix) ->
+		true
+	;	% unsupported token
+		writeq(Stream, Token)
 	),
 	'$lgt_print_message_tokens'(Tokens, Stream, Prefix, ExCtx).
 
+
+% if a token unifies with (-), assume it's a variable and ignore it
+
+'$lgt_print_message_token'((-), _, _, _).
 
 '$lgt_print_message_token'(at_same_line, _, _, _).
 

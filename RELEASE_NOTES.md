@@ -31,6 +31,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: When using structured message printing, output non-recognized
+tokens as-is. Also, intercept and ignore partial lists of tokens and tokens
+that are variables.
+
 * IMPROVED: Optimized the implementation of the `expand_goal/2` built-in
 method by avoiding repeated lookups of the declaration of the user-defined
 `goal_expansion/2` method.
