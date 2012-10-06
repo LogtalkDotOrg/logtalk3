@@ -4620,22 +4620,22 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % and those used in the compiled code of objects, protocols, and categories
 
 '$lgt_hidden_functor'(Functor) :-
-	atom_concat('$', _, Functor),
+	sub_atom(Functor, 0, 1, _, '$'),
 	!.
 
 '$lgt_hidden_functor'(Functor) :-
 	'$lgt_current_category_'(_, Prefix, _, _, _, _),
-	atom_concat(Prefix, _, Functor),
+	sub_atom(Functor, 0, _, _, Prefix),
 	!.
 
 '$lgt_hidden_functor'(Functor) :-
 	'$lgt_current_object_'(_, Prefix, _, _, _, _, _, _, _, _, _),
-	atom_concat(Prefix, _, Functor),
+	sub_atom(Functor, 0, _, _, Prefix),
 	!.
 
 '$lgt_hidden_functor'(Functor) :-
 	'$lgt_current_protocol_'(_, Prefix, _, _, _),
-	atom_concat(Prefix, _, Functor),
+	sub_atom(Functor, 0, _, _, Prefix),
 	!.
 
 
@@ -5256,7 +5256,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_filter_dont_care_variables'([], []).
 
 '$lgt_filter_dont_care_variables'([Name = _| Singletons], Names) :-
-	(	atom_concat('_', _, Name) ->
+	(	sub_atom(Name, 0, 1, _, '_') ->
 		'$lgt_filter_dont_care_variables'(Singletons, Names)
 	;	Names = [Name| Rest],
 		'$lgt_filter_dont_care_variables'(Singletons, Rest)
@@ -13657,7 +13657,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!,
 	Pred =.. [Functor| Args],
 	Meta =.. [Functor| MArgs],
-	'$lgt_fix_pred_calls_in_meta_args'(Args, MArgs, TArgs),
+	'$lgt_fix_predicate_calls_in_meta_arguments'(Args, MArgs, TArgs),
 	TPred =.. [Functor| TArgs].
 
 '$lgt_fix_predicate_calls'(':'(Module, Pred), ':'(Module, Pred), _) :-
@@ -13681,7 +13681,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	Pred =.. [Functor| Args],
 	Meta =.. [Functor| MArgs],
 	'$lgt_tr_module_meta_predicate_directives_args'(MArgs, CMArgs),
-	'$lgt_fix_pred_calls_in_meta_args'(Args, CMArgs, TArgs),
+	'$lgt_fix_predicate_calls_in_meta_arguments'(Args, CMArgs, TArgs),
 	TPred =.. [Functor| TArgs].
 
 '$lgt_fix_predicate_calls'(':'(Module, Pred), ':'(Module, TPred), _) :-
@@ -13692,30 +13692,30 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_fix_pred_calls_in_meta_args'(@list, @list, -list)
+% '$lgt_fix_predicate_calls_in_meta_arguments'(@list, @list, -list)
 %
 % fixes predicate calls in non-standard meta-arguments
 
-'$lgt_fix_pred_calls_in_meta_args'([], [], []).
+'$lgt_fix_predicate_calls_in_meta_arguments'([], [], []).
 
-'$lgt_fix_pred_calls_in_meta_args'([Arg| Args], [MArg| MArgs], [TArg| TArgs]) :-
-	'$lgt_fix_pred_calls_ins_in_marg'(MArg, Arg, TArg),
-	'$lgt_fix_pred_calls_in_meta_args'(Args, MArgs, TArgs).
+'$lgt_fix_predicate_calls_in_meta_arguments'([Arg| Args], [MArg| MArgs], [TArg| TArgs]) :-
+	'$lgt_fix_predicate_calls_in_meta_argument'(MArg, Arg, TArg),
+	'$lgt_fix_predicate_calls_in_meta_arguments'(Args, MArgs, TArgs).
 
 
-'$lgt_fix_pred_calls_ins_in_marg'(0, Arg, TArg) :-
+'$lgt_fix_predicate_calls_in_meta_argument'(0, Arg, TArg) :-
 	!,
 	'$lgt_fix_predicate_calls'(Arg, TArg, false).
 
-'$lgt_fix_pred_calls_ins_in_marg'([0], [Arg| Args], [TArg| TArgs]) :-
+'$lgt_fix_predicate_calls_in_meta_argument'([0], [Arg| Args], [TArg| TArgs]) :-
 	!,
 	'$lgt_fix_predicate_calls'(Arg, TArg, false),
-	'$lgt_fix_pred_calls_ins_in_marg'([0], Args, TArgs).
+	'$lgt_fix_predicate_calls_in_meta_argument'([0], Args, TArgs).
 
-'$lgt_fix_pred_calls_ins_in_marg'([0], [], []) :-
+'$lgt_fix_predicate_calls_in_meta_argument'([0], [], []) :-
 	!.
 
-'$lgt_fix_pred_calls_ins_in_marg'(_, Arg, Arg).
+'$lgt_fix_predicate_calls_in_meta_argument'(_, Arg, Arg).
 
 
 
