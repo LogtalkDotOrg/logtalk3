@@ -81,7 +81,7 @@ term_variables(Term, Variables) :-
 	!.
 
 '$lgt_predicate_property'(Pred, built_in) :-
-	'$lgt_iso_spec_pred'(Pred).
+	'$lgt_iso_spec_predicate'(Pred).
 
 '$lgt_predicate_property'(Pred, static) :-
 	predicate_property(Pred, compiled).
