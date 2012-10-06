@@ -21,9 +21,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.6,
+		version is 1.7,
 		author is 'Paulo Moura',
-		date is 2012/09/29,
+		date is 2012/10/06,
 		comment is 'Simple example of using conditional compilation to implement a portable operating-system interface for selected back-end Prolog compilers.'
 	]).
 
@@ -786,8 +786,8 @@
 				{env_getenv(Variable, Value)}
 			).
 
-		time_stamp(_) :-
-			throw(not_available(time_stamp/1)).
+		time_stamp(Time) :-
+			{realtime(Time)}.
 
 		date_time(Year, Month, Day, Hours, Mins, Secs, 0) :-
 			{realtime(Time)},

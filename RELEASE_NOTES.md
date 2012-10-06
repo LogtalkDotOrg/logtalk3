@@ -71,7 +71,8 @@ Examples
 * FIXED: Two bugs in the `cc` example: the definition of the predicate
 `make_directory/1` for GNU Prolog would fail if the directory already
 existed; the definition of the predicate `expand_path/2` for Lean Prolog
-could leave a choice point.
+could leave a choice point. Also added a definition of the `time_stamp/1`
+predicate for Qu-Prolog.
 
 Installers and installation scripts
 -----------------------------------
