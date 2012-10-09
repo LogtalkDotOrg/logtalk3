@@ -31,6 +31,8 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* NEW: Updated the compiler to also report references to unknown modules.
+
 * FIXED: During compilation, when saving references to categories for checking
 for unknown categories, use a template for parametric categories.
 

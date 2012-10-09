@@ -55,11 +55,14 @@
 % references to unknown entities in object opening directive
 
 :- object(unknownrefs,
-	implements(protocol),
-	imports(category),
-	extends(object)).
+	implements(some_protocol),
+	imports(some_category),
+	extends(some_object)).
 
-	
+	:- if(current_logtalk_flag(modules, supported)).
+		:- use_module(some_module, [predicate/0]).
+	:- endif.
+
 :- end_object.
 
 

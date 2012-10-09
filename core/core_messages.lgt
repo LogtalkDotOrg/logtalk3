@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/06/07,
+		date is 2012/10/09,
 		comment is 'Logtalk core (compiler and runtime) default message translations.']).
 
 	:- multifile(logtalk::message_prefix_stream/4).
@@ -184,6 +184,10 @@
 
 	logtalk::message_tokens(reference_to_unknown_category(File, Lines, Type, Entity, Category), core) -->
 		['Reference to unknown category: ~q'-[Category], nl],
+		message_context(File, Lines, Type, Entity).
+
+	logtalk::message_tokens(reference_to_unknown_module(File, Lines, Type, Entity, Module), core) -->
+		['Reference to unknown module: ~q'-[Module], nl],
 		message_context(File, Lines, Type, Entity).
 
 	logtalk::message_tokens(missing_predicate_directive(File, Lines, Type, Entity, Directive, Predicate), core) -->

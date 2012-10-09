@@ -294,6 +294,7 @@
 :- dynamic('$lgt_pp_referenced_object_'/2).					% '$lgt_pp_referenced_object_'(Object, Lines)
 :- dynamic('$lgt_pp_referenced_protocol_'/2).				% '$lgt_pp_referenced_protocol_'(Protocol, Lines)
 :- dynamic('$lgt_pp_referenced_category_'/2).				% '$lgt_pp_referenced_category_'(Category, Lines)
+:- dynamic('$lgt_pp_referenced_module_'/2).					% '$lgt_pp_referenced_module_'(Module, Lines)
 
 :- dynamic('$lgt_pp_global_operator_'/3).					% '$lgt_pp_global_operator_'(Priority, Specifier, Operator)
 :- dynamic('$lgt_pp_file_operator_'/3).						% '$lgt_pp_file_operator_'(Priority, Specifier, Operator)
@@ -5106,6 +5107,19 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
+% '$lgt_add_referenced_module'(@protocol_identifier)
+%
+% adds referenced module for cheking references to unknown modules
+
+'$lgt_add_referenced_module'(Module) :-
+	(	'$lgt_pp_referenced_module_'(Module, _) ->
+		true
+	;	'$lgt_current_line_numbers'(Lines),
+		assertz('$lgt_pp_referenced_module_'(Module, Lines))
+	).
+
+
+
 % '$lgt_add_entity_properties'(@atom, @entity_identifier)
 %
 % adds entity properties related to the entity source file
@@ -5513,6 +5527,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	retractall('$lgt_pp_referenced_object_'(_, _)),
 	retractall('$lgt_pp_referenced_protocol_'(_, _)),
 	retractall('$lgt_pp_referenced_category_'(_, _)),
+	retractall('$lgt_pp_referenced_module_'(_, _)),
 	retractall('$lgt_pp_dynamic_'),
 	retractall('$lgt_pp_threaded_'),
 	retractall('$lgt_pp_synchronized_'),
@@ -6420,6 +6435,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
 		'$lgt_tr_directive'(uses, [Module, Preds], Ctx)
 	;	% we're calling module predicates within an object or a category
+		'$lgt_add_referenced_module'(Module),
 		'$lgt_tr_use_module_directive'(Preds, Module, Ctx)
 	).
 
@@ -9292,6 +9308,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		'$lgt_tr_body'(Module::Pred, TPred, DPred, Ctx)
 	;	catch('$lgt_predicate_property'(':'(Module, Pred), meta_predicate(OriginalMeta)), _, fail) ->
 		% we're compiling a call to a module meta-predicate:
+		'$lgt_add_referenced_module'(Module),
 		'$lgt_term_template'(Pred, OverridingMeta),
 		(	'$lgt_pp_meta_predicate_'(':'(Module, OverridingMeta)) ->
 			% we're overriding the original meta-predicate template:
@@ -9315,6 +9332,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 			DPred = '$lgt_debug'(goal(':'(Module, Pred), DPred0), ExCtx)
 		)
 	;	% we're compiling a call to a module predicate
+		'$lgt_add_referenced_module'(Module),
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		TPred = ':'(Module, Pred),
 		DPred = '$lgt_debug'(goal(':'(Module, Pred), TPred), ExCtx)
@@ -9357,6 +9375,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
 		'$lgt_tr_body'(Module::current_predicate(Pred), TPred, DPred, Ctx)
 	;	% we're using modules together with objects
+		'$lgt_add_referenced_module'(Module),
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		TPred = '$lgt_final_goal'(current_predicate(':'(Module, Pred))),
 		DPred = '$lgt_debug'(goal(current_predicate(':'(Module, Pred)), TPred), ExCtx)
@@ -9386,6 +9405,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
 		'$lgt_tr_body'(Module::predicate_property(Pred, Prop), TPred, DPred, Ctx)
 	;	% we're using modules together with objects
+		'$lgt_add_referenced_module'(Module),
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		TPred = '$lgt_final_goal'(predicate_property(':'(Module, Pred), Prop)),
 		DPred = '$lgt_debug'(goal(predicate_property(':'(Module, Pred), Prop), TPred), ExCtx)
@@ -9416,6 +9436,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
 		'$lgt_tr_body'(Module::abolish(Pred), TCond, DCond, Ctx)
 	;	% we're using modules together with objects
+		'$lgt_add_referenced_module'(Module),
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		TCond = '$lgt_final_goal'(abolish(':'(Module, Pred))),
 		DCond = '$lgt_debug'(goal(abolish(':'(Module, Pred)), TCond), ExCtx)
@@ -9466,6 +9487,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
 		'$lgt_tr_body'(Module::asserta(Clause), TCond, DCond, Ctx)
 	;	% we're using modules together with objects
+		'$lgt_add_referenced_module'(Module),
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		TCond = '$lgt_final_goal'(asserta(':'(Module, Clause))),
 		DCond = '$lgt_debug'(goal(asserta(':'(Module, Clause)), TCond), ExCtx)
@@ -9519,6 +9541,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
 		'$lgt_tr_body'(Module::assertz(Clause), TCond, DCond, Ctx)
 	;	% we're using modules together with objects
+		'$lgt_add_referenced_module'(Module),
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		TCond = '$lgt_final_goal'(assertz(':'(Module, Clause))),
 		DCond = '$lgt_debug'(goal(assertz(':'(Module, Clause)), TCond), ExCtx)
@@ -9572,6 +9595,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
 		'$lgt_tr_body'(Module::clause(Head, Body), TCond, DCond, Ctx)
 	;	% we're using modules together with objects
+		'$lgt_add_referenced_module'(Module),
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		TCond = '$lgt_final_goal'(clause(':'(Module, Head), Body)),
 		DCond = '$lgt_debug'(goal(clause(':'(Module, Head), Body), TCond), ExCtx)
@@ -9612,6 +9636,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
 		'$lgt_tr_body'(Module::retract(Clause), TCond, DCond, Ctx)
 	;	% we're using modules together with objects
+		'$lgt_add_referenced_module'(Module),
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		TCond = '$lgt_final_goal'(retract(':'(Module, Clause))),
 		DCond = '$lgt_debug'(goal(retract(':'(Module, Clause)), TCond), ExCtx)
@@ -9667,6 +9692,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
 		'$lgt_tr_body'(Module::retractall(Head), TCond, DCond, Ctx)
 	;	% we're using modules together with objects
+		'$lgt_add_referenced_module'(Module),
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		TCond = '$lgt_final_goal'(retractall(':'(Module, Head))),
 		DCond = '$lgt_debug'(goal(retractall(':'(Module, Head)), TCond), ExCtx)
@@ -11996,7 +12022,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	(	'$lgt_compiler_flag'(unknown_entities, warning) ->
 		'$lgt_report_unknown_objects'(Type, Entity),
 		'$lgt_report_unknown_protocols'(Type, Entity),
-		'$lgt_report_unknown_categories'(Type, Entity)
+		'$lgt_report_unknown_categories'(Type, Entity),
+		'$lgt_report_unknown_modules'(Type, Entity)
 	;	true
 	).
 
@@ -12004,7 +12031,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 % '$lgt_report_unknown_objects'(+atom, +entity_identifier)
 %
-% reports any unknown referenced objects found while compiling an entity
+% reports any references to unknown objects found while compiling an entity
 
 '$lgt_report_unknown_objects'(Type, Entity) :-
 	'$lgt_pp_file_path_flags_'(File, Directory, _),
@@ -12029,7 +12056,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 % '$lgt_report_unknown_protocols'(+atom, +entity_identifier)
 %
-% reports any unknown referenced protocols found while compiling an entity
+% reports any references to unknown protocols found while compiling an entity
 
 '$lgt_report_unknown_protocols'(Type, Entity) :-
 	'$lgt_pp_file_path_flags_'(File, Directory, _),
@@ -12052,7 +12079,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 % '$lgt_report_unknown_categories'(+atom, +entity_identifier)
 %
-% reports any unknown referenced categories found while compiling an entity
+% reports any references to unknown categories found while compiling an entity
 
 '$lgt_report_unknown_categories'(Type, Entity) :-
 	'$lgt_pp_file_path_flags_'(File, Directory, _),
@@ -12066,12 +12093,31 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		\+ '$lgt_pp_entity_initialization_'(category, Category, _),
 		\+ '$lgt_pp_file_runtime_clause_'('$lgt_current_category_'(Category, _, _, _, _, _)),
 		'$lgt_inc_compile_warnings_counter',
-		'$lgt_pp_file_path_flags_'(File, Directory, _),
-		atom_concat(Directory, File, Path),
 		'$lgt_print_message'(warning(unknown_entities), core, reference_to_unknown_category(Path, Lines, Type, Entity, Category)),
 	fail.
 
 '$lgt_report_unknown_categories'(_, _).
+
+
+
+% '$lgt_report_unknown_modules'(+atom, +entity_identifier)
+%
+% reports any references to unknown modules found while compiling an entity
+
+'$lgt_report_unknown_modules'(Type, Entity) :-
+	'$lgt_prolog_feature'(modules, supported),
+	'$lgt_pp_file_path_flags_'(File, Directory, _),
+	atom_concat(Directory, File, Path),
+	'$lgt_pp_referenced_module_'(Module, Lines),
+		% not a currently loaded module:
+		\+ current_module(Module),
+		% not the module being compiled (self reference):
+		\+ '$lgt_pp_module_'(Module),
+		'$lgt_inc_compile_warnings_counter',
+		'$lgt_print_message'(warning(unknown_entities), core, reference_to_unknown_module(Path, Lines, Type, Entity, Module)),
+	fail.
+
+'$lgt_report_unknown_modules'(_, _).
 
 
 
