@@ -31,6 +31,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: When compiling a Prolog module as a Logtalk object, exported and
+reexported operators are now compiled as object operators instead of file
+operators.
+
 * FIXED: When compiling a Prolog module as a Logtalk object with the flag
 `source_data` turned on, entity file properties were not collected and saved.
 

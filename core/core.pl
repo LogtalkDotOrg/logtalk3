@@ -6296,12 +6296,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_add_entity_properties'(start, Module),
 	% assume static module/object
 	'$lgt_tr_object_identifier'(Module),
-	'$lgt_split_operators_and_predicates'(Exports, Preds, Operators),
-	forall(
-		'$lgt_member'(Operator, Operators),
-		'$lgt_tr_file_directive'(Operator, Ctx)),
 	% make the export list public predicates
-	'$lgt_tr_directive'((public), Preds, Ctx).
+	'$lgt_tr_directive'((public), Exports, Ctx).
 
 
 % set_logtalk_flag/1 entity directive
@@ -6433,9 +6429,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_must_be'(module_identifier, Module),
 	'$lgt_must_be'(list, Exports),
 	'$lgt_split_operators_and_predicates'(Exports, Preds, Operators),
-	forall(
-		'$lgt_member'(Operator, Operators),
-		'$lgt_tr_file_directive'(Operator, Ctx)),
+	'$lgt_tr_directives'(Operators, Ctx),
 	'$lgt_tr_reexport_directive'(Preds, Module, Ctx).
 
 
@@ -6519,12 +6513,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_directive'((export), Exports, Ctx) :-
 	% we must be compiling a module as an object
 	'$lgt_pp_module_'(_),
-	'$lgt_flatten_list'(Exports, ExportsFlatted),
-	'$lgt_split_operators_and_predicates'(ExportsFlatted, Preds, Operators),
-	forall(
-		'$lgt_member'(Operator, Operators),
-		'$lgt_tr_file_directive'(Operator, Ctx)),
-	'$lgt_tr_public_directive'(Preds).
+	% make the export list public resources
+	'$lgt_tr_directive'((public), Exports, Ctx).
 
 
 '$lgt_tr_directive'((dynamic), Resources, _) :-
