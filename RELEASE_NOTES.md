@@ -31,6 +31,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* FIXED: When compiling a Prolog module as a Logtalk object with the flag
+`source_data` turned on, entity file properties were not collected and saved.
+
 * IMPROVED: When using structured message printing, output non-recognized
 tokens as-is. Also, intercept and ignore partial lists of tokens and tokens
 that are variables.

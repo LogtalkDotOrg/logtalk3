@@ -6293,6 +6293,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	assertz('$lgt_pp_module_'(Module)),
 	retractall('$lgt_pp_entity_warnings_flag_'),
 	'$lgt_print_message'(silent(compiling), core, compiling_entity(module, Module)),
+	'$lgt_add_entity_properties'(start, Module),
 	% assume static module/object
 	'$lgt_tr_object_identifier'(Module),
 	'$lgt_split_operators_and_predicates'(Exports, Preds, Operators),
