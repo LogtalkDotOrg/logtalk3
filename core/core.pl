@@ -300,8 +300,8 @@
 :- dynamic('$lgt_pp_entity_operator_'/4).					% '$lgt_pp_entity_operator_'(Priority, Specifier, Operator, Scope)
 
 :- dynamic('$lgt_pp_warnings_top_goal_directory_'/2).		% '$lgt_pp_warnings_top_goal_directory_'(Goal, Directory)
-:- dynamic('$lgt_pp_comp_warnings_counter_'/1).				% '$lgt_pp_comp_warnings_counter_'(Counter)
-:- dynamic('$lgt_pp_load_warnings_counter_'/1).				% '$lgt_pp_load_warnings_counter_'(Counter)
+:- dynamic('$lgt_pp_compilation_warnings_counter_'/1).		% '$lgt_pp_compilation_warnings_counter_'(Counter)
+:- dynamic('$lgt_pp_loading_warnings_counter_'/1).			% '$lgt_pp_loading_warnings_counter_'(Counter)
 :- dynamic('$lgt_pp_entity_warnings_flag_'/0).				% '$lgt_pp_entity_warnings_flag_'
 :- dynamic('$lgt_pp_load_warnings_flag_'/0).				% '$lgt_pp_load_warnings_flag_'
 
@@ -584,8 +584,8 @@ object_property(Obj, Prop) :-
 			Predicates)
 	),
 	findall(
-		op(Priority, Spec, Operator),
-		'$lgt_entity_property_'(Obj, op(Priority, Spec, Operator, Scope)),
+		op(Priority, Specifier, Operator),
+		'$lgt_entity_property_'(Obj, op(Priority, Specifier, Operator, Scope)),
 		Operators
 	),
 	'$lgt_append'(Predicates, Operators, Resources).
@@ -967,15 +967,15 @@ create_protocol(Ptc, Relations, Directives) :-
 %
 % generates a new, unique entity identifier by appending an integer to a base char
 
-'$lgt_gen_entity_identifier'(Base, Id) :-
+'$lgt_gen_entity_identifier'(Base, Identifier) :-
 	char_code(Base, Code),
 	repeat,
 		'$lgt_next_integer'(1, New),
 		number_codes(New, Codes),
-		atom_codes(Id, [Code| Codes]),
-	\+ '$lgt_current_protocol_'(Id, _, _, _, _),
-	\+ '$lgt_current_object_'(Id, _, _, _, _, _, _, _, _, _, _),
-	\+ '$lgt_current_category_'(Id, _, _, _, _, _),
+		atom_codes(Identifier, [Code| Codes]),
+	\+ '$lgt_current_protocol_'(Identifier, _, _, _, _),
+	\+ '$lgt_current_object_'(Identifier, _, _, _, _, _, _, _, _, _, _),
+	\+ '$lgt_current_category_'(Identifier, _, _, _, _, _),
 	!.
 
 
@@ -1565,20 +1565,20 @@ threaded_notify(Message) :-
 % gets/checks the current value of a compiler flag
 
 '$lgt_compiler_flag'(Option, Value) :-
-	(	'$lgt_pp_entity_compiler_flag_'(Option, Value2) ->
+	(	'$lgt_pp_entity_compiler_flag_'(Option, CurrentValue) ->
 		% flag value as defined within the entity being compiled
-		Value = Value2
-	;	'$lgt_pp_file_compiler_flag_'(Option, Value2) ->
+		Value = CurrentValue
+	;	'$lgt_pp_file_compiler_flag_'(Option, CurrentValue) ->
 		% flag value as defined in the options argument of the
 		% compiling/loading predicates or in the source file
-		Value = Value2
-	;	'$lgt_current_flag_'(Option, Value2) ->
+		Value = CurrentValue
+	;	'$lgt_current_flag_'(Option, CurrentValue) ->
 		% default value for the current Logtalk session,
 		% set by calls to the set_logtalk_flag/2 predicate
-		Value = Value2
-	;	'$lgt_default_flag'(Option, Value2) ->
+		Value = CurrentValue
+	;	'$lgt_default_flag'(Option, CurrentValue) ->
 		% default value, defined on the Prolog adapter files
-		Value = Value2
+		Value = CurrentValue
 	;	% back-end Prolog compiler features
 		'$lgt_prolog_feature'(Option, Value)
 	).
@@ -1648,8 +1648,8 @@ logtalk_compile(Files, Flags) :-
 
 '$lgt_reset_warnings_counter' :-
 	retractall('$lgt_pp_warnings_top_goal_directory_'(_, _)),
-	retractall('$lgt_pp_comp_warnings_counter_'(_)),
-	retractall('$lgt_pp_load_warnings_counter_'(_)),
+	retractall('$lgt_pp_compilation_warnings_counter_'(_)),
+	retractall('$lgt_pp_loading_warnings_counter_'(_)),
 	retractall('$lgt_pp_entity_warnings_flag_').
 
 
@@ -1660,20 +1660,20 @@ logtalk_compile(Files, Flags) :-
 		% remember top compilation/loading goal and directory
 		asserta('$lgt_pp_warnings_top_goal_directory_'(Term, Current)),
 		% initialize compilation warnings counter
-		retractall('$lgt_pp_comp_warnings_counter_'(_)),
-		asserta('$lgt_pp_comp_warnings_counter_'(0)),
+		retractall('$lgt_pp_compilation_warnings_counter_'(_)),
+		asserta('$lgt_pp_compilation_warnings_counter_'(0)),
 		% initialize loading warnings counter
-		retractall('$lgt_pp_load_warnings_counter_'(_)),
-		asserta('$lgt_pp_load_warnings_counter_'(0)),
+		retractall('$lgt_pp_loading_warnings_counter_'(_)),
+		asserta('$lgt_pp_loading_warnings_counter_'(0)),
 		retractall('$lgt_pp_entity_warnings_flag_'),
 		retractall('$lgt_pp_load_warnings_flag_')
 	).
 
 
 '$lgt_inc_compile_warnings_counter' :-
-	retract('$lgt_pp_comp_warnings_counter_'(Old)),
+	retract('$lgt_pp_compilation_warnings_counter_'(Old)),
 	New is Old + 1,
-	asserta('$lgt_pp_comp_warnings_counter_'(New)),
+	asserta('$lgt_pp_compilation_warnings_counter_'(New)),
 	(	'$lgt_pp_entity_warnings_flag_' ->
 		true
 	;	assertz('$lgt_pp_entity_warnings_flag_')
@@ -1681,9 +1681,9 @@ logtalk_compile(Files, Flags) :-
 
 
 '$lgt_inc_load_warnings_counter' :-
-	retract('$lgt_pp_load_warnings_counter_'(Old)),
+	retract('$lgt_pp_loading_warnings_counter_'(Old)),
 	New is Old + 1,
-	asserta('$lgt_pp_load_warnings_counter_'(New)),
+	asserta('$lgt_pp_loading_warnings_counter_'(New)),
 	(	'$lgt_pp_load_warnings_flag_' ->
 		true
 	;	assertz('$lgt_pp_load_warnings_flag_')
@@ -1693,8 +1693,8 @@ logtalk_compile(Files, Flags) :-
 '$lgt_report_warning_numbers'(Goal, Flags) :-
 	(	retract('$lgt_pp_warnings_top_goal_directory_'(Goal, _)),
 		% top compilation/loading goal
-		retract('$lgt_pp_comp_warnings_counter_'(CCounter)),
-		retract('$lgt_pp_load_warnings_counter_'(LCounter)) ->
+		retract('$lgt_pp_compilation_warnings_counter_'(CCounter)),
+		retract('$lgt_pp_loading_warnings_counter_'(LCounter)) ->
 		% report compilation and loading warnings
 		(	'$lgt_member'(report(off), Flags) ->
 			true
@@ -5159,8 +5159,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	fail.
 
 '$lgt_add_entity_properties'(end, Entity) :-
-	'$lgt_pp_entity_operator_'(Priority, Spec, Operator, Scope),
-	assertz('$lgt_pp_entity_runtime_clause_'('$lgt_entity_property_'(Entity, op(Priority, Spec, Operator, Scope)))),
+	'$lgt_pp_entity_operator_'(Priority, Specifier, Operator, Scope),
+	assertz('$lgt_pp_entity_runtime_clause_'('$lgt_entity_property_'(Entity, op(Priority, Specifier, Operator, Scope)))),
 	fail.
 
 '$lgt_add_entity_properties'(end, Entity) :-
@@ -5564,18 +5564,18 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % restores current operator table
 
 '$lgt_restore_global_operator_table' :-
-	retract('$lgt_pp_entity_operator_'(_, Spec, Op, _)),
-		op(0, Spec, Op),
+	retract('$lgt_pp_entity_operator_'(_, Specifier, Operator, _)),
+		op(0, Specifier, Operator),
 	fail.
 
 '$lgt_restore_global_operator_table' :-
-	retract('$lgt_pp_file_operator_'(_, Spec, Op)),
-		op(0, Spec, Op),
+	retract('$lgt_pp_file_operator_'(_, Specifier, Operator)),
+		op(0, Specifier, Operator),
 	fail.
 
 '$lgt_restore_global_operator_table' :-
-	retract('$lgt_pp_global_operator_'(Priority, Spec, Op)),
-		op(Priority, Spec, Op),
+	retract('$lgt_pp_global_operator_'(Priority, Specifier, Operator)),
+		op(Priority, Specifier, Operator),
 	fail.
 
 '$lgt_restore_global_operator_table'.
@@ -5587,13 +5587,13 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % restores current operator table
 
 '$lgt_restore_file_operator_table' :-
-	retract('$lgt_pp_entity_operator_'(_, Spec, Op, _)),
-		op(0, Spec, Op),
+	retract('$lgt_pp_entity_operator_'(_, Specifier, Operator, _)),
+		op(0, Specifier, Operator),
 	fail.
 
 '$lgt_restore_file_operator_table' :-
-	retract('$lgt_pp_file_operator_'(Priority, Spec, Op)),
-		op(Priority, Spec, Op),
+	retract('$lgt_pp_file_operator_'(Priority, Specifier, Operator)),
+		op(Priority, Specifier, Operator),
 	fail.
 
 '$lgt_restore_file_operator_table'.
@@ -5607,23 +5607,23 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_activate_file_operators'(_, _, []) :-
 	!.
 
-'$lgt_activate_file_operators'(Priority, Spec, [Operator| Operators]) :-
+'$lgt_activate_file_operators'(Priority, Specifier, [Operator| Operators]) :-
 	!,
-	'$lgt_activate_file_operator'(Priority, Spec, Operator),
-	'$lgt_activate_file_operators'(Priority, Spec, Operators).
+	'$lgt_activate_file_operator'(Priority, Specifier, Operator),
+	'$lgt_activate_file_operators'(Priority, Specifier, Operators).
 
-'$lgt_activate_file_operators'(Priority, Spec, Operator) :-
-	'$lgt_activate_file_operator'(Priority, Spec, Operator).
+'$lgt_activate_file_operators'(Priority, Specifier, Operator) :-
+	'$lgt_activate_file_operator'(Priority, Specifier, Operator).
 
 
-'$lgt_activate_file_operator'(Priority, Spec, Operator) :-
-	(	current_op(OriginalPriority, OriginalSpec, Operator),
-	 	'$lgt_same_operator_class'(Spec, OriginalSpec) ->
-		assertz('$lgt_pp_global_operator_'(OriginalPriority, OriginalSpec, Operator))
+'$lgt_activate_file_operator'(Priority, Specifier, Operator) :-
+	(	current_op(OriginalPriority, OriginalSpecifier, Operator),
+	 	'$lgt_same_operator_class'(Specifier, OriginalSpecifier) ->
+		assertz('$lgt_pp_global_operator_'(OriginalPriority, OriginalSpecifier, Operator))
 	;	true
 	),
-	op(Priority, Spec, Operator),
-	assertz('$lgt_pp_file_operator_'(Priority, Spec, Operator)).
+	op(Priority, Specifier, Operator),
+	assertz('$lgt_pp_file_operator_'(Priority, Specifier, Operator)).
 
 
 
@@ -5634,23 +5634,23 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_activate_entity_operators'(_, _, [], _) :-
 	!.
 
-'$lgt_activate_entity_operators'(Priority, Spec, [Operator| Operators], Scope) :-
+'$lgt_activate_entity_operators'(Priority, Specifier, [Operator| Operators], Scope) :-
 	!,
-	'$lgt_activate_entity_operator'(Priority, Spec, Operator, Scope),
-	'$lgt_activate_entity_operators'(Priority, Spec, Operators, Scope).
+	'$lgt_activate_entity_operator'(Priority, Specifier, Operator, Scope),
+	'$lgt_activate_entity_operators'(Priority, Specifier, Operators, Scope).
 
-'$lgt_activate_entity_operators'(Priority, Spec, Operator, Scope) :-
-	'$lgt_activate_entity_operator'(Priority, Spec, Operator, Scope).
+'$lgt_activate_entity_operators'(Priority, Specifier, Operator, Scope) :-
+	'$lgt_activate_entity_operator'(Priority, Specifier, Operator, Scope).
 
 
-'$lgt_activate_entity_operator'(Priority, Spec, Operator, Scope) :-
-	(	current_op(OriginalPriority, OriginalSpec, Operator),
-	 	'$lgt_same_operator_class'(Spec, OriginalSpec) ->
-		assertz('$lgt_pp_file_operator_'(OriginalPriority, OriginalSpec, Operator))
+'$lgt_activate_entity_operator'(Priority, Specifier, Operator, Scope) :-
+	(	current_op(OriginalPriority, OriginalSpecifier, Operator),
+	 	'$lgt_same_operator_class'(Specifier, OriginalSpecifier) ->
+		assertz('$lgt_pp_file_operator_'(OriginalPriority, OriginalSpecifier, Operator))
 	;	true
 	),
-	op(Priority, Spec, Operator),
-	assertz('$lgt_pp_entity_operator_'(Priority, Spec, Operator, Scope)).
+	op(Priority, Specifier, Operator),
+	assertz('$lgt_pp_entity_operator_'(Priority, Specifier, Operator, Scope)).
 
 
 
@@ -5942,16 +5942,16 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_tr_directive'(elif('$lgt_predicate_property'(Pred, Prop)), Ctx).
 
 '$lgt_tr_directive'(elif(Goal), _) :-
-	'$lgt_pp_cc_mode_'(Value),
-	(	Value == ignore ->						% we're inside an if ... endif
+	'$lgt_pp_cc_mode_'(Mode),
+	(	Mode == ignore ->						% we're inside an if ... endif
 		true									% that we're ignoring
-	;	Value == skip_else ->					% the corresponding if is true
+	;	Mode == skip_else ->					% the corresponding if is true
 		retractall('$lgt_pp_cc_skipping_'),		% so we must skip this elif
 		assertz('$lgt_pp_cc_skipping_'),
 		asserta('$lgt_pp_cc_mode_'(skip_all))
-	;	Value == skip_all ->
+	;	Mode == skip_all ->
 		true
-	;	% Value == seek_else ->					% the corresponding if is false
+	;	% Mode == seek_else ->					% the corresponding if is false
 		retract('$lgt_pp_cc_mode_'(_)),
 		(	catch(Goal, Error, '$lgt_compiler_error_handler'(Error)) ->
 			retractall('$lgt_pp_cc_skipping_'),
@@ -5966,15 +5966,15 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	throw(error(existence_error(opening_directive, if/1), directive(else))).
 
 '$lgt_tr_directive'(else, _) :-
-	'$lgt_pp_cc_mode_'(Value),
-	(	Value == ignore ->						% we're inside an if ... endif
+	'$lgt_pp_cc_mode_'(Mode),
+	(	Mode == ignore ->						% we're inside an if ... endif
 		true									% that we're ignoring
-	;	Value == skip_else ->					% the corresponding if is true
+	;	Mode == skip_else ->					% the corresponding if is true
 		retractall('$lgt_pp_cc_skipping_'),		% so we must skip this else
 		assertz('$lgt_pp_cc_skipping_')
-	;	Value == skip_all ->
+	;	Mode == skip_all ->
 		true
-	;	% Value == seek_else ->					% the corresponding if is false
+	;	% Mode == seek_else ->					% the corresponding if is false
 		retractall('$lgt_pp_cc_skipping_')
 	),
 	!.
@@ -5985,8 +5985,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_tr_directive'(endif, _) :-
 	retract('$lgt_pp_cc_if_found_'(_)),
-	retract('$lgt_pp_cc_mode_'(Value)),
-	(	Value == seek_else ->
+	retract('$lgt_pp_cc_mode_'(Mode)),
+	(	Mode == seek_else ->
 		retractall('$lgt_pp_cc_skipping_')
 	;	\+ '$lgt_pp_cc_if_found_'(_) ->
 		retractall('$lgt_pp_cc_skipping_')
@@ -6126,12 +6126,12 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_must_be'(callable, Goal),
 	assertz('$lgt_pp_file_initialization_'(Goal)).
 
-'$lgt_tr_file_directive'(op(Priority, Spec, Operators), _) :-
+'$lgt_tr_file_directive'(op(Priority, Specifier, Operators), _) :-
 	!,
-	'$lgt_must_be'(operator_specification, op(Priority, Spec, Operators)),
-	'$lgt_activate_file_operators'(Priority, Spec, Operators),
+	'$lgt_must_be'(operator_specification, op(Priority, Specifier, Operators)),
+	'$lgt_activate_file_operators'(Priority, Specifier, Operators),
 	'$lgt_pp_term_location'(Location),
-	assertz('$lgt_pp_prolog_term_'((:- op(Priority, Spec, Operators)), Location)).
+	assertz('$lgt_pp_prolog_term_'((:- op(Priority, Specifier, Operators)), Location)).
 
 '$lgt_tr_file_directive'(set_logtalk_flag(Flag, Value), _) :-
 	!,
@@ -6295,10 +6295,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_print_message'(silent(compiling), core, compiling_entity(module, Module)),
 	% assume static module/object
 	'$lgt_tr_object_identifier'(Module),
-	'$lgt_split_operators_and_predicates'(Exports, Preds, Ops),
+	'$lgt_split_operators_and_predicates'(Exports, Preds, Operators),
 	forall(
-		'$lgt_member'(Op, Ops),
-		'$lgt_tr_file_directive'(Op, Ctx)),
+		'$lgt_member'(Operator, Operators),
+		'$lgt_tr_file_directive'(Operator, Ctx)),
 	% make the export list public predicates
 	'$lgt_tr_directive'((public), Preds, Ctx).
 
@@ -6382,9 +6382,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 % op/3 entity directive (operators are local to entities)
 
-'$lgt_tr_directive'(op, [Priority, Spec, Operators], _) :-
-	'$lgt_must_be'(operator_specification, op(Priority, Spec, Operators)),
-	'$lgt_activate_entity_operators'(Priority, Spec, Operators, l).
+'$lgt_tr_directive'(op, [Priority, Specifier, Operators], _) :-
+	'$lgt_must_be'(operator_specification, op(Priority, Specifier, Operators)),
+	'$lgt_activate_entity_operators'(Priority, Specifier, Operators, l).
 
 
 % uses/2 entity directive
@@ -6395,8 +6395,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_must_be'(list, Resources),
 	'$lgt_add_referenced_object'(Obj),
 	assertz('$lgt_pp_uses_'(Obj)),
-	'$lgt_split_operators_and_predicates'(Resources, Preds, Ops),
-	forall('$lgt_member'(Op, Ops), '$lgt_tr_directive'(Op, Ctx)),
+	'$lgt_split_operators_and_predicates'(Resources, Preds, Operators),
+	'$lgt_tr_directives'(Operators, Ctx),
 	'$lgt_tr_uses_directive'(Preds, Obj, Ctx).
 
 
@@ -6413,8 +6413,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_directive'(use_module, [Module, Imports], Ctx) :-
 	'$lgt_must_be'(module_identifier, Module),
 	'$lgt_must_be'(list, Imports),
-	'$lgt_split_operators_and_predicates'(Imports, Preds, Ops),
-	forall('$lgt_member'(Op, Ops), '$lgt_tr_directive'(Op, Ctx)),
+	'$lgt_split_operators_and_predicates'(Imports, Preds, Operators),
+	'$lgt_tr_directives'(Operators, Ctx),
 	(	'$lgt_pp_module_'(_) ->
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
 		'$lgt_tr_directive'(uses, [Module, Preds], Ctx)
@@ -6431,10 +6431,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	% we're compiling a module as an object; assume referenced modules are also compiled as objects
 	'$lgt_must_be'(module_identifier, Module),
 	'$lgt_must_be'(list, Exports),
-	'$lgt_split_operators_and_predicates'(Exports, Preds, Ops),
+	'$lgt_split_operators_and_predicates'(Exports, Preds, Operators),
 	forall(
-		'$lgt_member'(Op, Ops),
-		'$lgt_tr_file_directive'(Op, Ctx)),
+		'$lgt_member'(Operator, Operators),
+		'$lgt_tr_file_directive'(Operator, Ctx)),
 	'$lgt_tr_reexport_directive'(Preds, Module, Ctx).
 
 
@@ -6519,10 +6519,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	% we must be compiling a module as an object
 	'$lgt_pp_module_'(_),
 	'$lgt_flatten_list'(Exports, ExportsFlatted),
-	'$lgt_split_operators_and_predicates'(ExportsFlatted, Preds, Ops),
+	'$lgt_split_operators_and_predicates'(ExportsFlatted, Preds, Operators),
 	forall(
-		'$lgt_member'(Op, Ops),
-		'$lgt_tr_file_directive'(Op, Ctx)),
+		'$lgt_member'(Operator, Operators),
+		'$lgt_tr_file_directive'(Operator, Ctx)),
 	'$lgt_tr_public_directive'(Preds).
 
 
@@ -6732,11 +6732,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	var(Resource),
 	throw(instantiation_error).
 
-'$lgt_tr_public_directive'([op(Priority, Spec, Operators)| Resources]) :-
+'$lgt_tr_public_directive'([op(Priority, Specifier, Operators)| Resources]) :-
 	!,
-	'$lgt_must_be'(operator_specification, op(Priority, Spec, Operators)),
-	'$lgt_check_for_duplicated_scope_directives'(op(Priority, Spec, Operators)),
-	'$lgt_activate_entity_operators'(Priority, Spec, Operators, p(p(p))),
+	'$lgt_must_be'(operator_specification, op(Priority, Specifier, Operators)),
+	'$lgt_check_for_duplicated_scope_directives'(op(Priority, Specifier, Operators)),
+	'$lgt_activate_entity_operators'(Priority, Specifier, Operators, p(p(p))),
 	'$lgt_tr_public_directive'(Resources).
 
 '$lgt_tr_public_directive'([Pred| Resources]) :-
@@ -6771,11 +6771,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	var(Resource),
 	throw(instantiation_error).
 
-'$lgt_tr_protected_directive'([op(Priority, Spec, Operators)| Resources]) :-
+'$lgt_tr_protected_directive'([op(Priority, Specifier, Operators)| Resources]) :-
 	!,
-	'$lgt_must_be'(operator_specification, op(Priority, Spec, Operators)),
-	'$lgt_check_for_duplicated_scope_directives'(op(Priority, Spec, Operators)),
-	'$lgt_activate_entity_operators'(Priority, Spec, Operators, p(p)),
+	'$lgt_must_be'(operator_specification, op(Priority, Specifier, Operators)),
+	'$lgt_check_for_duplicated_scope_directives'(op(Priority, Specifier, Operators)),
+	'$lgt_activate_entity_operators'(Priority, Specifier, Operators, p(p)),
 	'$lgt_tr_protected_directive'(Resources).
 
 '$lgt_tr_protected_directive'([Pred| Resources]) :-
@@ -6810,11 +6810,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	var(Resource),
 	throw(instantiation_error).
 
-'$lgt_tr_private_directive'([op(Priority, Spec, Operators)| Resources]) :-
+'$lgt_tr_private_directive'([op(Priority, Specifier, Operators)| Resources]) :-
 	!,
-	'$lgt_must_be'(operator_specification, op(Priority, Spec, Operators)),
-	'$lgt_check_for_duplicated_scope_directives'(op(Priority, Spec, Operators)),
-	'$lgt_activate_entity_operators'(Priority, Spec, Operators, p),
+	'$lgt_must_be'(operator_specification, op(Priority, Specifier, Operators)),
+	'$lgt_check_for_duplicated_scope_directives'(op(Priority, Specifier, Operators)),
+	'$lgt_activate_entity_operators'(Priority, Specifier, Operators, p),
 	'$lgt_tr_private_directive'(Resources).
 
 '$lgt_tr_private_directive'([Pred| Resources]) :-
@@ -6842,16 +6842,16 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_check_for_duplicated_scope_directives'(op(_, _, [])) :-
 	!.
 
-'$lgt_check_for_duplicated_scope_directives'(op(Priority, Spec, [Operator| Operators])) :-
+'$lgt_check_for_duplicated_scope_directives'(op(Priority, Specifier, [Operator| Operators])) :-
 	!,
-	(	'$lgt_pp_entity_operator_'(Priority, Spec, Operator, _) ->
-		throw(permission_error(modify, operator_scope, op(Priority, Spec, Operator)))
-	;	'$lgt_check_for_duplicated_scope_directives'(op(Priority, Spec, Operators))
+	(	'$lgt_pp_entity_operator_'(Priority, Specifier, Operator, _) ->
+		throw(permission_error(modify, operator_scope, op(Priority, Specifier, Operator)))
+	;	'$lgt_check_for_duplicated_scope_directives'(op(Priority, Specifier, Operators))
 	).
 
-'$lgt_check_for_duplicated_scope_directives'(op(Priority, Spec, Operator)) :-
-	(	'$lgt_pp_entity_operator_'(Priority, Spec, Operator, _) ->
-		throw(permission_error(modify, predicate_scope, op(Priority, Spec, Operator)))
+'$lgt_check_for_duplicated_scope_directives'(op(Priority, Specifier, Operator)) :-
+	(	'$lgt_pp_entity_operator_'(Priority, Specifier, Operator, _) ->
+		throw(permission_error(modify, predicate_scope, op(Priority, Specifier, Operator)))
 	;	true
 	).
 
@@ -8065,12 +8065,12 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	var(Resource),
 	throw(instantiation_error).
 
-'$lgt_split_operators_and_predicates'([op(Priority, Spec, Operator)| Resources], Preds, [op(Priority, Spec, Operator)| Ops]) :-
+'$lgt_split_operators_and_predicates'([op(Priority, Specifier, Operator)| Resources], Preds, [op(Priority, Specifier, Operator)| Operators]) :-
 	!,
-	'$lgt_split_operators_and_predicates'(Resources, Preds, Ops).
+	'$lgt_split_operators_and_predicates'(Resources, Preds, Operators).
 
-'$lgt_split_operators_and_predicates'([Pred| Resources], [Pred| Preds], Ops) :-
-	'$lgt_split_operators_and_predicates'(Resources, Preds, Ops).
+'$lgt_split_operators_and_predicates'([Pred| Resources], [Pred| Preds], Operators) :-
+	'$lgt_split_operators_and_predicates'(Resources, Preds, Operators).
 
 
 
@@ -10658,36 +10658,36 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_compiler_flag'(portability, silent),
 	!.
 
-'$lgt_check_non_portable_functions'(Exp) :-
-	var(Exp),
+'$lgt_check_non_portable_functions'(Expression) :-
+	var(Expression),
 	!.
 
-'$lgt_check_non_portable_functions'(Exp) :-
-	number(Exp),
+'$lgt_check_non_portable_functions'(Expression) :-
+	number(Expression),
 	!.
 
-'$lgt_check_non_portable_functions'(Exp) :-
-	'$lgt_iso_spec_function'(Exp),
+'$lgt_check_non_portable_functions'(Expression) :-
+	'$lgt_iso_spec_function'(Expression),
 	!,
-	Exp =.. [_| Exps],
-	'$lgt_check_non_portable_function_args'(Exps).
+	Expression =.. [_| Expressions],
+	'$lgt_check_non_portable_function_args'(Expressions).
 
-'$lgt_check_non_portable_functions'(Exp) :-
-	functor(Exp, Functor, Arity),
+'$lgt_check_non_portable_functions'(Expression) :-
+	functor(Expression, Functor, Arity),
 	(	'$lgt_pp_non_portable_function_'(Functor, Arity, _) ->
 		true
 	;	'$lgt_current_line_numbers'(Lines),
 		assertz('$lgt_pp_non_portable_function_'(Functor, Arity, Lines))
 	),
-	Exp =.. [_| Exps],
-	'$lgt_check_non_portable_function_args'(Exps).
+	Expression =.. [_| Expressions],
+	'$lgt_check_non_portable_function_args'(Expressions).
 
 
 '$lgt_check_non_portable_function_args'([]).
 
-'$lgt_check_non_portable_function_args'([Exp| Exps]) :-
-	'$lgt_check_non_portable_functions'(Exp),
-	'$lgt_check_non_portable_function_args'(Exps).
+'$lgt_check_non_portable_function_args'([Expression| Expressions]) :-
+	'$lgt_check_non_portable_functions'(Expression),
+	'$lgt_check_non_portable_function_args'(Expressions).
 
 
 
@@ -11350,10 +11350,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_save_operators'([], []).
 
-'$lgt_save_operators'([op(_, Spec, Operator)| Operators], Saved) :-
-	(	current_op(Priority, SCSpec, Operator),
-		'$lgt_same_operator_class'(Spec, SCSpec) ->
-		Saved = [op(Priority, SCSpec, Operator)| Saved2]
+'$lgt_save_operators'([op(_, Specifier, Operator)| Operators], Saved) :-
+	(	current_op(Priority, SCSpecifier, Operator),
+		'$lgt_same_operator_class'(Specifier, SCSpecifier) ->
+		Saved = [op(Priority, SCSpecifier, Operator)| Saved2]
 	;	Saved = Saved2
 	),
 	'$lgt_save_operators'(Operators, Saved2).
@@ -11366,8 +11366,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_add_operators'([]).
 
-'$lgt_add_operators'([op(Priority, Spec, Operator)| Operators]) :-
-	op(Priority, Spec, Operator),
+'$lgt_add_operators'([op(Priority, Specifier, Operator)| Operators]) :-
+	op(Priority, Specifier, Operator),
 	'$lgt_add_operators'(Operators).
 
 
@@ -11378,8 +11378,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_remove_operators'([]).
 
-'$lgt_remove_operators'([op(_, Spec, Operator)| Operators]) :-
-	op(0, Spec, Operator),
+'$lgt_remove_operators'([op(_, Specifier, Operator)| Operators]) :-
+	op(0, Specifier, Operator),
 	'$lgt_remove_operators'(Operators).
 
 
@@ -14303,8 +14303,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		retract(Pred),
 	fail.
 '$lgt_assert_directives' :-
-	'$lgt_pp_directive_'(op(Priority, Spec, Operators)),
-		op(Priority, Spec, Operators),
+	'$lgt_pp_directive_'(op(Priority, Specifier, Operators)),
+		op(Priority, Specifier, Operators),
 	fail.
 '$lgt_assert_directives'.
 
@@ -17552,9 +17552,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_must_be'(operator_specification, Term, Context) :-
 	(	var(Term) ->
 		throw(error(instantiation_error, Context))
-	;	Term = op(Priority, Spec, Operators) ->
+	;	Term = op(Priority, Specifier, Operators) ->
 		'$lgt_must_be'(operator_priority, Priority, Context),
-		'$lgt_must_be'(operator_specifier, Spec, Context),
+		'$lgt_must_be'(operator_specifier, Specifier, Context),
 		'$lgt_must_be'(operator_names, Operators, Context)
 	;	throw(error(type_error(operator_specification, Term), Context))
 	).
