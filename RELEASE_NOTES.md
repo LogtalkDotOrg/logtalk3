@@ -31,6 +31,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* FIXED: During compilation, when saving references to categories for checking
+for unknown categories, use a template for parametric categories.
+
 * CHANGED: When compiling a Prolog module as a Logtalk object, exported and
 reexported operators are now compiled as object operators instead of file
 operators.

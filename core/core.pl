@@ -5097,7 +5097,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	(	'$lgt_pp_referenced_category_'(Ctg, _) ->
 		true
 	;	'$lgt_current_line_numbers'(Lines),
-		assertz('$lgt_pp_referenced_category_'(Ctg, Lines))
+		(	atom(Ctg) ->
+			assertz('$lgt_pp_referenced_category_'(Ctg, Lines))
+		;	'$lgt_term_template'(Ctg, Template),
+			assertz('$lgt_pp_referenced_category_'(Template, Lines))
+		)
 	).
 
 
