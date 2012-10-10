@@ -67,7 +67,7 @@
 :- thread_shared('$lgt_complemented_object_'/5).
 
 % table of loaded files
-:- thread_shared('$lgt_loaded_file_'/3).
+:- thread_shared('$lgt_loaded_file_'/4).
 
 % runtime flags
 :- thread_shared('$lgt_current_flag_'/2).

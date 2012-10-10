@@ -46,7 +46,7 @@
 	'$lgt_implements_protocol_'/3, '$lgt_imports_category_'/3, '$lgt_instantiates_class_'/3, 
 	'$lgt_specializes_class_'/3, '$lgt_extends_category_'/3, '$lgt_extends_object_'/3,
 	'$lgt_extends_protocol_'/3, '$lgt_complemented_object_'/5,
-	'$lgt_loaded_file_'/3,
+	'$lgt_loaded_file_'/4,
 	'$lgt_compiler_flag'/2, '$lgt_default_flag'/2, '$lgt_current_flag_'/2, '$lgt_pp_compiler_flag_'/2,
 	'$lgt_prolog_feature'/2,
 	'$lgt_exec_ctx'/6, '$lgt_pred_meta_vars'/3,
