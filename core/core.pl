@@ -2962,9 +2962,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		arg(1, UClause, UHead),
 		arg(3, UClause, UTHead),
 		(	(Scope = p(p(p)), Type == (dynamic)) ->
-			asserta('$lgt_db_lookup_cache_'(GObj, GHead, _, GTHead, UClause))
+			asserta('$lgt_db_lookup_cache_'(GObj, GHead, _, GTHead, update(UHead, UTHead, UClause)))
 		;	'$lgt_term_template'(Sender, GSender),
-			asserta('$lgt_db_lookup_cache_'(GObj, GHead, GSender, GTHead, UClause))
+			asserta('$lgt_db_lookup_cache_'(GObj, GHead, GSender, GTHead, update(UHead, UTHead, UClause)))
 		)
 	;	(	(Scope = p(p(p)), Type == (dynamic)) ->
 			asserta('$lgt_db_lookup_cache_'(GObj, GHead, _, GTHead, true))
@@ -12242,9 +12242,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % '$lgt_update_ddef_table'(+atom, @callable, @callable)
 %
 % retracts a dynamic "ddef clause" (used to translate a predicate call)
-% if there are no more clauses for the predicate otherwise does nothing
-%
-% this is required in order to allow definitions in ancestors to be found
+% and updated the predicate lookup caches if there are no more (local)
+% clauses for the predicate otherwise does nothing; this is required in
+% order to allow definitions in ancestor entities to be found
 
 '$lgt_update_ddef_table'(DDef, Head, THead) :-
 	'$lgt_term_template'(THead, GTHead),
@@ -12261,18 +12261,16 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % '$lgt_update_ddef_table_opt'(+callable)
 %
 % retracts a dynamic "ddef clause" (used to translate a predicate call)
-% if there are no more clauses for the predicate otherwise does nothing
-%
-% this is required in order to allow definitions in ancestors to be found
+% and updated the predicate lookup caches if there are no more (local)
+% clauses for the predicate otherwise does nothing; this is required in
+% order to allow definitions in ancestor entities to be found
 
-'$lgt_update_ddef_table_opt'(UClause) :-
-	(	UClause == true ->
+'$lgt_update_ddef_table_opt'(true).
+
+'$lgt_update_ddef_table_opt'(update(Head, THead, Clause)) :-
+	(	clause(THead, _) ->
 		true
-	;	arg(3, UClause, THead),
-		clause(THead, _) ->
-		true
-	;	retractall(UClause),
-		arg(1, UClause, Head),
+	;	retractall(Clause),
 		'$lgt_clean_lookup_caches'(Head)
 	).
 
