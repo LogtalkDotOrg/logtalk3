@@ -2442,7 +2442,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_asserta_rule_checked'(Obj, (Head:-Body), Sender, TestScope, DclScope) :-
 	'$lgt_current_object_'(Obj, Prefix, Dcl, Def, _, _, _, DDcl, DDef, _, Flags),
 	!,
-	'$lgt_assert_pred_dcl'(Dcl, DDcl, DDef, Flags, Head, Scope, Type, Meta, SCtn, DclScope, Obj::asserta((Head:-Body)), Sender),
+	'$lgt_assert_pred_dcl'(Obj, Dcl, DDcl, DDef, Flags, Head, Scope, Type, Meta, SCtn, DclScope, Obj::asserta((Head:-Body)), Sender),
 	(	(Type == (dynamic); Flags /\ 2 =:= 2, Sender = SCtn) ->
 		(	(Scope = TestScope; Sender = SCtn) ->
 			'$lgt_assert_pred_def'(Def, DDef, Prefix, Head, ExCtx, THead, _),
@@ -2475,7 +2475,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_asserta_fact_checked'(Obj, Head, Sender, TestScope, DclScope) :-
 	'$lgt_current_object_'(Obj, Prefix, Dcl, Def, _, _, _, DDcl, DDef, _, Flags),
 	!,
-	'$lgt_assert_pred_dcl'(Dcl, DDcl, DDef, Flags, Head, Scope, Type, _, SCtn, DclScope, Obj::asserta(Head), Sender),
+	'$lgt_assert_pred_dcl'(Obj, Dcl, DDcl, DDef, Flags, Head, Scope, Type, _, SCtn, DclScope, Obj::asserta(Head), Sender),
 	(	(Type == (dynamic); Flags /\ 2 =:= 2, Sender = SCtn) ->
 		(	(Scope = TestScope; Sender = SCtn) ->
 			'$lgt_assert_pred_def'(Def, DDef, Prefix, Head, ExCtx, THead, Update),
@@ -2523,7 +2523,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_assertz_rule_checked'(Obj, (Head:-Body), Sender, TestScope, DclScope) :-
 	'$lgt_current_object_'(Obj, Prefix, Dcl, Def, _, _, _, DDcl, DDef, _, Flags),
 	!,
-	'$lgt_assert_pred_dcl'(Dcl, DDcl, DDef, Flags, Head, Scope, Type, Meta, SCtn, DclScope, Obj::assertz((Head:-Body)), Sender),
+	'$lgt_assert_pred_dcl'(Obj, Dcl, DDcl, DDef, Flags, Head, Scope, Type, Meta, SCtn, DclScope, Obj::assertz((Head:-Body)), Sender),
 	(	(Type == (dynamic); Flags /\ 2 =:= 2, Sender = SCtn) ->
 		(	(Scope = TestScope; Sender = SCtn) ->
 			'$lgt_assert_pred_def'(Def, DDef, Prefix, Head, ExCtx, THead, _),
@@ -2556,7 +2556,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_assertz_fact_checked'(Obj, Head, Sender, TestScope, DclScope) :-
 	'$lgt_current_object_'(Obj, Prefix, Dcl, Def, _, _, _, DDcl, DDef, _, Flags),
 	!,
-	'$lgt_assert_pred_dcl'(Dcl, DDcl, DDef, Flags, Head, Scope, Type, _, SCtn, DclScope, Obj::assertz(Head), Sender),
+	'$lgt_assert_pred_dcl'(Obj, Dcl, DDcl, DDef, Flags, Head, Scope, Type, _, SCtn, DclScope, Obj::assertz(Head), Sender),
 	(	(Type == (dynamic); Flags /\ 2 =:= 2, Sender = SCtn) ->
 		(	(Scope = TestScope; Sender = SCtn) ->
 			'$lgt_assert_pred_def'(Def, DDef, Prefix, Head, ExCtx, THead, Update),
@@ -2583,7 +2583,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % gets or sets (if it doesn't exist) the declaration for an asserted predicate (but we must
 % not add a scope declaration when asserting clauses for a *local* dynamic predicate)
 
-'$lgt_assert_pred_dcl'(Dcl, DDcl, DDef, ObjFlags, Pred, Scope, Type, Meta, SCtn, DclScope, Goal, Sender) :-
+'$lgt_assert_pred_dcl'(Obj, Dcl, DDcl, DDef, ObjFlags, Pred, Scope, Type, Meta, SCtn, DclScope, Goal, Sender) :-
 	(	call(Dcl, Pred, Scope, Meta, PredFlags, SCtn, _) ->
 		% predicate declaration found; get predicate type:
 		(	PredFlags /\ 2 =:= 2 ->
@@ -2592,15 +2592,19 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		)
 	;	% no predicate declaration; check for a local dynamic predicate if we're asserting locally:
 		(DclScope == p, call(DDef, Pred, _, _)) ->
-		Scope = DclScope, Type = (dynamic), Meta = no
-	;	% not a local dynamic predicate; check if dynamic declaration of new predicates is allowed:
-		(DclScope == p; ObjFlags /\ 64 =:= 64) ->
+		Scope = DclScope, Type = (dynamic), Meta = no, SCtn = Obj
+	;	% not a declared predicate and not a local dynamic predicate:
+		(	DclScope == p
+			% object asserting a new predicate in itself
+		;	ObjFlags /\ 64 =:= 64
+			% dynamic declaration of new predicates allowed
+		) ->
 		'$lgt_term_template'(Pred, DPred),
 		functor(Clause, DDcl, 2),
 		arg(1, Clause, DPred),
 		arg(2, Clause, DclScope),
 		assertz(Clause),
-		Scope = DclScope, Type = (dynamic), Meta = no
+		Scope = DclScope, Type = (dynamic), Meta = no, SCtn = Obj
 	;	% object doesn't allow dynamic declaration of new predicates:
 		throw(error(permission_error(create, predicate_declaration, Pred), logtalk(Goal, Sender)))
 	).

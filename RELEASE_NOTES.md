@@ -33,6 +33,10 @@ Logtalk compiler and runtime
 
 * NEW: Updated the compiler to also report references to unknown modules.
 
+* FIXED: A harmless bug when creating a dynamic predicate declaration where
+the predicate scope container would not be passed to the code that creates
+the dynamic predicate definition table entry.
+
 * FIXED: During compilation, when saving references to categories for checking
 for unknown categories, use a template for parametric categories.
 
