@@ -2935,9 +2935,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_add_db_lookup_cache_entry'(Obj, Head, Scope, Type, Sender, THead) :-
 	'$lgt_term_template'(Obj, GObj),
-	'$lgt_term_template'(Head, GHead),
+	'$lgt_term_template'(Head, GHead, Arity),
 	'$lgt_term_template'(THead, GTHead),
-	'$lgt_unify_head_thead_args'(GHead, GTHead),
+	'$lgt_unify_head_thead_args'(Arity, GHead, GTHead),
 	(	(Scope = p(p(p)), Type == (dynamic)) ->
 		asserta('$lgt_db_lookup_cache_'(GObj, GHead, _, GTHead, true))
 	;	'$lgt_term_template'(Sender, GSender),
@@ -2952,9 +2952,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_add_db_lookup_cache_entry'(Obj, Head, SCtn, Scope, Type, Sender, THead, DDef, NeedsUpdate) :-
 	'$lgt_term_template'(Obj, GObj),
-	'$lgt_term_template'(Head, GHead),
+	'$lgt_term_template'(Head, GHead, Arity),
 	'$lgt_term_template'(THead, GTHead),
-	'$lgt_unify_head_thead_args'(GHead, GTHead),
+	'$lgt_unify_head_thead_args'(Arity, GHead, GTHead),
 	(	NeedsUpdate == true, Sender \= SCtn ->
 		'$lgt_term_template'(Head, UHead),
 		'$lgt_term_template'(THead, UTHead),
@@ -2974,12 +2974,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	).
 
 
+
+% '$lgt_unify_head_thead_args'(+integer, +callable, +callable)
+%
 % translated clause heads use an extra argument for passing the execution context
-
-'$lgt_unify_head_thead_args'(Head, THead) :-
-	functor(Head, _, Arity),
-	'$lgt_unify_head_thead_args'(Arity, Head, THead).
-
 
 '$lgt_unify_head_thead_args'(0, _, _) :-
 	!.
@@ -15158,6 +15156,16 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % constructs a template for a callable term
 
 '$lgt_term_template'(Term, Template) :-
+	functor(Term, Functor, Arity),
+	functor(Template, Functor, Arity).
+
+
+
+% '$lgt_term_template'(@callable, -callable, -integer)
+%
+% constructs a template for a callable term and returns the term arity
+
+'$lgt_term_template'(Term, Template, Arity) :-
 	functor(Term, Functor, Arity),
 	functor(Template, Functor, Arity).
 
