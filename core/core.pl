@@ -15236,12 +15236,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % checks that a closure meta-argument is valid
 
 '$lgt_check_closure'(Closure, _) :-
-	var(Closure),
-	!.
-
-'$lgt_check_closure'(Closure, _) :-
-	\+ callable(Closure),
-	throw(type_error(callable, Closure)).
+	'$lgt_must_be'(var_or_callable, Closure),
+	fail.
 
 '$lgt_check_closure'(Free/Goal, Ctx) :-
 	!,
@@ -15288,9 +15284,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_check_lambda_expression'(Free/Parameters>>Goal, Ctx) :-
 	!,
+	% first, check for errors:
 	'$lgt_must_be'(var_or_curly_bracketed_term, Free),
 	'$lgt_must_be'(list_or_partial_list, Parameters),
 	'$lgt_must_be'(var_or_callable, Goal),
+	% second, check for likely errors if compiling a source file:
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 		nonvar(Free),
 		nonvar(Parameters),
@@ -15305,8 +15303,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_must_be'(var_or_callable, Goal).
 
 '$lgt_check_lambda_expression'(Parameters>>Goal, Ctx) :-
+	% first, check for errors:
 	'$lgt_must_be'(list_or_partial_list, Parameters),
 	'$lgt_must_be'(var_or_callable, Goal),
+	% second, check for likely errors if compiling a source file:
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 		nonvar(Parameters),
 		nonvar(Goal) ->
@@ -15314,6 +15314,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	true
 	).
 
+
+
+% each lambda goal variable should be either a lambda free variable or a lambda parameter
 
 '$lgt_check_lambda_expression_unclassified_vars'(Parameters>>Goal) :-
 	(	'$lgt_current_flag_'(report, off) ->
@@ -15341,6 +15344,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	term_variables(Goal, UnqualifiedVars).
 
 
+
+% no lambda goal variable should be both a lambda free variable and a lambda parameter
 
 '$lgt_check_lambda_expression_mixed_up_vars'(Free/Parameters>>Goal) :-
 	(	'$lgt_current_flag_'(report, off) ->
