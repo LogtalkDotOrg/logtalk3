@@ -6466,6 +6466,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_tr_directive'(info, [List], _) :-
 	!,
+	'$lgt_must_be'(list, List),
 	(	'$lgt_check_entity_info_list'(List) ->
 		(	retract('$lgt_pp_info_'(Previous)) ->
 			'$lgt_append'(Previous, List, Info)
@@ -6479,17 +6480,16 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % info/2 predicate directive
 
 '$lgt_tr_directive'(info, [Pred, List], _) :-
-	(	nonvar(Pred) ->
-		(	'$lgt_valid_predicate_or_non_terminal_indicator'(Pred, Functor, Arity) ->
-			'$lgt_check_predicate_info_list'(List, Functor, Arity),
-			(	retract('$lgt_pp_info_'(Pred, Previous)) ->
-				'$lgt_append'(Previous, List, Info)
-			;	Info = List
-			),
-			assertz('$lgt_pp_info_'(Pred, Info))
-		;	throw(type_error(predicate_indicator, Pred))
-		)
-	;	throw(instantiation_error)
+	'$lgt_must_be'(nonvar, Pred),
+	'$lgt_must_be'(list, List),
+	(	'$lgt_valid_predicate_or_non_terminal_indicator'(Pred, Functor, Arity) ->
+		'$lgt_check_predicate_info_list'(List, Functor, Arity),
+		(	retract('$lgt_pp_info_'(Pred, Previous)) ->
+			'$lgt_append'(Previous, List, Info)
+		;	Info = List
+		),
+		assertz('$lgt_pp_info_'(Pred, Info))
+	;	throw(type_error(predicate_indicator, Pred))
 	).
 
 
@@ -7857,14 +7857,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 %
 % checks that the argument is a list of valid key-value pairs
 
-'$lgt_check_entity_info_list'(List) :-
-	var(List),
-	throw(instantiation_error).
-
-'$lgt_check_entity_info_list'(List) :-
-	\+ '$lgt_is_list'(List),
-	throw(type_error(list, List)).
-
 '$lgt_check_entity_info_list'([]).
 
 '$lgt_check_entity_info_list'([Head| _]) :-
@@ -7875,15 +7867,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	Head \= (_ is _),
 	throw(type_error(key_value_info_pair, Head)).
 
-'$lgt_check_entity_info_list'([Key is Value| _]) :-
-	(var(Key); var(Value)),
-	throw(instantiation_error).
-
-'$lgt_check_entity_info_list'([Key is _| _]) :-
-	\+ atom(Key),
-	throw(type_error(atom, Key)).
-
 '$lgt_check_entity_info_list'([Key is Value| Tail]) :-
+	'$lgt_must_be'(atom, Key),
+	'$lgt_must_be'(nonvar, Value),
 	'$lgt_check_entity_info_key_value'(Key, Value),
 	'$lgt_check_entity_info_list'(Tail).
 
@@ -7907,30 +7893,23 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_check_entity_info_key_value'(date, Date) :-
 	!,
 	(	Date = Year/Month/Day ->
-		(	integer(Year) ->
-			(	integer(Month) ->
-				(	integer(Day) ->
-					true
-				;	throw(type_error(integer, Day))
-				)
-			;	throw(type_error(integer, Month))
-			)
-		;	throw(type_error(integer, Year))
-		)
+		'$lgt_must_be'(integer, Year),
+		'$lgt_must_be'(integer, Month),
+		'$lgt_must_be'(integer, Day)
 	;	throw(type_error(date, Date))
 	).
 
 '$lgt_check_entity_info_key_value'(parameters, Parameters) :-
 	!,
-	(	'$lgt_is_list'(Parameters) ->
-		(	'$lgt_member'(Parameter, Parameters), \+ '$lgt_valid_entity_parameter'(Parameter) ->
-			throw(type_error(parameter, Parameter))
-		;	(	'$lgt_pp_entity'(_, Entity, _, _, _), \+ \+ Entity =.. [_| Parameters] ->
-				true
-			;	throw(length_error(parameters_list, Parameters))
-			)
+	'$lgt_must_be'(list, Parameters),
+	(	'$lgt_member'(Parameter, Parameters), \+ '$lgt_valid_entity_parameter'(Parameter) ->
+		throw(type_error(parameter, Parameter))
+	;	(	'$lgt_pp_entity'(_, Entity, _, _, _),
+			functor(Entity, _, Arity),
+			'$lgt_length'(Parameters, 0, Arity) ->
+			true
+		;	throw(length_error(parameters_list, Parameters))
 		)
-	;	throw(type_error(list, Parameters))
 	).
 
 '$lgt_check_entity_info_key_value'(parnames, Parnames) :-
@@ -7970,14 +7949,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 %
 % checks that the argument is a list of valid key-value pairs
 
-'$lgt_check_predicate_info_list'(List, _, _) :-
-	var(List),
-	throw(instantiation_error).
-
-'$lgt_check_predicate_info_list'(List, _, _) :-
-	\+ '$lgt_is_list'(List),
-	throw(type_error(list, List)).
-
 '$lgt_check_predicate_info_list'([], _, _).
 
 '$lgt_check_predicate_info_list'([Head| _], _, _) :-
@@ -7988,15 +7959,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	Head \= (_ is _),
 	throw(type_error(key_value_info_pair, Head)).
 
-'$lgt_check_predicate_info_list'([Key is Value| _], _, _) :-
-	(var(Key); var(Value)),
-	throw(instantiation_error).
-
-'$lgt_check_predicate_info_list'([Key is _| _], _, _) :-
-	\+ atom(Key),
-	throw(type_error(atom, Key)).
-
 '$lgt_check_predicate_info_list'([Key is Value| Tail], Functor, Arity) :-
+	'$lgt_must_be'(atom, Key),
+	'$lgt_must_be'(nonvar, Value),
 	'$lgt_check_pred_info_key_value'(Key, Value, Functor, Arity),
 	'$lgt_check_predicate_info_list'(Tail, Functor, Arity).
 
@@ -8014,23 +7979,23 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	throw(domain_error(allocation, Allocation))
 	).
 
-'$lgt_check_pred_info_key_value'(arguments, Arguments, Functor, Arity) :-
+'$lgt_check_pred_info_key_value'(arguments, Arguments, _, Arity) :-
 	!,
 	'$lgt_must_be'(list, Arguments),
 	(	'$lgt_member'(Argument, Arguments), \+ '$lgt_valid_predicate_argument'(Argument) ->
 		throw(type_error(argument, Argument))
-	;	(	functor(Pred, Functor, Arity), Pred =.. [_| Arguments] ->
+	;	(	'$lgt_length'(Arguments, 0, Arity) ->
 			true
 		;	throw(length_error(arguments_list, Arguments))
 		)
 	).
 
-'$lgt_check_pred_info_key_value'(argnames, Argnames, Functor, Arity) :-
+'$lgt_check_pred_info_key_value'(argnames, Argnames, _, Arity) :-
 	!,
 	'$lgt_must_be'(list, Argnames),
 	(	'$lgt_member'(Name, Argnames), \+ atom(Name) ->
 		throw(type_error(atom, Name))
-	;	(	functor(Pred, Functor, Arity), Pred =.. [_| Argnames] ->
+	;	(	'$lgt_length'(Argnames, 0, Arity) ->
 			true
 		 ;	throw(length_error(argnames_list, Argnames))
 		)
@@ -8411,12 +8376,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_convert_info_items'([], []).
 
 '$lgt_convert_info_items'([Key is Value| Items], [Info| Infos]) :-
-	atom(Key),
-	!,
 	Info =.. [Key, Value],
-	'$lgt_convert_info_items'(Items, Infos).
-
-'$lgt_convert_info_items'([_| Items], Infos) :-
 	'$lgt_convert_info_items'(Items, Infos).
 
 
