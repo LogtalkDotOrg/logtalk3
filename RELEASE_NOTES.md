@@ -25,7 +25,7 @@ RELEASE NOTES
 =============
 
 
-3.00.0 Alpha 3 - October ??, 2012
+3.00.0 Alpha 3 - October 12, 2012
 =================================
 
 Logtalk compiler and runtime
@@ -96,6 +96,9 @@ predicate for Qu-Prolog.
 
 Installers and installation scripts
 -----------------------------------
+
+* UPDATED: The Windows installer script for detecting the new SICStus Prolog
+4.2.3 64 bits version.
 
 * FIXED: Bug in the `logtalk_user_setup.sh` script when creating a symbolic
 link to the `RELEASE_NOTES.md` file.
