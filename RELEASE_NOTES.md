@@ -40,7 +40,17 @@ Prolog adapter and integration files
 * CHANGED: The default definition for the `scratch_directory` flag for SICStus
 Prolog is now the same as for other Prolog compilers (`./.lgt_tmp/` on POSIX
 systems and `./lgt_tmp/` on Windows systems).
- 
+
+Examples
+--------
+
+* CHANGED: Workaround an issue in SICStus Prolog where the built-in loading
+predicates and the file system library predicates that accept relative file
+paths work relative to the directory of the file being loaded instead of the
+user visible working directory (the two directories can differ depending e.g.
+on the value of the "scratch_directory" flag). This issue affected the `cc`,
+`benchmarks`, and `operators` examples.
+
 
 3.00.0 Alpha 3 - October 12, 2012
 =================================

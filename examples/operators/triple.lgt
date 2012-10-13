@@ -26,7 +26,9 @@
 
 	read_from_file :-
 		retractall(triple(_, _)),
-		open('triple.txt', read, Stream),
+		os::working_directory(Directory),
+		atom_concat(Directory, '/triple.txt', Path),
+		open(Path, read, Stream),
 		read(Stream, Term),
 		process(Stream, Term).
 

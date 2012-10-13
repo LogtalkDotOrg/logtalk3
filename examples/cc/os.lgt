@@ -21,9 +21,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.7,
+		version is 1.8,
 		author is 'Paulo Moura',
-		date is 2012/10/06,
+		date is 2012/10/13,
 		comment is 'Simple example of using conditional compilation to implement a portable operating-system interface for selected back-end Prolog compilers.'
 	]).
 
@@ -435,13 +435,15 @@
 			 absolute_file_name(Path, ExpandedPath, [relative_to(Directory)])}.
 
 		make_directory(Directory) :-
-			(	{directory_exists(Directory)} ->
+			expand_path(Directory, Path),
+			(	{directory_exists(Path)} ->
 				true
-			;	{make_directory(Directory)}
+			;	{make_directory(Path)}
 			).
 
 		delete_directory(Directory) :-
-			{delete_directory(Directory)}.
+			expand_path(Directory, Path),
+			{delete_directory(Path)}.
 
 		change_directory(Directory) :-
 			{current_directory(_, Directory)}.
@@ -450,25 +452,33 @@
 			{current_directory(Directory, Directory)}.
 
 		directory_exists(Directory) :-
-			{directory_exists(Directory)}.
+			expand_path(Directory, Path),
+			{directory_exists(Path)}.
 
 		file_exists(File) :-
-			{file_exists(File)}.
+			expand_path(File, Path),
+			{file_exists(Path)}.
 
 		file_modification_time(File, Time) :-
-			{file_property(File, modify_timestamp, Time)}.
+			expand_path(File, Path),
+			{file_property(Path, modify_timestamp, Time)}.
 
 		file_size(File, Size) :-
-			{file_property(File, size_in_bytes, Size)}.
+			expand_path(File, Path),
+			{file_property(Path, size_in_bytes, Size)}.
 
 		file_permission(File, Permission) :-
-			{file_exists(File, Permission)}.
+			expand_path(File, Path),
+			{file_exists(Path, Permission)}.
  
 		delete_file(File) :-
-			{delete_file(File)}.
+			expand_path(File, Path),
+			{delete_file(Path)}.
 
 		rename_file(Old, New) :-
-			{rename_file(Old, New)}.
+			expand_path(Old, OldPath),
+			expand_path(New, NewPath),
+			{rename_file(OldPath, NewPath)}.
 
 		environment_variable(Variable, Value) :-
 			{environ(Variable, Value)}.
