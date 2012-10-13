@@ -15236,8 +15236,12 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % checks that a closure meta-argument is valid
 
 '$lgt_check_closure'(Closure, _) :-
-	'$lgt_must_be'(var_or_callable, Closure),
-	fail.
+	var(Closure),
+	!.
+
+'$lgt_check_closure'(Closure, _) :-
+	\+ callable(Closure),
+	throw(type_error(callable, Closure)).
 
 '$lgt_check_closure'(Free/Goal, Ctx) :-
 	!,

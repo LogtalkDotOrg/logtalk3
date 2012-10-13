@@ -25,6 +25,16 @@ RELEASE NOTES
 =============
 
 
+3.00.0 Alpha 4 - November ??, 2012
+==================================
+
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Undo wrong change in the previous alpha version to the lambda closure
+checking code (which broke lambda and meta-predicate examples).
+
+
 3.00.0 Alpha 3 - October 12, 2012
 =================================
 
