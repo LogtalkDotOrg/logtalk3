@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SICStus Prolog 4.1.0 and later versions
-%  Last updated on August 2, 2012
+%  Last updated on September 13, 2012
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -222,9 +222,9 @@ forall(Generate, Test) :-
 '$lgt_default_flag'(scratch_directory, ScratchDirectory) :-
 	(	environ('COMSPEC', _) ->
 		% Windows systems define this environment variable...
-		ScratchDirectory = './'
+		ScratchDirectory = './lgt_tmp/'
 	;	% ... but not POSIX systems
-		ScratchDirectory = './'
+		ScratchDirectory = './.lgt_tmp/'
 	).
 '$lgt_default_flag'(report, on).
 '$lgt_default_flag'(clean, on).

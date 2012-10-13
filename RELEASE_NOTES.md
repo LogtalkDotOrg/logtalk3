@@ -34,6 +34,13 @@ Logtalk compiler and runtime
 * FIXED: Undo wrong change in the previous alpha version to the lambda closure
 checking code (which broke lambda and meta-predicate examples).
 
+Prolog adapter and integration files
+------------------------------------
+
+* CHANGED: The default definition for the `scratch_directory` flag for SICStus
+Prolog is now the same as for other Prolog compilers (`./.lgt_tmp/` on POSIX
+systems and `./lgt_tmp/` on Windows systems).
+ 
 
 3.00.0 Alpha 3 - October 12, 2012
 =================================
