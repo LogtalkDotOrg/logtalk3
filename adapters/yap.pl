@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for YAP Prolog 6.0.2 and later versions
-%  Last updated on October 10, 2012
+%  Last updated on October 13, 2012
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -63,8 +63,6 @@
 		dynamic('$lgt_pp_warnings_top_goal_directory_'/2), hide_predicate('$lgt_pp_warnings_top_goal_directory_'/2),
 		dynamic('$lgt_pp_compilation_warnings_counter_'/1), hide_predicate('$lgt_pp_compilation_warnings_counter_'/1),
 		dynamic('$lgt_pp_loading_warnings_counter_'/1), hide_predicate('$lgt_pp_loading_warnings_counter_'/1),
-		dynamic('$lgt_pp_entity_warnings_flag_'/0), hide_predicate('$lgt_pp_entity_warnings_flag_'/0),
-		dynamic('$lgt_pp_load_warnings_flag_'/0), hide_predicate('$lgt_pp_load_warnings_flag_'/0),
 		dynamic('$lgt_pp_aux_predicate_counter_'/1), hide_predicate('$lgt_pp_aux_predicate_counter_'/1),
 		dynamic('$lgt_hook_term_expansion_'/2), hide_predicate('$lgt_hook_term_expansion_'/2),
 		dynamic('$lgt_hook_goal_expansion_'/2), hide_predicate('$lgt_hook_goal_expansion_'/2),
@@ -89,7 +87,7 @@
 :- dynamic(message_hook/3).
 
 message_hook(clauses_not_together(_), _, _) :-	% YAP discontiguous predicate
-	'$lgt_inc_load_warnings_counter',			% clauses warning; hack to increment
+	'$lgt_increment_loadind_warnings_counter',	% clauses warning; hack to increment
 	fail.										% the Logtalk warnings counter
 
 

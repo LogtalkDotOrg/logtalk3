@@ -31,12 +31,12 @@
 :- set_prolog_flag(optimise, true).
 
 
-:- multifile(message_hook/3).				% SWI-Prolog hook predicate
+:- multifile(message_hook/3).					% SWI-Prolog hook predicate
 :- dynamic(message_hook/3).
 
-message_hook(discontiguous(_), _, _) :-		% SWI-Prolog discontiguous predicate
-	'$lgt_inc_load_warnings_counter',		% clauses warning; hack to increment
-	fail.									% the Logtalk warnings counter
+message_hook(discontiguous(_), _, _) :-			% SWI-Prolog discontiguous predicate
+	'$lgt_increment_loadind_warnings_counter',	% clauses warning; hack to increment
+	fail.										% the Logtalk warnings counter
 
 
 

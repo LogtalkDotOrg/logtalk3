@@ -40,7 +40,7 @@
 :- set_event_handler(134, '$lgt_eclipse_discontiguous_predicate_handler'/2).
 
 '$lgt_eclipse_discontiguous_predicate_handler'(Err, Goal) :-
-	'$lgt_inc_load_warnings_counter',
+	'$lgt_increment_loadind_warnings_counter',
 	error(default(Err), Goal).
 
 :- set_stream(user_error, stderr).
