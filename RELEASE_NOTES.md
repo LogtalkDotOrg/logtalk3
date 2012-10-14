@@ -31,6 +31,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* FIXED: The implementation of the top-level built-in predicates `::/2` and
+`<</2`, used mainly at the top-level interactive interpreter, could fail to
+throw an `instantiation_error` exception when the first argument was unbound.
+
 * FIXED: Undo wrong change in the previous alpha version to the lambda closure
 checking code (which broke lambda and meta-predicate examples).
 

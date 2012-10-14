@@ -337,6 +337,10 @@
 
 
 Obj::Pred :-
+	var(Obj),
+	throw(error(instantiation_error, logtalk(Obj::Pred, user))).
+
+Obj::Pred :-
 	catch('$lgt_tr_msg'(Pred, Obj, Call, user), Error, '$lgt_runtime_error_handler'(error(Error, logtalk(Obj::Pred, user)))),
 	(	'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags),
 		Flags /\ 256 =:= 256 ->
@@ -346,6 +350,10 @@ Obj::Pred :-
 	).
 
 
+
+Obj<<Goal :-
+	var(Obj),
+	throw(error(instantiation_error, logtalk(Obj<<Goal, user))).
 
 Obj<<Goal :-
 	catch('$lgt_tr_ctx_call'(Obj, Goal, Call, user), Error, '$lgt_runtime_error_handler'(error(Error, logtalk(Obj<<Goal, user)))),
