@@ -3543,8 +3543,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_obj_super_call_other_nv'(Super, Pred, ExCtx) :-
 	'$lgt_exec_ctx'(ExCtx, _, This, Self, _, _),
-	(	'$lgt_current_object_'(Self, _, Dcl, _, _, _, _, _, _, _, _),
-		% lookup predicate declaration
+	'$lgt_current_object_'(Self, _, Dcl, _, _, _, _, _, _, _, _),
+	(	% lookup predicate declaration
 		call(Dcl, Pred, Scope, _, _, SCtn, _) ->
 		(	% check scope
 			(Scope = p(_); This = SCtn) ->
@@ -3610,8 +3610,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % been type-checked; generates a cache entry to speed up future calls
 
 '$lgt_ctg_super_call_other_nv'(Ctg, Pred, ExCtx) :-
-	(	'$lgt_current_category_'(Ctg, _, Dcl, Def, _, _),
-		call(Dcl, Pred, Scope, _, _, _) ->
+	'$lgt_current_category_'(Ctg, _, Dcl, Def, _, _),
+	(	call(Dcl, Pred, Scope, _, _, _) ->
 		(	% check that the call is within scope
 			Scope = p(_) ->
 			(	% construct category and predicate templates
@@ -4072,8 +4072,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_ctg_call_nv'(Dcl, Alias, ExCtx) :-
 	'$lgt_exec_ctx_this'(ExCtx, This),
-	(	'$lgt_current_object_'(This, _, _, _, _, _, _, _, _, Rnm, _),
-		call(Dcl, Alias, _, _, _, _, _) ->
+	'$lgt_current_object_'(This, _, _, _, _, _, _, _, _, Rnm, _),
+	(	call(Dcl, Alias, _, _, _, _, _) ->
 		(	% construct predicate and "this" templates
 			'$lgt_term_template'(Alias, GAlias),
 			'$lgt_term_template'(This, GThis),
