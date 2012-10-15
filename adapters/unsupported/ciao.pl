@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Ciao Prolog 1.14.0
-%  Last updated on August 2, 2012
+%  Last updated on October 15, 2012
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -393,6 +393,52 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 '$lgt_home_directory'(Directory) :-
 	getenvstr('LOGTALKHOME', String),
 	atom_codes(Directory, String).
+
+
+% '$lgt_decompose_file_name'(+atom, ?atom, ?atom, ?atom)
+%
+% decomposes a file path in its components; the directory
+% must always end with a slash and the extension must be
+% the empty atom when it does not exist
+
+'$lgt_decompose_file_name'(File, Directory, Name, Extension) :-
+	atom_codes(File, FileCodes),
+	(	'$lgt_strrch'(FileCodes, 0'/, [_Slash| BasenameCodes]) ->
+		atom_codes(Basename, BasenameCodes),
+		atom_concat(Directory, Basename, File)
+	;	Directory = './',
+		atom_codes(Basename, FileCodes),
+		BasenameCodes = FileCodes
+	),
+	(	'$lgt_strrch'(BasenameCodes, 0'., ExtensionCodes) ->
+		atom_codes(Extension, ExtensionCodes),
+		atom_concat(Name, Extension, Basename)
+	;	Name = Basename,
+		Extension = ''
+	).
+        
+% the following auxiliar predicate was written by Per Mildner and 
+% is used here (renamed just to avoid conflicts) with permission
+
+'$lgt_strrch'(Xs, G, Ys) :-
+	Xs = [X| Xs1],
+	(	X == G ->
+		'$lgt_strrch1'(Xs1, G, Xs, Ys)
+	;	'$lgt_strrch'(Xs1, G, Ys)
+	).
+
+'$lgt_strrch1'(Xs, _G, _Prev, _Ys) :-
+	var(Xs),
+	!,
+	fail.
+'$lgt_strrch1'([], _G, Prev, Ys) :-
+	Ys = Prev.
+'$lgt_strrch1'(Xs, G, Prev, Ys) :-
+	Xs = [X| Xs1],
+	(	X == G ->
+		'$lgt_strrch1'(Xs1, G, Xs, Ys)
+	;	'$lgt_strrch1'(Xs1, G, Prev, Ys)
+	).
 
 
 
