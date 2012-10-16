@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Quintus Prolog 3.3~3.5
-%  Last updated on August 2, 2012
+%  Last updated on October 16, 2012
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -635,6 +635,18 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 	error(existence_error(_, _, procedure, ':'(user, Functor/Arity), _), _),
 	error(existence_error(procedure, Functor/Arity), _)
 ).
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  message token printing
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%:- multifile('$lgt_logtalk.print_message_token'/3).
+%:- dynamic('$lgt_logtalk.print_message_token'/3).
 
 
 

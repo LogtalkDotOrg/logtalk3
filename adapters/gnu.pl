@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for GNU Prolog 1.4.1 (and later versions)
-%  Last updated on September 7, 2012
+%  Last updated on October 16, 2012
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -597,7 +597,7 @@ setup_call_cleanup(_, _, _) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  ugly hack to deal with GNU Prolog's non-standard format/3 predicate
+%  message token printing
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -605,6 +605,7 @@ setup_call_cleanup(_, _, _) :-
 :- multifile('$lgt_logtalk.print_message_token'/3).
 :- dynamic('$lgt_logtalk.print_message_token'/3).
 
+%  ugly hack to deal with GNU Prolog's non-standard format/3 predicate
 '$lgt_logtalk.print_message_token'(Stream, Format-Args, _) :-
 	'$lgt_gnu_filter_format'(Format, FilteredFormat),
 	format(Stream, FilteredFormat, Args).

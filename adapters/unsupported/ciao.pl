@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Ciao Prolog 1.14.0
-%  Last updated on October 15, 2012
+%  Last updated on October 16, 2012
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -700,6 +700,18 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 
 '$lgt_normalize_error_term'(error(existence_error(procedure, ModFunctor/Arity), _), error(existence_error(procedure, Functor/Arity), _)) :-
 	atom_concat('user:', Functor, ModFunctor).
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  message token printing
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%:- multifile('$lgt_logtalk.print_message_token'/3).
+%:- dynamic('$lgt_logtalk.print_message_token'/3).
 
 
 

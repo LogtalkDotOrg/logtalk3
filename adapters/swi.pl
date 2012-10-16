@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SWI Prolog 6.0.0 and later versions
-%  Last updated on September 24, 2012
+%  Last updated on October 16, 2012
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -995,6 +995,17 @@ user:goal_expansion('::'(Object, Message), Goal) :-
 
 '$lgt_logtalk.print_message_token'(Stream, end(Var), _) :-
 	prolog:message_line_element(Stream, end(Var)).
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  term hashing (used un dynamic binding caching)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% term_hash(@callable, +integer, +integer, -integer) -- built-in
 
 
 
