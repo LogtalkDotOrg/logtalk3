@@ -9164,6 +9164,14 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_comp_ctx_this'(Ctx, This),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_exec_ctx_this'(ExCtx, This),
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+		nonvar(Obj),
+		This \== user,
+		\+ functor(Obj, {}, 1) ->
+		% not runtime message translation; remember object receiving message
+		'$lgt_add_referenced_object'(Obj)
+	;	true
+	),
 	'$lgt_tr_msg'(Pred, Obj, TPred, This).
 
 '$lgt_tr_body'(::Pred, TPred, '$lgt_debug'(goal(::Pred, TPred), ExCtx), Ctx) :-
@@ -10676,16 +10684,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	nonvar(Obj),
 	\+ callable(Obj),
 	throw(type_error(object_identifier, Obj)).
-
-
-% not runtime message translation; remember object receiving message
-
-'$lgt_tr_msg'(_, Obj, _, This) :-
-	nonvar(Obj),
-	This \== user,
-	\+ functor(Obj, {}, 1),
-	'$lgt_add_referenced_object'(Obj),
-	fail.
 
 
 % convenient access to parametric object proxies

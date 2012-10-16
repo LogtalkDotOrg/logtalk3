@@ -31,6 +31,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* FIXED: Make sure that runtime translation of `::/2` calls don't try to
+record the referenced object for checks that only apply when compiling a
+source file.
+
 * FIXED: The implementation of the top-level built-in predicates `::/2` and
 `<</2`, used mainly at the top-level interactive interpreter, could fail to
 throw an `instantiation_error` exception when the first argument was unbound.
