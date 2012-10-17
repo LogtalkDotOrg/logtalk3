@@ -3681,10 +3681,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		Sender = This
 	;	Sender = Sender0
 	),
-	(	atom(Closure) ->
-		Goal =.. [Closure| ExtraArgs],
-		call(Goal)
-	;	compound(Closure) ->
+	(	callable(Closure) ->
 		Closure =.. [Functor| Args],
 		'$lgt_append'(Args, ExtraArgs, FullArgs),
 		Goal =.. [Functor| FullArgs],
@@ -3705,14 +3702,14 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		Sender = This
 	;	Sender = Sender0
 	),
-	(	var(Closure) ->
-		Call =.. [call, ::Closure| ExtraArgs],
-		throw(error(instantiation_error, logtalk(Call, Sender)))
-	;	callable(Closure) ->
+	(	callable(Closure) ->
 		Closure =.. [Functor| Args],
 		'$lgt_append'(Args, ExtraArgs, FullArgs),
 		Goal =.. [Functor| FullArgs],
 		'$lgt_send_to_self_'(Self, Goal, Sender)
+	;	var(Closure) ->
+		Call =.. [call, ::Closure| ExtraArgs],
+		throw(error(instantiation_error, logtalk(Call, Sender)))
 	;	Call =.. [call, ::Closure| ExtraArgs],
 		throw(error(type_error(callable, Closure), logtalk(Call, Sender)))
 	).
@@ -3723,13 +3720,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		Sender = This
 	;	Sender = Sender0
 	),
-	(	var(Obj) ->
-		Call =.. [call, Obj::Closure| ExtraArgs],
-		throw(error(instantiation_error, logtalk(Call, Sender)))
-	;	var(Closure) ->
-		Call =.. [call, Obj::Closure| ExtraArgs],
-		throw(error(instantiation_error, logtalk(Call, Sender)))
-	;	callable(Obj), callable(Closure) ->
+	(	callable(Obj), callable(Closure) ->
 		Closure =.. [Functor| Args],
 		'$lgt_append'(Args, ExtraArgs, FullArgs),
 		Goal =.. [Functor| FullArgs],
@@ -3737,8 +3728,17 @@ current_logtalk_flag(version, version(3, 0, 0)).
 			'$lgt_send_to_obj_'(Obj, Goal, Sender)
 		;	'$lgt_send_to_obj_ne_'(Obj, Goal, Sender)
 		)
-	;	Call =.. [call, Obj::Closure| ExtraArgs],
+	;	var(Obj) ->
+		Call =.. [call, Obj::Closure| ExtraArgs],
+		throw(error(instantiation_error, logtalk(Call, Sender)))
+	;	var(Closure) ->
+		Call =.. [call, Obj::Closure| ExtraArgs],
+		throw(error(instantiation_error, logtalk(Call, Sender)))
+	;	\+ callable(Closure) ->
+		Call =.. [call, Obj::Closure| ExtraArgs],
 		throw(error(type_error(callable, Closure), logtalk(Call, Sender)))
+	;	Call =.. [call, Obj::Closure| ExtraArgs],
+		throw(error(type_error(object_identifier, Obj), logtalk(Call, Sender)))
 	).
 
 '$lgt_metacall'(Obj<<Closure, ExtraArgs, MetaCallCtx, _, Sender0, This, _) :-
@@ -3747,19 +3747,22 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		Sender = This
 	;	Sender = Sender0
 	),
-	(	var(Obj) ->
+	(	callable(Obj), callable(Closure) ->
+		Closure =.. [Functor| Args],
+		'$lgt_append'(Args, ExtraArgs, FullArgs),
+		Goal =.. [Functor| FullArgs],
+		'$lgt_call_within_context_nv'(Obj, Goal, Sender)
+	;	var(Obj) ->
 		Call =.. [call, Obj<<Closure| ExtraArgs],
 		throw(error(instantiation_error, logtalk(Call, Sender)))
 	;	var(Closure) ->
 		Call =.. [call, Obj<<Closure| ExtraArgs],
 		throw(error(instantiation_error, logtalk(Call, Sender)))
-	;	callable(Obj), callable(Closure) ->
-		Closure =.. [Functor| Args],
-		'$lgt_append'(Args, ExtraArgs, FullArgs),
-		Goal =.. [Functor| FullArgs],
-		'$lgt_call_within_context_nv'(Obj, Goal, Sender)
-	;	Call =.. [call, Obj<<Closure| ExtraArgs],
+	;	\+ callable(Closure) ->
+		Call =.. [call, Obj<<Closure| ExtraArgs],
 		throw(error(type_error(callable, Closure), logtalk(Call, Sender)))
+	;	Call =.. [call, Obj<<Closure| ExtraArgs],
+		throw(error(type_error(object_identifier, Obj), logtalk(Call, Sender)))
 	).
 
 '$lgt_metacall'(':'(Module, Closure), ExtraArgs, MetaCallCtx, _, Sender0, This, _) :-
@@ -3768,23 +3771,22 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		Sender = This
 	;	Sender = Sender0
 	),
-	(	var(Module) ->
+	(	atom(Module), callable(Closure) ->
+		Closure =.. [Functor| Args],
+		'$lgt_append'(Args, ExtraArgs, FullArgs),
+		Goal =.. [Functor| FullArgs],
+		':'(Module, Goal)
+	;	var(Module) ->
 		Call =.. [call, ':'(Module, Closure)| ExtraArgs],
 		throw(error(instantiation_error, logtalk(Call, Sender)))
 	;	var(Closure) ->
 		Call =.. [call, ':'(Module, Closure)| ExtraArgs],
 		throw(error(instantiation_error, logtalk(Call, Sender)))
-	;	atom(Module) ->
-		(	callable(Closure) ->
-			Closure =.. [Functor| Args],
-			'$lgt_append'(Args, ExtraArgs, FullArgs),
-			Goal =.. [Functor| FullArgs],
-			':'(Module, Goal)
-		;	Call =.. [call, ':'(Module, Closure)| ExtraArgs],
-			throw(error(type_error(callable, Closure), logtalk(Call, Sender)))
-		)
-	;	Call =.. [call, ':'(Module, Closure)| ExtraArgs],
+	;	\+ atom(Module) ->
+		Call =.. [call, ':'(Module, Closure)| ExtraArgs],
 		throw(error(type_error(module_identifier, Module), logtalk(Call, Sender)))
+	;	Call =.. [call, ':'(Module, Closure)| ExtraArgs],
+		throw(error(type_error(callable, Closure), logtalk(Call, Sender)))
 	).
 
 '$lgt_metacall'(Free/Closure, ExtraArgs, LambdaMetaCallCtx, Prefix, Sender, This, Self) :-
@@ -3822,12 +3824,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	throw(error(type_error(callable, Closure), logtalk(Call, This))).
 
 '$lgt_metacall'(Closure, ExtraArgs, MetaCallCtx, Prefix, Sender, This, Self) :-
-	(	atom(Closure) ->
-		Goal =.. [Closure| ExtraArgs]
-	;	Closure =.. [Functor| Args],
-		'$lgt_append'(Args, ExtraArgs, FullArgs),
-		Goal =.. [Functor| FullArgs]
-	),
+	Closure =.. [Functor| Args],
+	'$lgt_append'(Args, ExtraArgs, FullArgs),
+	Goal =.. [Functor| FullArgs],
 	(	\+ '$lgt_member'(Closure, MetaCallCtx) ->
 		'$lgt_metacall_this'(Goal, Prefix, Sender, This, Self)
 	;	'$lgt_metacall_sender'(Goal, Sender, This, ExtraArgs)

@@ -31,6 +31,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* FIXED: A meta-call with a `Object::Closure` argument would not generate
+the correct exception for a non-valid object identifier.
+
 * FIXED: Make sure that runtime translation of `::/2` calls don't try to
 record the referenced object for checks that only apply when compiling a
 source file.
