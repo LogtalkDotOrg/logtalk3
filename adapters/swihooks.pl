@@ -557,23 +557,23 @@ user:portray(c(This, r(Sender, Self, MetaVars, CoinductionStack))) :-
 % default a "notrace" property
 :- '$set_predicate_attribute'('$lgt_send_to_self_nv'/3, trace, 1).
 :- '$set_predicate_attribute'('$lgt_send_to_self'/3, trace, 1).
-:- '$set_predicate_attribute'('$lgt_send_to_self_'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_send_to_self_'/4, trace, 1).
 :- '$set_predicate_attribute'('$lgt_send_to_obj'/3, trace, 1).
-:- '$set_predicate_attribute'('$lgt_send_to_obj_'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_send_to_obj_'/4, trace, 1).
 :- '$set_predicate_attribute'('$lgt_send_to_obj_nv'/3, trace, 1).
 :- '$set_predicate_attribute'('$lgt_send_to_obj_ne_nv'/3, trace, 1).
 :- '$set_predicate_attribute'('$lgt_send_to_obj_ne'/3, trace, 1).
-:- '$set_predicate_attribute'('$lgt_send_to_obj_ne_'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_send_to_obj_ne_'/4, trace, 1).
 :- '$set_predicate_attribute'('$lgt_obj_super_call_same'/3, trace, 1).
-:- '$set_predicate_attribute'('$lgt_obj_super_call_same_'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_obj_super_call_same_'/4, trace, 1).
 :- '$set_predicate_attribute'('$lgt_obj_super_call_other'/3, trace, 1).
-:- '$set_predicate_attribute'('$lgt_obj_super_call_other_'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_obj_super_call_other_'/4, trace, 1).
 :- '$set_predicate_attribute'('$lgt_ctg_super_call_same'/3, trace, 1).
-:- '$set_predicate_attribute'('$lgt_ctg_super_call_same_'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_ctg_super_call_same_'/4, trace, 1).
 :- '$set_predicate_attribute'('$lgt_ctg_super_call_other'/3, trace, 1).
-:- '$set_predicate_attribute'('$lgt_ctg_super_call_other_'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_ctg_super_call_same_'/4, trace, 1).
 :- '$set_predicate_attribute'('$lgt_ctg_call'/3, trace, 1).
-:- '$set_predicate_attribute'('$lgt_ctg_call_'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_ctg_call_'/4, trace, 1).
 :- '$set_predicate_attribute'('$lgt_call_in_this'/2, trace, 1).
 
 :- '$set_predicate_attribute'('$lgt_metacall'/6, trace, 1).

@@ -28,16 +28,16 @@
 
 :- import format/3 from format.
 
-:- index('$lgt_send_to_obj_'/3, [1 + *(2)]).
-:- index('$lgt_send_to_obj_ne_'/3, [1 + *(2)]).
-:- index('$lgt_send_to_self_'/3, [1 + *(2)]).
-:- index('$lgt_obj_super_call_same_'/3, [1 + *(2)]).
-:- index('$lgt_obj_super_call_other_'/3, [1 + *(2)]).
-:- index('$lgt_ctg_super_call_same_'/3, [1 + *(2)]).
-:- index('$lgt_ctg_super_call_other_'/3, [1 + *(2)]).
-:- index('$lgt_ctg_call_'/3, [1 + *(2)]).
+:- index('$lgt_send_to_obj_'/4, [1 + *(2)]).
+:- index('$lgt_send_to_obj_ne_'/4, [1 + *(2)]).
+:- index('$lgt_send_to_self_'/4, [1 + *(2)]).
+:- index('$lgt_obj_super_call_same_'/4, [1 + *(2)]).
+:- index('$lgt_obj_super_call_other_'/4, [1 + *(2)]).
+:- index('$lgt_ctg_super_call_same_'/4, [1 + *(2)]).
+:- index('$lgt_ctg_super_call_same_'/4, [1 + *(2)]).
+:- index('$lgt_ctg_call_'/4, [1 + *(2)]).
 
-:- index('$lgt_db_lookup_cache_'/5, [1 + *(2)]).
+:- index('$lgt_db_lookup_cache_'/6, [1 + *(2)]).
 
 :- compiler_options([xpp_on]).
 

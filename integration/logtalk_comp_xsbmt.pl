@@ -28,16 +28,16 @@
 
 :- import format/3 from format.
 
-:- index('$lgt_send_to_obj_'/3, [1 + *(2)]).
-:- index('$lgt_send_to_obj_ne_'/3, [1 + *(2)]).
-:- index('$lgt_send_to_self_'/3, [1 + *(2)]).
-:- index('$lgt_obj_super_call_same_'/3, [1 + *(2)]).
-:- index('$lgt_obj_super_call_other_'/3, [1 + *(2)]).
-:- index('$lgt_ctg_super_call_same_'/3, [1 + *(2)]).
-:- index('$lgt_ctg_super_call_other_'/3, [1 + *(2)]).
-:- index('$lgt_ctg_call_'/3, [1 + *(2)]).
+:- index('$lgt_send_to_obj_'/4, [1 + *(2)]).
+:- index('$lgt_send_to_obj_ne_'/4, [1 + *(2)]).
+:- index('$lgt_send_to_self_'/4, [1 + *(2)]).
+:- index('$lgt_obj_super_call_same_'/4, [1 + *(2)]).
+:- index('$lgt_obj_super_call_other_'/4, [1 + *(2)]).
+:- index('$lgt_ctg_super_call_same_'/4, [1 + *(2)]).
+:- index('$lgt_ctg_super_call_same_'/4, [1 + *(2)]).
+:- index('$lgt_ctg_call_'/4, [1 + *(2)]).
 
-:- index('$lgt_db_lookup_cache_'/5, [1 + *(2)]).
+:- index('$lgt_db_lookup_cache_'/6, [1 + *(2)]).
 
 :- compiler_options([xpp_on]).
 
@@ -78,17 +78,17 @@
 :- thread_shared('$lgt_ctg_call_static_binding_cache_'/4).
 
 % lookup caches for messages to an object, messages to self, and super calls
-:- thread_shared('$lgt_send_to_obj_'/3).
-:- thread_shared('$lgt_send_to_obj_ne_'/3).
-:- thread_shared('$lgt_send_to_self_'/3).
-:- thread_shared('$lgt_obj_super_call_same_'/3).
-:- thread_shared('$lgt_obj_super_call_other_'/3).
-:- thread_shared('$lgt_ctg_super_call_same_'/3).
-:- thread_shared('$lgt_ctg_super_call_other_'/3).
-:- thread_shared('$lgt_ctg_call_'/3).
+:- thread_shared('$lgt_send_to_obj_'/4).
+:- thread_shared('$lgt_send_to_obj_ne_'/4).
+:- thread_shared('$lgt_send_to_self_'/4).
+:- thread_shared('$lgt_obj_super_call_same_'/4).
+:- thread_shared('$lgt_obj_super_call_other_'/4).
+:- thread_shared('$lgt_ctg_super_call_same_'/4).
+:- thread_shared('$lgt_ctg_super_call_same_'/4).
+:- thread_shared('$lgt_ctg_call_'/4).
 
 % lookup cache for asserting and retracting dynamic facts
-:- thread_shared('$lgt_db_lookup_cache_'/5).
+:- thread_shared('$lgt_db_lookup_cache_'/6).
 
 % table of library paths
 :- thread_shared(logtalk_library_path/2).
