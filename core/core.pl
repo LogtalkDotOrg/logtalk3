@@ -7263,8 +7263,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	(	Entity == user ->
 		assertz('$lgt_pp_directive_'(multifile(Functor/Arity)))
 	;	functor(Template, Functor, Arity),
-		'$lgt_predicate_property'(Entity, Template, Scope, Entity, _), '$lgt_scope'(Scope, _),
-		'$lgt_predicate_property'(Entity, Template, (multifile), Entity, _) ->
+		'$lgt_check_for_public_multifile_declaration'(Entity, Template) ->
 		'$lgt_construct_entity_prefix'(Entity, Prefix),
 		'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity)))
@@ -7279,8 +7278,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	(	Entity == user ->
 		assertz('$lgt_pp_directive_'(multifile(Functor/ExtArity)))
 	;	functor(Template, Functor, ExtArity),
-		'$lgt_predicate_property'(Entity, Template, (public), Entity, p(p(p))),
-		'$lgt_predicate_property'(Entity, Template, (multifile), Entity, p(p(p))) ->
+		'$lgt_check_for_public_multifile_declaration'(Entity, Template) ->
 		'$lgt_construct_entity_prefix'(Entity, Prefix),
 		'$lgt_construct_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity)))
@@ -7328,6 +7326,19 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_tr_multifile_directive'([Resource| _]) :-
 	throw(type_error(predicate_indicator, Resource)).
+
+
+'$lgt_check_for_public_multifile_declaration'(Entity, Pred) :-
+	(	'$lgt_current_object_'(Entity, _, Dcl, _, _, _, _, _, _, _, _)
+	;	'$lgt_current_protocol_'(Entity, _, Dcl, _, _)
+	;	'$lgt_current_category_'(Entity, _, Dcl, _, _, _)
+	),
+	!,
+	% predicate must declared public and multifile
+	(	call(Dcl, Pred, p(p(p)), _, Flags) ->
+		Flags /\ 16 =:= 16
+	;	fail
+	).
 
 
 

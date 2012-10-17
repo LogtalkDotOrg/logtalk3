@@ -31,6 +31,8 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: Also allow categories to declare (public) multifile predicates.
+
 * FIXED: A meta-call with a `Object::Closure` argument would not generate
 the correct exception for a non-valid object identifier.
 
