@@ -4733,7 +4733,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		atom_concat(OldDirectory, OldBase, OldFile0),
 		atom_concat(NewDirectory, NewBase, NewFile0), 
 		Lines = Start-End,
-		(	OldFile \== NewFile ->
+		(	OldFile0 \== NewFile0 ->
 			OldFile = OldFile0,
 			NewFile = NewFile0
 		;	% we're reloading the same file
