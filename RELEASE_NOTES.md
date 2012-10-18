@@ -31,6 +31,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: Detect a missing closing entity directive when the entity with
+the missing directive is followed by another entity.
+
 * IMPROVED: Also allow categories to declare (public) multifile predicates.
 
 * FIXED: A meta-call with a `Object::Closure` argument would not generate

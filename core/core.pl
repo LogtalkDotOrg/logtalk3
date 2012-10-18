@@ -6192,6 +6192,14 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		throw(permission_error(modify, protocol, Obj))
 	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_category_'(Obj, _, _, _, _, _)),
 		throw(permission_error(modify, category, Obj))
+	;	'$lgt_pp_entity'(Type, _, _, _, _),
+		(	Type == object ->
+			throw(existence_error(closing_directive, end_object/0))
+		;	Type == protocol ->
+			throw(existence_error(closing_directive, end_protocol/0))
+		;	% Type == category ->
+			throw(existence_error(closing_directive, end_category/0))
+		)
 	).
 
 '$lgt_tr_directive'(object, [Obj| Relations], _) :-
@@ -6231,6 +6239,14 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		throw(permission_error(modify, protocol, Ptc))
 	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_category_'(Ptc, _, _, _, _, _)),
 		throw(permission_error(modify, category, Ptc))
+	;	'$lgt_pp_entity'(Type, _, _, _, _),
+		(	Type == object ->
+			throw(existence_error(closing_directive, end_object/0))
+		;	Type == protocol ->
+			throw(existence_error(closing_directive, end_protocol/0))
+		;	% Type == category ->
+			throw(existence_error(closing_directive, end_category/0))
+		)
 	).
 
 '$lgt_tr_directive'(protocol, [Ptc| Relations], _) :-
@@ -6271,6 +6287,14 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		throw(permission_error(modify, protocol, Ctg))
 	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_category_'(Ctg, _, _, _, _, _)),
 		throw(permission_error(modify, category, Ctg))
+	;	'$lgt_pp_entity'(Type, _, _, _, _),
+		(	Type == object ->
+			throw(existence_error(closing_directive, end_object/0))
+		;	Type == protocol ->
+			throw(existence_error(closing_directive, end_protocol/0))
+		;	% Type == category ->
+			throw(existence_error(closing_directive, end_category/0))
+		)
 	).
 
 '$lgt_tr_directive'(category, [Ctg| Relations], _) :-
