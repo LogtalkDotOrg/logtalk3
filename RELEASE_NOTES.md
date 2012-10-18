@@ -54,6 +54,12 @@ Prolog adapter and integration files
 Prolog is now the same as for other Prolog compilers (`./.lgt_tmp/` on POSIX
 systems and `./lgt_tmp/` on Windows systems).
 
+Tools
+-----
+
+* FIXED: The `diagram` tool contained two calls to `list::member/2` instead
+of using the custom, local, definition.
+
 Examples
 --------
 

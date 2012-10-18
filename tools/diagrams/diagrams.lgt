@@ -25,9 +25,9 @@
 :- object(diagram).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2011/05/24,
+		date is 2012/10/18,
 		comment is 'Generates entity diagram DOT files for source files and libraries.']).
 
 	:- public(rlibrary/2).
@@ -420,9 +420,9 @@
 		).
 
 	parameter_names(Entity, Info, Names) :-
-		(	list::member(parnames(Names), Info) ->
+		(	member(parnames(Names), Info) ->
 			true
-		;	list::member(parameters(Parameters), Info) ->
+		;	member(parameters(Parameters), Info) ->
 			pairs::keys(Parameters, Names)
 		;	Entity =.. [_| Names],
 			variables_to_underscore(Names)
