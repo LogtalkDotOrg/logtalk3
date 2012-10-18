@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/10/09,
+		date is 2012/10/18,
 		comment is 'Logtalk core (compiler and runtime) default message translations.']).
 
 	:- multifile(logtalk::message_prefix_stream/4).
@@ -308,8 +308,9 @@
 	logtalk::message_tokens(redefining_entity(Type, Entity), core) -->
 		['Redefining ~w ~q'-[Type, Entity], nl].
 
-	logtalk::message_tokens(redefining_entity_from_file(Type, Entity, File), core) -->
-		['Redefining ~w ~q (loaded from file ~w)'-[Type, Entity, File], nl].		
+	logtalk::message_tokens(redefining_entity_from_file(Type, Entity, OldFile, NewFile, Lines), core) -->
+		['Redefining ~w ~q (loaded from file ~w)'-[Type, Entity, OldFile], nl],
+		message_context(NewFile, Lines).
 
 	logtalk::message_tokens(compilation_and_loading_warnings(CCounter, LCounter), core) -->
 		(	{CCounter + LCounter =:= 0} ->

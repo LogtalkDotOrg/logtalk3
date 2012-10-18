@@ -31,6 +31,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: When printing a loading warning that an entity with the same
+identifier was already loaded from a different file, also output the file
+and line number information.
+
 * IMPROVED: Detect a missing closing entity directive when the entity with
 the missing directive is followed by another entity.
 

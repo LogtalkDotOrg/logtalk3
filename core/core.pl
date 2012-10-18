@@ -4705,8 +4705,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_category_'(Entity, _, _, _, _, _))
 	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_object_'(Entity, _, _, _, _, _, _, _, _, _, _))
 	),
-	'$lgt_redefined_entity'(Entity, Type, File),
-	'$lgt_report_redefined_entity'(Type, Entity, File),
+	'$lgt_redefined_entity'(Entity, Type, OldFile, NewFile, Lines),
+	'$lgt_report_redefined_entity'(Type, Entity, OldFile, NewFile, Lines),
 	'$lgt_retract_old_runtime_clauses'(Entity),
 	fail.
 
@@ -4718,7 +4718,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 %
 % true if an entity of the same name is already loaded; returns entity type
 
-'$lgt_redefined_entity'(Entity, Type, File) :-
+'$lgt_redefined_entity'(Entity, Type, OldFile, NewFile, Lines) :-
+	% check that an entity of the same name is already loaded:
 	(	'$lgt_current_object_'(Entity, _, _, _, _, _, _, _, _, _, _) ->
 		Type = object
 	;	'$lgt_current_protocol_'(Entity, _, _, _, _) ->
@@ -4727,28 +4728,36 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		Type = category
 	),
 	(	% check file information using the file/2 entity property, if available:
-		'$lgt_entity_property_'(Entity, file_lines(OldBase, OldPath, _, _)),
-		'$lgt_pp_file_runtime_clause_'('$lgt_entity_property_'(Entity, file_lines(NewBase, NewPath, _, _))),
-		(OldPath \== NewPath; OldBase \== NewBase) ->
-		File = OldBase-OldPath
-	;	% either no file/2 entity property or we're reloading the same file
-		File = nil
+		'$lgt_entity_property_'(Entity, file_lines(OldBase, OldDirectory, _, _)),
+		'$lgt_pp_file_runtime_clause_'('$lgt_entity_property_'(Entity, file_lines(NewBase, NewDirectory, Start, End))) ->
+		atom_concat(OldDirectory, OldBase, OldFile0),
+		atom_concat(NewDirectory, NewBase, NewFile0), 
+		Lines = Start-End,
+		(	OldFile \== NewFile ->
+			OldFile = OldFile0,
+			NewFile = NewFile0
+		;	% we're reloading the same file
+			OldFile = nil,
+			NewFile = nil
+		)
+	;	% no file/2 entity property
+		OldFile = nil,
+		NewFile = nil,
+		Lines = 1
 	).
 
 
 
-% '$lgt_report_redefined_entity'(+atom, @entity_identifier, +atom)
+% '$lgt_report_redefined_entity'(+atom, @entity_identifier, +atom, +nonvar)
 %
 % prints a warning for redefined entities
 
-'$lgt_report_redefined_entity'(Type, Entity, File) :-
+'$lgt_report_redefined_entity'(Type, Entity, OldFile, NewFile, Lines) :-
 	'$lgt_increment_loadind_warnings_counter',
-	(	File == nil ->
+	(	NewFile == nil ->
 		'$lgt_print_message'(warning(redefining), core, redefining_entity(Type, Entity))
 	;	% we've conflicting entities coming from different source files:
-		File = Base-Directory,
-		atom_concat(Base, Directory, Path),
-		'$lgt_print_message'(warning(redefining), core, redefining_entity_from_file(Type, Entity, Path))
+		'$lgt_print_message'(warning(redefining), core, redefining_entity_from_file(Type, Entity, OldFile, NewFile, Lines))
 	).
 
 
