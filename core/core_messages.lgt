@@ -308,9 +308,9 @@
 	logtalk::message_tokens(redefining_entity(Type, Entity), core) -->
 		['Redefining ~w ~q'-[Type, Entity], nl].
 
-	logtalk::message_tokens(redefining_entity_from_file(Type, Entity, OldFile, NewFile, Lines), core) -->
+	logtalk::message_tokens(redefining_entity_from_file(File, Lines, Type, Entity, OldFile), core) -->
 		['Redefining ~w ~q (loaded from file ~w)'-[Type, Entity, OldFile], nl],
-		message_context(NewFile, Lines).
+		message_context(File, Lines).
 
 	logtalk::message_tokens(compilation_and_loading_warnings(CCounter, LCounter), core) -->
 		(	{CCounter + LCounter =:= 0} ->

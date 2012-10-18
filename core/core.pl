@@ -4757,7 +4757,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	(	NewFile == nil ->
 		'$lgt_print_message'(warning(redefining), core, redefining_entity(Type, Entity))
 	;	% we've conflicting entities coming from different source files:
-		'$lgt_print_message'(warning(redefining), core, redefining_entity_from_file(Type, Entity, OldFile, NewFile, Lines))
+		'$lgt_print_message'(warning(redefining), core, redefining_entity_from_file(NewFile, Lines, Type, Entity, OldFile))
 	).
 
 
