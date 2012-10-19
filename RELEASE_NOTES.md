@@ -31,6 +31,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: Compiler messages about redefined entities that result from
+reloading the same source file that contained the previous defintions are
+no longer warning but informational messages.
+
 * IMPROVED: When printing a loading warning that an entity with the same
 identifier was already loaded from a different file, also output the file
 and line number information.
