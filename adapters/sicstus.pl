@@ -28,7 +28,7 @@
 
 :- use_module(library(file_systems)).
 :- use_module(library(system)).
-:- use_module(library(system3), [shell/1, shell/2]).
+:- use_module(library(system3), [pid/1, shell/1, shell/2]).
 
 
 :- multifile(message_hook/3).							% SICStus Prolog hook predicate

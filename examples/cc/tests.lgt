@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Paulo Moura',
-		date is 2011/08/27,
+		date is 2011/10/19,
 		comment is 'Unit tests for the "cc" example.']).
 
 	test(cc_1) :-
@@ -60,5 +60,9 @@
 		os::time_stamp(Time1),
 		os::time_stamp(Time2),
 		Time1 @=< Time2.
+
+	test(cc_9) :-
+		os::pid(PID),
+		integer(PID).
 
 :- end_object.

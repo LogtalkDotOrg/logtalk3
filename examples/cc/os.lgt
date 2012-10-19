@@ -119,7 +119,7 @@
 	:- elif(current_logtalk_flag(prolog_dialect, yap)).
 
 		pid(PID) :-
-			pid(PID).
+			{pid(PID)}.
 
 		shell(Command, Status) :-
 			{shell(Command, Status)}.
@@ -441,7 +441,7 @@
 	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
 
 		pid(PID) :-
-			pid(PID).
+			{pid(PID)}.
 
 		shell(Command, Status) :-
 			{shell(Command, Status)}.
