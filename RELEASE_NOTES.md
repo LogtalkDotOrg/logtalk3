@@ -80,6 +80,9 @@ category opening directives.
 Examples
 --------
 
+* ADDED: Definition for a `pid/1` predicate for getting the process identifier
+of the current process to the `cc` example.
+
 * CHANGED: Workaround an issue in SICStus Prolog where the built-in loading
 predicates and the file system library predicates that accept relative file
 paths work relative to the directory of the file being loaded instead of the

@@ -12,10 +12,16 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1.8,
+		version is 1.9,
 		author is 'Paulo Moura',
-		date is 2012/09/29,
+		date is 2012/10/19,
 		comment is 'Portable operating-system access protocol.']).
+
+	:- public(pid/1).
+	:- mode(pid(-integer), one).
+	:- info(pid/1, [
+		comment is 'Returns the process identitifer of the running process.',
+		argnames is ['PID']]).
 
 	:- public(shell/2).
 	:- mode(shell(+atom, -integer), one).

@@ -14,6 +14,7 @@
 :- elif(current_logtalk_flag(prolog_dialect, xsb)).
 	:- import(from(/(expand_atom,2), standard)).
 	:- import(from(/(xsb_configuration,2), xsb_configuration)).
+	:- import(from(/(sys_pid,1), shell)).
 :- endif.
 
 
@@ -21,13 +22,16 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.8,
+		version is 1.9,
 		author is 'Paulo Moura',
-		date is 2012/10/13,
+		date is 2012/10/19,
 		comment is 'Simple example of using conditional compilation to implement a portable operating-system interface for selected back-end Prolog compilers.'
 	]).
 
 	:- if(current_logtalk_flag(prolog_dialect, swi)).
+
+		pid(PID) :-
+			current_prolog_flag(pid, PID).
 
 		shell(Command, Status) :-
 			{shell(Command, Status)}.
@@ -114,6 +118,9 @@
 
 	:- elif(current_logtalk_flag(prolog_dialect, yap)).
 
+		pid(PID) :-
+			pid(PID).
+
 		shell(Command, Status) :-
 			{shell(Command, Status)}.
 
@@ -198,6 +205,9 @@
 
 	:- elif(current_logtalk_flag(prolog_dialect, xsb)).
 
+		pid(PID) :-
+			{sys_pid(PID)}.
+
 		shell(Command, Status) :-
 			{shell(Command, Status)}.
 
@@ -280,6 +290,9 @@
 
 	:- elif(current_logtalk_flag(prolog_dialect, gnu)).
 
+		pid(PID) :-
+			{prolog_pid(PID)}.
+
 		shell(Command, Status) :-
 			{shell(Command, Status)}.
 
@@ -352,6 +365,9 @@
 
 	:- elif(current_logtalk_flag(prolog_dialect, b)).
 
+		pid(_) :-
+			throw(not_available(pid/1)).
+
 		shell(Command, Status) :-
 			{system(Command, Status)}.
 
@@ -423,6 +439,9 @@
 			get_main_args(Arguments).
 
 	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
+
+		pid(PID) :-
+			pid(PID).
 
 		shell(Command, Status) :-
 			{shell(Command, Status)}.
@@ -506,6 +525,9 @@
 
 	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
 
+		pid(PID) :-
+			{get_flag(pid, PID)}.
+
 		shell(Command, Status) :-	% for UNIX anyway...
 			{getenv('SHELL', Shell),
 			 exec([Shell,'-c',Command], [], Pid),
@@ -582,6 +604,9 @@
 
 	:- elif(current_logtalk_flag(prolog_dialect, ciao)).
 
+		pid(PID) :-
+			{get_pid(PID)}.
+
 		shell(Command, Status) :-
 			{shell(Command, Status)}.
 
@@ -651,6 +676,9 @@
 			throw(not_available(command_line_arguments/1)).
 
 	:- elif(current_logtalk_flag(prolog_dialect, cx)).
+
+		pid(PID) :-
+			{os_pid(PID)}.
 
 		shell(Command, Status) :-
 			(	{os_run(Command)} ->
@@ -732,6 +760,9 @@
 			find_arguments(Arguments0, Arguments).
 
 	:- elif(current_logtalk_flag(prolog_dialect, qp)).
+
+		pid(_) :-
+			throw(not_available(pid/1)).
 
 		shell(Command, Status) :-
 			{os(system(Command, Status))}.
@@ -821,6 +852,9 @@
 			{get_args(Arguments)}.
 
 	:- elif(current_logtalk_flag(prolog_dialect, lean)).
+
+		pid(_) :-
+			throw(not_available(pid/1)).
 
 		shell(Command, Status) :-
 			{split_string(Command, ' ', List),
