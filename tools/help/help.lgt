@@ -121,7 +121,7 @@
 	built_in_directive(endif, 0, '/manuals/refman/directives/', 'endif0.html').
 
 	built_in_directive(calls, 1, '/manuals/refman/directives/', 'calls1.html').
-	built_in_directive(category, N, '/manuals/refman/directives/', 'category1.html') :-
+	built_in_directive(category, N, '/manuals/refman/directives/', 'category1_3.html') :-
 		integer::between(1, 3, N).
 	built_in_directive(dynamic, 0, '/manuals/refman/directives/', 'dynamic0.html').
 	built_in_directive(end_category, 0, '/manuals/refman/directives/', 'end_category0.html').
@@ -129,9 +129,9 @@
 	built_in_directive(end_protocol, 0, '/manuals/refman/directives/', 'end_protocol0.html').
 	built_in_directive(info, 1, '/manuals/refman/directives/', 'info1.html').
 	built_in_directive(initialization, 1, '/manuals/refman/directives/', 'initialization1.html').
-	built_in_directive(object, N, '/manuals/refman/directives/', 'object1.html') :-
+	built_in_directive(object, N, '/manuals/refman/directives/', 'object1_5.html') :-
 		integer::between(1, 5, N).
-	built_in_directive(protocol, N, '/manuals/refman/directives/', 'protocol1.html') :-
+	built_in_directive(protocol, N, '/manuals/refman/directives/', 'protocol1_2.html') :-
 		integer::between(1, 2, N).
 	built_in_directive(synchronized, 0, '/manuals/refman/directives/', 'synchronized0.html').
 	built_in_directive(threaded, 0, '/manuals/refman/directives/', 'threaded0.html').

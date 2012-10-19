@@ -67,6 +67,9 @@ Tools
 * FIXED: The `diagram` tool contained two calls to `list::member/2` instead
 of using the custom, local, definition.
 
+* FIXED: The `help` tool contained wrong links to the object, protocol, and
+category opening directives.
+
 Examples
 --------
 
