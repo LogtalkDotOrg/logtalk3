@@ -32,8 +32,8 @@ Logtalk compiler and runtime
 ----------------------------
 
 * NEW: Updated the compiler to perform error and portability checking
-for the `set_prolog_flag/2` and `current_prolog_flag/2` standard Prolog
-built-in predicates.
+for the Prolog standard `set_prolog_flag/2` and `current_prolog_flag/2`  
+predicates and the `set_prolog_flag/2` directive.
 
 * CHANGED: Compiler messages about redefined entities that result from
 reloading the same source file that contained the previous definitions
