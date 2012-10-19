@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/10/18,
+		date is 2012/10/20,
 		comment is 'Logtalk core (compiler and runtime) default message translations.']).
 
 	:- multifile(logtalk::message_prefix_stream/4).
@@ -205,6 +205,22 @@
 	logtalk::message_tokens(non_standard_arithmetic_function_call(File, Lines, Type, Entity, Function), core) -->
 		['Call to non-standard Prolog built-in arithmetic function: ~q'-[Function], nl],
 		message_context(File, Lines, Type, Entity).
+
+	logtalk::message_tokens(non_standard_prolog_flag(File, Lines, Type, Entity, Flag), core) -->
+		['Use of non-standard Prolog flag: ~q'-[Flag], nl],
+		message_context(File, Lines, Type, Entity).
+
+	logtalk::message_tokens(non_standard_prolog_flag(File, Lines, Flag), core) -->
+		['Use of non-standard Prolog flag: ~q'-[Flag], nl],
+		message_context(File, Lines).
+
+	logtalk::message_tokens(non_standard_prolog_flag_value(File, Lines, Type, Entity, Flag, Value), core) -->
+		['Use of non-standard Prolog flag value: ~q:~q'-[Flag, Value], nl],
+		message_context(File, Lines, Type, Entity).
+
+	logtalk::message_tokens(non_standard_prolog_flag_value(File, Lines, Flag, Value), core) -->
+		['Use of non-standard Prolog flag: ~q:~q'-[Flag, Value], nl],
+		message_context(File, Lines).
 
 	logtalk::message_tokens(unclassified_variables_in_lambda_expression(File, Lines, Type, Entity, LambdaExpression), core) -->
 		{copy_term(LambdaExpression, LambdaExpressionCopy), numbervars(LambdaExpressionCopy, 0, _)},

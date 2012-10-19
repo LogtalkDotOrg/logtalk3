@@ -9926,7 +9926,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!.
 
 
-% flags (just error cheking)
+% Logtalk flag predicates (just error cheking)
 
 '$lgt_tr_body'(set_logtalk_flag(Flag, Value), _, _, _) :-
 	'$lgt_must_be'(var_or_flag, Flag),
@@ -9935,6 +9935,67 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_tr_body'(current_logtalk_flag(Flag, _), _, _, _) :-
 	'$lgt_must_be'(var_or_flag, Flag),
+	fail.
+
+
+% Prolog flag predicates (just basic error and portability cheking)
+
+'$lgt_tr_body'(set_prolog_flag(Flag, Value), _, _, _) :-
+	'$lgt_must_be'(atom, Flag),
+	'$lgt_must_be'(nonvar, Value),
+	'$lgt_compiler_flag'(portability, warning),
+	\+ '$lgt_iso_spec_flag'(Flag),
+	'$lgt_pp_file_path_flags_'(File, Directory, _),
+	atom_concat(Directory, File, Path),
+	'$lgt_current_line_numbers'(Lines),
+	'$lgt_increment_compile_warnings_counter',
+	(	'$lgt_pp_entity'(Type, Entity, _, _, _) ->
+		'$lgt_print_message'(warning(portability), core, non_standard_prolog_flag(Path, Lines, Type, Entity, Flag))
+	;	'$lgt_print_message'(warning(portability), core, non_standard_prolog_flag(Path, Lines, Flag))
+	),
+	fail.
+
+'$lgt_tr_body'(set_prolog_flag(Flag, Value), _, _, _) :-
+	'$lgt_compiler_flag'(portability, warning),
+	\+ '$lgt_iso_spec_flag'(Flag, Value),
+	'$lgt_pp_file_path_flags_'(File, Directory, _),
+	atom_concat(Directory, File, Path),
+	'$lgt_current_line_numbers'(Lines),
+	'$lgt_increment_compile_warnings_counter',
+	(	'$lgt_pp_entity'(Type, Entity, _, _, _) ->
+		'$lgt_print_message'(warning(portability), core, non_standard_prolog_flag_value(Path, Lines, Type, Entity, Flag, Value))
+	;	'$lgt_print_message'(warning(portability), core, non_standard_prolog_flag_value(Path, Lines, Flag, Value))
+	),
+	fail.
+
+'$lgt_tr_body'(current_prolog_flag(Flag, _), _, _, _) :-
+	'$lgt_must_be'(var_or_atom, Flag),
+	nonvar(Flag),
+	'$lgt_compiler_flag'(portability, warning),
+	\+ '$lgt_iso_spec_flag'(Flag),
+	'$lgt_pp_file_path_flags_'(File, Directory, _),
+	atom_concat(Directory, File, Path),
+	'$lgt_current_line_numbers'(Lines),
+	'$lgt_increment_compile_warnings_counter',
+	(	'$lgt_pp_entity'(Type, Entity, _, _, _) ->
+		'$lgt_print_message'(warning(portability), core, non_standard_prolog_flag(Path, Lines, Type, Entity, Flag))
+	;	'$lgt_print_message'(warning(portability), core, non_standard_prolog_flag(Path, Lines, Flag))
+	),
+	fail.
+
+'$lgt_tr_body'(current_prolog_flag(Flag, Value), _, _, _) :-
+	nonvar(Flag),
+	nonvar(Value),
+	'$lgt_compiler_flag'(portability, warning),
+	\+ '$lgt_iso_spec_flag'(Flag, Value),
+	'$lgt_pp_file_path_flags_'(File, Directory, _),
+	atom_concat(Directory, File, Path),
+	'$lgt_current_line_numbers'(Lines),
+	'$lgt_increment_compile_warnings_counter',
+	(	'$lgt_pp_entity'(Type, Entity, _, _, _) ->
+		'$lgt_print_message'(warning(portability), core, non_standard_prolog_flag_value(Path, Lines, Type, Entity, Flag, Value))
+	;	'$lgt_print_message'(warning(portability), core, non_standard_prolog_flag_value(Path, Lines, Flag, Value))
+	),
 	fail.
 
 
@@ -16428,6 +16489,49 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_iso_spec_function'(max(_, _)).
 '$lgt_iso_spec_function'(min(_, _)).
 '$lgt_iso_spec_function'('^'(_, _)).
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  table of ISO specified flags
+%
+%  (used for portability checking)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+'$lgt_iso_spec_flag'(bounded).
+'$lgt_iso_spec_flag'(max_integer).
+'$lgt_iso_spec_flag'(min_integer).
+'$lgt_iso_spec_flag'(integer_rounding_function).
+'$lgt_iso_spec_flag'(max_arity).
+'$lgt_iso_spec_flag'(char_conversion).
+'$lgt_iso_spec_flag'(debug).
+'$lgt_iso_spec_flag'(double_quotes).
+'$lgt_iso_spec_flag'(unknown).
+
+
+'$lgt_iso_spec_flag_value'(bounded, Value) :-
+	'$lgt_member'(Value, [true, false]).
+'$lgt_iso_spec_flag'(max_integer, Value) :-
+	integer(Value).
+'$lgt_iso_spec_flag'(min_integer, Value) :-
+	integer(Value).
+'$lgt_iso_spec_flag'(integer_rounding_function, Value) :-
+	'$lgt_member'(Value, [toward_zero, down]).
+'$lgt_iso_spec_flag'(max_arity, Value) :-
+	integer(Value).
+'$lgt_iso_spec_flag'(char_conversion, Value) :-
+	'$lgt_member'(Value, [on, off]).
+'$lgt_iso_spec_flag'(debug, Value) :-
+	'$lgt_member'(Value, [on, off]).
+'$lgt_iso_spec_flag'(double_quotes, Value) :-
+	'$lgt_member'(Value, [atom, chars, codes]).
+'$lgt_iso_spec_flag'(unknown, Value) :-
+	'$lgt_member'(Value, [error, warning, fail]).
 
 
 
