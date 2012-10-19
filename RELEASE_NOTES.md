@@ -32,8 +32,8 @@ Logtalk compiler and runtime
 ----------------------------
 
 * CHANGED: Compiler messages about redefined entities that result from
-reloading the same source file that contained the previous defintions are
-no longer warning but informational messages.
+reloading the same source file that contained the previous definitions
+are no longer warning but informational messages.
 
 * IMPROVED: When printing a loading warning that an entity with the same
 identifier was already loaded from a different file, also output the file
@@ -64,6 +64,9 @@ Prolog adapter and integration files
 * CHANGED: The default definition for the `scratch_directory` flag for SICStus
 Prolog is now the same as for other Prolog compilers (`./.lgt_tmp/` on POSIX
 systems and `./lgt_tmp/` on Windows systems).
+
+* CHANGED: Deleted from the SWI-Prolog adapter file the setting of the flag
+`optimise` to `true` as it's not local to a file and it breaks `plunit`.
 
 Tools
 -----

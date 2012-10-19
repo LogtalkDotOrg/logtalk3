@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SWI Prolog 6.0.0 and later versions
-%  Last updated on October 16, 2012
+%  Last updated on October 19, 2012
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -28,7 +28,6 @@
 
 %:- set_prolog_flag(iso, true).	% commented due to all the SWI-Prolog libraries that don't compile/work in "iso" mode!
 :- set_prolog_flag(generate_debug_info, false).
-:- set_prolog_flag(optimise, true).
 
 
 :- multifile(message_hook/3).					% SWI-Prolog hook predicate
