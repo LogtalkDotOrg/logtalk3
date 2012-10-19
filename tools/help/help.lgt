@@ -97,15 +97,8 @@
 			Completion = Functor/Arity
 		),
 		sub_atom(Functor, 0, _, _, Prefix),
-		(	os::environment_variable('COMSPEC', _) ->
-			% assume we're running on Windows
-			convert_file_path(Path, ConvertedPath),
-			atom_concat('%LOGTALKHOME%', ConvertedPath, Page0),
-			atom_concat(Page0, File, Page1)
-		;	% assume we're running on a POSIX system
-			atom_concat('$LOGTALKHOME', Path, Page0),
-			atom_concat(Page0, File, Page1)
-		),
+		atom_concat('$LOGTALKHOME', Path, Page0),
+		atom_concat(Page0, File, Page1),
 		os::expand_path(Page1, Page).
 
 	:- public(completions/2).
