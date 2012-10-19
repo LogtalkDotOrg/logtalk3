@@ -25,9 +25,9 @@
 :- object(help).
 
 	:- info([
-		version is 0.6,
+		version is 0.7,
 		author is 'Paulo Moura',
-		date is 2011/08/21,
+		date is 2012/10/19,
 		comment is 'Command-line help for Logtalk built-in control constructs, predicates, non-terminals, and methods.']).
 
 	:- initialization((nl, write('For help on Logtalk, type help::help.'), nl)).
@@ -78,6 +78,45 @@
 			open(Path, File)
 		).
 
+	:- public(completion/2).
+	:- mode(completion(+atom, -pair), zero_or_more).
+	:- info(completion/2, [
+		comment is 'Provides a completion pair (Completion-Page) for a given prefix.',
+		argnames is ['Prefix', 'Completion']]).
+
+	completion(Prefix, Completion-Page) :-
+		(	built_in_directive(Functor, Arity, Path, File),
+			Completion = Functor/Arity
+		;	built_in_method(Functor, Arity, Path, File),
+			Completion = Functor/Arity
+		;	built_in_predicate(Functor, Arity, Path, File),
+			Completion = Functor/Arity
+		;	built_in_non_terminal(Functor, Arity, Path, File),
+			Completion = Functor//Arity
+		;	control(Functor, Arity, Path, File),
+			Completion = Functor/Arity
+		),
+		sub_atom(Functor, 0, _, _, Prefix),
+		(	os::environment_variable('COMSPEC', _) ->
+			% assume we're running on Windows
+			convert_file_path(Path, ConvertedPath),
+			atom_concat('%LOGTALKHOME%', ConvertedPath, Page0),
+			atom_concat(Page0, File, Page1)
+		;	% assume we're running on a POSIX system
+			atom_concat('$LOGTALKHOME', Path, Page0),
+			atom_concat(Page0, File, Page1)
+		),
+		os::expand_path(Page1, Page).
+
+	:- public(completions/2).
+	:- mode(completions(+atom, -lists(pair)), zero_or_more).
+	:- info(completions/2, [
+		comment is 'Provides a list of completions pairs (Completion-Page) for a given prefix.',
+		argnames is ['Prefix', 'Completions']]).
+
+	completions(Prefix, Completions) :-
+		findall(Completion, completion(Prefix, Completion), Completions).
+
 	built_in_directive(encoding, 1, '/manuals/refman/directives/', 'encoding1.html').
 	built_in_directive(initialization, 1, '/manuals/refman/directives/', 'initialization1.html').
 	built_in_directive(op, 3, '/manuals/refman/directives/', 'op3.html').
@@ -90,7 +129,7 @@
 
 	built_in_directive(calls, 1, '/manuals/refman/directives/', 'calls1.html').
 	built_in_directive(category, N, '/manuals/refman/directives/', 'category1.html') :-
-		N >= 1, N =< 3.
+		integer::between(1, 3, N).
 	built_in_directive(dynamic, 0, '/manuals/refman/directives/', 'dynamic0.html').
 	built_in_directive(end_category, 0, '/manuals/refman/directives/', 'end_category0.html').
 	built_in_directive(end_object, 0, '/manuals/refman/directives/', 'end_object0.html').
@@ -98,9 +137,9 @@
 	built_in_directive(info, 1, '/manuals/refman/directives/', 'info1.html').
 	built_in_directive(initialization, 1, '/manuals/refman/directives/', 'initialization1.html').
 	built_in_directive(object, N, '/manuals/refman/directives/', 'object1.html') :-
-		N >= 1, N =< 5.
+		integer::between(1, 5, N).
 	built_in_directive(protocol, N, '/manuals/refman/directives/', 'protocol1.html') :-
-		N >= 1, N =< 2.
+		integer::between(1, 2, N).
 	built_in_directive(synchronized, 0, '/manuals/refman/directives/', 'synchronized0.html').
 	built_in_directive(threaded, 0, '/manuals/refman/directives/', 'threaded0.html').
 	built_in_directive(uses, 1, '/manuals/refman/directives/', 'uses1.html').
@@ -197,7 +236,7 @@
 	built_in_method(retractall, 1, '/manuals/refman/methods/', 'retractall1.html').
 
 	built_in_method(call, N, '/manuals/refman/methods/', 'callN.html') :-
-		N > 0.
+		integer::between(1, 8, N).
 	built_in_method(once, 1, '/manuals/refman/methods/', 'once1.html').
 	built_in_method((\+), 1, '/manuals/refman/methods/', 'not1.html').
 
@@ -228,7 +267,7 @@
 	control((:), 1, '/manuals/refman/control/', 'direct1.html').
 
 	built_in_non_terminal(call, N, '/manuals/refman/methods/', 'call1.html') :-
-		N > 0.
+		integer::between(1, 6, N).
 
 	:- public(library/0).
 	:- mode(library, one).
@@ -267,7 +306,7 @@
 		(	\+ os::environment_variable('LOGTALKHOME', _) ->
 			write('The environment variable LOGTALKHOME must be defined and pointing to your'), nl,
 			write('Logtalk installation folder in order for on-line help to be available.'), nl, nl
-		;	os::environment_variable('HOMEDRIVE', _) ->
+		;	os::environment_variable('COMSPEC', _) ->
 			% assume we're running on Windows
 			convert_file_path(Path, ConvertedPath),
 			atom_concat('%LOGTALKHOME%', ConvertedPath, FullPath),
