@@ -9965,6 +9965,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_tr_body'(set_prolog_flag(Flag, Value), _, _, _) :-
 	'$lgt_compiler_flag'(portability, warning),
+	'$lgt_iso_spec_flag'(Flag),
 	\+ '$lgt_iso_spec_flag'(Flag, Value),
 	'$lgt_pp_file_path_flags_'(File, Directory, _),
 	atom_concat(Directory, File, Path),
@@ -9995,6 +9996,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	nonvar(Flag),
 	nonvar(Value),
 	'$lgt_compiler_flag'(portability, warning),
+	'$lgt_iso_spec_flag'(Flag),
 	\+ '$lgt_iso_spec_flag'(Flag, Value),
 	'$lgt_pp_file_path_flags_'(File, Directory, _),
 	atom_concat(Directory, File, Path),
