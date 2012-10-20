@@ -974,6 +974,9 @@ user:goal_expansion('::'(Object, Message), Goal) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% uncomment the following lines for getting colored messages when running on
+% a terminal but be sure to keep them commented out when using PDT
+%
 %:- multifile('$lgt_logtalk.message_hook'/5).
 %:- dynamic('$lgt_logtalk.message_hook'/5).
 %
