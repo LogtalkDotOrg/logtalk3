@@ -599,9 +599,19 @@ message_hook(clauses_not_together(_), _, _) :-	% YAP discontiguous predicate
 	logtalk_load_context(entity_type, module),					% only when we're compiling a module as an object!
 	'$lgt_compile_predicate_indicators'(PIs, CPIs).
 
-'$lgt_yap_directive_expansion'(table(PIs), {table(CPIs)}) :-
+'$lgt_yap_directive_expansion'(table(F/A), {table(TF/TA)}) :-
 	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_indicators'(PIs, CPIs).
+	'$lgt_compile_predicate_indicators'(F/A, TF/TA).
+
+'$lgt_yap_directive_expansion'(table([F/A| PIs]), {table(TPIs)}) :-
+	logtalk_load_context(entity_type, _),
+	'$lgt_compile_predicate_indicators'([F/A| PIs], TPIs).
+
+'$lgt_yap_directive_expansion'(table(Head), {table(THead)}) :-
+	logtalk_load_context(entity_type, _),
+	'$lgt_compile_predicate_heads'(Head, THead),
+	functor(THead, _, Arity),
+	arg(Arity, THead, first).
 
 '$lgt_yap_directive_expansion'(thread_local(PIs), {thread_local(CPIs)}) :-
 	logtalk_load_context(entity_type, _),

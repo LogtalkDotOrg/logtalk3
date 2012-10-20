@@ -68,6 +68,8 @@ checking code (which broke lambda and meta-predicate examples).
 Prolog adapter and integration files
 ------------------------------------
 
+* ADDED: Support for the YAP `table/1` mode directed tabling directive.
+
 * CHANGED: The default definition for the `scratch_directory` flag for SICStus
 Prolog is now the same as for other Prolog compilers (`./.lgt_tmp/` on POSIX
 systems and `./lgt_tmp/` on Windows systems).
@@ -86,6 +88,10 @@ category opening directives.
 
 Examples
 --------
+
+* ADDED: Some examples of mode directed tabling to the `tabling` example
+when using YAP as the back-end Prolog compiler. Contributed by João Santos
+and Ricardo Rocha.
 
 * ADDED: Definition for a `pid/1` predicate for getting the process identifier
 of the current process to the `cc` example.
