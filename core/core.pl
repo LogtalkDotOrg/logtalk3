@@ -6166,11 +6166,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_set_compiler_flags'([Option]).
 
 '$lgt_tr_file_directive'(set_prolog_flag(Flag, Value), _) :-
-	% perform basic error and portability checking
-	'$lgt_tr_body'(set_prolog_flag(Flag, Value), _, _, _),
-	fail.
-
-'$lgt_tr_file_directive'(set_prolog_flag(Flag, Value), _) :-
 	!,
 	set_prolog_flag(Flag, Value),
 	'$lgt_pp_term_location'(Location),
@@ -6356,6 +6351,14 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_check_compiler_flag'(Flag, Value),
 	retractall('$lgt_pp_entity_compiler_flag_'(Flag, _)),
 	assertz('$lgt_pp_entity_compiler_flag_'(Flag, Value)).
+
+
+% set_prolog_flag/1 used as an entity directive
+
+'$lgt_tr_directive'(set_prolog_flag, [Flag, Value], _) :-
+	% perform basic error and portability checking
+	'$lgt_tr_body'(set_prolog_flag(Flag, Value), _, _, _),
+	fail.
 
 
 % create a message queue at object initialization
