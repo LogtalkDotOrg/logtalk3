@@ -31,7 +31,7 @@
 	:- if(current_logtalk_flag(prolog_dialect, swi)).
 
 		pid(PID) :-
-			current_prolog_flag(pid, PID).
+			{current_prolog_flag(pid, PID)}.
 
 		shell(Command, Status) :-
 			{shell(Command, Status)}.
@@ -99,15 +99,15 @@
 			{statistics(walltime, [Time, _])}.
 
 		operating_system_type(Type) :-
-			(	current_prolog_flag(windows, true) ->
+			(	{current_prolog_flag(windows, true)} ->
 				Type = windows
-			;	current_prolog_flag(unix, true) ->
+			;	{current_prolog_flag(unix, true)} ->
 				Type = unix
 			;	Type = unknown
 			).
 
 		command_line_arguments(Arguments) :-
-			current_prolog_flag(argv, Arguments0),
+			{current_prolog_flag(argv, Arguments0)},
 			find_arguments(Arguments0, Arguments).
 
 		find_arguments([], []).
@@ -193,15 +193,15 @@
 			{statistics(walltime, [Time, _])}.
 
 		operating_system_type(Type) :-
-			(	current_prolog_flag(windows, true) ->
+			(	{current_prolog_flag(windows, true)} ->
 				Type = windows
-			;	current_prolog_flag(unix, true) ->
+			;	{current_prolog_flag(unix, true)} ->
 				Type = unix
 			;	Type = unknown
 			).
 
 		command_line_arguments(Arguments) :-
-			current_prolog_flag(argv, Arguments).
+			{current_prolog_flag(argv, Arguments)}.
 
 	:- elif(current_logtalk_flag(prolog_dialect, xsb)).
 
@@ -355,13 +355,13 @@
 			{real_time(Miliseconds), Time is Miliseconds/1000}.
 
 		operating_system_type(Type) :-
-			(	os_version(windows) ->
+			(	{os_version(windows)} ->
 				Type = windows
 			;	Type = unix
 			).
 
 		command_line_arguments(Arguments) :-
-			argument_list(Arguments).
+			{argument_list(Arguments)}.
 
 	:- elif(current_logtalk_flag(prolog_dialect, b)).
 
@@ -436,7 +436,7 @@
 			).
 
 		command_line_arguments(Arguments) :-
-			get_main_args(Arguments).
+			{get_main_args(Arguments)}.
 
 	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
 
@@ -521,7 +521,7 @@
 			).
 
 		command_line_arguments(Arguments) :-
-			current_prolog_flag(argv, Arguments).
+			{current_prolog_flag(argv, Arguments)}.
 
 	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
 
@@ -599,8 +599,8 @@
 			).
 
 		command_line_arguments(Arguments) :-
-			argv(all, Arguments0),
-			findall(Argument, (member(Argument0, Arguments0), atom_string(Argument, Argument0)), [_| Arguments]).
+			{argv(all, Arguments0),
+			findall(Argument, (member(Argument0, Arguments0), atom_string(Argument, Argument0)), [_| Arguments])}.
 
 	:- elif(current_logtalk_flag(prolog_dialect, ciao)).
 
@@ -741,7 +741,7 @@
 			throw(not_available(wall_time/1)).
 
 		operating_system_type(Type) :-
-			os_name(Name),
+			{os_name(Name)},
 			(	Name = win32 ->
 				Type = windows
 			;	Name = unix ->
@@ -750,7 +750,7 @@
 			).
 
 		command_line_arguments(Arguments) :-
-			os_args(Arguments0),
+			{os_args(Arguments0)},
 			find_arguments(Arguments0, Arguments).
 
 		find_arguments([], []).
