@@ -103,6 +103,7 @@
 		{current_logtalk_flag(unknown_entities, Unknown),
 		 current_logtalk_flag(misspelt_calls, Misspelt),
 		 current_logtalk_flag(portability, Portability),
+		 current_logtalk_flag(redefined_built_ins, Redefined),
 		 current_logtalk_flag(singleton_variables, Singletons),
 		 current_logtalk_flag(underscore_variables, Underscore),
 		 current_logtalk_flag(complements, Complements),
@@ -129,7 +130,8 @@
 		 current_logtalk_flag(coinduction, Coinduction)},
 		[
 			'Default lint compilation flags: '-[], nl,
-			'  unknown_entities: ~w, misspelt_calls: ~w, portability: ~w'-[Unknown, Misspelt, Portability], nl,
+			'  unknown_entities: ~w, misspelt_calls: ~w'-[Unknown, Misspelt], nl,
+			'  portability: ~w, redefined_built_ins: ~w'-[Portability, Redefined], nl,
 			'  singleton_variables: ~w, underscore_variables: ~w'-[Singletons, Underscore], nl,
 			'Default optional features compiler flags:'-[], nl,
 			'  complements: ~w, dynamic_declarations: ~w'-[Complements, DynamicDeclarations], nl,

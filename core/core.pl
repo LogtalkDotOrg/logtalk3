@@ -8487,7 +8487,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % redefinition of Logtalk built-in predicates
 
 '$lgt_tr_head'(Head, _, _) :-
-	'$lgt_compiler_flag'(portability, warning),
+	'$lgt_compiler_flag'(redefined_built_ins, warning),
 	'$lgt_logtalk_built_in_predicate'(Head),
 	\+ functor(Head, '::', 2),
 	% not the head of a multifile entity predicate
@@ -8496,14 +8496,14 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	functor(Head, Functor, Arity),
 	'$lgt_increment_compile_warnings_counter',
 	'$lgt_warning_context'(Path, Lines, Type, Entity),
-	'$lgt_print_message'(warning(portability), core, redefined_logtalk_built_in_predicate(Path, Lines, Type, Entity, Functor/Arity)),
+	'$lgt_print_message'(warning(redefined_built_ins), core, redefined_logtalk_built_in_predicate(Path, Lines, Type, Entity, Functor/Arity)),
 	fail.
 
 
 % redefinition of Prolog built-in predicates
 
 '$lgt_tr_head'(Head, _, _) :-
-	'$lgt_compiler_flag'(portability, warning),
+	'$lgt_compiler_flag'(redefined_built_ins, warning),
 	'$lgt_prolog_built_in_predicate'(Head),
 	\+ functor(Head, ':', 2),
 	% not the head of a multifile module predicate
@@ -8512,7 +8512,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	functor(Head, Functor, Arity),
 	'$lgt_increment_compile_warnings_counter',
 	'$lgt_warning_context'(Path, Lines, Type, Entity),
-	'$lgt_print_message'(warning(portability), core, redefined_prolog_built_in_predicate(Path, Lines, Type, Entity, Functor/Arity)),
+	'$lgt_print_message'(warning(redefined_built_ins), core, redefined_prolog_built_in_predicate(Path, Lines, Type, Entity, Functor/Arity)),
 	fail.
 
 
@@ -15672,6 +15672,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_valid_flag'(misspelt_calls).
 '$lgt_valid_flag'(underscore_variables).
 '$lgt_valid_flag'(portability).
+'$lgt_valid_flag'(redefined_built_ins).
 % optional features compilation flags:
 '$lgt_valid_flag'(complements).
 '$lgt_valid_flag'(dynamic_declarations).
@@ -15737,6 +15738,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_valid_flag_value'(portability, silent) :- !.
 '$lgt_valid_flag_value'(portability, warning) :- !.
+
+'$lgt_valid_flag_value'(redefined_built_ins, silent) :- !.
+'$lgt_valid_flag_value'(redefined_built_ins, warning) :- !.
 
 '$lgt_valid_flag_value'(report, on) :- !.
 '$lgt_valid_flag_value'(report, warnings) :- !.
