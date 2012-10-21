@@ -206,11 +206,14 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 
 
 %  To develop portable Logtalk applications uncomment the following lines
-%  to help you catch possible non-portable built-in predicate calls:
+%  to help you catch possible non-portable built-in predicate calls, use
+%  of non-standard flags or non-standard flag values, and missing predicate
+%  directives:
 
 /*
 :- initialization((
-	set_logtalk_flag(portability, warning)
+	set_logtalk_flag(portability, warning),
+	set_logtalk_flag(missing_directives, warning)
 )).
 */
 

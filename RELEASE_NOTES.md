@@ -104,6 +104,12 @@ user visible working directory (the two directories can differ depending e.g.
 on the value of the "scratch_directory" flag). This issue affected the `cc`,
 `benchmarks`, and `operators` examples.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* ADDED: Auto-completion support for the Logtalk compiler flags to the jEdit,
+SubEthaEdit, TextMate, and Vim text editors.
+
 
 3.00.0 Alpha 3 - October 12, 2012
 =================================

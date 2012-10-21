@@ -204,6 +204,39 @@
 			<string>sin</string>
 			<string>sqrt</string>
 			<string>truncate</string>
+			<!-- flag names -->
+			<string>unknown_entities</string>
+			<string>singleton_variables</string>
+			<string>misspelt_calls</string>
+			<string>underscore_variables</string>
+			<string>portability</string>
+			<string>redefined_built_ins</string>
+			<string>missing_directives</string>
+			<string>complements</string>
+			<string>dynamic_declarations</string>
+			<string>events</string>
+			<string>context_switching_calls</string>
+			<string>scratch_directory</string>
+			<string>report</string>
+			<string>smart_compilation</string>
+			<string>reload</string>
+			<string>hook</string>
+			<string>code_prefix</string>
+			<string>optimize</string>
+			<string>debug</string>
+			<string>clean</string>
+			<string>source_data</string>
+			<string>version</string>
+			<string>prolog_dialect</string>
+			<string>prolog_version</string>
+			<string>prolog_compatible_version</string>
+			<string>encoding_directive</string>
+			<string>threads</string>
+			<string>modules</string>
+			<string>tabling</string>
+			<string>coinduction</string>
+			<string>prolog_compiler</string>
+			<string>prolog_loader</string>
 		</array>
 	</dict>
 	<key>uuid</key>
