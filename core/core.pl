@@ -16425,9 +16425,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_iso_spec_predicate'(halt(_)).
 
 % the following predicates are not part of the ISO/IEC 13211-1 Prolog standard
-% but can be found on the Core Revision standardization proposal; more important,
-% these predicates are built-in predicates in most, if not all, supported Prolog
-% compilers
+% but can be found either on the Core Revision standardization proposal or,
+% more important, these predicates are becoming de facto standards
 
 % database
 '$lgt_iso_spec_predicate'(retractall(_)).
@@ -16491,9 +16490,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_iso_spec_function'(float_integer_part(_)).
 
 % the following functions are not part of the ISO/IEC 13211-1 Prolog standard
-% but can be found on the Core Revision standardization proposal; more important,
-% these functions are built-in functions in most, if not all, supported Prolog
-% compilers
+% but can be found either on the Core Revision standardization proposal or,
+% more important, these functions are becoming de facto standards
 
 '$lgt_iso_spec_function'(pi).
 '$lgt_iso_spec_function'(e).
@@ -16527,6 +16525,13 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_iso_spec_flag'(double_quotes).
 '$lgt_iso_spec_flag'(unknown).
 
+% the following flags are not part of the ISO/IEC 13211-1 Prolog standard
+% but can be found either on the Core Revision standardization proposal or,
+% more important, these flags are becoming de facto standards
+
+'$lgt_iso_spec_flag'(dialect).
+'$lgt_iso_spec_flag'(version_data).
+
 
 '$lgt_iso_spec_flag_value'(bounded, Value) :-
 	'$lgt_member'(Value, [true, false]).
@@ -16546,6 +16551,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_member'(Value, [atom, chars, codes]).
 '$lgt_iso_spec_flag'(unknown, Value) :-
 	'$lgt_member'(Value, [error, warning, fail]).
+
+'$lgt_iso_spec_flag'(dialect, Value) :-
+	atom(Value).
+'$lgt_iso_spec_flag'(version_data, Value) :-
+	compound(Value).
 
 
 
