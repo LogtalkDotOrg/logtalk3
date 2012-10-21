@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/10/20,
+		date is 2012/10/21,
 		comment is 'Logtalk core (compiler and runtime) default message translations.']).
 
 	:- multifile(logtalk::message_prefix_stream/4).
@@ -104,6 +104,7 @@
 		 current_logtalk_flag(misspelt_calls, Misspelt),
 		 current_logtalk_flag(portability, Portability),
 		 current_logtalk_flag(redefined_built_ins, Redefined),
+		 current_logtalk_flag(missing_directives, Missing),
 		 current_logtalk_flag(singleton_variables, Singletons),
 		 current_logtalk_flag(underscore_variables, Underscore),
 		 current_logtalk_flag(complements, Complements),
@@ -131,7 +132,8 @@
 		[
 			'Default lint compilation flags: '-[], nl,
 			'  unknown_entities: ~w, misspelt_calls: ~w'-[Unknown, Misspelt], nl,
-			'  portability: ~w, redefined_built_ins: ~w'-[Portability, Redefined], nl,
+			'  portability: ~w'-[Portability], nl,
+			'  missing_directives: ~w, redefined_built_ins: ~w'-[Missing, Redefined], nl,
 			'  singleton_variables: ~w, underscore_variables: ~w'-[Singletons, Underscore], nl,
 			'Default optional features compiler flags:'-[], nl,
 			'  complements: ~w, dynamic_declarations: ~w'-[Complements, DynamicDeclarations], nl,

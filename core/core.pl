@@ -8561,6 +8561,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	(	'$lgt_pp_directive_'(multifile(Functor/Arity)) ->
 		true
 	;	\+ '$lgt_current_flag_'(report, off) ->
+		'$lgt_current_flag_'(missing_directives, warning),
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_pp_entity'(Type, Entity, _, _, _),
 		'$lgt_pp_file_path_flags_'(File, Directory, _),
@@ -8613,6 +8614,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	'$lgt_pp_directive_'(multifile(':'(Module, Functor/Arity))) ->
 		true
 	;	\+ '$lgt_current_flag_'(report, off) ->
+		'$lgt_current_flag_'(missing_directives, warning),
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_pp_entity'(Type, Entity, _, _, _),
 		'$lgt_pp_file_path_flags_'(File, Directory, _),
@@ -13905,6 +13907,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % reports possibly missing dynamic directives
 
 '$lgt_report_missing_dynamic_directives'(Type, Entity) :-
+	'$lgt_current_flag_'(missing_directives, warning),
 	'$lgt_pp_file_path_flags_'(File, Directory, _),
 	atom_concat(Directory, File, Path),
 		% detected dynamic predicate
@@ -13925,6 +13928,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % reports possibly missing discontiguous directives
 
 '$lgt_report_missing_discontiguous_directives'(Type, Entity) :-
+	'$lgt_current_flag_'(missing_directives, warning),
 	'$lgt_pp_file_path_flags_'(File, Directory, _),
 	atom_concat(Directory, File, Path),
 		% detected discontiguous predicate
@@ -15673,6 +15677,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_valid_flag'(underscore_variables).
 '$lgt_valid_flag'(portability).
 '$lgt_valid_flag'(redefined_built_ins).
+'$lgt_valid_flag'(missing_directives).
 % optional features compilation flags:
 '$lgt_valid_flag'(complements).
 '$lgt_valid_flag'(dynamic_declarations).
@@ -15741,6 +15746,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_valid_flag_value'(redefined_built_ins, silent) :- !.
 '$lgt_valid_flag_value'(redefined_built_ins, warning) :- !.
+
+'$lgt_valid_flag_value'(missing_directives, silent) :- !.
+'$lgt_valid_flag_value'(missing_directives, warning) :- !.
 
 '$lgt_valid_flag_value'(report, on) :- !.
 '$lgt_valid_flag_value'(report, warnings) :- !.
@@ -16293,6 +16301,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
+% '$lgt_iso_spec_predicate'(?callable)
+
 % control constructs
 '$lgt_iso_spec_predicate'(true).
 '$lgt_iso_spec_predicate'(fail).
@@ -16458,6 +16468,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
+% '$lgt_iso_spec_function'(?callable)
+
 '$lgt_iso_spec_function'('-'(_)).
 '$lgt_iso_spec_function'('+'(_, _)).
 '$lgt_iso_spec_function'('-'(_, _)).
@@ -16515,6 +16527,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
+% '$lgt_iso_spec_flag'(?atom)
+
 '$lgt_iso_spec_flag'(bounded).
 '$lgt_iso_spec_flag'(max_integer).
 '$lgt_iso_spec_flag'(min_integer).
@@ -16532,6 +16546,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_iso_spec_flag'(dialect).
 '$lgt_iso_spec_flag'(version_data).
 
+
+
+% '$lgt_iso_spec_flag_value'(+atom, @nonvar)
 
 '$lgt_iso_spec_flag_value'(bounded, Value) :-
 	'$lgt_member'(Value, [true, false]).

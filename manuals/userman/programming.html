@@ -264,6 +264,14 @@ Note that the scope of the <code>set_logtalk_flag/2</code> directive is local to
 			<dd>Controls the non-ISO specified built-in predicate and non-ISO specified built-in arithmetic function calls warnings. Possible option values are <code>warning</code> and <code>silent</code> (the usual default).</dd>
 	</dl>
 	<dl>
+		<dt><code>missing_directives(Option)</code></dt>
+			<dd>Controls the missing predicate directive warnings. Possible option values are <code>warning</code> (the usual default) and <code>silent</code> (not recommended).</dd>
+	</dl>
+	<dl>
+		<dt><code>redefined_built_ins(Option)</code></dt>
+			<dd>Controls the Logtalk and Prolog built-in predicate redefinition warnings. Possible option values are <code>warning</code> (the usual default) and <code>silent</code>. Warnings about redefined Prolog built-in predicates are often the result of running a Logtalk application on several Prolog compilers as each Prolog compiler defines its set of built-in predicates.</dd>
+	</dl>
+	<dl>
 		<dt><code>singleton_variables(Option)</code></dt>
 			<dd>Controls the singleton variable warnings. Possible option values are <code>warning</code> (the usual default) and <code>silent</code> (not recommended).</dd>
 	</dl>
@@ -691,7 +699,7 @@ When objects or categories containing grammar rules are compiled in debug mode, 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: August 24, 2012</span>
+		<span>Last updated on: October 21, 2012</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="installing.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="migration.html">next</a></span><br/>

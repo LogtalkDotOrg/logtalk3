@@ -32,7 +32,8 @@ Logtalk compiler and runtime
 ----------------------------
 
 * CHANGED: Restored the `redefined_built_ins` compiler flag with a default
-value of `silent`.
+value of `silent` and the `missing_directives` compiler flags with a default
+value of `warning`.
 
 * NEW: Updated the compiler to perform error and portability checking
 for the Prolog standard `set_prolog_flag/2` and `current_prolog_flag/2`  

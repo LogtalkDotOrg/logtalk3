@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for ECLiPSe 6.0#141 and later versions
-%  Last updated on October 20, 2012
+%  Last updated on October 21, 2012
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -275,6 +275,7 @@ forall(Generate, Test) :-
 '$lgt_default_flag'(singleton_variables, warning).
 '$lgt_default_flag'(portability, silent).
 '$lgt_default_flag'(redefined_built_ins, silent).
+'$lgt_default_flag'(missing_directives, warning).
 '$lgt_default_flag'(underscore_variables, dont_care).
 % optional features compilation flags:
 '$lgt_default_flag'(complements, deny).
