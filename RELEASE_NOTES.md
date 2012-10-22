@@ -25,7 +25,7 @@ RELEASE NOTES
 =============
 
 
-3.00.0 Alpha 4 - November ??, 2012
+3.00.0 Alpha 4 - October 22, 2012
 ==================================
 
 Logtalk compiler and runtime
@@ -76,7 +76,8 @@ Prolog is now the same as for other Prolog compilers (`./.lgt_tmp/` on POSIX
 systems and `./lgt_tmp/` on Windows systems).
 
 * CHANGED: Deleted from the SWI-Prolog adapter file the setting of the flag
-`optimise` to `true` as it's not local to a file and it breaks `plunit`.
+`optimise` to `true` for now as it's only became local to a file in recent
+development versions of SWI-Prolog.
 
 Tools
 -----
