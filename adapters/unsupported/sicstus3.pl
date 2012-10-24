@@ -424,7 +424,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 	;	Name = Basename,
 		Extension = ''
 	).
-        
+
 % the following auxiliar predicate was written by Per Mildner and 
 % is used here (renamed just to avoid conflicts) with permission
 

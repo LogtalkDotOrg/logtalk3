@@ -405,7 +405,7 @@ forall(Generate, Test) :-
 	;	Name = Basename,
 		Extension = ''
 	).
-        
+
 % the following auxiliar predicate was written by Per Mildner and 
 % is used here (renamed just to avoid conflicts) with permission
 
