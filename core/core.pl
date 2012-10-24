@@ -1708,7 +1708,7 @@ logtalk_compile(Files, Flags) :-
 
 '$lgt_check_source_files'(Files) :-
 	var(Files),
-	throw(instantiation_error).
+	throw(error(instantiation_error, _)).
 
 '$lgt_check_source_files'([]) :-
 	!.
@@ -1724,12 +1724,12 @@ logtalk_compile(Files, Flags) :-
 
 '$lgt_check_source_file'(File) :-
 	var(File),
-	throw(instantiation_error).
+	throw(error(instantiation_error, _)).
 
 '$lgt_check_source_file'(File) :-
 	'$lgt_file_name'(logtalk, File, _, _, Source),
 	\+ '$lgt_file_exists'(Source),
-	throw(existence_error(file, File)).
+	throw(error(existence_error(file, File), _)).
 
 '$lgt_check_source_file'(_).
 

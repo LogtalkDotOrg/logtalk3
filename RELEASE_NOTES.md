@@ -25,6 +25,16 @@ RELEASE NOTES
 =============
 
 
+3.00.0 Alpha 5 - November ??, 2012
+==================================
+
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Restore the working directory after a file existence error when
+using the `logtalk_compile/1-2` and `logtalk_load/1-2` built-in predicates.
+
+
 3.00.0 Alpha 4 - October 22, 2012
 ==================================
 
