@@ -38,6 +38,12 @@ message was an instance.
 * FIXED: Restore the working directory after a file existence error when
 using the `logtalk_compile/1-2` and `logtalk_load/1-2` built-in predicates.
 
+Examples
+--------
+
+* FIXED: Added missing declaration for the predicate `print/0` in the `points`
+example.
+
 
 3.00.0 Alpha 4 - October 22, 2012
 ==================================

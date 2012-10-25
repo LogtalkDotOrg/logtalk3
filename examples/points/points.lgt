@@ -14,14 +14,17 @@
 	specializes(object)).
 
 	:- info([
-		version is 1.1,
-		date is 2000/10/31,
+		version is 1.2,
+		date is 2012/10/25,
 		author is 'Paulo Moura',
 		comment is 'Two dimensional point class.',
 		source is 'Example adapted from the SICStus Objects documentation.']).
 
 	:- public(move/2).
 	:- mode(move(+integer, +integer), zero_or_one).
+
+	:- public(print/0).
+	:- mode(print, one).
 
 	:- public(position/2).
 	:- mode(position(?integer, ?integer), one).
