@@ -2165,14 +2165,14 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		true
 	;	fail
 	).
-'$lgt_predicate_property_user'(redefined_from(Super), Pred, _, _, _, _, _, Def, _) :-
+'$lgt_predicate_property_user'(redefined_from(Super), Pred, _, _, _, _, Obj, Def, _) :-
 	(	call(Def, Pred, _, _, DCtn) ->
-		'$lgt_find_overridden_predicate'(DCtn, Pred, Super)
+		'$lgt_find_overridden_predicate'(DCtn, Obj, Pred, Super)
 	;	fail
 	).
-'$lgt_predicate_property_user'(redefined_from(Super, Line), Pred, _, _, _, _, _, Def, _) :-
+'$lgt_predicate_property_user'(redefined_from(Super, Line), Pred, _, _, _, _, Obj, Def, _) :-
 	(	call(Def, Pred, _, _, DCtn),
-		'$lgt_find_overridden_predicate'(DCtn, Pred, Super),
+		'$lgt_find_overridden_predicate'(DCtn, Obj, Pred, Super),
 		functor(Pred, Functor, Arity),
 		'$lgt_predicate_property_'(Super, Functor/Arity, lines_clauses(_,Line,_)) ->
 		true
@@ -2331,18 +2331,20 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_find_overridden_predicate'(+entity_identifier, +callable, -entity_identifier)
+% '$lgt_find_overridden_predicate'(+entity_identifier, +entity_identifier, +callable, -entity_identifier)
 %
 % finds the entity containing the overridden predicate definition (assuming that the
-% start entity contains a overriding definition for the predicate)
+% start lookup entity contains a overriding definition for the predicate)
 
-'$lgt_find_overridden_predicate'(Obj, Pred, DefCtn) :-
+'$lgt_find_overridden_predicate'(Obj, Self, Pred, DefCtn) :-
 	'$lgt_current_object_'(Obj, _, _, _, Super, _, _, _, _, _, _),
-	call(Super, Pred, _, _, DefCtn),
+	% for classes, we need to be sure we use the correct clause for "super" by looking into "self"
+	'$lgt_exec_ctx'(ExCtx, _, _, Self, _, _),
+	call(Super, Pred, ExCtx, _, DefCtn),
 	DefCtn \= Obj,
 	!.
 
-'$lgt_find_overridden_predicate'(Ctg, Pred, DefCtn) :-
+'$lgt_find_overridden_predicate'(Ctg, _, Pred, DefCtn) :-
 	'$lgt_current_category_'(Ctg, _, _, Def, _, _),
 	call(Def, Pred, _, _, DefCtn),
 	DefCtn \= Ctg,
