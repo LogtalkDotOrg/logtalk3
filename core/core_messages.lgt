@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/10/21,
+		date is 2012/10/25,
 		comment is 'Logtalk core (compiler and runtime) default message translations.']).
 
 	:- multifile(logtalk::message_prefix_stream/4).
@@ -47,22 +47,22 @@
 	:- dynamic(logtalk::message_tokens//2).
 
 	logtalk::message_tokens(skipping_loading_file(File, _Flags), core) -->
-		['[ skipping reloading of source file ~w ]'-[File], nl].
+		['[ skipping reloading of ~w ]'-[File], nl].
 
 	logtalk::message_tokens(loading_file(File, _Flags), core) -->
-		['[ loading source file ~w ...  ]'-[File], nl].
+		['[ loading ~w ...  ]'-[File], nl].
 
 	logtalk::message_tokens(loaded_file(File, _Flags), core) -->
-		['[ ~w source file loaded ]'-[File], nl].
+		['[ ~w loaded ]'-[File], nl].
 
 	logtalk::message_tokens(reloading_file(File, _Flags), core) -->
-		['[ reloading source file ~w ... ]'-[File], nl].
+		['[ reloading ~w ... ]'-[File], nl].
 
 	logtalk::message_tokens(reloaded_file(File, _Flags), core) -->
-		['[ ~w source file reloaded ]'-[File], nl].
+		['[ ~w reloaded ]'-[File], nl].
 
 	logtalk::message_tokens(compiling_file(File, _Flags), core) -->
-		['[ compiling source file ~w'-[File]],
+		['[ compiling ~w'-[File]],
 		(	{current_logtalk_flag(debug, on)} ->
 			(	{current_logtalk_flag(hook, Hook)} ->
 				[' in debug mode using the hook object ~q ... ]'-[Hook], nl]
@@ -75,10 +75,10 @@
 		).
 
 	logtalk::message_tokens(compiled_file(File, _Flags), core) -->
-		['[ ~w source file compiled ]'-[File], nl].
+		['[ ~w compiled ]'-[File], nl].
 
 	logtalk::message_tokens(up_to_date_file(File, _Flags), core) -->
-		['[ compiling source file ~w ... up-to-date ]'-[File], nl].
+		['[ compiling ~w ... up-to-date ]'-[File], nl].
 
 	logtalk::message_tokens(compiling_entity(Type, Entity), core) -->
 		{copy_term(Entity, EntityCopy), numbervars(EntityCopy, 0, _)},
