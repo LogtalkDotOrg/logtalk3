@@ -969,17 +969,19 @@ user:goal_expansion('::'(Object, Message), user:Goal) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% uncomment the following lines for getting colored messages when running on
-% a terminal but be sure to keep them commented out when using PDT
-%
-%:- multifile('$lgt_logtalk.message_hook'/5).
-%:- dynamic('$lgt_logtalk.message_hook'/5).
-%
-%'$lgt_logtalk.message_hook'(_, Kind, Component, Tokens, ExCtx) :-
-%	functor(Kind, Functor, _),
-%	'$lgt_append'([begin(Functor,Ctx)| Tokens], [end(Ctx)], ExpandedTokens),
-%	'$lgt_logtalk.message_prefix_stream'(Kind, Component, Prefix, Stream, ExCtx),
-%	'$lgt_logtalk.print_message_tokens'(Stream, Prefix, ExpandedTokens, ExCtx).
+:- multifile('$lgt_logtalk.message_hook'/5).
+:- dynamic('$lgt_logtalk.message_hook'/5).
+
+'$lgt_logtalk.message_hook'(_, Kind, Component, Tokens, ExCtx) :-
+	% make sure we're no running in PDT as this IDE also defines
+	% this hook predicate for much improved Logtalk integration
+	\+ current_module(pdt_console),
+	% Logtalk message kinds can be either an atom or a compound
+	% term but SWI-Prolog only uses atoms
+	functor(Kind, Functor, _),
+	'$lgt_append'([begin(Functor,Ctx)| Tokens], [end(Ctx)], ExpandedTokens),
+	'$lgt_logtalk.message_prefix_stream'(Kind, Component, Prefix, Stream, ExCtx),
+	'$lgt_logtalk.print_message_tokens'(Stream, Prefix, ExpandedTokens, ExCtx).
 
 
 :- multifile('$lgt_logtalk.print_message_token'/3).

@@ -49,6 +49,8 @@ Prolog adapter and integration files
 * IMPROVED: The goal expansion of `(::)/2` goals within modules for SWI-Prolog
 is now independent of having `user` as a default import module.
 
+* IMPROVED: Enable coloring of console messages for SWI-Prolog by default.
+
 Examples
 --------
 
