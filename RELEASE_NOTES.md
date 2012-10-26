@@ -31,6 +31,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: Moved the static binding step for message sending from the second
+compiler pass to the first pass.
+
 * FIXED: The `predicate_property/2` built-in method would return the wrong
 class in the `redefined_from/1-2` properties when the object receiving the
 message was an instance.

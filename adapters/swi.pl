@@ -785,12 +785,6 @@ user:goal_expansion(phrase(Rule, Input), '$lgt_phrase'(Rule, Input, ExCtx)) :-
 user:goal_expansion('::'(Object, Message), Goal) :-
 	prolog_load_context(module, Module),
 	Module \== user,
-	'$lgt_swi_translate_message'(Message, Object, Goal). 
-
-'$lgt_swi_translate_message'(Message, Object, Goal) :-
-	catch('$lgt_send_to_obj_static_binding_cache'(Object, Message, user, Goal), _, fail),
-	!.
-'$lgt_swi_translate_message'(Message, Object, Goal) :-
 	catch('$lgt_tr_msg'(Message, Object, Goal, user), _, fail). 
 
 

@@ -10979,17 +10979,25 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!.
 
 
-% message is not a built-in control construct or a call to a built-in
-% (meta-)predicate: translation performed at runtime
+% message is not a built-in control construct or a call to a built-in (meta-)predicate
 
 '$lgt_tr_msg'(Pred, Obj, TPred, This) :-
-	(	var(Obj) ->
-		(	'$lgt_compiler_flag'(events, allow) ->
-			TPred = '$lgt_send_to_obj'(Obj, Pred, This)
-		;	TPred = '$lgt_send_to_obj_ne'(Obj, Pred, This)
+	var(Obj),
+	% translation performed at runtime
+	!,
+	(	'$lgt_compiler_flag'(events, allow) ->
+		TPred = '$lgt_send_to_obj'(Obj, Pred, This)
+	;	TPred = '$lgt_send_to_obj_ne'(Obj, Pred, This)
+	).
+
+'$lgt_tr_msg'(Pred, Obj, TPred, This) :-
+	(	'$lgt_compiler_flag'(events, allow) ->
+		(	'$lgt_send_to_obj_static_binding_cache'(Obj, Pred, This, Call) ->
+			TPred = '$lgt_guarded_method_call'(Obj, Pred, This, Call)
+		;	TPred = '$lgt_send_to_obj_'(Obj, Pred, This)
 		)
-	;	(	'$lgt_compiler_flag'(events, allow) ->
-			TPred = '$lgt_send_to_obj_'(Obj, Pred, This)
+	;	(	'$lgt_send_to_obj_static_binding_cache'(Obj, Pred, This, TPred) ->
+			true
 		;	TPred = '$lgt_send_to_obj_ne_'(Obj, Pred, This)
 		)
 	).
@@ -13695,16 +13703,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_fix_predicate_calls'('$lgt_debug'(goal(OPred, Pred), ExCtx), '$lgt_debug'(goal(OPred, TPred), ExCtx), Annotation) :-
 	!,
 	'$lgt_fix_predicate_calls'(Pred, TPred, Annotation).
-
-'$lgt_fix_predicate_calls'('$lgt_send_to_obj_'(Obj, Pred, This), TPred, _) :-
-	'$lgt_send_to_obj_static_binding_cache'(Obj, Pred, This, Call),
-	!,
-	TPred = '$lgt_guarded_method_call'(Obj, Pred, This, Call).
-
-'$lgt_fix_predicate_calls'('$lgt_send_to_obj_ne_'(Obj, Pred, This), TPred, _) :-
-	'$lgt_send_to_obj_static_binding_cache'(Obj, Pred, This, Call),
-	!,
-	TPred = Call.
 
 '$lgt_fix_predicate_calls'('$lgt_call_built_in'(Pred, MetaExPred, ExCtx), TPred, _) :-
 	% calls to Logtalk and Prolog built-in (meta-)predicates
