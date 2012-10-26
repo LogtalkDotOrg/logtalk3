@@ -771,18 +771,18 @@ thread_sleep(Time) :-
 :- dynamic(user:goal_expansion/2).
 :- multifile(user:goal_expansion/2).
 
-user:goal_expansion(phrase(Rule, Input, Rest), '$lgt_phrase'(Rule, Input, Rest, ExCtx)) :-
+user:goal_expansion(phrase(Rule, Input, Rest), user:'$lgt_phrase'(Rule, Input, Rest, ExCtx)) :-
 	nonvar(Rule),
 	functor(Rule, '::', 2),
 	!,
 	'$lgt_exec_ctx'(ExCtx, user, user, user, [], []).
-user:goal_expansion(phrase(Rule, Input), '$lgt_phrase'(Rule, Input, ExCtx)) :-
+user:goal_expansion(phrase(Rule, Input), user:'$lgt_phrase'(Rule, Input, ExCtx)) :-
 	nonvar(Rule),
 	functor(Rule, '::', 2),
 	!,
 	'$lgt_exec_ctx'(ExCtx, user, user, user, [], []).
 
-user:goal_expansion('::'(Object, Message), Goal) :-
+user:goal_expansion('::'(Object, Message), user:Goal) :-
 	prolog_load_context(module, Module),
 	Module \== user,
 	catch('$lgt_tr_msg'(Message, Object, Goal, user), _, fail). 

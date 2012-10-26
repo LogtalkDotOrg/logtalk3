@@ -44,7 +44,10 @@ using the `logtalk_compile/1-2` and `logtalk_load/1-2` built-in predicates.
 Prolog adapter and integration files
 ------------------------------------
 
-* FIXED: Goal expansion of (::)/2 goals within modules for YAP.
+* FIXED: Goal expansion of `(::)/2` goals within modules for YAP.
+
+* IMPROVED: The goal expansion of `(::)/2` goals within modules for SWI-Prolog
+is now independent of having `user` as a default import module.
 
 Examples
 --------
