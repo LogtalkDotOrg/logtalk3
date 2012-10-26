@@ -1750,15 +1750,16 @@ logtalk_compile(Files, Flags) :-
 
 
 '$lgt_expand_library_path'(Library, Path, N) :-
-	logtalk_library_path(Library, Location) ->
+	logtalk_library_path(Library, Location), !,
 	(	atom(Location) ->
 		(	sub_atom(Location, _, _, 0, '/') ->
 			Path = Location
 		;	atom_concat(Location, '/', Path)
 		)
-	;	Location =.. [Library2, Location2],
-		N > 0,
+	;	N > 0,
 		N2 is N - 1,
+		functor(Location, Library2, 1),
+		arg(1, Location, Location2),
 		'$lgt_expand_library_path'(Library2, Path2, N2),
 		atom_concat(Path2, Location2, Path)
 	).
@@ -1790,13 +1791,17 @@ logtalk_compile(Files, Flags) :-
 	throw(type_error(flag, Option)).
 
 '$lgt_check_compiler_flag'(Option) :-
-	\+ functor(Option, _, 1),
-	throw(type_error(flag, Option)).
+	(	functor(Option, Flag, 1) ->
+		arg(1, Option, Value),
+		'$lgt_check_compiler_flag'(Flag, Value)
+	;	throw(type_error(flag, Option))
+	).
 
-'$lgt_check_compiler_flag'(Option) :-
-	Option =.. [Flag, Value],
-	'$lgt_check_compiler_flag'(Flag, Value).
 
+
+% '$lgt_check_compiler_flag'(+atom, @term)
+%
+% checks if a compiler flag is valid
 
 '$lgt_check_compiler_flag'(Flag, Value) :-
 	'$lgt_must_be'(read_write_flag, Flag),
@@ -1853,7 +1858,8 @@ logtalk_compile(Files, Flags) :-
 '$lgt_assert_compiler_flags'([]).
 
 '$lgt_assert_compiler_flags'([Flag| Flags]) :-
-	Flag =.. [Name, Value],
+	functor(Flag, Name, 1),
+	arg(1, Flag, Value),
 	retractall('$lgt_pp_file_compiler_flag_'(Name, _)),
 	asserta('$lgt_pp_file_compiler_flag_'(Name, Value)),
 	'$lgt_assert_compiler_flags'(Flags).
@@ -3456,6 +3462,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		'$lgt_term_template'(Pred, GPred),
 		'$lgt_term_template'(This, GThis),
 		'$lgt_term_template'(Self, GSelf),
+		% check if we have a dependency on "self" to select the correct "super" clause
 		(	'$lgt_extends_object_'(GThis, _, _) ->
 			true
 		;	'$lgt_exec_ctx'(GExCtx, _, GThis, GSelf, _, _)
@@ -3548,6 +3555,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 				'$lgt_term_template'(Pred, GPred),
 				'$lgt_term_template'(This, GThis),
 				'$lgt_term_template'(Self, GSelf),
+				% check if we have a dependency on "self" to select the correct "super" clause
 				(	'$lgt_extends_object_'(GThis, _, _) ->
 					true
 				;	'$lgt_exec_ctx'(GExCtx, _, GThis, GSelf, _, _)
@@ -4858,7 +4866,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_file_name'(Type, FilePath, Directory, Basename, FullPath) :-
 	(	compound(FilePath),
-		FilePath =.. [Library, File] ->
+		functor(FilePath, Library, 1),
+		arg(1, FilePath, File) ->
 		(	'$lgt_expand_library_path'(Library, LibraryPath) ->
 			atom_concat(LibraryPath, File, NormalizedPath)
 		;	throw(existence_error(library, Library))
@@ -7555,7 +7564,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	\+ '$lgt_pp_use_module_predicate_'(_, _, TAlias),
 	!,
 	% unify args of TOriginal and TAlias
-	TOriginal =.. [_| Args], TAlias =.. [_| Args],
+	TOriginal =.. [_| Args],
+	TAlias =.. [_| Args],
 	% allow for runtime use
 	'$lgt_tr_clause'((TAlias :- Obj::TOriginal), Ctx),
 	assertz('$lgt_pp_uses_predicate_'(Obj, TOriginal, TAlias)).
@@ -7573,7 +7583,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		\+ '$lgt_pp_uses_predicate_'(_, _, TPred),
 		\+ '$lgt_pp_use_module_predicate_'(_, _, TPred) ->
 		% unify args of TOriginal and TAlias
-		TOriginal =.. [_| Args], TAlias =.. [_| Args],
+		TOriginal =.. [_| Args],
+		TAlias =.. [_| Args],
 		% allow for runtime use
 		'$lgt_tr_grammar_rule'((TAlias --> Obj::TOriginal), Ctx),
 		assertz('$lgt_pp_uses_non_terminal_'(Obj, TOriginal, TAlias))
@@ -7695,7 +7706,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		\+ '$lgt_pp_uses_predicate_'(_, _, TPred),
 		\+ '$lgt_pp_use_module_predicate_'(_, _, TPred) ->
 		% unify args of TOriginal and TAlias
-		TOriginal =.. [_| Args], TAlias =.. [_| Args],
+		TOriginal =.. [_| Args],
+		TAlias =.. [_| Args],
 		% allow for runtime use
 		'$lgt_tr_grammar_rule'((TAlias --> ':'(Module, TOriginal)), Ctx),
 		assertz('$lgt_pp_use_module_non_terminal_'(Module, TOriginal, TAlias))
@@ -8415,7 +8427,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_convert_info_items'([], []).
 
 '$lgt_convert_info_items'([Key is Value| Items], [Info| Infos]) :-
-	Info =.. [Key, Value],
+	functor(Info, Key, 1),
+	arg(1, Info, Value),
 	'$lgt_convert_info_items'(Items, Infos).
 
 
@@ -12651,7 +12664,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 			% dynamic protocol
 			true
 		;	% generate a catchall clause for static protocols
-			Head =.. [Dcl, _, _, _, _, _],
+			functor(Head, Dcl, 5),
 			assertz('$lgt_pp_dcl_'((Head:-fail)))
 		)
 	).
@@ -12745,7 +12758,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 			% dynamic category
 			true
 		;	% generate a catchall clause for static categories
-			Head =.. [Dcl, _, _, _, _, _],
+			functor(Head, Dcl, 5),
 			assertz('$lgt_pp_dcl_'((Head:-fail)))
 		)
 	).
@@ -12802,7 +12815,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		% dynamic object
 		true
 	;	% generate a catchall clause for static objects
-		Head =.. [Dcl, _, _, _, _],
+		functor(Head, Dcl, 4),
 		assertz('$lgt_pp_dcl_'((Head:-fail)))
 	).
 
@@ -12816,7 +12829,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		% dynamic object
 		true
 	;	% generate a catchall clause for static objects
-		Head =.. [Def, _, _, _],
+		functor(Head, Def, 3),
 		assertz('$lgt_pp_final_def_'((Head:-fail)))
 	).
 
@@ -13037,16 +13050,16 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % we can have a root object where super have nowhere to go ...
 
 '$lgt_gen_prototype_super_clauses' :-
-	'$lgt_pp_object_'(_, _, _, _, OSuper, _, _, _, _, _, _),
+	'$lgt_pp_object_'(_, _, _, _, Super, _, _, _, _, _, _),
 	\+ '$lgt_pp_extended_object_'(_, _, _, _, _, _, _, _, _, _),
-	Head =.. [OSuper, _, _, _, _],
+	functor(Head, Super, 4),
 	assertz('$lgt_pp_super_'((Head:-fail))),
 	!.
 
 % ... or we may extends some objects
 
 '$lgt_gen_prototype_super_clauses' :-
-	'$lgt_pp_object_'(Obj, _, _, _, OSuper, _, _, _, _, Rnm, _),
+	'$lgt_pp_object_'(Obj, _, _, _, Super, _, _, _, _, Rnm, _),
 	% when working with parametric prototypes, we must connect the descendant parameters
 	% with the parent parameters:
 	'$lgt_pp_entity_runtime_clause_'('$lgt_extends_object_'(Obj, Parent, _)),
@@ -13055,10 +13068,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	Lookup =.. [PDef, Pred, PExCtx, Call, Ctn],
 	'$lgt_exec_ctx_this_rest'(OExCtx, Obj, Ctx),
 	(	'$lgt_pp_predicate_alias_'(Parent, _, _) ->
-		Head =.. [OSuper, Alias, OExCtx, Call, Ctn],
+		Head =.. [Super, Alias, OExCtx, Call, Ctn],
 		Rename =.. [Rnm, Parent, Pred, Alias],
 		assertz('$lgt_pp_super_'((Head :- Rename, Lookup)))
-	;	Head =.. [OSuper, Pred, OExCtx, Call, Ctn],
+	;	Head =.. [Super, Pred, OExCtx, Call, Ctn],
 		assertz('$lgt_pp_super_'((Head:-Lookup)))
 	),
 	fail.
@@ -13086,7 +13099,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_pp_object_'(_, _, ODcl, _, _, _, _, _, _, _, _),
 	\+ '$lgt_pp_instantiated_class_'(_, _, _, _, _, _, _, _, _, _),
 	!,
-	Head =.. [ODcl, _, _, _, _, _, _],
+	functor(Head, ODcl, 6),
 	assertz('$lgt_pp_dcl_'((Head:-fail))).
 
 '$lgt_gen_ic_hierarchy_dcl_clauses' :-
@@ -13402,17 +13415,17 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % we can have a root object where "super" have nowhere to go ...
 
 '$lgt_gen_ic_super_clauses' :-
-	'$lgt_pp_object_'(Obj, _, _, _, OSuper, _, _, _, _, _, _),
+	'$lgt_pp_object_'(Obj, _, _, _, Super, _, _, _, _, _, _),
 	\+ '$lgt_pp_specialized_class_'(_, _, _, _, _, _, _, _, _, _),
 	\+ ('$lgt_pp_instantiated_class_'(Class, _, _, _, _, _, _, _, _, _), Class \= Obj),
-	Head =.. [OSuper, _, _, _, _],
+	functor(Head, Super, 4),
 	assertz('$lgt_pp_super_'((Head:-fail))),
 	!.
 
 % ... or predicates can be redefined in instances...
 
 '$lgt_gen_ic_super_clauses' :-
-	'$lgt_pp_object_'(Obj, _, _, _, OSuper, _, _, _, _, Rnm, _),
+	'$lgt_pp_object_'(Obj, _, _, _, Super, _, _, _, _, Rnm, _),
 	% when working with parametric objects, we must connect the instance parameters
 	% with the class parameters:
 	'$lgt_pp_entity_runtime_clause_'('$lgt_instantiates_class_'(Obj, Class, _)),
@@ -13426,10 +13439,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	% are generated when an object both instantiates and specializes other objects:
 	'$lgt_exec_ctx'(OExCtx, _, Obj, Obj, _, _),
 	(	'$lgt_pp_predicate_alias_'(Class, _, _) ->
-		Head =.. [OSuper, Alias, OExCtx, Call, Ctn],
+		Head =.. [Super, Alias, OExCtx, Call, Ctn],
 		Rename =.. [Rnm, Class, Pred, Alias],
 		assertz('$lgt_pp_super_'((Head :- Rename, Lookup)))
-	;	Head =.. [OSuper, Pred, OExCtx, Call, Ctn],
+	;	Head =.. [Super, Pred, OExCtx, Call, Ctn],
 		assertz('$lgt_pp_super_'((Head:-Lookup)))
 	),
 	fail.
@@ -13437,19 +13450,19 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % ... or/and in subclasses...
 
 '$lgt_gen_ic_super_clauses' :-
-	'$lgt_pp_object_'(Class, _, _, _, CSuper, _, _, _, _, Rnm, _),
+	'$lgt_pp_object_'(Class, _, _, _, Super, _, _, _, _, Rnm, _),
 	% when working with parametric objects, we must connect the class parameters
 	% with the superclass parameters:
-	'$lgt_pp_entity_runtime_clause_'('$lgt_specializes_class_'(Class, Super, _)),
-	'$lgt_pp_specialized_class_'(Super, _, _, _, _, _, SIDef, _, _, _),
-	'$lgt_exec_ctx_this_rest'(SExCtx, Super, Ctx),
+	'$lgt_pp_entity_runtime_clause_'('$lgt_specializes_class_'(Class, Superclass, _)),
+	'$lgt_pp_specialized_class_'(Superclass, _, _, _, _, _, SIDef, _, _, _),
+	'$lgt_exec_ctx_this_rest'(SExCtx, Superclass, Ctx),
 	Lookup =.. [SIDef, Pred, SExCtx, Call, Ctn],
 	'$lgt_exec_ctx_this_rest'(CExCtx, Class, Ctx),
-	(	'$lgt_pp_predicate_alias_'(Super, _, _) ->
-		Head =.. [CSuper, Alias, CExCtx, Call, Ctn],
-		Rename =.. [Rnm, Super, Pred, Alias],
+	(	'$lgt_pp_predicate_alias_'(Superclass, _, _) ->
+		Head =.. [Super, Alias, CExCtx, Call, Ctn],
+		Rename =.. [Rnm, Superclass, Pred, Alias],
 		assertz('$lgt_pp_super_'((Head :- Rename, Lookup)))
-	;	Head =.. [CSuper, Pred, CExCtx, Call, Ctn],
+	;	Head =.. [Super, Pred, CExCtx, Call, Ctn],
 		assertz('$lgt_pp_super_'((Head:-Lookup)))
 	),
 	fail.
@@ -18021,7 +18034,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_check_prolog_version' :-
 	'$lgt_prolog_feature'(prolog_version, Current),
 	'$lgt_prolog_feature'(prolog_compatible_version, Check),
-	Check =.. [Operator, Compatible] ->
+	functor(Check, Operator, 1),
+	arg(1, Check, Compatible),
 	(	call(Operator, Current, Compatible) ->
 		true
 	;	'$lgt_print_message'(warning(compatibility), core, possibly_incompatible_prolog_version(Current, Compatible))
