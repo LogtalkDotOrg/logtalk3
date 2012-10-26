@@ -41,6 +41,11 @@ message was an instance.
 * FIXED: Restore the working directory after a file existence error when
 using the `logtalk_compile/1-2` and `logtalk_load/1-2` built-in predicates.
 
+Prolog adapter and integration files
+------------------------------------
+
+* FIXED: Goal expansion of (::)/2 goals within modules for YAP.
+
 Examples
 --------
 
