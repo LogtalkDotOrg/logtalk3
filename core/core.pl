@@ -3893,7 +3893,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	(	\+ (	'$lgt_member'(QMetaCall, MetaCallCtx),
 				'$existentially_quantified_goal_to_goal'(QMetaCall, MetaCall),
 				Goal = MetaCall
-	 	) ->
+		) ->
 		'$lgt_metacall_this'(Goal, Prefix, Sender, This, Self)
 	;	'$lgt_metacall_sender'(Goal, Sender, This, [])
 	).
@@ -4902,7 +4902,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 				% simply replace the extension
 				atom_concat(Name, TypeExtension, Basename)
 			;	% assume that the original file name didn't contain a
-			 	% true extension but have one or more '.' in its name
+				% true extension but have one or more '.' in its name
 				atom_concat(Name, Extension, Basename0),
 				atom_concat(Basename0, TypeExtension, Basename)
 			)
@@ -5648,7 +5648,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_activate_file_operator'(Priority, Specifier, Operator) :-
 	(	current_op(OriginalPriority, OriginalSpecifier, Operator),
-	 	'$lgt_same_operator_class'(Specifier, OriginalSpecifier) ->
+		'$lgt_same_operator_class'(Specifier, OriginalSpecifier) ->
 		assertz('$lgt_pp_global_operator_'(OriginalPriority, OriginalSpecifier, Operator))
 	;	true
 	),
@@ -5675,7 +5675,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_activate_entity_operator'(Priority, Specifier, Operator, Scope) :-
 	(	current_op(OriginalPriority, OriginalSpecifier, Operator),
-	 	'$lgt_same_operator_class'(Specifier, OriginalSpecifier) ->
+		'$lgt_same_operator_class'(Specifier, OriginalSpecifier) ->
 		assertz('$lgt_pp_file_operator_'(OriginalPriority, OriginalSpecifier, Operator))
 	;	true
 	),
@@ -6536,21 +6536,26 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 % synchronized/1 predicate directive
 %
-% this directive is ignored when using a back-end Prolog compiler that don't provide a compatible threads implementation
+% this directive is ignored when using a back-end Prolog compiler
+% that does not provide a compatible threads implementation
 
 '$lgt_tr_directive'(synchronized, Resources, _) :-
 	(	'$lgt_prolog_feature'(threads, supported) ->
 		(	'$lgt_pp_synchronized_' ->
+			% the entity itself is declared synchronized; thus all its
+			% predicates are already being compiled as synchronized 
 			(	'$lgt_current_flag_'(report, off) ->
 				true
 			;	'$lgt_increment_compile_warnings_counter',
 				'$lgt_warning_context'(Path, Lines, Type, Entity),
 				'$lgt_print_message'(warning(general), core, ignoring_synchronized_predicate_directive(Path, Lines, Type, Entity))
 			)
-		;	'$lgt_flatten_list'(Resources, ResourcesFlatted),
+		;	% process the directive
+			'$lgt_flatten_list'(Resources, ResourcesFlatted),
 			'$lgt_tr_synchronized_directive'(ResourcesFlatted)
 		)
-	;	true
+	;	% ignore the directive
+		true
 	).
 
 
@@ -8052,7 +8057,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		throw(type_error(atom, Name))
 	;	(	'$lgt_length'(Argnames, 0, Arity) ->
 			true
-		 ;	throw(length_error(argnames_list, Argnames))
+		;	throw(length_error(argnames_list, Argnames))
 		)
 	).
 
@@ -13868,7 +13873,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	\+ '$lgt_pp_multifile_'(Functor, Arity),
 	% predicate not declared multifile in object/category
 	Arity2 is Arity - 2,
-	% only return predicates that are not the expansion of grammar rules; see second clause
+	% only return predicates that are not the expansion of grammar rules
 	\+ '$lgt_pp_calls_non_terminal_'(Functor, Arity2, _),
 	once((	'$lgt_pp_public_'(Functor, Arity)
 		;	'$lgt_pp_protected_'(Functor, Arity)
@@ -14574,6 +14579,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % '$lgt_construct_entity_prefix'(@entity_identifier, -atom)
 %
 % constructs the entity prefix used in the compiled code
+%
+% parametric entities: Code prefix + Entity functor + "." + Entity arity + "."
+% other entities: Code prefix + Entity functor + "."
 
 '$lgt_construct_entity_prefix'(Entity, Prefix) :-
 	'$lgt_current_object_'(Entity, Prefix, _, _, _, _, _, _, _, _, _),
@@ -15586,10 +15594,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 % '$lgt_pred_arg_instantiation_mode'(@nonvar)
 
-'$lgt_pred_arg_instantiation_mode'((?)).			   % unspecified, can be input, output or both input and output
-'$lgt_pred_arg_instantiation_mode'((+)).			   % instantiated on predicate call, can be further instantiated by the predicate call
-'$lgt_pred_arg_instantiation_mode'((-)).			   % non-instantiated (i.e. a variable) on predicate call
-'$lgt_pred_arg_instantiation_mode'((@)).			   % not modified (i.e. not further instantiated) by the predicate call
+'$lgt_pred_arg_instantiation_mode'((?)).				% unspecified, can be input, output or both input and output
+'$lgt_pred_arg_instantiation_mode'((+)).				% instantiated on predicate call, can be further instantiated by the predicate call
+'$lgt_pred_arg_instantiation_mode'((-)).				% non-instantiated (i.e. a variable) on predicate call
+'$lgt_pred_arg_instantiation_mode'((@)).				% not modified (i.e. not further instantiated) by the predicate call
 
 
 
@@ -16862,9 +16870,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 				((	thread_property(Id, status(running)) ->
 					% thread still running, suspended waiting for a request to an alternative proof; tell it to exit
 					catch(thread_send_message(Id, '$lgt_exit'), _, true)
-				 ;	true
-				 ),
-				 thread_join(Id, _))
+				;	true
+				),
+				thread_join(Id, _))
 			)
 		)
 	;	% answering thread don't exist; generate an exception (failing is not an option as it could simply mean goal failure)
@@ -16910,9 +16918,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 				((	thread_property(Id, status(running)) ->
 					% thread still running, suspended waiting for a request to an alternative proof; tell it to exit
 					catch(thread_send_message(Id, '$lgt_exit'), _, true)
-				 ;	true
-				 ),
-				 thread_join(Id, _))
+				;	true
+				),
+				thread_join(Id, _))
 			)
 		)
 	;	% answering thread don't exist; generate an exception (failing is not an option as it could simply mean goal failure)
