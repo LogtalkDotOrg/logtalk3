@@ -12894,7 +12894,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	\+ '$lgt_pp_implemented_protocol_'(_, _, _, _),
 		\+ '$lgt_pp_imported_category_'(_, _, _, _, _),
 		\+ '$lgt_pp_extended_object_'(_, _, _, _, _, _, _, _, _, _) ->
-		HeadDDcl =.. [Dcl, _, _, _, _, _, _],
+		functor(HeadDDcl, Dcl, 6),
 		assertz('$lgt_pp_dcl_'((HeadDDcl:-fail)))
 	;	true
 	).
@@ -13179,7 +13179,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	\+ '$lgt_pp_implemented_protocol_'(_, _, _, _),
 		\+ '$lgt_pp_imported_category_'(_, _, _, _, _),
 		\+ '$lgt_pp_specialized_class_'(_, _, _, _, _, _, _, _, _, _) ->
-		HeadDDcl =.. [IDcl, _, _, _, _, _, _],
+		functor(HeadDDcl, IDcl, 6),
 		assertz('$lgt_pp_dcl_'((HeadDDcl:-fail)))
 	;	true
 	).
