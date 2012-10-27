@@ -5755,7 +5755,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 '$lgt_prolog_goal_expansion_portability_warnings'(Goal, ExpandedGoal) :-
-	(	'$lgt_compiler_flag'(portability, warning) ->
+	(	'$lgt_compiler_flag'(portability, warning),
+		\+ '$lgt_current_flag_'(report, off) ->
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_pp_file_path_flags_'(File, Directory, _),
 		atom_concat(Directory, File, Path),
@@ -5810,7 +5811,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 '$lgt_prolog_term_expansion_portability_warnings'(Term, ExpandedTerms) :-
-	(	'$lgt_compiler_flag'(portability, warning) ->
+	(	'$lgt_compiler_flag'(portability, warning),
+		\+ '$lgt_current_flag_'(report, off) ->
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_pp_file_path_flags_'(File, Directory, _),
 		atom_concat(Directory, File, Path),
@@ -6079,7 +6081,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_term_template'(Directive, Meta),
 	'$lgt_prolog_meta_directive'(Meta),					% defined in the Prolog adapter files
 	!,
-	(	'$lgt_compiler_flag'(portability, warning) ->
+	(	'$lgt_compiler_flag'(portability, warning),
+		\+ '$lgt_current_flag_'(report, off) ->
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_warning_context'(Path, Lines, Type, Entity),
 		'$lgt_print_message'(warning(portability), core, compiling_proprietary_prolog_directive(Path, Lines, Type, Entity, Directive))
@@ -6114,7 +6117,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	),
 	!,
 	% translate query as an initialization goal
-	(	'$lgt_compiler_flag'(portability, warning) ->
+	(	'$lgt_compiler_flag'(portability, warning),
+		\+ '$lgt_current_flag_'(report, off) ->
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_warning_context'(Path, Lines, Type, Entity),
 		'$lgt_print_message'(warning(portability), core, compiling_query_as_initialization_goal(Path, Lines, Type, Entity, Directive))
@@ -8528,7 +8532,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % definition of event handlers without reference to the "monitoring" built-in protocol
 
 '$lgt_tr_head'(Head, _, _) :-
- 	\+ '$lgt_current_flag_'(report, off),
+	\+ '$lgt_current_flag_'(report, off),
 	\+ '$lgt_pp_module_'(_),
 	functor(Head, Functor, 3),
 	once((Functor == before; Functor == after)),
@@ -8544,7 +8548,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % definition of term and goal expansion predicates without reference to the "expanding" built-in protocol
 
 '$lgt_tr_head'(Head, _, _) :-
- 	\+ '$lgt_current_flag_'(report, off),
+	\+ '$lgt_current_flag_'(report, off),
 	\+ '$lgt_pp_module_'(_),
 	functor(Head, Functor, 2),
 	once((Functor == term_expansion; Functor == goal_expansion)),
@@ -8582,7 +8586,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_comp_ctx_head'(Ctx, user::Head).
 
 '$lgt_tr_head'(logtalk::debug_handler_provider(_), _, _) :-
- 	\+ '$lgt_current_flag_'(report, off),
+	\+ '$lgt_current_flag_'(report, off),
 	'$lgt_logtalk.debug_handler_provider'(Provider, _),
 	'$lgt_pp_entity'(Type, Entity, _, _, _),
 	'$lgt_pp_file_path_flags_'(File, Directory, _),
@@ -9963,6 +9967,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_must_be'(atom, Flag),
 	'$lgt_must_be'(nonvar, Value),
 	'$lgt_compiler_flag'(portability, warning),
+	\+ '$lgt_current_flag_'(report, off),
 	\+ '$lgt_iso_spec_flag'(Flag),
 	'$lgt_pp_file_path_flags_'(File, Directory, _),
 	atom_concat(Directory, File, Path),
@@ -9976,6 +9981,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_tr_body'(set_prolog_flag(Flag, Value), _, _, _) :-
 	'$lgt_compiler_flag'(portability, warning),
+	\+ '$lgt_current_flag_'(report, off),
 	'$lgt_iso_spec_flag'(Flag),
 	\+ '$lgt_iso_spec_flag'(Flag, Value),
 	'$lgt_pp_file_path_flags_'(File, Directory, _),
@@ -9992,6 +9998,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_must_be'(var_or_atom, Flag),
 	nonvar(Flag),
 	'$lgt_compiler_flag'(portability, warning),
+	\+ '$lgt_current_flag_'(report, off),
 	\+ '$lgt_iso_spec_flag'(Flag),
 	'$lgt_pp_file_path_flags_'(File, Directory, _),
 	atom_concat(Directory, File, Path),
@@ -10007,6 +10014,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	nonvar(Flag),
 	nonvar(Value),
 	'$lgt_compiler_flag'(portability, warning),
+	\+ '$lgt_current_flag_'(report, off),
 	'$lgt_iso_spec_flag'(Flag),
 	\+ '$lgt_iso_spec_flag'(Flag, Value),
 	'$lgt_pp_file_path_flags_'(File, Directory, _),
@@ -10161,6 +10169,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_body'(Pred, _, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 	'$lgt_compiler_flag'(portability, warning),
+	\+ '$lgt_current_flag_'(report, off),
 	'$lgt_prolog_built_in_predicate'(Pred),
 	\+ '$lgt_logtalk_built_in_predicate'(Pred),
 	\+ '$lgt_iso_spec_predicate'(Pred),
@@ -11928,7 +11937,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	throw(permission_error(complement, self, Obj)).
 
 '$lgt_tr_complements_category'([Obj| _], Ctg, _, _, _) :-
- 	\+ '$lgt_current_flag_'(report, off),
+	\+ '$lgt_current_flag_'(report, off),
 	once((	'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags)
 		;	'$lgt_pp_file_runtime_clause_'('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags))
 	)),

@@ -31,6 +31,8 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: Avoid generating warning messages when the `report` flag is off.
+
 * CHANGED: Moved the static binding step for message sending from the second
 compiler pass to the first pass.
 
