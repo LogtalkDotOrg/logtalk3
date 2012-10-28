@@ -2254,7 +2254,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 % '$lgt_filter_scope'(+nonvar, -nonvar)
 %
-% filters predicate scope;
+% filters the predicate scope;
 % used in the implementation of protected-qualified relations between entities:
 % public predicates become protected predicates, protected and private predicates
 % are unaffected
@@ -2264,16 +2264,16 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_set_scope_container'(+nonvar, +object_identifier, +object_identifier, -object_identifier)
+% '$lgt_filter_scope_container'(+nonvar, +object_identifier, +object_identifier, -object_identifier)
 %
-% sets predicate scope container;
+% filters the predicate scope container;
 % used in the implementation of private-qualified relations between entities:
 % when the predicate is public or protected, the object inheriting the predicate
 % becomes the scope container; when the predicate is private, the scope container
 % is the inherited scope container
 
-'$lgt_set_scope_container'(p(_), _, SCtn, SCtn).
-'$lgt_set_scope_container'(p, SCtn, _, SCtn).
+'$lgt_filter_scope_container'(p(_), _, SCtn, SCtn).
+'$lgt_filter_scope_container'(p, SCtn, _, SCtn).
 
 
 
@@ -12642,10 +12642,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_gen_protocol_extend_clauses' :-
 	'$lgt_pp_protocol_'(_, _, Dcl, Rnm, _),
-	'$lgt_pp_extended_protocol_'(ExtPtc, _, ExtDcl, EntityScope),
-	(	EntityScope == (public) ->
+	'$lgt_pp_extended_protocol_'(ExtPtc, _, ExtDcl, RelationScope),
+	(	RelationScope == (public) ->
 		Lookup =.. [ExtDcl, Pred, Scope, Meta, Flags, Ctn]
-	;	EntityScope == protected ->
+	;	RelationScope == protected ->
 		Call =.. [ExtDcl, Pred, Scope2, Meta, Flags, Ctn],
 		Lookup = (Call, '$lgt_filter_scope'(Scope2, Scope))
 	;	Scope = p,
@@ -12712,10 +12712,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_gen_category_implements_dcl_clauses' :-
 	'$lgt_pp_category_'(_, _, CDcl, _, Rnm, _),
-	'$lgt_pp_implemented_protocol_'(Ptc, _, PDcl, EntityScope),
-	(	EntityScope == (public) ->
+	'$lgt_pp_implemented_protocol_'(Ptc, _, PDcl, RelationScope),
+	(	RelationScope == (public) ->
 		Lookup =.. [PDcl, Pred, Scope, Meta, Flags, Ctn]
-	;	EntityScope == protected ->
+	;	RelationScope == protected ->
 		Call =.. [PDcl, Pred, Scope2, Meta, Flags, Ctn],
 		Lookup = (Call, '$lgt_filter_scope'(Scope2, Scope))
 	;	Scope = p,
@@ -12736,10 +12736,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_gen_category_extends_dcl_clauses' :-
 	'$lgt_pp_category_'(_, _, CDcl, _, Rnm, _),
-	'$lgt_pp_extended_category_'(Ctg, _, ECDcl, _, EntityScope),
-	(	EntityScope == (public) ->
+	'$lgt_pp_extended_category_'(Ctg, _, ECDcl, _, RelationScope),
+	(	RelationScope == (public) ->
 		Lookup =.. [ECDcl, Pred, Scope, Meta, Flags, Ctn]
-	;	EntityScope == protected ->
+	;	RelationScope == protected ->
 		Call =.. [ECDcl, Pred, Scope2, Meta, Flags, Ctn],
 		Lookup = (Call, '$lgt_filter_scope'(Scope2, Scope))
 	;	Scope = p,
@@ -12908,10 +12908,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_gen_prototype_implements_dcl_clauses' :-
 	'$lgt_pp_object_'(Obj, _, ODcl, _, _, _, _, _, _, Rnm, _),
-	'$lgt_pp_implemented_protocol_'(Ptc, _, PDcl, EntityScope),
-	(	EntityScope == (public) ->
+	'$lgt_pp_implemented_protocol_'(Ptc, _, PDcl, RelationScope),
+	(	RelationScope == (public) ->
 		Lookup =.. [PDcl, Pred, Scope, Meta, Flags, Ctn]
-	;	EntityScope == protected ->
+	;	RelationScope == protected ->
 		Call =.. [PDcl, Pred, Scope2, Meta, Flags, Ctn],
 		Lookup = (Call, '$lgt_filter_scope'(Scope2, Scope))
 	;	Scope = p,
@@ -12932,10 +12932,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_gen_prototype_imports_dcl_clauses' :-
 	'$lgt_pp_object_'(Obj, _, ODcl, _, _, _, _, _, _, Rnm, _),
-	'$lgt_pp_imported_category_'(Ctg, _, CDcl, _, EntityScope),
-	(	EntityScope == (public) ->
+	'$lgt_pp_imported_category_'(Ctg, _, CDcl, _, RelationScope),
+	(	RelationScope == (public) ->
 		Lookup =.. [CDcl, Pred, Scope, Meta, Flags, Ctn]
-	;	EntityScope == protected ->
+	;	RelationScope == protected ->
 		Call =.. [CDcl, Pred, Scope2, Meta, Flags, Ctn],
 		Lookup = (Call, '$lgt_filter_scope'(Scope2, Scope))
 	;	Scope = p,
@@ -12956,15 +12956,15 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_gen_prototype_extends_dcl_clauses' :-
 	'$lgt_pp_object_'(Obj, _, ODcl, _, _, _, _, _, _, Rnm, _),
-	'$lgt_pp_extended_object_'(Parent, _, PDcl, _, _, _, _, _, _, EntityScope),
-	(	EntityScope == (public) ->
+	'$lgt_pp_extended_object_'(Parent, _, PDcl, _, _, _, _, _, _, RelationScope),
+	(	RelationScope == (public) ->
 		Lookup =.. [PDcl, Pred, Scope, Meta, Flags, SCtn, TCtn]
-	;	EntityScope == protected ->
+	;	RelationScope == protected ->
 		Call =.. [PDcl, Pred, Scope2, Meta, Flags, SCtn, TCtn],
 		Lookup = (Call, '$lgt_filter_scope'(Scope2, Scope))
 	;	Scope = p,
 		Call =.. [PDcl, Pred, Scope2, Meta, Flags, SCtn2, TCtn],
-		Lookup = (Call, '$lgt_set_scope_container'(Scope2, SCtn2, Obj, SCtn))
+		Lookup = (Call, '$lgt_filter_scope_container'(Scope2, SCtn2, Obj, SCtn))
 	),
 	(	'$lgt_pp_predicate_alias_'(Parent, _, _) ->
 		Head =.. [ODcl, Alias, Scope, Meta, Flags, SCtn, TCtn],
@@ -13118,15 +13118,15 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_gen_ic_hierarchy_dcl_clauses' :-
 	'$lgt_pp_object_'(Obj, _, ODcl, _, _, _, _, _, _, Rnm, _),
-	'$lgt_pp_instantiated_class_'(Class, _, _, _, _, CIDcl, _, _, _, EntityScope),
-	(	EntityScope == (public) ->
+	'$lgt_pp_instantiated_class_'(Class, _, _, _, _, CIDcl, _, _, _, RelationScope),
+	(	RelationScope == (public) ->
 		Lookup =.. [CIDcl, Pred, Scope, Meta, Flags, SCtn, TCtn]
-	;	EntityScope == protected ->
+	;	RelationScope == protected ->
 		Call =.. [CIDcl, Pred, Scope2, Meta, Flags, SCtn, TCtn],
 		Lookup = (Call, '$lgt_filter_scope'(Scope2, Scope))
 	;	Scope = p,
 		Call =.. [CIDcl, Pred, Scope2, Meta, Flags, SCtn2, TCtn],
-		Lookup = (Call, '$lgt_set_scope_container'(Scope2, SCtn2, Obj, SCtn))
+		Lookup = (Call, '$lgt_filter_scope_container'(Scope2, SCtn2, Obj, SCtn))
 	),
 	(	'$lgt_pp_predicate_alias_'(Class, _, _) ->
 		Head =.. [ODcl, Alias, Scope, Meta, Flags, SCtn, TCtn],
@@ -13193,10 +13193,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_gen_ic_implements_idcl_clauses' :-
 	'$lgt_pp_object_'(Obj, _, _, _, _, OIDcl, _, _, _, Rnm, _),
-	'$lgt_pp_implemented_protocol_'(Ptc, _, PDcl, EntityScope),
-	(	EntityScope == (public) ->
+	'$lgt_pp_implemented_protocol_'(Ptc, _, PDcl, RelationScope),
+	(	RelationScope == (public) ->
 		Lookup =.. [PDcl, Pred, Scope, Meta, Flags, Ctn]
-	;	EntityScope == protected ->
+	;	RelationScope == protected ->
 		Call =.. [PDcl, Pred, Scope2, Meta, Flags, Ctn],
 		Lookup = (Call, '$lgt_filter_scope'(Scope2, Scope))
 	;	Scope = p,
@@ -13217,10 +13217,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_gen_ic_imports_idcl_clauses' :-
 	'$lgt_pp_object_'(Obj, _, _, _, _, OIDcl, _, _, _, Rnm, _),
-	'$lgt_pp_imported_category_'(Ctg, _, CDcl, _, EntityScope),
-	(	EntityScope == (public) ->
+	'$lgt_pp_imported_category_'(Ctg, _, CDcl, _, RelationScope),
+	(	RelationScope == (public) ->
 		Lookup =.. [CDcl, Pred, Scope, Meta, Flags, Ctn]
-	;	EntityScope == protected ->
+	;	RelationScope == protected ->
 		Call =.. [CDcl, Pred, Scope2, Meta, Flags, Ctn],
 		Lookup = (Call, '$lgt_filter_scope'(Scope2, Scope))
 	;	Scope = p,
@@ -13241,15 +13241,15 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_gen_ic_hierarchy_idcl_clauses' :-
 	'$lgt_pp_object_'(Obj, _, _, _, _, CIDcl, _, _, _, Rnm, _),
-	'$lgt_pp_specialized_class_'(Super, _, _, _, _, SIDcl, _, _, _, EntityScope),
-	(	EntityScope == (public) ->
+	'$lgt_pp_specialized_class_'(Super, _, _, _, _, SIDcl, _, _, _, RelationScope),
+	(	RelationScope == (public) ->
 		Lookup =.. [SIDcl, Pred, Scope, Meta, Flags, SCtn, TCtn]
-	;	EntityScope == protected ->
+	;	RelationScope == protected ->
 		Call =.. [SIDcl, Pred, Scope2, Meta, Flags, SCtn, TCtn],
 		Lookup = (Call, '$lgt_filter_scope'(Scope2, Scope))
 	;	Scope = p,
 		Call =.. [SIDcl, Pred, Scope2, Meta, Flags, SCtn2, TCtn],
-		Lookup = (Call, '$lgt_set_scope_container'(Scope2, SCtn2, Obj, SCtn))
+		Lookup = (Call, '$lgt_filter_scope_container'(Scope2, SCtn2, Obj, SCtn))
 	),
 	(	'$lgt_pp_predicate_alias_'(Super, _, _) ->
 		Head =.. [CIDcl, Alias, Scope, Meta, Flags, SCtn, TCtn],
