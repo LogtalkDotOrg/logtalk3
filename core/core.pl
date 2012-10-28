@@ -145,7 +145,7 @@
 :- dynamic('$lgt_send_to_obj_'/3).					% '$lgt_send_to_obj_'(Obj, Pred, Sender)
 :- dynamic('$lgt_send_to_obj_ne_'/3).				% '$lgt_send_to_obj_ne_'(Obj, Pred, Sender)
 :- dynamic('$lgt_send_to_self_'/3).					% '$lgt_send_to_self_'(Obj, Pred, Sender)
-:- dynamic('$lgt_obj_super_call_'/3).				% '$lgt_obj_super_call_'(Obj, Pred, ExCtx)
+:- dynamic('$lgt_obj_super_call_'/3).				% '$lgt_obj_super_call_'(Super, Pred, ExCtx)
 :- dynamic('$lgt_ctg_super_call_'/3).				% '$lgt_ctg_super_call_'(Ctg, Pred, ExCtx)
 :- dynamic('$lgt_ctg_call_'/3).						% '$lgt_ctg_call_'(Dcl, Pred, ExCtx)
 
@@ -3447,7 +3447,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_obj_super_call_'(+atom, +callable, +execution_context, ?integer)
+% '$lgt_obj_super_call_'(+atom, +callable, +execution_context)
 %
 % the last clause of this cache predicate must always exist and must
 % call the predicate that generates the missing cache entry
@@ -3521,7 +3521,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_ctg_super_call_'(+object_identifier, +callable, +execution_context, ?integer)
+% '$lgt_ctg_super_call_'(+category_identifier, +callable, +execution_context)
 %
 % the last clause of this cache predicate must always exist and must
 % call the predicate that generates the missing cache entry
