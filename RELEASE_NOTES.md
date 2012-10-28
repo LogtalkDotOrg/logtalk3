@@ -31,6 +31,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* FIXED: An encapsulation bug in the implementation of the `(^^)/2` control
+construct could allow access to ancestor private predicates sharing the same
+with the predicate making the "super" call.
+
 * IMPROVED: Avoid generating warning messages when the `report` flag is off.
 
 * CHANGED: Moved the static binding step for message sending from the second
