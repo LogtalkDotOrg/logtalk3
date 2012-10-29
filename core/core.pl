@@ -1046,6 +1046,7 @@ abolish_category(Ctg) :-
 			abolish(Dcl/4),
 			abolish(Dcl/5),
 			abolish(Def/3),
+			abolish(Def/4),
 			abolish(Rnm/3),
 			retractall('$lgt_current_category_'(Ctg, _, _, _, _, _)),
 			retractall('$lgt_entity_property_'(Ctg, _)),

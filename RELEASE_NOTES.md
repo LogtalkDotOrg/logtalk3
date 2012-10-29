@@ -31,6 +31,8 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* FIXED: Memory leak in the `abolish_category/1` built-in predicate.
+
 * FIXED: An encapsulation bug in the implementation of the `(^^)/2` control
 construct could allow access to ancestor private predicates sharing the same
 with the predicate making the "super" call.
