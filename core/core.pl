@@ -11130,17 +11130,53 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	throw(existence_error(ancestor_category, Ctg)).
 
 '$lgt_tr_super_call'(Pred, TPred, Ctx) :-
+	var(Pred),
+	% translation performed at runtime
+	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	(	'$lgt_pp_object_'(_, _, _, _, Super, _, _, _, _, _, _) ->
-		(	var(Pred) ->
-			TPred = '$lgt_obj_super_call'(Super, Pred, ExCtx)
+	(	'$lgt_pp_object_'(_, _, _, _, Super, _, _, _, _, _, _) ->	
+		TPred = '$lgt_obj_super_call'(Super, Pred, ExCtx)
+	;	'$lgt_pp_category_'(Ctg, _, _, _, _, _),
+		TPred = '$lgt_ctg_super_call'(Ctg, Pred, ExCtx)
+	).
+
+'$lgt_tr_super_call'(Pred, TPred, Ctx) :-
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	(	'$lgt_pp_object_'(Obj, _, _, _, Super, _, _, _, _, _, _) ->
+		(	'$lgt_related_entities_are_static_binding',
+			'$lgt_obj_super_call_static_binding'(Obj, Pred, ExCtx, TPred) ->
+			true
 		;	TPred = '$lgt_obj_super_call_'(Super, Pred, ExCtx)
 		)
 	;	'$lgt_pp_category_'(Ctg, _, _, _, _, _),
-		(	var(Pred) ->
-			TPred = '$lgt_ctg_super_call'(Ctg, Pred, ExCtx)
+		(	'$lgt_related_entities_are_static_binding',
+			'$lgt_ctg_super_call_static_binding'(Ctg, Pred, ExCtx, TPred) ->
+			true
 		;	TPred = '$lgt_ctg_super_call_'(Ctg, Pred, ExCtx)
 		)
+	).
+
+
+'$lgt_related_entities_are_static_binding' :-
+	forall(
+		'$lgt_pp_extended_object_'(Obj, _, _, _, _, _, _, _, _, _),
+		('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags), Flags /\ 1 =:= 1)
+	),
+	forall(
+		'$lgt_pp_instantiated_class_'(Obj, _, _, _, _, _, _, _, _, _),
+		('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags), Flags /\ 1 =:= 1)
+	),
+	forall(
+		'$lgt_pp_specialized_class_'(Obj, _, _, _, _, _, _, _, _, _),
+		('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags), Flags /\ 1 =:= 1)
+	),
+	forall(
+		'$lgt_pp_extended_category_'(Ctg, _, _, _, _),
+		('$lgt_current_category_'(Ctg, _, _, _, _, Flags), Flags /\ 1 =:= 1)
+	),
+	forall(
+		'$lgt_pp_implemented_protocol_'(Ptc, _, _, _),
+		('$lgt_current_protocol_'(Ptc, _, _, _, Flags), Flags /\ 1 =:= 1)
 	).
 
 
@@ -17240,6 +17276,147 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		assertz('$lgt_ctg_call_static_binding_cache_'(GCtg, GPred, GExCtx, GCall)),
 		Ctg = GCtg, Pred = GPred, ExCtx = GExCtx, Call = GCall
 	).
+
+
+
+% '$lgt_obj_super_call_static_binding'(@object_identifier, @callable, @execution_context -callable)
+
+'$lgt_obj_super_call_static_binding'(Obj, Pred, ExCtx, Call) :-
+	(	'$lgt_pp_extended_object_'(_, _, _, _, _, _, _, _, _, _) ->
+		'$lgt_obj_super_call_static_binding_prototype'(Obj, Pred, ExCtx, Call)
+	;	'$lgt_pp_instantiated_class_'(_, _, _, _, _, _, _, _, _, _),
+		'$lgt_pp_specialized_class_'(_, _, _, _, _, _, _, _, _, _) ->
+		'$lgt_obj_super_call_static_binding_instance_class'(Obj, Pred, ExCtx, Call)
+	;	'$lgt_pp_instantiated_class_'(_, _, _, _, _, _, _, _, _, _) ->
+		'$lgt_obj_super_call_static_binding_instance'(Obj, Pred, ExCtx, Call)
+	;	'$lgt_pp_specialized_class_'(_, _, _, _, _, _, _, _, _, _) ->
+		'$lgt_obj_super_call_static_binding_class'(Obj, Pred, ExCtx, Call)
+	;	fail
+	).
+
+
+'$lgt_obj_super_call_static_binding_prototype'(Obj, Pred, ExCtx, Call) :-
+	% when working with parametric entities, we must connect the parameters
+	% between related entities
+	'$lgt_pp_entity_runtime_clause_'('$lgt_extends_object_'(Obj, Parent, RelationScope)),
+	'$lgt_current_object_'(Parent, _, Dcl, Def, _, _, _, _, _, _, _),
+	% lookup predicate declaration
+	(	RelationScope == (public) ->
+		call(Dcl, Pred, Scope, _, Flags, SCtn, _)
+	;	RelationScope == protected ->
+		call(Dcl, Pred, PredScope, _, Flags, SCtn, _),
+		'$lgt_filter_scope'(PredScope, Scope)
+	;	Scope = p,
+		call(Dcl, Pred, PredScope, _, Flags, SCtn0, _),
+		'$lgt_filter_scope_container'(PredScope, SCtn0, Obj, SCtn)
+	), !,
+	(	Scope = p(_) ->
+		true
+	;	Obj = SCtn
+	),
+	Flags /\ 2 =:= 0,	% Type == static
+	% unify execution context arguments
+	'$lgt_exec_ctx'(ExCtx, Sender, Obj, Self, MetaCallCtx, Stack),
+	'$lgt_exec_ctx'(ExCtx0, Sender, Parent, Self, MetaCallCtx, Stack),
+	% lookup predicate definition
+	call(Def, Pred, ExCtx0, Call, _, DefCtn), !,
+	% predicate definition found; use it only if it's safe
+	'$lgt_safe_static_binding_paths'(Obj, SCtn, DefCtn).
+
+
+'$lgt_obj_super_call_static_binding_instance'(Obj, Pred, ExCtx, Call) :-
+	% when working with parametric entities, we must connect the parameters
+	% between related entities
+	'$lgt_pp_entity_runtime_clause_'('$lgt_instantiates_class_'(Obj, Class, RelationScope)),
+	'$lgt_current_object_'(Class, _, _, _, _, IDcl, IDef, _, _, _, _),
+	% lookup predicate declaration
+	(	RelationScope == (public) ->
+		call(IDcl, Pred, Scope, _, Flags, SCtn, _)
+	;	RelationScope == protected ->
+		call(IDcl, Pred, PredScope, _, Flags, SCtn, _),
+		'$lgt_filter_scope'(PredScope, Scope)
+	;	Scope = p,
+		call(IDcl, Pred, PredScope, _, Flags, SCtn0, _),
+		'$lgt_filter_scope_container'(PredScope, SCtn0, Obj, SCtn)
+	), !,
+	(	Scope = p(_) ->
+		true
+	;	Obj = SCtn
+	),
+	Flags /\ 2 =:= 0,	% Type == static
+	% unify execution context arguments
+	'$lgt_exec_ctx'(ExCtx, Sender, Obj, Self, MetaCallCtx, Stack),
+	'$lgt_exec_ctx'(ExCtx0, Sender, Class, Self, MetaCallCtx, Stack),
+	% lookup predicate definition
+	call(IDef, Pred, ExCtx0, Call, _, DefCtn), !,
+	% predicate definition found; use it only if it's safe
+	'$lgt_safe_static_binding_paths'(Obj, SCtn, DefCtn).
+
+
+'$lgt_obj_super_call_static_binding_class'(Obj, Pred, ExCtx, Call) :-
+	% when working with parametric entities, we must connect the parameters
+	% between related entities
+	'$lgt_pp_entity_runtime_clause_'('$lgt_specializes_class_'(Obj, Superclass, RelationScope)),
+	'$lgt_current_object_'(Superclass, _, Dcl, Def, _, _, _, _, _, _, _),
+	% lookup predicate declaration
+	(	RelationScope == (public) ->
+		call(Dcl, Pred, Scope, _, Flags, SCtn, _)
+	;	RelationScope == protected ->
+		call(Dcl, Pred, PredScope, _, Flags, SCtn, _),
+		'$lgt_filter_scope'(PredScope, Scope)
+	;	Scope = p,
+		call(Dcl, Pred, PredScope, _, Flags, SCtn0, _),
+		'$lgt_filter_scope_container'(PredScope, SCtn0, Obj, SCtn)
+	), !,
+	(	Scope = p(_) ->
+		true
+	;	Obj = SCtn
+	),
+	Flags /\ 2 =:= 0,	% Type == static
+	% unify execution context arguments
+	'$lgt_exec_ctx'(ExCtx, Sender, Obj, Self, MetaCallCtx, Stack),
+	'$lgt_exec_ctx'(ExCtx0, Sender, Superclass, Self, MetaCallCtx, Stack),
+	% lookup predicate definition
+	call(Def, Pred, ExCtx0, Call, _, DefCtn), !,
+	% predicate definition found; use it only if it's safe
+	'$lgt_safe_static_binding_paths'(Obj, SCtn, DefCtn).
+
+
+'$lgt_obj_super_call_static_binding_instance_class'(Obj, Pred, ExCtx, Call) :-
+	(	'$lgt_obj_super_call_static_binding_instance'(Obj, Pred, ExCtx, ICall),
+		'$lgt_obj_super_call_static_binding_class'(Obj, Pred, ExCtx, CCall) ->
+		(	ICall == CCall ->
+			Call = ICall
+		;	'$lgt_exec_ctx'(ExCtx, _, _, Self, _, _),
+			Call = (Obj = Self -> ICall; CCall)
+		)
+	;	'$lgt_obj_super_call_static_binding_instance'(Obj, Pred, ExCtx, Call) ->
+		true
+	;	'$lgt_obj_super_call_static_binding_class'(Obj, Pred, ExCtx, Call)
+	).
+
+
+% '$lgt_ctg_super_call_static_binding'(@category_identifier, @callable, @execution_context -callable)
+
+'$lgt_ctg_super_call_static_binding'(Ctg, Pred, ExCtx, Call) :-
+	% when working with parametric entities, we must connect the parameters
+	% between related entities
+	'$lgt_pp_entity_runtime_clause_'('$lgt_extends_category_'(Ctg, ExtCtg, RelationScope)),
+	'$lgt_current_category_'(ExtCtg, _, Dcl, Def, _, _),
+	% lookup predicate declaration:
+	(	RelationScope == (public) ->
+		call(Dcl, Pred, Scope, _, Flags, DclCtn)
+	;	RelationScope == protected,
+		call(Dcl, Pred, Scope0, _, Flags, DclCtn),
+		'$lgt_filter_scope'(Scope0, Scope)
+	), !,
+	% check that the call is within scope
+	Scope = p(_),
+	Flags /\ 2 =:= 0,	% Type == static
+	% lookup predicate definition
+	call(Def, Pred, ExCtx, Call, DefCtn), !,
+	% predicate definition found; use it only if it's safe
+	'$lgt_safe_static_binding_paths'(Ctg, DclCtn, DefCtn).
 
 
 
