@@ -31,6 +31,12 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: Format of the entity linking clauses for predicate definitions.
+The new format includes an additional argument that allows distinguishing
+between the scope container and the true container of a predicate definition.
+This change is necessary to allow upcoming support for static binding of
+"super" calls.
+
 * FIXED: Memory leak in the `abolish_category/1` built-in predicate.
 
 * FIXED: An encapsulation bug in the implementation of the `(^^)/2` control
