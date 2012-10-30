@@ -31,11 +31,13 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: Implemented static binding for "super" calls. As with other static
+binding optimizations, it requires entities defined in separated source files
+compiled with the option `reload(skip)`.
+
 * CHANGED: Format of the entity linking clauses for predicate definitions.
 The new format includes an additional argument that allows distinguishing
 between the scope container and the true container of a predicate definition.
-This change is necessary to allow upcoming support for static binding of
-"super" calls.
 
 * FIXED: Memory leak in the `abolish_category/1` built-in predicate.
 
