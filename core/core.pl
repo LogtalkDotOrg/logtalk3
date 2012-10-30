@@ -136,8 +136,7 @@
 
 % static binding caches
 
-:- dynamic('$lgt_send_to_obj_static_binding_cache_'/4).		% '$lgt_send_to_obj_static_binding_cache_'(Obj, Pred, Sender, Call)
-:- dynamic('$lgt_ctg_call_static_binding_cache_'/4).		% '$lgt_ctg_call_static_binding_cache_'(Ctg, Pred, ExCtx, Call)
+:- dynamic('$lgt_send_to_obj_static_binding_'/4).	% '$lgt_send_to_obj_static_binding_'(Obj, Pred, Sender, Call)
 
 
 % lookup caches for messages to an object, messages to self, and super calls
@@ -9223,7 +9222,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	\+ '$lgt_pp_imported_category_'(_, _, _, _, _),
 	throw(existence_error(procedure, Pred)).
 
-'$lgt_tr_body'(:Alias, TPred, '$lgt_debug'(goal(:Alias, TPred), ExCtx), Ctx) :-
+'$lgt_tr_body'(:Pred, TPred, '$lgt_debug'(goal(:Pred, TPred), ExCtx), Ctx) :-
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	(	% ensure that all imported categories are "static binding" entities
@@ -9232,19 +9231,15 @@ current_logtalk_flag(version, version(3, 0, 0)).
 			('$lgt_current_category_'(Ctg, _, _, _, _, Flags), Flags /\ 1 =:= 1)
 		),
 		% find the first category in left-to-right import order that defines the predicate
-		'$lgt_pp_imported_category_'(Ctg, _, _, _, _),
-		(	'$lgt_pp_predicate_alias_'(Ctg, Pred, Alias) ->
-			true
-		;	Pred = Alias
-		),
-		'$lgt_ctg_call_static_binding_cache'(Ctg, Pred, ExCtx, TPred) ->
+		'$lgt_comp_ctx_this'(Ctx, This),
+		'$lgt_ctg_call_static_binding'(This, Pred, ExCtx, TPred) ->
 		true
 	;	% must resort to dynamic binding
 		'$lgt_pp_object_'(_, _, Dcl, _, _, IDcl, _, _, _, _, _),
 		(	\+ '$lgt_pp_instantiated_class_'(_, _, _, _, _, _, _, _, _, _),
 			\+ '$lgt_pp_specialized_class_'(_, _, _, _, _, _, _, _, _, _) ->
-			TPred = '$lgt_ctg_call_'(Dcl, Alias, ExCtx)
-		;	TPred = '$lgt_ctg_call_'(IDcl, Alias, ExCtx)
+			TPred = '$lgt_ctg_call_'(Dcl, Pred, ExCtx)
+		;	TPred = '$lgt_ctg_call_'(IDcl, Pred, ExCtx)
 		)
 	).
 
@@ -10933,11 +10928,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_tr_msg'(Pred, Obj, TPred, This) :-
 	(	'$lgt_compiler_flag'(events, allow) ->
-		(	'$lgt_send_to_obj_static_binding_cache'(Obj, Pred, This, Call) ->
+		(	'$lgt_send_to_obj_static_binding'(Obj, Pred, This, Call) ->
 			TPred = '$lgt_guarded_method_call'(Obj, Pred, This, Call)
 		;	TPred = '$lgt_send_to_obj_'(Obj, Pred, This)
 		)
-	;	(	'$lgt_send_to_obj_static_binding_cache'(Obj, Pred, This, TPred) ->
+	;	(	'$lgt_send_to_obj_static_binding'(Obj, Pred, This, TPred) ->
 			true
 		;	TPred = '$lgt_send_to_obj_ne_'(Obj, Pred, This)
 		)
@@ -17192,10 +17187,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_send_to_obj_static_binding_cache'(@object_identifier, @callable, @object_identifier -callable)
+% '$lgt_send_to_obj_static_binding'(@object_identifier, @callable, @object_identifier -callable)
 
-'$lgt_send_to_obj_static_binding_cache'(Obj, Pred, Sender, Call) :-
-	(	'$lgt_send_to_obj_static_binding_cache_'(Obj, Pred, Sender, Call) ->
+'$lgt_send_to_obj_static_binding'(Obj, Pred, Sender, Call) :-
+	(	'$lgt_send_to_obj_static_binding_'(Obj, Pred, Sender, Call) ->
 		true
 	;	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, _, _, _, ObjFlags),
 		ObjFlags /\ 1 =:= 1,
@@ -17218,7 +17213,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		'$lgt_safe_static_binding_paths'(Obj, DclCtn, DefCtn),
 		(	Meta == no ->
 			% cache only normal predicates
-			assertz('$lgt_send_to_obj_static_binding_cache_'(GObj, GPred, GSender, GCall)),
+			assertz('$lgt_send_to_obj_static_binding_'(GObj, GPred, GSender, GCall)),
 			Obj = GObj, Pred = GPred, Sender = GSender, Call = GCall
 		;	% meta-predicates cannot be cached as they require translation of the meta-arguments
 			Meta =.. [PredFunctor| MArgs],
@@ -17260,22 +17255,26 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_ctg_call_static_binding_cache'(@category_identifier, @callable, @execution_context -callable)
+% '$lgt_ctg_call_static_binding'(@object_identifier, @callable, @execution_context -callable)
 
-'$lgt_ctg_call_static_binding_cache'(Ctg, Pred, ExCtx, Call) :-
-	(	'$lgt_ctg_call_static_binding_cache_'(Ctg, Pred, ExCtx, Call) ->
+'$lgt_ctg_call_static_binding'(Obj, Alias, ExCtx, Call) :-
+	% when working with parametric entities, we must connect the parameters
+	% between related entities
+	'$lgt_pp_entity_runtime_clause_'('$lgt_imports_category_'(Obj, Ctg, _)),
+	'$lgt_current_category_'(Ctg, _, Dcl, Def, _, _),
+	% we may be aliasing the predicate
+	(	'$lgt_pp_predicate_alias_'(Ctg, Pred, Alias) ->
 		true
-	;	'$lgt_current_category_'(Ctg, _, Dcl, Def, _, CtgFlags),
-		CtgFlags /\ 1 =:= 1,
-		call(Dcl, Pred, _, _, Flags, DclCtn), !,
-		Flags /\ 2 =:= 0,
-		'$lgt_term_template'(Ctg, GCtg),
-		'$lgt_term_template'(Pred, GPred),
-		call(Def, GPred, GExCtx, GCall, DefCtn), !,
-		'$lgt_safe_static_binding_paths'(Ctg, DclCtn, DefCtn),
-		assertz('$lgt_ctg_call_static_binding_cache_'(GCtg, GPred, GExCtx, GCall)),
-		Ctg = GCtg, Pred = GPred, ExCtx = GExCtx, Call = GCall
-	).
+	;	Pred = Alias
+	),
+	% lookup predicate declaration
+	call(Dcl, Pred, _, _, Flags, DclCtn), !,
+	% the predicate must be static
+	Flags /\ 2 =:= 0,
+	% lookup predicate definition
+	call(Def, Pred, ExCtx, Call, DefCtn), !,
+	% predicate definition found; use it only if it's safe
+	'$lgt_safe_static_binding_paths'(Ctg, DclCtn, DefCtn).
 
 
 
@@ -17315,11 +17314,13 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		call(Dcl, Pred, PredScope, _, Flags, SCtn0, TCtn),
 		'$lgt_filter_scope_container'(PredScope, SCtn0, Obj, SCtn)
 	), !,
+	% check that the call is within scope
 	(	Scope = p(_) ->
 		true
 	;	Obj = SCtn
 	),
-	Flags /\ 2 =:= 0,	% Type == static
+	% the predicate must be static
+	Flags /\ 2 =:= 0,
 	% unify execution context arguments
 	'$lgt_exec_ctx_this_rest'(ExCtx, Obj, Rest),
 	'$lgt_exec_ctx_this_rest'(ExCtx0, Parent, Rest),
@@ -17349,11 +17350,13 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		call(IDcl, Pred, PredScope, _, Flags, SCtn0, TCtn),
 		'$lgt_filter_scope_container'(PredScope, SCtn0, Obj, SCtn)
 	), !,
+	% check that the call is within scope
 	(	Scope = p(_) ->
 		true
 	;	Obj = SCtn
 	),
-	Flags /\ 2 =:= 0,	% Type == static
+	% the predicate must be static
+	Flags /\ 2 =:= 0,
 	% unify execution context arguments
 	'$lgt_exec_ctx_this_rest'(ExCtx, Obj, Rest),
 	'$lgt_exec_ctx_this_rest'(ExCtx0, Class, Rest),
@@ -17383,11 +17386,13 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		call(Dcl, Pred, PredScope, _, Flags, SCtn0, TCtn),
 		'$lgt_filter_scope_container'(PredScope, SCtn0, Obj, SCtn)
 	), !,
+	% check that the call is within scope
 	(	Scope = p(_) ->
 		true
 	;	Obj = SCtn
 	),
-	Flags /\ 2 =:= 0,	% Type == static
+	% the predicate must be static
+	Flags /\ 2 =:= 0,
 	% unify execution context arguments
 	'$lgt_exec_ctx_this_rest'(ExCtx, Obj, Rest),
 	'$lgt_exec_ctx_this_rest'(ExCtx0, Superclass, Rest),
@@ -17432,7 +17437,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	), !,
 	% check that the call is within scope
 	Scope = p(_),
-	Flags /\ 2 =:= 0,	% Type == static
+	% the predicate must be static
+	Flags /\ 2 =:= 0,
 	% lookup predicate definition
 	call(Def, Pred, ExCtx, Call, DefCtn), !,
 	% predicate definition found; use it only if it's safe

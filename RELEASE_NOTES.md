@@ -35,6 +35,10 @@ Logtalk compiler and runtime
 binding optimizations, it requires entities defined in separated source files
 compiled with the option `reload(skip)`.
 
+* FIXED: The implementation of static binding for the `(:)/1` control construct
+would fail to propagate parameters when using parametric objects and parametric
+categories.
+
 * CHANGED: Format of the entity linking clauses for predicate definitions.
 The new format includes an additional argument that allows distinguishing
 between the scope container and the true container of a predicate definition.
