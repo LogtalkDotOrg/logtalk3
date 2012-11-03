@@ -10551,7 +10551,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_check_dynamic_directive'((':'(Module, Head) :- _)) :-
 	% module explicit qualification
 	!,
-	(	'$lgt_pp_module_'(Module) ->
+	(	nonvar(Module),
+		'$lgt_pp_module_'(Module) ->
 		% same module we're compiling
 		'$lgt_check_dynamic_directive'(Head)
 	;	true
@@ -10560,7 +10561,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_check_dynamic_directive'(':'(Module, Term)) :-
 	% module explicit qualification
 	!,
-	(	'$lgt_pp_module_'(Module) ->
+	(	nonvar(Module),
+		'$lgt_pp_module_'(Module) ->
 		% same module we're compiling
 		'$lgt_check_dynamic_directive'(Term)
 	;	true
