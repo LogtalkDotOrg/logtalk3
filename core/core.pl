@@ -10097,6 +10097,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	\+ '$lgt_pp_public_'(Functor, Arity),		% not a
 	\+ '$lgt_pp_protected_'(Functor, Arity),	% redefined
 	\+ '$lgt_pp_private_'(Functor, Arity),		% built-in
+	\+ '$lgt_pp_redefined_built_in_'(Pred, _, _),
 	\+ '$lgt_pp_non_portable_call_'(Functor, Arity, _),
 	'$lgt_current_line_numbers'(Lines),
 	assertz('$lgt_pp_non_portable_call_'(Functor, Arity, Lines)),

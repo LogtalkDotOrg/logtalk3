@@ -64,6 +64,8 @@ using the `logtalk_compile/1-2` and `logtalk_load/1-2` built-in predicates.
 * FIXED: Ensure that checking for missing `dynamic/1` directives for module
 predicates is only performed when the module name is know at compile time.
 
+* FIXED: False reports of calls to non-standard Prolog built-in predicates.
+
 Prolog adapter and integration files
 ------------------------------------
 
