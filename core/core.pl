@@ -5675,7 +5675,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_prolog_goal_expansion_portability_warnings'(Goal, ExpandedGoal) :-
 	(	'$lgt_compiler_flag'(portability, warning),
-		\+ '$lgt_current_flag_'(report, off) ->
+		\+ '$lgt_compiler_flag'(report, off) ->
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_pp_file_path_flags_'(File, Directory, _),
 		atom_concat(Directory, File, Path),
@@ -5731,7 +5731,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_prolog_term_expansion_portability_warnings'(Term, ExpandedTerms) :-
 	(	'$lgt_compiler_flag'(portability, warning),
-		\+ '$lgt_current_flag_'(report, off) ->
+		\+ '$lgt_compiler_flag'(report, off) ->
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_pp_file_path_flags_'(File, Directory, _),
 		atom_concat(Directory, File, Path),
@@ -6001,7 +6001,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_prolog_meta_directive'(Meta),					% defined in the Prolog adapter files
 	!,
 	(	'$lgt_compiler_flag'(portability, warning),
-		\+ '$lgt_current_flag_'(report, off) ->
+		\+ '$lgt_compiler_flag'(report, off) ->
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_warning_context'(Path, Lines, Type, Entity),
 		'$lgt_print_message'(warning(portability), core, compiling_proprietary_prolog_directive(Path, Lines, Type, Entity, Directive))
@@ -6037,7 +6037,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!,
 	% translate query as an initialization goal
 	(	'$lgt_compiler_flag'(portability, warning),
-		\+ '$lgt_current_flag_'(report, off) ->
+		\+ '$lgt_compiler_flag'(report, off) ->
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_warning_context'(Path, Lines, Type, Entity),
 		'$lgt_print_message'(warning(portability), core, compiling_query_as_initialization_goal(Path, Lines, Type, Entity, Directive))
@@ -6463,7 +6463,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		(	'$lgt_pp_synchronized_' ->
 			% the entity itself is declared synchronized; thus all its
 			% predicates are already being compiled as synchronized 
-			(	'$lgt_current_flag_'(report, off) ->
+			(	'$lgt_compiler_flag'(report, off) ->
 				true
 			;	'$lgt_increment_compile_warnings_counter',
 				'$lgt_warning_context'(Path, Lines, Type, Entity),
@@ -8456,7 +8456,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % definition of event handlers without reference to the "monitoring" built-in protocol
 
 '$lgt_tr_head'(Head, _, _) :-
-	\+ '$lgt_current_flag_'(report, off),
+	\+ '$lgt_compiler_flag'(report, off),
 	\+ '$lgt_pp_module_'(_),
 	functor(Head, Functor, 3),
 	once((Functor == before; Functor == after)),
@@ -8472,7 +8472,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % definition of term and goal expansion predicates without reference to the "expanding" built-in protocol
 
 '$lgt_tr_head'(Head, _, _) :-
-	\+ '$lgt_current_flag_'(report, off),
+	\+ '$lgt_compiler_flag'(report, off),
 	\+ '$lgt_pp_module_'(_),
 	functor(Head, Functor, 2),
 	once((Functor == term_expansion; Functor == goal_expansion)),
@@ -8497,8 +8497,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	functor(Head, Functor, Arity),
 	(	'$lgt_pp_directive_'(multifile(Functor/Arity)) ->
 		true
-	;	\+ '$lgt_current_flag_'(report, off) ->
-		'$lgt_current_flag_'(missing_directives, warning),
+	;	\+ '$lgt_compiler_flag'(report, off) ->
+		'$lgt_compiler_flag'(missing_directives, warning),
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_pp_entity'(Type, Entity, _, _, _),
 		'$lgt_pp_file_path_flags_'(File, Directory, _),
@@ -8510,7 +8510,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_comp_ctx_head'(Ctx, user::Head).
 
 '$lgt_tr_head'(logtalk::debug_handler_provider(_), _, _) :-
-	\+ '$lgt_current_flag_'(report, off),
+	\+ '$lgt_compiler_flag'(report, off),
 	'$lgt_logtalk.debug_handler_provider'(Provider, _),
 	'$lgt_pp_entity'(Type, Entity, _, _, _),
 	'$lgt_pp_file_path_flags_'(File, Directory, _),
@@ -8550,8 +8550,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		true
 	;	'$lgt_pp_directive_'(multifile(':'(Module, Functor/Arity))) ->
 		true
-	;	\+ '$lgt_current_flag_'(report, off) ->
-		'$lgt_current_flag_'(missing_directives, warning),
+	;	\+ '$lgt_compiler_flag'(report, off) ->
+		'$lgt_compiler_flag'(missing_directives, warning),
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_pp_entity'(Type, Entity, _, _, _),
 		'$lgt_pp_file_path_flags_'(File, Directory, _),
@@ -9887,7 +9887,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_must_be'(atom, Flag),
 	'$lgt_must_be'(nonvar, Value),
 	'$lgt_compiler_flag'(portability, warning),
-	\+ '$lgt_current_flag_'(report, off),
+	\+ '$lgt_compiler_flag'(report, off),
 	\+ '$lgt_iso_spec_flag'(Flag),
 	'$lgt_pp_file_path_flags_'(File, Directory, _),
 	atom_concat(Directory, File, Path),
@@ -9901,7 +9901,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_tr_body'(set_prolog_flag(Flag, Value), _, _, _) :-
 	'$lgt_compiler_flag'(portability, warning),
-	\+ '$lgt_current_flag_'(report, off),
+	\+ '$lgt_compiler_flag'(report, off),
 	'$lgt_iso_spec_flag'(Flag),
 	\+ '$lgt_iso_spec_flag'(Flag, Value),
 	'$lgt_pp_file_path_flags_'(File, Directory, _),
@@ -9918,7 +9918,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_must_be'(var_or_atom, Flag),
 	nonvar(Flag),
 	'$lgt_compiler_flag'(portability, warning),
-	\+ '$lgt_current_flag_'(report, off),
+	\+ '$lgt_compiler_flag'(report, off),
 	\+ '$lgt_iso_spec_flag'(Flag),
 	'$lgt_pp_file_path_flags_'(File, Directory, _),
 	atom_concat(Directory, File, Path),
@@ -9934,7 +9934,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	nonvar(Flag),
 	nonvar(Value),
 	'$lgt_compiler_flag'(portability, warning),
-	\+ '$lgt_current_flag_'(report, off),
+	\+ '$lgt_compiler_flag'(report, off),
 	'$lgt_iso_spec_flag'(Flag),
 	\+ '$lgt_iso_spec_flag'(Flag, Value),
 	'$lgt_pp_file_path_flags_'(File, Directory, _),
@@ -10089,7 +10089,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_body'(Pred, _, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 	'$lgt_compiler_flag'(portability, warning),
-	\+ '$lgt_current_flag_'(report, off),
+	\+ '$lgt_compiler_flag'(report, off),
 	'$lgt_prolog_built_in_predicate'(Pred),
 	\+ '$lgt_logtalk_built_in_predicate'(Pred),
 	\+ '$lgt_iso_spec_predicate'(Pred),
@@ -11876,7 +11876,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	throw(permission_error(complement, self, Obj)).
 
 '$lgt_tr_complements_category'([Obj| _], Ctg, _, _, _) :-
-	\+ '$lgt_current_flag_'(report, off),
+	\+ '$lgt_compiler_flag'(report, off),
 	once((	'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags)
 		;	'$lgt_pp_file_runtime_clause_'('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags))
 	)),
@@ -13862,7 +13862,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % reports possibly missing dynamic directives
 
 '$lgt_report_missing_dynamic_directives'(Type, Entity) :-
-	'$lgt_current_flag_'(missing_directives, warning),
+	'$lgt_compiler_flag'(missing_directives, warning),
 	'$lgt_pp_file_path_flags_'(File, Directory, _),
 	atom_concat(Directory, File, Path),
 		% detected dynamic predicate
@@ -13883,7 +13883,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % reports possibly missing discontiguous directives
 
 '$lgt_report_missing_discontiguous_directives'(Type, Entity) :-
-	'$lgt_current_flag_'(missing_directives, warning),
+	'$lgt_compiler_flag'(missing_directives, warning),
 	'$lgt_pp_file_path_flags_'(File, Directory, _),
 	atom_concat(Directory, File, Path),
 		% detected discontiguous predicate
@@ -15389,7 +15389,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % each lambda goal variable should be either a lambda free variable or a lambda parameter
 
 '$lgt_check_lambda_expression_unclassified_vars'(Parameters>>Goal) :-
-	(	'$lgt_current_flag_'(report, off) ->
+	(	'$lgt_compiler_flag'(report, off) ->
 		true
 	;	'$lgt_check_lambda_expression_unclassified_vars'(Goal, GoalVars),
 		term_variables(Parameters, ParameterVars),
@@ -15418,7 +15418,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % no lambda goal variable should be both a lambda free variable and a lambda parameter
 
 '$lgt_check_lambda_expression_mixed_up_vars'(Free/Parameters>>Goal) :-
-	(	'$lgt_current_flag_'(report, off) ->
+	(	'$lgt_compiler_flag'(report, off) ->
 		true
 	;	term_variables(Free, FreeVars),
 		term_variables(Parameters, ParameterVars),
