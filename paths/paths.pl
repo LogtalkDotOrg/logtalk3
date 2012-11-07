@@ -115,6 +115,7 @@ logtalk_library_path(logging, examples('logging/')).
 logtalk_library_path(logic, examples('logic/')).
 logtalk_library_path(lpa_faults, examples('lpa/faults/')).
 logtalk_library_path(lpa_timetables, examples('lpa/timetables/')).
+logtalk_library_path(metaclasses, examples('metaclasses/')).
 logtalk_library_path(metainterpreters, examples('metainterpreters/')).
 logtalk_library_path(metapredicates, examples('metapredicates/')).
 logtalk_library_path(metapredicates_compiled, examples('metapredicates_compiled/')).

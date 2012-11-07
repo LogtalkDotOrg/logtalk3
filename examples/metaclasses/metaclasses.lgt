@@ -39,16 +39,20 @@
 :- object(metaclass,
 	instantiates(metaclass)).
 
+	% metaclass are used to hold methods for their instances,
+	% which play the role of classes; common examples are
+	% instance crwation methods; for example:
 	:- public(new/1).
 	new(Instance) :-
 		self(Class),
-		create_object(Instance, [], [], []).
+		% create a new, dynamic, object:
+		create_object(Instance, [instantiates(Class)], [], []).
 
 :- end_object.
 
 
 % but we don't need to define a metaclasses for every class; i.e. metaclasses
-% are optional except for the root class
+% are optional, except for the root class, and can be shared by several classes
 
 :- object(superclass,
 	instantiates(metaclass)).
@@ -56,9 +60,13 @@
 	:- public(init/1).
 	init(_).
 
-	% methods can be redefined in instances
+	% methods can be specialized in instances; the lookup for a
+	% method *definition* always starts at the object receiving
+	% the corresponding message
 	new(Instance, Data) :-
+		% call the inherited, overriden definition:
 		^^new(Instance),
+		% do something more:
 		Instance::init(Data).
 
 :- end_object.
@@ -67,11 +75,14 @@
 :- object(subclass,
 	specializes(superclass)).
 
+	% methods can also override inherited definitions:
 	init :-
 		write('Instance initialized.'), nl.
 
 :- end_object.
 
+
+% instance can be static and defined in source files:
 
 :- object(instance,
 	instantiates(subclass)).
@@ -79,9 +90,7 @@
 :- end_object.
 
 
-
-% metaclasses can be shared by several classes
-
+% metaclasses can be shared by several classes:
 
 :- object(class1,
 	instantiates(metaclass)).
@@ -95,14 +104,10 @@
 :- end_object.
 
 
-:- object(class3,
-	instantiates(metaclass)).
-
-:- end_object.
-
-
 :- object(instance1,
 	instantiates(class1)).
+
+	% by default, instance defined in a source file are static but ...
 
 :- end_object.
 
@@ -110,10 +115,8 @@
 :- object(instance2,
 	instantiates(class2)).
 
-:- end_object.
-
-
-:- object(instance3,
-	instantiates(class3)).
+	% ... it's possible, if necessary, to define a dynamic
+	% instance in a source file by writing:
+	:- dynamic.
 
 :- end_object.

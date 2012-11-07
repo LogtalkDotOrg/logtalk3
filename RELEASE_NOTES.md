@@ -25,6 +25,15 @@ RELEASE NOTES
 =============
 
 
+3.00.0 Alpha 6 - December ??, 2012
+==================================
+
+Examples
+--------
+
+* NEW: Added a tutorial example, `metaclasses`, on how to use metaclasses.
+
+
 3.00.0 Alpha 5 - November 5, 2012
 =================================
 

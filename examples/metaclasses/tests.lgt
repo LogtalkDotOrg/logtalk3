@@ -18,7 +18,4 @@
 		date is 2012/03/02,
 		comment is 'Unit tests for the "metaclasses" example.']).
 
-	test(metaclasses_1) :-
-		true.
-
 :- end_object.
