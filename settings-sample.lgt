@@ -233,6 +233,16 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 */
 
 
+%  To enable static binding by default when loading finished applications,
+%  uncomment the following lines:
+
+/*
+:- initialization((
+	set_logtalk_flag(reload, skip)
+)).
+*/
+
+
 %  To prevent using the <</2 context-switching control construct to bypass
 %  object encapsulation rules uncomment the following lines:
 
