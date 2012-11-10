@@ -279,7 +279,7 @@
 
 :- dynamic('$lgt_pp_defines_predicate_'/4).					% '$lgt_pp_defines_predicate_'(Functor, Arity, TFunctor, TArity)
 :- dynamic('$lgt_pp_calls_predicate_'/5).					% '$lgt_pp_calls_predicate_'(Functor, Arity, TFunctor, TArity, Lines)
-:- dynamic('$lgt_pp_non_portable_call_'/3).					% '$lgt_pp_non_portable_call_'(Functor, Arity, Lines)
+:- dynamic('$lgt_pp_non_portable_predicate_'/3).			% '$lgt_pp_non_portable_predicate_'(Functor, Arity, Lines)
 :- dynamic('$lgt_pp_non_portable_function_'/3).				% '$lgt_pp_non_portable_function_'(Functor, Arity, Lines)
 :- dynamic('$lgt_pp_missing_dynamic_directive_'/3).			% '$lgt_pp_missing_dynamic_directive_'(Functor, Arity, Lines)
 :- dynamic('$lgt_pp_missing_discontiguous_directive_'/3).	% '$lgt_pp_missing_discontiguous_directive_'(Functor, Arity, Lines)
@@ -5453,7 +5453,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	retractall('$lgt_pp_redefined_built_in_'(_, _, _)),
 	retractall('$lgt_pp_defines_predicate_'(_, _, _, _)),
 	retractall('$lgt_pp_calls_predicate_'(_, _, _, _, _)),
-	retractall('$lgt_pp_non_portable_call_'(_, _, _)),
+	retractall('$lgt_pp_non_portable_predicate_'(_, _, _)),
 	retractall('$lgt_pp_non_portable_function_'(_, _, _)),
 	retractall('$lgt_pp_missing_dynamic_directive_'(_, _, _)),
 	retractall('$lgt_pp_missing_discontiguous_directive_'(_, _, _)),
@@ -7856,7 +7856,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % checks that the argument is a valid key-value pair
 
 '$lgt_check_entity_info_key_value'(author, Author) :-
-	(	(atom(Author); nonvar(Author), Author = {EntityName}, atom(EntityName)) ->
+	(	atom(Author) ->
+		true
+	;	Author = {EntityName}, atom(EntityName) ->
 		true
 	;	throw(type_error(atom, Author))
 	).
@@ -7898,13 +7900,17 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_must_be'(atomic, Version).
 
 '$lgt_check_entity_info_key_value'(copyright, Copyright) :-
-	(	(atom(Copyright); nonvar(Copyright), Copyright = {EntityName}, atom(EntityName)) ->
+	(	atom(Copyright) ->
+	 	true
+	;	Copyright = {EntityName}, atom(EntityName) ->
 		true
 	;	throw(type_error(atom, Copyright))
 	).
 
 '$lgt_check_entity_info_key_value'(license, License) :-
-	(	(atom(License); nonvar(License), License = {EntityName}, atom(EntityName)) ->
+	(	atom(License) ->
+	 	true
+	;	License = {EntityName}, atom(EntityName) ->
 		true
 	;	throw(type_error(atom, License))
 	).
@@ -9261,31 +9267,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		DPred = '$lgt_debug'(goal(':'(Module, Pred), TPred), ExCtx)
 	).
 
-'$lgt_tr_body'('@'(Pred, Module), TPred, '$lgt_debug'(goal('@'(Pred, Module), TPred), ExCtx), Ctx) :-
-	'$lgt_prolog_feature'(modules, supported),
-	'$lgt_prolog_built_in_predicate'('@'(_, _)),
-	'$lgt_pp_module_'(_),
-	% we're compiling a module as an object
-	!,
-	'$lgt_must_be'(var_or_module_identifier, Module),
-	'$lgt_must_be'(var_or_callable, Pred),
-	'$lgt_term_template'(Pred, Meta),
-	(	\+ '$lgt_pp_meta_predicate_'(Meta),
-		\+ '$lgt_prolog_meta_predicate'(Pred, Meta, predicate),
-		\+ '$lgt_logtalk_meta_predicate'(Pred, Meta, predicate),
-		\+ '$lgt_predicate_property'(Pred, meta_predicate(Meta)) ->
-		\+ (	'$lgt_pp_use_module_predicate_'(Module, Original, Pred),
-				nl, write(use_module), nl,
-				'$lgt_predicate_property'(':'(Module, Original), meta_predicate(Meta))
-		) ->
-		nl, functor(Pred, F, A), writeq(Pred - F/A), nl,
-		'$lgt_tr_body'(Pred, TPred, _, Ctx)
-	;	'$lgt_comp_ctx'(Ctx, Head, _, This, Self, Prefix, _, _, ExCtx, Mode, Stack),
-		'$lgt_comp_ctx'(NewCtx, Head, Module, This, Self, Prefix, MetaVars, _, ExCtx, Mode, Stack),
-		term_variables(Pred, MetaVars),
-		'$lgt_tr_body'(Pred, TPred, _, NewCtx)
-	).
-
 
 % "reflection" built-in predicates
 
@@ -9394,10 +9375,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_body'(assert(Clause), TCond, DCond, Ctx) :-
 	'$lgt_prolog_built_in_predicate'(assert(_)),
 	!,
-	(	'$lgt_pp_non_portable_call_'(assert, 1, _) ->
+	(	'$lgt_pp_non_portable_predicate_'(assert, 1, _) ->
 		true
 	;	'$lgt_current_line_numbers'(Lines),
-		assertz('$lgt_pp_non_portable_call_'(assert, 1, Lines))
+		assertz('$lgt_pp_non_portable_predicate_'(assert, 1, Lines))
 	),
 	'$lgt_tr_body'(assertz(Clause), TCond, DCond, Ctx).
 
@@ -10073,9 +10054,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	\+ '$lgt_pp_protected_'(Functor, Arity),	% redefined
 	\+ '$lgt_pp_private_'(Functor, Arity),		% built-in
 	\+ '$lgt_pp_redefined_built_in_'(Pred, _, _),
-	\+ '$lgt_pp_non_portable_call_'(Functor, Arity, _),
+	\+ '$lgt_pp_non_portable_predicate_'(Functor, Arity, _),
 	'$lgt_current_line_numbers'(Lines),
-	assertz('$lgt_pp_non_portable_call_'(Functor, Arity, Lines)),
+	assertz('$lgt_pp_non_portable_predicate_'(Functor, Arity, Lines)),
 	fail.
 
 
@@ -11989,7 +11970,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		'$lgt_report_missing_dynamic_directives'(Type, Entity),
 		'$lgt_report_missing_discontiguous_directives'(Type, Entity),
 		'$lgt_report_misspelt_calls'(Type, Entity),
-		'$lgt_report_non_portable_calls'(Type, Entity),
+		'$lgt_report_non_portable_predicates'(Type, Entity),
 		'$lgt_report_non_portable_functions'(Type, Entity),
 		'$lgt_report_unknown_entities'(Type, Entity)
 	).
@@ -12173,7 +12154,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		(	'$lgt_pp_redefined_built_in_'(HeadTemplate, _, _) ->
 			true
 		;	assertz('$lgt_pp_redefined_built_in_'(HeadTemplate, ExCtxTemplate, HeadDefTemplate)),
-			retractall('$lgt_pp_non_portable_call_'(Functor, Arity, _))
+			retractall('$lgt_pp_non_portable_predicate_'(Functor, Arity, _))
 		)
 	;	true
 	),
@@ -12209,7 +12190,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		(	'$lgt_pp_redefined_built_in_'(HeadTemplate, _, _) ->
 			true
 		;	assertz('$lgt_pp_redefined_built_in_'(HeadTemplate, ExCtxTemplate, HeadDefTemplate)),
-			retractall('$lgt_pp_non_portable_call_'(Functor, Arity, _))
+			retractall('$lgt_pp_non_portable_predicate_'(Functor, Arity, _))
 		)
 	;	true
 	),
@@ -12240,7 +12221,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		'$lgt_comp_ctx_prefix'(Ctx, Prefix),
 		'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		asserta('$lgt_pp_defines_predicate_'(Functor, Arity, TFunctor, TArity)),
-		retractall('$lgt_pp_non_portable_call_'(Functor, Arity, _))
+		retractall('$lgt_pp_non_portable_predicate_'(Functor, Arity, _))
 	),
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(aux)) ->
 		true
@@ -13952,16 +13933,16 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 % reports non-portable predicate calls in the body of object and category predicates
 
-'$lgt_report_non_portable_calls'(Type, Entity) :-
+'$lgt_report_non_portable_predicates'(Type, Entity) :-
 	'$lgt_compiler_flag'(portability, warning),
 	'$lgt_pp_file_path_flags_'(File, Directory, _),
 	atom_concat(Directory, File, Path),
-		'$lgt_pp_non_portable_call_'(Functor, Arity, Lines),
+		'$lgt_pp_non_portable_predicate_'(Functor, Arity, Lines),
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_print_message'(warning(portability), core, non_standard_predicate_call(Path, Lines, Type, Entity, Functor/Arity)),
 	fail.
 
-'$lgt_report_non_portable_calls'(_, _).
+'$lgt_report_non_portable_predicates'(_, _).
 
 
 

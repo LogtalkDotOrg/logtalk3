@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for ECLiPSe 6.0#141 and later versions
-%  Last updated on October 21, 2012
+%  Last updated on November 10, 2012
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -114,16 +114,6 @@ subsumes_term(General, Specific) :-
 	functor(Predicate, Functor, Arity),
 	current_predicate(Functor/Arity),
 	\+ is_dynamic(Functor/Arity).
-
-%'$lgt_predicate_property'(':'(Module,Predicate), meta_predicate(Meta)) :-
-%	!,
-%	current_module(Module),
-%	functor(Predicate, Functor, Arity),
-%	get_flag(Functor/Arity, tool, on)@Module,
-%	tool_body(Functor/Arity, _Body, Module)@Module,
-%	'$lgt_term_template'(Predicate, Meta),
-%	Meta =.. [_| Args],
-%	'$lgt_eclipse_meta_args1'(Args).
 
 
 
@@ -552,25 +542,6 @@ forall(Generate, Test) :-
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-% '$lgt_prolog_term_expansion'(@callable, -callable)
-
-%'$lgt_prolog_term_expansion'(
-%		(:- tool(Functor1/Arity1, Functor2/Arity2)),
-%		[(:- meta_predicate(Template1)), (:- meta_predicate(Template2)), (Callable1 :- sender(Sender), Callable2)]) :-
-%	!,
-%	Arity2 is Arity1 + 1,
-%	functor(Callable1, Functor1, Arity1),
-%	functor(Callable2, Functor2, Arity2),
-%	Callable1 =.. [Functor1| Args1],
-%	Callable2 =.. [Functor2| Args2],
-%	append(Args1, [Sender], Args2),
-%	functor(Template1, Functor1, Arity1),
-%	Template1 =.. [Functor1| MetaArgs1],
-%	'$lgt_eclipse_meta_args1'(MetaArgs1),
-%	functor(Template2, Functor2, Arity2),
-%	Template2 =.. [Functor2| MetaArgs2],
-%	'$lgt_eclipse_meta_args2'(MetaArgs2).
 
 '$lgt_prolog_term_expansion'((:- Directive), Expanded) :-
 	'$lgt_eclipse_directive_expansion'(Directive, Expanded0),
