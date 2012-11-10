@@ -15286,44 +15286,50 @@ current_logtalk_flag(version, version(3, 0, 0)).
 %
 % checks that a closure meta-argument is valid
 
-'$lgt_check_closure'(Closure, Ctx) :-
-	(	var(Closure) ->
-		true
-	;	\+ callable(Closure) ->
-		throw(type_error(callable, Closure))
-	;	'$lgt_check_control_construct_closure'(Closure, Ctx) ->
-		true
-	;	% assume closure for user-defined or built-in predicate
-		true
-	).
+'$lgt_check_closure'(Closure, _) :-
+	var(Closure),
+	!.
 
-
-'$lgt_check_control_construct_closure'(Free/Goal, Ctx) :-
+'$lgt_check_closure'(Free/Goal, Ctx) :-
+	!,
 	'$lgt_check_lambda_expression'(Free/Goal, Ctx).
 
-'$lgt_check_control_construct_closure'(Parameters>>Goal, Ctx) :-
+'$lgt_check_closure'(Parameters>>Goal, Ctx) :-
+	!,
 	'$lgt_check_lambda_expression'(Parameters>>Goal, Ctx).
 
-'$lgt_check_control_construct_closure'({Closure}, _) :-
+'$lgt_check_closure'({Closure}, _) :-
+	!,
 	'$lgt_must_be'(var_or_callable, Closure).
 
-'$lgt_check_control_construct_closure'(Object::Closure, _) :-
+'$lgt_check_closure'(Object::Closure, _) :-
+	!,
 	'$lgt_must_be'(var_or_object_identifier, Object),
 	'$lgt_must_be'(var_or_callable, Closure).
 
-'$lgt_check_control_construct_closure'(::Closure, _) :-
+'$lgt_check_closure'(::Closure, _) :-
+	!,
 	'$lgt_must_be'(var_or_callable, Closure).
 
-'$lgt_check_control_construct_closure'(^^Closure, _) :-
+'$lgt_check_closure'(^^Closure, _) :-
+	!,
 	'$lgt_must_be'(var_or_callable, Closure).
 
-'$lgt_check_control_construct_closure'(Object<<Closure, _) :-
+'$lgt_check_closure'(Object<<Closure, _) :-
+	!,
 	'$lgt_must_be'(var_or_object_identifier, Object),
 	'$lgt_must_be'(var_or_callable, Closure).
 
-'$lgt_check_control_construct_closure'(':'(Module, Closure), _) :-
+'$lgt_check_closure'(':'(Module, Closure), _) :-
+	!,
 	'$lgt_must_be'(var_or_module_identifier, Module),
 	'$lgt_must_be'(var_or_callable, Closure).
+
+'$lgt_check_closure'(Closure, _) :-
+	\+ callable(Closure),
+	throw(type_error(callable, Closure)).
+
+'$lgt_check_closure'(_, _).
 
 
 
