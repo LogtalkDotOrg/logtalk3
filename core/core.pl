@@ -9878,7 +9878,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_compiler_flag'(portability, warning),
 	\+ '$lgt_compiler_flag'(report, off),
 	'$lgt_iso_spec_flag'(Flag),
-	\+ '$lgt_iso_spec_flag'(Flag, Value),
+	\+ '$lgt_iso_spec_flag_value'(Flag, Value),
 	'$lgt_pp_file_path_flags_'(File, Directory, _),
 	atom_concat(Directory, File, Path),
 	'$lgt_current_line_numbers'(Lines),
@@ -9911,7 +9911,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_compiler_flag'(portability, warning),
 	\+ '$lgt_compiler_flag'(report, off),
 	'$lgt_iso_spec_flag'(Flag),
-	\+ '$lgt_iso_spec_flag'(Flag, Value),
+	\+ '$lgt_iso_spec_flag_value'(Flag, Value),
 	'$lgt_pp_file_path_flags_'(File, Directory, _),
 	atom_concat(Directory, File, Path),
 	'$lgt_current_line_numbers'(Lines),
@@ -16495,26 +16495,26 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_iso_spec_flag_value'(bounded, Value) :-
 	'$lgt_member'(Value, [true, false]).
-'$lgt_iso_spec_flag'(max_integer, Value) :-
+'$lgt_iso_spec_flag_value'(max_integer, Value) :-
 	integer(Value).
-'$lgt_iso_spec_flag'(min_integer, Value) :-
+'$lgt_iso_spec_flag_value'(min_integer, Value) :-
 	integer(Value).
-'$lgt_iso_spec_flag'(integer_rounding_function, Value) :-
+'$lgt_iso_spec_flag_value'(integer_rounding_function, Value) :-
 	'$lgt_member'(Value, [toward_zero, down]).
-'$lgt_iso_spec_flag'(max_arity, Value) :-
+'$lgt_iso_spec_flag_value'(max_arity, Value) :-
 	integer(Value).
-'$lgt_iso_spec_flag'(char_conversion, Value) :-
+'$lgt_iso_spec_flag_value'(char_conversion, Value) :-
 	'$lgt_member'(Value, [on, off]).
-'$lgt_iso_spec_flag'(debug, Value) :-
+'$lgt_iso_spec_flag_value'(debug, Value) :-
 	'$lgt_member'(Value, [on, off]).
-'$lgt_iso_spec_flag'(double_quotes, Value) :-
+'$lgt_iso_spec_flag_value'(double_quotes, Value) :-
 	'$lgt_member'(Value, [atom, chars, codes]).
-'$lgt_iso_spec_flag'(unknown, Value) :-
+'$lgt_iso_spec_flag_value'(unknown, Value) :-
 	'$lgt_member'(Value, [error, warning, fail]).
 
-'$lgt_iso_spec_flag'(dialect, Value) :-
+'$lgt_iso_spec_flag_value'(dialect, Value) :-
 	atom(Value).
-'$lgt_iso_spec_flag'(version_data, Value) :-
+'$lgt_iso_spec_flag_value'(version_data, Value) :-
 	compound(Value).
 
 
