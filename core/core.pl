@@ -8928,6 +8928,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_comp_ctx'(Ctx, _, _, This, Self, _, _, _, ExCtx, _, _),
 	'$lgt_tr_body'(Goal, TGoal, DGoal, Ctx),
 	(	'$lgt_pp_object_'(_, Prefix, _, _, _, _, _, _, _, _, _) ->
+		% compiling an object
 		MTGoal = '$lgt_threaded_call_tagged'(Prefix, TGoal, This, Self, Tag),
 		MDGoal = '$lgt_threaded_call_tagged'(Prefix, DGoal, This, Self, Tag)
 	;	% compiling a category
@@ -8947,6 +8948,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_comp_ctx'(Ctx, _, _, This, Self, _, _, _, ExCtx, _, _),
 	'$lgt_tr_body'(Goal, TGoal, DGoal, Ctx),
 	(	'$lgt_pp_object_'(_, Prefix, _, _, _, _, _, _, _, _, _) ->
+		% compiling an object
 		MTGoal = '$lgt_threaded_call'(Prefix, TGoal, This, Self),
 		MDGoal = '$lgt_threaded_call'(Prefix, DGoal, This, Self)
 	;	% compiling a category
@@ -8967,6 +8969,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_comp_ctx'(Ctx, _, _, This, Self, _, _, _, ExCtx, _, _),
 	'$lgt_tr_body'(Goal, TGoal, DGoal, Ctx),
 	(	'$lgt_pp_object_'(_, Prefix, _, _, _, _, _, _, _, _, _) ->
+		% compiling an object
 		MTGoal = '$lgt_threaded_once_tagged'(Prefix, TGoal, This, Self, Tag),
 		MDGoal = '$lgt_threaded_once_tagged'(Prefix, DGoal, This, Self, Tag)
 	;	% compiling a category
@@ -8986,6 +8989,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_comp_ctx'(Ctx, _, _, This, Self, _, _, _, ExCtx, _, _),
 	'$lgt_tr_body'(Goal, TGoal, DGoal, Ctx),
 	(	'$lgt_pp_object_'(_, Prefix, _, _, _, _, _, _, _, _, _) ->
+		% compiling an object
 		MTGoal = '$lgt_threaded_once'(Prefix, TGoal, This, Self),
 		MDGoal = '$lgt_threaded_once'(Prefix, DGoal, This, Self)
 	;	% compiling a category
@@ -9018,6 +9022,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_comp_ctx'(Ctx, _, Sender, This, Self, _, _, _, ExCtx, _, _),
 	'$lgt_tr_body'(Goal, TGoal, DGoal, Ctx),
 	(	'$lgt_pp_object_'(_, Prefix, _, _, _, _, _, _, _, _, _) ->
+		% compiling an object
 		MTGoal = '$lgt_threaded_exit_tagged'(Prefix, TGoal, Sender, This, Self, Tag),
 		MDGoal = '$lgt_threaded_exit_tagged'(Prefix, DGoal, Sender, This, Self, Tag)
 	;	% compiling a category
@@ -9037,6 +9042,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_comp_ctx'(Ctx, _, Sender, This, Self, _, _, _, ExCtx, _, _),
 	'$lgt_tr_body'(Goal, TGoal, DGoal, Ctx),
 	(	'$lgt_pp_object_'(_, Prefix, _, _, _, _, _, _, _, _, _) ->
+		% compiling an object
 		MTGoal = '$lgt_threaded_exit'(Prefix, TGoal, Sender, This, Self),
 		MDGoal = '$lgt_threaded_exit'(Prefix, DGoal, Sender, This, Self)
 	;	% compiling a category
@@ -9056,6 +9062,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_comp_ctx'(Ctx, _, Sender, This, Self, _, _, _, ExCtx, _, _),
 	'$lgt_tr_body'(Goal, TGoal, DGoal, Ctx),
 	(	'$lgt_pp_object_'(_, Prefix, _, _, _, _, _, _, _, _, _) ->
+		% compiling an object
 		MTGoal = '$lgt_threaded_peek_tagged'(Prefix, TGoal, Sender, This, Self, Tag),
 		MDGoal = '$lgt_threaded_peek_tagged'(Prefix, DGoal, Sender, This, Self, Tag)
 	;	% compiling a category
@@ -9075,6 +9082,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_comp_ctx'(Ctx, _, Sender, This, Self, _, _, _, ExCtx, _, _),
 	'$lgt_tr_body'(Goal, TGoal, DGoal, Ctx),
 	(	'$lgt_pp_object_'(_, Prefix, _, _, _, _, _, _, _, _, _) ->
+		% compiling an object
 		MTGoal = '$lgt_threaded_peek'(Prefix, TGoal, Sender, This, Self),
 		MDGoal = '$lgt_threaded_peek'(Prefix, DGoal, Sender, This, Self)
 	;	% compiling a category
@@ -9095,6 +9103,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, Prefix, _, _, ExCtx, _, _),
 	(	'$lgt_pp_synchronized_'(Head, Mutex) ->
 		(	Type == object ->
+			% we're compiling an object predicate
 			MTPred = '$lgt_threaded_wait_synch'(Mutex, Msg, Prefix)
 		;	% we're compiling a category predicate
 			'$lgt_comp_ctx_this'(Ctx, This),
@@ -9102,6 +9111,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 			MTPred = '$lgt_threaded_wait_synch_ctg'(Mutex, Msg, This)
 		)
 	;	(	Type == object ->
+			% we're compiling an object predicate
 			MTPred = '$lgt_threaded_wait'(Msg, Prefix)
 		;	% we're compiling a category predicate
 			'$lgt_comp_ctx_this'(Ctx, This),
@@ -9121,6 +9131,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_pp_entity'(Type, _, Prefix, _, _),
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, Prefix, _, _, ExCtx, _, _),
 	(	Type == object ->
+		% we're compiling an object predicate
 		MTPred = '$lgt_threaded_notify'(Msg, Prefix)
 	;	% we're compiling a category predicate
 		'$lgt_comp_ctx_this'(Ctx, This),
@@ -9686,10 +9697,12 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_exec_ctx'(ExCtx, Sender0, _, _, _, _),
 	(	var(Sender) ->
+		% compile time unification
 		Sender0 = Sender,
 		TPred = true,
 		DPred = (Sender0 = Sender)
-	;	TPred = (Sender0 = Sender),
+	;	% we must delay unification to runtime
+		TPred = (Sender0 = Sender),
 		DPred = TPred
 	).
 
@@ -9699,10 +9712,12 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_exec_ctx_this'(ExCtx, This0),
 	(	var(This) ->
+		% compile time unification
 		This0 = This,
 		TPred = true,
 		DPred = (This0 = This)
-	;	TPred = (This0 = This),
+	;	% we must delay unification to runtime
+		TPred = (This0 = This),
 		DPred = TPred
 	),
 	(	nonvar(This0),
@@ -9720,10 +9735,12 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_exec_ctx'(ExCtx, _, _, Self0, _, _),
 	(	var(Self) ->
+		% compile time unification
 		Self0 = Self,
 		TPred = true,
 		DPred = (Self0 = Self)
-	;	TPred = (Self0 = Self),
+	;	% we must delay unification to runtime
+		TPred = (Self0 = Self),
 		DPred = TPred
 	).
 
@@ -9743,10 +9760,12 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	(	1 =< Arg, Arg =< Arity ->
 		arg(Arg, This, Value0),
 		(	var(Value) ->
+			% parameter compile time unification
 			Value0 = Value,
 			TPred = true,
 			DPred = (Value0=Value)
-		;	TPred = (Value0 = Value),
+		;	% we must delay unification to runtime
+			TPred = (Value0 = Value),
 			DPred = TPred
 		)
 	;	throw(domain_error(out_of_range, Arg))
@@ -10043,18 +10062,21 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % remember non-portable Prolog built-in predicate calls
 
 '$lgt_tr_body'(Pred, _, _, Ctx) :-
+	\+ '$lgt_pp_non_portable_predicate_'(Functor, Arity, _),
+	% not previously recorded as a non portable call
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 	'$lgt_compiler_flag'(portability, warning),
 	\+ '$lgt_compiler_flag'(report, off),
 	'$lgt_prolog_built_in_predicate'(Pred),
 	\+ '$lgt_logtalk_built_in_predicate'(Pred),
 	\+ '$lgt_iso_spec_predicate'(Pred),
+	% bona fide Prolog built-in predicate
 	functor(Pred, Functor, Arity),
-	\+ '$lgt_pp_public_'(Functor, Arity),		% not a
-	\+ '$lgt_pp_protected_'(Functor, Arity),	% redefined
-	\+ '$lgt_pp_private_'(Functor, Arity),		% built-in
+	\+ '$lgt_pp_public_'(Functor, Arity),
+	\+ '$lgt_pp_protected_'(Functor, Arity),
+	\+ '$lgt_pp_private_'(Functor, Arity),
 	\+ '$lgt_pp_redefined_built_in_'(Pred, _, _),
-	\+ '$lgt_pp_non_portable_predicate_'(Functor, Arity, _),
+	% not a redefined Prolog built-in predicate; remember it
 	'$lgt_current_line_numbers'(Lines),
 	assertz('$lgt_pp_non_portable_predicate_'(Functor, Arity, Lines)),
 	fail.
@@ -10135,15 +10157,18 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	(	'$lgt_comp_ctx_mode'(Ctx, runtime) ->
 		true
 	;	\+ '$lgt_pp_defines_predicate_'(Functor, Arity, _, _),
-		\+ '$lgt_pp_public_'(Functor, Arity),			% not a redefined
-		\+ '$lgt_pp_protected_'(Functor, Arity),		% built-in... unless
-		\+ '$lgt_pp_private_'(Functor, Arity),			% the redefinition is
-		\+ '$lgt_pp_redefined_built_in_'(Pred, _, _)	% yet to be compiled
+		\+ '$lgt_pp_public_'(Functor, Arity),
+		\+ '$lgt_pp_protected_'(Functor, Arity),
+		\+ '$lgt_pp_private_'(Functor, Arity),
+		\+ '$lgt_pp_redefined_built_in_'(Pred, _, _)
+		% not a redefined built-in... unless the redefinition is yet to be compiled
 	),
 	!,
-	(	'$lgt_prolog_meta_predicate'(Pred, Meta, Type),	% we can have multiple templates for
-		Pred =.. [_| Args],								% the same meta-predicate; look for
-		Meta =.. [_| MArgs],							% one that matches the predicate call
+	(	% we can have multiple templates for the same meta-predicate;
+		% look for one that matches the predicate call
+		'$lgt_prolog_meta_predicate'(Pred, Meta, Type),
+		Pred =.. [_| Args],
+		Meta =.. [_| MArgs],
 		'$lgt_tr_prolog_meta_arguments'(Args, MArgs, Ctx, TArgs, DArgs) ->
 		TGoal =.. [Functor| TArgs],
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
@@ -10175,10 +10200,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		TPred = Pred
 	;	functor(Pred, Functor, Arity),
 		\+ '$lgt_pp_defines_predicate_'(Functor, Arity, _, _),
-		\+ '$lgt_pp_public_'(Functor, Arity),			% not a redefined
-		\+ '$lgt_pp_protected_'(Functor, Arity),		% built-in... unless
-		\+ '$lgt_pp_private_'(Functor, Arity),			% the redefinition is
-		\+ '$lgt_pp_redefined_built_in_'(Pred, _, _),	% yet to be compiled
+		\+ '$lgt_pp_public_'(Functor, Arity),
+		\+ '$lgt_pp_protected_'(Functor, Arity),
+		\+ '$lgt_pp_private_'(Functor, Arity),
+		\+ '$lgt_pp_redefined_built_in_'(Pred, _, _),
+		% not a redefined built-in... unless the redefinition is yet to be compiled
 		TPred = '$lgt_call_built_in'(Pred, Pred, ExCtx)
 	),
 	DPred = '$lgt_debug'(goal(Pred, TPred), ExCtx),
@@ -14992,7 +15018,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 %'$lgt_logtalk_directive'(+atom, +integer)
 %
-% valid Logtalk directives
+% valid Logtalk directives; a common subset of Prolog module directives are
+% also included as modules can be compiled as objects (but the specific case
+% of the use_module/1 directive is handled at the Prolog adapter file level)
 
 '$lgt_logtalk_directive'(Functor, Arity) :-
 	'$lgt_logtalk_opening_directive'(Functor, Arity),

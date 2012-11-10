@@ -81,7 +81,7 @@ list.
 SPONSORS
 ========
 
-VivoMind Research, LLC (testing and library suggestions)
+VivoMind Research, LLC
 
 
 OPEN-SOURCE SOFTWARE USED IN LOGTALK DEVELOPMENT AND DISTRIBUTION
