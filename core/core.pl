@@ -8122,6 +8122,15 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	\+ callable(Body),
 	throw(type_error(callable, Body)).
 
+'$lgt_tr_clause'(Clause, _, _, _, _) :-
+	'$lgt_pp_entity'(protocol, _, _, _, _),
+	% protocols cannot contain predicate definitions
+	(	Clause = (Head:-_)
+	;	Clause = Head
+	),
+	functor(Head, Functor, Arity),
+	throw(permission_error(define, predicate, Functor/Arity)).
+
 '$lgt_tr_clause'((Annotation:-Body), TClause, DClause, HeadCtx, BodyCtx) :-
 	'$lgt_value_annotation'(Annotation, Functor, Value, Head, _),
 	!,
@@ -10725,7 +10734,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	\+ callable(Obj),
 	throw(type_error(object_identifier, Obj)).
 
-
 % convenient access to parametric object proxies
 
 '$lgt_tr_msg'(Pred, Obj, (catch(Proxy, error(Error, _), throw(error(Error, Obj::Pred, This))), TPred), This) :-
@@ -10739,7 +10747,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	throw(type_error(object_identifier, Proxy))
 	).
 
-
 % messages to the pseudo-object "user"
 
 '$lgt_tr_msg'(Pred, Obj, Pred, _) :-
@@ -10747,7 +10754,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	Pred \= current_predicate(_),
 	Pred \= predicate_property(_, _),
 	!.
-
 
 % translation performed at runtime
 
@@ -10759,13 +10765,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	TPred = '$lgt_send_to_obj_ne'(Obj, Pred, This)
 	).
 
-
 % invalid message
 
 '$lgt_tr_msg'(Pred, _, _, _) :-
 	\+ callable(Pred),
 	throw(type_error(callable, Pred)).
-
 
 % broadcasting control constructs
 
@@ -10790,7 +10794,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_tr_msg'(Pred1, Obj, TPred1, This),
 	'$lgt_tr_msg'(Pred2, Obj, TPred2, This).
 
-
 % built-in methods that cannot be redefined
 
 '$lgt_tr_msg'(!, Obj, ('$lgt_object_exists'(Obj, !, This), !), This) :-
@@ -10805,7 +10808,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_msg'(repeat, Obj, ('$lgt_object_exists'(Obj, repeat, This), repeat), This) :-
 	!.
 
-
 % "reflection" built-in predicates
 
 '$lgt_tr_msg'(current_predicate(Pred), Obj, '$lgt_current_predicate'(Obj, Pred, This, p(p(p))), This) :-
@@ -10813,7 +10815,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_tr_msg'(predicate_property(Pred, Prop), Obj, '$lgt_predicate_property'(Obj, Pred, Prop, This, p(p(p))), This) :-
 	!.
-
 
 % database handling built-in predicates
 
@@ -10890,7 +10891,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		TPred = '$lgt_retractall_checked'(Obj, Head, This, p(p(p)))
 	).
 
-
 % term and goal expansion predicates
 
 '$lgt_tr_msg'(expand_term(Term, Expansion), Obj, '$lgt_expand_term'(Obj, Term, Expansion, This, p(p(p))), This) :-
@@ -10898,7 +10898,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_tr_msg'(expand_goal(Goal, ExpandedGoal), Obj, '$lgt_expand_goal'(Obj, Goal, ExpandedGoal, This, p(p(p))), This) :-
 	!.
-
 
 % message is not a built-in control construct or a call to a built-in (meta-)predicate
 
@@ -10936,14 +10935,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	var(Pred),
 	!.
 
-
-% invalid message
-
-'$lgt_tr_self_msg'(Pred, _, _, _) :-
-	\+ callable(Pred),
-	throw(type_error(callable, Pred)).
-
-
 % broadcasting control constructs
 
 '$lgt_tr_self_msg'((Pred1, Pred2), (TPred1, TPred2), This, Self) :-
@@ -10967,7 +10958,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_tr_self_msg'(Pred1, TPred1, This, Self),
 	'$lgt_tr_self_msg'(Pred2, TPred2, This, Self).
 
-
 % built-in methods that cannot be redefined
 
 '$lgt_tr_self_msg'(!, !, _, _) :-
@@ -10982,7 +10972,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_self_msg'(repeat, repeat, _, _) :-
 	!.
 
-
 % "reflection" built-in predicates
 
 '$lgt_tr_self_msg'(current_predicate(Pred), '$lgt_current_predicate'(Self, Pred, This, p(_)), This, Self) :-
@@ -10990,7 +10979,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_tr_self_msg'(predicate_property(Pred, Prop), '$lgt_predicate_property'(Self, Pred, Prop, This, p(_)), This, Self) :-
 	!.
-
 
 % database handling built-in predicates
 
@@ -11067,7 +11055,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		TPred = '$lgt_retractall_checked'(Self, Head, This, p(_))
 	).
 
-
 % term and goal expansion predicates
 
 '$lgt_tr_self_msg'(expand_term(Term, Expansion), '$lgt_expand_term'(Self, Term, Expansion, This, p(_)), This, Self) :-
@@ -11076,6 +11063,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_self_msg'(expand_goal(Goal, ExpandedGoal), '$lgt_expand_goal'(Self, Goal, ExpandedGoal, This, p(_)), This, Self) :-
 	!.
 
+% invalid message
+
+'$lgt_tr_self_msg'(Pred, _, _, _) :-
+	\+ callable(Pred),
+	throw(type_error(callable, Pred)).
 
 % message is not a built-in control construct or a call to a built-in
 % (meta-)predicate: translation performed at runtime
@@ -16022,8 +16014,14 @@ current_logtalk_flag(version, version(3, 0, 0)).
 %
 % translates a grammar goal non-terminal:
 
-'$lgt_dcg_non_terminal'(NonTerminal, S0, S, Goal) :-
+'$lgt_dcg_non_terminal'(NonTerminal, _, _, _) :-
 	'$lgt_must_be'(callable, NonTerminal),
+	'$lgt_pp_protocol_'(_, _, _, _, _),
+	% protocols cannot contain non-terminal definitions
+	functor(NonTerminal, Functor, Arity),
+	throw(permission_error(define, non_terminal, Functor//Arity)).
+
+'$lgt_dcg_non_terminal'(NonTerminal, S0, S, Goal) :-
 	NonTerminal =.. NonTerminalUniv,
 	'$lgt_append'(NonTerminalUniv, [S0, S], GoalUniv),
 	Goal =.. GoalUniv.

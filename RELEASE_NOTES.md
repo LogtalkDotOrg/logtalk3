@@ -28,6 +28,12 @@ RELEASE NOTES
 3.00.0 Alpha 6 - December ??, 2012
 ==================================
 
+Logtalk compiler and runtime
+----------------------------
+
+* IMPROVED: Report a permission error when attempting to define a clause or a
+grammar rule within a protocol.
+
 Examples
 --------
 
