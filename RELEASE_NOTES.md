@@ -34,6 +34,12 @@ Logtalk compiler and runtime
 * IMPROVED: Report a permission error when attempting to define a clause or a
 grammar rule within a protocol.
 
+Prolog adapter and integration files
+------------------------------------
+
+* IMPROVED: Updated the Lean Prolog adapter file with dummy definitions for the
+ISO Prolog standard predicates `flush_output/0-1`.
+
 Examples
 --------
 

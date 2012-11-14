@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Lean Prolog 3.7.10 and later versions
-%  Last updated on October 21, 2012
+%  Last updated on November 13, 2012
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -46,10 +46,18 @@
 %
 % table of missing ISO predicates which are defined in this file
 
+'$lgt_iso_predicate'(flush_output(_)).
+'$lgt_iso_predicate'(flush_output).
 '$lgt_iso_predicate'(open(_, _, _, _)).
 '$lgt_iso_predicate'(stream_property(_, _)).
 '$lgt_iso_predicate'(write_term(_, _)).
 '$lgt_iso_predicate'(write_term(_, _, _)).
+
+
+flush_output(_).
+
+
+flush_output.
 
 
 open(Source, Mode, Stream, Options) :-
@@ -822,12 +830,6 @@ current_module(_) :-
 
 ensure_loaded(_) :-
 	fail.
-
-
-flush_output(_).
-
-
-flush_output.
 
 
 
