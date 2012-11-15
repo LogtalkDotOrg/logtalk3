@@ -31,6 +31,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: Optimized the code generated for `uses/2` directives that allows
+runtime use when static binding is possible.
+
 * IMPROVED: Report a permission error when attempting to define a clause or a
 grammar rule within a protocol.
 

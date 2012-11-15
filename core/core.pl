@@ -7495,7 +7495,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	TOriginal =.. [_| Args],
 	TAlias =.. [_| Args],
 	% allow for runtime use
-	'$lgt_tr_clause'((TAlias :- Obj::TOriginal), Ctx),
+	(	'$lgt_comp_ctx_this'(Ctx, This),
+		'$lgt_send_to_obj_static_binding'(Obj, TOriginal, This, Call) ->
+		'$lgt_add_uses_def_clause'(TAlias, This, Call)
+	;	'$lgt_tr_clause'((TAlias :- Obj::TOriginal), Ctx)
+	),
 	assertz('$lgt_pp_uses_predicate_'(Obj, TOriginal, TAlias)).
 
 '$lgt_tr_uses_directive_predicate_arg'(_, AFunctor, Arity, _, _) :-
@@ -12141,6 +12145,27 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	'$lgt_pp_file_path_flags_'(File, Path, _) ->
 		Location = Path+File+1
 	;	Location = none
+	).
+
+
+
+% '$lgt_add_uses_def_clause'(+callable, +callable)
+%
+% adds a "def clause" for predicates specified in uses/2 directives
+% when static binding is possible
+
+'$lgt_add_uses_def_clause'(Pred, This, TPred) :-
+	'$lgt_exec_ctx_this'(ExCtx, This),
+	once((	'$lgt_pp_object_'(_, _, _, Def, _, _, _, _, _, _, _)
+		;	'$lgt_pp_category_'(_, _, _, Def, _, _)
+	)),
+	functor(Clause, Def, 3),
+	arg(1, Clause, Pred),
+	arg(2, Clause, ExCtx),
+	arg(3, Clause, TPred),
+	(	'$lgt_pp_def_'(Clause) ->
+		true
+	;	assertz('$lgt_pp_def_'(Clause))
 	).
 
 
