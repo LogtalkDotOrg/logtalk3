@@ -10075,6 +10075,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % remember non-portable Prolog built-in predicate calls
 
 '$lgt_tr_body'(Pred, _, _, Ctx) :-
+	functor(Pred, Functor, Arity),
 	\+ '$lgt_pp_non_portable_predicate_'(Functor, Arity, _),
 	% not previously recorded as a non portable call
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
