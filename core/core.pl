@@ -10259,6 +10259,19 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 % goal is a call to a local user-defined predicate
 
+'$lgt_tr_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
+	'$lgt_comp_ctx_mode'(Ctx, runtime),
+	% in the most common case, we're meta-calling the predicate
+	!,
+	'$lgt_comp_ctx_this'(Ctx, This),
+	'$lgt_current_object_'(This, _, _, Def, _, _, _, _, DDef, _, _),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	(	call(Def, Pred, ExCtx, TPred)
+	;	call(DDef, Pred, ExCtx, TPred)
+	),
+	% locally defined predicate or a predicate specified in a uses/2 directive
+	!.
+
 '$lgt_tr_body'(Pred, TPred, '$lgt_debug'(goal(DPred, TPred), ExCtx), Ctx) :-
 	functor(Pred, Functor, Arity),
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, Prefix, _, _, ExCtx, _, _),
