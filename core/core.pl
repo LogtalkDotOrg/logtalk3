@@ -3603,7 +3603,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	Call =.. [call, Closure| ExtraArgs],
 	throw(error(instantiation_error, logtalk(Call, This))).
 
-'$lgt_metacall'({Closure}, ExtraArgs, MetaCallCtx, _, _, This, _) :-
+'$lgt_metacall'({Closure}, ExtraArgs, _, _, _, This, _) :-
 	!,
 	% pre-compiled closures or calls in "user" (compiler bypass)
 	(	atom(Closure) ->
