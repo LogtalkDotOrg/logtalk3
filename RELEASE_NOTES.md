@@ -37,6 +37,9 @@ runtime use when static binding is possible.
 * IMPROVED: Report a permission error when attempting to define a clause or a
 grammar rule within a protocol.
 
+* FIXED: Error handling of meta-calls. In some cases, the exception term would
+not include a `logtalk/2` context term.
+
 Prolog adapter and integration files
 ------------------------------------
 
