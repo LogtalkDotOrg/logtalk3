@@ -10269,7 +10269,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, runtime),
 	% in the most common case, we're meta-calling the predicate
-	!,
 	'$lgt_comp_ctx_this'(Ctx, This),
 	'$lgt_current_object_'(This, _, _, Def, _, _, _, _, DDef, _, _),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
