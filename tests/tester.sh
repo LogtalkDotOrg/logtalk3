@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 #############################################################################
 ## 
@@ -28,7 +28,7 @@
 # based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "`basename $0` 0.5"
+	echo "`basename $0` 0.7"
 	exit 0
 }
 
@@ -69,7 +69,7 @@ usage_help()
 	echo "Optional arguments:"
 	echo "  -v print version of `basename $0`"
 	echo "  -p back-end Prolog compiler (default is $backend)"
-	echo "     (possible values are cx, eclipse, gnu, qp, sicstus, swi, xsb, and yap)"
+	echo "     (possible values are b, cx, eclipse, gnu, lean, qp, sicstus, swi, xsb, and yap)"
 	echo "  -m compilation mode (default is $mode)"
 	echo "     (possible values are normal, debug, and all)"
 	echo "  -d name of the sub-directory to store the test results (default is tester_results)"
@@ -90,7 +90,10 @@ do
 	esac
 done
 
-if [ "$p_arg" = "cx" ] ; then
+if [ "$p_arg" = "b" ] ; then
+	prolog='B-Prolog'
+	logtalk="bplgt$extension -g"
+elif [ "$p_arg" = "cx" ] ; then
 	prolog='CxProlog'
 	logtalk="cxlgt$extension --goal"
 elif [ "$p_arg" = "eclipse" ] ; then
@@ -99,6 +102,9 @@ elif [ "$p_arg" = "eclipse" ] ; then
 elif [ "$p_arg" = "gnu" ] ; then
 	prolog='GNU Prolog'
 	logtalk="gplgt$extension --query-goal"
+elif [ "$p_arg" = "lean" ] ; then
+	prolog='Lean Prolog'
+	logtalk="lplgt$extension"
 elif [ "$p_arg" = "qp" ] ; then
 	prolog='Qu-Prolog'
 	logtalk="qplgt$extension -g"
@@ -157,7 +163,7 @@ rm -f "$results"/tester_versions.txt
 
 date=`eval date \"+%Y-%m-%d %H:%M:%S\"`
 
-echo '********************************************'
+echo '******************************************************************************'
 echo "***** Running unit tests"
 echo "*****         Date: $date"
 $logtalk $versions_goal > "$results"/tester_versions.txt 2> /dev/null
@@ -168,7 +174,7 @@ do
 	if [ -d $unit ] ; then
 		cd $unit
 		if [ -e "./tester.lgt" ] ; then
-			echo '********************************************'
+			echo '******************************************************************************'
 			echo "***** Testing $unit"
 			name=$(echo $unit|sed 's|/|__|g')
 			if [ $mode = 'normal' ] || [ $mode = 'all' ] ; then
@@ -179,6 +185,8 @@ do
 				$logtalk $tester_debug_goal > "$results/$name.results" 2> "$results/$name.errors"
 				grep 'tests:' "$results/$name.results" | sed 's/%/***** (debug)/'
 			fi
+			grep 'out of' "$results/$name.results" | sed 's/%/*****        /'
+			grep 'no coverage information collected' "$results/$name.results" | sed 's/%/*****        /'
 			grep '(not applicable)' "$results/$name.results" | sed 's/(/*****         (/'
 		fi
 		for subunit in *
@@ -186,7 +194,7 @@ do
 			if [ -d $subunit ] ; then
 				cd $subunit
 				if [ -e "./tester.lgt" ] ; then
-					echo '********************************************'
+					echo '******************************************************************************'
 					echo "***** Testing $unit/$subunit"
 					subname=$(echo $unit/$subunit|sed 's|/|__|g')
 					if [ $mode = 'normal' ] || [ $mode = 'all' ] ; then
@@ -197,6 +205,8 @@ do
 						$logtalk $tester_debug_goal > "$results/$subname.results" 2> "$results/$subname.errors"
 						grep 'tests:' "$results/$subname.results" | sed 's/%/***** (debug)/'
 					fi
+					grep 'out of' "$results/$subname.results" | sed 's/%/*****        /'
+					grep 'no coverage information collected' "$results/$subname.results" | sed 's/%/*****        /'
 					grep '(not applicable)' "$results/$subname.results" | sed 's/(/*****         (/'
 				fi
 				cd ..
@@ -206,15 +216,15 @@ do
 	fi
 done
 
-echo '********************************************'
+echo '******************************************************************************'
 echo "***** Errors and warnings"
-echo '********************************************'
+echo '******************************************************************************'
 cd "$results"
 grep -A2 'ERROR!' *.errors | sed 's/.errors//' | tee errors.all
 grep -A2 'ERROR!' *.results | sed 's/.results//' | tee -a errors.all
 grep -A2 'WARNING!' *.results | sed 's/.results//' | tee -a errors.all
-echo '********************************************'
+echo '******************************************************************************'
 echo "***** Failed tests"
-echo '********************************************'
+echo '******************************************************************************'
 grep ': failure' *.results | sed 's/: failure/ failed/' | sed 's/.results/:/' | sed 's|__|/|g' | tee -a errors.all
-echo '********************************************'
+echo '******************************************************************************'
