@@ -17862,8 +17862,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	Term \= _/_,
 		throw(error(type_error(predicate_indicator, Term), Context))
 	;	Term = Functor/Arity,
-		'$lgt_must_be'(atom, Functor),
-		'$lgt_must_be'(non_negative_integer, Arity)
+		'$lgt_must_be'(atom, Functor, Context),
+		'$lgt_must_be'(non_negative_integer, Arity, Context)
 	).
 
 '$lgt_must_be'(var_or_predicate_indicator, Term, Context) :-
@@ -17872,8 +17872,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	Term \= _/_,
 		throw(error(type_error(predicate_indicator, Term), Context))
 	;	Term = Functor/Arity,
-		'$lgt_must_be'(var_or_atom, Functor),
-		'$lgt_must_be'(var_or_non_negative_integer, Arity)
+		'$lgt_must_be'(var_or_atom, Functor, Context),
+		'$lgt_must_be'(var_or_non_negative_integer, Arity, Context)
 	).
 
 '$lgt_must_be'(scope, Term, Context) :-
@@ -18055,8 +18055,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	(	var(Term) ->
 		throw(error(instantiation_error, Context))
 	;	Term = (Key is Value) ->
-		'$lgt_must_be'(atom, Key),
-		'$lgt_must_be'(nonvar, Value)
+		'$lgt_must_be'(atom, Key, Context),
+		'$lgt_must_be'(nonvar, Value, Context)
 	;	throw(error(type_error(key_value_info_pair, Term), Context))
 	).
 

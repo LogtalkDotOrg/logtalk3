@@ -40,6 +40,9 @@ grammar rule within a protocol.
 * FIXED: Error handling of meta-calls. In some cases, the exception term would
 not include a `logtalk/2` context term.
 
+* FIXED: Missing `error/2` wrapper when error checking predicate indicators
+and `info/1-2` key-value pairs.
+
 Prolog adapter and integration files
 ------------------------------------
 
