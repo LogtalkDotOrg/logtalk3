@@ -22,9 +22,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.9,
+		version is 1.10,
 		author is 'Paulo Moura',
-		date is 2012/10/19,
+		date is 2012/11/20,
 		comment is 'Simple example of using conditional compilation to implement a portable operating-system interface for selected back-end Prolog compilers.'
 	]).
 
@@ -689,8 +689,14 @@
 		shell(Command) :-
 			{os_run(Command)}.
 
-		expand_path(_, _) :-
-			throw(not_available(expand_path/2)).
+		expand_path(Path, ExpandedPath) :-
+			{'$lgt_decompose_file_name'(Path, Directory, Name, Extension),
+			 fs_cwd(Current, Directory),
+			 fs_cwd(ExpandedDirectory),
+			 fs_cwd(ExpandedDirectory, Current),
+			 atom_concat(Name, Extension, Basename),
+			 atom_concat(ExpandedDirectory, '/', ExpandedDirectorySlash),
+			 atom_concat(ExpandedDirectorySlash, Basename, ExpandedPath)}.
 
 		make_directory(Directory) :-
 			(	{fs_exists_dir(Directory)} ->
