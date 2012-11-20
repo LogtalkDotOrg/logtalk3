@@ -717,7 +717,7 @@
 			{fs_property(File, time, [_, Time])}.
 
 		file_size(File, Size) :-
-			{file_property(File, size, Size)}.
+			{fs_property(File, size, Size)}.
 
 		delete_file(File) :-
 			{fs_delete(File)}.

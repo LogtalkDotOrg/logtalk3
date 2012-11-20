@@ -64,7 +64,8 @@ Examples
 * FIXED: Bug in the loader file of the `operators` example.
 
 * IMPROVED: Added CxProlog definition for the predicate `expand_path/2` to the
-`cc` example.
+`cc` example. Corrected a typo in the definition of the predicate `file_size/2`
+for CxProlog.
 
 
 3.00.0 Alpha 5 - November 5, 2012
