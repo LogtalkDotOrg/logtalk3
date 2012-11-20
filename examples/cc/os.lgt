@@ -690,13 +690,7 @@
 			{os_run(Command)}.
 
 		expand_path(Path, ExpandedPath) :-
-			{'$lgt_decompose_file_name'(Path, Directory, Name, Extension),
-			 fs_cwd(Current, Directory),
-			 fs_cwd(ExpandedDirectory),
-			 fs_cwd(ExpandedDirectory, Current),
-			 atom_concat(Name, Extension, Basename),
-			 atom_concat(ExpandedDirectory, '/', ExpandedDirectorySlash),
-			 atom_concat(ExpandedDirectorySlash, Basename, ExpandedPath)}.
+			{absolute_file_name(Path, ExpandedPath)}.
 
 		make_directory(Directory) :-
 			(	{fs_exists_dir(Directory)} ->
