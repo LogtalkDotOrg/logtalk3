@@ -3,8 +3,8 @@
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
 %
-%  Adapter file for CxProlog 0.97.5 or a later version
-%  Last updated on October 21, 2012
+%  Adapter file for CxProlog 0.97.6 or a later version
+%  Last updated on November 20, 2012
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -31,8 +31,6 @@
 :- set_prolog_flag(file_name_variables, true).
 
 :- initialization(write_depth(1000, 1000)).
-
-:- op(200, xfy, **).	% fix priority bug in CxProlog 0.97.5 dev and earlier versions
 
 
 
@@ -192,7 +190,7 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 '$lgt_prolog_feature'(prolog_dialect, cx).
 '$lgt_prolog_feature'(prolog_version, (Major, Minor, Patch)) :-
 	catch(current_prolog_flag(version_data, cxprolog(Major, Minor, Patch, _)), _, fail).
-'$lgt_prolog_feature'(prolog_compatible_version, @>=((0,97,5))).
+'$lgt_prolog_feature'(prolog_compatible_version, @>=((0,97,6))).
 
 '$lgt_prolog_feature'(encoding_directive, source).
 '$lgt_prolog_feature'(tabling, unsupported).
@@ -269,13 +267,7 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 % expands a file path to a full path
 
 '$lgt_expand_path'(Path, ExpandedPath) :-
-	'$lgt_decompose_file_name'(Path, Directory, Name, Extension),
-	fs_cwd(Current, Directory),
-	fs_cwd(ExpandedDirectory),
-	fs_cwd(ExpandedDirectory, Current),
-	atom_concat(Name, Extension, Basename),
-	atom_concat(ExpandedDirectory, '/', ExpandedDirectorySlash),
-	atom_concat(ExpandedDirectorySlash, Basename, ExpandedPath).
+	absolute_file_name(Path, ExpandedPath).
 
 
 % '$lgt_file_exists'(+atom)

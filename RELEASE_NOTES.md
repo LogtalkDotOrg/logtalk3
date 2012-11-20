@@ -50,6 +50,9 @@ the exception term would not include a `logtalk/2` context term.
 Prolog adapter and integration files
 ------------------------------------
 
+* UPDATED: CxProlog adapter file for version 0.97.6, which is now the minimum
+version required.
+
 * IMPROVED: Updated the Lean Prolog adapter file with dummy definitions for the
 ISO Prolog standard predicates `flush_output/0-1`.
 
