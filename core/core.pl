@@ -1435,7 +1435,7 @@ threaded_call(Goal, Tag) :-
 
 threaded_call(Goal, Tag) :-
 	'$lgt_must_be'(callable, Goal, logtalk(threaded_call(Goal, Tag), _)),
-	'$lgt_must_be'(var, Tag, threaded_call(Goal, Tag)),
+	'$lgt_must_be'(var, Tag, logtalk(threaded_call(Goal, Tag), _)),
 	'$lgt_current_object_'(user, Prefix, _, _, _, _, _, _, _, _, _),
 	catch('$lgt_threaded_call_tagged'(Prefix, Goal, user, user, Tag), Error, '$lgt_runtime_error_handler'(Error)).
 
@@ -1460,7 +1460,7 @@ threaded_once(Goal, Tag) :-
 
 threaded_once(Goal, Tag) :-
 	'$lgt_must_be'(callable, Goal, logtalk(threaded_once(Goal, Tag), _)),
-	'$lgt_must_be'(var, Tag, threaded_once(Goal, Tag)),
+	'$lgt_must_be'(var, Tag, logtalk(threaded_once(Goal, Tag), _)),
 	'$lgt_current_object_'(user, Prefix, _, _, _, _, _, _, _, _, _),
 	catch('$lgt_threaded_once_tagged'(Prefix, Goal, user, user, Tag), Error, '$lgt_runtime_error_handler'(Error)).
 
@@ -1496,7 +1496,7 @@ threaded_exit(Goal, Tag) :-
 
 threaded_exit(Goal, Tag) :-
 	'$lgt_must_be'(callable, Goal, logtalk(threaded_exit(Goal, Tag), _)),
-	'$lgt_must_be'(nonvar, Tag, threaded_exit(Goal, Tag)),
+	'$lgt_must_be'(nonvar, Tag, logtalk(threaded_exit(Goal, Tag), _)),
 	'$lgt_current_object_'(user, Prefix, _, _, _, _, _, _, _, _, _),
 	catch('$lgt_threaded_exit_tagged'(Prefix, Goal, user, user, user, Tag), Error, '$lgt_runtime_error_handler'(Error)).
 
@@ -1521,7 +1521,7 @@ threaded_peek(Goal, Tag) :-
 
 threaded_peek(Goal, Tag) :-
 	'$lgt_must_be'(callable, Goal, logtalk(threaded_peek(Goal, Tag), _)),
-	'$lgt_must_be'(nonvar, Tag, threaded_peek(Goal, Tag)),
+	'$lgt_must_be'(nonvar, Tag, logtalk(threaded_peek(Goal, Tag), _)),
 	'$lgt_current_object_'(user, Prefix, _, _, _, _, _, _, _, _, _),
 	catch('$lgt_threaded_peek_tagged'(Prefix, Goal, user, user, user, Tag), Error, '$lgt_runtime_error_handler'(Error)).
 

@@ -43,6 +43,10 @@ not include a `logtalk/2` context term.
 * FIXED: Missing `error/2` wrapper when error checking predicate indicators
 and `info/1-2` key-value pairs.
 
+* FIXED: Error handling of the `threaded_call/2`, `threaded_once/2`,
+`threaded_exit/2`, and `threaded_peek/2` built-in predicates. In some cases,
+the exception term would not include a `logtalk/2` context term.
+
 Prolog adapter and integration files
 ------------------------------------
 
