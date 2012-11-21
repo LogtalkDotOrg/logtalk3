@@ -327,7 +327,7 @@
 		findall(Test, retract(test_(Test)), Tests).
 
 	check_for_repeated_test_identifier(Test, Head) :-
-		logtalk_load_context(entity_name, Entity),
+		logtalk_load_context(entity_identifier, Entity),
 		(	var(Test) ->
 			throw(error(instantiation_error, logtalk(Head, Entity)))
 		;	(	test_(succeeds(Test))

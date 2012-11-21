@@ -1922,7 +1922,10 @@ logtalk_load_context(file, File) :-
 logtalk_load_context(directory, Directory) :-
 	'$lgt_pp_file_path_flags_'(_, Directory, _).
 
-logtalk_load_context(entity_name, Entity) :-
+logtalk_load_context(entity_name, Entity) :-	% deprecated
+	logtalk_load_context(entity_identifier, Entity).
+
+logtalk_load_context(entity_identifier, Entity) :-
 	(	'$lgt_pp_object_'(Entity, _, _, _, _, _, _, _, _, _, _) ->
 		true
 	;	'$lgt_pp_protocol_'(Entity, _, _, _, _) ->

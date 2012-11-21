@@ -31,6 +31,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: Renamed the `logtalk_load_context/2` key `entity_name` to
+`entity_identifier` for consistency. The now deprecated `entity_name` key
+is still supported and aliased to `entity_identifier`.
+
 * IMPROVED: Optimized the code generated for `uses/2` directives that allows
 runtime use when static binding is possible.
 

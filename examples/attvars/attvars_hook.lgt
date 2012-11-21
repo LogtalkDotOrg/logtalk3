@@ -52,7 +52,7 @@
 
 	entity_to_prefix_and_parameters(Entity, Prefix, Parameters) :-
 		callable(Entity),
-		(	logtalk_load_context(entity_name, Entity) ->
+		(	logtalk_load_context(entity_identifier, Entity) ->
 			% reference to entity under compilation
 			logtalk_load_context(entity_prefix, Prefix)
 		;	% reference to other entity; try to avoid expansion loop
