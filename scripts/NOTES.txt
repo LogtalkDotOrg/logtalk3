@@ -37,14 +37,15 @@ from `http://msdn.microsoft.com/downloads/list/webdev.asp`).
 	script for cleaning a Logtalk distribution in preparation for packaging
 
 - `install.sh`  
-	shell script for installing Logtalk in a system-wide location for Unix 
-	and Unix-like operating systems (must be run from this directory by a 
-	user with administration privileges; accepts as an optional argument 
-	a prefix for the installation directory: default is `/opt/local` on 
-	Darwin (MacOS X), `/usr` on Debian systems, and `/usr/local` on other 
-	POSIX systems, resulting in Logtalk being installed in `$prefix/share`
-	with useful scripts written to `$prefix/bin`, which should be in your
-	path)
+	shell script for installing Logtalk in POSIX operating systems. When
+	using the default installation directory prefix, it must be run from
+	this directory by a user with administration privileges (for example,
+	`sudo ./install.sh`). The default prefix is `/opt/local` on Darwin
+	(MacOS X), `/usr` on Debian systems, and `/usr/local` on other POSIX
+	systems, resulting in Logtalk being installed in `$prefix/share` with
+	useful scripts written to `$prefix/bin`, which should be in your path);
+	the script also accepts as an optional argument a prefix for the
+	installation directory (for example, `./install.sh $HOME`)
 
 - `uninstall.sh`  
 	shell script for de-installing Logtalk in Unix and Unix-like operating 
