@@ -56,6 +56,12 @@ version required.
 * IMPROVED: Updated the Lean Prolog adapter file with dummy definitions for the
 ISO Prolog standard predicates `flush_output/0-1`.
 
+Tools
+-----
+
+* IMPROVED: The `lgtunit` tool now generates an error for non-instantiated and
+repeated test identifiers.
+
 Examples
 --------
 
