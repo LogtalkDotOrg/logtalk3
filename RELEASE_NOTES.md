@@ -31,6 +31,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: A `path` key to the `logtalk_load_context/2` built-in predicate for
+accesssing the absolute path to the source file under compilation.
+
 * CHANGED: Renamed the `logtalk_load_context/2` key `entity_name` to
 `entity_identifier` for consistency. The now deprecated `entity_name` key
 is still supported and aliased to `entity_identifier`.

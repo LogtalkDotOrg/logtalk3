@@ -1916,6 +1916,10 @@ logtalk_load(Files, Flags) :-
 %
 % provides access to the compilation/loading context
 
+logtalk_load_context(path, Path) :-
+	'$lgt_pp_file_path_flags_'(File, Directory, _),
+	atom_concat(Directory, File, Path).
+
 logtalk_load_context(file, File) :-
 	'$lgt_pp_file_path_flags_'(File, _, _).
 
