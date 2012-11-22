@@ -3703,12 +3703,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		throw(error(type_error(object_identifier, Obj), logtalk(Call, This)))
 	).
 
-'$lgt_metacall'(':'(Module, Closure), ExtraArgs, MetaCallCtx, _, Sender0, This, _) :-
+'$lgt_metacall'(':'(Module, Closure), ExtraArgs, _, _, _, This, _) :-
 	!,
-	(	\+ '$lgt_member'(':'(Module, Closure), MetaCallCtx) ->
-		Sender = This
-	;	Sender = Sender0
-	),
 	(	atom(Module), callable(Closure) ->
 		Closure =.. [Functor| Args],
 		'$lgt_append'(Args, ExtraArgs, FullArgs),
