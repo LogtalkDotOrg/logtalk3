@@ -125,6 +125,7 @@ logtalk_library_path(modules, examples('modules/')).
 logtalk_library_path(msglog, examples('msglog/')).
 logtalk_library_path(mtbatch, threads('mtbatch/')).
 logtalk_library_path(multifile, examples('multifile/')).
+logtalk_library_path(named_databases, examples('named_databases/')).
 logtalk_library_path(nondet, threads('nondet/')).
 logtalk_library_path(operators, examples('operators/')).
 logtalk_library_path(patching, examples('patching/')).

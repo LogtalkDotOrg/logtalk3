@@ -72,6 +72,9 @@ repeated test identifiers.
 Examples
 --------
 
+* NEW: Added `named_databases`, an implementation example of the Lean Prolog
+API for named databases for Prolog compilers with a module system.
+
 * NEW: Added a tutorial example, `metaclasses`, on how to use metaclasses.
 
 * FIXED: Bug in the loader file of the `operators` example.
