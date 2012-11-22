@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/10/25,
+		date is 2012/11/22,
 		comment is 'Logtalk core (compiler and runtime) default message translations.']).
 
 	:- multifile(logtalk::message_prefix_stream/4).
@@ -169,6 +169,26 @@
 
 	logtalk::message_tokens(compiler_stream_error(Error), core) -->
 		['~q'-[Error], nl].
+
+	logtalk::message_tokens(term_expansion_error(File, Lines, Type, Entity, HookEntity, Term, Error), core) -->
+		['Error found when term-expanding ~w using hook entity ~w: '-[Term, HookEntity]],
+		error_term_tokens(Error),
+		message_context(File, Lines, Type, Entity).		
+
+	logtalk::message_tokens(term_expansion_error(File, Lines, HookEntity, Term, Error), core) -->
+		['Error found when term-expanding ~w using hook entity ~w: '-[Term, HookEntity]],
+		error_term_tokens(Error),
+		message_context(File, Lines).		
+
+	logtalk::message_tokens(goal_expansion_error(File, Lines, Type, Entity, HookEntity, Goal, Error), core) -->
+		['Error found when goal-expanding ~w using hook entity ~w: '-[Term, HookEntity]],
+		error_term_tokens(Error),
+		message_context(File, Lines, Type, Entity).		
+
+	logtalk::message_tokens(goal_expansion_error(File, Lines, HookEntity, Goal, Error), core) -->
+		['Error found when goal-expanding ~w using hook entity ~w: '-[Term, HookEntity]],
+		error_term_tokens(Error),
+		message_context(File, Lines).		
 
 	logtalk::message_tokens(redefined_logtalk_built_in_predicate(File, Lines, Type, Entity, Predicate), core) -->
 		['Redefining a Logtalk built-in predicate: ~q'-[Predicate], nl],

@@ -1833,24 +1833,57 @@ logtalk_compile(Files, Flags) :-
 		assertz('$lgt_pp_file_compiler_flag_'(smart_compilation, off))
 	;	true
 	),
-	(	'$lgt_pp_file_compiler_flag_'(hook, Object) ->
+	(	'$lgt_pp_file_compiler_flag_'(hook, HookEntity) ->
 		% pre-compile hooks in order to speed up entity compilation
-		(	Object == user ->
+		(	HookEntity == user ->
 			TermExpansionGoal = term_expansion(Term, Terms),
 			GoalExpansionGoal = goal_expansion(Goal, ExpandedGoal)
-		;	atom(Object),
-			\+ current_object(Object),
+		;	atom(HookEntity),
+			\+ current_object(HookEntity),
 			'$lgt_prolog_feature'(modules, supported),
-			current_module(Object) ->
-			TermExpansionGoal = ':'(Object, term_expansion(Term, Terms)),
-			GoalExpansionGoal = ':'(Object, goal_expansion(Goal, ExpandedGoal))
-		;	'$lgt_tr_msg'(term_expansion(Term, Terms), Object, TermExpansionGoal, user),
-			'$lgt_tr_msg'(goal_expansion(Goal, ExpandedGoal), Object, GoalExpansionGoal, user)
+			current_module(HookEntity) ->
+			TermExpansionGoal = ':'(HookEntity, term_expansion(Term, Terms)),
+			GoalExpansionGoal = ':'(HookEntity, goal_expansion(Goal, ExpandedGoal))
+		;	'$lgt_tr_msg'(term_expansion(Term, Terms), HookEntity, TermExpansionGoal, user),
+			'$lgt_tr_msg'(goal_expansion(Goal, ExpandedGoal), HookEntity, GoalExpansionGoal, user)
 		),
-		assertz(('$lgt_pp_hook_term_expansion_'(Term, Terms) :- catch(TermExpansionGoal, _, fail))),
-		assertz(('$lgt_pp_hook_goal_expansion_'(Goal, ExpandedGoal) :- catch(GoalExpansionGoal, _, fail)))
+		assertz((
+			'$lgt_pp_hook_term_expansion_'(Term, Terms) :-
+				catch(TermExpansionGoal, Error, '$lgt_term_expansion_error'(HookEntity, Term, Error))
+		)),
+		assertz((
+			'$lgt_pp_hook_goal_expansion_'(Goal, ExpandedGoal) :-
+				catch(GoalExpansionGoal, Error, '$lgt_goal_expansion_error'(HookEntity, Goal, Error))
+		))
 	;	true
 	).
+
+
+% term-expansion errors result in a warning message and a failure
+
+'$lgt_term_expansion_error'(HookEntity, Term, Error) :-
+	'$lgt_pp_file_path_flags_'(File, Directory, _),
+	atom_concat(Directory, File, Path),
+	'$lgt_current_line_numbers'(Lines),
+	(	'$lgt_pp_entity'(Type, Entity, _, _, _) ->
+		'$lgt_print_message'(warning(expansion), core, term_expansion_error(Path, Lines, Type, Entity, HookEntity, Term, Error))
+	;	'$lgt_print_message'(warning(expansion), core, term_expansion_error(Path, Lines, HookEntity, Term, Error))
+	),
+	fail.
+
+
+% goal-expansion errors result in a warning message and a failure
+
+'$lgt_goal_expansion_error'(HookEntity, Goal, Error) :-
+	'$lgt_pp_file_path_flags_'(File, Directory, _),
+	atom_concat(Directory, File, Path),
+	'$lgt_current_line_numbers'(Lines),
+	(	'$lgt_pp_entity'(Type, Entity, _, _, _) ->
+		'$lgt_print_message'(warning(expansion), core, goal_expansion_error(Path, Lines, Type, Entity, HookEntity, Goal, Error))
+	;	'$lgt_print_message'(warning(expansion), core, goal_expansion_error(Path, Lines, HookEntity, Goal, Error))
+	),
+	fail.
+
 
 
 '$lgt_assert_compiler_flags'([]).

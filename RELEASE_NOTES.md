@@ -31,6 +31,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: Print a warning message when term-expansion or goal-expansion
+errors are found.
+
 * ADDED: A `source` key to the `logtalk_load_context/2` built-in predicate
 for accessing the absolute path to the source file under compilation.
 
