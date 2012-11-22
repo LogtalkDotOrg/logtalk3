@@ -66,8 +66,8 @@ ISO Prolog standard predicates `flush_output/0-1`.
 Tools
 -----
 
-* IMPROVED: The `lgtunit` tool now generates an error for non-instantiated and
-repeated test identifiers.
+* IMPROVED: The `lgtunit` tool now prints warning messages for non-instantiated
+and repeated test identifiers.
 
 Examples
 --------

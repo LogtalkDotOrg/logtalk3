@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/09/24,
+		date is 2012/11/22,
 		comment is 'Logtalk unit test framework default message translations.']).
 
 	% structured message printing predicates;
@@ -122,6 +122,14 @@
 
 	logtalk::message_tokens(no_coverage_information_collected, lgtunit) -->
 		['no coverage information collected'-[], nl].
+
+	% messages for test identifier errors
+
+	logtalk::message_tokens(non_instantiated_test_identifier, lgtunit) -->
+		['non-instantiated test identifier found'-[], nl].
+
+	logtalk::message_tokens(repeated_test_identifier(Test), lgtunit) -->
+		['repeated test identifier found: ~w'-[Test], nl].
 
 	% auxiliary grammar rules
 

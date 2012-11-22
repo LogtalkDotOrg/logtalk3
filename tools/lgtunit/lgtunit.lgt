@@ -30,7 +30,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2012/11/20,
+		date is 2012/11/22,
 		comment is 'A simple unit test framework featuring predicate clause coverage.']).
 
 	:- public(unit/1).
@@ -298,7 +298,7 @@
 
 	% unit test idiom test/2
 	term_expansion((test(Test, Outcome) :- Goal), [(test(Test, Outcome) :- Goal)]) :-
-		check_for_repeated_test_identifier(Test, test(Test, Outcome)),
+		check_for_repeated_test_identifier(Test),
 		(	Outcome == true ->
 			assertz(test_(succeeds(Test)))
 		;	Outcome == fail ->
@@ -309,32 +309,31 @@
 
 	% unit test idiom test/1
 	term_expansion((test(Test) :- Goal), [(test(Test, true) :- Goal)]) :-
-		check_for_repeated_test_identifier(Test, test(Test)),
+		check_for_repeated_test_identifier(Test),
 		assertz(test_(succeeds(Test))).
 
 	% unit test idiom succeeds/1 + fails/1 + throws/2
 	term_expansion((succeeds(Test) :- Goal), [(test(Test, true) :- Goal)]) :-
-		check_for_repeated_test_identifier(Test, succeeds(Test)),
+		check_for_repeated_test_identifier(Test),
 		assertz(test_(succeeds(Test))).
 	term_expansion((fails(Test) :- Goal), [(test(Test, fail) :- Goal)]) :-
-		check_for_repeated_test_identifier(Test, fails(Test)),
+		check_for_repeated_test_identifier(Test),
 		assertz(test_(fails(Test))).
 	term_expansion((throws(Test, Error) :- Goal), [(test(Test, Error) :- Goal)]) :-
-		check_for_repeated_test_identifier(Test, throws(Test, Error)),
+		check_for_repeated_test_identifier(Test),
 		assertz(test_(throws(Test, Error))).
 
 	term_expansion((:- end_object), [(run_tests :- ::run_tests(Tests)), (:- end_object)]) :-
 		findall(Test, retract(test_(Test)), Tests).
 
-	check_for_repeated_test_identifier(Test, Head) :-
-		logtalk_load_context(entity_identifier, Entity),
+	check_for_repeated_test_identifier(Test) :-
 		(	var(Test) ->
-			throw(error(instantiation_error, logtalk(Head, Entity)))
+			print_message(warning, lgtunit, non_instantiated_test_identifier)
 		;	(	test_(succeeds(Test))
 			;	test_(fails(Test))
 			;	test_(throws(Test, _))
 			) ->
-			throw(error(permission_error(modify, test, Test), logtalk(Head, Entity)))
+			print_message(warning, lgtunit, repeated_test_identifier(Test))
 		;	true
 		).
 
