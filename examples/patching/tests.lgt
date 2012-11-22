@@ -43,7 +43,7 @@
 	fails(patching_6) :-
 		broken::is_proper_list([a,b,c|_]).
 
-	fails(patching_6) :-
+	fails(patching_7) :-
 		instance::is_proper_list([a,b,c|_]).
 
 	throws(patching_8, error(permission_error(access, private_predicate, last/3), _)) :- 

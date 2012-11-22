@@ -66,7 +66,7 @@
 		descendant2 << predicate_property(protected, protected),
 		\+ descendant2 << predicate_property(private, _).
 
-	test(inheritance_08) :-
+	test(inheritance_07) :-
 		\+ descendant3::current_predicate(public/0),
 		\+ descendant3::current_predicate(protected/0),
 		\+ descendant3::current_predicate(private/0),
