@@ -61,7 +61,8 @@ Prolog adapter and integration files
 ------------------------------------
 
 * UPDATED: CxProlog adapter file for version 0.97.6, which is now the minimum
-version required.
+version required. This version allows some coinduction examples to run as it
+supported the soft-cut control construct.
 
 * IMPROVED: Updated the Lean Prolog adapter file with dummy definitions for the
 ISO Prolog standard predicates `flush_output/0-1`.

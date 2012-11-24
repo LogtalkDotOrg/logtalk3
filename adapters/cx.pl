@@ -197,7 +197,7 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 '$lgt_prolog_feature'(tabling, unsupported).
 '$lgt_prolog_feature'(threads, unsupported).
 '$lgt_prolog_feature'(modules, unsupported).
-'$lgt_prolog_feature'(coinduction, unsupported).
+'$lgt_prolog_feature'(coinduction, supported).
 
 
 
