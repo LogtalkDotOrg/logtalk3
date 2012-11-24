@@ -11,6 +11,10 @@
 
 :- if(current_logtalk_flag(coinduction, supported)).
 
+	:- if(current_logtalk_flag(prolog_dialect, cx)).
+		:- write_depth(10, 10).
+	:- endif.
+
 	:- if(current_logtalk_flag(prolog_dialect, yap)).
 		:- initialization((
 			current_prolog_flag(toplevel_print_options, Options),

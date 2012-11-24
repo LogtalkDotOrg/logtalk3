@@ -100,8 +100,6 @@
 	succeeds(coinduction_counter_1) :-
 		counter::verify.
 
-	:- if(\+ current_logtalk_flag(prolog_dialect, eclipse)).
-
 	succeeds(coinduction_sieve_1) :-
 		sieve::primes(20, P),
 		P = [2, 3, 5, 7, 11, 13, 17, 19| P].
@@ -163,8 +161,6 @@
 		A = [approach, in, out, exit| A],
 		B = [approach, exit| B],
 		C = [lower, raise| C].
-	:- endif.
-
 	:- endif.
 
 :- end_object.

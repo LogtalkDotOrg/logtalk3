@@ -76,6 +76,10 @@ and repeated test identifiers.
 Examples
 --------
 
+* CHANGED: Turn off the `coinduction` example unit tests when using CxProlog
+or ECLiPSe as the back-end compiler as all tests that call bagof/3 cannot be
+run due to the fragile support for rational terms in these Prolog compilers.
+
 * NEW: Added `named_databases`, an implementation example of the Lean Prolog
 API for named databases for Prolog compilers with a module system.
 

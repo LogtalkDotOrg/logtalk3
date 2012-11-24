@@ -9,8 +9,8 @@ ________________________________________________________________________
 
 
 To load this example and for sample queries, please see the SCRIPT.txt file.
-This example requires a recent version of ECLiPSE, SICStus Prolog, SWI-Prolog,
-or YAP as the back-end Prolog compiler.
+This example requires a recent version of CxProlog, ECLiPSE, SICStus Prolog,
+SWI-Prolog, or YAP as the back-end Prolog compiler.
 
 Note that Logtalk support for coinduction is still experimental. The two major
 issues are lack of robust Prolog support for cyclic terms and lack of support
@@ -20,6 +20,11 @@ behave as (theoretically) expected.
 
 This folder contains several examples of coinductive predicates, adapted from
 the coinduction papers and from the Feliks Kluzniak's DRA meta-interpreter.
+
+The unit tests are currently disabled when using CxProlog or ECLiPSE as the
+back-end compiler. Although some tests pass, all tests calling bagof/3 don't
+terminate until all available memory is exhausted due to the fragile support
+for rational terms in these two Prolog compilers.
 
 For more information see:
 
