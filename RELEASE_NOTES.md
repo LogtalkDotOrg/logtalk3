@@ -91,6 +91,8 @@ API for named databases for Prolog compilers with a module system.
 `cc` example. Corrected a typo in the definition of the predicate `file_size/2`
 for CxProlog.
 
+* ADDED: Unit tests fr the `constraints/sicstus` example.
+
 
 3.00.0 Alpha 5 - November 5, 2012
 =================================
