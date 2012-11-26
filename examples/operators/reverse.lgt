@@ -12,9 +12,9 @@
 :- object(reverse).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2011/05/18,
+		date is 2012/11/26,
 		comment is 'Reads and writes a simple table of facts from and to files for testing operator handling code.']).
 
 	:- op(500, xfx, next).				% local object operators, not visible outside this object
@@ -23,8 +23,12 @@
 	:- public(reverse_file/0).
 
 	reverse_file :-
-		open('next.txt', read, RStream),
-		open('previous.txt', write, WStream),
+		this(This),
+		object_property(This, file(_, Directory)),
+		atom_concat(Directory, 'next.txt', InFile),
+		atom_concat(Directory, 'previous.txt', OutFile),
+		open(InFile, read, RStream),
+		open(OutFile, write, WStream),
 		read(RStream, Term),			% local operators are used when reading terms ...
 		process(Term, RStream, WStream).
 

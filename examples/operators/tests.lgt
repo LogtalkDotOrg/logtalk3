@@ -13,17 +13,17 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2012/07/04,
+		date is 2012/11/26,
 		comment is 'Unit tests for the "operators" example.']).
 
 	unit(double).
 	unit(triple).
-	%unit(reverse).
-	unit(edge).
+	unit(graph).
 	unit(graph1).
 	%unit(graph2).
+	unit(reverse).
 
 	test(operators_1) :-
 		findall(I-J, double::double(I, J), Solutions),
@@ -34,7 +34,6 @@
 		findall(I-J, triple::triple(I, J), Solutions),
 		Solutions == [1-3, 2-6, 3-9].
 
-	% test 3.  % couldn't really test the interesting cases because of compilation errors
 	test(operators_3) :-
 		findall(N1-N2, graph1::edge(N1, N2), Solutions),
 		Solutions == [a-b, a-c, b-d, c-d].
@@ -45,5 +44,8 @@
 
 	test(operators_5) :-
 		\+ current_op(_P, _T, edge).
+
+	test(operators_6) :-
+		reverse::reverse_file.
 
 :- end_object.
