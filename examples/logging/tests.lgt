@@ -15,10 +15,15 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/08/13,
+		date is 2012/11/26,
 		comment is 'Unit tests for the "logging" example.']).
 
 	unit(logging).
 	unit(object).
+
+	test(logging_1) :-
+		object::add_log_entry('something interesting happens'),
+		findall(Entry, object::log_entry(_, Entry), Entries),
+		Entries == [start, 'something interesting happens'].
 
 :- end_object.
