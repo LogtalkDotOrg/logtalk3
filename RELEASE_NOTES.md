@@ -73,6 +73,9 @@ Tools
 * IMPROVED: The `lgtunit` tool now prints warning messages for non-instantiated
 and repeated test identifiers.
 
+* CHANGED: Moved and renamed the `examples/tester.sh` POSIX shell script to
+`scripts/logtalk_tester.sh` and added a man page for it.
+
 Examples
 --------
 

@@ -21,8 +21,8 @@ Public License 3. Consult the `LICENSE.txt` file for details.
 ________________________________________________________________________
 
 
-This directory contains some shell scripts used for Logtalk packaging, 
-installation, and integration with Prolog compilers. Those with extension 
+This directory contains shell scripts used for Logtalk testing, packaging,
+installation, and integration with Prolog compilers. Those with extension
 `.sh` are bash shells scripts for MacOS X, Linux, and similar systems.
 Those with extension `.js` are JScript command-line scripts for Windows;
 they require WSH 5.6 or later version to be installed and should be run
@@ -51,6 +51,10 @@ from `http://msdn.microsoft.com/downloads/list/webdev.asp`).
 	shell script for de-installing Logtalk in Unix and Unix-like operating 
 	systems (must be run from this directory by a user with administration 
 	privileges)
+
+- `logtalk_tester.sh`
+    shell script for automating running unit tests in the `examples` and
+    `tests` directories
 
 - `logtalk_version_select.sh`  
 	experimental shell script for switching between installed Logtalk

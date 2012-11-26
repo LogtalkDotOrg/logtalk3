@@ -1,0 +1,34 @@
+.TH logtalk_tester 1 "November 26, 2012" "Logtalk 3.00.0" "Logtalk Documentation"
+
+.SH NAME
+logtalk_tester \-- Logtalk script for automating running unit tests
+
+.SH SYNOPSIS
+.B logtalk_tester [-p Prolog]
+
+.SH DESCRIPTION
+\f3logtalk_tester\f1 is a Logtalk script script for automating running unit tests. This script assumes that the directories (and its direct subdirectories, if existing) in the current directory contain a \f3tester.lgt\f1 source file that, when loaded, runs a set of unit tests. 
+
+.SH OPTIONS
+.TP
+.BI \-p
+Back-end Prolog compiler. Default is YAP. The following identifiers are used: B-Prolog - b, CxProlog - cx, ECLiPSe - eclipse, GNU Prolog - gnu, Lean Prolog - lean, Qu-Prolog - qp, SICStus Prolog - sicstus, SWI-Prolog - swi, XSB - xsb, YAP - yap.
+
+.SH ENVIRONMENT
+.TP
+.B LOGTALKHOME
+Specifies the location of the Logtalk installation.
+.TP
+.B LOGTALKUSER
+Specifies the location of the Logtalk user directory.
+
+.SH "SEE ALSO"
+The Logtalk website at http://logtalk.org/
+.PP
+The Logtalk User and Reference Manuals at $LOGTALKHOME/manuals/index.html
+
+.SH AUTHOR
+Paulo Moura <pmoura@logtalk.org>
+
+.SH COPYRIGHT
+Copyright (c) 1998-2012 Paulo Moura.

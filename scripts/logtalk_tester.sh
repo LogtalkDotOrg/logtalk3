@@ -46,8 +46,8 @@ prolog='YAP'
 logtalk="yaplgt$extension -g"
 mode='normal'
 
-versions_goal="logtalk_load(tester_versions),halt"
-versions_goal_dot="logtalk_load(tester_versions),halt."
+versions_goal="logtalk_load(library(tester_versions)),halt"
+versions_goal_dot="logtalk_load(library(tester_versions)),halt."
 
 tester_goal="logtalk_load(tester),halt"
 tester_goal_dot="logtalk_load(tester),halt."

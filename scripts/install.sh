@@ -71,6 +71,7 @@ ln -sf lgt3000 logtalk
 mkdir -p $prefix/bin
 cd $prefix/bin
 
+ln -sf ../share/logtalk/scripts/logtalk_tester.sh logtalk_tester
 ln -sf ../share/logtalk/scripts/logtalk_user_setup.sh logtalk_user_setup
 cp -f ../share/logtalk/scripts/logtalk_version_select.sh logtalk_version_select
 ln -sf ../share/logtalk/scripts/logtalk_backend_select.sh logtalk_backend_select
@@ -80,8 +81,8 @@ ln -sf ../share/logtalk/tools/lgtdoc/xml/lgt2xml.sh lgt2xml
 ln -sf ../share/logtalk/tools/lgtdoc/xml/lgt2txt.sh lgt2txt
 
 echo "Links to the \"logtalk_user_setup\", \"logtalk_backend_select\","
-echo "\"logtalk_version_select\", \"lgt2pdf\", \"lgt2html\", \"lgt2xml\","
-echo "and \"lgt2txt\" scripts have been created on \"$prefix/bin\";"
+echo "\"logtalk_version_select\", \"logtalk_tester\", \"lgt2pdf\", \"lgt2html\","
+echo "\"lgt2xml\", and \"lgt2txt\" scripts have been created on \"$prefix/bin\";"
 echo "you may need to add this directory to your execution path."
 echo
 
