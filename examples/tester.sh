@@ -28,7 +28,7 @@
 # based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "`basename $0` 0.7"
+	echo "`basename $0` 0.8"
 	exit 0
 }
 
@@ -220,9 +220,11 @@ echo '**************************************************************************
 echo "***** Errors and warnings"
 echo '******************************************************************************'
 cd "$results"
-grep -A2 'ERROR!' *.errors | sed 's/.errors//' | tee errors.all
-grep -A2 'ERROR!' *.results | sed 's/.results//' | tee -a errors.all
-grep -A2 'WARNING!' *.results | sed 's/.results//' | tee -a errors.all
+grep -A2 'syntax_error' *.results | sed 's/.results//' | tee errors.all
+grep -A2 'syntax_error' *.errors | sed 's/.errors//' | tee -a errors.all
+grep -A2 '!     ' *.errors | sed 's/.errors//' | tee -a errors.all
+grep -A2 '!     ' *.results | sed 's/.results//' | tee -a errors.all
+grep -A2 '*     ' *.results | sed 's/.results//' | tee -a errors.all
 echo '******************************************************************************'
 echo "***** Failed tests"
 echo '******************************************************************************'

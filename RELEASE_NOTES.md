@@ -93,6 +93,10 @@ for CxProlog.
 
 * ADDED: Unit tests to the `constraints/sicstus` and `logging` examples.
 
+* UPDATED: The unit tests automation script to work with the new warning and 
+error reporting formats (using the defaults in the `core/core_messages.lgt`
+file).
+
 
 3.00.0 Alpha 5 - November 5, 2012
 =================================
