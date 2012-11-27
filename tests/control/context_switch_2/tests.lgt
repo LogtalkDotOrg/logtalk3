@@ -1,5 +1,5 @@
 
-:- object(context2,
+:- object(tests,
 	extends(lgtunit)).
 
 	:- info([
