@@ -8,4 +8,6 @@ terms per section 7).        Consult the `LICENSE.txt` file for details.
 ________________________________________________________________________
 
 
-This folder contains Logtalk unit tests.
+This directory contains Logtalk unit tests. On POSIX operating-systems, you
+can run all these tests by calling the shell script `logtalk_tester` from
+the command-line. Type `man logtalk_tester` for usage details.

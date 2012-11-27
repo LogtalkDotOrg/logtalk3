@@ -53,10 +53,9 @@ The example folders may contain two files, `tests.lgt` and `tester.lgt`.
 The file `tests.lgt` contains unit tests for the example. These unit tests
 are based on the sample queries found on the example `SCRIPT.txt` file.
 The file `tester.lgt` is a loader file that, when loaded, will automatically
-run all example unit tests. The POSIX script `tester.sh`, found on the
-`examples` folder, may be used to run all examples unit tests. This script
-works with all compatible back-end Prolog compilers except B-Prolog due to
-limitations on the command-line options of this compiler.
+run all the example unit tests. On POSIX operating-systems, you can run all
+the unit tests, for all the examples, by calling the `logtalk_tester` shell
+script from the command-line. Type `man logtalk_tester` for usage details.
 
 
 Follows a short description of each included example (in alphabetical order):
