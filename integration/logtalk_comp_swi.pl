@@ -56,10 +56,8 @@
 	'$lgt_send_to_obj_nv'/3,
 	'$lgt_send_to_obj_ne_nv'/3,
 	'$lgt_send_to_obj_ne'/3, '$lgt_send_to_obj_ne_'/3,
-	'$lgt_obj_super_call_same'/3, '$lgt_obj_super_call_same_'/3,
-	'$lgt_obj_super_call_other'/3, '$lgt_obj_super_call_other_'/3,
-	'$lgt_ctg_super_call_same'/3, '$lgt_ctg_super_call_same_'/3,
-	'$lgt_ctg_super_call_other'/3, '$lgt_ctg_super_call_other_'/3,
+	'$lgt_obj_super_call'/3, '$lgt_obj_super_call_'/3,
+	'$lgt_ctg_super_call'/3, '$lgt_ctg_super_call_'/3,
 	'$lgt_ctg_call'/3, '$lgt_ctg_call_'/3,
 	'$lgt_db_lookup_cache_'/5,
 	'$lgt_hook_term_expansion_'/2, '$lgt_hook_goal_expansion_'/2,
@@ -75,10 +73,8 @@
 	:- index('$lgt_send_to_obj_'(1, 1, 0)).
 	:- index('$lgt_send_to_obj_ne_'(1, 1, 0)).
 	:- index('$lgt_send_to_self_'(1, 1, 0)).
-	:- index('$lgt_obj_super_call_same_'(1, 1, 0)).
-	:- index('$lgt_obj_super_call_other_'(1, 1, 0)).
-	:- index('$lgt_ctg_super_call_same_'(1, 1, 0)).
-	:- index('$lgt_ctg_super_call_other_'(1, 1, 0)).
+	:- index('$lgt_obj_super_call_'(1, 1, 0)).
+	:- index('$lgt_ctg_super_call_'(1, 1, 0)).
 	:- index('$lgt_ctg_call_'(1, 1, 0)).
 	:- index('$lgt_db_lookup_cache_'(1, 1, 0, 0, 0)).
 :- endif.

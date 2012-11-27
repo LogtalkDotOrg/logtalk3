@@ -5,7 +5,7 @@
 %
 %  integration code for YAP 6.0.2 and later versions to improve
 %  usability when using the YAP profilers
-%  Last updated on September 11, 2012
+%  Last updated on November 27, 2012
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -35,20 +35,16 @@
 user:prolog_predicate_name(user:'$lgt_send_to_obj_'(_, _, _), '::/2 (event-aware)') :- !.
 user:prolog_predicate_name(user:'$lgt_send_to_obj_ne_'(_, _, _), '::/2 (event transparent)') :- !.
 user:prolog_predicate_name(user:'$lgt_send_to_self_'(_, _, _), '::/1') :- !.
-user:prolog_predicate_name(user:'$lgt_obj_super_call_same_'(_, _, _), '^^/2 (from obj; same pred)') :- !.
-user:prolog_predicate_name(user:'$lgt_obj_super_call_other_'(_, _, _), '^^/2 (from obj; diff pred)') :- !.
-user:prolog_predicate_name(user:'$lgt_ctg_super_call_same_'(_, _, _), '^^/2 (from ctg; same pred)') :- !.
-user:prolog_predicate_name(user:'$lgt_ctg_super_call_other_'(_, _, _), '^^/2 (from ctg; diff pred)') :- !.
+user:prolog_predicate_name(user:'$lgt_obj_super_call_'(_, _, _), '^^/2 (from obj; same pred)') :- !.
+user:prolog_predicate_name(user:'$lgt_ctg_super_call_'(_, _, _), '^^/2 (from ctg; same pred)') :- !.
 user:prolog_predicate_name(user:'$lgt_ctg_call_'(_, _, _, _), ':/1') :- !.
 user:prolog_predicate_name(user:'$lgt_call_in_this'(_, _), 'call/1') :- !.
 
 user:prolog_predicate_name(user:'$lgt_send_to_obj'(_, _, _), '::/2 (event-aware)') :- !.
 user:prolog_predicate_name(user:'$lgt_send_to_obj_ne'(_, _, _), '::/2 (event transparent)') :- !.
 user:prolog_predicate_name(user:'$lgt_send_to_self'(_, _, _), '::/1') :- !.
-user:prolog_predicate_name(user:'$lgt_obj_super_call_same'(_, _, _), '^^/2 (from obj; same pred)') :- !.
-user:prolog_predicate_name(user:'$lgt_obj_super_call_other'(_, _, _), '^^/2 (from obj; diff pred)') :- !.
-user:prolog_predicate_name(user:'$lgt_ctg_super_call_same'(_, _, _), '^^/2 (from ctg; same pred)') :- !.
-user:prolog_predicate_name(user:'$lgt_ctg_super_call_other'(_, _, _), '^^/2 (from ctg; diff pred)') :- !.
+user:prolog_predicate_name(user:'$lgt_obj_super_call'(_, _, _), '^^/2 (from obj; same pred)') :- !.
+user:prolog_predicate_name(user:'$lgt_ctg_super_call'(_, _, _), '^^/2 (from ctg; same pred)') :- !.
 user:prolog_predicate_name(user:'$lgt_ctg_call'(_, _, _), ':/1') :- !.
 
 user:prolog_predicate_name(user:'$lgt_metacall'(_, _, _, _, _, _, _), 'call/N') :- !.
