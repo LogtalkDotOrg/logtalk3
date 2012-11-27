@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2.0,
+		version is 2.1,
 		author is 'Paulo Moura',
-		date is 2010/06/19,
+		date is 2012/11/27,
 		comment is 'Unit tests for the "securemp" example.']).
 
 	:- discontiguous(succeeds/1).
@@ -44,7 +44,7 @@
 		{client_b_3_variant::test(X)},		% definition but no error
 		X == 3.
 
-	throws(rule_c, error(arity_mismatch(closure,call(_,_,_), map(1,*)), _)) :-
+	throws(rule_c, error(domain_error({1}, 2), _)) :-
 		logtalk_load(rule_c).				% compile-time error
 
 :- end_object.

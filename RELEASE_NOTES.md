@@ -31,6 +31,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: Renamed the `arith_mismatch` domain errors thrown by the compiler
+to `{N}` where `N` is the expected arity integer value.
+
 * IMPROVED: Print a warning message when term-expansion or goal-expansion
 errors are found.
 

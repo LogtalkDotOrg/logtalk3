@@ -6648,19 +6648,19 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	\+ '$lgt_valid_non_terminal_indicator'(Alias, _, _, _),
 	throw(type_error(predicate_indicator, Alias)).
 
-'$lgt_tr_pred_alias_directive'(_, Functor1//Arity1, Functor2//Arity2) :-
+'$lgt_tr_pred_alias_directive'(_, _//Arity1, _//Arity2) :-
 	Arity1 =\= Arity2,
-	throw(domain_error(arity_mismatch, Functor1//Arity1, Functor2//Arity2)).
+	throw(domain_error({Arity1}, Arity2)).
 
-'$lgt_tr_pred_alias_directive'(_, Functor1/Arity1, Functor2/Arity2) :-
+'$lgt_tr_pred_alias_directive'(_, _/Arity1, _/Arity2) :-
 	Arity1 =\= Arity2,
-	throw(domain_error(arity_mismatch, Functor1/Arity1, Functor2/Arity2)).
+	throw(domain_error({Arity1}, Arity2)).
 
-'$lgt_tr_pred_alias_directive'(_, Functor1/Arity1, Functor2//Arity2) :-
-	throw(domain_error(indicator_mismatch, Functor1/Arity1, Functor2//Arity2)).
+'$lgt_tr_pred_alias_directive'(_, _/_, Functor2//Arity2) :-
+	throw(type_error(predicate_indicator, Functor2//Arity2)).
 
-'$lgt_tr_pred_alias_directive'(_, Functor1//Arity1, Functor2/Arity2) :-
-	throw(domain_error(indicator_mismatch, Functor1//Arity1, Functor2/Arity2)).
+'$lgt_tr_pred_alias_directive'(_, _//_, Functor2/Arity2) :-
+	throw(type_error(non_terminal_indicator, Functor2/Arity2)).
 
 '$lgt_tr_pred_alias_directive'(Entity, Functor1/Arity, Functor2/Arity) :-
 	!,
@@ -7481,7 +7481,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!,
 	(	OArity =:= AArity ->
 		'$lgt_tr_uses_directive_predicate_arg'(OFunctor, AFunctor, OArity, Obj, Ctx)
-	;	throw(domain_error(arity_mismatch(Original, Alias)))
+	;	throw(domain_error({OArity}, AArity))
 	),
 	'$lgt_tr_uses_directive'(Resources, Obj, Ctx).
 
@@ -7491,7 +7491,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!,
 	(	OArity =:= AArity ->
 		'$lgt_tr_uses_directive_non_terminal_arg'(OFunctor, AFunctor, OArity, OExtArity, Obj, Ctx)
-	;	throw(domain_error(arity_mismatch(Original, Alias)))
+	;	throw(domain_error({OArity}, AArity))
 	),
 	'$lgt_tr_uses_directive'(Resources, Obj, Ctx).
 
@@ -7589,7 +7589,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!,
 	(	OArity =:= AArity ->
 		'$lgt_tr_use_module_directive_predicate_arg'(OFunctor, AFunctor, OArity, Module, Ctx)
-	;	throw(domain_error(arity_mismatch(Original, Alias)))
+	;	throw(domain_error({OArity}, AArity))
 	),
 	'$lgt_tr_use_module_directive'(Resources, Module, Ctx).
 
@@ -7599,7 +7599,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!,
 	(	OArity =:= AArity ->
 		'$lgt_tr_use_module_directive_non_terminal_arg'(OFunctor, AFunctor, OArity, OExtArity, Module, Ctx)
-	;	throw(domain_error(arity_mismatch(Original, Alias)))
+	;	throw(domain_error({OArity}, AArity))
 	),
 	'$lgt_tr_use_module_directive'(Resources, Module, Ctx).
 
@@ -8776,9 +8776,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	once('$lgt_member_var'(Closure, MetaVars)),	% our closure is a meta-argument then check that the
 	'$lgt_length'(ExtraArgs, 0, NExtraArgs),	% call/N call complies with the meta-predicate declaration
 	Meta =.. [_| MetaArgs],
-	\+ '$lgt_same_meta_arg_extra_args'(MetaArgs, MetaVars, Closure, NExtraArgs),
-	CallN =.. [call, Closure| ExtraArgs],
-	throw(arity_mismatch(closure, CallN, Meta)).
+	'$lgt_not_same_meta_arg_extra_args'(MetaArgs, MetaVars, Closure, NExtraArgs, MetaArg),
+	throw(domain_error({MetaArg}, NExtraArgs)).
 
 '$lgt_tr_body'('$lgt_callN'(Closure, ExtraArgs), TPred, DPred, Ctx) :-
 	!,
@@ -10530,33 +10529,33 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_same_meta_arg_extra_args'(@list(nonvar), @list(var), @var, +integer)
+% '$lgt_not_same_meta_arg_extra_args'(@list(nonvar), @list(var), @var, +integer, -integer)
 %
 % checks that the number of additional arguments being appended to a closure
 % in a call/N call matches the corresponding meta-predicate declaration
 % (the relative ordering of the meta-vars is the same of the corresponding
 % meta-arguments; assumes Logtalk meta-predicate notation)
 
-'$lgt_same_meta_arg_extra_args'([(*)| MetaArgs], MetaVars, Closure, ExtraArgs) :-
+'$lgt_not_same_meta_arg_extra_args'([(*)| MetaArgs], MetaVars, Closure, ExtraArgs, MetaArg) :-
 	!,
-	'$lgt_same_meta_arg_extra_args'(MetaArgs, MetaVars, Closure, ExtraArgs).
+	'$lgt_not_same_meta_arg_extra_args'(MetaArgs, MetaVars, Closure, ExtraArgs, MetaArg).
 
-'$lgt_same_meta_arg_extra_args'([(::)| MetaArgs], MetaVars, Closure, ExtraArgs) :-
+'$lgt_not_same_meta_arg_extra_args'([(::)| MetaArgs], MetaVars, Closure, ExtraArgs, MetaArg) :-
 	!,
-	'$lgt_same_meta_arg_extra_args'(MetaArgs, MetaVars, Closure, ExtraArgs).
+	'$lgt_not_same_meta_arg_extra_args'(MetaArgs, MetaVars, Closure, ExtraArgs, MetaArg).
 
-'$lgt_same_meta_arg_extra_args'([0| MetaArgs], MetaVars, Closure, ExtraArgs) :-
+'$lgt_not_same_meta_arg_extra_args'([0| MetaArgs], MetaVars, Closure, ExtraArgs, MetaArg) :-
 	!,
-	'$lgt_same_meta_arg_extra_args'(MetaArgs, MetaVars, Closure, ExtraArgs).
+	'$lgt_not_same_meta_arg_extra_args'(MetaArgs, MetaVars, Closure, ExtraArgs, MetaArg).
 
-'$lgt_same_meta_arg_extra_args'([MetaArg| _], [MetaVar| _], Closure, ExtraArgs) :-
+'$lgt_not_same_meta_arg_extra_args'([MetaArg| _], [MetaVar| _], Closure, ExtraArgs, MetaArg) :-
 	MetaVar == Closure,
 	!,
 	integer(MetaArg),
-	MetaArg =:= ExtraArgs.
+	MetaArg =\= ExtraArgs.
 
-'$lgt_same_meta_arg_extra_args'([_| MetaArgs], [_| MetaVars], Closure, ExtraArgs) :-
-	'$lgt_same_meta_arg_extra_args'(MetaArgs, MetaVars, Closure, ExtraArgs).
+'$lgt_not_same_meta_arg_extra_args'([_| MetaArgs], [_| MetaVars], Closure, ExtraArgs, MetaArg) :-
+	'$lgt_not_same_meta_arg_extra_args'(MetaArgs, MetaVars, Closure, ExtraArgs, MetaArg).
 
 
 
@@ -10576,7 +10575,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		(	PredMetaArg = HeadMetaArg ->
 			% same number of closure extra args
 			'$lgt_same_number_of_closure_extra_args'(PredArgs, PredMetaArgs, HeadArgs, HeadMetaArgs)
-		;	throw(arity_mismatch(closure, PredMetaArg, HeadMetaArg))
+		;	throw(domain_error({HeadMetaArg}, PredMetaArg))
 		)
 	;	'$lgt_same_number_of_closure_extra_args'(PredArgs, PredMetaArgs, HeadArgs, HeadMetaArgs)
 	).
