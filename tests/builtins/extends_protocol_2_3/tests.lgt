@@ -6,7 +6,7 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2012/11/19,
-		comment is 'Unit tests for the extends_protocol/2-3 built-in predicate.'
+		comment is 'Unit tests for the extends_protocol/2-3 built-in predicates.'
 	]).
 
 	% extends_protocol/2 tests

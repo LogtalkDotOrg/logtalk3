@@ -6,7 +6,7 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2012/11/19,
-		comment is 'Unit tests for the conforms_to_protocol/2-3 built-in predicate.'
+		comment is 'Unit tests for the conforms_to_protocol/2-3 built-in predicates.'
 	]).
 
 	throws(conforms_to_protocol_2_1, error(type_error(object_identifier, 1), logtalk(conforms_to_protocol(1,_), _))) :-

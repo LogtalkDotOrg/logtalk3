@@ -6,7 +6,7 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2012/11/19,
-		comment is 'Unit tests for the imports_category/2-3 built-in predicate.'
+		comment is 'Unit tests for the imports_category/2-3 built-in predicates.'
 	]).
 
 	% imports_category/2 tests
