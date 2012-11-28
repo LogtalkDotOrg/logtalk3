@@ -9,7 +9,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization(catch((client_a_variant::double([1,2,3], Doubles), write(Doubles)), Error, writeq(Error))).
+:- initialization(
+	catch((client_a_variant::double([1,2,3], Doubles), (write(Doubles), nl)), Error, (writeq(Error), nl))
+).
 
 
 :- object(library_a_variant).

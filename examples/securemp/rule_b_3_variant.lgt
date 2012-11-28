@@ -9,7 +9,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization(catch(client_b_3_variant::test(_), Error, writeq(Error))).
+:- initialization(catch(client_b_3_variant::test(_), Error, w(riteq(Error), nl))).
+
 
 :- object(library_b_3_variant).
 

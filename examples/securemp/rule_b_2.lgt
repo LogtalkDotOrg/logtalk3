@@ -9,7 +9,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization(catch(client_b_2::test, Error, writeq(Error))).
+:- initialization(catch(client_b_2::test, Error, (writeq(Error), nl))).
 
 
 :- object(library_b_2).
