@@ -31,6 +31,11 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: The default procedure for printing messages (not intercepted by
+the user) now adds begin/2 and end/1 tokens to, respectively, the start and
+the end of the list of tokens. These two tokens can be intercepted by the
+user for supporting e.g. message coloring.
+
 * CHANGED: Renamed the `arith_mismatch` domain errors thrown by the compiler
 to `{N}` where `N` is the expected arity integer value.
 
@@ -62,6 +67,10 @@ the exception term would not include a `logtalk/2` context term.
 
 Prolog adapter and integration files
 ------------------------------------
+
+* IMPROVED: The SWI-Prolog adapter file no longer needs to define the hook
+predicate logtalk::message_hook/4 in order to provide support for message
+coloring.
 
 * UPDATED: CxProlog adapter file for version 0.97.6, which is now the minimum
 version required. This version allows some coinduction examples to run as it

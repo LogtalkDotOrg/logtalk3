@@ -4352,7 +4352,12 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		'$lgt_logtalk.message_hook'(Term, Kind, Component, Tokens, ExCtx) ->
 		% message intercepted; assume that the message is printed
 		true
-	;	'$lgt_default_print_message'(Kind, Component, Tokens, ExCtx)
+	;	% add begin/2 and end/1 tokens to, respectively, the start and the end of
+		% the list of tokens; these can be intercepted by the user for suporting
+		% e.g. message coloring
+		functor(Kind, Functor, _),
+		'$lgt_append'([begin(Functor,Ctx)| Tokens], [end(Ctx)], ExpandedTokens),
+		'$lgt_default_print_message'(Kind, Component, ExpandedTokens, ExCtx)
 	).
 
 
@@ -4483,8 +4488,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_print_message_token'(Format-Arguments, _, Stream, _) :-
 	format(Stream, Format, Arguments).
 
-% the following tokens are used by SWI-Prolog; we use default definitions
-% for compatibility when running Logtalk with this back-end Prolog compiler
+% the following tokens were first introduced by SWI-Prolog; we use default definitions
+% for compatibility when running Logtalk with other back-end Prolog compilers
 
 '$lgt_print_message_token'(ansi(_, Format, Arguments), _, Stream, _) :-
 	format(Stream, Format, Arguments).
