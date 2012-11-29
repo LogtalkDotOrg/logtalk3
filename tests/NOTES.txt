@@ -8,6 +8,10 @@ terms per section 7).        Consult the `LICENSE.txt` file for details.
 ________________________________________________________________________
 
 
-This directory contains Logtalk unit tests. On POSIX operating-systems, you
-can run all these tests by calling the shell script `logtalk_tester` from
-the command-line. Type `man logtalk_tester` for usage details.
+This directory contains Logtalk unit tests for built-in predicates, control
+constructs, directives and methods. Besides this set of unit tests, there are
+also unit tests defined for most of the examples.
+
+On POSIX operating-systems, you can run all these tests by calling the shell
+script `logtalk_tester` from the command-line. Type `man logtalk_tester` for
+usage details, including how to select the back-end Prolog compiler.

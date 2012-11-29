@@ -103,20 +103,25 @@ In the Logtalk installation directory, you will find the following files and dir
 	<dt><code>settings-sample.lgt</code> &ndash; sample file for user-defined Logtalk settings</dt>
 </dl>
 <dl>
-	<dt><code>compiler</code></dt>
-		<dd><code>NOTES.txt</code> &ndash; notes on the current status of the compiler</dd>
-		<dd><code>...</code> &ndash; compiler source files</dd>
-</dl>
-<dl>
 	<dt><code>adapters</code></dt>
 		<dd><code>NOTES.txt</code> &ndash; notes on the provided adapter files</dd>
 		<dd><code>template.pl</code> &ndash; template adapter file</dd>
 		<dd><code>...</code> &ndash; specific adapter files</dd>
 </dl>
 <dl>
+	<dt><code>coding</code></dt>
+		<dd><code>NOTES.txt</code> &ndash; notes on syntax highlighter and text editor support files providing syntax coloring for publishing and editing Logtalk source code</dd>
+		<dd><code>...</code> &ndash; syntax coloring support files</dd>
+</dl>
+<dl>
 	<dt><code>contributions</code></dt>
 		<dd><code>NOTES.txt</code> &ndash; notes on the user-contributed code</dd>
 		<dd><code>...</code> &ndash; user-contributed code files</dd>
+</dl>
+<dl>
+	<dt><code>core</code></dt>
+		<dd><code>NOTES.txt</code> &ndash; notes on the current status of the compiler and runtime</dd>
+		<dd><code>...</code> &ndash; core source files</dd>
 </dl>
 <dl>
 	<dt><code>examples</code></dt>
@@ -136,15 +141,14 @@ In the Logtalk installation directory, you will find the following files and dir
 		<dd><code>...</code> &ndash; Prolog integration scripts</dd>
 </dl>
 <dl>
-	<dt><code>paths</code></dt>
-		<dd><code>NOTES.txt</code> &ndash; description on how to setup library and examples paths</dd>
-		<dd><code>paths.pl</code> &ndash; default library and example paths</dd>
-</dl>
-<dl>
 	<dt><code>library</code></dt>
 		<dd><code>NOTES.txt</code> &ndash; short description of the library contents</dd>
 		<dd><code>all_loader.lgt</code> &ndash; loader utility file for all library entities</dd>
 		<dd><code>...</code> &ndash; library source files</dd>
+</dl>
+<dl>
+	<dt><code>man</code></dt>
+		<dd><code>...</code> &ndash; POSIX man pages for the shell scripts</dd>
 </dl>
 <dl>
 	<dt><code>manuals</code></dt>
@@ -155,8 +159,13 @@ In the Logtalk installation directory, you will find the following files and dir
 		<dd><code>...</code> &ndash; other documentation files</dd>
 </dl>
 <dl>
-	<dt><code>man</code></dt>
-		<dd><code>...</code> &ndash; POSIX man pages for the shell scripts</dd>
+	<dt><code>paths</code></dt>
+		<dd><code>NOTES.txt</code> &ndash; description on how to setup library and examples paths</dd>
+		<dd><code>paths.pl</code> &ndash; default library and example paths</dd>
+</dl>
+<dl>
+	<dt><code>scratch</code></dt>
+		<dd><code>NOTES.txt</code> &ndash; notes on the scratch directory</dd>
 </dl>
 <dl>
 	<dt><code>scripts</code></dt>
@@ -164,10 +173,16 @@ In the Logtalk installation directory, you will find the following files and dir
 		<dd><code>...</code> &ndash; packaging, installation, and setup scripts</dd>
 </dl>
 <dl>
-	<dt><code>coding</code></dt>
-		<dd><code>NOTES.txt</code> &ndash; notes on syntax highlighter and text editor support files providing syntax coloring for publishing and editing Logtalk source code</dd>
-		<dd><code>...</code> &ndash; syntax coloring support files</dd>
+	<dt><code>tests</code></dt>
+		<dd><code>NOTES.txt</code> &ndash; notes on the current status of the unit tests</dd>
+		<dd><code>...</code> &ndash; unit tests for built-in features</dd>
 </dl>
+<dl>
+	<dt><code>tools</code></dt>
+		<dd><code>NOTES.txt</code> &ndash; notes on the provided programming tools</dd>
+		<dd><code>...</code> &ndash; programming tools</dd>
+</dl>
+<!-->
 <dl>
 	<dt><code>xml</code></dt>
 		<dd><code>NOTES.txt</code> &ndash; notes on the automatic generation of XML documentation files</dd>
@@ -178,6 +193,7 @@ In the Logtalk installation directory, you will find the following files and dir
 		<dd><code>lgt2html.sh</code> &ndash; shell script for converting XML documenting files to (X)HTML files</dd>
 		<dd><code>...</code> &ndash; other script files</dd>
 </dl>
+-->
 
 <h3 id="installing_adapters">Adapter files</h3>
 
@@ -288,7 +304,7 @@ Logtalk source files are text files containing entity definitions (objects, cate
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &ndash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: July 24, 2012</span>
+		<span>Last updated on: November 29, 2012</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="documenting.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="programming.html">next</a></span><br/>

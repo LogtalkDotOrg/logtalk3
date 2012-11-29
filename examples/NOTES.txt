@@ -27,15 +27,15 @@ description of each example is included below.
 Each example folder contains a `NOTES.txt` file and a loader helper file 
 (usually `loader.lgt`) that may be used to load all the example entities. 
 Most examples also contain a `SCRIPT.txt` file with instructions on how 
-to load the example and sample queries for your to try.
+to load the example and sample queries for you to try.
 
-Most of these examples need objects, protocols, and categories that 
+Most of these examples require objects, protocols, and categories that 
 are defined in the Logtalk standard library or in other examples. See 
 the `NOTES.txt` files inside the library folder, plus the `NOTES.txt` 
 and `SCRIPT.txt` files inside each example folder.
 
 Some examples may redefine objects already loaded from other examples.
-You may want to restart Logtalk after trying each example.
+It might be necessary to restart Logtalk after playing with some examples.
 
 Some of the examples have been adapted from public available Prolog code 
 or from known Prolog text books and are copyrighted by the respective 
