@@ -19,7 +19,7 @@
 		this(This),
 		\+ object_property(This, static).
 
-	% all predicates in a dynamic directive are implicitly dynamic
+	% all predicates in a dynamic entity are implicitly dynamic
 
 	:- private(p/0).
 
