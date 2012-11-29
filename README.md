@@ -132,7 +132,7 @@ The reference and user manuals and the tutorial are provided in XHTML format
 and can be found in the `manuals` directory. PDF versions of the reference
 and user manuals can be downloaded from the Logtalk web site.
 
-The file `RELEASE_NOTES.txt` contains descriptions of all Logtalk updates 
+The file `RELEASE_NOTES.md` contains descriptions of all Logtalk updates 
 since the first public version. Read it carefully if you have been using a 
 previous Logtalk version.
 
