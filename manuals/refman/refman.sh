@@ -35,6 +35,12 @@ xslt_proc="xsltproc -path /opt/local/share/xml/xhtml -nonet"
 fo_proc=xep
 # fo_proc=xinc
 
+# this script assumes a catalog file with a single line:
+#	PUBLIC "-//W3C//DTD XHTML 1.1//EN" "xhtml11-flat.dtd"
+#
+# the "xhtml11-flat.dtd" file can be downloaded from:
+#	http://www.w3.org/TR/xhtml11/DTD/xhtml11-flat.dtd
+
 catalog=file:///opt/local/share/xml/xhtml/catalog
 
 # rm -f refman.fo refman.html
