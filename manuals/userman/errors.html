@@ -73,13 +73,13 @@ Singleton variables in a clause are often misspell variables and, as such, one o
 The Logtalk compiler will warn us of any redefinition of a Prolog built-in predicate inside an object or category. Sometimes the redefinition is intended. In other cases, the user may not be aware that the subjacent Prolog compiler may already provide the predicate as a built-in or we may want to ensure code portability among several Prolog compilers with different sets of built-in predicates.
 </p>
 
-<h3 id="errors_predicates">Redefinition of Logtalk built-in predicates</h3>
+<h3 id="errors_redefinion_predicates">Redefinition of Logtalk built-in predicates</h3>
 
 <p>
 Similar to the redefinition of Prolog built-in predicates, the Logtalk compiler will warn us if we try to redefine a Logtalk built-in. The redefinition will probably be an error in almost all (if not all) cases.
 </p>
 
-<h3 id="errors_methods">Redefinition of Logtalk built-in methods</h3>
+<h3 id="errors_redefinion_methods">Redefinition of Logtalk built-in methods</h3>
 
 <p>
 An error will be thrown if we attempt to redefine a Logtalk built-in method inside an entity. The default behavior is to report the error and abort the compilation of the offending entity. 
