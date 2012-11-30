@@ -118,6 +118,7 @@ FSObject.CopyFolder(logtalk_home + "\\contributions", logtalk_user + "\\contribu
 FSObject.CopyFolder(logtalk_home + "\\examples", logtalk_user + "\\examples");
 FSObject.CopyFolder(logtalk_home + "\\library", logtalk_user + "\\library");
 FSObject.CopyFolder(logtalk_home + "\\scratch", logtalk_user + "\\scratch");
+FSObject.CopyFolder(logtalk_home + "\\tests", logtalk_user + "\\tests");
 FSObject.CopyFolder(logtalk_home + "\\tools", logtalk_user + "\\tools");
 FSObject.CopyFile(logtalk_home + "\\settings-sample.lgt", logtalk_user + "\\settings-sample.lgt");
 FSObject.CopyFile(logtalk_home + "\\VERSION.txt", logtalk_user + "\\VERSION.txt");

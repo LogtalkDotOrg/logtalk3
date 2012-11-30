@@ -111,11 +111,13 @@ mkdir -p "$LOGTALKUSER"/contributions
 mkdir -p "$LOGTALKUSER"/examples
 mkdir -p "$LOGTALKUSER"/library
 mkdir -p "$LOGTALKUSER"/scratch
+mkdir -p "$LOGTALKUSER"/tests
 mkdir -p "$LOGTALKUSER"/tools
 cp -RL "$LOGTALKHOME"/contributions "$LOGTALKUSER"/
 cp -RL "$LOGTALKHOME"/examples "$LOGTALKUSER"/
 cp -RL "$LOGTALKHOME"/library "$LOGTALKUSER"/
 cp -RL "$LOGTALKHOME"/scratch "$LOGTALKUSER"/
+cp -RL "$LOGTALKHOME"/tests "$LOGTALKUSER"/
 cp -RL "$LOGTALKHOME"/tools "$LOGTALKUSER"/
 cp "$LOGTALKHOME"/settings-sample.lgt "$LOGTALKUSER"/settings-sample.lgt
 cp "$LOGTALKHOME"/VERSION.txt "$LOGTALKUSER"/

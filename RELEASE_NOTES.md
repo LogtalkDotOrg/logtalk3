@@ -112,6 +112,12 @@ for CxProlog.
 error reporting formats (using the defaults in the `core/core_messages.lgt`
 file).
 
+Installers and installation scripts
+-----------------------------------
+
+* UPDATED: The `logtalk_user_setup.*` scripts to create a copy of the `tests`
+directory in the Logtalk user directory.
+
 
 3.00.0 Alpha 5 - November 5, 2012
 =================================
