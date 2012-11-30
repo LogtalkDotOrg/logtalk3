@@ -268,6 +268,7 @@ cat -s \
 	methods/before3.section \
 	methods/after3.section \
 	methods/call1.section \
+	methods/phrase1.section \
 	methods/phrase2.section \
 	methods/phrase3.section \
 	methods/expand_term2.section \
