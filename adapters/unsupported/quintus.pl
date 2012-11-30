@@ -374,24 +374,24 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 %
 % returns the Logtalk startup directory 
 
-'$lgt_startup_directory'(_) :-
-	fail.
+'$lgt_startup_directory'(Directory) :-
+	unix(argv([_, _, Directory| _])).
 
 
 % '$lgt_user_directory'(-atom)
 %
 % returns the Logtalk user directory; fails if unknown
 
-'$lgt_user_directory'(_) :-
-	fail.
+'$lgt_user_directory'(Directory) :-
+	unix(argv([_, Directory| _])).
 
 
 % '$lgt_home_directory'(-atom)
 %
 % returns the Logtalk home directory; fails if unknown
 
-'$lgt_home_directory'(_) :-
-	fail.
+'$lgt_home_directory'(Directory) :-
+	unix(argv([Directory| _])).
 
 
 
