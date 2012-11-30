@@ -144,6 +144,7 @@ eval $xslt_proc -o methods/setof3.section refman.xsl methods/setof3.html
 eval $xslt_proc -o methods/before3.section refman.xsl methods/before3.html
 eval $xslt_proc -o methods/after3.section refman.xsl methods/after3.html
 eval $xslt_proc -o methods/call1.section refman.xsl methods/call1.html
+eval $xslt_proc -o methods/phrase1.section refman.xsl methods/phrase1.html
 eval $xslt_proc -o methods/phrase2.section refman.xsl methods/phrase2.html
 eval $xslt_proc -o methods/phrase3.section refman.xsl methods/phrase3.html
 eval $xslt_proc -o methods/expand_term2.section refman.xsl methods/expand_term2.html
