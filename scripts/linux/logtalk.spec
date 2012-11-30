@@ -34,7 +34,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc /usr/local/share/lgt3000/LICENSE.txt
 %doc /usr/local/share/lgt3000/QUICK_START.md
 %doc /usr/local/share/lgt3000/README.md
-%doc /usr/local/share/lgt3000/RELEASE_NOTES.txt
+%doc /usr/local/share/lgt3000/RELEASE_NOTES.md
 %doc /usr/local/share/lgt3000/UPGRADING.md
 /usr/local/share/lgt3000/VERSION.txt
 /usr/local/share/lgt3000/compiler
