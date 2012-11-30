@@ -28,7 +28,7 @@
 
 dir=`PWD`
 
-svn export http://svn.logtalk.org/logtalk/trunk lgt3000
+git clone git://github.com/LogtalkDotOrg/logtalk3.git lgt3000
 
 cd lgt3000
 chmod a+x scripts/cleandist.sh
@@ -70,13 +70,13 @@ sha1="`openssl sha1 -r lgt3000.tar.bz2 | xargs -L 1 | sed 's/*lgt3000.tar.bz2//g
 rmd160="`openssl rmd160 -r lgt3000.tar.bz2 | xargs -L 1 | sed 's/*lgt3000.tar.bz2//g'`"
 sudo mkdir -p /opt/local/var/macports/distfiles/logtalk
 sudo cp -f lgt3000.tar.bz2 /opt/local/var/macports/distfiles/logtalk/lgt3000.tar.bz2
-cd /opt/local/var/macports/sources/rsync.macports.org/release/ports/lang/logtalk/
+cd /opt/local/var/macports/sources/rsync.macports.org/release/tarballs/ports/lang/logtalk/
 sudo mv -f Portfile Portfile.old
 sudo cp $dir/lgt3000/scripts/macosx/Portfile .
 sudo sed -e 's/^version.*/version 3.00.0/' -i '' Portfile
 sudo sed -e "s/sha1.*/sha1 $sha1 \\\/" -i '' Portfile
 sudo sed -e "s/rmd160.*/rmd160 $rmd160/" -i '' Portfile
-sudo port clean --archive logtalk
+sudo port clean logtalk
 sudo port destroot logtalk
 sudo port pkg logtalk
 cp -R work/logtalk-3.00.0.pkg $dir

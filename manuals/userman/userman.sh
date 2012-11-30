@@ -36,9 +36,9 @@ fo_proc=xep
 # fo_proc=xinc
 
 # this script assumes a catalog file with a single line:
-#	PUBLIC "-//W3C//DTD XHTML 1.1//EN" "xhtml11-flat.dtd"
+#	PUBLIC "-//W3C//DTD XHTML 1.1//EN" "xhtml11.dtd"
 #
-# the "xhtml11-flat.dtd" file can be downloaded from:
+# the "xhtml11.dtd" file must be a renamed copy of the file:
 #	http://www.w3.org/TR/xhtml11/DTD/xhtml11-flat.dtd
 
 catalog=file:///opt/local/share/xml/xhtml/catalog

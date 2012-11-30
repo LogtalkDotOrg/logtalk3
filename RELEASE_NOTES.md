@@ -79,6 +79,13 @@ supports the soft-cut control construct.
 * IMPROVED: Updated the Lean Prolog adapter file with dummy definitions for the
 ISO Prolog standard predicates `flush_output/0-1`.
 
+Documentation
+-------------
+
+* FIXED: Several issues that prevented using the `scripts/build_release.sh`
+shell script to generate installers and the PDF versions of the User and
+Reference Manuals.
+
 Tools
 -----
 
