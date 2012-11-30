@@ -48,6 +48,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr/local/share/lgt3000/man
 /usr/local/share/lgt3000/scripts
 /usr/local/share/lgt3000/settings-sample.lgt
+/usr/local/share/lgt3000/tests
 /usr/local/share/lgt3000/tools
 /usr/local/share/lgt3000/coding
 /usr/local/share/logtalk
