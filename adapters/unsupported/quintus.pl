@@ -27,8 +27,10 @@
 
 
 :- [library(files)].
+:- [library(directory)].
 :- [library(date)].
 :- [library(strings)].
+:- [library(environ)].
 
 
 
@@ -288,7 +290,21 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 % expands a file path to a full path
 
 '$lgt_expand_path'(Path, ExpandedPath) :-
-	absolute_file_name(Path, ExpandedPath).
+	expanded_file_name(Path, ExpandedPath0),
+	'$lgt_quintus_convert_file_path'(ExpandedPath0, ExpandedPath).
+
+'$lgt_quintus_convert_file_path'(File, Converted) :-
+	atom_codes(File, FileChars),
+	'$lgt_quintus_reverse_slashes'(FileChars, ConvertedChars),
+	atom_codes(Converted, ConvertedChars).
+
+'$lgt_quintus_reverse_slashes'([], []).
+'$lgt_quintus_reverse_slashes'([Char| Chars], [ConvertedChar| ConvertedChars]) :-
+	(	Char =:= 0'\ ->
+		ConvertedChar = 0'/
+	;	ConvertedChar = Char
+	),
+	'$lgt_quintus_reverse_slashes'(Chars, ConvertedChars).
 
 
 % '$lgt_file_exists'(+atom)
@@ -312,8 +328,8 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 % checks if a directory exists
 
 '$lgt_directory_exists'(Directory) :-
-	absolute_file_name(Directory, [access(exist)], _),
-	absolute_file_name(Directory, [file_type(directory)], _).
+	'$lgt_expand_path'(Directory, ExpandedPath),
+	absolute_file_name(ExpandedPath, [access(exist), file_type(directory)], _).
 
 
 % '$lgt_current_directory'(-atom)
@@ -337,8 +353,12 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 % makes a new directory; succeeds if the directory already exists
 
 '$lgt_make_directory'(Directory) :-
-	atom_concat('mkdir -p ', Directory, Command),
-	unix(system(Command)).
+	'$lgt_expand_path'(Directory, Path),
+	(	absolute_file_name(Path, [access(exist), file_type(directory)], _) ->
+		true
+	;	atom_concat('mkdir ', Path, Command),
+		unix(system(Command))
+	).
 
 
 % '$lgt_compile_prolog_code'(+atom, +atom, +list)
@@ -372,8 +392,8 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 %
 % access to operating-system environment variables
 
-'$lgt_environment_variable'(_, _) :-
-	fail.
+'$lgt_environment_variable'(Variable, Value) :-
+	environ(Variable, Value).
 
 
 % '$lgt_startup_directory'(-atom)
@@ -381,7 +401,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 % returns the Logtalk startup directory 
 
 '$lgt_startup_directory'(Directory) :-
-	unix(argv([_, _, Directory| _])).
+	environ('LOGTALK_STARTUP_DIRECTORY', Directory).
 
 
 % '$lgt_user_directory'(-atom)
@@ -389,7 +409,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 % returns the Logtalk user directory; fails if unknown
 
 '$lgt_user_directory'(Directory) :-
-	unix(argv([_, Directory| _])).
+	environ('LOGTALKUSER', Directory).
 
 
 % '$lgt_home_directory'(-atom)
@@ -397,7 +417,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 % returns the Logtalk home directory; fails if unknown
 
 '$lgt_home_directory'(Directory) :-
-	unix(argv([Directory| _])).
+	environ('LOGTALKHOME', Directory).
 
 
 % '$lgt_decompose_file_name'(+atom, ?atom, ?atom, ?atom)
@@ -490,20 +510,6 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  read character predicate
-%
-%  read a single character echoing it and writing a newline after
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-'$lgt_read_single_char'(Char) :-
-	get(Code), name(Char, [Code]).
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
 %  getting stream current line number
 %  (needed for improved compiler error messages)
 %
@@ -527,8 +533,10 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 
 % '$lgt_read_term'(@stream, -term, +list, -position)
 
-'$lgt_read_term'(Stream, Term, Options, -1) :-
-	read_term(Stream, Options, Term).
+'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd) :-
+	line_count(Stream, LineBegin),
+	read_term(Stream, Options, Term),
+	line_count(Stream, LineEnd).
 
 
 
