@@ -31,6 +31,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: Always interpret `assert/1` calls and messages as `assertz/1`.
+Previously, this would require a back-end Prolog compiler supporting the
+`assert/1` built-in predicate.
+
 * IMPROVED: Detect and report an error on attempts to define multifile entity
 predicates in `user`.
 

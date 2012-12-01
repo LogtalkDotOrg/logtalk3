@@ -9452,7 +9452,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	DCond = '$lgt_debug'(goal(abolish(Pred), TCond), ExCtx).
 
 '$lgt_tr_body'(assert(Clause), TCond, DCond, Ctx) :-
-	'$lgt_prolog_built_in_predicate'(assert(_)),
 	!,
 	(	'$lgt_pp_non_portable_predicate_'(assert, 1, _) ->
 		true
@@ -10899,7 +10898,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	).
 
 '$lgt_tr_msg'(assert(Clause), Obj, TPred, This) :-
-	'$lgt_prolog_built_in_predicate'(assert(_)),
 	!,
 	'$lgt_tr_msg'(assertz(Clause), Obj, TPred, This).
 
@@ -11063,7 +11061,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	).
 
 '$lgt_tr_self_msg'(assert(Clause), TPred, This, Self) :-
-	'$lgt_prolog_built_in_predicate'(assert(_)),
 	!,
 	'$lgt_tr_self_msg'(assertz(Clause), TPred, This, Self).
 
