@@ -31,6 +31,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: Detect and report an error on attempts to define multifile entity
+predicates in `user`.
+
 * CHANGED: The default procedure for printing messages (not intercepted by
 the user) now adds begin/2 and end/1 tokens to, respectively, the start and
 the end of the list of tokens. These two tokens can be intercepted by the

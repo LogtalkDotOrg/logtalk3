@@ -6147,6 +6147,14 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_pp_term_location'(Location),
 	assertz('$lgt_pp_prolog_term_'((:- set_prolog_flag(Flag, Value)), Location)).
 
+'$lgt_tr_file_directive'(multifile(Preds), _) :-
+	'$lgt_flatten_list'([Preds], PredsFlatted),
+	'$lgt_member'(Obj::Functor/Arity, PredsFlatted),
+	% Logtalk multifile predicates must be defined within an entity but
+	% be sure there isn't a non-instantiation error in the directive
+	ground(Obj::Functor/Arity),
+	throw(error(permission_error(declare, multifile_predicate, Obj::Functor/Arity), multifile(Preds))).
+
 '$lgt_tr_file_directive'(Directive, _) :-
 	'$lgt_pp_term_location'(Location),
 	% directive will be copied to the generated Prolog file
