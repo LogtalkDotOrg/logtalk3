@@ -31,6 +31,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* FIXED: Bug in the "super" clauses for the built-in objects `logtalk` and
+`user` introduced in the previous alpha release.
+
 * CHANGED: Always interpret `assert/1` calls and messages as `assertz/1`.
 Previously, this would require a back-end Prolog compiler supporting the
 `assert/1` built-in predicate.

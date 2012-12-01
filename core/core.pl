@@ -4322,7 +4322,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_logtalk._ddef'(Pred, ExCtx, Call).
 
 
-'$lgt_logtalk._super'(_, _, _, _) :-
+'$lgt_logtalk._super'(_, _, _, _, _) :-
 	fail.
 
 
@@ -4550,7 +4550,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_user._def'(Pred, _, Pred).
 
 
-'$lgt_user._super'(_, _, _, _) :-
+'$lgt_user._super'(_, _, _, _, _) :-
 	fail.
 
 
