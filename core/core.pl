@@ -15035,6 +15035,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_built_in_method'(predicate_property, 2, p(p(p)), no, 1).
 % database methods
 '$lgt_built_in_method'(abolish, 1, p(p(p)), abolish((::)), 1).
+'$lgt_built_in_method'(assert, 1, p(p(p)), assert((::)), 1).	% just for compatibility with old code!
 '$lgt_built_in_method'(asserta, 1, p(p(p)), asserta((::)), 1).
 '$lgt_built_in_method'(assertz, 1, p(p(p)), assertz((::)), 1).
 '$lgt_built_in_method'(clause, 2, p(p(p)), clause((::), *), 1).
