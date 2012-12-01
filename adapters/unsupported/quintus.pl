@@ -28,6 +28,7 @@
 
 :- [library(files)].
 :- [library(date)].
+:- [library(strings)].
 
 
 
@@ -54,6 +55,7 @@
 '$lgt_iso_predicate'(catch(_, _, _)).
 '$lgt_iso_predicate'(number_codes(_, _)).
 '$lgt_iso_predicate'(once(_)).
+'$lgt_iso_predicate'(sub_atom(_, _, _, _, _)).
 '$lgt_iso_predicate'(throw(_)).
 
 
@@ -93,6 +95,10 @@ number_codes(Number, Codes) :-
 once(Goal) :-
 	call(Goal),
 	!.
+
+
+sub_atom(Atom, Before, Length, After, SubAtom) :-
+	substring(Atom, SubAtom, Before, Length, After).
 
 
 throw(Ball) :-
@@ -331,7 +337,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 % makes a new directory; succeeds if the directory already exists
 
 '$lgt_make_directory'(Directory) :-
-	concat_atom(['mkdir -p ', Directory], Command),
+	atom_concat('mkdir -p ', Directory, Command),
 	unix(system(Command)).
 
 
@@ -392,6 +398,52 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 
 '$lgt_home_directory'(Directory) :-
 	unix(argv([Directory| _])).
+
+
+% '$lgt_decompose_file_name'(+atom, ?atom, ?atom, ?atom)
+%
+% decomposes a file path in its components; the directory
+% must always end with a slash and the extension must be
+% the empty atom when it does not exist
+
+'$lgt_decompose_file_name'(File, Directory, Name, Extension) :-
+	atom_codes(File, FileCodes),
+	(	'$lgt_strrch'(FileCodes, 0'/, [_Slash| BasenameCodes]) ->
+		atom_codes(Basename, BasenameCodes),
+		atom_concat(Directory, Basename, File)
+	;	Directory = './',
+		atom_codes(Basename, FileCodes),
+		BasenameCodes = FileCodes
+	),
+	(	'$lgt_strrch'(BasenameCodes, 0'., ExtensionCodes) ->
+		atom_codes(Extension, ExtensionCodes),
+		atom_concat(Name, Extension, Basename)
+	;	Name = Basename,
+		Extension = ''
+	).
+
+% the following auxiliar predicate was written by Per Mildner and 
+% is used here (renamed just to avoid conflicts) with permission
+
+'$lgt_strrch'(Xs, G, Ys) :-
+	Xs = [X| Xs1],
+	(	X == G ->
+		'$lgt_strrch1'(Xs1, G, Xs, Ys)
+	;	'$lgt_strrch'(Xs1, G, Ys)
+	).
+
+'$lgt_strrch1'(Xs, _G, _Prev, _Ys) :-
+	var(Xs),
+	!,
+	fail.
+'$lgt_strrch1'([], _G, Prev, Ys) :-
+	Ys = Prev.
+'$lgt_strrch1'(Xs, G, Prev, Ys) :-
+	Xs = [X| Xs1],
+	(	X == G ->
+		'$lgt_strrch1'(Xs1, G, Xs, Ys)
+	;	'$lgt_strrch1'(Xs1, G, Prev, Ys)
+	).
 
 
 
