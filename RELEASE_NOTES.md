@@ -25,8 +25,8 @@ RELEASE NOTES
 =============
 
 
-3.00.0 Alpha 6 - December ??, 2012
-==================================
+3.00.0 Alpha 6 - December 3, 2012
+=================================
 
 Logtalk compiler and runtime
 ----------------------------
@@ -86,8 +86,12 @@ coloring.
 version required. This version allows some coinduction examples to run as it
 supports the soft-cut control construct.
 
-* IMPROVED: Updated the Lean Prolog adapter file with dummy definitions for the
-ISO Prolog standard predicates `flush_output/0-1`.
+* IMPROVED: Updated the Lean Prolog adapter file with dummy definitions for
+the ISO Prolog standard predicates `flush_output/0-1`.
+
+* UPDATED: Added missing predicate definitions to the Quintus Prolog adapter
+file (but this compiler can still only be supported with a hacked version of
+the Logtalk compiler/runtime).
 
 Documentation
 -------------
