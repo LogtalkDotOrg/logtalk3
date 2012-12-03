@@ -31,6 +31,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: Compile-time error-checking of calls to the reflection built-in
+methods.
+
 * CHANGED: Exception terms used for permission and existence errors thrown
 by the built-in database methods to use a predicate indicator instead of a
 predicate head.

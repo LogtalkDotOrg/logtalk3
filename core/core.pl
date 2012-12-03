@@ -9391,11 +9391,14 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	functor(Head, HeadFunctor, Arity),
 	'$lgt_tr_body'(Obj::current_predicate(HeadFunctor/Arity), TCond, DCond, Ctx).
 
-'$lgt_tr_body'(current_predicate(Pred), '$lgt_current_predicate'(This, Pred, This, p(_)), '$lgt_debug'(goal(current_predicate(Pred), '$lgt_current_predicate'(This, Pred, This, p(_))), ExCtx), Ctx) :-
+'$lgt_tr_body'(current_predicate(Pred), TPred, DPred, Ctx) :-
 	!,
+	'$lgt_must_be'(var_or_predicate_indicator, Pred),
 	'$lgt_comp_ctx_this'(Ctx, This),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	'$lgt_exec_ctx_this'(ExCtx, This).
+	'$lgt_exec_ctx_this'(ExCtx, This),
+	TPred = '$lgt_current_predicate'(This, Pred, This, p(_)),
+	DPred = '$lgt_debug'(goal(current_predicate(Pred), TPred), ExCtx).
 
 '$lgt_tr_body'(predicate_property(Term, Prop), TPred, DPred, Ctx) :-
 	nonvar(Term),
@@ -9414,16 +9417,19 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_tr_body'(predicate_property(Alias, Prop), TCond, DCond, Ctx) :-
 	nonvar(Alias),
-	'$lgt_must_be'(callable, Alias),
 	'$lgt_pp_uses_predicate_'(Obj, Head, Alias),
 	!,
 	'$lgt_tr_body'(Obj::predicate_property(Head, Prop), TCond, DCond, Ctx).
 
-'$lgt_tr_body'(predicate_property(Pred, Prop), '$lgt_predicate_property'(This, Pred, Prop, This, p(_)), '$lgt_debug'(goal(predicate_property(Pred, Prop), '$lgt_predicate_property'(This, Pred, Prop, This, p(_))), ExCtx), Ctx) :-
+'$lgt_tr_body'(predicate_property(Pred, Prop), TPred, DPred, Ctx) :-
 	!,
+	'$lgt_must_be'(var_or_callable, Pred),
+	'$lgt_must_be'(var_or_predicate_property, Prop),
 	'$lgt_comp_ctx_this'(Ctx, This),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	'$lgt_exec_ctx_this'(ExCtx, This).
+	'$lgt_exec_ctx_this'(ExCtx, This),
+	TPred = '$lgt_predicate_property'(This, Pred, Prop, This, p(_)),
+	DPred = '$lgt_debug'(goal(predicate_property(Pred, Prop), TPred), ExCtx).
 
 
 % database handling built-in predicates
@@ -10900,10 +10906,13 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % "reflection" built-in predicates
 
 '$lgt_tr_msg'(current_predicate(Pred), Obj, '$lgt_current_predicate'(Obj, Pred, This, p(p(p))), This) :-
-	!.
+	!,
+	'$lgt_must_be'(var_or_predicate_indicator, Pred).	
 
 '$lgt_tr_msg'(predicate_property(Pred, Prop), Obj, '$lgt_predicate_property'(Obj, Pred, Prop, This, p(p(p))), This) :-
-	!.
+	!,
+	'$lgt_must_be'(var_or_callable, Pred),
+	'$lgt_must_be'(var_or_predicate_property, Prop).
 
 % database handling built-in predicates
 
@@ -11063,10 +11072,13 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % "reflection" built-in predicates
 
 '$lgt_tr_self_msg'(current_predicate(Pred), '$lgt_current_predicate'(Self, Pred, This, p(_)), This, Self) :-
-	!.
+	!,
+	'$lgt_must_be'(var_or_predicate_indicator, Pred).	
 
 '$lgt_tr_self_msg'(predicate_property(Pred, Prop), '$lgt_predicate_property'(Self, Pred, Prop, This, p(_)), This, Self) :-
-	!.
+	!,
+	'$lgt_must_be'(var_or_callable, Pred),
+	'$lgt_must_be'(var_or_predicate_property, Prop).
 
 % database handling built-in predicates
 
