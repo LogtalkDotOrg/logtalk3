@@ -31,10 +31,13 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: Exception terms used for permission and existence errors thrown
+by the built-in database methods to use a predicate indicator instead of a
+predicate head.
+
 * FIXED: Bug in the `abolish/1` built-in method when trying to abolish a
 non-existing predicate of an object that doesn't allow dynamic declaration
-of new predicates. Also fixed exceptions thrown by this method to match
-the documentation.
+of new predicates.
 
 * FIXED: Bug in the "super" clauses for the built-in objects `logtalk` and
 `user` introduced in the previous alpha release.

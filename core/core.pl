@@ -2490,13 +2490,15 @@ current_logtalk_flag(version, version(3, 0, 0)).
 			;	asserta((THead :- ('$lgt_nop'(Body), TBody)))
 			)
 		;	% predicate is not within the scope of the sender:
+			functor(Head, Functor, Arity),
 			(	Scope == p ->
-				throw(error(permission_error(modify, private_predicate, Head), logtalk(Obj::asserta((Head:-Body)), Sender)))
-			;	throw(error(permission_error(modify, protected_predicate, Head), logtalk(Obj::asserta((Head:-Body)), Sender)))
+				throw(error(permission_error(modify, private_predicate, Functor/Arity), logtalk(Obj::asserta((Head:-Body)), Sender)))
+			;	throw(error(permission_error(modify, protected_predicate, Functor/Arity), logtalk(Obj::asserta((Head:-Body)), Sender)))
 			)
 		)
 	;	% predicate is static:
-		throw(error(permission_error(modify, static_predicate, Head), logtalk(Obj::asserta((Head:-Body)), Sender)))
+		functor(Head, Functor, Arity),
+		throw(error(permission_error(modify, static_predicate, Functor/Arity), logtalk(Obj::asserta((Head:-Body)), Sender)))
 	).
 
 '$lgt_asserta_rule_checked'(Obj, (Head:-Body), Sender, _, _) :-
@@ -2521,13 +2523,15 @@ current_logtalk_flag(version, version(3, 0, 0)).
 				asserta(THead)
 			)
 		;	% predicate is not within the scope of the sender:
+			functor(Head, Functor, Arity),
 			(	Scope == p ->
-				throw(error(permission_error(modify, private_predicate, Head), logtalk(Obj::asserta(Head), Sender)))
-			;	throw(error(permission_error(modify, protected_predicate, Head), logtalk(Obj::asserta(Head), Sender)))
+				throw(error(permission_error(modify, private_predicate, Functor/Arity), logtalk(Obj::asserta(Head), Sender)))
+			;	throw(error(permission_error(modify, protected_predicate, Functor/Arity), logtalk(Obj::asserta(Head), Sender)))
 			)
 		)
 	;	% predicate is static:
-		throw(error(permission_error(modify, static_predicate, Head), logtalk(Obj::asserta(Head), Sender)))
+		functor(Head, Functor, Arity),
+		throw(error(permission_error(modify, static_predicate, Functor/Arity), logtalk(Obj::asserta(Head), Sender)))
 	).
 
 '$lgt_asserta_fact_checked'(Obj, Head, Sender, _, _) :-
@@ -2571,13 +2575,15 @@ current_logtalk_flag(version, version(3, 0, 0)).
 			;	assertz((THead :- ('$lgt_nop'(Body), TBody)))
 			)
 		;	% predicate is not within the scope of the sender:
+			functor(Head, Functor, Arity),
 			(	Scope == p ->
-				throw(error(permission_error(modify, private_predicate, Head), logtalk(Obj::assertz((Head:-Body)), Sender)))
-			;	throw(error(permission_error(modify, protected_predicate, Head), logtalk(Obj::assertz((Head:-Body)), Sender)))
+				throw(error(permission_error(modify, private_predicate, Functor/Arity), logtalk(Obj::assertz((Head:-Body)), Sender)))
+			;	throw(error(permission_error(modify, protected_predicate, Functor/Arity), logtalk(Obj::assertz((Head:-Body)), Sender)))
 			)
 		)
 	;	% predicate is static:
-		throw(error(permission_error(modify, static_predicate, Head), logtalk(Obj::assertz((Head:-Body)), Sender)))
+		functor(Head, Functor, Arity),
+		throw(error(permission_error(modify, static_predicate, Functor/Arity), logtalk(Obj::assertz((Head:-Body)), Sender)))
 	).
 
 '$lgt_assertz_rule_checked'(Obj, (Head:-Body), Sender, _, _) :-
@@ -2602,13 +2608,15 @@ current_logtalk_flag(version, version(3, 0, 0)).
 				assertz(THead)
 			)
 		;	% predicate is not within the scope of the sender:
+			functor(Head, Functor, Arity),
 			(	Scope == p ->
-				throw(error(permission_error(modify, private_predicate, Head), logtalk(Obj::assertz(Head), Sender)))
-			;	throw(error(permission_error(modify, protected_predicate, Head), logtalk(Obj::assertz(Head), Sender)))
+				throw(error(permission_error(modify, private_predicate, Functor/Arity), logtalk(Obj::assertz(Head), Sender)))
+			;	throw(error(permission_error(modify, protected_predicate, Functor/Arity), logtalk(Obj::assertz(Head), Sender)))
 			)
 		)
 	;	% predicate is static:
-		throw(error(permission_error(modify, static_predicate, Head), logtalk(Obj::assertz(Head), Sender)))
+		functor(Head, Functor, Arity),
+		throw(error(permission_error(modify, static_predicate, Functor/Arity), logtalk(Obj::assertz(Head), Sender)))
 	).
 
 '$lgt_assertz_fact_checked'(Obj, Head, Sender, _, _) :-
@@ -2642,7 +2650,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		assertz(Clause),
 		Scope = DclScope, Type = (dynamic), Meta = no, SCtn = Obj
 	;	% object doesn't allow dynamic declaration of new predicates:
-		throw(error(permission_error(create, predicate_declaration, Pred), logtalk(Goal, Sender)))
+		functor(Pred, Functor, Arity),
+		throw(error(permission_error(create, predicate_declaration, Functor/Arity), logtalk(Goal, Sender)))
 	).
 
 
@@ -2786,13 +2795,15 @@ current_logtalk_flag(version, version(3, 0, 0)).
 					)
 				)
 			;	% predicate is not within the scope of the sender:
+				functor(Head, Functor, Arity),
 				(	Scope == p ->
-					throw(error(permission_error(modify, private_predicate, Head), logtalk(Obj::retract((Head:-Body)), Sender)))
-				;	throw(error(permission_error(modify, protected_predicate, Head), logtalk(Obj::retract((Head:-Body)), Sender)))
+					throw(error(permission_error(modify, private_predicate, Functor/Arity), logtalk(Obj::retract((Head:-Body)), Sender)))
+				;	throw(error(permission_error(modify, protected_predicate, Functor/Arity), logtalk(Obj::retract((Head:-Body)), Sender)))
 				)
 			)
 		;	% predicate is static:
-			throw(error(permission_error(modify, static_predicate, Head), logtalk(Obj::retract((Head:-Body)), Sender)))
+			functor(Head, Functor, Arity),
+			throw(error(permission_error(modify, static_predicate, Functor/Arity), logtalk(Obj::retract((Head:-Body)), Sender)))
 		)
 	;	% local dynamic predicate with no scope declaration:
 		(	Obj = Sender,
@@ -2826,13 +2837,15 @@ current_logtalk_flag(version, version(3, 0, 0)).
 					retract((THead :- ('$lgt_nop'(Body), _)))
 				)
 			;	% predicate is not within the scope of the sender:
+				functor(Head, Functor, Arity),
 				(	Scope == p ->
-					throw(error(permission_error(modify, private_predicate, Head), logtalk(Obj::retract((Head:-Body)), Sender)))
-				;	throw(error(permission_error(modify, protected_predicate, Head), logtalk(Obj::retract((Head:-Body)), Sender)))
+					throw(error(permission_error(modify, private_predicate, Functor/Arity), logtalk(Obj::retract((Head:-Body)), Sender)))
+				;	throw(error(permission_error(modify, protected_predicate, Functor/Arity), logtalk(Obj::retract((Head:-Body)), Sender)))
 				)
 			)
 		;	% predicate is static:
-			throw(error(permission_error(modify, static_predicate, Head), logtalk(Obj::retract((Head:-Body)), Sender)))
+			functor(Head, Functor, Arity),
+			throw(error(permission_error(modify, static_predicate, Functor/Arity), logtalk(Obj::retract((Head:-Body)), Sender)))
 		)
 	;	% local dynamic predicate with no scope declaration:
 		(	Obj = Sender,
@@ -2875,13 +2888,15 @@ current_logtalk_flag(version, version(3, 0, 0)).
 					)
 				)
 			;	% predicate is not within the scope of the sender:
+				functor(Head, Functor, Arity),
 				(	Scope == p ->
-					throw(error(permission_error(modify, private_predicate, Head), logtalk(Obj::retract(Head), Sender)))
-				;	throw(error(permission_error(modify, protected_predicate, Head), logtalk(Obj::retract(Head), Sender)))
+					throw(error(permission_error(modify, private_predicate, Functor/Arity), logtalk(Obj::retract(Head), Sender)))
+				;	throw(error(permission_error(modify, protected_predicate, Functor/Arity), logtalk(Obj::retract(Head), Sender)))
 				)
 			)
 		;	% predicate is static:
-			throw(error(permission_error(modify, static_predicate, Head), logtalk(Obj::retract(Head), Sender)))
+			functor(Head, Functor, Arity),
+			throw(error(permission_error(modify, static_predicate, Functor/Arity), logtalk(Obj::retract(Head), Sender)))
 		)
 	;	% local dynamic predicate with no scope declaration:
 		(	call(DDef, Head, _, THead) ->
@@ -2934,13 +2949,15 @@ current_logtalk_flag(version, version(3, 0, 0)).
 				;	true
 				)
 			;	% predicate is not within the scope of the sender:
+				functor(Head, Functor, Arity),
 				(	Scope == p ->
-					throw(error(permission_error(modify, private_predicate, Head), logtalk(Obj::retractall(Head), Sender)))
-				;	throw(error(permission_error(modify, protected_predicate, Head), logtalk(Obj::retractall(Head), Sender)))
+					throw(error(permission_error(modify, private_predicate, Functor/Arity), logtalk(Obj::retractall(Head), Sender)))
+				;	throw(error(permission_error(modify, protected_predicate, Functor/Arity), logtalk(Obj::retractall(Head), Sender)))
 				)
 			)
 		;	% predicate is static:
-			throw(error(permission_error(modify, static_predicate, Head), logtalk(Obj::retractall(Head), Sender)))
+			functor(Head, Functor, Arity),
+			throw(error(permission_error(modify, static_predicate, Functor/Arity), logtalk(Obj::retractall(Head), Sender)))
 		)
 	;	% local dynamic predicate with no scope declaration:
 		(	Obj = Sender,
