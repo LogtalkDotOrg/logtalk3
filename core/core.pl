@@ -2400,26 +2400,27 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 '$lgt_abolish_checked'(Obj, Functor/Arity, Sender, TestScope) :-
-	'$lgt_current_object_'(Obj, _, Dcl, _, _, _, _, DDcl, DDef, _, _),
+	'$lgt_current_object_'(Obj, _, Dcl, _, _, _, _, DDcl, DDef, _, ObjFlags),
 	!,
 	functor(Pred, Functor, Arity),
-	(	call(Dcl, Pred, Scope, _, Flags) ->
+	(	call(Dcl, Pred, Scope, _, PredFlags) ->
 		% local static predicate declaration found
 		(	(Scope = TestScope; Sender = Obj) ->
 			% predicate is within the scope of the sender
-			(	Flags /\ 2 =:= 2 ->
+			(	PredFlags /\ 2 =:= 2 ->
 				% static declaration for a dynamic predicate
-				throw(error(permission_error(modify, predicate_declaration, Pred), logtalk(Obj::abolish(Functor/Arity), Sender)))
+				throw(error(permission_error(modify, predicate_declaration, Functor/Arity), logtalk(Obj::abolish(Functor/Arity), Sender)))
 			;	% predicate is static:
-				throw(error(permission_error(modify, static_predicate, Pred), logtalk(Obj::abolish(Functor/Arity), Sender)))
+				throw(error(permission_error(modify, static_predicate, Functor/Arity), logtalk(Obj::abolish(Functor/Arity), Sender)))
 			)
 		;	% predicate is not within the scope of the sender
 			(	Scope == p ->
-				throw(error(permission_error(modify, private_predicate, Pred), logtalk(Obj::abolish(Functor/Arity), Sender)))
-			;	throw(error(permission_error(modify, protected_predicate, Pred), logtalk(Obj::abolish(Functor/Arity), Sender)))
+				throw(error(permission_error(modify, private_predicate, Functor/Arity), logtalk(Obj::abolish(Functor/Arity), Sender)))
+			;	throw(error(permission_error(modify, protected_predicate, Functor/Arity), logtalk(Obj::abolish(Functor/Arity), Sender)))
 			)
 		)
-	;	% no static predicate declaration; check for a dynamic declaration
+	;	% no static predicate declaration; check for a dynamic declaration if allowed
+		ObjFlags /\ 64 =:= 64,
 		functor(DDclClause, DDcl, 2),
 		arg(1, DDclClause, Pred),
 		call(DDclClause) ->

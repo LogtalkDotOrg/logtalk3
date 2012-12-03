@@ -31,6 +31,11 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* FIXED: Bug in the `abolish/1` built-in method when trying to abolish a
+non-existing predicate of an object that doesn't allow dynamic declaration
+of new predicates. Also fixed exceptions thrown by this method to match
+the documentation.
+
 * FIXED: Bug in the "super" clauses for the built-in objects `logtalk` and
 `user` introduced in the previous alpha release.
 
