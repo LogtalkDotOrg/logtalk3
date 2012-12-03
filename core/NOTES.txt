@@ -29,7 +29,9 @@ for Logtalk core messages.
 
 Before loading the `core.pl` file into your favorite Prolog compiler,
 you must first load the appropriated adapter file for your Prolog
-compiler that you will find in the `adapters` directory.
+compiler, which you will find in the `adapters` directory, and the
+`paths/paths.pl` file, which defines essential library paths for
+starting Logtalk.
 
 The source files are formatted using tabs (the recommended setting is
 a tab width equivalent to 4 spaces).
