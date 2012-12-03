@@ -50,6 +50,12 @@
 <dl>
 	<dt>Predicate is neither a variable nor a valid predicate indicator:</dt>
 		<dd><code>type_error(predicate_indicator, Predicate)</code></dd>
+	<dt>Predicate is a Functor/Arity term but Functor is neither a variable nor an atom:</dt>
+		<dd><code>type_error(atom, Name)</code></dd>
+	<dt>Predicate is a Functor/Arity term but Arity is neither a variable nor an integer:</dt>
+		<dd><code>type_error(integer, Arity)</code></dd>
+	<dt>Predicate is a Functor/Arity term but Arity is a negative integer:</dt>
+		<dd><code>domain_error(not_less_than_zero, Arity)</code></dd>
 </dl>
 
 <h4>Examples</h4>
@@ -66,7 +72,7 @@
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: April 29, 2009</span>
+		<span>Last updated on: December 3, 2012</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="../index.html#methods">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="predicate_property2.html">next</a></span><br/>

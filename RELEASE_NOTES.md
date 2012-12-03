@@ -31,6 +31,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* FIXED: Documentation of the error conditions for the `current_predicate/1`
+built-in reflection method.
+
 * IMPROVED: Compile-time error-checking of calls to the reflection built-in
 methods.
 
