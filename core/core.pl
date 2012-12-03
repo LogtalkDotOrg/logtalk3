@@ -3511,7 +3511,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_exec_ctx'(ExCtx, _, This, Self, _, _),
 	'$lgt_current_object_'(Self, _, Dcl, _, _, _, _, _, _, _, _),
 	(	% lookup predicate declaration (the predicate must not be
-	 	% declared in the same entity making the "super" call):
+		% declared in the same entity making the "super" call):
 		call(Dcl, Pred, Scope, _, _, SCtn, TCtn), TCtn \= This ->
 		(	% check scope
 			(Scope = p(_); This = SCtn) ->
@@ -3580,7 +3580,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_ctg_super_call_nv'(Ctg, Pred, ExCtx) :-
 	'$lgt_current_category_'(Ctg, _, Dcl, Def, _, _),
 	(	% lookup predicate declaration (the predicate must not be
-	 	% declared in the same entity making the "super" call):
+		% declared in the same entity making the "super" call):
 		call(Dcl, Pred, Scope, _, _, DclCtn), DclCtn \= Ctg ->
 		(	% check that the call is within scope
 			Scope = p(_) ->
@@ -7962,7 +7962,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_check_entity_info_key_value'(copyright, Copyright) :-
 	(	atom(Copyright) ->
-	 	true
+		true
 	;	Copyright = {EntityName}, atom(EntityName) ->
 		true
 	;	throw(type_error(atom, Copyright))
@@ -7970,7 +7970,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_check_entity_info_key_value'(license, License) :-
 	(	atom(License) ->
-	 	true
+		true
 	;	License = {EntityName}, atom(EntityName) ->
 		true
 	;	throw(type_error(atom, License))
@@ -18157,12 +18157,14 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	atom_concat(settings, Extension, SettingsFile),
 	% save the current directory
 	'$lgt_current_directory'(Current),
+	% define the compiler options to be used for compiling and loading the settings file
+	CompilerOptions = [report(off), smart_compilation(off), clean(on), reload(skip), scratch_directory(ScratchDirectory)],
 	(	% first lookup for a settings file in the startup directory
 		'$lgt_startup_directory'(Startup),
 		'$lgt_change_directory'(Startup),
 		'$lgt_file_exists'(SettingsFile) ->
 		catch(
-			(logtalk_load(settings, [report(off), smart_compilation(off), clean(on), reload(skip), scratch_directory(ScratchDirectory)]),
+			(logtalk_load(settings, CompilerOptions),
 			 Result = loaded(Startup)),
 			Error,
 			Result = error(Startup, Error)
@@ -18172,7 +18174,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		'$lgt_change_directory'(User),
 		'$lgt_file_exists'(SettingsFile) ->
 		catch(
-			(logtalk_load(settings, [report(off), smart_compilation(off), clean(on), reload(skip), scratch_directory(ScratchDirectory)]),
+			(logtalk_load(settings, CompilerOptions),
 			 Result = loaded(User)),
 			Error,
 			Result = error(User, Error)
