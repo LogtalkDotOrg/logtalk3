@@ -57,14 +57,14 @@ This method may be used to enumerate clauses for predicates that are not declare
 		<dd><code>type_error(callable, Head)</code></dd>
 	<dt>Body is a neither a variable nor a callable term:</dt>
 		<dd><code>type_error(callable, Body)</code></dd>
-	<dt>The predicate indicator of Head is that of a private predicate:</dt>
-		<dd><code>permission_error(access, private_predicate, Head)</code></dd>
-	<dt>The predicate indicator of Head is that of a protected predicate:</dt>
-		<dd><code>permission_error(access, protected_predicate, Head)</code></dd>
-	<dt>The predicate indicator of Head is that of a static predicate:</dt>
-		<dd><code>permission_error(access, static_predicate, Head)</code></dd>
+	<dt>The predicate indicator of Head, Functor/Arity, is that of a private predicate:</dt>
+		<dd><code>permission_error(access, private_predicate, Functor/Arity)</code></dd>
+	<dt>The predicate indicator of Head, Functor/Arity, is that of a protected predicate:</dt>
+		<dd><code>permission_error(access, protected_predicate, Functor/Arity)</code></dd>
+	<dt>The predicate indicator of Head, Functor/Arity, is that of a static predicate:</dt>
+		<dd><code>permission_error(access, static_predicate, Functor/Arity)</code></dd>
 	<dt>Head is not a declared predicate:</dt>
-		<dd><code>existence_error(predicate_declaration, Head)</code></dd>
+		<dd><code>existence_error(predicate_declaration, Functor/Arity)</code></dd>
 </dl>
 
 <h4>Examples</h4>
@@ -81,7 +81,7 @@ This method may be used to enumerate clauses for predicates that are not declare
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: June 30, 2009</span>
+		<span>Last updated on: December 3, 2012</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="assertz1.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="retract1.html">next</a></span><br/>
