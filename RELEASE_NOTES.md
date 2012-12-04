@@ -25,6 +25,16 @@ RELEASE NOTES
 =============
 
 
+3.00.0 Alpha 7 - December ??, 2012
+==================================
+
+Logtalk compiler and runtime
+----------------------------
+
+* CHANGED: Save entity operator declarations also when the `source_data` flag
+is off.
+
+
 3.00.0 Alpha 6 - December 3, 2012
 =================================
 

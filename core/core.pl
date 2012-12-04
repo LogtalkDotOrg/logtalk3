@@ -5179,11 +5179,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	fail.
 
 '$lgt_add_entity_properties'(end, Entity) :-
-	'$lgt_pp_entity_operator_'(Priority, Specifier, Operator, Scope),
-	assertz('$lgt_pp_entity_runtime_clause_'('$lgt_entity_property_'(Entity, op(Priority, Specifier, Operator, Scope)))),
-	fail.
-
-'$lgt_add_entity_properties'(end, Entity) :-
 	'$lgt_pp_info_'(Info0),
 	'$lgt_convert_info_items'(Info0, Info),
 	assertz('$lgt_pp_entity_runtime_clause_'('$lgt_entity_property_'(Entity, info(Info)))),
@@ -5665,7 +5660,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	true
 	),
 	op(Priority, Specifier, Operator),
-	assertz('$lgt_pp_entity_operator_'(Priority, Specifier, Operator, Scope)).
+	assertz('$lgt_pp_entity_operator_'(Priority, Specifier, Operator, Scope)),
+	assertz('$lgt_pp_entity_runtime_clause_'('$lgt_entity_property_'(Entity, op(Priority, Specifier, Operator, Scope)))).
 
 
 
