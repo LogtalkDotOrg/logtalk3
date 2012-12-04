@@ -53,7 +53,7 @@ Predicate directives should always precede the corresponding predicate definitio
 <h3 id="predicates_scope">Scope directives</h3>
 
 <p>
-A predicate can be <em>public</em>, <em>protected</em>, <em>private</em>, or <em>local</em>. Public predicates can be called from any object. Protected predicates can only be called from the container object or from a container descendant. Private predicates can only be called from the container object. Local predicates, like private predicates, can only be called from the container object (or category) but they are <em>invisible</em> to the reflection built-in methods (<code>current_predicate/1</code> and <code>predicate_property/2</code>) and to the message error handling mechanisms (i.e. sending a message corresponding to a local predicate results in a <code>predicate_declaration</code> existence error, not in a scope error).
+A predicate can be <em>public</em>, <em>protected</em>, <em>private</em>, or <em>local</em>. Public predicates can be called from any object. Protected predicates can only be called from the container object or from a container descendant. Private predicates can only be called from the container object. Local predicates, like private predicates, can only be called from the container object (or category) but they are <em>invisible</em> to the reflection built-in methods (<code>current_op/3</code>, <code>current_predicate/1</code>, and <code>predicate_property/2</code>) and to the message error handling mechanisms (i.e. sending a message corresponding to a local predicate results in a <code>predicate_declaration</code> existence error, not in a scope error).
 </p>
 <p>
 The scope declarations are made using the directives <a title="Consult reference manual" href="../refman/directives/public1.html"><code>public/1</code></a>, <a title="Consult reference manual" href="../refman/directives/protected1.html"><code>protected/1</code></a>, and <a title="Consult reference manual" href="../refman/directives/private1.html"><code>private/1</code></a>. For example:
@@ -658,7 +658,7 @@ The usual all solutions meta-predicates are built-in private methods in Logtalk:
 <h3 id="predicates_reflection">Reflection methods</h3>
 
 <p>
-Logtalk provides two built-in methods for inspecting object predicates: <a title="Consult reference manual" href="../refman/methods/predicate_property2.html"><code>predicate_property/2</code></a>, which returns predicate properties and <a title="Consult reference manual" href="../refman/methods/current_predicate1.html"><code>current_predicate/1</code></a>, which enables us to query about predicate definitions. See below for a more detailed description of both methods.
+Logtalk provides built-in methods for inspecting object operators and predicates: <a title="Consult reference manual" href="../refman/methods/current_op3.html"><code>current_op/3</code></a>, which returns operator specifications, <a title="Consult reference manual" href="../refman/methods/predicate_property2.html"><code>predicate_property/2</code></a>, which returns predicate properties, and <a title="Consult reference manual" href="../refman/methods/current_predicate1.html"><code>current_predicate/1</code></a>, which enables us to query about predicate definitions. See below for a more detailed description of these methods.
 </p>
 
 <h3 id="predicates_parsing">Definite clause grammar parsing methods and non-terminals</h3>
@@ -701,20 +701,31 @@ An object's set of visible predicates is the union of all the predicates declare
 Possible predicate properties values are:
 </p>
 <ul>
+	<li><code>scope(Scope)</code></li>
 	<li><code>public</code>, <code>protected</code>, <code>private</code></li>
 	<li><code>static</code>, <code>dynamic</code></li>
 	<li><code>logtalk</code>, <code>prolog</code></li>
 	<li><code>built_in</code></li>
 	<li><code>multifile</code></li>
-	<li><code>meta_predicate(Mode)</code></li>
+	<li><code>meta_predicate(Template)</code></li>
+	<li><code>coinductive(Template)</code></li>
 	<li><code>declared_in(Entity)</code></li>
 	<li><code>defined_in(Entity)</code></li>
 	<li><code>redefined_from(Entity)</code></li>
 	<li><code>non_terminal(NonTerminal//Arity)</code></li>
 	<li><code>alias_of(Predicate)</code></li>
 	<li><code>synchronized</code></li>
+</ul>
+<p>
+Some properties are only available when the entities are compiled with the <code>source_data</code> flag turned on:
+</p>
+<ul>
 	<li><code>mode(Mode, Solutions)</code></li>
 	<li><code>info(ListOfPairs)</code></li>
+	<li><code>number_of_clauses(N)</code></li>
+	<li><code>declared_in(Entity, Line)</code></li>
+	<li><code>defined_in(Entity, Line)</code></li>
+	<li><code>redefined_from(Entity, Line)</code></li>
 </ul>
 <p>
 The properties <code>logtalk</code> and <code>prolog</code> allows us to distinguish between predicates defined by Logtalk and predicates defined by the back-end Prolog compiler.
@@ -783,7 +794,7 @@ Currently, there is no clean workaround for calling non-standard Prolog built-in
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: August 25, 2011</span>
+		<span>Last updated on: December 4, 2012</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="categories.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="inheritance.html">next</a></span><br/>
