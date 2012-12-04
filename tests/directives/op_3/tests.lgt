@@ -47,22 +47,42 @@
 		comment is 'Unit tests for the op/3 built-in directive.'
 	]).
 
-	test(op_3_1) :-
+	throws(op_3_1, error(type_error(integer,a), logtalk(This::current_op(a,_,_),user))) :-
+		this(This),
+		{This::current_op(a, _, _)}.
+
+	throws(op_3_2, error(domain_error(operator_priority,3000), logtalk(This::current_op(3000,_,_),user))) :-
+		this(This),
+		{This::current_op(3000, _, _)}.
+
+	throws(op_3_3, error(type_error(atom,1), logtalk(This::current_op(_,1,_),user))) :-
+		this(This),
+		{This::current_op(_, 1, _)}.
+
+	throws(op_3_4, error(domain_error(operator_specifier,a), logtalk(This::current_op(_,a,_),user))) :-
+		this(This),
+		{This::current_op(_, a, _)}.
+
+	throws(op_3_5, error(type_error(atom,1), logtalk(This::current_op(_,_,1),user))) :-
+		this(This),
+		{This::current_op(_, _, 1)}.
+
+	succeeds(op_3_6) :-
 		setof(Operator, op_3_test_object_1<<current_op(501, xfx, Operator), Operators),
 		Operators == [abc, def, ghi].
 
-	test(op_3_2) :-
+	succeeds(op_3_7) :-
 		setof(Operator, op_3_test_object_1::current_op(501, xfx, Operator), Operators),
 		Operators == [abc].
 
-	test(op_3_3) :-
+	succeeds(op_3_8) :-
 		op_3_test_object_1::current_op(600, xfx, :),
 		\+ op_3_test_object_1::current_op(600, xfy, :).
 
-	test(op_3_4) :-
+	succeeds(op_3_9) :-
 		\+ op_3_test_object_2::current_op(501, xfx, _).
 
-	test(op_3_5) :-
+	succeeds(op_3_10) :-
 		op_3_test_object_2::operators(Operators),
 		Operators == [opq, rst].
 
