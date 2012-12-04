@@ -5661,6 +5661,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	),
 	op(Priority, Specifier, Operator),
 	assertz('$lgt_pp_entity_operator_'(Priority, Specifier, Operator, Scope)),
+	'$lgt_pp_entity'(_, Entity, _, _, _),
 	assertz('$lgt_pp_entity_runtime_clause_'('$lgt_entity_property_'(Entity, op(Priority, Specifier, Operator, Scope)))).
 
 
