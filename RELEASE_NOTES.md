@@ -31,6 +31,8 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* NEW: Built-in reflection method `current_op/3`.
+
 * CHANGED: Save entity operator declarations also when the `source_data` flag
 is off.
 

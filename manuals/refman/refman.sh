@@ -129,6 +129,7 @@ eval $xslt_proc -o methods/parameter2.section refman.xsl methods/parameter2.html
 eval $xslt_proc -o methods/self1.section refman.xsl methods/self1.html
 eval $xslt_proc -o methods/sender1.section refman.xsl methods/sender1.html
 eval $xslt_proc -o methods/this1.section refman.xsl methods/this1.html
+eval $xslt_proc -o methods/current_op3.section refman.xsl methods/current_op3.html
 eval $xslt_proc -o methods/current_predicate1.section refman.xsl methods/current_predicate1.html
 eval $xslt_proc -o methods/predicate_property2.section refman.xsl methods/predicate_property2.html
 eval $xslt_proc -o methods/abolish1.section refman.xsl methods/abolish1.html
@@ -253,6 +254,7 @@ cat -s \
 	methods/self1.section \
 	methods/sender1.section \
 	methods/this1.section \
+	methods/current_op3.section \
 	methods/current_predicate1.section \
 	methods/predicate_property2.section \
 	methods/abolish1.section \

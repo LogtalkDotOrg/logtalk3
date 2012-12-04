@@ -2066,7 +2066,30 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_current_predicate'(+object_identifier, +predicate_indicator, +object_identifier, +scope)
+% '$lgt_current_op'(+object_identifier, ?operator_priority, ?operator_specifier, ?atom, +object_identifier, +scope)
+%
+% current_op/3 built-in method
+
+'$lgt_current_op'(Obj, Priority, Specifier, Operator, Sender, Scope) :-
+	'$lgt_must_be'(object, Obj, logtalk(Obj::current_op(Priority, Specifier, Operator), Sender)),
+	'$lgt_must_be'(var_or_operator_priority, Priority, logtalk(Obj::current_op(Priority, Specifier, Operator), Sender)),
+	'$lgt_must_be'(var_or_operator_specifier, Specifier, logtalk(Obj::current_op(Priority, Specifier, Operator), Sender)),
+	'$lgt_must_be'(var_or_atom, Operator, logtalk(Obj::current_op(Priority, Specifier, Operator), Sender)),
+	(	'$lgt_entity_property_'(Obj, op(Priority, Specifier, Operator, OpScope)),
+		% don't return local operator declarations
+		OpScope \== l,
+		% check that the operator declaration is within the scope of the caller
+		\+ \+ (OpScope = Scope; Obj = Sender)
+	;	% also return global operators that aren't overriden by entity operators
+		current_op(Priority, Specifier, Operator),
+		\+ (	'$lgt_entity_property_'(Obj, op(_, OtherSpecifier, Operator, _)),
+				'$lgt_same_operator_class'(Specifier, OtherSpecifier)
+		)
+	).
+
+
+
+% '$lgt_current_predicate'(+object_identifier, ?predicate_indicator, +object_identifier, +scope)
 %
 % current_predicate/1 built-in method
 
@@ -9362,7 +9385,18 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	).
 
 
-% "reflection" built-in predicates
+% reflection built-in predicates
+
+'$lgt_tr_body'(current_op(Priority, Specifier, Operator), TPred, DPred, Ctx) :-
+	!,
+	'$lgt_must_be'(var_or_operator_priority, Priority),
+	'$lgt_must_be'(var_or_operator_specifier, Specifier),
+	'$lgt_must_be'(var_or_atom, Operator),
+	'$lgt_comp_ctx_this'(Ctx, This),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	'$lgt_exec_ctx_this'(ExCtx, This),
+	TPred = '$lgt_current_op'(This, Priority, Specifier, Operator, This, p(_)),
+	DPred = '$lgt_debug'(goal(current_op(Priority, Specifier, Operator), TPred), ExCtx).
 
 '$lgt_tr_body'(current_predicate(Term), TPred, DPred, Ctx) :-
 	nonvar(Term),
@@ -10900,7 +10934,13 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_msg'(repeat, Obj, ('$lgt_object_exists'(Obj, repeat, This), repeat), This) :-
 	!.
 
-% "reflection" built-in predicates
+% reflection built-in predicates
+
+'$lgt_tr_msg'(current_op(Priority, Specifier, Operator), Obj, '$lgt_current_op'(Obj, Priority, Specifier, Operator, This, p(p(p))), This) :-
+	!,
+	'$lgt_must_be'(var_or_operator_priority, Priority),
+	'$lgt_must_be'(var_or_operator_specifier, Specifier),
+	'$lgt_must_be'(var_or_atom, Operator).
 
 '$lgt_tr_msg'(current_predicate(Pred), Obj, '$lgt_current_predicate'(Obj, Pred, This, p(p(p))), This) :-
 	!,
@@ -11066,7 +11106,13 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_self_msg'(repeat, repeat, _, _) :-
 	!.
 
-% "reflection" built-in predicates
+% reflection built-in predicates
+
+'$lgt_tr_self_msg'(current_op(Priority, Specifier, Operator), '$lgt_current_op'(Self, Priority, Specifier, Operator, This, p(_)), This, Self) :-
+	!,
+	'$lgt_must_be'(var_or_operator_priority, Priority),
+	'$lgt_must_be'(var_or_operator_specifier, Specifier),
+	'$lgt_must_be'(var_or_atom, Operator).
 
 '$lgt_tr_self_msg'(current_predicate(Pred), '$lgt_current_predicate'(Self, Pred, This, p(_)), This, Self) :-
 	!,
@@ -15058,6 +15104,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_built_in_method'((*->), 2, p(p(p)), '*->'(0, 0), 1) :-
 	'$lgt_prolog_built_in_predicate'('*->'(_, _)).
 % reflection methods
+'$lgt_built_in_method'(current_op, 3, p(p(p)), no, 1).
 '$lgt_built_in_method'(current_predicate, 1, p(p(p)), no, 1).
 '$lgt_built_in_method'(predicate_property, 2, p(p(p)), no, 1).
 % database methods
@@ -17998,6 +18045,12 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	true
 	).
 
+'$lgt_must_be'(var_or_operator_priority, Priority, Context) :-
+	(	var(Priority) ->
+		true
+	;	'$lgt_must_be'(operator_priority, Priority, Context)
+	).
+
 '$lgt_must_be'(operator_specifier, Term, Context) :-
 	(	var(Term) ->
 		throw(error(instantiation_error, Context))
@@ -18006,6 +18059,12 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	\+ '$lgt_member'(Term, [fx, fy, xfx, xfy, yfx, xf, yf]) ->
 		throw(error(domain_error(operator_specifier, Term), Context))
 	;	true
+	).
+
+'$lgt_must_be'(var_or_operator_specifier, Term, Context) :-
+	(	var(Term) ->
+		true
+	;	'$lgt_must_be'(operator_specifier, Term, Context)
 	).
 
 '$lgt_must_be'(operator_names, Term, Context) :-
