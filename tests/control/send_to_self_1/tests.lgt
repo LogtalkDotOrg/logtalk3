@@ -8,16 +8,20 @@
 	:- protected(q/1).
 	:- protected(r/1).
 
+	:- private(s/1).
+
 :- end_object.
 
 
 :- object(send_to_self_test_object_2,
 	extends(send_to_self_test_object_1)).
 
-	:- private(s/1).
-	s(1).
+	:- private(t/1).
+	t(1).
 
-	q(2).
+	s(2).
+
+	q(3).
 
 :- end_object.
 
@@ -38,17 +42,21 @@
 	throws(send_to_self_1_2, error(type_error(callable,1),logtalk(::1,send_to_self_test_object_1))) :-
 		send_to_self_test_object_2::p(1).
 
-	throws(send_to_self_1_3, error(permission_error(access,private_predicate,s/1),logtalk(::s(_),send_to_self_test_object_1))) :-
-		send_to_self_test_object_2::p(s(_)).
-
-	throws(send_to_self_1_4, error(existence_error(predicate_declaration,t/1),logtalk(::t(_),send_to_self_test_object_1))) :-
+	throws(send_to_self_1_3, error(permission_error(access,private_predicate,t/1),logtalk(::t(_),send_to_self_test_object_1))) :-
 		send_to_self_test_object_2::p(t(_)).
 
+	throws(send_to_self_1_4, error(existence_error(predicate_declaration,u/1),logtalk(::u(_),send_to_self_test_object_1))) :-
+		send_to_self_test_object_2::p(u(_)).
+
 	succeeds(send_to_self_1_5) :-
-		send_to_self_test_object_2::p(q(X)),
+		send_to_self_test_object_2::p(s(X)),
 		X == 2.
 
-	fails(send_to_self_1_6) :-
+	succeeds(send_to_self_1_6) :-
+		send_to_self_test_object_2::p(q(X)),
+		X == 3.
+
+	fails(send_to_self_1_7) :-
 		send_to_self_test_object_2::p(r(_)).
 
 :- end_object.
