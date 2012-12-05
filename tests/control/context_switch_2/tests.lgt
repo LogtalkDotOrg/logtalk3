@@ -1,29 +1,71 @@
 
+:- object(context_switch_test_object).
+
+	:- set_logtalk_flag(context_switching_calls, deny).
+
+	p.
+
+:- end_object.
+
+
+
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/11/19,
+		date is 2012/12/05,
 		comment is 'Unit tests for the (<<)/2 built-in control construct.'
 	]).
 
-	succeeds(ctx01, [], user << true).
-	succeeds(ctx02, [setup(logtalk::(assertz(a(1)),assertz(a(2)),assertz(a(3)))), cleanup(logtalk::abolish(a/1))], logtalk << findall(X, a(X), [1,2,3])).
-	succeeds(ctx03, [], This << findall(X, a(X), [1,2,3])) :- this(This).
-	succeeds(ctx04, [setup(create_object(Obj,[],[],[a(1),a(2),a(3)])), cleanup(abolish_object(Obj))], Obj << findall(X, a(X), [1,2,3])).
+	throws(context_switch_2_1, error(instantiation_error, logtalk(_<<goal,user))) :-
+		{_ << goal}.
 
-	fails(ctx10, [], user << fail).
-	fails(ctx11, [setup(logtalk::(assertz(a(_)),retractall(a(_)))), cleanup(logtalk::abolish(a/1))], logtalk << a(_)).
-	fails(ctx12, [], This << a(4)) :- this(This).
+	throws(context_switch_2_2, error(instantiation_error, logtalk(logtalk<<_,user))) :-
+		{logtalk << _}.
 
-	throws(ctx20, [], _ << goal, error(instantiation_error, _, _)).
-	throws(ctx21, [], object << _, error(instantiation_error, _, _)).
-	throws(ctx22, [], 3 << goal, error(type_error(object_identifier, 3), _, _)).
-	throws(ctx23, [], object << 3, error(type_error(callable, 3), _, _)).
-	throws(ctx24, [], This << goal, error(existence_error(procedure, goal/0), _)) :- this(This).
-	throws(ctx25, [], xpto << goal, error(existence_error(object, xpto), _, _)).
+	throws(context_switch_2_3, error(type_error(object_identifier, 3), logtalk(3<<goal,user))) :- 
+		{3 << goal}.
+
+	throws(context_switch_2_4, error(type_error(callable, 3), logtalk(object<<3,user))) :-
+		{object << 3}.
+
+	throws(context_switch_2_5, error(existence_error(procedure, goal/0), logtalk(This<<goal,user))) :-
+		this(This),
+		{This << goal}.
+
+	throws(context_switch_2_6, error(existence_error(object, foo), logtalk(foo<<goal,user))) :-
+		{foo << goal}.
+
+	throws(context_switch_2_7, error(permission_error(access, database, p), logtalk(context_switch_test_object<<p,user))) :-
+		{context_switch_test_object << p}.
+
+	succeeds(context_switch_2_8) :-
+		{user << true}.
+
+	succeeds(context_switch_2_9) :-
+		this(This),
+		findall(X, {This << a(X)}, Xs),
+		Xs == [1,2,3].
+
+	succeeds(context_switch_2_10) :-
+		create_object(Object, [], [], [a(1),a(2),a(3)]),
+		findall(X, {Object << a(X)}, Xs),
+		Xs == [1,2,3],
+		abolish_object(Object).
+
+	fails(context_switch_2_11) :-
+		{user << fail}.
+
+	fails(context_switch_2_12) :-
+		logtalk::assertz(foo(_)),
+		logtalk::retractall(foo(_)),
+		logtalk << foo(_).
+
+	fails(context_switch_2_13) :-
+		this(This),
+		{This << a(4)}.
 
 	a(1). a(2). a(3).
 
