@@ -36,6 +36,8 @@ Logtalk compiler and runtime
 * CHANGED: Save entity operator declarations also when the `source_data` flag
 is off.
 
+* FIXED: Exception term thrown when sending a message to a non-callable proxy.
+
 
 3.00.0 Alpha 6 - December 3, 2012
 =================================

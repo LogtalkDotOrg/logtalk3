@@ -10862,7 +10862,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 % convenient access to parametric object proxies
 
-'$lgt_tr_msg'(Pred, Obj, (catch(Proxy, error(Error, _), throw(error(Error, Obj::Pred, This))), TPred), This) :-
+'$lgt_tr_msg'(Pred, Obj, (catch(Proxy, error(Error, _), throw(error(Error, logtalk(Obj::Pred, This)))), TPred), This) :-
 	nonvar(Obj),
 	Obj = {Proxy},
 	!,
