@@ -38,6 +38,10 @@ is off.
 
 * FIXED: Exception term thrown when sending a message to a non-callable proxy.
 
+* CHANGED: Exception term thrown when attempting to use the `(<<)/2` control
+construct with an object compiled with the flag `context_switching_calls` set
+to `deny`.
+
 
 3.00.0 Alpha 6 - December 3, 2012
 =================================

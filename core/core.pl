@@ -4050,7 +4050,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 				;	catch(TGoal, Error, '$lgt_runtime_error_handler'(error(Error, logtalk(Obj<<Goal, This))))
 				)
 			)
-		;	throw(error(permission_error(access, predicate, Goal), logtalk(Obj<<Goal, This)))
+		;	throw(error(permission_error(access, database, Goal), logtalk(Obj<<Goal, This)))
 		)
 	;	throw(error(existence_error(object, Obj), logtalk(Obj<<Goal, This)))
 	).
