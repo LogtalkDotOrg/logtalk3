@@ -36,69 +36,84 @@
 		Closure = 1,
 		call(Closure, _, _).
 
-	succeeds(call_N_7) :-
+	% it's not always possible to decompile the actual call
+
+	throws(call_N_7, error(existence_error(procedure,_),logtalk(call(foo(_,_)),This))) :-
+		this(This),
+		Goal = foo(_,_),
+		call(Goal).
+
+	throws(call_N_8, error(existence_error(procedure,_),logtalk(call(foo(_,_)),This))) :-
+		this(This),
+		call(foo(_), _).
+
+	throws(call_N_9, error(existence_error(procedure,_),logtalk(call(foo(_,_)),This))) :-
+		this(This),
+		call(foo, _, _).
+
+	succeeds(call_N_10) :-
 		call(a(X)),
 		X == 1.
 
-	succeeds(call_N_8) :-
+	succeeds(call_N_11) :-
 		call(a, X),
 		X == 1.
 
-	succeeds(call_N_9) :-
+	succeeds(call_N_12) :-
 		call(b(X, Y)),
 		X == 1, Y == one.
 
-	succeeds(call_N_10) :-
+	succeeds(call_N_13) :-
 		call(b(X), Y),
 		X == 1, Y == one.
 
-	succeeds(call_N_11) :-
+	succeeds(call_N_14) :-
 		call(b, X, Y),
 		X == 1, Y == one.
 
-	succeeds(call_N_12) :-
+	succeeds(call_N_15) :-
 		call(c(X, Y, Z)),
 		X == 1, Y == one, Z == 'ONE'.
 
-	succeeds(call_N_13) :-
+	succeeds(call_N_16) :-
 		call(c(X,Y), Z),
 		X == 1, Y == one, Z == 'ONE'.
 
-	succeeds(call_N_14) :-
+	succeeds(call_N_17) :-
 		call(c(X), Y, Z),
 		X == 1, Y == one, Z == 'ONE'.
 
-	succeeds(call_N_15) :-
+	succeeds(call_N_18) :-
 		call(c, X, Y, Z),
 		X == 1, Y == one, Z == 'ONE'.
 
-	fails(call_N_16) :-
+	fails(call_N_19) :-
 		Goal = d(_,_,_,_),
 		call(Goal).
 
-	fails(call_N_17) :-
+	fails(call_N_20) :-
 		call(d(_,_,_),_).
 
-	fails(call_N_18) :-
+	fails(call_N_21) :-
 		call(d(_,_),_,_).
 
-	fails(call_N_19) :-
+	fails(call_N_22) :-
 		call(d(_),_,_,_).
 
-	fails(call_N_20) :-
+	fails(call_N_23) :-
 		Goal = e(_,_,_,_,_),
 		call(Goal).
 
-	fails(call_N_21) :-
+	fails(call_N_24) :-
 		call(e(_,_,_,_),_).
 
-	fails(call_N_22) :-
+	fails(call_N_25) :-
 		call(e(_,_,_),_,_).
 
-	fails(call_N_23) :-
+	fails(call_N_26) :-
 		call(e(_,_),_,_,_).
 
-	fails(call_N_24) :-
+	fails(call_N_27) :-
 		call(e(_),_,_,_,_).
 
 	% some data for the tests
