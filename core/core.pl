@@ -12381,6 +12381,36 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_remember_predicate'(Functor, Arity, Ctx).
 
 
+
+% '$lgt_add_def_fail_clause'(+callable, +atom, +integer)
+%
+% adds a "def clause" (used to translate a predicate call) where the
+% definition is simply fail due to the predicate being declared, static,
+% but undefined (closed-world assumption)
+
+'$lgt_add_def_fail_clause'(Head, Functor, Arity) :-
+	functor(HeadTemplate, Functor, Arity),
+	once((	'$lgt_pp_object_'(_, _, _, Def, _, _, _, _, _, _, _)
+		;	'$lgt_pp_category_'(_, _, _, Def, _, _)
+	)),
+	functor(Clause, Def, 3),
+	arg(1, Clause, HeadTemplate),
+	arg(3, Clause, fail),
+	(	'$lgt_pp_def_'(Clause) ->
+		true
+	;	assertz('$lgt_pp_def_'(Clause))
+	),
+	(	'$lgt_is_built_in_predicate'(Head) ->
+		(	'$lgt_pp_redefined_built_in_'(HeadTemplate, _, _) ->
+			true
+		;	assertz('$lgt_pp_redefined_built_in_'(HeadTemplate, _, fail)),
+			retractall('$lgt_pp_non_portable_predicate_'(Functor, Arity, _))
+		)
+	;	true
+	).
+
+
+
 % is necessary to remember which predicates are defined in order to deal with
 % redefinition of built-in predicates and detect missing predicate directives
 %
@@ -12655,16 +12685,30 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 % '$lgt_gen_local_def_clauses'
 %
-% generates local def clauses for undefined but declared (using scope or dynamic
-% directives) predicates
+% generates local def clauses for undefined but declared
+% (using scope and/or dynamic directives) predicates
 
 '$lgt_gen_local_def_clauses' :-
-	% categories cannot contain clauses for dynamic predicates:
+	(	'$lgt_pp_public_'(Functor, Arity)
+	;	'$lgt_pp_protected_'(Functor, Arity)
+	;	'$lgt_pp_private_'(Functor, Arity)
+	),
+	\+ '$lgt_pp_dynamic_'(Functor, Arity),
+	\+ '$lgt_pp_defines_predicate_'(Functor, Arity, _, _),
+	% declared, static, but undefined predicate;
+	% local calls must fail (closed-world assumption)
+	functor(Head, Functor, Arity),
+	'$lgt_add_def_fail_clause'(Head, Functor, Arity),
+	fail.
+
+'$lgt_gen_local_def_clauses' :-
+	% categories cannot contain clauses for dynamic predicates;
+	% thus, in this case, we look only into objects
 	'$lgt_pp_entity'(object, _, Prefix, _, _),
-	'$lgt_comp_ctx_prefix'(Ctx, Prefix),
 	'$lgt_pp_dynamic_'(Functor, Arity),
 	\+ '$lgt_pp_defines_predicate_'(Functor, Arity, _, _),
 	functor(Head, Functor, Arity),
+	'$lgt_comp_ctx_prefix'(Ctx, Prefix),
 	(	\+ '$lgt_pp_public_'(Functor, Arity),
 		\+ '$lgt_pp_protected_'(Functor, Arity),
 		\+ '$lgt_pp_private_'(Functor, Arity) ->
@@ -12674,10 +12718,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	fail.
 
 '$lgt_gen_local_def_clauses' :-
-	% annotations *may* result in the definition of predicates:
 	once((	'$lgt_value_annotation'(_, _, _, _, _)
 		 ;	'$lgt_goal_annotation'(_, _, _, _, _)
 	)),
+	% annotations *may* result in the definition of predicates
 	'$lgt_pp_entity'(_, _, Prefix, _, _),
 	'$lgt_comp_ctx_prefix'(Ctx, Prefix),
 	'$lgt_pp_calls_predicate_'(Functor, Arity, _, _, _),

@@ -42,6 +42,9 @@ is off.
 construct with an object compiled with the flag `context_switching_calls` set
 to `deny`.
 
+* FIXED: Meta-calling of declared, static, but undefined predicates could
+throw an error instead of failing (as per closed-world assumption).
+
 
 3.00.0 Alpha 6 - December 3, 2012
 =================================
