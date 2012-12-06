@@ -377,9 +377,10 @@ Obj<<Goal :-
 
 '$lgt_runtime_error_handler'(error(Variable, Context)) :-
 	var(Variable),
-	throw(error(instantiation_error, throw(_), Context)).
+	throw(error(instantiation_error, logtalk(throw(_), Context))).
 
 '$lgt_runtime_error_handler'(error(error(Error, _), Context)) :-
+	!,
 	'$lgt_runtime_error_handler'(error(Error, Context)).
 
 '$lgt_runtime_error_handler'(error(Error, logtalk(Object::Goal, user))) :-
