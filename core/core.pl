@@ -3938,8 +3938,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 			'$lgt_comp_ctx'(Ctx, _, Sender, This, Self, Prefix, [], _, ExCtx, runtime, _),
 			catch('$lgt_tr_body'(Pred, TPred, DPred, Ctx), Error, throw(error(Error, logtalk(call(Pred), This)))) ->
 			(	Flags /\ 256 =:= 256 ->
-				call(DPred)
-			;	call(TPred)
+				catch(DPred, error(Error,_), throw(error(Error, logtalk(call(Pred), This))))
+			;	catch(TPred, error(Error,_), throw(error(Error, logtalk(call(Pred), This))))
 			)
 		;	% of course, the meta-call may happen to be an unfortunate mistake:
 			functor(Pred, Functor, Arity),
@@ -3953,8 +3953,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 			'$lgt_comp_ctx'(Ctx, _, Sender, This, Self, Prefix, [], _, ExCtx, runtime, _),
 			catch('$lgt_tr_body'(Pred, TPred, DPred, Ctx), Error, throw(error(Error, logtalk(call(Pred), This)))) ->
 			(	Flags /\ 256 =:= 256 ->
-				call(DPred)
-			;	call(TPred)
+				catch(DPred, error(Error,_), throw(error(Error, logtalk(call(Pred), This))))
+			;	catch(TPred, error(Error,_), throw(error(Error, logtalk(call(Pred), This))))
 			)
 		;	% of course, the meta-call may happen to be an unfortunate mistake:
 			functor(Pred, Functor, Arity),
@@ -3981,8 +3981,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		'$lgt_comp_ctx'(Ctx, _, This, Sender, Sender, Prefix, ExtraVars, _, _, runtime, _),
 		catch('$lgt_tr_body'(Pred, TPred, DPred, Ctx), Error, throw(error(Error, logtalk(call(Pred), Sender)))) ->
 		(	Flags /\ 256 =:= 256 ->
-			call(DPred)
-		;	call(TPred)
+			catch(DPred, error(Error,_), throw(error(Error, logtalk(call(Pred), Sender))))
+		;	catch(TPred, error(Error,_), throw(error(Error, logtalk(call(Pred), Sender))))
 		)
 	;	% of course, the meta-call may happen to be an unfortunate mistake:
 		functor(Pred, Functor, Arity),
@@ -4011,7 +4011,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		% call a dynamic redefinition of a built-in predicate:
 		call(TPred)
 	;	% no redefinition; call the built-in predicate:
-		call(MetaExPred)
+		catch(MetaExPred, error(Error,_), throw(error(Error,logtalk(MetaExPred,This))))
 	).
 
 

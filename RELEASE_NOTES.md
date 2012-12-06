@@ -48,6 +48,9 @@ throw an error instead of failing (as per closed-world assumption).
 * FIXED: The wrong exception term would be thrown by the runtime error handler
 when the original exception is a variable.
 
+* IMPROVED: Ensure that meta-calls of control constructs and built-in
+predicates throw the correct exception term.
+
 
 3.00.0 Alpha 6 - December 3, 2012
 =================================
