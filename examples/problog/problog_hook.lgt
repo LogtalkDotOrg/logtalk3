@@ -18,6 +18,12 @@
 user:problog_user_ground(THead) :-
 	logtalk::decompile_predicate_heads(THead, Head),
 	ground(Head).
+user:problog_user_ground(THead) :-
+	THead =.. [ProbLogFunctor| Args],
+	atom_concat(problogcontinuous_, LogtalkFunctor, ProbLogFunctor),
+	THead2 =.. [LogtalkFunctor| Args],
+	logtalk::decompile_predicate_heads(THead2, Head),
+	ground(Head).
 
 
 :- op(550, yfx, ~).		% alternative to ProbLog (::)/2 operator
