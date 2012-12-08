@@ -55,6 +55,10 @@ predicates throw the correct exception term.
 annotation expansion predicates defined in the built-in `expanding` protocol.
 These annotation predicates are still considered experimental.
 
+* IMPROVED: Allow non-callable source file terms to be term-expanded. Updated
+the compiler to throw an error when a term is expanded to a non-callable term.
+
+
 Prolog adapter and integration files
 ------------------------------------
 

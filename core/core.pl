@@ -5849,14 +5849,19 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 % '$lgt_tr_term'(@term, +compilation_context)
 %
-% translates a source term (clause, directive, or grammar rule)
+% translates a source term (clause, directive, or grammar rule);
+% we allow non-callable terms to be term-expanded; only if that
+% fails we throw an error
 
 '$lgt_tr_term'(Term, Ctx) :-
 	(	var(Term) ->
 		throw(error(instantiantion_error, term(Term)))
 	;	% runtime creation of new entities; no term expansion:
 		'$lgt_comp_ctx_mode'(Ctx, runtime) ->
-		'$lgt_tr_expanded_term'(Term, Ctx)
+		(	callable(Term) ->
+			'$lgt_tr_expanded_term'(Term, Ctx)
+		;	throw(error(type_error(callable, Term), term(Term)))
+		)
 	;	% source-file specific compiler hook:
 		'$lgt_pp_hook_term_expansion_'(Term, Terms) ->
 		'$lgt_tr_expanded_terms'(Terms, Ctx)
@@ -5868,7 +5873,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		'$lgt_prolog_term_expansion_portability_warnings'(Term, Terms),
 		'$lgt_tr_expanded_terms'(Terms, Ctx)
 	;	% no compiler hook defined:
-		'$lgt_tr_expanded_term'(Term, Ctx)
+		(	callable(Term) ->
+			'$lgt_tr_expanded_term'(Term, Ctx)
+		;	throw(error(type_error(callable, Term), term(Term)))
+		)
 	).
 
 
@@ -5946,6 +5954,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_expanded_term'((Head --> Body), Ctx) :-
 	!,
 	'$lgt_tr_grammar_rule'((Head --> Body), Ctx).
+
+'$lgt_tr_expanded_term'(Term, _) :-
+	\+ callable(Term),
+	throw(error(type_error(callable, Term), term_expansion/2)).
 
 '$lgt_tr_expanded_term'(Fact, Ctx) :-
 	'$lgt_tr_clause'(Fact, Ctx).
