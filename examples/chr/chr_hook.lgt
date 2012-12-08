@@ -13,9 +13,9 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0.21,
+		version is 0.3,
 		author is 'Paulo Moura',
-		date is 2011/02/24,
+		date is 2011/12/07,
 		comment is 'Hook object for compiling objects and categories containing CHR code.']).
 
 	term_expansion((:- chr_constraint(PIs)), [{(:- chr_constraint(TPIs))}]) :-
@@ -29,25 +29,26 @@
 	% the same for CHR options
 	term_expansion((:- chr_option(Option, Value)), [{(:- chr_option(Option, Value))}]).
 
-	term_expansion((:- Directive), [(:- Directive)| Annotations]) :-
-		nonvar(Directive),
-		functor(Directive, Functor, Arity),
-		Arity >= 1,
-		(	Functor == object, Arity =< 5 ->
-			true
-		;	Functor == category, Arity =< 3
-		),
-		chr_annotations(Annotations).
+	value_annotation('@'(Value,Goal), Value, Goal, Head) :-
+		goal_annotation(Goal, _, _, Head).
+	value_annotation('#'(Head,Value), Value, Head, Head).
+	value_annotation(pragma(Head,Value), Value, Head, Head).
 
-	chr_annotations([
-		(:- annotation('@'(*,0))),
-		(:- annotation('==>'(0,0))),
-		(:- annotation('<=>'(0,0))),
-		(:- annotation('|'(0,0))),
-		(:- annotation('\\'(0,0))),
-		(:- annotation('#'(0,*))),
-		(:- annotation(pragma(0,*)))
-	]).
+	goal_annotation('<=>'(Goal,Body), Goal, Body, Head) :-
+		(	goal_annotation(Goal, _, _, Head) ->
+			true
+		;	Goal = (Head, _) ->
+			true
+		;	Goal = Head
+		).
+	goal_annotation('==>'(Head,Body), Head, Body, Head) :-
+		(	Goal = (Head, _) ->
+			true
+		;	Goal = Head
+		).
+	goal_annotation('\\'(Head,Body), Head, Body, Head).
+
+	body_annotation('|'(Left,Right), Left, Right).
 
 	:- multifile(user::portray/1).
 	:- dynamic(user::portray/1).

@@ -51,6 +51,28 @@ when the original exception is a variable.
 * IMPROVED: Ensure that meta-calls of control constructs and built-in
 predicates throw the correct exception term.
 
+* CHANGED: Replaced the experimental directive `annotation/1` with a set of
+annotation expansion predicates defined in the built-in `expanding` protocol.
+These annotation predicates are still considered experimental.
+
+Prolog adapter and integration files
+------------------------------------
+
+* CHANGED: All adapter files to define the new default annotation expansion
+predicates.
+
+Documentation
+-------------
+
+REMOVED: All references to the no longer supported `annotation/1` experimental
+directive.
+
+Examples
+--------
+
+* CHANGED: The `chr` and `problog` examples to use the new experimental
+annotation support.
+
 
 3.00.0 Alpha 6 - December 3, 2012
 =================================

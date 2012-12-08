@@ -28,9 +28,9 @@ user:problog_user_ground(THead) :-
 	implements(expanding)).
 
 	:- info([
-		version is 0.4,
+		version is 0.5,
 		author is 'Paulo Moura',
-		date is 2010/12/02,
+		date is 2012/12/08,
 		comment is 'Hook object for compiling objects and categories containing ProbLog code.']).
 
 	term_expansion((:- set_problog_flag(Flag, Value)), [{(:- flags:set_problog_flag(Flag, Value))}]).
@@ -38,21 +38,9 @@ user:problog_user_ground(THead) :-
 	term_expansion((:- problog_table(PI)), [{(:- problog:problog_table(user:TPI))}]) :-
 		logtalk::compile_predicate_indicators(PI, TPI).
 
-	term_expansion((:- Directive), [(:- Directive)| Annotations]) :-
-		nonvar(Directive),
-		functor(Directive, Functor, Arity),
-		Arity >= 1,
-		(	Functor == object, Arity =< 5 ->
-			true
-		;	Functor == category, Arity =< 3
-		),
-		problog_annotations(Annotations).
-
-	problog_annotations([
-		(:- annotation('=>'(0, *))),
-		(:- annotation('~'(*, 0))),
-		(:- annotation('<--'(0, 0)))
-	]).
+	value_annotation('=>'(Head, Value), Value, Head, Head).
+	value_annotation('~'(Value, Head), Value, Head, Head).
+	goal_annotation('<--'(Left,Right), Left, Right, Left).
 
 	:- multifile(user:term_expansion/2).
 	:- dynamic(user:term_expansion/2).

@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/11/22,
+		date is 2012/12/08,
 		comment is 'Logtalk core (compiler and runtime) default message translations.']).
 
 	:- multifile(logtalk::message_prefix_stream/4).
@@ -190,6 +190,16 @@
 		error_term_tokens(Error),
 		message_context(File, Lines).		
 
+	logtalk::message_tokens(annotation_expansion_error(File, Lines, Type, Entity, HookEntity, Annotation, Error), core) -->
+		['Error found when annotation-expanding ~w using hook entity ~w: '-[Annotation, HookEntity]],
+		error_term_tokens(Error),
+		message_context(File, Lines, Type, Entity).		
+
+	logtalk::message_tokens(annotation_expansion_error(File, Lines, HookEntity, Annotation, Error), core) -->
+		['Error found when annotation-expanding ~w using hook entity ~w: '-[Annotation, HookEntity]],
+		error_term_tokens(Error),
+		message_context(File, Lines).		
+
 	logtalk::message_tokens(redefined_logtalk_built_in_predicate(File, Lines, Type, Entity, Predicate), core) -->
 		['Redefining a Logtalk built-in predicate: ~q'-[Predicate], nl],
 		message_context(File, Lines, Type, Entity).
@@ -216,10 +226,6 @@
 
 	logtalk::message_tokens(missing_predicate_directive(File, Lines, Type, Entity, Directive, Predicate), core) -->
 		['Missing ~w directive for the predicate: ~q'-[Directive, Predicate], nl],
-		message_context(File, Lines, Type, Entity).
-
-	logtalk::message_tokens(possibly_missing_predicate_directive(File, Lines, Type, Entity, Directive, Predicate), core) -->
-		['Possibly missing ~w directive for the predicate: ~q'-[Directive, Predicate], nl],
 		message_context(File, Lines, Type, Entity).
 
 	logtalk::message_tokens(non_standard_predicate_call(File, Lines, Type, Entity, Predicate), core) -->
@@ -285,32 +291,16 @@
 		['This declared static predicate is called but never defined: ~q'-[Predicate], nl],
 		message_context(File, Lines, Type, Entity).
 
-	logtalk::message_tokens(declared_static_predicate_called_but_possibly_not_defined(File, Lines, Type, Entity, Predicate), core) -->
-		['This declared static predicate is called but may not be defined: ~q'-[Predicate], nl],
-		message_context(File, Lines, Type, Entity).
-
 	logtalk::message_tokens(declared_static_non_terminal_called_but_not_defined(File, Lines, Type, Entity, NonTerminal), core) -->
 		['This declared static non terminal is called but never defined: ~q'-[NonTerminal], nl],
-		message_context(File, Lines, Type, Entity).
-
-	logtalk::message_tokens(declared_static_non_terminal_called_but_possibly_not_defined(File, Lines, Type, Entity, NonTerminal), core) -->
-		['This declared static non terminal is called but may not be defined: ~q'-[NonTerminal], nl],
 		message_context(File, Lines, Type, Entity).
 
 	logtalk::message_tokens(predicate_called_but_not_defined(File, Lines, Type, Entity, Predicate), core) -->
 		['This predicate is called but never defined: ~q'-[Predicate], nl],
 		message_context(File, Lines, Type, Entity).
 
-	logtalk::message_tokens(predicate_called_but_possibly_not_defined(File, Lines, Type, Entity, Predicate), core) -->
-		['This predicate is called but may not be defined: ~q'-[Predicate], nl],
-		message_context(File, Lines, Type, Entity).
-
 	logtalk::message_tokens(non_terminal_called_but_not_defined(File, Lines, Type, Entity, NonTerminal), core) -->
 		['This non-terminal is called but never defined: ~q'-[NonTerminal], nl],
-		message_context(File, Lines, Type, Entity).
-
-	logtalk::message_tokens(non_terminal_called_but_possibly_not_defined(File, Lines, Type, Entity, NonTerminal), core) -->
-		['This non-terminal is called but may not be defined: ~q'-[NonTerminal], nl],
 		message_context(File, Lines, Type, Entity).
 
 	logtalk::message_tokens(missing_reference_to_built_in_protocol(File, Type, Entity, Protocol), core) -->

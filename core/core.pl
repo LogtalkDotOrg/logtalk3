@@ -160,10 +160,13 @@
 :- dynamic(logtalk_library_path/2).
 
 
-% term and goal expansion compiler hooks:
+% term expansion, goal expansion, and annotation compiler hooks:
 
 :- dynamic('$lgt_hook_term_expansion_'/2).			% '$lgt_hook_term_expansion_'(Term, ExpandedTerms)
 :- dynamic('$lgt_hook_goal_expansion_'/2).			% '$lgt_hook_goal_expansion_'(Goal, ExpandedGoal)
+:- dynamic('$lgt_hook_goal_annotation_'/4).			% '$lgt_hook_goal_annotation_'(Annotation, Left, Right, Head)
+:- dynamic('$lgt_hook_value_annotation_'/4).		% '$lgt_hook_value_annotation_'(Annotation, Value, Goal, Head)
+:- dynamic('$lgt_hook_body_annotation_'/3).			% '$lgt_hook_body_annotation_'(Annotation, Left, Right)
 
 
 % multi-threading tags
@@ -228,8 +231,6 @@
 :- dynamic('$lgt_pp_protected_'/2).							% '$lgt_pp_protected_'(Functor, Arity)
 :- dynamic('$lgt_pp_private_'/2).							% '$lgt_pp_private_'(Functor, Arity)
 :- dynamic('$lgt_pp_meta_predicate_'/1).					% '$lgt_pp_meta_predicate_'(MetaTemplate)
-:- dynamic('$lgt_pp_value_annotation_'/4).					% '$lgt_pp_value_annotation_'(Annotation, Functor, Value, Goal)
-:- dynamic('$lgt_pp_goal_annotation_'/4).					% '$lgt_pp_goal_annotation_'(Annotation, Functor, LeftGoal, RightGoal)
 :- dynamic('$lgt_pp_predicate_alias_'/3).					% '$lgt_pp_predicate_alias_'(Entity, Pred, Alias)
 :- dynamic('$lgt_pp_non_terminal_'/3).						% '$lgt_pp_non_terminal_'(Functor, Arity, ExtArity)
 :- dynamic('$lgt_pp_multifile_'/2).							% '$lgt_pp_multifile_'(Functor, Arity)
@@ -278,6 +279,8 @@
 :- dynamic('$lgt_pp_clause_number_'/3).						% '$lgt_pp_clause_number_'(TFunctor, TArity, Number)
 
 :- dynamic('$lgt_pp_defines_predicate_'/4).					% '$lgt_pp_defines_predicate_'(Functor, Arity, TFunctor, TArity)
+:- dynamic('$lgt_pp_defines_annotation_'/2).				% '$lgt_pp_defines_annotation_'(Functor, Arity)
+:- dynamic('$lgt_pp_defines_annotated_predicate_'/2).		% '$lgt_pp_defines_annotated_predicate_'(Functor, Arity)
 :- dynamic('$lgt_pp_calls_predicate_'/5).					% '$lgt_pp_calls_predicate_'(Functor, Arity, TFunctor, TArity, Lines)
 :- dynamic('$lgt_pp_non_portable_predicate_'/3).			% '$lgt_pp_non_portable_predicate_'(Functor, Arity, Lines)
 :- dynamic('$lgt_pp_non_portable_function_'/3).				% '$lgt_pp_non_portable_function_'(Functor, Arity, Lines)
@@ -303,6 +306,9 @@
 
 :- dynamic('$lgt_pp_hook_term_expansion_'/2).				% '$lgt_pp_hook_term_expansion_'(Term, Terms)
 :- dynamic('$lgt_pp_hook_goal_expansion_'/2).				% '$lgt_pp_hook_goal_expansion_'(Goal, ExpandedGoal)
+:- dynamic('$lgt_pp_hook_goal_annotation_'/4).				% '$lgt_pp_hook_goal_annotation_'(Annotation, Left, Right, Head)
+:- dynamic('$lgt_pp_hook_value_annotation_'/4).				% '$lgt_pp_hook_value_annotation_'(Annotation, Value, Goal, Head)
+:- dynamic('$lgt_pp_hook_body_annotation_'/3).				% '$lgt_pp_hook_body_annotation_'(Annotation, Left, Right)
 
 :- dynamic('$lgt_pp_dynamic_'/0).							% '$lgt_pp_dynamic_'
 :- dynamic('$lgt_pp_threaded_'/0).							% '$lgt_pp_threaded_'
@@ -1838,15 +1844,24 @@ logtalk_compile(Files, Flags) :-
 		% pre-compile hooks in order to speed up entity compilation
 		(	HookEntity == user ->
 			TermExpansionGoal = term_expansion(Term, Terms),
-			GoalExpansionGoal = goal_expansion(Goal, ExpandedGoal)
+			GoalExpansionGoal = goal_expansion(Goal, ExpandedGoal),
+			GoalAnnotationGoal = fail,
+			ValueAnnotationGoal = fail,
+			BodyAnnotationGoal = fail
 		;	atom(HookEntity),
 			\+ current_object(HookEntity),
 			'$lgt_prolog_feature'(modules, supported),
 			current_module(HookEntity) ->
 			TermExpansionGoal = ':'(HookEntity, term_expansion(Term, Terms)),
-			GoalExpansionGoal = ':'(HookEntity, goal_expansion(Goal, ExpandedGoal))
+			GoalExpansionGoal = ':'(HookEntity, goal_expansion(Goal, ExpandedGoal)),
+			GoalAnnotationGoal = fail,
+			ValueAnnotationGoal = fail,
+			BodyAnnotationGoal = fail
 		;	'$lgt_tr_msg'(term_expansion(Term, Terms), HookEntity, TermExpansionGoal, user),
-			'$lgt_tr_msg'(goal_expansion(Goal, ExpandedGoal), HookEntity, GoalExpansionGoal, user)
+			'$lgt_tr_msg'(goal_expansion(Goal, ExpandedGoal), HookEntity, GoalExpansionGoal, user),
+			'$lgt_tr_msg'(goal_annotation(GoalAnnotation, GoalLeft, GoalRight, GoalHead), HookEntity, GoalAnnotationGoal, user),
+			'$lgt_tr_msg'(value_annotation(ValueAnnotation, Value, Goal, ValueHead), HookEntity, ValueAnnotationGoal, user),
+			'$lgt_tr_msg'(body_annotation(BodyAnnotation, BodyLeft, BodyRight), HookEntity, BodyAnnotationGoal, user)
 		),
 		assertz((
 			'$lgt_pp_hook_term_expansion_'(Term, Terms) :-
@@ -1855,6 +1870,18 @@ logtalk_compile(Files, Flags) :-
 		assertz((
 			'$lgt_pp_hook_goal_expansion_'(Goal, ExpandedGoal) :-
 				catch(GoalExpansionGoal, Error, '$lgt_goal_expansion_error'(HookEntity, Goal, Error))
+		)),
+		assertz((
+			'$lgt_pp_hook_goal_annotation_'(GoalAnnotation, GoalLeft, GoalRight, GoalHead) :-
+				catch(GoalAnnotationGoal, Error, '$lgt_annotation_expansion_error'(HookEntity, GoalAnnotation, Error))
+		)),
+		assertz((
+			'$lgt_pp_hook_value_annotation_'(ValueAnnotation, Value, Goal, ValueHead) :-
+				catch(ValueAnnotationGoal, Error, '$lgt_annotation_expansion_error'(HookEntity, ValueAnnotation, Error))
+		)),
+		assertz((
+			'$lgt_pp_hook_body_annotation_'(BodyAnnotation, BodyLeft, BodyRight) :-
+				catch(BodyAnnotationGoal, Error, '$lgt_annotation_expansion_error'(HookEntity, BodyAnnotation, Error))
 		))
 	;	true
 	).
@@ -1882,6 +1909,19 @@ logtalk_compile(Files, Flags) :-
 	(	'$lgt_pp_entity'(Type, Entity, _, _, _) ->
 		'$lgt_print_message'(warning(expansion), core, goal_expansion_error(Path, Lines, Type, Entity, HookEntity, Goal, Error))
 	;	'$lgt_print_message'(warning(expansion), core, goal_expansion_error(Path, Lines, HookEntity, Goal, Error))
+	),
+	fail.
+
+
+% annotation-expansion errors result in a warning message and a failure
+
+'$lgt_annotation_expansion_error'(HookEntity, Annotation, Error) :-
+	'$lgt_pp_file_path_flags_'(File, Directory, _),
+	atom_concat(Directory, File, Path),
+	'$lgt_current_line_numbers'(Lines),
+	(	'$lgt_pp_entity'(Type, Entity, _, _, _) ->
+		'$lgt_print_message'(warning(expansion), core, annotation_expansion_error(Path, Lines, Type, Entity, HookEntity, Annotation, Error))
+	;	'$lgt_print_message'(warning(expansion), core, annotation_expansion_error(Path, Lines, HookEntity, Annotation, Error))
 	),
 	fail.
 
@@ -4176,22 +4216,36 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-'$lgt_value_annotation'(Annotation, Functor, Value, Goal, _) :-
-	'$lgt_pp_value_annotation_'(Annotation, Functor, Value, Goal),
+'$lgt_value_annotation'(Annotation, Functor, Order, Value, Goal, Head) :-
+	(	'$lgt_pp_hook_value_annotation_'(Annotation, Value, Goal, Head)
+	;	'$lgt_hook_value_annotation_'(Annotation, Value, Goal, Head)
+	;	'$lgt_default_value_annotation'(Annotation, Value, Goal, Head)
+	),
+	functor(Annotation, Functor, _),
+	(	arg(1, Annotation, Goal) ->
+		Order = suffix
+	;	Order = prefix
+	),
 	!.
 
-'$lgt_value_annotation'(Annotation, Functor, Value, Goal, Head) :-
-	'$lgt_default_value_annotation'(Annotation, Functor, Value, Goal, Head),
-	!.
 
-
-
-'$lgt_goal_annotation'(Annotation, Functor, Left, Right, _) :-
-	'$lgt_pp_goal_annotation_'(Annotation, Functor, Left, Right),
-	!.
 
 '$lgt_goal_annotation'(Annotation, Functor, Left, Right, Head) :-
-	'$lgt_default_goal_annotation'(Annotation, Functor, Left, Right, Head),
+	(	'$lgt_hook_goal_annotation_'(Annotation, Left, Right, Head)
+	;	'$lgt_pp_hook_goal_annotation_'(Annotation, Left, Right, Head)
+	;	'$lgt_default_goal_annotation'(Annotation, Left, Right, Head)
+	),
+	functor(Annotation, Functor, _),
+	!.
+
+
+
+'$lgt_body_annotation'(Annotation, Functor, Left, Right) :-
+	(	'$lgt_pp_hook_body_annotation_'(Annotation, Left, Right)
+	;	'$lgt_hook_body_annotation_'(Annotation, Left, Right)
+	;	'$lgt_default_body_annotation'(Annotation, Left, Right)
+	),
+	functor(Annotation, Functor, _),
 	!.
 
 
@@ -5537,6 +5591,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	retractall('$lgt_pp_clause_number_'(_,_,_)),
 	retractall('$lgt_pp_redefined_built_in_'(_, _, _)),
 	retractall('$lgt_pp_defines_predicate_'(_, _, _, _)),
+	retractall('$lgt_pp_defines_annotation_'(_, _)),
+	retractall('$lgt_pp_defines_annotated_predicate_'(_, _)),
 	retractall('$lgt_pp_calls_predicate_'(_, _, _, _, _)),
 	retractall('$lgt_pp_non_portable_predicate_'(_, _, _)),
 	retractall('$lgt_pp_non_portable_function_'(_, _, _)),
@@ -8231,17 +8287,22 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	throw(permission_error(define, predicate, Functor/Arity)).
 
 '$lgt_tr_clause'((Annotation:-Body), TClause, DClause, HeadCtx, BodyCtx) :-
-	'$lgt_value_annotation'(Annotation, Functor, Value, Head, _),
+	'$lgt_value_annotation'(Annotation, Functor, Order, Value, Head, _),
 	!,
-	'$lgt_tr_clause'((Head:-Body), TClause0, DClause, HeadCtx, BodyCtx),
-	functor(TAnnotation, Functor, 2),
+	'$lgt_tr_clause'((Head:-Body), TClause0, DClause0, HeadCtx, BodyCtx),
+	(	Order == prefix ->
+		TAnnotation =.. [Functor, Value, THead],
+		DAnnotation =.. [Functor, Value, DHead]
+	;	TAnnotation =.. [Functor, THead, Value],
+		DAnnotation =.. [Functor, DHead, Value]
+	),
 	(	TClause0 = (THead :- TBody) ->
-		'$lgt_value_annotation'(TAnnotation, Functor, Value, THead, _),
 		TClause = (TAnnotation :- TBody)
 	;	TClause0 = THead,
-		'$lgt_value_annotation'(TAnnotation, Functor, Value, THead, _),
 		TClause = TAnnotation
-	).
+	),
+	DClause0 = (DHead :- DBody),
+	DClause = (DAnnotation :- DBody).
 
 '$lgt_tr_clause'((Head:-Body), TClause, DClause, HeadCtx, BodyCtx) :-
 	'$lgt_pp_coinductive_'(Head, CoinductiveHead, _),
@@ -8311,35 +8372,31 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	throw(type_error(callable, Fact)).
 
 '$lgt_tr_clause'(Annotation, TFact, DFact, _, BodyCtx) :-
-	'$lgt_value_annotation'(Annotation, AnnotationFunctor, Value, Body, Head),
+	'$lgt_value_annotation'(Annotation, Functor, Order, Value, Body, Head),
 	!,
 	'$lgt_comp_ctx_meta_vars'(BodyCtx, []),
 	'$lgt_tr_body'(Body, TBody, DBody, BodyCtx),
-	functor(TFact, AnnotationFunctor, 2),
-	'$lgt_value_annotation'(TFact, AnnotationFunctor, Value, TBody, _),
-	functor(DFact, AnnotationFunctor, 2),
-	'$lgt_value_annotation'(DFact, AnnotationFunctor, Value, DBody, _),
-	(	callable(Head) ->
-		functor(Head, Functor, Arity),
-		'$lgt_remember_predicate'(Functor, Arity, BodyCtx)
-	;	true
-	).
+	(	Order == prefix ->
+		TFact =.. [Functor, Value, TBody],
+		DFact =.. [Functor, Value, DBody]
+	;	TFact =.. [Functor, TBody, Value],
+		DFact =.. [Functor, DBody, Value]
+	),
+	'$lgt_remember_annotation'(Functor, 2),
+	functor(Head, HeadFunctor, HeadArity),
+	'$lgt_remember_annotated_predicate'(HeadFunctor, HeadArity).
 
 '$lgt_tr_clause'(Annotation, TFact, DFact, _, BodyCtx) :-
-	'$lgt_goal_annotation'(Annotation, AnnotationFunctor, Left, Right, Head),
+	'$lgt_goal_annotation'(Annotation, Functor, Left, Right, Head),
 	!,
 	'$lgt_comp_ctx_meta_vars'(BodyCtx, []),
 	'$lgt_tr_body'(Left, TLeft, DLeft, BodyCtx),
 	'$lgt_tr_body'(Right, TRight, DRight, BodyCtx),
-	functor(TFact, AnnotationFunctor, 2),
-	'$lgt_goal_annotation'(TFact, AnnotationFunctor, TLeft, TRight, _),
-	functor(DFact, AnnotationFunctor, 2),
-	'$lgt_goal_annotation'(DFact, AnnotationFunctor, DLeft, DRight, _),
-	(	callable(Head) ->
-		functor(Head, Functor, Arity),
-		'$lgt_remember_predicate'(Functor, Arity, BodyCtx)
-	;	true
-	).
+	TFact =.. [Functor, TLeft, TRight],
+	DFact =.. [Functor, DLeft, DRight],
+	'$lgt_remember_annotation'(Functor, 2),
+	functor(Head, HeadFunctor, HeadArity),
+	'$lgt_remember_annotated_predicate'(HeadFunctor, HeadArity).
 
 '$lgt_tr_clause'(Fact, TFact, DFact, HeadCtx, BodyCtx) :-
 	'$lgt_pp_coinductive_'(Fact, CoinductiveFact, _),
@@ -10126,22 +10183,41 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!.
 
 
-% annotations
+% annotations (EXPERIMENTAL)
 
 '$lgt_tr_body'(Annotation, TAnnotation, DAnnotation, Ctx) :-
-	'$lgt_value_annotation'(Annotation, Functor, Value, Pred, _),
+	'$lgt_value_annotation'(Annotation, Functor, Order, Value, Pred, Head),
 	!,
 	'$lgt_tr_body'(Pred, TPred, DPred, Ctx),
-	'$lgt_value_annotation'(TAnnotation, Functor, Value, TPred, _),
-	'$lgt_value_annotation'(DAnnotation, Functor, Value, DPred, _).
+	(	Order == prefix ->
+		TAnnotation =.. [Functor, Value, TPred],
+		DAnnotation =.. [Functor, Value, DPred]
+	;	TAnnotation =.. [Functor, TPred, Value],
+		DAnnotation =.. [Functor, DPred, Value]
+	),
+	'$lgt_remember_annotation'(Functor, 2),
+	functor(Head, HeadFunctor, HeadArity),
+	'$lgt_remember_annotated_predicate'(HeadFunctor, HeadArity).
 
 '$lgt_tr_body'(Annotation, TAnnotation, DAnnotation, Ctx) :-
-	'$lgt_goal_annotation'(Annotation, Functor, Pred1, Pred2, _),
+	'$lgt_goal_annotation'(Annotation, Functor, Pred1, Pred2, Head),
 	!,
 	'$lgt_tr_body'(Pred1, TPred1, DPred1, Ctx),
 	'$lgt_tr_body'(Pred2, TPred2, DPred2, Ctx),
-	'$lgt_goal_annotation'(TAnnotation, Functor, TPred1, TPred2, _),
-	'$lgt_goal_annotation'(DAnnotation, Functor, DPred1, DPred2, _).
+	TAnnotation =.. [Functor, TPred1, TPred2],
+	DAnnotation =.. [Functor, DPred1, DPred2],
+	'$lgt_remember_annotation'(Functor, 2),
+	functor(Head, HeadFunctor, HeadArity),
+	'$lgt_remember_annotated_predicate'(HeadFunctor, HeadArity).
+
+'$lgt_tr_body'(Annotation, TAnnotation, DAnnotation, Ctx) :-
+	'$lgt_body_annotation'(Annotation, Functor, Pred1, Pred2),
+	!,
+	'$lgt_tr_body'(Pred1, TPred1, DPred1, Ctx),
+	'$lgt_tr_body'(Pred2, TPred2, DPred2, Ctx),
+	TAnnotation =.. [Functor, TPred1, TPred2],
+	DAnnotation =.. [Functor, DPred1, DPred2],
+	'$lgt_remember_annotation'(Functor, 2).
 
 
 % arithmetic predicates (portability checks)
@@ -12412,7 +12488,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% is necessary to remember which predicates are defined in order to deal with
+% it's necessary to remember which predicates are defined in order to deal with
 % redefinition of built-in predicates and detect missing predicate directives
 %
 % the check for discontiguous predicates is not performed when compiling clauses
@@ -12439,6 +12515,24 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		true
 	;	retractall('$lgt_pp_previous_predicate_'(_, _)),
 		asserta('$lgt_pp_previous_predicate_'(Functor, Arity))
+	).
+
+
+
+% it's necessary to remember which predicates are defined using annotations in order to
+% deal with redefinition of built-in predicates and detect missing predicate directives
+
+'$lgt_remember_annotated_predicate'(Functor, Arity) :-
+	(	'$lgt_pp_defines_annotated_predicate_'(Functor, Arity) ->
+		true
+	;	asserta('$lgt_pp_defines_annotated_predicate_'(Functor, Arity))
+	).
+
+
+'$lgt_remember_annotation'(Functor, Arity) :-
+	(	'$lgt_pp_defines_annotation_'(Functor, Arity) ->
+		true
+	;	asserta('$lgt_pp_defines_annotation_'(Functor, Arity))
 	).
 
 
@@ -12696,7 +12790,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	),
 	\+ '$lgt_pp_dynamic_'(Functor, Arity),
 	\+ '$lgt_pp_defines_predicate_'(Functor, Arity, _, _),
-	\+ '$lgt_pp_calls_predicate_'(Functor, Arity, _, _, _),
+	\+ '$lgt_pp_defines_annotated_predicate_'(Functor, Arity),
 	% declared, static, but undefined predicate;
 	% local calls must fail (closed-world assumption)
 	functor(Head, Functor, Arity),
@@ -12709,6 +12803,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_pp_entity'(object, _, Prefix, _, _),
 	'$lgt_pp_dynamic_'(Functor, Arity),
 	\+ '$lgt_pp_defines_predicate_'(Functor, Arity, _, _),
+	% dynamic predicate with no initial set of clauses
 	functor(Head, Functor, Arity),
 	'$lgt_comp_ctx_prefix'(Ctx, Prefix),
 	(	\+ '$lgt_pp_public_'(Functor, Arity),
@@ -12720,19 +12815,16 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	fail.
 
 '$lgt_gen_local_def_clauses' :-
-	once((	'$lgt_value_annotation'(_, _, _, _, _)
-		 ;	'$lgt_goal_annotation'(_, _, _, _, _)
-	)),
-	% annotations *may* result in the definition of predicates
+	% annotations also result in the definition of predicates
 	'$lgt_pp_entity'(_, _, Prefix, _, _),
 	'$lgt_comp_ctx_prefix'(Ctx, Prefix),
-	'$lgt_pp_calls_predicate_'(Functor, Arity, _, _, _),
+	'$lgt_pp_defines_annotated_predicate_'(Functor, Arity),
 	\+ '$lgt_pp_defines_predicate_'(Functor, Arity, _, _),
+	functor(Head, Functor, Arity),
 	once((	'$lgt_pp_public_'(Functor, Arity)
 		 ;	'$lgt_pp_protected_'(Functor, Arity)
 		 ;	'$lgt_pp_private_'(Functor, Arity)
 	)),
-	functor(Head, Functor, Arity),
 	'$lgt_add_def_clause'(Head, Functor, Arity, _, Ctx),
 	fail.
 
@@ -13687,14 +13779,17 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	Clause = (Head:-Body) ->
 		'$lgt_fix_predicate_calls'(Body, FBody, false),
 		assertz('$lgt_pp_final_entity_clause_'((Head:-FBody), Location))
-	;	'$lgt_value_annotation'(Clause, Functor, Value, Body, _) ->
+	;	'$lgt_value_annotation'(Clause, Functor, Order, Value, Body, _) ->
 		'$lgt_fix_predicate_calls'(Body, FBody, true),
-		'$lgt_value_annotation'(FClause, Functor, Value, FBody, _),
+		(	Order == prefix ->
+			FClause =.. [Functor, Value, FBody]
+		;	FClause =.. [Functor, FBody, Value]
+		),
 		assertz('$lgt_pp_final_entity_clause_'(FClause, Location))
 	;	'$lgt_goal_annotation'(Clause, Functor, Body1, Body2, _) ->
 		'$lgt_fix_predicate_calls'(Body1, FBody1, true),
 		'$lgt_fix_predicate_calls'(Body2, FBody2, true),
-		'$lgt_goal_annotation'(FClause, Functor, FBody1, FBody2, _),
+		FClause =.. [Functor, FBody1, FBody2],
 		assertz('$lgt_pp_final_entity_clause_'(FClause, Location))
 	;	assertz('$lgt_pp_final_entity_clause_'(Clause, Location))
 	),
@@ -13707,14 +13802,17 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	Clause = (Head:-Body) ->
 		'$lgt_fix_predicate_calls'(Body, FBody, false),
 		assertz('$lgt_pp_final_entity_aux_clause_'((Head:-FBody)))
-	;	'$lgt_value_annotation'(Clause, Functor, Value, Body, _) ->
+	;	'$lgt_value_annotation'(Clause, Functor, Order, Value, Body, _) ->
 		'$lgt_fix_predicate_calls'(Body, FBody, true),
-		'$lgt_value_annotation'(FClause, Functor, Value, FBody, _),
+		(	Order == prefix ->
+			FClause =.. [Functor, Value, FBody]
+		;	FClause =.. [Functor, FBody, Value]
+		),
 		assertz('$lgt_pp_final_entity_aux_clause_'(FClause))
 	;	'$lgt_goal_annotation'(Clause, Functor, Body1, Body2, _) ->
 		'$lgt_fix_predicate_calls'(Body1, FBody1, true),
 		'$lgt_fix_predicate_calls'(Body2, FBody2, true),
-		'$lgt_goal_annotation'(FClause, Functor, FBody1, FBody2, _),
+		FClause =.. [Functor, FBody1, FBody2],
 		assertz('$lgt_pp_final_entity_aux_clause_'(FClause))
 	;	assertz('$lgt_pp_final_entity_aux_clause_'(Clause))
 	),
@@ -13871,17 +13969,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!.
 
 '$lgt_fix_predicate_calls'(Pred, TPred, _) :-
-	'$lgt_value_annotation'(Pred, Functor, Value, Goal, _),
-	!,
-	'$lgt_fix_predicate_calls'(Goal, TGoal, true),
-	'$lgt_value_annotation'(TPred, Functor, Value, TGoal, _).
-
-'$lgt_fix_predicate_calls'(Pred, TPred, _) :-
-	'$lgt_goal_annotation'(Pred, Functor, Goal1, Goal2, _),
+	'$lgt_body_annotation'(Pred, Functor, Goal1, Goal2),
 	!,
 	'$lgt_fix_predicate_calls'(Goal1, TGoal1, true),
 	'$lgt_fix_predicate_calls'(Goal2, TGoal2, true),
-	'$lgt_goal_annotation'(TPred, Functor, TGoal1, TGoal2, _).
+	TPred =.. [Functor, TGoal1, TGoal2].
 
 '$lgt_fix_predicate_calls'(Pred, Pred, _) :-
 	'$lgt_logtalk_built_in_predicate'(Pred),
@@ -13973,10 +14065,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	atom_concat(Directory, File, Path),
 		'$lgt_undefined_predicate_call'(Pred, _, Lines),
 		'$lgt_increment_compile_warnings_counter',
-		(	('$lgt_value_annotation'(_, _, _, _, _); '$lgt_goal_annotation'(_, _, _, _, _)) ->
-			'$lgt_print_message'(warning(misspelt_calls), core, declared_static_predicate_called_but_possibly_not_defined(Path, Lines, Type, Entity, Pred))
-		;	'$lgt_print_message'(warning(misspelt_calls), core, declared_static_predicate_called_but_not_defined(Path, Lines, Type, Entity, Pred))
-		),
+		'$lgt_print_message'(warning(misspelt_calls), core, declared_static_predicate_called_but_not_defined(Path, Lines, Type, Entity, Pred)),
 	fail.
 
 '$lgt_report_undefined_predicate_calls'(_, _).
@@ -13985,6 +14074,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_undefined_predicate_call'(Functor/Arity, TFunctor/TArity, Lines) :-
 	'$lgt_pp_calls_predicate_'(Functor, Arity, TFunctor, TArity, Lines),
 	\+ '$lgt_pp_defines_predicate_'(Functor, Arity, _, _),
+	\+ '$lgt_pp_defines_annotation_'(Functor, Arity),
+	\+ '$lgt_pp_defines_annotated_predicate_'(Functor, Arity),
 	% predicate not defined in object/category
 	\+ '$lgt_pp_dynamic_'(Functor, Arity),
 	% predicate not declared dynamic in object/category
@@ -14014,10 +14105,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	atom_concat(Directory, File, Path),
 		'$lgt_undefined_non_terminal_call'(NonTerminal, _, Lines),
 		'$lgt_increment_compile_warnings_counter',
-		(	('$lgt_value_annotation'(_, _, _, _, _); '$lgt_goal_annotation'(_, _, _, _, _)) ->
-			'$lgt_print_message'(warning(misspelt_calls), core, declared_static_non_terminal_called_but_possibly_not_defined(Path, Lines, Type, Entity, NonTerminal))
-		;	'$lgt_print_message'(warning(misspelt_calls), core, declared_static_non_terminal_called_but_not_defined(Path, Lines, Type, Entity, NonTerminal))
-		),
+		'$lgt_print_message'(warning(misspelt_calls), core, declared_static_non_terminal_called_but_not_defined(Path, Lines, Type, Entity, NonTerminal)),
 	fail.
 
 '$lgt_report_undefined_non_terminal_calls'(_, _).
@@ -14054,10 +14142,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		% but check for out-of-place dynamic/1 directive
 		\+ '$lgt_pp_dynamic_'(Functor, Arity),
 		'$lgt_increment_compile_warnings_counter',
-		(	('$lgt_value_annotation'(_, _, _, _, _); '$lgt_goal_annotation'(_, _, _, _, _); \+ '$lgt_pp_module_'(_)) ->
-			'$lgt_print_message'(warning(missing), core, possibly_missing_predicate_directive(Path, Lines, Type, Entity, (dynamic), Functor/Arity))
-		;	'$lgt_print_message'(warning(missing), core, missing_predicate_directive(Path, Lines, Type, Entity, (dynamic), Functor/Arity))
-		),
+		'$lgt_print_message'(warning(missing), core, missing_predicate_directive(Path, Lines, Type, Entity, (dynamic), Functor/Arity)),
 	fail.
 
 '$lgt_report_missing_dynamic_directives'(_, _).
@@ -14075,10 +14160,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		% but check for out-of-place discontiguous/1 directive
 		\+ '$lgt_pp_discontiguous_'(Functor, Arity),
 		'$lgt_increment_compile_warnings_counter',
-		(	('$lgt_value_annotation'(_, _, _, _, _); '$lgt_goal_annotation'(_, _, _, _, _); \+ '$lgt_pp_module_'(_)) ->
-			'$lgt_print_message'(warning(missing), core, possibly_missing_predicate_directive(Path, Lines, Type, Entity, (discontiguous), Functor/Arity))
-		;	'$lgt_print_message'(warning(missing), core, missing_predicate_directive(Path, Lines, Type, Entity, (discontiguous), Functor/Arity))
-		),
+		'$lgt_print_message'(warning(missing), core, missing_predicate_directive(Path, Lines, Type, Entity, (discontiguous), Functor/Arity)),
 	fail.
 
 '$lgt_report_missing_discontiguous_directives'(_, _).
@@ -14112,10 +14194,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	atom_concat(Directory, File, Path),
 		'$lgt_misspelt_predicate_call'(Pred, Lines),
 		'$lgt_increment_compile_warnings_counter',
-		(	('$lgt_value_annotation'(_, _, _, _, _); '$lgt_goal_annotation'(_, _, _, _, _)) ->
-			'$lgt_print_message'(warning(misspelt_calls), core, predicate_called_but_possibly_not_defined(Path, Lines, Type, Entity, Pred))
-		;	'$lgt_print_message'(warning(misspelt_calls), core, predicate_called_but_not_defined(Path, Lines, Type, Entity, Pred))
-		),
+		'$lgt_print_message'(warning(misspelt_calls), core, predicate_called_but_not_defined(Path, Lines, Type, Entity, Pred)),
 	fail.
 
 '$lgt_report_misspelt_predicate_calls'(_, _).
@@ -14124,6 +14203,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_misspelt_predicate_call'(Functor/Arity, Lines) :-
 	'$lgt_pp_calls_predicate_'(Functor, Arity, _, _, Lines),
 	\+ '$lgt_pp_defines_predicate_'(Functor, Arity, _, _),
+	\+ '$lgt_pp_defines_annotation_'(Functor, Arity),
+	\+ '$lgt_pp_defines_annotated_predicate_'(Functor, Arity),
 	\+ '$lgt_pp_dynamic_'(Functor, Arity),
 	\+ '$lgt_pp_public_'(Functor, Arity),
 	\+ '$lgt_pp_protected_'(Functor, Arity),
@@ -14137,10 +14218,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	atom_concat(Directory, File, Path),
 		'$lgt_misspelt_non_terminal_call'(NonTerminal, Lines),
 		'$lgt_increment_compile_warnings_counter',
-		(	('$lgt_value_annotation'(_, _, _, _, _); '$lgt_goal_annotation'(_, _, _, _, _)) ->
-			'$lgt_print_message'(warning(misspelt_calls), core, non_terminal_called_but_possibly_not_defined(Path, Lines, Type, Entity, NonTerminal))
-		;	'$lgt_print_message'(warning(misspelt_calls), core, non_terminal_called_but_not_defined(Path, Lines, Type, Entity, NonTerminal))
-		),
+		'$lgt_print_message'(warning(misspelt_calls), core, non_terminal_called_but_not_defined(Path, Lines, Type, Entity, NonTerminal)),
 	fail.
 
 '$lgt_report_misspelt_non_terminal_calls'(_, _).
@@ -15075,14 +15153,41 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_compile_hooks'(Obj) :-
 	(	Obj == user ->
 		TermExpansionGoal = term_expansion(Term, ExpandedTerm),
-		GoalExpansionGoal = goal_expansion(Term, ExpandedTerm)
+		GoalExpansionGoal = goal_expansion(Term, ExpandedTerm),
+		GoalAnnotationGoal = fail,
+		ValueAnnotationGoal = fail,
+		BodyAnnotationGoal = fail
 	;	'$lgt_tr_msg'(term_expansion(Term, ExpandedTerm), Obj, TermExpansionGoal, user),
-		'$lgt_tr_msg'(goal_expansion(Term, ExpandedTerm), Obj, GoalExpansionGoal, user)
+		'$lgt_tr_msg'(goal_expansion(Term, ExpandedTerm), Obj, GoalExpansionGoal, user),
+		'$lgt_tr_msg'(goal_annotation(GoalAnnotation, GoalLeft, GoalRight, GoalHead), Obj, GoalAnnotationGoal, user),
+		'$lgt_tr_msg'(value_annotation(ValueAnnotation, Value, Goal, ValueHead), Obj, ValueAnnotationGoal, user),
+		'$lgt_tr_msg'(body_annotation(BodyAnnotation, BodyLeft, BodyRight), Obj, BodyAnnotationGoal, user)
 	),
 	retractall('$lgt_hook_term_expansion_'(_, _)),
-	assertz(('$lgt_hook_term_expansion_'(Term, ExpandedTerm) :- catch(TermExpansionGoal, _, fail))),
+	assertz((
+		'$lgt_hook_term_expansion_'(Term, ExpandedTerm) :-
+			catch(TermExpansionGoal, Error, '$lgt_term_expansion_error'(Obj, Term, Error))
+	)),
 	retractall('$lgt_hook_goal_expansion_'(_, _)),
-	assertz(('$lgt_hook_goal_expansion_'(Term, ExpandedTerm) :- catch(GoalExpansionGoal, _, fail))).
+	assertz((
+		'$lgt_hook_goal_expansion_'(Term, ExpandedTerm) :-
+			catch(GoalExpansionGoal, Error, '$lgt_goal_expansion_error'(Obj, Goal, Error))
+	)),
+	retractall('$lgt_hook_goal_annotation_'(_, _, _, _)),
+	assertz((
+		'$lgt_hook_goal_annotation_'(GoalAnnotation, GoalLeft, GoalRight, GoalHead) :-
+			catch(GoalAnnotationGoal, Error, '$lgt_annotation_expansion_error'(Obj, GoalAnnotation, Error))
+	)),
+	retractall('$lgt_hook_value_annotation_'(_, _, _, _)),
+	assertz((
+		'$lgt_hook_value_annotation_'(ValueAnnotation, Value, Goal, ValueHead) :-
+			catch(ValueAnnotationGoal, Error, '$lgt_annotation_expansion_error'(Obj, ValueAnnotation, Error))
+	)),
+	retractall('$lgt_hook_body_annotation_'(_, _, _)),
+	assertz((
+		'$lgt_hook_body_annotation_'(BodyAnnotation, BodyLeft, BodyRight) :-
+			catch(BodyAnnotationGoal, Error, '$lgt_annotation_expansion_error'(Obj, BodyAnnotation, Error))
+	)).
 
 
 
