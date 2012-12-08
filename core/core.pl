@@ -8263,7 +8263,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!.
 
 '$lgt_tr_clause'(Clause, _, _) :-
-	throw(error(unknown_error, clause(Clause))).
+	(	Clause = (Head :- _) ->
+		functor(Head, Functor, Arity)
+	;	functor(Clause, Functor, Arity)
+	),
+	throw(error(domain_error(clause, Functor/Arity), clause(Clause))).
 
 
 

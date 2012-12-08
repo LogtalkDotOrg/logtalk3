@@ -58,6 +58,9 @@ These annotation predicates are still considered experimental.
 * IMPROVED: Allow non-callable source file terms to be term-expanded. Updated
 the compiler to throw an error when a term is expanded to a non-callable term.
 
+* CHANGED: Use a `domain_error(clause, Functor/Arity)` exception term instead
+of `unknown_error` when the compiler fails to translate a clause.
+
 
 Prolog adapter and integration files
 ------------------------------------
