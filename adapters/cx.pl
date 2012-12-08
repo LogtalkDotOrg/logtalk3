@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for CxProlog 0.97.6 or a later version
-%  Last updated on November 24, 2012
+%  Last updated on December 7, 2012
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -640,15 +640,21 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_default_value_annotation'(@callable, -atom, -callable, -callable, -callable)
+% '$lgt_default_value_annotation'(@callable, -term, -callable, -callable)
 
-'$lgt_default_value_annotation'(_, _, _, _, _) :-
+'$lgt_default_value_annotation'(_, _, _, _) :-
 	fail.
 
 
-% '$lgt_default_goal_annotation'(@callable, -atom, -callable, -callable, -callable)
+% '$lgt_default_goal_annotation'(@callable, -callable, -callable, -callable)
 
-'$lgt_default_goal_annotation'(_, _, _, _, _) :-
+'$lgt_default_goal_annotation'(_, _, _, _) :-
+	fail.
+
+
+% '$lgt_default_body_annotation'(@callable, -callable, -callable)
+
+'$lgt_default_body_annotation'(_, _, _) :-
 	fail.
 
 

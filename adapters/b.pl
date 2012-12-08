@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for B-Prolog 7.8 and later versions
-%  Last updated on October 21, 2012
+%  Last updated on December 7, 2012
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -612,24 +612,30 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_default_value_annotation'(@callable, -atom, -callable, -callable, -callable)
+% '$lgt_default_value_annotation'(@callable, -atom, -callable, -callable)
 
-'$lgt_default_value_annotation'(_, _, _, _, _) :-
+'$lgt_default_value_annotation'(_, _, _, _) :-
 	fail.
 
 
-% '$lgt_default_goal_annotation'(@callable, -atom, -callable, -callable, -callable)
+% '$lgt_default_goal_annotation'(@callable, -atom, -callable, -callable)
 
-'$lgt_default_goal_annotation'('=>'(Left, Right), '=>', Left, Right, Head) :-
+'$lgt_default_goal_annotation'('=>'(Left, Right), Left, Right, Head) :-
 	(	Left = (Head, _) ->
 		true
 	;	Left = Head
 	).
-'$lgt_default_goal_annotation'('?=>'(Left, Right), '?=>', Left, Right, Head) :-
+'$lgt_default_goal_annotation'('?=>'(Left, Right), Left, Right, Head) :-
 	(	Left = (Head, _) ->
 		true
 	;	Left = Head
 	).
+
+
+% '$lgt_default_body_annotation'(@callable, -callable, -callable)
+
+'$lgt_default_body_annotation'(_, _, _) :-
+	fail.
 
 
 

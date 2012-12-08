@@ -530,15 +530,21 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_default_value_annotation'(@callable, -atom, -callable, -callable, -callable)
+% '$lgt_default_value_annotation'(@callable, -term, -callable, -callable)
 
 '$lgt_default_value_annotation'(Annotation, Functor, Value, Goal, Head) :-
 	?????
 
 
-% '$lgt_default_goal_annotation'(@callable, -atom, -callable, -callable, -callable)
+% '$lgt_default_goal_annotation'(@callable, -callable, -callable, -callable)
 
 '$lgt_default_goal_annotation'(Annotation, Functor, LeftGoal, RightGoal, Head) :-
+	?????
+
+
+% '$lgt_default_body_annotation'(@callable, -callable, -callable)
+
+'$lgt_default_body_annotation'(Annotation, LeftGoal, RightGoal) :-
 	?????
 
 

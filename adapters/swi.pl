@@ -933,15 +933,21 @@ user:goal_expansion('::'(Object, Message), user:Goal) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_default_value_annotation'(@callable, -atom, -callable, -callable, -callable)
+% '$lgt_default_value_annotation'(@callable, -term, -callable, -callable)
 
-'$lgt_default_value_annotation'(_, _, _, _, _) :-
+'$lgt_default_value_annotation'(_, _, _, _) :-
 	fail.
 
 
-% '$lgt_default_goal_annotation'(@callable, -atom, -callable, -callable, -callable)
+% '$lgt_default_goal_annotation'(@callable, -callable, -callable, -callable)
 
-'$lgt_default_goal_annotation'(_, _, _, _, _) :-
+'$lgt_default_goal_annotation'(_, _, _, _) :-
+	fail.
+
+
+% '$lgt_default_body_annotation'(@callable, -callable, -callable)
+
+'$lgt_default_body_annotation'(_, _, _) :-
 	fail.
 
 

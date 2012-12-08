@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Qu-Prolog 8.12 and later versions
-%  Last updated on October 21, 2012
+%  Last updated on December 7, 2012
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -654,15 +654,21 @@ format_spec_('~', Stream, Arguments, Arguments) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_default_value_annotation'(@callable, -atom, -callable, -callable, -callable)
+% '$lgt_default_value_annotation'(@callable, -term, -callable, -callable)
 
-'$lgt_default_value_annotation'(_, _, _, _, _) :-
+'$lgt_default_value_annotation'(_, _, _, _) :-
 	fail.
 
 
-% '$lgt_default_goal_annotation'(@callable, -atom, -callable, -callable, -callable)
+% '$lgt_default_goal_annotation'(@callable, -callable, -callable, -callable)
 
-'$lgt_default_goal_annotation'(_, _, _, _, _) :-
+'$lgt_default_goal_annotation'(_, _, _, _) :-
+	fail.
+
+
+% '$lgt_default_body_annotation'(@callable, -callable, -callable)
+
+'$lgt_default_body_annotation'(_, _, _) :-
 	fail.
 
 
@@ -676,7 +682,9 @@ format_spec_('~', Stream, Arguments, Arguments) :-
 
 % '$lgt_normalize_error_term'(@callable, -callable)
 
-'$lgt_normalize_error_term'(exception(undefined_predicate(recoverable, Predicate, Context)), error(existence_error(procedure, Functor/Arity), Context)) :-
+'$lgt_normalize_error_term'(
+		exception(undefined_predicate(recoverable, Predicate, Context)),
+		error(existence_error(procedure, Functor/Arity), Context)) :-
 	functor(Predicate, Functor, Arity).
 
 
