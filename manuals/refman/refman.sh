@@ -75,7 +75,6 @@ eval $xslt_proc -o directives/dynamic1.section refman.xsl directives/dynamic1.ht
 eval $xslt_proc -o directives/info2.section refman.xsl directives/info2.html
 eval $xslt_proc -o directives/meta_predicate1.section refman.xsl directives/meta_predicate1.html
 eval $xslt_proc -o directives/meta_non_terminal1.section refman.xsl directives/meta_non_terminal1.html
-eval $xslt_proc -o directives/annotation1.section refman.xsl directives/annotation1.html
 eval $xslt_proc -o directives/mode2.section refman.xsl directives/mode2.html
 eval $xslt_proc -o directives/op3.section refman.xsl directives/op3.html
 eval $xslt_proc -o directives/private1.section refman.xsl directives/private1.html
@@ -198,7 +197,6 @@ cat -s \
 	directives/info2.section \
 	directives/meta_predicate1.section \
 	directives/meta_non_terminal1.section \
-	directives/annotation1.section \
 	directives/mode2.section \
 	directives/op3.section \
 	directives/private1.section \
