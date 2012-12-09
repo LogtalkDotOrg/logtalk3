@@ -10,14 +10,14 @@
 
 
 :- initialization((
-	ignore(logtalk_load(lgtmthdredef, [report(on)])),
-	ignore(logtalk_load(invclause, [report(on)])),
-	ignore(logtalk_load(unknowndir, [report(on)])),
-	ignore(logtalk_load(noninstdir, [report(on)])),
-	ignore(logtalk_load(invargdir, [report(on)])),
-	ignore(logtalk_load(unmatchdir, [report(on)])),
-	ignore(logtalk_load(catdynpred, [report(on)])),
-	ignore(logtalk_load(ccredef, [report(on)])),
-	ignore(logtalk_load(usesrepeated, [report(on)])),
-	ignore(logtalk_load(usesconflict, [report(on)]))
+	(logtalk_load(lgtmthdredef, [report(on)]) -> true; true),
+	(logtalk_load(invclause, [report(on)]) -> true; true),
+	(logtalk_load(unknowndir, [report(on)]) -> true; true),
+	(logtalk_load(noninstdir, [report(on)]) -> true; true),
+	(logtalk_load(invargdir, [report(on)]) -> true; true),
+	(logtalk_load(unmatchdir, [report(on)]) -> true; true),
+	(logtalk_load(catdynpred, [report(on)]) -> true; true),
+	(logtalk_load(ccredef, [report(on)]) -> true; true),
+	(logtalk_load(usesrepeated, [report(on)]) -> true; true),
+	(logtalk_load(usesconflict, [report(on)]) -> true; true)
 )).
