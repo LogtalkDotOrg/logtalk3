@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/12/08,
+		date is 2012/12/09,
 		comment is 'Logtalk core (compiler and runtime) default message translations.']).
 
 	:- multifile(logtalk::message_prefix_stream/4).
@@ -168,7 +168,7 @@
 		message_context(File, Lines).
 
 	logtalk::message_tokens(compiler_stream_error(Error), core) -->
-		['~q'-[Error], nl].
+		error_term_tokens(Error).
 
 	logtalk::message_tokens(term_expansion_error(File, Lines, Type, Entity, HookEntity, Term, Error), core) -->
 		['Error found when term-expanding ~w using hook entity ~w: '-[Term, HookEntity]],
