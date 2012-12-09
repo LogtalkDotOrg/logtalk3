@@ -61,6 +61,10 @@ the compiler to throw an error when a term is expanded to a non-callable term.
 * CHANGED: Use a `domain_error(clause, Functor/Arity)` exception term instead
 of `unknown_error` when the compiler fails to translate a clause.
 
+* CHANGED: The compiler now fails in case of compilation error (after printing
+the error information) instead of re-throwing the error.  This avoids repeated
+error information and unhandled exceptions messages with the top-level of some
+back-end Prolog compilers.
 
 Prolog adapter and integration files
 ------------------------------------

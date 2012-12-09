@@ -5355,7 +5355,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 			catch(('$lgt_delete_file'(TmpFile) -> true; true), _, true))
 	;	true
 	),
-	throw(Error).
+	!,
+	fail.
 
 
 
@@ -5370,7 +5371,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_clean_pp_clauses',
 	'$lgt_reset_warnings_counter',
 	catch(close(Stream), _, true),
-	throw(Error).
+	!,
+	fail.
 
 
 
@@ -5383,7 +5385,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_restore_global_operator_table',
 	'$lgt_clean_pp_clauses',
 	'$lgt_reset_warnings_counter',
-	throw(Error).
+	!,
+	fail.
 
 
 
