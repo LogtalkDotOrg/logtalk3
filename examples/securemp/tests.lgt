@@ -13,15 +13,16 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2.1,
+		version is 2.2,
 		author is 'Paulo Moura',
-		date is 2012/11/27,
+		date is 2012/12/09,
 		comment is 'Unit tests for the "securemp" example.']).
 
+	:- discontiguous(fails/1).
 	:- discontiguous(succeeds/1).
 	:- discontiguous(throws/2).
 
-	throws(rule_a, error(type_error(variable, scale(_)), _)) :-
+	fails(rule_a) :-
 		logtalk_load(rule_a).				% compile-time error
 
 	throws(rule_a_variant, error(existence_error(procedure, scale/3), _)) :-
@@ -44,7 +45,7 @@
 		{client_b_3_variant::test(X)},		% definition but no error
 		X == 3.
 
-	throws(rule_c, error(domain_error({1}, 2), _)) :-
+	fails(rule_c) :-
 		logtalk_load(rule_c).				% compile-time error
 
 :- end_object.
