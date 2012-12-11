@@ -16,7 +16,7 @@
 	throws(current_logtalk_flag_2_1, error(type_error(atom, 1), logtalk(current_logtalk_flag(1, _), _))) :-
 		{current_logtalk_flag(1, _)}.
 
-	throws(current_logtalk_flag_2_2, error(domain_error(logtalk_flag, non_existing_flag), logtalk(current_logtalk_flag(non_existing_flag, _), _))) :-
+	throws(current_logtalk_flag_2_2, error(domain_error(flag, non_existing_flag), logtalk(current_logtalk_flag(non_existing_flag, _), _))) :-
 		{current_logtalk_flag(non_existing_flag, _)}.
 
 	succeeds(unknown_entities_flag) :-

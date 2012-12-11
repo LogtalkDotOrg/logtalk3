@@ -5,7 +5,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/12/05,
+		date is 2012/12/11,
 		comment is 'Unit tests for the set_logtalk_flag/2 built-in predicate.'
 	]).
 
@@ -19,7 +19,7 @@
 	throws(set_logtalk_flag_2_2, error(type_error(atom,1), logtalk(set_logtalk_flag(1,a),_))) :-
 		{set_logtalk_flag(1, a)}.
 
-	throws(set_logtalk_flag_2_3, error(domain_error(logtalk_flag,non_existing_flag), logtalk(set_logtalk_flag(non_existing_flag,a),_))) :-
+	throws(set_logtalk_flag_2_3, error(domain_error(flag,non_existing_flag), logtalk(set_logtalk_flag(non_existing_flag,a),_))) :-
 		{set_logtalk_flag(non_existing_flag, a)}.
 
 :- end_object.
