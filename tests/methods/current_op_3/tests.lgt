@@ -1,5 +1,5 @@
 
-:- object(op_3_test_object_1).
+:- object(current_op_3_test_object_1).
 
 	:- set_logtalk_flag(context_switching_calls, allow).
 
@@ -23,8 +23,8 @@
 
 
 
-:- object(op_3_test_object_2,
-	extends(op_3_test_object_1)).
+:- object(current_op_3_test_object_2,
+	extends(current_op_3_test_object_1)).
 
 	:- public(op(501, xfx, opq)).
 	:- protected(op(501, xfx, rst)).
@@ -43,51 +43,51 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/12/04,
+		date is 2012/12/11,
 		comment is 'Unit tests for the current_op/3 built-in directive.'
 	]).
 
-	throws(op_3_1, error(type_error(integer,a), logtalk(This::current_op(a,_,_),user))) :-
+	throws(current_op_3_1, error(type_error(integer,a), logtalk(This::current_op(a,_,_),user))) :-
 		this(This),
 		{This::current_op(a, _, _)}.
 
-	throws(op_3_2, error(domain_error(operator_priority,3000), logtalk(This::current_op(3000,_,_),user))) :-
+	throws(current_op_3_2, error(domain_error(operator_priority,3000), logtalk(This::current_op(3000,_,_),user))) :-
 		this(This),
 		{This::current_op(3000, _, _)}.
 
-	throws(op_3_3, error(type_error(atom,1), logtalk(This::current_op(_,1,_),user))) :-
+	throws(current_op_3_3, error(type_error(atom,1), logtalk(This::current_op(_,1,_),user))) :-
 		this(This),
 		{This::current_op(_, 1, _)}.
 
-	throws(op_3_4, error(domain_error(operator_specifier,a), logtalk(This::current_op(_,a,_),user))) :-
+	throws(current_op_3_4, error(domain_error(operator_specifier,a), logtalk(This::current_op(_,a,_),user))) :-
 		this(This),
 		{This::current_op(_, a, _)}.
 
-	throws(op_3_5, error(type_error(atom,1), logtalk(This::current_op(_,_,1),user))) :-
+	throws(current_op_3_5, error(type_error(atom,1), logtalk(This::current_op(_,_,1),user))) :-
 		this(This),
 		{This::current_op(_, _, 1)}.
 
-	succeeds(op_3_6) :-
-		setof(Operator, op_3_test_object_1<<current_op(501, xfx, Operator), Operators),
+	succeeds(current_op_3_6) :-
+		setof(Operator, current_op_3_test_object_1<<current_op(501, xfx, Operator), Operators),
 		Operators == [abc, def, ghi].
 
-	succeeds(op_3_7) :-
-		setof(Operator, op_3_test_object_1::current_op(501, xfx, Operator), Operators),
+	succeeds(current_op_3_7) :-
+		setof(Operator, current_op_3_test_object_1::current_op(501, xfx, Operator), Operators),
 		Operators == [abc].
 
-	succeeds(op_3_8) :-
-		op_3_test_object_1::current_op(600, xfx, :),
-		\+ op_3_test_object_1::current_op(600, xfy, :).
+	succeeds(current_op_3_8) :-
+		current_op_3_test_object_1::current_op(600, xfx, :),
+		\+ current_op_3_test_object_1::current_op(600, xfy, :).
 
-	succeeds(op_3_9) :-
-		\+ op_3_test_object_2::current_op(600, xfx, _).
+	succeeds(current_op_3_9) :-
+		\+ current_op_3_test_object_2::current_op(600, xfx, :).
 
-	succeeds(op_3_10) :-
-		op_3_test_object_1::operators(Operators),
+	succeeds(current_op_3_10) :-
+		current_op_3_test_object_1::operators(Operators),
 		Operators == [abc, def, ghi].
 
-	succeeds(op_3_11) :-
-		op_3_test_object_2::operators(Operators),
+	succeeds(current_op_3_11) :-
+		current_op_3_test_object_2::operators(Operators),
 		Operators == [opq, rst].
 
 :- end_object.
