@@ -143,7 +143,7 @@
 			'  code_prefix: ~q, hook: ~w'-[Code, Hook], nl,
 			'  optimize: ~w, source_data: ~w, debug: ~w'-[Optimize, SourceData, Debug], nl,
 			'  clean: ~w, smart_compilation: ~w, reload: ~w'-[Clean, Smart, Reload], nl,
-			'Back-end Prolog compiler and loader flags:'-[], nl,
+			'Back-end Prolog compiler flags:'-[], nl,
 			'  prolog_compiler: ~w'-[PrologCompiler], nl,
 			'  prolog_loader:   ~w'-[PrologLoader], nl,
 			'Read-only compilation flags (back-end Prolog compiler features):'-[], nl,
