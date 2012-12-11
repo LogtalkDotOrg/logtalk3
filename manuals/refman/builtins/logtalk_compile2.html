@@ -50,7 +50,8 @@ Note that only the errors related to problems in the predicate arguments are lis
 
 <h4>Template and modes</h4>
 
-<pre>logtalk_compile(@source_file_names, @list)</pre>
+<pre>logtalk_compile(@source_file_name, @list(compiler_flag))
+logtalk_compile(@list(source_file_name), @list(compiler_flag))</pre>
 
 <h4>Errors</h4>
 
@@ -59,18 +60,22 @@ Note that only the errors related to problems in the predicate arguments are lis
 		<dd><code>instantiation_error</code></dd>
 	<dt>Files is a variable or a list with an element which is a variable:</dt>
 		<dd><code>instantiation_error</code></dd>
-	<dt>File, or an element File of the Files list, is neither a variable nor an entity file name nor a library entity file name:</dt>
+	<dt>File, or an element File of the Files list, is neither a variable nor a source file name:</dt>
 		<dd><code>type_error(source_file_name, File)</code></dd>
-	<dt>File or an element File of the Files list does not exist in the current working directory or in the specified library directory:</dt>
-		<dd><code>existence_error(file, File)</code></dd>
-	<dt>Entity library does not exist:</dt>
+	<dt>File, or an element File of the Files list, uses library notation but the library does not exist:</dt>
 		<dd><code>existence_error(library, Library)</code></dd>
-	<dt>Flags is a variable:</dt>
+	<dt>File or an element File of the Files list, does not exist:</dt>
+		<dd><code>existence_error(file, File)</code></dd>
+	<dt>Flags is a variable or a list with an element which is a variable:</dt>
 		<dd><code>instantiation_error</code></dd>
 	<dt>Flags is neither a variable nor a proper list:</dt>
 		<dd><code>type_error(list, Flags)</code></dd>
-	<dt>An element Flag of the Flags list is not valid:</dt>
-		<dd><code>type_error(compiler_flag, Flag)</code></dd>
+	<dt>An element Flag of the Flags list is not a valid compiler flag:</dt>
+		<dd><code>type_error(flag, Flag)</code></dd>
+	<dt>An element Flag of the Flags list is a read-only compiler flag:</dt>
+		<dd><code>permission_error(modify, flag, Flag)</code></dd>
+	<dt>The value of an element Flag of the Flags list is not valid:</dt>
+		<dd><code>domain_error(flag_value, Flag+Value)</code></dd>
 </dl>
 
 <h4>Examples</h4>

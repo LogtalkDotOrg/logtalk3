@@ -66,6 +66,13 @@ the error information) instead of re-throwing the error.  This avoids repeated
 error information and unhandled exceptions messages with the top-level of some
 back-end Prolog compilers.
 
+* IMPROVED: The compiling and loading built-in predicates now check that all
+source file names are valid and correspond to existing files before attempting
+to compile any of the files.
+
+* CHANGED: The exception terms used in case of error when using the compiling
+and loading built-in predicates.
+
 Prolog adapter and integration files
 ------------------------------------
 
