@@ -36,22 +36,16 @@
 
 <h4>Description</h4>
 
-<pre>logtalk_load(File, Flags)
-logtalk_load(Files, Flags)</pre>
+<pre>logtalk_load(File, Options)
+logtalk_load(Files, Options)</pre>
 <p>
-Compiles to disk and then loads to memory a source file or a list of source files using a list of flag values. The Logtalk source file name extension (by default, <code>.lgt</code>) can be omitted.
-</p>
-<p>
-For a description of the available compiler flags, please <a href="../../userman/programming.html#programming_flags">consult</a> the User Manual.
-</p>
-<p>
-Note that only the errors related to problems in the predicate arguments are listed below. This predicate fails when errors are found during compilation of a source file.
+Compiles to disk and then loads to memory a source file or a list of source files using a list of compiler options. The Logtalk source file name extension (by default, <code>.lgt</code>) can be omitted. Compiler option are represented as <em>flag(value)</em>. For a description of the available compiler flags, please <a href="../../userman/programming.html#programming_flags">consult</a> the User Manual. Note that only the errors related to problems in the predicate arguments are listed below. This predicate fails when errors are found during compilation of a source file.
 </p>
 
 <h4>Template and modes</h4>
 
-<pre>logtalk_load(@source_file_name, @list(compiler_flag))
-logtalk_load(@list(source_file_name), @list(compiler_flag))</pre>
+<pre>logtalk_load(@source_file_name, @list(compiler_option))
+logtalk_load(@list(source_file_name), @list(compiler_option))</pre>
 
 <h4>Errors</h4>
 
@@ -66,15 +60,15 @@ logtalk_load(@list(source_file_name), @list(compiler_flag))</pre>
 		<dd><code>existence_error(library, Library)</code></dd>
 	<dt>File or an element File of the Files list, does not exist:</dt>
 		<dd><code>existence_error(file, File)</code></dd>
-	<dt>Flags is a variable or a list with an element which is a variable:</dt>
+	<dt>Options is a variable or a list with an element which is a variable:</dt>
 		<dd><code>instantiation_error</code></dd>
-	<dt>Flags is neither a variable nor a proper list:</dt>
-		<dd><code>type_error(list, Flags)</code></dd>
-	<dt>An element Flag of the Flags list is not a valid compiler flag:</dt>
-		<dd><code>type_error(flag, Flag)</code></dd>
-	<dt>An element Flag of the Flags list is a read-only compiler flag:</dt>
+	<dt>Options is neither a Options nor a proper list:</dt>
+		<dd><code>type_error(list, Options)</code></dd>
+	<dt>An element Option of the Options list is not a valid compiler option:</dt>
+		<dd><code>type_error(compiler_option, Option)</code></dd>
+	<dt>An element Option of the Options list defines a value for a read-only compiler flag:</dt>
 		<dd><code>permission_error(modify, flag, Flag)</code></dd>
-	<dt>The value of an element Flag of the Flags list is not valid:</dt>
+	<dt>An element Option of the Options list defines an invalid value for a flag:</dt>
 		<dd><code>domain_error(flag_value, Flag+Value)</code></dd>
 </dl>
 
@@ -82,14 +76,14 @@ logtalk_load(@list(source_file_name), @list(compiler_flag))</pre>
 
 <pre>| ?- logtalk_load(list, []).
 
-| ?- logtalk_load(types(tree), [xmlspec(xsd)]).
+| ?- logtalk_load(types(tree), [reload(skip)]).
 
-| ?- logtalk_load([listp, list], [xml(off), plredf(warning)]).</pre>
+| ?- logtalk_load([listp, list], [source_data(off), portability(silent)]).</pre>
 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: December 10, 2012</span>
+		<span>Last updated on: December 12, 2012</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="logtalk_load1.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="logtalk_library_path2.html">next</a></span><br/>
