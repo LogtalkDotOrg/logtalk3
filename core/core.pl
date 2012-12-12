@@ -1614,7 +1614,7 @@ threaded_notify(Message) :-
 
 
 % logtalk_compile(@source_file_name)
-% logtalk_compile(@source_file_name_list)
+% logtalk_compile(@list(source_file_name))
 %
 % compiles to disk a source file or list of source files using default options
 
@@ -1626,8 +1626,8 @@ logtalk_compile(Files) :-
 
 
 
-% logtalk_compile(@source_file_name, @list)
-% logtalk_compile(@source_file_name_list, @list)
+% logtalk_compile(@source_file_name, @list(compiler_option))
+% logtalk_compile(@list(source_file_name), @list(compiler_option))
 %
 % compiles to disk a source file or a list of source files using a list of flag options
 
@@ -1966,7 +1966,7 @@ logtalk_compile(Files, Flags) :-
 
 
 % logtalk_load(@source_file_name)
-% logtalk_load(@source_file_name_list)
+% logtalk_load(@list(source_file_name))
 %
 % compiles to disk and then loads to memory a source file
 % or a list of source files using default compiler options
@@ -1979,8 +1979,8 @@ logtalk_load(Files) :-
 
 
 
-% logtalk_load(@source_file_name, @list)
-% logtalk_load(@source_file_name_list, @list)
+% logtalk_load(@source_file_name, @list(compiler_option))
+% logtalk_load(@list(source_file_name), @list(compiler_option))
 %
 % compiles to disk and then loads to memory a source file
 % or a list of source files using a list of compiler options
@@ -4706,8 +4706,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_load_files'(@source_file_name, @list)
-% '$lgt_load_files'(@source_file_name_list, @list)
+% '$lgt_load_files'(@source_file_name, @list(compiler_option))
+% '$lgt_load_files'(@list(source_file_name), @list(compiler_option))
 %
 % compiles to disk and then loads to memory a source file or a list of source files
 %
@@ -4801,7 +4801,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_redefined_entity'(@entity_identifier, -atom, -atom)
+% '$lgt_redefined_entity'(@entity_identifier, -atom, -atom, -atom, -nonvar)
 %
 % true if an entity of the same name is already loaded; returns entity type
 
@@ -4835,7 +4835,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_report_redefined_entity'(+atom, @entity_identifier, +atom, +nonvar)
+% '$lgt_report_redefined_entity'(+atom, @entity_identifier, +atom, +atom, +nonvar)
 %
 % prints a warning for redefined entities
 
@@ -4874,8 +4874,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_compile_files'(@source_file_name, @list)
-% '$lgt_compile_files'(@source_file_name_list, @list)
+% '$lgt_compile_files'(@source_file_name, @list(compiler_option))
+% '$lgt_compile_files'(@list(source_file_name), @list(compiler_option))
 %
 % compiles to disk a source file or a list of source files
 %
@@ -4940,7 +4940,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_file_name'(+atom, +atom, -atom, -atom)
+% '$lgt_file_name'(+atom, +atom, -atom, -atom, -atom)
 %
 % derives from a given file type (logtalk, prolog, or tmp) and a file path
 % (which can be either absolute or relative and may or may not include a
@@ -5286,7 +5286,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_report_singleton_variables'(+list, +term)
+% '$lgt_report_singleton_variables'(@list, @term)
 %
 % reports the singleton variables found while compiling an entity term
 
@@ -5309,7 +5309,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_filter_singleton_variables'(+list, -list)
+% '$lgt_filter_singleton_variables'(@list, -list(atom))
 %
 % filters variables whose name start with an underscore from a singletons list if
 % the corresponding compiler flag sets their interpretation to don't care variables
@@ -5338,7 +5338,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_compiler_error_handler'(+term)
+% '$lgt_compiler_error_handler'(@compound)
 %
 % closes the streams being used for reading and writing terms, restores
 % the operator table, and reports the compilation error found
@@ -5371,7 +5371,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_compiler_stream_io_error_handler'(@stream, +term)
+% '$lgt_compiler_stream_io_error_handler'(@stream, @compound)
 %
 % closes the stream being used for reading or writing terms, restores
 % the operator table, and reports the compilation error found
@@ -5387,7 +5387,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_compiler_open_stream_error_handler'(+term)
+% '$lgt_compiler_open_stream_error_handler'(@compound)
 %
 % restores the operator table and reports the compilation error found
 
@@ -7595,7 +7595,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_tr_uses_directive'(+list, +object_identifier, +compilation_context)
+% '$lgt_tr_uses_directive'(+list, @object_identifier, +compilation_context)
 %
 % auxiliary predicate for translating uses/2 directives
 
@@ -7908,7 +7908,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_tr_object_relations'(+list, +term)
+% '$lgt_tr_object_relations'(+list, @object_identifier)
 %
 % translates the relations of an object with other entities
 
@@ -7928,7 +7928,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_tr_object_relation'(+atom, +list, +term)
+% '$lgt_tr_object_relation'(+atom, +list, list, @object_identifier)
 %
 % translates a relation between an object (the last argument) with other entities
 
@@ -7949,7 +7949,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_tr_protocol_relations'(+list, +term)
+% '$lgt_tr_protocol_relations'(+list, list, @protocol_identifier)
 %
 % translates the relations of a protocol with other entities
 
@@ -7969,7 +7969,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_tr_protocol_relation'(+atom, +list, +term)
+% '$lgt_tr_protocol_relation'(+atom, +list, @protocol_identifier)
 %
 % translates a relation between a protocol (the last argument) with other entities
 
@@ -7978,7 +7978,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_tr_category_relations'(+list, +category_identifier)
+% '$lgt_tr_category_relations'(+list, @category_identifier)
 %
 % translates the relations of a category with other entities
 
@@ -7998,7 +7998,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_tr_category_relation'(+atom, +list, +category_identifier)
+% '$lgt_tr_category_relation'(+atom, +list, @category_identifier)
 %
 % translates a relation between a category (the last argument) with other entities
 
@@ -8193,7 +8193,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_tr_grammar_rules'(+list, @stream)
+% '$lgt_tr_grammar_rules'(+list, +compilation_context)
 
 '$lgt_tr_grammar_rules'([], _).
 
@@ -8203,7 +8203,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_tr_grammar_rule'(+grammar_rule, +atom, +position, @stream)
+% '$lgt_tr_grammar_rule'(+grammar_rule, +compilation_context)
 
 '$lgt_tr_grammar_rule'(GrammarRule, Ctx) :-
 	'$lgt_dcg_rule_to_clause'(GrammarRule, Clause),
@@ -8537,7 +8537,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_tr_head'(+callable, -callable, +Ctx)
+% '$lgt_tr_head'(+callable, -callable, +compilation_context)
 %
 % translates an entity clause head
 
@@ -8766,7 +8766,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_tr_body'(+callable, -callable, -callable, +term)
+% '$lgt_tr_body'(+callable, -callable, -callable, +compilation_context)
 %
 % translates an entity clause body
 
@@ -10955,7 +10955,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_tr_msg'(@term, @object_identifier, -nonvar, @object_identifier)
+% '$lgt_tr_msg'(@term, @object_identifier, -callable, @object_identifier)
 %
 % translates the sending of a message to an object
 
@@ -11165,7 +11165,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_tr_self_msg'(@term, -nonvar, @object_identifier, @object_identifier)
+% '$lgt_tr_self_msg'(@term, -callable, @object_identifier, @object_identifier)
 %
 % translates the sending of a message to self
 
@@ -11326,7 +11326,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_tr_super_call'(@term, -term, +compilation_context)
+% '$lgt_tr_super_call'(@term, -callable, +compilation_context)
 %
 % translates calling of redefined predicates ("super" calls)
 
@@ -11418,7 +11418,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_head_meta_variables'(+callable, -list)
+% '$lgt_head_meta_variables'(+callable, -list(variable))
 %
 % constructs a list of all variables that occur in a position corresponding
 % to a meta-argument in the head of clause being compiled
@@ -11446,7 +11446,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_goal_meta_variables'(+callable, +callable, -list)
+% '$lgt_goal_meta_variables'(+callable, +callable, -list(variable))
 %
 % constructs a list of all variables that occur in a
 % position corresponding to a meta-argument in a goal
@@ -11866,7 +11866,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_tr_object_identifier'(+object_identifier)
+% '$lgt_tr_object_identifier'(@object_identifier)
 %
 % from the object identifier construct the set of
 % functor prefixes used in the compiled code clauses
@@ -11881,7 +11881,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_tr_category_identifier'(+category_identifier)
+% '$lgt_tr_category_identifier'(@category_identifier)
 %
 % from the category identifier construct the set of
 % functor prefixes used in the compiled code clauses
@@ -11896,7 +11896,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_tr_protocol_identifier'(+protocol_identifier)
+% '$lgt_tr_protocol_identifier'(@protocol_identifier)
 %
 % from the protocol identifier construct the set of
 % functor prefixes used in the compiled code clauses
@@ -11911,8 +11911,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_tr_implements_protocol'(+list, +object_identifier)
-% '$lgt_tr_implements_protocol'(+list, +category_identifier)
+% '$lgt_tr_implements_protocol'(+list, @object_identifier)
+% '$lgt_tr_implements_protocol'(+list, @category_identifier)
 %
 % translates an "implementents" relation between a category or an object and a list of protocols
 
@@ -11934,7 +11934,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_tr_imports_category'(+list, +object_identifier)
+% '$lgt_tr_imports_category'(+list, @object_identifier)
 %
 % translates an "imports" relation between an object and a list of categories
 
@@ -11956,7 +11956,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_tr_instantiates_class'(+list, +object_identifier)
+% '$lgt_tr_instantiates_class'(+list, @object_identifier)
 %
 % translates an "instantiates" relation between an instance and a list of classes
 
@@ -11978,7 +11978,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_tr_specializes_class'(+list, +object_identifier)
+% '$lgt_tr_specializes_class'(+list, @object_identifier)
 %
 % translates a "specializes" relation between a class and a list of superclasses
 
@@ -12003,7 +12003,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_tr_extends_object'(+list, +object_identifier)
+% '$lgt_tr_extends_object'(+list, @object_identifier)
 %
 % translates an "extends" relation between a prototype and a list of parents
 
@@ -12028,7 +12028,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_tr_extends_protocol'(+list, +protocol_identifier)
+% '$lgt_tr_extends_protocol'(+list, @protocol_identifier)
 %
 % translates an "extends" relation between a protocol and a list of protocols
 
@@ -12050,7 +12050,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_tr_extends_category'(+list, +category_identifier)
+% '$lgt_tr_extends_category'(+list, @category_identifier)
 %
 % translates an "extends" relation between a category and a list of categories
 
@@ -12072,7 +12072,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_tr_complements_category'(+list, +category_identifier)
+% '$lgt_tr_complements_category'(+list, @category_identifier)
 %
 % translates a "complements" relation between a category and a list of objects
 
@@ -12223,7 +12223,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_report_problems'(+atom, +entity_identifier)
+% '$lgt_report_problems'(+atom, @entity_identifier)
 %
 % reports any potential problem found while compiling an entity
 
@@ -12271,7 +12271,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_report_unknown_entities'(+atom, +entity_identifier)
+% '$lgt_report_unknown_entities'(+atom, @entity_identifier)
 %
 % reports any unknown referenced entities found while compiling an entity
 
@@ -12286,7 +12286,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_report_unknown_objects'(+atom, +entity_identifier)
+% '$lgt_report_unknown_objects'(+atom, @entity_identifier)
 %
 % reports any references to unknown objects found while compiling an entity
 
@@ -12311,7 +12311,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_report_unknown_protocols'(+atom, +entity_identifier)
+% '$lgt_report_unknown_protocols'(+atom, @entity_identifier)
 %
 % reports any references to unknown protocols found while compiling an entity
 
@@ -12334,7 +12334,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_report_unknown_categories'(+atom, +entity_identifier)
+% '$lgt_report_unknown_categories'(+atom, @entity_identifier)
 %
 % reports any references to unknown categories found while compiling an entity
 
@@ -12357,7 +12357,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_report_unknown_modules'(+atom, +entity_identifier)
+% '$lgt_report_unknown_modules'(+atom, @entity_identifier)
 %
 % reports any references to unknown modules found while compiling an entity
 
@@ -12378,7 +12378,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_pp_term_location'(-compound)
+% '$lgt_pp_term_location'(-nonvar)
 %
 % returns the location of the last source file term read;
 % returns the atom "none" if the location information is not available
@@ -12415,7 +12415,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_add_def_clause'(+callable, +atom, +integer, -callable, +nonvar)
+% '$lgt_add_def_clause'(+callable, +atom, +integer, -callable, +compilation_context)
 %
 % adds a "def clause" (used to translate a predicate call) and returns
 % the translated clause head
@@ -12453,7 +12453,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_add_ddef_clause'(+callable, +atom, +integer, -callable, +nonvar)
+% '$lgt_add_ddef_clause'(+callable, +atom, +integer, -callable, +compilation_context)
 %
 % adds a "ddef clause" (used to translate a predicate call) and returns
 % the translated clause head
@@ -12518,6 +12518,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
+% '$lgt_remember_predicate'(+atom, +integer, +compilation_context)
+%
 % it's necessary to remember which predicates are defined in order to deal with
 % redefinition of built-in predicates and detect missing predicate directives
 %
@@ -12549,6 +12551,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
+% '$lgt_remember_annotated_predicate'(+atom, +integer)
+%
 % it's necessary to remember which predicates are defined using annotations in order to
 % deal with redefinition of built-in predicates and detect missing predicate directives
 
