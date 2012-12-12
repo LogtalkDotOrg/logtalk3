@@ -5,7 +5,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/11/19,
+		date is 2012/12/12,
 		comment is 'Unit tests for the logtalk_load/1-2 built-in predicates.'
 	]).
 
@@ -82,7 +82,7 @@
 	throws(logtalk_load_2_13, error(type_error(list,1), logtalk(logtalk_load([],1), _))) :-
 		logtalk_load([], 1).
 
-	throws(logtalk_load_2_14, error(type_error(flag,1), logtalk(logtalk_load([],[1]), _))) :-
+	throws(logtalk_load_2_14, error(type_error(compiler_option,1), logtalk(logtalk_load([],[1]), _))) :-
 		logtalk_load([], [1]).
 
 	throws(logtalk_load_2_15, error(domain_error(flag_value,portability+invalid_value), logtalk(logtalk_load([],[portability(invalid_value)]), _))) :-
