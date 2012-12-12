@@ -22,9 +22,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.10,
+		version is 1.11,
 		author is 'Paulo Moura',
-		date is 2012/11/20,
+		date is 2012/12/12,
 		comment is 'Simple example of using conditional compilation to implement a portable operating-system interface for selected back-end Prolog compilers.'
 	]).
 
@@ -699,7 +699,7 @@
 			).
 
 		delete_directory(_) :-
-			throw(not_available(delete_directory/2)).
+			throw(not_available(delete_directory/1)).
 
 		change_directory(Directory) :-
 			{fs_cwd(_, Directory)}.
