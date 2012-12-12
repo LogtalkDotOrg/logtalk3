@@ -5,7 +5,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/11/19,
+		date is 2012/12/12,
 		comment is 'Unit tests for the abolish_object/1 built-in predicate.'
 	]).
 
@@ -20,5 +20,13 @@
 
 	throws(abolish_object_1_4, error(permission_error(modify, static_object, logtalk), logtalk(abolish_object(logtalk), _))) :-
 		abolish_object(logtalk).
+
+	succeeds(abolish_object_1_5) :-
+		create_object(Object, [], [], []),
+		abolish_object(Object).
+
+	succeeds(abolish_object_1_6) :-
+		create_object(a_object, [], [], []),
+		abolish_object(a_object).
 
 :- end_object.

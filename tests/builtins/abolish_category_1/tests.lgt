@@ -5,7 +5,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/11/19,
+		date is 2012/12/12,
 		comment is 'Unit tests for the abolish_category/1 built-in predicate.'
 	]).
 
@@ -17,5 +17,13 @@
 
 	throws(abolish_category_1_3, error(existence_error(category, non_exisiting_category), logtalk(abolish_category(non_exisiting_category), _))) :-
 		abolish_category(non_exisiting_category).
+
+	succeeds(abolish_category_1_4) :-
+		create_category(Category, [], [], []),
+		abolish_category(Category).
+
+	succeeds(abolish_category_1_5) :-
+		create_category(a_category, [], [], []),
+		abolish_category(a_category).
 
 :- end_object.

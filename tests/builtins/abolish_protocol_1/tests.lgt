@@ -5,7 +5,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/11/19,
+		date is 2012/12/12,
 		comment is 'Unit tests for the abolish_protocol/1 built-in predicate.'
 	]).
 
@@ -20,5 +20,13 @@
 
 	throws(abolish_protocol_1_4, error(permission_error(modify, static_protocol, monitoring), logtalk(abolish_protocol(monitoring), _))) :-
 		abolish_protocol(monitoring).
+
+	succeeds(abolish_protocol_1_5) :-
+		create_protocol(Protocol, [], []),
+		abolish_protocol(Protocol).
+
+	succeeds(abolish_protocol_1_6) :-
+		create_protocol(a_protocol, [], []),
+		abolish_protocol(a_protocol).
 
 :- end_object.
