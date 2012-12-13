@@ -73,6 +73,9 @@ to compile any of the files.
 * CHANGED: The exception terms used in case of error when using the compiling
 and loading built-in predicates.
 
+* FIXED: Silly bug in the `current_event/5` built-in method, which failed to
+consider the event argument.
+
 Prolog adapter and integration files
 ------------------------------------
 

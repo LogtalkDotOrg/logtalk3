@@ -27,4 +27,22 @@
 	throws(define_events_5_6, error(type_error(object_identifier, 1), logtalk(define_events(_,_,_,_,1), _))) :-
 		define_events(_, _, _, _, 1).
 
+	succeeds(define_events_5_7) :-
+		create_object(Monitor, [implements(monitoring)], [], [before(_,_,_)]),
+		define_events(before, _, _, _ , Monitor),
+		current_event(before, _, _, _, Monitor),
+		\+ current_event(after, _, _, _, Monitor),
+		abolish_events(_, _, _, _, Monitor),
+		\+ current_event(_, _, _, _, Monitor),
+		abolish_object(Monitor).
+
+	succeeds(define_events_5_8) :-
+		create_object(Monitor, [implements(monitoring)], [], [after(_,_,_)]),
+		define_events(after, _, _, _ , Monitor),
+		current_event(after, _, _, _, Monitor),
+		\+ current_event(before, _, _, _, Monitor),
+		abolish_events(_, _, _, _, Monitor),
+		\+ current_event(_, _, _, _, Monitor),
+		abolish_object(Monitor).
+
 :- end_object.
