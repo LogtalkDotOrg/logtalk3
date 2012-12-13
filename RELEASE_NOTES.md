@@ -76,6 +76,9 @@ and loading built-in predicates.
 * FIXED: Silly bug in the `current_event/5` built-in method, which failed to
 consider the event argument.
 
+* IMPROVED: More informative context information in case of term-expansion
+errors.
+
 Prolog adapter and integration files
 ------------------------------------
 

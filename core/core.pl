@@ -5881,22 +5881,22 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	% runtime creation of new entities; no term expansion:
 		'$lgt_comp_ctx_mode'(Ctx, runtime) ->
 		(	callable(Term) ->
-			'$lgt_tr_expanded_term'(Term, Ctx)
+			'$lgt_tr_expanded_term'(Term, Term, Ctx)
 		;	throw(error(type_error(callable, Term), term(Term)))
 		)
 	;	% source-file specific compiler hook:
-		'$lgt_pp_hook_term_expansion_'(Term, Terms) ->
-		'$lgt_tr_expanded_terms'(Terms, Ctx)
+		'$lgt_pp_hook_term_expansion_'(Term, ExpandedTerms) ->
+		'$lgt_tr_expanded_terms'(ExpandedTerms, Term, Ctx)
 	;	% default compiler hook:
-		'$lgt_hook_term_expansion_'(Term, Terms) ->
-		'$lgt_tr_expanded_terms'(Terms, Ctx)
+		'$lgt_hook_term_expansion_'(Term, ExpandedTerms) ->
+		'$lgt_tr_expanded_terms'(ExpandedTerms, Term, Ctx)
 	;	% dialect specific expansion:
-		'$lgt_prolog_term_expansion'(Term, Terms) ->
-		'$lgt_prolog_term_expansion_portability_warnings'(Term, Terms),
-		'$lgt_tr_expanded_terms'(Terms, Ctx)
+		'$lgt_prolog_term_expansion'(Term, ExpandedTerms) ->
+		'$lgt_prolog_term_expansion_portability_warnings'(Term, ExpandedTerms),
+		'$lgt_tr_expanded_terms'(ExpandedTerms, Term, Ctx)
 	;	% no compiler hook defined:
 		(	callable(Term) ->
-			'$lgt_tr_expanded_term'(Term, Ctx)
+			'$lgt_tr_expanded_term'(Term, Term, Ctx)
 		;	throw(error(type_error(callable, Term), term(Term)))
 		)
 	).
@@ -5918,71 +5918,76 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_tr_expanded_terms'(@term, +compilation_context)
+% '$lgt_tr_expanded_terms'(@term, @term, +compilation_context)
+% '$lgt_tr_expanded_terms'(@list(term), @term, +compilation_context)
 %
-% translates the expanded terms (which can be a list of terms)
+% translates the expanded terms (which can be a list of terms);
+% the second argument is the original term and is used for more
+% informative exception terms in case of error
 
-'$lgt_tr_expanded_terms'(Term, _) :-
-	var(Term),
-	throw(error(instantiantion_error, term_expansion/2)).
+'$lgt_tr_expanded_terms'(ExpandedTerms, Term, _) :-
+	var(ExpandedTerms),
+	throw(error(instantiantion_error, term_expansion(Term, ExpandedTerms))).
 
-'$lgt_tr_expanded_terms'([], _) :-
+'$lgt_tr_expanded_terms'([], _, _) :-
 	!.
 
-'$lgt_tr_expanded_terms'([Term| Terms], Ctx) :-
+'$lgt_tr_expanded_terms'([ExpandedTerm| ExpandedTerms], Term, Ctx) :-
 	!,
-	'$lgt_tr_expanded_term'(Term, Ctx),
-	'$lgt_tr_expanded_terms'(Terms, Ctx).
+	'$lgt_tr_expanded_term'(ExpandedTerm, Term, Ctx),
+	'$lgt_tr_expanded_terms'(ExpandedTerms, Term, Ctx).
 
-'$lgt_tr_expanded_terms'(Term, Ctx) :-
+'$lgt_tr_expanded_terms'(ExpandedTerm, Term, Ctx) :-
 	!,
-	'$lgt_tr_expanded_term'(Term, Ctx).
+	'$lgt_tr_expanded_term'(ExpandedTerm, Term, Ctx).
 
 
 
-% '$lgt_tr_expanded_term'(+term, +compilation_context)
+% '$lgt_tr_expanded_term'(@term, @term, +compilation_context)
 %
-% translates a source file term (clauses, directives, and grammar rules)
+% translates a source file term (a clause, directive, or grammar rule);
+% the second argument is the original term and is used for more
+% informative exception terms in case of error
 
-'$lgt_tr_expanded_term'(Term, _) :-
+'$lgt_tr_expanded_term'(ExpandedTerm, Term, _) :-
 	var(Term),
-	throw(error(instantiantion_error, term_expansion/2)).
+	throw(error(instantiantion_error, term_expansion(Term, ExpandedTerm))).
 
-'$lgt_tr_expanded_term'(end_of_file, _) :-
+'$lgt_tr_expanded_term'(end_of_file, _, _) :-
 	!.
 
-'$lgt_tr_expanded_term'({Term}, _) :-
+'$lgt_tr_expanded_term'({ExpandedTerm}, Term, _) :-
 	% bypass control construct; expanded term is final
 	!,
-	(	var(Term) ->
-		throw(error(instantiantion_error, {Term}))
+	(	var(ExpandedTerm) ->
+		throw(error(instantiantion_error, term_expansion(Term, {ExpandedTerm})))
 	;	'$lgt_pp_entity'(_, _, _, _, _) ->
 		'$lgt_pp_term_location'(Location),
 		% ensure that the relative order of the entity terms is kept
-		assertz('$lgt_pp_entity_clause_'({Term}, Location))
+		assertz('$lgt_pp_entity_clause_'({ExpandedTerm}, Location))
 	;	% non-entity terms
 		'$lgt_pp_term_location'(Location),
-		assertz('$lgt_pp_prolog_term_'(Term, Location))
+		assertz('$lgt_pp_prolog_term_'(ExpandedTerm, Location))
 	).
 
-'$lgt_tr_expanded_term'((Head :- Body), Ctx) :-
+'$lgt_tr_expanded_term'((Head :- Body), _, Ctx) :-
 	!,
 	'$lgt_tr_clause'((Head :- Body), Ctx).
 
-'$lgt_tr_expanded_term'((:- Directive), Ctx) :-
+'$lgt_tr_expanded_term'((:- Directive), _, Ctx) :-
 	!,
 	'$lgt_tr_directive'(Directive, Ctx).
 
-'$lgt_tr_expanded_term'((Head --> Body), Ctx) :-
+'$lgt_tr_expanded_term'((Head --> Body), _, Ctx) :-
 	!,
 	'$lgt_tr_grammar_rule'((Head --> Body), Ctx).
 
-'$lgt_tr_expanded_term'(Term, _) :-
-	\+ callable(Term),
-	throw(error(type_error(callable, Term), term_expansion/2)).
+'$lgt_tr_expanded_term'(ExpandedTerm, Term, _) :-
+	\+ callable(ExpandedTerm),
+	throw(error(type_error(callable, ExpandedTerm), term_expansion(Term, ExpandedTerm))).
 
-'$lgt_tr_expanded_term'(Fact, Ctx) :-
-	'$lgt_tr_clause'(Fact, Ctx).
+'$lgt_tr_expanded_term'(ExpandedTerm, _, Ctx) :-
+	'$lgt_tr_clause'(ExpandedTerm, Ctx).
 
 
 
