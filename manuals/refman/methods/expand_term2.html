@@ -41,13 +41,13 @@
 Expands a term. The most common use is to expand a grammar rule into a clause. Users may override the default Logtalk grammar rule translator by defining clauses for the predicate <a href="term_expansion2.html"><code>term_expansion/2</code></a>.
 </p>
 <p>
-The expansion works as follows: if the first argument is a variable, then it is unified with the second argument; if the first argument is not a variable and clauses for the <code>term_expansion/2</code> predicate are within scope, then this predicate is called to provide an expansion that is then unified with the second argument; if the <code>term_expansion/2</code> predicate is not used and the first argument is a compound term with functor <code>--&gt;/2</code> then the default Logtalk grammar rule translator is used, with the resulting clause being unified with the second argument; when the translator is not used, the two arguments are unified. The <code>expand_term/2</code> predicate may return a list of terms.
+The expansion works as follows: if the first argument is a variable, then it is unified with the second argument; if the first argument is not a variable and clauses for the <code>term_expansion/2</code> predicate are within scope, then this predicate is called to provide an expansion that is then unified with the second argument; if the <code>term_expansion/2</code> predicate is not used and the first argument is a compound term with functor <code>--&gt;/2</code> then the default Logtalk grammar rule translator is used, with the resulting clause being unified with the second argument; when the translator is not used, the two arguments are unified. The <code>expand_term/2</code> predicate may return a single term or a list of terms.
 </p>
 <p>
 This built-in method may be used to expand a grammar rule into a clause for use with the built-in database methods.
 </p>
 <p>
-Term expansion is only performed by the Logtalk compiler to expand terms read from a source file.
+Term expansion is only performed by by Logtalk at compile time (to expand terms read from a source file). This predicate can be used by the user to perform term expansion at runtime (for example, to convert a grammar rule into a clause).
 </p>
 
 
@@ -70,7 +70,7 @@ Term expansion is only performed by the Logtalk compiler to expand terms read fr
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: May 18, 2010</span>
+		<span>Last updated on: December 13, 2012</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="../index.html#methods">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="term_expansion2.html">next</a></span><br/>
