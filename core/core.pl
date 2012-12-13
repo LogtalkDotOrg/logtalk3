@@ -2056,8 +2056,8 @@ logtalk_load_context(term_position, Position) :-
 	'$lgt_pp_term_position_'(Position).
 
 logtalk_load_context(stream, Stream) :-
-	stream_property(Stream, alias(logtalk_compiler_input)),
-	!.	% avoid a spurious choice-point with some back-end Prolog compilers
+	% avoid a spurious choice-point with some back-end Prolog compilers
+	stream_property(Stream, alias(logtalk_compiler_input)), !.
 
 
 
@@ -4938,7 +4938,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % writes to disk the entity compiled code
 
 '$lgt_write_tr_entity' :-
-	stream_property(Output, alias(logtalk_compiler_output)),
+	% avoid a spurious choice-point with some back-end Prolog compilers
+	stream_property(Output, alias(logtalk_compiler_output)), !,
 	catch(
 		('$lgt_write_prolog_terms'(Output),
 		 '$lgt_write_logtalk_directives'(Output),
@@ -4961,7 +4962,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		'$lgt_expand_library_path'(Library, LibraryPath),
 		arg(1, FilePath, File),
 		atom_concat(LibraryPath, File, NormalizedPath)
-	;	% atom(FilePath) ->
+	;	% atom(FilePath)
 		'$lgt_prolog_os_file_name'(NormalizedPath, FilePath)
 	),
 	'$lgt_decompose_file_name'(NormalizedPath, Directory0, Name, Extension),
@@ -4977,7 +4978,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	),
 	% file extensions are defined in the Prolog adapter files
 	'$lgt_file_extension'(Type, TypeExtension),
-	(	Extension = TypeExtension ->
+	(	Extension == TypeExtension ->
 		% declared extension for this type of file is present
 		atom_concat(Name, Extension, Basename)
 	;	% declared extension for this type of file is missing
@@ -4985,12 +4986,13 @@ current_logtalk_flag(version, version(3, 0, 0)).
 			% simply add the missing extension
 			atom_concat(Name, Extension, Basename0),
 			atom_concat(Basename0, TypeExtension, Basename)
-		;	% we need to check if we are adding or replacing an extension
+		;	% we're constructing the name of a intermediate Prolog file or some Prolog
+			% dialect specific temporary file from the original Logtalk file name
 			(	'$lgt_file_extension'(logtalk, Extension) ->
-				% simply replace the extension
+				% we're simply replacing the extension (e.g. 'file.lgt' -> 'file.pl')
 				atom_concat(Name, TypeExtension, Basename)
-			;	% assume that the original file name didn't contain a
-				% true extension but have one or more '.' in its name
+			;	% assume that the original file name didn't contain a true extension
+				% (which we know is missing) but have one or more '.' in its name
 				atom_concat(Name, Extension, Basename0),
 				atom_concat(Basename0, TypeExtension, Basename)
 			)
@@ -5315,8 +5317,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-
-
 % '$lgt_filter_singleton_variables'(@list, -list(atom))
 %
 % filters variables whose name start with an underscore from a singletons list if
@@ -5364,11 +5364,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	catch(close(Input), _, true),
 	(	nonvar(Output) ->
 		catch(close(Output), _, true),
-		% try to delete the intermediate Prolog (ignore failure or error) in order to
-		% prevent problems when using the "smart_compilation" flag:
+		% try to delete the intermediate Prolog files (ignoring failure or error)
+		% in order to prevent problems when using the "smart_compilation" flag:
 		'$lgt_file_name'(prolog, Path, _, _, Prolog),
 		catch(('$lgt_delete_file'(Prolog) -> true; true), _, true),
-		% try to delete any Prolog-specific auxiliary file (ignore failure or error):
+		% try to delete any Prolog dialect specific auxiliary files (ignoring failure or error):
 		forall(
 			'$lgt_file_name'(tmp, Path, _, _, TmpFile),
 			catch(('$lgt_delete_file'(TmpFile) -> true; true), _, true))
