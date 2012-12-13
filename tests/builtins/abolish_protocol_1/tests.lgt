@@ -23,10 +23,14 @@
 
 	succeeds(abolish_protocol_1_5) :-
 		create_protocol(Protocol, [], []),
-		abolish_protocol(Protocol).
+		current_protocol(Protocol),
+		abolish_protocol(Protocol),
+		\+ current_protocol(Protocol).
 
 	succeeds(abolish_protocol_1_6) :-
 		create_protocol(a_protocol, [], []),
-		abolish_protocol(a_protocol).
+		current_protocol(a_protocol),
+		abolish_protocol(a_protocol),
+		\+ current_protocol(a_protocol).
 
 :- end_object.

@@ -20,10 +20,14 @@
 
 	succeeds(abolish_category_1_4) :-
 		create_category(Category, [], [], []),
-		abolish_category(Category).
+		current_category(Category),
+		abolish_category(Category),
+		\+ current_category(Category).
 
 	succeeds(abolish_category_1_5) :-
 		create_category(a_category, [], [], []),
-		abolish_category(a_category).
+		current_category(a_category),
+		abolish_category(a_category),
+		\+ current_category(a_category).
 
 :- end_object.

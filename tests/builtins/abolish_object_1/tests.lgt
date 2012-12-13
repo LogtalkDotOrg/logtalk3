@@ -23,10 +23,14 @@
 
 	succeeds(abolish_object_1_5) :-
 		create_object(Object, [], [], []),
-		abolish_object(Object).
+		current_object(Object),
+		abolish_object(Object),
+		\+ current_object(Object).
 
 	succeeds(abolish_object_1_6) :-
 		create_object(a_object, [], [], []),
-		abolish_object(a_object).
+		current_object(a_object),
+		abolish_object(a_object),
+		\+ current_object(a_object).
 
 :- end_object.
