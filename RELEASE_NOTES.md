@@ -76,8 +76,12 @@ and loading built-in predicates.
 * FIXED: Silly bug in the `current_event/5` built-in method, which failed to
 consider the event argument.
 
-* IMPROVED: More informative context information in case of term-expansion
-errors.
+* IMPROVED: The exception term generated in case of term- or goal-expansion
+errors now includes the original term or goal.
+
+* IMPROVED: Ensure that the generation of a non-callable term by a call to a
+goal-expansion hook predicate is reported as such. Previously, the exception
+could be generated at a later stage and thus loose the context information. 
 
 Prolog adapter and integration files
 ------------------------------------
