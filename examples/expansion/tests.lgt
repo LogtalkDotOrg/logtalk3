@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.01,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2010/03/16,
+		date is 2012/12/14,
 		comment is 'Unit tests for the "expansion" example.']).
 
 	test(expansion_01) :-
@@ -72,7 +72,7 @@
 	test(expansion_14) :-
 		cooked << (ha, hb, hc).
 
-	test(expansion_14) :-
+	test(expansion_15) :-
 		cooked << p.
 
 :- end_object.
