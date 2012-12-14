@@ -6254,6 +6254,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	assertz('$lgt_pp_prolog_term_'((:- ensure_loaded(File)), Location)).
 
 '$lgt_tr_file_directive'(initialization(Goal), Ctx) :-
+	'$lgt_must_be'(callable, Goal, directive(initialization(Goal))),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 	% only expand goals when compiling a source file
 	'$lgt_tr_expand_goal'(Goal, ExpandedGoal),

@@ -87,6 +87,9 @@ information.
 * CHANGED: All predicates in the `expanding` protocol are now also declared
 as dynamic.
 
+* FIXED: Check that the argument of a source file `initialization/1` directive
+is callable before attempting to expand it.
+
 Prolog adapter and integration files
 ------------------------------------
 
