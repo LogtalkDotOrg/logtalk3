@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/11/22,
+		date is 2012/12/14,
 		comment is 'Logtalk unit test framework default message translations.']).
 
 	% structured message printing predicates;
@@ -39,8 +39,8 @@
 
 	% Quintus Prolog based (also SICStus Prolog):
 	logtalk::message_prefix_stream(information, lgtunit, '% ', user_output).
-	logtalk::message_prefix_stream(warning, lgtunit, '* ', user_output).
-	logtalk::message_prefix_stream(error, lgtunit,   '! ', user_output).
+	logtalk::message_prefix_stream(warning, lgtunit, '*     ', user_output).
+	logtalk::message_prefix_stream(error, lgtunit,   '!     ', user_output).
 
 	:- multifile(logtalk::message_tokens//2).
 	:- dynamic(logtalk::message_tokens//2).
