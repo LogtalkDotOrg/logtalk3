@@ -5821,7 +5821,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 % '$lgt_tr_expand_goal'(+callable, -callable)
 %
-% expands a goal; fails if no goal expansion hook is defined
+% expands a goal; fails if no goal expansion hook is defined;
+% the callers of this predicate ensure that a goal is repeatedly
+% expanded until a fixed-point is reached
 
 '$lgt_tr_expand_goal'(Goal, ExpandedGoal) :-
 	(	% source-file specific compiler hook:
@@ -5835,7 +5837,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		'$lgt_prolog_goal_expansion_portability_warnings'(Goal, ExpandedGoal)
 	;	% no compiler hook defined:
 		fail
-	).
+	),
+	'$lgt_must_be'(callable, ExpandedGoal, goal_expansion(Goal, ExpandedGoal)).
+
 
 
 '$lgt_prolog_goal_expansion_portability_warnings'(Goal, ExpandedGoal) :-
@@ -6022,7 +6026,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	% only expand goals when compiling a source file
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 	'$lgt_tr_expand_goal'(Goal, ExpandedGoal),
-	'$lgt_must_be'(callable, ExpandedGoal, goal_expansion(Goal, ExpandedGoal)),
 	!,
 	'$lgt_tr_directive'(if(ExpandedGoal), Ctx).
 
@@ -6068,7 +6071,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	% only expand goals when compiling a source file
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 	'$lgt_tr_expand_goal'(Goal, ExpandedGoal),
-	'$lgt_must_be'(callable, ExpandedGoal, goal_expansion(Goal, ExpandedGoal)),
 	!,
 	'$lgt_tr_directive'(elif(ExpandedGoal), Ctx).
 
@@ -6255,7 +6257,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 	% only expand goals when compiling a source file
 	'$lgt_tr_expand_goal'(Goal, ExpandedGoal),
-	'$lgt_must_be'(callable, ExpandedGoal, goal_expansion(Goal, ExpandedGoal)),
 	!,
 	'$lgt_tr_file_directive'(initialization(ExpandedGoal), Ctx).
 
@@ -8852,7 +8853,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_body'(Pred, TPred, DPred, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 	'$lgt_tr_expand_goal'(Pred, ExpandedPred),
-	'$lgt_must_be'(callable, ExpandedPred, goal_expansion(Pred, ExpandedPred)),
 	!,
 	'$lgt_tr_body'(ExpandedPred, TPred, DPred, Ctx).
 

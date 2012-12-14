@@ -80,8 +80,9 @@ consider the event argument.
 errors now includes the original term or goal.
 
 * IMPROVED: Ensure that the generation of a non-callable term by a call to a
-goal-expansion hook predicate is reported as such. Previously, the exception
-could be generated at a later stage and thus loose the context information.
+goal-expansion hook predicate at compile time is reported as such. Previously,
+the exception could be generated at a later stage and thus loose the context
+information.
 
 * CHANGED: All predicates in the `expanding` protocol are now also declared
 as dynamic.
