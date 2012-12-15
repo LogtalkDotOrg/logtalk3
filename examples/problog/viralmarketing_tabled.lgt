@@ -21,7 +21,7 @@
 	imports(problog_decision_theory)).
 
 	% Decisions
-	? ~ marketed(P) :- person(P).
+	(?) ~ marketed(P) :- person(P).
 
 	% Utility attributes
 	buys(P) => 5 :- person(P).

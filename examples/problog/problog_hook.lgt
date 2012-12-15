@@ -9,11 +9,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- use_module(library(problog), []).
-:- use_module(library(dtproblog), []).
-:- use_module(library(problog_learning), []).
-
-
 :- multifile(user:problog_user_ground/1).
 user:problog_user_ground(THead) :-
 	logtalk::decompile_predicate_heads(THead, Head),
@@ -27,7 +22,7 @@ user:problog_user_ground(THead) :-
 
 
 :- op(550, yfx, ~).		% alternative to ProbLog (::)/2 operator
-:- discontiguous((~)/2).
+:- multifile(problog:(~)/2).
 
 
 :- object(problog_hook,

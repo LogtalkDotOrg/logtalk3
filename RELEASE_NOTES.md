@@ -108,6 +108,8 @@ Examples
 * CHANGED: The `chr` and `problog` examples to use the new experimental
 annotation support.
 
+* IMPROVED: Avoid some harmless warnings in the `problog` example.
+
 
 3.00.0 Alpha 6 - December 3, 2012
 =================================
