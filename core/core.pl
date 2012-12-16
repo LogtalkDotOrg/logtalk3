@@ -4814,7 +4814,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % true if an entity of the same name is already loaded; returns entity type
 
 '$lgt_redefined_entity'(Entity, Type, OldFile, NewFile, Lines) :-
-	writeq('$lgt_redefined_entity'(Entity, Type, OldFile, NewFile, Lines)), nl,
 	% check that an entity of the same name is already loaded:
 	(	'$lgt_current_object_'(Entity, _, _, _, _, _, _, _, _, _, Flags) ->
 		Type = object
