@@ -107,6 +107,9 @@ are never called when using GNU Prolog as the back-end compiler. This allows
 using GNU Prolog `gplc` utility to generate executables that embed Logtalk
 without requiring patching of the Logtalk core files or the adapter file.
 
+* ADDED: Instructions on how to embed Logtalk into a GNU Prolog generated
+executable file.
+
 Documentation
 -------------
 

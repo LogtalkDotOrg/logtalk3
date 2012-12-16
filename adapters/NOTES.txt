@@ -113,6 +113,37 @@ GNU Prolog 1.4.1 and later versions
 
 	GNU Prolog supports the ISO Prolog standard. No problems expected. 
 
+	You can generate a new Prolog top level that embeds Logtalk by following
+	the steps (exemplified for POSIX systems):
+
+        $ gplgt
+        ...
+        | ?- logtalk_compile([
+            logtalk_home('core/core_messages'),
+            logtalk_home('core/expanding'),
+            logtalk_home('core/monitoring'),
+            [scratch_directory('$HOME/collect')]).
+
+		$ cp $LOGTALKHOME/adapters/gnu.pl $HOME/collect/gnu.pl
+		$ cp $LOGTALKHOME/paths/paths.pl $HOME/collect/paths.pl
+		$ cp $LOGTALKHOME/core/core.pl $HOME/collect/core.pl
+
+	Edit the $HOME/collect/core.pl file and add the line ":- built_in." to
+	the top. Then:
+
+        $ cd $HOME/collect
+		$ gplc -o logtalk gnu.pl paths.pl core_messages.pl expanding.pl monitoring.pl core.pl
+	
+	Finally, move the new executable to a directory in your system PATH.
+	For example:
+
+		$ mv logtalk /usr/local/bin/
+
+	This way, every time you want to work with Logtalk you will just need 
+	to type:
+
+		% logtalk
+
 
 Lean Prolog 3.7.10 and later versions
 
