@@ -5592,8 +5592,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	retractall('$lgt_pp_coinductive_'(_, _, _)),
 	retractall('$lgt_pp_mode_'(_, _)),
 	retractall('$lgt_pp_meta_predicate_'(_)),
-	retractall('$lgt_pp_value_annotation_'(_, _, _, _)),
-	retractall('$lgt_pp_goal_annotation_'(_, _, _, _)),
+	retractall('$lgt_pp_hook_value_annotation_'(_, _, _, _)),
+	retractall('$lgt_pp_hook_goal_annotation_'(_, _, _, _)),
+	retractall('$lgt_pp_hook_body_annotation_'(_, _, _)),
 	retractall('$lgt_pp_predicate_alias_'(_, _, _)),
 	retractall('$lgt_pp_non_terminal_'(_, _, _)),
 	retractall('$lgt_pp_entity_initialization_'(_)),
@@ -6723,12 +6724,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_flatten_list'(Preds, PredsFlatted),
 	'$lgt_tr_meta_non_terminal_directive'(PredsFlatted).
 
-
-'$lgt_tr_directive'(annotation, Annotations, _) :-
-	'$lgt_flatten_list'(Annotations, AnnotationsFlatted),
-	'$lgt_tr_annotation_directive'(AnnotationsFlatted).
-
-
 '$lgt_tr_directive'((mode), [Mode, Solutions], _) :-
 	(var(Mode); var(Solutions)),
 	throw(instantiation_error).
@@ -7349,62 +7344,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	ExtendedArg = Arg
 	),
 	'$lgt_tr_meta_non_terminal_directive_args'(Args, ExtendedArgs).
-
-
-
-% '$lgt_tr_annotation_directive'(+list)
-%
-% auxiliary predicate for translating annotation/1 directives
-
-'$lgt_tr_annotation_directive'([]).
-
-'$lgt_tr_annotation_directive'([Annotation| _]) :-
-	var(Annotation),
-	throw(instantiation_error).
-
-'$lgt_tr_annotation_directive'([Annotation| _]) :-
-	\+ callable(Annotation),
-	throw(type_error(callable, Annotation)).
-
-'$lgt_tr_annotation_directive'([Annotation| _]) :-
-	\+ '$lgt_valid_annotation_template'(Annotation),
-	throw(domain_error(annotation_template, Annotation)).
-
-'$lgt_tr_annotation_directive'([Annotation| Annotations]) :-
-	functor(Annotation, Functor, Arity),
-	functor(GAnnotation, Functor, Arity),
-	arg(1, Annotation, Arg1),
-	arg(2, Annotation, Arg2),
-	'$lgt_tr_annotation_directive'(Arg1, Arg2, Functor, GAnnotation),
-	'$lgt_tr_annotation_directive'(Annotations).
-
-
-'$lgt_tr_annotation_directive'((*), 0, Functor, GAnnotation) :-
-	!,
-	arg(1, GAnnotation, Value),
-	arg(2, GAnnotation, Goal),
-	(	'$lgt_pp_value_annotation_'(GAnnotation, Functor, Value, Goal) ->
-		true
-	;	assertz('$lgt_pp_value_annotation_'(GAnnotation, Functor, Value, Goal))
-	).
-
-'$lgt_tr_annotation_directive'(0, (*), Functor, GAnnotation) :-
-	!,
-	arg(1, GAnnotation, Goal),
-	arg(2, GAnnotation, Value),
-	(	'$lgt_pp_value_annotation_'(GAnnotation, Functor, Value, Goal) ->
-		true
-	;	assertz('$lgt_pp_value_annotation_'(GAnnotation, Functor, Value, Goal))
-	).
-
-'$lgt_tr_annotation_directive'(0, 0, Functor, GAnnotation) :-
-	!,
-	arg(1, GAnnotation, Left),
-	arg(2, GAnnotation, Right),
-	(	'$lgt_pp_goal_annotation_'(GAnnotation, Functor, Left, Right) ->
-		true
-	;	assertz('$lgt_pp_goal_annotation_'(GAnnotation, Functor, Left, Right))
-	).
 
 
 
