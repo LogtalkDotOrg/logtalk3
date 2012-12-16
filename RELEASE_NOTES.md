@@ -124,6 +124,15 @@ annotation support.
 
 * IMPROVED: Avoid some harmless warnings in the `problog` example.
 
+Installers and installation scripts
+-----------------------------------
+
+* CHANGED: The Windows installer now creates integration shortcuts that start
+Logtalk in the `%LOGTALKUSER` directory. Before, the integration shortcuts used
+`%CD%` as the startup directory but this doesn't work on Windows 7 and resulted
+in Logtalk starting up in a system directory where usually users don't have
+write access.
+
 
 3.00.0 Alpha 6 - December 3, 2012
 =================================
