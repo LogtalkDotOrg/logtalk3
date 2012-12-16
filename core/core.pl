@@ -4814,13 +4814,19 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % true if an entity of the same name is already loaded; returns entity type
 
 '$lgt_redefined_entity'(Entity, Type, OldFile, NewFile, Lines) :-
+	writeq('$lgt_redefined_entity'(Entity, Type, OldFile, NewFile, Lines)), nl,
 	% check that an entity of the same name is already loaded:
-	(	'$lgt_current_object_'(Entity, _, _, _, _, _, _, _, _, _, _) ->
+	(	'$lgt_current_object_'(Entity, _, _, _, _, _, _, _, _, _, Flags) ->
 		Type = object
-	;	'$lgt_current_protocol_'(Entity, _, _, _, _) ->
+	;	'$lgt_current_protocol_'(Entity, _, _, _, Flags) ->
 		Type = protocol
-	;	'$lgt_current_category_'(Entity, _, _, _, _, _),
+	;	'$lgt_current_category_'(Entity, _, _, _, _, Flags),
 		Type = category
+	),
+	(	Flags /\ 1 =:= 1 ->
+		% final entity
+		throw(permission_error(modify, Type, Entity))
+	;	true
 	),
 	(	% check file information using the file/2 entity property, if available:
 		'$lgt_entity_property_'(Entity, file_lines(OldBase, OldDirectory, _, _)),
@@ -6311,15 +6317,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		throw(instantiation_error)
 	;	\+ callable(Obj),
 		throw(type_error(object_identifier, Obj))
-	;	'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags),
-		Flags /\ 1 =:= 1,
-		throw(permission_error(modify, object, Obj))
-	;	'$lgt_current_protocol_'(Obj, _, _, _, Flags),
-		Flags /\ 1 =:= 1,
-		throw(permission_error(modify, protocol, Obj))
-	;	'$lgt_current_category_'(Obj, _, _, _, _, Flags),
-		Flags /\ 1 =:= 1,
-		throw(permission_error(modify, category, Obj))
 	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, _)),
 		throw(permission_error(modify, object, Obj))
 	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_protocol_'(Obj, _, _, _, _)),
@@ -6358,15 +6355,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		throw(instantiation_error)
 	;	\+ atom(Ptc),
 		throw(type_error(protocol_identifier, Ptc))
-	;	'$lgt_current_object_'(Ptc, _, _, _, _, _, _, _, _, _, Flags),
-		Flags /\ 1 =:= 1,
-		throw(permission_error(modify, object, Ptc))
-	;	'$lgt_current_protocol_'(Ptc, _, _, _, Flags),
-		Flags /\ 1 =:= 1,
-		throw(permission_error(modify, protocol, Ptc))
-	;	'$lgt_current_category_'(Ptc, _, _, _, _, Flags),
-		Flags /\ 1 =:= 1,
-		throw(permission_error(modify, category, Ptc))
 	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_object_'(Ptc, _, _, _, _, _, _, _, _, _, _)),
 		throw(permission_error(modify, object, Ptc))
 	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_protocol_'(Ptc, _, _, _, _)),
@@ -6406,15 +6394,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		throw(instantiation_error)
 	;	\+ callable(Ctg),
 		throw(type_error(category_identifier, Ctg))
-	;	'$lgt_current_object_'(Ctg, _, _, _, _, _, _, _, _, _, Flags),
-		Flags /\ 1 =:= 1,
-		throw(permission_error(modify, object, Ctg))
-	;	'$lgt_current_protocol_'(Ctg, _, _, _, Flags),
-		Flags /\ 1 =:= 1,
-		throw(permission_error(modify, protocol, Ctg))
-	;	'$lgt_current_category_'(Ctg, _, _, _, _, Flags),
-		Flags /\ 1 =:= 1,
-		throw(permission_error(modify, category, Ctg))
 	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_object_'(Ctg, _, _, _, _, _, _, _, _, _, _)),
 		throw(permission_error(modify, object, Ctg))
 	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_protocol_'(Ctg, _, _, _, _)),
