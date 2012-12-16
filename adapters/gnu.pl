@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for GNU Prolog 1.4.1 (and later versions)
-%  Last updated on December 7, 2012
+%  Last updated on December 16, 2012
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -584,6 +584,30 @@ setup_call_cleanup(_, _, _) :-
 
 '$lgt_default_body_annotation'(_, _, _) :-
 	fail.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  dummy definitions just to avoid errors when usng gplc to generate
+%  executables
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+current_module(_) :- fail.
+ensure_loaded(_) :- fail.
+mutex_create(_, _) :- fail.
+mutex_lock(_) :- fail.
+mutex_unlock(_) :- fail.
+thread_create(_, _, _) :- fail.
+thread_get_message(_) :- fail.
+thread_get_message(_, _) :- fail.
+thread_peek_message(_, _) :- fail.
+thread_property(_, _) :- fail.
+thread_self(_) :- fail.
+thread_send_message(_, _) :- fail.
+with_mutex(_, _) :- fail.
 
 
 

@@ -25,7 +25,7 @@ RELEASE NOTES
 =============
 
 
-3.00.0 Alpha 7 - December ??, 2012
+3.00.0 Alpha 7 - December 21, 2012
 ==================================
 
 Logtalk compiler and runtime
@@ -95,6 +95,12 @@ Prolog adapter and integration files
 
 * CHANGED: All adapter files to define the new default annotation expansion
 predicates.
+
+* IMPROVED: The GNU Prolog adapter file now includes dummy definitions for
+Prolog built-in predicates used in the Logtalk compiler or runtime but that
+are never called when using GNU Prolog as the back-end compiler. This allows
+using GNU Prolog `gplc` utility to generate executables that embed Logtalk
+without requiring patching of the Logtalk core files or the adapter file.
 
 Documentation
 -------------
