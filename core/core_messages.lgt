@@ -173,32 +173,32 @@
 	logtalk::message_tokens(term_expansion_error(File, Lines, Type, Entity, HookEntity, Term, Error), core) -->
 		['Error found when term-expanding ~w using hook entity ~w: '-[Term, HookEntity]],
 		error_term_tokens(Error),
-		message_context(File, Lines, Type, Entity).		
+		message_context(File, Lines, Type, Entity).
 
 	logtalk::message_tokens(term_expansion_error(File, Lines, HookEntity, Term, Error), core) -->
 		['Error found when term-expanding ~w using hook entity ~w: '-[Term, HookEntity]],
 		error_term_tokens(Error),
-		message_context(File, Lines).		
+		message_context(File, Lines).
 
 	logtalk::message_tokens(goal_expansion_error(File, Lines, Type, Entity, HookEntity, Goal, Error), core) -->
 		['Error found when goal-expanding ~w using hook entity ~w: '-[Goal, HookEntity]],
 		error_term_tokens(Error),
-		message_context(File, Lines, Type, Entity).		
+		message_context(File, Lines, Type, Entity).
 
 	logtalk::message_tokens(goal_expansion_error(File, Lines, HookEntity, Goal, Error), core) -->
 		['Error found when goal-expanding ~w using hook entity ~w: '-[Goal, HookEntity]],
 		error_term_tokens(Error),
-		message_context(File, Lines).		
+		message_context(File, Lines).
 
 	logtalk::message_tokens(annotation_expansion_error(File, Lines, Type, Entity, HookEntity, Annotation, Error), core) -->
 		['Error found when annotation-expanding ~w using hook entity ~w: '-[Annotation, HookEntity]],
 		error_term_tokens(Error),
-		message_context(File, Lines, Type, Entity).		
+		message_context(File, Lines, Type, Entity).
 
 	logtalk::message_tokens(annotation_expansion_error(File, Lines, HookEntity, Annotation, Error), core) -->
 		['Error found when annotation-expanding ~w using hook entity ~w: '-[Annotation, HookEntity]],
 		error_term_tokens(Error),
-		message_context(File, Lines).		
+		message_context(File, Lines).
 
 	logtalk::message_tokens(redefined_logtalk_built_in_predicate(File, Lines, Type, Entity, Predicate), core) -->
 		['Redefining a Logtalk built-in predicate: ~q'-[Predicate], nl],
@@ -264,7 +264,7 @@
 
 	logtalk::message_tokens(complementing_category_ignored(File, Lines, Category, Object), core) -->
 		['Complementing category will be ignored: ~q'-[Category], nl,
-	   	 'Complemented object, ~q, compiled with complementing categories support turned off'-[Object], nl],
+		 'Complemented object, ~q, compiled with complementing categories support turned off'-[Object], nl],
 		message_context(File, Lines).
 
 	logtalk::message_tokens(debug_handler_provider_already_exists(File, Lines, Type, Entity, Provider), core) -->
@@ -345,7 +345,7 @@
 	logtalk::message_tokens(compilation_and_loading_warnings(CCounter, LCounter), core) -->
 		(	{CCounter + LCounter =:= 0} ->
 			% no warnings
-	   		['(0 warnings)'-[], nl]
+			['(0 warnings)'-[], nl]
 		;	{CCounter =:= 0} ->
 			% no compilation warnings
 			loading_warnings(LCounter), [nl]

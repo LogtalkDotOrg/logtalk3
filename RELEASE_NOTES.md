@@ -113,7 +113,7 @@ executable file.
 Documentation
 -------------
 
-REMOVED: All references to the no longer supported `annotation/1` experimental
+* REMOVED: All references to the no longer supported `annotation/1` experimental
 directive.
 
 Examples
