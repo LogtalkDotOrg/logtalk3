@@ -22,19 +22,17 @@ ________________________________________________________________________
 
 
 This file contains some notes about the adapter files provided. The folder
-"unsupported" contains adapter filers for Prolog compilers that are no longer
+"unsupported" contains adapter files for Prolog compilers that are no longer
 officially supported.
 
 If you improve or correct some of these files, or write new ones for other
 Prolog compilers, please send me a copy. It is not feasible for me to 
-individually test Logtalk under all possible combinations of compatible Prolog
-versions and operating-system versions (or, for that mater, to own a copy
-of each one of these compilers). For some of these Prolog compilers I only
-have the manuals available on-line.
+individually test Logtalk under all possible combinations of compatible
+Prolog versions and operating-system versions.
 
 As a general rule, always try to use the latest version of your Prolog 
 compiler of choice. For Prolog compilers with long release cycles, this 
-may imply use of development versions. Most Prolog compilers are moving 
+may require use of development versions. Most Prolog compilers are moving 
 towards better ISO Standard compatibility and, as a consequence, improved 
 Logtalk compatibility.
 
@@ -43,7 +41,7 @@ see the files in the "integration" directory of the Logtalk distribution.
 
 The adapter files may include hacked definitions for missing ISO Prolog
 standard and de-facto standard built-in predicates. These definitions aim
-only to fulfill the requirements of the Logtalk compiler and runtime but
+only to fulfill the requirements of the Logtalk compiler and runtime and
 are not intended as a full replacement for missing functionality.
 
 
@@ -99,10 +97,10 @@ ECLiPSe 6.0#141 or later versions
 	Adopted from a adapter file written and tested with help of Taner Bilgic 
 	for Logtalk 1.x.
 
-	With this Prolog compiler, avoid reloading Logtalk source files declaring
-	and defining dynamic predicates. Due to the semantics of the ECLiPSe 
-	built-in predicate compile/1, new clauses for dynamic predicates are 
-	appended to the old ones instead of replacing them.
+	With this Prolog compiler, avoid reloading Logtalk source files defining
+	dynamic predicates. Due to the semantics of the ECLiPSe built-in predicate
+	compile/1, new clauses for dynamic predicates are appended to the old ones
+	instead of replacing them.
 
 	On Windows, settings files are only supported on the Logtalk user folder.
 
@@ -111,18 +109,18 @@ GNU Prolog 1.4.1 and later versions
 
 	gnu.pl
 
-	GNU Prolog supports the ISO Prolog standard. No problems expected. 
+	GNU Prolog supports the ISO Prolog standard. No problems expected.
 
 	You can generate a new Prolog top level that embeds Logtalk by following
 	the steps (exemplified for POSIX systems):
 
-        $ gplgt
-        ...
-        | ?- logtalk_compile([
-            logtalk_home('core/core_messages'),
-            logtalk_home('core/expanding'),
-            logtalk_home('core/monitoring'),
-            [scratch_directory('$HOME/collect')]).
+		$ gplgt
+		...
+		| ?- logtalk_compile([
+			logtalk_home('core/core_messages'),
+			logtalk_home('core/expanding'),
+			logtalk_home('core/monitoring')],
+			[scratch_directory('$HOME/collect')]).
 
 		$ cp $LOGTALKHOME/adapters/gnu.pl $HOME/collect/gnu.pl
 		$ cp $LOGTALKHOME/paths/paths.pl $HOME/collect/paths.pl
@@ -131,9 +129,9 @@ GNU Prolog 1.4.1 and later versions
 	Edit the $HOME/collect/core.pl file and add the line ":- built_in." to
 	the top. Then:
 
-        $ cd $HOME/collect
+		$ cd $HOME/collect
 		$ gplc -o logtalk gnu.pl paths.pl core_messages.pl expanding.pl monitoring.pl core.pl
-	
+
 	Finally, move the new executable to a directory in your system PATH.
 	For example:
 
@@ -142,14 +140,14 @@ GNU Prolog 1.4.1 and later versions
 	This way, every time you want to work with Logtalk you will just need 
 	to type:
 
-		% logtalk
+		$ logtalk
 
 
 Lean Prolog 3.7.10 and later versions
 
-    lean.pl
+	lean.pl
 
-    The support for this Prolog compiler is still experimental.
+	The support for this Prolog compiler is still experimental.
 
 
 Qu-Prolog 8.12 and later versions
