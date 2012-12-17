@@ -35,9 +35,8 @@ In alternative, you may also set the `debug` flag to `on` by typing:
 
 	| ?- set_logtalk_flag(debug, on).
 
-Logtalk also supports the SWI-Prolog graphical tracer. To use it, you
-must use the required settings described in the default `settings.lgt`
-file.
+Logtalk also supports the SWI-Prolog graphical tracer. The required
+settings are described in the `settings-sample.lgt` file.
 
 All source files are formatted using tabs (the recommended setting is
 a tab width equivalent to 4 spaces).

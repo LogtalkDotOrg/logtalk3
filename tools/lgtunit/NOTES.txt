@@ -42,13 +42,13 @@ option `hook(lgtunit)`. For example:
 
 Unit tests can be written using any of the following dialects:
 
-    test(Test) :- Goal.
+	test(Test) :- Goal.
 
 This is the most simple dialect, allowing the specification of tests
 that are expected to succeed. However, tests that are expected to throw
 an error cannot be specified. A more versatile dialect is:
 
-    succeeds(Test) :- Goal.
+	succeeds(Test) :- Goal.
 	fails(Test) :- Goal.
 	throws(Test, Error) :- Goal.
 
@@ -57,19 +57,21 @@ expected to succeed. For `fails/1` tests, `Goal` is expected to fail.
 For `throws/2` tests, `Goal` is expected to throw `Error`. An alternative
 that can be used with the same expressive power is:
 
-    test(Test, Outcome) :- Goal.
+	test(Test, Outcome) :- Goal.
 
 In this case, `Outcome` can be the atom `true`, the atom `fail`, or the
 exception term that the test is expected to throw.
 
-In all dialects, `Test` is an atom, uniquely identifying a test.
+In all dialects, `Test` is an atom, uniquely identifying a test. A warning is
+printed if duplicated identifiers are found.
 
 The "units" (objects, protocols, and categories) being tested by an unit test
 object are declared using the `unit/1` predicate. A single unit test object my
 included tests for one or more "units".
 
-For examples of how to write unit tests check the `testing` example in the
-`examples` folder in the Logtalk distribution.
+For examples of how to write unit tests, check the `tests` folder or the
+`testing` example in the `examples` folder in the Logtalk distribution.
+Most of the provided examples also include unit tests.
 
 Note: when using the `(<<)/2` control construct to access and test an object
 internal predicates, make sure that the `context_switching_calls` compiler
@@ -89,6 +91,9 @@ test that is failing, you can type:
 You may also compile the unit test objects in debug mode and use the Logtalk
 debugger. For example:
 
+	| ?- logtalk_load(debugger(loader)).
+	...
+
 	| ?- logtalk_load(my_tests, [debug(on)]).
 	...
 
@@ -103,12 +108,16 @@ and printed, you will need to compile the entities that you're testing
 using the options `debug(on)` and `source_data(on)`. Be aware, however,
 that compiling in debug mode results in a performance penalty. Your unit
 test objects must also define facts for the predicate `unit/1`, whose
-argument is the identifier of an entity being tested.
+argument is the identifier of an entity being tested for which you want
+to collect coverage information.
 
 In the printed predicate clause coverage information, you may get a total
 number of clauses smaller than the covered clauses. This results from the
 use of dynamic predicates with clauses asserted at runtime. You may easily
-identify dynamic predicates in the results as their clauses have an index
-equal to zero.
+identify dynamic predicates in the results as their clauses often have a
+initial count equal to zero.
 
 Parameterized unit tests can be easily defined by using parametric objects.
+
+All source files are formatted using tabs (the recommended setting is a tab
+width equivalent to 4 spaces).

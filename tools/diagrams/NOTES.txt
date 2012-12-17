@@ -58,22 +58,25 @@ tiled printing (e.g. Adobe Reader).
 A set of options are available to specify the details to include in the
 generated diagrams:
 
-- `date(Boolean)`
+- `date(Boolean)`  
 	print/omit current date (`true` or `false`; default is `true`)
-- `library_paths(Boolean)`
+- `library_paths(Boolean)`  
 	print/omit library paths (`true` or `false`; default is `true`)
-- `file_names(Boolean)`
+- `file_names(Boolean)`  
 	print/omit source file names (`true` or `false`; default is `true`)
-- `interface(Boolean)`
+- `interface(Boolean)`  
 	print/omit public predicates (`true` or `false`; default is `true`)
-- `output_path(OutputPath)`
+- `output_path(OutputPath)`  
 	directory for the .dot files (an atom; default is `.`)
-- `exclude_files(Files)`
+- `exclude_files(Files)`  
 	list of source files (without the `.lgt` extension) to exclude (default is `[]`)
-- `exclude_paths(Paths)`
+- `exclude_paths(Paths)`  
 	list of relative paths to exclude (default is `[]`)
-- `exclude_entities(Entities)`
+- `exclude_entities(Entities)`  
 	list of entities to exclude (default is `[]`)
 
-Be sure to set the `source_data` flag on before compiling the libraries or
-files for which you want to generated diagrams.
+Be sure to set the `source_data` flag `on` before compiling the libraries
+or files for which you want to generated diagrams.
+
+All source files are formatted using tabs (the recommended setting is a
+tab width equivalent to 4 spaces).

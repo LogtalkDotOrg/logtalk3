@@ -14,10 +14,10 @@ file.
 This example contains simple wrappers for Prolog profiler tools, requiring
 either SICStus Prolog 4 or YAP. The example includes two files:
 
-- `yap_profiler.lgt`
+- `yap_profiler.lgt`  
 	simple wrapper for the YAP count profiler 
 	
-- `sicstus_profiler.lgt`
+- `sicstus_profiler.lgt`  
 	simple wrapper for the SICStus Prolog 4 profiler
 
 Logtalk also supports the YAP tick profiler (using the latest YAP devel
@@ -38,6 +38,9 @@ predicate by typing:
 The profiler support makes no attempt to conceal the internal Logtalk
 compiler/runtime predicates or the generated predicates that implement
 predicate inheritance. Calls to internal compiler and runtime predicates
-have functors starting with "$lgt_". Calls to predicates with functors
-such as "_def", "_dcl", or "_super", used to implement inheritance, may
+have functors starting with `$lgt_`. Calls to predicates with functors
+such as `_def`, `_dcl`, or `_super`, used to implement inheritance, may
 be listed when your code uses dynamic binding.
+
+All source files are formatted using tabs (the recommended setting is a
+tab width equivalent to 4 spaces).
