@@ -34,39 +34,39 @@ and loading predicates. For example:
 Currently, there are ten groups of entities defined, each one with its 
 own loader and notes files:
 
-* dates
+* dates  
 	`dates_loader.lgt`
 	`dates.txt`
 
-* dependents
+* dependents  
 	`dependents_loader.lgt`
 	`dependents.txt`
 
-* events
+* events  
 	`events_loader.lgt`
 	`events.txt`
 
-* hierarchies
+* hierarchies  
 	`hierarchies_loader.lgt`
 	`hierarchies.txt`
 
-* metapredicates
+* metapredicates  
 	`metapredicates_loader.lgt`
 	`metapredicates.txt`
 
-* random
+* random  
 	`random_loader.lgt`
 	`random.txt`
 
-* statistics
+* statistics  
 	`statistics_loader.lgt`
 	`statistics.txt`
 
-* types
+* types  
 	`types_loader.lgt`
 	`types.txt`
 
-There is also a file named all_loader.lgt that will load all entities in the 
+There is also a file named `all_loader.lgt` that will load all entities in the 
 groups listed above. Simply type the goal:
 
 	| ?- logtalk_load(library(all_loader)).

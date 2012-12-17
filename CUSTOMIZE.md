@@ -92,7 +92,7 @@ may want to change include:
 Be sure to read the `adapters/NOTES.txt` file for Prolog specific compatibility
 notes; some back-end Prolog compilers don't support all the possible compilation
 flags values. In addition, some back-end Prolog compilers provide limited
-support for settings files.
+support for settings files in some operating-systems.
 
 
 4. CUSTOMIZING DOCUMENTATION PROCESSING SUPPORT

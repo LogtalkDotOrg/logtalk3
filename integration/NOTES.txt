@@ -43,6 +43,9 @@ system path):
 * XSB MT 64 bits (version 3.3 or later):   `xsbmt64lgt` (first run must use `sudo`)
 * YAP (version 6.0.2 or later):            `yaplgt`
 
+For more information about these scripts and their dependencies, consult
+the corresponding `man` page (e.g. `man yaplgt`).
+
 On Windows systems, the Logtalk installer makes the Prolog integration 
 shortcuts available from the `Start Menu/Programs/Logtalk` menu.
 

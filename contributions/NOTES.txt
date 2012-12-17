@@ -11,13 +11,13 @@ ________________________________________________________________________
 This folder contains code contributions from Logtalk users. Follows 
 a short description of each included contribution:
 
-* `flags`
+* `flags`  
 	Contributed by: Theofrastos Mantadelis	
 
 	This folder contains an implementation of persistent object
 	flags. Includes usage examples.
 
-* `iso8601.lgt`
+* `iso8601.lgt`  
 	Contributed by: Daniel L. Dudley	
 
 	This is a partial implementation of the ISO 8601 standard, 
@@ -28,25 +28,25 @@ a short description of each included contribution:
 	resulting XML file into (X)HTML or PDF documentation. Your 
 	feedback is appreciated.
 
-* `pddl_parser`
+* `pddl_parser`  
 	Contributed by: Robert Sasak
 
 	This is a partial implementation of a parser for PDDL 3.0 files.
-	See http://artax.karlin.mff.cuni.cz/~sasar5am/pddl/ for the
+	See `http://artax.karlin.mff.cuni.cz/~sasar5am/pddl/` for the
 	original Prolog version.
 
-* `verdi_neruda`
+* `verdi_neruda`  
 	Contributed by: Victor Lagerkvist
 
 	This folder contains a a meta-interpreter collection that
 	includes both top-down and bottom-up search strategies.
 	See the `verdi_neruda/README.md` file for details.
 
-* `xml_parser`
+* `xml_parser`  
 	Contributed by: John Fletcher
 
 	This folder contains a Logtalk version of John Fletcher's 
-	Prolog XML parser (http://www.zen37763.zen.co.uk/xml.pl.html).
+	Prolog XML parser (`http://www.zen37763.zen.co.uk/xml.pl.html`).
 	See the `xml_parser/NOTES.txt` file for details.
 
 See the copyright and license information on the contributed files for 

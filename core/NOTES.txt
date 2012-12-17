@@ -24,7 +24,7 @@ ________________________________________________________________________
 This folder contains a single Prolog file, `core.pl`, which implements
 both the Logtalk compiler and the Logtalk runtime. There are also some
 Logtalk files, such as `expanding.lgt` and `monitoring.lgt`, defining
-built-in protocols, and core_messages.lgt`, defining default translations
+built-in protocols, and `core_messages.lgt`, defining default translations
 for Logtalk core messages.
 
 Before loading the `core.pl` file into your favorite Prolog compiler,

@@ -52,15 +52,15 @@ from `http://msdn.microsoft.com/downloads/list/webdev.asp`).
 	systems (must be run from this directory by a user with administration 
 	privileges)
 
-- `logtalk_tester.sh`
-    shell script for automating running unit tests in the `examples` and
-    `tests` directories
+- `logtalk_tester.sh`  
+	shell script for automating running unit tests in the `examples` and
+	`tests` directories
 
 - `logtalk_version_select.sh`  
-	experimental shell script for switching between installed Logtalk
-	versions for POSIX operating-systems; works with version 2.36.0 or
-	later; doesn't change the Logtalk user folder; this script is loosely
-	based on the `python_select` script
+	shell script for switching between installed Logtalk versions for POSIX
+	operating-systems; works with version 2.36.0 or later; doesn't change the
+	Logtalk user folder; this script is loosely based on the `python_select`
+	script
 
 - `logtalk_backend_select.sh`  
 	experimental shell script for defining an alias, logtalk, to a chosen
@@ -86,15 +86,14 @@ from `http://msdn.microsoft.com/downloads/list/webdev.asp`).
 - `windows`  
 	directory containing files used when building Windows GUI installers
 
-- `logtalk_user_setup.sh`  
-- `logtalk_user_setup.js`  
+- `logtalk_user_setup.sh` and `logtalk_user_setup.js`  
 	end-user scripts for copying the Logtalk user-modifiable files and 
 	directories to the location pointed by the environment variable 
-	LOGTALKUSER (defaults to `~/logtalk` on POSIX operating-systems 
+	`LOGTALKUSER` (defaults to `~/logtalk` on POSIX operating-systems 
 	and to `My Documents\Logtalk` on Windows when the variable is not 
 	defined); must be run by each end-user in order to ensure proper 
 	permissions for the copied files; the `LOGTALKHOME` environment 
 	variable must be defined (pointing to the Logtalk installation 
 	directory)
 - `logtalk_user_setup.bat`  
-    wrapper for the logtalk_user_setup.js script to simplify its use
+	wrapper for the `logtalk_user_setup.js` script to simplify its use

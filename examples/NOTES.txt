@@ -146,9 +146,9 @@ Follows a short description of each included example (in alphabetical order):
 	in order to implement dynamic object state
 
 - `encodings`  
-	very simple example of using the new, experimental encoding/1 
+	very simple example of using the new, experimental `encoding/1` 
 	directive (requires Logtalk to be run with YAP, SWI-Prolog,
-	CxProlog, K-Prolog, or SICStus Prolog)
+	CxProlog, K-Prolog, SICStus Prolog, or Lean Prolog)
 
 - `engines`  
 	example of category composition (extension of categories by 
@@ -295,8 +295,8 @@ Follows a short description of each included example (in alphabetical order):
 
 - `searching`  
 	state-space searching framework
-	(example adapted from Ivan Bratko's "Prolog Programming for 
-	Artificial Intelligence" book)
+	(this example includes some code adapted from Ivan Bratko's "Prolog
+	Programming for Artificial Intelligence" book)
 
 - `securemp`  
 	a set of source files for testing Logtalk secure
