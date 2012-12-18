@@ -38,13 +38,13 @@ URL:
 
 Two scripts are provided to convert the XHTML manual pages to PDF files:
 
-- `userman/userman.sh`
-		Bourne-compatible shell script for POSIX systems that generates
-		a PDF version of the User Manual
+- `userman/userman.sh`  
+	Bourne-compatible shell script for POSIX systems that generates
+	a PDF version of the User Manual
 
-- `refman/refman.sh`
-		Bourne-compatible shell script for POSIX systems that generates
-		a PDF version of the Reference Manual
+- `refman/refman.sh`  
+	Bourne-compatible shell script for POSIX systems that generates
+	a PDF version of the Reference Manual
 
 You may edit the scripts in order to change the default XSLT and/or XSL-FO 
 processors.
