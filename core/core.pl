@@ -12760,6 +12760,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	\+ '$lgt_pp_dynamic_'(Functor, Arity),
 	\+ '$lgt_pp_defines_predicate_'(Functor, Arity, _, _),
 	\+ '$lgt_pp_defines_annotated_predicate_'(Functor, Arity),
+	\+ '$lgt_pp_dynamic_',
 	% declared, static, but undefined predicate;
 	% local calls must fail (closed-world assumption)
 	functor(Head, Functor, Arity),
