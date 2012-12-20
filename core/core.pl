@@ -12686,6 +12686,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 '$lgt_gen_object_clauses' :-
+	% object without an instantiation or specialization relation are
+	% always compiled as prototypes 
 	(	\+ '$lgt_pp_instantiated_class_'(_, _, _, _, _, _, _, _, _, _),
 		\+ '$lgt_pp_specialized_class_'(_, _, _, _, _, _, _, _, _, _) ->
 		'$lgt_gen_prototype_clauses'
@@ -12803,6 +12805,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 '$lgt_gen_protocol_clauses' :-
+	% some linking clauses depend on the existence of local
+	% predicate declarations
 	'$lgt_gen_local_dcl_clauses'(Local),
 	'$lgt_gen_protocol_linking_clauses'(Local),
 	'$lgt_gen_protocol_extend_clauses',
@@ -12872,6 +12876,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 '$lgt_gen_category_dcl_clauses' :-
+	% some linking clauses depend on the existence of local
+	% predicate declarations
 	'$lgt_gen_local_dcl_clauses'(Local),
 	'$lgt_gen_category_linking_dcl_clauses'(Local),
 	'$lgt_gen_category_implements_dcl_clauses',
@@ -12979,7 +12985,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_gen_category_extends_def_clauses' :-
 	'$lgt_pp_category_'(Ctg, _, _, Def, Rnm, _),
 	% when working with parametric categories, we must connect the descendant parameters
-	% with the parent parameters:
+	% with the parent parameters by using the entity relation clauses:
 	'$lgt_pp_entity_runtime_clause_'('$lgt_extends_category_'(Ctg, ExtCtg, _)),
 	'$lgt_pp_extended_category_'(ExtCtg, _, _, ExtDef, _),
 	Lookup =.. [ExtDef, Pred, ExCtx, Call, Ctn],
@@ -13038,6 +13044,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_gen_prototype_dcl_clauses' :-
 	'$lgt_gen_local_dcl_clauses'(Local),
+	% linking clauses for complementing categories must come
+	% first to allow overriding of predicate declarations
 	'$lgt_gen_prototype_complements_dcl_clauses',
 	'$lgt_gen_prototype_linking_dcl_clauses'(Local),
 	'$lgt_gen_prototype_implements_dcl_clauses',
@@ -13160,10 +13168,14 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 '$lgt_gen_prototype_def_clauses' :-
+	% some linking clauses depend on the existence of local
+	% predicate definitions
 	(	'$lgt_pp_final_def_'(_) ->
 		Local = true
 	;	Local = false
 	),
+	% linking clauses for complementing categories must come
+	% first to allow overriding of predicate definitions
 	'$lgt_gen_prototype_complements_def_clauses',
 	'$lgt_gen_prototype_linking_def_clauses'(Local),
 	'$lgt_gen_prototype_imports_def_clauses',
@@ -13202,7 +13214,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_gen_prototype_imports_def_clauses' :-
 	'$lgt_pp_object_'(Obj, _, _, ODef, _, _, _, _, _, Rnm, _),
 	% when working with parametric entities, we must connect the object parameters
-	% with the category parameters:
+	% with the category parameters by using the entity relation clauses:
 	'$lgt_pp_entity_runtime_clause_'('$lgt_imports_category_'(Obj, Ctg, _)),
 	'$lgt_pp_imported_category_'(Ctg, _, _, CDef, _),
 	Lookup =.. [CDef, Pred, ExCtx, Call, Ctn],
@@ -13222,7 +13234,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_gen_prototype_extends_def_clauses' :-
 	'$lgt_pp_object_'(Obj, _, _, ODef, _, _, _, _, _, Rnm, _),
 	% when working with parametric prototypes, we must connect the descendant parameters
-	% with the parent parameters:
+	% with the parent parameters by using the entity relation clauses:
 	'$lgt_pp_entity_runtime_clause_'('$lgt_extends_object_'(Obj, Parent, _)),
 	'$lgt_pp_extended_object_'(Parent, _, _, PDef, _, _, _, _, _, _),
 	'$lgt_exec_ctx_this_rest'(PExCtx, Parent, Ctx),
@@ -13255,7 +13267,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_gen_prototype_super_clauses' :-
 	'$lgt_pp_object_'(Obj, _, _, _, Super, _, _, _, _, Rnm, _),
 	% when working with parametric prototypes, we must connect the descendant parameters
-	% with the parent parameters:
+	% with the parent parameters by using the entity relation clauses:
 	'$lgt_pp_entity_runtime_clause_'('$lgt_extends_object_'(Obj, Parent, _)),
 	'$lgt_pp_extended_object_'(Parent, _, _, PDef, _, _, _, _, _, _),
 	'$lgt_exec_ctx_this_rest'(PExCtx, Parent, Ctx),
@@ -13282,21 +13294,24 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 '$lgt_gen_ic_dcl_clauses' :-
+	% some linking clauses depend on the existence of local
+	% predicate declarations
 	'$lgt_gen_local_dcl_clauses'(Local),
 	'$lgt_gen_ic_idcl_clauses'(Local),
-	'$lgt_gen_ic_hierarchy_dcl_clauses',
+	'$lgt_gen_ic_instantiates_dcl_clauses',
 	'$lgt_gen_object_catchall_dcl_clauses'(Local).
 
 
 
-'$lgt_gen_ic_hierarchy_dcl_clauses' :-
+'$lgt_gen_ic_instantiates_dcl_clauses' :-
 	'$lgt_pp_object_'(_, _, ODcl, _, _, _, _, _, _, _, _),
 	\+ '$lgt_pp_instantiated_class_'(_, _, _, _, _, _, _, _, _, _),
+	% no meta-class for the class we're compiling
 	!,
 	functor(Head, ODcl, 6),
 	assertz('$lgt_pp_dcl_'((Head:-fail))).
 
-'$lgt_gen_ic_hierarchy_dcl_clauses' :-
+'$lgt_gen_ic_instantiates_dcl_clauses' :-
 	'$lgt_pp_object_'(Obj, _, ODcl, _, _, _, _, _, _, Rnm, _),
 	'$lgt_pp_instantiated_class_'(Class, _, _, _, _, CIDcl, _, _, _, RelationScope),
 	(	RelationScope == (public) ->
@@ -13317,18 +13332,20 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	),
 	fail.
 
-'$lgt_gen_ic_hierarchy_dcl_clauses'.
+'$lgt_gen_ic_instantiates_dcl_clauses'.
 
 
 
 % generates instance/class inherited declaration clauses
 
 '$lgt_gen_ic_idcl_clauses'(Local) :-
+	% linking clauses for complementing categories must come
+	% first to allow overriding of predicate declarations
 	'$lgt_gen_ic_complements_idcl_clauses',
 	'$lgt_gen_ic_linking_idcl_clauses'(Local),
 	'$lgt_gen_ic_implements_idcl_clauses',
 	'$lgt_gen_ic_imports_idcl_clauses',
-	'$lgt_gen_ic_hierarchy_idcl_clauses'.
+	'$lgt_gen_ic_specializes_idcl_clauses'.
 
 
 
@@ -13419,7 +13436,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-'$lgt_gen_ic_hierarchy_idcl_clauses' :-
+'$lgt_gen_ic_specializes_idcl_clauses' :-
 	'$lgt_pp_object_'(Obj, _, _, _, _, CIDcl, _, _, _, Rnm, _),
 	'$lgt_pp_specialized_class_'(Super, _, _, _, _, SIDcl, _, _, _, RelationScope),
 	(	RelationScope == (public) ->
@@ -13440,19 +13457,23 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	),
 	fail.
 
-'$lgt_gen_ic_hierarchy_idcl_clauses'.
+'$lgt_gen_ic_specializes_idcl_clauses'.
 
 
 
 '$lgt_gen_ic_def_clauses' :-
+	% some linking clauses depend on the existence of local
+	% predicate definitions
 	(	'$lgt_pp_final_def_'(_) ->
 		Local = true
 	;	Local = false
 	),
+	% linking clauses for complementing categories must come
+	% first to allow overriding of predicate definitions
 	'$lgt_gen_ic_complements_def_clauses',
 	'$lgt_gen_ic_linking_def_clauses'(Local),
 	'$lgt_gen_ic_imports_def_clauses',
-	'$lgt_gen_ic_hierarchy_def_clauses',
+	'$lgt_gen_ic_instantiates_def_clauses',
 	'$lgt_gen_ic_idef_clauses'(Local),
 	'$lgt_gen_object_catchall_def_clauses'(Local).
 
@@ -13488,7 +13509,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_gen_ic_imports_def_clauses' :-
 	'$lgt_pp_object_'(Obj, _, _, ODef, _, _, _, _, _, Rnm, _),
 	% when working with parametric entities, we must connect the object parameters
-	% with the category parameters:
+	% with the category parameters by using the entity relation clauses:
 	'$lgt_pp_entity_runtime_clause_'('$lgt_imports_category_'(Obj, Ctg, _)),
 	'$lgt_pp_imported_category_'(Ctg, _, _, CDef, _),
 	Lookup =.. [CDef, Pred, ExCtx, Call, Ctn],
@@ -13505,10 +13526,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-'$lgt_gen_ic_hierarchy_def_clauses' :-
+'$lgt_gen_ic_instantiates_def_clauses' :-
 	'$lgt_pp_object_'(Obj, _, _, ODef, _, _, _, _, _, Rnm, _),
 	% when working with parametric objects, we must connect the instance parameters
-	% with the class parameters:
+	% with the class parameters by using the entity relation clauses:
 	'$lgt_pp_entity_runtime_clause_'('$lgt_instantiates_class_'(Obj, Class, _)),
 	'$lgt_pp_instantiated_class_'(Class, _, _, _, _, _, CIDef, _, _, _),
 	'$lgt_exec_ctx_this_rest'(CExCtx, Class, Ctx),
@@ -13523,15 +13544,17 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	),
 	fail.
 
-'$lgt_gen_ic_hierarchy_def_clauses'.
+'$lgt_gen_ic_instantiates_def_clauses'.
 
 
 
 '$lgt_gen_ic_idef_clauses'(Local) :-
+	% linking clauses for complementing categories must come
+	% first to allow overriding of predicate definitions
 	'$lgt_gen_ic_complements_idef_clauses',
 	'$lgt_gen_ic_linking_idef_clauses'(Local),
 	'$lgt_gen_ic_imports_idef_clauses',
-	'$lgt_gen_ic_hierarchy_idef_clauses'.
+	'$lgt_gen_ic_specializes_idef_clauses'.
 
 
 
@@ -13566,7 +13589,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_gen_ic_imports_idef_clauses' :-
 	'$lgt_pp_object_'(Obj, _, _, _, _, _, OIDef, _, _, Rnm, _),
 	% when working with parametric entities, we must connect the object parameters
-	% with the category parameters:
+	% with the category parameters by using the entity relation clauses:
 	'$lgt_pp_entity_runtime_clause_'('$lgt_imports_category_'(Obj, Ctg, _)),
 	'$lgt_pp_imported_category_'(Ctg, _, _, CDef, _),
 	'$lgt_exec_ctx_this'(ExCtx, Obj),
@@ -13584,10 +13607,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-'$lgt_gen_ic_hierarchy_idef_clauses' :-
+'$lgt_gen_ic_specializes_idef_clauses' :-
 	'$lgt_pp_object_'(Class, _, _, _, _, _, CIDef, _, _, Rnm, _),
 	% when working with parametric objects, we must connect the class parameters
-	% with the superclass parameters:
+	% with the superclass parameters by using the entity relation clauses:
 	'$lgt_pp_entity_runtime_clause_'('$lgt_specializes_class_'(Class, Super, _)),
 	'$lgt_pp_specialized_class_'(Super, _, _, _, _, _, SIDef, _, _, _),
 	'$lgt_exec_ctx_this_rest'(SExCtx, Super, Ctx),
@@ -13602,7 +13625,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	),
 	fail.
 
-'$lgt_gen_ic_hierarchy_idef_clauses'.
+'$lgt_gen_ic_specializes_idef_clauses'.
 
 
 
@@ -13621,7 +13644,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_gen_ic_super_clauses' :-
 	'$lgt_pp_object_'(Obj, _, _, _, Super, _, _, _, _, Rnm, _),
 	% when working with parametric objects, we must connect the instance parameters
-	% with the class parameters:
+	% with the class parameters by using the entity relation clauses:
 	'$lgt_pp_entity_runtime_clause_'('$lgt_instantiates_class_'(Obj, Class, _)),
 	'$lgt_pp_instantiated_class_'(Class, _, _, _, _, _, CIDef, _, _, _),
 	% we can ignore class self-instantiation, which is often used in reflective designs:
@@ -13646,7 +13669,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_gen_ic_super_clauses' :-
 	'$lgt_pp_object_'(Class, _, _, _, Super, _, _, _, _, Rnm, _),
 	% when working with parametric objects, we must connect the class parameters
-	% with the superclass parameters:
+	% with the superclass parameters by using the entity relation clauses:
 	'$lgt_pp_entity_runtime_clause_'('$lgt_specializes_class_'(Class, Superclass, _)),
 	'$lgt_pp_specialized_class_'(Superclass, _, _, _, _, _, SIDef, _, _, _),
 	'$lgt_exec_ctx_this_rest'(SExCtx, Superclass, Ctx),
