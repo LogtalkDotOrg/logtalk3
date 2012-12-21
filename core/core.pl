@@ -873,7 +873,7 @@ create_object(Obj, Relations, Directives, Clauses) :-
 	'$lgt_tr_directives'([(dynamic)| Directives], Ctx),
 	% the list of clauses may also include grammar rules
 	'$lgt_tr_terms'(Clauses, Ctx),
-	'$lgt_gen_local_def_clauses',
+	'$lgt_gen_def_table_clauses',
 	'$lgt_fix_synchronized_predicates',
 	'$lgt_fix_predicate_calls',
 	'$lgt_gen_object_clauses',
@@ -921,7 +921,7 @@ create_category(Ctg, Relations, Directives, Clauses) :-
 	'$lgt_tr_directives'([(dynamic)| Directives], Ctx),
 	% the list of clauses may also include grammar rules
 	'$lgt_tr_terms'(Clauses, Ctx),
-	'$lgt_gen_local_def_clauses',
+	'$lgt_gen_def_table_clauses',
 	'$lgt_fix_synchronized_predicates',
 	'$lgt_fix_predicate_calls',
 	'$lgt_gen_category_clauses',
@@ -12554,7 +12554,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_gen_entity_initialization_goal'.
 
 '$lgt_generate_code'(object) :-
-	'$lgt_gen_local_def_clauses',
+	'$lgt_gen_def_table_clauses',
 	'$lgt_fix_synchronized_predicates',
 	'$lgt_fix_predicate_calls',
 	'$lgt_gen_object_clauses',
@@ -12562,7 +12562,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_gen_entity_initialization_goal'.
 
 '$lgt_generate_code'(category) :-
-	'$lgt_gen_local_def_clauses',
+	'$lgt_gen_def_table_clauses',
 	'$lgt_fix_synchronized_predicates',
 	'$lgt_fix_predicate_calls',
 	'$lgt_gen_category_clauses',
@@ -12696,13 +12696,13 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_gen_local_dcl_clauses'(-atom)
+% '$lgt_gen_dcl_table_clauses'(-atom)
 %
-% a (local) predicate declaration is only generated if there is a scope
-% declaration for the predicate; the single argument returns the atom
-% "true" if there are local declaration clauses and the atom "false" otherwise
+% a predicate declaration table clause is only generated if there is a
+% scope declaration for the predicate; the single argument returns the
+% atom "true" if there are local clauses and the atom "false" otherwise
 
-'$lgt_gen_local_dcl_clauses'(_) :-
+'$lgt_gen_dcl_table_clauses'(_) :-
 	'$lgt_pp_entity'(_, _, _, Dcl, Mode),
 	(	'$lgt_pp_public_'(Functor, Arity), Scope = p(p(p))
 	;	'$lgt_pp_protected_'(Functor, Arity), Scope = p(p)
@@ -12741,7 +12741,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	assertz('$lgt_pp_dcl_'(Fact)),
 	fail.
 
-'$lgt_gen_local_dcl_clauses'(Local) :-
+'$lgt_gen_dcl_table_clauses'(Local) :-
 	(	'$lgt_pp_dcl_'(_) ->
 		Local = true
 	;	Local = false
@@ -12749,12 +12749,12 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_gen_local_def_clauses'
+% '$lgt_gen_def_table_clauses'
 %
-% generates local def clauses for undefined but declared
-% (using scope and/or dynamic directives) predicates
+% generates predicate definition table clauses for undefined but
+% declared (using scope and/or dynamic directives) predicates
 
-'$lgt_gen_local_def_clauses' :-
+'$lgt_gen_def_table_clauses' :-
 	(	'$lgt_pp_public_'(Functor, Arity)
 	;	'$lgt_pp_protected_'(Functor, Arity)
 	;	'$lgt_pp_private_'(Functor, Arity)
@@ -12769,7 +12769,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_add_def_fail_clause'(Head, Functor, Arity),
 	fail.
 
-'$lgt_gen_local_def_clauses' :-
+'$lgt_gen_def_table_clauses' :-
 	% categories cannot contain clauses for dynamic predicates;
 	% thus, in this case, we look only into objects
 	'$lgt_pp_entity'(object, _, Prefix, _, _),
@@ -12786,7 +12786,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	),
 	fail.
 
-'$lgt_gen_local_def_clauses' :-
+'$lgt_gen_def_table_clauses' :-
 	% annotations also result in the definition of predicates
 	'$lgt_pp_entity'(_, _, Prefix, _, _),
 	'$lgt_comp_ctx_prefix'(Ctx, Prefix),
@@ -12800,31 +12800,35 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_add_def_clause'(Head, Functor, Arity, _, Ctx),
 	fail.
 
-'$lgt_gen_local_def_clauses'.
+'$lgt_gen_def_table_clauses'.
 
 
 
 '$lgt_gen_protocol_clauses' :-
-	% some linking clauses depend on the existence of local
-	% predicate declarations
-	'$lgt_gen_local_dcl_clauses'(Local),
-	'$lgt_gen_protocol_linking_clauses'(Local),
-	'$lgt_gen_protocol_extend_clauses',
+	% first, generate the local table of predicate declarations: 
+	'$lgt_gen_dcl_table_clauses'(Local),
+	% second, generate linking clauses for accessing both local
+	% declarations and declarations in related entities (some
+	% linking clauses depend on the existence of local predicate
+	% declarations):
+	'$lgt_gen_protocol_local_clauses'(Local),
+	'$lgt_gen_protocol_extends_clauses',
+	% third, add a catchall clause if necessary:
 	'$lgt_gen_protocol_catchall_clauses'.
 
 
 
-'$lgt_gen_protocol_linking_clauses'(true) :-
+'$lgt_gen_protocol_local_clauses'(true) :-
 	'$lgt_pp_protocol_'(Ptc, _, PDcl, _, _),
 	Head =.. [PDcl, Pred, Scope, Meta, Flags, Ptc],
 	Body =.. [PDcl, Pred, Scope, Meta, Flags],
 	assertz('$lgt_pp_dcl_'((Head:-Body))).
 
-'$lgt_gen_protocol_linking_clauses'(false).
+'$lgt_gen_protocol_local_clauses'(false).
 
 
 
-'$lgt_gen_protocol_extend_clauses' :-
+'$lgt_gen_protocol_extends_clauses' :-
 	'$lgt_pp_protocol_'(_, _, Dcl, Rnm, _),
 	'$lgt_pp_extended_protocol_'(ExtPtc, _, ExtDcl, RelationScope),
 	(	RelationScope == (public) ->
@@ -12844,7 +12848,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	),
 	fail.
 
-'$lgt_gen_protocol_extend_clauses'.
+'$lgt_gen_protocol_extends_clauses'.
 
 
 
@@ -12876,23 +12880,28 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 '$lgt_gen_category_dcl_clauses' :-
-	% some linking clauses depend on the existence of local
-	% predicate declarations
-	'$lgt_gen_local_dcl_clauses'(Local),
-	'$lgt_gen_category_linking_dcl_clauses'(Local),
+	% first, generate the local table of predicate declarations: 
+	'$lgt_gen_dcl_table_clauses'(Local),
+	% second, generate linking clauses for accessing both local
+	% declarations and declarations in related entities (some
+	% linking clauses depend on the existence of local predicate
+	% declarations):
+	'$lgt_gen_category_local_dcl_clauses'(Local),
 	'$lgt_gen_category_implements_dcl_clauses',
 	'$lgt_gen_category_extends_dcl_clauses',
+	% third, add a catchall clause if necessary:
 	'$lgt_gen_category_catchall_dcl_clauses'.
 
 
 
-'$lgt_gen_category_linking_dcl_clauses'(true) :-
+
+'$lgt_gen_category_local_dcl_clauses'(true) :-
 	'$lgt_pp_category_'(Ctg, _, CDcl, _, _, _),
 	Head =.. [CDcl, Pred, Scope, Meta, Flags, Ctg],
 	Body =.. [CDcl, Pred, Scope, Meta, Flags],
 	assertz('$lgt_pp_dcl_'((Head:-Body))).
 
-'$lgt_gen_category_linking_dcl_clauses'(false).
+'$lgt_gen_category_local_dcl_clauses'(false).
 
 
 
@@ -12966,12 +12975,12 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 '$lgt_gen_category_def_clauses' :-
-	'$lgt_gen_category_linking_def_clauses',
+	'$lgt_gen_category_local_def_clauses',
 	'$lgt_gen_category_extends_def_clauses'.
 
 
 
-'$lgt_gen_category_linking_def_clauses' :-
+'$lgt_gen_category_local_def_clauses' :-
 	'$lgt_pp_category_'(Ctg, _, _, Def, _, _),
 	Head =.. [Def, Pred, ExCtx, Call, Ctg],
 	(	'$lgt_pp_final_def_'(_) ->
@@ -13043,14 +13052,19 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 '$lgt_gen_prototype_dcl_clauses' :-
-	'$lgt_gen_local_dcl_clauses'(Local),
-	% linking clauses for complementing categories must come
-	% first to allow overriding of predicate declarations
+	% first, generate the local table of predicate declarations: 
+	'$lgt_gen_dcl_table_clauses'(Local),
+	% second, generate linking clauses for accessing both local
+	% declarations and declarations in related entities (some
+	% linking clauses depend on the existence of local predicate
+	% declarations; plus, linking clauses for complementing categories
+	% must come first to allow overriding of predicate declarations):
 	'$lgt_gen_prototype_complements_dcl_clauses',
-	'$lgt_gen_prototype_linking_dcl_clauses'(Local),
+	'$lgt_gen_prototype_local_dcl_clauses'(Local),
 	'$lgt_gen_prototype_implements_dcl_clauses',
 	'$lgt_gen_prototype_imports_dcl_clauses',
 	'$lgt_gen_prototype_extends_dcl_clauses',
+	% third, add a catchall clause if necessary:
 	'$lgt_gen_object_catchall_dcl_clauses'(Local).
 
 
@@ -13066,7 +13080,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-'$lgt_gen_prototype_linking_dcl_clauses'(true) :-
+'$lgt_gen_prototype_local_dcl_clauses'(true) :-
 	'$lgt_pp_object_'(Obj, _, Dcl, _, _, _, _, DDcl, _, _, _),
 	HeadDcl =.. [Dcl, Pred, Scope, Meta, Flags, Obj, Obj],
 	BodyDcl =.. [Dcl, Pred, Scope, Meta, Flags],
@@ -13078,7 +13092,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	true
 	).
 
-'$lgt_gen_prototype_linking_dcl_clauses'(false) :-
+'$lgt_gen_prototype_local_dcl_clauses'(false) :-
 	'$lgt_pp_object_'(Obj, _, Dcl, _, _, _, _, DDcl, _, _, _),
 	(	'$lgt_compiler_flag'(dynamic_declarations, allow) ->
 		HeadDDcl =.. [Dcl, Pred, Scope, no, 2, Obj, Obj],
@@ -13169,17 +13183,18 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_gen_prototype_def_clauses' :-
 	% some linking clauses depend on the existence of local
-	% predicate definitions
+	% predicate definitions:
 	(	'$lgt_pp_final_def_'(_) ->
 		Local = true
 	;	Local = false
 	),
 	% linking clauses for complementing categories must come
-	% first to allow overriding of predicate definitions
+	% first to allow overriding of predicate definitions:
 	'$lgt_gen_prototype_complements_def_clauses',
-	'$lgt_gen_prototype_linking_def_clauses'(Local),
+	'$lgt_gen_prototype_local_def_clauses'(Local),
 	'$lgt_gen_prototype_imports_def_clauses',
 	'$lgt_gen_prototype_extends_def_clauses',
+	% add a catchall clause if necessary:
 	'$lgt_gen_object_catchall_def_clauses'(Local).
 
 
@@ -13195,7 +13210,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-'$lgt_gen_prototype_linking_def_clauses'(true) :-
+'$lgt_gen_prototype_local_def_clauses'(true) :-
 	'$lgt_pp_object_'(Obj, _, _, Def, _, _, _, _, DDef, _, _),
 	Head =.. [Def, Pred, ExCtx, Call, Obj, Obj],
 	BodyDef =.. [Def, Pred, ExCtx, Call],
@@ -13203,7 +13218,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	BodyDDef =.. [DDef, Pred, ExCtx, Call],
 	assertz('$lgt_pp_final_def_'((Head:-BodyDDef))).
 
-'$lgt_gen_prototype_linking_def_clauses'(false) :-
+'$lgt_gen_prototype_local_def_clauses'(false) :-
 	'$lgt_pp_object_'(Obj, _, _, Def, _, _, _, _, DDef, _, _),
 	Head =.. [Def, Pred, ExCtx, Call, Obj, Obj],
 	BodyDDef =.. [DDef, Pred, ExCtx, Call],
@@ -13294,12 +13309,18 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 '$lgt_gen_ic_dcl_clauses' :-
-	% some linking clauses depend on the existence of local
-	% predicate declarations
-	'$lgt_gen_local_dcl_clauses'(Local),
-	'$lgt_gen_ic_idcl_clauses'(Local),
+	% first, generate the local table of predicate declarations: 
+	'$lgt_gen_dcl_table_clauses'(Local),
+	% second, generate linking clauses for accessing declarations
+	% in related entities (for an instance, the lookup for a predicate
+	% declaration always start at its classes):
 	'$lgt_gen_ic_instantiates_dcl_clauses',
-	'$lgt_gen_object_catchall_dcl_clauses'(Local).
+	% third, add a catchall clause if necessary:
+	'$lgt_gen_object_catchall_dcl_clauses'(Local),
+	% finaly, generate linking clauses for accessing declarations
+	% when we reach the class being compiled during a lookup
+	% from a descendant instance:
+	'$lgt_gen_ic_idcl_clauses'(Local).
 
 
 
@@ -13336,13 +13357,16 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% generates instance/class inherited declaration clauses
+% generates the declaration linking clauses that are used
+% when traversing specialization links in order to lookup
+% a predicate declaration for a descendant instance
 
 '$lgt_gen_ic_idcl_clauses'(Local) :-
-	% linking clauses for complementing categories must come
-	% first to allow overriding of predicate declarations
+	% generate linking clauses for accessing declarations in related
+	% entities (linking clauses for complementing categories must
+	% come first to allow overriding of predicate declarations):
 	'$lgt_gen_ic_complements_idcl_clauses',
-	'$lgt_gen_ic_linking_idcl_clauses'(Local),
+	'$lgt_gen_ic_local_idcl_clauses'(Local),
 	'$lgt_gen_ic_implements_idcl_clauses',
 	'$lgt_gen_ic_imports_idcl_clauses',
 	'$lgt_gen_ic_specializes_idcl_clauses'.
@@ -13360,7 +13384,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-'$lgt_gen_ic_linking_idcl_clauses'(true) :-
+'$lgt_gen_ic_local_idcl_clauses'(true) :-
 	'$lgt_pp_object_'(Obj, _, Dcl, _, _, IDcl, _, DDcl, _, _, _),
 	HeadDcl =.. [IDcl, Pred, Scope, Meta, Flags, Obj, Obj],
 	BodyDcl =.. [Dcl, Pred, Scope, Meta, Flags],
@@ -13372,7 +13396,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	true
 	).
 
-'$lgt_gen_ic_linking_idcl_clauses'(false) :-
+'$lgt_gen_ic_local_idcl_clauses'(false) :-
 	'$lgt_pp_object_'(Obj, _, _, _, _, IDcl, _, DDcl, _, _, _),
 	(	'$lgt_compiler_flag'(dynamic_declarations, allow) ->
 		HeadDDcl =.. [IDcl, Pred, Scope, no, 2, Obj, Obj],
@@ -13463,19 +13487,26 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_gen_ic_def_clauses' :-
 	% some linking clauses depend on the existence of local
-	% predicate definitions
+	% predicate definitions:
 	(	'$lgt_pp_final_def_'(_) ->
 		Local = true
 	;	Local = false
 	),
 	% linking clauses for complementing categories must come
-	% first to allow overriding of predicate definitions
+	% first to allow overriding of predicate definitions:
 	'$lgt_gen_ic_complements_def_clauses',
-	'$lgt_gen_ic_linking_def_clauses'(Local),
+	% lookup of predicate definitions start at the instance
+	% itself (not at its classes as it's the case for predicate
+	% declarations):
+	'$lgt_gen_ic_local_def_clauses'(Local),
 	'$lgt_gen_ic_imports_def_clauses',
 	'$lgt_gen_ic_instantiates_def_clauses',
-	'$lgt_gen_ic_idef_clauses'(Local),
-	'$lgt_gen_object_catchall_def_clauses'(Local).
+	% add a catchall clause if necessary:
+	'$lgt_gen_object_catchall_def_clauses'(Local),
+	% generate linking clauses for accessing definitions when
+	% we reach the class being compiled during a lookup from
+	% a descendant instance:
+	'$lgt_gen_ic_idef_clauses'(Local).
 
 
 
@@ -13490,7 +13521,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-'$lgt_gen_ic_linking_def_clauses'(true) :-
+'$lgt_gen_ic_local_def_clauses'(true) :-
 	'$lgt_pp_object_'(Obj, _, _, Def, _, _, _, _, DDef, _, _),
 	Head =.. [Def, Pred, ExCtx, Call, Obj, Obj],
 	BodyDef =.. [Def, Pred, ExCtx, Call],
@@ -13498,7 +13529,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	BodyDDef =.. [DDef, Pred, ExCtx, Call],
 	assertz('$lgt_pp_final_def_'((Head:-BodyDDef))).
 
-'$lgt_gen_ic_linking_def_clauses'(false) :-
+'$lgt_gen_ic_local_def_clauses'(false) :-
 	'$lgt_pp_object_'(Obj, _, _, Def, _, _, _, _, DDef, _, _),
 	Head =.. [Def, Pred, ExCtx, Call, Obj, Obj],
 	BodyDDef =.. [DDef, Pred, ExCtx, Call],
@@ -13548,11 +13579,15 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
+% generates the definition linking clauses that are used
+% when traversing specialization links in order to lookup
+% a predicate definition for a descendant instance
+
 '$lgt_gen_ic_idef_clauses'(Local) :-
 	% linking clauses for complementing categories must come
 	% first to allow overriding of predicate definitions
 	'$lgt_gen_ic_complements_idef_clauses',
-	'$lgt_gen_ic_linking_idef_clauses'(Local),
+	'$lgt_gen_ic_local_idef_clauses'(Local),
 	'$lgt_gen_ic_imports_idef_clauses',
 	'$lgt_gen_ic_specializes_idef_clauses'.
 
@@ -13570,7 +13605,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-'$lgt_gen_ic_linking_idef_clauses'(true) :-
+'$lgt_gen_ic_local_idef_clauses'(true) :-
 	'$lgt_pp_object_'(Obj, _, _, Def, _, _, IDef, _, DDef, _, _),
 	Head =.. [IDef, Pred, ExCtx, Call, Obj, Obj],
 	BodyDef =.. [Def, Pred, ExCtx, Call],
@@ -13578,7 +13613,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	BodyDDef =.. [DDef, Pred, ExCtx, Call],
 	assertz('$lgt_pp_final_def_'((Head:-BodyDDef))).
 
-'$lgt_gen_ic_linking_idef_clauses'(false) :-
+'$lgt_gen_ic_local_idef_clauses'(false) :-
 	'$lgt_pp_object_'(Obj, _, _, _, _, _, IDef, _, DDef, _, _),
 	Head =.. [IDef, Pred, ExCtx, Call, Obj, Obj],
 	BodyDDef =.. [DDef, Pred, ExCtx, Call],
