@@ -70,7 +70,7 @@ usage_help()
 	echo "Optional arguments:"
 	echo "  -v print version of `basename $0`"
 	echo "  -p back-end Prolog compiler (default is $backend)"
-	echo "     (possible values are b, cx, eclipse, gnu, lean, qp, sicstus, swi, xsb xsbmt, and yap)"
+	echo "     (possible values are b, cx, eclipse, gnu, lean, qp, sicstus, swi, xsb, xsb64, xsbmt, xsbmt64, and yap)"
 	echo "  -m compilation mode (default is $mode)"
 	echo "     (possible values are normal, debug, and all)"
 	echo "  -d name of the sub-directory to store the test results (default is tester_results)"
@@ -127,9 +127,21 @@ elif [ "$p_arg" = "xsb" ] ; then
 	versions_goal=$versions_goal_dot
 	tester_goal=$tester_goal_dot
 	tester_debug_goal=$tester_debug_goal_dot
+elif [ "$p_arg" = "xsb64" ] ; then
+	prolog='XSB 64 bits'
+	logtalk="xsb64lgt$extension -e"
+	versions_goal=$versions_goal_dot
+	tester_goal=$tester_goal_dot
+	tester_debug_goal=$tester_debug_goal_dot
 elif [ "$p_arg" = "xsbmt" ] ; then
 	prolog='XSB-MT'
 	logtalk="xsbmtlgt$extension -e"
+	versions_goal=$versions_goal_dot
+	tester_goal=$tester_goal_dot
+	tester_debug_goal=$tester_debug_goal_dot
+elif [ "$p_arg" = "xsbmt64" ] ; then
+	prolog='XSB-MT 64 bits'
+	logtalk="xsbmt64lgt$extension -e"
 	versions_goal=$versions_goal_dot
 	tester_goal=$tester_goal_dot
 	tester_debug_goal=$tester_debug_goal_dot
