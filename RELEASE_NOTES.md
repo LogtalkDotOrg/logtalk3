@@ -34,6 +34,12 @@ Prolog adapter and integration files
 * IMPROVED: Updated the XSB adapter file in order to solve some issues with
 the non-standard error handling of this Prolog compiler.
 
+Tests
+-----
+
+* ADDED: Support for multi-threading versions of XSB to the `logtalk_tester.sh`
+script.
+
 
 3.00.0 Alpha 7 - December 21, 2012
 ==================================
