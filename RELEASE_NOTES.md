@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <http://logtalk.org/>  
-Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
+Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -23,6 +23,16 @@ ________________________________________________________________________
 
 RELEASE NOTES
 =============
+
+
+3.00.0 Alpha 8 - January ??, 2013
+=================================
+
+Prolog adapter and integration files
+------------------------------------
+
+* IMPROVED: Updated the XSB adapter file in order to solve some issues with
+the non-standard error handling of this Prolog compiler.
 
 
 3.00.0 Alpha 7 - December 21, 2012
@@ -132,10 +142,10 @@ Installers and installation scripts
 -----------------------------------
 
 * CHANGED: The Windows installer now creates integration shortcuts that start
-Logtalk in the `%LOGTALKUSER` directory. Before, the integration shortcuts used
-`%CD%` as the startup directory but this doesn't work on Windows 7 and resulted
-in Logtalk starting up in a system directory where usually users don't have
-write access.
+Logtalk in the `%LOGTALKUSER%` directory. Before, the integration shortcuts
+used `%CD%` as the startup directory but this doesn't work on Windows 7 and
+resulted in Logtalk starting up in a system directory where usually users
+don't have write access.
 
 
 3.00.0 Alpha 6 - December 3, 2012

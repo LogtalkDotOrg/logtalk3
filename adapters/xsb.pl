@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for XSB 3.3 or later versions
-%  Last updated on December 7, 2012
+%  Last updated on December 22, 2012
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -700,15 +700,26 @@ setup_call_catcher_cleanup(Setup, Call, Catcher, Cleanup) :-
 
 % '$lgt_normalize_error_term'(@callable, -callable)
 
-'$lgt_normalize_error_term'(error(error(Error, _, _), _, _), NormalizedError) :-
-	'$lgt_normalize_error_term'(error(Error, _, _), NormalizedError).
+'$lgt_normalize_error_term'(error(error(Error, _, _), Context), error(NormalizedError, Context)) :-
+	'$lgt_normalize_error_term_aux'(Error, NormalizedError).
+'$lgt_normalize_error_term'(error(error(Error, _, _), _, _), error(NormalizedError, _)) :-
+	'$lgt_normalize_error_term_aux'(Error, NormalizedError).
 '$lgt_normalize_error_term'(error(Error, _, _), error(NormalizedError, _)) :-
 	'$lgt_normalize_error_term_aux'(Error, NormalizedError).
+'$lgt_normalize_error_term'(error(Error, Context), error(NormalizedError, Context)) :-
+	'$lgt_normalize_error_term_aux'(Error, NormalizedError).
 
+'$lgt_normalize_error_term'(Error, _) :-
+	writeq('ERROR: '-Error), nl,
+	fail.
 
 '$lgt_normalize_error_term_aux'(
 	existence_error(procedure, ':'(usermod, Functor/Arity)),
 	existence_error(procedure, Functor/Arity)
+).
+'$lgt_normalize_error_term_aux'(
+	Error,
+	Error
 ).
 
 
