@@ -40,6 +40,12 @@ Tests
 * ADDED: Support for multi-threading and 64 bits versions of XSB to the
 `logtalk_tester.sh` script.
 
+Examples
+--------
+
+* FIXED: Broken `threads/philosophers` example due to the used of the `(::)/2`
+control construct as a message to self.
+
 
 3.00.0 Alpha 7 - December 21, 2012
 ==================================

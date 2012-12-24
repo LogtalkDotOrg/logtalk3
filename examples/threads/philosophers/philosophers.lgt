@@ -87,9 +87,9 @@
 :- category(philosopher).
 
 	:- info([
-		version is 2.0,
+		version is 2.1,
 		author is 'Paulo Moura',
-		date is 2007/1/3,
+		date is 2012/12/24,
 		comment is 'Dining philosophers problem: philosopher representation.']).
 
 	:- public(left_chopstick/1).
@@ -145,8 +145,8 @@
 		RightStick::pick_up,
 		message(['Philosopher ', Philosopher, ' eating for ', EatTime, ' seconds with chopsticks ', LeftStick, ' and ', RightStick, '.']),
 		thread_sleep(EatTime),
-		::LeftStick::put_down,
-		::RightStick::put_down.
+		LeftStick::put_down,
+		RightStick::put_down.
 
 	% writing a message needs to be synchronized as it's accomplished  
 	% using a combination of individual write/1 and nl/0 calls:
@@ -272,8 +272,8 @@
 		parameter(1, Philosopher),
 		message(['Philosopher ', Philosopher, ' eating for ', EatTime, ' seconds with chopsticks ', LeftStick, ' and ', RightStick, '.']),
 		thread_sleep(EatTime),
-		::LeftStick::put_down,
-		::RightStick::put_down.
+		LeftStick::put_down,
+		RightStick::put_down.
 
 	% writing a message needs to be synchronized as it's accomplished  
 	% using a combination of individual write/1 and nl/0 calls:
