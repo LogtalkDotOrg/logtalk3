@@ -31,6 +31,11 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* FIXED: A bug where the `(::)/2` and `(^^)/2` control constructs could report
+a permission error when a public built-in method was used as a message. This
+bug only surfaced, however, in artificial calls such as using `(::)/2` itself
+as a message to another object.
+
 * FIXED: The `(::)/2` and `(>>)/2` control constructs were wrongly declared
 as private instead of public.
 

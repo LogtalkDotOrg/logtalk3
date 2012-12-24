@@ -3332,7 +3332,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 			throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(::Pred, Sender)))
 		)
 	;	% no predicate declaration, check if it's a private built-in method or a Prolog built-in meta-predicate:
-		('$lgt_built_in_method'(Pred, _, _, _); '$lgt_prolog_meta_predicate'(Pred, _, _)) ->
+		('$lgt_built_in_method'(Pred, p, _, _); '$lgt_prolog_meta_predicate'(Pred, _, _)) ->
 		functor(Pred, Functor, Arity),
 		throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(::Pred, Sender)))
 	;	% no predicate declaration, check if it's a built-in predicate:
@@ -3430,7 +3430,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 			)
 		)
 	;	% no predicate declaration, check if it's a private built-in method or a Prolog built-in meta-predicate:
-		('$lgt_built_in_method'(Pred, _, _, _); '$lgt_prolog_meta_predicate'(Pred, _, _)) ->
+		('$lgt_built_in_method'(Pred, p, _, _); '$lgt_prolog_meta_predicate'(Pred, _, _)) ->
 		functor(Pred, Functor, Arity),
 		throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(Obj::Pred, Sender)))
 	;	% no predicate declaration, check if it's a built-in predicate:
@@ -3550,7 +3550,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 			)
 		)
 	;	% no predicate declaration, check if it's a private built-in method or a Prolog built-in meta-predicate:
-		('$lgt_built_in_method'(Pred, _, _, _); '$lgt_prolog_meta_predicate'(Pred, _, _)) ->
+		('$lgt_built_in_method'(Pred, p, _, _); '$lgt_prolog_meta_predicate'(Pred, _, _)) ->
 		functor(Pred, Functor, Arity),
 		throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(Obj::Pred, Sender)))
 	;	% no predicate declaration, check if it's a built-in predicate:
@@ -3642,7 +3642,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 			throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(^^Pred, This)))
 		)
 	;	% no predicate declaration, check if it's a private built-in method or a Prolog built-in meta-predicate:
-		('$lgt_built_in_method'(Pred, _, _, _); '$lgt_prolog_meta_predicate'(Pred, _, _)) ->
+		('$lgt_built_in_method'(Pred, p, _, _); '$lgt_prolog_meta_predicate'(Pred, _, _)) ->
 		functor(Pred, Functor, Arity),
 		throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(^^Pred, This)))
 	;	% no predicate declaration, check if it's a built-in predicate:
@@ -3705,7 +3705,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 			throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(^^Pred, Ctg)))
 		)
 	;	% no predicate declaration, check if it's a private built-in method or a Prolog built-in meta-predicate:
-		('$lgt_built_in_method'(Pred, _, _, _); '$lgt_prolog_meta_predicate'(Pred, _, _)) ->
+		('$lgt_built_in_method'(Pred, p, _, _); '$lgt_prolog_meta_predicate'(Pred, _, _)) ->
 		functor(Pred, Functor, Arity),
 		throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(^^Pred, Ctg)))
 	;	% no predicate declaration, check if it's a built-in predicate:
