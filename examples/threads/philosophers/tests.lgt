@@ -32,7 +32,7 @@
 		threaded_ignore(p4::run(5, 5)),
 		threaded_ignore(p5::run(5, 5)).
 
-	test(philosophers_1) :-
+	test(philosophers_2) :-
 		threaded_ignore(philosopher(p1,cs1,cs2)::run(5, 5)),
 		threaded_ignore(philosopher(p2,cs2,cs3)::run(5, 5)),
 		threaded_ignore(philosopher(p3,cs3,cs4)::run(5, 5)),
