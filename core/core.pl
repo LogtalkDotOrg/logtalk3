@@ -15260,14 +15260,16 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 % control constructs
-'$lgt_built_in_method'((::), Arity, p, Meta, 1) :-
+'$lgt_built_in_method'((::), Arity, Scope, Meta, 1) :-
 	(	Arity =:= 2 ->
+		Scope = p(p(p)),
 		Meta = '::'(*, 0)
 	;	Arity =:= 1,
+		Scope = p,
 		Meta = '::'(0)
 	).
 '$lgt_built_in_method'((^^), 1, p, '^^'(0), 1).
-'$lgt_built_in_method'((<<), 2, p, '<<'(*, 0), 1).
+'$lgt_built_in_method'((<<), 2, p(p(p)), '<<'(*, 0), 1).
 '$lgt_built_in_method'((>>), 2, p, '>>'(*, 0), 1).
 '$lgt_built_in_method'((:), Arity, p, Meta, 1) :-
 	(	Arity =:= 2,

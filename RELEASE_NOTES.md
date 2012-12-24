@@ -28,6 +28,12 @@ RELEASE NOTES
 3.00.0 Alpha 8 - January ??, 2013
 =================================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: The `(::)/2` and `(>>)/2` control constructs were wrongly declared
+as private instead of public.
+
 Prolog adapter and integration files
 ------------------------------------
 
