@@ -22,4 +22,28 @@
 	unit(msort(_)).
 	unit(qsort(_)).
 
+	test(sorting_1) :-
+		generator::list(20000, List),
+		msort(1)::msort(List, _Sorted).
+
+	test(sorting_2) :-
+		generator::list(20000, List),
+		msort(2)::msort(List, _Sorted).
+
+	test(sorting_3) :-
+		generator::list(20000, List),
+		msort(4)::msort(List, _Sorted).
+
+	test(sorting_4) :-
+		generator::list(20000, List),
+		qsort(1)::qsort(List, _Sorted).
+
+	test(sorting_5) :-
+		generator::list(20000, List),
+		qsort(2)::qsort(List, _Sorted).
+
+	test(sorting_6) :-
+		generator::list(20000, List),
+		qsort(4)::qsort(List, _Sorted).
+
 :- end_object.

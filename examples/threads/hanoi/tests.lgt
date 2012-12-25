@@ -15,9 +15,24 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/08/16,
+		date is 2012/12/25,
 		comment is 'Unit tests for the "threads/hanoi" example.']).
 
 	unit(hanoi(_)).
+
+	test(hanoi_1) :-
+		hanoi(1)::run(24).
+
+	test(hanoi_2) :-
+		hanoi(2)::run(24).
+
+	test(hanoi_3) :-
+		hanoi(4)::run(24).
+
+	test(hanoi_4) :-
+		hanoi(8)::run(24).
+
+	test(hanoi_5) :-
+		hanoi(16)::run(24).
 
 :- end_object.

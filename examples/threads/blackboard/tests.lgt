@@ -15,8 +15,10 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/08/06,
+		date is 2012/12/25,
 		comment is 'Unit tests for the "threads/blackboard" example.']).
+
+	:- threaded.
 
 	unit(using).
 	unit(chalk).
@@ -24,5 +26,9 @@
 	unit(running).
 	unit(teacher).
 	unit(student).
+
+	test(blackboard_1) :-
+		threaded_ignore(teacher::run(4)),
+		threaded_ignore(student::run(10)).
 
 :- end_object.
