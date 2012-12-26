@@ -6464,14 +6464,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	assertz('$lgt_pp_entity_compiler_flag_'(Flag, Value)).
 
 
-% set_prolog_flag/1 used as an entity directive
-
-'$lgt_tr_directive'(set_prolog_flag, [Flag, Value], _) :-
-	% perform basic error and portability checking
-	'$lgt_tr_body'(set_prolog_flag(Flag, Value), _, _, _),
-	fail.
-
-
 % create a message queue at object initialization
 
 '$lgt_tr_directive'(threaded, [], _) :-
