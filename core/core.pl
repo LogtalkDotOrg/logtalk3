@@ -10003,9 +10003,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 % Prolog flag predicates (just basic error and portability cheking)
 
-'$lgt_tr_body'(set_prolog_flag(Flag, Value), _, _, _) :-
-	'$lgt_must_be'(atom, Flag),
-	'$lgt_must_be'(nonvar, Value),
+'$lgt_tr_body'(set_prolog_flag(Flag, _), _, _, _) :-
+	'$lgt_must_be'(var_or_atom, Flag),
+	nonvar(Flag),
 	'$lgt_compiler_flag'(portability, warning),
 	\+ '$lgt_compiler_flag'(report, off),
 	\+ '$lgt_iso_spec_flag'(Flag),
@@ -10020,6 +10020,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	fail.
 
 '$lgt_tr_body'(set_prolog_flag(Flag, Value), _, _, _) :-
+	nonvar(Flag),
+	nonvar(Value),
 	'$lgt_compiler_flag'(portability, warning),
 	\+ '$lgt_compiler_flag'(report, off),
 	'$lgt_iso_spec_flag'(Flag),

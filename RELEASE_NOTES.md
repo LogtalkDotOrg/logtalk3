@@ -31,6 +31,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* FIXED: Overzealous error-checking of calls to the `set_prolog_flag/2` Prolog
+built-in predicate.
+
 * FIXED: A bug where the `(::)/2` and `(^^)/2` control constructs could report
 a permission error when a public built-in method was used as a message. This
 bug only surfaced, however, in artificial calls such as using `(::)/2` itself
