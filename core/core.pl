@@ -3963,7 +3963,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	% in "this" or in "sender"; thus, we "reverse" the test (the computational cost
 	% is essentially the same)
 	(	\+ (	'$lgt_member'(QMetaCall, MetaCallCtx),
-				'$existentially_quantified_goal_to_goal'(QMetaCall, MetaCall),
+				'$lgt_existentially_quantified_goal_to_goal'(QMetaCall, MetaCall),
 				Goal = MetaCall
 		) ->
 		'$lgt_metacall_this'(Goal, Prefix, Sender, This, Self)
@@ -3971,15 +3971,15 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	).
 
 
-'$existentially_quantified_goal_to_goal'(Goal, Goal) :-
+'$lgt_existentially_quantified_goal_to_goal'(Goal, Goal) :-
 	var(Goal),
 	!.
 
-'$existentially_quantified_goal_to_goal'(_^Term, Goal) :-
+'$lgt_existentially_quantified_goal_to_goal'(_^Term, Goal) :-
 	!,
-	'$existentially_quantified_goal_to_goal'(Term, Goal).
+	'$lgt_existentially_quantified_goal_to_goal'(Term, Goal).
 
-'$existentially_quantified_goal_to_goal'(Goal, Goal).
+'$lgt_existentially_quantified_goal_to_goal'(Goal, Goal).
 
 
 
