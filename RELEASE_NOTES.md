@@ -45,6 +45,9 @@ as private instead of public.
 Prolog adapter and integration files
 ------------------------------------
 
+* IMPROVED: Updated the SICStus Prolog adapter file in order to solve an issue
+where the context information could be missing in exception terms.
+
 * IMPROVED: Updated the Qu-Prolog and XSB adapter files in order to solve some
 issues with the non-standard error handling of these Prolog compilers.
 

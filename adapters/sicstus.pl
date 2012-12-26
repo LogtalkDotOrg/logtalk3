@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SICStus Prolog 4.1.0 and later versions
-%  Last updated on December 7, 2012
+%  Last updated on December 26, 2012
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -732,8 +732,8 @@ forall(Generate, Test) :-
 % '$lgt_normalize_error_term'(@callable, -callable)
 
 '$lgt_normalize_error_term'(
-	error(existence_error(procedure, ':'(user, Functor/Arity)), _),
-	error(existence_error(procedure, Functor/Arity), _)
+	error(existence_error(procedure, ':'(user, Functor/Arity)), Context),
+	error(existence_error(procedure, Functor/Arity), Context)
 ).
 
 
