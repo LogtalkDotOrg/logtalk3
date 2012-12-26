@@ -6288,9 +6288,18 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_tr_file_directive'(set_prolog_flag(Flag, Value), _) :-
 	!,
-	set_prolog_flag(Flag, Value),
-	'$lgt_pp_term_location'(Location),
-	assertz('$lgt_pp_prolog_term_'((:- set_prolog_flag(Flag, Value)), Location)).
+	(	% perform basic error and portability checking
+		'$lgt_tr_body'(set_prolog_flag(Flag, Value), _, _, _),
+		fail
+	;	% require a nonvar value
+		'$lgt_must_be'(nonvar, Value),
+		% setting the flag during compilation may or may not work as expected
+		% depending on the flag and on the back-end Prolog compiler
+		set_prolog_flag(Flag, Value),
+		% we also copy the directive to the generated intermediate Prolog file
+		'$lgt_pp_term_location'(Location),
+		assertz('$lgt_pp_prolog_term_'((:- set_prolog_flag(Flag, Value)), Location))
+	).
 
 '$lgt_tr_file_directive'(multifile(Preds), _) :-
 	'$lgt_flatten_list'([Preds], PredsFlatted),
@@ -6447,7 +6456,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_tr_directive'((public), Exports, Ctx).
 
 
-% set_logtalk_flag/1 entity directive
+% set_logtalk_flag/2 entity directive
 
 '$lgt_tr_directive'(set_logtalk_flag, [Flag, Value], _) :-
 	'$lgt_check_compiler_flag'(Flag, Value),
