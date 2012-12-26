@@ -45,8 +45,8 @@ as private instead of public.
 Prolog adapter and integration files
 ------------------------------------
 
-* IMPROVED: Updated the XSB adapter file in order to solve some issues with
-the non-standard error handling of this Prolog compiler.
+* IMPROVED: Updated the Qu-Prolog and XSB adapter files in order to solve some
+issues with the non-standard error handling of these Prolog compilers.
 
 Tests
 -----

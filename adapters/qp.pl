@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Qu-Prolog 8.12 and later versions
-%  Last updated on December 7, 2012
+%  Last updated on December 26, 2012
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -683,9 +683,21 @@ format_spec_('~', Stream, Arguments, Arguments) :-
 % '$lgt_normalize_error_term'(@callable, -callable)
 
 '$lgt_normalize_error_term'(
-		exception(undefined_predicate(recoverable, Predicate, Context)),
+		error(exception(undefined_predicate(recoverable, Predicate, _)), Context),
 		error(existence_error(procedure, Functor/Arity), Context)) :-
 	functor(Predicate, Functor, Arity).
+'$lgt_normalize_error_term'(
+		exception(undefined_predicate(recoverable, Predicate, _)),
+		error(existence_error(procedure, Functor/Arity), _)) :-
+	functor(Predicate, Functor, Arity).
+'$lgt_normalize_error_term'(
+		exception(instantiation_error(recoverable, _, _, _, _)),
+		error(instantiation_error, _)).
+'$lgt_normalize_error_term'(
+		exception(type_error(unrecoverable, Call, Correct, Arg, _)),
+		error(type_error(Type,Culprit), _)) :-
+			arg(Arg, Correct, Type),
+			arg(Arg, Call, Culprit).
 
 
 
