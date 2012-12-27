@@ -9,11 +9,11 @@
 		comment is 'Unit tests for the bagof/3 built-in method.'
 	]).
 
-	test(bagof_1) :-
+	test(bagof_3_1) :-
 		bagof(X, Y^a(X, Y), L),
 		L == [1, 2, 3, 4].
 
-	test(bagof_2) :-
+	test(bagof_3_2) :-
 		findall(Y-L, bagof(X, a(X, Y), L), LL),
 		LL == [even-[2,4], odd-[1,3]].
 

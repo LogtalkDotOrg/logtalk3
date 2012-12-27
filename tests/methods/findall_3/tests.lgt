@@ -9,11 +9,11 @@
 		comment is 'Unit tests for the findall/3 built-in method.'
 	]).
 
-	test(findall_1) :-
+	test(findall_3_1) :-
 		findall(X, a(X, _), L),
 		L == [1, 2, 3, 4].
 
-	test(findall_2) :-
+	test(findall_3_2) :-
 		findall(Y-L, findall(X, a(X, Y), L), LL),
 		LL = [_-[1,2,3,4]].
 
