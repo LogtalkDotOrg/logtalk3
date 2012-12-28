@@ -188,6 +188,8 @@
 		predicate_label(Module:TFunctor/TArity, Label) :-
 			(	Module:TFunctor/TArity == user:(::)/2 ->
 				Label = (::)/2
+			;	Module:TFunctor/TArity == user:(<<)/2 ->
+				Label = (<<)/2
 			;	Module == user,
 				logtalk::decompile_predicate_indicators(TFunctor/TArity, Entity, Functor/Arity) ->
 				(	atom(Entity) ->
