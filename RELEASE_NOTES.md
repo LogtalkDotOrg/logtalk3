@@ -51,6 +51,12 @@ where the context information could be missing in exception terms.
 * IMPROVED: Updated the Qu-Prolog and XSB adapter files in order to solve some
 issues with the non-standard error handling of these Prolog compilers.
 
+Tools
+-----
+
+* FIXED: The `profiler` tool now works with the profiling support found in
+recent SICStus Prolog 4 versions (tested with version 4.2.3).
+
 Tests
 -----
 
