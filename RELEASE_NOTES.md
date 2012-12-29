@@ -31,6 +31,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: Compile-time type-checking of the arguments of the `phrase/2-3`
+built-in methods.
+
 * FIXED: Overzealous error-checking of calls to the `set_prolog_flag/2` Prolog
 built-in predicate.
 

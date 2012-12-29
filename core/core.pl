@@ -9806,11 +9806,14 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_body'(phrase(GRBody, Input), '$lgt_phrase'(GRBody, Input, ExCtx), '$lgt_debug'(goal(phrase(GRBody, Input), '$lgt_phrase'(GRBody, Input, ExCtx)), ExCtx), Ctx) :-
 	var(GRBody),
 	!,
+	'$lgt_must_be'(list_or_partial_list, Input),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
 
 '$lgt_tr_body'(phrase(GRBody, Input), TPred, '$lgt_debug'(goal(phrase(GRBody, Input), DPred), ExCtx), Ctx) :-
 	!,
+	% the '$lgt_dcg_body'/4 already checks that the grammar rule body is callable
 	'$lgt_dcg_body'(GRBody, S0, S, Pred),
+	'$lgt_must_be'(list_or_partial_list, Input),
 	TPred = (Input = S0, [] = S, TPred0),
 	DPred = (Input = S0, [] = S, DPred0),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
@@ -9819,11 +9822,16 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_body'(phrase(GRBody, Input, Rest), '$lgt_phrase'(GRBody, Input, Rest, ExCtx), '$lgt_debug'(goal(phrase(GRBody, Input, Rest), '$lgt_phrase'(GRBody, Input, Rest, ExCtx)), ExCtx), Ctx) :-
 	var(GRBody),
 	!,
+	'$lgt_must_be'(list_or_partial_list, Input),
+	'$lgt_must_be'(list_or_partial_list, Rest),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
 
 '$lgt_tr_body'(phrase(GRBody, Input, Rest), TPred, '$lgt_debug'(goal(phrase(GRBody, Input, Rest), DPred), ExCtx), Ctx) :-
 	!,
+	% the '$lgt_dcg_body'/4 already checks that the grammar rule body is callable
 	'$lgt_dcg_body'(GRBody, S0, S, Pred),
+	'$lgt_must_be'(list_or_partial_list, Input),
+	'$lgt_must_be'(list_or_partial_list, Rest),
 	TPred = (Input = S0, Rest = S, TPred0),
 	DPred = (Input = S0, Rest = S, DPred0),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
