@@ -1,5 +1,5 @@
 ; This file is part of Logtalk <http://logtalk.org/>  
-; Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
+; Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 ; 
 ; Logtalk is free software. You can redistribute it and/or modify it under
 ; the terms of the FSF GNU General Public License 3  (plus some additional
@@ -36,7 +36,7 @@ SolidCompression=yes
 PrivilegesRequired=none
 
 VersionInfoVersion=3.00.0
-VersionInfoCopyright=© Paulo Moura, Copyright (c) 1998-2012
+VersionInfoCopyright=© Paulo Moura, Copyright (c) 1998-2013
 
 AllowRootDirectory=yes
 UninstallFilesDir="{userdocs}\Logtalk uninstaller"
@@ -76,7 +76,7 @@ Name: shortcut; Description: "&Create a desktop shortcut to the Logtalk user fol
 Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Messages]
-BeveledLabel=Logtalk 3.00.0 © Paulo Moura, Copyright (c) 1998-2012
+BeveledLabel=Logtalk 3.00.0 © Paulo Moura, Copyright (c) 1998-2013
 
 [Dirs]
 Name: {code:GetLgtUserDir}; Components: user; Flags: uninsneveruninstall

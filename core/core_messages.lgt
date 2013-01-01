@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
-%  Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
+%  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -97,7 +97,7 @@
 
 	logtalk::message_tokens(banner, core) -->
 		{current_logtalk_flag(version, version(Major, Minor, Patch))},
-		[nl, 'Logtalk ~d.~d.~d'-[Major, Minor, Patch], nl, 'Copyright (c) 1998-2012 Paulo Moura'-[], nl, nl].
+		[nl, 'Logtalk ~d.~d.~d'-[Major, Minor, Patch], nl, 'Copyright (c) 1998-2013 Paulo Moura'-[], nl, nl].
 
 	logtalk::message_tokens(default_flags, core) -->
 		{current_logtalk_flag(unknown_entities, Unknown),

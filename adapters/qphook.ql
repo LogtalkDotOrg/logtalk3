@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
-%  Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
+%  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  integration code for Qu-Prolog 7.1 and later versions
 %  used when generating a new interpreter that embeds Logtalk

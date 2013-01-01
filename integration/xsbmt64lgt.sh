@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
-##   Copyright (c) 1998-2012 Paulo Moura <pmoura@logtalk.org>
+##   Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Integration script for XSB-MT 64 bits
 ## 
