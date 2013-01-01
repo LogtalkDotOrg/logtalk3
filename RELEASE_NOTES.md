@@ -25,7 +25,7 @@ RELEASE NOTES
 =============
 
 
-3.00.0 Alpha 8 - January ??, 2013
+3.00.0 Alpha 8 - January 18, 2013
 =================================
 
 Logtalk compiler and runtime
@@ -71,6 +71,8 @@ Examples
 
 * FIXED: Broken `threads/philosophers` example due to the used of the `(::)/2`
 control construct as a message to self.
+
+* ADDED: Qu-Prolog definition for the `pid/1` predicate to the `cc` example.
 
 
 3.00.0 Alpha 7 - December 21, 2012
