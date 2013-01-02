@@ -57,7 +57,8 @@ issues with the non-standard error handling of these Prolog compilers.
 Documentation
 -------------
 
-* IMPROVED: POSIX man pages for integration and helper shell scripts.
+* IMPROVED: POSIX man pages for integration, documentation, and helper shell
+scripts.
 
 Tools
 -----
