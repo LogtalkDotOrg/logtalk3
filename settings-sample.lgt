@@ -33,11 +33,12 @@
 %  or by using the set_logtalk_flag/2 directive within the source files.
 %
 %  To use this feature, copy this file to the directory containing your
-%  project files, customize it (see the examples below), and start Logtalk
-%  from the project directory. Note that, for setting Logtalk flag values,
-%  you must use the set_logtalk_flag/2 predicate (wrapped in a directive
-%  initialization/1) as the scope of the set_logtalk_flag/2 directive is
-%  always local to the entity or the source file containing it.
+%  project files, rename it to "settings.lgt", customize it (see the examples
+%  below), and start Logtalk from the project directory. Note that, for
+%  setting Logtalk flag values, you must use the set_logtalk_flag/2 predicate
+%  (wrapped in a directive initialization/1) as the scope of the directive
+%  set_logtalk_flag/2 is always local to the entity or the source file
+%  containing it.
 %
 %  If you use more than one back-end Prolog compiler and want to use
 %  different settings per compiler you will need to use the Logtalk 
