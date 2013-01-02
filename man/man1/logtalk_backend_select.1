@@ -1,10 +1,19 @@
-.TH logtalk_backend_select 1 "May 27, 2012" "Logtalk 3.00.0" "Logtalk Documentation"
+.TH logtalk_backend_select 1 "January 2, 2013" "Logtalk 3.00.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_backend_select \-- Logtalk script for defining an alias, logtalk, to a chosen back-end Prolog integration script
 
 .SH SYNOPSIS
-.B logtalk_backend_select [-vlsh] integration-script
+.B logtalk_backend_select -v
+.br
+.B logtalk_backend_select -l
+.br
+.B logtalk_backend_select -s
+.br
+.B logtalk_backend_select 
+.I integration-script
+.br
+.B logtalk_backend_select -h
 
 .SH DESCRIPTION
 \f3logtalk_backend_select\f1 is a Logtalk script script for defining an alias, logtalk, to a chosen back-end Prolog integration script. The alias is created in same directory where the *lgt integration scripts are found.

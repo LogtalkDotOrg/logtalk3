@@ -1,18 +1,40 @@
-.TH logtalk_tester 1 "December 22, 2012" "Logtalk 3.00.0" "Logtalk Documentation"
+.TH logtalk_tester 1 "January 2, 2013" "Logtalk 3.00.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_tester \-- Logtalk script for automating running unit tests
 
 .SH SYNOPSIS
-.B logtalk_tester [-p Prolog]
+.B logtalk_tester -v
+.br
+.B logtalk_tester [-p 
+.I prolog
+.B ] [-m 
+.I mode
+.B ] [-d 
+.I results
+.B ]
+.br
+.B logtalk_tester -h
 
 .SH DESCRIPTION
 \f3logtalk_tester\f1 is a Logtalk script script for automating running unit tests. This script assumes that the directories (and its direct subdirectories, if existing) in the current directory contain a \f3tester.lgt\f1 source file that, when loaded, runs a set of unit tests. 
 
 .SH OPTIONS
 .TP
+.BI \-v
+Print script version.
+.TP
 .BI \-p
 Back-end Prolog compiler. Default is YAP. The following identifiers are used: B-Prolog - b, CxProlog - cx, ECLiPSe - eclipse, GNU Prolog - gnu, Lean Prolog - lean, Qu-Prolog - qp, SICStus Prolog - sicstus, SWI-Prolog - swi, XSB - xsb, XSB 64 bits - xsb64, XSB-MT - xsbmt, XSB-MT 64 bits - xsbmt64, YAP - yap.
+.TP
+.BI \-m
+Compilation mode. Default is normal. Possible values are normal, debug, and all.
+.TP
+.BI \-d
+Name of the sub-directory to store the test results. Default is tester_results.
+.TP
+.BI \-h
+Provide help on script usage.
 
 .SH ENVIRONMENT
 .TP
