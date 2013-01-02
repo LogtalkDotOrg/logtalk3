@@ -94,7 +94,9 @@ The script installs Logtalk in the `$prefix/share` directory with useful
 scripts written to the `$prefix/bin` directory, which should be in your path.
 
 If you're using Windows, you can simply use the provided GUI installer (which
-supports both admin and non-admin users) to perform a full installation.
+supports both admin and non-admin users) to perform a full installation. You
+can also easily generate the GUI installer yourself. See the instructions on
+the `scripts/windows/NOTES.txt` file.
 
 
 2. SETTING LOGTALK ENVIRONMENT VARIABLES
