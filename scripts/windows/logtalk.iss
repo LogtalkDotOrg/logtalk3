@@ -132,9 +132,9 @@ Name: "{group}\Logtalk - Lean Prolog"; Filename: "{code:GetLeanPrologExePath}"; 
 
 Name: "{group}\Logtalk - SICStus Prolog"; Filename: "{code:GetSICStusExePath}"; Parameters: "-l ""%LOGTALKHOME%\integration\logtalk_sicstus.pl"""; Comment: "Runs Logtalk with SICStus Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\sicstus; Flags: createonlyiffileexists
 
-Name: "{group}\Logtalk - SWI-Prolog (console)"; Filename: "{code:GetSWIConExePath}"; Parameters: "-f ""%LOGTALKHOME%\integration\logtalk_swi.pl"""; Comment: "Runs Logtalk with SWI-Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\swicon; Flags: createonlyiffileexists
+Name: "{group}\Logtalk - SWI-Prolog (console)"; Filename: "{code:GetSWIConExePath}"; Parameters: "-s ""%LOGTALKHOME%\integration\logtalk_swi.pl"""; Comment: "Runs Logtalk with SWI-Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\swicon; Flags: createonlyiffileexists
 
-Name: "{group}\Logtalk - SWI-Prolog (window)"; Filename: "{code:GetSWIWinExePath}"; Parameters: "-f ""%LOGTALKHOME%\integration\logtalk_swi.pl"""; Comment: "Runs Logtalk with SWI-Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\swiwin; Flags: createonlyiffileexists
+Name: "{group}\Logtalk - SWI-Prolog (window)"; Filename: "{code:GetSWIWinExePath}"; Parameters: "-s ""%LOGTALKHOME%\integration\logtalk_swi.pl"""; Comment: "Runs Logtalk with SWI-Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\swiwin; Flags: createonlyiffileexists
 
 Name: "{group}\Logtalk - XSB"; Filename: "{code:GetXSBExePath}"; Parameters: "-l -e ""['%LOGTALKHOME%\\integration\\logtalk_xsb.pl']."""; Comment: "Runs Logtalk with XSB"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\xsb; Flags: createonlyiffileexists
 

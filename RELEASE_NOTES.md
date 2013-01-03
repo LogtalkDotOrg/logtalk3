@@ -48,6 +48,11 @@ as private instead of public.
 Prolog adapter and integration files
 ------------------------------------
 
+* FIXED: The Windows integration shortcuts for SWI-Prolog now use the `-s`
+command-line option instead of `-f` (this is already the case with the POSIX
+integration scripts). This allows loading of any existing SWI-Prolog user
+initialization file. Thanks to David Hyde for the bug report.
+
 * IMPROVED: Updated the SICStus Prolog adapter file in order to solve an issue
 where the context information could be missing in exception terms.
 
