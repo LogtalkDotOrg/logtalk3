@@ -85,6 +85,8 @@ Installers and installation scripts
 
 * FIXED: Several issues with the spec file used for building RPM installers.
 
+* FIXED: Minor issues with the spec files used for building Debian installers.
+
 
 3.00.0 Alpha 7 - December 21, 2012
 ==================================
