@@ -28,6 +28,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)
+%doc /usr/local/share/lgt3000/ACKNOWLEDGMENTS.md
 %doc /usr/local/share/lgt3000/BIBLIOGRAPHY.bib
 %doc /usr/local/share/lgt3000/CUSTOMIZE.md
 %doc /usr/local/share/lgt3000/INSTALL.md
@@ -37,20 +38,21 @@ rm -rf $RPM_BUILD_ROOT
 %doc /usr/local/share/lgt3000/RELEASE_NOTES.md
 %doc /usr/local/share/lgt3000/UPGRADING.md
 /usr/local/share/lgt3000/VERSION.txt
-/usr/local/share/lgt3000/compiler
 /usr/local/share/lgt3000/adapters
+/usr/local/share/lgt3000/coding
 /usr/local/share/lgt3000/contributions
+/usr/local/share/lgt3000/core
 /usr/local/share/lgt3000/examples
 /usr/local/share/lgt3000/integration
-/usr/local/share/lgt3000/paths
 /usr/local/share/lgt3000/library
-%doc /usr/local/share/lgt3000/manuals
+/usr/local/share/lgt3000/paths
 /usr/local/share/lgt3000/man
+%doc /usr/local/share/lgt3000/manuals
+/usr/local/share/lgt3000/scratch
 /usr/local/share/lgt3000/scripts
 /usr/local/share/lgt3000/settings-sample.lgt
 /usr/local/share/lgt3000/tests
 /usr/local/share/lgt3000/tools
-/usr/local/share/lgt3000/coding
 /usr/local/share/logtalk
 /usr/local/bin/logtalk_user_setup
 /usr/local/bin/lgt2pdf
@@ -81,8 +83,8 @@ rm -rf $RPM_BUILD_ROOT
 /usr/local/share/man/man1/lgt2pdf.1.gz
 /usr/local/share/man/man1/lgt2txt.1.gz
 /usr/local/share/man/man1/lgt2xml.1.gz
-/usr/local/share/man/man1/logtalk_tester.1.gz
 /usr/local/share/man/man1/logtalk_backend_select.1.gz
+/usr/local/share/man/man1/logtalk_tester.1.gz
 /usr/local/share/man/man1/logtalk_user_setup.1.gz
 /usr/local/share/man/man1/logtalk_version_select.1.gz
 /usr/local/share/man/man1/lplgt.1.gz

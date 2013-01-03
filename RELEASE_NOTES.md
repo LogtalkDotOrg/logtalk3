@@ -80,6 +80,11 @@ control construct as a message to self.
 
 * ADDED: Qu-Prolog definition for the `pid/1` predicate to the `cc` example.
 
+Installers and installation scripts
+-----------------------------------
+
+* FIXED: Several issues with the spec file used for building RPM installers.
+
 
 3.00.0 Alpha 7 - December 21, 2012
 ==================================
