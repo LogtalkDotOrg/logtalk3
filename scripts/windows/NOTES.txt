@@ -21,18 +21,18 @@ Public License 3. Consult the `LICENSE.txt` file for details.
 ________________________________________________________________________
 
 
-This directory contains files used when building Windows 2000/XP GUI 
+This directory contains files used when building Windows 2000/XP/7 GUI 
 installers using Inno Setup 5.1.11 (or a later version):
 
 	http://www.jrsoftware.org/isinfo.php
 
-The Inno Setup building script, `logtalk.iss`, assumes that a checkout
-of the Logtalk repository exists in the `C:\lgt3git` directory.
+The Inno Setup script, `logtalk.iss`, assumes that a checkout of the
+Logtalk repository exists in the `C:\lgt3git` directory.
 
 The installer creates integration shortcuts that start Logtalk in the
 `%LOGTALKUSER` directory. You can edit the building script and change
-the `Start in` setting to `%CD%`. However, this works on Windows XP but
-is ignored on Windows 7.
+the `Start in` setting to `%CD%`. However, this works on Windows XP
+but is ignored on Windows 7.
 
 As Logtalk first looks at startup for a `settings.lgt` file in the
 current directory, in order to use a project-specific settings file,

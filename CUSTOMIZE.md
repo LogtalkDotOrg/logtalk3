@@ -81,7 +81,8 @@ may want to change include:
     for less verbose startup and compilation reports
 
 * `scratch_directory`
-    to move compiler generated temporary files out of the way
+    to move compiler generated temporary files out of the way or to
+    collect them for embedding Logtalk applications
 
 * `portability` and `underscore_variables`
     essential if you're writing portable Logtalk applications
@@ -89,8 +90,8 @@ may want to change include:
 * `smart_compilation`
     for avoiding recompilation of unchanged source files
 
-Be sure to read the `adapters/NOTES.txt` file for Prolog specific compatibility
-notes; some back-end Prolog compilers don't support all the possible compilation
+Check the `adapters/NOTES.txt` file for Prolog specific compatibility notes.
+Some back-end Prolog compilers don't support all the possible compilation
 flags values. In addition, some back-end Prolog compilers provide limited
 support for settings files in some operating-systems.
 

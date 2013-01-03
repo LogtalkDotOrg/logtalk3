@@ -92,7 +92,6 @@ OPEN-SOURCE SOFTWARE USED IN LOGTALK DEVELOPMENT AND DISTRIBUTION
 * InnoSetup (Windows installer)
 * RPM (Linux installer)
 * dpkg (Debian installer)
-* Trac (development website)
 * Subversion (source code version control)
 * Git (source code version control)
 * CSSToXSLFO (PDF documentation)
