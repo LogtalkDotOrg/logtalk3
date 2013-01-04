@@ -88,6 +88,9 @@ control construct as a message to self.
 Installers and installation scripts
 -----------------------------------
 
+* UPDATED: MacPorts portfile to avoid conflicts with the new `logtalk-devel`
+portfile.
+
 * FIXED: Several issues with the spec file used for building RPM installers.
 
 * FIXED: Minor issues with the spec files used for building Debian installers.
