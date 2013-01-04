@@ -26,6 +26,8 @@
 #############################################################################
 
 version=`cat ../VERSION.txt`
+number=`echo $version | sed -e 's/-//g' -e 's/\.//g'`
+directory=lgt$number
 
 if [ -z "$1" ]; then
 	if [ -f "/etc/debian_version" ]; then
@@ -53,20 +55,20 @@ echo
 
 mkdir -p $prefix/share
 
-rm -rf $prefix/share/lgt3000
+rm -rf $prefix/share/$directory
 rm -f $prefix/share/logtalk
 
-mkdir $prefix/share/lgt3000
+mkdir $prefix/share/$directory
 
 cd ..
-cp -R * $prefix/share/lgt3000
+cp -R * $prefix/share/$directory
 
-cd $prefix/share/lgt3000
+cd $prefix/share/$directory
 chmod a+x scripts/cleandist.sh
 scripts/cleandist.sh
 
 cd ..
-ln -sf lgt3000 logtalk
+ln -sf $directory logtalk
 
 mkdir -p $prefix/bin
 cd $prefix/bin
@@ -140,7 +142,7 @@ echo
 if [ "`which update-mime-database`" != "" ]; then
 	mkdir -p $prefix/share/mime/packages
 	rm -f $prefix/share/mime/packages/logtalk.xml
-	cp $prefix/share/lgt3000/scripts/freedesktop/logtalk.xml $prefix/share/mime/packages/logtalk.xml
+	cp $prefix/share/$directory/scripts/freedesktop/logtalk.xml $prefix/share/mime/packages/logtalk.xml
 	update-mime-database $prefix/share/mime
 	echo "Added the Logtalk mime-type to the Shared MIME-info Database."
 	echo
