@@ -88,8 +88,9 @@ control construct as a message to self.
 Installers and installation scripts
 -----------------------------------
 
-* IMPROVED: The `install.sh` POSIX shell script now uses the contents of the
-`VERSION.txt` file to define the name of the installation directory.
+* IMPROVED: The `install.sh` and `build_rpm.sh` POSIX shell scripts now use
+the contents of the `VERSION.txt` file to define the name of the installation
+directory.
 
 * UPDATED: MacPorts portfile to avoid conflicts with the new `logtalk-devel`
 portfile.

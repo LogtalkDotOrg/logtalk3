@@ -25,13 +25,17 @@
 ## 
 #############################################################################
 
-dir="$PWD"
+version=`cat ../../VERSION.txt`
+number=`echo $version | sed -e 's/-//g' -e 's/\.//g'`
+archive=lgt$number
+
+directory="$PWD"
 
 cd ../..
-tar -cjf ~/rpmbuild/SOURCES/lgt3000.tar.bz2 .
+tar -cjf ~/rpmbuild/SOURCES/$archive.tar.bz2 .
 mkdir -p ~/rpmbuild/RPMS/noarch
 
-cd "$dir"
+cd "$directory"
 rpmbuild -ba --target=noarch-*-linux logtalk.spec
 
 cd ~/rpmbuild/RPMS/noarch
