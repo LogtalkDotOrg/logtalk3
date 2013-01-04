@@ -91,9 +91,9 @@ Installers and installation scripts
 * IMPROVED: The `build_release.sh` POSIX shell script now takes a version
 argument instead of using a fixed value.
 
-* IMPROVED: The `install.sh` and `build_rpm.sh` POSIX shell scripts now use
-the contents of the `VERSION.txt` file to define the name of the installation
-directory.
+* IMPROVED: The `install.sh`, `uninstall.sh`, and `build_rpm.sh` POSIX shell
+scripts now use the contents of the `VERSION.txt` file to define the name of
+the installation directory.
 
 * UPDATED: MacPorts portfile to avoid conflicts with the new `logtalk-devel`
 portfile.

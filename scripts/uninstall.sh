@@ -25,9 +25,6 @@
 ## 
 #############################################################################
 
-echo
-echo "Uninstalling Logtalk 3.00.0 system-level files..."
-echo
 
 if ! [ "$LOGTALKHOME" ]; then
 	echo "The environment variable LOGTALKHOME should be defined first!"
@@ -57,8 +54,16 @@ if ! [ "$LOGTALKHOME" ]; then
 		exit 1
 fi
 
+version=`cat ../VERSION.txt`
+number=`echo $version | sed -e 's/-//g' -e 's/\.//g'`
+directory=lgt$number
+
+echo
+echo "Uninstalling Logtalk $version system-level files..."
+echo
+
 cd $LOGTALKHOME/..
-rm -rf lgt3000
+rm -rf $directory
 rm -f logtalk
 cd ../bin
 rm -f bplgt
@@ -103,6 +108,6 @@ rm -f xsbmtlgt.1.gz
 rm -f yaplgt.1.gz
 
 
-echo "Logtalk 3.00.0 system-level uninstall completed. For uninstalling user-level"
+echo "Logtalk $version system-level uninstall completed. For uninstalling user-level"
 echo "Logtalk files simply delete the LOGTALKUSER directories."
 echo
