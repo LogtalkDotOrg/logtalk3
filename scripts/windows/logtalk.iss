@@ -625,7 +625,7 @@ begin
     InstalledVersion := 0
   else
     InstalledVersion := -1;
-  if (InstalledVersion >= 0) and (InstalledVersion < 2440) then
+  if (InstalledVersion >= 0) and (InstalledVersion < 3000) then
   begin
     Warning := 'Your Logtalk user directory is outdated!'
                + Chr(13) + Chr(13)

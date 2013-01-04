@@ -102,6 +102,9 @@ portfile.
 
 * FIXED: Minor issues with the spec files used for building Debian installers.
 
+* FIXED: Detection of outdated Logtalk user folders by the Windows installer
+was looking for versions older than 2.44.1 instead of 3.00.0.
+
 
 3.00.0 Alpha 7 - December 21, 2012
 ==================================
