@@ -25,6 +25,7 @@
 ## 
 #############################################################################
 
+
 echo ""
 echo "Installed Logtalk on \"/usr/share\"."
 
@@ -83,7 +84,7 @@ echo
 if [ -x /usr/bin/update-mime-database ]; then
 	mkdir -p /usr/share/mime/packages
 	rm -f /usr/share/mime/packages/logtalk.xml
-	cp /usr/share/lgt3000/scripts/freedesktop/logtalk.xml /usr/share/mime/packages/logtalk.xml
+	cp /usr/share/logtalk/scripts/freedesktop/logtalk.xml /usr/share/mime/packages/logtalk.xml
 	update-mime-database /usr/share/mime
 	echo "Added the Logtalk mime-type to the Shared MIME-info Database."
 	echo
