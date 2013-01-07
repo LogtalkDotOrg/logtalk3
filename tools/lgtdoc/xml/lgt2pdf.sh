@@ -101,8 +101,8 @@ usage_help()
 	echo "current directory to PDF files"
 	echo
 	echo "Usage:"
-	echo "  $0 -f format -d directory -p processor"
-	echo "  $0 -h"
+	echo "  `basename $0` [-f format] [-d directory] [-p processor]"
+	echo "  `basename $0` -h"
 	echo
 	echo "Optional arguments:"
 	echo "  -f paper format (either a4 or us; default is $format)"

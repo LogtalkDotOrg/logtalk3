@@ -94,7 +94,11 @@ usage_help() {
 	echo "creating a symbolic link, \"logtalk\", to the corresponding integration script."
 	echo
 	echo "Usage:"
-	echo "  `basename $0` [-vlsh] integration-script"
+	echo "  `basename $0` integration-script"
+	echo "  `basename $0` -v"
+	echo "  `basename $0` -l"
+	echo "  `basename $0` -s"
+	echo "  `basename $0` -h"
 	echo
 	echo "Optional arguments:"
 	echo "  -v print script version"

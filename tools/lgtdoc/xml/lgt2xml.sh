@@ -93,8 +93,8 @@ usage_help()
 	echo "documenting files in the current directory"
 	echo
 	echo "Usage:"
-	echo "  $0 -f format -i index -t title"
-	echo "  $0 -h"
+	echo "  `basename $0` [-f format] [-i index] [-t title]"
+	echo "  `basename $0` -h"
 	echo
 	echo "Optional arguments:"
 	echo "  -f format of the index file (either xhtml or html; default is $format)"

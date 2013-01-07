@@ -103,8 +103,8 @@ usage_help()
 	echo "current directory to XHTML or HTML files"
 	echo
 	echo "Usage:"
-	echo "  $0 -f format -d directory -i index -t title -p processor"
-	echo "  $0 -h"
+	echo "  `basename $0` [-f format] [-d directory] [-i index] [-t title] [-p processor]"
+	echo "  `basename $0` -h"
 	echo
 	echo "Optional arguments:"
 	echo "  -f output file format (either xhtml or html; default is $format)"

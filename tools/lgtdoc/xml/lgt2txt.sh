@@ -97,8 +97,8 @@ usage_help()
 	echo "current directory to text files"
 	echo
 	echo "Usage:"
-	echo "  $0 -d directory -p processor"
-	echo "  $0 -h"
+	echo "  `basename $0` [-d directory] [-p processor]"
+	echo "  `basename $0` -h"
 	echo
 	echo "Optional arguments:"
 	echo "  -d output directory for the text files (default is $directory)"

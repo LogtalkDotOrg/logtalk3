@@ -63,9 +63,9 @@ usage_help()
 	echo "of the directory containing this script."
 	echo
 	echo "Usage:"
-	echo "  $0 -p prolog -m mode -d results"
-	echo "  $0 -v"
-	echo "  $0 -h"
+	echo "  `basename $0` [-p prolog] [-m mode] [-d results]"
+	echo "  `basename $0` -v"
+	echo "  `basename $0` -h"
 	echo
 	echo "Optional arguments:"
 	echo "  -v print version of `basename $0`"

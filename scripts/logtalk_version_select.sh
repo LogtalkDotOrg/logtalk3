@@ -65,7 +65,11 @@ usage_help() {
 	echo "This script allows switching between installed Logtalk versions"
 	echo
 	echo "Usage:"
-	echo "  `basename $0` [-vlsh] version"
+	echo "  `basename $0` version"
+	echo "  `basename $0` -v"
+	echo "  `basename $0` -l"
+	echo "  `basename $0` -s"
+	echo "  `basename $0` -h"
 	echo
 	echo "Optional arguments:"
 	echo "  -v print version of `basename $0`"
