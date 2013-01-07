@@ -25,27 +25,76 @@
 ## 
 #############################################################################
 
-version=`cat ../VERSION.txt`
-number=`echo $version | sed -e 's/-//g' -e 's/\.//g'`
-directory=lgt$number
 
-if [ -z "$1" ]; then
-	if [ -f "/etc/debian_version" ]; then
-		prefix=/usr
-	else
-		case $( uname -s ) in
-			Darwin	) prefix=/opt/local;;
-			*		) prefix=/usr/local;;
-		esac
-	fi
-	mkdir -p $prefix
+if [ -f "/etc/debian_version" ]; then
+	default_prefix=/usr
 else
-	prefix="$1"
+	case $( uname -s ) in
+		Darwin	) default_prefix=/opt/local;;
+		*		) default_prefix=/usr/local;;
+	esac
 fi
 
-if ! [ -d "$prefix" ]; then
-	echo "Directory prefix does not exist!"
+version=`cat ../VERSION.txt`
+number=`echo $version | sed -e 's/-//g' -e 's/\.//g'`
+default_directory=lgt$number
+
+print_version() {
+	echo "Current `basename $0` version:"
+	echo "  0.2"
+	exit 0
+}
+
+usage_help()
+{
+	echo 
+	echo "This script install Logtalk on a default or a user-specified directory."
+	echo "It may require a user with administrative privileges or the use of sudo."
 	echo
+	echo "Usage:"
+	echo "  `basename $0` [-p prefix] [-d directory]"
+	echo "  `basename $0` -v"
+	echo "  `basename $0` -h"
+	echo
+	echo "Optional arguments:"
+	echo "  -p prefix directory for the installation (default is $default_prefix)"
+	echo "  -d installation directory (default is $default_directory)"
+	echo "  -v print script version"
+	echo "  -h help"
+	echo
+	exit 1
+}
+
+while getopts "p:d:vh" option
+do
+	case $option in
+		v) print_version;;
+		p) prefix_argument="$OPTARG";;
+		d) directory_argument="$OPTARG";;
+		h) usage_help;;
+		*) usage_help;;
+	esac
+done
+
+if [ "$prefix_argument" != "" ] && [ ! -d "$prefix_argument" ] ; then
+	echo "Error! Prefix directory does not exist: $prefix_argument"
+	usage_help
+	exit 1
+elif [ "$prefix_argument" != "" ] ; then
+	prefix=$prefix_argument
+else
+	prefix=$default_prefix
+fi
+
+if [ "$directory_argument" != "" ] ; then
+	directory=$directory_argument
+else
+	directory=$default_directory
+fi
+
+if [ ! -w "$prefix" ] ; then
+	echo "Error! No write permission for the prefix directory: $prefix"
+	usage_help
 	exit 1
 fi
 

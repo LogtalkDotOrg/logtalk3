@@ -93,7 +93,9 @@ argument instead of using a fixed value.
 
 * IMPROVED: The `install.sh`, `uninstall.sh`, and `build_rpm.sh` POSIX shell
 scripts now use the contents of the `VERSION.txt` file to define the name of
-the installation directory.
+the installation directory. The `install.sh` script now accepts as optional
+arguments the installation prefix directory and the installation directory
+itself.
 
 * UPDATED: MacPorts portfile to avoid conflicts with the new `logtalk-devel`
 portfile.
@@ -103,7 +105,7 @@ portfile.
 * FIXED: Minor issues with the spec files used for building Debian installers.
 
 * FIXED: Detection of outdated Logtalk user folders by the Windows installer
-was looking for versions older than 2.44.1 instead of 3.00.0.
+was looking for versions older than 2.44.0 instead of 3.00.0.
 
 
 3.00.0 Alpha 7 - December 21, 2012
