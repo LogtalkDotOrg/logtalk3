@@ -59,6 +59,9 @@ where the context information could be missing in exception terms.
 * IMPROVED: Updated the Qu-Prolog and XSB adapter files in order to solve some
 issues with the non-standard error handling of these Prolog compilers.
 
+* IMPROVED: The POSIX integration scripts now use the contents of the system
+and user `VERSION.txt` files instead of hard-coding version information.
+
 Documentation
 -------------
 
