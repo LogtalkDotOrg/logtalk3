@@ -14,7 +14,7 @@
 
 #define MyBaseDir "C:\lgt3git"
 #define MyAppVer FileRead(FileOpen(MyBaseDir + "\VERSION.txt"))
-#define MyAppVerNumberString StringChange(MyAppVer, ".", "")
+#define MyAppVerNumberString StringChange(StringChange(MyAppVer, ".", ""), "-", "")
 #define MyAppVerNumberInteger Int(MyAppVerNumberString)
 
 [Setup]
