@@ -6,7 +6,6 @@
 ; terms per section 7).        Consult the `LICENSE.txt` file for details.
 
 #define MyAppName "Logtalk"
-#define MyAppVerName "Logtalk 3.00.0"
 #define MyAppPublisher "Logtalk.org"
 #define MyAppURL "http://logtalk.org"
 #define MyAppUrlName "Logtalk Web Site.url"
@@ -14,10 +13,13 @@
 #define MyAppRegUrlName "Logtalk Registration.url"
 
 #define MyBaseDir "C:\lgt3git"
+#define MyAppVer FileRead(FileOpen(MyBaseDir + "\VERSION.txt"))
+#define MyAppVerNumberString StringChange(MyAppVer, ".", "")
+#define MyAppVerNumberInteger Int(MyAppVerNumberString)
 
 [Setup]
 AppName={#MyAppName}
-AppVerName={#MyAppVerName}
+AppVerName={#MyAppName} {#MyAppVer}
 AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
@@ -30,12 +32,12 @@ DisableProgramGroupPage=yes
 LicenseFile={#MyBaseDir}\scripts\windows\LICENSE.rtf
 InfoBeforeFile={#MyBaseDir}\scripts\windows\README.rtf
 ; SetupIconFile={#MyBaseDir}\scripts\windows\logtalk.ico
-OutputBaseFilename=lgt3000
+OutputBaseFilename=lgt{#MyAppVerNumberString}
 Compression=lzma
 SolidCompression=yes
 PrivilegesRequired=none
 
-VersionInfoVersion=3.00.0
+VersionInfoVersion={#MyAppVer}
 VersionInfoCopyright=© Paulo Moura, Copyright (c) 1998-2013
 
 AllowRootDirectory=yes
@@ -160,7 +162,7 @@ Name: "{userdesktop}\Logtalk user files"; Filename: "{code:GetLgtUserDir}"; Comp
 
 [Registry]
 ; admin users
-Root: HKLM; Subkey: "Software\Logtalk"; ValueType: dword; ValueName: "Version"; ValueData: "3000"; Components: base; Flags: deletevalue uninsdeletevalue; Check: IsAdminLoggedOn
+Root: HKLM; Subkey: "Software\Logtalk"; ValueType: dword; ValueName: "Version"; ValueData: "{#MyAppVerNumberInteger}"; Components: base; Flags: deletevalue uninsdeletevalue; Check: IsAdminLoggedOn
 Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Control\Session Manager\Environment"; ValueType: expandsz; ValueName: "LOGTALKHOME"; ValueData: "{app}"; Components: base; Flags: deletevalue uninsdeletevalue; Check: IsAdminLoggedOn
 Root: HKCU; Subkey: "Environment"; ValueType: expandsz; ValueName: "LOGTALKUSER"; ValueData: "{code:GetLgtUserDir}"; Flags: deletevalue uninsdeletevalue; Check: IsAdminLoggedOn
 Root: HKLM; Subkey: "SOFTWARE\Classes\MIME\Database\Content Type\text/x-logtalk"; Components: base; Flags: uninsdeletevalue; Check: IsAdminLoggedOn
@@ -168,7 +170,7 @@ Root: HKLM; Subkey: "SOFTWARE\Classes\MIME\Database\Content Type\text/x-logtalk"
 Root: HKCR; Subkey: ".lgt"; ValueType: string; ValueName: ""; ValueData: "LogtalkSourceFile"; Components: base; Flags: uninsdeletevalue; Check: IsAdminLoggedOn
 Root: HKCR; Subkey: "LogtalkSourceFile"; ValueType: string; ValueName: ""; ValueData: "Logtalk source file"; Components: base; Flags: uninsdeletekey; Check: IsAdminLoggedOn
 ; non-admin users
-Root: HKCU; Subkey: "Software\Logtalk"; ValueType: dword; ValueName: "Version"; ValueData: "3000"; Components: base; Flags: deletevalue uninsdeletevalue; Check: not IsAdminLoggedOn
+Root: HKCU; Subkey: "Software\Logtalk"; ValueType: dword; ValueName: "Version"; ValueData: "{#MyAppVerNumberInteger}"; Components: base; Flags: deletevalue uninsdeletevalue; Check: not IsAdminLoggedOn
 Root: HKCU; Subkey: "Environment"; ValueType: expandsz; ValueName: "LOGTALKHOME"; ValueData: "{app}"; Components: base; Flags: deletevalue uninsdeletevalue; Check: not IsAdminLoggedOn
 Root: HKCU; Subkey: "Environment"; ValueType: expandsz; ValueName: "LOGTALKUSER"; ValueData: "{code:GetLgtUserDir}"; Flags: deletevalue uninsdeletevalue; Check: not IsAdminLoggedOn
 Root: HKCU; Subkey: "SOFTWARE\Classes\MIME\Database\Content Type\text/x-logtalk"; Components: base; Flags: uninsdeletevalue; Check: not IsAdminLoggedOn
@@ -625,7 +627,7 @@ begin
     InstalledVersion := 0
   else
     InstalledVersion := -1;
-  if (InstalledVersion >= 0) and (InstalledVersion < 3000) then
+  if (InstalledVersion >= 0) and (InstalledVersion < {#MyAppVerNumberInteger}) then
   begin
     Warning := 'Your Logtalk user directory is outdated!'
                + Chr(13) + Chr(13)

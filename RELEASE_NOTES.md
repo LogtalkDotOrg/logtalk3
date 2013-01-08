@@ -91,6 +91,10 @@ Installers and installation scripts
 * IMPROVED: The `build_release.sh` POSIX shell script now takes a version
 argument instead of using a fixed value.
 
+* IMPROVED: The `logtalk.iss` Inno Setup script, used for building binary
+Windows installers, now use the contents of the `VERSION.txt` file instead
+of hard-coding version information.
+
 * IMPROVED: The `install.sh`, `uninstall.sh`, and `build_rpm.sh` POSIX shell
 scripts now use the contents of the `VERSION.txt` file to define the name of
 the installation directory. The `install.sh` script now accepts as optional
