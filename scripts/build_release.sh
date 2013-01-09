@@ -54,7 +54,7 @@ mkdir -p debian/usr/share/doc-base
 mkdir -p debian/usr/share/menu
 mkdir -p debian/DEBIAN
 cd lgt$number/scripts
-./install.sh $directory/debian/usr
+./install.sh -p $directory/debian/usr
 rm -rf $directory/debian/usr/share/mime
 cp debian/logtalk.doc-base $directory/debian/usr/share/doc-base/logtalk-docs
 cp debian/menu $directory/debian/usr/share/menu/logtalk

@@ -55,7 +55,7 @@ For POSIX systems, first, open a terminal, change the current directory to
 the Logtalk directory, and then type:
 
 	% cd scripts
-	% ./install.sh $HOME
+	% ./install.sh -p $HOME
 
 This will install Logtalk into the $HOME/share and $HOME/bin directories (the
 $HOME/bin path must be in your PATH environment variable).
@@ -81,7 +81,7 @@ order to avoid user tempering. This is a convenient setup for computer labs,
 given that making directories world-writable is a security risk. The install
 script accepts an installation prefix as argument. For example:
 
-	% sudo ./install.sh /opt/local
+	% sudo ./install.sh -p /opt/local
 
 If no prefix is given, the default installation prefix depends on the
 operating-system:

@@ -45,7 +45,7 @@ from `http://msdn.microsoft.com/downloads/list/webdev.asp`).
 	systems, resulting in Logtalk being installed in `$prefix/share` with
 	useful scripts written to `$prefix/bin`, which should be in your path);
 	the script also accepts as an optional argument a prefix for the
-	installation directory (for example, `./install.sh $HOME`)
+	installation directory (for example, `./install.sh -p $HOME`)
 
 - `uninstall.sh`  
 	shell script for de-installing Logtalk in Unix and Unix-like operating 

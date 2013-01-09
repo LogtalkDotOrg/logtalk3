@@ -21,7 +21,7 @@ Logtalk is an object-oriented logic programming language that can use most Prolo
 rm -rf $RPM_BUILD_ROOT
 cd scripts
 mkdir -p $RPM_BUILD_ROOT/usr/local
-./install.sh $RPM_BUILD_ROOT/usr/local
+./install.sh -p $RPM_BUILD_ROOT/usr/local
 
 %clean
 rm -rf $RPM_BUILD_ROOT
