@@ -31,7 +31,8 @@ from `http://msdn.microsoft.com/downloads/list/webdev.asp`).
 
 - `build_release.sh`  
 	helper script for building most of the distribution files of a new 
-	Logtalk release
+	Logtalk release; accepts as an optional argument a version identifier
+	(e.g. 3.00.0-a8)
 
 - `cleandist.sh`  
 	script for cleaning a Logtalk distribution in preparation for packaging

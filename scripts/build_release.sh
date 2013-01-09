@@ -27,17 +27,17 @@
 
 
 if [ -z "$1" ]; then
-	echo "Missing version argument!"
-	exit 1
+	git clone git://github.com/LogtalkDotOrg/logtalk3.git lgtclone
+	version=`cat lgtclone/VERSION.txt`
+	number=`echo $version | sed -e 's/-//g' -e 's/\.//g'`
+	mv lgtclone lgt$number
 else
 	version="$1"
+	number=`echo $version | sed -e 's/-//g' -e 's/\.//g'`
+	git clone git://github.com/LogtalkDotOrg/logtalk3.git lgt$number
 fi
 
-number=`echo $version | sed -e 's/-//g' -e 's/\.//g'`
-
 directory=`PWD`
-
-git clone git://github.com/LogtalkDotOrg/logtalk3.git lgt$number
 
 cd lgt$number
 chmod a+x scripts/cleandist.sh
@@ -48,6 +48,7 @@ cp -R lgt$number/manuals man$number
 tar -czf man$number.tgz man$number
 tar -cjf lgt$number.tar.bz2 lgt$number
 
+rm -rf debian
 mkdir -p debian/usr/bin
 mkdir -p debian/usr/share/doc/logtalk
 mkdir -p debian/usr/share/doc-base

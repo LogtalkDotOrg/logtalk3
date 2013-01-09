@@ -95,8 +95,9 @@ Installers and installation scripts
 that's processed by the `build_rpm.sh` shell script by using the contents of
 the `VERSION.txt` file.
 
-* IMPROVED: The `build_release.sh` POSIX shell script now takes a version
-argument instead of using a fixed value.
+* IMPROVED: The `build_release.sh` POSIX shell script now takes as an optional
+argument a version identifier, using the contents of the `VERSION.txt` file as
+a fallback value.
 
 * IMPROVED: The `logtalk.iss` Inno Setup script, used for building binary
 Windows installers, now use the contents of the `VERSION.txt` file instead
