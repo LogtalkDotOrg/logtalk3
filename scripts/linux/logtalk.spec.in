@@ -1,11 +1,11 @@
 Name: logtalk
 Summary: Logtalk - Open source object-oriented logic programming language
-Version: 3.00.0
+Version: LOGTALK_VERSION
 Release: 1
 License: GPLv3+ with exceptions
 Group: Development/Languages
 Packager: Paulo Moura <pmoura@logtalk.org>
-Source: http://logtalk.org/files/lgt3000.tar.bz2
+Source: http://logtalk.org/files/LOGTALK_INSTALL_DIRECTORY.tar.bz2
 BuildArchitectures: noarch
 URL: http://logtalk.org/
 AutoReqProv: no
@@ -13,7 +13,7 @@ AutoReqProv: no
 Logtalk is an object-oriented logic programming language that can use most Prolog implementations as a back-end compiler. As a multi-paradigm language, it includes support for both prototypes and classes, protocols (interfaces), component-based programming through category-based composition, event-driven programming, and high-level multi-threading programming.
 
 %prep
-%setup -q -c lgt3000 -n lgt3000
+%setup -q -c LOGTALK_INSTALL_DIRECTORY -n LOGTALK_INSTALL_DIRECTORY
 
 %build
 
@@ -28,31 +28,31 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)
-%doc /usr/local/share/lgt3000/ACKNOWLEDGMENTS.md
-%doc /usr/local/share/lgt3000/BIBLIOGRAPHY.bib
-%doc /usr/local/share/lgt3000/CUSTOMIZE.md
-%doc /usr/local/share/lgt3000/INSTALL.md
-%doc /usr/local/share/lgt3000/LICENSE.txt
-%doc /usr/local/share/lgt3000/QUICK_START.md
-%doc /usr/local/share/lgt3000/README.md
-%doc /usr/local/share/lgt3000/RELEASE_NOTES.md
-%doc /usr/local/share/lgt3000/UPGRADING.md
-/usr/local/share/lgt3000/VERSION.txt
-/usr/local/share/lgt3000/adapters
-/usr/local/share/lgt3000/coding
-/usr/local/share/lgt3000/contributions
-/usr/local/share/lgt3000/core
-/usr/local/share/lgt3000/examples
-/usr/local/share/lgt3000/integration
-/usr/local/share/lgt3000/library
-/usr/local/share/lgt3000/paths
-/usr/local/share/lgt3000/man
-%doc /usr/local/share/lgt3000/manuals
-/usr/local/share/lgt3000/scratch
-/usr/local/share/lgt3000/scripts
-/usr/local/share/lgt3000/settings-sample.lgt
-/usr/local/share/lgt3000/tests
-/usr/local/share/lgt3000/tools
+%doc /usr/local/share/LOGTALK_INSTALL_DIRECTORY/ACKNOWLEDGMENTS.md
+%doc /usr/local/share/LOGTALK_INSTALL_DIRECTORY/BIBLIOGRAPHY.bib
+%doc /usr/local/share/LOGTALK_INSTALL_DIRECTORY/CUSTOMIZE.md
+%doc /usr/local/share/LOGTALK_INSTALL_DIRECTORY/INSTALL.md
+%doc /usr/local/share/LOGTALK_INSTALL_DIRECTORY/LICENSE.txt
+%doc /usr/local/share/LOGTALK_INSTALL_DIRECTORY/QUICK_START.md
+%doc /usr/local/share/LOGTALK_INSTALL_DIRECTORY/README.md
+%doc /usr/local/share/LOGTALK_INSTALL_DIRECTORY/RELEASE_NOTES.md
+%doc /usr/local/share/LOGTALK_INSTALL_DIRECTORY/UPGRADING.md
+/usr/local/share/LOGTALK_INSTALL_DIRECTORY/VERSION.txt
+/usr/local/share/LOGTALK_INSTALL_DIRECTORY/adapters
+/usr/local/share/LOGTALK_INSTALL_DIRECTORY/coding
+/usr/local/share/LOGTALK_INSTALL_DIRECTORY/contributions
+/usr/local/share/LOGTALK_INSTALL_DIRECTORY/core
+/usr/local/share/LOGTALK_INSTALL_DIRECTORY/examples
+/usr/local/share/LOGTALK_INSTALL_DIRECTORY/integration
+/usr/local/share/LOGTALK_INSTALL_DIRECTORY/library
+/usr/local/share/LOGTALK_INSTALL_DIRECTORY/paths
+/usr/local/share/LOGTALK_INSTALL_DIRECTORY/man
+%doc /usr/local/share/LOGTALK_INSTALL_DIRECTORY/manuals
+/usr/local/share/LOGTALK_INSTALL_DIRECTORY/scratch
+/usr/local/share/LOGTALK_INSTALL_DIRECTORY/scripts
+/usr/local/share/LOGTALK_INSTALL_DIRECTORY/settings-sample.lgt
+/usr/local/share/LOGTALK_INSTALL_DIRECTORY/tests
+/usr/local/share/LOGTALK_INSTALL_DIRECTORY/tools
 /usr/local/share/logtalk
 /usr/local/bin/logtalk_user_setup
 /usr/local/bin/lgt2pdf
@@ -167,7 +167,7 @@ echo
 if [ -x /usr/bin/update-mime-database ]; then
 	mkdir -p /usr/share/mime/packages
 	rm -f /usr/share/mime/packages/logtalk.xml
-	cp /usr/local/share/lgt3000/scripts/freedesktop/logtalk.xml /usr/share/mime/packages/logtalk.xml
+	cp /usr/local/share/LOGTALK_INSTALL_DIRECTORY/scripts/freedesktop/logtalk.xml /usr/share/mime/packages/logtalk.xml
 	update-mime-database /usr/share/mime
 	echo "Added the Logtalk mime-type to the Shared MIME-info Database."
 	echo

@@ -91,6 +91,10 @@ control construct as a message to self.
 Installers and installation scripts
 -----------------------------------
 
+* IMPROVED: Replaced the RPM `logtalk.spec` file by a `logtalk.spec.in` file
+that's processed by the `build_rpm.sh` shell script by using the contents of
+the `VERSION.txt` file.
+
 * IMPROVED: The `build_release.sh` POSIX shell script now takes a version
 argument instead of using a fixed value.
 
