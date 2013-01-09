@@ -54,7 +54,7 @@ if ! [ "$LOGTALKHOME" ]; then
 		exit 1
 fi
 
-version=`cat ../VERSION.txt`
+version=`cat "$LOGTALKHOME/VERSION.txt"`
 number=`echo $version | sed -e 's/-//g' -e 's/\.//g'`
 directory=lgt$number
 
