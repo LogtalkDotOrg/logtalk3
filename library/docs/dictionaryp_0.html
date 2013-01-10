@@ -31,9 +31,9 @@
           </dd>
         </dl>
         <dl class="properties">
-          <dt class="key">compilation:</dt>
+          <dt class="key">compilation flags:</dt>
           <dd class="value">
-            <code>static, context_switching_calls</code>
+            <code>static, context_switching_calls, dynamic_declarations, complements, events, threaded</code>
           </dd>
         </dl>
         <p class="comment">(no dependencies on other files)</p>
@@ -48,7 +48,7 @@
             <p class="comment">Converts a list of key-value pairs to a dictionary.</p>
           </blockquote>
           <dl class="properties">
-            <dt class="key">compilation:</dt>
+            <dt class="key">compilation flags:</dt>
             <dd class="value">
               <code>static</code>
             </dd>
@@ -68,7 +68,7 @@
             <p class="comment">Converts a dictionary to a ordered list of key-value pairs.</p>
           </blockquote>
           <dl class="properties">
-            <dt class="key">compilation:</dt>
+            <dt class="key">compilation flags:</dt>
             <dd class="value">
               <code>static</code>
             </dd>
@@ -88,7 +88,7 @@
             <p class="comment">Clones a dictionary using the same keys but with all values unbound and returning a list of all the pairs in the new clone.</p>
           </blockquote>
           <dl class="properties">
-            <dt class="key">compilation:</dt>
+            <dt class="key">compilation flags:</dt>
             <dd class="value">
               <code>static</code>
             </dd>
@@ -108,7 +108,7 @@
             <p class="comment">Clones a dictionary using the same keys but with all values unbound and returning the list of all pairs in the dictionary and in the clone.</p>
           </blockquote>
           <dl class="properties">
-            <dt class="key">compilation:</dt>
+            <dt class="key">compilation flags:</dt>
             <dd class="value">
               <code>static</code>
             </dd>
@@ -128,7 +128,7 @@
             <p class="comment">Inserts a Key-Value pair into a dictionary, returning the updated dictionary. When the key already exists, the associated value is updated.</p>
           </blockquote>
           <dl class="properties">
-            <dt class="key">compilation:</dt>
+            <dt class="key">compilation flags:</dt>
             <dd class="value">
               <code>static</code>
             </dd>
@@ -148,7 +148,7 @@
             <p class="comment">Deletes a matching Key-Value pair from a dictionary, returning the updated dictionary.</p>
           </blockquote>
           <dl class="properties">
-            <dt class="key">compilation:</dt>
+            <dt class="key">compilation flags:</dt>
             <dd class="value">
               <code>static</code>
             </dd>
@@ -168,7 +168,7 @@
             <p class="comment">Updates the value associated with Key in a dictionary, returning the updated dictionary. Fails if it cannot find the key.</p>
           </blockquote>
           <dl class="properties">
-            <dt class="key">compilation:</dt>
+            <dt class="key">compilation flags:</dt>
             <dd class="value">
               <code>static</code>
             </dd>
@@ -188,7 +188,7 @@
             <p class="comment">Updates the value associated with Key in a dictionary, returning the updated dictionary. Fails if it cannot find the key or if the existing value does not match OldValue.</p>
           </blockquote>
           <dl class="properties">
-            <dt class="key">compilation:</dt>
+            <dt class="key">compilation flags:</dt>
             <dd class="value">
               <code>static</code>
             </dd>
@@ -208,7 +208,7 @@
             <p class="comment">True if the dictionary is empty.</p>
           </blockquote>
           <dl class="properties">
-            <dt class="key">compilation:</dt>
+            <dt class="key">compilation flags:</dt>
             <dd class="value">
               <code>static</code>
             </dd>
@@ -228,7 +228,7 @@
             <p class="comment">Lookups a matching Key-Value pair from a dictionary.</p>
           </blockquote>
           <dl class="properties">
-            <dt class="key">compilation:</dt>
+            <dt class="key">compilation flags:</dt>
             <dd class="value">
               <code>static</code>
             </dd>
@@ -251,7 +251,7 @@
             <p class="comment">Returns the previous pair in a dictionary given a key.</p>
           </blockquote>
           <dl class="properties">
-            <dt class="key">compilation:</dt>
+            <dt class="key">compilation flags:</dt>
             <dd class="value">
               <code>static</code>
             </dd>
@@ -271,7 +271,7 @@
             <p class="comment">Returns the next pair in a dictionary given a key.</p>
           </blockquote>
           <dl class="properties">
-            <dt class="key">compilation:</dt>
+            <dt class="key">compilation flags:</dt>
             <dd class="value">
               <code>static</code>
             </dd>
@@ -291,7 +291,7 @@
             <p class="comment">Returns the pair with the minimum key in a dictionary. Fails if the dictionary is empty.</p>
           </blockquote>
           <dl class="properties">
-            <dt class="key">compilation:</dt>
+            <dt class="key">compilation flags:</dt>
             <dd class="value">
               <code>static</code>
             </dd>
@@ -311,7 +311,7 @@
             <p class="comment">Returns the pair with the maximum key in a dictionary. Fails if the dictionary is empty.</p>
           </blockquote>
           <dl class="properties">
-            <dt class="key">compilation:</dt>
+            <dt class="key">compilation flags:</dt>
             <dd class="value">
               <code>static</code>
             </dd>
@@ -331,7 +331,7 @@
             <p class="comment">Deletes the pair with the minimum key from a dictionary, returning the deleted pair and the updated dictionary.</p>
           </blockquote>
           <dl class="properties">
-            <dt class="key">compilation:</dt>
+            <dt class="key">compilation flags:</dt>
             <dd class="value">
               <code>static</code>
             </dd>
@@ -351,7 +351,7 @@
             <p class="comment">Deletes the pair with the maximum key from a dictionary, returning the deleted pair and the updated dictionary.</p>
           </blockquote>
           <dl class="properties">
-            <dt class="key">compilation:</dt>
+            <dt class="key">compilation flags:</dt>
             <dd class="value">
               <code>static</code>
             </dd>
@@ -371,7 +371,7 @@
             <p class="comment">Returns a list with all dictionary keys.</p>
           </blockquote>
           <dl class="properties">
-            <dt class="key">compilation:</dt>
+            <dt class="key">compilation flags:</dt>
             <dd class="value">
               <code>static</code>
             </dd>
@@ -391,7 +391,7 @@
             <p class="comment">Maps a closure over each dictionary key-value pair. Fails if the mapped closure attempts to modify the keys.</p>
           </blockquote>
           <dl class="properties">
-            <dt class="key">compilation:</dt>
+            <dt class="key">compilation flags:</dt>
             <dd class="value">
               <code>static</code>
             </dd>
@@ -412,10 +412,10 @@
         <div class="section">
           <h3 class="code">map/3</h3>
           <blockquote>
-            <p class="comment">Maps a closure over each dictionary key-value pair, returning the new dictionary. Fails if the mapped closure atempts to modify the keys.</p>
+            <p class="comment">Maps a closure over each dictionary key-value pair, returning the new dictionary. Fails if the mapped closure attempts to modify the keys.</p>
           </blockquote>
           <dl class="properties">
-            <dt class="key">compilation:</dt>
+            <dt class="key">compilation flags:</dt>
             <dd class="value">
               <code>static</code>
             </dd>
@@ -436,10 +436,10 @@
         <div class="section">
           <h3 class="code">apply/4</h3>
           <blockquote>
-            <p class="comment">Applies a closure to a specific key-value pair, returning the new dictionary. Fails if the key cannot be found or if the mapped closure atempts to modify the key.</p>
+            <p class="comment">Applies a closure to a specific key-value pair, returning the new dictionary. Fails if the key cannot be found or if the mapped closure attempts to modify the key.</p>
           </blockquote>
           <dl class="properties">
-            <dt class="key">compilation:</dt>
+            <dt class="key">compilation flags:</dt>
             <dd class="value">
               <code>static</code>
             </dd>
@@ -463,7 +463,7 @@
             <p class="comment">Number of dictionary entries.</p>
           </blockquote>
           <dl class="properties">
-            <dt class="key">compilation:</dt>
+            <dt class="key">compilation flags:</dt>
             <dd class="value">
               <code>static</code>
             </dd>

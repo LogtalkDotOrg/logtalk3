@@ -31,9 +31,9 @@
           </dd>
         </dl>
         <dl class="properties">
-          <dt class="key">compilation:</dt>
+          <dt class="key">compilation flags:</dt>
           <dd class="value">
-            <code>static, context_switching_calls</code>
+            <code>static, context_switching_calls, dynamic_declarations, complements, events, threaded</code>
           </dd>
         </dl>
         <p class="comment">(no dependencies on other files)</p>
@@ -45,10 +45,10 @@
         <div class="section">
           <h3 class="code">depth/2</h3>
           <blockquote>
-            <p class="comment">True if the depth of Term is Depth. The depth of atomic terms is zero; the depth of a compound term is one plus the maximium depth of its sub-terms.</p>
+            <p class="comment">True if the depth of Term is Depth. The depth of atomic terms is zero; the depth of a compound term is one plus the maximum depth of its sub-terms.</p>
           </blockquote>
           <dl class="properties">
-            <dt class="key">compilation:</dt>
+            <dt class="key">compilation flags:</dt>
             <dd class="value">
               <code>static</code>
             </dd>
@@ -68,7 +68,7 @@
             <p class="comment">True if the argument is ground.</p>
           </blockquote>
           <dl class="properties">
-            <dt class="key">compilation:</dt>
+            <dt class="key">compilation flags:</dt>
             <dd class="value">
               <code>static</code>
             </dd>
@@ -88,7 +88,7 @@
             <p class="comment">Creates a new term instance (if meaningful).</p>
           </blockquote>
           <dl class="properties">
-            <dt class="key">compilation:</dt>
+            <dt class="key">compilation flags:</dt>
             <dd class="value">
               <code>static</code>
             </dd>
@@ -108,7 +108,7 @@
             <p class="comment">True if the variable occurs in the term.</p>
           </blockquote>
           <dl class="properties">
-            <dt class="key">compilation:</dt>
+            <dt class="key">compilation flags:</dt>
             <dd class="value">
               <code>static</code>
             </dd>
@@ -128,7 +128,7 @@
             <p class="comment">The first term subsumes the second term.</p>
           </blockquote>
           <dl class="properties">
-            <dt class="key">compilation:</dt>
+            <dt class="key">compilation flags:</dt>
             <dd class="value">
               <code>static</code>
             </dd>
@@ -148,7 +148,7 @@
             <p class="comment">The first term is a subterm of the second term.</p>
           </blockquote>
           <dl class="properties">
-            <dt class="key">compilation:</dt>
+            <dt class="key">compilation flags:</dt>
             <dd class="value">
               <code>static</code>
             </dd>
@@ -168,7 +168,7 @@
             <p class="comment">Term is valid.</p>
           </blockquote>
           <dl class="properties">
-            <dt class="key">compilation:</dt>
+            <dt class="key">compilation flags:</dt>
             <dd class="value">
               <code>static</code>
             </dd>
@@ -188,7 +188,7 @@
             <p class="comment">Checks if a term is valid. Throws an exception if the term is not valid.</p>
           </blockquote>
           <dl class="properties">
-            <dt class="key">compilation:</dt>
+            <dt class="key">compilation flags:</dt>
             <dd class="value">
               <code>static</code>
             </dd>
@@ -208,7 +208,7 @@
             <p class="comment">Each term is a variant of the other (i.e. they are structurally equivalent).</p>
           </blockquote>
           <dl class="properties">
-            <dt class="key">compilation:</dt>
+            <dt class="key">compilation flags:</dt>
             <dd class="value">
               <code>static</code>
             </dd>
@@ -228,7 +228,7 @@
             <p class="comment">Returns a list of all term variables (ordered as found when doing a depth-first, left-to-right traversal of Term).</p>
           </blockquote>
           <dl class="properties">
-            <dt class="key">compilation:</dt>
+            <dt class="key">compilation flags:</dt>
             <dd class="value">
               <code>static</code>
             </dd>
@@ -248,7 +248,7 @@
             <p class="comment">Returns a list of all term singleton variables (ordered as found when doing a depth-first, left-to-right traversal of Term).</p>
           </blockquote>
           <dl class="properties">
-            <dt class="key">compilation:</dt>
+            <dt class="key">compilation flags:</dt>
             <dd class="value">
               <code>static</code>
             </dd>
