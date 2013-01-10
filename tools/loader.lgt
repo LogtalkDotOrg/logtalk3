@@ -28,5 +28,6 @@
 	logtalk_load(profiler(loader)),
 	logtalk_load(diagrams(loader)),
 	logtalk_load(help(loader)),
-	logtalk_load(lgtunit(loader))
+	logtalk_load(lgtunit(loader)),
+	logtalk_load(lgtdoc(loader))
 )).
