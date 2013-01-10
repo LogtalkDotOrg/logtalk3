@@ -90,8 +90,11 @@ operating-system:
 	Debian distributions:	`/usr`
 	Other POSIX systems:	`/usr/local`
 
-The script installs Logtalk in the `$prefix/share` directory with useful
-scripts written to the `$prefix/bin` directory, which should be in your path.
+The script installs Logtalk in the `$prefix/share` directory with Prolog
+integration and other useful shell scripts written to the `$prefix/bin`
+directory, which should be in your path. The `install.sh` shell script also
+creates a symbolic link, `$prefix/share/logtalk`, which can be used for e.g.
+defining the LOGTALKHOME environment variable described below.
 
 If you're using Windows, you can simply use the provided GUI installer (which
 supports both admin and non-admin users) to perform a full installation. You
