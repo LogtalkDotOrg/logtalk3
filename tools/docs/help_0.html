@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<?xml-stylesheet href="logtalk.css" type="text/css"?><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>help</title>
+    <link rel="stylesheet" href="logtalk.css" type="text/css"/>
+  </head>
+  <body>
+    <div class="header">
+      <p class="type">object</p>
+      <h1 class="code">help</h1>
+      <blockquote>
+        <p class="comment">Command-line help for Logtalk built-in control constructs, predicates, non-terminals, and methods.</p>
+      </blockquote>
+    </div>
+    <div class="entity">
+      <div class="section">
+        <dl class="properties">
+          <dt class="key">author:</dt>
+          <dd class="value">
+            <code>Paulo Moura</code>
+          </dd>
+          <dt class="key">version:</dt>
+          <dd class="value">
+            <code>0.7</code>
+          </dd>
+          <dt class="key">date:</dt>
+          <dd class="value">
+            <code>2012/10/19</code>
+          </dd>
+        </dl>
+        <dl class="properties">
+          <dt class="key">compilation flags:</dt>
+          <dd class="value">
+            <code>static, context_switching_calls, dynamic_declarations, complements, events, threaded</code>
+          </dd>
+        </dl>
+        <p class="comment">(no dependencies on other files)</p>
+      </div>
+    </div>
+    <div class="predicates">
+      <div class="public">
+        <h2>Public interface</h2>
+        <div class="section">
+          <h3 class="code">help/0</h3>
+          <blockquote>
+            <p class="comment">Prints instructions on how to use help.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>help &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">(/)/2</h3>
+          <blockquote>
+            <p class="comment">Provides help on the Functor/Arity built-in control construct, directive, predicate, or method.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>Functor/Arity</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>+atom/ +integer &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">(//)/2</h3>
+          <blockquote>
+            <p class="comment">Provides help on the Functor//Arity built-in non-terminal.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>Functor//Arity</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>+atom// +integer &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">completion/2</h3>
+          <blockquote>
+            <p class="comment">Provides a completion pair (Completion-Page) for a given prefix.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>completion(Prefix,Completion)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>completion(+atom,-pair) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">completions/2</h3>
+          <blockquote>
+            <p class="comment">Provides a list of completions pairs (Completion-Page) for a given prefix.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>completions(Prefix,Completions)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>completions(+atom,-lists(pair)) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">library/0</h3>
+          <blockquote>
+            <p class="comment">Provides help on the standard Logtalk library.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>library &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">library/1</h3>
+          <blockquote>
+            <p class="comment">Provides help on the standard Logtalk library.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>library(Entity)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>library(+entity_identifier) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">manuals/0</h3>
+          <blockquote>
+            <p class="comment">Provides access to the Logtalk User and Reference manuals.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>manuals &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="protected">
+        <h2>Protected interface</h2>
+        <div class="section">
+          <p class="comment">(none)</p>
+        </div>
+      </div>
+      <div class="private">
+        <h2>Private predicates</h2>
+        <div class="section">
+          <p class="comment">(none)</p>
+        </div>
+      </div>
+    </div>
+    <div class="operators">
+      <h2>Operators</h2>
+      <div class="section">
+        <h3 class="comment">(none)</h3>
+      </div>
+    </div>
+    <div class="remarks">
+      <h2>Remarks</h2>
+      <div class="section">
+        <h3 class="comment">(none)</h3>
+      </div>
+    </div>
+  </body>
+</html>

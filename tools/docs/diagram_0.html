@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<?xml-stylesheet href="logtalk.css" type="text/css"?><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>diagram</title>
+    <link rel="stylesheet" href="logtalk.css" type="text/css"/>
+  </head>
+  <body>
+    <div class="header">
+      <p class="type">object</p>
+      <h1 class="code">diagram</h1>
+      <blockquote>
+        <p class="comment">Generates entity diagram DOT files for source files and libraries.</p>
+      </blockquote>
+    </div>
+    <div class="entity">
+      <div class="section">
+        <dl class="properties">
+          <dt class="key">author:</dt>
+          <dd class="value">
+            <code>Paulo Moura</code>
+          </dd>
+          <dt class="key">version:</dt>
+          <dd class="value">
+            <code>1.2</code>
+          </dd>
+          <dt class="key">date:</dt>
+          <dd class="value">
+            <code>2012/10/18</code>
+          </dd>
+        </dl>
+        <dl class="properties">
+          <dt class="key">compilation flags:</dt>
+          <dd class="value">
+            <code>static, context_switching_calls, dynamic_declarations, complements, events, threaded</code>
+          </dd>
+        </dl>
+        <p class="comment">(no dependencies on other files)</p>
+      </div>
+    </div>
+    <div class="predicates">
+      <div class="public">
+        <h2>Public interface</h2>
+        <div class="section">
+          <h3 class="code">rlibrary/2</h3>
+          <blockquote>
+            <p class="comment">Creates a diagram for all entities in a library its sub-libraries using the specified options.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>rlibrary(Library,Options)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>rlibrary(+atom,+list) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">rlibrary/1</h3>
+          <blockquote>
+            <p class="comment">Creates a diagram for all entities in a library and its sub-libraries using default options.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>rlibrary(Library)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>rlibrary(+atom) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">library/2</h3>
+          <blockquote>
+            <p class="comment">Creates a diagram for all entities in a library using the specified options.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>library(Library,Options)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>library(+atom,+list) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">library/1</h3>
+          <blockquote>
+            <p class="comment">Creates a diagram for all entities in a library using default options.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>library(Library)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>library(+atom) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">file/2</h3>
+          <blockquote>
+            <p class="comment">Creates a diagram for all entities in a loaded source file using the specified options. Supports library notation.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>file(File,Options)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>file(+atom,+list) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">file/1</h3>
+          <blockquote>
+            <p class="comment">Creates a diagram for all entities in a loaded source file using default options. Supports library notation.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>file(File)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>file(+atom) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">default_options/1</h3>
+          <blockquote>
+            <p class="comment">Returns a list of the default options used when generating a diagram.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>default_options(DefaultOptions)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>default_options(-list) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="protected">
+        <h2>Protected interface</h2>
+        <div class="section">
+          <p class="comment">(none)</p>
+        </div>
+      </div>
+      <div class="private">
+        <h2>Private predicates</h2>
+        <div class="section">
+          <p class="comment">(none)</p>
+        </div>
+      </div>
+    </div>
+    <div class="operators">
+      <h2>Operators</h2>
+      <div class="section">
+        <h3 class="comment">(none)</h3>
+      </div>
+    </div>
+    <div class="remarks">
+      <h2>Remarks</h2>
+      <div class="section">
+        <h3 class="comment">(none)</h3>
+      </div>
+    </div>
+  </body>
+</html>

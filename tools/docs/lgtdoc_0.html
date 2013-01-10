@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<?xml-stylesheet href="logtalk.css" type="text/css"?><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>lgtdoc</title>
+    <link rel="stylesheet" href="logtalk.css" type="text/css"/>
+  </head>
+  <body>
+    <div class="header">
+      <p class="type">object</p>
+      <h1 class="code">lgtdoc</h1>
+      <blockquote>
+        <p class="comment">Documenting tool.</p>
+      </blockquote>
+    </div>
+    <div class="entity">
+      <div class="section">
+        <dl class="properties">
+          <dt class="key">author:</dt>
+          <dd class="value">
+            <code>Paulo Moura</code>
+          </dd>
+          <dt class="key">version:</dt>
+          <dd class="value">
+            <code>2.0</code>
+          </dd>
+          <dt class="key">date:</dt>
+          <dd class="value">
+            <code>2012/9/27</code>
+          </dd>
+        </dl>
+        <dl class="properties">
+          <dt class="key">compilation flags:</dt>
+          <dd class="value">
+            <code>static, context_switching_calls, dynamic_declarations, complements, events, threaded</code>
+          </dd>
+        </dl>
+        <dl class="relations">
+          <dt class="key">implements:</dt>
+          <dd class="value">
+            <code>public <a href="lgtdocp_0.html">lgtdocp</a></code>
+          </dd>
+        </dl>
+      </div>
+    </div>
+    <div class="predicates">
+      <div class="public">
+        <h2>Public interface</h2>
+        <div class="section">
+          <p class="comment">(see related entities)</p>
+        </div>
+      </div>
+      <div class="protected">
+        <h2>Protected interface</h2>
+        <div class="section">
+          <p class="comment">(see related entities)</p>
+        </div>
+      </div>
+      <div class="private">
+        <h2>Private predicates</h2>
+        <div class="section">
+          <h3 class="code">option_/2</h3>
+          <blockquote>
+            <p class="comment">Table of option values.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>dynamic</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>option_(Option,Value)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>option_(?atom,?nonvar) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+    <div class="operators">
+      <h2>Operators</h2>
+      <div class="section">
+        <h3 class="comment">(none)</h3>
+      </div>
+    </div>
+    <div class="remarks">
+      <h2>Remarks</h2>
+      <div class="section">
+        <dl class="remarks">
+          <dt class="comment">Compiling files for generating XML documentation</dt>
+          <dd class="text">All source files must be compiled with the "source_data" compiler flag turned on.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">xmlspec(Specification) option</dt>
+          <dd class="text">XML documenting files specification format. Possible option values are "dtd" (for the DTD specification; the usual default) and "xsd" (for the XML Schema specification). Most XSL processors support DTDs but only some of them support XML Schemas.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">xmlsref(Reference) option</dt>
+          <dd class="text">Reference to the XML specification file in the generated XML documenting files. The default value is "local", i.e. the reference points to a local DTD or XSD file (respectively, "logtalk.dtd" or "logtalk.xsd"), residing in the same directory as the XML file. Other possible values are "web" (the reference points to an web location, either "http://logtalk.org/xml/3.0/logtalk.dtd" or "http://logtalk.org/xml/3.0/logtalk.xsd"), and "standalone" (no reference to specification files in the XML documenting files). The most appropriated option value depends on the XSL processor you intend to use. Some of them are buggy an may not work with the default option value.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">xslfile(File) option</dt>
+          <dd class="text">XSLT file to be used with the generated XML documenting files. The default value is "lgtxml.xsl", which allows the XML files to be viewed by simply opening them with recent versions of web navigators which support XSLT transformations (after copying the "lgtxml.xsl" and of the "logtalk.css" files to the directory containing the XML files).</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">xmldir(Directory) option</dt>
+          <dd class="text">Directory where the XML documenting files will be generated. The default value is "xml_docs", a sub-directory of the source files directory.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">bom(Boolean) option</dt>
+          <dd class="text">Defines if a BOM should be added to the generated XML documenting files.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">encoding(Encoding) option</dt>
+          <dd class="text">Encoding to be used for the generated XML documenting files.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">exclude_files(List) option</dt>
+          <dd class="text">List of files to exclude when generating the XML documenting files.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">exclude_paths(List) option</dt>
+          <dd class="text">List of (relative) library paths to exclude when generating the XML documenting files.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">exclude_entities(List) option</dt>
+          <dd class="text">List of entities to exclude when generating the XML documenting files.</dd>
+        </dl>
+      </div>
+    </div>
+  </body>
+</html>

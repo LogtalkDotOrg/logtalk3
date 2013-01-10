@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<?xml-stylesheet href="logtalk.css" type="text/css"?><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>debuggerp</title>
+    <link rel="stylesheet" href="logtalk.css" type="text/css"/>
+  </head>
+  <body>
+    <div class="header">
+      <p class="type">protocol</p>
+      <h1 class="code">debuggerp</h1>
+      <blockquote>
+        <p class="comment">Debugger protocol.</p>
+      </blockquote>
+    </div>
+    <div class="entity">
+      <div class="section">
+        <dl class="properties">
+          <dt class="key">author:</dt>
+          <dd class="value">
+            <code>Paulo Moura</code>
+          </dd>
+          <dt class="key">version:</dt>
+          <dd class="value">
+            <code>1.0</code>
+          </dd>
+          <dt class="key">date:</dt>
+          <dd class="value">
+            <code>2012/4/23</code>
+          </dd>
+        </dl>
+        <dl class="properties">
+          <dt class="key">compilation flags:</dt>
+          <dd class="value">
+            <code>static, context_switching_calls, dynamic_declarations, complements, events, threaded</code>
+          </dd>
+        </dl>
+        <p class="comment">(no dependencies on other files)</p>
+      </div>
+    </div>
+    <div class="predicates">
+      <div class="public">
+        <h2>Public interface</h2>
+        <div class="section">
+          <h3 class="code">reset/0</h3>
+          <blockquote>
+            <p class="comment">Resets all debugging settings, including spy points and context spy points.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>reset &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">debug/0</h3>
+          <blockquote>
+            <p class="comment">Starts debugging for all defined spy points and context spy points.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>debug &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">nodebug/0</h3>
+          <blockquote>
+            <p class="comment">Stops debugging for all defined spy points and context spy points.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>nodebug &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">debugging/0</h3>
+          <blockquote>
+            <p class="comment">Reports current debugging settings, including spy points and context spy points.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>debugging &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">debugging/1</h3>
+          <blockquote>
+            <p class="comment">True if the entity is being debugged.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>debugging(Entity)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>debugging(@dictionary) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">trace/0</h3>
+          <blockquote>
+            <p class="comment">Starts tracing all calls compiled in debug mode.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>trace &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">notrace/0</h3>
+          <blockquote>
+            <p class="comment">Stops tracing of call compiled in debug mode.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>notrace &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">spy/1</h3>
+          <blockquote>
+            <p class="comment">Sets a spy point for a predicate or a list of predicates.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>spy(Predicate)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>spy(+predicate_indicator) &ndash; one</code>
+            </dd>
+            <dd class="value">
+              <code>spy(+list(predicate_indicator)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">spy/4</h3>
+          <blockquote>
+            <p class="comment">Sets a context spy point.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>spy(Sender,This,Self,Goal)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>spy(@term,@term,@term,@term) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">nospy/1</h3>
+          <blockquote>
+            <p class="comment">Removes all matching predicate spy points.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>nospy(Predicate)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>nospy(@variable) &ndash; one</code>
+            </dd>
+            <dd class="value">
+              <code>nospy(+predicate_indicator) &ndash; one</code>
+            </dd>
+            <dd class="value">
+              <code>nospy(+list(predicate_indicator)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">nospy/4</h3>
+          <blockquote>
+            <p class="comment">Removes all matching context spy points.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>nospy(Sender,This,Self,Goal)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>nospy(@callable,+dictionary,-dictionary,?) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">nospyall/0</h3>
+          <blockquote>
+            <p class="comment">Removes all spy points.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>nospyall &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">leash/1</h3>
+          <blockquote>
+            <p class="comment">Sets the debugger leash ports using an abbreviation (none, loose, half, tight, or full) or a list of ports (valid ports are fact, rule, call, exit, redo, fail, and exception).</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>leash(Ports)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>leash(+atom) &ndash; one</code>
+            </dd>
+            <dd class="value">
+              <code>leash(+list(atom)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="protected">
+        <h2>Protected interface</h2>
+        <div class="section">
+          <p class="comment">(none)</p>
+        </div>
+      </div>
+      <div class="private">
+        <h2>Private predicates</h2>
+        <div class="section">
+          <p class="comment">(none)</p>
+        </div>
+      </div>
+    </div>
+    <div class="operators">
+      <h2>Operators</h2>
+      <div class="section">
+        <h3 class="comment">(none)</h3>
+      </div>
+    </div>
+    <div class="remarks">
+      <h2>Remarks</h2>
+      <div class="section">
+        <h3 class="comment">(none)</h3>
+      </div>
+    </div>
+  </body>
+</html>
