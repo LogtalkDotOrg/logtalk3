@@ -105,7 +105,7 @@ loaded entities using the queries:
 	...
 	| ?- lgtdoc::all([xmldir('$LOGTALKUSER/library/docs')]).
 
-4. Run the command `lgt2html` on the "library" directory inside your
-`$LOGTALKUSER/library/docs` to generate (X)HTML documentation or the
-command `lgt2pdf` to generate PDF documentation. After generating the
-(X)HTML and/or PDF documentation, you can delete the generated XML files.
+4. Run the command `lgt2html` on the `$LOGTALKUSER/library/docs` directory
+to generate (X)HTML documentation or the command `lgt2pdf` to generate PDF
+documentation.  After generating the (X)HTML and/or PDF documentation, you
+can delete the generated XML files.

@@ -71,7 +71,7 @@ scripts.
 Tools
 -----
 
-* ADDED: Basic XHTML documentation of the provided programming tools.
+* ADDED: Basic XHTML documentation for the provided programming tools.
 
 * FIXED: The `profiler` tool now works with the profiling support found in
 recent SICStus Prolog 4 versions (tested with version 4.2.3).
