@@ -22,13 +22,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- protocol(profilerp).
 
 	:- info([
-		version is 1.0,
+		version is 1.01,
 		author is 'Paulo Moura',
-		date is 2010/10/20,
+		date is 2013/01/11,
 		comment is 'Simple wrapper protocol for Prolog native profilers.']).
 
 	:- public(load/1).
@@ -40,7 +39,7 @@
 	:- public(load/2).
 	:- mode(load(@file, @list), zero_or_one).
 	:- info(load/2, [
-		comment is 'Compiles and loads a Logtalk source file for profiling.',
+		comment is 'Compiles and loads a Logtalk source file for profiling using a set of options.',
 		argnames is ['File', 'Options']]).
 
 	:- public(profile/1).
