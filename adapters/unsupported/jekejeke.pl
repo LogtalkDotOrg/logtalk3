@@ -3,8 +3,8 @@
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
-%  Adapter file for Jekejeke Prolog 0.8.9 (and later versions)
-%  Last updated on December 7, 2012
+%  Adapter file for Jekejeke Prolog 0.9.7 (and later versions)
+%  Last updated on January 24, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -69,10 +69,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% setup_call_cleanup(+callable, +callable, +callable)
-
-setup_call_cleanup(_, _, _) :-
-	throw(not_supported(setup_call_cleanup/3)).
+% setup_call_cleanup(+callable, +callable, +callable) -- built-in
 
 
 % forall(+callable, +callable)
@@ -142,7 +139,7 @@ forall(Generate, Test) :-
 '$lgt_prolog_feature'(prolog_dialect, jekejeke).
 '$lgt_prolog_feature'(prolog_version, (Major, Minor, Patch)) :-
 	catch(current_prolog_flag(version_data, gprolog(Major, Minor, Patch, _)), _, fail).
-'$lgt_prolog_feature'(prolog_compatible_version, @>=((0,8,8))).
+'$lgt_prolog_feature'(prolog_compatible_version, @>=((0,9,7))).
 
 '$lgt_prolog_feature'(encoding_directive, supported).
 '$lgt_prolog_feature'(tabling, unsupported).
@@ -372,8 +369,8 @@ forall(Generate, Test) :-
 
 % '$lgt_stream_current_line_number'(@stream, -integer)
 
-'$lgt_stream_current_line_number'(_, _) :-
-	fail.
+'$lgt_stream_current_line_number'(Stream, Line) :-
+	stream_property(Stream, line_no(Line)).
 
 
 
@@ -387,8 +384,10 @@ forall(Generate, Test) :-
 
 % '$lgt_read_term'(@stream, -term, +list, -position)
 
-'$lgt_read_term'(Stream, Term, Options, -1) :-
-	read_term(Stream, Term, Options).
+'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd) :-
+	stream_property(Stream, line_no(LineBegin)),
+	read_term(Stream, Term, Options),
+	stream_property(Stream, line_no(LineEnd)).
 
 
 

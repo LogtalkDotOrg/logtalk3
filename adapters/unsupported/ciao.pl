@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Ciao Prolog 1.14.0
-%  Last updated on December 7, 2012
+%  Last updated on January 23, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -558,7 +558,13 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 	).
 
 
+'$lgt_ciao_directive_expansion'(data(PIs), data(CPIs)) :-
+	logtalk_load_context(entity_type, _),
+	'$lgt_compile_predicate_indicators'(PIs, CPIs).
 '$lgt_ciao_directive_expansion'(imports(Module, Imports), uses(Module, Imports)).
+'$lgt_ciao_directive_expansion'(meta_predicate(Template), meta_predicate(CTemplate)) :-
+	logtalk_load_context(entity_type, _),
+	'$lgt_ciao_directive_meta_predicate'(Template, CTemplate).
 '$lgt_ciao_directive_expansion'(module(Module, Exports, []), module(Module, Exports)) :-
 	(	var(Module) ->		% module name taken from file name
 		'$lgt_ciao_find_module_name'(Module)
@@ -569,6 +575,9 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 		'$lgt_ciao_find_module_name'(Module)
 	;	true
 	).
+'$lgt_ciao_directive_expansion'(prop(PIs), prop(CPIs)) :-
+	logtalk_load_context(entity_type, _),
+	'$lgt_compile_predicate_indicators'(PIs, CPIs).
 
 
 '$lgt_ciao_find_module_name'(Module) :-
@@ -578,6 +587,26 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 	extension(File, '.lgt'),
 	basename(File, Module),
 	!.
+
+
+'$lgt_ciao_directive_meta_predicate'(Template, CTemplate) :-
+	functor(Template, Functor, Arity),
+	'$lgt_compile_predicate_indicators'(Functor, Arity, CFunctor, CArity),
+	Template =.. [Functor| Args],
+	'$lgt_ciao_directive_meta_predicate_args'(Args, CArgs),
+	CTemplate =.. [CFunctor| CArgs].
+
+'$lgt_ciao_directive_meta_predicate_args'([], []).
+'$lgt_ciao_directive_meta_predicate_args'([Arg| Args], [CArg| CArgs]) :-
+	'$lgt_ciao_directive_meta_predicate_arg'(Arg, CArg),
+	'$lgt_ciao_directive_meta_predicate_args'(Args, CArgs).
+
+'$lgt_ciao_directive_meta_predicate_arg'(clause, ::).
+'$lgt_ciao_directive_meta_predicate_arg'(fact, ::).
+'$lgt_ciao_directive_meta_predicate_arg'(goal, 0).
+'$lgt_ciao_directive_meta_predicate_arg'(+, *).
+'$lgt_ciao_directive_meta_predicate_arg'(?, *).
+'$lgt_ciao_directive_meta_predicate_arg'(-, *).
 
 
 % '$lgt_prolog_goal_expansion'(@callable, -callable)
