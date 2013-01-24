@@ -33,7 +33,7 @@
 	:- multifile(logtalk::message_prefix_stream/4).
 	:- dynamic(logtalk::message_prefix_stream/4).
 
-	% Quintus Prolog based (also SICStus Prolog):
+	% Quintus Prolog based prefixes (also used in SICStus Prolog):
 	logtalk::message_prefix_stream(banner, core, '', user_output).
 	logtalk::message_prefix_stream(banner(_), core, '', user_output).
 	logtalk::message_prefix_stream(information, core, '% ', user_output).
@@ -355,6 +355,8 @@
 		;	% both compilation and loading warnings
 			loading_warnings(LCounter), [' and '-[]], compilation_warnings(CCounter), [nl]
 		).
+
+	% auxiliary grammar rules
 
 	loading_warnings(LCounter) -->
 		(	{LCounter =:= 1} ->
