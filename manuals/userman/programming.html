@@ -165,7 +165,7 @@ Another example of directives that are often used in a loader file would be <cod
 </p>
 <pre>:- initialization((
     set_logtalk_flag(underscore_variables, dont_care),
-    set_logtalk_flag(xmlspec, xsd),
+    set_logtalk_flag(source_data, off),
     logtalk_load(
         [source1, source2, source3],
         [portability(warning)]),               % source file-specific flags
@@ -179,7 +179,7 @@ To take the best advantage of loader files, assert a clause to the dynamic predi
 <p>
 A common mistake is to try to set compiler options using <code>logtalk_load/2</code> with a loader file. For example, by writing:
 </p>
-<pre>| ?- logtalk_load(loader, [xmlspec(xsd), xslfile('lgtxhtml.xsl')]).</pre>
+<pre>| ?- logtalk_load(loader, [underscore_variables(dont_care), source_data(off)]).</pre>
 <p>
 This will not work as you might expect as the compiler options will only be used in the compilation of the <code>loader.lgt</code> file itself and will not affect the compilation of files loaded through the <code>initialization/1</code> directive contained on the loader file.	
 </p>
@@ -699,7 +699,7 @@ When objects or categories containing grammar rules are compiled in debug mode, 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: December 7, 2012</span>
+		<span>Last updated on: January 25, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="installing.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="migration.html">next</a></span><br/>
