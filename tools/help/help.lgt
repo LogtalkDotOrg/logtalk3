@@ -25,9 +25,9 @@
 :- object(help).
 
 	:- info([
-		version is 0.7,
+		version is 0.71,
 		author is 'Paulo Moura',
-		date is 2012/10/19,
+		date is 2013/01/25,
 		comment is 'Command-line help for Logtalk built-in control constructs, predicates, non-terminals, and methods.']).
 
 	:- initialization((nl, write('For help on Logtalk, type help::help.'), nl)).
@@ -218,6 +218,7 @@
 	built_in_method(sender, 1, '/manuals/refman/methods/', 'sender1.html').
 	built_in_method(this, 1, '/manuals/refman/methods/', 'this1.html').
 
+	built_in_method(current_op, 3, '/manuals/refman/methods/', 'current_op3.html').
 	built_in_method(current_predicate, 1, '/manuals/refman/methods/', 'current_predicate1.html').
 	built_in_method(predicate_property, 2, '/manuals/refman/methods/', 'predicate_property2.html').
 
