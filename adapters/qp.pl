@@ -3,7 +3,7 @@
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
-%  Adapter file for Qu-Prolog 8.12 and later versions
+%  Adapter file for Qu-Prolog 9.0 and later versions
 %  Last updated on December 26, 2012
 %
 %  This program is free software: you can redistribute it and/or modify
@@ -228,7 +228,7 @@ format_spec_('~', Stream, Arguments, Arguments) :-
 '$lgt_prolog_feature'(prolog_dialect, qp).
 '$lgt_prolog_feature'(prolog_version, (Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, qp(Major, Minor, Patch, _)).
-'$lgt_prolog_feature'(prolog_compatible_version, @>=((8,12,0))).
+'$lgt_prolog_feature'(prolog_compatible_version, @>=((9,0,0))).
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
 '$lgt_prolog_feature'(tabling, unsupported).

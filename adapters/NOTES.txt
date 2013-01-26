@@ -150,12 +150,15 @@ Lean Prolog 3.7.10 and later versions
 	The support for this Prolog compiler is still experimental.
 
 
-Qu-Prolog 8.12 and later versions
+Qu-Prolog 9.0 and later versions
 
 	qp.pl
 
-	Know issue in Qu-Prolog 8.12: this version doesn't support static multifile
-	predicates. This limitation may be fixed in later versions.
+	Know issues in Qu-Prolog 9.0: (1) this version doesn't support static
+	multifile predicates. This limitation may be fixed in later versions;
+	(2) a bug in the Windows version of Qu-Prolog in the expansion of file
+	paths containing environment variables prevents using it with Logtalk
+	in this operating-system.
 
 	Written and tested with the help of Peter Robinson.
 

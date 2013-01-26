@@ -28,7 +28,10 @@ RELEASE NOTES
 3.00.0 Beta 1 - February 9, 2013
 ================================
 
+Prolog adapter and integration files
+------------------------------------
 
+* CHANGED: Qu-Prolog 9.0 is now required.
 
 
 3.00.0 Alpha 8 - January 18, 2013
