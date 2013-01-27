@@ -204,7 +204,7 @@ This allows us to load a library source file without the need to first change th
 The best way to take advantage of this feature is to load at startup a source file containing an <code>initialization/1</code> directive which asserts all the <code>logtalk_library_path/2</code> clauses needed for all available libraries. This allows us to load library source files or entire libraries without worrying about libraries paths, improving code portability. The directory paths on the second argument <strong>must</strong> always end with the path directory separator character. Most back-end Prolog compilers allows the use of environment variables in the second argument of the <code>logtalk_library_path/2</code> predicate. Use of POSIX relative paths (e.g. <code>'../'</code> or <code>'./'</code>) for top-level library directories (e.g. <code>lgtuser</code> in the example above) is not advised as different back-end Prolog compilers may start with different initial working directories, which may result in portability problems of your loader files.
 </p>
 <p>
-Unfortunately, a few Prolog compilers do not support the <code>&lt;library&gt;(&lt;source file&gt;)</code> notation. In this case, you will need to set the working directory to be the one that contains the source file in order to load it. The library notation provides functionality similar to the <code>file_search_path/2</code> mechanism introduced by Quintus Prolog and later adopted by some other Prolog compilers.
+The library notation provides functionality inspired by the <code>file_search_path/2</code> mechanism introduced by Quintus Prolog and later adopted by some other Prolog compilers.
 </p>
 
 <h3 id="programming_flags">Compiler flags</h3>
@@ -699,7 +699,7 @@ When objects or categories containing grammar rules are compiled in debug mode, 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: January 25, 2013</span>
+		<span>Last updated on: January 27, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="installing.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="migration.html">next</a></span><br/>

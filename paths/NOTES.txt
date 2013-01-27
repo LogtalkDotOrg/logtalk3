@@ -41,4 +41,4 @@ When manually loading Logtalk (instead of using the provided integration
 scripts and shortcuts), you will need to load the `paths.pl` into your
 Prolog compiler before loading the Logtalk compiler/runtime to ensure
 Logtalk proper startup and to easily compile and load library and example
-source files using the notation `<library>(<entity>)`.
+source files using the notation `<library>(<file>)`.
