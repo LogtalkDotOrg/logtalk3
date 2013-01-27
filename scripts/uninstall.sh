@@ -67,7 +67,6 @@ rm -rf $directory
 rm -f logtalk
 cd ../bin
 rm -f bplgt
-rm -f logtalk_user_setup
 rm -f cxlgt
 rm -f eclipselgt
 rm -f gplgt
@@ -75,8 +74,10 @@ rm -f lgt2html
 rm -f lgt2pdf
 rm -f lgt2xml
 rm -f lgt2txt
-rm -f logtalk_version_select
 rm -f logtalk_backend_select
+rm -f logtalk_tester
+rm -f logtalk_user_setup
+rm -f logtalk_version_select
 rm -f lplgt
 rm -f qplgt
 rm -f sicstuslgt
@@ -95,6 +96,7 @@ rm -f lgt2pdf.1.gz
 rm -f lgt2txt.1.gz
 rm -f lgt2xml.1.gz
 rm -f logtalk_backend_select.1.gz
+rm -f logtalk_tester.1.gz
 rm -f logtalk_user_setup.1.gz
 rm -f logtalk_version_select.1.gz
 rm -f lplgt.1.gz

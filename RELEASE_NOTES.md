@@ -33,6 +33,12 @@ Prolog adapter and integration files
 
 * CHANGED: Qu-Prolog 9.0 is now required.
 
+Installers and installation scripts
+-----------------------------------
+
+* FIXED: The `uninstall.sh` POSIX shell script failed to delete some installed
+script symbolic links and man pages.
+
 
 3.00.0 Alpha 8 - January 18, 2013
 =================================
