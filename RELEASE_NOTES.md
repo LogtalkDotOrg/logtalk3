@@ -28,6 +28,12 @@ RELEASE NOTES
 3.00.0 Beta 1 - February 9, 2013
 ================================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Abolishing a dynamic category that complements an object would fail
+to update the internal runtime table of complemented objects.
+
 Prolog adapter and integration files
 ------------------------------------
 
