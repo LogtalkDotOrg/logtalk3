@@ -35,7 +35,7 @@
 <h1 id="documenting_documenting">Documenting Logtalk programs</h1>
 
 <p>
-Logtalk automatically generates a documentation file for each compiled entity (object, protocol, or category) in <a href="http://www.w3.org/XML/">XML</a> format. Contents of the XML file include the entity name, type, and compilation mode (static or dynamic), the entity relations with other entities, and a description of any declared predicates (name, compilation mode, scope, ...).
+By setting the compiler flag <code>source_data</code>, Logtalk saves documenting information when compiling a source file. The provided <code>lgtdoc</code> tool can access this information by using Logtalk's reflection support and generate a documentation file for each compiled entity (object, protocol, or category) in <a href="http://www.w3.org/XML/">XML</a> format. Contents of the XML file include the entity name, type, and compilation mode (static or dynamic), the entity relations with other entities, and a description of any declared predicates (name, compilation mode, scope, ...).
 </p>
 <p>
 The XML documentation files can be enriched with arbitrary user-defined information, either about an entity or about its predicates, by using the two directives described below.
@@ -152,13 +152,13 @@ The Logtalk DTD file, <code>logtalk.dtd</code>, contains a reference to a user-c
 The entity references are replaced by the value of the corresponding XML entity when the XML documenting files are processed (<strong>not</strong> when they are generated; this notation is just a shortcut to take advantage of XML entities).
 </p>
 <p>
-There is a set of compilers options, used with the Logtalk <a title="Consult reference manual" href="../refman/builtins/logtalk_load2.html"><code>logtalk_load/2</code></a> or the <a title="Consult reference manual" href="../refman/builtins/logtalk_compile2.html"><code>logtalk_compile/2</code></a> built-in predicates, that can be used to control the generation of the XML documentation files. Please see the <a href="programming.html#options">Running Logtalk</a> section of this manual for details.
+The <code>lgtdoc</code> tool supports a set of options that can be used to control the generation of the XML documentation files. Please see the tool documentation for details.
 </p>
 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: October 26, 2006</span>
+		<span>Last updated on: January 29, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="errors.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="installing.html">next</a></span><br/>
