@@ -930,7 +930,13 @@ create_category(Ctg, Relations, Directives, Clauses) :-
 	'$lgt_gen_category_directives',
 	'$lgt_assert_tr_entity',
 	'$lgt_restore_global_operator_table',
-	'$lgt_clean_pp_clauses'.
+	'$lgt_clean_pp_clauses',
+	% complementing categories can invalidate dynamic binding cache entries
+	(	'$lgt_member'(Relation, Relations),
+		 functor(Relation, complements, _) ->
+		'$lgt_clean_lookup_caches'
+	;	true
+	).
 
 
 
