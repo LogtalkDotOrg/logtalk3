@@ -31,6 +31,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* FIXED: Predicate property `defined_in/2` failed to return the line for the
+first clause of a coinductive predicate.
+
 * FIXED: Disable static binding for messages to objects compiled with support
 for complementing categories enabled, thus avoiding possible inconsistencies
 when hot patching is used with unpatched resources already in use.

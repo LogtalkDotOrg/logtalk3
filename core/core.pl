@@ -8308,6 +8308,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	% not the first clause, i.e. auxiliary clause already compiled
 	'$lgt_pp_defines_predicate_'(Functor, Arity, _, _),
 	!,
+	'$lgt_comp_ctx_prefix'(HeadCtx, Prefix),
+	'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
+	functor(THead, TFunctor, TArity),
+	'$lgt_clause_number'(THead, N),
+	'$lgt_update_predicate_line_clauses_property'(N, Head),
 	'$lgt_tr_clause'((CoinductiveHead :- Body), TClause, DClause, HeadCtx, BodyCtx).
 
 '$lgt_tr_clause'((Head:-Body), (THead:-'$lgt_nop'(Body), SBody), (THead:-'$lgt_nop'(Body),'$lgt_debug'(rule(Entity, DHead, N), ExCtx),DBody), HeadCtx, BodyCtx) :-
@@ -8442,9 +8447,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 			functor(Head, Functor, Arity),
 			(	retract('$lgt_pp_entity_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/Arity, lines_clauses(DclLine,_,_)))) ->
 				% already found the predicate declaration line; add the predicate definition line
-				assertz('$lgt_pp_entity_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/Arity, lines_clauses(DclLine,DefLine, _))))
+				assertz('$lgt_pp_entity_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/Arity, lines_clauses(DclLine,DefLine,_))))
 			;	% no predicate declaration in the entity being compiled
-				assertz('$lgt_pp_entity_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/Arity, lines_clauses(-1,DefLine, _))))
+				assertz('$lgt_pp_entity_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/Arity, lines_clauses(-1,DefLine,_))))
 			)
 		)
 	;	true
