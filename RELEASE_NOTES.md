@@ -31,6 +31,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* FIXED: Disable static binding for messages to objects compiled with support
+for complementing categories enabled, thus avoiding possible inconsistencies
+when hot patching is used when unpatched resources are already in use.
+
 * FIXED: Abolishing a dynamic category that complements an object would fail
 to update the internal runtime table of complemented objects.
 

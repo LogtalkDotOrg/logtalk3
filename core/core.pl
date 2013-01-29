@@ -12074,9 +12074,13 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_complements_category'([Obj| _], Ctg, _, _, _) :-
 	\+ '$lgt_compiler_flag'(report, off),
 	once((	'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags)
+			% loaded object
 		;	'$lgt_pp_file_runtime_clause_'('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags))
+			% object being redefined in the same file as the complementing category;
+			% possible but unlikely in practice (except, maybe, in classroom examples)
 	)),
 	Flags /\ 32 =\= 32,
+	% object compiled with complementing categories support disabled
 	'$lgt_increment_compile_warnings_counter',
 	'$lgt_pp_file_path_flags_'(File, Directory, _),
 	atom_concat(Directory, File, Path),
@@ -17556,12 +17560,21 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 % '$lgt_send_to_obj_static_binding'(@object_identifier, @callable, @object_identifier -callable)
+%
+% static binding is only used for the (::)/2 control construct when the object receiving the
+% message is final and the support for complementing categories is disallowed (unfortunately,
+% allowing hot patching of a final object would easily lead to inconsistencies as there isn't
+% any portable solution for updating in-place the definition of patched object predicates that
+% were already directly called due to the previou use of static binding)
 
 '$lgt_send_to_obj_static_binding'(Obj, Pred, Sender, Call) :-
 	(	'$lgt_send_to_obj_static_binding_'(Obj, Pred, Sender, Call) ->
 		true
 	;	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, _, _, _, ObjFlags),
 		ObjFlags /\ 1 =:= 1,
+		% object is final
+		ObjFlags /\ 32 =\= 32,
+		% support for complementing categories is disallowed
 		call(Dcl, Pred, p(p(p)), Meta, PredFlags, _, DclCtn), !,
 		'$lgt_term_template'(Obj, GObj),
 		'$lgt_term_template'(Pred, GPred),
@@ -17624,6 +17637,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 % '$lgt_ctg_call_static_binding'(@object_identifier, @callable, @execution_context -callable)
+%
+% static binding for the (:)/2 control construct
 
 '$lgt_ctg_call_static_binding'(Obj, Alias, ExCtx, Call) :-
 	% when working with parametric entities, we must connect the parameters
@@ -17647,6 +17662,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 % '$lgt_obj_super_call_static_binding'(@object_identifier, @callable, @execution_context -callable)
+%
+% static binding for the (^^)/1 control construct (used within objects)
 
 '$lgt_obj_super_call_static_binding'(Obj, Pred, ExCtx, Call) :-
 	(	'$lgt_pp_extended_object_'(_, _, _, _, _, _, _, _, _, _) ->
@@ -17785,6 +17802,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 % '$lgt_ctg_super_call_static_binding'(@category_identifier, @callable, @execution_context -callable)
+%
+% static binding for the (^^)/1 control construct (used within categories)
 
 '$lgt_ctg_super_call_static_binding'(Ctg, Alias, ExCtx, Call) :-
 	% when working with parametric entities, we must connect the parameters

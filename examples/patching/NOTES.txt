@@ -15,9 +15,10 @@ category to patch broken object predicate declarations and definitions
 (without modifying its source code), thus providing functionality similar
 to Objective-C categories.
 
-The complemented objects need to be compiled with the flag "complements" 
-set to "allow" (its default value is "deny"). This solution was adapted
-to improve performance of applications that doesn't use complementing
-categories and to provide a solution for preventing the use of categories
-to break object encapsulation. Note that the "complements" flag can be
-set on a per-object basis by using the set_logtalk_flag/2 directive.
+The complemented objects must be compiled with the flag "complements" set
+to "allow" (its default value is usually "deny") and the flag "reload" set
+to "always". This solution was adapted to improve performance of applications
+that don't make use complementing categories and to provide a solution for
+preventing the use of categories to break object encapsulation. Note that
+the "complements" flag can be set on a per-object basis by using the
+set_logtalk_flag/2 directive.
