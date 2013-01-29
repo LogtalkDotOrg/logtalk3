@@ -8339,7 +8339,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		DHead = Head,
 		'$lgt_clause_number'(THead, N)
 	),
-	'$lgt_comp_ctx_exec_ctx'(HeadCtx, ExCtx).
+	'$lgt_comp_ctx_exec_ctx'(HeadCtx, ExCtx),
+	'$lgt_update_predicate_line_clauses_property'(N, Head).
 
 '$lgt_tr_clause'((Head:-Body), TClause, (THead:-'$lgt_debug'(rule(Entity, DHead, N), ExCtx),DBody), HeadCtx, BodyCtx) :-
 	!,
