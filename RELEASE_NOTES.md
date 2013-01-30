@@ -31,6 +31,15 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* NEW: Handler for unknown messages, `forward/1`, declared in the `forwarding`
+built-in protocol. This predicate is automatically called by the runtime when
+a message sent using the `::/2` control construct is not understood by the
+receiving object and is usually used to forward the message to another object.
+
+* NEW: Delegation control construct, `[]/1`, allowing sending a message to an
+object while preserving the original sender. Its argument must be a call to
+the `::/2` control construct.
+
 * FIXED: Predicate property `defined_in/2` failed to return the line for the
 first clause of a coinductive predicate.
 
