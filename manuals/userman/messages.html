@@ -57,11 +57,21 @@ It is assumed that these operators remain active (once the Logtalk compiler and 
 <h2 id="messages_sending">Sending a message to an object</h2>
 
 <p>
-Sending a message to an object is accomplished by using the <a title="Consult reference manual" href="../refman/control/to_object2.html"><code>::/2</code></a> infix  operator:
+Sending a message to an object is accomplished by using the <a title="Consult reference manual" href="../refman/control/to_object2.html"><code>::/2</code></a> infix operator:
 </p>
 <pre>| ?- Object::Message.</pre>
 <p>
 The message must match a public predicate declared for the receiving object or a Logtalk/Prolog built-in predicate (the message may also correspond to a protected or private predicate if the <em>sender</em> matches the predicate scope container). The Logtalk and Prolog built-in predicates are implicitly declared as object public predicates (unless redefined inside an object). However, Logtalk and Prolog built-in meta-predicates cannot be used as messages. Care should be taken when using Prolog built-in predicates as messages as different Prolog compilers provide different sets of built-in predicates.
+</p>
+
+<h2 id="messages_delegating">Delegating a message to an object</h2>
+
+<p>
+It is also possible to send a message to an object while preserving the original <em>sender</em> by using the <a title="Consult reference manual" href="../refman/control/delegate1.html"><code>[]/2</code></a> delegation control construct:
+</p>
+<pre>..., [Object::Message], ....</pre>
+<p>
+This control construct can only be used within objects and categories (at the interpreter top-level, the <em>sender</em> is always the pseudo-object <em>user</em> so using this control construct would be equivalent to use the <code>::/2</code> message sending control construct).
 </p>
 
 <h2>Sending a message to <em>self</em><a id="messages_self"></a></h2>
@@ -222,7 +232,7 @@ It should be stressed that message sending is only one of the factors affecting 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: June 30, 2009</span>
+		<span>Last updated on: January 30, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="nomenclature.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="objects.html">next</a></span><br/>
