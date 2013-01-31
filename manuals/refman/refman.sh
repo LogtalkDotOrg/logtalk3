@@ -163,6 +163,7 @@ eval $xslt_proc -o control/super1.section refman.xsl control/super1.html
 eval $xslt_proc -o control/external1.section refman.xsl control/external1.html
 eval $xslt_proc -o control/context2.section refman.xsl control/context2.html
 eval $xslt_proc -o control/direct1.section refman.xsl control/direct1.html
+eval $xslt_proc -o control/delegate1.section refman.xsl control/delegate1.html
 
 cat -s \
 	refman.header \
@@ -288,6 +289,7 @@ cat -s \
 	control/external1.section \
 	control/context2.section \
 	control/direct1.section \
+	control/delegate1.section \
 	refman.footer \
 	> refman.html
 
