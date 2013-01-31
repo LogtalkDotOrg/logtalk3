@@ -15380,6 +15380,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		Scope = p,
 		Meta = '::'(0)
 	).
+'$lgt_built_in_method'('.', 2, p, [(::)], 1).
 '$lgt_built_in_method'((^^), 1, p, '^^'(0), 1).
 '$lgt_built_in_method'((<<), 2, p(p(p)), '<<'(*, 0), 1).
 '$lgt_built_in_method'((>>), 2, p, '>>'(*, 0), 1).
