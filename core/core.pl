@@ -3849,6 +3849,33 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		throw(error(type_error(object_identifier, Obj), logtalk(Call, This)))
 	).
 
+'$lgt_metacall'([Obj::Closure], ExtraArgs, _, _, Sender, This, _) :-
+	!,
+	(	callable(Obj), callable(Closure), Obj \= Sender ->
+		Closure =.. [Functor| Args],
+		'$lgt_append'(Args, ExtraArgs, FullArgs),
+		Goal =.. [Functor| FullArgs],
+		(	'$lgt_current_object_'(Sender, _, _, _, _, _, _, _, _, _, Flags), Flags /\ 16 =:= 16 ->
+			'$lgt_send_to_obj_'(Obj, Goal, Sender)
+		;	'$lgt_send_to_obj_ne_'(Obj, Goal, Sender)
+		)
+	;	var(Obj) ->
+		Call =.. [call, [Obj::Closure]| ExtraArgs],
+		throw(error(instantiation_error, logtalk(Call, This)))
+	;	var(Closure) ->
+		Call =.. [call, [Obj::Closure]| ExtraArgs],
+		throw(error(instantiation_error, logtalk(Call, This)))
+	;	\+ callable(Closure) ->
+		Call =.. [call, [Obj::Closure]| ExtraArgs],
+		throw(error(type_error(callable, Closure), logtalk(Call, This)))
+	;	\+ callable(Obj) ->
+		Call =.. [call, [Obj::Closure]| ExtraArgs],
+		throw(error(type_error(object_identifier, Obj), logtalk(Call, This)))
+	;	% Obj = Sender ->
+		Call =.. [call, [Obj::Closure]| ExtraArgs],
+		throw(error(permission_error(access, object, Sender), logtalk(Call, This)))
+	).
+
 '$lgt_metacall'(Obj<<Closure, ExtraArgs, MetaCallCtx, _, Sender0, This, _) :-
 	!,
 	(	\+ '$lgt_member'(Obj<<Closure, MetaCallCtx) ->
