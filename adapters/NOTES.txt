@@ -119,7 +119,8 @@ GNU Prolog 1.4.1 and later versions
 		| ?- logtalk_compile([
 			logtalk_home('core/core_messages'),
 			logtalk_home('core/expanding'),
-			logtalk_home('core/monitoring')],
+			logtalk_home('core/monitoring'),
+			logtalk_home('core/forwarding')],
 			[scratch_directory('$HOME/collect')]).
 
 		$ cp $LOGTALKHOME/adapters/gnu.pl $HOME/collect/gnu.pl
@@ -130,7 +131,7 @@ GNU Prolog 1.4.1 and later versions
 	the top. Then:
 
 		$ cd $HOME/collect
-		$ gplc -o logtalk gnu.pl paths.pl core_messages.pl expanding.pl monitoring.pl core.pl
+		$ gplc -o logtalk gnu.pl paths.pl core_messages.pl expanding.pl monitoring.pl forwarding.pl core.pl
 
 	Finally, move the new executable to a directory in your system PATH.
 	For example:
