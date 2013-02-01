@@ -8533,13 +8533,14 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 % redefinition of Logtalk built-in methods
-% (note that ::/2 and :/2 can be used in a clause head when defining multifile predicates)
 
 '$lgt_tr_head'(Head, _, _) :-
 	'$lgt_built_in_method'(Head, _, _, Flags),
 	Head \= _::_,
 	Head \= ':'(_, _),
-	Flags /\ 2 =\= 2,	% static built-in predicate
+	% not a clause head for a multifile predicate
+	Flags /\ 2 =\= 2,
+	% not a (user defined) dynamic built-in predicate
 	functor(Head, Functor, Arity),
 	throw(permission_error(modify, built_in_method, Functor/Arity)).
 
@@ -12601,7 +12602,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % generates code for the entity being compiled
 
 '$lgt_generate_code'(protocol) :-
-	'$lgt_fix_predicate_calls',		% necessary because of possible initialization goal
+	% protocols may contain initialization directives
+	'$lgt_fix_predicate_calls',
 	'$lgt_gen_protocol_clauses',
 	'$lgt_gen_protocol_directives',
 	'$lgt_gen_entity_initialization_goal'.
