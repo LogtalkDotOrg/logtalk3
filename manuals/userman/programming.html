@@ -235,11 +235,13 @@ yes</pre>
 Logtalk also implements a <a title="Consult reference manual" href="../refman/directives/set_logtalk_flag2.html"><code>set_logtalk_flag/2</code></a> directive, which can be used to set flags within a source file or within an entity. For example:
 </p>
 <pre>
-:- set_logtalk_flag(events, allow).                      % compile all objects in the source file with event support
+% compile all objects in the source file with event support
+:- set_logtalk_flag(events, allow).
 
 :- object(foo).
 
-    :- set_logtalk_flag(dynamic_declarations, allow).    % compile this object with support for dynamic predicate declarations
+    % compile this object with support for dynamic predicate declarations
+    :- set_logtalk_flag(dynamic_declarations, allow).
     ...
 
 :- end_object.
@@ -699,7 +701,7 @@ When objects or categories containing grammar rules are compiled in debug mode, 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: January 27, 2013</span>
+		<span>Last updated on: January 30, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="installing.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="migration.html">next</a></span><br/>

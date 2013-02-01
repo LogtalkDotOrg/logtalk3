@@ -196,7 +196,7 @@ db_update(Update) :-            % predicate with side-effects
 <p>
 A second example: assume an object defining two predicates for writing, respectively, even and odd numbers in a given interval to the standard output. Given a large interval, a goal such as:
 </p>
-<pre>| ?- threaded_call(obj::odd_numbers(1,1000)), threaded_call(obj::even_numbers(1,1000)).
+<pre>| ?- threaded_call(obj::odd_numbers(1,100)), threaded_call(obj::even_numbers(1,100)).
 
 1 3 2 4 6 8 5 7 10 ...
 ...
@@ -211,7 +211,7 @@ will most likely result in a mixed up output. By declaring the <code>odd_numbers
 <p>
 one goal will only start after the other one finished:
 </p>
-<pre>| ?- threaded_ignore(obj::odd_numbers(1,1000)), threaded_ignore(obj::even_numbers(1,1000)).
+<pre>| ?- threaded_ignore(obj::odd_numbers(1,100)), threaded_ignore(obj::even_numbers(1,100)).
 
 1 3 5 7 9 11 ...
 ...
@@ -266,7 +266,7 @@ The performance of multi-threading applications is highly dependent on the back-
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: October 20, 2008</span>
+		<span>Last updated on: January 30, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="events.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="errors.html">next</a></span><br/>
