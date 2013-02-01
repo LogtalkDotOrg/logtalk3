@@ -161,10 +161,10 @@ eval $xslt_proc -o methods/goal_expansion2.section refman.xsl methods/goal_expan
 eval $xslt_proc -o control/to_object2.section refman.xsl control/to_object2.html
 eval $xslt_proc -o control/to_self1.section refman.xsl control/to_self1.html
 eval $xslt_proc -o control/super1.section refman.xsl control/super1.html
+eval $xslt_proc -o control/delegate1.section refman.xsl control/delegate1.html
 eval $xslt_proc -o control/external1.section refman.xsl control/external1.html
 eval $xslt_proc -o control/context2.section refman.xsl control/context2.html
 eval $xslt_proc -o control/direct1.section refman.xsl control/direct1.html
-eval $xslt_proc -o control/delegate1.section refman.xsl control/delegate1.html
 
 cat -s \
 	refman.header \
@@ -288,10 +288,10 @@ cat -s \
 	control/to_object2.section \
 	control/to_self1.section \
 	control/super1.section \
+	control/delegate1.section \
 	control/external1.section \
 	control/context2.section \
 	control/direct1.section \
-	control/delegate1.section \
 	refman.footer \
 	> refman.html
 
