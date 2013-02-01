@@ -30,12 +30,15 @@ AUTHORS
 CONTRIBUTORS
 ============
 
+* Andreas Becker (PDT support for Logtalk)
 * Artur Miguel Dias (testing, lambda expression examples)
 * Clara Dimene (GeSHi syntax highlighter)
 * Daniel L. Dudley (made the ISO 8601 library object available)
 * Davide Ancona (coinduction examples)
+* Eva Stöwe (PDT support for Logtalk)
 * Feliks Kluzniak (coinduction examples and bug reports)
 * François Fages (meta-predicate safety bug reports)
+* Günter Kniesel (PDT support for Logtalk; feedback on Logtalk OOP features)
 * Gopal Gupta (coinduction examples)
 * Ivan Bratko (search methods in the state-space searching example)
 * Joerg Schuster (bug reports)
