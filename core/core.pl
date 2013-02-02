@@ -8853,9 +8853,15 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
 
 
-% send a message while preserving the original sender
+% message delegation (send a message while preserving the original sender)
+
+'$lgt_tr_body'([Goal], _, _, _) :-
+	'$lgt_must_be'(callable, Goal),
+	\+ functor(Goal, (::), 2),
+	throw(domain_error(message_sending_goal, Goal)).
 
 '$lgt_tr_body'([Obj::Pred], TPred, '$lgt_debug'(goal([Obj::Pred], TPred), ExCtx), Ctx) :-
+	!,
 	'$lgt_tr_msg'(Pred, Obj, TPred0, Sender),
 	TPred = (Obj \= Sender -> TPred0; throw(error(permission_error(access, object, Sender), logtalk([Obj::Pred], This)))),
 	'$lgt_comp_ctx_sender'(Ctx, Sender),
