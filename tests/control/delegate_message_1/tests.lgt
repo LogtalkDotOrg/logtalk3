@@ -33,7 +33,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/02/01,
+		date is 2013/02/02,
 		comment is 'Unit tests for the []/1 built-in control construct.'
 	]).
 
@@ -45,7 +45,13 @@
 		{delegate_message_test_object_2::q(X)},
 		X == user.
 
-	throws(delegate_message_1_3, error(permission_error(access, object, user), logtalk([user::foo], delegate_message_test_object_2))) :-
+	throws(delegate_message_1_3, error(instantiation_error, logtalk(logtalk<<[_], user))) :-
+		{logtalk << [_]}.
+
+	throws(delegate_message_1_4, error(type_error(callable, 1), logtalk(logtalk<<[1], user))) :-
+		{logtalk << [1]}.
+
+	throws(delegate_message_1_5, error(permission_error(access, object, user), logtalk([user::foo], delegate_message_test_object_2))) :-
 		{delegate_message_test_object_2::r}.
 
 :- end_object.
