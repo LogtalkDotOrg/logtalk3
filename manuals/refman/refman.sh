@@ -149,6 +149,7 @@ eval $xslt_proc -o methods/forall2.section refman.xsl methods/forall2.html
 eval $xslt_proc -o methods/setof3.section refman.xsl methods/setof3.html
 eval $xslt_proc -o methods/before3.section refman.xsl methods/before3.html
 eval $xslt_proc -o methods/after3.section refman.xsl methods/after3.html
+eval $xslt_proc -o methods/forward1.section refman.xsl methods/forward1.html
 eval $xslt_proc -o methods/call1.section refman.xsl methods/call1.html
 eval $xslt_proc -o methods/phrase1.section refman.xsl methods/phrase1.html
 eval $xslt_proc -o methods/phrase2.section refman.xsl methods/phrase2.html
@@ -160,6 +161,7 @@ eval $xslt_proc -o methods/goal_expansion2.section refman.xsl methods/goal_expan
 eval $xslt_proc -o control/to_object2.section refman.xsl control/to_object2.html
 eval $xslt_proc -o control/to_self1.section refman.xsl control/to_self1.html
 eval $xslt_proc -o control/super1.section refman.xsl control/super1.html
+eval $xslt_proc -o control/delegate1.section refman.xsl control/delegate1.html
 eval $xslt_proc -o control/external1.section refman.xsl control/external1.html
 eval $xslt_proc -o control/context2.section refman.xsl control/context2.html
 eval $xslt_proc -o control/direct1.section refman.xsl control/direct1.html
@@ -273,6 +275,7 @@ cat -s \
 	methods/setof3.section \
 	methods/before3.section \
 	methods/after3.section \
+	methods/forward1.section \
 	methods/call1.section \
 	methods/phrase1.section \
 	methods/phrase2.section \
@@ -285,6 +288,7 @@ cat -s \
 	control/to_object2.section \
 	control/to_self1.section \
 	control/super1.section \
+	control/delegate1.section \
 	control/external1.section \
 	control/context2.section \
 	control/direct1.section \

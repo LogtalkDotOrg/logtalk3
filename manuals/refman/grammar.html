@@ -822,21 +822,26 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 	</dl>
 	<dl>
 		<dt>goal ::=</dt>
-			<dd>message_call |</dd>
+			<dd>message_sending |</dd>
 			<dd>external_call |</dd>
 			<dd>direct_call |</dd>
-			<dd>context_call |</dd>
+			<dd>context_switching_call |</dd>
 			<dd><em>callable</em></dd>
 	</dl>
 	<dl>
-		<dt>message_call ::=</dt>
+		<dt>message_sending ::=</dt>
 			<dd>message_to_object |</dd>
+			<dd>message_delegation |</dd>
 			<dd>message_to_self |</dd>
 			<dd>message_to_super</dd>
 	</dl>
 	<dl>
 		<dt>message_to_object ::=</dt>
 			<dd>receiver "<code>::</code>" messages</dd>
+	</dl>
+	<dl>
+		<dt>message_delegation ::=</dt>
+			<dd>"<code>[</code>" message_to_object "<code>]</code>"</dd>
 	</dl>
 	<dl>
 		<dt>message_to_self ::=</dt>
@@ -873,7 +878,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 			<dd> "<code>:</code>" message</dd>
 	</dl>
 	<dl>
-		<dt>context_call ::=</dt>
+		<dt>context_switching_call ::=</dt>
 			<dd>object_identifier "<code>&lt;&lt;</code>" <em>goal</em></dd>
 	</dl>
 
@@ -1036,7 +1041,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: December 12, 2012</span>
+		<span>Last updated on: January 30, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="index.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="index.html">next</a></span><br/>

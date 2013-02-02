@@ -3461,6 +3461,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	% no predicate declaration, check if it's a built-in predicate
 		'$lgt_is_built_in_predicate'(Pred) ->
 		call(Pred)
+	;	call(Def, forward(Pred), ExCtx, Call, _, _) ->
+		'$lgt_exec_ctx'(ExCtx, Sender, Obj, Obj, [], []),
+		call(Call)
 	;	functor(Pred, Functor, Arity),
 		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(Obj::Pred, Sender)))
 	).
@@ -3581,6 +3584,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	% no predicate declaration, check if it's a built-in predicate
 		'$lgt_is_built_in_predicate'(Pred) ->
 		call(Pred)
+	;	call(Def, forward(Pred), ExCtx, Call, _, _) ->
+		'$lgt_exec_ctx'(ExCtx, Sender, Obj, Obj, [], []),
+		call(Call)
 	;	functor(Pred, Functor, Arity),
 		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(Obj::Pred, Sender)))
 	).
@@ -3841,6 +3847,33 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		throw(error(type_error(callable, Closure), logtalk(Call, This)))
 	;	Call =.. [call, Obj::Closure| ExtraArgs],
 		throw(error(type_error(object_identifier, Obj), logtalk(Call, This)))
+	).
+
+'$lgt_metacall'([Obj::Closure], ExtraArgs, _, _, Sender, This, _) :-
+	!,
+	(	callable(Obj), callable(Closure), Obj \= Sender ->
+		Closure =.. [Functor| Args],
+		'$lgt_append'(Args, ExtraArgs, FullArgs),
+		Goal =.. [Functor| FullArgs],
+		(	'$lgt_current_object_'(Sender, _, _, _, _, _, _, _, _, _, Flags), Flags /\ 16 =:= 16 ->
+			'$lgt_send_to_obj_'(Obj, Goal, Sender)
+		;	'$lgt_send_to_obj_ne_'(Obj, Goal, Sender)
+		)
+	;	var(Obj) ->
+		Call =.. [call, [Obj::Closure]| ExtraArgs],
+		throw(error(instantiation_error, logtalk(Call, This)))
+	;	var(Closure) ->
+		Call =.. [call, [Obj::Closure]| ExtraArgs],
+		throw(error(instantiation_error, logtalk(Call, This)))
+	;	\+ callable(Closure) ->
+		Call =.. [call, [Obj::Closure]| ExtraArgs],
+		throw(error(type_error(callable, Closure), logtalk(Call, This)))
+	;	\+ callable(Obj) ->
+		Call =.. [call, [Obj::Closure]| ExtraArgs],
+		throw(error(type_error(object_identifier, Obj), logtalk(Call, This)))
+	;	% Obj = Sender ->
+		Call =.. [call, [Obj::Closure]| ExtraArgs],
+		throw(error(permission_error(access, object, Sender), logtalk(Call, This)))
 	).
 
 '$lgt_metacall'(Obj<<Closure, ExtraArgs, MetaCallCtx, _, Sender0, This, _) :-
@@ -8636,6 +8669,21 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	fail.
 
 
+% definition of forward message handler without reference to the "forwarding" built-in protocol
+
+'$lgt_tr_head'(Head, _, _) :-
+	\+ '$lgt_compiler_flag'(report, off),
+	\+ '$lgt_pp_module_'(_),
+	functor(Head, forward, 1),
+	\+ '$lgt_pp_implemented_protocol_'(forwarding, _, _, _),
+	'$lgt_increment_compile_warnings_counter',
+	'$lgt_pp_entity'(Type, Entity, _, _, _),
+	'$lgt_pp_file_path_flags_'(File, Directory, _),
+	atom_concat(Directory, File, Path),
+	'$lgt_print_message'(warning(general), core, missing_reference_to_built_in_protocol(Path, Type, Entity, forwarding)),
+	fail.
+
+
 % translate the head of a clause of another entity predicate (which we assume declared multifile)
 
 '$lgt_tr_head'(Other::Head, _, _) :-
@@ -8804,6 +8852,23 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_must_be'(callable, Pred),
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
+
+
+% message delegation (send a message while preserving the original sender)
+
+'$lgt_tr_body'([Goal], _, _, _) :-
+	'$lgt_must_be'(callable, Goal),
+	\+ functor(Goal, (::), 2),
+	throw(domain_error(message_sending_goal, Goal)).
+
+'$lgt_tr_body'([Obj::Pred], TPred, '$lgt_debug'(goal([Obj::Pred], TPred), ExCtx), Ctx) :-
+	!,
+	'$lgt_tr_msg'(Pred, Obj, TPred0, Sender),
+	TPred = (Obj \= Sender -> TPred0; throw(error(permission_error(access, object, Sender), logtalk([Obj::Pred], This)))),
+	'$lgt_comp_ctx_sender'(Ctx, Sender),
+	'$lgt_comp_ctx_this'(Ctx, This),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	'$lgt_exec_ctx'(ExCtx, Sender, This, _, _, _).
 
 
 % goal expansion (only applied at compile time)
@@ -15323,6 +15388,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		Scope = p,
 		Meta = '::'(0)
 	).
+'$lgt_built_in_method'('.', 2, p, [(::)], 1).
 '$lgt_built_in_method'((^^), 1, p, '^^'(0), 1).
 '$lgt_built_in_method'((<<), 2, p(p(p)), '<<'(*, 0), 1).
 '$lgt_built_in_method'((>>), 2, p, '>>'(*, 0), 1).
@@ -18471,7 +18537,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_expand_library_path'(logtalk_user, LogtalkUserDirectory),
 	atom_concat(LogtalkUserDirectory, 'scratch/', ScratchDirectory),
 	logtalk_load(
-		[logtalk_home('core/core_messages'), logtalk_home('core/expanding'), logtalk_home('core/monitoring')],
+		[	logtalk_home('core/core_messages'), logtalk_home('core/expanding'),
+			logtalk_home('core/monitoring'), logtalk_home('core/forwarding')
+		],
 		[report(off), clean(on), reload(skip), scratch_directory(ScratchDirectory)]
 	).
 
