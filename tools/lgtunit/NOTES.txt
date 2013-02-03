@@ -65,6 +65,11 @@ exception term that the test is expected to throw.
 In all dialects, `Test` is an atom, uniquely identifying a test. A warning is
 printed if duplicated identifiers are found.
 
+Tests that for some reason should be skipped can have the test clause head
+prefixed with the `(-)/1` operator. An alternative is to use the conditional
+compilation directives. The number of skipped tests is reported together with
+the numbers of passed and failed tests.
+
 The "units" (objects, protocols, and categories) being tested by an unit test
 object are declared using the `unit/1` predicate. A single unit test object my
 included tests for one or more "units".
