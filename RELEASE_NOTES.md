@@ -40,6 +40,9 @@ receiving object and is usually used to forward the message to another object.
 object while preserving the original sender. Its argument must be a call to
 the `::/2` control construct.
 
+* CHANGED: The `logtalk` built-in object no longer implements the `expanding`
+and `monitoring` protocols.
+
 * FIXED: Allow the `logtalk` built-in object to be complemented by a category.
 
 * FIXED: Predicate property `defined_in/2` failed to return the line for the

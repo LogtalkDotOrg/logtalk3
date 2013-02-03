@@ -4414,10 +4414,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	).
 
 
-'$lgt_implements_protocol_'(logtalk, expanding, (public)).
-'$lgt_implements_protocol_'(logtalk, monitoring, (public)).
-
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -4476,12 +4472,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_logtalk._dcl'(Pred, Scope, no, 2, logtalk, logtalk) :-
 	'$lgt_logtalk._ddcl'(Pred, Scope).
-
-'$lgt_logtalk._dcl'(Pred, Scope, Meta, Flags, logtalk, Ctn) :-
-	'$expanding._dcl'(Pred, Scope, Meta, Flags, Ctn).
-
-'$lgt_logtalk._dcl'(Pred, Scope, Meta, Flags, logtalk, Ctn) :-
-	'$monitoring._dcl'(Pred, Scope, Meta, Flags, Ctn).
 
 
 '$lgt_logtalk._def'(expand_library_path(Library, Path), _, '$lgt_expand_library_path'(Library, Path)).
