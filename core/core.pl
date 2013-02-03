@@ -585,6 +585,7 @@ object_property(Obj, Prop) :-
 
 '$lgt_object_property_resources'(Obj, Dcl, DDcl, Flags, Scope, Resources) :-
 	(	Flags /\ 64 =:= 64 ->
+		% dynamic declarations are allowed
 		findall(
 			Functor/Arity,
 			((call(Dcl, Predicate, Scope, _, _); call(DDcl, Predicate, Scope)),
@@ -1628,6 +1629,7 @@ threaded_notify(Message) :-
 
 '$lgt_file_type_alt_directory'(tmp, Directory) :-
 	'$lgt_compiler_flag'(scratch_directory, Directory0),
+	% make sure that the directory path ends with a slash
 	(	sub_atom(Directory0, _, _, 0, '/') ->
 		Directory = Directory0
 	;	atom_concat(Directory0, '/', Directory)
@@ -1786,6 +1788,7 @@ logtalk_compile(Files, Flags) :-
 '$lgt_expand_library_path'(Library, ExpandedPath) :-
 	'$lgt_expand_library_path'(Library, Path, 16),
 	'$lgt_expand_path'(Path, ExpandedPath0),
+	% make sure that the directory path ends with a slash
 	(	sub_atom(ExpandedPath0, _, _, 0, '/') ->
 		ExpandedPath = ExpandedPath0
 	;	atom_concat(ExpandedPath0, '/', ExpandedPath)
@@ -1795,11 +1798,14 @@ logtalk_compile(Files, Flags) :-
 '$lgt_expand_library_path'(Library, Path, N) :-
 	logtalk_library_path(Library, Location), !,
 	(	atom(Location) ->
+		% assume the final component of the library path
+		% and make sure that it ends with a slash
 		(	sub_atom(Location, _, _, 0, '/') ->
 			Path = Location
 		;	atom_concat(Location, '/', Path)
 		)
-	;	N > 0,
+	;	% assume library notation (a compound term)
+		N > 0,
 		N2 is N - 1,
 		functor(Location, Library2, 1),
 		arg(1, Location, Location2),
@@ -2519,8 +2525,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 			;	throw(error(permission_error(modify, protected_predicate, Functor/Arity), logtalk(Obj::abolish(Functor/Arity), Sender)))
 			)
 		)
-	;	% no static predicate declaration; check for a dynamic declaration if allowed
+	;	% no static predicate declaration...
 		ObjFlags /\ 64 =:= 64,
+		% ... but dynamic declarations are allowed
 		functor(DDclClause, DDcl, 2),
 		arg(1, DDclClause, Pred),
 		call(DDclClause) ->
@@ -2580,6 +2587,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!,
 	'$lgt_assert_pred_dcl'(Obj, Dcl, DDcl, DDef, Flags, Head, Scope, Type, Meta, SCtn, DclScope, Obj::asserta((Head:-Body)), Sender),
 	(	(Type == (dynamic); Flags /\ 2 =:= 2, Sender = SCtn) ->
+		% either a dynamic predicate or a dynamic object that is both the sender and the predicate scope container
 		(	(Scope = TestScope; Sender = SCtn) ->
 			'$lgt_assert_pred_def'(Def, DDef, Prefix, Head, ExCtx, THead, _),
 			'$lgt_goal_meta_variables'(Head, Meta, MetaVars),
@@ -2616,6 +2624,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!,
 	'$lgt_assert_pred_dcl'(Obj, Dcl, DDcl, DDef, Flags, Head, Scope, Type, _, SCtn, DclScope, Obj::asserta(Head), Sender),
 	(	(Type == (dynamic); Flags /\ 2 =:= 2, Sender = SCtn) ->
+		% either a dynamic predicate or a dynamic object that is both the sender and the predicate scope container
 		(	(Scope = TestScope; Sender = SCtn) ->
 			'$lgt_assert_pred_def'(Def, DDef, Prefix, Head, ExCtx, THead, Update),
 			(	Flags /\ 256 =:= 256 ->
@@ -2667,6 +2676,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!,
 	'$lgt_assert_pred_dcl'(Obj, Dcl, DDcl, DDef, Flags, Head, Scope, Type, Meta, SCtn, DclScope, Obj::assertz((Head:-Body)), Sender),
 	(	(Type == (dynamic); Flags /\ 2 =:= 2, Sender = SCtn) ->
+		% either a dynamic predicate or a dynamic object that is both the sender and the predicate scope container
 		(	(Scope = TestScope; Sender = SCtn) ->
 			'$lgt_assert_pred_def'(Def, DDef, Prefix, Head, ExCtx, THead, _),
 			'$lgt_goal_meta_variables'(Head, Meta, MetaVars),
@@ -2703,6 +2713,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!,
 	'$lgt_assert_pred_dcl'(Obj, Dcl, DDcl, DDef, Flags, Head, Scope, Type, _, SCtn, DclScope, Obj::assertz(Head), Sender),
 	(	(Type == (dynamic); Flags /\ 2 =:= 2, Sender = SCtn) ->
+		% either a dynamic predicate or a dynamic object that is both the sender and the predicate scope container
 		(	(Scope = TestScope; Sender = SCtn) ->
 			'$lgt_assert_pred_def'(Def, DDef, Prefix, Head, ExCtx, THead, Update),
 			(	Flags /\ 256 =:= 256 ->
@@ -2816,6 +2827,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!,
 	(	call(Dcl, Head, Scope, _, PredFlags, SCtn, _) ->
 		(	(PredFlags /\ 2 =:= 2; ObjFlags /\ 2 =:= 2, Sender = SCtn) ->
+			% either a dynamic predicate or a dynamic object that is both the sender and the predicate scope container
 			(	(Scope = TestScope; Sender = SCtn) ->
 				(	(call(DDef, Head, _, THead); call(Def, Head, _, THead)) ->
 					clause(THead, TBody),
@@ -2879,6 +2891,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!,
 	(	call(Dcl, Head, Scope, _, PredFlags, SCtn, _) ->
 		(	(PredFlags /\ 2 =:= 2; ObjFlags /\ 2 =:= 2, Sender = SCtn) ->
+			% either a dynamic predicate or a dynamic object that is both the sender and the predicate scope container
 			(	(Scope = TestScope; Sender = SCtn) ->
 				(	call(DDef, Head, _, THead) ->
 					retract((THead :- TBody)),
@@ -2933,6 +2946,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!,
 	(	call(Dcl, Head, Scope, _, PredFlags, SCtn, _) ->
 		(	(PredFlags /\ 2 =:= 2; ObjFlags /\ 2 =:= 2, Sender = SCtn) ->
+			% either a dynamic predicate or a dynamic object that is both the sender and the predicate scope container
 			(	(Scope = TestScope; Sender = SCtn) ->
 				(	call(DDef, Head, _, THead) ->
 					retract((THead :- ('$lgt_nop'(Body), _))),
@@ -2975,6 +2989,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!,
 	(	call(Dcl, Head, Scope, _, PredFlags, SCtn, _) ->
 		(	(PredFlags /\ 2 =:= 2; ObjFlags /\ 2 =:= 2, Sender = SCtn) ->
+			% either a dynamic predicate or a dynamic object that is both the sender and the predicate scope container
 			Type = (dynamic),
 			(	(Scope = TestScope; Sender = SCtn) ->
 				(	call(DDef, Head, _, THead) ->
@@ -3042,6 +3057,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!,
 	(	call(Dcl, Head, Scope, _, PredFlags, SCtn, _) ->
 		(	(PredFlags /\ 2 =:= 2; ObjFlags /\ 2 =:= 2, Sender = SCtn) ->
+			% either a dynamic predicate or a dynamic object that is both the sender and the predicate scope container
 			Type = (dynamic),
 			(	(Scope = TestScope; Sender = SCtn) ->
 				(	call(DDef, Head, _, THead) ->
@@ -4452,6 +4468,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_logtalk._dcl'(debug_handler_provider(_), p(p(p)), no, 16).
 '$lgt_logtalk._dcl'(debug_handler(_, _), p(p(p)), no, 16).
 
+'$lgt_logtalk._dcl'(Pred, Scope, Meta, Flags, SCtn, TCtn) :-
+	'$lgt_complemented_object'(logtalk, '$lgt_logtalk._dcl', Pred, Scope, Meta, Flags, SCtn, TCtn).
 
 '$lgt_logtalk._dcl'(Pred, Scope, Meta, Flags, logtalk, logtalk) :-
 	'$lgt_logtalk._dcl'(Pred, Scope, Meta, Flags).
@@ -4497,6 +4515,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_logtalk._def'(debug_handler_provider(Provider), ExCtx, '$lgt_logtalk.debug_handler_provider'(Provider, ExCtx)).
 '$lgt_logtalk._def'(debug_handler(Event, EventExCtx), ExCtx, '$lgt_logtalk.debug_handler'(Event, EventExCtx, ExCtx)).
 
+'$lgt_logtalk._def'(Pred, ExCtx, Call, logtalk, Ctn) :-
+	'$lgt_complemented_object'('$lgt_logtalk._def', Pred, ExCtx, Call, Ctn).
 
 '$lgt_logtalk._def'(Pred, ExCtx, Call, logtalk, logtalk) :-
 	'$lgt_logtalk._def'(Pred, ExCtx, Call).
