@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/12/14,
+		date is 2013/02/03,
 		comment is 'Logtalk unit test framework default message translations.']).
 
 	% structured message printing predicates;
@@ -64,8 +64,8 @@
 
 	% messages for test results
 
-	logtalk::message_tokens(tests_results_summary(Total, Passed, Failed), lgtunit) -->
-		['~d tests: ~d passed, ~d failed'-[Total, Passed, Failed], nl].
+	logtalk::message_tokens(tests_results_summary(Total, Skipped, Passed, Failed), lgtunit) -->
+		['~d tests: ~d skipped, ~d passed, ~d failed'-[Total, Skipped, Passed, Failed], nl].
 
 	logtalk::message_tokens(passed_test(Test), lgtunit) -->
 		['~w: success'-[Test], nl].

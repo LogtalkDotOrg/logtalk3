@@ -30,7 +30,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2012/11/22,
+		date is 2013/02/03,
 		comment is 'A simple unit test framework featuring predicate clause coverage.']).
 
 	:- public(unit/1).
@@ -88,6 +88,13 @@
 	:- mode(test_(?compound), zero_or_more).
 	:- info(test_/1, [
 		comment is 'Table of defined tests.',
+		argnames is ['Counter']]).
+
+	:- private(skipped_/1).
+	:- dynamic(skipped_/1).
+	:- mode(skipped_(?integer), zero_or_one).
+	:- info(skipped_/1, [
+		comment is 'Counter for skipped tests.',
 		argnames is ['Counter']]).
 
 	:- private(passed_/1).
@@ -208,10 +215,11 @@
 
 	write_tests_results :-
 		self(Self),
-		passed_(Passed),
-		failed_(Failed),
-		Total is Passed + Failed,
-		print_message(information(requested), lgtunit, tests_results_summary(Total, Passed, Failed)),
+		::skipped_(Skipped),
+		::passed_(Passed),
+		::failed_(Failed),
+		Total is Skipped + Passed + Failed,
+		print_message(information(requested), lgtunit, tests_results_summary(Total, Skipped, Passed, Failed)),
 		print_message(information(requested), lgtunit, completed_tests_from_object(Self)).
 
 	write_tests_footer :-
@@ -259,42 +267,61 @@
 		self(Self),
 		print_message(error, lgtunit, failed_step(Step, Self)).
 
+	reset_compilation_counters :-
+		retractall(test_(_)),
+		retractall(skipped_(_)),
+		asserta(skipped_(0)).
+
+	increment_skipped_tests_counter :-
+		retract(skipped_(Old)) ->
+		New is Old + 1,
+		asserta(skipped_(New)).
+
 	reset_test_counters :-
-		retractall(passed_(_)),
-		asserta(passed_(0)),
-		retractall(failed_(_)),
-		asserta(failed_(0)).
+		::retractall(passed_(_)),
+		::asserta(passed_(0)),
+		::retractall(failed_(_)),
+		::asserta(failed_(0)).
 
 	increment_passed_tests_counter :-
-		retract(passed_(Old)),
+		::retract(passed_(Old)),
 		New is Old + 1,
-		asserta(passed_(New)).
+		::asserta(passed_(New)).
 
 	increment_failed_tests_counter :-
-		retract(failed_(Old)),
+		::retract(failed_(Old)),
 		New is Old + 1,
-		asserta(failed_(New)).
+		::asserta(failed_(New)).
 
 	% different unit test idioms are supported using the term-expansion mechanism;
 	% the unit test objects must be loaded using this object as an hook object
 
 	term_expansion((:- object(Test, Relation)), [(:- object(Test, Relation))]) :-
-		retractall(test_(_)).
+		reset_compilation_counters.
 	term_expansion((:- object(Test, Relation1, Relation2)), [(:- object(Test, Relation1, Relation2))]) :-
-		retractall(test_(_)).
+		reset_compilation_counters.
 	term_expansion((:- object(Test, Relation1, Relation2, Relation3)), [(:- object(Test, Relation1, Relation2, Relation3))]) :-
-		retractall(test_(_)).
+		reset_compilation_counters.
 	term_expansion((:- object(Test, Relation1, Relation2, Relation3, Relation4)), [(:- object(Test, Relation1, Relation2, Relation3, Relation4))]) :-
-		retractall(test_(_)).
+		reset_compilation_counters.
 	term_expansion((:- object(Test, Relation1, Relation2, Relation3, Relation4, Relation5)), [(:- object(Test, Relation1, Relation2, Relation3, Relation4, Relation5))]) :-
-		retractall(test_(_)).
+		reset_compilation_counters.
 
 	term_expansion((:- discontiguous(Functor/Arity)), []) :-
-		(	Functor/Arity == succeeds/1
+		(	Functor/Arity == (-)/1
+		;	Functor/Arity == test/2
+		;	Functor/Arity == test/1
+		;	Functor/Arity == succeeds/1
 		;	Functor/Arity == fails/1
 		;	Functor/Arity == throws/2
 		),
 		!.
+
+	% skipped tests
+	term_expansion((- Head :- _), []) :-
+		test_idiom_head(Head, Test),
+		check_for_repeated_test_identifier(Test),
+		increment_skipped_tests_counter.
 
 	% unit test idiom test/2
 	term_expansion((test(Test, Outcome) :- Goal), [(test(Test, Outcome) :- Goal)]) :-
@@ -323,8 +350,15 @@
 		check_for_repeated_test_identifier(Test),
 		assertz(test_(throws(Test, Error))).
 
-	term_expansion((:- end_object), [(run_tests :- ::run_tests(Tests)), (:- end_object)]) :-
+	term_expansion((:- end_object), [skipped_(N), (run_tests :- ::run_tests(Tests)), (:- end_object)]) :-
+		retract(skipped_(N)),
 		findall(Test, retract(test_(Test)), Tests).
+
+	test_idiom_head(test(Test, _), Test).
+	test_idiom_head(test(Test), Test).
+	test_idiom_head(succeeds(Test), Test).
+	test_idiom_head(fails(Test), Test).
+	test_idiom_head(throws(Test, _), Test).
 
 	check_for_repeated_test_identifier(Test) :-
 		(	var(Test) ->

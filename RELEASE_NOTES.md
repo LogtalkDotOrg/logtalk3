@@ -63,6 +63,13 @@ Prolog adapter and integration files
 
 * CHANGED: Qu-Prolog 9.0 is now required.
 
+Tools
+-----
+
+* IMPROVED: The `lgtunit` tool now allows the specification of tests that
+for some reason should be skipped by prefixing the test clause head with
+the `(-)/1` operator.
+
 Installers and installation scripts
 -----------------------------------
 
