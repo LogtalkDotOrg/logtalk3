@@ -41,7 +41,7 @@ object while preserving the original sender. Its argument must be a call to
 the `::/2` control construct.
 
 * CHANGED: The `logtalk` built-in object no longer implements the `expanding`
-and `monitoring` protocols.
+and `monitoring` built-in protocols.
 
 * FIXED: Allow the `logtalk` built-in object to be complemented by a category.
 
@@ -72,6 +72,8 @@ Tools
 * IMPROVED: The `lgtunit` tool now allows the specification of tests that
 for some reason should be skipped by prefixing the test clause head with
 the `(-)/1` operator.
+
+* IMPROVED: Documentation for the `diagrams` tool.
 
 Installers and installation scripts
 -----------------------------------

@@ -27,7 +27,30 @@ file.
 This example illustrates how to generate entity diagrams for source files
 and for libraries of source files using the Logtalk reflection features to
 collect the relevant information and the DOT language for representing the
-diagrams.
+diagrams. Limitations in both the DOT language and UML forces the invention
+of a modeling language that can represent all kinds of Logtalk entities and
+entity relations. Currently we use the following DOT shapes (entities) and
+arrows (entity relations):
+
+- object (classes, instances, and prototypes)  
+	box (rectangle)
+- protocols  
+	note (rectangle with folded right-upper corners)
+- categories  
+	component (rectangle with two small rectangles intercepting the left side)
+
+- specialization relation  
+	onormal (arrow ending with a white triangle)
+- instantiation relation  
+	normal (arrow ending with a black triangle)
+- extends relation  
+	vee (arrow ending with a "v")
+- implements relation  
+	dot (arrow ending with a black circle)
+- imports relation  
+	box (arrow ending with a black square)
+- complements relation  
+	obox (arrow ending with a white square)
 
 The diagrams `.dot` files are created on the current directory by default.
 These files can be easily converted into a printable format such as PDF
