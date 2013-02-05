@@ -98,4 +98,4 @@ echo
 
 export LOGTALK_STARTUP_DIRECTORY=`pwd`
 
-exec eclipse -b "$LOGTALKHOME/integration/logtalk_eclipse.pl" "$@"
+exec eclipse -L iso -b "$LOGTALKHOME/integration/logtalk_eclipse.pl" "$@"

@@ -3,8 +3,8 @@
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
-%  Adapter file for ECLiPSe 6.0#141 and later versions
-%  Last updated on December 7, 2012
+%  Adapter file for ECLiPSe 6.1#140 and later versions
+%  Last updated on February 5, 2012
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -61,22 +61,12 @@
 
 % '$lgt_iso_predicate'(?callable).
 
-'$lgt_iso_predicate'(subsumes_term(_, _)).
-
-subsumes_term(General, Specific) :-
-	metutl:subsumes_chk(General, Specific).
-
-
-:- use_module(library(iso)).
-:- import abolish/1 from iso.
-:- import ground/1 from iso.
+'$lgt_iso_predicate'(_) :-
+	fail.
 
 :- if((get_flag(version_as_list, Version), Version @>= [6,1,69])).
 	:- local syntax_option(not(iso_restrictions)).
 :- endif.
-
-
-:- op(650, xfx, @).	% the "iso" library turns off this operator
 
 
 
@@ -136,36 +126,7 @@ forall(Generate, Test) :-
 	\+ (Generate, \+ Test).
 
 
-% call/2-7
-
-:- if((get_flag(version_as_list, Version), Version @< [6,1,59])).
-
-	:- export call/2.	% avoid conflict with obsolete built-in predicate
-	call(F, A) :-
-		Call =.. [F, A],
-		call(Call).
-
-	call(F, A1, A2) :-
-		Call =.. [F, A1, A2],
-		call(Call).
-
-	call(F, A1, A2, A3) :-
-		Call =.. [F, A1, A2, A3],
-		call(Call).
-
-	call(F, A1, A2, A3, A4) :-
-		Call =.. [F, A1, A2, A3, A4],
-		call(Call).
-
-	call(F, A1, A2, A3, A4, A5) :-
-		Call =.. [F, A1, A2, A3, A4, A5],
-		call(Call).
-
-	call(F, A1, A2, A3, A4, A5, A6) :-
-		Call =.. [F, A1, A2, A3, A4, A5, A6],
-		call(Call).
-
-:- endif.
+% call/2-7 -- built-in
 
 
 
@@ -238,7 +199,7 @@ forall(Generate, Test) :-
 '$lgt_prolog_feature'(prolog_dialect, eclipse).
 '$lgt_prolog_feature'(prolog_version, (Major, Minor, Build)) :-
 	get_flag(version_as_list, [Major, Minor, Build]).
-'$lgt_prolog_feature'(prolog_compatible_version, @>=((6,0,141))).
+'$lgt_prolog_feature'(prolog_compatible_version, @>=((6,1,140))).
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
 '$lgt_prolog_feature'(tabling, unsupported).

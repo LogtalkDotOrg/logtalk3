@@ -64,7 +64,8 @@ to update the internal runtime table of complemented objects.
 Prolog adapter and integration files
 ------------------------------------
 
-* CHANGED: Qu-Prolog 9.0 is now required.
+* CHANGED: ECLiPSe 6.1#140 and Qu-Prolog 9.0 (or later versions) are now
+required when using these back-end Prolog compilers.
 
 Tools
 -----

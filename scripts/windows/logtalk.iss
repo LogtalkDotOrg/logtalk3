@@ -59,7 +59,7 @@ Name: "user\backup"; Description: "Backup current Logtalk user folder"; Types: f
 Name: "prolog"; Description: "Prolog integration (back-end compiler support)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\bp"; Description: "B-Prolog integration (version 7.8 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\cxprolog"; Description: "CxProlog integration (version 0.97.6 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
-Name: "prolog\eclipse"; Description: "ECLiPSe integration (version 6.0#141 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
+Name: "prolog\eclipse"; Description: "ECLiPSe integration (version 6.1#140 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\gprolog"; Description: "GNU Prolog integration (version 1.4.1 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\lean"; Description: "Lean Prolog Prolog integration (version 3.7.10 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\sicstus"; Description: "SICStus Prolog integration (version 4.1.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
@@ -126,7 +126,7 @@ Name: "{group}\Logtalk - B-Prolog"; Filename: "{code:GetBPExePath}"; Parameters:
 
 Name: "{group}\Logtalk - CxProlog"; Filename: "{code:GetCxExePath}"; Parameters: "--script ""%LOGTALKHOME%\\integration\\logtalk_cx.pl"""; Comment: "Runs Logtalk with CxProlog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\cxprolog; Flags: createonlyiffileexists
 
-Name: "{group}\Logtalk - ECLiPSe 6"; Filename: "{code:GetEclipse6ExePath}"; Parameters: "-b ""$LOGTALKHOME/integration/logtalk_eclipse.pl"""; Comment: "Runs Logtalk with ECLiPSe 6"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\eclipse; Flags: createonlyiffileexists
+Name: "{group}\Logtalk - ECLiPSe 6"; Filename: "{code:GetEclipse6ExePath}"; Parameters: "-L iso -b ""$LOGTALKHOME/integration/logtalk_eclipse.pl"""; Comment: "Runs Logtalk with ECLiPSe 6"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\eclipse; Flags: createonlyiffileexists
 
 Name: "{group}\Logtalk - GNU Prolog"; Filename: "{code:GetGPExePath}"; Parameters: "--init-goal ""['$LOGTALKHOME/integration/logtalk_gp.pl']"""; Comment: "Runs Logtalk with GNU Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\gprolog; Flags: createonlyiffileexists
 
