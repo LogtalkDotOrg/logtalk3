@@ -30,7 +30,6 @@
 :- pragma(nodebug).
 
 :- use_module(library(numbervars)).
-:- use_module(library(multifile)).
 
 :- ensure_loaded(library(quintus)).
 :- import format/3 from quintus.
