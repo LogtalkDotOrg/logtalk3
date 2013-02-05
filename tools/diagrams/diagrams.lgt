@@ -229,17 +229,27 @@
 
 	output_date(Options) :-
 		(	member(date(true), Options),
-			catch(os::date_time(Year, Month, Day, Hours, Mins, Secs, _), _, fail) ->
+			catch(os::date_time(Year, Month, Day, Hours, Minutes, _, _), _, fail) ->
+			integer_to_padded_atom(Month, PaddedMonth),
+			integer_to_padded_atom(Day, PaddedDay),
+			integer_to_padded_atom(Hours, PaddedHours),
+			integer_to_padded_atom(Minutes, PaddedMinutes),			
 			write(dot_file, '\nlabel="Generated on '),
 			write(dot_file, Year), write(dot_file, '/'),
-			write(dot_file, Month), write(dot_file, '/'),
-			write(dot_file, Day),
+			write(dot_file, PaddedMonth), write(dot_file, '/'),
+			write(dot_file, PaddedDay),
 			write(dot_file, ', '),
-			write(dot_file, Hours), write(dot_file, ':'),
-			write(dot_file, Mins), write(dot_file, ':'),
-			write(dot_file, Secs),
+			write(dot_file, PaddedHours), write(dot_file, ':'),
+			write(dot_file, PaddedMinutes),
 			write(dot_file, '"')
 		;	true
+		).
+
+	integer_to_padded_atom(Integer, Atom) :-
+		number_codes(Integer, Codes),
+		(	Integer < 10 ->
+			atom_codes(Atom, [0'0| Codes])
+		;	atom_codes(Atom, Codes)
 		).
 
 	reset_external_entities :-
