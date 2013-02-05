@@ -343,71 +343,71 @@
 		box(Name, PredicateText, category),
 		output_category_relations(Category, Options).
 
-	output_protocol_relations(Protocol, _) :-
+	output_protocol_relations(Protocol, Options) :-
 		extends_protocol(Protocol, ExtendedProtocol),
 		print_name(protocol, Protocol, ProtocolName),
 		print_name(protocol, ExtendedProtocol, ExtendedProtocolName),
-		arrow(ProtocolName, ExtendedProtocolName, extends),
+		arrow(ProtocolName, ExtendedProtocolName, extends, Options),
 		assertz(referenced_entity_(ExtendedProtocol)),
 		fail.
 	output_protocol_relations(_, _).
 
-	output_object_relations(Object, _) :-
+	output_object_relations(Object, Options) :-
 		implements_protocol(Object, Protocol),
 		print_name(object, Object, ObjectName),
 		print_name(protocol, Protocol, ProtocolName),
-		arrow(ObjectName, ProtocolName, implements),
+		arrow(ObjectName, ProtocolName, implements, Options),
 		assertz(referenced_entity_(Protocol)),
 		fail.
-	output_object_relations(Instance, _) :-
+	output_object_relations(Instance, Options) :-
 		instantiates_class(Instance, Class),
 		print_name(object, Instance, InstanceName),
 		print_name(object, Class, ClassName),
-		arrow(InstanceName, ClassName, instantiates),
+		arrow(InstanceName, ClassName, instantiates, Options),
 		assertz(referenced_entity_(Class)),
 		fail.
-	output_object_relations(Class, _) :-
+	output_object_relations(Class, Options) :-
 		specializes_class(Class, SuperClass),
 		print_name(object, Class, ClassName),
 		print_name(object, SuperClass, SuperClassName),
-		arrow(ClassName, SuperClassName, specializes),
+		arrow(ClassName, SuperClassName, specializes, Options),
 		assertz(referenced_entity_(SuperClass)),
 		fail.
-	output_object_relations(Prototype, _) :-
+	output_object_relations(Prototype, Options) :-
 		extends_object(Prototype, Parent),
 		print_name(object, Prototype, PrototypeName),
 		print_name(object, Parent, ParentName),
-		arrow(PrototypeName, ParentName, extends),
+		arrow(PrototypeName, ParentName, extends, Options),
 		assertz(referenced_entity_(Parent)),
 		fail.
-	output_object_relations(Object, _) :-
+	output_object_relations(Object, Options) :-
 		imports_category(Object, Category),
 		print_name(object, Object, ObjectName),
 		print_name(category, Category, CategoryName),
-		arrow(ObjectName, CategoryName, imports),
+		arrow(ObjectName, CategoryName, imports, Options),
 		assertz(referenced_entity_(Category)),
 		fail.
 	output_object_relations(_, _).
 
-	output_category_relations(Category, _) :-
+	output_category_relations(Category, Options) :-
 		extends_category(Category, ExtendedCategory),
 		print_name(category, Category, CategoryName),
 		print_name(category, ExtendedCategory, ExtendedCategoryName),
-		arrow(CategoryName, ExtendedCategoryName, extends),
+		arrow(CategoryName, ExtendedCategoryName, extends, Options),
 		assertz(referenced_entity_(ExtendedCategory)),
 		fail.
-	output_category_relations(Category, _) :-
+	output_category_relations(Category, Options) :-
 		implements_protocol(Category, Protocol),
 		print_name(category, Category, CategoryName),
 		print_name(protocol, Protocol, ProtocolName),
-		arrow(CategoryName, ProtocolName, implements),
+		arrow(CategoryName, ProtocolName, implements, Options),
 		assertz(referenced_entity_(Protocol)),
 		fail.
-	output_category_relations(Category, _) :-
+	output_category_relations(Category, Options) :-
 		complements_object(Category, Object),
 		print_name(category, Category, CategoryName),
 		print_name(object, Object, ObjectName),
-		arrow(ObjectName, CategoryName, complements),
+		arrow(ObjectName, CategoryName, complements, Options),
 		assertz(referenced_entity_(Object)),
 		fail.
 	output_category_relations(_, _).
@@ -437,7 +437,7 @@
 	entity_shape(external_protocol, note, dashed).
 	entity_shape(external_category, component, dashed).
 
-	arrow(Start, End, Label) :-
+	arrow(Start, End, Label, Options) :-
 		label_arrowhead(Label, ArrowHead),
 		write(dot_file, '"'),
 		write(dot_file, Start),
@@ -445,9 +445,12 @@
 		write(dot_file, End),
 		write(dot_file, '" [arrowhead='),
 		write(dot_file, ArrowHead),
-		write(dot_file, ',label="'),
-		write(dot_file, Label),
-		write(dot_file, '"]'),
+		(	member(relation_labels(true), Options) ->
+			write(dot_file, ',label="'),
+			write(dot_file, Label),
+			write(dot_file, '"]')
+		;	write(dot_file, ',label=""]')
+		),
 		nl(dot_file).
 
 	label_arrowhead(extends, vee).
@@ -519,6 +522,8 @@
 		(member(date(Date), UserOptions) -> true; Date = true),
 		% by default, print entity public predicates:
 		(member(interface(Interface), UserOptions) -> true; Interface = true),
+		% by default, don't print entity relation labels:
+		(member(relation_labels(Relations), UserOptions) -> true; Relations = false),
 		% by default, write diagram to the current directory:
 		(member(output_path(OutputPath), UserOptions) -> true; os::working_directory(OutputPath)),
 		% by default, don't exclude any source files:
@@ -528,7 +533,7 @@
 		% by default, don't exclude any entities:
 		(member(exclude_entities(ExcludedEntities), UserOptions) -> true; ExcludedEntities = []),
 		Options = [
-			library_paths(LibraryPaths), file_names(FileNames), date(Date), interface(Interface),
+			library_paths(LibraryPaths), file_names(FileNames), date(Date), interface(Interface), relation_labels(Relations),
 			output_path(OutputPath),
 			exclude_files(ExcludedFiles), exclude_paths(ExcludedPaths), exclude_entities(ExcludedEntities)].
 
