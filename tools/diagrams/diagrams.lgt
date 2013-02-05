@@ -261,6 +261,9 @@
 		retractall(referenced_entity_(Entity)),
 		fail.
 	output_external_entities :-
+		write(dot_file, 'subgraph "cluster_others" {\n'),
+		write(dot_file, 'bgcolor=white\nlabel=""'),
+		nl(dot_file),
 		retract(referenced_entity_(Entity)),
 		(	current_object(Entity) ->
 			print_name(object, Entity, Name),
@@ -276,7 +279,8 @@
 			box(Name, '', external_category)
 		),
 		fail.
-	output_external_entities.
+	output_external_entities :-
+		write(dot_file, '}\n').
 
 	dot_footer(_) :-
 		write(dot_file, '}'),
