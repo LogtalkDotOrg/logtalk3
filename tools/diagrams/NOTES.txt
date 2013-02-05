@@ -52,6 +52,9 @@ arrows (entity relations):
 - complements relation  
 	obox (arrow ending with a white square)
 
+The entities that are not part of the files or libraries for which you are
+generating a diagram use a dashed border.
+
 The diagrams `.dot` files are created on the current directory by default.
 These files can be easily converted into a printable format such as PDF
 or Postscript. For example, using the `dot` command-line executable we can

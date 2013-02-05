@@ -25,9 +25,9 @@
 :- object(diagram).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2012/10/18,
+		date is 2013/02/05,
 		comment is 'Generates entity diagram DOT files for source files and libraries.']).
 
 	:- public(rlibrary/2).
@@ -42,6 +42,12 @@
 		comment is 'Creates a diagram for all entities in a library and its sub-libraries using default options.',
 		argnames is ['Library']]).
 
+	:- private(included_entity_/1).
+	:- dynamic(included_entity_/1).
+
+	:- private(referenced_entity_/1).
+	:- dynamic(referenced_entity_/1).
+
 	rlibrary(Library, UserOptions) :-
 		merge_options(UserOptions, Options),
 		logtalk::expand_library_path(Library, TopPath),
@@ -51,7 +57,9 @@
 		os::change_directory(Directory),
 		open(DotFile, write, Stream, [alias(dot_file)]),
 		dot_header(Options),
+		reset_external_entities,
 		output_rlibrary(TopPath, Options),
+		output_external_entities,
 		dot_footer(Options),
 		close(Stream),
 		os::change_directory(Current).
@@ -101,7 +109,9 @@
 		os::change_directory(Directory),
 		open(DotFile, write, Stream, [alias(dot_file)]),
 		dot_header(Options),
+		reset_external_entities,
 		output_library(Path, Path, Options),
+		output_external_entities,
 		dot_footer(Options),
 		close(Stream),
 		os::change_directory(Current).
@@ -157,7 +167,9 @@
 		os::change_directory(Directory),
 		open(DotFile, write, Stream, [alias(dot_file)]),
 		dot_header(Options),
+		reset_external_entities,
 		output_file(File, Path, Options),
+		output_external_entities,
 		dot_footer(Options),
 		close(Stream),
 		os::change_directory(Current).
@@ -172,7 +184,9 @@
 		os::change_directory(Directory),
 		open(DotFile, write, Stream, [alias(dot_file)]),
 		dot_header(Options),
+		reset_external_entities,
 		output_file(File, _, Options),
+		output_external_entities,
 		dot_footer(Options),
 		close(Stream),
 		os::change_directory(Current).
@@ -208,7 +222,7 @@
 		write(dot_file, '\nfontsize=10'),
 		write(dot_file, '\nfontcolor=snow4'),
 		write(dot_file, '\npencolor=snow4'),
-		write(dot_file, '\nnode [style=filled,fillcolor=white,fontname="Courier",fontsize=9]'),
+		write(dot_file, '\nnode [shape=ellipse,style=dashed,fillcolor=white,fontname="Courier",fontsize=9]'),
 		write(dot_file, '\nedge [fontname="Courier",fontsize=9]'),
 		output_date(Options),
 		nl(dot_file).
@@ -228,6 +242,32 @@
 		;	true
 		).
 
+	reset_external_entities :-
+		retractall(included_entity_(_)),
+		retractall(referenced_entity_(_)).		
+
+	output_external_entities :-
+		retract(included_entity_(Entity)),
+		retractall(referenced_entity_(Entity)),
+		fail.
+	output_external_entities :-
+		retract(referenced_entity_(Entity)),
+		(	current_object(Entity) ->
+			print_name(object, Entity, Name),
+			(	\+ instantiates_class(Object, _),
+				\+ specializes_class(Object, _) ->
+				box(Name, '', external_prototype)
+			;	box(Name, '', external_instance_or_class)
+			)
+		;	current_protocol(Entity) ->
+			print_name(protocol, Entity, Name),
+			box(Name, '', external_protocol)
+		;	print_name(category, Entity, Name),
+			box(Name, '', external_category)
+		),
+		fail.
+	output_external_entities.
+
 	dot_footer(_) :-
 		write(dot_file, '}'),
 		nl(dot_file).
@@ -237,18 +277,21 @@
 		protocol_property(Protocol, file(File, Path)),
 		\+ member(Protocol, ExcludedEntities),
 		output_protocol(Protocol, Options),
+		assertz(included_entity_(Protocol)),
 		fail.
 	process(File, Path, Options) :-
 		member(exclude_entities(ExcludedEntities), Options),
 		object_property(Object, file(File, Path)),
 		\+ member(Object, ExcludedEntities),
 		output_object(Object, Options),
+		assertz(included_entity_(Object)),
 		fail.
 	process(File, Path, Options) :-
 		member(exclude_entities(ExcludedEntities), Options),
 		category_property(Category, file(File, Path)),
 		\+ member(Category, ExcludedEntities),
 		output_category(Category, Options),
+		assertz(included_entity_(Category)),
 		fail.
 	process(_, _, _).
 
@@ -272,7 +315,7 @@
 		(	\+ instantiates_class(Object, _),
 			\+ specializes_class(Object, _) ->
 			box(Name, PredicateText, prototype)
-		;	box(Name, PredicateText, instance_or_class)	
+		;	box(Name, PredicateText, instance_or_class)
 		),
 		output_object_relations(Object, Options).
 
@@ -291,6 +334,7 @@
 		print_name(protocol, Protocol, ProtocolName),
 		print_name(protocol, ExtendedProtocol, ExtendedProtocolName),
 		arrow(ProtocolName, ExtendedProtocolName, extends),
+		assertz(referenced_entity_(ExtendedProtocol)),
 		fail.
 	output_protocol_relations(_, _).
 
@@ -299,30 +343,35 @@
 		print_name(object, Object, ObjectName),
 		print_name(protocol, Protocol, ProtocolName),
 		arrow(ObjectName, ProtocolName, implements),
+		assertz(referenced_entity_(Protocol)),
 		fail.
 	output_object_relations(Instance, _) :-
 		instantiates_class(Instance, Class),
 		print_name(object, Instance, InstanceName),
 		print_name(object, Class, ClassName),
 		arrow(InstanceName, ClassName, instantiates),
+		assertz(referenced_entity_(Class)),
 		fail.
 	output_object_relations(Class, _) :-
 		specializes_class(Class, SuperClass),
 		print_name(object, Class, ClassName),
 		print_name(object, SuperClass, SuperClassName),
 		arrow(ClassName, SuperClassName, specializes),
+		assertz(referenced_entity_(SuperClass)),
 		fail.
 	output_object_relations(Prototype, _) :-
 		extends_object(Prototype, Parent),
 		print_name(object, Prototype, PrototypeName),
 		print_name(object, Parent, ParentName),
 		arrow(PrototypeName, ParentName, extends),
+		assertz(referenced_entity_(Parent)),
 		fail.
 	output_object_relations(Object, _) :-
 		imports_category(Object, Category),
 		print_name(object, Object, ObjectName),
 		print_name(category, Category, CategoryName),
 		arrow(ObjectName, CategoryName, imports),
+		assertz(referenced_entity_(Category)),
 		fail.
 	output_object_relations(_, _).
 
@@ -331,27 +380,32 @@
 		print_name(category, Category, CategoryName),
 		print_name(category, ExtendedCategory, ExtendedCategoryName),
 		arrow(CategoryName, ExtendedCategoryName, extends),
+		assertz(referenced_entity_(ExtendedCategory)),
 		fail.
 	output_category_relations(Category, _) :-
 		implements_protocol(Category, Protocol),
 		print_name(category, Category, CategoryName),
 		print_name(protocol, Protocol, ProtocolName),
 		arrow(CategoryName, ProtocolName, implements),
+		assertz(referenced_entity_(Protocol)),
 		fail.
 	output_category_relations(Category, _) :-
 		complements_object(Category, Object),
 		print_name(category, Category, CategoryName),
 		print_name(object, Object, ObjectName),
 		arrow(ObjectName, CategoryName, complements),
+		assertz(referenced_entity_(Object)),
 		fail.
 	output_category_relations(_, _).
 
 	box(Name, PredicateText, Entity) :-
-		entity_shape(Entity, Shape),
+		entity_shape(Entity, Shape, Style),
 		write(dot_file, '"'),
 		write(dot_file, Name),
 		write(dot_file, '" [shape='),
 		write(dot_file, Shape),
+		write(dot_file, ',style='),
+		write(dot_file, Style),
 		write(dot_file, ',label="'),
 		write(dot_file, Name),
 		write(dot_file, '\\n'),
@@ -359,10 +413,15 @@
 		write(dot_file, '"]'),
 		nl(dot_file).
 
-	entity_shape(prototype, box).
-	entity_shape(instance_or_class, box).
-	entity_shape(protocol, note).
-	entity_shape(category, component).
+	entity_shape(prototype, box, solid).
+	entity_shape(instance_or_class, box, solid).
+	entity_shape(protocol, note, solid).
+	entity_shape(category, component, solid).
+
+	entity_shape(external_prototype, box, dashed).
+	entity_shape(external_instance_or_class, box, dashed).
+	entity_shape(external_protocol, note, dashed).
+	entity_shape(external_category, component, dashed).
 
 	arrow(Start, End, Label) :-
 		label_arrowhead(Label, ArrowHead),
