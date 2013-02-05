@@ -73,9 +73,9 @@ Tools
 for some reason should be skipped by prefixing the test clause head with
 the `(-)/1` operator.
 
-* IMPROVED: When using the `diagrams` tool, the entities that are not part
-of the processed files or libraries now use a dashed border. Also improved
-the tool documentation.
+* IMPROVED: When using the `diagrams` tool, entities names are now printed
+in bold typeface and the entities that are not part of the processed files
+or libraries now use a dashed border. Also improved the tool documentation.
 
 Installers and installation scripts
 -----------------------------------

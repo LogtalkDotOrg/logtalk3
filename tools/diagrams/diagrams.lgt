@@ -406,11 +406,11 @@
 		write(dot_file, Shape),
 		write(dot_file, ',style='),
 		write(dot_file, Style),
-		write(dot_file, ',label="'),
+		write(dot_file, ',label=<<B>'),
 		write(dot_file, Name),
-		write(dot_file, '\\n'),
+		write(dot_file, '</B><BR/>'),
 		write(dot_file, PredicateText),
-		write(dot_file, '"]'),
+		write(dot_file, '>]'),
 		nl(dot_file).
 
 	entity_shape(prototype, box, solid).
@@ -443,14 +443,15 @@
 	label_arrowhead(imports, box).
 	label_arrowhead(complements, obox).
 
-	predicate_list_to_atom(List, Atom) :-
-		predicate_list_to_atom(List, '', Atom).
+	predicate_list_to_atom([], '').
+	predicate_list_to_atom([Predicate| Predicates], Atom) :-
+		predicate_list_to_atom([Predicate| Predicates], ' <BR/>', Atom).
 
 	predicate_list_to_atom([], Atom, Atom).
 	predicate_list_to_atom([Functor/Arity| Predicates], Atom0, Atom) :-
 		number_codes(Arity, ArityCodes),
 		atom_codes(ArityAtom, ArityCodes),
-		atom_concat(Atom0, '\\n', Atom1),
+		atom_concat(Atom0, '<BR/>', Atom1),
 		atom_concat(Atom1, Functor, Atom2),
 		atom_concat(Atom2, '/', Atom3),
 		atom_concat(Atom3, ArityAtom, Atom4),
