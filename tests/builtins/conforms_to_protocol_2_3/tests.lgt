@@ -5,7 +5,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/11/19,
+		date is 2013/02/05,
 		comment is 'Unit tests for the conforms_to_protocol/2-3 built-in predicates.'
 	]).
 
@@ -23,12 +23,5 @@
 
 	throws(conforms_to_protocol_3_3, error(type_error(scope, 1), logtalk(conforms_to_protocol(logtalk,_,1), _))) :-
 		conforms_to_protocol(logtalk, _, 1).
-
-	succeeds(conforms_to_protocol_2_) :-
-		conforms_to_protocol(logtalk, expanding).
-
-	succeeds(conforms_to_protocol3_) :-
-		conforms_to_protocol(logtalk, expanding, Scope),
-		Scope == (public).
 
 :- end_object.
