@@ -29,12 +29,30 @@
 :- pragma(system).
 :- pragma(nodebug).
 
+
 :- use_module(library(numbervars)).
 
-:- ensure_loaded(library(quintus)).
-:- import format/3 from quintus.
 
-:- ensure_loaded(library(metutl)).
+format(Format, Arguments) :-
+	current_output(Stream),
+	format(Stream, Format, Arguments).
+format(Stream, Format, Arguments) :-
+	atom_codes(Format, FormatCodes),
+	'$lgt_eclipse_convert_format'(FormatCodes, ConvertedFormatCodes),
+	atom_codes(ConvertedFormat, ConvertedFormatCodes),
+	atom_string(ConvertedFormat, ConvertedFormatString),
+	printf(Stream, ConvertedFormatString, Arguments).
+
+'$lgt_eclipse_convert_format'([], []).
+'$lgt_eclipse_convert_format'([0'%| Codes], [0'%, 0'%| ConvertedCodes]) :-
+	!,
+	'$lgt_eclipse_convert_format'(Codes, ConvertedCodes).
+'$lgt_eclipse_convert_format'([0'~| Codes], [0'%| ConvertedCodes]) :-
+	!,
+	'$lgt_eclipse_convert_format'(Codes, ConvertedCodes).
+'$lgt_eclipse_convert_format'([Code| Codes], [Code| ConvertedCodes]) :-
+	'$lgt_eclipse_convert_format'(Codes, ConvertedCodes).
+
 
 :- set_event_handler(134, '$lgt_eclipse_discontiguous_predicate_handler'/2).
 
