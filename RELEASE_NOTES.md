@@ -40,6 +40,8 @@ receiving object and is usually used to forward the message to another object.
 object while preserving the original sender. Its argument must be a call to
 the `::/2` control construct.
 
+* NEW: Recognize `false/0` as a ISO Prolog standard predicate.
+
 * CHANGED: The `logtalk` built-in object no longer implements the `expanding`
 and `monitoring` built-in protocols.
 

@@ -16724,6 +16724,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % control constructs
 '$lgt_iso_spec_predicate'(true).
 '$lgt_iso_spec_predicate'(fail).
+'$lgt_iso_spec_predicate'(false).
 '$lgt_iso_spec_predicate'(call(_)).
 '$lgt_iso_spec_predicate'(!).
 '$lgt_iso_spec_predicate'((Goal; _)) :-
