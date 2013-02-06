@@ -2,7 +2,7 @@
 "
 " Language:	Logtalk
 " Maintainer:	Paulo Moura <pmoura@logtalk.org>
-" Last Change:	May 3, 2012
+" Last Change:	February 6, 2013
 
 
 " Quit when a syntax file was already loaded:
@@ -177,6 +177,7 @@ syn match	logtalkOperator		"@"
 
 syn match	logtalkKeyword		"\<true\>"
 syn match	logtalkKeyword		"\<fail\>"
+syn match	logtalkKeyword		"\<false\>"
 syn match	logtalkKeyword		"\<ca\(ll\|tch\)\ze("
 syn match	logtalkOperator		"!"
 " syn match	logtalkOperator		","

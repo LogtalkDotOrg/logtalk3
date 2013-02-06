@@ -69,7 +69,7 @@ class LogtalkLexer(RegexLexer):
             (r'a(bolish|ssert(a|z))(?=[(])', Keyword),
             # Control constructs
             (r'(ca(ll|tch)|throw)(?=[(])', Keyword),
-            (r'(fail|true)\b', Keyword),
+            (r'(fa(il|lse)|true)\b', Keyword),
             # All solutions
             (r'((bag|set)of|f(ind|or)all)(?=[(])', Keyword),
             # Multi-threading meta-predicates

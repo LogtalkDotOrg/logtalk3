@@ -12,6 +12,8 @@
  *
  * CHANGES
  * -------
+ * 2013/02/06 (1.1.9)
+ *  -  Added syntax coloring of false/0 predicate
  * 2012/05/03 (1.1.8)
  *  -  Added syntax coloring of acyclic_term/1 and subsumes_term/2 predicates
  * 2012/03/05 (1.1.7)
@@ -186,7 +188,7 @@ $language_data = array(
         // Built-in predicates (no arguments)
         5 => array(
             // control
-            'fail', 'repeat', 'true',
+            'fail', 'false', 'repeat', 'true',
             // character and byte input/output predicates
             'nl',
             // implementation defined hooks functions

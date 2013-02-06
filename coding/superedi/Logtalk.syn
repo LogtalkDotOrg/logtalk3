@@ -1,7 +1,7 @@
 ; Superedi syntax definitions for Logtalk (http://logtalk.org/)
 ; 
 ; Author: 			Paulo Moura
-; Last changed in: 	March 4, 2012
+; Last changed in: 	February 6, 2013
 
 
 C=1
@@ -200,6 +200,7 @@ phrase
 ; Control constructs
 true
 fail
+false
 call
 !
 ,

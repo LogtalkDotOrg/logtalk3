@@ -188,7 +188,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(true|fail|repeat)\b(?![-!(^~])</string>
+			<string>\b(true|fa(il|lse)|repeat)\b(?![-!(^~])</string>
 			<key>name</key>
 			<string>support.function.control.logtalk</string>
 		</dict>

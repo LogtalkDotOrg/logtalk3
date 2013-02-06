@@ -87,6 +87,12 @@ Installers and installation scripts
 * FIXED: The `uninstall.sh` POSIX shell script failed to delete some installed
 script symbolic links and man pages.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* ADDED: Syntax coloring support for the `false/0` ISO Prolog standard
+predicate to all supported text editors and syntax highlighters.
+
 
 3.00.0 Alpha 8 - January 18, 2013
 =================================

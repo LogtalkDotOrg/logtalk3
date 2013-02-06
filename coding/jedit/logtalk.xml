@@ -7,7 +7,7 @@
 	written by		Paulo Moura
 	version			1.98
 	created on		May 5, 2002
-	last revised	May 3, 2012
+	last revised	February 6, 2013
 
 	To install, copy this file to the "modes" subdirectory in jEdit 
 	directory installation.   Next, check the "catalog" file in the 
@@ -82,7 +82,7 @@
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD2">\ba(bolish|ssert(a|z))(?=[(])</SEQ_REGEXP>
 		<!-- Control -->
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD2">\b(ca(ll|tch)|throw)(?=[(])</SEQ_REGEXP>
-		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD2">\b(fail|true)\b</SEQ_REGEXP>
+		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD2">\b(fa(il|lse)|true)\b</SEQ_REGEXP>
 		<!-- All solutions -->
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD2">\b((bag|set)of|f(ind|or)all)(?=[(])</SEQ_REGEXP>
 		<!-- Multi-threading meta-predicates -->
@@ -297,6 +297,7 @@
 			<NULL>extends_protocol</NULL>
 			<NULL>extends_category</NULL>
 			<NULL>fail</NULL>
+			<NULL>false</NULL>
 			<NULL>findall</NULL>
 			<NULL>float</NULL>
 			<NULL>flush_output</NULL>

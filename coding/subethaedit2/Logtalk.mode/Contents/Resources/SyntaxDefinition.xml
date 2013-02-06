@@ -45,6 +45,7 @@
 				<regex>\b(throw)\(</regex>
 				<regex>\b(true)[^[(A-Za-z_]]</regex>
 				<regex>\b(fail)[^[(A-Za-z_]]</regex>
+				<regex>\b(false)[^[(A-Za-z_]]</regex>
 				<regex>\s(--&gt;)\s</regex>
 				<regex>\s(-&gt;)\s</regex>
 				<regex>(!)</regex>

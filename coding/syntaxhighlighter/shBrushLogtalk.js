@@ -5,7 +5,7 @@
 
 	function Brush()
 	{
-		// Contributed by Paulo Moura (http://logtalk.org/); last revised on May 3, 2012
+		// Contributed by Paulo Moura (http://logtalk.org/); last revised on February 6, 2013
 
 		this.regexList = [
 		  // variables
@@ -89,7 +89,7 @@
       { regex: new RegExp("\\b((key)?sort)(?=[(])", 'g'), css: 'keyword'},
       // built-in control constructs
       { regex: new RegExp("\\b(ca(ll|tch)|throw)(?=[(])", 'g'), css: 'keyword'},
-      { regex: new RegExp("\\b(true|fail|repeat)\\b", 'g'), css: 'keyword'},
+      { regex: new RegExp("\\b(true|fa(il|lse)|repeat)\\b", 'g'), css: 'keyword'},
       { regex: new RegExp("\\b(ignore|once)(?=[(])", 'g'), css: 'keyword'},
       // directives
 			{ regex: new RegExp("^\\s*:\-\\s(c(a(lls|tegory)|oinductive)|p(ublic|r(ot(ocol|ected)|ivate))|e(l(if|se)|n(coding|sure_loaded)|xport)|i(f|n(clude|itialization|fo))|alias|d(ynamic|iscontiguous)|m(eta_(non_terminal|predicate)|od(e|ule)|ultifile)|reexport|s(et_(logtalk|prolog)_flag|ynchronized)|o(bject|p)|use(s|_module))(?=[(])", 'gm'), css: 'preprocessor' },

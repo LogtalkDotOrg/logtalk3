@@ -4,8 +4,8 @@
 #
 #  Author: Paulo Moura
 #    Mail: pmoura@logtalk.org
-#    Date: 2012.05.03
-# Version: 1.13
+#    Date: 2013.02.06
+# Version: 1.14
 # ------------------------------------------
 # This file is a part of highlight, a free source code converter released under the GPL.
 #
@@ -58,7 +58,7 @@ $KEYWORDS(kwc)=regex((clause|retract(all)?)(?=[(]), 1)
 $KEYWORDS(kwc)=regex((a(bolish|ssert(a|z)))(?=[(]), 1)
 # control
 $KEYWORDS(kwc)=regex((throw|ca(ll|tch))(?=[(]), 1)
-$KEYWORDS(kwc)=regex((fail|true), 1)
+$KEYWORDS(kwc)=regex((fa(il|lse)|true), 1)
 # all solutions
 $KEYWORDS(kwc)=regex((bagof|setof|findall|forall)(?=[(]), 1)
 # multi-threading meta-predicates

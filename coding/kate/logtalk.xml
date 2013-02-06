@@ -37,7 +37,7 @@
 				<RegExpr String = "\ba(bolish|ssert(a|z))(?=[(])" attribute = "Built-in" context = "#stay" />
 				<!-- Control -->
 				<RegExpr String = "\b(ca(ll|tch)|throw)(?=[(])" attribute = "Built-in" context = "#stay" />
-				<RegExpr String = "\b(fail|true)\b" attribute = "Built-in" context = "#stay" />
+				<RegExpr String = "\b(fa(il|lse)|true)\b" attribute = "Built-in" context = "#stay" />
 				<!-- All solutions -->
 				<RegExpr String = "\b((bag|set)of|f(ind|or)all)(?=[(])" attribute = "Built-in" context = "#stay" />
 				<!-- Multi-threading meta-predicates -->
