@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for ECLiPSe 6.1#140 and later versions
-%  Last updated on February 5, 2012
+%  Last updated on February 6, 2012
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -63,9 +63,7 @@
 '$lgt_iso_predicate'(_) :-
 	fail.
 
-:- if((get_flag(version_as_list, Version), Version @>= [6,1,69])).
-	:- local syntax_option(not(iso_restrictions)).
-:- endif.
+:- local syntax_option(not(iso_restrictions)).
 
 
 
