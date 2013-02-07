@@ -40,7 +40,7 @@ receiving object and is usually used to forward the message to another object.
 object while preserving the original sender. Its argument must be a call to
 the `::/2` control construct.
 
-* NEW: Recognize `false/0` as a ISO Prolog standard predicate.
+* NEW: Recognize `false/0` as an ISO Prolog standard predicate.
 
 * CHANGED: The `logtalk` built-in object no longer implements the `expanding`
 and `monitoring` built-in protocols.
@@ -67,7 +67,9 @@ Prolog adapter and integration files
 ------------------------------------
 
 * CHANGED: ECLiPSe 6.1#140 and Qu-Prolog 9.0 (or later versions) are now
-required when using these back-end Prolog compilers.
+required when using these back-end Prolog compilers. Thanks to Joachim
+Schimpf for his feedback on the necessary updates to the ECLiPSe adapter
+file.
 
 Tools
 -----

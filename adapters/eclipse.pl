@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for ECLiPSe 6.1#140 and later versions
-%  Last updated on February 6, 2012
+%  Last updated on February 7, 2012
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -50,6 +50,9 @@ format(Stream, Format, Arguments) :-
 '$lgt_eclipse_convert_format'([0'~, 0's| Codes], [String| Arguments], [0'%, 0's| ConvertedCodes], [Atom| ConvertedArguments]) :-
 	!,
 	atom_codes(Atom, String),
+	'$lgt_eclipse_convert_format'(Codes, Arguments, ConvertedCodes, ConvertedArguments).
+'$lgt_eclipse_convert_format'([0'~, 0'~| Codes], Arguments, [0'~| ConvertedCodes], ConvertedArguments) :-
+	!,
 	'$lgt_eclipse_convert_format'(Codes, Arguments, ConvertedCodes, ConvertedArguments).
 '$lgt_eclipse_convert_format'([0'~| Codes], [Argument| Arguments], [0'%| ConvertedCodes], [Argument| ConvertedArguments]) :-
 	!,
