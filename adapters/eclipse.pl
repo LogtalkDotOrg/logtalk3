@@ -38,20 +38,24 @@ format(Format, Arguments) :-
 	format(Stream, Format, Arguments).
 format(Stream, Format, Arguments) :-
 	atom_codes(Format, FormatCodes),
-	'$lgt_eclipse_convert_format'(FormatCodes, ConvertedFormatCodes),
-	atom_codes(ConvertedFormat, ConvertedFormatCodes),
-	atom_string(ConvertedFormat, ConvertedFormatString),
-	printf(Stream, ConvertedFormatString, Arguments).
+	'$lgt_eclipse_convert_format'(FormatCodes, Arguments, ConvertedFormatCodes, ConvertedArguments),
+	atom_codes(ConvertedFormatAtom, ConvertedFormatCodes),
+	atom_string(ConvertedFormatAtom, ConvertedFormat),
+	printf(Stream, ConvertedFormat, ConvertedArguments).
 
-'$lgt_eclipse_convert_format'([], []).
-'$lgt_eclipse_convert_format'([0'%| Codes], [0'%, 0'%| ConvertedCodes]) :-
+'$lgt_eclipse_convert_format'([], [], [], []).
+'$lgt_eclipse_convert_format'([0'%| Codes], Arguments, [0'%, 0'%| ConvertedCodes], ConvertedArguments) :-
 	!,
-	'$lgt_eclipse_convert_format'(Codes, ConvertedCodes).
-'$lgt_eclipse_convert_format'([0'~| Codes], [0'%| ConvertedCodes]) :-
+	'$lgt_eclipse_convert_format'(Codes, Arguments, ConvertedCodes, ConvertedArguments).
+'$lgt_eclipse_convert_format'([0'~, 0's| Codes], [String| Arguments], [0'%, 0's| ConvertedCodes], [Atom| ConvertedArguments]) :-
 	!,
-	'$lgt_eclipse_convert_format'(Codes, ConvertedCodes).
-'$lgt_eclipse_convert_format'([Code| Codes], [Code| ConvertedCodes]) :-
-	'$lgt_eclipse_convert_format'(Codes, ConvertedCodes).
+	atom_codes(Atom, String),
+	'$lgt_eclipse_convert_format'(Codes, Arguments, ConvertedCodes, ConvertedArguments).
+'$lgt_eclipse_convert_format'([0'~| Codes], [Argument| Arguments], [0'%| ConvertedCodes], [Argument| ConvertedArguments]) :-
+	!,
+	'$lgt_eclipse_convert_format'(Codes, Arguments, ConvertedCodes, ConvertedArguments).
+'$lgt_eclipse_convert_format'([Code| Codes], Arguments, [Code| ConvertedCodes], ConvertedArguments) :-
+	'$lgt_eclipse_convert_format'(Codes, Arguments, ConvertedCodes, ConvertedArguments).
 
 
 :- set_event_handler(134, '$lgt_eclipse_discontiguous_predicate_handler'/2).
