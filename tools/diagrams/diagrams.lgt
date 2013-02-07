@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2013/02/05,
+		date is 2013/02/07,
 		comment is 'Generates entity diagram DOT files for source files and libraries.']).
 
 	:- public(rlibrary/2).
@@ -252,6 +252,12 @@
 		;	atom_codes(Atom, Codes)
 		).
 
+	remember_referenced_entity(Entity) :-
+		(	referenced_entity_(Entity) ->
+			true
+		;	assertz(referenced_entity_(Entity))
+		).
+
 	reset_external_entities :-
 		retractall(included_entity_(_)),
 		retractall(referenced_entity_(_)).		
@@ -262,7 +268,7 @@
 		fail.
 	output_external_entities :-
 		write(dot_file, 'subgraph "cluster_others" {\n'),
-		write(dot_file, 'bgcolor=white\nlabel=""'),
+		write(dot_file, 'bgcolor=white\nlabel="(other referenced entities)"'),
 		nl(dot_file),
 		retract(referenced_entity_(Entity)),
 		(	current_object(Entity) ->
@@ -348,7 +354,7 @@
 		print_name(protocol, Protocol, ProtocolName),
 		print_name(protocol, ExtendedProtocol, ExtendedProtocolName),
 		arrow(ProtocolName, ExtendedProtocolName, extends, Options),
-		assertz(referenced_entity_(ExtendedProtocol)),
+		remember_referenced_entity(ExtendedProtocol),
 		fail.
 	output_protocol_relations(_, _).
 
@@ -357,35 +363,35 @@
 		print_name(object, Object, ObjectName),
 		print_name(protocol, Protocol, ProtocolName),
 		arrow(ObjectName, ProtocolName, implements, Options),
-		assertz(referenced_entity_(Protocol)),
+		remember_referenced_entity(Protocol),
 		fail.
 	output_object_relations(Instance, Options) :-
 		instantiates_class(Instance, Class),
 		print_name(object, Instance, InstanceName),
 		print_name(object, Class, ClassName),
 		arrow(InstanceName, ClassName, instantiates, Options),
-		assertz(referenced_entity_(Class)),
+		remember_referenced_entity(Class),
 		fail.
 	output_object_relations(Class, Options) :-
 		specializes_class(Class, SuperClass),
 		print_name(object, Class, ClassName),
 		print_name(object, SuperClass, SuperClassName),
 		arrow(ClassName, SuperClassName, specializes, Options),
-		assertz(referenced_entity_(SuperClass)),
+		remember_referenced_entity(SuperClass),
 		fail.
 	output_object_relations(Prototype, Options) :-
 		extends_object(Prototype, Parent),
 		print_name(object, Prototype, PrototypeName),
 		print_name(object, Parent, ParentName),
 		arrow(PrototypeName, ParentName, extends, Options),
-		assertz(referenced_entity_(Parent)),
+		remember_referenced_entity(Parent),
 		fail.
 	output_object_relations(Object, Options) :-
 		imports_category(Object, Category),
 		print_name(object, Object, ObjectName),
 		print_name(category, Category, CategoryName),
 		arrow(ObjectName, CategoryName, imports, Options),
-		assertz(referenced_entity_(Category)),
+		remember_referenced_entity(Category),
 		fail.
 	output_object_relations(_, _).
 
@@ -394,21 +400,21 @@
 		print_name(category, Category, CategoryName),
 		print_name(category, ExtendedCategory, ExtendedCategoryName),
 		arrow(CategoryName, ExtendedCategoryName, extends, Options),
-		assertz(referenced_entity_(ExtendedCategory)),
+		remember_referenced_entity(ExtendedCategory),
 		fail.
 	output_category_relations(Category, Options) :-
 		implements_protocol(Category, Protocol),
 		print_name(category, Category, CategoryName),
 		print_name(protocol, Protocol, ProtocolName),
 		arrow(CategoryName, ProtocolName, implements, Options),
-		assertz(referenced_entity_(Protocol)),
+		remember_referenced_entity(Protocol),
 		fail.
 	output_category_relations(Category, Options) :-
 		complements_object(Category, Object),
 		print_name(category, Category, CategoryName),
 		print_name(object, Object, ObjectName),
 		arrow(ObjectName, CategoryName, complements, Options),
-		assertz(referenced_entity_(Object)),
+		remember_referenced_entity(Object),
 		fail.
 	output_category_relations(_, _).
 
