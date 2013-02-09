@@ -22,9 +22,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.12,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2013/01/01,
+		date is 2013/02/09,
 		comment is 'Simple example of using conditional compilation to implement a portable operating-system interface for selected back-end Prolog compilers.'
 	]).
 
@@ -47,40 +47,51 @@
 			).
 
 		make_directory(Directory) :-
-			(	{exists_directory(Directory)} ->
+			expand_path(Directory, ExpandedPath),
+			(	{exists_directory(ExpandedPath)} ->
 				true
-			;	{make_directory(Directory)}
+			;	{make_directory(ExpandedPath)}
 			).
 
 		delete_directory(Directory) :-
-			{delete_directory(Directory)}.
+			expand_path(Directory, ExpandedPath),
+			{delete_directory(ExpandedPath)}.
 
 		change_directory(Directory) :-
-			{working_directory(_, Directory)}.
+			expand_path(Directory, ExpandedPath),
+			{working_directory(_, ExpandedPath)}.
 
 		working_directory(Directory) :-
 			{working_directory(Directory, Directory)}.
 
 		directory_exists(Directory) :-
-			{exists_directory(Directory)}.
+			expand_path(Directory, ExpandedPath),
+			{exists_directory(ExpandedPath)}.
 
 		file_exists(File) :-
-			{exists_file(File)}.
+			expand_path(File, ExpandedPath),
+			{exists_file(ExpandedPath)}.
 
 		file_modification_time(File, Time) :-
-			{time_file(File, Time)}.
+			expand_path(File, ExpandedPath),
+			{time_file(ExpandedPath, Time)}.
 
 		file_size(File, Size) :-
-			{size_file(File, Size)}.
+			expand_path(File, ExpandedPath),
+			{size_file(ExpandedPath, Size)}.
 
 		file_permission(File, Permission) :-
-			{access_file(File, Permission)}.
+			expand_path(File, ExpandedPath),
+			{access_file(ExpandedPath, Permission)}.
 
 		rename_file(Old, New) :-
-			{rename_file(Old, New)}.
+			expand_path(Old, OldExpandedPath),
+			expand_path(New, NewExpandedPath),
+			{rename_file(OldExpandedPath, NewExpandedPath)}.
 
 		delete_file(File) :-
-			{delete_file(File)}.
+			expand_path(File, ExpandedPath),
+			{delete_file(ExpandedPath)}.
 
 		environment_variable(Variable, Value) :-
 			{getenv(Variable, Value)}.

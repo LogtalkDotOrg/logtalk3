@@ -83,6 +83,11 @@ printed in bold typeface; entities that are not part of the processed files
 or libraries now use a dashed border; entity relation labels are now omitted
 by default. Also improved the tool documentation.
 
+Examples
+--------
+* CHANGED: The file and directory predicates defined in the `cc` example for
+SWI-Prolog now expand the path arguments before calling the native predicates.
+
 Installers and installation scripts
 -----------------------------------
 
