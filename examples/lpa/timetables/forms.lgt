@@ -15,11 +15,13 @@
 		version is 1.0,
 		date is 2005/5/8,
 		author is 'Example by LPA; adapted to Logtalk by Paulo Moura.',
-		comment is 'General attributes & methods for all forms.']).
+		comment is 'General attributes & methods for all forms.'
+	]).
 
 	:- public(print/0).
 	:- info(print/0, [
-		comment is 'Print the complete timetable from the pupil viewpoint.']).
+		comment is 'Print the complete timetable from the pupil viewpoint.'
+	]).
 
 	print :-
 		nl, write('FORM TIMETABLE...'), nl, nl,
@@ -34,16 +36,19 @@
 		version is 1.0,
 		date is 2005/5/8,
 		author is 'Example by LPA; adapted to Logtalk by Paulo Moura.',
-		comment is 'General attributes & methods for all forms.']).
+		comment is 'General attributes & methods for all forms.'
+	]).
 
 	:- public(print/0).
 	:- info(print/0, [
-		comment is 'Print the complete timetable from the pupil viewpoint.']).
+		comment is 'Print the complete timetable from the pupil viewpoint.'
+	]).
 
 	:- public(print_period/1).
 	:- info(print_period/1, [
 		comment is 'Print the pupil timetable for a specific period.',
-		argnames is ['Period']]).
+		argnames is ['Period']
+	]).
 
 	print :-
 		self(Self),

@@ -16,7 +16,8 @@
 		version is 1.2,
 		author is 'Parker Jones and Paulo Moura',
 		date is 2012/10/20,
-		comment is 'Unit tests for the "tabling" example.']).
+		comment is 'Unit tests for the "tabling" example.'
+	]).
 
 	unit(fibonacci).
 	unit(paths).

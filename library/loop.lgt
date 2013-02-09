@@ -30,7 +30,8 @@
 		version is 1.2,
 		author is 'Paulo Moura',
 		date is 2008/2/16,
-		comment is 'Loop control structures predicates.']).
+		comment is 'Loop control structures predicates.'
+	]).
 
 	:- meta_predicate(whiledo(0, 0)).
 	whiledo(Condition, Action) :-

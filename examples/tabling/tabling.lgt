@@ -16,7 +16,8 @@
 		author is 'Paulo Moura',
 		date is 2007/05/14,
 		comment is 'Simple tabling example using graph paths.',
-		source is 'Direct conversion to Logtalk of a XSB tabling example.']).
+		source is 'Direct conversion to Logtalk of a XSB tabling example.'
+	]).
 
 	:- public(path/2).
 	:- table(path/2).
@@ -40,7 +41,8 @@
 		author is 'Paulo Moura',
 		date is 2007/05/28,
 		comment is 'Simple tabling example using Fibonacci numbers.',
-		source is 'Direct conversion to Logtalk of a B-Prolog tabling example.']).
+		source is 'Direct conversion to Logtalk of a B-Prolog tabling example.'
+	]).
 
 	:- public(fib/2).
 	:- table(fib/2).
@@ -69,7 +71,8 @@
 			author is 'Joao Santos and Ricardo Rocha. Adapted to Logtalk by Paulo Moura',
 			date is 2012/10/20,
 			comment is 'Simple tabling example using graph paths.',
-			source is 'SLATE 2012 paper on mode directed tabling.']).
+			source is 'SLATE 2012 paper on mode directed tabling.'
+		]).
 	
 		:- public(path/3).
 		:- table(path(index, index, first)).
@@ -90,7 +93,8 @@
 			author is 'Joao Santos and Ricardo Rocha. Adapted to Logtalk by Paulo Moura',
 			date is 2012/10/20,
 			comment is 'Simple tabling example using graph paths.',
-			source is 'SLATE 2012 paper on mode directed tabling.']).
+			source is 'SLATE 2012 paper on mode directed tabling.'
+		]).
 
 		:- public(path/3).
 		:- table(path(index, index, min)).
@@ -113,7 +117,8 @@
 			author is 'Joao Santos and Ricardo Rocha. Adapted to Logtalk by Paulo Moura',
 			date is 2012/10/20,
 			comment is 'Simple tabling example using graph paths.',
-			source is 'SLATE 2012 paper on mode directed tabling.']).
+			source is 'SLATE 2012 paper on mode directed tabling.'
+		]).
 	
 		:- public(path/4).
 		:- table(path(index, index, min, all)).

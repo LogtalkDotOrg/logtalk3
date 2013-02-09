@@ -15,13 +15,15 @@
 		version is 1.1,
 		author is 'Paulo Moura and Paulo Nunes',
 		date is 2006/11/26,
-		comment is 'Default protocol for root find algorithms.']).
+		comment is 'Default protocol for root find algorithms.'
+	]).
 
 	:- public(find_root/5).
 	:- mode(find_root(+object_identifier, +float, +float, +float, -float), one).
 	:- info(find_root/5, [
 		comment is 'Find the root of a function in the interval [A, B] given a maximum aproximation error.',
-		argnames is ['Function', 'A', 'B', 'Error', 'Zero']]).
+		argnames is ['Function', 'A', 'B', 'Error', 'Zero']
+	]).
 
 :- end_protocol.
 
@@ -33,19 +35,22 @@
 		version is 1.1,
 		author is 'Paulo Moura and Paulo Nunes',
 		date is 2006/11/26,
-		comment is 'Default protocol for real functions of a single real variable.']).
+		comment is 'Default protocol for real functions of a single real variable.'
+	]).
 
 	:- public(eval/2).
 	:- mode(eval(+float, -float), one).
 	:- info(eval/2, [
 		comment is 'Calculates the function value.',
-		argnames is ['X', 'Fx']]).
+		argnames is ['X', 'Fx']
+	]).
 
 	:- public(evald/2).
 	:- mode(evald(+float, -float), one).
 	:- info(evald/2, [
 		comment is 'Calculates the value of the function derivative.',
-		argnames is ['X', 'DFx']]).
+		argnames is ['X', 'DFx']
+	]).
 
 :- end_protocol.
 
@@ -138,7 +143,8 @@
 		version is 1.3,
 		author is 'Paulo Moura and Paulo Nunes',
 		date is 2008/2/4,
-		comment is 'Bisection algorithm.']).
+		comment is 'Bisection algorithm.'
+	]).
 
 	find_root(Function, A, B, Error, Zero) :-
 		Function::eval(A, Fa),
@@ -176,7 +182,8 @@
 		version is 1.2,
 		author is 'Paul Crocker... No More Coffee',
 		date is 2007/07/06,
-		comment is 'Newton algorithm.']).
+		comment is 'Newton algorithm.'
+	]).
 
     find_root(Function, Xa, Xb, Deviation, Zero) :-
 		Ac is (Xb - Xa) / 2,		
@@ -202,7 +209,8 @@
 		version is 1.2,
 		author is 'Paulo Moura and Paulo Nunes',
 		date is 2006/11/26,
-		comment is 'Muller algorithm.']).
+		comment is 'Muller algorithm.'
+	]).
 
 	find_root(Function, Xa, Xb, Deviation, Zero) :-
 		Xc is (Xa + Xb) / 2.0, 
@@ -256,7 +264,8 @@
 		version is 2.1,
 		author is 'Paulo Moura and Paulo Nunes',
 		date is 2008/02/08,
-		comment is 'Multi-threading interface to root finding algorithms.']).
+		comment is 'Multi-threading interface to root finding algorithms.'
+	]).
 
 	:- threaded.
 
@@ -264,7 +273,8 @@
 	:- mode(find_root(+object_identifier, +float, +float, +float, -float, -object_identifier), one).
 	:- info(find_root/6, [
 		comment is 'Finds the root of a function in the interval [A, B] given a maximum aproximation error. Returns the method used.',
-		argnames is ['Function', 'A', 'B', 'Error', 'Zero', 'Method']]).
+		argnames is ['Function', 'A', 'B', 'Error', 'Zero', 'Method']
+	]).
 
 	find_root(Function, A, B, Error, Zero, Algorithm) :-
 		threaded((

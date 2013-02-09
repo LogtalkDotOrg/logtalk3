@@ -31,7 +31,8 @@
 		version is 1.5,
 		author is 'Richard O''Keefe; adapted to Logtalk by Paulo Moura.',
 		date is 2011/02/16,
-		comment is 'Set predicates implemented using ordered lists. Uses ==/2 for element comparison and standard term ordering.']).
+		comment is 'Set predicates implemented using ordered lists. Uses ==/2 for element comparison and standard term ordering.'
+	]).
 
 	delete([], _, []).
 	delete([Head| Tail], Element, Remaining) :-

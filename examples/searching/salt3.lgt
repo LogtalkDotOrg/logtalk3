@@ -43,7 +43,8 @@ Remarks:
 		author is 'Paula Marisa Sampaio',
 		date is 2011/04/01,
 		comment is 'Salt state-space search problem (updated from the original 1.0 version to support heuristics).',
-		parnames is ['Accumulator', 'Measure1', 'Measure2']]).
+		parnames is ['Accumulator', 'Measure1', 'Measure2']
+	]).
 
 	% each state is represented by a compound term with four arguments: (Accumulator, Measure1, Measure2, Step)
 	initial_state(initial, (0, 0, 0, all_empty)).

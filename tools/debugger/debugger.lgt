@@ -29,7 +29,8 @@
 		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2012/09/01,
-		comment is 'Debugger.']).
+		comment is 'Debugger.'
+	]).
 
 	% avoid a catch-22...
 	:- set_logtalk_flag(debug, off).

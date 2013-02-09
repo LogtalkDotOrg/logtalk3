@@ -15,7 +15,8 @@
 		version is 0.1,
 		author is 'Gopal Gupta et al. Adapted to Logtalk by Paulo Moura.',
 		date is 2010/07/23,
-		comment is 'Coinduction infinite streams example.']).
+		comment is 'Coinduction infinite streams example.'
+	]).
 
 	:- public(nat_stream/1).
 	:- coinductive(nat_stream/1).

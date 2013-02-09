@@ -7,13 +7,15 @@
 		version is 1.1,
 		author is 'Paulo Moura',
 		date is 2008/01/10,
-		comment is 'Simple test of the encoding/1 directive.']).
+		comment is 'Simple test of the encoding/1 directive.'
+	]).
 
 	:- public(name/1).
 	:- mode(name(?atom), zero_or_more).
 	:- info(name/1, [
 		comment is 'Table of person names.',
-		argnames is ['Name']]).
+		argnames is ['Name']
+	]).
 
 	name('António Simões').
 	name('Cátia Conceição').

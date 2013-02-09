@@ -16,7 +16,8 @@
 		version is 1.1,
 		author is 'Paulo Moura. Next step predicate comments contributed by Michael Igler.',
 		date is 2009/9/6,
-		comment is 'Water jug state space search problem.']).
+		comment is 'Water jug state space search problem.'
+	]).
 
 	% states are represented by the compound term (4-gallon jug, 3-gallon jug);
 	% in the initial state both jugs are empty:

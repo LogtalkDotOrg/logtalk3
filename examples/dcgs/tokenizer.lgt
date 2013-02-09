@@ -35,13 +35,15 @@
 		version is 1.0,
 		date is 2006/2/11,
 		author is 'Michael A. Covington',
-		comment is 'Natural language tokenizer example using DCG rules.']).
+		comment is 'Natural language tokenizer example using DCG rules.'
+	]).
 
 	:- public(tokens/2).
 	:- mode(tokens(+string, -list), zero_or_more).
 	:- info(tokens/2, [
 		comment is 'Parses a string into a list of tokens.',
-		argnames is ['String', 'Tokens']]).
+		argnames is ['String', 'Tokens']
+	]).
 
 	tokens(String, Tokens) :-
 		phrase(token_list(Tokens), String).

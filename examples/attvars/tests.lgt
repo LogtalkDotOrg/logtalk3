@@ -16,7 +16,8 @@
 		version is 1.4,
 		author is 'Paulo Moura',
 		date is 2011/03/13,
-		comment is 'Unit tests for the "attvars" example.']).
+		comment is 'Unit tests for the "attvars" example.'
+	]).
 
 	:- if(current_object(domain)).
 	test(attvars_1) :-

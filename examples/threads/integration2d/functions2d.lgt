@@ -15,19 +15,22 @@
 		version is 1.0,
 		author is 'Paul Crocker',
 		date is 2008/07/19,
-		comment is 'Example functions of two variables']).
+		comment is 'Example functions of two variables'
+	]).
 
 	:- public(eval/4).
 	:- mode(eval(+atom, +float,+float, -float), one).
 	:- info(eval/4, [
 		comment is 'Calculates the function value.',
-		argnames is ['Function', 'X', 'Y', 'Fxy']]).
+		argnames is ['Function', 'X', 'Y', 'Fxy']
+	]).
 
 	:- public(integral/2).
 	:- mode(integral(+atom, -float), one).
 	:- info(integral/2, [
 		comment is 'Function integral.',
-		argnames is ['Function', 'Integral']]).
+		argnames is ['Function', 'Integral']
+	]).
 
 	integral(circle,  -21.33333).
 	integral(poly6,     5.88698).

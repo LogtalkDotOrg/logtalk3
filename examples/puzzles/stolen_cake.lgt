@@ -48,7 +48,8 @@ Published on the web:
 	:- mode(thief(?atom), zero_or_one).
 	:- info(thief/1, [
 		comment is 'Thief that stole the cake.',
-		argnames is ['Thief']]).
+		argnames is ['Thief']
+	]).
 
 	thief(Thief) :-
 		villain(Thief),

@@ -18,7 +18,8 @@
 		date is 2010/6/23,
 		comment is 'Best first heuristic state space search strategy.',
 		source is 'Code adapted from the book "Prolog Programming for Artificial Intelligence" by Ivan Bratko.',
-		parnames is ['Threshold']]).
+		parnames is ['Threshold']
+	]).
 
 	:- uses(list, [member/2, reverse/2]).
 

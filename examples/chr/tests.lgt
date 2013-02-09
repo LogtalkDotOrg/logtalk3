@@ -16,7 +16,8 @@
 		version is 1.1,
 		author is 'Paulo Moura',
 		date is 2012/02/17,
-		comment is 'Unit tests for the "chr" example.']).
+		comment is 'Unit tests for the "chr" example.'
+	]).
 
 	:- if(current_object(dom)).
 	test(chr_dom_1) :-

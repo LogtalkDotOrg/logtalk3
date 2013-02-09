@@ -29,6 +29,7 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2010/10/20,
-		comment is 'Unit tests for the "profiler" tool.']).
+		comment is 'Unit tests for the "profiler" tool.'
+	]).
 
 :- end_object.

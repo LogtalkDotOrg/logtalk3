@@ -16,7 +16,8 @@
 		version is 1.1,
 		author is 'Paulo Moura',
 		date is 2011/02/01,
-		comment is 'Unit tests for the "delegates" example.']).
+		comment is 'Unit tests for the "delegates" example.'
+	]).
 
 	unit(delegator).
 	unit(a_delegator).

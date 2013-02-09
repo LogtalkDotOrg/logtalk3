@@ -15,13 +15,15 @@
 		version is 1.0,
 		date is 2010/12/19,
 		author is 'Paulo Moura',
-		comment is 'Computation of Fibonacci numbers using a fold left meta-predicate.']).
+		comment is 'Computation of Fibonacci numbers using a fold left meta-predicate.'
+	]).
 
 	:- public(nth/2).
 	:- mode(nth(+integer, -integer), one).
 	:- info(nth/2, [
 		comment is 'Calculates the Nth Fibonacci number.',
-		argnames is ['Nth', 'Number']]).
+		argnames is ['Nth', 'Number']
+	]).
 
 	nth(N, F) :-
 		meta::fold_left(next, 0-[0,1], _, N-[F, _]).

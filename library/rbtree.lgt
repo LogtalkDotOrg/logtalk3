@@ -46,9 +46,10 @@
 	:- public(partial_map/4).
 	:- meta_predicate(partial_map(*, *, 2, *)).
 	:- mode(partial_map(+tree, +list, @closure, -tree), zero_or_one).
-	:- info(partial_map/4,
-		[comment is 'Applies a closure to the tree pairs identified by a set of keys.',
-		 argnames is ['Tree', 'Keys', 'Closure', 'NewTree']]).
+	:- info(partial_map/4, [
+		comment is 'Applies a closure to the tree pairs identified by a set of keys.',
+		argnames is ['Tree', 'Keys', 'Closure', 'NewTree']
+	]).
 
 	new(t(Nil, Nil)) :-
 		Nil = black('', _, _, '').

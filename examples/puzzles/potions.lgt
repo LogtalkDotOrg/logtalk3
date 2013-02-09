@@ -22,7 +22,8 @@ http://www.csci.csusb.edu/dick/cs320/prolog/Potions.htm
 		version is 1.2,
 		date is 2006/3/26,
 		author is 'Paulo Moura',
-		comment is 'Harry Potter potions logical puzzle.']).
+		comment is 'Harry Potter potions logical puzzle.'
+	]).
 
 	:- uses(list, [select/3]).
 
@@ -30,7 +31,8 @@ http://www.csci.csusb.edu/dick/cs320/prolog/Potions.htm
 	:- mode(potions(?atom, ?atom, ?atom, ?atom, ?atom, ?atom, ?atom), zero_or_one).
 	:- info(potions/7, [
 		comment is 'Contents of the seven potions.',
-		argnames is ['P1', 'P2', 'P3', 'P4', 'P5', 'P6', 'P7']]).
+		argnames is ['P1', 'P2', 'P3', 'P4', 'P5', 'P6', 'P7']
+	]).
 
 	contents([wine, wine, poison, poison, poison, forward, backwards]).
 

@@ -15,13 +15,15 @@
 		version is 1.0,
 		date is 2004/4/29,
 		author is 'Paulo Moura',
-		comment is 'Walker movements.']).
+		comment is 'Walker movements.'
+	]).
 
 	:- public(walk/2).
 	:- mode(walk(@list, -position), one).
 	:- info(walk/2, [
 		comment is 'Parses a sequence of walker moves, returning ending position.',
-		argnames is ['Moves', 'Ending']]).
+		argnames is ['Moves', 'Ending']
+	]).
 
 	walk(Moves, Ending) :-
 		phrase(walk(Ending), Moves).

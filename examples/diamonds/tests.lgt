@@ -16,7 +16,8 @@
 		version is 1.0,
 		author is 'Parker Jones and Paulo Moura',
 		date is 2010/03/16,
-		comment is 'Unit tests for the "diamonds" example.']).
+		comment is 'Unit tests for the "diamonds" example.'
+	]).
 
 	test(d1) :-
 		d1::predicate_property(m, defined_in(Object)),

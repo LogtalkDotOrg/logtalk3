@@ -15,19 +15,22 @@
 		version is 1.0,
 		date is 2004/5/10,
 		author is 'Paulo Moura',
-		comment is 'Adaptation of the command language DCG example from the Amzi! Prolog manual.']).
+		comment is 'Adaptation of the command language DCG example from the Amzi! Prolog manual.'
+	]).
 
 	:- public(main/0).
 	:- mode(main, one).
 	:- info(main/0, [
-		comment is 'Starts iteractive command language interpreter.']).
+		comment is 'Starts iteractive command language interpreter.'
+	]).
 
 	:- private(booked/2).
 	:- dynamic(booked/2).
 	:- mode(booked(?atom, ?atom), zero_or_more).
 	:- info(booked/2, [
 		comment is 'Booked places in flight.',
-		argnames is ['Passenger', 'Flight']]).
+		argnames is ['Passenger', 'Flight']
+	]).
 
 	main :-
 		write('Fly Amzi! Air'), nl,

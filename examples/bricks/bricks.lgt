@@ -17,26 +17,30 @@
 		version is 1.1,
 		date is 2000/10/31,
 		author is 'Paulo Moura',
-		comment is 'Two-dimensional brick (or should I say square?) class.']).
+		comment is 'Two-dimensional brick (or should I say square?) class.'
+	]).
 
 	:- public(position/2).
 	:- mode(position(?integer, ?integer), zero_or_one).
 	:- info(position/2, [
 		comment is 'Brick current position.',
-		argnames is ['X', 'Y']]).
+		argnames is ['X', 'Y']
+	]).
 
 	:- private(position_/2).
 	:- dynamic(position_/2).
 	:- mode(position_(?integer, ?integer), zero_or_one).
 	:- info(position_/2, [
 		comment is 'Stores brick current position.',
-		argnames is ['X', 'Y']]).
+		argnames is ['X', 'Y']
+	]).
 
 	:- public(move/2).
 	:- mode(move(+integer, +integer), one).
 	:- info(move/2, [
 		comment is 'Moves a brick to a new position.',
-		argnames is ['X', 'Y']]).
+		argnames is ['X', 'Y']
+	]).
 
 	position(X, Y) :-
 		::position_(X, Y).
@@ -73,7 +77,8 @@
 		version is 1.0,
 		date is 1998/3/23,
 		author is 'Paulo Moura',
-		comment is 'Stack of bricks as a constrained binary relation.']).
+		comment is 'Stack of bricks as a constrained binary relation.'
+	]).
 
 	descriptor_([top, bottom]).
 
@@ -123,7 +128,8 @@
 		version is 1.2,
 		date is 2010/03/28,
 		author is 'Paulo Moura',
-		comment is 'Monitor for brick movements printing an ascii representation of each brick position.']).
+		comment is 'Monitor for brick movements printing an ascii representation of each brick position.'
+	]).
 
 	:- set_logtalk_flag(events, deny).
 

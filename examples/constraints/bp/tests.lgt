@@ -16,7 +16,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2010/04/10,
-		comment is 'Unit tests for the "constraints/bp" example.']).
+		comment is 'Unit tests for the "constraints/bp" example.'
+	]).
 
 	test(constraints_bp_1) :-
 		clique::go.

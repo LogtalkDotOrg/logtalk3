@@ -15,30 +15,35 @@
 		version is 5.2,
 		author is 'Paulo Moura',
 		date is 2011/09/24,
-		comment is 'Benchmark utility predicates and standard set of benchmarks.']).
+		comment is 'Benchmark utility predicates and standard set of benchmarks.'
+	]).
 
 	:- public(run/0).
 	:- mode(run, one).
 	:- info(run/0, [
-		comment is 'Runs all benchmarks the default number of times.']).
+		comment is 'Runs all benchmarks the default number of times.'
+	]).
 
 	:- public(run/1).
 	:- mode(run(+integer), one).
 	:- info(run/1, [
 		comment is 'Runs all benchmarks the specified number of times.',
-		argnames is ['N']]).
+		argnames is ['N']
+	]).
 
 	:- public(run/2).
 	:- mode(run(+atom, +integer), one).
 	:- info(run/2, [
 		comment is 'Runs a specific benchmark the specified number of times.',
-		argnames is ['Id', 'N']]).
+		argnames is ['Id', 'N']
+	]).
 
 	:- public(benchmark/2).
 	:- mode(move(?atom, -callable), zero_or_more).
 	:- info(move/2, [
 		comment is 'Table of benchmark identifiers and benchmark goals.',
-		argnames is ['Id', 'Goal']]).
+		argnames is ['Id', 'Goal']
+	]).
 
 	% run all benchmarks the default number of times:
 	run :-

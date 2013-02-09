@@ -19,13 +19,15 @@
 		date is 2000/4/22,
 		comment is 'Air-line trip planner.',
 		parnames is ['Mode'],
-		source is 'Example adapted from the Francis G. McCabe L&O documentation.']).
+		source is 'Example adapted from the Francis G. McCabe L&O documentation.'
+	]).
 
 	:- public(from/3).
 	:- mode(from(+atom, +atom, -list), zero_or_more).
-	:- info(from/3,
-		[comment is 'Plan a trip from Start to Destination.',
-		 argnames is ['Start', 'Destination', 'Plan']]).
+	:- info(from/3, [
+		comment is 'Plan a trip from Start to Destination.',
+		argnames is ['Start', 'Destination', 'Plan']
+	]).
 
 	from(Start, Destination, Plan) :-
 		from(Start, Destination, [], Plan).

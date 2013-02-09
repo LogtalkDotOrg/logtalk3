@@ -16,7 +16,8 @@
 		version is 1.3,
 		author is 'Parker Jones and Paulo Moura',
 		date is 2011/05/04,
-		comment is 'Unit tests for the "lambdas" example.']).
+		comment is 'Unit tests for the "lambdas" example.'
+	]).
 
 	:- uses(lgtunit, [op(700, xfx, '=~='), '=~='/2]).
 

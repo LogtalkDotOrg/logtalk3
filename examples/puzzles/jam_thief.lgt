@@ -33,13 +33,15 @@ Assuming, as we do, that fairy-tale characters either always lie or always tell 
 	:- mode(thief(?atom), zero_or_one).
 	:- info(thief/1, [
 		comment is 'Thief that stole the jam.',
-		argnames is ['Thief']]).
+		argnames is ['Thief']
+	]).
 
 	:- public(thief/2).
 	:- mode(thief(?atom, -list), zero_or_one).
 	:- info(thief/2, [
 		comment is 'Thief that stole the jam.',
-		argnames is ['Thief', 'Justification']]).
+		argnames is ['Thief', 'Justification']
+	]).
 
 	thief(Thief) :-
 		(claim(dormouse, Thief); \+ claim(dormouse, Thief)),

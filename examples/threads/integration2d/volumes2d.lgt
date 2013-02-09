@@ -15,7 +15,8 @@
 		version is 1.0,
 		author is 'Paul Crocker',
 		date is 2008/07/18,
-		comment is 'Interval and trapezium volume predicates for quadrature methods.']).
+		comment is 'Interval and trapezium volume predicates for quadrature methods.'
+	]).
 
 	:- private(interval_volume/9).
 

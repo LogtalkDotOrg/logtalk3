@@ -15,13 +15,15 @@
 		version is 1.1,
 		date is 2008/10/2,
 		author is 'Paulo Moura',
-		comment is 'Simple meta-interpreter for pure Prolog with only conjunctions as clause bodies.']).
+		comment is 'Simple meta-interpreter for pure Prolog with only conjunctions as clause bodies.'
+	]).
 
 	:- public(solve/1).
 	:- mode(solve(+goal), zero_or_more).
 	:- info(solve/1, [
 		comment is 'Proves goal.',
-		argnames is ['Goal']]).
+		argnames is ['Goal']
+	]).
 
 	solve(true) :-
 		!.
@@ -42,13 +44,15 @@
 		version is 1.1,
 		date is 2008/10/2,
 		author is 'Paulo Moura',
-		comment is 'Meta-interpreter for pure Prolog with only conjunctions as clause bodies.']).
+		comment is 'Meta-interpreter for pure Prolog with only conjunctions as clause bodies.'
+	]).
 
 	:- public(proof_tree/2).
 	:- mode(proof_tree(+goal, -tree), zero_or_more).
 	:- info(proof_tree/2, [
 		comment is 'Constructs a proof tree for a goal.',
-		argnames is ['Goal', 'Tree']]).
+		argnames is ['Goal', 'Tree']
+	]).
 
 	proof_tree(true, true) :-
 		!.
@@ -69,13 +73,15 @@
 		version is 1.1,
 		date is 2008/10/2,
 		author is 'Paulo Moura',
-		comment is 'A simple tracer meta-interpreter for pure Prolog with only conjunctions as clause bodies.']).
+		comment is 'A simple tracer meta-interpreter for pure Prolog with only conjunctions as clause bodies.'
+	]).
 
 	:- public(trace/1).
 	:- mode(trace(+goal), zero_or_more).
 	:- info(trace/1, [
 		comment is 'Traces goal proof.',
-		argnames is ['Goal']]).
+		argnames is ['Goal']
+	]).
 
 	trace(Goal) :-
 		trace(Goal, 1).

@@ -16,7 +16,8 @@
 		author is 'Paulo Moura and Paul Crocker',
 		date is 2011/03/28,
 		comment is 'Multi-threaded implementation of the merge sort algorithm.',
-		parameters is ['Threads'- 'Number of threads to use in sorting. Valid values are 1, 2, 4, 8, etc.']]).
+		parameters is ['Threads' - 'Number of threads to use in sorting. Valid values are 1, 2, 4, 8, etc.']
+	]).
 
 	:- threaded.
 
@@ -24,7 +25,8 @@
 	:- mode(msort(@list(number), -list(number)), one).
 	:- info(msort/2, [
 		comment is 'Sorts a list of terms into ascending order.',
-		argnames is ['List', 'Sorted']]).
+		argnames is ['List', 'Sorted']
+	]).
 
 	msort(List, Sorted) :-
 		parameter(1, Threads),

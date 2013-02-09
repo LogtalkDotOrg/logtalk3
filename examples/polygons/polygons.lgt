@@ -17,7 +17,8 @@
 		version is 1.2,
 		date is 2005/8/15,
 		author is 'Paulo Moura',
-		comment is 'Polygon predicates.']).
+		comment is 'Polygon predicates.'
+	]).
 
 	:- public(move/2).
 	:- mode(move(+integer, +integer), one).
@@ -74,7 +75,8 @@
 		version is 1.0,
 		date is 1998/3/23,
 		author is 'Paulo Moura',
-		comment is 'Triangle class.']).
+		comment is 'Triangle class.'
+	]).
 
 	number_of_sides(3).
 
@@ -92,7 +94,8 @@
 		version is 1.0,
 		date is 1998/3/23,
 		author is 'Paulo Moura',
-		comment is 'Square class.']).
+		comment is 'Square class.'
+	]).
 
 	number_of_sides(4).
 
@@ -110,7 +113,8 @@
 		version is 1.0,
 		date is 1998/3/23,
 		author is 'Paulo Moura',
-		comment is 'Pentagon class.']).
+		comment is 'Pentagon class.'
+	]).
 
 	number_of_sides(5).
 
@@ -128,7 +132,8 @@
 		version is 1.0,
 		date is 1998/3/23,
 		author is 'Paulo Moura',
-		comment is 'Hexagon class.']).
+		comment is 'Hexagon class.'
+	]).
 
 	number_of_sides(6).
 
@@ -145,7 +150,8 @@
 		version is 1.1,
 		date is 2004/8/15,
 		author is 'Paulo Moura',
-		comment is 'Concentric polygons as a constrained binary relation.']).
+		comment is 'Concentric polygons as a constrained binary relation.'
+	]).
 
 	:- uses(list,
 		[member/2, select/3]).

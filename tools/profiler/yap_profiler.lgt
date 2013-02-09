@@ -29,7 +29,8 @@
 		version is 1.1,
 		author is 'Paulo Moura and Vitor Santos Costa',
 		date is 2011/02/24,
-		comment is 'Simple wrapper for the YAP count profiler.']).
+		comment is 'Simple wrapper for the YAP count profiler.'
+	]).
 
 	load(File) :-
 		current_prolog_flag(profiling, Current),

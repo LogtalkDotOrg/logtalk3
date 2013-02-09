@@ -17,7 +17,8 @@
 		author is 'Paul Crocker, adapted from original code by Colin Barker',
 		comment is 'Simple multi-threaded version of the Fast Fourier Transform.',
 		source is 'Original code available from http://pagesperso-orange.fr/colin.barker/lpa/fft.htm',
-		parameters is ['Threads'- 'Number of threads to use. Valid values are 1, 2, 4, 8, 16, etc.']]).
+		parameters is ['Threads' - 'Number of threads to use. Valid values are 1, 2, 4, 8, 16, etc.']
+	]).
 
 	:- threaded.
 
@@ -25,7 +26,8 @@
 	:- mode(fft(+integer, +list, -list), one).
 	:- info(fft/3, [
 		comment is 'Returns a list of complex numbers the FFT given a List of Complex Numbers and N the size of that list a power of two',
-		argnames is ['N', 'List', 'FFT']]).
+		argnames is ['N', 'List', 'FFT']
+	]).
 
 	fft(N, L, Ft) :-
 		parameter(1, Threads),

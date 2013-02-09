@@ -30,7 +30,8 @@
 		version is 0.73,
 		date is 2011/01/21,
 		author is 'Paulo Moura',
-		comment is 'Compiler for the "meta" object meta-predicates. Generates auxiliary predicates in order to avoid meta-call overheads.']).
+		comment is 'Compiler for the "meta" object meta-predicates. Generates auxiliary predicates in order to avoid meta-call overheads.'
+	]).
 
 	:- uses(list, [append/3, length/2]).
 	:- uses(gensym, [gensym/2]).

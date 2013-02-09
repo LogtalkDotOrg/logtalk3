@@ -16,7 +16,8 @@
 		version is 1.1,
 		author is 'Parker Jones and Paulo Moura',
 		date is 2012/07/06,
-		comment is 'Unit tests for the "instmethods" example.']).
+		comment is 'Unit tests for the "instmethods" example.'
+	]).
 
 	unit(root).
 	unit(instance1).

@@ -15,7 +15,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2011/03/22,
-		comment is 'Experiment with co-inductive sorting of lists.']).
+		comment is 'Experiment with co-inductive sorting of lists.'
+	]).
 
 	:- public(keysort/2).
 

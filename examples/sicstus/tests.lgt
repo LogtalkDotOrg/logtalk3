@@ -16,7 +16,8 @@
 		version is 1.11,
 		author is 'Parker Jones and Paulo Moura',
 		date is 2011/05/25,
-		comment is 'Unit tests for the "sicstus" example.']).
+		comment is 'Unit tests for the "sicstus" example.'
+	]).
 
 	:- uses(lgtunit, [op(700, xfx, '=~='), '=~='/2]).
 

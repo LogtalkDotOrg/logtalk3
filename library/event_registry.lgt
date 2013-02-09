@@ -30,7 +30,8 @@
 		version is 1.1,
 		author is 'Paulo Moura',
 		date is 2009/10/8,
-		comment is 'Before and after events registry predicates.']).
+		comment is 'Before and after events registry predicates.'
+	]).
 
 	monitor(Monitor) :-
 		current_event(before, _, _, _, Monitor),

@@ -14,7 +14,8 @@ version 2.1 (http://opensource.org/licenses/osl-2.1.php).
 		version is 1.0,
 		author is 'Nobukuni Kino and Paulo Moura',
 		date is 2011/08/17,
-		comment is 'Stream variables (supporting logical, backtracable, adding and retrieving of terms).']).
+		comment is 'Stream variables (supporting logical, backtracable, adding and retrieving of terms).'
+	]).
 
 	:- public(new/1).
 	:- mode(new(-streamvar), one).
@@ -36,7 +37,8 @@ version 2.1 (http://opensource.org/licenses/osl-2.1.php).
 	:- mode(<=(?streamvar, @nonvar), one).
 	:- info((<=)/2, [
 		comment is 'Sets the state of the stream variable Variable to Value (initializing the variable if needed).',
-		argnames is ['Variable', 'Value']]).
+		argnames is ['Variable', 'Value']
+	]).
 
 	:- public(op(100, xfx, <=)).
 
@@ -44,7 +46,8 @@ version 2.1 (http://opensource.org/licenses/osl-2.1.php).
 	:- mode(=>(+streamvar, ?nonvar), zero_or_one).
 	:- info((=>)/2, [
 		comment is 'Unifies Value with the current state of the stream variable Variable.',
-		argnames is ['Variable', 'Value']]).
+		argnames is ['Variable', 'Value']
+	]).
 
 	:- public(op(100, xfx, =>)).
 

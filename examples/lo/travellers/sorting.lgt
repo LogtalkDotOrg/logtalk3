@@ -17,7 +17,8 @@
 		date is 2000/4/22,
 		parnames is ['Order'],
 		comment is '.',
-		source is 'Example adapted from the Francis G. McCabe L&O documentation.']).
+		source is 'Example adapted from the Francis G. McCabe L&O documentation.'
+	]).
 
 	:- public(sort/2).
 	:- mode(sort(+list, -list), one).
@@ -53,7 +54,8 @@
 		version is 1.0,
 		date is 2000/4/22,
 		comment is '.',
-		source is 'Example adapted from the Francis G. McCabe L&O documentation.']).
+		source is 'Example adapted from the Francis G. McCabe L&O documentation.'
+	]).
 
 	:- public(less/2).
 
@@ -73,7 +75,8 @@
 		version is 1.0,
 		date is 2000/4/22,
 		comment is '.',
-		source is 'Example adapted from the Francis G. McCabe L&O documentation.']).
+		source is 'Example adapted from the Francis G. McCabe L&O documentation.'
+	]).
 
 	:- public(less/2).
 
@@ -91,7 +94,8 @@
 		date is 2000/4/22,
 		parnames is ['OX', 'OY'],
 		comment is '.',
-		source is 'Example adapted from the Francis G. McCabe L&O documentation.']).
+		source is 'Example adapted from the Francis G. McCabe L&O documentation.'
+	]).
 
 	:- public(less/2).
 
@@ -153,7 +157,8 @@
 		date is 2000/4/22,
 		comment is '.',
 		parnames is ['Town'],
-		source is 'Example adapted from the Francis G. McCabe L&O documentation.']).
+		source is 'Example adapted from the Francis G. McCabe L&O documentation.'
+	]).
 
 	:- public(less/2).
 

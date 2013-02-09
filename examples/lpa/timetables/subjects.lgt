@@ -15,11 +15,13 @@
 		version is 1.0,
 		date is 2005/5/8,
 		author is 'Example by LPA; adapted to Logtalk by Paulo Moura.',
-		comment is 'General attributes & methods for all subjects.']).
+		comment is 'General attributes & methods for all subjects.'
+	]).
 
 	:- public(print/0).
 	:- info(print/0, [
-		comment is 'Print complete timetable from the subject viewpoint.']).
+		comment is 'Print complete timetable from the subject viewpoint.'
+	]).
 
 	print :-
 		nl, write('SUBJECT TIMETABLE ...'), nl, nl,
@@ -35,11 +37,13 @@
 		version is 1.0,
 		date is 2005/5/8,
 		author is 'Example by LPA; adapted to Logtalk by Paulo Moura.',
-		comment is 'General attributes & methods for all subjects.']).
+		comment is 'General attributes & methods for all subjects.'
+	]).
 
 	:- public(print/0).
 	:- info(print/0, [
-		comment is 'Print complete timetable from the subject viewpoint.']).
+		comment is 'Print complete timetable from the subject viewpoint.'
+	]).
 
 	print :-
 		self(Self),

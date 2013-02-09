@@ -123,7 +123,8 @@
 		version is 1.4,
 		author is 'Parker Jones and Paulo Moura',
 		date is 2012/03/03,
-		comment is 'Unit tests for the "metapredicates" example.']).
+		comment is 'Unit tests for the "metapredicates" example.'
+	]).
 
 	% This example defines a plain Prolog predicate even_integer/1. As the
 	% definition is in the pseudo-object "user", moving the call to another object

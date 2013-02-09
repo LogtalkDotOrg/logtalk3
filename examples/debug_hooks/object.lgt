@@ -5,7 +5,8 @@
 		version is 1.0,
 		author is pm,
 		date is 2008/4/9,
-		comment is 'Simple example of using compilation hooks and term expansion for conditional compilation of debug statements.']).
+		comment is 'Simple example of using compilation hooks and term expansion for conditional compilation of debug statements.'
+	]).
 
 	:- public(append/3).
 

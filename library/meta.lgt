@@ -30,7 +30,8 @@
 		version is 4.0,
 		date is 2011/01/18,
 		author is 'Paulo Moura',
-		comment is 'Some useful meta-predicates.']).
+		comment is 'Some useful meta-predicates.'
+	]).
 
 	:- alias(metap, map/2, succeeds/2).
 	:- alias(metap, include/3, filter/3).

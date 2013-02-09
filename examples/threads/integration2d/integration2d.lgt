@@ -15,13 +15,15 @@
 		version is 1.1,
 		author is 'Paul Crocker',
 		date is 2008/7/11,
-		comment is 'Default protocol for Numerical Integration of functions of two variables.']).
+		comment is 'Default protocol for Numerical Integration of functions of two variables.'
+	]).
 
 	:- public(integrate/8).
 	:- mode(integrate(+object_identifier, +float, +float, +float, +float, +integer, +float, -float), one).
 	:- info(integrate/8, [
 		comment is 'Find the integral of a function of two variables in the interval [A, B] [C, D] given a maximum approximation error (epsilon).',
-		argnames is ['Function', 'A', 'B', 'C', 'D','NP', 'Epsilon', 'Integral']]).
+		argnames is ['Function', 'A', 'B', 'C', 'D','NP', 'Epsilon', 'Integral']
+	]).
 
 :- end_protocol.
 
@@ -37,7 +39,8 @@
 		author is 'Paul Crocker',
 		date is 2008/07/11,
 		comment is 'Multi-threading implementation of Recursive Gaussian Quadrature Methods for Numerical Integration for functions of two variables.',
-		parameters is ['Threads'- 'Number of threads to use (1, 4, 16, 64, 256, ...).']]).
+		parameters is ['Threads' - 'Number of threads to use (1, 4, 16, 64, 256, ...).']
+	]).
 
 	integrate(Function, A, B, C, D, NP, Epsilon, Integral) :-
 		parameter(1, Threads),
@@ -134,7 +137,8 @@
 		author is 'Paul Crocker',
 		date is 2008/08/30,
 		comment is 'Multi-threading implementation of Recursive Gaussian Quadrature Methods for Numerical Integration for functions of two real variables.',
-		parameters is ['Threads'- 'Number of threads to use (1, 4, 9, 16, 25, ...).']]).
+		parameters is ['Threads' - 'Number of threads to use (1, 4, 9, 16, 25, ...).']
+	]).
 
 	integrate(Function, A, B, C, D, NP, Epsilon, Integral) :-
 		parameter(1, Threads),

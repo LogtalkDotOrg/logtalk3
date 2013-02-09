@@ -15,7 +15,8 @@
 		version is 1.0,
 		author is 'Gopal Gupta et al. Adapted to Logtalk by Paulo Moura.',
 		date is 2011/07/02,
-		comment is 'Coinduction example of filtering a coinductive list.']).
+		comment is 'Coinduction example of filtering a coinductive list.'
+	]).
 
 	:- public(filter/2).
 	:- coinductive(filter/2).

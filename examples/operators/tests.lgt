@@ -16,7 +16,8 @@
 		version is 1.2,
 		author is 'Parker Jones and Paulo Moura',
 		date is 2012/11/26,
-		comment is 'Unit tests for the "operators" example.']).
+		comment is 'Unit tests for the "operators" example.'
+	]).
 
 	unit(double).
 	unit(triple).

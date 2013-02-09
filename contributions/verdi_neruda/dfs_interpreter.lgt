@@ -6,7 +6,8 @@
 		version is 1.0,
 		author is 'Victor Lagerkvist',
 		date is 2010/06/13,
-		comment is 'Depth-first interpreter for general logic programs.']).
+		comment is 'Depth-first interpreter for general logic programs.'
+	]).
 
 	prove(Goal, DB) :- 
 		prove_body([Goal], -1, DB).

@@ -31,7 +31,8 @@
 		version is 1.5,
 		author is 'Paulo Moura',
 		date is 2011/12/15,
-		comment is 'List of numbers predicates.']).
+		comment is 'List of numbers predicates.'
+	]).
 
 	average([], 0.0).
 	average([N| Ns], Average) :-

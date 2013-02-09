@@ -16,7 +16,8 @@
 		author is 'Paulo Moura',
 		date is 2008/2/29,
 		comment is 'Simple example for comparing single and multi-threading calculation of prime numbers.',
-		parameters is ['Threads'- 'Number of threads to use.']]).
+		parameters is ['Threads' - 'Number of threads to use.']
+	]).
 
 	:- threaded.
 
@@ -24,7 +25,8 @@
 	:- mode(primes(+integer, +integer, -list), one).
 	:- info(primes/3, [
 		comment is 'Returns a list of all prime numbers in the given interval. No restrictions on the number of threads to use besides those imposed by the backend Prolog compiler.',
-		argnames is ['Inf', 'Sup', 'Primes']]).
+		argnames is ['Inf', 'Sup', 'Primes']
+	]).
 
 	primes(Inf, Sup, Primes) :-
 		parameter(1, Threads),

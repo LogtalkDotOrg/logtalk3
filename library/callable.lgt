@@ -30,7 +30,8 @@
 		version is 1.2,
 		author is 'Paulo Moura',
 		date is 2009/3/6,
-		comment is 'Callable term type predicates.']).
+		comment is 'Callable term type predicates.'
+	]).
 
 	valid(Callable) :-
 		(	atom(Callable) ->

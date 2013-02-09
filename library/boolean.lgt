@@ -30,13 +30,15 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2010/05/31,
-		comment is 'Boolean data type predicates.']).
+		comment is 'Boolean data type predicates.'
+	]).
 
 	:- public(eval/2).
 	:- mode(eval(+nonvar, -boolean), zero_or_one).
 	:- info(eval/2, [
 		comment is 'Evaluates a boolean expression, returning either true or false. Expressions use the (,)/2, (;)/2, and \+/1 standard operators, plus the atoms true and false.',
-		argnames is ['Expression', 'Value']]).
+		argnames is ['Expression', 'Value']
+	]).
 
 	eval(Expression, Value) :-
 		(	var(Expression) ->

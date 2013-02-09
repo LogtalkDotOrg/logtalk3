@@ -72,7 +72,8 @@
 		author is 'Richard O''Keefe; adapted to Logtalk by Paulo Moura and Victor Lagerkvist.',
 		date is 2010/02/19,
 		comment is 'Heap implementation, parameterized by the order to be used to compare keys ("<" or ">").',
-		parnames is ['Order']]).
+		parnames is ['Order']
+	]).
 
 	insert(Key, Value, t(M,[],OldTree), t(N,[],NewTree)) :- !,
 		N is M + 1,
@@ -211,7 +212,8 @@
 		version is 1.0,
 		author is 'Paulo Moura.',
 		date is 2010/02/19,
-		comment is 'Min-heap implementation. Uses standard order to compare keys.']).
+		comment is 'Min-heap implementation. Uses standard order to compare keys.'
+	]).
 
 :- end_object.
 
@@ -223,6 +225,7 @@
 		version is 1.0,
 		author is 'Paulo Moura.',
 		date is 2010/02/19,
-		comment is 'Max-heap implementation. Uses standard order to compare keys.']).
+		comment is 'Max-heap implementation. Uses standard order to compare keys.'
+	]).
 
 :- end_object.

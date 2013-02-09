@@ -17,12 +17,14 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 1998/3/23,
-		comment is 'State space search strategies.']).
+		comment is 'State space search strategies.'
+	]).
 
 	:- public(solve/3).
 	:- mode(solve(+object, +nonvar, -list), zero_or_more).
-	:- info(solve/3,
-		[comment is 'State space search solution.',
-		 argnames is ['Space', 'State', 'Path']]).
+	:- info(solve/3, [
+		comment is 'State space search solution.',
+		argnames is ['Space', 'State', 'Path']
+	]).
 
 :- end_object.

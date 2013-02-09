@@ -45,7 +45,8 @@
 		version is 1.0,
 		author is 'Dan Cliburn. Adapted to Logtalk by Paulo Moura.',
 		date is 2010/09/10,
-		comment is 'Hunt the Wumpus text adventure.']).
+		comment is 'Hunt the Wumpus text adventure.'
+	]).
 
 	%:- initialization(main).
 

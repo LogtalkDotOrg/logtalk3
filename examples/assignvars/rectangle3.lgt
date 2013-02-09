@@ -17,30 +17,35 @@
 		author is 'Paulo Moura',
 		date is 2005/1/8,
 		comment is 'A simple implementation of a geometric rectangle using assignable variables and parametric objects.',
-		parnames is ['Width', 'Height', 'Position']]).
+		parnames is ['Width', 'Height', 'Position']
+	]).
 
 	:- public(init/0).
 	:- mode(init, one).
-	:- info(init/0,
-		[comment is 'Initialize rectangle position.']).
+	:- info(init/0, [
+		comment is 'Initialize rectangle position.'
+	]).
 
 	:- public(area/1).
 	:- mode(area(-integer), one).
-	:- info(area/1,
-		[comment is 'Rectangle area.',
-		 argnames is ['Area']]).
+	:- info(area/1, [
+		comment is 'Rectangle area.',
+		argnames is ['Area']
+	]).
 
 	:- public(move/2).
 	:- mode(move(+integer, +integer), one).
 	:- info(move/2, [
 		comment is 'Moves a rectangle to a new position.',
-		argnames is ['X', 'Y']]).
+		argnames is ['X', 'Y']
+	]).
 
 	:- public(position/2).
 	:- mode(position(?integer, ?integer), zero_or_one).
 	:- info(position/2, [
 		comment is 'Rectangle current position.',
-		argnames is ['X', 'Y']]).
+		argnames is ['X', 'Y']
+	]).
 
 	init :-
 		parameter(3, Position),

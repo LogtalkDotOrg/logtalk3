@@ -31,7 +31,8 @@
 		author is 'Paulo Moura',
 		date is 2010/2/10,
 		comment is 'Set predicates with elements constrained to a single type.',
-		parnames is ['Type']]).
+		parnames is ['Type']
+	]).
 
 	valid((-)) :-				% catch variables
 		!,

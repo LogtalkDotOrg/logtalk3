@@ -30,7 +30,8 @@
 		author is 'Paulo Moura',
 		date is 2008/2/14,
 		comment is 'Random number generator predicates (for tuples of random numbers).',
-		parameters is ['TupleDim'- 'Tuple dimension.']]).
+		parameters is ['TupleDim'- 'Tuple dimension.']
+	]).
 
 	:- synchronized([random/1, randseq/4, randset/4, reset_seed/0, set_seed/1]).
 
@@ -41,7 +42,8 @@
 	:- mode(seed_(-integer, -integer, -integer), one).
 	:- info(seed_/3, [
 		comment is 'Stores the current random generator seed values.',
-		argnames is ['S0', 'S1', 'S2']]).
+		argnames is ['S0', 'S1', 'S2']
+	]).
 
 	random(Random) :-
 		parameter(1, TupleDim),

@@ -6,7 +6,8 @@
 		version is 1.0,
 		author is 'Victor Lagerkvist',
 		date is 2010/06/13,
-		comment is 'A simple database for planning in a blocks world.']).
+		comment is 'A simple database for planning in a blocks world.'
+	]).
 
 	member(X, [X|_]) <- true.
 	member(X, [_|Xs]) <-

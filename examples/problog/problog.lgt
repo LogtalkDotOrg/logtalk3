@@ -15,7 +15,8 @@
 		version is 0.41,
 		author is 'Paulo Moura',
 		date is 2011/02/24,
-		comment is 'Interface predicates for ProbLog integration.']).
+		comment is 'Interface predicates for ProbLog integration.'
+	]).
 
 	:- public(problog_exact/3).
 
@@ -82,7 +83,8 @@
 		version is 0.41,
 		author is 'Paulo Moura',
 		date is 2011/02/24,
-		comment is 'Interface predicates for ProbLog integration.']).
+		comment is 'Interface predicates for ProbLog integration.'
+	]).
 
 	:- public(dtproblog_solve/2).
 
@@ -127,7 +129,8 @@
 		version is 0.4,
 		author is 'Paulo Moura',
 		date is 2010/11/13,
-		comment is 'Interface predicates for ProbLog integration.']).
+		comment is 'Interface predicates for ProbLog integration.'
+	]).
 
 	:- public(do_learning/1).
 

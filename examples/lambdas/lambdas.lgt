@@ -15,7 +15,8 @@
 		version is 1.0,
 		date is 2009/11/28,
 		author is 'Paulo Moura',
-		comment is 'Simple example of using lambda expressions to simplify setof/3 and similar calls.']).
+		comment is 'Simple example of using lambda expressions to simplify setof/3 and similar calls.'
+	]).
 
 	:- public(currencies_wrong/1).
 	currencies_wrong(Currencies) :-
@@ -47,7 +48,8 @@
 		version is 1.0,
 		author is 'Artur Miguel Dias',
 		date is 2009/12/04,
-		comment is 'Generic sum predicate for testing lambda expressions.']).
+		comment is 'Generic sum predicate for testing lambda expressions.'
+	]).
 
 	% note that this is simple an example of using lambda expressions; Logtalk
 	% already includes a fold_left/4 predicate in its library that could
@@ -79,7 +81,8 @@
 		version is 1.1,
 		date is 2009/12/5,
 		author is 'Paulo Moura',
-		comment is 'Some miscellaneous tests for lambda expressions collected from public forums.']).
+		comment is 'Some miscellaneous tests for lambda expressions collected from public forums.'
+	]).
 
 	:- public(common_prefix/3).  
 

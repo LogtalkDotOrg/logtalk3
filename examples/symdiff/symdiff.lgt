@@ -16,19 +16,22 @@
 		version is 1.0,
 		date is 1999/12/29,
 		comment is 'Symbolic differentiation and simplification protocol.',
-		source is 'Example based on the Clocksin and Mellish Prolog book.']).
+		source is 'Example based on the Clocksin and Mellish Prolog book.'
+	]).
 
 	:- public(diff/1).
 	:- mode(diff(-expression), one).
 	:- info(diff/1, [
 		comment is 'Returns the symbolic differentiation of self.',
-		argnames is ['Expression']]).
+		argnames is ['Expression']
+	]).
 
 	:- public(simplify/1).
 	:- mode(simplify(-expression), one).
 	:- info(simplify/1, [
 		comment is 'Returns the symbolic simplification of self.',
-		argnames is ['Expression']]).
+		argnames is ['Expression']
+	]).
 
 :- end_protocol.
 
@@ -42,7 +45,8 @@
 		version is 1.0,
 		date is 1999/12/29,
 		comment is 'Symbolic differentiation and simplification of a variable.',
-		source is 'Example based on the Clocksin and Mellish Prolog book.']).
+		source is 'Example based on the Clocksin and Mellish Prolog book.'
+	]).
 
 	diff(1).
 
@@ -61,7 +65,8 @@
 		date is 1999/12/29,
 		parnames is ['Expression1', 'Expression2'],
 		comment is 'Symbolic differentiation and simplification of +/2 expressions.',
-		source is 'Example based on the Clocksin and Mellish Prolog book.']).
+		source is 'Example based on the Clocksin and Mellish Prolog book.'
+	]).
 
 	diff(Diff) :-
 		this(X + Y),
@@ -129,7 +134,8 @@
 		date is 1999/12/29,
 		parnames is ['Expression1', 'Expression2'],
 		comment is 'Symbolic differentiation and simplification of -/2 expressions.',
-		source is 'Example based on the Clocksin and Mellish Prolog book.']).
+		source is 'Example based on the Clocksin and Mellish Prolog book.'
+	]).
 
 	diff(Diff) :-
 		this(X - Y),
@@ -199,7 +205,8 @@
 		date is 1999/12/29,
 		parnames is ['Expression1', 'Expression2'],
 		comment is 'Symbolic differentiation and simplification of */2 expressions.',
-		source is 'Example based on the Clocksin and Mellish Prolog book.']).
+		source is 'Example based on the Clocksin and Mellish Prolog book.'
+	]).
 
 	diff(Diff) :-
 		this(X * Y),
@@ -271,7 +278,8 @@
 		date is 1999/12/29,
 		parnames is ['Expression', 'Power'],
 		comment is 'Symbolic differentiation and simplification of **/2 expressions.',
-		source is 'Example based on the Clocksin and Mellish Prolog book.']).
+		source is 'Example based on the Clocksin and Mellish Prolog book.'
+	]).
 
 	diff(Diff) :-
 		this(X ** Y),
@@ -317,7 +325,8 @@
 		date is 1999/12/29,
 		parnames is ['Expression'],
 		comment is 'Symbolic differentiation and simplification of log/1 expressions.',
-		source is 'Example based on the Clocksin and Mellish Prolog book.']).
+		source is 'Example based on the Clocksin and Mellish Prolog book.'
+	]).
 
 	diff(Diff) :-
 		this(log(X)),

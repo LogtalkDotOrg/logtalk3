@@ -15,18 +15,21 @@
 		version is 1.0,
 		date is 2000/7/24,
 		author is 'Paulo Moura',
-		comment is 'Default protocol for all prototypes.']).
+		comment is 'Default protocol for all prototypes.'
+	]).
 
 	:- public(clone/1).
 	:- mode(clone(?object), zero_or_one).
 	:- info(clone/1, [
 		comment is 'Clones a prototype.',
-		argnames is ['Clone']]).
+		argnames is ['Clone']
+	]).
 
 	:- public(print/0).
 	:- mode(print, one).
 	:- info(print/0, [
-		comment is 'Pretty prints an object description.']).
+		comment is 'Pretty prints an object description.'
+	]).
 
 :- end_protocol.
 
@@ -40,7 +43,8 @@
 		version is 1.2,
 		date is 2006/12/14,
 		author is 'Paulo Moura',
-		comment is 'Minimal predicates for all prototypes. Default root of the extension graph.']).
+		comment is 'Minimal predicates for all prototypes. Default root of the extension graph.'
+	]).
 
 	:- uses(event_registry, [del_monitors/4]).
 

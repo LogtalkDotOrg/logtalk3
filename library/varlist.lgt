@@ -30,7 +30,8 @@
 		version is 1.5,
 		author is 'Paulo Moura',
 		date is 2009/4/25,
-		comment is 'List of variables predicates.']).
+		comment is 'List of variables predicates.'
+	]).
 
 	append([], List, List).
 	append([Head| Tail], List, [Head| Tail2]) :-

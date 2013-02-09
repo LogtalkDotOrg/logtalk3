@@ -16,7 +16,8 @@
 		version is 4.0,
 		author is 'Paulo Moura',
 		date is 2010/02/21,
-		comment is 'Example object for benchmarking library predicate calls and imported category predicate calls.']).
+		comment is 'Example object for benchmarking library predicate calls and imported category predicate calls.'
+	]).
 
 	:- public(append/3).
 
@@ -71,7 +72,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2007/04/17,
-		comment is 'Example object used for simulating a small hierarchy.']).
+		comment is 'Example object used for simulating a small hierarchy.'
+	]).
 
 :- end_object.
 
@@ -83,6 +85,7 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2007/04/17,
-		comment is 'Example object used for simulating a small hierarchy.']).
+		comment is 'Example object used for simulating a small hierarchy.'
+	]).
 
 :- end_object.

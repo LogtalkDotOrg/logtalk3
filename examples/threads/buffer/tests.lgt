@@ -16,7 +16,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2012/12/25,
-		comment is 'Unit tests for the "threads/buffer" example.']).
+		comment is 'Unit tests for the "threads/buffer" example.'
+	]).
 
 	:- threaded.
 

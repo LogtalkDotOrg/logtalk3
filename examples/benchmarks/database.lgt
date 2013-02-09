@@ -15,25 +15,29 @@
 		version is 3.1,
 		author is 'Paulo Moura',
 		date is 2011/10/03,
-		comment is 'Dynamic database benchmark utility predicates.']).
+		comment is 'Dynamic database benchmark utility predicates.'
+	]).
 
 	:- public(this_dyndb/1).
 	:- mode(this_dyndb(+nonvar), one).
 	:- info(this_dyndb/1, [
 		comment is 'Asserts and retracts a fact in "this".',
-		argnames is ['Term']]).
+		argnames is ['Term']
+	]).
 
 	:- public(self_dyndb/1).
 	:- mode(self_dyndb(+nonvar), one).
 	:- info(self_dyndb/1, [
 		comment is 'Asserts and retracts a fact using ::/1.',
-		argnames is ['Term']]).
+		argnames is ['Term']
+	]).
 
 	:- public(obj_dyndb/1).
 	:- mode(obj_dyndb(+nonvar), one).
 	:- info(obj_dyndb/1, [
 		comment is 'Asserts and retracts a fact using ::/2.',
-		argnames is ['Term']]).
+		argnames is ['Term']
+	]).
 	
 	:- private([pred_this/4, pred_self/4, pred_obj/4]).
 	:- dynamic([pred_this/4, pred_self/4, pred_obj/4]).

@@ -5,13 +5,15 @@
 		version is 1.0,
 		author is 'Victor Lagerkvist',
 		date is 2010/06/13,
-		comment is 'Generates random data structures for use in benchmarks.']).
+		comment is 'Generates random data structures for use in benchmarks.'
+	]).
 
 	:- public(random_tree/1).
 	:- mode(random_tree(-tree), one).
 	:- info(random_tree/1, [
 		comment is 'Generates a random tree.',
-		argnames is ['Tree']]).
+		argnames is ['Tree']
+	]).
 
 	max_depth(5).
 

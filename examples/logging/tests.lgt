@@ -16,7 +16,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2012/11/26,
-		comment is 'Unit tests for the "logging" example.']).
+		comment is 'Unit tests for the "logging" example.'
+	]).
 
 	unit(logging).
 	unit(object).

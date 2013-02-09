@@ -31,13 +31,15 @@
 		version is 2.4,
 		author is 'Paulo Moura',
 		date is 2012/04/25,
-		comment is 'List predicates.']).
+		comment is 'List predicates.'
+	]).
 
 	:- public(as_difflist/2).
 	:- mode(as_difflist(+list, -list), one).
-	:- info(as_difflist/2,
-		[comment is 'Converts a list to a difference list.',
-		 argnames is ['List', 'Diffist']]).
+	:- info(as_difflist/2, [
+		comment is 'Converts a list to a difference list.',
+		argnames is ['List', 'Diffist']
+	]).
 
 	append([], []).
 	append([List| Lists], Concatenation) :-

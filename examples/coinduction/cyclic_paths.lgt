@@ -15,7 +15,8 @@
 		version is 1.0,
 		author is 'Gopal Gupta et al. Adapted to Logtalk by Paulo Moura.',
 		date is 2011/06/24,
-		comment is 'Coinduction example of finding the cyclic paths in a graph.']).
+		comment is 'Coinduction example of finding the cyclic paths in a graph.'
+	]).
 
 	:- public(path/2).
 	:- coinductive(path/2).
@@ -39,7 +40,8 @@
 		version is 1.0,
 		author is 'Gopal Gupta et al. Adapted to Logtalk by Paulo Moura.',
 		date is 2011/06/24,
-		comment is 'Coinduction example of finding the cyclic paths in a graph.']).
+		comment is 'Coinduction example of finding the cyclic paths in a graph.'
+	]).
 
 	:- public(path/2).
 	:- coinductive(path/2).
@@ -63,7 +65,8 @@
 		version is 1.0,
 		author is 'Paulo Moura. Derived from a Gopal Gupta et al example.',
 		date is 2012/07/30,
-		comment is 'Coinduction example of finding the cyclic paths in a graph.']).
+		comment is 'Coinduction example of finding the cyclic paths in a graph.'
+	]).
 
 	:- public(path/3).
 

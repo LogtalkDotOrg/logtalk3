@@ -19,14 +19,16 @@
 		version is 2.1,
 		author is 'Paulo Moura',
 		date is 2006/9/17,
-		comment is 'Tracer for a goal call, exit, and fail ports.']).
+		comment is 'Tracer for a goal call, exit, and fail ports.'
+	]).
 
 	:- public(trace/1).
 	:- meta_predicate(trace(0)).	% changes interpretation of meta-calls on trace/1 clauses
 	:- mode(trace(+callable), zero_or_more).
 	:- info(trace/1, [
 		comment is 'Traces goal execution.',
-		argnames is ['Goal']]).
+		argnames is ['Goal']
+	]).
 
 	trace(Goal) :-
 		write('call: '), writeq(Goal), nl,
@@ -49,7 +51,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2000/7/24,
-		comment is 'List sorting parameterized by the type of the list elements.']).
+		comment is 'List sorting parameterized by the type of the list elements.'
+	]).
 
 	:- uses(list, [append/3]).		% calls to append(...) will be translated to list::append(...)
 	:- uses(tracer, [trace/1]).		% calls to trace(...) will be translated to tracer::trace(...)
@@ -60,13 +63,15 @@
 	:- mode(sort(+list, -list), one).
 	:- info(sort/2, [
 		comment is 'Sorts a list in ascending order (quicksort algorithm).',
-		argnames is ['List', 'Sorted']]).
+		argnames is ['List', 'Sorted']
+	]).
 
 	:- private(partition/4).
 	:- mode(partition(+list, +nonvar, -list, -list), one).
 	:- info(partition/4, [
 		comment is 'Partition a list in two lists containing the elements smaller and larger than a pivot.',
-		argnames is ['List', 'Pivot', 'Small', 'Large']]).
+		argnames is ['List', 'Pivot', 'Small', 'Large']
+	]).
 
 	sort([], []).
 

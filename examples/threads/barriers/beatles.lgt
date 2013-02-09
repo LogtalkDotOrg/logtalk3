@@ -15,14 +15,16 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2007/10/23,
-		comment is 'Simple example of using a barrier to synchronize a set of threads.']).
+		comment is 'Simple example of using a barrier to synchronize a set of threads.'
+	]).
 
 	:- threaded.
 
 	:- public(sing_along/0).
 	:- mode(sing_along, one).
 	:- info(sing_along/0, [
-		comment is 'Wait for all threads to say "hello" and then proceed with the threads saying "goodbye".']).
+		comment is 'Wait for all threads to say "hello" and then proceed with the threads saying "goodbye".'
+	]).
 
 	:- uses(random, [random/3]).
 

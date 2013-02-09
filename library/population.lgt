@@ -30,7 +30,8 @@
 		version is 1.1,
 		author is 'Paulo Moura',
 		date is 2008/11/11,
-		comment is 'Statistical population represented as a list of numbers.']).
+		comment is 'Statistical population represented as a list of numbers.'
+	]).
 
 	skewness([X| Xs], Skewness) :-
 		:arithmetic_mean(Xs, 1, N, X, Mean),

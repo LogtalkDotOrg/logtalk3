@@ -15,11 +15,13 @@
 		version is 1.0,
 		date is 2005/5/8,
 		author is 'Example by LPA; adapted to Logtalk by Paulo Moura.',
-		comment is 'General attributes & methods for all teachers.']).
+		comment is 'General attributes & methods for all teachers.'
+	]).
 
 	:- public(print/0).
 	:- info(print/0, [
-		comment is 'Print teachers timetable.']).
+		comment is 'Print teachers timetable.'
+	]).
 
 	print :-
 		nl, write('TEACHER TIMETABLE ...'), nl, nl,
@@ -35,29 +37,35 @@
 		version is 1.0,
 		date is 2005/5/8,
 		author is 'Example by LPA; adapted to Logtalk by Paulo Moura.',
-		comment is 'General attributes & methods for all teachers.']).
+		comment is 'General attributes & methods for all teachers.'
+	]).
 
 	:- public(teach_period/1).
 	:- info(teach_period/1, [
-		comment is 'A period for which the teacher can be assigned.']).
+		comment is 'A period for which the teacher can be assigned.'
+	]).
 
 	:- public(teach_subject/1).
 	:- info(teach_subject/1, [
-		comment is 'A subject which the teacher can teach.']).
+		comment is 'A subject which the teacher can teach.'
+	]).
 
 	:- public(print/0).
 	:- info(print/0, [
-		comment is 'Print complete timetable from the teacher viewpoint.']).
+		comment is 'Print complete timetable from the teacher viewpoint.'
+	]).
 
 	:- public(freetime/1).
 	:- info(freetime/1, [
 		comment is '.',
-		argnames is ['Freetime']]).
+		argnames is ['Freetime']
+	]).
 
 	:- public(subject/1).
 	:- info(subject/1, [
 		comment is '.',
-		argnames is ['Subject']]).
+		argnames is ['Subject']
+	]).
 
 	teach_period(Period) :-
 		\+ ::freetime(Period).

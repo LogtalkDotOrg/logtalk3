@@ -18,19 +18,22 @@
 		author is 'Paulo Moura',
 		date is 1998/3/23,
 		comment is 'Blind search state space strategies.',
-		parnames is ['Bound']]).
+		parnames is ['Bound']
+	]).
 
 	:- public(bound/1).
 	:- mode(bound(?integer), zero_or_one).
-	:- info(bound/1,
-		[comment is 'Search depth bound.',
-		 argnames is ['Bound']]).
+	:- info(bound/1, [
+		comment is 'Search depth bound.',
+		argnames is ['Bound']
+	]).
 
 	:- protected(search/4).
 	:- mode(search(+object, +nonvar, +integer, -list), zero_or_more).
-	:- info(search/4,
-		[comment is 'State space search solution.',
-		 argnames is ['Space', 'State', 'Bound', 'Path']]).
+	:- info(search/4, [
+		comment is 'State space search solution.',
+		argnames is ['Space', 'State', 'Bound', 'Path']
+	]).
 
 	bound(Bound) :-
 		parameter(1, Bound).

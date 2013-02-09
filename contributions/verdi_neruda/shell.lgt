@@ -6,7 +6,8 @@
 		author is 'Victor Lagerkvist and Paulo Moura',
 		date is 2010/06/13,
 		comment is 'Prolog shell for the interpreters.',
-		parnames is ['Interpreters']]).
+		parnames is ['Interpreters']
+	]).
 
 	:- public(init/0).
 

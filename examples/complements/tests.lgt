@@ -16,7 +16,8 @@
 		version is 1.3,
 		author is 'Parker Jones and Paulo Moura',
 		date is 2012/07/03,
-		comment is 'Unit tests for the "complements" example.']).
+		comment is 'Unit tests for the "complements" example.'
+	]).
 
 	unit(employee).
 	unit(add_on).

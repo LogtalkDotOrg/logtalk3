@@ -15,12 +15,14 @@
 		version is 1.01,
 		date is 2010/03/29,
 		author is 'Paulo Moura',
-		comment is 'Test cases for the Logtalk DCG translator.']).
+		comment is 'Test cases for the Logtalk DCG translator.'
+	]).
 
 	:- public(run/0).
 	:- mode(run, one).
 	:- info(run/0, [
-		comment is 'Runs the Logtalk DCG translator on the test cases.']).
+		comment is 'Runs the Logtalk DCG translator on the test cases.'
+	]).
 
 	run :-
 	    write('Testing expand_term/2 predicate ...'), nl, nl,

@@ -16,7 +16,8 @@
 		author is 'Paul Crocker and Paulo Moura',
 		date is 2007/12/27,
 		comment is 'Multi-threaded version of the quick sort algorithm.',
-		parameters is ['Threads'- 'Number of threads to use in sorting. Valid values are 1, 2, 4, 8, 16, 32, etc.']]).
+		parameters is ['Threads' - 'Number of threads to use in sorting. Valid values are 1, 2, 4, 8, 16, 32, etc.']
+	]).
 
 	:- threaded.
 
@@ -24,7 +25,8 @@
 	:- mode(qsort(+list, -list), one).
 	:- info(qsort/2, [
 		comment is 'Sorts a list of terms into ascending order.',
-		argnames is ['List', 'Sorted']]).
+		argnames is ['List', 'Sorted']
+	]).
 
 	qsort(List, Sorted) :-
 		parameter(1, Threads),

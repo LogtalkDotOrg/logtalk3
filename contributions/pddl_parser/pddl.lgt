@@ -46,7 +46,8 @@
 		version is 1.0,
 		author is 'Robert Sasak, Charles University in Prague. Adapted to Logtalk by Paulo Moura.',
 		date is 2011/08/04,
-		comment is 'Simple parser of PDDL 3.0 files.']).
+		comment is 'Simple parser of PDDL 3.0 files.'
+	]).
 
 	% Defining operator ?. It is a syntax sugar for marking variables: ?x
 	% (commented out as Logtalk already defines a global op(200, fy, ?) operator)
@@ -54,15 +55,17 @@
 
 	:- public(parse_domain/3).
 	:- mode(parse_domain(+atom, -compound, -list(atom)), one).
-	:- info(parse_domain/3,
-		[comment is 'Parses a PDDL 3.0 domain file, returning a compound term representing its contents and rest of the file. Useful when domain and problem are in one file.',
-		 argnames is ['File', 'Output', 'RestOfFile']]).
+	:- info(parse_domain/3, [
+		comment is 'Parses a PDDL 3.0 domain file, returning a compound term representing its contents and rest of the file. Useful when domain and problem are in one file.',
+		argnames is ['File', 'Output', 'RestOfFile']
+	]).
 
 	:- public(parse_domain/2).
 	:- mode(parse_domain(+atom, -compound), one).
-	:- info(parse_domain/2,
-		[comment is 'Parses a PDDL 3.0 domain file, returning a compound term representing its contents.',
-		 argnames is ['File', 'Output']]).
+	:- info(parse_domain/2, [
+		comment is 'Parses a PDDL 3.0 domain file, returning a compound term representing its contents.',
+		argnames is ['File', 'Output']
+	]).
 
 	parse_domain(File, Output) :-
 		parse_domain(File, Output, _).
@@ -73,15 +76,17 @@
 
 	:- public(parse_problem/2).
 	:- mode(parse_problem(+atom, -compound), one).
-	:- info(parse_problem/2,
-		[comment is 'Parses a PDDL 3.0 problem file, returning a compound term representing its contents.',
-		 argnames is ['File', 'Output']]).
+	:- info(parse_problem/2, [
+		comment is 'Parses a PDDL 3.0 problem file, returning a compound term representing its contents.',
+		argnames is ['File', 'Output']
+	]).
 
 	:- public(parse_problem/3).
 	:- mode(parse_problem(+atom, -compound, -list(atom)), one).
-	:- info(parse_problem/3,
-		[comment is 'Parses a PDDL 3.0 problem file, returning a compound term representing its contents and rest of the file. Useful when domain and problem are in one file.',
-		 argnames is ['File', 'Output', 'RestOfFile']]).
+	:- info(parse_problem/3, [
+		comment is 'Parses a PDDL 3.0 problem file, returning a compound term representing its contents and rest of the file. Useful when domain and problem are in one file.',
+		argnames is ['File', 'Output', 'RestOfFile']
+	]).
 
 	parse_problem(File, Output) :-
 		parse_problem(File, Output, _).

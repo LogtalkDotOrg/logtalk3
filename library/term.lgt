@@ -30,7 +30,8 @@
 		version is 1.5,
 		author is 'Paulo Moura',
 		date is 2010/1/8,
-		comment is 'Prolog term utility predicates.']).
+		comment is 'Prolog term utility predicates.'
+	]).
 
 	:- alias(termp, variables/2, vars/2).
 

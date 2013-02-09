@@ -16,7 +16,8 @@
 		version is 0.3,
 		author is 'Paulo Moura',
 		date is 2011/12/07,
-		comment is 'Hook object for compiling objects and categories containing CHR code.']).
+		comment is 'Hook object for compiling objects and categories containing CHR code.'
+	]).
 
 	term_expansion((:- chr_constraint(PIs)), [{(:- chr_constraint(TPIs))}]) :-
 		logtalk::compile_predicate_indicators(PIs, TPIs).

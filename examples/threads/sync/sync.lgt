@@ -15,7 +15,8 @@
 		version is 1.1,
 		author is 'Paulo Moura',
 		date is 2006/11/26,
-		comment is 'Simple example for illustrating the problems with lack of thread synchronization when calling methods with side-effects.']).
+		comment is 'Simple example for illustrating the problems with lack of thread synchronization when calling methods with side-effects.'
+	]).
 
 	:- threaded.
 
@@ -23,7 +24,8 @@
 	:- mode(update_db(-integer), one).
 	:- info(update_db/1, [
 		comment is 'Perform a database update with a long delay between retracting the old information and asserting the new one.',
-		argnames is ['New']]).
+		argnames is ['New']
+	]).
 
 	:- private(db/1).
 	:- dynamic(db/1).
@@ -32,7 +34,8 @@
 	:- mode(io(+atom), one).
 	:- info(io/1, [
 		comment is 'Write some characters to the standard output stream with a long delay between each write operation.',
-		argnames is ['Chars']]).
+		argnames is ['Chars']
+	]).
 
 	db(0).
 
@@ -75,7 +78,8 @@
 		version is 1.1,
 		author is 'Paulo Moura',
 		date is 2006/11/26,
-		comment is 'Simple example for using the "synchronized" predicate directive for multi-threading methods with side-effects.']).
+		comment is 'Simple example for using the "synchronized" predicate directive for multi-threading methods with side-effects.'
+	]).
 
 	:- threaded.
 
@@ -84,7 +88,8 @@
 	:- mode(update_db(-integer), one).
 	:- info(update_db/1, [
 		comment is 'Perform a database update with a long delay between retracting the old information and asserting the new one.',
-		argnames is ['New']]).
+		argnames is ['New']
+	]).
 
 	:- private(db/1).
 	:- dynamic(db/1).
@@ -94,7 +99,8 @@
 	:- mode(io(+atom), one).
 	:- info(io/1, [
 		comment is 'Write some characters to the standard output stream with a long delay between each write operation.',
-		argnames is ['Chars']]).
+		argnames is ['Chars']
+	]).
 
 	db(0).
 

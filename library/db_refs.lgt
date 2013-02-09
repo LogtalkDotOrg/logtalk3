@@ -29,7 +29,8 @@
 		version is 0.2,
 		author is 'Paulo Moura',
 		date is 2009/03/06,
-		comment is 'Logtalk portable version of database predicates working with clause references. Objects importing this category must call init_db_refs/0 in their initialization goal.']).
+		comment is 'Logtalk portable version of database predicates working with clause references. Objects importing this category must call init_db_refs/0 in their initialization goal.'
+	]).
 
 	:- uses(gensym, [gensym/2]).
 
@@ -37,42 +38,49 @@
 	:- mode(asserta(+clause, -reference), one).
 	:- info(asserta/2, [
 		comment is 'Asserts a new clause returning the clause reference.',
-		argnames is ['Clause', 'Reference']]).
+		argnames is ['Clause', 'Reference']
+	]).
 
 	:- public(assertz/2).
 	:- mode(assertz(+clause, -reference), one).
 	:- info(assertz/2, [
 		comment is 'Asserts a new clause returning the clause reference.',
-		argnames is ['Clause', 'Reference']]).
+		argnames is ['Clause', 'Reference']
+	]).
 
 	:- public(clause/3).
 	:- mode(clause(+callable, ?callable, ?reference), zero_or_more).
 	:- info(clause/3, [
 		comment is 'Returns clauses and their references.',
-		argnames is ['Head', 'Body', 'Reference']]).
+		argnames is ['Head', 'Body', 'Reference']
+	]).
 
 	:- public(retract/2).
 	:- mode(retract(+callable, ?reference), zero_or_more).
 	:- info(retract/2, [
 		comment is 'Retracts a matching clause with the given reference.',
-		argnames is ['Clause', 'Reference']]).
+		argnames is ['Clause', 'Reference']
+	]).
 
 	:- public(retractall/2).
 	:- mode(retractall(+callable, ?reference), one).
 	:- info(retractall/2, [
 		comment is 'Retracts all matching clauses with the given reference.',
-		argnames is ['Head', 'Reference']]).
+		argnames is ['Head', 'Reference']
+	]).
 
 	:- protected(init_db_refs/0).
 	:- mode(init_db_refs, one).
 	:- info(init_db_refs/0, [
-		comment is 'Initializes the clause database references.']).
+		comment is 'Initializes the clause database references.'
+	]).
 
 	:- private(db_ref/1).
 	:- mode(db_ref(@reference), one).
 	:- info(db_ref/1, [
 		comment is 'This predicate is called when using clauses with database references. Is argument is ignored and it is always true.',
-		argnames is ['Reference']]).
+		argnames is ['Reference']
+	]).
 
 	asserta((Head :- Body), Ref) :-
 		!,

@@ -13,7 +13,8 @@
 			'Absolute file names:' - 'These are file names that always point to a local file. They always start with a slash character (/).',
 			'Relative file names:' - 'These are file names that always point to a local file. A file name is a relative file name if it does not start with a slash character or a file access protocol (including the :// characters).',
 			'Canonical file names' - 'These are file names where any environment variables was been expanded and where the sequences for current (.) and parent (..) directories have been resolved.',
-			'Time stamps:' - 'Time stamps are used for representing current, system time and in file properties to represent creation, modification, and access times. Time stamps are system-dependent terms but that can be compared (e.g. when testing which of two given files is older).']]).
+			'Time stamps:' - 'Time stamps are used for representing current, system time and in file properties to represent creation, modification, and access times. Time stamps are system-dependent terms but that can be compared (e.g. when testing which of two given files is older).']
+	]).
 
 	:- public(make_directory/1).
 	:- mode(make_directory(+atom), one).
@@ -223,19 +224,22 @@
 	:- mode(time_stamp(-number), one).
 	:- info(time_stamp/1, [
 		comment is 'Returns a system-dependent time stamp (which can be used for sorting).',
-		argnames is ['Time']]).
+		argnames is ['Time']
+	]).
 
 	:- public(local_time/1).
 	:- mode(local_time(?time(?integer, ?integer, ?integer, ?integer, ?integer, ?integer, ?integer)), zero_or_one).
 	:- info(local_time/1, [
 		comment is 'Local time (respecting time zone and daylight savings settings).',
-		argnames is ['time(Year, Month, Day, Hours, Mins, Secs, Microsecs)']]).
+		argnames is ['time(Year, Month, Day, Hours, Mins, Secs, Microsecs)']
+	]).
 
 	:- public(utc_time/1).
 	:- mode(utc_time(?time(?integer, ?integer, ?integer, ?integer, ?integer, ?integer, ?integer)), zero_or_one).
 	:- info(utc_time/1, [
 		comment is 'Universal Coordinated Time (UTC).',
-		argnames is ['time(Year, Month, Day, Hours, Mins, Secs, Microsecs)']]).
+		argnames is ['time(Year, Month, Day, Hours, Mins, Secs, Microsecs)']
+	]).
 
 	:- public(convert_time/2).
 	:- mode(convert_time(+number, ?time(?integer, ?integer, ?integer, ?integer, ?integer, ?integer, ?integer)), zero_or_one).
@@ -252,20 +256,23 @@
 	:- mode(cpu_time(-number), one).
 	:- info(cpu_time/1, [
 		comment is 'System cpu time in seconds.',
-		argnames is ['Time']]).
+		argnames is ['Time']
+	]).
 
 	:- public(host_name/1).
 	:- mode(host_name(-atom), one).
 	:- info(host_name/1, [
 		comment is 'Host name (default is localhost).',
-		argnames is ['Name']]).
+		argnames is ['Name']
+	]).
 
 	:- public(portable_os_file_name/2).
 	:- mode(portable_os_file_name(+atom, -atom), one).
 	:- mode(portable_os_file_name(-atom, +atom), one).
 	:- info(portable_os_file_name/2, [
 		comment is 'Converts between portable and operating-system dependent file names.',
-		argnames is ['Canonical', 'OS']]).
+		argnames is ['Canonical', 'OS']
+	]).
 
 	:- public(portable_file_name/3).
 	:- mode(portable_file_name(+atom, -atom, -atom), one).

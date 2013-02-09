@@ -6,7 +6,8 @@
 		version is 1.0,
 		author is 'Ulf Nilsson. Ported to Logtalk and augmented with negation by Victor Lagerkvist.',
 		date is 2010/06/13,
-		comment is 'Semi-naive bottom-up interpreter for general (stratified) logic programs. Magic transformation is realized through an expansion hook.']).
+		comment is 'Semi-naive bottom-up interpreter for general (stratified) logic programs. Magic transformation is realized through an expansion hook.'
+	]).
 
 	prove(Goal, DB) :-
 		prove(Goal, -1, DB).			

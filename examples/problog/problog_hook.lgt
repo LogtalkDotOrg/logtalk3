@@ -32,7 +32,8 @@ user:problog_user_ground(THead) :-
 		version is 0.5,
 		author is 'Paulo Moura',
 		date is 2012/12/08,
-		comment is 'Hook object for compiling objects and categories containing ProbLog code.']).
+		comment is 'Hook object for compiling objects and categories containing ProbLog code.'
+	]).
 
 	term_expansion((:- set_problog_flag(Flag, Value)), [{(:- flags:set_problog_flag(Flag, Value))}]).
 

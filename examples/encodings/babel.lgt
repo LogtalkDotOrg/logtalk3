@@ -18,13 +18,15 @@
 		version is 1.2,
 		author is 'Paulo Moura',
 		date is 2011/04/05,
-		comment is 'Simple test of the encoding/1 directive.']).
+		comment is 'Simple test of the encoding/1 directive.'
+	]).
 
 	:- public(hello_world/2).
 	:- mode(hello_world(?atom, ?atom), zero_or_more).
 	:- info(hello_world/2, [
 		comment is 'Table of "hello world" messages in several languages (using ISO 639-2 two letter language codes for indexing).',
-		argnames is ['Language', 'Text']]).
+		argnames is ['Language', 'Text']
+	]).
 
 	hello_world(el, 'Γειά σου κόσμε!').
 	hello_world(en, 'Hello world!').

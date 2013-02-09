@@ -16,7 +16,8 @@
 		version is 1.4,
 		author is 'Paulo Moura',
 		date is 2008/10/20,
-		comment is 'Performance monitor for state space searches.']).
+		comment is 'Performance monitor for state space searches.'
+	]).
 
 	:- uses(event_registry).
 	:- uses(before_event_registry).

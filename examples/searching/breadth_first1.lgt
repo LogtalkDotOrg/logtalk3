@@ -18,7 +18,8 @@
 		date is 2010/06/23,
 		comment is 'Breadth first state space search strategy.',
 		source is 'Code adapted from the book "Prolog Programming for Artificial Intelligence" by Ivan Bratko.',
-		parnames is ['Bound']]).
+		parnames is ['Bound']
+	]).
 
 	:- uses(list, [member/2, reverse/2]).
 

@@ -16,7 +16,8 @@
 		version is 1.2,
 		author is 'Parker Jones and Paulo Moura',
 		date is 2012/07/06,
-		comment is 'Unit tests for the "classmethods" example.']).
+		comment is 'Unit tests for the "classmethods" example.'
+	]).
 
 	:- uses(lgtunit, [op(700, xfx, '=~='), '=~='/2]).
 

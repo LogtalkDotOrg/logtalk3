@@ -16,7 +16,8 @@
 		version is 1.1,
 		author is 'Parker Jones and Paulo Moura',
 		date is 2012/07/03,
-		comment is 'Unit tests for the "metainterpreters" example.']).
+		comment is 'Unit tests for the "metainterpreters" example.'
+	]).
 
 	unit(solver).
 	unit(proof_tree).

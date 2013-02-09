@@ -6,7 +6,8 @@
 		version is 1.0,
 		author is 'Robert Sasak, Charles University in Prague. Adapted to Logtalk by Paulo Moura.',
 		date is 2011/06/17,
-		comment is 'Unit tests for the PDDL 3.0 parsers.']).
+		comment is 'Unit tests for the PDDL 3.0 parsers.'
+	]).
 
 	:- uses(os, [change_directory/1]).
 

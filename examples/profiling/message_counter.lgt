@@ -7,17 +7,20 @@
 		version is 1.1,
 		author is 'Paulo Moura',
 		date is 2006/12/14,
-		comment is 'Message counter monitor.']).
+		comment is 'Message counter monitor.'
+	]).
 
 	:- public(report/0).
 	:- mode(report, one).
-	:- info(report/0,
-		[comment is 'Reports current calls and exits message counts.']).
+	:- info(report/0, [
+		comment is 'Reports current calls and exits message counts.'
+	]).
 
 	:- public(stop/0).
 	:- mode(stop, one).
-	:- info(stop/0,
-		[comment is 'Stops message counting.']).
+	:- info(stop/0, [
+		comment is 'Stops message counting.'
+	]).
 
 	:- private(calls/2).
 	:- dynamic(calls/2).

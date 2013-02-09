@@ -16,7 +16,8 @@
 		version is 1.0,
 		author is 'Parker Jones and Paulo Moura',
 		date is 2010/03/16,
-		comment is 'Unit tests for the "lo/travellers" example.']).
+		comment is 'Unit tests for the "lo/travellers" example.'
+	]).
 
 	test(lo_travellers_1) :-
 		incremental::route([london, brighton, portsmouth, exeter, oxford, aberystwyth], Route),

@@ -16,19 +16,22 @@
 		date is 2007/10/13,
 		author is 'Paulo Moura',
 		comment is 'Translator of logic propositions to clauses in conjunctive normal form.',
-		source is 'Code partially based on an example found on the Clocksin and Mellish Prolog book.']).
+		source is 'Code partially based on an example found on the Clocksin and Mellish Prolog book.'
+	]).
 
 	:- public(translate/2).
 	:- mode(translate(+nonvar, -list), zero_or_one).
 	:- info(translate/2, [
 		comment is 'Translates a proposition to a list of clauses.',
-		argnames is ['Propostion', 'Clauses']]).
+		argnames is ['Propostion', 'Clauses']
+	]).
 
 	:- public(step_by_step/2).
 	:- mode(step_by_step(+nonvar, -list), zero_or_one).
 	:- info(step_by_step/2, [
 		comment is 'Translates a proposition to a list of clauses, printing the result of each translation step.',
-		argnames is ['Propostion', 'Clauses']]).
+		argnames is ['Propostion', 'Clauses']
+	]).
 
 	:- private(gensym_counter_/1).
 	:- dynamic(gensym_counter_/1).

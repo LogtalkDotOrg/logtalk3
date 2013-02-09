@@ -16,7 +16,8 @@
 		version is 1.1,
 		author is 'Paulo Moura',
 		date is 2004/8/15,
-		comment is 'Bridge puzzle.']).
+		comment is 'Bridge puzzle.'
+	]).
 
 	:- uses(list, [append/3]).
 	:- uses(numberlist, [min/2, max/2]).

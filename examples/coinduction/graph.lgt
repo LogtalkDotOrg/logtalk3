@@ -15,7 +15,8 @@
 		version is 1.0,
 		author is 'Davide Ancona. Adapted to Logtalk by Paulo Moura.',
 		date is 2012/09/17,
-		comment is 'Examples of coinductive predicates over graphs.']).
+		comment is 'Examples of coinductive predicates over graphs.'
+	]).
 
 	:- public(bipartite/1).
 

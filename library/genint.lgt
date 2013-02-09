@@ -29,34 +29,39 @@
 		version is 1.01,
 		author is 'Arun Majumdar. Adapted to Logtalk by Paulo Moura.',
 		date is 2012/04/07,
-		comment is 'Predicates for generating unique atoms.']).
+		comment is 'Predicates for generating unique atoms.'
+	]).
 
 	:- public(reset_genint/0).
 	:- synchronized(reset_genint/0).
 	:- mode(reset_genint, one).
 	:- info(reset_genint/0, [
-		comment is 'Resets the all the integer counters.']).
+		comment is 'Resets the all the integer counters.'
+	]).
 
 	:- public(reset_genint/1).
 	:- synchronized(reset_genint/1).
 	:- mode(reset_genint(+atom), one).
 	:- info(reset_genint/1, [
 		comment is 'Resets the named integer counter.',
-		argnames is ['Counter']]).
+		argnames is ['Counter']
+	]).
 
 	:- public(genint/2).
 	:- synchronized(genint/2).
 	:- mode(genint(+atom, -integer), one).
 	:- info(genint/2, [
 		comment is 'Returns the next integer for the given counter.',
-		argnames is ['Counter', 'Value']]).
+		argnames is ['Counter', 'Value']
+	]).
 
 	:- private(base_/2).
 	:- dynamic(base_/2).
 	:- mode(base_(?atom, ?integer), zero_or_more).
 	:- info(base_/2, [
 		comment is 'Table of counters and respective values.',
-		argnames is ['Counter', 'Value']]).
+		argnames is ['Counter', 'Value']
+	]).
 
 	reset_genint :-
 		retract(base_(Counter, _)),

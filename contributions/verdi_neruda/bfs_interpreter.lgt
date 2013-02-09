@@ -6,7 +6,8 @@
 		version is 1.0,
 		author is 'Victor Lagerkvist',
 		date is 2010/06/13,
-		comment is 'Breadth-first interpreter for general logic programs.']).
+		comment is 'Breadth-first interpreter for general logic programs.'
+	]).
 
 	prove(Goal, DB) :-
 		prove(Goal, -1, DB).	

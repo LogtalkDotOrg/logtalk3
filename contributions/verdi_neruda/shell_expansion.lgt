@@ -7,7 +7,8 @@
 		version is 1.0,
 		author is 'Victor Lagerkvist',
 		date is 2010/06/13,
-		comment is 'Expansion object for the shell.']).
+		comment is 'Expansion object for the shell.'
+	]).
 
 	goal_expansion(Term, Expansion) :-
 		^^goal_expansion(Term, Expansion).

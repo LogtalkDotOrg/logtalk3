@@ -16,7 +16,8 @@
 		version is 1.4,
 		author is 'Paulo Moura',
 		date is 2012/09/13,
-		comment is 'Unit tests for the "coinduction" example.']).
+		comment is 'Unit tests for the "coinduction" example.'
+	]).
 
 	:- discontiguous(succeeds/1).
 	:- discontiguous(fails/1).

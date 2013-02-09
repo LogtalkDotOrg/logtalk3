@@ -6,7 +6,8 @@
 		author is 'Vijay Saraswat; adapted to Logtalk by Paulo Moura.',
 		author is 'Paulo Moura',
 		date is 2009/7/5,
-		comment is 'Splay trees implementation.']).
+		comment is 'Splay trees implementation.'
+	]).
 
 	:- public(access/5).
 
@@ -16,7 +17,8 @@
 	:- mode(delete(?list, ?list, ?list), zero_or_more).
 	:- info(delete/3, [
 		comment is 'Delete item Item from tree Tree, assuming that it is present.',
-		argnames is ['Item', 'Tree', 'NewTree']]).
+		argnames is ['Item', 'Tree', 'NewTree']
+	]).
 
 	:- public(init/1).
 

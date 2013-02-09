@@ -16,7 +16,8 @@
 		version is 1.0,
 		author is 'Parker Jones and Paulo Moura',
 		date is 2010/03/16,
-		comment is 'Unit tests for the "threads/primes" example.']).
+		comment is 'Unit tests for the "threads/primes" example.'
+	]).
 
 	test(primes_1) :-
 		primes(1)::primes(1, 100, Primes),

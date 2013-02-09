@@ -19,7 +19,8 @@
 			version is 0.4,
 			author is 'Neda Saeedloei and Gopal Gupta. Adapted to Logtalk by Paulo Moura.',
 			date is 2011/08/16,
-			comment is 'Timed automata example.']).
+			comment is 'Timed automata example.'
+		]).
 
 		:- public(driver/5).
 		driver(S0, S1, S2, [X| Rest], [(X,T)| R]) :-
@@ -82,7 +83,8 @@
 			version is 0.3,
 			author is 'Neda Saeedloei and Gopal Gupta. Adapted to Logtalk by Paulo Moura.',
 			date is 2011/08/12,
-			comment is 'Timed automata example.']).
+			comment is 'Timed automata example.'
+		]).
 
 		:- public(driver/5).
 		driver(S0, S1, S2, [X| Rest], [(X,T)| R]) :-

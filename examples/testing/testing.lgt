@@ -16,7 +16,8 @@
 		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2010/03/18,
-		comment is 'Tests for the <</2 built-in control construct.']).
+		comment is 'Tests for the <</2 built-in control construct.'
+	]).
 
 	:- initialization(::run).
 %	:- initialization(::run('bios_tests.txt', write)).
@@ -53,7 +54,8 @@
 		version is 2.1,
 		author is 'Paulo Moura',
 		date is 2012/07/04,
-		comment is 'Tests built-in objects.']).
+		comment is 'Tests built-in objects.'
+	]).
 
 	:- initialization(::run).
 %	:- initialization(::run('bios_tests.txt', write)).
@@ -91,7 +93,8 @@
 		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2010/03/16,
-		comment is 'Tests for the library object "list".']).
+		comment is 'Tests for the library object "list".'
+	]).
 
 	:- initialization(::run).
 %	:- initialization(::run('list_tests.txt', write)).
@@ -127,7 +130,8 @@
 		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2010/03/16,
-		comment is 'Tests dynamic objects and dynamic predicates.']).
+		comment is 'Tests dynamic objects and dynamic predicates.'
+	]).
 
 	:- set_logtalk_flag(unknown_entities, silent).
 

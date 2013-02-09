@@ -15,13 +15,15 @@
 		version is 1.1,
 		author is 'Paul Crocker',
 		date is 2008/3/18,
-		comment is 'Default protocol for Numerical Integration.']).
+		comment is 'Default protocol for Numerical Integration.'
+	]).
 
 	:- public(integrate/6).
 	:- mode(integrate(+object_identifier, +float, +float, +integer, +float, -float), one).
 	:- info(integrate/6, [
 		comment is 'Find the integral of a function of one variable in the interval [A, B] given a maximum aproximation error (epsilon).',
-		argnames is ['Function', 'A', 'B', 'NP','Epsilon', 'Integral']]).
+		argnames is ['Function', 'A', 'B', 'NP','Epsilon', 'Integral']
+	]).
 
 :- end_protocol.
 
@@ -38,7 +40,8 @@
 		author is 'Paul Crocker',
 		date is 2008/07/19,
 		comment is 'Multi-threading implementation of Recursive Gaussian Quadrature Methods for Numerical Integration for functions of a single variable.',
-		parameters is ['Threads'- 'Number of threads to use.']]).
+		parameters is ['Threads' - 'Number of threads to use.']
+	]).
 
 	integrate(Function, Left, Right, NP, Epsilon, Integral) :-
 		parameter(1, Threads),
@@ -109,7 +112,8 @@
 		author is 'Paul Crocker',
 		date is 2008/07/19,
 		comment is 'Multi-threading implementation of Recursive Gaussian Quadrature Methods for Numerical Integration for functions of a single variable.',
-		parameters is ['Threads'- 'Number of threads to use.']]).
+		parameters is ['Threads' - 'Number of threads to use.']
+	]).
 
 	integrate(Function, Left, Right, NP, Epsilon, Integral) :-
 		parameter(1, Threads),

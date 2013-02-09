@@ -30,13 +30,15 @@
 		version is 1.0,
 		author is 'Robert Sasak, Charles University in Prague. Adapted to Logtalk by Paulo Moura.',
 		date is 2011/08/04,
-		comment is 'Utility predicates for parsing a file as a list of atoms.']).
+		comment is 'Utility predicates for parsing a file as a list of atoms.'
+	]).
 
 	:- public(read_file/2).
 	:- mode(read_file(+atom, -list(atom)), one).
-	:- info(read_file/2,
-		[comment is 'Reads a file character by character, parsing it into a list of atoms.',
-		 argnames is ['File', 'List']]).
+	:- info(read_file/2, [
+		comment is 'Reads a file character by character, parsing it into a list of atoms.',
+		argnames is 'File', 'List']
+	]).
 
 	read_file(File, List) :-
 		current_input(Current),

@@ -16,7 +16,8 @@
 		date is 2007/12/27,
 		author is 'Paulo Moura',
 		comment is 'Multi-threaded version of the computation of Fibonacci numbers.',
-		parameters is ['Threads'- 'Number of threads to use. Valid values are 1, 2, 4, 8, 16, etc.']]).
+		parameters is ['Threads' - 'Number of threads to use. Valid values are 1, 2, 4, 8, 16, etc.']
+	]).
 
 	:- threaded.
 
@@ -24,7 +25,8 @@
 	:- mode(fib(+integer, -integer), one).
 	:- info(fib/2, [
 		comment is 'Calculates the Nth Fibonacci number.',
-		argnames is ['Nth', 'Number']]).
+		argnames is ['Nth', 'Number']
+	]).
 
 	fib(N, F) :-
 		parameter(1, Threads),

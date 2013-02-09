@@ -15,13 +15,15 @@
 		version is 1.0,
 		date is 2004/4/29,
 		author is 'Paulo Moura',
-		comment is 'Simple example of command-line shell parsing.']).
+		comment is 'Simple example of command-line shell parsing.'
+	]).
 
 	:- public(parse/2).
 	:- mode(parse(@list, -list), zero_or_one).
 	:- info(parse/2, [
 		comment is 'Parses a sequence of commands.',
-		argnames is ['Sequence', 'Commands']]).
+		argnames is ['Sequence', 'Commands']
+	]).
 
 	parse(Sequence, Commands) :-
 		phrase(commands(Commands), Sequence).

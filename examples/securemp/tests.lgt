@@ -16,7 +16,8 @@
 		version is 2.2,
 		author is 'Paulo Moura',
 		date is 2012/12/09,
-		comment is 'Unit tests for the "securemp" example.']).
+		comment is 'Unit tests for the "securemp" example.'
+	]).
 
 	:- discontiguous(fails/1).
 	:- discontiguous(succeeds/1).

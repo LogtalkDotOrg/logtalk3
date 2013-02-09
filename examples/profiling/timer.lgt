@@ -5,7 +5,8 @@
 		version is 1.3,
 		author is 'Paulo Moura',
 		date is 2006/9/17,
-		comment is 'Call executing time profiler.']).
+		comment is 'Call executing time profiler.'
+	]).
 
 	:- uses(time, [cpu_time/1]).
 	:- uses(loop, [forto/3]).
@@ -13,16 +14,18 @@
 	:- public(timer/2).
 	:- meta_predicate(timer(0, *)).
 	:- mode(timer(+callable, -number), one).
-	:- info(timer/2,
-		[comment is 'Returns time to execute a call.',
-		 argnames is ['Call', 'Time']]).
+	:- info(timer/2, [
+		comment is 'Returns time to execute a call.',
+		argnames is ['Call', 'Time']
+	]).
 
 	:- public(timer/3).
 	:- meta_predicate(timer(0, *, *)).
 	:- mode(timer(+callable, +integer, -float), one).
-	:- info(timer/3,
-		[comment is 'Returns the average time needed to to execute a call.',
-		 argnames is ['Call', 'Times', 'Time']]).
+	:- info(timer/3, [
+		comment is 'Returns the average time needed to to execute a call.',
+		argnames is ['Call', 'Times', 'Time']
+	]).
 
 	timer(Call, Time) :-
 		cpu_time(Start),

@@ -36,26 +36,30 @@
 	:- mode(parse(?nonvar, +nonvar), zero_or_one).
 	:- info(parse/2, [
 		comment is 'Parses Chars to/from a data structure of the form xml(<atts>, <content>).',
-		argnames is ['Chars', 'Document']]).
+		argnames is ['Chars', 'Document']
+	]).
 
 	:- public(parse/3).
 	:- mode(parse(+nonvar, +nonvar, ?nonvar), zero_or_one).
 	:- mode(parse(+nonvar, ?nonvar, +nonvar), zero_or_one).
 	:- info(parse/3, [
 		comment is 'Parses Chars to/from a data structure of the form xml(<atts>, <content>).',
-		argnames is ['Controls', 'Chars', 'Document']]).
+		argnames is ['Controls', 'Chars', 'Document']
+	]).
 
 	:- public(subterm/2).
 	:- mode(subterm(+nonvar, ?nonvar), zero_or_one).
 	:- info(subterm/2, [
 		comment is 'Unifies Subterm with a sub-term of XMLTerm. Note that XMLTerm is a sub-term of itself.',
-		argnames is ['XMLTerm', 'Subterm']]).
+		argnames is ['XMLTerm', 'Subterm']
+	]).
 
 	:- public(pp/1).
 	:- mode(pp(+nonvar), zero_or_one).
 	:- info(pp/1, [
 		comment is 'Pretty prints a XML document on the current output stream.',
-		argnames is ['XMLDocument']]).
+		argnames is ['XMLDocument']
+	]).
 
 	:- uses(list, [append/3, member/2, select/3, valid/1::is_list/1]).
 	:- uses(term, [ground/1]).
@@ -173,7 +177,8 @@
 	:- mode(xml_to_document(+nonvar, +nonvar, ?nonvar), zero_or_one).
 	:- info(xml_to_document/3, [
 		comment is 'Translates the list of character codes XML into the Prolog term Document. Controls is a list of terms controlling the treatment of layout characters and character entities.',
-		argnames is ['Controls', 'XML', 'Document']]).
+		argnames is ['Controls', 'XML', 'Document']
+	]).
 
 	xml_to_document( Controls, XML, Document ) :-
 		initial_context( Controls, Context ),
@@ -1108,7 +1113,8 @@
 	:- mode(empty_map(?nonvar), zero_or_one).
 	:- info(empty_map/1, [
 		comment is 'True if Map is a null map.',
-		argnames is ['Map']]).
+		argnames is ['Map']
+	]).
 
 	empty_map( [] ).
 
@@ -1119,7 +1125,8 @@
 	:- mode(map_member(+nonvar, +nonvar, ?nonvar), zero_or_one).
 	:- info(map_member/3, [
 		comment is 'True if Map is a ordered map structure which records the pair Key-Data. Key must be ground.',
-		argnames is ['Key', 'Map', 'Data']]).
+		argnames is ['Key', 'Map', 'Data']
+	]).
 
 	map_member( Key0, [Key1-Data1|Rest], Data0 ) :-
 		(	Key0 == Key1 ->
@@ -1136,7 +1143,8 @@
 	:- mode(map_store(+nonvar, +nonvar, +nonvar, ?nonvar), zero_or_one).
 	:- info(map_store/4, [
 		comment is 'True if Map0 is an ordered map structure, Key must be ground, and Map1 is identical to Map0 except that the pair Key-Data is recorded by Map1.',
-		argnames is ['Map0', 'Key', 'Data', 'Map1']]).
+		argnames is ['Map0', 'Key', 'Data', 'Map1']
+	]).
 
 	map_store( [], Key, Data, [Key-Data] ).
 	map_store( [Key0-Data0|Map0], Key, Data, Map ) :-
@@ -1268,7 +1276,8 @@
 	:- mode(pp_string(+nonvar), zero_or_one).
 	:- info(pp_string/1, [
 		comment is 'Prints String onto the current output stream. If String contains only 7-bit chars it is printed in shorthand quoted format, otherwise it is written as a list.',
-		argnames is ['String']]).
+		argnames is ['String']
+	]).
 
 	pp_string( Chars ) :-
 		(	member( Char, Chars ),
@@ -1613,7 +1622,8 @@
 	:- mode(fault(+nonvar, +nonvar, ?nonvar, ?nonvar, ?nonvar), zero_or_one).
 	:- info(fault/5, [
 		comment is 'Identifies SubTerm as a sub-term of Term which cannot be serialized after Indentation. Message is an atom naming the type of error; Path is a string encoding a list of SubTerm''s ancestor elements in the form <tag>{(id)}* where <tag> is the element tag and <id> is the value of any attribute _named_ id.',
-		argnames is ['Term', 'Indentation', 'SubTerm', 'Path', 'Message']]).
+		argnames is ['Term', 'Indentation', 'SubTerm', 'Path', 'Message']
+	]).
 
 	fault( Term, _Indent, Term, [], "Illegal Variable" ) :-
 		var( Term ).
@@ -1691,7 +1701,8 @@
 	:- mode(document_generation(+nonvar, +nonvar), zero_or_one).
 	:- info(document_generation//2, [
 		comment is 'DCG generating Document as a list of character codes. Format is true|false defining whether layouts, to provide indentation, should be added between the element content of the resultant "string". Note that formatting is disabled for elements that are interspersed with pcdata/1 terms, such as XHTML''s ''inline'' elements. Also, Format is over-ridden, for an individual element, by an explicit ''xml:space''="preserve" attribute.',
-		argnames is ['Format', 'Document']]).
+		argnames is ['Format', 'Document']
+	]).
 
 	document_generation( Format, xml(Attributes, Document) ) -->
 		document_generation_body( Attributes, Format, Document ).
@@ -1886,7 +1897,8 @@
 	:- mode(pcdata_7bit(?nonvar), zero_or_one).
 	:- info(pcdata_7bit//1, [
 		comment is 'Represents the ascii character set in its simplest format, using the character entities &amp; &quot; &lt; and &gt; which are common to both XML and HTML. The numeric entity &#39; is used in place of &apos;, because browsers don''t recognize it in HTML.',
-		argnames is ['Char']]).
+		argnames is ['Char']
+	]).
 
 	pcdata_7bit( 0 ) --> "".
 	pcdata_7bit( 1 ) --> "".
@@ -2028,7 +2040,8 @@
 	:- mode(pcdata_format(+nonvar, +nonvar, ?nonvar), zero_or_one).
 	:- info(pcdata_format/3, [
 		comment is 'Holds when Format0 and Format1 are the statuses of XML formatting before and after Chars - which may be null.',
-		argnames is ['Chars', 'Format0', 'Format1']]).
+		argnames is ['Chars', 'Format0', 'Format1']
+	]).
 
 	pcdata_format( [], Format, Format ).
 	pcdata_format( [_Char|_Chars], _Format, false ).
@@ -2041,7 +2054,8 @@
 	:- mode(cdata_generation(+list), zero_or_one).
 	:- info(cdata_generation//1, [
 		comment is 'Holds when Format0 and Format1 are the statuses of XML formatting before and after Chars - which may be null.',
-		argnames is ['Chars']]).
+		argnames is ['Chars']
+	]).
 
 	cdata_generation( [] ) --> "".
 	cdata_generation( [Char|Chars] ) -->

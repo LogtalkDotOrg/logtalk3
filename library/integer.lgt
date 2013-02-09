@@ -30,14 +30,16 @@
 		version is 1.51,
 		author is 'Paulo Moura',
 		date is 2011/9/19,
-		comment is 'Integer data type predicates.']).
+		comment is 'Integer data type predicates.'
+	]).
 
 	:- public(between/3).
 	:- mode(between(+integer, +integer, +integer), zero_or_one).
 	:- mode(between(+integer, +integer, -integer), zero_or_more).
 	:- info(between/3, [
 		comment is 'Returns integers in the interval defined by the two first arguments.',
-		argnames is ['Lower', 'Upper', 'Integer']]).
+		argnames is ['Lower', 'Upper', 'Integer']
+	]).
 
 	:- public(plus/3).
 	:- mode(plus(+integer, +integer, ?integer), zero_or_one).
@@ -45,20 +47,23 @@
 	:- mode(plus(?integer, +integer, +integer), zero_or_one).
 	:- info(plus/3, [
 		comment is 'Reversible integer sum. At least two of the arguments must be instantiated to integers.',
-		argnames is ['I', 'J', 'Sum']]).
+		argnames is ['I', 'J', 'Sum']
+	]).
 
 	:- public(succ/2).
 	:- mode(succ(+integer, ?integer), zero_or_one).
 	:- mode(succ(?integer, +integer), zero_or_one).
 	:- info(succ/2, [
 		comment is 'Successor of a natural number. At least one of the arguments must be instantiated to a natural number.',
-		argnames is ['I', 'J']]).
+		argnames is ['I', 'J']
+	]).
 
 	:- public(sequence/3).
 	:- mode(sequence(+integer, +integer, -list(integer)), zero_or_one).
-	:- info(sequence/3,
-		[comment is 'Generates a list with the sequence of all integers in the interval [Inf, Sup], assuming Inf =< Sup.',
-		 argnames is ['Inf', 'Sup', 'List']]).
+	:- info(sequence/3, [
+		comment is 'Generates a list with the sequence of all integers in the interval [Inf, Sup], assuming Inf =< Sup.',
+		argnames is ['Inf', 'Sup', 'List']
+	]).
 
 	:- if(predicate_property(between(_, _, _), built_in)).
 

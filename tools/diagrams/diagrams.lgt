@@ -28,19 +28,22 @@
 		version is 1.3,
 		author is 'Paulo Moura',
 		date is 2013/02/07,
-		comment is 'Generates entity diagram DOT files for source files and libraries.']).
+		comment is 'Generates entity diagram DOT files for source files and libraries.'
+	]).
 
 	:- public(rlibrary/2).
 	:- mode(rlibrary(+atom, +list), one).
 	:- info(rlibrary/2, [
 		comment is 'Creates a diagram for all entities in a library its sub-libraries using the specified options.',
-		argnames is ['Library', 'Options']]).
+		argnames is ['Library', 'Options']
+	]).
 
 	:- public(rlibrary/1).
 	:- mode(rlibrary(+atom), one).
 	:- info(rlibrary/1, [
 		comment is 'Creates a diagram for all entities in a library and its sub-libraries using default options.',
-		argnames is ['Library']]).
+		argnames is ['Library']
+	]).
 
 	:- private(included_entity_/1).
 	:- dynamic(included_entity_/1).
@@ -92,13 +95,15 @@
 	:- mode(library(+atom, +list), one).
 	:- info(library/2, [
 		comment is 'Creates a diagram for all entities in a library using the specified options.',
-		argnames is ['Library', 'Options']]).
+		argnames is ['Library', 'Options']
+	]).
 
 	:- public(library/1).
 	:- mode(library(+atom), one).
 	:- info(library/1, [
 		comment is 'Creates a diagram for all entities in a library using default options.',
-		argnames is ['Library']]).
+		argnames is ['Library']
+	]).
 
 	library(Library, UserOptions) :-
 		merge_options(UserOptions, Options),
@@ -147,13 +152,15 @@
 	:- mode(file(+atom, +list), one).
 	:- info(file/2, [
 		comment is 'Creates a diagram for all entities in a loaded source file using the specified options. Supports library notation.',
-		argnames is ['File', 'Options']]).
+		argnames is ['File', 'Options']
+	]).
 
 	:- public(file/1).
 	:- mode(file(+atom), one).
 	:- info(file/1, [
 		comment is 'Creates a diagram for all entities in a loaded source file using default options. Supports library notation.',
-		argnames is ['File']]).
+		argnames is ['File']
+	]).
 
 	file(Spec, UserOptions) :-
 		merge_options(UserOptions, Options),
@@ -547,7 +554,8 @@
 	:- mode(default_options(-list), one).
 	:- info(default_options/1, [
 		comment is 'Returns a list of the default options used when generating a diagram.',
-		argnames is ['DefaultOptions']]).
+		argnames is ['DefaultOptions']
+	]).
 
 	default_options(DefaultOptions) :-
 		merge_options([], DefaultOptions).

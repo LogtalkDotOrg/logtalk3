@@ -15,7 +15,8 @@
 		version is 1.0,
 		author is 'Gopal Gupta et al. Adapted to Logtalk by Paulo Moura.',
 		date is 2011/06/29,
-		comment is 'Shared cycles coinductive example.']).
+		comment is 'Shared cycles coinductive example.'
+	]).
 
 	:- public(path/2).
 	:- coinductive(path/2).

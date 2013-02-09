@@ -17,7 +17,8 @@
 		author is 'Paulo Moura',
 		date is 2008/6/9,
 		comment is 'Depth first state space search strategy.',
-		parnames is ['Bound']]).
+		parnames is ['Bound']
+	]).
 
 	:- uses(list, [member/2, reverse/2]).
 

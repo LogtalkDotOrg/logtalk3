@@ -30,7 +30,8 @@
 		version is 1.1,
 		author is 'Paulo Moura',
 		date is 2009/3/6,
-		comment is 'Atomic data type predicates.']).
+		comment is 'Atomic data type predicates.'
+	]).
 
 	valid(Atomic) :-
 		atomic(Atomic).

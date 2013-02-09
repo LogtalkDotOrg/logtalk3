@@ -16,7 +16,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 20102/08/06,
-		comment is 'Unit tests for the "msglog" example.']).
+		comment is 'Unit tests for the "msglog" example.'
+	]).
 
 	unit(msglog).
 

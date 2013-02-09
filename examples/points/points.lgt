@@ -18,7 +18,8 @@
 		date is 2012/10/25,
 		author is 'Paulo Moura',
 		comment is 'Two dimensional point class.',
-		source is 'Example adapted from the SICStus Objects documentation.']).
+		source is 'Example adapted from the SICStus Objects documentation.'
+	]).
 
 	:- public(move/2).
 	:- mode(move(+integer, +integer), zero_or_one).
@@ -67,7 +68,8 @@
 		date is 1998/3/23,
 		author is 'Paulo Moura',
 		comment is 'Point coordinate bounds management predicates.',
-		source is 'Example adapted from the SICStus Objects documentation.']).
+		source is 'Example adapted from the SICStus Objects documentation.'
+	]).
 
 	:- public(set_bounds/3).
 	:- mode(set_bounds(+atom, +integer, +integer), one).
@@ -133,7 +135,8 @@
 		date is 2000/10/31,
 		author is 'Paulo Moura',
 		comment is 'Two dimensional point moving in a constrained area.',
-		source is 'Example adapted from the SICStus Objects documentation.']).
+		source is 'Example adapted from the SICStus Objects documentation.'
+	]).
 
 	move(X, Y) :-
 		::check_bounds(x, X),
@@ -168,7 +171,8 @@
 		date is 1998/3/23,
 		author is 'Paulo Moura',
 		comment is 'Point position history management predicates.',
-		source is 'Example adapted from the SICStus Objects documentation.']).
+		source is 'Example adapted from the SICStus Objects documentation.'
+	]).
 
 	:- public(add_to_history/1).
 	:- mode(add_to_history(+nonvar), one).
@@ -217,7 +221,8 @@
 		date is 2000/10/31,
 		author is 'Paulo Moura',
 		comment is 'Two dimensional point remembering past positions.',
-		source is 'Example adapted from the SICStus Objects documentation.']).
+		source is 'Example adapted from the SICStus Objects documentation.'
+	]).
 
 	move(X, Y) :-
 		::position(OldX, OldY),
@@ -253,7 +258,8 @@
 		date is 2000/10/31,
 		author is 'Paulo Moura',
 		comment is 'Two dimensional point moving in a constrained area and remembering past point positions.',
-		source is 'Example adapted from the SICStus Objects documentation.']).
+		source is 'Example adapted from the SICStus Objects documentation.'
+	]).
 
 	move(X, Y) :-
 		::check_bounds(x, X),

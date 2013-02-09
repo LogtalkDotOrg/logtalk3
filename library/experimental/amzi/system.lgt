@@ -10,7 +10,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2004/6/5,
-		comment is 'Operating system interface for Amzi! Prolog.']).
+		comment is 'Operating system interface for Amzi! Prolog.'
+	]).
 
 
 	make_directory(Directory) :-

@@ -10,7 +10,8 @@
 		version is 1.0,
 		author is 'Davide Ancona. Adapted to Logtalk by Paulo Moura.',
 		date is 2012/09/13,
-		comment is 'Examples of coinductive predicates over lists of numbers.']).
+		comment is 'Examples of coinductive predicates over lists of numbers.'
+	]).
 
 	:- public(add/4).
 	:- coinductive(add/4).

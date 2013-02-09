@@ -43,7 +43,8 @@ Remarks:
 		version is 1.0,
 		author is 'Paula Marisa Sampaio',
 		date is 2005/06/08,
-		comment is 'Salt state-space search problem.']).
+		comment is 'Salt state-space search problem.'
+	]).
 
 
 	% each state is represented by a compound term with four arguments: (Acumulator, Measure1, Measure2, Step)

@@ -16,7 +16,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2010/06/24,
-		comment is 'Unit tests for the "constraints/gnu" example.']).
+		comment is 'Unit tests for the "constraints/gnu" example.'
+	]).
 
 	test(alpha) :-
 		alpha::q(LD, _),

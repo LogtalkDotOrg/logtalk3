@@ -7,7 +7,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2004/6/5,
-		comment is 'Operating system interface for K-Prolog.']).
+		comment is 'Operating system interface for K-Prolog.'
+	]).
 
 
 	make_directory(Directory) :-

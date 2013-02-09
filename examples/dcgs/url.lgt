@@ -15,13 +15,15 @@
 		version is 1.0,
 		date is 2003/7/7,
 		author is 'Paulo Moura',
-		comment is 'Simple example of URL parsing.']).
+		comment is 'Simple example of URL parsing.'
+	]).
 
 	:- public(parse/2).
 	:- mode(parse(@list, -list), zero_or_one).
 	:- info(parse/2, [
 		comment is 'Parses a URL into its components.',
-		argnames is ['URL', 'Components']]).
+		argnames is ['URL', 'Components']
+	]).
 
 	parse(URL, [protocol(Protocol), address(Address), path(Path), file(File)]) :-
 		phrase(url(Protocol, Address, Path, File), URL).

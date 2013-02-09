@@ -16,7 +16,8 @@
 		version is 1.1,
 		author is 'Parker Jones and Paulo Moura',
 		date is 2012/05/13,
-		comment is 'Unit tests for the "engines" example.']).
+		comment is 'Unit tests for the "engines" example.'
+	]).
 
 	unit(enginep).
 	unit(classic).

@@ -15,7 +15,8 @@
 		version is 1.2,
 		author is 'Paulo Moura',
 		date is 2012/11/26,
-		comment is 'Reads and writes a simple table of facts from and to files for testing operator handling code.']).
+		comment is 'Reads and writes a simple table of facts from and to files for testing operator handling code.'
+	]).
 
 	:- op(500, xfx, next).				% local object operators, not visible outside this object
 	:- op(500, xfx, previous).

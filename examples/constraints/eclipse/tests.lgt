@@ -16,7 +16,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2010/04/10,
-		comment is 'Unit tests for the "constraints/eclipse" example.']).
+		comment is 'Unit tests for the "constraints/eclipse" example.'
+	]).
 
 	test(constraints_eclipse_1) :-
 		puzzle::sendmore1(Digits),

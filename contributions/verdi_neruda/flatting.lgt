@@ -13,7 +13,8 @@
 	:- mode(flatten_goals(+callable), one).
 	:- info(flatten_goals//1, [
 		comment is 'Flattens a conjunction of goals.',
-		argnames is ['Conjunction']]).
+		argnames is ['Conjunction']
+	]).
 
 	flatten_goals((G1 & G2)) -->
 		!,

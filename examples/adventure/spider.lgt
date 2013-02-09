@@ -19,7 +19,8 @@
 		version is 1.0,
 		author is 'David Matuszek, Villanova University. Adapted to Logtalk by Paulo Moura.',
 		date is 2010/09/10,
-		comment is 'Spider - A Sample Adventure Game.']).
+		comment is 'Spider - A Sample Adventure Game.'
+	]).
 
 	%:- initialization(start).
 

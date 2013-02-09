@@ -7,7 +7,8 @@
 		version is 1.0,
 		author is 'Victor Lagerkvist',
 		date is 2010/06/13,
-		comment is 'Expands rules of the form p <- f & g to rule(p, [f,g|Tail], Length, Tail).']).
+		comment is 'Expands rules of the form p <- f & g to rule(p, [f,g|Tail], Length, Tail).'
+	]).
 
 	goal_expansion(Term, Expansion) :-
 		^^goal_expansion(Term, Expansion).

@@ -16,12 +16,14 @@
 		version is 1.0,
 		date is 2005/5/8,
 		author is 'Example by LPA; adapted to Logtalk by Paulo Moura.',
-		comment is 'General attributes & methods for all periods.']).
+		comment is 'General attributes & methods for all periods.'
+	]).
 
 
 	:- public(print/0).
 	:- info(print/0, [
-		comment is 'Print period timetable.']).
+		comment is 'Print period timetable.'
+	]).
 
 
 	print :-
@@ -39,27 +41,32 @@
 		version is 1.0,
 		date is 2005/5/8,
 		author is 'Example by LPA; adapted to Logtalk by Paulo Moura.',
-		comment is 'General attributes & methods for all periods.']).
+		comment is 'General attributes & methods for all periods.'
+	]).
 
 
 	:- public(print/0).
 	:- info(print/0, [
-		comment is 'Print complete timetable from the period viewpoint.']).
+		comment is 'Print complete timetable from the period viewpoint.'
+	]).
 
 	:- public(print_teacher/1).
 	:- info(print_teacher/1, [
 		comment is 'Print entry for a specific teacher in this period.',
-		argnames is ['Teacher']]).
+		argnames is ['Teacher']
+	]).
 
 	:- public(print_form/1).
 	:- info(print_form/1, [
 		comment is 'Print entry for a specific form in this period.',
-		argnames is ['Form']]).
+		argnames is ['Form']
+	]).
 
 	:- public(print_subject/1).
 	:- info(print_subject/1, [
 		comment is 'Print entry for a specific subject in this period.',
-		argnames is ['Subject']]).
+		argnames is ['Subject']
+	]).
 
 
 

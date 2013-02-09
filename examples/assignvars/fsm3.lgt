@@ -28,13 +28,15 @@ fsm([red-0-red, red-1-green, red-2-red,		% a simple finite state machine example
 		author is 'Paulo Moura',
 		date is 2005/1/8,
 		comment is 'A simple implementation of finite-state machines using assignable variables and parametric objects. Adapted from a similar example by Nobukuni Kino.',
-		parnames is ['Transitions', 'Initial state', 'Final states']]).
+		parnames is ['Transitions', 'Initial state', 'Final states']
+	]).
 
 	:- public(recognise/1).
 	:- mode(recognise(+list), zero_or_more).
-	:- info(recognise/1,
-		[comment is 'Recognise a list of events.',
-		 argnames is ['Events']]).
+	:- info(recognise/1, [
+		comment is 'Recognise a list of events.',
+		argnames is ['Events']
+	]).
 
 	recognise(Events) :-
 		parameter(2, Initial),
@@ -47,9 +49,10 @@ fsm([red-0-red, red-1-green, red-2-red,		% a simple finite state machine example
 	recognise([Event| Events], State) :-
 		::State => Current,
 		transition(Event, Current, Next),
-		(write(Current-Event-Next), nl
-		 ;
-		 write('backtracking...'), nl, fail),
+		(	write(Current-Event-Next), nl
+		;	write('backtracking...'), nl,
+			fail
+		),
 		::State <= Next,
 		recognise(Events, State).
 

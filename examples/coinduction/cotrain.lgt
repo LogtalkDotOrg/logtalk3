@@ -9,7 +9,8 @@
 			version is 0.1,
 			author is 'Neda Saeedloei and Gopal Gupta. Adapted to Logtalk by Paulo Moura.',
 			date is 2011/08/20,
-			comment is 'Timed automata coroutining example.']).
+			comment is 'Timed automata coroutining example.'
+		]).
 
 		:- uses(streamvars, [new/2::new_stream/2, (=>)/2::read_from_stream/2, (<=)/2::update_stream/2]).
 
@@ -119,7 +120,8 @@
 			version is 0.1,
 			author is 'Neda Saeedloei and Gopal Gupta. Adapted to Logtalk by Paulo Moura.',
 			date is 2011/08/20,
-			comment is 'Timed automata coroutining example.']).
+			comment is 'Timed automata coroutining example.'
+		]).
 
 		:- uses(streamvars, [new/2::new_stream/2, (=>)/2::read_from_stream/2, (<=)/2::update_stream/2]).
 

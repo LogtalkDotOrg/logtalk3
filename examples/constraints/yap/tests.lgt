@@ -16,7 +16,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2010/04/10,
-		comment is 'Unit tests for the "constraints/yap" example.']).
+		comment is 'Unit tests for the "constraints/yap" example.'
+	]).
 
 	test(constraints_yap_1) :-
 		puzzle::solve(Sum=Rs),

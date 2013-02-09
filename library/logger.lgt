@@ -30,21 +30,24 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2011/01/06,
-		comment is 'Global logger object for logging events to files.']).
+		comment is 'Global logger object for logging events to files.'
+	]).
 
 	:- private(log_file_/2).
 	:- dynamic(log_file_/2).
 	:- mode(log_file_(?atom, ?nonvar), zero_or_more).
 	:- info(log_file_/2, [
 		comment is 'Table of log files.',
-		argnames is ['Alias', 'File']]).
+		argnames is ['Alias', 'File']
+	]).
 
 	:- private(logging_to_file_/2).
 	:- dynamic(logging_to_file_/2).
 	:- mode(logging_to_file_(?atom, ?atom), zero_or_more).
 	:- info(logging_to_file_/2, [
 		comment is 'Table of logging file status for log files.',
-		argnames is ['Alias', 'Status']]).
+		argnames is ['Alias', 'Status']
+	]).
 
 	log_file(Alias, File) :-
 		log_file_(Alias, File).

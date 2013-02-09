@@ -29,7 +29,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2009/10/08,
-		comment is 'Predicates over strings, represented as lists of character codes.']).
+		comment is 'Predicates over strings, represented as lists of character codes.'
+	]).
 
 	:- uses(list, [reverse/2]).
 
@@ -37,19 +38,22 @@
 	:- mode(expand_tabs(+string, +string, -string), one).
 	:- info(expand_tabs/3, [
 		comment is 'Description',
-		argnames is ['String', 'TabSize', 'ConvertedString']]).
+		argnames is ['String', 'TabSize', 'ConvertedString']
+	]).
 
 	:- public(camel_case/1).
 	:- mode(camel_case(+string), zero_or_one).
 	:- info(camel_case/1, [
 		comment is 'Checks if a string represents a word where the first character is in upper case and the remaining characters are in lower case.',
-		argnames is ['String']]).
+		argnames is ['String']
+	]).
 
 	:- public(lower_case/1).
 	:- mode(lower_case(+string), zero_or_one).
 	:- info(lower_case/1, [
 		comment is 'Checks if a string represents a word in lower case.',
-		argnames is ['String']]).
+		argnames is ['String']
+	]).
 
 	:- public(lower_case/2).
 	:- mode(lower_case(+string, -string), one).
@@ -60,49 +64,57 @@
 	:- mode(title_case(+string), zero_or_one).
 	:- info(title_case/1, [
 		comment is 'Checks if a string represents a word where the first character is in upper case and the remaining characters are in lower case.',
-		argnames is ['String']]).
+		argnames is ['String']
+	]).
 
 	:- public(upper_case/1).
 	:- mode(upper_case(+string), zero_or_one).
 	:- info(upper_case/1, [
 		comment is 'Checks if a string represents a word in upper case.',
-		argnames is ['String']]).
+		argnames is ['String']
+	]).
 
 	:- public(upper_case/2).
 	:- mode(upper_case(+string, -string), one).
 	:- info(upper_case/2, [
 		comment is 'Description',
-		argnames is ['String', 'ConvertedString']]).
+		argnames is ['String', 'ConvertedString']
+	]).
 
 	:- public(capitalize_words/2).
 	:- mode(capitalize_words(+string, -string), one).
 	:- info(capitalize_words/2, [
 		comment is 'Description',
-		argnames is ['String', 'ConvertedString']]).
+		argnames is ['String', 'ConvertedString']
+	]).
 
 	:- public(replace_word/3).
 	:- mode(replace_word(+string, +string, -string), one).
 	:- info(replace_word/3, [
 		comment is 'Description',
-		argnames is ['String', 'Word', 'ConvertedString']]).
+		argnames is ['String', 'Word', 'ConvertedString']
+	]).
 
 	:- public(split/3).
 	:- mode(split(+string, +string, -list(string)), one).
-	:- info(split/3,
-		[comment is 'Splits a string using another string as a delimiter.',
-		 argnames is ['String', 'Delimiter', 'Strings']]).
+	:- info(split/3, [
+		comment is 'Splits a string using another string as a delimiter.',
+		argnames is ['String', 'Delimiter', 'Strings']
+	]).
 
 	:- public(trim/2).
 	:- mode(trim(+string, -string), one).
 	:- info(trim/2, [
 		comment is 'Description',
-		argnames is ['String', 'TrimedString']]).
+		argnames is ['String', 'TrimedString']
+	]).
 
 	:- public(valid/1).
 	:- mode(valid(@nonvar), zero_or_one).
 	:- info(valid/1, [
 		comment is 'Term is a valid string.',
-		argnames is ['Term']]).
+		argnames is ['Term']
+	]).
 
 	length(Codes, Length) :-
 		length(Codes, 0, Length).

@@ -31,19 +31,22 @@
 		version is 1.7,
 		author is 'Paulo Moura',
 		date is 2012/04/25,
-		comment is 'Difference list predicates.']).
+		comment is 'Difference list predicates.'
+	]).
 
 	:- public(add/3).
 	:- mode(add(@term, +list, -list), one).
-	:- info(add/3,
-		[comment is 'Adds a term to the end of a difference list.',
-		 argnames is ['Term', 'DiffList', 'NewDiffList']]).
+	:- info(add/3, [
+		comment is 'Adds a term to the end of a difference list.',
+		argnames is ['Term', 'DiffList', 'NewDiffList']
+	]).
 
 	:- public(as_list/2).
 	:- mode(as_list(+list, -list), one).
-	:- info(as_list/2,
-		[comment is 'Converts a difference list to a normal list.',
-		 argnames is ['DiffList', 'List']]).
+	:- info(as_list/2, [
+		comment is 'Converts a difference list to a normal list.',
+		argnames is ['DiffList', 'List']
+	]).
 
 	add(Term, List-[Term| Back], List-Back).
 

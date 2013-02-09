@@ -17,19 +17,22 @@
 		version is 1.1,
 		date is 2005/3/6,
 		comment is 'Expert system for bird identification.',
-		source is 'Example adapted from an Amzi! Inc Prolog book.']).
+		source is 'Example adapted from an Amzi! Inc Prolog book.'
+	]).
 
 	:- public(identify/0).
 	:- mode(identify, one).
-	:- info(identify/0,
-		[comment is 'Starts a bird identification session.']).
+	:- info(identify/0, [
+		comment is 'Starts a bird identification session.'
+	]).
 
 	:- private(known_/3).
 	:- dynamic(known_/3).
 	:- mode(known_(?nonvar, ?nonvar, ?nonvar), zero_or_more).
 	:- info(known_/3, [
 		comment is 'Table of already known facts.',
-		argnames is ['Answer', 'Attribute', 'Value']]).
+		argnames is ['Answer', 'Attribute', 'Value']
+	]).
 
 	identify :-
 		::retractall(known_(_, _, _)),

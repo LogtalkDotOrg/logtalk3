@@ -18,7 +18,8 @@
 		version is 1.0,
 		author is 'Parker Jones and Paulo Moura',
 		date is 2010/03/16,
-		comment is 'Unit tests for the "bricks" example.']).
+		comment is 'Unit tests for the "bricks" example.'
+	]).
 
 	% don't use message broadcasting syntax in order to workaround a XSB parser bug
 	test(bricks_1) :-

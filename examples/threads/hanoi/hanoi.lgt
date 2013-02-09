@@ -16,7 +16,8 @@
 		date is 2007/12/27,
 		author is 'Paulo Moura',
 		comment is 'Multi-threaded version of the Towers of Hanoi problem.',
-		parameters is ['Threads'- 'Number of threads to use. Valid values are 1, 2, 4, 8, 16, etc.']]).
+		parameters is ['Threads' - 'Number of threads to use. Valid values are 1, 2, 4, 8, 16, etc.']
+	]).
 
 	:- threaded.
 
@@ -24,19 +25,22 @@
 	:- mode(run(+integer), one).
 	:- info(run/1, [
 		comment is 'Simulates solving the Towers of Hanoi problem for the specified number of disks without actually returning a list of the necessary disk moves.',
-		argnames is ['Disks']]).
+		argnames is ['Disks']
+	]).
 
 	:- public(run/2).
 	:- mode(run(+integer, -list), one).
 	:- info(run/2, [
 		comment is 'Solves the towers of Hanoi problem for the specified number of disks returning a list of the necessary disk moves.',
-		argnames is ['Disks', 'Moves']]).
+		argnames is ['Disks', 'Moves']
+	]).
 
 	:- public(write_moves/1).
 	:- mode(write_moves(+list), one).
 	:- info(write_moves/1, [
 		comment is 'Writes a list of disk moves to the standard output (one disk move per line).',
-		argnames is ['Moves']]).
+		argnames is ['Moves']
+	]).
 
 	run(Disks) :-
 		parameter(1, Threads),

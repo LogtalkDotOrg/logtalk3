@@ -16,7 +16,8 @@
 		version is 1.11,
 		author is 'Parker Jones and Paulo Moura',
 		date is 2011/09/20,
-		comment is 'Unit tests for the "shapes_ch" example.']).
+		comment is 'Unit tests for the "shapes_ch" example.'
+	]).
 
 	throws(shapes_ch_1, error(existence_error(predicate_declaration,nsides/1), logtalk(_,_))) :-
 		square::nsides(_).

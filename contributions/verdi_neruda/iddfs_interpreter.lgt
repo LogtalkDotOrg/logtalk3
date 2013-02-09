@@ -8,7 +8,8 @@
 		author is 'Victor Lagerkvist',
 		date is 2010/06/13,
 		comment is 'Iterative deepening depth-first interpreter for general logic programs. Based on source code from The Craft of Prolog, by Richard O''Keefe. The default value for the increment is 1.',
-		parnames is ['Increment']]).
+		parnames is ['Increment']
+	]).
 
 	prove(Goal, DB) :-
 		prove(Goal, -1, DB).		

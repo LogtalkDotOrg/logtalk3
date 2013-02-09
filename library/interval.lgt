@@ -30,7 +30,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2011/01/06,
-		comment is 'Basic temporal interval relations. An interval is represented by a list with two ground terms, the start and end points.']).
+		comment is 'Basic temporal interval relations. An interval is represented by a list with two ground terms, the start and end points.'
+	]).
 
 	valid([Start, End]) :-
 		ground(Start),

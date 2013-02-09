@@ -15,13 +15,15 @@
 		version is 1.0,
 		date is 2010/02/23,
 		author is 'Paulo Moura',
-		comment is 'Simple meta-interpreter for pure Prolog for counting resolution steps.']).
+		comment is 'Simple meta-interpreter for pure Prolog for counting resolution steps.'
+	]).
 
 	:- public(steps/2).
 	:- mode(steps(+goal, -integer), zero_or_more).
 	:- info(steps/2, [
 		comment is 'Proves goal.',
-		argnames is ['Goal', 'Steps']]).
+		argnames is ['Goal', 'Steps']
+	]).
 
 	steps(Goal, Steps) :-
 		steps(Goal, 0, Steps).

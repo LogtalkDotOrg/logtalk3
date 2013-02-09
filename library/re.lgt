@@ -5,7 +5,8 @@
 		version is 1.0,
 		author is 'Robert D. Cameron; adapted to Logtalk by Paulo Moura.',
 		date is 2011/01/03,
-		comment is 'Perl Style Regular Expressions.']).
+		comment is 'Perl Style Regular Expressions.'
+	]).
 
 	re_metachar(0'\\).
 	re_metachar(0'|).

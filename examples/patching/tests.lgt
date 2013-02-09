@@ -16,7 +16,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2012/03/01,
-		comment is 'Unit tests for the "patching" example.']).
+		comment is 'Unit tests for the "patching" example.'
+	]).
 
 	unit(broken).
 	unit(metaclass).

@@ -31,7 +31,8 @@
 		version is 1.4,
 		author is 'Paulo Moura',
 		date is 2011/11/10,
-		comment is 'Character predicates (most of them assume an ASCII representation).']).
+		comment is 'Character predicates (most of them assume an ASCII representation).'
+	]).
 
 	is_ascii(Char) :-
 		char_code(Char, Code),

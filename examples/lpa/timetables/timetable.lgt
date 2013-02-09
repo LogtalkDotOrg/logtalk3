@@ -16,36 +16,43 @@
 		version is 1.01,
 		date is 2010/03/18,
 		author is 'Example by LPA; adapted to Logtalk by Paulo Moura.',
-		comment is 'Set up & create a timetable satisfying all of the constraints.']).
+		comment is 'Set up & create a timetable satisfying all of the constraints.'
+	]).
 
 
 	:- public(setup/0).
 	:- info(setup/0, [
-		comment is 'Set up the teachers, subjects, forms & periods for this school.']).
+		comment is 'Set up the teachers, subjects, forms & periods for this school.'
+	]).
 
 	:- public(make/0).
 	:- info(make/0, [
-		comment is 'Make the timetable according to the school setup.']).
+		comment is 'Make the timetable according to the school setup.'
+	]).
 
 	:- public(make/1).
 	:- info(make/1, [
 		comment is 'Make with max. depth of swaps.',
-		argnames is ['Effort']]).
+		argnames is ['Effort']
+	]).
 
 	:- public(print/0).
 	:- info(print/0, [
-		comment is 'Print from different perspectives.']).
+		comment is 'Print from different perspectives.'
+	]).
 
 	:- public(filled_entry/4).
 	:- info(filled_entry/4, [
 		comment is 'Timetable entry.',
-		argnames is ['Form', 'Period', 'Teacher', 'Subject']]).
+		argnames is ['Form', 'Period', 'Teacher', 'Subject']
+	]).
 
 	:- private(entry/4).
 	:- dynamic(entry/4).
 	:- info(entry/4, [
 		comment is 'Timetable entry.',
-		argnames is ['Form', 'Period', 'Teacher', 'Subject']]).
+		argnames is ['Form', 'Period', 'Teacher', 'Subject']
+	]).
 
 
 	:- uses(list).

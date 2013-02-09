@@ -15,7 +15,8 @@
 		version is 0.2,
 		author is 'Gopal Gupta et al. Adapted to Logtalk by Paulo Moura.',
 		date is 2010/08/31,
-		comment is 'Elementary coinduction predicate example.']).
+		comment is 'Elementary coinduction predicate example.'
+	]).
 
 	:- public(p/0).
 	:- coinductive(p/0).

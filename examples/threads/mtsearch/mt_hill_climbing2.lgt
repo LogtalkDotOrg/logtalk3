@@ -17,7 +17,8 @@
 		author is 'Paulo Moura',
 		date is 2008/6/9,
 		comment is 'Multi-threaded hill climbing heuristic state space search strategy.',
-		parnames is ['Threshold', 'Threads']]).
+		parnames is ['Threshold', 'Threads']
+	]).
 
 	:- threaded.
 

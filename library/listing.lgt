@@ -29,36 +29,42 @@
 		version is 1.1,
 		author is 'Paulo Moura',
 		date is 2010/03/12,
-		comment is 'Listing predicates.']).
+		comment is 'Listing predicates.'
+	]).
 
 	:- public(listing/0).
 	:- mode(listing, one).
 	:- info(listing/0, [
-		comment is 'Lists all clauses of all dynamic predicates to the current output stream.']).
+		comment is 'Lists all clauses of all dynamic predicates to the current output stream.'
+	]).
 
 	:- public(listing/1).
 	:- mode(listing(+predicate_indicator), one).
 	:- info(listing/1, [
 		comment is 'Lists all clauses of a dynamic predicate to the current output stream.',
-		argnames is ['Predicate']]).
+		argnames is ['Predicate']
+	]).
 
 	:- public(portray_clause/1).
 	:- mode(portray_clause(+clause), one).
 	:- info(portray_clause/1, [
 		comment is 'Pretty prints a clause to the current output stream.',
-		argnames is ['Clause']]).
+		argnames is ['Clause']
+	]).
 
 	:- protected(portray_body/1).
 	:- mode(portray_body(+callable), one).
 	:- info(portray_body/1, [
 		comment is 'Pretty prints a clause body to the current output stream.',
-		argnames is ['Body']]).
+		argnames is ['Body']
+	]).
 
 	:- protected(spaces/1).
 	:- mode(spaces(+integer), one).
 	:- info(spaces/1, [
 		comment is 'Prints N spaces to the current output stream.',
-		argnames is ['N']]).
+		argnames is ['N']
+	]).
 
 	listing :-
 		::current_predicate(Functor/Arity),

@@ -15,17 +15,20 @@
 		version is 1.1,
 		author is 'Paulo Moura',
 		date is 2010/11/20,
-		comment is 'Default protocol for all abstract classes.']).
+		comment is 'Default protocol for all abstract classes.'
+	]).
 
 	:- public(metaclass/0).
 	:- mode(metaclass, zero_or_one).
 	:- info(metaclass/0, [
-		comment is 'True if the object is a metaclass.']).
+		comment is 'True if the object is a metaclass.'
+	]).
 
 	:- public(abstract_class/0).
 	:- mode(abstract_class, zero_or_one).
 	:- info(metaclass/0, [
-		comment is 'True if the object is an abstract class.']).
+		comment is 'True if the object is an abstract class.'
+	]).
 
 :- end_protocol.
 
@@ -40,7 +43,8 @@
 		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2000/7/24,
-		comment is 'Default metaclass for all abstract classes.']).
+		comment is 'Default metaclass for all abstract classes.'
+	]).
 
 	metaclass :-
 		self(Self),
@@ -65,60 +69,70 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2000/7/24,
-		comment is 'Default protocol for all instantiable classes.']).
+		comment is 'Default protocol for all instantiable classes.'
+	]).
 
 	:- public(new/1).
 	:- mode(new(?object), zero_or_one).
 	:- info(new/1, [
 		comment is 'Creates a new instance.',
-		argnames is ['Instance']]).
+		argnames is ['Instance']
+	]).
 
 	:- public(new/2).
 	:- mode(new(?object, +list), zero_or_one).
 	:- info(new/2, [
 		comment is 'Creates a new instance using a list of initialization options.',
-		argnames is ['Instance', 'Options']]).
+		argnames is ['Instance', 'Options']
+	]).
 
 	:- public(clone/2).
 	:- mode(clone(+object, ?object), zero_or_one).
 	:- info(clone/2, [
 		comment is 'Clones an instance.',
-		argnames is ['Instance', 'Clone']]).
+		argnames is ['Instance', 'Clone']
+	]).
 
 	:- public(instance_base_name/1).
 	:- mode(instance_base_name(-atom), one).
 	:- info(instance_base_name/1, [
 		comment is 'Base name to generated new instance names.',
-		argnames is ['Name']]).
+		argnames is ['Name']
+	]).
 
 	:- public(delete/1).
 	:- mode(delete(+object), zero_or_one).
 	:- info(delete/1, [
 		comment is 'Deletes a dynamic instance.',
-		argnames is ['Instance']]).
+		argnames is ['Instance']
+	]).
 
 	:- public(delete/2).
 	:- mode(delete(+object, +list), zero_or_one).
 	:- info(delete/2, [
 		comment is 'Deletes a dynamic instance using a list of deleting options.',
-		argnames is ['Instance', 'Options']]).
+		argnames is ['Instance', 'Options']
+	]).
 
 	:- public(delete_all/0).
 	:- mode(delete_all, zero_or_one).
 	:- info(delete_all/0, [
-		comment is 'Deletes all dynamic instances. Fails if some dynamic instance can not be deleted.']).
+		comment is 'Deletes all dynamic instances. Fails if some dynamic instance can not be deleted.'
+	]).
 
 	:- public(delete_all/1).
 	:- mode(delete_all(+list), zero_or_one).
 	:- info(delete_all/1, [
 		comment is 'Deletes all dynamic instances using a list of deleting options. Fails if some dynamic instance can not be deleted.',
-		argnames is ['Options']]).
+		argnames is ['Options']
+	]).
 
 	:- public(equals/2).
 	:- mode(equals(+object, +object), zero_or_one).
 	:- info(equals/2, [
 		comment is 'The two instances represents the same object for some definition of equality.',
-		argnames is ['Instance1', 'Instance2']]).
+		argnames is ['Instance1', 'Instance2']
+	]).
 
 :- end_protocol.
 
@@ -133,14 +147,16 @@
 		version is 1.1,
 		author is 'Paulo Moura',
 		date is 2005/3/12,
-		comment is 'Default metaclass for all classes.']).
+		comment is 'Default metaclass for all classes.'
+	]).
 
 	:- private(instance_counter_/1).
 	:- dynamic(instance_counter_/1).
 	:- mode(instance_counter_(?integer), zero_or_one).
 	:- info(instance_counter_/1, [
 		comment is 'Stores a counter of created instances.',
-		argnames is ['Counter']]).
+		argnames is ['Counter']
+	]).
 
 	new(Object) :-
 		::new(Object, []).
@@ -226,22 +242,26 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2000/7/24,
-		comment is 'Default protocol for all objects.']).
+		comment is 'Default protocol for all objects.'
+	]).
 
 	:- public(strict_instance/0).
 	:- mode(strict_instance, zero_or_one).
 	:- info(strict_instance/0, [
-		comment is 'True if the object is strictly an instance.']).
+		comment is 'True if the object is strictly an instance.'
+	]).
 
 	:- public(print/0).
 	:- mode(print, one).
 	:- info(print/0, [
-		comment is 'Pretty prints an object description.']).
+		comment is 'Pretty prints an object description.'
+	]).
 
 	:- public(nil/0).
 	:- mode(nil, zero_or_one).
 	:- info(nil/0, [
-		comment is 'True if the object represents a void reference.']).
+		comment is 'True if the object represents a void reference.'
+	]).
 
 :- end_protocol.
 
@@ -256,7 +276,8 @@
 		version is 1.1,
 		date is 2006/12/14,
 		author is 'Paulo Moura',
-		comment is 'Minimal predicates for all objects. Default root of the inheritance graph.']).
+		comment is 'Minimal predicates for all objects. Default root of the inheritance graph.'
+	]).
 
 	:- uses(event_registry).
 

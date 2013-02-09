@@ -16,7 +16,8 @@
 		version is 2.3,
 		author is 'Parker Jones and Paulo Moura',
 		date is 2012/07/04,
-		comment is 'Unit tests for the "dynpred" example.']).
+		comment is 'Unit tests for the "dynpred" example.'
+	]).
 
 	unit(ctg).
 	unit(top).

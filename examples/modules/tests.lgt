@@ -16,7 +16,8 @@
 		version is 1.3,
 		author is 'Parker Jones and Paulo Moura',
 		date is 2012/07/04,
-		comment is 'Unit tests for the "modules" example.']).
+		comment is 'Unit tests for the "modules" example.'
+	]).
 
 	unit(exports).
 	unit(test).

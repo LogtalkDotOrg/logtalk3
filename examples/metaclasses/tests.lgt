@@ -16,6 +16,7 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2012/03/02,
-		comment is 'Unit tests for the "metaclasses" example.']).
+		comment is 'Unit tests for the "metaclasses" example.'
+	]).
 
 :- end_object.

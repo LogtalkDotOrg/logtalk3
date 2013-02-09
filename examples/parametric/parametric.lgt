@@ -92,7 +92,8 @@
 		author is 'Paulo Moura',
 		date is 2005/9/5,
 		comment is 'Dates as parametric objects.',
-		parnames is ['Year', 'Month', 'Day']]).
+		parnames is ['Year', 'Month', 'Day']
+	]).
 
 	:- public(year/1).
 	:- mode(year(?integer), one).
@@ -159,7 +160,8 @@
 		author is 'Paulo Moura',
 		date is 2005/9/5,
 		comment is 'Time as parametric objects.',
-		parnames is ['Hours', 'Mins', 'Secs']]).
+		parnames is ['Hours', 'Mins', 'Secs']
+	]).
 
 	:- public(hours/1).
 	:- mode(hours(?integer), one).
@@ -223,30 +225,35 @@
 		author is 'Paulo Moura',
 		date is 2005/9/5,
 		comment is 'A simple implementation of a geometric rectangle using parametric objects.',
-		parnames is ['Width', 'Height', 'X', 'Y']]).
+		parnames is ['Width', 'Height', 'X', 'Y']
+	]).
 
 	:- public(init/0).
 	:- mode(init, one).
-	:- info(init/0,
-		[comment is 'Initialize rectangle position.']).
+	:- info(init/0, [
+		comment is 'Initialize rectangle position.'
+	]).
 
 	:- public(area/1).
 	:- mode(area(-integer), one).
-	:- info(area/1,
-		[comment is 'Rectangle area.',
-		 argnames is ['Area']]).
+	:- info(area/1, [
+		comment is 'Rectangle area.',
+		argnames is ['Area']
+	]).
 
 	:- public(move/3).
 	:- mode(move(+integer, +integer, -compound), one).
 	:- info(move/3, [
 		comment is 'Moves a rectangle to a new position, returning the updated rectangle.',
-		argnames is ['X', 'Y', 'NewRectangle']]).
+		argnames is ['X', 'Y', 'NewRectangle']
+	]).
 
 	:- public(position/2).
 	:- mode(position(?integer, ?integer), zero_or_one).
 	:- info(position/2, [
 		comment is 'Rectangle current position.',
-		argnames is ['X', 'Y']]).
+		argnames is ['X', 'Y']
+	]).
 
 	init :-
 		parameter(1, 2),	% Width
@@ -300,13 +307,15 @@
 		author is 'Paulo Moura',
 		date is 2007/6/19,
 		comment is 'A simple representation for people using parametric objects.',
-		parnames is ['Name', 'Age']]).
+		parnames is ['Name', 'Age']
+	]).
 
 	:- public(grow_older/1).
 	:- mode(grow_older(-object_identifier), one).
-	:- info(grow_older/1,
-		[comment is 'Increments the person''s age, returning the updated object identifier.',
-		 argnames is ['NewId']]).
+	:- info(grow_older/1, [
+		comment is 'Increments the person''s age, returning the updated object identifier.',
+		argnames is ['NewId']
+	]).
 
 	grow_older(NewId) :-
 		::age(OldAge, NewAge, NewId),
@@ -314,9 +323,10 @@
 
 	:- protected(age/3).
 	:- mode(age(?integer, ?integer, -object_identifier), zero_or_one).
-	:- info(age/3,
-		[comment is 'Rectangle area.',
-		 argnames is ['OldAge', 'NewAge', 'NewId']]).
+	:- info(age/3, [
+		comment is 'Rectangle area.',
+		argnames is ['OldAge', 'NewAge', 'NewId']
+	]).
 
 	age(OldAge, NewAge, person(Name, NewAge)) :-	% this rule is compiled into a fact due to
 		this(person(Name, OldAge)).					% compilation of the this/1 call inline
@@ -332,13 +342,15 @@
 		author is 'Paulo Moura',
 		date is 2007/6/19,
 		comment is 'A simple representation for employees using parametric objects.',
-		parnames is ['Name', 'Age', 'Salary']]).
+		parnames is ['Name', 'Age', 'Salary']
+	]).
 
 	:- public(give_raise/2).
 	:- mode(give_raise(+integer, -object_identifier), one).
-	:- info(give_raise/2,
-		[comment is 'Gives a raise to the employee, returning the updated object identifier.',
-		 argnames is ['Amount', 'NewId']]).
+	:- info(give_raise/2, [
+		comment is 'Gives a raise to the employee, returning the updated object identifier.',
+		argnames is ['Amount', 'NewId']
+	]).
 
 	give_raise(Amount, NewId) :-
 		::salary(OldSalary, NewSalary, NewId),
@@ -346,9 +358,10 @@
 
 	:- protected(salary/3).
 	:- mode(salary(?integer, ?integer, -object_identifier), zero_or_one).
-	:- info(salary/3,
-		[comment is 'Rectangle area.',
-		 argnames is ['OldSalary', 'NewSalary', 'NewId']]).
+	:- info(salary/3, [
+		comment is 'Rectangle area.',
+		argnames is ['OldSalary', 'NewSalary', 'NewId']
+	]).
 
 	salary(OldSalary, NewSalary, employee(Name, Age, NewSalary)) :-
 		this(employee(Name, Age, OldSalary)).
@@ -370,7 +383,8 @@
 		author is 'Paulo Moura',
 		date is 2010/02/17,
 		comment is 'Description',
-		parnames is ['Season']]).
+		parnames is ['Season']
+	]).
 
 	:- public(clothes/1).
 
@@ -393,7 +407,8 @@
 		author is 'Paulo Moura',
 		date is 2010/02/17,
 		comment is 'Description',
-		parnames is ['Event']]).
+		parnames is ['Event']
+	]).
 
 	:- public(speech/1).
 
@@ -415,7 +430,8 @@
 		author is 'Paulo Moura',
 		date is 2010/02/17,
 		comment is 'Description',
-		parnames is ['Season', 'Event']]).
+		parnames is ['Season', 'Event']
+	]).
 
 	:- public(advice/0).
 

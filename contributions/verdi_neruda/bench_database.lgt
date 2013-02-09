@@ -6,7 +6,8 @@
 		version is 1.0,
 		author is 'Victor Lagerkvist',
 		date is 2010/06/13,
-		comment is 'A simple database for finding related regions using world countries data.']).
+		comment is 'A simple database for finding related regions using world countries data.'
+	]).
 
 	query([C1,D1,C2,D2]) <-
 		density(C1,D1) &

@@ -48,13 +48,15 @@ Published on the web:
 	:- mode(beds(-list), one).
 	:- info(beds/1, [
 		comment is 'Solution to the puzzle.',
-		argnames is ['Solution']]).
+		argnames is ['Solution']
+	]).
 
 	:- public(print/1).
 	:- mode(print(+list), one).
 	:- info(print/1, [
 		comment is 'Pretty print solution to the puzzle.',
-		argnames is ['Solution']]).
+		argnames is ['Solution']
+	]).
 
 	beds(Solution) :-
 		template(Solution),

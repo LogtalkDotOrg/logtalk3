@@ -22,7 +22,8 @@ the three objects below with their instantiation and specialization relations.
 		author is 'Paulo Moura',
 		version is 1.0,
 		date is 2000/4/22,
-		comment is 'Inheritance root for all objects.']).
+		comment is 'Inheritance root for all objects.'
+	]).
 
 	:- public(strict_instance/0).
 	:- mode(strict_instance, zero_or_one).
@@ -52,7 +53,8 @@ the three objects below with their instantiation and specialization relations.
 		author is 'Paulo Moura',
 		version is 1.0,
 		date is 2000/4/22,
-		comment is 'Instantiation root and default metaclass for all classes.']).
+		comment is 'Instantiation root and default metaclass for all classes.'
+	]).
 
 	:- public(new/1).
 	:- mode(new(+object), zero_or_one).
@@ -92,7 +94,8 @@ the three objects below with their instantiation and specialization relations.
 		author is 'Paulo Moura',
 		version is 1.0,
 		date is 2000/4/22,
-		comment is 'Default metaclass for all abstract classes.']).
+		comment is 'Default metaclass for all abstract classes.'
+	]).
 
 	:- public(metaclass/0).
 	:- mode(metaclass, zero_or_one).

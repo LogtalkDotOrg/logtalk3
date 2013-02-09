@@ -28,18 +28,21 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2012/10/01,
-		comment is 'Event handlers protocol. The handlers are automatically called for messages sent using the ::/2 control construct from within objects compiled with the "events" flag set to "allow".']).
+		comment is 'Event handlers protocol. The handlers are automatically called for messages sent using the ::/2 control construct from within objects compiled with the "events" flag set to "allow".'
+	]).
 
 	:- public(before/3).
 	:- mode(before(@term, @term, @term), zero_or_one).
 	:- info(before/3, [
 		comment is 'Event handler for "before" events. A "before" event handler may prevent a method from being looked up or called by failing.',
-		argnames is ['Object', 'Message', 'Sender']]).
+		argnames is ['Object', 'Message', 'Sender']
+	]).
 
 	:- public(after/3).
 	:- mode(after(@term, @term, @term), zero_or_one).
 	:- info(after/3, [
 		comment is 'Event handler for "after" events. An "after" event handler may prevent a method from succeeding by failing.',
-		argnames is ['Object', 'Message', 'Sender']]).
+		argnames is ['Object', 'Message', 'Sender']
+	]).
 
 :- end_protocol.

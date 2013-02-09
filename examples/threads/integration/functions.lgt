@@ -15,13 +15,15 @@
 		version is 1.0,
 		author is 'Paul Crocker',
 		date is 2008/07/19,
-		comment is 'Example functions of one variable']).
+		comment is 'Example functions of one variable'
+	]).
 
 	:- public(eval/3).
 	:- mode(eval(+atom, +float, -float), one).
 	:- info(eval/3, [
 		comment is 'Calculates the function value.',
-		argnames is ['Function', 'X', 'Y']]).
+		argnames is ['Function', 'X', 'Y']
+	]).
 
 	% exp(x) [0,4] integral = 8.0
 	eval(const, _, 2).

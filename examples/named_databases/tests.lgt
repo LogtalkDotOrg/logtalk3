@@ -16,7 +16,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2012/11/05,
-		comment is 'Unit tests for the "named_databases" example.']).
+		comment is 'Unit tests for the "named_databases" example.'
+	]).
 
 	:- uses(user, [
 		db_create/1, db_clear/1, db_load/2, db_save/2,

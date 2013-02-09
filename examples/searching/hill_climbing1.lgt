@@ -17,7 +17,8 @@
 		author is 'Paulo Moura',
 		date is 2008/6/9,
 		comment is 'Hill climbing heuristic state space search strategy.',
-		parnames is ['Threshold']]).
+		parnames is ['Threshold']
+	]).
 
 	:- uses(list, [member/2, reverse/2, sort/2]).
 

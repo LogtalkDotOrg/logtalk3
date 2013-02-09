@@ -28,14 +28,16 @@
 		version is 0.72,
 		author is 'Paulo Moura',
 		date is 2013/02/01,
-		comment is 'Command-line help for Logtalk built-in control constructs, predicates, non-terminals, and methods.']).
+		comment is 'Command-line help for Logtalk built-in control constructs, predicates, non-terminals, and methods.'
+	]).
 
 	:- initialization((nl, write('For help on Logtalk, type help::help.'), nl)).
 
 	:- public(help/0).
 	:- mode(help, one).
 	:- info(help/0, [
-		comment is 'Prints instructions on how to use help.']).
+		comment is 'Prints instructions on how to use help.'
+	]).
 
 	help :-
 		write('On-line help is available for Logtalk built-in control constructs,'), nl,
@@ -54,7 +56,8 @@
 	:- mode('/'(+atom, +integer), zero_or_one).
 	:- info(('/')/2, [
 		comment is 'Provides help on the Functor/Arity built-in control construct, directive, predicate, or method.',
-		argnames is ['Functor', 'Arity']]).
+		argnames is ['Functor', 'Arity']
+	]).
 
 	Functor/Arity :-
 		forall(
@@ -70,7 +73,8 @@
 	:- mode('//'(+atom, +integer), zero_or_one).
 	:- info(('//')/2, [
 		comment is 'Provides help on the Functor//Arity built-in non-terminal.',
-		argnames is ['Functor', 'Arity']]).
+		argnames is ['Functor', 'Arity']
+	]).
 
 	NonTerminalFunctor//Arity :-
 		forall(
@@ -82,7 +86,8 @@
 	:- mode(completion(+atom, -pair), zero_or_more).
 	:- info(completion/2, [
 		comment is 'Provides a completion pair (Completion-Page) for a given prefix.',
-		argnames is ['Prefix', 'Completion']]).
+		argnames is ['Prefix', 'Completion']
+	]).
 
 	completion(Prefix, Completion-Page) :-
 		(	built_in_directive(Functor, Arity, Path, File),
@@ -105,7 +110,8 @@
 	:- mode(completions(+atom, -lists(pair)), zero_or_more).
 	:- info(completions/2, [
 		comment is 'Provides a list of completions pairs (Completion-Page) for a given prefix.',
-		argnames is ['Prefix', 'Completions']]).
+		argnames is ['Prefix', 'Completions']
+	]).
 
 	completions(Prefix, Completions) :-
 		findall(Completion, completion(Prefix, Completion), Completions).
@@ -269,7 +275,8 @@
 	:- public(library/0).
 	:- mode(library, one).
 	:- info(library/0, [
-		comment is 'Provides help on the standard Logtalk library.']).
+		comment is 'Provides help on the standard Logtalk library.'
+	]).
 
 	library :-
 		open('/library/docs/', 'index.html').
@@ -278,7 +285,8 @@
 	:- mode(library(+entity_identifier), zero_or_one).
 	:- info(library/1, [
 		comment is 'Provides help on the standard Logtalk library.',
-		argnames is ['Entity']]).
+		argnames is ['Entity']
+	]).
 
 	library(Entity) :-
 		nonvar(Entity),
@@ -294,7 +302,8 @@
 	:- public(manuals/0).
 	:- mode(manuals, one).
 	:- info(manuals/0, [
-		comment is 'Provides access to the Logtalk User and Reference manuals.']).
+		comment is 'Provides access to the Logtalk User and Reference manuals.'
+	]).
 
 	manuals :-
 		open('/manuals/', 'index.html').

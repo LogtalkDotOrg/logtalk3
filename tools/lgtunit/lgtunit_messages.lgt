@@ -28,7 +28,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2013/02/03,
-		comment is 'Logtalk unit test framework default message translations.']).
+		comment is 'Logtalk unit test framework default message translations.'
+	]).
 
 	% structured message printing predicates;
 	% the main reason to not write directly to an output stream is to allows

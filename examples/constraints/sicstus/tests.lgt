@@ -16,7 +16,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2012/11/26,
-		comment is 'Unit tests for the "constraints/sicstus" example.']).
+		comment is 'Unit tests for the "constraints/sicstus" example.'
+	]).
 
 	test(sicstus_clpfd_1) :-
 		findall(X, cars_ix::cars_ix([ff], X), Xs),

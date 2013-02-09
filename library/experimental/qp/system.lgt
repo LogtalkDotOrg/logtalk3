@@ -7,7 +7,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2004/12/1,
-		comment is 'Operating system interface for Qu-Prolog.']).
+		comment is 'Operating system interface for Qu-Prolog.'
+	]).
 
 
 	make_directory(Directory) :-

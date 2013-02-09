@@ -35,7 +35,8 @@
 	:- mode(type_check(@object_identifier, @term), one).
 	:- info(type_check/2, [
 		comment is 'Description',
-		argnames is ['Type', 'Term']]).
+		argnames is ['Type', 'Term']
+	]).
 
 	type_check(Type, Term) :-	% default definition
 		(	Type::valid(Term) ->

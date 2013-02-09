@@ -17,7 +17,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2009/10/24,
-		comment is 'Simple message mode checker based on hooks and events.']).
+		comment is 'Simple message mode checker based on hooks and events.'
+	]).
 
 	:- private(compiling_object_/1).
 	:- dynamic(compiling_object_/1).

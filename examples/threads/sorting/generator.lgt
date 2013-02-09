@@ -15,7 +15,8 @@
 		version is 1.1,
 		author is 'Paulo Moura',
 		date is 2008/2/7,
-		comment is 'Simple object defining a predicate for generating lists of random values.']).
+		comment is 'Simple object defining a predicate for generating lists of random values.'
+	]).
 
 	:- public(list/2).
 

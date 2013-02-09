@@ -15,13 +15,15 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2007/06/14,
-		comment is 'Morse code decoder.']).
+		comment is 'Morse code decoder.'
+	]).
 
 	:- public(morse//1).
 	:- mode(morse(-list(atom)), zero_or_one).
 	:- info(morse//1, [
 		comment is 'Recognizes a message in Morse code, returning the corresponding list of words.',
-		argnames is ['Words']]).
+		argnames is ['Words']
+	]).
 
 	morse([Word| Words]) --> word(Characters), {atom_chars(Word, Characters)}, "  ", morse(Words).
 	morse([Word]) --> word(Characters), {atom_chars(Word, Characters)}.

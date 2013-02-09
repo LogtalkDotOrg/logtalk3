@@ -31,7 +31,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2000/7/24,
-		comment is 'Queue predicates implemented using difference lists.']).
+		comment is 'Queue predicates implemented using difference lists.'
+	]).
 
 	as_list(Queue-Back, List) :-
 		(	Queue == Back ->

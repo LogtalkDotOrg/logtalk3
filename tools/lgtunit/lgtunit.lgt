@@ -31,99 +31,115 @@
 		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2013/02/03,
-		comment is 'A simple unit test framework featuring predicate clause coverage.']).
+		comment is 'A simple unit test framework featuring predicate clause coverage.'
+	]).
 
 	:- public(unit/1).
 	:- mode(unit(?entity_identifier), zero_or_more).
 	:- info(unit/1, [
-		comment is 'Units (or entities) being tested.']).
+		comment is 'Units (or entities) being tested.'
+	]).
 
 	:- public(run/2).
 	:- mode(run(+atom, +atom), one).
 	:- info(run/2, [
 		comment is 'Runs the unit tests, writing the results to the specified file. Mode can be either "write" (to create a new file) or "append" (to add results to an existing file).',
-		argnames is ['File', 'Mode']]).
+		argnames is ['File', 'Mode']
+	]).
 
 	:- public(run/0).
 	:- mode(run, one).
 	:- info(run/0, [
-		comment is 'Runs the unit tests, writing the results to the current output stream.']).
+		comment is 'Runs the unit tests, writing the results to the current output stream.'
+	]).
 
 	:- public(op(700, xfx, ('=~='))).
 	:- public(('=~=')/2).
 	:- mode('=~='(+float, +float), zero_or_one).
 	:- info(('=~=')/2, [
 		comment is 'Compares two floats for approximate equality using 100*epsilon for the absolute error and, if that fails, 99.999% accuracy for the relative error. Handy when writing certain unit tests but the default precision values may not be adequate for all cases.',
-		argnames is ['Float1', 'Float2']]).
+		argnames is ['Float1', 'Float2']
+	]).
 
 	:- protected(run_tests/0).
 	:- mode(run_tests, one).
 	:- info(run_tests/0, [
-		comment is 'Runs all defined unit tests.']).
+		comment is 'Runs all defined unit tests.'
+	]).
 
 	:- protected(run_tests/1).
 	:- mode(run_tests(+list(callable)), one).
 	:- info(run_tests/1, [
 		comment is 'Runs a list of defined tests.',
-		argnames is ['Tests']]).
+		argnames is ['Tests']
+	]).
 
 	:- protected(setup/0).
 	:- mode(setup, zero_or_one).
 	:- info(setup/0, [
-		comment is 'Setup environment before running the test set. Defaults to the goal true.']).
+		comment is 'Setup environment before running the test set. Defaults to the goal true.'
+	]).
 
 	:- protected(cleanup/0).
 	:- mode(cleanup, zero_or_one).
 	:- info(cleanup/0, [
-		comment is 'Cleanup environment after running the test set. Defaults to the goal true.']).
+		comment is 'Cleanup environment after running the test set. Defaults to the goal true.'
+	]).
 
 	:- private(test/2).
 	:- mode(test(?atom, ?nonvar), zero_or_more).
 	:- info(test/2, [
 		comment is 'Specifies a unit test.',
-		argnames is ['Identifier', 'Outcome']]).
+		argnames is ['Identifier', 'Outcome']
+	]).
 
 	:- private(test_/1).
 	:- dynamic(test_/1).
 	:- mode(test_(?compound), zero_or_more).
 	:- info(test_/1, [
 		comment is 'Table of defined tests.',
-		argnames is ['Counter']]).
+		argnames is ['Counter']
+	]).
 
 	:- private(skipped_/1).
 	:- dynamic(skipped_/1).
 	:- mode(skipped_(?integer), zero_or_one).
 	:- info(skipped_/1, [
 		comment is 'Counter for skipped tests.',
-		argnames is ['Counter']]).
+		argnames is ['Counter']
+	]).
 
 	:- private(passed_/1).
 	:- dynamic(passed_/1).
 	:- mode(passed_(?integer), zero_or_one).
 	:- info(passed_/1, [
 		comment is 'Counter for passed tests.',
-		argnames is ['Counter']]).
+		argnames is ['Counter']
+	]).
 
 	:- private(failed_/1).
 	:- dynamic(failed_/1).
 	:- mode(failed_(?callable), zero_or_one).
 	:- info(failed_/1, [
 		comment is 'Counter for failed tests.',
-		argnames is ['Counter']]).
+		argnames is ['Counter']
+	]).
 
 	:- private(fired_/3).
 	:- dynamic(fired_/3).
 	:- mode(fired_(?entity_identifier, ?predicate_indicator, ?integer), zero_or_more).
 	:- info(fired_/3, [
 		comment is 'Fired clauses when running the unit tests.',
-		argnames is ['Entity', 'Predicate', 'Clause']]).
+		argnames is ['Entity', 'Predicate', 'Clause']
+	]).
 
 	:- private(covered_/2).
 	:- dynamic(covered_/2).
 	:- mode(covered_(?integer, ?integer), zero_or_more).
 	:- info(covered_/2, [
 		comment is 'Auxiliary predicate for collecting statistics on clause coverage.',
-		argnames is ['Covered', 'Total']]).
+		argnames is ['Covered', 'Total']
+	]).
 
 	:- uses(logtalk, [print_message/3]).
 

@@ -16,7 +16,8 @@
 		version is 1.0,
 		date is 1998/3/23,
 		author is 'Paulo Moura',
-		comment is 'Towers of Hanoi.']).
+		comment is 'Towers of Hanoi.'
+	]).
 
 
 	:- public(run/1).
@@ -24,7 +25,8 @@
 
 	:- info(run/1, [
 		comment is 'Solves the towers of Hanoi problem for the specified number of disks.',
-		argnames is ['Disks']]).
+		argnames is ['Disks']
+	]).
 
 
 	run(Disks) :-

@@ -15,25 +15,29 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2008/10/12,
-		comment is 'Generic person.']).
+		comment is 'Generic person.'
+	]).
 
 	:- public(name/1).
 	:- mode(name(?atom), zero_or_one).
 	:- info(name/1, [
 		comment is 'Person name.',
-		argnames is ['Name']]).
+		argnames is ['Name']
+	]).
 
 	:- public(birth/1).
 	:- mode(birth(?atom), zero_or_one).
 	:- info(birth/1, [
 		comment is 'Person birth data.',
-		argnames is ['Year/Month/Day']]).
+		argnames is ['Year/Month/Day']
+	]).
 
 	:- public(new/3).
 	:- mode(new(-object_identifier, +atom, +atom), one).
 	:- info(new/3, [
 		comment is 'Creates a new person.',
-		argnames is ['Id', 'Name', 'Birth']]).
+		argnames is ['Id', 'Name', 'Birth']
+	]).
 
 	new(Person, Name, Birth) :-
 		self(Self),
@@ -50,7 +54,8 @@
 	:- public(print/0).
 	:- mode(print, one).
 	:- info(print/0, [
-		comment is 'Prints a person description.']).
+		comment is 'Prints a person description.'
+	]).
 
 	print :-
 		::name(Name),   write('Name:   '), write(Name), nl,
@@ -66,19 +71,22 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2008/10/12,
-		comment is 'Teacher person.']).
+		comment is 'Teacher person.'
+	]).
 
 	:- public(office/1).
 	:- mode(office(?atom), zero_or_one).
 	:- info(office/1, [
 		comment is 'Person office.',
-		argnames is ['Office']]).
+		argnames is ['Office']
+	]).
 
 	:- public(new/4).
 	:- mode(new(-object_identifier, +atom, +atom, +atom), one).
 	:- info(new/4, [
 		comment is 'Creates a new teacher.',
-		argnames is ['Id', 'Name', 'Birth', 'Office']]).
+		argnames is ['Id', 'Name', 'Birth', 'Office']
+	]).
 
 	new(Person, Name, Birth, Office) :-
 		::new(Person, Name, Birth),			% create a "generic" person and
@@ -98,19 +106,22 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2008/10/12,
-		comment is 'Student person.']).
+		comment is 'Student person.'
+	]).
 
 	:- public(dorm/1).
 	:- mode(dorm(?atom), zero_or_one).
 	:- info(dorm/1, [
 		comment is 'Student dorm.',
-		argnames is ['Dorm']]).
+		argnames is ['Dorm']
+	]).
 
 	:- public(new/4).
 	:- mode(new(-object_identifier, +atom, +atom, +atom), one).
 	:- info(new/4, [
 		comment is 'Creates a new student.',
-		argnames is ['Id', 'Name', 'Birth', 'Dorm']]).
+		argnames is ['Id', 'Name', 'Birth', 'Dorm']
+	]).
 
 	new(Person, Name, Birth, Dorm) :-
 		::new(Person, Name, Birth),			% create a "generic" person and
@@ -132,7 +143,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2008/10/12,
-		comment is 'Person as a parametric object.']).
+		comment is 'Person as a parametric object.'
+	]).
 
 	name(Name) :-
 		parameter(1, Name).
@@ -150,7 +162,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2008/10/12,
-		comment is 'Teacher as a parametric object.']).
+		comment is 'Teacher as a parametric object.'
+	]).
 
 	name(Name) :-
 		parameter(1, Name).
@@ -171,7 +184,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2008/10/12,
-		comment is 'Student as a parametric object.']).
+		comment is 'Student as a parametric object.'
+	]).
 
 	name(Name) :-
 		parameter(1, Name).

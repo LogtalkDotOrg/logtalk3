@@ -16,7 +16,8 @@
 		version is 1.0,
 		author is 'Parker Jones and Paulo Moura',
 		date is 2010/03/16,
-		comment is 'Unit tests for the "puzzles" example.']).
+		comment is 'Unit tests for the "puzzles" example.'
+	]).
 
 	test(puzzles_1) :-
 		potions::potions(P1, P2, P3, P4, P5, P6, P7),

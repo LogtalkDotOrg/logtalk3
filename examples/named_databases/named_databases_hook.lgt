@@ -29,7 +29,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2012/10/26,
-		comment is 'Hook object for the named database predicates.']).
+		comment is 'Hook object for the named database predicates.'
+	]).
 
 	:- if(current_logtalk_flag(prolog_dialect, lean)).
 

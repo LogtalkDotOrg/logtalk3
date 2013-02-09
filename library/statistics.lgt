@@ -30,7 +30,8 @@
 		version is 1.1,
 		author is 'Paulo Moura',
 		date is 2008/11/11,
-		comment is 'Statistical calculations over a list of numbers.']).
+		comment is 'Statistical calculations over a list of numbers.'
+	]).
 
 	arithmetic_mean([X| Xs], Mean) :-
 		arithmetic_mean(Xs, 1, _, X, Mean).

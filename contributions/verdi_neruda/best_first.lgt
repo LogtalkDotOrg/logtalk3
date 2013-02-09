@@ -6,13 +6,15 @@
 		version is 1.0,
 		author is 'Victor Lagerkvist',
 		date is 2010/06/13,
-		comment is 'Best-first framework for general logic programs.']).
+		comment is 'Best-first framework for general logic programs.'
+	]).
 
 	:- protected(f/4).
 	:- mode(f(+float, +float, +float, -float), zero_or_more).
-	:- info(f/4,
-		[comment is '.',
-		 argnames is ['Length1', 'Length2', 'Depth', 'Cost']]).
+	:- info(f/4, [
+		comment is '.',
+		argnames is ['Length1', 'Length2', 'Depth', 'Cost']
+	]).
 
 	prove(Goal, DB) :-
 		prove(Goal, -1, DB).

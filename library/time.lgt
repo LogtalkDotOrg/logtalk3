@@ -30,7 +30,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2000/7/24,
-		comment is 'Time predicates.']).
+		comment is 'Time predicates.'
+	]).
 
 	now(Hours, Mins, Secs) :-
 		{'$lgt_current_time'(Hours, Mins, Secs)}.

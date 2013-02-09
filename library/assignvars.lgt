@@ -19,7 +19,8 @@ version 2.1 (http://opensource.org/licenses/osl-2.1.php).
 		version is 1.0,
 		author is 'Nobukuni Kino and Paulo Moura',
 		date is 2005/1/7,
-		comment is 'Assignable variables (supporting logical, backtracable assignement of non-variable terms).']).
+		comment is 'Assignable variables (supporting logical, backtracable assignement of non-variable terms).'
+	]).
 
 	:- public(assignable/1).
 	:- mode(assignable(-assignvar), one).

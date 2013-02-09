@@ -16,7 +16,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2010/04/25,
-		comment is 'Unit tests for the "miscellaneous" example.']).
+		comment is 'Unit tests for the "miscellaneous" example.'
+	]).
 
 	test(miscellaneous_1) :-
 		hanoi::run(3).

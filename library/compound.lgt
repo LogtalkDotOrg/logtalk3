@@ -30,7 +30,8 @@
 		version is 1.1,
 		author is 'Paulo Moura',
 		date is 2009/3/6,
-		comment is 'Compound data type.']).
+		comment is 'Compound data type.'
+	]).
 
 	valid(Compound) :-
 		compound(Compound).

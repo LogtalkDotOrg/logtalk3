@@ -29,7 +29,8 @@ even_integer(I) :-
 		version is 1.0,
 		date is 2008/11/19,
 		author is 'Paul Crocker',
-		comment is 'Some predicates for testing the library meta-predicates.']).
+		comment is 'Some predicates for testing the library meta-predicates.'
+	]).
 
 	:- public(tuple/3).
 

@@ -15,17 +15,20 @@
 		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2007/3/19,
-		comment is 'Dining philosophers problem: chopstick representation.']).
+		comment is 'Dining philosophers problem: chopstick representation.'
+	]).
 
 	:- public(pick_up/0).
 	:- mode(pick_up, zero_or_one).
 	:- info(pick_up/0, [
-		comment is 'A Philosopher picks up the chopstick.']).
+		comment is 'A Philosopher picks up the chopstick.'
+	]).
 
 	:- public(put_down/0).
 	:- mode(put_down, zero_or_one).
 	:- info(put_down/0, [
-		comment is 'A Philosopher puts down the chopstick.']).
+		comment is 'A Philosopher puts down the chopstick.'
+	]).
 
 	% chopstick actions (picking up and putting down) are synchronized using a notification
 	% such that a chopstick can only be handled by a single philosopher at a time:
@@ -84,44 +87,65 @@
 :- end_object.
 
 
-:- category(philosopher).
+
+:- protocol(philosopherp).
 
 	:- info([
-		version is 2.1,
+		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/12/24,
-		comment is 'Dining philosophers problem: philosopher representation.']).
+		date is 2013/02/09,
+		comment is 'Dining philosophers ptotocol.'
+	]).
 
 	:- public(left_chopstick/1).
 	:- mode(left_chopstick(?object_identifier), zero_or_one).
 	:- info(left_chopstick/1, [
 		comment is 'Chopstick at the left of a philosopher.',
-		argnames is ['Chopstick']]).
+		argnames is ['Chopstick']
+	]).
 
 	:- public(right_chopstick/1).
 	:- mode(right_chopstick(?object_identifier), zero_or_one).
 	:- info(right_chopstick/1, [
 		comment is 'Chopstick at the right of a philosopher.',
-		argnames is ['Chopstick']]).
+		argnames is ['Chopstick']
+	]).
 
 	:- public(run/2).
 	:- mode(run(+integer, +integer), one).
 	:- info(run/2, [
 		comment is 'Runs Count number of thinking/eating cycles, with each activity taking MaxTime (in seconds).',
-		argnames is ['Count', 'MaxTime']]).
+		argnames is ['Count', 'MaxTime']
+	]).
+
+:- end_protocol.
+
+
+
+:- category(philosopher,
+	implements(philosopherp)).
+
+	:- info([
+		version is 2.2,
+		author is 'Paulo Moura',
+		date is 2013/02/09,
+		comment is 'Dining philosophers problem: philosopher representation.'
+	]).
 
 	:- private(message/1).
 	:- synchronized(message/1).
 	:- mode(message(+list), one).
 	:- info(message/1, [
 		comment is 'Writes all the terms on a list as an atomic operation.',
-		argnames is ['Atoms']]).
+		argnames is ['Atoms']
+	]).
 
 	:- uses(random, [random/3]).
 
 	run(0, _) :-
 		this(Philosopher),
-		message([Philosopher, ' terminated.']).
+		message([Philosopher, ' terminated.'
+	]).
 
 	run(Count, MaxTime) :-
 		Count > 0,
@@ -205,38 +229,23 @@
 :- end_object.
 
 
-:- object(philosopher(_Philosopher, _LeftChopstick, _RightShopstick)).
+:- object(philosopher(_Philosopher, _LeftChopstick, _RightShopstick),
+	implements(philosopherp)).
 
 	:- info([
-		version is 2.0,
+		version is 2.1,
 		author is 'Paulo Moura',
-		date is 2007/1/3,
-		comment is 'Dining philosophers problem: philosopher representation.']).
-
-	:- public(left_chopstick/1).
-	:- mode(left_chopstick(?object_identifier), zero_or_one).
-	:- info(left_chopstick/1, [
-		comment is 'Chopstick at the left of a philosopher.',
-		argnames is ['Chopstick']]).
-
-	:- public(right_chopstick/1).
-	:- mode(right_chopstick(?object_identifier), zero_or_one).
-	:- info(right_chopstick/1, [
-		comment is 'Chopstick at the right of a philosopher.',
-		argnames is ['Chopstick']]).
-
-	:- public(run/2).
-	:- mode(run(+integer, +integer), one).
-	:- info(run/2, [
-		comment is 'Runs Count number of thinking/eating cycles, with each activity taking MaxTime (in seconds).',
-		argnames is ['Count', 'MaxTime']]).
+		date is 2013/02/09,
+		comment is 'Dining philosophers problem: philosopher representation.'
+	]).
 
 	:- private(message/1).
 	:- synchronized(message/1).
 	:- mode(message(+list), one).
 	:- info(message/1, [
 		comment is 'Writes all the terms on a list as an atomic operation.',
-		argnames is ['Atoms']]).
+		argnames is ['Atoms']
+	]).
 
 	:- uses(random, [random/3]).
 
@@ -248,7 +257,8 @@
 
 	run(0, _) :-
 		parameter(1, Philosopher),
-		message([Philosopher, ' terminated.']).
+		message([Philosopher, ' terminated.'
+	]).
 
 	run(Count, MaxTime) :-
 		Count > 0,

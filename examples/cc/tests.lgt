@@ -16,7 +16,8 @@
 		version is 0.2,
 		author is 'Paulo Moura',
 		date is 2011/10/19,
-		comment is 'Unit tests for the "cc" example.']).
+		comment is 'Unit tests for the "cc" example.'
+	]).
 
 	test(cc_1) :-
 		os::environment_variable('LOGTALKUSER', _).

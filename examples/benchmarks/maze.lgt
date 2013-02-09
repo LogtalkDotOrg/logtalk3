@@ -33,7 +33,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2010/05/26,
-		comment is 'Example maze path search problem for benchmarking tests.']).
+		comment is 'Example maze path search problem for benchmarking tests.'
+	]).
 
 	:- public(solve/3).
 

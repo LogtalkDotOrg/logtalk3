@@ -15,7 +15,8 @@
 		version is 1.1,
 		author is 'Paul Crocker',
 		date is 2008/07/19,
-		comment is 'Interval and trapezium area predicates for quadrature methods.']).
+		comment is 'Interval and trapezium area predicates for quadrature methods.'
+	]).
 
 	:- private(interval_area/7).
 

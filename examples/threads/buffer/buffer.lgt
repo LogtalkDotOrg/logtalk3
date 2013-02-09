@@ -15,19 +15,22 @@
 		version is 2.1,
 		author is 'Paulo Moura',
 		date is 2007/9/16,
-		comment is 'Producer-consumer problem with a bounded buffer.']).
+		comment is 'Producer-consumer problem with a bounded buffer.'
+	]).
 
 	:- threaded.
 
 	:- public(put/1).
 	:- mode(put(?integer), one).
 	:- info(put/1, [
-		comment is 'Put an item in the buffer.']).
+		comment is 'Put an item in the buffer.'
+	]).
 
 	:- public(get/1).
 	:- mode(get(?integer), one).
 	:- info(get/1, [
-		comment is 'Get an item from the buffer.']).
+		comment is 'Get an item from the buffer.'
+	]).
 
 	:- private(item_/1).
 	:- dynamic(item_/1).

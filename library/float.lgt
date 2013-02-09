@@ -30,7 +30,8 @@
 		version is 1.1,
 		author is 'Paulo Moura',
 		date is 2009/3/6,
-		comment is 'Floating point numbers data type predicates.']).
+		comment is 'Floating point numbers data type predicates.'
+	]).
 
 	valid(Float) :-
 		float(Float).

@@ -206,18 +206,21 @@
 		version is 1.0,
 		author is 'Theofrastos Mantadelis',
 		date is 2010/11/27,
-		comment is 'Flag validation protocol. Must be implemented by validator objects.']).
+		comment is 'Flag validation protocol. Must be implemented by validator objects.'
+	]).
 
 	:- public(validate/0).
 	:- mode(print_flags, zero_or_one).
 	:- info(print_flags/0, [
-		comment is 'Validates the validator object itself.']).
+		comment is 'Validates the validator object itself.'
+	]).
 
 	:- public(validate/1).
 	:- mode(validate(@term), zero_or_one).
 	:- info(validate/1, [
 		comment is 'Validates a flag value.',
-		argnames is ['Value']]).
+		argnames is ['Value']
+	]).
 
 :- end_protocol.
 
@@ -229,103 +232,120 @@
 		version is 1.0,
 		author is 'Theofrastos Mantadelis',
 		date is 2010/11/27,
-		comment is 'Implementation of persistent object flags.']).
+		comment is 'Implementation of persistent object flags.'
+	]).
 
 	:- public(get_flag_value/2).
 	:- mode(get_flag_value(+atom, ?nonvar), zero_or_one).
 	:- info(get_flag_value/2, [
 		comment is 'Gets or tests the value of a flag.',
-		argnames is ['Flag', 'Value']]).
+		argnames is ['Flag', 'Value']
+	]).
 
 	:- public(set_flag_value/2).
 	:- mode(set_flag_value(+atom, @nonvar), one).
 	:- info(set_flag_value/2, [
 		comment is 'Sets the value of a flag.',
-		argnames is ['Flag', 'NewValue']]).
+		argnames is ['Flag', 'NewValue']
+	]).
 
 	:- public(set_flag_value/3).
 	:- mode(set_flag_value(+atom, ?nonvar, @nonvar), one).
 	:- info(set_flag_value/3, [
 		comment is 'Sets the value of a flag, returning the old value.',
-		argnames is ['Flag', 'OldValue', 'NewValue']]).
+		argnames is ['Flag', 'OldValue', 'NewValue']
+	]).
 
 	:- public(reset_flags/0).
 	:- mode(reset_flags, one).
 	:- info(reset_flags/0, [
-		comment is 'Resets all flags to their default values.']).
+		comment is 'Resets all flags to their default values.'
+	]).
 
 	:- public(reset_flags/1).
 	:- mode(reset_flags(+atom), one).
 	:- info(reset_flags/1, [
 		comment is 'Resets all flags in a group to their default values.',
-		argnames is ['Group']]).
+		argnames is ['Group']
+	]).
 
 	:- public(flag_groups/1).
 	:- mode(flag_groups(-list(atom)), one).
 	:- info(flag_groups/1, [
 		comment is 'Returns a list of all flag groups.',
-		argnames is ['Groups']]).
+		argnames is ['Groups']
+	]).
 
 	:- public(flag_group_chk/1).
 	:- mode(flag_group_chk(+atom), zero_or_one).
 	:- info(flag_group_chk/1, [
 		comment is 'Checks if a given atom is a flag group.',
-		argnames is ['Group']]).
+		argnames is ['Group']
+	]).
 
 	:- public(print_flags/0).
 	:- mode(print_flags, one).
 	:- info(print_flags/0, [
-		comment is 'Prints a listing of all flags.']).
+		comment is 'Prints a listing of all flags.'
+	]).
 
 	:- public(print_flags/1).
 	:- mode(print_flags(+atom), one).
 	:- info(print_flags/1, [
 		comment is 'Prints a listing of all flags in a group.',
-		argnames is ['Group']]).
+		argnames is ['Group']
+	]).
 
 	:- public(defined_flag/6).
 	:- mode(defined_flag(?atom, ?atom, ?nonvar, ?nonvar, ?atom, ?atom), zero_or_more).
 	:- info(defined_flag/6, [
 		comment is 'Gets or test the existing (visible) flag definitions.',
-		argnames is ['Flag', 'Group', 'Type', 'DefaultValue', 'Description', 'Access']]).
+		argnames is ['Flag', 'Group', 'Type', 'DefaultValue', 'Description', 'Access']
+	]).
 
 	:- public(built_in_flag/2).
 	:- mode(built_in_flag(?atom, ?nonvar), zero_or_more).
 	:- info(built_in_flag/2, [
 		comment is 'True if the argument is a built-in flag type with the specified default value.',
-		argnames is ['Type', 'DefaultValue']]).
+		argnames is ['Type', 'DefaultValue']
+	]).
 
 	:- protected(unsafe_set_flag_value/2).
 	:- mode(unsafe_set_flag_value(+atom, @nonvar), one).
 	:- info(unsafe_set_flag_value/2, [
 		comment is 'Sets the value of a flag without performing any validation checks.',
-		argnames is ['Flag', 'NewValue']]).
+		argnames is ['Flag', 'NewValue']
+	]).
 
 	:- protected(define_flag/1).
 	:- mode(define_flag(+atom), one).
 	:- info(define_flag/1, [
 		comment is 'Defines a new flag using default options.',
-		argnames is ['Flag']]).
+		argnames is ['Flag']
+	]).
 
 	:- protected(define_flag/2).
 	:- mode(define_flag(+atom, @list), one).
 	:- info(define_flag/2, [
 		comment is 'Defines a new flag using a given set of options (for example, [group(general), type(nonvar), default(true), description(Flag), access(read_write)]).',
-		argnames is ['Flag', 'Options']]).
+		argnames is ['Flag', 'Options']
+	]).
 
 	:- private(defined_flag_/6).
 	:- dynamic(defined_flag_/6).
 	:- mode(defined_flag_(?atom, ?atom, ?nonvar, ?nonvar, ?atom, ?atom), zero_or_more).
 	:- info(defined_flag_/6, [
 		comment is 'Gets or test the existing flag definitions.',
-		argnames is ['Flag', 'Group', 'Type', 'DefaultValue', 'Description', 'Access']]).
+		argnames is ['Flag', 'Group', 'Type', 'DefaultValue', 'Description', 'Access']
+	]).
 
 	:- private(flag_value_/2).
 	:- dynamic(flag_value_/2).
 	:- mode(flag_value_(?atom, ?nonvar), zero_or_more).
 	:- info(flag_value_/2, [
 		comment is 'Table of flag values.',
-		argnames is ['Flag', 'Value']]).
+		argnames is ['Flag', 'Value']
+	]).
 
 	:- private([
 		validate/3,

@@ -15,7 +15,8 @@
 		version is 1.4,
 		author is 'Paulo Moura',
 		date is 2011/04/03,
-		comment is 'Multi-threading benchmarks. Supports SWI-Prolog, XSB, and YAP.']).
+		comment is 'Multi-threading benchmarks. Supports SWI-Prolog, XSB, and YAP.'
+	]).
 
 	:- threaded.
 
@@ -24,19 +25,22 @@
 	:- public(run/0).
 	:- mode(run, one).
 	:- info(run/0, [
-		comment is 'Runs all benchmarks the default number of times.']).
+		comment is 'Runs all benchmarks the default number of times.'
+	]).
 
 	:- public(run/1).
 	:- mode(run(+integer), one).
 	:- info(run/1, [
 		comment is 'Runs all benchmarks the specified number of times.',
-		argnames is ['N']]).
+		argnames is ['N']
+	]).
 
 	:- public(run/2).
 	:- mode(run(+atom, +integer), one).
 	:- info(run/2, [
 		comment is 'Runs a specific benchmark the specified number of times.',
-		argnames is ['Id', 'N']]).
+		argnames is ['Id', 'N']
+	]).
 
 	% run all benchmarks the default number of times:
 	run :-

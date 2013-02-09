@@ -15,14 +15,16 @@
 		version is 1.01,
 		date is 2012/04/16,
 		author is 'Paulo Moura',
-		comment is 'Conversion between compound terms and XML.']).
+		comment is 'Conversion between compound terms and XML.'
+	]).
 
 	:- public(convert/3).
 	:- mode(convert(@compound, @compound, -atom), zero_or_one).
 	:- mode(convert(-compound, -compound, +atom), zero_or_one).
 	:- info(convert/3, [
 		comment is 'Converts between a compound term and an interpretation and XML.',
-		argnames is ['Term', 'Interpretation', 'XML']]).
+		argnames is ['Term', 'Interpretation', 'XML']
+	]).
 
 	convert(Term, Interpretation, XML) :-
 		var(XML) ->

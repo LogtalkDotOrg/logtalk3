@@ -30,7 +30,8 @@
 		version is 1.1,
 		author is 'Paulo Moura',
 		date is 2006/3/7,
-		comment is 'Date predicates.']).
+		comment is 'Date predicates.'
+	]).
 
 	today(Year, Month, Day) :-
 		{'$lgt_current_date'(Year, Month, Day)}.

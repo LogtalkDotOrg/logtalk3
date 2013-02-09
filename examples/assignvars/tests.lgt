@@ -16,7 +16,8 @@
 		version is 1.1,
 		author is 'Parker Jones and Paulo Moura',
 		date is 2012/07/04,
-		comment is 'Unit tests for the "assignvars" example.']).
+		comment is 'Unit tests for the "assignvars" example.'
+	]).
 
 	unit(rectangle(_, _, _)).
 	unit(fsm(_, _, _)).

@@ -15,7 +15,8 @@
 		version is 1.1,
 		author is 'Paulo Moura. Derived from a coroutining solution by Gopal Gupta et al.',
 		date is 2011/08/13,
-		comment is 'Sieve of Eratosthenes coinduction example.']).
+		comment is 'Sieve of Eratosthenes coinduction example.'
+	]).
 
 	:- public(primes/2).
 	% computes a coinductive list with all the primes in the 2..N interval

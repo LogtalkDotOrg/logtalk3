@@ -15,13 +15,15 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2006/01/22,
-		comment is 'Example of using DCG rules to decrypt a enigma where words are made of numbers corresponding to the characters on a cellphone keypad.']).
+		comment is 'Example of using DCG rules to decrypt a enigma where words are made of numbers corresponding to the characters on a cellphone keypad.'
+	]).
 
 	:- public(solve/2).
 	:- mode(solve(+string, -list(atom)), zero_or_one).
 	:- info(solve/2, [
 		comment is 'Solves a cellphone enigma against a dictionary of words.',
-		argnames is ['Enigma', 'Message']]).
+		argnames is ['Enigma', 'Message']
+	]).
 
 	solve(Enigma, Message) :-
 		phrase(message(Message), Enigma).

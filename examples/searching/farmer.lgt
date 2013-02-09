@@ -16,7 +16,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 1998/3/23,
-		comment is 'Farmer, cabbage, goat, and wolf state space search problem.']).
+		comment is 'Farmer, cabbage, goat, and wolf state space search problem.'
+	]).
 
 	initial_state(start, (north, north, north, north)).
 

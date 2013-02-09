@@ -30,7 +30,8 @@
 		version is 1.3,
 		author is 'Paulo Moura',
 		date is 2012/12/28,
-		comment is 'Simple wrapper for the SICStus Prolog profiler.']).
+		comment is 'Simple wrapper for the SICStus Prolog profiler.'
+	]).
 
 	:- if((current_logtalk_flag(prolog_version, (4, Minor, _)), Minor >= 2)).
 

@@ -15,7 +15,8 @@
 		version is 1.2,
 		author is 'Paulo Moura',
 		date is 2011/05/18,
-		comment is 'Read and asserts a simple table of facts from a file for testing operator handling code.']).
+		comment is 'Read and asserts a simple table of facts from a file for testing operator handling code.'
+	]).
 
 	:- public(triple/2).
 	:- dynamic(triple/2).

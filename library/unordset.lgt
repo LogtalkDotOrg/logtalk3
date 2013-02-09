@@ -31,7 +31,8 @@
 		version is 1.1,
 		author is 'Paulo Moura',
 		date is 2008/4/22,
-		comment is 'Set predicates implemented using non-ordered lists. Uses ==/2 for element comparison and standard term ordering.']).
+		comment is 'Set predicates implemented using non-ordered lists. Uses ==/2 for element comparison and standard term ordering.'
+	]).
 
 	delete([], _, []).
 	delete([Head| Tail], Element, Remaining) :-

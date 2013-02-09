@@ -28,7 +28,8 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2012/12/16,
-		comment is 'Logtalk core (compiler and runtime) default message translations.']).
+		comment is 'Logtalk core (compiler and runtime) default message translations.'
+	]).
 
 	:- multifile(logtalk::message_prefix_stream/4).
 	:- dynamic(logtalk::message_prefix_stream/4).

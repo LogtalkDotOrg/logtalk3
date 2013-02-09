@@ -16,7 +16,8 @@
 		author is 'Paulo Moura',
 		date is 2011/04/03,
 		comment is 'Takeuchi function (recursive arithmetic).',
-		parameters is ['Threads'- 'Number of threads to use. Valid values are 1, 3, 9, 27, 81, etc.']]).
+		parameters is ['Threads' - 'Number of threads to use. Valid values are 1, 3, 9, 27, 81, etc.']
+	]).
 
 	:- threaded.
 
@@ -24,7 +25,8 @@
 	:- mode(tak(+integer, +integer, +integer, -integer), one).
 	:- info(tak/4, [
 		comment is 'Takeuchi function.',
-		argnames is ['X', 'Y', 'Z', 'A']]).
+		argnames is ['X', 'Y', 'Z', 'A']
+	]).
 
 	tak(X, Y, Z, A) :-
 		parameter(1, Threads),

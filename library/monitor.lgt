@@ -30,14 +30,16 @@
 		version is 1.2,
 		author is 'Paulo Moura',
 		date is 2009/10/8,
-		comment is 'Monitor predicates.']).
+		comment is 'Monitor predicates.'
+	]).
 
 	:- private(spy_point_/4).
 	:- dynamic(spy_point_/4).
 	:- mode(spy_point_(?event, ?object, ?callable, ?object), zero_or_more).
 	:- info(spy_point_/4, [
 		comment is 'Stores current spy points.',
-		argnames is ['Event', 'Object', 'Message', 'Sender']]).
+		argnames is ['Event', 'Object', 'Message', 'Sender']
+	]).
 
 	monitor_activated :-
 		self(Self),

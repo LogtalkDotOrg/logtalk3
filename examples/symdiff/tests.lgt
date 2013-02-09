@@ -16,7 +16,8 @@
 		version is 1.0,
 		author is 'Parker Jones and Paulo Moura',
 		date is 2010/03/16,
-		comment is 'Unit tests for the "symdiff" example.']).
+		comment is 'Unit tests for the "symdiff" example.'
+	]).
 
 	test(symdiff_1) :-
 		(x**1 + x*0 - x*1)::simplify(S),

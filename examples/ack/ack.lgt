@@ -15,13 +15,15 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2008/3/31,
-		comment is 'Ackermann function (general recursive function).']).
+		comment is 'Ackermann function (general recursive function).'
+	]).
 
 	:- public(ack/3).
 	:- mode(ack(+integer, +integer, -integer), one).
 	:- info(ack/3, [
 		comment is 'Ackermann function.',
-		argnames is ['M', 'N', 'V']]).
+		argnames is ['M', 'N', 'V']
+	]).
 
 	ack(0, N, V) :-
 		!,

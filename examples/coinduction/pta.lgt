@@ -19,7 +19,8 @@
 			version is 0.1,
 			author is 'Neda Saeedloei and Gopal Gupta. Adapted to Logtalk by Paulo Moura.',
 			date is 2010/07/23,
-			comment is 'Pushdown timed automaton example.']).
+			comment is 'Pushdown timed automaton example.'
+		]).
 
 		:- public(driver/6).
 		:- coinductive(driver/6).
@@ -47,7 +48,8 @@
 			version is 0.1,
 			author is 'Neda Saeedloei and Gopal Gupta. Adapted to Logtalk by Paulo Moura.',
 			date is 2010/07/23,
-			comment is 'Pushdown timed automaton example.']).
+			comment is 'Pushdown timed automaton example.'
+		]).
 
 		:- public(driver/6).
 		:- coinductive(driver/6).

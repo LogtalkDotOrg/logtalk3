@@ -16,7 +16,8 @@
 		version is 1.01,
 		author is 'Parker Jones and Paulo Moura',
 		date is 2012/12/14,
-		comment is 'Unit tests for the "expansion" example.']).
+		comment is 'Unit tests for the "expansion" example.'
+	]).
 
 	test(expansion_01) :-
 		exp_public::expand_term(8, Term),

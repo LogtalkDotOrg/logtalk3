@@ -16,7 +16,8 @@
 		version is 1.31,
 		author is 'Paulo Moura',
 		date is 2012/08/02,
-		comment is 'Example of an object defining compiler hook predicates.']).
+		comment is 'Example of an object defining compiler hook predicates.'
+	]).
 
 	% the term_expansion/2 predicate is called for every term in the source file
 	% being compiled using this hook object:
