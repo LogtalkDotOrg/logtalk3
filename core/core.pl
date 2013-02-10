@@ -8029,7 +8029,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_tr_entity_info_directive_pair'(+atom, @nonvar, -atom, @nonvar)
+% '$lgt_tr_entity_info_directive_pair'(+atom, @nonvar, -atom, -nonvar)
 %
 % translates an entity info/1 directive key-value pair
 
@@ -8047,6 +8047,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_must_be'(atom, Comment).
 
 '$lgt_tr_entity_info_directive_pair'(date, Date, date, Date) :-
+	!,
 	(	Date = Year/Month/Day ->
 		'$lgt_must_be'(integer, Year),
 		'$lgt_must_be'(integer, Month),
