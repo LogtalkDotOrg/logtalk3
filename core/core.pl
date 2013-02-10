@@ -5358,8 +5358,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	fail.
 
 '$lgt_add_entity_properties'(end, Entity) :-
-	'$lgt_pp_info_'(Info0),
-	'$lgt_convert_info_items'(Info0, Info),
+	'$lgt_pp_info_'(Info),
 	assertz('$lgt_pp_entity_runtime_clause_'('$lgt_entity_property_'(Entity, info(Info)))),
 	fail.
 
@@ -6677,14 +6676,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_directive'(info, [List], _) :-
 	!,
 	'$lgt_must_be'(list, List),
-	(	'$lgt_check_entity_info_list'(List) ->
-		(	retract('$lgt_pp_info_'(Previous)) ->
-			'$lgt_append'(Previous, List, Info)
-		;	Info = List
-		),
-		assertz('$lgt_pp_info_'(Info))
-	;	throw(type_error(entity_info_list, List))
-	).
+	'$lgt_tr_entity_info_directive'(List, TList),
+	assertz('$lgt_pp_info_'(TList)).
 
 
 % info/2 predicate directive
@@ -6693,12 +6686,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_must_be'(nonvar, Pred),
 	'$lgt_must_be'(list, List),
 	(	'$lgt_valid_predicate_or_non_terminal_indicator'(Pred, Functor, Arity) ->
-		'$lgt_check_predicate_info_list'(List, Functor, Arity),
-		(	retract('$lgt_pp_info_'(Pred, Previous)) ->
-			'$lgt_append'(Previous, List, Info)
-		;	Info = List
-		),
-		assertz('$lgt_pp_info_'(Pred, Info))
+		'$lgt_tr_predicate_info_directive'(List, Functor, Arity, TList),
+		assertz('$lgt_pp_info_'(Pred, TList))
 	;	throw(type_error(predicate_indicator, Pred))
 	).
 
@@ -8024,30 +8013,28 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_check_entity_info_list'(@list)
+% '$lgt_tr_entity_info_directive'(@list, -list)
 %
-% checks that the argument is a list of valid key-value pairs
+% translates the entity info/1 directive key-value pairs
 
-'$lgt_check_entity_info_list'([]).
+'$lgt_tr_entity_info_directive'([], []).
 
-'$lgt_check_entity_info_list'([Head| Tail]) :-
-	'$lgt_must_be'(key_value_info_pair, Head),
-	Head = (Key is Value),
-	(	'$lgt_check_entity_info_key_value'(Key, Value) ->
-		% standard entity info pair checked
-		true
-	;	% user-defined entity info pair; no checking
-		true
-	),
-	'$lgt_check_entity_info_list'(Tail).
+'$lgt_tr_entity_info_directive'([Pair| Pairs], [TPair| TPairs]) :-
+	'$lgt_must_be'(key_value_info_pair, Pair),
+	Pair = (Key is Value),
+	'$lgt_tr_entity_info_directive_pair'(Key, Value, TKey, TValue),
+	functor(TPair, TKey, 1),
+	arg(1, TPair, TValue),
+	'$lgt_tr_entity_info_directive'(Pairs, TPairs).
 
 
 
-% '$lgt_check_entity_info_key_value'(+atom, @nonvar)
+% '$lgt_tr_entity_info_directive_pair'(+atom, @nonvar, -atom, @nonvar)
 %
-% checks that the argument is a valid key-value pair
+% translates an entity info/1 directive key-value pair
 
-'$lgt_check_entity_info_key_value'(author, Author) :-
+'$lgt_tr_entity_info_directive_pair'(author, Author, author, Author) :-
+	!,
 	(	atom(Author) ->
 		true
 	;	Author = {EntityName}, atom(EntityName) ->
@@ -8055,10 +8042,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	throw(type_error(atom, Author))
 	).
 
-'$lgt_check_entity_info_key_value'(comment, Comment) :-
+'$lgt_tr_entity_info_directive_pair'(comment, Comment, comment, Comment) :-
 	'$lgt_must_be'(atom, Comment).
 
-'$lgt_check_entity_info_key_value'(date, Date) :-
+'$lgt_tr_entity_info_directive_pair'(date, Date, date, Date) :-
 	(	Date = Year/Month/Day ->
 		'$lgt_must_be'(integer, Year),
 		'$lgt_must_be'(integer, Month),
@@ -8066,7 +8053,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	throw(type_error(date, Date))
 	).
 
-'$lgt_check_entity_info_key_value'(parameters, Parameters) :-
+'$lgt_tr_entity_info_directive_pair'(parameters, Parameters, parameters, Parameters) :-
 	'$lgt_must_be'(list, Parameters),
 	(	'$lgt_member'(Parameter, Parameters), \+ '$lgt_valid_entity_parameter'(Parameter) ->
 		throw(type_error(parameter, Parameter))
@@ -8078,7 +8065,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		)
 	).
 
-'$lgt_check_entity_info_key_value'(parnames, Parnames) :-
+'$lgt_tr_entity_info_directive_pair'(parnames, Parnames, parnames, Parnames) :-
 	'$lgt_must_be'(list, Parnames),
 	(	'$lgt_member'(Name, Parnames), \+ atom(Name) ->
 		throw(type_error(atom, Name))
@@ -8088,10 +8075,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		)
 	).
 
-'$lgt_check_entity_info_key_value'(version, Version) :-
+'$lgt_tr_entity_info_directive_pair'(version, Version, version, Version) :-
 	'$lgt_must_be'(atomic, Version).
 
-'$lgt_check_entity_info_key_value'(copyright, Copyright) :-
+'$lgt_tr_entity_info_directive_pair'(copyright, Copyright, copyright, Copyright) :-
 	(	atom(Copyright) ->
 		true
 	;	Copyright = {EntityName}, atom(EntityName) ->
@@ -8099,7 +8086,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	throw(type_error(atom, Copyright))
 	).
 
-'$lgt_check_entity_info_key_value'(license, License) :-
+'$lgt_tr_entity_info_directive_pair'(license, License, license, License) :-
 	(	atom(License) ->
 		true
 	;	License = {EntityName}, atom(EntityName) ->
@@ -8107,39 +8094,39 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	throw(type_error(atom, License))
 	).
 
+% user-defined entity info pair; no checking
+'$lgt_tr_entity_info_directive_pair'(Key, Value, Key, Value).
 
 
-% '$lgt_check_predicate_info_list'(@list, +atom, +integer)
+
+% '$lgt_tr_predicate_info_directive'(@list, +atom, +integer, -list)
 %
-% checks that the argument is a list of valid key-value pairs
+% translates the predicate info/2 directive key-value pairs
 
-'$lgt_check_predicate_info_list'([], _, _).
+'$lgt_tr_predicate_info_directive'([], _, _, []).
 
-'$lgt_check_predicate_info_list'([Head| Tail], Functor, Arity) :-
-	'$lgt_must_be'(key_value_info_pair, Head),
-	Head = (Key is Value),
-	(	'$lgt_check_predicate_info_key_value'(Key, Value, Functor, Arity) ->
-		% standard predicate info pair checked
-		true
-	;	% user-defined predicate info pair; no checking
-		true
-	),
-	'$lgt_check_predicate_info_list'(Tail, Functor, Arity).
+'$lgt_tr_predicate_info_directive'([Pair| Pairs], Functor, Arity, [TPair| TPairs]) :-
+	'$lgt_must_be'(key_value_info_pair, Pair),
+	Pair = (Key is Value),
+	'$lgt_tr_predicate_info_directive_pair'(Key, Value, Functor, Arity, TKey, TValue),
+	functor(TPair, TKey, 1),
+	arg(1, TPair, TValue),
+	'$lgt_tr_predicate_info_directive'(Pairs, Functor, Arity, TPairs).
 
 
 
-% '$lgt_check_predicate_info_key_value'(+atom, @nonvar, +atom, +integer)
+% '$lgt_tr_predicate_info_directive_pair'(+atom, @nonvar, +atom, +integer, -atom, -nonvar)
 %
-% checks that the argument is a valid key-value pair
+% translates a predicate info/2 directive key-value pair
 
-'$lgt_check_predicate_info_key_value'(allocation, Allocation, _, _) :-
+'$lgt_tr_predicate_info_directive_pair'(allocation, Allocation, _, _, allocation, Allocation) :-
 	'$lgt_must_be'(atom, Allocation),
 	(	'$lgt_valid_predicate_allocation'(Allocation) ->
 		true
 	;	throw(domain_error(allocation, Allocation))
 	).
 
-'$lgt_check_predicate_info_key_value'(arguments, Arguments, _, Arity) :-
+'$lgt_tr_predicate_info_directive_pair'(arguments, Arguments, _, Arity, arguments, Arguments) :-
 	'$lgt_must_be'(list, Arguments),
 	(	'$lgt_member'(Argument, Arguments), \+ '$lgt_valid_predicate_argument'(Argument) ->
 		throw(type_error(argument, Argument))
@@ -8149,7 +8136,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		)
 	).
 
-'$lgt_check_predicate_info_key_value'(argnames, Argnames, _, Arity) :-
+'$lgt_tr_predicate_info_directive_pair'(argnames, Argnames, _, Arity, argnames, Argnames) :-
 	'$lgt_must_be'(list, Argnames),
 	(	'$lgt_member'(Name, Argnames), \+ atom(Name) ->
 		throw(type_error(atom, Name))
@@ -8159,29 +8146,32 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		)
 	).
 
-'$lgt_check_predicate_info_key_value'(comment, Comment, _, _) :-
+'$lgt_tr_predicate_info_directive_pair'(comment, Comment, _, _, comment, Comment) :-
 	'$lgt_must_be'(atom, Comment).
 
-'$lgt_check_predicate_info_key_value'(exceptions, Exceptions, _, _) :-
+'$lgt_tr_predicate_info_directive_pair'(exceptions, Exceptions, _, _, exceptions, Exceptions) :-
 	'$lgt_must_be'(list, Exceptions),
 	(	'$lgt_member'(Exception, Exceptions), \+ '$lgt_valid_predicate_exception'(Exception) ->
 		throw(type_error(exception, Exception))
 	;	true
 	).
 
-'$lgt_check_predicate_info_key_value'(examples, Examples, Functor, Arity) :-
+'$lgt_tr_predicate_info_directive_pair'(examples, Examples, Functor, Arity, examples, Examples) :-
 	'$lgt_must_be'(list, Examples),
 	(	'$lgt_member'(Example, Examples), \+ '$lgt_valid_predicate_call_example'(Example, Functor, Arity) ->
 		throw(type_error(example, Example))
 	;	true
 	).
 
-'$lgt_check_predicate_info_key_value'(redefinition, Redefinition, _, _) :-
+'$lgt_tr_predicate_info_directive_pair'(redefinition, Redefinition, _, _, redefinition, Redefinition) :-
 	'$lgt_must_be'(atom, Redefinition),
 	(	'$lgt_valid_predicate_redefinition'(Redefinition) ->
 		true
 	;	throw(domain_error(redefinition, Redefinition))
 	).
+
+% user-defined predicate info pair; no checking
+'$lgt_tr_predicate_info_directive_pair'(Key, Value, _, _, Key, Value).
 
 
 
@@ -8530,27 +8520,17 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	fail.
 
 '$lgt_add_entity_predicate_properties'(Entity) :-
-	'$lgt_pp_info_'(Functor/Arity, Info0),
-		'$lgt_convert_info_items'(Info0, Info),
-		assertz('$lgt_pp_entity_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/Arity, info(Info)))),
+	'$lgt_pp_info_'(Functor/Arity, Info),
+	assertz('$lgt_pp_entity_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/Arity, info(Info)))),
 	fail.
 
 '$lgt_add_entity_predicate_properties'(Entity) :-
-	'$lgt_pp_info_'(Functor//Arity, Info0),
-		'$lgt_convert_info_items'(Info0, Info),
-		ExtArity is Arity + 2,
-		assertz('$lgt_pp_entity_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/ExtArity, info(Info)))),
+	'$lgt_pp_info_'(Functor//Arity, Info),
+	ExtArity is Arity + 2,
+	assertz('$lgt_pp_entity_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/ExtArity, info(Info)))),
 	fail.
 
 '$lgt_add_entity_predicate_properties'(_).
-
-
-'$lgt_convert_info_items'([], []).
-
-'$lgt_convert_info_items'([Key is Value| Items], [Info| Infos]) :-
-	functor(Info, Key, 1),
-	arg(1, Info, Value),
-	'$lgt_convert_info_items'(Items, Infos).
 
 
 
