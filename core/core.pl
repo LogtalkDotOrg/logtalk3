@@ -8043,6 +8043,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	).
 
 '$lgt_tr_entity_info_directive_pair'(comment, Comment, comment, Comment) :-
+	!,
 	'$lgt_must_be'(atom, Comment).
 
 '$lgt_tr_entity_info_directive_pair'(date, Date, date, Date) :-
@@ -8054,6 +8055,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	).
 
 '$lgt_tr_entity_info_directive_pair'(parameters, Parameters, parameters, Parameters) :-
+	!,
 	'$lgt_must_be'(list, Parameters),
 	(	'$lgt_member'(Parameter, Parameters), \+ '$lgt_valid_entity_parameter'(Parameter) ->
 		throw(type_error(parameter, Parameter))
@@ -8066,6 +8068,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	).
 
 '$lgt_tr_entity_info_directive_pair'(parnames, Parnames, parnames, Parnames) :-
+	!,
 	'$lgt_must_be'(list, Parnames),
 	(	'$lgt_member'(Name, Parnames), \+ atom(Name) ->
 		throw(type_error(atom, Name))
@@ -8076,9 +8079,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	).
 
 '$lgt_tr_entity_info_directive_pair'(version, Version, version, Version) :-
+	!,
 	'$lgt_must_be'(atomic, Version).
 
 '$lgt_tr_entity_info_directive_pair'(copyright, Copyright, copyright, Copyright) :-
+	!,
 	(	atom(Copyright) ->
 		true
 	;	Copyright = {EntityName}, atom(EntityName) ->
@@ -8087,6 +8092,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	).
 
 '$lgt_tr_entity_info_directive_pair'(license, License, license, License) :-
+	!,
 	(	atom(License) ->
 		true
 	;	License = {EntityName}, atom(EntityName) ->
@@ -8120,6 +8126,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % translates a predicate info/2 directive key-value pair
 
 '$lgt_tr_predicate_info_directive_pair'(allocation, Allocation, _, _, allocation, Allocation) :-
+	!,
 	'$lgt_must_be'(atom, Allocation),
 	(	'$lgt_valid_predicate_allocation'(Allocation) ->
 		true
@@ -8127,6 +8134,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	).
 
 '$lgt_tr_predicate_info_directive_pair'(arguments, Arguments, _, Arity, arguments, Arguments) :-
+	!,
 	'$lgt_must_be'(list, Arguments),
 	(	'$lgt_member'(Argument, Arguments), \+ '$lgt_valid_predicate_argument'(Argument) ->
 		throw(type_error(argument, Argument))
@@ -8137,6 +8145,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	).
 
 '$lgt_tr_predicate_info_directive_pair'(argnames, Argnames, _, Arity, argnames, Argnames) :-
+	!,
 	'$lgt_must_be'(list, Argnames),
 	(	'$lgt_member'(Name, Argnames), \+ atom(Name) ->
 		throw(type_error(atom, Name))
@@ -8147,9 +8156,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	).
 
 '$lgt_tr_predicate_info_directive_pair'(comment, Comment, _, _, comment, Comment) :-
+	!,
 	'$lgt_must_be'(atom, Comment).
 
 '$lgt_tr_predicate_info_directive_pair'(exceptions, Exceptions, _, _, exceptions, Exceptions) :-
+	!,
 	'$lgt_must_be'(list, Exceptions),
 	(	'$lgt_member'(Exception, Exceptions), \+ '$lgt_valid_predicate_exception'(Exception) ->
 		throw(type_error(exception, Exception))
@@ -8157,6 +8168,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	).
 
 '$lgt_tr_predicate_info_directive_pair'(examples, Examples, Functor, Arity, examples, Examples) :-
+	!,
 	'$lgt_must_be'(list, Examples),
 	(	'$lgt_member'(Example, Examples), \+ '$lgt_valid_predicate_call_example'(Example, Functor, Arity) ->
 		throw(type_error(example, Example))
@@ -8164,6 +8176,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	).
 
 '$lgt_tr_predicate_info_directive_pair'(redefinition, Redefinition, _, _, redefinition, Redefinition) :-
+	!,
 	'$lgt_must_be'(atom, Redefinition),
 	(	'$lgt_valid_predicate_redefinition'(Redefinition) ->
 		true
