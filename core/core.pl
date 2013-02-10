@@ -15941,21 +15941,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_valid_annotation_template'(+nonvar)
-
-'$lgt_valid_annotation_template'(Pred) :-
-	Pred =.. [_, Arg1, Arg2],
-	nonvar(Arg1),
-	nonvar(Arg2),
-	'$lgt_valid_annotation_template_args'(Arg1, Arg2).
-
-
-'$lgt_valid_annotation_template_args'(*, 0).		% right annotation operand is a goal
-'$lgt_valid_annotation_template_args'(0, *).		% left annotation operand is a goal
-'$lgt_valid_annotation_template_args'(0, 0).		% both annotation operands are goals
-
-
-
 % '$lgt_valid_mode_template'(+nonvar)
 
 '$lgt_valid_mode_template'(Pred) :-
