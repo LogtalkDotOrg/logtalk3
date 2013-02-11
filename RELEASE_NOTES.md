@@ -45,6 +45,9 @@ the `::/2` control construct.
 * CHANGED: The `logtalk` built-in object no longer implements the `expanding`
 and `monitoring` built-in protocols.
 
+* CHANGED: When compiling messages to the pseudo-object `user`, the compiler
+now checks that the message is either a variable or a callable term.
+
 * FIXED: The compiler could fail to properly report non-callable terms used as
 goals in predicate clauses.
 

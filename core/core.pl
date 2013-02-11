@@ -11045,8 +11045,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_tr_msg'(Pred, Obj, Pred, _) :-
 	Obj == user,
-	Pred \= current_predicate(_),
-	Pred \= predicate_property(_, _),
+	'$lgt_must_be'(var_or_callable, Pred),
+	Pred \== current_predicate(_),
+	Pred \== predicate_property(_, _),
 	!.
 
 % translation performed at runtime
