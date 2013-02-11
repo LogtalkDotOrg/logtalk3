@@ -3,8 +3,8 @@
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
-%  Adapter file for ECLiPSe 6.1#140 and later versions
-%  Last updated on February 7, 2012
+%  Adapter file for ECLiPSe 6.1#143 and later versions
+%  Last updated on February 11, 2012
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -25,49 +25,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- pragma(system).
 :- pragma(nodebug).
 
-
 :- use_module(library(numbervars)).
-
-
-format(Format, Arguments) :-
-	current_output(Stream),
-	format(Stream, Format, Arguments).
-format(Stream, Format, Arguments) :-
-	atom_codes(Format, FormatCodes),
-	'$lgt_eclipse_convert_format'(FormatCodes, Arguments, ConvertedFormatCodes, ConvertedArguments),
-	atom_codes(ConvertedFormatAtom, ConvertedFormatCodes),
-	atom_string(ConvertedFormatAtom, ConvertedFormat),
-	printf(Stream, ConvertedFormat, ConvertedArguments).
-
-'$lgt_eclipse_convert_format'([], [], [], []).
-'$lgt_eclipse_convert_format'([0'%| Codes], Arguments, [0'%, 0'%| ConvertedCodes], ConvertedArguments) :-
-	!,
-	'$lgt_eclipse_convert_format'(Codes, Arguments, ConvertedCodes, ConvertedArguments).
-'$lgt_eclipse_convert_format'([0'~, 0's| Codes], [String| Arguments], [0'%, 0's| ConvertedCodes], [Atom| ConvertedArguments]) :-
-	!,
-	atom_codes(Atom, String),
-	'$lgt_eclipse_convert_format'(Codes, Arguments, ConvertedCodes, ConvertedArguments).
-'$lgt_eclipse_convert_format'([0'~, 0'~| Codes], Arguments, [0'~| ConvertedCodes], ConvertedArguments) :-
-	!,
-	'$lgt_eclipse_convert_format'(Codes, Arguments, ConvertedCodes, ConvertedArguments).
-'$lgt_eclipse_convert_format'([0'~| Codes], [Argument| Arguments], [0'%| ConvertedCodes], [Argument| ConvertedArguments]) :-
-	!,
-	'$lgt_eclipse_convert_format'(Codes, Arguments, ConvertedCodes, ConvertedArguments).
-'$lgt_eclipse_convert_format'([Code| Codes], Arguments, [Code| ConvertedCodes], ConvertedArguments) :-
-	'$lgt_eclipse_convert_format'(Codes, Arguments, ConvertedCodes, ConvertedArguments).
-
+:- use_module(library(format)).
 
 :- set_event_handler(134, '$lgt_eclipse_discontiguous_predicate_handler'/2).
 
 '$lgt_eclipse_discontiguous_predicate_handler'(Err, Goal) :-
 	'$lgt_increment_loadind_warnings_counter',
 	error(default(Err), Goal).
-
-:- set_stream(user_error, stderr).
 
 
 
@@ -221,7 +189,7 @@ forall(Generate, Test) :-
 '$lgt_prolog_feature'(prolog_dialect, eclipse).
 '$lgt_prolog_feature'(prolog_version, (Major, Minor, Build)) :-
 	get_flag(version_as_list, [Major, Minor, Build]).
-'$lgt_prolog_feature'(prolog_compatible_version, @>=((6,1,140))).
+'$lgt_prolog_feature'(prolog_compatible_version, @>=((6,1,143))).
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
 '$lgt_prolog_feature'(tabling, unsupported).
