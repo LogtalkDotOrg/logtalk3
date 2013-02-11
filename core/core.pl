@@ -10187,6 +10187,13 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	fail.
 
 
+% non-callable terms
+
+'$lgt_tr_body'(Pred, _, _, _) :-
+	\+ callable(Pred),
+	throw(type_error(callable, Pred)).
+
+
 % predicates specified in uses/2 directives
 
 '$lgt_tr_body'(Alias, TPred, '$lgt_debug'(goal(Alias, TPred), ExCtx), Ctx) :-

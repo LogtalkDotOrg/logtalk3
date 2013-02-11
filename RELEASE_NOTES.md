@@ -45,6 +45,9 @@ the `::/2` control construct.
 * CHANGED: The `logtalk` built-in object no longer implements the `expanding`
 and `monitoring` built-in protocols.
 
+* FIXED: The compiler could fail to properly report non-callable terms used as
+goals in predicate clauses.
+
 * FIXED: Allow the `logtalk` built-in object to be complemented by a category.
 
 * FIXED: Predicate property `defined_in/2` failed to return the line for the
