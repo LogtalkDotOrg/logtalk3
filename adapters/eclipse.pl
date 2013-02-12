@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on February 11, 2012
+%  Last updated on February 12, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -28,6 +28,7 @@
 :- pragma(system).
 :- pragma(nodebug).
 
+:- use_module(library(iso)).
 :- use_module(library(numbervars)).
 :- use_module(library(format)).
 
