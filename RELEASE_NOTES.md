@@ -25,6 +25,16 @@ RELEASE NOTES
 =============
 
 
+3.00.0 Alpha 10 - March ??, 2013
+================================
+
+Prolog adapter and integration files
+------------------------------------
+
+* CHANGED: GNU Prolog 1.4.2 (or a later version) is now required when using
+this back-end Prolog compiler.
+
+
 3.00.0 Alpha 9 - February 11, 2013
 ==================================
 

@@ -164,7 +164,7 @@ echo
 echo "* B-Prolog (version 7.8 or later):         bplgt"
 echo "* CxProlog (version 0.97.6 or later):      cxlgt"
 echo "* ECLiPSe (version 6.1#143 or later):      eclipselgt"
-echo "* GNU Prolog (version 1.4.1 or later):     gplgt"
+echo "* GNU Prolog (version 1.4.2 or later):     gplgt"
 echo "* Lean Prolog (version 3.7.10 or later):   lplgt"
 echo "* Qu-Prolog (version 9.0 or later):        qplgt"
 echo "* SICStus Prolog (version 4.1.0 or later): sicstuslgt"

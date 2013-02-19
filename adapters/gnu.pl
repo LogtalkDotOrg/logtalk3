@@ -3,8 +3,8 @@
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
-%  Adapter file for GNU Prolog 1.4.1 (and later versions)
-%  Last updated on December 16, 2012
+%  Adapter file for GNU Prolog 1.4.2 (and later versions)
+%  Last updated on February 19, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -153,7 +153,7 @@ setup_call_cleanup(_, _, _) :-
 '$lgt_prolog_feature'(prolog_dialect, gnu).
 '$lgt_prolog_feature'(prolog_version, (Major, Minor, Patch)) :-
 	catch(current_prolog_flag(version_data, gprolog(Major, Minor, Patch, _)), _, fail).
-'$lgt_prolog_feature'(prolog_compatible_version, @>=((1,4,1))).
+'$lgt_prolog_feature'(prolog_compatible_version, @>=((1,4,2))).
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
 '$lgt_prolog_feature'(tabling, unsupported).
@@ -655,6 +655,17 @@ with_mutex(_, _) :- fail.
 '$lgt_gnu_filter_format_codes'([Code| Codes], [Code| FilteredCodes]) :-
 	!,
 	'$lgt_gnu_filter_format_codes'(Codes, FilteredCodes).
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  term hashing
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% term_hash(@callable, +integer, +integer, -integer) -- built-in
 
 
 
