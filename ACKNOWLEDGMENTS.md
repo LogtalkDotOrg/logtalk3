@@ -59,6 +59,7 @@ CONTRIBUTORS
 * Paulo Nunes (multi-threading testing)
 * rbt (bug reports)
 * Rémy Haemmerlé (meta-predicate safety bug reports)
+* Richard O'Keefe (heaps and ordered sets library code)
 * Robert Sasak (PDDL 3.0 parser contribution)
 * Robert Shiplett (bug reports)
 * Rui Marques (bug reports)
