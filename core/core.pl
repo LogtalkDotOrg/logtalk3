@@ -6403,20 +6403,28 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		)
 	).
 
-'$lgt_tr_directive'(object, [Obj| Relations], _) :-
-	'$lgt_print_message'(silent(compiling), core, compiling_entity(object, Obj)),
+'$lgt_tr_directive'(object, [Obj| Relations], Ctx) :-
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+		\+ '$lgt_compiler_flag'(report, off) ->
+		'$lgt_print_message'(silent(compiling), core, compiling_entity(object, Obj))
+	;	true
+	),
 	'$lgt_add_entity_properties'(start, Obj),
 	% assume static object
 	'$lgt_tr_object_identifier'(Obj),
 	'$lgt_tr_object_relations'(Relations, Obj).
 
-'$lgt_tr_directive'(end_object, [], _) :-
+'$lgt_tr_directive'(end_object, [], Ctx) :-
 	(	'$lgt_pp_object_'(Obj, _, _, _, _, _, _, _, _, _, _) ->
 		'$lgt_add_entity_predicate_properties'(Obj),
 		'$lgt_add_entity_properties'(end, Obj),
 		'$lgt_tr_entity'(object, Obj),
 		'$lgt_restore_file_operator_table',
-		'$lgt_print_message'(silent(compiling), core, compiled_entity(object, Obj))
+		(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+			\+ '$lgt_compiler_flag'(report, off) ->
+			'$lgt_print_message'(silent(compiling), core, compiled_entity(object, Obj))
+		;	true
+		)
 	;	throw(existence_error(opening_directive, object/1))
 	).
 
@@ -6441,20 +6449,28 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		)
 	).
 
-'$lgt_tr_directive'(protocol, [Ptc| Relations], _) :-
-	'$lgt_print_message'(silent(compiling), core, compiling_entity(protocol, Ptc)),
+'$lgt_tr_directive'(protocol, [Ptc| Relations], Ctx) :-
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+		\+ '$lgt_compiler_flag'(report, off) ->
+		'$lgt_print_message'(silent(compiling), core, compiling_entity(protocol, Ptc))
+	;	true
+	),
 	'$lgt_add_entity_properties'(start, Ptc),
 	% assume static protocol
 	'$lgt_tr_protocol_identifier'(Ptc),
 	'$lgt_tr_protocol_relations'(Relations, Ptc).
 
-'$lgt_tr_directive'(end_protocol, [], _) :-
+'$lgt_tr_directive'(end_protocol, [], Ctx) :-
 	(	'$lgt_pp_protocol_'(Ptc, _, _, _, _) ->
 		'$lgt_add_entity_predicate_properties'(Ptc),
 		'$lgt_add_entity_properties'(end, Ptc),
 		'$lgt_tr_entity'(protocol, Ptc),
 		'$lgt_restore_file_operator_table',
-		'$lgt_print_message'(silent(compiling), core, compiled_entity(protocol, Ptc))
+		(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+			\+ '$lgt_compiler_flag'(report, off) ->
+			'$lgt_print_message'(silent(compiling), core, compiled_entity(protocol, Ptc))
+		;	true
+		)
 	;	throw(existence_error(opening_directive, protocol/1))
 	).
 
@@ -6480,20 +6496,28 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		)
 	).
 
-'$lgt_tr_directive'(category, [Ctg| Relations], _) :-
-	'$lgt_print_message'(silent(compiling), core, compiling_entity(category, Ctg)),
+'$lgt_tr_directive'(category, [Ctg| Relations], Ctx) :-
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+		\+ '$lgt_compiler_flag'(report, off) ->
+		'$lgt_print_message'(silent(compiling), core, compiling_entity(category, Ctg))
+	;	true
+	),
 	'$lgt_add_entity_properties'(start, Ctg),
 	% assume static category
 	'$lgt_tr_category_identifier'(Ctg),
 	'$lgt_tr_category_relations'(Relations, Ctg).
 
-'$lgt_tr_directive'(end_category, [], _) :-
+'$lgt_tr_directive'(end_category, [], Ctx) :-
 	(	'$lgt_pp_category_'(Ctg, _, _, _, _, _) ->
 		'$lgt_add_entity_predicate_properties'(Ctg),
 		'$lgt_add_entity_properties'(end, Ctg),
 		'$lgt_tr_entity'(category, Ctg),
 		'$lgt_restore_file_operator_table',
-		'$lgt_print_message'(silent(compiling), core, compiled_entity(category, Ctg))
+		(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+			\+ '$lgt_compiler_flag'(report, off) ->
+			'$lgt_print_message'(silent(compiling), core, compiled_entity(category, Ctg))
+		;	true
+		)
 	;	throw(existence_error(opening_directive, category/1))
 	).
 
@@ -6510,7 +6534,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_must_be'(list, Exports),
 	% remember we are compiling a module
 	assertz('$lgt_pp_module_'(Module)),
-	'$lgt_print_message'(silent(compiling), core, compiling_entity(module, Module)),
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+		\+ '$lgt_compiler_flag'(report, off) ->
+		'$lgt_print_message'(silent(compiling), core, compiling_entity(module, Module))
+	;	true
+	),
 	'$lgt_add_entity_properties'(start, Module),
 	% assume static module/object
 	'$lgt_tr_object_identifier'(Module),
