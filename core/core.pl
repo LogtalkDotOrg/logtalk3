@@ -12248,8 +12248,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	'$lgt_report_undefined_calls'(Type, Entity),
 		'$lgt_report_missing_directives'(Type, Entity),
 		'$lgt_report_misspelt_calls'(Type, Entity),
-		'$lgt_report_non_portable_predicates'(Type, Entity),
-		'$lgt_report_non_portable_functions'(Type, Entity),
+		'$lgt_report_non_portable_calls'(Type, Entity),
 		'$lgt_report_unknown_entities'(Type, Entity)
 	).
 
@@ -14360,33 +14359,30 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% reports non-portable predicate calls in the body of object and category predicates
+% reports non-portable predicate and function calls in the body of object and category predicates
 
-'$lgt_report_non_portable_predicates'(Type, Entity) :-
-	'$lgt_compiler_flag'(portability, warning),
-	'$lgt_pp_file_path_flags_'(File, Directory, _),
-	atom_concat(Directory, File, Path),
-		'$lgt_pp_non_portable_predicate_'(Functor, Arity, Lines),
-		'$lgt_increment_compile_warnings_counter',
-		'$lgt_print_message'(warning(portability), core, non_standard_predicate_call(Path, Lines, Type, Entity, Functor/Arity)),
+'$lgt_report_non_portable_calls'(Type, Entity) :-
+	(	'$lgt_compiler_flag'(portability, warning) ->
+		'$lgt_pp_file_path_flags_'(File, Directory, _),
+		atom_concat(Directory, File, Path),
+		'$lgt_report_non_portable_calls'(Path, Type, Entity)
+	;	true
+	).
+
+
+'$lgt_report_non_portable_calls'(Path, Type, Entity) :-
+	'$lgt_pp_non_portable_predicate_'(Functor, Arity, Lines),
+	'$lgt_increment_compile_warnings_counter',
+	'$lgt_print_message'(warning(portability), core, non_standard_predicate_call(Path, Lines, Type, Entity, Functor/Arity)),
 	fail.
 
-'$lgt_report_non_portable_predicates'(_, _).
-
-
-
-% reports non-portable arithmetic function calls in the body of object and category predicates
-
-'$lgt_report_non_portable_functions'(Type, Entity) :-
-	'$lgt_compiler_flag'(portability, warning),
-	'$lgt_pp_file_path_flags_'(File, Directory, _),
-	atom_concat(Directory, File, Path),
-		'$lgt_pp_non_portable_function_'(Functor, Arity, Lines),
-		'$lgt_increment_compile_warnings_counter',
-		'$lgt_print_message'(warning(portability), core, non_standard_arithmetic_function_call(Path, Lines, Type, Entity, Functor/Arity)),
+'$lgt_report_non_portable_calls'(Path, Type, Entity) :-
+	'$lgt_pp_non_portable_function_'(Functor, Arity, Lines),
+	'$lgt_increment_compile_warnings_counter',
+	'$lgt_print_message'(warning(portability), core, non_standard_arithmetic_function_call(Path, Lines, Type, Entity, Functor/Arity)),
 	fail.
 
-'$lgt_report_non_portable_functions'(_, _).
+'$lgt_report_non_portable_calls'(_, _, _).
 
 
 
