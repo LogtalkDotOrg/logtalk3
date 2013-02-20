@@ -31,6 +31,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: Updated the compiler to print a warning for missing `public/1`
+directives for multifile predicates.
+
 * CHANGED: The compiler now only uses the value of the `report` flag in the
 default code for printing messages. This allows the user to intercept any
 compiler message (by defining clauses for the `logtalk::message_hook/4` hook
