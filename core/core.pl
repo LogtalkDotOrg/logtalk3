@@ -8841,6 +8841,15 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
 
 
+% goal expansion (only applied at compile time)
+
+'$lgt_tr_body'(Pred, TPred, DPred, Ctx) :-
+	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	'$lgt_tr_expand_goal'(Pred, ExpandedPred),
+	!,
+	'$lgt_tr_body'(ExpandedPred, TPred, DPred, Ctx).
+
+
 % message delegation (send a message while preserving the original sender)
 
 '$lgt_tr_body'([Goal], _, _, _) :-
@@ -8856,15 +8865,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_comp_ctx_this'(Ctx, This),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_exec_ctx'(ExCtx, Sender, This, _, _, _).
-
-
-% goal expansion (only applied at compile time)
-
-'$lgt_tr_body'(Pred, TPred, DPred, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-	'$lgt_tr_expand_goal'(Pred, ExpandedPred),
-	!,
-	'$lgt_tr_body'(ExpandedPred, TPred, DPred, Ctx).
 
 
 % bagof/3 and setof/3 existential quantifiers

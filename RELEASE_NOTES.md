@@ -37,6 +37,8 @@ Logtalk compiler and runtime
 when using the entity creation built-in predicates, resulting in failures or
 errors.
 
+* FIXED: Also allow message delegation goals to be expanded.
+
 Prolog adapter and integration files
 ------------------------------------
 
