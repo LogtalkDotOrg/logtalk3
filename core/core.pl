@@ -12245,8 +12245,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_report_problems'(Type, Entity) :-
 	(	Type == protocol ->
 		'$lgt_report_unknown_entities'(Type, Entity)
-	;	'$lgt_report_undefined_predicate_calls'(Type, Entity),
-		'$lgt_report_undefined_non_terminal_calls'(Type, Entity),
+	;	'$lgt_report_undefined_calls'(Type, Entity),
 		'$lgt_report_missing_directives'(Type, Entity),
 		'$lgt_report_misspelt_calls'(Type, Entity),
 		'$lgt_report_non_portable_predicates'(Type, Entity),
@@ -14169,23 +14168,37 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% reports calls to declared, static but undefined predicates in the body of object and category predicates
+% reports calls to declared, static but undefined predicates and
+% non-terminals in the body of object and category predicates
 
-'$lgt_report_undefined_predicate_calls'(_, _) :-
-	'$lgt_compiler_flag'(misspelt_calls, error),
-	'$lgt_undefined_predicate_call'(Pred, _, _),
-	throw(existence_error(procedure, Pred)).
+'$lgt_report_undefined_calls'(Type, Entity) :-
+	'$lgt_compiler_flag'(misspelt_calls, Value),
+	'$lgt_report_undefined_calls'(Value, Type, Entity).
 
-'$lgt_report_undefined_predicate_calls'(Type, Entity) :-
-	'$lgt_compiler_flag'(misspelt_calls, warning),
+
+'$lgt_report_undefined_calls'(silent, _, _).
+
+'$lgt_report_undefined_calls'(error, _, _) :-
+	(	'$lgt_undefined_predicate_call'(Pred, _, _) ->
+		throw(existence_error(procedure, Pred))
+	;	'$lgt_undefined_non_terminal_call'(NonTerminal, _, _) ->
+		throw(existence_error(procedure, NonTerminal))
+	;	true
+	).
+
+'$lgt_report_undefined_calls'(warning, Type, Entity) :-
 	'$lgt_pp_file_path_flags_'(File, Directory, _),
 	atom_concat(Directory, File, Path),
-		'$lgt_undefined_predicate_call'(Pred, _, Lines),
+	(	'$lgt_undefined_predicate_call'(Pred, _, Lines),
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_print_message'(warning(misspelt_calls), core, declared_static_predicate_called_but_not_defined(Path, Lines, Type, Entity, Pred)),
-	fail.
-
-'$lgt_report_undefined_predicate_calls'(_, _).
+		fail
+	;	'$lgt_undefined_non_terminal_call'(NonTerminal, _, Lines),
+		'$lgt_increment_compile_warnings_counter',
+		'$lgt_print_message'(warning(misspelt_calls), core, declared_static_non_terminal_called_but_not_defined(Path, Lines, Type, Entity, NonTerminal)),
+		fail
+	;	true
+	).
 
 
 '$lgt_undefined_predicate_call'(Functor/Arity, TFunctor/TArity, Lines) :-
@@ -14206,26 +14219,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		;	'$lgt_pp_private_'(Functor, Arity)
 	% but there is a scope directive for the predicate
 	)).
-
-
-
-% reports calls to declared, static but undefined predicates in the body of object and category predicates
-
-'$lgt_report_undefined_non_terminal_calls'(_, _) :-
-	'$lgt_compiler_flag'(misspelt_calls, error),
-	'$lgt_undefined_non_terminal_call'(NonTerminal, _, _),
-	throw(existence_error(procedure, NonTerminal)).
-
-'$lgt_report_undefined_non_terminal_calls'(Type, Entity) :-
-	'$lgt_compiler_flag'(misspelt_calls, warning),
-	'$lgt_pp_file_path_flags_'(File, Directory, _),
-	atom_concat(Directory, File, Path),
-		'$lgt_undefined_non_terminal_call'(NonTerminal, _, Lines),
-		'$lgt_increment_compile_warnings_counter',
-		'$lgt_print_message'(warning(misspelt_calls), core, declared_static_non_terminal_called_but_not_defined(Path, Lines, Type, Entity, NonTerminal)),
-	fail.
-
-'$lgt_report_undefined_non_terminal_calls'(_, _).
 
 
 '$lgt_undefined_non_terminal_call'(Functor//Arity, TFunctor/TArity, Lines) :-
