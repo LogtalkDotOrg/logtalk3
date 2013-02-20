@@ -56,6 +56,11 @@ Prolog adapter and integration files
 * CHANGED: GNU Prolog 1.4.2 (or a later version) is now required when using
 this back-end Prolog compiler.
 
+Documentation
+-------------
+
+* IMPROVED: Documentation of the `multifile/1` predicate directive.
+
 
 3.00.0 Alpha 9 - February 11, 2013
 ==================================
