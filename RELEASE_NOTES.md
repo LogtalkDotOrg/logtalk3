@@ -28,6 +28,13 @@ RELEASE NOTES
 3.00.0 Alpha 10 - March ??, 2013
 ================================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: The compiler could attempt to print compilation warnings at runtime
+when using the entity creation built-in predicates, resulting in failures or
+errors.
+
 Prolog adapter and integration files
 ------------------------------------
 
