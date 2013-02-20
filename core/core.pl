@@ -8324,23 +8324,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % head and for the body) into a normal clause and a debug clause
 
 '$lgt_tr_clause'(Clause, _, _, _, _) :-
-	var(Clause),
-	throw(instantiation_error).
-
-'$lgt_tr_clause'((Head:-_), _, _, _, _) :-
-	var(Head),
-	throw(instantiation_error).
-
-'$lgt_tr_clause'((Head:-_), _, _, _, _) :-
-	\+ callable(Head),
-	throw(type_error(callable, Head)).
-
-'$lgt_tr_clause'((_:-Body), _, _, _, _) :-
-	nonvar(Body),
-	\+ callable(Body),
-	throw(type_error(callable, Body)).
-
-'$lgt_tr_clause'(Clause, _, _, _, _) :-
+	'$lgt_must_be'(clause, Clause),
 	'$lgt_pp_entity'(protocol, _, _, _, _),
 	% protocols cannot contain predicate definitions
 	(	Clause = (Head:-_)
@@ -8435,10 +8419,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	),
 	'$lgt_comp_ctx_exec_ctx'(HeadCtx, ExCtx),
 	'$lgt_update_predicate_line_clauses_property'(N, Head).
-
-'$lgt_tr_clause'(Fact, _, _, _, _) :-
-	\+ callable(Fact),
-	throw(type_error(callable, Fact)).
 
 '$lgt_tr_clause'(Annotation, TFact, DFact, _, BodyCtx) :-
 	'$lgt_value_annotation'(Annotation, Functor, Order, Value, Body, Head),

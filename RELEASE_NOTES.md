@@ -31,7 +31,7 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* IMPROVED: Small performance improvement when compiling entity clause heads.
+* IMPROVED: Small performance improvements when compiling entity clauses.
 
 * FIXED: The compiler could attempt to print compilation warnings at runtime
 when using the entity creation built-in predicates, resulting in failures or
