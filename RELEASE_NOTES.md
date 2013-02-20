@@ -47,6 +47,9 @@ errors.
 * FIXED: A compiler bug in the handling of missing directives warnings could
 lead to unexpected to failed compilation.
 
+* FIXED: File-specific annotation hooks were not cleaned after compiling a
+source file.
+
 Prolog adapter and integration files
 ------------------------------------
 

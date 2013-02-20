@@ -1980,11 +1980,15 @@ logtalk_compile(Files, Flags) :-
 % clears the compiler flag options
 
 '$lgt_clear_compiler_flags' :-
-	% retract file flag values
+	% retract all file-specific flag values
 	retractall('$lgt_pp_file_compiler_flag_'(_, _)),
-	% plus any term and goal expansion hooks
+	% retract all file-specific term and goal expansion hooks
 	retractall('$lgt_pp_hook_term_expansion_'(_, _)),
-	retractall('$lgt_pp_hook_goal_expansion_'(_, _)).
+	retractall('$lgt_pp_hook_goal_expansion_'(_, _)),
+	% retract all file-specific annotation hooks
+	retractall('$lgt_pp_hook_goal_annotation_'(_, _, _, _)),
+	retractall('$lgt_pp_hook_value_annotation_'(_, _, _, _)),
+	retractall('$lgt_pp_hook_body_annotation_'(_, _, _)).
 
 
 
