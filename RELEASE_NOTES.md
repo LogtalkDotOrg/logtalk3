@@ -39,6 +39,9 @@ errors.
 
 * FIXED: Also allow message delegation goals to be expanded.
 
+* FIXED: A compiler bug in the handling of missing directives warnings could
+lead to unexpected to failed compilation.
+
 Prolog adapter and integration files
 ------------------------------------
 

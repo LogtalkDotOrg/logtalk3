@@ -8690,8 +8690,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	(	'$lgt_pp_directive_'(multifile(Functor/Arity)) ->
 		true
 	;	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-		\+ '$lgt_compiler_flag'(report, off) ->
 		'$lgt_compiler_flag'(missing_directives, warning),
+		\+ '$lgt_compiler_flag'(report, off) ->
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_warning_context'(Path, Lines, Type, Entity),
 		'$lgt_print_message'(warning(missing), core, missing_predicate_directive(Path, Lines, Type, Entity, (multifile), user::Functor/Arity))
@@ -8739,8 +8739,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	'$lgt_pp_directive_'(multifile(':'(Module, Functor/Arity))) ->
 		true
 	;	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-		\+ '$lgt_compiler_flag'(report, off) ->
 		'$lgt_compiler_flag'(missing_directives, warning),
+		\+ '$lgt_compiler_flag'(report, off) ->
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_warning_context'(Path, Lines, Type, Entity),
 		'$lgt_print_message'(warning(missing), core, missing_predicate_directive(Path, Lines, Type, Entity, (multifile), ':'(Module,Functor/Arity)))
