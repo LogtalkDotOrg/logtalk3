@@ -31,6 +31,11 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: The compiler now only uses the value of the `report` flag in the
+default code for printing messages. This allows the user to intercept any
+compiler message (by defining clauses for the `logtalk::message_hook/4` hook
+predicate).
+
 * IMPROVED: Small performance improvements when compiling entity clauses.
 
 * FIXED: The compiler could attempt to print compilation warnings at runtime
@@ -411,7 +416,7 @@ Prolog adapter and integration files
 ------------------------------------
 
 * IMPROVED: The SWI-Prolog adapter file no longer needs to define the hook
-predicate logtalk::message_hook/4 in order to provide support for message
+predicate `logtalk::message_hook/4` in order to provide support for message
 coloring.
 
 * UPDATED: CxProlog adapter file for version 0.97.6, which is now the minimum
