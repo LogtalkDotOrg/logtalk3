@@ -8628,88 +8628,52 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 % redefinition of Logtalk built-in predicates
-
-'$lgt_tr_head'(Head, _, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-	\+ '$lgt_compiler_flag'(report, off),
-	'$lgt_compiler_flag'(redefined_built_ins, warning),
-	'$lgt_logtalk_built_in_predicate'(Head),
-	\+ functor(Head, '::', 2),
-	% not the head of a multifile entity predicate
-	\+ '$lgt_pp_redefined_built_in_'(Head, _, _),
-	% not already reported
-	functor(Head, Functor, Arity),
-	'$lgt_increment_compile_warnings_counter',
-	'$lgt_warning_context'(Path, Lines, Type, Entity),
-	'$lgt_print_message'(warning(redefined_built_ins), core, redefined_logtalk_built_in_predicate(Path, Lines, Type, Entity, Functor/Arity)),
-	fail.
-
-
 % redefinition of Prolog built-in predicates
 
 '$lgt_tr_head'(Head, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-	\+ '$lgt_compiler_flag'(report, off),
 	'$lgt_compiler_flag'(redefined_built_ins, warning),
-	'$lgt_prolog_built_in_predicate'(Head),
-	\+ functor(Head, ':', 2),
-	% not the head of a multifile module predicate
+	\+ '$lgt_compiler_flag'(report, off),
+	(	'$lgt_logtalk_built_in_predicate'(Head) ->
+		\+ functor(Head, '::', 2),
+		% not the head of a multifile entity predicate
+		Message = redefined_logtalk_built_in_predicate(Path, Lines, Type, Entity, Functor/Arity)
+	;	'$lgt_prolog_built_in_predicate'(Head),
+		\+ functor(Head, ':', 2),
+		% not the head of a multifile module predicate
+		Message = redefined_prolog_built_in_predicate(Path, Lines, Type, Entity, Functor/Arity)
+	),
 	\+ '$lgt_pp_redefined_built_in_'(Head, _, _),
 	% not already reported
 	functor(Head, Functor, Arity),
 	'$lgt_increment_compile_warnings_counter',
 	'$lgt_warning_context'(Path, Lines, Type, Entity),
-	'$lgt_print_message'(warning(redefined_built_ins), core, redefined_prolog_built_in_predicate(Path, Lines, Type, Entity, Functor/Arity)),
+	'$lgt_print_message'(warning(redefined_built_ins), core, Message),
 	fail.
 
 
 % definition of event handlers without reference to the "monitoring" built-in protocol
-
-'$lgt_tr_head'(Head, _, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-	\+ '$lgt_compiler_flag'(report, off),
-	\+ '$lgt_pp_module_'(_),
-	functor(Head, Functor, 3),
-	once((Functor == before; Functor == after)),
-	\+ '$lgt_pp_implemented_protocol_'(monitoring, _, _, _),
-	'$lgt_increment_compile_warnings_counter',
-	'$lgt_pp_entity'(Type, Entity, _, _, _),
-	'$lgt_pp_file_path_flags_'(File, Directory, _),
-	atom_concat(Directory, File, Path),
-	'$lgt_print_message'(warning(general), core, missing_reference_to_built_in_protocol(Path, Type, Entity, monitoring)),
-	fail.
-
-
 % definition of term and goal expansion predicates without reference to the "expanding" built-in protocol
-
-'$lgt_tr_head'(Head, _, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-	\+ '$lgt_compiler_flag'(report, off),
-	\+ '$lgt_pp_module_'(_),
-	functor(Head, Functor, 2),
-	once((Functor == term_expansion; Functor == goal_expansion)),
-	\+ '$lgt_pp_implemented_protocol_'(expanding, _, _, _),
-	'$lgt_increment_compile_warnings_counter',
-	'$lgt_pp_entity'(Type, Entity, _, _, _),
-	'$lgt_pp_file_path_flags_'(File, Directory, _),
-	atom_concat(Directory, File, Path),
-	'$lgt_print_message'(warning(general), core, missing_reference_to_built_in_protocol(Path, Type, Entity, expanding)),
-	fail.
-
-
 % definition of forward message handler without reference to the "forwarding" built-in protocol
 
 '$lgt_tr_head'(Head, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-	\+ '$lgt_compiler_flag'(report, off),
 	\+ '$lgt_pp_module_'(_),
-	functor(Head, forward, 1),
-	\+ '$lgt_pp_implemented_protocol_'(forwarding, _, _, _),
+	\+ '$lgt_compiler_flag'(report, off),
+	(	Head = before(_, _, _), \+ '$lgt_pp_implemented_protocol_'(monitoring, _, _, _) ->
+		Protocol = monitoring
+	;	Head = after(_, _, _), \+ '$lgt_pp_implemented_protocol_'(monitoring, _, _, _) ->
+		Protocol = monitoring
+	;	Head = term_expansion(_, _), \+ '$lgt_pp_implemented_protocol_'(expanding, _, _, _) ->
+		Protocol = expanding
+	;	Head = goal_expansion(_, _), \+ '$lgt_pp_implemented_protocol_'(expanding, _, _, _) ->
+		Protocol = expanding
+	;	Head = forward(_), \+ '$lgt_pp_implemented_protocol_'(forwarding, _, _, _) ->
+		Protocol = forwarding
+	),
 	'$lgt_increment_compile_warnings_counter',
-	'$lgt_pp_entity'(Type, Entity, _, _, _),
-	'$lgt_pp_file_path_flags_'(File, Directory, _),
-	atom_concat(Directory, File, Path),
-	'$lgt_print_message'(warning(general), core, missing_reference_to_built_in_protocol(Path, Type, Entity, forwarding)),
+	'$lgt_warning_context'(Path, _, Type, Entity),
+	'$lgt_print_message'(warning(general), core, missing_reference_to_built_in_protocol(Path, Type, Entity, Protocol)),
 	fail.
 
 
