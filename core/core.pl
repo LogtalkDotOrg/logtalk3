@@ -4708,6 +4708,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  "user" built-in pseudo-object
@@ -4918,7 +4919,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		throw(permission_error(modify, Type, Entity))
 	;	true
 	),
-	(	% check file information using the file/2 entity property, if available
+	(	% check file information using the file_lines/4 entity property, if available
 		'$lgt_entity_property_'(Entity, file_lines(OldBase, OldDirectory, _, _)),
 		'$lgt_pp_file_runtime_clause_'('$lgt_entity_property_'(Entity, file_lines(NewBase, NewDirectory, Start, End))) ->
 		atom_concat(OldDirectory, OldBase, OldFile0),
@@ -6027,10 +6028,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		'$lgt_prolog_term_expansion_portability_warnings'(Term, ExpandedTerms),
 		'$lgt_tr_expanded_terms'(ExpandedTerms, Term, Ctx)
 	;	% no compiler hook defined
-		(	callable(Term) ->
-			'$lgt_tr_expanded_term'(Term, Term, Ctx)
-		;	throw(error(type_error(callable, Term), term(Term)))
-		)
+		callable(Term) ->
+		'$lgt_tr_expanded_term'(Term, Term, Ctx)
+	;	throw(error(type_error(callable, Term), term(Term)))
 	).
 
 
@@ -6259,33 +6259,29 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 % remaining directives
 
-'$lgt_tr_directive'(Directive, _) :-
-	\+ '$lgt_pp_entity'(_, _, _, _, _),
-	functor(Directive, Functor, Arity),
-	'$lgt_logtalk_closing_directive'(Functor, Arity),
-	% closing entity directive occurs before the opening entity directive;
-	% the opening directive is probably missing or misspelt
-	(	Functor = end_object ->
-		throw(error(existence_error(opening_directive, object/1), directive(Directive)))
-	;	Functor = end_protocol ->
-		throw(error(existence_error(opening_directive, protocol/1), directive(Directive)))
-	;	% Functor = end_category ->
-		throw(error(existence_error(opening_directive, category/1), directive(Directive)))
-	).
-
 '$lgt_tr_directive'(Directive, Ctx) :-
 	\+ '$lgt_pp_entity'(_, _, _, _, _),
 	% directive occurs before opening entity directive
 	functor(Directive, Functor, Arity),
-	\+ '$lgt_logtalk_opening_directive'(Functor, Arity),
-	!,
-	% translate it as a source file-level directive
-	'$lgt_tr_file_directive'(Directive, Ctx).
+	(	'$lgt_logtalk_closing_directive'(Functor, Arity) ->
+		% closing entity directive occurs before the opening entity directive;
+		% the opening directive is probably missing or misspelt
+		(	Functor = end_object ->
+			throw(error(existence_error(opening_directive, object/1), directive(Directive)))
+		;	Functor = end_protocol ->
+			throw(error(existence_error(opening_directive, protocol/1), directive(Directive)))
+		;	% Functor = end_category ->
+			throw(error(existence_error(opening_directive, category/1), directive(Directive)))
+		)
+	;	\+ '$lgt_logtalk_opening_directive'(Functor, Arity),
+		!,
+		% translate it as a source file-level directive
+		'$lgt_tr_file_directive'(Directive, Ctx)
+	).
 
 '$lgt_tr_directive'(Directive, Ctx) :-
 	functor(Directive, Functor, Arity),
-	'$lgt_logtalk_closing_directive'(Functor, Arity),
-	% entity closing directive
+	'$lgt_logtalk_directive'(Functor, Arity),
 	Directive =.. [Functor| Args],
 	catch(
 		'$lgt_tr_directive'(Functor, Args, Ctx),
@@ -6294,17 +6290,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 			throw(error(Error, entity(Type, Entity)))
 		;	throw(error(Error, directive(Directive)))
 		)),
-	!.
-
-'$lgt_tr_directive'(Directive, Ctx) :-
-	functor(Directive, Functor, Arity),
-	'$lgt_logtalk_directive'(Functor, Arity),
-	% entity opening directive or entity directive
-	Directive =.. [Functor| Args],
-	catch(
-		'$lgt_tr_directive'(Functor, Args, Ctx),
-		Error,
-		throw(error(Error, directive(Directive)))),
 	!.
 
 '$lgt_tr_directive'(Directive, Ctx) :-
