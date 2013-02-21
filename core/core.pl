@@ -327,7 +327,7 @@
 
 :- dynamic('$lgt_pp_file_encoding_'/2).						% '$lgt_pp_file_encoding_'(LogtalkEncoding, PrologEncoding)
 :- dynamic('$lgt_pp_file_bom_'/1).							% '$lgt_pp_file_bom_'(BOM)
-:- dynamic('$lgt_pp_file_path_flags_'/3).					% '$lgt_pp_file_path_flags_'(File, Path, Flags)
+:- dynamic('$lgt_pp_file_directory_path_flags_'/4).			% '$lgt_pp_file_directory_path_flags_'(File, Directory, Path, Flags)
 
 :- dynamic('$lgt_pp_file_runtime_clause_'/1).				% '$lgt_pp_file_runtime_clause_'(Clause)
 
@@ -2049,14 +2049,13 @@ logtalk_load(Files, Flags) :-
 % provides access to the compilation/loading context
 
 logtalk_load_context(source, Path) :-
-	'$lgt_pp_file_path_flags_'(File, Directory, _),
-	atom_concat(Directory, File, Path).
+	'$lgt_pp_file_directory_path_flags_'(_, _, Path, _).
 
 logtalk_load_context(file, File) :-
-	'$lgt_pp_file_path_flags_'(File, _, _).
+	'$lgt_pp_file_directory_path_flags_'(File, _, _, _).
 
 logtalk_load_context(directory, Directory) :-
-	'$lgt_pp_file_path_flags_'(_, Directory, _).
+	'$lgt_pp_file_directory_path_flags_'(_, Directory, _, _).
 
 logtalk_load_context(entity_name, Entity) :-	% deprecated
 	logtalk_load_context(entity_identifier, Entity).
@@ -4838,7 +4837,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_load_file'(File, Flags) :-
 	'$lgt_file_name'(logtalk, File, Directory, Basename, SourceFile),
 	'$lgt_file_name'(prolog, File, _, _, PrologFile),
-	asserta('$lgt_pp_file_path_flags_'(Basename, Directory, Flags)),
+	asserta('$lgt_pp_file_directory_path_flags_'(Basename, Directory, File, Flags)),
 	% change the directory to the directory of the file being loaded as
 	% it can be a loader file loading other files in its directory
 	'$lgt_current_directory'(Current),
@@ -4999,7 +4998,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_set_compiler_flags'(Flags),
 	'$lgt_file_name'(logtalk, File, Directory, Basename, SourceFile),
 	'$lgt_file_name'(prolog, File, _, _, PrologFile),
-	asserta('$lgt_pp_file_path_flags_'(Basename, Directory, Flags)),
+	asserta('$lgt_pp_file_directory_path_flags_'(Basename, Directory, File, Flags)),
 	'$lgt_compile_file'(SourceFile, PrologFile, Flags, compiling),
 	'$lgt_compile_files'(Files, Flags).
 
@@ -5328,9 +5327,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!.
 
 '$lgt_add_entity_properties'(start, Entity) :-
-	'$lgt_pp_file_path_flags_'(File, Path, _),
+	'$lgt_pp_file_directory_path_flags_'(File, Directory, _, _),
 	'$lgt_pp_term_position_'((Start - _)),
-	assertz('$lgt_pp_entity_property_'(Entity, file_lines(File, Path, Start, _))),
+	assertz('$lgt_pp_entity_property_'(Entity, file_lines(File, Directory, Start, _))),
 	fail.
 
 '$lgt_add_entity_properties'(start, _).
@@ -5341,10 +5340,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!.
 
 '$lgt_add_entity_properties'(end, Entity) :-
-	'$lgt_pp_file_path_flags_'(File, Path, _),
-	once(retract('$lgt_pp_entity_property_'(Entity, file_lines(File, Path, Start, _)))),
+	'$lgt_pp_file_directory_path_flags_'(File, Directory, _, _),
+	once(retract('$lgt_pp_entity_property_'(Entity, file_lines(File, Directory, Start, _)))),
 	'$lgt_pp_term_position_'((_ - End)),
-	assertz('$lgt_pp_entity_property_'(Entity, file_lines(File, Path, Start, End))),
+	assertz('$lgt_pp_entity_property_'(Entity, file_lines(File, Directory, Start, End))),
 	fail.
 
 '$lgt_add_entity_properties'(end, Entity) :-
@@ -5642,7 +5641,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	retractall('$lgt_pp_entity_initialization_'(_, _, _)),
 	retractall('$lgt_pp_file_encoding_'(_, _)),
 	retractall('$lgt_pp_file_bom_'(_)),
-	retractall('$lgt_pp_file_path_flags_'(_, _, _)),
+	retractall('$lgt_pp_file_directory_path_flags_'(_, _, _, _)),
 	retractall('$lgt_pp_file_runtime_clause_'(_)),
 	retractall('$lgt_pp_cc_if_found_'(_)),
 	retractall('$lgt_pp_cc_skipping_'),
@@ -12312,8 +12311,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % returns file and entity warning context
 
 '$lgt_warning_context'(Path, Lines, Type, Entity) :-
-	'$lgt_pp_file_path_flags_'(File, Directory, _),
-	atom_concat(Directory, File, Path),
+	'$lgt_pp_file_directory_path_flags_'(_, _, Path, _),
 	'$lgt_current_line_numbers'(Lines),
 	'$lgt_pp_entity'(Type, Entity, _, _, _).
 
@@ -12324,8 +12322,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % returns file warning context
 
 '$lgt_warning_context'(Path, Lines) :-
-	'$lgt_pp_file_path_flags_'(File, Directory, _),
-	atom_concat(Directory, File, Path),
+	'$lgt_pp_file_directory_path_flags_'(_, _, Path, _),
 	'$lgt_current_line_numbers'(Lines).
 
 
@@ -12365,8 +12362,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % reports any references to unknown objects found while compiling an entity
 
 '$lgt_report_unknown_objects'(Type, Entity) :-
-	'$lgt_pp_file_path_flags_'(File, Directory, _),
-	atom_concat(Directory, File, Path),
+	'$lgt_pp_file_directory_path_flags_'(_, _, Path, _),
 		'$lgt_pp_referenced_object_'(Object, Lines),
 		% not a currently loaded object
 		\+ '$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _),
@@ -12390,8 +12386,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % reports any references to unknown protocols found while compiling an entity
 
 '$lgt_report_unknown_protocols'(Type, Entity) :-
-	'$lgt_pp_file_path_flags_'(File, Directory, _),
-	atom_concat(Directory, File, Path),
+	'$lgt_pp_file_directory_path_flags_'(_, _, Path, _),
 		'$lgt_pp_referenced_protocol_'(Protocol, Lines),
 		% not a currently loaded protocol
 		\+ '$lgt_current_protocol_'(Protocol, _, _, _, _),
@@ -12413,8 +12408,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % reports any references to unknown categories found while compiling an entity
 
 '$lgt_report_unknown_categories'(Type, Entity) :-
-	'$lgt_pp_file_path_flags_'(File, Directory, _),
-	atom_concat(Directory, File, Path),
+	'$lgt_pp_file_directory_path_flags_'(_, _, Path, _),
 	'$lgt_pp_referenced_category_'(Category, Lines),
 		% not a currently loaded category
 		\+ '$lgt_current_category_'(Category, _, _, _, _, _),
@@ -12437,8 +12431,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_report_unknown_modules'(Type, Entity) :-
 	'$lgt_prolog_feature'(modules, supported),
-	'$lgt_pp_file_path_flags_'(File, Directory, _),
-	atom_concat(Directory, File, Path),
+	'$lgt_pp_file_directory_path_flags_'(_, _, Path, _),
 	'$lgt_pp_referenced_module_'(Module, Lines),
 		% not a currently loaded module
 		\+ current_module(Module),
@@ -12459,10 +12452,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_pp_term_location'(Location) :-
 	(	'$lgt_pp_term_position_'(Line-_),
-		'$lgt_pp_file_path_flags_'(File, Path, _) ->
-		Location = Path+File+Line
-	;	'$lgt_pp_file_path_flags_'(File, Path, _) ->
-		Location = Path+File+1
+		'$lgt_pp_file_directory_path_flags_'(File, Directory, _, _) ->
+		Location = Directory+File+Line
+	;	'$lgt_pp_file_directory_path_flags_'(File, Directory, _, _) ->
+		Location = Directory+File+1
 	;	Location = none
 	).
 
@@ -14241,8 +14234,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	).
 
 '$lgt_report_undefined_calls'(warning, Type, Entity) :-
-	'$lgt_pp_file_path_flags_'(File, Directory, _),
-	atom_concat(Directory, File, Path),
+	'$lgt_pp_file_directory_path_flags_'(_, _, Path, _),
 	(	'$lgt_undefined_predicate_call'(Pred, _, Lines),
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_print_message'(warning(misspelt_calls), core, declared_static_predicate_called_but_not_defined(Path, Lines, Type, Entity, Pred)),
@@ -14299,8 +14291,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_report_missing_directives'(Type, Entity) :-
 	(	'$lgt_compiler_flag'(missing_directives, warning) ->
-		'$lgt_pp_file_path_flags_'(File, Directory, _),
-		atom_concat(Directory, File, Path),
+		'$lgt_pp_file_directory_path_flags_'(_, _, Path, _),
 		'$lgt_report_missing_directives'(Path, Type, Entity)
 	;	true
 	).
@@ -14364,8 +14355,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 '$lgt_report_misspelt_predicate_calls'(Type, Entity) :-
-	'$lgt_pp_file_path_flags_'(File, Directory, _),
-	atom_concat(Directory, File, Path),
+	'$lgt_pp_file_directory_path_flags_'(_, _, Path, _),
 		'$lgt_misspelt_predicate_call'(Pred, Lines),
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_print_message'(warning(misspelt_calls), core, predicate_called_but_not_defined(Path, Lines, Type, Entity, Pred)),
@@ -14392,8 +14382,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 '$lgt_report_misspelt_non_terminal_calls'(Type, Entity) :-
-	'$lgt_pp_file_path_flags_'(File, Directory, _),
-	atom_concat(Directory, File, Path),
+	'$lgt_pp_file_directory_path_flags_'(_, _, Path, _),
 		'$lgt_misspelt_non_terminal_call'(NonTerminal, Lines),
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_print_message'(warning(misspelt_calls), core, non_terminal_called_but_not_defined(Path, Lines, Type, Entity, NonTerminal)),
@@ -14418,8 +14407,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_report_non_portable_calls'(Type, Entity) :-
 	(	'$lgt_compiler_flag'(portability, warning) ->
-		'$lgt_pp_file_path_flags_'(File, Directory, _),
-		atom_concat(Directory, File, Path),
+		'$lgt_pp_file_directory_path_flags_'(_, _, Path, _),
 		'$lgt_report_non_portable_calls'(Path, Type, Entity)
 	;	true
 	).
@@ -14507,9 +14495,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_write_dcl_clauses'(Stream) :-
 	'$lgt_compiler_flag'(source_data, on),
-	'$lgt_pp_file_path_flags_'(File, Path, _),
+	'$lgt_pp_file_directory_path_flags_'(File, Directory, _, _),
 	'$lgt_pp_dcl_'(Clause),
-	'$lgt_write_term_and_source_location'(Stream, Clause, aux, Path+File+1),
+	'$lgt_write_term_and_source_location'(Stream, Clause, aux, Directory+File+1),
 	fail.
 
 '$lgt_write_dcl_clauses'(Stream) :-
@@ -14523,9 +14511,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_write_def_clauses'(Stream) :-
 	'$lgt_compiler_flag'(source_data, on),
-	'$lgt_pp_file_path_flags_'(File, Path, _),
+	'$lgt_pp_file_directory_path_flags_'(File, Directory, _, _),
 	'$lgt_pp_final_def_'(Clause),
-	'$lgt_write_term_and_source_location'(Stream, Clause, aux, Path+File+1),
+	'$lgt_write_term_and_source_location'(Stream, Clause, aux, Directory+File+1),
 	fail.
 
 '$lgt_write_def_clauses'(Stream) :-
@@ -14539,9 +14527,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_write_ddef_clauses'(Stream) :-
 	'$lgt_compiler_flag'(source_data, on),
-	'$lgt_pp_file_path_flags_'(File, Path, _),
+	'$lgt_pp_file_directory_path_flags_'(File, Directory, _, _),
 	'$lgt_pp_final_ddef_'(Clause),
-	'$lgt_write_term_and_source_location'(Stream, Clause, aux, Path+File+1),
+	'$lgt_write_term_and_source_location'(Stream, Clause, aux, Directory+File+1),
 	fail.
 
 '$lgt_write_ddef_clauses'(Stream) :-
@@ -14555,9 +14543,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_write_super_clauses'(Stream) :-
 	'$lgt_compiler_flag'(source_data, on),
-	'$lgt_pp_file_path_flags_'(File, Path, _),
+	'$lgt_pp_file_directory_path_flags_'(File, Directory, _, _),
 	'$lgt_pp_super_'(Clause),
-	'$lgt_write_term_and_source_location'(Stream, Clause, aux, Path+File+1),
+	'$lgt_write_term_and_source_location'(Stream, Clause, aux, Directory+File+1),
 	fail.
 
 '$lgt_write_super_clauses'(Stream) :-
@@ -14579,10 +14567,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_write_alias_clauses'(Stream, Rnm) :-
 	'$lgt_compiler_flag'(source_data, on),
-	'$lgt_pp_file_path_flags_'(File, Path, _),
+	'$lgt_pp_file_directory_path_flags_'(File, Directory, _, _),
 	'$lgt_pp_predicate_alias_'(Entity, Pred, Alias),
 	Clause =.. [Rnm, Entity, Pred, Alias],
-	'$lgt_write_term_and_source_location'(Stream, Clause, aux, Path+File+1),
+	'$lgt_write_term_and_source_location'(Stream, Clause, aux, Directory+File+1),
 	fail.
 
 '$lgt_write_alias_clauses'(Stream, Rnm) :-
@@ -14595,8 +14583,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_write_alias_clauses'(Stream, Rnm) :-
 	Catchall =.. [Rnm, _, Pred, Pred],
 	(	'$lgt_compiler_flag'(source_data, on) ->
-		'$lgt_pp_file_path_flags_'(File, Path, _),
-		'$lgt_write_term_and_source_location'(Stream, Catchall, aux, Path+File+1)
+		'$lgt_pp_file_directory_path_flags_'(File, Directory, _, _),
+		'$lgt_write_term_and_source_location'(Stream, Catchall, aux, Directory+File+1)
 	;	write_canonical(Stream, Catchall), write(Stream, '.'), nl(Stream)
 	).
 
@@ -14618,9 +14606,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_write_entity_aux_clauses'(Stream) :-
 	'$lgt_compiler_flag'(source_data, on),
-	'$lgt_pp_file_path_flags_'(File, Path, _),
+	'$lgt_pp_file_directory_path_flags_'(File, Directory, _, _),
 	'$lgt_pp_final_entity_aux_clause_'(Clause),
-	'$lgt_write_term_and_source_location'(Stream, Clause, aux, Path+File+1),
+	'$lgt_write_term_and_source_location'(Stream, Clause, aux, Directory+File+1),
 	fail.
 
 '$lgt_write_entity_aux_clauses'(Stream) :-
@@ -14656,7 +14644,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	% file runtime clauses
 	write_canonical(Stream, (:- multifile('$lgt_loaded_file_'/4))), write(Stream, '.'), nl(Stream),
 	write_canonical(Stream, (:- dynamic('$lgt_loaded_file_'/4))), write(Stream, '.'), nl(Stream),
-	'$lgt_pp_file_path_flags_'(File, Path, Flags),
+	'$lgt_pp_file_directory_path_flags_'(File, Directory, _, Flags),
 	(	'$lgt_pp_file_encoding_'(Encoding, _) ->
 		(	'$lgt_pp_file_bom_'(BOM) ->
 			StreamProperties = [encoding(Encoding), BOM]
@@ -14664,9 +14652,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		)
 	;	StreamProperties = []
 	),
-	Clause = '$lgt_loaded_file_'(File, Path, Flags, StreamProperties),
+	Clause = '$lgt_loaded_file_'(File, Directory, Flags, StreamProperties),
 	(	'$lgt_compiler_flag'(source_data, on) ->
-		'$lgt_write_term_and_source_location'(Stream, Clause, aux, Path+File+1)
+		'$lgt_write_term_and_source_location'(Stream, Clause, aux, Directory+File+1)
 	;	write_canonical(Stream, Clause), write(Stream, '.'), nl(Stream)
 	).
 
@@ -14677,9 +14665,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		write_canonical(Stream, (:- multifile(Functor/Arity))), write(Stream, '.'), nl(Stream),
 		write_canonical(Stream, (:- dynamic(Functor/Arity))), write(Stream, '.'), nl(Stream),
 		(	'$lgt_compiler_flag'(source_data, on) ->
-			'$lgt_pp_file_path_flags_'(File, Path, _),
+			'$lgt_pp_file_directory_path_flags_'(File, Directory, _, _),
 			(	'$lgt_pp_file_runtime_clause_'(Clause),
-				'$lgt_write_term_and_source_location'(Stream, Clause, aux, Path+File+1),
+				'$lgt_write_term_and_source_location'(Stream, Clause, aux, Directory+File+1),
 				fail
 			;	true
 			)
