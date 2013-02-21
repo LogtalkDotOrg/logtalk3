@@ -8062,7 +8062,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_tr_extends_category'(Ctgs, Ctg).
 
 '$lgt_tr_category_relation'(complements, Objs, Ctg) :-
-	'$lgt_tr_complements_category'(Objs, Ctg).
+	'$lgt_tr_complements_object'(Objs, Ctg).
 
 
 
@@ -12122,34 +12122,27 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_tr_complements_category'(+list, @category_identifier)
+% '$lgt_tr_complements_object'(+list, @category_identifier)
 %
 % translates a "complements" relation between a category and a list of objects
 
-'$lgt_tr_complements_category'(Objs, Ctg) :-
+'$lgt_tr_complements_object'(Objs, Ctg) :-
 	'$lgt_pp_category_'(Ctg, _, Dcl, Def, Rnm, _),
-	'$lgt_tr_complements_category'(Objs, Ctg, Dcl, Def, Rnm).
+	'$lgt_tr_complements_object'(Objs, Ctg, Dcl, Def, Rnm).
 
 
-'$lgt_tr_complements_category'([], _, _, _, _).
+'$lgt_tr_complements_object'([], _, _, _, _).
 
-'$lgt_tr_complements_category'([Obj| _], _, _, _, _) :-
-	var(Obj),
-	throw(instantiation_error).
-
-'$lgt_tr_complements_category'([Obj| _], _, _, _, _) :-
-	\+ callable(Obj),
-	throw(type_error(object_identifier, Obj)).
-
-'$lgt_tr_complements_category'([Obj| _], _, _, _, _) :-
+'$lgt_tr_complements_object'([Obj| _], _, _, _, _) :-
+	'$lgt_must_be'(object_identifier, Obj),
 	('$lgt_is_protocol'(Obj); '$lgt_is_category'(Obj)),
 	throw(type_error(object, Obj)).
 
-'$lgt_tr_complements_category'([Obj| _], Ctg, _, _, _) :-
+'$lgt_tr_complements_object'([Obj| _], Ctg, _, _, _) :-
 	'$lgt_term_template'(Obj, Ctg),
 	throw(permission_error(complement, self, Obj)).
 
-'$lgt_tr_complements_category'([Obj| _], Ctg, _, _, Ctx) :-
+'$lgt_tr_complements_object'([Obj| _], Ctg, _, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 	once((	'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags)
 			% loaded object
@@ -12164,11 +12157,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_print_message'(warning(general), core, complementing_category_ignored(Path, Lines, Ctg, Obj)),
 	fail.
 
-'$lgt_tr_complements_category'([Obj| Objs], Ctg, Dcl, Def, Rnm) :-
+'$lgt_tr_complements_object'([Obj| Objs], Ctg, Dcl, Def, Rnm) :-
 	'$lgt_add_referenced_object'(Obj),
 	assertz('$lgt_pp_complemented_object_'(Obj)),
 	assertz('$lgt_pp_complemented_object_'(Obj, Ctg, Dcl, Def, Rnm)),
-	'$lgt_tr_complements_category'(Objs, Ctg, Dcl, Def, Rnm).
+	'$lgt_tr_complements_object'(Objs, Ctg, Dcl, Def, Rnm).
 
 
 
