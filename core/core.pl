@@ -5397,9 +5397,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 %
 % reports the singleton variables found while compiling an entity term
 
-'$lgt_report_singleton_variables'(Singletons, Term) :-
+'$lgt_report_singleton_variables'([], _).
+
+'$lgt_report_singleton_variables'([Singleton| Singletons], Term) :-
 	(	'$lgt_compiler_flag'(singleton_variables, warning),
-		'$lgt_filter_singleton_variables'(Singletons, Names),
+		'$lgt_filter_singleton_variables'([Singleton| Singletons], Names),
 		Names \== [] ->
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_warning_context'(Path, Lines),
