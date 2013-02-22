@@ -56,6 +56,10 @@ source file.
 Prolog adapter and integration files
 ------------------------------------
 
+* IMPROVED: Updated the SWI-Prolog `swihooks.pl` integration file with dummy
+`meta_predicate/1` directives for internal compiler and runtime predicates to
+avoid cluttering the make/0 analysis report.
+
 * CHANGED: GNU Prolog 1.4.2 (or a later version) is now required when using
 this back-end Prolog compiler.
 

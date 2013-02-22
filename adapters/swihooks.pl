@@ -7,7 +7,7 @@
 %  load Logtalk files using SWI Prolog consult/1, to support edit/1 and
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
-%  Last updated on January 25, 2013
+%  Last updated on February 22, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -627,3 +627,70 @@ user:portray(c(This, r(Sender, Self, MetaVars, CoinductionStack))) :-
 :- '$set_predicate_attribute'('$lgt_threaded_wait'/2, trace, 1).
 :- '$set_predicate_attribute'('$lgt_threaded_notify_ctg'/2, trace, 1).
 :- '$set_predicate_attribute'('$lgt_threaded_notify'/2, trace, 1).
+
+% add dummy meta_predicate/1 directives to avoid cluttering the make/0
+% analysis report (as some of the results are not correct for all usage
+% cases and can lead to false warnings)
+:- meta_predicate user:'$lgt_ctg_super_call_nv'(*,*,*).
+:- meta_predicate user:'$lgt_obj_super_call_nv'(*,*,*).
+:- meta_predicate user:'$lgt_category_property_declares'(*,*,*,*).
+:- meta_predicate user:'$lgt_category_property'(*,*,*,*,*).
+:- meta_predicate user:'$lgt_send_to_obj_nv_inner'(*,*,*).
+:- meta_predicate user:'$lgt_object_property_declares'(*,*,*,*,*,*).
+:- meta_predicate user:'$lgt_complemented_object'(*,*,*,*,*).
+:- meta_predicate user:'$lgt_object_property_defines'(*,*,*,*,*).
+:- meta_predicate user:'$lgt_find_original_predicate'(*,*,*,*,*).
+:- meta_predicate user:'$lgt_expand_goal_local'(*,*,*,*,*).
+:- meta_predicate user:'$lgt_assert_pred_dcl'(*,*,*,*,*,*,*,*,*,*,*,*,*).
+:- meta_predicate user:'$lgt_ctg_call_nv'(*,*,*).
+:- meta_predicate user:'$lgt_expand_goal_scoped'(*,*,*,*).
+:- meta_predicate user:'$lgt_define_events'(*,*,*,*,*,*,*).
+:- meta_predicate user:'$lgt_threaded_or'(*,*,*).
+:- meta_predicate user:'$lgt_mt_non_det_goal'(*,*,*,*,*).
+:- meta_predicate user:'$lgt_protocol_property_declares'(*,*,*,*).
+:- meta_predicate user:'$lgt_call_built_in'(*,*,*).
+:- meta_predicate user:'$lgt_guarded_method_call'(*,*,*,*).
+:- meta_predicate user:'$lgt_threaded_and'(*,*,*).
+:- meta_predicate user:'$lgt_category_property_defines'(*,*,*,*).
+:- meta_predicate user:'$lgt_protocol_property'(*,*,*,*).
+:- meta_predicate user:'$lgt_mt_det_goal'(*,*,*,*,*).
+:- meta_predicate user:'$lgt_abolish_entity_predicates'(*).
+:- meta_predicate user:'$lgt_threaded_once'(*,*,*,*).
+:- meta_predicate user:'$lgt_threaded_call_tagged'(*,*,*,*,*).
+:- meta_predicate user:'$lgt_threaded_call'(*,*,*,*).
+:- meta_predicate user:'$lgt_predicate_property_user'(*,*,*,*,*,*,*,*,*).
+:- meta_predicate user:'$lgt_threaded_once_tagged'(*,*,*,*,*).
+:- meta_predicate user:'$lgt_send_to_obj_ne_nv'(*,*,*).
+:- meta_predicate user:'$lgt_mt_threaded_call'(*,*,*).
+:- meta_predicate user:'$lgt_threaded_ignore'(*).
+:- meta_predicate user:'$lgt_send_to_obj_nv'(*,*,*).
+:- meta_predicate user:threaded_ignore(*).
+:- meta_predicate user:threaded_once(*,*).
+:- meta_predicate user:threaded_call(*,*).
+:- meta_predicate user:'$lgt_complemented_object'(*,*,*,*,*,*,*,*).
+:- meta_predicate user:threaded_call(*).
+:- meta_predicate user:'$lgt_object_property_resources'(*,*,*,*,*,*).
+:- meta_predicate user:'$lgt_assert_pred_def'(*,*,*,*,*,*,*).
+:- meta_predicate user:threaded_once(*).
+:- meta_predicate user:'$lgt_send_to_self_nv'(*,*,*).
+:- meta_predicate user:'$lgt_object_property'(*,*,*,*,*,*,*).
+
+:- meta_predicate user:'$lgt_find_original_predicate'(*,*,*,*).
+:- meta_predicate user:'$lgt_threaded_goal'(*,*,*,*).
+:- meta_predicate user:'$lgt_threaded_call'(*,*,*).
+:- meta_predicate user:'$lgt_threaded_once'(*,*,*).
+:- meta_predicate user:'$lgt_ctg_call_'(*,*,*).
+:- meta_predicate user:'$lgt_ctg_super_call_'(*,*,*).
+:- meta_predicate user:'$lgt_send_to_obj_'(*,*,*).
+:- meta_predicate user:'$lgt_obj_super_call_'(*,*,*).
+:- meta_predicate user:'$lgt_send_to_obj_ne_'(*,*,*).
+:- meta_predicate user:'$lgt_threaded_once_tagged'(*,*,*,*).
+:- meta_predicate user:'$lgt_send_to_self_'(*,*,*).
+:- meta_predicate user:'$lgt_threaded_call_tagged'(*,*,*,*).
+
+:- meta_predicate user:'$lgt_ctg_call'(*,*,*).
+:- meta_predicate user:'$lgt_send_to_obj_ne'(*,*,*).
+:- meta_predicate user:'$lgt_ctg_super_call'(*,*,*).
+:- meta_predicate user:'$lgt_obj_super_call'(*,*,*).
+:- meta_predicate user:'$lgt_send_to_obj'(*,*,*).
+:- meta_predicate user:'$lgt_send_to_self'(*,*,*).
