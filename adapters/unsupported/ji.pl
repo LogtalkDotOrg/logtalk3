@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for JIProlog 3.1.0-1 or later versions
-%  Last updated on December 7, 2012
+%  Last updated on February 22, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -499,8 +499,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 
 '$lgt_write_term_and_source_location'(Stream, Term, _Kind, _Location) :-
 	write_canonical(Stream, Term),
-	write(Stream, '.'),
-	nl(Stream).
+	write(Stream, '.\n').
 
 
 % '$lgt_assertz_entity_clause'(@clause, +atom)

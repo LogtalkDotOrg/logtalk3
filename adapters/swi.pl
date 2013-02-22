@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SWI Prolog 6.0.0 and later versions
-%  Last updated on November 28, 2012
+%  Last updated on February 22, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -827,8 +827,7 @@ user:goal_expansion('::'(Object, Message), user:Goal) :-
 	'$lgt_swi_write_hide_directive'(Stream, Rnm/3),
 	atom_concat(Path, Source, File),
 	write_canonical(Stream, '$source_location'(File,Line):'$lgt_current_object_'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, Flags)),
-	write(Stream, '.'),
-	nl(Stream).
+	write(Stream, '.\n').
 
 '$lgt_write_term_and_source_location'(Stream, '$lgt_current_category_'(Ctg, Prefix, Dcl, Def, Rnm, Flags), _, Path+Source+Line) :-
 	!,
@@ -838,8 +837,7 @@ user:goal_expansion('::'(Object, Message), user:Goal) :-
 	'$lgt_swi_write_hide_directive'(Stream, Rnm/3),
 	atom_concat(Path, Source, File),
 	write_canonical(Stream, '$source_location'(File,Line):'$lgt_current_category_'(Ctg, Prefix, Dcl, Def, Rnm, Flags)),
-	write(Stream, '.'),
-	nl(Stream).
+	write(Stream, '.\n').
 
 '$lgt_write_term_and_source_location'(Stream, '$lgt_current_protocol_'(Ptc, Prefix, Dcl, Rnm, Flags), _, Path+Source+Line) :-
 	!,
@@ -848,14 +846,12 @@ user:goal_expansion('::'(Object, Message), user:Goal) :-
 	'$lgt_swi_write_hide_directive'(Stream, Rnm/3),
 	atom_concat(Path, Source, File),
 	write_canonical(Stream, '$source_location'(File,Line):'$lgt_current_protocol_'(Ptc, Prefix, Dcl, Rnm, Flags)),
-	write(Stream, '.'),
-	nl(Stream).
+	write(Stream, '.\n').
 
 '$lgt_write_term_and_source_location'(Stream, (:- Directive), _, _) :-	% to cope with {(:- Directive)} entity terms
 	!,
 	write_canonical(Stream, (:- Directive)),
-	write(Stream, '.'),
-	nl(Stream).
+	write(Stream, '.\n').
 
 '$lgt_write_term_and_source_location'(Stream, Term, Kind, Path+Source+Line) :-
 	(	Kind == aux ->
@@ -870,14 +866,12 @@ user:goal_expansion('::'(Object, Message), user:Goal) :-
 	),
 	atom_concat(Path, Source, File),
 	write_canonical(Stream, '$source_location'(File,Line):Term),
-	write(Stream, '.'),
-	nl(Stream).
+	write(Stream, '.\n').
 
 
 '$lgt_swi_write_hide_directive'(Stream, Functor/Arity) :-
 	write_canonical(Stream, (:- '$hide'(user:Functor/Arity))),
-	write(Stream, '.'),
-	nl(Stream).
+	write(Stream, '.\n').
 
 
 % '$lgt_assertz_entity_clause'(@clause, +atom)

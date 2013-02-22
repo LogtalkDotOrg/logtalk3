@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Jekejeke Prolog 0.9.7 (and later versions)
-%  Last updated on January 24, 2013
+%  Last updated on February 22, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -485,8 +485,7 @@ forall(Generate, Test) :-
 
 '$lgt_write_term_and_source_location'(Stream, Term, _, _) :-
 	write_canonical(Stream, Term),
-	write(Stream, '.'),
-	nl(Stream).
+	write(Stream, '.\n').
 
 
 % '$lgt_assertz_entity_clause'(@clause, +atom)

@@ -512,8 +512,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 
 '$lgt_write_term_and_source_location'(Stream, Term, _Kind, _Location) :-
 	write_canonical(Stream, Term),
-	write(Stream, '.'),
-	nl(Stream).
+	write(Stream, '.\n').
 
 
 % '$lgt_assertz_entity_clause'(@clause, +atom)
