@@ -8519,14 +8519,17 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	assertz('$lgt_pp_clause_number_'(TFunctor, TArity, N)).
 
 
+'$lgt_update_predicate_line_clauses_property'(_, _) :-
+	'$lgt_compiler_flag'(source_data, off),
+	!.
+
 '$lgt_update_predicate_line_clauses_property'(N, {Head}) :-
 	!,
 	'$lgt_update_predicate_line_clauses_property'(N, user::Head).
 
 '$lgt_update_predicate_line_clauses_property'(1, QHead) :-
 	!,
-	(	'$lgt_compiler_flag'(source_data, on),
-		'$lgt_pp_term_position_'(DefLine-_) ->
+	(	'$lgt_pp_term_position_'(DefLine-_) ->
 		'$lgt_pp_entity'(_, Entity, _, _, _),
 		(	QHead = Other::Head ->
 			% multifile entity predicate definition; assume Other \== Entity
@@ -8550,10 +8553,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_update_predicate_line_clauses_property'(N, Other::Head) :-
 	!,
-	(	'$lgt_compiler_flag'(source_data, on),
-		'$lgt_pp_term_position_'(_) ->
+	(	'$lgt_pp_term_position_'(_),
 		functor(Head, Functor, Arity),
-		retract('$lgt_pp_predicate_property_'(Other, Functor/Arity, line_clauses_from(DefLine,_,Entity))),
+		retract('$lgt_pp_predicate_property_'(Other, Functor/Arity, line_clauses_from(DefLine,_,Entity))) ->
 		assertz('$lgt_pp_predicate_property_'(Other, Functor/Arity, line_clauses_from(DefLine,N,Entity)))
 	;	true
 	).
