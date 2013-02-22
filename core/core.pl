@@ -14469,140 +14469,127 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % writes Logtalk entity clauses
 
 '$lgt_write_logtalk_clauses'(Stream) :-
-	'$lgt_write_dcl_clauses'(Stream),
-	'$lgt_write_def_clauses'(Stream),
-	'$lgt_write_ddef_clauses'(Stream),
-	'$lgt_write_super_clauses'(Stream),
-	'$lgt_write_alias_clauses'(Stream),
-	'$lgt_write_entity_clauses'(Stream),
-	'$lgt_write_entity_aux_clauses'(Stream).
+	'$lgt_compiler_flag'(source_data, SourceData),
+	'$lgt_write_dcl_clauses'(SourceData, Stream),
+	'$lgt_write_def_clauses'(SourceData, Stream),
+	'$lgt_write_ddef_clauses'(SourceData, Stream),
+	'$lgt_write_super_clauses'(SourceData, Stream),
+	'$lgt_write_alias_clauses'(SourceData, Stream),
+	'$lgt_write_entity_clauses'(SourceData, Stream),
+	'$lgt_write_entity_aux_clauses'(SourceData, Stream).
 
 
-'$lgt_write_dcl_clauses'(Stream) :-
-	'$lgt_compiler_flag'(source_data, on),
+'$lgt_write_dcl_clauses'(on, Stream) :-
 	'$lgt_pp_file_directory_path_flags_'(File, Directory, _, _),
 	'$lgt_pp_dcl_'(Clause),
 	'$lgt_write_term_and_source_location'(Stream, Clause, aux, Directory+File+1),
 	fail.
 
-'$lgt_write_dcl_clauses'(Stream) :-
-	'$lgt_compiler_flag'(source_data, off),
+'$lgt_write_dcl_clauses'(off, Stream) :-
 	'$lgt_pp_dcl_'(Clause),
 	write_canonical(Stream, Clause), write(Stream, '.\n'),
 	fail.
 
-'$lgt_write_dcl_clauses'(_).
+'$lgt_write_dcl_clauses'(_, _).
 
 
-'$lgt_write_def_clauses'(Stream) :-
-	'$lgt_compiler_flag'(source_data, on),
+'$lgt_write_def_clauses'(on, Stream) :-
 	'$lgt_pp_file_directory_path_flags_'(File, Directory, _, _),
 	'$lgt_pp_final_def_'(Clause),
 	'$lgt_write_term_and_source_location'(Stream, Clause, aux, Directory+File+1),
 	fail.
 
-'$lgt_write_def_clauses'(Stream) :-
-	'$lgt_compiler_flag'(source_data, off),
+'$lgt_write_def_clauses'(off, Stream) :-
 	'$lgt_pp_final_def_'(Clause),
 	write_canonical(Stream, Clause), write(Stream, '.\n'),
 	fail.
 
-'$lgt_write_def_clauses'(_).
+'$lgt_write_def_clauses'(_, _).
 
 
-'$lgt_write_ddef_clauses'(Stream) :-
-	'$lgt_compiler_flag'(source_data, on),
+'$lgt_write_ddef_clauses'(on, Stream) :-
 	'$lgt_pp_file_directory_path_flags_'(File, Directory, _, _),
 	'$lgt_pp_final_ddef_'(Clause),
 	'$lgt_write_term_and_source_location'(Stream, Clause, aux, Directory+File+1),
 	fail.
 
-'$lgt_write_ddef_clauses'(Stream) :-
-	'$lgt_compiler_flag'(source_data, off),
+'$lgt_write_ddef_clauses'(off, Stream) :-
 	'$lgt_pp_final_ddef_'(Clause),
 	write_canonical(Stream, Clause), write(Stream, '.\n'),
 	fail.
 
-'$lgt_write_ddef_clauses'(_).
+'$lgt_write_ddef_clauses'(_, _).
 
 
-'$lgt_write_super_clauses'(Stream) :-
-	'$lgt_compiler_flag'(source_data, on),
+'$lgt_write_super_clauses'(on, Stream) :-
 	'$lgt_pp_file_directory_path_flags_'(File, Directory, _, _),
 	'$lgt_pp_super_'(Clause),
 	'$lgt_write_term_and_source_location'(Stream, Clause, aux, Directory+File+1),
 	fail.
 
-'$lgt_write_super_clauses'(Stream) :-
-	'$lgt_compiler_flag'(source_data, off),
+'$lgt_write_super_clauses'(off, Stream) :-
 	'$lgt_pp_super_'(Clause),
 	write_canonical(Stream, Clause), write(Stream, '.\n'),
 	fail.
 
-'$lgt_write_super_clauses'(_).
+'$lgt_write_super_clauses'(_, _).
 
 
-'$lgt_write_alias_clauses'(Stream) :-
+'$lgt_write_alias_clauses'(SourceData, Stream) :-
 	(	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, Rnm, _)
 	;	'$lgt_pp_category_'(_, _, _, _, Rnm, _)
 	;	'$lgt_pp_protocol_'(_, _, _, Rnm, _)
 	), !,
-	'$lgt_write_alias_clauses'(Stream, Rnm).
+	'$lgt_write_alias_clauses'(SourceData, Stream, Rnm).
 
 
-'$lgt_write_alias_clauses'(Stream, Rnm) :-
-	'$lgt_compiler_flag'(source_data, on),
+'$lgt_write_alias_clauses'(on, Stream, Rnm) :-
 	'$lgt_pp_file_directory_path_flags_'(File, Directory, _, _),
 	'$lgt_pp_predicate_alias_'(Entity, Pred, Alias),
 	Clause =.. [Rnm, Entity, Pred, Alias],
 	'$lgt_write_term_and_source_location'(Stream, Clause, aux, Directory+File+1),
 	fail.
 
-'$lgt_write_alias_clauses'(Stream, Rnm) :-
-	'$lgt_compiler_flag'(source_data, off),
+'$lgt_write_alias_clauses'(off, Stream, Rnm) :-
 	'$lgt_pp_predicate_alias_'(Entity, Pred, Alias),
 	Clause =.. [Rnm, Entity, Pred, Alias],
 	write_canonical(Stream, Clause), write(Stream, '.\n'),
 	fail.
 
-'$lgt_write_alias_clauses'(Stream, Rnm) :-
+'$lgt_write_alias_clauses'(SourceData, Stream, Rnm) :-
 	Catchall =.. [Rnm, _, Pred, Pred],
-	(	'$lgt_compiler_flag'(source_data, on) ->
+	(	SourceData == on ->
 		'$lgt_pp_file_directory_path_flags_'(File, Directory, _, _),
 		'$lgt_write_term_and_source_location'(Stream, Catchall, aux, Directory+File+1)
 	;	write_canonical(Stream, Catchall), write(Stream, '.\n')
 	).
 
 
-'$lgt_write_entity_clauses'(Stream) :-
-	'$lgt_compiler_flag'(source_data, on),
+'$lgt_write_entity_clauses'(on, Stream) :-
 	'$lgt_pp_final_entity_clause_'(Clause, Location),
 	'$lgt_write_term_and_source_location'(Stream, Clause, user, Location),
 	fail.
 
-'$lgt_write_entity_clauses'(Stream) :-
-	'$lgt_compiler_flag'(source_data, off),
+'$lgt_write_entity_clauses'(off, Stream) :-
 	'$lgt_pp_final_entity_clause_'(Clause, _),
 	write_canonical(Stream, Clause), write(Stream, '.\n'),
 	fail.
 
-'$lgt_write_entity_clauses'(_).
+'$lgt_write_entity_clauses'(_, _).
 
 
-'$lgt_write_entity_aux_clauses'(Stream) :-
-	'$lgt_compiler_flag'(source_data, on),
+'$lgt_write_entity_aux_clauses'(on, Stream) :-
 	'$lgt_pp_file_directory_path_flags_'(File, Directory, _, _),
 	'$lgt_pp_final_entity_aux_clause_'(Clause),
 	'$lgt_write_term_and_source_location'(Stream, Clause, aux, Directory+File+1),
 	fail.
 
-'$lgt_write_entity_aux_clauses'(Stream) :-
-	'$lgt_compiler_flag'(source_data, off),
+'$lgt_write_entity_aux_clauses'(off, Stream) :-
 	'$lgt_pp_final_entity_aux_clause_'(Clause),
 	write_canonical(Stream, Clause), write(Stream, '.\n'),
 	fail.
 
-'$lgt_write_entity_aux_clauses'(_).
+'$lgt_write_entity_aux_clauses'(_, _).
 
 
 
