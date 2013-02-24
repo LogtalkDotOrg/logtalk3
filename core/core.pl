@@ -230,7 +230,7 @@
 :- dynamic('$lgt_pp_public_'/2).							% '$lgt_pp_public_'(Functor, Arity)
 :- dynamic('$lgt_pp_protected_'/2).							% '$lgt_pp_protected_'(Functor, Arity)
 :- dynamic('$lgt_pp_private_'/2).							% '$lgt_pp_private_'(Functor, Arity)
-:- dynamic('$lgt_pp_meta_predicate_'/1).					% '$lgt_pp_meta_predicate_'(MetaTemplate)
+:- dynamic('$lgt_pp_meta_predicate_'/2).					% '$lgt_pp_meta_predicate_'(PredTemplate, MetaTemplate)
 :- dynamic('$lgt_pp_predicate_alias_'/3).					% '$lgt_pp_predicate_alias_'(Entity, Pred, Alias)
 :- dynamic('$lgt_pp_non_terminal_'/3).						% '$lgt_pp_non_terminal_'(Functor, Arity, ExtArity)
 :- dynamic('$lgt_pp_multifile_'/3).							% '$lgt_pp_multifile_'(Functor, Arity, Lines)
@@ -5705,7 +5705,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	retractall('$lgt_pp_multifile_'(_, _, _)),
 	retractall('$lgt_pp_coinductive_'(_, _, _)),
 	retractall('$lgt_pp_mode_'(_, _)),
-	retractall('$lgt_pp_meta_predicate_'(_)),
+	retractall('$lgt_pp_meta_predicate_'(_, _)),
 	retractall('$lgt_pp_hook_value_annotation_'(_, _, _, _)),
 	retractall('$lgt_pp_hook_goal_annotation_'(_, _, _, _)),
 	retractall('$lgt_pp_hook_body_annotation_'(_, _, _)),
@@ -7350,14 +7350,16 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_valid_meta_predicate_template'(Pred),
 	!,
 	'$lgt_must_be'(entity_identifier, Entity),
-	assertz('$lgt_pp_meta_predicate_'(Entity::Pred)),
+	'$lgt_term_template'(Pred, Template),
+	assertz('$lgt_pp_meta_predicate_'(Entity::Template, Entity::Pred)),
 	'$lgt_tr_meta_predicate_directive'(Preds).
 
 '$lgt_tr_meta_predicate_directive'([':'(Module, Pred)| Preds]) :-
 	'$lgt_valid_meta_predicate_template'(Pred),
 	!,
 	'$lgt_must_be'(module_identifier, Module),
-	assertz('$lgt_pp_meta_predicate_'(':'(Module, Pred))),
+	'$lgt_term_template'(Pred, Template),
+	assertz('$lgt_pp_meta_predicate_'(':'(Module,Template), ':'(Module,Pred))),
 	'$lgt_tr_meta_predicate_directive'(Preds).
 
 '$lgt_tr_meta_predicate_directive'([Pred| Preds]) :-
@@ -7365,7 +7367,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!,
 	functor(Pred, Functor, Arity),
 	'$lgt_check_for_directive_after_call'(Functor/Arity),
-	assertz('$lgt_pp_meta_predicate_'(Pred)),
+	'$lgt_term_template'(Pred, Template),
+	assertz('$lgt_pp_meta_predicate_'(Template, Pred)),
 	'$lgt_tr_meta_predicate_directive'(Preds).
 
 '$lgt_tr_meta_predicate_directive'([Pred| _]) :-
@@ -7402,7 +7405,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	NonTerminal =.. [Functor| Args],
 	'$lgt_tr_meta_non_terminal_directive_args'(Args, ExtendedArgs),
 	Pred =.. [Functor| ExtendedArgs],
-	assertz('$lgt_pp_meta_predicate_'(Entity::Pred)),
+	'$lgt_term_template'(Pred, Template),
+	assertz('$lgt_pp_meta_predicate_'(Entity::Template, Entity::Pred)),
 	'$lgt_tr_meta_non_terminal_directive'(NonTerminals).
 
 '$lgt_tr_meta_non_terminal_directive'([':'(Module, NonTerminal)| NonTerminals]) :-
@@ -7412,7 +7416,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	NonTerminal =.. [Functor| Args],
 	'$lgt_tr_meta_non_terminal_directive_args'(Args, ExtendedArgs),
 	Pred =.. [Functor| ExtendedArgs],
-	assertz('$lgt_pp_meta_predicate_'(':'(Module, Pred))),
+	'$lgt_term_template'(Pred, Template),
+	assertz('$lgt_pp_meta_predicate_'(':'(Module, Template), ':'(Module, Pred))),
 	'$lgt_tr_meta_non_terminal_directive'(NonTerminals).
 
 '$lgt_tr_meta_non_terminal_directive'([NonTerminal| NonTerminals]) :-
@@ -7424,7 +7429,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	NonTerminal =.. [Functor| Args],
 	'$lgt_tr_meta_non_terminal_directive_args'(Args, ExtendedArgs),
 	Pred =.. [Functor| ExtendedArgs],
-	assertz('$lgt_pp_meta_predicate_'(Pred)),
+	'$lgt_term_template'(Pred, Template),
+	assertz('$lgt_pp_meta_predicate_'(Template, Pred)),
 	'$lgt_tr_meta_non_terminal_directive'(NonTerminals).
 
 '$lgt_tr_meta_non_terminal_directive'([NonTerminal| _]) :-
@@ -8648,8 +8654,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % non-variable meta-argument in clause head of a user-defined meta-predicate
 
 '$lgt_tr_head'(Head, _, _) :-
-	'$lgt_term_template'(Head, Meta),
-	'$lgt_pp_meta_predicate_'(Meta),
+	'$lgt_pp_meta_predicate_'(Head, Meta),
 	Head =.. [_| Args],
 	Meta =.. [_| MArgs],
 	'$lgt_nonvar_meta_arg'(Args, MArgs, Arg),
@@ -8961,8 +8966,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	% ignore multifile predicates
 	Head \= ':'(_, _),
 	Head \= _::_,
-	'$lgt_term_template'(Head, Meta),
-	'$lgt_pp_meta_predicate_'(Meta),			% if we're compiling a clause for a meta-predicate and
+	'$lgt_pp_meta_predicate_'(Head, Meta),		% if we're compiling a clause for a meta-predicate and
 	once('$lgt_member_var'(Closure, MetaVars)),	% our closure is a meta-argument then check that the
 	'$lgt_length'(ExtraArgs, 0, NExtraArgs),	% call/N call complies with the meta-predicate declaration
 	Meta =.. [_| MetaArgs],
@@ -9494,8 +9498,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	catch('$lgt_predicate_property'(':'(Module, Pred), meta_predicate(OriginalMeta)), _, fail) ->
 		% we're compiling a call to a module meta-predicate
 		'$lgt_add_referenced_module'(Module),
-		'$lgt_term_template'(Pred, OverridingMeta),
-		(	'$lgt_pp_meta_predicate_'(':'(Module, OverridingMeta)) ->
+		(	'$lgt_pp_meta_predicate_'(':'(Module, Pred), ':'(Module, OverridingMeta)) ->
 			% we're overriding the original meta-predicate template
 			Meta = OverridingMeta
 		;	Meta = OriginalMeta
@@ -10208,8 +10211,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_body'(Pred, _, _, Ctx) :-
 	'$lgt_comp_ctx_meta_vars'(Ctx, MetaVars),
 	MetaVars \= [],
-	(	'$lgt_term_template'(Pred, Meta),
-		'$lgt_pp_meta_predicate_'(Meta) ->
+	(	'$lgt_pp_meta_predicate_'(Pred, Meta) ->
 		% user-defined meta-predicate
 		true
 	;	'$lgt_prolog_meta_predicate'(Pred, Meta, predicate) ->
@@ -10232,8 +10234,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	% ignore multifile predicates
 	Head \= ':'(_, _),
 	Head \= _::_,
-	'$lgt_term_template'(Head, HeadMeta),
-	'$lgt_pp_meta_predicate_'(HeadMeta),
+	'$lgt_pp_meta_predicate_'(Head, HeadMeta),
 	Head =.. [_| HeadArgs],
 	HeadMeta =.. [_| HeadMetaArgs],
 	'$lgt_same_number_of_closure_extra_args'(PredArgs, MetaArgs, HeadArgs, HeadMetaArgs),
@@ -10245,8 +10246,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_body'(Alias, ':'(Module, TPred), ':'(Module, DPred), Ctx) :-
 	'$lgt_pp_use_module_predicate_'(Module, Pred, Alias),
 	catch('$lgt_predicate_property'(':'(Module, Pred), meta_predicate(OriginalMeta)), _, fail),
-	'$lgt_term_template'(Pred, OverridingMeta),
-	(	'$lgt_pp_meta_predicate_'(':'(Module, OverridingMeta)) ->
+	(	'$lgt_pp_meta_predicate_'(':'(Module, Pred), ':'(Module, OverridingMeta)) ->
 		% we're overriding the original meta-predicate template
 		Meta = OverridingMeta
 	;	Meta = OriginalMeta
@@ -11485,8 +11485,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % to a meta-argument in the head of clause being compiled
 
 '$lgt_head_meta_variables'(Pred, MetaVars) :-
-	'$lgt_term_template'(Pred, Meta),
-	(	'$lgt_pp_meta_predicate_'(Meta) ->
+	(	'$lgt_pp_meta_predicate_'(Pred, Meta) ->
 		Pred =.. [_| Args],
 		Meta =.. [_| MArgs],
 		'$lgt_extract_meta_variables'(Args, MArgs, MetaVars)
@@ -12831,8 +12830,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	'$lgt_pp_private_'(Functor, Arity), Scope = p
 	),
 	functor(Pred, Functor, Arity),
-	functor(Template, Functor, Arity),
-	(	'$lgt_pp_meta_predicate_'(Template) ->
+	(	'$lgt_pp_meta_predicate_'(Pred, Template) ->
 		Meta = Template,
 		MetaPredicate = 64
 	;	Meta = no,
@@ -14154,9 +14152,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_fix_predicate_calls'(':'(Module, Pred), TPred, false).
 
 '$lgt_fix_predicate_calls'(':'(Module, Pred), ':'(Module, TPred), _) :-
-	'$lgt_term_template'(Pred, OverridingMeta),
 	catch('$lgt_predicate_property'(':'(Module, Pred), meta_predicate(OriginalMeta)), _, fail),
-	(	'$lgt_pp_meta_predicate_'(':'(Module, OverridingMeta)) ->
+	(	'$lgt_pp_meta_predicate_'(':'(Module, Pred), ':'(Module, OverridingMeta)) ->
 		% we're overriding the original meta-predicate template
 		Meta = OverridingMeta
 	;	Meta = OriginalMeta

@@ -39,7 +39,7 @@ default code for printing messages. This allows the user to intercept any
 compiler message (by defining clauses for the `logtalk::message_hook/4` hook
 predicate).
 
-* IMPROVED: Small performance improvements when compiling entity clauses.
+* IMPROVED: Compiler performance improvements when compiling source files.
 
 * FIXED: The compiler could attempt to print compilation warnings at runtime
 when using the entity creation built-in predicates, resulting in failures or
