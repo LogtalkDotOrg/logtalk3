@@ -57,6 +57,10 @@ source file.
 test that all arguments appearing in a meta-argument position are variables
 was not performed correctly.
 
+* FIXED: Also print warnings about missing references to the `expanding`
+built-in protocol when compiling definitions for the annotation hook
+predicates.
+
 Prolog adapter and integration files
 ------------------------------------
 

@@ -8693,26 +8693,83 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 % definition of event handlers without reference to the "monitoring" built-in protocol
-% definition of term and goal expansion predicates without reference to the "expanding" built-in protocol
-% definition of forward message handler without reference to the "forwarding" built-in protocol
 
-'$lgt_tr_head'(Head, _, Ctx) :-
+'$lgt_tr_head'(before(_, _, _), _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 	\+ '$lgt_pp_module_'(_),
-	(	Head = before(_, _, _), \+ '$lgt_pp_implemented_protocol_'(monitoring, _, _, _) ->
-		Protocol = monitoring
-	;	Head = after(_, _, _), \+ '$lgt_pp_implemented_protocol_'(monitoring, _, _, _) ->
-		Protocol = monitoring
-	;	Head = term_expansion(_, _), \+ '$lgt_pp_implemented_protocol_'(expanding, _, _, _) ->
-		Protocol = expanding
-	;	Head = goal_expansion(_, _), \+ '$lgt_pp_implemented_protocol_'(expanding, _, _, _) ->
-		Protocol = expanding
-	;	Head = forward(_), \+ '$lgt_pp_implemented_protocol_'(forwarding, _, _, _) ->
-		Protocol = forwarding
-	),
+	\+ '$lgt_pp_implemented_protocol_'(monitoring, _, _, _),
 	'$lgt_increment_compile_warnings_counter',
 	'$lgt_warning_context'(Path, _, Type, Entity),
-	'$lgt_print_message'(warning(general), core, missing_reference_to_built_in_protocol(Path, Type, Entity, Protocol)),
+	'$lgt_print_message'(warning(general), core, missing_reference_to_built_in_protocol(Path, Type, Entity, monitoring)),
+	fail.
+
+'$lgt_tr_head'(after(_, _, _), _, Ctx) :-
+	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	\+ '$lgt_pp_module_'(_),
+	\+ '$lgt_pp_implemented_protocol_'(monitoring, _, _, _),
+	'$lgt_increment_compile_warnings_counter',
+	'$lgt_warning_context'(Path, _, Type, Entity),
+	'$lgt_print_message'(warning(general), core, missing_reference_to_built_in_protocol(Path, Type, Entity, monitoring)),
+	fail.
+
+
+% definition of term and goal expansion predicates and annotation predicates without reference to the "expanding" built-in protocol
+
+'$lgt_tr_head'(term_expansion(_, _), _, Ctx) :-
+	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	\+ '$lgt_pp_module_'(_),
+	\+ '$lgt_pp_implemented_protocol_'(expanding, _, _, _),
+	'$lgt_increment_compile_warnings_counter',
+	'$lgt_warning_context'(Path, _, Type, Entity),
+	'$lgt_print_message'(warning(general), core, missing_reference_to_built_in_protocol(Path, Type, Entity, expanding)),
+	fail.
+
+'$lgt_tr_head'(goal_expansion(_, _), _, Ctx) :-
+	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	\+ '$lgt_pp_module_'(_),
+	\+ '$lgt_pp_implemented_protocol_'(expanding, _, _, _),
+	'$lgt_increment_compile_warnings_counter',
+	'$lgt_warning_context'(Path, _, Type, Entity),
+	'$lgt_print_message'(warning(general), core, missing_reference_to_built_in_protocol(Path, Type, Entity, expanding)),
+	fail.
+
+'$lgt_tr_head'(goal_annotation(_, _, _, _), _, Ctx) :-
+	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	\+ '$lgt_pp_module_'(_),
+	\+ '$lgt_pp_implemented_protocol_'(expanding, _, _, _),
+	'$lgt_increment_compile_warnings_counter',
+	'$lgt_warning_context'(Path, _, Type, Entity),
+	'$lgt_print_message'(warning(general), core, missing_reference_to_built_in_protocol(Path, Type, Entity, expanding)),
+	fail.
+
+'$lgt_tr_head'(value_annotation(_, _, _, _), _, Ctx) :-
+	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	\+ '$lgt_pp_module_'(_),
+	\+ '$lgt_pp_implemented_protocol_'(expanding, _, _, _),
+	'$lgt_increment_compile_warnings_counter',
+	'$lgt_warning_context'(Path, _, Type, Entity),
+	'$lgt_print_message'(warning(general), core, missing_reference_to_built_in_protocol(Path, Type, Entity, expanding)),
+	fail.
+
+'$lgt_tr_head'(body_annotation(_, _, _), _, Ctx) :-
+	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	\+ '$lgt_pp_module_'(_),
+	\+ '$lgt_pp_implemented_protocol_'(expanding, _, _, _),
+	'$lgt_increment_compile_warnings_counter',
+	'$lgt_warning_context'(Path, _, Type, Entity),
+	'$lgt_print_message'(warning(general), core, missing_reference_to_built_in_protocol(Path, Type, Entity, expanding)),
+	fail.
+
+
+% definition of forward message handler without reference to the "forwarding" built-in protocol
+
+'$lgt_tr_head'(forward(_), _, Ctx) :-
+	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	\+ '$lgt_pp_module_'(_),
+	\+ '$lgt_pp_implemented_protocol_'(forwarding, _, _, _),
+	'$lgt_increment_compile_warnings_counter',
+	'$lgt_warning_context'(Path, _, Type, Entity),
+	'$lgt_print_message'(warning(general), core, missing_reference_to_built_in_protocol(Path, Type, Entity, forwarding)),
 	fail.
 
 
