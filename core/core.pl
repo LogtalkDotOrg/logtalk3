@@ -9015,12 +9015,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_tr_body'(Goal, TGoal, DGoal, Ctx).
 
-'$lgt_tr_body'(CallN, TPred, DPred, Ctx) :-
-	CallN =.. [call, Closure| ExtraArgs],
-	!,
-	'$lgt_check_closure'(Closure, Ctx),
-	'$lgt_tr_body'('$lgt_callN'(Closure, ExtraArgs), TPred, DPred, Ctx).
-
 '$lgt_tr_body'('$lgt_callN'(Closure, ExtraArgs), _, _, Ctx) :-
 	var(Closure),
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, MetaVars, _, _, _, _),
@@ -10249,6 +10243,16 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	'$lgt_print_message'(warning(portability), core, non_standard_prolog_flag_value(Path, Lines, Flag, Value))
 	),
 	fail.
+
+
+% call/2-N built-in control construct
+
+'$lgt_tr_body'(CallN, TPred, DPred, Ctx) :-
+	functor(CallN, call, _),
+	CallN =.. [call, Closure| ExtraArgs],
+	!,
+	'$lgt_check_closure'(Closure, Ctx),
+	'$lgt_tr_body'('$lgt_callN'(Closure, ExtraArgs), TPred, DPred, Ctx).
 
 
 % non-callable terms
