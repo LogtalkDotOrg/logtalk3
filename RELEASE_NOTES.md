@@ -53,6 +53,10 @@ lead to a failed compilation.
 * FIXED: File-specific annotation hooks were not cleaned after compiling a
 source file.
 
+* FIXED: When compiling a multifile clause for a meta-predicate, the safety
+test that all arguments appearing in a meta-argument position are variables
+was not performed correctly.
+
 Prolog adapter and integration files
 ------------------------------------
 

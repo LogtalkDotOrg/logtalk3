@@ -8655,8 +8655,15 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_tr_head'(Head, _, _) :-
 	'$lgt_pp_meta_predicate_'(Head, Meta),
-	Head =.. [_| Args],
-	Meta =.. [_| MArgs],
+	(	Head = Entity::Pred ->
+		Meta = Entity::Template
+	;	Head = ':'(Module, Pred) ->
+		Meta = ':'(Module, Template)
+	;	Pred = Head,
+		Template = Meta
+	),
+	Pred =.. [_| Args],
+	Template =.. [_| MArgs],
 	'$lgt_nonvar_meta_arg'(Args, MArgs, Arg),
 	throw(type_error(variable, Arg)).
 
