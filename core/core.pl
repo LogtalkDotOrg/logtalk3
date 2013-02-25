@@ -13920,14 +13920,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_fix_synchronized_predicates' :-
 	\+ '$lgt_prolog_feature'(threads, supported),
 	!,
-	(	retract('$lgt_pp_def_'(Def)),
-		assertz('$lgt_pp_final_def_'(Def)),
-		fail
-	;	retract('$lgt_pp_ddef_'(DDef)),
-		assertz('$lgt_pp_final_ddef_'(DDef)),
-		fail
-	;	true
-	).
+	assertz(('$lgt_pp_final_def_'(Def) :- '$lgt_pp_def_'(Def))),
+	assertz(('$lgt_pp_final_ddef_'(DDef) :- '$lgt_pp_ddef_'(DDef))).
 
 '$lgt_fix_synchronized_predicates' :-
 	(	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _) ->
