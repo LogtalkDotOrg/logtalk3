@@ -261,7 +261,7 @@
 :- dynamic('$lgt_pp_extends_object_'/3).					% '$lgt_pp_extends_object_'(Obj, Parent, Scope)
 :- dynamic('$lgt_pp_extends_protocol_'/3).					% '$lgt_pp_extends_protocol_'(Ptc, ExtPtc, Scope)
 :- dynamic('$lgt_pp_extends_category_'/3).					% '$lgt_pp_extends_category_'(Ctg, ExtCtg, Scope)
-:- dynamic('$lgt_pp_complemented_object_'/3).				% '$lgt_pp_complemented_object_'(Obj, Ctg, Dcl, Def, Rnm)
+:- dynamic('$lgt_pp_complemented_object_'/5).				% '$lgt_pp_complemented_object_'(Obj, Ctg, Dcl, Def, Rnm)
 
 :- dynamic('$lgt_pp_implemented_protocol_'/4).				% '$lgt_pp_implemented_protocol_'(Ptc, Prefix, Dcl, Scope)
 :- dynamic('$lgt_pp_imported_category_'/5).					% '$lgt_pp_imported_category_'(Ctg, Prefix, Dcl, Def, Scope)
