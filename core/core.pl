@@ -13913,27 +13913,29 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 % '$lgt_fix_synchronized_predicates'
 %
-% adds mutex wrappers for calling synchronized predicates;
+% adds mutex wrappers for calling synchronized predicates
+%
 % for Prolog compilers that do not support multi-threading,
 % synchronized predicates are compiled as normal predicates
 
 '$lgt_fix_synchronized_predicates' :-
-	\+ '$lgt_prolog_feature'(threads, supported),
-	!,
-	assertz(('$lgt_pp_final_def_'(Def) :- '$lgt_pp_def_'(Def))),
-	assertz(('$lgt_pp_final_ddef_'(DDef) :- '$lgt_pp_ddef_'(DDef))).
-
-'$lgt_fix_synchronized_predicates' :-
-	(	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _) ->
-		'$lgt_fix_synchronized_pred_defs',
-		'$lgt_fix_synchronized_pred_ddefs'
+	'$lgt_prolog_feature'(threads, Threads),
+	(	Threads == unsupported ->
+		assertz(('$lgt_pp_final_def_'(Def) :- '$lgt_pp_def_'(Def))),
+		assertz(('$lgt_pp_final_ddef_'(DDef) :- '$lgt_pp_ddef_'(DDef)))
+	;	% Threads == supported
+		'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _) ->
+		'$lgt_fix_synchronized_predicate_defs',
+		'$lgt_fix_synchronized_predicate_ddefs'
 	;	'$lgt_pp_category_'(_, _, _, _, _, _) ->
-		'$lgt_fix_synchronized_pred_defs'
-	;	true
+		% categories can only define static predicates
+		'$lgt_fix_synchronized_predicate_defs'
+	;	% protocols don't contain predicate definitions
+		true
 	).
 
 
-'$lgt_fix_synchronized_pred_defs' :-
+'$lgt_fix_synchronized_predicate_defs' :-
 	retract('$lgt_pp_def_'(Old)),
 	Old =.. [Def, Head, ExCtx, THead],
 	(	'$lgt_pp_synchronized_'(Head, Mutex) ->
@@ -13947,10 +13949,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	),
 	fail.
 
-'$lgt_fix_synchronized_pred_defs'.
+'$lgt_fix_synchronized_predicate_defs'.
 
 
-'$lgt_fix_synchronized_pred_ddefs' :-
+'$lgt_fix_synchronized_predicate_ddefs' :-
 	retract('$lgt_pp_ddef_'(Old)),
 	Old =.. [DDef, Head, ExCtx, THead],
 	(	'$lgt_pp_synchronized_'(Head, Mutex) ->
@@ -13964,7 +13966,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	),
 	fail.
 
-'$lgt_fix_synchronized_pred_ddefs'.
+'$lgt_fix_synchronized_predicate_ddefs'.
 
 
 
