@@ -63,6 +63,9 @@ predicates.
 
 * CHANGED: Removed support for non-deterministic synchronized predicates.
 
+* FIXED: The compiler second pass could go deeper in fixing calls to
+explicitly-qualified module predicates than it should.
+
 Prolog adapter and integration files
 ------------------------------------
 

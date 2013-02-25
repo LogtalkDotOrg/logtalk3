@@ -14158,6 +14158,29 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!,
 	'$lgt_fix_predicate_calls'(DPred, TPred, Annotation).
 
+'$lgt_fix_predicate_calls'(':'(Module, Pred), ':'(Module, Pred), _) :-
+	var(Pred),
+	!.
+
+'$lgt_fix_predicate_calls'(':'(_, ':'(Module, Pred)), TPred, _) :-
+	!,
+	'$lgt_fix_predicate_calls'(':'(Module, Pred), TPred, false).
+
+'$lgt_fix_predicate_calls'(':'(Module, Pred), ':'(Module, TPred), _) :-
+	catch('$lgt_predicate_property'(':'(Module, Pred), meta_predicate(OriginalMeta)), _, fail),
+	(	'$lgt_pp_meta_predicate_'(':'(Module, Pred), ':'(Module, OverridingMeta)) ->
+		% we're overriding the original meta-predicate template
+		Meta = OverridingMeta
+	;	Meta = OriginalMeta
+	),
+	!,
+	% fixing a call to a Prolog module meta-predicate
+	Pred =.. [Functor| Args],
+	Meta =.. [Functor| MArgs],
+	'$lgt_tr_module_meta_predicate_directive_args'(MArgs, CMArgs),
+	'$lgt_fix_predicate_calls_in_meta_arguments'(Args, CMArgs, TArgs),
+	TPred =.. [Functor| TArgs].
+
 '$lgt_fix_predicate_calls'(Pred, fail, false) :-
 	functor(Pred, Functor, Arity),
 	'$lgt_undefined_predicate_call'(_, Functor/Arity, _),
@@ -14195,34 +14218,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	Pred =.. [Functor| Args],
 	Meta =.. [Functor| MArgs],
 	'$lgt_fix_predicate_calls_in_meta_arguments'(Args, MArgs, TArgs),
-	TPred =.. [Functor| TArgs].
-
-'$lgt_fix_predicate_calls'(':'(Module, Pred), ':'(Module, Pred), _) :-
-	var(Pred),
-	!.
-
-'$lgt_fix_predicate_calls'(':'(_, ':'(Module, Pred)), TPred, _) :-
-	!,
-	'$lgt_fix_predicate_calls'(':'(Module, Pred), TPred, false).
-
-'$lgt_fix_predicate_calls'(':'(Module, Pred), ':'(Module, TPred), _) :-
-	catch('$lgt_predicate_property'(':'(Module, Pred), meta_predicate(OriginalMeta)), _, fail),
-	(	'$lgt_pp_meta_predicate_'(':'(Module, Pred), ':'(Module, OverridingMeta)) ->
-		% we're overriding the original meta-predicate template
-		Meta = OverridingMeta
-	;	Meta = OriginalMeta
-	),
-	!,
-	% fixing a call to a Prolog module meta-predicate
-	Pred =.. [Functor| Args],
-	Meta =.. [Functor| MArgs],
-	'$lgt_tr_module_meta_predicate_directive_args'(MArgs, CMArgs),
-	'$lgt_fix_predicate_calls_in_meta_arguments'(Args, CMArgs, TArgs),
-	TPred =.. [Functor| TArgs].
-
-'$lgt_fix_predicate_calls'(':'(Module, Pred), ':'(Module, TPred), _) :-
-	!,
-	'$lgt_fix_predicate_calls'(Pred, TPred, false).
+	TPred =.. [Functor| TArgs].	
 
 '$lgt_fix_predicate_calls'(Pred, Pred, _).
 
