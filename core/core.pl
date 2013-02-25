@@ -8426,7 +8426,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_comp_ctx_meta_vars'(BodyCtx, MetaVars),
 	'$lgt_tr_body'(Body, TBody, DBody, BodyCtx),
 	(	'$lgt_compiler_flag'(optimize, on) ->
-		'$lgt_simplify_body'(TBody, SBody)
+		'$lgt_simplify_goal'(TBody, SBody)
 	;	SBody = TBody
 	),
 	(	'$lgt_pp_coinductive_'(Head, _, DHead) ->
@@ -8451,7 +8451,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_comp_ctx_meta_vars'(BodyCtx, MetaVars),
 	'$lgt_tr_body'(Body, TBody, DBody, BodyCtx),
 	(	'$lgt_compiler_flag'(optimize, on) ->
-		'$lgt_simplify_body'(TBody, SBody),
+		'$lgt_simplify_goal'(TBody, SBody),
 		(	SBody == true ->
 			TClause = THead
 		;	TClause = (THead:-SBody)
@@ -11800,7 +11800,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_simplify_body'(+callable, -callable)
+% '$lgt_simplify_goal'(+callable, -callable)
 %
 % simplify the body of a compiled clause by folding left unifications (usually
 % resulting from the compilation of grammar rules or from inlined calls to the
@@ -11808,7 +11808,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % (but we must be careful with control constructs that are opaque to cuts such
 % as call/1 and once/1)
 
-'$lgt_simplify_body'(Goal, SGoal) :-
+'$lgt_simplify_goal'(Goal, SGoal) :-
 	'$lgt_flatten_conjunctions'(Goal, SGoal0),
 	'$lgt_fold_left_unifications'(SGoal0, SGoal1),
 	'$lgt_remove_redundant_calls'(SGoal1, SGoal).
@@ -14745,7 +14745,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	findall(FileGoal, '$lgt_pp_file_initialization_'(FileGoal), FileGoals),
 	'$lgt_append'(EntityGoals, FileGoals, Goals),
 	'$lgt_list_to_conjunction'(Goals, Goals2),
-	'$lgt_simplify_body'(Goals2, Goal).
+	'$lgt_remove_redundant_calls'(Goals2, Goal).
 
 
 % converts a list of goals into a conjunction of goals
@@ -14796,7 +14796,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	),
 	findall(EntityInitGoal, '$lgt_pp_final_entity_initialization_'(EntityInitGoal), EntityInitGoals),
 	'$lgt_list_to_conjunction'(EntityInitGoals, Goal3),
-	'$lgt_simplify_body'((Goal1, Goal2, Goal3), Goal),
+	'$lgt_remove_redundant_calls'((Goal1, Goal2, Goal3), Goal),
 	(	Goal == true ->
 		true
 	;	assertz('$lgt_pp_entity_initialization_'(Type, Entity, Goal))
@@ -16433,7 +16433,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_dcg_rule'(Rule, Expansion),
 	(	Expansion = (Head :- Body),
 		'$lgt_compiler_flag'(optimize, on) ->
-		'$lgt_simplify_body'(Body, SBody),
+		'$lgt_simplify_goal'(Body, SBody),
 		(	SBody == true ->
 			Clause = Head
 		;	Clause = (Head :- SBody)
