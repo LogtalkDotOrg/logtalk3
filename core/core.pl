@@ -13942,12 +13942,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		MHead =.. [MFunctor| Args],
 		New =.. [Def, Head, ExCtx, MHead],
 		assertz('$lgt_pp_final_def_'(New)),
-		(	'$lgt_term_template'(Head, Mode),
-			'$lgt_pp_mode_'(Mode, _),
-			forall('$lgt_pp_mode_'(Mode, Solutions), (Solutions \== zero_or_one, Solutions \== one, Solutions \== zero)) ->
-			assertz('$lgt_pp_entity_aux_clause_'((MHead:-setup_call_cleanup(mutex_lock(Mutex), THead, mutex_unlock(Mutex)))))
-		;	assertz('$lgt_pp_entity_aux_clause_'((MHead:-with_mutex(Mutex, THead))))
-		)
+		assertz('$lgt_pp_entity_aux_clause_'((MHead:-with_mutex(Mutex, THead))))
 	;	assertz('$lgt_pp_final_def_'(Old))
 	),
 	fail.
@@ -13964,12 +13959,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		MHead =.. [MFunctor| Args],
 		New =.. [DDef, Head, ExCtx, MHead],
 		assertz('$lgt_pp_final_ddef_'(New)),
-		(	'$lgt_term_template'(Head, Mode),
-			'$lgt_pp_mode_'(Mode, _),
-			forall('$lgt_pp_mode_'(Mode, Solutions), (Solutions \== zero_or_one, Solutions \== one, Solutions \== zero)) ->
-			assertz('$lgt_pp_entity_aux_clause_'((MHead:-setup_call_cleanup(mutex_lock(Mutex), THead, mutex_unlock(Mutex)))))
-		;	assertz('$lgt_pp_entity_aux_clause_'((MHead:-with_mutex(Mutex, THead))))
-		)
+		assertz('$lgt_pp_entity_aux_clause_'((MHead:-with_mutex(Mutex, THead))))
 	;	assertz('$lgt_pp_final_ddef_'(Old))
 	),
 	fail.

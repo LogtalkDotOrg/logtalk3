@@ -226,9 +226,6 @@ Note that, in a more realistic scenario, the two <code>threaded_ignore/1</code> 
 The <code>synchronized/1</code> directive must precede any local calls to the synchronized predicate (or synchronized non-terminal) in order to ensure proper compilation. In addition, as each Logtalk entity is independently compiled, this directive must be included in every object or category that contains a definition for the described predicate, even if the predicate declaration is inherited from another entity, in order to ensure proper compilation. Note that a synchronized predicate cannot be declared dynamic. To ensure atomic updates of a dynamic predicate, declare as synchronized the predicate performing the update.
 </p>
 <p>
-Logtalk supports both deterministic and non-deterministic synchronized predicates (and synchronized non-terminals). However, whenever possible, synchronized predicates should be coded as deterministic predicates in order to avoid deadlocks. In those cases where the predicate (or grammar rule) is defined in the same object (or category) where the predicate is declared synchronized, Logtalk takes advantage of any existing <a title="Consult reference manual" href="../refman/directives/mode2.html"><code>mode/2</code></a> directives in order to generate the most appropriated mutex handling code. When no <code>mode/2</code> predicate directives are presented, Logtalk assumes a deterministic predicate when generating the mutex handling code.
-</p>
-<p>
 We may declare all predicates of an object (or a category) as synchronized by using the entity directive <a title="Consult reference manual" href="../refman/directives/synchronized0.html"><code>synchronized/0</code></a>. In this case, the <code>synchronized/1</code> predicate directive is not necessary and should not be used.
 </p>
 <p>
@@ -266,7 +263,7 @@ The performance of multi-threading applications is highly dependent on the back-
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: January 30, 2013</span>
+		<span>Last updated on: February 25, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="events.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="errors.html">next</a></span><br/>

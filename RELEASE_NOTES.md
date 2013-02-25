@@ -61,6 +61,8 @@ was not performed correctly.
 built-in protocol when compiling definitions for the annotation hook
 predicates.
 
+* CHANGED: Removed support for non-deterministic synchronized predicates.
+
 Prolog adapter and integration files
 ------------------------------------
 
