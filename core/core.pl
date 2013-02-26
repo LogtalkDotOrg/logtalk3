@@ -13921,10 +13921,14 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_fix_synchronized_predicates' :-
 	'$lgt_prolog_feature'(threads, Threads),
 	(	Threads == unsupported ->
+		% nothing to fix
 		assertz(('$lgt_pp_final_def_'(Clause) :- '$lgt_pp_def_'(Clause))),
 		assertz(('$lgt_pp_final_ddef_'(Clause) :- '$lgt_pp_ddef_'(Clause)))
-	;	% Threads == supported
-		'$lgt_pp_object_'(_, _, _, Def, _, _, _, _, DDef, _, _) ->
+	;	\+ '$lgt_pp_synchronized_'(_, _) ->
+		% nothing to fix either
+		assertz(('$lgt_pp_final_def_'(Clause) :- '$lgt_pp_def_'(Clause))),
+		assertz(('$lgt_pp_final_ddef_'(Clause) :- '$lgt_pp_ddef_'(Clause)))
+	;	'$lgt_pp_object_'(_, _, _, Def, _, _, _, _, DDef, _, _) ->
 		'$lgt_fix_synchronized_predicate_defs'(Def),
 		'$lgt_fix_synchronized_predicate_ddefs'(DDef)
 	;	'$lgt_pp_category_'(_, _, _, Def, _, _) ->
@@ -13947,6 +13951,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	assertz('$lgt_pp_entity_aux_clause_'((MHead:-with_mutex(Mutex, THead)))),
 	fail.
 
+'$lgt_fix_synchronized_predicate_defs'(_) :-
+	retract('$lgt_pp_def_'(Clause)),
+	assertz('$lgt_pp_final_def_'(Clause)),
+	fail.
+
 '$lgt_fix_synchronized_predicate_defs'(_).
 
 
@@ -13960,6 +13969,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	New =.. [DDef, Head, ExCtx, MHead],
 	assertz('$lgt_pp_final_ddef_'(New)),
 	assertz('$lgt_pp_entity_aux_clause_'((MHead:-with_mutex(Mutex, THead)))),
+	fail.
+
+'$lgt_fix_synchronized_predicate_ddefs'(_) :-
+	retract('$lgt_pp_ddef_'(Clause)),
+	assertz('$lgt_pp_final_ddef_'(Clause)),
 	fail.
 
 '$lgt_fix_synchronized_predicate_ddefs'(_).
