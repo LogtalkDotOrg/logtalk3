@@ -414,9 +414,10 @@ Obj<<Goal :-
 
 
 '$lgt_runtime_normalized_error_handler'(error(existence_error(procedure, TFunctor/6), _)) :-
-	once((	atom_concat(Prefix, '_idcl', TFunctor)
-		;	atom_concat(Prefix, '_dcl', TFunctor)
-	)),
+	(	atom_concat(Prefix, '_idcl', TFunctor) ->
+		true
+	;	atom_concat(Prefix, '_dcl', TFunctor)
+	),
 	'$lgt_reverse_entity_prefix'(Prefix, Obj),
 	(	'$lgt_instantiates_class_'(_, Obj, _)
 	;	'$lgt_specializes_class_'(_, Obj, _)
@@ -4342,12 +4343,12 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	'$lgt_default_value_annotation'(Annotation, Value, Goal, Head)
 		% adapter file value annotation hook
 	),
+	!,
 	functor(Annotation, Functor, _),
 	(	arg(1, Annotation, Goal) ->
 		Order = suffix
 	;	Order = prefix
-	),
-	!.
+	).
 
 
 
@@ -4359,8 +4360,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	'$lgt_default_goal_annotation'(Annotation, Left, Right, Head)
 		% adapter file goal annotation hook
 	),
-	functor(Annotation, Functor, _),
-	!.
+	!,
+	functor(Annotation, Functor, _).
 
 
 
@@ -4372,8 +4373,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	'$lgt_default_body_annotation'(Annotation, Left, Right)
 		% adapter file body annotation hook
 	),
-	functor(Annotation, Functor, _),
-	!.
+	!,
+	functor(Annotation, Functor, _).
 
 
 
@@ -12222,12 +12223,13 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_tr_complements_object'([Obj| _], Ctg, _, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-	once((	'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags)
-			% loaded object
-		;	'$lgt_pp_file_runtime_clause_'('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags))
-			% object being redefined in the same file as the complementing category;
-			% possible but unlikely in practice (except, maybe, in classroom examples)
-	)),
+	(	'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags) ->
+		% loaded object
+		true
+	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags))
+		% object being redefined in the same file as the complementing category;
+		% possible but unlikely in practice (except, maybe, in classroom examples)
+	),
 	Flags /\ 32 =\= 32,
 	% object compiled with complementing categories support disabled
 	'$lgt_increment_compile_warnings_counter',
@@ -12305,7 +12307,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		\+ '$lgt_pp_file_runtime_clause_'('$lgt_current_protocol_'(Obj, _, _, _, _)),
 		\+ '$lgt_pp_file_runtime_clause_'('$lgt_current_category_'(Obj, _, _, _, _, _))
 	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, _)) ->
-		% object defined previously in the same file
+		% object defined in the same file we're compiling
 		true
 	;	fail
 	).
@@ -12322,7 +12324,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		\+ '$lgt_pp_file_runtime_clause_'('$lgt_current_object_'(Ptc, _, _, _, _, _, _, _, _, _, _)),
 		\+ '$lgt_pp_file_runtime_clause_'('$lgt_current_category_'(Ptc, _, _, _, _, _))
 	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_protocol_'(Ptc, _, _, _, _)) ->
-		% protocol defined previously in the same file
+		% protocol defined in the same file we're compiling
 		true
 	;	fail
 	).
@@ -12339,7 +12341,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		\+ '$lgt_pp_file_runtime_clause_'('$lgt_current_object_'(Ctg, _, _, _, _, _, _, _, _, _, _)),
 		\+ '$lgt_pp_file_runtime_clause_'('$lgt_current_protocol_'(Ctg, _, _, _, _))
 	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_category_'(Ctg, _, _, _, _, _)) ->
-		% category defined previously in the same file
+		% category defined in the same file we're compiling
 		true
 	;	fail
 	).
@@ -12524,9 +12526,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_add_uses_def_clause'(Pred, This, TPred) :-
 	'$lgt_exec_ctx_this'(ExCtx, This),
-	once((	'$lgt_pp_object_'(_, _, _, Def, _, _, _, _, _, _, _)
-		;	'$lgt_pp_category_'(_, _, _, Def, _, _)
-	)),
+	(	'$lgt_pp_object_'(_, _, _, Def, _, _, _, _, _, _, _) ->
+		true
+	;	'$lgt_pp_category_'(_, _, _, Def, _, _)
+	),
 	functor(Clause, Def, 3),
 	arg(1, Clause, Pred),
 	arg(2, Clause, ExCtx),
@@ -12550,9 +12553,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	functor(HeadDefTemplate, TFunctor, TArity),
 	'$lgt_unify_head_thead_args'(Arity, HeadTemplate, HeadDefTemplate),
 	arg(TArity, HeadDefTemplate, ExCtxTemplate),
-	once((	'$lgt_pp_object_'(_, _, _, Def, _, _, _, _, _, _, _)
-		;	'$lgt_pp_category_'(_, _, _, Def, _, _)
-	)),
+	(	'$lgt_pp_object_'(_, _, _, Def, _, _, _, _, _, _, _) ->
+		true
+	;	'$lgt_pp_category_'(_, _, _, Def, _, _)
+	),
 	functor(Clause, Def, 3),
 	arg(1, Clause, HeadTemplate),
 	arg(2, Clause, ExCtxTemplate),
@@ -12620,9 +12624,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_add_def_fail_clause'(Head, Functor, Arity) :-
 	functor(HeadTemplate, Functor, Arity),
-	once((	'$lgt_pp_object_'(_, _, _, Def, _, _, _, _, _, _, _)
-		;	'$lgt_pp_category_'(_, _, _, Def, _, _)
-	)),
+	(	'$lgt_pp_object_'(_, _, _, Def, _, _, _, _, _, _, _) ->
+		true
+	;	'$lgt_pp_category_'(_, _, _, Def, _, _)
+	),
 	functor(Clause, Def, 3),
 	arg(1, Clause, HeadTemplate),
 	arg(3, Clause, fail),
@@ -12773,8 +12778,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 '$lgt_gen_protocol_directives' :-
-	(	'$lgt_pp_protocol_'(_, _, Dcl, Rnm, _),
-		'$lgt_pp_dynamic_' ->
+	(	'$lgt_pp_dynamic_' ->
+		'$lgt_pp_protocol_'(_, _, Dcl, Rnm, _),
 		assertz('$lgt_pp_directive_'(dynamic(Dcl/4))),
 		assertz('$lgt_pp_directive_'(dynamic(Dcl/5))),
 		assertz('$lgt_pp_directive_'(dynamic(Rnm/3)))
@@ -12784,8 +12789,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 '$lgt_gen_object_dynamic_directives' :-
-	(	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
-		'$lgt_pp_dynamic_' ->
+	(	'$lgt_pp_dynamic_' ->
 		'$lgt_gen_dynamic_object_dynamic_directives'
 	;	'$lgt_gen_static_object_dynamic_directives'
 	).
@@ -12851,8 +12855,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 '$lgt_gen_category_dynamic_directives' :-
-	(	'$lgt_pp_category_'(_, _, Dcl, Def, Rnm, _),
-		'$lgt_pp_dynamic_' ->
+	(	'$lgt_pp_dynamic_' ->
+		'$lgt_pp_category_'(_, _, Dcl, Def, Rnm, _),
 		assertz('$lgt_pp_directive_'(dynamic(Dcl/4))),
 		assertz('$lgt_pp_directive_'(dynamic(Dcl/5))),
 		assertz('$lgt_pp_directive_'(dynamic(Def/3))),
@@ -13049,14 +13053,13 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	(	'$lgt_pp_dcl_'(_) ->
 		true
 	;	% empty, standalone protocol
+		'$lgt_pp_dynamic_' ->
+		% dynamic protocol
+		true
+	;	% generate a catchall clause for static protocols
 		'$lgt_pp_protocol_'(_, _, Dcl, _, _),
-		(	'$lgt_pp_dynamic_' ->
-			% dynamic protocol
-			true
-		;	% generate a catchall clause for static protocols
-			functor(Head, Dcl, 5),
-			assertz('$lgt_pp_dcl_'((Head:-fail)))
-		)
+		functor(Head, Dcl, 5),
+		assertz('$lgt_pp_dcl_'((Head:-fail)))
 	).
 
 
@@ -13150,14 +13153,13 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	(	'$lgt_pp_dcl_'(_) ->
 		true
 	;	% standalone category with no local or inherited predicate declarations
+		'$lgt_pp_dynamic_' ->
+		% dynamic category
+		true
+	;	% generate a catchall clause for static categories
 		'$lgt_pp_category_'(_, _, Dcl, _, _, _),
-		(	'$lgt_pp_dynamic_' ->
-			% dynamic category
-			true
-		;	% generate a catchall clause for static categories
-			functor(Head, Dcl, 5),
-			assertz('$lgt_pp_dcl_'((Head:-fail)))
-		)
+		functor(Head, Dcl, 5),
+		assertz('$lgt_pp_dcl_'((Head:-fail)))
 	).
 
 
@@ -13207,11 +13209,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_gen_object_catchall_dcl_clauses'(true).
 
 '$lgt_gen_object_catchall_dcl_clauses'(false) :-
-	'$lgt_pp_object_'(_, _, Dcl, _, _, _, _, _, _, _, _),
 	(	'$lgt_pp_dynamic_' ->
 		% dynamic object
 		true
 	;	% generate a catchall clause for static objects
+		'$lgt_pp_object_'(_, _, Dcl, _, _, _, _, _, _, _, _),
 		functor(Head, Dcl, 4),
 		assertz('$lgt_pp_dcl_'((Head:-fail)))
 	).
@@ -13221,11 +13223,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_gen_object_catchall_def_clauses'(true).
 
 '$lgt_gen_object_catchall_def_clauses'(false) :-
-	'$lgt_pp_object_'(_, _, _, Def, _, _, _, _, _, _, _),
 	(	'$lgt_pp_dynamic_' ->
 		% dynamic object
 		true
 	;	% generate a catchall clause for static objects
+		'$lgt_pp_object_'(_, _, _, Def, _, _, _, _, _, _, _),
 		functor(Head, Def, 3),
 		assertz('$lgt_pp_final_def_'((Head:-fail)))
 	).
@@ -14477,8 +14479,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	(	'$lgt_prolog_feature'(encoding_directive, full),
 		'$lgt_pp_file_encoding_'(_, Encoding) ->
 		write_canonical(Stream, (:- encoding(Encoding))),
-		write(Stream, '.'),
-		nl(Stream)
+		write(Stream, '.\n')
 	;	true
 	).
 
@@ -14729,41 +14730,34 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	findall(EntityGoal, '$lgt_pp_entity_initialization_'(_, _, EntityGoal), EntityGoals),
 	findall(FileGoal, '$lgt_pp_file_initialization_'(FileGoal), FileGoals),
 	'$lgt_append'(EntityGoals, FileGoals, Goals),
-	'$lgt_list_to_conjunction'(Goals, Goals2),
-	'$lgt_remove_redundant_calls'(Goals2, Goal).
+	'$lgt_list_to_conjunction'(Goals, GoalConjunction),
+	'$lgt_remove_redundant_calls'(GoalConjunction, Goal).
+
 
 
 % converts a list of goals into a conjunction of goals
+%
+% the conjunction always ends with true/0 but that's not
+% an issue as usually the result is later simplified
 
-'$lgt_list_to_conjunction'([], true) :- !.
+'$lgt_list_to_conjunction'([], true).
 
-'$lgt_list_to_conjunction'([Goal], Goal) :- !.
-
-'$lgt_list_to_conjunction'([Goal1, Goal2| Goals], (Goal1, Rest)) :-
-	'$lgt_list_to_conjunction'([Goal2| Goals], Rest).
+'$lgt_list_to_conjunction'([Goal| Goals], (Goal, Conjunction)) :-
+	'$lgt_list_to_conjunction'(Goals, Conjunction).
 
 
 
 % converts a conjunction into a list of terms
 
-'$lgt_conjunction_to_list'(Conjunction, Terms) :-
-	'$lgt_conjunction_to_list'(Conjunction, Terms, _).
-
-
-'$lgt_conjunction_to_list'(Conjunction, Terms, N) :-
-	'$lgt_conjunction_to_list'(Conjunction, Terms, 1, N).
-
-
-'$lgt_conjunction_to_list'(Term, [Term], N, N) :-
+'$lgt_conjunction_to_list'(Term, [Term]) :-
 	var(Term),
 	!.
 
-'$lgt_conjunction_to_list'((Term, Conjunction), [Term| Terms], N0, N) :-
+'$lgt_conjunction_to_list'((Term, Conjunction), [Term| Terms]) :-
 	!,
-	N1 is N0 + 1,
-	'$lgt_conjunction_to_list'(Conjunction, Terms, N1, N).
+	'$lgt_conjunction_to_list'(Conjunction, Terms).
 
-'$lgt_conjunction_to_list'(Term, [Term], N, N).
+'$lgt_conjunction_to_list'(Term, [Term]).
 
 
 
