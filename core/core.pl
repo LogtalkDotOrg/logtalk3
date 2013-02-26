@@ -13952,11 +13952,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	fail.
 
 '$lgt_fix_synchronized_predicate_defs'(_) :-
-	retract('$lgt_pp_def_'(Clause)),
-	assertz('$lgt_pp_final_def_'(Clause)),
-	fail.
-
-'$lgt_fix_synchronized_predicate_defs'(_).
+	% link to the remaining '$lgt_pp_def_'/1 clauses
+	assertz(('$lgt_pp_final_def_'(Clause) :- '$lgt_pp_def_'(Clause))).
 
 
 '$lgt_fix_synchronized_predicate_ddefs'(DDef) :-
@@ -13972,11 +13969,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	fail.
 
 '$lgt_fix_synchronized_predicate_ddefs'(_) :-
-	retract('$lgt_pp_ddef_'(Clause)),
-	assertz('$lgt_pp_final_ddef_'(Clause)),
-	fail.
-
-'$lgt_fix_synchronized_predicate_ddefs'(_).
+	% link to the remaining '$lgt_pp_def_'/1 clauses
+	assertz(('$lgt_pp_final_ddef_'(Clause) :- '$lgt_pp_ddef_'(Clause))).
 
 
 
