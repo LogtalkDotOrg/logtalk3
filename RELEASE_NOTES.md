@@ -42,6 +42,9 @@ Prolog adapter and integration files
 * CHANGED: Representation of proprietary Prolog meta-directives to avoid
 unnecessary computations when compiling source files.
 
+* IMPROVED: Updated the SWI-Prolog adapter file with a bit more efficient
+implementation of the internal compiler predicate for reading file terms.
+
 
 3.00.0 Alpha 10 - February 25, 2013
 ===================================

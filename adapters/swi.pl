@@ -490,23 +490,47 @@ message_hook(discontiguous(_), _, _) :-			% SWI-Prolog discontiguous predicate
 
 % '$lgt_read_term'(@stream, -term, +list, -position)
 
-'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd) :-
-	(	logtalk_load_context(entity_type, module) ->
-		% compiling a module as an object
-		read_term(Stream, Term, [term_position(PositionBegin)| Options])
-	;	current_op(Priority, Specifier, (public)) ->
-		% workaround SWI-Prolog public/1 operator clash
-		setup_call_cleanup(
-			op(0, Specifier, (public)),
-			read_term(Stream, Term, [term_position(PositionBegin)| Options]),
-			op(Priority, Specifier, (public))
-		)
-	;	%  public/1 operator not present (likely an old SWI-Prolog version)
-		read_term(Stream, Term, [term_position(PositionBegin)| Options])
-	),
-	stream_position_data(line_count, PositionBegin, LineBegin),
-	stream_property(Stream, position(PositionEnd)),
-	stream_position_data(line_count, PositionEnd, LineEnd).
+:- if(current_op(1150, fx, (public))).
+
+	% the public operator was added to SWI-Prolog on version 5.11.9
+	'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd) :-
+		(	logtalk_load_context(entity_type, module) ->
+			% compiling a module as an object
+			read_term(Stream, Term, [term_position(PositionBegin)| Options])
+		;	% workaround SWI-Prolog public/1 operator clash
+			setup_call_cleanup(
+				op(0, fx, (public)),
+				read_term(Stream, Term, [term_position(PositionBegin)| Options]),
+				op(1150, fx, (public))
+			)
+		),
+		stream_position_data(line_count, PositionBegin, LineBegin),
+		stream_property(Stream, position(PositionEnd)),
+		stream_position_data(line_count, PositionEnd, LineEnd).
+
+:- else.
+
+	% just in case the operator definition changes or is removed,
+	% we also provide a more generic definition of this predicate
+	'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd) :-
+		(	logtalk_load_context(entity_type, module) ->
+			% compiling a module as an object
+			read_term(Stream, Term, [term_position(PositionBegin)| Options])
+		;	current_op(Priority, Specifier, (public)) ->
+			% workaround SWI-Prolog public/1 operator clash
+			setup_call_cleanup(
+				op(0, Specifier, (public)),
+				read_term(Stream, Term, [term_position(PositionBegin)| Options]),
+				op(Priority, Specifier, (public))
+			)
+		;	% public/1 operator not present (likely an old SWI-Prolog version)
+			read_term(Stream, Term, [term_position(PositionBegin)| Options])
+		),
+		stream_position_data(line_count, PositionBegin, LineBegin),
+		stream_property(Stream, position(PositionEnd)),
+		stream_position_data(line_count, PositionEnd, LineEnd).
+
+:- endif.
 
 
 
