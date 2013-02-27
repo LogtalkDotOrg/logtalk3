@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Open Prolog 1.1b5
-%  Last updated on February 22, 2013
+%  Last updated on February 27, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -231,9 +231,9 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 	fail.
 
 
-% '$lgt_prolog_meta_directive'(@callable)
+% '$lgt_prolog_meta_directive'(@callable, @callable)
 
-'$lgt_prolog_meta_directive'(_) :-
+'$lgt_prolog_meta_directive'(_, _) :-
 	fail.
 
 

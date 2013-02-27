@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SICStus Prolog 4.1.0 and later versions
-%  Last updated on February 22, 2013
+%  Last updated on February 27, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -146,9 +146,9 @@ forall(Generate, Test) :-
 '$lgt_prolog_meta_predicate'(use_module(_, _, _), use_module(*, *, *), predicate).
 
 
-% '$lgt_prolog_meta_directive'(@callable)
+% '$lgt_prolog_meta_directive'(@callable, @callable)
 
-'$lgt_prolog_meta_directive'(_) :-
+'$lgt_prolog_meta_directive'(_, _) :-
 	fail.
 
 

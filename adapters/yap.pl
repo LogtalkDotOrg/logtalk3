@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for YAP Prolog 6.0.2 and later versions
-%  Last updated on February 22, 2013
+%  Last updated on February 27, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -217,10 +217,10 @@ message_hook(clauses_not_together(_), _, _) :-	% YAP discontiguous predicate
 '$lgt_prolog_meta_predicate'(use_module(_, _, _), use_module(*, *, *), predicate).
 
 
-% '$lgt_prolog_meta_directive'(@callable)
+% '$lgt_prolog_meta_directive'(@callable, @callable)
 
-'$lgt_prolog_meta_directive'(initialization(0, *)).
-'$lgt_prolog_meta_directive'(thread_initialization(0)).
+'$lgt_prolog_meta_directive'(initialization(_, _), initialization(0, *)).
+'$lgt_prolog_meta_directive'(thread_initialization(_), thread_initialization(0)).
 
 
 

@@ -6023,20 +6023,20 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_term'(Term, Ctx) :-
 	(	var(Term) ->
 		throw(error(instantiantion_error, term(Term)))
-	;	% runtime creation of new entities; no term expansion
-		'$lgt_comp_ctx_mode'(Ctx, runtime) ->
+	;	'$lgt_comp_ctx_mode'(Ctx, runtime) ->
+		% runtime creation of new entities; no term expansion
 		(	callable(Term) ->
 			'$lgt_tr_expanded_term'(Term, Term, Ctx)
 		;	throw(error(type_error(callable, Term), term(Term)))
 		)
-	;	% source-file specific compiler hook
-		'$lgt_pp_hook_term_expansion_'(Term, ExpandedTerms) ->
+	;	'$lgt_pp_hook_term_expansion_'(Term, ExpandedTerms) ->
+		% source-file specific compiler hook
 		'$lgt_tr_expanded_terms'(ExpandedTerms, Term, Ctx)
-	;	% default compiler hook
-		'$lgt_hook_term_expansion_'(Term, ExpandedTerms) ->
+	;	'$lgt_hook_term_expansion_'(Term, ExpandedTerms) ->
+		% default compiler hook
 		'$lgt_tr_expanded_terms'(ExpandedTerms, Term, Ctx)
-	;	% dialect specific expansion
-		'$lgt_prolog_term_expansion'(Term, ExpandedTerms) ->
+	;	'$lgt_prolog_term_expansion'(Term, ExpandedTerms) ->
+		% dialect specific expansion
 		'$lgt_prolog_term_expansion_portability_warnings'(Term, ExpandedTerms),
 		'$lgt_tr_expanded_terms'(ExpandedTerms, Term, Ctx)
 	;	% no compiler hook defined
@@ -6305,8 +6305,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!.
 
 '$lgt_tr_directive'(Directive, Ctx) :-
-	'$lgt_term_template'(Directive, Meta),
-	'$lgt_prolog_meta_directive'(Meta),					% defined in the Prolog adapter files
+	'$lgt_prolog_meta_directive'(Directive, Meta),	% defined in the Prolog adapter files
 	!,
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 		'$lgt_compiler_flag'(portability, warning) ->
@@ -6327,7 +6326,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		),
 		assertz('$lgt_pp_directive_'(TDirective))
 	;	% the template is not usable, report it as an error
-		'$lgt_prolog_meta_directive'(Meta),
+		'$lgt_prolog_meta_directive'(_, Meta),
 		throw(error(domain_error(meta_predicate_template, Meta), directive(Directive)))
 	).
 
@@ -14488,8 +14487,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_write_encoding_directive'(Stream) :-
 	(	'$lgt_prolog_feature'(encoding_directive, full),
 		'$lgt_pp_file_encoding_'(_, Encoding) ->
-		write_canonical(Stream, (:- encoding(Encoding))),
-		write(Stream, '.\n')
+		write_canonical(Stream, (:- encoding(Encoding))), write(Stream, '.\n')
 	;	true
 	).
 

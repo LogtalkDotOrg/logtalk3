@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Qu-Prolog 9.0 and later versions
-%  Last updated on February 22, 2013
+%  Last updated on February 27, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -188,9 +188,9 @@ format_spec_('~', Stream, Arguments, Arguments) :-
 	!.
 
 
-% '$lgt_prolog_meta_directive'(@callable)
+% '$lgt_prolog_meta_directive'(@callable, @callable)
 
-'$lgt_prolog_meta_directive'(inline(0, 0)).
+'$lgt_prolog_meta_directive'(inline(_, _), inline(0, 0)).
 
 
 

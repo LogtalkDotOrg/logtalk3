@@ -124,9 +124,9 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 	fail.
 
 
-% '$lgt_prolog_meta_directive'(@callable)
+% '$lgt_prolog_meta_directive'(@callable, @callable)
 
-'$lgt_prolog_meta_directive'(_) :-
+'$lgt_prolog_meta_directive'(_, _) :-
 	fail.
 
 

@@ -31,7 +31,13 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* NEW: Interpret `false/0` also as a built-in method.
+* NEW: Interpret `false/0` as also a built-in method.
+
+Prolog adapter and integration files
+------------------------------------
+
+* CHANGED: Representation of proprietary Prolog meta-directives to avoid
+unnecessary computations when compiling source files.
 
 
 3.00.0 Alpha 10 - February 25, 2013

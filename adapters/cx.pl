@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for CxProlog 0.97.6 or a later version
-%  Last updated on February 22, 2013
+%  Last updated on February 27, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -151,9 +151,9 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 '$lgt_prolog_meta_predicate'(with_ivar(_, _, _), with_ivar(*, *, 0), predicate).
 
 
-% '$lgt_prolog_meta_directive'(@callable)
+% '$lgt_prolog_meta_directive'(@callable, @callable)
 
-'$lgt_prolog_meta_directive'(_) :-
+'$lgt_prolog_meta_directive'(_, _) :-
 	fail.
 
 

@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for PrologII+ 4.5 and later versions
-%  Last updated on February 22, 2013
+%  Last updated on February 27, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -131,9 +131,9 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 	fail.
 
 
-% '$lgt_prolog_meta_directive'(@callable)
+% '$lgt_prolog_meta_directive'(@callable, @callable)
 
-'$lgt_prolog_meta_directive'(_) :-
+'$lgt_prolog_meta_directive'(_, _) :-
 	fail.
 
 
@@ -454,26 +454,6 @@ callable(Term) :-
 
 '$lgt_read_term'(Stream, Term, Options, -1) :-
 	read_term(Stream, Term, Options).
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  Prolog non-standard built-in meta-predicates and meta-directives
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-% '$lgt_prolog_meta_predicate'(?callable, ?atom).
-
-'$lgt_prolog_meta_predicate'(_, _) :-
-	fail.
-
-
-% '$lgt_prolog_meta_directive'(@callable)
-
-'$lgt_prolog_meta_directive'(_) :-
-	fail.
 
 
 
