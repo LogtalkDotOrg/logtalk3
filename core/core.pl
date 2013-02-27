@@ -8323,14 +8323,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % translates a clause using different compilation contexts for the head and for the body;
 % this is required in order to correctly compile clauses for e.g. coinductive predicates
 
-'$lgt_tr_clause'(Clause, _, _) :-
-	\+ '$lgt_pp_entity'(_, _, _, _, _),
-	% clause occurs before an opening entity directive
-	!,
-	'$lgt_pp_term_location'(Location),
-	% copy it unchanged to the generated Prolog file
-	assertz('$lgt_pp_prolog_term_'(Clause, Location)).
-
 '$lgt_tr_clause'(Clause, HeadCtx, BodyCtx) :-
 	'$lgt_pp_entity'(Type, Entity, Prefix, _, _),
 	(	Type == object, compound(Entity) ->
@@ -8360,6 +8352,14 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!.
 
 '$lgt_tr_clause'(Clause, _, _) :-
+	\+ '$lgt_pp_entity'(_, _, _, _, _),
+	% clause occurs before an opening entity directive
+	!,
+	'$lgt_pp_term_location'(Location),
+	% copy it unchanged to the generated Prolog file
+	assertz('$lgt_pp_prolog_term_'(Clause, Location)).
+
+'$lgt_tr_clause'(Clause, _, _) :-
 	(	Clause = (Head :- _) ->
 		functor(Head, Functor, Arity)
 	;	functor(Clause, Functor, Arity)
@@ -8375,7 +8375,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_tr_clause'(Clause, _, _, _, _) :-
 	'$lgt_must_be'(clause, Clause),
-	'$lgt_pp_entity'(protocol, _, _, _, _),
+	'$lgt_pp_protocol_'(_, _, _, _, _),
 	% protocols cannot contain predicate definitions
 	(	Clause = (Head:-_)
 	;	Clause = Head
@@ -10083,7 +10083,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	throw(type_error(parametric_entity, Entity)).
 
 '$lgt_tr_body'(parameter(Arg, Value), TPred, '$lgt_debug'(goal(parameter(Arg, Value), DPred), ExCtx), Ctx) :-
-	'$lgt_pp_entity'(object, _, _, _, _),
+	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
 	!,
 	'$lgt_comp_ctx_this'(Ctx, This),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
@@ -10104,7 +10104,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	).
 
 '$lgt_tr_body'(parameter(Arg, Value), TPred, '$lgt_debug'(goal(parameter(Arg, Value), TPred), ExCtx), Ctx) :-
-	'$lgt_pp_entity'(category, Ctg, _, _, _),
+	'$lgt_pp_category_'(Ctg, _, _, _, _, _),
 	!,
 	'$lgt_comp_ctx_this'(Ctx, This),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
@@ -10973,7 +10973,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_optimizable_local_db_call'(Pred, TPred) :-
 	nonvar(Pred),
 	% only for objects...
-	'$lgt_pp_entity'(object, _, Prefix, _, _),
+	'$lgt_pp_object_'(_, Prefix, _, _, _, _, _, _, _, _, _),
 	% not compiled in debug mode
 	'$lgt_compiler_flag'(debug, off),
 	% only for facts
@@ -12971,7 +12971,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_gen_def_table_clauses' :-
 	% categories cannot contain clauses for dynamic predicates;
 	% thus, in this case, we look only into objects
-	'$lgt_pp_entity'(object, _, Prefix, _, _),
+	'$lgt_pp_object_'(_, Prefix, _, _, _, _, _, _, _, _, _),
 	'$lgt_pp_dynamic_'(Functor, Arity),
 	\+ '$lgt_pp_defines_predicate_'(Functor, Arity, _, _),
 	% dynamic predicate with no initial set of clauses
