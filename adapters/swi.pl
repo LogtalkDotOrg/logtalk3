@@ -490,17 +490,18 @@ message_hook(discontiguous(_), _, _) :-			% SWI-Prolog discontiguous predicate
 
 % '$lgt_read_term'(@stream, -term, +list, -position)
 
-% workaround SWI-Prolog public/1 operator clash
 '$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd) :-
-	(	current_op(Priority, Specifier, (public)),
-		\+ logtalk_load_context(entity_type, module) ->
-		% not compiling a module as an object
+	(	logtalk_load_context(entity_type, module) ->
+		% compiling a module as an object
+		read_term(Stream, Term, [term_position(PositionBegin)| Options])
+	;	current_op(Priority, Specifier, (public)) ->
+		% workaround SWI-Prolog public/1 operator clash
 		setup_call_cleanup(
 			op(0, Specifier, (public)),
 			read_term(Stream, Term, [term_position(PositionBegin)| Options]),
 			op(Priority, Specifier, (public))
 		)
-	;	% compiling a module as an object
+	;	%  public/1 operator not present (likely an old SWI-Prolog version)
 		read_term(Stream, Term, [term_position(PositionBegin)| Options])
 	),
 	stream_position_data(line_count, PositionBegin, LineBegin),
