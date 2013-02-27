@@ -33,6 +33,9 @@ Logtalk compiler and runtime
 
 * NEW: Interpret `false/0` as also a built-in method.
 
+* CHANGED: Representation used in table of supported directives to avoid
+unnecessary computations when compiling source files.
+
 Prolog adapter and integration files
 ------------------------------------
 
