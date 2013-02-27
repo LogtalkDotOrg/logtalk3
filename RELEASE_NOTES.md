@@ -25,6 +25,15 @@ RELEASE NOTES
 =============
 
 
+3.00.0 Alpha 11 - March ??, 2013
+================================
+
+Logtalk compiler and runtime
+----------------------------
+
+* NEW: Interpret `false/0` also as a built-in method.
+
+
 3.00.0 Alpha 10 - February 25, 2013
 ===================================
 

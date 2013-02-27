@@ -9008,6 +9008,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
 
+'$lgt_tr_body'(false, false, '$lgt_debug'(goal(false, false), ExCtx), Ctx) :-
+	!,
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
+
 '$lgt_tr_body'(repeat, repeat, '$lgt_debug'(goal(repeat, repeat), ExCtx), Ctx) :-
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
@@ -11168,6 +11172,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_msg'(fail, Obj, ('$lgt_object_exists'(Obj, fail, This), fail), This) :-
 	!.
 
+'$lgt_tr_msg'(false, Obj, ('$lgt_object_exists'(Obj, false, This), false), This) :-
+	!.
+
 '$lgt_tr_msg'(repeat, Obj, ('$lgt_object_exists'(Obj, repeat, This), repeat), This) :-
 	!.
 
@@ -11335,6 +11342,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!.
 
 '$lgt_tr_self_msg'(true, true, _, _) :-
+	!.
+
+'$lgt_tr_self_msg'(false, false, _, _) :-
 	!.
 
 '$lgt_tr_self_msg'(fail, fail, _, _) :-
@@ -15470,6 +15480,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_built_in_method'(!, 0, p(p(p)), no, 1).
 '$lgt_built_in_method'(true, 0, p(p(p)), no, 1).
 '$lgt_built_in_method'(fail, 0, p(p(p)), no, 1).
+'$lgt_built_in_method'(false, 0, p(p(p)), no, 1).
 '$lgt_built_in_method'(repeat, 0, p(p(p)), no, 1).
 % exception handling methods
 '$lgt_built_in_method'(catch, 3, p, catch(0, *, 0), 1).
