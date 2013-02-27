@@ -8775,9 +8775,13 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 % translate the head of a clause of another entity predicate (which we assume declared multifile)
 
+'$lgt_tr_head'(Other::Head, _, _) :-
+	'$lgt_must_be'(entity_identifier, Other),
+	'$lgt_must_be'(callable, Head),
+	fail.
+
 '$lgt_tr_head'(user::Head, Head, Ctx) :-
 	!,
-	'$lgt_must_be'(callable, Head),
 	functor(Head, Functor, Arity),
 	(	'$lgt_pp_directive_'(multifile(Functor/Arity)) ->
 		true
@@ -8799,8 +8803,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_tr_head'(Other::Head, THead, Ctx) :-
 	!,
-	'$lgt_must_be'(entity_identifier, Other),
-	'$lgt_must_be'(callable, Head),
 	functor(Head, Functor, Arity),
 	'$lgt_construct_entity_prefix'(Other, Prefix),
 	'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
