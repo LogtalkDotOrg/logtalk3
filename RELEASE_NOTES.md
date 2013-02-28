@@ -43,7 +43,7 @@ Prolog adapter and integration files
 unnecessary computations when compiling source files.
 
 * CHANGED: Updated the default Prolog loader options for XSB to include
-`-verbo`, `+canonical`.
+`-verbo` and `+canonical`.
 
 * IMPROVED: Updated the SWI-Prolog adapter file with a bit more efficient
 implementation of the internal compiler predicate for reading file terms.

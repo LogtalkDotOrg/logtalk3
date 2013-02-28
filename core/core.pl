@@ -287,7 +287,7 @@
 :- dynamic('$lgt_pp_entity_aux_clause_'/1).					% '$lgt_pp_entity_aux_clause_'(Clause)
 :- dynamic('$lgt_pp_final_entity_aux_clause_'/1).			% '$lgt_pp_final_entity_aux_clause_'(Clause)
 
-:- dynamic('$lgt_pp_clause_number_'/3).						% '$lgt_pp_clause_number_'(TFunctor, TArity, Number)
+:- dynamic('$lgt_pp_number_of_clauses_'/3).					% '$lgt_pp_number_of_clauses_'(Functor, Arity, Number)
 
 :- dynamic('$lgt_pp_defines_predicate_'/4).					% '$lgt_pp_defines_predicate_'(Functor, Arity, TFunctor, TArity)
 :- dynamic('$lgt_pp_defines_annotation_'/2).				% '$lgt_pp_defines_annotation_'(Functor, Arity)
@@ -5727,7 +5727,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	retractall('$lgt_pp_final_entity_clause_'(_, _)),
 	retractall('$lgt_pp_entity_aux_clause_'(_)),
 	retractall('$lgt_pp_final_entity_aux_clause_'(_)),
-	retractall('$lgt_pp_clause_number_'(_,_,_)),
+	retractall('$lgt_pp_number_of_clauses_'(_,_,_)),
 	retractall('$lgt_pp_redefined_built_in_'(_, _, _)),
 	retractall('$lgt_pp_defines_predicate_'(_, _, _, _)),
 	retractall('$lgt_pp_defines_annotation_'(_, _)),
@@ -8428,10 +8428,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	% not the first clause, i.e. auxiliary clause already compiled
 	'$lgt_pp_defines_predicate_'(Functor, Arity, _, _),
 	!,
-	'$lgt_comp_ctx_prefix'(HeadCtx, Prefix),
-	'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
-	functor(THead, TFunctor, TArity),
-	'$lgt_clause_number'(THead, N),
+	'$lgt_clause_number'(Head, N),
 	'$lgt_update_predicate_line_clauses_property'(N, Head),
 	'$lgt_tr_clause'((CoinductiveHead :- Body), TClause, DClause, HeadCtx, BodyCtx).
 
@@ -8454,10 +8451,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		N = 0
 	;	'$lgt_pp_coinductive_'(DHead, Head, _) ->
 		% use the original coinductive predicate head
-		'$lgt_clause_number'(THead, N)
+		'$lgt_clause_number'(Head, N)
 	;	% not a coinduction predicate
 		DHead = Head,
-		'$lgt_clause_number'(THead, N)
+		'$lgt_clause_number'(Head, N)
 	),
 	'$lgt_comp_ctx_exec_ctx'(HeadCtx, ExCtx),
 	'$lgt_update_predicate_line_clauses_property'(N, Head).
@@ -8483,10 +8480,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		N = 0
 	;	'$lgt_pp_coinductive_'(DHead, Head, _) ->
 		% use the original coinductive predicate head
-		'$lgt_clause_number'(THead, N)
+		'$lgt_clause_number'(Head, N)
 	;	% not a coinduction predicate
 		DHead = Head,
-		'$lgt_clause_number'(THead, N)
+		'$lgt_clause_number'(Head, N)
 	),
 	'$lgt_comp_ctx_exec_ctx'(HeadCtx, ExCtx),
 	'$lgt_update_predicate_line_clauses_property'(N, Head).
@@ -8531,18 +8528,18 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_pp_entity'(_, Entity, _),
 	'$lgt_tr_head'(Fact, TFact, HeadCtx),
 	'$lgt_comp_ctx_exec_ctx'(HeadCtx, ExCtx),
-	'$lgt_clause_number'(TFact, N),
+	'$lgt_clause_number'(Fact, N),
 	'$lgt_update_predicate_line_clauses_property'(N, Fact).
 
 
-'$lgt_clause_number'(THead, N) :-
-	functor(THead, TFunctor, TArity),
-	(	retract('$lgt_pp_clause_number_'(TFunctor, TArity, N0)) ->
+'$lgt_clause_number'(Head, N) :-
+	functor(Head, Functor, Arity),
+	(	retract('$lgt_pp_number_of_clauses_'(Functor, Arity, N0)) ->
 		N is N0 + 1
 	;	% first clause found for this predicate
 		N = 1
 	),
-	assertz('$lgt_pp_clause_number_'(TFunctor, TArity, N)).
+	assertz('$lgt_pp_number_of_clauses_'(Functor, Arity, N)).
 
 
 '$lgt_update_predicate_line_clauses_property'(_, _) :-
@@ -8594,8 +8591,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!.
 
 '$lgt_add_entity_predicate_properties'(Entity) :-
-	'$lgt_pp_defines_predicate_'(Functor, Arity, TFunctor, TArity),
-		'$lgt_pp_clause_number_'(TFunctor, TArity, N),
+	'$lgt_pp_number_of_clauses_'(Functor, Arity, N),
 		once(retract('$lgt_pp_predicate_property_'(Entity, Functor/Arity, lines_clauses(DclLine,DefLine,_)))),
 		assertz('$lgt_pp_predicate_property_'(Entity, Functor/Arity, lines_clauses(DclLine,DefLine,N))),
 	fail.
