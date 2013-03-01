@@ -8522,6 +8522,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	% not the first clause, i.e. auxiliary clause already compiled
 	'$lgt_pp_defines_predicate_'(Functor, Arity, _, _),
 	!,
+	'$lgt_clause_number'(Fact, N),
+	'$lgt_update_predicate_line_clauses_property'(N, Fact),
 	'$lgt_tr_clause'(CoinductiveFact, TFact, DFact, HeadCtx, BodyCtx).
 
 '$lgt_tr_clause'(Fact, TFact, (TFact:-'$lgt_debug'(fact(Entity, Fact, N), ExCtx)), HeadCtx, _) :-

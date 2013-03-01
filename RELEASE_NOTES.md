@@ -36,6 +36,9 @@ Logtalk compiler and runtime
 * CHANGED: Representation used in table of supported directives to avoid
 unnecessary computations when compiling source files.
 
+* FIXED: Bug where the `number_of_clauses/1` property value would not be
+correct for coinductive predicates define also by facts.
+
 Prolog adapter and integration files
 ------------------------------------
 
