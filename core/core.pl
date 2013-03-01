@@ -8570,6 +8570,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_update_predicate_line_clauses_property'(user::Head, N).
 
 '$lgt_update_predicate_line_clauses_property'(Head, 1) :-
+	!,
 	(	'$lgt_pp_term_position_'(Line-_) ->
 		'$lgt_pp_entity'(_, Entity, _),
 		functor(Head, Functor, Arity),
