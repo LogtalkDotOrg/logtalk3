@@ -289,7 +289,7 @@
 
 :- dynamic('$lgt_pp_number_of_clauses_'/3).					% '$lgt_pp_number_of_clauses_'(Functor, Arity, Number)
 
-:- dynamic('$lgt_pp_defines_predicate_'/4).					% '$lgt_pp_defines_predicate_'(Functor, Arity, TFunctor, TArity)
+:- dynamic('$lgt_pp_defines_predicate_'/5).					% '$lgt_pp_defines_predicate_'(Functor, Arity, TFunctor, TArity, Mode)
 :- dynamic('$lgt_pp_defines_annotation_'/2).				% '$lgt_pp_defines_annotation_'(Functor, Arity)
 :- dynamic('$lgt_pp_defines_annotated_predicate_'/2).		% '$lgt_pp_defines_annotated_predicate_'(Functor, Arity)
 :- dynamic('$lgt_pp_calls_predicate_'/5).					% '$lgt_pp_calls_predicate_'(Functor, Arity, TFunctor, TArity, Lines)
@@ -5729,7 +5729,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	retractall('$lgt_pp_final_entity_aux_clause_'(_)),
 	retractall('$lgt_pp_number_of_clauses_'(_,_,_)),
 	retractall('$lgt_pp_redefined_built_in_'(_, _, _)),
-	retractall('$lgt_pp_defines_predicate_'(_, _, _, _)),
+	retractall('$lgt_pp_defines_predicate_'(_, _, _, _, _)),
 	retractall('$lgt_pp_defines_annotation_'(_, _)),
 	retractall('$lgt_pp_defines_annotated_predicate_'(_, _)),
 	retractall('$lgt_pp_calls_predicate_'(_, _, _, _, _)),
@@ -6351,7 +6351,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_directive'(Directive, Ctx) :-
 	'$lgt_pp_module_'(_),
 	% we're compiling a module as an object
-	(	functor(Directive, Functor, Arity), '$lgt_pp_defines_predicate_'(Functor, Arity, _, _)
+	(	functor(Directive, Functor, Arity), '$lgt_pp_defines_predicate_'(Functor, Arity, _, _, _)
 	;	'$lgt_pp_uses_predicate_'(_, _, Directive)
 		% directive is a query for a locally defined predicate
 	;	'$lgt_pp_use_module_predicate_'(_, _, Directive)
@@ -8426,11 +8426,12 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_pp_coinductive_'(Head, CoinductiveHead, _),
 	functor(Head, Functor, Arity),
 	% not the first clause, i.e. auxiliary clause already compiled
-	'$lgt_pp_defines_predicate_'(Functor, Arity, _, _),
+	'$lgt_pp_defines_predicate_'(Functor, Arity, _, _, _),
 	!,
 	'$lgt_clause_number'(Head, N),
 	'$lgt_update_predicate_line_clauses_property'(N, Head),
-	'$lgt_tr_clause'((CoinductiveHead :- Body), TClause, DClause, HeadCtx, BodyCtx).
+	'$lgt_comp_ctx_mode_new_mode'(HeadCtx, compile(aux), HeadCtxAux),
+	'$lgt_tr_clause'((CoinductiveHead :- Body), TClause, DClause, HeadCtxAux, BodyCtx).
 
 '$lgt_tr_clause'((Head:-Body), (THead:-'$lgt_nop'(Body), SBody), (THead:-'$lgt_nop'(Body),'$lgt_debug'(rule(Entity, DHead, N), ExCtx),DBody), HeadCtx, BodyCtx) :-
 	functor(Head, Functor, Arity),
@@ -8520,11 +8521,12 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_pp_coinductive_'(Fact, CoinductiveFact, _),
 	functor(Fact, Functor, Arity),
 	% not the first clause, i.e. auxiliary clause already compiled
-	'$lgt_pp_defines_predicate_'(Functor, Arity, _, _),
+	'$lgt_pp_defines_predicate_'(Functor, Arity, _, _, _),
 	!,
 	'$lgt_clause_number'(Fact, N),
 	'$lgt_update_predicate_line_clauses_property'(N, Fact),
-	'$lgt_tr_clause'(CoinductiveFact, TFact, DFact, HeadCtx, BodyCtx).
+	'$lgt_comp_ctx_mode_new_mode'(HeadCtx, compile(aux), HeadCtxAux),
+	'$lgt_tr_clause'(CoinductiveFact, TFact, DFact, HeadCtxAux, BodyCtx).
 
 '$lgt_tr_clause'(Fact, TFact, (TFact:-'$lgt_debug'(fact(Entity, Fact, N), ExCtx)), HeadCtx, _) :-
 	'$lgt_pp_entity'(_, Entity, _),
@@ -8593,9 +8595,13 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!.
 
 '$lgt_add_entity_predicate_properties'(Entity) :-
-	'$lgt_pp_number_of_clauses_'(Functor, Arity, N),
+	'$lgt_pp_defines_predicate_'(Functor, Arity, _, _, Mode),
+	(	Mode == compile(aux) ->
+		retractall('$lgt_pp_predicate_property_'(Entity, Functor/Arity, lines_clauses(_,_,_)))
+	;	'$lgt_pp_number_of_clauses_'(Functor, Arity, N),
 		once(retract('$lgt_pp_predicate_property_'(Entity, Functor/Arity, lines_clauses(DclLine,DefLine,_)))),
-		assertz('$lgt_pp_predicate_property_'(Entity, Functor/Arity, lines_clauses(DclLine,DefLine,N))),
+		assertz('$lgt_pp_predicate_property_'(Entity, Functor/Arity, lines_clauses(DclLine,DefLine,N)))
+	),
 	fail.
 
 '$lgt_add_entity_predicate_properties'(Entity) :-
@@ -10536,7 +10542,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	functor(Pred, Functor, Arity),
 	(	'$lgt_comp_ctx_mode'(Ctx, runtime) ->
 		true
-	;	\+ '$lgt_pp_defines_predicate_'(Functor, Arity, _, _),
+	;	\+ '$lgt_pp_defines_predicate_'(Functor, Arity, _, _, _),
 		\+ '$lgt_pp_public_'(Functor, Arity),
 		\+ '$lgt_pp_protected_'(Functor, Arity),
 		\+ '$lgt_pp_private_'(Functor, Arity),
@@ -10579,7 +10585,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	(	'$lgt_comp_ctx_mode'(Ctx, runtime) ->
 		TPred = Pred
 	;	functor(Pred, Functor, Arity),
-		\+ '$lgt_pp_defines_predicate_'(Functor, Arity, _, _),
+		\+ '$lgt_pp_defines_predicate_'(Functor, Arity, _, _, _),
 		\+ '$lgt_pp_public_'(Functor, Arity),
 		\+ '$lgt_pp_protected_'(Functor, Arity),
 		\+ '$lgt_pp_private_'(Functor, Arity),
@@ -12682,11 +12688,12 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % for auxiliary predicates (using the logtalk::compile_aux_clauses/1 hook predicate)
 
 '$lgt_remember_predicate'(Functor, Arity, Ctx) :-
-	(	'$lgt_pp_defines_predicate_'(Functor, Arity, _, _) ->
+	'$lgt_comp_ctx_mode'(Ctx, Mode),
+	(	'$lgt_pp_defines_predicate_'(Functor, Arity, _, _, _) ->
 		% not the first clause for the predicate
 		(	'$lgt_pp_previous_predicate_'(PreviousFunctor, PreviousArity),
 			PreviousFunctor/PreviousArity \== Functor/Arity,
-			\+ '$lgt_comp_ctx_mode'(Ctx, compile(aux)) ->
+			Mode \== compile(aux) ->
 			% clauses for the predicate are discontiguous
 			'$lgt_check_discontiguous_directive'(Functor, Arity)
 		;	% more clauses for the same predicate
@@ -12695,10 +12702,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	% first clause for this predicate; remember it
 		'$lgt_comp_ctx_prefix'(Ctx, Prefix),
 		'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
-		asserta('$lgt_pp_defines_predicate_'(Functor, Arity, TFunctor, TArity)),
+		asserta('$lgt_pp_defines_predicate_'(Functor, Arity, TFunctor, TArity, Mode)),
 		retractall('$lgt_pp_non_portable_predicate_'(Functor, Arity, _))
 	),
-	(	'$lgt_comp_ctx_mode'(Ctx, compile(aux)) ->
+	(	Mode == compile(aux) ->
 		true
 	;	retractall('$lgt_pp_previous_predicate_'(_, _)),
 		asserta('$lgt_pp_previous_predicate_'(Functor, Arity))
@@ -12979,7 +12986,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	'$lgt_pp_private_'(Functor, Arity)
 	),
 	\+ '$lgt_pp_dynamic_'(Functor, Arity),
-	\+ '$lgt_pp_defines_predicate_'(Functor, Arity, _, _),
+	\+ '$lgt_pp_defines_predicate_'(Functor, Arity, _, _, _),
 	\+ '$lgt_pp_defines_annotated_predicate_'(Functor, Arity),
 	\+ '$lgt_pp_dynamic_',
 	% declared, static, but undefined predicate;
@@ -12993,7 +13000,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	% thus, in this case, we look only into objects
 	'$lgt_pp_object_'(_, Prefix, _, _, _, _, _, _, _, _, _),
 	'$lgt_pp_dynamic_'(Functor, Arity),
-	\+ '$lgt_pp_defines_predicate_'(Functor, Arity, _, _),
+	\+ '$lgt_pp_defines_predicate_'(Functor, Arity, _, _, _),
 	% dynamic predicate with no initial set of clauses
 	functor(Head, Functor, Arity),
 	'$lgt_comp_ctx_prefix'(Ctx, Prefix),
@@ -13010,7 +13017,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_pp_entity'(_, _, Prefix),
 	'$lgt_comp_ctx_prefix'(Ctx, Prefix),
 	'$lgt_pp_defines_annotated_predicate_'(Functor, Arity),
-	\+ '$lgt_pp_defines_predicate_'(Functor, Arity, _, _),
+	\+ '$lgt_pp_defines_predicate_'(Functor, Arity, _, _, _),
 	functor(Head, Functor, Arity),
 	once((	'$lgt_pp_public_'(Functor, Arity)
 		 ;	'$lgt_pp_protected_'(Functor, Arity)
@@ -14076,7 +14083,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_fix_predicate_calls'('$lgt_coinductive_success_hook'(Head, Hypothesis, ExCtx, HeadStack, BodyStack), Pred, _) :-
 	!,
-	(	'$lgt_pp_defines_predicate_'(coinductive_success_hook, 2, TFunctor, TArity) ->
+	(	'$lgt_pp_defines_predicate_'(coinductive_success_hook, 2, TFunctor, TArity, _) ->
 		(	functor(THead, TFunctor, TArity),
 			arg(1, THead, Head),
 			arg(2, THead, Hypothesis),
@@ -14085,7 +14092,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 			Pred = ((HeadStack = BodyStack), THead)
 		;	Pred = (HeadStack = BodyStack)
 		)
-	;	'$lgt_pp_defines_predicate_'(coinductive_success_hook, 1, TFunctor, TArity) ->
+	;	'$lgt_pp_defines_predicate_'(coinductive_success_hook, 1, TFunctor, TArity, _) ->
 		(	functor(THead, TFunctor, TArity),
 			arg(1, THead, Head),
 			arg(2, THead, ExCtx),
@@ -14318,7 +14325,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_undefined_predicate_call'(Functor/Arity, TFunctor/TArity, Lines) :-
 	'$lgt_pp_calls_predicate_'(Functor, Arity, TFunctor, TArity, Lines),
-	\+ '$lgt_pp_defines_predicate_'(Functor, Arity, _, _),
+	\+ '$lgt_pp_defines_predicate_'(Functor, Arity, _, _, _),
 	\+ '$lgt_pp_defines_annotation_'(Functor, Arity),
 	\+ '$lgt_pp_defines_annotated_predicate_'(Functor, Arity),
 	% predicate not defined in object/category
@@ -14342,7 +14349,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	% non-terminal not defined in object/category
 	ExtArity is Arity + 2,
 	% no corresponding predicate is defined
-	\+ '$lgt_pp_defines_predicate_'(Functor, ExtArity, _, _),
+	\+ '$lgt_pp_defines_predicate_'(Functor, ExtArity, _, _, _),
 	\+ '$lgt_pp_dynamic_'(Functor, ExtArity),
 	% no dynamic directive for the corresponding predicate
 	\+ '$lgt_pp_multifile_'(Functor, ExtArity, _),
@@ -14439,7 +14446,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_misspelt_predicate_call'(Functor/Arity, Lines) :-
 	'$lgt_pp_calls_predicate_'(Functor, Arity, _, _, Lines),
-	\+ '$lgt_pp_defines_predicate_'(Functor, Arity, _, _),
+	\+ '$lgt_pp_defines_predicate_'(Functor, Arity, _, _, _),
 	\+ '$lgt_pp_defines_annotation_'(Functor, Arity),
 	\+ '$lgt_pp_defines_annotated_predicate_'(Functor, Arity),
 	\+ '$lgt_pp_dynamic_'(Functor, Arity),
@@ -14464,7 +14471,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_pp_calls_non_terminal_'(Functor, Arity, Lines),
 	\+ '$lgt_pp_defines_non_terminal_'(Functor, Arity),
 	ExtArity is Arity + 2,
-	\+ '$lgt_pp_defines_predicate_'(Functor, ExtArity, _, _),
+	\+ '$lgt_pp_defines_predicate_'(Functor, ExtArity, _, _, _),
 	\+ '$lgt_pp_dynamic_'(Functor, ExtArity),
 	\+ '$lgt_pp_public_'(Functor, ExtArity),
 	\+ '$lgt_pp_protected_'(Functor, ExtArity),
@@ -15654,6 +15661,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_comp_ctx_stack'(ctx(_, _, _, _, _, _, _, _, _, Stack), Stack).	% stack of coinductive hypothesis (ancestor goals)
 
 '$lgt_comp_ctx_stack_new_stack'(ctx(Head, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, _, Mode, _), NewStack, ctx(Head, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, _, Mode, NewStack)).
+
+'$lgt_comp_ctx_mode_new_mode'(ctx(Head, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, _, Stack), NewMode, ctx(Head, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, NewMode, Stack)).
 
 
 
