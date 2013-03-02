@@ -52,18 +52,8 @@ false.
 % but not all solutions can be returned:
 
 | ?- binary::p(X).
-X = [0|_S1], % where
-    _S1 = [0|_S1] ;
-X = [0, 1|_S1], % where
-    _S1 = [1|_S1] ;
-X = [0|_S1], % where
-    _S1 = [1, 0|_S1] ;
-X = [1|_S1], % where
-    _S1 = [1|_S1] ;
-X = [1, 0|_S1], % where
-    _S1 = [0|_S1] ;
-X = [1|_S1], % where
-    _S1 = [0, 1|_S1] ;
+X = [0|X] ;
+X = [1|X] ;
 false.
 
 
