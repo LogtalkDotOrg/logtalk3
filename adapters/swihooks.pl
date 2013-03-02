@@ -7,7 +7,7 @@
 %  load Logtalk files using SWI Prolog consult/1, to support edit/1 and
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
-%  Last updated on February 22, 2013
+%  Last updated on March 2, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -512,9 +512,13 @@ user:portray(c(This, r(Sender, Self, MetaVars, CoinductionStack))) :-
 
 '$lgt_swi_unify_clause_body'(Goal, _, TGoal, TermPos, TermPos) :-	% object and category user predicates
 	'$lgt_decompile_predicate_heads'(TGoal, GoalEntity, Goal0),
-	(	functor(Goal0, Functor0, _),
-		atom_concat(Functor1, '__sync', Functor0) ->
+	functor(Goal0, Functor0, _),
+	(	atom_concat(Functor1, '__sync', Functor0) ->
 		% synchronized predicate
+		Goal0 =.. [Functor0| Args],
+		Goal1 =.. [Functor1| Args]
+	;	atom_concat(Functor1, '__coinductive', Functor0) ->
+		% coinductive predicate
 		Goal0 =.. [Functor0| Args],
 		Goal1 =.. [Functor1| Args]
 	;	Goal1 = Goal0

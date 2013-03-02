@@ -59,6 +59,8 @@ unnecessary computations when compiling source files.
 * IMPROVED: Updated the SWI-Prolog adapter file with a bit more efficient
 implementation of the internal compiler predicate for reading file terms.
 
+* UPDATED: The SWI-Prolog hooks integration file to also be able to decompile
+calls to the auxiliary predicates generated for coinductive predicates.
 
 3.00.0 Alpha 10 - February 25, 2013
 ===================================
