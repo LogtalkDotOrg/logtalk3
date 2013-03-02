@@ -14084,7 +14084,12 @@ current_logtalk_flag(version, version(3, 0, 0)).
 			arg(1, THead, Head),
 			arg(2, THead, Hypothesis),
 			arg(3, THead, ExCtx),
-			\+ \+ ('$lgt_pp_entity_clause_'(THead, _); '$lgt_pp_entity_clause_'((THead :- _), _)) ->
+			\+ \+ (
+				'$lgt_pp_entity_clause_'(THead, _)
+			;	'$lgt_pp_entity_clause_'((THead :- _), _)
+			;	'$lgt_pp_final_entity_clause_'(THead, _)
+			;	'$lgt_pp_final_entity_clause_'((THead :- _), _)
+			) ->
 			Pred = ((HeadStack = BodyStack), THead)
 		;	Pred = (HeadStack = BodyStack)
 		)
@@ -14092,7 +14097,12 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		(	functor(THead, TFunctor, TArity),
 			arg(1, THead, Head),
 			arg(2, THead, ExCtx),
-			\+ \+ ('$lgt_pp_entity_clause_'(THead, _); '$lgt_pp_entity_clause_'((THead :- _), _)) ->
+			\+ \+ (
+				'$lgt_pp_entity_clause_'(THead, _)
+			;	'$lgt_pp_entity_clause_'((THead :- _), _)
+			;	'$lgt_pp_final_entity_clause_'(THead, _)
+			;	'$lgt_pp_final_entity_clause_'((THead :- _), _)
+			) ->
 			Pred = ((HeadStack = BodyStack), THead)
 		;	Pred = (HeadStack = BodyStack)
 		)
