@@ -784,7 +784,7 @@ protocol_property(Ptc, Prop) :-
 	),
 	findall(mode(Mode, Solutions), '$lgt_predicate_property_'(Entity, Functor/Arity, mode(Mode, Solutions)), Modes),
 	'$lgt_append'(Modes, Properties0, Properties1),
-	(	'$lgt_predicate_property_'(Entity, Functor/Arity, scope_line(Line)) ->
+	(	'$lgt_predicate_property_'(Entity, Functor/Arity, declaration_line(Line)) ->
 		Properties2 = [line_count(Line)| Properties1]
 	;	Properties2 = Properties1
 	),
@@ -817,36 +817,43 @@ protocol_property(Ptc, Prop) :-
 	).
 
 
-
 '$lgt_object_property_defines'(Obj, Def, DDef, Functor/Arity, Properties) :-
 	(	call(Def, Predicate, _, _)
 	;	call(DDef, Predicate, _, _)
 	),
 	functor(Predicate, Functor, Arity),
-	(	'$lgt_predicate_property_'(Obj, Functor/Arity, line_clauses(Line,N)) ->
+	(	'$lgt_predicate_property_'(Obj, Functor/Arity, auxiliary),
+		'$lgt_predicate_property_'(Obj, Functor/Arity, number_of_clauses(N)) ->
+		Properties = [auxiliary, number_of_clauses(N)]
+	;	'$lgt_predicate_property_'(Obj, Functor/Arity, definition_line(Line)),
+		'$lgt_predicate_property_'(Obj, Functor/Arity, number_of_clauses(N)) ->
 		Properties = [line_count(Line), number_of_clauses(N)]
 	;	Properties = []
 	).
 
 
 '$lgt_category_property_defines'(Ctg, Def, Functor/Arity, Properties) :-
-	call(Def, Predicate, _, _, Ctg),
+	call(Def, Predicate, _, _),
 	functor(Predicate, Functor, Arity),
-	(	'$lgt_predicate_property_'(Ctg, Functor/Arity, line_clauses(Line,N)) ->
+	(	'$lgt_pp_predicate_property_'(Ctg, Functor/Arity, auxiliary),
+		'$lgt_predicate_property_'(Ctg, Functor/Arity, number_of_clauses(N)) ->
+		Properties = [auxiliary, number_of_clauses(N)]
+	;	'$lgt_predicate_property_'(Ctg, Functor/Arity, definition_line(Line)),
+		'$lgt_predicate_property_'(Ctg, Functor/Arity, number_of_clauses(N)) ->
 		Properties = [line_count(Line), number_of_clauses(N)]
 	;	Properties = []
 	).
 
 
-
 '$lgt_entity_property_includes'(Entity, Functor/Arity, From, Properties) :-
-	'$lgt_predicate_property_'(Entity, Functor/Arity, line_clauses_from(Line, N, From)),
+	'$lgt_predicate_property_'(Entity, Functor/Arity, definition_line_from(Line, From)),
+	'$lgt_predicate_property_'(Entity, Functor/Arity, number_of_clauses_from(N, From)),
 	Properties = [line_count(Line), number_of_clauses(N)].
 
 
-
 '$lgt_entity_property_provides'(Entity, Functor/Arity, To, Properties) :-
-	'$lgt_predicate_property_'(To, Functor/Arity, line_clauses_from(Line, N, Entity)),
+	'$lgt_predicate_property_'(To, Functor/Arity, definition_line_from(Line, Entity)),
+	'$lgt_predicate_property_'(To, Functor/Arity, number_of_clauses_from(N, Entity)),
 	Properties = [line_count(Line), number_of_clauses(N)].
 
 
@@ -2282,7 +2289,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_predicate_property_user'(declared_in(TCtn), _, _, _, _, TCtn, _, _, _).
 '$lgt_predicate_property_user'(declared_in(TCtn, Line), Pred, _, _, _, TCtn, _, _, _) :-
 	functor(Pred, Functor, Arity),
-	(	'$lgt_predicate_property_'(TCtn, Functor/Arity, scope_line(Line)) ->
+	(	'$lgt_predicate_property_'(TCtn, Functor/Arity, declaration_line(Line)) ->
 		true
 	;	fail
 	).
@@ -2321,7 +2328,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_predicate_property_user'(defined_in(DCtn, Line), Pred, _, _, _, _, _, Def, _) :-
 	(	call(Def, Pred, _, _, _, DCtn),
 		functor(Pred, Functor, Arity),
-		'$lgt_predicate_property_'(DCtn, Functor/Arity, line_clauses(Line,_)) ->
+		'$lgt_predicate_property_'(DCtn, Functor/Arity, definition_line(Line)) ->
 		true
 	;	fail
 	).
@@ -2334,7 +2341,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	(	call(Def, Pred, _, _, _, DCtn),
 		'$lgt_find_overridden_predicate'(DCtn, Obj, Pred, Super),
 		functor(Pred, Functor, Arity),
-		'$lgt_predicate_property_'(Super, Functor/Arity, line_clauses(Line,_)) ->
+		'$lgt_predicate_property_'(Super, Functor/Arity, definition_line(Line)) ->
 		true
 	;	fail
 	).
@@ -2351,7 +2358,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_predicate_property_user'(number_of_clauses(N), Pred, _, _, _, _, _, Def, _) :-
 	(	call(Def, Pred, _, _, _, DCtn),
 		functor(Pred, Functor, Arity),
-		'$lgt_predicate_property_'(DCtn, Functor/Arity, line_clauses(_,N)) ->
+		'$lgt_predicate_property_'(DCtn, Functor/Arity, number_of_clauses(N)) ->
 		true
 	;	fail
 	).
@@ -5335,17 +5342,13 @@ current_logtalk_flag(version, version(3, 0, 0)).
 %
 % adds entity properties related to the entity source file
 
-'$lgt_add_entity_properties'(start, _) :-
-	'$lgt_compiler_flag'(source_data, off),
-	!.
-
 '$lgt_add_entity_properties'(start, Entity) :-
-	'$lgt_pp_file_directory_path_flags_'(File, Directory, _, _),
-	'$lgt_pp_term_position_'((Start - _)),
-	assertz('$lgt_pp_entity_property_'(Entity, file_lines(File, Directory, Start, _))),
-	fail.
-
-'$lgt_add_entity_properties'(start, _).
+	(	'$lgt_compiler_flag'(source_data, on) ->
+		'$lgt_pp_file_directory_path_flags_'(File, Directory, _, _),
+		'$lgt_pp_term_position_'((Start - _)),
+		assertz('$lgt_pp_entity_property_'(Entity, file_lines(File, Directory, Start, _)))
+	;	true
+	).
 
 
 '$lgt_add_entity_properties'(end, _) :-
@@ -5353,8 +5356,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!.
 
 '$lgt_add_entity_properties'(end, Entity) :-
-	'$lgt_pp_file_directory_path_flags_'(File, Directory, _, _),
-	once(retract('$lgt_pp_entity_property_'(Entity, file_lines(File, Directory, Start, _)))),
+	retract('$lgt_pp_entity_property_'(Entity, file_lines(File, Directory, Start, _))),
 	'$lgt_pp_term_position_'((_ - End)),
 	assertz('$lgt_pp_entity_property_'(Entity, file_lines(File, Directory, Start, End))),
 	fail.
@@ -5393,9 +5395,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	fail.
 
 '$lgt_add_entity_properties'(end, Entity) :-
-	findall(Define, '$lgt_pp_predicate_property_'(Entity, _, line_clauses(_, Define)), Defines),
+	findall(Define, '$lgt_pp_predicate_property_'(Entity, _, number_of_clauses(Define)), Defines),
 	'$lgt_sum_list'(Defines, TotalDefines),
-	findall(Provide, '$lgt_pp_predicate_property_'(_, _, line_clauses_from(_, Provide, Entity)), Provides),
+	findall(Provide, '$lgt_pp_predicate_property_'(_, _, number_of_clauses_from(Provide, Entity)), Provides),
 	'$lgt_sum_list'(Provides, TotalProvides),
 	Total is TotalDefines + TotalProvides,
 	assertz('$lgt_pp_entity_property_'(Entity, number_of_clauses(Total))),
@@ -7167,7 +7169,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	(	'$lgt_compiler_flag'(source_data, on),
 		'$lgt_pp_term_position_'(Line-_) ->
 		'$lgt_pp_entity'(_, Entity, _),
-		assertz('$lgt_pp_predicate_property_'(Entity, Functor/Arity, scope_line(Line)))
+		assertz('$lgt_pp_predicate_property_'(Entity, Functor/Arity, declaration_line(Line)))
 	;	true
 	).
 
@@ -8429,7 +8431,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_pp_defines_predicate_'(Functor, Arity, _, _, _),
 	!,
 	'$lgt_clause_number'(Head, N),
-	'$lgt_update_predicate_line_clauses_property'(Head, N),
+	'$lgt_update_predicate_line_clauses_properties'(Head, N),
 	'$lgt_comp_ctx_mode_new_mode'(HeadCtx, compile(aux), HeadCtxAux),
 	'$lgt_tr_clause'((CoinductiveHead :- Body), TClause, DClause, HeadCtxAux, BodyCtx).
 
@@ -8458,7 +8460,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		'$lgt_clause_number'(Head, N)
 	),
 	'$lgt_comp_ctx_exec_ctx'(HeadCtx, ExCtx),
-	'$lgt_update_predicate_line_clauses_property'(Head, N).
+	'$lgt_update_predicate_line_clauses_properties'(Head, N).
 
 '$lgt_tr_clause'((Head:-Body), TClause, (THead:-'$lgt_debug'(rule(Entity, DHead, N), ExCtx),DBody), HeadCtx, BodyCtx) :-
 	!,
@@ -8487,7 +8489,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		'$lgt_clause_number'(Head, N)
 	),
 	'$lgt_comp_ctx_exec_ctx'(HeadCtx, ExCtx),
-	'$lgt_update_predicate_line_clauses_property'(Head, N).
+	'$lgt_update_predicate_line_clauses_properties'(Head, N).
 
 '$lgt_tr_clause'(Annotation, TFact, DFact, _, BodyCtx) :-
 	'$lgt_value_annotation'(Annotation, Functor, Order, Value, Body, Head),
@@ -8524,7 +8526,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_pp_defines_predicate_'(Functor, Arity, _, _, _),
 	!,
 	'$lgt_clause_number'(Fact, N),
-	'$lgt_update_predicate_line_clauses_property'(Fact, N),
+	'$lgt_update_predicate_line_clauses_properties'(Fact, N),
 	'$lgt_comp_ctx_mode_new_mode'(HeadCtx, compile(aux), HeadCtxAux),
 	'$lgt_tr_clause'(CoinductiveFact, TFact, DFact, HeadCtxAux, BodyCtx).
 
@@ -8533,7 +8535,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_tr_head'(Fact, TFact, HeadCtx),
 	'$lgt_comp_ctx_exec_ctx'(HeadCtx, ExCtx),
 	'$lgt_clause_number'(Fact, N),
-	'$lgt_update_predicate_line_clauses_property'(Fact, N).
+	'$lgt_update_predicate_line_clauses_properties'(Fact, N).
 
 
 '$lgt_clause_number'(Head, N) :-
@@ -8546,39 +8548,41 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	assertz('$lgt_pp_number_of_clauses_'(Functor, Arity, N)).
 
 
-'$lgt_update_predicate_line_clauses_property'(_, _) :-
+'$lgt_update_predicate_line_clauses_properties'(_, _) :-
 	'$lgt_compiler_flag'(source_data, off),
 	!.
 
-'$lgt_update_predicate_line_clauses_property'(Other::Head, N) :-
+'$lgt_update_predicate_line_clauses_properties'(Other::Head, N) :-
 	!,
 	(	N =:= 1,
 		'$lgt_pp_term_position_'(Line-_) ->
 		'$lgt_pp_entity'(_, Entity, _),
 		functor(Head, Functor, Arity),
-		assertz('$lgt_pp_predicate_property_'(Other, Functor/Arity, line_clauses_from(Line,1,Entity)))
+		assertz('$lgt_pp_predicate_property_'(Other, Functor/Arity, definition_line_from(Line,Entity))),
+		assertz('$lgt_pp_predicate_property_'(Other, Functor/Arity, number_of_clauses_from(1,Entity)))
 	;	% N > 1
 		'$lgt_pp_term_position_'(_),
 		functor(Head, Functor, Arity),
-		retract('$lgt_pp_predicate_property_'(Other, Functor/Arity, line_clauses_from(Line,_,Entity))) ->
-		assertz('$lgt_pp_predicate_property_'(Other, Functor/Arity, line_clauses_from(Line,N,Entity)))
+		retract('$lgt_pp_predicate_property_'(Other, Functor/Arity, number_of_clauses_from(_,Entity))) ->
+		assertz('$lgt_pp_predicate_property_'(Other, Functor/Arity, number_of_clauses_from(N,Entity)))
 	;	true
 	).
 
-'$lgt_update_predicate_line_clauses_property'({Head}, N) :-
+'$lgt_update_predicate_line_clauses_properties'({Head}, N) :-
 	!,
-	'$lgt_update_predicate_line_clauses_property'(user::Head, N).
+	'$lgt_update_predicate_line_clauses_properties'(user::Head, N).
 
-'$lgt_update_predicate_line_clauses_property'(Head, 1) :-
+'$lgt_update_predicate_line_clauses_properties'(Head, 1) :-
 	!,
 	(	'$lgt_pp_term_position_'(Line-_) ->
 		'$lgt_pp_entity'(_, Entity, _),
 		functor(Head, Functor, Arity),
-		assertz('$lgt_pp_predicate_property_'(Entity, Functor/Arity, line_clauses(Line,1)))	
+		assertz('$lgt_pp_predicate_property_'(Entity, Functor/Arity, definition_line(Line)))
 	;	true
 	).
 
-'$lgt_update_predicate_line_clauses_property'(_, _).
+'$lgt_update_predicate_line_clauses_properties'(_, _).
+
 
 
 '$lgt_add_entity_predicate_properties'(_) :-
@@ -8588,12 +8592,12 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_add_entity_predicate_properties'(Entity) :-
 	'$lgt_pp_defines_predicate_'(Functor, Arity, _, _, Mode),
 	(	Mode == compile(aux) ->
-		retractall('$lgt_pp_predicate_property_'(Entity, Functor/Arity, line_clauses(_,_)))
-	;	retract('$lgt_pp_predicate_property_'(Entity, Functor/Arity, line_clauses(Line,_))) ->
-		'$lgt_pp_number_of_clauses_'(Functor, Arity, N),
-		assertz('$lgt_pp_predicate_property_'(Entity, Functor/Arity, line_clauses(Line,N)))
-	;	fail
+		assertz('$lgt_pp_predicate_property_'(Entity, Functor/Arity, auxiliary)),
+		retractall('$lgt_pp_predicate_property_'(Entity, Functor/Arity, definition_line(_)))
+	;	true
 	),
+	'$lgt_pp_number_of_clauses_'(Functor, Arity, N),
+	assertz('$lgt_pp_predicate_property_'(Entity, Functor/Arity, number_of_clauses(N))),
 	fail.
 
 '$lgt_add_entity_predicate_properties'(Entity) :-
@@ -16053,6 +16057,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_valid_predicate_property'(declared_in(_, _)).		% entity containing the predicate scope directive plus declaration line
 '$lgt_valid_predicate_property'(defined_in(_, _)).		% object or category containing the predicate definition plus definition line
 '$lgt_valid_predicate_property'(redefined_from(_, _)).	% object or category containing the overridden predicate definition plus definition line
+'$lgt_valid_predicate_property'(auxiliary).				% predicate is an auxiliary predicate
 
 
 
