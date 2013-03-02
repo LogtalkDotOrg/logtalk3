@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2012/09/13,
+		date is 2013/03/02,
 		comment is 'Unit tests for the "coinduction" example.'
 	]).
 
@@ -150,10 +150,10 @@
 	:- if(current_object(train)).
 	succeeds(coinduction_train_1) :-
 		bagof((X, R), train::driver(s0, s0, s0, X, R), [(X1, R1), (X2, R2)]),
-		XS1 = [down, in, out, exit, raise, approach, up, lower| XS1], X1 == [approach, lower| XS1],
-		RS1 = [(down, _), (in, _), (out, _), (exit, _), (raise, _), (approach, _), (up, _), (lower, 1.0)| RS1], R1 = [(approach, 0), (lower, 1.0)| RS1],
-		XS2 = [lower, down, in, out, exit, raise, up, approach| XS2], X2 == [approach| XS2],
-		RS2 = [(lower, 1.0), (down, _), (in, _), (out, _), (exit, _), (raise, _), (up, _), (approach, 0)| RS2], R2 = [(approach, 0)| RS2].
+		X1 = [approach| TX1], TX1 = [lower, down, in, out, exit, raise, approach, up| TX1],
+		R1 = [ (approach, 0)| TR1], TR1 = [ (lower, 1.0), (down, _), (in, _), (out, _), (exit, _), (raise, _), (approach, _), (up, _)| TR1],
+		X2 = [approach| TX2], TX2 = [lower, down, in, out, exit, raise, up, approach| TX2],
+		R2 = [ (approach, 0)| TR2], TR2 = [ (lower, 1.0), (down, _), (in, _), (out, _), (exit, _), (raise, _), (up, _), (approach, _)| TR2].
 	:- endif.
 
 	:- if(current_object(cotrain)).
