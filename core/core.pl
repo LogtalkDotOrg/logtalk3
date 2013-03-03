@@ -13890,6 +13890,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 % '$lgt_fix_predicate_defs'
+%
+% ensure that calls to synchronized or coinductive predicates
+% are routed to the corresponding auxilary clauses
 
 '$lgt_fix_predicate_defs' :-
 	(	'$lgt_pp_synchronized_'(_, _) ->
@@ -13930,14 +13933,14 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_fix_synchronized_predicate_defs'(Def) :-
 	'$lgt_pp_synchronized_'(Head, Mutex),
-	Old =.. [Def, Head, ExCtx, THead],
-	retract('$lgt_pp_def_'(Old)),
-	THead =.. [TFunctor| Args],
-	atom_concat(TFunctor, '__sync', MFunctor),
-	MHead =.. [MFunctor| Args],
-	New =.. [Def, Head, ExCtx, MHead],
-	assertz('$lgt_pp_final_def_'(New)),
-	assertz('$lgt_pp_entity_aux_clause_'((MHead:-with_mutex(Mutex, THead)))),
+		Old =.. [Def, Head, ExCtx, THead],
+		retract('$lgt_pp_def_'(Old)),
+		THead =.. [TFunctor| Args],
+		atom_concat(TFunctor, '__sync', MFunctor),
+		MHead =.. [MFunctor| Args],
+		New =.. [Def, Head, ExCtx, MHead],
+		assertz('$lgt_pp_final_def_'(New)),
+		assertz('$lgt_pp_entity_aux_clause_'((MHead:-with_mutex(Mutex, THead)))),
 	fail.
 
 '$lgt_fix_synchronized_predicate_defs'(_).
@@ -13945,18 +13948,24 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_fix_synchronized_predicate_ddefs'(DDef) :-
 	'$lgt_pp_synchronized_'(Head, Mutex),
-	Old =.. [DDef, Head, ExCtx, THead],
-	retract('$lgt_pp_ddef_'(Old)),
-	THead =.. [TFunctor| Args],
-	atom_concat(TFunctor, '__sync', MFunctor),
-	MHead =.. [MFunctor| Args],
-	New =.. [DDef, Head, ExCtx, MHead],
-	assertz('$lgt_pp_final_ddef_'(New)),
-	assertz('$lgt_pp_entity_aux_clause_'((MHead:-with_mutex(Mutex, THead)))),
+		Old =.. [DDef, Head, ExCtx, THead],
+		retract('$lgt_pp_ddef_'(Old)),
+		THead =.. [TFunctor| Args],
+		atom_concat(TFunctor, '__sync', MFunctor),
+		MHead =.. [MFunctor| Args],
+		New =.. [DDef, Head, ExCtx, MHead],
+		assertz('$lgt_pp_final_ddef_'(New)),
+		assertz('$lgt_pp_entity_aux_clause_'((MHead:-with_mutex(Mutex, THead)))),
 	fail.
 
 '$lgt_fix_synchronized_predicate_ddefs'(_).
 
+
+
+% '$lgt_fix_coinductive_predicates_defs'
+%
+% ensure that calls to coinductive predicates are routed to the
+% auxilary clauses that perform the check for coinductive success
 
 '$lgt_fix_coinductive_predicates_defs' :-
 	(	'$lgt_pp_object_'(_, _, _, Def, _, _, _, _, DDef, _, _) ->
@@ -13972,24 +13981,26 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_fix_coinductive_predicates_defs'(Def) :-
 	'$lgt_pp_coinductive_'(Head, TestHead, TCHead, THead, DHead),
-	Old =.. [Def, Head, _, _],
-	retract('$lgt_pp_def_'(Old)),
-	functor(TCHead, _, TCArity),
-	arg(TCArity, TCHead, HeadExCtx),
-	New =.. [Def, Head, HeadExCtx, TCHead],
-	assertz('$lgt_pp_final_def_'(New)),
-	'$lgt_add_coinductive_predicate_aux_clause'(Head, TestHead, TCHead, THead, DHead).
+		Old =.. [Def, Head, _, _],
+		retract('$lgt_pp_def_'(Old)),
+		functor(TCHead, _, TCArity),
+		arg(TCArity, TCHead, HeadExCtx),
+		New =.. [Def, Head, HeadExCtx, TCHead],
+		assertz('$lgt_pp_final_def_'(New)),
+		'$lgt_add_coinductive_predicate_aux_clause'(Head, TestHead, TCHead, THead, DHead),
+	fail.
 
 '$lgt_fix_coinductive_predicates_defs'(_).
 
 
 '$lgt_fix_coinductive_predicates_ddefs'(DDef) :-
 	'$lgt_pp_coinductive_'(Head, TestHead, TCHead, THead, DHead),
-	Old =.. [DDef, Head, ExCtx, THead],
-	retract('$lgt_pp_ddef_'(Old)),
-	New =.. [DDef, Head, ExCtx, TCHead],
-	assertz('$lgt_pp_final_ddef_'(New)),
-	'$lgt_add_coinductive_predicate_aux_clause'(Head, TestHead, TCHead, THead, DHead).
+		Old =.. [DDef, Head, ExCtx, THead],
+		retract('$lgt_pp_ddef_'(Old)),
+		New =.. [DDef, Head, ExCtx, TCHead],
+		assertz('$lgt_pp_final_ddef_'(New)),
+		'$lgt_add_coinductive_predicate_aux_clause'(Head, TestHead, TCHead, THead, DHead),
+	fail.
 
 '$lgt_fix_coinductive_predicates_ddefs'(_).
 
@@ -14021,9 +14032,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	'$lgt_prolog_meta_predicate'(if(_, _, _), _, _) ->
 		% back-end Prolog compiler supports the if/3 soft-cut built-in meta-predicate
 		assertz('$lgt_pp_entity_aux_clause_'((TCHead :- Header, if(If, Then, Else))))
-	;	throw(resource_error(soft_cut_support))
-	),
-	fail.
+	;	% the adapter file for the backend Prolog compiler declares that coinduction
+		% is supported but it seems to be missing the necessary declaration for the
+		% soft-cut control construct or meta-predicate
+		throw(resource_error(soft_cut_support))
+	).
 
 
 
@@ -14033,56 +14046,56 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_fix_predicate_calls' :-
 	retract('$lgt_pp_entity_clause_'(Clause, Location)),
-	(	Clause = {Term} ->
-		assertz('$lgt_pp_final_entity_clause_'(Term, Location))
-	;	Clause = (Head:-Body) ->
-		'$lgt_fix_predicate_calls'(Body, FBody, false),
-		assertz('$lgt_pp_final_entity_clause_'((Head:-FBody), Location))
-	;	'$lgt_value_annotation'(Clause, Functor, Order, Value, Body, _) ->
-		'$lgt_fix_predicate_calls'(Body, FBody, true),
-		(	Order == prefix ->
-			FClause =.. [Functor, Value, FBody]
-		;	% Order == suffix
-			FClause =.. [Functor, FBody, Value]
+		(	Clause = {Term} ->
+			assertz('$lgt_pp_final_entity_clause_'(Term, Location))
+		;	Clause = (Head:-Body) ->
+			'$lgt_fix_predicate_calls'(Body, FBody, false),
+			assertz('$lgt_pp_final_entity_clause_'((Head:-FBody), Location))
+		;	'$lgt_value_annotation'(Clause, Functor, Order, Value, Body, _) ->
+			'$lgt_fix_predicate_calls'(Body, FBody, true),
+			(	Order == prefix ->
+				FClause =.. [Functor, Value, FBody]
+			;	% Order == suffix
+				FClause =.. [Functor, FBody, Value]
+			),
+			assertz('$lgt_pp_final_entity_clause_'(FClause, Location))
+		;	'$lgt_goal_annotation'(Clause, Functor, Body1, Body2, _) ->
+			'$lgt_fix_predicate_calls'(Body1, FBody1, true),
+			'$lgt_fix_predicate_calls'(Body2, FBody2, true),
+			FClause =.. [Functor, FBody1, FBody2],
+			assertz('$lgt_pp_final_entity_clause_'(FClause, Location))
+		;	assertz('$lgt_pp_final_entity_clause_'(Clause, Location))
 		),
-		assertz('$lgt_pp_final_entity_clause_'(FClause, Location))
-	;	'$lgt_goal_annotation'(Clause, Functor, Body1, Body2, _) ->
-		'$lgt_fix_predicate_calls'(Body1, FBody1, true),
-		'$lgt_fix_predicate_calls'(Body2, FBody2, true),
-		FClause =.. [Functor, FBody1, FBody2],
-		assertz('$lgt_pp_final_entity_clause_'(FClause, Location))
-	;	assertz('$lgt_pp_final_entity_clause_'(Clause, Location))
-	),
 	fail.
 
 '$lgt_fix_predicate_calls' :-
 	retract('$lgt_pp_entity_aux_clause_'(Clause)),
-	(	Clause = {Term} ->
-		assertz('$lgt_pp_final_entity_aux_clause_'(Term))
-	;	Clause = (Head:-Body) ->
-		'$lgt_fix_predicate_calls'(Body, FBody, false),
-		assertz('$lgt_pp_final_entity_aux_clause_'((Head:-FBody)))
-	;	'$lgt_value_annotation'(Clause, Functor, Order, Value, Body, _) ->
-		'$lgt_fix_predicate_calls'(Body, FBody, true),
-		(	Order == prefix ->
-			FClause =.. [Functor, Value, FBody]
-		;	% Order == suffix
-			FClause =.. [Functor, FBody, Value]
+		(	Clause = {Term} ->
+			assertz('$lgt_pp_final_entity_aux_clause_'(Term))
+		;	Clause = (Head:-Body) ->
+			'$lgt_fix_predicate_calls'(Body, FBody, false),
+			assertz('$lgt_pp_final_entity_aux_clause_'((Head:-FBody)))
+		;	'$lgt_value_annotation'(Clause, Functor, Order, Value, Body, _) ->
+			'$lgt_fix_predicate_calls'(Body, FBody, true),
+			(	Order == prefix ->
+				FClause =.. [Functor, Value, FBody]
+			;	% Order == suffix
+				FClause =.. [Functor, FBody, Value]
+			),
+			assertz('$lgt_pp_final_entity_aux_clause_'(FClause))
+		;	'$lgt_goal_annotation'(Clause, Functor, Body1, Body2, _) ->
+			'$lgt_fix_predicate_calls'(Body1, FBody1, true),
+			'$lgt_fix_predicate_calls'(Body2, FBody2, true),
+			FClause =.. [Functor, FBody1, FBody2],
+			assertz('$lgt_pp_final_entity_aux_clause_'(FClause))
+		;	assertz('$lgt_pp_final_entity_aux_clause_'(Clause))
 		),
-		assertz('$lgt_pp_final_entity_aux_clause_'(FClause))
-	;	'$lgt_goal_annotation'(Clause, Functor, Body1, Body2, _) ->
-		'$lgt_fix_predicate_calls'(Body1, FBody1, true),
-		'$lgt_fix_predicate_calls'(Body2, FBody2, true),
-		FClause =.. [Functor, FBody1, FBody2],
-		assertz('$lgt_pp_final_entity_aux_clause_'(FClause))
-	;	assertz('$lgt_pp_final_entity_aux_clause_'(Clause))
-	),
 	fail.
 
 '$lgt_fix_predicate_calls' :-
 	retract('$lgt_pp_entity_initialization_'(Call)),
-	'$lgt_fix_predicate_calls'(Call, Fixed, false),
-	assertz('$lgt_pp_final_entity_initialization_'(Fixed)),
+		'$lgt_fix_predicate_calls'(Call, Fixed, false),
+		assertz('$lgt_pp_final_entity_initialization_'(Fixed)),
 	fail.
 
 '$lgt_fix_predicate_calls'.
