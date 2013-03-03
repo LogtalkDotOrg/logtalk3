@@ -31,6 +31,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: Simpler implementation of coinduction, improving compilation times
+in general and avoiding reporting the generated auxiliary clauses when using
+the reflection methods. The existing special debugging support is preserved.
+
 * NEW: Interpret `false/0` as also a built-in method.
 
 * CHANGED: Representation used in table of supported directives to avoid
