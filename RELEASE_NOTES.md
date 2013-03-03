@@ -66,6 +66,7 @@ implementation of the internal compiler predicate for reading file terms.
 * UPDATED: The SWI-Prolog hooks integration file to also be able to decompile
 calls to the auxiliary predicates generated for coinductive predicates.
 
+
 3.00.0 Alpha 10 - February 25, 2013
 ===================================
 

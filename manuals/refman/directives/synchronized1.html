@@ -52,6 +52,9 @@ Synchronized predicates are silently compiled as normal predicates when using ba
 <p>
 Declaring a predicate synchronized implicitly makes it deterministic when using a back-end Prolog compiler that supports multi-threading programming. In order to avoid semantic differences in portable code that uses synchronized predicates across back-end Prolog compilers that may or may not support threads, only deterministic predicates should be declared as synchronized.
 </p>
+<p>
+This directive must precede any calls to the declared synchronized predicates.
+</p>
 
 <h4>Template and modes</h4>
 
@@ -70,7 +73,7 @@ synchronized(+non_terminal_indicator_term)</pre>
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: February 25, 2013</span>
+		<span>Last updated on: March 3, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="public1.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="uses2.html">next</a></span><br/>

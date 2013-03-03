@@ -47,6 +47,9 @@ coinductive([Template1, Template2, ...])</pre>
 <p>
 This is an <strong>experimental</strong> directive, used for declaring coinductive predicates. Requires a back-end Prolog compiler with minimal support for cyclic terms. The current implementation of coinduction allows the generation of only the <em>basic cycles</em> but all valid solutions should be recognized. Use a predicate indicator as argument when all the coinductive predicate arguments are relevant for coinductive success. Use a template when only some coinductive predicate arguments (represented by a "<code>+</code>") should be considered when testing for coinductive success (represent the arguments that should be disregarded by a "<code>-</code>"). It's possible to define local <code>coinductive_success_hook/2</code> or <code>coinductive_success_hook/1</code> predicates that are automatically called with the coinductive predicate term resulting from a successful unification with an ancestor goal as first argument. The second argument, when present, is the coinductive hypotheses used. These hook predicates can provide an alternative to the use of tabling when defining some coinductive predicates. There is no overhead when these hook predicates are not defined.
 </p>
+<p>
+This directive must precede any calls to the declared coinductive predicates.
+</p>
 
 <h4>Template and modes</h4>
 
@@ -62,7 +65,7 @@ coinductive(+coinductive_predicate_template_term)</pre>
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: September 15, 2012</span>
+		<span>Last updated on: March 3, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="alias3.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="discontiguous1.html">next</a></span><br/>

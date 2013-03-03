@@ -50,6 +50,9 @@ Declares meta-predicates, i.e., predicates that have arguments that will be call
 <p>
 Meta-arguments which are goals are represented by the integer <code>0</code>. Meta-arguments which are closures are represented by a positive integer, <code>N</code>, representing the number of additional arguments that will be appended to the closure in order to construct the corresponding meta-call. Normal arguments are represented by the atom <code>*</code>. Meta-arguments are always called in the context of the <em><a class="glossary" title="Go to glossary definition" href="../../glossary.html#sender">sender</a></em>, i.e. in the meta-predicate calling context, not in the meta-predicate definition context.
 </p>
+<p>
+This directive must precede any calls to the declared meta-predicates.
+</p>
 
 <h4>Template and modes</h4>
 
@@ -69,7 +72,7 @@ meta_predicate(+category_identifier::+meta_predicate_template_term)</pre>
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: November 20, 2010</span>
+		<span>Last updated on: March 3, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="info2.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="meta_non_terminal1.html">next</a></span><br/>
