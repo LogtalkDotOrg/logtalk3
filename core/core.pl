@@ -10560,7 +10560,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_body'(Pred, TCPred, '$lgt_debug'(goal(DPred, TCPred), ExCtx), Ctx) :-
 	'$lgt_pp_coinductive_'(Pred, _, TCPred, _, DPred),
 	!,
-	% convert the call to the original coinductive predicate into a call to the auxiliary predicate
+	% convert the call to the original coinductive predicate into a call to the auxiliary
+	% predicate whose compiled normal and debug forms are already computed
 	functor(Pred, Functor, Arity),
 	functor(TCPred, TCFunctor, TCArity),
 	(	'$lgt_pp_calls_predicate_'(Functor, Arity, _, _, _) ->
@@ -10573,22 +10574,40 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
 
 '$lgt_tr_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
+	'$lgt_pp_synchronized_'(Pred, _),
+	!,
 	functor(Pred, Functor, Arity),
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, Prefix, _, _, ExCtx, _, _),
+	'$lgt_comp_ctx_prefix'(Ctx, Prefix),
 	'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
-	(	'$lgt_pp_synchronized_'(Pred, _),
-		\+ functor(Head, Functor, Arity) ->
-		% not a recursive call
+	'$lgt_comp_ctx_head'(Ctx, Head),
+	(	functor(Head, Functor, Arity) ->
+		% recursive call
+		STFunctor = TFunctor
+	;	% call the mutex protected version of the predicate instead
 		atom_concat(TFunctor, '__sync', STFunctor)
-	;	STFunctor = TFunctor
 	),
 	functor(TPred, STFunctor, TArity),
 	'$lgt_unify_head_thead_args'(Arity, Pred, TPred),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	arg(TArity, TPred, ExCtx),
 	(	'$lgt_pp_calls_predicate_'(Functor, Arity, _, _, _) ->
 		true
 	;	'$lgt_current_line_numbers'(Lines),
 		assertz('$lgt_pp_calls_predicate_'(Functor, Arity, STFunctor, TArity, Lines))
+	).
+
+'$lgt_tr_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
+	functor(Pred, Functor, Arity),
+	'$lgt_comp_ctx_prefix'(Ctx, Prefix),
+	'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
+	functor(TPred, TFunctor, TArity),
+	'$lgt_unify_head_thead_args'(Arity, Pred, TPred),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	arg(TArity, TPred, ExCtx),
+	(	'$lgt_pp_calls_predicate_'(Functor, Arity, _, _, _) ->
+		true
+	;	'$lgt_current_line_numbers'(Lines),
+		assertz('$lgt_pp_calls_predicate_'(Functor, Arity, TFunctor, TArity, Lines))
 	).
 
 
