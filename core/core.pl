@@ -8293,10 +8293,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_clauses'([], _).
 
 '$lgt_tr_clauses'([Clause| Clauses], Ctx) :-
-	% only the compilation context mode should be shared between different clauses
-	'$lgt_comp_ctx_mode'(Ctx, Mode),
-	'$lgt_comp_ctx_mode'(NewCtx, Mode),
-	'$lgt_tr_clause'(Clause, NewCtx),
+	'$lgt_tr_clause'(Clause, Ctx),
 	'$lgt_tr_clauses'(Clauses, Ctx).
 
 
@@ -8304,41 +8301,28 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % '$lgt_tr_clause'(+clause, +compilation_context)
 
 '$lgt_tr_clause'(Clause, Ctx) :-
-	% only the compilation context mode should be shared between different clauses
+	% ensure that only the compilation context mode is shared between different clauses
 	'$lgt_comp_ctx_mode'(Ctx, Mode),
 	'$lgt_comp_ctx_mode'(NewCtx, Mode),
-	% assume for now that the head and the body compilation contexts are the same
-	'$lgt_tr_clause'(Clause, NewCtx, NewCtx).
-
-
-
-% '$lgt_tr_clause'(+clause, +compilation_context, +compilation_context)
-%
-% translates a clause using different compilation contexts for the head and for the body;
-% this is required in order to correctly compile clauses for e.g. coinductive predicates
-
-'$lgt_tr_clause'(Clause, HeadCtx, BodyCtx) :-
 	(	'$lgt_pp_object_'(Entity, Prefix, _, _, _, _, _, _, _, _, _) ->
 		% entity may be a parametric object; we require "this" for inline compilation of parameter/2
-		'$lgt_comp_ctx_this'(HeadCtx, Entity),
-		'$lgt_comp_ctx_this'(BodyCtx, Entity)
+		'$lgt_comp_ctx_this'(NewCtx, Entity)
 	;	'$lgt_pp_category_'(Entity, Prefix, _, _, _, _) ->
 		true
 	;	'$lgt_pp_protocol_'(Entity, Prefix, _, _, _)
 	),
-	'$lgt_comp_ctx_prefix'(HeadCtx, Prefix),
-	'$lgt_comp_ctx_prefix'(BodyCtx, Prefix),
+	'$lgt_comp_ctx_prefix'(NewCtx, Prefix),
 	catch(
-		'$lgt_tr_clause'(Clause, TClause, DClause, HeadCtx, BodyCtx),
+		'$lgt_tr_clause'(Clause, TClause, DClause, NewCtx),
 		Error,
 		throw(error(Error, clause(Clause)))),
 	(	'$lgt_compiler_flag'(debug, on) ->
-		(	'$lgt_comp_ctx_mode'(HeadCtx, compile(aux)) ->
+		(	'$lgt_comp_ctx_mode'(Ctx, compile(aux)) ->
 			assertz('$lgt_pp_entity_aux_clause_'(DClause))
 		;	'$lgt_pp_term_location'(Location),
 			assertz('$lgt_pp_entity_clause_'(DClause, Location))
 		)
-	;	(	'$lgt_comp_ctx_mode'(HeadCtx, compile(aux)) ->
+	;	(	'$lgt_comp_ctx_mode'(Ctx, compile(aux)) ->
 			assertz('$lgt_pp_entity_aux_clause_'(TClause))
 		;	'$lgt_pp_term_location'(Location),
 			assertz('$lgt_pp_entity_clause_'(TClause, Location))
@@ -8346,7 +8330,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	),
 	!.
 
-'$lgt_tr_clause'(Clause, _, _) :-
+'$lgt_tr_clause'(Clause, _) :-
 	\+ '$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
 	\+ '$lgt_pp_category_'(_, _, _, _, _, _),
 	\+ '$lgt_pp_protocol_'(_, _, _, _, _),
@@ -8356,7 +8340,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	% copy it unchanged to the generated Prolog file
 	assertz('$lgt_pp_prolog_term_'(Clause, Location)).
 
-'$lgt_tr_clause'(Clause, _, _) :-
+'$lgt_tr_clause'(Clause, _) :-
 	(	Clause = (Head :- _) ->
 		functor(Head, Functor, Arity)
 	;	functor(Clause, Functor, Arity)
@@ -8365,12 +8349,12 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_tr_clause'(+clause, -clause, -clause, +compilation_context, +compilation_context)
+% '$lgt_tr_clause'(+clause, -clause, -clause, +compilation_context)
 %
 % translates a clause (using different compilation contexts for the
 % head and for the body) into a normal clause and a debug clause
 
-'$lgt_tr_clause'(Clause, _, _, _, _) :-
+'$lgt_tr_clause'(Clause, _, _, _) :-
 	'$lgt_must_be'(clause, Clause),
 	'$lgt_pp_protocol_'(_, _, _, _, _),
 	% protocols cannot contain predicate definitions
@@ -8380,10 +8364,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	functor(Head, Functor, Arity),
 	throw(permission_error(define, predicate, Functor/Arity)).
 
-'$lgt_tr_clause'((Annotation:-Body), TClause, DClause, HeadCtx, BodyCtx) :-
+'$lgt_tr_clause'((Annotation:-Body), TClause, DClause, Ctx) :-
 	'$lgt_value_annotation'(Annotation, Functor, Order, Value, Head, _),
 	!,
-	'$lgt_tr_clause'((Head:-Body), TClause0, DClause0, HeadCtx, BodyCtx),
+	'$lgt_tr_clause'((Head:-Body), TClause0, DClause0, Ctx),
 	(	Order == prefix ->
 		TAnnotation =.. [Functor, Value, THead],
 		DAnnotation =.. [Functor, Value, DHead]
@@ -8399,32 +8383,30 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	DClause0 = (DHead :- DBody),
 	DClause = (DAnnotation :- DBody).
 
-'$lgt_tr_clause'((Head:-Body), (THead:-'$lgt_nop'(Body), SBody), (THead:-'$lgt_nop'(Body),'$lgt_debug'(rule(Entity, Head, N), ExCtx),DBody), HeadCtx, BodyCtx) :-
+'$lgt_tr_clause'((Head:-Body), (THead:-'$lgt_nop'(Body), SBody), (THead:-'$lgt_nop'(Body),'$lgt_debug'(rule(Entity, Head, N), ExCtx),DBody), Ctx) :-
 	functor(Head, Functor, Arity),
 	'$lgt_pp_dynamic_'(Functor, Arity),
 	!,
 	'$lgt_pp_entity'(_, Entity, _),
 	'$lgt_head_meta_variables'(Head, MetaVars),
-	'$lgt_comp_ctx_meta_vars'(HeadCtx, MetaVars),
-	'$lgt_tr_head'(Head, THead, HeadCtx),
-	'$lgt_comp_ctx_meta_vars'(BodyCtx, MetaVars),
-	'$lgt_tr_body'(Body, TBody, DBody, BodyCtx),
+	'$lgt_comp_ctx_meta_vars'(Ctx, MetaVars),
+	'$lgt_tr_head'(Head, THead, Ctx),
+	'$lgt_tr_body'(Body, TBody, DBody, Ctx),
 	(	'$lgt_compiler_flag'(optimize, on) ->
 		'$lgt_simplify_goal'(TBody, SBody)
 	;	SBody = TBody
 	),
 	'$lgt_clause_number'(Head, N),
-	'$lgt_comp_ctx_exec_ctx'(HeadCtx, ExCtx),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_update_predicate_line_clauses_properties'(Head, N).
 
-'$lgt_tr_clause'((Head:-Body), TClause, (THead:-'$lgt_debug'(rule(Entity, Head, N), ExCtx),DBody), HeadCtx, BodyCtx) :-
+'$lgt_tr_clause'((Head:-Body), TClause, (THead:-'$lgt_debug'(rule(Entity, Head, N), ExCtx),DBody), Ctx) :-
 	!,
 	'$lgt_pp_entity'(_, Entity, _),
 	'$lgt_head_meta_variables'(Head, MetaVars),
-	'$lgt_comp_ctx_meta_vars'(HeadCtx, MetaVars),
-	'$lgt_tr_head'(Head, THead, HeadCtx),
-	'$lgt_comp_ctx_meta_vars'(BodyCtx, MetaVars),
-	'$lgt_tr_body'(Body, TBody, DBody, BodyCtx),
+	'$lgt_comp_ctx_meta_vars'(Ctx, MetaVars),
+	'$lgt_tr_head'(Head, THead, Ctx),
+	'$lgt_tr_body'(Body, TBody, DBody, Ctx),
 	(	'$lgt_compiler_flag'(optimize, on) ->
 		'$lgt_simplify_goal'(TBody, SBody),
 		(	SBody == true ->
@@ -8434,14 +8416,14 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	TClause = (THead:-TBody)
 	),
 	'$lgt_clause_number'(Head, N),
-	'$lgt_comp_ctx_exec_ctx'(HeadCtx, ExCtx),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_update_predicate_line_clauses_properties'(Head, N).
 
-'$lgt_tr_clause'(Annotation, TFact, DFact, _, BodyCtx) :-
+'$lgt_tr_clause'(Annotation, TFact, DFact, Ctx) :-
 	'$lgt_value_annotation'(Annotation, Functor, Order, Value, Body, Head),
 	!,
-	'$lgt_comp_ctx_meta_vars'(BodyCtx, []),
-	'$lgt_tr_body'(Body, TBody, DBody, BodyCtx),
+	'$lgt_comp_ctx_meta_vars'(Ctx, []),
+	'$lgt_tr_body'(Body, TBody, DBody, Ctx),
 	(	Order == prefix ->
 		TFact =.. [Functor, Value, TBody],
 		DFact =.. [Functor, Value, DBody]
@@ -8453,22 +8435,22 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	functor(Head, HeadFunctor, HeadArity),
 	'$lgt_remember_annotated_predicate'(HeadFunctor, HeadArity).
 
-'$lgt_tr_clause'(Annotation, TFact, DFact, _, BodyCtx) :-
+'$lgt_tr_clause'(Annotation, TFact, DFact, Ctx) :-
 	'$lgt_goal_annotation'(Annotation, Functor, Left, Right, Head),
 	!,
-	'$lgt_comp_ctx_meta_vars'(BodyCtx, []),
-	'$lgt_tr_body'(Left, TLeft, DLeft, BodyCtx),
-	'$lgt_tr_body'(Right, TRight, DRight, BodyCtx),
+	'$lgt_comp_ctx_meta_vars'(Ctx, []),
+	'$lgt_tr_body'(Left, TLeft, DLeft, Ctx),
+	'$lgt_tr_body'(Right, TRight, DRight, Ctx),
 	TFact =.. [Functor, TLeft, TRight],
 	DFact =.. [Functor, DLeft, DRight],
 	'$lgt_remember_annotation'(Functor, 2),
 	functor(Head, HeadFunctor, HeadArity),
 	'$lgt_remember_annotated_predicate'(HeadFunctor, HeadArity).
 
-'$lgt_tr_clause'(Fact, TFact, (TFact:-'$lgt_debug'(fact(Entity, Fact, N), ExCtx)), HeadCtx, _) :-
+'$lgt_tr_clause'(Fact, TFact, (TFact:-'$lgt_debug'(fact(Entity, Fact, N), ExCtx)), Ctx) :-
 	'$lgt_pp_entity'(_, Entity, _),
-	'$lgt_tr_head'(Fact, TFact, HeadCtx),
-	'$lgt_comp_ctx_exec_ctx'(HeadCtx, ExCtx),
+	'$lgt_tr_head'(Fact, TFact, Ctx),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_clause_number'(Fact, N),
 	'$lgt_update_predicate_line_clauses_properties'(Fact, N).
 
