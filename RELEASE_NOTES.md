@@ -51,6 +51,10 @@ property.
 is turned on, for auxiliary predicates generated during the compilation of the
 enclosing entity.
 
+* FIXED: Bug in the implementation of the `object_property/2` built-in method
+for the property `includes/3` where information for some multifile predicates
+could be missing.
+
 Prolog adapter and integration files
 ------------------------------------
 

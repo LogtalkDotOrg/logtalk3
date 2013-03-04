@@ -288,6 +288,7 @@
 :- dynamic('$lgt_pp_final_entity_aux_clause_'/1).			% '$lgt_pp_final_entity_aux_clause_'(Clause)
 
 :- dynamic('$lgt_pp_number_of_clauses_'/3).					% '$lgt_pp_number_of_clauses_'(Functor, Arity, Number)
+:- dynamic('$lgt_pp_number_of_clauses_'/4).					% '$lgt_pp_number_of_clauses_'(Other, Functor, Arity, Number)
 
 :- dynamic('$lgt_pp_defines_predicate_'/5).					% '$lgt_pp_defines_predicate_'(Functor, Arity, TFunctor, TArity, Mode)
 :- dynamic('$lgt_pp_defines_annotation_'/2).				% '$lgt_pp_defines_annotation_'(Functor, Arity)
@@ -5729,7 +5730,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	retractall('$lgt_pp_final_entity_clause_'(_, _)),
 	retractall('$lgt_pp_entity_aux_clause_'(_)),
 	retractall('$lgt_pp_final_entity_aux_clause_'(_)),
-	retractall('$lgt_pp_number_of_clauses_'(_,_,_)),
+	retractall('$lgt_pp_number_of_clauses_'(_, _, _)),
+	retractall('$lgt_pp_number_of_clauses_'(_, _, _, _)),
 	retractall('$lgt_pp_redefined_built_in_'(_, _, _)),
 	retractall('$lgt_pp_defines_predicate_'(_, _, _, _, _)),
 	retractall('$lgt_pp_defines_annotation_'(_, _)),
@@ -8397,8 +8399,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	SBody = TBody
 	),
 	'$lgt_clause_number'(Head, N),
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	'$lgt_update_predicate_line_clauses_properties'(Head, N).
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
 
 '$lgt_tr_clause'((Head:-Body), TClause, (THead:-'$lgt_debug'(rule(Entity, Head, N), ExCtx),DBody), Ctx) :-
 	!,
@@ -8416,8 +8417,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	TClause = (THead:-TBody)
 	),
 	'$lgt_clause_number'(Head, N),
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	'$lgt_update_predicate_line_clauses_properties'(Head, N).
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
 
 '$lgt_tr_clause'(Annotation, TFact, DFact, Ctx) :-
 	'$lgt_value_annotation'(Annotation, Functor, Order, Value, Body, Head),
@@ -8451,60 +8451,62 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_pp_entity'(_, Entity, _),
 	'$lgt_tr_head'(Fact, TFact, Ctx),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	'$lgt_clause_number'(Fact, N),
-	'$lgt_update_predicate_line_clauses_properties'(Fact, N).
+	'$lgt_clause_number'(Fact, N).
 
+
+'$lgt_clause_number'(Other::Head, N) :-
+	!,
+	functor(Head, Functor, Arity),
+	(	retract('$lgt_pp_number_of_clauses_'(Other, Functor, Arity, N0)) ->
+		N is N0 + 1
+	;	% first clause found for this predicate
+		N = 1,
+		'$lgt_update_predicate_line_clauses_properties'(Other, Functor, Arity)
+	),
+	assertz('$lgt_pp_number_of_clauses_'(Other, Functor, Arity, N)).
+
+'$lgt_clause_number'({Head}, N) :-
+	!,
+	'$lgt_clause_number'(user::Head, N).
 
 '$lgt_clause_number'(Head, N) :-
 	functor(Head, Functor, Arity),
 	(	retract('$lgt_pp_number_of_clauses_'(Functor, Arity, N0)) ->
 		N is N0 + 1
 	;	% first clause found for this predicate
-		N = 1
+		N = 1,
+		'$lgt_update_predicate_line_clauses_properties'(Functor, Arity)
 	),
 	assertz('$lgt_pp_number_of_clauses_'(Functor, Arity, N)).
 
 
-'$lgt_update_predicate_line_clauses_properties'(_, _) :-
-	'$lgt_compiler_flag'(source_data, off),
-	!.
-
-'$lgt_update_predicate_line_clauses_properties'(Other::Head, N) :-
-	!,
-	(	N =:= 1,
+'$lgt_update_predicate_line_clauses_properties'(Other, Functor, Arity) :-
+	(	'$lgt_compiler_flag'(source_data, on),
 		'$lgt_pp_term_position_'(Line-_) ->
 		'$lgt_pp_entity'(_, Entity, _),
-		functor(Head, Functor, Arity),
-		assertz('$lgt_pp_predicate_property_'(Other, Functor/Arity, definition_line_from(Line,Entity))),
-		assertz('$lgt_pp_predicate_property_'(Other, Functor/Arity, number_of_clauses_from(1,Entity)))
-	;	% N > 1
-		'$lgt_pp_term_position_'(_),
-		functor(Head, Functor, Arity),
-		retract('$lgt_pp_predicate_property_'(Other, Functor/Arity, number_of_clauses_from(_,Entity))) ->
-		assertz('$lgt_pp_predicate_property_'(Other, Functor/Arity, number_of_clauses_from(N,Entity)))
+		assertz('$lgt_pp_predicate_property_'(Other, Functor/Arity, definition_line_from(Line,Entity)))
 	;	true
 	).
 
-'$lgt_update_predicate_line_clauses_properties'({Head}, N) :-
-	!,
-	'$lgt_update_predicate_line_clauses_properties'(user::Head, N).
 
-'$lgt_update_predicate_line_clauses_properties'(Head, 1) :-
-	!,
-	(	'$lgt_pp_term_position_'(Line-_) ->
+'$lgt_update_predicate_line_clauses_properties'(Functor, Arity) :-
+	(	'$lgt_compiler_flag'(source_data, on),
+		'$lgt_pp_term_position_'(Line-_) ->
 		'$lgt_pp_entity'(_, Entity, _),
-		functor(Head, Functor, Arity),
 		assertz('$lgt_pp_predicate_property_'(Entity, Functor/Arity, definition_line(Line)))
 	;	true
 	).
-
-'$lgt_update_predicate_line_clauses_properties'(_, _).
 
 
 
 '$lgt_add_entity_predicate_properties'(_) :-
 	'$lgt_compiler_flag'(source_data, off),
 	!.
+
+'$lgt_add_entity_predicate_properties'(Entity) :-
+	'$lgt_pp_number_of_clauses_'(Other, Functor, Arity, N),
+	assertz('$lgt_pp_predicate_property_'(Other, Functor/Arity, number_of_clauses_from(N, Entity))),
+	fail.
 
 '$lgt_add_entity_predicate_properties'(Entity) :-
 	'$lgt_pp_defines_predicate_'(Functor, Arity, _, _, Mode),
