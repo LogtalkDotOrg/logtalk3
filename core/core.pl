@@ -833,7 +833,7 @@ protocol_property(Ptc, Prop) :-
 
 
 '$lgt_category_property_defines'(Ctg, Def, Functor/Arity, Properties) :-
-	call(Def, Predicate, _, _),
+	call(Def, Predicate, _, _, Ctg),
 	functor(Predicate, Functor, Arity),
 	(	'$lgt_pp_predicate_property_'(Ctg, Functor/Arity, auxiliary),
 		'$lgt_predicate_property_'(Ctg, Functor/Arity, number_of_clauses(N)) ->
