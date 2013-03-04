@@ -8301,6 +8301,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 % '$lgt_tr_clause'(+clause, +compilation_context)
+%
+% translates a source file clause
 
 '$lgt_tr_clause'(Clause, Ctx) :-
 	% ensure that only the compilation context mode is shared between different clauses
@@ -8313,11 +8315,14 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		true
 	;	'$lgt_pp_protocol_'(Entity, Prefix, _, _, _)
 	),
+	% we're translating an entity clause 
 	'$lgt_comp_ctx_prefix'(NewCtx, Prefix),
 	catch(
 		'$lgt_tr_clause'(Clause, TClause, DClause, NewCtx),
 		Error,
 		throw(error(Error, clause(Clause)))),
+	% sucessful translation; check which compile clause to save (normal and debug)
+	% and if we have a clause defined by the user or an auxiliary clause
 	(	'$lgt_compiler_flag'(debug, on) ->
 		(	'$lgt_comp_ctx_mode'(Ctx, compile(aux)) ->
 			assertz('$lgt_pp_entity_aux_clause_'(DClause))
@@ -8343,6 +8348,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	assertz('$lgt_pp_prolog_term_'(Clause, Location)).
 
 '$lgt_tr_clause'(Clause, _) :-
+	% deal with unexpected clause translation failures
 	(	Clause = (Head :- _) ->
 		functor(Head, Functor, Arity)
 	;	functor(Clause, Functor, Arity)
@@ -8353,8 +8359,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 % '$lgt_tr_clause'(+clause, -clause, -clause, +compilation_context)
 %
-% translates a clause (using different compilation contexts for the
-% head and for the body) into a normal clause and a debug clause
+% translates an entity clause into a normal clause and a debug clause
 
 '$lgt_tr_clause'(Clause, _, _, _) :-
 	'$lgt_must_be'(clause, Clause),
@@ -8454,33 +8459,44 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_clause_number'(Fact, N).
 
 
+
+% '$lgt_clause_number'(@callable, -integer)
+%
+% returns the clause number for a compiled predicate; when the clause is the
+% first one for the predicate, we also save the definition line in the source
+% file (assuming that we're not compiling a clause for a dynamically created
+% entity) for use with the reflection built-in predicates and methods
+
 '$lgt_clause_number'(Other::Head, N) :-
+	% clause for multifile predicate
 	!,
 	functor(Head, Functor, Arity),
 	(	retract('$lgt_pp_number_of_clauses_'(Other, Functor, Arity, N0)) ->
 		N is N0 + 1
 	;	% first clause found for this predicate
 		N = 1,
-		'$lgt_update_predicate_line_clauses_properties'(Other, Functor, Arity)
+		'$lgt_save_predicate_line_definition_property'(Other, Functor, Arity)
 	),
 	assertz('$lgt_pp_number_of_clauses_'(Other, Functor, Arity, N)).
 
 '$lgt_clause_number'({Head}, N) :-
+	% pre-compiled predicate clause
 	!,
 	'$lgt_clause_number'(user::Head, N).
 
 '$lgt_clause_number'(Head, N) :-
+	% predicate clause for the entity being compiled
 	functor(Head, Functor, Arity),
 	(	retract('$lgt_pp_number_of_clauses_'(Functor, Arity, N0)) ->
 		N is N0 + 1
 	;	% first clause found for this predicate
 		N = 1,
-		'$lgt_update_predicate_line_clauses_properties'(Functor, Arity)
+		'$lgt_save_predicate_line_definition_property'(Functor, Arity)
 	),
 	assertz('$lgt_pp_number_of_clauses_'(Functor, Arity, N)).
 
 
-'$lgt_update_predicate_line_clauses_properties'(Other, Functor, Arity) :-
+'$lgt_save_predicate_line_definition_property'(Other, Functor, Arity) :-
 	(	'$lgt_compiler_flag'(source_data, on),
 		'$lgt_pp_term_position_'(Line-_) ->
 		'$lgt_pp_entity'(_, Entity, _),
@@ -8489,7 +8505,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	).
 
 
-'$lgt_update_predicate_line_clauses_properties'(Functor, Arity) :-
+'$lgt_save_predicate_line_definition_property'(Functor, Arity) :-
 	(	'$lgt_compiler_flag'(source_data, on),
 		'$lgt_pp_term_position_'(Line-_) ->
 		'$lgt_pp_entity'(_, Entity, _),
@@ -8498,6 +8514,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	).
 
 
+
+% '$lgt_add_entity_predicate_properties'(@entity_identifier)
+%
+% save all entity predicate properties (at the end of entity compilation)
+% for use with the reflection built-in predicates and methods
 
 '$lgt_add_entity_predicate_properties'(_) :-
 	'$lgt_compiler_flag'(source_data, off),
@@ -8512,6 +8533,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_pp_defines_predicate_'(Functor, Arity, _, _, Mode),
 	(	Mode == compile(aux) ->
 		assertz('$lgt_pp_predicate_property_'(Entity, Functor/Arity, auxiliary)),
+		% ensure that there isn't a misleading definition_line/1 property
 		retractall('$lgt_pp_predicate_property_'(Entity, Functor/Arity, definition_line(_)))
 	;	true
 	),
