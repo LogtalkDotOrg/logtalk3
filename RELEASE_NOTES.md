@@ -25,11 +25,15 @@ RELEASE NOTES
 =============
 
 
-3.00.0 Alpha 11 - March ??, 2013
-================================
+3.00.0 Alpha 11 - March 4, 2013
+===============================
 
 Logtalk compiler and runtime
 ----------------------------
+
+* IMPROVED: Compiler performance when compiling source files. On typical source
+files, the improved compiler does less ~24% of inferences and is ~25% faster on
+average (depending on the used Prolog backend compiler).
 
 * IMPROVED: Simpler implementation of coinduction, improving compilation times
 in general and avoiding reporting the generated auxiliary clauses when using
