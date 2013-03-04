@@ -25,6 +25,16 @@ RELEASE NOTES
 =============
 
 
+3.00.0 Alpha 12 - March ??, 2013
+================================
+
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: Added an hack for compiling `include/1` directives when compiling
+modules as objects to the SWI-Prolog adapter file.
+
+
 3.00.0 Alpha 11 - March 4, 2013
 ===============================
 

@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SWI Prolog 6.0.0 and later versions
-%  Last updated on February 27, 2013
+%  Last updated on March 4, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -547,11 +547,17 @@ message_hook(discontiguous(_), _, _) :-			% SWI-Prolog discontiguous predicate
 	'$lgt_swi_directive_expansion'(Directive, Expanded0),
 	(	Expanded0 == [] ->
 		Expanded  == []
+	;	Expanded0 = [_| _] ->
+		Expanded = Expanded0
 	;	Expanded0 =  {ExpandedDirective} ->
 		Expanded  =  {(:- ExpandedDirective)}
 	;	Expanded  =  (:- Expanded0)
 	).
 
+'$lgt_swi_directive_expansion'(include(File), Terms) :-	% just an hack for simple cases
+	logtalk_load_context(entity_type, module),
+	use_module(library(readutil), []),					% auto-loading might be turned off
+	readutil:read_file_to_terms(File, Terms, [extensions([pl, ''])]).
 
 '$lgt_swi_directive_expansion'(public(_), []) :-		% used to provide info to the cross-referencer
 	logtalk_load_context(entity_type, module).			% only when we're compiling a module as an object!
