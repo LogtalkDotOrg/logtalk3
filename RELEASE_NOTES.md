@@ -28,6 +28,12 @@ RELEASE NOTES
 3.00.0 Alpha 12 - March ??, 2013
 ================================
 
+Logtalk compiler and runtime
+----------------------------
+
+* IMPROVED: Performance message printing when no `logtalk::message_hook/4` hook
+predicate is defined.
+
 Prolog adapter and integration files
 ------------------------------------
 

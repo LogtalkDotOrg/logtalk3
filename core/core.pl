@@ -1698,11 +1698,10 @@ logtalk_compile(Files, Flags) :-
 % predicates for compilation warning counting and reporting
 
 '$lgt_reset_warnings_counter'(Goal) :-
-	'$lgt_pp_warnings_top_goal_directory_'(Goal, Directory),
-	'$lgt_change_directory'(Directory),
-	fail.
-
-'$lgt_reset_warnings_counter'(_) :-
+	(	'$lgt_pp_warnings_top_goal_directory_'(Goal, Directory) ->
+		'$lgt_change_directory'(Directory)
+	;	true
+	),
 	'$lgt_reset_warnings_counter'.
 
 
@@ -4578,12 +4577,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		'$lgt_logtalk.message_hook'(Term, Kind, Component, Tokens, ExCtx) ->
 		% message intercepted; assume that the message is printed
 		true
-	;	% add begin/2 and end/1 tokens to, respectively, the start and the end of
-		% the list of tokens; these can be intercepted by the user for suporting
-		% e.g. message coloring
+	;	% add begin/2 and end/1 tokens to, respectively, the start and the end of the list of tokens
+		% but pass them using discrete arguments instead of doing an expensive list append operation;
+		% these two tokens can be intercepted by the user for suporting e.g. message coloring
 		functor(Kind, Functor, _),
-		'$lgt_append'([begin(Functor,Ctx)| Tokens], [end(Ctx)], ExpandedTokens),
-		'$lgt_default_print_message'(Kind, Component, ExpandedTokens, ExCtx)
+		'$lgt_default_print_message'(Kind, Component, begin(Functor,Ctx), Tokens, end(Ctx), ExCtx)
 	).
 
 
@@ -4606,36 +4604,37 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-% '$lgt_default_print_message'(+atom_or_compound, +atom, +list, @execution_context)
+% '$lgt_default_print_message'(+atom_or_compound, +atom, +compound, +list, +compound, @execution_context)
 %
 % print a message that was not intercepted by the user
 
-'$lgt_default_print_message'(_, _, _, _) :-
+'$lgt_default_print_message'(_, _, _, _, _, _) :-
 	'$lgt_compiler_flag'(report, off),
 	!.
 
-'$lgt_default_print_message'(silent, _, _, _) :-
+'$lgt_default_print_message'(silent, _, _, _, _, _) :-
 	!.
 
-'$lgt_default_print_message'(silent(_), _, _, _) :-
+'$lgt_default_print_message'(silent(_), _, _, _, _, _) :-
 	!.
 
-'$lgt_default_print_message'(information, _, _, _) :-
+'$lgt_default_print_message'(information, _, _, _, _, _) :-
 	'$lgt_compiler_flag'(report, warnings),
 	!.
 
-'$lgt_default_print_message'(information(Key), _, _, _) :-
+'$lgt_default_print_message'(information(Key), _, _, _, _, _) :-
 	Key \== requested,
 	'$lgt_compiler_flag'(report, warnings),
 	!.
 
-'$lgt_default_print_message'(Kind, Component, Tokens, ExCtx) :-
+'$lgt_default_print_message'(Kind, Component, BeginToken, Tokens, EndToken, ExCtx) :-
 	(	'$lgt_logtalk.message_prefix_stream'(Kind, Component, Prefix, Stream, ExCtx) ->
 		true
 	;	% no user-defined prefix and stream; use Logtalk default definition
 		'$lgt_default_message_prefix_stream'(Kind, Component, Prefix, Stream)
 	),
-	'$lgt_logtalk.print_message_tokens'(Stream, Prefix, Tokens, ExCtx).
+	'$lgt_logtalk.print_message_tokens'(Stream, Prefix, [BeginToken| Tokens], ExCtx),
+	'$lgt_logtalk.print_message_tokens'(Stream, Prefix, [at_same_line, EndToken], ExCtx).
 
 
 
@@ -4685,7 +4684,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		% token printing intercepted by user-defined code
 		true
 	;	% no user-defined token printing; use Logtalk default
-		'$lgt_print_message_token'(Token, Tokens, Stream, Prefix) ->
+		'$lgt_default_print_message_token'(Token, Tokens, Stream, Prefix) ->
 		true
 	;	% unsupported token
 		writeq(Stream, Token)
@@ -4695,11 +4694,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 % if a token unifies with (-), assume it's a variable and ignore it
 
-'$lgt_print_message_token'((-), _, _, _).
+'$lgt_default_print_message_token'((-), _, _, _).
 
-'$lgt_print_message_token'(at_same_line, _, _, _).
+'$lgt_default_print_message_token'(at_same_line, _, _, _).
 
-'$lgt_print_message_token'(nl, Tokens, Stream, Prefix) :-
+'$lgt_default_print_message_token'(nl, Tokens, Stream, Prefix) :-
 	(	Tokens == [] ->
 		nl(Stream)
 	;	Tokens = [end(_)] ->
@@ -4708,21 +4707,21 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		write(Stream, Prefix)
 	).
 
-'$lgt_print_message_token'(flush, _, Stream, _) :-
+'$lgt_default_print_message_token'(flush, _, Stream, _) :-
 	flush_output(Stream).
 
-'$lgt_print_message_token'(Format-Arguments, _, Stream, _) :-
+'$lgt_default_print_message_token'(Format-Arguments, _, Stream, _) :-
 	format(Stream, Format, Arguments).
 
 % the following tokens were first introduced by SWI-Prolog; we use default definitions
 % for compatibility when running Logtalk with other back-end Prolog compilers
 
-'$lgt_print_message_token'(ansi(_, Format, Arguments), _, Stream, _) :-
+'$lgt_default_print_message_token'(ansi(_, Format, Arguments), _, Stream, _) :-
 	format(Stream, Format, Arguments).
 
-'$lgt_print_message_token'(begin(_, _), _, _, _).
+'$lgt_default_print_message_token'(begin(_, _), _, _, _).
 
-'$lgt_print_message_token'(end(_), _, _, _).
+'$lgt_default_print_message_token'(end(_), _, _, _).
 
 
 
