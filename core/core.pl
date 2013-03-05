@@ -11981,7 +11981,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % functor prefixes used in the compiled code clauses
 
 '$lgt_tr_object_identifier'(Obj) :-
-	'$lgt_term_template'(Obj, GObj),
+	(	atom(Obj) ->
+		GObj = Obj
+	;	% parametric object
+		'$lgt_term_template'(Obj, GObj)
+	),
 	'$lgt_add_referenced_object'(GObj),
 	'$lgt_construct_object_functors'(GObj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm),
 	'$lgt_tr_entity_flags'(object, Flags),
@@ -11996,7 +12000,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % functor prefixes used in the compiled code clauses
 
 '$lgt_tr_category_identifier'(Ctg) :-
-	'$lgt_term_template'(Ctg, GCtg),
+	(	atom(Ctg) ->
+		GCtg = Ctg
+	;	% parametric category
+		'$lgt_term_template'(Ctg, GCtg)
+	),
 	'$lgt_add_referenced_category'(GCtg),
 	'$lgt_construct_category_functors'(GCtg, Prefix, Dcl, Def, Rnm),
 	'$lgt_tr_entity_flags'(category, Flags),
