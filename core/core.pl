@@ -903,7 +903,8 @@ create_object(Obj, Relations, Directives, Clauses) :-
 	'$lgt_gen_object_directives',
 	'$lgt_assert_tr_entity',
 	'$lgt_restore_global_operator_table',
-	'$lgt_clean_pp_clauses'.
+	'$lgt_clean_pp_file_clauses',
+	'$lgt_clean_pp_entity_clauses'.
 
 
 
@@ -951,7 +952,8 @@ create_category(Ctg, Relations, Directives, Clauses) :-
 	'$lgt_gen_category_directives',
 	'$lgt_assert_tr_entity',
 	'$lgt_restore_global_operator_table',
-	'$lgt_clean_pp_clauses',
+	'$lgt_clean_pp_file_clauses',
+	'$lgt_clean_pp_entity_clauses',
 	% complementing categories can invalidate dynamic binding cache entries
 	(	'$lgt_member'(Relation, Relations),
 		 functor(Relation, complements, _) ->
@@ -999,7 +1001,8 @@ create_protocol(Ptc, Relations, Directives) :-
 	'$lgt_gen_protocol_directives',
 	'$lgt_assert_tr_entity',
 	'$lgt_restore_global_operator_table',
-	'$lgt_clean_pp_clauses'.
+	'$lgt_clean_pp_file_clauses',
+	'$lgt_clean_pp_entity_clauses'.
 
 
 
@@ -1032,7 +1035,8 @@ create_protocol(Ptc, Relations, Directives) :-
 
 '$lgt_create_entity_error_handler'(Error, Goal) :-
 	'$lgt_restore_global_operator_table',
-	'$lgt_clean_pp_clauses',
+	'$lgt_clean_pp_file_clauses',
+	'$lgt_clean_pp_entity_clauses',
 	throw(error(Error, logtalk(Goal, _))).
 
 
@@ -1689,7 +1693,8 @@ logtalk_compile(Files, Flags) :-
 		 '$lgt_clear_compiler_flags'),
 		error(Error, _),
 		('$lgt_clear_compiler_flags',
-		 '$lgt_clean_pp_clauses',
+		 '$lgt_clean_pp_file_clauses',
+		 '$lgt_clean_pp_entity_clauses',
 		 '$lgt_reset_warnings_counter'(logtalk_compile(Files, Flags)),
 		 throw(error(Error, logtalk(logtalk_compile(Files, Flags), _))))).
 
@@ -2040,7 +2045,8 @@ logtalk_load(Files, Flags) :-
 		 '$lgt_clear_compiler_flags'),
 		error(Error, _),
 		('$lgt_clear_compiler_flags',
-		 '$lgt_clean_pp_clauses',
+		 '$lgt_clean_pp_file_clauses',
+		 '$lgt_clean_pp_entity_clauses',
 		 '$lgt_reset_warnings_counter'(logtalk_load(Files, Flags)),
 		 throw(error(Error, logtalk(logtalk_load(Files, Flags), _))))).
 
@@ -4826,13 +4832,13 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_load_files'([], Flags) :-
 	!,
-	'$lgt_clean_pp_clauses',
+	'$lgt_clean_pp_file_clauses',
 	% the caller might need the flags set
 	'$lgt_set_compiler_flags'(Flags).
 
 '$lgt_load_files'([File| Files], Flags) :-
 	!,
-	'$lgt_clean_pp_clauses',
+	'$lgt_clean_pp_file_clauses',
 	'$lgt_set_compiler_flags'(Flags),
 	'$lgt_load_file'(File, Flags),
 	'$lgt_load_files'(Files, Flags).
@@ -5004,13 +5010,13 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_compile_files'([], Flags) :-
 	!,
-	'$lgt_clean_pp_clauses',
+	'$lgt_clean_pp_file_clauses',
 	% the caller might need the flags set
 	'$lgt_set_compiler_flags'(Flags).
 
 '$lgt_compile_files'([File| Files], Flags) :-
 	!,
-	'$lgt_clean_pp_clauses',
+	'$lgt_clean_pp_file_clauses',
 	'$lgt_set_compiler_flags'(Flags),
 	'$lgt_file_name'(logtalk, File, Directory, Basename, SourceFile),
 	(	'$lgt_file_exists'(SourceFile) ->
@@ -5018,7 +5024,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	throw(error(existence_error(file, File), _))
 	),
 	'$lgt_file_name'(prolog, File, _, _, PrologFile),
-	asserta('$lgt_pp_file_directory_path_flags_'(Basename, Directory, File, Flags)),
+	assertz('$lgt_pp_file_directory_path_flags_'(Basename, Directory, File, Flags)),
 	'$lgt_compile_file'(SourceFile, PrologFile, Flags, compiling),
 	'$lgt_compile_files'(Files, Flags).
 
@@ -5478,7 +5484,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_warning_context'(Path, Lines),
 	'$lgt_print_message'(error, core, compiler_error(Path, Lines, Error)),
 	'$lgt_restore_global_operator_table',
-	'$lgt_clean_pp_clauses',
+	'$lgt_clean_pp_file_clauses',
+	'$lgt_clean_pp_entity_clauses',
 	'$lgt_reset_warnings_counter',
 	catch(close(Input), _, true),
 	(	nonvar(Output) ->
@@ -5506,7 +5513,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_compiler_stream_io_error_handler'(Stream, Error) :-
 	'$lgt_print_message'(error, core, compiler_stream_error(Error)),
 	'$lgt_restore_global_operator_table',
-	'$lgt_clean_pp_clauses',
+	'$lgt_clean_pp_file_clauses',
+	'$lgt_clean_pp_entity_clauses',
 	'$lgt_reset_warnings_counter',
 	catch(close(Stream), _, true),
 	!,
@@ -5521,7 +5529,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_compiler_open_stream_error_handler'(Error) :-
 	'$lgt_print_message'(error, core, compiler_stream_error(Error)),
 	'$lgt_restore_global_operator_table',
-	'$lgt_clean_pp_clauses',
+	'$lgt_clean_pp_file_clauses',
+	'$lgt_clean_pp_entity_clauses',
 	'$lgt_reset_warnings_counter',
 	!,
 	fail.
@@ -5657,8 +5666,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % (except any user-defined compiler options specified on the compiling
 % and loading predicates)
 
-'$lgt_clean_pp_clauses' :-
-	'$lgt_clean_pp_entity_clauses',
+'$lgt_clean_pp_file_clauses' :-
 	retractall('$lgt_pp_global_operator_'(_, _, _)),
 	retractall('$lgt_pp_file_operator_'(_, _, _)),
 	retractall('$lgt_pp_entity_operator_'(_, _, _, _)),
