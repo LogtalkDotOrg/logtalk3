@@ -34,6 +34,9 @@ Logtalk compiler and runtime
 * IMPROVED: Performance message printing when no `logtalk::message_hook/4` hook
 predicate is defined.
 
+* FIXED: Bug where information about called entity predicates could also be
+saved when compiling meta-arguments during runtime meta-predicate calls.
+
 Prolog adapter and integration files
 ------------------------------------
 

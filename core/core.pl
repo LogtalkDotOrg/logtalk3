@@ -10568,7 +10568,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	% predicate whose compiled normal and debug forms are already computed
 	functor(Pred, Functor, Arity),
 	functor(TCPred, TCFunctor, TCArity),
-	(	'$lgt_pp_calls_predicate_'(Functor, Arity, _, _, _) ->
+	(	'$lgt_comp_ctx_mode'(Ctx, runtime) ->
+		true
+	;	'$lgt_pp_calls_predicate_'(Functor, Arity, _, _, _) ->
 		true
 	;	'$lgt_current_line_numbers'(Lines),
 		assertz('$lgt_pp_calls_predicate_'(Functor, Arity, TCFunctor, TCArity, Lines))
@@ -10594,7 +10596,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_unify_head_thead_args'(Arity, Pred, TPred),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	arg(TArity, TPred, ExCtx),
-	(	'$lgt_pp_calls_predicate_'(Functor, Arity, _, _, _) ->
+	(	'$lgt_comp_ctx_mode'(Ctx, runtime) ->
+		true
+	;	'$lgt_pp_calls_predicate_'(Functor, Arity, _, _, _) ->
 		true
 	;	'$lgt_current_line_numbers'(Lines),
 		assertz('$lgt_pp_calls_predicate_'(Functor, Arity, STFunctor, TArity, Lines))
@@ -10608,7 +10612,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_unify_head_thead_args'(Arity, Pred, TPred),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	arg(TArity, TPred, ExCtx),
-	(	'$lgt_pp_calls_predicate_'(Functor, Arity, _, _, _) ->
+	(	'$lgt_comp_ctx_mode'(Ctx, runtime) ->
+		true
+	;	'$lgt_pp_calls_predicate_'(Functor, Arity, _, _, _) ->
 		true
 	;	'$lgt_current_line_numbers'(Lines),
 		assertz('$lgt_pp_calls_predicate_'(Functor, Arity, TFunctor, TArity, Lines))
