@@ -6668,18 +6668,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_tr_directive'((dynamic), [], _) :-
 	!,
-	assertz('$lgt_pp_dynamic_'),
-	% update entity compilation mode to "dynamic"
-	(	retract('$lgt_pp_object_'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, Flags0)) ->
-		Flags is Flags0 \/ 2,
-		assertz('$lgt_pp_object_'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, Flags))
-	;	retract('$lgt_pp_protocol_'(Ptc, Prefix, Dcl, Rnm, Flags0)) ->
-		Flags is Flags0 \/ 2,
-		assertz('$lgt_pp_protocol_'(Ptc, Prefix, Dcl, Rnm, Flags))
-	;	retract('$lgt_pp_category_'(Ctg, Prefix, Dcl, Def, Rnm, Flags0)),
-		Flags is Flags0 \/ 2,
-		assertz('$lgt_pp_category_'(Ctg, Prefix, Dcl, Def, Rnm, Flags))
-	).
+	assertz('$lgt_pp_dynamic_').
 
 
 % initialization/1 entity directive
@@ -11998,8 +11987,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	),
 	'$lgt_add_referenced_object'(GObj),
 	'$lgt_construct_object_functors'(GObj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm),
-	'$lgt_tr_entity_flags'(object, Flags),
-	assertz('$lgt_pp_object_'(GObj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, Flags)),
+	% the object flags are only computed at the end of the entity compilation
+	assertz('$lgt_pp_object_'(GObj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, _)),
 	asserta('$lgt_pp_predicate_mutex_counter_'(0)).
 
 
@@ -12017,8 +12006,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	),
 	'$lgt_add_referenced_category'(GCtg),
 	'$lgt_construct_category_functors'(GCtg, Prefix, Dcl, Def, Rnm),
-	'$lgt_tr_entity_flags'(category, Flags),
-	assertz('$lgt_pp_category_'(GCtg, Prefix, Dcl, Def, Rnm, Flags)),
+	% the category flags are only computed at the end of the entity compilation
+	assertz('$lgt_pp_category_'(GCtg, Prefix, Dcl, Def, Rnm, _)),
 	asserta('$lgt_pp_predicate_mutex_counter_'(0)).
 
 
@@ -12031,8 +12020,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_protocol_identifier'(Ptc) :-
 	'$lgt_add_referenced_protocol'(Ptc),
 	'$lgt_construct_protocol_functors'(Ptc, Prefix, Dcl, Rnm),
-	'$lgt_tr_entity_flags'(protocol, Flags),
-	assertz('$lgt_pp_protocol_'(Ptc, Prefix, Dcl, Rnm, Flags)),
+	% the protocol flags are only computed at the end of the entity compilation
+	assertz('$lgt_pp_protocol_'(Ptc, Prefix, Dcl, Rnm, _)),
 	% necessary in order to be able to save synchronized predicate properties
 	asserta('$lgt_pp_predicate_mutex_counter_'(0)).
 
