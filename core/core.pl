@@ -4850,7 +4850,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_file_name'(logtalk, File, Directory, Basename, SourceFile),
 	(	'$lgt_file_exists'(SourceFile) ->
 		true
-	;	throw(error(existence_error(file, SourceFile), _))
+	;	throw(error(existence_error(file, File), _))
 	),
 	'$lgt_file_name'(prolog, File, _, _, PrologFile),
 	asserta('$lgt_pp_file_directory_path_flags_'(Basename, Directory, File, Flags)),
@@ -5015,7 +5015,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_file_name'(logtalk, File, Directory, Basename, SourceFile),
 	(	'$lgt_file_exists'(SourceFile) ->
 		true
-	;	throw(error(existence_error(file, SourceFile), _))
+	;	throw(error(existence_error(file, File), _))
 	),
 	'$lgt_file_name'(prolog, File, _, _, PrologFile),
 	asserta('$lgt_pp_file_directory_path_flags_'(Basename, Directory, File, Flags)),
