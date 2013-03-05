@@ -1716,26 +1716,26 @@ logtalk_compile(Files, Flags) :-
 		true
 	;	'$lgt_current_directory'(Current),
 		% remember top compilation/loading goal and directory
-		asserta('$lgt_pp_warnings_top_goal_directory_'(Term, Current)),
+		assertz('$lgt_pp_warnings_top_goal_directory_'(Term, Current)),
 		% initialize compilation warnings counter
 		retractall('$lgt_pp_compilation_warnings_counter_'(_)),
-		asserta('$lgt_pp_compilation_warnings_counter_'(0)),
+		assertz('$lgt_pp_compilation_warnings_counter_'(0)),
 		% initialize loading warnings counter
 		retractall('$lgt_pp_loading_warnings_counter_'(_)),
-		asserta('$lgt_pp_loading_warnings_counter_'(0))
+		assertz('$lgt_pp_loading_warnings_counter_'(0))
 	).
 
 
 '$lgt_increment_compile_warnings_counter' :-
 	retract('$lgt_pp_compilation_warnings_counter_'(Old)),
 	New is Old + 1,
-	asserta('$lgt_pp_compilation_warnings_counter_'(New)).
+	assertz('$lgt_pp_compilation_warnings_counter_'(New)).
 
 
 '$lgt_increment_loadind_warnings_counter' :-
 	retract('$lgt_pp_loading_warnings_counter_'(Old)),
 	New is Old + 1,
-	asserta('$lgt_pp_loading_warnings_counter_'(New)).
+	assertz('$lgt_pp_loading_warnings_counter_'(New)).
 
 
 '$lgt_report_warning_numbers'(Goal) :-
@@ -1753,7 +1753,7 @@ logtalk_compile(Files, Flags) :-
 
 % '$lgt_check_source_files'(@term)
 %
-% check if the source file names are valid and correspond to existing files
+% check if the source file names are valid (but not if the file exists)
 
 '$lgt_check_source_files'(Files) :-
 	var(Files),
@@ -1789,12 +1789,6 @@ logtalk_compile(Files, Flags) :-
 	functor(File, Library, _),
 	\+ '$lgt_expand_library_path'(Library, _),
 	throw(error(existence_error(library, Library), _)).
-
-'$lgt_check_source_file'(File) :-
-	\+ (	'$lgt_file_name'(logtalk, File, _, _, Source),
-			'$lgt_file_exists'(Source)
-	),
-	throw(error(existence_error(file, File), _)).
 
 '$lgt_check_source_file'(_).
 
@@ -1989,7 +1983,7 @@ logtalk_compile(Files, Flags) :-
 	functor(Flag, Name, 1),
 	arg(1, Flag, Value),
 	retractall('$lgt_pp_file_compiler_flag_'(Name, _)),
-	asserta('$lgt_pp_file_compiler_flag_'(Name, Value)),
+	assertz('$lgt_pp_file_compiler_flag_'(Name, Value)),
 	'$lgt_assert_compiler_flags'(Flags).
 
 
@@ -4854,6 +4848,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_load_file'(File, Flags) :-
 	'$lgt_file_name'(logtalk, File, Directory, Basename, SourceFile),
+	(	'$lgt_file_exists'(SourceFile) ->
+		true
+	;	throw(error(existence_error(file, SourceFile), _))
+	),
 	'$lgt_file_name'(prolog, File, _, _, PrologFile),
 	asserta('$lgt_pp_file_directory_path_flags_'(Basename, Directory, File, Flags)),
 	% change the directory to the directory of the file being loaded as
@@ -5015,6 +5013,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_clean_pp_clauses',
 	'$lgt_set_compiler_flags'(Flags),
 	'$lgt_file_name'(logtalk, File, Directory, Basename, SourceFile),
+	(	'$lgt_file_exists'(SourceFile) ->
+		true
+	;	throw(error(existence_error(file, SourceFile), _))
+	),
 	'$lgt_file_name'(prolog, File, _, _, PrologFile),
 	asserta('$lgt_pp_file_directory_path_flags_'(Basename, Directory, File, Flags)),
 	'$lgt_compile_file'(SourceFile, PrologFile, Flags, compiling),
@@ -5057,11 +5059,15 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	stream_property(Output, alias(logtalk_compiler_output)), !,
 	'$lgt_compiler_flag'(source_data, SourceData),
 	catch(
-		('$lgt_write_prolog_terms'(SourceData, Output),
-		 '$lgt_write_logtalk_directives'(Output),
-		 '$lgt_write_logtalk_clauses'(SourceData, Output)),
+		'$lgt_write_tr_entity'(SourceData, Output),
 		Error,
 		'$lgt_compiler_stream_io_error_handler'(Output, Error)).
+
+
+'$lgt_write_tr_entity'(SourceData, Output) :-
+	'$lgt_write_prolog_terms'(SourceData, Output),
+	'$lgt_write_logtalk_directives'(Output),
+	'$lgt_write_logtalk_clauses'(SourceData, Output).
 
 
 
@@ -5159,17 +5165,21 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	% finish writing the generated Prolog file
 	'$lgt_compiler_flag'(source_data, SourceData),
 	catch(
-		(% write out any Prolog code occurring after the last source file entity
-		 '$lgt_write_prolog_terms'(SourceData, Output),
-		 % write entity runtime directives and clauses
-		 '$lgt_write_runtime_clauses'(SourceData, Output),
-		 % write initialization/1 directive at the end of the file to improve
-		 % compatibility with non-ISO compliant Prolog compilers
-		 '$lgt_write_initialization_call'(Output)),
+		'$lgt_write_runtime_tables'(SourceData, Output),
 		OutputError,
 		'$lgt_compiler_stream_io_error_handler'(Output, OutputError)),
 	close(Output),
 	'$lgt_restore_global_operator_table'.
+
+
+'$lgt_write_runtime_tables'(SourceData, Output) :-
+	% write out any Prolog code occurring after the last source file entity
+	'$lgt_write_prolog_terms'(SourceData, Output),
+	% write entity runtime directives and clauses
+	'$lgt_write_runtime_clauses'(SourceData, Output),
+	% write initialization/1 directive at the end of the file to improve
+	% compatibility with non-ISO compliant Prolog compilers
+	'$lgt_write_initialization_call'(Output).
 
 
 
