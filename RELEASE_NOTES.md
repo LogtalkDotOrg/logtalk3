@@ -43,6 +43,9 @@ compilation times.
 * FIXED: Bug where information about called entity predicates could also be
 saved when compiling meta-arguments during runtime meta-predicate calls.
 
+* FIXED: Compiler bug where the full path of the source file being compiled
+would not be correctly saved.
+
 Prolog adapter and integration files
 ------------------------------------
 

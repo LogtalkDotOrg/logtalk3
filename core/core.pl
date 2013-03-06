@@ -4856,7 +4856,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	throw(error(existence_error(file, File), _))
 	),
 	'$lgt_file_name'(prolog, File, _, _, PrologFile),
-	asserta('$lgt_pp_file_directory_path_flags_'(Basename, Directory, File, Flags)),
+	asserta('$lgt_pp_file_directory_path_flags_'(Basename, Directory, SourceFile, Flags)),
 	% change the directory to the directory of the file being loaded as
 	% it can be a loader file loading other files in its directory
 	'$lgt_current_directory'(Current),
@@ -5021,7 +5021,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	throw(error(existence_error(file, File), _))
 	),
 	'$lgt_file_name'(prolog, File, _, _, PrologFile),
-	assertz('$lgt_pp_file_directory_path_flags_'(Basename, Directory, File, Flags)),
+	assertz('$lgt_pp_file_directory_path_flags_'(Basename, Directory, SourceFile, Flags)),
 	'$lgt_compile_file'(SourceFile, PrologFile, Flags, compiling),
 	'$lgt_compile_files'(Files, Flags).
 
