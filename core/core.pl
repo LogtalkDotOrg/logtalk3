@@ -5768,8 +5768,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	retractall('$lgt_pp_dynamic_'),
 	retractall('$lgt_pp_threaded_'),
 	retractall('$lgt_pp_synchronized_'),
-	retractall('$lgt_pp_aux_predicate_counter_'(_)),
-	asserta('$lgt_pp_aux_predicate_counter_'(0)).
+	retractall('$lgt_pp_aux_predicate_counter_'(_)).
 
 
 
@@ -10646,15 +10645,16 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 
-
 % '$lgt_gen_aux_predicate_functor'(+atom, -atom)
 %
 % generates a new functor for an auxiliary predicate
 % based on a base atom and an entity global counter
 
 '$lgt_gen_aux_predicate_functor'(Base, Functor) :-
-	retract('$lgt_pp_aux_predicate_counter_'(Old)),
-	New is Old + 1,
+	(	retract('$lgt_pp_aux_predicate_counter_'(Old)) ->
+		New is Old + 1
+	;	New is 1
+	),	
 	asserta('$lgt_pp_aux_predicate_counter_'(New)),
 	number_codes(New, NewCodes),
 	atom_codes(NewAtom, NewCodes),
