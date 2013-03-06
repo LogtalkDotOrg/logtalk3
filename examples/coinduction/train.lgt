@@ -16,17 +16,20 @@
 	:- object(train).
 
 		:- info([
-			version is 0.4,
+			version is 0.5,
 			author is 'Neda Saeedloei and Gopal Gupta. Adapted to Logtalk by Paulo Moura.',
-			date is 2011/08/16,
+			date is 2013/03/06,
 			comment is 'Timed automata example.'
 		]).
 
 		:- public(driver/5).
+
+		:- private(driver/9).
+		:- coinductive(driver(+,+,+,+,+,-,-,-,-)).
+
 		driver(S0, S1, S2, [X| Rest], [(X,T)| R]) :-
 			driver(S0, S1, S2, [X| Rest], [(X,T)| R], 0, 0, 0, 0).
 
-		:- coinductive(driver(+,+,+,+,+,-,-,-,-)).
 		driver(S0, S1, S2, [X| Rest], [(X,T)| R], T, T0, T1, T2) :-
 			train(S0, X, S00, T, T0, T00),
 			gate(S1, X, S10, T, T1, T10),
@@ -80,17 +83,20 @@
 	:- object(train).
 	
 		:- info([
-			version is 0.3,
+			version is 0.4,
 			author is 'Neda Saeedloei and Gopal Gupta. Adapted to Logtalk by Paulo Moura.',
-			date is 2011/08/12,
+			date is 2013/03/06,
 			comment is 'Timed automata example.'
 		]).
 
 		:- public(driver/5).
+
+		:- private(driver/9).
+		:- coinductive(driver(+,+,+,+,+,-,-,-,-)).
+
 		driver(S0, S1, S2, [X| Rest], [(X,T)| R]) :-
 			driver(S0, S1, S2, [X| Rest], [(X,T)| R], 0, 0, 0, 0).
 
-		:- coinductive(driver(+,+,+,+,+,-,-,-,-)).
 		driver(S0, S1, S2, [X| Rest], [(X,T)| R], T, T0, T1, T2) :-
 			train(S0, X, S00, T, T0, T00),
 			gate(S1, X, S10, T, T1, T10),

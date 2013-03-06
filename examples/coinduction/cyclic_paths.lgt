@@ -62,19 +62,19 @@
 :- object(cp3).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura. Derived from a Gopal Gupta et al example.',
-		date is 2012/07/30,
+		date is 2013/03/06,
 		comment is 'Coinduction example of finding the cyclic paths in a graph.'
 	]).
 
 	:- public(path/3).
 
-	path(From, Path, MaxLength) :-
-		path(From, Path, 0, MaxLength).
-
 	:- private(path/4).
 	:- coinductive(path(+, +, -, -)).
+
+	path(From, Path, MaxLength) :-
+		path(From, Path, 0, MaxLength).
 
 	path(From, [From| Path], Length, MaxLength) :-
 		Length < MaxLength,

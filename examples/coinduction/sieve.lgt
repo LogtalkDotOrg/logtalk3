@@ -19,6 +19,11 @@
 	]).
 
 	:- public(primes/2).
+
+	:- coinductive([
+		sieve/2, filter/3
+	]).
+
 	% computes a coinductive list with all the primes in the 2..N interval
 	primes(N, Primes) :-
 		generate_infinite_list(N, List),
@@ -34,12 +39,10 @@
 		Next is Inf + 1,
 		sequence(Next, Sup, List, Tail).
 
-	:- coinductive(sieve/2).
 	sieve([H| T], [H| R]) :-
 		filter(H, T, F),
 		sieve(F, R).
 
-	:- coinductive(filter/3).
 	filter(H, [K| T], L) :-
 		(	K > H, K mod H =:= 0 ->
 			% throw away the multiple we found

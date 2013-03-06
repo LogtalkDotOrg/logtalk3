@@ -151,9 +151,9 @@
 	succeeds(coinduction_train_1) :-
 		bagof((X, R), train::driver(s0, s0, s0, X, R), [(X1, R1), (X2, R2)]),
 		X1 = [approach| TX1], TX1 = [lower, down, in, out, exit, raise, approach, up| TX1],
-		R1 = [ (approach, 0)| TR1], TR1 = [ (lower, 1.0), (down, _), (in, _), (out, _), (exit, _), (raise, _), (approach, _), (up, _)| TR1],
+		R1 = [(approach, 0)| TR1], TR1 = [ (lower, 1.0), (down, _), (in, _), (out, _), (exit, _), (raise, _), (approach, _), (up, _)| TR1],
 		X2 = [approach| TX2], TX2 = [lower, down, in, out, exit, raise, up, approach| TX2],
-		R2 = [ (approach, 0)| TR2], TR2 = [ (lower, 1.0), (down, _), (in, _), (out, _), (exit, _), (raise, _), (up, _), (approach, _)| TR2].
+		R2 = [(approach, 0)| TR2], TR2 = [ (lower, 1.0), (down, _), (in, _), (out, _), (exit, _), (raise, _), (up, _), (approach, _)| TR2].
 	:- endif.
 
 	:- if(current_object(cotrain)).

@@ -6,15 +6,26 @@
 	:- object(cotrain).
 
 		:- info([
-			version is 0.1,
+			version is 0.2,
 			author is 'Neda Saeedloei and Gopal Gupta. Adapted to Logtalk by Paulo Moura.',
-			date is 2011/08/20,
+			date is 2013/03/06,
 			comment is 'Timed automata coroutining example.'
 		]).
 
-		:- uses(streamvars, [new/2::new_stream/2, (=>)/2::read_from_stream/2, (<=)/2::update_stream/2]).
+		:- uses(streamvars, [
+			new/2::new_stream/2, (=>)/2::read_from_stream/2, (<=)/2::update_stream/2
+		]).
 
-		:- public(comain/3).
+		:- public([
+			comain/3, test_max/3
+		]).
+
+		:- coinductive([
+			train(+,+,+,-,-,-),
+			controller(+,+,+,-,-,-),
+			gate(+,+,-,-,-)
+		]).
+
 		comain(A, B, C) :-
 			new_stream(Wall, 0),
 			new_stream(Results, []),
@@ -25,7 +36,6 @@
 			suspend((suspend(gate(C, s0, Wall, Results, Clock), 0, (C->inst)), controller(B, C, s0, Wall, Results, Clock)), 0, (A->inst)),
 			train(A, B, s0, Wall, Results, Clock).
 
-		:- public(test_max/3).
 		test_max(M, N, R) :-
 			new_stream(Wall, 0),
 			new_stream(Results, []),
@@ -51,7 +61,6 @@
 		gtrans(s2, raise, s3).
 		gtrans(s3, up,    s0).
 
-		:- coinductive(train(+,+,+,-,-,-)).
 		train(X, Y, Si, Wall, Results, Clock) :-
 			read_from_stream(Wall, W),
 			read_from_stream(Results, R),
@@ -74,7 +83,6 @@
 			%update_stream(Wall, W2),
 			X = [H| Xs].
 
-		:- coinductive(controller(+,+,+,-,-,-)).
 		controller([H| Xs], Y, Sc, Wall, Results, Clock) :-
 			read_from_stream(Wall, W),
 			read_from_stream(Results, R),
@@ -89,7 +97,6 @@
 			update_stream(Results, R2),
 			Y = [M| Ys].
 
-		:- coinductive(gate(+,+,-,-,-)).
 		gate([H| Xs], Sg, Wall, Results, Clock) :-
 			read_from_stream(Wall, W),
 			read_from_stream(Results, R),
@@ -117,15 +124,26 @@
 	:- object(cotrain).
 	
 		:- info([
-			version is 0.1,
+			version is 0.2,
 			author is 'Neda Saeedloei and Gopal Gupta. Adapted to Logtalk by Paulo Moura.',
-			date is 2011/08/20,
+			date is 2013/03/06,
 			comment is 'Timed automata coroutining example.'
 		]).
 
-		:- uses(streamvars, [new/2::new_stream/2, (=>)/2::read_from_stream/2, (<=)/2::update_stream/2]).
+		:- uses(streamvars, [
+			new/2::new_stream/2, (=>)/2::read_from_stream/2, (<=)/2::update_stream/2
+		]).
 
-		:- public(comain/3).
+		:- public([
+			comain/3, test_max/3
+		]).
+
+		:- coinductive([
+			train(+,+,+,-,-,-),
+			controller(+,+,+,-,-,-),
+			gate(+,+,-,-,-)
+		]).
+
 		comain(A, B, C) :-
 			new_stream(Wall, 0),
 			new_stream(Results, []),
@@ -136,7 +154,6 @@
 			freeze(A, (freeze(C, gate(C, s0, Wall, Results, Clock)), controller(B, C, s0, Wall, Results, Clock))),
 			train(A, B, s0, Wall, Results, Clock).
 
-		:- public(test_max/3).
 		test_max(M, N, R) :-
 			new_stream(Wall, 0),
 			new_stream(Results, []),
@@ -162,7 +179,6 @@
 		gtrans(s2, raise, s3).
 		gtrans(s3, up,    s0).
 
-		:- coinductive(train(+,+,+,-,-,-)).
 		train(X, Y, Si, Wall, Results, Clock) :-
 			read_from_stream(Wall, W),
 			read_from_stream(Results, R),
@@ -185,7 +201,6 @@
 			%update_stream(Wall, W2),
 			X = [H| Xs].
 
-		:- coinductive(controller(+,+,+,-,-,-)).
 		controller([H| Xs], Y, Sc, Wall, Results, Clock) :-
 			read_from_stream(Wall, W),
 			read_from_stream(Results, R),
@@ -200,7 +215,6 @@
 			update_stream(Results, R2),
 			Y = [M| Ys].
 
-		:- coinductive(gate(+,+,-,-,-)).
 		gate([H| Xs], Sg, Wall, Results, Clock) :-
 			read_from_stream(Wall, W),
 			read_from_stream(Results, R),
