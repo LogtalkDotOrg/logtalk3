@@ -1716,12 +1716,12 @@ logtalk_compile(Files, Flags) :-
 	retractall('$lgt_pp_loading_warnings_counter_'(_)).
 
 
-'$lgt_init_warnings_counter'(Term) :-
+'$lgt_init_warnings_counter'(Goal) :-
 	(	'$lgt_pp_warnings_top_goal_directory_'(_, _) ->
 		true
 	;	'$lgt_current_directory'(Current),
 		% remember top compilation/loading goal and directory
-		assertz('$lgt_pp_warnings_top_goal_directory_'(Term, Current)),
+		assertz('$lgt_pp_warnings_top_goal_directory_'(Goal, Current)),
 		% initialize compilation warnings counter
 		retractall('$lgt_pp_compilation_warnings_counter_'(_)),
 		assertz('$lgt_pp_compilation_warnings_counter_'(0)),
@@ -10336,35 +10336,42 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_tr_body'(_ is Exp, _, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	'$lgt_compiler_flag'(portability, warning),
 	'$lgt_check_non_portable_functions'(Exp),
 	fail.
 '$lgt_tr_body'(Exp1 =:= Exp2, _, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	'$lgt_compiler_flag'(portability, warning),
 	'$lgt_check_non_portable_functions'(Exp1),
 	'$lgt_check_non_portable_functions'(Exp2),
 	fail.
 '$lgt_tr_body'(Exp1 =\= Exp2, _, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	'$lgt_compiler_flag'(portability, warning),
 	'$lgt_check_non_portable_functions'(Exp1),
 	'$lgt_check_non_portable_functions'(Exp2),
 	fail.
 '$lgt_tr_body'(Exp1 < Exp2, _, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	'$lgt_compiler_flag'(portability, warning),
 	'$lgt_check_non_portable_functions'(Exp1),
 	'$lgt_check_non_portable_functions'(Exp2),
 	fail.
 '$lgt_tr_body'(Exp1 =< Exp2, _, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	'$lgt_compiler_flag'(portability, warning),
 	'$lgt_check_non_portable_functions'(Exp1),
 	'$lgt_check_non_portable_functions'(Exp2),
 	fail.
 '$lgt_tr_body'(Exp1 > Exp2, _, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	'$lgt_compiler_flag'(portability, warning),
 	'$lgt_check_non_portable_functions'(Exp1),
 	'$lgt_check_non_portable_functions'(Exp2),
 	fail.
 '$lgt_tr_body'(Exp1 >= Exp2, _, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	'$lgt_compiler_flag'(portability, warning),
 	'$lgt_check_non_portable_functions'(Exp1),
 	'$lgt_check_non_portable_functions'(Exp2),
 	fail.
@@ -10960,14 +10967,13 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	nonvar(Pred),
 	% only for objects...
 	'$lgt_pp_object_'(_, Prefix, _, _, _, _, _, _, _, _, _),
-	% not compiled in debug mode
-	'$lgt_compiler_flag'(debug, off),
 	% only for facts
 	(	Pred = (Head :- Body) ->
 		Body == true
 	;	Head = Pred
 	),
 	callable(Head),
+	% instantiated fact
 	functor(Head, Functor, Arity),
 	% a dynamic directive must be present
 	'$lgt_pp_dynamic_'(Functor, Arity),
@@ -10976,6 +10982,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	'$lgt_pp_protected_'(Functor, Arity)
 	;	'$lgt_pp_private_'(Functor, Arity)
 	), !,
+	% not compiled in debug mode
+	'$lgt_compiler_flag'(debug, off),
+	% compile the fact
 	'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	functor(TPred, TFunctor, TArity),
 	'$lgt_unify_head_thead_args'(Arity, Head, TPred).
@@ -11033,10 +11042,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % '$lgt_check_non_portable_functions'(@term)
 %
 % checks an arithmetic expression for calls to non-standard Prolog functions
-
-'$lgt_check_non_portable_functions'(_) :-
-	'$lgt_compiler_flag'(portability, silent),
-	!.
 
 '$lgt_check_non_portable_functions'(Expression) :-
 	var(Expression),
@@ -13205,8 +13210,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 % the database built-in methods need to check if a local declaration or a local definition
 % exists for a predicate; in order to avoid predicate existence errors, we need to generate
-% catchall clauses for static when there are no local predicate declarations or no local
-% predicate definitions
+% catchall clauses for static objects when there are no local predicate declarations or no
+% local predicate definitions
 
 '$lgt_gen_object_catchall_dcl_clauses'(true).
 
@@ -14284,16 +14289,13 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_fix_predicate_calls'(Pred, fail) :-
 	functor(Pred, Functor, Arity),
-	'$lgt_undefined_predicate_call'(_, Functor/Arity, _),
-	% calls to static, declared but undefined predicates;
-	% must fail instead of throwing an exception
-	!.
-
-'$lgt_fix_predicate_calls'(Pred, fail) :-
-	functor(Pred, Functor, Arity),
-	'$lgt_undefined_non_terminal_call'(_, Functor/Arity, _),
-	% calls to static, declared but undefined non terminals;
-	% must fail instead of throwing an exception
+	(	'$lgt_undefined_predicate_call'(_, Functor/Arity, _)
+		% calls to static, declared but undefined predicates
+		% must fail instead of throwing an exception
+	;	'$lgt_undefined_non_terminal_call'(_, Functor/Arity, _)
+		% calls to static, declared but undefined non terminals
+		% must fail instead of throwing an exception
+	),
 	!.
 
 '$lgt_fix_predicate_calls'(Pred, TPred) :-
@@ -15468,12 +15470,16 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % checks if the argument is either a Prolog or Logtalk built-in predicate
 
 '$lgt_is_built_in_predicate'(Pred) :-
-	(	'$lgt_prolog_built_in_predicate'(Pred) ->
-		true
-	;	'$lgt_logtalk_built_in_predicate'(Pred) ->
-		true
-	;	fail
-	).
+	'$lgt_logtalk_built_in_predicate'(Pred),
+	!.
+
+'$lgt_is_built_in_predicate'(Pred) :-
+	'$lgt_predicate_property'(Pred, built_in),
+	!.
+
+'$lgt_is_built_in_predicate'(Pred) :-
+	'$lgt_iso_predicate'(Pred),
+	!.
 
 
 

@@ -31,6 +31,8 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: Compiler performance when compiling source files.
+
 * IMPROVED: The compiler now checks for the occurrence of `synchronized/1` and
 `coinductive/1` directives after calls to the declared predicates.
 
@@ -50,7 +52,8 @@ Prolog adapter and integration files
 ------------------------------------
 
 * UPDATED: Added an hack for compiling `include/1` directives when compiling
-modules as objects to the SWI-Prolog adapter file.
+modules as objects to the SWI-Prolog adapter file. Also use a faster version
+of the term reading internal predicate.
 
 
 3.00.0 Alpha 11 - March 4, 2013
