@@ -494,7 +494,7 @@ message_hook(discontiguous(_), _, _) :-			% SWI-Prolog discontiguous predicate
 
 	% the public operator was added to SWI-Prolog on version 5.11.9
 	'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd) :-
-		(	logtalk_load_context(entity_type, module) ->
+		(	'$lgt_pp_module_'(_) ->
 			% compiling a module as an object
 			read_term(Stream, Term, [term_position(PositionBegin)| Options])
 		;	% workaround SWI-Prolog public/1 operator clash
@@ -513,7 +513,7 @@ message_hook(discontiguous(_), _, _) :-			% SWI-Prolog discontiguous predicate
 	% just in case the operator definition changes or is removed,
 	% we also provide a more generic definition of this predicate
 	'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd) :-
-		(	logtalk_load_context(entity_type, module) ->
+		(	'$lgt_pp_module_'(_) ->
 			% compiling a module as an object
 			read_term(Stream, Term, [term_position(PositionBegin)| Options])
 		;	current_op(Priority, Specifier, (public)) ->
