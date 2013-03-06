@@ -31,6 +31,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: The compiler now checks for the occurrence of `synchronized/1` and
+`coinductive/1` directives after calls to the declared predicates.
+
 * IMPROVED: Performance message printing when no `logtalk::message_hook/4` hook
 predicate is defined.
 

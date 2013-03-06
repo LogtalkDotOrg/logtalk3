@@ -6990,6 +6990,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_synchronized_directive'([Pred| Resources], Mutex) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
+	'$lgt_check_for_directive_after_call'(Functor/Arity),
 	(	'$lgt_pp_dynamic_'(Functor, Arity) ->
 		throw(permission_error(modify, dynamic_predicate, Functor/Arity))
 	;	'$lgt_pp_calls_predicate_'(Functor, Arity, _, _, _) ->
@@ -7002,6 +7003,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_synchronized_directive'([NonTerminal| Resources], Mutex) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, Arity, ExtArity),
 	!,
+	'$lgt_check_for_directive_after_call'(Functor/ExtArity),
 	(	'$lgt_pp_dynamic_'(Functor, ExtArity) ->
 		throw(permission_error(modify, dynamic_non_terminal, Functor//Arity))
 	;	'$lgt_pp_calls_non_terminal_'(Functor, Arity, _) ->
@@ -7595,6 +7597,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_must_be'(nonvar, Pred),
 	'$lgt_valid_coinductive_template'(Pred, Functor, Arity, Head, TestHead, Template),
 	!,
+	'$lgt_check_for_directive_after_call'(Functor/Arity),
 	% construct functor for the auxiliary predicate
 	atom_concat(Functor, '__coinductive', CFunctor),
 	% construct functor for debugging calls to the auxiliary predicate
