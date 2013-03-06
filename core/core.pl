@@ -15499,94 +15499,84 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % '$lgt_built_in_method'(@callable, ?scope, ?callable, ?integer)
 
 '$lgt_built_in_method'(Method, Scope, Meta, Flags) :-
-	functor(Method, Functor, Arity),
-	'$lgt_built_in_method'(Functor, Arity, Scope, Meta, Flags).
-
-
-% control constructs
-'$lgt_built_in_method'((::), Arity, Scope, Meta, 1) :-
-	(	Arity =:= 2 ->
-		Scope = p(p(p)),
-		Meta = '::'(*, 0)
-	;	Arity =:= 1,
-		Scope = p,
-		Meta = '::'(0)
+	(	'$lgt_built_in_method_spec'(Method, Scope, Meta, Flags) ->
+		true
+	;	% check if call/2-N
+		functor(Method, call, Arity),
+		Arity > 1,
+		functor(Meta, call, Arity),	
+		Closure is Arity - 1,
+		arg(1, Meta, Closure),
+		'$lgt_built_in_method_call_n_args'(Arity, Meta)
 	).
-'$lgt_built_in_method'('.', 2, p, [(::)], 1).
-'$lgt_built_in_method'((^^), 1, p, '^^'(0), 1).
-'$lgt_built_in_method'((<<), 2, p(p(p)), '<<'(*, 0), 1).
-'$lgt_built_in_method'((>>), 2, p, '>>'(*, 0), 1).
-'$lgt_built_in_method'((:), Arity, p, Meta, 1) :-
-	(	Arity =:= 2,
-		'$lgt_prolog_feature'(modules, supported) ->
-		Meta = ':'(*, 0)
-	;	Arity =:= 1,
-		Meta = ':'(0)
-	).
-'$lgt_built_in_method'(({}), 1, p, '{}'(0), 1).
-'$lgt_built_in_method'((','), 2, p(p(p)), ','(0, 0), 1).
-'$lgt_built_in_method'((;), 2, p(p(p)), ';'(0, 0), 1).
-'$lgt_built_in_method'((->), 2, p(p(p)), '->'(0, 0), 1).
-'$lgt_built_in_method'((*->), 2, p(p(p)), '*->'(0, 0), 1) :-
-	'$lgt_prolog_built_in_predicate'('*->'(_, _)).
-% reflection methods
-'$lgt_built_in_method'(current_op, 3, p(p(p)), no, 1).
-'$lgt_built_in_method'(current_predicate, 1, p(p(p)), no, 1).
-'$lgt_built_in_method'(predicate_property, 2, p(p(p)), no, 1).
-% database methods
-'$lgt_built_in_method'(abolish, 1, p(p(p)), abolish((::)), 1).
-'$lgt_built_in_method'(assert, 1, p(p(p)), assert((::)), 1).	% just for compatibility with old code!
-'$lgt_built_in_method'(asserta, 1, p(p(p)), asserta((::)), 1).
-'$lgt_built_in_method'(assertz, 1, p(p(p)), assertz((::)), 1).
-'$lgt_built_in_method'(clause, 2, p(p(p)), clause((::), *), 1).
-'$lgt_built_in_method'(retract, 1, p(p(p)), retract((::)), 1).
-'$lgt_built_in_method'(retractall, 1, p(p(p)), retractall((::)), 1).
-% term expansion methods
-'$lgt_built_in_method'(expand_term, 2, p(p(p)), no, 1).
-'$lgt_built_in_method'(expand_goal, 2, p(p(p)), no, 1).
-% DCGs methods
-'$lgt_built_in_method'(phrase, Arity, p, Meta, 1) :-
-	(	Arity =:= 2 ->
-		Meta = phrase(2, *)
-	;	Arity =:= 3,
-		Meta = phrase(2, *, *)
-	).
-% meta-calls plus logic and control methods
-'$lgt_built_in_method'((\+), 1, p, \+ 0, 1).
-'$lgt_built_in_method'(call, Arity, p, Meta, 1) :-  % call/1-N
-	Arity > 0,
-	functor(Meta, call, Arity),
-	Closure is Arity - 1,
-	arg(1, Meta, Closure),
-	'$lgt_built_in_method_call_n_args'(Arity, Meta).
-'$lgt_built_in_method'(once, 1, p, once(0), 1).
-'$lgt_built_in_method'(ignore, 1, p, ignore(0), 1).
-'$lgt_built_in_method'(!, 0, p(p(p)), no, 1).
-'$lgt_built_in_method'(true, 0, p(p(p)), no, 1).
-'$lgt_built_in_method'(fail, 0, p(p(p)), no, 1).
-'$lgt_built_in_method'(false, 0, p(p(p)), no, 1).
-'$lgt_built_in_method'(repeat, 0, p(p(p)), no, 1).
-% exception handling methods
-'$lgt_built_in_method'(catch, 3, p, catch(0, *, 0), 1).
-'$lgt_built_in_method'(throw, 1, p, no, 1).
-% execution context methods
-'$lgt_built_in_method'(parameter, 2, p, no, 1).
-'$lgt_built_in_method'(self, 1, p, no, 1).
-'$lgt_built_in_method'(sender, 1, p, no, 1).
-'$lgt_built_in_method'(this, 1, p, no, 1).
-% all solutions methods
-'$lgt_built_in_method'(bagof, 3, p, bagof(*, ^, *), 1).
-'$lgt_built_in_method'(findall, 3, p, findall(*, 0, *), 1).
-'$lgt_built_in_method'(forall, 2, p, forall(0, 0), 1).
-'$lgt_built_in_method'(setof, 3, p, setof(*, ^, *), 1).
 
 
 '$lgt_built_in_method_call_n_args'(1, _) :-
 	!.
+
 '$lgt_built_in_method_call_n_args'(N, Meta) :-
 	arg(N, Meta, *),
 	N2 is N - 1,
 	'$lgt_built_in_method_call_n_args'(N2, Meta).
+
+
+% control constructs
+'$lgt_built_in_method_spec'(_::_, p(p(p)), '::'(*, 0), 1).
+'$lgt_built_in_method_spec'(_::_, p, '::'(0), 1).
+'$lgt_built_in_method_spec'('.'(_,_), p, [(::)], 1).
+'$lgt_built_in_method_spec'(^^_, p, '^^'(0), 1).
+'$lgt_built_in_method_spec'(_<<_, p(p(p)), '<<'(*, 0), 1).
+'$lgt_built_in_method_spec'(_>>_, p, '>>'(*, 0), 1).
+'$lgt_built_in_method_spec'(':'(_), p, ':'(0), 1).
+'$lgt_built_in_method_spec'(':'(_,_), p, ':'(*, 0), 1) :-
+	'$lgt_prolog_feature'(modules, supported).
+'$lgt_built_in_method_spec'({_}, p, '{}'(0), 1).
+'$lgt_built_in_method_spec'((_,_), p(p(p)), ','(0, 0), 1).
+'$lgt_built_in_method_spec'((_;_), p(p(p)), ';'(0, 0), 1).
+'$lgt_built_in_method_spec'((_->_), p(p(p)), '->'(0, 0), 1).
+'$lgt_built_in_method_spec'('*->'(_,_), p(p(p)), '*->'(0, 0), 1) :-
+	'$lgt_prolog_built_in_predicate'('*->'(_, _)).
+% reflection methods
+'$lgt_built_in_method_spec'(current_op(_,_,_), p(p(p)), no, 1).
+'$lgt_built_in_method_spec'(current_predicate(_), p(p(p)), no, 1).
+'$lgt_built_in_method_spec'(predicate_property(_,_), p(p(p)), no, 1).
+% database methods
+'$lgt_built_in_method_spec'(abolish(_), p(p(p)), abolish((::)), 1).
+'$lgt_built_in_method_spec'(assert(_), p(p(p)), assert((::)), 1).	% just for compatibility with old code!
+'$lgt_built_in_method_spec'(asserta(_), p(p(p)), asserta((::)), 1).
+'$lgt_built_in_method_spec'(assertz(_), p(p(p)), assertz((::)), 1).
+'$lgt_built_in_method_spec'(clause(_,_), p(p(p)), clause((::), *), 1).
+'$lgt_built_in_method_spec'(retract(_), p(p(p)), retract((::)), 1).
+'$lgt_built_in_method_spec'(retractall(_), p(p(p)), retractall((::)), 1).
+% term expansion methods
+'$lgt_built_in_method_spec'(expand_term(_,_), p(p(p)), no, 1).
+'$lgt_built_in_method_spec'(expand_goal(_,_), p(p(p)), no, 1).
+% DCGs methods
+'$lgt_built_in_method_spec'(phrase(_,_,_), p, phrase(2, *, *), 1).
+'$lgt_built_in_method_spec'(phrase(_,_), p, phrase(2, *), 1).
+% meta-calls plus logic and control methods
+'$lgt_built_in_method_spec'(\+ _, p, \+ 0, 1).
+'$lgt_built_in_method_spec'(call(_), p, call(0), 1).
+'$lgt_built_in_method_spec'(once(_), p, once(0), 1).
+'$lgt_built_in_method_spec'(ignore(_), p, ignore(0), 1).
+'$lgt_built_in_method_spec'(!, p(p(p)), no, 1).
+'$lgt_built_in_method_spec'(true, p(p(p)), no, 1).
+'$lgt_built_in_method_spec'(fail, p(p(p)), no, 1).
+'$lgt_built_in_method_spec'(false, p(p(p)), no, 1).
+'$lgt_built_in_method_spec'(repeat, p(p(p)), no, 1).
+% exception handling methods
+'$lgt_built_in_method_spec'(catch(_,_,_), p, catch(0, *, 0), 1).
+'$lgt_built_in_method_spec'(throw(_), p, no, 1).
+% execution context methods
+'$lgt_built_in_method_spec'(parameter(_,_), p, no, 1).
+'$lgt_built_in_method_spec'(self(_), p, no, 1).
+'$lgt_built_in_method_spec'(sender(_), p, no, 1).
+'$lgt_built_in_method_spec'(this(_), p, no, 1).
+% all solutions methods
+'$lgt_built_in_method_spec'(bagof(_,_,_), p, bagof(*, ^, *), 1).
+'$lgt_built_in_method_spec'(findall(_,_,_), p, findall(*, 0, *), 1).
+'$lgt_built_in_method_spec'(forall(_,_,_), p, forall(0, 0), 1).
+'$lgt_built_in_method_spec'(setof(_,_,_), p, setof(*, ^, *), 1).
 
 
 
