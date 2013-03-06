@@ -9562,7 +9562,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	% we're using modules together with objects
 		'$lgt_add_referenced_module'(Module),
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-		TPred = '$lgt_final_goal'(current_predicate(':'(Module, Pred))),
+		TPred = {current_predicate(':'(Module, Pred))},
 		DPred = '$lgt_debug'(goal(current_predicate(':'(Module, Pred)), TPred), ExCtx)
 	).
 
@@ -9595,7 +9595,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	% we're using modules together with objects
 		'$lgt_add_referenced_module'(Module),
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-		TPred = '$lgt_final_goal'(predicate_property(':'(Module, Pred), Prop)),
+		TPred = {predicate_property(':'(Module, Pred), Prop)},
 		DPred = '$lgt_debug'(goal(predicate_property(':'(Module, Pred), Prop), TPred), ExCtx)
 	).
 
@@ -9629,7 +9629,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	% we're using modules together with objects
 		'$lgt_add_referenced_module'(Module),
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-		TCond = '$lgt_final_goal'(abolish(':'(Module, Pred))),
+		TCond = {abolish(':'(Module, Pred))},
 		DCond = '$lgt_debug'(goal(abolish(':'(Module, Pred)), TCond), ExCtx)
 	).
 
@@ -9679,7 +9679,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	% we're using modules together with objects
 		'$lgt_add_referenced_module'(Module),
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-		TCond = '$lgt_final_goal'(asserta(':'(Module, Clause))),
+		TCond = {asserta(':'(Module, Clause))},
 		DCond = '$lgt_debug'(goal(asserta(':'(Module, Clause)), TCond), ExCtx)
 	).
 
@@ -9733,7 +9733,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	% we're using modules together with objects
 		'$lgt_add_referenced_module'(Module),
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-		TCond = '$lgt_final_goal'(assertz(':'(Module, Clause))),
+		TCond = {assertz(':'(Module, Clause))},
 		DCond = '$lgt_debug'(goal(assertz(':'(Module, Clause)), TCond), ExCtx)
 	).
 
@@ -9787,7 +9787,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	% we're using modules together with objects
 		'$lgt_add_referenced_module'(Module),
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-		TCond = '$lgt_final_goal'(clause(':'(Module, Head), Body)),
+		TCond = {clause(':'(Module, Head), Body)},
 		DCond = '$lgt_debug'(goal(clause(':'(Module, Head), Body), TCond), ExCtx)
 	).
 
@@ -9828,7 +9828,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	% we're using modules together with objects
 		'$lgt_add_referenced_module'(Module),
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-		TCond = '$lgt_final_goal'(retract(':'(Module, Clause))),
+		TCond = {retract(':'(Module, Clause))},
 		DCond = '$lgt_debug'(goal(retract(':'(Module, Clause)), TCond), ExCtx)
 	).
 
@@ -9884,7 +9884,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	% we're using modules together with objects
 		'$lgt_add_referenced_module'(Module),
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-		TCond = '$lgt_final_goal'(retractall(':'(Module, Head))),
+		TCond = {retractall(':'(Module, Head))},
 		DCond = '$lgt_debug'(goal(retractall(':'(Module, Head)), TCond), ExCtx)
 	).
 
@@ -14168,7 +14168,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	Pred = (HeadStack = BodyStack)
 	).
 
-'$lgt_fix_predicate_calls'('$lgt_final_goal'(Pred), Pred) :-
+'$lgt_fix_predicate_calls'({Pred}, Pred) :-
 	!.
 
 '$lgt_fix_predicate_calls'((Pred1, Pred2), (TPred1, TPred2)) :-
@@ -14247,6 +14247,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_fix_predicate_calls'(Pred, TPred).
 
 '$lgt_fix_predicate_calls'('$lgt_debug'(goal(OPred, Pred), ExCtx), '$lgt_debug'(goal(OPred, TPred), ExCtx)) :-
+	% calls in debug mode
 	!,
 	'$lgt_fix_predicate_calls'(Pred, TPred).
 
@@ -14257,11 +14258,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		true
 	;	'$lgt_fix_predicate_calls'(MetaExPred, TPred)
 	).
-
-'$lgt_fix_predicate_calls'('$lgt_debug'(goal(Pred, DPred), ExCtx), '$lgt_debug'(goal(Pred, TPred), ExCtx)) :-
-	% calls in debug mode
-	!,
-	'$lgt_fix_predicate_calls'(DPred, TPred).
 
 '$lgt_fix_predicate_calls'(':'(Module, Pred), ':'(Module, Pred)) :-
 	var(Pred),
