@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SWI Prolog 6.0.0 and later versions
-%  Last updated on March 4, 2013
+%  Last updated on March 6, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -844,7 +844,7 @@ user:goal_expansion('::'(Object, Message), user:Goal) :-
 
 % '$lgt_write_term_and_source_location'(@stream, @callable, +atom, @callable)
 
-'$lgt_write_term_and_source_location'(Stream, '$lgt_current_object_'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, Flags), _, Path+Source+Line) :-
+'$lgt_write_term_and_source_location'(Stream, '$lgt_current_object_'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, Flags), _, File+Line) :-
 	!,
 	'$lgt_swi_write_hide_directive'(Stream, Dcl/4),
 	'$lgt_swi_write_hide_directive'(Stream, Dcl/6),
@@ -856,26 +856,23 @@ user:goal_expansion('::'(Object, Message), user:Goal) :-
 	'$lgt_swi_write_hide_directive'(Stream, DDcl/2),
 	'$lgt_swi_write_hide_directive'(Stream, DDef/3),
 	'$lgt_swi_write_hide_directive'(Stream, Rnm/3),
-	atom_concat(Path, Source, File),
 	write_canonical(Stream, '$source_location'(File,Line):'$lgt_current_object_'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, Flags)),
 	write(Stream, '.\n').
 
-'$lgt_write_term_and_source_location'(Stream, '$lgt_current_category_'(Ctg, Prefix, Dcl, Def, Rnm, Flags), _, Path+Source+Line) :-
+'$lgt_write_term_and_source_location'(Stream, '$lgt_current_category_'(Ctg, Prefix, Dcl, Def, Rnm, Flags), _, File+Line) :-
 	!,
 	'$lgt_swi_write_hide_directive'(Stream, Dcl/4),
 	'$lgt_swi_write_hide_directive'(Stream, Dcl/5),
 	'$lgt_swi_write_hide_directive'(Stream, Def/3),
 	'$lgt_swi_write_hide_directive'(Stream, Rnm/3),
-	atom_concat(Path, Source, File),
 	write_canonical(Stream, '$source_location'(File,Line):'$lgt_current_category_'(Ctg, Prefix, Dcl, Def, Rnm, Flags)),
 	write(Stream, '.\n').
 
-'$lgt_write_term_and_source_location'(Stream, '$lgt_current_protocol_'(Ptc, Prefix, Dcl, Rnm, Flags), _, Path+Source+Line) :-
+'$lgt_write_term_and_source_location'(Stream, '$lgt_current_protocol_'(Ptc, Prefix, Dcl, Rnm, Flags), _, File+Line) :-
 	!,
 	'$lgt_swi_write_hide_directive'(Stream, Dcl/4),
 	'$lgt_swi_write_hide_directive'(Stream, Dcl/5),
 	'$lgt_swi_write_hide_directive'(Stream, Rnm/3),
-	atom_concat(Path, Source, File),
 	write_canonical(Stream, '$source_location'(File,Line):'$lgt_current_protocol_'(Ptc, Prefix, Dcl, Rnm, Flags)),
 	write(Stream, '.\n').
 
@@ -884,7 +881,7 @@ user:goal_expansion('::'(Object, Message), user:Goal) :-
 	write_canonical(Stream, (:- Directive)),
 	write(Stream, '.\n').
 
-'$lgt_write_term_and_source_location'(Stream, Term, Kind, Path+Source+Line) :-
+'$lgt_write_term_and_source_location'(Stream, Term, Kind, File+Line) :-
 	(	Kind == aux ->
 		(	Term = (Head :- _) ->
 			true
@@ -895,7 +892,6 @@ user:goal_expansion('::'(Object, Message), user:Goal) :-
 		'$lgt_swi_write_hide_directive'(Stream, Functor/Arity)
 	;	true
 	),
-	atom_concat(Path, Source, File),
 	write_canonical(Stream, '$source_location'(File,Line):Term),
 	write(Stream, '.\n').
 

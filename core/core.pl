@@ -12511,10 +12511,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_pp_term_location'(Location) :-
 	(	'$lgt_pp_term_position_'(Line-_),
-		'$lgt_pp_file_directory_path_flags_'(File, Directory, _, _) ->
-		Location = Directory+File+Line
-	;	'$lgt_pp_file_directory_path_flags_'(File, Directory, _, _) ->
-		Location = Directory+File+1
+		'$lgt_pp_file_directory_path_flags_'(_, _, Path, _) ->
+		Location = Path+Line
+	;	'$lgt_pp_file_directory_path_flags_'(_, _, Path, _) ->
+		Location = Path+1
 	;	Location = none
 	).
 
@@ -14625,9 +14625,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 '$lgt_write_dcl_clauses'(on, Stream) :-
-	'$lgt_pp_file_directory_path_flags_'(File, Directory, _, _),
+	'$lgt_pp_file_directory_path_flags_'(_, _, Path, _),
 	'$lgt_pp_dcl_'(Clause),
-	'$lgt_write_term_and_source_location'(Stream, Clause, aux, Directory+File+1),
+	'$lgt_write_term_and_source_location'(Stream, Clause, aux, Path+1),
 	fail.
 
 '$lgt_write_dcl_clauses'(off, Stream) :-
@@ -14639,9 +14639,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 '$lgt_write_def_clauses'(on, Stream) :-
-	'$lgt_pp_file_directory_path_flags_'(File, Directory, _, _),
+	'$lgt_pp_file_directory_path_flags_'(_, _, Path, _),
 	'$lgt_pp_final_def_'(Clause),
-	'$lgt_write_term_and_source_location'(Stream, Clause, aux, Directory+File+1),
+	'$lgt_write_term_and_source_location'(Stream, Clause, aux, Path+1),
 	fail.
 
 '$lgt_write_def_clauses'(off, Stream) :-
@@ -14653,9 +14653,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 '$lgt_write_ddef_clauses'(on, Stream) :-
-	'$lgt_pp_file_directory_path_flags_'(File, Directory, _, _),
+	'$lgt_pp_file_directory_path_flags_'(_, _, Path, _),
 	'$lgt_pp_final_ddef_'(Clause),
-	'$lgt_write_term_and_source_location'(Stream, Clause, aux, Directory+File+1),
+	'$lgt_write_term_and_source_location'(Stream, Clause, aux, Path+1),
 	fail.
 
 '$lgt_write_ddef_clauses'(off, Stream) :-
@@ -14667,9 +14667,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 '$lgt_write_super_clauses'(on, Stream) :-
-	'$lgt_pp_file_directory_path_flags_'(File, Directory, _, _),
+	'$lgt_pp_file_directory_path_flags_'(_, _, Path, _),
 	'$lgt_pp_super_'(Clause),
-	'$lgt_write_term_and_source_location'(Stream, Clause, aux, Directory+File+1),
+	'$lgt_write_term_and_source_location'(Stream, Clause, aux, Path+1),
 	fail.
 
 '$lgt_write_super_clauses'(off, Stream) :-
@@ -14689,10 +14689,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 '$lgt_write_alias_clauses'(on, Stream, Rnm) :-
-	'$lgt_pp_file_directory_path_flags_'(File, Directory, _, _),
+	'$lgt_pp_file_directory_path_flags_'(_, _, Path, _),
 	'$lgt_pp_predicate_alias_'(Entity, Pred, Alias),
 	Clause =.. [Rnm, Entity, Pred, Alias],
-	'$lgt_write_term_and_source_location'(Stream, Clause, aux, Directory+File+1),
+	'$lgt_write_term_and_source_location'(Stream, Clause, aux, Path+1),
 	fail.
 
 '$lgt_write_alias_clauses'(off, Stream, Rnm) :-
@@ -14704,8 +14704,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_write_alias_clauses'(SourceData, Stream, Rnm) :-
 	Catchall =.. [Rnm, _, Pred, Pred],
 	(	SourceData == on ->
-		'$lgt_pp_file_directory_path_flags_'(File, Directory, _, _),
-		'$lgt_write_term_and_source_location'(Stream, Catchall, aux, Directory+File+1)
+		'$lgt_pp_file_directory_path_flags_'(_, _, Path, _),
+		'$lgt_write_term_and_source_location'(Stream, Catchall, aux, Path+1)
 	;	write_canonical(Stream, Catchall), write(Stream, '.\n')
 	).
 
@@ -14724,9 +14724,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 
 '$lgt_write_entity_aux_clauses'(on, Stream) :-
-	'$lgt_pp_file_directory_path_flags_'(File, Directory, _, _),
+	'$lgt_pp_file_directory_path_flags_'(_, _, Path, _),
 	'$lgt_pp_final_entity_aux_clause_'(Clause),
-	'$lgt_write_term_and_source_location'(Stream, Clause, aux, Directory+File+1),
+	'$lgt_write_term_and_source_location'(Stream, Clause, aux, Path+1),
 	fail.
 
 '$lgt_write_entity_aux_clauses'(off, Stream) :-
@@ -14761,7 +14761,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	% file runtime clauses
 	write_canonical(Stream, (:- multifile('$lgt_loaded_file_'/4))), write(Stream, '.\n'),
 	write_canonical(Stream, (:- dynamic('$lgt_loaded_file_'/4))), write(Stream, '.\n'),
-	'$lgt_pp_file_directory_path_flags_'(File, Directory, _, Flags),
+	'$lgt_pp_file_directory_path_flags_'(File, Directory, Path, Flags),
 	(	'$lgt_pp_file_encoding_'(Encoding, _) ->
 		(	'$lgt_pp_file_bom_'(BOM) ->
 			StreamProperties = [encoding(Encoding), BOM]
@@ -14771,7 +14771,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	),
 	Clause = '$lgt_loaded_file_'(File, Directory, Flags, StreamProperties),
 	(	SourceData == on ->
-		'$lgt_write_term_and_source_location'(Stream, Clause, aux, Directory+File+1)
+		'$lgt_write_term_and_source_location'(Stream, Clause, aux, Path+1)
 	;	write_canonical(Stream, Clause), write(Stream, '.\n')
 	).
 
@@ -14782,9 +14782,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		write_canonical(Stream, (:- multifile(Functor/Arity))), write(Stream, '.\n'),
 		write_canonical(Stream, (:- dynamic(Functor/Arity))), write(Stream, '.\n'),
 		(	SourceData == on ->
-			'$lgt_pp_file_directory_path_flags_'(File, Directory, _, _),
+			'$lgt_pp_file_directory_path_flags_'(_, _, Path, _),
 			(	'$lgt_pp_file_runtime_clause_'(Clause),
-				'$lgt_write_term_and_source_location'(Stream, Clause, aux, Directory+File+1),
+				'$lgt_write_term_and_source_location'(Stream, Clause, aux, Path+1),
 				fail
 			;	true
 			)
