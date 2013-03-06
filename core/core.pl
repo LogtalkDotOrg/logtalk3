@@ -1760,17 +1760,13 @@ logtalk_compile(Files, Flags) :-
 %
 % check if the source file names are valid (but not if the file exists)
 
-'$lgt_check_source_files'(Files) :-
-	var(Files),
-	throw(error(instantiation_error, _)).
-
-'$lgt_check_source_files'([]) :-
-	!.
-
 '$lgt_check_source_files'([File| Files]) :-
 	!,
 	'$lgt_check_source_file'(File),
 	'$lgt_check_source_files'(Files).
+
+'$lgt_check_source_files'([]) :-
+	!.
 
 '$lgt_check_source_files'(File) :-
 	'$lgt_check_source_file'(File).
@@ -1781,21 +1777,22 @@ logtalk_compile(Files, Flags) :-
 	throw(error(instantiation_error, _)).
 
 '$lgt_check_source_file'(File) :-
-	\+ atom(File),
-	\+ (	compound(File),
-			functor(File, _, 1),
-			arg(1, File, Basename),
-			atom(Basename)
-	),
-	throw(error(type_error(source_file_name, File), _)).
+	atom(File),
+	!.
 
 '$lgt_check_source_file'(File) :-
 	compound(File),
-	functor(File, Library, _),
-	\+ '$lgt_expand_library_path'(Library, _),
-	throw(error(existence_error(library, Library), _)).
+	functor(File, Library, 1),
+	arg(1, File, Basename),
+	atom(Basename),
+	!,
+	(	'$lgt_expand_library_path'(Library, _) ->
+		true
+	;	throw(error(existence_error(library, Library), _))
+	).
 
-'$lgt_check_source_file'(_).
+'$lgt_check_source_file'(File) :-
+	throw(error(type_error(source_file_name, File), _)).
 
 
 
