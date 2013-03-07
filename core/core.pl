@@ -6310,7 +6310,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	\+ '$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
 	\+ '$lgt_pp_category_'(_, _, _, _, _, _),
 	\+ '$lgt_pp_protocol_'(_, _, _, _, _),
+	\+ '$lgt_logtalk_opening_directive'(Directive),
 	% directive occurs before opening entity directive
+	!,
 	(	'$lgt_logtalk_closing_directive'(Directive) ->
 		% closing entity directive occurs before the opening entity directive;
 		% the opening directive is probably missing or misspelt
@@ -6321,9 +6323,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		;	% Directive == end_category ->
 			throw(error(existence_error(opening_directive, category/1), directive(Directive)))
 		)
-	;	\+ '$lgt_logtalk_opening_directive'(Directive),
-		!,
-		% translate it as a source file-level directive
+	;	% translate it as a source file-level directive
 		'$lgt_tr_file_directive'(Directive, Ctx)
 	).
 
