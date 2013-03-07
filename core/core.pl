@@ -2779,9 +2779,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 			% dynamic declaration of new predicates allowed
 		) ->
 		'$lgt_term_template'(Pred, DPred),
-		functor(Clause, DDcl, 2),
-		arg(1, Clause, DPred),
-		arg(2, Clause, DclScope),
+		Clause =.. [DDcl, DPred, DclScope],
 		assertz(Clause),
 		Scope = DclScope, Type = (dynamic), Meta = no, SCtn = Obj
 	;	% object doesn't allow dynamic declaration of new predicates
@@ -2807,10 +2805,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		functor(THead, TFunctor, TArity),
 		'$lgt_unify_head_thead_args'(Arity, GHead, THead),
 		arg(TArity, THead, ExCtx),
-		functor(DDefClause, DDef, 3),
-		arg(1, DDefClause, GHead),
-		arg(2, DDefClause, ExCtx),
-		arg(3, DDefClause, THead),
+		DDefClause =.. [DDef, GHead, ExCtx, THead],
 		assertz(DDefClause),
 		'$lgt_clean_lookup_caches'(GHead),
 		NeedsUpdate = true,
@@ -5546,7 +5541,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	% approximated position of the error
 	retractall('$lgt_pp_term_position_'(_)),
 	'$lgt_read_term'(Stream, Term, Options, Position),	% defined in the adapter files
-	asserta('$lgt_pp_term_position_'(Position)).
+	assertz('$lgt_pp_term_position_'(Position)).
 
 
 
@@ -11534,9 +11529,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % constructs a list of all variables that occur in a position corresponding
 % to a meta-argument in the head of clause being compiled
 
-'$lgt_head_meta_variables'(Pred, MetaVars) :-
-	(	'$lgt_pp_meta_predicate_'(Pred, Meta) ->
-		Pred =.. [_| Args],
+'$lgt_head_meta_variables'(Head, MetaVars) :-
+	(	'$lgt_pp_meta_predicate_'(Head, Meta) ->
+		Head =.. [_| Args],
 		Meta =.. [_| MArgs],
 		'$lgt_extract_meta_variables'(Args, MArgs, MetaVars)
 	;	MetaVars = []
@@ -11561,10 +11556,10 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % constructs a list of all variables that occur in a
 % position corresponding to a meta-argument in a goal
 
-'$lgt_goal_meta_variables'(Pred, Meta, MetaVars) :-
+'$lgt_goal_meta_variables'(Goal, Meta, MetaVars) :-
 	(	Meta == no ->
 		MetaVars = []
-	;	Pred =.. [_| Args],
+	;	Goal =.. [_| Args],
 		Meta =.. [_| MArgs],
 		'$lgt_extract_meta_variables'(Args, MArgs, MetaVars)
 	).
@@ -12546,10 +12541,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		true
 	;	'$lgt_pp_category_'(_, _, _, Def, _, _)
 	),
-	functor(Clause, Def, 3),
-	arg(1, Clause, HeadTemplate),
-	arg(2, Clause, ExCtxTemplate),
-	arg(3, Clause, THeadTemplate),
+	Clause =.. [Def, HeadTemplate, ExCtxTemplate, THeadTemplate],
 	(	'$lgt_pp_def_'(Clause) ->
 		true
 	;	assertz('$lgt_pp_def_'(Clause))
@@ -12582,10 +12574,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	'$lgt_unify_head_thead_args'(Arity, HeadTemplate, THeadTemplate),
 	arg(TArity, THeadTemplate, ExCtxTemplate),
 	once('$lgt_pp_object_'(_, _, _, _, _, _, _, _, DDef, _, _)),
-	functor(Clause, DDef, 3),
-	arg(1, Clause, HeadTemplate),
-	arg(2, Clause, ExCtxTemplate),
-	arg(3, Clause, THeadTemplate),
+	Clause =.. [DDef, HeadTemplate, ExCtxTemplate, THeadTemplate],
 	(	'$lgt_pp_ddef_'(Clause) ->
 		true
 	;	assertz('$lgt_pp_ddef_'(Clause))
@@ -12617,9 +12606,7 @@ current_logtalk_flag(version, version(3, 0, 0)).
 		true
 	;	'$lgt_pp_category_'(_, _, _, Def, _, _)
 	),
-	functor(Clause, Def, 3),
-	arg(1, Clause, HeadTemplate),
-	arg(3, Clause, fail),
+	Clause =.. [Def, HeadTemplate, _, fail],
 	(	'$lgt_pp_def_'(Clause) ->
 		true
 	;	assertz('$lgt_pp_def_'(Clause))
@@ -12658,13 +12645,13 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	;	% first clause for this predicate; remember it
 		'$lgt_comp_ctx_prefix'(Ctx, Prefix),
 		'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
-		asserta('$lgt_pp_defines_predicate_'(Functor, Arity, TFunctor, TArity, Mode)),
+		assertz('$lgt_pp_defines_predicate_'(Functor, Arity, TFunctor, TArity, Mode)),
 		retractall('$lgt_pp_non_portable_predicate_'(Functor, Arity, _))
 	),
 	(	Mode == compile(aux) ->
 		true
 	;	retractall('$lgt_pp_previous_predicate_'(_, _)),
-		asserta('$lgt_pp_previous_predicate_'(Functor, Arity))
+		assertz('$lgt_pp_previous_predicate_'(Functor, Arity))
 	).
 
 
@@ -14126,11 +14113,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_fix_predicate_calls'('$lgt_coinductive_success_hook'(Head, Hypothesis, ExCtx, HeadStack, BodyStack), Pred) :-
 	!,
-	(	'$lgt_pp_defines_predicate_'(coinductive_success_hook, 2, TFunctor, TArity, _) ->
-		(	functor(THead, TFunctor, TArity),
-			arg(1, THead, Head),
-			arg(2, THead, Hypothesis),
-			arg(3, THead, ExCtx),
+	(	'$lgt_pp_defines_predicate_'(coinductive_success_hook, 2, TFunctor, _, _) ->
+		(	THead =.. [TFunctor, Head, Hypothesis, ExCtx],
 			\+ \+ (
 				'$lgt_pp_entity_clause_'(THead, _)
 			;	'$lgt_pp_entity_clause_'((THead :- _), _)
@@ -14140,10 +14124,8 @@ current_logtalk_flag(version, version(3, 0, 0)).
 			Pred = ((HeadStack = BodyStack), THead)
 		;	Pred = (HeadStack = BodyStack)
 		)
-	;	'$lgt_pp_defines_predicate_'(coinductive_success_hook, 1, TFunctor, TArity, _) ->
-		(	functor(THead, TFunctor, TArity),
-			arg(1, THead, Head),
-			arg(2, THead, ExCtx),
+	;	'$lgt_pp_defines_predicate_'(coinductive_success_hook, 1, TFunctor, _, _) ->
+		(	THead =.. [TFunctor, Head, ExCtx],
 			\+ \+ (
 				'$lgt_pp_entity_clause_'(THead, _)
 			;	'$lgt_pp_entity_clause_'((THead :- _), _)
