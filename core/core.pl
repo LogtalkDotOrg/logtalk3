@@ -15472,9 +15472,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % that we have defined in the correspondent adapter file
 
 '$lgt_prolog_built_in_predicate'(Pred) :-
+	'$lgt_predicate_property'(Pred, built_in),
 	% Logtalk built-ins may also have the property built_in
 	\+ '$lgt_logtalk_built_in_predicate'(Pred),
-	'$lgt_predicate_property'(Pred, built_in),
 	!.
 
 '$lgt_prolog_built_in_predicate'(Pred) :-
