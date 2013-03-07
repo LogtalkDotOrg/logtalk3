@@ -4963,11 +4963,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 % prints a warning for redefined entities
 
 '$lgt_report_redefined_entity'(Type, Entity, OldFile, NewFile, Lines) :-
-	'$lgt_increment_loadind_warnings_counter',
 	(	NewFile == nil ->
 		% we're reloading the same source file so consider redefinitions normal
 		'$lgt_print_message'(information(loading), core, redefining_entity(Type, Entity))
 	;	% we've conflicting entities coming from different source files
+		'$lgt_increment_loadind_warnings_counter',
 		'$lgt_print_message'(warning(loading), core, redefining_entity_from_file(NewFile, Lines, Type, Entity, OldFile))
 	).
 

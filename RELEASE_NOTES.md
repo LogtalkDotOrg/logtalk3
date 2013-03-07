@@ -48,6 +48,9 @@ saved when compiling meta-arguments during runtime meta-predicate calls.
 * FIXED: Compiler bug where the full path of the source file being compiled
 would not be correctly saved.
 
+* FIXED: Don't count redefining an entity as a consequence of reloading a file
+as a loading warning.
+
 Prolog adapter and integration files
 ------------------------------------
 
