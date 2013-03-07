@@ -7045,36 +7045,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_tr_public_directive'([]).
 
-'$lgt_tr_public_directive'([Resource| _]) :-
-	var(Resource),
-	throw(instantiation_error).
-
-'$lgt_tr_public_directive'([op(Priority, Specifier, Operators)| Resources]) :-
-	!,
-	'$lgt_must_be'(operator_specification, op(Priority, Specifier, Operators)),
-	'$lgt_check_for_duplicated_scope_directives'(op(Priority, Specifier, Operators)),
-	'$lgt_activate_entity_operators'(Priority, Specifier, Operators, p(p(p))),
+'$lgt_tr_public_directive'([Resource| Resources]) :-
+	'$lgt_tr_scope_directive_resource'(Resource, (public)),
 	'$lgt_tr_public_directive'(Resources).
-
-'$lgt_tr_public_directive'([Pred| Resources]) :-
-	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
-	!,
-	'$lgt_check_for_duplicated_scope_directives'(Functor/Arity),
-	assertz('$lgt_pp_public_'(Functor, Arity)),
-	'$lgt_add_predicate_scope_line_property'(Functor/Arity),
-	'$lgt_tr_public_directive'(Resources).
-
-'$lgt_tr_public_directive'([NonTerminal| Resources]) :-
-	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, Arity, ExtArity),
-	!,
-	'$lgt_check_for_duplicated_scope_directives'(Functor//Arity+ExtArity),
-	assertz('$lgt_pp_non_terminal_'(Functor, Arity, ExtArity)),
-	assertz('$lgt_pp_public_'(Functor, ExtArity)),
-	'$lgt_add_predicate_scope_line_property'(Functor/ExtArity),
-	'$lgt_tr_public_directive'(Resources).
-
-'$lgt_tr_public_directive'([Resource| _]) :-
-	throw(type_error(predicate_indicator, Resource)).
 
 
 
@@ -7084,36 +7057,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_tr_protected_directive'([]).
 
-'$lgt_tr_protected_directive'([Resource| _]) :-
-	var(Resource),
-	throw(instantiation_error).
-
-'$lgt_tr_protected_directive'([op(Priority, Specifier, Operators)| Resources]) :-
-	!,
-	'$lgt_must_be'(operator_specification, op(Priority, Specifier, Operators)),
-	'$lgt_check_for_duplicated_scope_directives'(op(Priority, Specifier, Operators)),
-	'$lgt_activate_entity_operators'(Priority, Specifier, Operators, p(p)),
+'$lgt_tr_protected_directive'([Resource| Resources]) :-
+	'$lgt_tr_scope_directive_resource'(Resource, protected),
 	'$lgt_tr_protected_directive'(Resources).
-
-'$lgt_tr_protected_directive'([Pred| Resources]) :-
-	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
-	!,
-	'$lgt_check_for_duplicated_scope_directives'(Functor/Arity),
-	assertz('$lgt_pp_protected_'(Functor, Arity)),
-	'$lgt_add_predicate_scope_line_property'(Functor/Arity),
-	'$lgt_tr_protected_directive'(Resources).
-
-'$lgt_tr_protected_directive'([NonTerminal| Resources]) :-
-	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, Arity, ExtArity),
-	!,
-	'$lgt_check_for_duplicated_scope_directives'(Functor//Arity+ExtArity),
-	assertz('$lgt_pp_non_terminal_'(Functor, Arity, ExtArity)),
-	assertz('$lgt_pp_protected_'(Functor, ExtArity)),
-	'$lgt_add_predicate_scope_line_property'(Functor/ExtArity),
-	'$lgt_tr_protected_directive'(Resources).
-
-'$lgt_tr_protected_directive'([Resource| _]) :-
-	throw(type_error(predicate_indicator, Resource)).
 
 
 
@@ -7123,37 +7069,54 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_tr_private_directive'([]).
 
-'$lgt_tr_private_directive'([Resource| _]) :-
+'$lgt_tr_private_directive'([Resource| Resources]) :-
+	'$lgt_tr_scope_directive_resource'(Resource, private),
+	'$lgt_tr_private_directive'(Resources).
+
+
+
+% '$lgt_tr_scope_directive_resource'(@term, @scope)
+%
+% auxiliary predicate for translating scope directives
+
+'$lgt_tr_scope_directive_resource'(Resource, _) :-
 	var(Resource),
 	throw(instantiation_error).
 
-'$lgt_tr_private_directive'([op(Priority, Specifier, Operators)| Resources]) :-
-	!,
+'$lgt_tr_scope_directive_resource'(op(Priority, Specifier, Operators), Scope) :-
 	'$lgt_must_be'(operator_specification, op(Priority, Specifier, Operators)),
+	!,
 	'$lgt_check_for_duplicated_scope_directives'(op(Priority, Specifier, Operators)),
-	'$lgt_activate_entity_operators'(Priority, Specifier, Operators, p),
-	'$lgt_tr_private_directive'(Resources).
+	'$lgt_scope'(Scope, InternalScope),
+	'$lgt_activate_entity_operators'(Priority, Specifier, Operators, InternalScope).
 
-'$lgt_tr_private_directive'([Pred| Resources]) :-
-	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
+'$lgt_tr_scope_directive_resource'(Functor/Arity, Scope) :-
+	'$lgt_valid_predicate_indicator'(Functor/Arity, Functor, Arity),
 	!,
 	'$lgt_check_for_duplicated_scope_directives'(Functor/Arity),
-	assertz('$lgt_pp_private_'(Functor, Arity)),
-	'$lgt_add_predicate_scope_line_property'(Functor/Arity),
-	'$lgt_tr_private_directive'(Resources).
+	'$lgt_add_predicate_scope_directive'(Scope, Functor, Arity),
+	'$lgt_add_predicate_scope_line_property'(Functor/Arity).
 
-'$lgt_tr_private_directive'([NonTerminal| Resources]) :-
-	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, Arity, ExtArity),
+'$lgt_tr_scope_directive_resource'(Functor//Arity, Scope) :-
+	'$lgt_valid_non_terminal_indicator'(Functor//Arity, Functor, Arity, ExtArity),
 	!,
 	'$lgt_check_for_duplicated_scope_directives'(Functor//Arity+ExtArity),
 	assertz('$lgt_pp_non_terminal_'(Functor, Arity, ExtArity)),
-	'$lgt_add_predicate_scope_line_property'(Functor/ExtArity),
-	assertz('$lgt_pp_private_'(Functor, ExtArity)),
-	'$lgt_tr_private_directive'(Resources).
+	'$lgt_add_predicate_scope_directive'(Scope, Functor, ExtArity),
+	'$lgt_add_predicate_scope_line_property'(Functor/ExtArity).
 
-'$lgt_tr_private_directive'([Pred| _]) :-
-	throw(type_error(predicate_indicator, Pred)).
+'$lgt_tr_scope_directive_resource'(Resource, _) :-
+	throw(type_error(predicate_indicator, Resource)).
 
+
+'$lgt_add_predicate_scope_directive'((public), Functor, Arity) :-
+	assertz('$lgt_pp_public_'(Functor, Arity)).
+
+'$lgt_add_predicate_scope_directive'(protected, Functor, Arity) :-
+	assertz('$lgt_pp_protected_'(Functor, Arity)).
+	
+'$lgt_add_predicate_scope_directive'(private, Functor, Arity) :-
+	assertz('$lgt_pp_private_'(Functor, Arity)).
 
 
 '$lgt_check_for_duplicated_scope_directives'(op(_, _, [])) :-
@@ -7191,12 +7154,11 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	).
 
 
-
-'$lgt_add_predicate_scope_line_property'(Functor/Arity) :-
+'$lgt_add_predicate_scope_line_property'(PredicateIndicator) :-
 	(	'$lgt_compiler_flag'(source_data, on),
 		'$lgt_pp_term_position_'(Line-_) ->
 		'$lgt_pp_entity'(_, Entity, _),
-		assertz('$lgt_pp_predicate_property_'(Entity, Functor/Arity, declaration_line(Line)))
+		assertz('$lgt_pp_predicate_property_'(Entity, PredicateIndicator, declaration_line(Line)))
 	;	true
 	).
 
