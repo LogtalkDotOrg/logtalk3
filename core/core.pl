@@ -14297,7 +14297,6 @@ current_logtalk_flag(version, version(3, 0, 0)).
 	!.
 
 '$lgt_fix_predicate_calls'(Pred, TPred) :-
-	'$lgt_prolog_built_in_predicate'(Pred),
 	'$lgt_prolog_meta_predicate'(Pred, Meta, _),
 	% call to a non-standard Prolog built-in meta-predicate
 	!,
