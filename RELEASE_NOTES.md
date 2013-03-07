@@ -31,6 +31,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: The compiler now detects attempts to define an object as both a
+prototype and a class or as both a prototype and an instance.
+
 * IMPROVED: Compiler performance when compiling source files.
 
 * IMPROVED: The compiler now checks for the occurrence of `synchronized/1` and

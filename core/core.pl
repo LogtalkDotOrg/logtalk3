@@ -12034,7 +12034,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_implements_protocol'([Ref| Refs], ObjOrCtg) :-
 	'$lgt_check_entity_reference'(protocol, Ref, Scope, Ptc),
 	(	ObjOrCtg \= Ptc ->
-		(	('$lgt_is_object'(Ptc); '$lgt_is_category'(Ptc)) ->
+		(	'$lgt_is_object'(Ptc) ->
+			throw(type_error(protocol, Ptc))
+		;	'$lgt_is_category'(Ptc) ->
 			throw(type_error(protocol, Ptc))
 		;	'$lgt_add_referenced_protocol'(Ptc),
 			assertz('$lgt_pp_implements_protocol_'(ObjOrCtg, Ptc, Scope)),
@@ -12056,7 +12058,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_imports_category'([Ref| Refs], Obj) :-
 	'$lgt_check_entity_reference'(category, Ref, Scope, Ctg),
 	(	functor(Obj, Functor, Arity), \+ functor(Ctg, Functor, Arity) ->
-		(	('$lgt_is_object'(Ctg); '$lgt_is_protocol'(Ctg)) ->
+		(	'$lgt_is_object'(Ctg) ->
+			throw(type_error(category, Ctg))
+		;	'$lgt_is_protocol'(Ctg) ->
 			throw(type_error(category, Ctg))
 		;	'$lgt_add_referenced_category'(Ctg),
 			assertz('$lgt_pp_imports_category_'(Obj, Ctg, Scope)),
@@ -12077,16 +12081,19 @@ current_logtalk_flag(version, version(3, 0, 0)).
 
 '$lgt_tr_instantiates_class'([Ref| Refs], Obj) :-
 	'$lgt_check_entity_reference'(object, Ref, Scope, Class),
-	(	('$lgt_is_protocol'(Class); '$lgt_is_category'(Class)) ->
+	(	'$lgt_is_protocol'(Class) ->
 		throw(type_error(object, Class))
-	;	(	\+ '$lgt_is_prototype'(Class) ->
-			'$lgt_add_referenced_object'(Class),
-			assertz('$lgt_pp_instantiates_class_'(Obj, Class, Scope)),
-			'$lgt_construct_object_functors'(Class, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, _),
-			assertz('$lgt_pp_instantiated_class_'(Class, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Scope)),
-			'$lgt_tr_instantiates_class'(Refs, Obj)
-		;	throw(domain_error(class, Class))
-		)
+	;	'$lgt_is_category'(Class) ->
+		throw(type_error(object, Class))
+	;	'$lgt_is_prototype'(Class) ->
+		throw(domain_error(class, Class))
+	;	'$lgt_pp_extends_object_'(Obj, _, _) ->
+		throw(permission_error(instantiate, class, Class))
+	;	'$lgt_add_referenced_object'(Class),
+		assertz('$lgt_pp_instantiates_class_'(Obj, Class, Scope)),
+		'$lgt_construct_object_functors'(Class, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, _),
+		assertz('$lgt_pp_instantiated_class_'(Class, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Scope)),
+		'$lgt_tr_instantiates_class'(Refs, Obj)
 	).
 
 
@@ -12100,16 +12107,19 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_specializes_class'([Ref| Refs], Class) :-
 	'$lgt_check_entity_reference'(object, Ref, Scope, Superclass),
 	(	functor(Class, Functor, Arity), \+ functor(Superclass, Functor, Arity) ->
-		(	('$lgt_is_protocol'(Superclass); '$lgt_is_category'(Superclass)) ->
+		(	'$lgt_is_protocol'(Superclass) ->
 			throw(type_error(object, Superclass))
-		;	(	\+ '$lgt_is_prototype'(Class) ->
-				'$lgt_add_referenced_object'(Superclass),
-				assertz('$lgt_pp_specializes_class_'(Class, Superclass, Scope)),
-				'$lgt_construct_object_functors'(Superclass, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, _),
-				assertz('$lgt_pp_specialized_class_'(Superclass, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Scope)),
-				'$lgt_tr_specializes_class'(Refs, Class)
-			;	throw(domain_error(class, Class))
-			)
+		;	'$lgt_is_category'(Superclass) ->
+			throw(type_error(object, Superclass))
+		;	'$lgt_is_prototype'(Class) ->
+			throw(domain_error(class, Class))
+		;	'$lgt_pp_extends_object_'(Class, _, _) ->
+			throw(permission_error(specialize, class, Class))
+		;	'$lgt_add_referenced_object'(Superclass),
+			assertz('$lgt_pp_specializes_class_'(Class, Superclass, Scope)),
+			'$lgt_construct_object_functors'(Superclass, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, _),
+			assertz('$lgt_pp_specialized_class_'(Superclass, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Scope)),
+			'$lgt_tr_specializes_class'(Refs, Class)
 		)
 	;	throw(permission_error(specialize, self, Class))
 	).
@@ -12125,16 +12135,21 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_extends_object'([Ref| Refs], Obj) :-
 	'$lgt_check_entity_reference'(object, Ref, Scope, Parent),
 	(	functor(Obj, Functor, Arity), \+ functor(Parent, Functor, Arity) ->
-		(	('$lgt_is_protocol'(Parent); '$lgt_is_category'(Parent)) ->
+		(	'$lgt_is_protocol'(Parent) ->
 			throw(type_error(object, Parent))
-		;	(	\+ '$lgt_is_class'(Parent) ->
-				'$lgt_add_referenced_object'(Parent),
-				assertz('$lgt_pp_extends_object_'(Obj, Parent, Scope)),
-				'$lgt_construct_object_functors'(Parent, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, _),
-				assertz('$lgt_pp_extended_object_'(Parent, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Scope)),
-				'$lgt_tr_extends_object'(Refs, Obj)
-			;	throw(domain_error(prototype, Parent))
-			)
+		;	'$lgt_is_category'(Parent) ->
+			throw(type_error(object, Parent))
+		;	'$lgt_is_class'(Parent) ->
+			throw(domain_error(prototype, Parent))
+		;	'$lgt_pp_instantiates_class_'(Obj, _, _) ->
+			throw(permission_error(extend, prototype, Parent))
+		;	'$lgt_pp_specializes_class_'(Obj, _, _) ->
+			throw(permission_error(extend, prototype, Parent))
+		;	'$lgt_add_referenced_object'(Parent),
+			assertz('$lgt_pp_extends_object_'(Obj, Parent, Scope)),
+			'$lgt_construct_object_functors'(Parent, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, _),
+			assertz('$lgt_pp_extended_object_'(Parent, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Scope)),
+			'$lgt_tr_extends_object'(Refs, Obj)
 		)
 	;	throw(permission_error(extend, self, Obj))
 	).
@@ -12150,7 +12165,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_extends_protocol'([Ref| Refs], Ptc) :-
 	'$lgt_check_entity_reference'(protocol, Ref, Scope, ExtPtc),
 	(	Ptc \= ExtPtc ->
-		(	('$lgt_is_object'(ExtPtc); '$lgt_is_category'(ExtPtc)) ->
+		(	'$lgt_is_object'(ExtPtc) ->
+			throw(type_error(protocol, ExtPtc))
+		;	'$lgt_is_category'(ExtPtc) ->
 			throw(type_error(protocol, ExtPtc))
 		;	'$lgt_add_referenced_protocol'(ExtPtc),
 			assertz('$lgt_pp_extends_protocol_'(Ptc, ExtPtc, Scope)),
@@ -12172,7 +12189,9 @@ current_logtalk_flag(version, version(3, 0, 0)).
 '$lgt_tr_extends_category'([Ref| Refs], Ctg) :-
 	'$lgt_check_entity_reference'(category, Ref, Scope, ExtCtg),
 	(	functor(Ctg, Functor, Arity), \+ functor(ExtCtg, Functor, Arity) ->
-		(	('$lgt_is_object'(ExtCtg); '$lgt_is_protocol'(ExtCtg)) ->
+		(	'$lgt_is_object'(ExtCtg) ->
+			throw(type_error(category, ExtCtg))
+		;	'$lgt_is_protocol'(ExtCtg) ->
 			throw(type_error(category, ExtCtg))
 		;	'$lgt_add_referenced_category'(ExtCtg),
 			assertz('$lgt_pp_extends_category_'(Ctg, ExtCtg, Scope)),
