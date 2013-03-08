@@ -270,7 +270,6 @@
 :- dynamic('$lgt_pp_specialized_class_'/10).				% '$lgt_pp_specialized_class_'(Superclass, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Scope)
 :- dynamic('$lgt_pp_extended_protocol_'/4).					% '$lgt_pp_extended_protocol_'(Ptc, Prefix, Dcl, Scope)
 :- dynamic('$lgt_pp_extended_category_'/5).					% '$lgt_pp_extended_category_'(Ctg, Prefix, Dcl, Def, Scope)
-:- dynamic('$lgt_pp_complemented_object_'/1).				% '$lgt_pp_complemented_object_'(Obj)
 
 :- dynamic('$lgt_pp_file_initialization_'/1).				% '$lgt_pp_file_initialization_'(Goal)
 :- dynamic('$lgt_pp_entity_initialization_'/3).				% '$lgt_pp_entity_initialization_'(Type, Entity, Goal)
@@ -5722,7 +5721,6 @@ current_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_pp_specialized_class_'(_, _, _, _, _, _, _, _, _, _)),
 	retractall('$lgt_pp_extended_protocol_'(_, _, _, _)),
 	retractall('$lgt_pp_extended_category_'(_, _, _, _, _)),
-	retractall('$lgt_pp_complemented_object_'(_)),
 	retractall('$lgt_pp_uses_'(_)),
 	retractall('$lgt_pp_uses_predicate_'(_, _, _)),
 	retractall('$lgt_pp_uses_non_terminal_'(_, _, _)),
@@ -6945,7 +6943,7 @@ current_logtalk_flag(Flag, Value) :-
 	\+ '$lgt_pp_extended_object_'(Entity, _, _, _, _, _, _, _, _, _),
 	\+ '$lgt_pp_instantiated_class_'(Entity, _, _, _, _, _, _, _, _, _),
 	\+ '$lgt_pp_specialized_class_'(Entity, _, _, _, _, _, _, _, _, _),
-	\+ '$lgt_pp_complemented_object_'(Entity),
+	\+ '$lgt_pp_complemented_object_'(Entity, _, _, _, _),
 	throw(reference_error(entity_identifier, Entity)).
 
 '$lgt_tr_predicate_alias_directive'(_, Pred, _) :-
@@ -12263,7 +12261,6 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_complements_object'([Obj| Objs], Ctg, Dcl, Def, Rnm) :-
 	'$lgt_add_referenced_object'(Obj),
-	assertz('$lgt_pp_complemented_object_'(Obj)),
 	assertz('$lgt_pp_complemented_object_'(Obj, Ctg, Dcl, Def, Rnm)),
 	'$lgt_tr_complements_object'(Objs, Ctg, Dcl, Def, Rnm).
 
