@@ -6915,25 +6915,12 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_tr_logtalk_directive'(alias(Entity, Pred, Alias), _) :-
+	'$lgt_must_be'(entity_identifier, Entity),
+	'$lgt_must_be'(predicate_or_non_terminal_indicator, Pred),
+	'$lgt_must_be'(predicate_or_non_terminal_indicator, Alias),
 	'$lgt_tr_predicate_alias_directive'(Entity, Pred, Alias).
 
 
-
-'$lgt_tr_predicate_alias_directive'(Entity, _, _) :-
-	var(Entity),
-	throw(instantiation_error).
-
-'$lgt_tr_predicate_alias_directive'(_, Pred, _) :-
-	var(Pred),
-	throw(instantiation_error).
-
-'$lgt_tr_predicate_alias_directive'(_, _, Alias) :-
-	var(Alias),
-	throw(instantiation_error).
-
-'$lgt_tr_predicate_alias_directive'(Entity, _, _) :-
-	\+ callable(Entity),
-	throw(type_error(entity_identifier, Entity)).
 
 '$lgt_tr_predicate_alias_directive'(Entity, _, _) :-
 	\+ '$lgt_pp_extended_protocol_'(Entity, _, _, _),
@@ -6946,15 +6933,20 @@ current_logtalk_flag(Flag, Value) :-
 	\+ '$lgt_pp_complemented_object_'(Entity, _, _, _, _),
 	throw(reference_error(entity_identifier, Entity)).
 
-'$lgt_tr_predicate_alias_directive'(_, Pred, _) :-
-	\+ '$lgt_valid_predicate_indicator'(Pred, _, _),
-	\+ '$lgt_valid_non_terminal_indicator'(Pred, _, _, _),
-	throw(type_error(predicate_indicator, Pred)).
+'$lgt_tr_predicate_alias_directive'(Entity, Functor1/Arity, Functor2/Arity) :-
+	!,
+	functor(Pred, Functor1, Arity),
+	Pred =.. [Functor1| Args],
+	Alias =.. [Functor2| Args],
+	assertz('$lgt_pp_predicate_alias_'(Entity, Pred, Alias)).
 
-'$lgt_tr_predicate_alias_directive'(_, _, Alias) :-
-	\+ '$lgt_valid_predicate_indicator'(Alias, _, _),
-	\+ '$lgt_valid_non_terminal_indicator'(Alias, _, _, _),
-	throw(type_error(predicate_indicator, Alias)).
+'$lgt_tr_predicate_alias_directive'(Entity, Functor1//Arity, Functor2//Arity) :-
+	!,
+	ExtArity is Arity + 2,
+	functor(Pred, Functor1, ExtArity),
+	Pred =.. [Functor1| Args],
+	Alias =.. [Functor2| Args],
+	assertz('$lgt_pp_predicate_alias_'(Entity, Pred, Alias)).
 
 '$lgt_tr_predicate_alias_directive'(_, _//Arity1, _//Arity2) :-
 	Arity1 =\= Arity2,
@@ -6969,20 +6961,6 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_predicate_alias_directive'(_, _//_, Functor2/Arity2) :-
 	throw(type_error(non_terminal_indicator, Functor2/Arity2)).
-
-'$lgt_tr_predicate_alias_directive'(Entity, Functor1/Arity, Functor2/Arity) :-
-	!,
-	functor(Pred, Functor1, Arity),
-	Pred =.. [_| Args],
-	Alias =.. [Functor2| Args],
-	assertz('$lgt_pp_predicate_alias_'(Entity, Pred, Alias)).
-
-'$lgt_tr_predicate_alias_directive'(Entity, Functor1//Arity, Functor2//Arity) :-
-	ExtArity is Arity + 2,
-	functor(Pred, Functor1, ExtArity),
-	Pred =.. [_| Args],
-	Alias =.. [Functor2| Args],
-	assertz('$lgt_pp_predicate_alias_'(Entity, Pred, Alias)).
 
 
 
