@@ -6340,7 +6340,11 @@ current_logtalk_flag(Flag, Value) :-
 			throw(error(existence_error(opening_directive, category/1), directive(Directive)))
 		)
 	;	% translate it as a source file-level directive
-		'$lgt_tr_file_directive'(Directive, Ctx)
+		catch(
+			'$lgt_tr_file_directive'(Directive, Ctx),
+			Error,
+			throw(error(Error, directive(Directive)))
+		)
 	).
 
 '$lgt_tr_directive'(Directive, Ctx) :-
@@ -6349,10 +6353,8 @@ current_logtalk_flag(Flag, Value) :-
 	catch(
 		'$lgt_tr_logtalk_directive'(Directive, Ctx),
 		Error,
-		(	'$lgt_pp_entity'(Type, Entity, _) ->
-			throw(error(Error, entity(Type, Entity)))
-		;	throw(error(Error, directive(Directive)))
-		)).
+		throw(error(Error, directive(Directive)))
+	).
 
 '$lgt_tr_directive'(Directive, Ctx) :-
 	'$lgt_prolog_meta_directive'(Directive, Meta),	% defined in the Prolog adapter files
@@ -6425,7 +6427,7 @@ current_logtalk_flag(Flag, Value) :-
 	assertz('$lgt_pp_prolog_term_'((:- ensure_loaded(File)), Location)).
 
 '$lgt_tr_file_directive'(initialization(Goal), Ctx) :-
-	'$lgt_must_be'(callable, Goal, directive(initialization(Goal))),
+	'$lgt_must_be'(callable, Goal),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 	% only expand goals when compiling a source file
 	'$lgt_tr_expand_goal'(Goal, ExpandedGoal),
@@ -6470,7 +6472,7 @@ current_logtalk_flag(Flag, Value) :-
 	% Logtalk multifile predicates must be defined within an entity but
 	% be sure there isn't a non-instantiation error in the directive
 	ground(Obj::Functor/Arity),
-	throw(error(permission_error(declare, multifile_predicate, Obj::Functor/Arity), multifile(Preds))).
+	throw(permission_error(declare, multifile_predicate, Obj::Functor/Arity)).
 
 '$lgt_tr_file_directive'(Directive, _) :-
 	'$lgt_pp_term_location'(Location),

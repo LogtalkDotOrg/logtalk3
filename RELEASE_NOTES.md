@@ -57,6 +57,9 @@ would not be correctly saved.
 * FIXED: Don't count redefining an entity as a consequence of reloading a file
 as a loading warning.
 
+* FIXED: In some cases, the compiler would not generate the correct exception
+term when reporting an error in the compilation of a file-level directive.
+
 Prolog adapter and integration files
 ------------------------------------
 
