@@ -18285,11 +18285,11 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_must_be'(object, Term, Context) :-
 	(	var(Term) ->
 		throw(error(instantiation_error, Context))
-	;	\+ callable(Term) ->
-		throw(error(type_error(object_identifier, Term), Context))
 	;	'$lgt_current_object_'(Term, _, _, _, _, _, _, _, _, _, _) ->
 		true
-	;	throw(error(existence_error(object, Term), Context))
+	;	callable(Term) ->
+		throw(error(existence_error(object, Term), Context))
+	;	throw(error(type_error(object_identifier, Term), Context))
 	).
 
 '$lgt_must_be'(object_identifier, Term, Context) :-
@@ -18311,11 +18311,11 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_must_be'(protocol, Term, Context) :-
 	(	var(Term) ->
 		throw(error(instantiation_error, Context))
-	;	\+ atom(Term) ->
-		throw(error(type_error(protocol_identifier, Term), Context))
 	;	'$lgt_current_protocol_'(Term, _, _, _, _) ->
 		true
-	;	throw(error(existence_error(protocol, Term), Context))
+	;	 atom(Term) ->
+		throw(error(existence_error(protocol, Term), Context))
+	;	throw(error(type_error(protocol_identifier, Term), Context))
 	).
 
 '$lgt_must_be'(protocol_identifier, Term, Context) :-
@@ -18337,11 +18337,11 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_must_be'(category, Term, Context) :-
 	(	var(Term) ->
 		throw(error(instantiation_error, Context))
-	;	\+ callable(Term) ->
-		throw(error(type_error(category_identifier, Term), Context))
 	;	'$lgt_current_category_'(Term, _, _, _, _, _) ->
 		true
-	;	throw(error(existence_error(category, Term), Context))
+	;	callable(Term) ->
+		throw(error(existence_error(category, Term), Context))
+	;	throw(error(type_error(category_identifier, Term), Context))
 	).
 
 '$lgt_must_be'(category_identifier, Term, Context) :-
@@ -18395,21 +18395,31 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_must_be'(predicate_indicator, Term, Context) :-
 	(	var(Term) ->
 		throw(error(instantiation_error, Context))
-	;	Term \= _/_,
-		throw(error(type_error(predicate_indicator, Term), Context))
-	;	Term = Functor/Arity,
+	;	Term = Functor/Arity ->
 		'$lgt_must_be'(atom, Functor, Context),
 		'$lgt_must_be'(non_negative_integer, Arity, Context)
+	;	throw(error(type_error(predicate_indicator, Term), Context))
 	).
 
 '$lgt_must_be'(var_or_predicate_indicator, Term, Context) :-
 	(	var(Term) ->
 		true
-	;	Term \= _/_,
-		throw(error(type_error(predicate_indicator, Term), Context))
-	;	Term = Functor/Arity,
+	;	Term = Functor/Arity ->
 		'$lgt_must_be'(var_or_atom, Functor, Context),
 		'$lgt_must_be'(var_or_non_negative_integer, Arity, Context)
+	;	throw(error(type_error(predicate_indicator, Term), Context))
+	).
+
+'$lgt_must_be'(predicate_or_non_terminal_indicator, Term, Context) :-
+	(	var(Term) ->
+		throw(error(instantiation_error, Context))
+	;	Term = Functor/Arity ->
+		'$lgt_must_be'(atom, Functor, Context),
+		'$lgt_must_be'(non_negative_integer, Arity, Context)
+	;	Term = Functor//Arity ->
+		'$lgt_must_be'(atom, Functor, Context),
+		'$lgt_must_be'(non_negative_integer, Arity, Context)
+	;	throw(error(type_error(predicate_indicator, Term), Context))
 	).
 
 '$lgt_must_be'(scope, Term, Context) :-
@@ -18472,9 +18482,9 @@ current_logtalk_flag(Flag, Value) :-
 		throw(error(instantiation_error, Context))
 	;	\+ atom(Term) ->
 		throw(error(type_error(atom, Term), Context))
-	;	\+ '$lgt_member'(Term, [fx, fy, xfx, xfy, yfx, xf, yf]) ->
-		throw(error(domain_error(operator_specifier, Term), Context))
-	;	true
+	;	'$lgt_member'(Term, [fx, fy, xfx, xfy, yfx, xf, yf]) ->
+		true
+	;	throw(error(domain_error(operator_specifier, Term), Context))
 	).
 
 '$lgt_must_be'(var_or_operator_specifier, Term, Context) :-
@@ -18538,21 +18548,21 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_must_be'(flag, Term, Context) :-
 	(	var(Term) ->
 		throw(error(instantiation_error, Context))
-	;	\+ atom(Term) ->
-		throw(error(type_error(atom, Term), Context))
 	;	'$lgt_valid_flag'(Term) ->
 		true
-	;	throw(error(domain_error(flag, Term), Context))
+	;	atom(Term) ->
+		throw(error(domain_error(flag, Term), Context))
+	;	throw(error(type_error(atom, Term), Context))
 	).
 
 '$lgt_must_be'(var_or_flag, Term, Context) :-
 	(	var(Term) ->
 		true
-	;	\+ atom(Term) ->
-		throw(error(type_error(atom, Term), Context))
 	;	'$lgt_valid_flag'(Term) ->
 		true
-	;	throw(error(domain_error(flag, Term), Context))
+	;	atom(Term) ->
+		throw(error(domain_error(flag, Term), Context))
+	;	throw(error(type_error(atom, Term), Context))
 	).
 
 '$lgt_must_be'(read_write_flag, Term, Context) :-
