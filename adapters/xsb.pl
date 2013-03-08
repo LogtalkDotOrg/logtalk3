@@ -42,10 +42,30 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_iso_predicate'(?callable).
+% '$lgt_iso_predicate'(?callable)
 
 '$lgt_iso_predicate'(_) :-
 	fail.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  de facto standard Prolog predicates that might be missing
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% forall(+callable, +callable) -- built-in
+
+
+% format(+stream_or_alias, +character_code_list_or_atom, +list) -- built-in
+
+
+% format(+character_code_list_or_atom, +list) -- built-in
+
+
+% numbervars(?term, +integer, ?integer) -- built-in
 
 
 
@@ -88,12 +108,6 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 setup_call_catcher_cleanup(Setup, Call, Catcher, Cleanup) :-
 	call(Setup),
 	catch(Call, Catcher, Cleanup).
-
-
-% forall(+callable, +callable) -- built-in
-
-
-% call/2-7 -- built-in
 
 
 

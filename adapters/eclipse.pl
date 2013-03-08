@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on February 27, 2013
+%  Last updated on March 8, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -29,8 +29,6 @@
 :- pragma(nodebug).
 
 :- use_module(library(iso)).
-:- use_module(library(numbervars)).
-:- use_module(library(format)).
 
 :- set_event_handler(134, '$lgt_eclipse_discontiguous_predicate_handler'/2).
 
@@ -58,6 +56,31 @@
 	fail.
 
 :- local syntax_option(not(iso_restrictions)).
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  de facto standard Prolog predicates that might be missing
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% forall(+callable, +callable)
+
+forall(Generate, Test) :-
+	\+ (Generate, \+ Test).
+
+
+% format(+stream_or_alias, +character_code_list_or_atom, +list)
+% format(+character_code_list_or_atom, +list)
+
+:- use_module(library(format)).
+
+
+% numbervars(?term, +integer, ?integer) -- built-in
+
+:- use_module(library(numbervars)).
 
 
 
@@ -109,15 +132,6 @@
 
 setup_call_cleanup(_, _, _) :-
 	throw(not_supported(setup_call_cleanup/3)).
-
-
-% forall(+callable, +callable)
-
-forall(Generate, Test) :-
-	\+ (Generate, \+ Test).
-
-
-% call/2-7 -- built-in
 
 
 

@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for YAP Prolog 6.0.2 and later versions
-%  Last updated on February 27, 2013
+%  Last updated on March 8, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -27,8 +27,6 @@
 
 :- no_source.
 
-% the following language initialization is not needed to run Logtalk altough is 
-% higly recommended; you can comment out the set_prolog_flag/2 calls if needed
 
 :- initialization((
 	use_module(library(system)),
@@ -81,12 +79,15 @@
 	).
 
 
-:- multifile(message_hook/3).					% YAP hook predicate
+% YAP hook predicate
+:- multifile(message_hook/3).
 :- dynamic(message_hook/3).
 
-message_hook(clauses_not_together(_), _, _) :-	% YAP discontiguous predicate
-	'$lgt_increment_loadind_warnings_counter',	% clauses warning; hack to increment
-	fail.										% the Logtalk warnings counter
+% YAP discontiguous predicate clauses warning;
+% hack to increment the Logtalk warnings counter
+message_hook(clauses_not_together(_), _, _) :-	
+	'$lgt_increment_loadind_warnings_counter',
+	fail.
 
 
 
@@ -106,6 +107,26 @@ message_hook(clauses_not_together(_), _, _) :-	% YAP discontiguous predicate
 
 '$lgt_iso_predicate'(_) :-
 	fail.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  de facto standard Prolog predicates that might be missing
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% forall(+callable, +callable) -- built-in
+
+
+% format(+stream_or_alias, +character_code_list_or_atom, +list) -- built-in
+
+
+% format(+character_code_list_or_atom, +list) -- built-in
+
+
+% numbervars(?term, +integer, ?integer) -- built-in
 
 
 
@@ -137,12 +158,6 @@ message_hook(clauses_not_together(_), _, _) :-	% YAP discontiguous predicate
 
 
 % setup_call_cleanup(+callable, +callable, +callable) -- built-in
-
-
-% forall(+callable, +callable) -- built-in
-
-
-% call/2-7 -- built-in
 
 
 

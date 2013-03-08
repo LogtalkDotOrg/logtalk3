@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for B-Prolog 7.8 and later versions
-%  Last updated on February 27, 2013
+%  Last updated on March 8, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -25,8 +25,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% allow redefinition of predicate ::/2; use
-%  the alternative in/2 predicate instead
+% allow redefinition of predicate ::/2; use the alternative in/2 predicate instead
+
 :- set_prolog_flag(redefined, off).
 
 
@@ -47,6 +47,26 @@
 
 '$lgt_iso_predicate'(_) :-
 	fail.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  de facto standard Prolog predicates that might be missing
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% forall(+callable, +callable) -- built-in
+
+
+% format(+stream_or_alias, +character_code_list_or_atom, +list) -- built-in
+
+
+% format(+character_code_list_or_atom, +list) -- built-in
+
+
+% numbervars(?term, +integer, ?integer) -- built-in
 
 
 
@@ -79,9 +99,6 @@
 
 
 % setup_call_cleanup(+callable, +callable, +callable) -- built-in
-
-
-% forall(+callable, +callable) -- built-in
 
 
 % call/2-7 -- built-in

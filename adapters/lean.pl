@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Lean Prolog 3.7.10 and later versions
-%  Last updated on February 27, 2013
+%  Last updated on March 8, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -93,9 +93,18 @@ write_term(Stream, Term, _) :-
 	set_output(Current).
 
 
-format(Format, Arguments) :-
-	current_output(Stream),
-	format(Stream, Format, Arguments).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  de facto standard Prolog predicates that might be missing
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% forall(+callable, +callable) -- built-in
+
+
+% format(+stream_or_alias, +character_code_list_or_atom, +list)
 
 format(Stream, Format, Arguments) :-
 	atom_chars(Format, Chars),
@@ -141,6 +150,16 @@ format_spec_('~', Stream, Arguments, Arguments) :-
 	put_char(Stream, '~').
 
 
+% format(+character_code_list_or_atom, +list)
+
+format(Format, Arguments) :-
+	current_output(Stream),
+	format(Stream, Format, Arguments).
+
+
+% numbervars(?term, +integer, ?integer) -- built-in
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -174,12 +193,6 @@ format_spec_('~', Stream, Arguments, Arguments) :-
 
 setup_call_cleanup(_, _, _) :-
 	throw(not_supported(setup_call_cleanup/3)).
-
-
-% forall(+callable, +callable) -- built-in
-
-
-% call/2-7 -- built-in
 
 
 

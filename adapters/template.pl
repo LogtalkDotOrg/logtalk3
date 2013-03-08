@@ -42,8 +42,41 @@
 %
 % table of missing ISO predicates which are defined in this file
 
-'$lgt_iso_predicate'(_) :-			% remove this clause if you need 
-	fail.							% to define any ISO predicate
+% remove the following clause if you need to define any ISO predicate
+'$lgt_iso_predicate'(_) :-
+	fail.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  de facto standard Prolog predicates that might be missing
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% forall(+callable, +callable) -- built-in ????
+
+forall(Generate, Test) :-
+	\+ (Generate, \+ Test).
+
+
+% format(+stream_or_alias, +character_code_list_or_atom, +list) -- built-in ????
+
+format(Stream, Format, Arguments) :-
+	?????
+
+
+% format(+character_code_list_or_atom, +list) -- built-in ????
+
+format(Format, Arguments) :-
+	?????
+
+
+% numbervars(?term, +integer, ?integer) -- built-in ????
+
+numbervars(Term, From, Next) :-
+	?????
 
 
 
@@ -72,38 +105,6 @@
 
 
 % setup_call_cleanup(+callable, +callable, +callable) -- built-in ????
-
-
-% forall(+callable, +callable) -- built-in ????
-
-forall(Generate, Test) :-
-	\+ (Generate, \+ Test).
-
-
-% call/2-7 -- built-in ????
-
-call(F, A) :-
-	?????
-
-
-call(F, A1, A2) :-
-	?????
-
-
-call(F, A1, A2, A3) :-
-	?????
-
-
-call(F, A1, A2, A3, A4) :-
-	?????
-
-
-call(F, A1, A2, A3, A4, A5) :-
-	?????
-
-
-call(F, A1, A2, A3, A4, A5, A6) :-
-	?????
 
 
 

@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SWI Prolog 6.0.0 and later versions
-%  Last updated on March 6, 2013
+%  Last updated on March 8, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -30,12 +30,15 @@
 :- set_prolog_flag(generate_debug_info, false).
 
 
-:- multifile(message_hook/3).					% SWI-Prolog hook predicate
+% SWI-Prolog hook predicate
+:- multifile(message_hook/3).
 :- dynamic(message_hook/3).
 
-message_hook(discontiguous(_), _, _) :-			% SWI-Prolog discontiguous predicate
-	'$lgt_increment_loadind_warnings_counter',	% clauses warning; hack to increment
-	fail.										% the Logtalk warnings counter
+% SWI-Prolog discontiguous predicate clauses warning;
+% hack to increment the Logtalk warnings counter
+message_hook(discontiguous(_), _, _) :-
+	'$lgt_increment_loadind_warnings_counter',
+	fail.
 
 
 
@@ -55,6 +58,26 @@ message_hook(discontiguous(_), _, _) :-			% SWI-Prolog discontiguous predicate
 
 '$lgt_iso_predicate'(_) :-
 	fail.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  de facto standard Prolog predicates that might be missing
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% forall(+callable, +callable) -- built-in
+
+
+% format(+stream_or_alias, +character_code_list_or_atom, +list) -- built-in
+
+
+% format(+character_code_list_or_atom, +list) -- built-in
+
+
+% numbervars(?term, +integer, ?integer) -- built-in
 
 
 
@@ -92,12 +115,6 @@ message_hook(discontiguous(_), _, _) :-			% SWI-Prolog discontiguous predicate
 
 
 % setup_call_cleanup(+callable, +callable, +callable) -- built-in
-
-
-% forall(+callable, +callable) -- built-in
-
-
-% call/2-7 -- built-in
 
 
 
@@ -316,9 +333,12 @@ message_hook(discontiguous(_), _, _) :-			% SWI-Prolog discontiguous predicate
 % changes current working directory
 
 '$lgt_change_directory'(Directory) :-
-	prolog_to_os_filename(Directory, Path),		% fix possible mix of forward and backward slashes
-	expand_file_name(Path, [Expanded]),			% expand environment variables
-	prolog_to_os_filename(Fixed, Expanded),		% convert to SWI-Prolog notation for paths
+	% fix possible mix of forward and backward slashes
+	prolog_to_os_filename(Directory, Path),
+	% expand environment variables
+	expand_file_name(Path, [Expanded]),
+	% convert to SWI-Prolog notation for paths
+	prolog_to_os_filename(Fixed, Expanded),
 	working_directory(_, Fixed).
 
 
@@ -327,9 +347,12 @@ message_hook(discontiguous(_), _, _) :-			% SWI-Prolog discontiguous predicate
 % makes a new directory; succeeds if the directory already exists
 
 '$lgt_make_directory'(Directory) :-
-	prolog_to_os_filename(Directory, Path),		% fix possible mix of forward and backward slashes
-	expand_file_name(Path, [Expanded]),			% expand environment variables
-	prolog_to_os_filename(Fixed, Expanded),		% convert to SWI-Prolog notation for paths
+	% fix possible mix of forward and backward slashes
+	prolog_to_os_filename(Directory, Path),
+	% expand environment variables
+	expand_file_name(Path, [Expanded]),
+	% convert to SWI-Prolog notation for paths
+	prolog_to_os_filename(Fixed, Expanded),
 	(	exists_directory(Fixed) ->
 		true
 	;	make_directory(Fixed)
@@ -554,13 +577,16 @@ message_hook(discontiguous(_), _, _) :-			% SWI-Prolog discontiguous predicate
 	;	Expanded  =  (:- Expanded0)
 	).
 
-'$lgt_swi_directive_expansion'(include(File), Terms) :-	% just an hack for simple cases
-	logtalk_load_context(entity_type, module),
-	use_module(library(readutil), []),					% auto-loading might be turned off
+'$lgt_swi_directive_expansion'(include(File), Terms) :-
+	% just an hack for simple cases
+	'$lgt_pp_module_'(_),
+	% auto-loading might be turned off
+	use_module(library(readutil), []),
 	readutil:read_file_to_terms(File, Terms, [extensions([pl, ''])]).
 
-'$lgt_swi_directive_expansion'(public(_), []) :-		% used to provide info to the cross-referencer
-	logtalk_load_context(entity_type, module).			% only when we're compiling a module as an object!
+'$lgt_swi_directive_expansion'(public(_), []) :-
+	% used to provide information about module predicates to the cross-referencer
+	'$lgt_pp_module_'(_).
 
 '$lgt_swi_directive_expansion'(style_check(Option), []) :-
 	style_check(Option).
@@ -619,7 +645,7 @@ message_hook(discontiguous(_), _, _) :-			% SWI-Prolog discontiguous predicate
 	'$lgt_swi_encoding_to_logtalk_encoding'(Encoding1, Encoding2).
 
 '$lgt_swi_directive_expansion'(ensure_loaded(File), use_module(Module, Imports)) :-
-	logtalk_load_context(entity_type, module),
+	'$lgt_pp_module_'(_),
 	% ensure_loaded/1 directive used within a module (sloppy replacement for the use_module/1-2 directives)
 	'$lgt_swi_list_of_exports'(File, Module, Imports).
 

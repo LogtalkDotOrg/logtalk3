@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for CxProlog 0.97.6 or a later version
-%  Last updated on February 27, 2013
+%  Last updated on March 8, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -46,9 +46,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_iso_predicate'(?callable).
-%
-% table of definition for missing ISO predicates
+% '$lgt_iso_predicate'(?callable)
 
 '$lgt_iso_predicate'(subsumes_term(_, _)).
 
@@ -89,6 +87,26 @@ subsumes_term(General, Specific) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
+%  de facto standard Prolog predicates that might be missing
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% forall(+callable, +callable) -- built-in
+
+
+% format(+stream_or_alias, +character_code_list_or_atom, +list) -- built-in
+
+
+% format(+character_code_list_or_atom, +list) -- built-in
+
+
+% numbervars(?term, +integer, ?integer) -- built-in
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
 %  predicate properties
 %
 %  this predicate must return at least static, dynamic, and built_in 
@@ -116,12 +134,6 @@ subsumes_term(General, Specific) :-
 setup_call_cleanup(Setup, Call, Cleanup) :-
 	call(Setup),
 	call_cleanup(Call, Cleanup).
-
-
-% forall(+callable, +callable) -- built-in
-
-
-% call/2-7 -- built-in
 
 
 

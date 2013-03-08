@@ -60,6 +60,9 @@ as a loading warning.
 Prolog adapter and integration files
 ------------------------------------
 
+* UPDATED: Internal documentation of adapter files for supported backend Prolog
+compilers.
+
 * UPDATED: Added an hack for compiling `include/1` directives when compiling
 modules as objects to the SWI-Prolog adapter file. Also use a faster version
 of the term reading internal predicate.

@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Qu-Prolog 9.0 and later versions
-%  Last updated on February 27, 2013
+%  Last updated on March 8, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -89,40 +89,15 @@ term_variables(Term, Variables) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  predicate properties
-%
-%  this predicate must return at least static, dynamic, and built_in 
-%  properties for an existing predicate
+%  de facto standard Prolog predicates that might be missing
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-% '$lgt_predicate_property'(+callable, ?predicate_property)
-
-'$lgt_predicate_property'(Pred, Prop) :-
-	predicate_property(Pred, Prop).
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  meta-predicates
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-% setup_call_cleanup(+callable, +callable, +callable) -- built-in
 
 
 % forall(+callable, +callable) -- built-in
 
 
-% call/2-7 -- built-in
-
-
-format(Format, Arguments) :-
-	current_output(Stream),
-	format(Stream, Format, Arguments).
+% format(+stream_or_alias, +character_code_list_or_atom, +list)
 
 format(Stream, Format, Arguments) :-
 	atom_chars(Format, Chars),
@@ -166,6 +141,44 @@ format_spec_('n', Stream, Arguments, Arguments) :-
 	nl(Stream).
 format_spec_('~', Stream, Arguments, Arguments) :-
 	put_char(Stream, '~').
+
+
+% format(+character_code_list_or_atom, +list)
+
+format(Format, Arguments) :-
+	current_output(Stream),
+	format(Stream, Format, Arguments).
+
+
+% numbervars(?term, +integer, ?integer) -- built-in
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  predicate properties
+%
+%  this predicate must return at least static, dynamic, and built_in 
+%  properties for an existing predicate
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% '$lgt_predicate_property'(+callable, ?predicate_property)
+
+'$lgt_predicate_property'(Pred, Prop) :-
+	predicate_property(Pred, Prop).
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  meta-predicates
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% setup_call_cleanup(+callable, +callable, +callable) -- built-in
 
 
 
