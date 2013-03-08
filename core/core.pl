@@ -4828,7 +4828,7 @@ current_logtalk_flag(Flag, Value) :-
 %  compiler
 %
 %  compiles Logtalk source files into intermediate Prolog source files
-%  and calls the back-end Prolog compiler the generated files
+%  and calls the back-end Prolog compiler on the generated files
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -4844,6 +4844,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_load_files'([], Flags) :-
 	!,
+	% make sure there are no leftovers
 	'$lgt_clean_pp_file_clauses',
 	% the caller might need the flags set
 	'$lgt_set_compiler_flags'(Flags).
@@ -5022,6 +5023,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_files'([], Flags) :-
 	!,
+	% make sure there are no leftovers
 	'$lgt_clean_pp_file_clauses',
 	% the caller might need the flags set
 	'$lgt_set_compiler_flags'(Flags).
@@ -6129,7 +6131,6 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_tr_expanded_terms'(ExpandedTerms, Term, Ctx).
 
 '$lgt_tr_expanded_terms'(ExpandedTerm, Term, Ctx) :-
-	!,
 	'$lgt_tr_expanded_term'(ExpandedTerm, Term, Ctx).
 
 
@@ -6452,18 +6453,16 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_file_directive'(set_prolog_flag(Flag, Value), _) :-
 	!,
-	(	% perform basic error and portability checking
-		'$lgt_tr_body'(set_prolog_flag(Flag, Value), _, _, _),
-		fail
-	;	% require a nonvar value
-		'$lgt_must_be'(nonvar, Value),
-		% setting the flag during compilation may or may not work as expected
-		% depending on the flag and on the back-end Prolog compiler
-		set_prolog_flag(Flag, Value),
-		% we also copy the directive to the generated intermediate Prolog file
-		'$lgt_pp_term_location'(Location),
-		assertz('$lgt_pp_prolog_term_'((:- set_prolog_flag(Flag, Value)), Location))
-	).
+	% perform basic error and portability checking
+	'$lgt_tr_body'(set_prolog_flag(Flag, Value), _, _, _),
+	% require a nonvar value
+	'$lgt_must_be'(nonvar, Value),
+	% setting the flag during compilation may or may not work as expected
+	% depending on the flag and on the back-end Prolog compiler
+	set_prolog_flag(Flag, Value),
+	% we also copy the directive to the generated intermediate Prolog file
+	'$lgt_pp_term_location'(Location),
+	assertz('$lgt_pp_prolog_term_'((:- set_prolog_flag(Flag, Value)), Location)).
 
 '$lgt_tr_file_directive'(multifile(Preds), _) :-
 	'$lgt_flatten_list'([Preds], PredsFlatted),
