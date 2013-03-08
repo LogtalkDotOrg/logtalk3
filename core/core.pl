@@ -2135,11 +2135,31 @@ set_logtalk_flag(Flag, Value) :-
 % tests/gets Logtalk flags
 
 current_logtalk_flag(Flag, Value) :-
-	'$lgt_must_be'(var_or_flag, Flag, logtalk(current_logtalk_flag(Flag, Value), _)),
-	'$lgt_valid_flag'(Flag),
-	'$lgt_compiler_flag'(Flag, Value).
+	var(Flag),
+	!,
+	(	Flag = version,
+		'$lgt_version'(Value)
+	;	'$lgt_valid_flag'(Flag),
+		'$lgt_compiler_flag'(Flag, Value)
+	).
 
-current_logtalk_flag(version, version(3, 0, 0)).
+current_logtalk_flag(Flag, Value) :-	
+	'$lgt_valid_flag'(Flag),
+	!,
+	(	Flag == version ->
+		'$lgt_version'(Value)
+	;	'$lgt_compiler_flag'(Flag, Value)
+	).
+
+current_logtalk_flag(Flag, Value) :-	
+	\+ atom(Flag),
+	throw(error(type_error(atom, Flag), logtalk(current_logtalk_flag(Flag, Value), _))).
+
+current_logtalk_flag(Flag, Value) :-	
+	throw(error(domain_error(flag, Flag), logtalk(current_logtalk_flag(Flag, Value), _))).
+
+
+'$lgt_version'(version(3, 0, 0)).
 
 
 
