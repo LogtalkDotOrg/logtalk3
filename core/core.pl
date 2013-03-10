@@ -4018,7 +4018,8 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 
-'$lgt_unify_lambda_parameters'((-), _, _, Lambda, This) :-	% catch variables and lists with unbound tails
+'$lgt_unify_lambda_parameters'((-), _, _, Lambda, This) :-
+	% catch variables and lists with unbound tails
 	(	Lambda = _/Parameters>>_
 	;	Lambda = Parameters>>_
 	),
@@ -6188,6 +6189,10 @@ current_logtalk_flag(Flag, Value) :-
 %
 % translates a list of directives
 
+'$lgt_tr_directives'((-), _) :-
+	% catch variables and lists with unbound tails
+	throw(error(instantiantion_error, directive(_))).
+
 '$lgt_tr_directives'([], _).
 
 '$lgt_tr_directives'([Directive| Directives], Ctx) :-
@@ -7901,6 +7906,10 @@ current_logtalk_flag(Flag, Value) :-
 %
 % translates the relations of an object with other entities
 
+'$lgt_tr_object_relations'((-), _) :-
+	% catch variables and lists with unbound tails
+	throw(instantiation_error).
+
 '$lgt_tr_object_relations'([], _).
 
 '$lgt_tr_object_relations'([Relation| Relations], Obj) :-
@@ -7942,6 +7951,10 @@ current_logtalk_flag(Flag, Value) :-
 %
 % translates the relations of a protocol with other entities
 
+'$lgt_tr_protocol_relations'((-), _) :-
+	% catch variables and lists with unbound tails
+	throw(instantiation_error).
+
 '$lgt_tr_protocol_relations'([], _).
 
 '$lgt_tr_protocol_relations'([Relation| Relations], Ptc) :-
@@ -7970,6 +7983,10 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_tr_category_relations'(+list, @category_identifier)
 %
 % translates the relations of a category with other entities
+
+'$lgt_tr_category_relations'((-), _) :-
+	% catch variables and lists with unbound tails
+	throw(instantiation_error).
 
 '$lgt_tr_category_relations'([], _).
 
@@ -8216,6 +8233,10 @@ current_logtalk_flag(Flag, Value) :-
 
 
 % '$lgt_tr_clauses'(+list, +compilation_context)
+
+'$lgt_tr_clauses'((-), _) :-
+	% catch variables and lists with unbound tails
+	throw(error(instantiation_error, clause(_))).
 
 '$lgt_tr_clauses'([], _).
 

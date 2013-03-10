@@ -63,6 +63,9 @@ term when reporting an error in the compilation of a file-level directive.
 * FIXED: Possible nesting of error terms when using the entity creation
 built-in predicates.
 
+* FIXED: Detection of instantiation errors when compiling entity relations,
+directives, and clauses.
+
 Prolog adapter and integration files
 ------------------------------------
 
