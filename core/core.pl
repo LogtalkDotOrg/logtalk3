@@ -272,7 +272,7 @@
 :- dynamic('$lgt_pp_extended_category_'/5).					% '$lgt_pp_extended_category_'(Ctg, Prefix, Dcl, Def, Scope)
 
 :- dynamic('$lgt_pp_file_initialization_'/1).				% '$lgt_pp_file_initialization_'(Goal)
-:- dynamic('$lgt_pp_entity_initialization_'/3).				% '$lgt_pp_entity_initialization_'(Type, Entity, Goal)
+:- dynamic('$lgt_pp_file_entity_initialization_'/3).		% '$lgt_pp_file_entity_initialization_'(Type, Entity, Goal)
 
 :- dynamic('$lgt_pp_entity_initialization_'/1).				% '$lgt_pp_entity_initialization_'(Goal)
 :- dynamic('$lgt_pp_final_entity_initialization_'/1).		% '$lgt_pp_final_entity_initialization_'(Goal)
@@ -5685,7 +5685,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_clean_pp_file_clauses' :-
 	retractall('$lgt_pp_file_initialization_'(_)),
-	retractall('$lgt_pp_entity_initialization_'(_, _, _)),
+	retractall('$lgt_pp_file_entity_initialization_'(_, _, _)),
 	retractall('$lgt_pp_file_encoding_'(_, _)),
 	retractall('$lgt_pp_file_bom_'(_)),
 	retractall('$lgt_pp_file_directory_path_flags_'(_, _, _, _)),
@@ -6059,6 +6059,10 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_tr_terms'(+list(term), +compilation_context)
 %
 % translates a list of terms (clauses, directives, or grammar rules)
+
+'$lgt_tr_terms'((-), _) :-
+	% catch variables and lists with unbound tails
+	throw(error(instantiantion_error, term(_))).
 
 '$lgt_tr_terms'([], _).
 
@@ -12395,7 +12399,7 @@ current_logtalk_flag(Flag, Value) :-
 		% not the object being compiled (self reference)
 		\+ '$lgt_pp_object_'(Object, _, _, _, _, _, _, _, _, _, _),
 		% not an object defined in the source file being compiled
-		\+ '$lgt_pp_entity_initialization_'(object, Object, _),
+		\+ '$lgt_pp_file_entity_initialization_'(object, Object, _),
 		\+ '$lgt_pp_file_runtime_clause_'('$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _)),
 		% not a currently loaded module
 		\+ (atom(Object), '$lgt_prolog_feature'(modules, supported), current_module(Object)),
@@ -12419,7 +12423,7 @@ current_logtalk_flag(Flag, Value) :-
 		% not the protocol being compiled (self reference)
 		\+ '$lgt_pp_protocol_'(Protocol, _, _, _, _),
 		% not a protocol defined in the source file being compiled
-		\+ '$lgt_pp_entity_initialization_'(protocol, Protocol, _),
+		\+ '$lgt_pp_file_entity_initialization_'(protocol, Protocol, _),
 		\+ '$lgt_pp_file_runtime_clause_'('$lgt_current_protocol_'(Protocol, _, _, _, _)),
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_print_message'(warning(unknown_entities), core, reference_to_unknown_protocol(Path, Lines, Type, Entity, Protocol)),
@@ -12441,7 +12445,7 @@ current_logtalk_flag(Flag, Value) :-
 		% not the category being compiled (self reference)
 		\+ '$lgt_pp_category_'(Category, _, _, _, _, _),
 		% not a category defined in the source file being compiled
-		\+ '$lgt_pp_entity_initialization_'(category, Category, _),
+		\+ '$lgt_pp_file_entity_initialization_'(category, Category, _),
 		\+ '$lgt_pp_file_runtime_clause_'('$lgt_current_category_'(Category, _, _, _, _, _)),
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_print_message'(warning(unknown_entities), core, reference_to_unknown_category(Path, Lines, Type, Entity, Category)),
@@ -12706,7 +12710,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_fix_predicate_calls',
 	'$lgt_gen_protocol_clauses',
 	'$lgt_gen_protocol_directives',
-	'$lgt_gen_entity_initialization_goal'.
+	'$lgt_gen_file_entity_initialization_goal'.
 
 '$lgt_generate_code'(object) :-
 	'$lgt_gen_def_table_clauses',
@@ -12714,7 +12718,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_fix_predicate_calls',
 	'$lgt_gen_object_clauses',
 	'$lgt_gen_object_directives',
-	'$lgt_gen_entity_initialization_goal'.
+	'$lgt_gen_file_entity_initialization_goal'.
 
 '$lgt_generate_code'(category) :-
 	'$lgt_gen_def_table_clauses',
@@ -12722,7 +12726,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_fix_predicate_calls',
 	'$lgt_gen_category_clauses',
 	'$lgt_gen_category_directives',
-	'$lgt_gen_entity_initialization_goal'.
+	'$lgt_gen_file_entity_initialization_goal'.
 
 
 
@@ -14771,7 +14775,7 @@ current_logtalk_flag(Flag, Value) :-
 % goals and from the source file initialization/1 directive if present
 
 '$lgt_initialization_goal'(Goal) :-
-	findall(EntityGoal, '$lgt_pp_entity_initialization_'(_, _, EntityGoal), EntityGoals),
+	findall(EntityGoal, '$lgt_pp_file_entity_initialization_'(_, _, EntityGoal), EntityGoals),
 	findall(FileGoal, '$lgt_pp_file_initialization_'(FileGoal), FileGoals),
 	'$lgt_append'(EntityGoals, FileGoals, Goals),
 	'$lgt_list_to_conjunction'(Goals, GoalConjunction),
@@ -14807,7 +14811,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % generates and asserts the initialization goal for the entity being compiled
 
-'$lgt_gen_entity_initialization_goal' :-
+'$lgt_gen_file_entity_initialization_goal' :-
 	'$lgt_pp_entity'(Type, Entity, Prefix),
 	(	setof(Mutex, Head^'$lgt_pp_synchronized_'(Head, Mutex), Mutexes) ->
 		Goal1 = '$lgt_create_mutexes'(Mutexes)
@@ -14822,7 +14826,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_remove_redundant_calls'((Goal1, Goal2, Goal3), Goal),
 	(	Goal == true ->
 		true
-	;	assertz('$lgt_pp_entity_initialization_'(Type, Entity, Goal))
+	;	assertz('$lgt_pp_file_entity_initialization_'(Type, Entity, Goal))
 	).
 
 
