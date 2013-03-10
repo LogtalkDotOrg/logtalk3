@@ -1032,6 +1032,9 @@ create_protocol(Ptc, Relations, Directives) :-
 %
 % error handler for the dynamic entity creation built-in predicates
 
+'$lgt_create_entity_error_handler'(error(Error,_), Goal) :-
+	'$lgt_create_entity_error_handler'(Error, Goal).
+
 '$lgt_create_entity_error_handler'(Error, Goal) :-
 	'$lgt_restore_global_operator_table',
 	'$lgt_clean_pp_file_clauses',

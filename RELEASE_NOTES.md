@@ -60,6 +60,9 @@ as a loading warning.
 * FIXED: In some cases, the compiler would not generate the correct exception
 term when reporting an error in the compilation of a file-level directive.
 
+* FIXED: Possible nesting of error terms when using the entity creation
+built-in predicates.
+
 Prolog adapter and integration files
 ------------------------------------
 
