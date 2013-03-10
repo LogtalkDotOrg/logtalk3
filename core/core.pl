@@ -5684,9 +5684,6 @@ current_logtalk_flag(Flag, Value) :-
 % and loading predicates)
 
 '$lgt_clean_pp_file_clauses' :-
-	retractall('$lgt_pp_global_operator_'(_, _, _)),
-	retractall('$lgt_pp_file_operator_'(_, _, _)),
-	retractall('$lgt_pp_entity_operator_'(_, _, _, _)),
 	retractall('$lgt_pp_file_initialization_'(_)),
 	retractall('$lgt_pp_entity_initialization_'(_, _, _)),
 	retractall('$lgt_pp_file_encoding_'(_, _)),
