@@ -5696,7 +5696,12 @@ current_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_pp_cc_if_found_'(_)),
 	retractall('$lgt_pp_cc_skipping_'),
 	retractall('$lgt_pp_cc_mode_'(_)),
-	retractall('$lgt_pp_term_position_'(_)).
+	retractall('$lgt_pp_term_position_'(_)),
+	% a Logtalk source file may contain only plain Prolog terms
+	% instead of plain Prolog terms intermixed between entities
+	% definitions; there might also be plain Prolog terms after
+	% the last entity definition
+	retractall('$lgt_pp_prolog_term_'(_, _)).
 
 
 
@@ -5758,6 +5763,7 @@ current_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_pp_ddef_'(_)),
 	retractall('$lgt_pp_final_ddef_'(_)),
 	retractall('$lgt_pp_super_'(_)),
+	% clean plain Prolog terms appearing before an entity definition
 	retractall('$lgt_pp_prolog_term_'(_, _)),
 	retractall('$lgt_pp_entity_clause_'(_, _)),
 	retractall('$lgt_pp_final_entity_clause_'(_, _)),
