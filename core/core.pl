@@ -892,7 +892,7 @@ create_object(Obj, Relations, Directives, Clauses) :-
 	'$lgt_tr_object_relations'(Relations, Obj),
 	% set the initial compilation context for compiling the object directives and clauses
 	'$lgt_comp_ctx_mode'(Ctx, runtime),
-	'$lgt_tr_directives'([(dynamic)| Directives], Ctx),
+	'$lgt_tr_logtalk_directives'([(dynamic)| Directives], Ctx),
 	% the list of clauses may also include grammar rules
 	'$lgt_tr_terms'(Clauses, Ctx),
 	'$lgt_gen_def_table_clauses',
@@ -941,7 +941,7 @@ create_category(Ctg, Relations, Directives, Clauses) :-
 	'$lgt_tr_category_relations'(Relations, Ctg),
 	% set the initial compilation context for compiling the category directives and clauses
 	'$lgt_comp_ctx_mode'(Ctx, runtime),
-	'$lgt_tr_directives'([(dynamic)| Directives], Ctx),
+	'$lgt_tr_logtalk_directives'([(dynamic)| Directives], Ctx),
 	% the list of clauses may also include grammar rules
 	'$lgt_tr_terms'(Clauses, Ctx),
 	'$lgt_gen_def_table_clauses',
@@ -995,7 +995,7 @@ create_protocol(Ptc, Relations, Directives) :-
 	'$lgt_tr_protocol_relations'(Relations, Ptc),
 	% set the initial compilation context for compiling the protocol directives
 	'$lgt_comp_ctx_mode'(Ctx, runtime),
-	'$lgt_tr_directives'([(dynamic)| Directives], Ctx),
+	'$lgt_tr_logtalk_directives'([(dynamic)| Directives], Ctx),
 	'$lgt_gen_protocol_clauses',
 	'$lgt_gen_protocol_directives',
 	'$lgt_assert_tr_entity',
@@ -6191,25 +6191,6 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_tr_directives'(+list, +compilation_context)
-%
-% translates a list of directives
-
-'$lgt_tr_directives'((-), _) :-
-	% catch variables and lists with unbound tails
-	throw(error(instantiantion_error, directive(_))).
-
-'$lgt_tr_directives'([], _).
-
-'$lgt_tr_directives'([Directive| Directives], Ctx) :-
-	% only the compilation context mode should be shared between different directives
-	'$lgt_comp_ctx_mode'(Ctx, Mode),
-	'$lgt_comp_ctx_mode'(NewCtx, Mode),
-	'$lgt_tr_directive'(Directive, NewCtx),
-	'$lgt_tr_directives'(Directives, Ctx).
-
-
-
 % '$lgt_tr_directive'(+term, +compilation_context)
 %
 % translates a directive
@@ -6493,6 +6474,25 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
+% '$lgt_tr_logtalk_directives'(+list, +compilation_context)
+%
+% translates a list of directives
+
+'$lgt_tr_logtalk_directives'((-), _) :-
+	% catch variables and lists with unbound tails
+	throw(error(instantiantion_error, directive(_))).
+
+'$lgt_tr_logtalk_directives'([], _).
+
+'$lgt_tr_logtalk_directives'([Directive| Directives], Ctx) :-
+	% only the compilation context mode should be shared between different directives
+	'$lgt_comp_ctx_mode'(Ctx, Mode),
+	'$lgt_comp_ctx_mode'(NewCtx, Mode),
+	'$lgt_tr_logtalk_directive'(Directive, NewCtx),
+	'$lgt_tr_logtalk_directives'(Directives, Ctx).
+
+
+
 % '$lgt_tr_logtalk_directive'(+atom, +list, +compilation_context)
 %
 % translates a Logtalk directive and its (possibly empty) list of arguments
@@ -6754,7 +6754,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_add_referenced_object'(Obj),
 	assertz('$lgt_pp_uses_'(Obj)),
 	'$lgt_split_operators_and_predicates'(Resources, Preds, Operators),
-	'$lgt_tr_directives'(Operators, Ctx),
+	'$lgt_tr_logtalk_directives'(Operators, Ctx),
 	'$lgt_tr_uses_directive'(Preds, Obj, Ctx).
 
 
@@ -6772,7 +6772,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_must_be'(module_identifier, Module),
 	'$lgt_must_be'(list, Imports),
 	'$lgt_split_operators_and_predicates'(Imports, Preds, Operators),
-	'$lgt_tr_directives'(Operators, Ctx),
+	'$lgt_tr_logtalk_directives'(Operators, Ctx),
 	(	'$lgt_pp_module_'(_) ->
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
 		'$lgt_tr_logtalk_directive'(uses(Module, Preds), Ctx)
@@ -6791,7 +6791,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_must_be'(module_identifier, Module),
 	'$lgt_must_be'(list, Exports),
 	'$lgt_split_operators_and_predicates'(Exports, Preds, Operators),
-	'$lgt_tr_directives'(Operators, Ctx),
+	'$lgt_tr_logtalk_directives'(Operators, Ctx),
 	'$lgt_tr_reexport_directive'(Preds, Module, Ctx).
 
 
