@@ -7926,8 +7926,10 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_flatten_list'(Args, FlattenedArgs),
 		'$lgt_tr_object_relation'(Functor, FlattenedArgs, Obj) ->
 		true
-	;	functor(Relation, Functor, Arity),
+	;	callable(Relation) ->
+		functor(Relation, Functor, Arity),
 		throw(domain_error(object_relation, Functor/Arity))
+	;	throw(type_error(callable, Relation))
 	),
 	'$lgt_tr_object_relations'(Relations, Obj).
 
@@ -7971,8 +7973,10 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_flatten_list'(Args, FlattenedArgs),
 		'$lgt_tr_protocol_relation'(Functor, FlattenedArgs, Ptc) ->
 		true
-	;	functor(Relation, Functor, Arity),
+	;	callable(Relation) ->
+		functor(Relation, Functor, Arity),
 		throw(domain_error(protocol_relation, Functor/Arity))
+	;	throw(type_error(callable, Relation))
 	),
 	'$lgt_tr_protocol_relations'(Relations, Ptc).
 
@@ -8004,8 +8008,10 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_flatten_list'(Args, FlattenedArgs),
 		'$lgt_tr_category_relation'(Functor, FlattenedArgs, Ctg) ->
 		true
-	;	functor(Relation, Functor, Arity),
+	;	callable(Relation) ->
+		functor(Relation, Functor, Arity),
 		throw(domain_error(category_relation, Functor/Arity))
+	;	throw(type_error(callable, Relation))
 	),
 	'$lgt_tr_category_relations'(Relations, Ctg).
 

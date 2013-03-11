@@ -40,6 +40,9 @@ calls from an object or a category without any ancestors. The exception terms
 `existence_error(ancestor, object)` and `existence_error(ancestor, object)` are
 now used.
 
+* IMPROVED: Throw callable type errors when applicable when compiling entity
+relations.
+
 * IMPROVED: The compiler now detects attempts to define an object as both a
 prototype and a class or as both a prototype and an instance.
 
