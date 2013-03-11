@@ -101,6 +101,9 @@ numbervars(Term, From, Next) :-
 %
 %  meta-predicates
 %
+%  the setup_call_cleanup/3 meta-predicate is only required if the backend
+%  Prolog compiler supports a compatible multi-threading implementation
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
