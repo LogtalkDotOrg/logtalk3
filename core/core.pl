@@ -15776,6 +15776,16 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
+% '$lgt_valid_scope'(@nonvar).
+%
+% converts between user and internal scope terms
+
+'$lgt_valid_scope'(private).
+'$lgt_valid_scope'(protected).
+'$lgt_valid_scope'((public)).
+
+
+
 % '$lgt_valid_predicate_indicator'(+nonvar, -atom, -integer)
 %
 % valid predicate indicator
@@ -18417,21 +18427,21 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_must_be'(scope, Term, Context) :-
 	(	var(Term) ->
 		throw(error(instantiation_error, Context))
-	;	Term \== (public),
-		Term \== protected,
-		Term \== private ->
-		throw(error(type_error(scope, Term), Context))
-	;	true
+	;	'$lgt_valid_scope'(Term) ->
+		true
+	;	atom(Term) ->
+		throw(error(domain_error(scope, Term), Context))
+	;	throw(error(type_error(atom, Term), Context))
 	).
 
 '$lgt_must_be'(var_or_scope, Term, Context) :-
 	(	var(Term) ->
 		true
-	;	Term \== (public),
-		Term \== protected,
-		Term \== private ->
-		throw(error(type_error(scope, Term), Context))
-	;	true
+	;	'$lgt_valid_scope'(Term) ->
+		true
+	;	atom(Term) ->
+		throw(error(domain_error(scope, Term), Context))
+	;	throw(error(type_error(atom, Term), Context))
 	).
 
 '$lgt_must_be'(var_or_event, Term, Context) :-
