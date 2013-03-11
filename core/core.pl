@@ -11413,18 +11413,18 @@ current_logtalk_flag(Flag, Value) :-
 	throw(type_error(callable, Pred)).
 
 '$lgt_tr_super_call'(_, _, _) :-
-	'$lgt_pp_object_'(Obj, _, _, _, _, _, _, _, _, _, _),
+	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
 	\+ '$lgt_pp_extended_object_'(_, _, _, _, _, _, _, _, _, _),
 	\+ '$lgt_pp_instantiated_class_'(_, _, _, _, _, _, _, _, _, _),
 	\+ '$lgt_pp_specialized_class_'(_, _, _, _, _, _, _, _, _, _),
 	% invalid goal (standalone object)
-	throw(existence_error(ancestor_object, Obj)).
+	throw(existence_error(ancestor, object)).
 
 '$lgt_tr_super_call'(_, _, _) :-
-	'$lgt_pp_category_'(Ctg, _, _, _, _, _),
+	'$lgt_pp_category_'(_, _, _, _, _, _),
 	\+ '$lgt_pp_extended_category_'(_, _, _, _, _),
 	% invalid goal (not an extended category)
-	throw(existence_error(ancestor_category, Ctg)).
+	throw(existence_error(ancestor, category)).
 
 '$lgt_tr_super_call'(Pred, TPred, Ctx) :-
 	var(Pred),
