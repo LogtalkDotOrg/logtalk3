@@ -2064,7 +2064,8 @@ logtalk_load_context(file, File) :-
 logtalk_load_context(directory, Directory) :-
 	'$lgt_pp_file_directory_path_flags_'(_, Directory, _, _).
 
-logtalk_load_context(entity_name, Entity) :-	% deprecated
+logtalk_load_context(entity_name, Entity) :-
+	% deprecated key
 	logtalk_load_context(entity_identifier, Entity).
 
 logtalk_load_context(entity_identifier, Entity) :-
@@ -6216,13 +6217,16 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_tr_directive'(if('$lgt_predicate_property'(Pred, Prop)), Ctx).
 
 '$lgt_tr_directive'(if(Goal), _) :-
-	'$lgt_pp_cc_mode_'(Value),					% not top-level if
+	'$lgt_pp_cc_mode_'(Value),
+	% not top-level if
 	!,
 	asserta('$lgt_pp_cc_if_found_'(Goal)),
 	(	Value == ignore ->
-		asserta('$lgt_pp_cc_mode_'(ignore))		% another if ... endif to ignore
-	;	Value == seek_else ->					% we're looking for an else
-		asserta('$lgt_pp_cc_mode_'(ignore))		% so ignore this if ... endif
+		% another if ... endif to ignore
+		asserta('$lgt_pp_cc_mode_'(ignore))
+	;	Value == seek_else ->
+		% we're looking for an else; ignore this if ... endif
+		asserta('$lgt_pp_cc_mode_'(ignore))
 	;	Value == skip_all ->
 		asserta('$lgt_pp_cc_mode_'(ignore))
 	;	% Value == skip_else ->
@@ -6234,7 +6238,8 @@ current_logtalk_flag(Flag, Value) :-
 		)
 	).
 
-'$lgt_tr_directive'(if(Goal), _) :-				% top-level if
+'$lgt_tr_directive'(if(Goal), _) :-
+	% top-level if
 	!,
 	asserta('$lgt_pp_cc_if_found_'(Goal)),
 	(	call(Goal) ->
@@ -6262,15 +6267,18 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_directive'(elif(Goal), _) :-
 	'$lgt_pp_cc_mode_'(Mode),
-	(	Mode == ignore ->						% we're inside an if ... endif
-		true									% that we're ignoring
-	;	Mode == skip_else ->					% the corresponding if is true
-		retractall('$lgt_pp_cc_skipping_'),		% so we must skip this elif
+	(	Mode == ignore ->
+		% we're inside an if ... endif that we're ignoring
+		true
+	;	Mode == skip_else ->
+		% the corresponding if is true so we must skip this elif
+		retractall('$lgt_pp_cc_skipping_'),
 		assertz('$lgt_pp_cc_skipping_'),
 		asserta('$lgt_pp_cc_mode_'(skip_all))
 	;	Mode == skip_all ->
 		true
-	;	% Mode == seek_else ->					% the corresponding if is false
+	;	% Mode == seek_else ->
+		% the corresponding if is false
 		retract('$lgt_pp_cc_mode_'(_)),
 		(	catch(Goal, Error, '$lgt_compiler_error_handler'(Error)) ->
 			retractall('$lgt_pp_cc_skipping_'),
@@ -6286,14 +6294,17 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_directive'(else, _) :-
 	'$lgt_pp_cc_mode_'(Mode),
-	(	Mode == ignore ->						% we're inside an if ... endif
-		true									% that we're ignoring
-	;	Mode == skip_else ->					% the corresponding if is true
-		retractall('$lgt_pp_cc_skipping_'),		% so we must skip this else
+	(	Mode == ignore ->
+		% we're inside an if ... endif that we're ignoring
+		true
+	;	Mode == skip_else ->
+		% the corresponding if is true so we must skip this else
+		retractall('$lgt_pp_cc_skipping_'),
 		assertz('$lgt_pp_cc_skipping_')
 	;	Mode == skip_all ->
 		true
-	;	% Mode == seek_else ->					% the corresponding if is false
+	;	% Mode == seek_else ->
+		% the corresponding if is false
 		retractall('$lgt_pp_cc_skipping_')
 	),
 	!.
@@ -7738,8 +7749,8 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	'$lgt_tr_use_module_directive'(Resources, Module, Ctx).
 
-% only accept the as/2 renaming operator (found e.g. on SWI-Prolog, XSB and YAP) when compiling
-% modules as objects
+% only accept the as/2 renaming operator (found e.g. on SWI-Prolog, XSB, and YAP)
+% when compiling modules as objects
 
 '$lgt_tr_use_module_directive'([as(Original, AFunctor)| Resources], Module, Ctx) :-
 	'$lgt_pp_module_'(_),
@@ -7896,14 +7907,29 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_module_meta_predicate_directive_args'([], []).
 
 '$lgt_tr_module_meta_predicate_directive_args'([Arg| Args], [TArg| TArgs]) :-
-	(	Arg == (:) -> TArg = (::)				% Prolog to Logtalk notation; this is fragile due to the lack of standardization
-	;	Arg == (::) -> TArg = (::)				% mixed-up notation or overriding meta-predicate template being used
-	;	integer(Arg) -> TArg = Arg				% goals and closures are denoted by integers >= 0
-	;	Arg == (/) -> TArg = Arg				% predicate indicator
-	;	Arg = [N], integer(N) -> TArg = Arg		% list of goals/closures
-	;	Arg == [/] -> TArg = Arg				% list of predicate indicators
-	;	Arg == (^) -> TArg = Arg				% goal with possible existential variables qualification
-	;	TArg = (*)								% non meta-arguments (e.g. instantiation modes) to Logtalk notation
+	(	Arg == (:) ->
+		% Prolog to Logtalk notation; this is fragile due to the lack of standardization
+		TArg = (::)
+	;	Arg == (::) ->
+		% mixed-up notation or overriding meta-predicate template being used
+		TArg = (::)	
+	;	integer(Arg) ->
+		% goals and closures are denoted by integers >= 0
+		TArg = Arg
+	;	Arg == (/) ->
+		% predicate indicator
+		TArg = Arg
+	;	Arg = [N], integer(N) ->
+		% list of goals/closures
+		TArg = Arg
+	;	Arg == [/] ->
+		% list of predicate indicators
+		TArg = Arg
+	;	Arg == (^) ->
+		% goal with possible existential variables qualification
+		TArg = Arg
+	;	% non meta-arguments (e.g. instantiation modes) to Logtalk notation
+		TArg = (*)
 	),
 	'$lgt_tr_module_meta_predicate_directive_args'(Args, TArgs).
 
@@ -8931,10 +8957,13 @@ current_logtalk_flag(Flag, Value) :-
 	% ignore multifile predicates
 	Head \= ':'(_, _),
 	Head \= _::_,
-	'$lgt_pp_meta_predicate_'(Head, Meta),		% if we're compiling a clause for a meta-predicate and
-	once('$lgt_member_var'(Closure, MetaVars)),	% our closure is a meta-argument then check that the
-	'$lgt_length'(ExtraArgs, 0, NExtraArgs),	% call/N call complies with the meta-predicate declaration
+	'$lgt_pp_meta_predicate_'(Head, Meta),
+	% we're compiling a clause for a meta-predicate
+	once('$lgt_member_var'(Closure, MetaVars)),
+	% the closure is a meta-argument
+	'$lgt_length'(ExtraArgs, 0, NExtraArgs),
 	Meta =.. [_| MetaArgs],
+	% check that the call/N call complies with the meta-predicate declaration
 	'$lgt_not_same_meta_arg_extra_args'(MetaArgs, MetaVars, Closure, NExtraArgs, MetaArg),
 	throw(domain_error({MetaArg}, NExtraArgs)).
 
@@ -15577,23 +15606,24 @@ current_logtalk_flag(Flag, Value) :-
 	!.
 
 
+% objects
 '$lgt_logtalk_opening_directive'(object(_)).
 '$lgt_logtalk_opening_directive'(object(_, _)).
 '$lgt_logtalk_opening_directive'(object(_, _, _)).
 '$lgt_logtalk_opening_directive'(object(_, _, _, _)).
 '$lgt_logtalk_opening_directive'(object(_, _, _, _, _)).
-
+% categories
 '$lgt_logtalk_opening_directive'(category(_)).
 '$lgt_logtalk_opening_directive'(category(_, _)).
 '$lgt_logtalk_opening_directive'(category(_, _, _)).
-
+% protocols
 '$lgt_logtalk_opening_directive'(protocol(_)).
 '$lgt_logtalk_opening_directive'(protocol(_, _)).
-
+% Prolog module directives
 '$lgt_logtalk_opening_directive'(module(_)).
 '$lgt_logtalk_opening_directive'(module(_, _)).
-% Prolog module directives; module/3 directives are not supported
-% but must be recognized as entity opening directives
+% module/3 directives are not supported but must 
+% be recognized as entity opening directives
 '$lgt_logtalk_opening_directive'(module(_, _, _)).
 
 
@@ -15606,7 +15636,6 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_logtalk_entity_directive'(calls(_)).
 '$lgt_logtalk_entity_directive'(uses(_)).
 '$lgt_logtalk_entity_directive'(uses(_, _)).
-'$lgt_logtalk_entity_directive'(use_module(_, _)).		% Prolog module directive
 '$lgt_logtalk_entity_directive'(initialization(_)).
 '$lgt_logtalk_entity_directive'((dynamic)).
 '$lgt_logtalk_entity_directive'(op(_, _, _)).
@@ -15614,6 +15643,8 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_logtalk_entity_directive'(synchronized).
 '$lgt_logtalk_entity_directive'(threaded).
 '$lgt_logtalk_entity_directive'(set_logtalk_flag(_, _)).
+% Prolog module directive that can be used within objects and categories
+'$lgt_logtalk_entity_directive'(use_module(_, _)).
 
 
 '$lgt_logtalk_predicate_directive'(synchronized(_)).
@@ -15624,13 +15655,14 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_logtalk_predicate_directive'(public(_)).
 '$lgt_logtalk_predicate_directive'(protected(_)).
 '$lgt_logtalk_predicate_directive'(private(_)).
-'$lgt_logtalk_predicate_directive'(export(_)).			% Prolog module directive
-'$lgt_logtalk_predicate_directive'(reexport(_, _)).		% Prolog module directive
 '$lgt_logtalk_predicate_directive'(mode(_, _)).
 '$lgt_logtalk_predicate_directive'(info(_, _)).
 '$lgt_logtalk_predicate_directive'(alias(_, _, _)).
 '$lgt_logtalk_predicate_directive'(multifile(_)).
 '$lgt_logtalk_predicate_directive'(coinductive(_)).
+% Prolog module directive that are recognized when compiling modules as objects
+'$lgt_logtalk_predicate_directive'(export(_)).			
+'$lgt_logtalk_predicate_directive'(reexport(_, _)).
 
 
 
@@ -15655,7 +15687,8 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_comp_ctx'(ctx(Head, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, Mode, Stack), Head, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, Mode, Stack).
 
-'$lgt_comp_ctx_head'(ctx(Head, _, _, _, _, _, _, _, _, _), Head).		% head of the clause being compiled
+% head of the clause being compiled
+'$lgt_comp_ctx_head'(ctx(Head, _, _, _, _, _, _, _, _, _), Head).
 
 '$lgt_comp_ctx_sender'(ctx(_, Sender, _, _, _, _, _, _, _, _), Sender).
 
@@ -15663,7 +15696,8 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_comp_ctx_self'(ctx(_, _, _, Self, _, _, _, _, _, _), Self).
 
-'$lgt_comp_ctx_prefix'(ctx(_, _, _, _, Prefix, _, _, _, _, _), Prefix).	% entity prefix used to avoid predicate name conflicts
+% entity prefix used to avoid predicate name conflicts
+'$lgt_comp_ctx_prefix'(ctx(_, _, _, _, Prefix, _, _, _, _, _), Prefix).
 
 '$lgt_comp_ctx_meta_vars'(ctx(_, _, _, _, _, MetaVars, _, _, _, _), MetaVars).
 
@@ -15671,9 +15705,11 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_comp_ctx_exec_ctx'(ctx(_, _, _, _, _, _, _, ExCtx, _, _), ExCtx).
 
-'$lgt_comp_ctx_mode'(ctx(_, _, _, _, _, _, _, _, Mode, _), Mode).		% mode is "compile(regular)", "compile(aux)", or "runtime"
+% compilation mode; possible values are "compile(regular)", "compile(aux)", and "runtime"
+'$lgt_comp_ctx_mode'(ctx(_, _, _, _, _, _, _, _, Mode, _), Mode).
 
-'$lgt_comp_ctx_stack'(ctx(_, _, _, _, _, _, _, _, _, Stack), Stack).	% stack of coinductive hypothesis (ancestor goals)
+% stack of coinductive hypothesis (ancestor goals)
+'$lgt_comp_ctx_stack'(ctx(_, _, _, _, _, _, _, _, _, Stack), Stack).
 
 '$lgt_comp_ctx_stack_new_stack'(ctx(Head, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, _, Mode, _), NewStack, ctx(Head, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, _, Mode, NewStack)).
 
@@ -18099,10 +18135,10 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 '$lgt_must_be'(atom, Term, Context) :-
-	(	var(Term) ->
-		throw(error(instantiation_error, Context))
-	;	atom(Term) ->
+	(	atom(Term) ->
 		true
+	;	var(Term) ->
+		throw(error(instantiation_error, Context))	
 	;	throw(error(type_error(atom, Term), Context))
 	).
 
@@ -18115,10 +18151,10 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 '$lgt_must_be'(integer, Term, Context) :-
-	(	var(Term) ->
-		throw(error(instantiation_error, Context))
-	;	integer(Term) ->
+	(	integer(Term) ->
 		true
+	;	var(Term) ->
+		throw(error(instantiation_error, Context))
 	;	throw(error(type_error(integer, Term), Context))
 	).
 
@@ -18151,18 +18187,18 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 '$lgt_must_be'(float, Term, Context) :-
-	(	var(Term) ->
-		throw(error(instantiation_error, Context))
-	;	float(Term) ->
+	(	float(Term) ->
 		true
+	;	var(Term) ->
+		throw(error(instantiation_error, Context))	
 	;	throw(error(type_error(float, Term), Context))
 	).
 
 '$lgt_must_be'(atomic, Term, Context) :-
-	(	var(Term) ->
-		throw(error(instantiation_error, Context))
-	;	atomic(Term) ->
+	(	atomic(Term) ->
 		true
+	;	var(Term) ->
+		throw(error(instantiation_error, Context))
 	;	throw(error(type_error(atomic, Term), Context))
 	).
 
@@ -18183,10 +18219,10 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 '$lgt_must_be'(callable, Term, Context) :-
-	(	var(Term) ->
-		throw(error(instantiation_error, Context))
-	;	callable(Term) ->
+	(	callable(Term) ->
 		true
+	;	var(Term) ->
+		throw(error(instantiation_error, Context))	
 	;	throw(error(type_error(callable, Term), Context))
 	).
 
@@ -18247,10 +18283,10 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 '$lgt_must_be'(object_identifier, Term, Context) :-
-	(	var(Term) ->
-		throw(error(instantiation_error, Context))
-	;	callable(Term) ->
+	(	callable(Term) ->
 		true
+	;	var(Term) ->
+		throw(error(instantiation_error, Context))
 	;	throw(error(type_error(object_identifier, Term), Context))
 	).
 
@@ -18267,16 +18303,16 @@ current_logtalk_flag(Flag, Value) :-
 		throw(error(instantiation_error, Context))
 	;	'$lgt_current_protocol_'(Term, _, _, _, _) ->
 		true
-	;	 atom(Term) ->
+	;	atom(Term) ->
 		throw(error(existence_error(protocol, Term), Context))
 	;	throw(error(type_error(protocol_identifier, Term), Context))
 	).
 
 '$lgt_must_be'(protocol_identifier, Term, Context) :-
-	(	var(Term) ->
-		throw(error(instantiation_error, Context))
-	;	atom(Term) ->
+	(	atom(Term) ->
 		true
+	;	var(Term) ->
+		throw(error(instantiation_error, Context))
 	;	throw(error(type_error(protocol_identifier, Term), Context))
 	).
 
@@ -18299,10 +18335,10 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 '$lgt_must_be'(category_identifier, Term, Context) :-
-	(	var(Term) ->
-		throw(error(instantiation_error, Context))
-	;	callable(Term) ->
+	(	callable(Term) ->
 		true
+	;	var(Term) ->
+		throw(error(instantiation_error, Context))	
 	;	throw(error(type_error(category_identifier, Term), Context))
 	).
 
@@ -18315,10 +18351,10 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 '$lgt_must_be'(entity_identifier, Term, Context) :-
-	(	var(Term) ->
-		throw(error(instantiation_error, Context))
-	;	callable(Term) ->
+	(	callable(Term) ->
 		true
+	;	var(Term) ->
+		throw(error(instantiation_error, Context))	
 	;	throw(error(type_error(entity_identifier, Term), Context))
 	).
 
@@ -18331,10 +18367,10 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 '$lgt_must_be'(module_identifier, Term, Context) :-
-	(	var(Term) ->
-		throw(error(instantiation_error, Context))
-	;	atom(Term) ->
+	(	atom(Term) ->
 		true
+	;	var(Term) ->
+		throw(error(instantiation_error, Context))	
 	;	throw(error(type_error(module_identifier, Term), Context))
 	).
 
