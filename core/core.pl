@@ -5270,19 +5270,19 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_file_term'(end_of_file, _, _) :-
 	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
-	throw(existence_error(closing_directive, end_object/0)).
+	throw(existence_error(directive, end_object/0)).
 
 '$lgt_tr_file_term'(end_of_file, _, _) :-
 	'$lgt_pp_protocol_'(_, _, _, _, _),
-	throw(existence_error(closing_directive, end_protocol/0)).
+	throw(existence_error(directive, end_protocol/0)).
 
 '$lgt_tr_file_term'(end_of_file, _, _) :-
 	'$lgt_pp_category_'(_, _, _, _, _, _),
-	throw(existence_error(closing_directive, end_category/0)).
+	throw(existence_error(directive, end_category/0)).
 
 '$lgt_tr_file_term'(end_of_file, _, _) :-
 	'$lgt_pp_cc_if_found_'(_),
-	throw(existence_error(closing_directive, endif/0)).
+	throw(existence_error(directive, endif/0)).
 
 '$lgt_tr_file_term'(end_of_file, _, _) :-
 	% set the initial compilation context for compiling the read term
@@ -6246,7 +6246,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_directive'(elif(Goal), _) :-
 	\+ '$lgt_pp_cc_if_found_'(_),
-	throw(error(existence_error(opening_directive, if/1), directive(elif(Goal)))).
+	throw(error(existence_error(directive, if/1), directive(elif(Goal)))).
 
 '$lgt_tr_directive'(elif(Goal), Ctx) :-
 	'$lgt_must_be'(callable, Goal, directive(elif(Goal))),
@@ -6282,7 +6282,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_directive'(else, _) :-
 	\+ '$lgt_pp_cc_if_found_'(_),
-	throw(error(existence_error(opening_directive, if/1), directive(else))).
+	throw(error(existence_error(directive, if/1), directive(else))).
 
 '$lgt_tr_directive'(else, _) :-
 	'$lgt_pp_cc_mode_'(Mode),
@@ -6300,7 +6300,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_directive'(endif, _) :-
 	\+ '$lgt_pp_cc_if_found_'(_),
-	throw(error(existence_error(opening_directive, if/1), directive(endif))).
+	throw(error(existence_error(directive, if/1), directive(endif))).
 
 '$lgt_tr_directive'(endif, _) :-
 	retract('$lgt_pp_cc_if_found_'(_)),
@@ -6327,11 +6327,11 @@ current_logtalk_flag(Flag, Value) :-
 		% closing entity directive occurs before the opening entity directive;
 		% the opening directive is probably missing or misspelt
 		(	Directive == end_object ->
-			throw(error(existence_error(opening_directive, object/1), directive(Directive)))
+			throw(error(existence_error(directive, object/1), directive(Directive)))
 		;	Directive == end_protocol ->
-			throw(error(existence_error(opening_directive, protocol/1), directive(Directive)))
+			throw(error(existence_error(directive, protocol/1), directive(Directive)))
 		;	% Directive == end_category ->
-			throw(error(existence_error(opening_directive, category/1), directive(Directive)))
+			throw(error(existence_error(directive, category/1), directive(Directive)))
 		)
 	;	% translate it as a source file-level directive
 		catch(
@@ -6526,11 +6526,11 @@ current_logtalk_flag(Flag, Value) :-
 	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_category_'(Obj, _, _, _, _, _)),
 		throw(permission_error(modify, category, Obj))
 	;	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _) ->
-		throw(existence_error(closing_directive, end_object/0))
+		throw(existence_error(directive, end_object/0))
 	;	'$lgt_pp_protocol_'(_, _, _, _, _) ->
-		throw(existence_error(closing_directive, end_protocol/0))
+		throw(existence_error(directive, end_protocol/0))
 	;	'$lgt_pp_category_'(_, _, _, _, _, _) ->
-		throw(existence_error(closing_directive, end_category/0))
+		throw(existence_error(directive, end_category/0))
 	;	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
 			'$lgt_print_message'(silent(compiling), core, compiling_entity(object, Obj))
 		;	true
@@ -6550,7 +6550,7 @@ current_logtalk_flag(Flag, Value) :-
 			'$lgt_print_message'(silent(compiling), core, compiled_entity(object, Obj))
 		;	true
 		)
-	;	throw(existence_error(opening_directive, object/1))
+	;	throw(existence_error(directive, object/1))
 	).
 
 
@@ -6573,11 +6573,11 @@ current_logtalk_flag(Flag, Value) :-
 	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_category_'(Ptc, _, _, _, _, _)),
 		throw(permission_error(modify, category, Ptc))
 	;	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _) ->
-		throw(existence_error(closing_directive, end_object/0))
+		throw(existence_error(directive, end_object/0))
 	;	'$lgt_pp_protocol_'(_, _, _, _, _) ->
-		throw(existence_error(closing_directive, end_protocol/0))
+		throw(existence_error(directive, end_protocol/0))
 	;	'$lgt_pp_category_'(_, _, _, _, _, _) ->
-		throw(existence_error(closing_directive, end_category/0))
+		throw(existence_error(directive, end_category/0))
 	;	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
 			'$lgt_print_message'(silent(compiling), core, compiling_entity(protocol, Ptc))
 		;	true
@@ -6597,7 +6597,7 @@ current_logtalk_flag(Flag, Value) :-
 			'$lgt_print_message'(silent(compiling), core, compiled_entity(protocol, Ptc))
 		;	true
 		)
-	;	throw(existence_error(opening_directive, protocol/1))
+	;	throw(existence_error(directive, protocol/1))
 	).
 
 
@@ -6623,11 +6623,11 @@ current_logtalk_flag(Flag, Value) :-
 	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_category_'(Ctg, _, _, _, _, _)),
 		throw(permission_error(modify, category, Ctg))
 	;	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _) ->
-		throw(existence_error(closing_directive, end_object/0))
+		throw(existence_error(directive, end_object/0))
 	;	'$lgt_pp_protocol_'(_, _, _, _, _) ->
-		throw(existence_error(closing_directive, end_protocol/0))
+		throw(existence_error(directive, end_protocol/0))
 	;	'$lgt_pp_category_'(_, _, _, _, _, _) ->
-		throw(existence_error(closing_directive, end_category/0))
+		throw(existence_error(directive, end_category/0))
 	;	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
 			'$lgt_print_message'(silent(compiling), core, compiling_entity(category, Ctg))
 		;	true
@@ -6647,7 +6647,7 @@ current_logtalk_flag(Flag, Value) :-
 			'$lgt_print_message'(silent(compiling), core, compiled_entity(category, Ctg))
 		;	true
 		)
-	;	throw(existence_error(opening_directive, category/1))
+	;	throw(existence_error(directive, category/1))
 	).
 
 
