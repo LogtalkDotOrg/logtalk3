@@ -32,8 +32,8 @@ Logtalk compiler and runtime
 ----------------------------
 
 * CHANGED: Simplified directive existence errors exceptions. The first argument
-of the `existence_error/2` term is now the atom `directive` instead of the atom
-`opening_directive` or the atom `closing_directive`.
+of the `existence_error/2` term in the case of missing directives is now always
+the atom `directive`.
 
 * IMPROVED: The compiler now detects attempts to define an object as both a
 prototype and a class or as both a prototype and an instance.

@@ -8722,7 +8722,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	(	'$lgt_pp_directive_'(multifile(TFunctor/TArity)) ->
 		true
-	;	throw(existence_error(multifile_directive, Other::Head))
+	;	throw(existence_error(directive, multifile(Other::Head)))
 	),
 	functor(THead, TFunctor, TArity),
 	'$lgt_unify_head_thead_args'(Arity, Head, THead),
