@@ -60,6 +60,9 @@ compilation times.
 * IMPROVED: More efficient implementation of the `current_logtalk_flag/2`
 built-in predicate.
 
+* FIXED: Errors found while compiling the `end_of_file` term could result in
+exceptions terms missing the `error/2` wrapper.
+
 * FIXED: Bug where information about called entity predicates could also be
 saved when compiling meta-arguments during runtime meta-predicate calls.
 

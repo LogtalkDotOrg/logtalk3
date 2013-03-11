@@ -5271,19 +5271,19 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_file_term'(end_of_file, _, _) :-
 	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
-	throw(existence_error(directive, end_object/0)).
+	throw(error(existence_error(directive, end_object/0), term(end_of_file))).
 
 '$lgt_tr_file_term'(end_of_file, _, _) :-
 	'$lgt_pp_protocol_'(_, _, _, _, _),
-	throw(existence_error(directive, end_protocol/0)).
+	throw(error(existence_error(directive, end_protocol/0), term(end_of_file))).
 
 '$lgt_tr_file_term'(end_of_file, _, _) :-
 	'$lgt_pp_category_'(_, _, _, _, _, _),
-	throw(existence_error(directive, end_category/0)).
+	throw(error(existence_error(directive, end_category/0), term(end_of_file))).
 
 '$lgt_tr_file_term'(end_of_file, _, _) :-
 	'$lgt_pp_cc_if_found_'(_),
-	throw(existence_error(directive, endif/0)).
+	throw(error(existence_error(directive, endif/0), term(end_of_file))).
 
 '$lgt_tr_file_term'(end_of_file, _, _) :-
 	% set the initial compilation context for compiling the read term
