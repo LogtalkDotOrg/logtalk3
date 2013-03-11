@@ -5,7 +5,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/11/19,
+		date is 2013/03/11,
 		comment is 'Unit tests for the imports_category/2-3 built-in predicates.'
 	]).
 
@@ -25,7 +25,10 @@
 	throws(imports_category_3_2, error(type_error(category_identifier, 1), logtalk(imports_category(_, 1, _), _))) :-
 		imports_category(_, 1, _).
 
-	throws(imports_category_3_3, error(type_error(scope, 1), logtalk(imports_category(_, _, 1), _))) :-
+	throws(imports_category_3_3, error(type_error(atom, 1), logtalk(imports_category(_, _, 1), _))) :-
 		imports_category(_, _, 1).
+
+	throws(imports_category_3_4, error(domain_error(scope, a), logtalk(imports_category(_, _, a), _))) :-
+		imports_category(_, _, a).
 
 :- end_object.

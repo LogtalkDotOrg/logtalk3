@@ -54,8 +54,10 @@ instantiates_class(?object_identifier, ?object_identifier, ?scope)</pre>
 		<dd><code>type_error(object_identifier, Instance)</code></dd>
 	<dt>Class is neither a variable nor a valid object identifier:</dt>
 		<dd><code>type_error(object_identifier, Class)</code></dd>
-	<dt>Scope is neither a variable nor a valid entity scope:</dt>
-		<dd><code>type_error(scope, Scope)</code></dd>
+	<dt>Scope is neither a variable nor an atom:</dt>
+		<dd><code>type_error(atom, Scope)</code></dd>
+	<dt>Scope is not a valid entity scope:</dt>
+		<dd><code>domain_error(scope, Scope)</code></dd>
 </dl>
 
 <h4>Examples</h4>
@@ -67,7 +69,7 @@ instantiates_class(?object_identifier, ?object_identifier, ?scope)</pre>
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: October 26, 2006</span>
+		<span>Last updated on: March 11, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="imports_category2_3.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="specializes_class2_3.html">next</a></span><br/>

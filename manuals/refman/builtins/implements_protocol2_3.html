@@ -62,8 +62,10 @@ implements_protocol(?category_identifier, ?protocol_identifier, ?scope)</pre>
 		<dd><code>type_error(category_identifier, Category)</code></dd>
 	<dt>Protocol is neither a variable nor a valid protocol identifier:</dt>
 		<dd><code>type_error(protocol_identifier, Protocol)</code></dd>
-	<dt>Scope is neither a variable nor a valid entity scope:</dt>
-		<dd><code>type_error(scope, Scope)</code></dd>
+	<dt>Scope is neither a variable nor an atom:</dt>
+		<dd><code>type_error(atom, Scope)</code></dd>
+	<dt>Scope is not a valid entity scope:</dt>
+		<dd><code>domain_error(scope, Scope)</code></dd>
 </dl>
 
 <h4>Examples</h4>
@@ -75,7 +77,7 @@ implements_protocol(?category_identifier, ?protocol_identifier, ?scope)</pre>
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: November 22, 2010</span>
+		<span>Last updated on: March 11, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="extends_category2_3.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="conforms_to_protocol2_3.html">next</a></span><br/>

@@ -5,7 +5,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/11/19,
+		date is 2013/03/11,
 		comment is 'Unit tests for the extends_protocol/2-3 built-in predicates.'
 	]).
 
@@ -25,7 +25,10 @@
 	throws(extends_protocol_3_2, error(type_error(protocol_identifier, 1), logtalk(extends_protocol(_, 1, _), _))) :-
 		extends_protocol(_, 1, _).
 
-	throws(extends_protocol_3_3, error(type_error(scope, 1), logtalk(extends_protocol(_, _, 1), _))) :-
+	throws(extends_protocol_3_3, error(type_error(atom, 1), logtalk(extends_protocol(_, _, 1), _))) :-
 		extends_protocol(_, _, 1).
+
+	throws(extends_protocol_3_4, error(domain_error(scope, a), logtalk(extends_protocol(_, _, a), _))) :-
+		extends_protocol(_, _, a).
 
 :- end_object.
