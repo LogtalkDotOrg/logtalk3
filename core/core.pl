@@ -894,7 +894,7 @@ create_object(Obj, Relations, Directives, Clauses) :-
 	'$lgt_comp_ctx_mode'(Ctx, runtime),
 	'$lgt_tr_logtalk_directives'([(dynamic)| Directives], Ctx),
 	% the list of clauses may also include grammar rules
-	'$lgt_tr_terms'(Clauses, Ctx),
+	'$lgt_tr_runtime_terms'(Clauses, Ctx),
 	'$lgt_gen_def_table_clauses',
 	'$lgt_fix_predicate_defs',
 	'$lgt_fix_predicate_calls',
@@ -943,7 +943,7 @@ create_category(Ctg, Relations, Directives, Clauses) :-
 	'$lgt_comp_ctx_mode'(Ctx, runtime),
 	'$lgt_tr_logtalk_directives'([(dynamic)| Directives], Ctx),
 	% the list of clauses may also include grammar rules
-	'$lgt_tr_terms'(Clauses, Ctx),
+	'$lgt_tr_runtime_terms'(Clauses, Ctx),
 	'$lgt_gen_def_table_clauses',
 	'$lgt_fix_predicate_defs',
 	'$lgt_fix_predicate_calls',
@@ -5262,7 +5262,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_pp_object_'(Module, _, _, _, _, _, _, _, _, _, _),
 	% set the initial compilation context for compiling the end_of_file term
 	'$lgt_comp_ctx_mode'(Ctx, compile(regular)),
-	'$lgt_tr_term'(end_of_file, Ctx),
+	'$lgt_tr_file_term'(end_of_file, Ctx),
 	'$lgt_add_entity_predicate_properties'(Module),
 	'$lgt_add_entity_properties'(end, Module),
 	'$lgt_tr_entity'(object, Module),
@@ -5289,14 +5289,14 @@ current_logtalk_flag(Flag, Value) :-
 	% set the initial compilation context for compiling the read term
 	'$lgt_comp_ctx_mode'(Ctx, compile(regular)),
 	% allow for term-expansion of the end_of_file term
-	'$lgt_tr_term'(end_of_file, Ctx),
+	'$lgt_tr_file_term'(end_of_file, Ctx),
 	!.
 
 '$lgt_tr_file_term'(Term, _, Input) :-
 	'$lgt_pp_cc_skipping_',
+	% we're performing conditional compilation and skipping terms ...
 	\+ '$lgt_conditional_compilation_directive'(Term),
-	% we're performing conditional compilation and skipping terms
-	% except for conditional compilation directives itself
+	% ... except for conditional compilation directives itself
 	!,
 	'$lgt_read_term'(Input, Next, [singletons(NextSingletons)]),
 	'$lgt_tr_file_term'(Next, NextSingletons, Input).
@@ -5305,7 +5305,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_report_singleton_variables'(Singletons, Term),
 	% set the initial compilation context for compiling the read term
 	'$lgt_comp_ctx_mode'(Ctx, compile(regular)),
-	'$lgt_tr_term'(Term, Ctx),
+	'$lgt_tr_file_term'(Term, Ctx),
 	'$lgt_read_term'(Input, Next, [singletons(NextSingletons)]),
 	'$lgt_tr_file_term'(Next, NextSingletons, Input).
 
@@ -6057,40 +6057,15 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_tr_terms'(+list(term), +compilation_context)
+% '$lgt_tr_file_term'(@term, +compilation_context)
 %
-% translates a list of terms (clauses, directives, or grammar rules)
+% translates a source file term (clause, directive, or grammar rule);
+% we allow non-callable terms to be term-expanded; only if that fails
+% we throw an error
 
-'$lgt_tr_terms'((-), _) :-
-	% catch variables and lists with unbound tails
-	throw(error(instantiantion_error, term(_))).
-
-'$lgt_tr_terms'([], _).
-
-'$lgt_tr_terms'([Term| Terms], Ctx) :-
-	% only the compilation context mode should be shared between different terms
-	'$lgt_comp_ctx_mode'(Ctx, Mode),
-	'$lgt_comp_ctx_mode'(NewCtx, Mode),
-	'$lgt_tr_term'(Term, NewCtx),
-	'$lgt_tr_terms'(Terms, Ctx).
-
-
-
-% '$lgt_tr_term'(@term, +compilation_context)
-%
-% translates a source term (clause, directive, or grammar rule);
-% we allow non-callable terms to be term-expanded; only if that
-% fails we throw an error
-
-'$lgt_tr_term'(Term, Ctx) :-
+'$lgt_tr_file_term'(Term, Ctx) :-
 	(	var(Term) ->
 		throw(error(instantiantion_error, term(Term)))
-	;	'$lgt_comp_ctx_mode'(Ctx, runtime) ->
-		% runtime creation of new entities; no term expansion
-		(	callable(Term) ->
-			'$lgt_tr_expanded_term'(Term, Term, Ctx)
-		;	throw(error(type_error(callable, Term), term(Term)))
-		)
 	;	'$lgt_pp_hook_term_expansion_'(Term, ExpandedTerms) ->
 		% source-file specific compiler hook
 		'$lgt_tr_expanded_terms'(ExpandedTerms, Term, Ctx)
@@ -6190,6 +6165,65 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_expanded_term'(ExpandedTerm, _, Ctx) :-
 	'$lgt_tr_clause'(ExpandedTerm, Ctx).
+
+
+
+% '$lgt_tr_runtime_terms'(+list(term), +compilation_context)
+%
+% translates a list of runtime terms (clauses, directives, or grammar rules)
+
+'$lgt_tr_runtime_terms'((-), _) :-
+	% catch variables and lists with unbound tails
+	throw(error(instantiantion_error, term(_))).
+
+'$lgt_tr_runtime_terms'([], _).
+
+'$lgt_tr_runtime_terms'([Term| Terms], Ctx) :-
+	% only the compilation context mode should be shared between different terms
+	'$lgt_comp_ctx_mode'(Ctx, Mode),
+	'$lgt_comp_ctx_mode'(NewCtx, Mode),
+	'$lgt_tr_runtime_term'(Term, NewCtx),
+	'$lgt_tr_runtime_terms'(Terms, Ctx).
+
+
+
+% '$lgt_tr_runtime_term'(@term, +compilation_context)
+%
+% translates a rumtime term (a clause, directive, or grammar rule)
+
+'$lgt_tr_runtime_term'(Term, _) :-
+	var(Term),
+	throw(error(instantiantion_error, term(Term))).
+
+'$lgt_tr_runtime_term'({Term}, _) :-
+	% bypass control construct; term is final
+	!,
+	(	var(Term) ->
+		throw(error(instantiantion_error, term({Term})))
+	;	callable(Term) ->
+		'$lgt_pp_term_location'(Location),
+		assertz('$lgt_pp_entity_clause_'({Term}, Location))
+	;	throw(error(type_error(callable, Term), term({Term})))
+	).
+
+'$lgt_tr_runtime_term'((Head :- Body), Ctx) :-
+	!,
+	'$lgt_tr_clause'((Head :- Body), Ctx).
+
+'$lgt_tr_runtime_term'((:- Directive), Ctx) :-
+	!,
+	'$lgt_tr_directive'(Directive, Ctx).
+
+'$lgt_tr_runtime_term'((Head --> Body), Ctx) :-
+	!,
+	'$lgt_tr_grammar_rule'((Head --> Body), Ctx).
+
+'$lgt_tr_runtime_term'(Term, _) :-
+	\+ callable(Term),
+	throw(error(type_error(callable, Term), term(Term))).
+
+'$lgt_tr_runtime_term'(Term, Ctx) :-
+	'$lgt_tr_clause'(Term, Ctx).
 
 
 

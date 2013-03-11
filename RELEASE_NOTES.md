@@ -40,6 +40,10 @@ calls from an object or a category without any ancestors. The exception terms
 `existence_error(ancestor, object)` and `existence_error(ancestor, object)` are
 now used.
 
+* IMPROVED: Performance of compilation of predicate clauses and grammar rules
+passed as arguments to the `create_object/4` and `create_category/4` built-in
+predicates.
+
 * IMPROVED: Throw callable type errors when applicable when compiling entity
 relations.
 
