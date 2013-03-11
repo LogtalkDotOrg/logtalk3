@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/12/16,
+		date is 2013/03/11,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -410,6 +410,8 @@
 		['  in clause ~q'-[Clause], nl].
 	term_tokens(grammar_rule(Rule)) -->
 		['  in grammar rule ~q'-[Rule], nl].
+	term_tokens(term(Term)) -->
+		['  in term ~q'-[Term], nl].
 	term_tokens(Term) -->
 		['  in ~q'-[Term], nl].
 
