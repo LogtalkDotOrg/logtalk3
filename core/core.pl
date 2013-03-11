@@ -14136,29 +14136,31 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_fix_predicate_calls'('$lgt_coinductive_success_hook'(Head, Hypothesis, ExCtx, HeadStack, BodyStack), Pred) :-
 	!,
-	(	'$lgt_pp_defines_predicate_'(coinductive_success_hook, 2, TFunctor, _, _) ->
-		(	THead =.. [TFunctor, Head, Hypothesis, ExCtx],
-			\+ \+ (
-				'$lgt_pp_entity_clause_'(THead, _)
-			;	'$lgt_pp_entity_clause_'((THead :- _), _)
-			;	'$lgt_pp_final_entity_clause_'(THead, _)
-			;	'$lgt_pp_final_entity_clause_'((THead :- _), _)
-			) ->
-			Pred = ((HeadStack = BodyStack), THead)
-		;	Pred = (HeadStack = BodyStack)
-		)
-	;	'$lgt_pp_defines_predicate_'(coinductive_success_hook, 1, TFunctor, _, _) ->
-		(	THead =.. [TFunctor, Head, ExCtx],
-			\+ \+ (
-				'$lgt_pp_entity_clause_'(THead, _)
-			;	'$lgt_pp_entity_clause_'((THead :- _), _)
-			;	'$lgt_pp_final_entity_clause_'(THead, _)
-			;	'$lgt_pp_final_entity_clause_'((THead :- _), _)
-			) ->
-			Pred = ((HeadStack = BodyStack), THead)
-		;	Pred = (HeadStack = BodyStack)
-		)
-	;	Pred = (HeadStack = BodyStack)
+	(	'$lgt_pp_defines_predicate_'(coinductive_success_hook, 2, TFunctor, _, _),
+		% the coinductive_success_hook/2 is defined ...
+		THead =.. [TFunctor, Head, Hypothesis, ExCtx],
+		\+ \+ (
+			'$lgt_pp_entity_clause_'(THead, _)
+		;	'$lgt_pp_entity_clause_'((THead :- _), _)
+		;	'$lgt_pp_final_entity_clause_'(THead, _)
+		;	'$lgt_pp_final_entity_clause_'((THead :- _), _)
+		) ->
+		% ... with at least one clause for this particular coinductive predicate head
+		Pred = ((HeadStack = BodyStack), THead)
+	;	% we only consider coinductive_success_hook/1 clauses if no coinductive_success_hook/2 clause applies
+		'$lgt_pp_defines_predicate_'(coinductive_success_hook, 1, TFunctor, _, _),
+		% the coinductive_success_hook/1 is defined ...
+		THead =.. [TFunctor, Head, ExCtx],
+		\+ \+ (
+			'$lgt_pp_entity_clause_'(THead, _)
+		;	'$lgt_pp_entity_clause_'((THead :- _), _)
+		;	'$lgt_pp_final_entity_clause_'(THead, _)
+		;	'$lgt_pp_final_entity_clause_'((THead :- _), _)
+		) ->
+		% ... with at least one clause for this particular coinductive predicate head
+		Pred = ((HeadStack = BodyStack), THead)
+	;	% no hook predicates defined or defined but with no clause for this particular coinductive predicate head
+		Pred = (HeadStack = BodyStack)
 	).
 
 '$lgt_fix_predicate_calls'({Pred}, Pred) :-
