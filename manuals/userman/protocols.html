@@ -244,10 +244,16 @@ Logtalk defines a built-in protocol named <code>expanding</code> that contains d
 Logtalk defines a built-in protocol named <code>monitoring</code> that contains declarations for the <code>before/3</code> and <code>after/3</code> public event handler predicates. See the <a href="events.html">event-driven programming</a> section for more details.
 </p>
 
+<h3 id="protocols_forwarding">The built-in protocol <em>forwarding</em></h3>
+
+<p>
+Logtalk defines a built-in protocol named <code>forwarding</code> that contains a declaration for the <code>forward/1</code> user-defined message forwarding handler, which is automatically called (if defined) by the runtime for any message that the receiving object does not understand. See also the <a href="../refman/control/delegate1.html">[]/1</a> control construct.
+</p>
+
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: October 21, 2009</span>
+		<span>Last updated on: March 12, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="objects.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="categories.html">next</a></span><br/>

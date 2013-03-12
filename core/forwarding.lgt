@@ -34,7 +34,7 @@
 	:- public(forward/1).
 	:- mode(forward(@callable), zero_or_more).
 	:- info(forward/1, [
-		comment is 'User-defined message forward handler, automatically called (if defined) by the runtime for any message that the receiving object does not understand.',
+		comment is 'User-defined message forwarding handler, automatically called (if defined) by the runtime for any message that the receiving object does not understand.',
 		argnames is ['Message']
 	]).
 

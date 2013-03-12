@@ -25,8 +25,13 @@ RELEASE NOTES
 =============
 
 
-3.00.0 Alpha 12 - April ??, 2013
+3.00.0 Alpha 13 - April ??, 2013
 ================================
+
+Documentation
+-------------
+
+* UPDATED: User Manual with information on the `forwarding` built-in protocol.
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
