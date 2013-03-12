@@ -37,8 +37,8 @@ the atom `directive`.
 
 * CHANGED: More clear ancestor existence error exceptions when reporting super
 calls from an object or a category without any ancestors. The exception terms
-`existence_error(ancestor, object)` and `existence_error(ancestor, object)` are
-now used.
+`existence_error(ancestor, object)` and `existence_error(ancestor, category)`
+are now used.
 
 * IMPROVED: Performance of compilation of predicate clauses and grammar rules
 passed as arguments to the `create_object/4` and `create_category/4` built-in
