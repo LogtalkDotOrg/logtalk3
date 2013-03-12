@@ -25,6 +25,16 @@ RELEASE NOTES
 =============
 
 
+3.00.0 Alpha 12 - April ??, 2013
+================================
+
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* UPDATED: The TextMate 2 bundle now sets the `indentOnPaste` key to `simple`
+to avoid the editor messing up the text indentation when pasting code.
+
+
 3.00.0 Alpha 12 - March 12, 2013
 ================================
 
