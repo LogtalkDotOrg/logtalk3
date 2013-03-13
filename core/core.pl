@@ -1640,8 +1640,11 @@ threaded_notify(Message) :-
 	;	'$lgt_default_flag'(Option, CurrentValue) ->
 		% default value, defined on the Prolog adapter files
 		Value = CurrentValue
-	;	% back-end Prolog compiler features
-		'$lgt_prolog_feature'(Option, Value)
+	;	'$lgt_prolog_feature'(Option, CurrentValue) ->
+		% back-end Prolog compiler features
+		Value = CurrentValue
+	;	Option == version,
+		'$lgt_version'(Value)
 	).
 
 
@@ -2140,19 +2143,13 @@ set_logtalk_flag(Flag, Value) :-
 current_logtalk_flag(Flag, Value) :-
 	var(Flag),
 	!,
-	(	Flag = version,
-		'$lgt_version'(Value)
-	;	'$lgt_valid_flag'(Flag),
-		'$lgt_compiler_flag'(Flag, Value)
-	).
+	'$lgt_valid_flag'(Flag),
+	'$lgt_compiler_flag'(Flag, Value).
 
 current_logtalk_flag(Flag, Value) :-	
 	'$lgt_valid_flag'(Flag),
 	!,
-	(	Flag == version ->
-		'$lgt_version'(Value)
-	;	'$lgt_compiler_flag'(Flag, Value)
-	).
+	'$lgt_compiler_flag'(Flag, Value).
 
 current_logtalk_flag(Flag, Value) :-	
 	\+ atom(Flag),
@@ -2161,6 +2158,11 @@ current_logtalk_flag(Flag, Value) :-
 current_logtalk_flag(Flag, Value) :-	
 	throw(error(domain_error(flag, Flag), logtalk(current_logtalk_flag(Flag, Value), _))).
 
+
+
+% '$lgt_version'(?compound)
+%
+% current Logtalk version for use with the current_logtalk_flag/2 predicate
 
 '$lgt_version'(version(3, 0, 0)).
 
@@ -10151,9 +10153,13 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_must_be'(var_or_flag_value, Flag + Value),
 	fail.
 
-'$lgt_tr_body'(current_logtalk_flag(Flag, _), _, _, _) :-
-	'$lgt_must_be'(var_or_flag, Flag),
-	fail.
+'$lgt_tr_body'(current_logtalk_flag(Flag, Value), TPred, '$lgt_debug'(goal(DPred), TPred, ExCtx), Ctx) :-
+	nonvar(Flag),
+	!,
+	'$lgt_must_be'(flag, Flag),
+	TPred = '$lgt_compiler_flag'(Flag, Value),
+	DPred = current_logtalk_flag(Flag, Value),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
 
 
 % Prolog flag predicates (just basic error and portability cheking)

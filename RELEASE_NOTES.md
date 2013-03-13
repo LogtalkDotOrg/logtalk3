@@ -28,6 +28,12 @@ RELEASE NOTES
 3.00.0 Alpha 13 - April ??, 2013
 ================================
 
+Logtalk compiler and runtime
+----------------------------
+
+* IMPROVED: Simplified implementation of the `current_logtalk_flag/2` built-in
+predicate and optimized compilation for sufficiently instantiated calls.
+
 Documentation
 -------------
 

@@ -7,7 +7,7 @@
 %  load Logtalk files using SWI Prolog consult/1, to support edit/1 and
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
-%  Last updated on March 2, 2013
+%  Last updated on March 13, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -120,6 +120,8 @@ user:prolog_predicate_name(user:'$lgt_expand_goal'(_, _, _, _, _), 'expand_goal/
 
 user:prolog_predicate_name(user:'$lgt_phrase'(_, _, _), 'phrase/2') :- !.
 user:prolog_predicate_name(user:'$lgt_phrase'(_, _, _, _), 'phrase/3') :- !.
+
+user:prolog_predicate_name(user:'$lgt_compiler_flag'(_, _), 'current_logtalk_flag/2') :- !.
 
 user:prolog_predicate_name(user:'$lgt_current_op'(_, _, _, _, _, _), 'current_op/3') :- !.
 user:prolog_predicate_name(user:'$lgt_current_predicate'(_, _, _, _), 'current_predicate/1') :- !.
@@ -380,6 +382,8 @@ user:portray(c(This, r(Sender, Self, MetaVars, CoinductionStack))) :-
 
 '$lgt_swi_unify_clause_body'(phrase(GRBody, Input), _, '$lgt_phrase'(GRBody, Input, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(phrase(GRBody, Input, Rest), _, '$lgt_phrase'(GRBody, Input, Rest, _), TermPos, TermPos) :- !.
+
+'$lgt_swi_unify_clause_body'(current_logtalk_flag(Flag, Value), _, '$lgt_compiler_flag'(Flag, Value), TermPos, TermPos) :- !.
 
 '$lgt_swi_unify_clause_body'(Obj::current_op(Priority, Specifier, Operator), _, '$lgt_current_op'(Obj, Priority, Specifier, Operator, _, p(p(p))), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(current_op(Priority, Specifier, Operator), _, '$lgt_current_op'(This, Priority, Specifier, Operator, This, p(_)), TermPos, TermPos) :- !.

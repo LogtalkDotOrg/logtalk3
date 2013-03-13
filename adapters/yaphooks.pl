@@ -5,7 +5,7 @@
 %
 %  integration code for YAP 6.0.2 and later versions to improve
 %  usability when using the YAP profilers
-%  Last updated on January 25, 2013
+%  Last updated on March 13, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -57,6 +57,8 @@ user:prolog_predicate_name(user:'$lgt_expand_goal'(_, _, _, _, _), 'expand_goal/
 
 user:prolog_predicate_name(user:'$lgt_phrase'(_, _, _), 'phrase/2') :- !.
 user:prolog_predicate_name(user:'$lgt_phrase'(_, _, _, _), 'phrase/3') :- !.
+
+user:prolog_predicate_name(user:'$lgt_compiler_flag'(_, _), 'current_logtalk_flag/2') :- !.
 
 user:prolog_predicate_name(user:'$lgt_current_op'(_, _, _, _, _, _), 'current_op/3') :- !.
 user:prolog_predicate_name(user:'$lgt_current_predicate'(_, _, _, _), 'current_predicate/1') :- !.
