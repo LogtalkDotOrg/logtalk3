@@ -2112,7 +2112,12 @@ logtalk_load_context(stream, Stream) :-
 % sets a Logtalk flag
 
 set_logtalk_flag(Flag, Value) :-
-	catch('$lgt_check_compiler_flag'(Flag, Value), Error, throw(error(Error, logtalk(set_logtalk_flag(Flag, Value), _)))),
+	'$lgt_must_be'(read_write_flag, Flag, logtalk(set_logtalk_flag(Flag, Value), _)),
+	'$lgt_must_be'(flag_value, Flag + Value, logtalk(set_logtalk_flag(Flag, Value), _)),
+	'$lgt_set_compiler_flag'(Flag, Value).
+
+
+'$lgt_set_compiler_flag'(Flag, Value) :-
 	retractall('$lgt_current_flag_'(Flag, _)),
 	assertz('$lgt_current_flag_'(Flag, Value)),
 	(	Flag == debug, Value == on ->
@@ -2152,11 +2157,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_compiler_flag'(Flag, Value).
 
 current_logtalk_flag(Flag, Value) :-	
-	\+ atom(Flag),
-	throw(error(type_error(atom, Flag), logtalk(current_logtalk_flag(Flag, Value), _))).
-
-current_logtalk_flag(Flag, Value) :-	
-	throw(error(domain_error(flag, Flag), logtalk(current_logtalk_flag(Flag, Value), _))).
+	'$lgt_must_be'(flag, Flag, logtalk(current_logtalk_flag(Flag, Value), _)).
 
 
 
@@ -10146,20 +10147,35 @@ current_logtalk_flag(Flag, Value) :-
 	!.
 
 
-% Logtalk flag predicates (just error cheking)
+% Logtalk flag predicates (just error cheking when one of the arguments isn't instantiated)
 
-'$lgt_tr_body'(set_logtalk_flag(Flag, Value), _, _, _) :-
-	'$lgt_must_be'(var_or_flag, Flag),
-	'$lgt_must_be'(var_or_flag_value, Flag + Value),
+'$lgt_tr_body'(set_logtalk_flag(Flag, Value), TPred, '$lgt_debug'(goal(DPred), TPred, ExCtx), Ctx) :-
+	nonvar(Flag),
+	nonvar(Value),
+	!,
+	'$lgt_must_be'(read_write_flag, Flag),
+	'$lgt_must_be'(flag_value, Flag + Value),
+	TPred = '$lgt_set_compiler_flag'(Flag, Value),
+	DPred = set_logtalk_flag(Flag, Value),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
+
+'$lgt_tr_body'(set_logtalk_flag(Flag, _), _, _, _) :-
+	'$lgt_must_be'(var_or_read_write_flag, Flag),
 	fail.
 
 '$lgt_tr_body'(current_logtalk_flag(Flag, Value), TPred, '$lgt_debug'(goal(DPred), TPred, ExCtx), Ctx) :-
 	nonvar(Flag),
+	nonvar(Value),
 	!,
 	'$lgt_must_be'(flag, Flag),
+	'$lgt_must_be'(flag_value, Flag + Value),
 	TPred = '$lgt_compiler_flag'(Flag, Value),
 	DPred = current_logtalk_flag(Flag, Value),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
+
+'$lgt_tr_body'(current_logtalk_flag(Flag, _), _, _, _) :-
+	'$lgt_must_be'(var_or_flag, Flag),
+	fail.
 
 
 % Prolog flag predicates (just basic error and portability cheking)
@@ -16343,6 +16359,34 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_valid_flag_value'(prolog_loader, Options) :-
 	'$lgt_is_list'(Options).
 
+'$lgt_valid_flag_value'(version, Version) :-
+	functor(Version, version, 3).
+
+'$lgt_valid_flag_value'(prolog_dialect, Dialect) :-
+	atom(Dialect).
+
+'$lgt_valid_flag_value'(prolog_version, Version) :-
+	compound(Version).
+
+'$lgt_valid_flag_value'(prolog_compatible_version, Version) :-
+	compound(Version).
+
+'$lgt_valid_flag_value'(encoding_directive, full) :- !.
+'$lgt_valid_flag_value'(encoding_directive, source) :- !.
+'$lgt_valid_flag_value'(encoding_directive, unsupported) :- !.
+
+'$lgt_valid_flag_value'(threads, supported) :- !.
+'$lgt_valid_flag_value'(threads, unsupported) :- !.
+
+'$lgt_valid_flag_value'(modules, supported) :- !.
+'$lgt_valid_flag_value'(modules, unsupported) :- !.
+
+'$lgt_valid_flag_value'(tabling, supported) :- !.
+'$lgt_valid_flag_value'(tabling, unsupported) :- !.
+
+'$lgt_valid_flag_value'(coinduction, supported) :- !.
+'$lgt_valid_flag_value'(coinduction, unsupported) :- !.
+
 
 
 % '$lgt_valid_entity_parameter'(@term)
@@ -18610,6 +18654,18 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_must_be'(read_write_flag, Term, Context) :-
 	(	var(Term) ->
 		throw(error(instantiation_error, Context))
+	;	\+ atom(Term) ->
+		throw(error(type_error(atom, Term), Context))
+	;	\+ '$lgt_valid_flag'(Term) ->
+		throw(error(domain_error(flag, Term), Context))
+	;	'$lgt_read_only_flag'(Term) ->
+		throw(error(permission_error(modify, flag, Term), Context))
+	;	true
+	).
+
+'$lgt_must_be'(var_or_read_write_flag, Term, Context) :-
+	(	var(Term) ->
+		true
 	;	\+ atom(Term) ->
 		throw(error(type_error(atom, Term), Context))
 	;	\+ '$lgt_valid_flag'(Term) ->

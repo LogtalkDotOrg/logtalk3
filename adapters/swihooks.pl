@@ -122,6 +122,7 @@ user:prolog_predicate_name(user:'$lgt_phrase'(_, _, _), 'phrase/2') :- !.
 user:prolog_predicate_name(user:'$lgt_phrase'(_, _, _, _), 'phrase/3') :- !.
 
 user:prolog_predicate_name(user:'$lgt_compiler_flag'(_, _), 'current_logtalk_flag/2') :- !.
+user:prolog_predicate_name(user:'$lgt_set_compiler_flag'(_, _), 'set_logtalk_flag/2') :- !.
 
 user:prolog_predicate_name(user:'$lgt_current_op'(_, _, _, _, _, _), 'current_op/3') :- !.
 user:prolog_predicate_name(user:'$lgt_current_predicate'(_, _, _, _), 'current_predicate/1') :- !.
@@ -384,6 +385,7 @@ user:portray(c(This, r(Sender, Self, MetaVars, CoinductionStack))) :-
 '$lgt_swi_unify_clause_body'(phrase(GRBody, Input, Rest), _, '$lgt_phrase'(GRBody, Input, Rest, _), TermPos, TermPos) :- !.
 
 '$lgt_swi_unify_clause_body'(current_logtalk_flag(Flag, Value), _, '$lgt_compiler_flag'(Flag, Value), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(set_logtalk_flag(Flag, Value), _, '$lgt_set_compiler_flag'(Flag, Value), TermPos, TermPos) :- !.
 
 '$lgt_swi_unify_clause_body'(Obj::current_op(Priority, Specifier, Operator), _, '$lgt_current_op'(Obj, Priority, Specifier, Operator, _, p(p(p))), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(current_op(Priority, Specifier, Operator), _, '$lgt_current_op'(This, Priority, Specifier, Operator, This, p(_)), TermPos, TermPos) :- !.
