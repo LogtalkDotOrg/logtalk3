@@ -5198,26 +5198,26 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_check_for_encoding_directive'((:- encoding(LogtalkEncoding)), Source, Input, NewInput, [encoding(PrologEncoding)|BOM]) :-
 	!,
-	(	\+ '$lgt_prolog_feature'(encoding_directive, unsupported) ->
-		(	% the conversion between Logtalk and Prolog encodings is defined in the adapter files
-			'$lgt_logtalk_prolog_encoding'(LogtalkEncoding, PrologEncoding, Input) ->
-			assertz('$lgt_pp_file_encoding_'(LogtalkEncoding, PrologEncoding)),
-			close(Input),
-			open(Source, read, NewInput, [alias(logtalk_compiler_input), encoding(PrologEncoding)]),
-			(	catch(stream_property(NewInput, bom(Boolean)), _, fail) ->
-				% SWI-Prolog and YAP
-				BOM = [bom(Boolean)],
-				assertz('$lgt_pp_file_bom_'(bom(Boolean)))
-			;	catch(stream_property(NewInput, encoding_signature(Boolean)), _, fail) ->
-				% SICStus Prolog
-				BOM = [encoding_signature(Boolean)]
-			;	BOM = []
-			),
-			% throw away encoding/1 directive
-			'$lgt_read_term'(NewInput, _, [singletons(_)])
-		;	throw(error(domain_error(directive, encoding/1), directive(encoding(LogtalkEncoding))))
-		)
-	;	throw(error(resource_error(text_encoding_support), directive(encoding(LogtalkEncoding))))
+	(	'$lgt_prolog_feature'(encoding_directive, unsupported) ->
+		throw(error(resource_error(text_encoding_support), directive(encoding(LogtalkEncoding))))
+	;	% the conversion between Logtalk and Prolog encodings is defined in the adapter files
+		'$lgt_logtalk_prolog_encoding'(LogtalkEncoding, PrologEncoding, Input) ->
+		assertz('$lgt_pp_file_encoding_'(LogtalkEncoding, PrologEncoding)),
+		close(Input),
+		open(Source, read, NewInput, [alias(logtalk_compiler_input), encoding(PrologEncoding)]),
+		(	catch(stream_property(NewInput, bom(Boolean)), _, fail) ->
+			% SWI-Prolog and YAP
+			BOM = [bom(Boolean)],
+			assertz('$lgt_pp_file_bom_'(bom(Boolean)))
+		;	catch(stream_property(NewInput, encoding_signature(Boolean)), _, fail) ->
+			% SICStus Prolog
+			BOM = [encoding_signature(Boolean)]
+		;	BOM = []
+		),
+		% throw away encoding/1 directive
+		'$lgt_read_term'(NewInput, _, [singletons(_)])
+	;	% encoding not recognized
+		throw(error(domain_error(directive, encoding/1), directive(encoding(LogtalkEncoding))))
 	).
 
 '$lgt_check_for_encoding_directive'(_, _, Input, Input, []).	% assume no encoding/1 directive present on the source file
