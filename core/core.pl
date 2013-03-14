@@ -15135,12 +15135,6 @@ current_logtalk_flag(Flag, Value) :-
 % used mainly in conjunction with goal_expansion/2 hooks
 
 '$lgt_compile_aux_clauses'(Clauses) :-
-	% protocols cannot contain predicate clauses
-	(	'$lgt_pp_object_'(_, Prefix, _, _, _, _, _, _, _, _, _) ->
-		true
-	;	'$lgt_pp_category_'(_, Prefix, _, _, _, _)
-	),
-	'$lgt_comp_ctx_prefix'(Ctx, Prefix),
 	% avoid making a predicate discontiguous by accident
 	'$lgt_comp_ctx_mode'(Ctx, compile(aux)),
 	'$lgt_compile_aux_clauses'(Clauses, Ctx).
