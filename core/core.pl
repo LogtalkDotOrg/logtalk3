@@ -418,7 +418,7 @@ Obj<<Goal :-
 		true
 	;	atom_concat(Prefix, '_dcl', TFunctor)
 	),
-	'$lgt_reverse_entity_prefix'(Prefix, Obj),
+	'$lgt_prefix_to_entity'(Prefix, Obj),
 	(	'$lgt_instantiates_class_'(_, Obj, _)
 	;	'$lgt_specializes_class_'(_, Obj, _)
 	;	'$lgt_extends_object_'(_, Obj, _)
@@ -429,7 +429,7 @@ Obj<<Goal :-
 
 '$lgt_runtime_normalized_error_handler'(error(existence_error(procedure, TFunctor/5), _)) :-
 	atom_concat(Prefix, '_dcl', TFunctor),
-	'$lgt_reverse_entity_prefix'(Prefix, CtgOrPtc),
+	'$lgt_prefix_to_entity'(Prefix, CtgOrPtc),
 	(	'$lgt_implements_protocol_'(_, CtgOrPtc, _), \+ '$lgt_current_protocol_'(CtgOrPtc, _, _, _, _),
 		throw(error(existence_error(protocol, CtgOrPtc), logtalk(_, _)))
 	;	'$lgt_extends_protocol_'(_, CtgOrPtc, _), \+ '$lgt_current_protocol_'(CtgOrPtc, _, _, _, _),
@@ -7211,7 +7211,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_must_be'(entity_identifier, Entity),
 	(	Entity == user ->
 		assertz('$lgt_pp_directive_'(dynamic(Functor/Arity)))
-	;	'$lgt_construct_entity_prefix'(Entity, Prefix),
+	;	'$lgt_entity_to_prefix'(Entity, Prefix),
 		'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(dynamic(TFunctor/TArity)))
 	).
@@ -7222,7 +7222,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_must_be'(entity_identifier, Entity),
 	(	Entity == user ->
 		assertz('$lgt_pp_directive_'(dynamic(Functor/ExtArity)))
-	;	'$lgt_construct_entity_prefix'(Entity, Prefix),
+	;	'$lgt_entity_to_prefix'(Entity, Prefix),
 		'$lgt_construct_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(dynamic(TFunctor/TArity)))
 	).
@@ -7291,7 +7291,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_must_be'(entity_identifier, Entity),
 	(	Entity == user ->
 		assertz('$lgt_pp_directive_'(discontiguous(Functor/Arity)))
-	;	'$lgt_construct_entity_prefix'(Entity, Prefix),
+	;	'$lgt_entity_to_prefix'(Entity, Prefix),
 		'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(discontiguous(TFunctor/TArity)))
 	).
@@ -7302,7 +7302,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_must_be'(entity_identifier, Entity),
 	(	Entity == user ->
 		assertz('$lgt_pp_directive_'(discontiguous(Functor/ExtArity)))
-	;	'$lgt_construct_entity_prefix'(Entity, Prefix),
+	;	'$lgt_entity_to_prefix'(Entity, Prefix),
 		'$lgt_construct_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(discontiguous(TFunctor/TArity)))
 	).
@@ -7475,7 +7475,7 @@ current_logtalk_flag(Flag, Value) :-
 		assertz('$lgt_pp_directive_'(multifile(Functor/Arity)))
 	;	functor(Template, Functor, Arity),
 		'$lgt_check_for_public_multifile_declaration'(Entity, Template) ->
-		'$lgt_construct_entity_prefix'(Entity, Prefix),
+		'$lgt_entity_to_prefix'(Entity, Prefix),
 		'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity)))
 	;	throw(permission_error(modify, predicate_declaration, Pred))
@@ -7489,7 +7489,7 @@ current_logtalk_flag(Flag, Value) :-
 		assertz('$lgt_pp_directive_'(multifile(Functor/ExtArity)))
 	;	functor(Template, Functor, ExtArity),
 		'$lgt_check_for_public_multifile_declaration'(Entity, Template) ->
-		'$lgt_construct_entity_prefix'(Entity, Prefix),
+		'$lgt_entity_to_prefix'(Entity, Prefix),
 		'$lgt_construct_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity)))
 	;	throw(permission_error(modify, non_terminal_declaration, NonTerminal))
@@ -8764,7 +8764,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_head'(Other::Head, THead, Ctx) :-
 	!,
 	functor(Head, Functor, Arity),
-	'$lgt_construct_entity_prefix'(Other, Prefix),
+	'$lgt_entity_to_prefix'(Other, Prefix),
 	'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	(	'$lgt_pp_directive_'(multifile(TFunctor/TArity)) ->
 		true
@@ -15062,24 +15062,44 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
+% '$lgt_entity_to_prefix'(@entity_identifier, -atom)
+%
+% converts an entity identifier into an entity prefix (used in the compiled code)
+
+'$lgt_entity_to_prefix'(Entity, Prefix) :-
+	(	'$lgt_current_object_'(Entity, Prefix, _, _, _, _, _, _, _, _, _) ->
+		true
+	;	'$lgt_current_protocol_'(Entity, Prefix, _, _, _) ->
+		true
+	;	'$lgt_current_category_'(Entity, Prefix, _, _, _, _) ->
+		true
+	;	'$lgt_construct_entity_prefix'(Entity, Prefix)
+	).
+
+
+
+% '$lgt_prefix_to_entity'(+atom, -entity_identifier)
+%
+% reverses the entity prefix used in the compiled code
+
+'$lgt_prefix_to_entity'(Prefix, Entity) :-
+	(	'$lgt_current_object_'(Entity, Prefix, _, _, _, _, _, _, _, _, _) ->
+		true
+	;	'$lgt_current_protocol_'(Entity, Prefix, _, _, _) ->
+		true
+	;	'$lgt_current_category_'(Entity, Prefix, _, _, _, _) ->
+		true
+	;	'$lgt_deconstruct_entity_prefix'(Prefix, Entity)
+	).
+
+
+
 % '$lgt_construct_entity_prefix'(@entity_identifier, -atom)
 %
-% constructs the entity prefix used in the compiled code
+% constructs the entity prefix used in the compiled code from the entity identifier
 %
 % parametric entities: Code prefix + Entity functor + "." + Entity arity + "."
 % other entities: Code prefix + Entity functor + "."
-
-'$lgt_construct_entity_prefix'(Entity, Prefix) :-
-	'$lgt_current_object_'(Entity, Prefix, _, _, _, _, _, _, _, _, _),
-	!.
-
-'$lgt_construct_entity_prefix'(Entity, Prefix) :-
-	'$lgt_current_protocol_'(Entity, Prefix, _, _, _),
-	!.
-
-'$lgt_construct_entity_prefix'(Entity, Prefix) :-
-	'$lgt_current_category_'(Entity, Prefix, _, _, _, _),
-	!.
 
 '$lgt_construct_entity_prefix'(Entity, Prefix) :-
 	'$lgt_compiler_flag'(code_prefix, CodePrefix),
@@ -15097,23 +15117,12 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_reverse_entity_prefix'(+atom, -entity_identifier)
+% '$lgt_deconstruct_entity_prefix'(+atom, -entity_identifier)
 %
-% reverses the entity prefix used in the compiled code
+% deconstructs the entity prefix used in the compiled code
+% returning the corresponding entity identifier
 
-'$lgt_reverse_entity_prefix'(Prefix, Entity) :-
-	'$lgt_current_object_'(Entity, Prefix, _, _, _, _, _, _, _, _, _),
-	!.
-
-'$lgt_reverse_entity_prefix'(Prefix, Entity) :-
-	'$lgt_current_protocol_'(Entity, Prefix, _, _, _),
-	!.
-
-'$lgt_reverse_entity_prefix'(Prefix, Entity) :-
-	'$lgt_current_category_'(Entity, Prefix, _, _, _, _),
-	!.
-
-'$lgt_reverse_entity_prefix'(Prefix, Entity) :-
+'$lgt_deconstruct_entity_prefix'(Prefix, Entity) :-
 	'$lgt_compiler_flag'(code_prefix, CodePrefix),
 	atom_concat(CodePrefix, Entity0, Prefix),
 	atom_concat(Entity1, '.', Entity0),
@@ -15162,9 +15171,9 @@ current_logtalk_flag(Flag, Value) :-
 	;	'$lgt_current_protocol_'(Entity, Prefix, _, _, _) ->
 		true
 	;	atom(Prefix) ->
-		'$lgt_reverse_entity_prefix'(Prefix, Entity)
+		'$lgt_prefix_to_entity'(Prefix, Entity)
 	;	callable(Entity),
-		'$lgt_construct_entity_prefix'(Entity, Prefix)
+		'$lgt_entity_to_prefix'(Entity, Prefix)
 	).
 
 
