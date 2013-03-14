@@ -5,7 +5,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/12/12,
+		date is 2013/03/14,
 		comment is 'Unit tests for the logtalk_compile/1-2 built-in predicates.'
 	]).
 
@@ -82,13 +82,16 @@
 	throws(logtalk_compile_2_13, error(type_error(list,1), logtalk(logtalk_compile([],1), _))) :-
 		logtalk_compile([], 1).
 
-	throws(logtalk_compile_2_14, error(type_error(compiler_option,1), logtalk(logtalk_compile([],[1]), _))) :-
+	throws(logtalk_compile_2_14, error(type_error(compound,1), logtalk(logtalk_compile([],[1]), _))) :-
 		logtalk_compile([], [1]).
 
-	throws(logtalk_compile_2_15, error(domain_error(flag_value,portability+invalid_value), logtalk(logtalk_compile([],[portability(invalid_value)]), _))) :-
+	throws(logtalk_compile_2_15, error(domain_error(compiler_option,a(1,2)), logtalk(logtalk_compile([],[a(1,2)]), _))) :-
+		logtalk_compile([], [a(1,2)]).
+
+	throws(logtalk_compile_2_16, error(domain_error(flag_value,portability+invalid_value), logtalk(logtalk_compile([],[portability(invalid_value)]), _))) :-
 		logtalk_compile([], [portability(invalid_value)]).
 
-	throws(logtalk_compile_2_16, error(permission_error(modify,flag,threads), logtalk(logtalk_compile([],[threads(supported)]), _))) :-
+	throws(logtalk_compile_2_17, error(permission_error(modify,flag,threads), logtalk(logtalk_compile([],[threads(supported)]), _))) :-
 		logtalk_compile([], [threads(supported)]).
 
 :- end_object.

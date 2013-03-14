@@ -1849,31 +1849,15 @@ logtalk_compile(Files, Flags) :-
 '$lgt_check_compiler_flag_list'([]).
 
 '$lgt_check_compiler_flag_list'([Option| Options]) :-
-	'$lgt_check_compiler_flag'(Option),
-	'$lgt_check_compiler_flag_list'(Options).
-
-
-'$lgt_check_compiler_flag'(Option) :-
-	\+ compound(Option),
-	throw(error(type_error(compiler_option, Option), _)).
-
-'$lgt_check_compiler_flag'(Option) :-
 	(	functor(Option, Flag, 1) ->
 		arg(1, Option, Value),
 		'$lgt_must_be'(read_write_flag, Flag, _),
 		'$lgt_must_be'(flag_value, Flag+Value, _)
-	;	throw(error(type_error(compiler_option, Option), _))
-	).
-
-
-
-% '$lgt_check_compiler_flag'(+atom, @term)
-%
-% checks if a compiler flag is valid
-
-'$lgt_check_compiler_flag'(Flag, Value) :-
-	'$lgt_must_be'(read_write_flag, Flag),
-	'$lgt_must_be'(flag_value, Flag+Value).
+	;	compound(Option) ->
+		throw(error(domain_error(compiler_option, Option), _))
+	;	throw(error(type_error(compound, Option), _))
+	),
+	'$lgt_check_compiler_flag_list'(Options).
 
 
 
@@ -2146,18 +2130,13 @@ set_logtalk_flag(Flag, Value) :-
 % tests/gets Logtalk flags
 
 current_logtalk_flag(Flag, Value) :-
-	var(Flag),
-	!,
-	'$lgt_valid_flag'(Flag),
-	'$lgt_compiler_flag'(Flag, Value).
-
-current_logtalk_flag(Flag, Value) :-	
-	'$lgt_valid_flag'(Flag),
-	!,
-	'$lgt_compiler_flag'(Flag, Value).
-
-current_logtalk_flag(Flag, Value) :-	
-	'$lgt_must_be'(flag, Flag, logtalk(current_logtalk_flag(Flag, Value), _)).
+	(	var(Flag) ->
+		'$lgt_valid_flag'(Flag),
+		'$lgt_compiler_flag'(Flag, Value)
+	;	'$lgt_valid_flag'(Flag) ->
+		'$lgt_compiler_flag'(Flag, Value)
+	;	'$lgt_must_be'(flag, Flag, logtalk(current_logtalk_flag(Flag, Value), _))
+	).
 
 
 
@@ -6490,7 +6469,8 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_file_directive'(set_logtalk_flag(Flag, Value), _) :-
 	!,
-	'$lgt_check_compiler_flag'(Flag, Value),
+	'$lgt_must_be'(read_write_flag, Flag),
+	'$lgt_must_be'(flag_value, Flag+Value),
 	Option =.. [Flag, Value],
 	% local scope (restricted to the source file being compiled)
 	'$lgt_set_compiler_flags'([Option]).
@@ -6724,7 +6704,8 @@ current_logtalk_flag(Flag, Value) :-
 % set_logtalk_flag/2 entity directive
 
 '$lgt_tr_logtalk_directive'(set_logtalk_flag(Flag, Value), _) :-
-	'$lgt_check_compiler_flag'(Flag, Value),
+	'$lgt_must_be'(read_write_flag, Flag),
+	'$lgt_must_be'(flag_value, Flag+Value),
 	retractall('$lgt_pp_entity_compiler_flag_'(Flag, _)),
 	assertz('$lgt_pp_entity_compiler_flag_'(Flag, Value)).
 
@@ -16364,10 +16345,8 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_valid_flag_value'(prolog_dialect, Dialect) :-
 	atom(Dialect).
-
 '$lgt_valid_flag_value'(prolog_version, Version) :-
 	compound(Version).
-
 '$lgt_valid_flag_value'(prolog_compatible_version, Version) :-
 	compound(Version).
 
