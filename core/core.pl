@@ -1834,16 +1834,11 @@ logtalk_compile(Files, Flags) :-
 %
 % checks if the compiler flags are valid
 
-'$lgt_check_compiler_flags'(Options) :-
-	'$lgt_must_be'(ground, Options, _),
-	'$lgt_must_be'(list, Options, _),
-	'$lgt_check_compiler_flag_list'(Options).
-
-
-'$lgt_check_compiler_flag_list'([]).
-
-'$lgt_check_compiler_flag_list'([Option| Options]) :-
-	(	functor(Option, Flag, 1) ->
+'$lgt_check_compiler_flags'([Option| Options]) :-
+	!,
+	(	var(Option) ->
+		throw(error(instantiation_error, _))
+	;	functor(Option, Flag, 1) ->
 		arg(1, Option, Value),
 		'$lgt_must_be'(read_write_flag, Flag, _),
 		'$lgt_must_be'(flag_value, Flag+Value, _)
@@ -1851,7 +1846,13 @@ logtalk_compile(Files, Flags) :-
 		throw(error(domain_error(compiler_option, Option), _))
 	;	throw(error(type_error(compound, Option), _))
 	),
-	'$lgt_check_compiler_flag_list'(Options).
+	'$lgt_check_compiler_flags'(Options).
+
+'$lgt_check_compiler_flags'([]) :-
+	!.
+
+'$lgt_check_compiler_flags'(Options) :-
+	throw(error(type_error(list, Options), _)).
 
 
 
