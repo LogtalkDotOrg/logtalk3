@@ -6830,7 +6830,6 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_logtalk_directive'(info(List), _) :-
 	!,
-	'$lgt_must_be'(list, List),
 	'$lgt_tr_entity_info_directive'(List, TList),
 	assertz('$lgt_pp_info_'(TList)).
 
@@ -6839,7 +6838,6 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_logtalk_directive'(info(Pred, List), _) :-
 	'$lgt_must_be'(nonvar, Pred),
-	'$lgt_must_be'(list, List),
 	(	'$lgt_valid_predicate_or_non_terminal_indicator'(Pred, Functor, Arity) ->
 		'$lgt_tr_predicate_info_directive'(List, Functor, Arity, TList),
 		assertz('$lgt_pp_info_'(Pred, TList))
@@ -8074,15 +8072,17 @@ current_logtalk_flag(Flag, Value) :-
 %
 % translates the entity info/1 directive key-value pairs
 
-'$lgt_tr_entity_info_directive'([], []).
-
 '$lgt_tr_entity_info_directive'([Pair| Pairs], [TPair| TPairs]) :-
-	'$lgt_must_be'(key_value_info_pair, Pair),
-	Pair = (Key is Value),
-	'$lgt_tr_entity_info_directive_pair'(Key, Value, TKey, TValue),
-	functor(TPair, TKey, 1),
-	arg(1, TPair, TValue),
-	'$lgt_tr_entity_info_directive'(Pairs, TPairs).
+	(	'$lgt_valid_info_key_value_pair'(Pair, Key, Value) ->
+		'$lgt_tr_entity_info_directive_pair'(Key, Value, TKey, TValue),
+		functor(TPair, TKey, 1),
+		arg(1, TPair, TValue),
+		'$lgt_tr_entity_info_directive'(Pairs, TPairs)
+	;	% non-valid pair; generate an error
+		'$lgt_must_be'(key_value_info_pair, Pair)
+	).
+
+'$lgt_tr_entity_info_directive'([], []).
 
 
 
@@ -8167,15 +8167,17 @@ current_logtalk_flag(Flag, Value) :-
 %
 % translates the predicate info/2 directive key-value pairs
 
-'$lgt_tr_predicate_info_directive'([], _, _, []).
-
 '$lgt_tr_predicate_info_directive'([Pair| Pairs], Functor, Arity, [TPair| TPairs]) :-
-	'$lgt_must_be'(key_value_info_pair, Pair),
-	Pair = (Key is Value),
-	'$lgt_tr_predicate_info_directive_pair'(Key, Value, Functor, Arity, TKey, TValue),
-	functor(TPair, TKey, 1),
-	arg(1, TPair, TValue),
-	'$lgt_tr_predicate_info_directive'(Pairs, Functor, Arity, TPairs).
+	(	'$lgt_valid_info_key_value_pair'(Pair, Key, Value) ->
+		'$lgt_tr_predicate_info_directive_pair'(Key, Value, Functor, Arity, TKey, TValue),
+		functor(TPair, TKey, 1),
+		arg(1, TPair, TValue),
+		'$lgt_tr_predicate_info_directive'(Pairs, Functor, Arity, TPairs)
+	;	% non-valid pair; generate an error
+		'$lgt_must_be'(key_value_info_pair, Pair)
+	).
+
+'$lgt_tr_predicate_info_directive'([], _, _, []).
 
 
 
@@ -15817,7 +15819,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_valid_predicate_indicator'(+nonvar, -atom, -integer)
+% '$lgt_valid_predicate_indicator'(?nonvar, -atom, -integer)
 %
 % valid predicate indicator
 
@@ -15828,7 +15830,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_valid_non_terminal_indicator'(+nonvar, -atom, -integer, -integer)
+% '$lgt_valid_non_terminal_indicator'(?nonvar, -atom, -integer, -integer)
 %
 % valid grammar rule non-terminal indicator; the last argument is the
 % arity of the corresponding predicate
@@ -15841,7 +15843,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_valid_predicate_or_non_terminal_indicator'(+nonvar, -atom, -integer)
+% '$lgt_valid_predicate_or_non_terminal_indicator'(?nonvar, -atom, -integer)
 %
 % valid predicate indicator or grammar rule indicator
 
@@ -15854,6 +15856,15 @@ current_logtalk_flag(Flag, Value) :-
 	atom(Functor),
 	integer(Arity),
 	Arity >= 0.
+
+
+% '$lgt_valid_info_key_value_pair'(?nonvar, -atom, -integer)
+%
+% valid info/1-2 key-value pair
+
+'$lgt_valid_info_key_value_pair'(Key is Value, Key, Value) :-
+	atom(Key),
+	nonvar(Value).
 
 
 

@@ -35,6 +35,8 @@ Logtalk compiler and runtime
 predicate. Optimized compilation of sufficiently instantiated calls to the
 `current_logtalk_flag/2` and `set_logtalk_flag/2` built-in predicates.
 
+* IMPROVED: Faster compilation of `info/1-2` directives.
+
 Documentation
 -------------
 
