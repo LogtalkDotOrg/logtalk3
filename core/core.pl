@@ -6174,11 +6174,11 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_runtime_term'({Term}, _) :-
 	% bypass control construct; term is final
 	!,
-	(	var(Term) ->
-		throw(error(instantiantion_error, term({Term})))
-	;	callable(Term) ->
+	(	callable(Term) ->
 		'$lgt_pp_term_location'(Location),
 		assertz('$lgt_pp_entity_clause_'({Term}, Location))
+	;	var(Term) ->
+		throw(error(instantiantion_error, term({Term})))
 	;	throw(error(type_error(callable, Term), term({Term})))
 	).
 
@@ -6547,11 +6547,11 @@ current_logtalk_flag(Flag, Value) :-
 		throw(permission_error(modify, protocol, Obj))
 	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_category_'(Obj, _, _, _, _, _)),
 		throw(permission_error(modify, category, Obj))
-	;	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _) ->
+	;	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
 		throw(existence_error(directive, end_object/0))
-	;	'$lgt_pp_protocol_'(_, _, _, _, _) ->
+	;	'$lgt_pp_protocol_'(_, _, _, _, _),
 		throw(existence_error(directive, end_protocol/0))
-	;	'$lgt_pp_category_'(_, _, _, _, _, _) ->
+	;	'$lgt_pp_category_'(_, _, _, _, _, _),
 		throw(existence_error(directive, end_category/0))
 	;	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
 			'$lgt_print_message'(silent(compiling), core, compiling_entity(object, Obj))
@@ -6594,11 +6594,11 @@ current_logtalk_flag(Flag, Value) :-
 		throw(permission_error(modify, protocol, Ptc))
 	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_category_'(Ptc, _, _, _, _, _)),
 		throw(permission_error(modify, category, Ptc))
-	;	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _) ->
+	;	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
 		throw(existence_error(directive, end_object/0))
-	;	'$lgt_pp_protocol_'(_, _, _, _, _) ->
+	;	'$lgt_pp_protocol_'(_, _, _, _, _),
 		throw(existence_error(directive, end_protocol/0))
-	;	'$lgt_pp_category_'(_, _, _, _, _, _) ->
+	;	'$lgt_pp_category_'(_, _, _, _, _, _),
 		throw(existence_error(directive, end_category/0))
 	;	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
 			'$lgt_print_message'(silent(compiling), core, compiling_entity(protocol, Ptc))
@@ -6644,11 +6644,11 @@ current_logtalk_flag(Flag, Value) :-
 		throw(permission_error(modify, protocol, Ctg))
 	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_category_'(Ctg, _, _, _, _, _)),
 		throw(permission_error(modify, category, Ctg))
-	;	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _) ->
+	;	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
 		throw(existence_error(directive, end_object/0))
-	;	'$lgt_pp_protocol_'(_, _, _, _, _) ->
+	;	'$lgt_pp_protocol_'(_, _, _, _, _),
 		throw(existence_error(directive, end_protocol/0))
-	;	'$lgt_pp_category_'(_, _, _, _, _, _) ->
+	;	'$lgt_pp_category_'(_, _, _, _, _, _),
 		throw(existence_error(directive, end_category/0))
 	;	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
 			'$lgt_print_message'(silent(compiling), core, compiling_entity(category, Ctg))
@@ -15871,9 +15871,7 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_check_entity_reference'(+atom, @term, -atom, -entity_identifier)
 
 '$lgt_check_entity_reference'(object, Ref, Scope, Object) :-
-	(	var(Ref) ->
-		throw(instantiation_error)
-	;	Ref = Scope::Object ->
+	(	Ref = Scope::Object ->
 		'$lgt_must_be'(scope, Scope),
 		'$lgt_must_be'(object_identifier, Object)
 	;	Ref = Object,
@@ -15882,9 +15880,7 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 '$lgt_check_entity_reference'(protocol, Ref, Scope, Protocol) :-
-	(	var(Ref) ->
-		throw(instantiation_error)
-	;	Ref = Scope::Protocol ->
+	(	Ref = Scope::Protocol ->
 		'$lgt_must_be'(scope, Scope),
 		'$lgt_must_be'(protocol_identifier, Protocol)
 	;	Ref = Protocol,
@@ -15893,9 +15889,7 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 '$lgt_check_entity_reference'(category, Ref, Scope, Category) :-
-	(	var(Ref) ->
-		throw(instantiation_error)
-	;	Ref = Scope::Category ->
+	(	Ref = Scope::Category ->
 		'$lgt_must_be'(scope, Scope),
 		'$lgt_must_be'(category_identifier, Category)
 	;	Ref = Category,
