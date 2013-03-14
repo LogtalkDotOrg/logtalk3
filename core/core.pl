@@ -1723,6 +1723,7 @@ logtalk_compile(Files, Flags) :-
 
 '$lgt_init_warnings_counter'(Goal) :-
 	(	'$lgt_pp_warnings_top_goal_directory_'(_, _) ->
+		% not top compilation/loading goal; do nothing
 		true
 	;	'$lgt_current_directory'(Current),
 		% remember top compilation/loading goal and directory
@@ -1778,26 +1779,19 @@ logtalk_compile(Files, Flags) :-
 
 
 '$lgt_check_source_file'(File) :-
-	var(File),
-	throw(error(instantiation_error, _)).
-
-'$lgt_check_source_file'(File) :-
-	atom(File),
-	!.
-
-'$lgt_check_source_file'(File) :-
-	compound(File),
-	functor(File, Library, 1),
-	arg(1, File, Basename),
-	atom(Basename),
-	!,
-	(	'$lgt_expand_library_path'(Library, _) ->
+	(	var(File) ->
+		throw(error(instantiation_error, _))
+	;	atom(File) ->
 		true
-	;	throw(error(existence_error(library, Library), _))
+	;	functor(File, Library, 1),
+		arg(1, File, Basename),
+		atom(Basename) ->
+		(	'$lgt_expand_library_path'(Library, _) ->
+			true
+		;	throw(error(existence_error(library, Library), _))
+		)
+	;	throw(error(type_error(source_file_name, File), _))
 	).
-
-'$lgt_check_source_file'(File) :-
-	throw(error(type_error(source_file_name, File), _)).
 
 
 
@@ -5085,13 +5079,12 @@ current_logtalk_flag(Flag, Value) :-
 % extension), and the full file path
 
 '$lgt_file_name'(Type, FilePath, Directory, Basename, FullPath) :-
-	(	compound(FilePath) ->
-		functor(FilePath, Library, 1),
+	(	atom(FilePath) ->
+		'$lgt_prolog_os_file_name'(NormalizedPath, FilePath)	
+	;	functor(FilePath, Library, 1),
 		'$lgt_expand_library_path'(Library, LibraryPath),
 		arg(1, FilePath, File),
 		atom_concat(LibraryPath, File, NormalizedPath)
-	;	% atom(FilePath)
-		'$lgt_prolog_os_file_name'(NormalizedPath, FilePath)
 	),
 	'$lgt_decompose_file_name'(NormalizedPath, Directory0, Name, Extension),
 	(	'$lgt_file_type_alt_directory'(Type, AltDirectory) ->
