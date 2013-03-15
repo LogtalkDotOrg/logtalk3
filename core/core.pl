@@ -8806,14 +8806,18 @@ current_logtalk_flag(Flag, Value) :-
 % translate the head of a clause of a user defined predicate
 
 '$lgt_tr_head'(Head, THead, Ctx) :-
-	'$lgt_comp_ctx_head'(Ctx, Head),
-	functor(Head, Functor, Arity),
-	(	'$lgt_pp_dynamic_'(Functor, Arity),
-		\+ '$lgt_pp_public_'(Functor, Arity),
-		\+ '$lgt_pp_protected_'(Functor, Arity),
-		\+ '$lgt_pp_private_'(Functor, Arity) ->
-		'$lgt_add_ddef_clause'(Head, Functor, Arity, THead, Ctx)
-	;	'$lgt_add_def_clause'(Head, Functor, Arity, THead, Ctx)
+	(	'$lgt_pp_defines_predicate_'(Head, ExCtx, THead, _) ->
+		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx)
+	;	% first clause for this predicate
+		'$lgt_comp_ctx_head'(Ctx, Head),
+		functor(Head, Functor, Arity),
+		(	'$lgt_pp_dynamic_'(Functor, Arity),
+			\+ '$lgt_pp_public_'(Functor, Arity),
+			\+ '$lgt_pp_protected_'(Functor, Arity),
+			\+ '$lgt_pp_private_'(Functor, Arity) ->
+			'$lgt_add_ddef_clause'(Head, Functor, Arity, THead, Ctx)
+		;	'$lgt_add_def_clause'(Head, Functor, Arity, THead, Ctx)
+		)
 	).
 
 
@@ -12581,11 +12585,6 @@ current_logtalk_flag(Flag, Value) :-
 % adds a "def clause" (used to translate a predicate call) and returns
 % the translated clause head
 
-'$lgt_add_def_clause'(Head, _, _, THead, Ctx) :-
-	'$lgt_pp_defines_predicate_'(Head, ExCtx, THead, _),
-	!,
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
-
 '$lgt_add_def_clause'(Head, Functor, Arity, THead, Ctx) :-
 	functor(HeadTemplate, Functor, Arity),
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, Prefix, _, _, ExCtx, _, _),
@@ -12618,11 +12617,6 @@ current_logtalk_flag(Flag, Value) :-
 %
 % adds a "ddef clause" (used to translate a predicate call) and returns
 % the translated clause head
-
-'$lgt_add_ddef_clause'(Head, _, _, THead, Ctx) :-
-	'$lgt_pp_defines_predicate_'(Head, ExCtx, THead, _),
-	!,
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
 
 '$lgt_add_ddef_clause'(Head, Functor, Arity, THead, Ctx) :-
 	functor(HeadTemplate, Functor, Arity),
@@ -12662,10 +12656,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	'$lgt_pp_category_'(_, _, _, Def, _, _)
 	),
 	Clause =.. [Def, HeadTemplate, _, fail],
-	(	'$lgt_pp_def_'(Clause) ->
-		true
-	;	assertz('$lgt_pp_def_'(Clause))
-	),
+	assertz('$lgt_pp_def_'(Clause)),
 	(	'$lgt_is_built_in_predicate'(Head) ->
 		(	'$lgt_pp_redefined_built_in_'(HeadTemplate, _, _) ->
 			true
@@ -12677,10 +12668,11 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_remember_predicate'(+atom, +integer, +compilation_context)
+% '$lgt_remember_predicate'(@callable, +atom, +integer, +execution_context, @callable, +compilation_context)
 %
 % it's necessary to remember which predicates are defined in order to deal with
-% redefinition of built-in predicates and detect missing predicate directives
+% redefinition of built-in predicates, detect missing predicate directives, and
+% speed up compilation of other clauses for the same predicates
 %
 % the check for discontiguous predicates is not performed when compiling clauses
 % for auxiliary predicates (using the logtalk::compile_aux_clauses/1 hook predicate)
