@@ -8574,6 +8574,14 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_must_be'(callable, Head).
 
 
+% not the first clause for this predicate
+
+'$lgt_tr_head'(Head, THead, Ctx) :-
+	'$lgt_pp_defines_predicate_'(Head, ExCtx, THead, _),
+	!,
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
+
+
 % definition of dynamic predicates inside categories
 
 '$lgt_tr_head'(Head, _, _) :-
@@ -8635,17 +8643,17 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_head'(Head, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 	'$lgt_compiler_flag'(redefined_built_ins, warning),
-	(	'$lgt_logtalk_built_in_predicate'(Head) ->
-		\+ functor(Head, '::', 2),
-		% not the head of a multifile entity predicate
-		Message = redefined_logtalk_built_in_predicate(Path, Lines, Type, Entity, Functor/Arity)
-	;	'$lgt_prolog_built_in_predicate'(Head),
-		\+ functor(Head, ':', 2),
-		% not the head of a multifile module predicate
-		Message = redefined_prolog_built_in_predicate(Path, Lines, Type, Entity, Functor/Arity)
-	),
 	\+ '$lgt_pp_redefined_built_in_'(Head, _, _),
 	% not already reported
+	\+ functor(Head, '::', 2),
+	% not the head of a multifile entity predicate
+	\+ functor(Head, ':', 2),
+	% not the head of a multifile module predicate
+	(	'$lgt_logtalk_built_in_predicate'(Head) ->
+		Message = redefined_logtalk_built_in_predicate(Path, Lines, Type, Entity, Functor/Arity)
+	;	'$lgt_prolog_built_in_predicate'(Head),
+		Message = redefined_prolog_built_in_predicate(Path, Lines, Type, Entity, Functor/Arity)
+	),
 	functor(Head, Functor, Arity),
 	'$lgt_increment_compile_warnings_counter',
 	'$lgt_warning_context'(Path, Lines, Type, Entity),
@@ -8806,18 +8814,15 @@ current_logtalk_flag(Flag, Value) :-
 % translate the head of a clause of a user defined predicate
 
 '$lgt_tr_head'(Head, THead, Ctx) :-
-	(	'$lgt_pp_defines_predicate_'(Head, ExCtx, THead, _) ->
-		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx)
-	;	% first clause for this predicate
-		'$lgt_comp_ctx_head'(Ctx, Head),
-		functor(Head, Functor, Arity),
-		(	'$lgt_pp_dynamic_'(Functor, Arity),
-			\+ '$lgt_pp_public_'(Functor, Arity),
-			\+ '$lgt_pp_protected_'(Functor, Arity),
-			\+ '$lgt_pp_private_'(Functor, Arity) ->
-			'$lgt_add_ddef_clause'(Head, Functor, Arity, THead, Ctx)
-		;	'$lgt_add_def_clause'(Head, Functor, Arity, THead, Ctx)
-		)
+	% first clause for this predicate
+	'$lgt_comp_ctx_head'(Ctx, Head),
+	functor(Head, Functor, Arity),
+	(	'$lgt_pp_dynamic_'(Functor, Arity),
+		\+ '$lgt_pp_public_'(Functor, Arity),
+		\+ '$lgt_pp_protected_'(Functor, Arity),
+		\+ '$lgt_pp_private_'(Functor, Arity) ->
+		'$lgt_add_ddef_clause'(Head, Functor, Arity, THead, Ctx)
+	;	'$lgt_add_def_clause'(Head, Functor, Arity, THead, Ctx)
 	).
 
 
@@ -12600,7 +12605,7 @@ current_logtalk_flag(Flag, Value) :-
 		)
 	;	true
 	),
-	'$lgt_remember_predicate'(HeadTemplate, Functor, Arity, ExCtxTemplate, THeadTemplate, Ctx),
+	'$lgt_remember_defined_predicate'(HeadTemplate, Functor, Arity, ExCtxTemplate, THeadTemplate, Ctx),
 	Head = HeadTemplate,
 	ExCtx = ExCtxTemplate,
 	THead = THeadTemplate.
@@ -12630,7 +12635,7 @@ current_logtalk_flag(Flag, Value) :-
 		)
 	;	true
 	),
-	'$lgt_remember_predicate'(HeadTemplate, Functor, Arity, ExCtxTemplate, THeadTemplate, Ctx),
+	'$lgt_remember_defined_predicate'(HeadTemplate, Functor, Arity, ExCtxTemplate, THeadTemplate, Ctx),
 	Head = HeadTemplate,
 	ExCtx = ExCtxTemplate,
 	THead = THeadTemplate.
@@ -12662,7 +12667,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_remember_predicate'(@callable, +atom, +integer, +execution_context, @callable, +compilation_context)
+% '$lgt_remember_defined_predicate'(@callable, +atom, +integer, +execution_context, @callable, +compilation_context)
 %
 % it's necessary to remember which predicates are defined in order to deal with
 % redefinition of built-in predicates, detect missing predicate directives, and
@@ -12671,7 +12676,7 @@ current_logtalk_flag(Flag, Value) :-
 % the check for discontiguous predicates is not performed when compiling clauses
 % for auxiliary predicates (using the logtalk::compile_aux_clauses/1 hook predicate)
 
-'$lgt_remember_predicate'(Head, Functor, Arity, ExCtx, THead, Ctx) :-
+'$lgt_remember_defined_predicate'(Head, Functor, Arity, ExCtx, THead, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, Mode),
 	(	'$lgt_pp_defines_predicate_'(Head, _, _, _) ->
 		% not the first clause for the predicate
@@ -14520,6 +14525,7 @@ current_logtalk_flag(Flag, Value) :-
 	\+ '$lgt_pp_public_'(Functor, Arity),
 	\+ '$lgt_pp_protected_'(Functor, Arity),
 	\+ '$lgt_pp_private_'(Functor, Arity),
+	% misspelt non-terminal calls are found and reported separately
 	Arity2 is Arity - 2,
 	\+ '$lgt_pp_calls_non_terminal_'(Functor, Arity2, _).
 
