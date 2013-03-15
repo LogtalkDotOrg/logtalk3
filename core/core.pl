@@ -12563,20 +12563,14 @@ current_logtalk_flag(Flag, Value) :-
 % adds a "def clause" for predicates specified in uses/2 directives
 % when static binding is possible
 
-'$lgt_add_uses_def_clause'(Pred, This, TPred) :-
+'$lgt_add_uses_def_clause'(Head, This, THead) :-
 	'$lgt_exec_ctx_this'(ExCtx, This),
 	(	'$lgt_pp_object_'(_, _, _, Def, _, _, _, _, _, _, _) ->
 		true
 	;	'$lgt_pp_category_'(_, _, _, Def, _, _)
 	),
-	functor(Clause, Def, 3),
-	arg(1, Clause, Pred),
-	arg(2, Clause, ExCtx),
-	arg(3, Clause, TPred),
-	(	'$lgt_pp_def_'(Clause) ->
-		true
-	;	assertz('$lgt_pp_def_'(Clause))
-	).
+	Clause =.. [Def, Head, ExCtx, THead],
+	assertz('$lgt_pp_def_'(Clause)).
 
 
 
