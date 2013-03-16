@@ -8591,10 +8591,12 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_must_be'(callable, Head).
 
 
-% not the first clause for this predicate
+% not the first clause for this predicate (but this optimization
+% doesn't allow us to bypass the safety check for meta-predicates)
 
 '$lgt_tr_head'(Head, THead, Ctx) :-
 	'$lgt_pp_defines_predicate_'(Head, ExCtx, THead, _),
+	\+ '$lgt_pp_meta_predicate_'(Head, _),
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
 
