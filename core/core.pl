@@ -222,9 +222,9 @@
 :- dynamic('$lgt_pp_final_ddef_'/1).						% '$lgt_pp_final_ddef_'(Clause)
 :- dynamic('$lgt_pp_super_'/1).								% '$lgt_pp_super_'(Clause)
 
-:- dynamic('$lgt_pp_synchronized_'/2).						% '$lgt_pp_synchronized_'(Pred, Mutex)
+:- dynamic('$lgt_pp_synchronized_'/2).						% '$lgt_pp_synchronized_'(Head, Mutex)
 :- dynamic('$lgt_pp_predicate_mutex_counter_'/1).			% '$lgt_pp_predicate_mutex_counter_'(Count)
-:- dynamic('$lgt_pp_dynamic_'/2).							% '$lgt_pp_dynamic_'(Functor, Arity)
+:- dynamic('$lgt_pp_dynamic_'/1).							% '$lgt_pp_dynamic_'(Head)
 :- dynamic('$lgt_pp_discontiguous_'/2).						% '$lgt_pp_discontiguous_'(Functor, Arity)
 :- dynamic('$lgt_pp_mode_'/2).								% '$lgt_pp_mode_'(Mode, Determinism)
 :- dynamic('$lgt_pp_public_'/2).							% '$lgt_pp_public_'(Functor, Arity)
@@ -295,7 +295,7 @@
 :- dynamic('$lgt_pp_calls_predicate_'/5).					% '$lgt_pp_calls_predicate_'(Functor, Arity, TFunctor, TArity, Lines)
 :- dynamic('$lgt_pp_non_portable_predicate_'/3).			% '$lgt_pp_non_portable_predicate_'(Functor, Arity, Lines)
 :- dynamic('$lgt_pp_non_portable_function_'/3).				% '$lgt_pp_non_portable_function_'(Functor, Arity, Lines)
-:- dynamic('$lgt_pp_missing_dynamic_directive_'/3).			% '$lgt_pp_missing_dynamic_directive_'(Functor, Arity, Lines)
+:- dynamic('$lgt_pp_missing_dynamic_directive_'/2).			% '$lgt_pp_missing_dynamic_directive_'(Head, Lines)
 :- dynamic('$lgt_pp_missing_discontiguous_directive_'/3).	% '$lgt_pp_missing_discontiguous_directive_'(Functor, Arity, Lines)
 :- dynamic('$lgt_pp_previous_predicate_'/2).				% '$lgt_pp_previous_predicate_'(Functor, Arity)
 
@@ -5731,7 +5731,7 @@ current_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_pp_public_'(_, _)),
 	retractall('$lgt_pp_protected_'(_, _)),
 	retractall('$lgt_pp_private_'(_, _)),
-	retractall('$lgt_pp_dynamic_'(_, _)),
+	retractall('$lgt_pp_dynamic_'(_)),
 	retractall('$lgt_pp_discontiguous_'(_, _)),
 	retractall('$lgt_pp_multifile_'(_, _, _)),
 	retractall('$lgt_pp_coinductive_'(_, _, _, _, _)),
@@ -5765,7 +5765,7 @@ current_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_pp_calls_predicate_'(_, _, _, _, _)),
 	retractall('$lgt_pp_non_portable_predicate_'(_, _, _)),
 	retractall('$lgt_pp_non_portable_function_'(_, _, _)),
-	retractall('$lgt_pp_missing_dynamic_directive_'(_, _, _)),
+	retractall('$lgt_pp_missing_dynamic_directive_'(_, _)),
 	retractall('$lgt_pp_missing_discontiguous_directive_'(_, _, _)),
 	retractall('$lgt_pp_previous_predicate_'(_, _)),
 	retractall('$lgt_pp_defines_non_terminal_'(_, _)),
@@ -7052,25 +7052,25 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_synchronized_directive_resource'(Pred, Mutex) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
-	(	'$lgt_pp_dynamic_'(Functor, Arity) ->
+	functor(Head, Functor, Arity),
+	(	'$lgt_pp_dynamic_'(Head) ->
 		throw(permission_error(modify, dynamic_predicate, Functor/Arity))
 	;	'$lgt_pp_calls_predicate_'(Functor, Arity, _, _, _) ->
 		throw(permission_error(modify, predicate_interpretation, Functor/Arity))
-	;	functor(Head, Functor, Arity),
-		assertz('$lgt_pp_synchronized_'(Head, Mutex))
+	;	assertz('$lgt_pp_synchronized_'(Head, Mutex))
 	).
 
 '$lgt_tr_synchronized_directive_resource'(NonTerminal, Mutex) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, Arity, ExtArity),
 	!,
-	(	'$lgt_pp_dynamic_'(Functor, ExtArity) ->
+	functor(Head, Functor, ExtArity),
+	(	'$lgt_pp_dynamic_'(Head) ->
 		throw(permission_error(modify, dynamic_non_terminal, Functor//Arity))
 	;	'$lgt_pp_calls_non_terminal_'(Functor, Arity, _) ->
 		throw(permission_error(modify, non_terminal_interpretation, Functor//Arity))
 	;	'$lgt_pp_calls_predicate_'(Functor, ExtArity, _, _, _) ->
 		throw(permission_error(modify, non_terminal_interpretation, Functor//Arity))
-	;	functor(Head, Functor, ExtArity),
-		assertz('$lgt_pp_synchronized_'(Head, Mutex))
+	;	assertz('$lgt_pp_synchronized_'(Head, Mutex))
 	).
 
 '$lgt_tr_synchronized_directive_resource'(Resource, _) :-
@@ -7261,21 +7261,21 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_dynamic_directive_resource'(Pred) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
-	(	functor(Head, Functor, Arity),
-		'$lgt_pp_synchronized_'(Head, _) ->
+	functor(Head, Functor, Arity),
+	(	'$lgt_pp_synchronized_'(Head, _) ->
 		throw(permission_error(modify, synchronized_predicate, Functor/Arity))
-	;	assertz('$lgt_pp_dynamic_'(Functor, Arity))
+	;	assertz('$lgt_pp_dynamic_'(Head))
 	).
 
 '$lgt_tr_dynamic_directive_resource'(NonTerminal) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, Arity, ExtArity),
 	!,
-	(	functor(Head, Functor, ExtArity),
-		'$lgt_pp_synchronized_'(Head, _) ->
+	functor(Head, Functor, ExtArity),
+	(	'$lgt_pp_synchronized_'(Head, _) ->
 		throw(permission_error(modify, synchronized_non_terminal, Functor//Arity))
 	;	'$lgt_pp_calls_non_terminal_'(Functor, Arity, _) ->
 		throw(permission_error(modify, predicate_interpretation, Functor//Arity))
-	;	assertz('$lgt_pp_dynamic_'(Functor, ExtArity))
+	;	assertz('$lgt_pp_dynamic_'(Head))
 	).
 
 '$lgt_tr_dynamic_directive_resource'(Resource) :-
@@ -8384,6 +8384,8 @@ current_logtalk_flag(Flag, Value) :-
 	functor(Head, Functor, Arity),
 	throw(permission_error(define, predicate, Functor/Arity)).
 
+% rules
+
 '$lgt_tr_clause'((Annotation:-Body), TClause, DClause, Ctx) :-
 	'$lgt_value_annotation'(Annotation, Functor, Order, Value, Head, _),
 	!,
@@ -8404,8 +8406,7 @@ current_logtalk_flag(Flag, Value) :-
 	DClause = (DAnnotation :- DBody).
 
 '$lgt_tr_clause'((Head:-Body), (THead:-'$lgt_nop'(Body), SBody), (THead:-'$lgt_nop'(Body),'$lgt_debug'(rule(Entity, Head, N), ExCtx),DBody), Ctx) :-
-	functor(Head, Functor, Arity),
-	'$lgt_pp_dynamic_'(Functor, Arity),
+	'$lgt_pp_dynamic_'(Head),
 	!,
 	'$lgt_pp_entity'(_, Entity, _),
 	'$lgt_head_meta_variables'(Head, MetaVars),
@@ -8436,6 +8437,8 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	'$lgt_clause_number'(Head, N),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
+
+% facts
 
 '$lgt_tr_clause'(Annotation, TFact, DFact, Ctx) :-
 	'$lgt_value_annotation'(Annotation, Functor, Order, Value, Body, Head),
@@ -8600,8 +8603,8 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_head'(Head, _, _) :-
 	'$lgt_pp_category_'(_, _, _, _, _, _),
+	'$lgt_pp_dynamic_'(Head),
 	functor(Head, Functor, Arity),
-	'$lgt_pp_dynamic_'(Functor, Arity),
 	throw(permission_error(define, dynamic_predicate, Functor/Arity)).
 
 
@@ -8830,7 +8833,7 @@ current_logtalk_flag(Flag, Value) :-
 	% first clause for this predicate
 	'$lgt_comp_ctx_head'(Ctx, Head),
 	functor(Head, Functor, Arity),
-	(	'$lgt_pp_dynamic_'(Functor, Arity),
+	(	'$lgt_pp_dynamic_'(Head),
 		\+ '$lgt_pp_public_'(Functor, Arity),
 		\+ '$lgt_pp_protected_'(Functor, Arity),
 		\+ '$lgt_pp_private_'(Functor, Arity) ->
@@ -10579,8 +10582,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
 	'$lgt_pp_category_'(_, _, _, _, _, _),
-	functor(Pred, Functor, Arity),
-	'$lgt_pp_dynamic_'(Functor, Arity),
+	'$lgt_pp_dynamic_'(Pred),
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	TPred = '$lgt_call_in_this'(Pred, ExCtx).
@@ -10962,21 +10964,20 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_valid_predicate_indicator'(Term, Functor, Arity),
 	% predicate indicator
 	!,
-	\+ '$lgt_pp_dynamic_'(Functor, Arity),
+	functor(Head, Functor, Arity),
+	\+ '$lgt_pp_dynamic_'(Head),
 	% dynamic directive not (yet) found
-	\+ '$lgt_pp_missing_dynamic_directive_'(Functor, Arity, _),
+	\+ '$lgt_pp_missing_dynamic_directive_'(Head, _),
 	'$lgt_current_line_numbers'(Lines),
-	assertz('$lgt_pp_missing_dynamic_directive_'(Functor, Arity, Lines)).
+	assertz('$lgt_pp_missing_dynamic_directive_'(Head, Lines)).
 
 '$lgt_check_dynamic_directive'(Head) :-
 	% clause fact
-	nonvar(Head),
-	functor(Head, Functor, Arity),
-	\+ '$lgt_pp_dynamic_'(Functor, Arity),
+	\+ '$lgt_pp_dynamic_'(Head),
 	% dynamic directive not (yet) found
-	\+ '$lgt_pp_missing_dynamic_directive_'(Functor, Arity, _),
+	\+ '$lgt_pp_missing_dynamic_directive_'(Head, _),
 	'$lgt_current_line_numbers'(Lines),
-	assertz('$lgt_pp_missing_dynamic_directive_'(Functor, Arity, Lines)).
+	assertz('$lgt_pp_missing_dynamic_directive_'(Head, Lines)).
 
 
 
@@ -11011,10 +11012,10 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	callable(Head),
 	% instantiated fact
-	functor(Head, Functor, Arity),
 	% a dynamic directive must be present
-	'$lgt_pp_dynamic_'(Functor, Arity),
+	'$lgt_pp_dynamic_'(Head),
 	% a scope directive must be present
+	functor(Head, Functor, Arity),
 	(	'$lgt_pp_public_'(Functor, Arity)
 	;	'$lgt_pp_protected_'(Functor, Arity)
 	;	'$lgt_pp_private_'(Functor, Arity)
@@ -12864,7 +12865,8 @@ current_logtalk_flag(Flag, Value) :-
 	;	true
 	),
 	assertz('$lgt_pp_directive_'(dynamic(DDef/3))),
-	'$lgt_pp_dynamic_'(Functor, Arity),
+	'$lgt_pp_dynamic_'(Head),
+		functor(Head, Functor, Arity),
 		'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(dynamic(TFunctor/TArity))),
 	fail.
@@ -12954,7 +12956,7 @@ current_logtalk_flag(Flag, Value) :-
 		Synchronized = 4				% 0b00000100
 	;	Synchronized = 0
 	),
-	(	(Mode == (dynamic); '$lgt_pp_dynamic_'(Functor, Arity)) ->
+	(	(Mode == (dynamic); '$lgt_pp_dynamic_'(Pred)) ->
 		Dynamic = 2						% 0b00000010
 	;	Dynamic = 0
 	),
@@ -12982,10 +12984,10 @@ current_logtalk_flag(Flag, Value) :-
 	;	'$lgt_pp_private_'(Functor, Arity)
 	),
 	\+ '$lgt_pp_dynamic_',
-	\+ '$lgt_pp_dynamic_'(Functor, Arity),
-	\+ '$lgt_pp_defines_annotated_predicate_'(Functor, Arity),
 	functor(Head, Functor, Arity),
+	\+ '$lgt_pp_dynamic_'(Head),
 	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _),
+	\+ '$lgt_pp_defines_annotated_predicate_'(Functor, Arity),
 	% declared, static, but undefined predicate;
 	% local calls must fail (as per closed-world assumption)
 	'$lgt_add_def_fail_clause'(Head, Functor, Arity),
@@ -12995,11 +12997,11 @@ current_logtalk_flag(Flag, Value) :-
 	% categories cannot contain clauses for dynamic predicates;
 	% thus, in this case, we look only into objects
 	'$lgt_pp_object_'(_, Prefix, _, _, _, _, _, _, _, _, _),
-	'$lgt_pp_dynamic_'(Functor, Arity),
-	functor(Head, Functor, Arity),
+	'$lgt_pp_dynamic_'(Head),
 	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _),
 	% dynamic predicate with no initial set of clauses
 	'$lgt_comp_ctx_prefix'(Ctx, Prefix),
+	functor(Head, Functor, Arity),
 	(	\+ '$lgt_pp_public_'(Functor, Arity),
 		\+ '$lgt_pp_protected_'(Functor, Arity),
 		\+ '$lgt_pp_private_'(Functor, Arity) ->
@@ -14408,7 +14410,7 @@ current_logtalk_flag(Flag, Value) :-
 	\+ '$lgt_pp_defines_annotation_'(Functor, Arity),
 	\+ '$lgt_pp_defines_annotated_predicate_'(Functor, Arity),
 	% predicate not defined in object/category
-	\+ '$lgt_pp_dynamic_'(Functor, Arity),
+	\+ '$lgt_pp_dynamic_'(Head),
 	% predicate not declared dynamic in object/category
 	\+ '$lgt_pp_multifile_'(Functor, Arity, _),
 	% predicate not declared multifile in object/category
@@ -14430,7 +14432,7 @@ current_logtalk_flag(Flag, Value) :-
 	% no corresponding predicate is defined
 	functor(Head, Functor, ExtArity),
 	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _),
-	\+ '$lgt_pp_dynamic_'(Functor, ExtArity),
+	\+ '$lgt_pp_dynamic_'(Head),
 	% no dynamic directive for the corresponding predicate
 	\+ '$lgt_pp_multifile_'(Functor, ExtArity, _),
 	% predicate not declared multifile in object/category
@@ -14467,9 +14469,10 @@ current_logtalk_flag(Flag, Value) :-
 % reports missing dynamic/1 directives
 
 '$lgt_report_missing_directives'(Path, Type, Entity) :-
-	'$lgt_pp_missing_dynamic_directive_'(Functor, Arity, Lines),
+	'$lgt_pp_missing_dynamic_directive_'(Head, Lines),
 	% detected dynamic predicate but check for out-of-place dynamic/1 directive
-	\+ '$lgt_pp_dynamic_'(Functor, Arity),
+	\+ '$lgt_pp_dynamic_'(Head),
+	functor(Head, Functor, Arity),
 	'$lgt_increment_compile_warnings_counter',
 	'$lgt_print_message'(warning(missing), core, missing_predicate_directive(Path, Lines, Type, Entity, (dynamic), Functor/Arity)),
 	fail.
@@ -14530,7 +14533,7 @@ current_logtalk_flag(Flag, Value) :-
 	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _),
 	\+ '$lgt_pp_defines_annotation_'(Functor, Arity),
 	\+ '$lgt_pp_defines_annotated_predicate_'(Functor, Arity),
-	\+ '$lgt_pp_dynamic_'(Functor, Arity),
+	\+ '$lgt_pp_dynamic_'(Head),
 	\+ '$lgt_pp_public_'(Functor, Arity),
 	\+ '$lgt_pp_protected_'(Functor, Arity),
 	\+ '$lgt_pp_private_'(Functor, Arity),
@@ -14555,7 +14558,7 @@ current_logtalk_flag(Flag, Value) :-
 	ExtArity is Arity + 2,
 	functor(Head, Functor, ExtArity),
 	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _),
-	\+ '$lgt_pp_dynamic_'(Functor, ExtArity),
+	\+ '$lgt_pp_dynamic_'(Head),
 	\+ '$lgt_pp_public_'(Functor, ExtArity),
 	\+ '$lgt_pp_protected_'(Functor, ExtArity),
 	\+ '$lgt_pp_private_'(Functor, ExtArity).
