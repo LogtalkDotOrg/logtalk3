@@ -470,8 +470,7 @@ Obj<<Goal :-
 	functor(TGoal, TFunctor, TArity),
 	'$lgt_decompile_predicate_indicators'(TFunctor/TArity, _, _, Functor/Arity),
 	functor(Goal, Functor, Arity),
-	'$lgt_unify_head_thead_args'(Arity, Goal, TGoal),
-	arg(TArity, TGoal, ExCtx),
+	'$lgt_unify_head_thead_arguments'(Goal, TGoal, ExCtx),
 	'$lgt_exec_ctx'(ExCtx, _, _, Self, _, _),
 	(	Self == user ->
 		throw(error(existence_error(goal_thread, Goal), logtalk(Goal, Sender)))
@@ -2803,8 +2802,7 @@ current_logtalk_flag(Flag, Value) :-
 		functor(GHead, Functor, Arity),
 		'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		functor(THead, TFunctor, TArity),
-		'$lgt_unify_head_thead_args'(Arity, GHead, THead),
-		arg(TArity, THead, ExCtx),
+		'$lgt_unify_head_thead_arguments'(GHead, THead, ExCtx),
 		DDefClause =.. [DDef, GHead, ExCtx, THead],
 		assertz(DDefClause),
 		'$lgt_clean_lookup_caches'(GHead),
@@ -3132,9 +3130,9 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_add_db_lookup_cache_entry'(Obj, Head, Scope, Type, Sender, THead) :-
 	'$lgt_term_template'(Obj, GObj),
-	'$lgt_term_template'(Head, GHead, Arity),
+	'$lgt_term_template'(Head, GHead),
 	'$lgt_term_template'(THead, GTHead),
-	'$lgt_unify_head_thead_args'(Arity, GHead, GTHead),
+	'$lgt_unify_head_thead_arguments'(GHead, GTHead),
 	(	(Scope = p(p(p)), Type == (dynamic)) ->
 		asserta('$lgt_db_lookup_cache_'(GObj, GHead, _, GTHead, true))
 	;	'$lgt_term_template'(Sender, GSender),
@@ -3149,9 +3147,9 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_add_db_lookup_cache_entry'(Obj, Head, SCtn, Scope, Type, Sender, THead, DDef, NeedsUpdate) :-
 	'$lgt_term_template'(Obj, GObj),
-	'$lgt_term_template'(Head, GHead, Arity),
+	'$lgt_term_template'(Head, GHead),
 	'$lgt_term_template'(THead, GTHead),
-	'$lgt_unify_head_thead_args'(Arity, GHead, GTHead),
+	'$lgt_unify_head_thead_arguments'(GHead, GTHead),
 	(	NeedsUpdate == true, Sender \= SCtn ->
 		'$lgt_term_template'(Head, UHead),
 		'$lgt_term_template'(THead, UTHead),
@@ -3172,18 +3170,33 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_unify_head_thead_args'(+integer, +callable, +callable)
+% '$lgt_unify_head_thead_arguments'(+callable, +callable)
+% '$lgt_unify_head_thead_arguments'(+callable, +callable, @term)
 %
 % translated clause heads use an extra argument for passing the execution context
 
-'$lgt_unify_head_thead_args'(0, _, _) :-
-	!.
+'$lgt_unify_head_thead_arguments'(Head, THead) :-
+	Head =.. [_| Args],
+	THead =.. [_| TArgs],
+	'$lgt_unify_arguments'(Args, TArgs).
 
-'$lgt_unify_head_thead_args'(N, Head, THead) :-
-	arg(N, Head, Arg),
-	arg(N, THead, Arg),
-	M is N - 1,
-	'$lgt_unify_head_thead_args'(M, Head, THead).
+
+'$lgt_unify_head_thead_arguments'(Head, THead, ExCtx) :-
+	Head =.. [_| Args],
+	THead =.. [_| TArgs],
+	'$lgt_unify_arguments'(Args, TArgs, ExCtx).
+
+
+'$lgt_unify_arguments'([], [_]).
+
+'$lgt_unify_arguments'([Arg| Args], [Arg| TArgs]) :-
+	'$lgt_unify_arguments'(Args, TArgs).
+
+
+'$lgt_unify_arguments'([], [ExCtx], ExCtx).
+
+'$lgt_unify_arguments'([Arg| Args], [Arg| TArgs], ExCtx) :-
+	'$lgt_unify_arguments'(Args, TArgs, ExCtx).
 
 
 
@@ -7569,14 +7582,14 @@ current_logtalk_flag(Flag, Value) :-
 	% construct functor for debugging calls to the auxiliary predicate
 	atom_concat(Functor, '__coinduction_preflight', DFunctor),
 	functor(DHead, DFunctor, Arity),
-	'$lgt_unify_head_thead_args'(Arity, Head, DHead),
+	'$lgt_unify_head_thead_arguments'(Head, DHead),
 	'$lgt_pp_entity'(_, Entity, Prefix),
 	'$lgt_construct_predicate_indicator'(Prefix, CFunctor/Arity, TCFunctor/TCArity),
 	functor(TCHead, TCFunctor, TCArity),
-	'$lgt_unify_head_thead_args'(Arity, Head, TCHead),
+	'$lgt_unify_head_thead_arguments'(Head, TCHead),
 	'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	functor(THead, TFunctor, TArity),
-	'$lgt_unify_head_thead_args'(Arity, Head, THead),
+	'$lgt_unify_head_thead_arguments'(Head, THead),
 	assertz('$lgt_pp_coinductive_'(Head, TestHead, TCHead, THead, DHead)),
 	assertz('$lgt_pp_predicate_property_'(Entity, Functor/Arity, coinductive(Template))),
 	'$lgt_tr_coinductive_directive'(Preds, Ctx).
@@ -8780,9 +8793,8 @@ current_logtalk_flag(Flag, Value) :-
 	;	throw(existence_error(directive, multifile(Other::Head)))
 	),
 	functor(THead, TFunctor, TArity),
-	'$lgt_unify_head_thead_args'(Arity, Head, THead),
+	'$lgt_unify_head_thead_arguments'(Head, THead, ExCtx),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	arg(TArity, THead, ExCtx),
 	'$lgt_comp_ctx_head'(Ctx, Other::Head).
 
 % translate the head of a clause of a module predicate (which we assume declared multifile)
@@ -10633,9 +10645,8 @@ current_logtalk_flag(Flag, Value) :-
 		atom_concat(TFunctor, '__sync', STFunctor)
 	),
 	functor(TPred, STFunctor, TArity),
-	'$lgt_unify_head_thead_args'(Arity, Pred, TPred),
+	'$lgt_unify_head_thead_arguments'(Pred, TPred, ExCtx),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	arg(TArity, TPred, ExCtx),
 	(	'$lgt_comp_ctx_mode'(Ctx, runtime) ->
 		true
 	;	'$lgt_pp_calls_predicate_'(Functor, Arity, _, _, _) ->
@@ -10649,9 +10660,8 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_comp_ctx_prefix'(Ctx, Prefix),
 	'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	functor(TPred, TFunctor, TArity),
-	'$lgt_unify_head_thead_args'(Arity, Pred, TPred),
+	'$lgt_unify_head_thead_arguments'(Pred, TPred, ExCtx),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	arg(TArity, TPred, ExCtx),
 	(	'$lgt_comp_ctx_mode'(Ctx, runtime) ->
 		true
 	;	'$lgt_pp_calls_predicate_'(Functor, Arity, _, _, _) ->
@@ -11013,7 +11023,7 @@ current_logtalk_flag(Flag, Value) :-
 	% compile the fact
 	'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	functor(TPred, TFunctor, TArity),
-	'$lgt_unify_head_thead_args'(Arity, Head, TPred).
+	'$lgt_unify_head_thead_arguments'(Head, TPred).
 
 
 
@@ -12589,8 +12599,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, Prefix, _, _, ExCtx, _, _),
 	'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	functor(THeadTemplate, TFunctor, TArity),
-	'$lgt_unify_head_thead_args'(Arity, HeadTemplate, THeadTemplate),
-	arg(TArity, THeadTemplate, ExCtxTemplate),
+	'$lgt_unify_head_thead_arguments'(HeadTemplate, THeadTemplate, ExCtxTemplate),
 	(	'$lgt_pp_object_'(_, _, _, Def, _, _, _, _, _, _, _) ->
 		true
 	;	'$lgt_pp_category_'(_, _, _, Def, _, _)
@@ -12622,8 +12631,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, Prefix, _, _, ExCtx, _, _),
 	'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	functor(THeadTemplate, TFunctor, TArity),
-	'$lgt_unify_head_thead_args'(Arity, HeadTemplate, THeadTemplate),
-	arg(TArity, THeadTemplate, ExCtxTemplate),
+	'$lgt_unify_head_thead_arguments'(HeadTemplate, THeadTemplate, ExCtxTemplate),
 	once('$lgt_pp_object_'(_, _, _, _, _, _, _, _, DDef, _, _)),
 	Clause =.. [DDef, HeadTemplate, ExCtxTemplate, THeadTemplate],
 	assertz('$lgt_pp_ddef_'(Clause)),
@@ -15219,8 +15227,7 @@ current_logtalk_flag(Flag, Value) :-
 	functor(Head, Functor, Arity),
 	'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	functor(THead, TFunctor, TArity),
-	'$lgt_unify_head_thead_args'(Arity, Head, THead),
-	arg(TArity, THead, Ctx).
+	'$lgt_unify_head_thead_arguments'(Head, THead, Ctx).
 
 
 
@@ -15283,7 +15290,7 @@ current_logtalk_flag(Flag, Value) :-
 	Arity is TArity - 1,
 	Arity >= 0,
 	functor(Head, Functor, Arity),
-	'$lgt_unify_head_thead_args'(Arity, Head, THead),
+	'$lgt_unify_head_thead_arguments'(Head, THead),
 	!.
 
 
