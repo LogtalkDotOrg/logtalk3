@@ -10274,8 +10274,7 @@ current_logtalk_flag(Flag, Value) :-
 % must check the number of arguments for shared closures
 
 '$lgt_tr_body'(Pred, _, _, Ctx) :-
-	'$lgt_comp_ctx_meta_vars'(Ctx, MetaVars),
-	MetaVars \= [],
+	'$lgt_comp_ctx_meta_vars'(Ctx, [_| _]),
 	(	'$lgt_pp_meta_predicate_'(Pred, Meta) ->
 		% user-defined meta-predicate
 		true
