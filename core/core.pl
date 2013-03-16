@@ -7582,7 +7582,8 @@ current_logtalk_flag(Flag, Value) :-
 	% construct functor for debugging calls to the auxiliary predicate
 	atom_concat(Functor, '__coinduction_preflight', DFunctor),
 	functor(DHead, DFunctor, Arity),
-	'$lgt_unify_head_thead_arguments'(Head, DHead),
+	Head =.. [_| Args],
+	DHead =.. [_| Args],
 	'$lgt_pp_entity'(_, Entity, Prefix),
 	'$lgt_construct_predicate_indicator'(Prefix, CFunctor/Arity, TCFunctor/TCArity),
 	functor(TCHead, TCFunctor, TCArity),
