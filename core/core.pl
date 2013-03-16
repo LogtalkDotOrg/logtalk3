@@ -7039,7 +7039,6 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_synchronized_directive_resource'(Pred, Mutex) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
-	'$lgt_check_for_directive_after_call'(Functor/Arity),
 	(	'$lgt_pp_dynamic_'(Functor, Arity) ->
 		throw(permission_error(modify, dynamic_predicate, Functor/Arity))
 	;	'$lgt_pp_calls_predicate_'(Functor, Arity, _, _, _) ->
@@ -7051,10 +7050,11 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_synchronized_directive_resource'(NonTerminal, Mutex) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, Arity, ExtArity),
 	!,
-	'$lgt_check_for_directive_after_call'(Functor/ExtArity),
 	(	'$lgt_pp_dynamic_'(Functor, ExtArity) ->
 		throw(permission_error(modify, dynamic_non_terminal, Functor//Arity))
 	;	'$lgt_pp_calls_non_terminal_'(Functor, Arity, _) ->
+		throw(permission_error(modify, non_terminal_interpretation, Functor//Arity))
+	;	'$lgt_pp_calls_predicate_'(Functor, ExtArity, _, _, _) ->
 		throw(permission_error(modify, non_terminal_interpretation, Functor//Arity))
 	;	functor(Head, Functor, ExtArity),
 		assertz('$lgt_pp_synchronized_'(Head, Mutex))
