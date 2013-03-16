@@ -8310,9 +8310,9 @@ current_logtalk_flag(Flag, Value) :-
 	(	'$lgt_pp_object_'(Entity, Prefix, _, _, _, _, _, _, _, _, _) ->
 		% entity may be a parametric object; we require "this" for inline compilation of parameter/2
 		'$lgt_comp_ctx_this'(NewCtx, Entity)
-	;	'$lgt_pp_category_'(Entity, Prefix, _, _, _, _) ->
+	;	'$lgt_pp_category_'(_, Prefix, _, _, _, _) ->
 		true
-	;	'$lgt_pp_protocol_'(Entity, Prefix, _, _, _)
+	;	'$lgt_pp_protocol_'(_, Prefix, _, _, _)
 	),
 	% we're translating an entity clause 
 	'$lgt_comp_ctx_prefix'(NewCtx, Prefix),
