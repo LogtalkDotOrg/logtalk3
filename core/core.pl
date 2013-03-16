@@ -293,7 +293,7 @@
 :- dynamic('$lgt_pp_defines_annotation_'/2).				% '$lgt_pp_defines_annotation_'(Functor, Arity)
 :- dynamic('$lgt_pp_defines_annotated_predicate_'/2).		% '$lgt_pp_defines_annotated_predicate_'(Functor, Arity)
 :- dynamic('$lgt_pp_calls_predicate_'/5).					% '$lgt_pp_calls_predicate_'(Functor, Arity, TFunctor, TArity, Lines)
-:- dynamic('$lgt_pp_non_portable_predicate_'/3).			% '$lgt_pp_non_portable_predicate_'(Functor, Arity, Lines)
+:- dynamic('$lgt_pp_non_portable_predicate_'/2).			% '$lgt_pp_non_portable_predicate_'(Head, Lines)
 :- dynamic('$lgt_pp_non_portable_function_'/3).				% '$lgt_pp_non_portable_function_'(Functor, Arity, Lines)
 :- dynamic('$lgt_pp_missing_dynamic_directive_'/2).			% '$lgt_pp_missing_dynamic_directive_'(Head, Lines)
 :- dynamic('$lgt_pp_missing_discontiguous_directive_'/3).	% '$lgt_pp_missing_discontiguous_directive_'(Functor, Arity, Lines)
@@ -5763,7 +5763,7 @@ current_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_pp_defines_annotation_'(_, _)),
 	retractall('$lgt_pp_defines_annotated_predicate_'(_, _)),
 	retractall('$lgt_pp_calls_predicate_'(_, _, _, _, _)),
-	retractall('$lgt_pp_non_portable_predicate_'(_, _, _)),
+	retractall('$lgt_pp_non_portable_predicate_'(_, _)),
 	retractall('$lgt_pp_non_portable_function_'(_, _, _)),
 	retractall('$lgt_pp_missing_dynamic_directive_'(_, _)),
 	retractall('$lgt_pp_missing_discontiguous_directive_'(_, _, _)),
@@ -9686,10 +9686,10 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_body'(assert(Clause), TCond, DCond, Ctx) :-
 	!,
-	(	'$lgt_pp_non_portable_predicate_'(assert, 1, _) ->
+	(	'$lgt_pp_non_portable_predicate_'(assert(_), _) ->
 		true
 	;	'$lgt_current_line_numbers'(Lines),
-		assertz('$lgt_pp_non_portable_predicate_'(assert, 1, Lines))
+		assertz('$lgt_pp_non_portable_predicate_'(assert(_), Lines))
 	),
 	'$lgt_tr_body'(assertz(Clause), TCond, DCond, Ctx).
 
@@ -10423,8 +10423,7 @@ current_logtalk_flag(Flag, Value) :-
 % remember non-portable Prolog built-in predicate calls
 
 '$lgt_tr_body'(Pred, _, _, Ctx) :-
-	functor(Pred, Functor, Arity),
-	\+ '$lgt_pp_non_portable_predicate_'(Functor, Arity, _),
+	\+ '$lgt_pp_non_portable_predicate_'(Pred, _),
 	% not previously recorded as a non portable call
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 	'$lgt_compiler_flag'(portability, warning),
@@ -10438,8 +10437,9 @@ current_logtalk_flag(Flag, Value) :-
 	\+ '$lgt_pp_private_'(Functor, Arity),
 	\+ '$lgt_pp_redefined_built_in_'(Pred, _, _),
 	% not a redefined Prolog built-in predicate; remember it
+	functor(Head, Functor, Arity),
 	'$lgt_current_line_numbers'(Lines),
-	assertz('$lgt_pp_non_portable_predicate_'(Functor, Arity, Lines)),
+	assertz('$lgt_pp_non_portable_predicate_'(Head, Lines)),
 	fail.
 
 
@@ -12613,7 +12613,7 @@ current_logtalk_flag(Flag, Value) :-
 		(	'$lgt_pp_redefined_built_in_'(HeadTemplate, _, _) ->
 			true
 		;	assertz('$lgt_pp_redefined_built_in_'(HeadTemplate, ExCtxTemplate, THeadTemplate)),
-			retractall('$lgt_pp_non_portable_predicate_'(Functor, Arity, _))
+			retractall('$lgt_pp_non_portable_predicate_'(HeadTemplate, _))
 		)
 	;	true
 	),
@@ -12642,7 +12642,7 @@ current_logtalk_flag(Flag, Value) :-
 		(	'$lgt_pp_redefined_built_in_'(HeadTemplate, _, _) ->
 			true
 		;	assertz('$lgt_pp_redefined_built_in_'(HeadTemplate, ExCtxTemplate, THeadTemplate)),
-			retractall('$lgt_pp_non_portable_predicate_'(Functor, Arity, _))
+			retractall('$lgt_pp_non_portable_predicate_'(HeadTemplate, _))
 		)
 	;	true
 	),
@@ -12671,7 +12671,7 @@ current_logtalk_flag(Flag, Value) :-
 		(	'$lgt_pp_redefined_built_in_'(HeadTemplate, _, _) ->
 			true
 		;	assertz('$lgt_pp_redefined_built_in_'(HeadTemplate, _, fail)),
-			retractall('$lgt_pp_non_portable_predicate_'(Functor, Arity, _))
+			retractall('$lgt_pp_non_portable_predicate_'(HeadTemplate, _))
 		)
 	;	true
 	).
@@ -12701,7 +12701,7 @@ current_logtalk_flag(Flag, Value) :-
 		)
 	;	% first clause for this predicate; remember it
 		assertz('$lgt_pp_defines_predicate_'(Head, ExCtx, THead, Mode)),
-		retractall('$lgt_pp_non_portable_predicate_'(Functor, Arity, _))
+		retractall('$lgt_pp_non_portable_predicate_'(Head, _))
 	),
 	(	Mode == compile(aux) ->
 		true
@@ -14577,7 +14577,8 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_report_non_portable_calls'(Path, Type, Entity) :-
-	'$lgt_pp_non_portable_predicate_'(Functor, Arity, Lines),
+	'$lgt_pp_non_portable_predicate_'(Head, Lines),
+	functor(Head, Functor, Arity),
 	'$lgt_increment_compile_warnings_counter',
 	'$lgt_print_message'(warning(portability), core, non_standard_predicate_call(Path, Lines, Type, Entity, Functor/Arity)),
 	fail.
