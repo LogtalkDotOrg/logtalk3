@@ -294,7 +294,7 @@
 :- dynamic('$lgt_pp_defines_annotated_predicate_'/2).		% '$lgt_pp_defines_annotated_predicate_'(Functor, Arity)
 :- dynamic('$lgt_pp_calls_predicate_'/5).					% '$lgt_pp_calls_predicate_'(Functor, Arity, TFunctor, TArity, Lines)
 :- dynamic('$lgt_pp_non_portable_predicate_'/2).			% '$lgt_pp_non_portable_predicate_'(Head, Lines)
-:- dynamic('$lgt_pp_non_portable_function_'/3).				% '$lgt_pp_non_portable_function_'(Functor, Arity, Lines)
+:- dynamic('$lgt_pp_non_portable_function_'/2).				% '$lgt_pp_non_portable_function_'(Function, Lines)
 :- dynamic('$lgt_pp_missing_dynamic_directive_'/2).			% '$lgt_pp_missing_dynamic_directive_'(Head, Lines)
 :- dynamic('$lgt_pp_missing_discontiguous_directive_'/3).	% '$lgt_pp_missing_discontiguous_directive_'(Functor, Arity, Lines)
 :- dynamic('$lgt_pp_previous_predicate_'/2).				% '$lgt_pp_previous_predicate_'(Functor, Arity)
@@ -5764,7 +5764,7 @@ current_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_pp_defines_annotated_predicate_'(_, _)),
 	retractall('$lgt_pp_calls_predicate_'(_, _, _, _, _)),
 	retractall('$lgt_pp_non_portable_predicate_'(_, _)),
-	retractall('$lgt_pp_non_portable_function_'(_, _, _)),
+	retractall('$lgt_pp_non_portable_function_'(_, _)),
 	retractall('$lgt_pp_missing_dynamic_directive_'(_, _)),
 	retractall('$lgt_pp_missing_discontiguous_directive_'(_, _, _)),
 	retractall('$lgt_pp_previous_predicate_'(_, _)),
@@ -11083,28 +11083,22 @@ current_logtalk_flag(Flag, Value) :-
 % checks an arithmetic expression for calls to non-standard Prolog functions
 
 '$lgt_check_non_portable_functions'(Expression) :-
-	var(Expression),
-	!.
-
-'$lgt_check_non_portable_functions'(Expression) :-
-	number(Expression),
-	!.
-
-'$lgt_check_non_portable_functions'(Expression) :-
-	'$lgt_iso_spec_function'(Expression),
+	compound(Expression),
 	!,
-	Expression =.. [_| Expressions],
-	'$lgt_check_non_portable_function_args'(Expressions).
-
-'$lgt_check_non_portable_functions'(Expression) :-
-	functor(Expression, Functor, Arity),
-	(	'$lgt_pp_non_portable_function_'(Functor, Arity, _) ->
+	(	'$lgt_iso_spec_function'(Expression) ->
 		true
-	;	'$lgt_current_line_numbers'(Lines),
-		assertz('$lgt_pp_non_portable_function_'(Functor, Arity, Lines))
+	;	% non-portable function
+		'$lgt_pp_non_portable_function_'(Expression, _) ->
+		true
+	;	% first occurrence; not yet recorded
+		'$lgt_term_template'(Expression, Template),
+		'$lgt_current_line_numbers'(Lines),
+		assertz('$lgt_pp_non_portable_function_'(Template, Lines))
 	),
 	Expression =.. [_| Expressions],
 	'$lgt_check_non_portable_function_args'(Expressions).
+
+'$lgt_check_non_portable_functions'(_).		% variables and numbers
 
 
 '$lgt_check_non_portable_function_args'([]).
@@ -14578,15 +14572,16 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_report_non_portable_calls'(Path, Type, Entity) :-
 	'$lgt_pp_non_portable_predicate_'(Head, Lines),
-	functor(Head, Functor, Arity),
-	'$lgt_increment_compile_warnings_counter',
-	'$lgt_print_message'(warning(portability), core, non_standard_predicate_call(Path, Lines, Type, Entity, Functor/Arity)),
+		functor(Head, Functor, Arity),
+		'$lgt_increment_compile_warnings_counter',
+		'$lgt_print_message'(warning(portability), core, non_standard_predicate_call(Path, Lines, Type, Entity, Functor/Arity)),
 	fail.
 
 '$lgt_report_non_portable_calls'(Path, Type, Entity) :-
-	'$lgt_pp_non_portable_function_'(Functor, Arity, Lines),
-	'$lgt_increment_compile_warnings_counter',
-	'$lgt_print_message'(warning(portability), core, non_standard_arithmetic_function_call(Path, Lines, Type, Entity, Functor/Arity)),
+	'$lgt_pp_non_portable_function_'(Function, Lines),
+		functor(Function, Functor, Arity),
+		'$lgt_increment_compile_warnings_counter',
+		'$lgt_print_message'(warning(portability), core, non_standard_arithmetic_function_call(Path, Lines, Type, Entity, Functor/Arity)),
 	fail.
 
 '$lgt_report_non_portable_calls'(_, _, _).
