@@ -9677,10 +9677,11 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_comp_ctx_this'(Ctx, This),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_exec_ctx_this'(ExCtx, This),
-	(	'$lgt_runtime_db_pred_ind_checked'(Pred) ->
-		TCond = '$lgt_abolish'(This, Pred, This, p(_))
-	;	'$lgt_must_be'(predicate_indicator, Pred),
+	(	ground(Pred) ->
+		'$lgt_must_be'(predicate_indicator, Pred),
 		TCond = '$lgt_abolish_checked'(This, Pred, This, p(_))
+	;	% partially instantiated predicate indicator; runtime check required
+		TCond = '$lgt_abolish'(This, Pred, This, p(_))
 	),
 	DCond = '$lgt_debug'(goal(abolish(Pred), TCond), ExCtx).
 
@@ -11061,23 +11062,6 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_runtime_db_pred_ind_checked'(@term)
-%
-% true if the argument forces runtime validity check
-
-'$lgt_runtime_db_pred_ind_checked'(Pred) :-
-	var(Pred),
-	!.
-
-'$lgt_runtime_db_pred_ind_checked'(Functor/_) :-
-	var(Functor),
-	!.
-
-'$lgt_runtime_db_pred_ind_checked'(_/Arity) :-
-	var(Arity).
-
-
-
 % '$lgt_check_non_portable_functions'(@term)
 %
 % checks an arithmetic expression for calls to non-standard Prolog functions
@@ -11220,10 +11204,11 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_msg'(abolish(Pred), Obj, TPred, This) :-
 	!,
-	(	'$lgt_runtime_db_pred_ind_checked'(Pred) ->
-		TPred = '$lgt_abolish'(Obj, Pred, This, p(p(p)))
-	;	'$lgt_must_be'(predicate_indicator, Pred),
+	(	ground(Pred) ->
+		'$lgt_must_be'(predicate_indicator, Pred),
 		TPred = '$lgt_abolish_checked'(Obj, Pred, This, p(p(p)))
+	;	% partially instantiated predicate indicator; runtime check required
+		TPred = '$lgt_abolish'(Obj, Pred, This, p(p(p)))	
 	).
 
 '$lgt_tr_msg'(assert(Clause), Obj, TPred, This) :-
@@ -11395,10 +11380,11 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_self_msg'(abolish(Pred), TPred, This, Self) :-
 	!,
-	(	'$lgt_runtime_db_pred_ind_checked'(Pred) ->
-		TPred = '$lgt_abolish'(Self, Pred, This, p(_))
-	;	'$lgt_must_be'(predicate_indicator, Pred),
+	(	ground(Pred) ->
+		'$lgt_must_be'(predicate_indicator, Pred),
 		TPred = '$lgt_abolish_checked'(Self, Pred, This, p(_))
+	;	% partially instantiated predicate indicator; runtime check required
+		TPred = '$lgt_abolish'(Self, Pred, This, p(_))
 	).
 
 '$lgt_tr_self_msg'(assert(Clause), TPred, This, Self) :-
