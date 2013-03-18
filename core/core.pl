@@ -3253,8 +3253,22 @@ current_logtalk_flag(Flag, Value) :-
 	;	'$lgt_term_expansion'(Obj, Term, Expand, Sender, Scope) ->
 		Expansion = Expand
 	;	Term = (_ --> _) ->
-		'$lgt_dcg_rule_to_clause'(Term, Clause),
-		Expansion = Clause
+		% default grammar rule expansion
+		catch(
+			'$lgt_dcg_rule'(Term, Clause),
+			Error,
+			throw(error(Error, logtalk(expand_term(Term,_), Sender)))
+		),
+		(	Clause = (Head :- Body),
+			'$lgt_compiler_flag'(optimize, on) ->
+			'$lgt_simplify_goal'(Body, SBody),
+			(	SBody == true ->
+				Expansion = Head
+			;	Expansion = (Head :- SBody)
+			)
+		;	% fact and/or optimization disabled
+			Expansion = Clause
+		)
 	;	Expansion = Term
 	).
 
@@ -8294,7 +8308,11 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_tr_grammar_rule'(+grammar_rule, +compilation_context)
 
 '$lgt_tr_grammar_rule'(GrammarRule, Ctx) :-
-	'$lgt_dcg_rule_to_clause'(GrammarRule, Clause),
+	catch(
+		'$lgt_dcg_rule'(GrammarRule, Clause),
+		Error,
+		throw(error(Error, grammar_rule(GrammarRule)))
+	),
 	'$lgt_tr_clause'(Clause, Ctx).
 
 
@@ -16532,31 +16550,6 @@ current_logtalk_flag(Flag, Value) :-
 %  DCG rule conversion
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-% '$lgt_dcg_rule_to_clause'(@grammar_rule, -clause)
-%
-% converts a grammar rule into a normal clause
-
-'$lgt_dcg_rule_to_clause'(Rule, Clause) :-
-	catch(
-		'$lgt_dcg_rule_to_clause_aux'(Rule, Clause),
-		Error,
-		throw(error(Error, grammar_rule(Rule)))).
-
-
-'$lgt_dcg_rule_to_clause_aux'(Rule, Clause) :-
-	'$lgt_dcg_rule'(Rule, Expansion),
-	(	Expansion = (Head :- Body),
-		'$lgt_compiler_flag'(optimize, on) ->
-		'$lgt_simplify_goal'(Body, SBody),
-		(	SBody == true ->
-			Clause = Head
-		;	Clause = (Head :- SBody)
-		)
-	;	Clause = Expansion
-	).
 
 
 
