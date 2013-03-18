@@ -8328,7 +8328,7 @@ current_logtalk_flag(Flag, Value) :-
 		true
 	;	'$lgt_pp_protocol_'(_, Prefix, _, _, _)
 	),
-	% we're translating an entity clause 
+	% we're translating an entity clause
 	'$lgt_comp_ctx_prefix'(NewCtx, Prefix),
 	catch(
 		'$lgt_tr_clause'(Clause, TClause, DClause, NewCtx),
@@ -8890,9 +8890,6 @@ current_logtalk_flag(Flag, Value) :-
 
 
 % pre-processor bypass (call of external code)
-%
-% this control construct is abused by the compiler to implement
-% support for debugging of coinductive predicates
 
 '$lgt_tr_body'({Pred}, call(Pred), '$lgt_debug'(goal({Pred}, call(Pred)), ExCtx), Ctx) :-
 	var(Pred),
@@ -11488,7 +11485,7 @@ current_logtalk_flag(Flag, Value) :-
 	\+ '$lgt_pp_extended_object_'(_, _, _, _, _, _, _, _, _, _),
 	\+ '$lgt_pp_instantiated_class_'(_, _, _, _, _, _, _, _, _, _),
 	\+ '$lgt_pp_specialized_class_'(_, _, _, _, _, _, _, _, _, _),
-	% invalid goal (standalone object)
+	% invalid goal (no ancestor object)
 	throw(existence_error(ancestor, object)).
 
 '$lgt_tr_super_call'(_, _, _) :-
