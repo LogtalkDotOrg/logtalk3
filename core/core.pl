@@ -894,7 +894,7 @@ create_object(Obj, Relations, Directives, Clauses) :-
 	'$lgt_tr_logtalk_directives'([(dynamic)| Directives], Ctx),
 	% the list of clauses may also include grammar rules
 	'$lgt_tr_runtime_terms'(Clauses, Ctx),
-	'$lgt_gen_def_table_clauses',
+	'$lgt_gen_def_table_clauses'(Ctx),
 	'$lgt_fix_predicate_defs',
 	'$lgt_fix_predicate_calls',
 	'$lgt_gen_object_clauses',
@@ -943,7 +943,7 @@ create_category(Ctg, Relations, Directives, Clauses) :-
 	'$lgt_tr_logtalk_directives'([(dynamic)| Directives], Ctx),
 	% the list of clauses may also include grammar rules
 	'$lgt_tr_runtime_terms'(Clauses, Ctx),
-	'$lgt_gen_def_table_clauses',
+	'$lgt_gen_def_table_clauses'(Ctx),
 	'$lgt_fix_predicate_defs',
 	'$lgt_fix_predicate_calls',
 	'$lgt_gen_category_clauses',
@@ -5268,7 +5268,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_tr_file_term'(end_of_file, Ctx),
 	'$lgt_add_entity_predicate_properties'(Module),
 	'$lgt_add_entity_properties'(end, Module),
-	'$lgt_tr_entity'(object, Module),
+	'$lgt_tr_entity'(object, Module, Ctx),
 	'$lgt_print_message'(information(compiling), core, compiled_entity(module, Module)),
 	!.
 
@@ -5574,10 +5574,10 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_tr_entity'(+atom, @entity_identifier)
+% '$lgt_tr_entity'(+atom, @entity_identifier, +compilation_context)
 
-'$lgt_tr_entity'(Type, Entity) :-
-	'$lgt_generate_code'(Type),
+'$lgt_tr_entity'(Type, Entity, Ctx) :-
+	'$lgt_generate_code'(Type, Ctx),
 	'$lgt_report_problems'(Type, Entity),
 	'$lgt_write_tr_entity',
 	'$lgt_save_entity_runtime_clauses',
@@ -6593,7 +6593,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	'$lgt_pp_object_'(Obj, _, _, _, _, _, _, _, _, _, _) ->
 		'$lgt_add_entity_predicate_properties'(Obj),
 		'$lgt_add_entity_properties'(end, Obj),
-		'$lgt_tr_entity'(object, Obj),
+		'$lgt_tr_entity'(object, Obj, Ctx),
 		'$lgt_restore_file_operator_table',
 		(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
 			'$lgt_print_message'(silent(compiling), core, compiled_entity(object, Obj))
@@ -6640,7 +6640,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	'$lgt_pp_protocol_'(Ptc, _, _, _, _) ->
 		'$lgt_add_entity_predicate_properties'(Ptc),
 		'$lgt_add_entity_properties'(end, Ptc),
-		'$lgt_tr_entity'(protocol, Ptc),
+		'$lgt_tr_entity'(protocol, Ptc, Ctx),
 		'$lgt_restore_file_operator_table',
 		(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
 			'$lgt_print_message'(silent(compiling), core, compiled_entity(protocol, Ptc))
@@ -6690,7 +6690,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	'$lgt_pp_category_'(Ctg, _, _, _, _, _) ->
 		'$lgt_add_entity_predicate_properties'(Ctg),
 		'$lgt_add_entity_properties'(end, Ctg),
-		'$lgt_tr_entity'(category, Ctg),
+		'$lgt_tr_entity'(category, Ctg, Ctx),
 		'$lgt_restore_file_operator_table',
 		(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
 			'$lgt_print_message'(silent(compiling), core, compiled_entity(category, Ctg))
@@ -8672,30 +8672,6 @@ current_logtalk_flag(Flag, Value) :-
 	Template =.. [_| MArgs],
 	'$lgt_nonvar_meta_arg'(Args, MArgs, Arg),
 	throw(type_error(variable, Arg)).
-
-
-% redefinition of Logtalk built-in predicates
-% redefinition of Prolog built-in predicates
-
-'$lgt_tr_head'(Head, _, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-	'$lgt_compiler_flag'(redefined_built_ins, warning),
-	\+ '$lgt_pp_redefined_built_in_'(Head, _, _),
-	% not already reported
-	\+ functor(Head, '::', 2),
-	% not the head of a multifile entity predicate
-	\+ functor(Head, ':', 2),
-	% not the head of a multifile module predicate
-	(	'$lgt_logtalk_built_in_predicate'(Head) ->
-		Message = redefined_logtalk_built_in_predicate(Path, Lines, Type, Entity, Functor/Arity)
-	;	'$lgt_prolog_built_in_predicate'(Head),
-		Message = redefined_prolog_built_in_predicate(Path, Lines, Type, Entity, Functor/Arity)
-	),
-	functor(Head, Functor, Arity),
-	'$lgt_increment_compile_warnings_counter',
-	'$lgt_warning_context'(Path, Lines, Type, Entity),
-	'$lgt_print_message'(warning(redefined_built_ins), core, Message),
-	fail.
 
 
 % definition of event handlers without reference to the "monitoring" built-in protocol
@@ -12604,14 +12580,7 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	Clause =.. [Def, HeadTemplate, ExCtxTemplate, THeadTemplate],
 	assertz('$lgt_pp_def_'(Clause)),
-	(	'$lgt_is_built_in_predicate'(Head) ->
-		(	'$lgt_pp_redefined_built_in_'(HeadTemplate, _, _) ->
-			true
-		;	assertz('$lgt_pp_redefined_built_in_'(HeadTemplate, ExCtxTemplate, THeadTemplate)),
-			retractall('$lgt_pp_non_portable_predicate_'(HeadTemplate, _))
-		)
-	;	true
-	),
+	'$lgt_check_for_redefined_built_in'(HeadTemplate, ExCtxTemplate, THeadTemplate, Ctx),
 	'$lgt_remember_defined_predicate'(HeadTemplate, Functor, Arity, ExCtxTemplate, THeadTemplate, Ctx),
 	Head = HeadTemplate,
 	ExCtx = ExCtxTemplate,
@@ -12633,14 +12602,7 @@ current_logtalk_flag(Flag, Value) :-
 	once('$lgt_pp_object_'(_, _, _, _, _, _, _, _, DDef, _, _)),
 	Clause =.. [DDef, HeadTemplate, ExCtxTemplate, THeadTemplate],
 	assertz('$lgt_pp_ddef_'(Clause)),
-	(	'$lgt_is_built_in_predicate'(Head) ->
-		(	'$lgt_pp_redefined_built_in_'(HeadTemplate, _, _) ->
-			true
-		;	assertz('$lgt_pp_redefined_built_in_'(HeadTemplate, ExCtxTemplate, THeadTemplate)),
-			retractall('$lgt_pp_non_portable_predicate_'(HeadTemplate, _))
-		)
-	;	true
-	),
+	'$lgt_check_for_redefined_built_in'(HeadTemplate, ExCtxTemplate, THeadTemplate, Ctx),
 	'$lgt_remember_defined_predicate'(HeadTemplate, Functor, Arity, ExCtxTemplate, THeadTemplate, Ctx),
 	Head = HeadTemplate,
 	ExCtx = ExCtxTemplate,
@@ -12648,13 +12610,13 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_add_def_fail_clause'(+callable, +atom, +integer)
+% '$lgt_add_def_fail_clause'(+atom, +integer, @compilation_context)
 %
 % adds a "def clause" (used to translate a predicate call) where the
 % definition is simply fail due to the predicate being declared, static,
 % but undefined (as per closed-world assumption)
 
-'$lgt_add_def_fail_clause'(Head, Functor, Arity) :-
+'$lgt_add_def_fail_clause'(Functor, Arity, Ctx) :-
 	functor(HeadTemplate, Functor, Arity),
 	(	'$lgt_pp_object_'(_, _, _, Def, _, _, _, _, _, _, _) ->
 		true
@@ -12662,14 +12624,45 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	Clause =.. [Def, HeadTemplate, _, fail],
 	assertz('$lgt_pp_def_'(Clause)),
-	(	'$lgt_is_built_in_predicate'(Head) ->
-		(	'$lgt_pp_redefined_built_in_'(HeadTemplate, _, _) ->
-			true
-		;	assertz('$lgt_pp_redefined_built_in_'(HeadTemplate, _, fail)),
-			retractall('$lgt_pp_non_portable_predicate_'(HeadTemplate, _))
-		)
-	;	true
+	'$lgt_check_for_redefined_built_in'(HeadTemplate, _, fail, Ctx).
+
+
+
+% '$lgt_check_for_redefined_built_in'(@callable, @execution_context, @callable, @compilation_context)
+
+'$lgt_check_for_redefined_built_in'(Head, _, _, _) :-
+	'$lgt_pp_redefined_built_in_'(Head, _, _),
+	!.
+
+'$lgt_check_for_redefined_built_in'(Head, ExCtx, THead, Ctx) :-
+	'$lgt_logtalk_built_in_predicate'(Head),
+	!,
+	assertz('$lgt_pp_redefined_built_in_'(Head, ExCtx, THead)),
+	retractall('$lgt_pp_non_portable_predicate_'(Head, _)),
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+		'$lgt_compiler_flag'(redefined_built_ins, warning) ->
+		functor(Head, Functor, Arity),
+		'$lgt_increment_compile_warnings_counter',
+		'$lgt_warning_context'(Path, Lines, Type, Entity),
+		'$lgt_print_message'(warning(redefined_built_ins), core, redefined_logtalk_built_in_predicate(Path, Lines, Type, Entity, Functor/Arity))
+	;	true	
 	).
+
+'$lgt_check_for_redefined_built_in'(Head, ExCtx, THead, Ctx) :-
+	'$lgt_prolog_built_in_predicate'(Head),
+	!,
+	assertz('$lgt_pp_redefined_built_in_'(Head, ExCtx, THead)),
+	retractall('$lgt_pp_non_portable_predicate_'(Head, _)),
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+		'$lgt_compiler_flag'(redefined_built_ins, warning) ->
+		functor(Head, Functor, Arity),
+		'$lgt_increment_compile_warnings_counter',
+		'$lgt_warning_context'(Path, Lines, Type, Entity),
+		'$lgt_print_message'(warning(redefined_built_ins), core, redefined_prolog_built_in_predicate(Path, Lines, Type, Entity, Functor/Arity))
+	;	true	
+	).
+
+'$lgt_check_for_redefined_built_in'(_, _, _, _).
 
 
 
@@ -12763,27 +12756,27 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_generate_code'(+atom)
+% '$lgt_generate_code'(+atom, +compilation_context)
 %
 % generates code for the entity being compiled
 
-'$lgt_generate_code'(protocol) :-
+'$lgt_generate_code'(protocol, _) :-
 	% protocols may contain initialization directives
 	'$lgt_fix_predicate_calls',
 	'$lgt_gen_protocol_clauses',
 	'$lgt_gen_protocol_directives',
 	'$lgt_gen_file_entity_initialization_goal'.
 
-'$lgt_generate_code'(object) :-
-	'$lgt_gen_def_table_clauses',
+'$lgt_generate_code'(object, Ctx) :-
+	'$lgt_gen_def_table_clauses'(Ctx),
 	'$lgt_fix_predicate_defs',
 	'$lgt_fix_predicate_calls',
 	'$lgt_gen_object_clauses',
 	'$lgt_gen_object_directives',
 	'$lgt_gen_file_entity_initialization_goal'.
 
-'$lgt_generate_code'(category) :-
-	'$lgt_gen_def_table_clauses',
+'$lgt_generate_code'(category, Ctx) :-
+	'$lgt_gen_def_table_clauses'(Ctx),
 	'$lgt_fix_predicate_defs',
 	'$lgt_fix_predicate_calls',
 	'$lgt_gen_category_clauses',
@@ -12969,12 +12962,12 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_gen_def_table_clauses'
+% '$lgt_gen_def_table_clauses'(+compilation_context)
 %
 % generates predicate definition table clauses for undefined but
 % declared (using scope and/or dynamic directives) predicates
 
-'$lgt_gen_def_table_clauses' :-
+'$lgt_gen_def_table_clauses'(Ctx) :-
 	(	'$lgt_pp_public_'(Functor, Arity)
 	;	'$lgt_pp_protected_'(Functor, Arity)
 	;	'$lgt_pp_private_'(Functor, Arity)
@@ -12986,10 +12979,10 @@ current_logtalk_flag(Flag, Value) :-
 	\+ '$lgt_pp_defines_annotated_predicate_'(Functor, Arity),
 	% declared, static, but undefined predicate;
 	% local calls must fail (as per closed-world assumption)
-	'$lgt_add_def_fail_clause'(Head, Functor, Arity),
+	'$lgt_add_def_fail_clause'(Functor, Arity, Ctx),
 	fail.
 
-'$lgt_gen_def_table_clauses' :-
+'$lgt_gen_def_table_clauses'(Ctx) :-
 	% categories cannot contain clauses for dynamic predicates;
 	% thus, in this case, we look only into objects
 	'$lgt_pp_object_'(_, Prefix, _, _, _, _, _, _, _, _, _),
@@ -13006,7 +12999,7 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	fail.
 
-'$lgt_gen_def_table_clauses' :-
+'$lgt_gen_def_table_clauses'(Ctx) :-
 	% annotations also result in the definition of predicates
 	'$lgt_pp_entity'(_, _, Prefix),
 	'$lgt_comp_ctx_prefix'(Ctx, Prefix),
@@ -13020,7 +13013,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_add_def_clause'(Head, Functor, Arity, _, Ctx),
 	fail.
 
-'$lgt_gen_def_table_clauses'.
+'$lgt_gen_def_table_clauses'(_).
 
 
 

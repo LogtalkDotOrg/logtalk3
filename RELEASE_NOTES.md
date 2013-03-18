@@ -45,6 +45,10 @@ terms in case of error depending on the calling context.
 predicate. Optimized compilation of sufficiently instantiated calls to the
 `current_logtalk_flag/2` and `set_logtalk_flag/2` built-in predicates.
 
+* FIXED: Built-in predicates overridden within entities with a declaration but
+without any definition would not be reported when the `redefined_built_ins` is
+set to `warning`.
+
 Documentation
 -------------
 
