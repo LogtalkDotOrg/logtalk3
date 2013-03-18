@@ -16093,20 +16093,21 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_valid_mode_template_args'([]).
 
 '$lgt_valid_mode_template_args'([Arg| Args]) :-
-	nonvar(Arg),
-	functor(Arg, Functor, Arity),
-	Arity =< 1,
-	'$lgt_pred_arg_instantiation_mode'(Functor),
+	'$lgt_valid_mode_template_arg'(Arg),
 	'$lgt_valid_mode_template_args'(Args).
 
 
 
-% '$lgt_pred_arg_instantiation_mode'(@nonvar)
+% '$lgt_valid_mode_template_arg'(@nonvar)
 
-'$lgt_pred_arg_instantiation_mode'((?)).				% unspecified, can be input, output or both input and output
-'$lgt_pred_arg_instantiation_mode'((+)).				% instantiated on predicate call, can be further instantiated by the predicate call
-'$lgt_pred_arg_instantiation_mode'((-)).				% non-instantiated (i.e. a variable) on predicate call
-'$lgt_pred_arg_instantiation_mode'((@)).				% not modified (i.e. not further instantiated) by the predicate call
+'$lgt_valid_mode_template_arg'((?)).				% unspecified, can be input, output or both input and output
+'$lgt_valid_mode_template_arg'('?'(_)).
+'$lgt_valid_mode_template_arg'((+)).				% instantiated on predicate call, can be further instantiated by the predicate call
+'$lgt_valid_mode_template_arg'('+'(_)).
+'$lgt_valid_mode_template_arg'((-)).				% non-instantiated (i.e. a variable) on predicate call
+'$lgt_valid_mode_template_arg'('-'(_)).
+'$lgt_valid_mode_template_arg'((@)).				% not modified (i.e. not further instantiated) by the predicate call
+'$lgt_valid_mode_template_arg'('@'(_)).
 
 
 
