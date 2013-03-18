@@ -12968,11 +12968,13 @@ current_logtalk_flag(Flag, Value) :-
 % declared (using scope and/or dynamic directives) predicates
 
 '$lgt_gen_def_table_clauses'(Ctx) :-
+	\+ '$lgt_pp_dynamic_',
+	% static entities only otherwise abolishing the dynamic entity would result
+	% in an attempt to retract all clauses the fail/0 built-in control construct
 	(	'$lgt_pp_public_'(Functor, Arity)
 	;	'$lgt_pp_protected_'(Functor, Arity)
 	;	'$lgt_pp_private_'(Functor, Arity)
 	),
-	\+ '$lgt_pp_dynamic_',
 	functor(Head, Functor, Arity),
 	\+ '$lgt_pp_dynamic_'(Head),
 	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _),
