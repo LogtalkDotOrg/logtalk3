@@ -10242,6 +10242,118 @@ current_logtalk_flag(Flag, Value) :-
 	fail.
 
 
+% arithmetic predicates (portability checks)
+
+'$lgt_tr_body'(_ is Exp, _, _, Ctx) :-
+	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	'$lgt_compiler_flag'(portability, warning),
+	'$lgt_check_non_portable_functions'(Exp),
+	fail.
+'$lgt_tr_body'(Exp1 =:= Exp2, _, _, Ctx) :-
+	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	'$lgt_compiler_flag'(portability, warning),
+	'$lgt_check_non_portable_functions'(Exp1),
+	'$lgt_check_non_portable_functions'(Exp2),
+	fail.
+'$lgt_tr_body'(Exp1 =\= Exp2, _, _, Ctx) :-
+	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	'$lgt_compiler_flag'(portability, warning),
+	'$lgt_check_non_portable_functions'(Exp1),
+	'$lgt_check_non_portable_functions'(Exp2),
+	fail.
+'$lgt_tr_body'(Exp1 < Exp2, _, _, Ctx) :-
+	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	'$lgt_compiler_flag'(portability, warning),
+	'$lgt_check_non_portable_functions'(Exp1),
+	'$lgt_check_non_portable_functions'(Exp2),
+	fail.
+'$lgt_tr_body'(Exp1 =< Exp2, _, _, Ctx) :-
+	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	'$lgt_compiler_flag'(portability, warning),
+	'$lgt_check_non_portable_functions'(Exp1),
+	'$lgt_check_non_portable_functions'(Exp2),
+	fail.
+'$lgt_tr_body'(Exp1 > Exp2, _, _, Ctx) :-
+	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	'$lgt_compiler_flag'(portability, warning),
+	'$lgt_check_non_portable_functions'(Exp1),
+	'$lgt_check_non_portable_functions'(Exp2),
+	fail.
+'$lgt_tr_body'(Exp1 >= Exp2, _, _, Ctx) :-
+	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	'$lgt_compiler_flag'(portability, warning),
+	'$lgt_check_non_portable_functions'(Exp1),
+	'$lgt_check_non_portable_functions'(Exp2),
+	fail.
+
+
+% blackboard predicates (requires a back-end Prolog compiler natively supporting these built-in predicates)
+
+'$lgt_tr_body'(bb_put(Key, Term), TPred, DPred, Ctx) :-
+	'$lgt_prolog_built_in_predicate'(bb_put(_, _)),
+	!,
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	'$lgt_comp_ctx_prefix'(Ctx, Prefix),
+	(	atomic(Key) ->
+		'$lgt_tr_bb_key'(Key, Prefix, TKey),
+		TPred = '$lgt_call_built_in'(bb_put(Key, Term), bb_put(TKey, Term), ExCtx),
+		DPred = '$lgt_debug'(goal(bb_put(Key, Term), TPred), ExCtx)
+	;	var(Key) ->
+		% runtime key translation
+		TPred = '$lgt_call_built_in'(bb_put(Key, Term), ('$lgt_tr_bb_key'(Key, Prefix, TKey, bb_put(Key, Term)), bb_put(TKey, Term)), ExCtx),
+		DPred = '$lgt_debug'(goal(bb_put(Key, Term), TPred), ExCtx)
+	;	throw(type_error(atomic, Key))
+	).
+
+'$lgt_tr_body'(bb_get(Key, Term), TPred, DPred, Ctx) :-
+	'$lgt_prolog_built_in_predicate'(bb_get(_, _)),
+	!,
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	'$lgt_comp_ctx_prefix'(Ctx, Prefix),
+	(	atomic(Key) ->
+		'$lgt_tr_bb_key'(Key, Prefix, TKey),
+		TPred = '$lgt_call_built_in'(bb_get(Key, Term), bb_get(TKey, Term), ExCtx),
+		DPred = '$lgt_debug'(goal(bb_get(Key, Term), TPred), ExCtx)
+	;	var(Key) ->
+		% runtime key translation
+		TPred = '$lgt_call_built_in'(bb_get(Key, Term), ('$lgt_tr_bb_key'(Key, Prefix, TKey, bb_get(Key, Term)), bb_get(TKey, Term)), ExCtx),
+		DPred = '$lgt_debug'(goal(bb_get(Key, Term), TPred), ExCtx)
+	;	throw(type_error(atomic, Key))
+	).
+
+'$lgt_tr_body'(bb_delete(Key, Term), TPred, DPred, Ctx) :-
+	'$lgt_prolog_built_in_predicate'(bb_delete(_, _)),
+	!,
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	'$lgt_comp_ctx_prefix'(Ctx, Prefix),
+	(	atomic(Key) ->
+		'$lgt_tr_bb_key'(Key, Prefix, TKey),
+		TPred = '$lgt_call_built_in'(bb_delete(Key, Term), bb_delete(TKey, Term), ExCtx),
+		DPred = '$lgt_debug'(goal(bb_delete(Key, Term), TPred), ExCtx)
+	;	var(Key) ->
+		% runtime key translation
+		TPred = '$lgt_call_built_in'(bb_delete(Key, Term), ('$lgt_tr_bb_key'(Key, Prefix, TKey, bb_delete(Key, Term)), bb_delete(TKey, Term)), ExCtx),
+		DPred = '$lgt_debug'(goal(bb_delete(Key, Term), TPred), ExCtx)
+	;	throw(type_error(atomic, Key))
+	).
+
+'$lgt_tr_body'(bb_update(Key, Term, New), TPred, DPred, Ctx) :-
+	'$lgt_prolog_built_in_predicate'(bb_update(_, _, _)),
+	!,
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	'$lgt_comp_ctx_prefix'(Ctx, Prefix),
+	(	atomic(Key) ->
+		'$lgt_tr_bb_key'(Key, Prefix, TKey),
+		TPred = '$lgt_call_built_in'(bb_update(Key, Term, New), bb_update(TKey, Term, New), ExCtx),
+		DPred = '$lgt_debug'(goal(bb_update(Key, Term, New), TPred), ExCtx)
+	;	var(Key) ->
+		% runtime key translation
+		TPred = '$lgt_call_built_in'(bb_update(Key, Term, New), ('$lgt_tr_bb_key'(Key, Prefix, TKey, bb_update(Key, Term, New)), bb_update(TKey, Term, New)), ExCtx),
+		DPred = '$lgt_debug'(goal(bb_update(Key, Term, New), TPred), ExCtx)
+	;	throw(type_error(atomic, Key))
+	).
+
+
 % call/2-N built-in control construct
 
 '$lgt_tr_body'(CallN, TPred, DPred, Ctx) :-
@@ -10373,57 +10485,12 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_remember_annotation'(Functor, 2).
 
 
-% arithmetic predicates (portability checks)
-
-'$lgt_tr_body'(_ is Exp, _, _, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-	'$lgt_compiler_flag'(portability, warning),
-	'$lgt_check_non_portable_functions'(Exp),
-	fail.
-'$lgt_tr_body'(Exp1 =:= Exp2, _, _, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-	'$lgt_compiler_flag'(portability, warning),
-	'$lgt_check_non_portable_functions'(Exp1),
-	'$lgt_check_non_portable_functions'(Exp2),
-	fail.
-'$lgt_tr_body'(Exp1 =\= Exp2, _, _, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-	'$lgt_compiler_flag'(portability, warning),
-	'$lgt_check_non_portable_functions'(Exp1),
-	'$lgt_check_non_portable_functions'(Exp2),
-	fail.
-'$lgt_tr_body'(Exp1 < Exp2, _, _, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-	'$lgt_compiler_flag'(portability, warning),
-	'$lgt_check_non_portable_functions'(Exp1),
-	'$lgt_check_non_portable_functions'(Exp2),
-	fail.
-'$lgt_tr_body'(Exp1 =< Exp2, _, _, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-	'$lgt_compiler_flag'(portability, warning),
-	'$lgt_check_non_portable_functions'(Exp1),
-	'$lgt_check_non_portable_functions'(Exp2),
-	fail.
-'$lgt_tr_body'(Exp1 > Exp2, _, _, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-	'$lgt_compiler_flag'(portability, warning),
-	'$lgt_check_non_portable_functions'(Exp1),
-	'$lgt_check_non_portable_functions'(Exp2),
-	fail.
-'$lgt_tr_body'(Exp1 >= Exp2, _, _, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-	'$lgt_compiler_flag'(portability, warning),
-	'$lgt_check_non_portable_functions'(Exp1),
-	'$lgt_check_non_portable_functions'(Exp2),
-	fail.
-
-
 % remember non-portable Prolog built-in predicate calls
 
 '$lgt_tr_body'(Pred, _, _, Ctx) :-
+	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 	\+ '$lgt_pp_non_portable_predicate_'(Pred, _),
 	% not previously recorded as a non portable call
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 	'$lgt_compiler_flag'(portability, warning),
 	'$lgt_prolog_built_in_predicate'(Pred),
 	\+ '$lgt_logtalk_built_in_predicate'(Pred),
@@ -10439,73 +10506,6 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_current_line_numbers'(Lines),
 	assertz('$lgt_pp_non_portable_predicate_'(Head, Lines)),
 	fail.
-
-
-% blackboard predicates (requires a back-end Prolog compiler natively supporting these built-in predicates)
-
-'$lgt_tr_body'(bb_put(Key, Term), TPred, DPred, Ctx) :-
-	'$lgt_prolog_built_in_predicate'(bb_put(_, _)),
-	!,
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	'$lgt_comp_ctx_prefix'(Ctx, Prefix),
-	(	atomic(Key) ->
-		'$lgt_tr_bb_key'(Key, Prefix, TKey),
-		TPred = '$lgt_call_built_in'(bb_put(Key, Term), bb_put(TKey, Term), ExCtx),
-		DPred = '$lgt_debug'(goal(bb_put(Key, Term), TPred), ExCtx)
-	;	var(Key) ->
-		% runtime key translation
-		TPred = '$lgt_call_built_in'(bb_put(Key, Term), ('$lgt_tr_bb_key'(Key, Prefix, TKey, bb_put(Key, Term)), bb_put(TKey, Term)), ExCtx),
-		DPred = '$lgt_debug'(goal(bb_put(Key, Term), TPred), ExCtx)
-	;	throw(type_error(atomic, Key))
-	).
-
-'$lgt_tr_body'(bb_get(Key, Term), TPred, DPred, Ctx) :-
-	'$lgt_prolog_built_in_predicate'(bb_get(_, _)),
-	!,
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	'$lgt_comp_ctx_prefix'(Ctx, Prefix),
-	(	atomic(Key) ->
-		'$lgt_tr_bb_key'(Key, Prefix, TKey),
-		TPred = '$lgt_call_built_in'(bb_get(Key, Term), bb_get(TKey, Term), ExCtx),
-		DPred = '$lgt_debug'(goal(bb_get(Key, Term), TPred), ExCtx)
-	;	var(Key) ->
-		% runtime key translation
-		TPred = '$lgt_call_built_in'(bb_get(Key, Term), ('$lgt_tr_bb_key'(Key, Prefix, TKey, bb_get(Key, Term)), bb_get(TKey, Term)), ExCtx),
-		DPred = '$lgt_debug'(goal(bb_get(Key, Term), TPred), ExCtx)
-	;	throw(type_error(atomic, Key))
-	).
-
-'$lgt_tr_body'(bb_delete(Key, Term), TPred, DPred, Ctx) :-
-	'$lgt_prolog_built_in_predicate'(bb_delete(_, _)),
-	!,
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	'$lgt_comp_ctx_prefix'(Ctx, Prefix),
-	(	atomic(Key) ->
-		'$lgt_tr_bb_key'(Key, Prefix, TKey),
-		TPred = '$lgt_call_built_in'(bb_delete(Key, Term), bb_delete(TKey, Term), ExCtx),
-		DPred = '$lgt_debug'(goal(bb_delete(Key, Term), TPred), ExCtx)
-	;	var(Key) ->
-		% runtime key translation
-		TPred = '$lgt_call_built_in'(bb_delete(Key, Term), ('$lgt_tr_bb_key'(Key, Prefix, TKey, bb_delete(Key, Term)), bb_delete(TKey, Term)), ExCtx),
-		DPred = '$lgt_debug'(goal(bb_delete(Key, Term), TPred), ExCtx)
-	;	throw(type_error(atomic, Key))
-	).
-
-'$lgt_tr_body'(bb_update(Key, Term, New), TPred, DPred, Ctx) :-
-	'$lgt_prolog_built_in_predicate'(bb_update(_, _, _)),
-	!,
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	'$lgt_comp_ctx_prefix'(Ctx, Prefix),
-	(	atomic(Key) ->
-		'$lgt_tr_bb_key'(Key, Prefix, TKey),
-		TPred = '$lgt_call_built_in'(bb_update(Key, Term, New), bb_update(TKey, Term, New), ExCtx),
-		DPred = '$lgt_debug'(goal(bb_update(Key, Term, New), TPred), ExCtx)
-	;	var(Key) ->
-		% runtime key translation
-		TPred = '$lgt_call_built_in'(bb_update(Key, Term, New), ('$lgt_tr_bb_key'(Key, Prefix, TKey, bb_update(Key, Term, New)), bb_update(TKey, Term, New)), ExCtx),
-		DPred = '$lgt_debug'(goal(bb_update(Key, Term, New), TPred), ExCtx)
-	;	throw(type_error(atomic, Key))
-	).
 
 
 % Prolog proprietary built-in meta-predicates (must be declared in the adapter files)
