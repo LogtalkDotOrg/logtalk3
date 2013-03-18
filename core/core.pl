@@ -16582,6 +16582,11 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_must_be'(module_identifier, Module),
 	'$lgt_dcg_rule'((NonTerminal, Terminals --> GRBody), (Head :- Body)).
 
+'$lgt_dcg_rule'((NonTerminal, _ --> _), _) :-
+	functor(NonTerminal, call, Arity),
+	Arity >= 1,
+	throw(permission_error(modify, built_in_non_terminal, call//Arity)).
+
 '$lgt_dcg_rule'((NonTerminal, Terminals --> GRBody), (Head :- Body)) :-
 	!,
 	'$lgt_dcg_non_terminal'(NonTerminal, S0, S, Head),
@@ -16604,8 +16609,10 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_must_be'(module_identifier, Module),
 	'$lgt_dcg_rule'((NonTerminal --> GRBody), (Head :- Body)).
 
-'$lgt_dcg_rule'((call(_) --> _), _) :-
-	throw(permission_error(modify, built_in_non_terminal, call//1)).
+'$lgt_dcg_rule'((NonTerminal --> _), _) :-
+	functor(NonTerminal, call, Arity),
+	Arity >= 1,
+	throw(permission_error(modify, built_in_non_terminal, call//Arity)).
 
 '$lgt_dcg_rule'((NonTerminal --> GRBody), (Head :- Body)) :-
 	!,

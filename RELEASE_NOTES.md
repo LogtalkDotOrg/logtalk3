@@ -35,6 +35,9 @@ Logtalk compiler and runtime
 
 * IMPROVED: Faster compilation of `info/1-2` directives.
 
+* IMPROVED: Detect and report as an error any attempt to redefine the call//1-N
+built-in non-terminals.
+
 * IMPROVED: Simplified implementation of the `current_logtalk_flag/2` built-in
 predicate. Optimized compilation of sufficiently instantiated calls to the
 `current_logtalk_flag/2` and `set_logtalk_flag/2` built-in predicates.
