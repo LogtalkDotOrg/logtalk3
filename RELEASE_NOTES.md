@@ -33,9 +33,7 @@ Logtalk compiler and runtime
 
 * IMPROVED: Faster compilation of entity predicate clauses.
 
-* IMPROVED: Faster compilation of `info/1-2` directives.
-
-* IMPROVED: Faster compilation of `mode/2` directives.
+* IMPROVED: Faster compilation of `info/1-2` and `mode/2` directives.
 
 * IMPROVED: Detect and report as an error any attempt to redefine the call//1-N
 built-in non-terminals.

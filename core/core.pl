@@ -16071,15 +16071,15 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_valid_meta_predicate_template_args'(Args).
 
 
-'$lgt_valid_meta_predicate_template_arg'((::)).		% meta-argument but not called
-'$lgt_valid_meta_predicate_template_arg'(*).		% non meta-argument
+'$lgt_valid_meta_predicate_template_arg'((::)) :- !.	% meta-argument but not called
+'$lgt_valid_meta_predicate_template_arg'(*) :- !.		% non meta-argument
+'$lgt_valid_meta_predicate_template_arg'(/) :- !.		% predicate indicator
+'$lgt_valid_meta_predicate_template_arg'([N]) :-		% list of goals/closures
+	!, integer(N), N >= 0.
+'$lgt_valid_meta_predicate_template_arg'([/]) :- !.		% list of predicate indicators
+'$lgt_valid_meta_predicate_template_arg'(^) :- !.		% goal with possible existential variables qualification
 '$lgt_valid_meta_predicate_template_arg'(Arg) :-	% goal or closure
 	integer(Arg), Arg >= 0.
-'$lgt_valid_meta_predicate_template_arg'(/).		% predicate indicator
-'$lgt_valid_meta_predicate_template_arg'([N]) :-	% list of goals/closures
-	integer(N), N >= 0.
-'$lgt_valid_meta_predicate_template_arg'([/]).		% list of predicate indicators
-'$lgt_valid_meta_predicate_template_arg'(^).		% goal with possible existential variables qualification
 
 
 
