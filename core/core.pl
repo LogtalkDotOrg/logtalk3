@@ -1690,9 +1690,9 @@ logtalk_compile(Files) :-
 logtalk_compile(Files, Flags) :-
 	catch(
 		('$lgt_init_warnings_counter'(logtalk_compile(Files, Flags)),
-		 '$lgt_check_source_files'(Files),
-		 '$lgt_check_compiler_flags'(Flags),
-		 '$lgt_compile_files'(Files, Flags),
+		 '$lgt_check_source_files'(Files, ExpandedFiles),
+		 '$lgt_check_compiler_flags'(Flags, ProcessedFlags),
+		 '$lgt_compile_files'(ExpandedFiles, ProcessedFlags),
 		 '$lgt_report_warning_numbers'(logtalk_compile(Files, Flags)),
 		 '$lgt_clear_compiler_flags'),
 		error(Error, _),
@@ -1761,32 +1761,33 @@ logtalk_compile(Files, Flags) :-
 
 
 
-% '$lgt_check_source_files'(@term)
+% '$lgt_check_source_files'(@nonvar, -nonvar)
+% '$lgt_check_source_files'(@list, -list)
 %
 % check if the source file names are valid (but not if the file exists)
 
-'$lgt_check_source_files'([File| Files]) :-
+'$lgt_check_source_files'([File| Files], [ExpandedFile| ExpandedFiles]) :-
 	!,
-	'$lgt_check_source_file'(File),
-	'$lgt_check_source_files'(Files).
+	'$lgt_check_source_file'(File, ExpandedFile),
+	'$lgt_check_source_files'(Files, ExpandedFiles).
 
-'$lgt_check_source_files'([]) :-
+'$lgt_check_source_files'([], []) :-
 	!.
 
-'$lgt_check_source_files'(File) :-
-	'$lgt_check_source_file'(File).
+'$lgt_check_source_files'(File, ExpandedFile) :-
+	'$lgt_check_source_file'(File, ExpandedFile).
 
 
-'$lgt_check_source_file'(File) :-
+'$lgt_check_source_file'(File, ExpandedFile) :-
 	(	var(File) ->
 		throw(error(instantiation_error, _))
 	;	atom(File) ->
-		true
+		ExpandedFile = File
 	;	functor(File, Library, 1),
 		arg(1, File, Basename),
 		atom(Basename) ->
-		(	'$lgt_expand_library_path'(Library, _) ->
-			true
+		(	'$lgt_expand_library_path'(Library, Directory) ->
+			atom_concat(Directory, Basename, ExpandedFile)
 		;	throw(error(existence_error(library, Library), _))
 		)
 	;	throw(error(type_error(source_file_name, File), _))
@@ -1829,11 +1830,11 @@ logtalk_compile(Files, Flags) :-
 
 
 
-% '$lgt_check_compiler_flags'(@list)
+% '$lgt_check_compiler_flags'(@list, -list)
 %
 % checks if the compiler flags are valid
 
-'$lgt_check_compiler_flags'([Option| Options]) :-
+'$lgt_check_compiler_flags'([Option| Options], [Flag-Value| Flags]) :-
 	!,
 	(	var(Option) ->
 		throw(error(instantiation_error, _))
@@ -1845,12 +1846,12 @@ logtalk_compile(Files, Flags) :-
 		throw(error(domain_error(compiler_option, Option), _))
 	;	throw(error(type_error(compound, Option), _))
 	),
-	'$lgt_check_compiler_flags'(Options).
+	'$lgt_check_compiler_flags'(Options, Flags).
 
-'$lgt_check_compiler_flags'([]) :-
+'$lgt_check_compiler_flags'([], []) :-
 	!.
 
-'$lgt_check_compiler_flags'(Options) :-
+'$lgt_check_compiler_flags'(Options, _) :-
 	throw(error(type_error(list, Options), _)).
 
 
@@ -1964,11 +1965,9 @@ logtalk_compile(Files, Flags) :-
 
 '$lgt_assert_compiler_flags'([]).
 
-'$lgt_assert_compiler_flags'([Flag| Flags]) :-
-	functor(Flag, Name, 1),
-	arg(1, Flag, Value),
-	retractall('$lgt_pp_file_compiler_flag_'(Name, _)),
-	assertz('$lgt_pp_file_compiler_flag_'(Name, Value)),
+'$lgt_assert_compiler_flags'([Flag-Value| Flags]) :-
+	retractall('$lgt_pp_file_compiler_flag_'(Flag, _)),
+	assertz('$lgt_pp_file_compiler_flag_'(Flag, Value)),
 	'$lgt_assert_compiler_flags'(Flags).
 
 
@@ -2018,9 +2017,9 @@ logtalk_load(Files) :-
 logtalk_load(Files, Flags) :-
 	catch(
 		('$lgt_init_warnings_counter'(logtalk_load(Files, Flags)),
-		 '$lgt_check_source_files'(Files),
-		 '$lgt_check_compiler_flags'(Flags),
-		 '$lgt_load_files'(Files, Flags),
+		 '$lgt_check_source_files'(Files, ExpandedFiles),
+		 '$lgt_check_compiler_flags'(Flags, ProcessedFlags),
+		 '$lgt_load_files'(ExpandedFiles, ProcessedFlags),
 		 '$lgt_report_warning_numbers'(logtalk_load(Files, Flags)),
 		 '$lgt_clear_compiler_flags'),
 		error(Error, _),
@@ -5107,13 +5106,7 @@ current_logtalk_flag(Flag, Value) :-
 % extension), and the full file path
 
 '$lgt_file_name'(Type, FilePath, Directory, Basename, FullPath) :-
-	(	atom(FilePath) ->
-		'$lgt_prolog_os_file_name'(NormalizedPath, FilePath)	
-	;	functor(FilePath, Library, 1),
-		'$lgt_expand_library_path'(Library, LibraryPath),
-		arg(1, FilePath, File),
-		atom_concat(LibraryPath, File, NormalizedPath)
-	),
+	'$lgt_prolog_os_file_name'(NormalizedPath, FilePath),
 	'$lgt_decompose_file_name'(NormalizedPath, Directory0, Name, Extension),
 	(	'$lgt_file_type_alt_directory'(Type, AltDirectory) ->
 		(	sub_atom(AltDirectory, 0, 2, _, './') ->
@@ -6492,9 +6485,8 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_must_be'(read_write_flag, Flag),
 	'$lgt_must_be'(flag_value, Flag+Value),
-	Option =.. [Flag, Value],
 	% local scope (restricted to the source file being compiled)
-	'$lgt_set_compiler_flags'([Option]).
+	'$lgt_set_compiler_flags'([Flag-Value]).
 
 '$lgt_tr_file_directive'(set_prolog_flag(Flag, Value), _) :-
 	!,
