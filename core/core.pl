@@ -9727,7 +9727,7 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_exec_ctx_this'(ExCtx, This),
 		(	'$lgt_runtime_db_clause_checked'(Clause) ->
 			TCond = '$lgt_asserta'(This, Clause, This, p(_), p)
-		;	'$lgt_compiler_db_clause_checked'(Clause),
+		;	'$lgt_must_be'(clause_or_partial_clause, Clause),
 			(	Clause = (Head :- Body) ->
 				(	Body == true ->
 					TCond = '$lgt_asserta_fact_checked'(This, Head, This, p(_), p)
@@ -9781,7 +9781,7 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_exec_ctx_this'(ExCtx, This),
 		(	'$lgt_runtime_db_clause_checked'(Clause) ->
 			TCond = '$lgt_assertz'(This, Clause, This, p(_), p)
-		;	'$lgt_compiler_db_clause_checked'(Clause),
+		;	'$lgt_must_be'(clause_or_partial_clause, Clause),
 			(	Clause = (Head :- Body) ->
 				(	Body == true ->
 					TCond = '$lgt_assertz_fact_checked'(This, Head, This, p(_), p)
@@ -9828,7 +9828,7 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_exec_ctx_this'(ExCtx, This),
 		(	'$lgt_runtime_db_clause_checked'((Head :- Body)) ->
 			TCond = '$lgt_clause'(This, Head, Body, This, p(_))
-		;	'$lgt_compiler_db_clause_checked'((Head :- Body)),
+		;	'$lgt_must_be'(clause_or_partial_clause, (Head :- Body)),
 			TCond = '$lgt_clause_checked'(This, Head, Body, This, p(_))
 		)
 	),
@@ -9876,7 +9876,7 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_exec_ctx_this'(ExCtx, This),
 		(	'$lgt_runtime_db_clause_checked'(Clause) ->
 			TCond = '$lgt_retract'(This, Clause, This, p(_))
-		;	'$lgt_compiler_db_clause_checked'(Clause),
+		;	'$lgt_must_be'(clause_or_partial_clause, Clause),
 			(	Clause = (Head :- Body) ->
 				(	var(Body) ->
 					'$lgt_retract_var_body_checked'(This, Clause, This, p(_))
@@ -9923,9 +9923,9 @@ current_logtalk_flag(Flag, Value) :-
 		TCond = retractall(THead)
 	;	'$lgt_comp_ctx_this'(Ctx, This),
 		'$lgt_exec_ctx_this'(ExCtx, This),
-		(	'$lgt_runtime_db_clause_checked'(Head) ->
+		(	var(Head) ->
 			TCond = '$lgt_retractall'(This, Head, This, p(_))
-		;	'$lgt_compiler_db_clause_checked'(Head),
+		;	'$lgt_must_be'(callable, Head),
 			TCond = '$lgt_retractall_checked'(This, Head, This, p(_))
 		)
 	),
@@ -11039,20 +11039,6 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_compiler_db_clause_checked'(@nonvar)
-%
-% throws an error if the argument is invalid
-
-'$lgt_compiler_db_clause_checked'((Head :- Body)) :-
-	!,
-	'$lgt_must_be'(callable, Head),
-	'$lgt_must_be'(var_or_callable, Body).
-
-'$lgt_compiler_db_clause_checked'(Clause) :-
-	'$lgt_must_be'(callable, Clause).
-
-
-
 % '$lgt_check_non_portable_functions'(@term)
 %
 % checks an arithmetic expression for calls to non-standard Prolog functions
@@ -11210,7 +11196,7 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	(	'$lgt_runtime_db_clause_checked'(Clause) ->
 		TPred = '$lgt_asserta'(Obj, Clause, This, p(p(_)), p(p(p)))
-	;	'$lgt_compiler_db_clause_checked'(Clause),
+	;	'$lgt_must_be'(clause_or_partial_clause, Clause),
 		(	Clause = (Head :- Body) ->
 			(	Body == true ->
 				TPred = '$lgt_asserta_fact_checked'(Obj, Head, This, p(p(_)), p(p(p)))
@@ -11224,7 +11210,7 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	(	'$lgt_runtime_db_clause_checked'(Clause) ->
 		TPred = '$lgt_assertz'(Obj, Clause, This, p(p(_)), p(p(p)))
-	;	'$lgt_compiler_db_clause_checked'(Clause),
+	;	'$lgt_must_be'(clause_or_partial_clause, Clause),
 		(	Clause = (Head :- Body) ->
 			(	Body == true ->
 				TPred = '$lgt_assertz_fact_checked'(Obj, Head, This, p(p(_)), p(p(p)))
@@ -11238,7 +11224,7 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	(	'$lgt_runtime_db_clause_checked'((Head :- Body)) ->
 		TPred = '$lgt_clause'(Obj, Head, Body, This, p(p(p)))
-	;	'$lgt_compiler_db_clause_checked'((Head :- Body)),
+	;	'$lgt_must_be'(clause_or_partial_clause, (Head :- Body)),
 		TPred = '$lgt_clause_checked'(Obj, Head, Body, This, p(p(p)))
 	).
 
@@ -11246,7 +11232,7 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	(	'$lgt_runtime_db_clause_checked'(Clause) ->
 		TPred = '$lgt_retract'(Obj, Clause, This, p(p(p)))
-	;	'$lgt_compiler_db_clause_checked'(Clause),
+	;	'$lgt_must_be'(clause_or_partial_clause, Clause),
 		(	Clause = (Head :- Body) ->
 			(	var(Body) ->
 				'$lgt_retract_var_body_checked'(Obj, Clause, This, p(p(p)))
@@ -11260,9 +11246,9 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_msg'(retractall(Head), Obj, TPred, This) :-
 	!,
-	(	'$lgt_runtime_db_clause_checked'(Head) ->
+	(	var(Head) ->
 		TPred = '$lgt_retractall'(Obj, Head, This, p(p(p)))
-	;	'$lgt_compiler_db_clause_checked'(Head),
+	;	'$lgt_must_be'(callable, Head),
 		TPred = '$lgt_retractall_checked'(Obj, Head, This, p(p(p)))
 	).
 
@@ -11386,7 +11372,7 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	(	'$lgt_runtime_db_clause_checked'(Clause) ->
 		TPred = '$lgt_asserta'(Self, Clause, This, p(_), p(p))
-	;	'$lgt_compiler_db_clause_checked'(Clause),
+	;	'$lgt_must_be'(clause_or_partial_clause, Clause),
 		(	Clause = (Head :- Body) ->
 			(	Body == true ->
 				TPred = '$lgt_asserta_fact_checked'(Self, Head, This, p(_), p(p))
@@ -11400,7 +11386,7 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	(	'$lgt_runtime_db_clause_checked'(Clause) ->
 		TPred = '$lgt_assertz'(Self, Clause, This, p(_), p(p))
-	;	'$lgt_compiler_db_clause_checked'(Clause),
+	;	'$lgt_must_be'(clause_or_partial_clause, Clause),
 		(	Clause = (Head :- Body) ->
 			(	Body == true ->
 				TPred = '$lgt_assertz_fact_checked'(Self, Head, This, p(_), p(p))
@@ -11414,7 +11400,7 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	(	'$lgt_runtime_db_clause_checked'((Head :- Body)) ->
 		TPred = '$lgt_clause'(Self, Head, Body, This, p(_))
-	;	'$lgt_compiler_db_clause_checked'((Head :- Body)),
+	;	'$lgt_must_be'(clause_or_partial_clause, (Head :- Body)),
 		TPred = '$lgt_clause_checked'(Self, Head, Body, This, p(_))
 	).
 
@@ -11422,7 +11408,7 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	(	'$lgt_runtime_db_clause_checked'(Clause) ->
 		TPred = '$lgt_retract'(Self, Clause, This, p(_))
-	;	'$lgt_compiler_db_clause_checked'(Clause),
+	;	'$lgt_must_be'(clause_or_partial_clause, Clause),
 		(	Clause = (Head :- Body) ->
 			(	var(Body) ->
 				'$lgt_retract_var_body_checked'(Self, Clause, This, p(_))
@@ -11436,9 +11422,9 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_self_msg'(retractall(Head), TPred, This, Self) :-
 	!,
-	(	'$lgt_runtime_db_clause_checked'(Head) ->
+	(	var(Head) ->
 		TPred = '$lgt_retractall'(Self, Head, This, p(_))
-	;	'$lgt_compiler_db_clause_checked'(Head),
+	;	'$lgt_must_be'(callable, Head),
 		TPred = '$lgt_retractall_checked'(Self, Head, This, p(_))
 	).
 
@@ -12599,7 +12585,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	functor(THeadTemplate, TFunctor, TArity),
 	'$lgt_unify_head_thead_arguments'(HeadTemplate, THeadTemplate, ExCtxTemplate),
-	once('$lgt_pp_object_'(_, _, _, _, _, _, _, _, DDef, _, _)),
+	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, DDef, _, _),
 	Clause =.. [DDef, HeadTemplate, ExCtxTemplate, THeadTemplate],
 	assertz('$lgt_pp_ddef_'(Clause)),
 	'$lgt_check_for_redefined_built_in'(HeadTemplate, ExCtxTemplate, THeadTemplate, Ctx),
