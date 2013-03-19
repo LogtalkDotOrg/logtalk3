@@ -6864,10 +6864,11 @@ current_logtalk_flag(Flag, Value) :-
 % info/2 predicate directive
 
 '$lgt_tr_logtalk_directive'(info(Pred, List), _) :-
-	'$lgt_must_be'(nonvar, Pred),
 	(	'$lgt_valid_predicate_or_non_terminal_indicator'(Pred, Functor, Arity) ->
 		'$lgt_tr_predicate_info_directive'(List, Functor, Arity, TList),
 		assertz('$lgt_pp_info_'(Pred, TList))
+	;	var(Pred) ->
+		throw(instantiation_error)
 	;	throw(type_error(predicate_indicator, Pred))
 	).
 
@@ -7587,7 +7588,6 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_coinductive_directive'([], _).
 
 '$lgt_tr_coinductive_directive'([Pred| Preds], Ctx) :-
-	'$lgt_must_be'(nonvar, Pred),
 	'$lgt_valid_coinductive_template'(Pred, Functor, Arity, Head, TestHead, Template),
 	!,
 	'$lgt_check_for_directive_after_call'(Functor/Arity),
@@ -7608,6 +7608,10 @@ current_logtalk_flag(Flag, Value) :-
 	assertz('$lgt_pp_coinductive_'(Head, TestHead, TCHead, THead, DHead)),
 	assertz('$lgt_pp_predicate_property_'(Entity, Functor/Arity, coinductive(Template))),
 	'$lgt_tr_coinductive_directive'(Preds, Ctx).
+
+'$lgt_tr_coinductive_directive'([Pred| _], _) :-
+	var(Pred),
+	throw(instantiation_error).
 
 '$lgt_tr_coinductive_directive'([Pred| _], _) :-
 	throw(type_error(predicate_indicator, Pred)).
