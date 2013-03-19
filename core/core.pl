@@ -4853,7 +4853,8 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	% make sure there are no leftovers
 	'$lgt_clean_pp_file_clauses',
-	% the caller might need the flags set
+	% the caller of this predicate might need the flags set
+	% (e.g. for reporting loading and compilation warnings)
 	'$lgt_set_compiler_flags'(Flags).
 
 '$lgt_load_files'([File| Files], Flags) :-
@@ -4885,6 +4886,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_current_directory'(Current),
 	'$lgt_change_directory'(Directory),
 	(	'$lgt_loaded_file_'(Basename, Directory, PreviousFlags, _) ->
+		% we're attempting to reload a source file
 		(	(	'$lgt_member'(reload(skip), PreviousFlags)
 			;	'$lgt_compiler_flag'(reload, skip)
 			) ->
@@ -4894,7 +4896,8 @@ current_logtalk_flag(Flag, Value) :-
 			'$lgt_load_compiled_file'(File, SourceFile, PrologFile),
 			'$lgt_print_message'(information(loading), core, reloaded_file(SourceFile, Flags))
 		)
-	;	'$lgt_print_message'(silent(loading), core, loading_file(SourceFile, Flags)),
+	;	% first time loading this source file
+		'$lgt_print_message'(silent(loading), core, loading_file(SourceFile, Flags)),
 		'$lgt_compile_file'(SourceFile, PrologFile, Flags, loading),
 		'$lgt_load_compiled_file'(File, SourceFile, PrologFile),
 		'$lgt_print_message'(information(loading), core, loaded_file(SourceFile, Flags))
@@ -4956,9 +4959,11 @@ current_logtalk_flag(Flag, Value) :-
 		Type = category
 	),
 	(	Flags /\ 1 =:= 1 ->
-		% final entity
+		% final entity; no redefinition allowed
 		throw(permission_error(modify, Type, Entity))
-	;	true
+	;	% redefinable entity but, in the presence of entity dynamic predicates, when
+		% using some backend Prolog compilers, some old dynamic clauses may persist
+		true
 	),
 	(	% check file information using the file_lines/4 entity property, if available
 		'$lgt_entity_property_'(Entity, file_lines(OldBase, OldDirectory, _, _)),
@@ -4987,9 +4992,9 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_report_redefined_entity'(Type, Entity, OldFile, NewFile, Lines) :-
 	(	NewFile == nil ->
-		% we're reloading the same source file so consider redefinitions normal
+		% we're reloading the same source file so consider entity redefinitions normal
 		'$lgt_print_message'(information(loading), core, redefining_entity(Type, Entity))
-	;	% we've conflicting entities coming from different source files
+	;	% we've conflicting entity definitions coming from different source files
 		'$lgt_increment_loadind_warnings_counter',
 		'$lgt_print_message'(warning(loading), core, redefining_entity_from_file(NewFile, Lines, Type, Entity, OldFile))
 	).
@@ -5032,7 +5037,8 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	% make sure there are no leftovers
 	'$lgt_clean_pp_file_clauses',
-	% the caller might need the flags set
+	% the caller of this predicate might need the flags set
+	% (e.g. for reporting loading and compilation warnings)
 	'$lgt_set_compiler_flags'(Flags).
 
 '$lgt_compile_files'([File| Files], Flags) :-
@@ -5064,7 +5070,8 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_compare_file_modification_times'(Result, SourceFile, PrologFile),
 		Result \== (>) ->
 		'$lgt_print_message'(silent(compiling), core, up_to_date_file(SourceFile, Flags))
-	;	'$lgt_print_message'(silent(compiling), core, compiling_file(SourceFile, Flags)),
+	;	% the intermediate Prolog file doesn't exist or it's outdated
+		'$lgt_print_message'(silent(compiling), core, compiling_file(SourceFile, Flags)),
 		'$lgt_tr_file'(SourceFile, PrologFile),
 		'$lgt_compiler_flag'(prolog_compiler, Options),
 		'$lgt_compile_prolog_code'(PrologFile, SourceFile, Options),
