@@ -18821,8 +18821,6 @@ current_logtalk_flag(Flag, Value) :-
 % Logtalk runtime initialization goal
 
 :- initialization((
-	% make sure that the scratch directory exists
-	'$lgt_make_directory'('$LOGTALKUSER/scratch/'),
 	'$lgt_load_default_entities',
 	'$lgt_load_settings_file'(Result),
 	'$lgt_print_message'(banner, core, banner),
