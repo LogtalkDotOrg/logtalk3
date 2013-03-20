@@ -12567,7 +12567,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_add_def_clause'(Head, Functor, Arity, THead, Ctx) :-
 	functor(HeadTemplate, Functor, Arity),
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, Prefix, _, _, ExCtx, _, _),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, Prefix, _, _, ExCtx, Mode, _),
 	'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	functor(THeadTemplate, TFunctor, TArity),
 	'$lgt_unify_head_thead_arguments'(HeadTemplate, THeadTemplate, ExCtxTemplate),
@@ -12578,7 +12578,7 @@ current_logtalk_flag(Flag, Value) :-
 	Clause =.. [Def, HeadTemplate, ExCtxTemplate, THeadTemplate],
 	assertz('$lgt_pp_def_'(Clause)),
 	'$lgt_check_for_redefined_built_in'(HeadTemplate, ExCtxTemplate, THeadTemplate, Ctx),
-	'$lgt_remember_defined_predicate'(HeadTemplate, Functor, Arity, ExCtxTemplate, THeadTemplate, Ctx),
+	'$lgt_remember_defined_predicate'(HeadTemplate, Functor, Arity, ExCtxTemplate, THeadTemplate, Mode),
 	Head = HeadTemplate,
 	ExCtx = ExCtxTemplate,
 	THead = THeadTemplate.
@@ -12592,7 +12592,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_add_ddef_clause'(Head, Functor, Arity, THead, Ctx) :-
 	functor(HeadTemplate, Functor, Arity),
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, Prefix, _, _, ExCtx, _, _),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, Prefix, _, _, ExCtx, Mode, _),
 	'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	functor(THeadTemplate, TFunctor, TArity),
 	'$lgt_unify_head_thead_arguments'(HeadTemplate, THeadTemplate, ExCtxTemplate),
@@ -12600,7 +12600,7 @@ current_logtalk_flag(Flag, Value) :-
 	Clause =.. [DDef, HeadTemplate, ExCtxTemplate, THeadTemplate],
 	assertz('$lgt_pp_ddef_'(Clause)),
 	'$lgt_check_for_redefined_built_in'(HeadTemplate, ExCtxTemplate, THeadTemplate, Ctx),
-	'$lgt_remember_defined_predicate'(HeadTemplate, Functor, Arity, ExCtxTemplate, THeadTemplate, Ctx),
+	'$lgt_remember_defined_predicate'(HeadTemplate, Functor, Arity, ExCtxTemplate, THeadTemplate, Mode),
 	Head = HeadTemplate,
 	ExCtx = ExCtxTemplate,
 	THead = THeadTemplate.
@@ -12663,7 +12663,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_remember_defined_predicate'(@callable, +atom, +integer, +execution_context, @callable, +compilation_context)
+% '$lgt_remember_defined_predicate'(@callable, +atom, +integer, +execution_context, @callable, +compound)
 %
 % it's necessary to remember which predicates are defined in order to deal with
 % redefinition of built-in predicates, detect missing predicate directives, and
@@ -12672,8 +12672,7 @@ current_logtalk_flag(Flag, Value) :-
 % the check for discontiguous predicates is not performed when compiling clauses
 % for auxiliary predicates (using the logtalk::compile_aux_clauses/1 hook predicate)
 
-'$lgt_remember_defined_predicate'(Head, Functor, Arity, ExCtx, THead, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, Mode),
+'$lgt_remember_defined_predicate'(Head, Functor, Arity, ExCtx, THead, Mode) :-
 	(	'$lgt_pp_defines_predicate_'(Head, _, _, _) ->
 		% not the first clause for the predicate
 		(	'$lgt_pp_previous_predicate_'(PreviousFunctor, PreviousArity),
