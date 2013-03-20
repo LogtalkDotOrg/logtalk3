@@ -49,6 +49,9 @@ predicate. Optimized compilation of sufficiently instantiated calls to the
 without any definition would not be reported when the `redefined_built_ins` is
 set to `warning`.
 
+* FIXED: When expanding a file name, it's only necessary to ensure that its
+directory exists for a generated intermediate file.
+
 Documentation
 -------------
 

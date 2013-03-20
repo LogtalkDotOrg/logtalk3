@@ -5150,8 +5150,11 @@ current_logtalk_flag(Flag, Value) :-
 	atom_concat(Directory1, Basename, Path),
 	'$lgt_expand_path'(Path, FullPath),
 	atom_concat(Directory, Basename, FullPath),
-	% make sure the directory exists
-	'$lgt_make_directory'(Directory).
+	(	Type == logtalk ->
+		true
+	;	% make sure the directory exists
+		'$lgt_make_directory'(Directory)
+	).
 
 
 
