@@ -6622,21 +6622,21 @@ current_logtalk_flag(Flag, Value) :-
 
 % auxiliary predicate to translate all variants to the object opening directive
 '$lgt_tr_logtalk_directive'(object_(Obj, Relations), Ctx) :-
-	(	var(Obj),
+	(	var(Obj) ->
 		throw(instantiation_error)
-	;	\+ callable(Obj),
+	;	\+ callable(Obj) ->
 		throw(type_error(object_identifier, Obj))
-	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, _)),
+	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, _)) ->
 		throw(permission_error(modify, object, Obj))
-	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_protocol_'(Obj, _, _, _, _)),
+	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_protocol_'(Obj, _, _, _, _)) ->
 		throw(permission_error(modify, protocol, Obj))
-	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_category_'(Obj, _, _, _, _, _)),
+	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_category_'(Obj, _, _, _, _, _)) ->
 		throw(permission_error(modify, category, Obj))
-	;	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
+	;	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _) ->
 		throw(existence_error(directive, end_object/0))
-	;	'$lgt_pp_protocol_'(_, _, _, _, _),
+	;	'$lgt_pp_protocol_'(_, _, _, _, _) ->
 		throw(existence_error(directive, end_protocol/0))
-	;	'$lgt_pp_category_'(_, _, _, _, _, _),
+	;	'$lgt_pp_category_'(_, _, _, _, _, _) ->
 		throw(existence_error(directive, end_category/0))
 	;	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
 			'$lgt_print_message'(silent(compiling), core, compiling_entity(object, Obj))
@@ -6669,21 +6669,21 @@ current_logtalk_flag(Flag, Value) :-
 
 % auxiliary predicate to translate all variants to the protocol opening directive
 '$lgt_tr_logtalk_directive'(protocol_(Ptc, Relations), Ctx) :-
-	(	var(Ptc),
+	(	var(Ptc) ->
 		throw(instantiation_error)
-	;	\+ atom(Ptc),
+	;	\+ atom(Ptc) ->
 		throw(type_error(protocol_identifier, Ptc))
-	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_object_'(Ptc, _, _, _, _, _, _, _, _, _, _)),
+	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_object_'(Ptc, _, _, _, _, _, _, _, _, _, _)) ->
 		throw(permission_error(modify, object, Ptc))
-	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_protocol_'(Ptc, _, _, _, _)),
+	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_protocol_'(Ptc, _, _, _, _)) ->
 		throw(permission_error(modify, protocol, Ptc))
-	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_category_'(Ptc, _, _, _, _, _)),
+	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_category_'(Ptc, _, _, _, _, _)) ->
 		throw(permission_error(modify, category, Ptc))
-	;	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
+	;	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _) ->
 		throw(existence_error(directive, end_object/0))
-	;	'$lgt_pp_protocol_'(_, _, _, _, _),
+	;	'$lgt_pp_protocol_'(_, _, _, _, _) ->
 		throw(existence_error(directive, end_protocol/0))
-	;	'$lgt_pp_category_'(_, _, _, _, _, _),
+	;	'$lgt_pp_category_'(_, _, _, _, _, _) ->
 		throw(existence_error(directive, end_category/0))
 	;	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
 			'$lgt_print_message'(silent(compiling), core, compiling_entity(protocol, Ptc))
@@ -6719,21 +6719,21 @@ current_logtalk_flag(Flag, Value) :-
 
 % auxiliary predicate to translate all variants to the category opening directive
 '$lgt_tr_logtalk_directive'(category_(Ctg, Relations), Ctx) :-
-	(	var(Ctg),
+	(	var(Ctg) ->
 		throw(instantiation_error)
-	;	\+ callable(Ctg),
+	;	\+ callable(Ctg) ->
 		throw(type_error(category_identifier, Ctg))
-	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_object_'(Ctg, _, _, _, _, _, _, _, _, _, _)),
+	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_object_'(Ctg, _, _, _, _, _, _, _, _, _, _)) ->
 		throw(permission_error(modify, object, Ctg))
-	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_protocol_'(Ctg, _, _, _, _)),
+	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_protocol_'(Ctg, _, _, _, _)) ->
 		throw(permission_error(modify, protocol, Ctg))
-	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_category_'(Ctg, _, _, _, _, _)),
+	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_category_'(Ctg, _, _, _, _, _)) ->
 		throw(permission_error(modify, category, Ctg))
-	;	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
+	;	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _) ->
 		throw(existence_error(directive, end_object/0))
-	;	'$lgt_pp_protocol_'(_, _, _, _, _),
+	;	'$lgt_pp_protocol_'(_, _, _, _, _) ->
 		throw(existence_error(directive, end_protocol/0))
-	;	'$lgt_pp_category_'(_, _, _, _, _, _),
+	;	'$lgt_pp_category_'(_, _, _, _, _, _) ->
 		throw(existence_error(directive, end_category/0))
 	;	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
 			'$lgt_print_message'(silent(compiling), core, compiling_entity(category, Ctg))
@@ -6761,7 +6761,6 @@ current_logtalk_flag(Flag, Value) :-
 % compile modules as objects
 
 '$lgt_tr_logtalk_directive'(module(Module), Ctx) :-
-	!,
 	% empty export list
 	'$lgt_tr_logtalk_directive'(module(Module, []), Ctx).
 
@@ -6792,12 +6791,9 @@ current_logtalk_flag(Flag, Value) :-
 % create a message queue at object initialization
 
 '$lgt_tr_logtalk_directive'(threaded, _) :-
-	\+ '$lgt_prolog_feature'(threads, supported),
-	throw(resource_error(threads)).
-
-'$lgt_tr_logtalk_directive'(threaded, _) :-
-	!,
-	(	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _) ->
+	(	'$lgt_prolog_feature'(threads, unsupported) ->
+		throw(resource_error(threads))
+	;	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _) ->
 		assertz('$lgt_pp_threaded_')
 	;	throw(domain_error(object_directive, threaded/0))
 	).
@@ -6808,13 +6804,10 @@ current_logtalk_flag(Flag, Value) :-
 % this directive is ignored when using a back-end Prolog compiler that don't provide a compatible threads implementation
 
 '$lgt_tr_logtalk_directive'(synchronized, _) :-
-	\+ '$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
-	\+ '$lgt_pp_category_'(_, _, _, _, _, _),
-	throw(domain_error(directive, synchronized/0)).
-
-'$lgt_tr_logtalk_directive'(synchronized, _) :-
-	!,
-	(	'$lgt_prolog_feature'(threads, supported) ->
+	(	\+ '$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
+		\+ '$lgt_pp_category_'(_, _, _, _, _, _) ->
+		throw(domain_error(directive, synchronized/0))
+	;	'$lgt_prolog_feature'(threads, supported) ->
 		'$lgt_pp_entity'(_, _, Prefix),
 		atom_concat(Prefix, 'mutex_', Mutex),
 		assertz('$lgt_pp_synchronized_'),
@@ -6828,7 +6821,6 @@ current_logtalk_flag(Flag, Value) :-
 % (entities are static by default but can be declared dynamic using this directive)
 
 '$lgt_tr_logtalk_directive'((dynamic), _) :-
-	!,
 	assertz('$lgt_pp_dynamic_').
 
 
@@ -6857,7 +6849,6 @@ current_logtalk_flag(Flag, Value) :-
 % uses/2 entity directive
 
 '$lgt_tr_logtalk_directive'(uses(Obj, Resources), Ctx) :-
-	!,
 	'$lgt_must_be'(object_identifier, Obj),
 	'$lgt_must_be'(list, Resources),
 	'$lgt_add_referenced_object'(Obj),
@@ -6914,7 +6905,6 @@ current_logtalk_flag(Flag, Value) :-
 % info/1 entity directive
 
 '$lgt_tr_logtalk_directive'(info(List), _) :-
-	!,
 	'$lgt_tr_entity_info_directive'(List, TList),
 	assertz('$lgt_pp_info_'(TList)).
 
