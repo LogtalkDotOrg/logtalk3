@@ -12577,7 +12577,7 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	Clause =.. [Def, HeadTemplate, ExCtxTemplate, THeadTemplate],
 	assertz('$lgt_pp_def_'(Clause)),
-	'$lgt_check_for_redefined_built_in'(HeadTemplate, ExCtxTemplate, THeadTemplate, Ctx),
+	'$lgt_check_for_redefined_built_in'(HeadTemplate, ExCtxTemplate, THeadTemplate, Mode),
 	'$lgt_remember_defined_predicate'(HeadTemplate, Functor, Arity, ExCtxTemplate, THeadTemplate, Mode),
 	Head = HeadTemplate,
 	ExCtx = ExCtxTemplate,
@@ -12599,7 +12599,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, DDef, _, _),
 	Clause =.. [DDef, HeadTemplate, ExCtxTemplate, THeadTemplate],
 	assertz('$lgt_pp_ddef_'(Clause)),
-	'$lgt_check_for_redefined_built_in'(HeadTemplate, ExCtxTemplate, THeadTemplate, Ctx),
+	'$lgt_check_for_redefined_built_in'(HeadTemplate, ExCtxTemplate, THeadTemplate, Mode),
 	'$lgt_remember_defined_predicate'(HeadTemplate, Functor, Arity, ExCtxTemplate, THeadTemplate, Mode),
 	Head = HeadTemplate,
 	ExCtx = ExCtxTemplate,
@@ -12621,22 +12621,23 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	Clause =.. [Def, HeadTemplate, _, fail],
 	assertz('$lgt_pp_def_'(Clause)),
-	'$lgt_check_for_redefined_built_in'(HeadTemplate, _, fail, Ctx).
+	'$lgt_comp_ctx_mode'(Ctx, Mode),
+	'$lgt_check_for_redefined_built_in'(HeadTemplate, _, fail, Mode).
 
 
 
-% '$lgt_check_for_redefined_built_in'(@callable, @execution_context, @callable, @compilation_context)
+% '$lgt_check_for_redefined_built_in'(@callable, @execution_context, @callable, @compound)
 
 '$lgt_check_for_redefined_built_in'(Head, _, _, _) :-
 	'$lgt_pp_redefined_built_in_'(Head, _, _),
 	!.
 
-'$lgt_check_for_redefined_built_in'(Head, ExCtx, THead, Ctx) :-
+'$lgt_check_for_redefined_built_in'(Head, ExCtx, THead, Mode) :-
 	'$lgt_logtalk_built_in_predicate'(Head),
 	!,
 	assertz('$lgt_pp_redefined_built_in_'(Head, ExCtx, THead)),
 	retractall('$lgt_pp_non_portable_predicate_'(Head, _)),
-	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	(	Mode = compile(_),
 		'$lgt_compiler_flag'(redefined_built_ins, warning) ->
 		functor(Head, Functor, Arity),
 		'$lgt_increment_compile_warnings_counter',
@@ -12645,12 +12646,12 @@ current_logtalk_flag(Flag, Value) :-
 	;	true	
 	).
 
-'$lgt_check_for_redefined_built_in'(Head, ExCtx, THead, Ctx) :-
+'$lgt_check_for_redefined_built_in'(Head, ExCtx, THead, Mode) :-
 	'$lgt_prolog_built_in_predicate'(Head),
 	!,
 	assertz('$lgt_pp_redefined_built_in_'(Head, ExCtx, THead)),
 	retractall('$lgt_pp_non_portable_predicate_'(Head, _)),
-	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	(	Mode = compile(_),
 		'$lgt_compiler_flag'(redefined_built_ins, warning) ->
 		functor(Head, Functor, Arity),
 		'$lgt_increment_compile_warnings_counter',
