@@ -8613,13 +8613,15 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_must_be'(callable, Head).
 
 
-% not the first clause for this predicate (but this optimization
-% doesn't allow us to bypass the safety check for meta-predicates)
+% not the first clause for this predicate
 
 '$lgt_tr_head'(Head, THead, Ctx) :-
 	'$lgt_pp_defines_predicate_'(Head, ExCtx, THead, _),
-	\+ '$lgt_pp_meta_predicate_'(Head, _),
 	!,
+	(	'$lgt_pp_meta_predicate_'(Head, Meta) ->
+		'$lgt_check_meta_predicate_head'(Head, Meta)
+	;	true
+	),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
 
 
@@ -8661,21 +8663,12 @@ current_logtalk_flag(Flag, Value) :-
 	throw(permission_error(modify, uses_module_predicate, Functor/Arity)).
 
 
-% non-variable meta-argument in clause head of a user-defined meta-predicate
+% first clause for a user-defined meta-predicate; must check for head meta-argument errors
 
 '$lgt_tr_head'(Head, _, _) :-
 	'$lgt_pp_meta_predicate_'(Head, Meta),
-	(	Head = Entity::Pred ->
-		Meta = Entity::Template
-	;	Head = ':'(Module, Pred) ->
-		Meta = ':'(Module, Template)
-	;	Pred = Head,
-		Template = Meta
-	),
-	Pred =.. [_| Args],
-	Template =.. [_| MArgs],
-	'$lgt_nonvar_meta_arg'(Args, MArgs, Arg),
-	throw(type_error(variable, Arg)).
+	'$lgt_check_meta_predicate_head'(Head, Meta),
+	fail.
 
 
 % definition of event handlers without reference to the "monitoring" built-in protocol
@@ -8843,8 +8836,25 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% look for a non-variable meta-argument
-% (used when checking meta-predicate clause heads for meta-argument unification errors)
+% '$lgt_check_meta_predicate_head'(@callable, @callable)
+% 
+% check a meta-predicate clause head for a non-variable meta-argument
+
+'$lgt_check_meta_predicate_head'(Head, Meta) :-
+	(	Head = Entity::Pred ->
+		Meta = Entity::Template
+	;	Head = ':'(Module, Pred) ->
+		Meta = ':'(Module, Template)
+	;	Pred = Head,
+		Template = Meta
+	),
+	Pred =.. [_| Args],
+	Template =.. [_| MArgs],
+	(	'$lgt_nonvar_meta_arg'(Args, MArgs, Arg) ->
+		throw(type_error(variable, Arg))
+	;	true
+	).
+
 
 '$lgt_nonvar_meta_arg'([Arg| _], [N| _], Arg) :-
 	integer(N),
@@ -12674,7 +12684,7 @@ current_logtalk_flag(Flag, Value) :-
 			Mode \== compile(aux) ->
 			% clauses for the predicate are discontiguous
 			'$lgt_check_discontiguous_directive'(Functor, Arity)
-		;	% more clauses for the same predicate
+		;	% more clauses for the same predicate or no previous predicate
 			true
 		)
 	;	% first clause for this predicate; remember it
