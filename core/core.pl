@@ -3418,7 +3418,7 @@ current_logtalk_flag(Flag, Value) :-
 		functor(Pred, Functor, Arity),
 		throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(::Pred, Sender)))
 	;	% no predicate declaration, check if it's a built-in predicate
-		'$lgt_is_built_in_predicate'(Pred) ->
+		'$lgt_built_in_predicate'(Pred) ->
 		call(Pred)
 	;	functor(Pred, Functor, Arity),
 		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(::Pred, Sender)))
@@ -3516,7 +3516,7 @@ current_logtalk_flag(Flag, Value) :-
 		functor(Pred, Functor, Arity),
 		throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(Obj::Pred, Sender)))
 	;	% no predicate declaration, check if it's a built-in predicate
-		'$lgt_is_built_in_predicate'(Pred) ->
+		'$lgt_built_in_predicate'(Pred) ->
 		call(Pred)
 	;	call(Def, forward(Pred), ExCtx, Call, _, _) ->
 		'$lgt_exec_ctx'(ExCtx, Sender, Obj, Obj, [], []),
@@ -3639,7 +3639,7 @@ current_logtalk_flag(Flag, Value) :-
 		functor(Pred, Functor, Arity),
 		throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(Obj::Pred, Sender)))
 	;	% no predicate declaration, check if it's a built-in predicate
-		'$lgt_is_built_in_predicate'(Pred) ->
+		'$lgt_built_in_predicate'(Pred) ->
 		call(Pred)
 	;	call(Def, forward(Pred), ExCtx, Call, _, _) ->
 		'$lgt_exec_ctx'(ExCtx, Sender, Obj, Obj, [], []),
@@ -3735,7 +3735,7 @@ current_logtalk_flag(Flag, Value) :-
 		functor(Pred, Functor, Arity),
 		throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(^^Pred, This)))
 	;	% no predicate declaration, check if it's a built-in predicate
-		'$lgt_is_built_in_predicate'(Pred) ->
+		'$lgt_built_in_predicate'(Pred) ->
 		call(Pred)
 	;	functor(Pred, Functor, Arity),
 		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(^^Pred, This)))
@@ -3799,7 +3799,7 @@ current_logtalk_flag(Flag, Value) :-
 		functor(Pred, Functor, Arity),
 		throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(^^Pred, Ctg)))
 	;	% no predicate declaration, check if it's a built-in predicate
-		'$lgt_is_built_in_predicate'(Pred) ->
+		'$lgt_built_in_predicate'(Pred) ->
 		call(Pred)
 	;	functor(Pred, Functor, Arity),
 		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(^^Pred, Ctg)))
@@ -4288,7 +4288,7 @@ current_logtalk_flag(Flag, Value) :-
 			fail
 		)
 	;	% no predicate declaration, check if it's a built-in predicate
-		'$lgt_is_built_in_predicate'(Alias) ->
+		'$lgt_built_in_predicate'(Alias) ->
 		call(Alias)
 	;	functor(Alias, Functor, Arity),
 		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(:Alias, This)))
@@ -4767,12 +4767,12 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_user._dcl'(Pred, p(p(p)), no, Flags) :-
 	(	nonvar(Pred) ->
-		\+ '$lgt_is_built_in_predicate'(Pred),
+		\+ '$lgt_built_in_predicate'(Pred),
 		functor(Pred, Functor, Arity),
 		current_predicate(Functor/Arity)
 	;	current_predicate(Functor/Arity),
 		functor(Pred, Functor, Arity),
-		\+ '$lgt_is_built_in_predicate'(Pred),
+		\+ '$lgt_built_in_predicate'(Pred),
 		\+ '$lgt_hidden_functor'(Functor)
 	),
 	(	'$lgt_predicate_property'(Pred, (dynamic)) ->
@@ -4786,7 +4786,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_user._def'(Pred, _, Pred) :-
-	\+ '$lgt_is_built_in_predicate'(Pred),
+	\+ '$lgt_built_in_predicate'(Pred),
 	functor(Pred, Functor, Arity),
 	current_predicate(Functor/Arity).
 
@@ -6491,7 +6491,7 @@ current_logtalk_flag(Flag, Value) :-
 		% directive is a query for a locally defined predicate
 	;	'$lgt_pp_use_module_predicate_'(_, _, Directive)
 		% or a predicate referenced in a use_module/2 directive
-	;	'$lgt_is_built_in_predicate'(Directive)
+	;	'$lgt_built_in_predicate'(Directive)
 		% or a built-in predicate
 	),
 	!,
@@ -10551,7 +10551,7 @@ current_logtalk_flag(Flag, Value) :-
 % Logtalk and Prolog built-in predicates
 
 '$lgt_tr_body'(Pred, TPred, DPred, Ctx) :-
-	'$lgt_is_built_in_predicate'(Pred),
+	'$lgt_built_in_predicate'(Pred),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	(	'$lgt_comp_ctx_mode'(Ctx, runtime) ->
 		TPred = Pred
@@ -15473,19 +15473,19 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_is_built_in_predicate'(@callable)
+% '$lgt_built_in_predicate'(@callable)
 %
-% checks if the argument is either a Prolog or Logtalk built-in predicate
+% checks if the argument is either a Logtalk or a Prolog built-in predicate
 
-'$lgt_is_built_in_predicate'(Pred) :-
+'$lgt_built_in_predicate'(Pred) :-
 	'$lgt_logtalk_built_in_predicate'(Pred),
 	!.
 
-'$lgt_is_built_in_predicate'(Pred) :-
+'$lgt_built_in_predicate'(Pred) :-
 	'$lgt_predicate_property'(Pred, built_in),
 	!.
 
-'$lgt_is_built_in_predicate'(Pred) :-
+'$lgt_built_in_predicate'(Pred) :-
 	'$lgt_iso_predicate'(Pred),
 	!.
 
