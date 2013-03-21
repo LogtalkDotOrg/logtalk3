@@ -297,7 +297,7 @@
 :- dynamic('$lgt_pp_non_portable_function_'/2).				% '$lgt_pp_non_portable_function_'(Function, Lines)
 :- dynamic('$lgt_pp_missing_dynamic_directive_'/2).			% '$lgt_pp_missing_dynamic_directive_'(Head, Lines)
 :- dynamic('$lgt_pp_missing_discontiguous_directive_'/3).	% '$lgt_pp_missing_discontiguous_directive_'(Functor, Arity, Lines)
-:- dynamic('$lgt_pp_previous_predicate_'/2).				% '$lgt_pp_previous_predicate_'(Functor, Arity)
+:- dynamic('$lgt_pp_previous_predicate_'/1).				% '$lgt_pp_previous_predicate_'(Head)
 
 :- dynamic('$lgt_pp_defines_non_terminal_'/2).				% '$lgt_pp_defines_non_terminal_'(Functor, Arity)
 :- dynamic('$lgt_pp_calls_non_terminal_'/3).				% '$lgt_pp_calls_non_terminal_'(Functor, Arity, Lines)
@@ -5840,7 +5840,7 @@ current_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_pp_non_portable_function_'(_, _)),
 	retractall('$lgt_pp_missing_dynamic_directive_'(_, _)),
 	retractall('$lgt_pp_missing_discontiguous_directive_'(_, _, _)),
-	retractall('$lgt_pp_previous_predicate_'(_, _)),
+	retractall('$lgt_pp_previous_predicate_'(_)),
 	retractall('$lgt_pp_defines_non_terminal_'(_, _)),
 	retractall('$lgt_pp_calls_non_terminal_'(_, _, _)),
 	retractall('$lgt_pp_referenced_object_'(_, _)),
@@ -8622,7 +8622,11 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_check_meta_predicate_head'(Head, Meta)
 	;	true
 	),
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	(	'$lgt_pp_previous_predicate_'(Head) ->
+		true
+	;	'$lgt_check_discontiguous_predicate'(Head, Ctx)
+	).
 
 
 % definition of dynamic predicates inside categories
@@ -12677,24 +12681,33 @@ current_logtalk_flag(Flag, Value) :-
 % for auxiliary predicates (using the logtalk::compile_aux_clauses/1 hook predicate)
 
 '$lgt_remember_defined_predicate'(Head, Functor, Arity, ExCtx, THead, Mode) :-
-	(	'$lgt_pp_defines_predicate_'(Head, _, _, _) ->
-		% not the first clause for the predicate
-		(	'$lgt_pp_previous_predicate_'(PreviousFunctor, PreviousArity),
-			PreviousFunctor/PreviousArity \== Functor/Arity,
-			Mode \== compile(aux) ->
-			% clauses for the predicate are discontiguous
-			'$lgt_check_discontiguous_directive'(Functor, Arity)
-		;	% more clauses for the same predicate or no previous predicate
-			true
-		)
-	;	% first clause for this predicate; remember it
-		assertz('$lgt_pp_defines_predicate_'(Head, ExCtx, THead, Mode)),
-		retractall('$lgt_pp_non_portable_predicate_'(Head, _))
-	),
+	assertz('$lgt_pp_defines_predicate_'(Head, ExCtx, THead, Mode)),
+	retractall('$lgt_pp_non_portable_predicate_'(Head, _)),
 	(	Mode == compile(aux) ->
 		true
-	;	retractall('$lgt_pp_previous_predicate_'(_, _)),
-		assertz('$lgt_pp_previous_predicate_'(Functor, Arity))
+	;	functor(Template, Functor, Arity),
+		retractall('$lgt_pp_previous_predicate_'(_)),
+		assertz('$lgt_pp_previous_predicate_'(Template))
+	).
+
+
+
+% '$lgt_check_discontiguous_predicate'(@callable, @compilation_context)
+%
+% check if the predicate whose clause is being compiled is discontiguous
+%
+% this predicate is called when compiling another clause for an already
+% found predicate that is not the previous compiled predicate if such a
+% predicate exists; this test is skipped for runtime clause compilation
+% and when compiling auxiliary predicates
+
+'$lgt_check_discontiguous_predicate'(Head, Ctx) :-
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(regular)),
+		'$lgt_pp_previous_predicate_'(_) ->
+		% clauses for the predicate are discontiguous
+		functor(Head, Functor, Arity),
+		'$lgt_check_discontiguous_directive'(Functor, Arity)
+	;	true
 	).
 
 
