@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SWI Prolog 6.0.0 and later versions
-%  Last updated on March 8, 2013
+%  Last updated on March 21, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -30,15 +30,12 @@
 :- set_prolog_flag(generate_debug_info, false).
 
 
-% SWI-Prolog hook predicate
+% disable SWI-Prolog discontiguous predicate clauses warning
+% as the Logtalk compiler does its own detection and there's
+% no point in printing the same warning twice
 :- multifile(message_hook/3).
 :- dynamic(message_hook/3).
-
-% SWI-Prolog discontiguous predicate clauses warning;
-% hack to increment the Logtalk warnings counter
-message_hook(discontiguous(_), _, _) :-
-	'$lgt_increment_loadind_warnings_counter',
-	fail.
+message_hook(discontiguous(_), _, _).
 
 
 

@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SICStus Prolog 4.1.0 and later versions
-%  Last updated on March 8, 2013
+%  Last updated on March 21, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -30,12 +30,11 @@
 :- use_module(library(system)).
 :- use_module(library(system3), [pid/1, shell/1, shell/2]).
 
-
-:- multifile(message_hook/3).							% SICStus Prolog hook predicate
-
-message_hook(warning, clauses_not_together(_), _) :-	% SICStus Prolog discontiguous predicate
-	'$lgt_increment_loadind_warnings_counter',			% clauses warning; hack to increment
-	fail.												% the Logtalk warnings counter
+% disable SICStus Prolog discontiguous predicate clauses warning
+% as the Logtalk compiler does its own detection and there's no
+% point in printing the same warning twice
+:- multifile(message_hook/3).
+message_hook(warning, clauses_not_together(_), _).
 
 
 
