@@ -79,12 +79,13 @@
 	).
 
 
-% disable YAP discontiguous predicate clauses warning as the
-% Logtalk compiler does its own detection and there's no
-% point in printing the same warning twice
-:- multifile(message_hook/3).
-:- dynamic(message_hook/3).
-message_hook(clauses_not_together(_), _, _).
+% disable YAP discontiguous predicate clauses warning as
+% the Logtalk compiler does its own detection and there's
+% no point in printing the same warning twice
+%
+%:- multifile(message_hook/3).
+%:- dynamic(message_hook/3).
+%message_hook(clauses_not_together(_), _, _).
 
 
 

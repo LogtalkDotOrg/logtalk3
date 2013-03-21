@@ -33,8 +33,9 @@
 % disable SICStus Prolog discontiguous predicate clauses warning
 % as the Logtalk compiler does its own detection and there's no
 % point in printing the same warning twice
-:- multifile(message_hook/3).
-message_hook(warning, clauses_not_together(_), _).
+%
+%:- multifile(message_hook/3).
+%message_hook(warning, clauses_not_together(_), _).
 
 
 

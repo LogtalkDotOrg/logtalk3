@@ -55,9 +55,12 @@ directory exists for a generated intermediate file.
 Prolog adapter and integration files
 ------------------------------------
 
-* IMPROVED: The adapter files for SICStus Prolog, SWI-Prolog, and YAP now
-define the `message_hook/3` predicate to avoid printing repeated discontiguous
-predicate warnings that are already reported by the Logtalk compiler.
+* UPDATED: The adapter files for SICStus Prolog, SWI-Prolog, and YAP now
+include a commented out definition for the `message_hook/3` predicate for
+avoiding printing repeated discontiguous predicate warnings that are already
+reported by the Logtalk compiler. Note that activating this definition will
+likely result in missing discontiguous predicate warnings, however, when
+compiling Prolog code.
 
 Documentation
 -------------

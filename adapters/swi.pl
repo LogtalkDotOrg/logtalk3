@@ -33,9 +33,10 @@
 % disable SWI-Prolog discontiguous predicate clauses warning
 % as the Logtalk compiler does its own detection and there's
 % no point in printing the same warning twice
-:- multifile(message_hook/3).
-:- dynamic(message_hook/3).
-message_hook(discontiguous(_), _, _).
+%
+%:- multifile(message_hook/3).
+%:- dynamic(message_hook/3).
+%message_hook(discontiguous(_), _, _).
 
 
 
