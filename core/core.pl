@@ -8618,10 +8618,6 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_head'(Head, THead, Ctx) :-
 	'$lgt_pp_defines_predicate_'(Head, ExCtx, THead, _),
 	!,
-	(	'$lgt_pp_meta_predicate_'(Head, Meta) ->
-		'$lgt_check_meta_predicate_head'(Head, Meta)
-	;	true
-	),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	(	'$lgt_pp_previous_predicate_'(Head) ->
 		true
@@ -8665,14 +8661,6 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_pp_use_module_predicate_'(_, _, Alias),
 	functor(Alias, Functor, Arity),
 	throw(permission_error(modify, uses_module_predicate, Functor/Arity)).
-
-
-% first clause for a user-defined meta-predicate; must check for head meta-argument errors
-
-'$lgt_tr_head'(Head, _, _) :-
-	'$lgt_pp_meta_predicate_'(Head, Meta),
-	'$lgt_check_meta_predicate_head'(Head, Meta),
-	fail.
 
 
 % definition of event handlers without reference to the "monitoring" built-in protocol
@@ -8837,35 +8825,6 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_add_ddef_clause'(Head, Functor, Arity, THead, Ctx)
 	;	'$lgt_add_def_clause'(Head, Functor, Arity, THead, Ctx)
 	).
-
-
-
-% '$lgt_check_meta_predicate_head'(@callable, @callable)
-% 
-% check a meta-predicate clause head for a non-variable meta-argument
-
-'$lgt_check_meta_predicate_head'(Head, Meta) :-
-	(	Head = Entity::Pred ->
-		Meta = Entity::Template
-	;	Head = ':'(Module, Pred) ->
-		Meta = ':'(Module, Template)
-	;	Pred = Head,
-		Template = Meta
-	),
-	Pred =.. [_| Args],
-	Template =.. [_| MArgs],
-	(	'$lgt_nonvar_meta_arg'(Args, MArgs, Arg) ->
-		throw(type_error(variable, Arg))
-	;	true
-	).
-
-
-'$lgt_nonvar_meta_arg'([Arg| _], [N| _], Arg) :-
-	integer(N),
-	nonvar(Arg).
-
-'$lgt_nonvar_meta_arg'([_| Args], [_| MArgs], Arg) :-
-	'$lgt_nonvar_meta_arg'(Args, MArgs, Arg).
 
 
 
@@ -11567,14 +11526,26 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_head_meta_variables'(Head, MetaVars) :-
 	(	'$lgt_pp_meta_predicate_'(Head, Meta) ->
-		Head =.. [_| Args],
-		Meta =.. [_| MArgs],
+		(	Head = Entity::Pred ->
+			Meta = Entity::Template
+		;	Head = ':'(Module, Pred) ->
+			Meta = ':'(Module, Template)
+		;	Pred = Head,
+			Template = Meta
+		),
+		Pred =.. [_| Args],
+		Template =.. [_| MArgs],
 		'$lgt_extract_meta_variables'(Args, MArgs, MetaVars)
 	;	MetaVars = []
 	).
 
 
 '$lgt_extract_meta_variables'([], [], []).
+
+'$lgt_extract_meta_variables'([Arg| _], [MArg| _], _) :-
+	integer(MArg),
+	nonvar(Arg),
+	throw(type_error(variable, Arg)).
 
 '$lgt_extract_meta_variables'([Var| Args], [MArg| MArgs], [Var| MetaVars]) :-
 	var(Var),
