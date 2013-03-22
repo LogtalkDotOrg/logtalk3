@@ -11542,19 +11542,17 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_extract_meta_variables'([], [], []).
 
-'$lgt_extract_meta_variables'([Arg| _], [MArg| _], _) :-
-	integer(MArg),
-	nonvar(Arg),
-	throw(type_error(variable, Arg)).
-
-'$lgt_extract_meta_variables'([Var| Args], [MArg| MArgs], [Var| MetaVars]) :-
-	var(Var),
-	MArg \== (*),
-	!,
-	'$lgt_extract_meta_variables'(Args, MArgs, MetaVars).
-
-'$lgt_extract_meta_variables'([_| Args], [_| MArgs], MetaVars) :-
-	'$lgt_extract_meta_variables'(Args, MArgs, MetaVars).
+'$lgt_extract_meta_variables'([Arg| Args], [MArg| MArgs], MetaVars) :-
+	(	MArg == (*) ->
+		'$lgt_extract_meta_variables'(Args, MArgs, MetaVars)
+	;	integer(MArg),
+		nonvar(Arg) ->
+		throw(type_error(variable, Arg))
+	;	var(Arg) ->
+		MetaVars = [Arg| RestMetaVars],
+		'$lgt_extract_meta_variables'(Args, MArgs, RestMetaVars)
+	;	'$lgt_extract_meta_variables'(Args, MArgs, MetaVars)
+	).
 
 
 
