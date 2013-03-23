@@ -101,9 +101,6 @@
 % setup_call_cleanup(+callable, +callable, +callable) -- built-in
 
 
-% call/2-7 -- built-in
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
