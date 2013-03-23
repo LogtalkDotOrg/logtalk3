@@ -15724,10 +15724,6 @@ current_logtalk_flag(Flag, Value) :-
 % stack of coinductive hypothesis (ancestor goals)
 '$lgt_comp_ctx_stack'(ctx(_, _, _, _, _, _, _, _, _, Stack), Stack).
 
-'$lgt_comp_ctx_stack_new_stack'(ctx(Head, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, _, Mode, _), NewStack, ctx(Head, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, _, Mode, NewStack)).
-
-'$lgt_comp_ctx_mode_new_mode'(ctx(Head, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, _, Stack), NewMode, ctx(Head, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, NewMode, Stack)).
-
 
 
 % '$lgt_category_parameter'(This, Ctg, Arg, Value)
