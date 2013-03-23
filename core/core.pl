@@ -8479,7 +8479,7 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_pp_entity'(_, Entity, _),
 	'$lgt_head_meta_variables'(Head, MetaVars),
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, MetaVars, _, ExCtx, _, _),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, MetaVars, _, ExCtx, _, _),
 	'$lgt_tr_head'(Head, THead, Ctx),
 	'$lgt_tr_body'(Body, TBody, DBody, Ctx),
 	(	'$lgt_compiler_flag'(optimize, on) ->
@@ -8492,7 +8492,7 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_pp_entity'(_, Entity, _),
 	'$lgt_head_meta_variables'(Head, MetaVars),
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, MetaVars, _, ExCtx, _, _),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, MetaVars, _, ExCtx, _, _),
 	'$lgt_tr_head'(Head, THead, Ctx),
 	'$lgt_tr_body'(Body, TBody, DBody, Ctx),
 	(	'$lgt_compiler_flag'(optimize, on) ->
@@ -8813,7 +8813,6 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_head'(Head, THead, Ctx) :-
 	% first clause for this predicate
-	'$lgt_comp_ctx_head'(Ctx, Head),
 	functor(Head, Functor, Arity),
 	(	'$lgt_pp_dynamic_'(Head),
 		\+ '$lgt_pp_public_'(Functor, Arity),
@@ -9390,9 +9389,9 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_body'(Obj::Pred, TPred, '$lgt_debug'(goal(Obj::Pred, TPred), ExCtx), Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, _, _),
+	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, Mode, _),
 	'$lgt_exec_ctx_this'(ExCtx, This),
-	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	(	Mode = compile(_),
 		nonvar(Obj),
 		This \== user,
 		\+ functor(Obj, {}, 1) ->
@@ -9950,8 +9949,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_body'(sender(Sender), TPred, '$lgt_debug'(goal(sender(Sender), DPred), ExCtx), Ctx) :-
 	!,
-	'$lgt_comp_ctx_sender'(Ctx, Sender0),
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	'$lgt_comp_ctx'(Ctx, _, Sender0, _, _, _, _, _, ExCtx, _, _),
 	'$lgt_exec_ctx'(ExCtx, Sender0, _, _, _, _),
 	(	var(Sender) ->
 		% compile time unification
