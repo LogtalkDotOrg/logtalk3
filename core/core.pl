@@ -8390,16 +8390,15 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_clause'(Clause, Ctx) :-
 	% ensure that only the compilation context mode is shared between different clauses
 	'$lgt_comp_ctx_mode'(Ctx, Mode),
-	'$lgt_comp_ctx_mode'(NewCtx, Mode),
 	(	'$lgt_pp_object_'(Entity, Prefix, _, _, _, _, _, _, _, _, _) ->
 		% entity may be a parametric object; we require "this" for inline compilation of parameter/2
-		'$lgt_comp_ctx_this'(NewCtx, Entity)
+		'$lgt_comp_ctx'(NewCtx, _, _, Entity, _, Prefix, _, _, _, Mode, _)
 	;	'$lgt_pp_category_'(_, Prefix, _, _, _, _) ->
-		true
-	;	'$lgt_pp_protocol_'(_, Prefix, _, _, _)
+		'$lgt_comp_ctx'(NewCtx, _, _, _, _, Prefix, _, _, _, Mode, _)
+	;	'$lgt_pp_protocol_'(_, Prefix, _, _, _),
+		'$lgt_comp_ctx'(NewCtx, _, _, _, _, Prefix, _, _, _, Mode, _)
 	),
 	% we're translating an entity clause
-	'$lgt_comp_ctx_prefix'(NewCtx, Prefix),
 	catch(
 		'$lgt_tr_clause'(Clause, TClause, DClause, NewCtx),
 		Error,
@@ -8407,12 +8406,12 @@ current_logtalk_flag(Flag, Value) :-
 	% sucessful translation; check which compile clause to save (normal and debug)
 	% and if we have a clause defined by the user or an auxiliary clause
 	(	'$lgt_compiler_flag'(debug, on) ->
-		(	'$lgt_comp_ctx_mode'(Ctx, compile(aux)) ->
+		(	Mode == compile(aux) ->
 			assertz('$lgt_pp_entity_aux_clause_'(DClause))
 		;	'$lgt_pp_term_location'(Location),
 			assertz('$lgt_pp_entity_clause_'(DClause, Location))
 		)
-	;	(	'$lgt_comp_ctx_mode'(Ctx, compile(aux)) ->
+	;	(	Mode == compile(aux) ->
 			assertz('$lgt_pp_entity_aux_clause_'(TClause))
 		;	'$lgt_pp_term_location'(Location),
 			assertz('$lgt_pp_entity_clause_'(TClause, Location))
@@ -8480,21 +8479,20 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_pp_entity'(_, Entity, _),
 	'$lgt_head_meta_variables'(Head, MetaVars),
-	'$lgt_comp_ctx_meta_vars'(Ctx, MetaVars),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, MetaVars, _, ExCtx, _, _),
 	'$lgt_tr_head'(Head, THead, Ctx),
 	'$lgt_tr_body'(Body, TBody, DBody, Ctx),
 	(	'$lgt_compiler_flag'(optimize, on) ->
 		'$lgt_simplify_goal'(TBody, SBody)
 	;	SBody = TBody
 	),
-	'$lgt_clause_number'(Head, N),
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
+	'$lgt_clause_number'(Head, N).
 
 '$lgt_tr_clause'((Head:-Body), TClause, (THead:-'$lgt_debug'(rule(Entity, Head, N), ExCtx),DBody), Ctx) :-
 	!,
 	'$lgt_pp_entity'(_, Entity, _),
 	'$lgt_head_meta_variables'(Head, MetaVars),
-	'$lgt_comp_ctx_meta_vars'(Ctx, MetaVars),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, MetaVars, _, ExCtx, _, _),
 	'$lgt_tr_head'(Head, THead, Ctx),
 	'$lgt_tr_body'(Body, TBody, DBody, Ctx),
 	(	'$lgt_compiler_flag'(optimize, on) ->
@@ -8505,8 +8503,7 @@ current_logtalk_flag(Flag, Value) :-
 		)
 	;	TClause = (THead:-TBody)
 	),
-	'$lgt_clause_number'(Head, N),
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
+	'$lgt_clause_number'(Head, N).
 
 % facts
 
@@ -8893,9 +8890,7 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_tr_msg'(Pred, Obj, TPred0, Sender),
 	TPred = (Obj \= Sender -> TPred0; throw(error(permission_error(access, object, Sender), logtalk([Obj::Pred], This)))),
-	'$lgt_comp_ctx_sender'(Ctx, Sender),
-	'$lgt_comp_ctx_this'(Ctx, This),
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	'$lgt_comp_ctx'(Ctx, _, Sender, This, _, _, _, _, ExCtx, _, _),
 	'$lgt_exec_ctx'(ExCtx, Sender, This, _, _, _).
 
 
@@ -10506,8 +10501,8 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_body'(Pred, TPred, DPred, Ctx) :-
 	'$lgt_built_in_predicate'(Pred),
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	(	'$lgt_comp_ctx_mode'(Ctx, runtime) ->
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, ExCtx, Mode, _),
+	(	Mode == runtime ->
 		TPred = Pred
 	;	\+ '$lgt_pp_defines_predicate_'(Pred, _, _, _),
 		\+ '$lgt_pp_redefined_built_in_'(Pred, _, _),
@@ -10545,9 +10540,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_comp_ctx_meta_vars'(Ctx, [MetaVar| MetaVars]),
 	'$lgt_member_var'(Pred, [MetaVar| MetaVars]),
 	!,
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	'$lgt_comp_ctx_sender'(Ctx, Sender),
-	'$lgt_comp_ctx_self'(Ctx, Self),
+	'$lgt_comp_ctx'(Ctx, _, Sender, _, Self, _, _, _, ExCtx, _, _),
 	'$lgt_exec_ctx'(ExCtx, Sender, _, Self, _, _),
 	'$lgt_entity_prefix'(Sender, Prefix),
 	TPred = '$lgt_metacall_this'(Pred, Prefix, Sender, Sender, Self).
