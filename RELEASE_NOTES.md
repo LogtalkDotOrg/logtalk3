@@ -36,6 +36,8 @@ module-qualified term. Previously, this would require a backend Prolog compiler
 with support for modules but given that Logtalk objects subsume Prolog modules
 and that modules can be compiled as objects, this restriction have been lifted.
 
+* IMPROVED: Faster code generation of entity relation runtime clauses.
+
 * IMPROVED: Faster compilation of entity predicate clauses.
 
 * IMPROVED: Faster compilation of `info/1-2` and `mode/2` directives.
