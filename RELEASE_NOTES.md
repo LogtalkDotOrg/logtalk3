@@ -31,6 +31,11 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: When applicable, the `(:)/2` construct is always interpreted as a
+module-qualified term. Previously, this would require a backend Prolog compiler
+with support for modules but given that Logtalk objects subsume Prolog modules
+and that modules can be compiled as objects, this restriction have been lifted.
+
 * IMPROVED: Faster compilation of entity predicate clauses.
 
 * IMPROVED: Faster compilation of `info/1-2` and `mode/2` directives.
