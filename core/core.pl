@@ -239,7 +239,7 @@
 :- dynamic('$lgt_pp_object_'/11).							% '$lgt_pp_object_'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, Flags)
 :- dynamic('$lgt_pp_category_'/6).							% '$lgt_pp_category_'(Ctg, Prefix, Dcl, Def, Rnm, Flags)
 :- dynamic('$lgt_pp_protocol_'/5).							% '$lgt_pp_protocol_'(Ptc, Prefix, Dcl, Rnm, Flags)
-
+:- dynamic('$lgt_pp_entity_'/4).							% '$lgt_pp_entity_'(Type, Entity, Prefix, Dcl)
 :- dynamic('$lgt_pp_module_'/1).							% '$lgt_pp_module_'(Module)
 
 :- dynamic('$lgt_pp_uses_'/1).								% '$lgt_pp_uses_'(Obj)
@@ -1933,7 +1933,7 @@ logtalk_compile(Files, Flags) :-
 
 '$lgt_term_expansion_error'(HookEntity, Term, Error) :-
 	'$lgt_warning_context'(Path, Lines),
-	(	'$lgt_pp_entity'(Type, Entity, _) ->
+	(	'$lgt_pp_entity_'(Type, Entity, _, _) ->
 		'$lgt_print_message'(warning(expansion), core, term_expansion_error(Path, Lines, Type, Entity, HookEntity, Term, Error))
 	;	'$lgt_print_message'(warning(expansion), core, term_expansion_error(Path, Lines, HookEntity, Term, Error))
 	),
@@ -1944,7 +1944,7 @@ logtalk_compile(Files, Flags) :-
 
 '$lgt_goal_expansion_error'(HookEntity, Goal, Error) :-
 	'$lgt_warning_context'(Path, Lines),
-	(	'$lgt_pp_entity'(Type, Entity, _) ->
+	(	'$lgt_pp_entity_'(Type, Entity, _, _) ->
 		'$lgt_print_message'(warning(expansion), core, goal_expansion_error(Path, Lines, Type, Entity, HookEntity, Goal, Error))
 	;	'$lgt_print_message'(warning(expansion), core, goal_expansion_error(Path, Lines, HookEntity, Goal, Error))
 	),
@@ -1955,7 +1955,7 @@ logtalk_compile(Files, Flags) :-
 
 '$lgt_annotation_expansion_error'(HookEntity, Annotation, Error) :-
 	'$lgt_warning_context'(Path, Lines),
-	(	'$lgt_pp_entity'(Type, Entity, _) ->
+	(	'$lgt_pp_entity_'(Type, Entity, _, _) ->
 		'$lgt_print_message'(warning(expansion), core, annotation_expansion_error(Path, Lines, Type, Entity, HookEntity, Annotation, Error))
 	;	'$lgt_print_message'(warning(expansion), core, annotation_expansion_error(Path, Lines, HookEntity, Annotation, Error))
 	),
@@ -5515,7 +5515,7 @@ current_logtalk_flag(Flag, Value) :-
 		Names \== [] ->
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_warning_context'(Path, Lines),
-		(	'$lgt_pp_entity'(Type, Entity, _) ->
+		(	'$lgt_pp_entity_'(Type, Entity, _, _) ->
 			'$lgt_print_message'(warning(singleton_variables), core, singleton_variables(Path, Lines, Type, Entity, Names, Term))
 		;	'$lgt_print_message'(warning(singleton_variables), core, singleton_variables(Path, Lines, Names, Term))
 		)
@@ -5772,6 +5772,7 @@ current_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _)),
 	retractall('$lgt_pp_protocol_'(_, _, _, _, _)),
 	retractall('$lgt_pp_category_'(_, _, _, _, _, _)),
+	retractall('$lgt_pp_entity_'(_, _, _, _)),
 	retractall('$lgt_pp_module_'(_)),
 	retractall('$lgt_pp_entity_property_'(_, _)),
 	retractall('$lgt_pp_predicate_property_'(_, _, _)),
@@ -5982,56 +5983,8 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	op(Priority, Specifier, Operator),
 	assertz('$lgt_pp_entity_operator_'(Priority, Specifier, Operator, Scope)),
-	'$lgt_pp_entity'(_, Entity, _),
+	'$lgt_pp_entity_'(_, Entity, _, _),
 	assertz('$lgt_pp_entity_property_'(Entity, op(Priority, Specifier, Operator, Scope))).
-
-
-
-% '$lgt_pp_entity'(?atom, ?entity_identifier, ?atom)
-%
-% provides deterministic access to some common used data on the entity being compiled
-
-'$lgt_pp_entity'(object, Entity, Prefix) :-
-	'$lgt_pp_object_'(Entity, Prefix, _, _, _, _, _, _, _, _, _),
-	!.
-
-'$lgt_pp_entity'(category, Entity, Prefix) :-
-	'$lgt_pp_category_'(Entity, Prefix, _, _, _, _),
-	!.
-
-'$lgt_pp_entity'(protocol, Entity, Prefix) :-
-	'$lgt_pp_protocol_'(Entity, Prefix, _, _, _),
-	!.
-
-
-
-% '$lgt_pp_entity'(?atom, ?entity_identifier, ?atom, ?atom, ?atom)
-%
-% provides deterministic access to some common used data on the entity being compiled
-
-'$lgt_pp_entity'(object, Entity, Prefix, Dcl, Mode) :-
-	'$lgt_pp_object_'(Entity, Prefix, Dcl, _, _, _, _, _, _, _, _),
-	(	'$lgt_pp_dynamic_' ->
-		Mode = (dynamic)
-	;	Mode = static
-	),
-	!.
-
-'$lgt_pp_entity'(category, Entity, Prefix, Dcl, Mode) :-
-	'$lgt_pp_category_'(Entity, Prefix, Dcl, _, _, _),
-	(	'$lgt_pp_dynamic_' ->
-		Mode = (dynamic)
-	;	Mode = static
-	),
-	!.
-
-'$lgt_pp_entity'(protocol, Entity, Prefix, Dcl, Mode) :-
-	'$lgt_pp_protocol_'(Entity, Prefix, Dcl, _, _),
-	(	'$lgt_pp_dynamic_' ->
-		Mode = (dynamic)
-	;	Mode = static
-	),
-	!.
 
 
 
@@ -6110,7 +6063,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	'$lgt_compiler_flag'(portability, warning) ->
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_warning_context'(Path, Lines),
-		(	'$lgt_pp_entity'(Type, Entity, _) ->
+		(	'$lgt_pp_entity_'(Type, Entity, _, _) ->
 			'$lgt_print_message'(warning(portability), core, prolog_dialect_goal_expansion(Path, Lines, Type, Entity, Goal, ExpandedGoal))
 		;	'$lgt_print_message'(warning(portability), core, prolog_dialect_goal_expansion(Path, Lines, Goal, ExpandedGoal))
 		)
@@ -6149,7 +6102,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	'$lgt_compiler_flag'(portability, warning) ->
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_warning_context'(Path, Lines),
-		(	'$lgt_pp_entity'(Type, Entity, _) ->
+		(	'$lgt_pp_entity_'(Type, Entity, _, _) ->
 			'$lgt_print_message'(warning(portability), core, prolog_dialect_term_expansion(Path, Lines, Type, Entity, Term, ExpandedTerms))
 		;	'$lgt_print_message'(warning(portability), core, prolog_dialect_term_expansion(Path, Lines, Term, ExpandedTerms))
 		)
@@ -6200,7 +6153,7 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	(	var(ExpandedTerm) ->
 		throw(error(instantiantion_error, term_expansion(Term, {ExpandedTerm})))
-	;	'$lgt_pp_entity'(_, _, _) ->
+	;	'$lgt_pp_entity_'(_, _, _, _) ->
 		'$lgt_pp_term_location'(Location),
 		% ensure that the relative order of the entity terms is kept
 		assertz('$lgt_pp_entity_clause_'({ExpandedTerm}, Location))
@@ -6469,7 +6422,7 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	Directive =.. [Functor| Args],
 	Meta =.. [Functor| MArgs],
-	'$lgt_pp_entity'(_, Entity, Prefix),
+	'$lgt_pp_entity_'(_, Entity, Prefix, _),
 	% MetaVars = [] as we're compiling a local call
 	'$lgt_comp_ctx'(Ctx, _, Entity, Entity, Entity, Prefix, [], _, _, _, _),
 	(	'$lgt_tr_prolog_meta_arguments'(Args, MArgs, Ctx, TArgs, DArgs) ->
@@ -6808,7 +6761,7 @@ current_logtalk_flag(Flag, Value) :-
 		\+ '$lgt_pp_category_'(_, _, _, _, _, _) ->
 		throw(domain_error(directive, synchronized/0))
 	;	'$lgt_prolog_feature'(threads, supported) ->
-		'$lgt_pp_entity'(_, _, Prefix),
+		'$lgt_pp_entity_'(_, _, Prefix, _),
 		atom_concat(Prefix, 'mutex_', Mutex),
 		assertz('$lgt_pp_synchronized_'),
 		assertz('$lgt_pp_synchronized_'(_, Mutex))
@@ -6828,7 +6781,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_logtalk_directive'(initialization(Goal), Ctx) :-
 	'$lgt_must_be'(callable, Goal),
-	'$lgt_pp_entity'(_, Entity, Prefix),
+	'$lgt_pp_entity_'(_, Entity, Prefix, _),
 	% MetaVars = [] as we're compiling a local call
 	'$lgt_comp_ctx'(Ctx, _, Entity, Entity, Entity, Prefix, [], _, ExCtx, _, []),
 	'$lgt_exec_ctx'(ExCtx, Entity, Entity, Entity, [], []),
@@ -7095,7 +7048,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_gen_pred_mutex'(Mutex) :-
-	'$lgt_pp_entity'(_, _, Prefix),
+	'$lgt_pp_entity_'(_, _, Prefix, _),
 	retract('$lgt_pp_predicate_mutex_counter_'(Old)),
 	New is Old + 1,
 	asserta('$lgt_pp_predicate_mutex_counter_'(New)),
@@ -7263,7 +7216,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_add_predicate_scope_line_property'(PredicateIndicator) :-
 	(	'$lgt_compiler_flag'(source_data, on),
 		'$lgt_pp_term_position_'(Line-_) ->
-		'$lgt_pp_entity'(_, Entity, _),
+		'$lgt_pp_entity_'(_, Entity, _, _),
 		assertz('$lgt_pp_predicate_property_'(Entity, PredicateIndicator, declaration_line(Line)))
 	;	true
 	).
@@ -7594,7 +7547,7 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_current_line_numbers'(Lines),
 	assertz('$lgt_pp_multifile_'(Functor, Arity, Lines)),
-	'$lgt_pp_entity'(_, _, Prefix),
+	'$lgt_pp_entity_'(_, _, Prefix, _),
 	'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity))).
 
@@ -7603,7 +7556,7 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_current_line_numbers'(Lines),
 	assertz('$lgt_pp_multifile_'(Functor, ExtArity, Lines)),
-	'$lgt_pp_entity'(_, _, Prefix),
+	'$lgt_pp_entity_'(_, _, Prefix, _),
 	'$lgt_construct_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
 	assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity))).
 
@@ -7646,7 +7599,7 @@ current_logtalk_flag(Flag, Value) :-
 	functor(DHead, DFunctor, Arity),
 	Head =.. [_| Args],
 	DHead =.. [_| Args],
-	'$lgt_pp_entity'(_, Entity, Prefix),
+	'$lgt_pp_entity_'(_, Entity, Prefix, _),
 	'$lgt_construct_predicate_indicator'(Prefix, CFunctor/Arity, TCFunctor/TCArity),
 	functor(TCHead, TCFunctor, TCArity),
 	'$lgt_unify_head_thead_arguments'(Head, TCHead),
@@ -8197,7 +8150,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_must_be'(list, Parameters),
 	(	'$lgt_member'(Parameter, Parameters), \+ '$lgt_valid_entity_parameter'(Parameter) ->
 		throw(type_error(parameter, Parameter))
-	;	(	'$lgt_pp_entity'(_, Entity, _),
+	;	(	'$lgt_pp_entity_'(_, Entity, _, _),
 			functor(Entity, _, Arity),
 			'$lgt_length'(Parameters, 0, Arity) ->
 			true
@@ -8210,7 +8163,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_must_be'(list, Parnames),
 	(	'$lgt_member'(Name, Parnames), \+ atom(Name) ->
 		throw(type_error(atom, Name))
-	;	(	'$lgt_pp_entity'(_, Entity, _), \+ \+ Entity =.. [_| Parnames] ->
+	;	(	'$lgt_pp_entity_'(_, Entity, _, _), \+ \+ Entity =.. [_| Parnames] ->
 			true
 		;	throw(length_error(parnames_list, Parnames))
 		)
@@ -8477,7 +8430,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_clause'((Head:-Body), (THead:-'$lgt_nop'(Body), SBody), (THead:-'$lgt_nop'(Body),'$lgt_debug'(rule(Entity, Head, N), ExCtx),DBody), Ctx) :-
 	'$lgt_pp_dynamic_'(Head),
 	!,
-	'$lgt_pp_entity'(_, Entity, _),
+	'$lgt_pp_entity_'(_, Entity, _, _),
 	'$lgt_head_meta_variables'(Head, MetaVars),
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, MetaVars, _, ExCtx, _, _),
 	'$lgt_tr_head'(Head, THead, Ctx),
@@ -8490,7 +8443,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_clause'((Head:-Body), TClause, (THead:-'$lgt_debug'(rule(Entity, Head, N), ExCtx),DBody), Ctx) :-
 	!,
-	'$lgt_pp_entity'(_, Entity, _),
+	'$lgt_pp_entity_'(_, Entity, _, _),
 	'$lgt_head_meta_variables'(Head, MetaVars),
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, MetaVars, _, ExCtx, _, _),
 	'$lgt_tr_head'(Head, THead, Ctx),
@@ -8536,7 +8489,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_remember_annotated_predicate'(HeadFunctor, HeadArity).
 
 '$lgt_tr_clause'(Fact, TFact, (TFact:-'$lgt_debug'(fact(Entity, Fact, N), ExCtx)), Ctx) :-
-	'$lgt_pp_entity'(_, Entity, _),
+	'$lgt_pp_entity_'(_, Entity, _, _),
 	'$lgt_tr_head'(Fact, TFact, Ctx),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_clause_number'(Fact, N).
@@ -8582,7 +8535,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_save_predicate_line_definition_property'(Other, Functor, Arity) :-
 	(	'$lgt_compiler_flag'(source_data, on),
 		'$lgt_pp_term_position_'(Line-_) ->
-		'$lgt_pp_entity'(_, Entity, _),
+		'$lgt_pp_entity_'(_, Entity, _, _),
 		assertz('$lgt_pp_predicate_property_'(Other, Functor/Arity, definition_line_from(Line,Entity)))
 	;	true
 	).
@@ -8591,7 +8544,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_save_predicate_line_definition_property'(Functor, Arity) :-
 	(	'$lgt_compiler_flag'(source_data, on),
 		'$lgt_pp_term_position_'(Line-_) ->
-		'$lgt_pp_entity'(_, Entity, _),
+		'$lgt_pp_entity_'(_, Entity, _, _),
 		assertz('$lgt_pp_predicate_property_'(Entity, Functor/Arity, definition_line(Line)))
 	;	true
 	).
@@ -9343,7 +9296,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_body'(threaded_wait(Msg), MTPred, '$lgt_debug'(goal(threaded_wait(Msg), MTPred), ExCtx), Ctx) :-
 	!,
-	'$lgt_pp_entity'(Type, _, Prefix),
+	'$lgt_pp_entity_'(Type, _, Prefix, _),
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, Prefix, _, _, ExCtx, _, _),
 	(	'$lgt_pp_synchronized_'(Head, Mutex) ->
 		(	Type == object ->
@@ -9372,7 +9325,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_body'(threaded_notify(Msg), MTPred, '$lgt_debug'(goal(threaded_notify(Msg), MTPred), ExCtx), Ctx) :-
 	!,
-	'$lgt_pp_entity'(Type, _, Prefix),
+	'$lgt_pp_entity_'(Type, _, Prefix, _),
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, Prefix, _, _, ExCtx, _, _),
 	(	Type == object ->
 		% we're compiling an object predicate
@@ -9989,7 +9942,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_body'(parameter(Arg, _), _, _, _) :-
 	'$lgt_must_be'(integer, Arg),
-	'$lgt_pp_entity'(_, Entity, _),
+	'$lgt_pp_entity_'(_, Entity, _, _),
 	\+ compound(Entity),
 	throw(type_error(parametric_entity, Entity)).
 
@@ -10126,7 +10079,7 @@ current_logtalk_flag(Flag, Value) :-
 	\+ '$lgt_iso_spec_flag'(Flag),
 	'$lgt_increment_compile_warnings_counter',
 	'$lgt_warning_context'(Path, Lines),
-	(	'$lgt_pp_entity'(Type, Entity, _) ->
+	(	'$lgt_pp_entity_'(Type, Entity, _, _) ->
 		'$lgt_print_message'(warning(portability), core, non_standard_prolog_flag(Path, Lines, Type, Entity, Flag))
 	;	'$lgt_print_message'(warning(portability), core, non_standard_prolog_flag(Path, Lines, Flag))
 	),
@@ -10141,7 +10094,7 @@ current_logtalk_flag(Flag, Value) :-
 	\+ '$lgt_iso_spec_flag_value'(Flag, Value),
 	'$lgt_increment_compile_warnings_counter',
 	'$lgt_warning_context'(Path, Lines),
-	(	'$lgt_pp_entity'(Type, Entity, _) ->
+	(	'$lgt_pp_entity_'(Type, Entity, _, _) ->
 		'$lgt_print_message'(warning(portability), core, non_standard_prolog_flag_value(Path, Lines, Type, Entity, Flag, Value))
 	;	'$lgt_print_message'(warning(portability), core, non_standard_prolog_flag_value(Path, Lines, Flag, Value))
 	),
@@ -10155,7 +10108,7 @@ current_logtalk_flag(Flag, Value) :-
 	\+ '$lgt_iso_spec_flag'(Flag),
 	'$lgt_increment_compile_warnings_counter',
 	'$lgt_warning_context'(Path, Lines),
-	(	'$lgt_pp_entity'(Type, Entity, _) ->
+	(	'$lgt_pp_entity_'(Type, Entity, _, _) ->
 		'$lgt_print_message'(warning(portability), core, non_standard_prolog_flag(Path, Lines, Type, Entity, Flag))
 	;	'$lgt_print_message'(warning(portability), core, non_standard_prolog_flag(Path, Lines, Flag))
 	),
@@ -10170,7 +10123,7 @@ current_logtalk_flag(Flag, Value) :-
 	\+ '$lgt_iso_spec_flag_value'(Flag, Value),
 	'$lgt_increment_compile_warnings_counter',
 	'$lgt_warning_context'(Path, Lines),
-	(	'$lgt_pp_entity'(Type, Entity, _) ->
+	(	'$lgt_pp_entity_'(Type, Entity, _, _) ->
 		'$lgt_print_message'(warning(portability), core, non_standard_prolog_flag_value(Path, Lines, Type, Entity, Flag, Value))
 	;	'$lgt_print_message'(warning(portability), core, non_standard_prolog_flag_value(Path, Lines, Flag, Value))
 	),
@@ -11948,6 +11901,8 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_construct_object_functors'(GObj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm),
 	% the object flags are only computed at the end of the entity compilation
 	assertz('$lgt_pp_object_'(GObj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, _)),
+	% provide quick access to some common used data on the entity being compiled
+	assertz('$lgt_pp_entity_'(object, Obj, Prefix, Dcl)),
 	asserta('$lgt_pp_predicate_mutex_counter_'(0)).
 
 
@@ -11967,6 +11922,8 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_construct_category_functors'(GCtg, Prefix, Dcl, Def, Rnm),
 	% the category flags are only computed at the end of the entity compilation
 	assertz('$lgt_pp_category_'(GCtg, Prefix, Dcl, Def, Rnm, _)),
+	% provide quick access to some common used data on the entity being compiled
+	assertz('$lgt_pp_entity_'(category, Ctg, Prefix, Dcl)),
 	asserta('$lgt_pp_predicate_mutex_counter_'(0)).
 
 
@@ -11981,6 +11938,8 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_construct_protocol_functors'(Ptc, Prefix, Dcl, Rnm),
 	% the protocol flags are only computed at the end of the entity compilation
 	assertz('$lgt_pp_protocol_'(Ptc, Prefix, Dcl, Rnm, _)),
+	% provide quick access to some common used data on the entity being compiled
+	assertz('$lgt_pp_entity_'(protocol, Ptc, Prefix, Dcl)),
 	% necessary in order to be able to save synchronized predicate properties
 	asserta('$lgt_pp_predicate_mutex_counter_'(0)).
 
@@ -12329,7 +12288,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_warning_context'(Path, Lines, Type, Entity) :-
 	'$lgt_pp_file_directory_path_flags_'(_, _, Path, _),
 	'$lgt_current_line_numbers'(Lines),
-	'$lgt_pp_entity'(Type, Entity, _).
+	'$lgt_pp_entity_'(Type, Entity, _, _).
 
 
 
@@ -12856,7 +12815,7 @@ current_logtalk_flag(Flag, Value) :-
 % atom "true" if there are local clauses and the atom "false" otherwise
 
 '$lgt_gen_dcl_table_clauses'(_) :-
-	'$lgt_pp_entity'(_, _, _, Dcl, Mode),
+	'$lgt_pp_entity_'(_, _, _, Dcl),
 	(	'$lgt_pp_public_'(Functor, Arity), Scope = p(p(p))
 	;	'$lgt_pp_protected_'(Functor, Arity), Scope = p(p)
 	;	'$lgt_pp_private_'(Functor, Arity), Scope = p
@@ -12884,7 +12843,7 @@ current_logtalk_flag(Flag, Value) :-
 		Synchronized = 4				% 0b00000100
 	;	Synchronized = 0
 	),
-	(	(Mode == (dynamic); '$lgt_pp_dynamic_'(Pred)) ->
+	(	('$lgt_pp_dynamic_'; '$lgt_pp_dynamic_'(Pred)) ->
 		Dynamic = 2						% 0b00000010
 	;	Dynamic = 0
 	),
@@ -12942,7 +12901,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_gen_def_table_clauses'(Ctx) :-
 	% annotations also result in the definition of predicates
-	'$lgt_pp_entity'(_, _, Prefix),
+	'$lgt_pp_entity_'(_, _, Prefix, _),
 	'$lgt_comp_ctx_prefix'(Ctx, Prefix),
 	'$lgt_pp_defines_annotated_predicate_'(Functor, Arity),
 	functor(Head, Functor, Arity),
@@ -13999,7 +13958,7 @@ current_logtalk_flag(Flag, Value) :-
 	functor(THead, _, TArity),
 	arg(TArity, THead, BodyExCtx),
 	(	'$lgt_compiler_flag'(debug, on) ->
-		'$lgt_pp_entity'(_, Entity, _),
+		'$lgt_pp_entity_'(_, Entity, _, _),
 		Header = '$lgt_debug'(rule(Entity, DHead, 0), BodyExCtx),
 		If = '$lgt_debug'(goal(check_coinductive_success(TestHead, HeadStack), '$lgt_check_coinductive_success'(TestHead, HeadStack, Hypothesis)), BodyExCtx),
 		Then = '$lgt_debug'(goal(coinductive_success_hook(Head, Hypothesis), '$lgt_coinductive_success_hook'(Head, Hypothesis, HeadExCtx, HeadStack, BodyStack)), BodyExCtx),
@@ -14815,7 +14774,7 @@ current_logtalk_flag(Flag, Value) :-
 % generates and asserts the initialization goal for the entity being compiled
 
 '$lgt_gen_file_entity_initialization_goal' :-
-	'$lgt_pp_entity'(Type, Entity, Prefix),
+	'$lgt_pp_entity_'(Type, Entity, Prefix, _),
 	(	setof(Mutex, Head^'$lgt_pp_synchronized_'(Head, Mutex), Mutexes) ->
 		Goal1 = '$lgt_create_mutexes'(Mutexes)
 	;	Goal1 = true
@@ -15129,7 +15088,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_predicate_heads'(Heads, Entity, THeads, Ctx) :-
 	'$lgt_must_be'(var_or_entity_identifier, Entity),
 	(	var(Entity) ->
-		'$lgt_pp_entity'(_, Entity, Prefix)
+		'$lgt_pp_entity_'(_, Entity, Prefix, _)
 	;	'$lgt_current_object_'(Entity, Prefix, _, _, _, _, _, _, _, _, _) ->
 		true
 	;	'$lgt_current_category_'(Entity, Prefix, _, _, _, _) ->
@@ -15259,7 +15218,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_predicate_indicators'(PIs, Entity, TPIs) :-
 	'$lgt_must_be'(var_or_entity_identifier, Entity),
 	(	var(Entity) ->
-		'$lgt_pp_entity'(_, Entity, Prefix)
+		'$lgt_pp_entity_'(_, Entity, Prefix, _)
 	;	'$lgt_current_object_'(Entity, Prefix, _, _, _, _, _, _, _, _, _) ->
 		true
 	;	'$lgt_current_category_'(Entity, Prefix, _, _, _, _) ->
@@ -17758,7 +17717,7 @@ current_logtalk_flag(Flag, Value) :-
 			Pred =.. [PredFunctor| Args],
 			% next we cannot call '$lgt_current_object_'/11 to find the Prefix as Sender may not be
 			% instantiated (e.g. when meta-predicate calls are made within other meta-predicate calls)
-			'$lgt_pp_entity'(_, _, Prefix),
+			'$lgt_pp_entity_'(_, _, Prefix, _),
 			'$lgt_comp_ctx'(Ctx, _, Sender, Sender, Obj, Prefix, [], _, ExCtx, _, []),
 			'$lgt_exec_ctx'(ExCtx, Sender, Sender, Obj, [], []),
 			'$lgt_tr_static_binding_meta_args'(Args, MArgs, Ctx, TArgs, _),
