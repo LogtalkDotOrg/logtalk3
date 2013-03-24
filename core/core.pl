@@ -9565,15 +9565,14 @@ current_logtalk_flag(Flag, Value) :-
 	functor(Head, HeadFunctor, HeadArity),
 	'$lgt_tr_body'(Obj::abolish(HeadFunctor/HeadArity), TCond, DCond, Ctx).
 
-'$lgt_tr_body'(abolish(Term), _, _, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-	'$lgt_check_dynamic_directive'(Term),
-	fail.
-
 '$lgt_tr_body'(abolish(Pred), TCond, DCond, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, _, _),
+	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, Mode, _),
 	'$lgt_exec_ctx_this'(ExCtx, This),
+	(	Mode = compile(_) ->
+		'$lgt_check_dynamic_directive'(Pred)
+	;	true
+	),
 	(	ground(Pred) ->
 		'$lgt_must_be'(predicate_indicator, Pred),
 		TCond = '$lgt_abolish_checked'(This, Pred, This, p(_))
@@ -9618,18 +9617,16 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_tr_body'(Obj::asserta(Clause), TCond, DCond, Ctx).
 
-'$lgt_tr_body'(asserta(Clause), _, _, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-	'$lgt_check_dynamic_directive'(Clause),
-	fail.
-
 '$lgt_tr_body'(asserta(Clause), TCond, DCond, Ctx) :-
 	!,
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, Mode, _),
+	(	Mode = compile(_) ->
+		'$lgt_check_dynamic_directive'(Clause)
+	;	true
+	),
 	(	'$lgt_optimizable_local_db_call'(Clause, TClause) ->
 		TCond = asserta(TClause)
-	;	'$lgt_comp_ctx_this'(Ctx, This),
-		'$lgt_exec_ctx_this'(ExCtx, This),
+	;	'$lgt_exec_ctx_this'(ExCtx, This),
 		(	'$lgt_runtime_db_clause_checked'(Clause) ->
 			TCond = '$lgt_asserta'(This, Clause, This, p(_), p)
 		;	'$lgt_must_be'(clause_or_partial_clause, Clause),
@@ -9671,18 +9668,16 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_tr_body'(Obj::assertz(Clause), TCond, DCond, Ctx).
 
-'$lgt_tr_body'(assertz(Clause), _, _, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-	'$lgt_check_dynamic_directive'(Clause),
-	fail.
-
 '$lgt_tr_body'(assertz(Clause), TCond, DCond, Ctx) :-
 	!,
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, Mode, _),
+	(	Mode = compile(_) ->
+		'$lgt_check_dynamic_directive'(Clause)
+	;	true
+	),
 	(	'$lgt_optimizable_local_db_call'(Clause, TClause) ->
 		TCond = assertz(TClause)
-	;	'$lgt_comp_ctx_this'(Ctx, This),
-		'$lgt_exec_ctx_this'(ExCtx, This),
+	;	'$lgt_exec_ctx_this'(ExCtx, This),
 		(	'$lgt_runtime_db_clause_checked'(Clause) ->
 			TCond = '$lgt_assertz'(This, Clause, This, p(_), p)
 		;	'$lgt_must_be'(clause_or_partial_clause, Clause),
@@ -9717,18 +9712,16 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_tr_body'(Obj::clause(Head, Body), TCond, DCond, Ctx).
 
-'$lgt_tr_body'(clause(Head, _), _, _, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-	'$lgt_check_dynamic_directive'(Head),
-	fail.
-
 '$lgt_tr_body'(clause(Head, Body), TCond, DCond, Ctx) :-
 	!,
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, Mode, _),
+	(	Mode = compile(_) ->
+		'$lgt_check_dynamic_directive'(Head)
+	;	true
+	),
 	(	'$lgt_optimizable_local_db_call'(Head, THead) ->
 		TCond = (clause(THead, TBody), (TBody = ('$lgt_nop'(Body), _) -> true; TBody = Body))
-	;	'$lgt_comp_ctx_this'(Ctx, This),
-		'$lgt_exec_ctx_this'(ExCtx, This),
+	;	'$lgt_exec_ctx_this'(ExCtx, This),
 		(	'$lgt_runtime_db_clause_checked'((Head :- Body)) ->
 			TCond = '$lgt_clause'(This, Head, Body, This, p(_))
 		;	'$lgt_must_be'(clause_or_partial_clause, (Head :- Body)),
@@ -9771,11 +9764,14 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_body'(retract(Clause), TCond, DCond, Ctx) :-
 	!,
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, Mode, _),
+	(	Mode = compile(_) ->
+		'$lgt_check_dynamic_directive'(Clause)
+	;	true
+	),
 	(	'$lgt_optimizable_local_db_call'(Clause, TClause) ->
 		TCond = retract(TClause)
-	;	'$lgt_comp_ctx_this'(Ctx, This),
-		'$lgt_exec_ctx_this'(ExCtx, This),
+	;	'$lgt_exec_ctx_this'(ExCtx, This),
 		(	'$lgt_runtime_db_clause_checked'(Clause) ->
 			TCond = '$lgt_retract'(This, Clause, This, p(_))
 		;	'$lgt_must_be'(clause_or_partial_clause, Clause),
@@ -9812,18 +9808,16 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_tr_body'(Obj::retractall(Head), TCond, DCond, Ctx).
 
-'$lgt_tr_body'(retractall(Head), _, _, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-	'$lgt_check_dynamic_directive'(Head),
-	fail.
-
 '$lgt_tr_body'(retractall(Head), TCond, DCond, Ctx) :-
 	!,
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, Mode, _),
+	(	Mode = compile(_) ->
+		'$lgt_check_dynamic_directive'(Head)
+	;	true
+	),
 	(	'$lgt_optimizable_local_db_call'(Head, THead) ->
 		TCond = retractall(THead)
-	;	'$lgt_comp_ctx_this'(Ctx, This),
-		'$lgt_exec_ctx_this'(ExCtx, This),
+	;	'$lgt_exec_ctx_this'(ExCtx, This),
 		(	var(Head) ->
 			TCond = '$lgt_retractall'(This, Head, This, p(_))
 		;	'$lgt_must_be'(callable, Head),
@@ -10180,8 +10174,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_body'(bb_put(Key, Term), TPred, DPred, Ctx) :-
 	'$lgt_prolog_built_in_predicate'(bb_put(_, _)),
 	!,
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	'$lgt_comp_ctx_prefix'(Ctx, Prefix),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, Prefix, _, _, ExCtx, _, _),
 	(	atomic(Key) ->
 		'$lgt_tr_bb_key'(Key, Prefix, TKey),
 		TPred = '$lgt_call_built_in'(bb_put(Key, Term), bb_put(TKey, Term), ExCtx),
@@ -10196,8 +10189,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_body'(bb_get(Key, Term), TPred, DPred, Ctx) :-
 	'$lgt_prolog_built_in_predicate'(bb_get(_, _)),
 	!,
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	'$lgt_comp_ctx_prefix'(Ctx, Prefix),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, Prefix, _, _, ExCtx, _, _),
 	(	atomic(Key) ->
 		'$lgt_tr_bb_key'(Key, Prefix, TKey),
 		TPred = '$lgt_call_built_in'(bb_get(Key, Term), bb_get(TKey, Term), ExCtx),
@@ -10212,8 +10204,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_body'(bb_delete(Key, Term), TPred, DPred, Ctx) :-
 	'$lgt_prolog_built_in_predicate'(bb_delete(_, _)),
 	!,
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	'$lgt_comp_ctx_prefix'(Ctx, Prefix),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, Prefix, _, _, ExCtx, _, _),
 	(	atomic(Key) ->
 		'$lgt_tr_bb_key'(Key, Prefix, TKey),
 		TPred = '$lgt_call_built_in'(bb_delete(Key, Term), bb_delete(TKey, Term), ExCtx),
@@ -10228,8 +10219,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_body'(bb_update(Key, Term, New), TPred, DPred, Ctx) :-
 	'$lgt_prolog_built_in_predicate'(bb_update(_, _, _)),
 	!,
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	'$lgt_comp_ctx_prefix'(Ctx, Prefix),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, Prefix, _, _, ExCtx, _, _),
 	(	atomic(Key) ->
 		'$lgt_tr_bb_key'(Key, Prefix, TKey),
 		TPred = '$lgt_call_built_in'(bb_update(Key, Term, New), bb_update(TKey, Term, New), ExCtx),
@@ -10835,7 +10825,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	true
 	).
 
-'$lgt_check_dynamic_directive'((Head:-_)) :-
+'$lgt_check_dynamic_directive'((Head :- _)) :-
 	% clause rule
 	!,
 	'$lgt_check_dynamic_directive'(Head).
@@ -10845,19 +10835,23 @@ current_logtalk_flag(Flag, Value) :-
 	% predicate indicator
 	!,
 	functor(Head, Functor, Arity),
-	\+ '$lgt_pp_dynamic_'(Head),
-	% dynamic directive not (yet) found
-	\+ '$lgt_pp_missing_dynamic_directive_'(Head, _),
-	'$lgt_current_line_numbers'(Lines),
-	assertz('$lgt_pp_missing_dynamic_directive_'(Head, Lines)).
+	(	\+ '$lgt_pp_dynamic_'(Head),
+		% dynamic directive not (yet) found
+		\+ '$lgt_pp_missing_dynamic_directive_'(Head, _) ->
+		'$lgt_current_line_numbers'(Lines),
+		assertz('$lgt_pp_missing_dynamic_directive_'(Head, Lines))
+	;	true
+	).
 
 '$lgt_check_dynamic_directive'(Head) :-
 	% clause fact
-	\+ '$lgt_pp_dynamic_'(Head),
-	% dynamic directive not (yet) found
-	\+ '$lgt_pp_missing_dynamic_directive_'(Head, _),
-	'$lgt_current_line_numbers'(Lines),
-	assertz('$lgt_pp_missing_dynamic_directive_'(Head, Lines)).
+	(	\+ '$lgt_pp_dynamic_'(Head),
+		% dynamic directive not (yet) found
+		\+ '$lgt_pp_missing_dynamic_directive_'(Head, _) ->
+		'$lgt_current_line_numbers'(Lines),
+		assertz('$lgt_pp_missing_dynamic_directive_'(Head, Lines))
+	;	true
+	).
 
 
 
