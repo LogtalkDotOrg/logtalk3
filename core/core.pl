@@ -9391,8 +9391,8 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_pp_object_'(_, _, Dcl, _, _, IDcl, _, _, _, _, _),
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	(	\+ '$lgt_pp_instantiated_class_'(_, _, _, _, _, _, _, _, _, _, _),
-		\+ '$lgt_pp_specialized_class_'(_, _, _, _, _, _, _, _, _, _, _) ->
+	(	\+ '$lgt_pp_instantiates_class_'(_, _, _),
+		\+ '$lgt_pp_specializes_class_'(_, _, _) ->
 		TPred = '$lgt_ctg_call'(Dcl, Pred, ExCtx)
 	;	TPred = '$lgt_ctg_call'(IDcl, Pred, ExCtx)
 	).
@@ -9402,7 +9402,7 @@ current_logtalk_flag(Flag, Value) :-
 	throw(type_error(callable, Pred)).
 
 '$lgt_tr_body'(:Pred, _, _, _) :-
-	\+ '$lgt_pp_imported_category_'(_, _, _, _, _, _),
+	\+ '$lgt_pp_imports_category_'(_, _, _),
 	throw(existence_error(procedure, Pred)).
 
 '$lgt_tr_body'(:Pred, TPred, '$lgt_debug'(goal(:Pred, TPred), ExCtx), Ctx) :-
@@ -9418,8 +9418,8 @@ current_logtalk_flag(Flag, Value) :-
 		true
 	;	% must resort to dynamic binding
 		'$lgt_pp_object_'(_, _, Dcl, _, _, IDcl, _, _, _, _, _),
-		(	\+ '$lgt_pp_instantiated_class_'(_, _, _, _, _, _, _, _, _, _, _),
-			\+ '$lgt_pp_specialized_class_'(_, _, _, _, _, _, _, _, _, _, _) ->
+		(	\+ '$lgt_pp_instantiates_class_'(_, _, _),
+			\+ '$lgt_pp_specializes_class_'(_, _, _) ->
 			TPred = '$lgt_ctg_call_'(Dcl, Pred, ExCtx)
 		;	TPred = '$lgt_ctg_call_'(IDcl, Pred, ExCtx)
 		)
@@ -11343,15 +11343,15 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_super_call'(_, _, _) :-
 	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
-	\+ '$lgt_pp_extended_object_'(_, _, _, _, _, _, _, _, _, _, _),
-	\+ '$lgt_pp_instantiated_class_'(_, _, _, _, _, _, _, _, _, _, _),
-	\+ '$lgt_pp_specialized_class_'(_, _, _, _, _, _, _, _, _, _, _),
+	\+ '$lgt_pp_extends_object_'(_, _, _),
+	\+ '$lgt_pp_instantiates_class_'(_, _, _),
+	\+ '$lgt_pp_specializes_class_'(_, _, _),
 	% invalid goal (no ancestor object)
 	throw(existence_error(ancestor, object)).
 
 '$lgt_tr_super_call'(_, _, _) :-
 	'$lgt_pp_category_'(_, _, _, _, _, _),
-	\+ '$lgt_pp_extended_category_'(_, _, _, _, _, _),
+	\+ '$lgt_pp_extends_category_'(_, _, _),
 	% invalid goal (not an extended category)
 	throw(existence_error(ancestor, category)).
 
@@ -12792,9 +12792,9 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_gen_object_clauses' :-
-	(	'$lgt_pp_specialized_class_'(_, _, _, _, _, _, _, _, _, _, _) ->
+	(	'$lgt_pp_specializes_class_'(_, _, _) ->
 		'$lgt_gen_ic_clauses'
-	;	'$lgt_pp_instantiated_class_'(_, _, _, _, _, _, _, _, _, _, _) ->
+	;	'$lgt_pp_instantiates_class_'(_, _, _) ->
 		'$lgt_gen_ic_clauses'
 	;	% objects without an instantiation or specialization relation
 		% are always compiled as prototypes
@@ -13189,9 +13189,9 @@ current_logtalk_flag(Flag, Value) :-
 		HeadDDcl =.. [Dcl, Pred, Scope, no, 2, Obj, Obj],
 		BodyDDcl =.. [DDcl, Pred, Scope],
 		assertz('$lgt_pp_dcl_'((HeadDDcl:-BodyDDcl)))
-	;	\+ '$lgt_pp_implemented_protocol_'(_, _, _, _, _),
-		\+ '$lgt_pp_imported_category_'(_, _, _, _, _, _),
-		\+ '$lgt_pp_extended_object_'(_, _, _, _, _, _, _, _, _, _, _) ->
+	;	\+ '$lgt_pp_implements_protocol_'(_, _, _),
+		\+ '$lgt_pp_imports_category_'(_, _, _),
+		\+ '$lgt_pp_extends_object_'(_, _, _) ->
 		functor(HeadDDcl, Dcl, 6),
 		assertz('$lgt_pp_dcl_'((HeadDDcl:-fail)))
 	;	true
@@ -13348,7 +13348,7 @@ current_logtalk_flag(Flag, Value) :-
 % we can have a root object where super have nowhere to go ...
 
 '$lgt_gen_prototype_super_clauses'(Super, _) :-
-	\+ '$lgt_pp_extended_object_'(_, _, _, _, _, _, _, _, _, _, _),
+	\+ '$lgt_pp_extends_object_'(_, _, _),
 	functor(Head, Super, 5),
 	assertz('$lgt_pp_super_'((Head:-fail))),
 	!.
@@ -13398,7 +13398,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_gen_ic_instantiates_dcl_clauses'(ODcl, _) :-
-	\+ '$lgt_pp_instantiated_class_'(_, _, _, _, _, _, _, _, _, _, _),
+	\+ '$lgt_pp_instantiates_class_'(_, _, _),
 	% no meta-class for the class we're compiling
 	!,
 	functor(Head, ODcl, 6),
@@ -13470,9 +13470,9 @@ current_logtalk_flag(Flag, Value) :-
 		HeadDDcl =.. [IDcl, Pred, Scope, no, 2, Obj, Obj],
 		BodyDDcl =.. [DDcl, Pred, Scope],
 		assertz('$lgt_pp_dcl_'((HeadDDcl:-BodyDDcl)))
-	;	\+ '$lgt_pp_implemented_protocol_'(_, _, _, _, _),
-		\+ '$lgt_pp_imported_category_'(_, _, _, _, _, _),
-		\+ '$lgt_pp_specialized_class_'(_, _, _, _, _, _, _, _, _, _, _) ->
+	;	\+ '$lgt_pp_implements_protocol_'(_, _, _),
+		\+ '$lgt_pp_imports_category_'(_, _, _),
+		\+ '$lgt_pp_specializes_class_'(_, _, _) ->
 		functor(HeadDDcl, IDcl, 6),
 		assertz('$lgt_pp_dcl_'((HeadDDcl:-fail)))
 	;	true
@@ -17705,14 +17705,14 @@ current_logtalk_flag(Flag, Value) :-
 % static binding for the (^^)/1 control construct (used within objects)
 
 '$lgt_obj_super_call_static_binding'(Obj, Pred, ExCtx, Call) :-
-	(	'$lgt_pp_extended_object_'(_, _, _, _, _, _, _, _, _, _, _) ->
+	(	'$lgt_pp_extends_object_'(_, _, _) ->
 		'$lgt_obj_super_call_static_binding_prototype'(Obj, Pred, ExCtx, Call)
-	;	'$lgt_pp_instantiated_class_'(_, _, _, _, _, _, _, _, _, _, _),
-		'$lgt_pp_specialized_class_'(_, _, _, _, _, _, _, _, _, _, _) ->
+	;	'$lgt_pp_instantiates_class_'(_, _, _),
+		'$lgt_pp_specializes_class_'(_, _, _) ->
 		'$lgt_obj_super_call_static_binding_instance_class'(Obj, Pred, ExCtx, Call)
-	;	'$lgt_pp_instantiated_class_'(_, _, _, _, _, _, _, _, _, _, _) ->
+	;	'$lgt_pp_instantiates_class_'(_, _, _) ->
 		'$lgt_obj_super_call_static_binding_instance'(Obj, Pred, ExCtx, Call)
-	;	'$lgt_pp_specialized_class_'(_, _, _, _, _, _, _, _, _, _, _) ->
+	;	'$lgt_pp_specializes_class_'(_, _, _) ->
 		'$lgt_obj_super_call_static_binding_class'(Obj, Pred, ExCtx, Call)
 	;	fail
 	).
