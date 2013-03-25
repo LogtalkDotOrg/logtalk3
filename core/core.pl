@@ -13710,8 +13710,8 @@ current_logtalk_flag(Flag, Value) :-
 % we can have a root object where "super" have nowhere to go ...
 
 '$lgt_gen_ic_super_clauses'(Obj, Super, _) :-
-	\+ '$lgt_pp_specialized_class_'(_, _, _, _, _, _, _, _, _, _, _),
-	\+ ('$lgt_pp_instantiated_class_'(Class, _, _, _, _, _, _, _, _, _, _), Class \= Obj),
+	\+ '$lgt_pp_specializes_class_'(_, _, _),
+	\+ ('$lgt_pp_instantiates_class_'(_, Class, _), Class \= Obj),
 	functor(Head, Super, 5),
 	assertz('$lgt_pp_super_'((Head:-fail))),
 	!.
