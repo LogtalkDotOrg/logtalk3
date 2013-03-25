@@ -12266,7 +12266,8 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_report_problems'(Type, Entity) :-
 	(	Type == protocol ->
 		'$lgt_report_unknown_entities'(Type, Entity)
-	;	'$lgt_report_undefined_calls'(Type, Entity),
+	;	% object or category
+		'$lgt_report_undefined_calls'(Type, Entity),
 		'$lgt_report_missing_directives'(Type, Entity),
 		'$lgt_report_misspelt_calls'(Type, Entity),
 		'$lgt_report_non_portable_calls'(Type, Entity),
@@ -12332,7 +12333,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_report_unknown_objects'(Type, Entity) :-
 	'$lgt_pp_file_directory_path_flags_'(_, _, Path, _),
-		'$lgt_pp_referenced_object_'(Object, Lines),
+	'$lgt_pp_referenced_object_'(Object, Lines),
 		% not a currently loaded object
 		\+ '$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _),
 		% not the object being compiled (self reference)
@@ -12356,7 +12357,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_report_unknown_protocols'(Type, Entity) :-
 	'$lgt_pp_file_directory_path_flags_'(_, _, Path, _),
-		'$lgt_pp_referenced_protocol_'(Protocol, Lines),
+	'$lgt_pp_referenced_protocol_'(Protocol, Lines),
 		% not a currently loaded protocol
 		\+ '$lgt_current_protocol_'(Protocol, _, _, _, _),
 		% not the protocol being compiled (self reference)
@@ -13911,6 +13912,9 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_fix_predicate_calls'
 %
 % fixes predicate calls in entity clauses and initialization goals
+%
+% the main reason this compiler second step is necessaty is for
+% dealing with redefined built-in predicates
 
 '$lgt_fix_predicate_calls' :-
 	retract('$lgt_pp_entity_clause_'(Clause, Location)),
@@ -13980,6 +13984,8 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_fix_predicate_calls'('$lgt_coinductive_success_hook'(Head, Hypothesis, ExCtx, HeadStack, BodyStack), Pred) :-
 	!,
+	% ensure zero performance penalties when defining coinductive predicates without a definition
+	% for the coinductive success hook predicates
 	(	'$lgt_pp_defines_predicate_'(coinductive_success_hook(Head,Hypothesis), ExCtx, THead, _),
 		\+ \+ (
 			'$lgt_pp_entity_clause_'(THead, _)
@@ -14327,7 +14333,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_report_misspelt_predicate_calls'(Type, Entity) :-
 	'$lgt_pp_file_directory_path_flags_'(_, _, Path, _),
-		'$lgt_misspelt_predicate_call'(Pred, Lines),
+	'$lgt_misspelt_predicate_call'(Pred, Lines),
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_print_message'(warning(misspelt_calls), core, predicate_called_but_not_defined(Path, Lines, Type, Entity, Pred)),
 	fail.
@@ -14356,7 +14362,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_report_misspelt_non_terminal_calls'(Type, Entity) :-
 	'$lgt_pp_file_directory_path_flags_'(_, _, Path, _),
-		'$lgt_misspelt_non_terminal_call'(NonTerminal, Lines),
+	'$lgt_misspelt_non_terminal_call'(NonTerminal, Lines),
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_print_message'(warning(misspelt_calls), core, non_terminal_called_but_not_defined(Path, Lines, Type, Entity, NonTerminal)),
 	fail.
