@@ -13800,13 +13800,13 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_fix_synchronized_predicate_defs'(Def) :-
+	Old =.. [Def, Head, ExCtx, THead],
+	New =.. [Def, Head, ExCtx, MHead],
 	'$lgt_pp_synchronized_'(Head, Mutex),
-		Old =.. [Def, Head, ExCtx, THead],
 		retract('$lgt_pp_def_'(Old)),
 		THead =.. [TFunctor| Args],
 		atom_concat(TFunctor, '__sync', MFunctor),
 		MHead =.. [MFunctor| Args],
-		New =.. [Def, Head, ExCtx, MHead],
 		assertz('$lgt_pp_final_def_'(New)),
 		assertz('$lgt_pp_entity_aux_clause_'((MHead:-with_mutex(Mutex, THead)))),
 	fail.
@@ -13815,13 +13815,13 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_fix_synchronized_predicate_ddefs'(DDef) :-
+	Old =.. [DDef, Head, ExCtx, THead],
+	New =.. [DDef, Head, ExCtx, MHead],
 	'$lgt_pp_synchronized_'(Head, Mutex),
-		Old =.. [DDef, Head, ExCtx, THead],
 		retract('$lgt_pp_ddef_'(Old)),
 		THead =.. [TFunctor| Args],
 		atom_concat(TFunctor, '__sync', MFunctor),
 		MHead =.. [MFunctor| Args],
-		New =.. [DDef, Head, ExCtx, MHead],
 		assertz('$lgt_pp_final_ddef_'(New)),
 		assertz('$lgt_pp_entity_aux_clause_'((MHead:-with_mutex(Mutex, THead)))),
 	fail.
@@ -13848,12 +13848,12 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_fix_coinductive_predicates_defs'(Def) :-
+	Old =.. [Def, Head, _, _],
+	New =.. [Def, Head, HeadExCtx, TCHead],
 	'$lgt_pp_coinductive_'(Head, TestHead, TCHead, THead, DHead),
-		Old =.. [Def, Head, _, _],
 		retract('$lgt_pp_def_'(Old)),
 		functor(TCHead, _, TCArity),
 		arg(TCArity, TCHead, HeadExCtx),
-		New =.. [Def, Head, HeadExCtx, TCHead],
 		assertz('$lgt_pp_final_def_'(New)),
 		'$lgt_add_coinductive_predicate_aux_clause'(Head, TestHead, TCHead, THead, DHead),
 	fail.
@@ -13862,10 +13862,10 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_fix_coinductive_predicates_ddefs'(DDef) :-
+	Old =.. [DDef, Head, ExCtx, THead],
+	New =.. [DDef, Head, ExCtx, TCHead],
 	'$lgt_pp_coinductive_'(Head, TestHead, TCHead, THead, DHead),
-		Old =.. [DDef, Head, ExCtx, THead],
 		retract('$lgt_pp_ddef_'(Old)),
-		New =.. [DDef, Head, ExCtx, TCHead],
 		assertz('$lgt_pp_final_ddef_'(New)),
 		'$lgt_add_coinductive_predicate_aux_clause'(Head, TestHead, TCHead, THead, DHead),
 	fail.
