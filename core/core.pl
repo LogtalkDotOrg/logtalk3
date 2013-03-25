@@ -12881,7 +12881,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_gen_def_table_clauses'(Ctx) :-
 	% categories cannot contain clauses for dynamic predicates;
 	% thus, in this case, we look only into objects
-	'$lgt_pp_object_'(_, Prefix, _, _, _, _, _, _, _, _, _),
+	'$lgt_pp_entity_'(object, _, Prefix, _),
 	'$lgt_pp_dynamic_'(Head),
 	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _),
 	% dynamic predicate with no initial set of clauses
