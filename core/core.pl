@@ -12897,8 +12897,6 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_gen_def_table_clauses'(Ctx) :-
 	% annotations also result in the definition of predicates
-	'$lgt_pp_entity_'(_, _, Prefix, _),
-	'$lgt_comp_ctx_prefix'(Ctx, Prefix),
 	'$lgt_pp_defines_annotated_predicate_'(Functor, Arity),
 	functor(Head, Functor, Arity),
 	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _),
@@ -12906,6 +12904,8 @@ current_logtalk_flag(Flag, Value) :-
 		 ;	'$lgt_pp_protected_'(Functor, Arity)
 		 ;	'$lgt_pp_private_'(Functor, Arity)
 	)),
+	'$lgt_pp_entity_'(_, _, Prefix, _),
+	'$lgt_comp_ctx_prefix'(Ctx, Prefix),
 	'$lgt_add_def_clause'(Head, Functor, Arity, _, Ctx),
 	fail.
 
