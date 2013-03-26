@@ -2046,33 +2046,18 @@ logtalk_load_context(directory, Directory) :-
 
 logtalk_load_context(entity_name, Entity) :-
 	% deprecated key
-	logtalk_load_context(entity_identifier, Entity).
+	'$lgt_pp_entity_'(_, Entity, _, _).
 
 logtalk_load_context(entity_identifier, Entity) :-
-	(	'$lgt_pp_object_'(Entity, _, _, _, _, _, _, _, _, _, _) ->
-		true
-	;	'$lgt_pp_protocol_'(Entity, _, _, _, _) ->
-		true
-	;	'$lgt_pp_category_'(Entity, _, _, _, _, _)
-	).
+	'$lgt_pp_entity_'(_, Entity, _, _).
 
 logtalk_load_context(entity_prefix, Prefix) :-
-	(	'$lgt_pp_object_'(_, Prefix, _, _, _, _, _, _, _, _, _) ->
-		true
-	;	'$lgt_pp_protocol_'(_, Prefix, _, _, _) ->
-		true
-	;	'$lgt_pp_category_'(_, Prefix, _, _, _, _)
-	).
+	'$lgt_pp_entity_'(_, _, Prefix, _).
 
 logtalk_load_context(entity_type, Type) :-
 	(	'$lgt_pp_module_'(_) ->
 		Type = module
-	;	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _) ->
-		Type = object
-	;	'$lgt_pp_protocol_'(_, _, _, _, _) ->
-		Type = protocol
-	;	'$lgt_pp_category_'(_, _, _, _, _, _),
-		Type = category
+	;	'$lgt_pp_entity_'(Type, _, _, _)
 	).
 
 logtalk_load_context(term_position, Position) :-
