@@ -9957,7 +9957,7 @@ current_logtalk_flag(Flag, Value) :-
 			TPred = (Value0 = Value),
 			DPred = TPred
 		)
-	;	throw(domain_error(out_of_range, Arg))
+	;	throw(domain_error([1,Arity], Arg))
 	).
 
 '$lgt_tr_body'(parameter(Arg, Value), TPred, '$lgt_debug'(goal(parameter(Arg, Value), TPred), ExCtx), Ctx) :-
@@ -9968,7 +9968,7 @@ current_logtalk_flag(Flag, Value) :-
 	functor(Ctg, _, Arity),
 	(	1 =< Arg, Arg =< Arity ->
 		TPred = '$lgt_category_parameter'(This, Ctg, Arg, Value)
-	;	throw(domain_error(out_of_range, Arg))
+	;	throw(domain_error([1,Arity], Arg))
 	).
 
 
