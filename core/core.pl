@@ -4865,16 +4865,16 @@ current_logtalk_flag(Flag, Value) :-
 	;	throw(error(existence_error(file, File), _))
 	),
 	'$lgt_file_name'(prolog, File, _, _, PrologFile),
-	asserta('$lgt_pp_file_directory_path_flags_'(Basename, Directory, SourceFile, Flags)),
+	assertz('$lgt_pp_file_directory_path_flags_'(Basename, Directory, SourceFile, Flags)),
 	% change the directory to the directory of the file being loaded as
 	% it can be a loader file loading other files in its directory
 	'$lgt_current_directory'(Current),
 	'$lgt_change_directory'(Directory),
 	(	'$lgt_loaded_file_'(Basename, Directory, PreviousFlags, _) ->
 		% we're attempting to reload a source file
-		(	(	'$lgt_member'(reload(skip), PreviousFlags)
-			;	'$lgt_compiler_flag'(reload, skip)
-			) ->
+		(	'$lgt_member'(reload(skip), PreviousFlags) ->
+			'$lgt_print_message'(silent(loading), core, skipping_loading_file(SourceFile, Flags))
+		;	'$lgt_compiler_flag'(reload, skip) ->
 			'$lgt_print_message'(silent(loading), core, skipping_loading_file(SourceFile, Flags))
 		;	'$lgt_print_message'(silent(loading), core, reloading_file(SourceFile, Flags)),
 			'$lgt_compile_file'(SourceFile, PrologFile, Flags, loading),
@@ -5261,6 +5261,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_file_term'(end_of_file, _, _) :-
 	'$lgt_pp_entity_'(Type, _, _, _, _),
+	% unexpected end-of-file while compiling an entity
 	(	Type == object ->
 		throw(error(existence_error(directive, end_object/0), term(end_of_file)))
 	;	Type == protocol ->
@@ -5271,6 +5272,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_file_term'(end_of_file, _, _) :-
 	'$lgt_pp_cc_if_found_'(_),
+	% unexpected end-of-file while compiling a conditinal compilation block
 	throw(error(existence_error(directive, endif/0), term(end_of_file))).
 
 '$lgt_tr_file_term'(end_of_file, _, _) :-
@@ -5283,7 +5285,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_file_term'(Term, _, Input) :-
 	'$lgt_pp_cc_skipping_',
 	% we're performing conditional compilation and skipping terms ...
-	\+ '$lgt_conditional_compilation_directive'(Term),
+	\+ '$lgt_is_conditional_compilation_directive'(Term),
 	% ... except for conditional compilation directives itself
 	!,
 	'$lgt_read_term'(Input, Next, [singletons(NextSingletons)]),
@@ -11318,51 +11320,45 @@ current_logtalk_flag(Flag, Value) :-
 %
 % translates calling of redefined predicates ("super" calls)
 
-'$lgt_tr_super_call'(Pred, _, _) :-
-	nonvar(Pred),
-	\+ callable(Pred),
-	% invalid goal (not callable)
-	throw(type_error(callable, Pred)).
-
-'$lgt_tr_super_call'(_, _, _) :-
-	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
-	\+ '$lgt_pp_extends_object_'(_, _, _),
-	\+ '$lgt_pp_instantiates_class_'(_, _, _),
-	\+ '$lgt_pp_specializes_class_'(_, _, _),
-	% invalid goal (no ancestor object)
-	throw(existence_error(ancestor, object)).
-
-'$lgt_tr_super_call'(_, _, _) :-
-	'$lgt_pp_category_'(_, _, _, _, _, _),
-	\+ '$lgt_pp_extends_category_'(_, _, _),
-	% invalid goal (not an extended category)
-	throw(existence_error(ancestor, category)).
-
 '$lgt_tr_super_call'(Pred, TPred, Ctx) :-
-	var(Pred),
-	% translation performed at runtime
+	'$lgt_pp_object_'(Obj, _, _, _, Super, _, _, _, _, _, _),
 	!,
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	(	'$lgt_pp_object_'(_, _, _, _, Super, _, _, _, _, _, _) ->	
+	(	\+ '$lgt_pp_extends_object_'(_, _, _),
+		\+ '$lgt_pp_instantiates_class_'(_, _, _),
+		\+ '$lgt_pp_specializes_class_'(_, _, _) ->
+		% invalid goal (no ancestor object)
+		throw(existence_error(ancestor, object))
+	;	var(Pred) ->
+		% translation performed at runtime
+		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		TPred = '$lgt_obj_super_call'(Super, Pred, ExCtx)
-	;	'$lgt_pp_category_'(Ctg, _, _, _, _, _),
-		TPred = '$lgt_ctg_super_call'(Ctg, Pred, ExCtx)
-	).
-
-'$lgt_tr_super_call'(Pred, TPred, Ctx) :-
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	(	'$lgt_pp_object_'(Obj, _, _, _, Super, _, _, _, _, _, _) ->
+	;	callable(Pred) ->
+		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		(	'$lgt_related_entities_are_static_binding',
 			'$lgt_obj_super_call_static_binding'(Obj, Pred, ExCtx, TPred) ->
 			true
 		;	TPred = '$lgt_obj_super_call_'(Super, Pred, ExCtx)
 		)
-	;	'$lgt_pp_category_'(Ctg, _, _, _, _, _),
+	;	throw(type_error(callable, Pred))
+	).
+
+'$lgt_tr_super_call'(Pred, TPred, Ctx) :-
+	'$lgt_pp_category_'(Ctg, _, _, _, _, _),
+	(	\+ '$lgt_pp_extends_category_'(_, _, _) ->
+		% invalid goal (not an extended category)
+		throw(existence_error(ancestor, category))
+	;	var(Pred) ->
+		% translation performed at runtime
+		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+		TPred = '$lgt_ctg_super_call'(Ctg, Pred, ExCtx)
+	;	callable(Pred) ->
+		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		(	'$lgt_related_entities_are_static_binding',
 			'$lgt_ctg_super_call_static_binding'(Ctg, Pred, ExCtx, TPred) ->
 			true
 		;	TPred = '$lgt_ctg_super_call_'(Ctg, Pred, ExCtx)
 		)
+	;	throw(type_error(callable, Pred))
 	).
 
 
@@ -12301,28 +12297,27 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_report_unknown_entities'(Type, Entity) :-
 	(	'$lgt_compiler_flag'(unknown_entities, warning) ->
-		'$lgt_report_unknown_objects'(Type, Entity),
-		'$lgt_report_unknown_protocols'(Type, Entity),
-		'$lgt_report_unknown_categories'(Type, Entity),
-		'$lgt_report_unknown_modules'(Type, Entity)
+		'$lgt_pp_file_directory_path_flags_'(_, _, Path, _),
+		'$lgt_report_unknown_objects'(Type, Entity, Path),
+		'$lgt_report_unknown_protocols'(Type, Entity, Path),
+		'$lgt_report_unknown_categories'(Type, Entity, Path),
+		'$lgt_report_unknown_modules'(Type, Entity, Path)
 	;	true
 	).
 
 
 
-% '$lgt_report_unknown_objects'(+atom, @entity_identifier)
+% '$lgt_report_unknown_objects'(+atom, @entity_identifier, +atom)
 %
 % reports any references to unknown objects found while compiling an entity
 
-'$lgt_report_unknown_objects'(Type, Entity) :-
-	'$lgt_pp_file_directory_path_flags_'(_, _, Path, _),
+'$lgt_report_unknown_objects'(Type, Entity, Path) :-
 	'$lgt_pp_referenced_object_'(Object, Lines),
 		% not a currently loaded object
 		\+ '$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _),
 		% not the object being compiled (self reference)
 		\+ '$lgt_pp_object_'(Object, _, _, _, _, _, _, _, _, _, _),
 		% not an object defined in the source file being compiled
-		\+ '$lgt_pp_file_entity_initialization_'(object, Object, _),
 		\+ '$lgt_pp_file_runtime_clause_'('$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _)),
 		% not a currently loaded module
 		\+ (atom(Object), '$lgt_prolog_feature'(modules, supported), current_module(Object)),
@@ -12330,61 +12325,56 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_print_message'(warning(unknown_entities), core, reference_to_unknown_object(Path, Lines, Type, Entity, Object)),
 	fail.
 
-'$lgt_report_unknown_objects'(_, _).
+'$lgt_report_unknown_objects'(_, _, _).
 
 
 
-% '$lgt_report_unknown_protocols'(+atom, @entity_identifier)
+% '$lgt_report_unknown_protocols'(+atom, @entity_identifier, +atom)
 %
 % reports any references to unknown protocols found while compiling an entity
 
-'$lgt_report_unknown_protocols'(Type, Entity) :-
-	'$lgt_pp_file_directory_path_flags_'(_, _, Path, _),
+'$lgt_report_unknown_protocols'(Type, Entity, Path) :-
 	'$lgt_pp_referenced_protocol_'(Protocol, Lines),
 		% not a currently loaded protocol
 		\+ '$lgt_current_protocol_'(Protocol, _, _, _, _),
 		% not the protocol being compiled (self reference)
 		\+ '$lgt_pp_protocol_'(Protocol, _, _, _, _),
 		% not a protocol defined in the source file being compiled
-		\+ '$lgt_pp_file_entity_initialization_'(protocol, Protocol, _),
 		\+ '$lgt_pp_file_runtime_clause_'('$lgt_current_protocol_'(Protocol, _, _, _, _)),
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_print_message'(warning(unknown_entities), core, reference_to_unknown_protocol(Path, Lines, Type, Entity, Protocol)),
 	fail.
 
-'$lgt_report_unknown_protocols'(_, _).
+'$lgt_report_unknown_protocols'(_, _, _).
 
 
 
-% '$lgt_report_unknown_categories'(+atom, @entity_identifier)
+% '$lgt_report_unknown_categories'(+atom, @entity_identifier, +atom)
 %
 % reports any references to unknown categories found while compiling an entity
 
-'$lgt_report_unknown_categories'(Type, Entity) :-
-	'$lgt_pp_file_directory_path_flags_'(_, _, Path, _),
+'$lgt_report_unknown_categories'(Type, Entity, Path) :-
 	'$lgt_pp_referenced_category_'(Category, Lines),
 		% not a currently loaded category
 		\+ '$lgt_current_category_'(Category, _, _, _, _, _),
 		% not the category being compiled (self reference)
 		\+ '$lgt_pp_category_'(Category, _, _, _, _, _),
 		% not a category defined in the source file being compiled
-		\+ '$lgt_pp_file_entity_initialization_'(category, Category, _),
 		\+ '$lgt_pp_file_runtime_clause_'('$lgt_current_category_'(Category, _, _, _, _, _)),
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_print_message'(warning(unknown_entities), core, reference_to_unknown_category(Path, Lines, Type, Entity, Category)),
 	fail.
 
-'$lgt_report_unknown_categories'(_, _).
+'$lgt_report_unknown_categories'(_, _, _).
 
 
 
-% '$lgt_report_unknown_modules'(+atom, @entity_identifier)
+% '$lgt_report_unknown_modules'(+atom, @entity_identifier, +atom)
 %
 % reports any references to unknown modules found while compiling an entity
 
-'$lgt_report_unknown_modules'(Type, Entity) :-
+'$lgt_report_unknown_modules'(Type, Entity, Path) :-
 	'$lgt_prolog_feature'(modules, supported),
-	'$lgt_pp_file_directory_path_flags_'(_, _, Path, _),
 	'$lgt_pp_referenced_module_'(Module, Lines),
 		% not a currently loaded module
 		\+ current_module(Module),
@@ -12394,7 +12384,7 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_print_message'(warning(unknown_entities), core, reference_to_unknown_module(Path, Lines, Type, Entity, Module)),
 	fail.
 
-'$lgt_report_unknown_modules'(_, _).
+'$lgt_report_unknown_modules'(_, _, _).
 
 
 
@@ -12477,22 +12467,21 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_add_def_fail_clause'(+atom, +integer, @compilation_context)
+% '$lgt_add_def_fail_clause'(@callable, @compilation_context)
 %
 % adds a "def clause" (used to translate a predicate call) where the
 % definition is simply fail due to the predicate being declared, static,
 % but undefined (as per closed-world assumption)
 
-'$lgt_add_def_fail_clause'(Functor, Arity, Ctx) :-
-	functor(HeadTemplate, Functor, Arity),
+'$lgt_add_def_fail_clause'(Head, Ctx) :-
 	(	'$lgt_pp_object_'(_, _, _, Def, _, _, _, _, _, _, _) ->
 		true
 	;	'$lgt_pp_category_'(_, _, _, Def, _, _)
 	),
-	Clause =.. [Def, HeadTemplate, _, fail],
+	Clause =.. [Def, Head, _, fail],
 	assertz('$lgt_pp_def_'(Clause)),
 	'$lgt_comp_ctx_mode'(Ctx, Mode),
-	'$lgt_check_for_redefined_built_in'(HeadTemplate, _, fail, Mode).
+	'$lgt_check_for_redefined_built_in'(Head, _, fail, Mode).
 
 
 
@@ -12858,7 +12847,7 @@ current_logtalk_flag(Flag, Value) :-
 	\+ '$lgt_pp_defines_annotated_predicate_'(Functor, Arity),
 	% declared, static, but undefined predicate;
 	% local calls must fail (as per closed-world assumption)
-	'$lgt_add_def_fail_clause'(Functor, Arity, Ctx),
+	'$lgt_add_def_fail_clause'(Head, Ctx),
 	fail.
 
 '$lgt_gen_def_table_clauses'(Ctx) :-
@@ -14251,14 +14240,14 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_report_missing_directives'(Type, Entity) :-
 	(	'$lgt_compiler_flag'(missing_directives, warning) ->
 		'$lgt_pp_file_directory_path_flags_'(_, _, Path, _),
-		'$lgt_report_missing_directives'(Path, Type, Entity)
+		'$lgt_report_missing_directives'(Type, Entity, Path)
 	;	true
 	).
 
 
 % reports missing public/1 directives for multifile predicates
 
-'$lgt_report_missing_directives'(Path, Type, Entity) :-
+'$lgt_report_missing_directives'(Type, Entity, Path) :-
 	'$lgt_pp_multifile_'(Functor, Arity, Lines),
 	% declared multifile predicate
 	\+ '$lgt_pp_public_'(Functor, Arity),
@@ -14269,7 +14258,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % reports missing dynamic/1 directives
 
-'$lgt_report_missing_directives'(Path, Type, Entity) :-
+'$lgt_report_missing_directives'(Type, Entity, Path) :-
 	'$lgt_pp_missing_dynamic_directive_'(Head, Lines),
 	% detected dynamic predicate but check for out-of-place dynamic/1 directive
 	\+ '$lgt_pp_dynamic_'(Head),
@@ -14280,7 +14269,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % reports missing discontiguous/1 directives
 
-'$lgt_report_missing_directives'(Path, Type, Entity) :-
+'$lgt_report_missing_directives'(Type, Entity, Path) :-
 	'$lgt_pp_missing_discontiguous_directive_'(Functor, Arity, Lines),
 	% detected discontiguous predicate but check for out-of-place discontiguous/1 directive
 	\+ '$lgt_pp_discontiguous_'(Functor, Arity),
@@ -14310,18 +14299,18 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 '$lgt_report_misspelt_calls'(warning, Type, Entity) :-
-	'$lgt_report_misspelt_predicate_calls'(Type, Entity),
-	'$lgt_report_misspelt_non_terminal_calls'(Type, Entity).
-
-
-'$lgt_report_misspelt_predicate_calls'(Type, Entity) :-
 	'$lgt_pp_file_directory_path_flags_'(_, _, Path, _),
+	'$lgt_report_misspelt_predicate_calls'(Type, Entity, Path),
+	'$lgt_report_misspelt_non_terminal_calls'(Type, Entity, Path).
+
+
+'$lgt_report_misspelt_predicate_calls'(Type, Entity, Path) :-
 	'$lgt_misspelt_predicate_call'(Pred, Lines),
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_print_message'(warning(misspelt_calls), core, predicate_called_but_not_defined(Path, Lines, Type, Entity, Pred)),
 	fail.
 
-'$lgt_report_misspelt_predicate_calls'(_, _).
+'$lgt_report_misspelt_predicate_calls'(_, _, _).
 
 
 % when enumerating misspelt predicate calls, we don't check if the
@@ -14343,14 +14332,13 @@ current_logtalk_flag(Flag, Value) :-
 	\+ '$lgt_pp_calls_non_terminal_'(Functor, Arity2, _).
 
 
-'$lgt_report_misspelt_non_terminal_calls'(Type, Entity) :-
-	'$lgt_pp_file_directory_path_flags_'(_, _, Path, _),
+'$lgt_report_misspelt_non_terminal_calls'(Type, Entity, Path) :-
 	'$lgt_misspelt_non_terminal_call'(NonTerminal, Lines),
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_print_message'(warning(misspelt_calls), core, non_terminal_called_but_not_defined(Path, Lines, Type, Entity, NonTerminal)),
 	fail.
 
-'$lgt_report_misspelt_non_terminal_calls'(_, _).
+'$lgt_report_misspelt_non_terminal_calls'(_, _, _).
 
 
 '$lgt_misspelt_non_terminal_call'(Functor//Arity, Lines) :-
@@ -14371,19 +14359,19 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_report_non_portable_calls'(Type, Entity) :-
 	(	'$lgt_compiler_flag'(portability, warning) ->
 		'$lgt_pp_file_directory_path_flags_'(_, _, Path, _),
-		'$lgt_report_non_portable_calls'(Path, Type, Entity)
+		'$lgt_report_non_portable_calls'(Type, Entity, Path)
 	;	true
 	).
 
 
-'$lgt_report_non_portable_calls'(Path, Type, Entity) :-
+'$lgt_report_non_portable_calls'(Type, Entity, Path) :-
 	'$lgt_pp_non_portable_predicate_'(Head, Lines),
 		functor(Head, Functor, Arity),
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_print_message'(warning(portability), core, non_standard_predicate_call(Path, Lines, Type, Entity, Functor/Arity)),
 	fail.
 
-'$lgt_report_non_portable_calls'(Path, Type, Entity) :-
+'$lgt_report_non_portable_calls'(Type, Entity, Path) :-
 	'$lgt_pp_non_portable_function_'(Function, Lines),
 		functor(Function, Functor, Arity),
 		'$lgt_increment_compile_warnings_counter',
@@ -14559,24 +14547,24 @@ current_logtalk_flag(Flag, Value) :-
 % runtime clauses for all defined entities
 
 '$lgt_write_runtime_clauses'(SourceData, Stream) :-
+	'$lgt_pp_file_directory_path_flags_'(File, Directory, Path, Flags),
 	% entity runtime clauses
-	'$lgt_write_runtime_clauses'(SourceData, Stream, '$lgt_current_protocol_'/5),
-	'$lgt_write_runtime_clauses'(SourceData, Stream, '$lgt_current_category_'/6),
-	'$lgt_write_runtime_clauses'(SourceData, Stream, '$lgt_current_object_'/11),
-	'$lgt_write_runtime_clauses'(SourceData, Stream, '$lgt_entity_property_'/2),
-	'$lgt_write_runtime_clauses'(SourceData, Stream, '$lgt_predicate_property_'/3),
-	'$lgt_write_runtime_clauses'(SourceData, Stream, '$lgt_implements_protocol_'/3),
-	'$lgt_write_runtime_clauses'(SourceData, Stream, '$lgt_imports_category_'/3),
-	'$lgt_write_runtime_clauses'(SourceData, Stream, '$lgt_instantiates_class_'/3),
-	'$lgt_write_runtime_clauses'(SourceData, Stream, '$lgt_specializes_class_'/3),
-	'$lgt_write_runtime_clauses'(SourceData, Stream, '$lgt_extends_category_'/3),
-	'$lgt_write_runtime_clauses'(SourceData, Stream, '$lgt_extends_object_'/3),
-	'$lgt_write_runtime_clauses'(SourceData, Stream, '$lgt_extends_protocol_'/3),
-	'$lgt_write_runtime_clauses'(SourceData, Stream, '$lgt_complemented_object_'/5),
+	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_current_protocol_'/5),
+	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_current_category_'/6),
+	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_current_object_'/11),
+	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_entity_property_'/2),
+	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_predicate_property_'/3),
+	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_implements_protocol_'/3),
+	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_imports_category_'/3),
+	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_instantiates_class_'/3),
+	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_specializes_class_'/3),
+	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_extends_category_'/3),
+	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_extends_object_'/3),
+	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_extends_protocol_'/3),
+	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_complemented_object_'/5),
 	% file runtime clauses
 	write_canonical(Stream, (:- multifile('$lgt_loaded_file_'/4))), write(Stream, '.\n'),
 	write_canonical(Stream, (:- dynamic('$lgt_loaded_file_'/4))), write(Stream, '.\n'),
-	'$lgt_pp_file_directory_path_flags_'(File, Directory, Path, Flags),
 	(	'$lgt_pp_file_encoding_'(Encoding, _) ->
 		(	'$lgt_pp_file_bom_'(BOM) ->
 			StreamProperties = [encoding(Encoding), BOM]
@@ -14591,13 +14579,13 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 
-'$lgt_write_runtime_clauses'(SourceData, Stream, Functor/Arity) :-
+'$lgt_write_runtime_clauses'(SourceData, Stream, Path, Functor/Arity) :-
 	functor(Clause, Functor, Arity),
-	(	\+ \+ '$lgt_pp_file_runtime_clause_'(Clause) ->
-		write_canonical(Stream, (:- multifile(Functor/Arity))), write(Stream, '.\n'),
+	(	\+ '$lgt_pp_file_runtime_clause_'(Clause) ->
+		true
+	;	write_canonical(Stream, (:- multifile(Functor/Arity))), write(Stream, '.\n'),
 		write_canonical(Stream, (:- dynamic(Functor/Arity))), write(Stream, '.\n'),
 		(	SourceData == on ->
-			'$lgt_pp_file_directory_path_flags_'(_, _, Path, _),
 			(	'$lgt_pp_file_runtime_clause_'(Clause),
 				'$lgt_write_term_and_source_location'(Stream, Clause, aux, Path+1),
 				fail
@@ -14609,7 +14597,6 @@ current_logtalk_flag(Flag, Value) :-
 			;	true
 			)
 		)
-	;	true
 	).
 
 
@@ -15500,18 +15487,16 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_logtalk_predicate_directive'(reexport(_, _)).
 
 
-
 % conditional compilation directives
+'$lgt_conditional_compilation_directive'(if(_)).
+'$lgt_conditional_compilation_directive'(elif(_)).
+'$lgt_conditional_compilation_directive'(else).
+'$lgt_conditional_compilation_directive'(endif).
 
-'$lgt_conditional_compilation_directive'((:- Directive)) :-
+
+'$lgt_is_conditional_compilation_directive'((:- Directive)) :-
 	nonvar(Directive),
-	functor(Directive, Functor, Arity),
-	'$lgt_conditional_compilation_directive'(Functor, Arity).
-
-'$lgt_conditional_compilation_directive'(if,    1).
-'$lgt_conditional_compilation_directive'(elif,  1).
-'$lgt_conditional_compilation_directive'(else,  0).
-'$lgt_conditional_compilation_directive'(endif, 0).
+	'$lgt_conditional_compilation_directive'(Directive).
 
 
 
@@ -15520,7 +15505,10 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_comp_ctx'(ctx(_, _, _, _, _, _, _, _, _, _)).
 
-'$lgt_comp_ctx'(ctx(Head, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, Mode, Stack), Head, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, Mode, Stack).
+'$lgt_comp_ctx'(
+	ctx(Head, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, Mode, Stack),
+	Head, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, Mode, Stack
+).
 
 % head of the clause being compiled
 '$lgt_comp_ctx_head'(ctx(Head, _, _, _, _, _, _, _, _, _), Head).
