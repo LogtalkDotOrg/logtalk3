@@ -60,7 +60,7 @@ Logtalk is a registered trademark of Paulo Moura.
 2. LOGTALK WEB SITE
 -------------------
 
-The latest release of the Logtalk package is always available at the URL:
+The latest release of the Logtalk is always available at the URL:
 
     http://logtalk.org/
 
@@ -133,8 +133,8 @@ and can be found in the `manuals` directory. PDF versions of the reference
 and user manuals can be downloaded from the Logtalk web site.
 
 The file `RELEASE_NOTES.md` contains descriptions of all Logtalk updates 
-since the first public version. Read it carefully if you have been using a 
-previous Logtalk version.
+since the first public version. Read it carefully if you have been using
+a previous Logtalk version.
 
 The documentation for the Logtalk library is provided in XHTML format and
 can be found in the `library/docs` directory.

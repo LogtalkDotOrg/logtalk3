@@ -4186,8 +4186,11 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_call_within_context'(?term, ?term, +object_identifier)
 %
-% calls a goal within the context of the specified object;
-% used mostly for debugging and for writing unit tests
+% calls a goal within the context of the specified object
+%
+% used mostly for debugging and for writing unit tests, the permission to perform a
+% context-switching call can be disabled in a per-object basis by using the compiler
+% flag "context_switching_calls"
 
 '$lgt_call_within_context'(Obj, Goal, This) :-
 	'$lgt_must_be'(object_identifier, Obj, logtalk(Obj<<Goal, This)),
@@ -4198,8 +4201,8 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_call_within_context_nv'(+object_identifier, +callable, +object_identifier)
 %
-% calls a goal within the context of the specified object;
-% used mostly for debugging and for writing unit tests
+% calls a goal within the context of the specified object (arguments type-checked
+% at compile time)
 
 '$lgt_call_within_context_nv'(Obj, Goal, This) :-
 	(	'$lgt_current_object_'(Obj, Prefix, _, Def, _, _, _, _, DDef, _, Flags) ->
@@ -4440,13 +4443,17 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_current_object_'(logtalk, '$lgt_logtalk.', '$lgt_logtalk._dcl', '$lgt_logtalk._def', '$lgt_logtalk._super', '$lgt_logtalk._idcl', '$lgt_logtalk._idef', '$lgt_logtalk._ddcl', '$lgt_logtalk._ddef', '$lgt_logtalk._alias', Flags) :-
 	(	'$lgt_prolog_feature'(threads, supported) ->
-		Flags = 249		% 0b11111001
-	;	Flags = 241		% 0b11110001
+		% context_switching_calls + dynamic_declarations + complements + events + threaded + static + final
+		Flags = 249		% 0b011111001
+	;	% context_switching_calls + dynamic_declarations + complements + events + static + final
+		Flags = 241		% 0b011110001
 	).
 '$lgt_current_object_'(user, '$lgt_user.', '$lgt_user._dcl', '$lgt_user._def', '$lgt_user._super', '$lgt_user._idcl', '$lgt_user._idef', '$lgt_user._ddcl', '$lgt_user._ddef', '$lgt_user._alias', Flags) :-
 	(	'$lgt_prolog_feature'(threads, supported) ->
-		Flags = 249		% 0b11111001
-	;	Flags = 241		% 0b11110001
+		% context_switching_calls + dynamic_declarations + complements + events + threaded + static + final
+		Flags = 249		% 0b011111001
+	;	% context_switching_calls + dynamic_declarations + complements + events + static + final
+		Flags = 241		% 0b011110001
 	).
 
 
@@ -4465,15 +4472,17 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
+% support dynamic predicate declarations
 :- dynamic('$lgt_logtalk._ddcl'/2).
 :- dynamic('$lgt_logtalk._ddef'/3).
 
 
+% loaded file and library predicates
 '$lgt_logtalk._dcl'(expand_library_path(_, _), p(p(p)), no, 0).
 '$lgt_logtalk._dcl'(loaded_file(_, _), p(p(p)), no, 0).
 '$lgt_logtalk._dcl'(loaded_file(_, _, _), p(p(p)), no, 0).
 '$lgt_logtalk._dcl'(loaded_file(_, _, _, _), p(p(p)), no, 0).
-
+% predicates for low-level hacking
 '$lgt_logtalk._dcl'(compile_aux_clauses(_), p(p(p)), no, 0).
 '$lgt_logtalk._dcl'(entity_prefix(_, _), p(p(p)), no, 0).
 '$lgt_logtalk._dcl'(compile_predicate_heads(_, _), p(p(p)), no, 0).
@@ -4488,18 +4497,19 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_logtalk._dcl'(decompile_predicate_indicators(_, _, _), p(p(p)), no, 0).
 '$lgt_logtalk._dcl'(decompile_predicate_indicators(_, _, _, _), p(p(p)), no, 0).
 '$lgt_logtalk._dcl'(execution_context(_, _, _, _, _, _), p(p(p)), no, 0).
-
+% structured message printing predicates
 '$lgt_logtalk._dcl'(print_message(_, _, _), p(p(p)), no, 0).
 '$lgt_logtalk._dcl'(print_message_tokens(_, _, _), p(p(p)), no, 0).
 '$lgt_logtalk._dcl'(print_message_token(_, _), p(p(p)), no, 18).
 '$lgt_logtalk._dcl'(message_tokens(_, _, _, _), p(p(p)), no, 26).
 '$lgt_logtalk._dcl'(message_prefix_stream(_, _, _, _), p(p(p)), no, 18).
 '$lgt_logtalk._dcl'(message_hook(_, _, _, _), p(p(p)), no, 18).
-
+% debugging handler predicates
 '$lgt_logtalk._dcl'(trace_event(_, _), p(p(p)), no, 18).
 '$lgt_logtalk._dcl'(debug_handler_provider(_), p(p(p)), no, 16).
 '$lgt_logtalk._dcl'(debug_handler(_, _), p(p(p)), no, 16).
 
+% support complementing categories
 '$lgt_logtalk._dcl'(Pred, Scope, Meta, Flags, SCtn, TCtn) :-
 	'$lgt_complemented_object'(logtalk, '$lgt_logtalk._dcl', Pred, Scope, Meta, Flags, SCtn, TCtn).
 
@@ -4510,11 +4520,12 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_logtalk._ddcl'(Pred, Scope).
 
 
+% loaded file and library predicates
 '$lgt_logtalk._def'(expand_library_path(Library, Path), _, '$lgt_expand_library_path'(Library, Path)).
 '$lgt_logtalk._def'(loaded_file(File, Directory), _, '$lgt_loaded_file_'(File, Directory, _, _)).
 '$lgt_logtalk._def'(loaded_file(File, Directory, Flags), _, '$lgt_loaded_file_'(File, Directory, Flags, _)).
 '$lgt_logtalk._def'(loaded_file(File, Directory, Flags, StreamProperties), _, '$lgt_loaded_file_'(File, Directory, Flags, StreamProperties)).
-
+% predicates for low-level hacking
 '$lgt_logtalk._def'(compile_aux_clauses(Clauses), _, '$lgt_compile_aux_clauses'(Clauses)).
 '$lgt_logtalk._def'(entity_prefix(Entity, Prefix), _, '$lgt_entity_prefix'(Entity, Prefix)).
 '$lgt_logtalk._def'(compile_predicate_heads(Heads, THeads), _, '$lgt_compile_predicate_heads'(Heads, THeads)).
@@ -4529,14 +4540,14 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_logtalk._def'(decompile_predicate_heads(THeads, Entity, Heads), _, '$lgt_decompile_predicate_heads'(THeads, Entity, Heads)).
 '$lgt_logtalk._def'(decompile_predicate_heads(THeads, Entity, Type, Heads), _, '$lgt_decompile_predicate_heads'(THeads, Entity, Type, Heads)).
 '$lgt_logtalk._def'(execution_context(ExCtx, Sender, This, Self, MetaCallCtx, Stack), _, '$lgt_exec_ctx'(ExCtx, Sender, This, Self, MetaCallCtx, Stack)).
-
+% structured message printing predicates
 '$lgt_logtalk._def'(print_message(Kind, Component, Term), ExCtx, '$lgt_logtalk.print_message'(Kind, Component, Term, ExCtx)).
 '$lgt_logtalk._def'(print_message_tokens(Stream, Prefix, Tokens), ExCtx, '$lgt_logtalk.print_message_tokens'(Stream, Prefix, Tokens, ExCtx)).
 '$lgt_logtalk._def'(print_message_token(Stream, Token), ExCtx, '$lgt_logtalk.print_message_token'(Stream, Token, ExCtx)).
 '$lgt_logtalk._def'(message_tokens(Term, Component, Tokens, Rest), ExCtx, '$lgt_logtalk.message_tokens'(Term, Component, Tokens, Rest, ExCtx)).
 '$lgt_logtalk._def'(message_prefix_stream(Kind, Component, Prefix, Stream), ExCtx, '$lgt_logtalk.message_prefix_stream'(Kind, Component, Prefix, Stream, ExCtx)).
 '$lgt_logtalk._def'(message_hook(Term, Kind, Component, Tokens), ExCtx, '$lgt_logtalk.message_hook'(Term, Kind, Component, Tokens, ExCtx)).
-
+% debugging handler predicates
 '$lgt_logtalk._def'(trace_event(Event, EventExCtx), ExCtx, '$lgt_logtalk.trace_event'(Event, EventExCtx, ExCtx)).
 '$lgt_logtalk._def'(debug_handler_provider(Provider), ExCtx, '$lgt_logtalk.debug_handler_provider'(Provider, ExCtx)).
 '$lgt_logtalk._def'(debug_handler(Event, EventExCtx), ExCtx, '$lgt_logtalk.debug_handler'(Event, EventExCtx, ExCtx)).
@@ -4594,17 +4605,13 @@ current_logtalk_flag(Flag, Value) :-
 %
 % translates a message term to tokens
 
-'$lgt_message_term_to_tokens'(Term, Kind, Component, Tokens, _) :-
-	var(Term),
-	!,
-	Tokens = ['Non-instantiated ~q message for component ~q!'-[Kind, Component], nl].
-
-'$lgt_message_term_to_tokens'(Term, _, Component, Tokens, ExCtx) :-
-	'$lgt_logtalk.message_tokens'(Term, Component, Tokens, [], ExCtx),
-	!.
-
-'$lgt_message_term_to_tokens'(Term, Kind, Component, Tokens, _) :-
-	Tokens = ['Unknown ~q message for component ~q: ~q'-[Kind, Component, Term], nl].
+'$lgt_message_term_to_tokens'(Term, Kind, Component, Tokens, ExCtx) :-
+	(	var(Term) ->
+		Tokens = ['Non-instantiated ~q message for component ~q!'-[Kind, Component], nl]
+	;	'$lgt_logtalk.message_tokens'(Term, Component, Tokens, [], ExCtx) ->
+		true
+	;	Tokens = ['Unknown ~q message for component ~q: ~q'-[Kind, Component, Term], nl]
+	).
 
 
 
@@ -4746,6 +4753,7 @@ current_logtalk_flag(Flag, Value) :-
 % the following clauses correspond to a virtual compilation of the built-in pseudo-object "user"
 
 
+% support dynamic predicate declarations
 :- dynamic('$lgt_user._ddcl'/2).
 :- dynamic('$lgt_user._ddef'/3).
 
@@ -5069,21 +5077,22 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_write_tr_entity'
+% '$lgt_write_entity_code'
 %
 % writes to disk the entity compiled code
 
-'$lgt_write_tr_entity' :-
+'$lgt_write_entity_code' :-
 	% avoid a spurious choice-point with some back-end Prolog compilers
 	stream_property(Output, alias(logtalk_compiler_output)), !,
 	'$lgt_compiler_flag'(source_data, SourceData),
 	catch(
-		'$lgt_write_tr_entity'(SourceData, Output),
+		'$lgt_write_entity_code'(SourceData, Output),
 		Error,
 		'$lgt_compiler_stream_io_error_handler'(Output, Error)).
 
 
-'$lgt_write_tr_entity'(SourceData, Output) :-
+'$lgt_write_entity_code'(SourceData, Output) :-
+	% write any plain Prolog terms that precede the entity definition
 	'$lgt_write_prolog_terms'(SourceData, Output),
 	'$lgt_write_logtalk_directives'(Output),
 	'$lgt_write_logtalk_clauses'(SourceData, Output).
@@ -5306,7 +5315,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_add_referenced_object'(@object_identifier)
 %
-% adds referenced object for cheking references to unknown objects;
+% adds referenced object for later cheking of references to unknown objects;
 % we also save the line numbers for the first reference to the object
 
 '$lgt_add_referenced_object'(Obj) :-
@@ -5315,7 +5324,8 @@ current_logtalk_flag(Flag, Value) :-
 	;	'$lgt_current_line_numbers'(Lines),
 		(	atom(Obj) ->
 			assertz('$lgt_pp_referenced_object_'(Obj, Lines))
-		;	'$lgt_term_template'(Obj, Template),
+		;	% parametric object
+			'$lgt_term_template'(Obj, Template),
 			assertz('$lgt_pp_referenced_object_'(Template, Lines))
 		)
 	).
@@ -5324,7 +5334,8 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_add_referenced_protocol'(@protocol_identifier)
 %
-% adds referenced protocol for cheking references to unknown protocols
+% adds referenced protocol for later cheking of references to unknown protocols
+% we also save the line numbers for the first reference to the protocol
 
 '$lgt_add_referenced_protocol'(Ptc) :-
 	(	'$lgt_pp_referenced_protocol_'(Ptc, _) ->
@@ -5337,7 +5348,8 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_add_referenced_category'(@category_identifier)
 %
-% adds referenced category for cheking references to unknown categories
+% adds referenced category for later cheking of references to unknown categories
+% we also save the line numbers for the first reference to the category
 
 '$lgt_add_referenced_category'(Ctg) :-
 	(	'$lgt_pp_referenced_category_'(Ctg, _) ->
@@ -5345,7 +5357,8 @@ current_logtalk_flag(Flag, Value) :-
 	;	'$lgt_current_line_numbers'(Lines),
 		(	atom(Ctg) ->
 			assertz('$lgt_pp_referenced_category_'(Ctg, Lines))
-		;	'$lgt_term_template'(Ctg, Template),
+		;	% parametric category
+			'$lgt_term_template'(Ctg, Template),
 			assertz('$lgt_pp_referenced_category_'(Template, Lines))
 		)
 	).
@@ -5354,7 +5367,8 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_add_referenced_module'(@protocol_identifier)
 %
-% adds referenced module for cheking references to unknown modules
+% adds referenced module for later cheking of references to unknown modules
+% we also save the line numbers for the first reference to the module
 
 '$lgt_add_referenced_module'(Module) :-
 	(	'$lgt_pp_referenced_module_'(Module, _) ->
@@ -5624,9 +5638,9 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_tr_entity'(+atom, @entity_identifier, +compilation_context)
 
 '$lgt_tr_entity'(Type, Entity, Ctx) :-
-	'$lgt_generate_code'(Type, Ctx),
+	'$lgt_generate_entity_code'(Type, Ctx),
 	'$lgt_report_problems'(Type, Entity),
-	'$lgt_write_tr_entity',
+	'$lgt_write_entity_code',
 	'$lgt_save_entity_runtime_clauses',
 	'$lgt_clean_pp_entity_clauses'.
 
@@ -7034,11 +7048,11 @@ current_logtalk_flag(Flag, Value) :-
 % auxiliary predicate for translating synchronized/1 directives
 
 '$lgt_tr_synchronized_directive'(Resources) :-
-	'$lgt_gen_pred_mutex'(Mutex),
+	'$lgt_new_predicate_mutex'(Mutex),
 	'$lgt_tr_synchronized_directive'(Resources, Mutex).
 
 
-'$lgt_gen_pred_mutex'(Mutex) :-
+'$lgt_new_predicate_mutex'(Mutex) :-
 	'$lgt_pp_entity_'(_, _, Prefix, _, _),
 	retract('$lgt_pp_predicate_mutex_counter_'(Old)),
 	New is Old + 1,
@@ -12624,18 +12638,18 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_generate_code'(+atom, +compilation_context)
+% '$lgt_generate_entity_code'(+atom, +compilation_context)
 %
 % generates code for the entity being compiled
 
-'$lgt_generate_code'(protocol, _) :-
+'$lgt_generate_entity_code'(protocol, _) :-
 	% protocols may contain initialization directives
 	'$lgt_fix_predicate_calls',
 	'$lgt_gen_protocol_clauses',
 	'$lgt_gen_protocol_directives',
 	'$lgt_gen_file_entity_initialization_goal'.
 
-'$lgt_generate_code'(object, Ctx) :-
+'$lgt_generate_entity_code'(object, Ctx) :-
 	'$lgt_gen_def_table_clauses'(Ctx),
 	'$lgt_fix_predicate_defs',
 	'$lgt_fix_predicate_calls',
@@ -12643,7 +12657,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_gen_object_directives',
 	'$lgt_gen_file_entity_initialization_goal'.
 
-'$lgt_generate_code'(category, Ctx) :-
+'$lgt_generate_entity_code'(category, Ctx) :-
 	'$lgt_gen_def_table_clauses'(Ctx),
 	'$lgt_fix_predicate_defs',
 	'$lgt_fix_predicate_calls',
@@ -14400,7 +14414,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_write_logtalk_directives'(@stream)
 %
-% writes Logtalk directives
+% writes the translated entity directives
 
 '$lgt_write_logtalk_directives'(Stream) :-
 	'$lgt_pp_directive_'(Directive),
@@ -16261,35 +16275,33 @@ current_logtalk_flag(Flag, Value) :-
 %
 % '$lgt_logtalk_built_in_predicate'(?callable)
 
+% message sending and context switching control constructs
 '$lgt_logtalk_built_in_predicate'(_ :: _).
 '$lgt_logtalk_built_in_predicate'(_ << _).
-
-'$lgt_logtalk_built_in_predicate'(forall(_, _)).
-'$lgt_logtalk_built_in_predicate'(retractall(_)).
-
+% compiling and loading predicates
 '$lgt_logtalk_built_in_predicate'(logtalk_compile(_)).
 '$lgt_logtalk_built_in_predicate'(logtalk_compile(_, _)).
 '$lgt_logtalk_built_in_predicate'(logtalk_load(_)).
 '$lgt_logtalk_built_in_predicate'(logtalk_load(_, _)).
 '$lgt_logtalk_built_in_predicate'(logtalk_load_context(_, _)).
 '$lgt_logtalk_built_in_predicate'(logtalk_library_path(_, _)).
-
+% entity properties
 '$lgt_logtalk_built_in_predicate'(protocol_property(_, _)).
 '$lgt_logtalk_built_in_predicate'(category_property(_, _)).
 '$lgt_logtalk_built_in_predicate'(object_property(_, _)).
-
+% entity enumeration
 '$lgt_logtalk_built_in_predicate'(current_protocol(_)).
 '$lgt_logtalk_built_in_predicate'(current_category(_)).
 '$lgt_logtalk_built_in_predicate'(current_object(_)).
-
+% entity creation predicates
 '$lgt_logtalk_built_in_predicate'(create_object(_, _, _, _)).
 '$lgt_logtalk_built_in_predicate'(create_category(_, _, _, _)).
 '$lgt_logtalk_built_in_predicate'(create_protocol(_, _, _)).
-
+% entity abolishing predicates
 '$lgt_logtalk_built_in_predicate'(abolish_object(_)).
 '$lgt_logtalk_built_in_predicate'(abolish_category(_)).
 '$lgt_logtalk_built_in_predicate'(abolish_protocol(_)).
-
+% entity relations
 '$lgt_logtalk_built_in_predicate'(implements_protocol(_, _)).
 '$lgt_logtalk_built_in_predicate'(implements_protocol(_, _, _)).
 '$lgt_logtalk_built_in_predicate'(imports_category(_, _)).
@@ -16305,17 +16317,17 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_logtalk_built_in_predicate'(extends_category(_, _)).
 '$lgt_logtalk_built_in_predicate'(extends_category(_, _, _)).
 '$lgt_logtalk_built_in_predicate'(complements_object(_, _)).
-
+% protocol conformance
 '$lgt_logtalk_built_in_predicate'(conforms_to_protocol(_, _)).
 '$lgt_logtalk_built_in_predicate'(conforms_to_protocol(_, _, _)).
-
+% events
 '$lgt_logtalk_built_in_predicate'(abolish_events(_, _, _, _, _)).
 '$lgt_logtalk_built_in_predicate'(define_events(_, _, _, _, _)).
 '$lgt_logtalk_built_in_predicate'(current_event(_, _, _, _, _)).
-
+% flags
 '$lgt_logtalk_built_in_predicate'(current_logtalk_flag(_, _)).
 '$lgt_logtalk_built_in_predicate'(set_logtalk_flag(_, _)).
-
+% multi-threading predicates
 '$lgt_logtalk_built_in_predicate'(threaded(_)).
 '$lgt_logtalk_built_in_predicate'(threaded_call(_, _)).
 '$lgt_logtalk_built_in_predicate'(threaded_call(_)).
@@ -16328,6 +16340,9 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_logtalk_built_in_predicate'(threaded_peek(_)).
 '$lgt_logtalk_built_in_predicate'(threaded_wait(_)).
 '$lgt_logtalk_built_in_predicate'(threaded_notify(_)).
+% built-in predicates that should be standard Prolog built-in predicates
+'$lgt_logtalk_built_in_predicate'(forall(_, _)).
+'$lgt_logtalk_built_in_predicate'(retractall(_)).
 
 
 
