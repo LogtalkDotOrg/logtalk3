@@ -5214,7 +5214,9 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_check_for_encoding_directive'((:- encoding(LogtalkEncoding)), Source, Input, NewInput, [encoding(PrologEncoding)|BOM]) :-
 	!,
-	(	'$lgt_prolog_feature'(encoding_directive, unsupported) ->
+	(	var(LogtalkEncoding) ->
+		throw(error(instantiation_error, directive(encoding(LogtalkEncoding))))
+	;	'$lgt_prolog_feature'(encoding_directive, unsupported) ->
 		throw(error(resource_error(text_encoding_support), directive(encoding(LogtalkEncoding))))
 	;	% the conversion between Logtalk and Prolog encodings is defined in the adapter files
 		'$lgt_logtalk_prolog_encoding'(LogtalkEncoding, PrologEncoding, Input) ->
@@ -5236,7 +5238,8 @@ current_logtalk_flag(Flag, Value) :-
 		throw(error(domain_error(directive, encoding/1), directive(encoding(LogtalkEncoding))))
 	).
 
-'$lgt_check_for_encoding_directive'(_, _, Input, Input, []).	% assume no encoding/1 directive present on the source file
+% assume no encoding/1 directive present on the source file
+'$lgt_check_for_encoding_directive'(_, _, Input, Input, []).
 
 
 

@@ -25,8 +25,18 @@ RELEASE NOTES
 =============
 
 
+3.00.0 Alpha 14 - April ??, 2013
+================================
+
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: A non-instantiated argument in an `encoding/1` directive would not be
+detected.
+
+
 3.00.0 Alpha 13 - March 28, 2013
-=================================
+================================
 
 Logtalk compiler and runtime
 ----------------------------
