@@ -31,6 +31,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: The `retractall/1` predicate is no longer recognized as a Logtalk
+built-in predicate as it recently become part of the Core Prolog standard and
+its implemented as such by the supported backend Prolog compilers.
+
 * FIXED: A non-instantiated argument in an `encoding/1` directive would not be
 detected.
 
