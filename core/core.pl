@@ -16340,8 +16340,6 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_logtalk_built_in_predicate'(threaded_peek(_)).
 '$lgt_logtalk_built_in_predicate'(threaded_wait(_)).
 '$lgt_logtalk_built_in_predicate'(threaded_notify(_)).
-% built-in predicates that should be standard Prolog built-in predicates
-'$lgt_logtalk_built_in_predicate'(forall(_, _)).
 
 
 
