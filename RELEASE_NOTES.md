@@ -39,6 +39,9 @@ the Core Prolog standard.
 * FIXED: A non-instantiated argument in an `encoding/1` directive would not be
 detected.
 
+* FIXED: Some cases where printing the execution context in the debugger for
+the current goal would print a variable for the coinduction stack.
+
 
 3.00.0 Alpha 13 - March 28, 2013
 ================================
