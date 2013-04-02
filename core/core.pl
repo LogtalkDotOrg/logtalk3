@@ -10467,29 +10467,24 @@ current_logtalk_flag(Flag, Value) :-
 	TPred = '$lgt_call_in_this'(Pred, ExCtx).
 
 
-% goal is a call to a user-defined predicate in sender (i.e. a meta-argument)
+% runtime translation
 
 '$lgt_tr_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
-	'$lgt_comp_ctx_meta_vars'(Ctx, [MetaVar| MetaVars]),
-	'$lgt_member_var'(Pred, [MetaVar| MetaVars]),
-	!,
-	'$lgt_comp_ctx'(Ctx, _, Sender, _, Self, _, _, _, ExCtx, _, _),
-	'$lgt_exec_ctx'(ExCtx, Sender, _, Self, _, _),
-	'$lgt_entity_prefix'(Sender, Prefix),
-	TPred = '$lgt_metacall_this'(Pred, Prefix, Sender, Sender, Self).
+	'$lgt_comp_ctx'(Ctx, _, Sender, This, _, _, MetaVars, _, ExCtx, runtime, _),
+	% in the most common case, we're meta-calling the predicate
+	(	'$lgt_member_var'(Pred, MetaVars) ->
+		% goal is a call to a user-defined predicate in sender (i.e. a meta-argument)
+		TPred = '$lgt_metacall_sender'(Pred, Sender, This, [])
+	;	% goal is a call to a user-defined predicate in this
+		'$lgt_current_object_'(This, _, _, Def, _, _, _, _, DDef, _, _),
+		(	call(Def, Pred, ExCtx, TPred)
+		;	call(DDef, Pred, ExCtx, TPred)
+		)
+	),
+	!.
 
 
 % goal is a call to a local user-defined predicate
-
-'$lgt_tr_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
-	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, runtime, _),
-	% in the most common case, we're meta-calling the predicate
-	'$lgt_current_object_'(This, _, _, Def, _, _, _, _, DDef, _, _),
-	(	call(Def, Pred, ExCtx, TPred)
-	;	call(DDef, Pred, ExCtx, TPred)
-	),
-	% locally defined predicate or a predicate specified in a uses/2 directive
-	!.
 
 '$lgt_tr_body'(Pred, TCPred, '$lgt_debug'(goal(DPred, TCPred), ExCtx), Ctx) :-
 	'$lgt_pp_coinductive_'(Pred, _, TCPred, _, DPred),
