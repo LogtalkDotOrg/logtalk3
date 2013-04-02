@@ -42,6 +42,9 @@ detected.
 * FIXED: Some cases where printing the execution context in the debugger for
 the current goal would print a variable for the coinduction stack.
 
+* FIXED: Passing the execution context for goals compiled in debug mode when
+performing a meta-call in *sender*.
+
 
 3.00.0 Alpha 13 - March 28, 2013
 ================================

@@ -4145,7 +4145,7 @@ current_logtalk_flag(Flag, Value) :-
 		call(DDef, Pred, ExCtx, TPred) ->
 		call(TPred)
 	;	% in the worst case we have a control construct or a built-in predicate
-		'$lgt_comp_ctx'(Ctx, _, This, Sender, Sender, Prefix, ExtraVars, _, _, runtime, []),
+		'$lgt_comp_ctx'(Ctx, _, This, Sender, Sender, Prefix, ExtraVars, _, ExCtx, runtime, []),
 		catch('$lgt_tr_body'(Pred, TPred, DPred, Ctx), Error, throw(error(Error, logtalk(call(Pred), Sender)))) ->
 		(	Flags /\ 256 =:= 256 ->
 			% object compiled in debug mode
