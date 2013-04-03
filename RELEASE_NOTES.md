@@ -31,10 +31,13 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Support for the `forward/1` message forwarding handler to the `(::)/1`
+control construct.
+
 * CHANGED: The `forall/2` and `retractall/1` predicates are no longer recognized
 as Logtalk built-in predicates. The `forall/2` predicate is a de facto standard
 predicate while the `retractall/1` predicate is specified in recent revisions of
-the Core Prolog standard.
+the ISO Prolog Core standard.
 
 * FIXED: A non-instantiated argument in an `encoding/1` directive would not be
 detected.

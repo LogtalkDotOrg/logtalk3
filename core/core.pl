@@ -3405,6 +3405,10 @@ current_logtalk_flag(Flag, Value) :-
 	;	% no predicate declaration, check if it's a built-in predicate
 		'$lgt_built_in_predicate'(Pred) ->
 		call(Pred)
+	;	% message not understood; check for a message forwarding handler
+		call(Def, forward(Pred), ExCtx, Call, _, _) ->
+		'$lgt_exec_ctx'(ExCtx, Sender, Obj, Obj, [], []),
+		call(Call)
 	;	functor(Pred, Functor, Arity),
 		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(::Pred, Sender)))
 	).
@@ -3503,7 +3507,8 @@ current_logtalk_flag(Flag, Value) :-
 	;	% no predicate declaration, check if it's a built-in predicate
 		'$lgt_built_in_predicate'(Pred) ->
 		call(Pred)
-	;	call(Def, forward(Pred), ExCtx, Call, _, _) ->
+	;	% message not understood; check for a message forwarding handler
+		call(Def, forward(Pred), ExCtx, Call, _, _) ->
 		'$lgt_exec_ctx'(ExCtx, Sender, Obj, Obj, [], []),
 		call(Call)
 	;	functor(Pred, Functor, Arity),
@@ -3626,7 +3631,8 @@ current_logtalk_flag(Flag, Value) :-
 	;	% no predicate declaration, check if it's a built-in predicate
 		'$lgt_built_in_predicate'(Pred) ->
 		call(Pred)
-	;	call(Def, forward(Pred), ExCtx, Call, _, _) ->
+	;	% message not understood; check for a message forwarding handler
+		call(Def, forward(Pred), ExCtx, Call, _, _) ->
 		'$lgt_exec_ctx'(ExCtx, Sender, Obj, Obj, [], []),
 		call(Call)
 	;	functor(Pred, Functor, Arity),
@@ -8684,7 +8690,7 @@ current_logtalk_flag(Flag, Value) :-
 	fail.
 
 
-% definition of forward message handler without reference to the "forwarding" built-in protocol
+% definition of a message forwarding handler without reference to the "forwarding" built-in protocol
 
 '$lgt_tr_head'(forward(_), _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
