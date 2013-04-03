@@ -48,6 +48,12 @@ the current goal would print a variable for the coinduction stack.
 * FIXED: Passing the execution context for goals compiled in debug mode when
 performing a meta-call in *sender*.
 
+Examples
+--------
+
+* CHANGED: In the `cc` example, use the `statistics/2` key `cputime` in the
+implementation of the predicate `cpu_time/1` for SWI-Prolog.
+
 
 3.00.0 Alpha 13 - March 28, 2013
 ================================

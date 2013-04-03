@@ -22,9 +22,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2013/02/09,
+		date is 2013/04/03,
 		comment is 'Simple example of using conditional compilation to implement a portable operating-system interface for selected back-end Prolog compilers.'
 	]).
 
@@ -104,7 +104,7 @@
 			 convert_time(Time, Year, Month, Day, Hours, Mins, Secs, Milisecs)}.
 
 		cpu_time(Time) :-
-			{statistics(runtime, [Miliseconds| _]), Time is Miliseconds/1000}.
+			{statistics(cputime, Time)}.
 
 		wall_time(Time) :-
 			{statistics(walltime, [Time, _])}.
