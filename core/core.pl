@@ -3402,14 +3402,15 @@ current_logtalk_flag(Flag, Value) :-
 		('$lgt_built_in_method'(Pred, p, _, _); '$lgt_prolog_meta_predicate'(Pred, _, _)) ->
 		functor(Pred, Functor, Arity),
 		throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(::Pred, Sender)))
-	;	% no predicate declaration, check if it's a built-in predicate
+	;	% not a private built-in predicate, check if it's a public built-in predicate
 		'$lgt_built_in_predicate'(Pred) ->
 		call(Pred)
 	;	% message not understood; check for a message forwarding handler
 		call(Def, forward(Pred), ExCtx, Call, _, _) ->
 		'$lgt_exec_ctx'(ExCtx, Sender, Obj, Obj, [], []),
 		call(Call)
-	;	functor(Pred, Functor, Arity),
+	;	% give up and throw an existence error
+		functor(Pred, Functor, Arity),
 		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(::Pred, Sender)))
 	).
 
@@ -3504,14 +3505,15 @@ current_logtalk_flag(Flag, Value) :-
 		('$lgt_built_in_method'(Pred, p, _, _); '$lgt_prolog_meta_predicate'(Pred, _, _)) ->
 		functor(Pred, Functor, Arity),
 		throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(Obj::Pred, Sender)))
-	;	% no predicate declaration, check if it's a built-in predicate
+	;	% not a private built-in predicate, check if it's a public built-in predicate
 		'$lgt_built_in_predicate'(Pred) ->
 		call(Pred)
 	;	% message not understood; check for a message forwarding handler
 		call(Def, forward(Pred), ExCtx, Call, _, _) ->
 		'$lgt_exec_ctx'(ExCtx, Sender, Obj, Obj, [], []),
 		call(Call)
-	;	functor(Pred, Functor, Arity),
+	;	% give up and throw an existence error
+		functor(Pred, Functor, Arity),
 		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(Obj::Pred, Sender)))
 	).
 
@@ -3628,14 +3630,15 @@ current_logtalk_flag(Flag, Value) :-
 		('$lgt_built_in_method'(Pred, p, _, _); '$lgt_prolog_meta_predicate'(Pred, _, _)) ->
 		functor(Pred, Functor, Arity),
 		throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(Obj::Pred, Sender)))
-	;	% no predicate declaration, check if it's a built-in predicate
+	;	% not a private built-in predicate, check if it's a public built-in predicate
 		'$lgt_built_in_predicate'(Pred) ->
 		call(Pred)
 	;	% message not understood; check for a message forwarding handler
 		call(Def, forward(Pred), ExCtx, Call, _, _) ->
 		'$lgt_exec_ctx'(ExCtx, Sender, Obj, Obj, [], []),
 		call(Call)
-	;	functor(Pred, Functor, Arity),
+	;	% give up and throw an existence error
+		functor(Pred, Functor, Arity),
 		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(Obj::Pred, Sender)))
 	).
 
@@ -3725,10 +3728,11 @@ current_logtalk_flag(Flag, Value) :-
 		('$lgt_built_in_method'(Pred, p, _, _); '$lgt_prolog_meta_predicate'(Pred, _, _)) ->
 		functor(Pred, Functor, Arity),
 		throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(^^Pred, This)))
-	;	% no predicate declaration, check if it's a built-in predicate
+	;	% not a private built-in predicate, check if it's a public built-in predicate
 		'$lgt_built_in_predicate'(Pred) ->
 		call(Pred)
-	;	functor(Pred, Functor, Arity),
+	;	% give up and throw an existence error
+		functor(Pred, Functor, Arity),
 		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(^^Pred, This)))
 	).
 
@@ -3789,10 +3793,11 @@ current_logtalk_flag(Flag, Value) :-
 		('$lgt_built_in_method'(Pred, p, _, _); '$lgt_prolog_meta_predicate'(Pred, _, _)) ->
 		functor(Pred, Functor, Arity),
 		throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(^^Pred, Ctg)))
-	;	% no predicate declaration, check if it's a built-in predicate
+	;	% not a private built-in predicate, check if it's a public built-in predicate
 		'$lgt_built_in_predicate'(Pred) ->
 		call(Pred)
-	;	functor(Pred, Functor, Arity),
+	;	% give up and throw an existence error
+		functor(Pred, Functor, Arity),
 		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(^^Pred, Ctg)))
 	).
 
@@ -4265,12 +4270,15 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_ctg_call_nv'(Dcl, Alias, ExCtx) :-
 	'$lgt_exec_ctx_this'(ExCtx, This),
 	'$lgt_current_object_'(This, _, _, _, _, _, _, _, _, Rnm, _),
-	(	call(Dcl, Alias, _, _, _, _, _) ->
+	(	% lookup predicate declaration (as we're dealing with imported cateogries,
+		% it's not necessary to check if the call is within scope)
+		call(Dcl, Alias, _, _, _, _, _) ->
 		(	% construct predicate and "this" templates
 			'$lgt_term_template'(Alias, GAlias),
 			'$lgt_term_template'(This, GThis),
-			call(Rnm, GCtg, GPred, GAlias),
+			% find an imported category that defines the predicate (which can be an alias)
 			'$lgt_imports_category_'(GThis, GCtg, _),
+			call(Rnm, GCtg, GPred, GAlias),
 			'$lgt_current_category_'(GCtg, _, _, Def, _, _),
 			call(Def, GPred, GExCtx, GCall, _) ->
 			% cache lookup result
@@ -4284,7 +4292,8 @@ current_logtalk_flag(Flag, Value) :-
 	;	% no predicate declaration, check if it's a built-in predicate
 		'$lgt_built_in_predicate'(Alias) ->
 		call(Alias)
-	;	functor(Alias, Functor, Arity),
+	;	% give up and throw an existence error
+		functor(Alias, Functor, Arity),
 		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(:Alias, This)))
 	).
 
