@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/03/11,
+		date is 2013/04/04,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -356,6 +356,14 @@
 		;	% both compilation and loading warnings
 			loading_warnings(LCounter), [' and '-[]], compilation_warnings(CCounter), [nl]
 		).
+
+	logtalk::message_tokens(renamed_compiler_flag(File, Lines, Type, Entity, Flag, NewFlag), core) -->
+		['The compiler flag ~w have been renamed to ~w'-[Flag, NewFlag], nl],
+		message_context(File, Lines, Type, Entity).
+
+	logtalk::message_tokens(renamed_compiler_flag(File, Lines, Flag, NewFlag), core) -->
+		['The compiler flag ~w have been renamed to ~w'-[Flag, NewFlag], nl],
+		message_context(File, Lines).
 
 	% auxiliary grammar rules
 

@@ -6515,12 +6515,13 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_pp_term_location'(Location),
 	assertz('$lgt_pp_prolog_term_'((:- op(Priority, Specifier, Operators)), Location)).
 
-'$lgt_tr_file_directive'(set_logtalk_flag(Flag, Value), _) :-
+'$lgt_tr_file_directive'(set_logtalk_flag(Flag, Value), Ctx) :-
 	!,
 	'$lgt_must_be'(read_write_flag, Flag),
 	'$lgt_must_be'(flag_value, Flag+Value),
 	% local scope (restricted to the source file being compiled)
-	'$lgt_set_compiler_flags'([Flag-Value]).
+	'$lgt_set_compiler_flags'([Flag-Value]),
+	'$lgt_check_for_renamed_flag'(Flag, Ctx).
 
 '$lgt_tr_file_directive'(set_prolog_flag(Flag, Value), _) :-
 	!,
@@ -6755,11 +6756,12 @@ current_logtalk_flag(Flag, Value) :-
 
 % set_logtalk_flag/2 entity directive
 
-'$lgt_tr_logtalk_directive'(set_logtalk_flag(Flag, Value), _) :-
+'$lgt_tr_logtalk_directive'(set_logtalk_flag(Flag, Value), Ctx) :-
 	'$lgt_must_be'(read_write_flag, Flag),
 	'$lgt_must_be'(flag_value, Flag+Value),
 	retractall('$lgt_pp_entity_compiler_flag_'(Flag, _)),
-	assertz('$lgt_pp_entity_compiler_flag_'(Flag, Value)).
+	assertz('$lgt_pp_entity_compiler_flag_'(Flag, Value)),
+	'$lgt_check_for_renamed_flag'(Flag, Ctx).
 
 
 % create a message queue at object initialization
@@ -10059,7 +10061,8 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_must_be'(flag_value, Flag + Value),
 	TPred = '$lgt_set_compiler_flag'(Flag, Value),
 	DPred = set_logtalk_flag(Flag, Value),
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	'$lgt_check_for_renamed_flag'(Flag, Ctx).
 
 '$lgt_tr_body'(set_logtalk_flag(Flag, _), _, _, _) :-
 	'$lgt_must_be'(var_or_read_write_flag, Flag),
@@ -10073,7 +10076,8 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_must_be'(flag_value, Flag + Value),
 	TPred = '$lgt_compiler_flag'(Flag, Value),
 	DPred = current_logtalk_flag(Flag, Value),
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	'$lgt_check_for_renamed_flag'(Flag, Ctx).
 
 '$lgt_tr_body'(current_logtalk_flag(Flag, _), _, _, _) :-
 	'$lgt_must_be'(var_or_flag, Flag),
@@ -16058,6 +16062,11 @@ current_logtalk_flag(Flag, Value) :-
 % back-end Prolog compiler and loader options
 '$lgt_valid_flag'(prolog_compiler).
 '$lgt_valid_flag'(prolog_loader).
+% renamed (and thus deprecated) flags
+'$lgt_valid_flag'(unknown).
+'$lgt_valid_flag'(misspelt).
+'$lgt_valid_flag'(singletons).
+'$lgt_valid_flag'(tmpdir).
 
 
 
@@ -16176,6 +16185,46 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_valid_flag_value'(coinduction, supported) :- !.
 '$lgt_valid_flag_value'(coinduction, unsupported) :- !.
+
+% renamed flags
+
+'$lgt_valid_flag_value'(unknown, Value) :-
+	'$lgt_valid_flag_value'(unknown_entities, Value).
+'$lgt_valid_flag_value'(misspelt, Value) :-
+	'$lgt_valid_flag_value'(misspelt_calls, Value).
+'$lgt_valid_flag_value'(singletons, Value) :-
+	'$lgt_valid_flag_value'(singleton_variables, Value).
+'$lgt_valid_flag_value'(tmpdir, Value) :-
+	'$lgt_valid_flag_value'(scratch_directory, Value).
+
+
+
+% '$lgt_check_for_renamed_flag'(+atom, @compilation_context)
+%
+% check for use of a renamed compiler flag (from Logtalk 2.x)
+
+'$lgt_check_for_renamed_flag'(Flag, Ctx) :-
+	(	'$lgt_renamed_compiler_flag'(Flag, NewFlag),
+		'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
+		'$lgt_increment_compile_warnings_counter',
+		'$lgt_warning_context'(Path, Lines),
+		(	'$lgt_pp_entity_'(Type, Entity, _, _, _) ->
+			'$lgt_print_message'(warning(general), core, renamed_compiler_flag(Path, Lines, Type, Entity, Flag, NewFlag))
+		;	'$lgt_print_message'(warning(general), core, renamed_compiler_flag(Path, Lines, Flag, NewFlag))
+		)
+	;	true
+	).
+
+
+
+% '$lgt_renamed_compiler_flag'(+atom, -atom)
+%
+% renamed compiler flags (from Logtalk 2.x)
+
+'$lgt_renamed_compiler_flag'(unknown, unknown_entities).
+'$lgt_renamed_compiler_flag'(misspelt, misspelt_calls).
+'$lgt_renamed_compiler_flag'(singletons, singleton_variables).
+'$lgt_renamed_compiler_flag'(tmpdir, scratch_directory).
 
 
 

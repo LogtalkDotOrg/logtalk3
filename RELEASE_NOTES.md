@@ -31,6 +31,11 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* NEW: Updated the compiler to accept the old name of flags that have been
+renamed and to print a warning when the old names are used in calls to the
+`set_logtalk_flag/2` and `current_logtalk_flaf/2` built-in predicates and
+directives.
+
 * ADDED: Support for the `forward/1` message forwarding handler to the `(::)/1`
 control construct.
 
