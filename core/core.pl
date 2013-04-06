@@ -3976,7 +3976,6 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_metacall'(Free/Closure, ExtraArgs, LambdaMetaCallCtx, Prefix, Sender, This, Self) :-
 	!,
 	'$lgt_must_be'(curly_bracketed_term, Free, logtalk(Free/Closure, This)),
-	'$lgt_must_be'(callable, Closure, logtalk(Free/Closure, This)),
 	'$lgt_reduce_lambda_metacall_ctx'(LambdaMetaCallCtx, Free/Closure, MetaCallCtx),
 	'$lgt_copy_term_without_constraints'(Free/Closure+MetaCallCtx, Free/ClosureCopy+MetaCallCtxCopy),
 	'$lgt_metacall'(ClosureCopy, ExtraArgs, MetaCallCtxCopy, Prefix, Sender, This, Self).
@@ -3984,7 +3983,6 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_metacall'(Free/Parameters>>Closure, ExtraArgs, LambdaMetaCallCtx, Prefix, Sender, This, Self) :-
 	!,
 	'$lgt_must_be'(curly_bracketed_term, Free, logtalk(Free/Parameters>>Closure, This)),
-	'$lgt_must_be'(callable, Closure, logtalk(Free/Parameters>>Closure, This)),
 	(	'$lgt_reduce_lambda_metacall_ctx'(LambdaMetaCallCtx, Free/Parameters>>Closure, MetaCallCtx),
 		'$lgt_copy_term_without_constraints'(Free/Parameters>>Closure+MetaCallCtx, Free/ParametersCopy>>ClosureCopy+MetaCallCtxCopy),
 		'$lgt_unify_lambda_parameters'(ParametersCopy, ExtraArgs, Rest, Free/Parameters>>Closure, This) ->
@@ -3994,7 +3992,6 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_metacall'(Parameters>>Closure, ExtraArgs, LambdaMetaCallCtx, Prefix, Sender, This, Self) :-
 	!,
-	'$lgt_must_be'(callable, Closure, logtalk(Parameters>>Closure, This)),
 	(	'$lgt_reduce_lambda_metacall_ctx'(LambdaMetaCallCtx, Parameters>>Closure, MetaCallCtx),
 		'$lgt_copy_term_without_constraints'(Parameters>>Closure+MetaCallCtx, ParametersCopy>>ClosureCopy+MetaCallCtxCopy),
 		'$lgt_unify_lambda_parameters'(ParametersCopy, ExtraArgs, Rest, Parameters>>Closure, This) ->
@@ -18120,7 +18117,9 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_must_be'(curly_bracketed_term, Term, Context) :-
 	(	var(Term) ->
 		throw(error(instantiation_error, Context))
-	;	functor(Term, {}, Arity), Arity =< 1 ->
+	;	Term = {_} ->
+		true
+	;	Term == {} ->
 		true
 	;	throw(error(type_error(curly_bracketed_term, Term), Context))
 	).
@@ -18128,7 +18127,9 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_must_be'(var_or_curly_bracketed_term, Term, Context) :-
 	(	var(Term) ->
 		true
-	;	functor(Term, {}, Arity), Arity =< 1 ->
+	;	Term = {_} ->
+		true
+	;	Term == {} ->
 		true
 	;	throw(error(type_error(curly_bracketed_term, Term), Context))
 	).

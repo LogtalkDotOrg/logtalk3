@@ -44,6 +44,8 @@ as Logtalk built-in predicates. The `forall/2` predicate is a de facto standard
 predicate while the `retractall/1` predicate is specified in recent revisions of
 the ISO Prolog Core standard.
 
+* IMPROVED: Small performance improvement when calling lambda expressions.
+
 * FIXED: A non-instantiated argument in an `encoding/1` directive would not be
 detected.
 
