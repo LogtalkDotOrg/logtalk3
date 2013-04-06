@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2012/09/01,
+		date is 2013/04/06,
 		comment is 'Debugger.'
 	]).
 
@@ -351,18 +351,18 @@
 	logtalk::debug_handler(goal(Goal, TGoal), ExCtx) :-
 		inc_invocation_number(N),
 		(	debugging_, \+ skipping_ ->
-			(	port(call, N, Goal, _, ExCtx, CAction),
+			(	port(call, N, Goal, TGoal, _, ExCtx, CAction),
 				(	(CAction == ignore; CAction == unify) ->
 					true
 				;	{CAction},
-					catch({TGoal}, Error, exception(N, Goal, Error, ExCtx)),
-					(	port(exit, N, Goal, _, ExCtx, EAction),
+					catch({TGoal}, Error, exception(N, Goal, TGoal, Error, ExCtx)),
+					(	port(exit, N, Goal, TGoal, _, ExCtx, EAction),
 						{EAction}
-					;	port(redo, N, Goal, _, ExCtx, RAction),
+					;	port(redo, N, Goal, TGoal, _, ExCtx, RAction),
 						RAction == ignore
 					)
 				;	retractall(skipping_),
-					port(fail, N, Goal, _, ExCtx, _),
+					port(fail, N, Goal, TGoal, _, ExCtx, _),
 					fail
 				)
 			),
@@ -370,17 +370,17 @@
 		;	{TGoal}
 		).
 
-	exception(_, _, logtalk_debugger_aborted, _) :-
+	exception(_, _, _, logtalk_debugger_aborted, _) :-
 		throw(logtalk_debugger_aborted).
 
-	exception(N, Goal, Error, ExCtx) :-
-		port(exception, N, Goal, Error, ExCtx, TAction),
+	exception(N, Goal, TGoal, Error, ExCtx) :-
+		port(exception, N, Goal, TGoal, Error, ExCtx, TAction),
 		(	TAction == fail ->
 			fail
 		;	throw(Error)
 		).
 
-	port(Port, N, Goal, Error, ExCtx, Action) :-
+	port(Port, N, Goal, TGoal, Error, ExCtx, Action) :-
 		debugging_,
 		!,
 		(	leashing(Port, Goal, ExCtx, Code) ->
@@ -388,7 +388,7 @@
 				write(Code), write_port_name(Port), write_invocation_number(Port, N), writeq(Goal), write(' ? '),
 				catch(read_single_char(Option), _, fail),
 			valid_port_option(Option, Port, Code),
-			do_port_option(Option, Port, Goal, Error, ExCtx, Action),
+			do_port_option(Option, Port, Goal, TGoal, Error, ExCtx, Action),
 			!
 		;	(	tracing_ ->
 				write(' '), write_port_name(Port), write_invocation_number(Port, N), writeq(Goal), nl
@@ -447,6 +447,7 @@
 	valid_port_option(p, _, _) :- !.
 	valid_port_option(d, _, _) :- !.
 	valid_port_option(w, _, _) :- !.
+	valid_port_option('$', _, _) :- !.
 	valid_port_option(x, _, _) :- !.
 	valid_port_option(h, _, _) :- !.
 	valid_port_option((?), _, _) :- !.
@@ -456,29 +457,29 @@
 	valid_port_option((-), _, (+)) :- !.
 	valid_port_option(e, exception, _) :- !.
 
-	do_port_option('\r', _, _, _, _, true).
-	do_port_option('\n', _, _, _, _, true).
-	do_port_option(' ', _, _, _, _, true).
-	do_port_option(c, _, _, _, _, true).
+	do_port_option('\r', _, _, _, _, _, true).
+	do_port_option('\n', _, _, _, _, _, true).
+	do_port_option(' ', _, _, _, _, _, true).
+	do_port_option(c, _, _, _, _, _, true).
 
-	do_port_option(l, _, _, _, _, true) :-
+	do_port_option(l, _, _, _, _, _, true) :-
 		retractall(tracing_).
 
-	do_port_option(s, call, _, _, _, true) :-
+	do_port_option(s, call, _, _, _, _, true) :-
 		!,
 		retractall(skipping_),
 		assertz(skipping_).
-	do_port_option(s, redo, _, _, _, fail) :-
+	do_port_option(s, redo, _, _, _, _, fail) :-
 		!,
 		retractall(skipping_),
 		assertz(skipping_).
-	do_port_option(s, _, _, _, _, true).
+	do_port_option(s, _, _, _, _, _, true).
 
-	do_port_option(i, _, _, _, _, ignore).
+	do_port_option(i, _, _, _, _, _, ignore).
 
-	do_port_option(f, _, _, _, _, fail).
+	do_port_option(f, _, _, _, _, _, fail).
 
-	do_port_option(u, _, Goal, _, _, Result) :-
+	do_port_option(u, _, Goal, _, _, _, Result) :-
 		write('  |: '),
 		read(Term),
 		(	Goal = Term ->
@@ -486,21 +487,21 @@
 		;	Result = fail
 		).
 
-	do_port_option(t, _, _, _, _, _) :-
+	do_port_option(t, _, _, _, _, _, _) :-
 		(	tracing_ ->
 			true
 		;	assertz(tracing_)
 		),
 		fail.
 
-	do_port_option(n, _, _, _, _, true) :-
+	do_port_option(n, _, _, _, _, _, true) :-
 		nodebug.
 
-	do_port_option((=), _, _, _, _, _) :-
+	do_port_option((=), _, _, _, _, _, _) :-
 		debugging,
 		fail.
 
-	do_port_option((+), _, Goal, _, _, _) :-
+	do_port_option((+), _, Goal, _, _, _, _) :-
 		(	Goal = (_ :: Pred) ->
 			functor(Pred, Functor, Arity)
 		;	functor(Goal, Functor, Arity)
@@ -508,14 +509,14 @@
 		spy(Functor/Arity),
 		fail.
 
-	do_port_option((-), _, Goal, _, _, true) :-
+	do_port_option((-), _, Goal, _, _, _, true) :-
 		(	Goal = (_ :: Pred) ->
 			functor(Pred, Functor, Arity)
 		;	functor(Goal, Functor, Arity)
 		),
 		nospy(Functor/Arity).
 
-	do_port_option((*), _, Goal, _, _, _) :-
+	do_port_option((*), _, Goal, _, _, _, _) :-
 		functor(Goal, Functor, Arity),
 		functor(GoalTemplate, Functor, Arity),
 		write('  Enter a context spy point term formatted as (Sender, This, Self, Goal): '),
@@ -524,7 +525,7 @@
 		spy(Sender, This, Self, GoalTemplate),
 		fail.
 
-	do_port_option((/), _, Goal, _, _, _) :-
+	do_port_option((/), _, Goal, _, _, _, _) :-
 		functor(Goal, Functor, Arity),
 		functor(GoalTemplate, Functor, Arity),
 		write('  Enter a context spy point term formatted as (Sender, This, Self, Goal): '),
@@ -533,10 +534,10 @@
 		nospy(Sender, This, Self, GoalTemplate),
 		fail.
 
-	do_port_option(!, Port, Goal, Error, ExCtx, Action) :-
-		do_port_option((@), Port, Goal, Error, ExCtx, Action).
+	do_port_option(!, Port, Goal, TGoal, Error, ExCtx, Action) :-
+		do_port_option((@), Port, Goal, TGoal, Error, ExCtx, Action).
 
-	do_port_option((@), _, _, _, _, _) :-
+	do_port_option((@), _, _, _, _, _, _) :-
 		write('  ?- '),
 		read(Goal),
 		{once(Goal)},
@@ -544,7 +545,7 @@
 
 	:- if(predicate_property(break, built_in)).
 
-	do_port_option(b, _, _, _, _, _) :-
+	do_port_option(b, _, _, _, _, _, _) :-
 		suspend(Tracing),
 		break,
 		resume(Tracing),
@@ -552,34 +553,38 @@
 
 	:- else.
 
-	do_port_option(b, _, _, _, _, _) :-
+	do_port_option(b, _, _, _, _, _, _) :-
 		write('  break/0 not supported by the back-end Prolog compiler.'), nl,
 		fail.
 
 	:- endif.
 
-	do_port_option(a, _, _, _, _, _) :-
+	do_port_option(a, _, _, _, _, _, _) :-
 		retractall(skipping_),
 		throw(logtalk_debugger_aborted).
 
-	do_port_option('Q', _, _, _, _, _) :-
+	do_port_option('Q', _, _, _, _, _, _) :-
 		halt.
 
-	do_port_option(p, _, Goal, _, _, _) :-
+	do_port_option(p, _, Goal, _, _, _, _) :-
 		% use the {}/1 control construct to avoid compilation warnings on
 		% back-end Prolog compilers that don't provide the print/1 predicate
 		write('  Current goal: '), catch({print(Goal)}, _, writeq(Goal)), nl,
 		fail.
 
-	do_port_option(d, _, Goal, _, _, _) :-
+	do_port_option(d, _, Goal, _, _, _, _) :-
 		write('  Current goal: '), write_term(Goal, [quoted(true), ignore_ops(true), numbervars(false)]), nl,
 		fail.
 
-	do_port_option(w, _, Goal, _, _, _) :-
+	do_port_option(w, _, Goal, _, _, _, _) :-
 		write('  Current goal: '), write_term(Goal, [quoted(true), ignore_ops(false), numbervars(true)]), nl,
 		fail.
 
-	do_port_option(x, _, _, _, ExCtx, _) :-
+	do_port_option('$', _, _, TGoal, _, _, _) :-
+		write('  Compiled goal: '), write_term(TGoal, [quoted(true), ignore_ops(false), numbervars(true)]), nl,
+		fail.
+
+	do_port_option(x, _, _, _, ExCtx, _, _) :-
 		logtalk::execution_context(ExCtx, Sender, This, Self, MetaCallCtx, Stack),
 		write('  Sender:            '), writeq(Sender), nl,
 		write('  This:              '), writeq(This), nl,
@@ -588,11 +593,11 @@
 		write('  Coinduction stack: '), writeq(Stack), nl,
 		fail.
 
-	do_port_option(e, _, _, Error, _, _) :-
+	do_port_option(e, _, _, Error, _, _, _) :-
 		write('  Exception term: '), writeq(Error), nl,
 		fail.
 
-	do_port_option(h, _, _, _, _, _) :-
+	do_port_option(h, _, _, _, _, _, _) :-
 		write('  Available options are:'), nl,
 		write('      c - creep (go on; you may use also the spacebar, return, or enter keys)'), nl,
 		write('      l - leap (continues execution until the next spy point is found)'), nl,
@@ -609,6 +614,7 @@
 		write('      p - print (writes current goal using print/1 if available)'), nl,
 		write('      d - display (writes current goal without using operator notation)'), nl,
 		write('      w - write (writes current goal quoting atoms if necessary)'), nl,
+		write('      $ - outputs the compiled form of the current goal (for low-level debugging)'), nl,
 		write('      x - context (prints execution context)'), nl,
 		write('      e - exception (prints exception term thrown by current goal)'), nl,
 		write('      = - debugging (prints debugging information)'), nl,
@@ -620,8 +626,8 @@
 		write('      ? - help (prints this list of options)'), nl,
 		fail.
 
-	do_port_option((?), Port, Goal, Error, ExCtx, Action) :-
-		do_port_option(h, Port, Goal, Error, ExCtx, Action).
+	do_port_option((?), Port, Goal, TGoal, Error, ExCtx, Action) :-
+		do_port_option(h, Port, Goal, TGoal, Error, ExCtx, Action).
 
 	:- if(current_logtalk_flag(threads, supported)).
 

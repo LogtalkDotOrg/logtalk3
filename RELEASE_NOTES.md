@@ -44,7 +44,7 @@ as Logtalk built-in predicates. The `forall/2` predicate is a de facto standard
 predicate while the `retractall/1` predicate is specified in recent revisions of
 the ISO Prolog Core standard.
 
-* IMPROVED: Small performance improvement when calling lambda expressions.
+* IMPROVED: Small performance optimization when calling lambda expressions.
 
 * FIXED: Bug in the compilation of calls to the `bagof/3` and `setof/3`
 built-in methods when the meta-call is local but only know at runtime where
@@ -62,6 +62,12 @@ performing a meta-call in *sender*.
 
 * FIXED: Compiling a Prolog module as an object would print a spurious message
 when using default settings.
+
+Tools
+-----
+
+* ADDED: Low-level trace option for printing the compiled form of the current
+goal to the `debugger` tool.
 
 Examples
 --------
