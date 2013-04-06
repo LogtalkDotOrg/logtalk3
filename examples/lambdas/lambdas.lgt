@@ -26,7 +26,8 @@
 	currencies_no_lambda(Currencies) :-
 		setof(Currency, Country^Capital^Population^country(Country, Capital, Population, Currency), Currencies).
 
-	:- public(currencies_lambda/1).		% adapted from a Ulrich Neumerkel's lambda proposal example
+	% adapted from a Ulrich Neumerkel's lambda proposal example
+	:- public(currencies_lambda/1).
 	currencies_lambda(Currencies) :-
 		setof(Currency, {Currency}/country(_, _, _, Currency), Currencies).
 
@@ -62,7 +63,7 @@
 	sum(Closure, Inf, Sup, Result) :-
 		sum(Closure, Inf, Sup, 0, Result).
 
-	sum(Closure, Inf, Sup, Acc, Result) :-				
+	sum(Closure, Inf, Sup, Acc, Result) :-
 		(	Inf =< Sup ->
 			call(Closure, Inf, Sum),
 			Acc2 is Acc + Sum,
@@ -84,14 +85,22 @@
 		comment is 'Some miscellaneous tests for lambda expressions collected from public forums.'
 	]).
 
-	:- public(common_prefix/3).  
-
-	common_prefix(Front, Xs, Ys) :-		% adapted from a Richard O'Keefe example
+	% adapted from a Richard O'Keefe example
+	:- public(common_prefix/3).
+	common_prefix(Front, Xs, Ys) :-	
 		meta::map({Front}/(list::append(Front)), Xs, Ys).
 
-	:- public(call_n/0).
+	% an alternative definition
+	%
+	%:- uses(meta, [map/3]).
+	%:- uses(list, [append/3]).
+	%
+	%common_prefix(Front, Xs, Ys) :-
+	%	map({Front}/append(Front), Xs, Ys).
 
-	call_n :-							% adapted from a Ulrich Neumerkel's lambda proposal example
+	% adapted from a Ulrich Neumerkel's lambda proposal example
+	:- public(call_n/0).
+	call_n :-
 		f(X, Y),
 		write('This test should print '), write(f(X, Y)), write(' in all lines:'), nl,
 		call(f, A1, A2), write(f(A1, A2)), nl,
@@ -104,7 +113,6 @@
 	f(x, y).
 
 	:- public((local)/0).	% use ()'s in order to avoid a XSB parser bug
-
 	local :-
 		integer::sequence(1, 100, List),
 		meta::map([X]>>less(0,X),List).
@@ -128,7 +136,7 @@
 	
 		:- uses(integer, [between/3, sequence/3]).
 		:- uses(meta, [map/2, map/3]).
-	
+
 		bench1 :-
 			sequence(1, 100000, List),
 			write('Using map/2 with a closure for testing less(0, X) with X in [1..100000]: '), nl,
@@ -153,15 +161,15 @@
 				fail
 			;   true
 		).
-	
+
 		sum(List1, List2) :-
 			map(integer::plus(1), List1, List2).
-	
+
 		add1([], []).
 		add1([H0| T0], [H| T]) :-
 			H is H0 + 1,
 			add1(T0, T).
-	
+
 	:- end_object.
 
 :- endif.
