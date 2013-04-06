@@ -55,6 +55,9 @@ the current goal would print a variable for the coinduction stack.
 * FIXED: Passing the execution context for goals compiled in debug mode when
 performing a meta-call in *sender*.
 
+* FIXED: Compiling a Prolog module as an object would print a spurious message
+when using default settings.
+
 Examples
 --------
 

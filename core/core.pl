@@ -5280,7 +5280,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_tr_file_term'(end_of_file, Ctx),
 	'$lgt_add_entity_source_data'(end, Module),
 	'$lgt_tr_entity'(object, Module, Ctx),
-	'$lgt_print_message'(information(compiling), core, compiled_entity(module, Module)),
+	'$lgt_print_message'(silent(compiling), core, compiled_entity(module, Module)),
 	!.
 
 '$lgt_tr_file_term'(end_of_file, _, _) :-
