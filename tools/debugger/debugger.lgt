@@ -584,7 +584,7 @@
 		write('  Compiled goal: '), write_term(TGoal, [quoted(true), ignore_ops(false), numbervars(true)]), nl,
 		fail.
 
-	do_port_option(x, _, _, _, ExCtx, _, _) :-
+	do_port_option(x, _, _, _, _, ExCtx, _) :-
 		logtalk::execution_context(ExCtx, Sender, This, Self, MetaCallCtx, Stack),
 		write('  Sender:            '), writeq(Sender), nl,
 		write('  This:              '), writeq(This), nl,
@@ -593,7 +593,7 @@
 		write('  Coinduction stack: '), writeq(Stack), nl,
 		fail.
 
-	do_port_option(e, _, _, Error, _, _, _) :-
+	do_port_option(e, _, _, _, Error, _, _) :-
 		write('  Exception term: '), writeq(Error), nl,
 		fail.
 
