@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/04/06,
+		date is 2013/04/07,
 		comment is 'Debugger.'
 	]).
 
@@ -333,22 +333,25 @@
 		:- dynamic(logtalk::debug_handler/2).
 	:- endif.
 
-	logtalk::debug_handler(fact(_, Fact, N), ExCtx) :-
+	logtalk::debug_handler(Event, ExCtx) :-
+		debug_handler(Event, ExCtx).
+
+	debug_handler(fact(_, Fact, N), ExCtx) :-
 		(	debugging_, \+ skipping_ ->
 			port(fact(N), _, Fact, _, ExCtx, Action),
 			{Action}
 		;	true
 		).
-	logtalk::debug_handler(rule(_, Head, N), ExCtx) :-
+	debug_handler(rule(_, Head, N), ExCtx) :-
 		(	debugging_, \+ skipping_ ->
 			port(rule(N), _, Head, _, ExCtx, Action),
 			{Action}
 		;	true
 		).
-	logtalk::debug_handler(top_goal(Goal, TGoal), ExCtx) :-
+	debug_handler(top_goal(Goal, TGoal), ExCtx) :-
 		reset_invocation_number(_),
-		logtalk::debug_handler(goal(Goal, TGoal), ExCtx).
-	logtalk::debug_handler(goal(Goal, TGoal), ExCtx) :-
+		debug_handler(goal(Goal, TGoal), ExCtx).
+	debug_handler(goal(Goal, TGoal), ExCtx) :-
 		inc_invocation_number(N),
 		(	debugging_, \+ skipping_ ->
 			(	port(call, N, Goal, TGoal, _, ExCtx, CAction),

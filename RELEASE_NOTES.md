@@ -69,6 +69,9 @@ Tools
 * ADDED: Low-level trace option for printing the compiled form of the current
 goal to the `debugger` tool.
 
+* FIXED: A bug in the `debugger` tool preventing printing of the execution
+context (using the trace option `x`) for the top goal.
+
 Examples
 --------
 
