@@ -9085,6 +9085,10 @@ current_logtalk_flag(Flag, Value) :-
 		TPred = ('$lgt_convert_existentially_quantified_goal'(QGoal, Goal, TQGoal, TGoal), bagof(Term, TQGoal, List)),
 		DPred = ('$lgt_convert_existentially_quantified_goal'(QGoal, Goal, DQGoal, DGoal), bagof(Term, DQGoal, List)),
 		'$lgt_tr_body'(Goal, TGoal, DGoal, Ctx2)
+	;	var(QGoal) ->
+		TPred = ('$lgt_convert_existentially_quantified_goal'(QGoal, Goal, TQGoal, TGoal), bagof(Term, TQGoal, List)),
+		DPred = ('$lgt_convert_existentially_quantified_goal'(QGoal, Goal, DQGoal, DGoal), bagof(Term, DQGoal, List)),
+		'$lgt_tr_body'(Goal, TGoal, DGoal, Ctx)
 	;	TPred = bagof(Term, TGoal, List),
 		DPred = bagof(Term, DGoal, List),
 		'$lgt_tr_body'(QGoal, TGoal, DGoal, Ctx)
@@ -9109,6 +9113,10 @@ current_logtalk_flag(Flag, Value) :-
 		TPred = ('$lgt_convert_existentially_quantified_goal'(QGoal, Goal, TQGoal, TGoal), setof(Term, TQGoal, List)),
 		DPred = ('$lgt_convert_existentially_quantified_goal'(QGoal, Goal, DQGoal, DGoal), setof(Term, DQGoal, List)),
 		'$lgt_tr_body'(Goal, TGoal, DGoal, Ctx2)
+	;	var(QGoal) ->
+		TPred = ('$lgt_convert_existentially_quantified_goal'(QGoal, Goal, TQGoal, TGoal), setof(Term, TQGoal, List)),
+		DPred = ('$lgt_convert_existentially_quantified_goal'(QGoal, Goal, DQGoal, DGoal), setof(Term, DQGoal, List)),
+		'$lgt_tr_body'(Goal, TGoal, DGoal, Ctx)
 	;	TPred = setof(Term, TGoal, List),
 		DPred = setof(Term, DGoal, List),
 		'$lgt_tr_body'(QGoal, TGoal, DGoal, Ctx)

@@ -46,6 +46,11 @@ the ISO Prolog Core standard.
 
 * IMPROVED: Small performance improvement when calling lambda expressions.
 
+* FIXED: Bug in the compilation of calls to the `bagof/3` and `setof/3`
+built-in methods when the meta-call is local but only know at runtime where
+some backend Prolog compilers would complain about a `(^)/2` undefined
+predicate.
+
 * FIXED: A non-instantiated argument in an `encoding/1` directive would not be
 detected.
 
