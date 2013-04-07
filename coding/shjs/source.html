@@ -43,9 +43,9 @@ comment
 	extends(parent)).
 
 	:- info([
-		version is 1.10,
+		version is 1.11,
 		author is &#x27;Paulo Moura&#x27;,
-		date is 2013/02/06,
+		date is 2013/04/07,
 		comment is &#x27;Sample prototype for testing syntax coloring.&#x27;]).
 
 	:- threaded.
@@ -187,6 +187,9 @@ comment
 	event_handler_methods :-
 		before(Object, Message, Sender),
 		after(Object, Message, Sender).
+
+	message_forwarding_method :-
+		forward(Message).
 
 	dcg_rules_parsing_methods :-
 		phrase(NonTerminal, Input, Rest).

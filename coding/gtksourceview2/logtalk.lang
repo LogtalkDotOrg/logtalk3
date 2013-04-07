@@ -150,6 +150,8 @@
 			<!-- Event handlers -->
 			<keyword>(before)(?=[(])</keyword>
 			<keyword>(after)(?=[(])</keyword>
+			<!-- Message forwarding handler -->
+			<keyword>(forward)(?=[(])</keyword>
 			<!-- DCGs -->
 			<keyword>(expand_(goal|term))(?=[(])</keyword>
 			<keyword>((goal|term)_expansion)(?=[(])</keyword>

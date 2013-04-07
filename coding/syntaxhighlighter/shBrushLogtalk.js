@@ -5,7 +5,7 @@
 
 	function Brush()
 	{
-		// Contributed by Paulo Moura (http://logtalk.org/); last revised on February 6, 2013
+		// Contributed by Paulo Moura (http://logtalk.org/); last revised on April 7, 2013
 
 		this.regexList = [
 		  // variables
@@ -36,6 +36,8 @@
       { regex: new RegExp("\\blogtalk_(compile|l(oad|oad_context|ibrary_path))(?=[(])", 'g'), css: 'keyword'},
       // event handler methods
       { regex: new RegExp("\\b(after|before)(?=[(])", 'g'), css: 'keyword'},
+      // message forwarding handler methods
+      { regex: new RegExp("\\bforward(?=[(])", 'g'), css: 'keyword'},
       // execution-context methods
       { regex: new RegExp("\\b(parameter|this|se(lf|nder))(?=[(])", 'g'), css: 'keyword'},
       // reflection methods

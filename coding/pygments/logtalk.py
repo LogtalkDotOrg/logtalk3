@@ -44,6 +44,8 @@ class LogtalkLexer(RegexLexer):
             (r'([A-Z_][a-zA-Z0-9_]*)', Name.Variable),
             # Event handlers
             (r'(after|before)(?=[(])', Keyword),
+            # Message forwarding handler
+            (r'forward(?=[(])', Keyword),
             # Execution-context methods
             (r'(parameter|this|se(lf|nder))(?=[(])', Keyword),
             # Reflection

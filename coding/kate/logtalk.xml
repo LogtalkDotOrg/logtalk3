@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE language SYSTEM "language.dtd">
 
-<language name="Logtalk" version="2.2" kateversion="2.4" section="Sources" extensions="*.lgt" mimetype="text/x-logtalk" author="Paulo Moura (pmoura@logtalk.org)" license="GNU General Public License 3">
+<language name="Logtalk" version="2.3" kateversion="2.4" section="Sources" extensions="*.lgt" mimetype="text/x-logtalk" author="Paulo Moura (pmoura@logtalk.org)" license="GNU General Public License 3">
 
 	<highlighting>
 
@@ -12,6 +12,8 @@
 				<RegExpr String = "^\s*:-" attribute = "Normal" context = "directive" />
 				<!-- Event handlers -->
 				<RegExpr String = "\b(after|before)(?=[(])" attribute = "Built-in" context = "#stay" />
+				<!-- Message forwarding handler -->
+				<RegExpr String = "\bforward(?=[(])" attribute = "Built-in" context = "#stay" />
 				<!-- Method execution context -->
 				<RegExpr String = "\b(parameter|this|se(lf|nder))(?=[(])" attribute = "Built-in" context = "#stay" />
 				<!-- Reflection -->

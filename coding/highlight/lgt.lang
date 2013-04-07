@@ -4,8 +4,8 @@
 #
 #  Author: Paulo Moura
 #    Mail: pmoura@logtalk.org
-#    Date: 2013.02.06
-# Version: 1.14
+#    Date: 2013.04.07
+# Version: 1.15
 # ------------------------------------------
 # This file is a part of highlight, a free source code converter released under the GPL.
 #
@@ -32,6 +32,8 @@ $KEYWORDS(kwa)=regex(^\s*:-\s(dynamic|synchronized|threaded)(?=\.), 1)
 
 # event handlers
 $KEYWORDS(kwc)=regex((after|before)(?=[(]), 1)
+# message forwarding method
+$KEYWORDS(kwc)=regex((forward)(?=[(]), 1)
 # method execution context
 $KEYWORDS(kwc)=regex((parameter|this|se(lf|nder))(?=[(]), 1)
 # reflection

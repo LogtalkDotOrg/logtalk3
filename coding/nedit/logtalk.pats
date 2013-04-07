@@ -2,7 +2,7 @@
 !
 ! Author: Paulo Moura (pmoura at logtalk.org)
 !
-! Last changed in: February 6, 2013
+! Last changed in: April 7, 2013
 !
 !
 ! To install this patterns file:
@@ -45,7 +45,7 @@ nedit.highlightPatterns: Logtalk:1:0{\n\
 	String:"""":""""::String::\n\
 	Quoted atoms:"'":"'"::String::\n\
 	Escape sequences:"\\\\([\\\\abfnrtv""']|(x[a-fA-F0-9]+|[0-7]+)\\\\)":::String1:Quoted atoms:\n\
-	Built-in methods:"<(parameter|self|sender|this|current_predicate|predicate_property|abolish|asserta|assertz|clause|retractall|retract|bagof|findall|forall|setof|before|after|expand_goal|expand_term|goal_expansion|term_expansion|phrase|threaded|threaded_call|threaded_once|threaded_ignore|threaded_exit|threaded_peek|threaded_wait|threaded_notify)(?=[(])":::Subroutine::\n\
+	Built-in methods:"<(parameter|self|sender|this|current_predicate|predicate_property|abolish|asserta|assertz|clause|retractall|retract|bagof|findall|forall|setof|before|after|forward|expand_goal|expand_term|goal_expansion|term_expansion|phrase|threaded|threaded_call|threaded_once|threaded_ignore|threaded_exit|threaded_peek|threaded_wait|threaded_notify)(?=[(])":::Subroutine::\n\
 	Arithmetic operators:"<is>|\\+|\\*|\\-|/|=:=|=\\\\=|=\\<|\\>=|\\<|\\>":::Subroutine::\n\
 	Built-in predicates:"<(current_object|current_protocol|current_category|create_object|create_protocol|create_category|object_property|protocol_property|category_property|abolish_object|abolish_protocol|abolish_category|complements_object|conforms_to_protocol|extends_object|extends_protocol|extends_category|implements_protocol|instantiates_class|specializes_class|imports_category|abolish_events|current_event|define_events|current_logtalk_flag|set_logtalk_flag|logtalk_compile|logtalk_load|logtalk_library_path|logtalk_load_context|forall|retractall)(?=[(])":::Subroutine::\n\
 	Term unification:"=|\\\\=":::Subroutine::\n\

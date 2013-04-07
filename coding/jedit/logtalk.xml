@@ -5,9 +5,9 @@
 <!--	jEdit 4.3 Logtalk syntax file
 
 	written by		Paulo Moura
-	version			1.98
+	version			1.99
 	created on		May 5, 2002
-	last revised	February 6, 2013
+	last revised	April 7, 2013
 
 	To install, copy this file to the "modes" subdirectory in jEdit 
 	directory installation.   Next, check the "catalog" file in the 
@@ -57,6 +57,8 @@
 
 		<!-- Event handlers -->
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD2">\b(after|before)(?=[(])</SEQ_REGEXP>
+		<!-- Message forwarding handler -->
+		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD2">\bforward(?=[(])</SEQ_REGEXP>
 		<!-- Method execution context -->
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD2">\b(parameter|this|se(lf|nder))(?=[(])</SEQ_REGEXP>
 		<!-- Reflection -->
@@ -302,6 +304,7 @@
 			<NULL>float</NULL>
 			<NULL>flush_output</NULL>
 			<NULL>forall</NULL>
+			<NULL>forward</NULL>
 			<NULL>functor</NULL>
 			<NULL>get_byte</NULL>
 			<NULL>get_char</NULL>

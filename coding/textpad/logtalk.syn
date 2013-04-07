@@ -1,7 +1,7 @@
 ; TextPad syntax definitions for Logtalk (http://logtalk.org/)
 ; 
 ; Author: 			Paulo Moura
-; Last changed in: 	February 6, 2013
+; Last changed in: 	April 7, 2013
 ;
 ; Tags used and sugested colors:
 ;   Keywords 1	message sending operators	blue
@@ -187,6 +187,7 @@ forall
 setof
 before
 after
+forward
 expand_term
 expand_goal
 goal_expansion

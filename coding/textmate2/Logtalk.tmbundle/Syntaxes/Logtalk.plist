@@ -350,6 +350,12 @@
 		</dict>
 		<dict>
 			<key>match</key>
+			<string>\b(forward)(?=[(])</string>
+			<key>name</key>
+			<string>support.function.message-forwarding-handler.logtalk</string>
+		</dict>
+		<dict>
+			<key>match</key>
 			<string>\b(expand_(goal|term)|(goal|term)_expansion|phrase)(?=[(])</string>
 			<key>name</key>
 			<string>support.function.grammar-rule.logtalk</string>

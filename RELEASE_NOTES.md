@@ -78,6 +78,12 @@ Examples
 * CHANGED: In the `cc` example, use the `statistics/2` key `cputime` in the
 implementation of the predicate `cpu_time/1` for SWI-Prolog.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* ADDED: Syntax coloring support for the `forward/1` method to all supported
+text editors and syntax highlighters.
+
 
 3.00.0 Alpha 13 - March 28, 2013
 ================================

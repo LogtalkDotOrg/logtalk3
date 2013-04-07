@@ -12,6 +12,8 @@
  *
  * CHANGES
  * -------
+ * 2013/04/07 (1.1.10)
+ *  -  Added syntax coloring of forward/1 method
  * 2013/02/06 (1.1.9)
  *  -  Added syntax coloring of false/0 predicate
  * 2012/05/03 (1.1.8)
@@ -120,7 +122,7 @@ $language_data = array(
         // Built-in predicates (with arguments)
         4 => array(
             // event handlers
-            'after', 'before',
+            'after', 'before', 'forward',
             // execution-context methods
             'parameter', 'self', 'sender', 'this',
             // predicate reflection
