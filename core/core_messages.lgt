@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/04/04,
+		date is 2013/04/047,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -46,6 +46,8 @@
 
 	:- multifile(logtalk::message_tokens//2).
 	:- dynamic(logtalk::message_tokens//2).
+
+	% file compilation and loading messages
 
 	logtalk::message_tokens(skipping_loading_file(File, _Flags), core) -->
 		['[ skipping reloading of ~w ]'-[File], nl].
@@ -81,6 +83,8 @@
 	logtalk::message_tokens(up_to_date_file(File, _Flags), core) -->
 		['[ compiling ~w ... up-to-date ]'-[File], nl].
 
+	% entity compilation messages
+
 	logtalk::message_tokens(compiling_entity(Type, Entity), core) -->
 		{copy_term(Entity, EntityCopy), numbervars(EntityCopy, 0, _)},
 		(	{current_logtalk_flag(debug, on)} ->
@@ -89,6 +93,15 @@
 		).
 	logtalk::message_tokens(compiled_entity(_Type, _Entity), core) -->
 		['compiled'-[], nl].
+
+	logtalk::message_tokens(redefining_entity(Type, Entity), core) -->
+		['Redefining ~w ~q'-[Type, Entity], nl].
+
+	logtalk::message_tokens(redefining_entity_from_file(File, Lines, Type, Entity, OldFile), core) -->
+		['Redefining ~w ~q (loaded from file ~w)'-[Type, Entity, OldFile], nl],
+		message_context(File, Lines).
+
+	% Logtalk starup messages
 
 	logtalk::message_tokens(possibly_incompatible_prolog_version(Current, Compatible), core) -->
 		['Possibly incompatible Prolog version detected!'-[], nl,
@@ -152,6 +165,8 @@
 			'  encoding_directive: ~w, tabling: ~w, coinduction: ~w'-[Encodings, Tabling, Coinduction], nl, nl
 		].
 
+	% settings files messages
+
 	logtalk::message_tokens(loaded_settings_file(Path), core) -->
 		['Loaded settings file found on directory ~w'-[Path], nl, nl].
 	logtalk::message_tokens(error_loading_settings_file(Path, Error), core) -->
@@ -161,8 +176,16 @@
 		 'system access limitations of the back-end Prolog compiler.'-[], nl, nl
 		].
 
+	% debugging messages
+
 	logtalk::message_tokens(logtalk_debugger_aborted, core) -->
 		['Debugging session aborted by user. Debugger still on.'-[], nl].
+
+	logtalk::message_tokens(debug_handler_provider_already_exists(File, Lines, Type, Entity, Provider), core) -->
+		['A definition for the debug handler predicate already exists in: ~q'-[Provider], nl],
+		message_context(File, Lines, Type, Entity).
+
+	% compiler error messages
 
 	logtalk::message_tokens(compiler_error(File, Lines, Error), core) -->
 		error_term_tokens(Error),
@@ -268,10 +291,6 @@
 		 'Complemented object, ~q, compiled with complementing categories support turned off'-[Object], nl],
 		message_context(File, Lines).
 
-	logtalk::message_tokens(debug_handler_provider_already_exists(File, Lines, Type, Entity, Provider), core) -->
-		['A definition for the debug handler predicate already exists in: ~q'-[Provider], nl],
-		message_context(File, Lines, Type, Entity).
-
 	logtalk::message_tokens(prolog_dialect_goal_expansion(File, Lines, Type, Entity, Goal, ExpandedGoal), core) -->
 		['Prolog dialect rewrite of goal ~q as ~q'-[Goal, ExpandedGoal], nl],
 		message_context(File, Lines, Type, Entity).
@@ -334,13 +353,6 @@
 		;	['Singleton variables: ~w'-[Names], nl]
 		),
 		term_type_tokens(Term),
-		message_context(File, Lines).
-
-	logtalk::message_tokens(redefining_entity(Type, Entity), core) -->
-		['Redefining ~w ~q'-[Type, Entity], nl].
-
-	logtalk::message_tokens(redefining_entity_from_file(File, Lines, Type, Entity, OldFile), core) -->
-		['Redefining ~w ~q (loaded from file ~w)'-[Type, Entity, OldFile], nl],
 		message_context(File, Lines).
 
 	logtalk::message_tokens(compilation_and_loading_warnings(CCounter, LCounter), core) -->
