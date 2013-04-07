@@ -63,6 +63,12 @@ performing a meta-call in *sender*.
 * FIXED: Compiling a Prolog module as an object would print a spurious message
 when using default settings.
 
+Library
+-------
+
+* FIXED: Definition of the `msort/2` predicate in the library object `list`
+for GNU Prolog.
+
 Tools
 -----
 

@@ -28,9 +28,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 2.4,
+		version is 2.5,
 		author is 'Paulo Moura',
-		date is 2012/04/25,
+		date is 2013/04/07,
 		comment is 'List predicates.'
 	]).
 
@@ -162,11 +162,6 @@
 
 		msort(List, Sorted) :-
 			{msort(List, Sorted)}.
-
-	:- elif(current_logtalk_flag(prolog_dialect, gnu)).
-
-		msort(List, Sorted) :-
-			{sort0(List, Sorted)}.
 
 	:- else.
 
