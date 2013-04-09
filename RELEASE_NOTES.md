@@ -47,6 +47,9 @@ the ISO Prolog Core standard.
 * IMPROVED: Resolve at compile time unnecessary uses of the `call/2-N` control
 construct when the closure argument is already instantiated.
 
+* IMPROVED: Small performance optimization for meta-calls resolved at runtime
+by using specialized code for calls from within `bagof/3` and `setof/3` calls.
+
 * IMPROVED: Small performance optimization when calling lambda expressions.
 
 * FIXED: Bug in the compilation of calls to the `bagof/3` and `setof/3`

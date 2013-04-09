@@ -7,7 +7,7 @@
 %  load Logtalk files using SWI Prolog consult/1, to support edit/1 and
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
-%  Last updated on March 13, 2013
+%  Last updated on April 9, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -112,6 +112,7 @@ user:prolog_predicate_name(user:'$lgt_ctg_call'(_, _, _), ':/1') :- !.
 
 user:prolog_predicate_name(user:'$lgt_metacall'(_, _, _, _, _, _, _), 'call/N') :- !.
 user:prolog_predicate_name(user:'$lgt_metacall'(_, _, _, _, _, _), 'call/N') :- !.
+user:prolog_predicate_name(user:'$lgt_^metacall'(_, _, _, _, _, _), 'call/N') :- !.
 user:prolog_predicate_name(user:'$lgt_metacall_this'(_, _, _, _, _), 'call/N') :- !.
 user:prolog_predicate_name(user:'$lgt_metacall_sender'(_, _, _), 'call/N') :- !.
 
@@ -354,6 +355,7 @@ user:portray(c(This, r(Sender, Self, MetaVars, CoinductionStack))) :-
 	catch(arg(1, CallN, Closure), Error, (writeln('ERROR 2'-Error), throw(Error))),
 	'$lgt_swi_call_n_args'(ExtraArgs, 2, CallN).
 '$lgt_swi_unify_clause_body'(Goal, _, '$lgt_metacall'(Goal, _, _, _, _, _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(Goal, _, '$lgt_^metacall'(Goal, _, _, _, _, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(Goal, _, '$lgt_metacall_this'(Goal, _, _, _, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(Goal, _, '$lgt_metacall_sender'(Goal, _, _), TermPos, TermPos) :- !.
 
