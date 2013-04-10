@@ -10300,24 +10300,8 @@ current_logtalk_flag(Flag, Value) :-
 	functor(CallN, call, _),
 	CallN =.. [call, Closure| ExtraArgs],
 	!,
-	(	callable(Closure),
-		Closure \= {_},
-		Closure \= _::_,
-		Closure \= ::_,
-		Closure \= _<<_,
-		Closure \= [_],
-		Closure \= _>>_,
-		Closure \= _/_,
-		Closure \= ':'(_,_) ->
-		% a non-necessary use of the call/2-N control construct
-		Closure =.. [Functor| ClosoureArgs],
-		'$lgt_append'(ClosoureArgs, ExtraArgs, Args),
-		Call =.. [Functor| Args],
-		'$lgt_tr_body'(Call, TPred, DPred, Ctx)
-	;	% normal uses of the call/2-N control construct
-		'$lgt_check_closure'(Closure, Ctx),
-		'$lgt_tr_body'('$lgt_callN'(Closure, ExtraArgs), TPred, DPred, Ctx)
-	).
+	'$lgt_check_closure'(Closure, Ctx),
+	'$lgt_tr_body'('$lgt_callN'(Closure, ExtraArgs), TPred, DPred, Ctx).
 
 
 % non-callable terms

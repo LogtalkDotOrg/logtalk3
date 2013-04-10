@@ -44,9 +44,6 @@ as Logtalk built-in predicates. The `forall/2` predicate is a de facto standard
 predicate while the `retractall/1` predicate is specified in recent revisions of
 the ISO Prolog Core standard.
 
-* IMPROVED: Resolve at compile time unnecessary uses of the `call/2-N` control
-construct when the closure argument is already instantiated.
-
 * IMPROVED: Small performance optimization for meta-calls resolved at runtime
 by using specialized code for calls from within `bagof/3` and `setof/3` calls.
 
