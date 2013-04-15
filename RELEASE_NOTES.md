@@ -35,6 +35,12 @@ Logtalk compiler and runtime
 parameters and free resulting from a definition of a list intersection
 predicate that wrongly assumed an ordered representation.
 
+Examples
+--------
+
+* UPDATED: The `lambdas` example with a sample object illustrating detection
+of lambda expressions with unclassified or mixed-up variables.
+
 
 3.00.0 Alpha 14 - April 10, 2013
 ================================

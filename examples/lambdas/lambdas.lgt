@@ -173,3 +173,25 @@
 	:- end_object.
 
 :- endif.
+
+
+
+:- object(warnings).
+
+	:- info([
+		version is 1.0,
+		author is 'Paulo Moura',
+		date is 2013/04/15,
+		comment is 'Example for illustrating lambda compilation warnings.']).
+
+	% lambda expression with unclassified variables
+	foo(C1, C2, C3) :-
+		call([X,Y]>>f(X,Y,Z), C1, C2, C3).
+
+	% lambda expression with mixed-up variables
+	bar(C1, C2, C3) :-
+		call({Z}/[X,Y,Z]>>f(X,Y,Z), C1, C2, C3).
+
+	f(1, 2, 3).
+
+:- end_object.
