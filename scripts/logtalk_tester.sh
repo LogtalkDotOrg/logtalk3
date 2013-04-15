@@ -243,6 +243,7 @@ grep -A2 'syntax_error' *.results | sed 's/.results//' | tee errors.all
 grep -A2 'syntax_error' *.errors | sed 's/.errors//' | tee -a errors.all
 grep -A2 '!     ' *.errors | sed 's/.errors//' | tee -a errors.all
 grep -A2 '!     ' *.results | sed 's/.results//' | tee -a errors.all
+grep -A2 '*     ' *.errors | sed 's/.errors//' | tee -a errors.all
 grep -A2 '*     ' *.results | sed 's/.results//' | tee -a errors.all
 echo '******************************************************************************'
 echo "***** Failed tests"

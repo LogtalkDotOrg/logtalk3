@@ -35,6 +35,12 @@ Logtalk compiler and runtime
 parameters and free resulting from a definition of a list intersection
 predicate that wrongly assumed an ordered representation.
 
+Tools
+-----
+
+* FIXED: The `logtalk_tester.sh` shell script used in the automation of unit
+testing would not report compilation warnings.
+
 Examples
 --------
 
