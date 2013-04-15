@@ -18037,16 +18037,12 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_intersection'(_, [], []) :- !.
 '$lgt_intersection'([], _, []) :- !.
-'$lgt_intersection'([Head1| Tail1], [Head2| Tail2], Intersection) :-
-	compare(Order, Head1, Head2),
-	'$lgt_intersection'(Order, Head1, Tail1, Head2, Tail2, Intersection).
-
-'$lgt_intersection'(=, Head,  Tail1, _,     Tail2, [Head| Intersection]) :-
-	'$lgt_intersection'(Tail1, Tail2, Intersection).
-'$lgt_intersection'(<, _,     Tail1, Head2, Tail2, Intersection) :-
-	'$lgt_intersection'(Tail1, [Head2| Tail2], Intersection).
-'$lgt_intersection'(>, Head1, Tail1, _,     Tail2, Intersection) :-
-	'$lgt_intersection'([Head1|Tail1], Tail2, Intersection).
+'$lgt_intersection'([Head1| Tail1], List2, Intersection) :-
+	(	'$lgt_memberchk_var'(Head1, List2) ->
+		Intersection = [Head1| IntersectionRest],
+		'$lgt_intersection'(Tail1, List2, IntersectionRest)
+	;	'$lgt_intersection'(Tail1, List2, Intersection)
+	).
 
 
 '$lgt_var_subtract'([], _, []).

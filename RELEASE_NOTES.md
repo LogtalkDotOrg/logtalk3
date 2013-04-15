@@ -25,6 +25,17 @@ RELEASE NOTES
 =============
 
 
+3.00.0 Alpha 15 - April ??, 2013
+================================
+
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Bug when checking lambda expressions for variables declared as both
+parameters and free resulting from a definition of a list intersection
+predicate that wrongly assumed an ordered representation.
+
+
 3.00.0 Alpha 14 - April 10, 2013
 ================================
 
@@ -75,7 +86,7 @@ for GNU Prolog.
 Tools
 -----
 
-* ADDED: Low-level trace option, `$` for printing the compiled form of the
+* ADDED: Low-level trace option, `$`, for printing the compiled form of the
 current goal to the `debugger` tool.
 
 * FIXED: A bug in the `debugger` tool preventing printing of the execution
@@ -1135,7 +1146,7 @@ multifile predicates that an entity defines on behalf of another entity.
 	* `singletons` to `singleton_variables`
 	* `tmpdir` to `scratch_directory`
 
-* REMOVED: The following compiler flags have been removed:`xmldir`, `xmldocs`,
+* REMOVED: The following compiler flags have been removed: `xmldir`, `xmldocs`,
 `xmlspec`, `xmlsref`, `xslfile`, `break_predicate`, `redefined_built_ins`,
 `missing_directives`, `altdirs`, and `startup_message`.
 
