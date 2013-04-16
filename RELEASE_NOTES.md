@@ -35,6 +35,12 @@ Logtalk compiler and runtime
 parameters and free resulting from a definition of a list intersection
 predicate that wrongly assumed an ordered representation.
 
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: Ensure that the de facto `between/3` predicate is available for all
+supported backend Prolog compilers.
+
 Tools
 -----
 

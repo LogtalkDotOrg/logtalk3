@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Ciao Prolog 1.14.0
-%  Last updated on February 27, 2013
+%  Last updated on April 16, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -114,6 +114,9 @@ term_variables(Term, Variables) :-
 
 setup_call_cleanup(_, _, _) :-
 	throw(not_supported(setup_call_cleanup/3)).
+
+
+% between(+integer, +integer, ?integer) -- built-in
 
 
 % forall(+callable, +callable)

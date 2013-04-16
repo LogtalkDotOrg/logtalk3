@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SICStus Prolog 4.1.0 and later versions
-%  Last updated on March 21, 2013
+%  Last updated on April 16, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -69,6 +69,11 @@ term_variables(Term, Variables) :-
 %  de facto standard Prolog predicates that might be missing
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% between(+integer, +integer, ?integer)
+
+:- use_module(library(between), [between/3]).
 
 
 % forall(+callable, +callable)

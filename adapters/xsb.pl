@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for XSB 3.3 or later versions
-%  Last updated on February 28, 2013
+%  Last updated on April 16, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -54,6 +54,11 @@
 %  de facto standard Prolog predicates that might be missing
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% between(+integer, +integer, ?integer)
+
+:- import between/3 from basics.
 
 
 % forall(+callable, +callable) -- built-in

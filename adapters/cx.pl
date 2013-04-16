@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for CxProlog 0.97.6 or a later version
-%  Last updated on March 8, 2013
+%  Last updated on April 16, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -90,6 +90,9 @@ subsumes_term(General, Specific) :-
 %  de facto standard Prolog predicates that might be missing
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% between(+integer, +integer, ?integer) -- built-in
 
 
 % forall(+callable, +callable) -- built-in
