@@ -55,7 +55,9 @@ from `http://msdn.microsoft.com/downloads/list/webdev.asp`).
 
 - `logtalk_tester.sh`  
 	shell script for automating running unit tests in the `examples` and
-	`tests` directories
+	`tests` directories; besides test results, this script also reports
+	compilation warnings and errors (note that, depending on the tests,
+	these warnings and errors might be expected)
 
 - `logtalk_version_select.sh`  
 	shell script for switching between installed Logtalk versions for POSIX
