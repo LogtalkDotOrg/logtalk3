@@ -17763,7 +17763,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_ctg_call_static_binding'(@object_identifier, @callable, @execution_context -callable)
 %
-% static binding for the (:)/2 control construct
+% static binding for the (:)/1 control construct
 
 '$lgt_ctg_call_static_binding'(Obj, Alias, ExCtx, Call) :-
 	% when working with parametric entities, we must connect the parameters

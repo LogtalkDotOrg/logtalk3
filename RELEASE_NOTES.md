@@ -38,8 +38,8 @@ predicate that wrongly assumed an ordered representation.
 Prolog adapter and integration files
 ------------------------------------
 
-* UPDATED: Ensure that the de facto `between/3` predicate is available for all
-supported backend Prolog compilers.
+* UPDATED: Ensure that the de facto standard `between/3` predicate is available
+for all supported backend Prolog compilers.
 
 Tools
 -----
