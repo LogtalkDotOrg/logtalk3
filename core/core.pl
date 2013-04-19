@@ -16628,6 +16628,19 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
+% '$lgt_dcg_super_call'(@dcgbody, @var, @var, -body)
+%
+% translates a super call to a grammar rule in an ancestor entity
+
+'$lgt_dcg_super_call'(Var, S0, S, phrase(^^Var, S0, S)) :-
+	var(Var),
+	!.
+
+'$lgt_dcg_super_call'(NonTerminal, S0, S, ^^Pred) :-
+	'$lgt_dcg_non_terminal'(NonTerminal, S0, S, Pred).
+
+
+
 % '$lgt_dcg_ctg_call'(@dcgbody, @var, @var, -body)
 %
 % translates a direct call to a grammar rule in an imported category
@@ -16656,6 +16669,10 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_dcg_body'(::RGoal, S0, S, CGoal) :-
 	!,
 	'$lgt_dcg_self_msg'(RGoal, S0, S, CGoal).
+
+'$lgt_dcg_body'(^^RGoal, S0, S, CGoal) :-
+	!,
+	'$lgt_dcg_super_call'(RGoal, S0, S, CGoal).
 
 '$lgt_dcg_body'(:RGoal, S0, S, CGoal) :-
 	!,

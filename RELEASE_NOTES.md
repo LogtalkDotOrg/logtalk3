@@ -31,6 +31,8 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Support for using the `(^^)/1` control construct in grammar rules.
+
 * FIXED: Bug when checking lambda expressions for variables declared as both
 parameters and free resulting from a definition of a list intersection
 predicate that wrongly assumed an ordered representation.
