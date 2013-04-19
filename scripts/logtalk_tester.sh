@@ -182,7 +182,7 @@ rm -f "$results"/tester_versions.txt
 
 date=`eval date \"+%Y-%m-%d %H:%M:%S\"`
 
-echo '******************************************************************************'
+echo '*******************************************************************************'
 echo "***** Running unit tests"
 echo "*****         Date: $date"
 $logtalk $versions_goal > "$results"/tester_versions.txt 2> /dev/null
@@ -193,7 +193,7 @@ do
 	if [ -d $unit ] ; then
 		cd $unit
 		if [ -e "./tester.lgt" ] ; then
-			echo '******************************************************************************'
+			echo '*******************************************************************************'
 			echo "***** Testing $unit"
 			name=$(echo $unit|sed 's|/|__|g')
 			if [ $mode = 'normal' ] || [ $mode = 'all' ] ; then
@@ -213,7 +213,7 @@ do
 			if [ -d $subunit ] ; then
 				cd $subunit
 				if [ -e "./tester.lgt" ] ; then
-					echo '******************************************************************************'
+					echo '*******************************************************************************'
 					echo "***** Testing $unit/$subunit"
 					subname=$(echo $unit/$subunit|sed 's|/|__|g')
 					if [ $mode = 'normal' ] || [ $mode = 'all' ] ; then
@@ -235,9 +235,9 @@ do
 	fi
 done
 
-echo '******************************************************************************'
-echo "***** Errors and warnings"
-echo '******************************************************************************'
+echo '*******************************************************************************'
+echo "***** Compilation errors and warnings (might be expected depending on the test)"
+echo '*******************************************************************************'
 cd "$results"
 grep -A2 'syntax_error' *.results | sed 's/.results//' | tee errors.all
 grep -A2 'syntax_error' *.errors | sed 's/.errors//' | tee -a errors.all
@@ -245,8 +245,8 @@ grep -A2 '!     ' *.errors | sed 's/.errors//' | tee -a errors.all
 grep -A2 '!     ' *.results | sed 's/.results//' | tee -a errors.all
 grep -A2 '*     ' *.errors | sed 's/.errors//' | tee -a errors.all
 grep -A2 '*     ' *.results | sed 's/.results//' | tee -a errors.all
-echo '******************************************************************************'
+echo '*******************************************************************************'
 echo "***** Failed tests"
-echo '******************************************************************************'
+echo '*******************************************************************************'
 grep ': failure' *.results | sed 's/: failure/ failed/' | sed 's/.results/:/' | sed 's|__|/|g' | tee -a errors.all
-echo '******************************************************************************'
+echo '*******************************************************************************'
