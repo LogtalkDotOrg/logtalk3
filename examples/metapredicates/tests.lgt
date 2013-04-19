@@ -98,11 +98,11 @@
 
 	:- public(op1d/1).
 	op1d(L) :-
-		:cp1(a, L).
+		^^cp1(a, L).
 
 	:- public(op2d/1).
 	op2d(L) :-
-		:cp2(a, L).
+		^^cp2(a, L).
 
 	:- public(op1s/1).
 	op1s(L) :-

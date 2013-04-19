@@ -519,7 +519,7 @@ The categories imported by the object would contain the necessary grammar rules 
 
 :- end_category.</pre>
 <p>
-Along with the message sending operators (<code>::/1</code> and <code>::/2</code>), we may also use other control constructs such as <code>\+/1</code>, <code>!/0</code>, <code>;/2</code>, <code>-&gt;/2</code>, and <code>{}/1</code> in the body of a grammar. In addition, grammar rules may contain meta-calls (a variable taking the place of a non-terminal), which are translated to calls of the built-in method <code>phrase/3</code>. 
+Along with the message sending operators (<code>::/1</code>, <code>::/2</code>, and <code>^^/1</code>), we may also use other control constructs such as <code>\+/1</code>, <code>!/0</code>, <code>;/2</code>, <code>-&gt;/2</code>, and <code>{}/1</code> in the body of a grammar. In addition, grammar rules may contain meta-calls (a variable taking the place of a non-terminal), which are translated to calls of the built-in method <code>phrase/3</code>. 
 </p>
 <p>
 You may have noticed that Logtalk defines <code>{}/1</code> as a control construct for bypassing the compiler when compiling a clause body goal. As exemplified above, this is the same control construct that is used in grammar rules for bypassing the expansion of rule body goals when a rule is converted into a clause. Both control constructs can be combined in order to call a goal from a grammar rule body, while bypassing at the same time the Logtalk compiler. Consider the following example:
@@ -795,7 +795,7 @@ Currently, there is no clean workaround for calling non-standard Prolog built-in
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: March 1, 2013</span>
+		<span>Last updated on: April 19, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="categories.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="inheritance.html">next</a></span><br/>

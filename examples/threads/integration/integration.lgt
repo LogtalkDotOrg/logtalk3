@@ -36,9 +36,9 @@
 	:- threaded.
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paul Crocker',
-		date is 2008/07/19,
+		date is 2013/04/19,
 		comment is 'Multi-threading implementation of Recursive Gaussian Quadrature Methods for Numerical Integration for functions of a single variable.',
 		parameters is ['Threads' - 'Number of threads to use.']
 	]).
@@ -49,17 +49,17 @@
 		(	NP =:= 0 ->
 			functions::eval(Function, Left,  Fleft),
 			functions::eval(Function, Right, Fright),
-			:trapezium_area(Left, Right, Fleft, Fright, InitialArea),
+			^^trapezium_area(Left, Right, Fleft, Fright, InitialArea),
 			trapezium(Function, Threads, Left, Right, Fleft, Fright, InitialArea, Epsilon, Integral)
 		;	NP > 0,
-			:interval_area(Function, Left, Right, NP, NP, 0.0, InitialArea),
+			^^interval_area(Function, Left, Right, NP, NP, 0.0, InitialArea),
 			quadrature(Function, Threads, Left, Right, InitialArea, NP, Epsilon, Integral)
 		).
 
 	quadrature(Function, Threads, Left, Right, Area, NP, Epsilon, Integral) :-		
 		Middle is 0.5*(Right+Left),
-		:interval_area(Function, Left,   Middle, NP, NP, 0.0, Area1),
-		:interval_area(Function, Middle, Right,  NP, NP, 0.0, Area2),	
+		^^interval_area(Function, Left,   Middle, NP, NP, 0.0, Area1),
+		^^interval_area(Function, Middle, Right,  NP, NP, 0.0, Area2),	
 		Error is abs(Area-Area1-Area2),
 		(	Error > Epsilon -> 	
 			(	Threads =:= 1 ->
@@ -79,8 +79,8 @@
 	trapezium(Function, Threads, Left, Right, Fleft, Fright, Area, Epsilon, Integral) :-
 		Middle is 0.5*(Right+Left),
 		functions::eval(Function, Middle, Fmiddle),
-		:trapezium_area(Left,   Middle, Fleft,   Fmiddle, Area1),
-		:trapezium_area(Middle, Right,  Fmiddle, Fright,  Area2),
+		^^trapezium_area(Left,   Middle, Fleft,   Fmiddle, Area1),
+		^^trapezium_area(Middle, Right,  Fmiddle, Fright,  Area2),
 		Error is abs(Area-Area1-Area2),
 		(	Error > Epsilon -> 
 			(	Threads =:= 1 ->
@@ -108,9 +108,9 @@
 	:- threaded.
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paul Crocker',
-		date is 2008/07/19,
+		date is 2013/04/19,
 		comment is 'Multi-threading implementation of Recursive Gaussian Quadrature Methods for Numerical Integration for functions of a single variable.',
 		parameters is ['Threads' - 'Number of threads to use.']
 	]).
@@ -158,17 +158,17 @@
 		(	NP =:= 0 -> 
 			functions::eval(Function, Left, Fleft),
 			functions::eval(Function, Right,Fright),
-			:trapezium_area(Left, Right, Fleft, Fright, InitialArea),
+			^^trapezium_area(Left, Right, Fleft, Fright, InitialArea),
 			trapezium(Function, Left, Right, Fleft, Fright, InitialArea, Epsilon, Integral)
 		;	% NP > 0,
-			:interval_area(Function, Left, Right, NP, NP, 0.0, InitialArea),
+			^^interval_area(Function, Left, Right, NP, NP, 0.0, InitialArea),
 			quadrature(Function, Left, Right, InitialArea, NP, Epsilon, Integral)
 		).
 
 	quadrature(Function, Left, Right, Area, NP, Epsilon, Integral) :-
 		Middle is 0.5*(Right+Left),
-		:interval_area(Function, Left,   Middle, NP, NP, 0.0, Area1),
-		:interval_area(Function, Middle, Right,  NP, NP, 0.0, Area2),	
+		^^interval_area(Function, Left,   Middle, NP, NP, 0.0, Area1),
+		^^interval_area(Function, Middle, Right,  NP, NP, 0.0, Area2),	
 		Error is abs(Area-Area1-Area2),
 		(	Error > Epsilon -> 	
 			quadrature(Function, Left, Middle,  Area1, NP, Epsilon, I1),
@@ -180,8 +180,8 @@
 	trapezium(Function, Left, Right, Fleft, Fright, Area, Epsilon, Integral) :-
 		Middle is 0.5*(Right+Left),
 		functions::eval(Function, Middle, Fmiddle),
-		:trapezium_area(Left,   Middle, Fleft,   Fmiddle, Area1),
-		:trapezium_area(Middle, Right,  Fmiddle, Fright,  Area2),
+		^^trapezium_area(Left,   Middle, Fleft,   Fmiddle, Area1),
+		^^trapezium_area(Middle, Right,  Fmiddle, Fright,  Area2),
 		Error is abs(Area-Area1-Area2),	
 		(	Error > Epsilon -> 
 			trapezium(Function, Left,   Middle, Fleft,   Fmiddle, Area1, Epsilon, I1),

@@ -58,6 +58,6 @@
 	% "self" and "this" are the same object:
 
 	%:- initialization(::init_log).		% starts lookup for init_log/0 in "self"
-	:- initialization(:init_log).		% starts lookup for init_log/0 in "this"
+	:- initialization(^^init_log).		% starts lookup for init_log/0 in "this"
 
 :- end_object.

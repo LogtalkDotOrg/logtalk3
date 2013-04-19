@@ -48,8 +48,7 @@ Logtalk uses the following four operators for message sending and related contro
 </p>
 <pre>:- op(600, xfx, ::).
 :- op(600,  fx, ::).
-:- op(600,  fx, ^^).
-:- op(600,  fy,  :).</pre>
+:- op(600,  fx, ^^).</pre>
 <p>
 It is assumed that these operators remain active (once the Logtalk compiler and runtime files are loaded) until the end of the Prolog session (this is the usual behavior of most Prolog compilers). Note that these operator definitions are compatible with the pre-defined operators in the Prolog ISO standard.
 </p>
@@ -98,7 +97,7 @@ This is semantically equivalent to:
 This extended syntax may also be used with the <code>::/1</code> message sending control construct.
 </p>
 
-<h2 id="messages_super">Calling an overridden predicate definition</h2>
+<h2 id="messages_super">Calling imported and inherited predicate definitions</h2>
 
 <p>
 When redefining a predicate, sometimes we need to call the inherited definition in the new code. This functionality, introduced by the Smalltalk language through the <code>super</code> primitive, is available in Logtalk using the <a title="Consult reference manual" href="../refman/control/super1.html"><code>^^/1</code></a> control construct:
@@ -112,13 +111,7 @@ Most of the time we will use this operator by instantiating the pattern:
     ^^Predicate,    % call inherited definition
     ... .           % do something more</pre>
 <p>
-This control construct may be used to call any inherited predicate definition. This control construct may be used within objects and within categories that extend other categories. In the case of categories, the lookup for the overridden predicate definition is restricted to the extended categories.
-</p>
-
-<h2 id="messages_direct">Direct calls of imported predicates</h2>
-
-<p>
-It is possible to call an imported category predicate without using the message sending mechanisms with the <a title="Consult reference manual" href="../refman/control/direct1.html"><code>:/1</code></a> control construct. Combined with static binding, this control construct allows category predicates to be called with the same performance of local object predicates.
+This control construct is generalized in Logtalk where it may be used to call any imported or inherited predicate definition. This control construct may be used within objects and within categories that extend other categories. In the case of categories, the lookup for the predicate definition is restricted to the extended categories. When combined with static binding, this control construct allows imported and inherited predicates to be called with the same performance of local predicates.
 </p>
 
 <h2 id="messages_events">Message sending and event generation</h2>
@@ -232,7 +225,7 @@ It should be stressed that message sending is only one of the factors affecting 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: January 30, 2013</span>
+		<span>Last updated on: April 19, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="nomenclature.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="objects.html">next</a></span><br/>

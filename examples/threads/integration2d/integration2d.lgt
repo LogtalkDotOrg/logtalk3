@@ -35,9 +35,9 @@
 	:- threaded.
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paul Crocker',
-		date is 2008/07/11,
+		date is 2013/04/19,
 		comment is 'Multi-threading implementation of Recursive Gaussian Quadrature Methods for Numerical Integration for functions of two variables.',
 		parameters is ['Threads' - 'Number of threads to use (1, 4, 16, 64, 256, ...).']
 	]).
@@ -46,10 +46,10 @@
 		parameter(1, Threads),
 		Threads > 0,
 		(	NP =:= 0 ->
-			:trapezium_volume(Function, A, B, C, D, InitialVolume),
+			^^trapezium_volume(Function, A, B, C, D, InitialVolume),
 			trapezium(Threads, Function, A, B, C, D, InitialVolume, Epsilon, Integral)
 		;	NP > 0, NP < 4,
-			:interval_volume(Function, A, B, C, D, NP, NP, 0.0, InitialVolume),
+			^^interval_volume(Function, A, B, C, D, NP, NP, 0.0, InitialVolume),
 			quadrature(Threads, Function, A, B, C, D, InitialVolume, NP, Epsilon, Integral)
 		).
 
@@ -57,10 +57,10 @@
 		!,
 		MiddleX is 0.5 * (A + B),
 		MiddleY is 0.5 * (C + D),
-		:interval_volume(Function, A,       MiddleX, C,       MiddleY, NP, NP, 0.0, Volume1),
-		:interval_volume(Function, MiddleX, B,       C,       MiddleY, NP, NP, 0.0, Volume2),
-		:interval_volume(Function, A,       MiddleX, MiddleY, D,       NP, NP, 0.0, Volume3),
-		:interval_volume(Function, MiddleX, B,       MiddleY, D,       NP, NP, 0.0, Volume4),
+		^^interval_volume(Function, A,       MiddleX, C,       MiddleY, NP, NP, 0.0, Volume1),
+		^^interval_volume(Function, MiddleX, B,       C,       MiddleY, NP, NP, 0.0, Volume2),
+		^^interval_volume(Function, A,       MiddleX, MiddleY, D,       NP, NP, 0.0, Volume3),
+		^^interval_volume(Function, MiddleX, B,       MiddleY, D,       NP, NP, 0.0, Volume4),
 		Error is abs(Volume-Volume1-Volume2-Volume3-Volume4),
 		(	Error > Epsilon ->
 		    Epsilon4 is Epsilon/4.0,
@@ -76,10 +76,10 @@
 		Threads > 1,
 		MiddleX is 0.5 * (A + B),
 		MiddleY is 0.5 * (C + D),
-		:interval_volume(Function, A,       MiddleX, C,       MiddleY, NP, NP, 0.0, Volume1),
-		:interval_volume(Function, MiddleX, B,       C,       MiddleY, NP, NP, 0.0, Volume2),
-		:interval_volume(Function, A,       MiddleX, MiddleY, D,       NP, NP, 0.0, Volume3),
-		:interval_volume(Function, MiddleX, B,       MiddleY, D,       NP, NP, 0.0, Volume4),
+		^^interval_volume(Function, A,       MiddleX, C,       MiddleY, NP, NP, 0.0, Volume1),
+		^^interval_volume(Function, MiddleX, B,       C,       MiddleY, NP, NP, 0.0, Volume2),
+		^^interval_volume(Function, A,       MiddleX, MiddleY, D,       NP, NP, 0.0, Volume3),
+		^^interval_volume(Function, MiddleX, B,       MiddleY, D,       NP, NP, 0.0, Volume4),
 		Error is abs(Volume-Volume1-Volume2-Volume3-Volume4),
 		(	Error > Epsilon ->
 			Threads4 is Threads//4,
@@ -97,10 +97,10 @@
 	trapezium(Threads, Function, A, B, C, D, Volume, Epsilon, Integral) :-
 		MiddleX is 0.5 * (A + B),
 		MiddleY is 0.5 * (C + D),
-		:trapezium_volume(Function, A,       MiddleX, C,       MiddleY, Volume1),
-		:trapezium_volume(Function, MiddleX, B,       C,       MiddleY, Volume2),
-		:trapezium_volume(Function, A,       MiddleX, MiddleY, D,       Volume3),
-		:trapezium_volume(Function, MiddleX, B,       MiddleY, D,       Volume4),
+		^^trapezium_volume(Function, A,       MiddleX, C,       MiddleY, Volume1),
+		^^trapezium_volume(Function, MiddleX, B,       C,       MiddleY, Volume2),
+		^^trapezium_volume(Function, A,       MiddleX, MiddleY, D,       Volume3),
+		^^trapezium_volume(Function, MiddleX, B,       MiddleY, D,       Volume4),
 		Error is abs(Volume-Volume1-Volume2-Volume3-Volume4),
 		(	Error > Epsilon -> 
 			(	Threads =:= 1 ->
@@ -133,9 +133,9 @@
 	:- threaded.
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paul Crocker',
-		date is 2008/08/30,
+		date is 2013/04/19,
 		comment is 'Multi-threading implementation of Recursive Gaussian Quadrature Methods for Numerical Integration for functions of two real variables.',
 		parameters is ['Threads' - 'Number of threads to use (1, 4, 9, 16, 25, ...).']
 	]).
@@ -190,20 +190,20 @@
     % predicate that the threads will start	
 	start(Function, A, B, C, D, NP, Epsilon, Integral) :-
 		(	NP =:= 0 -> 
-			:trapezium_volume(Function, A, B, C, D, InitialVolume),
+			^^trapezium_volume(Function, A, B, C, D, InitialVolume),
 			trapezium(Function, A, B, C, D, InitialVolume, Epsilon, Integral)
 		;	% NP > 0,
-			:interval_volume(Function, A, B, C, D, NP, NP, 0.0, InitialVolume),
+			^^interval_volume(Function, A, B, C, D, NP, NP, 0.0, InitialVolume),
 			quadrature(Function, A, B, C, D, InitialVolume, NP, Epsilon, Integral)
 		).
 	
 	trapezium(Function, A, B, C, D, Volume, Epsilon, Integral) :-
 		MiddleX is 0.5*(A+B),
 		MiddleY is 0.5*(C+D),
-		:trapezium_volume(Function, A,       MiddleX, C,       MiddleY, Volume1),
-		:trapezium_volume(Function, MiddleX, B,       C,       MiddleY, Volume2),
-		:trapezium_volume(Function, A,       MiddleX, MiddleY, D,       Volume3),
-		:trapezium_volume(Function, MiddleX, B,       MiddleY, D,       Volume4),
+		^^trapezium_volume(Function, A,       MiddleX, C,       MiddleY, Volume1),
+		^^trapezium_volume(Function, MiddleX, B,       C,       MiddleY, Volume2),
+		^^trapezium_volume(Function, A,       MiddleX, MiddleY, D,       Volume3),
+		^^trapezium_volume(Function, MiddleX, B,       MiddleY, D,       Volume4),
 		Error is abs(Volume - Volume1 - Volume2 - Volume3 - Volume4),
 		(	Error > Epsilon -> 
 			Epsilon4 is Epsilon/4.0,
@@ -218,10 +218,10 @@
 	quadrature(Function, A, B, C, D, Volume, NP, Epsilon, Integral) :-	
 		MiddleX is 0.5*(A+B),
 		MiddleY is 0.5*(C+D),
-		:interval_volume(Function, A,       MiddleX, C,       MiddleY, NP, NP, 0.0, Volume1),
-		:interval_volume(Function, MiddleX, B,       C,       MiddleY, NP, NP, 0.0, Volume2),
-		:interval_volume(Function, A,       MiddleX, MiddleY, D,       NP, NP, 0.0, Volume3),
-		:interval_volume(Function, MiddleX, B,       MiddleY, D,       NP, NP, 0.0, Volume4),
+		^^interval_volume(Function, A,       MiddleX, C,       MiddleY, NP, NP, 0.0, Volume1),
+		^^interval_volume(Function, MiddleX, B,       C,       MiddleY, NP, NP, 0.0, Volume2),
+		^^interval_volume(Function, A,       MiddleX, MiddleY, D,       NP, NP, 0.0, Volume3),
+		^^interval_volume(Function, MiddleX, B,       MiddleY, D,       NP, NP, 0.0, Volume4),
 		Error is abs(Volume - Volume1 - Volume2 - Volume3 - Volume4),
 		(	Error > Epsilon -> 	
 			Epsilon4 is Epsilon/4.0,

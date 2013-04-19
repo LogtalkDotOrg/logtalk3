@@ -31,6 +31,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: Generalized the `(^^)/1` control construct to also allow calling
+of imported predicates. Deprecated the `(:)/1` control construct, which is
+now interpreted as an alias to the `(^^)/1` control construct.
+
 * ADDED: Support for using the `(^^)/1` control construct in grammar rules.
 
 * FIXED: Bug when checking lambda expressions for variables declared as both

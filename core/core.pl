@@ -146,7 +146,6 @@
 :- dynamic('$lgt_send_to_self_'/3).					% '$lgt_send_to_self_'(Obj, Pred, Sender)
 :- dynamic('$lgt_obj_super_call_'/3).				% '$lgt_obj_super_call_'(Super, Pred, ExCtx)
 :- dynamic('$lgt_ctg_super_call_'/3).				% '$lgt_ctg_super_call_'(Ctg, Pred, ExCtx)
-:- dynamic('$lgt_ctg_call_'/3).						% '$lgt_ctg_call_'(Dcl, Pred, ExCtx)
 
 
 % lookup cache for asserting and retracting dynamic facts
@@ -3689,7 +3688,7 @@ current_logtalk_flag(Flag, Value) :-
 % been type-checked; generates a cache entry to speed up future calls
 %
 % we may need to pass "self" when looking for the inherited predicate definition
-% in order to be able to select the correct "super" clauses for those cases where
+% in order to be able to select the correct "super" clause for those cases where
 % "this" both instantiates and specializes other objects
 
 '$lgt_obj_super_call_nv'(Super, Pred, ExCtx) :-
@@ -4265,63 +4264,6 @@ current_logtalk_flag(Flag, Value) :-
 		;	throw(error(permission_error(access, database, Goal), logtalk(Obj<<Goal, This)))
 		)
 	;	throw(error(existence_error(object, Obj), logtalk(Obj<<Goal, This)))
-	).
-
-
-
-% '$lgt_ctg_call'(+atom, ?term, +execution_context)
-%
-% calls a category predicate directly, without using the message sending mechanism
-
-'$lgt_ctg_call'(Dcl, Pred, ExCtx) :-
-	'$lgt_exec_ctx_this'(ExCtx, This),
-	'$lgt_must_be'(callable, Pred, logtalk(:Pred, This)),
-	'$lgt_ctg_call_'(Dcl, Pred, ExCtx).
-
-
-
-% '$lgt_ctg_call_'(+object_identifier, +term, +object_identifier)
-%
-% the last clause of this cache predicate must always exist and must
-% call the predicate that generates the missing cache entry
-
-'$lgt_ctg_call_'(Dcl, Pred, ExCtx) :-
-	'$lgt_ctg_call_nv'(Dcl, Pred, ExCtx).
-
-
-
-% '$lgt_ctg_call_nv'(+atom, +callable, +execution_context)
-%
-% calls a category predicate directly, without using the message sending mechanism
-
-'$lgt_ctg_call_nv'(Dcl, Alias, ExCtx) :-
-	'$lgt_exec_ctx_this'(ExCtx, This),
-	'$lgt_current_object_'(This, _, _, _, _, _, _, _, _, Rnm, _),
-	(	% lookup predicate declaration (as we're dealing with imported cateogries,
-		% it's not necessary to check if the call is within scope)
-		call(Dcl, Alias, _, _, _, _, _) ->
-		(	% construct predicate and "this" templates
-			'$lgt_term_template'(Alias, GAlias),
-			'$lgt_term_template'(This, GThis),
-			% find an imported category that defines the predicate (which can be an alias)
-			'$lgt_imports_category_'(GThis, GCtg, _),
-			call(Rnm, GCtg, GPred, GAlias),
-			'$lgt_current_category_'(GCtg, _, _, Def, _, _),
-			call(Def, GPred, GExCtx, GCall, _) ->
-			% cache lookup result
-			asserta(('$lgt_ctg_call_'(Dcl, GAlias, GExCtx) :- !, GCall)),
-			% unify message arguments and call inherited definition
-			GAlias = Alias, GExCtx = ExCtx,
-			call(GCall)
-		;	% no definition found; fail as per closed-world assumption
-			fail
-		)
-	;	% no predicate declaration, check if it's a built-in predicate
-		'$lgt_built_in_predicate'(Alias) ->
-		call(Alias)
-	;	% give up and throw an existence error
-		functor(Alias, Functor, Arity),
-		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(:Alias, This)))
 	).
 
 
@@ -5907,7 +5849,6 @@ current_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_send_to_self_'(_, _, _)),
 	retractall('$lgt_obj_super_call_'(_, _, _)),
 	retractall('$lgt_ctg_super_call_'(_, _, _)),
-	retractall('$lgt_ctg_call_'(_, _, _)),
 	retractall('$lgt_db_lookup_cache_'(_, _, _, _, _)),
 	'$lgt_reassert_lookup_cache_catchall_clauses'.
 
@@ -5920,7 +5861,6 @@ current_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_send_to_self_'(_, Pred, _)),
 	retractall('$lgt_obj_super_call_'(_, Pred, _)),
 	retractall('$lgt_ctg_super_call_'(_, Pred, _)),
-	retractall('$lgt_ctg_call_'(_, Pred, _)),
 	retractall('$lgt_db_lookup_cache_'(_, Pred, _, _, _)),
 	'$lgt_reassert_lookup_cache_catchall_clauses'.
 
@@ -5930,8 +5870,7 @@ current_logtalk_flag(Flag, Value) :-
 	assertz(('$lgt_send_to_obj_ne_'(Obj, Pred, Sender) :- '$lgt_send_to_obj_ne_nv'(Obj, Pred, Sender))),
 	assertz(('$lgt_send_to_self_'(Obj, Pred, Sender) :- '$lgt_send_to_self_nv'(Obj, Pred, Sender))),
 	assertz(('$lgt_obj_super_call_'(Super, Pred, ExCtx) :- '$lgt_obj_super_call_nv'(Super, Pred, ExCtx))),
-	assertz(('$lgt_ctg_super_call_'(Ctg, Pred, ExCtx) :- '$lgt_ctg_super_call_nv'(Ctg, Pred, ExCtx))),
-	assertz(('$lgt_ctg_call_'(Dcl, Pred, ExCtx) :- '$lgt_ctg_call_nv'(Dcl, Pred, ExCtx))).
+	assertz(('$lgt_ctg_super_call_'(Ctg, Pred, ExCtx) :- '$lgt_ctg_super_call_nv'(Ctg, Pred, ExCtx))).
 
 
 
@@ -9434,56 +9373,18 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_tr_ctx_call'(Obj, Pred, TPred, This).
 
 
-% calling category predicates directly
+% calling category predicates directly (depreacated control construct)
 
 '$lgt_tr_body'(:Pred, TPred, '$lgt_debug'(goal(:Pred, TPred), ExCtx), Ctx) :-
-	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, runtime, _),
-	'$lgt_current_object_'(This, _, Dcl, _, _, IDcl, _, _, _, _, _),
 	!,
-	(	\+ '$lgt_instantiates_class_'(_, _, _),
-		\+ '$lgt_specializes_class_'(_, _, _) ->
-		TPred = '$lgt_ctg_call'(Dcl, Pred, ExCtx)
-	;	TPred = '$lgt_ctg_call'(IDcl, Pred, ExCtx)
-	).
-
-'$lgt_tr_body'(:Pred, TPred, '$lgt_debug'(goal(:Pred, TPred), ExCtx), Ctx) :-
-	var(Pred),
-	'$lgt_pp_object_'(_, _, Dcl, _, _, IDcl, _, _, _, _, _),
-	!,
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
+		'$lgt_increment_compile_warnings_counter',
+		'$lgt_warning_context'(Path, Lines, Type, Entity),
+		'$lgt_print_message'(warning(general), core, deprecated_control_construct(Path, Lines, Type, Entity, (:)/1))		
+	;	true
+	),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	(	\+ '$lgt_pp_instantiates_class_'(_, _, _),
-		\+ '$lgt_pp_specializes_class_'(_, _, _) ->
-		TPred = '$lgt_ctg_call'(Dcl, Pred, ExCtx)
-	;	TPred = '$lgt_ctg_call'(IDcl, Pred, ExCtx)
-	).
-
-'$lgt_tr_body'(:Pred, _, _, _) :-
-	\+ callable(Pred),
-	throw(type_error(callable, Pred)).
-
-'$lgt_tr_body'(:Pred, _, _, _) :-
-	\+ '$lgt_pp_imports_category_'(_, _, _),
-	throw(existence_error(procedure, Pred)).
-
-'$lgt_tr_body'(:Pred, TPred, '$lgt_debug'(goal(:Pred, TPred), ExCtx), Ctx) :-
-	!,
-	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, _, _),
-	(	% ensure that all imported categories are "static binding" entities
-		forall(
-			'$lgt_pp_imported_category_'(Ctg, _, _, _, _, _),
-			('$lgt_current_category_'(Ctg, _, _, _, _, Flags), Flags /\ 1 =:= 1)
-		),
-		% find the first category in left-to-right import order that defines the predicate
-		'$lgt_ctg_call_static_binding'(This, Pred, ExCtx, TPred) ->
-		true
-	;	% must resort to dynamic binding
-		'$lgt_pp_object_'(_, _, Dcl, _, _, IDcl, _, _, _, _, _),
-		(	\+ '$lgt_pp_instantiates_class_'(_, _, _),
-			\+ '$lgt_pp_specializes_class_'(_, _, _) ->
-			TPred = '$lgt_ctg_call_'(Dcl, Pred, ExCtx)
-		;	TPred = '$lgt_ctg_call_'(IDcl, Pred, ExCtx)
-		)
-	).
+	'$lgt_tr_super_call'(Pred, TPred, Ctx).
 
 
 % calling explicitly qualified module predicates
@@ -11397,8 +11298,9 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	(	\+ '$lgt_pp_extends_object_'(_, _, _),
 		\+ '$lgt_pp_instantiates_class_'(_, _, _),
-		\+ '$lgt_pp_specializes_class_'(_, _, _) ->
-		% invalid goal (no ancestor object)
+		\+ '$lgt_pp_specializes_class_'(_, _, _),
+		\+ '$lgt_pp_imports_category_'(_, _, _) ->
+		% invalid goal (no ancestor entity)
 		throw(existence_error(ancestor, object))
 	;	var(Pred) ->
 		% translation performed at runtime
@@ -13393,12 +13295,27 @@ current_logtalk_flag(Flag, Value) :-
 % we can have a root object where super have nowhere to go ...
 
 '$lgt_gen_prototype_super_clauses'(Super, _) :-
+	\+ '$lgt_pp_imports_category_'(_, _, _),
 	\+ '$lgt_pp_extends_object_'(_, _, _),
 	functor(Head, Super, 5),
 	assertz('$lgt_pp_super_'((Head:-fail))),
 	!.
 
-% ... or we may extends some objects
+% ... or we may import some categories
+
+'$lgt_gen_prototype_super_clauses'(Super, Rnm) :-
+	'$lgt_pp_imported_category_'(Ctg, Obj, _, _, CDef, _),
+	Lookup =.. [CDef, Pred, ExCtx, Call, TCtn],
+	(	'$lgt_pp_predicate_alias_'(Ctg, _, _) ->
+		Head =.. [Super, Alias, ExCtx, Call, Obj, TCtn],
+		Rename =.. [Rnm, Ctg, Pred, Alias],
+		assertz('$lgt_pp_super_'((Head :- Rename, Lookup)))
+	;	Head =.. [Super, Pred, ExCtx, Call, Obj, TCtn],
+		assertz('$lgt_pp_super_'((Head:-Lookup)))
+	),
+	fail.
+
+% ... or we may extend some objects
 
 '$lgt_gen_prototype_super_clauses'(Super, Rnm) :-
 	'$lgt_pp_extended_object_'(Parent, Obj, _, _, PDef, _, _, _, _, _, _),
@@ -13755,11 +13672,26 @@ current_logtalk_flag(Flag, Value) :-
 % we can have a root object where "super" have nowhere to go ...
 
 '$lgt_gen_ic_super_clauses'(Obj, Super, _) :-
+	\+ '$lgt_pp_imports_category_'(_, _, _),
 	\+ '$lgt_pp_specializes_class_'(_, _, _),
 	\+ ('$lgt_pp_instantiates_class_'(_, Class, _), Class \= Obj),
 	functor(Head, Super, 5),
 	assertz('$lgt_pp_super_'((Head:-fail))),
 	!.
+
+% ... or we may import some categories
+
+'$lgt_gen_ic_super_clauses'(Obj, Super, Rnm) :-
+	'$lgt_pp_imported_category_'(Ctg, Obj, _, _, CDef, _),
+	Lookup =.. [CDef, Pred, ExCtx, Call, TCtn],
+	(	'$lgt_pp_predicate_alias_'(Ctg, _, _) ->
+		Head =.. [Super, Alias, ExCtx, Call, Obj, TCtn],
+		Rename =.. [Rnm, Ctg, Pred, Alias],
+		assertz('$lgt_pp_super_'((Head :- Rename, Lookup)))
+	;	Head =.. [Super, Pred, ExCtx, Call, Obj, TCtn],
+		assertz('$lgt_pp_super_'((Head:-Lookup)))
+	),
+	fail.
 
 % ... or predicates can be redefined in instances...
 
@@ -15414,7 +15346,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_built_in_method_spec'(^^_, p, '^^'(0), 1).
 '$lgt_built_in_method_spec'(_<<_, p(p(p)), '<<'(*, 0), 1).
 '$lgt_built_in_method_spec'(_>>_, p, '>>'(*, 0), 1).
-'$lgt_built_in_method_spec'(':'(_), p, ':'(0), 1).
+'$lgt_built_in_method_spec'(':'(_), p, ':'(0), 1).	% deprecated
 '$lgt_built_in_method_spec'(':'(_,_), p, ':'(*, 0), 1) :-
 	'$lgt_prolog_feature'(modules, supported).
 '$lgt_built_in_method_spec'({_}, p, '{}'(0), 1).
@@ -16643,7 +16575,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_dcg_ctg_call'(@dcgbody, @var, @var, -body)
 %
-% translates a direct call to a grammar rule in an imported category
+% translates a direct call to a grammar rule in an imported category (deprecated)
 
 '$lgt_dcg_ctg_call'(Var, S0, S, phrase(:Var, S0, S)) :-
 	var(Var),
@@ -17778,11 +17710,28 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_ctg_call_static_binding'(@object_identifier, @callable, @execution_context -callable)
+% '$lgt_obj_super_call_static_binding'(@object_identifier, @callable, @execution_context -callable)
 %
-% static binding for the (:)/1 control construct
+% static binding for the (^^)/1 control construct (used within objects)
 
-'$lgt_ctg_call_static_binding'(Obj, Alias, ExCtx, Call) :-
+'$lgt_obj_super_call_static_binding'(Obj, Pred, ExCtx, Call) :-
+	(	'$lgt_pp_imports_category_'(_, _, _),
+		'$lgt_obj_super_call_static_binding_category'(Obj, Pred, ExCtx, Call) ->
+		true
+	;	'$lgt_pp_extends_object_'(_, _, _) ->
+		'$lgt_obj_super_call_static_binding_prototype'(Obj, Pred, ExCtx, Call)
+	;	'$lgt_pp_instantiates_class_'(_, _, _),
+		'$lgt_pp_specializes_class_'(_, _, _) ->
+		'$lgt_obj_super_call_static_binding_instance_class'(Obj, Pred, ExCtx, Call)
+	;	'$lgt_pp_instantiates_class_'(_, _, _) ->
+		'$lgt_obj_super_call_static_binding_instance'(Obj, Pred, ExCtx, Call)
+	;	'$lgt_pp_specializes_class_'(_, _, _) ->
+		'$lgt_obj_super_call_static_binding_class'(Obj, Pred, ExCtx, Call)
+	;	fail
+	).
+
+
+'$lgt_obj_super_call_static_binding_category'(Obj, Alias, ExCtx, Call) :-
 	% when working with parametric entities, we must connect the parameters
 	% between related entities
 	'$lgt_pp_imports_category_'(Obj, Ctg, _),
@@ -17800,25 +17749,6 @@ current_logtalk_flag(Flag, Value) :-
 	call(Def, Pred, ExCtx, Call, DefCtn), !,
 	% predicate definition found; use it only if it's safe
 	'$lgt_safe_static_binding_paths'(Ctg, DclCtn, DefCtn).
-
-
-
-% '$lgt_obj_super_call_static_binding'(@object_identifier, @callable, @execution_context -callable)
-%
-% static binding for the (^^)/1 control construct (used within objects)
-
-'$lgt_obj_super_call_static_binding'(Obj, Pred, ExCtx, Call) :-
-	(	'$lgt_pp_extends_object_'(_, _, _) ->
-		'$lgt_obj_super_call_static_binding_prototype'(Obj, Pred, ExCtx, Call)
-	;	'$lgt_pp_instantiates_class_'(_, _, _),
-		'$lgt_pp_specializes_class_'(_, _, _) ->
-		'$lgt_obj_super_call_static_binding_instance_class'(Obj, Pred, ExCtx, Call)
-	;	'$lgt_pp_instantiates_class_'(_, _, _) ->
-		'$lgt_obj_super_call_static_binding_instance'(Obj, Pred, ExCtx, Call)
-	;	'$lgt_pp_specializes_class_'(_, _, _) ->
-		'$lgt_obj_super_call_static_binding_class'(Obj, Pred, ExCtx, Call)
-	;	fail
-	).
 
 
 '$lgt_obj_super_call_static_binding_prototype'(Obj, Alias, ExCtx, Call) :-
@@ -17897,7 +17827,7 @@ current_logtalk_flag(Flag, Value) :-
 	% when working with parametric entities, we must connect the parameters
 	% between related entities
 	'$lgt_pp_specializes_class_'(Obj, Superclass, RelationScope),
-	'$lgt_current_object_'(Superclass, _, Dcl, Def, _, _, _, _, _, _, _),
+	'$lgt_current_object_'(Superclass, _, _, _, _, IDcl, IDef, _, _, _, _),
 	% we may be aliasing the predicate
 	(	'$lgt_pp_predicate_alias_'(Superclass, Pred, Alias) ->
 		true
@@ -17905,12 +17835,12 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	% lookup predicate declaration
 	(	RelationScope == (public) ->
-		call(Dcl, Pred, Scope, _, Flags, SCtn, TCtn)
+		call(IDcl, Pred, Scope, _, Flags, SCtn, TCtn)
 	;	RelationScope == protected ->
-		call(Dcl, Pred, PredScope, _, Flags, SCtn, TCtn),
+		call(IDcl, Pred, PredScope, _, Flags, SCtn, TCtn),
 		'$lgt_filter_scope'(PredScope, Scope)
 	;	Scope = p,
-		call(Dcl, Pred, PredScope, _, Flags, SCtn0, TCtn),
+		call(IDcl, Pred, PredScope, _, Flags, SCtn0, TCtn),
 		'$lgt_filter_scope_container'(PredScope, SCtn0, Obj, SCtn)
 	), !,
 	% check that the call is within scope (i.e. public or protected)
@@ -17924,7 +17854,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_exec_ctx_this_rest'(ExCtx, Obj, Rest),
 	'$lgt_exec_ctx_this_rest'(ExCtx0, Superclass, Rest),
 	% lookup predicate definition
-	call(Def, Pred, ExCtx0, Call, _, DefCtn), !,
+	call(IDef, Pred, ExCtx0, Call, _, DefCtn), !,
 	% predicate definition found; use it only if it's safe
 	'$lgt_safe_static_binding_paths'(Obj, TCtn, DefCtn).
 

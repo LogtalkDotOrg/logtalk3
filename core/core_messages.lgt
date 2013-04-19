@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/04/047,
+		date is 2013/04/19,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -185,7 +185,7 @@
 		['A definition for the debug handler predicate already exists in: ~q'-[Provider], nl],
 		message_context(File, Lines, Type, Entity).
 
-	% compiler error messages
+	% compiler error and warning messages
 
 	logtalk::message_tokens(compiler_error(File, Lines, Error), core) -->
 		error_term_tokens(Error),
@@ -376,6 +376,10 @@
 	logtalk::message_tokens(renamed_compiler_flag(File, Lines, Flag, NewFlag), core) -->
 		['The compiler flag ~w have been renamed to ~w'-[Flag, NewFlag], nl],
 		message_context(File, Lines).
+
+	logtalk::message_tokens(deprecated_control_construct(File, Lines, Type, Entity, Term), core) -->
+		['The ~w control construct is deprecated'-[Term], nl],
+		message_context(File, Lines, Type, Entity).
 
 	% auxiliary grammar rules
 

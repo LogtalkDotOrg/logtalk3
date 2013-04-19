@@ -436,7 +436,7 @@
 	:- public(advice/0).
 
 	advice :-
-		:clothes(Clothes), write('Clothes: '), write(Clothes), nl,
-		:speech(Speech), write('Speech:  '), write(Speech), nl, nl.
+		^^clothes(Clothes), write('Clothes: '), write(Clothes), nl,
+		^^speech(Speech), write('Speech:  '), write(Speech), nl, nl.
 
 :- end_object.

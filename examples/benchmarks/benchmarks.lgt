@@ -12,9 +12,9 @@
 :- object(benchmarks).
 
 	:- info([
-		version is 5.2,
+		version is 5.3,
 		author is 'Paulo Moura',
-		date is 2011/09/24,
+		date is 2013/04/19,
 		comment is 'Benchmark utility predicates and standard set of benchmarks.'
 	]).
 
@@ -118,7 +118,7 @@
 
 	% some benchmark tests for category predicate calls:
 	benchmark(c1, leaf::obj_local).
-	benchmark(c2, leaf::ctg_direct).
+	benchmark(c2, leaf::ctg_super).
 	benchmark(c3, leaf::ctg_self).
 
 	% some benchmark tests for dynamic code:
@@ -230,7 +230,7 @@
 
 	do_benchmark(c2, N) :-
 		{my_repeat(N)},
-			leaf::ctg_direct,
+			leaf::ctg_super,
 		fail.
 	do_benchmark(c2, _).
 

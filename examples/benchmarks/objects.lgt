@@ -13,9 +13,9 @@
 	imports(category)).
 
 	:- info([
-		version is 4.0,
+		version is 4.1,
 		author is 'Paulo Moura',
-		date is 2010/02/21,
+		date is 2013/04/19,
 		comment is 'Example object for benchmarking library predicate calls and imported category predicate calls.'
 	]).
 
@@ -49,15 +49,15 @@
 	ctg_self :-
 		::ctg_pred.
 
-	:- public(ctg_direct/0).
-	% call an imported category predicate directly by using the :/1 control construct;
+	:- public(ctg_super/0).
+	% call an imported category predicate by using the ^^/1 control construct;
 	% (static binding may be used, depending on how the category is compiled)
-	ctg_direct :-
-		:ctg_pred.
+	ctg_super :-
+		^^ctg_pred.
 
 	:- public(obj_local/0).
 	% call a local object predicate directly; used for comparing performance with 
-	% calls to category predicates using the ::/1 and :/1 control constructs
+	% calls to category predicates using the ::/1 and ^^/1 control constructs
 	obj_local :-
 		{generate_list(20, List)},
 		length(List, _).
