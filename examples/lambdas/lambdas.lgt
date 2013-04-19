@@ -186,6 +186,7 @@
 
 	% lambda expression with unclassified variables
 	foo(C1, C2, C3) :-
+		g(Z),
 		call([X,Y]>>f(X,Y,Z), C1, C2, C3).
 
 	% lambda expression with mixed-up variables
@@ -193,5 +194,7 @@
 		call({Z}/[X,Y,Z]>>f(X,Y,Z), C1, C2, C3).
 
 	f(1, 2, 3).
+
+	g(4).
 
 :- end_object.
