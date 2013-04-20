@@ -886,7 +886,7 @@ create_object(Obj, Relations, Directives, Clauses) :-
 		'$lgt_gen_entity_identifier'(o, Obj)
 	;	true
 	),
-	'$lgt_tr_object_identifier'(Obj),
+	'$lgt_tr_object_identifier'(Obj, Relations),
 	'$lgt_tr_object_relations'(Relations, Obj),
 	% set the initial compilation context for compiling the object directives and clauses
 	'$lgt_comp_ctx_mode'(Ctx, runtime),
@@ -6580,7 +6580,7 @@ current_logtalk_flag(Flag, Value) :-
 		;	true
 		),
 		'$lgt_add_entity_source_data'(start, Obj),
-		'$lgt_tr_object_identifier'(Obj),
+		'$lgt_tr_object_identifier'(Obj, Relations),
 		'$lgt_tr_object_relations'(Relations, Obj)
 	).
 
@@ -6715,7 +6715,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	true
 	),
 	'$lgt_add_entity_source_data'(start, Module),
-	'$lgt_tr_object_identifier'(Module),
+	'$lgt_tr_object_identifier'(Module, []),
 	% make the export list public predicates
 	'$lgt_tr_logtalk_directive'(public(Exports), Ctx).
 
@@ -11833,19 +11833,24 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_tr_object_identifier'(@object_identifier)
+% '$lgt_tr_object_identifier'(@object_identifier, @list)
 %
 % from the object identifier construct the set of
 % functor prefixes used in the compiled code clauses
 
-'$lgt_tr_object_identifier'(Obj) :-
+'$lgt_tr_object_identifier'(Obj, Relations) :-
 	(	atom(Obj) ->
 		GObj = Obj
 	;	% parametric object
 		'$lgt_term_template'(Obj, GObj)
 	),
 	'$lgt_add_referenced_object'(GObj),
-	'$lgt_construct_object_functors'(GObj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm),
+	(	'$lgt_member'(instantiates(_), Relations) ->
+		'$lgt_construct_ic_functors'(GObj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm)
+	;	'$lgt_member'(specializes(_), Relations) ->
+		'$lgt_construct_ic_functors'(GObj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm)
+	;	'$lgt_construct_prototype_functors'(GObj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm)
+	),
 	% the object flags are only computed at the end of the entity compilation
 	assertz('$lgt_pp_object_'(GObj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, _)),
 	% provide quick access to some common used data on the entity being compiled
@@ -11957,7 +11962,7 @@ current_logtalk_flag(Flag, Value) :-
 		throw(permission_error(instantiate, class, Class))
 	;	'$lgt_add_referenced_object'(Class),
 		assertz('$lgt_pp_instantiates_class_'(Obj, Class, Scope)),
-		'$lgt_construct_object_functors'(Class, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, _),
+		'$lgt_construct_ic_functors'(Class, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, _),
 		assertz('$lgt_pp_instantiated_class_'(Class, Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Scope)),
 		'$lgt_tr_instantiates_class'(Refs, Obj)
 	).
@@ -11984,7 +11989,7 @@ current_logtalk_flag(Flag, Value) :-
 		throw(permission_error(specialize, class, Class))
 	;	'$lgt_add_referenced_object'(Superclass),
 		assertz('$lgt_pp_specializes_class_'(Class, Superclass, Scope)),
-		'$lgt_construct_object_functors'(Superclass, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, _),
+		'$lgt_construct_ic_functors'(Superclass, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, _),
 		assertz('$lgt_pp_specialized_class_'(Superclass, Class, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Scope)),
 		'$lgt_tr_specializes_class'(Refs, Class)
 	).
@@ -12013,7 +12018,7 @@ current_logtalk_flag(Flag, Value) :-
 		throw(permission_error(extend, prototype, Parent))
 	;	'$lgt_add_referenced_object'(Parent),
 		assertz('$lgt_pp_extends_object_'(Obj, Parent, Scope)),
-		'$lgt_construct_object_functors'(Parent, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, _),
+		'$lgt_construct_prototype_functors'(Parent, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, _),
 		assertz('$lgt_pp_extended_object_'(Parent, Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Scope)),
 		'$lgt_tr_extends_object'(Refs, Obj)
 	).
@@ -14808,11 +14813,31 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_construct_object_functors'(+object_identifier, -atom, -atom, -atom, -atom, -atom, -atom, -atom, -atom, -atom)
+% '$lgt_construct_prototype_functors'(+object_identifier, -atom, -atom, -atom, -atom, -atom, -atom, -atom, -atom, -atom)
 %
-% constructs functors used in the compiled code of an object
+% constructs functors used in the compiled code of a prototype
 
-'$lgt_construct_object_functors'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm) :-
+'$lgt_construct_prototype_functors'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm) :-
+	(	'$lgt_current_object_'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, _) ->
+		true
+	;	'$lgt_construct_entity_prefix'(Obj, Prefix),
+		atom_concat(Prefix, '_dcl', Dcl),
+		atom_concat(Prefix, '_def', Def),
+		atom_concat(Prefix, '_super', Super),
+		IDcl = Dcl,
+		IDef = Def,
+		atom_concat(Prefix, '_ddcl', DDcl),
+		atom_concat(Prefix, '_ddef', DDef),
+		atom_concat(Prefix, '_alias', Rnm)
+	).
+
+
+
+% '$lgt_construct_ic_functors'(+object_identifier, -atom, -atom, -atom, -atom, -atom, -atom, -atom, -atom, -atom)
+%
+% constructs functors used in the compiled code of a class or an instance
+
+'$lgt_construct_ic_functors'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm) :-
 	(	'$lgt_current_object_'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, _) ->
 		true
 	;	'$lgt_construct_entity_prefix'(Obj, Prefix),

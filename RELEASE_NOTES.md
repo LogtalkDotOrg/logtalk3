@@ -38,8 +38,12 @@ now interpreted as an alias to the `(^^)/1` control construct.
 * ADDED: Support for using the `(^^)/1` control construct in grammar rules.
 
 * FIXED: Bug when checking lambda expressions for variables declared as both
-parameters and free resulting from a definition of a list intersection
+parameters and free resulting from using a definition of a list intersection
 predicate that wrongly assumed an ordered representation.
+
+* FIXED: Internal functors used for inherited predicate declaration and
+definition lookups for prototypes, although these functors are currently
+not used.
 
 Prolog adapter and integration files
 ------------------------------------
