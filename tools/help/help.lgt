@@ -25,9 +25,9 @@
 :- object(help).
 
 	:- info([
-		version is 0.72,
+		version is 0.73,
 		author is 'Paulo Moura',
-		date is 2013/02/01,
+		date is 2013/04/21,
 		comment is 'Command-line help for Logtalk built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
@@ -267,7 +267,6 @@
 	control((^^), 1, '/manuals/refman/control/', 'to_super1.html').
 	control(({}), 1, '/manuals/refman/control/', 'external1.html').
 	control((<<), 2, '/manuals/refman/control/', 'context2.html').
-	control((:), 1, '/manuals/refman/control/', 'direct1.html').
 
 	built_in_non_terminal(call, N, '/manuals/refman/methods/', 'call1.html') :-
 		integer::between(1, 6, N).
