@@ -44,6 +44,9 @@ Sends a message to an object. The message argument must match a public predicate
 <p>
 The <code>{Proxy}::Message</code> syntax construct allows simplified access to parametric object <em>proxies</em>. Its operational semantics is equivalent to the goal conjunction <code>(call(Proxy), Proxy::Message)</code>. I.e. <code>Proxy</code> is proved as a plain Prolog goal and, if successful, the goal term is used as a parametric object identifier. Exceptions thrown when proving <code>Proxy</code> are handled by the <code>::/2</code> control construct. This syntax construct supports backtracking over the <code>{Proxy}</code> goal.
 </p>
+<p>
+The lookups for the predicate declaration and the predicate definition are performed using a depth-first strategy.
+</p>
 
 <h4>Template and modes</h4>
 
@@ -89,7 +92,7 @@ yes</pre>
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: December 5, 2012</span>
+		<span>Last updated on: April 19, 2012</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="../index.html#constructs">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="to_self1.html">next</a></span><br/>

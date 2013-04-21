@@ -40,6 +40,9 @@
 <p>
 Calls an imported or inherited predicate definition. The call fails if the predicate is declared but there is no imported and no inherited predicate definition. This control construct may be used within objects or categories in the body of a predicate definition. When used within a category, the predicate definition lookup is restricted to the extended categories.
 </p>
+<p>
+This control construct is a generalization of the Smalltalk <em>super</em> keyword to take into account Logtalk support for prototypes and categories besides classes. The lookup for the predicate definition starts at the imported categories, if any. If an imported predicate definition is not found, the lookup proceeds to the ancestor objects. The lookups for the predicate declaration and the predicate definition are performed using a depth-first strategy.
+</p>
 
 <h4>Template and modes</h4>
 
