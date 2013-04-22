@@ -11350,6 +11350,10 @@ current_logtalk_flag(Flag, Value) :-
 		('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags), Flags /\ 1 =:= 1)
 	),
 	forall(
+		'$lgt_pp_imported_category_'(Ctg, _, _, _, _, _),
+		('$lgt_current_category_'(Ctg, _, _, _, _, Flags), Flags /\ 1 =:= 1)
+	),
+	forall(
 		'$lgt_pp_extended_category_'(Ctg, _, _, _, _, _),
 		('$lgt_current_category_'(Ctg, _, _, _, _, Flags), Flags /\ 1 =:= 1)
 	),
@@ -17934,7 +17938,7 @@ current_logtalk_flag(Flag, Value) :-
 %
 % all entities in the inheritance-chain (from the entity that's the starting
 % point to both the declaration container and the definition container)
-% should be static-binding entities but this is only partially checked
+% should be static-binding entities but currently we only check the end points
 
 '$lgt_safe_static_binding_paths'(_, DclEntity, DefEntity) :-
 	'$lgt_static_binding_entity'(DclEntity),
