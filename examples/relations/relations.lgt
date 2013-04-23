@@ -255,14 +255,12 @@
 	specializes(object)).
 
 	:- info([
-		version is 1.3,
-		date is 2006/12/16,
+		version is 1.31,
+		date is 2013/04/23,
 		author is 'Esteban Zimanyi, Paulo Moura',
 		comment is 'Enables the representation of relations between independent objects.'
 	]).
 
-	:- uses(before_event_registry).
-	:- uses(after_event_registry).
 	:- uses(list,
 		[length/2, member/2, memberchk/2, nth1/3, same_length/2]).
 

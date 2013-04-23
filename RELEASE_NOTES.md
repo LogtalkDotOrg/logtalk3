@@ -37,6 +37,8 @@ now interpreted as an alias to the `(^^)/1` control construct.
 
 * ADDED: Support for using the `(^^)/1` control construct in grammar rules.
 
+* CHANGED: The `calls/1` and `uses/1` entity directives are now deprecated.
+
 * FIXED: Bug when checking lambda expressions for variables declared as both
 parameters and free resulting from using a definition of a list intersection
 predicate that wrongly assumed an ordered representation.
@@ -72,7 +74,7 @@ Logtalk compiler and runtime
 
 * NEW: Updated the compiler to accept the old name of flags that have been
 renamed and to print a warning when the old names are used in calls to the
-`set_logtalk_flag/2` and `current_logtalk_flaf/2` built-in predicates and
+`set_logtalk_flag/2` and `current_logtalk_flag/2` built-in predicates and
 directives.
 
 * ADDED: Support for the `forward/1` message forwarding handler to the `(::)/1`

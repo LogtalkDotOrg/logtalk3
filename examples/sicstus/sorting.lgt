@@ -13,15 +13,14 @@
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1.0,
-		date is 2000/4/22,
+		version is 1.1,
+		date is 2013/04/23,
 		comment is 'List sorting parameterized by the type of the list elements.',
 		parnames is ['Type'],
 		source is 'Example adapted from the SICStus Objects documentation.'
 	]).
 
-	:- uses(list).
-	:- calls(comparingp).
+	:- uses(list, [append/3]).
 
 	:- public(sort/2).
 	:- mode(sort(+list, -list), one).
@@ -42,7 +41,7 @@
 		partition(L, P, Small, Large),
 		sort(Small, S0),
 		sort(Large, S1),
-		list::append(S0, [P| S1], S).
+		append(S0, [P| S1], S).
 
 	partition([], _, [], []).
 	partition([X| L1], P, Small, Large) :-

@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/04/19,
+		date is 2013/04/23,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -379,6 +379,10 @@
 
 	logtalk::message_tokens(deprecated_control_construct(File, Lines, Type, Entity, Term), core) -->
 		['The ~w control construct is deprecated'-[Term], nl],
+		message_context(File, Lines, Type, Entity).
+
+	logtalk::message_tokens(deprecated_directive(File, Lines, Type, Entity, Term), core) -->
+		['The ~w directive is deprecated'-[Term], nl],
 		message_context(File, Lines, Type, Entity).
 
 	% auxiliary grammar rules

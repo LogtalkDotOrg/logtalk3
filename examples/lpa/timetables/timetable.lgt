@@ -13,8 +13,8 @@
 
 
 	:- info([
-		version is 1.01,
-		date is 2010/03/18,
+		version is 1.02,
+		date is 2013/04/23,
 		author is 'Example by LPA; adapted to Logtalk by Paulo Moura.',
 		comment is 'Set up & create a timetable satisfying all of the constraints.'
 	]).
@@ -55,7 +55,7 @@
 	]).
 
 
-	:- uses(list).
+	:- uses(list, [length/2]).
 
 
 	print :-
@@ -74,7 +74,7 @@
 
 
 	make(Effort) :-
-		list::length(E, Effort),
+		length(E, Effort),
 		forall(
 			(extends_object(Form, form), extends_object(Period, period)),
 			fill_entry(E, Form, Period, _Teacher, _Subject)).

@@ -273,13 +273,15 @@
 	instantiates(class)).
 
 	:- info([
-		version is 1.1,
-		date is 2006/12/14,
+		version is 1.2,
+		date is 2013/04/23,
 		author is 'Paulo Moura',
 		comment is 'Minimal predicates for all objects. Default root of the inheritance graph.'
 	]).
 
-	:- uses(event_registry).
+	:- uses(event_registry, [
+		del_monitors/4
+	]).
 
 	strict_instance.
 
@@ -287,9 +289,9 @@
 
 	process_free_option(del_monitors) :-
 		self(Self),
-		event_registry::del_monitors(Self, _, _, _),
-		event_registry::del_monitors(_, _, Self, _),
-		event_registry::del_monitors(_, _, _, Self).
+		del_monitors(Self, _, _, _),
+		del_monitors(_, _, Self, _),
+		del_monitors(_, _, _, Self).
 
 	nil :-
 		fail.

@@ -241,12 +241,10 @@
 :- dynamic('$lgt_pp_entity_'/5).							% '$lgt_pp_entity_'(Type, Entity, Prefix, Dcl, Rnm)
 :- dynamic('$lgt_pp_module_'/1).							% '$lgt_pp_module_'(Module)
 
-:- dynamic('$lgt_pp_uses_'/1).								% '$lgt_pp_uses_'(Obj)
 :- dynamic('$lgt_pp_uses_predicate_'/3).					% '$lgt_pp_uses_predicate_'(Obj, Predicate, Alias)
 :- dynamic('$lgt_pp_uses_non_terminal_'/3).					% '$lgt_pp_uses_non_terminal_'(Obj, NonTerminal, Alias)
 :- dynamic('$lgt_pp_use_module_predicate_'/3).				% '$lgt_pp_use_module_predicate_'(Module, Predicate, Alias)
 :- dynamic('$lgt_pp_use_module_non_terminal_'/3).			% '$lgt_pp_use_module_non_terminal_'(Module, NonTerminal, Alias)
-:- dynamic('$lgt_pp_calls_'/1).								% '$lgt_pp_calls_'(Entity)
 :- dynamic('$lgt_pp_info_'/1).								% '$lgt_pp_info_'(List)
 :- dynamic('$lgt_pp_info_'/2).								% '$lgt_pp_info_'(Functor/Arity, List) or '$lgt_pp_info_'(Functor//Args, List)
 
@@ -5777,12 +5775,10 @@ current_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_pp_specialized_class_'(_, _, _, _, _, _, _, _, _, _, _)),
 	retractall('$lgt_pp_extended_protocol_'(_, _, _, _, _)),
 	retractall('$lgt_pp_extended_category_'(_, _, _, _, _, _)),
-	retractall('$lgt_pp_uses_'(_)),
 	retractall('$lgt_pp_uses_predicate_'(_, _, _)),
 	retractall('$lgt_pp_uses_non_terminal_'(_, _, _)),
 	retractall('$lgt_pp_use_module_predicate_'(_, _, _)),
 	retractall('$lgt_pp_use_module_non_terminal_'(_, _, _)),
-	retractall('$lgt_pp_calls_'(_)),
 	retractall('$lgt_pp_info_'(_)),
 	retractall('$lgt_pp_info_'(_, _)),
 	retractall('$lgt_pp_directive_'(_)),
@@ -6793,7 +6789,6 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_must_be'(object_identifier, Obj),
 	'$lgt_must_be'(list, Resources),
 	'$lgt_add_referenced_object'(Obj),
-	assertz('$lgt_pp_uses_'(Obj)),
 	'$lgt_split_operators_and_predicates'(Resources, Preds, Operators),
 	'$lgt_tr_logtalk_directives'(Operators, Ctx),
 	'$lgt_tr_uses_directive'(Preds, Obj, Ctx).
@@ -6801,10 +6796,15 @@ current_logtalk_flag(Flag, Value) :-
 
 % uses/1 entity directive
 
-'$lgt_tr_logtalk_directive'(uses(Obj), _) :-
+'$lgt_tr_logtalk_directive'(uses(Obj), Ctx) :-
 	'$lgt_must_be'(object_identifier, Obj),
 	'$lgt_add_referenced_object'(Obj),
-	assertz('$lgt_pp_uses_'(Obj)).
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
+		'$lgt_increment_compile_warnings_counter',
+		'$lgt_warning_context'(Path, Lines, Type, Entity),
+		'$lgt_print_message'(warning(general), core, deprecated_directive(Path, Lines, Type, Entity, uses/1))		
+	;	true
+	).
 
 
 % use_module/2 module directive
@@ -6838,9 +6838,15 @@ current_logtalk_flag(Flag, Value) :-
 
 % calls/1 entity directive
 
-'$lgt_tr_logtalk_directive'(calls(Ptcs), _) :-
+'$lgt_tr_logtalk_directive'(calls(Ptcs), Ctx) :-
 	'$lgt_flatten_list'([Ptcs], PtcsFlatted),
-	'$lgt_tr_calls_directive'(PtcsFlatted).
+	'$lgt_tr_calls_directive'(PtcsFlatted),
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
+		'$lgt_increment_compile_warnings_counter',
+		'$lgt_warning_context'(Path, Lines, Type, Entity),
+		'$lgt_print_message'(warning(general), core, deprecated_directive(Path, Lines, Type, Entity, calls/1))		
+	;	true
+	).
 
 
 % info/1 entity directive
@@ -7021,7 +7027,6 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_calls_directive'([Ptc| Ptcs]) :-
 	'$lgt_must_be'(protocol_identifier, Ptc),
 	'$lgt_add_referenced_protocol'(Ptc),
-	assertz('$lgt_pp_calls_'(Ptc)),
 	'$lgt_tr_calls_directive'(Ptcs).
 
 
@@ -15488,8 +15493,8 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_logtalk_entity_directive'(encoding(_)).
-'$lgt_logtalk_entity_directive'(calls(_)).
-'$lgt_logtalk_entity_directive'(uses(_)).
+'$lgt_logtalk_entity_directive'(calls(_)).	% deprecated
+'$lgt_logtalk_entity_directive'(uses(_)).	% deprecated
 '$lgt_logtalk_entity_directive'(uses(_, _)).
 '$lgt_logtalk_entity_directive'(initialization(_)).
 '$lgt_logtalk_entity_directive'((dynamic)).

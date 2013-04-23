@@ -38,14 +38,16 @@
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1.0,
-		date is 2000/4/22,
+		version is 1.1,
+		date is 2013/04/23,
 		comment is 'Parametric object for representing geometric ellipses.',
 		parnames is ['RX', 'RY', 'Color'],
 		source is 'Example adapted from the SICStus Objects documentation.'
 	]).
 
-	:- uses(math_constants).
+	:- uses(math_constants, [
+		pi/1
+	]).
 
 	:- public(color/1).
 	:- mode(color(?atom), zero_or_one).
@@ -93,7 +95,7 @@
 	area(Area) :-
 		::rx(Rx),
 		::ry(Ry),
-		math_constants::pi(Pi),
+		pi(Pi),
 		Area is Rx*Ry*Pi.
 
 	context :-

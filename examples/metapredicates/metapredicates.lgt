@@ -48,16 +48,14 @@
 :- object(sort(_Type)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2000/7/24,
+		date is 2013/04/23,
 		comment is 'List sorting parameterized by the type of the list elements.'
 	]).
 
 	:- uses(list, [append/3]).		% calls to append(...) will be translated to list::append(...)
 	:- uses(tracer, [trace/1]).		% calls to trace(...) will be translated to tracer::trace(...)
-
-	:- calls(comparingp).
 
 	:- public(sort/2).
 	:- mode(sort(+list, -list), one).

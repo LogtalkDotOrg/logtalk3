@@ -13,15 +13,11 @@
 	implements(monitoring)).	% built-in protocol for event handler methods
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2008/10/20,
+		date is 2013/04/23,
 		comment is 'Performance monitor for state space searches.'
 	]).
-
-	:- uses(event_registry).
-	:- uses(before_event_registry).
-	:- uses(after_event_registry).
 
 	:- uses(list, [length/2]).
 	:- uses(numberlist, [min/2, max/2, sum/2]).
