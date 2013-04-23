@@ -9401,6 +9401,15 @@ current_logtalk_flag(Flag, Value) :-
 	(	'$lgt_pp_module_'(_) ->
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
 		'$lgt_tr_body'(Module::Pred, TPred, DPred, Ctx)
+	;	var(Module) ->
+		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+		TPred = ':'(Module, Pred),
+		DPred = '$lgt_debug'(goal(':'(Module, Pred), TPred), ExCtx)
+	;	var(Pred) ->
+		'$lgt_add_referenced_module'(Module),
+		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+		TPred = ':'(Module, Pred),
+		DPred = '$lgt_debug'(goal(':'(Module, Pred), TPred), ExCtx)
 	;	catch('$lgt_predicate_property'(':'(Module, Pred), meta_predicate(OriginalMeta)), _, fail) ->
 		% we're compiling a call to a module meta-predicate
 		'$lgt_add_referenced_module'(Module),

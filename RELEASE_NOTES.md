@@ -47,6 +47,9 @@ predicate that wrongly assumed an ordered representation.
 definition lookups for prototypes, although these functors are currently
 not used.
 
+* FIXED: Explicit-qualified calls to module predicates where the module or the
+predicate are only know at runtime could be miscompiled.
+
 Prolog adapter and integration files
 ------------------------------------
 
