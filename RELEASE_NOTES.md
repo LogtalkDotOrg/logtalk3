@@ -50,6 +50,9 @@ not used.
 * FIXED: Explicit-qualified calls to module predicates where the module or the
 predicate are only know at runtime could be miscompiled.
 
+* FIXED: The object and category properties `uses/3` and `use_module/3` would
+not be recognized as valid when queried explicitly.
+
 Prolog adapter and integration files
 ------------------------------------
 

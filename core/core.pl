@@ -16021,6 +16021,8 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_valid_category_property'(defines(_, _)).			% list of definition properties for a predicate defined in the category
 '$lgt_valid_category_property'(includes(_, _, _)).		% list of definition properties for a multifile predicate defined in contributing entities
 '$lgt_valid_category_property'(provides(_, _, _)).		% list of definition properties for a multifile predicate defined for other entities
+'$lgt_valid_category_property'(uses(_, _, _)).			% dependency on an object predicate (i.e. the category sends a message to the object)
+'$lgt_valid_category_property'(use_module(_, _, _)).	% dependency on a module predicate (i.e. the category makes an explicit-qualified module call)
 
 
 
