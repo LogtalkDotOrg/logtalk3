@@ -120,8 +120,6 @@ eval $xslt_proc -o builtins/logtalk_library_path2.section refman.xsl builtins/lo
 eval $xslt_proc -o builtins/logtalk_load_context2.section refman.xsl builtins/logtalk_load_context2.html
 eval $xslt_proc -o builtins/current_logtalk_flag2.section refman.xsl builtins/current_logtalk_flag2.html
 eval $xslt_proc -o builtins/set_logtalk_flag2.section refman.xsl builtins/set_logtalk_flag2.html
-eval $xslt_proc -o builtins/forall2.section refman.xsl builtins/forall2.html
-eval $xslt_proc -o builtins/retractall1.section refman.xsl builtins/retractall1.html
 eval $xslt_proc -o methods/parameter2.section refman.xsl methods/parameter2.html
 eval $xslt_proc -o methods/self1.section refman.xsl methods/self1.html
 eval $xslt_proc -o methods/sender1.section refman.xsl methods/sender1.html
@@ -242,8 +240,6 @@ cat -s \
 	builtins/logtalk_load_context2.section \
 	builtins/current_logtalk_flag2.section \
 	builtins/set_logtalk_flag2.section \
-	builtins/forall2.section \
-	builtins/retractall1.section \
 	methods.header \
 	methods/parameter2.section \
 	methods/self1.section \
