@@ -564,15 +564,9 @@ object_property(Obj, Prop) :-
 	;	fail
 	).
 '$lgt_object_property'(uses(Object, Original, Alias), Obj, _, _, _, _, _) :-
-	(	'$lgt_entity_property_'(Obj, uses(Object, Original, Alias)) ->
-		true
-	;	fail
-	).
+	'$lgt_entity_property_'(Obj, uses(Object, Original, Alias)).
 '$lgt_object_property'(use_module(Module, Original, Alias), Obj, _, _, _, _, _) :-
-	(	'$lgt_entity_property_'(Obj, use_module(Module, Original, Alias)) ->
-		true
-	;	fail
-	).
+	'$lgt_entity_property_'(Obj, use_module(Module, Original, Alias)).
 '$lgt_object_property'(public(Resources), Obj, Dcl, _, DDcl, _, Flags) :-
 	'$lgt_object_property_resources'(Obj, Dcl, DDcl, Flags, p(p(p)), Resources).
 '$lgt_object_property'(protected(Resources), Obj, Dcl, _, DDcl, _, Flags) :-
@@ -654,15 +648,9 @@ category_property(Ctg, Prop) :-
 	;	fail
 	).
 '$lgt_category_property'(uses(Object, Original, Alias), Ctg, _, _, _) :-
-	(	'$lgt_entity_property_'(Ctg, uses(Object, Original, Alias)) ->
-		true
-	;	fail
-	).
+	'$lgt_entity_property_'(Ctg, uses(Object, Original, Alias)).
 '$lgt_category_property'(use_module(Module, Original, Alias), Ctg, _, _, _) :-
-	(	'$lgt_entity_property_'(Ctg, use_module(Module, Original, Alias)) ->
-		true
-	;	fail
-	).
+	'$lgt_entity_property_'(Ctg, use_module(Module, Original, Alias)).
 '$lgt_category_property'(public(Predicates), Ctg, Dcl, _, _) :-
 	findall(
 		Functor/Arity,
