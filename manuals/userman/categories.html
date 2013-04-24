@@ -224,23 +224,6 @@ As usually happens with Prolog code, a category can be either static or dynamic.
 The directive must precede any predicate directives or clauses. Please be aware that using dynamic code results in a performance hit when compared to static code. We should only use dynamic categories when these need to be abolished during program execution.
 </p>
 
-<h3 id="categories_dependencies">Category dependencies</h3>
-
-<p>
-Besides the relations declared in the category opening directive, the predicate definitions contained in the category may imply other dependencies. This can be documented by using the <a title="Consult reference manual" href="../refman/directives/calls1.html"><code>calls/1</code></a> and the <a title="Consult reference manual" href="../refman/directives/uses1.html"><code>uses/1</code></a> directives.
-</p>
-<p>
-The <code>calls/1</code> directive can be used when a predicate definition sends a message that is declared in a specific protocol:
-</p>
-<pre>:- calls(Protocol).</pre>
-<p>
-If a predicate definition sends a message to a specific object, this dependence can be declared with the <code>uses/1</code> directive:
-</p>
-<pre>:- uses(Object).</pre>
-<p>
-These two directives can be used by the Logtalk runtime to ensure that all needed entities are loaded when running an application.
-</p>
-
 <h3 id="categories_documentation">Category documentation</h3>
 
 <p>
@@ -406,7 +389,7 @@ Note that access to category parameters is only possible using the <code>paramet
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: January 29, 2013</span>
+		<span>Last updated on: April 24, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="protocols.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="predicates.html">next</a></span><br/>

@@ -54,7 +54,6 @@ eval $xslt_proc -o directives/if1.section refman.xsl directives/if1.html
 eval $xslt_proc -o directives/elif1.section refman.xsl directives/elif1.html
 eval $xslt_proc -o directives/else0.section refman.xsl directives/else0.html
 eval $xslt_proc -o directives/endif0.section refman.xsl directives/endif0.html
-eval $xslt_proc -o directives/calls1.section refman.xsl directives/calls1.html
 eval $xslt_proc -o directives/category1_3.section refman.xsl directives/category1_3.html
 eval $xslt_proc -o directives/dynamic0.section refman.xsl directives/dynamic0.html
 eval $xslt_proc -o directives/end_category0.section refman.xsl directives/end_category0.html
@@ -67,7 +66,6 @@ eval $xslt_proc -o directives/object1_5.section refman.xsl directives/object1_5.
 eval $xslt_proc -o directives/protocol1_2.section refman.xsl directives/protocol1_2.html
 eval $xslt_proc -o directives/synchronized0.section refman.xsl directives/synchronized0.html
 eval $xslt_proc -o directives/threaded0.section refman.xsl directives/threaded0.html
-eval $xslt_proc -o directives/uses1.section refman.xsl directives/uses1.html
 eval $xslt_proc -o directives/alias3.section refman.xsl directives/alias3.html
 eval $xslt_proc -o directives/coinductive1.section refman.xsl directives/coinductive1.html
 eval $xslt_proc -o directives/discontiguous1.section refman.xsl directives/discontiguous1.html
@@ -164,7 +162,6 @@ eval $xslt_proc -o control/super1.section refman.xsl control/super1.html
 eval $xslt_proc -o control/delegate1.section refman.xsl control/delegate1.html
 eval $xslt_proc -o control/external1.section refman.xsl control/external1.html
 eval $xslt_proc -o control/context2.section refman.xsl control/context2.html
-eval $xslt_proc -o control/direct1.section refman.xsl control/direct1.html
 
 cat -s \
 	refman.header \
@@ -178,7 +175,6 @@ cat -s \
 	directives/elif1.section \
 	directives/else0.section \
 	directives/endif0.section \
-	directives/calls1.section \
 	directives/category1_3.section \
 	directives/dynamic0.section \
 	directives/end_category0.section \
@@ -191,7 +187,6 @@ cat -s \
 	directives/protocol1_2.section \
 	directives/synchronized0.section \
 	directives/threaded0.section \
-	directives/uses1.section \
 	directives/alias3.section \
 	directives/coinductive1.section \
 	directives/discontiguous1.section \
@@ -291,7 +286,6 @@ cat -s \
 	control/delegate1.section \
 	control/external1.section \
 	control/context2.section \
-	control/direct1.section \
 	refman.footer \
 	> refman.html
 

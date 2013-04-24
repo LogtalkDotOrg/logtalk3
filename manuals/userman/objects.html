@@ -326,23 +326,6 @@ Similar to Prolog predicates, an object can be either static or dynamic. An obje
 The directive must precede any predicate directives or clauses. Please be aware that using dynamic code results in a performance hit when compared to static code. We should only use dynamic objects when these need to be abolished during program execution. In addition, note that we can declare and define dynamic predicates within a static object.
 </p>
 
-<h3 id="objects_dependencies">Object dependencies</h3>
-
-<p>
-Besides the relations declared in the object opening directive, the predicate definitions contained in the object may imply other dependencies. These can be documented by using the <a title="Consult reference manual" href="../refman/directives/calls1.html"><code>calls/1</code></a> and the <a title="Consult reference manual" href="../refman/directives/uses1.html"><code>uses/1</code></a> directives.
-</p>
-<p>
-The <code>calls/1</code> directive can be used when a predicate definition sends a message that is declared in a specific protocol:
-</p>
-<pre>:- calls(Protocol).</pre>
-<p>
-If a predicate definition sends a message to a specific object, this dependence can be declared with the <code>uses/1</code> directive:
-</p>
-<pre>:- uses(Object).</pre>
-<p>
-These two directives may be used by the Logtalk runtime to ensure that all needed entities are loaded when running an application.
-</p>
-
 <h3 id="objects_documentation">Object documentation</h3>
 
 <p>
