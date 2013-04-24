@@ -961,7 +961,9 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 			<dd>"<code>protected(</code>" predicate_indicator_list "<code>)</code>" |</dd>
 			<dd>"<code>private(</code>" predicate_indicator_list "<code>)</code>" |</dd>
 			<dd>"<code>declares(</code>" predicate_indicator "<code>,</code>" predicate_declaration_property_list "<code>)</code>" |</dd>
-			<dd>"<code>number_of_clauses(</code>" <em>integer</em> "<code>)</code>"</dd>
+			<dd>"<code>number_of_clauses(</code>" <em>integer</em> "<code>)</code>" |</dd>
+			<dd>"<code>uses(</code>" object_identifier "<code>,</code>" predicate_indicator | non_terminal_indicator "<code>,</code>" predicate_indicator | non_terminal_indicator "<code>)</code>" |</dd>
+			<dd>"<code>use_module(</code>" module_identifier "<code>,</code>" predicate_indicator | non_terminal_indicator "<code>,</code>" predicate_indicator | non_terminal_indicator "<code>)</code>"</dd>
 	</dl>
 
 	<dl>
@@ -1042,7 +1044,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: March 1, 2013</span>
+		<span>Last updated on: April 24, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="index.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="index.html">next</a></span><br/>
