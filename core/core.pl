@@ -304,6 +304,9 @@
 :- dynamic('$lgt_pp_referenced_category_'/2).				% '$lgt_pp_referenced_category_'(Category, Lines)
 :- dynamic('$lgt_pp_referenced_module_'/2).					% '$lgt_pp_referenced_module_'(Module, Lines)
 
+:- dynamic('$lgt_pp_referenced_object_message_'/3).			% '$lgt_pp_referenced_object_message_'(Object, Functor/Arity, Lines)
+:- dynamic('$lgt_pp_referenced_module_predicate_'/3).		% '$lgt_pp_referenced_module_predicate_'(Module, Functor/Arity, Lines)
+
 :- dynamic('$lgt_pp_global_operator_'/3).					% '$lgt_pp_global_operator_'(Priority, Specifier, Operator)
 :- dynamic('$lgt_pp_file_operator_'/3).						% '$lgt_pp_file_operator_'(Priority, Specifier, Operator)
 :- dynamic('$lgt_pp_entity_operator_'/4).					% '$lgt_pp_entity_operator_'(Priority, Specifier, Operator, Scope)
@@ -5349,6 +5352,45 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
+% '$lgt_add_referenced_object_message'(@object_identifier, @callable)
+%
+% adds referenced module for later cheking of references to unknown modules
+% we also save the line numbers for the first reference to the module
+
+'$lgt_add_referenced_object_message'(Obj, Pred) :-
+	functor(Pred, Functor, Arity),
+	(	'$lgt_pp_referenced_object_message_'(Obj, Functor/Arity, _) ->
+		true
+	;	'$lgt_pp_uses_predicate_'(Obj, Functor/Arity, Functor/Arity) ->
+		true
+	;	'$lgt_current_line_numbers'(Lines),
+		(	atom(Obj) ->
+			assertz('$lgt_pp_referenced_object_message_'(Obj, Functor/Arity, Lines))
+		;	% parametric object
+			'$lgt_term_template'(Obj, Template),
+			assertz('$lgt_pp_referenced_object_message_'(Template, Functor/Arity, Lines))
+		)
+	).
+
+
+
+% '$lgt_add_referenced_module_predicate'(@object_identifier, @callable)
+%
+% adds referenced module for later cheking of references to unknown modules
+% we also save the line numbers for the first reference to the module
+
+'$lgt_add_referenced_module_predicate'(Module, Pred) :-
+	functor(Pred, Functor, Arity),
+	(	'$lgt_pp_referenced_module_predicate_'(Module, Functor/Arity, _) ->
+		true
+	;	'$lgt_pp_use_module_predicate_'(Module, Functor/Arity, Functor/Arity) ->
+		true
+	;	'$lgt_current_line_numbers'(Lines),
+		assertz('$lgt_pp_referenced_module_predicate_'(Module, Functor/Arity, Lines))
+	).
+
+
+
 % '$lgt_add_entity_source_data'(@atom, @entity_identifier)
 %
 % adds entity source data
@@ -5393,6 +5435,11 @@ current_logtalk_flag(Flag, Value) :-
 	fail.
 
 '$lgt_add_entity_properties'(end, Entity) :-
+	'$lgt_pp_referenced_object_message_'(Object, Functor/Arity, _),
+	assertz('$lgt_pp_entity_property_'(Entity, uses(Object, Functor/Arity, Functor/Arity))),
+	fail.
+
+'$lgt_add_entity_properties'(end, Entity) :-
 	'$lgt_pp_uses_non_terminal_'(Object, Original, Alias),
 	functor(Original, OriginalFunctor, OriginalArity),
 	functor(Alias, AliasFunctor, AliasArity),
@@ -5404,6 +5451,11 @@ current_logtalk_flag(Flag, Value) :-
 	functor(Original, OriginalFunctor, OriginalArity),
 	functor(Alias, AliasFunctor, AliasArity),
 	assertz('$lgt_pp_entity_property_'(Entity, use_module(Module, OriginalFunctor/OriginalArity, AliasFunctor/AliasArity))),
+	fail.
+
+'$lgt_add_entity_properties'(end, Entity) :-
+	'$lgt_pp_referenced_module_predicate_'(Module, Functor/Arity, _),
+	assertz('$lgt_pp_entity_property_'(Entity, use_module(Module, Functor/Arity, Functor/Arity))),
 	fail.
 
 '$lgt_add_entity_properties'(end, Entity) :-
@@ -5818,6 +5870,8 @@ current_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_pp_referenced_protocol_'(_, _)),
 	retractall('$lgt_pp_referenced_category_'(_, _)),
 	retractall('$lgt_pp_referenced_module_'(_, _)),
+	retractall('$lgt_pp_referenced_object_message_'(_, _, _)),
+	retractall('$lgt_pp_referenced_module_predicate_'(_, _, _)),
 	retractall('$lgt_pp_dynamic_'),
 	retractall('$lgt_pp_threaded_'),
 	retractall('$lgt_pp_synchronized_'),
@@ -9401,6 +9455,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	catch('$lgt_predicate_property'(':'(Module, Pred), meta_predicate(OriginalMeta)), _, fail) ->
 		% we're compiling a call to a module meta-predicate
 		'$lgt_add_referenced_module'(Module),
+		'$lgt_add_referenced_module_predicate'(Module, Pred),
 		(	'$lgt_pp_meta_predicate_'(':'(Module, Pred), ':'(Module, OverridingMeta)) ->
 			% we're overriding the original meta-predicate template
 			Meta = OverridingMeta
@@ -9424,6 +9479,7 @@ current_logtalk_flag(Flag, Value) :-
 		)
 	;	% we're compiling a call to a module predicate
 		'$lgt_add_referenced_module'(Module),
+		'$lgt_add_referenced_module_predicate'(Module, Pred),
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		TPred = ':'(Module, Pred),
 		DPred = '$lgt_debug'(goal(':'(Module, Pred), TPred), ExCtx)
@@ -11113,6 +11169,7 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 '$lgt_tr_msg'(Pred, Obj, TPred, This) :-
+	'$lgt_add_referenced_object_message'(Obj, Pred),
 	(	'$lgt_compiler_flag'(events, allow) ->
 		(	'$lgt_send_to_obj_static_binding'(Obj, Pred, This, Call) ->
 			TPred = '$lgt_guarded_method_call'(Obj, Pred, This, Call)

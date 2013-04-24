@@ -50,8 +50,11 @@ not used.
 * FIXED: Explicit-qualified calls to module predicates where the module or the
 predicate are only know at runtime could be miscompiled.
 
-* FIXED: The object and category properties `uses/3` and `use_module/3` would
-not be recognized as valid when queried explicitly.
+* IMPROVED: The `uses/3` and `use_module/3` entity properties now also return
+information on sufficiently instantiated `::/2` or `:/2` goals.
+
+* FIXED: The entity properties `uses/3` and `use_module/3` would not be
+recognized as valid when queried explicitly.
 
 * FIXED: Protocols also have the properties `uses/3` and `use_module/3` as
 they may contain `initialization/1` directives with `::/2` or `:/2` goals.
