@@ -13,14 +13,11 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.21,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2012/10/20,
+		date is 2013/04/27,
 		comment is 'Unit tests for the "tabling" example.'
 	]).
-
-	unit(fibonacci).
-	unit(paths).
 	
 	test(tabling_1) :-
 		setof(Y, paths::path(1, Y), Ys),
