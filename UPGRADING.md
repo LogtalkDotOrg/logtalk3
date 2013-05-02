@@ -35,7 +35,9 @@ Logtalk user folder by running the `logtalk_user_setup` shell script.
 advisable that you check your code against the new version.
 
 * It's usually a good idea to recompile your source files with the compiler
-flag `smart_compilation` turned off after upgrading to a new Logtalk release.
+flag `clean` turned on after upgrading to a new Logtalk release to ensure
+that all files will be recompiled disregarding any existing intermediate
+files.
 
 * In the case of incompatible changes between major Logtalk versions, you
 may be able to use conditional compilation directives to allow you code to

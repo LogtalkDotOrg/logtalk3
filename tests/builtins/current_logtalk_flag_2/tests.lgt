@@ -3,9 +3,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2012/11/19,
+		date is 2013/05/02,
 		comment is 'Unit tests for the current_logtalk_flag/2 built-in predicate.'
 	]).
 
@@ -34,8 +34,6 @@
 		test_flag(clean, on, off).
 	succeeds(debug_flag) :-
 		test_flag(debug, on, off).
-	succeeds(smart_compilation_flag) :-
-		test_flag(smart_compilation, on, off).
 
 	succeeds(complements_flag) :-
 		test_flag(complements, allow, deny).

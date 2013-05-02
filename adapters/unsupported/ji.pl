@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for JIProlog 3.1.0-1 or later versions
-%  Last updated on February 27, 2013
+%  Last updated on May 2, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -96,6 +96,62 @@ call(F, A1, A2, A3, A4, A5) :-
 call(F, A1, A2, A3, A4, A5, A6) :-
 	Call =.. [F, A1, A2, A3, A4, A5, A6],
 	Call.
+
+
+% format(+stream_or_alias, +character_code_list_or_atom, +list)
+
+format(Stream, Format, Arguments) :-
+	atom_chars(Format, Chars),
+	format_(Chars, Stream, Arguments).
+
+format_([], _, []).
+format_(['~', Spec| Chars], Stream, Arguments) :-
+	!,
+	format_spec_(Spec, Stream, Arguments, RemainingArguments),
+	format_(Chars, Stream, RemainingArguments).
+format_([Char| Chars], Stream, Arguments) :-
+	put_char(Stream, Char),
+	format_(Chars, Stream, Arguments).
+
+format_spec_('a', Stream, [Argument| Arguments], Arguments) :-
+%	atom(Argument),
+	write(Stream, Argument).
+format_spec_('c', Stream, [Argument| Arguments], Arguments) :-
+	put_code(Stream, Argument).
+format_spec_('s', Stream, [Argument| Arguments], Arguments) :-
+	atom_codes(Atom, Argument),
+	write(Stream, Atom).
+format_spec_('w', Stream, [Argument| Arguments], Arguments) :-
+	write(Stream, Argument).
+format_spec_('q', Stream, [Argument| Arguments], Arguments) :-
+	writeq(Stream, Argument).
+format_spec_('k', Stream, [Argument| Arguments], Arguments) :-
+	write_canonical(Stream, Argument).
+format_spec_('d', Stream, [Argument| Arguments], Arguments) :-
+	write(Stream, Argument).
+format_spec_('D', Stream, [Argument| Arguments], Arguments) :-
+	write(Stream, Argument).
+format_spec_('f', Stream, [Argument| Arguments], Arguments) :-
+	write(Stream, Argument).
+format_spec_('g', Stream, [Argument| Arguments], Arguments) :-
+	write(Stream, Argument).
+format_spec_('G', Stream, [Argument| Arguments], Arguments) :-
+	write(Stream, Argument).
+format_spec_('i', _, [_| Arguments], Arguments).
+format_spec_('n', Stream, Arguments, Arguments) :-
+	nl(Stream).
+format_spec_('~', Stream, Arguments, Arguments) :-
+	put_char(Stream, '~').
+
+
+% format(+character_code_list_or_atom, +list)
+
+format(Format, Arguments) :-
+	current_output(Stream),
+	format(Stream, Format, Arguments).
+
+
+% numbervars(?term, +integer, ?integer) -- built-in
 
 
 
@@ -193,7 +249,6 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 '$lgt_default_flag'(scratch_directory, './lgt_tmp/').
 '$lgt_default_flag'(report, on).
 '$lgt_default_flag'(clean, off).
-'$lgt_default_flag'(smart_compilation, off).
 '$lgt_default_flag'(reload, always).
 '$lgt_default_flag'(code_prefix, '$').
 '$lgt_default_flag'(optimize, on).

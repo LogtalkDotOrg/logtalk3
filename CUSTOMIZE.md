@@ -87,9 +87,6 @@ may want to change include:
 * `portability` and `underscore_variables`
     essential if you're writing portable Logtalk applications
 
-* `smart_compilation`
-    for avoiding recompilation of unchanged source files
-
 Check the `adapters/NOTES.txt` file for Prolog specific compatibility notes.
 Some back-end Prolog compilers don't support all the possible compilation
 flags values. In addition, some back-end Prolog compilers provide limited

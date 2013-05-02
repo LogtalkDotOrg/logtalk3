@@ -25,6 +25,20 @@ RELEASE NOTES
 =============
 
 
+3.00.0 Alpha 16 - May ??, 2013
+==============================
+
+Logtalk compiler and runtime
+----------------------------
+
+* REMOVED: The `smart_compilation` compiler flag is no longer available.
+
+* CHANGED: When the `clean` flag is turned off, the compiler now always checks
+if an up-to-date intermediate file exists before recompiling a source file. In
+addition, when the `clean` flag is turned on, the compiler will now ignore any
+existing intermediate files, forcing source file recompilation.
+
+
 3.00.0 Alpha 15 - April 29, 2013
 ================================
 

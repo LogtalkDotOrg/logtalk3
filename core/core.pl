@@ -1851,23 +1851,11 @@ logtalk_compile(Files, Flags) :-
 '$lgt_set_compiler_flags'(Flags) :-
 	'$lgt_assert_compiler_flags'(Flags),
 	(	'$lgt_pp_file_compiler_flag_'(debug, on) ->
-		% debug flag on requires the smart_compilation flag off and the reload flag set to always
-		retractall('$lgt_pp_file_compiler_flag_'(smart_compilation, _)),
-		assertz('$lgt_pp_file_compiler_flag_'(smart_compilation, off)),
+		% debug flag on requires the clean flag on and the reload flag set to always
+		retractall('$lgt_pp_file_compiler_flag_'(clean, _)),
+		assertz('$lgt_pp_file_compiler_flag_'(clean, on)),
 		retractall('$lgt_pp_file_compiler_flag_'(reload, _)),
 		assertz('$lgt_pp_file_compiler_flag_'(reload, always))
-	;	true
-	),
-	(	'$lgt_pp_file_compiler_flag_'(smart_compilation, on) ->
-		% smart_compilation flag on requires the clean flag off
-		retractall('$lgt_pp_file_compiler_flag_'(clean, _)),
-		assertz('$lgt_pp_file_compiler_flag_'(clean, off))
-	;	true
-	),
-	(	'$lgt_pp_file_compiler_flag_'(clean, on) ->
-		% clean flag on requires smart_compilation flag off
-		retractall('$lgt_pp_file_compiler_flag_'(smart_compilation, _)),
-		assertz('$lgt_pp_file_compiler_flag_'(smart_compilation, off))
 	;	true
 	),
 	(	'$lgt_pp_file_compiler_flag_'(hook, HookEntity) ->
@@ -2071,19 +2059,11 @@ set_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_current_flag_'(Flag, _)),
 	assertz('$lgt_current_flag_'(Flag, Value)),
 	(	Flag == debug, Value == on ->
-		% debug flag on requires the smart_compilation flag off and the reload flag set to always
-		retractall('$lgt_current_flag_'(smart_compilation, _)),
-		assertz('$lgt_current_flag_'(smart_compilation, off)),
+		% debug flag on requires the clean flag on and the reload flag set to always
+		retractall('$lgt_current_flag_'(clean, _)),
+		assertz('$lgt_current_flag_'(clean, on)),
 		retractall('$lgt_current_flag_'(reload, _)),
 		assertz('$lgt_current_flag_'(reload, always))
-	;	Flag == smart_compilation, Value == on ->
-		% smart_compilation flag on requires the clean flag off
-		retractall('$lgt_current_flag_'(clean, _)),
-		assertz('$lgt_current_flag_'(clean, off))
-	;	Flag == clean, Value == on ->
-		% clean flag on requires smart_compilation flag off
-		retractall('$lgt_current_flag_'(smart_compilation, _)),
-		assertz('$lgt_current_flag_'(smart_compilation, off))
 	;	Flag == hook ->
 		'$lgt_compile_hooks'(Value)
 	;	true
@@ -5031,7 +5011,9 @@ current_logtalk_flag(Flag, Value) :-
 % compiles to disk a source file
 
 '$lgt_compile_file'(SourceFile, PrologFile, Flags, Action) :-
-	(	'$lgt_compiler_flag'(smart_compilation, on),
+	(	% interpret a clean(on) setting as (also) meaning that any
+		% existing intermediate Prolog files should be disregarded 
+		'$lgt_compiler_flag'(clean, off),
 		'$lgt_file_exists'(PrologFile),
 		'$lgt_compare_file_modification_times'(Result, SourceFile, PrologFile),
 		Result \== (>) ->
@@ -5595,7 +5577,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	nonvar(Output) ->
 		catch(close(Output), _, true),
 		% try to delete the intermediate Prolog files (ignoring failure or error)
-		% in order to prevent problems when using the "smart_compilation" flag
+		% in order to prevent problems by mistaken the broken files by good ones
 		'$lgt_file_name'(prolog, Path, _, _, Prolog),
 		catch(('$lgt_delete_file'(Prolog) -> true; true), _, true),
 		% try to delete any Prolog dialect specific auxiliary files (ignoring failure or error)
@@ -16103,7 +16085,6 @@ current_logtalk_flag(Flag, Value) :-
 % other compilation flags
 '$lgt_valid_flag'(scratch_directory).
 '$lgt_valid_flag'(report).
-'$lgt_valid_flag'(smart_compilation).
 '$lgt_valid_flag'(reload).
 '$lgt_valid_flag'(hook).
 '$lgt_valid_flag'(code_prefix).
@@ -16175,9 +16156,6 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_valid_flag_value'(report, on) :- !.
 '$lgt_valid_flag_value'(report, warnings) :- !.
 '$lgt_valid_flag_value'(report, off) :- !.
-
-'$lgt_valid_flag_value'(smart_compilation, on) :- !.
-'$lgt_valid_flag_value'(smart_compilation, off) :- !.
 
 '$lgt_valid_flag_value'(clean, on) :- !.
 '$lgt_valid_flag_value'(clean, off) :- !.
@@ -18666,7 +18644,7 @@ current_logtalk_flag(Flag, Value) :-
 	% save the current directory
 	'$lgt_current_directory'(Current),
 	% define the compiler options to be used for compiling and loading the settings file
-	CompilerOptions = [report(off), smart_compilation(off), clean(on), reload(skip), scratch_directory(ScratchDirectory)],
+	CompilerOptions = [report(off), clean(on), reload(skip), scratch_directory(ScratchDirectory)],
 	(	% first lookup for a settings file in the startup directory
 		'$lgt_startup_directory'(Startup),
 		'$lgt_change_directory'(Startup),
