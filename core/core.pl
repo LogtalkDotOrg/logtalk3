@@ -16055,8 +16055,8 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_valid_protocol_property'(declares(_, _)).			% list of declaration properties for a predicate declared in the protocol
 '$lgt_valid_protocol_property'(info(_)).				% list of pairs with user-defined protocol documentation
 '$lgt_valid_protocol_property'(number_of_clauses(_)).	% number of predicate clauses
-'$lgt_valid_protocol_property'(uses(_, _, _)).			% dependency on an object predicate (i.e. the category sends a message to the object)
-'$lgt_valid_protocol_property'(use_module(_, _, _)).	% dependency on a module predicate (i.e. the category makes an explicit-qualified module call)
+'$lgt_valid_protocol_property'(uses(_, _, _)).			% dependency on an object predicate (e.g. a message to an object as an initialization goal)
+'$lgt_valid_protocol_property'(use_module(_, _, _)).	% dependency on a module predicate (e.g. an explicit-qualified module call as an initialization goal)
 
 
 
