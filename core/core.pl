@@ -5221,7 +5221,7 @@ current_logtalk_flag(Flag, Value) :-
 	% set the initial compilation context for compiling the end_of_file term
 	'$lgt_comp_ctx_mode'(Ctx, compile(regular)),
 	'$lgt_tr_file_term'(end_of_file, Ctx),
-	'$lgt_add_entity_source_data'(end, Module),
+	'$lgt_add_entity_properties'(end, Module),
 	'$lgt_tr_entity'(object, Module, Ctx),
 	'$lgt_print_message'(silent(compiling), core, compiled_entity(module, Module)),
 	!.
@@ -5373,86 +5373,77 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_add_entity_source_data'(@atom, @entity_identifier)
-%
-% adds entity source data
-
-'$lgt_add_entity_source_data'(start, Entity) :-
-	% at opening entity directive
-	(	'$lgt_compiler_flag'(source_data, on) ->
-		'$lgt_add_entity_properties'(start, Entity)
-	;	true
-	).
-
-'$lgt_add_entity_source_data'(end, Entity) :-
-	% at closing entity directive
-	(	'$lgt_compiler_flag'(source_data, on) ->
-		'$lgt_add_entity_predicate_properties'(Entity),
-		'$lgt_add_entity_properties'(end, Entity)
-	;	true
-	).
-
-
-
 % '$lgt_add_entity_properties'(@atom, @entity_identifier)
 %
-% adds entity properties related to the entity source file
+% adds entity properties
 
 '$lgt_add_entity_properties'(start, Entity) :-
+	% at opening entity directive
 	'$lgt_pp_file_directory_path_flags_'(File, Directory, _, _),
 	'$lgt_pp_term_position_'((Start - _)),
 	assertz('$lgt_pp_entity_property_'(Entity, file_lines(File, Directory, Start, _))).
 
 '$lgt_add_entity_properties'(end, Entity) :-
+	% at closing entity directive
 	retract('$lgt_pp_entity_property_'(Entity, file_lines(File, Directory, Start, _))),
 	'$lgt_pp_term_position_'((_ - End)),
 	assertz('$lgt_pp_entity_property_'(Entity, file_lines(File, Directory, Start, End))),
-	fail.
+	(	'$lgt_compiler_flag'(source_data, on) ->
+		'$lgt_add_entity_predicate_properties'(Entity),
+		'$lgt_add_entity_source_data'(Entity)
+	;	true
+	).
 
-'$lgt_add_entity_properties'(end, Entity) :-
+
+
+% '$lgt_add_entity_source_data'(@entity_identifier)
+%
+% adds entity properties related to the entity source file
+
+'$lgt_add_entity_source_data'(Entity) :-
 	'$lgt_pp_uses_predicate_'(Object, Original, Alias),
 	functor(Original, OriginalFunctor, OriginalArity),
 	functor(Alias, AliasFunctor, AliasArity),
 	assertz('$lgt_pp_entity_property_'(Entity, uses(Object, OriginalFunctor/OriginalArity, AliasFunctor/AliasArity))),
 	fail.
 
-'$lgt_add_entity_properties'(end, Entity) :-
+'$lgt_add_entity_source_data'(Entity) :-
 	'$lgt_pp_referenced_object_message_'(Object, Functor/Arity, _),
 	assertz('$lgt_pp_entity_property_'(Entity, uses(Object, Functor/Arity, Functor/Arity))),
 	fail.
 
-'$lgt_add_entity_properties'(end, Entity) :-
+'$lgt_add_entity_source_data'(Entity) :-
 	'$lgt_pp_uses_non_terminal_'(Object, Original, Alias),
 	functor(Original, OriginalFunctor, OriginalArity),
 	functor(Alias, AliasFunctor, AliasArity),
 	assertz('$lgt_pp_entity_property_'(Entity, uses(Object, OriginalFunctor//OriginalArity, AliasFunctor//AliasArity))),
 	fail.
 
-'$lgt_add_entity_properties'(end, Entity) :-
+'$lgt_add_entity_source_data'(Entity) :-
 	'$lgt_pp_use_module_predicate_'(Module, Original, Alias),
 	functor(Original, OriginalFunctor, OriginalArity),
 	functor(Alias, AliasFunctor, AliasArity),
 	assertz('$lgt_pp_entity_property_'(Entity, use_module(Module, OriginalFunctor/OriginalArity, AliasFunctor/AliasArity))),
 	fail.
 
-'$lgt_add_entity_properties'(end, Entity) :-
+'$lgt_add_entity_source_data'(Entity) :-
 	'$lgt_pp_referenced_module_predicate_'(Module, Functor/Arity, _),
 	assertz('$lgt_pp_entity_property_'(Entity, use_module(Module, Functor/Arity, Functor/Arity))),
 	fail.
 
-'$lgt_add_entity_properties'(end, Entity) :-
+'$lgt_add_entity_source_data'(Entity) :-
 	'$lgt_pp_use_module_non_terminal_'(Module, Original, Alias),
 	functor(Original, OriginalFunctor, OriginalArity),
 	functor(Alias, AliasFunctor, AliasArity),
 	assertz('$lgt_pp_entity_property_'(Entity, use_module(Module, OriginalFunctor//OriginalArity, AliasFunctor//AliasArity))),
 	fail.
 
-'$lgt_add_entity_properties'(end, Entity) :-
+'$lgt_add_entity_source_data'(Entity) :-
 	'$lgt_pp_info_'(Info),
 	assertz('$lgt_pp_entity_property_'(Entity, info(Info))),
 	fail.
 
-'$lgt_add_entity_properties'(end, Entity) :-
+'$lgt_add_entity_source_data'(Entity) :-
 	findall(Define, '$lgt_pp_predicate_property_'(Entity, _, number_of_clauses(Define)), Defines),
 	'$lgt_sum_list'(Defines, TotalDefines),
 	findall(Provide, '$lgt_pp_predicate_property_'(_, _, number_of_clauses_from(Provide, Entity)), Provides),
@@ -5461,7 +5452,7 @@ current_logtalk_flag(Flag, Value) :-
 	assertz('$lgt_pp_entity_property_'(Entity, number_of_clauses(Total))),
 	fail.
 
-'$lgt_add_entity_properties'(end, _).
+'$lgt_add_entity_source_data'(_).
 
 
 
@@ -6599,14 +6590,14 @@ current_logtalk_flag(Flag, Value) :-
 			'$lgt_print_message'(silent(compiling), core, compiling_entity(object, Obj))
 		;	true
 		),
-		'$lgt_add_entity_source_data'(start, Obj),
+		'$lgt_add_entity_properties'(start, Obj),
 		'$lgt_tr_object_identifier'(Obj, Relations),
 		'$lgt_tr_object_relations'(Relations, Obj)
 	).
 
 '$lgt_tr_logtalk_directive'(end_object, Ctx) :-
 	(	'$lgt_pp_object_'(Obj, _, _, _, _, _, _, _, _, _, _) ->
-		'$lgt_add_entity_source_data'(end, Obj),
+		'$lgt_add_entity_properties'(end, Obj),
 		'$lgt_tr_entity'(object, Obj, Ctx),
 		'$lgt_restore_file_operator_table',
 		(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
@@ -6648,14 +6639,14 @@ current_logtalk_flag(Flag, Value) :-
 			'$lgt_print_message'(silent(compiling), core, compiling_entity(protocol, Ptc))
 		;	true
 		),
-		'$lgt_add_entity_source_data'(start, Ptc),
+		'$lgt_add_entity_properties'(start, Ptc),
 		'$lgt_tr_protocol_identifier'(Ptc),
 		'$lgt_tr_protocol_relations'(Relations, Ptc)
 	).
 
 '$lgt_tr_logtalk_directive'(end_protocol, Ctx) :-
 	(	'$lgt_pp_protocol_'(Ptc, _, _, _, _) ->
-		'$lgt_add_entity_source_data'(end, Ptc),
+		'$lgt_add_entity_properties'(end, Ptc),
 		'$lgt_tr_entity'(protocol, Ptc, Ctx),
 		'$lgt_restore_file_operator_table',
 		(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
@@ -6700,14 +6691,14 @@ current_logtalk_flag(Flag, Value) :-
 			'$lgt_print_message'(silent(compiling), core, compiling_entity(category, Ctg))
 		;	true
 		),
-		'$lgt_add_entity_source_data'(start, Ctg),
+		'$lgt_add_entity_properties'(start, Ctg),
 		'$lgt_tr_category_identifier'(Ctg),
 		'$lgt_tr_category_relations'(Relations, Ctg)
 	).
 
 '$lgt_tr_logtalk_directive'(end_category, Ctx) :-
 	(	'$lgt_pp_category_'(Ctg, _, _, _, _, _) ->
-		'$lgt_add_entity_source_data'(end, Ctg),
+		'$lgt_add_entity_properties'(end, Ctg),
 		'$lgt_tr_entity'(category, Ctg, Ctx),
 		'$lgt_restore_file_operator_table',
 		(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
@@ -6734,7 +6725,7 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_print_message'(silent(compiling), core, compiling_entity(module, Module))
 	;	true
 	),
-	'$lgt_add_entity_source_data'(start, Module),
+	'$lgt_add_entity_properties'(start, Module),
 	'$lgt_tr_object_identifier'(Module, []),
 	% make the export list public predicates
 	'$lgt_tr_logtalk_directive'(public(Exports), Ctx).
