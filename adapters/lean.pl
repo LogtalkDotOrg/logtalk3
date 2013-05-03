@@ -344,7 +344,6 @@ to_engine(Interactor, Pattern, Goal) :-
 	).
 '$lgt_default_flag'(report, on).
 '$lgt_default_flag'(clean, on).
-'$lgt_default_flag'(reload, always).
 '$lgt_default_flag'(code_prefix, '$').
 '$lgt_default_flag'(optimize, on).
 '$lgt_default_flag'(source_data, on).

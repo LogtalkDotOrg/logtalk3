@@ -31,7 +31,8 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* REMOVED: The `smart_compilation` compiler flag is no longer available.
+* REMOVED: The `smart_compilation` and `reload` compiler flags are no longer
+available.
 
 * CHANGED: When the `clean` flag is turned off, the compiler now always checks
 if an up-to-date intermediate file exists before recompiling a source file. In

@@ -40,5 +40,6 @@
 		dictionaryp, bintree, rbtree,
 		setp, set, set1,
 		heapp, heaps,
-		comparingp],
-		[reload(skip)])).	% allow for static binding
+		comparingp
+	])
+).

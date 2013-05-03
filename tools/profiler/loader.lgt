@@ -22,16 +22,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization(logtalk_load(profilerp, [reload(skip)])).
+:- initialization(logtalk_load(profilerp)).
 
 
 :- if(current_logtalk_flag(prolog_dialect, yap)).
 
-	:- initialization(logtalk_load(yap_profiler, [reload(skip)])).
+	:- initialization(logtalk_load(yap_profiler)).
 
 :- elif(current_logtalk_flag(prolog_dialect, sicstus)).
 
-	:- initialization(logtalk_load(sicstus_profiler, [reload(skip)])).
+	:- initialization(logtalk_load(sicstus_profiler)).
 
 :- elif(current_logtalk_flag(prolog_dialect, swi)).
 

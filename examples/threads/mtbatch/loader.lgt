@@ -20,7 +20,7 @@
 	logtalk_load(fft(loader)),
 	logtalk_load(integration(loader)),
 	logtalk_load(integration2d(loader)),
-	logtalk_load(roots(loader), [reload(skip)]),
+	logtalk_load(roots(loader)),
 	logtalk_load([
 		searching(state_space),
 		searching(heuristic_state_space),
@@ -31,6 +31,7 @@
 		searching(depth_first1),
 		searching(heuristic_search1),
 		searching(best_first1),
-		searching(hill_climbing1)], [reload(skip)]),
+		searching(hill_climbing1)
+	]),
 	logtalk_load(mtbatch, [misspelt_calls(silent)])
 )). 

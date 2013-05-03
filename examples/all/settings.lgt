@@ -118,7 +118,6 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 :- initialization((
 	set_logtalk_flag(debug, on),
 	set_logtalk_flag(clean, on),
-	set_logtalk_flag(reload, always),
 	set_logtalk_flag(unknown_entities, warning),
 	set_logtalk_flag(misspelt_calls, warning),
 	set_logtalk_flag(singleton_variables, warning),

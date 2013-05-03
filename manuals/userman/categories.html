@@ -367,7 +367,7 @@ It is also possible to perform direct calls to predicates from imported categori
 
 :- end_object.</pre>
 <p>
-This alternative should only be used when the user knows a priori that the category predicates will not be specialized or redefined by descendant objects of the object importing the category. Its advantage is that, whenever possible, the Logtalk compiler will optimize the calls by using static binding (requires separate loading of the categories using the <code>reload(skip)</code> compiler flag). When dynamic binding is used due to the lack of sufficient information at compilation time, the performance is similar to calling the category predicate using a message to <em>self</em> (in both cases a predicate lookup caching mechanism is used).
+This alternative should only be used when the user knows a priori that the category predicates will not be specialized or redefined by descendant objects of the object importing the category. Its advantage is that, whenever possible, the Logtalk compiler will optimize the calls by using static binding. When dynamic binding is used due to the lack of sufficient information at compilation time, the performance is similar to calling the category predicate using a message to <em>self</em> (in both cases a predicate lookup caching mechanism is used).
 </p>
 
 <h2 id="categories_parametric">Parametric categories</h2>

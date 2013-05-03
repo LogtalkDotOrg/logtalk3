@@ -23,6 +23,6 @@
 
 
 :- initialization((
-	logtalk_load(debuggerp, [reload(skip)]),
-	logtalk_load(debugger, [reload(skip)])
+	logtalk_load(debuggerp),
+	logtalk_load(debugger)
 )).

@@ -321,6 +321,7 @@
 :- dynamic('$lgt_pp_hook_value_annotation_'/4).				% '$lgt_pp_hook_value_annotation_'(Annotation, Value, Goal, Head)
 :- dynamic('$lgt_pp_hook_body_annotation_'/3).				% '$lgt_pp_hook_body_annotation_'(Annotation, Left, Right)
 
+:- dynamic('$lgt_pp_final_'/0).								% '$lgt_pp_final_'
 :- dynamic('$lgt_pp_dynamic_'/0).							% '$lgt_pp_dynamic_'
 :- dynamic('$lgt_pp_threaded_'/0).							% '$lgt_pp_threaded_'
 :- dynamic('$lgt_pp_synchronized_'/0).						% '$lgt_pp_synchronized_'
@@ -1851,11 +1852,9 @@ logtalk_compile(Files, Flags) :-
 '$lgt_set_compiler_flags'(Flags) :-
 	'$lgt_assert_compiler_flags'(Flags),
 	(	'$lgt_pp_file_compiler_flag_'(debug, on) ->
-		% debug flag on requires the clean flag on and the reload flag set to always
+		% debug flag on requires the clean flag on
 		retractall('$lgt_pp_file_compiler_flag_'(clean, _)),
-		assertz('$lgt_pp_file_compiler_flag_'(clean, on)),
-		retractall('$lgt_pp_file_compiler_flag_'(reload, _)),
-		assertz('$lgt_pp_file_compiler_flag_'(reload, always))
+		assertz('$lgt_pp_file_compiler_flag_'(clean, on))
 	;	true
 	),
 	(	'$lgt_pp_file_compiler_flag_'(hook, HookEntity) ->
@@ -2059,11 +2058,9 @@ set_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_current_flag_'(Flag, _)),
 	assertz('$lgt_current_flag_'(Flag, Value)),
 	(	Flag == debug, Value == on ->
-		% debug flag on requires the clean flag on and the reload flag set to always
+		% debug flag on requires the clean flag on
 		retractall('$lgt_current_flag_'(clean, _)),
-		assertz('$lgt_current_flag_'(clean, on)),
-		retractall('$lgt_current_flag_'(reload, _)),
-		assertz('$lgt_current_flag_'(reload, always))
+		assertz('$lgt_current_flag_'(clean, on))
 	;	Flag == hook ->
 		'$lgt_compile_hooks'(Value)
 	;	true
@@ -4831,17 +4828,12 @@ current_logtalk_flag(Flag, Value) :-
 	% it can be a loader file loading other files in its directory
 	'$lgt_current_directory'(Current),
 	'$lgt_change_directory'(Directory),
-	(	'$lgt_loaded_file_'(Basename, Directory, PreviousFlags, _) ->
-		% we're attempting to reload a source file
-		(	'$lgt_member'(reload(skip), PreviousFlags) ->
-			'$lgt_print_message'(silent(loading), core, skipping_loading_file(SourceFile, Flags))
-		;	'$lgt_compiler_flag'(reload, skip) ->
-			'$lgt_print_message'(silent(loading), core, skipping_loading_file(SourceFile, Flags))
-		;	'$lgt_print_message'(silent(loading), core, reloading_file(SourceFile, Flags)),
-			'$lgt_compile_file'(SourceFile, PrologFile, Flags, loading),
-			'$lgt_load_compiled_file'(File, SourceFile, PrologFile),
-			'$lgt_print_message'(information(loading), core, reloaded_file(SourceFile, Flags))
-		)
+	(	'$lgt_loaded_file_'(Basename, Directory, _, _) ->
+		% we're reloading a source file
+		'$lgt_print_message'(silent(loading), core, reloading_file(SourceFile, Flags)),
+		'$lgt_compile_file'(SourceFile, PrologFile, Flags, loading),
+		'$lgt_load_compiled_file'(File, SourceFile, PrologFile),
+		'$lgt_print_message'(information(loading), core, reloaded_file(SourceFile, Flags))
 	;	% first time loading this source file
 		'$lgt_print_message'(silent(loading), core, loading_file(SourceFile, Flags)),
 		'$lgt_compile_file'(SourceFile, PrologFile, Flags, loading),
@@ -5654,7 +5646,7 @@ current_logtalk_flag(Flag, Value) :-
 		Dynamic = 2						% 0b000000010
 	;	Dynamic = 0
 	),
-	(	\+ '$lgt_pp_dynamic_', '$lgt_compiler_flag'(reload, skip) ->
+	(	\+ '$lgt_pp_final_' ->
 		Final = 1						% 0b000000001
 	;	Final = 0
 	),
@@ -5677,7 +5669,7 @@ current_logtalk_flag(Flag, Value) :-
 		Dynamic = 2						% 0b000000010
 	;	Dynamic = 0
 	),
-	(	\+ '$lgt_pp_dynamic_', '$lgt_compiler_flag'(reload, skip) ->
+	(	\+ '$lgt_pp_final_' ->
 		Final = 1						% 0b000000001
 	;	Final = 0
 	),
@@ -5716,7 +5708,7 @@ current_logtalk_flag(Flag, Value) :-
 		Dynamic = 2						% 0b000000010
 	;	Dynamic = 0
 	),
-	(	\+ '$lgt_pp_dynamic_', '$lgt_compiler_flag'(reload, skip) ->
+	(	\+ '$lgt_pp_final_' ->
 		Final = 1						% 0b000000001
 	;	Final = 0
 	),
@@ -16016,7 +16008,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_valid_protocol_property'(@nonvar)
 
-'$lgt_valid_protocol_property'(final).					% final protocol (do not reload)
+'$lgt_valid_protocol_property'(final).					% final protocol
 '$lgt_valid_protocol_property'((dynamic)).				% dynamic protocol (can be abolished at runtime)
 '$lgt_valid_protocol_property'(static).					% static protocol
 '$lgt_valid_protocol_property'(debugging).				% protocol compiled in debug mode
@@ -16076,7 +16068,6 @@ current_logtalk_flag(Flag, Value) :-
 % other compilation flags
 '$lgt_valid_flag'(scratch_directory).
 '$lgt_valid_flag'(report).
-'$lgt_valid_flag'(reload).
 '$lgt_valid_flag'(hook).
 '$lgt_valid_flag'(code_prefix).
 '$lgt_valid_flag'(optimize).
@@ -16150,9 +16141,6 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_valid_flag_value'(clean, on) :- !.
 '$lgt_valid_flag_value'(clean, off) :- !.
-
-'$lgt_valid_flag_value'(reload, always) :- !.
-'$lgt_valid_flag_value'(reload, skip) :- !.
 
 '$lgt_valid_flag_value'(underscore_variables, dont_care) :- !.
 '$lgt_valid_flag_value'(underscore_variables, singletons) :- !.
@@ -18613,7 +18601,7 @@ current_logtalk_flag(Flag, Value) :-
 		[	logtalk_home('core/core_messages'), logtalk_home('core/expanding'),
 			logtalk_home('core/monitoring'), logtalk_home('core/forwarding')
 		],
-		[report(off), clean(on), reload(skip), scratch_directory(ScratchDirectory)]
+		[report(off), clean(on), scratch_directory(ScratchDirectory)]
 	).
 
 
@@ -18635,7 +18623,7 @@ current_logtalk_flag(Flag, Value) :-
 	% save the current directory
 	'$lgt_current_directory'(Current),
 	% define the compiler options to be used for compiling and loading the settings file
-	CompilerOptions = [report(off), clean(on), reload(skip), scratch_directory(ScratchDirectory)],
+	CompilerOptions = [report(off), clean(on), scratch_directory(ScratchDirectory)],
 	(	% first lookup for a settings file in the startup directory
 		'$lgt_startup_directory'(Startup),
 		'$lgt_change_directory'(Startup),

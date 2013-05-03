@@ -19,7 +19,7 @@ load_interpreters([I|Is]) :-
 	logtalk_load(
 		[library(heapp),
 		 library(heaps)],
-		[report(off), reload(skip)]
+		[report(off)]
 	),
 	logtalk_load(counter, [report(warnings), portability(warning)]),
 	logtalk_load(magic, [report(warnings), portability(warning)]),

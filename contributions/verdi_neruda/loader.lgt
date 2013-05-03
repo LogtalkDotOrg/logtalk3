@@ -8,7 +8,7 @@
 load_interpreters([]).
 load_interpreters([I|Is]) :-
 	functor(I, Name, _),
-	logtalk_load(Name, [hook(debug_expansion(production)), report(off), reload(skip)]),
+	logtalk_load(Name, [hook(debug_expansion(production)), report(off)]),
 	load_interpreters(Is).
 
 :- initialization((
@@ -26,22 +26,22 @@ load_interpreters([I|Is]) :-
 	logtalk_load(
 		[library(heapp),
 		 library(heaps)],
-		[report(off), reload(skip)]
+		[report(off)]
 	),
-	logtalk_load(counter, [report(off), reload(skip)]),
-	logtalk_load(magic, [report(off), reload(skip)]),
-	logtalk_load(flatting, [report(off), reload(skip)]),
-	logtalk_load(debug_expansion, [report(off), reload(skip)]),
-	logtalk_load(rule_expansion, [report(off), reload(skip)]),
-	logtalk_load(magic_expansion, [report(off), reload(skip)]),
-	logtalk_load(shell_expansion, [report(off), reload(skip)]),
-	logtalk_load(heuristic_expansion, [report(off), reload(skip)]),
-	logtalk_load(benchmark_generators, [report(off), reload(skip)]),
-	logtalk_load(databasep, [report(off), reload(skip)]),
-	logtalk_load(demodb, [hook(rule_expansion(production)), report(off), reload(skip)]),
-	logtalk_load(interpreterp, [report(off), reload(skip)]),
-	logtalk_load(best_first, [report(off), reload(skip)]),
+	logtalk_load(counter, [report(off)]),
+	logtalk_load(magic, [report(off)]),
+	logtalk_load(flatting, [report(off)]),
+	logtalk_load(debug_expansion, [report(off)]),
+	logtalk_load(rule_expansion, [report(off)]),
+	logtalk_load(magic_expansion, [report(off)]),
+	logtalk_load(shell_expansion, [report(off)]),
+	logtalk_load(heuristic_expansion, [report(off)]),
+	logtalk_load(benchmark_generators, [report(off)]),
+	logtalk_load(databasep, [report(off)]),
+	logtalk_load(demodb, [hook(rule_expansion(production)), report(off)]),
+	logtalk_load(interpreterp, [report(off)]),
+	logtalk_load(best_first, [report(off)]),
 	pairs::keys(Interpreters, Interpreters1),
 	load_interpreters(Interpreters1),
-	logtalk_load(shell, [hook(debug_expansion(production)), report(off), reload(skip)]),
+	logtalk_load(shell, [hook(debug_expansion(production)), report(off)]),
 	shell(Interpreters)::init)).

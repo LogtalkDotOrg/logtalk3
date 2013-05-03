@@ -241,7 +241,6 @@ forall(Generate, Test) :-
 '$lgt_default_flag'(scratch_directory, './lgt_tmp/').
 '$lgt_default_flag'(report, on).
 '$lgt_default_flag'(clean, off).
-'$lgt_default_flag'(reload, always).
 '$lgt_default_flag'(code_prefix, '$').
 '$lgt_default_flag'(optimize, on).
 '$lgt_default_flag'(source_data, on).

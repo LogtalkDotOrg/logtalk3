@@ -44,9 +44,6 @@
 	succeeds(events_flag) :-
 		test_flag(events, allow, deny).
 
-	succeeds(reload_flag) :-
-		test_flag(reload, always, skip).
-
 	succeeds(modules_flag) :-
 		current_logtalk_flag(modules, Value),
 		once((Value == supported; Value == unsupported)).

@@ -10,5 +10,5 @@
 
 
 :- initialization(
-	logtalk_load(tak, [reload(skip)])
+	logtalk_load(tak)
 ).

@@ -1,5 +1,5 @@
 
 :- initialization((
-	logtalk_load(read_file, [reload(skip)]),
-	logtalk_load(pddl, [reload(skip)])
+	logtalk_load(read_file),
+	logtalk_load(pddl)
 )).

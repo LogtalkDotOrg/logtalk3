@@ -11,5 +11,5 @@
 
 :- initialization((
 	logtalk_load(library(random_loader)),
-	logtalk_load([generator, qsort, msort], [reload(skip)])
+	logtalk_load([generator, qsort, msort])
 )).

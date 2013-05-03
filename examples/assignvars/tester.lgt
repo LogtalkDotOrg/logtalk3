@@ -12,7 +12,7 @@
 :- initialization((
 	set_logtalk_flag(report, warnings),
 	logtalk_load(lgtunit(loader)),
-	logtalk_load(library(assignvars), [reload(skip)]),	% allow for static binding
+	logtalk_load(library(assignvars)),
 	logtalk_load([fsm3, rectangle3], [debug(on), source_data(on)]),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run

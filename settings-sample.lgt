@@ -124,7 +124,6 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 :- initialization((
 	set_logtalk_flag(debug, on),
 	set_logtalk_flag(clean, on),
-	set_logtalk_flag(reload, always),
 	set_logtalk_flag(unknown_entities, warning),
 	set_logtalk_flag(misspelt_calls, warning),
 	set_logtalk_flag(singleton_variables, warning),
@@ -155,7 +154,6 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 	:- initialization((
 		set_logtalk_flag(debug, off),
 		set_logtalk_flag(clean, on),
-		set_logtalk_flag(reload, always),
 		set_logtalk_flag(unknown_entities, warning),
 		set_logtalk_flag(misspelt_calls, warning),
 		set_logtalk_flag(singleton_variables, warning),
@@ -176,7 +174,6 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 :- initialization((
 	set_logtalk_flag(debug, off),
 	set_logtalk_flag(clean, on),
-	set_logtalk_flag(reload, always),
 	set_logtalk_flag(code_prefix, '.'),
 	set_logtalk_flag(optimize, off),
 	set_logtalk_flag(source_data, on),
@@ -229,16 +226,6 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 	set_logtalk_flag(events, deny),
 	set_logtalk_flag(complements, deny),
 	set_logtalk_flag(dynamic_declarations, deny)
-)).
-*/
-
-
-%  To enable static binding by default when loading finished applications,
-%  uncomment the following lines:
-
-/*
-:- initialization((
-	set_logtalk_flag(reload, skip)
 )).
 */
 

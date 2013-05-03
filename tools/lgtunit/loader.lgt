@@ -24,5 +24,5 @@
 
 :- initialization((
 	logtalk_load(library(dates_loader)),
-	logtalk_load([lgtunit, lgtunit_messages], [reload(skip)])	% allow for static binding
+	logtalk_load([lgtunit, lgtunit_messages])
 )).

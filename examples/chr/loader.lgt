@@ -29,7 +29,7 @@
 		(Dialect == sicstus; Dialect == swi; Dialect == yap))).
 
 	:- initialization((
-		logtalk_load(chr_hook, [source_data(off), reload(skip)]),		% allow for static binding
+		logtalk_load(chr_hook, [source_data(off)]),
 		% only a single object or category containing CHR code can be loaded at a time
 		logtalk_load(dom, [source_data(off), hook(chr_hook)])
 %		logtalk_load(family, [source_data(off), hook(chr_hook)]),
@@ -43,7 +43,7 @@
 :- elif(current_logtalk_flag(prolog_dialect, qp)).
 
 	:- initialization((
-		logtalk_load(chr_hook, [reload(skip)]),		% allow for static binding
+		logtalk_load(chr_hook),
 		logtalk_load(dom, [hook(chr_hook)]),
 		logtalk_load(family, [hook(chr_hook)]),
 		logtalk_load(fib, [hook(chr_hook)]),

@@ -340,10 +340,6 @@ Note that the scope of the <code>set_logtalk_flag/2</code> directive is local to
 			<dd>Controls the compilation of source files in debug mode (the Logtalk default debugger can only be used with files compiled in this mode). Possible option values are <code>on</code> and <code>off</code> (the usual default).</dd>
 	</dl>
 	<dl>
-		<dt><code>reload(Option)</code></dt>
-			<dd>Defines the reloading behavior for source files. Possible option values are <code>skip</code> (skip loading of already loaded files; this value can be used to get similar functionality to the Prolog directive <code>ensure_loaded/1</code>) and <code>always</code> (always reload files; the usual default when developing). This option must not be used when recompiling source files in debug mode (see <code>debug/1</code> option above).</dd>
-	</dl>
-	<dl>
 		<dt><code>hook(Object)</code></dt>
 			<dd>Allows the definition of compiler hooks that are called for each term read form a source file and for each compiled goal. This option specifies an object (which can be the pseudo-object <code>user</code>) implementing the <code>expanding</code> built-in protocol. It's also possible to specify a Prolog module instead of a Logtalk object but the module must be pre-loaded and its identifier must be different from any object identifier. The object is expected to define clauses for the <a title="Consult reference manual" href="../refman/methods/term_expansion2.html"><code>term_expansion/2</code></a> and <a title="Consult reference manual" href="../refman/methods/goal_expansion2.html"><code>goal_expansion/2</code></a> predicates. In the case of the <code>term_expansion/2</code> predicate, the first argument is the term read form the source file while the second argument returns a list of terms corresponding to the expansion of the first argument. In the case of the <code>goal_expansion/2</code> predicate, the second argument should be a goal resulting from the expansion of the goal in the first argument. The predicate <code>goal_expansion/2</code> is called on the expanded goals so care must be taken to avoid compilation loops.</dd>
 	</dl>

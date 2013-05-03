@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/04/23,
+		date is 2013/05/03,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -48,9 +48,6 @@
 	:- dynamic(logtalk::message_tokens//2).
 
 	% file compilation and loading messages
-
-	logtalk::message_tokens(skipping_loading_file(File, _Flags), core) -->
-		['[ skipping reloading of ~w ]'-[File], nl].
 
 	logtalk::message_tokens(loading_file(File, _Flags), core) -->
 		['[ loading ~w ...  ]'-[File], nl].
@@ -133,7 +130,6 @@
 		 current_logtalk_flag(source_data, SourceData),
 		 current_logtalk_flag(debug, Debug),
 		 current_logtalk_flag(clean, Clean),
-		 current_logtalk_flag(reload, Reload),
 		 current_logtalk_flag(prolog_compiler, PrologCompiler),
 		 current_logtalk_flag(prolog_loader, PrologLoader),
 		 current_logtalk_flag(prolog_dialect, PrologDialect),
@@ -155,7 +151,7 @@
 			'  report: ~w, scratch_directory: ~w'-[Report, ScratchDirectory], nl,
 			'  code_prefix: ~q, hook: ~w'-[Code, Hook], nl,
 			'  optimize: ~w, source_data: ~w, debug: ~w'-[Optimize, SourceData, Debug], nl,
-			'  clean: ~w, reload: ~w'-[Clean, Reload], nl,
+			'  clean: ~w'-[Clean], nl,
 			'Back-end Prolog compiler flags:'-[], nl,
 			'  prolog_compiler: ~w'-[PrologCompiler], nl,
 			'  prolog_loader:   ~w'-[PrologLoader], nl,

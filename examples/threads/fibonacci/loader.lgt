@@ -10,5 +10,5 @@
 
 
 :- initialization(
-	logtalk_load(fibonacci, [reload(skip)])
+	logtalk_load(fibonacci)
 ).

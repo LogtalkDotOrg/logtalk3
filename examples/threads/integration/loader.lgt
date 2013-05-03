@@ -10,7 +10,7 @@
 
 
 :- initialization((
-	logtalk_load(functions,   [reload(skip)]),	% allow for static binding
-	logtalk_load(areas,       [reload(skip)]),	% allow for static binding
-	logtalk_load(integration, [reload(skip)])
+	logtalk_load(functions),
+	logtalk_load(areas),
+	logtalk_load(integration)
 )).

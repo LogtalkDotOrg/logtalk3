@@ -10,6 +10,6 @@
 
 
 :- initialization((
-	logtalk_load(library(random_loader), [reload(skip)]),
+	logtalk_load(library(random_loader)),
 	logtalk_load(beatles)
 )).

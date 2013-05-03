@@ -24,7 +24,7 @@
 
 	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == eclipse; Dialect == sicstus; Dialect == swi; Dialect == yap))).
 		:- initialization((
-			logtalk_load(library(streamvars), [reload(skip)]),
+			logtalk_load(library(streamvars)),
 			logtalk_load([pta, train, cotrain])
 		)).
 	:- endif.

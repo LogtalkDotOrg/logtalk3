@@ -11,6 +11,6 @@
 
 :- initialization((
 	logtalk_load(library(random_loader)),
-	logtalk_load(cgenerator, [reload(skip)]),	% allow for static binding
-	logtalk_load(fft, [reload(skip)])
+	logtalk_load(cgenerator),
+	logtalk_load(fft)
 )).
