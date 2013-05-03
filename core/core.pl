@@ -11332,7 +11332,7 @@ current_logtalk_flag(Flag, Value) :-
 		TPred = '$lgt_obj_super_call'(Super, Pred, ExCtx)
 	;	callable(Pred) ->
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-		(	'$lgt_related_entities_are_static_binding',
+		(	'$lgt_related_entities_are_static',
 			'$lgt_obj_super_call_static_binding'(Obj, Pred, ExCtx, TPred) ->
 			true
 		;	TPred = '$lgt_obj_super_call_'(Super, Pred, ExCtx)
@@ -11351,7 +11351,7 @@ current_logtalk_flag(Flag, Value) :-
 		TPred = '$lgt_ctg_super_call'(Ctg, Pred, ExCtx)
 	;	callable(Pred) ->
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-		(	'$lgt_related_entities_are_static_binding',
+		(	'$lgt_related_entities_are_static',
 			'$lgt_ctg_super_call_static_binding'(Ctg, Pred, ExCtx, TPred) ->
 			true
 		;	TPred = '$lgt_ctg_super_call_'(Ctg, Pred, ExCtx)
@@ -11360,30 +11360,30 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 
-'$lgt_related_entities_are_static_binding' :-
+'$lgt_related_entities_are_static' :-
 	forall(
 		'$lgt_pp_extended_object_'(Obj, _, _, _, _, _, _, _, _, _, _),
-		('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags), Flags /\ 1 =:= 1)
+		('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags), Flags /\ 2 =:= 0)
 	),
 	forall(
 		'$lgt_pp_instantiated_class_'(Obj, _, _, _, _, _, _, _, _, _, _),
-		('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags), Flags /\ 1 =:= 1)
+		('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags), Flags /\ 2 =:= 0)
 	),
 	forall(
 		'$lgt_pp_specialized_class_'(Obj, _, _, _, _, _, _, _, _, _, _),
-		('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags), Flags /\ 1 =:= 1)
+		('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags), Flags /\ 2 =:= 0)
 	),
 	forall(
 		'$lgt_pp_imported_category_'(Ctg, _, _, _, _, _),
-		('$lgt_current_category_'(Ctg, _, _, _, _, Flags), Flags /\ 1 =:= 1)
+		('$lgt_current_category_'(Ctg, _, _, _, _, Flags), Flags /\ 2 =:= 0)
 	),
 	forall(
 		'$lgt_pp_extended_category_'(Ctg, _, _, _, _, _),
-		('$lgt_current_category_'(Ctg, _, _, _, _, Flags), Flags /\ 1 =:= 1)
+		('$lgt_current_category_'(Ctg, _, _, _, _, Flags), Flags /\ 2 =:= 0)
 	),
 	forall(
 		'$lgt_pp_implemented_protocol_'(Ptc, _, _, _, _),
-		('$lgt_current_protocol_'(Ptc, _, _, _, Flags), Flags /\ 1 =:= 1)
+		('$lgt_current_protocol_'(Ptc, _, _, _, Flags), Flags /\ 2 =:= 0)
 	).
 
 
@@ -17692,8 +17692,8 @@ current_logtalk_flag(Flag, Value) :-
 	(	'$lgt_send_to_obj_static_binding_'(Obj, Pred, Sender, Call) ->
 		true
 	;	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, _, _, _, ObjFlags),
-		ObjFlags /\ 1 =:= 1,
-		% object is final
+		ObjFlags /\ 2 =:= 0,
+		% object is static
 		ObjFlags /\ 32 =\= 32,
 		% support for complementing categories is disallowed
 		call(Dcl, Pred, p(p(p)), Meta, PredFlags, _, DclCtn), !,
@@ -17969,7 +17969,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	'$lgt_current_category_'(Entity, _, _, _, _, Flags)
 	),
 	!,
-	Flags /\ 1 =:= 1.	% final entity property
+	Flags /\ 2 =:= 0.	% static entity property
 
 
 

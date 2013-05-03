@@ -31,6 +31,8 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: Always enable static binding when the target entities are static.
+
 * REMOVED: The `smart_compilation` and `reload` compiler flags are no longer
 available.
 
