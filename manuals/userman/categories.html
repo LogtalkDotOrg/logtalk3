@@ -82,9 +82,11 @@ A category may explicitly complement one or more existing objects, thus providin
 <p>
 This allows us to patch existing functionality or add new functionality to existing objects without requiring access or modifications to their source code. Common uses are adding logging or debugging predicates to a set of objects. Complementing categories may also be used to define aliases for complemented object predicates. Complemented objects need to be compiled with the <code>complements</code> compiler option switched on.
 </p>
+<!-- currently, static binding is disable for messages sent to an object with the complements flag set to allow
 <p>
-When you want to use static binding with a <em>complemented</em> object, be sure to compile and load the <em>complementing</em> category before the object (otherwise the new functionality added by the category will be ignored by the object clients).
+When using static binding for a message sent to a <em>complemented</em> object, it's advisable to compile and load the <em>complementing</em> category before the object (otherwise the changes may be ignored by the object clients).
 </p>
+-->
 <p>
 Categories cannot inherit from objects. In addition, categories cannot contain clauses for dynamic predicates. This restriction applies because a category can be imported by several objects and because we cannot use the database handling built-in methods with categories (messages can only be sent to objects). However, categories may contain declarations for dynamic predicates and they can contain predicates which handle dynamic predicates. For example:
 </p>
