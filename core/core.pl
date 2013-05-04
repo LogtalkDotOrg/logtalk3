@@ -321,7 +321,6 @@
 :- dynamic('$lgt_pp_hook_value_annotation_'/4).				% '$lgt_pp_hook_value_annotation_'(Annotation, Value, Goal, Head)
 :- dynamic('$lgt_pp_hook_body_annotation_'/3).				% '$lgt_pp_hook_body_annotation_'(Annotation, Left, Right)
 
-:- dynamic('$lgt_pp_final_'/0).								% '$lgt_pp_final_'
 :- dynamic('$lgt_pp_dynamic_'/0).							% '$lgt_pp_dynamic_'
 :- dynamic('$lgt_pp_threaded_'/0).							% '$lgt_pp_threaded_'
 :- dynamic('$lgt_pp_synchronized_'/0).						% '$lgt_pp_synchronized_'
@@ -550,7 +549,7 @@ object_property(Obj, Prop) :-
 	Flags /\ 2 =:= 2.
 '$lgt_object_property'(static, _, _, _, _, _, Flags) :-
 	Flags /\ 2 =:= 0.
-'$lgt_object_property'(final, _, _, _, _, _, Flags) :-
+'$lgt_object_property'(built_in, _, _, _, _, _, Flags) :-
 	Flags /\ 1 =:= 1.
 '$lgt_object_property'(file(Base, Path), Obj, _, _, _, _, _) :-
 	(	'$lgt_entity_property_'(Obj, file_lines(Base, Path, _, _)) ->
@@ -634,7 +633,7 @@ category_property(Ctg, Prop) :-
 	Flags /\ 2 =:= 2.
 '$lgt_category_property'(static, _, _, _, Flags) :-
 	Flags /\ 2 =:= 0.
-'$lgt_category_property'(final, _, _, _, Flags) :-
+'$lgt_category_property'(built_in, _, _, _, Flags) :-
 	Flags /\ 1 =:= 1.
 '$lgt_category_property'(file(Base, Path), Ctg, _, _, _) :-
 	(	'$lgt_entity_property_'(Ctg, file_lines(Base, Path, _, _)) ->
@@ -701,7 +700,7 @@ protocol_property(Ptc, Prop) :-
 	Flags /\ 2 =:= 2.
 '$lgt_protocol_property'(static, _, _, Flags) :-
 	Flags /\ 2 =:= 0.
-'$lgt_protocol_property'(final, _, _, Flags) :-
+'$lgt_protocol_property'(built_in, _, _, Flags) :-
 	Flags /\ 1 =:= 1.
 '$lgt_protocol_property'(file(Base, Path), Ptc, _, _) :-
 	(	'$lgt_entity_property_'(Ptc, file_lines(Base, Path, _, _)) ->
@@ -4393,16 +4392,16 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_current_object_'(logtalk, '$lgt_logtalk.', '$lgt_logtalk._dcl', '$lgt_logtalk._def', '$lgt_logtalk._super', '$lgt_logtalk._idcl', '$lgt_logtalk._idef', '$lgt_logtalk._ddcl', '$lgt_logtalk._ddef', '$lgt_logtalk._alias', Flags) :-
 	(	'$lgt_prolog_feature'(threads, supported) ->
-		% context_switching_calls + dynamic_declarations + complements + events + threaded + static + final
+		% context_switching_calls + dynamic_declarations + complements + events + threaded + static + built_in
 		Flags = 249		% 0b011111001
-	;	% context_switching_calls + dynamic_declarations + complements + events + static + final
+	;	% context_switching_calls + dynamic_declarations + complements + events + static + built_in
 		Flags = 241		% 0b011110001
 	).
 '$lgt_current_object_'(user, '$lgt_user.', '$lgt_user._dcl', '$lgt_user._def', '$lgt_user._super', '$lgt_user._idcl', '$lgt_user._idef', '$lgt_user._ddcl', '$lgt_user._ddef', '$lgt_user._alias', Flags) :-
 	(	'$lgt_prolog_feature'(threads, supported) ->
-		% context_switching_calls + dynamic_declarations + complements + events + threaded + static + final
+		% context_switching_calls + dynamic_declarations + complements + events + threaded + static + built_in
 		Flags = 249		% 0b011111001
-	;	% context_switching_calls + dynamic_declarations + complements + events + static + final
+	;	% context_switching_calls + dynamic_declarations + complements + events + static + built_in
 		Flags = 241		% 0b011110001
 	).
 
@@ -4897,7 +4896,7 @@ current_logtalk_flag(Flag, Value) :-
 		Type = category
 	),
 	(	Flags /\ 1 =:= 1 ->
-		% final entity; no redefinition allowed
+		% built_in entity; no redefinition allowed
 		throw(permission_error(modify, Type, Entity))
 	;	% redefinable entity but, in the presence of entity dynamic predicates, when
 		% using some backend Prolog compilers, some old dynamic clauses may persist
@@ -5646,11 +5645,7 @@ current_logtalk_flag(Flag, Value) :-
 		Dynamic = 2						% 0b000000010
 	;	Dynamic = 0
 	),
-	(	\+ '$lgt_pp_final_' ->
-		Final = 1						% 0b000000001
-	;	Final = 0
-	),
-	Flags is Debug + Dynamic + Final.
+	Flags is Debug + Dynamic.
 
 '$lgt_tr_entity_flags'(category, Flags) :-
 	(	'$lgt_compiler_flag'(debug, on) ->
@@ -5669,11 +5664,7 @@ current_logtalk_flag(Flag, Value) :-
 		Dynamic = 2						% 0b000000010
 	;	Dynamic = 0
 	),
-	(	\+ '$lgt_pp_final_' ->
-		Final = 1						% 0b000000001
-	;	Final = 0
-	),
-	Flags is Debug + Events + Synchronized + Dynamic + Final.
+	Flags is Debug + Events + Synchronized + Dynamic.
 
 '$lgt_tr_entity_flags'(object, Flags) :-
 	(	'$lgt_compiler_flag'(debug, on) ->
@@ -5708,11 +5699,7 @@ current_logtalk_flag(Flag, Value) :-
 		Dynamic = 2						% 0b000000010
 	;	Dynamic = 0
 	),
-	(	\+ '$lgt_pp_final_' ->
-		Final = 1						% 0b000000001
-	;	Final = 0
-	),
-	Flags is Debug + ContextSwitchingCalls + DynamicDeclarations + Complements + Events + Threaded + Synchronized + Dynamic + Final.
+	Flags is Debug + ContextSwitchingCalls + DynamicDeclarations + Complements + Events + Threaded + Synchronized + Dynamic.
 
 
 
@@ -16008,7 +15995,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_valid_protocol_property'(@nonvar)
 
-'$lgt_valid_protocol_property'(final).					% final protocol
+'$lgt_valid_protocol_property'(built_in).				% built-in protocol
 '$lgt_valid_protocol_property'((dynamic)).				% dynamic protocol (can be abolished at runtime)
 '$lgt_valid_protocol_property'(static).					% static protocol
 '$lgt_valid_protocol_property'(debugging).				% protocol compiled in debug mode
@@ -17683,8 +17670,8 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_send_to_obj_static_binding'(@object_identifier, @callable, @object_identifier -callable)
 %
 % static binding is only used for the (::)/2 control construct when the object receiving the
-% message is final and the support for complementing categories is disallowed (unfortunately,
-% allowing hot patching of a final object would easily lead to inconsistencies as there isn't
+% message is static and the support for complementing categories is disallowed (unfortunately,
+% allowing hot patching of a static object would easily lead to inconsistencies as there isn't
 % any portable solution for updating in-place the definition of patched object predicates that
 % were already directly called due to the previou use of static binding)
 

@@ -5,7 +5,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/02/06,
+		date is 2013/05/04,
 		comment is 'Unit tests for the current_object/1 built-in predicate.'
 	]).
 
@@ -26,7 +26,7 @@
 
 	succeeds(current_object_1_4) :-
 		current_object(user),
-		object_property(user, final),
+		object_property(user, built_in),
 		object_property(user, static),
 		(	current_logtalk_flag(threads, supported) ->
 			object_property(user, threaded)
@@ -35,7 +35,7 @@
 
 	succeeds(current_object_1_5) :-
 		current_object(logtalk),
-		object_property(logtalk, final),
+		object_property(logtalk, built_in),
 		object_property(logtalk, static),
 		(	current_logtalk_flag(threads, supported) ->
 			object_property(logtalk, threaded)
