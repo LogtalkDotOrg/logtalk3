@@ -47,9 +47,6 @@ if an up-to-date intermediate file exists before recompiling a source file. In
 addition, when the `clean` flag is turned on, the compiler will now ignore any
 existing intermediate files, forcing source file recompilation.
 
-* CHANGED: The entity properties `file/2` and `lines/2` are now also saved
-when the `source_data` compiler flag is turned off.
-
 Prolog adapter and integration files
 ------------------------------------
 
