@@ -7734,7 +7734,8 @@ current_logtalk_flag(Flag, Value) :-
 	TOriginal =.. [_| Args],
 	TAlias =.. [_| Args],
 	% allow for runtime use
-	(	'$lgt_comp_ctx_this'(Ctx, This),
+	(	'$lgt_compiler_flag'(optimize, on),
+		'$lgt_comp_ctx_this'(Ctx, This),
 		'$lgt_send_to_obj_static_binding'(Obj, TOriginal, This, Call) ->
 		'$lgt_add_uses_def_clause'(TAlias, This, Call)
 	;	'$lgt_tr_clause'((TAlias :- Obj::TOriginal), Ctx)
@@ -11143,11 +11144,13 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_msg'(Pred, Obj, TPred, This) :-
 	'$lgt_add_referenced_object_message'(Obj, Pred),
 	(	'$lgt_compiler_flag'(events, allow) ->
-		(	'$lgt_send_to_obj_static_binding'(Obj, Pred, This, Call) ->
+		(	'$lgt_compiler_flag'(optimize, on),
+			'$lgt_send_to_obj_static_binding'(Obj, Pred, This, Call) ->
 			TPred = '$lgt_guarded_method_call'(Obj, Pred, This, Call)
 		;	TPred = '$lgt_send_to_obj_'(Obj, Pred, This)
 		)
-	;	(	'$lgt_send_to_obj_static_binding'(Obj, Pred, This, TPred) ->
+	;	(	'$lgt_compiler_flag'(optimize, on),
+			'$lgt_send_to_obj_static_binding'(Obj, Pred, This, TPred) ->
 			true
 		;	TPred = '$lgt_send_to_obj_ne_'(Obj, Pred, This)
 		)
@@ -11339,7 +11342,8 @@ current_logtalk_flag(Flag, Value) :-
 		TPred = '$lgt_obj_super_call'(Super, Pred, ExCtx)
 	;	callable(Pred) ->
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-		(	'$lgt_related_entities_are_static',
+		(	'$lgt_compiler_flag'(optimize, on),
+			'$lgt_related_entities_are_static',
 			'$lgt_obj_super_call_static_binding'(Obj, Pred, ExCtx, TPred) ->
 			true
 		;	TPred = '$lgt_obj_super_call_'(Super, Pred, ExCtx)
@@ -11358,7 +11362,8 @@ current_logtalk_flag(Flag, Value) :-
 		TPred = '$lgt_ctg_super_call'(Ctg, Pred, ExCtx)
 	;	callable(Pred) ->
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-		(	'$lgt_related_entities_are_static',
+		(	'$lgt_compiler_flag'(optimize, on),
+			'$lgt_related_entities_are_static',
 			'$lgt_ctg_super_call_static_binding'(Ctg, Pred, ExCtx, TPred) ->
 			true
 		;	TPred = '$lgt_ctg_super_call_'(Ctg, Pred, ExCtx)

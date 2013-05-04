@@ -329,7 +329,7 @@ Note that the scope of the <code>set_logtalk_flag/2</code> directive is local to
 	</dl>
 	<dl>
 		<dt><code>optimize(Option)</code></dt>
-			<dd>Controls the compiler optimization. Possible option values are <code>on</code> (the usual default) and <code>off</code>. Compiler optimizations include the removal of redundant calls to <code>true/0</code> from predicate clauses and removal of redundant unifications when compiling grammar rules.</dd>
+			<dd>Controls the compiler optimizations. Possible option values are <code>on</code> (used by default for deployment) and <code>off</code> (used by default for development). Compiler optimizations include the use of static binding whenever possible, the removal of redundant calls to <code>true/0</code> from predicate clauses, and the removal of redundant unifications when compiling grammar rules.</dd>
 	</dl>
 	<dl>
 		<dt><code>source_data(Option)</code></dt>
@@ -695,7 +695,7 @@ When objects or categories containing grammar rules are compiled in debug mode, 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: May 2, 2013</span>
+		<span>Last updated on: May 4, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="installing.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="migration.html">next</a></span><br/>
