@@ -31,15 +31,13 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* CHANGED: Only try to apply static binding for `::/2` and `^^/2` calls when
-the `optimize` flag is turned on.
+* CHANGED: Always try to apply static binding for `::/2` and `^^/2` calls when
+the `optimize` flag is turned on and the target entities are static.
 
 * ADDED: A new entity directive, `built_in`, for declaring entities built-in.
 
 * RENAMED: Undo the rename done in the Alpha 1 release of the `built_in`
 entity property to `final`.
-
-* CHANGED: Always enable static binding when the target entities are static.
 
 * REMOVED: The `smart_compilation` and `reload` compiler flags are no longer
 available.
