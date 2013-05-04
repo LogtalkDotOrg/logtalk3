@@ -60,6 +60,12 @@ consistent with the default values of other flags such as `source_data` and
 `clean`, resulting in a default configuration appropriated for the development
 (not the deployment) of applications.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* ADDED: Syntax coloring support for the new `built_in/0` directive to all
+supported text editors and syntax highlighters.
+
 
 3.00.0 Alpha 15 - April 29, 2013
 ================================

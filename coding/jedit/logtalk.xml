@@ -7,7 +7,7 @@
 	written by		Paulo Moura
 	version			1.100
 	created on		May 5, 2002
-	last revised	May 2, 2013
+	last revised	May 4, 2013
 
 	To install, copy this file to the "modes" subdirectory in jEdit 
 	directory installation.   Next, check the "catalog" file in the 
@@ -49,7 +49,7 @@
 		<!-- Other directives -->
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD1">^\s*:-\se(n(coding|sure_loaded)|xport)(?=[(])</SEQ_REGEXP>
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD1">^\s*:-\sin(clude|itialization|fo)(?=[(])</SEQ_REGEXP>
-		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD1">^\s*:-\s(dynamic|synchronized|threaded)(?=[.])</SEQ_REGEXP>
+		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD1">^\s*:-\s(built_in|dynamic|synchronized|threaded)(?=[.])</SEQ_REGEXP>
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD1">^\s*:-\s(alias|d(ynamic|iscontiguous)|m(eta_predicate|ode|ultifile)|s(et_(logtalk|prolog)_flag|ynchronized))(?=[(])</SEQ_REGEXP>
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD1">^\s*:-\sop(?=[(])</SEQ_REGEXP>
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD1">^\s*:-\s(c(alls|oinductive)|reexport|use(s|_module))(?=[(])</SEQ_REGEXP>
@@ -255,6 +255,7 @@
 			<NULL>at_end_of_stream</NULL>
 			<NULL>bagof</NULL>
 			<NULL>before</NULL>
+			<NULL>built_in</NULL>
 			<NULL>call</NULL>
 			<NULL>callable</NULL>
 			<NULL>calls</NULL>

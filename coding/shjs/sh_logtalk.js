@@ -39,7 +39,7 @@ sh_languages['logtalk'] = [
       -1
     ],
     [
-      /^[ \t]*:-[ \t](?:c(?:a(?:lls|tegory)|oinductive)|p(?:ublic|r(?:ot(?:ocol|ected)|ivate))|e(?:l(?:if|se)|n(?:coding|sure_loaded)|xport)|i(?:f|n(?:fo|itialization))|alias|d(?:ynamic|iscontiguous)|m(?:eta_(?:non_terminal|predicate)|od(?:e|ule)|ultifile)|reexport|s(?:et_(?:logtalk|prolog)_flag|ynchronized)|o(?:bject|p)|use(?:s|_module))(?=\()|^[ \t]*:-[ \t](?:end(?:if|_(?:category|object|protocol))|dynamic|synchronized|threaded)\.|\b(?:complements|extends|i(?:nstantiates|mp(?:lements|orts))|specializes)(?=\()/g,
+      /^[ \t]*:-[ \t](?:c(?:a(?:lls|tegory)|oinductive)|p(?:ublic|r(?:ot(?:ocol|ected)|ivate))|e(?:l(?:if|se)|n(?:coding|sure_loaded)|xport)|i(?:f|n(?:fo|itialization))|alias|d(?:ynamic|iscontiguous)|m(?:eta_(?:non_terminal|predicate)|od(?:e|ule)|ultifile)|reexport|s(?:et_(?:logtalk|prolog)_flag|ynchronized)|o(?:bject|p)|use(?:s|_module))(?=\()|^[ \t]*:-[ \t](?:end(?:if|_(?:category|object|protocol))|built_in|dynamic|synchronized|threaded)\.|\b(?:complements|extends|i(?:nstantiates|mp(?:lements|orts))|specializes)(?=\()/g,
       'sh_preproc',
       -1
     ],

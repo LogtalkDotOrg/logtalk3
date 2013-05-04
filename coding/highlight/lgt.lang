@@ -4,8 +4,8 @@
 #
 #  Author: Paulo Moura
 #    Mail: pmoura@logtalk.org
-#    Date: 2013.04.07
-# Version: 1.15
+#    Date: 2013.05.04
+# Version: 1.16
 # ------------------------------------------
 # This file is a part of highlight, a free source code converter released under the GPL.
 #
@@ -28,7 +28,7 @@ $KEYWORDS(kwa)=regex(^\s*:-\s(end_(protocol|category|object))(?=\.), 1)
 
 # entity and predicate directives
 $KEYWORDS(kwa)=regex(^\s*:-\s(calls|coinductive|public|protected|private|encoding|ensure_loaded|export|include|info|initialization|alias|dynamic|discontiguous|meta_predicate|meta_non_terminal|mode|module|multifile|reexport|set_logtalk_flag|set_prolog_flag|synchronized|op|uses|use_module)(?=[(]), 1)
-$KEYWORDS(kwa)=regex(^\s*:-\s(dynamic|synchronized|threaded)(?=\.), 1)
+$KEYWORDS(kwa)=regex(^\s*:-\s(built_in|dynamic|synchronized|threaded)(?=\.), 1)
 
 # event handlers
 $KEYWORDS(kwc)=regex((after|before)(?=[(]), 1)

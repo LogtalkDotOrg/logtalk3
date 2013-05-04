@@ -4,8 +4,8 @@
 
 ;; Author: Paulo Moura <pmoura@logtalk.org>
 ;; Creation date: November 15, 2003
-;; Last modification date: April 7, 2013
-;; Version: 1.22
+;; Last modification date: May 4, 2013
+;; Version: 1.23
 
 ;; Installation:
 ;;
@@ -26,7 +26,7 @@
 
 ;; setup 
 
-(defvar logtalk-mode-version "1.22"
+(defvar logtalk-mode-version "1.23"
 	"Logtalk mode version number")
 
 (defvar logtalk-mode-hook nil)
@@ -100,7 +100,7 @@
 		("\\(:- \\)\\(category\\|object\\|protocol\\|module\\)\\([(]\\)" 2 'logtalk-directive-face)
 		("\\(:- \\)\\(p\\(?:r\\(?:ivate\\|otected\\)\\|ublic\\)\\)\\([(]\\)" 2 'logtalk-directive-face)
 		("\\(:- \\)\\(alias\\|c\\(?:alls\\|oinductive\\)\\|d\\(?:iscontiguous\\|ynamic\\)\\|e\\(?:lif\\|n\\(?:coding\\|sure_loaded\\)\\|xport\\)\\|i\\(?:f\\|n\\(?:clude\\|fo\\|itialization\\)\\)\\|m\\(?:\\(?:eta_\\(?:non_terminal\\|predicate\\)\\|ode\\|ultifile\\)\\)\\|op\\|use\\(?:s\\|_module\\)\\|reexport\\|synchronized\\)\\([(]\\)" 2 'logtalk-directive-face)
-		("\\(:- \\)\\(dynamic\\|s\\(?:et_\\(?:logtalk\\|prolog\\)_flag\\|ynchronized\\)\\|threaded\\)\\([\.]\\)" 2 'logtalk-directive-face)
+		("\\(:- \\)\\(built_in\\|dynamic\\|s\\(?:et_\\(?:logtalk\\|prolog\\)_flag\\|ynchronized\\)\\|threaded\\)\\([\.]\\)" 2 'logtalk-directive-face)
 		("\\<\\(\\(?:complement\\|extend\\|i\\(?:mp\\(?:\\(?:lemen\\|or\\)t\\)\\|nstantiate\\)\\|specialize\\)s\\)\\([(]\\)" 1 'logtalk-directive-face)
 	))
 

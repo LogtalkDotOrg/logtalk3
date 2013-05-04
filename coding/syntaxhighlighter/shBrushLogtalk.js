@@ -5,7 +5,7 @@
 
 	function Brush()
 	{
-		// Contributed by Paulo Moura (http://logtalk.org/); last revised on April 7, 2013
+		// Contributed by Paulo Moura (http://logtalk.org/); last revised on May 4, 2013
 
 		this.regexList = [
 		  // variables
@@ -95,7 +95,7 @@
       { regex: new RegExp("\\b(ignore|once)(?=[(])", 'g'), css: 'keyword'},
       // directives
 			{ regex: new RegExp("^\\s*:\-\\s(c(a(lls|tegory)|oinductive)|p(ublic|r(ot(ocol|ected)|ivate))|e(l(if|se)|n(coding|sure_loaded)|xport)|i(f|n(clude|itialization|fo))|alias|d(ynamic|iscontiguous)|m(eta_(non_terminal|predicate)|od(e|ule)|ultifile)|reexport|s(et_(logtalk|prolog)_flag|ynchronized)|o(bject|p)|use(s|_module))(?=[(])", 'gm'), css: 'preprocessor' },
-			{ regex: new RegExp("^\\s*:\-\\s(e(lse|nd(if|_(category|object|protocol)))|dynamic|synchronized|threaded)\.", 'gm'), css: 'preprocessor' },
+			{ regex: new RegExp("^\\s*:\-\\s(e(lse|nd(if|_(category|object|protocol)))|built_in|dynamic|synchronized|threaded)\.", 'gm'), css: 'preprocessor' },
 			{ regex: new RegExp("^\\s*(complements|extends|i(nstantiates|mp(lements|orts))|specializes)(?=[(])", 'gm'), css: 'preprocessor' },
       // atoms
       { regex: new RegExp("\\b[a-z][A-Za-z0-9_]*", 'g'), css: 'plain'},

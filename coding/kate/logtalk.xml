@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE language SYSTEM "language.dtd">
 
-<language name="Logtalk" version="2.3" kateversion="2.4" section="Sources" extensions="*.lgt" mimetype="text/x-logtalk" author="Paulo Moura (pmoura@logtalk.org)" license="GNU General Public License 3">
+<language name="Logtalk" version="2.4" kateversion="2.4" section="Sources" extensions="*.lgt" mimetype="text/x-logtalk" author="Paulo Moura (pmoura@logtalk.org)" license="GNU General Public License 3">
 
 	<highlighting>
 
@@ -172,7 +172,7 @@
 				<!-- Other directives -->
 				<RegExpr String = "\be(n(coding|sure_loaded)|xport)(?=[(])" attribute = "Directive" context = "#pop" />
 			   	<RegExpr String = "\bin(clude|itialization|fo)(?=[(])" attribute = "Directive" context = "#pop" />
-				<RegExpr String = "\b(dynamic|synchronized|threaded)[.]" attribute = "Directive" context = "#pop" />
+				<RegExpr String = "\b(built_in|dynamic|synchronized|threaded)[.]" attribute = "Directive" context = "#pop" />
 				<RegExpr String = "\b(alias|d(ynamic|iscontiguous)|m(eta_(non_terminal|predicate)|ode|ultifile)|s(et_(logtalk|prolog)_flag|ynchronized))(?=[(])" attribute = "Directive" context = "#pop" />
 				<RegExpr String = "\bop(?=[(])" attribute = "Directive" context = "#pop" />
 				<RegExpr String = "\b(c(alls|oinductive)|reexport|use(s|_module))(?=[(])" attribute = "Directive" context = "#pop" />

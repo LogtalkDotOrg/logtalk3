@@ -49,11 +49,12 @@ comment
 	extends(parent)).
 
 	:- info([
-		version is 1.11,
+		version is 1.12,
 		author is 'Paulo Moura',
-		date is 2013/04/07,
+		date is 2013/05/04,
 		comment is 'Sample prototype for testing syntax coloring.']).
 
+	:- built_in.
 	:- threaded.
 	:- synchronized.
 	:- dynamic.

@@ -20,7 +20,7 @@
  Boston, MA 02111-1307, USA.
 
 -->
-<language id="logtalk" _name="Logtalk" version="2.0" _section="Sources">
+<language id="logtalk" _name="Logtalk" version="2.1" _section="Sources">
 
 	<metadata>
 		<property name="mimetypes">text/x-logtalk</property>
@@ -123,6 +123,7 @@
 			<keyword>((re)?export)(?=[(])</keyword>
 			<keyword>(in(clude|itialization|fo))(?=[(])</keyword>			
 			<keyword>(mod(e|ule))(?=[(])</keyword>			
+			<keyword>(built_in)(?=[.])</keyword>			
 			<keyword>(dynamic)(?=[(])</keyword>			
 			<keyword>(dynamic)(?=[.])</keyword>			
 			<keyword>(discontiguous)(?=[(])</keyword>			

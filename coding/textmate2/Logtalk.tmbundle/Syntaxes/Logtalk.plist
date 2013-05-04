@@ -94,7 +94,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>(:-)\s(e(lse|ndif)|dynamic|synchronized|threaded)(?=[.])</string>
+			<string>(:-)\s(e(lse|ndif)|built_in|dynamic|synchronized|threaded)(?=[.])</string>
 			<key>name</key>
 			<string>storage.modifier.others.logtalk</string>
 		</dict>

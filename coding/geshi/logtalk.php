@@ -12,6 +12,8 @@
  *
  * CHANGES
  * -------
+ * 2013/05/04 (1.1.11)
+ *  -  Added syntax coloring of built_in/0 directive
  * 2013/04/07 (1.1.10)
  *  -  Added syntax coloring of forward/1 method
  * 2013/02/06 (1.1.9)
@@ -107,7 +109,7 @@ $language_data = array(
         // Directives (no arguments)
         2 => array(
             // entity directives
-            'dynamic',
+            'built_in', 'dynamic',
             // multi-threading directives
             'synchronized', 'threaded',
             // entity closing directives
