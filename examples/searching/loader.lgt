@@ -10,7 +10,8 @@
 
 
 :- initialization((
-	logtalk_load(library(all_loader)),
+	logtalk_load(library(metapredicates_loader)),
+	logtalk_load(library(dates_loader)),
 	logtalk_load(roots(loader)),
 	logtalk_load([
 		state_space,
