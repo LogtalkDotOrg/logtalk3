@@ -211,7 +211,7 @@ numbervars(Term, From, Next) :-
 '$lgt_default_flag'(report, on).
 '$lgt_default_flag'(clean, off).
 '$lgt_default_flag'(code_prefix, '$').
-'$lgt_default_flag'(optimize, on).
+'$lgt_default_flag'(optimize, off).
 '$lgt_default_flag'(source_data, on).
 '$lgt_default_flag'(debug, off).
 % Prolog compiler and loader flags:

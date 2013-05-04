@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for BinProlog 8.x~10.x
-%  Last updated on May 2, 2013
+%  Last updated on May 4, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -284,7 +284,7 @@ setup_call_cleanup(_, _, _) :-
 '$lgt_default_flag'(report, on).
 '$lgt_default_flag'(clean, off).
 '$lgt_default_flag'(code_prefix, '$').
-'$lgt_default_flag'(optimize, on).
+'$lgt_default_flag'(optimize, off).
 '$lgt_default_flag'(source_data, on).
 '$lgt_default_flag'(debug, off).
 % Prolog compiler and loader flags:

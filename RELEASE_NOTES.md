@@ -52,6 +52,14 @@ existing intermediate files, forcing source file recompilation.
 * CHANGED: The entity properties `file/2` and `lines/2` are now also saved
 when the `source_data` compiler flag is turned off.
 
+Prolog adapter and integration files
+------------------------------------
+
+* CHANGED: The default value of the `optimize` flag is now `off`. This is more
+consistent with the default values of other flags such as `source_data` and
+`clean`, resulting in a default configuration appropriated for the development
+(not the deployment) of applications.
+
 
 3.00.0 Alpha 15 - April 29, 2013
 ================================

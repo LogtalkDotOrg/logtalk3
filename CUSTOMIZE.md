@@ -69,7 +69,8 @@ can be found on the `adapters` folder in the Logtalk installation folder.
 These adapter files define default values of the flags that are used by
 Logtalk when compiling source files (for a full description of these flags, 
 consult the `Writing, Running, and Debugging Logtalk Programs` section of
-the User Manual).
+the User Manual). The default compiler flag settings are appropriated for the
+development (not the deployment) of applications.
 
 You may customize the Logtalk compiler flags and add your own library paths
 by copy or renaming the `settings-sample.lgt` file in your Logtalk user folder
