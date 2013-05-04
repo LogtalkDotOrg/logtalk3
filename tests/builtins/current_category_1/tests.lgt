@@ -17,6 +17,7 @@
 
 	succeeds(current_category_1_3) :-
 		current_category(core_messages),
+		category_property(core_messages, built_in),
 		category_property(core_messages, static).
 
 :- end_object.

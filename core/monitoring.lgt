@@ -27,9 +27,11 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/10/01,
+		date is 2013/05/04,
 		comment is 'Event handlers protocol. The handlers are automatically called for messages sent using the ::/2 control construct from within objects compiled with the "events" flag set to "allow".'
 	]).
+
+	:- built_in.
 
 	:- public(before/3).
 	:- mode(before(@term, @term, @term), zero_or_one).

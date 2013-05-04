@@ -321,6 +321,7 @@
 :- dynamic('$lgt_pp_hook_value_annotation_'/4).				% '$lgt_pp_hook_value_annotation_'(Annotation, Value, Goal, Head)
 :- dynamic('$lgt_pp_hook_body_annotation_'/3).				% '$lgt_pp_hook_body_annotation_'(Annotation, Left, Right)
 
+:- dynamic('$lgt_pp_built_in_'/0).							% '$lgt_pp_built_in_'
 :- dynamic('$lgt_pp_dynamic_'/0).							% '$lgt_pp_dynamic_'
 :- dynamic('$lgt_pp_threaded_'/0).							% '$lgt_pp_threaded_'
 :- dynamic('$lgt_pp_synchronized_'/0).						% '$lgt_pp_synchronized_'
@@ -5645,7 +5646,11 @@ current_logtalk_flag(Flag, Value) :-
 		Dynamic = 2						% 0b000000010
 	;	Dynamic = 0
 	),
-	Flags is Debug + Dynamic.
+	(	'$lgt_pp_built_in_' ->
+		BuiltIn = 1						% 0b000000001
+	;	BuiltIn = 0
+	),
+	Flags is Debug + Dynamic + BuiltIn.
 
 '$lgt_tr_entity_flags'(category, Flags) :-
 	(	'$lgt_compiler_flag'(debug, on) ->
@@ -5664,7 +5669,11 @@ current_logtalk_flag(Flag, Value) :-
 		Dynamic = 2						% 0b000000010
 	;	Dynamic = 0
 	),
-	Flags is Debug + Events + Synchronized + Dynamic.
+	(	'$lgt_pp_built_in_' ->
+		BuiltIn = 1						% 0b000000001
+	;	BuiltIn = 0
+	),
+	Flags is Debug + Events + Synchronized + Dynamic + BuiltIn.
 
 '$lgt_tr_entity_flags'(object, Flags) :-
 	(	'$lgt_compiler_flag'(debug, on) ->
@@ -5699,7 +5708,11 @@ current_logtalk_flag(Flag, Value) :-
 		Dynamic = 2						% 0b000000010
 	;	Dynamic = 0
 	),
-	Flags is Debug + ContextSwitchingCalls + DynamicDeclarations + Complements + Events + Threaded + Synchronized + Dynamic.
+	(	'$lgt_pp_built_in_' ->
+		BuiltIn = 1						% 0b000000001
+	;	BuiltIn = 0
+	),
+	Flags is Debug + ContextSwitchingCalls + DynamicDeclarations + Complements + Events + Threaded + Synchronized + Dynamic + BuiltIn.
 
 
 
@@ -5824,6 +5837,7 @@ current_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_pp_referenced_module_'(_, _)),
 	retractall('$lgt_pp_referenced_object_message_'(_, _, _)),
 	retractall('$lgt_pp_referenced_module_predicate_'(_, _, _)),
+	retractall('$lgt_pp_built_in_'),
 	retractall('$lgt_pp_dynamic_'),
 	retractall('$lgt_pp_threaded_'),
 	retractall('$lgt_pp_synchronized_'),
@@ -6718,6 +6732,12 @@ current_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_pp_entity_compiler_flag_'(Flag, _)),
 	assertz('$lgt_pp_entity_compiler_flag_'(Flag, Value)),
 	'$lgt_check_for_renamed_flag'(Flag, Ctx).
+
+
+% declare an entity as built-in
+
+'$lgt_tr_logtalk_directive'(built_in, _) :-
+	assertz('$lgt_pp_built_in_').
 
 
 % create a message queue at object initialization
@@ -15498,6 +15518,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_logtalk_closing_directive'(end_protocol).
 
 
+'$lgt_logtalk_entity_directive'(built_in).
 '$lgt_logtalk_entity_directive'(encoding(_)).
 '$lgt_logtalk_entity_directive'(calls(_)).	% deprecated
 '$lgt_logtalk_entity_directive'(uses(_)).	% deprecated

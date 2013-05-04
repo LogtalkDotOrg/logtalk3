@@ -27,9 +27,11 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/01/30,
+		date is 2013/05/04,
 		comment is 'Message forwarding protocol.'
 	]).
+
+	:- built_in.
 
 	:- public(forward/1).
 	:- mode(forward(@callable), zero_or_more).

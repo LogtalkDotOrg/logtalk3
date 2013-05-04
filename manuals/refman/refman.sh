@@ -54,6 +54,7 @@ eval $xslt_proc -o directives/if1.section refman.xsl directives/if1.html
 eval $xslt_proc -o directives/elif1.section refman.xsl directives/elif1.html
 eval $xslt_proc -o directives/else0.section refman.xsl directives/else0.html
 eval $xslt_proc -o directives/endif0.section refman.xsl directives/endif0.html
+eval $xslt_proc -o directives/built_in0.section refman.xsl directives/built_in0.html
 eval $xslt_proc -o directives/category1_3.section refman.xsl directives/category1_3.html
 eval $xslt_proc -o directives/dynamic0.section refman.xsl directives/dynamic0.html
 eval $xslt_proc -o directives/end_category0.section refman.xsl directives/end_category0.html
@@ -173,6 +174,7 @@ cat -s \
 	directives/elif1.section \
 	directives/else0.section \
 	directives/endif0.section \
+	directives/built_in0.section \
 	directives/category1_3.section \
 	directives/dynamic0.section \
 	directives/end_category0.section \

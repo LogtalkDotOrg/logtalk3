@@ -27,9 +27,11 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/12/14,
+		date is 2013/05/04,
 		comment is 'Term and goal expansion protocol.'
 	]).
+
+	:- built_in.
 
 	:- public(goal_expansion/2).
 	:- dynamic(goal_expansion/2).
