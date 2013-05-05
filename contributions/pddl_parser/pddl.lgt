@@ -43,9 +43,9 @@
 	imports(read_file)).
 
 	:- info([
-		version is 1.0,
+		version is 1.01,
 		author is 'Robert Sasak, Charles University in Prague. Adapted to Logtalk by Paulo Moura.',
-		date is 2011/08/04,
+		date is 2013/05/04,
 		comment is 'Simple parser of PDDL 3.0 files.'
 	]).
 
@@ -71,7 +71,7 @@
 		parse_domain(File, Output, _).
 
 	parse_domain(File, Output, RestOfFile) :-
-		:read_file(File, List),
+		^^read_file(File, List),
 		phrase(domain(Output), List, RestOfFile).
 
 	:- public(parse_problem/2).
@@ -92,7 +92,7 @@
 		parse_problem(File, Output, _).
 
 	parse_problem(File, Output, RestOfFile) :-
-		:read_file(File, List),
+		^^read_file(File, List),
 		phrase(problem(Output), List, RestOfFile).
 
 	% List of DCG rules describing structure of domain file in language PDDL.

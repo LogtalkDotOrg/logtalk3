@@ -37,7 +37,7 @@
 	:- mode(read_file(+atom, -list(atom)), one).
 	:- info(read_file/2, [
 		comment is 'Reads a file character by character, parsing it into a list of atoms.',
-		argnames is 'File', 'List']
+		argnames is ['File', 'List']
 	]).
 
 	read_file(File, List) :-
