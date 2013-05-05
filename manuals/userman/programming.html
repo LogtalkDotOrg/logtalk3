@@ -329,7 +329,7 @@ Note that the scope of the <code>set_logtalk_flag/2</code> directive is local to
 	</dl>
 	<dl>
 		<dt><code>optimize(Option)</code></dt>
-			<dd>Controls the compiler optimizations. Possible option values are <code>on</code> (used by default for deployment) and <code>off</code> (used by default for development). Compiler optimizations include the use of static binding whenever possible, the removal of redundant calls to <code>true/0</code> from predicate clauses, and the removal of redundant unifications when compiling grammar rules.</dd>
+			<dd>Controls the compiler optimizations. Possible option values are <code>on</code> (used by default for deployment) and <code>off</code> (used by default for development). Compiler optimizations include the use of static binding whenever possible, the removal of redundant calls to <code>true/0</code> from predicate clauses, and the removal of redundant unifications when compiling grammar rules. Care should be taken when developing applications with this flag turned on as changing and reloading a file may render static binding optimizations invalid for code defining in other loaded files.</dd>
 	</dl>
 	<dl>
 		<dt><code>source_data(Option)</code></dt>
