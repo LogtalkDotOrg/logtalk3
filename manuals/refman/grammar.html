@@ -824,7 +824,6 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 		<dt>goal ::=</dt>
 			<dd>message_sending |</dd>
 			<dd>external_call |</dd>
-			<dd>direct_call |</dd>
 			<dd>context_switching_call |</dd>
 			<dd><em>callable</em></dd>
 	</dl>
@@ -872,10 +871,6 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 	<dl>
 		<dt>external_call ::=</dt>
 			<dd>"<code>{</code>" <em>callable</em> "<code>}</code>"</dd>
-	</dl>
-	<dl>
-		<dt>direct_call ::=</dt>
-			<dd> "<code>:</code>" message</dd>
 	</dl>
 	<dl>
 		<dt>context_switching_call ::=</dt>
