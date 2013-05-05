@@ -512,6 +512,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 		<dl>
 			<dt>object_directive ::=</dt>
 				<dd><em>initialization_directive</em> |</dd>
+				<dd>"<code>:- built_in.</code>" |</dd>
 				<dd>"<code>:- threaded.</code>" |</dd>
 				<dd>"<code>:- synchronized.</code>" |</dd>
 				<dd>"<code>:- dynamic.</code>" |</dd>
@@ -530,6 +531,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 		<dl>
 			<dt>category_directive ::=</dt>
 				<dd><em>initialization_directive</em> |</dd>
+				<dd>"<code>:- built_in.</code>" |</dd>
 				<dd>"<code>:- synchronized.</code>" |</dd>
 				<dd>"<code>:- dynamic.</code>" |</dd>
 				<dd>"<code>:- uses(</code>" object_identifier "<code>).</code>" |</dd>
@@ -547,6 +549,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 		<dl>
 			<dt>protocol_directive ::=</dt>
 				<dd><em>initialization_directive</em> |</dd>
+				<dd>"<code>:- built_in.</code>" |</dd>
 				<dd>"<code>:- dynamic.</code>" |</dd>
 				<dd>"<code>:- info(</code>" info_list "<code>).</code>" |</dd>
 				<dd>predicate_directives</dd>
@@ -823,6 +826,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 	<dl>
 		<dt>goal ::=</dt>
 			<dd>message_sending |</dd>
+			<dd>super_call |</dd>
 			<dd>external_call |</dd>
 			<dd>context_switching_call |</dd>
 			<dd><em>callable</em></dd>
@@ -831,8 +835,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 		<dt>message_sending ::=</dt>
 			<dd>message_to_object |</dd>
 			<dd>message_delegation |</dd>
-			<dd>message_to_self |</dd>
-			<dd>message_to_super</dd>
+			<dd>message_to_self</dd>
 	</dl>
 	<dl>
 		<dt>message_to_object ::=</dt>
@@ -847,7 +850,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 			<dd>"<code>::</code>" messages</dd>
 	</dl>
 	<dl>
-		<dt>message_to_super ::=</dt>
+		<dt>super_call ::=</dt>
 			<dd>"<code>^^</code>" message</dd>
 	</dl>
 	<dl>
