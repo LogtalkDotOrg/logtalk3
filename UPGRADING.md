@@ -25,7 +25,7 @@ UPGRADING
 =========
 
 * Always check carefully the release notes when updating to a new version,
-specially, CHANGED and RENAMED items.
+specially, REMOVED, CHANGED, and RENAMED items.
 
 * Changes in the Logtalk compiler between releases may render some files from
 older versions incompatible with new ones. You may need to update your local
