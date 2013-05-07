@@ -25,6 +25,16 @@ RELEASE NOTES
 =============
 
 
+3.00.0 Alpha 17 - May ??, 2013
+==============================
+
+Logtalk compiler and runtime
+----------------------------
+
+* CHANGED: The message terms for lambda expression warnings for unclassified
+variables and mixed-up variables now include the list of culprit variables.
+
+
 3.00.0 Alpha 16 - May 6, 2013
 =============================
 

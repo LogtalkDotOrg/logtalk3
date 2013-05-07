@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/05/04,
+		date is 2013/05/07,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -273,13 +273,13 @@
 		['Use of non-standard Prolog flag: ~q:~q'-[Flag, Value], nl],
 		message_context(File, Lines).
 
-	logtalk::message_tokens(unclassified_variables_in_lambda_expression(File, Lines, Type, Entity, LambdaExpression), core) -->
-		{copy_term(LambdaExpression, LambdaExpressionCopy), numbervars(LambdaExpressionCopy, 0, _)},
+	logtalk::message_tokens(unclassified_variables_in_lambda_expression(File, Lines, Type, Entity, UnqualifiedVars, LambdaExpression), core) -->
+		{copy_term(UnqualifiedVars-LambdaExpression, UnqualifiedVarsCopy-LambdaExpressionCopy), numbervars(LambdaExpressionCopy, 0, _)},
 		['Unclassified variables in lambda expression: ~q'-[LambdaExpressionCopy], nl],
 		message_context(File, Lines, Type, Entity).
 
-	logtalk::message_tokens(variables_with_dual_role_in_lambda_expression(File, Lines, Type, Entity, LambdaExpression), core) -->
-		{copy_term(LambdaExpression, LambdaExpressionCopy), numbervars(LambdaExpressionCopy, 0, _)},
+	logtalk::message_tokens(variables_with_dual_role_in_lambda_expression(File, Lines, Type, Entity, MixedUpVars, LambdaExpression), core) -->
+		{copy_term(MixedUpVars-LambdaExpression, MixedUpVarsCopy-LambdaExpressionCopy), numbervars(LambdaExpressionCopy, 0, _)},
 		['Variables in lambda expression have dual role: ~q'-[LambdaExpressionCopy], nl],
 		message_context(File, Lines, Type, Entity).
 
