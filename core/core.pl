@@ -741,7 +741,7 @@ protocol_property(Ptc, Prop) :-
 
 '$lgt_object_property_declares'(Obj, Dcl, DDcl, EntityFlags, Functor/Arity, Properties) :-
 	(	call(Dcl, Predicate, Scope0, Meta, Flags)
-	;	'$lgt_object_property'(dynamic_declarations, _, _, _, _, _, EntityFlags),
+	;	EntityFlags /\ 64 =:= 64,	% dynamic predicate declarations enabled
 		call(DDcl, Predicate, Scope0),
 		Meta = no,
 		Flags = 2
@@ -1637,14 +1637,14 @@ threaded_notify(Message) :-
 
 
 
-% '$lgt_file_type_alt_directory'(+atom, ?atom)
+% '$lgt_file_type_scratch_directory'(+atom, ?atom)
 %
-% gets/checks the current value of the alternate compilation directory for the given file type
+% gets/checks the current value of the scratch directory for the given file type
 
-'$lgt_file_type_alt_directory'(prolog, Directory) :-
-	'$lgt_file_type_alt_directory'(tmp, Directory).
+'$lgt_file_type_scratch_directory'(prolog, Directory) :-
+	'$lgt_file_type_scratch_directory'(tmp, Directory).
 
-'$lgt_file_type_alt_directory'(tmp, Directory) :-
+'$lgt_file_type_scratch_directory'(tmp, Directory) :-
 	'$lgt_compiler_flag'(scratch_directory, Directory0),
 	% make sure that the directory path ends with a slash
 	(	sub_atom(Directory0, _, _, 0, '/') ->
@@ -4897,7 +4897,7 @@ current_logtalk_flag(Flag, Value) :-
 		Type = category
 	),
 	(	Flags /\ 1 =:= 1 ->
-		% built_in entity; no redefinition allowed
+		% built-in entity; no redefinition allowed
 		throw(permission_error(modify, Type, Entity))
 	;	% redefinable entity but, in the presence of entity dynamic predicates, when
 		% using some backend Prolog compilers, some old dynamic clauses may persist
@@ -4916,7 +4916,7 @@ current_logtalk_flag(Flag, Value) :-
 			OldFile = nil,
 			NewFile = nil
 		)
-	;	% no file/2 entity property
+	;	% no file_lines/4 entity property
 		OldFile = nil,
 		NewFile = nil,
 		Lines = 1
@@ -4930,7 +4930,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_report_redefined_entity'(Type, Entity, OldFile, NewFile, Lines) :-
 	(	NewFile == nil ->
-		% we're reloading the same source file so consider entity redefinitions normal
+		% assume we're reloading the same source file so consider entity redefinitions normal
 		'$lgt_print_message'(information(loading), core, redefining_entity(Type, Entity))
 	;	% we've conflicting entity definitions coming from different source files
 		'$lgt_increment_loadind_warnings_counter',
@@ -5056,7 +5056,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_file_name'(Type, FilePath, Directory, Basename, FullPath) :-
 	'$lgt_prolog_os_file_name'(NormalizedPath, FilePath),
 	'$lgt_decompose_file_name'(NormalizedPath, Directory0, Name, Extension),
-	(	'$lgt_file_type_alt_directory'(Type, AltDirectory) ->
+	(	'$lgt_file_type_scratch_directory'(Type, AltDirectory) ->
 		(	sub_atom(AltDirectory, 0, 2, _, './') ->
 			% relative directory path
 			atom_concat(Directory0, AltDirectory, Directory1)
@@ -7003,6 +7003,10 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
+% '$lgt_tr_predicate_alias_directive'(+entity_identifier, +callable, +callable)
+%
+% auxiliary predicate for translating alias/3 directives
+
 '$lgt_tr_predicate_alias_directive'(Entity, _, _) :-
 	\+ '$lgt_pp_extended_protocol_'(Entity, _, _, _, _),
 	\+ '$lgt_pp_implemented_protocol_'(Entity, _, _, _, _),
@@ -7044,6 +7048,10 @@ current_logtalk_flag(Flag, Value) :-
 	throw(type_error(non_terminal_indicator, Functor2/Arity2)).
 
 
+
+% '$lgt_tr_calls_directive'(+list)
+%
+% auxiliary predicate for translating calls/1 directives
 
 '$lgt_tr_calls_directive'([]).
 
@@ -16034,13 +16042,14 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_valid_protocol_property'((dynamic)).				% dynamic protocol (can be abolished at runtime)
 '$lgt_valid_protocol_property'(static).					% static protocol
 '$lgt_valid_protocol_property'(debugging).				% protocol compiled in debug mode
-'$lgt_valid_protocol_property'(file(_, _)).				% source file name plus file directory
-'$lgt_valid_protocol_property'(lines(_, _)).			% start and end lines in a source file
 '$lgt_valid_protocol_property'(public(_)).				% list of predicate indicators
 '$lgt_valid_protocol_property'(protected(_)).			% list of predicate indicators of protected predicates declared in the protocol
 '$lgt_valid_protocol_property'(private(_)).				% list of predicate indicators of private predicates declared in the protocol
 '$lgt_valid_protocol_property'(declares(_, _)).			% list of declaration properties for a predicate declared in the protocol
+% the remaining properties are available only when the entities are compiled with the "source_data" flag turned on
 '$lgt_valid_protocol_property'(info(_)).				% list of pairs with user-defined protocol documentation
+'$lgt_valid_protocol_property'(file(_, _)).				% source file name plus file directory
+'$lgt_valid_protocol_property'(lines(_, _)).			% start and end lines in a source file
 '$lgt_valid_protocol_property'(number_of_clauses(_)).	% number of predicate clauses
 '$lgt_valid_protocol_property'(uses(_, _, _)).			% dependency on an object predicate (e.g. a message to an object as an initialization goal)
 '$lgt_valid_protocol_property'(use_module(_, _, _)).	% dependency on a module predicate (e.g. an explicit-qualified module call as an initialization goal)
