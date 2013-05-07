@@ -5,7 +5,7 @@
 %
 %  integration code for YAP 6.0.2 and later versions to improve
 %  usability when using the YAP profilers
-%  Last updated on April 9, 2013
+%  Last updated on May 7, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -37,7 +37,6 @@ user:prolog_predicate_name(user:'$lgt_send_to_obj_ne_'(_, _, _), '::/2 (event tr
 user:prolog_predicate_name(user:'$lgt_send_to_self_'(_, _, _), '::/1') :- !.
 user:prolog_predicate_name(user:'$lgt_obj_super_call_'(_, _, _), '^^/2 (from obj; same pred)') :- !.
 user:prolog_predicate_name(user:'$lgt_ctg_super_call_'(_, _, _), '^^/2 (from ctg; same pred)') :- !.
-user:prolog_predicate_name(user:'$lgt_ctg_call_'(_, _, _, _), ':/1') :- !.
 user:prolog_predicate_name(user:'$lgt_call_in_this'(_, _), 'call/1') :- !.
 
 user:prolog_predicate_name(user:'$lgt_send_to_obj'(_, _, _), '::/2 (event-aware)') :- !.
@@ -45,7 +44,6 @@ user:prolog_predicate_name(user:'$lgt_send_to_obj_ne'(_, _, _), '::/2 (event tra
 user:prolog_predicate_name(user:'$lgt_send_to_self'(_, _, _), '::/1') :- !.
 user:prolog_predicate_name(user:'$lgt_obj_super_call'(_, _, _), '^^/2 (from obj; same pred)') :- !.
 user:prolog_predicate_name(user:'$lgt_ctg_super_call'(_, _, _), '^^/2 (from ctg; same pred)') :- !.
-user:prolog_predicate_name(user:'$lgt_ctg_call'(_, _, _), ':/1') :- !.
 
 user:prolog_predicate_name(user:'$lgt_metacall'(_, _, _, _, _, _, _), 'call/N') :- !.
 user:prolog_predicate_name(user:'$lgt_metacall'(_, _, _, _, _, _), 'call/N') :- !.
