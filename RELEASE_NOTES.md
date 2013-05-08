@@ -34,6 +34,13 @@ Logtalk compiler and runtime
 * CHANGED: The message terms for lambda expression warnings for unclassified
 variables and mixed-up variables now include the list of culprit variables.
 
+Documentation
+-------------
+
+* UPDATED: The `UPGRADING.md` file now contains a summary of the major changes
+in Logtalk 3.x that may require compatibility updates for running Logtalk 2.x
+applications.
+
 
 3.00.0 Alpha 16 - May 6, 2013
 =============================
