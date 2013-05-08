@@ -590,25 +590,25 @@ object_property(Obj, Prop) :-
 
 
 '$lgt_object_property_resources'(Obj, Dcl, DDcl, Flags, Scope, Resources) :-
-	(	Flags /\ 64 =:= 64 ->
-		% dynamic declarations are allowed
-		findall(
-			Functor/Arity,
-			((call(Dcl, Predicate, Scope, _, _); call(DDcl, Predicate, Scope)),
-			 functor(Predicate, Functor, Arity)),
-			Predicates)
-	;	findall(
-			Functor/Arity,
-			(call(Dcl, Predicate, Scope, _, _),
-			 functor(Predicate, Functor, Arity)),
-			Predicates)
-	),
 	findall(
-		op(Priority, Specifier, Operator),
-		'$lgt_entity_property_'(Obj, op(Priority, Specifier, Operator, Scope)),
-		Operators
-	),
-	'$lgt_append'(Predicates, Operators, Resources).
+		Resource,
+		'$lgt_object_property_resource'(Obj, Dcl, DDcl, Flags, Scope, Resource),
+		Resources
+	).
+
+
+'$lgt_object_property_resource'(Obj, Dcl, _, _, Scope, Functor/Arity) :-
+	call(Dcl, Predicate, Scope, _, _),
+	functor(Predicate, Functor, Arity).
+
+'$lgt_object_property_resource'(Obj, _, DDcl, Flags, Scope, Functor/Arity) :-
+	Flags /\ 64 =:= 64,
+	% dynamic declarations are allowed
+	call(DDcl, Predicate, Scope),
+	functor(Predicate, Functor, Arity).
+
+'$lgt_object_property_resource'(Obj, _, _, _, Scope, op(Priority, Specifier, Operator)) :-
+	'$lgt_entity_property_'(Obj, op(Priority, Specifier, Operator, Scope)).
 
 
 
@@ -659,17 +659,20 @@ category_property(Ctg, Prop) :-
 	findall(
 		Functor/Arity,
 		(call(Dcl, Predicate, p(p(p)), _, _, Ctg), functor(Predicate, Functor, Arity)),
-		Predicates).
+		Predicates
+	).
 '$lgt_category_property'(protected(Predicates), Ctg, Dcl, _, _) :-
 	findall(
 		Functor/Arity,
 		(call(Dcl, Predicate, p(p), _, _, Ctg), functor(Predicate, Functor, Arity)),
-		Predicates).
+		Predicates
+	).
 '$lgt_category_property'(private(Predicates), Ctg, Dcl, _, _) :-
 	findall(
 		Functor/Arity,
 		(call(Dcl, Predicate, p, _, _, Ctg), functor(Predicate, Functor, Arity)),
-		Predicates).
+		Predicates
+	).
 '$lgt_category_property'(declares(Predicate, Properties), Ctg, Dcl, _, _) :-
 	'$lgt_category_property_declares'(Ctg, Dcl, Predicate, Properties).
 '$lgt_category_property'(defines(Predicate, Properties), Ctg, _, Def, _) :-
@@ -722,17 +725,20 @@ protocol_property(Ptc, Prop) :-
 	findall(
 		Functor/Arity,
 		(call(Dcl, Predicate, p(p(p)), _, _, Ptc), functor(Predicate, Functor, Arity)),
-		Predicates).
+		Predicates
+	).
 '$lgt_protocol_property'(protected(Predicates), Ptc, Dcl, _) :-
 	findall(
 		Functor/Arity,
 		(call(Dcl, Predicate, p(p), _, _, Ptc), functor(Predicate, Functor, Arity)),
-		Predicates).
+		Predicates
+	).
 '$lgt_protocol_property'(private(Predicates), Ptc, Dcl, _) :-
 	findall(
 		Functor/Arity,
 		(call(Dcl, Predicate, p, _, _, Ptc), functor(Predicate, Functor, Arity)),
-		Predicates).
+		Predicates
+	).
 '$lgt_protocol_property'(declares(Predicate, Properties), Ptc, Dcl, _) :-
 	'$lgt_protocol_property_declares'(Ptc, Dcl, Predicate, Properties).
 '$lgt_protocol_property'(number_of_clauses(Total), Ptc, _, _) :-
@@ -995,7 +1001,7 @@ create_protocol(Ptc, Relations, Directives) :-
 
 % '$lgt_gen_entity_identifier'(+char, -entity_identifier)
 %
-% generates a new, unique entity identifier by appending an integer to a base char
+% generates a new, unique, entity identifier by appending an integer to a base char
 
 '$lgt_gen_entity_identifier'(Base, Identifier) :-
 	char_code(Base, Code),
