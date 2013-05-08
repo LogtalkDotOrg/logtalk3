@@ -41,6 +41,8 @@ Documentation
 in Logtalk 3.x that may require compatibility updates for running Logtalk 2.x
 applications.
 
+* UPDATED: The tutorial section on categories.
+
 
 3.00.0 Alpha 16 - May 6, 2013
 =============================

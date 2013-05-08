@@ -52,13 +52,13 @@ by defining a category that implements a set of predicates for handling dynamic 
 We want to define a set of predicates to handle dynamic object attributes. We need public predicates to set, get, and delete attributes, and a private dynamic predicate to store the attributes values. Let us name these predicates <code>set_attribute/2</code> and <code>get_attribute/2</code>, for getting and setting an attribute value, <code>del_attribute/2</code> and <code>del_attributes/2</code>, for deleting attributes, and <code>attribute_/2</code>, for storing the attributes values.
 </p>
 <p>
-We do not want to encapsulate these predicates in an object. Why? Because they are a set of useful, closely related, predicates that may be used by several, unrelated, objects. If defined at an object level, we would be constrained to use inheritance in order to have the predicates available to other objects. Furthermore, this could force us to use multi-inheritance or to have some kind of generic root object containing all kinds of possible useful predicates.
+But we do not want to encapsulate these predicates in an object. Why? Because they are a set of useful, closely related, predicates that may be used by several, unrelated, objects. If defined at an object level, we would be constrained to use inheritance in order to have the predicates available to other objects. Furthermore, this could force us to use multi-inheritance or to have some kind of generic root object containing all kinds of possible useful predicates.
 </p>
 <p>
 For this kind of situation, Logtalk enables the programmer to encapsulate the predicates in a <em>category</em>, so that they can be used in any object. A category is a Logtalk entity, at the same level as objects and protocols. It can contain predicates directives and/or definitions. Category predicates can be imported by any object, without code duplication and without resorting to inheritance.
 </p>
 <p>
-When defining category predicates, we need to remember that a category can be imported by more than one object. Because of that, the calls to the built-in methods that handle the private dynamic predicate (like <a title="Consult reference manual" href="../refman/methods/assertz1.html"><code>assertz/1</code></a> or <a title="Consult reference manual" href="../refman/methods/retract1.html"><code>retract/1</code></a>) must be made using the <em>message to self</em> control structure, <a title="Consult reference manual" href="../refman/control/to_self1.html"><code>::/1</code></a>. This way, we ensure that when we call one of the attribute predicates on an object, the object own definition of <code>attribute_/2</code> will be used. The predicates definitions are straightforward:
+When defining category predicates, we need to remember that a category can be imported by more than one object. Thus, the calls to the built-in methods that handle the private dynamic predicate (such as <a title="Consult reference manual" href="../refman/methods/assertz1.html"><code>assertz/1</code></a> or <a title="Consult reference manual" href="../refman/methods/retract1.html"><code>retract/1</code></a>) must be made either in the context of <em>self</em>, using the <em>message to self</em> control structure, <a title="Consult reference manual" href="../refman/control/to_self1.html"><code>::/1</code></a>, or in the context of <em>this</em> (i.e. in the context of the object importing the category). This way, we ensure that when we call one of the attribute predicates on an object, the intended object own definition of <code>attribute_/2</code> will be used. The predicates definitions are straightforward. For example, if opting for storing the attributes in <em>self</em>:
 </p>
 <pre>:- category(attributes).
 
@@ -92,6 +92,9 @@ When defining category predicates, we need to remember that a category can be im
         ::retractall(attribute_(Attribute, Value)).
 
 :- end_category.</pre>
+<p>
+The alternative, opting for storing the attributes on <em>this</em>, is similar: just delete the uses of the <code>::/1</code> control structure from the code above. 
+</p>
 <p>
 We have two new directives, <a title="Consult reference manual" href="../refman/directives/category1_3.html"><code>category/1</code></a> and <a title="Consult reference manual" href="../refman/directives/end_category0.html"><code>end_category/0</code></a>, that encapsulate the category code. If needed, we can put the predicates directives inside a protocol that will be implemented by the category:
 </p>
@@ -142,13 +145,13 @@ no</pre>
 	<li>An object reuses a category by importing it. The imported predicates behave as if they have been defined in the object itself.</li>
 </ul>
 <ul>
-	<li>When do we use a category instead of an object? Whenever we have a set of closely related predicates that we want to reuse in several, unrelated, objects. Categories can be interpreted as object building components.</li>
+	<li>When do we use a category instead of an object? Whenever we have a set of closely related predicates that we want to reuse in several, unrelated, objects without being constrained by inheritance relations. Thus, categories can be interpreted as object building components.</li>
 </ul>
 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: October 26, 2006</span>
+		<span>Last updated on: May 8, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="lists.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="reflection.html">next</a></span><br/>
