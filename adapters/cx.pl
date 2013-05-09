@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for CxProlog 0.97.6 or a later version
-%  Last updated on May 4, 2013
+%  Last updated on May 9, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -464,12 +464,12 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_current_date'(?Year, ?Month, ?Day)
+% '$lgt_current_date'(?integer, ?integer, ?integer)
 
 '$lgt_current_date'(2006, 6, 25).
 
 
-% '$lgt_current_time'(?Hours, ?Mins, ?Secs)
+% '$lgt_current_time'(?integer, ?integer, ?integer)
 
 '$lgt_current_time'(10, 39, 12).
 

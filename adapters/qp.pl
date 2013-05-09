@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Qu-Prolog 9.0 and later versions
-%  Last updated on May 4, 2013
+%  Last updated on May 9, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -490,7 +490,7 @@ format(Format, Arguments) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_current_date'(?Year, ?Month, ?Day)
+% '$lgt_current_date'(?integer, ?integer, ?integer)
 
 '$lgt_current_date'(Year, Month, Day) :-
 	realtime(Time),
@@ -499,11 +499,11 @@ format(Format, Arguments) :-
 	Month is Month2 + 1.
 
 
-% '$lgt_current_time'(?Hours, ?Mins, ?Secs)
+% '$lgt_current_time'(?integer, ?integer, ?integer)
 
-'$lgt_current_time'(Hours, Mins, Secs) :-
+'$lgt_current_time'(Hours, Minutes, Seconds) :-
 	realtime(Time),
-	localtime(Time, time(_, _, _, Hours, Mins, Secs, _)).
+	localtime(Time, time(_, _, _, Hours, Minutes, Seconds, _)).
 
 
 

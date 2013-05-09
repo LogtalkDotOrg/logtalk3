@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for MasterProLog 4.1
-%  Last updated on May 4, 2013
+%  Last updated on May 9, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -385,16 +385,16 @@ forall(Generate, Test) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_current_date'(?Year, ?Month, ?Day)
+% '$lgt_current_date'(?integer, ?integer, ?integer)
 
 '$lgt_current_date'(Year, Month, Day) :-
 	time_info([year,month,day],[Year,Month,Day]).
 
 
-% '$lgt_current_time'(?Hours, ?Mins, ?Secs)
+% '$lgt_current_time'(?integer, ?integer, ?integer)
 
-'$lgt_current_time'(Hours, Mins, Secs) :-
-	time_info([hour,min,sec],[Hours,Mins,Secs]).
+'$lgt_current_time'(Hours, Minutes, Seconds) :-
+	time_info([hour,min,sec],[Hours,Minutes,Seconds]).
 
 
 

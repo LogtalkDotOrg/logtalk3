@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SWI Prolog 6.0.0 and later versions
-%  Last updated on May 4, 2013
+%  Last updated on May 9, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -454,18 +454,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_current_date'(?Year, ?Month, ?Day)
+% '$lgt_current_date'(?integer, ?integer, ?integer)
 
 '$lgt_current_date'(Year, Month, Day) :-
 	get_time(Time),
 	convert_time(Time, Year, Month, Day, _, _, _, _).
 
 
-% '$lgt_current_time'(?Hours, ?Mins, ?Secs)
+% '$lgt_current_time'(?integer, ?integer, ?integer)
 
-'$lgt_current_time'(Hours, Mins, Secs) :-
+'$lgt_current_time'(Hours, Minutes, Seconds) :-
 	get_time(Time),
-	convert_time(Time, _, _, _, Hours, Mins, Secs, _).
+	convert_time(Time, _, _, _, Hours, Minutes, Seconds, _).
 
 
 

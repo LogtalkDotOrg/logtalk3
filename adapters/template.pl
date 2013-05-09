@@ -358,15 +358,15 @@ numbervars(Term, From, Next) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_current_date'(?Year, ?Month, ?Day)
+% '$lgt_current_date'(?integer, ?integer, ?integer)
 
 '$lgt_current_date'(Year, Month, Day) :-
 	?????
 
 
-% '$lgt_current_time'(?Hours, ?Mins, ?Secs)
+% '$lgt_current_time'(?integer, ?integer, ?integer)
 
-'$lgt_current_time'(Hours, Mins, Secs) :-
+'$lgt_current_time'(Hours, Minutes, Seconds) :-
 	?????
 
 

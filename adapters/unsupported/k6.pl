@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for K-Prolog 6.0.4 and later versions
-%  Last updated on May 4, 2013
+%  Last updated on May 9, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -347,16 +347,16 @@ setup_call_cleanup(_, _, _) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_current_date'(?Year, ?Month, ?Day)
+% '$lgt_current_date'(?integer, ?integer, ?integer)
 
 '$lgt_current_date'(Year, Month, Day) :-
 	time(_, _, _, Day, Month, Year, _, _, _).
 
 
-% '$lgt_current_time'(?Hours, ?Mins, ?Secs)
+% '$lgt_current_time'(?integer, ?integer, ?integer)
 
-'$lgt_current_time'(Hours, Mins, Secs) :-
-	time(Secs, Mins, Hours, _, _, _, _, _, _).
+'$lgt_current_time'(Hours, Minutes, Seconds) :-
+	time(Seconds, Minutes, Hours, _, _, _, _, _, _).
 
 
 
