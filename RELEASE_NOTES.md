@@ -34,6 +34,12 @@ Logtalk compiler and runtime
 * CHANGED: The message terms for lambda expression warnings for unclassified
 variables and mixed-up variables now include the list of culprit variables.
 
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: Added definitions for the internal time and date predicates to the
+Lean Prolog adapter file.
+
 Documentation
 -------------
 

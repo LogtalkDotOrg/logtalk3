@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Lean Prolog 3.7.10 and later versions
-%  Last updated on May 4, 2013
+%  Last updated on May 9, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -548,14 +548,22 @@ to_engine(Interactor, Pattern, Goal) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_current_date'(?Year, ?Month, ?Day)
+% '$lgt_current_date'(?integer, ?integer, ?integer)
 
-'$lgt_current_date'(2011, 8, 26).
+'$lgt_current_date'(Year, Month, Day) :-
+	new_java_object('java.util.GregorianCalendar', Calendar),
+	get_java_field(Calendar,'YEAR', Field1), invoke_java_method(Calendar, get(Field1), Year),
+	get_java_field(Calendar,'MONTH', Field2), invoke_java_method(Calendar, get(Field2), Month),
+	get_java_field(Calendar,'DAY_OF_MONTH', Field3), invoke_java_method(Calendar, get(Field3), Day).
 
 
-% '$lgt_current_time'(?Hours, ?Mins, ?Secs)
+% '$lgt_current_time'(?integer, ?integer, ?integer)
 
-'$lgt_current_time'(15, 00, 00).
+'$lgt_current_time'(Hours, Minutes, Seconds) :-
+	new_java_object('java.util.GregorianCalendar', Calendar),
+	get_java_field(Calendar,'HOUR_OF_DAY', Field4), invoke_java_method(Calendar, get(Field4), Hours),
+	get_java_field(Calendar,'MINUTE', Field5), invoke_java_method(Calendar, get(Field5), Minutes),
+	get_java_field(Calendar,'SECOND', Field6), invoke_java_method(Calendar, get(Field6), Seconds).
 
 
 
