@@ -885,43 +885,46 @@
 			).
 
 		make_directory(Directory) :-
-			(	{exists_dir(Directory)} ->
+			expand_path(Directory, ExpandedPath),
+			(	{exists_dir(ExpandedPath)} ->
 				true
-			;	{make_directory(Directory)}
+			;	{make_directory(ExpandedPath)}
 			).
 
-		delete_directory(_) :-
-			throw(not_available(delete_directory/1)).
+		delete_directory(Directory) :-
+			expand_path(Directory, ExpandedPath),
+			{delete_file(ExpandedPath)}.
 
 		change_directory(Directory) :-
-			{absolute_file_name(Directory, Path),
-			 working_directory(_, Path)}.
+			expand_path(Directory, ExpandedPath),
+			{working_directory(_, ExpandedPath)}.
 
 		working_directory(Directory) :-
 			{working_directory(Directory, Directory)}.
 
 		directory_exists(Directory) :-
-			{exists_dir(Directory)}.
+			expand_path(Directory, ExpandedPath),
+			{exists_dir(ExpandedPath)}.
 
 		file_exists(File) :-
-			{working_directory(Path0, Path0)},
-			atom_concat(Path0, '/', Path1),
-			atom_concat(Path1, File, Path),
-			{exists_file(Path)}.
+			expand_path(File, ExpandedPath),
+			{exists_file(ExpandedPath)}.
 
 		file_modification_time(File, Time) :-
-			{new_java_object('java.io.File'(File), Object),
+			expand_path(File, ExpandedPath),
+			{new_java_object('java.io.File'(ExpandedPath), Object),
 			 invoke_java_method(Object, lastModified, Time)}.
 
 		file_size(File, Size) :-
-			{new_java_object('java.io.File'(File), Object),
-			 invoke_java_method(Object, length, Size)}.
+			expand_path(File, ExpandedPath),
+			{new_java_object('java.io.File'(ExpandedPath), Object),
+			 invoke_java_method(Object, length, Size0)},
+			atom_codes(Size0, Codes),
+			number_codes(Size, Codes).
 
 		delete_file(File) :-
-			{working_directory(Path0, Path0)},
-			atom_concat(Path0, '/', Path1),
-			atom_concat(Path1, File, Path),
-			{delete_file(Path)}.
+			expand_path(File, ExpandedPath),
+			{delete_file(ExpandedPath)}.
 
 		rename_file(Old, New) :-
 			{rename_file(Old, New)}.
