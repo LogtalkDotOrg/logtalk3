@@ -49,6 +49,12 @@ applications.
 
 * UPDATED: The tutorial section on categories.
 
+Examples
+--------
+
+* UPDATED: Added definitions for the predicates `file_modification_time/2` and
+`file_size/2` for Lean Prolog to the `cc` example.
+
 
 3.00.0 Alpha 16 - May 6, 2013
 =============================

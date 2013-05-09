@@ -22,9 +22,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2013/04/03,
+		date is 2013/05/09,
 		comment is 'Simple example of using conditional compilation to implement a portable operating-system interface for selected back-end Prolog compilers.'
 	]).
 
@@ -909,11 +909,13 @@
 			atom_concat(Path1, File, Path),
 			{exists_file(Path)}.
 
-		file_modification_time(_, _) :-
-			throw(not_available(file_modification_time/2)).
+		file_modification_time(File, Time) :-
+			{new_java_object('java.io.File'(File), Object),
+			 invoke_java_method(Object, lastModified, Time)}.
 
-		file_size(_, _) :-
-			throw(not_available(file_size/2)).
+		file_size(File, Size) :-
+			{new_java_object('java.io.File'(File), Object),
+			 invoke_java_method(Object, length, Size)}.
 
 		delete_file(File) :-
 			{working_directory(Path0, Path0)},
