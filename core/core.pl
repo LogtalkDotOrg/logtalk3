@@ -597,11 +597,11 @@ object_property(Obj, Prop) :-
 	).
 
 
-'$lgt_object_property_resource'(Obj, Dcl, _, _, Scope, Functor/Arity) :-
+'$lgt_object_property_resource'(_, Dcl, _, _, Scope, Functor/Arity) :-
 	call(Dcl, Predicate, Scope, _, _),
 	functor(Predicate, Functor, Arity).
 
-'$lgt_object_property_resource'(Obj, _, DDcl, Flags, Scope, Functor/Arity) :-
+'$lgt_object_property_resource'(_, _, DDcl, Flags, Scope, Functor/Arity) :-
 	Flags /\ 64 =:= 64,
 	% dynamic declarations are allowed
 	call(DDcl, Predicate, Scope),
