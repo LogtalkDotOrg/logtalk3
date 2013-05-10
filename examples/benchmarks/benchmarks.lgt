@@ -12,9 +12,9 @@
 :- object(benchmarks).
 
 	:- info([
-		version is 5.3,
+		version is 5.4,
 		author is 'Paulo Moura',
-		date is 2013/04/19,
+		date is 2013/05/10,
 		comment is 'Benchmark utility predicates and standard set of benchmarks.'
 	]).
 
@@ -51,27 +51,31 @@
 
 	% run all benchmark tests N times:
 	run(N) :-
+		empty_loop_time(N, LoopTime),
 		benchmark(Id, Goal),
-		run(Id, N, LoopTime, GoalTime, Average, Speed),
-		report(Id, Goal, N, LoopTime, GoalTime, Average, Speed),
+			run(Id, N, LoopTime, GoalTime, Average, Speed),
+			report(Id, Goal, N, LoopTime, GoalTime, Average, Speed),
 		fail.
 	run(_).
 
 	% run a specific benchmark test:
 	run(Id, N) :-
 		benchmark(Id, Goal),
+		empty_loop_time(N, LoopTime),
 		run(Id, N, LoopTime, GoalTime, Average, Speed),
 		report(Id, Goal, N, LoopTime, GoalTime, Average, Speed).
 
-	run(Id, N, LoopTime, GoalTime, Average, Speed) :-
-		{'$lgt_cpu_time'(Seconds1)},		% defined in the adapter files
+	empty_loop_time(N, LoopTime) :-
+		{'$lgt_cpu_time'(Begin)},		% defined in the adapter files
 		do_benchmark(empty_loop, N),
-		{'$lgt_cpu_time'(Seconds2)},
-		LoopTime is Seconds2 - Seconds1,
-		{'$lgt_cpu_time'(Seconds3)},
+		{'$lgt_cpu_time'(End)},
+		LoopTime is End - Begin.
+
+	run(Id, N, LoopTime, GoalTime, Average, Speed) :-
+		{'$lgt_cpu_time'(Begin)},
 		do_benchmark(Id, N),
-		{'$lgt_cpu_time'(Seconds4)},
-		GoalTime is Seconds4 - Seconds3,
+		{'$lgt_cpu_time'(End)},
+		GoalTime is End - Begin,
 		Average is (GoalTime - LoopTime)/N,
 		catch(Speed is round(1.0/Average), _, Speed = 'n/a').
 

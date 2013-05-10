@@ -52,6 +52,9 @@ applications.
 Examples
 --------
 
+* CHANGED: The `benchmarks` example now calculates the empty loop time only
+once when running a batch of benchmark tests.
+
 * UPDATED: Added definitions for the predicates `file_modification_time/2` and
 `file_size/2` for Lean Prolog to the `cc` example.
 
