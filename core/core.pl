@@ -8867,9 +8867,20 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_body'([Obj::Pred], TPred, '$lgt_debug'(goal([Obj::Pred], TPred), ExCtx), Ctx) :-
 	!,
+	'$lgt_comp_ctx'(Ctx, _, Sender, This, _, _, _, _, ExCtx, Mode, _),
+	(	Mode = compile(_),
+		This \== user,
+		nonvar(Obj),
+		Obj \= {_} ->
+		% not runtime message translation; remember object receiving message
+		'$lgt_add_referenced_object'(Obj)
+	;	true
+	),
+	% as delegation keeps the original sender, we cannot use a recursive call
+	% to the '$lgt_tr_body'/4 predicate to compile the ::/2 goal as that would
+	% reset the sender to "this"
 	'$lgt_tr_msg'(Pred, Obj, TPred0, Sender),
 	TPred = (Obj \= Sender -> TPred0; throw(error(permission_error(access, object, Sender), logtalk([Obj::Pred], This)))),
-	'$lgt_comp_ctx'(Ctx, _, Sender, This, _, _, _, _, ExCtx, _, _),
 	'$lgt_exec_ctx'(ExCtx, Sender, This, _, _, _).
 
 
@@ -9386,9 +9397,9 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, Mode, _),
 	'$lgt_exec_ctx_this'(ExCtx, This),
 	(	Mode = compile(_),
-		nonvar(Obj),
 		This \== user,
-		\+ functor(Obj, {}, 1) ->
+		nonvar(Obj),
+		Obj \= {_} ->
 		% not runtime message translation; remember object receiving message
 		'$lgt_add_referenced_object'(Obj)
 	;	true

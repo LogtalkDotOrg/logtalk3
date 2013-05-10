@@ -31,6 +31,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* FIXED: When compiling a message delegating call, the compiler would not
+check if the object to which the message is delegated is known.
+
 * CHANGED: The message terms for lambda expression warnings for unclassified
 variables and mixed-up variables now include the list of culprit variables.
 
