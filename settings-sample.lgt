@@ -215,9 +215,10 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 */
 
 
-%  To maximize performance by turning on all optimizations and by turning
-%  off relevant optional features and collecting source data for integration
-%  with development tools, uncomment the following lines:
+%  To maximize performance when deploying an application by turning on all
+%  optimizations and turning off relevant optional features and collecting
+%  source data for integration with development tools, uncomment the following
+%  lines:
 
 /*
 :- initialization((

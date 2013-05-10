@@ -85,4 +85,3 @@ The documentation only directives `calls/1` and `uses/1` are deprecated. The
 reflection API in Logtalk 3.x now returns all object (and module) dependencies
 found on sufficiently instantiated `::/2` and `:/2` calls when compiling an
 object.
-
