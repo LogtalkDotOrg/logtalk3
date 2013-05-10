@@ -9,8 +9,28 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	(current_logtalk_flag(modules, supported) -> ensure_loaded(module); true),
-	% compile messages with event support in order to measure the implicit overhead
-	logtalk_load([category, objects, database, plain, maze, graph, benchmarks], [events(allow)])
-)).
+:- if(current_logtalk_flag(prolog_dialect, sicstus)).
+
+	:- initialization((
+		% workaround the ensure_loaded/1 built-in predicate not working
+		% relative to the user visible current directory but to the directory
+		% of the file being loaded (which can be different depending on the
+		% value of the "scratch_directory" flag)
+		current_directory(Current),
+		atom_concat(Current, module, Path),
+		ensure_loaded(Path),
+		logtalk_load([category], [events(allow), optimize(on)]),
+		logtalk_load([objects, database, maze, graph], [events(allow), optimize(on)]),
+		logtalk_load([plain, benchmarks], [events(allow), optimize(on)])
+	)).
+
+:- else.
+
+	:- initialization((
+		(current_logtalk_flag(modules, supported) -> ensure_loaded(module); true),
+		logtalk_load([category], [events(allow), optimize(on)]),
+		logtalk_load([objects, database, maze, graph], [events(allow), optimize(on)]),
+		logtalk_load([plain, benchmarks], [events(allow), optimize(on)])
+	)).
+
+:- endif.

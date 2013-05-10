@@ -21,11 +21,8 @@ This example is made of four loader files and five source files:
 		loads all source files with event support turned on
 	loader_no_events.lgt
 		loads all source files with event support turned off
-	loader_static_binding.lgt
-		loads all source files with event support turned off and using
-		static binding
 	loader.lgt
-		the same as the loader_static_binding.lgt file
+		the same as the loader_no_events.lgt file
 
 	benchmarks.lgt
 		contains the benchmark goals and testing predicates
@@ -85,7 +82,7 @@ context), the performance of Logtalk optimized calls might be slightly
 worse than the equivalent plain Prolog predicate calls.
 
 When running the tests, pay special attention to the empty loop times. If
-the times for the empty loop are not stable across tests, try to use an
+the times for the empty loop are not stable across runs, try to use an
 higher value (than the default one) as argument of the run/1 predicate.
 
 When the number of benchmark test repetitions is too low, you may get a
