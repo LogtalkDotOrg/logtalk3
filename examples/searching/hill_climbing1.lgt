@@ -13,14 +13,14 @@
 	instantiates(heuristic_search(Threshold))).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2008/6/9,
+		date is 2013/05/10,
 		comment is 'Hill climbing heuristic state space search strategy.',
 		parnames is ['Threshold']
 	]).
 
-	:- uses(list, [member/2, reverse/2, sort/2]).
+	:- uses(list, [reverse/2, sort/2]).
 
 	search(Space, State, Threshold, Solution, Cost) :-
 		hill(Space, State, Threshold, [], Path, 0, Cost),

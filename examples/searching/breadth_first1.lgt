@@ -13,19 +13,17 @@
 	instantiates(blind_search(Bound))).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Ivan Bratko; adapted to Logtalk by Paulo Moura.',
-		date is 2010/06/23,
+		date is 2013/05/10,
 		comment is 'Breadth first state space search strategy.',
 		source is 'Code adapted from the book "Prolog Programming for Artificial Intelligence" by Ivan Bratko.',
 		parnames is ['Bound']
 	]).
 
-	:- uses(list, [member/2, reverse/2]).
-
 	search(Space, State, Bound, Solution) :-
 		breadth(Space, l(State), Bound, Path),
-		reverse(Path, Solution).
+		list::reverse(Path, Solution).
 
 	breadth(Space, Tree, Bound, Solution) :-
 		expand([], Tree, Tree2, Solved, Solution, Space, Bound),

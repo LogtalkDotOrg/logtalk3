@@ -13,15 +13,13 @@
 	instantiates(heuristic_search(Threshold))).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Ivan Bratko; adapted to Logtalk by Paulo Moura.',
-		date is 2010/6/23,
+		date is 2013/05/10,
 		comment is 'Best first heuristic state space search strategy.',
 		source is 'Code adapted from the book "Prolog Programming for Artificial Intelligence" by Ivan Bratko.',
 		parnames is ['Threshold']
 	]).
-
-	:- uses(list, [member/2, reverse/2]).
 
 	:- private(expand/8).
 	:- private(succlist/5).
@@ -32,7 +30,7 @@
 
 	search(Space, State, Threshold, Solution, Cost) :-
 		expand([], l(State, 0/0), Threshold, _, yes, Path, Space, Cost),
-		reverse(Path, Solution).
+		list::reverse(Path, Solution).
 
 	expand(Path, l(State,Cost/_), _, _, yes, [State|Path], Space, Cost) :-
 		Space::goal_state(State).
