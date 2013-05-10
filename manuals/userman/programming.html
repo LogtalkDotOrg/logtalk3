@@ -321,7 +321,7 @@ Note that the scope of the <code>set_logtalk_flag/2</code> directive is local to
 
 	<dl>
 		<dt><code>report(Option)</code></dt>
-			<dd>Controls reporting of each compiled or loaded object, category, or protocol (including compilation and loading warnings). Possible option values are <code>on</code> (verbose, the usual default), <code>warnings</code> (only print warnings), and <code>off</code> (silent compilation and loading, useful for batch processing).</dd>
+			<dd>Controls the default printing of messages. Possible option values are <code>on</code> (by usual default, print all messages that are not intercepted by the user), <code>warnings</code> (only print warning messages that are not intercepted by the user), and <code>off</code> (do not print any messages that are not intercepted by the user).</dd>
 	</dl>
 	<dl>
 		<dt><code>code_prefix(Option)</code></dt>
@@ -695,7 +695,7 @@ When objects or categories containing grammar rules are compiled in debug mode, 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: May 4, 2013</span>
+		<span>Last updated on: May 10, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="installing.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="migration.html">next</a></span><br/>
