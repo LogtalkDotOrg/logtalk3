@@ -5341,7 +5341,7 @@ current_logtalk_flag(Flag, Value) :-
 	functor(Pred, Functor, Arity),
 	(	'$lgt_pp_referenced_object_message_'(Obj, Functor/Arity, _) ->
 		true
-	;	'$lgt_pp_uses_predicate_'(Obj, Functor/Arity, Functor/Arity) ->
+	;	'$lgt_pp_uses_predicate_'(Obj, Pred, _) ->
 		true
 	;	'$lgt_current_line_numbers'(Lines),
 		(	atom(Obj) ->
@@ -5363,7 +5363,7 @@ current_logtalk_flag(Flag, Value) :-
 	functor(Pred, Functor, Arity),
 	(	'$lgt_pp_referenced_module_predicate_'(Module, Functor/Arity, _) ->
 		true
-	;	'$lgt_pp_use_module_predicate_'(Module, Functor/Arity, Functor/Arity) ->
+	;	'$lgt_pp_use_module_predicate_'(Module, Pred, _) ->
 		true
 	;	'$lgt_current_line_numbers'(Lines),
 		assertz('$lgt_pp_referenced_module_predicate_'(Module, Functor/Arity, Lines))
@@ -5410,6 +5410,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_add_entity_properties'(end, Entity) :-
 	'$lgt_pp_uses_predicate_'(Object, Original, Alias),
 	functor(Original, OriginalFunctor, OriginalArity),
+	\+ '$lgt_pp_referenced_object_message_'(Object, OriginalFunctor/OriginalArity, _),
 	functor(Alias, AliasFunctor, AliasArity),
 	assertz('$lgt_pp_entity_property_'(Entity, uses(Object, OriginalFunctor/OriginalArity, AliasFunctor/AliasArity))),
 	fail.
@@ -5429,6 +5430,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_add_entity_properties'(end, Entity) :-
 	'$lgt_pp_use_module_predicate_'(Module, Original, Alias),
 	functor(Original, OriginalFunctor, OriginalArity),
+	\+ '$lgt_pp_referenced_module_predicate_'(Module, OriginalFunctor/OriginalArity, _),
 	functor(Alias, AliasFunctor, AliasArity),
 	assertz('$lgt_pp_entity_property_'(Entity, use_module(Module, OriginalFunctor/OriginalArity, AliasFunctor/AliasArity))),
 	fail.

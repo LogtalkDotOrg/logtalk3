@@ -34,6 +34,10 @@ Logtalk compiler and runtime
 * FIXED: When compiling a message delegating call, the compiler would not
 check if the object to which the message is delegated is known.
 
+* FIXED: When both `uses/2` directives and explicit `::/2` calls are used
+for the same messages to the same objects, the entity property predicates
+could return duplicated `uses/3` and `use_module/3` properties.
+
 * CHANGED: The message terms for lambda expression warnings for unclassified
 variables and mixed-up variables now include the list of culprit variables.
 
