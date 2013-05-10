@@ -31,7 +31,7 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* FIXED: When compiling a message delegating call, the compiler would not
+* FIXED: When compiling a message delegation call, the compiler would not
 check if the object to which the message is delegated is known.
 
 * FIXED: When both `uses/2` directives and explicit `::/2` calls are used
@@ -64,6 +64,14 @@ once when running a batch of benchmark tests.
 
 * UPDATED: Added definitions for the predicates `file_modification_time/2` and
 `file_size/2` for Lean Prolog to the `cc` example.
+
+Installers and installation scripts
+-----------------------------------
+
+* IMPROVED: The Windows installer now deletes any XSB `.xwam` files found
+in existing `adapters`, `integration`, and `paths` folders from a previous
+installation in order to prevent upgrading issues when using XSB as the
+backend Prolog compiler.
 
 
 3.00.0 Alpha 16 - May 6, 2013

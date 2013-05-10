@@ -111,6 +111,11 @@ Source: "{#MyBaseDir}\tools\lgtdoc\xml\*.bat"; DestDir: "{win}"; Components: bas
 Filename: "{app}\{#MyAppUrlName}"; Section: "InternetShortcut"; Key: "URL"; String: "{#MyAppURL}"; Components: base
 Filename: "{app}\{#MyAppRegUrlName}"; Section: "InternetShortcut"; Key: "URL"; String: "{#MyAppRegURL}"; Components: base
 
+[InstallDelete]
+Type: files; Name: "{app}\adapters\*.xwam"
+Type: files; Name: "{app}\integration\*.xwam"
+Type: files; Name: "{app}\paths\*.xwam"
+
 [Icons]
 Name: "{group}\Bibliography"; Filename: "{app}\BIBLIOGRAPHY.bib"; Components: base
 Name: "{group}\Documentation"; Filename: "{app}\manuals\index.html"; Components: base
