@@ -22,7 +22,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- initialization(
 	logtalk_load([
 		types_loader,
@@ -36,5 +35,5 @@
 		intervals_loader,
 		logging_loader,
 		meta_compiler_loader
-	])
+	], [optimize(on)])
 ).

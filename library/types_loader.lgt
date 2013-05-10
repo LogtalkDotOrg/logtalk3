@@ -41,5 +41,5 @@
 		setp, set, set1,
 		heapp, heaps,
 		comparingp
-	])
+	], [optimize(on)])
 ).

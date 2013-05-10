@@ -22,8 +22,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- initialization((
-	logtalk_load([types_loader, gensym]),
-	logtalk_load([metap, meta, meta_compiler])
+	logtalk_load([types_loader, gensym], [optimize(on)]),
+	logtalk_load([metap, meta, meta_compiler], [optimize(on)])
 )).

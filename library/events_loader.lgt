@@ -22,7 +22,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- initialization(
 	logtalk_load([
 		event_handlersp,
@@ -30,5 +29,5 @@
 		before_event_registry, after_event_registry,
 		monitorp, monitor
 	],
-	[events(allow)])
+	[events(allow), optimize(on)])
 ).

@@ -22,7 +22,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- initialization((
-	logtalk_load([loggingp, logging, logger])
+	logtalk_load([loggingp, logging, logger], [optimize(on)])
 )).

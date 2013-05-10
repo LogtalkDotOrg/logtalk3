@@ -24,5 +24,5 @@
 
 
 :- initialization(
-	logtalk_load([randomp, random])
+	logtalk_load([randomp, random], [optimize(on)])
 ).

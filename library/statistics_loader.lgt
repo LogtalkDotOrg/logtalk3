@@ -22,7 +22,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
-:- initialization((
-	logtalk_load([statisticsp, statistics]),
-	logtalk_load([population, sample]))).
+:- initialization(
+	logtalk_load([statisticsp, statistics, population, sample], [optimize(on)])
+).

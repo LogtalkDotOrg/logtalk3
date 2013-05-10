@@ -24,5 +24,5 @@
 
 
 :- initialization((
-	logtalk_load([metap, meta, loopp, loop])
+	logtalk_load([metap, meta, loopp, loop], [optimize(on)])
 )).

@@ -22,7 +22,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- initialization(
-	logtalk_load([observer, subject])
+	logtalk_load([observer, subject], [optimize(on)])
 ).
