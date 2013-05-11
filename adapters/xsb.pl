@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for XSB 3.3 or later versions
-%  Last updated on May 9, 2013
+%  Last updated on May 11, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -725,6 +725,10 @@ setup_call_catcher_cleanup(Setup, Call, Catcher, Cleanup) :-
 '$lgt_normalize_error_term'(error(Error, Context), error(NormalizedError, Context)) :-
 	'$lgt_normalize_error_term_aux'(Error, NormalizedError).
 
+'$lgt_normalize_error_term_aux'(
+	existence_error(procedure, ':'('usermod(?)', Functor/Arity)),
+	existence_error(procedure, Functor/Arity)
+).
 '$lgt_normalize_error_term_aux'(
 	existence_error(procedure, ':'(usermod, Functor/Arity)),
 	existence_error(procedure, Functor/Arity)

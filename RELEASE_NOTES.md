@@ -47,6 +47,9 @@ Prolog adapter and integration files
 * UPDATED: Added definitions for the internal time and date predicates to the
 Lean Prolog adapter file.
 
+* UPDATED: XSB adapter file for release 3.4.0, which changes the exception
+term format for errors within the pseudo-object `user`.
+
 Documentation
 -------------
 
