@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for YAP Prolog 6.0.2 and later versions
-%  Last updated on May 9, 2013
+%  Last updated on May 13, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -57,20 +57,21 @@
 		dynamic('$lgt_loaded_file_'/4), hide_predicate('$lgt_loaded_file_'/4),
 		dynamic('$lgt_current_flag_'/2), hide_predicate('$lgt_current_flag_'/2),
 		dynamic('$lgt_send_to_obj_static_binding_cache_'/4), hide_predicate('$lgt_send_to_obj_static_binding_cache_'/4),
-		dynamic('$lgt_ctg_call_static_binding_cache_'/4), hide_predicate('$lgt_ctg_call_static_binding_cache_'/4),
 		dynamic('$lgt_pp_warnings_top_goal_directory_'/2), hide_predicate('$lgt_pp_warnings_top_goal_directory_'/2),
 		dynamic('$lgt_pp_compilation_warnings_counter_'/1), hide_predicate('$lgt_pp_compilation_warnings_counter_'/1),
 		dynamic('$lgt_pp_loading_warnings_counter_'/1), hide_predicate('$lgt_pp_loading_warnings_counter_'/1),
 		dynamic('$lgt_pp_aux_predicate_counter_'/1), hide_predicate('$lgt_pp_aux_predicate_counter_'/1),
 		dynamic('$lgt_hook_term_expansion_'/2), hide_predicate('$lgt_hook_term_expansion_'/2),
 		dynamic('$lgt_hook_goal_expansion_'/2), hide_predicate('$lgt_hook_goal_expansion_'/2),
+		dynamic('$lgt_hook_goal_annotation_'/4), hide_predicate('$lgt_hook_goal_annotation_'/4),
+		dynamic('$lgt_hook_value_annotation_'/4), hide_predicate('$lgt_hook_value_annotation_'/4),
+		dynamic('$lgt_hook_body_annotation_'/3), hide_predicate('$lgt_hook_body_annotation_'/3),
 		dynamic('$lgt_threaded_tag_counter_'/1), hide_predicate('$lgt_threaded_tag_counter_'/1),
 		dynamic('$lgt_send_to_obj_'/3), hide_predicate('$lgt_send_to_obj_'/3),
 		dynamic('$lgt_send_to_obj_ne_'/3), hide_predicate('$lgt_send_to_obj_ne_'/3),
 		dynamic('$lgt_send_to_self_'/3), hide_predicate('$lgt_send_to_self_'/3),
 		dynamic('$lgt_ctg_super_call_'/3), hide_predicate('$lgt_ctg_super_call_'/3),
 		dynamic('$lgt_obj_super_call_'/3), hide_predicate('$lgt_obj_super_call_'/3),
-		dynamic('$lgt_ctg_call_'/3), hide_predicate('$lgt_ctg_call_'/3),
 		dynamic('$lgt_db_lookup_cache_'/5), hide_predicate('$lgt_db_lookup_cache_'/5),
 		dynamic('$lgt_logtalk.message_tokens'/5), hide_predicate('$lgt_logtalk.message_tokens'/5),
 		dynamic('$lgt_logtalk.message_prefix_stream'/5), hide_predicate('$lgt_logtalk.message_prefix_stream'/5),
