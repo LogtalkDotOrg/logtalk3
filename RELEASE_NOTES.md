@@ -41,6 +41,9 @@ could return duplicated `uses/3` and `use_module/3` properties.
 * CHANGED: The message terms for lambda expression warnings for unclassified
 variables and mixed-up variables now include the list of culprit variables.
 
+* IMPROVED: Recognize a new message kind, "help", in the structured message
+printing support. This message kind has first introduced by Quintus Prolog.
+
 Prolog adapter and integration files
 ------------------------------------
 

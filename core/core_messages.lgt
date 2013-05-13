@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/05/09,
+		date is 2013/05/13,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -39,6 +39,7 @@
 	% Quintus Prolog based prefixes (also used in SICStus Prolog):
 	logtalk::message_prefix_stream(banner, core, '', user_output).
 	logtalk::message_prefix_stream(banner(_), core, '', user_output).
+	logtalk::message_prefix_stream(help, _, '', user_output).
 	logtalk::message_prefix_stream(information, core, '% ', user_output).
 	logtalk::message_prefix_stream(information(_), core, '% ', user_output).
 	logtalk::message_prefix_stream(warning, core, '*     ', user_error).
