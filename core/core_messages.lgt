@@ -38,7 +38,6 @@
 
 	% Quintus Prolog based prefixes (also used in SICStus Prolog):
 	logtalk::message_prefix_stream(banner, core, '', user_output).
-	logtalk::message_prefix_stream(banner(_), core, '', user_output).
 	logtalk::message_prefix_stream(help, _, '', user_output).
 	logtalk::message_prefix_stream(information, core, '% ', user_output).
 	logtalk::message_prefix_stream(information(_), core, '% ', user_output).

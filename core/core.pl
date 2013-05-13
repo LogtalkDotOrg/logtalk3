@@ -4612,7 +4612,6 @@ current_logtalk_flag(Flag, Value) :-
 % Prolog compilers
 
 '$lgt_default_message_prefix_stream'(banner, _, '', user_output).
-'$lgt_default_message_prefix_stream'(banner(_), _, '', user_output).
 '$lgt_default_message_prefix_stream'(help, _, '', user_output).
 '$lgt_default_message_prefix_stream'(information, _, '% ', user_output).
 '$lgt_default_message_prefix_stream'(information(_), _, '% ', user_output).

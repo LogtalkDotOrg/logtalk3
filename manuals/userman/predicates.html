@@ -697,7 +697,7 @@ Why a mechanism for printing messages? Consider the different components in a Lo
 The Logtalk message printing mechanism provides you with a set of predicates, defined in the <code>logtalk</code> built-in object, and some hook predicates. Two of the most important predicates are <a title="Consult reference manual" href="../refman/methods/print_message3.html"><code>logtalk::print_message(Kind, Component, Term)</code></a>, which is used for printing a message, and <a title="Consult reference manual" href="../refman/methods/message_hook4.html"><code>logtalk::message_hook(Term, Kind, Component, Tokens)</code></a>, a user-defined hook predicate used for intercepting messages. The <code>Kind</code> argument is used to represent the nature of the message being printed. It can be e.g. a logging message, a warning message or an error message, In Logtalk this argument can be either an atom, e.g. <code>error</code>, or a compound term, e.g. <code>information(requested)</code>. Using a compound term allows easy partitioning of messages of the same kind in different groups. The following kinds of message are recognized by default:
 </p>
 <dl>
-	<dt><code>banner</code> and <code>banner(Group)</code></dt>
+	<dt><code>banner</code></dt>
 		<dd>banner messages</dd>
 	<dt><code>help</code></dt>
 		<dd>help messages</dd>
