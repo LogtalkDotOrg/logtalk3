@@ -698,15 +698,19 @@ The Logtalk message printing mechanism provides you with a set of predicates, de
 </p>
 <dl>
 	<dt><code>banner</code></dt>
-		<dd>banner messages</dd>
+		<dd>banner messages (usually when loading tools or main components)</dd>
 	<dt><code>help</code></dt>
-		<dd>help messages</dd>
+		<dd>messages printed in reply for the user asking for help (mostly for helping port existing Prolog code)</dd>
 	<dt><code>information</code> and <code>information(Group)</code></dt>
-		<dd>information messages</dd>
+		<dd>messages printed usually in reply to a user request for information</dd>
+	<dt><code>silent</code> and <code>silent(Group)</code></dt>
+		<dd>not printed by default (but can be intercepted using the <code>message_hook/4</code> predicate)</dd>
+	<dt><code>comment</code> and <code>comment(Group)</code></dt>
+		<dd>useful but usually not essential messages (can be suppressed by setting the <code>report</code> flag to <code>warnings</code>)</dd>
 	<dt><code>warning</code> and <code>warning(Group)</code></dt>
-		<dd>warning messages</dd>
+		<dd>warning messages (generated e.g. by the compiler)</dd>
 	<dt><code>error</code> and <code>error(Group)</code></dt>
-		<dd>error messages</dd>	
+		<dd>error messages (generated e.g. by the compiler)</dd>	
 </dl>
 <p>
 Messages are represented by atoms or compound terms, handy for machine-processing, and converted into a list of tokens, for human consumption. This conversion is performed using the non-terminal <a title="Consult reference manual" href="../refman/methods/message_tokens2.html"><code>logtalk::message_tokens(Term, Component)</code></a>. A simple example is:
@@ -725,9 +729,9 @@ The following tokens can be used when translating a message:
 </p>
 <dl>
 	<dt><code>at_same_line</code></dt>
-		<dd>Signals a following part to a multi-part message with no line break in between</dd>
+		<dd>Signals a following part to a multi-part message with no line break in between; this token is ignored when not the first in the list of tokens</dd>
 	<dt><code>flush</code></dt>
-		<dd>Flush the output stream</dd>
+		<dd>Flush the output stream (by calling the <code>flush_output/1</code> standard predicate)</dd>
 	<dt><code>nl</code></dt>
 		<dd>Change line in the output stream</dd>
 	<dt><code>Format-Arguments</code></dt>

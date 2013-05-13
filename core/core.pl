@@ -393,7 +393,7 @@ Obj<<Goal :-
 
 '$lgt_runtime_error_handler'(logtalk_debugger_aborted) :-
 	!,
-	'$lgt_print_message'(information(debugging), debugger, logtalk_debugger_aborted).
+	'$lgt_print_message'(comment(debugging), debugger, logtalk_debugger_aborted).
 
 '$lgt_runtime_error_handler'(error(Variable, Context)) :-
 	var(Variable),
@@ -1749,7 +1749,7 @@ logtalk_compile(Files, Flags) :-
 		retract('$lgt_pp_compilation_warnings_counter_'(CCounter)),
 		retract('$lgt_pp_loading_warnings_counter_'(LCounter)) ->
 		% report compilation and loading warnings
-		'$lgt_print_message'(information(warnings), core, compilation_and_loading_warnings(CCounter, LCounter))
+		'$lgt_print_message'(comment(warnings), core, compilation_and_loading_warnings(CCounter, LCounter))
 	;	% not top compilation/loading goal
 		true
 	).
@@ -4585,12 +4585,11 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_default_print_message'(silent(_), _, _, _, _, _) :-
 	!.
 
-'$lgt_default_print_message'(information, _, _, _, _, _) :-
+'$lgt_default_print_message'(comment, _, _, _, _, _) :-
 	'$lgt_compiler_flag'(report, warnings),
 	!.
 
-'$lgt_default_print_message'(information(Key), _, _, _, _, _) :-
-	Key \== requested,
+'$lgt_default_print_message'(comment(_), _, _, _, _, _) :-
 	'$lgt_compiler_flag'(report, warnings),
 	!.
 
@@ -4615,6 +4614,8 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_default_message_prefix_stream'(help, _, '', user_output).
 '$lgt_default_message_prefix_stream'(information, _, '% ', user_output).
 '$lgt_default_message_prefix_stream'(information(_), _, '% ', user_output).
+'$lgt_default_message_prefix_stream'(comment, _, '% ', user_output).
+'$lgt_default_message_prefix_stream'(comment(_), _, '% ', user_output).
 '$lgt_default_message_prefix_stream'(warning, _, '*     ', user_error).
 '$lgt_default_message_prefix_stream'(warning(_), _, '*     ', user_error).
 '$lgt_default_message_prefix_stream'(error, _,   '!     ', user_error).
@@ -4839,12 +4840,12 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_print_message'(silent(loading), core, reloading_file(SourceFile, Flags)),
 		'$lgt_compile_file'(SourceFile, PrologFile, Flags, loading),
 		'$lgt_load_compiled_file'(File, SourceFile, PrologFile),
-		'$lgt_print_message'(information(loading), core, reloaded_file(SourceFile, Flags))
+		'$lgt_print_message'(comment(loading), core, reloaded_file(SourceFile, Flags))
 	;	% first time loading this source file
 		'$lgt_print_message'(silent(loading), core, loading_file(SourceFile, Flags)),
 		'$lgt_compile_file'(SourceFile, PrologFile, Flags, loading),
 		'$lgt_load_compiled_file'(File, SourceFile, PrologFile),
-		'$lgt_print_message'(information(loading), core, loaded_file(SourceFile, Flags))
+		'$lgt_print_message'(comment(loading), core, loaded_file(SourceFile, Flags))
 	),
 	'$lgt_change_directory'(Current).
 
@@ -4937,7 +4938,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_report_redefined_entity'(Type, Entity, OldFile, NewFile, Lines) :-
 	(	NewFile == nil ->
 		% assume we're reloading the same source file so consider entity redefinitions normal
-		'$lgt_print_message'(information(loading), core, redefining_entity(Type, Entity))
+		'$lgt_print_message'(comment(loading), core, redefining_entity(Type, Entity))
 	;	% we've conflicting entity definitions coming from different source files
 		'$lgt_increment_loadind_warnings_counter',
 		'$lgt_print_message'(warning(loading), core, redefining_entity_from_file(NewFile, Lines, Type, Entity, OldFile))
@@ -5024,7 +5025,7 @@ current_logtalk_flag(Flag, Value) :-
 		(	Action == loading ->
 			'$lgt_print_message'(silent(compiling), core, compiled_file(SourceFile, Flags))
 		;	% Action == compiling
-			'$lgt_print_message'(information(compiling), core, compiled_file(SourceFile, Flags))
+			'$lgt_print_message'(comment(compiling), core, compiled_file(SourceFile, Flags))
 		)
 	).
 
@@ -18705,7 +18706,7 @@ current_logtalk_flag(Flag, Value) :-
 % reports result of attempt to load a settings file defined by the user
 
 '$lgt_report_settings_file'(loaded(Path)) :-
-	'$lgt_print_message'(information(settings), core, loaded_settings_file(Path)).
+	'$lgt_print_message'(comment(settings), core, loaded_settings_file(Path)).
 
 '$lgt_report_settings_file'(error(Path, Error)) :-
 	'$lgt_print_message'(error, core, error_loading_settings_file(Path, Error)).
@@ -18771,7 +18772,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_load_default_entities',
 	'$lgt_load_settings_file'(Result),
 	'$lgt_print_message'(banner, core, banner),
-	'$lgt_print_message'(information(settings), core, default_flags),
+	'$lgt_print_message'(comment(settings), core, default_flags),
 	'$lgt_assert_default_hooks',
 	'$lgt_start_runtime_threading',
 	'$lgt_report_settings_file'(Result),

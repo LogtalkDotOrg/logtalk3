@@ -30,7 +30,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/02/03,
+		date is 2013/05/13,
 		comment is 'A simple unit test framework featuring predicate clause coverage.'
 	]).
 
@@ -222,11 +222,11 @@
 		self(Self),
 		date::today(Year, Month, Day),
 		time::now(Hours, Minutes, Seconds),
-		print_message(information(requested), lgtunit, tests_start_date_time(Year, Month, Day, Hours, Minutes, Seconds)),
+		print_message(information, lgtunit, tests_start_date_time(Year, Month, Day, Hours, Minutes, Seconds)),
 		(	object_property(Self, file(File, Directory)) ->
 			atom_concat(Directory, File, Path),
-			print_message(information(requested), lgtunit, running_tests_from_object_file(Self, Path))
-		;	print_message(information(requested), lgtunit, running_tests_from_object(Self))
+			print_message(information, lgtunit, running_tests_from_object_file(Self, Path))
+		;	print_message(information, lgtunit, running_tests_from_object(Self))
 		).
 
 	write_tests_results :-
@@ -235,17 +235,17 @@
 		::passed_(Passed),
 		::failed_(Failed),
 		Total is Skipped + Passed + Failed,
-		print_message(information(requested), lgtunit, tests_results_summary(Total, Skipped, Passed, Failed)),
-		print_message(information(requested), lgtunit, completed_tests_from_object(Self)).
+		print_message(information, lgtunit, tests_results_summary(Total, Skipped, Passed, Failed)),
+		print_message(information, lgtunit, completed_tests_from_object(Self)).
 
 	write_tests_footer :-
 		date::today(Year, Month, Day),
 		time::now(Hours, Minutes, Seconds),
-		print_message(information(requested), lgtunit, tests_end_date_time(Year, Month, Day, Hours, Minutes, Seconds)).
+		print_message(information, lgtunit, tests_end_date_time(Year, Month, Day, Hours, Minutes, Seconds)).
 
 	passed_test(Test) :-
 		increment_passed_tests_counter,
-		print_message(information(requested), lgtunit, passed_test(Test)).
+		print_message(information, lgtunit, passed_test(Test)).
 
 	unexpected_success_expected_failure(Test) :-
 		increment_failed_tests_counter,
@@ -449,7 +449,7 @@
 			write_coverage_results(Entities),
 			setof(Unit, ::unit(Unit), Units),
 			write_coverage_results_summary(Units, Entities)
-		;	print_message(information(requested), lgtunit, no_coverage_information_collected)
+		;	print_message(information, lgtunit, no_coverage_information_collected)
 		).
 
 	fired_entity(Entity) :-
@@ -471,7 +471,7 @@
 		;	% likely a dynamic predicate with clauses asserted at runtime
 			assertz(covered_(Covered, Covered))
 		),
-		print_message(information(requested), lgtunit, entity_clause_coverage(Entity, Other::Functor/Arity, Ns, Covered/Total)),
+		print_message(information, lgtunit, entity_clause_coverage(Entity, Other::Functor/Arity, Ns, Covered/Total)),
 		fail.
 	write_entity_coverage_information(Entity) :-
 		% do not consider dynamic clauses asserted at runtime (which have an index of zero)
@@ -483,7 +483,7 @@
 		;	% likely a dynamic predicate with clauses asserted at runtime
 			assertz(covered_(Covered, Covered))
 		),
-		print_message(information(requested), lgtunit, entity_clause_coverage(Entity, Functor/Arity, Ns, Covered/Total)),
+		print_message(information, lgtunit, entity_clause_coverage(Entity, Functor/Arity, Ns, Covered/Total)),
 		fail.
 	write_entity_coverage_information(Entity) :-
 		current_object(Entity),
@@ -492,7 +492,7 @@
 		\+ (fired_(Entity, Functor/Arity, N), N > 0),
 		memberchk(number_of_clauses(Total), Properties),
 		assertz(covered_(0, Total)),
-		print_message(information(requested), lgtunit, entity_clause_coverage(Entity, Functor/Arity, [], 0/Total)),
+		print_message(information, lgtunit, entity_clause_coverage(Entity, Functor/Arity, [], 0/Total)),
 		fail.
 	write_entity_coverage_information(Entity) :-
 		current_category(Entity),
@@ -501,7 +501,7 @@
 		\+ (fired_(Entity, Functor/Arity, N), N > 0),
 		memberchk(number_of_clauses(Total), Properties),
 		assertz(covered_(0, Total)),
-		print_message(information(requested), lgtunit, entity_clause_coverage(Entity, Functor/Arity, [], 0/Total)),
+		print_message(information, lgtunit, entity_clause_coverage(Entity, Functor/Arity, [], 0/Total)),
 		fail.
 	write_entity_coverage_information(_).
 
@@ -549,9 +549,9 @@
 		%number_of_clauses(TestedEntities, Clauses),
 		covered(Coverage, Clauses),
 		Percentage is Coverage * 100 / TotalClauses,
-		print_message(information(requested), lgtunit, declared_test_unit_clause_numbers(TotalUnits, TotalClauses)),
-		print_message(information(requested), lgtunit, covered_test_unit_clause_numbers(Units, Clauses)),
-		print_message(information(requested), lgtunit, covered_clause_numbers(Coverage, TotalClauses, Percentage)).
+		print_message(information, lgtunit, declared_test_unit_clause_numbers(TotalUnits, TotalClauses)),
+		print_message(information, lgtunit, covered_test_unit_clause_numbers(Units, Clauses)),
+		print_message(information, lgtunit, covered_clause_numbers(Coverage, TotalClauses, Percentage)).
 
 	covered(Coverage, Clauses) :-
 		findall(Covered-Total, retract(covered_(Covered, Total)), List),

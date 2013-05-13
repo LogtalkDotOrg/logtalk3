@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SWI Prolog 6.0.0 and later versions
-%  Last updated on May 9, 2013
+%  Last updated on May 13, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -1027,11 +1027,17 @@ user:goal_expansion('::'(Object, Message), user:Goal) :-
 '$lgt_logtalk.print_message_token'(Stream, ansi(Attributes, Format, Arguments), _) :-
 	prolog:message_line_element(Stream, ansi(Attributes, Format, Arguments)).
 
-'$lgt_logtalk.print_message_token'(Stream, begin(Kind, Var), _) :-
+'$lgt_logtalk.print_message_token'(Stream, begin(Kind0, Var), _) :-
+	'$lgt_swi_convert_message_kind'(Kind0, Kind),
 	prolog:message_line_element(Stream, begin(Kind, Var)).
 
 '$lgt_logtalk.print_message_token'(Stream, end(Var), _) :-
 	prolog:message_line_element(Stream, end(Var)).
+
+
+'$lgt_swi_convert_message_kind'(comment, informational) :- !.
+'$lgt_swi_convert_message_kind'(comment(_), informational) :- !.
+'$lgt_swi_convert_message_kind'(Kind, Kind).
 
 
 

@@ -41,9 +41,13 @@ could return duplicated `uses/3` and `use_module/3` properties.
 * CHANGED: The message terms for lambda expression warnings for unclassified
 variables and mixed-up variables now include the list of culprit variables.
 
-* CHANGED: Recognize a new message kind, `help`, in the structured message
-printing support (this message kind has first introduced by Quintus Prolog).
-Also, remove support for the `banner(_)` message kind.
+* CHANGED: Reorganize the message kinds used in the structured message printing
+mechanism. Added message kind `help` (introduced by Quintus Prolog; supported
+mostly for helping port existing code). Use kinds `comment` and `comment(_)`
+for messages that provide useful but not essential information. Reserve
+`information` and `information(_)` kinds for messages printed in reply to a
+user request for information. Also, the `banner(_)` message kind is no longer
+supported.
 
 Prolog adapter and integration files
 ------------------------------------
