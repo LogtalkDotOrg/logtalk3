@@ -155,6 +155,12 @@ eval $xslt_proc -o methods/expand_term2.section refman.xsl methods/expand_term2.
 eval $xslt_proc -o methods/term_expansion2.section refman.xsl methods/term_expansion2.html
 eval $xslt_proc -o methods/expand_goal2.section refman.xsl methods/expand_goal2.html
 eval $xslt_proc -o methods/goal_expansion2.section refman.xsl methods/goal_expansion2.html
+eval $xslt_proc -o methods/print_message3.section refman.xsl methods/print_message3.html
+eval $xslt_proc -o methods/message_tokens2.section refman.xsl methods/message_tokens2.html
+eval $xslt_proc -o methods/message_hook4.section refman.xsl methods/message_hook4.html
+eval $xslt_proc -o methods/message_prefix_stream4.section refman.xsl methods/message_prefix_stream4.html
+eval $xslt_proc -o methods/print_message_tokens3.section refman.xsl methods/print_message_tokens3.html
+eval $xslt_proc -o methods/print_message_token2.section refman.xsl methods/print_message_token2.html
 eval $xslt_proc -o control/to_object2.section refman.xsl control/to_object2.html
 eval $xslt_proc -o control/to_self1.section refman.xsl control/to_self1.html
 eval $xslt_proc -o control/super1.section refman.xsl control/super1.html
@@ -277,6 +283,12 @@ cat -s \
 	methods/term_expansion2.section \
 	methods/expand_goal2.section \
 	methods/goal_expansion2.section \
+	methods/print_message3.section \
+	methods/message_tokens2.section \
+	methods/message_hook4.section \
+	methods/message_prefix_stream4.section \
+	methods/print_message_tokens3.section \
+	methods/print_message_token2.section \
 	control.header \
 	control/to_object2.section \
 	control/to_self1.section \

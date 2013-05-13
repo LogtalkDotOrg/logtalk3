@@ -62,6 +62,9 @@ applications.
 
 * UPDATED: The tutorial section on categories.
 
+* ADDED: Documentation on the structured message printing mechanism to the
+User and Reference Manuals.
+
 Examples
 --------
 
