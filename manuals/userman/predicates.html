@@ -722,9 +722,10 @@ Messages are represented by atoms or compound terms, handy for machine-processin
 :- multifile(logtalk::message_tokens//2).
 :- dynamic(logtalk::message_tokens//2).
 
-logtalk::message_tokens(loaded_settings_file(Path), core) -->
+logtalk::message_tokens(loaded_settings_file(Path), core) --&gt;
     ['Loaded settings file found on directory ~w'-[Path], nl, nl].
 </pre>
+<p>
 The <code>Component</code> argument is new in the Logtalk implementation and is useful to filter messages belonging to a specific component (e.g. the Logtalk compiler and runtime is identified by the atom <code>core</code>) and also to avoid conflicts when two different components define the same message term (e.g. <code>banner</code> seems to be popular).
 </p>
 <p>

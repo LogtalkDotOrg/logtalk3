@@ -43,7 +43,9 @@ uses(Object, NonTerminalsAndAliases)</pre>
 <p>
 Declares that all calls (made from predicates defined in the category or object containing the directive) to the specified predicates are to be interpreted as messages to the specified object. Thus, this directive may be used to simplify writing of predicate definitions by allowing the programmer to omit the <code>Object::</code> prefix when using the predicates listed in the directive (as long as the predicate calls do not occur as arguments for non-standard Prolog meta-predicates not declared on the adapter files).
 </p>
+<p>
 This directive is also used when compiling calls to the database and reflection built-in methods. 
+</p>
 <p>
 It is possible to specify a predicate alias using the notation <code>Functor/Arity::Alias/Arity</code>. Aliases may be used either for avoiding conflicts between predicates specified in several <code>uses/2</code> directives or for giving more meaningful names considering the using context of the predicates.
 </p>
