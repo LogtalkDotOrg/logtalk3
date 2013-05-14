@@ -81,6 +81,7 @@ eval $xslt_proc -o directives/protected1.section refman.xsl directives/protected
 eval $xslt_proc -o directives/public1.section refman.xsl directives/public1.html
 eval $xslt_proc -o directives/synchronized1.section refman.xsl directives/synchronized1.html
 eval $xslt_proc -o directives/uses2.section refman.xsl directives/uses2.html
+eval $xslt_proc -o directives/use_module2.section refman.xsl directives/use_module2.html
 eval $xslt_proc -o builtins/current_category1.section refman.xsl builtins/current_category1.html
 eval $xslt_proc -o builtins/current_object1.section refman.xsl builtins/current_object1.html
 eval $xslt_proc -o builtins/current_protocol1.section refman.xsl builtins/current_protocol1.html
@@ -208,6 +209,7 @@ cat -s \
 	directives/public1.section \
 	directives/synchronized1.section \
 	directives/uses2.section \
+	directives/use_module2.section \
 	builtins.header \
 	builtins/current_category1.section \
 	builtins/current_object1.section \

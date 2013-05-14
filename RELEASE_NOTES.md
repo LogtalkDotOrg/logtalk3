@@ -75,6 +75,9 @@ hook predicates to the Reference Manual.
 
 * IMPROVED: Documentation of the `uses/2` predicate directive.
 
+* ADDED: Documentation on the `use_module/2` predicate directive to the
+Reference Manual.
+
 Examples
 --------
 
