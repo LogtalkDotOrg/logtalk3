@@ -73,6 +73,8 @@ User and Reference Manuals.
 * ADDED: Documentation on the `coinductive_success_hook/1-2` user defined
 hook predicates to the Reference Manual.
 
+* IMPROVED: Documentation of the `uses/2` predicate directive.
+
 Examples
 --------
 
