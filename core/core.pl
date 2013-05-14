@@ -4585,6 +4585,10 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_default_print_message'(silent(_), _, _, _, _, _) :-
 	!.
 
+'$lgt_default_print_message'(banner, _, _, _, _, _) :-
+	'$lgt_compiler_flag'(report, warnings),
+	!.
+
 '$lgt_default_print_message'(comment, _, _, _, _, _) :-
 	'$lgt_compiler_flag'(report, warnings),
 	!.
