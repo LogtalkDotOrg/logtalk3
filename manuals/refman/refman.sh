@@ -161,6 +161,7 @@ eval $xslt_proc -o methods/message_hook4.section refman.xsl methods/message_hook
 eval $xslt_proc -o methods/message_prefix_stream4.section refman.xsl methods/message_prefix_stream4.html
 eval $xslt_proc -o methods/print_message_tokens3.section refman.xsl methods/print_message_tokens3.html
 eval $xslt_proc -o methods/print_message_token2.section refman.xsl methods/print_message_token2.html
+eval $xslt_proc -o methods/coinductive_success_hook1_2.section refman.xsl methods/coinductive_success_hook1_2.html
 eval $xslt_proc -o control/to_object2.section refman.xsl control/to_object2.html
 eval $xslt_proc -o control/to_self1.section refman.xsl control/to_self1.html
 eval $xslt_proc -o control/super1.section refman.xsl control/super1.html
@@ -289,6 +290,7 @@ cat -s \
 	methods/message_prefix_stream4.section \
 	methods/print_message_tokens3.section \
 	methods/print_message_token2.section \
+	methods/coinductive_success_hook1_2.section \
 	control.header \
 	control/to_object2.section \
 	control/to_self1.section \

@@ -70,6 +70,9 @@ applications.
 * ADDED: Documentation on the structured message printing mechanism to the
 User and Reference Manuals.
 
+* ADDED: Documentation on the `coinductive_success_hook/1-2` user defined
+hook predicates to the Reference Manual.
+
 Examples
 --------
 
