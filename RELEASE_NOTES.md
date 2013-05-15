@@ -54,6 +54,9 @@ the database and reflection built-in methods by looking into these methods
 predicate arguments. This change makes the interpretation of this directive
 consistent with the semantics of the `uses/2` directive.
 
+* FIXED: Compilation of calls to the `asserta/1`, `assertz/1`, and `retract/1`
+built-in methods when the argument is an explicitly-qualified module rule.
+
 Prolog adapter and integration files
 ------------------------------------
 

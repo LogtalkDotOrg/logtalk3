@@ -9643,7 +9643,13 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_body'(asserta(QClause), TCond, DCond, Ctx) :-
 	nonvar(QClause),
-	QClause = ':'(Module, Clause),
+	(	QClause = (QHead :- Body),
+		nonvar(QHead),
+		QHead = ':'(Module,Head) ->
+		Clause = (Head :- Body)
+	;	QClause = ':'(Module,Head),
+		Clause = Head
+	),
 	!,
 	(	'$lgt_pp_module_'(_) ->
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
@@ -9651,8 +9657,8 @@ current_logtalk_flag(Flag, Value) :-
 	;	% we're using modules together with objects
 		'$lgt_add_referenced_module'(Module),
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-		TCond = {asserta(':'(Module, Clause))},
-		DCond = '$lgt_debug'(goal(asserta(':'(Module, Clause)), TCond), ExCtx)
+		TCond = {asserta(QClause)},
+		DCond = '$lgt_debug'(goal(asserta(QClause), TCond), ExCtx)
 	).
 
 '$lgt_tr_body'(asserta(Clause), TCond, DCond, Ctx) :-
@@ -9705,7 +9711,13 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_body'(assertz(QClause), TCond, DCond, Ctx) :-
 	nonvar(QClause),
-	QClause = ':'(Module, Clause),
+	(	QClause = (QHead :- Body),
+		nonvar(QHead),
+		QHead = ':'(Module,Head) ->
+		Clause = (Head :- Body)
+	;	QClause = ':'(Module,Head),
+		Clause = Head
+	),
 	!,
 	(	'$lgt_pp_module_'(_) ->
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
@@ -9713,8 +9725,8 @@ current_logtalk_flag(Flag, Value) :-
 	;	% we're using modules together with objects
 		'$lgt_add_referenced_module'(Module),
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-		TCond = {assertz(':'(Module, Clause))},
-		DCond = '$lgt_debug'(goal(assertz(':'(Module, Clause)), TCond), ExCtx)
+		TCond = {assertz(QClause)},
+		DCond = '$lgt_debug'(goal(assertz(QClause), TCond), ExCtx)
 	).
 
 '$lgt_tr_body'(assertz(Clause), TCond, DCond, Ctx) :-
@@ -9775,8 +9787,8 @@ current_logtalk_flag(Flag, Value) :-
 	;	% we're using modules together with objects
 		'$lgt_add_referenced_module'(Module),
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-		TCond = {clause(':'(Module, Head), Body)},
-		DCond = '$lgt_debug'(goal(clause(':'(Module,Head), Body), TCond), ExCtx)
+		TCond = {clause(QHead, Body)},
+		DCond = '$lgt_debug'(goal(clause(QHead, Body), TCond), ExCtx)
 	).
 
 '$lgt_tr_body'(clause(Alias, Body), TCond, DCond, Ctx) :-
@@ -9811,7 +9823,13 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_body'(retract(QClause), TCond, DCond, Ctx) :-
 	nonvar(QClause),
-	QClause = ':'(Module, Clause),
+	(	QClause = (QHead :- Body),
+		nonvar(QHead),
+		QHead = ':'(Module,Head) ->
+		Clause = (Head :- Body)
+	;	QClause = ':'(Module,Head),
+		Clause = Head
+	),
 	!,
 	(	'$lgt_pp_module_'(_) ->
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
@@ -9819,8 +9837,8 @@ current_logtalk_flag(Flag, Value) :-
 	;	% we're using modules together with objects
 		'$lgt_add_referenced_module'(Module),
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-		TCond = {retract(':'(Module, Clause))},
-		DCond = '$lgt_debug'(goal(retract(':'(Module, Clause)), TCond), ExCtx)
+		TCond = {retract(QClause)},
+		DCond = '$lgt_debug'(goal(retract(QClause), TCond), ExCtx)
 	).
 
 '$lgt_tr_body'(retract(Clause), TCond, DCond, Ctx) :-
@@ -9888,8 +9906,8 @@ current_logtalk_flag(Flag, Value) :-
 	;	% we're using modules together with objects
 		'$lgt_add_referenced_module'(Module),
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-		TCond = {retractall(':'(Module, Head))},
-		DCond = '$lgt_debug'(goal(retractall(':'(Module, Head)), TCond), ExCtx)
+		TCond = {retractall(QHead)},
+		DCond = '$lgt_debug'(goal(retractall(QHead), TCond), ExCtx)
 	).
 
 '$lgt_tr_body'(retractall(Alias), TCond, DCond, Ctx) :-
