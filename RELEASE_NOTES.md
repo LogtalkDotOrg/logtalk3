@@ -60,6 +60,9 @@ built-in methods when the argument is an explicitly-qualified module rule.
 * FIXED: Convert Prolog module meta-predicate directive arguments into the
 Logtalk equivalents before checking meta-predicate calling compatibility.
 
+* IMPROVED: Faster generated code for `:/2` non-terminals in the body of
+grammar rules.
+
 Prolog adapter and integration files
 ------------------------------------
 

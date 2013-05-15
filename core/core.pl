@@ -16793,8 +16793,15 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_dcg_ctg_call'(RGoal, S0, S, CGoal).
 
-'$lgt_dcg_body'(':'(Module, RGoal), S0, S, ':'(Module, phrase(RGoal, S0, S))) :-
-	!.
+'$lgt_dcg_body'(':'(Module, RGoal), S0, S, CGoal) :-
+	!,
+	(	callable(RGoal) ->
+		RGoal =.. RGoalUniv,
+		'$lgt_append'(RGoalUniv, [S0, S], GoalUniv),
+		Goal =.. GoalUniv,
+		CGoal = ':'(Module, Goal)
+	;	CGoal = call(':'(Module,RGoal), S0, S)
+	).
 
 '$lgt_dcg_body'('*->'(GRIf, GRThen), S0, S, '*->'(If, Then)) :-
 	'$lgt_prolog_built_in_predicate'('*->'(_, _)),
