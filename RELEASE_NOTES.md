@@ -49,6 +49,11 @@ and `information(_)` kinds are now reserved for messages printed in reply to
 a user request for information. Also, removed the `banner(_)` message kind
 and suppress `banner` messages when the `report` flag is set to `warnings`.
 
+* NEW: Take into account `use_module/2` directives when compiling calls to
+the database and reflection built-in methods by looking into these methods
+predicate arguments. This change makes the interpretation of this directive
+consistent with the semantics of the `uses/2` directive.
+
 Prolog adapter and integration files
 ------------------------------------
 

@@ -9526,14 +9526,20 @@ current_logtalk_flag(Flag, Value) :-
 		DPred = '$lgt_debug'(goal(current_predicate(':'(Module, Pred)), TPred), ExCtx)
 	).
 
-'$lgt_tr_body'(current_predicate(Term), TCond, DCond, Ctx) :-
-	nonvar(Term),
+'$lgt_tr_body'(current_predicate(Term), TPred, DPred, Ctx) :-
 	'$lgt_valid_predicate_indicator'(Term, AliasFunctor, Arity),
 	functor(Alias, AliasFunctor, Arity),
-	'$lgt_pp_uses_predicate_'(Obj, Head, Alias),
-	!,
-	functor(Head, HeadFunctor, Arity),
-	'$lgt_tr_body'(Obj::current_predicate(HeadFunctor/Arity), TCond, DCond, Ctx).
+	(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias) ->
+		functor(Head, HeadFunctor, Arity),
+		'$lgt_tr_body'(Obj::current_predicate(HeadFunctor/Arity), TPred, DPred, Ctx)
+	;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias) ->
+		functor(Head, HeadFunctor, Arity),
+		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+		TPred = {current_predicate(':'(Module, HeadFunctor/Arity))},
+		DPred = '$lgt_debug'(goal(current_predicate(':'(Module, HeadFunctor/Arity)), TPred), ExCtx)
+	;	fail	
+	),
+	!.
 
 '$lgt_tr_body'(current_predicate(Pred), TPred, DPred, Ctx) :-
 	!,
@@ -9545,23 +9551,29 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_body'(predicate_property(Term, Prop), TPred, DPred, Ctx) :-
 	nonvar(Term),
-	Term = ':'(Module, Pred),
+	Term = ':'(Module, Head),
 	!,
 	(	'$lgt_pp_module_'(_) ->
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
-		'$lgt_tr_body'(Module::predicate_property(Pred, Prop), TPred, DPred, Ctx)
+		'$lgt_tr_body'(Module::predicate_property(Head, Prop), TPred, DPred, Ctx)
 	;	% we're using modules together with objects
 		'$lgt_add_referenced_module'(Module),
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-		TPred = {predicate_property(':'(Module, Pred), Prop)},
-		DPred = '$lgt_debug'(goal(predicate_property(':'(Module, Pred), Prop), TPred), ExCtx)
+		TPred = {predicate_property(':'(Module, Head), Prop)},
+		DPred = '$lgt_debug'(goal(predicate_property(':'(Module,Head), Prop), TPred), ExCtx)
 	).
 
-'$lgt_tr_body'(predicate_property(Alias, Prop), TCond, DCond, Ctx) :-
+'$lgt_tr_body'(predicate_property(Alias, Prop), TPred, DPred, Ctx) :-
 	nonvar(Alias),
-	'$lgt_pp_uses_predicate_'(Obj, Head, Alias),
-	!,
-	'$lgt_tr_body'(Obj::predicate_property(Head, Prop), TCond, DCond, Ctx).
+	(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias) ->
+		'$lgt_tr_body'(Obj::predicate_property(Head, Prop), TPred, DPred, Ctx)
+	;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias) ->
+		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+		TPred = {predicate_property(':'(Module, Head), Prop)},
+		DPred = '$lgt_debug'(goal(predicate_property(':'(Module,Head), Prop), TPred), ExCtx)
+	;	fail
+	),
+	!.
 
 '$lgt_tr_body'(predicate_property(Pred, Prop), TPred, DPred, Ctx) :-
 	!,
@@ -9589,14 +9601,20 @@ current_logtalk_flag(Flag, Value) :-
 		DCond = '$lgt_debug'(goal(abolish(':'(Module, Pred)), TCond), ExCtx)
 	).
 
-'$lgt_tr_body'(abolish(AliasFunctor/AliasArity), TCond, DCond, Ctx) :-
-	nonvar(AliasFunctor),
-	nonvar(AliasArity),
-	functor(Alias, AliasFunctor, AliasArity),
-	'$lgt_pp_uses_predicate_'(Obj, Head, Alias),
-	!,
-	functor(Head, HeadFunctor, HeadArity),
-	'$lgt_tr_body'(Obj::abolish(HeadFunctor/HeadArity), TCond, DCond, Ctx).
+'$lgt_tr_body'(abolish(Pred), TCond, DCond, Ctx) :-
+	'$lgt_valid_predicate_indicator'(Pred, AliasFunctor, Arity),
+	functor(Alias, AliasFunctor, Arity),
+	(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias) ->
+		functor(Head, HeadFunctor, Arity),
+		'$lgt_tr_body'(Obj::abolish(HeadFunctor/Arity), TCond, DCond, Ctx)
+	;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias) ->
+		functor(Head, HeadFunctor, Arity),
+		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+		TCond = {abolish(':'(Module, HeadFunctor/Arity))},
+		DCond = '$lgt_debug'(goal(abolish(':'(Module, HeadFunctor/Arity)), TCond), ExCtx)
+	;	fail
+	),
+	!.
 
 '$lgt_tr_body'(abolish(Pred), TCond, DCond, Ctx) :-
 	!,
@@ -9637,18 +9655,29 @@ current_logtalk_flag(Flag, Value) :-
 		DCond = '$lgt_debug'(goal(asserta(':'(Module, Clause)), TCond), ExCtx)
 	).
 
-'$lgt_tr_body'(asserta(QClause), TCond, DCond, Ctx) :-
-	nonvar(QClause),
-	(	QClause = (Alias :- Body) ->
+'$lgt_tr_body'(asserta(Clause), TCond, DCond, Ctx) :-
+	nonvar(Clause),
+	(	Clause = (Alias :- Body) ->
 		nonvar(Alias),
-		'$lgt_pp_uses_predicate_'(Obj, Head, Alias),
-		Clause = (Head :- Body)
-	;	QClause = Alias,
-		'$lgt_pp_uses_predicate_'(Obj, Head, Alias),
-		Clause = Head
+		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias) ->
+			'$lgt_tr_body'(Obj::asserta((Head :- Body)), TCond, DCond, Ctx)
+		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias) ->
+			'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+			TCond = {asserta((':'(Module,Head) :- Body))},
+			DCond = '$lgt_debug'(goal(asserta((':'(Module,Head) :- Body)), TCond), ExCtx)
+		;	fail
+		)
+	;	Clause = Alias,
+		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias) ->
+			'$lgt_tr_body'(Obj::asserta(Head), TCond, DCond, Ctx)
+		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias) ->
+			'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+			TCond = {asserta(':'(Module,Head))},
+			DCond = '$lgt_debug'(goal(asserta(':'(Module,Head)), TCond), ExCtx)
+		;	fail
+		)
 	),
-	!,
-	'$lgt_tr_body'(Obj::asserta(Clause), TCond, DCond, Ctx).
+	!.
 
 '$lgt_tr_body'(asserta(Clause), TCond, DCond, Ctx) :-
 	!,
@@ -9688,18 +9717,29 @@ current_logtalk_flag(Flag, Value) :-
 		DCond = '$lgt_debug'(goal(assertz(':'(Module, Clause)), TCond), ExCtx)
 	).
 
-'$lgt_tr_body'(assertz(QClause), TCond, DCond, Ctx) :-
-	nonvar(QClause),
-	(	QClause = (Alias :- Body) ->
+'$lgt_tr_body'(assertz(Clause), TCond, DCond, Ctx) :-
+	nonvar(Clause),
+	(	Clause = (Alias :- Body) ->
 		nonvar(Alias),
-		'$lgt_pp_uses_predicate_'(Obj, Head, Alias),
-		Clause = (Head :- Body)
-	;	QClause = Alias,
-		'$lgt_pp_uses_predicate_'(Obj, Head, Alias),
-		Clause = Head
+		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias) ->
+			'$lgt_tr_body'(Obj::assertz((Head :- Body)), TCond, DCond, Ctx)
+		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias) ->
+			'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+			TCond = {assertz((':'(Module,Head) :- Body))},
+			DCond = '$lgt_debug'(goal(assertz((':'(Module,Head) :- Body)), TCond), ExCtx)
+		;	fail
+		)
+	;	Clause = Alias,
+		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias) ->
+			'$lgt_tr_body'(Obj::assertz(Head), TCond, DCond, Ctx)
+		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias) ->
+			'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+			TCond = {assertz(':'(Module,Head))},
+			DCond = '$lgt_debug'(goal(assertz(':'(Module,Head)), TCond), ExCtx)
+		;	fail
+		)
 	),
-	!,
-	'$lgt_tr_body'(Obj::assertz(Clause), TCond, DCond, Ctx).
+	!.
 
 '$lgt_tr_body'(assertz(Clause), TCond, DCond, Ctx) :-
 	!,
@@ -9736,14 +9776,20 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_add_referenced_module'(Module),
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		TCond = {clause(':'(Module, Head), Body)},
-		DCond = '$lgt_debug'(goal(clause(':'(Module, Head), Body), TCond), ExCtx)
+		DCond = '$lgt_debug'(goal(clause(':'(Module,Head), Body), TCond), ExCtx)
 	).
 
 '$lgt_tr_body'(clause(Alias, Body), TCond, DCond, Ctx) :-
 	nonvar(Alias),
-	'$lgt_pp_uses_predicate_'(Obj, Head, Alias),
-	!,
-	'$lgt_tr_body'(Obj::clause(Head, Body), TCond, DCond, Ctx).
+	(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias) ->
+		'$lgt_tr_body'(Obj::clause(Head, Body), TCond, DCond, Ctx)
+	;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias) ->
+		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+		TCond = {clause(':'(Module,Head), Body)},
+		DCond = '$lgt_debug'(goal(clause(':'(Module,Head), Body), TCond), ExCtx)
+	;	fail
+	),
+	!.
 
 '$lgt_tr_body'(clause(Head, Body), TCond, DCond, Ctx) :-
 	!,
@@ -9777,18 +9823,29 @@ current_logtalk_flag(Flag, Value) :-
 		DCond = '$lgt_debug'(goal(retract(':'(Module, Clause)), TCond), ExCtx)
 	).
 
-'$lgt_tr_body'(retract(QClause), TCond, DCond, Ctx) :-
-	nonvar(QClause),
-	(	QClause = (Alias :- Body) ->
+'$lgt_tr_body'(retract(Clause), TCond, DCond, Ctx) :-
+	nonvar(Clause),
+	(	Clause = (Alias :- Body) ->
 		nonvar(Alias),
-		'$lgt_pp_uses_predicate_'(Obj, Head, Alias),
-		Clause = (Head :- Body)
-	;	QClause = Alias,
-		'$lgt_pp_uses_predicate_'(Obj, Head, Alias),
-		Clause = Head
+		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias) ->
+			'$lgt_tr_body'(Obj::retract((Head :- Body)), TCond, DCond, Ctx)
+		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias) ->
+			'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+			TCond = {retract((':'(Module,Head) :- Body))},
+			DCond = '$lgt_debug'(goal(retract((':'(Module,Head) :- Body)), TCond), ExCtx)
+		;	fail
+		)
+	;	Clause = Alias,
+		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias) ->
+			'$lgt_tr_body'(Obj::retract(Head), TCond, DCond, Ctx)
+		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias) ->
+			'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+			TCond = {retract(':'(Module,Head))},
+			DCond = '$lgt_debug'(goal(retract(':'(Module,Head)), TCond), ExCtx)
+		;	fail
+		)
 	),
-	!,
-	'$lgt_tr_body'(Obj::retract(Clause), TCond, DCond, Ctx).
+	!.
 
 '$lgt_tr_body'(retract(Clause), _, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
@@ -9837,9 +9894,15 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_body'(retractall(Alias), TCond, DCond, Ctx) :-
 	nonvar(Alias),
-	'$lgt_pp_uses_predicate_'(Obj, Head, Alias),
-	!,
-	'$lgt_tr_body'(Obj::retractall(Head), TCond, DCond, Ctx).
+	(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias) ->
+		'$lgt_tr_body'(Obj::retractall(Head), TCond, DCond, Ctx)
+	;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias) ->
+		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+		TCond = {retractall(':'(Module,Head))},
+		DCond = '$lgt_debug'(goal(retractall(':'(Module,Head)), TCond), ExCtx)
+	;	fail
+	),
+	!.
 
 '$lgt_tr_body'(retractall(Head), TCond, DCond, Ctx) :-
 	!,
