@@ -9477,14 +9477,14 @@ current_logtalk_flag(Flag, Value) :-
 		),
 		Pred =.. [Functor| Args],
 		Meta =.. [Functor| MArgs],
-		(	'$lgt_member'(MArg, MArgs), integer(MArg), MArg =\= 0 ->
+		'$lgt_tr_module_meta_predicate_directive_args'(MArgs, CMArgs),
+		(	'$lgt_member'(CMArg, CMArgs), integer(CMArg), CMArg =\= 0 ->
 			% module meta-predicates that take closures are not supported
 			throw(domain_error(closure, Meta))
-		;	'$lgt_member'(MArg, MArgs), MArg == (':') ->
-			% the meta-argument specifier ':' is ambiguous
+		;	'$lgt_member'(CMArg, CMArgs), CMArg == (':') ->
+			% the meta-argument specifier '::' is ambiguous in this context
 			throw(domain_error(meta_argument_specifier, Meta))
-		;	'$lgt_tr_module_meta_predicate_directive_args'(MArgs, CMArgs),
-			'$lgt_tr_module_meta_args'(Args, CMArgs, Ctx, TArgs, DArgs),
+		;	'$lgt_tr_module_meta_args'(Args, CMArgs, Ctx, TArgs, DArgs),
 			TPred0 =.. [Functor| TArgs],
 			TPred = ':'(Module, TPred0),
 			'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),

@@ -57,6 +57,9 @@ consistent with the semantics of the `uses/2` directive.
 * FIXED: Compilation of calls to the `asserta/1`, `assertz/1`, and `retract/1`
 built-in methods when the argument is an explicitly-qualified module rule.
 
+* FIXED: Convert Prolog module meta-predicate directive arguments into the
+Logtalk equivalents before checking meta-predicate calling compatibility.
+
 Prolog adapter and integration files
 ------------------------------------
 
