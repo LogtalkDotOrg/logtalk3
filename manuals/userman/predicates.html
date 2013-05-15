@@ -403,7 +403,7 @@ Note that, abstracting from the opening and closing object directives and the sc
 <h3 id="predicates_categories">Category predicates</h3>
 
 <p>
-Because a category can be imported by several different objects, dynamic private predicates must be called using the <a title="Consult reference manual" href="../refman/control/to_self1.html"><code>::/1</code></a> message sending operator. This ensures that the correct predicate definition will be used. For example, if we want to define a category implementing variables using destructive assignment we could write:
+Because a category can be imported by several different objects, dynamic private predicates must be called either in the context of <em>self</em>, using the <em>message to self</em> control structure, <a title="Consult reference manual" href="../refman/control/to_self1.html"><code>::/1</code></a>, or in the context of <em>this</em> (i.e. in the context of the object importing the category). For example, if we want to define a category implementing variables using destructive assignment where the variable values are stored in <em>self</em> we could write:
 </p>
 <pre>:- category(variable).
 
@@ -422,7 +422,7 @@ Because a category can be imported by several different objects, dynamic private
 
 :- end_category.</pre>
 <p>
-This way, each importing object will have its own definition for the <code>value_/2</code> private predicate. Furthermore, the <code>get/2</code> and <code>set/2</code> predicates will always access/update the correct definition, contained in the object receiving the messages.
+In this case, the <code>get/2</code> and <code>set/2</code> predicates will always access/update the correct definition, contained in the object receiving the messages. The alternative, storing the variable values in <em>this</em>, such that  each object importing the category will have its own definition for the <code>value_/2</code> private predicate is simple: just omit the use of the <code>::/1</code> control construct in the code above.
 </p>
 <p>
 A category may only contain clauses for static predicates. Nevertheless, as the example above illustrates, there are no restrictions in declaring and calling dynamic predicates from inside a category.
@@ -556,7 +556,7 @@ A grammar rule non-terminal may be declared as dynamic or discontiguous, as any 
 <h2 id="predicates_methods">Built-in object predicates (methods)</h2>
 
 <p>
-Logtalk defines a set of built-in object predicates or methods to access message execution context, to find sets of solutions, to inspect objects and for database handling. Similar to Prolog built-in predicates, these built-in methods should not be redefined.
+Logtalk defines a set of built-in object predicates or methods to access message execution context, to find sets of solutions, to inspect objects, for database handling, for term and goal expansion, and for printing messages. Similar to Prolog built-in predicates, these built-in methods should not be redefined.
 </p>
 
 <h3 id="predicates_context">Execution context methods</h3>
@@ -864,7 +864,7 @@ Currently, there is no clean workaround for calling non-standard Prolog built-in
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: May 13, 2013</span>
+		<span>Last updated on: May 14, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="categories.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="inheritance.html">next</a></span><br/>

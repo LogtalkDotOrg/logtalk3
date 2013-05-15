@@ -73,7 +73,8 @@ Documentation
 in Logtalk 3.x that may require compatibility updates for running Logtalk 2.x
 applications.
 
-* UPDATED: The tutorial section on categories.
+* UPDATED: The tutorial section on categories and the User Manual section on
+defining category predicates.
 
 * ADDED: Documentation on the structured message printing mechanism to the
 User and Reference Manuals.
