@@ -87,6 +87,8 @@ hook predicates to the Reference Manual.
 * ADDED: Documentation on the `use_module/2` predicate directive to the
 Reference Manual.
 
+* ADDED: Documentation on lambda expressions to the User Manual.
+
 Examples
 --------
 

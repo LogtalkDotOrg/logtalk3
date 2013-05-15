@@ -447,6 +447,64 @@ all_true(Closure, [Arg| Args]) :-
 Note that the meta-predicate directive specifies that the closure will be extended with exactly one extra argument.
 </p>
 
+<h3 id="predicates_lambdas">Lambda expressions</h3>
+<p>
+The use of <a href="http://en.wikipedia.org/wiki/Lambda_calculus">lambda expressions</a> as meta-predicate goal and closure arguments often saves writing auxiliary predicates for the sole purpose of calling the meta-predicates. A simple example of a lambda expression is:
+</p>
+<pre>| ?- meta::map([X,Y]>>(Y is 2*X), [1,2,3], Ys).
+Ys = [2,4,6]
+yes</pre>
+<p>
+In this example, a lambda expression, <code>[X,Y]&gt;&gt;(Y is 2*X)</code>, is used as an argument to the <code>map/3</code> list mapping predicate, defined in the library object <code>meta</code>, in order to double the elements of a list of integers. Using a lambda expression avoids writing an auxiliary predicate for the sole purpose of doubling the list elements. The lambda parameters are represented by the list <code>[X,Y]</code>, which is connected to the lambda goal, <code>(Y is 2*X)</code>, by the <code>(&gt;&gt;)/2</code> operator.
+</p>
+<p>
+Currying is supported. I.e. it is possible to write a lambda expression whose goal is another lambda expression. The above example can be rewritten as:
+</p>
+<pre>| ?- meta::map([X]>>([Y]>>(Y is 2*X)), [1,2,3], Ys).
+Ys = [2,4,6]
+yes</pre>
+<p>
+Lambda expressions may also contain lambda free variables. I.e. variables that are global to the lambda expression. For example, using GNU Prolog as the back-end compiler, we can write:
+</p>
+<pre>| ?- meta::map({Z}/[X,Y]>>(Z#=X+Y), [1,2,3], Zs).
+Z = _#22(3..268435455)
+Zs = [_#3(2..268435454),_#66(1..268435453),_#110(0..268435452)]
+yes</pre>
+<p>
+The ISO Prolog construct <code>{}/1</code> for representing the lambda free variables as this representation is often associated with set representation. Note that the order of the free variables is of no consequence (on the other hand, a list is used for the lambda parameters as their order does matter).
+</p>
+<p>
+Both lambda free variables and lambda parameters can be any Prolog term. Consider the following example by Markus Triska:
+</p>
+<pre>| ?- meta::map([A-B,B-A]>>true, [1-a,2-b,3-c], Zs).
+Zs = [a-1,b-2,c-3]
+yes</pre>
+<p>
+Lambda expressions can be used, as expected, in non-deterministic queries as in the following example using SWI-Prolog as the back-end compiler and Markus Triska's CLP(FD) library:
+</p>
+<pre>| ?- meta::map({Z}/[X,Y]>>(clpfd:(Z#=X+Y)), Xs, Ys).
+Xs = [],
+Ys = [] ;
+Xs = [_G1369],
+Ys = [_G1378],
+_G1369+_G1378#=Z ;
+Xs = [_G1579, _G1582],
+Ys = [_G1591, _G1594],
+_G1582+_G1594#=Z,
+_G1579+_G1591#=Z ;
+Xs = [_G1789, _G1792, _G1795],
+Ys = [_G1804, _G1807, _G1810],
+_G1795+_G1810#=Z,
+_G1792+_G1807#=Z,
+_G1789+_G1804#=Z ;
+...</pre>
+<p>
+As illustrated by the above examples, lambda expression syntax reuses the ISO Prolog construct <code>{}/1</code> and the standard operators <code>(/)/2</code> and <code>(&gt;&gt;)/2</code>, thus avoiding defining new operators, which is always tricky for a portable system such as Logtalk. The operator <code>(&gt;&gt;)/2</code> was chosen as it suggests an arrow, similar to the syntax used in other languages such as OCaml and Haskell to connect lambda parameters with lambda functions. This syntax was also chosen in order to simplify parsing, error checking, and compilation of lambda expressions. The full specification of the lambda expression syntax can be found in the <a href="http://logtalk.org/manuals/refman/grammar.html#grammar_lambdas">reference manual</a>.
+</p>
+<p>
+The compiler checks whenever possible that all variables in a lambda expression are either classified as free variables or as lambda parameters. The use of non-classified variables in a lambda expression should be regarded as a programming error. Unfortunately, the dynamic features of the language and lack of sufficient information at compile time may prevent the compiler of checking all uses of lambda expressions. The compiler also checks if a variable is classified as both a free variable and a lambda parameter. An optimizing meta-predicate and lambda expression compiler, based on the term-expansion mechanism, is provided for practical performance.
+</p>
+
 <h3 id="predicates_dcgs">Definite clause grammar rules</h3>
 
 <p>
@@ -864,7 +922,7 @@ Currently, there is no clean workaround for calling non-standard Prolog built-in
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: May 14, 2013</span>
+		<span>Last updated on: May 15, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="categories.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="inheritance.html">next</a></span><br/>
