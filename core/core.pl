@@ -9478,10 +9478,7 @@ current_logtalk_flag(Flag, Value) :-
 		Pred =.. [Functor| Args],
 		Meta =.. [Functor| MArgs],
 		'$lgt_tr_module_meta_predicate_directive_args'(MArgs, CMArgs),
-		(	'$lgt_member'(CMArg, CMArgs), integer(CMArg), CMArg =\= 0 ->
-			% module meta-predicates that take closures are not supported
-			throw(domain_error(closure, Meta))
-		;	'$lgt_member'(CMArg, CMArgs), CMArg == (':') ->
+		(	'$lgt_member'(CMArg, CMArgs), CMArg == (':') ->
 			% the meta-argument specifier '::' is ambiguous in this context
 			throw(domain_error(meta_argument_specifier, Meta))
 		;	'$lgt_tr_module_meta_args'(Args, CMArgs, Ctx, TArgs, DArgs),
@@ -10809,6 +10806,39 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_tr_module_meta_arg'(MArg, Arg, Ctx, TArg, DArg),
 	'$lgt_tr_module_meta_args'(Args, MArgs, Ctx, TArgs, DArgs).
 
+
+'$lgt_tr_module_meta_arg'(N, Arg, Ctx, TArg, DArg) :-
+	integer(N),
+	!,
+	(	nonvar(Arg), functor(Arg, ':', 2) ->
+		% explicit-qualified meta-argument
+		TArg = Arg,
+		DArg = Arg
+	;	% non-qualified meta-argument
+		callable(Arg) ->
+		Arg =.. [Functor| Args],
+		'$lgt_length'(ExtArgs, 0, N),
+		'$lgt_append'(Args, ExtArgs, FullArgs),
+		ExtArg =.. [Functor| FullArgs],
+		'$lgt_tr_body'(ExtArg, TArg0, DArg0, Ctx),
+		% generate an auxiliary predicate to allow the module meta-predicate to
+		% extend the closure without clashing with the execution-context argument
+		'$lgt_pp_entity_'(_, _, Prefix, _, _),
+		atom_concat(Prefix, '_module_helper_', HelperFunctor0),
+		'$lgt_gen_aux_predicate_functor'(HelperFunctor0, HelperFunctor),
+		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+		Helper =.. [HelperFunctor| [ExCtx| Args]],
+		ExtHelper =.. [HelperFunctor| [ExCtx| FullArgs]],
+		(	'$lgt_compiler_flag'(debug, on) ->
+			'$lgt_compile_aux_clauses'([({ExtHelper} :- {DArg0})])
+		;	'$lgt_compile_aux_clauses'([({ExtHelper} :- {TArg0})])
+		),
+		TArg = ':'(user, Helper),
+		DArg = ':'(user, Helper)
+	;	var(Arg) ->
+		throw(instantiation_error)
+	;	throw(type_error(callable, Arg))
+	).
 
 '$lgt_tr_module_meta_arg'((*), Arg, _, Arg, Arg).
 
