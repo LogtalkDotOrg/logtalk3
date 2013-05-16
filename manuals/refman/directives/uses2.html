@@ -41,16 +41,13 @@ uses(Object, PredicatesAndAliases)</pre>
 <pre>uses(Object, NonTerminals)
 uses(Object, NonTerminalsAndAliases)</pre>
 <p>
-Declares that all calls (made from predicates defined in the category or object containing the directive) to the specified predicates are to be interpreted as messages to the specified object. Thus, this directive may be used to simplify writing of predicate definitions by allowing the programmer to omit the <code>Object::</code> prefix when using the predicates listed in the directive (as long as the predicate calls do not occur as arguments for non-standard Prolog meta-predicates not declared on the adapter files).
+Declares that all calls (made from predicates defined in the category or object containing the directive) to the specified predicates are to be interpreted as messages to the specified object. Thus, this directive may be used to simplify writing of predicate definitions by allowing the programmer to omit the <code>Object::</code> prefix when using the predicates listed in the directive (as long as the predicate calls do not occur as arguments for non-standard Prolog meta-predicates not declared on the adapter files). It is also possible to include operator declarations, <code>op(Precedence, Associativity, Operator)</code>, in the second argument.
 </p>
 <p>
 This directive is also used when compiling calls to the database and reflection built-in methods by looking into these methods predicate arguments.
 </p>
 <p>
-It is possible to specify a predicate alias using the notation <code>Functor/Arity::Alias/Arity</code>. Aliases may be used either for avoiding conflicts between predicates specified in several <code>uses/2</code> directives or for giving more meaningful names considering the using context of the predicates.
-</p>
-<p>
-Is is also possible to include operator declarations, <code>op(Precedence, Associativity, Operator)</code>, in the second argument.
+It is possible to specify a predicate alias using the notation <code>Functor/Arity::Alias/Arity</code>. Aliases may be used either for avoiding conflicts between predicates specified in <code>use_module/2</code> and <code>uses/2</code> directives or for giving more meaningful names considering the using context of the predicates.
 </p>
 
 <h4>Template and modes</h4>
@@ -71,7 +68,7 @@ foo :-
     findall(X, member(X, L), A),    % the same as findall(X, list::member(X, L), A)
     append(A, B, C),                % the same as list::append(A, B, C)
     assertz(data(X, C)),            % the same as store::assertz(data(X, C))
-	...</pre>
+    ...</pre>
 <p>
 Another example, using the extended notation that allows us to define predicate aliases:
 </p>
@@ -87,7 +84,7 @@ btree_to_queue :-
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: May 14, 2013</span>
+		<span>Last updated on: May 16, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="synchronized1.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="../index.html#directives">next</a></span><br/>

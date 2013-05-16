@@ -43,6 +43,9 @@ This directive is supported only when using a back-end Prolog compiler that supp
 <p>
 This directive is also used when compiling calls to the database and reflection built-in methods by looking into these methods predicate arguments.
 </p>
+<p>
+It is possible to specify a predicate alias using the notation <code>Functor/Arity:Alias/Arity</code>. Aliases may be used either for avoiding conflicts between predicates specified in <code>use_module/2</code> and <code>uses/2</code> directives or for giving more meaningful names considering the using context of the predicates.
+</p>
 
 <h4>Template and modes</h4>
 
@@ -63,7 +66,7 @@ foo :-
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: May 14, 2013</span>
+		<span>Last updated on: May 16, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="../index.html#directives">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="../index.html#directives">next</a></span><br/>
