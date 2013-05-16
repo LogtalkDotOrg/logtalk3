@@ -7803,11 +7803,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_use_module_directive'([], _, _).
 
 '$lgt_tr_use_module_directive'([Resource| _], _, _) :-
-	var(Resource),
-	throw(instantiation_error).
-
-'$lgt_tr_use_module_directive'([':'(Original, Alias)| _], _, _) :-
-	(var(Original); var(Alias)),
+	\+ ground(Resource),
 	throw(instantiation_error).
 
 '$lgt_tr_use_module_directive'([':'(Original, Alias)| Resources], Module, Ctx) :-
@@ -7927,7 +7923,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_reexport_directive'([], _, _).
 
 '$lgt_tr_reexport_directive'([Resource| _], _, _) :-
-	var(Resource),
+	\+ ground(Resource),
 	throw(instantiation_error).
 
 '$lgt_tr_reexport_directive'([as(Pred, NewFunctor)| Resources], Module, Ctx) :-
