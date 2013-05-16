@@ -98,6 +98,11 @@ Reference Manual.
 
 * ADDED: Documentation on lambda expressions to the User Manual.
 
+Tests
+-----
+
+* ADDED: Unit tests for the `uses/2` predicate directive.
+
 Examples
 --------
 
