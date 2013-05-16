@@ -10809,6 +10809,8 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_module_meta_arg'(N, Arg, Ctx, TArg, DArg) :-
 	integer(N),
+	N > 0,
+	% closure
 	!,
 	(	nonvar(Arg), functor(Arg, ':', 2) ->
 		% explicit-qualified meta-argument
