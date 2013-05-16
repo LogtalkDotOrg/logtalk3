@@ -43,7 +43,10 @@ meta_predicate([MetaPredicateTemplate1, MetaPredicateTemplate2, ...])
 meta_predicate(Entity::MetaPredicateTemplate)
 meta_predicate((Entity1::MetaPredicateTemplate1, Entity2::MetaPredicateTemplate2, ...))
 meta_predicate([Entity1::MetaPredicateTemplate1, Entity2::MetaPredicateTemplate2, ...])
-</pre>
+
+meta_predicate(Module:MetaPredicateTemplate)
+meta_predicate((Module1:MetaPredicateTemplate1, Module2:MetaPredicateTemplate2, ...))
+meta_predicate([Module1:MetaPredicateTemplate1, Module2:MetaPredicateTemplate2, ...])</pre>
 <p>
 Declares meta-predicates, i.e., predicates that have arguments that will be called as goals. An argument may also be a <em>closure</em> instead of a goal if the meta-predicate uses the <a title="Consult reference manual" href="../methods/callN.html"><code>call/N</code></a> Logtalk built-in methods to construct and call the actual goal from the closure and the additional arguments.
 </p>
@@ -53,13 +56,18 @@ Meta-arguments which are goals are represented by the integer <code>0</code>. Me
 <p>
 This directive must precede any calls to the declared meta-predicates.
 </p>
+<p>
+Logtalk allows the use of this directive to override the original meta-predicate directive. This is sometimes necessary when calling Prolog module meta-predicates due to the lack of standardization of the syntax of the meta-predicate templates.
+</p>
 
 <h4>Template and modes</h4>
 
 <pre>meta_predicate(+meta_predicate_template_term)
+	
 meta_predicate(+object_identifier::+meta_predicate_template_term)
-meta_predicate(+category_identifier::+meta_predicate_template_term)</pre>
+meta_predicate(+category_identifier::+meta_predicate_template_term)
 
+meta_predicate(+module_identifier:+meta_predicate_template_term)</pre>
 
 <h4>Examples</h4>
 
@@ -72,7 +80,7 @@ meta_predicate(+category_identifier::+meta_predicate_template_term)</pre>
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: March 3, 2013</span>
+		<span>Last updated on: May 17, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="info2.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="meta_non_terminal1.html">next</a></span><br/>

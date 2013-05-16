@@ -233,7 +233,7 @@ Logtalk supports the declaration of predicate aliases in <code>use_module/2</cod
 With this directive, calls to the <code>ins/2</code> predicate alias will be automatically compiled by Logtalk to calls to the <code>::/2</code> predicate in the <code>ic</code> module.
 </p>
 <p>
-Note that the Logtalk library provides implementations of common meta-predicates, which can be used in place of module meta-predicates.
+When calling Prolog module meta-predicates, the Logtalk compiler may need help to understand the corresponding meta-predicate template. Despite some recent progress in standardization of the syntax of <code>meta_predicate/1</code> directives and of the <code>meta_predicate/1</code> property returned by the <code>predicate_property/2</code> reflection predicate, portability is still a problem. Thus, Logtalk allows the original <code>meta_predicate/1</code> directive to be overridden with a local one that Logtalk can make sense of. Note that the Logtalk library provides implementations of common meta-predicates, which can be used in place of module meta-predicates.
 </p>
 <p>
 Logtalk allows you to send a message to a module in order to call one of its predicates. This is usually not advised as it implies a performance penalty when compared to just using the <code>Module:Call</code> notation. Moreover, this works only if there is no object with the same name as the module you are targeting. This feature is necessary, however, in order to properly support compilation of modules containing <code>use_module/2</code> directives as objects. If the modules specified in the <code>use_module/2</code> directives are not compiled as objects but are instead loaded as-is by Prolog, the exported predicates would need to be called using the <code>Module:Call</code> notation but the converted module will be calling them through message sending. Thus, this feature ensures that, on a module compiled as an object, any predicate calling other module predicates will work as expected either these other modules are loaded as-is or also compiled as objects.
@@ -270,7 +270,7 @@ The Logtalk compiler will print a warning if the <code>multifile/1</code> direct
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: May 16, 2013</span>
+		<span>Last updated on: May 17, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="programming.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="index.html">next</a></span><br/>

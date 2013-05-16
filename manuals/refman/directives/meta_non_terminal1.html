@@ -43,7 +43,10 @@ meta_non_terminal([MetaNonTerminalTemplate1, MetaNonTerminalTemplate2, ...])
 meta_non_terminal(Entity::MetaNonTerminalTemplate)
 meta_non_terminal((Entity1::MetaNonTerminalTemplate1, Entity2::MetaNonTerminalTemplate2, ...))
 meta_non_terminal([Entity1::MetaNonTerminalTemplate1, Entity2::MetaNonTerminalTemplate2, ...])
-</pre>
+
+meta_non_terminal(Module:MetaNonTerminalTemplate)
+meta_non_terminal((Module1:MetaNonTerminalTemplate1, Module2:MetaNonTerminalTemplate2, ...))
+meta_non_terminal([Module1:MetaNonTerminalTemplate1, Module2:MetaNonTerminalTemplate2, ...])</pre>
 <p>
 Declares meta-non-terminals, i.e., non-terminals that have arguments that will be called as non-terminals (or grammar rule bodies). An argument may also be a <em>closure</em> instead of a goal if the non-terminal uses the <a title="Consult reference manual" href="../methods/call1.html"><code>call//1-N</code></a> Logtalk built-in methods to construct and call the actual goal from the closure and the additional arguments.
 </p>
@@ -53,13 +56,18 @@ Meta-arguments which are non-terminals are represented by the integer <code>0</c
 <p>
 This directive must precede any calls to the declared meta-non-terminals.
 </p>
+<p>
+Logtalk allows the use of this directive to override the original meta-non-terminal directive. This is sometimes necessary when calling Prolog module meta-non-terminals due to the lack of standardization of the syntax of the meta-non-terminal templates.
+</p>
 
 <h4>Template and modes</h4>
 
 <pre>meta_non_terminal(+meta_non_terminal_template_term)
-meta_non_terminal(+object_identifier::+meta_non_terminal_template_term)
-meta_non_terminal(+category_identifier::+meta_non_terminal_template_term)</pre>
 
+meta_non_terminal(+object_identifier::+meta_non_terminal_template_term)
+meta_non_terminal(+category_identifier::+meta_non_terminal_template_term)
+
+meta_non_terminal(+module_identifier:+meta_non_terminal_template_term)</pre>
 
 <h4>Examples</h4>
 
@@ -72,7 +80,7 @@ meta_non_terminal(+category_identifier::+meta_non_terminal_template_term)</pre>
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: March 3, 2013</span>
+		<span>Last updated on: May 17, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="meta_predicate1.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="mode2.html">next</a></span><br/>

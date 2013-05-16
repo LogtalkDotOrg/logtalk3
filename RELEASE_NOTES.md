@@ -98,6 +98,10 @@ Reference Manual.
 
 * ADDED: Documentation on lambda expressions to the User Manual.
 
+* ADDED: Documentation on how to use local `meta_non_terminal/1` and
+`meta_predicate/1` directives to override the original directives of
+called non-terminals and meta-predicates defined elsewhere.
+
 Tests
 -----
 
