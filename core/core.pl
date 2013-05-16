@@ -10812,8 +10812,8 @@ current_logtalk_flag(Flag, Value) :-
 		% explicit-qualified meta-argument
 		TArg = Arg,
 		DArg = Arg
-	;	% non-qualified meta-argument
-		callable(Arg) ->
+	;	callable(Arg) ->
+		% non-qualified meta-argument
 		Arg =.. [Functor| Args],
 		'$lgt_length'(ExtArgs, 0, N),
 		'$lgt_append'(Args, ExtArgs, FullArgs),
@@ -10834,7 +10834,24 @@ current_logtalk_flag(Flag, Value) :-
 		TArg = ':'(user, Helper),
 		DArg = ':'(user, Helper)
 	;	var(Arg) ->
-		throw(instantiation_error)
+		% closure only known at runtime
+		'$lgt_length'(ExtArgs, 0, N),
+		ExtArg =.. [call, Arg| ExtArgs],
+		'$lgt_tr_body'(ExtArg, TArg0, DArg0, Ctx),
+		% generate an auxiliary predicate to allow the module meta-predicate to
+		% extend the closure without clashing with the execution-context argument
+		'$lgt_pp_entity_'(_, _, Prefix, _, _),
+		atom_concat(Prefix, '_module_helper_', HelperFunctor0),
+		'$lgt_gen_aux_predicate_functor'(HelperFunctor0, HelperFunctor),
+		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+		Helper =.. [HelperFunctor| [ExCtx, Arg]],
+		ExtHelper =.. [HelperFunctor| [ExCtx, Arg| ExtArgs]],
+		(	'$lgt_compiler_flag'(debug, on) ->
+			'$lgt_compile_aux_clauses'([({ExtHelper} :- {DArg0})])
+		;	'$lgt_compile_aux_clauses'([({ExtHelper} :- {TArg0})])
+		),
+		TArg = ':'(user, Helper),
+		DArg = ':'(user, Helper)
 	;	throw(type_error(callable, Arg))
 	).
 
