@@ -10408,6 +10408,7 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	Pred =.. [_| PredArgs],
 	Meta =.. [_| MetaArgs],
+	'$lgt_prolog_to_logtalk_meta_argument_specifiers'(MetaArgs, CMetaArgs),
 	'$lgt_comp_ctx_head'(Ctx, Head),
 	nonvar(Head),
 	% ignore multifile predicates
@@ -10416,16 +10417,17 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_pp_meta_predicate_'(Head, HeadMeta),
 	Head =.. [_| HeadArgs],
 	HeadMeta =.. [_| HeadMetaArgs],
-	'$lgt_same_number_of_closure_extra_args'(PredArgs, MetaArgs, HeadArgs, HeadMetaArgs),
+	'$lgt_same_number_of_closure_extra_args'(PredArgs, CMetaArgs, HeadArgs, HeadMetaArgs),
 	fail.
 
 
 % predicates specified in use_module/2 directives
 
-'$lgt_tr_body'(Alias, TPred, DPred, Ctx) :-
+'$lgt_tr_body'(Alias, TPred, '$lgt_debug'(goal(Alias, TPred), Ctx) :-
 	'$lgt_pp_use_module_predicate_'(Module, Pred, Alias),
 	!,
-	'$lgt_tr_body'(':'(Module,Pred), TPred, DPred, Ctx).
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	'$lgt_tr_body'(':'(Module,Pred), TPred, _, Ctx).
 
 
 % annotations (EXPERIMENTAL)
