@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for GNU Prolog 1.4.2 (and later versions)
-%  Last updated on May 9, 2013
+%  Last updated on May 17, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -118,10 +118,9 @@ setup_call_cleanup(_, _, _) :-
 % is used to guide the compilation of these meta-predicates in debug mode
 
 '$lgt_prolog_meta_predicate'(Callable, Template, Kind) :-
-	functor(Callable, Functor, Arity),
-	predicate_property(Functor/Arity, meta_predicate(Template)),
-	predicate_property(Functor/Arity, built_in),
-	(	predicate_property(Functor/Arity, control_construct) ->
+	predicate_property(Callable, meta_predicate(Template)),
+	predicate_property(Callable, built_in),
+	(	predicate_property(Callable, control_construct) ->
 		Kind = control_construct
 	;	Kind = predicate
 	),

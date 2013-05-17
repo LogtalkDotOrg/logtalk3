@@ -75,6 +75,9 @@ Lean Prolog adapter file.
 * UPDATED: XSB adapter file for release 3.4.0, which changes the exception
 term format for errors within the pseudo-object `user`.
 
+* FIXED: Definition of internal predicate for querying built-in meta-predicates
+for GNU Prolog.
+
 Documentation
 -------------
 
