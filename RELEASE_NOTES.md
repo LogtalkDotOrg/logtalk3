@@ -63,8 +63,8 @@ Logtalk equivalents before checking meta-predicate calling compatibility.
 * IMPROVED: Faster generated code for `:/2` non-terminals in the body of
 grammar rules.
 
-* NEW: Support for calling Prolog module meta-predicates that take closures
-as meta-arguments.
+* NEW: Support for calling Prolog built-in meta-predicates and Prolog module
+meta-predicates that take closures as meta-arguments.
 
 Prolog adapter and integration files
 ------------------------------------

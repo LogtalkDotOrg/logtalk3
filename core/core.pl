@@ -6432,7 +6432,8 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_pp_entity_'(_, Entity, Prefix, _, _),
 	% MetaVars = [] as we're compiling a local call
 	'$lgt_comp_ctx'(Ctx, _, Entity, Entity, Entity, Prefix, [], _, _, _, _),
-	(	'$lgt_tr_prolog_meta_arguments'(Args, MArgs, Ctx, TArgs, DArgs) ->
+	(	'$lgt_tr_module_meta_predicate_directive_args'(MArgs, CMArgs),
+		'$lgt_tr_prolog_meta_arguments'(Args, CMArgs, Ctx, TArgs, DArgs) ->
 		(	'$lgt_compiler_flag'(debug, on) ->
 			TDirective =.. [Functor| DArgs]
 		;	TDirective =.. [Functor| TArgs]
@@ -10515,7 +10516,8 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_prolog_meta_predicate'(Pred, Meta, Type),
 		Pred =.. [_| Args],
 		Meta =.. [_| MArgs],
-		'$lgt_tr_prolog_meta_arguments'(Args, MArgs, Ctx, TArgs, DArgs) ->
+		'$lgt_tr_module_meta_predicate_directive_args'(MArgs, CMArgs),
+		'$lgt_tr_prolog_meta_arguments'(Args, CMArgs, Ctx, TArgs, DArgs) ->
 		TGoal =.. [Functor| TArgs],
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		(	'$lgt_comp_ctx_mode'(Ctx, runtime) ->
@@ -10761,6 +10763,54 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_tr_prolog_meta_arguments'(Args, MArgs, Ctx, TArgs, DArgs).
 
 
+'$lgt_tr_prolog_meta_argument'(N, Arg, Ctx, TArg, DArg) :-
+	integer(N),
+	N > 0,
+	% closure
+	!,
+	(	callable(Arg) ->
+		Arg =.. [Functor| Args],
+		once('$lgt_length'(ExtArgs, 0, N)),
+		'$lgt_append'(Args, ExtArgs, FullArgs),
+		ExtArg =.. [Functor| FullArgs],
+		'$lgt_tr_body'(ExtArg, TArg0, DArg0, Ctx),
+		writeq('$lgt_tr_body'(ExtArg, TArg0, DArg0, Ctx)), nl,
+		% generate an auxiliary predicate to allow the module meta-predicate to
+		% extend the closure without clashing with the execution-context argument
+		'$lgt_pp_entity_'(_, _, Prefix, _, _),
+		atom_concat(Prefix, '_helper_', HelperFunctor0),
+		'$lgt_gen_aux_predicate_functor'(HelperFunctor0, HelperFunctor),
+		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+		Helper =.. [HelperFunctor| [ExCtx| Args]],
+		ExtHelper =.. [HelperFunctor| [ExCtx| FullArgs]],
+		(	'$lgt_compiler_flag'(debug, on) ->
+			'$lgt_compile_aux_clauses'([({ExtHelper} :- {DArg0})])
+		;	'$lgt_compile_aux_clauses'([({ExtHelper} :- {TArg0})])
+		),
+		TArg = Helper,
+		DArg = Helper
+	;	var(Arg) ->
+		% closure only known at runtime
+		once('$lgt_length'(ExtArgs, 0, N)),
+		ExtArg =.. [call, Arg| ExtArgs],
+		'$lgt_tr_body'(ExtArg, TArg0, DArg0, Ctx),
+		% generate an auxiliary predicate to allow the module meta-predicate to
+		% extend the closure without clashing with the execution-context argument
+		'$lgt_pp_entity_'(_, _, Prefix, _, _),
+		atom_concat(Prefix, '_helper_', HelperFunctor0),
+		'$lgt_gen_aux_predicate_functor'(HelperFunctor0, HelperFunctor),
+		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+		Helper =.. [HelperFunctor| [ExCtx, Arg]],
+		ExtHelper =.. [HelperFunctor| [ExCtx, Arg| ExtArgs]],
+		(	'$lgt_compiler_flag'(debug, on) ->
+			'$lgt_compile_aux_clauses'([({ExtHelper} :- {DArg0})])
+		;	'$lgt_compile_aux_clauses'([({ExtHelper} :- {TArg0})])
+		),
+		TArg = Helper,
+		DArg = Helper
+	;	throw(type_error(callable, Arg))
+	).
+
 '$lgt_tr_prolog_meta_argument'((*), Arg, _, Arg, Arg).
 
 '$lgt_tr_prolog_meta_argument'((0), Arg, Ctx, TArg, DArg) :-
@@ -10815,7 +10865,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	callable(Arg) ->
 		% non-qualified meta-argument
 		Arg =.. [Functor| Args],
-		'$lgt_length'(ExtArgs, 0, N),
+		once('$lgt_length'(ExtArgs, 0, N)),
 		'$lgt_append'(Args, ExtArgs, FullArgs),
 		ExtArg =.. [Functor| FullArgs],
 		'$lgt_tr_body'(ExtArg, TArg0, DArg0, Ctx),
