@@ -10774,7 +10774,6 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_append'(Args, ExtArgs, FullArgs),
 		ExtArg =.. [Functor| FullArgs],
 		'$lgt_tr_body'(ExtArg, TArg0, DArg0, Ctx),
-		writeq('$lgt_tr_body'(ExtArg, TArg0, DArg0, Ctx)), nl,
 		% generate an auxiliary predicate to allow the module meta-predicate to
 		% extend the closure without clashing with the execution-context argument
 		'$lgt_pp_entity_'(_, _, Prefix, _, _),
