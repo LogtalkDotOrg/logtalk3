@@ -10423,7 +10423,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % predicates specified in use_module/2 directives
 
-'$lgt_tr_body'(Alias, TPred, '$lgt_debug'(goal(Alias, TPred), Ctx) :-
+'$lgt_tr_body'(Alias, TPred, '$lgt_debug'(goal(Alias, TPred), ExCtx), Ctx) :-
 	'$lgt_pp_use_module_predicate_'(Module, Pred, Alias),
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
