@@ -911,18 +911,15 @@ When calling non-standard Prolog built-in predicates or using non-standard Prolo
 <h3 id="predicates_prolog_meta">Calling Prolog non-standard meta-predicates</h3>
 
 <p>
-Prolog built-in meta-predicates may only be called locally within objects or categories, i.e. they cannot be used as messages. Compiling calls to non-standard, Prolog built-in meta-predicates can be tricky for two reasons: first, there is no standard way of checking if a built-in predicate is also a meta-predicate and finding out which are its meta-arguments; second, in some cases, the meta-arguments of a meta-predicate are not goals but closures, used for constructing goals. The way the goals are constructed is specific to the meta-predicate and cannot be reliable inferred by the Logtalk compiler. For meta-predicates whose meta-arguments are directly called as goals, the solution is to explicitly declare them in the corresponding Prolog adapter file using the predicate <code>'$lgt_pl_meta-predicate'/3</code>. For example:
+Prolog built-in meta-predicates may only be called locally within objects or categories, i.e. they cannot be used as messages. Compiling calls to non-standard, Prolog built-in meta-predicates can be tricky, however, as there is no standard way of checking if a built-in predicate is also a meta-predicate and finding out which are its meta-arguments. The solution is to explicitly declare them in the corresponding Prolog adapter file using the predicate <code>'$lgt_pl_meta-predicate'/3</code>. For example:
 </p>
 <pre>'$lgt_prolog_meta_predicate'(*-&gt;(_, _), (*-&gt;(0, 0), control_construct).
 '$lgt_prolog_meta_predicate'(findall(_, _, _, _), findall(*, 0, *, *), predicate).</pre>
-<p>
-Currently, there is no clean workaround for calling non-standard Prolog built-in meta-predicates whose meta-arguments are closures instead of goals.
-</p>
 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: May 15, 2013</span>
+		<span>Last updated on: May 17, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="categories.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="inheritance.html">next</a></span><br/>
