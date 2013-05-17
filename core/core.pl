@@ -9492,7 +9492,7 @@ current_logtalk_flag(Flag, Value) :-
 		Pred =.. [Functor| Args],
 		Meta =.. [Functor| MArgs],
 		'$lgt_prolog_to_logtalk_meta_argument_specifiers'(MArgs, CMArgs),
-		(	'$lgt_member'(CMArg, CMArgs), CMArg == (':') ->
+		(	'$lgt_member'(CMArg, CMArgs), CMArg == ('::') ->
 			% the meta-argument specifier '::' is ambiguous in this context
 			throw(domain_error(meta_argument_specifier, Meta))
 		;	'$lgt_tr_module_meta_args'(Args, CMArgs, Ctx, TArgs, DArgs),
@@ -10420,36 +10420,12 @@ current_logtalk_flag(Flag, Value) :-
 	fail.
 
 
-% meta-predicates specified in use_module/2 directives
+% predicates specified in use_module/2 directives
 
-'$lgt_tr_body'(Alias, ':'(Module, TPred), ':'(Module, DPred), Ctx) :-
+'$lgt_tr_body'(Alias, TPred, DPred, Ctx) :-
 	'$lgt_pp_use_module_predicate_'(Module, Pred, Alias),
-	catch('$lgt_predicate_property'(':'(Module, Pred), meta_predicate(OriginalMeta)), _, fail),
-	(	'$lgt_pp_meta_predicate_'(':'(Module, Pred), ':'(Module, OverridingMeta)) ->
-		% we're overriding the original meta-predicate template
-		Meta = OverridingMeta
-	;	Meta = OriginalMeta
-	),
-	Pred =.. [Functor| Args],
-	Meta =.. [Functor| MArgs],
-	(	'$lgt_member'(MArg, MArgs), integer(MArg), MArg =\= 0 ->
-		% module meta-predicates that take closures are not supported
-		throw(domain_error(closure, Meta))
-	;	'$lgt_member'(MArg, MArgs), MArg == (':') ->
-		% the meta-argument specifier ':' is ambiguous
-		throw(domain_error(meta_argument_specifier, Meta))
-	;	'$lgt_prolog_to_logtalk_meta_argument_specifiers'(MArgs, CMArgs),
-		'$lgt_tr_module_meta_args'(Args, CMArgs, Ctx, TArgs, DArgs),
-		TPred =.. [Functor| TArgs],
-		DPred =.. [Functor| DArgs]
-	),
-	!.
-
-% normal predicates specified in use_module/2 directives
-
-'$lgt_tr_body'(Alias, ':'(Module, Pred), ':'(Module, Pred), _) :-
-	'$lgt_pp_use_module_predicate_'(Module, Pred, Alias),
-	!.
+	!,
+	'$lgt_tr_body'(':'(Module,Pred), TPred, DPred, Ctx).
 
 
 % annotations (EXPERIMENTAL)
