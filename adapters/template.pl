@@ -137,6 +137,12 @@ numbervars(Term, From, Next) :-
 	fail.
 
 
+% '$lgt_prolog_to_logtalk_meta_argument_specifier_hook'(@nonvar, -atom)
+
+'$lgt_prolog_to_logtalk_meta_argument_specifier_hook'(_, _) :-
+	fail.
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %

@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SWI Prolog 6.0.0 and later versions
-%  Last updated on May 13, 2013
+%  Last updated on May 17, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -173,6 +173,11 @@
 '$lgt_prolog_meta_directive'(at_halt(_), at_halt(0)).
 '$lgt_prolog_meta_directive'(initialization(_, _), initialization(0, *)).
 '$lgt_prolog_meta_directive'(thread_initialization(_), thread_initialization(0)).
+
+
+% '$lgt_prolog_to_logtalk_meta_argument_specifier_hook'(@nonvar, -atom)
+
+'$lgt_prolog_to_logtalk_meta_argument_specifier_hook'((//), 2).
 
 
 

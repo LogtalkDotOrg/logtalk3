@@ -69,6 +69,9 @@ meta-predicates that take closures as meta-arguments.
 Prolog adapter and integration files
 ------------------------------------
 
+* IMPROVED: Add an internal hook predicate for overriding default conversions
+of Prolog dialect specific meta-argument specifiers to all adapter files.
+
 * UPDATED: Added definitions for the internal time and date predicates to the
 Lean Prolog adapter file.
 

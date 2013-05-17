@@ -6432,7 +6432,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_pp_entity_'(_, Entity, Prefix, _, _),
 	% MetaVars = [] as we're compiling a local call
 	'$lgt_comp_ctx'(Ctx, _, Entity, Entity, Entity, Prefix, [], _, _, _, _),
-	(	'$lgt_tr_module_meta_predicate_directive_args'(MArgs, CMArgs),
+	(	'$lgt_prolog_to_logtalk_meta_argument_specifiers'(MArgs, CMArgs),
 		'$lgt_tr_prolog_meta_arguments'(Args, CMArgs, Ctx, TArgs, DArgs) ->
 		(	'$lgt_compiler_flag'(debug, on) ->
 			TDirective =.. [Functor| DArgs]
@@ -7970,46 +7970,63 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% auxiliary predicate for translating module's meta predicate directives into
-% Logtalk ones by translating the argument modes (e.g. (:) -> (::))
+% auxiliary predicate for translating module's meta predicate directives
+% into Logtalk ones by translating the meta-argument specifiers
 
 '$lgt_tr_module_meta_predicate_directive'([], []).
 
 '$lgt_tr_module_meta_predicate_directive'([Template| Templates], [ConvertedTemplate| ConvertedTemplates]) :-
 	Template =.. [Functor| Args],
-	'$lgt_tr_module_meta_predicate_directive_args'(Args, ConvertedArgs),
+	'$lgt_prolog_to_logtalk_meta_argument_specifiers'(Args, ConvertedArgs),
 	ConvertedTemplate =.. [Functor| ConvertedArgs],
 	'$lgt_tr_module_meta_predicate_directive'(Templates, ConvertedTemplates).
 
 
-'$lgt_tr_module_meta_predicate_directive_args'([], []).
 
-'$lgt_tr_module_meta_predicate_directive_args'([Arg| Args], [TArg| TArgs]) :-
-	(	Arg == (:) ->
-		% Prolog to Logtalk notation; this is fragile due to the lack of standardization
-		TArg = (::)
-	;	Arg == (::) ->
-		% mixed-up notation or overriding meta-predicate template being used
-		TArg = (::)	
-	;	integer(Arg) ->
-		% goals and closures are denoted by integers >= 0
-		TArg = Arg
-	;	Arg == (/) ->
-		% predicate indicator
-		TArg = Arg
-	;	Arg = [N], integer(N) ->
-		% list of goals/closures
-		TArg = Arg
-	;	Arg == [/] ->
-		% list of predicate indicators
-		TArg = Arg
-	;	Arg == (^) ->
-		% goal with possible existential variables qualification
-		TArg = Arg
-	;	% non meta-arguments (e.g. instantiation modes) to Logtalk notation
-		TArg = (*)
+% auxiliary predicate for translating Prolog dialect meta-argument
+% predicate specifiers into Logtalk specifiers
+
+'$lgt_prolog_to_logtalk_meta_argument_specifiers'([], []).
+
+'$lgt_prolog_to_logtalk_meta_argument_specifiers'([Arg| Args], [TArg| TArgs]) :-
+	(	\+ ground(Arg) ->
+		throw(instantiation_error)
+	;	'$lgt_prolog_to_logtalk_meta_argument_specifier_hook'(Arg, TArg) ->
+		true
+	;	'$lgt_prolog_to_logtalk_meta_argument_specifier'(Arg, TArg) ->
+		true
+	;	throw(domain_error(meta_argument_specifier, Arg))
 	),
-	'$lgt_tr_module_meta_predicate_directive_args'(Args, TArgs).
+	'$lgt_prolog_to_logtalk_meta_argument_specifiers'(Args, TArgs).
+	
+
+% goals and closures are denoted by integers >= 0
+'$lgt_prolog_to_logtalk_meta_argument_specifier'(N, N) :-
+	integer(N).
+% Prolog to Logtalk notation; this is fragile due to the lack of standardization	
+'$lgt_prolog_to_logtalk_meta_argument_specifier'((:), (::)).
+% mixed-up notation or overriding meta-predicate template being used
+'$lgt_prolog_to_logtalk_meta_argument_specifier'((::), (::)).
+% predicate indicator
+'$lgt_prolog_to_logtalk_meta_argument_specifier'((/), (/)).
+% non-terminal indicator
+'$lgt_prolog_to_logtalk_meta_argument_specifier'((//), (//)).
+% list of goals/closures
+'$lgt_prolog_to_logtalk_meta_argument_specifier'([N], [N]) :-
+	integer(N).
+% list of predicate indicators
+'$lgt_prolog_to_logtalk_meta_argument_specifier'([/], [/]).
+% list of non-terminal indicators
+'$lgt_prolog_to_logtalk_meta_argument_specifier'([//], [//]).
+% goal with possible existential variables qualification
+'$lgt_prolog_to_logtalk_meta_argument_specifier'((^), (^)).
+% instantiation modes (non meta-arguments)
+'$lgt_prolog_to_logtalk_meta_argument_specifier'((@), (*)).
+'$lgt_prolog_to_logtalk_meta_argument_specifier'((+), (*)).
+'$lgt_prolog_to_logtalk_meta_argument_specifier'((-), (*)).
+'$lgt_prolog_to_logtalk_meta_argument_specifier'((?), (*)).
+% non meta-arguments
+'$lgt_prolog_to_logtalk_meta_argument_specifier'((*), (*)).
 
 
 
@@ -9474,7 +9491,7 @@ current_logtalk_flag(Flag, Value) :-
 		),
 		Pred =.. [Functor| Args],
 		Meta =.. [Functor| MArgs],
-		'$lgt_tr_module_meta_predicate_directive_args'(MArgs, CMArgs),
+		'$lgt_prolog_to_logtalk_meta_argument_specifiers'(MArgs, CMArgs),
 		(	'$lgt_member'(CMArg, CMArgs), CMArg == (':') ->
 			% the meta-argument specifier '::' is ambiguous in this context
 			throw(domain_error(meta_argument_specifier, Meta))
@@ -10421,7 +10438,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	'$lgt_member'(MArg, MArgs), MArg == (':') ->
 		% the meta-argument specifier ':' is ambiguous
 		throw(domain_error(meta_argument_specifier, Meta))
-	;	'$lgt_tr_module_meta_predicate_directive_args'(MArgs, CMArgs),
+	;	'$lgt_prolog_to_logtalk_meta_argument_specifiers'(MArgs, CMArgs),
 		'$lgt_tr_module_meta_args'(Args, CMArgs, Ctx, TArgs, DArgs),
 		TPred =.. [Functor| TArgs],
 		DPred =.. [Functor| DArgs]
@@ -10516,7 +10533,7 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_prolog_meta_predicate'(Pred, Meta, Type),
 		Pred =.. [_| Args],
 		Meta =.. [_| MArgs],
-		'$lgt_tr_module_meta_predicate_directive_args'(MArgs, CMArgs),
+		'$lgt_prolog_to_logtalk_meta_argument_specifiers'(MArgs, CMArgs),
 		'$lgt_tr_prolog_meta_arguments'(Args, CMArgs, Ctx, TArgs, DArgs) ->
 		TGoal =.. [Functor| TArgs],
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
@@ -14356,7 +14373,7 @@ current_logtalk_flag(Flag, Value) :-
 	% fixing a call to a Prolog module meta-predicate
 	Pred =.. [Functor| Args],
 	Meta =.. [Functor| MArgs],
-	'$lgt_tr_module_meta_predicate_directive_args'(MArgs, CMArgs),
+	'$lgt_prolog_to_logtalk_meta_argument_specifiers'(MArgs, CMArgs),
 	'$lgt_fix_predicate_calls_in_meta_arguments'(Args, CMArgs, TArgs),
 	TPred =.. [Functor| TArgs].
 
