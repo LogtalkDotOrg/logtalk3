@@ -7,7 +7,8 @@
 %  load Logtalk files using SWI Prolog consult/1, to support edit/1 and
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
-%  Last updated on May 7, 2013
+%
+%  Last updated on May 18, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -329,7 +330,6 @@ user:portray(c(This, r(Sender, Self, MetaVars, CoinductionStack))) :-
 '$lgt_swi_unify_clause_body'(^^Msg, _, '$lgt_ctg_super_call'(_, Msg, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(^^Msg, _, '$lgt_ctg_super_call_'(_, Msg, _), TermPos, TermPos) :- !.
 
-'$lgt_swi_unify_clause_body'(:Msg, _, '$lgt_ctg_call_'(_, Msg, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(Goal, _, '$lgt_call_in_this'(Goal, _), TermPos, TermPos) :- !.
 
 '$lgt_swi_unify_clause_body'(Obj<<Goal, _, '$lgt_call_within_context'(Obj, Goal, _), TermPos, TermPos) :- !.
@@ -575,8 +575,6 @@ user:portray(c(This, r(Sender, Self, MetaVars, CoinductionStack))) :-
 :- '$set_predicate_attribute'('$lgt_obj_super_call_'/3, trace, 1).
 :- '$set_predicate_attribute'('$lgt_ctg_super_call'/3, trace, 1).
 :- '$set_predicate_attribute'('$lgt_ctg_super_call_'/3, trace, 1).
-:- '$set_predicate_attribute'('$lgt_ctg_call'/3, trace, 1).
-:- '$set_predicate_attribute'('$lgt_ctg_call_'/3, trace, 1).
 :- '$set_predicate_attribute'('$lgt_call_in_this'/2, trace, 1).
 
 :- '$set_predicate_attribute'('$lgt_metacall'/6, trace, 1).
@@ -689,7 +687,6 @@ user:portray(c(This, r(Sender, Self, MetaVars, CoinductionStack))) :-
 :- meta_predicate user:'$lgt_threaded_goal'(*,*,*,*).
 :- meta_predicate user:'$lgt_threaded_call'(*,*,*).
 :- meta_predicate user:'$lgt_threaded_once'(*,*,*).
-:- meta_predicate user:'$lgt_ctg_call_'(*,*,*).
 :- meta_predicate user:'$lgt_ctg_super_call_'(*,*,*).
 :- meta_predicate user:'$lgt_send_to_obj_'(*,*,*).
 :- meta_predicate user:'$lgt_obj_super_call_'(*,*,*).
@@ -698,7 +695,6 @@ user:portray(c(This, r(Sender, Self, MetaVars, CoinductionStack))) :-
 :- meta_predicate user:'$lgt_send_to_self_'(*,*,*).
 :- meta_predicate user:'$lgt_threaded_call_tagged'(*,*,*,*).
 
-:- meta_predicate user:'$lgt_ctg_call'(*,*,*).
 :- meta_predicate user:'$lgt_send_to_obj_ne'(*,*,*).
 :- meta_predicate user:'$lgt_ctg_super_call'(*,*,*).
 :- meta_predicate user:'$lgt_obj_super_call'(*,*,*).
