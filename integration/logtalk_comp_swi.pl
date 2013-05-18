@@ -58,7 +58,6 @@
 	'$lgt_send_to_obj_ne'/3, '$lgt_send_to_obj_ne_'/3,
 	'$lgt_obj_super_call'/3, '$lgt_obj_super_call_'/3,
 	'$lgt_ctg_super_call'/3, '$lgt_ctg_super_call_'/3,
-	'$lgt_ctg_call'/3, '$lgt_ctg_call_'/3,
 	'$lgt_db_lookup_cache_'/5,
 	'$lgt_hook_term_expansion_'/2, '$lgt_hook_goal_expansion_'/2,
 	'$lgt_threaded_tag_counter_'/1,
@@ -75,7 +74,6 @@
 	:- index('$lgt_send_to_self_'(1, 1, 0)).
 	:- index('$lgt_obj_super_call_'(1, 1, 0)).
 	:- index('$lgt_ctg_super_call_'(1, 1, 0)).
-	:- index('$lgt_ctg_call_'(1, 1, 0)).
 	:- index('$lgt_db_lookup_cache_'(1, 1, 0, 0, 0)).
 :- endif.
 

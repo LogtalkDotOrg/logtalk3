@@ -33,7 +33,6 @@
 :- index('$lgt_send_to_self_'/3, [1 + *(2)]).
 :- index('$lgt_obj_super_call_'/3, [1 + *(2)]).
 :- index('$lgt_ctg_super_call_'/3, [1 + *(2)]).
-:- index('$lgt_ctg_call_'/3, [1 + *(2)]).
 
 :- index('$lgt_db_lookup_cache_'/5, [1 + *(2)]).
 
@@ -81,7 +80,6 @@
 :- thread_shared('$lgt_send_to_self_'/3).
 :- thread_shared('$lgt_obj_super_call_'/3).
 :- thread_shared('$lgt_ctg_super_call_'/3).
-:- thread_shared('$lgt_ctg_call_'/3).
 
 % lookup cache for asserting and retracting dynamic facts
 :- thread_shared('$lgt_db_lookup_cache_'/5).
