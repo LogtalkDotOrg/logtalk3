@@ -10774,22 +10774,39 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_tr_body'(ExtArg, TArg0, DArg0, Ctx),
 	% generate an auxiliary predicate to allow the meta-predicate to extend
 	% the closure without clashing with the execution-context argument
+	'$lgt_gen_aux_predicate_functor'('_closure_', HelperFunctor),
 	'$lgt_pp_entity_'(_, _, Prefix, _, _),
-	atom_concat(Prefix, '_closure_', HelperFunctor0),
-	'$lgt_gen_aux_predicate_functor'(HelperFunctor0, HelperFunctor),
+	atom_concat(Prefix, HelperFunctor, THelperFunctor),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	Helper =.. [HelperFunctor, Arg, ExCtx],
-	ExtHelper =.. [HelperFunctor, Arg, ExCtx| ExtArgs],
+	THelper =.. [THelperFunctor, Arg, ExCtx],
+	TExtHelper =.. [THelperFunctor, Arg, ExCtx| ExtArgs],
 	(	'$lgt_compiler_flag'(debug, on) ->
-		'$lgt_compile_aux_clauses'([({ExtHelper} :- {DArg0})])
-	;	'$lgt_compile_aux_clauses'([({ExtHelper} :- {TArg0})])
+		assertz('$lgt_pp_entity_aux_clause_'({TExtHelper :- DArg0}))
+	;	assertz('$lgt_pp_entity_aux_clause_'({TExtHelper :- TArg0}))
+	),
+	(	'$lgt_pp_object_'(Entity, _, _, Def, _, _, _, _, _, _, _) ->
+		true
+	;	'$lgt_pp_category_'(Entity, _, _, Def, _, _)
+	),
+	% add a def clause to ensure that we don't loose track of the auxiliary clause
+	Arity is N + 2, 
+	once('$lgt_length'(TemplateArgs, 0, Arity)),
+	ExtHelperTemplate =.. [HelperFunctor| TemplateArgs],
+	TExtHelperTemplate =.. [THelperFunctor| TemplateArgs],
+	Clause =.. [Def, ExtHelperTemplate, _, TExtHelperTemplate],
+	assertz('$lgt_pp_def_'(Clause)),
+	% add, if applicable, source data information for the auxiliary clause
+	(	'$lgt_compiler_flag'(source_data, on) ->
+		assertz('$lgt_pp_predicate_property_'(Entity, HelperFunctor/Arity, auxiliary)),
+		assertz('$lgt_pp_predicate_property_'(Entity, HelperFunctor/Arity, number_of_clauses(1)))
+	;	true
 	),
 	(	'$lgt_prolog_feature'(module, supported) ->
 		% make sure the call is made in the correct context
-		TArg = ':'(user, Helper),
-		DArg = ':'(user, Helper)
-	;	TArg = Helper,
-		DArg = Helper
+		TArg = ':'(user, THelper),
+		DArg = ':'(user, THelper)
+	;	TArg = THelper,
+		DArg = THelper
 	).
 
 '$lgt_tr_prolog_meta_argument'((*), Arg, _, Arg, Arg).
