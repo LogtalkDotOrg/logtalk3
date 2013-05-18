@@ -10865,6 +10865,14 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_extend_closure_basic'(Closure, ExtArgs, Goal).
 
+'$lgt_extend_closure'(Free/Lambda, ExtArgs, Goal) :-
+	!,
+	Goal =.. [call, Free/Lambda| ExtArgs].
+
+'$lgt_extend_closure'(Parameters>>Lambda, ExtArgs, Goal) :-
+	!,
+	Goal =.. [call, Parameters>>Lambda| ExtArgs].
+
 '$lgt_extend_closure'(':'(Module,Closure), ExtArgs, ':'(Module:Goal)) :-
 	!,
 	'$lgt_extend_closure_basic'(Closure, ExtArgs, Goal).
