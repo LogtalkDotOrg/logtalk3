@@ -9495,7 +9495,7 @@ current_logtalk_flag(Flag, Value) :-
 		(	'$lgt_member'(CMArg, CMArgs), CMArg == ('::') ->
 			% the meta-argument specifier '::' is ambiguous in this context
 			throw(domain_error(meta_argument_specifier, Meta))
-		;	'$lgt_tr_module_meta_args'(Args, CMArgs, Ctx, TArgs, DArgs),
+		;	'$lgt_tr_prolog_meta_arguments'(Args, CMArgs, Ctx, TArgs, DArgs),
 			TPred0 =.. [Functor| TArgs],
 			TPred = ':'(Module, TPred0),
 			'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
@@ -10763,52 +10763,47 @@ current_logtalk_flag(Flag, Value) :-
 	N > 0,
 	% closure
 	!,
-	(	callable(Arg) ->
-		Arg =.. [Functor| Args],
-		once('$lgt_length'(ExtArgs, 0, N)),
-		'$lgt_append'(Args, ExtArgs, FullArgs),
-		ExtArg =.. [Functor| FullArgs],
-		'$lgt_tr_body'(ExtArg, TArg0, DArg0, Ctx),
-		% generate an auxiliary predicate to allow the module meta-predicate to
-		% extend the closure without clashing with the execution-context argument
-		'$lgt_pp_entity_'(_, _, Prefix, _, _),
-		atom_concat(Prefix, '_helper_', HelperFunctor0),
-		'$lgt_gen_aux_predicate_functor'(HelperFunctor0, HelperFunctor),
-		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-		Helper =.. [HelperFunctor| [ExCtx| Args]],
-		ExtHelper =.. [HelperFunctor| [ExCtx| FullArgs]],
-		(	'$lgt_compiler_flag'(debug, on) ->
-			'$lgt_compile_aux_clauses'([({ExtHelper} :- {DArg0})])
-		;	'$lgt_compile_aux_clauses'([({ExtHelper} :- {TArg0})])
-		),
-		TArg = Helper,
+	'$lgt_must_be'(var_or_callable, Arg),
+	once('$lgt_length'(ExtArgs, 0, N)),
+	(	var(Arg) ->
+		ExtArg =.. [call, Arg| ExtArgs]
+	;	'$lgt_extend_closure'(Arg, ExtArgs, ExtArg) ->
+		true
+	;	throw(domain_error(closure, Arg))
+	),
+	'$lgt_tr_body'(ExtArg, TArg0, DArg0, Ctx),
+	% generate an auxiliary predicate to allow the meta-predicate to extend
+	% the closure without clashing with the execution-context argument
+	'$lgt_pp_entity_'(_, _, Prefix, _, _),
+	atom_concat(Prefix, '_closure_', HelperFunctor0),
+	'$lgt_gen_aux_predicate_functor'(HelperFunctor0, HelperFunctor),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	Helper =.. [HelperFunctor, Arg, ExCtx],
+	ExtHelper =.. [HelperFunctor, Arg, ExCtx| ExtArgs],
+	(	'$lgt_compiler_flag'(debug, on) ->
+		'$lgt_compile_aux_clauses'([({ExtHelper} :- {DArg0})])
+	;	'$lgt_compile_aux_clauses'([({ExtHelper} :- {TArg0})])
+	),
+	(	'$lgt_prolog_feature'(module, supported) ->
+		TArg = ':'(user, Helper),
+		DArg = ':'(user, Helper)
+	;	TArg = Helper,
 		DArg = Helper
-	;	var(Arg) ->
-		% closure only known at runtime
-		once('$lgt_length'(ExtArgs, 0, N)),
-		ExtArg =.. [call, Arg| ExtArgs],
-		'$lgt_tr_body'(ExtArg, TArg0, DArg0, Ctx),
-		% generate an auxiliary predicate to allow the module meta-predicate to
-		% extend the closure without clashing with the execution-context argument
-		'$lgt_pp_entity_'(_, _, Prefix, _, _),
-		atom_concat(Prefix, '_helper_', HelperFunctor0),
-		'$lgt_gen_aux_predicate_functor'(HelperFunctor0, HelperFunctor),
-		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-		Helper =.. [HelperFunctor| [ExCtx, Arg]],
-		ExtHelper =.. [HelperFunctor| [ExCtx, Arg| ExtArgs]],
-		(	'$lgt_compiler_flag'(debug, on) ->
-			'$lgt_compile_aux_clauses'([({ExtHelper} :- {DArg0})])
-		;	'$lgt_compile_aux_clauses'([({ExtHelper} :- {TArg0})])
-		),
-		TArg = Helper,
-		DArg = Helper
-	;	throw(type_error(callable, Arg))
 	).
 
 '$lgt_tr_prolog_meta_argument'((*), Arg, _, Arg, Arg).
 
 '$lgt_tr_prolog_meta_argument'((0), Arg, Ctx, TArg, DArg) :-
-	'$lgt_tr_body'(Arg, TArg, DArg, Ctx).
+	'$lgt_tr_body'(Arg, TArg0, DArg0, Ctx),
+	(	TArg0 = ':'(_, _) ->
+		TArg = TArg0,
+		DArg = DArg0
+	;	'$lgt_prolog_feature'(module, supported) ->
+		TArg = ':'(user, TArg0),
+		DArg = ':'(user, DArg0)
+	;	TArg = TArg0,
+		DArg = DArg0
+	).
 
 '$lgt_tr_prolog_meta_argument'((^), Arg, Ctx, TArg, DArg) :-
 	(	Arg = Vars^Arg0 ->
@@ -10824,7 +10819,13 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_tr_prolog_meta_argument'([0], Args, Ctx, TArgs, DArgs).
 
 '$lgt_tr_prolog_meta_argument'((/), Arg, _, TArg, TArg) :-
-	'$lgt_compile_predicate_indicators'(Arg, TArg).
+	'$lgt_compile_predicate_indicators'(Arg, TArg0),
+	(	'$lgt_prolog_feature'(module, supported) ->
+		TArg = ':'(user, TArg0),
+		DArg = ':'(user, DArg0)
+	;	TArg = TArg0,
+		DArg = DArg0
+	).
 
 '$lgt_tr_prolog_meta_argument'([/], [], _, [], []) :- !.
 '$lgt_tr_prolog_meta_argument'([/], [Arg| Args], Ctx, [TArg| TArgs], [DArg| DArgs]) :-
@@ -10832,106 +10833,52 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_tr_prolog_meta_argument'([/], Args, Ctx, TArgs, DArgs).
 
 
-
-% '$lgt_tr_module_meta_args'(@list, @list, +term, -list, -list)
-%
-% translates the meta-arguments contained in the list of arguments of a call
-% to a module meta-predicate (assumes Logtalk meta-predicate notation); due
-% to the module meta-predicate semantics, the meta-arguments must be explicitly
-% qualified as being called from the "user" module
-
-'$lgt_tr_module_meta_args'([], [], _, [], []).
-
-'$lgt_tr_module_meta_args'([Arg| Args], [MArg| MArgs], Ctx, [TArg| TArgs], [DArg| DArgs]) :-
-	'$lgt_tr_module_meta_arg'(MArg, Arg, Ctx, TArg, DArg),
-	'$lgt_tr_module_meta_args'(Args, MArgs, Ctx, TArgs, DArgs).
-
-
-'$lgt_tr_module_meta_arg'(N, Arg, Ctx, TArg, DArg) :-
-	integer(N),
-	N > 0,
-	% closure
+'$lgt_extend_closure'(Obj::Closure, ExtArgs, Obj::Msg) :-
 	!,
-	(	nonvar(Arg), functor(Arg, ':', 2) ->
-		% explicit-qualified meta-argument
-		TArg = Arg,
-		DArg = Arg
-	;	callable(Arg) ->
-		% non-qualified meta-argument
-		Arg =.. [Functor| Args],
-		once('$lgt_length'(ExtArgs, 0, N)),
-		'$lgt_append'(Args, ExtArgs, FullArgs),
-		ExtArg =.. [Functor| FullArgs],
-		'$lgt_tr_body'(ExtArg, TArg0, DArg0, Ctx),
-		% generate an auxiliary predicate to allow the module meta-predicate to
-		% extend the closure without clashing with the execution-context argument
-		'$lgt_pp_entity_'(_, _, Prefix, _, _),
-		atom_concat(Prefix, '_module_helper_', HelperFunctor0),
-		'$lgt_gen_aux_predicate_functor'(HelperFunctor0, HelperFunctor),
-		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-		Helper =.. [HelperFunctor| [ExCtx| Args]],
-		ExtHelper =.. [HelperFunctor| [ExCtx| FullArgs]],
-		(	'$lgt_compiler_flag'(debug, on) ->
-			'$lgt_compile_aux_clauses'([({ExtHelper} :- {DArg0})])
-		;	'$lgt_compile_aux_clauses'([({ExtHelper} :- {TArg0})])
-		),
-		TArg = ':'(user, Helper),
-		DArg = ':'(user, Helper)
-	;	var(Arg) ->
-		% closure only known at runtime
-		'$lgt_length'(ExtArgs, 0, N),
-		ExtArg =.. [call, Arg| ExtArgs],
-		'$lgt_tr_body'(ExtArg, TArg0, DArg0, Ctx),
-		% generate an auxiliary predicate to allow the module meta-predicate to
-		% extend the closure without clashing with the execution-context argument
-		'$lgt_pp_entity_'(_, _, Prefix, _, _),
-		atom_concat(Prefix, '_module_helper_', HelperFunctor0),
-		'$lgt_gen_aux_predicate_functor'(HelperFunctor0, HelperFunctor),
-		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-		Helper =.. [HelperFunctor| [ExCtx, Arg]],
-		ExtHelper =.. [HelperFunctor| [ExCtx, Arg| ExtArgs]],
-		(	'$lgt_compiler_flag'(debug, on) ->
-			'$lgt_compile_aux_clauses'([({ExtHelper} :- {DArg0})])
-		;	'$lgt_compile_aux_clauses'([({ExtHelper} :- {TArg0})])
-		),
-		TArg = ':'(user, Helper),
-		DArg = ':'(user, Helper)
-	;	throw(type_error(callable, Arg))
+	'$lgt_extend_closure_basic'(Closure, ExtArgs, Msg).
+
+'$lgt_extend_closure'([Obj::Closure], ExtArgs, [Obj::Msg]) :-
+	!,
+	'$lgt_extend_closure_basic'(Closure, ExtArgs, Msg).
+
+'$lgt_extend_closure'(::Closure, ExtArgs, ::Msg) :-
+	!,
+	'$lgt_extend_closure_basic'(Closure, ExtArgs, Msg).
+
+'$lgt_extend_closure'(^^Closure, ExtArgs, ^^Msg) :-
+	!,
+	'$lgt_extend_closure_basic'(Closure, ExtArgs, Msg).
+
+'$lgt_extend_closure'(:Closure, ExtArgs, :Msg) :-
+	!,
+	'$lgt_extend_closure_basic'(Closure, ExtArgs, Msg).
+
+'$lgt_extend_closure'(Obj<<Closure, ExtArgs, Obj<<Goal) :-
+	!,
+	'$lgt_extend_closure_basic'(Closure, ExtArgs, Goal).
+
+'$lgt_extend_closure'({Closure}, ExtArgs, {Goal}) :-
+	!,
+	'$lgt_extend_closure_basic'(Closure, ExtArgs, Goal).
+
+'$lgt_extend_closure'(':'(Module,Closure), ExtArgs, ':'(Module:Goal)) :-
+	!,
+	'$lgt_extend_closure_basic'(Closure, ExtArgs, Goal).
+
+'$lgt_extend_closure'(Closure, ExtArgs, Goal) :-
+	'$lgt_extend_closure_basic'(Closure, ExtArgs, Alias),
+	(	'$lgt_pp_uses_predicate_'(Object, Original, Alias) ->
+		Goal = Object::Original
+	;	'$lgt_pp_use_module_predicate_'(Module, Original, Alias) ->
+		Goal = ':'(Module, Original)
+	;	Goal = Alias
 	).
 
-'$lgt_tr_module_meta_arg'((*), Arg, _, Arg, Arg).
 
-'$lgt_tr_module_meta_arg'((0), Arg, Ctx, TArg, DArg) :-
-	(	nonvar(Arg), functor(Arg, ':', 2) ->
-		% explicit-qualified meta-argument
-		TArg = Arg,
-		DArg = Arg
-	;	% non-qualified meta-argument
-		'$lgt_tr_body'(Arg, TArg0, DArg0, Ctx),
-		TArg = ':'(user, TArg0),
-		DArg = ':'(user, DArg0)
-	).
-
-'$lgt_tr_module_meta_arg'([0], [], _, [], []) :- !.
-'$lgt_tr_module_meta_arg'([0], [Arg| Args], Ctx, [TArg| TArgs], [DArg| DArgs]) :-
-	'$lgt_tr_module_meta_arg'((0), Arg, Ctx, TArg, DArg),
-	'$lgt_tr_module_meta_arg'([0], Args, Ctx, TArgs, DArgs).
-
-'$lgt_tr_module_meta_arg'((/), Arg, _, TArg, DArg) :-
-	(	nonvar(Arg), functor(Arg, ':', 2) ->
-		% explicit-qualified meta-argument
-		TArg = Arg,
-		DArg = Arg
-	;	% non-qualified meta-argument
-		'$lgt_compile_predicate_indicators'(Arg, TArg0),
-		TArg = ':'(user, TArg0),
-		DArg = ':'(user, TArg0)
-	).
-
-'$lgt_tr_module_meta_arg'([/], [], _, [], []) :- !.
-'$lgt_tr_module_meta_arg'([/], [Arg| Args], Ctx, [TArg| TArgs], [DArg| DArgs]) :-
-	'$lgt_tr_module_meta_arg'((/), Arg, Ctx, TArg, DArg),
-	'$lgt_tr_module_meta_arg'([/], Args, Ctx, TArgs, DArgs).
+'$lgt_extend_closure_basic'(Closure, ExtArgs, Goal) :-
+	Closure =.. [Functor| Args],
+	'$lgt_append'(Args, ExtArgs, FullArgs),
+	Goal =.. [Functor| FullArgs].
 
 
 
