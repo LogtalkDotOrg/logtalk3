@@ -10785,6 +10785,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	'$lgt_compile_aux_clauses'([({ExtHelper} :- {TArg0})])
 	),
 	(	'$lgt_prolog_feature'(module, supported) ->
+		% make sure the call is made in the correct context
 		TArg = ':'(user, Helper),
 		DArg = ':'(user, Helper)
 	;	TArg = Helper,
@@ -10796,9 +10797,11 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_prolog_meta_argument'((0), Arg, Ctx, TArg, DArg) :-
 	'$lgt_tr_body'(Arg, TArg0, DArg0, Ctx),
 	(	TArg0 = ':'(_, _) ->
+		% the compiled call is already explicitly-qualified
 		TArg = TArg0,
 		DArg = DArg0
 	;	'$lgt_prolog_feature'(module, supported) ->
+		% make sure the call is made in the correct context
 		TArg = ':'(user, TArg0),
 		DArg = ':'(user, DArg0)
 	;	TArg = TArg0,
@@ -10821,6 +10824,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_prolog_meta_argument'((/), Arg, _, TArg, TArg) :-
 	'$lgt_compile_predicate_indicators'(Arg, TArg0),
 	(	'$lgt_prolog_feature'(module, supported) ->
+		% make sure the call is made in the correct context
 		TArg = ':'(user, TArg0),
 		DArg = ':'(user, DArg0)
 	;	TArg = TArg0,
@@ -10876,6 +10880,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_extend_closure_basic'(Closure, ExtArgs, Goal) :-
+	callable(Closure),
 	Closure =.. [Functor| Args],
 	'$lgt_append'(Args, ExtArgs, FullArgs),
 	Goal =.. [Functor| FullArgs].
