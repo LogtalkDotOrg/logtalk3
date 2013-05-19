@@ -150,7 +150,7 @@ logtalk_library_path(shapes_ch, examples('shapes/ch/')).
 logtalk_library_path(shapes_ph, examples('shapes/ph/')).
 logtalk_library_path(sicstus, examples('sicstus/')).
 logtalk_library_path(sorting, threads('sorting/')).
-logtalk_library_path(symbiosis, examples('symbiosis/').
+logtalk_library_path(symbiosis, examples('symbiosis/')).
 logtalk_library_path(sync, threads('sync/')).
 logtalk_library_path(symdiff, examples('symdiff/')).
 logtalk_library_path(tabling, examples('tabling/')).
