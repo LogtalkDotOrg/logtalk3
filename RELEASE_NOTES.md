@@ -66,6 +66,10 @@ grammar rules.
 * NEW: Support for calling Prolog built-in meta-predicates and Prolog module
 meta-predicates that take closures as meta-arguments.
 
+* FIXED: Bug in the processing if the conditional compilation directives when
+a true `if/1` directive is followed by a true `if/1` directive with an `elif/1`
+part.
+
 Prolog adapter and integration files
 ------------------------------------
 

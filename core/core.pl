@@ -6374,7 +6374,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_directive'(endif, _) :-
 	retract('$lgt_pp_cc_if_found_'(_)),
 	retract('$lgt_pp_cc_mode_'(Mode)),
-	(	Mode == seek_else ->
+	(	Mode \== ignore ->
 		retractall('$lgt_pp_cc_skipping_')
 	;	\+ '$lgt_pp_cc_if_found_'(_) ->
 		retractall('$lgt_pp_cc_skipping_')
