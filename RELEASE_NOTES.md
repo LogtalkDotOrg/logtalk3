@@ -122,6 +122,9 @@ Tests
 Examples
 --------
 
+* NEW: Added an example, `symbiosis`, of using Prolog built-in meta-predicates
+and module meta-predicates that take closures as arguments.
+
 * CHANGED: The `benchmarks` example now calculates the empty loop time only
 once when running a batch of benchmark tests.
 

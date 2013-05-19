@@ -1,0 +1,48 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the `LICENSE.txt` file for details.
+________________________________________________________________________
+
+
+% start by loading the example:
+
+| ?- logtalk_load(symbiosis(loader)).
+...
+
+
+% using Prolog maplist/2 to check a a list of integers
+
+| ?- symbiosis::p.
+yes
+
+
+% using Prolog maplist/3 to convert characters into codes
+
+| ?- symbiosis::q(L).
+L = [97, 98, 99]
+yes
+
+
+% sorting lists of lists using maplist/3
+
+| ?- symbiosis::r(L).
+L = [1, 2, 3]
+yes
+
+
+% adding one to each integer in a list using maplist/3 with a lambda expression with a built-in predicate
+
+| ?- symbiosis::s(L).
+L = [2,3,4]
+yes
+
+
+% adding one to each integer in a list using maplist/3 with a lambda expression with a local predicate
+
+| ?- symbiosis::t(L).
+L = [2,3,4]
+yes
