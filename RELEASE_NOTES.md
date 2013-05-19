@@ -117,6 +117,8 @@ Tests
 
 * ADDED: Unit tests for the `uses/2` predicate directive.
 
+* ADDED: Unit tests for the conditional compilation directives.
+
 Examples
 --------
 
