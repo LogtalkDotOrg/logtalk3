@@ -10781,8 +10781,8 @@ current_logtalk_flag(Flag, Value) :-
 	THelper =.. [THelperFunctor, Arg, ExCtx],
 	TExtHelper =.. [THelperFunctor, Arg, ExCtx| ExtArgs],
 	(	'$lgt_compiler_flag'(debug, on) ->
-		assertz('$lgt_pp_entity_aux_clause_'({TExtHelper :- DArg0}))
-	;	assertz('$lgt_pp_entity_aux_clause_'({TExtHelper :- TArg0}))
+		assertz('$lgt_pp_entity_aux_clause_'((TExtHelper :- DArg0)))
+	;	assertz('$lgt_pp_entity_aux_clause_'((TExtHelper :- TArg0)))
 	),
 	(	'$lgt_pp_object_'(Entity, _, _, Def, _, _, _, _, _, _, _) ->
 		true
