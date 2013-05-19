@@ -451,7 +451,7 @@ Note that the meta-predicate directive specifies that the closure will be extend
 <p>
 The use of <a href="http://en.wikipedia.org/wiki/Lambda_calculus">lambda expressions</a> as meta-predicate goal and closure arguments often saves writing auxiliary predicates for the sole purpose of calling the meta-predicates. A simple example of a lambda expression is:
 </p>
-<pre>| ?- meta::map([X,Y]>>(Y is 2*X), [1,2,3], Ys).
+<pre>| ?- meta::map([X,Y]&gt;&gt;(Y is 2*X), [1,2,3], Ys).
 Ys = [2,4,6]
 yes</pre>
 <p>
@@ -460,13 +460,13 @@ In this example, a lambda expression, <code>[X,Y]&gt;&gt;(Y is 2*X)</code>, is u
 <p>
 Currying is supported. I.e. it is possible to write a lambda expression whose goal is another lambda expression. The above example can be rewritten as:
 </p>
-<pre>| ?- meta::map([X]>>([Y]>>(Y is 2*X)), [1,2,3], Ys).
+<pre>| ?- meta::map([X]&gt;&gt;([Y]&gt;&gt;(Y is 2*X)), [1,2,3], Ys).
 Ys = [2,4,6]
 yes</pre>
 <p>
 Lambda expressions may also contain lambda free variables. I.e. variables that are global to the lambda expression. For example, using GNU Prolog as the back-end compiler, we can write:
 </p>
-<pre>| ?- meta::map({Z}/[X,Y]>>(Z#=X+Y), [1,2,3], Zs).
+<pre>| ?- meta::map({Z}/[X,Y]&gt;&gt;(Z#=X+Y), [1,2,3], Zs).
 Z = _#22(3..268435455)
 Zs = [_#3(2..268435454),_#66(1..268435453),_#110(0..268435452)]
 yes</pre>
@@ -476,13 +476,13 @@ The ISO Prolog construct <code>{}/1</code> for representing the lambda free vari
 <p>
 Both lambda free variables and lambda parameters can be any Prolog term. Consider the following example by Markus Triska:
 </p>
-<pre>| ?- meta::map([A-B,B-A]>>true, [1-a,2-b,3-c], Zs).
+<pre>| ?- meta::map([A-B,B-A]&gt;&gt;true, [1-a,2-b,3-c], Zs).
 Zs = [a-1,b-2,c-3]
 yes</pre>
 <p>
 Lambda expressions can be used, as expected, in non-deterministic queries as in the following example using SWI-Prolog as the back-end compiler and Markus Triska's CLP(FD) library:
 </p>
-<pre>| ?- meta::map({Z}/[X,Y]>>(clpfd:(Z#=X+Y)), Xs, Ys).
+<pre>| ?- meta::map({Z}/[X,Y]&gt;&gt;(clpfd:(Z#=X+Y)), Xs, Ys).
 Xs = [],
 Ys = [] ;
 Xs = [_G1369],
