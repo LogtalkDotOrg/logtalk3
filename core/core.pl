@@ -10842,10 +10842,8 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_compile_predicate_indicators'(Arg, TArg0),
 	(	'$lgt_prolog_feature'(module, supported) ->
 		% make sure the call is made in the correct context
-		TArg = ':'(user, TArg0),
-		DArg = ':'(user, DArg0)
-	;	TArg = TArg0,
-		DArg = DArg0
+		TArg = ':'(user, TArg0)
+	;	TArg = TArg0
 	).
 
 '$lgt_tr_prolog_meta_argument'([/], [], _, [], []) :- !.
