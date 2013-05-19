@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for GNU Prolog 1.4.2 (and later versions)
-%  Last updated on May 17, 2013
+%  Last updated on May 19, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -474,7 +474,8 @@ setup_call_cleanup(_, _, _) :-
 	).
 
 
-'$lgt_gnu_directive_expansion'(built_in, {built_in}).
+'$lgt_gnu_directive_expansion'(built_in, {built_in}) :-
+	\+ logtalk_load_context(entity_type, _).
 '$lgt_gnu_directive_expansion'(built_in(PIs), {built_in(CPIs)}) :-
 	logtalk_load_context(entity_type, _),
 	'$lgt_compile_predicate_indicators'(PIs, CPIs).

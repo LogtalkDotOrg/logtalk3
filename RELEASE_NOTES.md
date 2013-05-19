@@ -83,7 +83,8 @@ Lean Prolog adapter file.
 term format for errors within the pseudo-object `user`.
 
 * FIXED: Definition of internal predicate for querying built-in meta-predicates
-for GNU Prolog.
+for GNU Prolog. Also fixed clash between the GNU Prolog `built_in` directive
+and the Logtalk `built_in` entity directive.
 
 Documentation
 -------------
