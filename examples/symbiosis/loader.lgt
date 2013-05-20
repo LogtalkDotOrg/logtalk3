@@ -14,7 +14,9 @@ On Windows, the compilation of this example generates invalid file names for the
 documenting files. No problems on MacOS X and no problems expect in other POSIX systems.
 */
 
-:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == gnu; Dialect == sicstus; Dialect == swi; Dialect == yap))).
+:- if((	current_logtalk_flag(prolog_dialect, Dialect),
+		(Dialect == gnu; Dialect == sicstus; Dialect == swi; Dialect == yap)
+)).
 
 	:- if(current_logtalk_flag(prolog_dialect, sicstus)).
 		:- use_module(library(lists)).
