@@ -89,6 +89,8 @@ term format for errors within the pseudo-object `user`.
 for GNU Prolog. Also fixed clash between the GNU Prolog `built_in` directive
 and the Logtalk `built_in` entity directive.
 
+* REMOVED: Unsupported adapter files for old ECLiPSe versions (5.x and 6.0.x).
+
 Documentation
 -------------
 

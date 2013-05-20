@@ -111,46 +111,6 @@ CIAO Prolog 1.13.1
 	the goal use_module(library(system)).
 
 
-ECLiPSe 5.10#26 or later 5.10 versions
-
-	eclipse5.pl
-	eclipse5iso.pl
-
-	There are two adapters files for this compiler. The first one, named 
-	"eclipse5.pl", should be used when, for some reason, you don't want 
-	to load the "iso" library. The second file, "eclipse5iso.pl" contains 
-	a call to load the "iso" library. Both adapter files may be used with
-	ECLiPSe 5.10#26 or later versions.
-
-	You should use the "eclipse5iso.pl" adapter file whenever possible.
-	The "eclipse5.pl" adapter file may not contain all the necessary 
-	definitions for ISO Prolog predicates that are needed for compiling 
-	Logtalk itself, the Logtalk library, or the Logtalk examples. On the 
-	other hand, some of the ECLiPSE features (e.g. array notation or using
-	do/2 as an operator in logical loops) are not available when using the
-	"iso" library.
-
-	There is a clash between Logtalk and ECLiPSe regarding the ::/2 operator.
-	You may still use the ::/2 operator defined on the ECLiPSe constraint 
-	solver libraries by using explicit module qualification by writing 
-	"{library:(Var::Domain)}" (replace "library" by the actual library name; 
-	the {}/1 control construct allows you to bypass the Logtalk compiler).
-
-	Adopted from a adapter file written and tested with help of Taner Bilgic 
-	for Logtalk 1.x. Don't forget to use the cd/1 predicate to set the 
-	working directory before loading the library or an example. Supports 
-	smart compilation of source files.
-
-	With this Prolog compiler, avoid reloading Logtalk source files declaring
-	and defining dynamic predicates. Due to the semantics of the ECLiPSe 
-	built-in predicate compile/1, new clauses for dynamic predicates are 
-	appended to the old ones instead of replacing them.
-
-	Full support for settings files on POSIX operating-systems. On Windows,
-	only supports settings files on the Logtalk user folder. Doesn't support
-	the "altdirs" flag.
-
-
 IF/Prolog 5.3 and later versions
 
 	if.pl
