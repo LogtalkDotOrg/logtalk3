@@ -92,6 +92,9 @@ and the Logtalk `built_in` entity directive.
 * REMOVED: Unsupported adapter files for old ECLiPSe versions (5.x and 6.0.x)
 and old SICStus Prolog versions (3.8.x).
 
+* REMOVED: Unsupported adapter files for Prolog compilers that are no longer
+developed or maintained.
+
 Documentation
 -------------
 
