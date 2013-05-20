@@ -10380,9 +10380,21 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_body'(Alias, TPred, '$lgt_debug'(goal(Alias, TPred), ExCtx), Ctx) :-
 	'$lgt_pp_uses_predicate_'(Obj, Pred, Alias),
-	!,
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	'$lgt_tr_body'(Obj::Pred, TPred, _, Ctx).
+	(	Obj == user ->
+		(	'$lgt_prolog_built_in_predicate'(Pred) ->
+			% delegate translation to the clauses that deal with Prolog
+			% built-in predicates; the uses/2 directive is typically used
+			% in this case to help document built-in predicate dependencies
+			fail
+		;	% user-defined predicate
+			TPred = Pred,
+			'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx)
+		)
+	;	% an object other than the pseudo-object "user"
+		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+		'$lgt_tr_body'(Obj::Pred, TPred, _, Ctx)
+	),
+	!.
 
 
 % call to a meta-predicate from a user-defined meta-predicate;
@@ -10493,6 +10505,29 @@ current_logtalk_flag(Flag, Value) :-
 
 % Prolog proprietary built-in meta-predicates (must be declared in the adapter files)
 
+'$lgt_tr_body'(Alias, TPred, DPred, Ctx) :-
+	'$lgt_pp_uses_predicate_'(user, Pred, Alias),
+	'$lgt_prolog_meta_predicate'(Pred, _, _),
+	!,
+	functor(Pred, Functor, _),
+	(	% we can have multiple templates for the same meta-predicate;
+		% look for one that matches the predicate call
+		'$lgt_prolog_meta_predicate'(Pred, Meta, Type),
+		Pred =.. [_| Args],
+		Meta =.. [_| MArgs],
+		'$lgt_prolog_to_logtalk_meta_argument_specifiers'(MArgs, CMArgs),
+		'$lgt_tr_prolog_meta_arguments'(Args, CMArgs, Ctx, TArgs, DArgs) ->
+		TPred =.. [Functor| TArgs],
+		(	Type == control_construct ->
+			DPred =.. [Functor| DArgs]
+		;	DPred = '$lgt_debug'(goal(Alias, Pred), ExCtx)
+		),
+		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx)
+	;	% none of the templates is usable, report as an error the first one
+		'$lgt_prolog_meta_predicate'(Pred, Meta, _),
+		throw(domain_error(meta_predicate_template, Meta))
+	).
+
 '$lgt_tr_body'(Pred, TPred, DPred, Ctx) :-
 	'$lgt_prolog_meta_predicate'(Pred, _, _),
 	functor(Pred, Functor, Arity),
@@ -10535,6 +10570,12 @@ current_logtalk_flag(Flag, Value) :-
 
 
 % Logtalk and Prolog built-in predicates
+
+'$lgt_tr_body'(Alias, Pred, '$lgt_debug'(goal(Alias, Pred), ExCtx), Ctx) :-
+	'$lgt_pp_uses_predicate_'(user, Pred, Alias),
+	'$lgt_built_in_predicate'(Pred),
+	!,
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
 
 '$lgt_tr_body'(Pred, TPred, DPred, Ctx) :-
 	'$lgt_built_in_predicate'(Pred),

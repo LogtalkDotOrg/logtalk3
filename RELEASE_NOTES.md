@@ -70,6 +70,9 @@ meta-predicates that take closures as meta-arguments.
 a true `if/1` directive is followed by a true `if/1` directive with an `elif/1`
 part.
 
+* IMPROVED: Support the specification of Prolog built-in (meta-)predicates in
+`uses/2` directives (where the first argument is necessarily `user`).
+
 Prolog adapter and integration files
 ------------------------------------
 

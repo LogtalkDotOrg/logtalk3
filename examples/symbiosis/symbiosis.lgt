@@ -14,11 +14,16 @@
 	:- info([
 		author is 'Paulo Moura',
 		version is 1.0,
-		date is 2013/05/19,
+		date is 2013/05/20,
 		comment is 'Examples of using Prolog built-in meta-predicates and module meta-predicates that take closures as arguments.'
 	]).
 
-	:- if(current_logtalk_flag(prolog_dialect, sicstus)).
+	:- if(current_logtalk_flag(prolog_dialect, gnu)).
+		% in GNU Prolog, the maplist/2-3 predicates are built-in predicates;
+		% thus, the following uses/2 directive is not necessary but can stil
+		% be use e.g. for helping document the meta-predicate dependencies
+		:- uses(user, [maplist/2, maplist/3]).
+	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
 		:- use_module(lists, [maplist/2, maplist/3]).
 	:- elif(current_logtalk_flag(prolog_dialect, swi)).
 		:- use_module(apply, [maplist/2, maplist/3]).
