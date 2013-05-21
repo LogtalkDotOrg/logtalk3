@@ -25,23 +25,6 @@ This folder contains adapter files for Prolog compilers that are no longer
 supported. Follows some historical notes for these compilers.
 
 
-ALS Prolog 3.1
-
-	als.pl
-
-	Only a few tests have been done with this compiler. One known problem: an
-	ALS bug in operator handling that make calls like "\+ ::Pred" be 
-	interpreted like "::(\+ Pred)" instead of "\+ (::Pred)". A workaround is 
-	to replace all occurrences of "\+ ::Pred" by "\+ (::Pred)" and all 
-	occurrences of "\+ Obj::Pred" by "\+ (Obj::Pred)". Please report any other 
-	problems that you might find. Don't forget to use the cd/1 predicate to 
-	set the working directory before loading the library or an example. Consult 
-	the file builtins/comp_d10.pro in the ALS Prolog installation directory in 
-	order to get the definition of predicate numbervars/3 needed by the Logtalk 
-	built-in debugger. Supports smart compilation of source files. Does not 
-	support the "altdirs" compiler flag. Support for settings files not tested.
-
-
 Amzi! Prolog 7.6.1 and later versions
 
 	amzi.pl
@@ -137,37 +120,6 @@ JIProlog 3.0.2-6 and later versions
 	Logtalk).
 
 
-K-Prolog 5.1.5 and later 5.1.x versions
-
-	k5.pl
-
-	K-Prolog 5.1.5 supports the ISO Prolog standard (except the ISO
-	Prolog standard multifile/1 directive, therefore forcing the use of
-	the "paths/paths_no_multifile.pl" file). No problems expected. 
-	Adapter file written and tested with the help of Nobukuni Kino. Don't 
-	forget to use the cd/1 predicate to set the working directory before 
-	loading the library or an example. Smart compilation of source files
-	is not supported on Windows. Full support for settings files on POSIX
-	operating-systems. On Windows, only supports settings files on the 
-	Logtalk user folder. Does not support the "altdirs" compiler flag.
-
-
-K-Prolog 6.0.4 and later versions
-
-	k6.pl
-
-	K-Prolog 6.0.4 supports the current ISO Prolog standard (except the ISO
-	Prolog standard multifile/1 directive, therefore forcing the use of the
-	"paths/paths_no_multifile.pl" file) and features from the draft
-	core revision proposal.
-
-	Don't forget to use the cd/1 predicate to set the working directory
-	before loading the library or an example. Smart compilation of source
-	files is not supported on Windows. Full support for settings files on
-	POSIX operating-systems. On Windows, only supports settings files on
-	the Logtalk user folder. Does not support the "altdirs" compiler flag.
-
-
 LPA MacProlog32 1.25
 
 	lpamac.pl
@@ -203,46 +155,6 @@ LPA WinProlog32 4.0x
 	manually loaded).
 
 
-MasterProlog 4.1
-
-	master.pl
-
-	Written with the help of the MasterProlog support team (but if you find 
-	any Logtalk problem please report it to me). 
-	If in the MasterProlog version that you are using the implementation of 
-	the close/1 predicate does not follow the ISO standard, you will have to
-	apply the following patch to the Logtalk pre-processor: replace every 
-	call of close(...) with fclose(...).  Does not support the "altdirs" 
-	compiler flag. Support for settings files not tested.
-
-
-Open Prolog 1.1b5
-
-	open.pl
-
-	Limited test done. Please report any problems that you may find.
-	Don't forget to use the set_folder/1 predicate to set the working 
-	directory before loading the library or an example. Does not support 
-	the "altdirs" compiler flag. Settings files are not supported (must 
-	be manually loaded).
-
-
-PrologII+ 4.5 and later versions
-
-	prologII.pl
-
-	Written and tested with the help of Claude Lai from PrologIA. You need
-	to apply the following patches to the Logtalk pre-processor/runtime:
-	Search and replace every instance of "quoted(true)" with "quoted(:true)";
-	"open(File, write, Stream)" with "open(File, :write, Stream)",
-	"catch(close(Stream), _, true)" with "catch(close(Stream), _, :true)",
-	"open(File, read, Stream)" with "open(File, :read, Stream, [eof_action(eof_code)])".
-	Remember that you need to use the set_import_dir/1 built-in predicate to
-	set the working directory before loading the library or an example.
-	Does not support the "altdirs" compiler flag. Settings files are not 
-	supported (must be manually loaded after starting Logtalk).
-
-
 Quintus Prolog 3.3~3.5
 
 	quintus.pl
@@ -257,4 +169,3 @@ Quintus Prolog 3.3~3.5
 	set the working directory before loading the library or an example.
 	Supports smart compilation of source files. Settings files are not
 	supported (must be manually loaded after starting Logtalk).
-
