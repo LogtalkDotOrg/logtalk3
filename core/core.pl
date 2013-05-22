@@ -7769,7 +7769,7 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_comp_ctx_this'(Ctx, This),
 		'$lgt_send_to_obj_static_binding'(Obj, TOriginal, This, Call) ->
 		'$lgt_add_uses_def_clause'(TAlias, This, Call)
-	;	'$lgt_tr_clause'((TAlias :- Obj::TOriginal), Ctx)
+	;	'$lgt_compile_aux_clauses'([(TAlias :- Obj::TOriginal)])
 	),
 	assertz('$lgt_pp_uses_predicate_'(Obj, TOriginal, TAlias)).
 
@@ -7777,7 +7777,7 @@ current_logtalk_flag(Flag, Value) :-
 	throw(permission_error(modify, uses_object_predicate, AFunctor/Arity)).
 
 
-'$lgt_tr_uses_directive_non_terminal_arg'(OFunctor, AFunctor, Arity, ExtArity, Obj, Ctx) :-
+'$lgt_tr_uses_directive_non_terminal_arg'(OFunctor, AFunctor, Arity, ExtArity, Obj, _) :-
 	functor(TOriginal, OFunctor, Arity),
 	functor(TAlias, AFunctor, Arity),
 	functor(TPred, AFunctor, ExtArity),
@@ -7789,7 +7789,8 @@ current_logtalk_flag(Flag, Value) :-
 		TOriginal =.. [_| Args],
 		TAlias =.. [_| Args],
 		% allow for runtime use
-		'$lgt_tr_grammar_rule'((TAlias --> Obj::TOriginal), Ctx),
+		'$lgt_comp_ctx_mode'(NewCtx, compile(aux)),
+		'$lgt_tr_grammar_rule'((TAlias --> Obj::TOriginal), NewCtx),
 		assertz('$lgt_pp_uses_non_terminal_'(Obj, TOriginal, TAlias))
 	;	throw(permission_error(modify, uses_object_non_terminal, AFunctor//Arity))
 	).
@@ -7872,7 +7873,7 @@ current_logtalk_flag(Flag, Value) :-
 	throw(type_error(predicate_indicator, Resource)).
 
 
-'$lgt_tr_use_module_directive_predicate_arg'(OFunctor, AFunctor, Arity, Module, Ctx) :-
+'$lgt_tr_use_module_directive_predicate_arg'(OFunctor, AFunctor, Arity, Module, _) :-
 	functor(TOriginal, OFunctor, Arity),
 	functor(TAlias, AFunctor, Arity),
 	Arity2 is Arity - 2,
@@ -7889,14 +7890,14 @@ current_logtalk_flag(Flag, Value) :-
 	TOriginal =.. [_| Args],
 	TAlias =.. [_| Args],
 	% allow for runtime use
-	'$lgt_tr_clause'((TAlias :- ':'(Module, TOriginal)), Ctx),
+	'$lgt_compile_aux_clauses'([(TAlias :- ':'(Module, TOriginal))]),
 	assertz('$lgt_pp_use_module_predicate_'(Module, TOriginal, TAlias)).
 
 '$lgt_tr_use_module_directive_predicate_arg'(_, AFunctor, Arity, _, _) :-
 	throw(permission_error(modify, uses_module_predicate, AFunctor/Arity)).
 
 
-'$lgt_tr_use_module_directive_non_terminal_arg'(OFunctor, AFunctor, Arity, ExtArity, Module, Ctx) :-
+'$lgt_tr_use_module_directive_non_terminal_arg'(OFunctor, AFunctor, Arity, ExtArity, Module, _) :-
 	functor(TOriginal, OFunctor, Arity),
 	functor(TAlias, AFunctor, Arity),
 	functor(TPred, AFunctor, ExtArity),
@@ -7908,7 +7909,8 @@ current_logtalk_flag(Flag, Value) :-
 		TOriginal =.. [_| Args],
 		TAlias =.. [_| Args],
 		% allow for runtime use
-		'$lgt_tr_grammar_rule'((TAlias --> ':'(Module, TOriginal)), Ctx),
+		'$lgt_comp_ctx_mode'(NewCtx, compile(aux)),
+		'$lgt_tr_grammar_rule'((TAlias --> ':'(Module, TOriginal)), NewCtx),
 		assertz('$lgt_pp_use_module_non_terminal_'(Module, TOriginal, TAlias))
 	;	throw(permission_error(modify, uses_module_non_terminal, AFunctor//Arity))
 	).

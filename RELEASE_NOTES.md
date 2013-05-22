@@ -31,6 +31,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* FIXED: Compile the clauses that allow runtime use of predicates specified
+in `uses/2` and `use_module/2` directives as auxiliary clauses.
+
 * FIXED: The pseudo-object `user` no longer have the `complements` flag set.
 
 
