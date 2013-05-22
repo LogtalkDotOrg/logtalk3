@@ -4406,10 +4406,10 @@ current_logtalk_flag(Flag, Value) :-
 	).
 '$lgt_current_object_'(user, '$lgt_user.', '$lgt_user._dcl', '$lgt_user._def', '$lgt_user._super', '$lgt_user._idcl', '$lgt_user._idef', '$lgt_user._ddcl', '$lgt_user._ddef', '$lgt_user._alias', Flags) :-
 	(	'$lgt_prolog_feature'(threads, supported) ->
-		% context_switching_calls + dynamic_declarations + complements + events + threaded + static + built_in
-		Flags = 249		% 0b011111001
-	;	% context_switching_calls + dynamic_declarations + complements + events + static + built_in
-		Flags = 241		% 0b011110001
+		% context_switching_calls + dynamic_declarations + events + threaded + static + built_in
+		Flags = 217		% 0b011011001
+	;	% context_switching_calls + dynamic_declarations + events + static + built_in
+		Flags = 209		% 0b011010001
 	).
 
 

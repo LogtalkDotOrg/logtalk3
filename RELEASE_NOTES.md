@@ -25,6 +25,15 @@ RELEASE NOTES
 =============
 
 
+3.00.0 Alpha 18 - June ??, 2013
+===============================
+
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: The pseudo-object `user` no longer have the `complements` flag set.
+
+
 3.00.0 Alpha 17 - May 20, 2013
 ==============================
 
