@@ -8,7 +8,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on May 18, 2013
+%  Last updated on May 23, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -672,16 +672,18 @@ user:portray(c(This, r(Sender, Self, MetaVars, CoinductionStack))) :-
 :- meta_predicate user:'$lgt_mt_threaded_call'(*,*,*).
 :- meta_predicate user:'$lgt_threaded_ignore'(*).
 :- meta_predicate user:'$lgt_send_to_obj_nv'(*,*,*).
+:- meta_predicate user:'$lgt_complemented_object'(*,*,*,*,*,*,*,*).
+:- meta_predicate user:'$lgt_object_property'(*,*,*,*,*,*,*).
+:- meta_predicate user:'$lgt_object_property_resources'(*,*,*,*,*,*).
+:- meta_predicate user:'$lgt_object_property_resource'(*,*,*,*,*,*).
+:- meta_predicate user:'$lgt_assert_pred_def'(*,*,*,*,*,*,*).
+:- meta_predicate user:'$lgt_send_to_self_nv'(*,*,*).
+
 :- meta_predicate user:threaded_ignore(*).
 :- meta_predicate user:threaded_once(*,*).
 :- meta_predicate user:threaded_call(*,*).
-:- meta_predicate user:'$lgt_complemented_object'(*,*,*,*,*,*,*,*).
 :- meta_predicate user:threaded_call(*).
-:- meta_predicate user:'$lgt_object_property_resources'(*,*,*,*,*,*).
-:- meta_predicate user:'$lgt_assert_pred_def'(*,*,*,*,*,*,*).
 :- meta_predicate user:threaded_once(*).
-:- meta_predicate user:'$lgt_send_to_self_nv'(*,*,*).
-:- meta_predicate user:'$lgt_object_property'(*,*,*,*,*,*,*).
 
 :- meta_predicate user:'$lgt_find_original_predicate'(*,*,*,*).
 :- meta_predicate user:'$lgt_threaded_goal'(*,*,*,*).

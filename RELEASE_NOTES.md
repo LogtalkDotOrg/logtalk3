@@ -36,6 +36,12 @@ in `uses/2` and `use_module/2` directives as auxiliary clauses.
 
 * FIXED: The pseudo-object `user` no longer have the `complements` flag set.
 
+Prolog adapter and integration files
+------------------------------------
+
+* FIXED: Avoid a spurious missing `meta_predicate/1` directive for a compiler
+internal predicate when using the `make/0` utility of SWI-Prolog.
+
 
 3.00.0 Alpha 17 - May 20, 2013
 ==============================
