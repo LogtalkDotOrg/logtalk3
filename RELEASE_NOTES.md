@@ -36,6 +36,10 @@ in `uses/2` and `use_module/2` directives as auxiliary clauses.
 
 * FIXED: The pseudo-object `user` no longer have the `complements` flag set.
 
+* FIXED: When compiling a module as an object, the compilation of `reexport/2`
+directives could result in duplicated predicate linking clauses when using the
+`as/2` operator to define predicate aliases.
+
 Prolog adapter and integration files
 ------------------------------------
 
