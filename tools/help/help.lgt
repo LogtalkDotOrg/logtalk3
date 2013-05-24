@@ -25,9 +25,9 @@
 :- object(help).
 
 	:- info([
-		version is 0.73,
+		version is 0.8,
 		author is 'Paulo Moura',
-		date is 2013/04/21,
+		date is 2013/05/24,
 		comment is 'Command-line help for Logtalk built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
@@ -159,6 +159,7 @@
 	built_in_directive(public, 1, '/manuals/refman/directives/', 'public1.html').
 	built_in_directive(synchronized, 1, '/manuals/refman/directives/', 'synchronized1.html').
 	built_in_directive(uses, 2, '/manuals/refman/directives/', 'uses2.html').
+	built_in_directive(use_module, 2, '/manuals/refman/directives/', 'use_module2.html').
 
 	built_in_predicate(current_category, 1, '/manuals/refman/builtins/', 'current_category1.html').
 	built_in_predicate(current_object, 1, '/manuals/refman/builtins/', 'current_object1.html').

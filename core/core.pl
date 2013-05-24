@@ -81,7 +81,7 @@
 :- dynamic('$lgt_after_event_'/5).					% '$lgt_after_event_'(Obj, Msg, Sender, Monitor, Call)
 
 
-% tables of loaded entities, entity properties, and entity relations
+% tables of loaded entities, entity properties, entity relations, and entity predicate properties
 
 :- multifile('$lgt_current_protocol_'/5).			% '$lgt_current_protocol_'(Ptc, Prefix, Dcl, Rnm, Flags)
 :- dynamic('$lgt_current_protocol_'/5).
@@ -203,7 +203,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  pre-processor directives
+%  compiler directives
 %
 % (used for source file compilation and runtime creation of new entities)
 %
@@ -4759,8 +4759,8 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_hidden_functor'(+atom)
 %
-% hidden functors include Logtalk pre-processor and runtime internal functors
-% and those used in the compiled code of objects, protocols, and categories
+% hidden functors include Logtalk compiler and runtime internal functors and
+% those used in the compiled code of objects, protocols, and categories
 
 '$lgt_hidden_functor'(Functor) :-
 	sub_atom(Functor, 0, 1, _, '$'),
@@ -8837,7 +8837,7 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 
-% pre-processor bypass (call of external code)
+% compiler bypass (call of external code)
 
 '$lgt_tr_body'({Pred}, call(Pred), '$lgt_debug'(goal({Pred}, call(Pred)), ExCtx), Ctx) :-
 	var(Pred),

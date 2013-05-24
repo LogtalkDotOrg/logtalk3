@@ -69,7 +69,7 @@ Bin-Prolog 8.x~10.x
 		...
 	
 	You will probably want to have a project file including only the adapter
-	and the pre-processor/runtime files (core.pl) in order to compile the
+	and the compiler/runtime files (core.pl) in order to compile the
 	examples using logtalk_compile/1-2 (do NOT use logtalk_load/1-2 or the 
 	provided loader files). Don't forget to call the cd/1 predicate to set 
 	the working directory before compiling the library or an example. 
@@ -132,7 +132,7 @@ LPA MacProlog32 1.25
 	space after the operator resulting in calls like "\+(...)". Because \+ is 
 	not defined as a predicate this will fail. Don't forget to use the dvol/1 
 	predicate to set the working directory before loading an example.
-	Due to the size of the Logtalk pre-processor file, you must load it by 
+	Due to the size of the Logtalk compiler/runtime file, you must load it by 
 	using the consult/1 predicate instead of using the File:Open menu option.
 	Be aware that this adapter file redefines some built-ins that
 	you may use in your own programs. You must be careful to not consult the 

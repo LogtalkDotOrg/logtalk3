@@ -16,3 +16,13 @@ On POSIX operating-systems, you can run all these tests by calling the shell
 script `logtalk_tester` from the command-line. Type `man logtalk_tester` or
 `logtalk_tester -h` for usage details, including how to select the back-end
 Prolog compiler.
+
+To run all the provided unit tests with e.g. SWI-Prolog as the back-end
+compiler, open a terminal and type:
+
+$ cd $LOGTALKUSER/tests
+$ logtalk_tester -p swi
+...
+$ cd ../examples
+$ logtalk_tester -p swi
+...

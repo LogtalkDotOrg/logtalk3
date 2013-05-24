@@ -30,7 +30,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/05/13,
+		date is 2013/05/24,
 		comment is 'A simple unit test framework featuring predicate clause coverage.'
 	]).
 
@@ -141,7 +141,11 @@
 		argnames is ['Covered', 'Total']
 	]).
 
-	:- uses(logtalk, [print_message/3]).
+	% we use the structured printing mechanism in order to allow unit tests
+	% results to be intercepted for alternative reporting by e.g. GUI IDEs
+	:- uses(logtalk, [
+		print_message/3
+	]).
 
 	run(File, Mode) :-
 		open(File, Mode, Stream, [alias(lgtunit_redirected_output)]),
@@ -566,9 +570,8 @@
 		Clauses1 is Clauses0 + Total,
 		sum_coverage(List, Coverage1, Coverage, Clauses1, Clauses).
 
-	% auxiliary predicates; we could use the Logtalk standard library
-	% but we prefer to make this object as self-contaning as possible
-	% given its testing purpose
+	% auxiliary predicates; we could use the Logtalk standard library but we
+	% prefer to make this object self-contained given its testing purpose
 
 	length(List, Length) :-
 		length(List, 0, Length).
