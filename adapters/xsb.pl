@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for XSB 3.3 or later versions
-%  Last updated on May 11, 2013
+%  Last updated on May 25, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -684,32 +684,6 @@ setup_call_catcher_cleanup(Setup, Call, Catcher, Cleanup) :-
 
 '$lgt_assertz_entity_clause'(Clause, _Kind) :-
 	assertz(Clause).
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  annotations
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-% '$lgt_default_value_annotation'(@callable, -term, -callable, -callable)
-
-'$lgt_default_value_annotation'(_, _, _, _) :-
-	fail.
-
-
-% '$lgt_default_goal_annotation'(@callable, -callable, -callable, -callable)
-
-'$lgt_default_goal_annotation'(_, _, _, _) :-
-	fail.
-
-
-% '$lgt_default_body_annotation'(@callable, -callable, -callable)
-
-'$lgt_default_body_annotation'(_, _, _) :-
-	fail.
 
 
 

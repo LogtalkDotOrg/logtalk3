@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/05/13,
+		date is 2013/05/25,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -210,16 +210,6 @@
 
 	logtalk::message_tokens(goal_expansion_error(File, Lines, HookEntity, Goal, Error), core) -->
 		['Error found when goal-expanding ~w using hook entity ~w: '-[Goal, HookEntity]],
-		error_term_tokens(Error),
-		message_context(File, Lines).
-
-	logtalk::message_tokens(annotation_expansion_error(File, Lines, Type, Entity, HookEntity, Annotation, Error), core) -->
-		['Error found when annotation-expanding ~w using hook entity ~w: '-[Annotation, HookEntity]],
-		error_term_tokens(Error),
-		message_context(File, Lines, Type, Entity).
-
-	logtalk::message_tokens(annotation_expansion_error(File, Lines, HookEntity, Annotation, Error), core) -->
-		['Error found when annotation-expanding ~w using hook entity ~w: '-[Annotation, HookEntity]],
 		error_term_tokens(Error),
 		message_context(File, Lines).
 

@@ -535,32 +535,6 @@ numbervars(Term, From, Next) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  annotations
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-% '$lgt_default_value_annotation'(@callable, -term, -callable, -callable)
-
-'$lgt_default_value_annotation'(Annotation, Functor, Value, Goal, Head) :-
-	?????
-
-
-% '$lgt_default_goal_annotation'(@callable, -callable, -callable, -callable)
-
-'$lgt_default_goal_annotation'(Annotation, Functor, LeftGoal, RightGoal, Head) :-
-	?????
-
-
-% '$lgt_default_body_annotation'(@callable, -callable, -callable)
-
-'$lgt_default_body_annotation'(Annotation, LeftGoal, RightGoal) :-
-	?????
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
 %  error term normalization
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for BinProlog 8.x~10.x
-%  Last updated on May 17, 2013
+%  Last updated on May 25, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -620,32 +620,6 @@ setup_call_cleanup(_, _, _) :-
 
 '$lgt_assertz_entity_clause'(Clause, _Kind) :-
 	assertz(Clause).
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  annotations
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-% '$lgt_default_value_annotation'(@callable, -term, -callable, -callable)
-
-'$lgt_default_value_annotation'(_, _, _, _) :-
-	fail.
-
-
-% '$lgt_default_goal_annotation'(@callable, -callable, -callable, -callable)
-
-'$lgt_default_goal_annotation'(_, _, _, _) :-
-	fail.
-
-
-% '$lgt_default_body_annotation'(@callable, -callable, -callable)
-
-'$lgt_default_body_annotation'(_, _, _) :-
-	fail.
 
 
 

@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for YAP Prolog 6.0.2 and later versions
-%  Last updated on May 17, 2013
+%  Last updated on May 25, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -63,9 +63,6 @@
 		dynamic('$lgt_pp_aux_predicate_counter_'/1), hide_predicate('$lgt_pp_aux_predicate_counter_'/1),
 		dynamic('$lgt_hook_term_expansion_'/2), hide_predicate('$lgt_hook_term_expansion_'/2),
 		dynamic('$lgt_hook_goal_expansion_'/2), hide_predicate('$lgt_hook_goal_expansion_'/2),
-		dynamic('$lgt_hook_goal_annotation_'/4), hide_predicate('$lgt_hook_goal_annotation_'/4),
-		dynamic('$lgt_hook_value_annotation_'/4), hide_predicate('$lgt_hook_value_annotation_'/4),
-		dynamic('$lgt_hook_body_annotation_'/3), hide_predicate('$lgt_hook_body_annotation_'/3),
 		dynamic('$lgt_threaded_tag_counter_'/1), hide_predicate('$lgt_threaded_tag_counter_'/1),
 		dynamic('$lgt_send_to_obj_'/3), hide_predicate('$lgt_send_to_obj_'/3),
 		dynamic('$lgt_send_to_obj_ne_'/3), hide_predicate('$lgt_send_to_obj_ne_'/3),
@@ -861,32 +858,6 @@ user:goal_expansion('::'(Object, Message), user:Goal) :-
 
 '$lgt_assertz_entity_clause'(Clause, _Kind) :-
 	assertz(Clause).
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  annotations
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-% '$lgt_default_value_annotation'(@callable, -term, -callable, -callable)
-
-'$lgt_default_value_annotation'(_, _, _, _) :-
-	fail.
-
-
-% '$lgt_default_goal_annotation'(@callable, -callable, -callable, -callable)
-
-'$lgt_default_goal_annotation'(_, _, _, _) :-
-	fail.
-
-
-% '$lgt_default_body_annotation'(@callable, -callable, -callable)
-
-'$lgt_default_body_annotation'(_, _, _) :-
-	fail.
 
 
 

@@ -31,6 +31,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* REMOVED: Experimental support for the annotation expansion predicates. This
+functionality can be implemented, although with more coding work, using the
+term- and goal-expansion predicates.
+
 * FIXED: Compile the clauses that allow runtime use of predicates specified
 in `uses/2` and `use_module/2` directives as auxiliary clauses.
 
@@ -43,9 +47,18 @@ directives could result in duplicated predicate linking clauses when using the
 Prolog adapter and integration files
 ------------------------------------
 
+* REMOVED: Support for action rules, implemented using annotation expansion
+predicates, from the B-Prolog adapter file.
+
 * FIXED: Avoid a spurious missing `meta_predicate/1` directive for a compiler
 internal predicate when using the `make/0` utility of SWI-Prolog.
 
+Examples
+--------
+
+* REMOVED: Experimental examples `chr` and `problog`, which were implemented
+using the now removed support for annotation expansion predicates.
+ 
 
 3.00.0 Alpha 17 - May 20, 2013
 ==============================

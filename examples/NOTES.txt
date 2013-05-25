@@ -101,11 +101,6 @@ Follows a short description of each included example (in alphabetical order):
 	example of using conditional compilation directives to write code
 	portable across several back-end Prolog compilers
 
-- `chr`  
-	highly experimental example of CHR integration
-	(requires Logtalk to be run with Qu-Prolog, SICStus Prolog,
-	SWI-Prolog, or YAP)
-
 - `classmethods`  
 	example of defining "class methods" as found on some class-based
 	object-oriented programming languages
@@ -261,11 +256,6 @@ Follows a short description of each included example (in alphabetical order):
 
 - `polygons`  
 	example of representation and handling of relations using events
-
-- `problog`  
-	highly experimental example of ProbLog integration
-	(requires Logtalk to be run with YAP; it may require a patched
-	version of the ProbLog distribution)
 
 - `profiling`  
 	examples of using of events and monitors to implement profilers

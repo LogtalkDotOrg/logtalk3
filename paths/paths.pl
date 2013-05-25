@@ -74,7 +74,6 @@ logtalk_library_path(bottles, examples('bottles/')).
 logtalk_library_path(bricks, examples('bricks/')).
 logtalk_library_path(buffer, threads('buffer/')).
 logtalk_library_path(cc, examples('cc/')).
-logtalk_library_path(chr, examples('chr/')).
 logtalk_library_path(classmethods, examples('classmethods/')).
 logtalk_library_path(classvars, examples('classvars/')).
 logtalk_library_path(clp_bp, constraints('bp/')).
@@ -136,7 +135,6 @@ logtalk_library_path(poem, examples('poem/')).
 logtalk_library_path(points, examples('points/')).
 logtalk_library_path(polygons, examples('polygons/')).
 logtalk_library_path(primes, threads('primes/')).
-logtalk_library_path(problog, examples('problog/')).
 logtalk_library_path(profiling, examples('profiling/')).
 logtalk_library_path(prototypes, examples('prototypes/')).
 logtalk_library_path(proxies, examples('proxies/')).

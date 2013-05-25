@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/05/04,
+		date is 2013/05/25,
 		comment is 'Term and goal expansion protocol.'
 	]).
 
@@ -48,32 +48,6 @@
 	:- info(term_expansion/2, [
 		comment is 'Defines a term expansion. This predicate is called on all terms read while compiling a source file except those skipped by using the conditional compilation directives.',
 		argnames is ['Term', 'ExpandedTerms']
-	]).
-
-	% the remaining predicates are experimental
-
-	:- public(goal_annotation/4).
-	:- dynamic(goal_annotation/4).
-	:- mode(goal_annotation(@callable, -callable, -callable, -callable), zero_or_one).
-	:- info(goal_annotation/4, [
-		comment is 'Defines a goal annotation. Experimental.',
-		argnames is ['Annotation', 'Left', 'Right', 'Head']
-	]).
-
-	:- public(value_annotation/4).
-	:- dynamic(value_annotation/4).
-	:- mode(value_annotation(@callable, -term, -callable, -callable), zero_or_one).
-	:- info(value_annotation/4, [
-		comment is 'Defines a value annotation. Experimental.',
-		argnames is ['Annotation', 'Value', 'Goal', 'Head']
-	]).
-
-	:- public(body_annotation/3).
-	:- dynamic(body_annotation/3).
-	:- mode(body_annotation(@callable, -callable, -callable), zero_or_one).
-	:- info(body_annotation/3, [
-		comment is 'Defines a body annotation. Experimental.',
-		argnames is ['Annotation', 'Left', 'Right']
 	]).
 
 :- end_protocol.
