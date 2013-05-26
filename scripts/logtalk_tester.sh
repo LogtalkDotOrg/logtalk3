@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Unit testing automation script
-##   Last updated on December 22, 2012
+##   Last updated on May 26, 2013
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 # based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "`basename $0` 0.9"
+	echo "`basename $0` 0.10"
 	exit 0
 }
 
@@ -50,8 +50,11 @@ mode='normal'
 versions_goal="logtalk_load(library(tester_versions)),halt"
 versions_goal_dot="logtalk_load(library(tester_versions)),halt."
 
-tester_goal="logtalk_load(tester),halt"
-tester_goal_dot="logtalk_load(tester),halt."
+tester_optimal_goal="set_logtalk_flag(optimize,on),logtalk_load(tester),halt"
+tester_optimal_goal_dot="set_logtalk_flag(optimize,on),logtalk_load(tester),halt."
+
+tester_normal_goal="logtalk_load(tester),halt"
+tester_normal_goal_dot="logtalk_load(tester),halt."
 
 tester_debug_goal="set_logtalk_flag(debug,on),logtalk_load(tester),halt"
 tester_debug_goal_dot="set_logtalk_flag(debug,on),logtalk_load(tester),halt."
@@ -72,7 +75,7 @@ usage_help()
 	echo "  -p back-end Prolog compiler (default is $backend)"
 	echo "     (possible values are b, cx, eclipse, gnu, lean, qp, sicstus, swi, xsb, xsb64, xsbmt, xsbmt64, and yap)"
 	echo "  -m compilation mode (default is $mode)"
-	echo "     (possible values are normal, debug, and all)"
+	echo "     (possible values are optimal, normal, debug, and all)"
 	echo "  -d name of the sub-directory to store the test results (default is tester_results)"
 	echo "  -h help"
 	echo
@@ -110,13 +113,15 @@ elif [ "$p_arg" = "qp" ] ; then
 	prolog='Qu-Prolog'
 	logtalk="qplgt$extension -g"
 	versions_goal=$versions_goal_dot
-	tester_goal=$tester_goal_dot
+	tester_optimal_goal=$tester_optimal_goal_dot
+	tester_normal_goal=$tester_normal_goal_dot
 	tester_debug_goal=$tester_debug_goal_dot
 elif [ "$p_arg" = "sicstus" ] ; then
 	prolog='SICStus Prolog'
 	logtalk="sicstuslgt$extension --goal"
 	versions_goal=$versions_goal_dot
-	tester_goal=$tester_goal_dot
+	tester_optimal_goal=$tester_optimal_goal_dot
+	tester_normal_goal=$tester_normal_goal_dot
 	tester_debug_goal=$tester_debug_goal_dot
 elif [ "$p_arg" = "swi" ] ; then
 	prolog='SWI-Prolog'
@@ -125,25 +130,29 @@ elif [ "$p_arg" = "xsb" ] ; then
 	prolog='XSB'
 	logtalk="xsblgt$extension -e"
 	versions_goal=$versions_goal_dot
-	tester_goal=$tester_goal_dot
+	tester_optimal_goal=$tester_optimal_goal_dot
+	tester_normal_goal=$tester_normal_goal_dot
 	tester_debug_goal=$tester_debug_goal_dot
 elif [ "$p_arg" = "xsb64" ] ; then
 	prolog='XSB 64 bits'
 	logtalk="xsb64lgt$extension -e"
 	versions_goal=$versions_goal_dot
-	tester_goal=$tester_goal_dot
+	tester_optimal_goal=$tester_optimal_goal_dot
+	tester_normal_goal=$tester_normal_goal_dot
 	tester_debug_goal=$tester_debug_goal_dot
 elif [ "$p_arg" = "xsbmt" ] ; then
 	prolog='XSB-MT'
 	logtalk="xsbmtlgt$extension -e"
 	versions_goal=$versions_goal_dot
-	tester_goal=$tester_goal_dot
+	tester_optimal_goal=$tester_optimal_goal_dot
+	tester_normal_goal=$tester_normal_goal_dot
 	tester_debug_goal=$tester_debug_goal_dot
 elif [ "$p_arg" = "xsbmt64" ] ; then
 	prolog='XSB-MT 64 bits'
 	logtalk="xsbmt64lgt$extension -e"
 	versions_goal=$versions_goal_dot
-	tester_goal=$tester_goal_dot
+	tester_optimal_goal=$tester_optimal_goal_dot
+	tester_normal_goal=$tester_normal_goal_dot
 	tester_debug_goal=$tester_debug_goal_dot
 elif [ "$p_arg" = "yap" ] ; then
 	prolog='YAP'
@@ -158,7 +167,9 @@ elif [ ! `which $backend` ] ; then
     exit 1
 fi
 
-if [ "$m_arg" = "normal" ] ; then
+if [ "$m_arg" = "optimal" ] ; then
+	mode='optimal'
+elif [ "$m_arg" = "normal" ] ; then
 	mode='normal'
 elif [ "$m_arg" = "debug" ] ; then
 	mode='debug'
@@ -196,8 +207,12 @@ do
 			echo '*******************************************************************************'
 			echo "***** Testing $unit"
 			name=$(echo $unit|sed 's|/|__|g')
+			if [ $mode = 'optimal' ] || [ $mode = 'all' ] ; then
+				$logtalk $tester_optimal_goal > "$results/$name.results" 2> "$results/$name.errors"
+				grep 'tests:' "$results/$name.results" | sed 's/%/*****        /'
+			fi
 			if [ $mode = 'normal' ] || [ $mode = 'all' ] ; then
-				$logtalk $tester_goal > "$results/$name.results" 2> "$results/$name.errors"
+				$logtalk $tester_normal_goal > "$results/$name.results" 2> "$results/$name.errors"
 				grep 'tests:' "$results/$name.results" | sed 's/%/*****        /'
 			fi
 			if [ $mode = 'debug' ] || [ $mode = 'all' ] ; then
@@ -216,8 +231,12 @@ do
 					echo '*******************************************************************************'
 					echo "***** Testing $unit/$subunit"
 					subname=$(echo $unit/$subunit|sed 's|/|__|g')
+					if [ $mode = 'optimal' ] || [ $mode = 'all' ] ; then
+						$logtalk $tester_optimal_goal > "$results/$subname.results" 2> "$results/$subname.errors"
+						grep 'tests:' "$results/$subname.results" | sed 's/%/*****        /'
+					fi
 					if [ $mode = 'normal' ] || [ $mode = 'all' ] ; then
-						$logtalk $tester_goal > "$results/$subname.results" 2> "$results/$subname.errors"
+						$logtalk $tester_normal_goal > "$results/$subname.results" 2> "$results/$subname.errors"
 						grep 'tests:' "$results/$subname.results" | sed 's/%/*****        /'
 					fi
 					if [ $mode = 'debug' ] || [ $mode = 'all' ] ; then

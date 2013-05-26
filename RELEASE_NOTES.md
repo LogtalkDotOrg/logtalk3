@@ -53,6 +53,12 @@ predicates, from the B-Prolog adapter file.
 * FIXED: Avoid a spurious missing `meta_predicate/1` directive for a compiler
 internal predicate when using the `make/0` utility of SWI-Prolog.
 
+Tests
+-----
+
+* IMPROVED: The `logtalk_tester` shell script now supports running unit tests
+in `optimal` mode, besides the already supported `normal` and `debug` modes.
+
 Examples
 --------
 
