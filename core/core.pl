@@ -9964,7 +9964,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % Logtalk flag predicates (just error cheking when one of the arguments isn't instantiated)
 
-'$lgt_tr_body'(set_logtalk_flag(Flag, Value), TPred, '$lgt_debug'(goal(DPred), TPred, ExCtx), Ctx) :-
+'$lgt_tr_body'(set_logtalk_flag(Flag, Value), TPred, '$lgt_debug'(goal(DPred, TPred), ExCtx), Ctx) :-
 	nonvar(Flag),
 	nonvar(Value),
 	!,
@@ -9979,7 +9979,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_must_be'(var_or_read_write_flag, Flag),
 	fail.
 
-'$lgt_tr_body'(current_logtalk_flag(Flag, Value), TPred, '$lgt_debug'(goal(DPred), TPred, ExCtx), Ctx) :-
+'$lgt_tr_body'(current_logtalk_flag(Flag, Value), TPred, '$lgt_debug'(goal(DPred, TPred), ExCtx), Ctx) :-
 	nonvar(Flag),
 	nonvar(Value),
 	!,

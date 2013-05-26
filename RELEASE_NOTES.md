@@ -44,6 +44,9 @@ in `uses/2` and `use_module/2` directives as auxiliary clauses.
 directives could result in duplicated predicate linking clauses when using the
 `as/2` operator to define predicate aliases.
 
+* FIXED: Compilation in debug mode for the built-in `current_logtalk_flag/2`
+and `set_logtalk_flag/2` predicates.
+
 Prolog adapter and integration files
 ------------------------------------
 
