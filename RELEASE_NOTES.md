@@ -62,7 +62,8 @@ Tests
 * IMPROVED: The `logtalk_tester` shell script now supports running unit tests
 in `optimal` mode, besides the already supported `normal` and `debug` modes.
 
-* ADDED: Unit tests for the `forall/2` built-in method.
+* ADDED: Unit tests for the `catch/3`, `forall/2`, and `(\+)/1` built-in
+methods.
 
 Examples
 --------
