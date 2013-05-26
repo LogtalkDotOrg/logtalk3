@@ -26,7 +26,7 @@
 ## 
 #############################################################################
 
-# based on a unit test automation script contributed by Parker Jones
+# loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
 	echo "`basename $0` 0.10"
@@ -209,7 +209,7 @@ do
 			name=$(echo $unit|sed 's|/|__|g')
 			if [ $mode = 'optimal' ] || [ $mode = 'all' ] ; then
 				$logtalk $tester_optimal_goal > "$results/$name.results" 2> "$results/$name.errors"
-				grep 'tests:' "$results/$name.results" | sed 's/%/*****        /'
+				grep 'tests:' "$results/$name.results" | sed 's/%/***** (opt)  /'
 			fi
 			if [ $mode = 'normal' ] || [ $mode = 'all' ] ; then
 				$logtalk $tester_normal_goal > "$results/$name.results" 2> "$results/$name.errors"
@@ -233,7 +233,7 @@ do
 					subname=$(echo $unit/$subunit|sed 's|/|__|g')
 					if [ $mode = 'optimal' ] || [ $mode = 'all' ] ; then
 						$logtalk $tester_optimal_goal > "$results/$subname.results" 2> "$results/$subname.errors"
-						grep 'tests:' "$results/$subname.results" | sed 's/%/*****        /'
+						grep 'tests:' "$results/$subname.results" | sed 's/%/***** (opt)  /'
 					fi
 					if [ $mode = 'normal' ] || [ $mode = 'all' ] ; then
 						$logtalk $tester_normal_goal > "$results/$subname.results" 2> "$results/$subname.errors"
