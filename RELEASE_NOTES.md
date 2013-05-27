@@ -66,7 +66,7 @@ in `optimal` mode, besides the already supported `normal` and `debug` modes.
 tests skipped, passed, and failed.
 
 * ADDED: Unit tests for the `catch/3`, `forall/2`, and `(\+)/1` built-in
-methods.
+methods and for the `set_logtalk_flag/2` built-in directive.
 
 Examples
 --------
