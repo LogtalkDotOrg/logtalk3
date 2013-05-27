@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/05/25,
+		date is 2013/05/27,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -267,12 +267,18 @@
 
 	logtalk::message_tokens(unclassified_variables_in_lambda_expression(File, Lines, Type, Entity, UnqualifiedVars, LambdaExpression), core) -->
 		{copy_term(UnqualifiedVars-LambdaExpression, UnqualifiedVarsCopy-LambdaExpressionCopy), numbervars(LambdaExpressionCopy, 0, _)},
-		['Unclassified ~q variables in lambda expression: ~q'-[UnqualifiedVarsCopy, LambdaExpressionCopy], nl],
+		(	{UnqualifiedVarsCopy = [UnqualifiedVarCopy]} ->
+			['Unclassified variable ~q in lambda expression: ~q'-[UnqualifiedVarCopy, LambdaExpressionCopy], nl]
+		;	['Unclassified variables ~q in lambda expression: ~q'-[UnqualifiedVarsCopy, LambdaExpressionCopy], nl]
+		),
 		message_context(File, Lines, Type, Entity).
 
 	logtalk::message_tokens(variables_with_dual_role_in_lambda_expression(File, Lines, Type, Entity, MixedUpVars, LambdaExpression), core) -->
 		{copy_term(MixedUpVars-LambdaExpression, MixedUpVarsCopy-LambdaExpressionCopy), numbervars(LambdaExpressionCopy, 0, _)},
-		['Variables ~q have dual role in lambda expression: ~q'-[MixedUpVarsCopy, LambdaExpressionCopy], nl],
+		(	{MixedUpVarsCopy = [MixedUpVarCopy]} ->
+			['Variable ~q have dual role in lambda expression: ~q'-[MixedUpVarCopy, LambdaExpressionCopy], nl]
+		;	['Variables ~q have dual role in lambda expression: ~q'-[MixedUpVarsCopy, LambdaExpressionCopy], nl]
+		),
 		message_context(File, Lines, Type, Entity).
 
 	logtalk::message_tokens(complementing_category_ignored(File, Lines, Category, Object), core) -->
