@@ -12122,14 +12122,16 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_complements_object'([], _, _, _, _).
 
-'$lgt_tr_complements_object'([Obj| _], _, _, _, _) :-
-	'$lgt_must_be'(object_identifier, Obj),
-	('$lgt_is_protocol'(Obj); '$lgt_is_category'(Obj)),
-	throw(type_error(object, Obj)).
-
 '$lgt_tr_complements_object'([Obj| _], Ctg, _, _, _) :-
-	'$lgt_term_template'(Obj, Ctg),
-	throw(permission_error(complement, self, Obj)).
+	'$lgt_must_be'(object_identifier, Obj),
+	(	'$lgt_is_protocol'(Obj) ->
+		throw(type_error(object, Obj))
+	;	'$lgt_is_category'(Obj) ->
+		throw(type_error(object, Obj))
+	;	'$lgt_term_template'(Obj, Ctg) ->
+		throw(permission_error(complement, self, Obj))
+	;	fail
+	).
 
 '$lgt_tr_complements_object'([Obj| _], Ctg, _, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
@@ -14646,9 +14648,11 @@ current_logtalk_flag(Flag, Value) :-
 		Goal2 = '$lgt_init_object_message_queue'(Prefix)
 	;	Goal2 = true
 	),
-	findall(EntityInitGoal, '$lgt_pp_final_entity_initialization_'(EntityInitGoal), EntityInitGoals),
-	'$lgt_list_to_conjunction'(EntityInitGoals, Goal3),
-	'$lgt_remove_redundant_calls'((Goal1, Goal2, Goal3), Goal),
+	(	bagof(EntityInitGoal, '$lgt_pp_final_entity_initialization_'(EntityInitGoal), EntityInitGoals) ->
+		'$lgt_list_to_conjunction'(EntityInitGoals, Goal3),
+		'$lgt_remove_redundant_calls'((Goal1, Goal2, Goal3), Goal)	
+	;	'$lgt_remove_redundant_calls'((Goal1, Goal2), Goal)
+	),
 	(	Goal == true ->
 		true
 	;	assertz('$lgt_pp_file_entity_initialization_'(Type, Entity, Goal))
@@ -14775,9 +14779,11 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_init_object_message_queue'(Prefix)
 	;	true
 	),
-	findall(Goal, '$lgt_pp_final_entity_initialization_'(Goal), GoalList),
-	'$lgt_list_to_conjunction'(GoalList, Goals),
-	once(Goals).
+	(	bagof(Goal, '$lgt_pp_final_entity_initialization_'(Goal), GoalList) ->
+		'$lgt_list_to_conjunction'(GoalList, Goals),
+		once(Goals)
+	;	true
+	).
 
 
 
