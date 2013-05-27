@@ -10572,7 +10572,7 @@ current_logtalk_flag(Flag, Value) :-
 	% closure
 	!,
 	'$lgt_must_be'(var_or_callable, Arg),
-	once('$lgt_length'(ExtArgs, 0, N)),
+	'$lgt_length'(ExtArgs, 0, N),
 	(	var(Arg) ->
 		ExtArg =.. [call, Arg| ExtArgs]
 	;	'$lgt_extend_closure'(Arg, ExtArgs, ExtArg) ->
@@ -10598,7 +10598,7 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	% add a def clause to ensure that we don't loose track of the auxiliary clause
 	Arity is N + 2, 
-	once('$lgt_length'(TemplateArgs, 0, Arity)),
+	'$lgt_length'(TemplateArgs, 0, Arity),
 	ExtHelperTemplate =.. [HelperFunctor| TemplateArgs],
 	TExtHelperTemplate =.. [THelperFunctor| TemplateArgs],
 	Clause =.. [Def, ExtHelperTemplate, _, TExtHelperTemplate],
@@ -17917,8 +17917,10 @@ current_logtalk_flag(Flag, Value) :-
 
 
 % '$lgt_length'(+list, +integer, -integer)
+% '$lgt_length'(-list, +integer, +integer)
 
-'$lgt_length'([], Length, Length).
+'$lgt_length'([], Length, Length) :-
+	!.
 '$lgt_length'([_| Tail], Length0, Length) :-
 	Length1 is Length0 + 1,
 	'$lgt_length'(Tail, Length1, Length).
