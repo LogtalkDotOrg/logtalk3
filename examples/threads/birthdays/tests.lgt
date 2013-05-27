@@ -13,30 +13,30 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2010/03/16,
+		date is 2013/05/27,
 		comment is 'Unit tests for the "threads/birthdays" example.'
 	]).
 
 	:- set_logtalk_flag(unknown_entities, silent).
 
+	setup :-
+		set_logtalk_flag(events, allow).		
+
 	test(birthdays_1) :-
-		agent::(new(paul, 40, male), new(nathalie, 32, female)).
+		agent::new(paul, 40, male),
+		agent::new(nathalie, 32, female).
 
 	test(birthdays_2) :-
 		paul::new_friend(nathalie).
 
 	test(birthdays_3) :-
-		set_logtalk_flag(events, allow),
 		{nathalie::birthday}.
 
 	test(birthdays_4) :-
 		nathalie::age(Age),
 		Age == 33.
-
-	test(birthdays_5) :-
-		{nathalie::birthday}.
 
 	cleanup :-
 		set_logtalk_flag(events, deny).
