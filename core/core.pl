@@ -11692,7 +11692,8 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_flatten_conjunctions'(+callable, -callable)
 %
-% flattens conjunction of goals
+% flattens conjunction of goals; only standard or de
+% facto standard control constructs are traversed
 
 '$lgt_flatten_conjunctions'(Goal, Goal) :-
 	var(Goal),
@@ -11737,8 +11738,9 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_fold_left_unifications'(+goal, -goal)
 %
-% folds left unifications; right unifications cannot
-% be folded otherwise we may loose steadfastness
+% folds left unifications; right unifications cannot be folded otherwise
+% we may loose steadfastness; the left unifications are typically produced
+% when compiling grammar rules to clauses
 
 '$lgt_fold_left_unifications'(Goal, Goal) :-
 	var(Goal),
@@ -11767,7 +11769,8 @@ current_logtalk_flag(Flag, Value) :-
 % removes redundant calls to true/0 from a translated clause body (we must be careful
 % with control constructs that are opaque to cuts such as call/1 and once/1) and folds
 % pairs of consecutive variable unifications (Var1 = Var2, Var2 = Var3) that are usually
-% generated as a by-product of the compilation of grammar rules
+% generated as a by-product of the compilation of grammar rules; only standard or de
+% facto standard control constructs and meta-predicates are traversed
 
 '$lgt_remove_redundant_calls'(Goal, Goal) :-
 	var(Goal),
@@ -11889,6 +11892,7 @@ current_logtalk_flag(Flag, Value) :-
 	assertz('$lgt_pp_object_'(GObj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, _)),
 	% provide quick access to some common used data on the entity being compiled
 	assertz('$lgt_pp_entity_'(object, Obj, Prefix, Dcl, Rnm)),
+	% initialize the predicate mutex counter
 	asserta('$lgt_pp_predicate_mutex_counter_'(0)).
 
 
@@ -11910,6 +11914,7 @@ current_logtalk_flag(Flag, Value) :-
 	assertz('$lgt_pp_category_'(GCtg, Prefix, Dcl, Def, Rnm, _)),
 	% provide quick access to some common used data on the entity being compiled
 	assertz('$lgt_pp_entity_'(category, Ctg, Prefix, Dcl, Rnm)),
+	% initialize the predicate mutex counter
 	asserta('$lgt_pp_predicate_mutex_counter_'(0)).
 
 
@@ -11926,7 +11931,8 @@ current_logtalk_flag(Flag, Value) :-
 	assertz('$lgt_pp_protocol_'(Ptc, Prefix, Dcl, Rnm, _)),
 	% provide quick access to some common used data on the entity being compiled
 	assertz('$lgt_pp_entity_'(protocol, Ptc, Prefix, Dcl, Rnm)),
-	% necessary in order to be able to save synchronized predicate properties
+	% initialize the predicate mutex counter; necessary in order to be able to
+	% save synchronized predicate properties
 	asserta('$lgt_pp_predicate_mutex_counter_'(0)).
 
 
