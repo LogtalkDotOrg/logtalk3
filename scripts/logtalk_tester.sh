@@ -281,8 +281,6 @@ passed=`awk '{a+=$0}END{print a}' "$results/total"`
 failed=$(expr $total - $skipped - $passed)
 
 echo "*******************************************************************************"
-echo "***** $total tests: $skipped skipped, $passed passed, $failed failed"
-echo "*******************************************************************************"
 echo "***** Compilation errors and warnings (might be expected depending on the test)"
 echo "*******************************************************************************"
 cd "$results"
@@ -296,4 +294,6 @@ echo "**************************************************************************
 echo "***** Failed tests"
 echo "*******************************************************************************"
 grep ': failure' *.results | sed 's/: failure/ failed/' | sed 's/.results/:/' | sed 's|__|/|g' | tee -a errors.all
+echo "*******************************************************************************"
+echo "***** $total tests: $skipped skipped, $passed passed, $failed failed"
 echo "*******************************************************************************"
