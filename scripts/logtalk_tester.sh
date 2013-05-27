@@ -190,6 +190,9 @@ rm -f "$results"/*.results
 rm -f "$results"/*.errors
 rm -f "$results"/errors.all
 rm -f "$results"/tester_versions.txt
+rm -f "$results"/total
+rm -f "$results"/skipped
+rm -f "$results"/passed
 
 date=`eval date \"+%Y-%m-%d %H:%M:%S\"`
 
@@ -210,14 +213,23 @@ do
 			if [ $mode = 'optimal' ] || [ $mode = 'all' ] ; then
 				$logtalk $tester_optimal_goal > "$results/$name.results" 2> "$results/$name.errors"
 				grep 'tests:' "$results/$name.results" | sed 's/%/***** (opt)  /'
+				grep 'tests:' "$results/$name.results" | sed 's/\(% \)\([0-9]*\)\(.*\)/\2/' >> "$results/total"
+				grep 'tests:' "$results/$name.results" | sed 's/\(% [0-9]* tests: \)\([0-9]*\)\(.*\)/\2/' >> "$results/skipped"
+				grep 'tests:' "$results/$name.results" | sed 's/\(% [0-9]* tests: [0-9]* skipped, \)\([0-9]*\)\(.*\)/\2/' >> "$results/passed"
 			fi
 			if [ $mode = 'normal' ] || [ $mode = 'all' ] ; then
 				$logtalk $tester_normal_goal > "$results/$name.results" 2> "$results/$name.errors"
 				grep 'tests:' "$results/$name.results" | sed 's/%/*****        /'
+				grep 'tests:' "$results/$name.results" | sed 's/\(% \)\([0-9]*\)\(.*\)/\2/' >> "$results/total"
+				grep 'tests:' "$results/$name.results" | sed 's/\(% [0-9]* tests: \)\([0-9]*\)\(.*\)/\2/' >> "$results/skipped"
+				grep 'tests:' "$results/$name.results" | sed 's/\(% [0-9]* tests: [0-9]* skipped, \)\([0-9]*\)\(.*\)/\2/' >> "$results/passed"
 			fi
 			if [ $mode = 'debug' ] || [ $mode = 'all' ] ; then
 				$logtalk $tester_debug_goal > "$results/$name.results" 2> "$results/$name.errors"
 				grep 'tests:' "$results/$name.results" | sed 's/%/***** (debug)/'
+				grep 'tests:' "$results/$name.results" | sed 's/\(% \)\([0-9]*\)\(.*\)/\2/' >> "$results/total"
+				grep 'tests:' "$results/$name.results" | sed 's/\(% [0-9]* tests: \)\([0-9]*\)\(.*\)/\2/' >> "$results/skipped"
+				grep 'tests:' "$results/$name.results" | sed 's/\(% [0-9]* tests: [0-9]* skipped, \)\([0-9]*\)\(.*\)/\2/' >> "$results/passed"
 			fi
 			grep 'out of' "$results/$name.results" | sed 's/%/*****        /'
 			grep 'no coverage information collected' "$results/$name.results" | sed 's/%/*****        /'
@@ -234,14 +246,23 @@ do
 					if [ $mode = 'optimal' ] || [ $mode = 'all' ] ; then
 						$logtalk $tester_optimal_goal > "$results/$subname.results" 2> "$results/$subname.errors"
 						grep 'tests:' "$results/$subname.results" | sed 's/%/***** (opt)  /'
+						grep 'tests:' "$results/$subname.results" | sed 's/\(% \)\([0-9]*\)\(.*\)/\2/' >> "$results/total"
+						grep 'tests:' "$results/$subname.results" | sed 's/\(% [0-9]* tests: \)\([0-9]*\)\(.*\)/\2/' >> "$results/skipped"
+						grep 'tests:' "$results/$subname.results" | sed 's/\(% [0-9]* tests: [0-9]* skipped, \)\([0-9]*\)\(.*\)/\2/' >> "$results/passed"
 					fi
 					if [ $mode = 'normal' ] || [ $mode = 'all' ] ; then
 						$logtalk $tester_normal_goal > "$results/$subname.results" 2> "$results/$subname.errors"
 						grep 'tests:' "$results/$subname.results" | sed 's/%/*****        /'
+						grep 'tests:' "$results/$subname.results" | sed 's/\(% \)\([0-9]*\)\(.*\)/\2/' >> "$results/total"
+						grep 'tests:' "$results/$subname.results" | sed 's/\(% [0-9]* tests: \)\([0-9]*\)\(.*\)/\2/' >> "$results/skipped"
+						grep 'tests:' "$results/$subname.results" | sed 's/\(% [0-9]* tests: [0-9]* skipped, \)\([0-9]*\)\(.*\)/\2/' >> "$results/passed"
 					fi
 					if [ $mode = 'debug' ] || [ $mode = 'all' ] ; then
 						$logtalk $tester_debug_goal > "$results/$subname.results" 2> "$results/$subname.errors"
 						grep 'tests:' "$results/$subname.results" | sed 's/%/***** (debug)/'
+						grep 'tests:' "$results/$subname.results" | sed 's/\(% \)\([0-9]*\)\(.*\)/\2/' >> "$results/total"
+						grep 'tests:' "$results/$subname.results" | sed 's/\(% [0-9]* tests: \)\([0-9]*\)\(.*\)/\2/' >> "$results/skipped"
+						grep 'tests:' "$results/$subname.results" | sed 's/\(% [0-9]* tests: [0-9]* skipped, \)\([0-9]*\)\(.*\)/\2/' >> "$results/passed"
 					fi
 					grep 'out of' "$results/$subname.results" | sed 's/%/*****        /'
 					grep 'no coverage information collected' "$results/$subname.results" | sed 's/%/*****        /'
@@ -254,9 +275,16 @@ do
 	fi
 done
 
-echo '*******************************************************************************'
+total=`awk '{a+=$0}END{print a}' "$results/total"`
+skipped=`awk '{a+=$0}END{print a}' "$results/skipped"`
+passed=`awk '{a+=$0}END{print a}' "$results/total"`
+failed=$(expr $total - $skipped - $passed)
+
+echo "*******************************************************************************"
+echo "***** $total tests: $skipped skipped, $passed passed, $failed failed"
+echo "*******************************************************************************"
 echo "***** Compilation errors and warnings (might be expected depending on the test)"
-echo '*******************************************************************************'
+echo "*******************************************************************************"
 cd "$results"
 grep -A2 'syntax_error' *.results | sed 's/.results//' | tee errors.all
 grep -A2 'syntax_error' *.errors | sed 's/.errors//' | tee -a errors.all
@@ -264,8 +292,8 @@ grep -A2 '!     ' *.errors | sed 's/.errors//' | tee -a errors.all
 grep -A2 '!     ' *.results | sed 's/.results//' | tee -a errors.all
 grep -A2 '*     ' *.errors | sed 's/.errors//' | tee -a errors.all
 grep -A2 '*     ' *.results | sed 's/.results//' | tee -a errors.all
-echo '*******************************************************************************'
+echo "*******************************************************************************"
 echo "***** Failed tests"
-echo '*******************************************************************************'
+echo "*******************************************************************************"
 grep ': failure' *.results | sed 's/: failure/ failed/' | sed 's/.results/:/' | sed 's|__|/|g' | tee -a errors.all
-echo '*******************************************************************************'
+echo "*******************************************************************************"
