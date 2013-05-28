@@ -1635,23 +1635,6 @@ threaded_notify(Message) :-
 
 
 
-% '$lgt_file_type_scratch_directory'(+atom, ?atom)
-%
-% gets/checks the current value of the scratch directory for the given file type
-
-'$lgt_file_type_scratch_directory'(prolog, Directory) :-
-	'$lgt_file_type_scratch_directory'(tmp, Directory).
-
-'$lgt_file_type_scratch_directory'(tmp, Directory) :-
-	'$lgt_compiler_flag'(scratch_directory, Directory0),
-	% make sure that the directory path ends with a slash
-	(	sub_atom(Directory0, _, _, 0, '/') ->
-		Directory = Directory0
-	;	atom_concat(Directory0, '/', Directory)
-	).
-
-
-
 % logtalk_compile(@source_file_name)
 % logtalk_compile(@list(source_file_name))
 %
@@ -4732,8 +4715,8 @@ current_logtalk_flag(Flag, Value) :-
 % compiles to disk and then loads to memory a source file
 
 '$lgt_load_file'(File, Flags) :-
-	'$lgt_file_name'(logtalk, File, Directory, Basename, SourceFile),
-	(	'$lgt_file_exists'(SourceFile) ->
+	(	'$lgt_file_name'(logtalk, File, Directory, Basename, SourceFile),
+		'$lgt_file_exists'(SourceFile) ->
 		true
 	;	throw(error(existence_error(file, File), _))
 	),
@@ -4898,8 +4881,8 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_clean_pp_file_clauses',
 	'$lgt_set_compiler_flags'(Flags),
-	'$lgt_file_name'(logtalk, File, Directory, Basename, SourceFile),
-	(	'$lgt_file_exists'(SourceFile) ->
+	(	'$lgt_file_name'(logtalk, File, Directory, Basename, SourceFile),
+		'$lgt_file_exists'(SourceFile) ->
 		true
 	;	throw(error(existence_error(file, File), _))
 	),
@@ -4968,49 +4951,59 @@ current_logtalk_flag(Flag, Value) :-
 % file name extension) the file directory, the file basename (name plus
 % extension), and the full file path
 
-'$lgt_file_name'(Type, FilePath, Directory, Basename, FullPath) :-
+'$lgt_file_name'(logtalk, FilePath, Directory, Basename, FullPath) :-
+	!,
 	'$lgt_prolog_os_file_name'(NormalizedPath, FilePath),
 	'$lgt_decompose_file_name'(NormalizedPath, Directory0, Name, Extension),
-	(	'$lgt_file_type_scratch_directory'(Type, AltDirectory) ->
-		(	sub_atom(AltDirectory, 0, 2, _, './') ->
-			% relative directory path
-			atom_concat(Directory0, AltDirectory, Directory1)
-		;	% assume absolute directory path
-			Directory1 = AltDirectory
-		)
-	;	% same directory
-		Directory1 = Directory0
-	),
-	% file extensions are defined in the Prolog adapter files
-	'$lgt_file_extension'(Type, TypeExtension),
-	(	Extension == TypeExtension ->
+	(	% file extensions are defined in the Prolog adapter files (there might be
+		% multiple extensions defined for the same type of file)
+		'$lgt_file_extension'(logtalk, Extension) ->
 		% declared extension for this type of file is present
 		atom_concat(Name, Extension, Basename)
 	;	% declared extension for this type of file is missing
-		(	Type == logtalk ->
-			% simply add the missing extension
-			atom_concat(Name, Extension, Basename0),
-			atom_concat(Basename0, TypeExtension, Basename)
-		;	% we're constructing the name of a intermediate Prolog file or some Prolog
-			% dialect specific temporary file from the original Logtalk file name
-			(	'$lgt_file_extension'(logtalk, Extension) ->
-				% we're simply replacing the extension (e.g. 'file.lgt' -> 'file.pl')
-				atom_concat(Name, TypeExtension, Basename)
-			;	% assume that the original file name didn't contain a true extension
-				% (which we know is missing) but have one or more '.' in its name
-				atom_concat(Name, Extension, Basename0),
-				atom_concat(Basename0, TypeExtension, Basename)
-			)
-		)
+		'$lgt_file_extension'(logtalk, TypeExtension),
+		% simply add the missing extension
+		atom_concat(Name, Extension, Basename0),
+		atom_concat(Basename0, TypeExtension, Basename)
+	),
+	atom_concat(Directory0, Basename, Path),
+	'$lgt_expand_path'(Path, FullPath),
+	atom_concat(Directory, Basename, FullPath).
+
+'$lgt_file_name'(Type, FilePath, Directory, Basename, FullPath) :-
+	% we're constructing the name of a intermediate Prolog file or some Prolog
+	% dialect specific temporary file from the original Logtalk file name
+	'$lgt_prolog_os_file_name'(NormalizedPath, FilePath),
+	'$lgt_decompose_file_name'(NormalizedPath, Directory0, Name, Extension),
+	% temporary files are stored in the defined scratch directory
+	'$lgt_compiler_flag'(scratch_directory, ScratchDirectory0),
+	% make sure that the scratch directory path ends with a slash
+	(	sub_atom(ScratchDirectory0, _, _, 0, '/') ->
+		ScratchDirectory = ScratchDirectory0
+	;	atom_concat(ScratchDirectory0, '/', ScratchDirectory)
+	),
+	(	sub_atom(ScratchDirectory, 0, 2, _, './') ->
+		% relative directory path
+		atom_concat(Directory0, ScratchDirectory, Directory1)
+	;	% assume absolute directory path
+		Directory1 = ScratchDirectory
+	),
+	% file extensions are defined in the Prolog adapter files (there might be
+	% multiple extensions defined for the same type of file)
+	'$lgt_file_extension'(Type, TypeExtension),
+	(	'$lgt_file_extension'(logtalk, Extension) ->
+		% we're simply replacing the extension (e.g. 'file.lgt' -> 'file.pl')
+		atom_concat(Name, TypeExtension, Basename)
+	;	% assume that the original file name didn't contain a true extension
+		% (which we know is missing) but have one or more '.' in its name
+		atom_concat(Name, Extension, Basename0),
+		atom_concat(Basename0, TypeExtension, Basename)
 	),
 	atom_concat(Directory1, Basename, Path),
 	'$lgt_expand_path'(Path, FullPath),
 	atom_concat(Directory, Basename, FullPath),
-	(	Type == logtalk ->
-		true
-	;	% make sure the directory exists
-		'$lgt_make_directory'(Directory)
-	).
+	% make sure the scratch directory exists
+	'$lgt_make_directory'(Directory).
 
 
 
@@ -8334,8 +8327,6 @@ current_logtalk_flag(Flag, Value) :-
 	functor(Head, Functor, Arity),
 	throw(permission_error(define, predicate, Functor/Arity)).
 
-% rules
-
 '$lgt_tr_clause'((Head:-Body), (THead:-'$lgt_nop'(Body), SBody), (THead:-'$lgt_nop'(Body),'$lgt_debug'(rule(Entity, Head, N), ExCtx),DBody), Ctx) :-
 	'$lgt_pp_dynamic_'(Head),
 	!,
@@ -8366,8 +8357,6 @@ current_logtalk_flag(Flag, Value) :-
 	;	TClause = (THead:-TBody)
 	),
 	'$lgt_clause_number'(Head, N).
-
-% facts
 
 '$lgt_tr_clause'(Fact, TFact, (TFact:-'$lgt_debug'(fact(Entity, Fact, N), ExCtx)), Ctx) :-
 	'$lgt_pp_entity_'(_, Entity, _, _, _),
@@ -18550,19 +18539,18 @@ current_logtalk_flag(Flag, Value) :-
 % when switching between back-end Prolog compilers
 
 '$lgt_load_settings_file'(Result) :-
+	% save the current directory
+	'$lgt_current_directory'(Current),
 	% find the location of the default scratch directory
 	'$lgt_expand_library_path'(logtalk_user, LogtalkUserDirectory),
 	atom_concat(LogtalkUserDirectory, 'scratch/', ScratchDirectory),
-	% find the file name for the settings file
-	'$lgt_file_extension'(logtalk, Extension),
-	atom_concat(settings, Extension, SettingsFile),
-	% save the current directory
-	'$lgt_current_directory'(Current),
 	% define the compiler options to be used for compiling and loading the settings file
 	CompilerOptions = [report(off), clean(on), scratch_directory(ScratchDirectory)],
 	(	% first lookup for a settings file in the startup directory
 		'$lgt_startup_directory'(Startup),
 		'$lgt_change_directory'(Startup),
+		'$lgt_file_extension'(logtalk, Extension),
+		atom_concat(settings, Extension, SettingsFile),
 		'$lgt_file_exists'(SettingsFile) ->
 		catch(
 			(logtalk_load(settings, CompilerOptions), Result = loaded(Startup)),
@@ -18572,6 +18560,8 @@ current_logtalk_flag(Flag, Value) :-
 	;	% if not found, lookup for a settings file in the Logtalk user folder
 		'$lgt_user_directory'(User),
 		'$lgt_change_directory'(User),
+		'$lgt_file_extension'(logtalk, Extension),
+		atom_concat(settings, Extension, SettingsFile),
 		'$lgt_file_exists'(SettingsFile) ->
 		catch(
 			(logtalk_load(settings, CompilerOptions), Result = loaded(User)),

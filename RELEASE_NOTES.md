@@ -31,6 +31,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Support for defining and using alternative extensions for Logtalk
+source code files (e.g. `.logtalk` and `.lgt`).
+
 * REMOVED: Experimental support for the annotation expansion predicates. This
 functionality can be implemented, although with more coding work, using the
 term- and goal-expansion predicates.
