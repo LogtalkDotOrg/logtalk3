@@ -277,7 +277,7 @@ done
 
 total=`awk '{a+=$0}END{print a}' "$results/total"`
 skipped=`awk '{a+=$0}END{print a}' "$results/skipped"`
-passed=`awk '{a+=$0}END{print a}' "$results/total"`
+passed=`awk '{a+=$0}END{print a}' "$results/passed"`
 failed=$(expr $total - $skipped - $passed)
 
 echo "*******************************************************************************"
