@@ -32,7 +32,7 @@ Logtalk compiler and runtime
 ----------------------------
 
 * ADDED: Support for defining and using alternative extensions for Logtalk
-source code files (e.g. `.logtalk` and `.lgt`).
+source code files (e.g. `.logtalk`).
 
 * REMOVED: Experimental support for the annotation expansion predicates. This
 functionality can be implemented, although with more coding work, using the
@@ -50,14 +50,17 @@ directives could result in duplicated predicate linking clauses when using the
 * FIXED: Compilation in debug mode for the built-in `current_logtalk_flag/2`
 and `set_logtalk_flag/2` predicates.
 
+* FIXED: When using the `{}/1` bypass control construct for marking an expanded
+term as final, the compiler would not check that the expanded term is callable.
+
 Prolog adapter and integration files
 ------------------------------------
 
 * REMOVED: Support for action rules, implemented using annotation expansion
 predicates, from the B-Prolog adapter file.
 
-* FIXED: Avoid a spurious missing `meta_predicate/1` directive for a compiler
-internal predicate when using the `make/0` utility of SWI-Prolog.
+* FIXED: Avoid a spurious missing `meta_predicate/1` directive warning for a
+compiler internal predicate when using the `make/0` utility of SWI-Prolog.
 
 Tests
 -----

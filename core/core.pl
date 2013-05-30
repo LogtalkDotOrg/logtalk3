@@ -6052,15 +6052,18 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_expanded_term'({ExpandedTerm}, Term, _) :-
 	% bypass control construct; expanded term is final
 	!,
-	(	var(ExpandedTerm) ->
+	(	callable(ExpandedTerm) ->
+		(	'$lgt_pp_entity_'(_, _, _, _, _) ->
+			'$lgt_pp_term_location'(Location),
+			% ensure that the relative order of the entity terms is kept
+			assertz('$lgt_pp_entity_clause_'({ExpandedTerm}, Location))
+		;	% non-entity terms
+			'$lgt_pp_term_location'(Location),
+			assertz('$lgt_pp_prolog_term_'(ExpandedTerm, Location))
+		)
+	;	var(ExpandedTerm) ->
 		throw(error(instantiantion_error, term_expansion(Term, {ExpandedTerm})))
-	;	'$lgt_pp_entity_'(_, _, _, _, _) ->
-		'$lgt_pp_term_location'(Location),
-		% ensure that the relative order of the entity terms is kept
-		assertz('$lgt_pp_entity_clause_'({ExpandedTerm}, Location))
-	;	% non-entity terms
-		'$lgt_pp_term_location'(Location),
-		assertz('$lgt_pp_prolog_term_'(ExpandedTerm, Location))
+	;	throw(error(type_error(callable, Term), term_expansion(Term, {ExpandedTerm})))
 	).
 
 '$lgt_tr_expanded_term'((Head :- Body), _, Ctx) :-
