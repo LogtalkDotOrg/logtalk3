@@ -8092,27 +8092,15 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_entity_info_directive_pair'(parameters, Parameters, parameters(Parameters)) :-
 	!,
-	'$lgt_must_be'(list, Parameters),
-	(	'$lgt_member'(Parameter, Parameters), \+ '$lgt_valid_entity_parameter'(Parameter) ->
-		throw(type_error(parameter, Parameter))
-	;	(	'$lgt_pp_entity_'(_, Entity, _, _, _),
-			functor(Entity, _, Arity),
-			'$lgt_length'(Parameters, 0, Arity) ->
-			true
-		;	throw(length_error(parameters_list, Parameters))
-		)
-	).
+	'$lgt_pp_entity_'(_, Entity, _, _, _),
+	functor(Entity, _, Arity),
+	'$lgt_check_entity_info_parameters'(Parameters, Parameters, 0, Arity).
 
 '$lgt_tr_entity_info_directive_pair'(parnames, Parnames, parnames(Parnames)) :-
 	!,
-	'$lgt_must_be'(list, Parnames),
-	(	'$lgt_member'(Name, Parnames), \+ atom(Name) ->
-		throw(type_error(atom, Name))
-	;	(	'$lgt_pp_entity_'(_, Entity, _, _, _), \+ \+ Entity =.. [_| Parnames] ->
-			true
-		;	throw(length_error(parnames_list, Parnames))
-		)
-	).
+	'$lgt_pp_entity_'(_, Entity, _, _, _),
+	functor(Entity, _, Arity),
+	'$lgt_check_entity_info_parnames'(Parnames, Parnames, 0, Arity).
 
 '$lgt_tr_entity_info_directive_pair'(version, Version, version(Version)) :-
 	!,
@@ -8140,6 +8128,54 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_entity_info_directive_pair'(Key, Value, TPair) :-
 	functor(TPair, Key, 1),
 	arg(1, TPair, Value).
+
+
+'$lgt_check_entity_info_parameters'((-), _, _, _) :-
+	% catch variables and lists with unbound tails
+	throw(instantiation_error).
+
+'$lgt_check_entity_info_parameters'([], _, Counter, Arity) :-
+	!,
+	(	Counter =:= Arity ->
+		true
+	;	throw(domain_error({Arity}, {Counter}))
+	).
+
+'$lgt_check_entity_info_parameters'([Pair| Pairs], Parameters, Counter0, Arity) :-
+	!,
+	(	Pair = Name - Description,
+		atom(Name),
+		atom(Description) ->
+		Counter1 is Counter0 + 1,
+		'$lgt_check_entity_info_parameters'(Pairs, Parameters, Counter1, Arity)
+	;	throw(type_error(pair, Pair))
+	).
+
+'$lgt_check_entity_info_parameters'(_, Parameters, _, _) :-
+	throw(type_error(list, Parameters)).
+
+
+'$lgt_check_entity_info_parnames'((-), _, _, _) :-
+	% catch variables and lists with unbound tails
+	throw(instantiation_error).
+
+'$lgt_check_entity_info_parnames'([], _, Counter, Arity) :-
+	!,
+	(	Counter =:= Arity ->
+		true
+	;	throw(domain_error({Arity}, {Counter}))
+	).
+
+'$lgt_check_entity_info_parnames'([Name| Names], Parnames, Counter0, Arity) :-
+	!,
+	(	atom(Name) ->
+		Counter1 is Counter0 + 1,
+		'$lgt_check_entity_info_parnames'(Names, Parnames, Counter1, Arity)
+	;	throw(type_error(atom, Name))
+	).
+
+'$lgt_check_entity_info_parnames'(_, Parnames, _, _) :-
+	throw(type_error(list, Parnames)).
 
 
 
@@ -8173,25 +8209,11 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_predicate_info_directive_pair'(arguments, Arguments, _, Arity, arguments(Arguments)) :-
 	!,
-	'$lgt_must_be'(list, Arguments),
-	(	'$lgt_member'(Argument, Arguments), \+ '$lgt_valid_predicate_argument'(Argument) ->
-		throw(type_error(argument, Argument))
-	;	(	'$lgt_length'(Arguments, 0, Arity) ->
-			true
-		;	throw(length_error(arguments_list, Arguments))
-		)
-	).
+	'$lgt_check_predicate_info_arguments'(Arguments, Arguments, 0, Arity).
 
 '$lgt_tr_predicate_info_directive_pair'(argnames, Argnames, _, Arity, argnames(Argnames)) :-
 	!,
-	'$lgt_must_be'(list, Argnames),
-	(	'$lgt_member'(Name, Argnames), \+ atom(Name) ->
-		throw(type_error(atom, Name))
-	;	(	'$lgt_length'(Argnames, 0, Arity) ->
-			true
-		;	throw(length_error(argnames_list, Argnames))
-		)
-	).
+	'$lgt_check_predicate_info_argnames'(Argnames, Argnames, 0, Arity).
 
 '$lgt_tr_predicate_info_directive_pair'(comment, Comment, _, _, comment(Comment)) :-
 	!,
@@ -8225,6 +8247,54 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_predicate_info_directive_pair'(Key, Value, _, _, TPair) :-
 	functor(TPair, Key, 1),
 	arg(1, TPair, Value).
+
+
+'$lgt_check_predicate_info_arguments'((-), _, _, _) :-
+	% catch variables and lists with unbound tails
+	throw(instantiation_error).
+
+'$lgt_check_predicate_info_arguments'([], _, Counter, Arity) :-
+	!,
+	(	Counter =:= Arity ->
+		true
+	;	throw(domain_error({Arity}, {Counter}))
+	).
+
+'$lgt_check_predicate_info_arguments'([Pair| Pairs], Arguments, Counter0, Arity) :-
+	!,
+	(	Pair = Name - Description,
+		atom(Name),
+		atom(Description) ->
+		Counter1 is Counter0 + 1,
+		'$lgt_check_predicate_info_arguments'(Pairs, Arguments, Counter1, Arity)
+	;	throw(type_error(pair, Pair))
+	).
+
+'$lgt_check_predicate_info_arguments'(_, Arguments, _, _) :-
+	throw(type_error(list, Arguments)).
+
+
+'$lgt_check_predicate_info_argnames'((-), _, _, _) :-
+	% catch variables and lists with unbound tails
+	throw(instantiation_error).
+
+'$lgt_check_predicate_info_argnames'([], _, Counter, Arity) :-
+	!,
+	(	Counter =:= Arity ->
+		true
+	;	throw(domain_error({Arity}, {Counter}))
+	).
+
+'$lgt_check_predicate_info_argnames'([Name| Names], Arguments, Counter0, Arity) :-
+	!,
+	(	atom(Name) ->
+		Counter1 is Counter0 + 1,
+		'$lgt_check_predicate_info_argnames'(Names, Arguments, Counter1, Arity)
+	;	throw(type_error(atom, Name))
+	).
+
+'$lgt_check_predicate_info_argnames'(_, Arguments, _, _) :-
+	throw(type_error(list, Arguments)).
 
 
 
@@ -16166,25 +16236,6 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_renamed_compiler_flag'(singletons, singleton_variables).
 '$lgt_renamed_compiler_flag'(tmpdir, scratch_directory).
 
-
-
-% '$lgt_valid_entity_parameter'(@term)
-%
-% valid predicate argument documentation on info/2 directive
-
-'$lgt_valid_entity_parameter'(Name - Description) :-
-	atom(Name),
-	atom(Description).
-
-
-
-% '$lgt_valid_predicate_argument'(@term)
-%
-% valid predicate argument documentation on info/2 directive
-
-'$lgt_valid_predicate_argument'(Name - Description) :-
-	atom(Name),
-	atom(Description).
 
 
 % '$lgt_valid_predicate_allocation'(@nonvar)
