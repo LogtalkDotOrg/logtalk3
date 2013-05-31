@@ -6671,7 +6671,8 @@ current_logtalk_flag(Flag, Value) :-
 
 % make all object (or category) predicates synchronized using the same mutex
 %
-% this directive is ignored when using a back-end Prolog compiler that don't provide a compatible threads implementation
+% this directive is ignored when using a back-end Prolog compiler that don't
+% provide a compatible threads implementation
 
 '$lgt_tr_logtalk_directive'(synchronized, _) :-
 	'$lgt_pp_entity_'(Type, _, Prefix, _, _),
@@ -6777,17 +6778,17 @@ current_logtalk_flag(Flag, Value) :-
 
 % info/1 entity directive
 
-'$lgt_tr_logtalk_directive'(info(List), _) :-
-	'$lgt_tr_entity_info_directive'(List, TList),
-	assertz('$lgt_pp_info_'(TList)).
+'$lgt_tr_logtalk_directive'(info(Pairs), _) :-
+	'$lgt_tr_entity_info_directive'(Pairs, TPairs),
+	assertz('$lgt_pp_info_'(TPairs)).
 
 
 % info/2 predicate directive
 
-'$lgt_tr_logtalk_directive'(info(Pred, List), _) :-
+'$lgt_tr_logtalk_directive'(info(Pred, Pairs), _) :-
 	(	'$lgt_valid_predicate_or_non_terminal_indicator'(Pred, Functor, Arity) ->
-		'$lgt_tr_predicate_info_directive'(List, Functor, Arity, TList),
-		assertz('$lgt_pp_info_'(Pred, TList))
+		'$lgt_tr_predicate_info_directive'(Pairs, Functor, Arity, TPairs),
+		assertz('$lgt_pp_info_'(Pred, TPairs))
 	;	var(Pred) ->
 		throw(instantiation_error)
 	;	throw(type_error(predicate_indicator, Pred))
@@ -8053,9 +8054,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_entity_info_directive'([Pair| Pairs], [TPair| TPairs]) :-
 	(	'$lgt_valid_info_key_value_pair'(Pair, Key, Value) ->
-		'$lgt_tr_entity_info_directive_pair'(Key, Value, TKey, TValue),
-		functor(TPair, TKey, 1),
-		arg(1, TPair, TValue),
+		'$lgt_tr_entity_info_directive_pair'(Key, Value, TPair),
 		'$lgt_tr_entity_info_directive'(Pairs, TPairs)
 	;	% non-valid pair; generate an error
 		'$lgt_must_be'(key_value_info_pair, Pair)
@@ -8069,7 +8068,7 @@ current_logtalk_flag(Flag, Value) :-
 %
 % translates an entity info/1 directive key-value pair
 
-'$lgt_tr_entity_info_directive_pair'(author, Author, author, Author) :-
+'$lgt_tr_entity_info_directive_pair'(author, Author, author(Author)) :-
 	!,
 	(	atom(Author) ->
 		true
@@ -8078,11 +8077,11 @@ current_logtalk_flag(Flag, Value) :-
 	;	throw(type_error(atom, Author))
 	).
 
-'$lgt_tr_entity_info_directive_pair'(comment, Comment, comment, Comment) :-
+'$lgt_tr_entity_info_directive_pair'(comment, Comment, comment(Comment)) :-
 	!,
 	'$lgt_must_be'(atom, Comment).
 
-'$lgt_tr_entity_info_directive_pair'(date, Date, date, Date) :-
+'$lgt_tr_entity_info_directive_pair'(date, Date, date(Date)) :-
 	!,
 	(	Date = Year/Month/Day ->
 		'$lgt_must_be'(integer, Year),
@@ -8091,7 +8090,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	throw(type_error(date, Date))
 	).
 
-'$lgt_tr_entity_info_directive_pair'(parameters, Parameters, parameters, Parameters) :-
+'$lgt_tr_entity_info_directive_pair'(parameters, Parameters, parameters(Parameters)) :-
 	!,
 	'$lgt_must_be'(list, Parameters),
 	(	'$lgt_member'(Parameter, Parameters), \+ '$lgt_valid_entity_parameter'(Parameter) ->
@@ -8104,7 +8103,7 @@ current_logtalk_flag(Flag, Value) :-
 		)
 	).
 
-'$lgt_tr_entity_info_directive_pair'(parnames, Parnames, parnames, Parnames) :-
+'$lgt_tr_entity_info_directive_pair'(parnames, Parnames, parnames(Parnames)) :-
 	!,
 	'$lgt_must_be'(list, Parnames),
 	(	'$lgt_member'(Name, Parnames), \+ atom(Name) ->
@@ -8115,11 +8114,11 @@ current_logtalk_flag(Flag, Value) :-
 		)
 	).
 
-'$lgt_tr_entity_info_directive_pair'(version, Version, version, Version) :-
+'$lgt_tr_entity_info_directive_pair'(version, Version, version(Version)) :-
 	!,
 	'$lgt_must_be'(atomic, Version).
 
-'$lgt_tr_entity_info_directive_pair'(copyright, Copyright, copyright, Copyright) :-
+'$lgt_tr_entity_info_directive_pair'(copyright, Copyright, copyright(Copyright)) :-
 	!,
 	(	atom(Copyright) ->
 		true
@@ -8128,7 +8127,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	throw(type_error(atom, Copyright))
 	).
 
-'$lgt_tr_entity_info_directive_pair'(license, License, license, License) :-
+'$lgt_tr_entity_info_directive_pair'(license, License, license(License)) :-
 	!,
 	(	atom(License) ->
 		true
@@ -8138,7 +8137,9 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 % user-defined entity info pair; no checking
-'$lgt_tr_entity_info_directive_pair'(Key, Value, Key, Value).
+'$lgt_tr_entity_info_directive_pair'(Key, Value, TPair) :-
+	functor(TPair, Key, 1),
+	arg(1, TPair, Value).
 
 
 
@@ -8148,9 +8149,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_predicate_info_directive'([Pair| Pairs], Functor, Arity, [TPair| TPairs]) :-
 	(	'$lgt_valid_info_key_value_pair'(Pair, Key, Value) ->
-		'$lgt_tr_predicate_info_directive_pair'(Key, Value, Functor, Arity, TKey, TValue),
-		functor(TPair, TKey, 1),
-		arg(1, TPair, TValue),
+		'$lgt_tr_predicate_info_directive_pair'(Key, Value, Functor, Arity, TPair),
 		'$lgt_tr_predicate_info_directive'(Pairs, Functor, Arity, TPairs)
 	;	% non-valid pair; generate an error
 		'$lgt_must_be'(key_value_info_pair, Pair)
@@ -8164,7 +8163,7 @@ current_logtalk_flag(Flag, Value) :-
 %
 % translates a predicate info/2 directive key-value pair
 
-'$lgt_tr_predicate_info_directive_pair'(allocation, Allocation, _, _, allocation, Allocation) :-
+'$lgt_tr_predicate_info_directive_pair'(allocation, Allocation, _, _, allocation(Allocation)) :-
 	!,
 	'$lgt_must_be'(atom, Allocation),
 	(	'$lgt_valid_predicate_allocation'(Allocation) ->
@@ -8172,7 +8171,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	throw(domain_error(allocation, Allocation))
 	).
 
-'$lgt_tr_predicate_info_directive_pair'(arguments, Arguments, _, Arity, arguments, Arguments) :-
+'$lgt_tr_predicate_info_directive_pair'(arguments, Arguments, _, Arity, arguments(Arguments)) :-
 	!,
 	'$lgt_must_be'(list, Arguments),
 	(	'$lgt_member'(Argument, Arguments), \+ '$lgt_valid_predicate_argument'(Argument) ->
@@ -8183,7 +8182,7 @@ current_logtalk_flag(Flag, Value) :-
 		)
 	).
 
-'$lgt_tr_predicate_info_directive_pair'(argnames, Argnames, _, Arity, argnames, Argnames) :-
+'$lgt_tr_predicate_info_directive_pair'(argnames, Argnames, _, Arity, argnames(Argnames)) :-
 	!,
 	'$lgt_must_be'(list, Argnames),
 	(	'$lgt_member'(Name, Argnames), \+ atom(Name) ->
@@ -8194,11 +8193,11 @@ current_logtalk_flag(Flag, Value) :-
 		)
 	).
 
-'$lgt_tr_predicate_info_directive_pair'(comment, Comment, _, _, comment, Comment) :-
+'$lgt_tr_predicate_info_directive_pair'(comment, Comment, _, _, comment(Comment)) :-
 	!,
 	'$lgt_must_be'(atom, Comment).
 
-'$lgt_tr_predicate_info_directive_pair'(exceptions, Exceptions, _, _, exceptions, Exceptions) :-
+'$lgt_tr_predicate_info_directive_pair'(exceptions, Exceptions, _, _, exceptions(Exceptions)) :-
 	!,
 	'$lgt_must_be'(list, Exceptions),
 	(	'$lgt_member'(Exception, Exceptions), \+ '$lgt_valid_predicate_exception'(Exception) ->
@@ -8206,7 +8205,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	true
 	).
 
-'$lgt_tr_predicate_info_directive_pair'(examples, Examples, Functor, Arity, examples, Examples) :-
+'$lgt_tr_predicate_info_directive_pair'(examples, Examples, Functor, Arity, examples(Examples)) :-
 	!,
 	'$lgt_must_be'(list, Examples),
 	(	'$lgt_member'(Example, Examples), \+ '$lgt_valid_predicate_call_example'(Example, Functor, Arity) ->
@@ -8214,7 +8213,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	true
 	).
 
-'$lgt_tr_predicate_info_directive_pair'(redefinition, Redefinition, _, _, redefinition, Redefinition) :-
+'$lgt_tr_predicate_info_directive_pair'(redefinition, Redefinition, _, _, redefinition(Redefinition)) :-
 	!,
 	'$lgt_must_be'(atom, Redefinition),
 	(	'$lgt_valid_predicate_redefinition'(Redefinition) ->
@@ -8223,7 +8222,9 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 % user-defined predicate info pair; no checking
-'$lgt_tr_predicate_info_directive_pair'(Key, Value, _, _, Key, Value).
+'$lgt_tr_predicate_info_directive_pair'(Key, Value, _, _, TPair) :-
+	functor(TPair, Key, 1),
+	arg(1, TPair, Value).
 
 
 
