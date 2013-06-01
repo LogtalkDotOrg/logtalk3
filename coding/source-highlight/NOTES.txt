@@ -33,9 +33,10 @@ where $prefix is the source-highlight installation directory (by default,
 
 	$prefix/share/source-highlight/lang.map
 
-and add the entry:
+and add the entries:
 
 	lgt = logtalk.lang
+	logtalk = logtalk.lang
 
 Usage example for a "foo.lgt" Logtalk source file:
 

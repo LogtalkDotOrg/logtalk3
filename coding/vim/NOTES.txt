@@ -24,11 +24,12 @@ install the Logtalk support files by performing the following steps:
 1. Copy the file "syntax/logtalk.vim" to the "syntax" sub-directory in 
 your VIM installation directory (replacing any existing older file).
 
-2. Add the following entry to the "filetype.vim" configuration file 
+2. Add the following entries to the "filetype.vim" configuration file 
 (only if not already present):
 
 " Logtalk source files
 au BufNewFile,BufRead *.lgt                     setf logtalk
+au BufNewFile,BufRead *.logtalk                 setf logtalk
 
 3. Copy the file "indent/logtalk.vim" to the "indent" sub-directory in 
 your VIM installation directory (replacing any existing older file).

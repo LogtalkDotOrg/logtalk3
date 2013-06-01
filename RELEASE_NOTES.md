@@ -82,7 +82,13 @@ Examples
 
 * REMOVED: Experimental examples `chr` and `problog`, which were implemented
 using the now removed support for annotation expansion predicates.
- 
+
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* ADDED: Support for the alternative `.logtalk` file name extension to most
+of the supported text editors and syntax highlighters.
+
 
 3.00.0 Alpha 17 - May 20, 2013
 ==============================

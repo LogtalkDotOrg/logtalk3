@@ -21,7 +21,7 @@ class LogtalkLexer(RegexLexer):
 
     name = 'Logtalk'
     aliases = ['logtalk']
-    filenames = ['*.lgt']
+    filenames = ['*.lgt', '*.logtalk']
     mimetypes = ['text/x-logtalk']
 
     tokens = {

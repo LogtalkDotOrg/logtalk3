@@ -9,7 +9,8 @@
         Identifier = sourcecode.logtalk;
         BasedOn = sourcecode;
         Name = "Logtalk source files";
-        Extensions = (lgt);
+        Extensions = (lgt, logtalk);
+		MIMETypes = ("text/x-logtalk");
         ComputerLanguage = logtalk;
         AppliesToBuildRules = no;
     }

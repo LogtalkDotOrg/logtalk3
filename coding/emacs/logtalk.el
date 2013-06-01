@@ -4,8 +4,8 @@
 
 ;; Author: Paulo Moura <pmoura@logtalk.org>
 ;; Creation date: November 15, 2003
-;; Last modification date: May 4, 2013
-;; Version: 1.23
+;; Last modification date: June 1, 2013
+;; Version: 1.24
 
 ;; Installation:
 ;;
@@ -21,12 +21,13 @@
 ;;
 ;; (autoload 'logtalk-mode "logtalk" "Major mode for editing Logtalk programs." t)
 ;; (add-to-list 'auto-mode-alist '("\\.lgt\\'" . logtalk-mode))
+;; (add-to-list 'auto-mode-alist '("\\.logtalk\\'" . logtalk-mode))
 
 
 
 ;; setup 
 
-(defvar logtalk-mode-version "1.23"
+(defvar logtalk-mode-version "1.24"
 	"Logtalk mode version number")
 
 (defvar logtalk-mode-hook nil)

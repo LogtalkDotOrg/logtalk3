@@ -24,7 +24,7 @@
 
 	<metadata>
 		<property name="mimetypes">text/x-logtalk</property>
-		<property name="globs">*.lgt</property>
+		<property name="globs">*.lgt;*.logtalk</property>
 		<property name="line-comment-start">%</property>
 		<property name="block-comment-start">/*</property>
 		<property name="block-comment-end">*/</property>
