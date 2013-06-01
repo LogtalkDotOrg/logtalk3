@@ -58,6 +58,9 @@ term as final, the compiler would not check that the expanded term is callable.
 Prolog adapter and integration files
 ------------------------------------
 
+* ADDED: Alternative `.logtalk` file name extension definition to all adapter
+files.
+
 * REMOVED: Support for action rules, implemented using annotation expansion
 predicates, from the B-Prolog adapter file.
 

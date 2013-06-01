@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for XSB 3.3 or later versions
-%  Last updated on May 25, 2013
+%  Last updated on June 1, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -179,6 +179,7 @@ setup_call_catcher_cleanup(Setup, Call, Catcher, Cleanup) :-
 % '$lgt_file_extension'(?atom, ?atom)
 
 '$lgt_file_extension'(logtalk, '.lgt').
+'$lgt_file_extension'(logtalk, '.logtalk').
 '$lgt_file_extension'(prolog, '.pl').
 '$lgt_file_extension'(tmp, '.xwam').
 

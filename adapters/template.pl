@@ -159,6 +159,7 @@ numbervars(Term, From, Next) :-
 % '$lgt_file_extension'(?atom, ?atom)
 
 '$lgt_file_extension'(logtalk, '.lgt').
+'$lgt_file_extension'(logtalk, '.logtalk').
 '$lgt_file_extension'(prolog, '.pl').
 
 

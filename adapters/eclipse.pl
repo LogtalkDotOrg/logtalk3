@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on May 25, 2013
+%  Last updated on June 1, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -197,6 +197,7 @@ setup_call_cleanup(_, _, _) :-
 % '$lgt_file_extension'(?atom, ?atom)
 
 '$lgt_file_extension'(logtalk, '.lgt').
+'$lgt_file_extension'(logtalk, '.logtalk').
 '$lgt_file_extension'(prolog, '.pl').
 
 
