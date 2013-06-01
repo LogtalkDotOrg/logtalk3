@@ -25,8 +25,8 @@ RELEASE NOTES
 =============
 
 
-3.00.0 Alpha 18 - June ??, 2013
-===============================
+3.00.0 Alpha 18 - June 3, 2013
+==============================
 
 Logtalk compiler and runtime
 ----------------------------
@@ -38,7 +38,7 @@ source code files (e.g. `.logtalk`).
 functionality can be implemented, although with more coding work, using the
 term- and goal-expansion predicates.
 
-* IMPROVED: Faster compilation of `info/1-2` directives.
+* IMPROVED: Faster compilation of `info/1-2` and `uses/2` directives.
 
 * FIXED: Compile the clauses that allow runtime use of predicates specified
 in `uses/2` and `use_module/2` directives as auxiliary clauses.

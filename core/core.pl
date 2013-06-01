@@ -6720,9 +6720,8 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_logtalk_directive'(uses(Obj, Resources), Ctx) :-
 	'$lgt_must_be'(object_identifier, Obj),
-	'$lgt_must_be'(list, Resources),
 	'$lgt_add_referenced_object'(Obj),
-	'$lgt_tr_uses_directive'(Resources, Obj, Ctx).
+	'$lgt_tr_uses_directive'(Resources, Resources, Obj, Ctx).
 
 
 % uses/1 entity directive
@@ -7591,15 +7590,23 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_tr_uses_directive'(+list, @object_identifier, +compilation_context)
+% '$lgt_tr_uses_directive'(+list, +list, @object_identifier, +compilation_context)
 %
 % auxiliary predicate for translating uses/2 directives
 
-'$lgt_tr_uses_directive'([], _, _).
+'$lgt_tr_uses_directive'((-), _, _, _) :-
+	throw(instantiation_error).
 
-'$lgt_tr_uses_directive'([Resource| Resources], Obj, Ctx) :-
+'$lgt_tr_uses_directive'([], _, _, _) :-
+	!.
+
+'$lgt_tr_uses_directive'([Resource| Resources], Argument, Obj, Ctx) :-
+	!,
 	'$lgt_tr_uses_directive_resource'(Resource, Obj, Ctx),
-	'$lgt_tr_uses_directive'(Resources, Obj, Ctx).
+	'$lgt_tr_uses_directive'(Resources, Argument, Obj, Ctx).
+
+'$lgt_tr_uses_directive'(_, Argument, _, _) :-
+	throw(type_error(list, Argument)).
 
 
 '$lgt_tr_uses_directive_resource'(op(Priority, Specifier, Operators), _, _) :-
