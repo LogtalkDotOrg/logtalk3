@@ -8800,7 +8800,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_tr_body'(Pred2, TPred2, DPred2, Ctx).
 
 '$lgt_tr_body'('*->'(Pred1, Pred2), '*->'(TPred1, TPred2), '*->'(DPred1, DPred2), Ctx) :-
-	'$lgt_prolog_built_in_predicate'('*->'(_, _)),
+	'$lgt_predicate_property'('*->'(_, _), built_in),
 	!,
 	'$lgt_tr_body'(Pred1, TPred1, DPred1, Ctx),
 	'$lgt_tr_body'(Pred2, TPred2, DPred2, Ctx).
@@ -10324,7 +10324,7 @@ current_logtalk_flag(Flag, Value) :-
 	\+ '$lgt_pp_non_portable_predicate_'(Pred, _),
 	% not previously recorded as a non portable call
 	'$lgt_compiler_flag'(portability, warning),
-	'$lgt_prolog_built_in_predicate'(Pred),
+	'$lgt_predicate_property'(Pred, built_in),
 	\+ '$lgt_logtalk_built_in_predicate'(Pred),
 	\+ '$lgt_iso_spec_predicate'(Pred),
 	% bona fide Prolog built-in predicate
@@ -11072,7 +11072,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_tr_msg'(Pred2, Obj, TPred2, This).
 
 '$lgt_tr_msg'('*->'(Pred1, Pred2), Obj, '*->'(TPred1, TPred2), This) :-
-	'$lgt_prolog_built_in_predicate'('*->'(_, _)),
+	'$lgt_predicate_property'('*->'(_, _), built_in),
 	!,
 	'$lgt_tr_msg'(Pred1, Obj, TPred1, This),
 	'$lgt_tr_msg'(Pred2, Obj, TPred2, This).
@@ -11251,7 +11251,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_tr_self_msg'(Pred2, TPred2, This, Self).
 
 '$lgt_tr_self_msg'('*->'(Pred1, Pred2), '*->'(TPred1, TPred2), This, Self) :-
-	'$lgt_prolog_built_in_predicate'('*->'(_, _)),
+	'$lgt_predicate_property'('*->'(_, _), built_in),
 	!,
 	'$lgt_tr_self_msg'(Pred1, TPred1, This, Self),
 	'$lgt_tr_self_msg'(Pred2, TPred2, This, Self).
@@ -11770,7 +11770,7 @@ current_logtalk_flag(Flag, Value) :-
 	!.
 
 '$lgt_flatten_conjunctions'('*->'(Goal1, Goal2), '*->'(SGoal1, SGoal2)) :-
-	'$lgt_prolog_built_in_predicate'('*->'(_, _)),
+	'$lgt_predicate_property'('*->'(_, _), built_in),
 	!,
 	'$lgt_flatten_conjunctions'(Goal1, SGoal1),
 	'$lgt_flatten_conjunctions'(Goal2, SGoal2).
@@ -11901,7 +11901,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_remove_redundant_calls'(Goal2, SGoal2).
 
 '$lgt_remove_redundant_calls'('*->'(Goal1, Goal2), '*->'(SGoal1, SGoal2)) :-
-	'$lgt_prolog_built_in_predicate'('*->'(_, _)),
+	'$lgt_predicate_property'('*->'(_, _), built_in),
 	!,
 	'$lgt_remove_redundant_calls'(Goal1, SGoal1),
 	'$lgt_remove_redundant_calls'(Goal2, SGoal2).
@@ -14060,7 +14060,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_fix_predicate_calls'(Pred2, TPred2).
 
 '$lgt_fix_predicate_calls'('*->'(Pred1, Pred2), '*->'(TPred1, TPred2)) :-
-	'$lgt_prolog_built_in_predicate'('*->'(_, _)),
+	'$lgt_predicate_property'('*->'(_, _), built_in),
 	!,
 	'$lgt_fix_predicate_calls'(Pred1, TPred1),
 	'$lgt_fix_predicate_calls'(Pred2, TPred2).
@@ -16520,7 +16520,7 @@ current_logtalk_flag(Flag, Value) :-
 	!.
 
 '$lgt_dcg_msg'('*->'(GRIf, GRThen), Obj, S0, S, '*->'(If, Then)) :-
-	'$lgt_prolog_built_in_predicate'('*->'(_, _)),
+	'$lgt_predicate_property'('*->'(_, _), built_in),
 	!,
 	'$lgt_dcg_msg'(GRIf, Obj, S0, S1, If),
 	'$lgt_dcg_msg'(GRThen, Obj, S1, S, Then).
@@ -16557,7 +16557,7 @@ current_logtalk_flag(Flag, Value) :-
 	!.
 
 '$lgt_dcg_self_msg'('*->'(GRIf, GRThen), S0, S, '*->'(If, Then)) :-
-	'$lgt_prolog_built_in_predicate'('*->'(_, _)),
+	'$lgt_predicate_property'('*->'(_, _), built_in),
 	!,
 	'$lgt_dcg_self_msg'(GRIf, S0, S1, If),
 	'$lgt_dcg_self_msg'(GRThen, S1, S, Then).
@@ -16646,7 +16646,7 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 '$lgt_dcg_body'('*->'(GRIf, GRThen), S0, S, '*->'(If, Then)) :-
-	'$lgt_prolog_built_in_predicate'('*->'(_, _)),
+	'$lgt_predicate_property'('*->'(_, _), built_in),
 	!,
 	'$lgt_dcg_body'(GRIf, S0, S1, If),
 	'$lgt_dcg_body'(GRThen, S1, S, Then).
