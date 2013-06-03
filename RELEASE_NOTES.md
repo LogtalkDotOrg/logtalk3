@@ -37,6 +37,9 @@ files.
 Installers and installation scripts
 -----------------------------------
 
+* UPDATED: The freedesktop.org shared mime-info database entry for Logtalk now
+also registers the alternative `.logtalk` source code file extension.
+
 * UPDATED: The `logtalk.iss` Inno Setup script, used for building binary
 Windows installers, now also registers the alternative `.logtalk` source
 code file extension.

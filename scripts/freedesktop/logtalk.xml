@@ -43,5 +43,6 @@
 			<match value=":- category(" type="string" offset="0"/>
 		</magic>
 		<glob pattern="*.lgt"/>
+		<glob pattern="*.logtalk"/>
 	</mime-type>
 </mime-info>
