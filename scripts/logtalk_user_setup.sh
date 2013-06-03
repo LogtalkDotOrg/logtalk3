@@ -6,6 +6,7 @@
 ##   Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Logtalk user folder setup script
+##   Last updated on June 3, 2013
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -93,6 +94,14 @@ then
 	then
 		cp "$LOGTALKUSER-backup-$date"/settings.lgt "$LOGTALKUSER"/
 		echo "Copied your old \"settings.lgt\" file to the new \"\$LOGTALKUSER\" directory."
+		echo "The file \"settings-sample.lgt\" file contains an up-to-date copy of the"
+		echo "\"settings-sample.lgt\" file distributed with the currently installed Logtalk"
+		echo "version. Review this file for possible settings files update information."
+	fi
+	if [ -f "$LOGTALKUSER-backup-$date"/settings.logtalk ]
+	then
+		cp "$LOGTALKUSER-backup-$date"/settings.logtalk "$LOGTALKUSER"/
+		echo "Copied your old \"settings.logtalk\" file to the new \"\$LOGTALKUSER\" directory."
 		echo "The file \"settings-sample.lgt\" file contains an up-to-date copy of the"
 		echo "\"settings-sample.lgt\" file distributed with the currently installed Logtalk"
 		echo "version. Review this file for possible settings files update information."

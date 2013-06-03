@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Unit testing automation script
-##   Last updated on May 26, 2013
+##   Last updated on June 3, 2013
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -206,7 +206,7 @@ for unit in *
 do
 	if [ -d $unit ] ; then
 		cd $unit
-		if [ -e "./tester.lgt" ] ; then
+		if [ -e "./tester.lgt" ] || [ -e "./tester.logtalk" ] ; then
 			echo '*******************************************************************************'
 			echo "***** Testing $unit"
 			name=$(echo $unit|sed 's|/|__|g')
@@ -239,7 +239,7 @@ do
 		do
 			if [ -d $subunit ] ; then
 				cd $subunit
-				if [ -e "./tester.lgt" ] ; then
+				if [ -e "./tester.lgt" ] || [ -e "./tester.logtalk" ] ; then
 					echo '*******************************************************************************'
 					echo "***** Testing $unit/$subunit"
 					subname=$(echo $unit/$subunit|sed 's|/|__|g')

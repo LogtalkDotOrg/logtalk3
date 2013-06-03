@@ -25,6 +25,23 @@ RELEASE NOTES
 =============
 
 
+3.00.0 Alpha 19 - June ??, 2013
+===============================
+
+Tests
+-----
+
+* UPDATED: The `logtalk_tester.sh` script now also looks for `tester.logtalk`
+files.
+
+Installers and installation scripts
+-----------------------------------
+
+* UPDATED: The `logtalk_user_setup.sh` and `logtalk_user_setup.js` scripts now
+also copy back any `settings.logtalk` file found when creating a backup of the
+`$LOGTALKUSER` directory.
+
+
 3.00.0 Alpha 18 - June 3, 2013
 ==============================
 
