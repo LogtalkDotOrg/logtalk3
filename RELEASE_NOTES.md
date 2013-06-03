@@ -37,6 +37,10 @@ files.
 Installers and installation scripts
 -----------------------------------
 
+* UPDATED: The `logtalk.iss` Inno Setup script, used for building binary
+Windows installers, now also registers the alternative `.logtalk` source
+code file extension.
+
 * UPDATED: The `logtalk_user_setup.sh` and `logtalk_user_setup.js` scripts now
 also copy back any `settings.logtalk` file found when creating a backup of the
 `$LOGTALKUSER` directory.
