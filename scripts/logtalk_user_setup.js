@@ -95,34 +95,25 @@ if (FSObject.FolderExists(logtalk_user)) {
 	WScript.Echo("");
 	WScript.Echo("  " + logtalk_user + "-backup-" + date);
 	WScript.Echo("");
-	WScript.Echo("Creating a new \"\%LOGTALKUSER\%\" directory:");
-	WScript.Echo("");
-	WScript.Echo("  " + logtalk_user);
-	WScript.Echo("");
-	FSObject.CreateFolder(logtalk_user);
 	if (FSObject.FileExists(logtalk_user + "-backup-" + date + "\\settings.lgt")) {
 		FSObject.CopyFile(logtalk_user + "-backup-" + date + "\\settings.lgt", logtalk_user + "\\settings.lgt");
 		WScript.Echo("Copied your old \"settings.lgt\" file to the new \"\%LOGTALKUSER\%\" directory.");
-		WScript.Echo("The file \"settings-sample.lgt\" file contains a pristine copy of the ");
-		WScript.Echo("\"settings-sample.lgt\" file distributed with the currently installed Logtalk");
-		WScript.Echo("version. Review this file for possible settings files update information.");
 	}
 	if (FSObject.FileExists(logtalk_user + "-backup-" + date + "\\settings.logtalk")) {
 		FSObject.CopyFile(logtalk_user + "-backup-" + date + "\\settings.logtalk", logtalk_user + "\\settings.logtalk");
 		WScript.Echo("Copied your old \"settings.logtalk\" file to the new \"\%LOGTALKUSER\%\" directory.");
-		WScript.Echo("The file \"settings-sample.lgt\" file contains a pristine copy of the ");
-		WScript.Echo("\"settings-sample.lgt\" file distributed with the currently installed Logtalk");
-		WScript.Echo("version. Review this file for possible settings files update information.");
 	}
+	WScript.Echo("The file \"settings-sample.lgt\" file contains a pristine copy of the ");
+	WScript.Echo("\"settings-sample.lgt\" file distributed with the currently installed Logtalk");
+	WScript.Echo("version. Review this file for possible settings files update information.");
 	WScript.Echo("");
-} else {
-	WScript.Echo("Creating a new \"\%LOGTALKUSER\%\" directory:");
-	WScript.Echo("");
-	WScript.Echo("  " + logtalk_user);
-	WScript.Echo("");
-	FSObject.CreateFolder(logtalk_user);
 }
 
+WScript.Echo("Creating a new \"\%LOGTALKUSER\%\" directory:");
+WScript.Echo("");
+WScript.Echo("  " + logtalk_user);
+WScript.Echo("");
+FSObject.CreateFolder(logtalk_user);
 WScript.Echo("Copying Logtalk files and directories...");
 FSObject.CopyFolder(logtalk_home + "\\contributions", logtalk_user + "\\contributions");
 FSObject.CopyFolder(logtalk_home + "\\examples", logtalk_user + "\\examples");

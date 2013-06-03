@@ -94,18 +94,15 @@ then
 	then
 		cp "$LOGTALKUSER-backup-$date"/settings.lgt "$LOGTALKUSER"/
 		echo "Copied your old \"settings.lgt\" file to the new \"\$LOGTALKUSER\" directory."
-		echo "The file \"settings-sample.lgt\" file contains an up-to-date copy of the"
-		echo "\"settings-sample.lgt\" file distributed with the currently installed Logtalk"
-		echo "version. Review this file for possible settings files update information."
 	fi
 	if [ -f "$LOGTALKUSER-backup-$date"/settings.logtalk ]
 	then
 		cp "$LOGTALKUSER-backup-$date"/settings.logtalk "$LOGTALKUSER"/
 		echo "Copied your old \"settings.logtalk\" file to the new \"\$LOGTALKUSER\" directory."
-		echo "The file \"settings-sample.lgt\" file contains an up-to-date copy of the"
-		echo "\"settings-sample.lgt\" file distributed with the currently installed Logtalk"
-		echo "version. Review this file for possible settings files update information."
 	fi
+	echo "The file \"settings-sample.lgt\" file contains an up-to-date copy of the"
+	echo "\"settings-sample.lgt\" file distributed with the currently installed Logtalk"
+	echo "version. Review this file for possible settings files update information."
 	echo
 else
 	echo "Creating a new \"\$LOGTALKUSER\" directory:"
