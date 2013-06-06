@@ -8348,12 +8348,8 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_clause'(Clause, Ctx) :-
 	% ensure that only the compilation context mode is shared between different clauses
 	'$lgt_comp_ctx_mode'(Ctx, Mode),
-	'$lgt_pp_entity_'(Type, Entity, Prefix, _, _),
-	(	Type == object, compound(Entity) ->
-		% entity is a parametric object; we require "this" for inline compilation of parameter/2
-		'$lgt_comp_ctx'(NewCtx, _, _, Entity, _, Prefix, _, _, _, Mode, _)
-	;	'$lgt_comp_ctx'(NewCtx, _, _, _, _, Prefix, _, _, _, Mode, _)
-	),
+	'$lgt_pp_entity_'(_, _, Prefix, _, _),
+	'$lgt_comp_ctx'(NewCtx, _, _, _, _, Prefix, _, _, _, Mode, _),
 	% we're translating an entity clause
 	catch(
 		'$lgt_tr_clause'(Clause, TClause, DClause, NewCtx),
@@ -9941,7 +9937,7 @@ current_logtalk_flag(Flag, Value) :-
 	throw(type_error(parametric_entity, Entity)).
 
 '$lgt_tr_body'(parameter(Arg, Value), TPred, '$lgt_debug'(goal(parameter(Arg, Value), DPred), ExCtx), Ctx) :-
-	'$lgt_pp_entity_'(object, _, _, _, _),
+	'$lgt_pp_entity_'(object, This, _, _, _),
 	!,
 	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, _, _),
 	'$lgt_exec_ctx_this'(ExCtx, This),
