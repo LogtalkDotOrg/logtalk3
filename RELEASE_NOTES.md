@@ -31,6 +31,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: Avoid unnecessary compile-time instantiations of *this* in the
+execution-context argument of compiled predicate clauses for non-parametric
+objects.
+
 * FIXED: Asserting predicate rules using the `asserta/1` and `assertz/1`
 built-in methods. Thanks to Andreas Becker for the bug report.
 

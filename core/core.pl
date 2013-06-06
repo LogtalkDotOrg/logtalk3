@@ -8349,8 +8349,8 @@ current_logtalk_flag(Flag, Value) :-
 	% ensure that only the compilation context mode is shared between different clauses
 	'$lgt_comp_ctx_mode'(Ctx, Mode),
 	'$lgt_pp_entity_'(Type, Entity, Prefix, _, _),
-	(	Type == object ->
-		% entity may be a parametric object; we require "this" for inline compilation of parameter/2
+	(	Type == object, compound(Entity) ->
+		% entity is a parametric object; we require "this" for inline compilation of parameter/2
 		'$lgt_comp_ctx'(NewCtx, _, _, Entity, _, Prefix, _, _, _, Mode, _)
 	;	'$lgt_comp_ctx'(NewCtx, _, _, _, _, Prefix, _, _, _, Mode, _)
 	),
