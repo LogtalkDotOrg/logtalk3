@@ -10453,6 +10453,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
 	'$lgt_comp_ctx'(Ctx, _, Sender, This, _, _, MetaVars, _, ExCtx, runtime, _),
+	nonvar(This),
 	% in the most common case, we're meta-calling the predicate
 	(	'$lgt_member_var'(Pred, MetaVars) ->
 		% goal is a call to a user-defined predicate in sender (i.e. a meta-argument)

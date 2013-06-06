@@ -28,6 +28,12 @@ RELEASE NOTES
 3.00.0 Alpha 19 - June ??, 2013
 ===============================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Asserting predicate rules using the `asserta/1` and `assertz/1`
+built-in methods. Thanks to Andreas Becker for the bug report.
+
 Tests
 -----
 
