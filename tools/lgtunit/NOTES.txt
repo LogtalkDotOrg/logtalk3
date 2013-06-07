@@ -22,9 +22,16 @@ Public License 3. Consult the `LICENSE.txt` file for details.
 ________________________________________________________________________
 
 
+Overview
+--------
+
 The `lgtunit.lgt` file contains a simple framework for defining and
 running unit tests in Logtalk. The `lgtunit_messages.lgt` file defines
 the default message translations.
+
+
+Compiling and loading unit tests
+--------------------------------
 
 To compile and load this framework type:
 
@@ -39,6 +46,10 @@ In order to write your own unit tests, define objects extending the
 option `hook(lgtunit)`. For example:
 
 	| ?- logtalk_load(my_tests, [hook(lgtunit)]).
+
+
+Unit test dialects
+------------------
 
 Unit tests can be written using any of the following dialects:
 
@@ -78,9 +89,24 @@ For examples of how to write unit tests, check the `tests` folder or the
 `testing` example in the `examples` folder in the Logtalk distribution.
 Most of the provided examples also include unit tests.
 
+Parameterized unit tests can be easily defined by using parametric objects.
+
 Note: when using the `(<<)/2` control construct to access and test an object
 internal predicates, make sure that the `context_switching_calls` compiler
 flag is set to `allow` for those objects.
+
+
+Setup and cleanup goals
+-----------------------
+
+A unit test object can define `setup/0` and `cleanup/0`. goals. The `setup/0`
+predicate is called, when defined, before running the object unit tests. The
+`cleanup/0` predciate is called, when defined, after running all the object
+unit tests.
+
+
+Debugging failed unit tests
+---------------------------
 
 In order to debug failed unit tests, you can compile the unit test objects
 without using the `hook/1` option and use the `(<<)/2` control construct to
@@ -108,6 +134,10 @@ debugger. For example:
 	| ?- my_tests << test(test_n).
 	...
 
+
+Code coverage
+-------------
+
 If you want entity predicate clause coverage information to be collected
 and printed, you will need to compile the entities that you're testing
 using the options `debug(on)` and `source_data(on)`. Be aware, however,
@@ -122,7 +152,6 @@ use of dynamic predicates with clauses asserted at runtime. You may easily
 identify dynamic predicates in the results as their clauses often have a
 initial count equal to zero.
 
-Parameterized unit tests can be easily defined by using parametric objects.
 
 All source files are formatted using tabs (the recommended setting is a tab
 width equivalent to 4 spaces).
