@@ -35,6 +35,10 @@ Logtalk compiler and runtime
 execution-context argument of compiled predicate clauses for non-parametric
 objects.
 
+* CHANGED: Calls to the `parameter/2` and `this/1` execution context methods
+in a multifile predicate clause now return solutions based on the entity for
+which the clause is defined.
+
 * FIXED: Asserting predicate rules using the `asserta/1` and `assertz/1`
 built-in methods. Thanks to Andreas Becker for the bug report.
 

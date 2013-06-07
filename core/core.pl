@@ -9930,6 +9930,29 @@ current_logtalk_flag(Flag, Value) :-
 		DPred = TPred
 	).
 
+'$lgt_tr_body'(parameter(Arg, Value), TPred, '$lgt_debug'(goal(parameter(Arg, Value), TPred), ExCtx), Ctx) :-
+	'$lgt_comp_ctx'(Ctx, Other::_, _, This, _, _, _, _, ExCtx, _, _),
+	% we're compiling a clause for a multifile predicate
+	!,
+	'$lgt_must_be'(integer, Arg),
+	(	compound(Other) ->
+		true
+	;	throw(type_error(parametric_entity, Other))
+	),
+	functor(Other, _, Arity),
+	(	\+ (1 =< Arg, Arg =< Arity) ->
+		throw(domain_error([1,Arity], Arg))
+	;	true
+	),
+	'$lgt_exec_ctx_this'(ExCtx, This),
+	% we must delay unification to runtime as Other is only used for
+	% stating to which entity the multifile predicate clause belongs
+	(	'$lgt_current_object_'(Other, _, _, _, _, _, _, _, _, _, _) ->
+		TPred = arg(Arg, This, Value)	
+	;	% category
+		TPred = '$lgt_category_parameter'(This, Other, Arg, Value)
+	).
+
 '$lgt_tr_body'(parameter(Arg, _), _, _, _) :-
 	'$lgt_must_be'(integer, Arg),
 	'$lgt_pp_entity_'(_, Entity, _, _, _),
@@ -15589,10 +15612,10 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_category_parameter'(This, Ctg, Arg, Value)
 %
 % runtime access to category parameters; in the most common case, the
-% category parameters are shared with the parameters of the object that
-% imports the category; in some rare cases, a parametric category may
-% not be imported by any object and be used e.g. to hold definitions
-% for multifile predicates
+% category parameters are shared with the parameters of the object
+% (which is only know at runtime) that imports the category; in some
+% rare cases, a parametric category may not be imported by any object
+% and be used e.g. to hold definitions for multifile predicates
 
 '$lgt_category_parameter'(This, Ctg, Arg, Value) :-
 	(	'$lgt_imports_category_'(This, Ctg, _) ->
