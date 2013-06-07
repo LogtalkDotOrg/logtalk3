@@ -19,7 +19,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/12/03,
+		date is 2013/06/07,
 		comment is 'Unit tests for the abolish/1 built-in method.'
 	]).
 
@@ -58,5 +58,17 @@
 
 	throws(abolish_1_12, error(existence_error(predicate_declaration, foo/0), logtalk(abolish_1_test_object::abolish(foo/0),user))) :-
 		{abolish_1_test_object::abolish(foo/0)}.
+
+	succeeds(abolish_1_13) :-
+		create_object(Object, [], [set_logtalk_flag(dynamic_declarations, allow)], []),
+		Object::assertz(a(1)),
+		Object::current_predicate(a/1),
+		Object::assertz((p(X) :- a(X))),
+		Object::current_predicate(p/1),
+		Object::abolish(a/1),
+		\+ Object::current_predicate(a/1),
+		Object::abolish(p/1),
+		\+ Object::current_predicate(p/1),
+		abolish_object(Object).
 
 :- end_object.

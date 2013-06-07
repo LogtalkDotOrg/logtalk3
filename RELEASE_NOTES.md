@@ -45,6 +45,8 @@ built-in methods. Thanks to Andreas Becker for the bug report.
 Tests
 -----
 
+* ADDED: Some more unit tests for the built-in database methods.
+
 * UPDATED: The `logtalk_tester.sh` script now also looks for `tester.logtalk`
 files.
 

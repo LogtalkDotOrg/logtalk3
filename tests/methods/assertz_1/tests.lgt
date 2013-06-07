@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/12/03,
+		date is 2013/06/07,
 		comment is 'Unit tests for the assertz/1 built-in method.'
 	]).
 
@@ -63,5 +63,29 @@
 
 	throws(assertz_1_12, error(permission_error(create, predicate_declaration, new/0), logtalk(assertz_1_test_object::assertz(new),user))) :-
 		{assertz_1_test_object::assertz(new)}.
+
+	succeeds(assertz_1_13) :-
+		create_object(Object, [], [public(a/1), public(p/1)], []),
+		Object::assertz(a(1)),
+		Object::assertz(a(2)),
+		Object::assertz(a(3)),
+		Object::assertz((p(X) :- a(X))),
+		findall(X, Object::a(X), Xs),
+		Xs == [1,2,3],
+		findall(Y, Object::p(Y), Ys),
+		Ys == [1,2,3],
+		abolish_object(Object).
+
+	succeeds(assertz_1_14) :-
+		create_object(Object, [], [set_logtalk_flag(dynamic_declarations, allow)], []),
+		Object::assertz(a(1)),
+		Object::assertz(a(2)),
+		Object::assertz(a(3)),
+		Object::assertz((p(X) :- a(X))),
+		findall(X, Object::a(X), Xs),
+		Xs == [1,2,3],
+		findall(Y, Object::p(Y), Ys),
+		Ys == [1,2,3],
+		abolish_object(Object).
 
 :- end_object.

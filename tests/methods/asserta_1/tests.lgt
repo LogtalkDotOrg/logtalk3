@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/12/03,
+		date is 2013/06/07,
 		comment is 'Unit tests for the asserta/1 built-in method.'
 	]).
 
@@ -63,5 +63,29 @@
 
 	throws(asserta_1_12, error(permission_error(create, predicate_declaration, new/0), logtalk(asserta_1_test_object::asserta(new),user))) :-
 		{asserta_1_test_object::asserta(new)}.
+
+	succeeds(asserta_1_13) :-
+		create_object(Object, [], [public(a/1), public(p/1)], []),
+		Object::asserta(a(1)),
+		Object::asserta(a(2)),
+		Object::asserta(a(3)),
+		Object::asserta((p(X) :- a(X))),
+		findall(X, Object::a(X), Xs),
+		Xs == [3,2,1],
+		findall(Y, Object::p(Y), Ys),
+		Ys == [3,2,1],
+		abolish_object(Object).
+
+	succeeds(asserta_1_14) :-
+		create_object(Object, [], [set_logtalk_flag(dynamic_declarations, allow)], []),
+		Object::asserta(a(1)),
+		Object::asserta(a(2)),
+		Object::asserta(a(3)),
+		Object::asserta((p(X) :- a(X))),
+		findall(X, Object::a(X), Xs),
+		Xs == [3,2,1],
+		findall(Y, Object::p(Y), Ys),
+		Ys == [3,2,1],
+		abolish_object(Object).
 
 :- end_object.
