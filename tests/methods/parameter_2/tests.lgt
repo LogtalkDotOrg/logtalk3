@@ -57,7 +57,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/12/29,
+		date is 2013/06/08,
 		comment is 'Unit tests for the parameter/2 built-in method.'
 	]).
 
@@ -88,5 +88,9 @@
 		parameter_test_object(X)::t(P),
 		X == c,
 		P == c.
+
+	test(parameter_2_7) :-
+		parameter_2_multifile_test_object_1(foo)::p(Parameter),
+		Parameter == foo.
 
 :- end_object.

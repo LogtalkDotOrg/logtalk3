@@ -35,9 +35,9 @@ Logtalk compiler and runtime
 execution-context argument of compiled predicate clauses for non-parametric
 objects.
 
-* CHANGED: Calls to the `parameter/2` and `this/1` execution context methods
-in a multifile predicate clause now return solutions based on the entity for
-which the clause is defined.
+* FIXED: Calls to the `parameter/2` and `this/1` built-in execution-context
+methods in a multifile predicate clause now return solutions based on the
+entity for which the clause is defined as per documentation.
 
 * FIXED: Asserting predicate rules using the `asserta/1` and `assertz/1`
 built-in methods. Thanks to Andreas Becker for the bug report.
@@ -49,6 +49,9 @@ Tests
 -----
 
 * ADDED: Some more unit tests for the built-in database methods.
+
+* ADDED: Some more unit tests for the `parameter/2` and `this/1` built-in
+execution-context methods.
 
 * UPDATED: The `logtalk_tester.sh` script now also looks for `tester.logtalk`
 files.
