@@ -229,7 +229,7 @@
 :- dynamic('$lgt_pp_meta_predicate_'/2).					% '$lgt_pp_meta_predicate_'(PredTemplate, MetaTemplate)
 :- dynamic('$lgt_pp_predicate_alias_'/3).					% '$lgt_pp_predicate_alias_'(Entity, Pred, Alias)
 :- dynamic('$lgt_pp_non_terminal_'/3).						% '$lgt_pp_non_terminal_'(Functor, Arity, ExtArity)
-:- dynamic('$lgt_pp_multifile_'/3).							% '$lgt_pp_multifile_'(Functor, Arity, Lines)
+:- dynamic('$lgt_pp_multifile_'/2).							% '$lgt_pp_multifile_'(Head, Lines)
 :- dynamic('$lgt_pp_coinductive_'/5).						% '$lgt_pp_coinductive_'(Head, TestHead, TCHead, THead, DHead)
 
 :- dynamic('$lgt_pp_object_'/11).							% '$lgt_pp_object_'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, Flags)
@@ -5713,7 +5713,7 @@ current_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_pp_private_'(_, _)),
 	retractall('$lgt_pp_dynamic_'(_)),
 	retractall('$lgt_pp_discontiguous_'(_, _)),
-	retractall('$lgt_pp_multifile_'(_, _, _)),
+	retractall('$lgt_pp_multifile_'(_, _)),
 	retractall('$lgt_pp_coinductive_'(_, _, _, _, _)),
 	retractall('$lgt_pp_mode_'(_, _)),
 	retractall('$lgt_pp_meta_predicate_'(_, _)),
@@ -7473,7 +7473,8 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
 	'$lgt_current_line_numbers'(Lines),
-	assertz('$lgt_pp_multifile_'(Functor, Arity, Lines)),
+	functor(Head, Functor, Arity),
+	assertz('$lgt_pp_multifile_'(Head, Lines)),
 	'$lgt_pp_entity_'(_, _, Prefix, _, _),
 	'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity))).
@@ -7482,7 +7483,8 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, _, ExtArity),
 	!,
 	'$lgt_current_line_numbers'(Lines),
-	assertz('$lgt_pp_multifile_'(Functor, ExtArity, Lines)),
+	functor(Head, Functor, ExtArity),
+	assertz('$lgt_pp_multifile_'(Head, Lines)),
 	'$lgt_pp_entity_'(_, _, Prefix, _, _),
 	'$lgt_construct_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
 	assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity))).
@@ -12890,7 +12892,7 @@ current_logtalk_flag(Flag, Value) :-
 		Coinductive = 32				% 0b00100000
 	;	Coinductive = 0
 	),
-	(	'$lgt_pp_multifile_'(Functor, Arity, _) ->
+	(	'$lgt_pp_multifile_'(Pred, _) ->
 		Multifile = 16					% 0b00010000
 	;	Multifile = 0
 	),
@@ -12933,6 +12935,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	'$lgt_pp_private_'(Functor, Arity)
 	),
 	functor(Head, Functor, Arity),
+	\+ '$lgt_pp_multifile_'(Head, _),
 	\+ '$lgt_pp_dynamic_'(Head),
 	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _),
 	% declared, static, but undefined predicate;
@@ -12944,7 +12947,9 @@ current_logtalk_flag(Flag, Value) :-
 	% categories cannot contain clauses for dynamic predicates;
 	% thus, in this case, we look only into objects
 	'$lgt_pp_entity_'(object, _, Prefix, _, _),
-	'$lgt_pp_dynamic_'(Head),
+	(	'$lgt_pp_dynamic_'(Head)
+	;	'$lgt_pp_multifile_'(Head, _)
+	),
 	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _),
 	% dynamic predicate with no initial set of clauses
 	'$lgt_comp_ctx_prefix'(Ctx, Prefix),
@@ -14273,7 +14278,7 @@ current_logtalk_flag(Flag, Value) :-
 	% predicate not defined in object/category
 	\+ '$lgt_pp_dynamic_'(Head),
 	% predicate not declared dynamic in object/category
-	\+ '$lgt_pp_multifile_'(Functor, Arity, _),
+	\+ '$lgt_pp_multifile_'(Head, _),
 	% predicate not declared multifile in object/category
 	Arity2 is Arity - 2,
 	% only return predicates that are not the expansion of grammar rules
@@ -14295,7 +14300,7 @@ current_logtalk_flag(Flag, Value) :-
 	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _),
 	\+ '$lgt_pp_dynamic_'(Head),
 	% no dynamic directive for the corresponding predicate
-	\+ '$lgt_pp_multifile_'(Functor, ExtArity, _),
+	\+ '$lgt_pp_multifile_'(Head, _),
 	% predicate not declared multifile in object/category
 	once((	'$lgt_pp_public_'(Functor, ExtArity)
 		;	'$lgt_pp_protected_'(Functor, ExtArity)
@@ -14319,8 +14324,9 @@ current_logtalk_flag(Flag, Value) :-
 % reports missing public/1 directives for multifile predicates
 
 '$lgt_report_missing_directives'(Type, Entity, Path) :-
-	'$lgt_pp_multifile_'(Functor, Arity, Lines),
+	'$lgt_pp_multifile_'(Head, Lines),
 	% declared multifile predicate
+	functor(Head, Functor, Arity),
 	\+ '$lgt_pp_public_'(Functor, Arity),
 	% but missing corresponding public /1 directive
 	'$lgt_increment_compile_warnings_counter',

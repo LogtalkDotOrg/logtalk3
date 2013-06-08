@@ -42,6 +42,9 @@ which the clause is defined.
 * FIXED: Asserting predicate rules using the `asserta/1` and `assertz/1`
 built-in methods. Thanks to Andreas Becker for the bug report.
 
+* FIXED: Clauses for a multifile predicate would not be found if the entity
+holding the primary declaration defined no clauses for the predicate.
+
 Tests
 -----
 
