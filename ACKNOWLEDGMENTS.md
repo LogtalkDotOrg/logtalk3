@@ -30,7 +30,7 @@ AUTHORS
 CONTRIBUTORS
 ============
 
-* Andreas Becker (PDT support for Logtalk)
+* Andreas Becker (PDT support for Logtalk, bug reports)
 * Artur Miguel Dias (testing, lambda expression examples)
 * Clara Dimene (GeSHi syntax highlighter)
 * Daniel L. Dudley (made the ISO 8601 library object available)
