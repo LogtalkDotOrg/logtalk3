@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Unit testing automation script
-##   Last updated on June 3, 2013
+##   Last updated on June 8, 2013
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -232,7 +232,7 @@ do
 				grep 'tests:' "$results/$name.results" | sed 's/\(% [0-9]* tests: [0-9]* skipped, \)\([0-9]*\)\(.*\)/\2/' >> "$results/passed"
 			fi
 			grep 'out of' "$results/$name.results" | sed 's/%/*****        /'
-			grep 'no coverage information collected' "$results/$name.results" | sed 's/%/*****        /'
+			grep 'no code coverage information collected' "$results/$name.results" | sed 's/%/*****        /'
 			grep '(not applicable)' "$results/$name.results" | sed 's/(/*****         (/'
 		fi
 		for subunit in *
@@ -265,7 +265,7 @@ do
 						grep 'tests:' "$results/$subname.results" | sed 's/\(% [0-9]* tests: [0-9]* skipped, \)\([0-9]*\)\(.*\)/\2/' >> "$results/passed"
 					fi
 					grep 'out of' "$results/$subname.results" | sed 's/%/*****        /'
-					grep 'no coverage information collected' "$results/$subname.results" | sed 's/%/*****        /'
+					grep 'no code coverage information collected' "$results/$subname.results" | sed 's/%/*****        /'
 					grep '(not applicable)' "$results/$subname.results" | sed 's/(/*****         (/'
 				fi
 				cd ..

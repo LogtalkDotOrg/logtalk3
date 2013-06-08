@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/02/03,
+		date is 2013/06/08,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -121,8 +121,8 @@
 		{numbervars(Entity, 0, _)},
 		['~q: ~q - ~w (~w)'-[Entity, Predicate, Covered, Ratio], nl]. 
 
-	logtalk::message_tokens(no_coverage_information_collected, lgtunit) -->
-		['no coverage information collected'-[], nl].
+	logtalk::message_tokens(no_code_coverage_information_collected, lgtunit) -->
+		['no code coverage information collected'-[], nl].
 
 	% messages for test identifier errors
 

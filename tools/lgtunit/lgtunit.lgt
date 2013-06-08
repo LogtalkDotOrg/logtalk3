@@ -30,7 +30,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/05/24,
+		date is 2013/06/08,
 		comment is 'A simple unit test framework featuring predicate clause coverage.'
 	]).
 
@@ -453,7 +453,7 @@
 			write_coverage_results(Entities),
 			setof(Unit, ::unit(Unit), Units),
 			write_coverage_results_summary(Units, Entities)
-		;	print_message(information, lgtunit, no_coverage_information_collected)
+		;	print_message(information, lgtunit, no_code_coverage_information_collected)
 		).
 
 	fired_entity(Entity) :-
