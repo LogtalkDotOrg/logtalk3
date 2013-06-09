@@ -30,7 +30,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/06/09,
+		date is 2013/06/08,
 		comment is 'A simple unit test framework featuring predicate clause coverage.'
 	]).
 
@@ -57,7 +57,7 @@
 	:- public(('=~=')/2).
 	:- mode('=~='(+float, +float), zero_or_one).
 	:- info(('=~=')/2, [
-		comment is 'Compares two floats for approximate equality using the expression |v-u| <= epsilon*max(|u|,|v|) as found on "The Art of Computer Programming" by Donald E. Knuth.',
+		comment is 'Compares two floats for approximate equality using 100*epsilon for the absolute error and, if that fails, 99.999% accuracy for the relative error. Handy when writing certain unit tests but the default precision values may not be adequate for all cases.',
 		argnames is ['Float1', 'Float2']
 	]).
 
@@ -392,8 +392,15 @@
 		).
 
 	'=~='(Float1, Float2) :-
-		epsilon(Epsilon),
-		abs(Float1 - Float2) =< Epsilon*max(abs(Float1), abs(Float2)).
+		(	% first test the absolute error, for meaningful results with numbers very close to zero:
+			epsilon(Epsilon), abs(Float1 - Float2) < 100*Epsilon ->
+			true
+		;	% if that fails, test the relative error (protected by a catch/3 to avoid division errors)
+		 	% by using as the divisor the larger float in order to make argument order irrelevant:
+			abs(Float1) > abs(Float2) ->
+			catch(abs((Float1 - Float2) / Float1) < 0.00001, _, fail)	% 99.999% accuracy
+		;	catch(abs((Float1 - Float2) / Float2) < 0.00001, _, fail)
+		).
 
 	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == swi; Dialect == yap; Dialect == gnu; Dialect == b; Dialect == cx))).
 		epsilon(Epsilon) :-

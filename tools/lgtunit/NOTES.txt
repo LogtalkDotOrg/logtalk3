@@ -27,11 +27,7 @@ Overview
 
 The `lgtunit.lgt` file contains a simple framework for defining and
 running unit tests in Logtalk. The `lgtunit_messages.lgt` file defines
-the default message translations. For batch processing of unit tests on
-POSIX systems, see the `scripts/logtalk_tester.sh` shell script.
-
-All source files are formatted using tabs (the recommended setting is a
-tab width equivalent to 4 spaces).
+the default message translations.
 
 
 Compiling and loading unit tests
@@ -155,3 +151,7 @@ number of clauses smaller than the covered clauses. This results from the
 use of dynamic predicates with clauses asserted at runtime. You may easily
 identify dynamic predicates in the results as their clauses often have a
 initial count equal to zero.
+
+
+All source files are formatted using tabs (the recommended setting is a tab
+width equivalent to 4 spaces).
