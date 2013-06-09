@@ -45,6 +45,13 @@ built-in methods. Thanks to Andreas Becker for the bug report.
 * FIXED: Clauses for a multifile predicate would not be found if the entity
 holding the primary declaration defined no clauses for the predicate.
 
+Tools
+-----
+
+* CHANGED: The `lgtunit` tool now uses the approximately equality definition
+found on the "The Art of Computer Programming" by Donald E. Knuth for comparing
+floating point numbers.
+
 Tests
 -----
 
