@@ -25,6 +25,16 @@ RELEASE NOTES
 =============
 
 
+3.00.0 Alpha 20 - July ??, 2013
+===============================
+
+Logtalk compiler and runtime
+----------------------------
+
+* IMPROVED: Only load the default built-in entities if not already loaded in
+order to simplify embedding Logtalk in compiled Prolog applications.
+
+
 3.00.0 Alpha 19 - June 10, 2013
 ===============================
 
