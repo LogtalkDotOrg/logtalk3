@@ -34,6 +34,9 @@ Logtalk compiler and runtime
 * IMPROVED: Only load the default built-in entities if not already loaded in
 order to simplify embedding Logtalk in compiled Prolog applications.
 
+* ADDED: Sample code to the `settings-sample.lgt` file for suppressing some or
+all startup messages.
+
 
 3.00.0 Alpha 19 - June 10, 2013
 ===============================

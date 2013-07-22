@@ -252,3 +252,27 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 	set_logtalk_flag(source_data, off)
 )).
 */
+
+
+%  To suppress some or all startup messages, uncomment the following lines:
+
+/*
+:- category(my_logtalk_startup_settings).
+
+	:- multifile(logtalk::message_hook/4).
+	:- dynamic(logtalk::message_hook/4).
+
+	% uncomment the next line to suppress the startup banner
+	%logtalk::message_hook(banner, banner, core, _).
+
+	% uncomment the next line to suppress the startup printing of default flags
+	%logtalk::message_hook(default_flags, comment(settings), core, _).
+
+	% uncomment the next line to suppress the startup printing of the loaded settings file
+	%logtalk::message_hook(loaded_settings_file(_), comment(settings), core, _).
+
+	% uncomment the next line to suppress the startup printing of settings information (except warnings and errors)
+	%logtalk::message_hook(_, comment(settings), core, _).
+
+:- end_category.
+*/
