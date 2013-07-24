@@ -37,6 +37,12 @@ order to simplify embedding Logtalk in compiled Prolog applications.
 * ADDED: Sample code to the `settings-sample.lgt` file for suppressing some or
 all startup messages.
 
+Examples
+--------
+
+* FIXED: The `benchmarks` example `loader.lgt` didn't ensure compilation of the
+source files with the `optimize` flag set. 
+
 
 3.00.0 Alpha 19 - June 10, 2013
 ===============================
