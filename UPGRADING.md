@@ -66,22 +66,24 @@ object but a separate tool, `debugger`. Logtalk 3.x greatly improves support
 for source file paths, removing the need for the `altdirs` flag. The flag
 `startup_message` is removed due to the introduction on structured message
 printing in Logtalk 3.x, which allows fine grained control over message
-printing. The `smart_compilation` flag is no longer necessary and the old
-behavior can now be controlled using the `clean` flag. The `reload` flag,
-which was mainly used for indirectly allowing static binding is no longer
-required as static binding optimizations now depend on the `optimize` flag.
+printing (see also the provided sample settings file). The `smart_compilation`
+flag is no longer necessary and the old behavior can now be controlled using
+the `clean` flag. The `reload` flag, which was mainly used for indirectly
+allowing static binding is no longer required as static binding optimizations
+now depend on the `optimize` flag.
 
 
 Deprecated directives and control constructs
 --------------------------------------------
 
 The `:/1` control construct is deprecated in Logtalk 3.x. Its functionality
-subsumed by the `^^/1` control construct (aka "super" control construct),
+is subsumed by the `^^/1` control construct (aka "super" control construct),
 which have been generalized to allow calling any imported or inherited
-predicate. In addition, full support for the `^^/1` control construct have
-been implemented (enabled by turning on the `optimize` compiler flag).
+predicate. In addition, static binding support for the `^^/1` control
+construct have been implemented (enabled by turning on the `optimize`
+compiler flag).
 
 The documentation only directives `calls/1` and `uses/1` are deprecated. The
 reflection API in Logtalk 3.x now returns all object (and module) dependencies
 found on sufficiently instantiated `::/2` and `:/2` calls when compiling an
-object.
+object or a category.
