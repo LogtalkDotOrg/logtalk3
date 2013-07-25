@@ -37,6 +37,13 @@ order to simplify embedding Logtalk in compiled Prolog applications.
 * ADDED: Sample code to the `settings-sample.lgt` file for suppressing some or
 all startup messages.
 
+Prolog adapter and integration files
+------------------------------------
+
+* ADDED: Description of a workaround for supporting settings files in the
+current directory when using ECLiPSe as the back-end Prolog compiler on
+Windows.
+
 Examples
 --------
 

@@ -103,6 +103,13 @@ ECLiPSe 6.1#143 or later versions
 	instead of replacing them.
 
 	On Windows, settings files are only supported on the Logtalk user folder.
+	A workaround is to copy the integration shortcut to where you want to start
+	Logtalk and edit its "Target" field contents to start with the following
+	string (without the quotes):
+
+	"C:\Windows\System32\cmd.exe /c set LOGTALK_STARTUP_DIRECTORY=%CD% && "
+	
+	You must also delete the contents of the "Start in" field.
 
 
 GNU Prolog 1.4.2 and later versions
