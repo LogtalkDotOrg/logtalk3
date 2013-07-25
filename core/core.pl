@@ -18687,7 +18687,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_print_message'(error, core, error_loading_settings_file(Path, Error)).
 
 '$lgt_report_settings_file'(none) :-
-	'$lgt_print_message'(warning(settings), core, no_settings_file_found).
+	'$lgt_print_message'(comment(settings), core, no_settings_file_found).
 
 
 

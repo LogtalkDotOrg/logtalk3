@@ -37,6 +37,9 @@ order to simplify embedding Logtalk in compiled Prolog applications.
 * ADDED: Sample code to the `settings-sample.lgt` file for suppressing some or
 all startup messages.
 
+* CHANGED: Print the startup message that a settings files could not be found
+as a comment instead of as a warning and also make it more informative.
+
 Prolog adapter and integration files
 ------------------------------------
 
