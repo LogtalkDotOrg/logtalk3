@@ -23,11 +23,13 @@
 
 
 % load Logtalk core files
-:- consult('$LOGTALKHOME/adapters/swi.pl').
-:- consult('$LOGTALKHOME/paths/paths.pl').
-:- consult('$LOGTALKHOME/integration/logtalk_comp_swi.pl').
-:- consult('$LOGTALKHOME/adapters/swihooks.pl').
-:- (	absolute_file_name(library(pce), _, [file_type(prolog), access(read), file_errors(fail)]) ->
-		consult('$LOGTALKHOME/adapters/xpcehooks.pl')
+:-	getenv('LOGTALKHOME', LogtalkHome0),
+	prolog_to_os_filename(LogtalkHome, LogtalkHome0),
+	atom_concat(LogtalkHome, '/adapters/swi.pl', AdapterFile), consult(AdapterFile),
+	atom_concat(LogtalkHome, '/paths/paths.pl', PathsFile), consult(PathsFile),
+	atom_concat(LogtalkHome, '/integration/logtalk_comp_swi.pl', IntegrationFile), consult(IntegrationFile),
+	atom_concat(LogtalkHome, '/adapters/swihooks.pl', HooksFile), consult(HooksFile),
+	(	absolute_file_name(library(pce), _, [file_type(prolog), access(read), file_errors(fail)]) ->
+		atom_concat(LogtalkHome, '/adapters/xpcehooks.pl', XPCEHooksFile), consult(XPCEHooksFile)
 	;	true
 	).
