@@ -22,7 +22,7 @@ ________________________________________________________________________
 
 
 This file contains some notes about the adapter files provided. The folder
-"unsupported" contains adapter files for Prolog compilers that are no longer
+`unsupported` contains adapter files for Prolog compilers that are no longer
 officially supported.
 
 If you improve or correct some of these files, or write new ones for other
@@ -37,7 +37,7 @@ towards better ISO Standard compatibility and, as a consequence, improved
 Logtalk compatibility.
 
 For details on how to integrate Logtalk with specific Prolog compilers,
-see the files in the "integration" directory of the Logtalk distribution.
+see the files in the `integration` directory of the Logtalk distribution.
 
 The adapter files may include hacked definitions for missing ISO Prolog
 standard and de-facto standard built-in predicates. These definitions aim
@@ -46,207 +46,217 @@ are not intended as a full replacement for missing functionality.
 
 
 template adapter file
+---------------------
 
 	template.pl
 
-	If a adapter file for your favorite Prolog is not available, use this 
-	file as a template for writing one. For each predicate in the file, 
-	check if it is built-in in your Prolog, available in a library, or if 
-	you can write a better definition.
+If a adapter file for your favorite Prolog is not available, use this 
+file as a template for writing one. For each predicate in the file, 
+check if it is built-in in your Prolog, available in a library, or if 
+you can write a better definition.
 
 
 B-Prolog 7.8 and later versions
+-------------------------------
 
 	b.pl
 
-	For B-Prolog 7.8 and later versions. Note that this adapter file
-	redefines the B-Prolog ::/2 finite-domain built-in predicate
-	(you may use the alternative in/2 built-in predicate instead).
+For B-Prolog 7.8 and later versions. Note that this adapter file
+redefines the B-Prolog `::/2` finite-domain built-in predicate
+(you may use the alternative `in/2` built-in predicate instead).
 
-	Some of the B-Prolog built-in predicates (e.g. set_to_list/2 or (@=)/2) 
-	are not core predicates and can be redefined by the user. The predicate 
-	predicate_property/2 does not return the property "built_in" for these 
-	predicates. The solution is to encapsulate calls to these predicates 
-	within objects and categories using the Logtalk {}/1 control construct.
+Some of the B-Prolog built-in predicates (e.g. `set_to_list/2` or `(@=)/2`) 
+are not core predicates and can be redefined by the user. The predicate 
+`predicate_property/2` does not return the property `built_in` for these 
+predicates. The solution is to encapsulate calls to these predicates 
+within objects and categories using the Logtalk `{}/1` control construct.
 
-    You may need to increase the sizes of the code areas on the integration
-    scripts if you run into out-of-memory errors with complex applications.
+You may need to increase the sizes of the code areas on the integration
+scripts if you run into out-of-memory errors with complex applications.
 
 
 CxProlog 0.97.6 or later versions
+---------------------------------
 
 	cx.pl
 
-	Developed and tested with the help of the CxProlog author, Artur Miguel
-	Dias.
+Developed and tested with the help of the CxProlog author, Artur Miguel Dias.
 
 
 ECLiPSe 6.1#143 or later versions
+---------------------------------
 
 	eclipse.pl
 
-	There is a clash between Logtalk and ECLiPSe regarding the ::/2 operator.
-	You may still use the ::/2 operator defined on the ECLiPSe constraint 
-	solver libraries by using explicit module qualification by writing 
-	"{library:(Var::Domain)}" (replace "library" by the actual library name; 
-	the {}/1 control construct allows you to bypass the Logtalk compiler).
+There is a clash between Logtalk and ECLiPSe regarding the `::/2` operator.
+You may still use the `::/2` operator defined on the ECLiPSe constraint 
+solver libraries by using explicit module qualification by writing 
+`{library:(Var::Domain)}` (replace `library` by the actual library name; 
+the `{}/1` control construct allows you to bypass the Logtalk compiler).
 
-	ECLiPSE 6.0#78 adds an alias in_set_range/2 for ::/2 that can be used
-	to avoid conflicts with Logtalk ::/2 message sending operator.
+ECLiPSe defines an alias `in_set_range/2` for `::/2` that can be used to
+avoid conflicts with Logtalk `::/2` message sending operator.
 
-	Adopted from a adapter file written and tested with help of Taner Bilgic 
-	for Logtalk 1.x.
+Adopted from a adapter file written and tested with help of Taner Bilgic 
+for Logtalk 1.x.
 
-	With this Prolog compiler, avoid reloading Logtalk source files defining
-	dynamic predicates. Due to the semantics of the ECLiPSe built-in predicate
-	compile/1, new clauses for dynamic predicates are appended to the old ones
-	instead of replacing them.
+With this Prolog compiler, avoid reloading Logtalk source files defining
+dynamic predicates. Due to the semantics of the ECLiPSe built-in predicate
+`compile/1`, new clauses for dynamic predicates are appended to the old ones
+instead of replacing them.
 
-	On Windows, settings files are only supported on the Logtalk user folder.
-	A workaround is to copy the integration shortcut to where you want to start
-	Logtalk and edit its "Target" field contents to start with the following
-	string (without the quotes):
+On Windows, settings files are only supported on the Logtalk user folder.
+A workaround is to copy the integration shortcut to where you want to start
+Logtalk and edit its `Target` field contents to start with the following
+text:
 
-	"C:\Windows\System32\cmd.exe /c set LOGTALK_STARTUP_DIRECTORY=%CD% && "
-	
-	You must also delete the contents of the "Start in" field.
+	C:\Windows\System32\cmd.exe /c set LOGTALK_STARTUP_DIRECTORY=%CD% &&
+
+You must also delete the contents of the `Start in` field.
 
 
 GNU Prolog 1.4.2 and later versions
+-----------------------------------
 
 	gnu.pl
 
-	GNU Prolog supports the ISO Prolog standard. No problems expected.
+GNU Prolog supports the ISO Prolog standard. No problems expected.
 
-	You can generate a new Prolog top level that embeds Logtalk by following
-	the steps (exemplified for POSIX systems):
+You can generate a new Prolog top level that embeds Logtalk by following
+the steps (exemplified for POSIX systems):
 
-		$ gplgt
-		...
-		| ?- logtalk_compile([
-			logtalk_home('core/core_messages'),
-			logtalk_home('core/expanding'),
-			logtalk_home('core/monitoring'),
-			logtalk_home('core/forwarding')],
-			[scratch_directory('$HOME/collect')]).
+	$ gplgt
+	...
+	| ?- logtalk_compile([
+		logtalk_home('core/core_messages'),
+		logtalk_home('core/expanding'),
+		logtalk_home('core/monitoring'),
+		logtalk_home('core/forwarding')],
+		[scratch_directory('$HOME/collect')]).
 
-		$ cp $LOGTALKHOME/adapters/gnu.pl $HOME/collect/gnu.pl
-		$ cp $LOGTALKHOME/paths/paths.pl $HOME/collect/paths.pl
-		$ cp $LOGTALKHOME/core/core.pl $HOME/collect/core.pl
+	$ cp $LOGTALKHOME/adapters/gnu.pl $HOME/collect/gnu.pl
+	$ cp $LOGTALKHOME/paths/paths.pl $HOME/collect/paths.pl
+	$ cp $LOGTALKHOME/core/core.pl $HOME/collect/core.pl
 
-	Edit the $HOME/collect/core.pl file and add the line ":- built_in." to
-	the top. Then:
+Edit the `$HOME/collect/core.pl` file and add the line `:- built_in.` to
+the top. Then:
 
-		$ cd $HOME/collect
-		$ gplc -o logtalk gnu.pl paths.pl core_messages.pl expanding.pl monitoring.pl forwarding.pl core.pl
+	$ cd $HOME/collect
+	$ gplc -o logtalk gnu.pl paths.pl core_messages.pl expanding.pl monitoring.pl forwarding.pl core.pl
 
-	Finally, move the new executable to a directory in your system PATH.
-	For example:
+Finally, move the new executable to a directory in your system PATH.
+For example:
 
-		$ mv logtalk /usr/local/bin/
+	$ mv logtalk /usr/local/bin/
 
-	This way, every time you want to work with Logtalk you will just need 
-	to type:
+This way, every time you want to work with Logtalk you will just need 
+to type:
 
-		$ logtalk
+	$ logtalk
 
 
 Lean Prolog 3.7.10 and later versions
+-------------------------------------
 
 	lean.pl
 
-	The support for this Prolog compiler is still experimental.
+The support for this Prolog compiler is still experimental.
 
 
 Qu-Prolog 9.0 and later versions
+--------------------------------
 
 	qp.pl
 
-	Know issues in Qu-Prolog 9.0: (1) this version doesn't support static
-	multifile predicates. This limitation may be fixed in later versions;
-	(2) a bug in the Windows version of Qu-Prolog in the expansion of file
-	paths containing environment variables prevents using it with Logtalk
-	in this operating-system.
+Know issues in Qu-Prolog 9.0: (1) this version doesn't support static
+multifile predicates. This limitation may be fixed in later versions;
+(2) a bug in the Windows version of Qu-Prolog in the expansion of file
+paths containing environment variables prevents using it with Logtalk
+in this operating-system.
 
-	Written and tested with the help of Peter Robinson.
+Written and tested with the help of Peter Robinson.
 
 
 SICStus Prolog 4.1.0 and later versions
+---------------------------------------
 
 	sicstus.pl
 
-	Adapter file for SICStus Prolog.
+Adapter file for SICStus Prolog.
 
 
 SWI Prolog 6.0.0 and later versions
+-----------------------------------
 
 	swi.pl
 	swihooks.pl
 	xpcehooks.pl
 
-	No problems expected. Please report any problem found (with a solution 
-	if possible).
-	
-	To improve the integration between Logtalk and SWI-Prolog, the file
-	"swihooks.pl" allows loading of Logtalk source files using SWI-Prolog
-	load_files/2 and consult/1 predicates and adds support edit/1, make/0,
-	the XPCE profiler, and the XPCE graphical tracer.
+No problems expected. Please report any problem found (with a solution 
+if possible).
 
-	The adapter file may set the "iso" SWI-Prolog flag to "true". This setting
-	may improve compatibility of Logtalk code across different back-end 
-	Prolog compilers buy may also cause compatibility problems with some 
-	SWI-Prolog libraries. Comment out the corresponding set_prolog_flag/2 
-	call if necessary.
+To improve the integration between Logtalk and SWI-Prolog, the file
+`swihooks.pl` allows loading of Logtalk source files using SWI-Prolog
+`load_files/2` and `consult/1` predicates and adds support for the `edit/1`
+and `make/0` predicates, the XPCE profiler, and the XPCE graphical tracer.
 
-	If you intend to use Logtalk and XPCE at the same time, you may load the 
-	xpcehooks.pl file in order to support Logtalk message sending goals as
-	XPCE call-back goals.
+The adapter file may set the `iso` SWI-Prolog flag to `true`. This setting
+may improve compatibility of Logtalk code across different back-end 
+Prolog compilers buy may also cause compatibility problems with some 
+SWI-Prolog libraries. Comment out the corresponding `set_prolog_flag/2` 
+call if necessary.
 
-	With multi-threading support turned on, you may get an harmless message
-	when halting the system regarding threads that wouldn't die: you can 
-	suppress the message on POSIX systems by using "% swilgt 2> /dev/null".
+If you intend to use Logtalk and XPCE at the same time, you may load the 
+`xpcehooks.pl` file in order to support Logtalk message sending goals as
+XPCE call-back goals.
 
-	The definition of the predicate {}/1 in the adapter file conflicts with 
-	the "clpq" and "clpr" SWI-Prolog constraint libraries. The {}/1 predicate
-	is used in Logtalk as a shortcut to the logtalk_load/1 built-in predicate.
-	Comment out the definition in the adapter file if necessary. Note that 
-	Logtalk also defines a {}/1 control construct but this is only used within
-	objects and categories.
+With multi-threading support turned on, you may get an harmless message
+when halting the system regarding threads that wouldn't die: you can 
+suppress the message on POSIX systems by using `% swilgt 2> /dev/null`.
 
-	Logtalk doesn't rely on the SWI-Prolog auto-loading mechanism for library
-	predicates. Calls of these predicates within objects and categories must
-	be explicitly qualified or implicit qualified by listing the predicates
-	in use_module/2 directives). You may also set the Logtalk "portability"
-	and "misspelt_calls" compiler flags to "warning" in order to detect
-	unqualified calls to library predicates. The module libraries should be
-	loaded prior to compilation of object and categories containing calls to
-	the library predicates.
+The definition of the predicate `{}/1` in the adapter file conflicts with 
+the `clpq` and `clpr` SWI-Prolog constraint libraries. The `{}/1` predicate
+is used in Logtalk as a shortcut to the `logtalk_load/1` built-in predicate.
+Comment out the definition in the adapter file if necessary. Note that 
+Logtalk also defines a `{}/1` control construct but this is only used within
+objects and categories.
+
+Logtalk doesn't rely on the SWI-Prolog auto-loading mechanism for library
+predicates. Calls of these predicates within objects and categories must
+be explicitly qualified or implicit qualified by listing the predicates
+in `use_module/2` directives). You may also set the Logtalk `portability`
+and `misspelt_calls` compiler flags to `warning` in order to detect
+unqualified calls to library predicates. The module libraries should be
+loaded prior to compilation of object and categories containing calls to
+the library predicates.
 
 
 XSB 3.3 and later versions
+--------------------------
 
 	xsb.pl
 
-	XSB generates intermediate files (with a ".xwam" extension) when compiling
-	Prolog source files (thus including the Logtalk core files). Thus, you
-	must either install Logtalk on on a location where you have write access
-	or perform the first run of the integration scripts from an admin account.
+XSB generates intermediate files (with a `.xwam` extension) when compiling
+Prolog source files (thus including the Logtalk core files). Thus, you
+must either install Logtalk on on a location where you have write access
+or perform the first run of the integration scripts from an admin account.
 
-	Know issue in XSB 3.3: this version doesn't support static multifile
-	predicates. This limitation may be fixed in later versions.
+Know issue in XSB 3.3: this version doesn't support static multifile
+predicates. This limitation may be fixed in later versions.
 
 
 YAP 6.0.2 and later versions
+----------------------------
 
 	yap.pl
 	yaphooks.pl
 
-	The adapter file may set the flag "language" to "iso", but that is only
-	recommended and should not be needed to run Logtalk as some of the YAP
-	libraries may not be compatible with this flag setting.
+The adapter file may set the flag `language` to `iso`, but that is only
+recommended and should not be needed to run Logtalk as some of the YAP
+libraries may not be compatible with this flag setting.
 
-	The "yaphooks.pl" file defines YAP hook predicates for improving the
-	integration between Logtalk and YAP.
+The `yaphooks.pl` file defines YAP hook predicates for improving the
+integration between Logtalk and YAP.
 
-	Note that YAP can be compiled with or without support for features like
-	tabling or threads.
+Note that YAP can be compiled with or without support for features like
+tabling or threads.

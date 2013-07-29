@@ -38,7 +38,8 @@ order to simplify embedding Logtalk in compiled Prolog applications.
 all startup messages.
 
 * CHANGED: Print the startup message that a settings files could not be found
-as a comment instead of as a warning and also make it more informative.
+as a comment instead of as a warning and also make it more informative about
+which directories are searched.
 
 Prolog adapter and integration files
 ------------------------------------
