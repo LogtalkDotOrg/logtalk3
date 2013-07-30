@@ -20,9 +20,9 @@ Prolog compiler.
 To run all the provided unit tests with e.g. SWI-Prolog as the back-end
 compiler, open a terminal and type:
 
-$ cd $LOGTALKUSER/tests
-$ logtalk_tester -p swi
-...
-$ cd ../examples
-$ logtalk_tester -p swi
-...
+	$ cd $LOGTALKUSER/tests
+	$ logtalk_tester -p swi
+	...
+	$ cd ../examples
+	$ logtalk_tester -p swi
+	...
