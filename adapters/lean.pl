@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Lean Prolog 3.7.10 and later versions
-%  Last updated on June 1, 2013
+%  Last updated on July 30, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -820,24 +820,14 @@ mutex_unlock(_) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-':'(_, _) :-
-	fail.
+abort :- throw(abort).
 
-
-abort :-
-	throw(abort).
-
-
-break :-
-	fail.
-
-
-current_module(_) :-
-	fail.
-
-
-ensure_loaded(_) :-
-	fail.
+':'(_, _) :- fail.
+break :- fail.
+current_module(_) :- fail.
+ensure_loaded(_) :- fail.
+use_module(_) :- fail.
+use_module(_, _) :- fail.
 
 
 
