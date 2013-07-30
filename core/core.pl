@@ -6383,6 +6383,20 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_pp_term_location'(Location),
 	assertz('$lgt_pp_prolog_term_'((:- ensure_loaded(File)), Location)).
 
+'$lgt_tr_file_directive'(use_module(File), _) :-
+	% assume that use_module/1 is also a built-in predicate
+	!,
+	use_module(File),
+	'$lgt_pp_term_location'(Location),
+	assertz('$lgt_pp_prolog_term_'((:- use_module(File)), Location)).
+
+'$lgt_tr_file_directive'(use_module(File, Imports), _) :-
+	% assume that use_module/2 is also a built-in predicate
+	!,
+	use_module(File, Imports),
+	'$lgt_pp_term_location'(Location),
+	assertz('$lgt_pp_prolog_term_'((:- use_module(File, Imports)), Location)).
+
 '$lgt_tr_file_directive'(initialization(Goal), Ctx) :-
 	'$lgt_must_be'(callable, Goal),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),

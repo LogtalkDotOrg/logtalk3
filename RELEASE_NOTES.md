@@ -41,6 +41,13 @@ all startup messages.
 as a comment instead of as a warning and also make it more informative about
 which directories are searched.
 
+* CHANGED: Call source file global `use_module/1-2` directives immediately at
+compilation time. This simplifies working with Prolog module resources that
+must be loaded prior to the compilation of the rest of the source file but
+it also assumes that there are equivalent `use_module/1-2` predicates. This
+change is also consistent with the current processing of `ensure_loaded/1`
+source file global directives.
+
 Prolog adapter and integration files
 ------------------------------------
 
