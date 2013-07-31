@@ -22,11 +22,11 @@ ________________________________________________________________________
 
 
 This directory contains files that provide syntax highlighting and 
-other text editing services for writing Logtalk source files (`*.lgt`) 
-with common text editors. By default, Logtalk syntax highlighting may 
-also be applied to the Prolog adapter files (`*.pl`). Support for some
-syntax highlighters (used in e.g in wikis, source code browsers, and
-bug trackers) is also provided.
+other text editing services for writing Logtalk source files (`*.lgt`
+or `*.logtalk`) with common text editors. By default, Logtalk syntax
+highlighting may also be applied to the Prolog adapter files (`*.pl`).
+Support for some syntax highlighters (used in e.g in wikis, source code
+browsers, and bug trackers) is also provided.
 
 The files in this directory can be regarded as contributions to
 third-party text editors and syntax highlighters. Thus, as a general

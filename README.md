@@ -122,7 +122,7 @@ Logtalk installation and working environment.
 
 The file `QUICK_START.md` provides quick instructions for those of you
 in a hurry to run Logtalk, provided that your favorite Prolog compiler
-is supported.
+is supported and installed.
 
 
 8. DOCUMENTATION
