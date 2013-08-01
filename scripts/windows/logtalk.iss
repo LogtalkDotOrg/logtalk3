@@ -131,7 +131,7 @@ Name: "{group}\Logtalk - B-Prolog"; Filename: "{code:GetBPExePath}"; Parameters:
 
 Name: "{group}\Logtalk - CxProlog"; Filename: "{code:GetCxExePath}"; Parameters: "--script ""%LOGTALKHOME%\\integration\\logtalk_cx.pl"""; Comment: "Runs Logtalk with CxProlog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\cxprolog; Flags: createonlyiffileexists
 
-Name: "{group}\Logtalk - ECLiPSe 6"; Filename: "{code:GetEclipse6ExePath}"; Parameters: "-L iso -b ""$LOGTALKHOME/integration/logtalk_eclipse.pl"""; Comment: "Runs Logtalk with ECLiPSe 6"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\eclipse; Flags: createonlyiffileexists
+Name: "{group}\Logtalk - ECLiPSe"; Filename: "{code:GetEclipseExePath}"; Parameters: "-L iso -b ""$LOGTALKHOME/integration/logtalk_eclipse.pl"""; Comment: "Runs Logtalk with ECLiPSe"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\eclipse; Flags: createonlyiffileexists
 
 Name: "{group}\Logtalk - GNU Prolog"; Filename: "{code:GetGPExePath}"; Parameters: "--init-goal ""['$LOGTALKHOME/integration/logtalk_gp.pl']"""; Comment: "Runs Logtalk with GNU Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\gprolog; Flags: createonlyiffileexists
 
@@ -274,7 +274,7 @@ begin
   end
 end;
 
-function Eclipse6ExePath: String;
+function EclipseExePath: String;
 var
   ECLIPSEDIR: String;
 begin
@@ -283,26 +283,22 @@ begin
         Result := ECLIPSEDIR + '\lib\x86_64_nt\eclipse.exe'
     else if RegQueryStringValue(HKLM32, 'Software\IC-Parc\Eclipse\6.1\', 'ECLIPSEDIR', ECLIPSEDIR) then
         Result := ECLIPSEDIR + '\lib\i386_nt\eclipse.exe'
-    else if RegQueryStringValue(HKLM32, 'Software\IC-Parc\Eclipse\6.0\', 'ECLIPSEDIR', ECLIPSEDIR) then
-      Result := ECLIPSEDIR + '\lib\i386_nt\eclipse.exe'
     else
       Result := 'prolog_compiler_not_installed'
   else if RegQueryStringValue(HKLM, 'Software\IC-Parc\Eclipse\6.1\', 'ECLIPSEDIR', ECLIPSEDIR) then
-         Result := ECLIPSEDIR + '\lib\i386_nt\eclipse.exe'
-       else if RegQueryStringValue(HKLM, 'Software\IC-Parc\Eclipse\6.0\', 'ECLIPSEDIR', ECLIPSEDIR) then
          Result := ECLIPSEDIR + '\lib\i386_nt\eclipse.exe'
        else
          Result := 'prolog_compiler_not_installed'
 end;
 
-function GetEclipse6ExePath(Param: String): String;
+function GetEclipseExePath(Param: String): String;
 var
   Warning: String;
 begin
-  Result := Eclipse6ExePath;
+  Result := EclipseExePath;
   if Result = 'prolog_compiler_not_installed' then
-  begin
-    Warning := 'Failed to detect ECLiPSe Prolog 6 installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
+  begind
+    Warning := 'Failed to detect ECLiPSe Prolog installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
     MsgBox(Warning, mbError, MB_OK);
   end
 end;
@@ -578,7 +574,7 @@ begin
     Result :=
       (BPExePath = 'prolog_compiler_not_installed') and
       (CxExePath = 'prolog_compiler_not_installed') and
-      (Eclipse6ExePath = 'prolog_compiler_not_installed') and
+      (EclipseExePath = 'prolog_compiler_not_installed') and
       (GPExePath = 'prolog_compiler_not_installed') and
       (SICStusExePath = 'prolog_compiler_not_installed') and
       (SWIConExePath = 'prolog_compiler_not_installed') and
