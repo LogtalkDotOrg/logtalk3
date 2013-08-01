@@ -297,7 +297,7 @@ var
 begin
   Result := EclipseExePath;
   if Result = 'prolog_compiler_not_installed' then
-  begind
+  begin
     Warning := 'Failed to detect ECLiPSe Prolog installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
     MsgBox(Warning, mbError, MB_OK);
   end
