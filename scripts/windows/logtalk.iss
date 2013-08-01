@@ -143,9 +143,9 @@ Name: "{group}\Logtalk - SWI-Prolog (console)"; Filename: "{code:GetSWIConExePat
 
 Name: "{group}\Logtalk - SWI-Prolog (window)"; Filename: "{code:GetSWIWinExePath}"; Parameters: "-s ""%LOGTALKHOME%\integration\logtalk_swi.pl"""; Comment: "Runs Logtalk with SWI-Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\swiwin; Flags: createonlyiffileexists
 
-Name: "{group}\Logtalk - XSB"; Filename: "{code:GetXSBExePath}"; Parameters: "-l -e ""['%LOGTALKHOME%\\integration\\logtalk_xsb.pl']."""; Comment: "Runs Logtalk with XSB"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\xsb; Flags: createonlyiffileexists
+Name: "{group}\Logtalk - XSB"; Filename: "{code:GetXSBExePath}"; Parameters: "-l -e ""['%LOGTALKHOME%\\integration\\logtalk_xsb.pl']."""; Comment: "Runs Logtalk with XSB (first time may require running as administrator)"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\xsb; Flags: createonlyiffileexists
 
-Name: "{group}\Logtalk - XSB-MT"; Filename: "{code:GetXSBMTExePath}"; Parameters: "-l -e ""['%LOGTALKHOME%\\integration\\logtalk_xsbmt.pl']."""; Comment: "Runs Logtalk with XSB-MT"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\xsbmt; Flags: createonlyiffileexists
+Name: "{group}\Logtalk - XSB-MT"; Filename: "{code:GetXSBMTExePath}"; Parameters: "-l -e ""['%LOGTALKHOME%\\integration\\logtalk_xsbmt.pl']."""; Comment: "Runs Logtalk with XSB-MT (first time may require running as administrator)"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\xsbmt; Flags: createonlyiffileexists
 
 Name: "{group}\Logtalk - YAP (console)"; Filename: "{code:GetYAPConExePath}"; Parameters: "-l ""$LOGTALKHOME/integration/logtalk_yap.pl"""; Comment: "Runs Logtalk with YAP"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\yap; Flags: createonlyiffileexists
 
