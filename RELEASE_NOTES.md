@@ -35,6 +35,12 @@ Installers and installation scripts
 Windows installers, would use an incompatible ECLiPSe 6.0 version if no
 ECLiPSe 6.1 version was detected.
 
+Tests
+-----
+
+* FIXED: Skip the `discontiguous/1` directive unit tests when using XSB as the
+back-end Prolog compiler as it does not support discontiguous predicates.
+
 
 3.00.0 Alpha 20 - July 31, 2013
 ===============================
