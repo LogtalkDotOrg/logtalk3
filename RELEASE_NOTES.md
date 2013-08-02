@@ -33,7 +33,7 @@ Installers and installation scripts
 
 * FIXED: The `logtalk.iss` Inno Setup script, used for building binary
 Windows installers, would use an incompatible ECLiPSe 6.0 version if no
-ECLiPSe 6.1 was detected.
+ECLiPSe 6.1 version was detected.
 
 
 3.00.0 Alpha 20 - July 31, 2013

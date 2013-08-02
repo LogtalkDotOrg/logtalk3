@@ -44,15 +44,11 @@ scripts!):
 * Qu-Prolog:      `qplgt`
 * SICStus Prolog: `sicstuslgt`
 * SWI-Prolog:     `swilgt`
-* XSB:            `xsblgt`     (first run must use `sudo`)
-* XSB 64 bits:    `xsb64lgt`   (first run must use `sudo`)
-* XSB MT:         `xsbmtlgt`   (first run must use `sudo`)
-* XSB MT 64 bits: `xsbmt64lgt` (first run must use `sudo`)
+* XSB:            `xsblgt`     (first run may require `sudo`)
+* XSB 64 bits:    `xsb64lgt`   (first run may require `sudo`)
+* XSB MT:         `xsbmtlgt`   (first run may require `sudo`)
+* XSB MT 64 bits: `xsbmt64lgt` (first run may require `sudo`)
 * YAP:            `yaplgt`
-
-If you get an unexpected failure when using one of the Prolog integration
-scripts, consult the `adapters/NOTES.txt` file in the Logtalk installation
-folder for compatibility notes or consult the integration script man page.
 
 On MacOS X systems, `/opt/local/bin` must be in your PATH to run the scripts.
 Terminal command files for running Logtalk with selected back-end Prolog 
@@ -62,11 +58,14 @@ installer creates an alias to the Logtalk folder in the Applications folder.
 
 On Windows systems, shortcuts for running Logtalk with selected back-end 
 Prolog compilers are created on the `Start Menu/Programs/Logtalk` menu.
-The first run of the XSB integration shortcuts must be as an administrator
-(right-click on the shortcut and select the "Run as administrator" option).
+The first run of the XSB integration shortcuts may require administrator
+privileges depending on the XSB installation (right-click on the shortcut
+and select the "Run as administrator" option).
+
 If you get an unexpected failure when using one of the Prolog integration
-shortcuts, consult the `adapters/NOTES.txt` file in the Logtalk installation
-folder for compatibility notes.
+scripts or shortcuts, consult the `adapters/NOTES.txt` file in the Logtalk
+installation folder for compatibility notes. For the integration scripts,
+see also the integration script man page.
 
 2. Open the `manuals/index.html` file with a web browser.
 
