@@ -255,6 +255,8 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 
 
 %  To suppress some or all startup messages, uncomment the following lines:
+%  (you can use in alternative the `report` flag but this flag also affects
+%  source file compilation and loading reports)
 
 /*
 :- category(my_logtalk_startup_settings).
