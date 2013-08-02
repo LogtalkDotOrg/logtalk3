@@ -41,6 +41,11 @@ Tests
 * FIXED: Skip the `discontiguous/1` directive unit tests when using XSB as the
 back-end Prolog compiler as it does not support discontiguous predicates.
 
+* CHANGED: Make the multifile predicates used in the `paramerer/2` built-in
+method unit tests also dynamic to allow the tests to run when using back-end
+Prolog compilers such as Qu-Prolog and XSB that don't support static multifile
+predicates.
+
 
 3.00.0 Alpha 20 - July 31, 2013
 ===============================
