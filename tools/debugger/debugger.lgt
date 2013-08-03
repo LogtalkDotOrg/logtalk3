@@ -28,8 +28,8 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/04/07,
-		comment is 'Debugger.'
+		date is 2013/08/03,
+		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
 	% avoid a catch-22...
@@ -82,12 +82,12 @@
 		).
 
 	nodebug :-
-	(	debugging_ ->
-		retractall(debugging_),
-		retractall(tracing_),
-		write('Debugger switched off.'), nl
-	;	write('Debugger is off.'), nl
-	).
+		(	debugging_ ->
+			retractall(debugging_),
+			retractall(tracing_),
+			write('Debugger switched off.'), nl
+		;	write('Debugger is off.'), nl
+		).
 
 	suspend(Tracing) :-
 		(	tracing_ ->
@@ -144,7 +144,7 @@
 			write('Defined context spy points (Sender, This, Self, Goal):'), nl,
 			forall(
 				spying_(Sender, This, Self, Goal),
-				(write('    '), pretty_print_spypoint(Sender, This, Self, Goal), nl))
+				(write('    '), pretty_print_spy_point(Sender, This, Self, Goal), nl))
 		;	write('No context spy points are defined.'), nl
 		), nl,
 		write('Leashed ports:'), nl, write('    '),
@@ -164,7 +164,7 @@
 		;	fail
 		).
 
-	pretty_print_spypoint(Sender, This, Self, Goal) :-
+	pretty_print_spy_point(Sender, This, Self, Goal) :-
 		current_output(Output),
 		(	var(Sender) -> write('_, ')
 		;	pretty_print_vars_quoted(Output, Sender), write(', ')
@@ -317,7 +317,8 @@
 		\+ \+ spying_(Sender, This, Self, Goal).
 
 	:- multifile(logtalk::debug_handler_provider/1).
-	:- if(current_logtalk_flag(prolog_dialect, qp)).
+	:- if((current_logtalk_flag(prolog_dialect, qp); current_logtalk_flag(prolog_dialect, xsb))).
+		% Qu-Prolog and XSB don't support static multifile predicates
 		:- dynamic(logtalk::debug_handler_provider/1).
 	:- endif.
 
@@ -329,7 +330,8 @@
 		this(This).
 
 	:- multifile(logtalk::debug_handler/2).
-	:- if(current_logtalk_flag(prolog_dialect, qp)).
+	:- if((current_logtalk_flag(prolog_dialect, qp); current_logtalk_flag(prolog_dialect, xsb))).
+		% Qu-Prolog and XSB don't support static multifile predicates
 		:- dynamic(logtalk::debug_handler/2).
 	:- endif.
 
@@ -634,26 +636,26 @@
 
 	:- if(current_logtalk_flag(threads, supported)).
 
-	inc_invocation_number(New) :-
-		with_mutex(debbuger_invocation_number_mutex, inc_invocation_number_aux(New)).
+		inc_invocation_number(New) :-
+			with_mutex(debbuger_invocation_number_mutex, inc_invocation_number_aux(New)).
 
-	inc_invocation_number_aux(New) :-
-		(	retract(invocation_number_(Old)) ->
-			New is Old + 1,
-			asserta(invocation_number_(New))
-		;	% something weird happen as the previous call should never fail
-			reset_invocation_number(New)
-		).
+		inc_invocation_number_aux(New) :-
+			(	retract(invocation_number_(Old)) ->
+				New is Old + 1,
+				asserta(invocation_number_(New))
+			;	% something weird happen as the previous call should never fail
+				reset_invocation_number(New)
+			).
 
 	:- else.
 
-	inc_invocation_number(New) :-
-		(	retract(invocation_number_(Old)) ->
-			New is Old + 1,
-			asserta(invocation_number_(New))
-		;	% something weird happen as the previous call should never fail
-			reset_invocation_number(New)
-		).
+		inc_invocation_number(New) :-
+			(	retract(invocation_number_(Old)) ->
+				New is Old + 1,
+				asserta(invocation_number_(New))
+			;	% something weird happen as the previous call should never fail
+				reset_invocation_number(New)
+			).
 
 	:- endif.
 
@@ -663,55 +665,55 @@
 
 	:- if(current_logtalk_flag(prolog_dialect, cx)).
 
-	read_single_char(Char) :-
-		get_single_char(Code), put_code(Code), char_code(Char, Code),
-		(	Code =:= 10 ->
-			true
-		;	nl
-		).
+		read_single_char(Char) :-
+			get_single_char(Code), put_code(Code), char_code(Char, Code),
+			(	Code =:= 10 ->
+				true
+			;	nl
+			).
 
 	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
 
-	read_single_char(Char) :-
-		flush(user), tyi(Code), put(Code), nl, char_code(Char, Code).
+		read_single_char(Char) :-
+			flush(user), tyi(Code), put(Code), nl, char_code(Char, Code).
 
 	:- elif(current_logtalk_flag(prolog_dialect, gnu)).
 
-	read_single_char(Char) :-
-		get_key(Code), char_code(Char, Code), nl.
+		read_single_char(Char) :-
+			get_key(Code), char_code(Char, Code), nl.
 
 	:- elif(current_logtalk_flag(prolog_dialect, lean)).
 
-	read_single_char(Char) :-
-		kbd_wait(Code),
-		put_code(Code),
-		nl,
-		char_code(Char, Code).
+		read_single_char(Char) :-
+			kbd_wait(Code),
+			put_code(Code),
+			nl,
+			char_code(Char, Code).
 
 	:- elif(current_logtalk_flag(prolog_dialect, qp)).
 
-	read_single_char(Char) :-
-		flush_output, get_code(Code), char_code(Char, Code),
-		(	Code =:= 10 ->
-			true
-		;	skip(10)
-		).
+		read_single_char(Char) :-
+			flush_output, get_code(Code), char_code(Char, Code),
+			(	Code =:= 10 ->
+				true
+			;	skip(10)
+			).
 
 	:- elif(current_logtalk_flag(prolog_dialect, swi)).
 
-	read_single_char(Char) :-
-		get_single_char(Code), put_code(Code), nl, char_code(Char, Code).
+		read_single_char(Char) :-
+			get_single_char(Code), put_code(Code), nl, char_code(Char, Code).
 
 	:- else.
 
-	read_single_char(Char) :-
-		get_code(Code), char_code(Char, Code),
-		(	Code =:= 10 ->
-			true
-		;	peek_code(10) ->	% hack to workaround the lack of built-in
-			get_code(_)			% support for unbuffered character input
-		;	true
-		).
+		read_single_char(Char) :-
+			get_code(Code), char_code(Char, Code),
+			(	Code =:= 10 ->
+				true
+			;	peek_code(10) ->	% hack to workaround the lack of built-in
+				get_code(_)			% support for unbuffered character input
+			;	true
+			).
 
 	:- endif.
 

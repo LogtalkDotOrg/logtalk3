@@ -53,3 +53,7 @@
 		fcompile('$LOGTALKUSER/.core.pl', [assemble_only(true), object_file('$LOGTALKUSER/.core.qo'), compiler_heap(2048), string_table(256)])
 	),
 	load('$LOGTALKUSER/.core.qo').
+
+% workaround the lack of support for static multifile predicates
+:- dynamic('$lgt_logtalk.debug_handler_provider'/2).
+:- dynamic('$lgt_logtalk.debug_handler'/3).
