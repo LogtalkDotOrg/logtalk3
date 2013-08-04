@@ -368,7 +368,7 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 % gets a file modification time, assumed to be an opaque term but comparable
 
 '$lgt_file_modification_time'(File, Time) :-
-	file_property(File, modify_time, Time).
+	file_property(File, modify_timestamp, Time).
 
 
 % '$lgt_environment_variable'(?atom, ?atom)
