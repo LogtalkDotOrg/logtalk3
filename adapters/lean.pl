@@ -851,7 +851,7 @@ use_module(_, _) :- fail.
 
 :- index('$lgt_current_flag_'(1, 0)).
 
-:- index('$lgt_loaded_file_'(1, 1, 0, 0)).
+:- index('$lgt_loaded_file_'(1, 1, 0, 0, 0)).
 
 
 
