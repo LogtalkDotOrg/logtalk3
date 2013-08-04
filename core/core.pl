@@ -14669,8 +14669,8 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_extends_protocol_'/3),
 	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_complemented_object_'/5),
 	% file runtime clauses
-	write_canonical(Stream, (:- multifile('$lgt_loaded_file_'/4))), write(Stream, '.\n'),
-	write_canonical(Stream, (:- dynamic('$lgt_loaded_file_'/4))), write(Stream, '.\n'),
+	write_canonical(Stream, (:- multifile('$lgt_loaded_file_'/5))), write(Stream, '.\n'),
+	write_canonical(Stream, (:- dynamic('$lgt_loaded_file_'/5))), write(Stream, '.\n'),
 	(	'$lgt_pp_file_encoding_'(Encoding, _) ->
 		(	'$lgt_pp_file_bom_'(BOM) ->
 			StreamProperties = [encoding(Encoding), BOM]
