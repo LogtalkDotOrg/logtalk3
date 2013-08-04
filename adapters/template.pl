@@ -317,14 +317,11 @@ numbervars(Term, From, Next) :-
 	?????
 
 
-% '$lgt_compare_file_modification_times'(?atom, +atom, +atom)
+% '$lgt_file_modification_time'(+atom, -nonvar)
 %
-% compare file modification times
-%
-% should fail if file modification times cannot be retrived 
-% or if one of the files does not exist
+% gets a file modification time, assumed to be an opaque term but comparable
 
-'$lgt_compare_file_modification_times'(Result, File1, File2) :-
+'$lgt_file_modification_time'(File, Time) :-
 	?????
 
 

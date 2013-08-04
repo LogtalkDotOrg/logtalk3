@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Lean Prolog 3.7.10 and later versions
-%  Last updated on July 30, 2013
+%  Last updated on August 4, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -471,19 +471,13 @@ to_engine(Interactor, Pattern, Goal) :-
 	consult(File).
 
 
-% '$lgt_compare_file_modification_times'(?atom, +atom, +atom)
+% '$lgt_file_modification_time'(+atom, -nonvar)
 %
-% compare file modification times
-%
-% should fail if file modification times cannot be retrived 
-% or if one of the files does not exist
+% gets a file modification time, assumed to be an opaque term but comparable
 
-'$lgt_compare_file_modification_times'(Result, File1, File2) :-
-	newer_file_of(File1, File2, File),
-	(	File == File1 ->
-		Result = (>)
-	;	Result = (<)
-	).
+'$lgt_file_modification_time'(File, Time) :-
+	new_java_object('java.io.File'(File), Object),
+	invoke_java_method(Object, lastModified, Time).
 
 
 % '$lgt_environment_variable'(?atom, ?atom)

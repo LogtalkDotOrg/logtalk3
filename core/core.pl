@@ -125,8 +125,8 @@
 
 % table of loaded files
 
-:- multifile('$lgt_loaded_file_'/4).				% '$lgt_loaded_file_'(File, Directory, Flags, StreamProperties)
-:- dynamic('$lgt_loaded_file_'/4).
+:- multifile('$lgt_loaded_file_'/5).				% '$lgt_loaded_file_'(File, Directory, Flags, StreamProperties, TimeStamp)
+:- dynamic('$lgt_loaded_file_'/5).
 
 
 % runtime flag values
@@ -4365,9 +4365,9 @@ current_logtalk_flag(Flag, Value) :-
 
 % loaded file and library predicates
 '$lgt_logtalk._def'(expand_library_path(Library, Path), _, '$lgt_expand_library_path'(Library, Path)).
-'$lgt_logtalk._def'(loaded_file(File, Directory), _, '$lgt_loaded_file_'(File, Directory, _, _)).
-'$lgt_logtalk._def'(loaded_file(File, Directory, Flags), _, '$lgt_loaded_file_'(File, Directory, Flags, _)).
-'$lgt_logtalk._def'(loaded_file(File, Directory, Flags, StreamProperties), _, '$lgt_loaded_file_'(File, Directory, Flags, StreamProperties)).
+'$lgt_logtalk._def'(loaded_file(File, Directory), _, '$lgt_loaded_file_'(File, Directory, _, _, _)).
+'$lgt_logtalk._def'(loaded_file(File, Directory, Flags), _, '$lgt_loaded_file_'(File, Directory, Flags, _, _)).
+'$lgt_logtalk._def'(loaded_file(File, Directory, Flags, StreamProperties), _, '$lgt_loaded_file_'(File, Directory, Flags, StreamProperties, _)).
 % predicates for low-level hacking
 '$lgt_logtalk._def'(compile_aux_clauses(Clauses), _, '$lgt_compile_aux_clauses'(Clauses)).
 '$lgt_logtalk._def'(entity_prefix(Entity, Prefix), _, '$lgt_entity_prefix'(Entity, Prefix)).
@@ -4726,12 +4726,18 @@ current_logtalk_flag(Flag, Value) :-
 	% it can be a loader file loading other files in its directory
 	'$lgt_current_directory'(Current),
 	'$lgt_change_directory'(Directory),
-	(	'$lgt_loaded_file_'(Basename, Directory, _, _) ->
-		% we're reloading a source file
-		'$lgt_print_message'(silent(loading), core, reloading_file(SourceFile, Flags)),
-		'$lgt_compile_file'(SourceFile, PrologFile, Flags, loading),
-		'$lgt_load_compiled_file'(File, SourceFile, PrologFile),
-		'$lgt_print_message'(comment(loading), core, reloaded_file(SourceFile, Flags))
+	(	'$lgt_loaded_file_'(Basename, Directory, _, _, LoadingTimeStamp) ->
+		'$lgt_file_modification_time'(SourceFile, CurrentTimeStamp),
+		(	CurrentTimeStamp @=< LoadingTimeStamp ->
+			% file was not modified since loaded; no need to reload it
+			'$lgt_print_message'(comment(loading), core, skipping_reloading_file(SourceFile, Flags)),
+			true
+		;	% we're reloading a source file
+			'$lgt_print_message'(silent(loading), core, reloading_file(SourceFile, Flags)),
+			'$lgt_compile_file'(SourceFile, PrologFile, Flags, loading),
+			'$lgt_load_compiled_file'(File, SourceFile, PrologFile),
+			'$lgt_print_message'(comment(loading), core, reloaded_file(SourceFile, Flags))
+		)
 	;	% first time loading this source file
 		'$lgt_print_message'(silent(loading), core, loading_file(SourceFile, Flags)),
 		'$lgt_compile_file'(SourceFile, PrologFile, Flags, loading),
@@ -4919,6 +4925,17 @@ current_logtalk_flag(Flag, Value) :-
 			'$lgt_print_message'(comment(compiling), core, compiled_file(SourceFile, Flags))
 		)
 	).
+
+
+
+% '$lgt_compare_file_modification_times'(?atom, +atom, +atom)
+%
+% compare file modification times
+
+'$lgt_compare_file_modification_times'(Result, File1, File2) :-
+	'$lgt_file_modification_time'(File1, Time1),
+	'$lgt_file_modification_time'(File2, Time2),
+	compare(Result, Time1, Time2).
 
 
 
@@ -14661,7 +14678,8 @@ current_logtalk_flag(Flag, Value) :-
 		)
 	;	StreamProperties = []
 	),
-	Clause = '$lgt_loaded_file_'(File, Directory, Flags, StreamProperties),
+	'$lgt_file_modification_time'(Path, TimeStamp),
+	Clause = '$lgt_loaded_file_'(File, Directory, Flags, StreamProperties, TimeStamp),
 	(	SourceData == on ->
 		'$lgt_write_term_and_source_location'(Stream, Clause, aux, Path+1)
 	;	write_canonical(Stream, Clause), write(Stream, '.\n')

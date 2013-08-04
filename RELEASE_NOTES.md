@@ -28,6 +28,19 @@ RELEASE NOTES
 3.00.0 Alpha 21 - August ??, 2013
 =================================
 
+Logtalk compiler and runtime
+----------------------------
+
+* IMPROVED: Avoid reloading a source file if it was not modified since it
+was loaded.
+
+Prolog adapter and integration files
+------------------------------------
+
+* CHANGED: Moved the '$lgt_compare_file_modification_times'/3 internal
+predicate into the compiler and added a '$lgt_file_modification_time'/2
+predicate to all adapter files.
+
 Installers and installation scripts
 -----------------------------------
 

@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for IF/Prolog 5.3
-%  Last updated on June 1, 2013
+%  Last updated on August 4, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -318,14 +318,12 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 	load(File).
 
 
-% '$lgt_compare_file_modification_times'(?atom, +atom, +atom)
+% '$lgt_file_modification_time'(+atom, -nonvar)
 %
-% compare file modification times
+% gets a file modification time, assumed to be an opaque term but comparable
 
-'$lgt_compare_file_modification_times'(Result, File1, File2) :-
-	get_file_info(File1, mtime, Time1),
-	get_file_info(File2, mtime, Time2),
-	compare(Result, Time1, Time2).
+'$lgt_file_modification_time'(File, Time) :-
+	get_file_info(File, mtime, Time).
 
 
 % '$lgt_environment_variable'(?atom, ?atom)

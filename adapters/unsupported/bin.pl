@@ -385,20 +385,12 @@ setup_call_cleanup(_, _, _) :-
 	consult(File).
 
 
-% '$lgt_compare_file_modification_times'(?atom, +atom, +atom)
+% '$lgt_file_modification_time'(+atom, -nonvar)
 %
-% compare file modification times
+% gets a file modification time, assumed to be an opaque term but comparable
 
-'$lgt_compare_file_modification_times'(Result, File1, File2) :-
-	exists_file(File1),
-	exists_file(File2),
-	(	older_file(File1, File2) ->
-		Result = '<'
-	;	(	older_file(File2, File1) ->
-			Result = '>'
-		;	Result = '='
-		)
-	).
+'$lgt_file_modification_time'(File, Time) :-
+	?????
 
 
 % '$lgt_environment_variable'(?atom, ?atom)

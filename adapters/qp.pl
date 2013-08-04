@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Qu-Prolog 9.0 and later versions
-%  Last updated on June 1, 2013
+%  Last updated on August 4, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -398,14 +398,12 @@ format(Format, Arguments) :-
 	load(Name).
 
 
-% '$lgt_compare_file_modification_times'(?atom, +atom, +atom)
+% '$lgt_file_modification_time'(+atom, -nonvar)
 %
-% compare file modification times
+% gets a file modification time, assumed to be an opaque term but comparable
 
-'$lgt_compare_file_modification_times'(Result, File1, File2) :-
-	stat(File1, stat(Time1, _)),
-	stat(File2, stat(Time2, _)),
-	compare(Result, Time1, Time2).
+'$lgt_file_modification_time'(File, Time) :-
+	stat(File, stat(Time, _)).
 
 
 % '$lgt_environment_variable'(?atom, ?atom)

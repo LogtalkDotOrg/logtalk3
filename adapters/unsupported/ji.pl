@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for JIProlog 3.1.0-1 or later versions
-%  Last updated on June 1, 2013
+%  Last updated on August 4, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -349,19 +349,12 @@ format(Format, Arguments) :-
 	consult(File).
 
 
-% '$lgt_compare_file_modification_times'(?atom, +atom, +atom)
+% '$lgt_file_modification_time'(+atom, -nonvar)
 %
-% compare file modification times
-%
-% should fail if file modification times cannot be retrived 
-% or if one of the files does not exist
+% gets a file modification time, assumed to be an opaque term but comparable
 
-'$lgt_compare_file_modification_times'(Result, File1, File2) :-
-	exists_file(File1),
-	exists_file(File2),
-	file_attributes(File1, _, _, _, _, _, Time1),
-	file_attributes(File2, _, _, _, _, _, Time2),
-	compare(Result, Time1, Time2).
+'$lgt_file_modification_time'(File, Time) :-
+	file_attributes(File, _, _, _, _, _, Time).
 
 
 % '$lgt_environment_variable'(?atom, ?atom)

@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/07/25,
+		date is 2013/08/04,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -58,6 +58,9 @@
 
 	logtalk::message_tokens(loaded_file(File, _Flags), core) -->
 		['[ ~w loaded ]'-[File], nl].
+
+	logtalk::message_tokens(skipping_reloading_file(File, _Flags), core) -->
+		['[ ~w already loaded; skipping ]'-[File], nl].
 
 	logtalk::message_tokens(reloading_file(File, _Flags), core) -->
 		['[ reloading ~w ... ]'-[File], nl].

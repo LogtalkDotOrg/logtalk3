@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Ciao Prolog 1.14.0
-%  Last updated on June 1, 2013
+%  Last updated on August 4, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -357,14 +357,12 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 	ensure_loaded(File).
 
 
-% '$lgt_compare_file_modification_times'(?atom, +atom, +atom)
+% '$lgt_file_modification_time'(+atom, -nonvar)
 %
-% compare file modification times
+% gets a file modification time, assumed to be an opaque term but comparable
 
-'$lgt_compare_file_modification_times'(Result, File1, File2) :-
-	file_property(File1, mod_time(Time1)),
-	file_property(File2, mod_time(Time2)),
-	compare(Result, Time1, Time2).
+'$lgt_file_modification_time'(File, Time) :-
+	file_property(File, mod_time(Time)).
 
 
 % '$lgt_environment_variable'(?atom, ?atom)
