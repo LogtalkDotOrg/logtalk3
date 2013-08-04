@@ -24,7 +24,6 @@
 
 :- initialization((
 	logtalk_load(library(types_loader)),
-	logtalk_load(library(pairs)),
 	logtalk_load(cc(loader)),
 	logtalk_load(diagrams)
 )).

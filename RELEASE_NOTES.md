@@ -42,6 +42,9 @@ Tools
 back-end Prolog compilers due to the lack of support for static multifile
 predicates in these systems.
 
+* FIXED: The `diagrams` tool loader file would try to load the library
+`pairs.lgt` file twice.
+
 Tests
 -----
 
