@@ -8,7 +8,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on May 23, 2013
+%  Last updated on August 4, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -39,13 +39,13 @@ user:prolog_load_file(_:Spec, Options) :-
 	\+ absolute_file_name(Spec, [extensions([pl]), access(read), file_errors(fail)], _),
 	(	atom(Spec) ->
 		expand_file_name(Spec, [SpecExp]),
-		absolute_file_name(SpecExp, [extensions([lgt]), access(read), file_errors(fail)], Path)
+		absolute_file_name(SpecExp, [extensions([lgt,logtalk]), access(read), file_errors(fail)], Path)
 	;	Spec =.. [Library, File],
 		atom(File),										% no paths instead of a file name for Logtalk
 		'$lgt_expand_library_path'(Library, LibPath),
 		atom_concat(LibPath, File, Spec2),
 		expand_file_name(Spec2, [SpecExp]),
-		absolute_file_name(SpecExp, [extensions([lgt]), access(read), file_errors(fail)], Path)
+		absolute_file_name(SpecExp, [extensions([lgt,logtalk]), access(read), file_errors(fail)], Path)
 	),
 	file_directory_name(Path, Dir),
 	file_base_name(Path, BaseName),
@@ -76,7 +76,9 @@ prolog_edit:locate(Name, source_file(Source), [file(Source)]) :-
 	file_base_name(Path, PrologFile),
 	'$derived_source'(Path, Source, _),
 	file_base_name(Source, LogtalkFile),
-	file_name_extension(Name, 'lgt', LogtalkFile),
+	(	file_name_extension(Name, 'lgt', LogtalkFile)
+	;	file_name_extension(Name, 'logtalk', LogtalkFile)
+	),
 	!.
 
 prolog_edit:locate(Spec, source_file(Source), [file(Source)]) :-
@@ -88,7 +90,9 @@ prolog_edit:locate(Spec, source_file(Source), [file(Source)]) :-
 	file_base_name(Path, PrologFile),
 	'$derived_source'(Path, Source, _),
 	file_base_name(Source, LogtalkFile),
-	file_name_extension(Name, 'lgt', LogtalkFile),
+	(	file_name_extension(Name, 'lgt', LogtalkFile)
+	;	file_name_extension(Name, 'logtalk', LogtalkFile)
+	),
 	'$lgt_expand_library_path'(Library, LibraryPath),
 	atom_concat(LibraryPath, LogtalkFile, Source),
 	!.

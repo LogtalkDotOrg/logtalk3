@@ -48,6 +48,9 @@ Installers and installation scripts
 Windows installers, would use an incompatible ECLiPSe 6.0 version if no
 ECLiPSe 6.1 version was detected.
 
+* UPDATED: The SWI-Prolog `swihooks.pl` file to also take into account
+the alternative `.logtalk` source file name extension.
+
 Tools
 -----
 
