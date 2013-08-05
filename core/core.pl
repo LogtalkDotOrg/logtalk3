@@ -1968,8 +1968,8 @@ logtalk_make.
 
 
 '$lgt_convert_flags'([], []).
-'$lgt_convert_flags'([Flag-Value| Flags], [Option| Options]) :-
-	Option =.. [Flag, Value],
+'$lgt_convert_flags'([Name-Value| Flags], [Option| Options]) :-
+	Option =.. [Name, Value],
 	'$lgt_convert_flags'(Flags, Options).
 
 
@@ -4757,6 +4757,7 @@ current_logtalk_flag(Flag, Value) :-
 		;	% we're reloading a source file
 			'$lgt_print_message'(silent(loading), core, reloading_file(SourceFile, Flags)),
 			'$lgt_compile_file'(SourceFile, PrologFile, Flags, loading),
+			retractall('$lgt_loaded_file_'(Basename, Directory, _, _, _)),
 			'$lgt_load_compiled_file'(File, SourceFile, PrologFile),
 			'$lgt_print_message'(comment(loading), core, reloaded_file(SourceFile, Flags))
 		)

@@ -37,6 +37,9 @@ modified since the last time they are loaded.
 * IMPROVED: Avoid reloading a source file if it was not modified since it
 was loaded.
 
+* FIXED: Reloading a source file would result in duplicated entries in the
+internal runtime table of loaded files.
+
 Prolog adapter and integration files
 ------------------------------------
 
