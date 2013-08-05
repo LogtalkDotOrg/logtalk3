@@ -9,9 +9,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if(current_logtalk_flag(prolog_dialect, xsb)).
+:- if((current_logtalk_flag(prolog_dialect, b); current_logtalk_flag(prolog_dialect, xsb))).
 
-	% XSB 3.4 and earlier does not support discontiguous predicates
+	% B-Prolog 7.8#5 and XSB 3.4 and earlier version don't support discontiguous predicates
 	:- initialization((
 		write('(not applicable)'), nl
 	)).

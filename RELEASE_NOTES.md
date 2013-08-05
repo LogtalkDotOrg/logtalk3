@@ -72,8 +72,9 @@ predicates in these systems.
 Tests
 -----
 
-* FIXED: Skip the `discontiguous/1` directive unit tests when using XSB as the
-back-end Prolog compiler as it does not support discontiguous predicates.
+* FIXED: Skip the `discontiguous/1` directive unit tests when using B-Prolog
+or XSB as the back-end Prolog compilers as they lack support for discontiguous
+predicates.
 
 * FIXED: Make the multifile predicates used in the `parameter/2` and `this/1`
 built-in methods unit tests also dynamic to allow the tests to run when using
