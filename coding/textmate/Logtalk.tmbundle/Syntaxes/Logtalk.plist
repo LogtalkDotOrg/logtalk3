@@ -277,6 +277,12 @@
 		</dict>
 		<dict>
 			<key>match</key>
+			<string>\b(logtalk_make)\b</string>
+			<key>name</key>
+			<string>support.function.compiling-and-loading.logtalk</string>
+		</dict>
+		<dict>
+			<key>match</key>
 			<string>\b((abolish|define)_events|current_event)(?=[(])</string>
 			<key>name</key>
 			<string>support.function.event-handling.logtalk</string>

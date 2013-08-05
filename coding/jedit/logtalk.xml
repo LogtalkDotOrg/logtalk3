@@ -5,9 +5,9 @@
 <!--	jEdit 4.3 Logtalk syntax file
 
 	written by		Paulo Moura
-	version			1.100
+	version			1.200
 	created on		May 5, 2002
-	last revised	May 4, 2013
+	last revised	August 4, 2013
 
 	To install, copy this file to the "modes" subdirectory in jEdit 
 	directory installation.   Next, check the "catalog" file in the 
@@ -79,6 +79,7 @@
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD2">\b(current|set)_logtalk_flag(?=[(])</SEQ_REGEXP>
 		<!-- Compiling, loading, and library paths -->
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD2">\blogtalk_(compile|l(ibrary_path|oad|oad_context))(?=[(])</SEQ_REGEXP>
+		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD2">\blogtalk_make\b</SEQ_REGEXP>
 		<!-- Database -->
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD2">\b(clause|retract(all)?)(?=[(])</SEQ_REGEXP>
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD2">\ba(bolish|ssert(a|z))(?=[(])</SEQ_REGEXP>
@@ -325,6 +326,7 @@
 			<NULL>logtalk_compile</NULL>
 			<NULL>logtalk_library_path</NULL>
 			<NULL>logtalk_load</NULL>
+			<NULL>logtalk_make</NULL>
 			<NULL>logtalk_load_context</NULL>
 			<NULL>meta_predicate</NULL>
 			<NULL>meta_non_terminal</NULL>

@@ -30,7 +30,7 @@ comment
 	extends(parent)).
 
 	:- info([
-		version is 1.12,
+		version is 1.13,
 		author is 'Paulo Moura',
 		date is 2013/05/04,
 		comment is 'Sample prototype for testing syntax coloring.'
@@ -140,7 +140,8 @@ comment
 	compiling_and_loading :-
 		logtalk_compile(File, Options),
 		logtalk_load(File, Options),
-		logtalk_library_path(Library, Path).
+		logtalk_library_path(Library, Path),
+		logtalk_make.
 
 	flags :-
 		current_logtalk_flag(Flag, Value),

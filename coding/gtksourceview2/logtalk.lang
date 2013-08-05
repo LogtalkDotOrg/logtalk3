@@ -20,7 +20,7 @@
  Boston, MA 02111-1307, USA.
 
 -->
-<language id="logtalk" _name="Logtalk" version="2.1" _section="Sources">
+<language id="logtalk" _name="Logtalk" version="2.2" _section="Sources">
 
 	<metadata>
 		<property name="mimetypes">text/x-logtalk</property>
@@ -175,6 +175,7 @@
 			<keyword>((se|curren)t_logtalk_flag)(?=[(])</keyword>
 			<!-- Compiling, loading, and library paths -->
 			<keyword>(logtalk_(compile|l(ibrary_path|oad|oad_context)))(?=[(])</keyword>
+			<keyword>logtalk_make</keyword>
 			<!-- Multi-threading meta-predicates -->
 			<keyword>(threaded(_(call|once|ignore|exit|peek|wait|notify))?)(?=[(])</keyword>
 			<!-- All solutions -->

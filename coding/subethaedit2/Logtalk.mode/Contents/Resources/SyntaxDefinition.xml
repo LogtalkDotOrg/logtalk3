@@ -83,6 +83,7 @@
 				<regex>\b(define_events)\(</regex>
 				<regex>\b((?:se|curren)t_logtalk_flag)\(</regex>
 				<regex>\b(logtalk_(?:compile|l(?:ibrary_path|oad|oad_context)))\(</regex>
+				<regex>\b(logtalk_make)\b</regex>
 				<regex>\b(forall)\(</regex>
 				<!-- <regex>\b(retractall)\(</regex> -->
 				<regex>\b(threaded(?:_(?:call|once|ignore|exit|peek|wait|notify))?)\(</regex>

@@ -12,6 +12,8 @@
  *
  * CHANGES
  * -------
+ * 2013/08/04 (1.1.12)
+ *  -  Added syntax coloring of logtalk_make/0 directive
  * 2013/05/04 (1.1.11)
  *  -  Added syntax coloring of built_in/0 directive
  * 2013/04/07 (1.1.10)
@@ -147,7 +149,7 @@ $language_data = array(
             'current_logtalk_flag', 'set_logtalk_flag',
             'current_prolog_flag', 'set_prolog_flag',
             // compiling, loading, and library path
-            'logtalk_compile', 'logtalk_library_path', 'logtalk_load',
+            'logtalk_compile', 'logtalk_library_path', 'logtalk_load', 'logtalk_make',
             // database
             'abolish', 'asserta', 'assertz', 'clause', 'retract', 'retractall',
             // control

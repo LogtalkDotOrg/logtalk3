@@ -1951,6 +1951,29 @@ logtalk_load(Files, Flags) :-
 
 
 
+% logtalk_make
+%
+% reloads all Logtalk source files that have been modified since the
+% time they are last loaded
+
+logtalk_make :-
+	'$lgt_loaded_file_'(File, Directory, Flags, _, LoadingTimeStamp),
+	atom_concat(Directory, File, Path),
+	'$lgt_file_modification_time'(Path, CurrentTimeStamp),
+	LoadingTimeStamp @< CurrentTimeStamp,
+	'$lgt_convert_flags'(Flags, Options),
+	logtalk_load(Path, Options),
+	fail.
+logtalk_make.
+
+
+'$lgt_convert_flags'([], []).
+'$lgt_convert_flags'([Flag-Value| Flags], [Option| Options]) :-
+	Option =.. [Flag, Value],
+	'$lgt_convert_flags'(Flags, Options).
+
+
+
 % logtalk_load_context(?atom, ?nonvar)
 %
 % provides access to the compilation/loading context
@@ -4730,8 +4753,7 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_file_modification_time'(SourceFile, CurrentTimeStamp),
 		(	CurrentTimeStamp @=< LoadingTimeStamp ->
 			% file was not modified since loaded; no need to reload it
-			'$lgt_print_message'(comment(loading), core, skipping_reloading_file(SourceFile, Flags)),
-			true
+			'$lgt_print_message'(comment(loading), core, skipping_reloading_file(SourceFile, Flags))
 		;	% we're reloading a source file
 			'$lgt_print_message'(silent(loading), core, reloading_file(SourceFile, Flags)),
 			'$lgt_compile_file'(SourceFile, PrologFile, Flags, loading),

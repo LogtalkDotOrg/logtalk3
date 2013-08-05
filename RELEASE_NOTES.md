@@ -31,6 +31,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* NEW: Added `logtalk_make/0` built-in predicate for reloading source files
+modified since the last time they are loaded.
+
 * IMPROVED: Avoid reloading a source file if it was not modified since it
 was loaded.
 
@@ -41,15 +44,17 @@ Prolog adapter and integration files
 predicate into the compiler and added a '$lgt_file_modification_time'/2
 predicate to all adapter files.
 
+* UPDATED: The SWI-Prolog `swihooks.pl` file to also take into account the
+alternative `.logtalk` source file name extension.
+
+* NEW: Added shortcut `{}/0` for the new `logtalk_make/0` built-in predicate.
+
 Installers and installation scripts
 -----------------------------------
 
 * FIXED: The `logtalk.iss` Inno Setup script, used for building binary
 Windows installers, would use an incompatible ECLiPSe 6.0 version if no
 ECLiPSe 6.1 version was detected.
-
-* UPDATED: The SWI-Prolog `swihooks.pl` file to also take into account
-the alternative `.logtalk` source file name extension.
 
 Tools
 -----

@@ -480,12 +480,43 @@ callable(Term) :-
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
 {File, Files} :-
 	!,
 	logtalk_load(File),
 	{Files}.
 {File} :-
 	logtalk_load(File).
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  Shortcut to the Logtalk built-in predicate logtalk_make/0
+%
+%  defined in the adapter files in order to be able to comment it out in case
+%  of conflict with some Prolog native feature; it implies conformance with
+%  the ISO Prolog standard regarding the definition of the {} atom
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+{} :-
+	logtalk_make.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  Shortcut to the Logtalk built-in predicate logtalk_make/0
+%
+%  defined in the adapter files in order to be able to comment it out in case
+%  of conflict with some Prolog native feature; it implies conformance with
+%  the ISO Prolog standard regarding the definition of the {} atom
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+{} :-
+	logtalk_make.
 
 
 
