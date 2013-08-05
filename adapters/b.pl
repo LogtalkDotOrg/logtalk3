@@ -276,7 +276,14 @@
 % expands a file path to a full path
 
 '$lgt_expand_path'(Path, ExpandedPath) :-
-	expand_environment(Path, ExpandedPath).
+	expand_environment(Path, ExpandedPath0),
+	(	sub_atom(ExpandedPath0, 0, 2, _, './') ->
+		working_directory(Current),
+		file_base_name(ExpandedPath0, BaseName),
+		atom_concat(Current, '/', Directory),
+		atom_concat(Directory, BaseName, ExpandedPath)
+	;	ExpandedPath = ExpandedPath0
+	).
 
 
 % '$lgt_file_exists'(+atom)

@@ -52,6 +52,9 @@ alternative `.logtalk` source file name extension.
 
 * NEW: Added shortcut `{}/0` for the new `logtalk_make/0` built-in predicate.
 
+* FIXED: The definition for the internal predicate `'$lgt_expand_path'/2` for
+B-Prolog adapter file would fail to expand relative file paths.
+
 Installers and installation scripts
 -----------------------------------
 
