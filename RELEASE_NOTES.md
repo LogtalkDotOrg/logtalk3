@@ -43,8 +43,8 @@ internal runtime table of loaded files.
 Prolog adapter and integration files
 ------------------------------------
 
-* CHANGED: Moved the '$lgt_compare_file_modification_times'/3 internal
-predicate into the compiler and added a '$lgt_file_modification_time'/2
+* CHANGED: Moved the `'$lgt_compare_file_modification_times'/3` internal
+predicate into the compiler and added a `'$lgt_file_modification_time'/2`
 predicate to all adapter files.
 
 * UPDATED: The SWI-Prolog `swihooks.pl` file to also take into account the
@@ -54,6 +54,12 @@ alternative `.logtalk` source file name extension.
 
 * FIXED: The definition for the internal predicate `'$lgt_expand_path'/2` for
 B-Prolog adapter file would fail to expand relative file paths.
+
+Documentation
+-------------
+
+* FIXED: Some unresolved internal links in the Reference Manual that affected
+generating of the PDF version.
 
 Installers and installation scripts
 -----------------------------------
