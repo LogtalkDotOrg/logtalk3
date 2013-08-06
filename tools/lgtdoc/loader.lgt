@@ -23,7 +23,7 @@
 
 
 :- initialization((
-	logtalk_load([cc(osp), cc(os)]),
-	logtalk_load(lgtdocp),
-	logtalk_load(lgtdoc)
+	logtalk_load([cc(osp), cc(os)], [optimize(on)]),
+	logtalk_load(lgtdocp, [optimize(on)]),
+	logtalk_load(lgtdoc, [optimize(on)])
 )).

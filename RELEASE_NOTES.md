@@ -72,6 +72,9 @@ predicates in these systems.
 * FIXED: The `diagrams` tool loader file would try to load the library
 `pairs.lgt` file twice.
 
+* IMPROVED: Compile the `diagrams`, `help`, and `lgtdoc` tools with the
+`optimize` flag turned on.
+
 Tests
 -----
 
