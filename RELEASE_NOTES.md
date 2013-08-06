@@ -25,7 +25,7 @@ RELEASE NOTES
 =============
 
 
-3.00.0 Alpha 21 - August ??, 2013
+3.00.0 Alpha 21 - August 6, 2013
 =================================
 
 Logtalk compiler and runtime
@@ -59,7 +59,7 @@ Documentation
 -------------
 
 * FIXED: Some unresolved internal links in the Reference Manual that affected
-generating of the PDF version.
+generating the PDF version.
 
 Installers and installation scripts
 -----------------------------------
