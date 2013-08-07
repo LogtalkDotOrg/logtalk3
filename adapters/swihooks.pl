@@ -8,7 +8,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on August 4, 2013
+%  Last updated on August 7, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -219,7 +219,7 @@ prolog_clause:unify_clause_hook(Clause, QClause, Module, TermPos0, TermPos) :-
 	(	QClause = (M:THead :- TBody) ->
 		M == user,
 		TClause = (THead :- TBody)
-	;	QClause = (THead :- TBody) ->
+	;	QClause = (THead :- _) ->
 		TClause = QClause
 	;	QClause = M:THead ->
 		M == user,
