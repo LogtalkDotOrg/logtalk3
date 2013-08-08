@@ -16421,6 +16421,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_logtalk_built_in_predicate'(logtalk_compile(_, _)).
 '$lgt_logtalk_built_in_predicate'(logtalk_load(_)).
 '$lgt_logtalk_built_in_predicate'(logtalk_load(_, _)).
+'$lgt_logtalk_built_in_predicate'(logtalk_make).
 '$lgt_logtalk_built_in_predicate'(logtalk_load_context(_, _)).
 '$lgt_logtalk_built_in_predicate'(logtalk_library_path(_, _)).
 % entity properties
