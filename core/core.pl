@@ -5065,7 +5065,7 @@ current_logtalk_flag(Flag, Value) :-
 	catch(
 		'$lgt_check_for_encoding_directive'(Term, SourceFile, Input, NewInput, OutputOptions),
 		FirstTermError,
-		'$lgt_compiler_stream_io_error_handler'(NewInput, FirstTermError)),
+		'$lgt_compiler_stream_io_error_handler'(Input, FirstTermError)),
 	% open a corresponding Prolog file for writing generated code using any found encoding/1 directive
 	catch(
 		open(PrologFile, write, Output, [alias(logtalk_compiler_output)| OutputOptions]),

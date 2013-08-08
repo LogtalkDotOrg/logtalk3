@@ -25,6 +25,16 @@ RELEASE NOTES
 =============
 
 
+3.00.0 Alpha 22 - August ??, 2013
+=================================
+
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: The compiler would try to close the wrong stream when processing an
+error generated while checking a source file for an `encoding/1` directive.
+
+
 3.00.0 Alpha 21 - August 6, 2013
 =================================
 
