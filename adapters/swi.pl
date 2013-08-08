@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SWI Prolog 6.0.0 and later versions
-%  Last updated on August 4, 2013
+%  Last updated on August 8, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -382,7 +382,19 @@
 	% and loading of .qlf files when using the qcompile/1 option
 	'$lgt_file_extension'(prolog, Extension),
 	atom_concat(Path, Extension, File),
-	load_files(Path, [derived_from(Source)| Options]).
+	(	style_check('?'(singleton)) ->
+		% turn off singleton variable checking as the built-in
+		% write_canonical/2 predicate can generate code that
+		% triggers the new singleton analysis introduced in
+		% SWI-Prolog 6.5.0
+		setup_call_cleanup(
+			style_check('-'(singleton)),
+			load_files(Path, [derived_from(Source)| Options]),
+			style_check('+'(singleton))
+		)
+	;	load_files(Path, [derived_from(Source)| Options])
+	).
+
 
 
 % '$lgt_file_modification_time'(+atom, -nonvar)
