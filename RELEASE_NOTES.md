@@ -43,6 +43,10 @@ Logtalk source files. This is not an ideal solution but a workaround for
 avoiding reporting singleton variables in generated code that don't exist or
 aren't detected in the original code.
 
+* ADDED: Partial support to the SWI-Prolog adapter file for using the built-in
+meta-predicates `dynamic/1` and `multifile/1` within objects and categories
+when their argument is a single predicate indicator.
+
 
 3.00.0 Alpha 21 - August 6, 2013
 =================================

@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SWI Prolog 6.0.0 and later versions
-%  Last updated on August 8, 2013
+%  Last updated on August 9, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -140,8 +140,10 @@
 '$lgt_prolog_meta_predicate'(call_cleanup(_, _, _), call_cleanup(0, *, 0), predicate).
 '$lgt_prolog_meta_predicate'(call_with_depth_limit(_, _, _), call_with_depth_limit(0, *, *), predicate).
 '$lgt_prolog_meta_predicate'(compile_predicates(_), compile_predicates([/]), predicate).
+'$lgt_prolog_meta_predicate'(dynamic(_), dynamic(/), predicate).
 '$lgt_prolog_meta_predicate'(findall(_, _, _, _), findall(*, 0, *, *), predicate).
 '$lgt_prolog_meta_predicate'(freeze(_, _), freeze(*, 0), predicate).
+'$lgt_prolog_meta_predicate'(multifile(_), multifile(/), predicate).
 '$lgt_prolog_meta_predicate'(not(_), not(0), predicate).
 '$lgt_prolog_meta_predicate'(notrace(_), notrace(0), predicate).
 '$lgt_prolog_meta_predicate'(on_signal(_, _, _), on_signal(*, *, 0), predicate).
