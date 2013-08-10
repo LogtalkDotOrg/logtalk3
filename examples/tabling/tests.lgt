@@ -13,12 +13,21 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.21,
+		version is 1.22,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2013/04/27,
+		date is 2013/08/10,
 		comment is 'Unit tests for the "tabling" example.'
 	]).
-	
+
+	unit(fibonacci).
+	unit(paths).
+
+	:- if(current_logtalk_flag(prolog_dialect, yap)).
+	unit(mdt_paths_first).
+	unit(mdt_paths_min).
+	unit(mdt_paths_min_all).
+	:- endif.
+
 	test(tabling_1) :-
 		setof(Y, paths::path(1, Y), Ys),
 		Ys = [2, 3, 4, 5].
@@ -27,14 +36,7 @@
 		fibonacci::fib(30, F),
 		F == 1346269.
 
-	unit(fibonacci).
-	unit(paths).
-
 	:- if(current_logtalk_flag(prolog_dialect, yap)).
-
-	unit(mdt_paths_first).
-	unit(mdt_paths_min).
-	unit(mdt_paths_min_all).
 
 	test(tabling_3) :-
 		setof((Z, N), mdt_paths_first::path(a, Z, N), L),
