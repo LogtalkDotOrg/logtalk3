@@ -40,7 +40,6 @@ scripts!):
 * CxProlog:       `cxlgt`
 * ECLiPSe:        `eclipselgt`
 * GNU Prolog:     `gplgt`
-* Lean Prolog:    `lplgt`
 * Qu-Prolog:      `qplgt`
 * SICStus Prolog: `sicstuslgt`
 * SWI-Prolog:     `swilgt`

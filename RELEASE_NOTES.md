@@ -47,6 +47,9 @@ aren't detected in the original code.
 meta-predicates `dynamic/1` and `multifile/1` within objects and categories
 when their argument is a single predicate indicator.
 
+* CHANGED: Moved Lean Prolog adapter and integration files to the unsupported
+directories as its current version lacks the necessary features to run Logtalk.
+
 
 3.00.0 Alpha 21 - August 6, 2013
 =================================
