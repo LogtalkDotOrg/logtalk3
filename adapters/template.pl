@@ -202,6 +202,8 @@ numbervars(Term, From, Next) :-
 %
 % default values for all flags
 
+% startup flags:
+'$lgt_default_flag'(settings, allow).
 % lint compilation flags:
 '$lgt_default_flag'(unknown_entities, warning).
 '$lgt_default_flag'(misspelt_calls, warning).

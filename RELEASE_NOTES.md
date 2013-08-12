@@ -31,6 +31,12 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* NEW: Read-only flag, `settings`, with possible values `allow` and `deny`,
+that allows or disables loading a settings file at Logtalk startup. The
+adapter files set this flag to `allow` by default but the value can be
+changed by editing the adapter files when embedding Logtalk in a compiled
+application.
+
 * IMPROVED: When the `LOGTALKHOME` or the `LOGTALKUSER` environment variables
 are not defined, assume the current directory as their value. This enables
 Logtalk to startup when embedded in a compiled application if the variables

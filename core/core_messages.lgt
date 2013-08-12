@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/08/04,
+		date is 2013/08/12,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -171,6 +171,8 @@
 
 	logtalk::message_tokens(loaded_settings_file(Path), core) -->
 		['Loaded settings file found on directory ~w'-[Path], nl, nl].
+	logtalk::message_tokens(settings_file_disabled, core) -->
+		['Loading of settings file disabled'-[], nl, nl].
 	logtalk::message_tokens(error_loading_settings_file(Path, Error), core) -->
 		['Errors found while loading settings file from directory ~w: ~w'-[Path, Error], nl, nl].
 	logtalk::message_tokens(no_settings_file_found, core) -->

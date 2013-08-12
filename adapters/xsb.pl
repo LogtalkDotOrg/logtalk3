@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for XSB 3.3 or later versions
-%  Last updated on August 4, 2013
+%  Last updated on August 12, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -224,6 +224,8 @@ setup_call_catcher_cleanup(Setup, Call, Catcher, Cleanup) :-
 %
 % default values for all flags
 
+% startup flags:
+'$lgt_default_flag'(settings, allow).
 % lint compilation flags:
 '$lgt_default_flag'(unknown_entities, warning).
 '$lgt_default_flag'(misspelt_calls, warning).

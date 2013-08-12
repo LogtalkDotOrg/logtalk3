@@ -16154,6 +16154,8 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_valid_flag'(source_data).
 % read-only compilation flags
 '$lgt_valid_flag'(version).
+% startup flags
+'$lgt_valid_flag'(settings).
 % back-end Prolog features
 '$lgt_valid_flag'(prolog_dialect).
 '$lgt_valid_flag'(prolog_version).
@@ -16180,6 +16182,8 @@ current_logtalk_flag(Flag, Value) :-
 
 % Logtalk version flag
 '$lgt_read_only_flag'(version).
+% startup flags
+'$lgt_read_only_flag'(settings).
 % back-end Prolog features
 '$lgt_read_only_flag'(prolog_dialect).
 '$lgt_read_only_flag'(prolog_version).
@@ -16260,6 +16264,9 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_valid_flag_value'(version, Version) :-
 	functor(Version, version, 3).
+
+'$lgt_valid_flag_value'(settings, allow) :- !.
+'$lgt_valid_flag_value'(settings, deny) :- !.
 
 '$lgt_valid_flag_value'(prolog_dialect, Dialect) :-
 	atom(Dialect).
@@ -18698,6 +18705,10 @@ current_logtalk_flag(Flag, Value) :-
 % adapter files; these extensions will be tried in sequence when the test
 % for the settings file existence fails
 
+'$lgt_load_settings_file'(disabled) :-
+	'$lgt_default_flag'(settings, deny),
+	!.
+
 '$lgt_load_settings_file'(Result) :-
 	% save the current directory
 	'$lgt_current_directory'(Current),
@@ -18742,6 +18753,9 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_report_settings_file'(loaded(Path)) :-
 	'$lgt_print_message'(comment(settings), core, loaded_settings_file(Path)).
+
+'$lgt_report_settings_file'(disabled) :-
+	'$lgt_print_message'(comment(settings), core, settings_file_disabled).
 
 '$lgt_report_settings_file'(error(Path, Error)) :-
 	'$lgt_print_message'(error, core, error_loading_settings_file(Path, Error)).
