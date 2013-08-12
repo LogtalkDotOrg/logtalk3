@@ -3,6 +3,9 @@
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
+%  Default library paths 
+%  Last updated on August 11, 2013
+%
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
 %  the Free Software Foundation, either version 3 of the License, or
@@ -40,8 +43,27 @@ logtalk_library_path(home, HOME) :-
 	;	fail
 	).
 
-logtalk_library_path(logtalk_home, '$LOGTALKHOME/').
-logtalk_library_path(logtalk_user, '$LOGTALKUSER/').
+% when the LOGTALKHOME or the LOGTALKUSER environment variables are not
+% defined (we may be e.g. embedding Logtalk in a compiled application),
+% assume the current directory as their value
+logtalk_library_path(logtalk_home, LOGTALKHOME) :-
+	(	'$lgt_environment_variable'('LOGTALKHOME', _) ->
+		LOGTALKHOME = '$LOGTALKHOME/'
+	;	'$lgt_current_directory'(LOGTALKHOME0),
+		(	sub_atom(LOGTALKHOME0, _, _, 0, '/') ->
+			LOGTALKHOME = LOGTALKHOME0
+		;	atom_concat(LOGTALKHOME0, '/', LOGTALKHOME)
+		)
+	).
+logtalk_library_path(logtalk_user, LOGTALKUSER) :-
+	(	'$lgt_environment_variable'('LOGTALKUSER', _) ->
+		LOGTALKUSER = '$LOGTALKUSER/'
+	;	'$lgt_current_directory'(LOGTALKUSER0),
+		(	sub_atom(LOGTALKUSER0, _, _, 0, '/') ->
+			LOGTALKUSER = LOGTALKUSER0
+		;	atom_concat(LOGTALKUSER0, '/', LOGTALKUSER)
+		)
+	).
 
 logtalk_library_path(contributions, logtalk_user('contributions/')).
 logtalk_library_path(examples, logtalk_user('examples/')).

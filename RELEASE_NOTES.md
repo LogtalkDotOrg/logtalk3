@@ -31,6 +31,11 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: When the `LOGTALKHOME` or the `LOGTALKUSER` environment variables
+are not defined, assume the current directory as their value. This enables
+Logtalk to startup when embedded in a compiled application if the variables
+are not defined.
+
 * FIXED: The compiler would try to close the wrong stream when processing an
 error generated while checking a source file for an `encoding/1` directive.
 

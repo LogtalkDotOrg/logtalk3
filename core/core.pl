@@ -18693,6 +18693,10 @@ current_logtalk_flag(Flag, Value) :-
 % and loaded silently, ignoring any errors;  the intermediate Prolog files
 % are deleted using the clean/1 compiler flag in order to prevent problems
 % when switching between back-end Prolog compilers
+%
+% there can be more than one extension defined for source files in the
+% adapter files; these extensions will be tried in sequence when the test
+% for the settings file existence fails
 
 '$lgt_load_settings_file'(Result) :-
 	% save the current directory
@@ -18709,7 +18713,7 @@ current_logtalk_flag(Flag, Value) :-
 		atom_concat(settings, Extension, SettingsFile),
 		'$lgt_file_exists'(SettingsFile) ->
 		catch(
-			(logtalk_load(settings, CompilerOptions), Result = loaded(Startup)),
+			(logtalk_load(SettingsFile, CompilerOptions), Result = loaded(Startup)),
 			Error,
 			Result = error(Startup, Error)
 		)
@@ -18720,7 +18724,7 @@ current_logtalk_flag(Flag, Value) :-
 		atom_concat(settings, Extension, SettingsFile),
 		'$lgt_file_exists'(SettingsFile) ->
 		catch(
-			(logtalk_load(settings, CompilerOptions), Result = loaded(User)),
+			(logtalk_load(SettingsFile, CompilerOptions), Result = loaded(User)),
 			Error,
 			Result = error(User, Error)
 		)
