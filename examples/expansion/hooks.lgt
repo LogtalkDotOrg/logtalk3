@@ -10,8 +10,9 @@
 
 
 % we start by defining three hook objects; each hook object defines a
-% term_expansion/2 clause that expands a fact and a term_expansion/2
-% clause that adds a new clause to the expanded object
+% term_expansion/2 clause that expands a fact, a term_expansion/2 clause
+% that adds a new clause to the expanded object, and a goal_expansion/2
+% that rewrites a goal
 
 :- object(ha,
 	implements(expanding)).		% hook objects should always reference
@@ -85,8 +86,8 @@
 	term_expansion(Term, Expansion) :-
 		hc::term_expansion(Term, Expansion).
 
-	% the next term_expansion/2 clause defines a pipeline where the result
-	% of one hook expansion is feed into the next hook
+	% the following goal_expansion/2 clause defines a pipeline where
+	% the result of one hook expansion is feed into the next hook
 
 	goal_expansion(start, Expansion) :-
 		ha::goal_expansion(start, Expansion0),
