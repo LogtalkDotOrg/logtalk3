@@ -51,6 +51,7 @@ if ! [ "$LOGTALKHOME" ]; then
 	elif [ -f "$( cd "$( dirname "$0" )" && pwd )/../core/core.pl" ]; then
 		LOGTALKHOME="$( cd "$( dirname "$0" )" && pwd )/.."
 		echo "... using Logtalk installation found at $( cd "$( dirname "$0" )" && pwd )/.."
+	else
 		echo "... unable to locate Logtalk installation directory!"
 		echo
 		exit 1

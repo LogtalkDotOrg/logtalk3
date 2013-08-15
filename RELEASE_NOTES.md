@@ -61,6 +61,10 @@ when their argument is a single predicate indicator.
 * CHANGED: Moved Lean Prolog adapter and integration files to the unsupported
 directories as its current version lacks the necessary features to run Logtalk.
 
+* FIXED: Bug in most of the `lgt*.sh` integration scripts when the environment
+variable `LOGTALKHOME` is not defined and a Logtalk installation is located
+using the script own directory.
+
 
 3.00.0 Alpha 21 - August 6, 2013
 =================================
