@@ -45,6 +45,12 @@ are not defined.
 * FIXED: The compiler would try to close the wrong stream when processing an
 error generated while checking a source file for an `encoding/1` directive.
 
+* FIXED: A bug deleting Prolog-specific auxiliary files generated during the
+compilation of the intermediate Prolog files when the `clean` flag is on.
+This bug resulted in directory existence errors when using SWI-Prolog as the
+back-end compiler and a loader file loading source files in subdirectories
+using relative paths.
+
 Prolog adapter and integration files
 ------------------------------------
 

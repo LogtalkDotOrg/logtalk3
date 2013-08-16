@@ -4758,19 +4758,19 @@ current_logtalk_flag(Flag, Value) :-
 			'$lgt_print_message'(silent(loading), core, reloading_file(SourceFile, Flags)),
 			'$lgt_compile_file'(SourceFile, PrologFile, Flags, loading),
 			retractall('$lgt_loaded_file_'(Basename, Directory, _, _, _)),
-			'$lgt_load_compiled_file'(File, SourceFile, PrologFile),
+			'$lgt_load_compiled_file'(SourceFile, PrologFile),
 			'$lgt_print_message'(comment(loading), core, reloaded_file(SourceFile, Flags))
 		)
 	;	% first time loading this source file
 		'$lgt_print_message'(silent(loading), core, loading_file(SourceFile, Flags)),
 		'$lgt_compile_file'(SourceFile, PrologFile, Flags, loading),
-		'$lgt_load_compiled_file'(File, SourceFile, PrologFile),
+		'$lgt_load_compiled_file'(SourceFile, PrologFile),
 		'$lgt_print_message'(comment(loading), core, loaded_file(SourceFile, Flags))
 	),
 	'$lgt_change_directory'(Current).
 
 
-'$lgt_load_compiled_file'(File, SourceFile, PrologFile) :-
+'$lgt_load_compiled_file'(SourceFile, PrologFile) :-
 	'$lgt_clean_lookup_caches',
 	'$lgt_check_redefined_entities',
 	'$lgt_compiler_flag'(prolog_loader, Options),
@@ -4783,8 +4783,10 @@ current_logtalk_flag(Flag, Value) :-
 		% try to delete the intermediate Prolog (ignore failure or error)
 		catch(('$lgt_delete_file'(PrologFile) -> true; true), _, true),
 		% try to delete any Prolog-specific auxiliary file (ignore failure or error)
+		'$lgt_decompose_file_name'(SourceFile, Directory, Name, _),
+		atom_concat(Directory, Name, File),
 		forall(
-			'$lgt_file_name'(tmp, File, _, _, TmpFile),
+			('$lgt_file_name'(tmp, File, _, _, TmpFile), writeq(tmp-TmpFile), nl),
 			catch(('$lgt_delete_file'(TmpFile) -> true; true), _, true))
 	;	true
 	).
