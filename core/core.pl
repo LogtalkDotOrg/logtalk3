@@ -16157,7 +16157,7 @@ current_logtalk_flag(Flag, Value) :-
 % read-only compilation flags
 '$lgt_valid_flag'(version).
 % startup flags
-'$lgt_valid_flag'(settings).
+'$lgt_valid_flag'(settings_file).
 % back-end Prolog features
 '$lgt_valid_flag'(prolog_dialect).
 '$lgt_valid_flag'(prolog_version).
@@ -16185,7 +16185,7 @@ current_logtalk_flag(Flag, Value) :-
 % Logtalk version flag
 '$lgt_read_only_flag'(version).
 % startup flags
-'$lgt_read_only_flag'(settings).
+'$lgt_read_only_flag'(settings_file).
 % back-end Prolog features
 '$lgt_read_only_flag'(prolog_dialect).
 '$lgt_read_only_flag'(prolog_version).
@@ -16267,8 +16267,8 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_valid_flag_value'(version, Version) :-
 	functor(Version, version, 3).
 
-'$lgt_valid_flag_value'(settings, allow) :- !.
-'$lgt_valid_flag_value'(settings, deny) :- !.
+'$lgt_valid_flag_value'(settings_file, allow) :- !.
+'$lgt_valid_flag_value'(settings_file, deny) :- !.
 
 '$lgt_valid_flag_value'(prolog_dialect, Dialect) :-
 	atom(Dialect).
@@ -18708,7 +18708,7 @@ current_logtalk_flag(Flag, Value) :-
 % for the settings file existence fails
 
 '$lgt_load_settings_file'(disabled) :-
-	'$lgt_default_flag'(settings, deny),
+	'$lgt_default_flag'(settings_file, deny),
 	!.
 
 '$lgt_load_settings_file'(Result) :-

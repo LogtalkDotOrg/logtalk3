@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Ciao Prolog 1.14.0
-%  Last updated on August 12, 2013
+%  Last updated on August 16, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -242,7 +242,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 % default values for all flags
 
 % startup flags:
-'$lgt_default_flag'(settings, allow).
+'$lgt_default_flag'(settings_file, allow).
 % lint compilation flags:
 '$lgt_default_flag'(unknown_entities, warning).
 '$lgt_default_flag'(misspelt_calls, warning).
