@@ -4786,7 +4786,7 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_decompose_file_name'(SourceFile, Directory, Name, _),
 		atom_concat(Directory, Name, File),
 		forall(
-			('$lgt_file_name'(tmp, File, _, _, TmpFile), writeq(tmp-TmpFile), nl),
+			'$lgt_file_name'(tmp, File, _, _, TmpFile),
 			catch(('$lgt_delete_file'(TmpFile) -> true; true), _, true))
 	;	true
 	).
