@@ -45,8 +45,12 @@
 '$lgt_iso_predicate'(subsumes_term(_, _)).
 '$lgt_iso_predicate'(term_variables(_, _)).
 
-sub_atom(Atom, _Before, 1, 0, SubAtom) :-		% utterly broken hack just for
-	atom_length(Atom, Lenght),					% allowing Logtalk to startup 
+% utterly broken hack just for allowing Logtalk to startup
+sub_atom(Atom, 0, _, _, SubAtom) :-
+	atom_concat(SubAtom, _, Atom),
+	!.
+sub_atom(Atom, _Before, 1, 0, SubAtom) :-
+	atom_length(Atom, Lenght),
 	atom_search(Atom, Lenght, SubAtom, Lenght).
 
 subsumes_term(General, Specific) :-
@@ -288,7 +292,7 @@ format(Format, Arguments) :-
 '$lgt_default_flag'(events, deny).
 '$lgt_default_flag'(context_switching_calls, allow).
 % other compilation flags:
-'$lgt_default_flag'(scratch_directory, '.lgt_tmp/').
+'$lgt_default_flag'(scratch_directory, './.lgt_tmp/').
 '$lgt_default_flag'(report, on).
 '$lgt_default_flag'(clean, on).
 '$lgt_default_flag'(code_prefix, '$').
