@@ -71,6 +71,9 @@ directories as its current version lacks the necessary features to run Logtalk.
 variable `LOGTALKHOME` is not defined and a Logtalk installation is located
 using the script own directory.
 
+* FIXED: The definition for the internal predicate `'$lgt_expand_path'/2` for
+B-Prolog adapter file would fail to expand some relative file paths.
+
 
 3.00.0 Alpha 21 - August 6, 2013
 =================================

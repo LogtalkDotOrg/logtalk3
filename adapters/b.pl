@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for B-Prolog 7.8 and later versions
-%  Last updated on August 12, 2013
+%  Last updated on August 16, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -279,11 +279,12 @@
 
 '$lgt_expand_path'(Path, ExpandedPath) :-
 	expand_environment(Path, ExpandedPath0),
-	(	sub_atom(ExpandedPath0, 0, 2, _, './') ->
+	(	(	sub_atom(ExpandedPath0, 0, 2, _, './')
+		;	\+ sub_atom(ExpandedPath0, 0, 1, _, '/')
+		) ->
 		working_directory(Current),
-		file_base_name(ExpandedPath0, BaseName),
 		atom_concat(Current, '/', Directory),
-		atom_concat(Directory, BaseName, ExpandedPath)
+		atom_concat(Directory, ExpandedPath0, ExpandedPath)
 	;	ExpandedPath = ExpandedPath0
 	).
 
@@ -293,7 +294,8 @@
 % checks if a file exists
 
 '$lgt_file_exists'(File) :-
-	file_exists(File).
+	'$lgt_expand_path'(File, Path),
+	file_exists(Path).
 
 
 % '$lgt_delete_file'(+atom)
