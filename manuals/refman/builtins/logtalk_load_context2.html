@@ -38,7 +38,7 @@
 
 <pre>logtalk_load_context(Key, Value)</pre>
 <p>
-Provides access to the Logtalk compilation/loading context. The following keys are currently supported: <code>entity_identifier</code>, <code>entity_prefix</code>, <code>entity_type</code>, <code>source</code>, <code>file</code>, <code>directory</code>, <code>stream</code>, and <code>term_position</code>. The <code>term_position</code> key is only supported in back-end Prolog compilers that provide the start and end lines of a read term.
+Provides access to the Logtalk compilation/loading context. The following keys are currently supported: <code>entity_identifier</code>, <code>entity_prefix</code>, <code>entity_type</code>, <code>source</code>, <code>file</code> (same as <code>source</code>), <code>basename</code>, <code>directory</code>, <code>stream</code>, and <code>term_position</code>. The <code>term_position</code> key is only supported in back-end Prolog compilers that provide the start and end lines of a read term.
 </p>
 
 <h4>Template and modes</h4>
@@ -58,15 +58,23 @@ Provides access to the Logtalk compilation/loading context. The following keys a
 Name = list
 yes
 
-| ?- logtalk_load_context(file, File).
+| ?- logtalk_load_context(source, Source).
 
-File = 'list.lgt'
+Source = '/Users/me/project/library/list.lgt'
+
+| ?- logtalk_load_context(basename, Basename).
+
+Basename = 'list.lgt'
+
+| ?- logtalk_load_context(directory, Directory).
+
+Directory = '/Users/me/project/library/'
 yes</pre>
 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: November 21, 2012</span>
+		<span>Last updated on: August 17, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="logtalk_library_path2.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="../index.html#builtins">next</a></span><br/>

@@ -25,6 +25,19 @@ RELEASE NOTES
 =============
 
 
+3.00.0 Alpha 23 - September ??, 2013
+====================================
+
+Logtalk compiler and runtime
+----------------------------
+
+* CHANGED: The `logtalk_load_context/2` key `file` now returns the full file
+path to the file being compiled, same as the `source` key. This complies with
+the de fact standard meaning of this key in Prolog compilers implementing a
+`prolog_load_context/2` predicate. The name of the file is now available using
+the new `basename` key.
+
+
 3.00.0 Alpha 22 - August 16, 2013
 =================================
 

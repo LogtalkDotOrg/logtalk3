@@ -10,8 +10,12 @@
 		assertz(result(source, Path)),
 		fail.
 	term_expansion((:- end_object), (:- end_object)) :-
-		logtalk_load_context(file, File),
-		assertz(result(file, File)),
+		logtalk_load_context(file, Path),
+		assertz(result(file, Path)),
+		fail.
+	term_expansion((:- end_object), (:- end_object)) :-
+		logtalk_load_context(basename, Basename),
+		assertz(result(basename, Basename)),
 		fail.
 	term_expansion((:- end_object), (:- end_object)) :-
 		logtalk_load_context(directory, Directory),
@@ -48,7 +52,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/12/05,
+		date is 2013/08/17,
 		comment is 'Unit tests for the logtalk_load_context/2 built-in predicate.'
 	]).
 
@@ -61,7 +65,8 @@
 		atom_concat(Directory, 'sample.lgt', Source),
 		logtalk_load(Source, [hook(hook)]),
 		hook::result(source, Source0), Source0 == Source,
-		hook::result(file, File), File == 'sample.lgt',
+		hook::result(file, Source0), Source0 == Source,
+		hook::result(basename, Basename), Basename == 'sample.lgt',
 		hook::result(directory, Directory0), Directory0 == Directory,
 		hook::result(entity_identifier, EntityIdentifier), EntityIdentifier == sample,
 		hook::result(entity_prefix, EntityPrefix), logtalk::entity_prefix(sample, EntityPrefix),
