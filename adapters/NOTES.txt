@@ -229,10 +229,10 @@ for the `LOGTALKHOME` and `LOGTALKUSER` environment variables to their
 	:- setenv('LOGTALKHOME', ...).
 	:- setenv('LOGTALKUSER', ...).
 
-To also load Logtalk automatically at the `SWI-Prolog.app` startup, also add
-the line:
+To load Logtalk when using the `SWI-Prolog.app` application, you can use
+the goal:
 
-	:- ['$LOGTALKHOME/integration/logtalk_swi.pl'].
+	?- ['$LOGTALKHOME/integration/logtalk_swi.pl'].
 
 
 XSB 3.3 and later versions
