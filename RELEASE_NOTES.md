@@ -37,6 +37,12 @@ the de fact standard meaning of this key in Prolog compilers implementing a
 `prolog_load_context/2` predicate. The name of the file is now available using
 the new `basename` key.
 
+Prolog adapter and integration files
+------------------------------------
+
+* ADDED: Instructions on how to integrate and run Logtalk with the new MacOS X
+`SWI-Prolog.app` application.
+
 
 3.00.0 Alpha 22 - August 16, 2013
 =================================
