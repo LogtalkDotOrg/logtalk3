@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on August 16, 2013
+%  Last updated on August 20, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -199,6 +199,9 @@ setup_call_cleanup(_, _, _) :-
 '$lgt_file_extension'(logtalk, '.lgt').
 '$lgt_file_extension'(logtalk, '.logtalk').
 '$lgt_file_extension'(prolog, '.pl').
+'$lgt_file_extension'(tmp, Extension) :-
+	get_flag(eclipse_object_suffix, Extension0),	% '.eco' by default
+	atom_string(Extension, Extension0).
 
 
 
@@ -309,7 +312,10 @@ setup_call_cleanup(_, _, _) :-
 % deletes a file
 
 '$lgt_delete_file'(File) :-
-	delete(File).
+	(	exists(File) ->
+		delete(File)
+	;	true
+	).
 
 
 % '$lgt_directory_exists'(+atom)
