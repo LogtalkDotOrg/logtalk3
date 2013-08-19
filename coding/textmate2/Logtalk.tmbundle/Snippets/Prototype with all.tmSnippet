@@ -13,7 +13,8 @@
 		version is 1.0,
 		author is '$TM_FULLNAME',
 		date is `date +%Y/%m/%d`,
-		comment is '${5:Description}']).
+		comment is '${5:Description}'
+	]).
 
 $0
 

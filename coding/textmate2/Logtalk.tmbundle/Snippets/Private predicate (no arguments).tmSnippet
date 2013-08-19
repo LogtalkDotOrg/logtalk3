@@ -6,7 +6,8 @@
 	<string>	:- private(${1:Functor}/0).
 	:- mode(${1:Functor}, ${2:Solutions}).
 	:- info(${1:Functor}/0, [
-		comment is '${3:Description}']).
+		comment is '${3:Description}'
+	]).
 
 $0</string>
 	<key>name</key>

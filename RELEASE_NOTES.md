@@ -36,21 +36,27 @@ Logtalk compiler and runtime
 runtime changes to the definitions of these predicates can simply define them
 as calling dynamic predicates that perform the actual expansions.
 
-* CHANGED: The `logtalk_load_context/2` key `file` now returns the full file
-path to the file being compiled, same as the `source` key. This complies with
+* CHANGED: The `logtalk_load_context/2` key `file` now returns the full path
+of the file being compiled, the same as the `source` key. This complies with
 the de fact standard meaning of this key in Prolog compilers implementing a
 `prolog_load_context/2` predicate. The name of the file is now available using
 the new `basename` key.
 
 * CHANGED: The `logtalk::loaded_file/3-4` methods now return compiler flags
-using the same format used in the `logtalk_compile/2` and `logtalk_load/2`
+in the same format used by the `logtalk_compile/2` and `logtalk_load/2`
 built-in predicates.
 
 Prolog adapter and integration files
 ------------------------------------
 
-* ADDED: Instructions on how to integrate and run Logtalk with the new MacOS X
-`SWI-Prolog.app` application.
+* ADDED: Instructions on how to add support for running Logtalk with the new
+MacOS X `SWI-Prolog.app` application.
+
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* IMPROVED: Text layout of `info/1-2` directives found in the entity and
+predicate declaration templates for several text editors.
 
 
 3.00.0 Alpha 22 - August 16, 2013

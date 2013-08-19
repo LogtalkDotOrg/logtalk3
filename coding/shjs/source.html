@@ -43,9 +43,9 @@ comment
 	extends(parent)).
 
 	:- info([
-		version is 1.13,
+		version is 1.14,
 		author is &#x27;Paulo Moura&#x27;,
-		date is 2013/05/04,
+		date is 2013/08/19,
 		comment is &#x27;Sample prototype for testing syntax coloring.&#x27;]).
 
 	:- built_in.
@@ -81,7 +81,8 @@ comment
 	:- mode(aaa(+callable, ?integer), zero_or_one).
 	:- info(position/2, [
 		comment is &#x27;Predicate brief description.&#x27;,
-		arguments is [&#x27;Arg1&#x27;-&#x27;Arg1 description&#x27;, &#x27;Arg2&#x27;-&#x27;Arg2 description&#x27;]]).
+		arguments is [&#x27;Arg1&#x27;-&#x27;Arg1 description&#x27;, &#x27;Arg2&#x27;-&#x27;Arg2 description&#x27;]
+	]).
 
 	:- public(nt//2).
 	:- meta_non_terminal(nt(1, *)).
@@ -91,14 +92,16 @@ comment
 	:- mode(bbb(+integer, -float), one).
 	:- info(bbb/2, [
 		comment is &#x27;Predicate brief description.&#x27;,
-		argnames is [&#x27;Arg1&#x27;, &#x27;Arg2&#x27;]]).
+		argnames is [&#x27;Arg1&#x27;, &#x27;Arg2&#x27;]
+	]).
 
 	:- private(ccc/2).
 	:- dynamic(ccc/2).
 	:- mode(ccc(@atom, ?atom), one_or_more).
 	:- info(ccc/2, [
 		comment is &#x27;Predicate brief description.&#x27;,
-		argnames is [&#x27;Arg1&#x27;, &#x27;Arg2&#x27;]]).
+		argnames is [&#x27;Arg1&#x27;, &#x27;Arg2&#x27;]
+	]).
 
 	enumerating_entities(Object, Protocol, Category) :-
 		current_category(Category),

@@ -9,7 +9,8 @@
 		version is 1.0,
 		author is 'Author',
 		date is Year/Month/Day,
-		comment is 'Description']).
+		comment is 'Description'
+	]).
 
 \^
 
@@ -25,7 +26,8 @@
 		version is 1.0,
 		author is 'Author',
 		date is Year/Month/Day,
-		comment is 'Description']).
+		comment is 'Description'
+	]).
 
 \^
 
@@ -40,7 +42,8 @@
 		version is 1.0,
 		author is 'Author',
 		date is Year/Month/Day,
-		comment is 'Description']).
+		comment is 'Description'
+	]).
 
 \^
 
@@ -56,7 +59,8 @@
 		version is 1.0,
 		author is 'Author',
 		date is Year/Month/Day,
-		comment is 'Description']).
+		comment is 'Description'
+	]).
 
 \^
 
@@ -74,7 +78,8 @@
 		version is 1.0,
 		author is 'Author',
 		date is Year/Month/Day,
-		comment is 'Description']).
+		comment is 'Description'
+	]).
 
 \^
 
@@ -90,7 +95,8 @@
 		version is 1.0,
 		author is 'Author',
 		date is Year/Month/Day,
-		comment is 'Description']).
+		comment is 'Description'
+	]).
 
 \^
 
@@ -107,7 +113,8 @@
 		version is 1.0,
 		author is 'Author',
 		date is Year/Month/Day,
-		comment is 'Description']).
+		comment is 'Description'
+	]).
 
 \^
 
@@ -124,7 +131,8 @@
 		version is 1.0,
 		author is 'Author',
 		date is Year/Month/Day,
-		comment is 'Description']).
+		comment is 'Description'
+	]).
 
 \^
 
@@ -141,7 +149,8 @@
 		version is 1.0,
 		author is 'Author',
 		date is Year/Month/Day,
-		comment is 'Description']).
+		comment is 'Description'
+	]).
 
 \^
 
@@ -160,7 +169,8 @@
 		version is 1.0,
 		author is 'Author',
 		date is Year/Month/Day,
-		comment is '${6:Description']).
+		comment is '${6:Description'
+	]).
 
 \^
 
@@ -176,7 +186,8 @@
 		version is 1.0,
 		author is 'Author',
 		date is Year/Month/Day,
-		comment is 'Description']).
+		comment is 'Description'
+	]).
 
 \^
 
@@ -193,7 +204,8 @@
 		version is 1.0,
 		author is 'Author',
 		date is Year/Month/Day,
-		comment is 'Description']).
+		comment is 'Description'
+	]).
 
 \^
 
@@ -210,7 +222,8 @@
 		version is 1.0,
 		author is 'Author',
 		date is Year/Month/Day,
-		comment is 'Description']).
+		comment is 'Description'
+	]).
 
 \^
 
@@ -228,7 +241,8 @@
 		version is 1.0,
 		author is 'Author',
 		date is Year/Month/Day,
-		comment is 'Description']).
+		comment is 'Description'
+	]).
 
 \^
 
@@ -243,7 +257,8 @@
 		version is 1.0,
 		author is 'Author',
 		date is Year/Month/Day,
-		comment is 'Description']).
+		comment is 'Description'
+	]).
 
 \^
 
@@ -259,7 +274,8 @@
 		version is 1.0,
 		author is 'Author',
 		date is Year/Month/Day,
-		comment is 'Description']).
+		comment is 'Description'
+	]).
 
 \^
 
@@ -274,7 +290,8 @@
 		version is 1.0,
 		author is 'Author',
 		date is Year/Month/Day,
-		comment is 'Description']).
+		comment is 'Description'
+	]).
 
 \^
 
@@ -290,7 +307,8 @@
 		version is 1.0,
 		author is 'Author',
 		date is Year/Month/Day,
-		comment is 'Description']).
+		comment is 'Description'
+	]).
 
 \^
 
@@ -306,7 +324,8 @@
 		version is 1.0,
 		author is 'Author',
 		date is Year/Month/Day,
-		comment is 'Description']).
+		comment is 'Description'
+	]).
 
 \^
 
@@ -323,7 +342,8 @@
 		version is 1.0,
 		author is 'Author',
 		date is Year/Month/Day,
-		comment is 'Description']).
+		comment is 'Description'
+	]).
 
 \^
 
@@ -336,7 +356,8 @@
 	:- mode(Functor(Arguments), Solutions).
 	:- info(Functor/Arity, [
 		comment is 'Description',
-		arguments is ['Arg'-'Description']]).
+		arguments is ['Arg'-'Description']
+	]).
 
 !
 
@@ -345,7 +366,8 @@
 	:- public(Functor/0).
 	:- mode(Functor, Solutions).
 	:- info(Functor/0, [
-		comment is 'Description']).
+		comment is 'Description'
+	]).
 
 !
 
@@ -355,7 +377,8 @@
 	:- mode(Functor(Arguments), Solutions).
 	:- info(Functor/Arity, [
 		comment is 'Description',
-		arguments is ['Arg'-'Description']]).
+		arguments is ['Arg'-'Description']
+	]).
 
 !
 
@@ -364,7 +387,8 @@
 	:- protected(Functor/0).
 	:- mode(Functor, Solutions).
 	:- info(Functor/0, [
-		comment is 'Description']).
+		comment is 'Description'
+	]).
 
 !
 
@@ -374,7 +398,8 @@
 	:- mode(Functor(Arguments), Solutions).
 	:- info(Functor/Arity, [
 		comment is 'Description',
-		arguments is ['Arg'-'Description']]).
+		arguments is ['Arg'-'Description']
+	]).
 
 !
 
@@ -383,6 +408,7 @@
 	:- private(Functor/0).
 	:- mode(Functor, Solutions).
 	:- info(Functor/0, [
-		comment is 'Description']).
+		comment is 'Description'
+	]).
 
 !

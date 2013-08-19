@@ -8,7 +8,8 @@
 		version is 1.0,
 		author is '$(whoami)',
 		date is $(date +%Y/%m/%d),
-		comment is '${2:Description}']).
+		comment is '${2:Description}'
+	]).
 
 $0
 
@@ -26,7 +27,8 @@ $0
 		version is 1.0,
 		author is '$(whoami)',
 		date is $(date +%Y/%m/%d),
-		comment is '${3:Description}']).
+		comment is '${3:Description}'
+	]).
 
 $0
 
@@ -44,7 +46,8 @@ $0
 		version is 1.0,
 		author is '$(whoami)',
 		date is $(date +%Y/%m/%d),
-		comment is '${3:Description}']).
+		comment is '${3:Description}'
+	]).
 
 $0
 
@@ -62,7 +65,8 @@ $0
 		version is 1.0,
 		author is '$(whoami)',
 		date is $(date +%Y/%m/%d),
-		comment is '${3:Description}']).
+		comment is '${3:Description}'
+	]).
 
 $0
 
@@ -82,7 +86,8 @@ $0
 		version is 1.0,
 		author is '$(whoami)',
 		date is $(date +%Y/%m/%d),
-		comment is '${5:Description}']).
+		comment is '${5:Description}'
+	]).
 
 $0
 
@@ -100,7 +105,8 @@ $0
 		version is 1.0,
 		author is '$(whoami)',
 		date is $(date +%Y/%m/%d),
-		comment is '${3:Description}']).
+		comment is '${3:Description}'
+	]).
 
 $0
 
@@ -119,7 +125,8 @@ $0
 		version is 1.0,
 		author is '$(whoami)',
 		date is $(date +%Y/%m/%d),
-		comment is '${4:Description}']).
+		comment is '${4:Description}'
+	]).
 
 $0
 
@@ -138,7 +145,8 @@ $0
 		version is 1.0,
 		author is '$(whoami)',
 		date is $(date +%Y/%m/%d),
-		comment is '${4:Description}']).
+		comment is '${4:Description}'
+	]).
 
 $0
 
@@ -157,7 +165,8 @@ $0
 		version is 1.0,
 		author is '$(whoami)',
 		date is $(date +%Y/%m/%d),
-		comment is '${4:Description}']).
+		comment is '${4:Description}'
+	]).
 
 $0
 
@@ -178,7 +187,8 @@ $0
 		version is 1.0,
 		author is '$(whoami)',
 		date is $(date +%Y/%m/%d),
-		comment is '${6:Description}']).
+		comment is '${6:Description}'
+	]).
 
 $0
 
@@ -196,7 +206,8 @@ $0
 		version is 1.0,
 		author is '$(whoami)',
 		date is $(date +%Y/%m/%d),
-		comment is '${3:Description}']).
+		comment is '${3:Description}'
+	]).
 
 $0
 
@@ -215,7 +226,8 @@ $0
 		version is 1.0,
 		author is '$(whoami)',
 		date is $(date +%Y/%m/%d),
-		comment is '${4:Description}']).
+		comment is '${4:Description}'
+	]).
 
 $0
 
@@ -234,7 +246,8 @@ $0
 		version is 1.0,
 		author is '$(whoami)',
 		date is $(date +%Y/%m/%d),
-		comment is '${4:Description}']).
+		comment is '${4:Description}'
+	]).
 
 $0
 
@@ -254,7 +267,8 @@ $0
 		version is 1.0,
 		author is '$(whoami)',
 		date is $(date +%Y/%m/%d),
-		comment is '${5:Description}']).
+		comment is '${5:Description}'
+	]).
 
 $0
 
@@ -271,7 +285,8 @@ $0
 		version is 1.0,
 		author is '$(whoami)',
 		date is $(date +%Y/%m/%d),
-		comment is '${2:Description}']).
+		comment is '${2:Description}'
+	]).
 
 $0
 
@@ -289,7 +304,8 @@ $0
 		version is 1.0,
 		author is '$(whoami)',
 		date is $(date +%Y/%m/%d),
-		comment is '${3:Description}']).
+		comment is '${3:Description}'
+	]).
 
 $0
 
@@ -307,7 +323,8 @@ $0
 		version is 1.0,
 		author is '$(whoami)',
 		date is $(date +%Y/%m/%d),
-		comment is '${3:Description}']).
+		comment is '${3:Description}'
+	]).
 
 $0
 
@@ -324,7 +341,8 @@ $0
 		version is 1.0,
 		author is '$(whoami)',
 		date is $(date +%Y/%m/%d),
-		comment is '${2:Description}']).
+		comment is '${2:Description}'
+	]).
 
 $0
 
@@ -342,7 +360,8 @@ $0
 		version is 1.0,
 		author is '$(whoami)',
 		date is $(date +%Y/%m/%d),
-		comment is '${3:Description}']).
+		comment is '${3:Description}'
+	]).
 
 $0
 
@@ -356,7 +375,8 @@ $0
 	:- mode(${1:Functor}(${3:Arguments}), ${4:Solutions}).
 	:- info(${1:Functor}/${2:Arity}, [
 		comment is '${5:Description}',
-		arguments is ['$6'-'$7']]).
+		arguments is ['$6'-'$7']
+	]).
 
 $0]]></text>
     <tag>public</tag>
@@ -366,7 +386,8 @@ $0]]></text>
     <text><![CDATA[	:- public(${1:Functor}/0).
 	:- mode(${1:Functor}, ${2:Solutions}).
 	:- info(${1:Functor}/0, [
-		comment is '${3:Description}']).
+		comment is '${3:Description}'
+	]).
 
 $0]]></text>
     <tag>publicz</tag>
@@ -377,7 +398,8 @@ $0]]></text>
 	:- mode(${1:Functor}(${3:Arguments}), ${4:Solutions}).
 	:- info(${1:Functor}/${2:Arity}, [
 		comment is '${5:Description}',
-		arguments is ['$6'-'$7']]).
+		arguments is ['$6'-'$7']
+	]).
 
 $0]]></text>
     <tag>protected</tag>
@@ -388,7 +410,8 @@ $0]]></text>
 	:- mode(${1:Functor}(${3:Arguments}), ${4:Solutions}).
 	:- info(${1:Functor}/${2:Arity}, [
 		comment is '${5:Description}',
-		arguments is ['$6'-'$7']]).
+		arguments is ['$6'-'$7']
+	]).
 
 $0]]></text>
     <tag>protectedz</tag>
@@ -399,7 +422,8 @@ $0]]></text>
 	:- mode(${1:Functor}(${3:Arguments}), ${4:Solutions}).
 	:- info(${1:Functor}/${2:Arity}, [
 		comment is '${5:Description}',
-		arguments is ['$6'-'$7']]).
+		arguments is ['$6'-'$7']
+	]).
 
 $0]]></text>
     <tag>private</tag>
@@ -409,7 +433,8 @@ $0]]></text>
     <text><![CDATA[	:- private(${1:Functor}/0).
 	:- mode(${1:Functor}, ${2:Solutions}).
 	:- info(${1:Functor}/0, [
-		comment is '${3:Description}']).
+		comment is '${3:Description}'
+	]).
 
 $0]]></text>
     <tag>privatez</tag>

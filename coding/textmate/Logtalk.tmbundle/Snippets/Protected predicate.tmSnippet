@@ -7,7 +7,8 @@
 	:- mode(${1:Functor}(${3:Arguments}), ${4:Solutions}).
 	:- info(${1:Functor}/${2:Arity}, [
 		comment is '${5:Description}',
-		arguments is ['$6'-'$7']]).
+		arguments is ['$6'-'$7']
+	]).
 
 $0</string>
 	<key>name</key>

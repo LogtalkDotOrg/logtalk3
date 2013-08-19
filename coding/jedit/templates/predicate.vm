@@ -7,14 +7,16 @@
 #prompt ( "Number of solutions:" $solutions "zero_or_one" )
 #if ( $arity == "0" )
 	:- mode($functor, $solutions).
-	:- info($functor/$arity,
-		[comment is '$comment']).
+	:- info($functor/$arity, [
+		comment is '$comment'
+	]).
 #else
 #prompt ( "Arguments (comma separated):" $args )
 #prompt ( "Argument names (comma separated):" $argnames )
 	:- mode($functor($args), $solutions).
 	:- info($functor/$arity, [
 		comment is '$comment',
-		argnames is [$argnames]]).
+		argnames is [$argnames]
+	]).
 #end
 
