@@ -31,6 +31,11 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: The `expanding` built-in protocol no longer declares the predicates
+`term_expansion/2` and `goal_expansion/2` as dynamic. Applications requiring
+runtime changes to the definitions of these predicates can simply define them
+as calling dynamic predicates that perform the actual expansions.
+
 * CHANGED: The `logtalk_load_context/2` key `file` now returns the full file
 path to the file being compiled, same as the `source` key. This complies with
 the de fact standard meaning of this key in Prolog compilers implementing a
