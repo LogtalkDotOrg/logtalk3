@@ -1661,8 +1661,8 @@ logtalk_compile(Files, Flags) :-
 	catch(
 		('$lgt_init_warnings_counter'(logtalk_compile(Files, Flags)),
 		 '$lgt_check_source_files'(Files, ExpandedFiles),
-		 '$lgt_check_compiler_flags'(Flags, ProcessedFlags),
-		 '$lgt_compile_files'(ExpandedFiles, ProcessedFlags),
+		 '$lgt_check_compiler_flags'(Flags),
+		 '$lgt_compile_files'(ExpandedFiles, Flags),
 		 '$lgt_report_warning_numbers'(logtalk_compile(Files, Flags)),
 		 '$lgt_clear_compiler_flags'),
 		error(Error, _),
@@ -1800,29 +1800,28 @@ logtalk_compile(Files, Flags) :-
 
 
 
-% '$lgt_check_compiler_flags'(@list, -list)
+% '$lgt_check_compiler_flags'(@list)
 %
 % checks if the compiler flags are valid
 
-'$lgt_check_compiler_flags'([Option| Options], [Flag-Value| Flags]) :-
+'$lgt_check_compiler_flags'([Flag| Flags]) :-
 	!,
-	(	var(Option) ->
+	(	var(Flag) ->
 		throw(error(instantiation_error, _))
-	;	functor(Option, Flag, 1) ->
-		arg(1, Option, Value),
-		'$lgt_must_be'(read_write_flag, Flag, _),
-		'$lgt_must_be'(flag_value, Flag+Value, _)
-	;	compound(Option) ->
-		throw(error(domain_error(compiler_option, Option), _))
-	;	throw(error(type_error(compound, Option), _))
+	;	Flag =.. [Name, Value] ->
+		'$lgt_must_be'(read_write_flag, Name, _),
+		'$lgt_must_be'(flag_value, Name+Value, _)
+	;	compound(Flag) ->
+		throw(error(domain_error(compiler_option, Flag), _))
+	;	throw(error(type_error(compound, Flag), _))
 	),
-	'$lgt_check_compiler_flags'(Options, Flags).
+	'$lgt_check_compiler_flags'(Flags).
 
-'$lgt_check_compiler_flags'([], []) :-
+'$lgt_check_compiler_flags'([]) :-
 	!.
 
-'$lgt_check_compiler_flags'(Options, _) :-
-	throw(error(type_error(list, Options), _)).
+'$lgt_check_compiler_flags'(Flags) :-
+	throw(error(type_error(list, Flags), _)).
 
 
 
@@ -1889,9 +1888,10 @@ logtalk_compile(Files, Flags) :-
 
 '$lgt_assert_compiler_flags'([]).
 
-'$lgt_assert_compiler_flags'([Flag-Value| Flags]) :-
-	retractall('$lgt_pp_file_compiler_flag_'(Flag, _)),
-	assertz('$lgt_pp_file_compiler_flag_'(Flag, Value)),
+'$lgt_assert_compiler_flags'([Flag| Flags]) :-
+	Flag =.. [Name, Value],
+	retractall('$lgt_pp_file_compiler_flag_'(Name, _)),
+	assertz('$lgt_pp_file_compiler_flag_'(Name, Value)),
 	'$lgt_assert_compiler_flags'(Flags).
 
 
@@ -1938,8 +1938,8 @@ logtalk_load(Files, Flags) :-
 	catch(
 		('$lgt_init_warnings_counter'(logtalk_load(Files, Flags)),
 		 '$lgt_check_source_files'(Files, ExpandedFiles),
-		 '$lgt_check_compiler_flags'(Flags, ProcessedFlags),
-		 '$lgt_load_files'(ExpandedFiles, ProcessedFlags),
+		 '$lgt_check_compiler_flags'(Flags),
+		 '$lgt_load_files'(ExpandedFiles, Flags),
 		 '$lgt_report_warning_numbers'(logtalk_load(Files, Flags)),
 		 '$lgt_clear_compiler_flags'),
 		error(Error, _),
@@ -1961,22 +1961,19 @@ logtalk_make :-
 	atom_concat(Directory, File, Path),
 	'$lgt_file_modification_time'(Path, CurrentTimeStamp),
 	LoadingTimeStamp @< CurrentTimeStamp,
-	'$lgt_convert_flags'(Flags, Options),
-	logtalk_load(Path, Options),
+	logtalk_load(Path, Flags),
 	fail.
 logtalk_make.
-
-
-'$lgt_convert_flags'([], []).
-'$lgt_convert_flags'([Name-Value| Flags], [Option| Options]) :-
-	Option =.. [Name, Value],
-	'$lgt_convert_flags'(Flags, Options).
 
 
 
 % logtalk_load_context(?atom, ?nonvar)
 %
 % provides access to the compilation/loading context
+%
+% this predicate is the Logtalk version of the prolog_load_context/2
+% predicate found on some compilers such as Quintus Prolog, SICStus
+% Prolog, SWI-Prolog, and YAP
 
 logtalk_load_context(source, Path) :-
 	'$lgt_pp_basename_directory_path_flags_'(_, _, Path, _).
@@ -2019,20 +2016,20 @@ logtalk_load_context(stream, Stream) :-
 %
 % sets a Logtalk flag
 
-set_logtalk_flag(Flag, Value) :-
-	'$lgt_must_be'(read_write_flag, Flag, logtalk(set_logtalk_flag(Flag, Value), _)),
-	'$lgt_must_be'(flag_value, Flag + Value, logtalk(set_logtalk_flag(Flag, Value), _)),
-	'$lgt_set_compiler_flag'(Flag, Value).
+set_logtalk_flag(Name, Value) :-
+	'$lgt_must_be'(read_write_flag, Name, logtalk(set_logtalk_flag(Name, Value), _)),
+	'$lgt_must_be'(flag_value, Name + Value, logtalk(set_logtalk_flag(Name, Value), _)),
+	'$lgt_set_compiler_flag'(Name, Value).
 
 
-'$lgt_set_compiler_flag'(Flag, Value) :-
-	retractall('$lgt_current_flag_'(Flag, _)),
-	assertz('$lgt_current_flag_'(Flag, Value)),
-	(	Flag == debug, Value == on ->
+'$lgt_set_compiler_flag'(Name, Value) :-
+	retractall('$lgt_current_flag_'(Name, _)),
+	assertz('$lgt_current_flag_'(Name, Value)),
+	(	Name == debug, Value == on ->
 		% debug flag on requires the clean flag on
 		retractall('$lgt_current_flag_'(clean, _)),
 		assertz('$lgt_current_flag_'(clean, on))
-	;	Flag == hook ->
+	;	Name == hook ->
 		'$lgt_compile_hooks'(Value)
 	;	true
 	).
@@ -4391,9 +4388,9 @@ current_logtalk_flag(Flag, Value) :-
 
 % loaded file and library predicates
 '$lgt_logtalk._def'(expand_library_path(Library, Path), _, '$lgt_expand_library_path'(Library, Path)).
-'$lgt_logtalk._def'(loaded_file(File, Directory), _, '$lgt_loaded_file_'(File, Directory, _, _, _)).
-'$lgt_logtalk._def'(loaded_file(File, Directory, Flags), _, '$lgt_loaded_file_'(File, Directory, Flags, _, _)).
-'$lgt_logtalk._def'(loaded_file(File, Directory, Flags, StreamProperties), _, '$lgt_loaded_file_'(File, Directory, Flags, StreamProperties, _)).
+'$lgt_logtalk._def'(loaded_file(Basename, Directory), _, '$lgt_loaded_file_'(Basename, Directory, _, _, _)).
+'$lgt_logtalk._def'(loaded_file(Basename, Directory, Flags), _, '$lgt_loaded_file_'(Basename, Directory, Flags, _, _)).
+'$lgt_logtalk._def'(loaded_file(Basename, Directory, Flags, StreamProperties), _, '$lgt_loaded_file_'(Basename, Directory, Flags, StreamProperties, _)).
 % predicates for low-level hacking
 '$lgt_logtalk._def'(compile_aux_clauses(Clauses), _, '$lgt_compile_aux_clauses'(Clauses)).
 '$lgt_logtalk._def'(entity_prefix(Entity, Prefix), _, '$lgt_entity_prefix'(Entity, Prefix)).
@@ -6462,13 +6459,14 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_pp_term_location'(Location),
 	assertz('$lgt_pp_prolog_term_'((:- op(Priority, Specifier, Operators)), Location)).
 
-'$lgt_tr_file_directive'(set_logtalk_flag(Flag, Value), Ctx) :-
+'$lgt_tr_file_directive'(set_logtalk_flag(Name, Value), Ctx) :-
 	!,
-	'$lgt_must_be'(read_write_flag, Flag),
-	'$lgt_must_be'(flag_value, Flag+Value),
+	'$lgt_must_be'(read_write_flag, Name),
+	'$lgt_must_be'(flag_value, Name+Value),
 	% local scope (restricted to the source file being compiled)
-	'$lgt_set_compiler_flags'([Flag-Value]),
-	'$lgt_check_for_renamed_flag'(Flag, Ctx).
+	Flag =.. [Name, Value],
+	'$lgt_set_compiler_flags'([Flag]),
+	'$lgt_check_for_renamed_flag'(Name, Ctx).
 
 '$lgt_tr_file_directive'(set_prolog_flag(Flag, Value), _) :-
 	!,

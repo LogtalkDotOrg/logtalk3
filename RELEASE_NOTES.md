@@ -42,6 +42,10 @@ the de fact standard meaning of this key in Prolog compilers implementing a
 `prolog_load_context/2` predicate. The name of the file is now available using
 the new `basename` key.
 
+* CHANGED: The `logtalk::loaded_file/3-4` methods now return compiler flags
+using the same format used in the `logtalk_compile/2` and `logtalk_load/2`
+built-in predicates.
+
 Prolog adapter and integration files
 ------------------------------------
 
