@@ -114,6 +114,12 @@ text:
 
 You must also delete the contents of the `Start in` field.
 
+The Logtalk flag `prolog_compiler` is not usable due to lack of ECLiPSe
+built-in predicates for separate compilation and loading. To generate
+`.eco` files when compiling Logtalk source files, set the Logtalk `clean`
+flag to `off` and add the option `output:eco` to the Logtalk `prolog_loader`
+flag.
+
 
 GNU Prolog 1.4.2 and later versions
 -----------------------------------
@@ -233,6 +239,12 @@ To load Logtalk when using the `SWI-Prolog.app` application, you can use
 the goal:
 
 	?- ['$LOGTALKHOME/integration/logtalk_swi.pl'].
+
+The Logtalk flag `prolog_compiler` is not usable due to lack of SWI-Prolog
+built-in predicates for separate compilation and loading. To generate
+`.qlf` files when compiling Logtalk source files, set the Logtalk `clean`
+flag to `off` and add the option `qcompile(auto)` to the Logtalk flag
+`prolog_loader`.
 
 
 XSB 3.3 and later versions

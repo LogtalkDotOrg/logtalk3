@@ -61,6 +61,9 @@ precompiling Prolog files. Also changed the definition of the internal
 file extension by default) if they exist and are up-to-date instead of the
 corresponding Prolog files.
 
+* ADDED: Instructions on how to automatically generate `.eco` or `.qlf` files
+when using, respectively, ECLiPSe or SWI-Prolog as the backend compilers.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
