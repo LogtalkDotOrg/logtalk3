@@ -369,7 +369,11 @@ setup_call_cleanup(_, _, _) :-
 % Logtalk source file, given a list of options
 
 '$lgt_load_prolog_code'(File, _, Options) :-
-	compile(File, Options).
+	% remove the Prolog file name extension in order to support generating
+	% and loading of .eco files when using the output:eco option
+	'$lgt_file_extension'(prolog, Extension),
+	atom_concat(Path, Extension, File),
+	compile(Path, Options).
 
 
 % '$lgt_file_modification_time'(+atom, -nonvar)
