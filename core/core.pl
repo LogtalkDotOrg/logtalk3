@@ -9806,11 +9806,6 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	!.
 
-'$lgt_tr_body'(retract(Clause), _, _, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-	'$lgt_check_dynamic_directive'(Clause),
-	fail.
-
 '$lgt_tr_body'(retract(Clause), TCond, DCond, Ctx) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, Mode, _),
