@@ -36,7 +36,7 @@
 	:- public(goal_expansion/2).
 	:- mode(goal_expansion(+callable, -callable), zero_or_one).
 	:- info(goal_expansion/2, [
-		comment is 'Defines a goal expansion. This predicate is called recursively until a fixed point is reached on goals found while compiling a source file (including clause body goals, initialization goals, and conditional compilation goals).',
+		comment is 'Defines a goal expansion. This predicate is called recursively until a fixed point is reached on goals found while compiling a source file (including clause body goals, goal meta-arguments of standard meta-predicates, initialization goals, and conditional compilation goals).',
 		argnames is ['Goal', 'ExpandedGoal']
 	]).
 
@@ -44,7 +44,7 @@
 	:- mode(term_expansion(+term, -term), zero_or_one).
 	:- mode(term_expansion(+term, -list(term)), zero_or_one).
 	:- info(term_expansion/2, [
-		comment is 'Defines a term expansion. This predicate is called on all terms read while compiling a source file except those skipped by using the conditional compilation directives.',
+		comment is 'Defines a term expansion. This predicate is called until it succeeds on all terms read while compiling a source file except those skipped by using the conditional compilation directives.',
 		argnames is ['Term', 'ExpandedTerms']
 	]).
 
