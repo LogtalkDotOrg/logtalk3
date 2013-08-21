@@ -64,6 +64,13 @@ corresponding Prolog files.
 * ADDED: Instructions on how to automatically generate `.eco` or `.qlf` files
 when using, respectively, ECLiPSe or SWI-Prolog as the backend compilers.
 
+Examples
+--------
+
+* CHANGED: Comment out the individual examples on the `constraints/bp` example
+that require support for B-Prolog action rules as these are currently no longer
+supported.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

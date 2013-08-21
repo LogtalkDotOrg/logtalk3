@@ -14,8 +14,8 @@
 		clique,
 		magic,
 		puzzle,
-		steiner,
-		queens3,
-		srq
+		steiner
+		%queens3,
+		%srq
 	])
 ).

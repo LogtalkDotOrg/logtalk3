@@ -74,6 +74,8 @@ within objects and categories using the Logtalk `{}/1` control construct.
 You may need to increase the sizes of the code areas on the integration
 scripts if you run into out-of-memory errors with complex applications.
 
+Action rules are currently not supported.
+
 
 CxProlog 0.97.6 or later versions
 ---------------------------------

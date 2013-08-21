@@ -32,13 +32,13 @@
 	test(constraints_bp_4) :-
 		steiner::go.
 
-	test(constraints_bp_5) :-
+	-test(constraints_bp_5) :-
 		queens3::top.
 
-	test(constraints_bp_6) :-
+	-test(constraints_bp_6) :-
 		srq::q.
 
-	test(constraints_bp_7) :-
+	-test(constraints_bp_7) :-
 		srq::q_all.
 
 :- end_object.
