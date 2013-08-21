@@ -427,11 +427,11 @@ The following predicates are defined:
 <dl>
 	<dt><code>expand_library_path(Library, Path)</code></dt>
 		<dd>Expands a file specification in library notation to a full operating-system path.</dd>
-	<dt><code>loaded_file(File, Directory)</code></dt>
+	<dt><code>loaded_file(Basename, Directory)</code></dt>
 		<dd>Returns the name of currently loaded source files (with extension) and the source file directories.</dd>
-	<dt><code>loaded_file(File, Directory, Options)</code></dt>
+	<dt><code>loaded_file(Basename, Directory, Options)</code></dt>
 		<dd>Returns the name of currently loaded source files (with extension) and the source file directories, plus the explicit options used for compiling and loading the files.</dd>
-	<dt><code>loaded_file(File, Directory, Options, StreamProperties)</code></dt>
+	<dt><code>loaded_file(Basename, Directory, Options, StreamProperties)</code></dt>
 		<dd>Returns the name of currently loaded source files (with extension) and the source file directories, plus the explicit options used for compiling and loading the files and the stream properties (encoding and BOM) when available.</dd>
 </dl>
 <dl>
@@ -505,7 +505,7 @@ To use these predicates, simply send the corresponding message to the <code>logt
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: February 3, 2013</span>
+		<span>Last updated on: August 21, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="messages.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="protocols.html">next</a></span><br/>

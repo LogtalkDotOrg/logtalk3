@@ -64,6 +64,11 @@ corresponding Prolog files.
 * ADDED: Instructions on how to automatically generate `.eco` or `.qlf` files
 when using, respectively, ECLiPSe or SWI-Prolog as the backend compilers.
 
+Documentation
+-------------
+
+* IMPROVED: Documentation of the term expansion mechanism and its predicates.
+
 Examples
 --------
 
