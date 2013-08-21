@@ -125,7 +125,7 @@
 
 % table of loaded files
 
-:- multifile('$lgt_loaded_file_'/5).				% '$lgt_loaded_file_'(File, Directory, Flags, StreamProperties, TimeStamp)
+:- multifile('$lgt_loaded_file_'/5).				% '$lgt_loaded_file_'(Basename, Directory, Flags, StreamProperties, TimeStamp)
 :- dynamic('$lgt_loaded_file_'/5).
 
 
@@ -544,8 +544,8 @@ object_property(Obj, Prop) :-
 	Flags /\ 2 =:= 0.
 '$lgt_object_property'(built_in, _, _, _, _, _, Flags) :-
 	Flags /\ 1 =:= 1.
-'$lgt_object_property'(file(Base, Path), Obj, _, _, _, _, _) :-
-	(	'$lgt_entity_property_'(Obj, file_lines(Base, Path, _, _)) ->
+'$lgt_object_property'(file(Basename, Directory), Obj, _, _, _, _, _) :-
+	(	'$lgt_entity_property_'(Obj, file_lines(Basename, Directory, _, _)) ->
 		true
 	;	fail
 	).
@@ -628,8 +628,8 @@ category_property(Ctg, Prop) :-
 	Flags /\ 2 =:= 0.
 '$lgt_category_property'(built_in, _, _, _, Flags) :-
 	Flags /\ 1 =:= 1.
-'$lgt_category_property'(file(Base, Path), Ctg, _, _, _) :-
-	(	'$lgt_entity_property_'(Ctg, file_lines(Base, Path, _, _)) ->
+'$lgt_category_property'(file(Basename, Directory), Ctg, _, _, _) :-
+	(	'$lgt_entity_property_'(Ctg, file_lines(Basename, Directory, _, _)) ->
 		true
 	;	fail
 	).
@@ -698,8 +698,8 @@ protocol_property(Ptc, Prop) :-
 	Flags /\ 2 =:= 0.
 '$lgt_protocol_property'(built_in, _, _, Flags) :-
 	Flags /\ 1 =:= 1.
-'$lgt_protocol_property'(file(Base, Path), Ptc, _, _) :-
-	(	'$lgt_entity_property_'(Ptc, file_lines(Base, Path, _, _)) ->
+'$lgt_protocol_property'(file(Basename, Directory), Ptc, _, _) :-
+	(	'$lgt_entity_property_'(Ptc, file_lines(Basename, Directory, _, _)) ->
 		true
 	;	fail
 	).
@@ -1957,8 +1957,8 @@ logtalk_load(Files, Flags) :-
 % time they are last loaded
 
 logtalk_make :-
-	'$lgt_loaded_file_'(File, Directory, Flags, _, LoadingTimeStamp),
-	atom_concat(Directory, File, Path),
+	'$lgt_loaded_file_'(Basename, Directory, Flags, _, LoadingTimeStamp),
+	atom_concat(Directory, Basename, Path),
 	'$lgt_file_modification_time'(Path, CurrentTimeStamp),
 	LoadingTimeStamp @< CurrentTimeStamp,
 	logtalk_load(Path, Flags),
@@ -4833,10 +4833,10 @@ current_logtalk_flag(Flag, Value) :-
 		true
 	),
 	(	% check file information using the file_lines/4 entity property, if available
-		'$lgt_entity_property_'(Entity, file_lines(OldBase, OldDirectory, _, _)),
-		'$lgt_pp_file_runtime_clause_'('$lgt_entity_property_'(Entity, file_lines(NewBase, NewDirectory, Start, End))) ->
-		atom_concat(OldDirectory, OldBase, OldFile0),
-		atom_concat(NewDirectory, NewBase, NewFile0), 
+		'$lgt_entity_property_'(Entity, file_lines(OldBasename, OldDirectory, _, _)),
+		'$lgt_pp_file_runtime_clause_'('$lgt_entity_property_'(Entity, file_lines(NewBasename, NewDirectory, Start, End))) ->
+		atom_concat(OldDirectory, OldBasename, OldFile0),
+		atom_concat(NewDirectory, NewBasename, NewFile0), 
 		Lines = Start-End,
 		(	OldFile0 \== NewFile0 ->
 			OldFile = OldFile0,
@@ -5341,14 +5341,14 @@ current_logtalk_flag(Flag, Value) :-
 % adds entity properties related to the entity source file
 
 '$lgt_add_entity_properties'(start, Entity) :-
-	'$lgt_pp_basename_directory_path_flags_'(File, Directory, _, _),
+	'$lgt_pp_basename_directory_path_flags_'(Basename, Directory, _, _),
 	'$lgt_pp_term_position_'((Start - _)),
-	assertz('$lgt_pp_entity_property_'(Entity, file_lines(File, Directory, Start, _))).
+	assertz('$lgt_pp_entity_property_'(Entity, file_lines(Basename, Directory, Start, _))).
 
 '$lgt_add_entity_properties'(end, Entity) :-
-	retract('$lgt_pp_entity_property_'(Entity, file_lines(File, Directory, Start, _))),
+	retract('$lgt_pp_entity_property_'(Entity, file_lines(Basename, Directory, Start, _))),
 	'$lgt_pp_term_position_'((_ - End)),
-	assertz('$lgt_pp_entity_property_'(Entity, file_lines(File, Directory, Start, End))),
+	assertz('$lgt_pp_entity_property_'(Entity, file_lines(Basename, Directory, Start, End))),
 	fail.
 
 '$lgt_add_entity_properties'(end, Entity) :-
@@ -14674,7 +14674,7 @@ current_logtalk_flag(Flag, Value) :-
 % runtime clauses for all defined entities
 
 '$lgt_write_runtime_clauses'(SourceData, Stream) :-
-	'$lgt_pp_basename_directory_path_flags_'(File, Directory, Path, Flags),
+	'$lgt_pp_basename_directory_path_flags_'(Basename, Directory, Path, Flags),
 	% entity runtime clauses
 	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_current_protocol_'/5),
 	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_current_category_'/6),
@@ -14700,7 +14700,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	StreamProperties = []
 	),
 	'$lgt_file_modification_time'(Path, TimeStamp),
-	Clause = '$lgt_loaded_file_'(File, Directory, Flags, StreamProperties, TimeStamp),
+	Clause = '$lgt_loaded_file_'(Basename, Directory, Flags, StreamProperties, TimeStamp),
 	(	SourceData == on ->
 		'$lgt_write_term_and_source_location'(Stream, Clause, aux, Path+1)
 	;	write_canonical(Stream, Clause), write(Stream, '.\n')
@@ -16093,7 +16093,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_valid_protocol_property'(declares(_, _)).			% list of declaration properties for a predicate declared in the protocol
 % the remaining properties are available only when the entities are compiled with the "source_data" flag turned on
 '$lgt_valid_protocol_property'(info(_)).				% list of pairs with user-defined protocol documentation
-'$lgt_valid_protocol_property'(file(_, _)).				% source file name plus file directory
+'$lgt_valid_protocol_property'(file(_, _)).				% source file basename and directory
 '$lgt_valid_protocol_property'(lines(_, _)).			% start and end lines in a source file
 '$lgt_valid_protocol_property'(number_of_clauses(_)).	% number of predicate clauses
 '$lgt_valid_protocol_property'(uses(_, _, _)).			% dependency on an object predicate (e.g. a message to an object as an initialization goal)
