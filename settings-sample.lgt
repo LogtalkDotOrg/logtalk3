@@ -134,11 +134,23 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 */
 
 
-% To take advantage of SWI-Prolog .qlf files, uncomment the
-% following lines (*both* are necessary):
+% To take advantage of ECLiPSe .eco files, uncomment the
+% following lines:
 
 /*
 :- initialization((
+	set_logtalk_flag(clean, off),
+	set_logtalk_flag(prolog_loader, [output:eco])
+)).
+*/
+
+
+% To take advantage of SWI-Prolog .qlf files, uncomment the
+% following lines:
+
+/*
+:- initialization((
+	set_logtalk_flag(clean, off),
 	set_logtalk_flag(prolog_loader, [qcompile(auto)])
 )).
 */
