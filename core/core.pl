@@ -131,7 +131,7 @@
 
 % runtime flag values
 
-:- dynamic('$lgt_current_flag_'/2).					% '$lgt_current_flag_'(Option, Value)
+:- dynamic('$lgt_current_flag_'/2).					% '$lgt_current_flag_'(Name, Value)
 
 
 % static binding caches
@@ -208,8 +208,8 @@
 
 
 
-:- dynamic('$lgt_pp_file_compiler_flag_'/2).				% '$lgt_pp_file_compiler_flag_'(Option, Value)
-:- dynamic('$lgt_pp_entity_compiler_flag_'/2).				% '$lgt_pp_entity_compiler_flag_'(Option, Value)
+:- dynamic('$lgt_pp_file_compiler_flag_'/2).				% '$lgt_pp_file_compiler_flag_'(Name, Value)
+:- dynamic('$lgt_pp_entity_compiler_flag_'/2).				% '$lgt_pp_entity_compiler_flag_'(Name, Value)
 
 :- dynamic('$lgt_pp_dcl_'/1).								% '$lgt_pp_dcl_'(Clause)
 :- dynamic('$lgt_pp_def_'/1).								% '$lgt_pp_def_'(Clause)
@@ -470,7 +470,7 @@ Obj<<Goal :-
 	;	throw(error(existence_error(goal_thread, Self::Goal), logtalk(Self::Goal, Sender)))
 	).
 
-'$lgt_runtime_error_handler'(error(Error, Context)) :-																	% SWI-Prolog
+'$lgt_runtime_error_handler'(error(Error, Context)) :-	% SWI-Prolog
 	nonvar(Context),
 	Context = context(TFunctor/TArity, _),
 	'$lgt_decompile_predicate_indicators'(TFunctor/TArity, Entity, _, Functor/Arity),
@@ -1611,25 +1611,25 @@ threaded_notify(Message) :-
 %
 % gets/checks the current value of a compiler flag
 
-'$lgt_compiler_flag'(Option, Value) :-
-	(	'$lgt_pp_entity_compiler_flag_'(Option, CurrentValue) ->
+'$lgt_compiler_flag'(Name, Value) :-
+	(	'$lgt_pp_entity_compiler_flag_'(Name, CurrentValue) ->
 		% flag value as defined within the entity being compiled
 		Value = CurrentValue
-	;	'$lgt_pp_file_compiler_flag_'(Option, CurrentValue) ->
+	;	'$lgt_pp_file_compiler_flag_'(Name, CurrentValue) ->
 		% flag value as defined in the options argument of the
 		% compiling/loading predicates or in the source file
 		Value = CurrentValue
-	;	'$lgt_current_flag_'(Option, CurrentValue) ->
+	;	'$lgt_current_flag_'(Name, CurrentValue) ->
 		% default value for the current Logtalk session,
 		% set by calls to the set_logtalk_flag/2 predicate
 		Value = CurrentValue
-	;	'$lgt_default_flag'(Option, CurrentValue) ->
+	;	'$lgt_default_flag'(Name, CurrentValue) ->
 		% default value, defined on the Prolog adapter files
 		Value = CurrentValue
-	;	'$lgt_prolog_feature'(Option, CurrentValue) ->
+	;	'$lgt_prolog_feature'(Name, CurrentValue) ->
 		% back-end Prolog compiler features
 		Value = CurrentValue
-	;	Option == version,
+	;	Name == version,
 		'$lgt_version'(Value)
 	).
 
@@ -1659,18 +1659,27 @@ logtalk_compile(Files) :-
 
 logtalk_compile(Files, Flags) :-
 	catch(
-		('$lgt_init_warnings_counter'(logtalk_compile(Files, Flags)),
-		 '$lgt_check_source_files'(Files, ExpandedFiles),
-		 '$lgt_check_compiler_flags'(Flags),
-		 '$lgt_compile_files'(ExpandedFiles, Flags),
-		 '$lgt_report_warning_numbers'(logtalk_compile(Files, Flags)),
-		 '$lgt_clear_compiler_flags'),
+		'$lgt_logtalk_compile'(Files, Flags),
 		error(Error, _),
-		('$lgt_clear_compiler_flags',
-		 '$lgt_clean_pp_file_clauses',
-		 '$lgt_clean_pp_entity_clauses',
-		 '$lgt_reset_warnings_counter'(logtalk_compile(Files, Flags)),
-		 throw(error(Error, logtalk(logtalk_compile(Files, Flags), _))))).
+		'$lgt_logtalk_compile_error_handler'(Error, Files, Flags)
+	).
+
+
+'$lgt_logtalk_compile'(Files, Flags) :-
+	'$lgt_init_warnings_counter'(logtalk_compile(Files, Flags)),
+	'$lgt_check_source_files'(Files, ExpandedFiles),
+	'$lgt_check_compiler_flags'(Flags),
+	'$lgt_compile_files'(ExpandedFiles, Flags),
+	'$lgt_report_warning_numbers'(logtalk_compile(Files, Flags)),
+	'$lgt_clear_compiler_flags'.
+
+
+'$lgt_logtalk_compile_error_handler'(Error, Files, Flags) :-
+	'$lgt_clear_compiler_flags',
+	'$lgt_clean_pp_file_clauses',
+	'$lgt_clean_pp_entity_clauses',
+	'$lgt_reset_warnings_counter'(logtalk_compile(Files, Flags)),
+	throw(error(Error, logtalk(logtalk_compile(Files, Flags), _))).
 
 
 
@@ -1936,18 +1945,27 @@ logtalk_load(Files) :-
 
 logtalk_load(Files, Flags) :-
 	catch(
-		('$lgt_init_warnings_counter'(logtalk_load(Files, Flags)),
-		 '$lgt_check_source_files'(Files, ExpandedFiles),
-		 '$lgt_check_compiler_flags'(Flags),
-		 '$lgt_load_files'(ExpandedFiles, Flags),
-		 '$lgt_report_warning_numbers'(logtalk_load(Files, Flags)),
-		 '$lgt_clear_compiler_flags'),
+		'$lgt_logtalk_load'(Files, Flags),
 		error(Error, _),
-		('$lgt_clear_compiler_flags',
-		 '$lgt_clean_pp_file_clauses',
-		 '$lgt_clean_pp_entity_clauses',
-		 '$lgt_reset_warnings_counter'(logtalk_load(Files, Flags)),
-		 throw(error(Error, logtalk(logtalk_load(Files, Flags), _))))).
+		'$lgt_logtalk_load_error_handler'(Error, Files, Flags)
+	).
+
+
+'$lgt_logtalk_load'(Files, Flags) :-
+	'$lgt_init_warnings_counter'(logtalk_load(Files, Flags)),
+	'$lgt_check_source_files'(Files, ExpandedFiles),
+	'$lgt_check_compiler_flags'(Flags),
+	'$lgt_load_files'(ExpandedFiles, Flags),
+	'$lgt_report_warning_numbers'(logtalk_load(Files, Flags)),
+	'$lgt_clear_compiler_flags'.
+
+
+'$lgt_logtalk_load_error_handler'(Error, Files, Flags) :-
+	'$lgt_clear_compiler_flags',
+	'$lgt_clean_pp_file_clauses',
+	'$lgt_clean_pp_entity_clauses',
+	'$lgt_reset_warnings_counter'(logtalk_load(Files, Flags)),
+	throw(error(Error, logtalk(logtalk_load(Files, Flags), _))).
 
 
 
