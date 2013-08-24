@@ -242,6 +242,14 @@ the goal:
 
 	?- ['$LOGTALKHOME/integration/logtalk_swi.pl'].
 
+In alternative, if you want to be able to use Logtalk using both the shell
+integration script and the GUI application, you can also add to the `.plrc`
+init file the lines:
+
+	:- if((current_prolog_flag(home,HOME), sub_atom(HOME,_,_,0,'SWI-Prolog.app/Contents/swipl'))).
+		:- ['$LOGTALKHOME/integration/logtalk_swi.pl'].
+	:- endif.
+
 The Logtalk flag `prolog_compiler` is not usable due to lack of SWI-Prolog
 built-in predicates for separate compilation and loading. To generate
 `.qlf` files when compiling Logtalk source files, set the Logtalk `clean`
