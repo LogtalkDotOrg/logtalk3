@@ -180,6 +180,23 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 */
 
 
+%  To compile all your source files for debugging using the SWI-Prolog
+%  graphical profiler (stable version 6.2.0 or later; development version
+%  6.1.11 or later), uncomment the following lines:
+
+/*
+:- if(current_logtalk_flag(prolog_dialect, swi)).
+
+	:- use_module(library(statistics)).
+
+	:- initialization((
+		set_logtalk_flag(code_prefix, '.'),
+	)).
+
+:- endif.
+*/
+
+
 %  To use PDT for Logtalk development, uncomment the following lines:
 
 /*

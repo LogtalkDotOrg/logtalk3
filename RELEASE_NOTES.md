@@ -46,6 +46,10 @@ the new `basename` key.
 in the same format used by the `logtalk_compile/2` and `logtalk_load/2`
 built-in predicates.
 
+* ADDED: Commented out settings to the `settings-sample.lgt` file for using
+the SWI-Prolog graphical profiler and for using `.eco` or `.qlf` files when
+using, respectively, ECLiPSe or SWI-Prolog as the backend compilers.
+
 Prolog adapter and integration files
 ------------------------------------
 

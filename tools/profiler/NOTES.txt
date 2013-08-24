@@ -42,5 +42,14 @@ have functors starting with `$lgt_`. Calls to predicates with functors
 such as `_def`, `_dcl`, or `_super`, used to implement inheritance, may
 be listed when your code uses dynamic binding.
 
+In order to get user-level object and predicate names instead of compiler
+generated names when using the SWI-Prolog and YAP profilers you must set
+`code_prefix` flag to a value other than the default `$`. For example:
+
+	| ?- set_logtalk_flag(code_prefix, '.').
+
+See also the `settings-sample` file for automating the necessary setup at
+Logtalk startup.
+
 All source files are formatted using tabs (the recommended setting is a
 tab width equivalent to 4 spaces).
