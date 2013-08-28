@@ -25,8 +25,8 @@ RELEASE NOTES
 =============
 
 
-3.00.0 Alpha 23 - September ??, 2013
-====================================
+3.00.0 Alpha 23 - August 28, 2013
+=================================
 
 Logtalk compiler and runtime
 ----------------------------
@@ -48,7 +48,7 @@ built-in predicates.
 
 * ADDED: Commented out settings to the `settings-sample.lgt` file for using
 the SWI-Prolog graphical profiler and for using `.eco` or `.qlf` files when
-using, respectively, ECLiPSe or SWI-Prolog as the backend compilers.
+running with, respectively, ECLiPSe or SWI-Prolog as the backend compilers.
 
 Prolog adapter and integration files
 ------------------------------------
@@ -77,7 +77,7 @@ Examples
 --------
 
 * CHANGED: Comment out the individual examples on the `constraints/bp` example
-that require support for B-Prolog action rules as these are currently no longer
+that require support for B-Prolog action rules as these are currently not
 supported.
 
 IDEs, text editors, and syntax highlighters support
