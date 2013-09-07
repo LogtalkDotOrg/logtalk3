@@ -31,6 +31,11 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* FIXED: Restore the current directory when a call to the `logtalk_load/1-2`
+built-in predicates fail due to a syntax error in a source file for which the
+backend Prolog compiler `read_term/3` built-in predicate prints an error
+message and fails instead of throwing an exception.
+
 * FIXED: Don't compile calls to call//0 in a grammar rule body as a call to a
 built-in non-terminal.
 

@@ -4774,14 +4774,14 @@ current_logtalk_flag(Flag, Value) :-
 			'$lgt_print_message'(comment(loading), core, skipping_reloading_file(SourceFile, Flags))
 		;	% we're reloading a source file
 			'$lgt_print_message'(silent(loading), core, reloading_file(SourceFile, Flags)),
-			'$lgt_compile_file'(SourceFile, PrologFile, Flags, loading),
+			'$lgt_compile_file'(SourceFile, PrologFile, Flags, loading, Current),
 			retractall('$lgt_loaded_file_'(Basename, Directory, _, _, _)),
 			'$lgt_load_compiled_file'(SourceFile, PrologFile),
 			'$lgt_print_message'(comment(loading), core, reloaded_file(SourceFile, Flags))
 		)
 	;	% first time loading this source file
 		'$lgt_print_message'(silent(loading), core, loading_file(SourceFile, Flags)),
-		'$lgt_compile_file'(SourceFile, PrologFile, Flags, loading),
+		'$lgt_compile_file'(SourceFile, PrologFile, Flags, loading, Current),
 		'$lgt_load_compiled_file'(SourceFile, PrologFile),
 		'$lgt_print_message'(comment(loading), core, loaded_file(SourceFile, Flags))
 	),
@@ -4967,6 +4967,20 @@ current_logtalk_flag(Flag, Value) :-
 		;	% Action == compiling
 			'$lgt_print_message'(comment(compiling), core, compiled_file(SourceFile, Flags))
 		)
+	).
+
+
+% auxiliary predicate when compiling a file as a consequence of a logtalk_load/1-2 call
+%
+% with some backend Prolog compilers, a syntax error while reading the terms in a source
+% file results in a printed message and failure instead of an exception but we need to
+% restore the original directory before passsing the failure up to the caller
+
+'$lgt_compile_file'(SourceFile, PrologFile, Flags, Action, Directory) :-
+	(	'$lgt_compile_file'(SourceFile, PrologFile, Flags, Action) ->
+		true
+	;	'$lgt_change_directory'(Directory),
+		fail
 	).
 
 
