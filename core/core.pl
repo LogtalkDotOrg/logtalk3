@@ -16793,7 +16793,8 @@ current_logtalk_flag(Flag, Value) :-
 	!.
 
 '$lgt_dcg_body'(GRBody, S0, S, Goal) :-
-	functor(GRBody, call, _),
+	functor(GRBody, call, Arity),
+	Arity >= 1,
 	!,
 	GRBody =.. [call, Closure| Args],
 	'$lgt_must_be'(var_or_callable, Closure),
