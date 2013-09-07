@@ -1644,7 +1644,8 @@ logtalk_compile(Files) :-
 	catch(
 		logtalk_compile(Files, []),
 		error(Error, _),
-		throw(error(Error, logtalk(logtalk_compile(Files), _)))).
+		throw(error(Error, logtalk(logtalk_compile(Files), _)))
+	).
 
 
 
@@ -1744,29 +1745,30 @@ logtalk_compile(Files, Flags) :-
 % '$lgt_check_source_files'(@list, -list)
 %
 % check if the source file names are valid (but not if the file exists)
+% and return their paths
 
-'$lgt_check_source_files'([File| Files], [ExpandedFile| ExpandedFiles]) :-
+'$lgt_check_source_files'([File| Files], [Path| Paths]) :-
 	!,
-	'$lgt_check_source_file'(File, ExpandedFile),
-	'$lgt_check_source_files'(Files, ExpandedFiles).
+	'$lgt_check_source_file'(File, Path),
+	'$lgt_check_source_files'(Files, Paths).
 
 '$lgt_check_source_files'([], []) :-
 	!.
 
-'$lgt_check_source_files'(File, ExpandedFile) :-
-	'$lgt_check_source_file'(File, ExpandedFile).
+'$lgt_check_source_files'(File, Path) :-
+	'$lgt_check_source_file'(File, Path).
 
 
-'$lgt_check_source_file'(File, ExpandedFile) :-
+'$lgt_check_source_file'(File, Path) :-
 	(	var(File) ->
 		throw(error(instantiation_error, _))
 	;	atom(File) ->
-		ExpandedFile = File
+		Path = File
 	;	functor(File, Library, 1),
 		arg(1, File, Basename),
 		atom(Basename) ->
 		(	'$lgt_expand_library_path'(Library, Directory) ->
-			atom_concat(Directory, Basename, ExpandedFile)
+			atom_concat(Directory, Basename, Path)
 		;	throw(error(existence_error(library, Library), _))
 		)
 	;	throw(error(type_error(source_file_name, File), _))
@@ -1779,13 +1781,13 @@ logtalk_compile(Files, Flags) :-
 % converts a library alias into its corresponding path; uses a depth
 % bound to prevent loops (inspired by similar code in SWI-Prolog)
 
-'$lgt_expand_library_path'(Library, ExpandedPath) :-
-	'$lgt_expand_library_path'(Library, Path, 16),
-	'$lgt_expand_path'(Path, ExpandedPath0),
+'$lgt_expand_library_path'(Library, Path) :-
+	'$lgt_expand_library_path'(Library, Path0, 16),
+	'$lgt_expand_path'(Path0, Path1),
 	% make sure that the directory path ends with a slash
-	(	sub_atom(ExpandedPath0, _, _, 0, '/') ->
-		ExpandedPath = ExpandedPath0
-	;	atom_concat(ExpandedPath0, '/', ExpandedPath)
+	(	sub_atom(Path1, _, _, 0, '/') ->
+		Path = Path1
+	;	atom_concat(Path1, '/', Path)
 	).
 
 
@@ -1928,7 +1930,8 @@ logtalk_load(Files) :-
 	catch(
 		logtalk_load(Files, []),
 		error(Error, _),
-		throw(error(Error, logtalk(logtalk_load(Files), _)))).
+		throw(error(Error, logtalk(logtalk_load(Files), _)))
+	).
 
 
 
@@ -5007,7 +5010,8 @@ current_logtalk_flag(Flag, Value) :-
 	catch(
 		'$lgt_write_entity_code'(SourceData, Output),
 		Error,
-		'$lgt_compiler_stream_io_error_handler'(Output, Error)).
+		'$lgt_compiler_stream_io_error_handler'(Output, Error)
+	).
 
 
 '$lgt_write_entity_code'(SourceData, Output) :-
@@ -5090,37 +5094,44 @@ current_logtalk_flag(Flag, Value) :-
 	catch(
 		open(SourceFile, read, Input, [alias(logtalk_compiler_input)]),
 		OpenError,
-		'$lgt_compiler_open_stream_error_handler'(OpenError)),
+		'$lgt_compiler_open_stream_error_handler'(OpenError)
+	),
 	% look for an encoding/1 directive that, when present, must be the first term on a source file
 	catch(
 		'$lgt_read_term'(Input, Term, [singletons(Singletons)]),
 		InputError,
-		'$lgt_compiler_stream_io_error_handler'(Input, InputError)),
+		'$lgt_compiler_stream_io_error_handler'(Input, InputError)
+	),
 	catch(
 		'$lgt_check_for_encoding_directive'(Term, SourceFile, Input, NewInput, OutputOptions),
 		FirstTermError,
-		'$lgt_compiler_stream_io_error_handler'(Input, FirstTermError)),
+		'$lgt_compiler_stream_io_error_handler'(Input, FirstTermError)
+	),
 	% open a corresponding Prolog file for writing generated code using any found encoding/1 directive
 	catch(
 		open(PrologFile, write, Output, [alias(logtalk_compiler_output)| OutputOptions]),
 		OpenError,
-		'$lgt_compiler_error_handler'(OpenError)),
+		'$lgt_compiler_error_handler'(OpenError)
+	),
 	catch(
 		'$lgt_write_encoding_directive'(Output),
 		WriteError,
-		'$lgt_compiler_error_handler'(WriteError)),
+		'$lgt_compiler_error_handler'(WriteError)
+	),
 	% read and compile the remaining terms in the Logtalk source file
 	catch(
 		'$lgt_tr_file_term'(Term, Singletons, NewInput),
 		Error,
-		'$lgt_compiler_error_handler'(Error)),
+		'$lgt_compiler_error_handler'(Error)
+	),
 	close(NewInput),
 	% finish writing the generated Prolog file
 	'$lgt_compiler_flag'(source_data, SourceData),
 	catch(
 		'$lgt_write_runtime_tables'(SourceData, Output),
 		OutputError,
-		'$lgt_compiler_stream_io_error_handler'(Output, OutputError)),
+		'$lgt_compiler_stream_io_error_handler'(Output, OutputError)
+	),
 	close(Output),
 	'$lgt_restore_global_operator_table'.
 
@@ -11650,7 +11661,8 @@ current_logtalk_flag(Flag, Value) :-
 		 '$lgt_remove_operators'(Operators),
 		 '$lgt_add_operators'(Saved)),
 		Error,
-		'$lgt_iso_stream_input_output_error_handler'(Operators, Saved, Error)).
+		'$lgt_iso_stream_input_output_error_handler'(Operators, Saved, Error)
+	).
 
 
 
@@ -11666,7 +11678,8 @@ current_logtalk_flag(Flag, Value) :-
 		 '$lgt_remove_operators'(Operators),
 		 '$lgt_add_operators'(Saved)),
 		Error,
-		'$lgt_iso_stream_input_output_error_handler'(Operators, Saved, Error)).
+		'$lgt_iso_stream_input_output_error_handler'(Operators, Saved, Error)
+	).
 
 
 
@@ -11682,7 +11695,8 @@ current_logtalk_flag(Flag, Value) :-
 		 '$lgt_remove_operators'(Operators),
 		 '$lgt_add_operators'(Saved)),
 		Error,
-		'$lgt_iso_stream_input_output_error_handler'(Operators, Saved, Error)).
+		'$lgt_iso_stream_input_output_error_handler'(Operators, Saved, Error)
+	).
 
 
 
@@ -11698,7 +11712,8 @@ current_logtalk_flag(Flag, Value) :-
 		 '$lgt_remove_operators'(Operators),
 		 '$lgt_add_operators'(Saved)),
 		Error,
-		'$lgt_iso_stream_input_output_error_handler'(Operators, Saved, Error)).
+		'$lgt_iso_stream_input_output_error_handler'(Operators, Saved, Error)
+	).
 
 
 
@@ -11714,7 +11729,8 @@ current_logtalk_flag(Flag, Value) :-
 		 '$lgt_remove_operators'(Operators),
 		 '$lgt_add_operators'(Saved)),
 		Error,
-		'$lgt_iso_stream_input_output_error_handler'(Operators, Saved, Error)).
+		'$lgt_iso_stream_input_output_error_handler'(Operators, Saved, Error)
+	).
 
 
 
@@ -11730,7 +11746,8 @@ current_logtalk_flag(Flag, Value) :-
 		 '$lgt_remove_operators'(Operators),
 		 '$lgt_add_operators'(Saved)),
 		Error,
-		'$lgt_iso_stream_input_output_error_handler'(Operators, Saved, Error)).
+		'$lgt_iso_stream_input_output_error_handler'(Operators, Saved, Error)
+	).
 
 
 
@@ -11746,7 +11763,8 @@ current_logtalk_flag(Flag, Value) :-
 		 '$lgt_remove_operators'(Operators),
 		 '$lgt_add_operators'(Saved)),
 		Error,
-		'$lgt_iso_stream_input_output_error_handler'(Operators, Saved, Error)).
+		'$lgt_iso_stream_input_output_error_handler'(Operators, Saved, Error)
+	).
 
 
 
@@ -11762,7 +11780,8 @@ current_logtalk_flag(Flag, Value) :-
 		 '$lgt_remove_operators'(Operators),
 		 '$lgt_add_operators'(Saved)),
 		Error,
-		'$lgt_iso_stream_input_output_error_handler'(Operators, Saved, Error)).
+		'$lgt_iso_stream_input_output_error_handler'(Operators, Saved, Error)
+	).
 
 
 
@@ -11778,7 +11797,8 @@ current_logtalk_flag(Flag, Value) :-
 		 '$lgt_remove_operators'(Operators),
 		 '$lgt_add_operators'(Saved)),
 		Error,
-		'$lgt_iso_stream_input_output_error_handler'(Operators, Saved, Error)).
+		'$lgt_iso_stream_input_output_error_handler'(Operators, Saved, Error)
+	).
 
 
 
@@ -11794,7 +11814,8 @@ current_logtalk_flag(Flag, Value) :-
 		 '$lgt_remove_operators'(Operators),
 		 '$lgt_add_operators'(Saved)),
 		Error,
-		'$lgt_iso_stream_input_output_error_handler'(Operators, Saved, Error)).
+		'$lgt_iso_stream_input_output_error_handler'(Operators, Saved, Error)
+	).
 
 
 
@@ -16323,14 +16344,20 @@ current_logtalk_flag(Flag, Value) :-
 
 % renamed flags
 
-'$lgt_valid_flag_value'(unknown, Value) :-
-	'$lgt_valid_flag_value'(unknown_entities, Value).
-'$lgt_valid_flag_value'(misspelt, Value) :-
-	'$lgt_valid_flag_value'(misspelt_calls, Value).
-'$lgt_valid_flag_value'(singletons, Value) :-
-	'$lgt_valid_flag_value'(singleton_variables, Value).
-'$lgt_valid_flag_value'(tmpdir, Value) :-
-	'$lgt_valid_flag_value'(scratch_directory, Value).
+'$lgt_valid_flag_value'(OldFlag, Value) :-
+	'$lgt_renamed_compiler_flag'(OldFlag, NewFlag),
+	'$lgt_valid_flag_value'(NewFlag, Value).
+
+
+
+% '$lgt_renamed_compiler_flag'(+atom, -atom)
+%
+% renamed compiler flags (from Logtalk 2.x)
+
+'$lgt_renamed_compiler_flag'(unknown, unknown_entities).
+'$lgt_renamed_compiler_flag'(misspelt, misspelt_calls).
+'$lgt_renamed_compiler_flag'(singletons, singleton_variables).
+'$lgt_renamed_compiler_flag'(tmpdir, scratch_directory).
 
 
 
@@ -16349,17 +16376,6 @@ current_logtalk_flag(Flag, Value) :-
 		)
 	;	true
 	).
-
-
-
-% '$lgt_renamed_compiler_flag'(+atom, -atom)
-%
-% renamed compiler flags (from Logtalk 2.x)
-
-'$lgt_renamed_compiler_flag'(unknown, unknown_entities).
-'$lgt_renamed_compiler_flag'(misspelt, misspelt_calls).
-'$lgt_renamed_compiler_flag'(singletons, singleton_variables).
-'$lgt_renamed_compiler_flag'(tmpdir, scratch_directory).
 
 
 
