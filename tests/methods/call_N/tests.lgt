@@ -5,7 +5,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/12/06,
+		date is 2013/09/07,
 		comment is 'Unit tests for the call/1-N built-in method.'
 	]).
 
@@ -43,12 +43,10 @@
 		Goal = foo(_,_),
 		call(Goal).
 
-	throws(call_N_8, error(existence_error(procedure,_),logtalk(call(foo(_,_)),This))) :-
-		this(This),
+	throws(call_N_8, error(existence_error(procedure,_),_)) :-
 		call(foo(_), _).
 
-	throws(call_N_9, error(existence_error(procedure,_),logtalk(call(foo(_,_)),This))) :-
-		this(This),
+	throws(call_N_9, error(existence_error(procedure,_),_)) :-
 		call(foo, _, _).
 
 	succeeds(call_N_10) :-

@@ -31,6 +31,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: Performance of local meta-calls when using the `call/2-N` built-in
+predicates and the `call//1-N` built-in non-terminals with a callable closure
+known at compile time.
+
 * FIXED: Restore the current directory when a call to the `logtalk_load/1-2`
 built-in predicates fail due to a syntax error in a source file for which the
 backend Prolog compiler `read_term/3` built-in predicate prints an error

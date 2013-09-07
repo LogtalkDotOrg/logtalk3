@@ -8964,9 +8964,14 @@ current_logtalk_flag(Flag, Value) :-
 		% to connect the execution context and the meta-call context arguments
 		'$lgt_exec_ctx'(ExCtx, Sender, This, Self, MetaCallCtx, _),
 		TPred = '$lgt_metacall'(Closure, ExtraArgs, MetaCallCtx, Prefix, Sender, This, Self)
-	;	% we're either compiling a clause for a normal predicate (i.e. MetaVars == [])
+	;	callable(Closure), \+ '$lgt_member_var'(Closure, MetaVars),
+		% we're either compiling a clause for a normal predicate (i.e. MetaVars == [])
 		% or the meta-call should be local as it corresponds to a non meta-argument
-		% or the meta-call is an explicitly qualifed call (::/2, ::/1, :/2) or a lambda expression (>>/2, (/)/2)
+		'$lgt_extend_closure'(Closure, ExtraArgs, Goal),
+		% make sure the constructed goal is not a call to call/2-N itself
+		\+ (functor(Goal, call, Arity), Arity >= 2) ->
+		'$lgt_tr_body'(Goal, TPred, _, Ctx)
+	;	% runtine meta-call
 		'$lgt_exec_ctx'(ExCtx, Sender, This, Self, _, _),
 		TPred = '$lgt_metacall'(Closure, ExtraArgs, [], Prefix, Sender, This, Self)
 	),
@@ -10353,7 +10358,8 @@ current_logtalk_flag(Flag, Value) :-
 % call/2-N built-in control construct
 
 '$lgt_tr_body'(CallN, TPred, DPred, Ctx) :-
-	functor(CallN, call, _),
+	functor(CallN, call, Arity),
+	Arity >= 2,
 	CallN =.. [call, Closure| ExtraArgs],
 	!,
 	'$lgt_check_closure'(Closure, Ctx),
@@ -11981,10 +11987,13 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_remove_redundant_calls'(call(Goal), true) :-
 	Goal == !,
 	!.
-'$lgt_remove_redundant_calls'(call(Goal), Goal) :-
+'$lgt_remove_redundant_calls'(call(Goal), SGoal) :-
 	nonvar(Goal),
-	functor(Goal, '$lgt_metacall', _),
-	!.
+	functor(Goal, Functor, _),
+	sub_atom(Functor, 0, _, _, '$lgt_'),	% e.g. '$lgt_metacall'
+	!,
+	'$lgt_remove_redundant_calls'(Goal, SGoal).
+
 '$lgt_remove_redundant_calls'(call(Goal), call(SGoal)) :-
 	!,
 	'$lgt_remove_redundant_calls'(Goal, SGoal).
