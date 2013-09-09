@@ -43,6 +43,9 @@ message and fails instead of throwing an exception.
 * FIXED: Don't compile calls to call//0 in a grammar rule body as a call to a
 built-in non-terminal.
 
+* FIXED: Avoid a spurious choice-point in local meta-calls resolved at runtime
+from within a category.
+
 Tests
 -----
 

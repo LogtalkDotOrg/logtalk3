@@ -4103,7 +4103,7 @@ current_logtalk_flag(Flag, Value) :-
 			functor(Pred, Functor, Arity),
 			throw(error(existence_error(procedure, Functor/Arity), logtalk(call(Pred), This)))
 		)
-	;	'$lgt_current_category_'(Ctg, Prefix, _, Def, _, Flags),
+	;	'$lgt_current_category_'(Ctg, Prefix, _, Def, _, Flags), !,
 		(	% in the most common case we're meta-calling a user defined predicate
 			call(Def, Pred, ExCtx, TPred) ->
 			call(TPred)
