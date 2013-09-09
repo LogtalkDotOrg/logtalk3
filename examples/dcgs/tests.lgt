@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2012/04/16,
+		date is 2013/09/09,
 		comment is 'Unit tests for the "dcgs" example.'
 	]).
 
@@ -124,13 +124,24 @@
 	test(dcgs_23) :-
 		logtalk << phrase(call([Input, Rest]>>(set::subtract(Input, Rest, [1]))), [1,2,3], [2,3]).
 
-	% cuts in the first argument of phrase/2-3 calls must be local and not extend outside:
+	% two nasty examples of getting a grammar rule difference list arguments as
+	% they require using variables as both lambda free and lambda parameters
 
 	test(dcgs_24) :-
+		logtalk << phrase(call({Input,Rest}/[Input,Rest]>>true), [1,2,3], [2,3]),
+		Input == [1,2,3], Rest == [2,3].
+
+	test(dcgs_25) :-
+		logtalk << phrase(call({Element}/[[Element|_],_]>>true), [1,2,3], [2,3]),
+		Element == 1.
+
+	% cuts in the first argument of phrase/2-3 calls must be local and not extend outside:
+
+	test(dcgs_26) :-
 		findall(X, (list::member(X, [1,2,3]), logtalk << phrase(!, _)), Xs),
 		Xs == [1,2,3].
 
-	test(dcgs_25) :-
+	test(dcgs_27) :-
 		findall(X, (list::member(X, [1,2,3]), logtalk << phrase(!, _, _)), Xs),
 		Xs == [1,2,3].
 
