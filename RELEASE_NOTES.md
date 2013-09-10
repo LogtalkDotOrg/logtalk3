@@ -31,6 +31,11 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: To avoid performance penalties, the built-in methods `phrase/2-3`
+no longer check that the list arguments are lists or partial lists. This is
+in line with current practice in Prolog compilers and draft standardization
+proposals where such checks are specified as optional.
+
 * IMPROVED: Performance of local meta-calls when using the `call/2-N` built-in
 predicates and the `call//1-N` built-in non-terminals with a callable closure
 known at compile time.
