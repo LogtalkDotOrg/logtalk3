@@ -8812,7 +8812,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
 
 
-% meta-calls
+% runtime resolved meta-calls
 
 '$lgt_tr_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
 	var(Pred),
@@ -8971,7 +8971,7 @@ current_logtalk_flag(Flag, Value) :-
 		% make sure the constructed goal is not a call to call/2-N itself
 		\+ (functor(Goal, call, Arity), Arity >= 2) ->
 		'$lgt_tr_body'(Goal, TPred, _, Ctx)
-	;	% runtine meta-call
+	;	% runtime resolved meta-call
 		'$lgt_exec_ctx'(ExCtx, Sender, This, Self, _, _),
 		TPred = '$lgt_metacall'(Closure, ExtraArgs, [], Prefix, Sender, This, Self)
 	),
