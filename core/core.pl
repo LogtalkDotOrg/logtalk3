@@ -1842,12 +1842,6 @@ logtalk_compile(Files, Flags) :-
 
 '$lgt_set_compiler_flags'(Flags) :-
 	'$lgt_assert_compiler_flags'(Flags),
-	(	'$lgt_pp_file_compiler_flag_'(debug, on) ->
-		% debug flag on requires the clean flag on
-		retractall('$lgt_pp_file_compiler_flag_'(clean, _)),
-		assertz('$lgt_pp_file_compiler_flag_'(clean, on))
-	;	true
-	),
 	(	'$lgt_pp_file_compiler_flag_'(hook, HookEntity) ->
 		% pre-compile hooks in order to speed up entity compilation
 		(	HookEntity == user ->
@@ -2046,11 +2040,8 @@ set_logtalk_flag(Name, Value) :-
 '$lgt_set_compiler_flag'(Name, Value) :-
 	retractall('$lgt_current_flag_'(Name, _)),
 	assertz('$lgt_current_flag_'(Name, Value)),
-	(	Name == debug, Value == on ->
-		% debug flag on requires the clean flag on
-		retractall('$lgt_current_flag_'(clean, _)),
-		assertz('$lgt_current_flag_'(clean, on))
-	;	Name == hook ->
+	(	Name == hook ->
+		% pre-compile hook calls for better performance when compiling files
 		'$lgt_compile_hooks'(Value)
 	;	true
 	).
