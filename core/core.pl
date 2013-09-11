@@ -4792,16 +4792,27 @@ current_logtalk_flag(Flag, Value) :-
 	;	'$lgt_load_prolog_code'(PrologFile, SourceFile, Options)
 	),
 	(	'$lgt_compiler_flag'(clean, on) ->
-		% try to delete the intermediate Prolog (ignore failure or error)
-		catch(('$lgt_delete_file'(PrologFile) -> true; true), _, true),
-		% try to delete any Prolog-specific auxiliary file (ignore failure or error)
-		'$lgt_decompose_file_name'(SourceFile, Directory, Name, _),
-		atom_concat(Directory, Name, File),
-		forall(
-			'$lgt_file_name'(tmp, File, _, _, TmpFile),
-			catch(('$lgt_delete_file'(TmpFile) -> true; true), _, true))
+		'$lgt_delete_intermediate_files'(PrologFile)
 	;	true
 	).
+
+
+'$lgt_delete_intermediate_files'(PrologFile) :-
+	% try to delete the intermediate Prolog (ignore failure or error)
+	catch('$lgt_delete_file'(PrologFile), _, true),
+	fail.
+
+'$lgt_delete_intermediate_files'(PrologFile) :-
+	% try to delete any Prolog-specific auxiliary files (ignore failure or error)
+	'$lgt_decompose_file_name'(PrologFile, Directory, Name, _),
+	atom_concat(Directory, Name, File),
+	'$lgt_file_extension'(tmp, Extension),
+	atom_concat(File, Extension, TmpFile),
+	'$lgt_file_exists'(TmpFile),
+	catch('$lgt_delete_file'(TmpFile), _, true),
+	fail.
+
+'$lgt_delete_intermediate_files'(_).
 
 
 
@@ -5554,14 +5565,10 @@ current_logtalk_flag(Flag, Value) :-
 	catch(close(Input), _, true),
 	(	nonvar(Output) ->
 		catch(close(Output), _, true),
-		% try to delete the intermediate Prolog files (ignoring failure or error)
-		% in order to prevent problems by mistaken the broken files by good ones
-		'$lgt_file_name'(prolog, Path, _, _, Prolog),
-		catch(('$lgt_delete_file'(Prolog) -> true; true), _, true),
-		% try to delete any Prolog dialect specific auxiliary files (ignoring failure or error)
-		forall(
-			'$lgt_file_name'(tmp, Path, _, _, TmpFile),
-			catch(('$lgt_delete_file'(TmpFile) -> true; true), _, true))
+		% try to delete the intermediate Prolog files in order to prevent
+		% problems by mistaken the broken files by good ones
+		'$lgt_file_name'(prolog, Path, _, _, PrologFile),
+		'$lgt_delete_intermediate_files'(PrologFile)
 	;	true
 	),
 	!,
