@@ -45,8 +45,9 @@ built-in predicates fail due to a syntax error in a source file for which the
 backend Prolog compiler `read_term/3` built-in predicate prints an error
 message and fails instead of throwing an exception.
 
-* FIXED: Don't compile calls to call//0 in a grammar rule body as a call to a
-built-in non-terminal.
+* FIXED: Don't try to compile calls to `call//0` in a grammar rule body as a
+call to a built-in non-terminal. Don't try to compile calls to `call/0` in a
+clause body as a call to a built-in predicate.
 
 * FIXED: Avoid a spurious choice-point in local meta-calls resolved at runtime
 from within a category.
