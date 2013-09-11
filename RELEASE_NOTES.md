@@ -52,6 +52,9 @@ clause body as a call to a built-in predicate.
 * FIXED: Avoid a spurious choice-point in local meta-calls resolved at runtime
 from within a category.
 
+* FIXED: Only consider skipping reloading a source file when the explicit
+compiler flags are the same used before.
+
 Tests
 -----
 

@@ -4770,7 +4770,7 @@ current_logtalk_flag(Flag, Value) :-
 	% it can be a loader file loading other files in its directory
 	'$lgt_current_directory'(Current),
 	'$lgt_change_directory'(Directory),
-	(	'$lgt_loaded_file_'(Basename, Directory, _, _, LoadingTimeStamp) ->
+	(	'$lgt_loaded_file_'(Basename, Directory, Flags, _, LoadingTimeStamp) ->
 		'$lgt_file_modification_time'(SourceFile, CurrentTimeStamp),
 		(	CurrentTimeStamp @=< LoadingTimeStamp ->
 			% file was not modified since loaded; no need to reload it
