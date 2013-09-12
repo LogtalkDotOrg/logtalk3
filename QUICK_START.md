@@ -102,17 +102,21 @@ Ready to start writing your own programs?
 1. Read the User Manual sections on `Programming in Logtalk` and `Running 
 and debugging Logtalk programs`.
 
-2. Take a look at the `coding` sub-directory. There you will find syntax 
+2. Take a look to the `adapters/NOTES.txt` file for important compatibility
+information about your chosen backend Prolog compiler and for any defined
+shorthands for commonly used load and make predicates.
+
+3. Take a look at the `coding` sub-directory. There you will find syntax 
 support files for popular text editors which enable syntax coloring and
 other text services when editing Logtalk source files. There's also
 support for syntax highlighters used for publishing code.
 
-3. Create a sub-directory with a suitable name to hold all the files of 
+4. Create a sub-directory with a suitable name to hold all the files of 
 your application. You may want to define the application directory path
 in a `settings.lgt` file in order to easily load your application (see 
 the file `CUSTOMIZE.md` for details).
 
-4. Copy to this sub-directory a loader file from one of the example 
+5. Copy to this sub-directory a loader file from one of the example 
 directories and modify it to load your own source files.
 
-5. Have fun!
+6. Have fun!

@@ -83,6 +83,12 @@ Examples
 sometimes useful solution to get a grammar rule difference list arguments using
 lambda expressions.
 
+Documentation
+-------------
+
+* IMPROVED: Documentation of available shorthands for the `logtalk_load/1` and
+`logtalk_make/1` built-in predicates.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
