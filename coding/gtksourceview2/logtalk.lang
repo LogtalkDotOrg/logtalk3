@@ -174,7 +174,7 @@
 			<!-- Flags -->
 			<keyword>((se|curren)t_logtalk_flag)(?=[(])</keyword>
 			<!-- Compiling, loading, and library paths -->
-			<keyword>(logtalk_(compile|l(ibrary_path|oad|oad_context)))(?=[(])</keyword>
+			<keyword>(logtalk_(compile|l(ibrary_path|oad|oad_context)|make))(?=[(])</keyword>
 			<keyword>logtalk_make</keyword>
 			<!-- Multi-threading meta-predicates -->
 			<keyword>(threaded(_(call|once|ignore|exit|peek|wait|notify))?)(?=[(])</keyword>

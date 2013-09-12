@@ -12,8 +12,10 @@
  *
  * CHANGES
  * -------
+ * 2013/09/11 (1.1.13)
+ *  -  Added syntax coloring of logtalk_make/1 predicate
  * 2013/08/04 (1.1.12)
- *  -  Added syntax coloring of logtalk_make/0 directive
+ *  -  Added syntax coloring of logtalk_make/0 predicate
  * 2013/05/04 (1.1.11)
  *  -  Added syntax coloring of built_in/0 directive
  * 2013/04/07 (1.1.10)

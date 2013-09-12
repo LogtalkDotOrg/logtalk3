@@ -83,6 +83,12 @@ Examples
 sometimes useful solution to get a grammar rule difference list arguments using
 lambda expressions.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* ADDED: Syntax coloring support for the new `logtalk_make/1` built-in
+predicate to all supported text editors and syntax highlighters.
+
 
 3.00.0 Alpha 23 - August 28, 2013
 =================================

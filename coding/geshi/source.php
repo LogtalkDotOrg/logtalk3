@@ -49,9 +49,9 @@ comment
 	extends(parent)).
 
 	:- info([
-		version is 1.14,
+		version is 1.15,
 		author is 'Paulo Moura',
-		date is 2013/08/19,
+		date is 2013/09/11,
 		comment is 'Sample prototype for testing syntax coloring.'
 	]).
 
@@ -160,6 +160,7 @@ comment
 		logtalk_compile(File, Options),
 		logtalk_load(File, Options),
 		logtalk_library_path(Library, Path),
+		logtalk_make(clean),
 		logtalk_make.
 
 	flags :-
