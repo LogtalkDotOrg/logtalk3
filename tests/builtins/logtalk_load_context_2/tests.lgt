@@ -22,6 +22,10 @@
 		assertz(result(directory, Directory)),
 		fail.
 	term_expansion((:- end_object), (:- end_object)) :-
+		logtalk_load_context(target, PrologFile),
+		assertz(result(target, PrologFile)),
+		fail.
+	term_expansion((:- end_object), (:- end_object)) :-
 		logtalk_load_context(entity_identifier, Entity),
 		assertz(result(entity_identifier, Entity)),
 		fail.
@@ -52,8 +56,12 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/08/17,
+		date is 2013/09/12,
 		comment is 'Unit tests for the logtalk_load_context/2 built-in predicate.'
+	]).
+
+	:- uses(hook, [
+		result/2
 	]).
 
 	test(logtalk_load_context_2_1) :-
@@ -64,14 +72,15 @@
 		object_property(This, file(_, Directory)),
 		atom_concat(Directory, 'sample.lgt', Source),
 		logtalk_load(Source, [hook(hook)]),
-		hook::result(source, Source0), Source0 == Source,
-		hook::result(file, Source0), Source0 == Source,
-		hook::result(basename, Basename), Basename == 'sample.lgt',
-		hook::result(directory, Directory0), Directory0 == Directory,
-		hook::result(entity_identifier, EntityIdentifier), EntityIdentifier == sample,
-		hook::result(entity_prefix, EntityPrefix), logtalk::entity_prefix(sample, EntityPrefix),
-		hook::result(entity_type, EntityType), EntityType == object,
-		hook::result(term_position, TermPosition), ground(TermPosition),
-		hook::result(stream, Stream), ground(Stream).
+		result(source, Source0), Source0 == Source,
+		result(file, Source0), Source0 == Source,
+		result(basename, Basename), Basename == 'sample.lgt',
+		result(directory, Directory0), Directory0 == Directory,
+		result(target, PrologFile0), atom(PrologFile0),
+		result(entity_identifier, EntityIdentifier), EntityIdentifier == sample,
+		result(entity_prefix, EntityPrefix), logtalk::entity_prefix(sample, EntityPrefix),
+		result(entity_type, EntityType), EntityType == object,
+		result(term_position, TermPosition), ground(TermPosition),
+		result(stream, Stream), ground(Stream).
 
 :- end_object.
