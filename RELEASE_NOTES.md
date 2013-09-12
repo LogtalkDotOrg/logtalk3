@@ -89,6 +89,9 @@ IDEs, text editors, and syntax highlighters support
 * ADDED: Syntax coloring support for the new `logtalk_make/1` built-in
 predicate to all supported text editors and syntax highlighters.
 
+* FIXED: Some syntax coloring support files missed highlighting of the
+`logtalk_load_context/2` built-in predicate.
+
 
 3.00.0 Alpha 23 - August 28, 2013
 =================================

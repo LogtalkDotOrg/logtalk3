@@ -12,6 +12,8 @@
  *
  * CHANGES
  * -------
+ * 2013/09/11 (1.1.12)
+ *  -  Added syntax coloring of logtalk_load_context/2 predicate
  * 2013/09/11 (1.1.13)
  *  -  Added syntax coloring of logtalk_make/1 predicate
  * 2013/08/04 (1.1.12)
@@ -151,7 +153,7 @@ $language_data = array(
             'current_logtalk_flag', 'set_logtalk_flag',
             'current_prolog_flag', 'set_prolog_flag',
             // compiling, loading, and library path
-            'logtalk_compile', 'logtalk_library_path', 'logtalk_load', 'logtalk_make',
+            'logtalk_compile', 'logtalk_library_path', 'logtalk_load', 'logtalk_load_context', 'logtalk_make',
             // database
             'abolish', 'asserta', 'assertz', 'clause', 'retract', 'retractall',
             // control
