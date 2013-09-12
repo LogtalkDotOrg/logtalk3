@@ -660,41 +660,6 @@ setup_call_cleanup(_, _, _) :-
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  Shortcut to the Logtalk built-in predicate logtalk_load/1
-%
-%  defined in the adapter files in order to be able to comment it out in case
-%  of conflict with some Prolog native feature; it implies conformance with
-%  the ISO Prolog standard regarding the definition of the {}/1 syntax
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-{File, Files} :-
-	!,
-	logtalk_load(File),
-	{Files}.
-{File} :-
-	logtalk_load(File).
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  Shortcut to the Logtalk built-in predicate logtalk_make/0
-%
-%  defined in the adapter files in order to be able to comment it out in case
-%  of conflict with some Prolog native feature; it implies conformance with
-%  the ISO Prolog standard regarding the definition of the {} atom
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-{} :-
-	logtalk_make.
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  converts between Prolog stream encoding names and XML encoding names
@@ -795,6 +760,35 @@ setup_call_cleanup(_, _, _) :-
 
 
 % term_hash(@callable, +integer, +integer, -integer) -- built-in
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  Shortcuts to the Logtalk built-in predicates logtalk_load/1 and
+%  logtalk_make/1
+%
+%  defined in the adapter files in order to be able to comment it out in case
+%  of conflict with some Prolog native feature; it implies conformance with
+%  the ISO Prolog standard regarding the definition of the {}/1 syntax
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+{*} :-
+	!,
+	logtalk_make(all).
+{!} :-
+	!,
+	logtalk_make(clean).
+
+
+{File, Files} :-
+	!,
+	logtalk_load(File),
+	{Files}.
+{File} :-
+	logtalk_load(File).
 
 
 

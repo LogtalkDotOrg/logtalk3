@@ -214,12 +214,12 @@ With multi-threading support turned on, you may get an harmless message
 when halting the system regarding threads that wouldn't die: you can 
 suppress the message on POSIX systems by using `% swilgt 2> /dev/null`.
 
-The definition of the predicate `{}/1` in the adapter file conflicts with 
-the `clpq` and `clpr` SWI-Prolog constraint libraries. The `{}/1` predicate
-is used in Logtalk as a shortcut to the `logtalk_load/1` built-in predicate.
-Comment out the definition in the adapter file if necessary. Note that 
-Logtalk also defines a `{}/1` control construct but this is only used within
-objects and categories.
+The definition of the predicate `{}/1` at the end of the adapter files
+conflicts with e.g. the `clpq` and `clpr` SWI-Prolog constraint libraries.
+The `{}/1` predicate is used in Logtalk as a shortcut to the `logtalk_load/1`
+and  `logtalk_make/1` built-in predicates. Comment out the definition in the
+adapter file if necessary. Note that Logtalk also defines a `{}/1` control
+construct but this is only used within objects and categories.
 
 Logtalk doesn't rely on the SWI-Prolog auto-loading mechanism for library
 predicates. Calls of these predicates within objects and categories must

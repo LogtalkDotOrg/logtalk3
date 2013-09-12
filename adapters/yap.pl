@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for YAP Prolog 6.0.2 and later versions
-%  Last updated on August 16, 2013
+%  Last updated on September 11, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -733,41 +733,6 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Shortcut to the Logtalk built-in predicate logtalk_load/1
-%
-%  defined in the adapter files in order to be able to comment it out in case
-%  of conflict with some Prolog native feature; it implies conformance with
-%  the ISO Prolog standard regarding the definition of the {}/1 syntax
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-{File, Files} :-
-	!,
-	logtalk_load(File),
-	{Files}.
-{File} :-
-	logtalk_load(File).
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  Shortcut to the Logtalk built-in predicate logtalk_make/0
-%
-%  defined in the adapter files in order to be able to comment it out in case
-%  of conflict with some Prolog native feature; it implies conformance with
-%  the ISO Prolog standard regarding the definition of the {} atom
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-{} :-
-	logtalk_make.
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
 %  converts between Prolog stream encoding names and XML encoding names
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -915,6 +880,35 @@ user:goal_expansion('::'(Object, Message), user:Goal) :-
 % term_hash(@callable, +integer, +integer, -integer)
 
 :- use_module(library(terms), [term_hash/4]).
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  Shortcuts to the Logtalk built-in predicates logtalk_load/1 and
+%  logtalk_make/1
+%
+%  defined in the adapter files in order to be able to comment it out in case
+%  of conflict with some Prolog native feature; it implies conformance with
+%  the ISO Prolog standard regarding the definition of the {}/1 syntax
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+{*} :-
+	!,
+	logtalk_make(all).
+{!} :-
+	!,
+	logtalk_make(clean).
+
+
+{File, Files} :-
+	!,
+	logtalk_load(File),
+	{Files}.
+{File} :-
+	logtalk_load(File).
 
 
 

@@ -62,6 +62,14 @@ from within a category.
 * FIXED: Only consider skipping reloading a source file when the explicit
 compiler flags are the same used before.
 
+Prolog adapter and integration files
+------------------------------------
+
+* ADDED: Aliases `{*}` for the `logtalk_make(all)` call and `{!}` for the
+`logtalk_make(clean)` call.
+
+* REMOVED: Alias `{}` for the built-in predicate `logtalk_make/0`.
+
 Tests
 -----
 
