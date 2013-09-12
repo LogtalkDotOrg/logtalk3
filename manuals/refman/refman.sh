@@ -119,6 +119,7 @@ eval $xslt_proc -o builtins/logtalk_compile2.section refman.xsl builtins/logtalk
 eval $xslt_proc -o builtins/logtalk_load1.section refman.xsl builtins/logtalk_load1.html
 eval $xslt_proc -o builtins/logtalk_load2.section refman.xsl builtins/logtalk_load2.html
 eval $xslt_proc -o builtins/logtalk_make0.section refman.xsl builtins/logtalk_make0.html
+eval $xslt_proc -o builtins/logtalk_make1.section refman.xsl builtins/logtalk_make1.html
 eval $xslt_proc -o builtins/logtalk_library_path2.section refman.xsl builtins/logtalk_library_path2.html
 eval $xslt_proc -o builtins/logtalk_load_context2.section refman.xsl builtins/logtalk_load_context2.html
 eval $xslt_proc -o builtins/current_logtalk_flag2.section refman.xsl builtins/current_logtalk_flag2.html
@@ -249,6 +250,7 @@ cat -s \
 	builtins/logtalk_load1.section \
 	builtins/logtalk_load2.section \
 	builtins/logtalk_make0.section \
+	builtins/logtalk_make1.section \
 	builtins/logtalk_library_path2.section \
 	builtins/logtalk_load_context2.section \
 	builtins/current_logtalk_flag2.section \

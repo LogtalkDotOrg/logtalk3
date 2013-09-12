@@ -105,6 +105,17 @@
 		['Redefining ~w ~q (loaded from file ~w)'-[Type, Entity, OldFile], nl],
 		message_context(File, Lines).
 
+	% make messages
+
+	logtalk::message_tokens(invalid_make_target(Target), core) -->
+		['Invalid make target: ~w'-[Target], nl].
+
+	logtalk::message_tokens(modified_files_reloaded, core) -->
+		['Reloaded all modified Logtalk source files'-[], nl].
+
+	logtalk::message_tokens(intermediate_files_deleted, core) -->
+		['Deleted all intermediate files for the loaded Logtalk source files'-[], nl].
+
 	% Logtalk starup messages
 
 	logtalk::message_tokens(possibly_incompatible_prolog_version(Current, Compatible), core) -->
