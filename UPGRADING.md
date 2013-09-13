@@ -58,7 +58,6 @@ attempting to use them will result in compiler errors:
 * `altdirs`
 * `startup_message`
 * `smart_compilation`
-* `reload`
 
 The XML related files were removed as generating documenting files is now the
 responsibility of the `lgtdoc` tool. The debugger is also no longer a built-in
@@ -68,9 +67,13 @@ for source file paths, removing the need for the `altdirs` flag. The flag
 printing in Logtalk 3.x, which allows fine grained control over message
 printing (see also the provided sample settings file). The `smart_compilation`
 flag is no longer necessary and the old behavior can now be controlled using
-the `clean` flag. The `reload` flag, which was mainly used for indirectly
-allowing static binding is no longer required as static binding optimizations
-now depend on the `optimize` flag.
+the `clean` flag.
+
+The `reload` flag, is no longer considered or required for static binding
+optimizations, which now depend on the `optimize` flag. In addition, the
+default value for this flag is now `changed`, i.e. a file will be reloaded
+if changed since last loaded (provided that the any explicit flags are the
+same as the first time it was loaded).
 
 
 Deprecated directives and control constructs

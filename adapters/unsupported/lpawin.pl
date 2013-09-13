@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for LPA WinProlog 4.00
-%  Last updated on September 11, 2013
+%  Last updated on September 13, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -349,6 +349,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 '$lgt_default_flag'(code_prefix, '$').
 '$lgt_default_flag'(optimize, off).
 '$lgt_default_flag'(source_data, on).
+'$lgt_default_flag'(reload, changed).
 '$lgt_default_flag'(debug, off).
 % Prolog compiler and loader flags:
 '$lgt_default_flag'(prolog_compiler, []).

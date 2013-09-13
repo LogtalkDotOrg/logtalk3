@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/08/13,
+		date is 2013/09/13,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -146,8 +146,9 @@
 		 (current_logtalk_flag(hook, Hook) -> true; Hook = '(none defined)'),
 		 current_logtalk_flag(optimize, Optimize),
 		 current_logtalk_flag(source_data, SourceData),
-		 current_logtalk_flag(debug, Debug),
 		 current_logtalk_flag(clean, Clean),
+		 current_logtalk_flag(debug, Debug),
+		 current_logtalk_flag(reload, Reload),
 		 current_logtalk_flag(prolog_compiler, PrologCompiler),
 		 current_logtalk_flag(prolog_loader, PrologLoader),
 		 current_logtalk_flag(prolog_dialect, PrologDialect),
@@ -169,7 +170,7 @@
 			'  report: ~w, scratch_directory: ~w'-[Report, ScratchDirectory], nl,
 			'  code_prefix: ~q, hook: ~w'-[Code, Hook], nl,
 			'  optimize: ~w, source_data: ~w, clean: ~w'-[Optimize, SourceData, Clean], nl,
-			'  debug: ~w'-[Debug], nl,
+			'  debug: ~w, reload: ~w'-[Debug, Reload], nl,
 			'Back-end Prolog compiler flags:'-[], nl,
 			'  prolog_compiler: ~w'-[PrologCompiler], nl,
 			'  prolog_loader:   ~w'-[PrologLoader], nl,

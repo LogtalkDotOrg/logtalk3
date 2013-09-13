@@ -4797,17 +4797,26 @@ current_logtalk_flag(Flag, Value) :-
 	% it can be a loader file loading other files in its directory
 	'$lgt_current_directory'(Current),
 	'$lgt_change_directory'(Directory),
-	(	'$lgt_loaded_file_'(Basename, Directory, Flags, _, _, LoadingTimeStamp) ->
-		'$lgt_file_modification_time'(SourceFile, CurrentTimeStamp),
-		(	CurrentTimeStamp @=< LoadingTimeStamp ->
-			% file was not modified since loaded; no need to reload it
+	(	'$lgt_loaded_file_'(Basename, Directory, PreviousFlags, _, _, LoadingTimeStamp) ->
+		'$lgt_compiler_flag'(reload, Reload),
+		(	Reload == skip ->
+			% default or file-specific reload flag set to skip if file alreay loaded
+			'$lgt_print_message'(comment(loading), core, skipping_reloading_file(SourceFile, Flags))
+		;	'$lgt_member'(reload(skip), PreviousFlags) ->
+			% file marked as load once the first time it was loaded
+			'$lgt_print_message'(comment(loading), core, skipping_reloading_file(SourceFile, Flags))
+		;	Reload == changed,
+			PreviousFlags == Flags,
+			'$lgt_file_modification_time'(SourceFile, CurrentTimeStamp),
+			CurrentTimeStamp @=< LoadingTimeStamp ->
+			% file was not modified since loaded and same explicit flags as before
 			'$lgt_print_message'(comment(loading), core, skipping_reloading_file(SourceFile, Flags))
 		;	% we're reloading a source file
 			'$lgt_print_message'(silent(loading), core, reloading_file(SourceFile, Flags)),
 			'$lgt_compile_file'(SourceFile, PrologFile, Flags, loading, Current),
 			retractall('$lgt_loaded_file_'(Basename, Directory, _, _, _, _)),
 			'$lgt_load_compiled_file'(SourceFile, PrologFile),
-			'$lgt_print_message'(comment(loading), core, reloaded_file(SourceFile, Flags))
+			'$lgt_print_message'(comment(loading), core, reloaded_file(SourceFile, Flags))			
 		)
 	;	% first time loading this source file
 		'$lgt_print_message'(silent(loading), core, loading_file(SourceFile, Flags)),
@@ -4816,6 +4825,7 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_print_message'(comment(loading), core, loaded_file(SourceFile, Flags))
 	),
 	'$lgt_change_directory'(Current).
+
 
 
 '$lgt_load_compiled_file'(SourceFile, PrologFile) :-
@@ -16250,6 +16260,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_valid_flag'(debug).
 '$lgt_valid_flag'(clean).
 '$lgt_valid_flag'(source_data).
+'$lgt_valid_flag'(reload).
 % read-only compilation flags
 '$lgt_valid_flag'(version).
 % startup flags
@@ -16333,6 +16344,10 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_valid_flag_value'(source_data, on) :- !.
 '$lgt_valid_flag_value'(source_data, off) :- !.
+
+'$lgt_valid_flag_value'(reload, always) :- !.
+'$lgt_valid_flag_value'(reload, changed) :- !.
+'$lgt_valid_flag_value'(reload, skip) :- !.
 
 '$lgt_valid_flag_value'(debug, on) :- !.
 '$lgt_valid_flag_value'(debug, off) :- !.
@@ -18784,7 +18799,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	Type == object,
 		current_object(Entity) ->
 		true
-	;	logtalk_load(logtalk_home(File), [report(off), clean(on), scratch_directory(ScratchDirectory)])
+	;	logtalk_load(logtalk_home(File), [report(off), clean(on), reload(skip), scratch_directory(ScratchDirectory)])
 	).
 
 
