@@ -4798,6 +4798,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_current_directory'(Current),
 	'$lgt_change_directory'(Directory),
 	(	'$lgt_loaded_file_'(Basename, Directory, PreviousFlags, _, _, LoadingTimeStamp) ->
+		% we're attempting to reload a file
 		'$lgt_compiler_flag'(reload, Reload),
 		(	Reload == skip ->
 			% default or file-specific reload flag set to skip if file alreay loaded
