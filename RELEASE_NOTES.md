@@ -108,6 +108,10 @@ predicate to all supported text editors and syntax highlighters.
 * FIXED: Some syntax coloring support files missed highlighting of the
 `logtalk_load_context/2` built-in predicate.
 
+* FIXED: GtkSourceView 2.x support file had a wrong language specification
+version number that resulted in a reading language specification file error
+when using editors such as Gedit and IDEs such as Anjuta.
+
 
 3.00.0 Alpha 23 - August 28, 2013
 =================================
