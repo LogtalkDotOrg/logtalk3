@@ -659,6 +659,20 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  term hashing
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% term_hash(@callable, +integer, +integer, -integer)
+
+term_hash(_, _, _, _) :-
+	fail.
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Shortcuts to the Logtalk built-in predicates logtalk_load/1 and
