@@ -156,7 +156,7 @@
 		;;
 		;; term creation and decomposition:
 		;;
-		("\\<\\(arg\\|\\(?:acyclic\\|copy\\|subsumes\\)_term\\)\\|functor\\|numbervars\\|term_variables\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
+		("\\<\\(arg\\|\\(?:acyclic\\|copy\\|subsumes\\)_term\\|functor\\|numbervars\\|term_variables\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
 		("=\\.\\." 0 'logtalk-built-in-predicate-face)
 		;;
 		;; arithemtic evaluation:
@@ -213,7 +213,7 @@
 		;;
 		;; atomic term processing:
 		;;
-		("\\<\\(atom_\\(?:c\\(?:hars\\|o\\(?:des\\|ncat\\)\\)\\|length\\)\\|char_code\\|number_c\\(?:\\(?:har\\|ode\\)s\\)\\|sub_atom\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
+        ("\\<\\(atom_\\(?:c\\(?:hars\\|o\\(?:des\\|ncat\\)\\)\\|length\\)\\|char_code\\|number_c\\(?:har\\|ode\\)s\\|sub_atom\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
 		;;
 		;; sorting
 		;;

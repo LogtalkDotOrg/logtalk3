@@ -112,6 +112,9 @@ predicate to all supported text editors and syntax highlighters.
 version number that resulted in a reading language specification file error
 when using editors such as Gedit and IDEs such as Anjuta.
 
+* FIXED: Several typos in the Emacs support file that prevented syntax coloring
+of some operators, directives, and built-in predicates.
+
 
 3.00.0 Alpha 23 - August 28, 2013
 =================================
