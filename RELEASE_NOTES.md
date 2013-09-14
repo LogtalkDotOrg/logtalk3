@@ -121,6 +121,9 @@ of some operators, directives, and built-in predicates.
 * FIXED: Missing jEdit text editor syntax coloring support for the directive
 `meta_non_terminal/1`.
 
+* FIXED: Workaround a Nedit size limitation in language highlight patterns
+that prevented importing the `logtalk.pts` support file.
+
 
 3.00.0 Alpha 23 - August 28, 2013
 =================================
