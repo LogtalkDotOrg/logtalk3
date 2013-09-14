@@ -118,6 +118,9 @@ of some operators, directives, and built-in predicates.
 * FIXED: Typo in the SHJS support file that prevented syntax coloring of the
 `else/0` directive and added missing support for the `include/1` directive.
 
+* FIXED: Missing jEdit text editor syntax coloring support for the directive
+`meta_non_terminal/1`.
+
 
 3.00.0 Alpha 23 - August 28, 2013
 =================================

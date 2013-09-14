@@ -5,9 +5,9 @@
 <!--	jEdit 4.3 Logtalk syntax file
 
 	written by		Paulo Moura
-	version			1.200
+	version			1.300
 	created on		May 5, 2002
-	last revised	September 11, 2013
+	last revised	September 14, 2013
 
 	To install, copy this file to the "modes" subdirectory in jEdit 
 	directory installation.   Next, check the "catalog" file in the 
@@ -50,7 +50,7 @@
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD1">^\s*:-\se(n(coding|sure_loaded)|xport)(?=[(])</SEQ_REGEXP>
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD1">^\s*:-\sin(clude|itialization|fo)(?=[(])</SEQ_REGEXP>
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD1">^\s*:-\s(built_in|dynamic|synchronized|threaded)(?=[.])</SEQ_REGEXP>
-		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD1">^\s*:-\s(alias|d(ynamic|iscontiguous)|m(eta_predicate|ode|ultifile)|s(et_(logtalk|prolog)_flag|ynchronized))(?=[(])</SEQ_REGEXP>
+		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD1">^\s*:-\s(alias|d(ynamic|iscontiguous)|m(eta_(non_terminal|predicate)|ode|ultifile)|s(et_(logtalk|prolog)_flag|ynchronized))(?=[(])</SEQ_REGEXP>
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD1">^\s*:-\sop(?=[(])</SEQ_REGEXP>
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD1">^\s*:-\s(c(alls|oinductive)|reexport|use(s|_module))(?=[(])</SEQ_REGEXP>
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD1">(complements|extends|i(nstantiates|mp(lements|orts))|specializes)(?=[(])</SEQ_REGEXP>
