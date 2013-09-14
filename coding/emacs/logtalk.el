@@ -125,7 +125,7 @@
 		("\\<\\(co\\(?:mplements_object\\|nforms_to_protocol\\)\\|extends_\\(?:object\\|protocol\\|category\\)\\|i\\(?:mp\\(?:lements_protocol\\|orts_category\\)\\|nstantiates_class\\)\\|specializes_class\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
 		("\\<\\(\\(?:abolish\\|define\\)_events\\|current_event\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
 		("\\<\\(\\(?:curren\\|se\\)t_logtalk_flag\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
-		("\\<\\(logtalk_\\(?:compile\\|load\\|library_path\|load_context\\|make\\)\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
+		("\\<\\(logtalk_\\(?:compile\\|load\\|library_path\\|load_context\\|make\\)\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
 		("\\<logtalk_make\\>" 0 'logtalk-built-in-predicate-face)
 		("\\<\\(forall\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
 		("\\<\\(retractall\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
