@@ -8,7 +8,7 @@ terms per section 7).        Consult the `LICENSE.txt` file for details.
 ________________________________________________________________________
 
 
-This directory contains files that provide support for using version 2.6.9 
+This directory contains files that provide support for using version 3.15 
 or later of the Highlight package by Andre Simon with Logtalk source files.
 A detailed description on the Highlight package is available from:
 
@@ -23,30 +23,28 @@ for Logtalk, you may use the following command:
 
 	% highlight --list-langs
 
-Look in the resulting listing for the "lgt" extension. If support for Logtalk 
-is not included or if it is outdated, copy the file "lgt.lang" to the folder:
+Look in the resulting listing for the `lgt` extension. If support for Logtalk 
+is not included or if it is outdated, copy the file `logtalk.lang` to the
+folder:
 
 	$prefix/share/highlight/langDefs/
 
-where $prefix is the Highlight installation directory (by default, /usr).
+where `$prefix` is the Highlight installation directory (by default, `/usr`).
+There's also a `lgt.lang` file for older 2.x versions of Highlight.
 
-Usage example for a "foo.lgt" Logtalk source file:
+Usage example for a `foo.lgt` Logtalk source file:
 
 	% highlight --replace-tabs=4 --xhtml --input=foo.lgt --output=foo.html --style=kwrite
 
-You should try different style files (using the --style option) in order to 
+You should try different style files (using the `--style` option) in order to 
 find which ones provide the more satisfactory results. As Logtalk files are 
 usually formatted using tabs (the recommended setting is a tab width
-equivalent to 4 spaces), the option "--replace-tabs=4" may be necessary to
+equivalent to 4 spaces), the option `--replace-tabs=4` may be necessary to
 keep you source code properly formatted.
 
 You may also use the "lgt.lang" file with plain Prolog files by using the 
-"--syntax" option. For example:
+`--syntax` option. For example:
 
 	% highlight --syntax=lgt --xhtml --input=foo.pl --output=foo.html
-
-As the Highlight package itself, the "lgt.lang" file is licensed under the 
-GNU GPL 2 license.
-
 
 THIS SYNTAX COLORING FILE IS UNDER DEVELOPMENT.
