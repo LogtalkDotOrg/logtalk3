@@ -7,9 +7,9 @@ comment
 */
 
 
-:- if(goal).
+:- if(Goal).
 	% conditional
-:- elif(goal).
+:- elif(Goal).
 	% compilation
 :- else.
 	% directives
@@ -30,9 +30,9 @@ comment
 	extends(parent)).
 
 	:- info([
-		version is 1.16,
+		version is 1.17,
 		author is 'Paulo Moura',
-		date is 2013/09/12,
+		date is 2013/09/16,
 		comment is 'Sample prototype for testing syntax coloring.'
 	]).
 
@@ -206,8 +206,8 @@ comment
 	context_switching_calls :-
 		Object<<Goal.
 
-	direct_calls_of_category_predicates :-
-		:Goal.
+	explicitly_qualified_module_calls :-
+		Module:Goal.
 
 	if_then_else :-
 		(	If ->
@@ -220,9 +220,9 @@ comment
 		Y1 is 13.13, Y2 is -13.13, Y3 is +13.13,
 		Z1 is 13.13e-23, Z2 is -13.13e-23, Z3 is +13.13e-23,
 		C1 is 0'A, C2 is 0'', C3 is 0'",
-		B is 0b1011101,
-		O is 0o1234560,
-		H is 0x1234567890abcDEF.
+		B1 is 0b1011101,
+		O1 is 0o1234560,
+		H1 is 0x1234567890abcDEF.
 
 	functions :-
 		A is atan(3.14) + acos(0.5) + asin(0.5) + sin(0.77) - cos(123.23),
