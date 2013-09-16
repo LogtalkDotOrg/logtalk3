@@ -25,7 +25,7 @@ RELEASE NOTES
 =============
 
 
-3.00.0 Alpha 24 - September ??, 2013
+3.00.0 Alpha 24 - September 16, 2013
 ====================================
 
 Logtalk compiler and runtime
