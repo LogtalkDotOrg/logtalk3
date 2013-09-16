@@ -22,9 +22,6 @@ Keywords={
     Regex=[[(forward)(?=[(])]],
     Group=1,
   },
-  { Id=4, --Logtalk message sending operators
-    Regex=[[(::|\^\^|<<|:)]],
-  },
 
   { Id=1, --encapsulation directives
     Regex=[[ ^\s*:-\s(category|protocol|object)(?=[(]) ]],
@@ -250,17 +247,18 @@ Keywords={
     Regex=[[ (keysort|sort)(?=[(]) ]],
     Group=1
   },
+
   { Id=4, --Logtalk message sending operators
-    Regex=[[ (::|\^\^|<<|:) ]],
+    Regex=[[ (::|\^\^|<<|:(?!\-)) ]],
   },
   { Id=4, --Logtalk external-call control construct
     Regex=[[ ([{}]) ]],
   },
+  { Id=4,
+    Regex=[[ \b(is)\b ]],
+  },
   { Id=4, --operators
     Regex=[[ (\\\+|->|=\.\.|;|!|:-|\^) ]],
-  },
-  { Id=4,
-    Regex=[[ \b(is|mod|rem|pi|e|//|[+\-]|/(?!\*)|(?<=\*)/|[*][*])\b ]],
   },
   { Id=4,
     Regex=[[ (=<|<|=:=|=\\=|>=|>) ]],
@@ -277,11 +275,28 @@ Keywords={
   { Id=4,
     Regex=[[ (/\\|\\/|>>|\\) ]],
   },
+  { Id=5,
+    Regex=[[ (0['].) ]],
+  },
+  { Id=5,
+    Regex=[[ (0b[0-1]+|0o[0-7]+) ]],
+  },
+  { Id=5,
+    Regex=[=[0x[[:xdigit:]]+]=],
+  },
+  { Id=5,
+    Regex=[[ ([:digit:]+(\.[:digit:]+)?([eE][+-]?[:digit:]+)?) ]],
+  },
 }
+
+
+-- disable highlighting of numbers
+Digits = Identifiers
 
 
 Strings={
   Delimiter=[["|']],
+  Escape=[=[ \\[0-7]+\\|\\x[[:xdigit:]]+\\|\\[abfnrtv\\\'"] ]=]
 }
 
 IgnoreCase=false
@@ -295,7 +310,3 @@ Comments={
     Delimiter= { [[\/\*]],[[\*\/]],}
   }
 }
-
-Operators=[[\(|\)|\[|\]|\{|\}|\,|\;|\:|\&|<|>|\!|\=|\/|\*|\+|\-]]
-
---FIXME no default escchar param: regex(\\[0-7]+\\|\\x[[:xdigit:]]+\\|\\[abfnrtv\\'"])
