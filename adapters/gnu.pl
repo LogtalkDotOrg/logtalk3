@@ -565,7 +565,7 @@ setup_call_cleanup(_, _, _) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  dummy definitions just to avoid errors when usng gplc to generate
+%  dummy definitions just to avoid errors when using gplc to generate
 %  executables
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
