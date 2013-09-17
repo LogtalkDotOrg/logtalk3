@@ -25,6 +25,17 @@ RELEASE NOTES
 =============
 
 
+3.00.0 Alpha 25 - September ??, 2013
+====================================
+
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: CxProlog adapter file, taking advantage of the new `position/1`
+stream property and the new built-in predicate `stream_position_data/3`
+introduced on release 0.97.7, which is now the minimum version required.
+
+
 3.00.0 Alpha 24 - September 16, 2013
 ====================================
 

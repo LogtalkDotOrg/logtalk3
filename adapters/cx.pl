@@ -3,8 +3,8 @@
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
-%  Adapter file for CxProlog 0.97.6 or a later version
-%  Last updated on September 13, 2013
+%  Adapter file for CxProlog 0.97.7 or a later version
+%  Last updated on September 17, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -213,7 +213,7 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 '$lgt_prolog_feature'(prolog_dialect, cx).
 '$lgt_prolog_feature'(prolog_version, (Major, Minor, Patch)) :-
 	catch(current_prolog_flag(version_data, cxprolog(Major, Minor, Patch, _)), _, fail).
-'$lgt_prolog_feature'(prolog_compatible_version, @>=((0,97,6))).
+'$lgt_prolog_feature'(prolog_compatible_version, @>=((0,97,7))).
 
 '$lgt_prolog_feature'(encoding_directive, source).
 '$lgt_prolog_feature'(tabling, unsupported).
@@ -507,7 +507,9 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 
 % '$lgt_stream_current_line_number'(@stream, -integer)
 
-'$lgt_stream_current_line_number'(_, -1).
+'$lgt_stream_current_line_number'(Stream, Line) :-
+	stream_property(Stream, position(Position)),
+	stream_position_data(line_count, Position, Line), !.
 
 
 
@@ -521,8 +523,12 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 
 % '$lgt_read_term'(@stream, -term, +list, -position)
 
-'$lgt_read_term'(Stream, Term, Options, '-'(-1, -1)) :-
-	read_term(Stream, Term, Options).
+'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd) :-
+	stream_property(Stream, position(PositionBegin)),
+	stream_position_data(line_count, PositionBegin, LineBegin),
+	read_term(Stream, Term, Options),
+	stream_property(Stream, position(PositionEnd)),
+	stream_position_data(line_count, PositionEnd, LineEnd), !.
 
 
 
