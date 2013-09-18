@@ -38,6 +38,10 @@ introduced on release 0.97.7, which is now the minimum version required.
 Tools
 -----
 
+* CHANGED: The `lgtunit` tool code coverage output now writes the list of
+predicate clause indexes at the end. Also added information about backend
+Prolog compiler features for limiting the print depth of the list.
+
 * FIXED: A bug where the `lgtunit` tool code coverage would report statistics
 on compiler-generated auxiliary predicates (such as the ones resulting from
 `use_module/2` directives and optimized meta-predicate definitions).

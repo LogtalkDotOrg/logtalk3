@@ -152,6 +152,16 @@ use of dynamic predicates with clauses asserted at runtime. You may easily
 identify dynamic predicates in the results as their clauses often have a
 initial count equal to zero.
 
+The list of indexes of the covered predicate clauses can be long. Some backend
+Prolog compilers provide a flag or a predicate to control the depth of printed
+terms that can be useful:
+
+* CxProlog: `write_depth/2` predicate
+* ECLiPSe: `print_depth` flag
+* SICStus Prolog: `toplevel_print_options` flag
+* SWI-Prolog: `toplevel_print_options` flag
+* XSB: `set_file_write_depth/1` predicate
+* YAP: `write_depth/2-3` predicates
 
 All source files are formatted using tabs (the recommended setting is a tab
 width equivalent to 4 spaces).

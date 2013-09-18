@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/06/08,
+		date is 2013/09/18,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -117,9 +117,9 @@
 		clause_tokens(Total),
 		[' covered, ~f% coverage'-[Percentage], nl].
 
-	logtalk::message_tokens(entity_clause_coverage(Entity, Predicate, Covered, Ratio), lgtunit) -->
+	logtalk::message_tokens(entity_clause_coverage(Entity, Predicate, Ratio, Covered), lgtunit) -->
 		{numbervars(Entity, 0, _)},
-		['~q: ~q - ~w (~w)'-[Entity, Predicate, Covered, Ratio], nl]. 
+		['~q: ~q - ~w - ~w'-[Entity, Predicate, Ratio, Covered], nl]. 
 
 	logtalk::message_tokens(no_code_coverage_information_collected, lgtunit) -->
 		['no code coverage information collected'-[], nl].

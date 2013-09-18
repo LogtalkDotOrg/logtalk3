@@ -475,7 +475,7 @@
 		;	% likely a dynamic predicate with clauses asserted at runtime
 			assertz(covered_(Covered, Covered))
 		),
-		print_message(information, lgtunit, entity_clause_coverage(Entity, Other::Functor/Arity, Ns, Covered/Total)),
+		print_message(information, lgtunit, entity_clause_coverage(Entity, Other::Functor/Arity, Covered/Total, Ns)),
 		fail.
 	write_entity_coverage_information(Entity) :-
 		% do not consider dynamic clauses asserted at runtime (which have an index of zero)
@@ -487,7 +487,7 @@
 		;	% likely a dynamic predicate with clauses asserted at runtime
 			assertz(covered_(Covered, Covered))
 		),
-		print_message(information, lgtunit, entity_clause_coverage(Entity, Functor/Arity, Ns, Covered/Total)),
+		print_message(information, lgtunit, entity_clause_coverage(Entity, Functor/Arity, Covered/Total, Ns)),
 		fail.
 	write_entity_coverage_information(Entity) :-
 		current_object(Entity),
@@ -497,7 +497,7 @@
 		memberchk(number_of_clauses(Total), Properties),
 		\+ memberchk(auxiliary, Properties),
 		assertz(covered_(0, Total)),
-		print_message(information, lgtunit, entity_clause_coverage(Entity, Functor/Arity, [], 0/Total)),
+		print_message(information, lgtunit, entity_clause_coverage(Entity, Functor/Arity, 0/Total, [])),
 		fail.
 	write_entity_coverage_information(Entity) :-
 		current_category(Entity),
@@ -507,7 +507,7 @@
 		memberchk(number_of_clauses(Total), Properties),
 		\+ memberchk(auxiliary, Properties),
 		assertz(covered_(0, Total)),
-		print_message(information, lgtunit, entity_clause_coverage(Entity, Functor/Arity, [], 0/Total)),
+		print_message(information, lgtunit, entity_clause_coverage(Entity, Functor/Arity, 0/Total, [])),
 		fail.
 	write_entity_coverage_information(_).
 
