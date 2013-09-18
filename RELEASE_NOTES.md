@@ -35,6 +35,12 @@ Prolog adapter and integration files
 stream property and the new built-in predicate `stream_position_data/3`
 introduced on release 0.97.7, which is now the minimum version required.
 
+Examples
+--------
+
+* FIXED: Restored testing of `use_module/1` directives (whose support depend
+on the backend Prolog compiler) for the `modules` example.
+
 
 3.00.0 Alpha 24 - September 16, 2013
 ====================================

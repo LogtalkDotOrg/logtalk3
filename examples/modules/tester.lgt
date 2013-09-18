@@ -13,8 +13,9 @@
 	set_logtalk_flag(report, warnings),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load([exports, lists, metapreds, test], [debug(on), source_data(on)]),
-%	logtalk_load([exports, lists, metapreds, test], [source_data(off)]),
-	catch(logtalk_load(client), _,	true),	% also test parsing of use_module/1 directives
+	% also test parsing of use_module/1 directives, which
+	% is only supported by some backend Prolog compilers
+	catch((logtalk_load(client, [debug(on), source_data(on)]) -> true; true), _, true),
 	logtalk_load(library(types_loader)),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run

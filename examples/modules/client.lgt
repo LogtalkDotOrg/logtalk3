@@ -11,8 +11,8 @@
 
 :- module(client, [test/0, test/1, names/0, names/1]).
 
-:- use_module(lists, [contained/2]).
-:- use_module(metapreds, [meta/1]).
+:- use_module(lists).
+:- use_module(metapreds).
 
 names :-
 	contained(P, [paulo, carlos, helena]),

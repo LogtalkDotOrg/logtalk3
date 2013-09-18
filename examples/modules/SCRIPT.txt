@@ -60,3 +60,16 @@ N = 1 ;
 N = 2 ;
 N = 3
 yes
+
+
+% test the compilation and use of meta-predicates:
+
+| ?- test::names(Names).
+
+Names == [paulo, carlos, helena]
+yes
+
+| ?- test::test(Names).
+
+Names == [paulo, carlos, helena]
+yes
