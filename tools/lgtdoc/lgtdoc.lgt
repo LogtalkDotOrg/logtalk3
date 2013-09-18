@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2012/09/27,
+		date is 2013/09/18,
 		comment is 'Documenting tool.',
 		remarks is [
 			'Compiling files for generating XML documentation' - 'All source files must be compiled with the "source_data" compiler flag turned on.',
@@ -91,24 +91,26 @@
 	library(Library) :-
 		library(Library, []).
 
-	output_library_files(Path, Options) :-
+	output_library_files(Directory, Options) :-
 		once(member(exclude_files(ExcludedFiles), Options)),
-		logtalk::loaded_file(File, Path, _, StreamOptions),
+		logtalk::loaded_file_property(Path, directory(Directory)),
+		logtalk::loaded_file_property(Path, basename(File)),
+		logtalk::loaded_file_property(Path, stream_properties(StreamOptions)),
 		\+ member(File, ExcludedFiles),
 		atom_concat(Source, '.lgt', File),
 		\+ member(Source, ExcludedFiles),
-		process(File, Path, Options, StreamOptions),
+		process(File, Directory, Options, StreamOptions),
 		fail.
 	output_library_files(_, _).
 
 	file(Source, UserOptions) :-
-		locate_file(Source, File, Path, StreamOptions),
+		locate_file(Source, File, Directory, StreamOptions),
 		merge_options(UserOptions, Options),
 		member(xmldir(Directory), Options), !,
 		os::working_directory(Current),
 		os::make_directory(Directory),
 		os::change_directory(Directory),
-		process(File, Path, Options, StreamOptions),
+		process(File, Directory, Options, StreamOptions),
 		os::change_directory(Current).
 
 	file(Source) :-
@@ -120,8 +122,10 @@
 		os::working_directory(Current),
 		os::make_directory(Directory),
 		os::change_directory(Directory),
-		(	logtalk::loaded_file(File, Path, _, StreamOptions),
-			process(File, Path, Options, StreamOptions),
+		(	logtalk::loaded_file_property(Path, directory(Directory)),
+			logtalk::loaded_file_property(Path, basename(File)),
+			logtalk::loaded_file_property(Path, stream_properties(StreamOptions)),
+			process(File, Directory, Options, StreamOptions),
 			fail
 		;	os::change_directory(Current)
 		).
@@ -129,22 +133,24 @@
 	all :-
 		all([]).
 
-	locate_file(LibraryNotation, File, Path, StreamOptions) :-
+	locate_file(LibraryNotation, File, Directory, StreamOptions) :-
 		compound(LibraryNotation), !,
 		LibraryNotation =.. [Library| Name],
 		logtalk::expand_library_path(Library, LibraryPath),
 		atom_concat(LibraryPath, Name, Source),
-		locate_file(Source, File, Path, StreamOptions).
+		locate_file(Source, File, Directory, StreamOptions).
 
-	locate_file(Source, File, Path, StreamOptions) :-
+	locate_file(Source, File, Directory, StreamOptions) :-
 		atom(Source),
 		% first, add extension if missing
 		(	sub_atom(Source, _, 4, 0, '.lgt') ->
 			SourceWithExtension = Source
 		;	atom_concat(Source, '.lgt', SourceWithExtension)
 		),
-		logtalk::loaded_file(File, Path, _, StreamOptions),
-		(	atom_concat(Path, File, SourceWithExtension) ->
+		logtalk::loaded_file_property(Path, basename(File)),
+		logtalk::loaded_file_property(Path, directory(Directory)),
+		logtalk::loaded_file_property(Path, stream_properties(StreamOptions)),
+		(	atom_concat(Directory, File, SourceWithExtension) ->
 			true
 		;	SourceWithExtension = File
 		),

@@ -25,9 +25,9 @@
 :- object(diagram).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2013/02/07,
+		date is 2013/09/18,
 		comment is 'Generates entity diagram DOT files for source files and libraries.'
 	]).
 
@@ -53,7 +53,7 @@
 
 	rlibrary(Library, UserOptions) :-
 		merge_options(UserOptions, Options),
-		logtalk::expand_library_path(Library, TopPath),
+		logtalk::expand_library_path(Library, TopDirectory),
 		atom_concat(Library, '.dot', DotFile),
 		member(output_path(Directory), Options),
 		os::working_directory(Current),
@@ -61,7 +61,7 @@
 		open(DotFile, write, Stream, [alias(dot_file)]),
 		dot_header(Options),
 		reset_external_entities,
-		output_rlibrary(TopPath, Options),
+		output_rlibrary(TopDirectory, Options),
 		output_external_entities,
 		dot_footer(Options),
 		close(Stream),
@@ -70,25 +70,25 @@
 	rlibrary(Library) :-
 		rlibrary(Library, []).
 
-	output_rlibrary(TopPath, Options) :-
+	output_rlibrary(TopDirectory, Options) :-
 		write(dot_file, 'subgraph "cluster_'),
-		write(dot_file, TopPath),
+		write(dot_file, TopDirectory),
 		write(dot_file, '" {\n'),
 		write(dot_file, 'bgcolor=snow3\nlabel="'),
-		write(dot_file, TopPath),
+		write(dot_file, TopDirectory),
 		write(dot_file, '"'),
 		nl(dot_file),
 		member(exclude_paths(ExcludedPaths), Options),
 		forall(
-			sub_library(TopPath, ExcludedPaths, RelativePath, Path),
+			sub_library(TopDirectory, ExcludedPaths, RelativePath, Path),
 			output_library(RelativePath, Path, Options)),
 		write(dot_file, '}\n'),
 		nl(dot_file).
 
-	sub_library(TopPath, ExcludedPaths, RelativePath, Path) :-
+	sub_library(TopDirectory, ExcludedPaths, RelativePath, Path) :-
 		logtalk_library_path(Library, _),
 		logtalk::expand_library_path(Library, Path),
-		atom_concat(TopPath, RelativePath, Path),
+		atom_concat(TopDirectory, RelativePath, Path),
 		\+ member(RelativePath, ExcludedPaths).
 
 	:- public(library/2).
@@ -139,12 +139,14 @@
 		;	output_library_files(Path, Options)
 		).
 
-	output_library_files(Path, Options) :-
+	output_library_files(Directory, Options) :-
 		member(exclude_files(ExcludedFiles), Options),
-		logtalk::loaded_file(File, Path),
+		logtalk::loaded_file_property(Path, directory(Directory)),
+		logtalk::loaded_file_property(Path, basename(File)),
+		\+ member(File, ExcludedFiles),
 		atom_concat(Source, '.lgt', File),
 		\+ member(Source, ExcludedFiles),
-		output_file(File, Path, Options),
+		output_file(File, Directory, Options),
 		fail.
 	output_library_files(_, _).
 
@@ -166,7 +168,7 @@
 		merge_options(UserOptions, Options),
 		compound(Spec),
 		Spec =.. [Library, Source],
-		logtalk::expand_library_path(Library, Path),
+		logtalk::expand_library_path(Library, Directory),
 		atom_concat(Source, '.lgt', File),
 		atom_concat(Source, '.dot', DotFile),
 		member(output_path(Directory), Options),
@@ -175,7 +177,7 @@
 		open(DotFile, write, Stream, [alias(dot_file)]),
 		dot_header(Options),
 		reset_external_entities,
-		output_file(File, Path, Options),
+		output_file(File, Directory, Options),
 		output_external_entities,
 		dot_footer(Options),
 		close(Stream),
@@ -201,7 +203,7 @@
 	file(Source) :-
 		file(Source, []).
 
-	output_file(File, Path, Options) :-
+	output_file(File, Directory, Options) :-
 		(	member(file_names(true), Options) ->
 			write(dot_file, 'subgraph "cluster_'),
 			write(dot_file, File),
@@ -211,10 +213,10 @@
 			write(dot_file, File),
 			write(dot_file, '"'),
 			nl(dot_file),
-			process(File, Path, Options),
+			process(File, Directory, Options),
 			write(dot_file, '}\n'),
 			nl(dot_file)
-		;	process(File, Path, Options)
+		;	process(File, Directory, Options)
 		).
 
 	dot_header(Options) :-
@@ -301,23 +303,23 @@
 		write(dot_file, '}'),
 		nl(dot_file).
 
-	process(File, Path, Options) :-
+	process(File, Directory, Options) :-
 		member(exclude_entities(ExcludedEntities), Options),
-		protocol_property(Protocol, file(File, Path)),
+		protocol_property(Protocol, file(File, Directory)),
 		\+ member(Protocol, ExcludedEntities),
 		output_protocol(Protocol, Options),
 		assertz(included_entity_(Protocol)),
 		fail.
-	process(File, Path, Options) :-
+	process(File, Directory, Options) :-
 		member(exclude_entities(ExcludedEntities), Options),
-		object_property(Object, file(File, Path)),
+		object_property(Object, file(File, Directory)),
 		\+ member(Object, ExcludedEntities),
 		output_object(Object, Options),
 		assertz(included_entity_(Object)),
 		fail.
-	process(File, Path, Options) :-
+	process(File, Directory, Options) :-
 		member(exclude_entities(ExcludedEntities), Options),
-		category_property(Category, file(File, Path)),
+		category_property(Category, file(File, Directory)),
 		\+ member(Category, ExcludedEntities),
 		output_category(Category, Options),
 		assertz(included_entity_(Category)),

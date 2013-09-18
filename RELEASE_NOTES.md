@@ -31,9 +31,11 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* FIXED: Bug introduced in the previous alpha release which resulted in
-predicate existence errors when calling the `logtalk::loaded_file/2-4`
-methods.
+* ADDED: New `logtalk::loaded_file/1` and `logtalk::loaded_file_property/2`
+methods. The valid loaded file properties are `basename/1`, `directory/1`,
+`flags/1`, `stream_properties/1`, `target/1`, and `modified/1`.
+
+* REMOVED: The `logtalk::loaded_file/2-4` methods are no longer available.
 
 Prolog adapter and integration files
 ------------------------------------

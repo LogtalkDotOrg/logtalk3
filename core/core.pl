@@ -4393,9 +4393,8 @@ current_logtalk_flag(Flag, Value) :-
 
 % loaded file and library predicates
 '$lgt_logtalk._dcl'(expand_library_path(_, _), p(p(p)), no, 0).
-'$lgt_logtalk._dcl'(loaded_file(_, _), p(p(p)), no, 0).
-'$lgt_logtalk._dcl'(loaded_file(_, _, _), p(p(p)), no, 0).
-'$lgt_logtalk._dcl'(loaded_file(_, _, _, _), p(p(p)), no, 0).
+'$lgt_logtalk._dcl'(loaded_file(_), p(p(p)), no, 0).
+'$lgt_logtalk._dcl'(loaded_file_property(_, _), p(p(p)), no, 0).
 % predicates for low-level hacking
 '$lgt_logtalk._dcl'(compile_aux_clauses(_), p(p(p)), no, 0).
 '$lgt_logtalk._dcl'(entity_prefix(_, _), p(p(p)), no, 0).
@@ -4436,9 +4435,8 @@ current_logtalk_flag(Flag, Value) :-
 
 % loaded file and library predicates
 '$lgt_logtalk._def'(expand_library_path(Library, Path), _, '$lgt_expand_library_path'(Library, Path)).
-'$lgt_logtalk._def'(loaded_file(Basename, Directory), _, '$lgt_loaded_file_'(Basename, Directory, _, _, _, _)).
-'$lgt_logtalk._def'(loaded_file(Basename, Directory, Flags), _, '$lgt_loaded_file_'(Basename, Directory, Flags, _, _, _)).
-'$lgt_logtalk._def'(loaded_file(Basename, Directory, Flags, StreamProperties), _, '$lgt_loaded_file_'(Basename, Directory, Flags, StreamProperties, _, _)).
+'$lgt_logtalk._def'(loaded_file(Path), _, '$lgt_loaded_file'(Path)).
+'$lgt_logtalk._def'(loaded_file_property(Path, Property), _, '$lgt_loaded_file_property'(Path, Property)).
 % predicates for low-level hacking
 '$lgt_logtalk._def'(compile_aux_clauses(Clauses), _, '$lgt_compile_aux_clauses'(Clauses)).
 '$lgt_logtalk._def'(entity_prefix(Entity, Prefix), _, '$lgt_entity_prefix'(Entity, Prefix)).
@@ -4481,6 +4479,24 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_logtalk._alias'(_, Pred, Pred).
+
+
+'$lgt_loaded_file'(Path) :-
+	'$lgt_loaded_file_'(Basename, Directory, _, _, _, _),
+	atom_concat(Directory, Basename, Path).
+
+
+'$lgt_loaded_file_property'(Path, Property) :-
+	'$lgt_loaded_file_'(Basename, Directory, Flags, StreamProperties, PrologFile, TimeStamp),
+	atom_concat(Directory, Basename, Path),
+	'$lgt_loaded_file_property'(Property, Basename, Directory, Flags, StreamProperties, PrologFile, TimeStamp).
+
+'$lgt_loaded_file_property'(basename(Basename), Basename, _, _, _, _, _).
+'$lgt_loaded_file_property'(directory(Directory), _, Directory, _, _, _, _).
+'$lgt_loaded_file_property'(flags(Flags), _, _, Flags, _, _, _).
+'$lgt_loaded_file_property'(stream_properties(StreamProperties), _, _, _, StreamProperties, _, _).
+'$lgt_loaded_file_property'(target(PrologFile), _, _, _, _, PrologFile, _).
+'$lgt_loaded_file_property'(modified(TimeStamp), _, _, _, _, _, TimeStamp).
 
 
 
