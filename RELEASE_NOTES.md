@@ -28,12 +28,19 @@ RELEASE NOTES
 3.00.0 Alpha 25 - September ??, 2013
 ====================================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Bug introduced in the previous alpha release which resulted in
+predicate existence errors when calling the `logtalk::loaded_file/2-4`
+methods.
+
 Prolog adapter and integration files
 ------------------------------------
 
 * UPDATED: CxProlog adapter file, taking advantage of the new `position/1`
 stream property and the new built-in predicate `stream_position_data/3`
-introduced on release 0.97.7, which is now the minimum version required.
+introduced in release 0.97.7, which is now the minimum version required.
 
 Tools
 -----

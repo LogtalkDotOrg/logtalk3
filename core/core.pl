@@ -4436,9 +4436,9 @@ current_logtalk_flag(Flag, Value) :-
 
 % loaded file and library predicates
 '$lgt_logtalk._def'(expand_library_path(Library, Path), _, '$lgt_expand_library_path'(Library, Path)).
-'$lgt_logtalk._def'(loaded_file(Basename, Directory), _, '$lgt_loaded_file_'(Basename, Directory, _, _, _)).
-'$lgt_logtalk._def'(loaded_file(Basename, Directory, Flags), _, '$lgt_loaded_file_'(Basename, Directory, Flags, _, _)).
-'$lgt_logtalk._def'(loaded_file(Basename, Directory, Flags, StreamProperties), _, '$lgt_loaded_file_'(Basename, Directory, Flags, StreamProperties, _)).
+'$lgt_logtalk._def'(loaded_file(Basename, Directory), _, '$lgt_loaded_file_'(Basename, Directory, _, _, _, _)).
+'$lgt_logtalk._def'(loaded_file(Basename, Directory, Flags), _, '$lgt_loaded_file_'(Basename, Directory, Flags, _, _, _)).
+'$lgt_logtalk._def'(loaded_file(Basename, Directory, Flags, StreamProperties), _, '$lgt_loaded_file_'(Basename, Directory, Flags, StreamProperties, _, _)).
 % predicates for low-level hacking
 '$lgt_logtalk._def'(compile_aux_clauses(Clauses), _, '$lgt_compile_aux_clauses'(Clauses)).
 '$lgt_logtalk._def'(entity_prefix(Entity, Prefix), _, '$lgt_entity_prefix'(Entity, Prefix)).
