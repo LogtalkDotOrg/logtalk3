@@ -30,7 +30,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/06/08,
+		date is 2013/09/18,
 		comment is 'A simple unit test framework featuring predicate clause coverage.'
 	]).
 
@@ -495,6 +495,7 @@
 		% do not consider dynamic clauses asserted at runtime (which have an index of zero)
 		\+ (fired_(Entity, Functor/Arity, N), N > 0),
 		memberchk(number_of_clauses(Total), Properties),
+		\+ memberchk(auxiliary, Properties),
 		assertz(covered_(0, Total)),
 		print_message(information, lgtunit, entity_clause_coverage(Entity, Functor/Arity, [], 0/Total)),
 		fail.
@@ -504,6 +505,7 @@
 		% do not consider dynamic clauses asserted at runtime (which have an index of zero)
 		\+ (fired_(Entity, Functor/Arity, N), N > 0),
 		memberchk(number_of_clauses(Total), Properties),
+		\+ memberchk(auxiliary, Properties),
 		assertz(covered_(0, Total)),
 		print_message(information, lgtunit, entity_clause_coverage(Entity, Functor/Arity, [], 0/Total)),
 		fail.

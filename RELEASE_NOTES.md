@@ -35,6 +35,13 @@ Prolog adapter and integration files
 stream property and the new built-in predicate `stream_position_data/3`
 introduced on release 0.97.7, which is now the minimum version required.
 
+Tools
+-----
+
+* FIXED: A bug where the `lgtunit` tool code coverage would report statistics
+on compiler-generated auxiliary predicates (such as the ones resulting from
+`use_module/2` directives and optimized meta-predicate definitions).
+
 Examples
 --------
 
