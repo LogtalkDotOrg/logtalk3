@@ -5,43 +5,43 @@
 	:- public(result/2).
 	:- dynamic(result/2).
 
-	term_expansion((:- end_object), (:- end_object)) :-
+	term_expansion((:- end_object), _) :-
 		logtalk_load_context(source, Path),
 		assertz(result(source, Path)),
 		fail.
-	term_expansion((:- end_object), (:- end_object)) :-
+	term_expansion((:- end_object), _) :-
 		logtalk_load_context(file, Path),
 		assertz(result(file, Path)),
 		fail.
-	term_expansion((:- end_object), (:- end_object)) :-
+	term_expansion((:- end_object), _) :-
 		logtalk_load_context(basename, Basename),
 		assertz(result(basename, Basename)),
 		fail.
-	term_expansion((:- end_object), (:- end_object)) :-
+	term_expansion((:- end_object), _) :-
 		logtalk_load_context(directory, Directory),
 		assertz(result(directory, Directory)),
 		fail.
-	term_expansion((:- end_object), (:- end_object)) :-
+	term_expansion((:- end_object), _) :-
 		logtalk_load_context(target, PrologFile),
 		assertz(result(target, PrologFile)),
 		fail.
-	term_expansion((:- end_object), (:- end_object)) :-
+	term_expansion((:- end_object), _) :-
 		logtalk_load_context(entity_identifier, Entity),
 		assertz(result(entity_identifier, Entity)),
 		fail.
-	term_expansion((:- end_object), (:- end_object)) :-
+	term_expansion((:- end_object), _) :-
 		logtalk_load_context(entity_prefix, Prefix),
 		assertz(result(entity_prefix, Prefix)),
 		fail.
-	term_expansion((:- end_object), (:- end_object)) :-
+	term_expansion((:- end_object), _) :-
 		logtalk_load_context(entity_type, Type),
 		assertz(result(entity_type, Type)),
 		fail.
-	term_expansion((:- end_object), (:- end_object)) :-
+	term_expansion((:- end_object), _) :-
 		logtalk_load_context(term_position, Position),
 		assertz(result(term_position, Position)),
 		fail.
-	term_expansion((:- end_object), (:- end_object)) :-
+	term_expansion((:- end_object), _) :-
 		logtalk_load_context(stream, Stream),
 		assertz(result(stream, Stream)),
 		fail.
