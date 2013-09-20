@@ -48,6 +48,12 @@ introduced in release 0.97.7, which is now the minimum version required.
 SICStus Prolog, SWI-Prolog, XSB, and YAP by taking advantage of the internal
 `'$lgt_prolog_meta_directive'/2` predicate.
 
+Documentation
+-------------
+
+* IMPROVED: Documentation of meta-predicate argument mode indicators and their
+intended use.
+
 Tools
 -----
 
