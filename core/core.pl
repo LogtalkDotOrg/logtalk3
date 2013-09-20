@@ -10904,10 +10904,18 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_tr_prolog_meta_argument'((0), Arg, Ctx, TArg, DArg),
 	'$lgt_tr_prolog_meta_argument'([0], Args, Ctx, TArgs, DArgs).
 
+'$lgt_tr_prolog_meta_argument'((/), [Arg| Args], Ctx, [TArg| TArgs], [DArg| DArgs]) :-
+	!,
+	'$lgt_tr_prolog_meta_argument'((/), Arg, Ctx, TArg, DArg),
+	'$lgt_tr_prolog_meta_argument'([/], Args, Ctx, TArgs, DArgs).
+'$lgt_tr_prolog_meta_argument'((/), (Arg, Args), Ctx, (TArg, TArgs), (DArg, DArgs)) :-
+	!,
+	'$lgt_tr_prolog_meta_argument'((/), Arg, Ctx, TArg, DArg),
+	'$lgt_tr_prolog_meta_argument'((/), Args, Ctx, TArgs, DArgs).
 '$lgt_tr_prolog_meta_argument'((/), Arg, _, TArg, TArg) :-
 	'$lgt_compile_predicate_indicators'(Arg, TArg0),
 	(	'$lgt_prolog_feature'(modules, supported) ->
-		% make sure the call is made in the correct context
+		% make sure the predicate indicator refers to the correct context
 		TArg = ':'(user, TArg0)
 	;	TArg = TArg0
 	).
