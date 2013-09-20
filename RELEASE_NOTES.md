@@ -44,6 +44,10 @@ Prolog adapter and integration files
 stream property and the new built-in predicate `stream_position_data/3`
 introduced in release 0.97.7, which is now the minimum version required.
 
+* IMPROVED: Simplified the adapter files for B-Prolog, ECLiPSe, GNU Prolog,
+SICStus Prolog, SWI-Prolog, XSB, and YAP by taking advantage of the internal
+`'$lgt_prolog_meta_directive'/2` predicate.
+
 Tools
 -----
 

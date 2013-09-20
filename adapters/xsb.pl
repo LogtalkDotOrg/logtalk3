@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for XSB 3.3 or later versions
-%  Last updated on September 13, 2013
+%  Last updated on September 20, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -153,8 +153,11 @@ setup_call_catcher_cleanup(Setup, Call, Catcher, Cleanup) :-
 
 % '$lgt_prolog_meta_directive'(@callable, @callable)
 
-'$lgt_prolog_meta_directive'(_, _) :-
-	fail.
+'$lgt_prolog_meta_directive'(index(_, _), index(/, *)).
+'$lgt_prolog_meta_directive'(thread_private(_), thread_private(/)).
+'$lgt_prolog_meta_directive'(thread_shared(_), thread_shared(/)).
+'$lgt_prolog_meta_directive'(use_subsumptive_tabling(_), use_subsumptive_tabling(/)).
+'$lgt_prolog_meta_directive'(use_variant_tabling(_), use_variant_tabling(/)).
 
 
 % '$lgt_prolog_to_logtalk_meta_argument_specifier_hook'(@nonvar, -atom)
@@ -512,31 +515,11 @@ setup_call_catcher_cleanup(Setup, Call, Catcher, Cleanup) :-
 	).
 
 
-'$lgt_xsb_directive_expansion'(index(PI, IS), {index(CPI, IS)}) :-
-	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_indicators'(PI, CPI).
-
 '$lgt_xsb_directive_expansion'(table(PIs), {table(CPIs)}) :-
 	logtalk_load_context(entity_type, _),
 	'$lgt_compile_predicate_indicators'(PIs, CPIs).
 
 '$lgt_xsb_directive_expansion'(as(table(PIs),ShareMode), {as(table(CPIs),ShareMode)}) :-
-	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_indicators'(PIs, CPIs).
-
-'$lgt_xsb_directive_expansion'(thread_private(PIs), {thread_private(CPIs)}) :-
-	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_indicators'(PIs, CPIs).
-
-'$lgt_xsb_directive_expansion'(thread_shared(PIs), {thread_shared(CPIs)}) :-
-	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_indicators'(PIs, CPIs).
-
-'$lgt_xsb_directive_expansion'(use_subsumptive_tabling(PIs), {use_subsumptive_tabling(CPIs)}) :-
-	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_indicators'(PIs, CPIs).
-
-'$lgt_xsb_directive_expansion'(use_variant_tabling(PIs), {use_variant_tabling(CPIs)}) :-
 	logtalk_load_context(entity_type, _),
 	'$lgt_compile_predicate_indicators'(PIs, CPIs).
 

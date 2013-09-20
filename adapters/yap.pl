@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for YAP Prolog 6.0.2 and later versions
-%  Last updated on September 13, 2013
+%  Last updated on September 20, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -70,9 +70,9 @@
 		dynamic('$lgt_ctg_super_call_'/3), hide_predicate('$lgt_ctg_super_call_'/3),
 		dynamic('$lgt_obj_super_call_'/3), hide_predicate('$lgt_obj_super_call_'/3),
 		dynamic('$lgt_db_lookup_cache_'/5), hide_predicate('$lgt_db_lookup_cache_'/5),
-		dynamic('$lgt_logtalk.message_tokens'/5), hide_predicate('$lgt_logtalk.message_tokens'/5),
-		dynamic('$lgt_logtalk.message_prefix_stream'/5), hide_predicate('$lgt_logtalk.message_prefix_stream'/5),
-		dynamic('$lgt_logtalk.trace_event'/3), hide_predicate('$lgt_logtalk.trace_event'/3)
+		dynamic('$logtalk.message_tokens'/5), hide_predicate('$logtalk.message_tokens'/5),
+		dynamic('$logtalk.message_prefix_stream'/5), hide_predicate('$logtalk.message_prefix_stream'/5),
+		dynamic('$logtalk.trace_event'/3), hide_predicate('$logtalk.trace_event'/3)
 	;	true
 	).
 
@@ -209,15 +209,10 @@
 :- endif.
 % tabling meta-predicates:
 '$lgt_prolog_meta_predicate'(abolish_table(_), abolish_table(/), predicate).
-'$lgt_prolog_meta_predicate'(abolish_table(_), abolish_table([/]), predicate).
 '$lgt_prolog_meta_predicate'(is_tabled(_), is_tabled(/), predicate).
-'$lgt_prolog_meta_predicate'(is_tabled(_), is_tabled([/]), predicate).
 '$lgt_prolog_meta_predicate'(table_statistics(_), table_statistics(/), predicate).
-'$lgt_prolog_meta_predicate'(table_statistics(_), table_statistics([/]), predicate).
 '$lgt_prolog_meta_predicate'(tabling_mode(_, _), tabling_mode(/, *), predicate).
-'$lgt_prolog_meta_predicate'(tabling_mode(_, _), tabling_mode([/], *), predicate).
 '$lgt_prolog_meta_predicate'(show_table(_), show_table(/), predicate).
-'$lgt_prolog_meta_predicate'(show_table(_), show_table([/]), predicate).
 % workaround problematic meta-predicate declarations:
 '$lgt_prolog_meta_predicate'(compile(_), compile(*), predicate).
 '$lgt_prolog_meta_predicate'(consult(_), consult(*), predicate).
@@ -235,6 +230,7 @@
 
 '$lgt_prolog_meta_directive'(initialization(_, _), initialization(0, *)).
 '$lgt_prolog_meta_directive'(thread_initialization(_), thread_initialization(0)).
+'$lgt_prolog_meta_directive'(thread_local(_), thread_local(/)).
 
 
 % '$lgt_prolog_to_logtalk_meta_argument_specifier_hook'(@nonvar, -atom)
@@ -632,10 +628,6 @@
 	functor(THead, _, Arity),
 	arg(Arity, THead, first).
 
-'$lgt_yap_directive_expansion'(thread_local(PIs), {thread_local(CPIs)}) :-
-	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_indicators'(PIs, CPIs).
-
 '$lgt_yap_directive_expansion'(encoding(Encoding1), encoding(Encoding2)) :-
 	nonvar(Encoding1),
 	'$lgt_yap_encoding_to_logtalk_encoding'(Encoding1, Encoding2).
@@ -866,8 +858,8 @@ user:goal_expansion('::'(Object, Message), user:Goal) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%:- multifile('$lgt_logtalk.print_message_token'/3).
-%:- dynamic('$lgt_logtalk.print_message_token'/3).
+%:- multifile('$logtalk.print_message_token'/3).
+%:- dynamic('$logtalk.print_message_token'/3).
 
 
 

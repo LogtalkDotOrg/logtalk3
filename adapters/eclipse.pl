@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on September 13, 2013
+%  Last updated on September 20, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -171,8 +171,11 @@ setup_call_cleanup(_, _, _) :-
 
 % '$lgt_prolog_meta_directive'(@callable, @callable)
 
-'$lgt_prolog_meta_directive'(_, _) :-
-	fail.
+'$lgt_prolog_meta_directive'(demon(_), demon(/)).
+'$lgt_prolog_meta_directive'(inline(_, _), inline(/, /)).
+'$lgt_prolog_meta_directive'(set_error_handler(_, _), set_error_handler(*, /)).
+'$lgt_prolog_meta_directive'(set_flag(_, _, _), set_flag(/, *, *)).
+'$lgt_prolog_meta_directive'(skipped(_), skipped(/)).
 
 
 % '$lgt_prolog_to_logtalk_meta_argument_specifier_hook'(@nonvar, -atom)
@@ -543,39 +546,19 @@ setup_call_cleanup(_, _, _) :-
 '$lgt_eclipse_directive_expansion'(mode(_), []).
 '$lgt_eclipse_directive_expansion'(comment(_, _), []).
 
-'$lgt_eclipse_directive_expansion'(demon(PIs), {demon(CPIs)}) :-
-	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_indicators'(PIs, CPIs).
-
 '$lgt_eclipse_directive_expansion'(export(chtab(Char, Class)), {export(chtab(Char, Class))}).
 '$lgt_eclipse_directive_expansion'(export(domain(Domain)), {export(domain(Domain))}).
 '$lgt_eclipse_directive_expansion'(export(struct(Struct)), {export(struct(Struct))}).
 '$lgt_eclipse_directive_expansion'(export(syntax_option(SyntaxOption)), {export(syntax_option(SyntaxOption))}).
 
-'$lgt_eclipse_directive_expansion'(inline(PI1, PI2), {inline(CPI1, CPI2)}) :-
-	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_indicators'(PI1, CPI1),
-	'$lgt_compile_predicate_indicators'(PI2, CPI2).
-
 '$lgt_eclipse_directive_expansion'(pragma(Pragma), {pragma(Pragma)}).
 
-'$lgt_eclipse_directive_expansion'(set_error_handler(Event, Functor/Arity), {set_error_handler(Event, CFunctor/CArity)}) :-
-	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_indicators'(Functor/Arity, CFunctor/CArity).
 '$lgt_eclipse_directive_expansion'(set_event_handler(Event, defers(Functor/Arity)), {set_event_handler(Event, defers(CFunctor/CArity))}) :-
 	logtalk_load_context(entity_type, _),
 	'$lgt_compile_predicate_indicators'(Functor/Arity, CFunctor/CArity).
 '$lgt_eclipse_directive_expansion'(set_event_handler(Event, Functor/Arity), {set_event_handler(Event, CFunctor/CArity)}) :-
 	logtalk_load_context(entity_type, _),
 	'$lgt_compile_predicate_indicators'(Functor/Arity, CFunctor/CArity).
-
-'$lgt_eclipse_directive_expansion'(set_flag(PI, Flag, Value), {set_flag(CPI, Flag, Value)}) :-
-	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_indicators'(PI, CPI).
-
-'$lgt_eclipse_directive_expansion'(skipped(PIs), {skipped(CPIs)}) :-
-	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_indicators'(PIs, CPIs).
 
 '$lgt_eclipse_directive_expansion'(import(from(Conjunction, Module)), use_module(Module, Imports)) :-
 	'$lgt_flatten_list'([Conjunction], Imports).

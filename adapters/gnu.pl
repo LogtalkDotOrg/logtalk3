@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for GNU Prolog 1.4.2 (and later versions)
-%  Last updated on September 13, 2013
+%  Last updated on September 20, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -131,8 +131,9 @@ setup_call_cleanup(_, _, _) :-
 
 % '$lgt_prolog_meta_directive'(@callable, @callable)
 
-'$lgt_prolog_meta_directive'(_, _) :-
-	fail.
+'$lgt_prolog_meta_directive'(built_in(_), built_in(/)).
+'$lgt_prolog_meta_directive'(built_in_fd(_), built_in_fd(/)).
+'$lgt_prolog_meta_directive'(ensure_linked(_), ensure_linked(/)).
 
 
 % '$lgt_prolog_to_logtalk_meta_argument_specifier_hook'(@nonvar, -atom)
@@ -475,19 +476,9 @@ setup_call_cleanup(_, _, _) :-
 	;	Expanded  =  (:- Expanded0)
 	).
 
-
 '$lgt_gnu_directive_expansion'(built_in, {built_in}) :-
 	\+ logtalk_load_context(entity_type, _).
-'$lgt_gnu_directive_expansion'(built_in(PIs), {built_in(CPIs)}) :-
-	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_indicators'(PIs, CPIs).
 '$lgt_gnu_directive_expansion'(built_in_fd, {built_in_fd}).
-'$lgt_gnu_directive_expansion'(built_in_fd(PIs), {built_in_fd(CPIs)}) :-
-	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_indicators'(PIs, CPIs).
-'$lgt_gnu_directive_expansion'(ensure_linked(PIs), {ensure_linked(CPIs)}) :-
-	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_indicators'(PIs, CPIs).
 '$lgt_gnu_directive_expansion'(foreign(Template, Options), {foreign(Template, Options)}).
 '$lgt_gnu_directive_expansion'(foreign(Template), {foreign(Template)}).
 

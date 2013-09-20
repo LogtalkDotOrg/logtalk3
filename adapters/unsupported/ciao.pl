@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Ciao Prolog 1.14.0
-%  Last updated on September 13, 2013
+%  Last updated on September 20, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -171,8 +171,8 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 
 % '$lgt_prolog_meta_directive'(@callable, @callable)
 
-'$lgt_prolog_meta_directive'(_, _) :-
-	fail.
+'$lgt_prolog_meta_directive'(data(_), data(/)).
+'$lgt_prolog_meta_directive'(prop(_), prop(/)).
 
 
 % '$lgt_prolog_to_logtalk_meta_argument_specifier_hook'(@nonvar, -atom)
@@ -567,9 +567,6 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 	).
 
 
-'$lgt_ciao_directive_expansion'(data(PIs), data(CPIs)) :-
-	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_indicators'(PIs, CPIs).
 '$lgt_ciao_directive_expansion'(imports(Module, Imports), uses(Module, Imports)).
 '$lgt_ciao_directive_expansion'(meta_predicate(Template), meta_predicate(CTemplate)) :-
 	logtalk_load_context(entity_type, _),
@@ -584,9 +581,6 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 		'$lgt_ciao_find_module_name'(Module)
 	;	true
 	).
-'$lgt_ciao_directive_expansion'(prop(PIs), prop(CPIs)) :-
-	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_indicators'(PIs, CPIs).
 
 
 '$lgt_ciao_find_module_name'(Module) :-
@@ -600,7 +594,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 
 '$lgt_ciao_directive_meta_predicate'(Template, CTemplate) :-
 	functor(Template, Functor, Arity),
-	'$lgt_compile_predicate_indicators'(Functor, Arity, CFunctor, CArity),
+	'$lgt_compile_predicate_indicators'(Functor/Arity, CFunctor/CArity),
 	Template =.. [Functor| Args],
 	'$lgt_ciao_directive_meta_predicate_args'(Args, CArgs),
 	CTemplate =.. [CFunctor| CArgs].

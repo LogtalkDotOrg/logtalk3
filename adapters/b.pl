@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for B-Prolog 7.8 and later versions
-%  Last updated on September 13, 2013
+%  Last updated on September 20, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -156,8 +156,7 @@
 
 % '$lgt_prolog_meta_directive'(@callable, @callable)
 
-'$lgt_prolog_meta_directive'(_, _) :-
-	fail.
+'$lgt_prolog_meta_directive'(eager_consume(_), eager_consume(/)).
 
 
 % '$lgt_prolog_to_logtalk_meta_argument_specifier_hook'(@nonvar, -atom)
@@ -516,10 +515,6 @@
 
 
 '$lgt_b_directive_expansion'(eager_consume, {eager_consume}).
-
-'$lgt_b_directive_expansion'(eager_consume(PIs), {eager_consume(TPIs)}) :-
-	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_indicators'(PIs, TPIs).
 
 '$lgt_b_directive_expansion'(table(':'(Head, N)), {table(':'(THead, N))}) :-
 	logtalk_load_context(entity_type, _),

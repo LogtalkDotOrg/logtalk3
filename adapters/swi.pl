@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SWI Prolog 6.0.0 and later versions
-%  Last updated on September 13, 2013
+%  Last updated on September 20, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -173,8 +173,12 @@
 % '$lgt_prolog_meta_directive'(@callable, @callable)
 
 '$lgt_prolog_meta_directive'(at_halt(_), at_halt(0)).
+'$lgt_prolog_meta_directive'(format_predicate(_, _), format_predicate(*, 0)).
 '$lgt_prolog_meta_directive'(initialization(_, _), initialization(0, *)).
+'$lgt_prolog_meta_directive'(noprofile(_), noprofile(/)).
 '$lgt_prolog_meta_directive'(thread_initialization(_), thread_initialization(0)).
+'$lgt_prolog_meta_directive'(thread_local(_), thread_local(/)).
+'$lgt_prolog_meta_directive'(volatile(_), volatile(/)).
 
 
 % '$lgt_prolog_to_logtalk_meta_argument_specifier_hook'(@nonvar, -atom)
@@ -627,38 +631,15 @@
 '$lgt_swi_directive_expansion'(expects_dialect(Dialect), {expects_dialect(Dialect)}) :-
 	expects_dialect(Dialect).
 
-'$lgt_swi_directive_expansion'(format_predicate(Char, Head), {format_predicate(Char, THead)}) :-
-	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_heads'(Head, THead).
-
 '$lgt_swi_directive_expansion'(license(License), {license(License)}).
 
 '$lgt_swi_directive_expansion'(set_prolog_flag(generate_debug_info, false), {set_prolog_flag(generate_debug_info, false)}).
-
-'$lgt_swi_directive_expansion'(thread_local(PIs), {thread_local(CPIs)}) :-
-	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_indicators'(PIs, CPIs).
-
-'$lgt_swi_directive_expansion'(index(Head), {index(THead)}) :-
-	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_heads'(Head, THead, 0).
-
-'$lgt_swi_directive_expansion'(hash(Head), {hash(THead)}) :-
-	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_heads'(Head, THead).
-
-'$lgt_swi_directive_expansion'(noprofile(PIs), {noprofile(CPIs)}) :-
-	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_indicators'(PIs, CPIs).
 
 '$lgt_swi_directive_expansion'(use_foreign_library(File), {use_foreign_library(File)}) :-
 	load_foreign_library(File).
 
 '$lgt_swi_directive_expansion'(use_foreign_library(File, Entry), {use_foreign_library(File, Entry)}) :-
 	load_foreign_library(File, Entry).
-
-'$lgt_swi_directive_expansion'(volatile(PIs), {volatile(CPIs)}) :-
-	'$lgt_compile_predicate_indicators'(PIs, CPIs).
 
 '$lgt_swi_directive_expansion'(encoding(Encoding1), encoding(Encoding2)) :-
 	nonvar(Encoding1),
