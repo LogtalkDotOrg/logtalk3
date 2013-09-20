@@ -2357,7 +2357,10 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_predicate_property_prolog_built_in'(private, Pred) :-
 	'$lgt_prolog_meta_predicate'(Pred, _, _).
 '$lgt_predicate_property_prolog_built_in'(meta_predicate(Meta), Pred) :-
-	'$lgt_prolog_meta_predicate'(Pred, Meta, _).
+	'$lgt_prolog_meta_predicate'(Pred, Meta0, _),
+	Meta0 =.. [_| MetaArgs0],
+	'$lgt_prolog_to_logtalk_meta_argument_specifiers'(MetaArgs0, MetaArgs),
+	Meta =.. [_| MetaArgs].
 '$lgt_predicate_property_prolog_built_in'((public), Pred) :-
 	\+ '$lgt_prolog_meta_predicate'(Pred, _, _).
 '$lgt_predicate_property_prolog_built_in'(built_in, _).
@@ -14387,11 +14390,12 @@ current_logtalk_flag(Flag, Value) :-
 	!.
 
 '$lgt_fix_predicate_calls'(Pred, TPred) :-
-	'$lgt_prolog_meta_predicate'(Pred, Meta, _),
+	'$lgt_prolog_meta_predicate'(Pred, Meta0, _),
 	% call to a non-standard Prolog built-in meta-predicate
 	!,
 	Pred =.. [Functor| Args],
-	Meta =.. [Functor| MArgs],
+	Meta0 =.. [_| MArgs0],
+	'$lgt_prolog_to_logtalk_meta_argument_specifiers'(MArgs0, MArgs),
 	'$lgt_fix_predicate_calls_in_meta_arguments'(Args, MArgs, TArgs),
 	TPred =.. [Functor| TArgs].	
 
