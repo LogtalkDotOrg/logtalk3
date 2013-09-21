@@ -34,7 +34,7 @@ There's also a `lgt.lang` file for older 2.x versions of Highlight.
 
 Usage example for a `foo.lgt` Logtalk source file:
 
-	% highlight --replace-tabs=4 --xhtml --input=foo.lgt --output=foo.html --style=kwrite
+	% highlight --replace-tabs=4 --out-format=xhtml --input=foo.lgt --output=foo.html --style=edit-kwrite
 
 You should try different style files (using the `--style` option) in order to 
 find which ones provide the more satisfactory results. As Logtalk files are 
@@ -42,9 +42,9 @@ usually formatted using tabs (the recommended setting is a tab width
 equivalent to 4 spaces), the option `--replace-tabs=4` may be necessary to
 keep you source code properly formatted.
 
-You may also use the "lgt.lang" file with plain Prolog files by using the 
+You may also use the `logtalk.lang` file with plain Prolog files by using the 
 `--syntax` option. For example:
 
-	% highlight --syntax=lgt --xhtml --input=foo.pl --output=foo.html
+	% highlight --syntax=lgt --out-format=xhtml --input=foo.pl --output=foo.html
 
 THIS SYNTAX COLORING FILE IS UNDER DEVELOPMENT.
