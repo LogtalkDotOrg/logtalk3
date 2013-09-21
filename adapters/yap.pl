@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for YAP Prolog 6.0.2 and later versions
-%  Last updated on September 20, 2013
+%  Last updated on September 22, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -54,7 +54,7 @@
 		dynamic('$lgt_extends_object_'/3), hide_predicate('$lgt_extends_object_'/3),
 		dynamic('$lgt_extends_category_'/3), hide_predicate('$lgt_extends_category_'/3),
 		dynamic('$lgt_complemented_object_'/4), hide_predicate('$lgt_complemented_object_'/4),
-		dynamic('$lgt_loaded_file_'/5), hide_predicate('$lgt_loaded_file_'/5),
+		dynamic('$lgt_loaded_file_'/6), hide_predicate('$lgt_loaded_file_'/6),
 		dynamic('$lgt_current_flag_'/2), hide_predicate('$lgt_current_flag_'/2),
 		dynamic('$lgt_send_to_obj_static_binding_cache_'/4), hide_predicate('$lgt_send_to_obj_static_binding_cache_'/4),
 		dynamic('$lgt_pp_warnings_top_goal_directory_'/2), hide_predicate('$lgt_pp_warnings_top_goal_directory_'/2),
@@ -70,9 +70,10 @@
 		dynamic('$lgt_ctg_super_call_'/3), hide_predicate('$lgt_ctg_super_call_'/3),
 		dynamic('$lgt_obj_super_call_'/3), hide_predicate('$lgt_obj_super_call_'/3),
 		dynamic('$lgt_db_lookup_cache_'/5), hide_predicate('$lgt_db_lookup_cache_'/5),
-		dynamic('$logtalk.message_tokens'/5), hide_predicate('$logtalk.message_tokens'/5),
-		dynamic('$logtalk.message_prefix_stream'/5), hide_predicate('$logtalk.message_prefix_stream'/5),
-		dynamic('$logtalk.trace_event'/3), hide_predicate('$logtalk.trace_event'/3)
+		dynamic('$lgt_logtalk.message_tokens'/5), hide_predicate('$lgt_logtalk.message_tokens'/5),
+		dynamic('$lgt_logtalk.message_prefix_stream'/5), hide_predicate('$lgt_logtalk.message_prefix_stream'/5),
+		dynamic('$lgt_logtalk.print_message_token'/3), hide_predicate('$lgt_logtalk.print_message_token'/3),
+		dynamic('$lgt_logtalk.trace_event'/3), hide_predicate('$lgt_logtalk.trace_event'/3)
 	;	true
 	).
 
