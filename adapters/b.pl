@@ -329,7 +329,7 @@
 
 '$lgt_change_directory'(Directory) :-
 	expand_environment(Directory, Expanded),
-	change_directory(Expanded).
+	chdir(Expanded).
 
 
 % '$lgt_make_directory'(+atom)
