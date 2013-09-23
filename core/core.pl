@@ -4401,16 +4401,9 @@ current_logtalk_flag(Flag, Value) :-
 % predicates for low-level hacking
 '$lgt_logtalk._dcl'(compile_aux_clauses(_), p(p(p)), no, 0).
 '$lgt_logtalk._dcl'(entity_prefix(_, _), p(p(p)), no, 0).
-'$lgt_logtalk._dcl'(compile_predicate_heads(_, _), p(p(p)), no, 0).
-'$lgt_logtalk._dcl'(compile_predicate_heads(_, _, _), p(p(p)), no, 0).
 '$lgt_logtalk._dcl'(compile_predicate_heads(_, _, _, _), p(p(p)), no, 0).
-'$lgt_logtalk._dcl'(compile_predicate_indicators(_, _), p(p(p)), no, 0).
 '$lgt_logtalk._dcl'(compile_predicate_indicators(_, _, _), p(p(p)), no, 0).
-'$lgt_logtalk._dcl'(decompile_predicate_heads(_, _), p(p(p)), no, 0).
-'$lgt_logtalk._dcl'(decompile_predicate_heads(_, _, _), p(p(p)), no, 0).
 '$lgt_logtalk._dcl'(decompile_predicate_heads(_, _, _, _), p(p(p)), no, 0).
-'$lgt_logtalk._dcl'(decompile_predicate_indicators(_, _), p(p(p)), no, 0).
-'$lgt_logtalk._dcl'(decompile_predicate_indicators(_, _, _), p(p(p)), no, 0).
 '$lgt_logtalk._dcl'(decompile_predicate_indicators(_, _, _, _), p(p(p)), no, 0).
 '$lgt_logtalk._dcl'(execution_context(_, _, _, _, _, _), p(p(p)), no, 0).
 % structured message printing predicates
@@ -4443,16 +4436,9 @@ current_logtalk_flag(Flag, Value) :-
 % predicates for low-level hacking
 '$lgt_logtalk._def'(compile_aux_clauses(Clauses), _, '$lgt_compile_aux_clauses'(Clauses)).
 '$lgt_logtalk._def'(entity_prefix(Entity, Prefix), _, '$lgt_entity_prefix'(Entity, Prefix)).
-'$lgt_logtalk._def'(compile_predicate_heads(Heads, THeads), _, '$lgt_compile_predicate_heads'(Heads, THeads)).
-'$lgt_logtalk._def'(compile_predicate_heads(Heads, THeads, Ctx), _, '$lgt_compile_predicate_heads'(Heads, THeads, Ctx)).
 '$lgt_logtalk._def'(compile_predicate_heads(Heads, Entity, THeads, Ctx), _, '$lgt_compile_predicate_heads'(Heads, Entity, THeads, Ctx)).
-'$lgt_logtalk._def'(compile_predicate_indicators(PIs, TPIs), _, '$lgt_compile_predicate_indicators'(PIs, TPIs)).
 '$lgt_logtalk._def'(compile_predicate_indicators(PIs, Entity, TPIs), _, '$lgt_compile_predicate_indicators'(PIs, Entity, TPIs)).
-'$lgt_logtalk._def'(decompile_predicate_indicators(TPIs, PIs), _, '$lgt_decompile_predicate_indicators'(TPIs, PIs)).
-'$lgt_logtalk._def'(decompile_predicate_indicators(TPIs, Entity, PIs), _, '$lgt_decompile_predicate_indicators'(TPIs, Entity, PIs)).
 '$lgt_logtalk._def'(decompile_predicate_indicators(TPIs, Entity, Type, PIs), _, '$lgt_decompile_predicate_indicators'(TPIs, Entity, Type, PIs)).
-'$lgt_logtalk._def'(decompile_predicate_heads(THeads, Heads), _, '$lgt_decompile_predicate_heads'(THeads, Heads)).
-'$lgt_logtalk._def'(decompile_predicate_heads(THeads, Entity, Heads), _, '$lgt_decompile_predicate_heads'(THeads, Entity, Heads)).
 '$lgt_logtalk._def'(decompile_predicate_heads(THeads, Entity, Type, Heads), _, '$lgt_decompile_predicate_heads'(THeads, Entity, Type, Heads)).
 '$lgt_logtalk._def'(execution_context(ExCtx, Sender, This, Self, MetaCallCtx, Stack), _, '$lgt_exec_ctx'(ExCtx, Sender, This, Self, MetaCallCtx, Stack)).
 % structured message printing predicates
@@ -10909,7 +10895,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_tr_prolog_meta_argument'((/), Arg, Ctx, TArg, DArg),
 	'$lgt_tr_prolog_meta_argument'((/), Args, Ctx, TArgs, DArgs).
 '$lgt_tr_prolog_meta_argument'((/), Arg, _, TArg, TArg) :-
-	'$lgt_compile_predicate_indicators'(Arg, TArg0),
+	'$lgt_compile_predicate_indicators'(Arg, _, TArg0),
 	(	'$lgt_prolog_feature'(modules, supported) ->
 		% make sure the predicate indicator refers to the correct context
 		TArg = ':'(user, TArg0)
@@ -15303,22 +15289,6 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_compile_predicate_heads'(@list(callable), -list(callable))
-% '$lgt_compile_predicate_heads'(@callable, -callable)
-
-'$lgt_compile_predicate_heads'(Heads, THeads) :-
-	'$lgt_compile_predicate_heads'(Heads, _, THeads, _).
-
-
-
-% '$lgt_compile_predicate_heads'(@list(callable), -list(callable), @compilation_context)
-% '$lgt_compile_predicate_heads'(@callable, -callable, @compilation_context)
-
-'$lgt_compile_predicate_heads'(Heads, THeads, Ctx) :-
-	'$lgt_compile_predicate_heads'(Heads, _, THeads, Ctx).
-
-
-
 % '$lgt_decompile_predicate_heads'(+list(callable), ?entity_identifier, ?atom, -list(callable))
 % '$lgt_decompile_predicate_heads'(+callable, ?entity_identifier, ?atom, -callable)
 %
@@ -15364,22 +15334,6 @@ current_logtalk_flag(Flag, Value) :-
 	functor(Head, Functor, Arity),
 	'$lgt_unify_head_thead_arguments'(Head, THead),
 	!.
-
-
-
-% '$lgt_decompile_predicate_heads'(+list(callable), -list(callable))
-% '$lgt_decompile_predicate_heads'(+callable, -callable)
-
-'$lgt_decompile_predicate_heads'(THeads, Heads) :-
-	'$lgt_decompile_predicate_heads'(THeads, _, _, Heads).
-
-
-
-% '$lgt_decompile_predicate_heads'(+list(callable), ?entity_identifier, -list(callable))
-% '$lgt_decompile_predicate_heads'(+callable, ?entity_identifier, -callable)
-
-'$lgt_decompile_predicate_heads'(THeads, Entity, Heads) :-
-	'$lgt_decompile_predicate_heads'(THeads, Entity, _, Heads).
 
 
 
@@ -15431,14 +15385,6 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_construct_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity)
 	;	throw(type_error(predicate_indicator, PI))
 	).
-
-
-
-% '$lgt_compile_predicate_indicators'(+list(predicate_indicator), -list(predicate_indicator))
-% '$lgt_compile_predicate_indicators'(+predicate_indicator, -predicate_indicator)
-
-'$lgt_compile_predicate_indicators'(Heads, THeads) :-
-	'$lgt_compile_predicate_indicators'(Heads, _, THeads).
 
 
 
@@ -15494,22 +15440,6 @@ current_logtalk_flag(Flag, Value) :-
 	Arity is TArity - 1,
 	Arity >= 0,
 	!.
-
-
-
-% '$lgt_decompile_predicate_indicators'(+list(predicate_indicator), -list(predicate_indicator))
-% '$lgt_decompile_predicate_indicators'(+predicate_indicator, -predicate_indicator)
-
-'$lgt_decompile_predicate_indicators'(TPIs, PIs) :-
-	'$lgt_decompile_predicate_indicators'(TPIs, _, _, PIs).
-
-
-
-% '$lgt_decompile_predicate_indicators'(+list(predicate_indicator), ?entity_identifier, -list(predicate_indicator))
-% '$lgt_decompile_predicate_indicators'(+predicate_indicator, ?entity_identifier, -predicate_indicator)
-
-'$lgt_decompile_predicate_indicators'(TPIs, Entity, PIs) :-
-	'$lgt_decompile_predicate_indicators'(TPIs, Entity, _, PIs).
 
 
 

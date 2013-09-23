@@ -8,7 +8,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on August 7, 2013
+%  Last updated on September 23, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -189,7 +189,7 @@ user:prolog_predicate_name(Goal, Label) :-
 	;	Goal = THead
 	),
 	functor(THead, TFunctor, TArity),
-	'$lgt_decompile_predicate_indicators'(TFunctor/TArity, Entity, Functor/Arity),
+	'$lgt_decompile_predicate_indicators'(TFunctor/TArity, Entity, _, Functor/Arity),
 	(	atom(Entity) ->
 		atomic_list_concat([Entity, '::', Functor, '/', Arity], Label)
 	;	functor(Entity, EFunctor, EArity),
@@ -208,7 +208,7 @@ prolog:term_compiled(Entity::Head, QHead) :-
 			Module == user
 		;	QHead = THead
 		),
-		'$lgt_decompile_predicate_heads'(THead, Entity, Head)
+		'$lgt_decompile_predicate_heads'(THead, Entity, _, Head)
 	;	fail
 	).
 
@@ -288,12 +288,12 @@ user:portray(c(This, r(Sender, Self, MetaVars, CoinductionStack))) :-
 
 '$lgt_swi_unify_clause'((Head :- Body), (THead :- TBody), TermPos0, TermPos) :-
 	!,
-	'$lgt_decompile_predicate_heads'(THead, Entity, Head),
+	'$lgt_decompile_predicate_heads'(THead, Entity, _, Head),
 	'$lgt_swi_unify_clause_body'(Body, Entity, TBody, TermPos0, TermPos).
 
 '$lgt_swi_unify_clause'(Head, THead, TermPos, TermPos) :-
 	!,
-	'$lgt_decompile_predicate_heads'(THead, Head).
+	'$lgt_decompile_predicate_heads'(THead, _, _, Head).
 
 
 '$lgt_swi_unify_clause_body'((Goal1, Goal2), Entity, (TGoal1, TGoal2), TermPos0, TermPos) :-
@@ -369,13 +369,13 @@ user:portray(c(This, r(Sender, Self, MetaVars, CoinductionStack))) :-
 	'$lgt_swi_unify_clause_body'(Goal, Entity, TGoal, TermPos0, TermPos).
 
 '$lgt_swi_unify_clause_body'(abolish(PI), Entity, abolish(TPI), TermPos, TermPos) :-
-	'$lgt_decompile_predicate_indicators'(TPI, Entity, PI), !.
+	'$lgt_decompile_predicate_indicators'(TPI, Entity, _, PI), !.
 '$lgt_swi_unify_clause_body'(asserta(Clause), Entity, asserta(TClause), TermPos, TermPos) :-
-	'$lgt_decompile_predicate_heads'(TClause, Entity, Clause), !.
+	'$lgt_decompile_predicate_heads'(TClause, Entity, _, Clause), !.
 '$lgt_swi_unify_clause_body'(assertz(Clause), Entity, assertz(TClause), TermPos, TermPos) :-
-	'$lgt_decompile_predicate_heads'(TClause, Entity, Clause), !.
+	'$lgt_decompile_predicate_heads'(TClause, Entity, _, Clause), !.
 '$lgt_swi_unify_clause_body'(retract(Clause), Entity, retract(TClause), TermPos, TermPos) :-
-	'$lgt_decompile_predicate_heads'(TClause, Entity, Clause), !.
+	'$lgt_decompile_predicate_heads'(TClause, Entity, _, Clause), !.
 
 '$lgt_swi_unify_clause_body'(Obj::expand_term(Term, Clause), _, '$lgt_expand_term'(Obj, Term, Clause, _, p(p(p))), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(expand_term(Term, Clause), _, '$lgt_expand_term'(This, Term, Clause, This, p(_)), TermPos, TermPos) :- !.
@@ -521,7 +521,7 @@ user:portray(c(This, r(Sender, Self, MetaVars, CoinductionStack))) :-
 	!.
 
 '$lgt_swi_unify_clause_body'(Goal, _, TGoal, TermPos, TermPos) :-	% object and category user predicates
-	'$lgt_decompile_predicate_heads'(TGoal, GoalEntity, Goal0),
+	'$lgt_decompile_predicate_heads'(TGoal, GoalEntity, _, Goal0),
 	functor(Goal0, Functor0, _),
 	(	atom_concat(Functor1, '__sync', Functor0) ->
 		% synchronized predicate

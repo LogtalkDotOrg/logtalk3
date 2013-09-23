@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SICStus Prolog 4.1.0 and later versions
-%  Last updated on September 20, 2013
+%  Last updated on September 23, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -559,7 +559,7 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 
 '$lgt_sicstus_directive_expansion'(block(Heads), {block(THeads)}) :-
 	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_heads'(Heads, THeads, '?').
+	'$lgt_compile_predicate_heads'(Heads, _, THeads, '?').
 '$lgt_sicstus_directive_expansion'(load_foreign_resource(Resource), {initialization(load_foreign_resource(Resource))}) :-
 	load_foreign_resource(Resource).
 

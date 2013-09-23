@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for XSB 3.3 or later versions
-%  Last updated on September 20, 2013
+%  Last updated on September 23, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -517,11 +517,11 @@ setup_call_catcher_cleanup(Setup, Call, Catcher, Cleanup) :-
 
 '$lgt_xsb_directive_expansion'(table(PIs), {table(CPIs)}) :-
 	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_indicators'(PIs, CPIs).
+	'$lgt_compile_predicate_indicators'(PIs, _, CPIs).
 
 '$lgt_xsb_directive_expansion'(as(table(PIs),ShareMode), {as(table(CPIs),ShareMode)}) :-
 	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_indicators'(PIs, CPIs).
+	'$lgt_compile_predicate_indicators'(PIs, _, CPIs).
 
 '$lgt_xsb_directive_expansion'(import(as(from(PI), Module), Functor), use_module(Module, [as(PI, Functor)])).
 

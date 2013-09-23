@@ -29,11 +29,11 @@
 
 		term_expansion((attr_unify_hook(Att, Var) :- Body), [{(:- import(from(/(install_verify_attribute_handler,4), machine)))},{(:- install_verify_attribute_handler(Prefix,Att,Var,TAttrUnifyHookHead))},(attr_unify_hook(_-Att, Var) :- Body)]) :-
 			logtalk_load_context(entity_prefix, Prefix),
-			logtalk::compile_predicate_heads(attr_unify_hook(Att, Var), TAttrUnifyHookHead).
+			logtalk::compile_predicate_heads(attr_unify_hook(Att, Var), _, TAttrUnifyHookHead, _).
 		term_expansion((attribute_goals(X) --> Body), [{(:- import(from(/(install_attribute_portray_hook,3), machine)))},{(:- install_attribute_portray_hook(Prefix,X,TAttrUnifyHookHead))},(attribute_goals(X) --> Body)]) :-
 			logtalk_load_context(entity_prefix, Prefix),
 			logtalk::expand_term((attribute_goals(X) --> Body), (AttrUnifyHookHead :- _)),
-			logtalk::compile_predicate_heads(AttrUnifyHookHead, TAttrUnifyHookHead).
+			logtalk::compile_predicate_heads(AttrUnifyHookHead, _, TAttrUnifyHookHead, _).
 
 	:- else.
 

@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on September 20, 2013
+%  Last updated on September 23, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -555,10 +555,10 @@ setup_call_cleanup(_, _, _) :-
 
 '$lgt_eclipse_directive_expansion'(set_event_handler(Event, defers(Functor/Arity)), {set_event_handler(Event, defers(CFunctor/CArity))}) :-
 	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_indicators'(Functor/Arity, CFunctor/CArity).
+	'$lgt_compile_predicate_indicators'(Functor/Arity, _, CFunctor/CArity).
 '$lgt_eclipse_directive_expansion'(set_event_handler(Event, Functor/Arity), {set_event_handler(Event, CFunctor/CArity)}) :-
 	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_indicators'(Functor/Arity, CFunctor/CArity).
+	'$lgt_compile_predicate_indicators'(Functor/Arity, _, CFunctor/CArity).
 
 '$lgt_eclipse_directive_expansion'(import(from(Conjunction, Module)), use_module(Module, Imports)) :-
 	'$lgt_flatten_list'([Conjunction], Imports).

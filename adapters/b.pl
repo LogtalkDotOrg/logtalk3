@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for B-Prolog 7.8 and later versions
-%  Last updated on September 20, 2013
+%  Last updated on September 23, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -518,27 +518,27 @@
 
 '$lgt_b_directive_expansion'(table(':'(Head, N)), {table(':'(THead, N))}) :-
 	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_heads'(Head, THead, '-').
+	'$lgt_compile_predicate_heads'(Head, _, THead, '-').
 
 '$lgt_b_directive_expansion'(table(F/A), {table(TF/TA)}) :-
 	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_indicators'(F/A, TF/TA).
+	'$lgt_compile_predicate_indicators'(F/A, _, TF/TA).
 
 '$lgt_b_directive_expansion'(table([F/A| PIs]), {table(TPIs)}) :-
 	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_indicators'([F/A| PIs], TPIs).
+	'$lgt_compile_predicate_indicators'([F/A| PIs], _, TPIs).
 
 '$lgt_b_directive_expansion'(table((F/A, PIs)), {table(TPIs)}) :-
 	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_indicators'((F/A, PIs), TPIs).
+	'$lgt_compile_predicate_indicators'((F/A, PIs), _, TPIs).
 
 '$lgt_b_directive_expansion'(table(Head), {table(THead)}) :-
 	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_heads'(Head, THead).
+	'$lgt_compile_predicate_heads'(Head, _, THead, _).
 
 '$lgt_b_directive_expansion'(mode(Head), {mode(THead)}) :-
 	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_heads'(Head, THead, '?').
+	'$lgt_compile_predicate_heads'(Head, _, THead, '?').
 
 
 % '$lgt_prolog_goal_expansion'(@callable, -callable)

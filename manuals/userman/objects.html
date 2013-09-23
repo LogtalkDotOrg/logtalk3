@@ -442,32 +442,12 @@ The following predicates are defined:
 		<dd>Converts an entity identifier into its internal prefix or an internal prefix into an entity identifier.</dd>
 </dl>
 <dl>
-	<dt><code>compile_predicate_heads(Heads, TranslatedHeads)</code></dt>
-		<dd>Compiles a predicate head or a list of predicate heads in the context of the entity being compiled.</dd>
-	<dt><code>compile_predicate_heads(Heads, TranslatedHeads, ContextArgument)</code></dt>
-		<dd>Compiles a predicate head or a list of predicate heads in the context of the entity being compiled.</dd>
 	<dt><code>compile_predicate_heads(Heads, Entity, TranslatedHeads, ContextArgument)</code></dt>
 		<dd>Compiles a predicate head or a list of predicate heads in the context of the specified entity or in the context of the entity being compiled when <code>Entity</code> is not instantiated.</dd>
-</dl>
-<dl>
-	<dt><code>compile_predicate_indicators(PredicateIndicators, TranslatedPredicateIndicators)</code></dt>
-		<dd>Compiles a predicate indicator or a list of predicate indicators in the context of the entity being compiled.</dd>
 	<dt><code>compile_predicate_indicators(PredicateIndicators, Entity, TranslatedPredicateIndicators)</code></dt>
 		<dd>Compiles a predicate indicator or a list of predicate indicators in the context of the specified entity or in the context of the entity being compiled when <code>Entity</code> is not instantiated.</dd>
-</dl>
-<dl>
-	<dt><code>decompile_predicate_heads(TranslatedHeads, Heads)</code></dt>
-		<dd>Decompiles a compiled predicate head or a list of compiled predicate heads returning the source level predicate heads. Requires the implicit entity to be currently loaded.</dd>
-	<dt><code>decompile_predicate_heads(TranslatedHeads, Entity, Heads)</code></dt>
-		<dd>Decompiles a compiled predicate head or a list of compiled predicate heads returning the entity and source level heads. Requires the entity to be currently loaded.</dd>
 	<dt><code>decompile_predicate_heads(TranslatedHeads, Entity, EntityType, Heads)</code></dt>
 		<dd>Decompiles a compiled predicate head or a list of compiled predicate heads returning the entity, entity type, and source level heads. Requires the entity to be currently loaded.</dd>
-</dl>
-<dl>
-	<dt><code>decompile_predicate_indicators(TranslatedPredicateIndicators, PredicateIndicators)</code></dt>
-		<dd>Decompiles a compiled predicate indicator or a list of compiled predicate indicators returning source level predicate indicators. Requires the implicit entity to be currently loaded.</dd>
-	<dt><code>decompile_predicate_indicators(TranslatedPredicateIndicators, Entity, PredicateIndicators)</code></dt>
-		<dd>Decompiles a compiled predicate indicator or a list of compiled predicate indicators returning the entity and source level predicate indicators. Requires the entity to be currently loaded.</dd>
 	<dt><code>decompile_predicate_indicators(TranslatedPredicateIndicators, Entity, EntityType, PredicateIndicators)</code></dt>
 		<dd>Decompiles a compiled predicate indicator or a list of compiled predicate indicators returning the entity, entity type, and source level predicate indicators. Requires the entity to be currently loaded.</dd>
 </dl>
@@ -504,7 +484,7 @@ To use these predicates, simply send the corresponding message to the <code>logt
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: September 18, 2013</span>
+		<span>Last updated on: September 23, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="messages.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="protocols.html">next</a></span><br/>

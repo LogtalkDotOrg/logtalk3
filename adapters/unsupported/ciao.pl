@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Ciao Prolog 1.14.0
-%  Last updated on September 20, 2013
+%  Last updated on September 23, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -594,7 +594,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 
 '$lgt_ciao_directive_meta_predicate'(Template, CTemplate) :-
 	functor(Template, Functor, Arity),
-	'$lgt_compile_predicate_indicators'(Functor/Arity, CFunctor/CArity),
+	'$lgt_compile_predicate_indicators'(Functor/Arity, _, CFunctor/CArity),
 	Template =.. [Functor| Args],
 	'$lgt_ciao_directive_meta_predicate_args'(Args, CArgs),
 	CTemplate =.. [CFunctor| CArgs].

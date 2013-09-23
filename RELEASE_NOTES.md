@@ -37,6 +37,10 @@ methods. The valid loaded file properties are `basename/1`, `directory/1`,
 
 * REMOVED: The `logtalk::loaded_file/2-4` methods are no longer available.
 
+* REMOVED: The `logtalk` object methods `decompile_predicate_heads/2-3`,
+`compile_predicate_heads/2-3`, `decompile_predicate_indicators/2-3`, and
+`compile_predicate_indicators/2` are no longer available.
+
 * FIXED: Ensure that meta-predicate mode indicators in the declaration of
 Prolog proprietary built-in meta-predicates are converted into Logtalk
 compatible ones before being used in the second compiler pass or reported

@@ -26,9 +26,9 @@
 	implements(profilerp)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura and Vitor Santos Costa',
-		date is 2011/02/24,
+		date is 2013/09/23,
 		comment is 'Simple wrapper for the YAP count profiler.'
 	]).
 
@@ -78,7 +78,7 @@
 		predicate_label(user:TFunctor/TArity, Label).
 	predicate_label(Module:TFunctor/TArity, Label) :-
 		(	Module == user,
-			logtalk::decompile_predicate_indicators(TFunctor/TArity, Entity, Functor/Arity) ->
+			logtalk::decompile_predicate_indicators(TFunctor/TArity, Entity, _, Functor/Arity) ->
 			(	atom(Entity) ->
 				atomic_list_concat([Entity, '::', Functor, '/', Arity], Label)
 			;	functor(Entity, EntityFunctor, EntityArity),
@@ -100,7 +100,7 @@
 			Module == user
 		;	Term = TFunctor/TArity
 		),
-		logtalk::decompile_predicate_indicators(TFunctor/TArity, Entity, Functor/Arity),
+		logtalk::decompile_predicate_indicators(TFunctor/TArity, Entity, _, Functor/Arity),
 		{profile_data(Term, retries, Retries)},
 		Predicate = Functor/Arity.
 

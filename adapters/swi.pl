@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SWI Prolog 6.0.0 and later versions
-%  Last updated on September 20, 2013
+%  Last updated on September 23, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -617,7 +617,7 @@
 
 '$lgt_swi_directive_expansion'(arithmetic_function(Functor/Arity), {arithmetic_function(Functor/Arity)}) :-
 	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_indicators'(Functor/Arity, TFunctor/TArity),
+	'$lgt_compile_predicate_indicators'(Functor/Arity, _, TFunctor/TArity),
 	functor(Term, Functor, TArity),
 	Term =.. [_| Args],
 	TArity2 is TArity + 1,

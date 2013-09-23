@@ -13,9 +13,9 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0.31,
+		version is 0.4,
 		author is 'Paulo Moura',
-		date is 2011/02/24,
+		date is 2013/09/23,
 		comment is 'Hook object for compiling objects and categories containing CLP(FD) code when using SICStus Prolog.'
 	]).
 
@@ -39,7 +39,7 @@
 		compile_indexical_head(Head, THead).
 
 	compile_indexical_head(Head, THead) :-
-		logtalk::compile_predicate_heads(Head, CHead),
+		logtalk::compile_predicate_heads(Head, _, CHead, _),
 		CHead =.. [CFunctor| CArgs],
 		copy_args_except_last(CArgs, TArgs),	% remove execution-context argument
 		atom_concat(CFunctor, '+', TFunctor0),
@@ -72,7 +72,7 @@
 	:- dynamic(user::portray/1).
 	user::portray(THead) :-
 		callable(THead),
-		logtalk::decompile_predicate_heads(THead, Entity, Head),
+		logtalk::decompile_predicate_heads(THead, Entity, _, Head),
 		writeq(Entity::Head).
 
 :- end_object.
