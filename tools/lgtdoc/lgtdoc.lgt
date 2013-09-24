@@ -302,7 +302,7 @@
 		entity_to_xml_term(Entity),
 		write_xml_cdata_element(Stream, name, [], Entity),
 		write_xml_element(Stream, type, [], Type),
-		xml_entity_compilation_text(Compilation),
+		xml_entity_compilation_text(Type, Entity, Compilation),
 		write_xml_element(Stream, compilation, [], Compilation),
 		(	entity_property(Entity, info(Info)) ->
 			write_xml_entity_info(Stream, Info)
@@ -310,38 +310,68 @@
 		),
 		write_xml_close_tag(Stream, entity).
 
-	% xml_entity_compilation_text(-atom)
+	% xml_entity_compilation_text(+atom, @entity_identifier, -atom)
 
-	xml_entity_compilation_text(Flags) :-
-		(	entity_property(Entity, static) ->
+	xml_entity_compilation_text(object, Entity, Flags) :-
+		(	object_property(Entity, static) ->
 			Mode = static
 		;	Mode = (dynamic)
 		),
-		(	entity_property(Entity, context_switching_calls) ->
-			atom_concat(Mode, ', context_switching_calls', Flags1)
-		;	Flags1 = Mode
+		(	object_property(Entity, built_in) ->
+			atom_concat(Mode, ', built_in', Flags0)
+		;	Flags0 = Mode
 		),
-		(	entity_property(Entity, dynamic_declarations) ->
+		(	object_property(Entity, context_switching_calls) ->
+			atom_concat(Flags0, ', context_switching_calls', Flags1)
+		;	Flags1 = Flags0
+		),
+		(	object_property(Entity, dynamic_declarations) ->
 			atom_concat(Flags1, ', dynamic_declarations', Flags2)
 		;	Flags2 = Flags1
 		),
-		(	entity_property(Entity, complements(allow)) ->
+		(	object_property(Entity, complements(allow)) ->
 			atom_concat(Flags2, ', complements(allow)', Flags3)
-		;	entity_property(Entity, complements(restrict)) ->
+		;	object_property(Entity, complements(restrict)) ->
 			atom_concat(Flags2, ', complements(restrict)', Flags3)
 		;	Flags3 = Flags2
 		),
-		(	entity_property(Entity, events) ->
+		(	object_property(Entity, events) ->
 			atom_concat(Flags3, ', events', Flags4)
 		;	Flags4 = Flags3
 		),
-		(	entity_property(Entity, threaded) ->
+		(	object_property(Entity, threaded) ->
 			atom_concat(Flags4, ', threaded', Flags5)
 		;	Flags5 = Flags4
 		),
-		(	entity_property(Entity, synchronized) ->
+		(	object_property(Entity, synchronized) ->
 			atom_concat(Flags5, ', synchronized', Flags)
 		;	Flags = Flags5
+		).
+	xml_entity_compilation_text(category, Entity, Flags) :-
+		(	category_property(Entity, static) ->
+			Mode = static
+		;	Mode = (dynamic)
+		),
+		(	object_property(Entity, built_in) ->
+			atom_concat(Mode, ', built_in', Flags0)
+		;	Flags0 = Mode
+		),
+		(	category_property(Entity, events) ->
+			atom_concat(Flags0, ', events', Flags1)
+		;	Flags1 = Flags0
+		),
+		(	category_property(Entity, synchronized) ->
+			atom_concat(Flags1, ', synchronized', Flags)
+		;	Flags = Flags1
+		).
+	xml_entity_compilation_text(protocol, Entity, Flags) :-
+		(	protocol_property(Entity, static) ->
+			Mode = static
+		;	Mode = (dynamic)
+		),
+		(	protocol_property(Entity, built_in) ->
+			atom_concat(Mode, ', built_in', Flags)
+		;	Flags = Mode
 		).
 
 	% write_xml_entity_info(+stream, +list)

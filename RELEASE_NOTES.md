@@ -95,6 +95,9 @@ Tools
 * UPDATED: The `lgtdoc` tool now reports the new `complements/1` flag when
 documenting objects.
 
+* FIXED: The `lgtdoc` tool would print wrong information about protocol and
+category compilation flags.
+
 * CHANGED: The `lgtunit` tool code coverage output now writes the list of
 predicate clause indexes at the end. Also added information about backend
 Prolog compiler features for limiting the print depth of the list.
