@@ -77,6 +77,12 @@ Installers and installation scripts
 * UPDATED: The `logtalk.iss` Inno Setup script, used for building binary
 Windows installers, to detect B-Prolog 8.0.
 
+Library
+-------
+
+* FIXED: The instructions for generating the library HTML documentation would
+wrongly included non-library entities.
+
 Tools
 -----
 

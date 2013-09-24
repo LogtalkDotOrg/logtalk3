@@ -99,11 +99,11 @@ steps:
     | ?- {library(all_loader)}.
 
 3. Load the `lgtdoc` tool and generate the XML documenting files for all
-loaded entities using the queries:
+library entities using the queries:
 
-	| ?- logtalk_load(lgtdoc(loader)).
+	| ?- {lgtdoc(loader)}.
 	...
-	| ?- lgtdoc::all([xmldir('$LOGTALKUSER/library/docs')]).
+	| ?- lgtdoc::rlibrary(library, [xmldir('$LOGTALKUSER/library/docs')]).
 
 4. Run the command `lgt2html` on the `$LOGTALKUSER/library/docs` directory
 to generate (X)HTML documentation or the command `lgt2pdf` to generate PDF
