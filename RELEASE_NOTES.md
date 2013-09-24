@@ -112,6 +112,8 @@ Examples
 * FIXED: Restored testing of `use_module/1` directives (whose support depend
 on the backend Prolog compiler) for the `modules` example.
 
+* FIXED: Definition for the predicate `expand_path/2` for B-Prolog in the `cc`
+example.
 
 3.00.0 Alpha 24 - September 16, 2013
 ====================================

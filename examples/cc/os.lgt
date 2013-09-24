@@ -22,9 +22,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2013/05/09,
+		date is 2013/09/24,
 		comment is 'Simple example of using conditional compilation to implement a portable operating-system interface for selected back-end Prolog compilers.'
 	]).
 
@@ -386,7 +386,15 @@
 			{system(Command)}.
 
 		expand_path(Path, ExpandedPath) :-
-			{expand_environment(Path, ExpandedPath)}.
+			{expand_environment(Path, ExpandedPath0),
+			 (	(	sub_atom(ExpandedPath0, 0, 1, _, '/')
+			 	;	sub_atom(ExpandedPath0, 1, 1, _, ':')
+			 	) ->
+			 	ExpandedPath = ExpandedPath0
+			 ;	working_directory(Current),
+			 	atom_concat(Current, '/', Directory),
+			 	atom_concat(Directory, ExpandedPath0, ExpandedPath)
+			 )}.
 
 		make_directory(Directory) :-
 			(	directory_exists(Directory) ->
