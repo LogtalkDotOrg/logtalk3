@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/09/18,
+		date is 2013/09/24,
 		comment is 'Documenting tool.',
 		remarks is [
 			'Compiling files for generating XML documentation' - 'All source files must be compiled with the "source_data" compiler flag turned on.',
@@ -325,8 +325,10 @@
 			atom_concat(Flags1, ', dynamic_declarations', Flags2)
 		;	Flags2 = Flags1
 		),
-		(	entity_property(Entity, complements) ->
-			atom_concat(Flags2, ', complements', Flags3)
+		(	entity_property(Entity, complements(allow)) ->
+			atom_concat(Flags2, ', complements(allow)', Flags3)
+		;	entity_property(Entity, complements(restrict)) ->
+			atom_concat(Flags2, ', complements(restrict)', Flags3)
 		;	Flags3 = Flags2
 		),
 		(	entity_property(Entity, events) ->

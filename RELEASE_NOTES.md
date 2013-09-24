@@ -80,12 +80,15 @@ Windows installers, to detect B-Prolog 8.0.
 Tools
 -----
 
+* UPDATED: The `lgtdoc` tool now reports the new `complements/1` flag when
+documenting objects.
+
 * CHANGED: The `lgtunit` tool code coverage output now writes the list of
 predicate clause indexes at the end. Also added information about backend
 Prolog compiler features for limiting the print depth of the list.
 
-* FIXED: A bug where the `lgtunit` tool code coverage would report statistics
-on compiler-generated auxiliary predicates (such as the ones resulting from
+* CHANGED: The `lgtunit` tool code coverage no longer reports statistics on
+compiler-generated auxiliary predicates (such as the ones resulting from
 `use_module/2` directives and optimized meta-predicate definitions).
 
 Examples
