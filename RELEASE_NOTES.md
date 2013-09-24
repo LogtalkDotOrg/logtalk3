@@ -70,6 +70,12 @@ Documentation
 * IMPROVED: Documentation of meta-predicate argument mode indicators and their
 intended use.
 
+Installers and installation scripts
+-----------------------------------
+
+* UPDATED: The `logtalk.iss` Inno Setup script, used for building binary
+Windows installers, to detect B-Prolog 8.0.
+
 Tools
 -----
 

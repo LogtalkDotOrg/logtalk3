@@ -232,7 +232,12 @@ var
   BPDIR: String;
 begin
   if RegQueryStringValue(HKLM, 'SYSTEM\CurrentControlSet\Control\Session Manager\Environment\', 'BPDIR', BPDIR) then
-    Result := BPDIR + '\bp.bat'
+    if FileExists(BPDIR + '\bp.bat') then
+      Result := BPDIR + '\bp.bat'
+    else if FileExists(BPDIR + '\bp.exe') then
+      Result := BPDIR + '\bp.exe'
+    else
+      Result := 'prolog_compiler_not_installed'
   else
     Result := 'prolog_compiler_not_installed'
 end;
