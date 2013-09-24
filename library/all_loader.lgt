@@ -34,6 +34,9 @@
 		statistics_loader,
 		intervals_loader,
 		logging_loader,
-		meta_compiler_loader
+		meta_compiler_loader,
+		assignvars,
+		counters,
+		streamvars
 	], [optimize(on)])
 ).

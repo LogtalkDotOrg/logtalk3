@@ -83,6 +83,9 @@ Library
 * FIXED: The instructions for generating the library HTML documentation would
 wrongly included non-library entities.
 
+* FIXED: The library `all_loader.lgt` loader file would not load some library
+files (`assignvars.lgt`, `counters.lgt`, and `streamvars.lgt`).
+
 Tools
 -----
 
