@@ -80,7 +80,7 @@ A category may explicitly complement one or more existing objects, thus providin
     ...
 :- end_category.</pre>
 <p>
-This allows us to patch existing functionality or add new functionality to existing objects without requiring access or modifications to their source code. Common uses are adding logging or debugging predicates to a set of objects. Complementing categories may also be used to define aliases for complemented object predicates. Complemented objects need to be compiled with the <code>complements</code> compiler option switched on.
+This allows us to patch existing functionality or add new functionality to existing objects without requiring access or modifications to their source code. Common uses are adding logging or debugging predicates to a set of objects. Complementing categories may also be used to define aliases for complemented object predicates. Complemented objects need to be compiled with the <code>complements</code> compiler option set <code>allow</code> (to allow both patching and adding new functionality) or <code>restrict</code> (to allow only adding new functionality).
 </p>
 <!-- currently, static binding is disable for messages sent to an object with the complements flag set to allow
 <p>
@@ -391,7 +391,7 @@ Note that access to category parameters is only possible using the <code>paramet
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: May 4, 2013</span>
+		<span>Last updated on: September 24, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="protocols.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="predicates.html">next</a></span><br/>

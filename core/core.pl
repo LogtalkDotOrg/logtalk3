@@ -350,7 +350,7 @@ Obj::Pred :-
 Obj::Pred :-
 	catch('$lgt_tr_msg'(Pred, Obj, Call, user), Error, '$lgt_runtime_error_handler'(error(Error, logtalk(Obj::Pred, user)))),
 	(	'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags),
-		Flags /\ 256 =:= 256 ->
+		Flags /\ 512 =:= 512 ->
 		% object compiled in debug mode
 		'$lgt_exec_ctx'(ExCtx, user, user, Obj, [], []),
 		catch('$lgt_debug'(top_goal(Obj::Pred, Call), ExCtx), Error, '$lgt_runtime_error_handler'(Error))
@@ -366,7 +366,7 @@ Obj<<Goal :-
 Obj<<Goal :-
 	catch('$lgt_tr_ctx_call'(Obj, Goal, Call, user), Error, '$lgt_runtime_error_handler'(error(Error, logtalk(Obj<<Goal, user)))),
 	(	'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags),
-		Flags /\ 256 =:= 256 ->
+		Flags /\ 512 =:= 512 ->
 		% object compiled in debug mode
 		'$lgt_exec_ctx'(ExCtx, user, user, Obj, [], []),
 		catch('$lgt_debug'(top_goal(Obj<<Goal, Call), ExCtx), Error, '$lgt_runtime_error_handler'(Error))
@@ -525,13 +525,22 @@ object_property(Obj, Prop) :-
 
 
 '$lgt_object_property'(debugging, _, _, _, _, _, Flags) :-
-	Flags /\ 256 =:= 256.
+	Flags /\ 512 =:= 512.
 '$lgt_object_property'(context_switching_calls, _, _, _, _, _, Flags) :-
-	Flags /\ 128 =:= 128.
+	Flags /\ 256 =:= 256.
 '$lgt_object_property'(dynamic_declarations, _, _, _, _, _, Flags) :-
-	Flags /\ 64 =:= 64.
+	Flags /\ 128 =:= 128.
+'$lgt_object_property'(complements(Complements), _, _, _, _, _, Flags) :-
+	(	Flags /\ 64 =:= 64 ->
+		Complements = allow
+	;	Flags /\ 32 =:= 32,
+		Complements = restrict
+	).
 '$lgt_object_property'(complements, _, _, _, _, _, Flags) :-
-	Flags /\ 32 =:= 32.
+	(	Flags /\ 64 =:= 64 ->
+		true
+	;	Flags /\ 32 =:= 32
+	).
 '$lgt_object_property'(events, _, _, _, _, _, Flags) :-
 	Flags /\ 16 =:= 16.
 '$lgt_object_property'(threaded, _, _, _, _, _, Flags) :-
@@ -594,7 +603,7 @@ object_property(Obj, Prop) :-
 	functor(Predicate, Functor, Arity).
 
 '$lgt_object_property_resource'(_, _, DDcl, Flags, Scope, Functor/Arity) :-
-	Flags /\ 64 =:= 64,
+	Flags /\ 128 =:= 128,
 	% dynamic declarations are allowed
 	call(DDcl, Predicate, Scope),
 	functor(Predicate, Functor, Arity).
@@ -617,7 +626,7 @@ category_property(Ctg, Prop) :-
 
 
 '$lgt_category_property'(debugging, _, _, _, _, _, Flags) :-
-	Flags /\ 256 =:= 256.
+	Flags /\ 512 =:= 512.
 '$lgt_category_property'(events, _, _, _, Flags) :-
 	Flags /\ 16 =:= 16.
 '$lgt_category_property'(synchronized, _, _, _, Flags) :-
@@ -691,7 +700,7 @@ protocol_property(Ptc, Prop) :-
 
 
 '$lgt_protocol_property'(debugging, _, _, _, _, _, Flags) :-
-	Flags /\ 256 =:= 256.
+	Flags /\ 512 =:= 512.
 '$lgt_protocol_property'((dynamic), _, _, Flags) :-
 	Flags /\ 2 =:= 2.
 '$lgt_protocol_property'(static, _, _, Flags) :-
@@ -739,7 +748,7 @@ protocol_property(Ptc, Prop) :-
 
 '$lgt_object_property_declares'(Obj, Dcl, DDcl, EntityFlags, Functor/Arity, Properties) :-
 	(	call(Dcl, Predicate, Scope0, Meta, Flags)
-	;	EntityFlags /\ 64 =:= 64,	% dynamic predicate declarations enabled
+	;	EntityFlags /\ 128 =:= 128,	% dynamic predicate declarations enabled
 		call(DDcl, Predicate, Scope0),
 		Meta = no,
 		Flags = 2
@@ -2513,7 +2522,7 @@ current_logtalk_flag(Flag, Value) :-
 			)
 		)
 	;	% no static predicate declaration...
-		ObjFlags /\ 64 =:= 64,
+		ObjFlags /\ 128 =:= 128,
 		% ... but dynamic declarations are allowed
 		functor(DDclClause, DDcl, 2),
 		arg(1, DDclClause, Pred),
@@ -2580,7 +2589,7 @@ current_logtalk_flag(Flag, Value) :-
 			'$lgt_goal_meta_variables'(Head, Meta, MetaVars),
 			'$lgt_comp_ctx'(Ctx, _, _, _, _, Prefix, MetaVars, _, ExCtx, runtime, _),
 			'$lgt_tr_body'(Body, TBody, DBody, Ctx),
-			(	Flags /\ 256 =:= 256 ->
+			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
 				asserta((THead :- ('$lgt_nop'(Body), '$lgt_debug'(rule(Obj, Head, 0), ExCtx), DBody)))
 			;	asserta((THead :- ('$lgt_nop'(Body), TBody)))
@@ -2614,7 +2623,7 @@ current_logtalk_flag(Flag, Value) :-
 		% either a dynamic predicate or a dynamic object that is both the sender and the predicate scope container
 		(	(Scope = TestScope; Sender = SCtn) ->
 			'$lgt_assert_pred_def'(Def, DDef, Prefix, Head, ExCtx, THead, Update),
-			(	Flags /\ 256 =:= 256 ->
+			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
 				asserta((THead :- '$lgt_debug'(fact(Obj, Head, 0), ExCtx)))
 			;	'$lgt_add_db_lookup_cache_entry'(Obj, Head, SCtn, DclScope, Type, Sender, THead, DDef, Update),
@@ -2669,7 +2678,7 @@ current_logtalk_flag(Flag, Value) :-
 			'$lgt_goal_meta_variables'(Head, Meta, MetaVars),
 			'$lgt_comp_ctx'(Ctx, _, _, _, _, Prefix, MetaVars, _, ExCtx, runtime, _),
 			'$lgt_tr_body'(Body, TBody, DBody, Ctx),
-			(	Flags /\ 256 =:= 256 ->
+			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
 				assertz((THead :- ('$lgt_nop'(Body), '$lgt_debug'(rule(Obj, Head, 0), ExCtx), DBody)))
 			;	assertz((THead :- ('$lgt_nop'(Body), TBody)))
@@ -2703,7 +2712,7 @@ current_logtalk_flag(Flag, Value) :-
 		% either a dynamic predicate or a dynamic object that is both the sender and the predicate scope container
 		(	(Scope = TestScope; Sender = SCtn) ->
 			'$lgt_assert_pred_def'(Def, DDef, Prefix, Head, ExCtx, THead, Update),
-			(	Flags /\ 256 =:= 256 ->
+			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
 				assertz((THead :- '$lgt_debug'(fact(Obj, Head, 0), ExCtx)))
 			;	'$lgt_add_db_lookup_cache_entry'(Obj, Head, SCtn, DclScope, Type, Sender, THead, DDef, Update),
@@ -2742,7 +2751,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	% not a declared predicate and not a local dynamic predicate
 		(	DclScope == p
 			% object asserting a new predicate in itself
-		;	ObjFlags /\ 64 =:= 64
+		;	ObjFlags /\ 128 =:= 128
 			% dynamic declaration of new predicates allowed
 		) ->
 		'$lgt_term_template'(Pred, DPred),
@@ -2974,7 +2983,7 @@ current_logtalk_flag(Flag, Value) :-
 			Type = (dynamic),
 			(	(Scope = TestScope; Sender = SCtn) ->
 				(	call(DDef, Head, _, THead) ->
-					(	ObjFlags /\ 256 =:= 256 ->
+					(	ObjFlags /\ 512 =:= 512 ->
 						% object compiled in debug mode
 						retract((THead :- '$lgt_debug'(fact(_, _, _), _)))
 					;	'$lgt_add_db_lookup_cache_entry'(Obj, Head, SCtn, Scope, Type, Sender, THead, DDef, true),
@@ -2982,7 +2991,7 @@ current_logtalk_flag(Flag, Value) :-
 					),
 					'$lgt_update_ddef_table'(DDef, Head, THead)
 				;	call(Def, Head, _, THead) ->
-					(	ObjFlags /\ 256 =:= 256 ->
+					(	ObjFlags /\ 512 =:= 512 ->
 						% object compiled in debug mode
 						retract((THead :- '$lgt_debug'(fact(_, _, _), _)))
 					;	'$lgt_add_db_lookup_cache_entry'(Obj, Head, Scope, Type, Sender, THead),
@@ -3002,7 +3011,7 @@ current_logtalk_flag(Flag, Value) :-
 		)
 	;	% local dynamic predicate with no scope declaration
 		(	call(DDef, Head, _, THead) ->
-			(	ObjFlags /\ 256 =:= 256 ->
+			(	ObjFlags /\ 512 =:= 512 ->
 				% object compiled in debug mode
 				retract((THead :- '$lgt_debug'(fact(_, _, _), _)))
 			;	'$lgt_add_db_lookup_cache_entry'(Obj, Head, p, (dynamic), Sender, THead),
@@ -3045,7 +3054,7 @@ current_logtalk_flag(Flag, Value) :-
 					retractall(THead),
 					'$lgt_update_ddef_table'(DDef, Head, THead)
 				;	call(Def, Head, _, THead) ->
-					(	ObjFlags /\ 256 =:= 256 ->
+					(	ObjFlags /\ 512 =:= 512 ->
 						% object compiled in debug mode
 						true
 					;	'$lgt_add_db_lookup_cache_entry'(Obj, Head, Scope, Type, Sender, THead)
@@ -3067,7 +3076,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	% local dynamic predicate with no scope declaration
 		(	Obj = Sender,
 			call(DDef, Head, _, THead) ->
-			(	ObjFlags /\ 256 =:= 256 ->
+			(	ObjFlags /\ 512 =:= 512 ->
 				% object compiled in debug mode
 				true
 			;	'$lgt_add_db_lookup_cache_entry'(Obj, Head, p, (dynamic), Sender, THead)
@@ -3181,7 +3190,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_comp_ctx'(Ctx, _, Sender, This, Self, Prefix, [], _, ExCtx, runtime, _),
 	'$lgt_tr_body'(Pred, TPred, DPred, Ctx),
 	Input = S0, [] = S,
-	(	Flags /\ 256 =:= 256 ->
+	(	Flags /\ 512 =:= 512 ->
 		% object compiled in debug mode
 		call(DPred)
 	;	call(TPred)
@@ -3203,7 +3212,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_comp_ctx'(Ctx, _, Sender, This, Self, Prefix, [], _, ExCtx, runtime, _),
 	'$lgt_tr_body'(Pred, TPred, DPred, Ctx),
 	Input = S0, Rest = S,
-	(	Flags /\ 256 =:= 256 ->
+	(	Flags /\ 512 =:= 512 ->
 		% object compiled in debug mode
 		call(DPred)
 	;	call(TPred)
@@ -4124,7 +4133,7 @@ current_logtalk_flag(Flag, Value) :-
 		;	% in the worst case we need to compile the meta-call
 			'$lgt_comp_ctx'(Ctx, _, Sender, This, Self, Prefix, [], _, ExCtx, runtime, []),
 			catch('$lgt_tr_body'(Pred, TPred, DPred, Ctx), Error, throw(error(Error, logtalk(call(Pred), This)))) ->
-			(	Flags /\ 256 =:= 256 ->
+			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
 				catch(DPred, error(Error,_), throw(error(Error, logtalk(call(Pred), This))))
 			;	catch(TPred, error(Error,_), throw(error(Error, logtalk(call(Pred), This))))
@@ -4140,7 +4149,7 @@ current_logtalk_flag(Flag, Value) :-
 		;	% in the worst case we need to compile the meta-call
 			'$lgt_comp_ctx'(Ctx, _, Sender, This, Self, Prefix, [], _, ExCtx, runtime, []),
 			catch('$lgt_tr_body'(Pred, TPred, DPred, Ctx), Error, throw(error(Error, logtalk(call(Pred), This)))) ->
-			(	Flags /\ 256 =:= 256 ->
+			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
 				catch(DPred, error(Error,_), throw(error(Error, logtalk(call(Pred), This))))
 			;	catch(TPred, error(Error,_), throw(error(Error, logtalk(call(Pred), This))))
@@ -4169,7 +4178,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	% in the worst case we have a control construct or a built-in predicate
 		'$lgt_comp_ctx'(Ctx, _, This, Sender, Sender, Prefix, ExtraVars, _, ExCtx, runtime, []),
 		catch('$lgt_tr_body'(Pred, TPred, DPred, Ctx), Error, throw(error(Error, logtalk(call(Pred), Sender)))) ->
-		(	Flags /\ 256 =:= 256 ->
+		(	Flags /\ 512 =:= 512 ->
 			% object compiled in debug mode
 			catch(DPred, error(Error,_), throw(error(Error, logtalk(call(Pred), Sender))))
 		;	catch(TPred, error(Error,_), throw(error(Error, logtalk(call(Pred), Sender))))
@@ -4228,7 +4237,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_call_within_context_nv'(Obj, Goal, This) :-
 	(	'$lgt_current_object_'(Obj, Prefix, _, Def, _, _, _, _, DDef, _, Flags) ->
-		(	Flags /\ 128 =:= 128 ->
+		(	Flags /\ 256 =:= 256 ->
 			% object compiled with context-switching calls allowed
 			'$lgt_exec_ctx'(ExCtx, Obj, Obj, Obj, [], []),
 			(	% in the most common case we're calling a user defined static predicate
@@ -4240,7 +4249,7 @@ current_logtalk_flag(Flag, Value) :-
 			;	% in the worst case we need to compile the goal
 				'$lgt_comp_ctx'(Ctx, _, Obj, Obj, Obj, Prefix, [], _, ExCtx, runtime, []),
 				catch('$lgt_tr_body'(Goal, TGoal, DGoal, Ctx), Error, throw(error(Error, logtalk(Obj<<Goal, This)))),
-				(	Flags /\ 256 =:= 256 ->
+				(	Flags /\ 512 =:= 512 ->
 					% object compiled in debug mode
 					catch(DGoal, Error, throw(error(Error, logtalk(Obj<<Goal, This))))
 				;	catch(TGoal, Error, '$lgt_runtime_error_handler'(error(Error, logtalk(Obj<<Goal, This))))
@@ -4360,17 +4369,17 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_current_object_'(logtalk, '$lgt_logtalk.', '$lgt_logtalk._dcl', '$lgt_logtalk._def', '$lgt_logtalk._super', '$lgt_logtalk._idcl', '$lgt_logtalk._idef', '$lgt_logtalk._ddcl', '$lgt_logtalk._ddef', '$lgt_logtalk._alias', Flags) :-
 	(	'$lgt_prolog_feature'(threads, supported) ->
-		% context_switching_calls + dynamic_declarations + complements + events + threaded + static + built_in
-		Flags = 249		% 0b011111001
-	;	% context_switching_calls + dynamic_declarations + complements + events + static + built_in
-		Flags = 241		% 0b011110001
+		% context_switching_calls + dynamic_declarations + complements(allow) + events + threaded + static + built_in
+		Flags = 473		% 0b011111001
+	;	% context_switching_calls + dynamic_declarations + complements(allow) + events + static + built_in
+		Flags = 465		% 0b011110001
 	).
 '$lgt_current_object_'(user, '$lgt_user.', '$lgt_user._dcl', '$lgt_user._def', '$lgt_user._super', '$lgt_user._idcl', '$lgt_user._idef', '$lgt_user._ddcl', '$lgt_user._ddef', '$lgt_user._alias', Flags) :-
 	(	'$lgt_prolog_feature'(threads, supported) ->
 		% context_switching_calls + dynamic_declarations + events + threaded + static + built_in
-		Flags = 217		% 0b011011001
+		Flags = 409		% 0b011011001
 	;	% context_switching_calls + dynamic_declarations + events + static + built_in
-		Flags = 209		% 0b011010001
+		Flags = 401		% 0b011010001
 	).
 
 
@@ -5693,77 +5702,79 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_entity_flags'(protocol, Flags) :-
 	(	'$lgt_compiler_flag'(debug, on) ->
-		Debug = 256						% 0b100000000
+		Debug = 512						% 0b1000000000
 	;	Debug = 0
 	),
 	(	'$lgt_pp_dynamic_' ->
-		Dynamic = 2						% 0b000000010
+		Dynamic = 2						% 0b0000000010
 	;	Dynamic = 0
 	),
 	(	'$lgt_pp_built_in_' ->
-		BuiltIn = 1						% 0b000000001
+		BuiltIn = 1						% 0b0000000001
 	;	BuiltIn = 0
 	),
 	Flags is Debug + Dynamic + BuiltIn.
 
 '$lgt_tr_entity_flags'(category, Flags) :-
 	(	'$lgt_compiler_flag'(debug, on) ->
-		Debug = 256						% 0b100000000
+		Debug = 512						% 0b1000000000
 	;	Debug = 0
 	),
 	(	'$lgt_compiler_flag'(events, allow) ->
-		Events = 16						% 0b000001000
+		Events = 16						% 0b0000001000
 	;	Events = 0
 	),
 	(	'$lgt_pp_synchronized_' ->
-		Synchronized = 4				% 0b000000100
+		Synchronized = 4				% 0b0000000100
 	;	Synchronized = 0
 	),
 	(	'$lgt_pp_dynamic_' ->
-		Dynamic = 2						% 0b000000010
+		Dynamic = 2						% 0b0000000010
 	;	Dynamic = 0
 	),
 	(	'$lgt_pp_built_in_' ->
-		BuiltIn = 1						% 0b000000001
+		BuiltIn = 1						% 0b0000000001
 	;	BuiltIn = 0
 	),
 	Flags is Debug + Events + Synchronized + Dynamic + BuiltIn.
 
 '$lgt_tr_entity_flags'(object, Flags) :-
 	(	'$lgt_compiler_flag'(debug, on) ->
-		Debug = 256						% 0b100000000
+		Debug = 512						% 0b1000000000
 	;	Debug = 0
 	),
 	(	'$lgt_compiler_flag'(context_switching_calls, allow) ->
-		ContextSwitchingCalls = 128		% 0b010000000
+		ContextSwitchingCalls = 256		% 0b0100000000
 	;	ContextSwitchingCalls = 0
 	),
 	(	'$lgt_compiler_flag'(dynamic_declarations, allow) ->
-		DynamicDeclarations = 64		% 0b001000000
+		DynamicDeclarations = 128		% 0b0010000000
 	;	DynamicDeclarations = 0
 	),
 	(	'$lgt_compiler_flag'(complements, allow) ->
-		Complements = 32				% 0b000100000
+		Complements = 64				% 0b0001000000
+	;	'$lgt_compiler_flag'(complements, restrict) ->
+		Complements = 32				% 0b0000100000
 	;	Complements = 0
 	),
 	(	'$lgt_compiler_flag'(events, allow) ->
-		Events = 16						% 0b000010000
+		Events = 16						% 0b0000010000
 	;	Events = 0
 	),
 	(	'$lgt_pp_threaded_' ->
-		Threaded = 8					% 0b000001000
+		Threaded = 8					% 0b0000001000
 	;	Threaded = 0
 	),
 	(	'$lgt_pp_synchronized_' ->
-		Synchronized = 4				% 0b000000100
+		Synchronized = 4				% 0b0000000100
 	;	Synchronized = 0
 	),
 	(	'$lgt_pp_dynamic_' ->
-		Dynamic = 2						% 0b000000010
+		Dynamic = 2						% 0b0000000010
 	;	Dynamic = 0
 	),
 	(	'$lgt_pp_built_in_' ->
-		BuiltIn = 1						% 0b000000001
+		BuiltIn = 1						% 0b0000000001
 	;	BuiltIn = 0
 	),
 	Flags is Debug + ContextSwitchingCalls + DynamicDeclarations + Complements + Events + Threaded + Synchronized + Dynamic + BuiltIn.
@@ -12403,6 +12414,7 @@ current_logtalk_flag(Flag, Value) :-
 		% object being redefined in the same file as the complementing category;
 		% possible but unlikely in practice (except, maybe, in classroom examples)
 	),
+	Flags /\ 64 =\= 64,
 	Flags /\ 32 =\= 32,
 	% object compiled with complementing categories support disabled
 	'$lgt_increment_compile_warnings_counter',
@@ -13374,10 +13386,19 @@ current_logtalk_flag(Flag, Value) :-
 	% second, generate linking clauses for accessing both local
 	% declarations and declarations in related entities (some
 	% linking clauses depend on the existence of local predicate
-	% declarations; plus, linking clauses for complementing categories
-	% must come first to allow overriding of predicate declarations)
-	'$lgt_gen_prototype_complements_dcl_clauses'(Obj, Dcl),
-	'$lgt_gen_prototype_local_dcl_clauses'(Local, Obj, Dcl, DDcl),
+	% declarations
+	'$lgt_compiler_flag'(complements, Complements),
+	(	Complements == allow ->
+		% complementing categories are allowed to override local predicate declarations
+		'$lgt_gen_prototype_complements_dcl_clauses'(Obj, Dcl),
+		'$lgt_gen_prototype_local_dcl_clauses'(Local, Obj, Dcl, DDcl)
+	;	Complements == restrict ->
+		% complementing categories can add to but not override local predicate declarations
+		'$lgt_gen_prototype_local_dcl_clauses'(Local, Obj, Dcl, DDcl),
+		'$lgt_gen_prototype_complements_dcl_clauses'(Obj, Dcl)
+	;	% Complements == deny ->
+		'$lgt_gen_prototype_local_dcl_clauses'(Local, Obj, Dcl, DDcl)
+	),
 	'$lgt_gen_prototype_implements_dcl_clauses'(Dcl, Rnm),
 	'$lgt_gen_prototype_imports_dcl_clauses'(Dcl, Rnm),
 	'$lgt_gen_prototype_extends_dcl_clauses'(Dcl, Rnm),
@@ -13387,12 +13408,9 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_gen_prototype_complements_dcl_clauses'(Obj, Dcl) :-
-	(	'$lgt_compiler_flag'(complements, allow) ->
-		Head =.. [Dcl, Pred, Scope, Meta, Flags, SCtn, TCtn],
-		Lookup = '$lgt_complemented_object'(Obj, Dcl, Pred, Scope, Meta, Flags, SCtn, TCtn),
-		assertz('$lgt_pp_dcl_'((Head:-Lookup)))
-	;	true
-	).
+	Head =.. [Dcl, Pred, Scope, Meta, Flags, SCtn, TCtn],
+	Lookup = '$lgt_complemented_object'(Obj, Dcl, Pred, Scope, Meta, Flags, SCtn, TCtn),
+	assertz('$lgt_pp_dcl_'((Head:-Lookup))).
 
 
 
@@ -13493,16 +13511,23 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_gen_prototype_def_clauses'(Obj, Def, DDef, Rnm) :-
-	% some linking clauses depend on the existence of local
-	% predicate definitions
+	% some linking clauses depend on the existence of local predicate definitions
 	(	'$lgt_pp_final_def_'(_) ->
 		Local = true
 	;	Local = false
 	),
-	% linking clauses for complementing categories must come
-	% first to allow overriding of predicate definitions
-	'$lgt_gen_prototype_complements_def_clauses'(Obj, Def),
-	'$lgt_gen_prototype_local_def_clauses'(Local, Obj, Def, DDef),
+	'$lgt_compiler_flag'(complements, Complements),
+	(	Complements == allow ->
+		% complementing categories are allowed to override local predicate definitions
+		'$lgt_gen_prototype_complements_def_clauses'(Obj, Def),
+		'$lgt_gen_prototype_local_def_clauses'(Local, Obj, Def, DDef)
+	;	Complements == restrict ->
+		% complementing categories can add to but not override local predicate definitions
+		'$lgt_gen_prototype_local_def_clauses'(Local, Obj, Def, DDef),
+		'$lgt_gen_prototype_complements_def_clauses'(Obj, Def)
+	;	% Complements == deny ->
+		'$lgt_gen_prototype_local_def_clauses'(Local, Obj, Def, DDef)
+	),
 	'$lgt_gen_prototype_imports_def_clauses'(Def, Rnm),
 	'$lgt_gen_prototype_extends_def_clauses'(Def, Rnm),
 	% add a catchall clause if necessary
@@ -13511,12 +13536,9 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_gen_prototype_complements_def_clauses'(Obj, Def) :-
-	(	'$lgt_compiler_flag'(complements, allow) ->
-		Head =.. [Def, Pred, ExCtx, Call, Obj, Ctn],
-		Lookup = '$lgt_complemented_object'(Def, Pred, ExCtx, Call, Ctn),
-		assertz('$lgt_pp_final_def_'((Head:-Lookup)))
-	;	true
-	).
+	Head =.. [Def, Pred, ExCtx, Call, Obj, Ctn],
+	Lookup = '$lgt_complemented_object'(Def, Pred, ExCtx, Call, Ctn),
+	assertz('$lgt_pp_final_def_'((Head:-Lookup))).
 
 
 
@@ -13672,10 +13694,19 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_gen_ic_idcl_clauses'(Local, Obj, Dcl, IDcl, DDcl) :-
 	% generate linking clauses for accessing declarations in related
-	% entities (linking clauses for complementing categories must
-	% come first to allow overriding of predicate declarations)
-	'$lgt_gen_ic_complements_idcl_clauses'(Obj, IDcl),
-	'$lgt_gen_ic_local_idcl_clauses'(Local, Obj, Dcl, IDcl, DDcl),
+	% entities
+	'$lgt_compiler_flag'(complements, Complements),
+	(	Complements == allow ->
+		% complementing categories are allowed to override local predicate declarations
+		'$lgt_gen_ic_complements_idcl_clauses'(Obj, IDcl),
+		'$lgt_gen_ic_local_idcl_clauses'(Local, Obj, Dcl, IDcl, DDcl)
+	;	Complements == restrict ->
+		% complementing categories can add to but not override local predicate declarations
+		'$lgt_gen_ic_local_idcl_clauses'(Local, Obj, Dcl, IDcl, DDcl),
+		'$lgt_gen_ic_complements_idcl_clauses'(Obj, IDcl)
+	;	% Complements == deny ->
+		'$lgt_gen_ic_local_idcl_clauses'(Local, Obj, Dcl, IDcl, DDcl)
+	),
 	'$lgt_gen_ic_implements_idcl_clauses'(IDcl, Rnm),
 	'$lgt_gen_ic_imports_idcl_clauses'(IDcl, Rnm),
 	'$lgt_gen_ic_specializes_idcl_clauses'(IDcl, Rnm).
@@ -13683,12 +13714,9 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_gen_ic_complements_idcl_clauses'(Obj, IDcl) :-
-	(	'$lgt_compiler_flag'(complements, allow) ->
-		Head =.. [IDcl, Pred, Scope, Meta, Flags, SCtn, TCtn],
-		Lookup = '$lgt_complemented_object'(Obj, IDcl, Pred, Scope, Meta, Flags, SCtn, TCtn),
-		assertz('$lgt_pp_dcl_'((Head:-Lookup)))
-	;	true
-	).
+	Head =.. [IDcl, Pred, Scope, Meta, Flags, SCtn, TCtn],
+	Lookup = '$lgt_complemented_object'(Obj, IDcl, Pred, Scope, Meta, Flags, SCtn, TCtn),
+	assertz('$lgt_pp_dcl_'((Head:-Lookup))).
 
 
 
@@ -13788,20 +13816,27 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
+% lookup of predicate definitions start at the instance itself
+% (not at its classes as it's the case for predicate declarations)
+
 '$lgt_gen_ic_def_clauses'(Obj, Def, IDef, DDef, Rnm) :-
-	% some linking clauses depend on the existence of local
-	% predicate definitions
+	% some linking clauses depend on the existence of local predicate definitions
 	(	'$lgt_pp_final_def_'(_) ->
 		Local = true
 	;	Local = false
 	),
-	% linking clauses for complementing categories must come
-	% first to allow overriding of predicate definitions
-	'$lgt_gen_ic_complements_def_clauses'(Obj, Def),
-	% lookup of predicate definitions start at the instance
-	% itself (not at its classes as it's the case for predicate
-	% declarations)
-	'$lgt_gen_ic_local_def_clauses'(Local, Obj, Def, DDef),
+	'$lgt_compiler_flag'(complements, Complements),
+	(	Complements == allow ->
+		% complementing categories are allowed to override local predicate definitions
+		'$lgt_gen_ic_complements_def_clauses'(Obj, Def),
+		'$lgt_gen_ic_local_def_clauses'(Local, Obj, Def, DDef)
+	;	Complements == restrict ->
+		% complementing categories can add to but not override local predicate definitions
+		'$lgt_gen_ic_local_def_clauses'(Local, Obj, Def, DDef),
+		'$lgt_gen_ic_complements_def_clauses'(Obj, Def)
+	;	% Complements == deny ->
+		'$lgt_gen_ic_local_def_clauses'(Local, Obj, Def, DDef)
+	),
 	'$lgt_gen_ic_imports_def_clauses'(Def, Rnm),
 	'$lgt_gen_ic_instantiates_def_clauses'(Def, Rnm),
 	% add a catchall clause if necessary
@@ -13814,12 +13849,9 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_gen_ic_complements_def_clauses'(Obj, Def) :-
-	(	'$lgt_compiler_flag'(complements, allow) ->
-		Head =.. [Def, Pred, ExCtx, Call, Obj, Ctn],
-		Lookup = '$lgt_complemented_object'(Def, Pred, ExCtx, Call, Ctn),
-		assertz('$lgt_pp_final_def_'((Head:-Lookup)))
-	;	true
-	).
+	Head =.. [Def, Pred, ExCtx, Call, Obj, Ctn],
+	Lookup = '$lgt_complemented_object'(Def, Pred, ExCtx, Call, Ctn),
+	assertz('$lgt_pp_final_def_'((Head:-Lookup))).
 
 
 
@@ -13876,8 +13908,18 @@ current_logtalk_flag(Flag, Value) :-
 % a predicate definition for a descendant instance
 
 '$lgt_gen_ic_idef_clauses'(Local, Obj, Def, IDef, DDef, Rnm) :-
-	% linking clauses for complementing categories must come
-	% first to allow overriding of predicate definitions
+	'$lgt_compiler_flag'(complements, Complements),
+	(	Complements == allow ->
+		% complementing categories are allowed to override local predicate definitions
+		'$lgt_gen_ic_complements_idef_clauses'(Obj, IDef),
+		'$lgt_gen_ic_local_idef_clauses'(Local, Obj, Def, IDef, DDef)
+	;	Complements == restrict ->
+		% complementing categories can add to but not override local predicate definitions
+		'$lgt_gen_ic_local_idef_clauses'(Local, Obj, Def, IDef, DDef),
+		'$lgt_gen_ic_complements_idef_clauses'(Obj, IDef)
+	;	% Complements == deny ->
+		'$lgt_gen_ic_local_idef_clauses'(Local, Obj, Def, IDef, DDef)
+	),
 	'$lgt_gen_ic_complements_idef_clauses'(Obj, IDef),
 	'$lgt_gen_ic_local_idef_clauses'(Local, Obj, Def, IDef, DDef),
 	'$lgt_gen_ic_imports_idef_clauses'(IDef, Rnm),
@@ -13886,13 +13928,10 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_gen_ic_complements_idef_clauses'(Obj, IDef) :-
-	(	'$lgt_compiler_flag'(complements, allow) ->
-		'$lgt_exec_ctx_this'(ExCtx, Obj),
-		Head =.. [IDef, Pred, ExCtx, Call, Obj, Ctn],
-		Lookup = '$lgt_complemented_object'(IDef, Pred, ExCtx, Call, Ctn),
-		assertz('$lgt_pp_final_def_'((Head:-Lookup)))
-	;	true
-	).
+	'$lgt_exec_ctx_this'(ExCtx, Obj),
+	Head =.. [IDef, Pred, ExCtx, Call, Obj, Ctn],
+	Lookup = '$lgt_complemented_object'(IDef, Pred, ExCtx, Call, Ctn),
+	assertz('$lgt_pp_final_def_'((Head:-Lookup))).
 
 
 
@@ -16182,7 +16221,8 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_valid_object_property'(context_switching_calls).	% object allows the use of the <</2 control construct
 '$lgt_valid_object_property'(dynamic_declarations).		% object supports dynamic declaration of new predicates
 '$lgt_valid_object_property'(events).					% messages sent from the object using the ::/2 control construct generate events
-'$lgt_valid_object_property'(complements).				% object can be complemented by categories (hot patching)
+'$lgt_valid_object_property'(complements).				% object can be complemented by categories
+'$lgt_valid_object_property'(complements(_)).			% object can be complemented by categories
 
 
 
@@ -16305,6 +16345,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_valid_flag_value'(debug, off) :- !.
 
 '$lgt_valid_flag_value'(complements, allow) :- !.
+'$lgt_valid_flag_value'(complements, restrict) :- !.
 '$lgt_valid_flag_value'(complements, deny) :- !.
 
 '$lgt_valid_flag_value'(dynamic_declarations, allow) :- !.

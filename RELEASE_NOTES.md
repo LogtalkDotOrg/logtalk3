@@ -31,6 +31,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Refined complementing category semantics, allowing the `complements`
+object flag to be set to a new value, `restrict`, to prevent hot patching but
+still allow new functionality to be added to complemented objects.
+
 * ADDED: New `logtalk::loaded_file/1` and `logtalk::loaded_file_property/2`
 methods. The valid loaded file properties are `basename/1`, `directory/1`,
 `flags/1`, `stream_properties/1`, `target/1`, and `modified/1`.
