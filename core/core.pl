@@ -4370,16 +4370,16 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_current_object_'(logtalk, '$lgt_logtalk.', '$lgt_logtalk._dcl', '$lgt_logtalk._def', '$lgt_logtalk._super', '$lgt_logtalk._idcl', '$lgt_logtalk._idef', '$lgt_logtalk._ddcl', '$lgt_logtalk._ddef', '$lgt_logtalk._alias', Flags) :-
 	(	'$lgt_prolog_feature'(threads, supported) ->
 		% context_switching_calls + dynamic_declarations + complements(allow) + events + threaded + static + built_in
-		Flags = 473		% 0b011111001
+		Flags = 473		% 0b0111011001
 	;	% context_switching_calls + dynamic_declarations + complements(allow) + events + static + built_in
-		Flags = 465		% 0b011110001
+		Flags = 465		% 0b0111010001
 	).
 '$lgt_current_object_'(user, '$lgt_user.', '$lgt_user._dcl', '$lgt_user._def', '$lgt_user._super', '$lgt_user._idcl', '$lgt_user._idef', '$lgt_user._ddcl', '$lgt_user._ddef', '$lgt_user._alias', Flags) :-
 	(	'$lgt_prolog_feature'(threads, supported) ->
 		% context_switching_calls + dynamic_declarations + events + threaded + static + built_in
-		Flags = 409		% 0b011011001
+		Flags = 409		% 0b0110011001
 	;	% context_switching_calls + dynamic_declarations + events + static + built_in
-		Flags = 401		% 0b011010001
+		Flags = 401		% 0b0010010001
 	).
 
 
