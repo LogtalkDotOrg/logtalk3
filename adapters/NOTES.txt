@@ -90,6 +90,9 @@ scripts if you run into out-of-memory errors with complex applications.
 
 Action rules are currently not supported.
 
+On Windows, the environment variable `BPDIR` must be defined and pointing
+to the B-Prolog installation directory for the installer to detect it.
+
 
 CxProlog 0.97.6 or later versions
 ---------------------------------

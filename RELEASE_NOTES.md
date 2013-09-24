@@ -54,7 +54,8 @@ Prolog adapter and integration files
 ------------------------------------
 
 * UPDATED: B-Prolog adapter file for the new 8.0 version, which removes the
-`change_directory/2` built-in predicate without notice.
+`change_directory/2` built-in predicate without notice. Restored compatibility
+with Windows fixing an issue with the hack used to expand file paths.
 
 * UPDATED: CxProlog adapter file, taking advantage of the new `position/1`
 stream property and the new built-in predicate `stream_position_data/3`
