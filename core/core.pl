@@ -16206,6 +16206,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_valid_category_property'(Property) :-				% category properties include all protocol properties
 	'$lgt_valid_protocol_property'(Property), !.
+'$lgt_valid_category_property'(events).					% messages sent from the object using the ::/2 control construct generate events
 '$lgt_valid_category_property'(synchronized).			% all predicates are synchronized (using the same mutex)
 '$lgt_valid_category_property'(defines(_, _)).			% list of definition properties for a predicate defined in the category
 '$lgt_valid_category_property'(includes(_, _, _)).		% list of definition properties for a multifile predicate defined in contributing entities
@@ -16220,7 +16221,6 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_valid_object_property'(threaded).					% object contains calls to the built-in multi-threading predicates
 '$lgt_valid_object_property'(context_switching_calls).	% object allows the use of the <</2 control construct
 '$lgt_valid_object_property'(dynamic_declarations).		% object supports dynamic declaration of new predicates
-'$lgt_valid_object_property'(events).					% messages sent from the object using the ::/2 control construct generate events
 '$lgt_valid_object_property'(complements).				% object can be complemented by categories
 '$lgt_valid_object_property'(complements(_)).			% object can be complemented by categories
 

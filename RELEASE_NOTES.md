@@ -50,6 +50,9 @@ Prolog proprietary built-in meta-predicates are converted into Logtalk
 compatible ones before being used in the second compiler pass or reported
 by the built-in `predicate_property/2` method.
 
+* FIXED: The `category_property/2` built-in predicate would not recognize
+`events` as a valid category property.
+
 Prolog adapter and integration files
 ------------------------------------
 
