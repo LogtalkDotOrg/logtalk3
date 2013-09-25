@@ -25,7 +25,7 @@ RELEASE NOTES
 =============
 
 
-3.00.0 Alpha 25 - September ??, 2013
+3.00.0 Alpha 25 - September 25, 2013
 ====================================
 
 Logtalk compiler and runtime
@@ -78,13 +78,14 @@ Installers and installation scripts
 -----------------------------------
 
 * UPDATED: The `logtalk.iss` Inno Setup script, used for building binary
-Windows installers, to detect B-Prolog 8.0.
+Windows installers, to detect B-Prolog 8.0 (assuming that the `BPDIR`
+environment variable is defined).
 
 Library
 -------
 
 * FIXED: The instructions for generating the library HTML documentation would
-wrongly included non-library entities.
+wrongly include non-library entities.
 
 * FIXED: The library `all_loader.lgt` loader file would not load some library
 files (`assignvars.lgt`, `counters.lgt`, and `streamvars.lgt`).
@@ -114,6 +115,7 @@ on the backend Prolog compiler) for the `modules` example.
 
 * FIXED: Definition for the predicate `expand_path/2` for B-Prolog in the `cc`
 example.
+
 
 3.00.0 Alpha 24 - September 16, 2013
 ====================================
