@@ -55,5 +55,5 @@
 	load('$LOGTALKUSER/.core.qo').
 
 % workaround the lack of support for static multifile predicates
-:- dynamic('$lgt_logtalk.debug_handler_provider'/2).
-:- dynamic('$lgt_logtalk.debug_handler'/3).
+:- dynamic('$logtalk.debug_handler_provider'/2).
+:- dynamic('$logtalk.debug_handler'/3).

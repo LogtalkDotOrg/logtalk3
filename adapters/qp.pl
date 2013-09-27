@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Qu-Prolog 9.0 and later versions
-%  Last updated on September 13, 2013
+%  Last updated on September 27, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -688,8 +688,8 @@ format(Format, Arguments) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%:- multifile('$lgt_logtalk.print_message_token'/3).
-%:- dynamic('$lgt_logtalk.print_message_token'/3).
+%:- multifile('$logtalk.print_message_token'/3).
+%:- dynamic('$logtalk.print_message_token'/3).
 
 
 

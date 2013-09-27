@@ -25,6 +25,16 @@ RELEASE NOTES
 =============
 
 
+3.00.0 Alpha 26 - October ??, 2013
+==================================
+
+Logtalk compiler and runtime
+----------------------------
+
+* CHANGED: The built-in object `logtalk` is now provided in source code instead
+of being included in the compiler as a pre-compiled object.
+
+
 3.00.0 Alpha 25 - September 25, 2013
 ====================================
 

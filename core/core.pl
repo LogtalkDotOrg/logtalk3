@@ -172,28 +172,33 @@
 
 % debug mode handler
 
-:- multifile('$lgt_logtalk.debug_handler_provider'/2).	% logtalk::debug_handler_provider(Object)
-:- multifile('$lgt_logtalk.debug_handler'/3).			% logtalk::debug_handler(Event, ExCtx)
+:- multifile('$logtalk.debug_handler_provider'/2).	% logtalk::debug_handler_provider(Object)
+:- multifile('$logtalk.debug_handler'/3).			% logtalk::debug_handler(Event, ExCtx)
 
 % trace event hook predicate
 
-:- multifile('$lgt_logtalk.trace_event'/3).			% logtalk::trace_event(Event, ExCtx)
-:- dynamic('$lgt_logtalk.trace_event'/3).
+:- multifile('$logtalk.trace_event'/3).			% logtalk::trace_event(Event, ExCtx)
+:- dynamic('$logtalk.trace_event'/3).
 
 
 % structured message printing hooks
 
-:- multifile('$lgt_logtalk.message_hook'/5).		% logtalk::message_hook(Message, Kind, Component, Tokens)
-:- dynamic('$lgt_logtalk.message_hook'/5).
+:- multifile('$logtalk.message_hook'/5).		% logtalk::message_hook(Message, Kind, Component, Tokens)
+:- dynamic('$logtalk.message_hook'/5).
 
-:- multifile('$lgt_logtalk.message_prefix_stream'/5).	% logtalk::message_prefix_stream(Kind, Component, Prefix, Stream)
-:- dynamic('$lgt_logtalk.message_prefix_stream'/5).
+:- multifile('$logtalk.message_prefix_stream'/5).	% logtalk::message_prefix_stream(Kind, Component, Prefix, Stream)
+:- dynamic('$logtalk.message_prefix_stream'/5).
 
-:- multifile('$lgt_logtalk.message_tokens'/5).		% logtalk::message_tokens(Message, Component) --> Tokens
-:- dynamic('$lgt_logtalk.message_tokens'/5).		% logtalk::message_tokens//2
+:- multifile('$logtalk.message_tokens'/5).		% logtalk::message_tokens(Message, Component) --> Tokens
+:- dynamic('$logtalk.message_tokens'/5).		% logtalk::message_tokens//2
 
-:- multifile('$lgt_logtalk.print_message_token'/3).	% logtalk::print_message_token(Stream, Token)
-:- dynamic('$lgt_logtalk.print_message_token'/3).
+:- multifile('$logtalk.print_message_token'/3).	% logtalk::print_message_token(Stream, Token)
+:- dynamic('$logtalk.print_message_token'/3).
+
+
+% internal initialization flag
+
+:- dynamic('$lgt_default_entities_loaded_'/0).
 
 
 
@@ -4338,13 +4343,13 @@ current_logtalk_flag(Flag, Value) :-
 % we can have multiple trace event handlers but only one debug handler
 
 '$lgt_debug'(Event, ExCtx) :-
-	'$lgt_logtalk.trace_event'(Event, ExCtx, _),
+	'$logtalk.trace_event'(Event, ExCtx, _),
 	fail.
 
 '$lgt_debug'(Event, ExCtx) :-
-	'$lgt_logtalk.debug_handler_provider'(_, _),
+	'$logtalk.debug_handler_provider'(_, _),
 	!,
-	'$lgt_logtalk.debug_handler'(Event, ExCtx, _).
+	'$logtalk.debug_handler'(Event, ExCtx, _).
 
 '$lgt_debug'(top_goal(_, TGoal), _) :-
 	!,
@@ -4361,140 +4366,9 @@ current_logtalk_flag(Flag, Value) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  built-in entity runtime table clauses and properties
+%  message printing support
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-'$lgt_current_object_'(logtalk, '$lgt_logtalk.', '$lgt_logtalk._dcl', '$lgt_logtalk._def', '$lgt_logtalk._super', '$lgt_logtalk._idcl', '$lgt_logtalk._idef', '$lgt_logtalk._ddcl', '$lgt_logtalk._ddef', '$lgt_logtalk._alias', Flags) :-
-	(	'$lgt_prolog_feature'(threads, supported) ->
-		% context_switching_calls + dynamic_declarations + complements(allow) + events + threaded + static + built_in
-		Flags = 473		% 0b0111011001
-	;	% context_switching_calls + dynamic_declarations + complements(allow) + events + static + built_in
-		Flags = 465		% 0b0111010001
-	).
-'$lgt_current_object_'(user, '$lgt_user.', '$lgt_user._dcl', '$lgt_user._def', '$lgt_user._super', '$lgt_user._idcl', '$lgt_user._idef', '$lgt_user._ddcl', '$lgt_user._ddef', '$lgt_user._alias', Flags) :-
-	(	'$lgt_prolog_feature'(threads, supported) ->
-		% context_switching_calls + dynamic_declarations + events + threaded + static + built_in
-		Flags = 409		% 0b0110011001
-	;	% context_switching_calls + dynamic_declarations + events + static + built_in
-		Flags = 401		% 0b0010010001
-	).
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  "logtalk" built-in object
-%
-%  defines Logtalk hook predicates
-%
-%  its clauses correspond to a virtual compilation of the object using a
-%  "code_prefix" flag set to '$lgt_'
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-% support dynamic predicate declarations
-:- dynamic('$lgt_logtalk._ddcl'/2).
-:- dynamic('$lgt_logtalk._ddef'/3).
-
-
-% loaded file and library predicates
-'$lgt_logtalk._dcl'(expand_library_path(_, _), p(p(p)), no, 0).
-'$lgt_logtalk._dcl'(loaded_file(_), p(p(p)), no, 0).
-'$lgt_logtalk._dcl'(loaded_file_property(_, _), p(p(p)), no, 0).
-% predicates for low-level hacking
-'$lgt_logtalk._dcl'(compile_aux_clauses(_), p(p(p)), no, 0).
-'$lgt_logtalk._dcl'(entity_prefix(_, _), p(p(p)), no, 0).
-'$lgt_logtalk._dcl'(compile_predicate_heads(_, _, _, _), p(p(p)), no, 0).
-'$lgt_logtalk._dcl'(compile_predicate_indicators(_, _, _), p(p(p)), no, 0).
-'$lgt_logtalk._dcl'(decompile_predicate_heads(_, _, _, _), p(p(p)), no, 0).
-'$lgt_logtalk._dcl'(decompile_predicate_indicators(_, _, _, _), p(p(p)), no, 0).
-'$lgt_logtalk._dcl'(execution_context(_, _, _, _, _, _), p(p(p)), no, 0).
-% structured message printing predicates
-'$lgt_logtalk._dcl'(print_message(_, _, _), p(p(p)), no, 0).
-'$lgt_logtalk._dcl'(print_message_tokens(_, _, _), p(p(p)), no, 0).
-'$lgt_logtalk._dcl'(print_message_token(_, _), p(p(p)), no, 18).
-'$lgt_logtalk._dcl'(message_tokens(_, _, _, _), p(p(p)), no, 26).
-'$lgt_logtalk._dcl'(message_prefix_stream(_, _, _, _), p(p(p)), no, 18).
-'$lgt_logtalk._dcl'(message_hook(_, _, _, _), p(p(p)), no, 18).
-% debugging handler predicates
-'$lgt_logtalk._dcl'(trace_event(_, _), p(p(p)), no, 18).
-'$lgt_logtalk._dcl'(debug_handler_provider(_), p(p(p)), no, 16).
-'$lgt_logtalk._dcl'(debug_handler(_, _), p(p(p)), no, 16).
-
-% support complementing categories
-'$lgt_logtalk._dcl'(Pred, Scope, Meta, Flags, SCtn, TCtn) :-
-	'$lgt_complemented_object'(logtalk, '$lgt_logtalk._dcl', Pred, Scope, Meta, Flags, SCtn, TCtn).
-
-'$lgt_logtalk._dcl'(Pred, Scope, Meta, Flags, logtalk, logtalk) :-
-	'$lgt_logtalk._dcl'(Pred, Scope, Meta, Flags).
-
-'$lgt_logtalk._dcl'(Pred, Scope, no, 2, logtalk, logtalk) :-
-	'$lgt_logtalk._ddcl'(Pred, Scope).
-
-
-% loaded file and library predicates
-'$lgt_logtalk._def'(expand_library_path(Library, Path), _, '$lgt_expand_library_path'(Library, Path)).
-'$lgt_logtalk._def'(loaded_file(Path), _, '$lgt_loaded_file'(Path)).
-'$lgt_logtalk._def'(loaded_file_property(Path, Property), _, '$lgt_loaded_file_property'(Path, Property)).
-% predicates for low-level hacking
-'$lgt_logtalk._def'(compile_aux_clauses(Clauses), _, '$lgt_compile_aux_clauses'(Clauses)).
-'$lgt_logtalk._def'(entity_prefix(Entity, Prefix), _, '$lgt_entity_prefix'(Entity, Prefix)).
-'$lgt_logtalk._def'(compile_predicate_heads(Heads, Entity, THeads, Ctx), _, '$lgt_compile_predicate_heads'(Heads, Entity, THeads, Ctx)).
-'$lgt_logtalk._def'(compile_predicate_indicators(PIs, Entity, TPIs), _, '$lgt_compile_predicate_indicators'(PIs, Entity, TPIs)).
-'$lgt_logtalk._def'(decompile_predicate_indicators(TPIs, Entity, Type, PIs), _, '$lgt_decompile_predicate_indicators'(TPIs, Entity, Type, PIs)).
-'$lgt_logtalk._def'(decompile_predicate_heads(THeads, Entity, Type, Heads), _, '$lgt_decompile_predicate_heads'(THeads, Entity, Type, Heads)).
-'$lgt_logtalk._def'(execution_context(ExCtx, Sender, This, Self, MetaCallCtx, Stack), _, '$lgt_exec_ctx'(ExCtx, Sender, This, Self, MetaCallCtx, Stack)).
-% structured message printing predicates
-'$lgt_logtalk._def'(print_message(Kind, Component, Term), ExCtx, '$lgt_logtalk.print_message'(Kind, Component, Term, ExCtx)).
-'$lgt_logtalk._def'(print_message_tokens(Stream, Prefix, Tokens), ExCtx, '$lgt_logtalk.print_message_tokens'(Stream, Prefix, Tokens, ExCtx)).
-'$lgt_logtalk._def'(print_message_token(Stream, Token), ExCtx, '$lgt_logtalk.print_message_token'(Stream, Token, ExCtx)).
-'$lgt_logtalk._def'(message_tokens(Term, Component, Tokens, Rest), ExCtx, '$lgt_logtalk.message_tokens'(Term, Component, Tokens, Rest, ExCtx)).
-'$lgt_logtalk._def'(message_prefix_stream(Kind, Component, Prefix, Stream), ExCtx, '$lgt_logtalk.message_prefix_stream'(Kind, Component, Prefix, Stream, ExCtx)).
-'$lgt_logtalk._def'(message_hook(Term, Kind, Component, Tokens), ExCtx, '$lgt_logtalk.message_hook'(Term, Kind, Component, Tokens, ExCtx)).
-% debugging handler predicates
-'$lgt_logtalk._def'(trace_event(Event, EventExCtx), ExCtx, '$lgt_logtalk.trace_event'(Event, EventExCtx, ExCtx)).
-'$lgt_logtalk._def'(debug_handler_provider(Provider), ExCtx, '$lgt_logtalk.debug_handler_provider'(Provider, ExCtx)).
-'$lgt_logtalk._def'(debug_handler(Event, EventExCtx), ExCtx, '$lgt_logtalk.debug_handler'(Event, EventExCtx, ExCtx)).
-
-'$lgt_logtalk._def'(Pred, ExCtx, Call, logtalk, Ctn) :-
-	'$lgt_complemented_object'('$lgt_logtalk._def', Pred, ExCtx, Call, Ctn).
-
-'$lgt_logtalk._def'(Pred, ExCtx, Call, logtalk, logtalk) :-
-	'$lgt_logtalk._def'(Pred, ExCtx, Call).
-
-'$lgt_logtalk._def'(Pred, ExCtx, Call, logtalk, logtalk) :-
-	'$lgt_logtalk._ddef'(Pred, ExCtx, Call).
-
-
-'$lgt_logtalk._super'(_, _, _, _, _) :-
-	fail.
-
-
-'$lgt_logtalk._alias'(_, Pred, Pred).
-
-
-'$lgt_loaded_file'(Path) :-
-	'$lgt_loaded_file_'(Basename, Directory, _, _, _, _),
-	atom_concat(Directory, Basename, Path).
-
-
-'$lgt_loaded_file_property'(Path, Property) :-
-	'$lgt_loaded_file_'(Basename, Directory, Flags, StreamProperties, PrologFile, TimeStamp),
-	atom_concat(Directory, Basename, Path),
-	'$lgt_loaded_file_property'(Property, Basename, Directory, Flags, StreamProperties, PrologFile, TimeStamp).
-
-'$lgt_loaded_file_property'(basename(Basename), Basename, _, _, _, _, _).
-'$lgt_loaded_file_property'(directory(Directory), _, Directory, _, _, _, _).
-'$lgt_loaded_file_property'(flags(Flags), _, _, Flags, _, _, _).
-'$lgt_loaded_file_property'(stream_properties(StreamProperties), _, _, _, StreamProperties, _, _).
-'$lgt_loaded_file_property'(target(PrologFile), _, _, _, _, PrologFile, _).
-'$lgt_loaded_file_property'(modified(TimeStamp), _, _, _, _, _, TimeStamp).
 
 
 
@@ -4505,167 +4379,13 @@ current_logtalk_flag(Flag, Value) :-
 % in the "logtalk" built-in object
 
 '$lgt_print_message'(Kind, Component, Term) :-
-	'$lgt_exec_ctx'(ExCtx, logtalk, logtalk, logtalk, [], []),
-	'$lgt_logtalk.print_message'(Kind, Component, Term, ExCtx).
-
-
-
-% '$lgt_logtalk.print_message'(+atom_or_compound, +atom, +nonvar, @execution_context)
-%
-% prints a message of the given kind for the specificed component
-
-'$lgt_logtalk.print_message'(Kind, Component, Term, ExCtx) :-
-	'$lgt_message_term_to_tokens'(Term, Kind, Component, Tokens, ExCtx),
-	(	nonvar(Term),
-		'$lgt_logtalk.message_hook'(Term, Kind, Component, Tokens, ExCtx) ->
-		% message intercepted; assume that the message is printed
+	(	'$lgt_default_entities_loaded_' ->
+		'$lgt_exec_ctx'(ExCtx, logtalk, logtalk, logtalk, [], []),
+		'$logtalk.print_message'(Kind, Component, Term, ExCtx)
+	;	'$lgt_compiler_flag'(report, off) ->
 		true
-	;	% add begin/2 and end/1 tokens to, respectively, the start and the end of the list of tokens
-		% but pass them using discrete arguments instead of doing an expensive list append operation;
-		% these two tokens can be intercepted by the user for suporting e.g. message coloring
-		functor(Kind, Functor, _),
-		'$lgt_default_print_message'(Kind, Component, begin(Functor,Ctx), Tokens, end(Ctx), ExCtx)
-	).
-
-
-
-% '$lgt_message_term_to_tokens'(@term, @term, @term, -list, @execution_context)
-%
-% translates a message term to tokens
-
-'$lgt_message_term_to_tokens'(Term, Kind, Component, Tokens, ExCtx) :-
-	(	var(Term) ->
-		Tokens = ['Non-instantiated ~q message for component ~q!'-[Kind, Component], nl]
-	;	'$lgt_logtalk.message_tokens'(Term, Component, Tokens, [], ExCtx) ->
-		true
-	;	Tokens = ['Unknown ~q message for component ~q: ~q'-[Kind, Component, Term], nl]
-	).
-
-
-
-% '$lgt_default_print_message'(+atom_or_compound, +atom, +compound, +list, +compound, @execution_context)
-%
-% print a message that was not intercepted by the user
-
-'$lgt_default_print_message'(_, _, _, _, _, _) :-
-	'$lgt_compiler_flag'(report, off),
-	!.
-
-'$lgt_default_print_message'(silent, _, _, _, _, _) :-
-	!.
-
-'$lgt_default_print_message'(silent(_), _, _, _, _, _) :-
-	!.
-
-'$lgt_default_print_message'(banner, _, _, _, _, _) :-
-	'$lgt_compiler_flag'(report, warnings),
-	!.
-
-'$lgt_default_print_message'(comment, _, _, _, _, _) :-
-	'$lgt_compiler_flag'(report, warnings),
-	!.
-
-'$lgt_default_print_message'(comment(_), _, _, _, _, _) :-
-	'$lgt_compiler_flag'(report, warnings),
-	!.
-
-'$lgt_default_print_message'(Kind, Component, BeginToken, Tokens, EndToken, ExCtx) :-
-	(	'$lgt_logtalk.message_prefix_stream'(Kind, Component, Prefix, Stream, ExCtx) ->
-		true
-	;	% no user-defined prefix and stream; use Logtalk default definition
-		'$lgt_default_message_prefix_stream'(Kind, Component, Prefix, Stream)
-	),
-	'$lgt_logtalk.print_message_tokens'(Stream, Prefix, [BeginToken| Tokens], ExCtx),
-	'$lgt_logtalk.print_message_tokens'(Stream, Prefix, [at_same_line, EndToken], ExCtx).
-
-
-
-% '$lgt_default_message_prefix_stream'(?atom_or_compound, ?term, ?atom, ?stream_or_alias)
-%
-% default definitions for the line prefix and output stream when printing messages;
-% the definitions used here are based on Quintus Prolog and are also used in other
-% Prolog compilers
-
-'$lgt_default_message_prefix_stream'(banner, _, '', user_output).
-'$lgt_default_message_prefix_stream'(help, _, '', user_output).
-'$lgt_default_message_prefix_stream'(information, _, '% ', user_output).
-'$lgt_default_message_prefix_stream'(information(_), _, '% ', user_output).
-'$lgt_default_message_prefix_stream'(comment, _, '% ', user_output).
-'$lgt_default_message_prefix_stream'(comment(_), _, '% ', user_output).
-'$lgt_default_message_prefix_stream'(warning, _, '*     ', user_error).
-'$lgt_default_message_prefix_stream'(warning(_), _, '*     ', user_error).
-'$lgt_default_message_prefix_stream'(error, _,   '!     ', user_error).
-'$lgt_default_message_prefix_stream'(error(_), _,   '!     ', user_error).
-
-
-
-% '$lgt_logtalk.print_message_tokens'(+list, +atom, +stream_or_alias, @execution_context)
-%
-% print the messages tokens to the given stream and prefixing
-% each line with the specified atom
-
-'$lgt_logtalk.print_message_tokens'(Stream, Prefix, Tokens, ExCtx) :-
-	(	Tokens = [at_same_line| _] ->
-		% continuation message
-		'$lgt_print_message_tokens'(Tokens, Stream, Prefix, ExCtx)
-	;	Tokens = [begin(Kind, Context)| Rest] ->
-		% write the prefix after the begin/2 token
-		'$lgt_print_message_tokens'([begin(Kind, Context), Prefix-[]| Rest], Stream, Prefix, ExCtx)
-	;	% write first line prefix
-		write(Stream, Prefix),
-		'$lgt_print_message_tokens'(Tokens, Stream, Prefix, ExCtx)
-	).
-
-
-% if the list of tokens unifies with (-), assume it's a variable and ignore it
-
-'$lgt_print_message_tokens'((-), _, _, _).
-
-'$lgt_print_message_tokens'([], _, _, _).
-
-'$lgt_print_message_tokens'([Token| Tokens], Stream, Prefix, ExCtx) :-
-	(	'$lgt_logtalk.print_message_token'(Stream, Token, ExCtx) ->
-		% token printing intercepted by user-defined code
-		true
-	;	% no user-defined token printing; use Logtalk default
-		'$lgt_default_print_message_token'(Token, Tokens, Stream, Prefix) ->
-		true
-	;	% unsupported token
-		writeq(Stream, Token)
-	),
-	'$lgt_print_message_tokens'(Tokens, Stream, Prefix, ExCtx).
-
-
-% if a token unifies with (-), assume it's a variable and ignore it
-
-'$lgt_default_print_message_token'((-), _, _, _).
-
-'$lgt_default_print_message_token'(at_same_line, _, _, _).
-
-'$lgt_default_print_message_token'(nl, Tokens, Stream, Prefix) :-
-	(	Tokens == [] ->
-		nl(Stream)
-	;	Tokens = [end(_)] ->
-		nl(Stream)
-	;	nl(Stream),
-		write(Stream, Prefix)
-	).
-
-'$lgt_default_print_message_token'(flush, _, Stream, _) :-
-	flush_output(Stream).
-
-'$lgt_default_print_message_token'(Format-Arguments, _, Stream, _) :-
-	format(Stream, Format, Arguments).
-
-% the following tokens were first introduced by SWI-Prolog; we use default definitions
-% for compatibility when running Logtalk with other back-end Prolog compilers
-
-'$lgt_default_print_message_token'(ansi(_, Format, Arguments), _, Stream, _) :-
-	format(Stream, Format, Arguments).
-
-'$lgt_default_print_message_token'(begin(_, _), _, _, _).
-
-'$lgt_default_print_message_token'(end(_), _, _, _).
+	;	writeq(Component), write(' '), write(Kind), write(': '), writeq(Term), nl
+ 	).
 
 
 
@@ -4684,6 +4404,13 @@ current_logtalk_flag(Flag, Value) :-
 
 
 % the following clauses correspond to a virtual compilation of the built-in pseudo-object "user"
+'$lgt_current_object_'(user, '$lgt_user.', '$lgt_user._dcl', '$lgt_user._def', '$lgt_user._super', '$lgt_user._idcl', '$lgt_user._idef', '$lgt_user._ddcl', '$lgt_user._ddef', '$lgt_user._alias', Flags) :-
+	(	'$lgt_prolog_feature'(threads, supported) ->
+		% context_switching_calls + dynamic_declarations + events + threaded + static + built_in
+		Flags = 409		% 0b0110011001
+	;	% context_switching_calls + dynamic_declarations + events + static + built_in
+		Flags = 401		% 0b0010010001
+	).
 
 
 % support dynamic predicate declarations
@@ -8800,7 +8527,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_head'(logtalk::debug_handler_provider(_), _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-	'$lgt_logtalk.debug_handler_provider'(Provider, _),
+	'$logtalk.debug_handler_provider'(Provider, _),
 	'$lgt_warning_context'(Path, Lines, Type, Entity),
 	'$lgt_print_message'(warning(general), core, debug_handler_provider_already_exists(Path, Lines, Type, Entity, Provider)),
 	fail.
@@ -15257,23 +14984,24 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_entity_prefix'(+entity_identifier, ?atom)
-% '$lgt_entity_prefix'(-entity_identifier, +atom)
+% '$lgt_entity_prefix'(?entity_identifier, ?atom)
 %
 % converts between entity identifiers and internal entity prefixes;
 % used mainly in hook objects for processing proprietary directives
 
 '$lgt_entity_prefix'(Entity, Prefix) :-
-	(	'$lgt_current_object_'(Entity, Prefix, _, _, _, _, _, _, _, _, _) ->
+	(	var(Entity), var(Prefix) ->
+		'$lgt_pp_entity_'(_, Entity, Prefix, _, _)
+	;	'$lgt_current_object_'(Entity, Prefix, _, _, _, _, _, _, _, _, _) ->
 		true
 	;	'$lgt_current_category_'(Entity, Prefix, _, _, _, _) ->
 		true
 	;	'$lgt_current_protocol_'(Entity, Prefix, _, _, _) ->
 		true
-	;	atom(Prefix) ->
-		'$lgt_prefix_to_entity'(Prefix, Entity)
 	;	callable(Entity),
 		'$lgt_entity_to_prefix'(Entity, Prefix)
+	;	atom(Prefix) ->
+		'$lgt_prefix_to_entity'(Prefix, Entity)
 	).
 
 
@@ -18776,10 +18504,12 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_load_default_entities' :-
 	'$lgt_expand_library_path'(logtalk_user, LogtalkUserDirectory),
 	atom_concat(LogtalkUserDirectory, 'scratch/', ScratchDirectory),
-	'$lgt_load_default_entities'(core_messages, category, 'core/core_messages', ScratchDirectory),
 	'$lgt_load_default_entities'(expanding, protocol, 'core/expanding', ScratchDirectory),
 	'$lgt_load_default_entities'(monitoring, protocol, 'core/monitoring', ScratchDirectory),
-	'$lgt_load_default_entities'(forwarding, protocol, 'core/forwarding', ScratchDirectory).
+	'$lgt_load_default_entities'(forwarding, protocol, 'core/forwarding', ScratchDirectory),
+	'$lgt_load_default_entities'(logtalk, object, 'core/logtalk', ScratchDirectory),
+	'$lgt_load_default_entities'(core_messages, category, 'core/core_messages', ScratchDirectory),
+	assertz('$lgt_default_entities_loaded_').
 
 
 '$lgt_load_default_entities'(Entity, Type, File, ScratchDirectory) :-
@@ -18792,7 +18522,10 @@ current_logtalk_flag(Flag, Value) :-
 	;	Type == object,
 		current_object(Entity) ->
 		true
-	;	logtalk_load(logtalk_home(File), [report(off), clean(on), reload(skip), scratch_directory(ScratchDirectory)])
+	;	logtalk_load(
+			logtalk_home(File),
+			[code_prefix('$'), optimize(on), report(off), clean(on), reload(skip), scratch_directory(ScratchDirectory)]
+		)
 	).
 
 

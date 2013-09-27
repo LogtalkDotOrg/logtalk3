@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for GNU Prolog 1.4.2 (and later versions)
-%  Last updated on September 20, 2013
+%  Last updated on September 27, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -603,11 +603,11 @@ with_mutex(_, _) :- fail.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- multifile('$lgt_logtalk.print_message_token'/3).
-:- dynamic('$lgt_logtalk.print_message_token'/3).
+:- multifile('$logtalk.print_message_token'/3).
+:- dynamic('$logtalk.print_message_token'/3).
 
 %  ugly hack to deal with GNU Prolog's non-standard format/3 predicate
-'$lgt_logtalk.print_message_token'(Stream, Format-Args, _) :-
+'$logtalk.print_message_token'(Stream, Format-Args, _) :-
 	'$lgt_gnu_filter_format'(Format, FilteredFormat),
 	format(Stream, FilteredFormat, Args).
 

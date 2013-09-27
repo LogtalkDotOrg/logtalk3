@@ -41,8 +41,8 @@
 #include ../core/core.pl
 
 % workaround the lack of support for static multifile predicates
-:- dynamic('$lgt_logtalk.debug_handler_provider'/2).
-:- dynamic('$lgt_logtalk.debug_handler'/3).
+:- dynamic('$logtalk.debug_handler_provider'/2).
+:- dynamic('$logtalk.debug_handler'/3).
 
 % tables of defined events and monitors
 :- thread_shared('$lgt_before_event_'/5).

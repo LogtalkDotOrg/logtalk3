@@ -88,7 +88,7 @@ within objects and categories using the Logtalk `{}/1` control construct.
 You may need to increase the sizes of the code areas on the integration
 scripts if you run into out-of-memory errors with complex applications.
 
-Action rules are currently not supported.
+Matching clauses and action rules are currently not supported.
 
 On Windows, the environment variable `BPDIR` must be defined and pointing
 to the B-Prolog installation directory for the installer to detect it.
