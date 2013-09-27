@@ -34,6 +34,9 @@ Logtalk compiler and runtime
 * CHANGED: The built-in object `logtalk` is now provided in source code instead
 of being included in the compiler as a pre-compiled object.
 
+* CHANGED: The format of the execution context terms is now defined on the
+`logtalk` built-in object.
+
 Prolog adapter and integration files
 ------------------------------------
 

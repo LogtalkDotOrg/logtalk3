@@ -355,8 +355,7 @@
 	decompile_predicate_heads(THeads, Entity, Type, Heads) :-
 		{'$lgt_decompile_predicate_heads'(THeads, Entity, Type, Heads)}.
 
-	execution_context(ExCtx, Sender, This, Self, MetaCallCtx, Stack) :-
-		{'$lgt_exec_ctx'(ExCtx, Sender, This, Self, MetaCallCtx, Stack)}.
+	execution_context(c(This, r(Sender, Self, MetaCallCtx, Stack)), Sender, This, Self, MetaCallCtx, Stack).
 
 :- end_object.
 
