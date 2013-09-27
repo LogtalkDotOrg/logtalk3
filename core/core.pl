@@ -17610,6 +17610,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, _, _, _, ObjFlags),
 		ObjFlags /\ 2 =:= 0,
 		% object is static
+		ObjFlags /\ 64 =\= 64,
 		ObjFlags /\ 32 =\= 32,
 		% support for complementing categories is disallowed
 		call(Dcl, Pred, p(p(p)), Meta, PredFlags, _, DclCtn), !,

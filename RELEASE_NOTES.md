@@ -37,6 +37,9 @@ of being included in the compiler as a pre-compiled object.
 * CHANGED: The format of the execution context terms is now defined on the
 `logtalk` built-in object.
 
+* FIXED: Regression in previous release when optimizing `(::)/2` calls due to
+the introduction of the new `restrict` value for the `complements` flag.
+
 Prolog adapter and integration files
 ------------------------------------
 
