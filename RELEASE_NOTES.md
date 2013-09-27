@@ -34,6 +34,12 @@ Logtalk compiler and runtime
 * CHANGED: The built-in object `logtalk` is now provided in source code instead
 of being included in the compiler as a pre-compiled object.
 
+Prolog adapter and integration files
+------------------------------------
+
+* REMOVED: Auxiliary predicates used to customize the execution context term
+representation (which is moved back into the compiler).
+
 
 3.00.0 Alpha 25 - September 25, 2013
 ====================================
