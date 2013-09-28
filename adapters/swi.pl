@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SWI Prolog 6.0.0 and later versions
-%  Last updated on September 27, 2013
+%  Last updated on September 28, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -813,12 +813,12 @@ user:goal_expansion(phrase(Rule, Input, Rest), user:'$lgt_phrase'(Rule, Input, R
 	nonvar(Rule),
 	functor(Rule, '::', 2),
 	!,
-	'$lgt_exec_ctx'(ExCtx, user, user, user, [], []).
+	'$logtalk.execution_context'(ExCtx, user, user, user, [], [], _).
 user:goal_expansion(phrase(Rule, Input), user:'$lgt_phrase'(Rule, Input, ExCtx)) :-
 	nonvar(Rule),
 	functor(Rule, '::', 2),
 	!,
-	'$lgt_exec_ctx'(ExCtx, user, user, user, [], []).
+	'$logtalk.execution_context'(ExCtx, user, user, user, [], [], _).
 
 user:goal_expansion('::'(Object, Message), user:Goal) :-
 	prolog_load_context(module, Module),

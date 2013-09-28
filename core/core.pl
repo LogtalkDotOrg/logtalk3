@@ -4380,7 +4380,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_print_message'(Kind, Component, Term) :-
 	(	'$lgt_default_entities_loaded_' ->
-		'$lgt_execution_context'(ExCtx, logtalk, logtalk, logtalk, [], []),
+		'$logtalk.execution_context'(ExCtx, logtalk, logtalk, logtalk, [], [], _),
 		'$logtalk.print_message'(Kind, Component, Term, ExCtx)
 	;	'$lgt_compiler_flag'(report, off) ->
 		true
