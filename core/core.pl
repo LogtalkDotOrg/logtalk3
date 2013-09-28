@@ -15391,7 +15391,6 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_logtalk_entity_directive'(built_in).
-'$lgt_logtalk_entity_directive'(encoding(_)).
 '$lgt_logtalk_entity_directive'(calls(_)).	% deprecated
 '$lgt_logtalk_entity_directive'(uses(_)).	% deprecated
 '$lgt_logtalk_entity_directive'(uses(_, _)).
