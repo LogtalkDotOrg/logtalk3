@@ -8,9 +8,10 @@ terms per section 7).        Consult the `LICENSE.txt` file for details.
 ________________________________________________________________________
 
 
-This directory contains Logtalk unit tests for built-in predicates, control
-constructs, directives, and methods. Besides this set of unit tests, there
-are also unit tests defined for most of the examples.
+This directory contains Logtalk unit tests for built-in entities, predicates,
+control constructs, directives, and methods. Besides this set of unit tests,
+there are also unit tests defined for most of the examples and for some of
+the code contributions.
 
 On POSIX operating-systems, you can run all these tests by calling the shell
 script `logtalk_tester` from the command-line. Type `man logtalk_tester` or
