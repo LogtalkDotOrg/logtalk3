@@ -23,10 +23,13 @@
 :- object(queens).
 
 	:- use_module(clpfd, [
-					op(450, xfx, ..), op(700, xfx, #=), op(700, xfx, #\=), op(760, yfx, #<==>), op(700, xfx, #>), op(700, xfx, ins),
-					(#=)/2, (#\=)/2, (#<==>)/2, (#>)/2, (ins)/2, labeling/2]).
+		op(450, xfx, ..), op(700, xfx, #=), op(700, xfx, #\=), op(760, yfx, #<==>), op(700, xfx, #>), op(700, xfx, ins),
+		(#=)/2, (#\=)/2, (#<==>)/2, (#>)/2, (ins)/2, labeling/2
+	]).
 
-	:- public([n_queens/2, show/3]).
+	:- public([
+		n_queens/2, show/3
+	]).
 
 	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	   Constraint posting
@@ -94,17 +97,17 @@
 	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 	postscript -->
-		"systemdict /.setlanguagelevel known { 2 .setlanguagelevel} if \
-	 	/init {  /N exch def 322 N div dup scale -1 -1 translate \
-	          /Palatino-Roman findfont 0.8 scalefont setfont \
-	          0 setlinewidth \
-	          1 1 N { 1 1 N { 1 index c } for pop } for } bind def \
-		/showtext { 0.5 0.28 translate dup stringwidth pop -2 div 0 moveto \
-	          1 setgray show} bind def \
-		/i { gsave translate .5 setgray 0 0 1 1 4 copy rectfill 0 setgray rectstroke \
-	    	grestore } bind def \
-		/q { gsave translate 0 0 1 1 rectfill (Q) showtext grestore } bind def \
-		/c { gsave translate 1 setgray 0 0 1 1 4 copy rectfill 0 setgray rectstroke \
+		"systemdict /.setlanguagelevel known { 2 .setlanguagelevel} if \c
+	 	/init {  /N exch def 322 N div dup scale -1 -1 translate \c
+	          /Palatino-Roman findfont 0.8 scalefont setfont \c
+	          0 setlinewidth \c
+	          1 1 N { 1 1 N { 1 index c } for pop } for } bind def \c
+		/showtext { 0.5 0.28 translate dup stringwidth pop -2 div 0 moveto \c
+	          1 setgray show} bind def \c
+		/i { gsave translate .5 setgray 0 0 1 1 4 copy rectfill 0 setgray rectstroke \c
+	    	grestore } bind def \c
+		/q { gsave translate 0 0 1 1 rectfill (Q) showtext grestore } bind def \c
+		/c { gsave translate 1 setgray 0 0 1 1 4 copy rectfill 0 setgray rectstroke \c
 			grestore } bind def\n".
 
 
@@ -115,8 +118,7 @@
 	show(N, Options, Qs) :-
 		N #> 0,
 		n_queens(N, Qs),
-		open(pipe('gs -dNOPAUSE -g680x680 -dGraphicsAlphaBits=2 -r151 -q -'), write,
-			Out, [buffer(false)]),
+		open(pipe('gs -dNOPAUSE -g680x680 -dGraphicsAlphaBits=2 -r151 -q -'), write, Out, [buffer(false)]),
 		tell(Out),
 		phrase(postscript, Ps),
 		format("~s\n~w init\n", [Ps, N]),
@@ -125,9 +127,11 @@
 	finish :-
 		format("copypage\n"),
 		% fill the buffer to make 'gs' process all generated output
-		ignore((between(1,500,_),
-				format("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n"),
-				fail)),
+		ignore((
+			between(1,500,_),
+			format("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n"),
+			fail
+		)),
 		flush_output.
 
 	%?- show(N, [ff], Qs).

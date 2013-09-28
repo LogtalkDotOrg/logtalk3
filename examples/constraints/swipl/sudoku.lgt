@@ -23,13 +23,16 @@
 :- object(soduku).
 
 	:- use_module(clpfd, [
-					op(450, xfx, ..), op(700, xfx, ins),
-					all_different/1, (ins)/2, labeling/2]).
+		op(450, xfx, ..), op(700, xfx, ins),
+		all_different/1, (ins)/2, labeling/2
+	]).
 
 	:- uses(list, [append/2, length/2]).
 	:- uses(meta, [map/2::maplist/2]).
 
-	:- public([problem/2, show/2, sudoku/1]).
+	:- public([
+		problem/2, show/2, sudoku/1
+	]).
 
 	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	   Constraint posting
@@ -93,16 +96,16 @@
 	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 	postscript -->
-		"systemdict /.setlanguagelevel known { 2 .setlanguagelevel} if \
-		/Palatino-Bold findfont 5 scalefont setfont \
-		320 9 div dup scale 0 setlinewidth -0.9 -0.9 translate \
-		/num { gsave 10 exch sub translate 0.5 0.25 translate 0.16 dup scale \
-			dup stringwidth pop -2 div 0 moveto show grestore } bind def \
-		/clear { gsave 10 exch sub translate 1 setgray 0.1 dup 0.8 \
-			dup rectfill grestore } bind def \
-		1 1 10 { gsave dup 1 moveto 10 lineto stroke grestore } for \
-		1 1 10 { gsave dup 1 exch moveto 10 exch lineto stroke grestore } for \
-		1 3 9 { 1 3 9 { 1 index gsave translate 0.05 setlinewidth
+		"systemdict /.setlanguagelevel known { 2 .setlanguagelevel} if \c
+		/Palatino-Bold findfont 5 scalefont setfont \c
+		320 9 div dup scale 0 setlinewidth -0.9 -0.9 translate \c
+		/num { gsave 10 exch sub translate 0.5 0.25 translate 0.16 dup scale \c
+			dup stringwidth pop -2 div 0 moveto show grestore } bind def \c
+		/clear { gsave 10 exch sub translate 1 setgray 0.1 dup 0.8 \c
+			dup rectfill grestore } bind def \c
+		1 1 10 { gsave dup 1 moveto 10 lineto stroke grestore } for \c
+		1 1 10 { gsave dup 1 exch moveto 10 exch lineto stroke grestore } for \c
+		1 3 9 { 1 3 9 { 1 index gsave translate 0.05 setlinewidth \c
 			0 0 3 3 rectstroke grestore } for pop } for\n".
 
 	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

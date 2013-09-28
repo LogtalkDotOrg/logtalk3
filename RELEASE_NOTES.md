@@ -50,6 +50,12 @@ Prolog adapter and integration files
 * REMOVED: Auxiliary predicates used to customize the execution context term
 representation (which is moved back into the compiler).
 
+Examples
+--------
+
+* UPDATED: The `constraints/swipl` example to avoid deprecated warnings for
+continuation lines with recent versions of SWI-Prolog.
+
 
 3.00.0 Alpha 25 - September 25, 2013
 ====================================
