@@ -37,6 +37,10 @@ of being included in the compiler as a pre-compiled object.
 * CHANGED: The format of the execution context terms is now defined on the
 `logtalk` built-in object.
 
+* CHANGED: The `logtalk` object methods `compile_predicate_indicators/3` and
+`compile_predicate_heads/4` are generalized, allowing them to be called with
+an entity argument other than a loaded entity or the entity under compilation.
+
 * FIXED: Regression in previous release when optimizing `(::)/2` calls due to
 the introduction of the new `restrict` value for the `complements` flag.
 

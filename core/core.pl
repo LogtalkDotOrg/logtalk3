@@ -14992,9 +14992,9 @@ current_logtalk_flag(Flag, Value) :-
 		true
 	;	'$lgt_current_protocol_'(Entity, Prefix, _, _, _) ->
 		true
-	;	callable(Entity),
+	;	callable(Entity) ->
 		'$lgt_entity_to_prefix'(Entity, Prefix)
-	;	atom(Prefix) ->
+	;	atom(Prefix),
 		'$lgt_prefix_to_entity'(Prefix, Entity)
 	).
 
@@ -15011,16 +15011,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_predicate_heads'(Heads, Entity, THeads, Ctx) :-
 	'$lgt_must_be'(var_or_entity_identifier, Entity),
-	(	var(Entity) ->
-		'$lgt_pp_entity_'(_, Entity, Prefix, _, _)
-	;	'$lgt_current_object_'(Entity, Prefix, _, _, _, _, _, _, _, _, _) ->
-		true
-	;	'$lgt_current_category_'(Entity, Prefix, _, _, _, _) ->
-		true
-	;	'$lgt_current_protocol_'(Entity, Prefix, _, _, _) ->
-		true
-	;	fail
-	),
+	'$lgt_entity_prefix'(Entity, Prefix),
 	'$lgt_compile_predicate_heads_aux'(Heads, Prefix, THeads, Ctx).
 
 
@@ -15109,16 +15100,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_predicate_indicators'(PIs, Entity, TPIs) :-
 	'$lgt_must_be'(var_or_entity_identifier, Entity),
-	(	var(Entity) ->
-		'$lgt_pp_entity_'(_, Entity, Prefix, _, _)
-	;	'$lgt_current_object_'(Entity, Prefix, _, _, _, _, _, _, _, _, _) ->
-		true
-	;	'$lgt_current_category_'(Entity, Prefix, _, _, _, _) ->
-		true
-	;	'$lgt_current_protocol_'(Entity, Prefix, _, _, _) ->
-		true
-	;	fail
-	),
+	'$lgt_entity_prefix'(Entity, Prefix),
 	'$lgt_compile_predicate_indicators_aux'(PIs, Prefix, TPIs).
 
 

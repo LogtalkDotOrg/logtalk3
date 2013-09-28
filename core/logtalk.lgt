@@ -154,7 +154,7 @@
 	:- public(entity_prefix/2).
 	:- mode(entity_prefix(?entity_identifier, ?atom), zero_or_one).
 	:- info(entity_prefix/2, [
-		comment is 'Entity internal prefix used for its compiled code.',
+		comment is 'Converts between an entity identifier and the entity prefix that is used for its compiled code. When none of the arguments is instantiated, it returns the identifier and the prefix of the entity under compilation, if any.',
 		argnames is ['Entity', 'Prefix']
 	]).
 
@@ -163,7 +163,7 @@
 	:- mode(compile_predicate_heads(@conjunction(callable), ?entity_identifier, -conjunction(callable), @execution_context), zero_or_one).
 	:- mode(compile_predicate_heads(@callable, ?entity_identifier, -callable, @execution_context), zero_or_one).
 	:- info(compile_predicate_heads/4, [
-		comment is 'Compiles clause heads. The heads are compiled in the context of the specified existing entity or in the context of the entity being compiled when the entity argument is not instantiated.',
+		comment is 'Compiles clause heads. The heads are compiled in the context of the entity under compilation when the entity argument is not instantiated.',
 		argnames is ['Heads', 'Entity', 'CompiledHeads', 'ExecutionContext']
 	]).
 
@@ -172,7 +172,7 @@
 	:- mode(compile_predicate_indicators(@conjunction(predicate_indicator), ?entity_identifier, -conjunction(predicate_indicator)), zero_or_one).
 	:- mode(compile_predicate_indicators(@predicate_indicator, ?entity_identifier, -predicate_indicator), zero_or_one).
 	:- info(compile_predicate_indicators/3, [
-		comment is 'Compiles predicate indicators. The predicate indicators are compiled in the context of the specified existing entity or in the context of the entity being compiled when the entity argument is not instantiated.',
+		comment is 'Compiles predicate indicators. The predicate are compiled in the context of the entity under compilation when the entity argument is not instantiated.',
 		argnames is ['PredicateIndicators', 'Entity', 'CompiledPredicateIndicators']
 	]).
 
@@ -181,7 +181,7 @@
 	:- mode(decompile_predicate_heads(@conjunction(callable), -entity_identifier, -atom, -conjunction(callable)), zero_or_one).
 	:- mode(decompile_predicate_heads(@callable, -entity_identifier, -atom, -callable), zero_or_one).
 	:- info(decompile_predicate_heads/4, [
-		comment is 'Decompiles clause heads. All compiled clause heads should belong to the same entity.',
+		comment is 'Decompiles clause heads. All compiled clause heads must belong to the same entity.',
 		argnames is ['CompiledHeads', 'Entity', 'Type', 'Heads']
 	]).
 
@@ -190,7 +190,7 @@
 	:- mode(decompile_predicate_indicators(@conjunction(predicate_indicator), -entity_identifier, -atom, -conjunction(predicate_indicator)), zero_or_one).
 	:- mode(decompile_predicate_indicators(@predicate_indicator, -entity_identifier, -atom, -predicate_indicator), zero_or_one).
 	:- info(decompile_predicate_indicators/4, [
-		comment is 'Decompiles predicate indicators. All compiled predicate indicators should belong to the same entity.',
+		comment is 'Decompiles predicate indicators. All compiled predicate indicators must belong to the same entity.',
 		argnames is ['CompiledPredicateIndicators', 'Entity', 'Type', 'PredicateIndicators']
 	]).
 
