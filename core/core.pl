@@ -125,7 +125,7 @@
 
 % table of loaded files
 
-:- multifile('$lgt_loaded_file_'/6).				% '$lgt_loaded_file_'(Basename, Directory, Flags, StreamProperties, PrologFile, TimeStamp)
+:- multifile('$lgt_loaded_file_'/6).				% '$lgt_loaded_file_'(Basename, Directory, Flags, TextProperties, PrologFile, TimeStamp)
 :- dynamic('$lgt_loaded_file_'/6).
 
 
@@ -14572,13 +14572,13 @@ current_logtalk_flag(Flag, Value) :-
 	write_canonical(Stream, (:- dynamic('$lgt_loaded_file_'/6))), write(Stream, '.\n'),
 	(	'$lgt_pp_file_encoding_'(Encoding, _) ->
 		(	'$lgt_pp_file_bom_'(BOM) ->
-			StreamProperties = [encoding(Encoding), BOM]
-		;	StreamProperties = [encoding(Encoding)]
+			TextProperties = [encoding(Encoding), BOM]
+		;	TextProperties = [encoding(Encoding)]
 		)
-	;	StreamProperties = []
+	;	TextProperties = []
 	),
 	'$lgt_file_modification_time'(Path, TimeStamp),
-	Clause = '$lgt_loaded_file_'(Basename, Directory, Flags, StreamProperties, PrologFile, TimeStamp),
+	Clause = '$lgt_loaded_file_'(Basename, Directory, Flags, TextProperties, PrologFile, TimeStamp),
 	(	SourceData == on ->
 		'$lgt_write_term_and_source_location'(Stream, Clause, aux, Path+1)
 	;	write_canonical(Stream, Clause), write(Stream, '.\n')

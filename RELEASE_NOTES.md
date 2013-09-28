@@ -41,6 +41,9 @@ of being included in the compiler as a pre-compiled object.
 `compile_predicate_heads/4` are generalized, allowing them to be called with
 an entity argument other than a loaded entity or the entity under compilation.
 
+* RENAMED: The `logtalk::loaded_file_property/2` method `stream_properties/1`
+property to `text_properties/1`.
+
 * FIXED: Regression in previous release when optimizing `(::)/2` calls due to
 the introduction of the new `restrict` value for the `complements` flag.
 

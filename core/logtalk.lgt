@@ -326,14 +326,14 @@
 		atom_concat(Directory, Basename, Path).
 
 	loaded_file_property(Path, Property) :-
-		{'$lgt_loaded_file_'(Basename, Directory, Flags, StreamProperties, PrologFile, TimeStamp)},
+		{'$lgt_loaded_file_'(Basename, Directory, Flags, TextProperties, PrologFile, TimeStamp)},
 		atom_concat(Directory, Basename, Path),
-		loaded_file_property(Property, Basename, Directory, Flags, StreamProperties, PrologFile, TimeStamp).
+		loaded_file_property(Property, Basename, Directory, Flags, TextProperties, PrologFile, TimeStamp).
 
 	loaded_file_property(basename(Basename), Basename, _, _, _, _, _).
 	loaded_file_property(directory(Directory), _, Directory, _, _, _, _).
 	loaded_file_property(flags(Flags), _, _, Flags, _, _, _).
-	loaded_file_property(stream_properties(StreamProperties), _, _, _, StreamProperties, _, _).
+	loaded_file_property(text_properties(TextProperties), _, _, _, TextProperties, _, _).
 	loaded_file_property(target(PrologFile), _, _, _, _, PrologFile, _).
 	loaded_file_property(modified(TimeStamp), _, _, _, _, _, TimeStamp).
 

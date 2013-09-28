@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/09/24,
+		date is 2013/09/28,
 		comment is 'Documenting tool.',
 		remarks is [
 			'Compiling files for generating XML documentation' - 'All source files must be compiled with the "source_data" compiler flag turned on.',
@@ -95,7 +95,7 @@
 		once(member(exclude_files(ExcludedFiles), Options)),
 		logtalk::loaded_file_property(Path, directory(Directory)),
 		logtalk::loaded_file_property(Path, basename(File)),
-		logtalk::loaded_file_property(Path, stream_properties(StreamOptions)),
+		logtalk::loaded_file_property(Path, text_properties(StreamOptions)),
 		\+ member(File, ExcludedFiles),
 		atom_concat(Source, '.lgt', File),
 		\+ member(Source, ExcludedFiles),
@@ -124,7 +124,7 @@
 		os::change_directory(XMLDirectory),
 		(	logtalk::loaded_file_property(Path, directory(Directory)),
 			logtalk::loaded_file_property(Path, basename(File)),
-			logtalk::loaded_file_property(Path, stream_properties(StreamOptions)),
+			logtalk::loaded_file_property(Path, text_properties(StreamOptions)),
 			process(File, Directory, Options, StreamOptions),
 			fail
 		;	os::change_directory(Current)
@@ -149,7 +149,7 @@
 		),
 		logtalk::loaded_file_property(Path, basename(File)),
 		logtalk::loaded_file_property(Path, directory(Directory)),
-		logtalk::loaded_file_property(Path, stream_properties(StreamOptions)),
+		logtalk::loaded_file_property(Path, text_properties(StreamOptions)),
 		(	atom_concat(Directory, File, SourceWithExtension) ->
 			true
 		;	SourceWithExtension = File
