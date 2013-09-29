@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/09/27,
+		date is 2013/09/29,
 		comment is 'Built-in object providing message priting, debugging, library, source file, and hacking methods.']).
 
 	:- built_in.
@@ -61,7 +61,7 @@
 	:- dynamic(print_message_token/2).
 	:- mode(print_message_token(@steream_or_alias, @nonvar), zero_or_one).
 	:- info(print_message_token/2, [
-		comment is 'User-defined hook predicate for printing a message token.',
+		comment is 'User-defined hook predicate for printing a message token (at_same_line, nl, flush, Format-Arguments, ansi(Attributes,Format,Arguments), begin(Kind,Variable), and end(Variable)).',
 		argnames is ['Stream', 'Token']
 	]).
 
@@ -70,7 +70,7 @@
 	:- dynamic(message_tokens//2).
 	:- mode(message_tokens(@steream_or_alias, -list(term)), zero_or_one).
 	:- info(message_tokens//2, [
-		comment is 'User-defined hook grammar rule for converting a message into a list of tokens.',
+		comment is 'User-defined hook grammar rule for converting a message into a list of tokens (at_same_line, nl, flush, Format-Arguments, ansi(Attributes,Format,Arguments), begin(Kind,Variable), and end(Variable)).',
 		argnames is ['Message', 'Tokens']
 	]).
 
@@ -79,7 +79,7 @@
 	:- dynamic(message_prefix_stream/4).
 	:- mode(message_prefix_stream(@nonvar, @callable, @atom, @list(term)), zero_or_more).
 	:- info(message_prefix_stream/4, [
-		comment is '.',
+		comment is 'Message line prefix and stream to be used when printing a message given its kind and component.',
 		argnames is ['Kind', 'Component', 'Prefix', 'Stream']
 	]).
 
@@ -131,14 +131,14 @@
 	:- public(loaded_file/1).
 	:- mode(loaded_file(?atom), zero_or_more).
 	:- info(loaded_file/1, [
-		comment is 'Enumerates, by backtracking, all loaded files.',
+		comment is 'Enumerates, by backtracking, all loaded files, returning their full paths.',
 		argnames is ['Path']
 	]).
 
 	:- public(loaded_file_property/2).
 	:- mode(loaded_file_property(?atom, ?compound), zero_or_more).
 	:- info(loaded_file_property/2, [
-		comment is 'Enumerates, by backtracking, all loaded files and their properties.',
+		comment is 'Enumerates, by backtracking, all loaded files, returning their full paths, and their properties (basename/1, directory/1, flags/1, text_properties/1, target/1, and modified/1).',
 		argnames is ['Path', 'Property']
 	]).
 
