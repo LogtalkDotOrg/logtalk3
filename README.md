@@ -139,6 +139,9 @@ a previous Logtalk version.
 The documentation for the Logtalk library is provided in XHTML format and
 can be found in the `library/docs` directory.
 
+Most directories include `NOTES.txt` documenting files, which can be also
+rendered as Markdown files (for e.g. easy conversion to HTML).
+
 
 9. UPGRADING
 ------------

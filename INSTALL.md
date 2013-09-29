@@ -39,14 +39,14 @@ The POSIX shell scripts assume that `/bin/bash` is available.
 -----------------------------
 
 Manual installation of Logtalk can be accomplished by decompressing the
-downloaded archive (or checking out a Logtalk working copy from the official
-Subversion server), running an installation script, and defining a couple of
-environment variables. You can install Logtalk in any user accessible location.
-Whenever possible, it is recommended that Logtalk be installed by a user with
-administrative rights, as described below. This leads to a setup where each
-Logtalk user may freely try and modify the provided examples, library, and
-adapter files with the option of, at any time, restoring the files to
-its original state by simply running one of the provided scripts.
+downloaded archive (or by cloning the development git server), running an
+installation script, and defining a couple of environment variables. You can
+install Logtalk in any user accessible location. Whenever possible, it is
+recommended that Logtalk be installed by a user with administrative rights,
+as described below. This leads to a setup where each Logtalk user may freely
+try and modify the provided examples, library, and adapter files with the 
+option of, at any time, restoring the files to its original state by simply
+running one of the provided scripts.
 
 
 * Installing for a single user with no administrative rights:
@@ -57,8 +57,8 @@ the Logtalk directory, and then type:
 	% cd scripts
 	% ./install.sh -p $HOME
 
-This will install Logtalk into the $HOME/share and $HOME/bin directories (the
-$HOME/bin path must be in your PATH environment variable).
+This will install Logtalk into the `$HOME/share` and `$HOME/bin` directories
+(the `$HOME/bin` path must be in your `PATH` environment variable).
 
 If you're using Windows, you can simply use the provided installer (which
 supports both admin and non-admin users) to perform a full installation.
@@ -94,7 +94,7 @@ The script installs Logtalk in the `$prefix/share` directory with Prolog
 integration and other useful shell scripts written to the `$prefix/bin`
 directory, which should be in your path. The `install.sh` shell script also
 creates a symbolic link, `$prefix/share/logtalk`, which can be used for e.g.
-defining the LOGTALKHOME environment variable described below.
+defining the `LOGTALKHOME` environment variable described below.
 
 If you're using Windows, you can simply use the provided GUI installer (which
 supports both admin and non-admin users) to perform a full installation. You
@@ -105,15 +105,15 @@ the `scripts/windows/NOTES.txt` file.
 2. SETTING LOGTALK ENVIRONMENT VARIABLES
 ----------------------------------------
 
-You need to set two environment variables, LOGTALKHOME and LOGTALKUSER. The 
-environment variable LOGTALKHOME should be set to the Logtalk installation 
+You need to set two environment variables, `LOGTALKHOME` and `LOGTALKUSER`.
+The environment variable `LOGTALKHOME` should be set to the Logtalk installation 
 directory. The environment variable `LOGTALKUSER` should point to a directory 
 in your home directory where you want to store the user-specific Logtalk files
 (by default, `$HOME/logtalk` on POSIX systems and `My Documents\Logtalk` on 
 Windows). Both environment variables may be set for all users by a user with 
 administration privileges.
 
-For POSIX systems, add the following lines to your ~/.profile file:
+For POSIX systems, add the following lines to your `~/.profile` file:
 
 	LOGTALKHOME=/your/logtalk/installation/directory
 	LOGTALKUSER=$HOME/logtalk
@@ -121,7 +121,7 @@ For POSIX systems, add the following lines to your ~/.profile file:
 	MANPATH=$MANPATH:$LOGTALKHOME/man
 	export LOGTALKHOME LOGTALKUSER PATH MANPATH
 
-If you use instead a csh shell, add the following line to your ~/.cshrc file:
+If you use instead a csh shell, add the following line to your `~/.cshrc` file:
 
 	setenv LOGTALKHOME /your/logtalk/installation/directory
 	setenv LOGTALKUSER $HOME/logtalk
@@ -135,7 +135,7 @@ in `file not found` errors when attempting to use the Logtalk integration script
 When using the provided shell script for installing Logtalk, a symbolic link 
 to the Logtalk installation directory is automatically created. The link is 
 named `logtalk`. In this case, you may use this symbolic link to define the 
-LOGTALKHOME environment variable in order to avoid breaking it when upgrading 
+`LOGTALKHOME` environment variable in order to avoid breaking it when upgrading 
 Logtalk.
 
 If you're using Windows, the provided GUI installer (which supports both admin
@@ -146,13 +146,13 @@ and non-admin users) takes care of the definition of the environment variables.
 ----------------------------------------------------------------------------
 
 If you installed Logtalk on your home directory, then skip this step if and only
-if you have set both Logtalk environment variables (LOGTALKHOME and LOGTALKUSER)
+if you have set both Logtalk environment variables (`LOGTALKHOME` and `LOGTALKUSER`)
 to point to the same directory.
 
-Each user must make a local copy of the Logtalk user-modifiable files
-(examples, libraries, and other supporting files) in his/her home directory.
-These copies can be easily made by running the `logtalk_user_setup` shell
-script  (see the `scripts/NOTES.txt` file for details):
+Each user must make a local copy of the Logtalk user-modifiable files (examples,
+libraries, and other supporting files) in his/her home directory. These copies
+can be easily made by running the `logtalk_user_setup` shell script (see the
+`scripts/NOTES.txt` file for details):
 
 * POSIX systems:
 
