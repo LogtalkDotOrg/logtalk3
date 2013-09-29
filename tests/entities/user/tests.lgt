@@ -10,6 +10,7 @@
 	]).
 
 	test(user_1) :-
-		current_object(user).
+		current_object(user),
+		object_property(user, built_in).
 
 :- end_object.

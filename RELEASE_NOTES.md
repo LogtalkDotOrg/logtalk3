@@ -53,6 +53,11 @@ Prolog adapter and integration files
 * REMOVED: Auxiliary predicates used to customize the execution context term
 representation (which is moved back into the compiler).
 
+Tools
+-----
+
+* ADDED: Unit tests for the built-in entities.
+
 Examples
 --------
 

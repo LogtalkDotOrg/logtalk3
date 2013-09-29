@@ -10,6 +10,7 @@
 	]).
 
 	test(expanding_1) :-
-		current_protocol(expanding).
+		current_protocol(expanding),
+		protocol_property(expanding, built_in).
 
 :- end_object.

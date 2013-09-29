@@ -10,6 +10,7 @@
 	]).
 
 	test(monitoring_1) :-
-		current_protocol(monitoring).
+		current_protocol(monitoring),
+		protocol_property(monitoring, built_in).
 
 :- end_object.

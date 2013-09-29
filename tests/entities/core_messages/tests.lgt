@@ -10,6 +10,7 @@
 	]).
 
 	test(core_messages_1) :-
-		current_category(core_messages).
+		current_category(core_messages),
+		category_property(core_messages, built_in).
 
 :- end_object.

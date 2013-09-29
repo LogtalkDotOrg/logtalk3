@@ -10,6 +10,7 @@
 	]).
 
 	test(forwarding_1) :-
-		current_protocol(forwarding).
+		current_protocol(forwarding),
+		protocol_property(forwarding, built_in).
 
 :- end_object.
