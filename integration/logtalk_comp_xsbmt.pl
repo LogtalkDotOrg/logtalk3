@@ -64,15 +64,10 @@
 :- thread_shared('$lgt_complemented_object_'/5).
 
 % table of loaded files
-:- thread_shared('$lgt_loaded_file_'/4).
+:- thread_shared('$lgt_loaded_file_'/6).
 
 % runtime flags
 :- thread_shared('$lgt_current_flag_'/2).
-
-% static binding caches
-:- thread_shared('$lgt_static_binding_entity_'/1).
-:- thread_shared('$lgt_send_to_obj_static_binding_cache_'/4).
-:- thread_shared('$lgt_ctg_call_static_binding_cache_'/4).
 
 % lookup caches for messages to an object, messages to self, and super calls
 :- thread_shared('$lgt_send_to_obj_'/3).
