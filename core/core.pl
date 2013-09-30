@@ -4392,99 +4392,6 @@ current_logtalk_flag(Flag, Value) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  "user" built-in pseudo-object
-%
-%  represents the plain Prolog database (excluding built-in predicates)
-%
-%  the clauses correspond to a virtual compilation of the object using a
-%  "code_prefix" flag set to '$lgt_'
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-% the following clauses correspond to a virtual compilation of the built-in pseudo-object "user"
-'$lgt_current_object_'(user, '$lgt_user.', '$lgt_user._dcl', '$lgt_user._def', '$lgt_user._super', '$lgt_user._idcl', '$lgt_user._idef', '$lgt_user._ddcl', '$lgt_user._ddef', '$lgt_user._alias', Flags) :-
-	(	'$lgt_prolog_feature'(threads, supported) ->
-		% context_switching_calls + dynamic_declarations + events + threaded + static + built_in
-		Flags = 409		% 0b0110011001
-	;	% context_switching_calls + dynamic_declarations + events + static + built_in
-		Flags = 401		% 0b0010010001
-	).
-
-
-% support dynamic predicate declarations
-:- dynamic('$lgt_user._ddcl'/2).
-:- dynamic('$lgt_user._ddef'/3).
-
-
-'$lgt_user._dcl'(Pred, p(p(p)), no, Flags) :-
-	(	nonvar(Pred) ->
-		\+ '$lgt_built_in_predicate'(Pred),
-		functor(Pred, Functor, Arity),
-		current_predicate(Functor/Arity)
-	;	current_predicate(Functor/Arity),
-		functor(Pred, Functor, Arity),
-		\+ '$lgt_built_in_predicate'(Pred),
-		\+ '$lgt_hidden_functor'(Functor)
-	),
-	(	'$lgt_predicate_property'(Pred, (dynamic)) ->
-		Flags = 2
-	;	Flags = 0
-	).
-
-
-'$lgt_user._dcl'(Pred, Scope, Meta, Flags, user, user) :-
-	'$lgt_user._dcl'(Pred, Scope, Meta, Flags).
-
-
-'$lgt_user._def'(Pred, _, Pred) :-
-	\+ '$lgt_built_in_predicate'(Pred),
-	functor(Pred, Functor, Arity),
-	current_predicate(Functor/Arity).
-
-
-'$lgt_user._def'(Pred, _, Pred, user, user) :-
-	'$lgt_user._def'(Pred, _, Pred).
-
-
-'$lgt_user._super'(_, _, _, _, _) :-
-	fail.
-
-
-'$lgt_user._alias'(_, Pred, Pred).
-
-
-
-% '$lgt_hidden_functor'(+atom)
-%
-% hidden functors include Logtalk compiler and runtime internal functors and
-% those used in the compiled code of objects, protocols, and categories
-
-'$lgt_hidden_functor'(Functor) :-
-	sub_atom(Functor, 0, 1, _, '$'),
-	!.
-
-'$lgt_hidden_functor'(Functor) :-
-	'$lgt_current_category_'(_, Prefix, _, _, _, _),
-	sub_atom(Functor, 0, _, _, Prefix),
-	!.
-
-'$lgt_hidden_functor'(Functor) :-
-	'$lgt_current_object_'(_, Prefix, _, _, _, _, _, _, _, _, _),
-	sub_atom(Functor, 0, _, _, Prefix),
-	!.
-
-'$lgt_hidden_functor'(Functor) :-
-	'$lgt_current_protocol_'(_, Prefix, _, _, _),
-	sub_atom(Functor, 0, _, _, Prefix),
-	!.
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
 %  compiler
 %
 %  compiles Logtalk source files into intermediate Prolog source files
@@ -18497,6 +18404,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_load_default_entities'(expanding, protocol, 'core/expanding', ScratchDirectory),
 	'$lgt_load_default_entities'(monitoring, protocol, 'core/monitoring', ScratchDirectory),
 	'$lgt_load_default_entities'(forwarding, protocol, 'core/forwarding', ScratchDirectory),
+	'$lgt_load_default_entities'(user, object, 'core/user', ScratchDirectory),
 	'$lgt_load_default_entities'(logtalk, object, 'core/logtalk', ScratchDirectory),
 	'$lgt_load_default_entities'(core_messages, category, 'core/core_messages', ScratchDirectory),
 	assertz('$lgt_default_entities_loaded_').
