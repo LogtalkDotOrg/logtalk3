@@ -55,7 +55,7 @@
 :- op(400, yfx, <<).	% some back-end Prolog compilers don't declare this ISO Prolog standard operator
 
 
-% imported category predicate call operator
+% imported category predicate call operator (deprecated)
 
 :- op(600,  fy,  :).
 
@@ -168,32 +168,6 @@
 % multi-threading tags
 
 :- dynamic('$lgt_threaded_tag_counter_'/1).			% '$lgt_threaded_tag_counter_'(Tag)
-
-
-% debug mode handler
-
-:- multifile('$logtalk.debug_handler_provider'/2).	% logtalk::debug_handler_provider(Object)
-:- multifile('$logtalk.debug_handler'/3).			% logtalk::debug_handler(Event, ExCtx)
-
-% trace event hook predicate
-
-:- multifile('$logtalk.trace_event'/3).			% logtalk::trace_event(Event, ExCtx)
-:- dynamic('$logtalk.trace_event'/3).
-
-
-% structured message printing hooks
-
-:- multifile('$logtalk.message_hook'/5).		% logtalk::message_hook(Message, Kind, Component, Tokens)
-:- dynamic('$logtalk.message_hook'/5).
-
-:- multifile('$logtalk.message_prefix_stream'/5).	% logtalk::message_prefix_stream(Kind, Component, Prefix, Stream)
-:- dynamic('$logtalk.message_prefix_stream'/5).
-
-:- multifile('$logtalk.message_tokens'/5).		% logtalk::message_tokens(Message, Component) --> Tokens
-:- dynamic('$logtalk.message_tokens'/5).		% logtalk::message_tokens//2
-
-:- multifile('$logtalk.print_message_token'/3).	% logtalk::print_message_token(Stream, Token)
-:- dynamic('$logtalk.print_message_token'/3).
 
 
 % internal initialization flag
