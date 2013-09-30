@@ -8,7 +8,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on September 27, 2013
+%  Last updated on September 30, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -706,3 +706,5 @@ user:portray(c(This, r(Sender, Self, MetaVars, CoinductionStack))) :-
 :- meta_predicate user:'$lgt_obj_super_call'(*,*,*).
 :- meta_predicate user:'$lgt_send_to_obj'(*,*,*).
 :- meta_predicate user:'$lgt_send_to_self'(*,*,*).
+
+:- meta_predicate user:'$user.forward'(*,*).
