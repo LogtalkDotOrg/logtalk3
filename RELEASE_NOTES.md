@@ -51,8 +51,13 @@ the introduction of the new `restrict` value for the `complements` flag.
 Prolog adapter and integration files
 ------------------------------------
 
-* REMOVED: Auxiliary predicates used to customize the execution context term
-representation (which is moved back into the compiler).
+* REMOVED: Auxiliary predicates used to customize and access the execution
+context term representation (moved back into the compiler).
+
+* UPDATED: The XSB adapter file now declares 3.4.1 as the minimum compatible
+version. This version, however, is not yet released but the current XSB
+development version includes a critical bug fix that is required for running
+Logtalk.
 
 Tools
 -----

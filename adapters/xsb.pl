@@ -3,8 +3,8 @@
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
-%  Adapter file for XSB 3.3 or later versions
-%  Last updated on September 27, 2013
+%  Adapter file for XSB 3.4.1 or later versions
+%  Last updated on September 30, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -202,7 +202,7 @@ setup_call_catcher_cleanup(Setup, Call, Catcher, Cleanup) :-
 '$lgt_prolog_feature'(prolog_dialect, xsb).
 '$lgt_prolog_feature'(prolog_version, (Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, xsb(Major, Minor, Patch, _)).
-'$lgt_prolog_feature'(prolog_compatible_version, @>=((3,3,0))).
+'$lgt_prolog_feature'(prolog_compatible_version, @>=((3,4,1))).
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
 '$lgt_prolog_feature'(tabling, supported).
