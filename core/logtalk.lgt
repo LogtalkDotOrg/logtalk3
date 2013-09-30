@@ -138,7 +138,7 @@
 	:- public(loaded_file_property/2).
 	:- mode(loaded_file_property(?atom, ?compound), zero_or_more).
 	:- info(loaded_file_property/2, [
-		comment is 'Enumerates, by backtracking, all loaded files, returning their full paths, and their properties (basename/1, directory/1, flags/1, text_properties/1, target/1, and modified/1).',
+		comment is 'Enumerates, by backtracking, all loaded files, returning their full paths. Valid properties are: basename/1, directory/1, flags/1, text_properties/1 (encoding/1 and bom/1), target/1, and modified/1.',
 		argnames is ['Path', 'Property']
 	]).
 
@@ -181,7 +181,7 @@
 	:- mode(decompile_predicate_heads(@conjunction(callable), -entity_identifier, -atom, -conjunction(callable)), zero_or_one).
 	:- mode(decompile_predicate_heads(@callable, -entity_identifier, -atom, -callable), zero_or_one).
 	:- info(decompile_predicate_heads/4, [
-		comment is 'Decompiles clause heads. All compiled clause heads must belong to the same entity.',
+		comment is 'Decompiles clause heads. All compiled clause heads must belong to the same entity, which must be loaded.',
 		argnames is ['CompiledHeads', 'Entity', 'Type', 'Heads']
 	]).
 
@@ -190,7 +190,7 @@
 	:- mode(decompile_predicate_indicators(@conjunction(predicate_indicator), -entity_identifier, -atom, -conjunction(predicate_indicator)), zero_or_one).
 	:- mode(decompile_predicate_indicators(@predicate_indicator, -entity_identifier, -atom, -predicate_indicator), zero_or_one).
 	:- info(decompile_predicate_indicators/4, [
-		comment is 'Decompiles predicate indicators. All compiled predicate indicators must belong to the same entity.',
+		comment is 'Decompiles predicate indicators. All compiled predicate indicators must belong to the same entity, which must be loaded.',
 		argnames is ['CompiledPredicateIndicators', 'Entity', 'Type', 'PredicateIndicators']
 	]).
 
@@ -343,19 +343,19 @@
 	entity_prefix(Entity, Prefix) :-
 		{'$lgt_entity_prefix'(Entity, Prefix)}.
 
-	compile_predicate_heads(Heads, Entity, THeads, Ctx) :-
-		{'$lgt_compile_predicate_heads'(Heads, Entity, THeads, Ctx)}.
+	compile_predicate_heads(Heads, Entity, CompiledHeads, ExecutionContext) :-
+		{'$lgt_compile_predicate_heads'(Heads, Entity, CompiledHeads, ExecutionContext)}.
 
-	compile_predicate_indicators(PIs, Entity, TPIs) :-
-		{'$lgt_compile_predicate_indicators'(PIs, Entity, TPIs)}.
+	compile_predicate_indicators(PredicateIndicators, Entity, CompiledPredicateIndicators) :-
+		{'$lgt_compile_predicate_indicators'(PredicateIndicators, Entity, CompiledPredicateIndicators)}.
 
-	decompile_predicate_indicators(TPIs, Entity, Type, PIs) :-
-		{'$lgt_decompile_predicate_indicators'(TPIs, Entity, Type, PIs)}.
+	decompile_predicate_indicators(CompiledPredicateIndicators, Entity, Type, PredicateIndicators) :-
+		{'$lgt_decompile_predicate_indicators'(CompiledPredicateIndicators, Entity, Type, PredicateIndicators)}.
 
 	decompile_predicate_heads(THeads, Entity, Type, Heads) :-
 		{'$lgt_decompile_predicate_heads'(THeads, Entity, Type, Heads)}.
 
-	execution_context(c(This, r(Sender, Self, MetaCallCtx, Stack)), Sender, This, Self, MetaCallCtx, Stack).
+	execution_context(c(This, r(Sender, Self, MetaCallContext, CoinductionStack)), Sender, This, Self, MetaCallContext, CoinductionStack).
 
 :- end_object.
 
