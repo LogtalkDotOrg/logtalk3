@@ -18487,15 +18487,13 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_start_runtime_threading'
 %
-% creates the message queue for the pseudo-object "user" and initializes the asynchronous
-% threaded calls tag counter support for compilers supporting multi-threading programming
-% (curently we use integers, which impose a limitation on the maximum number of tags on
-% back-end Prolog compilers with bounded integers)
+% initializes the asynchronous threaded calls tag counter support for
+% compilers supporting multi-threading programming (curently we use
+% integers, which impose a limitation on the maximum number of tags
+% on back-end Prolog compilers with bounded integers)
 
 '$lgt_start_runtime_threading' :-
-	(	'$lgt_prolog_feature'(threads, supported),
-		'$lgt_current_object_'(user, Prefix, _, _, _, _, _, _, _, _, _) ->
-		'$lgt_init_object_message_queue'(Prefix),
+	(	'$lgt_prolog_feature'(threads, supported) ->
 		mutex_create(_, [alias('$lgt_threaded_tag')]),
 		(	current_prolog_flag(bounded, true) ->
 			current_prolog_flag(min_integer, Min),
