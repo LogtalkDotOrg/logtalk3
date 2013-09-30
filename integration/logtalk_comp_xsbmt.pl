@@ -54,6 +54,7 @@
 :- thread_shared('$lgt_current_object_'/11).
 
 :- thread_shared('$lgt_entity_property_'/2).
+:- thread_shared('$lgt_predicate_property_'/3).
 
 :- thread_shared('$lgt_implements_protocol_'/3).
 :- thread_shared('$lgt_imports_category_'/3).
