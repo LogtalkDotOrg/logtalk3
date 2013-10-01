@@ -78,7 +78,6 @@ rm -f logtalk_backend_select
 rm -f logtalk_tester
 rm -f logtalk_user_setup
 rm -f logtalk_version_select
-rm -f lplgt
 rm -f qplgt
 rm -f sicstuslgt
 rm -f swilgt
