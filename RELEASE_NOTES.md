@@ -36,7 +36,7 @@ now provided in source code instead of being included in the compiler as
 pre-compiled objects.
 
 * CHANGED: The format of the execution context terms is now defined on the
-`logtalk` built-in object.
+`logtalk` built-in object as is the same for all backend Prolog compilers.
 
 * CHANGED: The `logtalk` object methods `compile_predicate_indicators/3` and
 `compile_predicate_heads/4` are generalized, allowing them to be called with
@@ -48,6 +48,9 @@ property to `text_properties/1`.
 * FIXED: Regression in previous release when optimizing `(::)/2` calls due to
 the introduction of the new `restrict` value for the `complements` flag.
 
+* ADDED: Defined a new library path, `core`, using the `logtalk_library_path/2`
+built-in predicate.
+
 Prolog adapter and integration files
 ------------------------------------
 
@@ -56,7 +59,7 @@ context term representation (moved back into the compiler).
 
 * UPDATED: The XSB adapter file now declares 3.4.1 as the minimum compatible
 version. This version, however, is not yet released but the current XSB
-development version includes a critical bug fix that is required for running
+development version includes a critical bug fix that is required for loading
 Logtalk.
 
 Tools

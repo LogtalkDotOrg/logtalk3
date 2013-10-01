@@ -18375,12 +18375,12 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_load_default_entities' :-
 	'$lgt_expand_library_path'(logtalk_user, LogtalkUserDirectory),
 	atom_concat(LogtalkUserDirectory, 'scratch/', ScratchDirectory),
-	'$lgt_load_default_entities'(expanding, protocol, 'core/expanding', ScratchDirectory),
-	'$lgt_load_default_entities'(monitoring, protocol, 'core/monitoring', ScratchDirectory),
-	'$lgt_load_default_entities'(forwarding, protocol, 'core/forwarding', ScratchDirectory),
-	'$lgt_load_default_entities'(user, object, 'core/user', ScratchDirectory),
-	'$lgt_load_default_entities'(logtalk, object, 'core/logtalk', ScratchDirectory),
-	'$lgt_load_default_entities'(core_messages, category, 'core/core_messages', ScratchDirectory),
+	'$lgt_load_default_entities'(expanding, protocol, 'expanding', ScratchDirectory),
+	'$lgt_load_default_entities'(monitoring, protocol, 'monitoring', ScratchDirectory),
+	'$lgt_load_default_entities'(forwarding, protocol, 'forwarding', ScratchDirectory),
+	'$lgt_load_default_entities'(user, object, 'user', ScratchDirectory),
+	'$lgt_load_default_entities'(logtalk, object, 'logtalk', ScratchDirectory),
+	'$lgt_load_default_entities'(core_messages, category, 'core_messages', ScratchDirectory),
 	assertz('$lgt_default_entities_loaded_').
 
 
@@ -18395,7 +18395,7 @@ current_logtalk_flag(Flag, Value) :-
 		current_object(Entity) ->
 		true
 	;	logtalk_load(
-			logtalk_home(File),
+			core(File),
 			[code_prefix('$'), optimize(on), report(off), clean(on), reload(skip), scratch_directory(ScratchDirectory)]
 		)
 	).

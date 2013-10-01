@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Default library paths 
-%  Last updated on August 11, 2013
+%  Last updated on October 1, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -64,6 +64,8 @@ logtalk_library_path(logtalk_user, LOGTALKUSER) :-
 		;	atom_concat(LOGTALKUSER0, '/', LOGTALKUSER)
 		)
 	).
+
+logtalk_library_path(core, logtalk_home('core/')).
 
 logtalk_library_path(contributions, logtalk_user('contributions/')).
 logtalk_library_path(examples, logtalk_user('examples/')).
