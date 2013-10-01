@@ -51,8 +51,9 @@ the introduction of the new `restrict` value for the `complements` flag.
 * ADDED: Defined a new library path, `core`, using the `logtalk_library_path/2`
 built-in predicate.
 
-* IMPROVED: Use a single directory, `docs`, for the XHTML documentation of the
-core entities, library, tools, and contributions.
+* IMPROVED: Throw an error when attempting to dynamically create or define in
+a source file a `{}/1` parametric object as it would clash with the syntax for
+parametric object proxies.
 
 Prolog adapter and integration files
 ------------------------------------
@@ -64,6 +65,12 @@ context term representation (moved back into the compiler).
 version. This version, however, is not yet released but the current XSB
 development version includes a critical bug fix that is required for loading
 Logtalk.
+
+Documentation
+-------------
+
+* IMPROVED: Use a single directory, `docs`, for the XHTML documentation of all
+the core, library, tool, and contribution entities.
 
 Tools
 -----

@@ -844,6 +844,8 @@ create_object(Obj, Relations, Directives, Clauses) :-
 		throw(error(permission_error(modify, category, Obj), logtalk(create_object(Obj, Relations, Directives, Clauses), _)))
 	;	'$lgt_current_protocol_'(Obj, _, _, _, _),
 		throw(error(permission_error(modify, protocol, Obj), logtalk(create_object(Obj, Relations, Directives, Clauses), _)))
+	;	functor(Obj, {}, 1),
+		throw(error(permission_error(create, object, Obj), logtalk(create_object(Obj, Relations, Directives, Clauses), _)))
 	).
 
 create_object(Obj, Relations, Directives, Clauses) :-
@@ -6258,6 +6260,8 @@ current_logtalk_flag(Flag, Value) :-
 		throw(permission_error(modify, protocol, Obj))
 	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_category_'(Obj, _, _, _, _, _)) ->
 		throw(permission_error(modify, category, Obj))
+	;	functor(Obj, {}, 1) ->
+		throw(permission_error(create, object, Obj))
 	;	'$lgt_pp_entity_'(Type, _, _, _, _) ->
 		(	Type == object ->
 			throw(existence_error(directive, end_object/0))
