@@ -136,8 +136,8 @@ The file `RELEASE_NOTES.md` contains descriptions of all Logtalk updates
 since the first public version. Read it carefully if you have been using
 a previous Logtalk version.
 
-The documentation for the Logtalk library is provided in XHTML format and
-can be found in the `library/docs` directory.
+The documentation for the core, library, tools, and contributions entities
+is provided in XHTML format and can be found in the `docs` directory.
 
 Most directories include `NOTES.txt` documenting files, which can be also
 rendered as Markdown files (for e.g. easy conversion to HTML).
