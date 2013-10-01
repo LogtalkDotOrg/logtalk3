@@ -23,7 +23,10 @@
 		flush_output,
 		read_term(Command, [variable_names(VarNames)]),
 		user_reply(Command, VarNames),
-		repl.
+		(	Command == exit ->
+			!
+		;	repl
+		).
 	repl :-
 		write('no'), nl,
 		flush_output,
@@ -42,6 +45,7 @@
 		;	dispatch(Command, VarNames)
 		).
 
+	command(exit, 'Exit Verdi-Neruda, returning to the Prolog top-level.').
 	command(halt, 'Shuts down the Prolog system.').
 	command(help, 'Prints this message.').
 	command(load('Database'), 'Loads the specified database.').
@@ -58,6 +62,7 @@
 		command(benchmark('Interpreter', 'Statistic', 'N', 'Goal', 'Database'), 'Benchmarks Interpreter with respect to Statistic, N and Goal.').
 	:- endif.
 
+	dispatch(exit, _).
 	dispatch(halt, _) :-
 		halt.
 	dispatch(help, _) :-

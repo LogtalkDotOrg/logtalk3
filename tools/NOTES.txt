@@ -62,13 +62,14 @@ and follow these steps:
 
 3. Generate the XML documenting files for all loaded tools using the query:
 
-	| ?- lgtdoc::rlibrary(tools, [xmldir('$LOGTALKUSER/docs')]).
+	| ?- lgtdoc::rlibrary(tools, [xmldir('$LOGTALKUSER/docs/tmp')]).
 
-4. Run the command `lgt2html` on the `$LOGTALKUSER/library/docs` directory 
-to generate (X)HTML documentation or the command `lgt2pdf` to generate PDF
-documentation. For example:
+4. Run the command `lgt2html` on the `$LOGTALKUSER/docs/tmp` directory 
+to generate (X)HTML documentation or the command `lgt2pdf` to generate
+PDF documentation. For example:
 
 	$ lgt2html -i tools.html -t "Tools documentation index"
 
-After generating the (X)HTML and/or PDF documentation, you can delete the
-generated XML files.
+After generating the (X)HTML and/or PDF documentation, you can move the
+files to the upper directory, `$LOGTALKUSER/docs`, and delete the temporary
+directory.
