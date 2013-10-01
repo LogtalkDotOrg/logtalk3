@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Logtalk user folder setup script
-##   Last updated on June 3, 2013
+##   Last updated on October 1, 2013
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -114,12 +114,14 @@ fi
 
 echo "Copying Logtalk files and directories..."
 mkdir -p "$LOGTALKUSER"/contributions
+mkdir -p "$LOGTALKUSER"/docs
 mkdir -p "$LOGTALKUSER"/examples
 mkdir -p "$LOGTALKUSER"/library
 mkdir -p "$LOGTALKUSER"/scratch
 mkdir -p "$LOGTALKUSER"/tests
 mkdir -p "$LOGTALKUSER"/tools
 cp -RL "$LOGTALKHOME"/contributions "$LOGTALKUSER"/
+cp -RL "$LOGTALKHOME"/docs "$LOGTALKUSER"/
 cp -RL "$LOGTALKHOME"/examples "$LOGTALKUSER"/
 cp -RL "$LOGTALKHOME"/library "$LOGTALKUSER"/
 cp -RL "$LOGTALKHOME"/scratch "$LOGTALKUSER"/

@@ -95,6 +95,7 @@ Source: "{#MyBaseDir}\RELEASE_NOTES.md"; DestDir: "{app}"; DestName: "RELEASE_NO
 Source: "{#MyBaseDir}\UPGRADING.md"; DestDir: "{app}"; DestName: "UPGRADING.txt"; Components: base; Flags: ignoreversion skipifsourcedoesntexist
 
 Source: "{#MyBaseDir}\contributions\*"; Excludes: ".*"; DestDir: "{code:GetLgtUserDir}\contributions"; Components: user; Flags: ignoreversion recursesubdirs createallsubdirs uninsneveruninstall
+Source: "{#MyBaseDir}\docs\*"; Excludes: ".*"; DestDir: "{code:GetLgtUserDir}\docs"; Components: user; Flags: ignoreversion recursesubdirs createallsubdirs uninsneveruninstall
 Source: "{#MyBaseDir}\examples\*"; Excludes: ".*"; DestDir: "{code:GetLgtUserDir}\examples"; Components: user; Flags: ignoreversion recursesubdirs createallsubdirs uninsneveruninstall
 Source: "{#MyBaseDir}\library\*"; Excludes: ".*"; DestDir: "{code:GetLgtUserDir}\library"; Components: user; Flags: ignoreversion recursesubdirs createallsubdirs uninsneveruninstall
 Source: "{#MyBaseDir}\scratch\*"; Excludes: ".*"; DestDir: "{code:GetLgtUserDir}\scratch"; Components: user; Flags: ignoreversion recursesubdirs createallsubdirs uninsneveruninstall
@@ -117,12 +118,13 @@ Type: files; Name: "{app}\paths\*.xwam"
 
 [Icons]
 Name: "{group}\Bibliography"; Filename: "{app}\BIBLIOGRAPHY.bib"; Components: base
-Name: "{group}\Documentation"; Filename: "{app}\manuals\index.html"; Components: base
+Name: "{group}\Manuals"; Filename: "{app}\manuals\index.html"; Components: base
 Name: "{group}\License"; Filename: "{app}\LICENSE.txt"; Components: base
 Name: "{group}\Release Notes"; Filename: "{app}\RELEASE_NOTES.txt"; Components: base
 Name: "{group}\Read Me"; Filename: "{app}\README.txt"; Components: base
 Name: "{group}\Customization instructions"; Filename: "{app}\CUSTOMIZE.txt"; Components: base
 Name: "{group}\Default settings"; Filename: "%LOGTALKUSER%\settings-sample.lgt"; Components: base
+Name: "{group}\Docs"; Filename: "%LOGTALKUSER%\index.html"; Components: base
 
 Name: "{group}\Web Site"; Filename: "{#MyAppUrl}"; Components: base
 

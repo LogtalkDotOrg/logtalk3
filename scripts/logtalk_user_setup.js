@@ -4,7 +4,7 @@
 //   Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 // 
 //   Logtalk user folder setup script
-//   Last updated on June 3, 2013
+//   Last updated on October 1, 2013
 //
 //   This program is free software: you can redistribute it and/or modify
 //   it under the terms of the GNU General Public License as published by
@@ -116,6 +116,7 @@ WScript.Echo("");
 FSObject.CreateFolder(logtalk_user);
 WScript.Echo("Copying Logtalk files and directories...");
 FSObject.CopyFolder(logtalk_home + "\\contributions", logtalk_user + "\\contributions");
+FSObject.CopyFolder(logtalk_home + "\\docs", logtalk_user + "\\docs");
 FSObject.CopyFolder(logtalk_home + "\\examples", logtalk_user + "\\examples");
 FSObject.CopyFolder(logtalk_home + "\\library", logtalk_user + "\\library");
 FSObject.CopyFolder(logtalk_home + "\\scratch", logtalk_user + "\\scratch");

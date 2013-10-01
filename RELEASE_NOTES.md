@@ -51,6 +51,9 @@ the introduction of the new `restrict` value for the `complements` flag.
 * ADDED: Defined a new library path, `core`, using the `logtalk_library_path/2`
 built-in predicate.
 
+* IMPROVED: Use a single directory, `docs`, for the XHTML documentation of the
+core entities, library, tools, and contributions.
+
 Prolog adapter and integration files
 ------------------------------------
 

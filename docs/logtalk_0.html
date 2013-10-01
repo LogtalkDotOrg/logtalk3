@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<?xml-stylesheet href="logtalk.css" type="text/css"?><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>logtalk</title>
+    <link rel="stylesheet" href="logtalk.css" type="text/css"/>
+  </head>
+  <body>
+    <div class="header">
+      <p class="type">object</p>
+      <h1 class="code">logtalk</h1>
+      <blockquote>
+        <p class="comment">Built-in object providing message priting, debugging, library, source file, and hacking methods.</p>
+      </blockquote>
+    </div>
+    <div class="entity">
+      <div class="section">
+        <dl class="properties">
+          <dt class="key">author:</dt>
+          <dd class="value">
+            <code>Paulo Moura</code>
+          </dd>
+          <dt class="key">version:</dt>
+          <dd class="value">
+            <code>1.0</code>
+          </dd>
+          <dt class="key">date:</dt>
+          <dd class="value">
+            <code>2013/9/29</code>
+          </dd>
+        </dl>
+        <dl class="properties">
+          <dt class="key">compilation flags:</dt>
+          <dd class="value">
+            <code>static, built_in, context_switching_calls, dynamic_declarations, complements(allow), events, threaded</code>
+          </dd>
+        </dl>
+        <p class="comment">(no dependencies on other files)</p>
+      </div>
+    </div>
+    <div class="predicates">
+      <div class="public">
+        <h2>Public interface</h2>
+        <div class="section">
+          <h3 class="code">print_message/3</h3>
+          <blockquote>
+            <p class="comment">Prints a message of the given kind for the specificed component.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>print_message(Kind,Component,Message)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>print_message(@nonvar,+atom,@nonvar) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">print_message_tokens/3</h3>
+          <blockquote>
+            <p class="comment">Print the messages tokens to the given stream, prefixing each line with the specified atom.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>print_message_tokens(Stream,Prefix,Tokens)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>print_message_tokens(@stream_or_alias,+atom,@list(term)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">print_message_token/2</h3>
+          <blockquote>
+            <p class="comment">User-defined hook predicate for printing a message token (at_same_line, nl, flush, Format-Arguments, ansi(Attributes,Format,Arguments), begin(Kind,Variable), and end(Variable)).</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>dynamic</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>print_message_token(Stream,Token)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>print_message_token(@steream_or_alias,@nonvar) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">message_tokens//2</h3>
+          <blockquote>
+            <p class="comment">User-defined hook grammar rule for converting a message into a list of tokens (at_same_line, nl, flush, Format-Arguments, ansi(Attributes,Format,Arguments), begin(Kind,Variable), and end(Variable)).</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>dynamic</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>message_tokens(Message,Tokens)</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">message_prefix_stream/4</h3>
+          <blockquote>
+            <p class="comment">Message line prefix and stream to be used when printing a message given its kind and component.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>dynamic</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>message_prefix_stream(Kind,Component,Prefix,Stream)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>message_prefix_stream(@nonvar,@callable,@atom,@list(term)) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">message_hook/4</h3>
+          <blockquote>
+            <p class="comment">User-defined hook predicate for intercepting message printing calls.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>dynamic</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>message_hook(Message,Kind,Component,Tokens)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>message_hook(@nonvar,@callable,@atom,@list(term)) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">trace_event/2</h3>
+          <blockquote>
+            <p class="comment">Trace event handler. The runtime calls all trace event handlers using a failure-driven loop before calling the debug event handler.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>dynamic</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>trace_event(Event,ExecutionContext)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>trace_event(@callable,@execution_context) &ndash; zero</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">debug_handler_provider/1</h3>
+          <blockquote>
+            <p class="comment">Declares an object as the debug handler provider. There should be at most one debug handler provider loaded at any given moment.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>debug_handler_provider(Provider)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>debug_handler_provider(?object_identifier) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">debug_handler/2</h3>
+          <blockquote>
+            <p class="comment">Debug event handler.The two defined events are top_goal(Goal,TGoal) and goal(Goal,TGoal) where Goal is the source goal and TGoal is the corresponding compiled goal.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>debug_handler(Event,ExecutionContext)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>debug_handler(?entity_identifier,?atom) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">expand_library_path/2</h3>
+          <blockquote>
+            <p class="comment">Expands a library name into its full path. Uses a depth bound to prevent loops.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>expand_library_path(Library,Path)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>expand_library_path(?atom,?atom) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">loaded_file/1</h3>
+          <blockquote>
+            <p class="comment">Enumerates, by backtracking, all loaded files, returning their full paths.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>loaded_file(Path)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>loaded_file(?atom) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">loaded_file_property/2</h3>
+          <blockquote>
+            <p class="comment">Enumerates, by backtracking, all loaded files, returning their full paths. Valid properties are: basename/1, directory/1, flags/1, text_properties/1 (encoding/1 and bom/1), target/1, and modified/1.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>loaded_file_property(Path,Property)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>loaded_file_property(?atom,?compound) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">compile_aux_clauses/1</h3>
+          <blockquote>
+            <p class="comment">Compiles a list of auxiliary clauses.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>compile_aux_clauses(Clauses)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>compile_aux_clauses(@list(clause)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">entity_prefix/2</h3>
+          <blockquote>
+            <p class="comment">Converts between an entity identifier and the entity prefix that is used for its compiled code. When none of the arguments is instantiated, it returns the identifier and the prefix of the entity under compilation, if any.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>entity_prefix(Entity,Prefix)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>entity_prefix(?entity_identifier,?atom) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">compile_predicate_heads/4</h3>
+          <blockquote>
+            <p class="comment">Compiles clause heads. The heads are compiled in the context of the entity under compilation when the entity argument is not instantiated.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>compile_predicate_heads(Heads,Entity,CompiledHeads,ExecutionContext)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>compile_predicate_heads(@list(callable),?entity_identifier,-list(callable),@execution_context) &ndash; zero_or_one</code>
+            </dd>
+            <dd class="value">
+              <code>compile_predicate_heads(@conjunction(callable),?entity_identifier,-conjunction(callable),@execution_context) &ndash; zero_or_one</code>
+            </dd>
+            <dd class="value">
+              <code>compile_predicate_heads(@callable,?entity_identifier,-callable,@execution_context) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">compile_predicate_indicators/3</h3>
+          <blockquote>
+            <p class="comment">Compiles predicate indicators. The predicate are compiled in the context of the entity under compilation when the entity argument is not instantiated.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>compile_predicate_indicators(PredicateIndicators,Entity,CompiledPredicateIndicators)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>compile_predicate_indicators(@list(predicate_indicator),?entity_identifier,-list(predicate_indicator)) &ndash; zero_or_one</code>
+            </dd>
+            <dd class="value">
+              <code>compile_predicate_indicators(@conjunction(predicate_indicator),?entity_identifier,-conjunction(predicate_indicator)) &ndash; zero_or_one</code>
+            </dd>
+            <dd class="value">
+              <code>compile_predicate_indicators(@predicate_indicator,?entity_identifier,-predicate_indicator) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">decompile_predicate_heads/4</h3>
+          <blockquote>
+            <p class="comment">Decompiles clause heads. All compiled clause heads must belong to the same entity, which must be loaded.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>decompile_predicate_heads(CompiledHeads,Entity,Type,Heads)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>decompile_predicate_heads(@list(callable),-entity_identifier,-atom,-list(callable)) &ndash; zero_or_one</code>
+            </dd>
+            <dd class="value">
+              <code>decompile_predicate_heads(@conjunction(callable),-entity_identifier,-atom,-conjunction(callable)) &ndash; zero_or_one</code>
+            </dd>
+            <dd class="value">
+              <code>decompile_predicate_heads(@callable,-entity_identifier,-atom,-callable) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">decompile_predicate_indicators/4</h3>
+          <blockquote>
+            <p class="comment">Decompiles predicate indicators. All compiled predicate indicators must belong to the same entity, which must be loaded.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>decompile_predicate_indicators(CompiledPredicateIndicators,Entity,Type,PredicateIndicators)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>decompile_predicate_indicators(@list(predicate_indicator),-entity_identifier,-atom,-list(predicate_indicator)) &ndash; zero_or_one</code>
+            </dd>
+            <dd class="value">
+              <code>decompile_predicate_indicators(@conjunction(predicate_indicator),-entity_identifier,-atom,-conjunction(predicate_indicator)) &ndash; zero_or_one</code>
+            </dd>
+            <dd class="value">
+              <code>decompile_predicate_indicators(@predicate_indicator,-entity_identifier,-atom,-predicate_indicator) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">execution_context/6</h3>
+          <blockquote>
+            <p class="comment">Execution context term data. Execution context terms should be considered opaque terms subject to change without notice.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>execution_context(ExecutionContext,Sender,This,Self,MetaCallContext,Stack)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>execution_context(?nonvar,?object_identifier,?object_identifier,?object_identifier,@list(callable),@list(callable)) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="protected">
+        <h2>Protected interface</h2>
+        <div class="section">
+          <p class="comment">(none)</p>
+        </div>
+      </div>
+      <div class="private">
+        <h2>Private predicates</h2>
+        <div class="section">
+          <p class="comment">(none)</p>
+        </div>
+      </div>
+    </div>
+    <div class="operators">
+      <h2>Operators</h2>
+      <div class="section">
+        <h3 class="comment">(none)</h3>
+      </div>
+    </div>
+    <div class="remarks">
+      <h2>Remarks</h2>
+      <div class="section">
+        <h3 class="comment">(none)</h3>
+      </div>
+    </div>
+  </body>
+</html>

@@ -42,6 +42,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr/local/share/LOGTALK_INSTALL_DIRECTORY/coding
 /usr/local/share/LOGTALK_INSTALL_DIRECTORY/contributions
 /usr/local/share/LOGTALK_INSTALL_DIRECTORY/core
+%doc /usr/local/share/LOGTALK_INSTALL_DIRECTORY/docs
 /usr/local/share/LOGTALK_INSTALL_DIRECTORY/examples
 /usr/local/share/LOGTALK_INSTALL_DIRECTORY/integration
 /usr/local/share/LOGTALK_INSTALL_DIRECTORY/library
