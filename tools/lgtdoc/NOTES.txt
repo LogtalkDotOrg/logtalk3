@@ -27,11 +27,21 @@ be loaded by typing:
 	| ?- logtalk_load(lgtdoc(loader)).
 
 Documenting Logtalk source code (with this tool) requires compiling
-source files using the `source_data(on)` compiler option. For example:
+source files using the `source_data(on)` compiler option. For a single
+source file, you can type, example:
 
-	| ?- logtalk_load(my_shining_code, [source_data(on)]).
+	| ?- logtalk_load(source_file, [source_data(on)]).
 
-In alternative, you may also set the `source_data` flag to `on` by
+For multiple source files, assuming you use a loader file, you can set
+the `source_data` flag in the loader's `initialization/1` directive:
+
+	:- initialization((
+		set_logtalk_flag(source_data, on),
+		logtalk_load(source_file_1),
+		...
+	)).
+
+In alternative, you may also turn on the `source_data` flag globally by
 typing:
 
 	| ?- set_logtalk_flag(source_data, on).
@@ -39,7 +49,10 @@ typing:
 This documenting tool uses Logtalk's structural reflection support
 to extract and output in XML format relevant documentation about a
 source code file, a library of source files, or all loaded source
-files.
+files. The documenting predicates allows you to set several options
+for the XML files, including the output directory. To consult the
+documentation of the `lgtdoc` tool, open the `docs/tools.html` file
+in a web browser.
 
 All source files are formatted using tabs (the recommended setting
 is a tab width equivalent to 4 spaces).

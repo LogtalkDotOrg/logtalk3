@@ -31,15 +31,15 @@ source files using the `debug(on)` compiler option. For example:
 
 	| ?- logtalk_load(my_buggy_code, [debug(on)]).
 
-In alternative, you may also set the `debug` flag to `on` by typing:
+In alternative, you may also turn on the `debug` flag globally by typing:
 
 	| ?- set_logtalk_flag(debug, on).
 
 Logtalk also provides basic support for the SWI-Prolog graphical tracer.
 The required settings are described in the `settings-sample.lgt` file.
 
-For help using the debugger, see the tool documentation on the `../docs`
-folder and the debugging section of the User Manual.
+For help using the debugger, open the `docs/tools.html` file in a
+web browser and consult the debugging section of the User Manual.
 
 All source files are formatted using tabs (the recommended setting is
 a tab width equivalent to 4 spaces).
