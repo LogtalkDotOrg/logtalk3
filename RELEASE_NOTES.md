@@ -77,6 +77,9 @@ Tools
 
 * ADDED: Unit tests for the built-in entities.
 
+* FIXED: The SICStus Prolog profiler support failed to also filter object
+internal clauses for alias and super lookups.
+
 Examples
 --------
 

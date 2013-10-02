@@ -27,9 +27,9 @@
 	implements(profilerp)).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2013/09/23,
+		date is 2013/10/03,
 		comment is 'Simple wrapper for the SICStus Prolog profiler.'
 	]).
 
@@ -60,6 +60,8 @@
 			;	sub_atom(Functor, _, _, 0, '._def')
 			;	sub_atom(Functor, _, _, 0, '._ddef')
 			;	sub_atom(Functor, _, _, 0, '._idef')
+			;	sub_atom(Functor, _, _, 0, '._super')
+			;	sub_atom(Functor, _, _, 0, '._alias')
 			),
 			% Logtalk compiler/runtime internal predicate
 			!,
