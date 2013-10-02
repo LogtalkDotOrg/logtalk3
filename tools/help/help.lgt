@@ -25,9 +25,9 @@
 :- object(help).
 
 	:- info([
-		version is 0.9,
+		version is 0.10,
 		author is 'Paulo Moura',
-		date is 2013/05/25,
+		date is 2013/10/02,
 		comment is 'Command-line help for Logtalk built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
@@ -278,7 +278,7 @@
 	]).
 
 	library :-
-		open('/library/docs/', 'index.html').
+		open('/docs/', 'library.html').
 
 	:- public(library/1).
 	:- mode(library(+entity_identifier), zero_or_one).
@@ -296,7 +296,7 @@
 		atom_chars(ArityAtom, ArityChars),
 		atom_concat(File0, ArityAtom, File1),
 		atom_concat(File1, '.html', File),
-		open('/library/docs/', File).
+		open('/docs/', File).
 
 	:- public(manuals/0).
 	:- mode(manuals, one).
