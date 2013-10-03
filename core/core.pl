@@ -6106,6 +6106,10 @@ current_logtalk_flag(Flag, Value) :-
 	;	'$lgt_built_in_predicate'(Directive)
 		% or a built-in predicate
 	),
+	% but not unsupported directives that the backend Prolog compiler adapter
+	% file failed to expand into supported use_module/2 directives
+	Directive \= use_module(_),
+	Directive \= ensure_loaded(_),
 	!,
 	% translate query as an initialization goal
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),

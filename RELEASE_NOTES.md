@@ -48,6 +48,11 @@ property to `text_properties/1`.
 * FIXED: Regression in previous release when optimizing `(::)/2` calls due to
 the introduction of the new `restrict` value for the `complements` flag.
 
+* FIXED: When compiling a module as an object, occurrences of `ensure_loaded/1`
+and `use_module/1` directives that the backend Prolog compiler adapter file
+failed to expand into supported `use_module/2` directives would be compiled
+as initialization goals, resulting in runtime instead of compile time errors.
+
 * ADDED: Defined a new library path, `core`, using the `logtalk_library_path/2`
 built-in predicate.
 
