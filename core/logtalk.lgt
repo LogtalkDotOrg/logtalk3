@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/09/29,
+		date is 2013/10/03,
 		comment is 'Built-in object providing message priting, debugging, library, source file, and hacking methods.']).
 
 	:- built_in.
@@ -110,6 +110,10 @@
 		comment is 'Declares an object as the debug handler provider. There should be at most one debug handler provider loaded at any given moment.',
 		argnames is ['Provider']
 	]).
+	% workaround the lack of support for static multifile predicates in Qu-Prolog and XSB
+	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect==xsb; Dialect==qp))).
+		:- dynamic(debug_handler_provider/1).
+	:- endif.
 
 	:- public(debug_handler/2).
 	:- multifile(debug_handler/2).
@@ -118,6 +122,10 @@
 		comment is 'Debug event handler.The two defined events are top_goal(Goal,TGoal) and goal(Goal,TGoal) where Goal is the source goal and TGoal is the corresponding compiled goal.',
 		argnames is ['Event', 'ExecutionContext']
 	]).
+	% workaround the lack of support for static multifile predicates in Qu-Prolog and XSB
+	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect==xsb; Dialect==qp))).
+		:- dynamic(debug_handler/2).
+	:- endif.
 
 	% file and library predicates
 
@@ -361,5 +369,5 @@
 
 
 :- if(current_logtalk_flag(prolog_dialect, xsb)).
-	:- import(from(/(format,3), format)).	
+	:- import(from(/(format,3), format)).
 :- endif.
