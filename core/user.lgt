@@ -1,10 +1,11 @@
 
-:- object(user).
+:- object(user,
+	implements(forwarding)).
 
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/09/30,
+		date is 2013/10/04,
 		comment is 'Pseudo-object "user" representing the plain Prolog database.']).
 
 	:- built_in.

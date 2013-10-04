@@ -25,6 +25,16 @@ RELEASE NOTES
 =============
 
 
+3.00.0 Alpha 27 - October ??, 2013
+==================================
+
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: The definition of the `user` pseudo-object was missing the reference
+to the `forwarding` protocol.
+
+
 3.00.0 Alpha 26 - October 4, 2013
 =================================
 
