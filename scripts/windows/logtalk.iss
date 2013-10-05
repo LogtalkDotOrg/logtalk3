@@ -58,14 +58,14 @@ Name: "user"; Description: "User files (libraries, examples, and other support f
 Name: "user\backup"; Description: "Backup current Logtalk user folder"; Types: full user custom; Flags: disablenouninstallwarning
 Name: "prolog"; Description: "Prolog integration (back-end compiler support)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\bp"; Description: "B-Prolog integration (version 7.8 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
-Name: "prolog\cxprolog"; Description: "CxProlog integration (version 0.97.6 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
+Name: "prolog\cxprolog"; Description: "CxProlog integration (version 0.97.7 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\eclipse"; Description: "ECLiPSe integration (version 6.1#143 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\gprolog"; Description: "GNU Prolog integration (version 1.4.2 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\sicstus"; Description: "SICStus Prolog integration (version 4.1.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\swicon"; Description: "SWI-Prolog (console) integration (version 6.0.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\swiwin"; Description: "SWI-Prolog (window) integration (version 6.0.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
-Name: "prolog\xsb"; Description: "XSB integration (version 3.3 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
-Name: "prolog\xsbmt"; Description: "XSB-MT integration (version 3.3 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
+Name: "prolog\xsb"; Description: "XSB integration (version 3.4.1 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
+Name: "prolog\xsbmt"; Description: "XSB-MT integration (version 3.4.1 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\yap"; Description: "YAP (console) integration (version 6.0.2 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\yap"; Description: "YAP (window) integration (version 6.3.2 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 

@@ -94,7 +94,7 @@ On Windows, the environment variable `BPDIR` must be defined and pointing
 to the B-Prolog installation directory for the installer to detect it.
 
 
-CxProlog 0.97.6 or later versions
+CxProlog 0.97.7 or later versions
 ---------------------------------
 
 	cx.pl
@@ -274,7 +274,7 @@ flag to `off` and add the option `qcompile(auto)` to the Logtalk flag
 `prolog_loader`.
 
 
-XSB 3.3 and later versions
+XSB 3.4.1 and later versions
 --------------------------
 
 	xsb.pl
@@ -284,7 +284,7 @@ Prolog source files (thus including the Logtalk core files). Thus, you
 must either install Logtalk on on a location where you have write access
 or perform the first run of the integration scripts from an admin account.
 
-Know issue in XSB 3.3: this version doesn't support static multifile
+Know issue in XSB 3.4.1: this version doesn't support static multifile
 predicates. This limitation may be fixed in later versions.
 
 
