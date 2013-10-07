@@ -15370,11 +15370,11 @@ current_logtalk_flag(Flag, Value) :-
 
 % inheritance only requires updating "this"
 '$lgt_execution_context_update_this'(OldExCtx, OldThis, NewExCtx, NewThis) :-
-	'$logtalk.execution_context'(OldExCtx, Sender, OldThis, Self, MetaCallCtx, Stack, _),
-	'$logtalk.execution_context'(NewExCtx, Sender, NewThis, Self, MetaCallCtx, Stack, _).
+	'$logtalk.execution_context_this_rest'(OldExCtx, OldThis, Rest, _),
+	'$logtalk.execution_context_this_rest'(NewExCtx, NewThis, Rest, _).
 
 '$lgt_execution_context_this'(ExCtx, This) :-
-	'$logtalk.execution_context'(ExCtx, _, This, _, _, _, _).
+	'$logtalk.execution_context_this_rest'(ExCtx, This, _, _).
 
 
 

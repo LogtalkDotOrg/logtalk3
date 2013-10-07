@@ -31,6 +31,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* FIXED: Regression in the performance of accessing the execution context when
+it's only necessary to get the value of `this`.
+
 * FIXED: The definition of the `user` pseudo-object was missing the reference
 to the `forwarding` protocol.
 

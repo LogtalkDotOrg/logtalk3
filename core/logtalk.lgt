@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/10/03,
+		date is 2013/10/07,
 		comment is 'Built-in object providing message priting, debugging, library, source file, and hacking methods.']).
 
 	:- built_in.
@@ -209,6 +209,13 @@
 		argnames is ['ExecutionContext', 'Sender', 'This', 'Self', 'MetaCallContext', 'Stack']
 	]).
 
+	:- private(execution_context_this_rest/6).
+	:- mode(execution_context_this_rest(?nonvar, ?object_identifier, ?object_identifier), zero_or_one).
+	:- info(execution_context_this_rest/6, [
+		comment is 'Conversion between an execution context term data and "this" plus the remaining elements of the context.',
+		argnames is ['ExecutionContext', 'This', 'Rest']
+	]).
+
 	print_message(Kind, Component, Term) :-
 		message_term_to_tokens(Term, Kind, Component, Tokens),
 		(	nonvar(Term),
@@ -364,6 +371,8 @@
 		{'$lgt_decompile_predicate_heads'(THeads, Entity, Type, Heads)}.
 
 	execution_context(c(This, r(Sender, Self, MetaCallContext, CoinductionStack)), Sender, This, Self, MetaCallContext, CoinductionStack).
+
+	execution_context_this_rest(c(This, Rest), This, Rest).
 
 :- end_object.
 
