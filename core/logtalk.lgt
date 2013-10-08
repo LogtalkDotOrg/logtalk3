@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/10/07,
+		date is 2013/10/08,
 		comment is 'Built-in object providing message priting, debugging, library, source file, and hacking methods.']).
 
 	:- built_in.
@@ -209,9 +209,9 @@
 		argnames is ['ExecutionContext', 'Sender', 'This', 'Self', 'MetaCallContext', 'Stack']
 	]).
 
-	:- private(execution_context_this_rest/6).
+	:- private(execution_context_this_rest/3).
 	:- mode(execution_context_this_rest(?nonvar, ?object_identifier, ?object_identifier), zero_or_one).
-	:- info(execution_context_this_rest/6, [
+	:- info(execution_context_this_rest/3, [
 		comment is 'Conversion between an execution context term data and "this" plus the remaining elements of the context.',
 		argnames is ['ExecutionContext', 'This', 'Rest']
 	]).
