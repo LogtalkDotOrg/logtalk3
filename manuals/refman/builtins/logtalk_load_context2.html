@@ -40,6 +40,9 @@
 <p>
 Provides access to the Logtalk compilation/loading context. The following keys are currently supported: <code>entity_identifier</code>, <code>entity_prefix</code>, <code>entity_type</code>, <code>source</code>, <code>file</code> (same as <code>source</code>), <code>basename</code>, <code>directory</code>, <code>stream</code>, <code>target</code> (the full path of the intermediate Prolog file), <code>term_position</code> (<code>Start-End</code>), and <code>variable_names</code> (<code>[Name1=Variable1, ...]</code>). The <code>term_position</code> key is only supported in back-end Prolog compilers that provide the start and end lines of a read term.
 </p>
+<p>
+Using the <code>variable_names</code> key requires calling the standard built-in predicate <code>term_variables/2</code> on the term read and unifying the term variables with the variables in the names list. This, however, rises portability issues with those Prolog compilers that don't return the variables in the same order for the <code>term_variables/2</code> predicate and the option <code>variable_names/1</code> of the  <code>read_term/3</code> built-in predicate, which is used by the Logtalk compiler to read source files.
+</p>
 
 <h4>Template and modes</h4>
 

@@ -42,8 +42,8 @@
 		assertz(result(term_position, Position)),
 		fail.
 	term_expansion((:- end_object), _) :-
-		logtalk_load_context(variable_names, Position),
-		assertz(result(variable_names, Position)),
+		logtalk_load_context(variable_names, VariableNames),
+		assertz(result(variable_names, VariableNames)),
 		fail.
 	term_expansion((:- end_object), _) :-
 		logtalk_load_context(stream, Stream),
