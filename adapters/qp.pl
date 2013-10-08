@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Qu-Prolog 9.0 and later versions
-%  Last updated on September 27, 2013
+%  Last updated on October 8, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -560,11 +560,11 @@ format(Format, Arguments) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_read_term'(@stream, -term, +list, -position)
+% '$lgt_read_term'(@stream, -term, +list, -position, -list)
 
-'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd) :-
+'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, Variables) :-
 	stream_property(Stream, line_number(LineBegin)),
-	read_term(Stream, Term, Options),
+	read_term(Stream, Term, [variable_names(Variables)| Options]),
 	stream_property(Stream, line_number(LineEnd)).
 
 

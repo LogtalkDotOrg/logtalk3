@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for YAP Prolog 6.0.2 and later versions
-%  Last updated on September 28, 2013
+%  Last updated on October 8, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -573,10 +573,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_read_term'(@stream, -term, +list, -position)
+% '$lgt_read_term'(@stream, -term, +list, -position, -list)
 
-'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd) :-
-	read_term(Stream, Term, [term_position(PositionBegin)| Options]),
+'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, Variables) :-
+	read_term(Stream, Term, [term_position(PositionBegin), variable_names(Variables)| Options]),
 	stream_position_data(line_count, PositionBegin, LineBegin),
 	stream_position(Stream, PositionEnd),
 	stream_position_data(line_count, PositionEnd, LineEnd).

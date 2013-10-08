@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SWI Prolog 6.0.0 and later versions
-%  Last updated on September 28, 2013
+%  Last updated on October 8, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -535,19 +535,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_read_term'(@stream, -term, +list, -position)
+% '$lgt_read_term'(@stream, -term, +list, -position, -list)
 
 :- if(current_op(1150, fx, (public))).
 
 	% the public operator was added to SWI-Prolog on version 5.11.9
-	'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd) :-
+	'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, Variables) :-
 		(	'$lgt_pp_module_'(_) ->
 			% compiling a module as an object
-			read_term(Stream, Term, [term_position(PositionBegin)| Options])
+			read_term(Stream, Term, [term_position(PositionBegin), variable_names(Variables)| Options])
 		;	% workaround SWI-Prolog public/1 operator clash
 			setup_call_cleanup(
 				op(0, fx, (public)),
-				read_term(Stream, Term, [term_position(PositionBegin)| Options]),
+				read_term(Stream, Term, [term_position(PositionBegin), variable_names(Variables)| Options]),
 				op(1150, fx, (public))
 			)
 		),

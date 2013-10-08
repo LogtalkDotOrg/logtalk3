@@ -42,6 +42,10 @@
 		assertz(result(term_position, Position)),
 		fail.
 	term_expansion((:- end_object), _) :-
+		logtalk_load_context(variable_names, Position),
+		assertz(result(variable_names, Position)),
+		fail.
+	term_expansion((:- end_object), _) :-
 		logtalk_load_context(stream, Stream),
 		assertz(result(stream, Stream)),
 		fail.
@@ -56,7 +60,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/09/12,
+		date is 2013/10/08,
 		comment is 'Unit tests for the logtalk_load_context/2 built-in predicate.'
 	]).
 
@@ -81,6 +85,22 @@
 		result(entity_prefix, EntityPrefix), logtalk::entity_prefix(sample, EntityPrefix),
 		result(entity_type, EntityType), EntityType == object,
 		result(term_position, TermPosition), ground(TermPosition),
+		result(variable_names, VariableNames), variable_names_list(VariableNames),
 		result(stream, Stream), ground(Stream).
+
+	variable_names_list(-) :-
+		!,
+		fail.
+	variable_names_list([]).
+	variable_names_list([Pair| Pairs]) :-
+		variable_names_pair(Pair),
+		variable_names_list(Pairs).
+
+	variable_names_pair(-) :-
+		!,
+		fail.
+	variable_names_pair(Name = Variable) :-
+		atom(Name),
+		var(Variable).
 
 :- end_object.

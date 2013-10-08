@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for B-Prolog 7.8 and later versions
-%  Last updated on September 27, 2013
+%  Last updated on October 8, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -488,10 +488,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_read_term'(@stream, -term, +list, -position)
+% '$lgt_read_term'(@stream, -term, +list, -position, -list)
 
-'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd) :-
-	read_term(Stream, Term, [line_counts(LineBegin, LineEnd)| Options]).
+'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, Variables) :-
+	read_term(Stream, Term, [line_counts(LineBegin, LineEnd), variable_names(Variables)| Options]).
 
 
 

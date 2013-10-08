@@ -307,7 +307,7 @@
 :- dynamic('$lgt_pp_cc_skipping_'/0).						% '$lgt_pp_cc_skipping_'
 :- dynamic('$lgt_pp_cc_mode_'/1).							% '$lgt_pp_cc_mode_'(Action)
 
-:- dynamic('$lgt_pp_term_position_'/1).						% '$lgt_pp_term_position_'(Position)
+:- dynamic('$lgt_pp_term_position_variables_'/2).			% '$lgt_pp_term_position_variables_'(Position, Variables)
 
 :- dynamic('$lgt_pp_aux_predicate_counter_'/1).				% '$lgt_pp_aux_predicate_counter_'(Counter)
 
@@ -2045,7 +2045,10 @@ logtalk_load_context(entity_type, Type) :-
 	).
 
 logtalk_load_context(term_position, Position) :-
-	'$lgt_pp_term_position_'(Position).
+	'$lgt_pp_term_position_variables_'(Position, _).
+
+logtalk_load_context(variable_names, Variables) :-
+	'$lgt_pp_term_position_variables_'(_, Variables).
 
 logtalk_load_context(stream, Stream) :-
 	% avoid a spurious choice-point with some back-end Prolog compilers
@@ -5058,12 +5061,12 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_add_entity_properties'(start, Entity) :-
 	'$lgt_pp_file_data_'(Basename, Directory, _, _, _),
-	'$lgt_pp_term_position_'((Start - _)),
+	'$lgt_pp_term_position_variables_'(Start-_, _),
 	assertz('$lgt_pp_entity_property_'(Entity, file_lines(Basename, Directory, Start, _))).
 
 '$lgt_add_entity_properties'(end, Entity) :-
 	retract('$lgt_pp_entity_property_'(Entity, file_lines(Basename, Directory, Start, _))),
-	'$lgt_pp_term_position_'((_ - End)),
+	'$lgt_pp_term_position_variables_'(_-End, _),
 	assertz('$lgt_pp_entity_property_'(Entity, file_lines(Basename, Directory, Start, End))),
 	fail.
 
@@ -5289,9 +5292,9 @@ current_logtalk_flag(Flag, Value) :-
 	% may get a syntax error while reading the next term; this will
 	% allow us to use the stream position if necessary to find the
 	% approximated position of the error
-	retractall('$lgt_pp_term_position_'(_)),
-	'$lgt_read_term'(Stream, Term, Options, Position),	% defined in the adapter files
-	assertz('$lgt_pp_term_position_'(Position)).
+	retractall('$lgt_pp_term_position_variables_'(_, _)),
+	'$lgt_read_term'(Stream, Term, Options, Position, Variables),	% defined in the adapter files
+	assertz('$lgt_pp_term_position_variables_'(Position, Variables)).
 
 
 
@@ -5420,7 +5423,7 @@ current_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_pp_cc_if_found_'(_)),
 	retractall('$lgt_pp_cc_skipping_'),
 	retractall('$lgt_pp_cc_mode_'(_)),
-	retractall('$lgt_pp_term_position_'(_)),
+	retractall('$lgt_pp_term_position_variables_'(_, _)),
 	% a Logtalk source file may contain only plain Prolog terms
 	% instead of plain Prolog terms intermixed between entities
 	% definitions; there might also be plain Prolog terms after
@@ -6919,7 +6922,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_add_predicate_scope_line_property'(PredicateIndicator) :-
 	(	'$lgt_compiler_flag'(source_data, on),
-		'$lgt_pp_term_position_'(Line-_) ->
+		'$lgt_pp_term_position_variables_'(Line-_, _) ->
 		'$lgt_pp_entity_'(_, Entity, _, _, _),
 		assertz('$lgt_pp_predicate_property_'(Entity, PredicateIndicator, declaration_line(Line)))
 	;	true
@@ -8260,7 +8263,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_save_predicate_line_definition_property'(Other, Functor, Arity) :-
 	(	'$lgt_compiler_flag'(source_data, on),
-		'$lgt_pp_term_position_'(Line-_) ->
+		'$lgt_pp_term_position_variables_'(Line-_, _) ->
 		'$lgt_pp_entity_'(_, Entity, _, _, _),
 		assertz('$lgt_pp_predicate_property_'(Other, Functor/Arity, definition_line_from(Line,Entity)))
 	;	true
@@ -8269,7 +8272,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_save_predicate_line_definition_property'(Functor, Arity) :-
 	(	'$lgt_compiler_flag'(source_data, on),
-		'$lgt_pp_term_position_'(Line-_) ->
+		'$lgt_pp_term_position_variables_'(Line-_, _) ->
 		'$lgt_pp_entity_'(_, Entity, _, _, _),
 		assertz('$lgt_pp_predicate_property_'(Entity, Functor/Arity, definition_line(Line)))
 	;	true
@@ -12191,7 +12194,7 @@ current_logtalk_flag(Flag, Value) :-
 % returns the current line numbers
 
 '$lgt_current_line_numbers'(Lines) :-
-	(	'$lgt_pp_term_position_'(Lines) ->
+	(	'$lgt_pp_term_position_variables_'(Lines, _) ->
 		true
 	;	stream_property(Input, alias(logtalk_compiler_input)),
 		'$lgt_stream_current_line_number'(Input, Lines) ->
@@ -12304,7 +12307,7 @@ current_logtalk_flag(Flag, Value) :-
 % returns the atom "none" if the location information is not available
 
 '$lgt_pp_term_location'(Location) :-
-	(	'$lgt_pp_term_position_'(Line-_),
+	(	'$lgt_pp_term_position_variables_'(Line-_, _),
 		'$lgt_pp_file_data_'(_, _, Path, _, _) ->
 		Location = Path+Line
 	;	'$lgt_pp_file_data_'(_, _, Path, _, _) ->

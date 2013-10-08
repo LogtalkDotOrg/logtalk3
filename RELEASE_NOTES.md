@@ -31,6 +31,11 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Key `variable_names/1` to the `logtalk_load_context/2` built-in
+predicate for getting the variable names of the last term read (following
+the lead of SWI-Prolog which provides the same key in its implementation
+of the `prolog_load_context/2` predicate).
+
 * FIXED: Regression in the performance of accessing the execution context when
 it's only necessary to get the value of `this`.
 
