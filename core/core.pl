@@ -4802,9 +4802,8 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	close(NewInput),
 	% finish writing the generated Prolog file
-	'$lgt_compiler_flag'(source_data, SourceData),
 	catch(
-		'$lgt_write_runtime_tables'(SourceData, Output),
+		'$lgt_write_runtime_tables'(Output),
 		OutputError,
 		'$lgt_compiler_stream_io_error_handler'(Output, OutputError)
 	),
@@ -4812,7 +4811,9 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_restore_global_operator_table'.
 
 
-'$lgt_write_runtime_tables'(SourceData, Output) :-
+'$lgt_write_runtime_tables'(Output) :-
+	% the reflective information to be written depends on the source_data flag
+	'$lgt_compiler_flag'(source_data, SourceData),
 	% write out any Prolog code occurring after the last source file entity
 	'$lgt_write_prolog_terms'(SourceData, Output),
 	% write entity runtime directives and clauses
@@ -5284,16 +5285,18 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_read_term'(@stream, -term, @list)
 %
-% remember term position in order to support logtalk_load_context/2
-% and more informative compiler warning and error messages
+% remember term position and variable names in order to support the
+% logtalk_load_context/2 predicate and more informative compiler warning
+% and error messages
 
 '$lgt_read_term'(Stream, Term, Options) :-
-	% we retract first the position for the previous read term as we
-	% may get a syntax error while reading the next term; this will
-	% allow us to use the stream position if necessary to find the
-	% approximated position of the error
+	% we retract first the position and variable names for the previous
+	% read term as we may get a syntax error while reading the next term;
+	% this will allow us to use the stream position if necessary to find
+	% the approximated position of the error
 	retractall('$lgt_pp_term_position_variables_'(_, _)),
-	'$lgt_read_term'(Stream, Term, Options, Position, Variables),	% defined in the adapter files
+	% the actual read term predicate is defined in the adapter files
+	'$lgt_read_term'(Stream, Term, Options, Position, Variables),
 	assertz('$lgt_pp_term_position_variables_'(Position, Variables)).
 
 
@@ -5311,7 +5314,9 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_tr_entity_flags'(+atom, -integer)
 %
-% defines the entity flags value when creating a new entity
+% defines the entity flags value when creating a new entity;
+% we use integers in decimal notation instead of binary notation
+% to avoid standard-compliance issues with some Prolog compilers
 
 '$lgt_tr_entity_flags'(protocol, Flags) :-
 	(	'$lgt_compiler_flag'(debug, on) ->
@@ -12191,15 +12196,15 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_current_line_numbers'(@stream)
 %
-% returns the current line numbers
+% returns the current term line numbers, reprtesented as a pair StartLine-EndLine
 
 '$lgt_current_line_numbers'(Lines) :-
 	(	'$lgt_pp_term_position_variables_'(Lines, _) ->
 		true
 	;	stream_property(Input, alias(logtalk_compiler_input)),
-		'$lgt_stream_current_line_number'(Input, Lines) ->
-		true
-	;	Lines = -1
+		'$lgt_stream_current_line_number'(Input, Line) ->
+		Lines = Line-Line
+	;	Lines = '-'(-1, -1)
 	).
 
 

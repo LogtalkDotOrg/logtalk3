@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Amzi! Prolog 7.6.1 and later versions
-%  Last updated on September 27, 2013
+%  Last updated on October 8, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -498,7 +498,7 @@ callable(Term) :-
 
 % '$lgt_read_term'(@stream, -term, +list, -position)
 
-'$lgt_read_term'(Stream, Term, Options, -1) :-
+'$lgt_read_term'(Stream, Term, Options, '-'(-1, -1)) :-
 	read_term(Stream, Term, Options).
 
 

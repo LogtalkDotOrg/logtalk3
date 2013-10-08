@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/09/13,
+		date is 2013/10/08,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -507,14 +507,14 @@
 
 	message_context(File, Lines, Type, Entity) -->
 		{copy_term(Entity, EntityCopy), numbervars(EntityCopy, 0, _)},
-		(	{integer(Lines)} ->
-			['  in file ~w above line ~d'-[File, Lines], nl, '  while compiling ~w ~q'-[Type, EntityCopy], nl]
+		(	{Lines = Line-Line} ->
+			['  in file ~w above line ~d'-[File, Line], nl, '  while compiling ~w ~q'-[Type, EntityCopy], nl]
 		;	['  in file ~w between lines ~w'-[File, Lines], nl, '  while compiling ~w ~q'-[Type, EntityCopy], nl]
 		).
 
 	message_context(File, Lines) -->
-		(	{integer(Lines)} ->
-			['  in file ~w above line ~d'-[File, Lines], nl]
+		(	{Lines = Line-Line} ->
+			['  in file ~w above line ~d'-[File, Line], nl]
 		;	['  in file ~w between lines ~w'-[File, Lines], nl]
 		).
 
