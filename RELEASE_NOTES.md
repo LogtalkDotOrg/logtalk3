@@ -43,6 +43,10 @@ it's only necessary to get the value of `this`.
 * FIXED: The definition of the `user` pseudo-object was missing the reference
 to the `forwarding` protocol.
 
+* FIXED: The multifile directives for the `logtalk` object debugging methods
+must be repeated also in the compiler/runtime file where they are called to
+allow constructing GNU Prolog executables that embed Logtalk.
+
 
 3.00.0 Alpha 26 - October 4, 2013
 =================================

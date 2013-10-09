@@ -170,6 +170,16 @@
 :- dynamic('$lgt_threaded_tag_counter_'/1).			% '$lgt_threaded_tag_counter_'(Tag)
 
 
+% debugging predicates
+
+:- multifile('$logtalk.trace_event'/3).
+:- dynamic('$logtalk.trace_event'/3).
+
+:- multifile('$logtalk.debug_handler_provider'/2).
+
+:- multifile('$logtalk.debug_handler'/3).
+
+
 % internal initialization flag
 
 :- dynamic('$lgt_default_entities_loaded_'/0).
