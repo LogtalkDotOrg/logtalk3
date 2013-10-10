@@ -9153,15 +9153,14 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		TPred = ':'(Module, Pred),
 		DPred = '$lgt_debug'(goal(':'(Module, Pred), TPred), ExCtx)
-	;	catch('$lgt_predicate_property'(':'(Module, Pred), meta_predicate(OriginalMeta)), _, fail) ->
+	;	(	'$lgt_pp_meta_predicate_'(':'(Module, Pred), ':'(Module, Meta))
+			% we're either overriding the original meta-predicate template or working around a
+			% backend Prolog compiler limitation in providing access to meta-predicate templates
+		;	catch('$lgt_predicate_property'(':'(Module, Pred), meta_predicate(Meta)), _, fail)
+		) ->
 		% we're compiling a call to a module meta-predicate
 		'$lgt_add_referenced_module'(Module),
 		'$lgt_add_referenced_module_predicate'(Module, Pred),
-		(	'$lgt_pp_meta_predicate_'(':'(Module, Pred), ':'(Module, OverridingMeta)) ->
-			% we're overriding the original meta-predicate template
-			Meta = OverridingMeta
-		;	Meta = OriginalMeta
-		),
 		Pred =.. [Functor| Args],
 		Meta =.. [Functor| MArgs],
 		'$lgt_prolog_to_logtalk_meta_argument_specifiers'(MArgs, CMArgs),
@@ -14005,11 +14004,10 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_fix_predicate_calls'(':'(Module, Pred), TPred).
 
 '$lgt_fix_predicate_calls'(':'(Module, Pred), ':'(Module, TPred)) :-
-	catch('$lgt_predicate_property'(':'(Module, Pred), meta_predicate(OriginalMeta)), _, fail),
-	(	'$lgt_pp_meta_predicate_'(':'(Module, Pred), ':'(Module, OverridingMeta)) ->
-		% we're overriding the original meta-predicate template
-		Meta = OverridingMeta
-	;	Meta = OriginalMeta
+	(	'$lgt_pp_meta_predicate_'(':'(Module, Pred), ':'(Module, Meta))
+		% we're either overriding the original meta-predicate template or working around a
+		% backend Prolog compiler limitation in providing access to meta-predicate templates
+	;	catch('$lgt_predicate_property'(':'(Module, Pred), meta_predicate(Meta)), _, fail)
 	),
 	!,
 	% fixing a call to a Prolog module meta-predicate

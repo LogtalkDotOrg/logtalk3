@@ -37,6 +37,10 @@ introduced by SWI-Prolog). This key, however, requires calling the standard
 built-in predicate `term_variables/2` on the term read and unifying the term
 variables with the variables in the names list.
 
+* IMPROVED: Support defining meta-predicate directives for module predicates
+when the backend Prolog compilers that don't provide access to meta-predicate
+templates.
+
 * FIXED: Regression in the performance of accessing the execution context when
 it's only necessary to get the value of `this`.
 
