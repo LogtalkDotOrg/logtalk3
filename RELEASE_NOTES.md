@@ -47,6 +47,10 @@ to the `forwarding` protocol.
 must be repeated also in the compiler/runtime file where they are called to
 allow constructing GNU Prolog executables that embed Logtalk.
 
+* FIXED: When compiling calls to built-in or library Prolog meta-predicates,
+take into account that the ECLiPSe module system does not provide a `user`
+pseudo-module.
+
 
 3.00.0 Alpha 26 - October 4, 2013
 =================================
