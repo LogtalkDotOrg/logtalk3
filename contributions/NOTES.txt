@@ -65,14 +65,22 @@ library entities using the queries:
 
 	| ?- {lgtdoc(loader)}.
 	...
-	| ?- lgtdoc::rlibrary(contributions, [xmldir('$LOGTALKUSER/docs/tmp')]).
 
-3. Run the command `lgt2html` on the `$LOGTALKUSER/docs/tmp` directory to
-generate (X)HTML documentation or the command `lgt2pdf` to generate PDF
-documentation. For example:
+	| ?- lgtdoc::library(flags, [xmldir('$LOGTALKUSER/docs/tmp1')]),
+		lgtdoc::library(pddl_parser, [xmldir('$LOGTALKUSER/docs/tmp2')]),
+		lgtdoc::library(verdi_neruda, [xmldir('$LOGTALKUSER/docs/tmp3')]),
+		lgtdoc::library(xml_parser, [xmldir('$LOGTALKUSER/docs/tmp4')]),
+		lgtdoc::file(iso8601, [xmldir('$LOGTALKUSER/docs/tmp5')]).
 
-	$ lgt2html -i contributions.html -t "Contributions documentation index"
+3. Run the command `lgt2html` on the temporary directories to generate the
+(X)HTML documentation or the command `lgt2pdf` to generate PDF documentation:
+
+	$ cd "$LOGTALKUSER/docs/tmp1" && lgt2html -i flags.html -t "Flags"
+	$ cd ../tmp2 && lgt2html -i pddl_parser.html -t "PDDL Parser"
+	$ cd ../tmp3 && lgt2html -i verdi_neruda.html -t "Verdi Neruda"
+	$ cd ../tmp4 && lgt2html -i xml_parser.html -t "XML Parser"
+	$ cd ../tmp5 && lgt2html && rm index.html
 
 After generating the (X)HTML and/or PDF documentation, you can move the
 files to the upper directory, `$LOGTALKUSER/docs`, and delete the temporary
-directory.
+directories.
