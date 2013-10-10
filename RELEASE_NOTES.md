@@ -41,8 +41,8 @@ variables with the variables in the names list.
 when the backend Prolog compilers that don't provide access to meta-predicate
 templates.
 
-* FIXED: Regression in the performance of accessing the execution context when
-it's only necessary to get the value of `this`.
+* FIXED: Execution context access performance regression when only the value
+of `this` is required.
 
 * FIXED: The definition of the `user` pseudo-object was missing the reference
 to the `forwarding` protocol.
@@ -64,11 +64,16 @@ no longer declare the `(:)/2` control construct as a built-in predicate.
 * IMPROVED: Definition of the internal `'$lgt_predicate_property'/2` predicate
 for ECLiPSe, which now returns properties (including meta-predicate templates)
 for both built-in and module predicates.
+Documentation
+-------------
+
+* IMPROVED: Indexing of the documentation of the contribution entities.
 
 Examples
 --------
 
-* ADDED: Support for ECLiPSe to the `symbiosis` example.
+* ADDED: Support for using ECLiPSe as the backend Prolog compiler to the
+`symbiosis` example.
 
 
 3.00.0 Alpha 26 - October 4, 2013
