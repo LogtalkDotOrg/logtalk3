@@ -55,6 +55,11 @@ allow constructing GNU Prolog executables that embed Logtalk.
 take into account that the ECLiPSe module system does not provide a `user`
 pseudo-module.
 
+Examples
+--------
+
+* ADDED: Support for ECLiPSe to the `symbiosis` example.
+
 
 3.00.0 Alpha 26 - October 4, 2013
 =================================

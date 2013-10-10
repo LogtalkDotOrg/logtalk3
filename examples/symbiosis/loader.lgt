@@ -9,16 +9,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-/*
-On Windows, the compilation of this example generates invalid file names for the XML
-documenting files. No problems on MacOS X and no problems expect in other POSIX systems.
-*/
-
 :- if((	current_logtalk_flag(prolog_dialect, Dialect),
-		(Dialect == gnu; Dialect == sicstus; Dialect == swi; Dialect == yap)
+		(Dialect == eclipse; Dialect == gnu; Dialect == sicstus; Dialect == swi; Dialect == yap)
 )).
 
-	:- if(current_logtalk_flag(prolog_dialect, sicstus)).
+	:- if(current_logtalk_flag(prolog_dialect, eclipse)).
+		:- use_module(library(lists)).
+	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
 		:- use_module(library(lists)).
 	:- elif(current_logtalk_flag(prolog_dialect, swi)).
 		:- use_module(library(apply), []).

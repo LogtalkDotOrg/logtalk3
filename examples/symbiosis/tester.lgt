@@ -8,8 +8,9 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
 :- if((	current_logtalk_flag(prolog_dialect, Dialect),
-		(Dialect == gnu; Dialect == sicstus; Dialect == swi; Dialect == yap)
+		(Dialect == eclipse; Dialect == gnu; Dialect == sicstus; Dialect == swi; Dialect == yap)
 )).
 
 	:- initialization((
