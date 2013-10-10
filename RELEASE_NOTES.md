@@ -55,6 +55,12 @@ allow constructing GNU Prolog executables that embed Logtalk.
 take into account that the ECLiPSe module system does not provide a `user`
 pseudo-module.
 
+Prolog adapter and integration files
+------------------------------------
+
+* CHANGED: The adapter files of Prolog compilers supporting a module system
+no longer declare the `(:)/2` control construct as a built-in predicate.
+
 Examples
 --------
 

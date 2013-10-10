@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Amzi! Prolog 7.6.1 and later versions
-%  Last updated on October 8, 2013
+%  Last updated on October 10, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -86,8 +86,6 @@ write_term(Stream, Term, _) :-
 
 % '$lgt_predicate_property'(+callable, ?predicate_property)
 
-'$lgt_predicate_property'(':'(_,_), built_in) :-
-	!.
 
 '$lgt_predicate_property'(Predicate, Property) :-
 	functor(Predicate, Functor, Arity),

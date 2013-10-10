@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Quintus Prolog 3.3~3.5
-%  Last updated on September 27, 2013
+%  Last updated on October 10, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -120,8 +120,6 @@ throw(Ball) :-
 
 % '$lgt_predicate_property'(+callable, ?predicate_property)
 
-'$lgt_predicate_property'(':'(_,_), built_in) :-
-	!.
 
 '$lgt_predicate_property'(Pred, Prop) :-
 	predicate_property(Pred, Prop).
