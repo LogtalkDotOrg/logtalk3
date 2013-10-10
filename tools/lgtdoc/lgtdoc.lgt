@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/09/28,
+		date is 2013/10/10,
 		comment is 'Documenting tool.',
 		remarks is [
 			'Compiling files for generating XML documentation' - 'All source files must be compiled with the "source_data" compiler flag turned on.',
@@ -106,10 +106,10 @@
 	file(Source, UserOptions) :-
 		locate_file(Source, File, Directory, StreamOptions),
 		merge_options(UserOptions, Options),
-		member(xmldir(Directory), Options), !,
+		member(xmldir(XMLDirectory), Options), !,
 		os::working_directory(Current),
-		os::make_directory(Directory),
-		os::change_directory(Directory),
+		os::make_directory(XMLDirectory),
+		os::change_directory(XMLDirectory),
 		process(File, Directory, Options, StreamOptions),
 		os::change_directory(Current).
 

@@ -25,6 +25,15 @@ RELEASE NOTES
 =============
 
 
+3.00.0 Alpha 28 - October ??, 2013
+==================================
+
+Tools
+-----
+
+* FIXED: Bug that prevented using the `lgtdoc::file/1-2` predicates.
+
+
 3.00.0 Alpha 27 - October 10, 2013
 ==================================
 
