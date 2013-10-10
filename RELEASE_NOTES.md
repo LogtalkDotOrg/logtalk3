@@ -61,6 +61,10 @@ Prolog adapter and integration files
 * CHANGED: The adapter files of Prolog compilers supporting a module system
 no longer declare the `(:)/2` control construct as a built-in predicate.
 
+* IMPROVED: Definition of the internal `'$lgt_predicate_property'/2` predicate
+for ECLiPSe, which now returns properties (including meta-predicate templates)
+for both built-in and module predicates.
+
 Examples
 --------
 

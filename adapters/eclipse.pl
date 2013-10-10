@@ -101,26 +101,33 @@ forall(Generate, Test) :-
 
 % '$lgt_predicate_property'(+callable, ?predicate_property)
 
-'$lgt_predicate_property'(numbervars(_,_,_), built_in) :-
-	!.
-
-'$lgt_predicate_property'(Predicate, built_in) :-
+'$lgt_predicate_property'(':'(Module,Predicate), Property) :-
+	!,
 	functor(Predicate, Functor, Arity),
-	current_built_in(Functor/Arity).
-
-'$lgt_predicate_property'(Predicate, dynamic) :-
+	'$lgt_eclipse_module_predicate_property'(Module, Functor/Arity, Property).
+'$lgt_predicate_property'(Predicate, Property) :-
+	!,
 	functor(Predicate, Functor, Arity),
-	current_predicate(Functor/Arity),
-	is_dynamic(Functor/Arity).
+	'$lgt_eclipse_plain_predicate_property'(Functor/Arity, Property).
 
-'$lgt_predicate_property'(Predicate, static) :-
-	functor(Predicate, Functor, Arity),
-	current_built_in(Functor/Arity).
+'$lgt_eclipse_module_predicate_property'(Module, Predicate, built_in) :-
+	get_flag(Predicate, type, built_in)@Module.
+'$lgt_eclipse_module_predicate_property'(Module, Predicate, dynamic) :-
+	get_flag(Predicate, stability, dynamic)@Module.
+'$lgt_eclipse_module_predicate_property'(Module, Predicate, static) :-
+	get_flag(Predicate, stability, static)@Module.
+'$lgt_eclipse_module_predicate_property'(Module, Predicate, meta_predicate(Template)) :-
+	get_flag(Predicate, meta_predicate, Template)@Module.
 
-'$lgt_predicate_property'(Predicate, static) :-
-	functor(Predicate, Functor, Arity),
-	current_predicate(Functor/Arity),
-	\+ is_dynamic(Functor/Arity).
+'$lgt_eclipse_plain_predicate_property'(numbervars/3, built_in).
+'$lgt_eclipse_plain_predicate_property'(Predicate, built_in) :-
+	get_flag(Predicate, type, built_in).
+'$lgt_eclipse_plain_predicate_property'(Predicate, dynamic) :-
+	get_flag(Predicate, stability, dynamic).
+'$lgt_eclipse_plain_predicate_property'(Predicate, static) :-
+	get_flag(Predicate, stability, static).
+'$lgt_eclipse_plain_predicate_property'(Predicate, meta_predicate(Template)) :-
+	get_flag(Predicate, meta_predicate, Template).
 
 
 
