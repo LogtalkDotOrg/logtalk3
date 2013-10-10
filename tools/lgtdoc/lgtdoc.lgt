@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/10/10,
+		date is 2013/10/11,
 		comment is 'Documenting tool.',
 		remarks is [
 			'Compiling files for generating XML documentation' - 'All source files must be compiled with the "source_data" compiler flag turned on.',
@@ -97,8 +97,10 @@
 		logtalk::loaded_file_property(Path, basename(File)),
 		logtalk::loaded_file_property(Path, text_properties(StreamOptions)),
 		\+ member(File, ExcludedFiles),
-		atom_concat(Source, '.lgt', File),
-		\+ member(Source, ExcludedFiles),
+		atom_concat(Source1, '.lgt', File),
+		\+ member(Source1, ExcludedFiles),
+		atom_concat(Source2, '.logtalk', File),
+		\+ member(Source2, ExcludedFiles),
 		process(File, Directory, Options, StreamOptions),
 		fail.
 	output_library_files(_, _).
@@ -133,28 +135,46 @@
 	all :-
 		all([]).
 
+	% file given in library notation
 	locate_file(LibraryNotation, File, Directory, StreamOptions) :-
-		compound(LibraryNotation), !,
-		LibraryNotation =.. [Library| Name],
+		compound(LibraryNotation),
+		!,
+		LibraryNotation =.. [Library, Name],
 		logtalk::expand_library_path(Library, LibraryPath),
 		atom_concat(LibraryPath, Name, Source),
 		locate_file(Source, File, Directory, StreamOptions).
-
+	% file given using its name or basename
 	locate_file(Source, File, Directory, StreamOptions) :-
-		atom(Source),
-		% first, add extension if missing
-		(	sub_atom(Source, _, 4, 0, '.lgt') ->
-			SourceWithExtension = Source
-		;	atom_concat(Source, '.lgt', SourceWithExtension)
-		),
+		add_extension(Source, File),
 		logtalk::loaded_file_property(Path, basename(File)),
 		logtalk::loaded_file_property(Path, directory(Directory)),
-		logtalk::loaded_file_property(Path, text_properties(StreamOptions)),
-		(	atom_concat(Directory, File, SourceWithExtension) ->
-			true
-		;	SourceWithExtension = File
+		% check that there isn't another file with the same basename
+		% from a different directory
+		\+ (
+			logtalk::loaded_file_property(OtherPath, basename(File)),
+			Path \== OtherPath
 		),
+		logtalk::loaded_file_property(Path, text_properties(StreamOptions)),
 		!.
+	% file given using a full path
+	locate_file(Source, File, Directory, StreamOptions) :-
+		add_extension(Source, SourceWithExtension),
+		logtalk::loaded_file_property(Path, basename(File)),
+		logtalk::loaded_file_property(Path, directory(Directory)),
+		atom_concat(Directory, File, SourceWithExtension),
+		logtalk::loaded_file_property(Path, text_properties(StreamOptions)),
+		!.
+
+	add_extension(Source, SourceWithExtension) :-
+		atom(Source),
+		(	sub_atom(Source, _, 4, 0, '.lgt') ->
+			SourceWithExtension = Source
+		;	sub_atom(Source, _, 8, 0, '.logtalk') ->
+			SourceWithExtension = Source
+		;	(	atom_concat(Source, '.lgt', SourceWithExtension)
+			;	atom_concat(Source, '.logtalk', SourceWithExtension)
+			)
+		).
 
 	process(File, Path, Options, StreamOptions) :-
 		once(member(exclude_entities(ExcludedEntities), Options)),

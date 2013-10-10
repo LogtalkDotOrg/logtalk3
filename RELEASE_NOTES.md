@@ -31,6 +31,11 @@ RELEASE NOTES
 Tools
 -----
 
+* IMPROVED: Extended the `lgtdoc` tool with support for the alternative
+`.logtalk` source file extension. Allow the file argument of the `file/1-2`
+predicates to be given by its name, basename, full path, or by using library
+notation.
+
 * FIXED: Bug that prevented using the `lgtdoc::file/1-2` predicates.
 
 

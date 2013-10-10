@@ -27,7 +27,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2012/09/27,
+		date is 2012/10/11,
 		comment is 'Documenting tool protocol.'
 	]).
 
@@ -62,14 +62,14 @@
 	:- public(file/2).
 	:- mode(file(+atom, +list), one).
 	:- info(file/2, [
-		comment is 'Creates XML documenting files for all entities in a loaded source file using the specified options.',
+		comment is 'Creates XML documenting files for all entities in a loaded source file using the specified options. The file can be given by name, basename, full path, or using library notation.',
 		argnames is ['File', 'Options']
 	]).
 
 	:- public(file/1).
 	:- mode(file(+atom), one).
 	:- info(file/1, [
-		comment is 'Creates XML documenting files for all entities in a loaded source file using default options.',
+		comment is 'Creates XML documenting files for all entities in a loaded source file using default options. The file can be given by name, basename, full path, or using library notation.',
 		argnames is ['File']
 	]).
 
