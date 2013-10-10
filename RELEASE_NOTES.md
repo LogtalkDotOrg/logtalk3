@@ -25,7 +25,7 @@ RELEASE NOTES
 =============
 
 
-3.00.0 Alpha 27 - October ??, 2013
+3.00.0 Alpha 27 - October 10, 2013
 ==================================
 
 Logtalk compiler and runtime
@@ -72,7 +72,7 @@ Documentation
 Examples
 --------
 
-* ADDED: Support for using ECLiPSe as the backend Prolog compiler to the
+* ADDED: Support for using ECLiPSe as the backend Prolog compiler for the
 `symbiosis` example.
 
 
