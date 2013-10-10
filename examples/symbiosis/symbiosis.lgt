@@ -25,7 +25,6 @@
 		:- uses(user, [maplist/2, maplist/3]).
 	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
 		:- use_module(lists, [checklist/2:maplist/2, maplist/3]).
-		:- meta_predicate(lists:maplist(2,*,*)).
 	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
 		:- use_module(lists, [maplist/2, maplist/3]).
 	:- elif(current_logtalk_flag(prolog_dialect, swi)).
