@@ -38,6 +38,13 @@ notation.
 
 * FIXED: Bug that prevented using the `lgtdoc::file/1-2` predicates.
 
+Prolog adapter and integration files
+------------------------------------
+
+* FIXED: The `swilgt.sh` POSIX integration script to throw away the output
+generated while detecting the name of the SWI-Prolog executable to make it
+silent for batch processing by applying a patch contributed by Daniel Lyons.
+
 
 3.00.0 Alpha 27 - October 10, 2013
 ==================================

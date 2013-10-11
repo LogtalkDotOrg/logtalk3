@@ -99,8 +99,8 @@ echo
 
 export LOGTALK_STARTUP_DIRECTORY=`pwd`
 
-if swipl -t halt 2>&1 | grep "SWI-Prolog"; then
+if swipl -t halt 2>&1 | grep "SWI-Prolog" > /dev/null; then
 	exec swipl -s "$LOGTALKHOME/integration/logtalk_swi.pl" "$@"
-elif pl -t halt 2>&1 | grep "SWI-Prolog"; then
+elif pl -t halt 2>&1 | grep "SWI-Prolog" > /dev/null; then
 	exec pl -s "$LOGTALKHOME/integration/logtalk_swi.pl" "$@"
 fi
