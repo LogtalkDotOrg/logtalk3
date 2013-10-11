@@ -21,26 +21,18 @@ Public License 3. Consult the `LICENSE.txt` file for details.
 ________________________________________________________________________
 
 
-To load this example and for sample queries, please see the `SCRIPT.txt`
+To load this tool and for sample queries, please see the `SCRIPT.txt`
 file.
 
-This example provides basic on-line help for Logtalk when running in a
-limited set of operating-systems and back-end Prolog compilers. Currently,
-support is limited to:
-
-- Operating-systems:  
-	Linux, MacOS X, and Windows
-	
-- Prolog compilers:  
-	B-Prolog, Ciao Prolog, CxProlog, ECLiPSe, GNU Prolog,
-	Qu-Prolog, SICStus Prolog, SWI-Prolog, XSB, and YAP
+This tool provides basic on-line help for Logtalk when running in a
+limited set of operating-systems. Currently, support is limited to
+Linux, MacOS X, and Windows.
 
 On Windows, the `start` command must be available. On Linux, the `xdg-open`
 command must be available. On MacOS X, the command `open` is used.
 
-The limited support for back-end Prolog compilers is due to the lack of
-portable access to the operating-system. This example relies on the `cc`
-example to provide a portable operating-system access abstraction.
+This tool relies on the `cc` example to provide a portable operating-system
+access abstraction.
 
 All source files are formatted using tabs (the recommended setting is a
 tab width equivalent to 4 spaces).
