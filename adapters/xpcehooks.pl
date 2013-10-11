@@ -3,7 +3,7 @@
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
-%  integration code for XPCE 6.6.21 and later versions supporting Logtalk 
+%  Integration code for XPCE 6.6.21 and later versions supporting Logtalk 
 %  message sending goals as call-backs goals
 %  Last updated on August 2, 2012
 %
