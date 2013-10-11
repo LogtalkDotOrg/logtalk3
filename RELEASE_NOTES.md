@@ -28,6 +28,15 @@ RELEASE NOTES
 3.00.0 Alpha 28 - October ??, 2013
 ==================================
 
+Logtalk compiler and runtime
+----------------------------
+
+* ADDED: Read-only flag `version_data`, whose value is the compound term
+`logtalk(Major,Minor,Patch,Status)` where the first three arguments are
+integers and the last argument is an atom, possibly empty, representing
+alpha or beta version status. The old `version` flag is still available
+for compatibility with Logtalk 2.x applications.
+
 Tools
 -----
 

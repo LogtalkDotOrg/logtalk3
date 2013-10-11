@@ -254,6 +254,17 @@ Logtalk also implements a <a title="Consult reference manual" href="../refman/di
 Note that the scope of the <code>set_logtalk_flag/2</code> directive is local to the entity or to the source file containing it.
 </p>
 
+<h4>Version flags</h4>
+
+	<dl>
+		<dt><code>version_data(Value)</code></dt>
+			<dd>Read-only flag whose value is the compound term <code>logtalk(Major,Minor,Patch,Status)</code>. The first three arguments are integers and the last argument is an atom, possibly empty, representing alpha or beta version status. The <code>version_data</code> flag is also a de facto standard for Prolog compilers.</dd>
+	</dl>
+	<dl>
+		<dt><code>version(Value)</code></dt>
+		<dd>Read-only flag, inherited from Logtalk 2.x, whose value is the compound term <code>version(Major,Minor,Patch)</code>. The arguments are integers. New applications that are not required to support Logtalk 2.x should use the <code>version_data</code> flag instead.</dd>
+	</dl>
+
 <h4>Lint flags</h4>
 
 	<dl>
@@ -702,7 +713,7 @@ When objects or categories containing grammar rules are compiled in debug mode, 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: September 24, 2013</span>
+		<span>Last updated on: October 11, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="installing.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="migration.html">next</a></span><br/>

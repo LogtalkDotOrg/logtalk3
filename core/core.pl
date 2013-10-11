@@ -1629,8 +1629,11 @@ threaded_notify(Message) :-
 	;	'$lgt_prolog_feature'(Name, CurrentValue) ->
 		% back-end Prolog compiler features
 		Value = CurrentValue
-	;	Name == version,
-		'$lgt_version'(Value)
+	;	Name == version_data ->
+		'$lgt_version_data'(Value)
+	;	Name == version ->
+		'$lgt_version_data'(logtalk(Major,Minor,Patch,_)),
+		Value = version(Major, Minor, Patch)
 	).
 
 
@@ -2102,11 +2105,11 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_version'(?compound)
+% '$lgt_version_data'(?compound)
 %
 % current Logtalk version for use with the current_logtalk_flag/2 predicate
 
-'$lgt_version'(version(3, 0, 0)).
+'$lgt_version_data'(logtalk(3, 0, 0, a28)).
 
 
 
@@ -15882,7 +15885,8 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_valid_flag'(source_data).
 '$lgt_valid_flag'(reload).
 % read-only compilation flags
-'$lgt_valid_flag'(version).
+'$lgt_valid_flag'(version_data).
+'$lgt_valid_flag'(version).		% deprecated
 % startup flags
 '$lgt_valid_flag'(settings_file).
 % back-end Prolog features
@@ -15909,8 +15913,9 @@ current_logtalk_flag(Flag, Value) :-
 %
 % true if the argument is a read only Logtalk flag name
 
-% Logtalk version flag
-'$lgt_read_only_flag'(version).
+% Logtalk version flags
+'$lgt_read_only_flag'(version_data).
+'$lgt_read_only_flag'(version).		% deprecated
 % startup flags
 '$lgt_read_only_flag'(settings_file).
 % back-end Prolog features
@@ -15996,6 +16001,8 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_valid_flag_value'(prolog_loader, Options) :-
 	'$lgt_is_list'(Options).
 
+'$lgt_valid_flag_value'(version_data, Version) :-
+	functor(Version, logtalk, 4).
 '$lgt_valid_flag_value'(version, Version) :-
 	functor(Version, version, 3).
 

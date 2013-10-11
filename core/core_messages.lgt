@@ -125,8 +125,11 @@
 		].
 
 	logtalk::message_tokens(banner, core) -->
-		{current_logtalk_flag(version, version(Major, Minor, Patch))},
-		[nl, 'Logtalk ~d.~d.~d'-[Major, Minor, Patch], nl, 'Copyright (c) 1998-2013 Paulo Moura'-[], nl, nl].
+		{current_logtalk_flag(version_data, logtalk(Major, Minor, Patch, Status))},
+		(	{Status == ''} ->
+			[nl, 'Logtalk ~d.~d.~d'-[Major, Minor, Patch], nl, 'Copyright (c) 1998-2013 Paulo Moura'-[], nl, nl]
+ 		;	[nl, 'Logtalk ~d.~d.~d-~w'-[Major, Minor, Patch, Status], nl, 'Copyright (c) 1998-2013 Paulo Moura'-[], nl, nl]
+		).
 
 	logtalk::message_tokens(default_flags, core) -->
 		{current_logtalk_flag(unknown_entities, Unknown),
