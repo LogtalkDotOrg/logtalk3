@@ -54,6 +54,9 @@ Prolog adapter and integration files
 generated while detecting the name of the SWI-Prolog executable to make it
 silent for batch processing by applying a patch contributed by Daniel Lyons.
 
+* UPDATED: The ECLiPSe adapter file to interpret the `++` meta-predicate mode
+indicator for ground terms as `*` (i.e. a normal argument in Logtalk syntax).
+
 
 3.00.0 Alpha 27 - October 10, 2013
 ==================================
