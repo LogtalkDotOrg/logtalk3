@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for IF/Prolog 5.3
-%  Last updated on October 10, 2013
+%  Last updated on October 14, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -553,7 +553,7 @@ callable(Term) :-
 %  Shortcuts to the Logtalk built-in predicates logtalk_load/1 and
 %  logtalk_make/1
 %
-%  defined in the adapter files in order to be able to comment it out in case
+%  defined in the adapter files to make it easier to comment them out in case
 %  of conflict with some Prolog native feature; it implies conformance with
 %  the ISO Prolog standard regarding the definition of the {}/1 syntax
 %

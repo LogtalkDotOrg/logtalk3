@@ -546,7 +546,7 @@ term_hash(Term, Depth, Range, Hash) :-
 %  Shortcuts to the Logtalk built-in predicates logtalk_load/1 and
 %  logtalk_make/1
 %
-%  defined in the adapter files in order to be able to comment it out in case
+%  defined in the adapter files to make it easier to comment them out in case
 %  of conflict with some Prolog native feature; it implies conformance with
 %  the ISO Prolog standard regarding the definition of the {}/1 syntax
 %
