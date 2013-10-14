@@ -149,7 +149,7 @@ setup_call_catcher_cleanup(Setup, Call, Catcher, Cleanup) :-
 '$lgt_prolog_meta_predicate'(with_mutex(_, _), with_mutex(*, 0), predicate).
 
 
-% '$lgt_prolog_meta_directive'(@callable, @callable)
+% '$lgt_prolog_meta_directive'(@callable, -callable)
 
 '$lgt_prolog_meta_directive'(index(_, _), index(/, *)).
 '$lgt_prolog_meta_directive'(thread_private(_), thread_private(/)).

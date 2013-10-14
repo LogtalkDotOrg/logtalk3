@@ -166,7 +166,7 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 '$lgt_prolog_meta_predicate'(with_ivar(_, _, _), with_ivar(*, *, 0), predicate).
 
 
-% '$lgt_prolog_meta_directive'(@callable, @callable)
+% '$lgt_prolog_meta_directive'(@callable, -callable)
 
 '$lgt_prolog_meta_directive'(_, _) :-
 	fail.

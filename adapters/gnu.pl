@@ -129,7 +129,7 @@ setup_call_cleanup(_, _, _) :-
 '$lgt_prolog_meta_predicate'(*->(_, _), *->(0, 0), control_construct).
 
 
-% '$lgt_prolog_meta_directive'(@callable, @callable)
+% '$lgt_prolog_meta_directive'(@callable, -callable)
 
 '$lgt_prolog_meta_directive'(built_in(_), built_in(/)).
 '$lgt_prolog_meta_directive'(built_in_fd(_), built_in_fd(/)).

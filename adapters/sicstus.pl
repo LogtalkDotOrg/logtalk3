@@ -163,7 +163,7 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 '$lgt_prolog_meta_predicate'(use_module(_, _, _), use_module(*, *, *), predicate).
 
 
-% '$lgt_prolog_meta_directive'(@callable, @callable)
+% '$lgt_prolog_meta_directive'(@callable, -callable)
 
 '$lgt_prolog_meta_directive'(volatile(_), volatile(/)).
 

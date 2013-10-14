@@ -168,7 +168,7 @@ format(Format, Arguments) :-
 '$lgt_prolog_meta_predicate'(one(_), one(0), predicate).
 
 
-% '$lgt_prolog_meta_directive'(@callable, @callable)
+% '$lgt_prolog_meta_directive'(@callable, -callable)
 
 '$lgt_prolog_meta_directive'(_, _) :-
 	fail.

@@ -186,7 +186,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 '$lgt_prolog_meta_predicate'(on_exception(*, 0, 0), predicate).
 
 
-% '$lgt_prolog_meta_directive'(@callable, @callable)
+% '$lgt_prolog_meta_directive'(@callable, -callable)
 
 '$lgt_prolog_meta_directive'(_, _) :-
 	fail.

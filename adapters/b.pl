@@ -154,7 +154,7 @@
 	'$lgt_bp_foreach_n_args'(N2, Meta).
 
 
-% '$lgt_prolog_meta_directive'(@callable, @callable)
+% '$lgt_prolog_meta_directive'(@callable, -callable)
 
 '$lgt_prolog_meta_directive'(eager_consume(_), eager_consume(/)).
 

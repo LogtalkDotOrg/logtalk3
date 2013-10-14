@@ -168,7 +168,7 @@
 '$lgt_prolog_meta_predicate'(use_module(_, _), use_module(*, *), predicate).
 
 
-% '$lgt_prolog_meta_directive'(@callable, @callable)
+% '$lgt_prolog_meta_directive'(@callable, -callable)
 
 '$lgt_prolog_meta_directive'(at_halt(_), at_halt(0)).
 '$lgt_prolog_meta_directive'(format_predicate(_, _), format_predicate(*, 0)).

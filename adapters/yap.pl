@@ -225,7 +225,7 @@
 '$lgt_prolog_meta_predicate'(use_module(_, _, _), use_module(*, *, *), predicate).
 
 
-% '$lgt_prolog_meta_directive'(@callable, @callable)
+% '$lgt_prolog_meta_directive'(@callable, -callable)
 
 '$lgt_prolog_meta_directive'(initialization(_, _), initialization(0, *)).
 '$lgt_prolog_meta_directive'(thread_initialization(_), thread_initialization(0)).

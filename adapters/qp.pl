@@ -208,7 +208,7 @@ format(Format, Arguments) :-
 	!.
 
 
-% '$lgt_prolog_meta_directive'(@callable, @callable)
+% '$lgt_prolog_meta_directive'(@callable, -callable)
 
 '$lgt_prolog_meta_directive'(inline(_, _), inline(0, 0)).
 

@@ -205,7 +205,7 @@ setup_call_cleanup(_, _, _) :-
 '$lgt_prolog_meta_predicate'(topcall(0), predicate).
 
 
-% '$lgt_prolog_meta_directive'(@callable, @callable)
+% '$lgt_prolog_meta_directive'(@callable, -callable)
 
 '$lgt_prolog_meta_directive'(_, _) :-
 	fail.

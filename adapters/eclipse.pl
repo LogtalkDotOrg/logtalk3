@@ -174,7 +174,7 @@ setup_call_cleanup(_, _, _) :-
 '$lgt_prolog_meta_predicate'(suspend(_, _, _, _), suspend(0, *, *, *), predicate).
 
 
-% '$lgt_prolog_meta_directive'(@callable, @callable)
+% '$lgt_prolog_meta_directive'(@callable, -callable)
 
 '$lgt_prolog_meta_directive'(demon(_), demon(/)).
 '$lgt_prolog_meta_directive'(inline(_, _), inline(/, /)).
