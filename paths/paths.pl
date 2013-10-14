@@ -177,6 +177,7 @@ logtalk_library_path(sync, threads('sync/')).
 logtalk_library_path(symdiff, examples('symdiff/')).
 logtalk_library_path(tabling, examples('tabling/')).
 logtalk_library_path(tak, threads('tak/')).
+logtalk_library_path(team, threads('team/')).
 logtalk_library_path(testing, examples('testing/')).
 logtalk_library_path(threads, examples('threads/')).
 logtalk_library_path(viewpoints, examples('viewpoints/')).
