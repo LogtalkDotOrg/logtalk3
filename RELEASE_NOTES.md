@@ -60,6 +60,9 @@ indicator for ground terms as `*` (i.e. a normal argument in Logtalk syntax).
 Examples
 --------
 
+* NEW: Atomic updates multi-threading example, `buckets`, based on the
+description of the corresponding Rosetta Code programming task.
+
 * NEW: Synchronous concurrency multi-threading example, `team`, based on the
 description of the corresponding Rosetta Code programming task.
 

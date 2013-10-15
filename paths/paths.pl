@@ -96,6 +96,7 @@ logtalk_library_path(birthdays, threads('birthdays/')).
 logtalk_library_path(blackboard, threads('blackboard/')).
 logtalk_library_path(bottles, examples('bottles/')).
 logtalk_library_path(bricks, examples('bricks/')).
+logtalk_library_path(buckets, threads('buckets/')).
 logtalk_library_path(buffer, threads('buffer/')).
 logtalk_library_path(cc, examples('cc/')).
 logtalk_library_path(classmethods, examples('classmethods/')).
