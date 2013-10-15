@@ -14,9 +14,10 @@ ________________________________________________________________________
 ...
 
 
-% start the producer and the consumer, each one running in its own thread:
+% start the file reader and the line writer, each one running in its own
+% thread:
 
-| ?- ?- team::start.
+| ?- team::start.
 a(0)
 a(1)
 a(2)
