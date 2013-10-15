@@ -40,23 +40,13 @@ for compatibility with Logtalk 2.x applications.
 * CHANGED: The `logtalk::loaded_file_property/2` property `flags/1` now
 returns both the explicit flags from a `logtalk_load/2` call and the flags
 set within the loaded file using source-file level `set_logtalk_flag/2`
-directives. This allows flags such as `reload/1` to be used e.g. in loader
-files with the expected consequences.
+directives. This allows e.g. flags such as `reload/1` to be set locally
+in loader files with the expected consequences.
 
 * FIXED: Bug where source-file level `set_logtalk_flag/2` directives would
 not be local to a file containing them and would leak into files loaded
 after it in a group as a consequence of an ancestor `logtalk_load/1-2` or
 `logtalk_compile/1-2` call.
-
-Tools
------
-
-* IMPROVED: Extended the `lgtdoc` tool with support for the alternative
-`.logtalk` source file extension. Allow the file argument of the `file/1-2`
-predicates to be given by its name, basename, full path, or by using library
-notation.
-
-* FIXED: Bug that prevented using the `lgtdoc::file/1-2` predicates.
 
 Prolog adapter and integration files
 ------------------------------------
@@ -67,6 +57,22 @@ silent for batch processing by applying a patch contributed by Daniel Lyons.
 
 * UPDATED: The ECLiPSe adapter file to interpret the `++` meta-predicate mode
 indicator for ground terms as `*` (i.e. a normal argument in Logtalk syntax).
+
+Documentation
+-------------
+
+* UPDATED: User Manual section on loader files, explaining how to set the
+`reload` flag locally to improve their usability during development.
+
+Tools
+-----
+
+* IMPROVED: Extended the `lgtdoc` tool with support for the alternative
+`.logtalk` source file extension. Allow the file argument of the `file/1-2`
+predicates to be given by its name, basename, full path, or by using library
+notation.
+
+* FIXED: Bug that prevented using the `lgtdoc::file/1-2` predicates.
 
 Examples
 --------
