@@ -37,6 +37,17 @@ integers and the last argument is an atom, possibly empty, representing
 alpha or beta version status. The old `version` flag is still available
 for compatibility with Logtalk 2.x applications.
 
+* CHANGED: The `logtalk::loaded_file_property/2` property `flags/1` now
+returns both the explicit flags from a `logtalk_load/2` call and the flags
+set within the loaded file using source-file level `set_logtalk_flag/2`
+directives. This allows flags such as `reload/1` to be used e.g. in loader
+files with the expected consequences.
+
+* FIXED: Bug where source-file level `set_logtalk_flag/2` directives would
+not be local to a file containing them and would leak into files loaded
+after it in a group as a consequence of an ancestor `logtalk_load/1-2` or
+`logtalk_compile/1-2` call.
+
 Tools
 -----
 
