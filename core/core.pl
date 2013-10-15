@@ -16905,7 +16905,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_threaded_notify'(@term, @object_identifier)
+% '$lgt_threaded_notify_ctg'(@term, @object_identifier)
 
 '$lgt_threaded_notify_ctg'(Msg, This) :-
 	'$lgt_current_object_'(This, Prefix, _, _, _, _, _, _, _, _, _),
