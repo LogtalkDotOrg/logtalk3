@@ -106,13 +106,13 @@
 	output_library_files(_, _).
 
 	file(Source, UserOptions) :-
-		locate_file(Source, File, Directory, StreamOptions),
+		locate_file(Source, Basename, Directory, StreamOptions),
 		merge_options(UserOptions, Options),
 		member(xmldir(XMLDirectory), Options), !,
 		os::working_directory(Current),
 		os::make_directory(XMLDirectory),
 		os::change_directory(XMLDirectory),
-		process(File, Directory, Options, StreamOptions),
+		process(Basename, Directory, Options, StreamOptions),
 		os::change_directory(Current).
 
 	file(Source) :-
@@ -136,32 +136,32 @@
 		all([]).
 
 	% file given in library notation
-	locate_file(LibraryNotation, File, Directory, StreamOptions) :-
+	locate_file(LibraryNotation, Basename, Directory, StreamOptions) :-
 		compound(LibraryNotation),
 		!,
 		LibraryNotation =.. [Library, Name],
 		logtalk::expand_library_path(Library, LibraryPath),
 		atom_concat(LibraryPath, Name, Source),
-		locate_file(Source, File, Directory, StreamOptions).
+		locate_file(Source, Basename, Directory, StreamOptions).
 	% file given using its name or basename
-	locate_file(Source, File, Directory, StreamOptions) :-
-		add_extension(Source, File),
-		logtalk::loaded_file_property(Path, basename(File)),
+	locate_file(Source, Basename, Directory, StreamOptions) :-
+		add_extension(Source, Basename),
+		logtalk::loaded_file_property(Path, basename(Basename)),
 		logtalk::loaded_file_property(Path, directory(Directory)),
 		% check that there isn't another file with the same basename
 		% from a different directory
 		\+ (
-			logtalk::loaded_file_property(OtherPath, basename(File)),
+			logtalk::loaded_file_property(OtherPath, basename(Basename)),
 			Path \== OtherPath
 		),
 		logtalk::loaded_file_property(Path, text_properties(StreamOptions)),
 		!.
 	% file given using a full path
-	locate_file(Source, File, Directory, StreamOptions) :-
+	locate_file(Source, Basename, Directory, StreamOptions) :-
 		add_extension(Source, SourceWithExtension),
-		logtalk::loaded_file_property(Path, basename(File)),
+		logtalk::loaded_file_property(Path, basename(Basename)),
 		logtalk::loaded_file_property(Path, directory(Directory)),
-		atom_concat(Directory, File, SourceWithExtension),
+		atom_concat(Directory, Basename, SourceWithExtension),
 		logtalk::loaded_file_property(Path, text_properties(StreamOptions)),
 		!.
 

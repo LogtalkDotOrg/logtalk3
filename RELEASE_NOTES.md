@@ -67,12 +67,11 @@ Documentation
 Tools
 -----
 
-* IMPROVED: Extended the `lgtdoc` tool with support for the alternative
-`.logtalk` source file extension. Allow the file argument of the `file/1-2`
-predicates to be given by its name, basename, full path, or by using library
-notation.
-
-* FIXED: Bug that prevented using the `lgtdoc::file/1-2` predicates.
+* IMPROVED: Extended the `lgtdoc` and `diagrams` tools with support for the
+alternative `.logtalk` source file extension. Allow the file argument of the
+`file/1-2` predicates to be given by its name, basename, full path, or by
+using library notation. Fixed bugs that could prevent using the `file/1-2`
+predicates.
 
 Examples
 --------
@@ -80,8 +79,8 @@ Examples
 * NEW: Atomic updates multi-threading example, `buckets`, based on the
 description of the corresponding Rosetta Code programming task.
 
-* NEW: Synchronous concurrency multi-threading example, `team`, based on the
-description of the corresponding Rosetta Code programming task.
+* NEW: Synchronous concurrency multi-threading example, `team`, based
+on the description of the corresponding Rosetta Code programming task.
 
 
 3.00.0 Alpha 27 - October 10, 2013

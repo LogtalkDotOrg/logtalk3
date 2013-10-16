@@ -25,9 +25,9 @@
 :- object(diagram).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2013/09/18,
+		date is 2013/10/16,
 		comment is 'Generates entity diagram DOT files for source files and libraries.'
 	]).
 
@@ -55,9 +55,9 @@
 		merge_options(UserOptions, Options),
 		logtalk::expand_library_path(Library, TopDirectory),
 		atom_concat(Library, '.dot', DotFile),
-		member(output_path(Directory), Options),
+		member(output_path(OutputPath), Options),
 		os::working_directory(Current),
-		os::change_directory(Directory),
+		os::change_directory(OutputPath),
 		open(DotFile, write, Stream, [alias(dot_file)]),
 		dot_header(Options),
 		reset_external_entities,
@@ -109,9 +109,9 @@
 		merge_options(UserOptions, Options),
 		logtalk::expand_library_path(Library, Path),
 		atom_concat(Library, '.dot', DotFile),
-		member(output_path(Directory), Options),
+		member(output_path(OutputPath), Options),
 		os::working_directory(Current),
-		os::change_directory(Directory),
+		os::change_directory(OutputPath),
 		open(DotFile, write, Stream, [alias(dot_file)]),
 		dot_header(Options),
 		reset_external_entities,
@@ -142,59 +142,46 @@
 	output_library_files(Directory, Options) :-
 		member(exclude_files(ExcludedFiles), Options),
 		logtalk::loaded_file_property(Path, directory(Directory)),
-		logtalk::loaded_file_property(Path, basename(File)),
+		logtalk::loaded_file_property(Path, basename(Basename)),
+		% files in the exclusion list may be given with or without extension
 		\+ member(File, ExcludedFiles),
-		atom_concat(Source, '.lgt', File),
-		\+ member(Source, ExcludedFiles),
-		output_file(File, Directory, Options),
+		atom_concat(Source1, '.lgt', File),
+		\+ member(Source1, ExcludedFiles),
+		atom_concat(Source2, '.logtalk', File),
+		\+ member(Source2, ExcludedFiles),
+		output_file(Basename, Directory, Options),
 		fail.
 	output_library_files(_, _).
 
 	:- public(file/2).
 	:- mode(file(+atom, +list), one).
 	:- info(file/2, [
-		comment is 'Creates a diagram for all entities in a loaded source file using the specified options. Supports library notation.',
+		comment is 'Creates a diagram for all entities in a loaded source file using the specified options. The file can be given by name, basename, full path, or using library notation.',
 		argnames is ['File', 'Options']
 	]).
 
 	:- public(file/1).
 	:- mode(file(+atom), one).
 	:- info(file/1, [
-		comment is 'Creates a diagram for all entities in a loaded source file using default options. Supports library notation.',
+		comment is 'Creates a diagram for all entities in a loaded source file using default options. The file can be given by name, basename, full path, or using library notation.',
 		argnames is ['File']
 	]).
 
-	file(Spec, UserOptions) :-
-		merge_options(UserOptions, Options),
-		compound(Spec),
-		Spec =.. [Library, Source],
-		logtalk::expand_library_path(Library, Directory),
-		atom_concat(Source, '.lgt', File),
-		atom_concat(Source, '.dot', DotFile),
-		member(output_path(Directory), Options),
-		os::working_directory(Current),
-		os::change_directory(Directory),
-		open(DotFile, write, Stream, [alias(dot_file)]),
-		dot_header(Options),
-		reset_external_entities,
-		output_file(File, Directory, Options),
-		output_external_entities,
-		dot_footer(Options),
-		close(Stream),
-		os::change_directory(Current).
-
 	file(Source, UserOptions) :-
+		locate_file(Source, Basename, Directory),
 		merge_options(UserOptions, Options),
-		atom(Source),
-		atom_concat(Source, '.lgt', File),
+		(	atom_concat(Source, '.lgt', Basename) ->
+			true
+		;	atom_concat(Source, '.logtalk', Basename)
+		),
 		atom_concat(Source, '.dot', DotFile),
-		member(output_path(Directory), Options),
+		member(output_path(OutputPath), Options),
 		os::working_directory(Current),
-		os::change_directory(Directory),
+		os::change_directory(OutputPath),
 		open(DotFile, write, Stream, [alias(dot_file)]),
 		dot_header(Options),
 		reset_external_entities,
-		output_file(File, _, Options),
+		output_file(Basename, Directory, Options),
 		output_external_entities,
 		dot_footer(Options),
 		close(Stream),
@@ -203,20 +190,62 @@
 	file(Source) :-
 		file(Source, []).
 
-	output_file(File, Directory, Options) :-
+	% file given in library notation
+	locate_file(LibraryNotation, Basename, Directory) :-
+		compound(LibraryNotation),
+		!,
+		LibraryNotation =.. [Library, Name],
+		logtalk::expand_library_path(Library, LibraryPath),
+		atom_concat(LibraryPath, Name, Source),
+		locate_file(Source, Basename, Directory).
+	% file given using its name or basename
+	locate_file(Source, Basename, Directory) :-
+		add_extension(Source, Basename),
+		logtalk::loaded_file_property(Path, basename(Basename)),
+		logtalk::loaded_file_property(Path, directory(Directory)),
+		% check that there isn't another file with the same basename
+		% from a different directory
+		\+ (
+			logtalk::loaded_file_property(OtherPath, basename(Basename)),
+			Path \== OtherPath
+		),
+		!.
+	% file given using a full path
+	locate_file(Source, Basename, Directory) :-
+		add_extension(Source, SourceWithExtension),
+		logtalk::loaded_file_property(Path, basename(Basename)),
+		logtalk::loaded_file_property(Path, directory(Directory)),
+		atom_concat(Directory, Basename, SourceWithExtension),
+		!.
+
+	add_extension(Source, SourceWithExtension) :-
+		atom(Source),
+		(	sub_atom(Source, _, 4, 0, '.lgt') ->
+			SourceWithExtension = Source
+		;	sub_atom(Source, _, 8, 0, '.logtalk') ->
+			SourceWithExtension = Source
+		;	(	atom_concat(Source, '.lgt', SourceWithExtension)
+			;	atom_concat(Source, '.logtalk', SourceWithExtension)
+			)
+		).
+
+	output_file(Basename, Directory, Options) :-
 		(	member(file_names(true), Options) ->
+			% use the full path for the cluster identifier as we
+			% can have more than file with the same basename
+			atom_concat(Directory, Basename, File),
 			write(dot_file, 'subgraph "cluster_'),
 			write(dot_file, File),
 			write(dot_file, '" {\n'),
 			write(dot_file, 'bgcolor=snow'),
 			write(dot_file, '\nlabel="'),
-			write(dot_file, File),
+			write(dot_file, Basename),
 			write(dot_file, '"'),
 			nl(dot_file),
-			process(File, Directory, Options),
+			process(Basename, Directory, Options),
 			write(dot_file, '}\n'),
 			nl(dot_file)
-		;	process(File, Directory, Options)
+		;	process(Basename, Directory, Options)
 		).
 
 	dot_header(Options) :-
@@ -303,23 +332,23 @@
 		write(dot_file, '}'),
 		nl(dot_file).
 
-	process(File, Directory, Options) :-
+	process(Basename, Directory, Options) :-
 		member(exclude_entities(ExcludedEntities), Options),
-		protocol_property(Protocol, file(File, Directory)),
+		protocol_property(Protocol, file(Basename, Directory)),
 		\+ member(Protocol, ExcludedEntities),
 		output_protocol(Protocol, Options),
 		assertz(included_entity_(Protocol)),
 		fail.
-	process(File, Directory, Options) :-
+	process(Basename, Directory, Options) :-
 		member(exclude_entities(ExcludedEntities), Options),
-		object_property(Object, file(File, Directory)),
+		object_property(Object, file(Basename, Directory)),
 		\+ member(Object, ExcludedEntities),
 		output_object(Object, Options),
 		assertz(included_entity_(Object)),
 		fail.
-	process(File, Directory, Options) :-
+	process(Basename, Directory, Options) :-
 		member(exclude_entities(ExcludedEntities), Options),
-		category_property(Category, file(File, Directory)),
+		category_property(Category, file(Basename, Directory)),
 		\+ member(Category, ExcludedEntities),
 		output_category(Category, Options),
 		assertz(included_entity_(Category)),
