@@ -25,6 +25,17 @@ RELEASE NOTES
 =============
 
 
+3.00.0 Beta 1 - November ??, 2013
+=================================
+
+Examples
+--------
+
+* ADDED: New individual synchronized predicate directive multi-threading
+example, `slow_print`, originally coded for a Rosetta Code programming
+task, to the `threads/sync` example.
+
+
 3.00.0 Alpha 28 - October 16, 2013
 ==================================
 

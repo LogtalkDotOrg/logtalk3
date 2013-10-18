@@ -10,5 +10,5 @@
 
 
 :- initialization(
-	logtalk_load(sync)
+	logtalk_load([nasty, slow_print])
 ). 

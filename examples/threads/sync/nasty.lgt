@@ -12,9 +12,9 @@
 :- object(nasty1).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2006/11/26,
+		date is 2013/10/18,
 		comment is 'Simple example for illustrating the problems with lack of thread synchronization when calling methods with side-effects.'
 	]).
 
@@ -59,15 +59,7 @@
 		write(5), waste_time, write(6), waste_time, write(7), waste_time, write(8), waste_time, write(9), nl.
 
 	waste_time :-
-		between(1, 10000, _),
-		fail.
-	waste_time.
-	
-	between(Lower, _, Lower).
-	between(Lower, Upper, Integer) :-
-		Lower < Upper,
-		Next is Lower + 1,
-		between(Next, Upper, Integer).
+		thread_sleep(0.2).
 
 :- end_object.
 
@@ -75,9 +67,9 @@
 :- object(nasty2).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2006/11/26,
+		date is 2013/10/18,
 		comment is 'Simple example for using the "synchronized" predicate directive for multi-threading methods with side-effects.'
 	]).
 
@@ -124,14 +116,6 @@
 		write(5), waste_time, write(6), waste_time, write(7), waste_time, write(8), waste_time, write(9), nl.
 
 	waste_time :-
-		between(1, 100000, _),
-		fail.
-	waste_time.
-	
-	between(Lower, _, Lower).
-	between(Lower, Upper, Integer) :-
-		Lower < Upper,
-		Next is Lower + 1,
-		between(Next, Upper, Integer).
+		thread_sleep(0.2).
 
 :- end_object.

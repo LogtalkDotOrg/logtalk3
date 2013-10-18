@@ -14,6 +14,21 @@ ________________________________________________________________________
 ...
 
 
+% slow print text
+
+| ?- slow_print::start.
+abc
+123
+abc
+123
+abc
+123
+abc
+123
+abc
+...
+
+
 % send three asynchronous messages whose corresponding methods perform output operations:
 
 | ?- threaded_ignore(nasty1::io(alpha)), threaded_ignore(nasty1::io(digit)), threaded_ignore(nasty1::io(alpha)).
