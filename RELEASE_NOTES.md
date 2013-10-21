@@ -28,18 +28,26 @@ RELEASE NOTES
 3.00.0 Beta 1 - November ??, 2013
 =================================
 
-Examples
---------
+Logtalk compiler and runtime
+----------------------------
 
-* ADDED: New individual synchronized predicate directive multi-threading
-example, `slow_print`, originally coded for a Rosetta Code programming
-task, to the `threads/sync` example.
+* IMPROVED: The compiler now accepts explicit-qualified module calls for the
+built-in database predicates without requiring wrapping the module call with
+the `{}/1` control construct (due to the frequently ambiguous meta-predicate
+templates of the database predicates).
 
 Prolog adapter and integration files
 ------------------------------------
 
 * ADDED: Declaration of non-standard built-in database predicates to the
 adapter files of all supported backend Prolog compilers.
+
+Examples
+--------
+
+* ADDED: New individual synchronized predicate directive multi-threading
+example, `slow_print`, originally coded for a Rosetta Code programming
+task, to the `threads/sync` example.
 
 
 3.00.0 Alpha 28 - October 16, 2013

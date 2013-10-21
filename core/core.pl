@@ -9156,7 +9156,10 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		TPred = ':'(Module, Pred),
 		DPred = '$lgt_debug'(goal(':'(Module, Pred), TPred), ExCtx)
-	;	(	'$lgt_pp_meta_predicate_'(':'(Module, Pred), ':'(Module, Meta))
+	;	\+ '$lgt_prolog_built_in_database_predicate'(Pred),
+		% the meta-predicate templates for the database predicates are usaully not
+		% usable for Logtalk due the ambiguity of the ":" meta-argument qualifier
+		(	'$lgt_pp_meta_predicate_'(':'(Module, Pred), ':'(Module, Meta))
 			% we're either overriding the original meta-predicate template or working around a
 			% backend Prolog compiler limitation in providing access to meta-predicate templates
 		;	catch('$lgt_predicate_property'(':'(Module, Pred), meta_predicate(Meta)), _, fail)
@@ -15145,7 +15148,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_prolog_built_in_predicate'(+callable)
+% '$lgt_prolog_built_in_predicate'(@callable)
 %
 % either host Prolog native built-ins or missing ISO built-ins
 % that we have defined in the correspondent adapter file
@@ -15159,6 +15162,22 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_prolog_built_in_predicate'(Pred) :-
 	% ISO Prolog built-in predicate (defined in the adapter files)
 	'$lgt_iso_predicate'(Pred).
+
+
+
+% '$lgt_prolog_built_in_database_predicate'(@callable)
+%
+% ISO Prolog standard and proprietary database predicates 
+
+'$lgt_prolog_built_in_database_predicate'(Term) :-
+	'$lgt_iso_database_predicate'(Term),
+	% ISO Prolog standard database predicate
+	!.
+
+'$lgt_prolog_built_in_database_predicate'(Term) :-
+	'$lgt_prolog_database_predicate'(Term),
+	% proprietary database predicate (declared in the adapter files)
+	!.
 
 
 
@@ -16559,7 +16578,7 @@ current_logtalk_flag(Flag, Value) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  table of ISO specified predicates
+%  table of ISO Prolog specified built-in predicates
 %
 %  (used for portability checking)
 %
@@ -16727,7 +16746,7 @@ current_logtalk_flag(Flag, Value) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  table of ISO specified arithmetic functions
+%  table of ISO Prolog specified arithmetic functions
 %
 %  (used for portability checking)
 %
@@ -16786,7 +16805,7 @@ current_logtalk_flag(Flag, Value) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  table of ISO specified flags
+%  table of ISO Prolog specified flags
 %
 %  (used for portability checking)
 %
@@ -16840,6 +16859,26 @@ current_logtalk_flag(Flag, Value) :-
 	atom(Value).
 '$lgt_iso_spec_flag_value'(version_data, Value) :-
 	compound(Value).
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  table of ISO Prolog specified built-in database predicates
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+% '$lgt_iso_database_predicate'(@callble)
+
+'$lgt_iso_database_predicate'(abolish(_)).
+'$lgt_iso_database_predicate'(asserta(_)).
+'$lgt_iso_database_predicate'(assertz(_)).
+'$lgt_iso_database_predicate'(clause(_, _)).
+'$lgt_iso_database_predicate'(retract(_)).
+'$lgt_iso_database_predicate'(retractall(_)).
 
 
 
