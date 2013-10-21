@@ -35,6 +35,12 @@ Examples
 example, `slow_print`, originally coded for a Rosetta Code programming
 task, to the `threads/sync` example.
 
+Prolog adapter and integration files
+------------------------------------
+
+* ADDED: Declaration of non-standard built-in database predicates to the
+adapter files of all supported backend Prolog compilers.
+
 
 3.00.0 Alpha 28 - October 16, 2013
 ==================================

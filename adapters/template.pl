@@ -143,6 +143,12 @@ numbervars(Term, From, Next) :-
 	fail.
 
 
+% '$lgt_prolog_database_predicate'(@callable)
+
+'$lgt_prolog_database_predicate'(_) :-
+	fail.
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %

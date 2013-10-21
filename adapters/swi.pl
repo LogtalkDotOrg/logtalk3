@@ -184,6 +184,15 @@
 '$lgt_prolog_to_logtalk_meta_argument_specifier_hook'((//), 2).
 
 
+% '$lgt_prolog_database_predicate'(@callable)
+
+'$lgt_prolog_database_predicate'(assert(_)).
+'$lgt_prolog_database_predicate'(assert(_, _)).
+'$lgt_prolog_database_predicate'(asserta(_, _)).
+'$lgt_prolog_database_predicate'(assertz(_, _)).
+'$lgt_prolog_database_predicate'(clause(_, _, _)).
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
