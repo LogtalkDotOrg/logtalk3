@@ -45,9 +45,12 @@ adapter files of all supported backend Prolog compilers.
 Examples
 --------
 
-* ADDED: New individual synchronized predicate directive multi-threading
-example, `slow_print`, originally coded for a Rosetta Code programming
-task, to the `threads/sync` example.
+* NEW: Barrier synchronization multi-threading example, `checkpoint`,
+originally coded for a Rosetta Code programming task.
+
+* NEW: Synchronized predicate directive multi-threading example,
+`slow_print`, originally coded for a Rosetta Code programming
+task (added to the `threads/sync` example).
 
 
 3.00.0 Alpha 28 - October 16, 2013

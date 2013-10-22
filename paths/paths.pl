@@ -99,6 +99,7 @@ logtalk_library_path(bricks, examples('bricks/')).
 logtalk_library_path(buckets, threads('buckets/')).
 logtalk_library_path(buffer, threads('buffer/')).
 logtalk_library_path(cc, examples('cc/')).
+logtalk_library_path(checkpoint, threads('checkpoint/')).
 logtalk_library_path(classmethods, examples('classmethods/')).
 logtalk_library_path(classvars, examples('classvars/')).
 logtalk_library_path(clp_bp, constraints('bp/')).
