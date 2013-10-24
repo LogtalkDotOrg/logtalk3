@@ -1,0 +1,34 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the `LICENSE.txt` file for details.
+________________________________________________________________________
+
+
+% start by loading the loading the example:
+
+| ?- logtalk_load(metered_concurrency(loader)).
+...
+
+
+% run example:
+
+?- metered_concurrency::run.
+Worker 1 acquired semaphore
+Worker 6 acquired semaphore
+Worker 1 releasing semaphore
+Worker 2 acquired semaphore
+Worker 6 releasing semaphore
+Worker 5 acquired semaphore
+Worker 2 releasing semaphore
+Worker 7 acquired semaphore
+Worker 5 releasing semaphore
+Worker 3 acquired semaphore
+Worker 7 releasing semaphore
+Worker 4 acquired semaphore
+Worker 3 releasing semaphore
+Worker 4 releasing semaphore
+yes

@@ -144,6 +144,7 @@ logtalk_library_path(metaclasses, examples('metaclasses/')).
 logtalk_library_path(metainterpreters, examples('metainterpreters/')).
 logtalk_library_path(metapredicates, examples('metapredicates/')).
 logtalk_library_path(metapredicates_compiled, examples('metapredicates_compiled/')).
+logtalk_library_path(metered_concurrency, threads('metered_concurrency/')).
 logtalk_library_path(mi, examples('mi/')).
 logtalk_library_path(miscellaneous, examples('miscellaneous/')).
 logtalk_library_path(modules, examples('modules/')).

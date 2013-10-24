@@ -45,6 +45,9 @@ adapter files of all supported backend Prolog compilers.
 Examples
 --------
 
+* NEW: Metered concurrency multi-threading example, `metered_concurrency`,
+originally coded for a Rosetta Code programming task.
+
 * NEW: Barrier synchronization multi-threading example, `checkpoint`,
 originally coded for a Rosetta Code programming task.
 
