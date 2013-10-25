@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Quintus Prolog 3.3~3.5
-%  Last updated on October 14, 2013
+%  Last updated on October 21, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -196,6 +196,15 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 
 '$lgt_prolog_to_logtalk_meta_argument_specifier_hook'(_, _) :-
 	fail.
+
+
+% '$lgt_prolog_database_predicate'(@callable)
+
+'$lgt_prolog_database_predicate'(assert(_)).
+'$lgt_prolog_database_predicate'(assert(_, _)).
+'$lgt_prolog_database_predicate'(asserta(_, _)).
+'$lgt_prolog_database_predicate'(assertz(_, _)).
+'$lgt_prolog_database_predicate'(clause(_, _, _)).
 
 
 

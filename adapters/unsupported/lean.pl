@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Lean Prolog 3.7.10 and later versions
-%  Last updated on September 27, 2013
+%  Last updated on October 21, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -267,6 +267,11 @@ to_engine(Interactor, Pattern, Goal) :-
 
 '$lgt_prolog_to_logtalk_meta_argument_specifier_hook'(_, _) :-
 	fail.
+
+
+% '$lgt_prolog_database_predicate'(@callable)
+
+'$lgt_prolog_database_predicate'(assert(_)).
 
 
 

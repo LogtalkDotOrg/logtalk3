@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for BinProlog 8.x~10.x
-%  Last updated on October 14, 2013
+%  Last updated on October 21, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -214,6 +214,12 @@ setup_call_cleanup(_, _, _) :-
 % '$lgt_prolog_to_logtalk_meta_argument_specifier_hook'(@nonvar, -atom)
 
 '$lgt_prolog_to_logtalk_meta_argument_specifier_hook'(_, _) :-
+	fail.
+
+
+% '$lgt_prolog_database_predicate'(@callable)
+
+'$lgt_prolog_database_predicate'(_) :-
 	fail.
 
 
