@@ -14,8 +14,6 @@
 
 #define MyBaseDir "C:\lgt3git"
 #define MyAppVer FileRead(FileOpen(MyBaseDir + "\VERSION.txt"))
-#define MyAppVerNumberString StringChange(StringChange(MyAppVer, ".", ""), "-", "")
-#define MyAppVerNumberInteger Int(MyAppVerNumberString)
 
 [Setup]
 AppName={#MyAppName}
@@ -32,7 +30,7 @@ DisableProgramGroupPage=yes
 LicenseFile={#MyBaseDir}\scripts\windows\LICENSE.rtf
 InfoBeforeFile={#MyBaseDir}\scripts\windows\README.rtf
 ; SetupIconFile={#MyBaseDir}\scripts\windows\logtalk.ico
-OutputBaseFilename=lgt{#MyAppVerNumberString}
+OutputBaseFilename=lgt{#MyAppVer}
 Compression=lzma
 SolidCompression=yes
 PrivilegesRequired=none
@@ -166,7 +164,7 @@ Name: "{userdesktop}\Logtalk user files"; Filename: "{code:GetLgtUserDir}"; Comp
 
 [Registry]
 ; admin users
-Root: HKLM; Subkey: "Software\Logtalk"; ValueType: dword; ValueName: "Version"; ValueData: "{#MyAppVerNumberInteger}"; Components: base; Flags: deletevalue uninsdeletevalue; Check: IsAdminLoggedOn
+Root: HKLM; Subkey: "Software\Logtalk"; ValueType: string; ValueName: "Version"; ValueData: "{#MyAppVer}"; Components: base; Flags: deletevalue uninsdeletevalue; Check: IsAdminLoggedOn
 Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Control\Session Manager\Environment"; ValueType: expandsz; ValueName: "LOGTALKHOME"; ValueData: "{app}"; Components: base; Flags: deletevalue uninsdeletevalue; Check: IsAdminLoggedOn
 Root: HKCU; Subkey: "Environment"; ValueType: expandsz; ValueName: "LOGTALKUSER"; ValueData: "{code:GetLgtUserDir}"; Flags: deletevalue uninsdeletevalue; Check: IsAdminLoggedOn
 Root: HKLM; Subkey: "SOFTWARE\Classes\MIME\Database\Content Type\text/x-logtalk"; Components: base; Flags: uninsdeletevalue; Check: IsAdminLoggedOn
@@ -176,7 +174,7 @@ Root: HKCR; Subkey: ".lgt"; ValueType: string; ValueName: ""; ValueData: "Logtal
 Root: HKCR; Subkey: ".logtalk"; ValueType: string; ValueName: ""; ValueData: "LogtalkSourceFile"; Components: base; Flags: uninsdeletevalue; Check: IsAdminLoggedOn
 Root: HKCR; Subkey: "LogtalkSourceFile"; ValueType: string; ValueName: ""; ValueData: "Logtalk source file"; Components: base; Flags: uninsdeletekey; Check: IsAdminLoggedOn
 ; non-admin users
-Root: HKCU; Subkey: "Software\Logtalk"; ValueType: dword; ValueName: "Version"; ValueData: "{#MyAppVerNumberInteger}"; Components: base; Flags: deletevalue uninsdeletevalue; Check: not IsAdminLoggedOn
+Root: HKCU; Subkey: "Software\Logtalk"; ValueType: string; ValueName: "Version"; ValueData: "{#MyAppVer}"; Components: base; Flags: deletevalue uninsdeletevalue; Check: not IsAdminLoggedOn
 Root: HKCU; Subkey: "Environment"; ValueType: expandsz; ValueName: "LOGTALKHOME"; ValueData: "{app}"; Components: base; Flags: deletevalue uninsdeletevalue; Check: not IsAdminLoggedOn
 Root: HKCU; Subkey: "Environment"; ValueType: expandsz; ValueName: "LOGTALKUSER"; ValueData: "{code:GetLgtUserDir}"; Flags: deletevalue uninsdeletevalue; Check: not IsAdminLoggedOn
 Root: HKCU; Subkey: "SOFTWARE\Classes\MIME\Database\Content Type\text/x-logtalk"; Components: base; Flags: uninsdeletevalue; Check: not IsAdminLoggedOn
@@ -252,7 +250,7 @@ begin
   if Result = 'prolog_compiler_not_installed' then
   begin
     Warning := 'Failed to detect B-Prolog installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
-	  MsgBox(Warning, mbError, MB_OK);
+    MsgBox(Warning, mbError, MB_OK);
   end
 end;
 
@@ -274,7 +272,7 @@ begin
   if Result = 'prolog_compiler_not_installed' then
   begin
     Warning := 'Failed to detect CxProlog installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
-	MsgBox(Warning, mbError, MB_OK);
+  MsgBox(Warning, mbError, MB_OK);
   end
 end;
 
@@ -357,7 +355,7 @@ begin
   if Result = 'prolog_compiler_not_installed' then
   begin
     Warning := 'Failed to detect SICStus Prolog installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
-	MsgBox(Warning, mbError, MB_OK);
+  MsgBox(Warning, mbError, MB_OK);
   end
 end;
 
@@ -397,7 +395,7 @@ begin
   if Result = 'prolog_compiler_not_installed' then
   begin
     Warning := 'Failed to detect SWI-Prolog installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
-	MsgBox(Warning, mbError, MB_OK)
+  MsgBox(Warning, mbError, MB_OK)
   end
 end;
 
@@ -437,7 +435,7 @@ begin
   if Result = 'prolog_compiler_not_installed' then
   begin
     Warning := 'Failed to detect SWI-Prolog installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
-	MsgBox(Warning, mbError, MB_OK)
+  MsgBox(Warning, mbError, MB_OK)
   end
 end;
 
@@ -464,7 +462,7 @@ begin
   if Result = 'prolog_compiler_not_installed' then
   begin
     Warning := 'Failed to detect XSB installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
-	MsgBox(Warning, mbError, MB_OK);
+  MsgBox(Warning, mbError, MB_OK);
   end
 end;
 
@@ -491,7 +489,7 @@ begin
   if Result = 'prolog_compiler_not_installed' then
   begin
     Warning := 'Failed to detect XSB-MT installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
-	MsgBox(Warning, mbError, MB_OK);
+  MsgBox(Warning, mbError, MB_OK);
   end
 end;
 
@@ -520,7 +518,7 @@ begin
   if Result = 'prolog_compiler_not_installed' then
   begin
     Warning := 'Failed to detect YAP installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
-	MsgBox(Warning, mbError, MB_OK);
+  MsgBox(Warning, mbError, MB_OK);
   end
 end;
 
@@ -549,7 +547,7 @@ begin
   if Result = 'prolog_compiler_not_installed' then
   begin
     Warning := 'Failed to detect YAP installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
-	MsgBox(Warning, mbError, MB_OK);
+  MsgBox(Warning, mbError, MB_OK);
   end
 end;
 
@@ -571,7 +569,7 @@ end;
 
 procedure InitializeWizard;
 var
-  Version, InstalledVersion: Cardinal;
+  Version, InstalledVersion: String;
   LOGTALKHOME, LOGTALKUSER: String;
 begin
   if IsAdminLoggedOn then
@@ -599,7 +597,7 @@ begin
     LgtUserDirPage.Values[0] := LOGTALKUSER
   else 
     LgtUserDirPage.Values[0] := ExpandConstant('{userdocs}') + '\Logtalk';
-  if not IsAdminLoggedOn and RegQueryDWordValue(HKLM, 'Software\Logtalk', 'Version', Version) then
+  if not IsAdminLoggedOn and RegQueryStringValue(HKLM, 'Software\Logtalk', 'Version', Version) then
   begin
     Warning := 'You are running this installer from a non-administrative account.'
                + Chr(13) + Chr(13)
@@ -610,20 +608,22 @@ begin
     WizardForm.TypesCombo.ItemIndex := 2;
     WizardForm.TypesCombo.OnChange(WizardForm.TypesCombo)
   end;
-  if RegQueryDWordValue(HKCU, 'Software\Logtalk', 'Version', Version) then
+  if RegQueryStringValue(HKCU, 'Software\Logtalk', 'Version', Version) then
     InstalledVersion := Version
-  else if RegQueryDWordValue(HKLM, 'Software\Logtalk', 'Version', Version) then
+  else if RegQueryStringValue(HKLM, 'Software\Logtalk', 'Version', Version) then
     InstalledVersion := Version
   else if RegQueryStringValue(HKCU, 'Environment', 'LOGTALKHOME', LOGTALKHOME) and DirExists(LOGTALKHOME) then
-    InstalledVersion := 0
+    InstalledVersion := 'no_installed'
   else if RegQueryStringValue(HKLM, 'SYSTEM\CurrentControlSet\Control\Session Manager\Environment', 'LOGTALKHOME', LOGTALKHOME) and DirExists(LOGTALKHOME) then
-    InstalledVersion := 0
+    InstalledVersion := 'no_installed'
   else
-    InstalledVersion := -1;
-  if (InstalledVersion >= 0) and (InstalledVersion < {#MyAppVerNumberInteger}) then
+    InstalledVersion := 'no_installed';
+  if (CompareStr(InstalledVersion, 'no_installed') <> 0) and (CompareStr(InstalledVersion, ExpandConstant('{#MyAppVer}')) < 0) then
   begin
-    Warning := 'Your Logtalk user directory is outdated!'
-               + Chr(13) + Chr(13)
+    Warning := 'Your Logtalk user directory is outdated:'
+               + Chr(13)
+               + InstalledVersion + ' < ' + ExpandConstant('{#MyAppVer}')
+               + Chr(13)
                + 'You must updade your Logtalk user folder by performing a full installation.'
                + Chr(13) + Chr(13)
                + 'All aditional Logtalk users on your computer must also use this installer to update their Logtalk user folders.';

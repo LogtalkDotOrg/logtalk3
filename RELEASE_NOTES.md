@@ -42,6 +42,11 @@ Prolog adapter and integration files
 * ADDED: Declaration of non-standard built-in database predicates to the
 adapter files of all supported backend Prolog compilers.
 
+Installers and installation scripts
+-----------------------------------
+
+* CHANGED: The `VERSION.txt` file now includes the development status data.
+
 Examples
 --------
 

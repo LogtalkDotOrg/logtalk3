@@ -81,10 +81,11 @@ if [ -d "$LOGTALKUSER" ]; then
 		echo "Creating an up-to-date Logtalk user directory..."
 		logtalk_user_setup
 	else
-		system_version=`cat $LOGTALKHOME/VERSION.txt | sed -e 's/-//g' -e 's/\.//g'`
-		user_version=`cat $LOGTALKUSER/VERSION.txt | sed -e 's/-//g' -e 's/\.//g'`
-		if [ $user_version -lt $system_version ]; then
-			echo "Logtalk user directory at $LOGTALKUSER is outdated!"
+		system_version=`cat $LOGTALKHOME/VERSION.txt`
+		user_version=`cat $LOGTALKUSER/VERSION.txt`
+		if [ "$user_version" \< "$system_version" ]; then
+			echo "Logtalk user directory at $LOGTALKUSER is outdated: "
+			echo "    $user_version < $system_version"
 			echo "Creating an up-to-date Logtalk user directory..."
 			logtalk_user_setup
 		fi
