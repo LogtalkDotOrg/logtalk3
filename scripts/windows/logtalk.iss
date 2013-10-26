@@ -620,10 +620,8 @@ begin
     InstalledVersion := 'no_installed';
   if (CompareStr(InstalledVersion, 'no_installed') <> 0) and (CompareStr(InstalledVersion, ExpandConstant('{#MyAppVer}')) < 0) then
   begin
-    Warning := 'Your Logtalk user directory is outdated:'
-               + Chr(13)
-               + InstalledVersion + ' < ' + ExpandConstant('{#MyAppVer}')
-               + Chr(13)
+    Warning := 'Your Logtalk user directory is outdated: ' + InstalledVersion + ' < ' + ExpandConstant('{#MyAppVer}')
+               + Chr(13) + Chr(13)
                + 'You must updade your Logtalk user folder by performing a full installation.'
                + Chr(13) + Chr(13)
                + 'All aditional Logtalk users on your computer must also use this installer to update their Logtalk user folders.';
