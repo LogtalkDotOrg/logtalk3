@@ -35,7 +35,7 @@ Compression=lzma
 SolidCompression=yes
 PrivilegesRequired=none
 
-VersionInfoVersion={#MyAppVer}
+VersionInfoTextVersion={#MyAppVer}
 VersionInfoCopyright=© Paulo Moura, Copyright (c) 1998-2013
 
 AllowRootDirectory=yes
