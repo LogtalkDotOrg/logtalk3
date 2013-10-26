@@ -42,10 +42,16 @@ Prolog adapter and integration files
 * ADDED: Declaration of non-standard built-in database predicates to the
 adapter files of all supported backend Prolog compilers.
 
+* UPDATED: POSIX integration scripts and the Windows installer script to
+deal with alphanumeric version data.
+
 Installers and installation scripts
 -----------------------------------
 
 * CHANGED: The `VERSION.txt` file now includes the development status data.
+Besides consistency with the `version_data` flag value, this change allows
+the installers to be automatically named after the development status and
+version.
 
 Examples
 --------
