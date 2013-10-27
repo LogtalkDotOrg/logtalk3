@@ -27,19 +27,17 @@
 
 
 print_version() {
-	echo "`basename $0` 0.5"
+	echo "`basename $0` 0.6"
 	exit 0
 }
 
 
 list_versions() {
-    echo -n "Available versions: "
-	if [ `(ls -d "$prefix"/lgt* | wc -l) 2> /dev/null` -gt 0 ]; then
-		for path in $(ls -d "$prefix"/lgt*); do
+    echo "Available versions: "
+	if [ `(ls -d "$prefix"/logtalk-* | wc -l) 2> /dev/null` -gt 0 ]; then
+		for path in $(ls -d "$prefix"/logtalk-*); do
 			file=`basename $path`
-			if [ $file \> "lgt2351" ]; then
-				echo -n "$file "
-			fi
+			echo "  $file"
 		done
 		echo
 	else
@@ -82,12 +80,9 @@ usage_help() {
 
 
 valid_version() {
-	if [ `(ls -d "$prefix"/lgt* | wc -l) 2> /dev/null` -gt 0 ]; then
-	    for path in $(ls -d "$prefix"/lgt*); do
+	if [ `(ls -d "$prefix"/logtalk-* | wc -l) 2> /dev/null` -gt 0 ]; then
+	    for path in $(ls -d "$prefix"/logtalk-*); do
 			version=`basename $path`
-	        if [ $1 == $version -a $1 \> "lgt2351" ]; then
-	            return 0
-	        fi
 	    done
 	fi
 	return 1

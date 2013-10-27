@@ -53,8 +53,13 @@ Besides consistency with the `version_data` flag value, this change allows
 the installers to be automatically named after the development status and
 version.
 
+* CHANGED: The `logtalk_version_select.sh` POSIX script no longer supports
+listing and switching to Logtalk 2.x versions as these require incompatible
+user folder contents.
+
 * CHANGED: For consistency, the POSIX installation script and the Debian,
 RPM, MacOS X, and Windows installers all start with the `logtalk-` string.
+
 Examples
 --------
 
