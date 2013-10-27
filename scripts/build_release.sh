@@ -89,6 +89,7 @@ sudo port clean logtalk
 sudo port destroot logtalk
 sudo port pkg logtalk
 cp -R work/logtalk-$version.pkg $directory
+zip -r $directory/logtalk-$version.pkg.zip $directory/logtalk-$version.pkg
 sudo port clean logtalk
 
 cd $directory
