@@ -36,8 +36,7 @@ else
 fi
 
 version=`cat ../VERSION.txt`
-number=`echo $version | sed -e 's/-//g' -e 's/\.//g'`
-default_directory=lgt$number
+default_directory=logtalk-$version
 
 print_version() {
 	echo "Current `basename $0` version:"

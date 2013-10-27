@@ -53,6 +53,8 @@ Besides consistency with the `version_data` flag value, this change allows
 the installers to be automatically named after the development status and
 version.
 
+* CHANGED: For consistency, the POSIX installation script and the Debian,
+RPM, MacOS X, and Windows installers all start with the `logtalk-` string.
 Examples
 --------
 
