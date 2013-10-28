@@ -29,24 +29,22 @@
 if [ -z "$1" ]; then
 	git clone git://github.com/LogtalkDotOrg/logtalk3.git lgtclone
 	version=`cat lgtclone/VERSION.txt`
-	number=`echo $version | sed -e 's/-//g' -e 's/\.//g'`
-	mv lgtclone lgt$number
+	mv lgtclone logtalk-$version
 else
 	version="$1"
-	number=`echo $version | sed -e 's/-//g' -e 's/\.//g'`
-	git clone git://github.com/LogtalkDotOrg/logtalk3.git lgt$number
+	git clone git://github.com/LogtalkDotOrg/logtalk3.git logtalk-$version
 fi
 
 directory=`PWD`
 
-cd lgt$number
+cd logtalk-$version
 chmod a+x scripts/cleandist.sh
 scripts/cleandist.sh
 
 cd ..
-cp -R lgt$number/manuals man$number
-tar -czf man$number.tgz man$number
-tar -cjf lgt$number.tar.bz2 lgt$number
+cp -R logtalk-$version/manuals logtalk-manuals-$version
+tar -czf logtalk-manuals-$version.tgz logtalk-manuals-$version
+tar -cjf logtalk-$version.tar.bz2 logtalk-$version
 
 rm -rf debian
 mkdir -p debian/usr/bin
@@ -54,7 +52,7 @@ mkdir -p debian/usr/share/doc/logtalk
 mkdir -p debian/usr/share/doc-base
 mkdir -p debian/usr/share/menu
 mkdir -p debian/DEBIAN
-cd lgt$number/scripts
+cd logtalk-$version/scripts
 ./install.sh -p $directory/debian/usr
 rm -rf $directory/debian/usr/share/mime
 cp debian/logtalk.doc-base $directory/debian/usr/share/doc-base/logtalk-docs
@@ -75,15 +73,15 @@ cp debian/postrm $directory/debian/DEBIAN
 cd $directory
 dpkg-deb --build debian logtalk_$version-1_all.deb
 
-sha1="`openssl sha1 -r lgt$number.tar.bz2 | xargs -L 1 | sed 's/*.tar.bz2//g'`"
-rmd160="`openssl rmd160 -r lgt$number.tar.bz2 | xargs -L 1 | sed 's/*.tar.bz2//g'`"
+sha256="`openssl sha256 -r logtalk-$version.tar.bz2 | xargs -L 1 | sed 's/*.tar.bz2//g'`"
+rmd160="`openssl rmd160 -r logtalk-$version.tar.bz2 | xargs -L 1 | sed 's/*.tar.bz2//g'`"
 sudo mkdir -p /opt/local/var/macports/distfiles/logtalk
-sudo cp -f lgt$number.tar.bz2 /opt/local/var/macports/distfiles/logtalk/lgt$number.tar.bz2
+sudo cp -f logtalk-$version.tar.bz2 /opt/local/var/macports/distfiles/logtalk/logtalk-$version.tar.bz2
 cd /opt/local/var/macports/sources/rsync.macports.org/release/tarballs/ports/lang/logtalk/
 sudo mv -f Portfile Portfile.old
-sudo cp $directory/lgt$number/scripts/macosx/Portfile .
+sudo cp $directory/logtalk-$version/scripts/macosx/Portfile .
 sudo sed -e "s/^version.*/version $version/" -i '' Portfile
-sudo sed -e "s/sha1.*/sha1 $sha1 \\\/" -i '' Portfile
+sudo sed -e "s/sha256.*/sha256 $sha256 \\\/" -i '' Portfile
 sudo sed -e "s/rmd160.*/rmd160 $rmd160/" -i '' Portfile
 sudo port clean logtalk
 sudo port destroot logtalk
@@ -93,12 +91,3 @@ zip -r $directory/logtalk-$version.pkg.zip $directory/logtalk-$version.pkg
 sudo port clean logtalk
 
 cd $directory
-mkdir manpdf$number
-cd man$number/userman
-./userman.sh
-mv userman.pdf ../../manpdf$number/lgtuserman$number.pdf
-cd ../refman
-./refman.sh
-mv refman.pdf ../../manpdf$number/lgtrefman$number.pdf
-cd ../..
-tar -czf manpdf$number.tgz manpdf$number

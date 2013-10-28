@@ -6,6 +6,7 @@
 ##   Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Logtalk uninstall script
+##   Last updated on October 28, 2013
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -55,8 +56,7 @@ if ! [ "$LOGTALKHOME" ]; then
 fi
 
 version=`cat "$LOGTALKHOME/VERSION.txt"`
-number=`echo $version | sed -e 's/-//g' -e 's/\.//g'`
-directory=lgt$number
+directory=logtalk-$version
 
 echo
 echo "Uninstalling Logtalk $version system-level files..."

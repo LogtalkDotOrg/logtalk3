@@ -24,10 +24,10 @@ homepage		http://logtalk.org/
 master_sites	${homepage}files/
 
 checksums       \
-	sha1    8cb811c0a6e0c203b274e96edf74d8e56986bdef \
-	rmd160  bbf614c0450def4164b185b35d0f4b54c397dd0d
+	sha256	8cb811c0a6e0c203b274e96edf74d8e56986bdef \
+	rmd160	bbf614c0450def4164b185b35d0f4b54c397dd0d
 
-distname		lgt[strsed [strsed ${version} {g/-//}] {g/\.//}]
+distname		logtalk-${version}
 
 use_bzip2		yes
 
