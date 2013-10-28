@@ -27,6 +27,7 @@
 #############################################################################
 
 version=`cat ../../VERSION.txt`
+version_clean=`echo $version | sed -e 's/-/_/g'`
 archive=logtalk-$version
 
 directory="$PWD"
@@ -36,7 +37,7 @@ tar -cjf ~/rpmbuild/SOURCES/$archive.tar.bz2 .
 mkdir -p ~/rpmbuild/RPMS/noarch
 
 cd "$directory"
-sed -e 's/LOGTALK_VERSION/'$version'/g' -e 's/LOGTALK_INSTALL_DIRECTORY/'$archive'/g' logtalk.spec.in > logtalk.spec
+sed -e 's/LOGTALK_VERSION/'$version_clean'/g' -e 's/LOGTALK_INSTALL_DIRECTORY/'$archive'/g' logtalk.spec.in > logtalk.spec
 rpmbuild -ba --target=noarch-*-linux logtalk.spec
 
 cd ~/rpmbuild/RPMS/noarch
