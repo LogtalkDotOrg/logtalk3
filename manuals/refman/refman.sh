@@ -5,7 +5,8 @@
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 ## 
-##   Reference manual to PDF conversion script
+##   Reference Manual XHTML to PDF conversion script
+##   Last updated on October 28, 2013
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -317,3 +318,4 @@ fi
 
 rm refman.fo refman.html
 rm -f *.section directives/*.section builtins/*.section methods/*.section control/*.section
+mv refman.pdf ..

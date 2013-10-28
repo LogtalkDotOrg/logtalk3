@@ -5,7 +5,8 @@
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 ## 
-##   User manual to PDF conversion script
+##   User Manual XHTML to PDF conversion script
+##   Last updated on October 28, 2013
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -84,3 +85,5 @@ fi
 
 rm userman.fo userman.html
 rm -fr *.section
+mv userman.pdf ..
+
