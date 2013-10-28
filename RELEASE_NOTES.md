@@ -60,6 +60,11 @@ user folder contents.
 * CHANGED: For consistency, the POSIX installation script and the Debian,
 RPM, MacOS X, and Windows installers all start with the `logtalk-` string.
 
+Documentation
+-------------
+
+* ADDED: PDF versions of the User and Reference manuals.
+
 Examples
 --------
 
