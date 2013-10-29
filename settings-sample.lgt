@@ -80,6 +80,7 @@
 :- dynamic(logtalk_library_path/2).
 
 logtalk_library_path(my_project, '$HOME/my_project/').
+logtalk_library_path(my_project_libraries, my_project('libraries/')).
 logtalk_library_path(my_project_examples, my_project('examples/')).
 */
 
@@ -124,6 +125,7 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 :- initialization((
 	set_logtalk_flag(debug, on),
 	set_logtalk_flag(clean, on),
+	set_logtalk_flag(reload, always),
 	set_logtalk_flag(unknown_entities, warning),
 	set_logtalk_flag(misspelt_calls, warning),
 	set_logtalk_flag(singleton_variables, warning),
@@ -166,6 +168,7 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 	:- initialization((
 		set_logtalk_flag(debug, off),
 		set_logtalk_flag(clean, on),
+		set_logtalk_flag(reload, always),
 		set_logtalk_flag(unknown_entities, warning),
 		set_logtalk_flag(misspelt_calls, warning),
 		set_logtalk_flag(singleton_variables, warning),
@@ -180,7 +183,7 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 */
 
 
-%  To compile all your source files for debugging using the SWI-Prolog
+%  To compile all your source files for profiling using the SWI-Prolog
 %  graphical profiler (stable version 6.2.0 or later; development version
 %  6.1.11 or later), uncomment the following lines:
 
@@ -226,7 +229,8 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 
 /*
 :- initialization((
-	set_logtalk_flag(clean, off)
+	set_logtalk_flag(clean, off),
+	set_logtalk_flag(reload, changed)
 )).
 */
 
@@ -251,6 +255,7 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 
 /*
 :- initialization((
+	set_logtalk_flag(debug, off),
 	set_logtalk_flag(optimize, on),
 	set_logtalk_flag(source_data, off),
 	set_logtalk_flag(events, deny),
