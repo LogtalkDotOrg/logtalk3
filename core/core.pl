@@ -125,8 +125,8 @@
 
 % table of loaded files
 
-:- multifile('$lgt_loaded_file_'/6).				% '$lgt_loaded_file_'(Basename, Directory, Flags, TextProperties, PrologFile, TimeStamp)
-:- dynamic('$lgt_loaded_file_'/6).
+:- multifile('$lgt_loaded_file_'/7).				% '$lgt_loaded_file_'(Basename, Directory, Mode, Flags, TextProperties, PrologFile, TimeStamp)
+:- dynamic('$lgt_loaded_file_'/7).
 
 
 % runtime flag values
@@ -1999,21 +1999,39 @@ logtalk_make(Target) :-
 
 
 '$lgt_logtalk_make'(all) :-
-	'$lgt_loaded_file_'(Basename, Directory, Flags, _, _, LoadingTimeStamp),
+	'$lgt_loaded_file_'(Basename, Directory, Mode, Flags, _, _, LoadingTimeStamp),
 	atom_concat(Directory, Basename, Path),
-	'$lgt_file_modification_time'(Path, CurrentTimeStamp),
-	LoadingTimeStamp @< CurrentTimeStamp,
+	(	'$lgt_changed_compilation_mode'(Mode, Flags) ->
+		true
+	;	'$lgt_file_modification_time'(Path, CurrentTimeStamp),
+		LoadingTimeStamp @< CurrentTimeStamp
+	),
 	logtalk_load(Path, Flags),
 	fail.
 '$lgt_logtalk_make'(all) :-
 	'$lgt_print_message'(comment(make), core, modified_files_reloaded).
 
 '$lgt_logtalk_make'(clean) :-
-	'$lgt_loaded_file_'(_, _, _, _, PrologFile, _),
+	'$lgt_loaded_file_'(_, _, _, _, _, PrologFile, _),
 	'$lgt_delete_intermediate_files'(PrologFile),
 	fail.
 '$lgt_logtalk_make'(clean) :-
 	'$lgt_print_message'(comment(make), core, intermediate_files_deleted).
+
+
+'$lgt_changed_compilation_mode'(debug, Flags) :-
+	\+ '$lgt_member'(debug(_), Flags),
+	\+ '$lgt_compiler_flag'(debug, on).
+
+'$lgt_changed_compilation_mode'(optimal, Flags) :-
+	\+ '$lgt_member'(optimize(_), Flags),
+	\+ '$lgt_compiler_flag'(optimize, on).
+
+'$lgt_changed_compilation_mode'(normal, _) :-
+	(	'$lgt_compiler_flag'(debug, on) ->
+		true
+	;	'$lgt_compiler_flag'(optimize, on)
+	).
 
 
 
@@ -4436,7 +4454,7 @@ current_logtalk_flag(Flag, Value) :-
 	% it can be a loader file loading other files in its directory
 	'$lgt_current_directory'(Current),
 	'$lgt_change_directory'(Directory),
-	(	'$lgt_loaded_file_'(Basename, Directory, PreviousFlags, _, _, LoadingTimeStamp) ->
+	(	'$lgt_loaded_file_'(Basename, Directory, PreviousMode, PreviousFlags, _, _, LoadingTimeStamp) ->
 		% we're attempting to reload a file
 		'$lgt_compiler_flag'(reload, Reload),
 		(	Reload == skip ->
@@ -4447,6 +4465,7 @@ current_logtalk_flag(Flag, Value) :-
 			'$lgt_print_message'(comment(loading), core, skipping_reloading_file(SourceFile, Flags))
 		;	Reload == changed,
 			PreviousFlags == Flags,
+			\+ '$lgt_changed_compilation_mode'(PreviousMode, PreviousFlags),
 			'$lgt_file_modification_time'(SourceFile, CurrentTimeStamp),
 			CurrentTimeStamp @=< LoadingTimeStamp ->
 			% file was not modified since loaded and same explicit flags as before
@@ -4454,7 +4473,7 @@ current_logtalk_flag(Flag, Value) :-
 		;	% we're reloading a source file
 			'$lgt_print_message'(silent(loading), core, reloading_file(SourceFile, Flags)),
 			'$lgt_compile_file'(SourceFile, PrologFile, Flags, loading, Current),
-			retractall('$lgt_loaded_file_'(Basename, Directory, _, _, _, _)),
+			retractall('$lgt_loaded_file_'(Basename, Directory, _, _, _, _, _)),
 			'$lgt_load_compiled_file'(SourceFile, PrologFile),
 			'$lgt_print_message'(comment(loading), core, reloaded_file(SourceFile, Flags))			
 		)
@@ -14482,13 +14501,19 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_extends_protocol_'/3),
 	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_complemented_object_'/5),
 	% file runtime clauses
-	write_canonical(Stream, (:- multifile('$lgt_loaded_file_'/6))), write(Stream, '.\n'),
-	write_canonical(Stream, (:- dynamic('$lgt_loaded_file_'/6))), write(Stream, '.\n'),
-	% we must keep the list of flags sorted so that we can use a simple comparison to
-	% later check when reloading a file if the explicit flags are the same as before
+	write_canonical(Stream, (:- multifile('$lgt_loaded_file_'/7))), write(Stream, '.\n'),
+	write_canonical(Stream, (:- dynamic('$lgt_loaded_file_'/7))), write(Stream, '.\n'),
+	% we must keep the list of flags sorted so that we can use a simple term comparison
+	% to later check when reloading a file if the explicit flags are the same as before
 	(	setof(Flag, Name^Value^('$lgt_pp_file_compiler_flag_'(Name,Value), Flag =.. [Name,Value]), Flags) ->
 		true
 	;	Flags = []
+	),
+	(	'$lgt_compiler_flag'(debug, on) ->
+		Mode = debug
+	;	'$lgt_compiler_flag'(optimize, on) ->
+		Mode = optimal
+	;	Mode = normal
 	),
 	(	'$lgt_pp_file_encoding_'(Encoding, _) ->
 		(	'$lgt_pp_file_bom_'(BOM) ->
@@ -14498,7 +14523,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	TextProperties = []
 	),
 	'$lgt_file_modification_time'(Path, TimeStamp),
-	Clause = '$lgt_loaded_file_'(Basename, Directory, Flags, TextProperties, PrologFile, TimeStamp),
+	Clause = '$lgt_loaded_file_'(Basename, Directory, Mode, Flags, TextProperties, PrologFile, TimeStamp),
 	(	SourceData == on ->
 		'$lgt_write_term_and_source_location'(Stream, Clause, aux, Path+1)
 	;	write_canonical(Stream, Clause), write(Stream, '.\n')

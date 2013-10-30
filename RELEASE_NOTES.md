@@ -31,6 +31,13 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: * Property `mode/1` representing the file compilation mode (with
+possible values `optimal`, `normal`, and `debug`) to the predicate
+`logtalk::loaded_file_property/2`.
+
+* IMPROVED: Also reload a source file if the compilation mode changed due to
+a change to the global value of the flags `debug` or `optimize`.
+
 * IMPROVED: The compiler now accepts explicit-qualified module calls for the
 built-in database predicates without requiring wrapping the module call with
 the `{}/1` control construct (due to the frequently ambiguous meta-predicate

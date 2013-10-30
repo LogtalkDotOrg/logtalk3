@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Integration file for XSB
-%  Last updated on October 11, 2013
+%  Last updated on October 29, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -71,7 +71,7 @@
 :- thread_shared('$lgt_complemented_object_'/5).
 
 % table of loaded files
-:- thread_shared('$lgt_loaded_file_'/6).
+:- thread_shared('$lgt_loaded_file_'/7).
 
 % runtime flags
 :- thread_shared('$lgt_current_flag_'/2).

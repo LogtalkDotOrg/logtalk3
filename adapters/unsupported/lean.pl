@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Lean Prolog 3.7.10 and later versions
-%  Last updated on October 21, 2013
+%  Last updated on October 29, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -824,7 +824,7 @@ use_module(_, _) :- fail.
 
 :- index('$lgt_current_flag_'(1, 0)).
 
-:- index('$lgt_loaded_file_'(1, 1, 0, 0, 0)).
+:- index('$lgt_loaded_file_'(1, 1, 0, 0, 0, 0, 0)).
 
 
 

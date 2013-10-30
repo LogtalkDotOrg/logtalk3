@@ -546,8 +546,12 @@ setup_call_catcher_cleanup(Setup, Call, Catcher, Cleanup) :-
 
 % '$lgt_prolog_goal_expansion'(@callable, -callable)
 
-'$lgt_prolog_goal_expansion'(_, _) :-
-	fail.
+'$lgt_prolog_goal_expansion'(thread_sleep(Seconds), ExpandedGoal) :-
+	(	var(Seconds) ->
+		ExpandedGoal = {Miliseconds is round(Seconds*1000), thread_sleep(Miliseconds)}
+	;	Miliseconds is round(Seconds*1000),
+		ExpandedGoal = {thread_sleep(Miliseconds)}
+	).
 
 
 

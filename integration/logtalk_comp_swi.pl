@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Integration file for SWI-Prolog
-%  Last updated on October 11, 2013
+%  Last updated on October 29, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -49,7 +49,7 @@
 	'$lgt_implements_protocol_'/3, '$lgt_imports_category_'/3, '$lgt_instantiates_class_'/3, 
 	'$lgt_specializes_class_'/3, '$lgt_extends_category_'/3, '$lgt_extends_object_'/3,
 	'$lgt_extends_protocol_'/3, '$lgt_complemented_object_'/5,
-	'$lgt_loaded_file_'/6,
+	'$lgt_loaded_file_'/7,
 	'$lgt_compiler_flag'/2, '$lgt_default_flag'/2, '$lgt_current_flag_'/2, '$lgt_pp_compiler_flag_'/2,
 	'$lgt_prolog_feature'/2,
 	'$lgt_execution_context'/6, '$lgt_goal_meta_variables'/3,

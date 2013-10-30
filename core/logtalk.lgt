@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/10/08,
+		date is 2013/10/29,
 		comment is 'Built-in object providing message priting, debugging, library, source file, and hacking methods.']).
 
 	:- built_in.
@@ -146,7 +146,7 @@
 	:- public(loaded_file_property/2).
 	:- mode(loaded_file_property(?atom, ?compound), zero_or_more).
 	:- info(loaded_file_property/2, [
-		comment is 'Enumerates, by backtracking, all loaded files, returning their full paths. Valid properties are: basename/1, directory/1, flags/1, text_properties/1 (encoding/1 and bom/1), target/1, and modified/1.',
+		comment is 'Enumerates, by backtracking, all loaded files, returning their full paths. Valid properties are: basename/1, directory/1, mode/1, flags/1, text_properties/1 (encoding/1 and bom/1), target/1, and modified/1.',
 		argnames is ['Path', 'Property']
 	]).
 
@@ -337,20 +337,21 @@
 		{'$lgt_expand_library_path'(Library, Path)}.
 
 	loaded_file(Path) :-
-		{'$lgt_loaded_file_'(Basename, Directory, _, _, _, _)},
+		{'$lgt_loaded_file_'(Basename, Directory, _, _, _, _, _)},
 		atom_concat(Directory, Basename, Path).
 
 	loaded_file_property(Path, Property) :-
-		{'$lgt_loaded_file_'(Basename, Directory, Flags, TextProperties, PrologFile, TimeStamp)},
+		{'$lgt_loaded_file_'(Basename, Directory, Mode, Flags, TextProperties, PrologFile, TimeStamp)},
 		atom_concat(Directory, Basename, Path),
-		loaded_file_property(Property, Basename, Directory, Flags, TextProperties, PrologFile, TimeStamp).
+		loaded_file_property(Property, Basename, Directory, Mode, Flags, TextProperties, PrologFile, TimeStamp).
 
-	loaded_file_property(basename(Basename), Basename, _, _, _, _, _).
-	loaded_file_property(directory(Directory), _, Directory, _, _, _, _).
-	loaded_file_property(flags(Flags), _, _, Flags, _, _, _).
-	loaded_file_property(text_properties(TextProperties), _, _, _, TextProperties, _, _).
-	loaded_file_property(target(PrologFile), _, _, _, _, PrologFile, _).
-	loaded_file_property(modified(TimeStamp), _, _, _, _, _, TimeStamp).
+	loaded_file_property(basename(Basename), Basename, _, _, _, _, _, _).
+	loaded_file_property(directory(Directory), _, Directory, _, _, _, _, _).
+	loaded_file_property(mode(Mode), _, _, Mode, _, _, _, _).
+	loaded_file_property(flags(Flags), _, _, _, Flags, _, _, _).
+	loaded_file_property(text_properties(TextProperties), _, _, _, _, TextProperties, _, _).
+	loaded_file_property(target(PrologFile), _, _, _, _, _, PrologFile, _).
+	loaded_file_property(modified(TimeStamp), _, _, _, _, _, _, TimeStamp).
 
 	compile_aux_clauses(Clauses) :-
 		{'$lgt_compile_aux_clauses'(Clauses)}.
