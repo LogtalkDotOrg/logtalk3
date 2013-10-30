@@ -35,8 +35,9 @@ Logtalk compiler and runtime
 possible values `optimal`, `normal`, and `debug`) to the predicate
 `logtalk::loaded_file_property/2`.
 
-* IMPROVED: Also reload a source file if the compilation mode changed due to
-a change to the global value of the flags `debug` or `optimize`.
+* IMPROVED: Also reload a source file when the `reload` flag is set to
+`changed` and the file is not modified but the compilation mode changed
+due to a change to the global value of the flags `debug` or `optimize`.
 
 * IMPROVED: The compiler now accepts explicit-qualified module calls for the
 built-in database predicates without requiring wrapping the module call with
@@ -64,8 +65,9 @@ version.
 listing and switching to Logtalk 2.x versions as these require incompatible
 user folder contents.
 
-* CHANGED: For consistency, the POSIX installation script and the Debian,
-RPM, MacOS X, and Windows installers all start with the `logtalk-` string.
+* CHANGED: For consistency, the sources and manuals archives, the POSIX
+installation directive, and the Debian, RPM, MacOS X, and Windows installers
+all start with the `logtalk-` prefix.
 
 Documentation
 -------------
