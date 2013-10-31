@@ -25,8 +25,8 @@ RELEASE NOTES
 =============
 
 
-3.00.0 Beta 1 - November ??, 2013
-=================================
+3.00.0 Alpha 29 - October 31, 2013
+==================================
 
 Logtalk compiler and runtime
 ----------------------------
@@ -52,6 +52,10 @@ adapter files of all supported backend Prolog compilers.
 
 * UPDATED: POSIX integration scripts and the Windows installer script to
 deal with alphanumeric version data.
+
+* UPDATED: The XSB adapter file to goal-expand calls to the `thread_sleep/1`
+built-in predicate as the current implementation assumes mili-seconds instead
+of seconds as per the standardization proposal.
 
 Installers and installation scripts
 -----------------------------------
@@ -83,9 +87,9 @@ originally coded for a Rosetta Code programming task.
 * NEW: Barrier synchronization multi-threading example, `checkpoint`,
 originally coded for a Rosetta Code programming task.
 
-* NEW: Synchronized predicate directive multi-threading example,
-`slow_print`, originally coded for a Rosetta Code programming
-task (added to the `threads/sync` example).
+* NEW: Synchronized predicates multi-threading example, `slow_print`,
+originally coded for a Rosetta Code programming task (added to the
+`threads/sync` example).
 
 
 3.00.0 Alpha 28 - October 16, 2013
