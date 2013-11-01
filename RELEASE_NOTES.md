@@ -28,6 +28,12 @@ RELEASE NOTES
 3.00.0 Alpha 30 - November ??, 2013
 ===================================
 
+Logtalk compiler and runtime
+----------------------------
+
+* ADDED: Experimental support for using a backend Prolog compiler string
+built-in term type in DCGs. 
+
 Prolog adapter and integration files
 ------------------------------------
 

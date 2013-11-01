@@ -16579,6 +16579,12 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_dcg_terminals'([T| Ts], S0, S, Goal).
 
+'$lgt_dcg_body'(String, S0, S, Goal) :-
+	'$lgt_string'(String),
+	!,
+	'$lgt_string_codes'(String, Codes),
+	'$lgt_dcg_terminals'(Codes, S0, S, Goal).
+
 '$lgt_dcg_body'(NonTerminal, S0, S, Goal) :-
 	'$lgt_pp_uses_non_terminal_'(Obj, Original, NonTerminal),
 	!,
