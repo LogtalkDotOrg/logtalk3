@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for YAP Prolog 6.0.2 and later versions
-%  Last updated on October 29, 2013
+%  Last updated on November 1, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -866,6 +866,27 @@ user:goal_expansion('::'(Object, Message), user:Goal) :-
 % term_hash(@callable, +integer, +integer, -integer)
 
 :- use_module(library(terms), [term_hash/4]).
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  string built-in type
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% '$lgt_string'(@term)
+
+'$lgt_string'(_) :-
+	fail.
+
+
+% '$lgt_string_codes'(+string, -list(codes))
+% '$lgt_string_codes'(-string, +list(codes))
+
+'$lgt_string_codes'(_, _) :-
+	fail.
 
 
 

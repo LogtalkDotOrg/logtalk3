@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SICStus Prolog 4.1.0 and later versions
-%  Last updated on October 21, 2013
+%  Last updated on November 1, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -714,6 +714,27 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 % term_hash(@callable, +integer, +integer, -integer)
 
 :- use_module(library(terms), [term_hash/4]).
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  string built-in type
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% '$lgt_string'(@term)
+
+'$lgt_string'(_) :-
+	fail.
+
+
+% '$lgt_string_codes'(+string, -list(codes))
+% '$lgt_string_codes'(-string, +list(codes))
+
+'$lgt_string_codes'(_, _) :-
+	fail.
 
 
 

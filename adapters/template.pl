@@ -547,6 +547,27 @@ term_hash(Term, Depth, Range, Hash) :-
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  string built-in type
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% '$lgt_string'(@term)
+
+'$lgt_string'(_) :-
+	?????
+
+
+% '$lgt_string_codes'(+string, -list(codes))
+% '$lgt_string_codes'(-string, +list(codes))
+
+'$lgt_string_codes'(String, Codes) :-
+	?????
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Shortcuts to the Logtalk built-in predicates logtalk_load/1 and

@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for LPA MacProlog32 1.25
-%  Last updated on October 21, 2013
+%  Last updated on November 1, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -638,6 +638,27 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 
 %:- multifile('$logtalk.print_message_token'/3).
 %:- dynamic('$logtalk.print_message_token'/3).
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  string built-in type
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% '$lgt_string'(@term)
+
+'$lgt_string'(_) :-
+	fail.
+
+
+% '$lgt_string_codes'(+string, -list(codes))
+% '$lgt_string_codes'(-string, +list(codes))
+
+'$lgt_string_codes'(_, _) :-
+	fail.
 
 
 

@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for BinProlog 8.x~10.x
-%  Last updated on October 21, 2013
+%  Last updated on November 1, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -616,6 +616,27 @@ setup_call_cleanup(_, _, _) :-
 
 %:- multifile('$logtalk.print_message_token'/3).
 %:- dynamic('$logtalk.print_message_token'/3).
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  string built-in type
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% '$lgt_string'(@term)
+
+'$lgt_string'(_) :-
+	fail.
+
+
+% '$lgt_string_codes'(+string, -list(codes))
+% '$lgt_string_codes'(-string, +list(codes))
+
+'$lgt_string_codes'(_, _) :-
+	fail.
 
 
 
