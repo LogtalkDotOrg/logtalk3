@@ -37,10 +37,10 @@ built-in term type in DCGs.
 Prolog adapter and integration files
 ------------------------------------
 
-* ADDED: Internal predicates `'$lgt_string'/1` and `'$lgt_string_codes'/2` to
-the adapter files of all supported backend Prolog compilers for minimal support
-for a backend Prolog compiler string built-in term type. Currently only defined
-for SWI-Prolog.
+* ADDED: Internal predicates `'$lgt_string'/1` and `'$lgt_string_codes'/2`
+to the adapter files of all supported backend Prolog compilers for minimal
+support for a backend Prolog compiler string built-in term type. Currently
+only defined for SWI-Prolog.
 
 
 3.00.0 Alpha 29 - October 31, 2013
