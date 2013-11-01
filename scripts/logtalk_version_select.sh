@@ -28,13 +28,13 @@
 
 
 print_version() {
-	echo "`basename $0` 0.6"
+	echo "`basename $0` 0.7"
 	exit 0
 }
 
 
 list_versions() {
-    echo "Available versions: "
+    echo "Available versions:"
 	if [ `(ls -d "$prefix"/logtalk-* | wc -l) 2> /dev/null` -gt 0 ]; then
 		for path in $(ls -d "$prefix"/logtalk-*); do
 			file=`basename $path`
@@ -49,11 +49,12 @@ list_versions() {
 
 
 show_selected() {
-    echo -n "Current version: "
+    echo "Selected version:"
     if [ -e "$LOGTALKHOME" ]; then
+		echo -n "  "
 		readlink "$LOGTALKHOME"
     else
-        echo "none"
+        echo "  none"
     fi
 	exit 0
 }
