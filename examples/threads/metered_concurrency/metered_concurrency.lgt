@@ -12,9 +12,9 @@
 :- object(metered_concurrency).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2013/10/22,
+		date is 2013/11/02,
 		comment is 'Simple example of using multi-threading notifications, which use a per-object FIFO message queue, thus avoiding the need of idle-loops, for implementing a counting semaphore.'
 	]).
 
@@ -40,6 +40,11 @@
 	run :-
 		% default values: 7 workers, 2 concurrent workers
 		run(7, 2).
+
+	:- synchronized([
+		acquired_semaphore_message/1,
+		releasing_semaphore_message/1
+	]).
 
 	semaphore(N, Max) :-
 		threaded_wait(worker(Action, Worker)),
@@ -71,5 +76,11 @@
 		threaded_notify(worker(release, Worker)),
 		write('Worker '), write(Worker), write(' releasing semaphore\n'),
 		threaded_wait(semaphore(released, Worker)).
+
+	acquired_semaphore_message(Worker) :-
+		write('Worker '), write(Worker), write(' acquired semaphore\n').
+
+	releasing_semaphore_message(Worker) :-
+		write('Worker '), write(Worker), write(' releasing semaphore\n').
 
 :- end_object.
