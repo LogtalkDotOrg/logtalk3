@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for XSB 3.4.1 or later versions
-%  Last updated on November 1, 2013
+%  Last updated on November 4, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -546,12 +546,8 @@ setup_call_catcher_cleanup(Setup, Call, Catcher, Cleanup) :-
 
 % '$lgt_prolog_goal_expansion'(@callable, -callable)
 
-'$lgt_prolog_goal_expansion'(thread_sleep(Seconds), ExpandedGoal) :-
-	(	var(Seconds) ->
-		ExpandedGoal = {Miliseconds is round(Seconds*1000), thread_sleep(Miliseconds)}
-	;	Miliseconds is round(Seconds*1000),
-		ExpandedGoal = {thread_sleep(Miliseconds)}
-	).
+'$lgt_prolog_goal_expansion'(_, _) :-
+	fail.
 
 
 
