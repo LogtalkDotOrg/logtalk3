@@ -14,6 +14,9 @@
 	logtalk_load(library(types_loader)),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(loader),
+	current_prolog_flag(double_quotes, Value),
+	set_prolog_flag(double_quotes, codes),
 	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
+	tests::run,
+	set_prolog_flag(double_quotes, Value)
 )).

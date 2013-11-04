@@ -12,9 +12,9 @@
 :- object(morse).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2007/06/14,
+		date is 2013/11/04,
 		comment is 'Morse code decoder.'
 	]).
 
@@ -28,71 +28,71 @@
 	morse([Word| Words]) --> word(Characters), {atom_chars(Word, Characters)}, "  ", morse(Words).
 	morse([Word]) --> word(Characters), {atom_chars(Word, Characters)}.
 
-	word([Character| Characters]) --> character(LM), {code(Character, LM)}, " ", word(Characters).
-	word([Character]) --> character(Symbols), {code(Character, Symbols)}.
+	word([Character| Characters]) --> symbols(Symbols), {atom_chars(Atom, Symbols), character(Atom, Character)}, " ", word(Characters).
+	word([Character]) --> symbols(Symbols), {atom_chars(Atom, Symbols), character(Atom, Character)}.
 
-	character([Symbol| Symbols]) --> symbol([Symbol]), character(Symbols).
-	character([Symbol]) --> symbol([Symbol]).
+	symbols([Symbol| Symbols]) --> symbol(Symbol), symbols(Symbols).
+	symbols([Symbol]) --> symbol(Symbol).
 
-	symbol(".") --> ".".
-	symbol("-") --> "-".
+	symbol('.') --> ".".
+	symbol('-') --> "-".
 
-	code(a, ".-").
-	code(b, "-...").
-	code(c, "-.-.").
-	code(d, "-..").
-	code(e, ".").
-	code(f, "..-.").
-	code(g, "--.").
-	code(h, "....").
-	code(i, "..").
-	code(j, ".---").
-	code(k, "-.-").
-	code(l, ".-..").
-	code(m, "--").
-	code(n, "-.").
-	code(o, "---").
-	code(p, ".--.").
-	code(q, "--.-").
-	code(r, ".-.").
-	code(s, "...").
-	code(t, "-").
-	code(u, "..-").
-	code(v, "...-").
-	code(w, ".--").
-	code(x, "-..-").
-	code(y, "-.--").
-	code(z, "--..").
+	character('.-',   a).
+	character('-...', b).
+	character('-.-.', c).
+	character('-..',  d).
+	character('.',    e).
+	character('..-.', f).
+	character('--.',  g).
+	character('....', h).
+	character('..',   i).
+	character('.---', j).
+	character('-.-',  k).
+	character('.-..', l).
+	character('--',   m).
+	character('-.',   n).
+	character('---',  o).
+	character('.--.', p).
+	character('--.-', q).
+	character('.-.',  r).
+	character('...',  s).
+	character('-',    t).
+	character('..-',  u).
+	character('...-', v).
+	character('.--',  w).
+	character('-..-', x).
+	character('-.--', y).
+	character('--..', z).
 
-	code('1', ".----").
-	code('2', "..---").
-	code('3', "...--").
-	code('4', "....-").
-	code('5', ".....").
-	code('6', "-....").
-	code('7', "--...").
-	code('8', "---..").
-	code('9', "----.").
-	code('0', "-----").
+	character('.----', '1').
+	character('..---', '2').
+	character('...--', '3').
+	character('....-', '4').
+	character('.....', '5').
+	character('-....', '6').
+	character('--...', '7').
+	character('---..', '8').
+	character('----.', '9').
+	character('-----', '0').
 
-	code('.', ".-.-.-").
-	code(',', "--..--").
-	code('?', "..--..").
-	code('''', ".----.").
-	code('!', "-.-.--").
-	%code('!', "— — — ·").
-	code('/', "-..-.").
-	code('(', "-.--.").
-	code(')', "-.--.-").
-	code('&', ".-...").
-	code(':', "---...").
-	code(';', "-.-.-.").
-	code('=', "-...-").
-	code('+', ".-.-.").
-	code('-', "-....-").
-	code('_', "..--.-").
-	code('"', ".-..-.").
-	code('$', "...-..-").
-	code('@', ".--.-").
+	character('.-.-.-',  '.').
+	character('--..--',  ',').
+	character('..--..',  '?').
+	character('.----.', '''').
+	character('-.-.--',  '!').
+%	character('— — — ·', '!').
+	character('-..-.',   '/').
+	character('-.--.',   '(').
+	character('-.--.-',  ')').
+	character('.-...',   '&').
+	character('---...',  ':').
+	character('-.-.-.',  ';').
+	character('-...-',   '=').
+	character('.-.-.',   '+').
+	character('-....-',  '-').
+	character('..--.-',  '_').
+	character('.-..-.',  '"').
+	character('...-..-', '$').
+	character('.--.-',   '@').
 
 :- end_object.

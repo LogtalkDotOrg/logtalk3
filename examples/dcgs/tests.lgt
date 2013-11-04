@@ -21,7 +21,6 @@
 
 	:- uses(lgtunit, [op(700, xfx, '=~='), '=~='/2]).
 
-
 	:- if(\+ current_logtalk_flag(prolog_dialect, lean)).
 	% Lean Prolog doesn't support the 0'<char> used in these examples
 	test(dcgs_01) :-
