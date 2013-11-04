@@ -31,11 +31,15 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Experimental support for using a backend Prolog compiler string
+built-in term type in DCGs. 
+
 * FIXED: Ensure that the internal thread exit handler always succeeds to
 better deal with implementation differences between backend Prolog compilers.
 
-* ADDED: Experimental support for using a backend Prolog compiler string
-built-in term type in DCGs. 
+* FIXED: Cases where runtime processing of grammar rules could result in
+leaking of compile-time only information on defined and called non-terminals
+leading to misleading warnings when reloading files.
 
 Prolog adapter and integration files
 ------------------------------------

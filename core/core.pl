@@ -3199,9 +3199,9 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_execution_context'(ExCtx, Sender, This, Self, _, _),
 	'$lgt_must_be'(callable, GRBody, logtalk(This::phrase(GRBody, Input), Sender)),
 %	'$lgt_must_be'(list_or_partial_list, Input, logtalk(This::phrase(GRBody, Input), Sender)),
-	'$lgt_dcg_body'(GRBody, S0, S, Pred),
 	'$lgt_current_object_'(This, Prefix, _, _, _, _, _, _, _, _, Flags),
 	'$lgt_comp_ctx'(Ctx, _, Sender, This, Self, Prefix, [], _, ExCtx, runtime, _),
+	'$lgt_dcg_body'(GRBody, S0, S, Pred, Ctx),
 	'$lgt_tr_body'(Pred, TPred, DPred, Ctx),
 	Input = S0, [] = S,
 	(	Flags /\ 512 =:= 512 ->
@@ -3221,9 +3221,9 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_must_be'(callable, GRBody, logtalk(This::phrase(GRBody, Input, Rest), Sender)),
 %	'$lgt_must_be'(list_or_partial_list, Input, logtalk(This::phrase(GRBody, Input, Rest), Sender)),
 %	'$lgt_must_be'(list_or_partial_list, Rest, logtalk(This::phrase(GRBody, Input, Rest), Sender)),
-	'$lgt_dcg_body'(GRBody, S0, S, Pred),
 	'$lgt_current_object_'(This, Prefix, _, _, _, _, _, _, _, _, Flags),
 	'$lgt_comp_ctx'(Ctx, _, Sender, This, Self, Prefix, [], _, ExCtx, runtime, _),
+	'$lgt_dcg_body'(GRBody, S0, S, Pred, Ctx),
 	'$lgt_tr_body'(Pred, TPred, DPred, Ctx),
 	Input = S0, Rest = S,
 	(	Flags /\ 512 =:= 512 ->
@@ -3245,8 +3245,9 @@ current_logtalk_flag(Flag, Value) :-
 		Expansion = Expand
 	;	Term = (_ --> _) ->
 		% default grammar rule expansion
+		'$lgt_comp_ctx'(Ctx, _, Sender, Obj, Obj, _, [], _, _, runtime, _),
 		catch(
-			'$lgt_dcg_rule'(Term, Clause),
+			'$lgt_dcg_rule'(Term, Clause, Ctx),
 			Error,
 			throw(error(Error, logtalk(expand_term(Term,_), Sender)))
 		),
@@ -8138,7 +8139,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_grammar_rule'(GrammarRule, Ctx) :-
 	catch(
-		'$lgt_dcg_rule'(GrammarRule, Clause),
+		'$lgt_dcg_rule'(GrammarRule, Clause, Ctx),
 		Error,
 		throw(error(Error, grammar_rule(GrammarRule)))
 	),
@@ -9670,8 +9671,8 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_body'(phrase(GRBody, Input), TPred, '$lgt_debug'(goal(phrase(GRBody, Input), DPred), ExCtx), Ctx) :-
 	!,
-	% the '$lgt_dcg_body'/4 already checks that the grammar rule body is callable
-	'$lgt_dcg_body'(GRBody, S0, S, Pred),
+	% the '$lgt_dcg_body'/5 already checks that the grammar rule body is callable
+	'$lgt_dcg_body'(GRBody, S0, S, Pred, Ctx),
 %	'$lgt_must_be'(list_or_partial_list, Input),
 	TPred = (Input = S0, [] = S, TPred0),
 	DPred = (Input = S0, [] = S, DPred0),
@@ -9688,8 +9689,8 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_body'(phrase(GRBody, Input, Rest), TPred, '$lgt_debug'(goal(phrase(GRBody, Input, Rest), DPred), ExCtx), Ctx) :-
 	!,
-	% the '$lgt_dcg_body'/4 already checks that the grammar rule body is callable
-	'$lgt_dcg_body'(GRBody, S0, S, Pred),
+	% the '$lgt_dcg_body'/5 already checks that the grammar rule body is callable
+	'$lgt_dcg_body'(GRBody, S0, S, Pred, Ctx),
 %	'$lgt_must_be'(list_or_partial_list, Input),
 %	'$lgt_must_be'(list_or_partial_list, Rest),
 	TPred = (Input = S0, Rest = S, TPred0),
@@ -14154,13 +14155,15 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_undefined_non_terminal_call'(Functor//Arity, TFunctor/TArity, Lines) :-
+	'$lgt_pp_calls_predicate_'(Functor, ExtArity, TFunctor, TArity, _),
+	Arity is ExtArity - 2,
+	Arity >= 0,
 	'$lgt_pp_calls_non_terminal_'(Functor, Arity, Lines),
 	\+ '$lgt_pp_defines_non_terminal_'(Functor, Arity),
 	% non-terminal not defined in object/category
-	ExtArity is Arity + 2,
-	% no corresponding predicate is defined
 	functor(Head, Functor, ExtArity),
 	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _),
+	% no corresponding predicate is defined
 	\+ '$lgt_pp_dynamic_'(Head),
 	% no dynamic directive for the corresponding predicate
 	\+ '$lgt_pp_multifile_'(Head, _),
@@ -14168,9 +14171,8 @@ current_logtalk_flag(Flag, Value) :-
 	once((	'$lgt_pp_public_'(Functor, ExtArity)
 		;	'$lgt_pp_protected_'(Functor, ExtArity)
 		;	'$lgt_pp_private_'(Functor, ExtArity)
-	)),
+	)).
 	% but there is a scope directive for the non-terminal or the corresponding predicate
-	'$lgt_pp_calls_predicate_'(Functor, ExtArity, TFunctor, TArity, _).
 
 
 
@@ -16285,71 +16287,77 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_dcg_rule'(@grammar_rule, -clause)
+% '$lgt_dcg_rule'(@grammar_rule, -clause, @compilation_context)
 %
 % converts a grammar rule into a normal clause
 
-'$lgt_dcg_rule'((RHead --> _), _) :-
+'$lgt_dcg_rule'((RHead --> _), _, _) :-
 	var(RHead),
 	throw(instantiation_error).
 
-'$lgt_dcg_rule'((RHead, _ --> _), _) :-
+'$lgt_dcg_rule'((RHead, _ --> _), _, _) :-
 	var(RHead),
 	throw(instantiation_error).
 
-'$lgt_dcg_rule'((Entity::NonTerminal, Terminals --> GRBody), (Entity::Head :- Body)) :-
+'$lgt_dcg_rule'((Entity::NonTerminal, Terminals --> GRBody), (Entity::Head :- Body), Ctx) :-
 	!,
 	'$lgt_must_be'(object_identifier, Entity),
-	'$lgt_dcg_rule'((NonTerminal, Terminals --> GRBody), (Head :- Body)).
+	'$lgt_dcg_rule'((NonTerminal, Terminals --> GRBody), (Head :- Body), Ctx).
 
-'$lgt_dcg_rule'((':'(Module, NonTerminal), Terminals --> GRBody), (':'(Module, Head) :- Body)) :-
+'$lgt_dcg_rule'((':'(Module, NonTerminal), Terminals --> GRBody), (':'(Module, Head) :- Body), Ctx) :-
 	!,
 	'$lgt_must_be'(module_identifier, Module),
-	'$lgt_dcg_rule'((NonTerminal, Terminals --> GRBody), (Head :- Body)).
+	'$lgt_dcg_rule'((NonTerminal, Terminals --> GRBody), (Head :- Body), Ctx).
 
-'$lgt_dcg_rule'((NonTerminal, _ --> _), _) :-
+'$lgt_dcg_rule'((NonTerminal, _ --> _), _, _) :-
 	functor(NonTerminal, call, Arity),
 	Arity >= 1,
 	throw(permission_error(modify, built_in_non_terminal, call//Arity)).
 
-'$lgt_dcg_rule'((NonTerminal, Terminals --> GRBody), (Head :- Body)) :-
+'$lgt_dcg_rule'((NonTerminal, Terminals --> GRBody), (Head :- Body), Ctx) :-
 	!,
 	'$lgt_dcg_non_terminal'(NonTerminal, S0, S, Head),
-	'$lgt_dcg_body'(GRBody, S0, S1, Goal1),
+	'$lgt_dcg_body'(GRBody, S0, S1, Goal1, Ctx),
 	'$lgt_dcg_terminals'(Terminals, S, S1, Goal2),
 	Body = (Goal1, Goal2),
 	functor(NonTerminal, Functor, Arity),
-	(	'$lgt_pp_defines_non_terminal_'(Functor, Arity) ->
+	(	'$lgt_comp_ctx_mode'(Ctx, runtime) ->
 		true
-	;	assertz('$lgt_pp_defines_non_terminal_'(Functor, Arity))
+	;	(	'$lgt_pp_defines_non_terminal_'(Functor, Arity) ->
+			true
+		;	assertz('$lgt_pp_defines_non_terminal_'(Functor, Arity))
+		)
 	).
 
-'$lgt_dcg_rule'((Entity::NonTerminal --> GRBody), (Entity::Head :- Body)) :-
+'$lgt_dcg_rule'((Entity::NonTerminal --> GRBody), (Entity::Head :- Body), Ctx) :-
 	!,
 	'$lgt_must_be'(object_identifier, Entity),
-	'$lgt_dcg_rule'((NonTerminal --> GRBody), (Head :- Body)).
+	'$lgt_dcg_rule'((NonTerminal --> GRBody), (Head :- Body), Ctx).
 
-'$lgt_dcg_rule'((':'(Module, NonTerminal) --> GRBody), (':'(Module, Head) :- Body)) :-
+'$lgt_dcg_rule'((':'(Module, NonTerminal) --> GRBody), (':'(Module, Head) :- Body), Ctx) :-
 	!,
 	'$lgt_must_be'(module_identifier, Module),
-	'$lgt_dcg_rule'((NonTerminal --> GRBody), (Head :- Body)).
+	'$lgt_dcg_rule'((NonTerminal --> GRBody), (Head :- Body), Ctx).
 
-'$lgt_dcg_rule'((NonTerminal --> _), _) :-
+'$lgt_dcg_rule'((NonTerminal --> _), _, _) :-
 	functor(NonTerminal, call, Arity),
 	Arity >= 1,
 	throw(permission_error(modify, built_in_non_terminal, call//Arity)).
 
-'$lgt_dcg_rule'((NonTerminal --> GRBody), (Head :- Body)) :-
+'$lgt_dcg_rule'((NonTerminal --> GRBody), (Head :- Body), Ctx) :-
 	!,
 	'$lgt_dcg_non_terminal'(NonTerminal, S0, S, Head),
-	'$lgt_dcg_body'(GRBody, S0, S, Body),
+	'$lgt_dcg_body'(GRBody, S0, S, Body, Ctx),
 	functor(NonTerminal, Functor, Arity),
-	(	'$lgt_pp_defines_non_terminal_'(Functor, Arity) ->
+	(	'$lgt_comp_ctx_mode'(Ctx, runtime) ->
 		true
-	;	assertz('$lgt_pp_defines_non_terminal_'(Functor, Arity))
+	;	(	'$lgt_pp_defines_non_terminal_'(Functor, Arity) ->
+			true
+		;	assertz('$lgt_pp_defines_non_terminal_'(Functor, Arity))
+		)
 	).
 
-'$lgt_dcg_rule'(Term, _) :-
+'$lgt_dcg_rule'(Term, _, _) :-
 	throw(type_error(grammar_rule, Term)).
 
 
@@ -16487,31 +16495,31 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_dcg_body'(@dcgbody, @var, @var, -body)
+% '$lgt_dcg_body'(@dcgbody, @var, @var, -body, @compilation_context)
 %
 % translates a grammar rule body into a Prolog clause body
 
-'$lgt_dcg_body'(Var, S0, S, phrase(Var, S0, S)) :-
+'$lgt_dcg_body'(Var, S0, S, phrase(Var, S0, S), _) :-
 	var(Var),
 	!.
 
-'$lgt_dcg_body'(Obj::RGoal, S0, S, CGoal) :-
+'$lgt_dcg_body'(Obj::RGoal, S0, S, CGoal, _) :-
 	!,
 	'$lgt_dcg_msg'(RGoal, Obj, S0, S, CGoal).
 
-'$lgt_dcg_body'(::RGoal, S0, S, CGoal) :-
+'$lgt_dcg_body'(::RGoal, S0, S, CGoal, _) :-
 	!,
 	'$lgt_dcg_self_msg'(RGoal, S0, S, CGoal).
 
-'$lgt_dcg_body'(^^RGoal, S0, S, CGoal) :-
+'$lgt_dcg_body'(^^RGoal, S0, S, CGoal, _) :-
 	!,
 	'$lgt_dcg_super_call'(RGoal, S0, S, CGoal).
 
-'$lgt_dcg_body'(:RGoal, S0, S, CGoal) :-
+'$lgt_dcg_body'(:RGoal, S0, S, CGoal, _) :-
 	!,
 	'$lgt_dcg_ctg_call'(RGoal, S0, S, CGoal).
 
-'$lgt_dcg_body'(':'(Module, RGoal), S0, S, CGoal) :-
+'$lgt_dcg_body'(':'(Module, RGoal), S0, S, CGoal, _) :-
 	!,
 	(	callable(RGoal) ->
 		RGoal =.. RGoalUniv,
@@ -16521,49 +16529,49 @@ current_logtalk_flag(Flag, Value) :-
 	;	CGoal = call(':'(Module,RGoal), S0, S)
 	).
 
-'$lgt_dcg_body'('*->'(GRIf, GRThen), S0, S, '*->'(If, Then)) :-
+'$lgt_dcg_body'('*->'(GRIf, GRThen), S0, S, '*->'(If, Then), Ctx) :-
 	'$lgt_predicate_property'('*->'(_, _), built_in),
 	!,
-	'$lgt_dcg_body'(GRIf, S0, S1, If),
-	'$lgt_dcg_body'(GRThen, S1, S, Then).
+	'$lgt_dcg_body'(GRIf, S0, S1, If, Ctx),
+	'$lgt_dcg_body'(GRThen, S1, S, Then, Ctx).
 
-'$lgt_dcg_body'((GRIf -> GRThen), S0, S, (If -> Then)) :-
+'$lgt_dcg_body'((GRIf -> GRThen), S0, S, (If -> Then), Ctx) :-
 	!,
-	'$lgt_dcg_body'(GRIf, S0, S1, If),
-	'$lgt_dcg_body'(GRThen, S1, S, Then).
+	'$lgt_dcg_body'(GRIf, S0, S1, If, Ctx),
+	'$lgt_dcg_body'(GRThen, S1, S, Then, Ctx).
 
-'$lgt_dcg_body'((GREither; GROr), S0, S, (Either; Or)) :-
+'$lgt_dcg_body'((GREither; GROr), S0, S, (Either; Or), Ctx) :-
 	!,
-	'$lgt_dcg_body'(GREither, S0, S, Either),
-	'$lgt_dcg_body'(GROr, S0, S, Or).
+	'$lgt_dcg_body'(GREither, S0, S, Either, Ctx),
+	'$lgt_dcg_body'(GROr, S0, S, Or, Ctx).
 
-'$lgt_dcg_body'((GRFirst, GRSecond), S0, S, (First, Second)) :-
+'$lgt_dcg_body'((GRFirst, GRSecond), S0, S, (First, Second), Ctx) :-
 	!,
-	'$lgt_dcg_body'(GRFirst, S0, S1, First),
-	'$lgt_dcg_body'(GRSecond, S1, S, Second).
+	'$lgt_dcg_body'(GRFirst, S0, S1, First, Ctx),
+	'$lgt_dcg_body'(GRSecond, S1, S, Second, Ctx).
 
-'$lgt_dcg_body'(!, S0, S, (!, (S0 = S))) :-
+'$lgt_dcg_body'(!, S0, S, (!, (S0 = S)), _) :-
 	!.
 
-'$lgt_dcg_body'({}, S0, S, (S0 = S)) :-
+'$lgt_dcg_body'({}, S0, S, (S0 = S), _) :-
 	!.
 
-'$lgt_dcg_body'({Goal}, S0, S, (call(Goal), (S0 = S))) :-
+'$lgt_dcg_body'({Goal}, S0, S, (call(Goal), (S0 = S)), _) :-
 	var(Goal),
 	!.
 
-'$lgt_dcg_body'({Goal}, S0, S, (Goal, (S0 = S))) :-
+'$lgt_dcg_body'({Goal}, S0, S, (Goal, (S0 = S)), _) :-
 	!,
 	'$lgt_must_be'(callable, Goal).
 
-'$lgt_dcg_body'(\+ GRBody, S0, S, (\+ Goal, (S0 = S))) :-
+'$lgt_dcg_body'(\+ GRBody, S0, S, (\+ Goal, (S0 = S)), Ctx) :-
 	!,
-	'$lgt_dcg_body'(GRBody, S0, _, Goal).
+	'$lgt_dcg_body'(GRBody, S0, _, Goal, Ctx).
 
-'$lgt_dcg_body'(phrase(GRBody), S0, S, phrase(GRBody, S0, S)) :-
+'$lgt_dcg_body'(phrase(GRBody), S0, S, phrase(GRBody, S0, S), _) :-
 	!.
 
-'$lgt_dcg_body'(GRBody, S0, S, Goal) :-
+'$lgt_dcg_body'(GRBody, S0, S, Goal, _) :-
 	functor(GRBody, call, Arity),
 	Arity >= 1,
 	!,
@@ -16572,36 +16580,39 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_append'(Args, [S0, S], FullArgs),
 	Goal =.. [call, Closure| FullArgs].
 
-'$lgt_dcg_body'([], S0, S, (S0 = S)) :-
+'$lgt_dcg_body'([], S0, S, (S0 = S), _) :-
 	!.
 
-'$lgt_dcg_body'([T| Ts], S0, S, Goal) :-
+'$lgt_dcg_body'([T| Ts], S0, S, Goal, _) :-
 	!,
 	'$lgt_dcg_terminals'([T| Ts], S0, S, Goal).
 
-'$lgt_dcg_body'(String, S0, S, Goal) :-
+'$lgt_dcg_body'(String, S0, S, Goal, _) :-
 	'$lgt_string'(String),
 	!,
 	'$lgt_string_codes'(String, Codes),
 	'$lgt_dcg_terminals'(Codes, S0, S, Goal).
 
-'$lgt_dcg_body'(NonTerminal, S0, S, Goal) :-
+'$lgt_dcg_body'(NonTerminal, S0, S, Goal, Ctx) :-
 	'$lgt_pp_uses_non_terminal_'(Obj, Original, NonTerminal),
 	!,
-	'$lgt_dcg_body'(Obj::Original, S0, S, Goal).
+	'$lgt_dcg_body'(Obj::Original, S0, S, Goal, Ctx).
 
-'$lgt_dcg_body'(NonTerminal, S0, S, Goal) :-
+'$lgt_dcg_body'(NonTerminal, S0, S, Goal, Ctx) :-
 	'$lgt_pp_use_module_non_terminal_'(Module, Original, NonTerminal),
 	!,
-	'$lgt_dcg_body'(':'(Module, Original), S0, S, Goal).
+	'$lgt_dcg_body'(':'(Module, Original), S0, S, Goal, Ctx).
 
-'$lgt_dcg_body'(NonTerminal, S0, S, Goal) :-
+'$lgt_dcg_body'(NonTerminal, S0, S, Goal, Ctx) :-
 	'$lgt_dcg_non_terminal'(NonTerminal, S0, S, Goal),
 	functor(NonTerminal, Functor, Arity),
-	(	'$lgt_pp_calls_non_terminal_'(Functor, Arity, _) ->
+	(	'$lgt_comp_ctx_mode'(Ctx, runtime) ->
 		true
-	;	'$lgt_current_line_numbers'(Lines),
-		assertz('$lgt_pp_calls_non_terminal_'(Functor, Arity, Lines))
+	;	(	'$lgt_pp_calls_non_terminal_'(Functor, Arity, _) ->
+			true
+		;	'$lgt_current_line_numbers'(Lines),
+			assertz('$lgt_pp_calls_non_terminal_'(Functor, Arity, Lines))
+		)
 	).
 
 
