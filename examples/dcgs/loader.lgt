@@ -9,9 +9,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	current_prolog_flag(double_quotes, Value),
-	set_prolog_flag(double_quotes, codes),
+:- initialization(
 	logtalk_load([
 		parsep,
 		enigma,
@@ -26,23 +24,19 @@
 		bypass,
 		dcgtest,
 		metas
-	]),
-	set_prolog_flag(double_quotes, Value)
-)). 
+	])
+). 
 
 :- if(\+ current_logtalk_flag(prolog_dialect, lean)).
 
 	% Lean Prolog doesn't support the 0'<char> used in these examples
-	:- initialization((
-		current_prolog_flag(double_quotes, Value),
-		set_prolog_flag(double_quotes, codes),
+	:- initialization(
 		logtalk_load([
 			calculator,
 			macaddr,
 			url,
 			xml
-		]),
-		set_prolog_flag(double_quotes, Value)
-	)).
+		])
+	). 
 
 :- endif.
