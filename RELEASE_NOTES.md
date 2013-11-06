@@ -53,6 +53,13 @@ only defined for SWI-Prolog.
 compliance bug in the implementation of the `thread_sleep/1` predicate, which
 is now fixed in the latest development version of XSB.
 
+Examples
+--------
+
+* UPDATED: The loader and tester files of the `dcgs` example for compatibility
+with upcoming changes with SWI-Prolog, which may change the default value of
+the Prolog `double_quotes` flag from `codes` to `string`.
+
 
 3.00.0 Alpha 29 - October 31, 2013
 ==================================

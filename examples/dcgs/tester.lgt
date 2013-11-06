@@ -9,6 +9,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+:- if((current_logtalk_flag(prolog_dialect, swi), \+ current_prolog_flag(double_quotes, codes))).
+	:- set_prolog_flag(double_quotes, codes).
+:- endif.
+
+
 :- initialization((
 	set_logtalk_flag(report, warnings),
 	logtalk_load(library(types_loader)),
