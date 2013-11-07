@@ -60,6 +60,9 @@ Examples
 with upcoming changes with SWI-Prolog, which may change the default value of
 the Prolog `double_quotes` flag from `codes` to `string`.
 
+* UPDATED: The `parametric` example for compatibility with upcoming changes
+with SWI-Prolog, which changes the internal representation for lists.
+
 
 3.00.0 Alpha 29 - October 31, 2013
 ==================================

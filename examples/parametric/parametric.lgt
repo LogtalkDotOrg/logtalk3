@@ -24,8 +24,8 @@
 
 % dealing with non-empty lists is easy:
 
-:- object(.(_, _)).			% note that the [X, Y, ...] notation
-							% is just syntactic sugar for ./2
+:- object([_| _]).			% note that the lists are compound terms
+
 	:- public(last/1).
 	:- mode(last(?term), zero_or_one).
 
@@ -64,8 +64,8 @@
 
 % dealing with empty lists must also be done but it's a bit tricky:
 
-:- object([],				% the empty list is an atom, not a compound term, 
-	extends([.(_, _)])).	% so the "extends" relation would be always wrong
+:- object('[]',				% the empty list is usually an atom, not a compound term, 
+	extends([[_| _]])).		% so the "extends" relation would be always wrong
 
 	last(_) :-				% the trick is to redefine all inherited predicates
 		fail.				% to do the right thing for empty lists

@@ -19,8 +19,8 @@
 		comment is 'Unit tests for the "parametric" example.'
 	]).
 
-	unit(.(_, _)).
-	unit([]).
+	unit([_| _]).
+	unit('[]').
 	unit(date(_, _, _)).
 	unit(time(_, _, _)).
 	unit(rectangle(_, _, _, _)).
@@ -43,7 +43,7 @@
 		Solutions == [3].
 
 	test(parametric_4) :-
-		\+ []::member(_).
+		\+ '[]'::member(_).
 
 	test(parametric_5) :-
 		rectangle(W, H, X, Y)::init, rectangle(W, H, X, Y)::move(3, 4, NR), NR::position(X2, Y2),
