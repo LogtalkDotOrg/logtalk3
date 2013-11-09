@@ -31,6 +31,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Experimental support for using strings in `info/1-2` directives
+argument pairs where atoms were previously required.
+
 * ADDED: Experimental support for using a backend Prolog compiler string
 built-in term type in DCGs. 
 

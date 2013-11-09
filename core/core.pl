@@ -7897,16 +7897,14 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_entity_info_directive_pair'(author, Author, author(Author)) :-
 	!,
-	(	atom(Author) ->
+	(	Author = {EntityName}, atom(EntityName) ->
 		true
-	;	Author = {EntityName}, atom(EntityName) ->
-		true
-	;	throw(type_error(atom, Author))
+	;	'$lgt_must_be'(atom_or_string, Author)
 	).
 
 '$lgt_tr_entity_info_directive_pair'(comment, Comment, comment(Comment)) :-
 	!,
-	'$lgt_must_be'(atom, Comment).
+	'$lgt_must_be'(atom_or_string, Comment).
 
 '$lgt_tr_entity_info_directive_pair'(date, Date, date(Date)) :-
 	!,
@@ -7931,24 +7929,20 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_entity_info_directive_pair'(version, Version, version(Version)) :-
 	!,
-	'$lgt_must_be'(atomic, Version).
+	'$lgt_must_be'(atomic_or_string, Version).
 
 '$lgt_tr_entity_info_directive_pair'(copyright, Copyright, copyright(Copyright)) :-
 	!,
-	(	atom(Copyright) ->
+	(	Copyright = {EntityName}, atom(EntityName) ->
 		true
-	;	Copyright = {EntityName}, atom(EntityName) ->
-		true
-	;	throw(type_error(atom, Copyright))
+	;	'$lgt_must_be'(atom_or_string, Copyright)
 	).
 
 '$lgt_tr_entity_info_directive_pair'(license, License, license(License)) :-
 	!,
-	(	atom(License) ->
+	(	License = {EntityName}, atom(EntityName) ->
 		true
-	;	License = {EntityName}, atom(EntityName) ->
-		true
-	;	throw(type_error(atom, License))
+	;	'$lgt_must_be'(atom_or_string, License)
 	).
 
 % user-defined entity info pair; no checking
@@ -7970,9 +7964,9 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_check_entity_info_parameters'([Pair| Pairs], Parameters, Counter0, Arity) :-
 	!,
-	(	Pair = Name - Description,
-		atom(Name),
-		atom(Description) ->
+	(	Pair = Name - Description ->
+		'$lgt_must_be'(atom_or_string, Name),
+		'$lgt_must_be'(atom_or_string, Description),
 		Counter1 is Counter0 + 1,
 		'$lgt_check_entity_info_parameters'(Pairs, Parameters, Counter1, Arity)
 	;	throw(type_error(pair, Pair))
@@ -7995,11 +7989,9 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_check_entity_info_parnames'([Name| Names], Parnames, Counter0, Arity) :-
 	!,
-	(	atom(Name) ->
-		Counter1 is Counter0 + 1,
-		'$lgt_check_entity_info_parnames'(Names, Parnames, Counter1, Arity)
-	;	throw(type_error(atom, Name))
-	).
+	'$lgt_must_be'(atom_or_string, Name),
+	Counter1 is Counter0 + 1,
+	'$lgt_check_entity_info_parnames'(Names, Parnames, Counter1, Arity).
 
 '$lgt_check_entity_info_parnames'(_, Parnames, _, _) :-
 	throw(type_error(list, Parnames)).
@@ -8044,7 +8036,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_predicate_info_directive_pair'(comment, Comment, _, _, comment(Comment)) :-
 	!,
-	'$lgt_must_be'(atom, Comment).
+	'$lgt_must_be'(atom_or_string, Comment).
 
 '$lgt_tr_predicate_info_directive_pair'(exceptions, Exceptions, _, _, exceptions(Exceptions)) :-
 	!,
@@ -8089,9 +8081,9 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_check_predicate_info_arguments'([Pair| Pairs], Arguments, Counter0, Arity) :-
 	!,
-	(	Pair = Name - Description,
-		atom(Name),
-		atom(Description) ->
+	(	Pair = Name - Description ->
+		'$lgt_must_be'(atom_or_string, Name),
+		'$lgt_must_be'(atom_or_string, Description),
 		Counter1 is Counter0 + 1,
 		'$lgt_check_predicate_info_arguments'(Pairs, Arguments, Counter1, Arity)
 	;	throw(type_error(pair, Pair))
@@ -8114,11 +8106,9 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_check_predicate_info_argnames'([Name| Names], Arguments, Counter0, Arity) :-
 	!,
-	(	atom(Name) ->
-		Counter1 is Counter0 + 1,
-		'$lgt_check_predicate_info_argnames'(Names, Arguments, Counter1, Arity)
-	;	throw(type_error(atom, Name))
-	).
+	'$lgt_must_be'(atom_or_string, Name),
+	Counter1 is Counter0 + 1,
+	'$lgt_check_predicate_info_argnames'(Names, Arguments, Counter1, Arity).
 
 '$lgt_check_predicate_info_argnames'(_, Arguments, _, _) :-
 	throw(type_error(list, Arguments)).
@@ -17997,6 +17987,16 @@ current_logtalk_flag(Flag, Value) :-
 	;	throw(error(type_error(atom, Term), Context))
 	).
 
+'$lgt_must_be'(atom_or_string, Term, Context) :-
+	(	atom(Term) ->
+		true
+	;	'$lgt_string'(Term) ->
+		true
+	;	var(Term) ->
+		throw(error(instantiation_error, Context))	
+	;	throw(error(type_error(atom_or_string, Term), Context))
+	).
+
 '$lgt_must_be'(integer, Term, Context) :-
 	(	integer(Term) ->
 		true
@@ -18047,6 +18047,16 @@ current_logtalk_flag(Flag, Value) :-
 	;	var(Term) ->
 		throw(error(instantiation_error, Context))
 	;	throw(error(type_error(atomic, Term), Context))
+	).
+
+'$lgt_must_be'(atomic_or_string, Term, Context) :-
+	(	atomic(Term) ->
+		true
+	;	'$lgt_string'(Term) ->
+		true
+	;	var(Term) ->
+		throw(error(instantiation_error, Context))	
+	;	throw(error(type_error(atomic_or_string, Term), Context))
 	).
 
 '$lgt_must_be'(curly_bracketed_term, Term, Context) :-

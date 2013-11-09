@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/10/11,
+		date is 2013/11/09,
 		comment is 'Documenting tool.',
 		remarks is [
 			'Compiling files for generating XML documentation' - 'All source files must be compiled with the "source_data" compiler flag turned on.',
@@ -416,17 +416,20 @@
 		;	true
 		),
 		(	member(author(Author), Info) ->
-			(	atom(Author) ->
-				write_xml_cdata_element(Stream, author, [], Author)
-			;	entity_name_to_xml_entity(Author, AuthorEntity),
-				write_xml_element(Stream, author, [], AuthorEntity)
+			(	Author = {EntityName} ->
+				entity_name_to_xml_entity(EntityName, XMLEntity),
+				write_xml_element(Stream, author, [], XMLEntity)
+			;	write_xml_cdata_element(Stream, author, [], Author)
 			)
 		;	true
 		),
 		(	member(version(Version), Info) ->
-			number_codes(Version, VersionCodes),
-			atom_codes(VersionAtom, VersionCodes),
-			write_xml_element(Stream, version, [], VersionAtom)
+			(	number(Version) ->
+				number_codes(Version, VersionCodes),
+				atom_codes(VersionAtom, VersionCodes),
+				write_xml_element(Stream, version, [], VersionAtom)
+			;	write_xml_element(Stream, version, [], Version)
+			)
 		;	true
 		),
 		(	member(date(Date), Info) ->
@@ -434,18 +437,18 @@
 		;	true
 		),
 		(	member(copyright(Copyright), Info) ->
-			(	atom(Copyright) ->
-				write_xml_element(Stream, copyright, [], Copyright)
-			;	entity_name_to_xml_entity(Copyright, CopyrightEntity),
-				write_xml_element(Stream, copyright, [], CopyrightEntity)
+			(	Copyright = {EntityName} ->
+				entity_name_to_xml_entity(EntityName, XMLEntity),
+				write_xml_element(Stream, copyright, [], XMLEntity)
+			;	write_xml_element(Stream, copyright, [], Copyright)
 			)
 		;	true
 		),
 		(	member(license(License), Info) ->
-			(	atom(License) ->
-				write_xml_element(Stream, license, [], License)
-			;	entity_name_to_xml_entity(License, LicenseEntity),
-				write_xml_element(Stream, license, [], LicenseEntity)
+			(	License = {EntityName} ->
+				entity_name_to_xml_entity(EntityName, XMLEntity),
+				write_xml_element(Stream, license, [], XMLEntity)
+			;	write_xml_element(Stream, license, [], License)
 			)
 		;	true
 		),
