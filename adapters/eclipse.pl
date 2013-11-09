@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on November 1, 2013
+%  Last updated on November 9, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -750,15 +750,15 @@ setup_call_cleanup(_, _, _) :-
 
 % '$lgt_string'(@term)
 
-'$lgt_string'(_) :-
-	fail.
+'$lgt_string'(Term) :-
+	string(Term).
 
 
 % '$lgt_string_codes'(+string, -list(codes))
 % '$lgt_string_codes'(-string, +list(codes))
 
-'$lgt_string_codes'(_, _) :-
-	fail.
+'$lgt_string_codes'(String, Codes) :-
+	string_list(String, Codes).
 
 
 
