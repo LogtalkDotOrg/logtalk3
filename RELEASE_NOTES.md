@@ -53,6 +53,9 @@ only defined for SWI-Prolog and ECLiPSe.
 compliance bug in the implementation of the `thread_sleep/1` predicate, which
 is now fixed in the latest development version of XSB.
 
+* UPDATED: The Qu-Prolog adapter file with a better definition for the missing
+`sub_atom/5` standard predicate.
+
 Examples
 --------
 

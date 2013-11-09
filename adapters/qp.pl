@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Qu-Prolog 9.0 and later versions
-%  Last updated on November 1, 2013
+%  Last updated on November 9, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -45,13 +45,10 @@
 '$lgt_iso_predicate'(subsumes_term(_, _)).
 '$lgt_iso_predicate'(term_variables(_, _)).
 
-% utterly broken hack just for allowing Logtalk to startup
-sub_atom(Atom, 0, _, _, SubAtom) :-
-	atom_concat(SubAtom, _, Atom),
-	!.
-sub_atom(Atom, _Before, 1, 0, SubAtom) :-
-	atom_length(Atom, Lenght),
-	atom_search(Atom, Lenght, SubAtom, Lenght).
+sub_atom(Atom, Before, Length, After, SubAtom) :-
+	string_to_atom(String, Atom),
+	sub_string(String, Before, Length, After, SubString),
+	string_to_atom(SubString, SubAtom).
 
 subsumes_term(General, Specific) :-
 	collect_vars(Specific, Vars),
