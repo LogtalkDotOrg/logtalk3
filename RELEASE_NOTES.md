@@ -59,6 +59,9 @@ is now fixed in the latest development version of XSB.
 * UPDATED: The Qu-Prolog adapter file with a better definition for the missing
 `sub_atom/5` standard predicate.
 
+* UPDATED: The YAP adapter file to ensure that auto-loading is not used when
+querying predicate properties.
+
 Examples
 --------
 
