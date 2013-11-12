@@ -27,34 +27,37 @@
 
 %  This is a sample settings file for Logtalk that can be used to override
 %  the default flag values in the back-end Prolog compiler adapter files.
-%  Using settings files allows Logtalk to easily support per-project
-%  settings. Note that the settings defined here can always be overridden
-%  by using the logtalk_compile/2 and logtalk_load/2 built-in predicates
-%  or by using the set_logtalk_flag/2 directive within the source files.
+%  This is specially useful when Logtalk is installed system-wide in a
+%  read-only directory. Using settings files allows Logtalk to easily support
+%  user-specific settings. Note that the settings defined here can always
+%  be overridden by using the logtalk_compile/2 and logtalk_load/2 built-in
+%  predicates or by using the set_logtalk_flag/2 directive within the source
+%  files.
 %
-%  To use this feature, copy this file to the directory containing your
-%  project files, rename it to "settings.lgt", customize it (see the examples
-%  below), and start Logtalk from the project directory. Note that, for
-%  setting Logtalk flag values, you must use the set_logtalk_flag/2 predicate
-%  (wrapped in a directive initialization/1) as the scope of the directive
-%  set_logtalk_flag/2 is always local to the entity or the source file
-%  containing it.
+%  Logtalk looks for a settings file first in the startup directory (thus
+%  supporting per-project settings files). If not found, Logtalk looks for
+%  a settings file in the Logtalk user directory. If no settings file is
+%  found, Logtalk will use the default flag values defined in the back-end
+%  Prolog compiler adapter file.
 %
-%  If you use more than one back-end Prolog compiler and want to use
-%  different settings per compiler you will need to use the Logtalk 
-%  conditional compilation directives and the "prolog_dialect" compiler
-%  flag. See the User and Reference Manuals for details.
+%  To use this feature, copy this file to your Logtalk user directory or to
+%  the directory containing your project files, rename it to "settings.lgt",
+%  customize it (see the examples below), and start Logtalk from the desired
+%  directory. Note that, for setting Logtalk flag values, you must use the
+%  set_logtalk_flag/2 predicate (wrapped in a directive initialization/1)
+%  as the scope of the directive set_logtalk_flag/2 is always local to the
+%  entity or the source file containing it.
+%
+%  If you use more than one back-end Prolog compiler and want to use per
+%  compiler settings, you can use the Logtalk conditional compilation
+%  directives and the "prolog_dialect" compiler flag. See the User and
+%   Reference Manuals for details.
 %
 %  Logtalk compiles and loads settings files silently but a warning will
-%  be printed if syntax errors are found. Be sure to debug and test your
-%  settings files as regular Logtalk source files before using them (you
-%  may use the logtalk_compile/1-2 built-in predicates to compile the
-%  settings files without loading them).
-%
-%  Logtalk looks for a settings file first in the startup directory. If not
-%  found, Logtalk looks for a settings file in the Logtalk user directory.
-%  If no settings file is found, Logtalk will use the default flag values
-%  defined in the back-end Prolog compiler adapter file.
+%  be printed by default if syntax errors are found. Be sure to debug and
+%  test your settings files as regular Logtalk source files before using
+%  them (you may use the logtalk_compile/1-2 built-in predicates to compile
+%  the settings files without loading them).
 %
 %  Limitations of the back-end Prolog compilers may prevent settings files
 %  to work from directories other than the Logtalk user directory, specially

@@ -62,6 +62,11 @@ is now fixed in the latest development version of XSB.
 * UPDATED: The YAP adapter file to ensure that auto-loading is not used when
 querying predicate properties.
 
+Documentation
+-------------
+
+* IMPROVED: Documentation of the sample settings file.
+
 Examples
 --------
 
