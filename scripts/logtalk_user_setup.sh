@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Logtalk user folder setup script
-##   Last updated on October 1, 2013
+##   Last updated on November 12, 2013
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -127,6 +127,7 @@ cp -RL "$LOGTALKHOME"/library "$LOGTALKUSER"/
 cp -RL "$LOGTALKHOME"/scratch "$LOGTALKUSER"/
 cp -RL "$LOGTALKHOME"/tests "$LOGTALKUSER"/
 cp -RL "$LOGTALKHOME"/tools "$LOGTALKUSER"/
+cp "$LOGTALKHOME"/loader-sample.lgt "$LOGTALKUSER"/loader-sample.lgt
 cp "$LOGTALKHOME"/settings-sample.lgt "$LOGTALKUSER"/settings-sample.lgt
 cp "$LOGTALKHOME"/VERSION.txt "$LOGTALKUSER"/
 chmod -R u+w "$LOGTALKUSER"

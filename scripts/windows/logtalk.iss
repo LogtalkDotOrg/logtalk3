@@ -99,6 +99,7 @@ Source: "{#MyBaseDir}\library\*"; Excludes: ".*"; DestDir: "{code:GetLgtUserDir}
 Source: "{#MyBaseDir}\scratch\*"; Excludes: ".*"; DestDir: "{code:GetLgtUserDir}\scratch"; Components: user; Flags: ignoreversion recursesubdirs createallsubdirs uninsneveruninstall
 Source: "{#MyBaseDir}\tools\*"; Excludes: ".*"; DestDir: "{code:GetLgtUserDir}\tools"; Components: user; Flags: ignoreversion recursesubdirs createallsubdirs uninsneveruninstall
 
+Source: "{#MyBaseDir}\loader-sample.lgt"; DestDir: "{code:GetLgtUserDir}"; DestName: "loader-sample.lgt"; Components: user; Flags: ignoreversion uninsneveruninstall
 Source: "{#MyBaseDir}\settings-sample.lgt"; DestDir: "{code:GetLgtUserDir}"; DestName: "settings-sample.lgt"; Components: user; Flags: ignoreversion uninsneveruninstall
 Source: "{#MyBaseDir}\VERSION.txt"; DestDir: "{code:GetLgtUserDir}"; DestName: "VERSION.txt"; Components: user; Flags: ignoreversion uninsneveruninstall
 

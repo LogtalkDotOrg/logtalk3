@@ -67,6 +67,8 @@ Documentation
 
 * IMPROVED: Documentation of the sample settings file.
 
+* ADDED: Sample loader file, `loader-sample.lgt`.
+
 Examples
 --------
 

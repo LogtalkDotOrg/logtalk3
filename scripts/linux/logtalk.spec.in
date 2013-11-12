@@ -38,6 +38,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc /usr/local/share/LOGTALK_INSTALL_DIRECTORY/RELEASE_NOTES.md
 %doc /usr/local/share/LOGTALK_INSTALL_DIRECTORY/UPGRADING.md
 /usr/local/share/LOGTALK_INSTALL_DIRECTORY/VERSION.txt
+/usr/local/share/LOGTALK_INSTALL_DIRECTORY/loader-sample.lgt
+/usr/local/share/LOGTALK_INSTALL_DIRECTORY/settings-sample.lgt
 /usr/local/share/LOGTALK_INSTALL_DIRECTORY/adapters
 /usr/local/share/LOGTALK_INSTALL_DIRECTORY/coding
 /usr/local/share/LOGTALK_INSTALL_DIRECTORY/contributions
@@ -51,7 +53,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc /usr/local/share/LOGTALK_INSTALL_DIRECTORY/manuals
 /usr/local/share/LOGTALK_INSTALL_DIRECTORY/scratch
 /usr/local/share/LOGTALK_INSTALL_DIRECTORY/scripts
-/usr/local/share/LOGTALK_INSTALL_DIRECTORY/settings-sample.lgt
 /usr/local/share/LOGTALK_INSTALL_DIRECTORY/tests
 /usr/local/share/LOGTALK_INSTALL_DIRECTORY/tools
 /usr/local/share/logtalk

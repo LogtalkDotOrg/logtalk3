@@ -4,7 +4,7 @@
 //   Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 // 
 //   Logtalk user folder setup script
-//   Last updated on October 1, 2013
+//   Last updated on November 12, 2013
 //
 //   This program is free software: you can redistribute it and/or modify
 //   it under the terms of the GNU General Public License as published by
@@ -122,6 +122,7 @@ FSObject.CopyFolder(logtalk_home + "\\library", logtalk_user + "\\library");
 FSObject.CopyFolder(logtalk_home + "\\scratch", logtalk_user + "\\scratch");
 FSObject.CopyFolder(logtalk_home + "\\tests", logtalk_user + "\\tests");
 FSObject.CopyFolder(logtalk_home + "\\tools", logtalk_user + "\\tools");
+FSObject.CopyFile(logtalk_home + "\\loader-sample.lgt", logtalk_user + "\\loader-sample.lgt");
 FSObject.CopyFile(logtalk_home + "\\settings-sample.lgt", logtalk_user + "\\settings-sample.lgt");
 FSObject.CopyFile(logtalk_home + "\\VERSION.txt", logtalk_user + "\\VERSION.txt");
 

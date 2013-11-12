@@ -109,14 +109,14 @@ shorthands for commonly used load and make predicates.
 3. Take a look at the `coding` sub-directory. There you will find syntax 
 support files for popular text editors which enable syntax coloring and
 other text services when editing Logtalk source files. There's also
-support for syntax highlighters used for publishing code.
+support for syntax highlighters used for publishing source code.
 
 4. Create a sub-directory with a suitable name to hold all the files of 
 your application. You may want to define the application directory path
 in a `settings.lgt` file in order to easily load your application (see 
 the file `CUSTOMIZE.md` for details).
 
-5. Copy to this sub-directory a loader file from one of the example 
-directories and modify it to load your own source files.
+5. Copy to this sub-directory the `loader-sample.lgt` file, rename it to 
+`loader.lgt`, and modify it to load your application source files.
 
 6. Have fun!
