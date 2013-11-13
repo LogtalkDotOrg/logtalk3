@@ -844,17 +844,18 @@ user:goal_expansion('::'(Object, Message), user:Goal) :-
 	write_canonical(Stream, (:- Directive)),
 	write(Stream, '.\n').
 
-'$lgt_write_term_and_source_location'(Stream, Term, Kind, File+Line) :-
-	(	Kind == aux ->
-		(	Term = (Head :- _) ->
-			true
-		;	Term \= (:- _),
-			Term = Head
-		),
-		functor(Head, Functor, Arity),
-		'$lgt_swi_write_hide_directive'(Stream, Functor/Arity)
-	;	true
+'$lgt_write_term_and_source_location'(Stream, Term, aux, File+Line) :-
+	!,
+	(	Term = (Head :- _) ->
+		true
+	;	Term = Head
 	),
+	functor(Head, Functor, Arity),
+	'$lgt_swi_write_hide_directive'(Stream, Functor/Arity),
+	write_canonical(Stream, '$source_location'(File,Line):Term),
+	write(Stream, '.\n').
+
+'$lgt_write_term_and_source_location'(Stream, Term, _, File+Line) :-
 	write_canonical(Stream, '$source_location'(File,Line):Term),
 	write(Stream, '.\n').
 
@@ -895,17 +896,17 @@ user:goal_expansion('::'(Object, Message), user:Goal) :-
 	'$hide'(user:Rnm/3),
 	assertz('$lgt_current_protocol_'(Ptc, Prefix, Dcl, Rnm, Flags)).
 
-'$lgt_assertz_entity_clause'(Term, Kind) :-
-	(	Kind == aux ->
-		(	Term = (Head :- _) ->
-			true
-		;	Term \= (:- _),
-			Term = Head
-		),
-		functor(Head, Functor, Arity),
-		'$hide'(user:Functor/Arity)
-	;	true
+'$lgt_assertz_entity_clause'(Term, aux) :-
+	!,
+	(	Term = (Head :- _) ->
+		true
+	;	Term = Head
 	),
+	functor(Head, Functor, Arity),
+	'$hide'(user:Functor/Arity),
+	assertz(Term).
+
+'$lgt_assertz_entity_clause'(Term, _) :-
 	assertz(Term).
 
 
