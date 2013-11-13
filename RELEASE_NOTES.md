@@ -28,6 +28,14 @@ RELEASE NOTES
 3.00.0 Alpha 31 - November ??, 2013
 ===================================
 
+Prolog adapter and integration files
+------------------------------------
+
+* CHANGED: Removed from the SWI-Prolog adapter file the workaround for the
+`public` prefix operator defined by this compiler as the potential syntax
+clashes seldom occur in practice and the source file compilation performance
+hit was significant.
+
 Examples
 --------
 
