@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SWI Prolog 6.0.0 and later versions
-%  Last updated on November 1, 2013
+%  Last updated on November 13, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -566,19 +566,19 @@
 
 	% just in case the operator definition changes or is removed,
 	% we also provide a more generic definition of this predicate
-	'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd) :-
+	'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, Variables) :-
 		(	'$lgt_pp_module_'(_) ->
 			% compiling a module as an object
-			read_term(Stream, Term, [term_position(PositionBegin)| Options])
+			read_term(Stream, Term, [term_position(PositionBegin), variable_names(Variables)| Options])
 		;	current_op(Priority, Specifier, (public)) ->
 			% workaround SWI-Prolog public/1 operator clash
 			setup_call_cleanup(
 				op(0, Specifier, (public)),
-				read_term(Stream, Term, [term_position(PositionBegin)| Options]),
+				read_term(Stream, Term, [term_position(PositionBegin), variable_names(Variables)| Options]),
 				op(Priority, Specifier, (public))
 			)
 		;	% public/1 operator not present (likely an old SWI-Prolog version)
-			read_term(Stream, Term, [term_position(PositionBegin)| Options])
+			read_term(Stream, Term, [term_position(PositionBegin), variable_names(Variables)| Options])
 		),
 		stream_position_data(line_count, PositionBegin, LineBegin),
 		stream_property(Stream, position(PositionEnd)),
