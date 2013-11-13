@@ -25,6 +25,17 @@ RELEASE NOTES
 =============
 
 
+3.00.0 Alpha 31 - November ??, 2013
+===================================
+
+Examples
+--------
+
+* UPDATED: Examples `expansion` and `inheritance` to avoid a syntax clash
+with some backend Prolog compilers such as SWI-Prolog that define a `public`
+prefix operator.
+
+
 3.00.0 Alpha 30 - November 12, 2013
 ===================================
 

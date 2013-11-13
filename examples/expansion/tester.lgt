@@ -9,6 +9,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% some backend Prolog compilers such as SWI-Prolog define a 'public'
+% operator, which can cause syntax errors when loading this example
+:- if(current_op(_, fx, (public))).
+	:- op(0, fx, (public)).
+:- endif.
+
+
 :- initialization((
 	set_logtalk_flag(report, warnings),
 	logtalk_load(lgtunit(loader)),
