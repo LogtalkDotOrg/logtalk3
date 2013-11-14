@@ -28,6 +28,12 @@ RELEASE NOTES
 3.00.0 Alpha 31 - November ??, 2013
 ===================================
 
+Logtalk compiler and runtime
+----------------------------
+
+* IMPROVED: Perform basic type checking of plain Prolog predicate clauses
+when compiling source files.
+
 Prolog adapter and integration files
 ------------------------------------
 
