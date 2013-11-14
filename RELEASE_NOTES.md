@@ -31,6 +31,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: Minor compiler performance improvements to the compilation of
+entity clauses.
+
 * IMPROVED: Perform basic type checking of plain Prolog predicate clauses
 when compiling source files.
 

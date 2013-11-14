@@ -8156,9 +8156,16 @@ current_logtalk_flag(Flag, Value) :-
 % translates a source file clause
 
 '$lgt_tr_clause'(Clause, Ctx) :-
-	% ensure that only the compilation context mode is shared between different clauses
+	'$lgt_pp_entity_'(Type, Entity, Prefix, _, _),
+	(	Type == protocol ->
+		% protocols cannot contain predicate definitions
+		throw(error(permission_error(define, clause, Entity), clause(Clause)))
+	;	true
+	),
+	'$lgt_must_be'(clause, Clause),
+	% ensure that only the compilation context mode and the entity prefix
+	% are shared between different clauses
 	'$lgt_comp_ctx_mode'(Ctx, Mode),
-	'$lgt_pp_entity_'(_, _, Prefix, _, _),
 	'$lgt_comp_ctx'(NewCtx, _, _, _, _, Prefix, _, _, _, Mode, _),
 	% we're translating an entity clause
 	catch(
@@ -8204,16 +8211,6 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_tr_clause'(+clause, -clause, -clause, +compilation_context)
 %
 % translates an entity clause into a normal clause and a debug clause
-
-'$lgt_tr_clause'(Clause, _, _, _) :-
-	'$lgt_must_be'(clause, Clause),
-	'$lgt_pp_protocol_'(_, _, _, _, _),
-	% protocols cannot contain predicate definitions
-	(	Clause = (Head:-_)
-	;	Clause = Head
-	),
-	functor(Head, Functor, Arity),
-	throw(permission_error(define, predicate, Functor/Arity)).
 
 '$lgt_tr_clause'((Head:-Body), (THead:-'$lgt_nop'(Body), SBody), (THead:-'$lgt_nop'(Body),'$lgt_debug'(rule(Entity, Head, N), ExCtx),DBody), Ctx) :-
 	'$lgt_pp_dynamic_'(Head),
