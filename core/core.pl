@@ -4903,8 +4903,8 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_tr_file_term'(?term, +list, @stream)
 
-'$lgt_tr_file_term'(Term, _, _) :-
-	var(Term),
+'$lgt_tr_file_term'((-), _, _) :-
+	% catch variables
 	throw(instantiation_error).
 
 '$lgt_tr_file_term'(end_of_file, _, _) :-
@@ -5770,16 +5770,14 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_tr_file_term'(@term, +compilation_context)
+% '$lgt_tr_file_term'(@nonvar, +compilation_context)
 %
 % translates a source file term (clause, directive, or grammar rule);
 % we allow non-callable terms to be term-expanded; only if that fails
 % we throw an error
 
 '$lgt_tr_file_term'(Term, Ctx) :-
-	(	var(Term) ->
-		throw(error(instantiantion_error, term(Term)))
-	;	'$lgt_pp_hook_term_expansion_'(Term, ExpandedTerms) ->
+	(	'$lgt_pp_hook_term_expansion_'(Term, ExpandedTerms) ->
 		% source-file specific compiler hook
 		'$lgt_tr_expanded_terms'(ExpandedTerms, Term, Ctx)
 	;	'$lgt_hook_term_expansion_'(Term, ExpandedTerms) ->
@@ -5816,9 +5814,9 @@ current_logtalk_flag(Flag, Value) :-
 % the second argument is the original term and is used for more
 % informative exception terms in case of error
 
-'$lgt_tr_expanded_terms'(ExpandedTerms, Term, _) :-
-	var(ExpandedTerms),
-	throw(error(instantiantion_error, term_expansion(Term, ExpandedTerms))).
+'$lgt_tr_expanded_terms'((-), Term, _) :-
+	% catch variables
+	throw(error(instantiantion_error, term_expansion(Term, _))).
 
 '$lgt_tr_expanded_terms'([], _, _) :-
 	!.
@@ -5839,9 +5837,9 @@ current_logtalk_flag(Flag, Value) :-
 % the second argument is the original term and is used for more
 % informative exception terms in case of error
 
-'$lgt_tr_expanded_term'(ExpandedTerm, Term, _) :-
-	var(Term),
-	throw(error(instantiantion_error, term_expansion(Term, ExpandedTerm))).
+'$lgt_tr_expanded_term'((-), Term, _) :-
+	% catch variables
+	throw(error(instantiantion_error, term_expansion(Term, _))).
 
 '$lgt_tr_expanded_term'(end_of_file, _, _) :-
 	!.
@@ -5907,9 +5905,9 @@ current_logtalk_flag(Flag, Value) :-
 %
 % translates a rumtime term (a clause, directive, or grammar rule)
 
-'$lgt_tr_runtime_term'(Term, _) :-
-	var(Term),
-	throw(error(instantiantion_error, term(Term))).
+'$lgt_tr_runtime_term'((-), _) :-
+	% catch variables
+	throw(error(instantiantion_error, term(_))).
 
 '$lgt_tr_runtime_term'({Term}, _) :-
 	% bypass control construct; term is final
@@ -5947,9 +5945,9 @@ current_logtalk_flag(Flag, Value) :-
 %
 % translates a directive
 
-'$lgt_tr_directive'(Directive, _) :-
-	var(Directive),
-	throw(error(instantiantion_error, directive(Directive))).
+'$lgt_tr_directive'((-), _) :-
+	% catch variables
+	throw(error(instantiantion_error, directive(_))).
 
 
 % conditional compilation directives
@@ -8162,7 +8160,7 @@ current_logtalk_flag(Flag, Value) :-
 		throw(error(permission_error(define, clause, Entity), clause(Clause)))
 	;	true
 	),
-	'$lgt_must_be'(clause, Clause),
+	'$lgt_must_be'(clause, Clause, clause(Clause)),
 	% ensure that only the compilation context mode and the entity prefix
 	% are shared between different clauses
 	'$lgt_comp_ctx_mode'(Ctx, Mode),
