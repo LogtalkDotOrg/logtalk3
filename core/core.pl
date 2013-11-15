@@ -10076,13 +10076,6 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_tr_body'('$lgt_callN'(Closure, ExtraArgs), TPred, DPred, Ctx).
 
 
-% non-callable terms
-
-'$lgt_tr_body'(Pred, _, _, _) :-
-	\+ callable(Pred),
-	throw(type_error(callable, Pred)).
-
-
 % predicates specified in uses/2 directives
 
 '$lgt_tr_body'(Alias, TPred, '$lgt_debug'(goal(Alias, TPred), ExCtx), Ctx) :-
@@ -10102,6 +10095,13 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_tr_body'(Obj::Pred, TPred, _, Ctx)
 	),
 	!.
+
+
+% non-callable terms
+
+'$lgt_tr_body'(Pred, _, _, _) :-
+	\+ callable(Pred),
+	throw(type_error(callable, Pred)).
 
 
 % call to a meta-predicate from a user-defined meta-predicate;
@@ -10255,13 +10255,6 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	DPred = '$lgt_debug'(goal(Pred, TPred), ExCtx),
 	!.
-
-
-% invalid goal
-
-'$lgt_tr_body'(Pred, _, _, _) :-
-	\+ callable(Pred),
-	throw(type_error(callable, Pred)).
 
 
 % goal is a call to a dynamic predicate within a category
@@ -15204,7 +15197,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	% check if call/2-N
 		functor(Method, call, Arity),
 		Arity > 1,
-		functor(Meta, call, Arity),	
+		functor(Meta, call, Arity),
 		Closure is Arity - 1,
 		arg(1, Meta, Closure),
 		'$lgt_built_in_method_call_n_args'(Arity, Meta)
