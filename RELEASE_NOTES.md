@@ -31,6 +31,12 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: The `{}/1` compiler bypass control construct is now opaque to cuts,
+ensuring that goals such as `{!}` and `G = !, {G}` have the same semantics.
+
+* FIXED: Bug where the argument of the `{}/1` compiler bypass control construct
+could be changed during the second compiler stage.
+
 * IMPROVED: Minor compiler performance improvements to the compilation of
 entity clauses.
 
