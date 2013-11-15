@@ -2126,7 +2126,7 @@ current_logtalk_flag(Flag, Value) :-
 %
 % current Logtalk version for use with the current_logtalk_flag/2 predicate
 
-'$lgt_version_data'(logtalk(3, 0, 0, a30)).
+'$lgt_version_data'(logtalk(3, 0, 0, a31)).
 
 
 
