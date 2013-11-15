@@ -51,6 +51,9 @@ when compiling source files.
 pseudo-object `user` now call the backend Prolog compiler implementation of
 these predicates instead of using the corresponding Logtalk methods.
 
+* FIXED: Case where runtime translation of a message would result in leaking
+of compile-time only information on referenced objects and messages.
+
 Prolog adapter and integration files
 ------------------------------------
 

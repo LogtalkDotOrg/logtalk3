@@ -11031,7 +11031,11 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 '$lgt_tr_msg'(Pred, Obj, TPred, This) :-
-	'$lgt_add_referenced_object_message'(Obj, Pred),
+	(	'$lgt_pp_entity_'(_, _, _, _, _) ->
+		'$lgt_add_referenced_object_message'(Obj, Pred)
+	;	% assume runtime translation
+		true
+	),
 	(	'$lgt_compiler_flag'(events, allow) ->
 		(	'$lgt_compiler_flag'(optimize, on),
 			'$lgt_send_to_obj_static_binding'(Obj, Pred, This, Call) ->
