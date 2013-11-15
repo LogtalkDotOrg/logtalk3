@@ -5032,8 +5032,8 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_add_referenced_object_message'(@object_identifier, @callable)
 %
-% adds referenced module for later cheking of references to unknown modules
-% we also save the line numbers for the first reference to the module
+% adds referenced object and message for supporting using reflection to
+% retrieve cross-reference information
 
 '$lgt_add_referenced_object_message'(Obj, Pred) :-
 	functor(Pred, Functor, Arity),
