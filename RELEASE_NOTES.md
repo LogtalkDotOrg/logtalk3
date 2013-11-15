@@ -37,6 +37,10 @@ ensuring that goals such as `{!}` and `G = !, {G}` have the same semantics.
 * FIXED: Bug where the argument of the `{}/1` compiler bypass control construct
 could be changed during the second compiler stage.
 
+* FIXED: Bug where the `(<<)/2` context-switching control construct would not
+apply the compiler second pass to its goal argument. The bug fix, however, is
+partial as some of the necessary information may not available at runtime.
+
 * IMPROVED: Minor compiler performance improvements to the compilation of
 entity clauses.
 

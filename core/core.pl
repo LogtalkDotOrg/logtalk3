@@ -4263,11 +4263,13 @@ current_logtalk_flag(Flag, Value) :-
 				catch(TGoal, Error, '$lgt_runtime_error_handler'(error(Error, logtalk(Obj<<Goal, This))))
 			;	% in the worst case we need to compile the goal
 				'$lgt_comp_ctx'(Ctx, _, Obj, Obj, Obj, Prefix, [], _, ExCtx, runtime, []),
-				catch('$lgt_tr_body'(Goal, TGoal, DGoal, Ctx), Error, throw(error(Error, logtalk(Obj<<Goal, This)))),
+				catch('$lgt_tr_body'(Goal, TGoal0, DGoal0, Ctx), Error, throw(error(Error, logtalk(Obj<<Goal, This)))),
 				(	Flags /\ 512 =:= 512 ->
 					% object compiled in debug mode
+					catch('$lgt_fix_predicate_calls'(DGoal0, DGoal), Error, throw(error(Error, logtalk(Obj<<Goal, This)))),
 					catch(DGoal, Error, throw(error(Error, logtalk(Obj<<Goal, This))))
-				;	catch(TGoal, Error, '$lgt_runtime_error_handler'(error(Error, logtalk(Obj<<Goal, This))))
+				;	catch('$lgt_fix_predicate_calls'(TGoal0, TGoal), Error, throw(error(Error, logtalk(Obj<<Goal, This)))),
+					catch(TGoal, Error, '$lgt_runtime_error_handler'(error(Error, logtalk(Obj<<Goal, This))))
 				)
 			)
 		;	throw(error(permission_error(access, database, Goal), logtalk(Obj<<Goal, This)))

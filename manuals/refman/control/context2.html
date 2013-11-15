@@ -38,7 +38,10 @@
 
 <pre>Object&lt;&lt;Goal</pre>
 <p>
-Calls a goal within the context of the specified object. Goal is called with the execution context (<a class="glossary" title="Go to glossary definition" href="../../glossary.html#sender"><em>sender</em></a>, <a class="glossary" title="Go to glossary definition" href="../../glossary.html#this"><em>this</em></a>, and <a class="glossary" title="Go to glossary definition" href="../../glossary.html#self"><em>self</em></a>) set to Object. Goal may need to be written within brackets to avoid parsing errors due to operator clashes. This control construct is mainly used for debugging and for writing object unit tests. This control construct can only be used for objects compiled with the compiler option <code>context_switching_calls</code> set to <code>allow</code>. Set this compiler option to <code>deny</code> to disable this control construct and thus preventing using it to break encapsulation.
+Calls a goal within the context of the specified object. Goal is called with the execution context (<a class="glossary" title="Go to glossary definition" href="../../glossary.html#sender"><em>sender</em></a>, <a class="glossary" title="Go to glossary definition" href="../../glossary.html#this"><em>this</em></a>, and <a class="glossary" title="Go to glossary definition" href="../../glossary.html#self"><em>self</em></a>) set to Object. Goal may need to be written within brackets to avoid parsing errors due to operator clashes. This control construct should only be used for debugging or for writing unit tests. This control construct can only be used for objects compiled with the compiler option <code>context_switching_calls</code> set to <code>allow</code>. Set this compiler option to <code>deny</code> to disable this control construct and thus preventing using it to break encapsulation.
+</p>
+<p>
+Caveat: although the goal argument is fully compiled before calling, some of the necessary information for the second compiler pass may not be available at runtime.
 </p>
 
 <h4>Template and modes</h4>
@@ -70,7 +73,7 @@ Calls a goal within the context of the specified object. Goal is called with the
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: May 4, 2013</span>
+		<span>Last updated on: November 15, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="../index.html#constructs">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="../index.html#constructs">next</a></span><br/>
