@@ -47,6 +47,10 @@ entity clauses.
 * IMPROVED: Perform basic type checking of plain Prolog predicate clauses
 when compiling source files.
 
+* CHANGED: `current_predicate/1` and `predicate_property/2` messages to the
+pseudo-object `user` now call the backend Prolog compiler implementation of
+these predicates instead of using the corresponding Logtalk methods.
+
 Prolog adapter and integration files
 ------------------------------------
 
