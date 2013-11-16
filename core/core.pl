@@ -4392,11 +4392,15 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_print_message'(Kind, Component, Term) :-
 	(	'$lgt_default_entities_loaded_' ->
+		% "logtalk" built-in object loaded
 		'$logtalk.execution_context'(ExCtx, logtalk, logtalk, logtalk, [], [], _),
 		'$logtalk.print_message'(Kind, Component, Term, ExCtx)
-	;	'$lgt_compiler_flag'(report, off) ->
+	;	% something wrong happen when loading the default entities
+		'$lgt_compiler_flag'(report, off) ->
+		% no message printing required
 		true
-	;	writeq(Component), write(' '), write(Kind), write(': '), writeq(Term), nl
+	;	% bare-bones message printing
+		writeq(Component), write(' '), write(Kind), write(': '), writeq(Term), nl
  	).
 
 
@@ -18473,7 +18477,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_must_be'(+atom, @term)
 %
-% this simpler version of the predicate is mainly used by the Logtalk compiler
+% this simpler version of the predicate is mainly used when compiling source files
 
 '$lgt_must_be'(Type, Term) :-
 	catch('$lgt_must_be'(Type, Term, _), error(Error, _), throw(Error)).
@@ -18491,7 +18495,8 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_load_default_entities'
 %
-% loads all default built-in entities if not already loaded
+% loads all default built-in entities if not already loaded (when embbeding
+% Logtalk, the pre-compiled entities are loaded prior to this file)
 
 '$lgt_load_default_entities' :-
 	'$lgt_expand_library_path'(logtalk_user, LogtalkUserDirectory),
