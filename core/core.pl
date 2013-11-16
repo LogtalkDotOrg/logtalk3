@@ -17547,13 +17547,16 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_create_mutexes'(+list(mutex_identifier))
 %
-% creates entity mutexes (called when loading an entity); use catch/3 as
-% we may be reloading an entity and the mutex may be already created
+% creates entity mutexes (called when loading an entity); we may
+% be reloading an entity and the mutex may be already created
 
 '$lgt_create_mutexes'([]).
 
 '$lgt_create_mutexes'([Mutex| Mutexes]) :-
-	catch(mutex_create(_, [alias(Mutex)]), _, true),
+	(	mutex_property(_, alias(Mutex)) ->
+		true
+	;	mutex_create(_, [alias(Mutex)])
+	),
 	'$lgt_create_mutexes'(Mutexes).
 
 
