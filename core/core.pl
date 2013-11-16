@@ -1983,15 +1983,12 @@ logtalk_make :-
 % reloads changed Logtalk source files or cleans all intermediate Prolog files
 
 logtalk_make(Target) :-
-	(	var(Target)
-	;	\+ '$lgt_valid_logtalk_make_target'(Target)
-	),
-	'$lgt_print_message'(warning(make), core, invalid_make_target(Target)),
-	!,
-	fail.
-
-logtalk_make(Target) :-
-	'$lgt_logtalk_make'(Target).
+	(	var(Target) ->
+		'$lgt_print_message'(warning(make), core, no_make_target_specified)
+	;	'$lgt_valid_logtalk_make_target'(Target) ->
+		'$lgt_logtalk_make'(Target)
+	;	'$lgt_print_message'(warning(make), core, invalid_make_target(Target))
+	).
 
 
 '$lgt_valid_logtalk_make_target'(all).

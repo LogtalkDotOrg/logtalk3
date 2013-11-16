@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/10/08,
+		date is 2013/11/16,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -106,6 +106,9 @@
 		message_context(File, Lines).
 
 	% make messages
+
+	logtalk::message_tokens(no_make_target_specified, core) -->
+		['No make target specified'-[], nl].
 
 	logtalk::message_tokens(invalid_make_target(Target), core) -->
 		['Invalid make target: ~w'-[Target], nl].
