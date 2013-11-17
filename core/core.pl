@@ -2121,7 +2121,9 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_version_data'(?compound)
 %
-% current Logtalk version for use with the current_logtalk_flag/2 predicate
+% current Logtalk version for use with the current_logtalk_flag/2 predicate;
+% the last argument is an atom: 'aXX' for alpha versions, 'bXX' for beta
+% versions, and 'stable' for stable versions
 
 '$lgt_version_data'(logtalk(3, 0, 0, a31)).
 
@@ -2395,7 +2397,9 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_scope'(?atom, ?nonvar).
 %
-% converts between user and internal scope terms
+% converts between user and internal scope terms;
+% this representation was chosen as it allows testing if a scope is either
+% public or protected by a single unification step with the p(_) term
 
 '$lgt_scope'(private, p).
 '$lgt_scope'(protected, p(p)).
@@ -4248,7 +4252,9 @@ current_logtalk_flag(Flag, Value) :-
 % at compile time)
 
 '$lgt_call_within_context_nv'(Obj, Goal, This) :-
-	(	'$lgt_current_object_'(Obj, Prefix, _, Def, _, _, _, _, DDef, _, Flags) ->
+	(	Obj == user ->
+		catch(Goal, Error, '$lgt_runtime_error_handler'(error(Error, logtalk(user<<Goal, This))))
+	;	'$lgt_current_object_'(Obj, Prefix, _, Def, _, _, _, _, DDef, _, Flags) ->
 		(	Flags /\ 256 =:= 256 ->
 			% object compiled with context-switching calls allowed
 			'$lgt_execution_context'(ExCtx, Obj, Obj, Obj, [], []),
@@ -8505,18 +8511,9 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_tr_body'(+callable, -callable, -callable, +compilation_context)
+% '$lgt_tr_body'(@term, -callable, -callable, +compilation_context)
 %
 % translates an entity clause body
-
-
-% calls in the context of the pseudo-object "user"
-
-'$lgt_tr_body'(Pred, Pred, '$lgt_debug'(goal(Pred, Pred), ExCtx), Ctx) :-
-	'$lgt_comp_ctx_this'(Ctx, This),
-	This == user,
-	!,
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
 
 
 % runtime resolved meta-calls
@@ -8540,8 +8537,8 @@ current_logtalk_flag(Flag, Value) :-
 % compiler bypass (call of external code)
 
 '$lgt_tr_body'({Pred}, {call(Pred)}, '$lgt_debug'(goal({Pred}, {call(Pred)}), ExCtx), Ctx) :-
-	'$lgt_must_be'(var_or_callable, Pred),
 	!,
+	'$lgt_must_be'(var_or_callable, Pred),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
 
 
@@ -18590,7 +18587,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_report_settings_file'(+compound)
 %
-% reports result of attempt to load a settings file defined by the user
+% reports result of the attempt to load a settings file defined by the user
 
 '$lgt_report_settings_file'(loaded(Path)) :-
 	'$lgt_print_message'(comment(settings), core, loaded_settings_file(Path)).
@@ -18606,11 +18603,12 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_assert_default_hooks'
+% '$lgt_compile_default_hooks'
 %
-% asserts the compiler hook goal specified on the adapter file
+% compiles the default hooks specified on the backend Prolog compiler
+% adapter file
 
-'$lgt_assert_default_hooks' :-
+'$lgt_compile_default_hooks' :-
 	(	'$lgt_compiler_flag'(hook, Hook) ->
 		'$lgt_compile_hooks'(Hook)
 	;	true
@@ -18661,7 +18659,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_load_settings_file'(Result),
 	'$lgt_print_message'(banner, core, banner),
 	'$lgt_print_message'(comment(settings), core, default_flags),
-	'$lgt_assert_default_hooks',
+	'$lgt_compile_default_hooks',
 	'$lgt_start_runtime_threading',
 	'$lgt_report_settings_file'(Result),
 	'$lgt_check_prolog_version'

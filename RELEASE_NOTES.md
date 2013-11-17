@@ -41,8 +41,7 @@ could be changed during the second compiler stage.
 apply the compiler second pass to its goal argument. The bug fix, however, is
 partial as some of the necessary information may not available at runtime.
 
-* IMPROVED: Minor compiler performance improvements to the compilation of
-entity clauses.
+* IMPROVED: Compiler performance when compiling source files.
 
 * IMPROVED: Perform basic type checking of plain Prolog predicate clauses
 when compiling source files.
