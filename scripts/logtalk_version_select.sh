@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Logtalk version select script
-##   Last updated on October 27, 2013
+##   Last updated on November 17, 2013
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -85,6 +85,9 @@ valid_version() {
 	if [ `(ls -d "$prefix"/logtalk-* | wc -l) 2> /dev/null` -gt 0 ]; then
 	    for path in $(ls -d "$prefix"/logtalk-*); do
 			version=`basename $path`
+	        if [ $1 == $version ]; then
+	            return 0
+	        fi
 	    done
 	fi
 	return 1

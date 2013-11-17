@@ -65,6 +65,12 @@ Prolog adapter and integration files
 clashes seldom occur in practice and the source file compilation performance
 hit was significant.
 
+Installers and installation scripts
+-----------------------------------
+
+* FIXED: Bug in the `logtalk_version_select.sh` POSIX script that prevented
+switching the installed version.
+
 Examples
 --------
 
