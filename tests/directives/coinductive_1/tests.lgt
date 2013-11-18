@@ -1,3 +1,13 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  
+%  This file is part of Logtalk <http://logtalk.org/>    
+%  
+%  Logtalk is free software. You can redistribute it and/or modify it under
+%  the terms of the FSF GNU General Public License 3  (plus some additional
+%  terms per section 7).        Consult the `LICENSE.txt` file for details.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 :- object(tests,
 	extends(lgtunit)).
@@ -15,10 +25,6 @@
 	:- coinductive(a/1).
 
 	test(coinductive_1_1) :-
-		predicate_property(a(_), logtalk),
-		predicate_property(a(_), (public)),
-		predicate_property(a(_), scope(public)),
-		predicate_property(a(_), static),
 		predicate_property(a(_), coinductive(Template)),
 		Template == a(+).
 
@@ -26,10 +32,6 @@
 	:- coinductive(b(+, -)).
 
 	test(coinductive_1_2) :-
-		predicate_property(b(_, _), logtalk),
-		predicate_property(b(_, _), (public)),
-		predicate_property(b(_, _), scope(public)),
-		predicate_property(b(_, _), static),
 		predicate_property(b(_, _), coinductive(Template)),
 		Template == b(+, -).
 

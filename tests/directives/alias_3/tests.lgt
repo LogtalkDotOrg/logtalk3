@@ -1,3 +1,13 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  
+%  This file is part of Logtalk <http://logtalk.org/>    
+%  
+%  Logtalk is free software. You can redistribute it and/or modify it under
+%  the terms of the FSF GNU General Public License 3  (plus some additional
+%  terms per section 7).        Consult the `LICENSE.txt` file for details.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 :- object(tests,
 	extends(lgtunit)).
@@ -14,10 +24,6 @@
 	:- alias(lgtunit, run/0, run_alias/0).
 
 	test(alias_3_1) :-
-		predicate_property(run_alias, logtalk),
-		predicate_property(run_alias, (public)),
-		predicate_property(run_alias, scope(public)),
-		predicate_property(run_alias, static),
 		predicate_property(run_alias, alias_of(run)),
 		predicate_property(run_alias, declared_in(lgtunit)),
 		predicate_property(run_alias, defined_in(lgtunit)).
