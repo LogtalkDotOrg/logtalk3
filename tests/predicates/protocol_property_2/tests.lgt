@@ -24,7 +24,9 @@
 	:- coinductive(a/1).
 
 	:- protected(b/2).
-	:- synchronized(b/2).
+	:- if(current_logtalk_flag(threads, supported)).
+		:- synchronized(b/2).
+	:- endif.
 
 	:- private(c/3).
 	:- dynamic(c/3).
@@ -94,7 +96,10 @@
 		member(protected, Properties2),
 		member(scope(Scope2), Properties2), Scope2 == protected,
 		member(static, Properties2),
-		member(synchronized, Properties2),
+		(	current_logtalk_flag(threads, supported) ->
+			member(synchronized, Properties2)
+		;	true
+		),
 		member(line_count(LC2), Properties2), integer(LC2),
 		protocol_property(test_protocol, declares(c/3, Properties3)),
 		member(private, Properties3),
@@ -102,7 +107,8 @@
 		member((dynamic), Properties3),
 		member(line_count(LC3), Properties3), integer(LC3).
 
-	member(H, [H| _]).
+	member(H, [H| _]) :-
+		!.
 	member(H, [_| T]) :-
 		member(H, T).
 

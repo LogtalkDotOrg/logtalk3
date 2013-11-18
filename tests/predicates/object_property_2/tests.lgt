@@ -30,7 +30,9 @@
 	a(1).
 
 	:- protected(b/2).
-	:- synchronized(b/2).
+	:- if(current_logtalk_flag(threads, supported)).
+		:- synchronized(b/2).
+	:- endif.
 	b(1, 2).
 	b(2, 1).
 
@@ -114,7 +116,10 @@
 		member(protected, Properties2),
 		member(scope(Scope2), Properties2), Scope2 == protected,
 		member(static, Properties2),
-		member(synchronized, Properties2),
+		(	current_logtalk_flag(threads, supported) ->
+			member(synchronized, Properties2)
+		;	true
+		),
 		member(line_count(LC2), Properties2), integer(LC2),
 		object_property(test_object, declares(c/3, Properties3)),
 		member(private, Properties3),
@@ -138,7 +143,8 @@
 		member(line_count(LC4), Properties4), integer(LC4),
 		member(number_of_clauses(NC4), Properties4), NC4 == 4.
 
-	member(H, [H| _]).
+	member(H, [H| _]) :-
+		!.
 	member(H, [_| T]) :-
 		member(H, T).
 
