@@ -1,3 +1,36 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  
+%  This file is part of Logtalk <http://logtalk.org/>    
+%  
+%  Logtalk is free software. You can redistribute it and/or modify it under
+%  the terms of the FSF GNU General Public License 3  (plus some additional
+%  terms per section 7).        Consult the `LICENSE.txt` file for details.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+:- set_logtalk_flag(source_data, on).
+
+
+:- protocol(test_protocol).
+
+	:- info([
+		version is 1.0,
+		author is 'Paulo Moura',
+		date is 2013/11/18,
+		comment is 'Sample protocol for testing with the `source_data` flag turned on.']).
+
+	:- public(a/1).
+	:- coinductive(a/1).
+
+	:- protected(b/2).
+	:- synchronized(b/2).
+
+	:- private(c/3).
+	:- dynamic(c/3).
+
+:- end_protocol.
+
 
 :- object(tests,
 	extends(lgtunit)).
@@ -5,7 +38,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/11/19,
+		date is 2013/11/18,
 		comment is 'Unit tests for the protocol_property/2 built-in predicate.'
 	]).
 
@@ -30,5 +63,47 @@
 
 	succeeds(protocol_property_2_6) :-
 		findall(Prop, protocol_property(monitoring, Prop), _).
+
+	% entity info
+	succeeds(protocol_property_2_7) :-
+		protocol_property(test_protocol, static),
+		protocol_property(test_protocol, file(Basename, Directory)), ground(Basename), ground(Directory),
+		protocol_property(test_protocol, lines(Start, End)), integer(Start), integer(End),
+		protocol_property(test_protocol, number_of_clauses(N)), N == 0,
+		protocol_property(test_protocol, info(Info)),
+		member(version(_), Info),
+		member(author(_), Info),
+		member(date(_), Info),
+		member(comment(_), Info).
+
+	% entity interface
+	succeeds(protocol_property_2_8) :-
+		protocol_property(test_protocol, public(Public)), Public == [a/1],
+		protocol_property(test_protocol, protected(Protected)), Protected == [b/2],
+		protocol_property(test_protocol, private(Private)), Private == [c/3].
+
+	% interface predicate declaration properties
+	succeeds(protocol_property_2_9) :-
+		protocol_property(test_protocol, declares(a/1, Properties1)),
+		member((public), Properties1),
+		member(scope(Scope1), Properties1), Scope1 == (public),
+		member(static, Properties1),
+		member(coinductive(Template), Properties1), Template == a(+),
+		member(line_count(LC1), Properties1), integer(LC1),
+		protocol_property(test_protocol, declares(b/2, Properties2)),
+		member(protected, Properties2),
+		member(scope(Scope2), Properties2), Scope2 == protected,
+		member(static, Properties2),
+		member(synchronized, Properties2),
+		member(line_count(LC2), Properties2), integer(LC2),
+		protocol_property(test_protocol, declares(c/3, Properties3)),
+		member(private, Properties3),
+		member(scope(Scope3), Properties3), Scope3 == private,
+		member((dynamic), Properties3),
+		member(line_count(LC3), Properties3), integer(LC3).
+
+	member(H, [H| _]).
+	member(H, [_| T]) :-
+		member(H, T).
 
 :- end_object.

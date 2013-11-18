@@ -70,6 +70,12 @@ Installers and installation scripts
 * FIXED: Bug in the `logtalk_version_select.sh` POSIX script that prevented
 switching the installed version.
 
+Tests
+-----
+
+* ADDED: Unit tests for the entity property built-in predicates for testing
+with the `source_data` flag turned on.
+
 Examples
 --------
 
