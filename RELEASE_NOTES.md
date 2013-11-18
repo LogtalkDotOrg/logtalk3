@@ -76,8 +76,9 @@ Tests
 * ADDED: Unit tests for the entity property built-in predicates for testing
 with the `source_data` flag turned on.
 
-* ADDED: Unit tests for the `alias/3`, `coinductive/1`, and `meta_predicate/1`
-predicate directives.
+* ADDED: Unit tests for the `meta_non_terminal/1` non-terminal directive
+and for the `alias/3`, `coinductive/1`, and `meta_predicate/1`, predicate
+directives.
 
 Examples
 --------
