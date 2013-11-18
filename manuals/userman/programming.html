@@ -354,7 +354,7 @@ Note that the scope of the <code>set_logtalk_flag/2</code> directive is local to
 	</dl>
 	<dl>
 		<dt><code>source_data(Option)</code></dt>
-			<dd>Possible option values are <code>on</code> (the usual default) and <code>off</code>. With this flag set to "on", Logtalk will keep the information represented using <code>mode/2</code> and <code>info/2</code> directives plus source location data (including source file names and line numbers), useful both for debugging and for integration with development tools. This flag can be turned off in order to generate more compact code.</dd>
+			<dd>Defines how much information is retained when compiling a source file. Possible option values are <code>on</code> (the usual default) and <code>off</code>. With this flag set to <code>on</code>, Logtalk will keep the information represented using documenting directives plus source location data (including source file names and line numbers). This information can be retrieved using reflection and is useful both for debugging and for integration with development tools. This flag can be turned off in order to generate more compact code.</dd>
 	</dl>
 	<dl>
 		<dt><code>debug(Option)</code></dt>
@@ -720,7 +720,7 @@ When objects or categories containing grammar rules are compiled in debug mode, 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: October 15, 2013</span>
+		<span>Last updated on: November 18, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="installing.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="migration.html">next</a></span><br/>
