@@ -25,7 +25,7 @@ RELEASE NOTES
 =============
 
 
-3.00.0 Alpha 31 - November ??, 2013
+3.00.0 Alpha 31 - November 19, 2013
 ===================================
 
 Logtalk compiler and runtime
@@ -39,7 +39,8 @@ could be changed during the second compiler stage.
 
 * FIXED: Bug where the `(<<)/2` context-switching control construct would not
 apply the compiler second pass to its goal argument. The bug fix, however, is
-partial as some of the necessary information may not available at runtime.
+partial for runtime calls as some of the necessary information may not longer
+be available.
 
 * IMPROVED: Compiler performance when compiling source files.
 
