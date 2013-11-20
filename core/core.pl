@@ -2125,7 +2125,7 @@ current_logtalk_flag(Flag, Value) :-
 % the last argument is an atom: 'aXX' for alpha versions, 'bXX' for beta
 % versions, and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 0, 0, a31)).
+'$lgt_version_data'(logtalk(3, 0, 0, a32)).
 
 
 
