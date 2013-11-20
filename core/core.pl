@@ -16042,6 +16042,7 @@ current_logtalk_flag(Flag, Value) :-
 	functor(Version, version, 3).
 
 '$lgt_valid_flag_value'(settings_file, allow) :- !.
+'$lgt_valid_flag_value'(settings_file, restrict) :- !.
 '$lgt_valid_flag_value'(settings_file, deny) :- !.
 
 '$lgt_valid_flag_value'(prolog_dialect, Dialect) :-
@@ -18532,7 +18533,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_load_settings_file'(-compound)
+% '$lgt_load_settings_file'(-compound, -atom)
 %
 % loads any settings file defined by the user; settings files are compiled
 % and loaded silently, ignoring any errors;  the intermediate Prolog files
@@ -18543,45 +18544,55 @@ current_logtalk_flag(Flag, Value) :-
 % adapter files; these extensions will be tried in sequence when the test
 % for the settings file existence fails
 
-'$lgt_load_settings_file'(disabled) :-
-	'$lgt_default_flag'(settings_file, deny),
-	!.
-
-'$lgt_load_settings_file'(Result) :-
+'$lgt_load_settings_file'(Result, Value) :-
+	'$lgt_default_flag'(settings_file, Value),
 	% save the current directory
 	'$lgt_current_directory'(Current),
 	% find the location of the default scratch directory
 	'$lgt_expand_library_path'(logtalk_user, LogtalkUserDirectory),
 	atom_concat(LogtalkUserDirectory, 'scratch/', ScratchDirectory),
 	% define the compiler options to be used for compiling and loading the settings file
-	CompilerOptions = [report(off), clean(on), scratch_directory(ScratchDirectory)],
-	(	% first lookup for a settings file in the startup directory
-		'$lgt_startup_directory'(Startup),
-		'$lgt_change_directory'(Startup),
-		'$lgt_file_extension'(logtalk, Extension),
-		atom_concat(settings, Extension, SettingsFile),
-		'$lgt_file_exists'(SettingsFile) ->
-		catch(
-			(logtalk_load(SettingsFile, CompilerOptions), Result = loaded(Startup)),
-			Error,
-			Result = error(Startup, Error)
-		)
-	;	% if not found, lookup for a settings file in the Logtalk user folder
-		'$lgt_user_directory'(User),
-		'$lgt_change_directory'(User),
-		'$lgt_file_extension'(logtalk, Extension),
-		atom_concat(settings, Extension, SettingsFile),
-		'$lgt_file_exists'(SettingsFile) ->
-		catch(
-			(logtalk_load(SettingsFile, CompilerOptions), Result = loaded(User)),
-			Error,
-			Result = error(User, Error)
-		)
-	;	% no settings file found
-		Result = none
-	),
+	Options = [report(off), clean(on), scratch_directory(ScratchDirectory)],
+	'$lgt_load_settings_file'(Value, Options, Result),
 	% restore the current directory
 	'$lgt_change_directory'(Current).
+
+
+'$lgt_load_settings_file'(deny, _, disabled).
+
+'$lgt_load_settings_file'(restrict, Options, Result) :-
+	(	% lookup for a settings file in the Logtalk user folder
+		'$lgt_user_directory'(User),
+		'$lgt_load_settings_file_from_directory'(User, Options, Result) ->
+		true
+	;	% no settings file found
+		Result = none
+	).
+
+'$lgt_load_settings_file'(allow, Options, Result) :-
+	(	% first lookup for a settings file in the startup directory if allowed
+		'$lgt_startup_directory'(Startup),
+		'$lgt_load_settings_file_from_directory'(Startup, Options, Result) ->
+		true
+	;	% if not found, lookup for a settings file in the Logtalk user folder
+		'$lgt_user_directory'(User),
+		'$lgt_load_settings_file_from_directory'(User, Options, Result) ->
+		true
+	;	% no settings file found
+		Result = none
+	).
+
+
+'$lgt_load_settings_file_from_directory'(Directory, Options, Result) :-
+	'$lgt_change_directory'(Directory),
+	'$lgt_file_extension'(logtalk, Extension),
+	atom_concat(settings, Extension, SettingsFile),
+	'$lgt_file_exists'(SettingsFile) ->
+	catch(
+		(logtalk_load(SettingsFile, Options), Result = loaded(Startup)),
+		Error,
+		Result = error(Startup, Error)
+	).
 
 
 
@@ -18589,17 +18600,17 @@ current_logtalk_flag(Flag, Value) :-
 %
 % reports result of the attempt to load a settings file defined by the user
 
-'$lgt_report_settings_file'(loaded(Path)) :-
+'$lgt_report_settings_file'(loaded(Path), _) :-
 	'$lgt_print_message'(comment(settings), core, loaded_settings_file(Path)).
 
-'$lgt_report_settings_file'(disabled) :-
+'$lgt_report_settings_file'(disabled, _) :-
 	'$lgt_print_message'(comment(settings), core, settings_file_disabled).
 
-'$lgt_report_settings_file'(error(Path, Error)) :-
+'$lgt_report_settings_file'(error(Path, Error), _) :-
 	'$lgt_print_message'(error, core, error_loading_settings_file(Path, Error)).
 
-'$lgt_report_settings_file'(none) :-
-	'$lgt_print_message'(comment(settings), core, no_settings_file_found).
+'$lgt_report_settings_file'(none, Flag) :-
+	'$lgt_print_message'(comment(settings), core, no_settings_file_found(Flag)).
 
 
 
@@ -18656,12 +18667,12 @@ current_logtalk_flag(Flag, Value) :-
 
 :- initialization((
 	'$lgt_load_default_entities',
-	'$lgt_load_settings_file'(Result),
+	'$lgt_load_settings_file'(Result, Flag),
 	'$lgt_print_message'(banner, core, banner),
 	'$lgt_print_message'(comment(settings), core, default_flags),
 	'$lgt_compile_default_hooks',
 	'$lgt_start_runtime_threading',
-	'$lgt_report_settings_file'(Result),
+	'$lgt_report_settings_file'(Result, Flag),
 	'$lgt_check_prolog_version'
 )).
 
