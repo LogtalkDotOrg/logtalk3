@@ -35,6 +35,9 @@ Logtalk compiler and runtime
 value `restrict` in the backend Prolog adapter files to restrict searching
 of settings files to the Logtalk user directory.
 
+* FIXED: Throw a permission error on attempts to redefine the `phrase//1`
+built-in non-terminal.
+
 
 3.00.0 Alpha 31 - November 19, 2013
 ===================================
