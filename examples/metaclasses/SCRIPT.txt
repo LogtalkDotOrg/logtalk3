@@ -16,3 +16,18 @@ ________________________________________________________________________
 
 % play and modify the example code to get comfortable using classes and
 % instances in Logtalk
+
+| ?- root::new(I).
+Instance created.
+I = o1
+true
+
+| ?- subclass1::new(I).
+Instance created.
+Instance initialized.
+I = o2
+true
+
+| ?- subclass2::new(I).
+I = o3
+true

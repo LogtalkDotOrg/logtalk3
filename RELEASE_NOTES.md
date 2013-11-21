@@ -38,6 +38,11 @@ of settings files to the Logtalk user directory.
 * FIXED: Throw a permission error on attempts to redefine the `phrase//1`
 built-in non-terminal.
 
+Examples
+--------
+
+* FIXED: Several issues with the `metaclasses` example.
+
 
 3.00.0 Alpha 31 - November 19, 2013
 ===================================

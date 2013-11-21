@@ -41,12 +41,13 @@
 
 	% metaclass are used to hold methods for their instances,
 	% which play the role of classes; common examples are
-	% instance crwation methods; for example:
+	% instance creation methods; for example:
 	:- public(new/1).
 	new(Instance) :-
 		self(Class),
 		% create a new, dynamic, object:
-		create_object(Instance, [instantiates(Class)], [], []).
+		create_object(Instance, [instantiates(Class)], [], []),
+		Instance::init.
 
 :- end_object.
 
@@ -54,30 +55,36 @@
 % but we don't need to define a metaclasses for every class; i.e. metaclasses
 % are optional, except for the root class, and can be shared by several classes
 
-:- object(superclass,
+:- object(root,
 	instantiates(metaclass)).
 
-	:- public(init/1).
-	init(_).
-
-	% methods can be specialized in instances; the lookup for a
-	% method *definition* always starts at the object receiving
-	% the corresponding message
-	new(Instance, Data) :-
-		% call the inherited, overriden definition:
-		^^new(Instance),
-		% do something more:
-		Instance::init(Data).
+	:- public(init/0).
+	init :-
+		write('Instance created.'), nl.
 
 :- end_object.
 
 
-:- object(subclass,
-	specializes(superclass)).
+:- object(subclass1,
+	instantiates(metaclass),
+	specializes(root)).
+
+	% methods can be specialized:
+	init :-
+		% call the inherited, overriden definition:
+		^^init,
+		% do something more:
+		write('Instance initialized.'), nl.
+
+:- end_object.
+
+
+:- object(subclass2,
+	instantiates(metaclass),
+	specializes(root)).
 
 	% methods can also override inherited definitions:
-	init :-
-		write('Instance initialized.'), nl.
+	init.
 
 :- end_object.
 
@@ -85,7 +92,7 @@
 % instance can be static and defined in source files:
 
 :- object(instance,
-	instantiates(subclass)).
+	instantiates(subclass1)).
 
 :- end_object.
 
