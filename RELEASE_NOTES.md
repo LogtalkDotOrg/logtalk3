@@ -31,7 +31,7 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* IMPROVED: The read-only flag, `settings_file`, can now also be set to the
+* IMPROVED: The read-only `settings_file` flag can now also be set to the
 value `restrict` in the backend Prolog adapter files to restrict searching
 of settings files to the Logtalk user directory.
 

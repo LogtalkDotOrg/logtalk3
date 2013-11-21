@@ -47,6 +47,14 @@ compile and run under multiple versions.
 MAJOR CHANGES FROM LOGTALK 2.x TO LOGTALK 3.x
 =============================================
 
+
+Source file paths
+-----------------
+
+Relative and absolute source file paths are now fully supported by the
+compiling and loading built-in predicates.
+
+
 Removed flags
 -------------
 
@@ -59,7 +67,7 @@ attempting to use them will result in compiler errors:
 * `startup_message`
 * `smart_compilation`
 
-The XML related files were removed as generating documenting files is now the
+The XML related flags were removed as generating documenting files is now the
 responsibility of the `lgtdoc` tool. The debugger is also no longer a built-in
 object but a separate tool, `debugger`. Logtalk 3.x greatly improves support
 for source file paths, removing the need for the `altdirs` flag. The flag
@@ -90,3 +98,9 @@ The documentation only directives `calls/1` and `uses/1` are deprecated. The
 reflection API in Logtalk 3.x now returns all object (and module) dependencies
 found on sufficiently instantiated `::/2` and `:/2` calls when compiling an
 object or a category.
+
+
+Control constructs semantic changes
+-----------------------------------
+
+The `{}/1` control construct is now opaque to cuts.
