@@ -16864,27 +16864,38 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_iso_spec_flag_value'(+atom, @nonvar)
 
-'$lgt_iso_spec_flag_value'(bounded, Value) :-
-	'$lgt_member'(Value, [true, false]).
+'$lgt_iso_spec_flag_value'(bounded, true) :- !.
+'$lgt_iso_spec_flag_value'(bounded, false) :- !.
+
 '$lgt_iso_spec_flag_value'(max_integer, Value) :-
 	integer(Value).
+
 '$lgt_iso_spec_flag_value'(min_integer, Value) :-
 	integer(Value).
-'$lgt_iso_spec_flag_value'(integer_rounding_function, Value) :-
-	'$lgt_member'(Value, [toward_zero, down]).
+
+'$lgt_iso_spec_flag_value'(integer_rounding_function, toward_zero) :- !.
+'$lgt_iso_spec_flag_value'(integer_rounding_function, down) :- !.
+
 '$lgt_iso_spec_flag_value'(max_arity, Value) :-
 	integer(Value).
-'$lgt_iso_spec_flag_value'(char_conversion, Value) :-
-	'$lgt_member'(Value, [on, off]).
-'$lgt_iso_spec_flag_value'(debug, Value) :-
-	'$lgt_member'(Value, [on, off]).
-'$lgt_iso_spec_flag_value'(double_quotes, Value) :-
-	'$lgt_member'(Value, [atom, chars, codes]).
-'$lgt_iso_spec_flag_value'(unknown, Value) :-
-	'$lgt_member'(Value, [error, warning, fail]).
+
+'$lgt_iso_spec_flag_value'(char_conversion, on) :- !.
+'$lgt_iso_spec_flag_value'(char_conversion, off) :- !.
+
+'$lgt_iso_spec_flag_value'(debug, on) :- !.
+'$lgt_iso_spec_flag_value'(debug, off) :- !.
+
+'$lgt_iso_spec_flag_value'(double_quotes, atom) :- !.
+'$lgt_iso_spec_flag_value'(double_quotes, chars) :- !.
+'$lgt_iso_spec_flag_value'(double_quotes, codes) :- !.
+
+'$lgt_iso_spec_flag_value'(unknown, error) :- !.
+'$lgt_iso_spec_flag_value'(unknown, warning) :- !.
+'$lgt_iso_spec_flag_value'(unknown, fail) :- !.
 
 '$lgt_iso_spec_flag_value'(dialect, Value) :-
 	atom(Value).
+
 '$lgt_iso_spec_flag_value'(version_data, Value) :-
 	compound(Value).
 
