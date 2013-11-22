@@ -3894,7 +3894,8 @@ current_logtalk_flag(Flag, Value) :-
 		Closure =.. [Functor| Args],
 		'$lgt_append'(Args, ExtraArgs, FullArgs),
 		Goal =.. [Functor| FullArgs],
-		(	'$lgt_current_object_'(Sender, _, _, _, _, _, _, _, _, _, Flags), Flags /\ 16 =:= 16 ->
+		(	'$lgt_current_object_'(Sender, _, _, _, _, _, _, _, _, _, Flags),
+			Flags /\ 16 =:= 16 ->
 			'$lgt_send_to_obj_'(Obj, Goal, Sender)
 		;	'$lgt_send_to_obj_ne_'(Obj, Goal, Sender)
 		)
@@ -3917,7 +3918,8 @@ current_logtalk_flag(Flag, Value) :-
 		Closure =.. [Functor| Args],
 		'$lgt_append'(Args, ExtraArgs, FullArgs),
 		Goal =.. [Functor| FullArgs],
-		(	'$lgt_current_object_'(Sender, _, _, _, _, _, _, _, _, _, Flags), Flags /\ 16 =:= 16 ->
+		(	'$lgt_current_object_'(Sender, _, _, _, _, _, _, _, _, _, Flags),
+			Flags /\ 16 =:= 16 ->
 			'$lgt_send_to_obj_'(Obj, Goal, Sender)
 		;	'$lgt_send_to_obj_ne_'(Obj, Goal, Sender)
 		)
@@ -16308,12 +16310,10 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_dcg_terminals'(Terminals, S, S1, Goal2),
 	Body = (Goal1, Goal2),
 	functor(NonTerminal, Functor, Arity),
-	(	'$lgt_comp_ctx_mode'(Ctx, runtime) ->
-		true
-	;	(	'$lgt_pp_defines_non_terminal_'(Functor, Arity) ->
-			true
-		;	assertz('$lgt_pp_defines_non_terminal_'(Functor, Arity))
-		)
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+		\+ '$lgt_pp_defines_non_terminal_'(Functor, Arity) ->
+		assertz('$lgt_pp_defines_non_terminal_'(Functor, Arity))
+	;	true
 	).
 
 '$lgt_dcg_rule'((Entity::NonTerminal --> GRBody), (Entity::Head :- Body), Ctx) :-
@@ -16339,12 +16339,10 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_dcg_non_terminal'(NonTerminal, S0, S, Head),
 	'$lgt_dcg_body'(GRBody, S0, S, Body, Ctx),
 	functor(NonTerminal, Functor, Arity),
-	(	'$lgt_comp_ctx_mode'(Ctx, runtime) ->
-		true
-	;	(	'$lgt_pp_defines_non_terminal_'(Functor, Arity) ->
-			true
-		;	assertz('$lgt_pp_defines_non_terminal_'(Functor, Arity))
-		)
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+		\+ '$lgt_pp_defines_non_terminal_'(Functor, Arity) ->
+		assertz('$lgt_pp_defines_non_terminal_'(Functor, Arity))
+	;	true
 	).
 
 '$lgt_dcg_rule'(Term, _, _) :-
@@ -16596,13 +16594,11 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_dcg_body'(NonTerminal, S0, S, Goal, Ctx) :-
 	'$lgt_dcg_non_terminal'(NonTerminal, S0, S, Goal),
 	functor(NonTerminal, Functor, Arity),
-	(	'$lgt_comp_ctx_mode'(Ctx, runtime) ->
-		true
-	;	(	'$lgt_pp_calls_non_terminal_'(Functor, Arity, _) ->
-			true
-		;	'$lgt_current_line_numbers'(Lines),
-			assertz('$lgt_pp_calls_non_terminal_'(Functor, Arity, Lines))
-		)
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+		\+ '$lgt_pp_calls_non_terminal_'(Functor, Arity, _) ->
+		'$lgt_current_line_numbers'(Lines),
+		assertz('$lgt_pp_calls_non_terminal_'(Functor, Arity, Lines))
+	;	true
 	).
 
 
