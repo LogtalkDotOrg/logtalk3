@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2013/09/09,
+		date is 2013/11/23,
 		comment is 'Unit tests for the "dcgs" example.'
 	]).
 
@@ -143,5 +143,12 @@
 	test(dcgs_27) :-
 		findall(X, (list::member(X, [1,2,3]), logtalk << phrase(!, _, _)), Xs),
 		Xs == [1,2,3].
+
+	test(dcgs_28) :-
+		client::print.
+
+	test(dcgs_29) :-
+		client::successors([1,2,3], Successors),
+		Successors == [2,3,4].
 
 :- end_object.

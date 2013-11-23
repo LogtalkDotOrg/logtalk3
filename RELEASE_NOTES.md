@@ -41,6 +41,8 @@ built-in non-terminal.
 Examples
 --------
 
+* ADDED: Meta non-terminal unit tests to the `dcgs` example.
+
 * FIXED: Several issues with the `metaclasses` example.
 
 

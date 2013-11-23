@@ -25,6 +25,8 @@
 	list(_, []) --> [].
 	list(X, [T|Ts]) --> phrase(X, T), list(X, Ts).
 
+	% phrase//1-N is more general than call//1-N but only the
+	% latter is currently provided as a built-in non-terminal
 	phrase(X, T) --> call(X, T).
 
 :- end_object.
@@ -41,5 +43,13 @@
 
 	print(N, [Element| Result], Result) :-
 		write(N-Element), nl.
+
+	:- public(successors/2).
+
+	successors(Elements, Successors) :-
+		phrase(dcg::list(next, Successors), Elements).
+
+	next(Next, [Element| Result], Result) :-
+		Next is Element + 1.
 
 :- end_object.
