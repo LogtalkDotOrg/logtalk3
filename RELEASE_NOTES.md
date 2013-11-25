@@ -38,6 +38,15 @@ of settings files to the Logtalk user directory.
 * FIXED: Throw a permission error on attempts to redefine the `phrase//1`
 built-in non-terminal.
 
+* CHANGED: The `uses/3` and `use_module/3` entity properties are now only
+returned when the referenced predicates are actually called in the entity.
+
+* ADDED: Entity properties `uses/5` and `use_module/5` that extend the
+existing `uses/3` and `use_module/3` properties with the caller predicate
+and the range of lines for the directive or clause from where the referenced
+predicate is called. In the case of an `initialization/1` directive, the
+caller is identified as `(:-)/1`.
+
 Examples
 --------
 
