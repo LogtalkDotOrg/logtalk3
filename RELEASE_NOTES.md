@@ -47,6 +47,9 @@ and the range of lines for the directive or clause from where the referenced
 predicate is called. In the case of an `initialization/1` directive, the
 caller is identified as `(:-)/1`.
 
+* ADDED: Property `parent/1` to the `logtalk::loaded_file_property/2` method,
+allowing retrieving file loading dependencies.
+
 Examples
 --------
 

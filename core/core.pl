@@ -128,6 +128,9 @@
 :- multifile('$lgt_loaded_file_'/7).				% '$lgt_loaded_file_'(Basename, Directory, Mode, Flags, TextProperties, PrologFile, TimeStamp)
 :- dynamic('$lgt_loaded_file_'/7).
 
+:- dynamic('$lgt_parent_file_'/2).					% '$lgt_parent_file_'(SourceFile, ParentSourceFile)
+:- dynamic('$lgt_file_loading_stack_'/1).			% '$lgt_file_loading_stack_'(SourceFile)
+
 
 % runtime flag values
 
@@ -4508,7 +4511,27 @@ current_logtalk_flag(Flag, Value) :-
 	;	% first time loading this source file
 		'$lgt_print_message'(silent(loading), core, loading_file(SourceFile, Flags)),
 		'$lgt_compile_file'(SourceFile, PrologFile, Flags, loading, Current),
-		'$lgt_load_compiled_file'(SourceFile, PrologFile),
+		% save the file loading dependency on a parent file if it exists
+		(	'$lgt_file_loading_stack_'(ParentSourceFile) ->
+			retractall('$lgt_parent_file_'(SourceFile, _)),
+			asserta('$lgt_parent_file_'(SourceFile, ParentSourceFile))
+		;	% no parent file
+			true
+		),
+		asserta('$lgt_file_loading_stack_'(SourceFile)),
+		% sometimes there are syntax errors in the generated intermediate Prolog files
+		% that are due to write_canonical/2 and read_term/3 bugs; thus we must ensure
+		% that the '$lgt_file_loading_stack_'/1 and '$lgt_parent_file_'/2 entries are
+		% deleted in case of error
+		catch(
+			'$lgt_load_compiled_file'(SourceFile, PrologFile),
+			Error,
+			(	retract('$lgt_file_loading_stack_'(SourceFile)),
+			 	retractall('$lgt_parent_file_'(SourceFile, _)),
+				throw(Error)
+			)
+		),
+		retract('$lgt_file_loading_stack_'(SourceFile)),
 		'$lgt_print_message'(comment(loading), core, loaded_file(SourceFile, Flags))
 	),
 	'$lgt_change_directory'(Current).
@@ -6252,6 +6275,8 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_file_directive'(initialization(Goal), _) :-
 	!,
 	'$lgt_must_be'(callable, Goal),
+	% initialization directives are collected and moved to the end of file
+	% to minimize compatibility issues with backend Prolog compilers
 	assertz('$lgt_pp_file_initialization_'(Goal)).
 
 '$lgt_tr_file_directive'(op(Priority, Specifier, Operators), _) :-
