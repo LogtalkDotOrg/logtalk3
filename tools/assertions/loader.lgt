@@ -23,16 +23,5 @@
 
 
 :- initialization((
-	% most of these tools require that application code
-	% be compiled with the source_data flag turned on
-	set_logtalk_flag(source_data, on),
-	logtalk_load([
-		assertions(loader),
-		debugger(loader),
-		profiler(loader),
-		diagrams(loader),
-		help(loader),
-		lgtunit(loader),
-		lgtdoc(loader)
-	])
+	logtalk_load([assertions, assertions_messages])
 )).

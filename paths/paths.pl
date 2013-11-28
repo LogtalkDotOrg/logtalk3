@@ -77,6 +77,7 @@ logtalk_library_path(pddl_parser, contributions('pddl_parser/')).
 logtalk_library_path(verdi_neruda, contributions('verdi_neruda/')).
 logtalk_library_path(xml_parser, contributions('xml_parser/')).
 
+logtalk_library_path(assertions, tools('assertions/')).
 logtalk_library_path(debugger, tools('debugger/')).
 logtalk_library_path(profiler, tools('profiler/')).
 logtalk_library_path(diagrams, tools('diagrams/')).

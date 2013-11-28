@@ -53,6 +53,9 @@ allowing retrieving file loading dependencies.
 Tools
 -----
 
+* NEW: Assertions tool, defining `assertion/1-2` meta-predicates, for adding
+assertions to your code.
+
 * FIXED: Bug in the `lgtdoc` tool that prevented documenting libraries.
 
 Examples
