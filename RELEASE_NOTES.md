@@ -50,6 +50,11 @@ caller is identified as `(:-)/1`.
 * ADDED: Property `parent/1` to the `logtalk::loaded_file_property/2` method,
 allowing retrieving file loading dependencies.
 
+Tools
+-----
+
+* FIXED: Bug in the `lgtdoc` tool that prevented documenting libraries.
+
 Examples
 --------
 

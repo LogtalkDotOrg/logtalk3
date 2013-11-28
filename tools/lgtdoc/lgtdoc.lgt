@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/11/09,
+		date is 2013/11/28,
 		comment is 'Documenting tool.',
 		remarks is [
 			'Compiling files for generating XML documentation' - 'All source files must be compiled with the "source_data" compiler flag turned on.',
@@ -97,10 +97,12 @@
 		logtalk::loaded_file_property(Path, basename(File)),
 		logtalk::loaded_file_property(Path, text_properties(StreamOptions)),
 		\+ member(File, ExcludedFiles),
-		atom_concat(Source1, '.lgt', File),
-		\+ member(Source1, ExcludedFiles),
-		atom_concat(Source2, '.logtalk', File),
-		\+ member(Source2, ExcludedFiles),
+		(	atom_concat(Source1, '.lgt', File) ->
+			\+ member(Source1, ExcludedFiles)
+		;	atom_concat(Source2, '.logtalk', File) ->
+			\+ member(Source2, ExcludedFiles)
+		;	true
+		),
 		process(File, Directory, Options, StreamOptions),
 		fail.
 	output_library_files(_, _).
