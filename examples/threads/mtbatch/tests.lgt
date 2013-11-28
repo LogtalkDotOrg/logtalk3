@@ -9,6 +9,6 @@
 		comment is 'Unit tests for the "threads/mtbatch" example.'
 	]).
 
-	unit(mtbatch).
+	cover(mtbatch).
 
 :- end_object.

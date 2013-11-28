@@ -9,10 +9,10 @@
 		comment is 'Unit tests for the "errors" example.'
 	]).
 
-	unit(misspell).
-	unit(singletons(_)).
-	unit(redefinitions).
-	unit(unknownrefs).
-	unit(portability).
+	cover(misspell).
+	cover(singletons(_)).
+	cover(redefinitions).
+	cover(unknownrefs).
+	cover(portability).
 
 :- end_object.

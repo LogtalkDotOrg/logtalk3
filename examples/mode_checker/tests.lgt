@@ -9,6 +9,6 @@
 		comment is 'Unit tests for the "mode_checker" example.'
 	]).
 
-	unit(mode_checker).
+	cover(mode_checker).
 
 :- end_object.

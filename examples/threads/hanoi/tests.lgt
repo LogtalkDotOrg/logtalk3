@@ -19,7 +19,7 @@
 		comment is 'Unit tests for the "threads/hanoi" example.'
 	]).
 
-	unit(hanoi(_)).
+	cover(hanoi(_)).
 
 	test(hanoi_1) :-
 		hanoi(1)::run(24).

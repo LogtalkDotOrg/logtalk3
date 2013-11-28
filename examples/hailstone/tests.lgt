@@ -19,7 +19,7 @@
 		comment is 'Unit tests for the "hailstone" example.'
 	]).
 
-	unit(hailstone).
+	cover(hailstone).
 
 	test(hailstone_1) :-
 		hailstone::generate_sequence(10, Sequence),

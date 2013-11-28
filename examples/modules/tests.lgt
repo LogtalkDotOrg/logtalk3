@@ -19,11 +19,11 @@
 		comment is 'Unit tests for the "modules" example.'
 	]).
 
-	unit(exports).
-	unit(test).
-	unit(metapreds).
+	cover(exports).
+	cover(test).
+	cover(metapreds).
 	:- if(current_object(client)).	% client for testing use_module/1 directives, which are
-		unit(client).				% only supported for some back-end Prolog compilers
+		cover(client).				% only supported for some back-end Prolog compilers
 	:- endif.
 
 	test(modules_1) :-

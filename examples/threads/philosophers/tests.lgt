@@ -21,10 +21,10 @@
 
 	:- threaded.
 
-	unit(chopstick).
-	unit(philosopher).
+	cover(chopstick).
+	cover(philosopher).
 
-	unit(philosopher(_, _, _)).
+	cover(philosopher(_, _, _)).
 
 	test(philosophers_1) :-
 		threaded_ignore(p1::run(5, 5)),

@@ -19,7 +19,7 @@
 		comment is 'Unit tests for the "threads/checkpoint" example.'
 	]).
 
-	unit(checkpoint).
+	cover(checkpoint).
 
 	test(checkpoint_1) :-
 		checkpoint::run.

@@ -19,7 +19,7 @@
 		comment is 'Unit tests for the "lpa/timetables" example.'
 	]).
 
-	unit(forms).
-	unit(form).
+	cover(forms).
+	cover(form).
 
 :- end_object.

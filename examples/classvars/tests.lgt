@@ -19,10 +19,10 @@
 		comment is 'Unit tests for the "classvars" example.'
 	]).
 
-	unit(root).
-	unit(instance1).
-	unit(instance2).
-	unit(instance3).
+	cover(root).
+	cover(instance1).
+	cover(instance2).
+	cover(instance3).
 
 	test(classvars_1) :-
 		instance1::cv(Value1), 

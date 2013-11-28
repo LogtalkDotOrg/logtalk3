@@ -19,9 +19,9 @@
 		comment is 'Unit tests for the "poem" example.'
 	]).
 
-	unit(point(_, _)).
-	unit(line(_, _)).
-	unit(ellipse(_, _, _)).
-	unit(circle(_, _)).
+	cover(point(_, _)).
+	cover(line(_, _)).
+	cover(ellipse(_, _, _)).
+	cover(circle(_, _)).
 
 :- end_object.

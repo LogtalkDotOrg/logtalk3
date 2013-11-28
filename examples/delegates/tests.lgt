@@ -19,12 +19,12 @@
 		comment is 'Unit tests for the "delegates" example.'
 	]).
 
-	unit(delegator).
-	unit(a_delegator).
-	unit(a_delegator(_)).
-	unit(delegate).
-	unit(a_delegate).
-	unit(an_object).
+	cover(delegator).
+	cover(a_delegator).
+	cover(a_delegator(_)).
+	cover(delegate).
+	cover(a_delegate).
+	cover(an_object).
 
 	% without a delegate:
 	test(delegates_1) :-

@@ -19,7 +19,7 @@
 		comment is 'Unit tests for the "threads/barriers" example.'
 	]).
 
-	unit(beatles).
+	cover(beatles).
 
 	test(barriers_1) :-
 		beatles::sing_along.

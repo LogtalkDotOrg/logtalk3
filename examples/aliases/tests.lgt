@@ -19,10 +19,10 @@
 		comment is 'Unit tests for the "aliases" example.'
 	]).
 
-	unit(rectangle(_, _)).
-	unit(square(_)).
-	unit(ellipse(_, _)).
-	unit(circle(_)).
+	cover(rectangle(_, _)).
+	cover(square(_)).
+	cover(ellipse(_, _)).
+	cover(circle(_)).
 
 	test(aliases_1) :-
 		findall(Predicate, square(_)::current_predicate(Predicate), PredicatesUnsorted),

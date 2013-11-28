@@ -19,7 +19,7 @@
 		comment is 'Unit tests for the "threads/team" example.'
 	]).
 
-	unit(team).
+	cover(team).
 
 	test(team_1) :-
 		team::start.

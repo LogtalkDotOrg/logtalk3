@@ -19,6 +19,6 @@
 		comment is 'Unit tests for the "msglog" example.'
 	]).
 
-	unit(msglog).
+	cover(msglog).
 
 :- end_object.

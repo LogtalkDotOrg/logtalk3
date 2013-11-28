@@ -82,9 +82,10 @@ prefixed with the `(-)/1` operator. An alternative is to use the conditional
 compilation directives. The number of skipped tests is reported together with
 the numbers of passed and failed tests.
 
-The "units" (objects, protocols, and categories) being tested by an unit test
-object are declared using the `unit/1` predicate. A single unit test object my
-included tests for one or more "units".
+A single unit test object my include tests for one or more entities (objects,
+protocols, and categories). The entities being tested by an unit test object
+for which code coverage information should be collected are declared using
+the `cover/1` predicate.
 
 For examples of how to write unit tests, check the `tests` folder or the
 `testing` example in the `examples` folder in the Logtalk distribution.
@@ -143,7 +144,7 @@ If you want entity predicate clause coverage information to be collected
 and printed, you will need to compile the entities that you're testing
 using the options `debug(on)` and `source_data(on)`. Be aware, however,
 that compiling in debug mode results in a performance penalty. Your unit
-test objects must also define facts for the predicate `unit/1`, whose
+test objects must also define facts for the predicate `cover/1`, whose
 argument is the identifier of an entity being tested for which you want
 to collect coverage information.
 

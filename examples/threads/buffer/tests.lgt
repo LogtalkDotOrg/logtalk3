@@ -21,9 +21,9 @@
 
 	:- threaded.
 
-	unit(buffer(_)).
-	unit(producer(_)).
-	unit(consumer(_)).
+	cover(buffer(_)).
+	cover(producer(_)).
+	cover(consumer(_)).
 
 	test(buffer_1) :-
 		threaded_ignore(producer(2)::run(25)),

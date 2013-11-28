@@ -19,12 +19,12 @@
 		comment is 'Unit tests for the "people" example.'
 	]).
 
-	unit(person).
-	unit(teacher).
-	unit(student).
-	unit(person(_, _)).
-	unit(teacher(_, _, _)).
-	unit(student(_, _, _)).
+	cover(person).
+	cover(teacher).
+	cover(student).
+	cover(person(_, _)).
+	cover(teacher(_, _, _)).
+	cover(student(_, _, _)).
 
 	test(people_1) :-
 		person::new(Id1, 'Oscar the Grouch', '1969/11/10'),

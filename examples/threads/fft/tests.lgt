@@ -19,7 +19,7 @@
 		comment is 'Unit tests for the "threads/fft" example.'
 	]).
 
-	unit(fft(_)).
+	cover(fft(_)).
 
 	test(fft_1) :-
 		N is 8, cgenerator::list(N,L),

@@ -24,7 +24,7 @@
 		assertion/2
 	]).
 
-	unit(assertions).
+	cover(assertions).
 
 	% assertion/1 tests
 

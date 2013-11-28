@@ -19,9 +19,9 @@
 		comment is 'Unit tests for the "prototypes" example.'
 	]).
 
-	unit(alf).
-	unit(skip).
-	unit(rhonda).
+	cover(alf).
+	cover(skip).
+	cover(rhonda).
 
 	test(prototypes_1) :-
 		findall(P, (alf::current_predicate(F/A), functor(P,F,A), alf::P), Solutions),

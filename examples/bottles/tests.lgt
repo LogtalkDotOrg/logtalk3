@@ -19,6 +19,6 @@
 		comment is 'Unit tests for the "bottles" example.'
 	]).
 
-	unit(bottles).
+	cover(bottles).
 
 :- end_object.

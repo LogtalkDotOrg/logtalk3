@@ -21,7 +21,7 @@
 
 	:- uses(lgtunit, [op(700, xfx, '=~='), '=~='/2]).
 
-	unit(circle(_, _, _)).
+	cover(circle(_, _, _)).
 
 	test(proxies_1) :-
 		{circle('#2', Radius, Color)}::print,

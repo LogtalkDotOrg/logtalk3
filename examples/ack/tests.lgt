@@ -19,7 +19,7 @@
 		comment is 'Unit tests for the "ack" example.'
 	]).
 
-	unit(ack).
+	cover(ack).
 
 	test(ack_1) :-
 		ack::ack(2, 4, Result),

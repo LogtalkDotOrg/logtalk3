@@ -19,8 +19,8 @@
 		comment is 'Unit tests for the "relations" example.'
 	]).
 
-	unit(relationp).
-	unit(relation).
-	unit(constrained_relation).
+	cover(relationp).
+	cover(relation).
+	cover(constrained_relation).
 
 :- end_object.

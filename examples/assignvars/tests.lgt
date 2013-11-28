@@ -19,8 +19,8 @@
 		comment is 'Unit tests for the "assignvars" example.'
 	]).
 
-	unit(rectangle(_, _, _)).
-	unit(fsm(_, _, _)).
+	cover(rectangle(_, _, _)).
+	cover(fsm(_, _, _)).
 
 	test(assignvars_1) :-
 		rectangle(2, 3, S)::init,

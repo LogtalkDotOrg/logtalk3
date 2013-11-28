@@ -19,19 +19,19 @@
 		comment is 'Unit tests for the "dynpred" example.'
 	]).
 
-	unit(ctg).
-	unit(top).
-	unit(middle).
-	unit(bottom).
+	cover(ctg).
+	cover(top).
+	cover(middle).
+	cover(bottom).
 
-	unit(metaclass).
-	unit(class).
-	unit(instance).
+	cover(metaclass).
+	cover(class).
+	cover(instance).
 
-	unit(root).
-	unit(descendant).
+	cover(root).
+	cover(descendant).
 
-	unit(prototype).
+	cover(prototype).
 
 	:- discontiguous(succeeds/1).
 	:- discontiguous(fails/1).

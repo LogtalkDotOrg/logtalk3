@@ -21,12 +21,12 @@
 
 	:- uses(lgtunit, [op(700, xfx, '=~='), '=~='/2]).
 
-	unit(xyz).
-	unit(t).
-	unit(xyzt).
-	unit(xyz(_, _, _)).
-	unit(t(_)).
-	unit(xyzt(_, _, _, _)).
+	cover(xyz).
+	cover(t).
+	cover(xyzt).
+	cover(xyz(_, _, _)).
+	cover(t(_)).
+	cover(xyzt(_, _, _, _)).
 
 	test(mi_1) :-
 		xyzt::rotate(1, 2, 3),

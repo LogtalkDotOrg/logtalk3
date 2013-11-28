@@ -9,8 +9,8 @@
 		comment is 'Unit tests for the "profiling" example.'
 	]).
 
-	unit(message_counter).
-	unit(stop_watch).
-	unit(timer).
+	cover(message_counter).
+	cover(stop_watch).
+	cover(timer).
 
 :- end_object.

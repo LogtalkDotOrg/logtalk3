@@ -19,14 +19,14 @@
 		comment is 'Unit tests for the "metainterpreters" example.'
 	]).
 
-	unit(solver).
-	unit(proof_tree).
-	unit(tracer).
-	unit(counter).
-	unit(lists).
-	unit(database).
-	unit(engine).
-	unit(rules).
+	cover(solver).
+	cover(proof_tree).
+	cover(tracer).
+	cover(counter).
+	cover(lists).
+	cover(database).
+	cover(engine).
+	cover(rules).
 
 	test(metainterpreters_1) :-
 		findall(X,database::p(X),Solutions),

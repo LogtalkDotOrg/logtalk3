@@ -19,16 +19,16 @@
 		comment is 'Unit tests for the "parametric" example.'
 	]).
 
-	unit([_| _]).
-	unit('[]').
-	unit(date(_, _, _)).
-	unit(time(_, _, _)).
-	unit(rectangle(_, _, _, _)).
-	unit(person(_, _)).
-	unit(employee(_, _, _)).
-	unit(dress(_)).
-	unit(speech(_)).
-	unit(speech(_, _)).
+	cover([_| _]).
+	cover('[]').
+	cover(date(_, _, _)).
+	cover(time(_, _, _)).
+	cover(rectangle(_, _, _, _)).
+	cover(person(_, _)).
+	cover(employee(_, _, _)).
+	cover(dress(_)).
+	cover(speech(_)).
+	cover(speech(_, _)).
 
 	test(parametric_1) :-
 		findall(X, [1, 2, 3]::member(X), Solutions),

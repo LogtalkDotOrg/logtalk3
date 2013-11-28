@@ -19,11 +19,11 @@
 		comment is 'Unit tests for the "engines" example.'
 	]).
 
-	unit(enginep).
-	unit(classic).
-	unit(sport).
-	unit(sedan).
-	unit(coupe).
+	cover(enginep).
+	cover(classic).
+	cover(sport).
+	cover(sedan).
+	cover(coupe).
 
 	test(engines_1) :-
 		findall(Predicate, sedan::current_predicate(Predicate), Solutions),

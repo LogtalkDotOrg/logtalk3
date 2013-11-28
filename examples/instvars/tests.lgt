@@ -19,10 +19,10 @@
 		comment is 'Unit tests for the "instvars" example.'
 	]).
 
-	unit(root).
-	unit(instance1).
-	unit(instance2).
-	unit(instance3).
+	cover(root).
+	cover(instance1).
+	cover(instance2).
+	cover(instance3).
 
 	test(instvars_1) :-
 		instance1::ivar(Value1), instance2::ivar(Value2), instance3::ivar(Value3),

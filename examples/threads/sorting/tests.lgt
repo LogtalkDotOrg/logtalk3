@@ -19,9 +19,9 @@
 		comment is 'Unit tests for the "threads/sorting" example.'
 	]).
 
-	unit(generator).
-	unit(msort(_)).
-	unit(qsort(_)).
+	cover(generator).
+	cover(msort(_)).
+	cover(qsort(_)).
 
 	test(sorting_1) :-
 		generator::list(20000, List),

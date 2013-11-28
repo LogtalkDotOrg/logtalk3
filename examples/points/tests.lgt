@@ -19,10 +19,10 @@
 		comment is 'Unit tests for the "points" example.'
 	]).
 
-	unit(point).
-	unit(bounded_point).
-	unit(history_point).
-	unit(bounded_history_point).
+	cover(point).
+	cover(bounded_point).
+	cover(history_point).
+	cover(bounded_history_point).
 
 	test(points_1) :-
 		point::new(Point, [position-(1, 3)]),

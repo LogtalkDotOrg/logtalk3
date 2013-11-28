@@ -19,7 +19,7 @@
 		comment is 'Unit tests for the "threads/buckets" example.'
 	]).
 
-	unit(buckets).
+	cover(buckets).
 
 	test(buckets_1) :-
 		buckets::start.

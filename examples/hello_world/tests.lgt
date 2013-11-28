@@ -9,6 +9,6 @@
 		comment is 'Unit tests for the "hello_world" example.'
 	]).
 
-	unit(hello_world).
+	cover(hello_world).
 
 :- end_object.

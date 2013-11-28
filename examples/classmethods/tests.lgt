@@ -21,9 +21,9 @@
 
 	:- uses(lgtunit, [op(700, xfx, '=~='), '=~='/2]).
 
-	unit(metacircle).
-	unit(circle).
-	unit(c42).
+	cover(metacircle).
+	cover(circle).
+	cover(c42).
 
 	test(classmethods_1) :-
 		circle::area(1.0, Area),

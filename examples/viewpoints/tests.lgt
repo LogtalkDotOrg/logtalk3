@@ -19,11 +19,11 @@
 		comment is 'Unit tests for the "viewpoints" example.'
 	]).
 
-	unit(joePerson).
-	unit(joeSportsman).
-	unit(joeChessPlayer).
-	unit(joeFilmEnthusiast).
-	unit(joeEmployee).
+	cover(joePerson).
+	cover(joeSportsman).
+	cover(joeChessPlayer).
+	cover(joeFilmEnthusiast).
+	cover(joeEmployee).
 
 	test(viewpoints_1) :-
 		joePerson::age(Age),

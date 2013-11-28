@@ -19,11 +19,11 @@
 		comment is 'Unit tests for the "patching" example.'
 	]).
 
-	unit(broken).
-	unit(metaclass).
-	unit(broken_class).
-	unit(instance).
-	unit(patch).
+	cover(broken).
+	cover(metaclass).
+	cover(broken_class).
+	cover(instance).
+	cover(patch).
 
 	succeeds(patching_1) :-
 		setof((Category, Object), complements_object(Category, Object), Pairs),

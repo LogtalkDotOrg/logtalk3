@@ -19,13 +19,13 @@
 		comment is 'Unit tests for the "tabling" example.'
 	]).
 
-	unit(fibonacci).
-	unit(paths).
+	cover(fibonacci).
+	cover(paths).
 
 	:- if(current_logtalk_flag(prolog_dialect, yap)).
-	unit(mdt_paths_first).
-	unit(mdt_paths_min).
-	unit(mdt_paths_min_all).
+	cover(mdt_paths_first).
+	cover(mdt_paths_min).
+	cover(mdt_paths_min_all).
 	:- endif.
 
 	test(tabling_1) :-

@@ -19,7 +19,7 @@
 		comment is 'Unit tests for the "birds" example.'
 	]).
 
-	unit(descriptors).
-	unit(expert).
+	cover(descriptors).
+	cover(expert).
 
 :- end_object.

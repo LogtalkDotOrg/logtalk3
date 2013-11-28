@@ -21,9 +21,9 @@
 		comment is 'Unit tests for the "reflection" example.'
 	]).
 
-	unit(object).
-	unit(class).
-	unit(abstract_class).
+	cover(object).
+	cover(class).
+	cover(abstract_class).
 
 	:- discontiguous(succeeds/1).
 	:- discontiguous(throws/2).

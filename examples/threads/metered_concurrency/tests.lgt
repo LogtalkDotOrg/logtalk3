@@ -19,7 +19,7 @@
 		comment is 'Unit tests for the "threads/metered_concurrency" example.'
 	]).
 
-	unit(metered_concurrency).
+	cover(metered_concurrency).
 
 	test(metered_concurrency_1) :-
 		metered_concurrency::run.

@@ -19,8 +19,8 @@
 		comment is 'Unit tests for the "logging" example.'
 	]).
 
-	unit(logging).
-	unit(object).
+	cover(logging).
+	cover(object).
 
 	test(logging_1) :-
 		object::add_log_entry('something interesting happens'),

@@ -19,6 +19,6 @@
 		comment is 'Unit tests for the "lpa/faults" example.'
 	]).
 
-	unit(fault).
+	cover(fault).
 
 :- end_object.

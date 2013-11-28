@@ -22,7 +22,7 @@
 		comment is 'Unit tests for the "encodings" example.'
 	]).
 
-	unit(babel).
+	cover(babel).
 
 	test(encodings_utf_8_1) :-
 		findall(Code-Text, babel::hello_world(Code, Text), Solutions),

@@ -34,10 +34,10 @@
 		comment is 'A simple unit test framework featuring predicate clause coverage.'
 	]).
 
-	:- public(unit/1).
-	:- mode(unit(?entity_identifier), zero_or_more).
-	:- info(unit/1, [
-		comment is 'Units (or entities) being tested.'
+	:- public(cover/1).
+	:- mode(cover(?entity_identifier), zero_or_more).
+	:- info(cover/1, [
+		comment is 'Declares entities being tested for which code coverage information should be collected.'
 	]).
 
 	:- public(run/2).
@@ -315,7 +315,6 @@
 
 	% different unit test idioms are supported using the term-expansion mechanism;
 	% the unit test objects must be loaded using this object as an hook object
-
 	term_expansion((:- object(Test, Relation)), [(:- object(Test, Relation))]) :-
 		reset_compilation_counters.
 	term_expansion((:- object(Test, Relation1, Relation2)), [(:- object(Test, Relation1, Relation2))]) :-
@@ -327,6 +326,8 @@
 	term_expansion((:- object(Test, Relation1, Relation2, Relation3, Relation4, Relation5)), [(:- object(Test, Relation1, Relation2, Relation3, Relation4, Relation5))]) :-
 		reset_compilation_counters.
 
+	% the discontiguous/1 directives usually required when using some of the
+	% unit tests idioms are no longer necessary after term-expanding them 
 	term_expansion((:- discontiguous(Functor/Arity)), []) :-
 		(	Functor/Arity == (-)/1
 		;	Functor/Arity == test/2
@@ -375,10 +376,14 @@
 		logtalk_load_context(term_position, Position),
 		assertz(test_(throws(Test, Error, Position))).
 
+	% collect all unit test identifiers when reching the end_object/0 directive 
 	term_expansion((:- end_object), [skipped_(N), (run_tests :- ::run_tests(Tests, File)), (:- end_object)]) :-
 		retract(skipped_(N)),
 		findall(Test, retract(test_(Test)), Tests),
 		logtalk_load_context(source, File).
+
+	% support the deprecated unit/1 predicate which may still be in use in old code
+	term_expansion(unit(Entity), [cover(Entity)]).
 
 	test_idiom_head(test(Test, _), Test).
 	test_idiom_head(test(Test), Test).
@@ -457,13 +462,13 @@
 	write_coverage_results :-
 		(	setof(Entity, fired_entity(Entity), Entities) ->
 			write_coverage_results(Entities),
-			setof(Unit, ::unit(Unit), Units),
+			setof(Unit, ::cover(Unit), Units),
 			write_coverage_results_summary(Units, Entities)
 		;	print_message(information, lgtunit, no_code_coverage_information_collected)
 		).
 
 	fired_entity(Entity) :-
-		::unit(Entity),
+		::cover(Entity),
 		\+ \+ fired_(Entity, _, _).
 
 	write_coverage_results([]).

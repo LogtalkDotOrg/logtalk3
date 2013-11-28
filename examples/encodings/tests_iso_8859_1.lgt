@@ -23,7 +23,7 @@
 		comment is 'Unit tests for the "encodings" example.'
 	]).
 
-	unit(latin).
+	cover(latin).
 
 	test(encodings_iso_8859_1_1) :-
 		findall(Name, latin::name(Name), Solutions),

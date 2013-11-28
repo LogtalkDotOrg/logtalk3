@@ -19,10 +19,10 @@
 		comment is 'Unit tests for the "instmethods" example.'
 	]).
 
-	unit(root).
-	unit(instance1).
-	unit(instance2).
-	unit(instance3).
+	cover(root).
+	cover(instance1).
+	cover(instance2).
+	cover(instance3).
 
 	test(instmethods_1) :-
 		instance1::predicate_property(method, defined_in(Object)),

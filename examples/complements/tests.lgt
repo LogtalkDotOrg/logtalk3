@@ -19,8 +19,8 @@
 		comment is 'Unit tests for the "complements" example.'
 	]).
 
-	unit(employee).
-	unit(add_on).
+	cover(employee).
+	cover(add_on).
 
 	test(complements_1) :-
 		complements_object(Category, Object),

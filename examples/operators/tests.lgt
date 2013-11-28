@@ -19,12 +19,12 @@
 		comment is 'Unit tests for the "operators" example.'
 	]).
 
-	unit(double).
-	unit(triple).
-	unit(graph).
-	unit(graph1).
+	cover(double).
+	cover(triple).
+	cover(graph).
+	cover(graph1).
 	%unit(graph2).
-	unit(reverse).
+	cover(reverse).
 
 	test(operators_1) :-
 		findall(I-J, double::double(I, J), Solutions),

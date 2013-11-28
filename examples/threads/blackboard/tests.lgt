@@ -21,12 +21,12 @@
 
 	:- threaded.
 
-	unit(using).
-	unit(chalk).
-	unit(eraser).
-	unit(running).
-	unit(teacher).
-	unit(student).
+	cover(using).
+	cover(chalk).
+	cover(eraser).
+	cover(running).
+	cover(teacher).
+	cover(student).
 
 	test(blackboard_1) :-
 		threaded_ignore(teacher::run(4)),

@@ -9,8 +9,8 @@
 		comment is 'Unit tests for the "debug_hooks" example.'
 	]).
 
-	unit(hook_debug).
-	unit(hook_production).
-	unit(hook(_)).
+	cover(hook_debug).
+	cover(hook_production).
+	cover(hook(_)).
 
 :- end_object.

@@ -19,8 +19,8 @@
 		comment is 'Unit tests for the "adventure" example.'
 	]).
 
-	unit(sleepy).
-	unit(spider).
-	unit(wumpus).
+	cover(sleepy).
+	cover(spider).
+	cover(wumpus).
 
 :- end_object.

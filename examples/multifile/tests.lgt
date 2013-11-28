@@ -19,9 +19,9 @@
 		comment is 'Unit tests for the "multifile" example.'
 	]).
 
-	unit(main).
-	unit(other).
-	unit(more).
+	cover(main).
+	cover(other).
+	cover(more).
 
 	test(multifile_1) :-
 		findall(X, main::a(X), Solutions),
