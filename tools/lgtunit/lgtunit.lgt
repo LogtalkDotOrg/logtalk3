@@ -30,7 +30,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/09/18,
+		date is 2013/11/28,
 		comment is 'A simple unit test framework featuring predicate clause coverage.'
 	]).
 
@@ -67,11 +67,11 @@
 		comment is 'Runs all defined unit tests.'
 	]).
 
-	:- protected(run_tests/1).
-	:- mode(run_tests(+list(callable)), one).
-	:- info(run_tests/1, [
+	:- protected(run_tests/2).
+	:- mode(run_tests(+list(callable), +atom), one).
+	:- info(run_tests/2, [
 		comment is 'Runs a list of defined tests.',
-		argnames is ['Tests']
+		argnames is ['Tests', 'File']
 	]).
 
 	:- protected(setup/0).
@@ -182,44 +182,44 @@
 	% by default, no test cleanup is needed:
 	cleanup.
 
-	run_tests([]).
-	run_tests([Test| Tests]) :-
-		run_test(Test),
-		run_tests(Tests).
+	run_tests([], _).
+	run_tests([Test| Tests], File) :-
+		run_test(Test, File),
+		run_tests(Tests, File).
 
 	% by default, no tests are defined:
 	run_tests :-
-		run_tests([]).
+		run_tests([], _).
 
-	run_test(succeeds(Test)) :-
-		(	catch(::test(Test, _), Error, unexpected_error_expected_success(Test, Error)) ->
+	run_test(succeeds(Test, Position), File) :-
+		(	catch(::test(Test, _), Error, unexpected_error_expected_success(Test, Error, File, Position)) ->
 			(	var(Error) ->
-				passed_test(Test)
+				passed_test(Test, File, Position)
 			;	true
 			)
-		;	unexpected_failure_expected_success(Test)
+		;	unexpected_failure_expected_success(Test, File, Position)
 		).
-	run_test(fails(Test)) :-
-		(	catch(::test(Test, _), Error, unexpected_error_expected_failure(Test, Error)) ->
+	run_test(fails(Test, Position), File) :-
+		(	catch(::test(Test, _), Error, unexpected_error_expected_failure(Test, Error, File, Position)) ->
 			(	var(Error) ->
-				unexpected_success_expected_failure(Test)
+				unexpected_success_expected_failure(Test, File, Position)
 			;	true
 			)
-		;	passed_test(Test)
+		;	passed_test(Test, File, Position)
 		).
-	run_test(throws(Test, ExpectedError)) :-
-		(	catch(::test(Test, ExpectedError), Error, check_error(Test, ExpectedError, Error)) ->
+	run_test(throws(Test, ExpectedError, Position), File) :-
+		(	catch(::test(Test, ExpectedError), Error, check_error(Test, ExpectedError, Error, File, Position)) ->
 			(	var(Error) ->
-				unexpected_success_expected_error(Test)
+				unexpected_success_expected_error(Test, File, Position)
 			;	true
 			)
-		;	unexpected_failure_expected_error(Test)
+		;	unexpected_failure_expected_error(Test, File, Position)
 		).
 
-	check_error(Test, ExpectedError, Error) :-
+	check_error(Test, ExpectedError, Error, File, Position) :-
 		(	subsumes_term(ExpectedError, Error) ->
-			passed_test(Test)
-		;	wrong_error(Test, ExpectedError, Error)
+			passed_test(Test, File, Position)
+		;	wrong_error(Test, ExpectedError, Error, File, Position)
 		).
 
 	write_tests_header :-
@@ -247,37 +247,37 @@
 		time::now(Hours, Minutes, Seconds),
 		print_message(information, lgtunit, tests_end_date_time(Year, Month, Day, Hours, Minutes, Seconds)).
 
-	passed_test(Test) :-
+	passed_test(Test, File, Position) :-
 		increment_passed_tests_counter,
-		print_message(information, lgtunit, passed_test(Test)).
+		print_message(information, lgtunit, passed_test(Test, File, Position)).
 
-	unexpected_success_expected_failure(Test) :-
+	unexpected_success_expected_failure(Test, File, Position) :-
 		increment_failed_tests_counter,
-		print_message(error, lgtunit, unexpected_success_expected_failure(Test)).
+		print_message(error, lgtunit, unexpected_success_expected_failure(Test, File, Position)).
 
-	unexpected_success_expected_error(Test) :-
+	unexpected_success_expected_error(Test, File, Position) :-
 		increment_failed_tests_counter,
-		print_message(error, lgtunit, unexpected_success_expected_error(Test)).
+		print_message(error, lgtunit, unexpected_success_expected_error(Test, File, Position)).
 
-	unexpected_failure_expected_success(Test) :-
+	unexpected_failure_expected_success(Test, File, Position) :-
 		increment_failed_tests_counter,
-		print_message(error, lgtunit, unexpected_failure_expected_success(Test)).
+		print_message(error, lgtunit, unexpected_failure_expected_success(Test, File, Position)).
 
-	unexpected_failure_expected_error(Test) :-
+	unexpected_failure_expected_error(Test, File, Position) :-
 		increment_failed_tests_counter,
-		print_message(error, lgtunit, unexpected_failure_expected_error(Test)).
+		print_message(error, lgtunit, unexpected_failure_expected_error(Test, File, Position)).
 
-	unexpected_error_expected_failure(Test, Error) :-
+	unexpected_error_expected_failure(Test, Error, File, Position) :-
 		increment_failed_tests_counter,
-		print_message(error, lgtunit, unexpected_error_expected_failure(Test, Error)).
+		print_message(error, lgtunit, unexpected_error_expected_failure(Test, Error, File, Position)).
 
-	unexpected_error_expected_success(Test, Error) :-
+	unexpected_error_expected_success(Test, Error, File, Position) :-
 		increment_failed_tests_counter,
-		print_message(error, lgtunit, unexpected_error_expected_success(Test, Error)).
+		print_message(error, lgtunit, unexpected_error_expected_success(Test, Error, File, Position)).
 
-	wrong_error(Test, Error, Ball) :-
+	wrong_error(Test, Error, Ball, File, Position) :-
 		increment_failed_tests_counter,
-		print_message(error, lgtunit, wrong_error(Test, Error, Ball)).
+		print_message(error, lgtunit, wrong_error(Test, Error, Ball, File, Position)).
 
 	broken_step(Step, Error) :-
 		self(Self),
@@ -346,33 +346,39 @@
 	% unit test idiom test/2
 	term_expansion((test(Test, Outcome) :- Goal), [(test(Test, Outcome) :- Goal)]) :-
 		check_for_repeated_test_identifier(Test),
+		logtalk_load_context(term_position, Position),
 		(	Outcome == true ->
-			assertz(test_(succeeds(Test)))
+			assertz(test_(succeeds(Test, Position)))
 		;	Outcome == fail ->
-			assertz(test_(fails(Test)))
+			assertz(test_(fails(Test, Position)))
 		;	nonvar(Outcome) ->
-			assertz(test_(throws(Test, Outcome)))
+			assertz(test_(throws(Test, Outcome, Position)))
 		).
 
 	% unit test idiom test/1
 	term_expansion((test(Test) :- Goal), [(test(Test, true) :- Goal)]) :-
 		check_for_repeated_test_identifier(Test),
-		assertz(test_(succeeds(Test))).
+		logtalk_load_context(term_position, Position),
+		assertz(test_(succeeds(Test, Position))).
 
 	% unit test idiom succeeds/1 + fails/1 + throws/2
 	term_expansion((succeeds(Test) :- Goal), [(test(Test, true) :- Goal)]) :-
 		check_for_repeated_test_identifier(Test),
-		assertz(test_(succeeds(Test))).
+		logtalk_load_context(term_position, Position),
+		assertz(test_(succeeds(Test, Position))).
 	term_expansion((fails(Test) :- Goal), [(test(Test, fail) :- Goal)]) :-
 		check_for_repeated_test_identifier(Test),
-		assertz(test_(fails(Test))).
+		logtalk_load_context(term_position, Position),
+		assertz(test_(fails(Test, Position))).
 	term_expansion((throws(Test, Error) :- Goal), [(test(Test, Error) :- Goal)]) :-
 		check_for_repeated_test_identifier(Test),
-		assertz(test_(throws(Test, Error))).
+		logtalk_load_context(term_position, Position),
+		assertz(test_(throws(Test, Error, Position))).
 
-	term_expansion((:- end_object), [skipped_(N), (run_tests :- ::run_tests(Tests)), (:- end_object)]) :-
+	term_expansion((:- end_object), [skipped_(N), (run_tests :- ::run_tests(Tests, File)), (:- end_object)]) :-
 		retract(skipped_(N)),
-		findall(Test, retract(test_(Test)), Tests).
+		findall(Test, retract(test_(Test)), Tests),
+		logtalk_load_context(source, File).
 
 	test_idiom_head(test(Test, _), Test).
 	test_idiom_head(test(Test), Test).

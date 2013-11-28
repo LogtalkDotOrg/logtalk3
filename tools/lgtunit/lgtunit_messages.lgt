@@ -68,29 +68,43 @@
 	logtalk::message_tokens(tests_results_summary(Total, Skipped, Passed, Failed), lgtunit) -->
 		['~d tests: ~d skipped, ~d passed, ~d failed'-[Total, Skipped, Passed, Failed], nl].
 
-	logtalk::message_tokens(passed_test(Test), lgtunit) -->
+	logtalk::message_tokens(passed_test(Test, _File, _Position), lgtunit) -->
 		['~w: success'-[Test], nl].
 
-	logtalk::message_tokens(unexpected_success_expected_failure(Test), lgtunit) -->
-		['~w: failure (test goal succeeded but should have failed)'-[Test], nl].
+	logtalk::message_tokens(unexpected_success_expected_failure(Test, File, Position), lgtunit) -->
+		['~w: failure (test goal succeeded but should have failed)'-[Test], nl,
+		 '  in file ~w between lines ~w'-[File, Position], nl
+		].
 
-	logtalk::message_tokens(unexpected_success_expected_error(Test), lgtunit) -->
-		['~w: failure (test goal succeeded but should have throw an error)'-[Test], nl].
+	logtalk::message_tokens(unexpected_success_expected_error(Test, File, Position), lgtunit) -->
+		['~w: failure (test goal succeeded but should have throw an error)'-[Test], nl,
+		 '  in file ~w between lines ~w'-[File, Position], nl
+		].
 
-	logtalk::message_tokens(unexpected_failure_expected_success(Test), lgtunit) -->
-		['~w: failure (test goal failed but should have succeeded)'-[Test], nl].
+	logtalk::message_tokens(unexpected_failure_expected_success(Test, File, Position), lgtunit) -->
+		['~w: failure (test goal failed but should have succeeded)'-[Test], nl,
+		 '  in file ~w between lines ~w'-[File, Position], nl
+		].
 
-	logtalk::message_tokens(unexpected_failure_expected_error(Test), lgtunit) -->
-		['~w: failure (test goal failed but should have throw an error)'-[Test], nl].
+	logtalk::message_tokens(unexpected_failure_expected_error(Test, File, Position), lgtunit) -->
+		['~w: failure (test goal failed but should have throw an error)'-[Test], nl,
+		 '  in file ~w between lines ~w'-[File, Position], nl
+		].
 
-	logtalk::message_tokens(unexpected_error_expected_failure(Test, Error), lgtunit) -->
-		['~w: failure (test goal throws an error but should have failed: ~q)'-[Test, Error], nl].
+	logtalk::message_tokens(unexpected_error_expected_failure(Test, Error, File, Position), lgtunit) -->
+		['~w: failure (test goal throws an error but should have failed: ~q)'-[Test, Error], nl,
+		 '  in file ~w between lines ~w'-[File, Position], nl
+		].
 
-	logtalk::message_tokens(unexpected_error_expected_success(Test, Error), lgtunit) -->
-		['~w: failure (test goal throws an error but should have succeeded: ~q)'-[Test, Error], nl].
+	logtalk::message_tokens(unexpected_error_expected_success(Test, Error, File, Position), lgtunit) -->
+		['~w: failure (test goal throws an error but should have succeeded: ~q)'-[Test, Error], nl,
+		 '  in file ~w between lines ~w'-[File, Position], nl
+		].
 
-	logtalk::message_tokens(wrong_error(Test, Error, Ball), lgtunit) -->
-		['~w: failure (test goal throws the wrong error: got ~q instead of ~q)'-[Test, Ball, Error], nl].
+	logtalk::message_tokens(wrong_error(Test, Error, Ball, File, Position), lgtunit) -->
+		['~w: failure (test goal throws the wrong error: got ~q instead of ~q)'-[Test, Ball, Error], nl,
+		 '  in file ~w between lines ~w'-[File, Position], nl
+		].
 
 	logtalk::message_tokens(broken_step(Step, Object, Error), lgtunit) -->
 		['broken ~w for object ~q: ~q'-[Step, Object, Error], nl].

@@ -58,6 +58,10 @@ assertions to your code.
 
 * FIXED: Bug in the `lgtdoc` tool that prevented documenting libraries.
 
+* CHANGED: The `lgtunit` tool default messages for failed unit tests now
+include both the test file path and the test line numbers (allowing better
+integration with development tools such as PDT).
+
 Examples
 --------
 
