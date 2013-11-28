@@ -2621,7 +2621,7 @@ current_logtalk_flag(Flag, Value) :-
 		(	(Scope = TestScope; Sender = SCtn) ->
 			'$lgt_assert_pred_def'(Def, DDef, Prefix, Head, ExCtx, THead, _),
 			'$lgt_goal_meta_variables'(Head, Meta, MetaVars),
-			'$lgt_comp_ctx'(Ctx, _, _, _, _, Prefix, MetaVars, _, ExCtx, runtime, _),
+			'$lgt_comp_ctx'(Ctx, Head, _, _, _, Prefix, MetaVars, _, ExCtx, runtime, _),
 			'$lgt_tr_body'(Body, TBody, DBody, Ctx),
 			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
@@ -2710,7 +2710,7 @@ current_logtalk_flag(Flag, Value) :-
 		(	(Scope = TestScope; Sender = SCtn) ->
 			'$lgt_assert_pred_def'(Def, DDef, Prefix, Head, ExCtx, THead, _),
 			'$lgt_goal_meta_variables'(Head, Meta, MetaVars),
-			'$lgt_comp_ctx'(Ctx, _, _, _, _, Prefix, MetaVars, _, ExCtx, runtime, _),
+			'$lgt_comp_ctx'(Ctx, Head, _, _, _, Prefix, MetaVars, _, ExCtx, runtime, _),
 			'$lgt_tr_body'(Body, TBody, DBody, Ctx),
 			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
@@ -5086,7 +5086,9 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_add_referenced_object_message'(Obj, Pred, Head) :-
 	functor(Pred, PredFunctor, PredArity),
-	(	'$lgt_pp_defines_predicate_'(Head, _, _, compile(aux)) ->
+	(	var(Head) ->
+		true
+	;	\+ '$lgt_pp_defines_predicate_'(Head, _, _, compile(regular)) ->
 		true
 	;	'$lgt_pp_uses_predicate_'(Obj, PredFunctor/PredArity, _) ->
 		true
@@ -5103,17 +5105,22 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 '$lgt_add_referenced_object_message'(Obj, Pred, Alias, Head) :-
-	functor(Pred, PredFunctor, PredArity),
-	functor(Head, HeadFunctor, HeadArity),
-	'$lgt_current_line_numbers'(Lines),
-	(	'$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, _, HeadFunctor/HeadArity, Lines) ->
+	(	var(Head) ->
 		true
-	;	functor(Alias, AliasFunctor, AliasArity),
-		(	atom(Obj) ->
-			assertz('$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, AliasFunctor/AliasArity, HeadFunctor/HeadArity, Lines))
-		;	% parametric object
-			'$lgt_term_template'(Obj, Template),
-			assertz('$lgt_pp_referenced_object_message_'(Template, PredFunctor/PredArity, AliasFunctor/AliasArity, HeadFunctor/HeadArity, Lines))
+	;	\+ '$lgt_pp_defines_predicate_'(Head, _, _, compile(regular)) ->
+		true
+	;	functor(Pred, PredFunctor, PredArity),
+		functor(Head, HeadFunctor, HeadArity),
+		'$lgt_current_line_numbers'(Lines),
+		(	'$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, _, HeadFunctor/HeadArity, Lines) ->
+			true
+		;	functor(Alias, AliasFunctor, AliasArity),
+			(	atom(Obj) ->
+				assertz('$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, AliasFunctor/AliasArity, HeadFunctor/HeadArity, Lines))
+			;	% parametric object
+				'$lgt_term_template'(Obj, Template),
+				assertz('$lgt_pp_referenced_object_message_'(Template, PredFunctor/PredArity, AliasFunctor/AliasArity, HeadFunctor/HeadArity, Lines))
+			)
 		)
 	).
 
@@ -5127,7 +5134,9 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_add_referenced_module_predicate'(Module, Pred, Head) :-
 	functor(Pred, PredFunctor, PredArity),
-	(	'$lgt_pp_defines_predicate_'(Head, _, _, compile(aux)) ->
+	(	var(Head) ->
+		true
+	;	\+ '$lgt_pp_defines_predicate_'(Head, _, _, compile(regular)) ->
 		true
 	;	'$lgt_pp_use_module_predicate_'(Module, PredFunctor/PredArity, _) ->
 		true
@@ -5140,13 +5149,18 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 '$lgt_add_referenced_module_predicate'(Module, Pred, Alias, Head) :-
-	functor(Pred, PredFunctor, PredArity),
-	functor(Alias, AliasFunctor, AliasArity),
-	functor(Head, HeadFunctor, HeadArity),
-	'$lgt_current_line_numbers'(Lines),
-	(	'$lgt_pp_referenced_module_predicate_'(Module, PredFunctor/PredArity, _, HeadFunctor/HeadArity, Lines) ->
+	(	var(Head) ->
 		true
-	;	assertz('$lgt_pp_referenced_module_predicate_'(Module, PredFunctor/PredArity, AliasFunctor/AliasArity, HeadFunctor/HeadArity, Lines))
+	;	\+ '$lgt_pp_defines_predicate_'(Head, _, _, compile(regular)) ->
+		true
+	;	functor(Pred, PredFunctor, PredArity),
+		functor(Alias, AliasFunctor, AliasArity),
+		functor(Head, HeadFunctor, HeadArity),
+		'$lgt_current_line_numbers'(Lines),
+		(	'$lgt_pp_referenced_module_predicate_'(Module, PredFunctor/PredArity, _, HeadFunctor/HeadArity, Lines) ->
+			true
+		;	assertz('$lgt_pp_referenced_module_predicate_'(Module, PredFunctor/PredArity, AliasFunctor/AliasArity, HeadFunctor/HeadArity, Lines))
+		)
 	).
 
 
