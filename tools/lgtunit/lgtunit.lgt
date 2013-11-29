@@ -30,7 +30,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/11/28,
+		date is 2013/11/29,
 		comment is 'A simple unit test framework featuring predicate clause coverage.'
 	]).
 
@@ -192,17 +192,17 @@
 		run_tests([], _).
 
 	run_test(succeeds(Test, Position), File) :-
-		(	catch(::test(Test, _), Error, unexpected_error_expected_success(Test, Error, File, Position)) ->
+		(	catch(::test(Test, _), Error, failed_test(Test, File, Position, error_instead_of_success(Error))) ->
 			(	var(Error) ->
 				passed_test(Test, File, Position)
 			;	true
 			)
-		;	unexpected_failure_expected_success(Test, File, Position)
+		;	failed_test(Test, File, Position, failure_instead_of_success)
 		).
 	run_test(fails(Test, Position), File) :-
-		(	catch(::test(Test, _), Error, unexpected_error_expected_failure(Test, Error, File, Position)) ->
+		(	catch(::test(Test, _), Error, failed_test(Test, File, Position, error_instead_of_failure(Error))) ->
 			(	var(Error) ->
-				unexpected_success_expected_failure(Test, File, Position)
+				failed_test(Test, File, Position, success_instead_of_failure)
 			;	true
 			)
 		;	passed_test(Test, File, Position)
@@ -210,16 +210,16 @@
 	run_test(throws(Test, ExpectedError, Position), File) :-
 		(	catch(::test(Test, ExpectedError), Error, check_error(Test, ExpectedError, Error, File, Position)) ->
 			(	var(Error) ->
-				unexpected_success_expected_error(Test, File, Position)
+				failed_test(Test, File, Position, success_instead_of_error)
 			;	true
 			)
-		;	unexpected_failure_expected_error(Test, File, Position)
+		;	failed_test(Test, File, Position, failure_instead_of_error)
 		).
 
 	check_error(Test, ExpectedError, Error, File, Position) :-
 		(	subsumes_term(ExpectedError, Error) ->
 			passed_test(Test, File, Position)
-		;	wrong_error(Test, ExpectedError, Error, File, Position)
+		;	failed_test(Test, File, Position, wrong_error(ExpectedError, Error))
 		).
 
 	write_tests_header :-
@@ -251,33 +251,9 @@
 		increment_passed_tests_counter,
 		print_message(information, lgtunit, passed_test(Test, File, Position)).
 
-	unexpected_success_expected_failure(Test, File, Position) :-
+	failed_test(Test, File, Position, Reason) :-
 		increment_failed_tests_counter,
-		print_message(error, lgtunit, unexpected_success_expected_failure(Test, File, Position)).
-
-	unexpected_success_expected_error(Test, File, Position) :-
-		increment_failed_tests_counter,
-		print_message(error, lgtunit, unexpected_success_expected_error(Test, File, Position)).
-
-	unexpected_failure_expected_success(Test, File, Position) :-
-		increment_failed_tests_counter,
-		print_message(error, lgtunit, unexpected_failure_expected_success(Test, File, Position)).
-
-	unexpected_failure_expected_error(Test, File, Position) :-
-		increment_failed_tests_counter,
-		print_message(error, lgtunit, unexpected_failure_expected_error(Test, File, Position)).
-
-	unexpected_error_expected_failure(Test, Error, File, Position) :-
-		increment_failed_tests_counter,
-		print_message(error, lgtunit, unexpected_error_expected_failure(Test, Error, File, Position)).
-
-	unexpected_error_expected_success(Test, Error, File, Position) :-
-		increment_failed_tests_counter,
-		print_message(error, lgtunit, unexpected_error_expected_success(Test, Error, File, Position)).
-
-	wrong_error(Test, Error, Ball, File, Position) :-
-		increment_failed_tests_counter,
-		print_message(error, lgtunit, wrong_error(Test, Error, Ball, File, Position)).
+		print_message(error, lgtunit, failed_test(Test, File, Position, Reason)).
 
 	broken_step(Step, Error) :-
 		self(Self),
@@ -460,10 +436,10 @@
 		retractall(fired_(_, _, _)).
 
 	write_coverage_results :-
-		(	setof(Entity, fired_entity(Entity), Entities) ->
-			write_coverage_results(Entities),
-			setof(Unit, ::cover(Unit), Units),
-			write_coverage_results_summary(Units, Entities)
+		(	setof(TestedEntity, fired_entity(TestedEntity), TestedEntities) ->
+			write_coverage_results(TestedEntities),
+			setof(DeclaredEntity, ::cover(DeclaredEntity), DeclaredEntities),
+			write_coverage_results_summary(DeclaredEntities, TestedEntities)
 		;	print_message(information, lgtunit, no_code_coverage_information_collected)
 		).
 
@@ -559,15 +535,15 @@
 		!.
 	number_of_clauses(_, _, 0).
 
-	write_coverage_results_summary(AllEntities, TestedEntities) :-
-		length(AllEntities, TotalUnits),
-		number_of_clauses(AllEntities, TotalClauses),
-		length(TestedEntities, Units),
+	write_coverage_results_summary(DeclaredEntities, TestedEntities) :-
+		length(DeclaredEntities, TotalDeclaredEntities),
+		number_of_clauses(DeclaredEntities, TotalClauses),
+		length(TestedEntities, TotalTestedEntities),
 		%number_of_clauses(TestedEntities, Clauses),
-		covered(Coverage, Clauses),
+		covered(Coverage, TestedClauses),
 		Percentage is Coverage * 100 / TotalClauses,
-		print_message(information, lgtunit, declared_test_unit_clause_numbers(TotalUnits, TotalClauses)),
-		print_message(information, lgtunit, covered_test_unit_clause_numbers(Units, Clauses)),
+		print_message(information, lgtunit, declared_entities_and_clause_numbers(TotalDeclaredEntities, TotalClauses)),
+		print_message(information, lgtunit, covered_entities_and_clause_numbers(TotalTestedEntities, TestedClauses)),
 		print_message(information, lgtunit, covered_clause_numbers(Coverage, TotalClauses, Percentage)).
 
 	covered(Coverage, Clauses) :-

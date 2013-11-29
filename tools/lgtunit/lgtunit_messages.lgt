@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/09/18,
+		date is 2013/11/29,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -71,40 +71,10 @@
 	logtalk::message_tokens(passed_test(Test, _File, _Position), lgtunit) -->
 		['~w: success'-[Test], nl].
 
-	logtalk::message_tokens(unexpected_success_expected_failure(Test, File, Position), lgtunit) -->
-		['~w: failure (test goal succeeded but should have failed)'-[Test], nl,
-		 '  in file ~w between lines ~w'-[File, Position], nl
-		].
-
-	logtalk::message_tokens(unexpected_success_expected_error(Test, File, Position), lgtunit) -->
-		['~w: failure (test goal succeeded but should have throw an error)'-[Test], nl,
-		 '  in file ~w between lines ~w'-[File, Position], nl
-		].
-
-	logtalk::message_tokens(unexpected_failure_expected_success(Test, File, Position), lgtunit) -->
-		['~w: failure (test goal failed but should have succeeded)'-[Test], nl,
-		 '  in file ~w between lines ~w'-[File, Position], nl
-		].
-
-	logtalk::message_tokens(unexpected_failure_expected_error(Test, File, Position), lgtunit) -->
-		['~w: failure (test goal failed but should have throw an error)'-[Test], nl,
-		 '  in file ~w between lines ~w'-[File, Position], nl
-		].
-
-	logtalk::message_tokens(unexpected_error_expected_failure(Test, Error, File, Position), lgtunit) -->
-		['~w: failure (test goal throws an error but should have failed: ~q)'-[Test, Error], nl,
-		 '  in file ~w between lines ~w'-[File, Position], nl
-		].
-
-	logtalk::message_tokens(unexpected_error_expected_success(Test, Error, File, Position), lgtunit) -->
-		['~w: failure (test goal throws an error but should have succeeded: ~q)'-[Test, Error], nl,
-		 '  in file ~w between lines ~w'-[File, Position], nl
-		].
-
-	logtalk::message_tokens(wrong_error(Test, Error, Ball, File, Position), lgtunit) -->
-		['~w: failure (test goal throws the wrong error: got ~q instead of ~q)'-[Test, Ball, Error], nl,
-		 '  in file ~w between lines ~w'-[File, Position], nl
-		].
+	logtalk::message_tokens(failed_test(Test, File, Position, Reason), lgtunit) -->
+		['~w: failure '-[Test]],
+		failure_reason(Reason),
+		['  in file ~w between lines ~w'-[File, Position], nl].
 
 	logtalk::message_tokens(broken_step(Step, Object, Error), lgtunit) -->
 		['broken ~w for object ~q: ~q'-[Step, Object, Error], nl].
@@ -114,14 +84,14 @@
 
 	% messages for test's clause coverage
 
-	logtalk::message_tokens(declared_test_unit_clause_numbers(Units, Clauses), lgtunit) -->
-		unit_tokens(Units),
+	logtalk::message_tokens(declared_entities_and_clause_numbers(Entities, Clauses), lgtunit) -->
+		entity_tokens(Entities),
 		[' declared in the test file containing '-[]],
 		clause_tokens(Clauses),
 		[nl].
 
-	logtalk::message_tokens(covered_test_unit_clause_numbers(Units, Clauses), lgtunit) -->
-		unit_tokens(Units),
+	logtalk::message_tokens(covered_entities_and_clause_numbers(Entities, Clauses), lgtunit) -->
+		entity_tokens(Entities),
 		[' covered containing '-[]],
 		clause_tokens(Clauses),
 		[nl].
@@ -148,10 +118,25 @@
 
 	% auxiliary grammar rules
 
-	unit_tokens(Units) -->
-		(	{Units =:= 1} ->
-			['~d unit'-[Units]]
-		;	['~d units'-[Units]]
+	failure_reason(success_instead_of_failure) -->
+		['(test goal succeeded but should have failed)', nl].
+	failure_reason(success_instead_of_error) -->
+		['(test goal succeeded but should have throw an error)', nl].
+	failure_reason(failure_instead_of_success) -->
+		['(test goal failed but should have succeeded)', nl].
+	failure_reason(failure_instead_of_error) -->
+		['(test goal failed but should have throw an error)', nl].
+	failure_reason(error_instead_of_failure(Error)) -->
+		['(test goal throws an error but should have failed: ~q)'-[Error], nl].
+	failure_reason(error_instead_of_success(Error)) -->
+		['(test goal throws an error but should have succeeded: ~q)'-[Error], nl].
+	failure_reason(wrong_error(ExpectedError, Error)) -->
+		['(test goal throws the wrong error: expected ~q but got ~q)'-[ExpectedError, Error], nl].
+
+	entity_tokens(Entities) -->
+		(	{Entities =:= 1} ->
+			['~d entity'-[Entities]]
+		;	['~d entities'-[Entities]]
 		).
 
 	clause_tokens(Clauses) -->

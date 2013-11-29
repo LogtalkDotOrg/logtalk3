@@ -59,10 +59,11 @@ assertions to your code.
 
 * CHANGED: The `lgtunit` tool default messages for failed unit tests now
 include both the test file path and the test line numbers (allowing better
-integration with development tools such as PDT). Also renamed the `unit/1`
-predicate to `cover/1` and updated its documentation to clarify its intent
+integration with development tools such as PDT). Renamed the predicate
+`unit/1` to `cover/1` and updated its documentation to clarify its intent
 (the old name is deprecated but still supported for compatibility with
-existing code).
+existing code). Replaced all the failed unit test messages by a single one
+to simplify writing message hooks that intercept failed test messages.
 
 Examples
 --------
