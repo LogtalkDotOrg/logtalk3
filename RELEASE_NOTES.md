@@ -71,6 +71,12 @@ Examples
 
 * FIXED: Several issues with the `metaclasses` example.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* UPDATED: Add tab triggers to all predicate and entity templates used in
+the TextMate text editor.
+
 
 3.00.0 Alpha 31 - November 19, 2013
 ===================================
