@@ -560,14 +560,6 @@ object_property(Obj, Prop) :-
 		true
 	;	fail
 	).
-'$lgt_object_property'(uses(Object, Predicate, Alias), Obj, _, _, _, _, _) :-
-	'$lgt_entity_property_'(Obj, uses(Object, Predicate, Alias, _, _)).
-'$lgt_object_property'(uses(Object, Predicate, Alias, Caller, Lines), Obj, _, _, _, _, _) :-
-	'$lgt_entity_property_'(Obj, uses(Object, Predicate, Alias, Caller, Lines)).
-'$lgt_object_property'(use_module(Module, Predicate, Alias), Obj, _, _, _, _, _) :-
-	'$lgt_entity_property_'(Obj, use_module(Module, Predicate, Alias, _, _)).
-'$lgt_object_property'(use_module(Module, Predicate, Alias, Caller, Lines), Obj, _, _, _, _, _) :-
-	'$lgt_entity_property_'(Obj, use_module(Module, Predicate, Alias, Caller, Lines)).
 '$lgt_object_property'(public(Resources), Obj, Dcl, _, DDcl, _, Flags) :-
 	'$lgt_object_property_resources'(Obj, Dcl, DDcl, Flags, p(p(p)), Resources).
 '$lgt_object_property'(protected(Resources), Obj, Dcl, _, DDcl, _, Flags) :-
@@ -582,6 +574,8 @@ object_property(Obj, Prop) :-
 	'$lgt_entity_property_includes'(Obj, Predicate, From, Properties).
 '$lgt_object_property'(provides(Predicate, To, Properties), Obj, _, _, _, _, _) :-
 	'$lgt_entity_property_provides'(Obj, Predicate, To, Properties).
+'$lgt_object_property'(calls(Predicate, Properties), Obj, _, _, _, _, _) :-
+	'$lgt_entity_property_calls'(Obj, Predicate, Properties).
 '$lgt_object_property'(number_of_clauses(Total), Obj, _, _, _, _, _) :-
 	'$lgt_entity_property_'(Obj, number_of_clauses(Total)).
 
@@ -648,14 +642,6 @@ category_property(Ctg, Prop) :-
 		true
 	;	fail
 	).
-'$lgt_category_property'(uses(Object, Original, Alias), Ctg, _, _, _) :-
-	'$lgt_entity_property_'(Ctg, uses(Object, Original, Alias)).
-'$lgt_category_property'(uses(Object, Predicate, Alias, Caller, Lines), Ctg, _, _, _) :-
-	'$lgt_entity_property_'(Ctg, uses(Object, Predicate, Alias, Caller, Lines)).
-'$lgt_category_property'(use_module(Module, Original, Alias), Ctg, _, _, _) :-
-	'$lgt_entity_property_'(Ctg, use_module(Module, Original, Alias)).
-'$lgt_category_property'(use_module(Module, Predicate, Alias, Caller, Lines), Ctg, _, _, _) :-
-	'$lgt_entity_property_'(Ctg, use_module(Module, Predicate, Alias, Caller, Lines)).
 '$lgt_category_property'(public(Predicates), Ctg, Dcl, _, _) :-
 	findall(
 		Functor/Arity,
@@ -682,6 +668,8 @@ category_property(Ctg, Prop) :-
 	'$lgt_entity_property_includes'(Ctg, Predicate, From, Properties).
 '$lgt_category_property'(provides(Predicate, To, Properties), Ctg, _, _, _) :-
 	'$lgt_entity_property_provides'(Ctg, Predicate, To, Properties).
+'$lgt_category_property'(calls(Predicate, Properties), Ctg, _, _, _) :-
+	'$lgt_entity_property_calls'(Ctg, Predicate, Properties).
 '$lgt_category_property'(number_of_clauses(Total), Ctg, _, _, _) :-
 	'$lgt_entity_property_'(Ctg, number_of_clauses(Total)).
 
@@ -722,14 +710,6 @@ protocol_property(Ptc, Prop) :-
 		true
 	;	fail
 	).
-'$lgt_protocol_property'(uses(Object, Predicate, Alias), Ptc, _, _) :-
-	'$lgt_entity_property_'(Ptc, uses(Object, Predicate, Alias, _, _)).
-'$lgt_protocol_property'(uses(Object, Predicate, Alias, Caller, Lines), Ptc, _, _) :-
-	'$lgt_entity_property_'(Ptc, uses(Object, Predicate, Alias, Caller, Lines)).
-'$lgt_protocol_property'(use_module(Module, Predicate, Alias), Ptc, _, _) :-
-	'$lgt_entity_property_'(Ptc, use_module(Module, Predicate, Alias, _, _)).
-'$lgt_protocol_property'(use_module(Module, Predicate, Alias, Caller, Lines), Ptc, _, _) :-
-	'$lgt_entity_property_'(Ptc, use_module(Module, Predicate, Alias, Caller, Lines)).
 '$lgt_protocol_property'(public(Predicates), Ptc, Dcl, _) :-
 	findall(
 		Functor/Arity,
@@ -750,6 +730,8 @@ protocol_property(Ptc, Prop) :-
 	).
 '$lgt_protocol_property'(declares(Predicate, Properties), Ptc, Dcl, _) :-
 	'$lgt_protocol_property_declares'(Ptc, Dcl, Predicate, Properties).
+'$lgt_protocol_property'(calls(Predicate, Properties), Ptc, _, _) :-
+	'$lgt_entity_property_calls'(Ptc, Predicate, Properties).
 '$lgt_protocol_property'(number_of_clauses(Total), Ptc, _, _) :-
 	'$lgt_entity_property_'(Ptc, number_of_clauses(Total)).
 
@@ -858,6 +840,20 @@ protocol_property(Ptc, Prop) :-
 	'$lgt_predicate_property_'(To, Functor/Arity, definition_line_from(Line, Entity)),
 	'$lgt_predicate_property_'(To, Functor/Arity, number_of_clauses_from(N, Entity)),
 	Properties = [line_count(Line), number_of_clauses(N)].
+
+
+'$lgt_entity_property_calls'(Entity, Provider::Functor/Arity, [caller(Caller), line_count(Line)| Others]) :-
+	'$lgt_entity_property_'(Entity, uses(Provider, Functor/Arity, AliasFunctor/Arity, Caller, Line-_)),
+	(	Functor \== AliasFunctor ->
+		Others = [as(AliasFunctor/Arity)]
+	;	Others = []
+	).
+'$lgt_entity_property_calls'(Entity, Provider:Functor/Arity, [caller(Caller), line_count(Line)| Others]) :-
+	'$lgt_entity_property_'(Entity, use_module(Provider, Functor/Arity, AliasFunctor/Arity, Caller, Line-_)),
+	(	Functor \== AliasFunctor ->
+		Others = [as(AliasFunctor/Arity)]
+	;	Others = []
+	).
 
 
 
@@ -15939,6 +15935,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_valid_protocol_property'(protected(_)).			% list of predicate indicators of protected predicates declared in the protocol
 '$lgt_valid_protocol_property'(private(_)).				% list of predicate indicators of private predicates declared in the protocol
 '$lgt_valid_protocol_property'(declares(_, _)).			% list of declaration properties for a predicate declared in the protocol
+'$lgt_valid_protocol_property'(calls(_, _)).			% list of calling properties for a predicate called in the protocol
 % the remaining properties are available only when the entities are compiled with the "source_data" flag turned on
 '$lgt_valid_protocol_property'(info(_)).				% list of pairs with user-defined protocol documentation
 '$lgt_valid_protocol_property'(file(_, _)).				% source file basename and directory

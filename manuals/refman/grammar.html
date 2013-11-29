@@ -426,7 +426,6 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 				<dd>protocol_identifier_list</dd>
 		</dl>
 		<dl>
-
 			<dt>protocol_identifier ::=</dt>
 				<dd><em>atom</em></dd>
 		</dl>
@@ -439,7 +438,13 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 			<dt>protocol_identifier_list ::=</dt>
 				<dd>"<code>[</code>" protocol_identifier_sequence "<code>]</code>"</dd>
 		</dl>
-	
+		
+		<h3 id="grammar_module_identifiers">Module identifiers</h3>
+			<dl>
+				<dt>module_identifier ::=</dt>
+					<dd><em>atom</em></dd>
+			</dl>
+
 
 <h2 id="grammar_source_file_names">Source file names</h2>
 
@@ -923,9 +928,8 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 			<dd>"<code>defines(</code>" predicate_indicator "<code>,</code>" predicate_definition_property_list "<code>)</code>" |</dd>
 			<dd>"<code>includes(</code>" predicate_indicator "<code>,</code>" object_identifier | category_identifier "<code>,</code>" predicate_definition_property_list "<code>)</code>" |</dd>
 			<dd>"<code>provides(</code>" predicate_indicator "<code>,</code>" object_identifier | category_identifier "<code>,</code>" predicate_definition_property_list "<code>)</code>" |</dd>
-			<dd>"<code>number_of_clauses(</code>" <em>integer</em> "<code>)</code>" |</dd>
-			<dd>"<code>uses(</code>" object_identifier "<code>,</code>" predicate_indicator | non_terminal_indicator "<code>,</code>" predicate_indicator | non_terminal_indicator "<code>)</code>" |</dd>
-			<dd>"<code>use_module(</code>" module_identifier "<code>,</code>" predicate_indicator | non_terminal_indicator "<code>,</code>" predicate_indicator | non_terminal_indicator "<code>)</code>"</dd>
+			<dd>"<code>calls(</code>" predicate_indicator | object_identifier"<code>::</code>"predicate_indicator | module_identifier<code>:</code>"predicate_indicator "<code>,</code>" predicate_call_property_list "<code>)</code>" |</dd>
+			<dd>"<code>number_of_clauses(</code>" <em>integer</em> "<code>)</code>"
 	</dl>
 	<dl id="grammar_object_property">
 		<dt>object_property ::=</dt>
@@ -948,9 +952,8 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 			<dd>"<code>defines(</code>" predicate_indicator "<code>,</code>" predicate_definition_property_list "<code>)</code>" |</dd>
 			<dd>"<code>includes(</code>" predicate_indicator "<code>,</code>" object_identifier | category_identifier "<code>,</code>" predicate_definition_property_list "<code>)</code>" |</dd>
 			<dd>"<code>provides(</code>" predicate_indicator "<code>,</code>" object_identifier | category_identifier "<code>,</code>" predicate_definition_property_list "<code>)</code>"</dd>
-			<dd>"<code>number_of_clauses(</code>" <em>integer</em> "<code>)</code>" |</dd>
-			<dd>"<code>uses(</code>" object_identifier "<code>,</code>" predicate_indicator | non_terminal_indicator "<code>,</code>" predicate_indicator | non_terminal_indicator "<code>)</code>" |</dd>
-			<dd>"<code>use_module(</code>" module_identifier "<code>,</code>" predicate_indicator | non_terminal_indicator "<code>,</code>" predicate_indicator | non_terminal_indicator "<code>)</code>"</dd>
+			<dd>"<code>calls(</code>" predicate_indicator | object_identifier"<code>::</code>"predicate_indicator | module_identifier<code>:</code>"predicate_indicator "<code>,</code>" predicate_call_property_list "<code>)</code>" |</dd>
+			<dd>"<code>number_of_clauses(</code>" <em>integer</em> "<code>)</code>"
 	</dl>
 	<dl id="grammar_protocol_property">
 		<dt>protocol_property ::=</dt>
@@ -963,9 +966,8 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 			<dd>"<code>protected(</code>" predicate_indicator_list "<code>)</code>" |</dd>
 			<dd>"<code>private(</code>" predicate_indicator_list "<code>)</code>" |</dd>
 			<dd>"<code>declares(</code>" predicate_indicator "<code>,</code>" predicate_declaration_property_list "<code>)</code>" |</dd>
-			<dd>"<code>number_of_clauses(</code>" <em>integer</em> "<code>)</code>" |</dd>
-			<dd>"<code>uses(</code>" object_identifier "<code>,</code>" predicate_indicator | non_terminal_indicator "<code>,</code>" predicate_indicator | non_terminal_indicator "<code>)</code>" |</dd>
-			<dd>"<code>use_module(</code>" module_identifier "<code>,</code>" predicate_indicator | non_terminal_indicator "<code>,</code>" predicate_indicator | non_terminal_indicator "<code>)</code>"</dd>
+			<dd>"<code>calls(</code>" predicate_indicator | object_identifier"<code>::</code>"predicate_indicator | module_identifier<code>:</code>"predicate_indicator "<code>,</code>" predicate_call_property_list "<code>)</code>" |</dd>
+			<dd>"<code>number_of_clauses(</code>" <em>integer</em> "<code>)</code>"
 	</dl>
 
 	<dl>
@@ -1009,6 +1011,22 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 			<dd>"<code>number_of_clauses(</code>" <em>integer</em> "<code>)</code>"</dd>
 	</dl>
 
+	<dl>
+		<dt>predicate_call_property_list ::=</dt>
+			<dd>"<code>[</code>" predicate_call_property_sequence "<code>]</code>"</dd>
+	</dl>
+	<dl>
+		<dt>predicate_call_property_sequence ::=</dt>
+			<dd>predicate_call_property |</dd>
+			<dd>predicate_call_property "<code>,</code>" predicate_call_property_sequence</dd>
+	</dl>
+	<dl>
+		<dt>predicate_call_property ::=</dt>
+			<dd>"<code>caller(</code>" predicate_indicator "<code>)</code>" |</dd>
+			<dd>"<code>line_count(</code>" <em>integer</em> "<code>)</code>" |</dd>
+			<dd>"<code>as(</code>" predicate_indicator "<code>)</code>"</dd>
+	</dl>
+
 
 <h2 id="grammar_predicate_properties">Predicate properties</h2>
 
@@ -1046,7 +1064,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: November 18, 2013</span>
+		<span>Last updated on: November 29, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="index.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="index.html">next</a></span><br/>
