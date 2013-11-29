@@ -72,7 +72,7 @@
 		['~w: success'-[Test], nl].
 
 	logtalk::message_tokens(failed_test(Test, File, Position, Reason), lgtunit) -->
-		['~w: failure '-[Test]],
+		['~w: failure '-[Test], nl],
 		failure_reason(Reason),
 		['  in file ~w between lines ~w'-[File, Position], nl].
 
@@ -119,19 +119,19 @@
 	% auxiliary grammar rules
 
 	failure_reason(success_instead_of_failure) -->
-		['(test goal succeeded but should have failed)', nl].
+		['  test goal succeeded but should have failed'-[], nl].
 	failure_reason(success_instead_of_error) -->
-		['(test goal succeeded but should have throw an error)', nl].
+		['  test goal succeeded but should have throw an error'-[], nl].
 	failure_reason(failure_instead_of_success) -->
-		['(test goal failed but should have succeeded)', nl].
+		['  test goal failed but should have succeeded'-[], nl].
 	failure_reason(failure_instead_of_error) -->
-		['(test goal failed but should have throw an error)', nl].
+		['  test goal failed but should have throw an error'-[], nl].
 	failure_reason(error_instead_of_failure(Error)) -->
-		['(test goal throws an error but should have failed: ~q)'-[Error], nl].
+		['  test goal throws an error but should have failed: ~q'-[Error], nl].
 	failure_reason(error_instead_of_success(Error)) -->
-		['(test goal throws an error but should have succeeded: ~q)'-[Error], nl].
+		['  test goal throws an error but should have succeeded: ~q'-[Error], nl].
 	failure_reason(wrong_error(ExpectedError, Error)) -->
-		['(test goal throws the wrong error: expected ~q but got ~q)'-[ExpectedError, Error], nl].
+		['  test goal throws the wrong error: expected ~q but got ~q'-[ExpectedError, Error], nl].
 
 	entity_tokens(Entities) -->
 		(	{Entities =:= 1} ->
