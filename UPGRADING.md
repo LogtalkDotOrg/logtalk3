@@ -104,3 +104,10 @@ Control constructs semantic changes
 -----------------------------------
 
 The `{}/1` control construct is now opaque to cuts.
+
+
+Reflection support
+------------------
+
+Logtalk 3.x adds new entity properties such as `calls/2` but also removes
+subsumed Logtalk 2.x properties such as `uses/3` and `use_module/3`.
