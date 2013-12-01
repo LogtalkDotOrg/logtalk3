@@ -44,7 +44,9 @@ supported.
 * ADDED: Entity property `calls/2` for querying cross-reference predicate
 call properties. These properties include `caller/1`, `line_count/1`, and
 `as/1` (when using a predicate alias). In the case of an `initialization/1`
-directive, the caller is identified as `(:-)/1`.
+directive, the caller is identified as `(:-)/1`. Due to limitations on most
+backend Prolog compilers, the `line_count/1` property points to the clause
+head and not to the line of the call in the clause body.
 
 * ADDED: Property `parent/1` to the `logtalk::loaded_file_property/2` method,
 allowing retrieving file loading dependencies.

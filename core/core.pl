@@ -276,7 +276,7 @@
 :- dynamic('$lgt_pp_number_of_clauses_'/4).					% '$lgt_pp_number_of_clauses_'(Other, Functor, Arity, Number)
 
 :- dynamic('$lgt_pp_defines_predicate_'/4).					% '$lgt_pp_defines_predicate_'(Head, ExCtx, THead, Mode)
-:- dynamic('$lgt_pp_calls_predicate_'/5).					% '$lgt_pp_calls_predicate_'(Functor, Arity, TFunctor, TArity, Lines)
+:- dynamic('$lgt_pp_calls_predicate_'/4).					% '$lgt_pp_calls_predicate_'(Functor/Arity, TFunctor/TArity, HeadFunctor/HeadArity, Lines)
 :- dynamic('$lgt_pp_non_portable_predicate_'/2).			% '$lgt_pp_non_portable_predicate_'(Head, Lines)
 :- dynamic('$lgt_pp_non_portable_function_'/2).				% '$lgt_pp_non_portable_function_'(Function, Lines)
 :- dynamic('$lgt_pp_missing_dynamic_directive_'/2).			% '$lgt_pp_missing_dynamic_directive_'(Head, Lines)
@@ -842,18 +842,8 @@ protocol_property(Ptc, Prop) :-
 	Properties = [line_count(Line), number_of_clauses(N)].
 
 
-'$lgt_entity_property_calls'(Entity, Provider::Functor/Arity, [caller(Caller), line_count(Line)| Others]) :-
-	'$lgt_entity_property_'(Entity, uses(Provider, Functor/Arity, AliasFunctor/Arity, Caller, Line-_)),
-	(	Functor \== AliasFunctor ->
-		Others = [as(AliasFunctor/Arity)]
-	;	Others = []
-	).
-'$lgt_entity_property_calls'(Entity, Provider:Functor/Arity, [caller(Caller), line_count(Line)| Others]) :-
-	'$lgt_entity_property_'(Entity, use_module(Provider, Functor/Arity, AliasFunctor/Arity, Caller, Line-_)),
-	(	Functor \== AliasFunctor ->
-		Others = [as(AliasFunctor/Arity)]
-	;	Others = []
-	).
+'$lgt_entity_property_calls'(Entity, Predicate, Properties) :-
+	'$lgt_entity_property_'(Entity, calls(Predicate, Properties)).
 
 
 
@@ -5198,27 +5188,26 @@ current_logtalk_flag(Flag, Value) :-
 	fail.
 
 '$lgt_add_entity_properties'(end, Entity) :-
-	'$lgt_pp_referenced_object_message_'(Object, Functor/Arity, AliasFunctor/AliasArity, HeadFunctor/HeadArity, Lines),
-	assertz('$lgt_pp_entity_property_'(Entity, uses(Object, Functor/Arity, AliasFunctor/AliasArity, HeadFunctor/HeadArity, Lines))),
+	'$lgt_pp_referenced_object_message_'(Object, Functor/Arity, AliasFunctor/AliasArity, HeadFunctor/HeadArity, Line-_),
+	(	Functor == AliasFunctor ->
+		Properties = [caller(HeadFunctor/HeadArity), line_count(Line)]
+	;	Properties = [caller(HeadFunctor/HeadArity), line_count(Line), as(AliasFunctor/AliasArity)]
+	),
+	assertz('$lgt_pp_entity_property_'(Entity, calls(Object::Functor/Arity, Properties))),
 	fail.
 
 '$lgt_add_entity_properties'(end, Entity) :-
-	'$lgt_pp_uses_non_terminal_'(Object, Original, Alias),
-	functor(Original, OriginalFunctor, OriginalArity),
-	functor(Alias, AliasFunctor, AliasArity),
-	assertz('$lgt_pp_entity_property_'(Entity, uses(Object, OriginalFunctor//OriginalArity, AliasFunctor//AliasArity))),
+	'$lgt_pp_referenced_module_predicate_'(Module, Functor/Arity, AliasFunctor/AliasArity, HeadFunctor/HeadArity, Line-_),
+	(	Functor == AliasFunctor ->
+		Properties = [caller(HeadFunctor/HeadArity), line_count(Line)]
+	;	Properties = [caller(HeadFunctor/HeadArity), line_count(Line), as(AliasFunctor/AliasArity)]
+	),
+	assertz('$lgt_pp_entity_property_'(Entity, calls(':'(Module,Functor/Arity), Properties))),
 	fail.
 
 '$lgt_add_entity_properties'(end, Entity) :-
-	'$lgt_pp_referenced_module_predicate_'(Module, Functor/Arity, AliasFunctor/AliasArity, HeadFunctor/HeadArity, Lines),
-	assertz('$lgt_pp_entity_property_'(Entity, use_module(Module, Functor/Arity, AliasFunctor/AliasArity, HeadFunctor/HeadArity, Lines))),
-	fail.
-
-'$lgt_add_entity_properties'(end, Entity) :-
-	'$lgt_pp_use_module_non_terminal_'(Module, Original, Alias),
-	functor(Original, OriginalFunctor, OriginalArity),
-	functor(Alias, AliasFunctor, AliasArity),
-	assertz('$lgt_pp_entity_property_'(Entity, use_module(Module, OriginalFunctor//OriginalArity, AliasFunctor//AliasArity))),
+	'$lgt_pp_calls_predicate_'(Functor/Arity, _, HeadFunctor/HeadArity, Line-_),
+	assertz('$lgt_pp_entity_property_'(Entity, calls(Functor/Arity, [caller(HeadFunctor/HeadArity), line_count(Line)]))),
 	fail.
 
 '$lgt_add_entity_properties'(end, Entity) :-
@@ -5612,7 +5601,7 @@ current_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_pp_number_of_clauses_'(_, _, _, _)),
 	retractall('$lgt_pp_redefined_built_in_'(_, _, _)),
 	retractall('$lgt_pp_defines_predicate_'(_, _, _, _)),
-	retractall('$lgt_pp_calls_predicate_'(_, _, _, _, _)),
+	retractall('$lgt_pp_calls_predicate_'(_, _, _, _)),
 	retractall('$lgt_pp_non_portable_predicate_'(_, _)),
 	retractall('$lgt_pp_non_portable_function_'(_, _)),
 	retractall('$lgt_pp_missing_dynamic_directive_'(_, _)),
@@ -6894,7 +6883,7 @@ current_logtalk_flag(Flag, Value) :-
 	functor(Head, Functor, Arity),
 	(	'$lgt_pp_dynamic_'(Head) ->
 		throw(permission_error(modify, dynamic_predicate, Functor/Arity))
-	;	'$lgt_pp_calls_predicate_'(Functor, Arity, _, _, _) ->
+	;	'$lgt_pp_calls_predicate_'(Functor/Arity, _, _, _) ->
 		throw(permission_error(modify, predicate_interpretation, Functor/Arity))
 	;	assertz('$lgt_pp_synchronized_'(Head, Mutex))
 	).
@@ -6907,7 +6896,7 @@ current_logtalk_flag(Flag, Value) :-
 		throw(permission_error(modify, dynamic_non_terminal, Functor//Arity))
 	;	'$lgt_pp_calls_non_terminal_'(Functor, Arity, _) ->
 		throw(permission_error(modify, non_terminal_interpretation, Functor//Arity))
-	;	'$lgt_pp_calls_predicate_'(Functor, ExtArity, _, _, _) ->
+	;	'$lgt_pp_calls_predicate_'(Functor/ExtArity, _, _, _) ->
 		throw(permission_error(modify, non_terminal_interpretation, Functor//Arity))
 	;	assertz('$lgt_pp_synchronized_'(Head, Mutex))
 	).
@@ -7291,7 +7280,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_check_for_directive_after_call'(Functor/Arity) :-
-	(	'$lgt_pp_calls_predicate_'(Functor, Arity, _, _, _) ->
+	(	'$lgt_pp_calls_predicate_'(Functor/Arity, _, _, _) ->
 		throw(permission_error(modify, predicate_interpretation, Functor/Arity))
 	;	true
 	).
@@ -10364,15 +10353,19 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	% convert the call to the original coinductive predicate into a call to the auxiliary
 	% predicate whose compiled normal and debug forms are already computed
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, ExCtx, Mode, _),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, ExCtx, Mode, _),
 	functor(Pred, Functor, Arity),
 	functor(TCPred, TCFunctor, TCArity),
 	(	Mode == runtime ->
 		true
-	;	'$lgt_pp_calls_predicate_'(Functor, Arity, _, _, _) ->
+	;	'$lgt_pp_calls_predicate_'(Functor/Arity, _, _, _) ->
 		true
-	;	'$lgt_current_line_numbers'(Lines),
-		assertz('$lgt_pp_calls_predicate_'(Functor, Arity, TCFunctor, TCArity, Lines))
+	;	functor(Head, HeadFunctor, HeadArity),
+		Functor/Arity \== HeadFunctor/HeadArity ->
+		'$lgt_current_line_numbers'(Lines),
+		assertz('$lgt_pp_calls_predicate_'(Functor/Arity, TCFunctor/TCArity, HeadFunctor/HeadArity, Lines))
+	;	% recursive call
+		true
 	),
 	% set the execution context of the call to the auxiliary predicate
 	arg(TCArity, TCPred, ExCtx).
@@ -10393,24 +10386,32 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_unify_head_thead_arguments'(Pred, TPred, ExCtx),
 	(	Mode == runtime ->
 		true
-	;	'$lgt_pp_calls_predicate_'(Functor, Arity, _, _, _) ->
+	;	'$lgt_pp_calls_predicate_'(Functor/Arity, _, _, _) ->
 		true
-	;	'$lgt_current_line_numbers'(Lines),
-		assertz('$lgt_pp_calls_predicate_'(Functor, Arity, STFunctor, TArity, Lines))
+	;	functor(Head, HeadFunctor, HeadArity),
+		Functor/Arity \== HeadFunctor/HeadArity ->
+		'$lgt_current_line_numbers'(Lines),
+		assertz('$lgt_pp_calls_predicate_'(Functor/Arity, STFunctor/TArity, HeadFunctor/HeadArity, Lines))
+	;	% recursive call
+		true
 	).
 
 '$lgt_tr_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, Prefix, _, _, ExCtx, Mode, _),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, Prefix, _, _, ExCtx, Mode, _),
 	functor(Pred, Functor, Arity),
 	'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	functor(TPred, TFunctor, TArity),
 	'$lgt_unify_head_thead_arguments'(Pred, TPred, ExCtx),
 	(	Mode == runtime ->
 		true
-	;	'$lgt_pp_calls_predicate_'(Functor, Arity, _, _, _) ->
+	;	'$lgt_pp_calls_predicate_'(Functor/Arity, _, _, _) ->
 		true
-	;	'$lgt_current_line_numbers'(Lines),
-		assertz('$lgt_pp_calls_predicate_'(Functor, Arity, TFunctor, TArity, Lines))
+	;	functor(Head, HeadFunctor, HeadArity),
+		Functor/Arity \== HeadFunctor/HeadArity ->
+		'$lgt_current_line_numbers'(Lines),
+		assertz('$lgt_pp_calls_predicate_'(Functor/Arity, TFunctor/TArity, HeadFunctor/HeadArity, Lines))
+	;	% recursive call
+		true
 	).
 
 
@@ -14196,7 +14197,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_undefined_predicate_call'(Functor/Arity, TFunctor/TArity, Lines) :-
-	'$lgt_pp_calls_predicate_'(Functor, Arity, TFunctor, TArity, Lines),
+	'$lgt_pp_calls_predicate_'(Functor/Arity, TFunctor/TArity, _, Lines),
 	functor(Head, Functor, Arity),
 	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _),
 	% predicate not defined in object/category
@@ -14215,7 +14216,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_undefined_non_terminal_call'(Functor//Arity, TFunctor/TArity, Lines) :-
-	'$lgt_pp_calls_predicate_'(Functor, ExtArity, TFunctor, TArity, _),
+	'$lgt_pp_calls_predicate_'(Functor/ExtArity, TFunctor/TArity, _, _),
 	Arity is ExtArity - 2,
 	Arity >= 0,
 	'$lgt_pp_calls_non_terminal_'(Functor, Arity, Lines),
@@ -14320,7 +14321,7 @@ current_logtalk_flag(Flag, Value) :-
 % must also have a public directive
 
 '$lgt_misspelt_predicate_call'(Functor/Arity, Lines) :-
-	'$lgt_pp_calls_predicate_'(Functor, Arity, _, _, Lines),
+	'$lgt_pp_calls_predicate_'(Functor/Arity, _, _, Lines),
 	functor(Head, Functor, Arity),
 	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _),
 	\+ '$lgt_pp_dynamic_'(Head),
