@@ -5193,26 +5193,26 @@ current_logtalk_flag(Flag, Value) :-
 	fail.
 
 '$lgt_add_entity_properties'(end, Entity) :-
-	'$lgt_pp_referenced_object_message_'(Object, Functor/Arity, AliasFunctor/AliasArity, HeadFunctor/HeadArity, Line-_),
+	'$lgt_pp_referenced_object_message_'(Object, Functor/Arity, AliasFunctor/AliasArity, Caller, Line-_),
 	(	Functor == AliasFunctor ->
-		Properties = [caller(HeadFunctor/HeadArity), line_count(Line)]
-	;	Properties = [caller(HeadFunctor/HeadArity), line_count(Line), as(AliasFunctor/AliasArity)]
+		Properties = [caller(Caller), line_count(Line)]
+	;	Properties = [caller(Caller), line_count(Line), as(AliasFunctor/AliasArity)]
 	),
 	assertz('$lgt_pp_entity_property_'(Entity, calls(Object::Functor/Arity, Properties))),
 	fail.
 
 '$lgt_add_entity_properties'(end, Entity) :-
-	'$lgt_pp_referenced_module_predicate_'(Module, Functor/Arity, AliasFunctor/AliasArity, HeadFunctor/HeadArity, Line-_),
+	'$lgt_pp_referenced_module_predicate_'(Module, Functor/Arity, AliasFunctor/AliasArity, Caller, Line-_),
 	(	Functor == AliasFunctor ->
-		Properties = [caller(HeadFunctor/HeadArity), line_count(Line)]
-	;	Properties = [caller(HeadFunctor/HeadArity), line_count(Line), as(AliasFunctor/AliasArity)]
+		Properties = [caller(Caller), line_count(Line)]
+	;	Properties = [caller(Caller), line_count(Line), as(AliasFunctor/AliasArity)]
 	),
 	assertz('$lgt_pp_entity_property_'(Entity, calls(':'(Module,Functor/Arity), Properties))),
 	fail.
 
 '$lgt_add_entity_properties'(end, Entity) :-
-	'$lgt_pp_calls_predicate_'(Functor/Arity, _, HeadFunctor/HeadArity, Line-_),
-	assertz('$lgt_pp_entity_property_'(Entity, calls(Functor/Arity, [caller(HeadFunctor/HeadArity), line_count(Line)]))),
+	'$lgt_pp_calls_predicate_'(Predicate, _, Caller, Line-_),
+	assertz('$lgt_pp_entity_property_'(Entity, calls(Predicate, [caller(Caller), line_count(Line)]))),
 	fail.
 
 '$lgt_add_entity_properties'(end, Entity) :-
@@ -10367,19 +10367,9 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, ExCtx, Mode, _),
 	functor(Pred, Functor, Arity),
 	functor(TCPred, TCFunctor, TCArity),
-	(	Mode == runtime ->
-		true
-	;	'$lgt_pp_calls_predicate_'(Functor/Arity, _, _, _) ->
-		true
-	;	functor(Head, HeadFunctor, HeadArity),
-		Functor/Arity \== HeadFunctor/HeadArity ->
-		'$lgt_current_line_numbers'(Lines),
-		assertz('$lgt_pp_calls_predicate_'(Functor/Arity, TCFunctor/TCArity, HeadFunctor/HeadArity, Lines))
-	;	% recursive call
-		true
-	),
 	% set the execution context of the call to the auxiliary predicate
-	arg(TCArity, TCPred, ExCtx).
+	arg(TCArity, TCPred, ExCtx),
+	'$lgt_remember_called_predicate'(Mode, Functor/Arity,  TCFunctor/TCArity, Head).
 
 '$lgt_tr_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
 	'$lgt_pp_synchronized_'(Pred, _),
@@ -10395,28 +10385,33 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	functor(TPred, STFunctor, TArity),
 	'$lgt_unify_head_thead_arguments'(Pred, TPred, ExCtx),
-	(	Mode == runtime ->
-		true
-	;	'$lgt_pp_calls_predicate_'(Functor/Arity, _, _, _) ->
-		true
-	;	functor(Head, HeadFunctor, HeadArity),
-		Functor/Arity \== HeadFunctor/HeadArity ->
-		'$lgt_current_line_numbers'(Lines),
-		assertz('$lgt_pp_calls_predicate_'(Functor/Arity, STFunctor/TArity, HeadFunctor/HeadArity, Lines))
-	;	% recursive call
-		true
-	).
-
+	'$lgt_remember_called_predicate'(Mode, Functor/Arity, STFunctor/TArity, Head).
+	
 '$lgt_tr_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, Prefix, _, _, ExCtx, Mode, _),
 	functor(Pred, Functor, Arity),
 	'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	functor(TPred, TFunctor, TArity),
 	'$lgt_unify_head_thead_arguments'(Pred, TPred, ExCtx),
-	(	Mode == runtime ->
+	'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head).
+
+
+
+% '$lgt_remember_called_predicate'(@callable, +predicate_indicator, +predicate_indicator, @callable)
+%
+% used for checking calls to undefined predicates and for collecting cross-referencing information
+
+'$lgt_remember_called_predicate'(runtime, _, _, _).
+
+'$lgt_remember_called_predicate'(compile(Mode), Functor/Arity, TFunctor/TArity, Head) :-
+	(	Mode == aux ->
 		true
 	;	'$lgt_pp_calls_predicate_'(Functor/Arity, _, _, _) ->
 		true
+	;	Head = Object::Predicate ->
+		functor(Predicate, HeadFunctor, HeadArity),
+		'$lgt_current_line_numbers'(Lines),
+		assertz('$lgt_pp_calls_predicate_'(Functor/Arity, TFunctor/TArity, Object::HeadFunctor/HeadArity, Lines))
 	;	functor(Head, HeadFunctor, HeadArity),
 		Functor/Arity \== HeadFunctor/HeadArity ->
 		'$lgt_current_line_numbers'(Lines),
