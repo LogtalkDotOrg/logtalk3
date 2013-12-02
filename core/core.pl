@@ -2349,7 +2349,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_predicate_property_user'(number_of_clauses(N), Pred, _, _, _, _, _, Def, _) :-
 	(	call(Def, Pred, _, _, _, DCtn),
 		functor(Pred, Functor, Arity),
-		'$lgt_predicate_property_'(DCtn, Functor/Arity, number_of_clauses(N)) ->
+		'$lgt_predicate_property_'(DCtn, Functor/Arity, flags_clauses(_, N)) ->
 		true
 	;	fail
 	).
@@ -5219,7 +5219,7 @@ current_logtalk_flag(Flag, Value) :-
 	fail.
 
 '$lgt_add_entity_properties'(end, Entity) :-
-	findall(Define, '$lgt_pp_predicate_property_'(Entity, _, number_of_clauses(Define)), Defines),
+	findall(Define, '$lgt_pp_predicate_property_'(Entity, _, flags_clauses(_, Define)), Defines),
 	'$lgt_sum_list'(Defines, TotalDefines),
 	findall(Provide, '$lgt_pp_predicate_property_'(_, _, number_of_clauses_from(Provide, Entity)), Provides),
 	'$lgt_sum_list'(Provides, TotalProvides),
