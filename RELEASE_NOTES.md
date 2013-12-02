@@ -51,6 +51,10 @@ head and not to the line of the call in the clause body.
 * ADDED: Property `parent/1` to the `logtalk::loaded_file_property/2` method,
 allowing retrieving file loading dependencies.
 
+* ADDED: Property `non_terminal/1` to the list of properties returned by the
+entity predicate property `defines/2` when the predicate resulted from the
+compilation of a grammar rule.
+
 Tools
 -----
 

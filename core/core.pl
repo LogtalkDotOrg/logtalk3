@@ -807,26 +807,29 @@ protocol_property(Ptc, Prop) :-
 	;	call(DDef, Predicate, _, _)
 	),
 	functor(Predicate, Functor, Arity),
-	(	'$lgt_predicate_property_'(Obj, Functor/Arity, auxiliary),
-		'$lgt_predicate_property_'(Obj, Functor/Arity, number_of_clauses(N)) ->
-		Properties = [auxiliary, number_of_clauses(N)]
-	;	'$lgt_predicate_property_'(Obj, Functor/Arity, definition_line(Line)),
-		'$lgt_predicate_property_'(Obj, Functor/Arity, number_of_clauses(N)) ->
-		Properties = [line_count(Line), number_of_clauses(N)]
-	;	Properties = []
-	).
+	'$lgt_entity_property_defines'(Obj, Functor/Arity, Properties).
 
 
 '$lgt_category_property_defines'(Ctg, Def, Functor/Arity, Properties) :-
 	call(Def, Predicate, _, _, Ctg),
 	functor(Predicate, Functor, Arity),
-	(	'$lgt_pp_predicate_property_'(Ctg, Functor/Arity, auxiliary),
-		'$lgt_predicate_property_'(Ctg, Functor/Arity, number_of_clauses(N)) ->
-		Properties = [auxiliary, number_of_clauses(N)]
-	;	'$lgt_predicate_property_'(Ctg, Functor/Arity, definition_line(Line)),
-		'$lgt_predicate_property_'(Ctg, Functor/Arity, number_of_clauses(N)) ->
-		Properties = [line_count(Line), number_of_clauses(N)]
-	;	Properties = []
+	'$lgt_entity_property_defines'(Ctg, Functor/Arity, Properties).
+
+
+'$lgt_entity_property_defines'(Entity, Functor/Arity, Properties) :-
+	'$lgt_predicate_property_'(Entity, Functor/Arity, flags_clauses(Flags, N)),
+	(	'$lgt_predicate_property_'(Entity, Functor/Arity, definition_line(Line)) ->
+		Properties0 = [line_count(Line), number_of_clauses(N)]
+	;	Properties0 = [number_of_clauses(N)]
+	),
+	(	Flags /\ 2 =:= 2 ->
+		Arity2 is Arity - 2,
+		Properties1 = [non_terminal(Functor//Arity2)| Properties0]
+	;	Properties1 = Properties0
+	),
+	(	Flags /\ 1 =:= 1 ->
+		Properties = [auxiliary| Properties1]
+	;	Properties = Properties1
 	).
 
 
@@ -5241,14 +5244,20 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_add_entity_predicate_properties'(Entity) :-
 	'$lgt_pp_defines_predicate_'(Head, _, _, Mode),
 	functor(Head, Functor, Arity),
+	(	Arity2 is Arity - 2,
+		Arity2 >= 0,
+		'$lgt_pp_defines_non_terminal_'(Functor, Arity2) ->
+		Flags0 is 2
+	;	Flags0 is 0
+	),
 	(	Mode == compile(aux) ->
-		assertz('$lgt_pp_predicate_property_'(Entity, Functor/Arity, auxiliary)),
+		Flags is Flags0 + 1,
 		% ensure that there isn't a misleading definition_line/1 property
 		retractall('$lgt_pp_predicate_property_'(Entity, Functor/Arity, definition_line(_)))
-	;	true
+	;	Flags is Flags0
 	),
 	'$lgt_pp_number_of_clauses_'(Functor, Arity, N),
-	assertz('$lgt_pp_predicate_property_'(Entity, Functor/Arity, number_of_clauses(N))),
+	assertz('$lgt_pp_predicate_property_'(Entity, Functor/Arity, flags_clauses(Flags, N))),
 	fail.
 
 '$lgt_add_entity_predicate_properties'(Entity) :-
