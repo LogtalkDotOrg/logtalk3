@@ -10409,10 +10409,17 @@ current_logtalk_flag(Flag, Value) :-
 	;	'$lgt_pp_calls_predicate_'(Functor/Arity, _, _, _) ->
 		true
 	;	Head = Object::Predicate ->
+		% call from the body of a Logtalk multifile predicate clause
 		functor(Predicate, HeadFunctor, HeadArity),
 		'$lgt_current_line_numbers'(Lines),
 		assertz('$lgt_pp_calls_predicate_'(Functor/Arity, TFunctor/TArity, Object::HeadFunctor/HeadArity, Lines))
-	;	functor(Head, HeadFunctor, HeadArity),
+	;	Head = ':'(Module,Predicate) ->
+		% call from the body of a Prolog module multifile predicate clause
+		functor(Predicate, HeadFunctor, HeadArity),
+		'$lgt_current_line_numbers'(Lines),
+		assertz('$lgt_pp_calls_predicate_'(Functor/Arity, TFunctor/TArity, ':'(Module,HeadFunctor/HeadArity), Lines))
+	;	% call from the body of an entity local clause
+		functor(Head, HeadFunctor, HeadArity),
 		Functor/Arity \== HeadFunctor/HeadArity ->
 		'$lgt_current_line_numbers'(Lines),
 		assertz('$lgt_pp_calls_predicate_'(Functor/Arity, TFunctor/TArity, HeadFunctor/HeadArity, Lines))
