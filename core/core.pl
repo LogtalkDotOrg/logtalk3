@@ -10403,25 +10403,26 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_remember_called_predicate'(runtime, _, _, _).
 
-'$lgt_remember_called_predicate'(compile(Mode), Functor/Arity, TFunctor/TArity, Head) :-
-	(	Mode == aux ->
-		true
-	;	'$lgt_pp_calls_predicate_'(Functor/Arity, _, _, _) ->
+'$lgt_remember_called_predicate'(compile(aux), _, _, _) :-
+	!.
+
+'$lgt_remember_called_predicate'(compile(regular), Functor/Arity, TFunctor/TArity, Head) :-
+	'$lgt_current_line_numbers'(Lines),
+	% currently, the returned line numbers are for the start and end lines of the clause containing the call
+	(	'$lgt_pp_calls_predicate_'(Functor/Arity, _, _, Lines) ->
+		% already reported for the current clause being compiled
 		true
 	;	Head = Object::Predicate ->
 		% call from the body of a Logtalk multifile predicate clause
 		functor(Predicate, HeadFunctor, HeadArity),
-		'$lgt_current_line_numbers'(Lines),
 		assertz('$lgt_pp_calls_predicate_'(Functor/Arity, TFunctor/TArity, Object::HeadFunctor/HeadArity, Lines))
 	;	Head = ':'(Module,Predicate) ->
 		% call from the body of a Prolog module multifile predicate clause
 		functor(Predicate, HeadFunctor, HeadArity),
-		'$lgt_current_line_numbers'(Lines),
 		assertz('$lgt_pp_calls_predicate_'(Functor/Arity, TFunctor/TArity, ':'(Module,HeadFunctor/HeadArity), Lines))
-	;	% call from the body of an entity local clause
+	;	% call from the body of a local entity clause
 		functor(Head, HeadFunctor, HeadArity),
 		Functor/Arity \== HeadFunctor/HeadArity ->
-		'$lgt_current_line_numbers'(Lines),
 		assertz('$lgt_pp_calls_predicate_'(Functor/Arity, TFunctor/TArity, HeadFunctor/HeadArity, Lines))
 	;	% recursive call
 		true
