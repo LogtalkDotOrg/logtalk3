@@ -48,7 +48,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/11/18,
+		date is 2013/12/03,
 		comment is 'Unit tests for the category_property/2 built-in predicate.'
 	]).
 
@@ -79,7 +79,8 @@
 		category_property(test_category, static),
 		category_property(test_category, file(Basename, Directory)), ground(Basename), ground(Directory),
 		category_property(test_category, lines(Start, End)), integer(Start), integer(End),
-		category_property(test_category, number_of_clauses(N)), N == 7,
+		category_property(test_category, number_of_clauses(NC)), NC == 7,
+		category_property(test_category, number_of_user_clauses(NUC)), NUC == 7,
 		category_property(test_category, info(Info)),
 		member(version(_), Info),
 		member(author(_), Info),

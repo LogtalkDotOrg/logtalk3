@@ -25,7 +25,7 @@ RELEASE NOTES
 =============
 
 
-3.00.0 Alpha 32 - November ??, 2013
+3.00.0 Alpha 32 - December ??, 2013
 ===================================
 
 Logtalk compiler and runtime
@@ -47,6 +47,9 @@ call properties. These properties include `caller/1`, `line_count/1`, and
 directive, the caller is identified as `(:-)/1`. Due to limitations on most
 backend Prolog compilers, the `line_count/1` property points to the clause
 head and not to the line of the call in the clause body.
+
+* ADDED: Entity property `number_of_user_clauses/1` for querying the number
+of user-defined clauses.
 
 * ADDED: Property `parent/1` to the `logtalk::loaded_file_property/2` method,
 allowing retrieving file loading dependencies.

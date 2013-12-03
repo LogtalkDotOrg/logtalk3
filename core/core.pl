@@ -579,7 +579,9 @@ object_property(Obj, Prop) :-
 '$lgt_object_property'(calls(Predicate, Properties), Obj, _, _, _, _, _) :-
 	'$lgt_entity_property_calls'(Obj, Predicate, Properties).
 '$lgt_object_property'(number_of_clauses(Total), Obj, _, _, _, _, _) :-
-	'$lgt_entity_property_'(Obj, number_of_clauses(Total)).
+	'$lgt_entity_property_'(Obj, number_of_clauses(Total, _)).
+'$lgt_object_property'(number_of_user_clauses(TotalUser), Obj, _, _, _, _, _) :-
+	'$lgt_entity_property_'(Obj, number_of_clauses(_, TotalUser)).
 
 
 '$lgt_object_property_resources'(Obj, Dcl, DDcl, Flags, Scope, Resources) :-
@@ -673,7 +675,9 @@ category_property(Ctg, Prop) :-
 '$lgt_category_property'(calls(Predicate, Properties), Ctg, _, _, _) :-
 	'$lgt_entity_property_calls'(Ctg, Predicate, Properties).
 '$lgt_category_property'(number_of_clauses(Total), Ctg, _, _, _) :-
-	'$lgt_entity_property_'(Ctg, number_of_clauses(Total)).
+	'$lgt_entity_property_'(Ctg, number_of_clauses(Total, _)).
+'$lgt_category_property'(number_of_user_clauses(TotalUser), Ctg, _, _, _) :-
+	'$lgt_entity_property_'(Ctg, number_of_clauses(_, TotalUser)).
 
 
 
@@ -735,7 +739,9 @@ protocol_property(Ptc, Prop) :-
 '$lgt_protocol_property'(calls(Predicate, Properties), Ptc, _, _) :-
 	'$lgt_entity_property_calls'(Ptc, Predicate, Properties).
 '$lgt_protocol_property'(number_of_clauses(Total), Ptc, _, _) :-
-	'$lgt_entity_property_'(Ptc, number_of_clauses(Total)).
+	'$lgt_entity_property_'(Ptc, number_of_clauses(Total, _)).
+'$lgt_protocol_property'(number_of_user_clauses(TotalUser), Ptc, _, _) :-
+	'$lgt_entity_property_'(Ptc, number_of_clauses(_, TotalUser)).
 
 
 '$lgt_object_property_declares'(Obj, Dcl, DDcl, EntityFlags, Functor/Arity, Properties) :-
@@ -5223,10 +5229,13 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_add_entity_properties'(end, Entity) :-
 	findall(Define, '$lgt_pp_predicate_property_'(Entity, _, flags_clauses_line(_, Define, _)), Defines),
 	'$lgt_sum_list'(Defines, TotalDefines),
+	findall(AuxDefine, ('$lgt_pp_predicate_property_'(Entity, _, flags_clauses_line(Flags, AuxDefine, _)), Flags /\ 1 =:= 1), AuxDefines),
+	'$lgt_sum_list'(AuxDefines, TotalAuxDefines),
 	findall(Provide, '$lgt_pp_predicate_property_'(_, _, number_of_clauses_from(Provide, Entity)), Provides),
 	'$lgt_sum_list'(Provides, TotalProvides),
 	Total is TotalDefines + TotalProvides,
-	assertz('$lgt_pp_entity_property_'(Entity, number_of_clauses(Total))),
+	TotalUser is Total - TotalAuxDefines,
+	assertz('$lgt_pp_entity_property_'(Entity, number_of_clauses(Total, TotalUser))),
 	fail.
 
 '$lgt_add_entity_properties'(end, _).
@@ -15956,6 +15965,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_valid_protocol_property'(file(_, _)).				% source file basename and directory
 '$lgt_valid_protocol_property'(lines(_, _)).			% start and end lines in a source file
 '$lgt_valid_protocol_property'(number_of_clauses(_)).	% number of predicate clauses
+'$lgt_valid_protocol_property'(number_of_user_clauses(_)).	% number of predicate clauses
 '$lgt_valid_protocol_property'(uses(_, _, _)).			% dependency on an object predicate (e.g. a message to an object as an initialization goal)
 '$lgt_valid_protocol_property'(uses(_, _, _, _, _)).	% dependency on an object predicate (e.g. a message to an object as an initialization goal)
 '$lgt_valid_protocol_property'(use_module(_, _, _)).	% dependency on a module predicate (e.g. an explicit-qualified module call as an initialization goal)

@@ -56,7 +56,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/11/18,
+		date is 2013/12/03,
 		comment is 'Unit tests for the object_property/2 built-in predicate.'
 	]).
 
@@ -92,6 +92,7 @@
 		object_property(test_object, file(Basename, Directory)), ground(Basename), ground(Directory),
 		object_property(test_object, lines(Start, End)), integer(Start), integer(End),
 		object_property(test_object, number_of_clauses(N)), N == 10,
+		object_property(test_object, number_of_user_clauses(NUC)), NUC == 10,
 		object_property(test_object, info(Info)),
 		member(version(_), Info),
 		member(author(_), Info),
