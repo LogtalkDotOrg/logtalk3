@@ -58,6 +58,12 @@ allowing retrieving file loading dependencies.
 entity predicate property `defines/2` when the predicate resulted from the
 compilation of a grammar rule.
 
+Prolog adapter and integration files
+------------------------------------
+
+* FIXED: Restored compatibility with old YAP versions that don't support
+auto-loading.
+
 Tools
 -----
 
