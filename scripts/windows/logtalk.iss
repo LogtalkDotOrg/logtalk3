@@ -64,7 +64,7 @@ Name: "prolog\swicon"; Description: "SWI-Prolog (console) integration (version 6
 Name: "prolog\swiwin"; Description: "SWI-Prolog (window) integration (version 6.0.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\xsb"; Description: "XSB integration (version 3.4.1 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\xsbmt"; Description: "XSB-MT integration (version 3.4.1 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
-Name: "prolog\yap"; Description: "YAP (console) integration (version 6.0.2 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
+Name: "prolog\yap"; Description: "YAP (console) integration (version 6.3.4 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\yap"; Description: "YAP (window) integration (version 6.3.2 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 
 [Tasks]

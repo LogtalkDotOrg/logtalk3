@@ -61,8 +61,8 @@ compilation of a grammar rule.
 Prolog adapter and integration files
 ------------------------------------
 
-* FIXED: Restored compatibility with old YAP versions that don't support
-auto-loading.
+* UPDATED: YAP 6.3.4 or a later version is now required when using this
+backend compiler.
 
 Tools
 -----

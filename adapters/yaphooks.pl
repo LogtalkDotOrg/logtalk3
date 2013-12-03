@@ -3,9 +3,9 @@
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
-%  integration code for YAP 6.0.2 and later versions to improve
+%  integration code for YAP 6.3.4 and later versions to improve
 %  usability when using the YAP profilers
-%  Last updated on September 27, 2013
+%  Last updated on December 3, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by

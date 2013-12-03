@@ -72,7 +72,7 @@ post-activate {
 	ui_msg "* XSB 64 bits (version 3.4.1 or later):    xsb64lgt   (first run may require sudo)"
 	ui_msg "* XSB MT (version 3.4.1 or later):         xsbmtlgt   (first run may require sudo)"
 	ui_msg "* XSB MT 64 bits (version 3.4.1 or later): xsbmt64lgt (first run may require sudo)"
-	ui_msg "* YAP (version 6.0.2 or later):            yaplgt"
+	ui_msg "* YAP (version 6.3.4 or later):            yaplgt"
 	ui_msg "*"
 	ui_msg "* Remember to set the environment variable LOGTALKHOME to the path to"
 	ui_msg "* the Logtalk distribution: ${prefix}/share/logtalk"

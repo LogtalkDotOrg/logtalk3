@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Logtalk installation script
-##   Last updated on October 27, 2013
+##   Last updated on December 3, 2013
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -171,7 +171,7 @@ echo "* XSB (version 3.4.1 or later):            xsblgt     (first run may requi
 echo "* XSB 64 bits (version 3.4.1 or later):    xsb64lgt   (first run may require sudo)"
 echo "* XSB MT (version 3.4.1 or later):         xsbmtlgt   (first run may require sudo)"
 echo "* XSB MT 64 bits (version 3.4.1 or later): xsbmt64lgt (first run may require sudo)"
-echo "* YAP (version 6.0.2 or later):            yaplgt"
+echo "* YAP (version 6.3.4 or later):            yaplgt"
 echo
 echo "Links to the Prolog integration scripts can be found on \"$prefix/bin\"."
 echo "Make sure that the Prolog compilers are properly installed and available"

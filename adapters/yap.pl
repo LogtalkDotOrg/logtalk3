@@ -3,7 +3,7 @@
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
-%  Adapter file for YAP Prolog 6.0.2 and later versions
+%  Adapter file for YAP Prolog 6.3.4 and later versions
 %  Last updated on December 3, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
@@ -144,13 +144,10 @@
 
 
 '$lgt_predicate_property'(Pred, Prop) :-
-	(	current_prolog_flag(autoload, Value) ->
-		setup_call_cleanup(
+	setup_call_cleanup(
 			set_prolog_flag(autoload, false),
 			predicate_property(Pred, Prop),
-			set_prolog_flag(autoload, Value))
-	;	% older YAP version not supporting auto-loading
-		predicate_property(Pred, Prop)
+			set_prolog_flag(autoload, Value)
 	).
 
 
@@ -289,7 +286,7 @@
 '$lgt_prolog_feature'(prolog_dialect, yap).
 '$lgt_prolog_feature'(prolog_version, (Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, yap(Major, Minor, Patch, _)).
-'$lgt_prolog_feature'(prolog_compatible_version, @>=((6,0,2))).
+'$lgt_prolog_feature'(prolog_compatible_version, @>=((6,3,4))).
 
 '$lgt_prolog_feature'(encoding_directive, full).
 '$lgt_prolog_feature'(tabling, Tabling) :-
