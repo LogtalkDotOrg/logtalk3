@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for YAP Prolog 6.3.4 and later versions
-%  Last updated on December 3, 2013
+%  Last updated on December 4, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -142,13 +142,18 @@
 
 % '$lgt_predicate_property'(+callable, ?predicate_property)
 
-
-'$lgt_predicate_property'(Pred, Prop) :-
-	setup_call_cleanup(
-			set_prolog_flag(autoload, false),
-			predicate_property(Pred, Prop),
-			set_prolog_flag(autoload, Value)
-	).
+:- if((current_prolog_flag(version_data, yap(Major,Minor,_,_)), (Major,Minor) @< (6,3))).
+	'$lgt_predicate_property'(Pred, Prop) :-
+		predicate_property(Pred, Prop).
+:- else.
+	'$lgt_predicate_property'(Pred, Prop) :-
+		current_prolog_flag(autoload, Value),
+		setup_call_cleanup(
+				set_prolog_flag(autoload, false),
+				predicate_property(Pred, Prop),
+				set_prolog_flag(autoload, Value)
+		).
+:- endif.
 
 
 
