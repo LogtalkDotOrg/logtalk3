@@ -80,6 +80,10 @@ integration with development tools such as PDT). Renamed the predicate
 existing code). Replaced all the failed unit test messages by a single one
 to simplify writing message hooks that intercept failed test messages.
 
+* IMPROVED: Refactored the `diagrams` tool to allow using different output
+graph languages. Currently, only DOT is supported but GraphML support is
+expected soon.
+
 Examples
 --------
 

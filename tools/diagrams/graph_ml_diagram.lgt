@@ -22,11 +22,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(library(types_loader)),
-	logtalk_load([cc(osp), cc(os)], [optimize(on)]),
-	logtalk_load([
-			diagrams,
-			dot_diagram
-		], [optimize(on)])
-)).
+:- object(graph_ml_diagram,
+	imports(diagram)).
+
+	:- info([
+		version is 2.0,
+		author is 'Paulo Moura',
+		date is 2013/12/05,
+		comment is 'Generates entity diagram GraphML files for source files and libraries.'
+	]).
+
+	:- multifile(diagram(_)::format_object/2).
+	diagram(_)::format_object(graph_ml, graph_ml_diagram).
+
+	output_file_name(Name, OutputFile) :-
+		atom_concat(Name, '.graphml', OutputFile).
+
+:- end_object.

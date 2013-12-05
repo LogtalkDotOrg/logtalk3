@@ -97,7 +97,7 @@ generated diagrams:
 - `output_path(OutputPath)`  
 	directory for the .dot files (an atom; default is `.`)
 - `exclude_files(Files)`  
-	list of source files (without the `.lgt` extension) to exclude (default is `[]`)
+	list of source files to exclude (default is `[]`)
 - `exclude_paths(Paths)`  
 	list of relative paths to exclude (default is `[]`)
 - `exclude_entities(Entities)`  

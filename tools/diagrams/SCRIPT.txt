@@ -29,7 +29,7 @@ ________________________________________________________________________
 
 % check the default list of options used when generating a diagram:
 
-| ?- diagram::default_options(DefaultOptions).
+| ?- diagram(dot)::default_options(DefaultOptions).
 DefaultOptions = ...
 yes
 
@@ -41,7 +41,7 @@ yes
 
 % generating an entity diagram for a source file using default options:
 
-| ?- diagram::file(points).
+| ?- diagram(dot)::file(points).
 yes
 
 
@@ -52,7 +52,7 @@ yes
 
 % generating an entity diagram for all source files in a library using default options:
 
-| ?- diagram::library(searching).
+| ?- diagram(dot)::library(searching).
 yes
 
 
