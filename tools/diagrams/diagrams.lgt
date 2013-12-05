@@ -247,6 +247,7 @@
 
 	not_excluded_file([], _, _).
 	not_excluded_file([ExcludedFile| ExcludedFiles], Path, Basename) :-
+		% files in the exclusion list may be given by full path or by basename
 		\+ member(Path, [ExcludedFile| ExcludedFiles]),
 		\+ member(Basename, [ExcludedFile| ExcludedFiles]),
 		% files in the exclusion list may be given with or without extension
@@ -491,26 +492,17 @@
 		remember_referenced_entity(Category),
 		fail.
 	output_object_relations(Object, Options) :-
-		object_property(Object, Properties),
-		setof(
-			Other,
-			Original^Alias^member(uses(Other, Original, Alias), Properties),
-			Others
-		),
-		member(Other, Others),
+		object_property(Object, calls(Other::_, _)),
+		\+ referenced_entity_(Other),
 		print_name(object, Object, ObjectName),
 		print_name(object, Other, OtherName),
+		writeq(::arrow(output_file, ObjectName, OtherName, uses, Options)), nl,
 		::arrow(output_file, ObjectName, OtherName, uses, Options),
 		remember_referenced_entity(Other),
 		fail.
 	output_object_relations(Object, Options) :-
-		object_property(Object, Properties),
-		setof(
-			Module,
-			Original^Alias^member(use_module(Module, Original, Alias), Properties),
-			Modules
-		),
-		member(Module, Modules),
+		object_property(Object, calls(':'(Module,_), _)),
+		\+ referenced_entity_(Module),
 		print_name(object, Object, ObjectName),
 		print_name(module, Module, ModuleName),
 		::arrow(output_file, ObjectName, ModuleName, use_module, Options),
@@ -540,26 +532,16 @@
 		remember_referenced_entity(Object),
 		fail.
 	output_category_relations(Category, Options) :-
-		category_property(Category, Properties),
-		setof(
-			Object,
-			Original^Alias^member(uses(Other, Original, Alias), Properties),
-			Objects
-		),
-		member(Object, Objects),
+		category_property(Category, calls(Object::_, _)),
+		\+ referenced_entity_(Object),
 		print_name(category, Category, CategoryName),
 		print_name(object, Object, ObjectName),
 		::arrow(output_file, CategoryName, ObjectName, uses, Options),
-		remember_referenced_entity(Other),
+		remember_referenced_entity(Object),
 		fail.
 	output_category_relations(Category, Options) :-
-		category_property(Category, Properties),
-		setof(
-			Module,
-			Original^Alias^member(use_module(Module, Original, Alias), Properties),
-			Modules
-		),
-		member(Module, Modules),
+		category_property(Category, calls(':'(Module,_), _)),
+		\+ referenced_entity_(Module),
 		print_name(category, Category, CategoryName),
 		print_name(module, Module, ModuleName),
 		::arrow(output_file, CategoryName, ModuleName, use_module, Options),
