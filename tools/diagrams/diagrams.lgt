@@ -496,7 +496,6 @@
 		\+ referenced_entity_(Other),
 		print_name(object, Object, ObjectName),
 		print_name(object, Other, OtherName),
-		writeq(::arrow(output_file, ObjectName, OtherName, uses, Options)), nl,
 		::arrow(output_file, ObjectName, OtherName, uses, Options),
 		remember_referenced_entity(Other),
 		fail.
