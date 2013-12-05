@@ -51,6 +51,8 @@ arrows (entity relations):
 	box (arrow ending with a black square)
 - complements relation  
 	obox (arrow ending with a white square)
+- uses and use_module relations
+	none (line)
 
 The entities that are not part of the files or libraries for which you are
 generating a diagram use a dashed border.

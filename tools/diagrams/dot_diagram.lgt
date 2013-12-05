@@ -160,8 +160,8 @@
 	label_arrowhead(implements, dot).
 	label_arrowhead(imports, box).
 	label_arrowhead(complements, obox).
-	label_arrowhead(uses, obox).
-	label_arrowhead(use_module, obox).
+	label_arrowhead(uses, none).
+	label_arrowhead(use_module, none).
 
 	predicate_list_to_atom([], '').
 	predicate_list_to_atom([Predicate| Predicates], Atom) :-
