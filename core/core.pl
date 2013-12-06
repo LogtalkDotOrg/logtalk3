@@ -9238,7 +9238,7 @@ current_logtalk_flag(Flag, Value) :-
 		TPred = ':'(Module, Pred),
 		DPred = '$lgt_debug'(goal(':'(Module, Pred), TPred), ExCtx)
 	;	\+ '$lgt_prolog_built_in_database_predicate'(Pred),
-		% the meta-predicate templates for the database predicates are usaully not
+		% the meta-predicate templates for the database predicates are usually not
 		% usable for Logtalk due the ambiguity of the ":" meta-argument qualifier
 		(	'$lgt_pp_meta_predicate_'(':'(Module, Pred), ':'(Module, Meta))
 			% we're either overriding the original meta-predicate template or working around a
@@ -15959,17 +15959,13 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_valid_protocol_property'(protected(_)).			% list of predicate indicators of protected predicates declared in the protocol
 '$lgt_valid_protocol_property'(private(_)).				% list of predicate indicators of private predicates declared in the protocol
 '$lgt_valid_protocol_property'(declares(_, _)).			% list of declaration properties for a predicate declared in the protocol
-'$lgt_valid_protocol_property'(calls(_, _)).			% list of calling properties for a predicate called in the protocol
+'$lgt_valid_protocol_property'(calls(_, _)).			% list of calling properties for a predicate called in the protocol (e.g. in an initialization goal)
 % the remaining properties are available only when the entities are compiled with the "source_data" flag turned on
 '$lgt_valid_protocol_property'(info(_)).				% list of pairs with user-defined protocol documentation
 '$lgt_valid_protocol_property'(file(_, _)).				% source file basename and directory
 '$lgt_valid_protocol_property'(lines(_, _)).			% start and end lines in a source file
 '$lgt_valid_protocol_property'(number_of_clauses(_)).	% number of predicate clauses
 '$lgt_valid_protocol_property'(number_of_user_clauses(_)).	% number of predicate clauses
-'$lgt_valid_protocol_property'(uses(_, _, _)).			% dependency on an object predicate (e.g. a message to an object as an initialization goal)
-'$lgt_valid_protocol_property'(uses(_, _, _, _, _)).	% dependency on an object predicate (e.g. a message to an object as an initialization goal)
-'$lgt_valid_protocol_property'(use_module(_, _, _)).	% dependency on a module predicate (e.g. an explicit-qualified module call as an initialization goal)
-'$lgt_valid_protocol_property'(use_module(_, _, _, _, _)).	% dependency on a module predicate (e.g. an explicit-qualified module call as an initialization goal)
 
 
 
