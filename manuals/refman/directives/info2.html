@@ -26,9 +26,9 @@
 
 <body>
 
-<div class="top-left">Logtalk reference manual</div> 
+<div class="top-left">Logtalk reference manual</div>
 <div class="top-right">Predicate directive: info/2</div>
-<div class="bottom-left"><span class="page"/></div> 
+<div class="bottom-left"><span class="page"/></div>
 <div class="bottom-right"><span class="page"/></div>
 <div class="navtop"><a href="../../index.html">Contents</a> &gt; <a href="../index.html">Reference Manual</a> &gt; <a href="../index.html#directives">Directives</a> &gt; info/2</div>
 
@@ -39,7 +39,7 @@
 <pre>info(Functor/Arity, List)
 info(Functor//Arity, List)</pre>
 <p>
-Documentation directive for predicates and grammar rule non-terminals. The first argument is either a predicate indicator or a grammar rule non-terminal indicator. The second argument is a list of pairs using the format <em>Key is Value</em>.
+Documentation directive for predicates and grammar rule non-terminals. The first argument is either a predicate indicator or a grammar rule non-terminal indicator. The second argument is a list of pairs using the format <em>Key is Value</em>. See the <a href="../../userman/documenting.html#documenting_predicate">documenting Logtalk programs</a> section for a description of the valid keys.
 </p>
 
 <h4>Template and modes</h4>
@@ -51,15 +51,17 @@ info(+non_terminal_indicator, +info_list)</pre>
 
 <pre>:- info(empty/1, [
     comment is 'True if the argument is an empty list.',
-    argnames is ['List']]).
+    argnames is ['List']
+]).
     
 :- info(sentence//0, [
-    comment is 'Rewrites a sentence into a noun phrase and a verb phrase.']).</pre>
+    comment is 'Rewrites a sentence into a noun phrase and a verb phrase.'
+]).</pre>
 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: May 23, 2008</span>
+		<span>Last updated on: December 8, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="dynamic1.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="meta_predicate1.html">next</a></span><br/>

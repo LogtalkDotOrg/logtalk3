@@ -28,7 +28,7 @@
 
 <div class="top-left">Logtalk user manual</div> 
 <div class="top-right">Predicates</div>
-<div class="bottom-left"><span class="page"/></div> 
+<div class="bottom-left"><span class="page"/></div>
 <div class="bottom-right"><span class="page"/></div>
 <div class="navtop"><a href="../index.html">Contents</a> &gt; <a href="index.html">User Manual</a> &gt; Predicates</div>
 
@@ -220,15 +220,16 @@ Logtalk provides a directive, <a title="Consult reference manual" href="../refma
 <p>
 Rewriting the code above using this directive results in a simplified and more readable predicate definition:
 </p>
-<pre>:- uses(list,
-    [append/3, member/2, select/3]).
+<pre>:- uses(list, [
+    append/3, member/2, select/3
+]).
 
-    foo :-
-        ...,
-        findall(X, member(X, L), A),
-        append(A, B, C),
-        select(Y, C, R),
-        ...</pre>
+foo :-
+    ...,
+    findall(X, member(X, L), A),
+    append(A, B, C),
+    select(Y, C, R),
+    ...</pre>
 <p>
 Logtalk also supports an extended version of this directive that allows the declaration of predicate alias using the notation <code>Predicate::Alias</code>. For example:
 </p>
@@ -930,7 +931,7 @@ Prolog built-in meta-predicates may only be called locally within objects or cat
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: December 6, 2013</span>
+		<span>Last updated on: December 8, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="categories.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="inheritance.html">next</a></span><br/>
