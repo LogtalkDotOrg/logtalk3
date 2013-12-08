@@ -55,7 +55,8 @@ Arbitrary user-defined entity information can be represented using the <a title=
 <pre>:- info([
     Key1 is Value1,
     Key2 is Value2,
-    ...]).</pre>
+    ...
+]).</pre>
 <p>
 In this pattern, keys should be atoms and values should be ground terms. The following keys are pre-defined and may be processed specially by Logtalk:
 </p>
@@ -87,7 +88,8 @@ For example:
     author is 'Paulo Moura',
     date is 2000/4/20,
     comment is 'Building representation.',
-    diagram is 'UML Class Diagram #312']).</pre>
+    diagram is 'UML Class Diagram #312'
+]).</pre>
 <p>
 Use only the keywords that make sense for your application and remember that you are free to invent your own keywords.
 </p>
@@ -101,7 +103,8 @@ Arbitrary user-defined predicate information can be represented using the
 <pre>:- info(Functor/Arity, [
     Key1 is Value1,
     Key2 is Value2,
-    ...]).</pre>
+    ...
+]).</pre>
 <p>
 Keys should be atoms and values should be ground terms. The following keys are pre-defined and may be processed specially by Logtalk:
 </p>
@@ -127,7 +130,8 @@ For example:
 <pre>:- info(color/1, [
     comment is 'Table of defined colors.',
     argnames is ['Color'],
-    constraint is 'Only a maximum of four visible colors allowed.']).</pre>
+    constraint is 'Only a maximum of four visible colors allowed.'
+]).</pre>
 <p>
 Use only the keywords that make sense for your application and remember that you are free to invent your own keywords.
 </p>
@@ -147,7 +151,8 @@ The Logtalk DTD file, <code>logtalk.dtd</code>, contains a reference to a user-c
     version is 1.1,
     author is {author},
     license is {license},
-    copyright is {copyright}).</pre>
+    copyright is {copyright}
+]).</pre>
 <p>
 The entity references are replaced by the value of the corresponding XML entity when the XML documenting files are processed (<strong>not</strong> when they are generated; this notation is just a shortcut to take advantage of XML entities).
 </p>
