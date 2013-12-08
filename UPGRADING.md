@@ -84,8 +84,8 @@ if changed since last loaded (provided that the any explicit flags are the
 same as the first time it was loaded).
 
 
-Deprecated directives and control constructs
---------------------------------------------
+Deprecated directives, control constructs, and flags
+----------------------------------------------------
 
 The `:/1` control construct is deprecated in Logtalk 3.x. Its functionality
 is subsumed by the `^^/1` control construct (aka "super" control construct),
@@ -98,6 +98,13 @@ The documentation only directives `calls/1` and `uses/1` are deprecated. The
 reflection API in Logtalk 3.x now returns all object (and module) dependencies
 found on sufficiently instantiated `::/2` and `:/2` calls when compiling an
 object or a category.
+
+The `version` flag is deprecated. New code that doesn't require compatibility
+with Logtalk 2.x should use instead the new `version_data` flag.
+
+The Logtalk 2.x `unknown`, `misspelt`, `singletons`, and `tmpdir` are renamed
+in Logtalk 3.x for clarity. The old names are deprecated and should only be
+used when compatibility with Logtalk 2.x is still required.
 
 
 Control constructs semantic changes
