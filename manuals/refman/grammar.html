@@ -39,7 +39,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 </p>
 
 
-<h2 id="grammar_compilation_units">Compilation units</h2>
+<h2 id="grammar_entities">Entities</h2>
 
 	<dl>
 		<dt>entity ::=</dt>
@@ -490,8 +490,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 			<dt>source_file_directive ::=</dt>
 				<dd>"<code>:- encoding(</code>" <em>atom</em> "<code>).</code>" |</dd>
 				<dd>"<code>:- set_logtalk_flag(</code>" <em>atom</em> "<code>,</code>" <em>nonvar</em> "<code>).</code>" |</dd>
-				<dd><em>initialization_directive</em> |</dd>
-				<dd><em>operator_directive</em></dd>
+				<dd><em>Prolog directives</em></dd>
 		</dl>
 
 	<h3 id="grammar_conditional_compilation_directives">Conditional compilation directives</h3>
@@ -789,20 +788,19 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 		</dl>
 		<dl id="grammar_meta_predicate_template">
 			<dt>meta_predicate_template ::=</dt>
-				<dd>object_identifier "<code>::</code>" <em>atom</em> "<code>(</code>" meta_predicate_terms "<code>)</code>" |</dd>
-				<dd>category_identifier "<code>::</code>" <em>atom</em> "<code>(</code>" meta_predicate_terms "<code>)</code>" |</dd>
-				<dd><em>atom</em> "<code>(</code>" meta_predicate_terms "<code>)</code>"</dd>
+				<dd>object_identifier "<code>::</code>" <em>atom</em> "<code>(</code>" meta_predicate_specifiers "<code>)</code>" |</dd>
+				<dd>category_identifier "<code>::</code>" <em>atom</em> "<code>(</code>" meta_predicate_specifiers "<code>)</code>" |</dd>
+				<dd><em>atom</em> "<code>(</code>" meta_predicate_specifiers "<code>)</code>"</dd>
 		</dl>
-		<dl id="grammar_meta_predicate_terms">
-			<dt>meta_predicate_terms ::=</dt>
-				<dd>meta_predicate_term |</dd>
-				<dd>meta_predicate_term "<code>,</code>" meta_predicate_terms</dd>
+		<dl id="grammar_meta_predicate_specifiers">
+			<dt>meta_predicate_specifiers ::=</dt>
+				<dd>meta_predicate_specifier |</dd>
+				<dd>meta_predicate_specifier "<code>,</code>" meta_predicate_specifiers</dd>
 		</dl>
 		<dl>
-			<dt>meta_predicate_term ::=</dt>
-				<dd><em>integer</em> | "<code>::</code>" | "<code>^</code>" | "<code>/</code>" |</dd>
-				<dd>"<code>*</code>" |</dd>
-				<dd>"<code>[0]</code>" | "<code>[/]</code>"</dd>
+			<dt>meta_predicate_specifier ::=</dt>
+				<dd><em>non-negative integer</em> | "<code>::</code>" | "<code>^</code>" |</dd>
+				<dd>"<code>*</code>"</dd>
 		</dl>
 		<dl>
 			<dt>meta_non_terminal_template_term ::=</dt>
