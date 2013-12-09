@@ -25,9 +25,5 @@
 :- initialization((
 	logtalk_load(library(types_loader)),
 	logtalk_load([cc(osp), cc(os)], [optimize(on)]),
-	logtalk_load([
-			diagrams,
-			graphp,
-			dot_diagram
-		], [optimize(on)])
+	logtalk_load([diagrams, graphp, dot_graph], [optimize(on)])
 )).
