@@ -27,7 +27,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/12/06,
+		date is 2013/12/09,
 		comment is 'Generates entity diagram files for source files and libraries in the specified format.',
 		argnames is ['Format']
 	]).
@@ -321,14 +321,14 @@
 			print_name(object, Entity, Name),
 			(	\+ instantiates_class(Object, _),
 				\+ specializes_class(Object, _) ->
-				Format::node(output_file, Name, [], external_prototype)
-			;	Format::node(output_file, Name, [], external_instance_or_class)
+				Format::node(output_file, Name, Name, [], external_prototype, Options)
+			;	Format::node(output_file, Name, Name, [], external_instance_or_class, Options)
 			)
 		;	current_protocol(Entity) ->
 			print_name(protocol, Entity, Name),
-			Format::node(output_file, Name, [], external_protocol)
+			Format::node(output_file, Name, Name, [], external_protocol, Options)
 		;	print_name(category, Entity, Name),
-			Format::node(output_file, Name, [], external_category)
+			Format::node(output_file, Name, Name, [], external_category, Options)
 		),
 		fail.
 	output_external_entities(Options) :-
@@ -366,7 +366,7 @@
 			entity_resources_to_atoms(Predicates, Atoms)
 		;	Atoms = []
 		),
-		Format::node(output_file, Name, Atoms, protocol),
+		Format::node(output_file, Name, Name, Atoms, protocol, Options),
 		output_protocol_relations(Protocol, Options).
 
 	output_object(Object, Options) :-
@@ -379,8 +379,8 @@
 		),
 		(	\+ instantiates_class(Object, _),
 			\+ specializes_class(Object, _) ->
-			Format::node(output_file, Name, Atoms, prototype)
-		;	Format::node(output_file, Name, Atoms, instance_or_class)
+			Format::node(output_file, Name, Name, Atoms, prototype, Options)
+		;	Format::node(output_file, Name, Name, Atoms, instance_or_class, Options)
 		),
 		output_object_relations(Object, Options).
 
@@ -392,7 +392,7 @@
 			entity_resources_to_atoms(Predicates, Atoms)
 		;	Atoms = []
 		),
-		Format::node(output_file, Name, Atoms, category),
+		Format::node(output_file, Name, Name, Atoms, category, Options),
 		output_category_relations(Category, Options).
 
 	output_protocol_relations(Protocol, Options) :-
@@ -400,7 +400,7 @@
 		extends_protocol(Protocol, ExtendedProtocol),
 		print_name(protocol, Protocol, ProtocolName),
 		print_name(protocol, ExtendedProtocol, ExtendedProtocolName),
-		Format::arrow(output_file, ProtocolName, ExtendedProtocolName, extends, Options),
+		Format::edge(output_file, ProtocolName, ExtendedProtocolName, extends, Options),
 		remember_referenced_entity(ExtendedProtocol),
 		fail.
 	output_protocol_relations(_, _).
@@ -410,7 +410,7 @@
 		implements_protocol(Object, Protocol),
 		print_name(object, Object, ObjectName),
 		print_name(protocol, Protocol, ProtocolName),
-		Format::arrow(output_file, ObjectName, ProtocolName, implements, Options),
+		Format::edge(output_file, ObjectName, ProtocolName, implements, Options),
 		remember_referenced_entity(Protocol),
 		fail.
 	output_object_relations(Instance, Options) :-
@@ -418,7 +418,7 @@
 		instantiates_class(Instance, Class),
 		print_name(object, Instance, InstanceName),
 		print_name(object, Class, ClassName),
-		Format::arrow(output_file, InstanceName, ClassName, instantiates, Options),
+		Format::edge(output_file, InstanceName, ClassName, instantiates, Options),
 		remember_referenced_entity(Class),
 		fail.
 	output_object_relations(Class, Options) :-
@@ -426,7 +426,7 @@
 		specializes_class(Class, SuperClass),
 		print_name(object, Class, ClassName),
 		print_name(object, SuperClass, SuperClassName),
-		Format::arrow(output_file, ClassName, SuperClassName, specializes, Options),
+		Format::edge(output_file, ClassName, SuperClassName, specializes, Options),
 		remember_referenced_entity(SuperClass),
 		fail.
 	output_object_relations(Prototype, Options) :-
@@ -434,7 +434,7 @@
 		extends_object(Prototype, Parent),
 		print_name(object, Prototype, PrototypeName),
 		print_name(object, Parent, ParentName),
-		Format::arrow(output_file, PrototypeName, ParentName, extends, Options),
+		Format::edge(output_file, PrototypeName, ParentName, extends, Options),
 		remember_referenced_entity(Parent),
 		fail.
 	output_object_relations(Object, Options) :-
@@ -442,7 +442,7 @@
 		imports_category(Object, Category),
 		print_name(object, Object, ObjectName),
 		print_name(category, Category, CategoryName),
-		Format::arrow(output_file, ObjectName, CategoryName, imports, Options),
+		Format::edge(output_file, ObjectName, CategoryName, imports, Options),
 		remember_referenced_entity(Category),
 		fail.
 	output_object_relations(Object, Options) :-
@@ -451,7 +451,7 @@
 		\+ referenced_entity_(Other),
 		print_name(object, Object, ObjectName),
 		print_name(object, Other, OtherName),
-		Format::arrow(output_file, ObjectName, OtherName, uses, Options),
+		Format::edge(output_file, ObjectName, OtherName, uses, Options),
 		remember_referenced_entity(Other),
 		fail.
 	output_object_relations(Object, Options) :-
@@ -460,7 +460,7 @@
 		\+ referenced_entity_(Module),
 		print_name(object, Object, ObjectName),
 		print_name(module, Module, ModuleName),
-		Format::arrow(output_file, ObjectName, ModuleName, use_module, Options),
+		Format::edge(output_file, ObjectName, ModuleName, use_module, Options),
 		remember_referenced_entity(Module),
 		fail.
 	output_object_relations(_, _).
@@ -470,7 +470,7 @@
 		extends_category(Category, ExtendedCategory),
 		print_name(category, Category, CategoryName),
 		print_name(category, ExtendedCategory, ExtendedCategoryName),
-		Format::arrow(output_file, CategoryName, ExtendedCategoryName, extends, Options),
+		Format::edge(output_file, CategoryName, ExtendedCategoryName, extends, Options),
 		remember_referenced_entity(ExtendedCategory),
 		fail.
 	output_category_relations(Category, Options) :-
@@ -478,7 +478,7 @@
 		implements_protocol(Category, Protocol),
 		print_name(category, Category, CategoryName),
 		print_name(protocol, Protocol, ProtocolName),
-		Format::arrow(output_file, CategoryName, ProtocolName, implements, Options),
+		Format::edge(output_file, CategoryName, ProtocolName, implements, Options),
 		remember_referenced_entity(Protocol),
 		fail.
 	output_category_relations(Category, Options) :-
@@ -486,7 +486,7 @@
 		complements_object(Category, Object),
 		print_name(category, Category, CategoryName),
 		print_name(object, Object, ObjectName),
-		Format::arrow(output_file, ObjectName, CategoryName, complements, Options),
+		Format::edge(output_file, ObjectName, CategoryName, complements, Options),
 		remember_referenced_entity(Object),
 		fail.
 	output_category_relations(Category, Options) :-
@@ -495,7 +495,7 @@
 		\+ referenced_entity_(Object),
 		print_name(category, Category, CategoryName),
 		print_name(object, Object, ObjectName),
-		Format::arrow(output_file, CategoryName, ObjectName, uses, Options),
+		Format::edge(output_file, CategoryName, ObjectName, uses, Options),
 		remember_referenced_entity(Object),
 		fail.
 	output_category_relations(Category, Options) :-
@@ -504,7 +504,7 @@
 		\+ referenced_entity_(Module),
 		print_name(category, Category, CategoryName),
 		print_name(module, Module, ModuleName),
-		Format::arrow(output_file, CategoryName, ModuleName, use_module, Options),
+		Format::edge(output_file, CategoryName, ModuleName, use_module, Options),
 		remember_referenced_entity(Module),
 		fail.
 	output_category_relations(_, _).

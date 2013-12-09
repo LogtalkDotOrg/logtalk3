@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/12/06,
+		date is 2013/12/09,
 		comment is 'Description']).
 
 	:- public(output_file_name/2).
@@ -65,17 +65,17 @@
 		argnames is ['Stream', 'Identifier', 'Label', 'Options']
 	]).
 
-	:- public(node/4).
-	:- mode(node(+stream_or_alias, +atom, +list(predicate_indicator), +atom), one).
-	:- info(node/4, [
-		comment is 'Writes an arrow between two nodes using the specified options.',
-		argnames is ['Stream', 'Label', 'Predicates', 'Kind']
+	:- public(node/6).
+	:- mode(node(+stream_or_alias, +atom, +atom, +list(atom), +atom, +list(compound)), one).
+	:- info(node/6, [
+		comment is 'Writes a node using the specified options.',
+		argnames is ['Stream', 'Identifier', 'Label', 'Lines', 'Kind', 'Options']
 	]).
 
-	:- public(arrow/5).
-	:- mode(arrow(+stream_or_alias, +atom, +atom, +atom, +list), one).
-	:- info(arrow/5, [
-		comment is 'Writes an arrow between two nodes using the specified options.',
+	:- public(edge/5).
+	:- mode(edge(+stream_or_alias, +atom, +atom, +atom, +list(compound)), one).
+	:- info(edge/5, [
+		comment is 'Writes an edge between two nodes using the specified options.',
 		argnames is ['Stream', 'Start', 'End', 'Label', 'Options']
 	]).
 

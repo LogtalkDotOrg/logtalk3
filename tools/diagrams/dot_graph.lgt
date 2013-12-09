@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/12/05,
+		date is 2013/12/09,
 		comment is 'Generates entity diagram DOT files for source files and libraries.'
 	]).
 
@@ -102,11 +102,11 @@
 	graph_footer(Stream, _Id, _Label, _Options) :-
 		write(Stream, '}\n\n').
 
-	node(Stream, Label, Lines, Kind) :-
+	node(Stream, Id, Label, Lines, Kind, _Options) :-
 		lines_to_contents(Lines, Contents),
 		entity_shape(Kind, Shape, Style),
 		write(Stream, '"'),
-		write(Stream, Label),
+		write(Stream, Id),
 		write(Stream, '" [shape='),
 		write(Stream, Shape),
 		write(Stream, ',style='),
@@ -127,8 +127,10 @@
 	entity_shape(external_protocol, note, dashed).
 	entity_shape(external_category, component, dashed).
 
-	arrow(Stream, Start, End, Label, Options) :-
-		label_arrowhead(Label, ArrowHead),
+	entity_shape(file, box, solid).
+
+	edge(Stream, Start, End, Label, Options) :-
+		label_edge(Label, ArrowHead),
 		write(Stream, '"'),
 		write(Stream, Start),
 		write(Stream, '" -> "'),
@@ -142,17 +144,17 @@
 		;	write(Stream, ',label=""]\n')
 		).
 
-	label_arrowhead(extends, vee).
-	label_arrowhead(instantiates, normal).
-	label_arrowhead(specializes, onormal).
-	label_arrowhead(implements, dot).
-	label_arrowhead(imports, box).
-	label_arrowhead(complements, obox).
+	label_edge(extends, vee).
+	label_edge(instantiates, normal).
+	label_edge(specializes, onormal).
+	label_edge(implements, dot).
+	label_edge(imports, box).
+	label_edge(complements, obox).
 
-	label_arrowhead(uses, none).
-	label_arrowhead(use_module, none).
+	label_edge(uses, none).
+	label_edge(use_module, none).
 
-	label_arrowhead(loads, normal).
+	label_edge(loads, normal).
 
 	lines_to_contents([], '').
 	lines_to_contents([Line| Lines], Atom) :-
