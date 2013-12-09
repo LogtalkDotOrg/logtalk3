@@ -22,8 +22,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(dot_diagram,
-	imports(diagram)).
+:- object(dot_graph,
+	implements(graphp)).
 
 	:- info([
 		version is 2.0,
@@ -33,7 +33,7 @@
 	]).
 
 	:- multifile(diagram(_)::format_object/2).
-	diagram(_)::format_object(dot, dot_diagram).
+	diagram(_)::format_object(dot, dot_graph).
 
 	output_file_name(Name, OutputFile) :-
 		atom_concat(Name, '.dot', OutputFile).
@@ -85,37 +85,25 @@
 	output_file_footer(Stream, _Options) :-
 		write(Stream, '}\n').
 
-	graph_header(Stream, Id, Label, _Options) :-
+	graph_header(Stream, Id, Label, Options) :-
 		write(Stream, 'subgraph "cluster_'),
 		write(Stream, Id),
 		write(Stream, '" {\n'),
-		write(Stream, 'bgcolor=snow3\nlabel="'),
+		write(Stream, 'bgcolor="'),
+		(	member(bgcolor(BGColor), Options) ->
+			true
+		;	BGColor = white
+		),
+		write(Stream, BGColor),
+		write(Stream, '"\nlabel="'),
 		write(Stream, Label),
 		write(Stream, '"\n').
 
 	graph_footer(Stream, _Id, _Label, _Options) :-
 		write(Stream, '}\n\n').
 
-	subgraph_header(Stream, Id, Label, _Options) :-
-		write(Stream, 'subgraph "cluster_'),
-		write(Stream, Id),
-		write(Stream, '" {\n'),
-		write(Stream, 'bgcolor=snow2\nlabel="'),
-		write(Stream, Label),
-		write(Stream, '"\n').
-
-	subgraph_footer(Stream, _Id, _Label, _Options) :-
-		write(Stream, '}\n\n').
-
-	externals_subgraph_header(Stream, _Options) :-
-		write(Stream, 'subgraph "cluster_others" {\n'),
-		write(Stream, 'bgcolor=white\nlabel="(other referenced entities)"\n').
-
-	externals_subgraph_footer(Stream, _Options) :-
-		write(Stream, '}\n').
-
-	node(Stream, Label, Predicates, Kind) :-
-		predicate_list_to_atom(Predicates, Text),
+	node(Stream, Label, Lines, Kind) :-
+		lines_to_contents(Lines, Contents),
 		entity_shape(Kind, Shape, Style),
 		write(Stream, '"'),
 		write(Stream, Label),
@@ -126,7 +114,7 @@
 		write(Stream, ',label=<<B>'),
 		write(Stream, Label),
 		write(Stream, '</B><BR/>'),
-		write(Stream, Text),
+		write(Stream, Contents),
 		write(Stream, '>]\n').
 
 	entity_shape(prototype, box, solid).
@@ -160,22 +148,21 @@
 	label_arrowhead(implements, dot).
 	label_arrowhead(imports, box).
 	label_arrowhead(complements, obox).
+
 	label_arrowhead(uses, none).
 	label_arrowhead(use_module, none).
 
-	predicate_list_to_atom([], '').
-	predicate_list_to_atom([Predicate| Predicates], Atom) :-
-		predicate_list_to_atom([Predicate| Predicates], ' <BR/>', Atom).
+	label_arrowhead(loads, normal).
 
-	predicate_list_to_atom([], Atom, Atom).
-	predicate_list_to_atom([Functor/Arity| Predicates], Atom0, Atom) :-
-		number_codes(Arity, ArityCodes),
-		atom_codes(ArityAtom, ArityCodes),
+	lines_to_contents([], '').
+	lines_to_contents([Line| Lines], Atom) :-
+		lines_to_contents([Line| Lines], ' <BR/>', Atom).
+
+	lines_to_contents([], Atom, Atom).
+	lines_to_contents([Line| Lines], Atom0, Atom) :-
 		atom_concat(Atom0, '<BR/>', Atom1),
-		atom_concat(Atom1, Functor, Atom2),
-		atom_concat(Atom2, '/', Atom3),
-		atom_concat(Atom3, ArityAtom, Atom4),
-		predicate_list_to_atom(Predicates, Atom4, Atom).
+		atom_concat(Atom1, Line, Atom2),
+		lines_to_contents(Lines, Atom2, Atom).
 
 	member(Option, [Option| _]) :-
 		!.

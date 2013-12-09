@@ -22,30 +22,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(graphml_graph,
-	imports(diagram)).
+:- object(gxl_graph,
+	implements(graphp)).
 
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2013/12/05,
-		comment is 'Generates entity diagram GraphML files for source files and libraries.'
+		comment is 'Generates entity diagram GXL files for source files and libraries.'
 	]).
 
 	:- multifile(diagram(_)::format_object/2).
-	diagram(_)::format_object(graphml, graphml_graph).
+	diagram(_)::format_object(gxl, gxl_graph).
 
 	output_file_name(Name, OutputFile) :-
-		atom_concat(Name, '.graphml', OutputFile).
-
-	output_file_header(Stream, _Options) :-
-		write(Stream, '<?xml version="1.0" encoding="UTF-8"?>\n'),
-		write(Stream, '<graphml xmlns="http://graphml.graphdrawing.org/xmlns"\n'),
-		write(Stream, '    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"\n'),
-		write(Stream, '    xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns\n'),
-		write(Stream, '     http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">\n').
-
-	output_file_footer(Stream, _Options) :-
-		write(Stream, '</graphml>\n').
+		atom_concat(Name, '.gxl', OutputFile).
 
 :- end_object.

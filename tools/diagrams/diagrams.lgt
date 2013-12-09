@@ -22,13 +22,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- category(diagram).
+:- object(diagram(_Format)).
 
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/12/05,
-		comment is 'Predicates for generating entity diagram files for source files and libraries.'
+		date is 2013/12/06,
+		comment is 'Generates entity diagram files for source files and libraries in the specified format.',
+		argnames is ['Format']
 	]).
 
 	:- public(rlibrary/2).
@@ -58,6 +59,7 @@
 		comment is 'Creates a diagram for all entities in a library using default options.',
 		argnames is ['Library']
 	]).
+
 	:- public(files/3).
 	:- mode(files(+atom, +list(atom), +list), one).
 	:- info(files/3, [
@@ -93,81 +95,12 @@
 		argnames is ['DefaultOptions']
 	]).
 
-	:- protected(output_file_name/2).
-	:- mode(output_file_name(+atom, -atom), one).
-	:- info(output_file_name/2, [
-		comment is 'Constructs the the diagram file name.',
-		argnames is ['Name', 'File']
-	]).
-
-	:- protected(output_file_header/2).
-	:- mode(output_file_header(+stream_or_alias, +list), one).
-	:- info(output_file_header/2, [
-		comment is 'Writes the output file header using the specified options.',
-		argnames is ['Stream', 'Options']
-	]).
-
-	:- protected(output_file_footer/2).
-	:- mode(output_file_footer(+stream_or_alias, +list), one).
-	:- info(output_file_footer/2, [
-		comment is 'Writes the output file footer using the specified options.',
-		argnames is ['Stream', 'Options']
-	]).
-
-	:- protected(graph_header/4).
-	:- mode(graph_header(+stream_or_alias, +atom, +atom, +list), one).
-	:- info(graph_header/4, [
-		comment is 'Writes a graph header using the specified options.',
-		argnames is ['Stream', 'Identifier', 'Label', 'Options']
-	]).
-
-	:- protected(graph_footer/4).
-	:- mode(graph_footer(+stream_or_alias, +atom, +atom, +list), one).
-	:- info(graph_footer/4, [
-		comment is 'Writes a graph footer using the specified options.',
-		argnames is ['Stream', 'Identifier', 'Label', 'Options']
-	]).
-
-	:- protected(subgraph_header/4).
-	:- mode(subgraph_header(+stream_or_alias, +atom, +atom, +list), one).
-	:- info(subgraph_header/4, [
-		comment is 'Writes a subgraph header using the specified options.',
-		argnames is ['Stream', 'Identifier', 'Label', 'Options']
-	]).
-
-	:- protected(subgraph_footer/4).
-	:- mode(subgraph_footer(+stream_or_alias, +atom, +atom, +list), one).
-	:- info(subgraph_footer/4, [
-		comment is 'Writes a subgraph footer using the specified options.',
-		argnames is ['Stream', 'Identifier', 'Label', 'Options']
-	]).
-
-	:- protected(externals_subgraph_header/2).
-	:- mode(externals_subgraph_header(+stream_or_alias, +list), one).
-	:- info(externals_subgraph_header/2, [
-		comment is 'Writes a subgraph header using the specified options.',
-		argnames is ['Stream', 'Options']
-	]).
-
-	:- protected(externals_subgraph_footer/2).
-	:- mode(externals_subgraph_footer(+stream_or_alias, +list), one).
-	:- info(externals_subgraph_footer/2, [
-		comment is 'Writes a subgraph footer using the specified options.',
-		argnames is ['Stream', 'Options']
-	]).
-
-	:- protected(node/4).
-	:- mode(node(+stream_or_alias, +atom, +list(predicate_indicator), +atom), one).
-	:- info(node/4, [
-		comment is 'Writes an arrow between two nodes using the specified options.',
-		argnames is ['Stream', 'Label', 'Predicates', 'Kind']
-	]).
-
-	:- protected(arrow/5).
-	:- mode(arrow(+stream_or_alias, +atom, +atom, +atom, +list), one).
-	:- info(arrow/5, [
-		comment is 'Writes an arrow between two nodes using the specified options.',
-		argnames is ['Stream', 'Start', 'End', 'Label', 'Options']
+	:- public(format_object/2).
+	:- multifile(format_object/2).
+	:- mode(format_object(?atom, ?object_identifier), zero_or_more).
+	:- info(format_object/2, [
+		comment is '.',
+		argnames is ['Format', 'Object']
 	]).
 
 	:- private(included_entity_/1).
@@ -177,18 +110,19 @@
 	:- dynamic(referenced_entity_/1).
 
 	rlibrary(Library, UserOptions) :-
+		format_object(Format),
 		merge_options(UserOptions, Options),
 		logtalk::expand_library_path(Library, TopDirectory),
-		::output_file_name(Library, OutputFile),
+		Format::output_file_name(Library, OutputFile),
 		member(output_path(OutputPath), Options),
 		os::working_directory(Current),
 		os::change_directory(OutputPath),
 		open(OutputFile, write, Stream, [alias(output_file)]),
-		::output_file_header(output_file, Options),
+		Format::output_file_header(output_file, Options),
 		reset_external_entities,
 		output_rlibrary(TopDirectory, Options),
 		output_external_entities(Options),
-		::output_file_footer(output_file, Options),
+		Format::output_file_footer(output_file, Options),
 		close(Stream),
 		os::change_directory(Current).
 
@@ -196,12 +130,13 @@
 		rlibrary(Library, []).
 
 	output_rlibrary(TopDirectory, Options) :-
-		::graph_header(output_file, TopDirectory, TopDirectory, Options),
+		format_object(Format),
+		Format::graph_header(output_file, TopDirectory, TopDirectory, [bgcolor(snow3)| Options]),
 		member(exclude_paths(ExcludedPaths), Options),
 		forall(
 			sub_library(TopDirectory, ExcludedPaths, RelativePath, Path),
 			output_library(RelativePath, Path, Options)),
-		::graph_footer(output_file, TopDirectory, TopDirectory, Options).
+		Format::graph_footer(output_file, TopDirectory, TopDirectory, [bgcolor(snow3)| Options]).
 
 	sub_library(TopDirectory, ExcludedPaths, RelativePath, Path) :-
 		logtalk_library_path(Library, _),
@@ -210,18 +145,19 @@
 		\+ member(RelativePath, ExcludedPaths).
 
 	library(Library, UserOptions) :-
+		format_object(Format),
 		merge_options(UserOptions, Options),
 		logtalk::expand_library_path(Library, Path),
-		::output_file_name(Library, OutputFile),
+		Format::output_file_name(Library, OutputFile),
 		member(output_path(OutputPath), Options),
 		os::working_directory(Current),
 		os::change_directory(OutputPath),
 		open(OutputFile, write, Stream, [alias(output_file)]),
-		::output_file_header(output_file, Options),
+		Format::output_file_header(output_file, Options),
 		reset_external_entities,
 		output_library(Path, Path, Options),
 		output_external_entities(Options),
-		::output_file_footer(output_file, Options),
+		Format::output_file_footer(output_file, Options),
 		close(Stream),
 		os::change_directory(Current).
 
@@ -229,10 +165,11 @@
 		library(Library, []).
 
 	output_library(RelativePath, Path, Options) :-
+		format_object(Format),
 		(	member(library_paths(true), Options) ->
-			::subgraph_header(output_file, RelativePath, RelativePath, Options),
+			Format::graph_header(output_file, RelativePath, RelativePath, [bgcolor(snow2)| Options]),
 			output_library_files(Path, Options),
-			::subgraph_footer(output_file, RelativePath, RelativePath, Options)
+			Format::graph_footer(output_file, RelativePath, RelativePath, Options)
 		;	output_library_files(Path, Options)
 		).
 
@@ -264,16 +201,17 @@
 		files(Project, Paths, []).
 
 	files(Project, Paths, UserOptions) :-
+		format_object(Format),
 		merge_options(UserOptions, Options),
-		::output_file_name(Project, OutputFile),
+		Format::output_file_name(Project, OutputFile),
 		member(output_path(OutputPath), Options),
 		os::working_directory(Current),
 		os::change_directory(OutputPath),
 		open(OutputFile, write, Stream, [alias(output_file)]),
-		::output_file_header(output_file, Options),
+		Format::output_file_header(output_file, Options),
 		reset_external_entities,
 		output_files(Paths, Options),
-		::output_file_footer(output_file, Options),
+		Format::output_file_footer(output_file, Options),
 		close(Stream),
 		os::change_directory(Current).
 
@@ -287,22 +225,23 @@
 		output_files(Paths, Options).
 
 	file(Source, UserOptions) :-
+		format_object(Format),
 		locate_file(Source, Basename, Directory),
 		merge_options(UserOptions, Options),
 		(	atom_concat(Source, '.lgt', Basename) ->
 			true
 		;	atom_concat(Source, '.logtalk', Basename)
 		),
-		::output_file_name(Source, OutputFile),
+		Format::output_file_name(Source, OutputFile),
 		member(output_path(OutputPath), Options),
 		os::working_directory(Current),
 		os::change_directory(OutputPath),
 		open(OutputFile, write, Stream, [alias(output_file)]),
-		::output_file_header(output_file, Options),
+		Format::output_file_header(output_file, Options),
 		reset_external_entities,
 		output_file(Basename, Directory, Options),
 		output_external_entities(Options),
-		::output_file_footer(output_file, Options),
+		Format::output_file_footer(output_file, Options),
 		close(Stream),
 		os::change_directory(Current).
 
@@ -349,13 +288,14 @@
 		).
 
 	output_file(Basename, Directory, Options) :-
+		format_object(Format),
 		(	member(file_names(true), Options) ->
 			% use the full path for the cluster identifier as we
 			% can have more than file with the same basename
 			atom_concat(Directory, Basename, File),
-			::subgraph_header(output_file, File, Basename, Options),
+			Format::graph_header(output_file, File, Basename, [bgcolor(snow2)| Options]),
 			process(Basename, Directory, Options),
-			::subgraph_footer(output_file, File, Basename, Options)
+			Format::graph_footer(output_file, File, Basename, [bgcolor(snow2)| Options])
 		;	process(Basename, Directory, Options)
 		).
 
@@ -367,31 +307,33 @@
 
 	reset_external_entities :-
 		retractall(included_entity_(_)),
-		retractall(referenced_entity_(_)).		
+		retractall(referenced_entity_(_)).
 
 	output_external_entities(_Options) :-
 		retract(included_entity_(Entity)),
 		retractall(referenced_entity_(Entity)),
 		fail.
 	output_external_entities(Options) :-
-		::externals_subgraph_header(output_file, Options),
+		format_object(Format),
+		Format::graph_header(output_file, other, '(other referenced entities)', [bgcolor(white)| Options]),
 		retract(referenced_entity_(Entity)),
 		(	current_object(Entity) ->
 			print_name(object, Entity, Name),
 			(	\+ instantiates_class(Object, _),
 				\+ specializes_class(Object, _) ->
-				::node(output_file, Name, [], external_prototype)
-			;	::node(output_file, Name, [], external_instance_or_class)
+				Format::node(output_file, Name, [], external_prototype)
+			;	Format::node(output_file, Name, [], external_instance_or_class)
 			)
 		;	current_protocol(Entity) ->
 			print_name(protocol, Entity, Name),
-			::node(output_file, Name, [], external_protocol)
+			Format::node(output_file, Name, [], external_protocol)
 		;	print_name(category, Entity, Name),
-			::node(output_file, Name, [], external_category)
+			Format::node(output_file, Name, [], external_category)
 		),
 		fail.
 	output_external_entities(Options) :-
-		::externals_subgraph_footer(output_file, Options).
+		format_object(Format),
+		Format::graph_footer(output_file, other, '(other referenced entities)', [bgcolor(white)| Options]).
 
 	process(Basename, Directory, Options) :-
 		member(exclude_entities(ExcludedEntities), Options),
@@ -417,133 +359,152 @@
 	process(_, _, _).
 
 	output_protocol(Protocol, Options) :-
+		format_object(Format),
 		print_name(protocol, Protocol, Name),
 		(	member(interface(true), Options) ->
-			protocol_property(Protocol, public(Predicates))
-		;	true
+			protocol_property(Protocol, public(Predicates)),
+			entity_resources_to_atoms(Predicates, Atoms)
+		;	Atoms = []
 		),
-		::node(output_file, Name, Predicates, protocol),
+		Format::node(output_file, Name, Atoms, protocol),
 		output_protocol_relations(Protocol, Options).
 
 	output_object(Object, Options) :-
+		format_object(Format),
 		print_name(object, Object, Name),
 		(	member(interface(true), Options) ->
-			object_property(Object, public(Predicates))
-		;	true
+			object_property(Object, public(Predicates)),
+			entity_resources_to_atoms(Predicates, Atoms)
+		;	Atoms = []
 		),
 		(	\+ instantiates_class(Object, _),
 			\+ specializes_class(Object, _) ->
-			::node(output_file, Name, Predicates, prototype)
-		;	::node(output_file, Name, Predicates, instance_or_class)
+			Format::node(output_file, Name, Atoms, prototype)
+		;	Format::node(output_file, Name, Atoms, instance_or_class)
 		),
 		output_object_relations(Object, Options).
 
 	output_category(Category, Options) :-
+		format_object(Format),
 		print_name(category, Category, Name),
 		(	member(interface(true), Options) ->
-			category_property(Category, public(Predicates))
-		;	true
+			category_property(Category, public(Predicates)),
+			entity_resources_to_atoms(Predicates, Atoms)
+		;	Atoms = []
 		),
-		::node(output_file, Name, Predicates, category),
+		Format::node(output_file, Name, Atoms, category),
 		output_category_relations(Category, Options).
 
 	output_protocol_relations(Protocol, Options) :-
+		format_object(Format),
 		extends_protocol(Protocol, ExtendedProtocol),
 		print_name(protocol, Protocol, ProtocolName),
 		print_name(protocol, ExtendedProtocol, ExtendedProtocolName),
-		::arrow(output_file, ProtocolName, ExtendedProtocolName, extends, Options),
+		Format::arrow(output_file, ProtocolName, ExtendedProtocolName, extends, Options),
 		remember_referenced_entity(ExtendedProtocol),
 		fail.
 	output_protocol_relations(_, _).
 
 	output_object_relations(Object, Options) :-
+		format_object(Format),
 		implements_protocol(Object, Protocol),
 		print_name(object, Object, ObjectName),
 		print_name(protocol, Protocol, ProtocolName),
-		::arrow(output_file, ObjectName, ProtocolName, implements, Options),
+		Format::arrow(output_file, ObjectName, ProtocolName, implements, Options),
 		remember_referenced_entity(Protocol),
 		fail.
 	output_object_relations(Instance, Options) :-
+		format_object(Format),
 		instantiates_class(Instance, Class),
 		print_name(object, Instance, InstanceName),
 		print_name(object, Class, ClassName),
-		::arrow(output_file, InstanceName, ClassName, instantiates, Options),
+		Format::arrow(output_file, InstanceName, ClassName, instantiates, Options),
 		remember_referenced_entity(Class),
 		fail.
 	output_object_relations(Class, Options) :-
+		format_object(Format),
 		specializes_class(Class, SuperClass),
 		print_name(object, Class, ClassName),
 		print_name(object, SuperClass, SuperClassName),
-		::arrow(output_file, ClassName, SuperClassName, specializes, Options),
+		Format::arrow(output_file, ClassName, SuperClassName, specializes, Options),
 		remember_referenced_entity(SuperClass),
 		fail.
 	output_object_relations(Prototype, Options) :-
+		format_object(Format),
 		extends_object(Prototype, Parent),
 		print_name(object, Prototype, PrototypeName),
 		print_name(object, Parent, ParentName),
-		::arrow(output_file, PrototypeName, ParentName, extends, Options),
+		Format::arrow(output_file, PrototypeName, ParentName, extends, Options),
 		remember_referenced_entity(Parent),
 		fail.
 	output_object_relations(Object, Options) :-
+		format_object(Format),
 		imports_category(Object, Category),
 		print_name(object, Object, ObjectName),
 		print_name(category, Category, CategoryName),
-		::arrow(output_file, ObjectName, CategoryName, imports, Options),
+		Format::arrow(output_file, ObjectName, CategoryName, imports, Options),
 		remember_referenced_entity(Category),
 		fail.
 	output_object_relations(Object, Options) :-
+		format_object(Format),
 		object_property(Object, calls(Other::_, _)),
 		\+ referenced_entity_(Other),
 		print_name(object, Object, ObjectName),
 		print_name(object, Other, OtherName),
-		::arrow(output_file, ObjectName, OtherName, uses, Options),
+		Format::arrow(output_file, ObjectName, OtherName, uses, Options),
 		remember_referenced_entity(Other),
 		fail.
 	output_object_relations(Object, Options) :-
+		format_object(Format),
 		object_property(Object, calls(':'(Module,_), _)),
 		\+ referenced_entity_(Module),
 		print_name(object, Object, ObjectName),
 		print_name(module, Module, ModuleName),
-		::arrow(output_file, ObjectName, ModuleName, use_module, Options),
+		Format::arrow(output_file, ObjectName, ModuleName, use_module, Options),
 		remember_referenced_entity(Module),
 		fail.
 	output_object_relations(_, _).
 
 	output_category_relations(Category, Options) :-
+		format_object(Format),
 		extends_category(Category, ExtendedCategory),
 		print_name(category, Category, CategoryName),
 		print_name(category, ExtendedCategory, ExtendedCategoryName),
-		::arrow(output_file, CategoryName, ExtendedCategoryName, extends, Options),
+		Format::arrow(output_file, CategoryName, ExtendedCategoryName, extends, Options),
 		remember_referenced_entity(ExtendedCategory),
 		fail.
 	output_category_relations(Category, Options) :-
+		format_object(Format),
 		implements_protocol(Category, Protocol),
 		print_name(category, Category, CategoryName),
 		print_name(protocol, Protocol, ProtocolName),
-		::arrow(output_file, CategoryName, ProtocolName, implements, Options),
+		Format::arrow(output_file, CategoryName, ProtocolName, implements, Options),
 		remember_referenced_entity(Protocol),
 		fail.
 	output_category_relations(Category, Options) :-
+		format_object(Format),
 		complements_object(Category, Object),
 		print_name(category, Category, CategoryName),
 		print_name(object, Object, ObjectName),
-		::arrow(output_file, ObjectName, CategoryName, complements, Options),
+		Format::arrow(output_file, ObjectName, CategoryName, complements, Options),
 		remember_referenced_entity(Object),
 		fail.
 	output_category_relations(Category, Options) :-
+		format_object(Format),
 		category_property(Category, calls(Object::_, _)),
 		\+ referenced_entity_(Object),
 		print_name(category, Category, CategoryName),
 		print_name(object, Object, ObjectName),
-		::arrow(output_file, CategoryName, ObjectName, uses, Options),
+		Format::arrow(output_file, CategoryName, ObjectName, uses, Options),
 		remember_referenced_entity(Object),
 		fail.
 	output_category_relations(Category, Options) :-
+		format_object(Format),
 		category_property(Category, calls(':'(Module,_), _)),
 		\+ referenced_entity_(Module),
 		print_name(category, Category, CategoryName),
 		print_name(module, Module, ModuleName),
-		::arrow(output_file, CategoryName, ModuleName, use_module, Options),
+		Format::arrow(output_file, CategoryName, ModuleName, use_module, Options),
 		remember_referenced_entity(Module),
 		fail.
 	output_category_relations(_, _).
@@ -578,6 +539,31 @@
 		;	Entity =.. [_| Names],
 			variables_to_underscore(Names)
 		).
+
+	entity_resources_to_atoms([], []).
+	entity_resources_to_atoms([Predicate| Predicates], [Atom| Atoms]) :-
+		entity_resource_to_atom(Predicate, Atom),
+		entity_resources_to_atoms(Predicates, Atoms).
+
+	entity_resource_to_atom(Functor/Arity, Atom) :-
+		number_codes(Arity, ArityCodes),
+		atom_codes(ArityAtom, ArityCodes),
+		atom_concat(Functor, '/', Atom0),
+		atom_concat(Atom0, ArityAtom, Atom).
+	entity_resource_to_atom(Functor//Arity, Atom) :-
+		number_codes(Arity, ArityCodes),
+		atom_codes(ArityAtom, ArityCodes),
+		atom_concat(Functor, '//', Atom0),
+		atom_concat(Atom0, ArityAtom, Atom).
+	entity_resource_to_atom(op(Priority,Type,Operator), Atom) :-
+		number_codes(Priority, PriorityCodes),
+		atom_codes(PriorityAtom, PriorityCodes),
+		atom_concat('op(', PriorityAtom, Atom0),
+		atom_concat(Atom0, ',', Atom1),
+		atom_concat(Atom1, Type, Atom2),
+		atom_concat(Atom2, ',', Atom3),
+		atom_concat(Atom3, Operator, Atom4),
+		atom_concat(Atom4, ')', Atom).
 
 	variables_to_underscore([]).
 	variables_to_underscore([Arg| Args]) :-
@@ -614,32 +600,13 @@
 	default_options(DefaultOptions) :-
 		merge_options([], DefaultOptions).
 
+	format_object(Object) :-
+		parameter(1, Format),
+		format_object(Format, Object).
+
 	member(Option, [Option| _]) :-
 		!.
 	member(Option, [_| Options]) :-
 		member(Option, Options).
-
-:- end_category.
-
-
-
-:- object(diagram(_Format),
-	implements(forwarding)).
-
-	:- info([
-		version is 2.0,
-		author is 'Paulo Moura',
-		date is 2013/12/05,
-		comment is 'Generates entity diagram files for source files and libraries in the specified format.',
-		argnames is ['Format']
-	]).
-
-	:- public(format_object/2).
-	:- multifile(format_object/2).
-
-	forward(Message) :-
-		parameter(1, Format),
-		format_object(Format, Object),
-		[Object::Message].
 
 :- end_object.
