@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2013/9/18</code>
+            <code>2013/11/29</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -48,9 +48,9 @@
       <div class="public">
         <h2>Public interface</h2>
         <div class="section">
-          <h3 class="code">unit/1</h3>
+          <h3 class="code">cover/1</h3>
           <blockquote>
-            <p class="comment">Units (or entities) being tested.</p>
+            <p class="comment">Declares entities being tested for which code coverage information should be collected.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -59,7 +59,7 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>unit(?entity_identifier) &ndash; zero_or_more</code>
+              <code>cover(?entity_identifier) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
@@ -139,7 +139,7 @@
           </dl>
         </div>
         <div class="section">
-          <h3 class="code">run_tests/1</h3>
+          <h3 class="code">run_tests/2</h3>
           <blockquote>
             <p class="comment">Runs a list of defined tests.</p>
           </blockquote>
@@ -150,11 +150,11 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>run_tests(Tests)</code>
+              <code>run_tests(Tests,File)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>run_tests(+list(callable)) &ndash; one</code>
+              <code>run_tests(+list(callable),+atom) &ndash; one</code>
             </dd>
           </dl>
         </div>
