@@ -234,6 +234,9 @@
 		retractall(included_entity_(_)),
 		retractall(referenced_entity_(_)).
 
+	output_external_entities(Options) :-
+		member(external_entities(false), Options),
+		!.
 	output_external_entities(_Options) :-
 		retract(included_entity_(Entity)),
 		retractall(referenced_entity_(Entity)),
@@ -321,6 +324,16 @@
 		output_category_relations(Category, Options).
 
 	output_protocol_relations(Protocol, Options) :-
+		(	member(inheritance_relations(true), Options) ->
+			output_protocol_inheritance_relations(Protocol, Options)
+		;	true
+		),
+		(	member(cross_reference_relations(true), Options) ->
+			output_protocol_cross_reference_relations(Protocol, Options)
+		;	true
+		).
+
+	output_protocol_inheritance_relations(Protocol, Options) :-
 		parameter(1, Format),
 		extends_protocol(Protocol, ExtendedProtocol),
 		print_name(protocol, Protocol, ProtocolName),
@@ -328,9 +341,39 @@
 		Format::edge(output_file, ProtocolName, ExtendedProtocolName, extends, Options),
 		remember_referenced_entity(ExtendedProtocol),
 		fail.
-	output_protocol_relations(_, _).
+	output_protocol_inheritance_relations(_, _).
+
+	output_protocol_cross_reference_relations(Protocol, Options) :-
+		parameter(1, Format),
+		protocol_property(Protocol, calls(Other::_, _)),
+		\+ referenced_entity_(Other),
+		print_name(protocol, Protocol, ProtocolName),
+		print_name(object, Other, OtherName),
+		Format::edge(output_file, ProtocolName, OtherName, uses, Options),
+		remember_referenced_entity(Other),
+		fail.
+	output_protocol_cross_reference_relations(Protocol, Options) :-
+		parameter(1, Format),
+		protocol_property(Protocol, calls(':'(Module,_), _)),
+		\+ referenced_entity_(Module),
+		print_name(protocol, Protocol, ProtocolName),
+		print_name(module, Module, ModuleName),
+		Format::edge(output_file, ProtocolName, ModuleName, use_module, Options),
+		remember_referenced_entity(Module),
+		fail.
+	output_protocol_cross_reference_relations(_, _).
 
 	output_object_relations(Object, Options) :-
+		(	member(inheritance_relations(true), Options) ->
+			output_object_inheritance_relations(Object, Options)
+		;	true
+		),
+		(	member(cross_reference_relations(true), Options) ->
+			output_object_cross_reference_relations(Object, Options)
+		;	true
+		).
+
+	output_object_inheritance_relations(Object, Options) :-
 		parameter(1, Format),
 		implements_protocol(Object, Protocol),
 		print_name(object, Object, ObjectName),
@@ -338,7 +381,7 @@
 		Format::edge(output_file, ObjectName, ProtocolName, implements, Options),
 		remember_referenced_entity(Protocol),
 		fail.
-	output_object_relations(Instance, Options) :-
+	output_object_inheritance_relations(Instance, Options) :-
 		parameter(1, Format),
 		instantiates_class(Instance, Class),
 		print_name(object, Instance, InstanceName),
@@ -346,7 +389,7 @@
 		Format::edge(output_file, InstanceName, ClassName, instantiates, Options),
 		remember_referenced_entity(Class),
 		fail.
-	output_object_relations(Class, Options) :-
+	output_object_inheritance_relations(Class, Options) :-
 		parameter(1, Format),
 		specializes_class(Class, SuperClass),
 		print_name(object, Class, ClassName),
@@ -354,7 +397,7 @@
 		Format::edge(output_file, ClassName, SuperClassName, specializes, Options),
 		remember_referenced_entity(SuperClass),
 		fail.
-	output_object_relations(Prototype, Options) :-
+	output_object_inheritance_relations(Prototype, Options) :-
 		parameter(1, Format),
 		extends_object(Prototype, Parent),
 		print_name(object, Prototype, PrototypeName),
@@ -362,7 +405,7 @@
 		Format::edge(output_file, PrototypeName, ParentName, extends, Options),
 		remember_referenced_entity(Parent),
 		fail.
-	output_object_relations(Object, Options) :-
+	output_object_inheritance_relations(Object, Options) :-
 		parameter(1, Format),
 		imports_category(Object, Category),
 		print_name(object, Object, ObjectName),
@@ -370,7 +413,9 @@
 		Format::edge(output_file, ObjectName, CategoryName, imports, Options),
 		remember_referenced_entity(Category),
 		fail.
-	output_object_relations(Object, Options) :-
+	output_object_inheritance_relations(_, _).
+
+	output_object_cross_reference_relations(Object, Options) :-
 		parameter(1, Format),
 		object_property(Object, calls(Other::_, _)),
 		\+ referenced_entity_(Other),
@@ -379,7 +424,7 @@
 		Format::edge(output_file, ObjectName, OtherName, uses, Options),
 		remember_referenced_entity(Other),
 		fail.
-	output_object_relations(Object, Options) :-
+	output_object_cross_reference_relations(Object, Options) :-
 		parameter(1, Format),
 		object_property(Object, calls(':'(Module,_), _)),
 		\+ referenced_entity_(Module),
@@ -388,9 +433,19 @@
 		Format::edge(output_file, ObjectName, ModuleName, use_module, Options),
 		remember_referenced_entity(Module),
 		fail.
-	output_object_relations(_, _).
+	output_object_cross_reference_relations(_, _).
 
 	output_category_relations(Category, Options) :-
+		(	member(inheritance_relations(true), Options) ->
+			output_category_inheritance_relations(Category, Options)
+		;	true
+		),
+		(	member(cross_reference_relations(true), Options) ->
+			output_category_cross_reference_relations(Category, Options)
+		;	true
+		).
+
+	output_category_inheritance_relations(Category, Options) :-
 		parameter(1, Format),
 		extends_category(Category, ExtendedCategory),
 		print_name(category, Category, CategoryName),
@@ -398,7 +453,7 @@
 		Format::edge(output_file, CategoryName, ExtendedCategoryName, extends, Options),
 		remember_referenced_entity(ExtendedCategory),
 		fail.
-	output_category_relations(Category, Options) :-
+	output_category_inheritance_relations(Category, Options) :-
 		parameter(1, Format),
 		implements_protocol(Category, Protocol),
 		print_name(category, Category, CategoryName),
@@ -406,7 +461,7 @@
 		Format::edge(output_file, CategoryName, ProtocolName, implements, Options),
 		remember_referenced_entity(Protocol),
 		fail.
-	output_category_relations(Category, Options) :-
+	output_category_inheritance_relations(Category, Options) :-
 		parameter(1, Format),
 		complements_object(Category, Object),
 		print_name(category, Category, CategoryName),
@@ -414,7 +469,9 @@
 		Format::edge(output_file, ObjectName, CategoryName, complements, Options),
 		remember_referenced_entity(Object),
 		fail.
-	output_category_relations(Category, Options) :-
+	output_category_inheritance_relations(_, _).
+
+	output_category_cross_reference_relations(Category, Options) :-
 		parameter(1, Format),
 		category_property(Category, calls(Object::_, _)),
 		\+ referenced_entity_(Object),
@@ -423,7 +480,7 @@
 		Format::edge(output_file, CategoryName, ObjectName, uses, Options),
 		remember_referenced_entity(Object),
 		fail.
-	output_category_relations(Category, Options) :-
+	output_category_cross_reference_relations(Category, Options) :-
 		parameter(1, Format),
 		category_property(Category, calls(':'(Module,_), _)),
 		\+ referenced_entity_(Module),
@@ -432,7 +489,7 @@
 		Format::edge(output_file, CategoryName, ModuleName, use_module, Options),
 		remember_referenced_entity(Module),
 		fail.
-	output_category_relations(_, _).
+	output_category_cross_reference_relations(_, _).
 
 	print_name(object, Object, ObjectName) :-
 		(	atom(Object) ->
@@ -507,7 +564,13 @@
 		(member(date(Date), UserOptions) -> true; Date = true),
 		% by default, print entity public predicates:
 		(member(interface(Interface), UserOptions) -> true; Interface = true),
-		% by default, don't print entity relation labels:
+		% by default, write inheritance links:
+		(member(inheritance_relations(Inheritance), UserOptions) -> true; Inheritance = true),
+		% by default, write cross-referenceing links:
+		(member(cross_reference_relations(CrossReference), UserOptions) -> true; CrossReference = true),
+		% by default, write external entities:
+		(member(external_entities(External), UserOptions) -> true; External = true),
+		% by default, write diagram to the current directory:
 		(member(relation_labels(Relations), UserOptions) -> true; Relations = false),
 		% by default, write diagram to the current directory:
 		(member(output_path(OutputPath), UserOptions) -> true; OutputPath = './'),
@@ -519,6 +582,7 @@
 		(member(exclude_entities(ExcludedEntities), UserOptions) -> true; ExcludedEntities = []),
 		Options = [
 			library_paths(LibraryPaths), file_names(FileNames), date(Date), interface(Interface), relation_labels(Relations),
+			inheritance_relations(Inheritance), cross_reference_relations(CrossReference), external_entities(External),
 			output_path(OutputPath),
 			exclude_files(ExcludedFiles), exclude_paths(ExcludedPaths), exclude_entities(ExcludedEntities)].
 
