@@ -28,7 +28,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/12/09,
+		date is 2013/12/10,
 		comment is 'Predicates for generating file loading dependency diagrams.',
 		argnames is ['Format']
 	]).
@@ -48,12 +48,10 @@
 		os::change_directory(Current).
 
 	output_all_files(Options) :-
-		parameter(1, Format),
 		logtalk::loaded_file(Path),
 		logtalk::loaded_file_property(Path, basename(Basename)),
 		logtalk::loaded_file_property(Path, directory(Directory)),
-		%parameter(1, Format),
-		Format::node(output_file, Path, Basename, [Directory], file, Options),
+		output_file(Path, Basename, Directory, Options),
 		fail.
 	output_all_files(Options) :-
 		parameter(1, Format),
@@ -134,7 +132,10 @@
 
 	output_file(Path, Basename, Directory, Options) :-
 		parameter(1, Format),
-		Format::node(output_file, Path, Basename, [Directory], file, Options),
+		(	member(directory_paths(true), Options) ->
+			Format::node(output_file, Path, Basename, [Directory], file, Options)
+		;	Format::node(output_file, Path, Basename, [], file, Options)
+		),
 		fail.
 	output_file(Path, _, _, Options) :-
 		parameter(1, Format),
@@ -146,13 +147,11 @@
 	merge_options(UserOptions, Options) :-
 		% by default, print library paths:
 		(member(library_paths(LibraryPaths), UserOptions) -> true; LibraryPaths = true),
-		% by default, print file names:
-		(member(file_names(FileNames), UserOptions) -> true; FileNames = true),
+		% by default, print directory paths:
+		(member(directory_paths(FileNames), UserOptions) -> true; FileNames = true),
 		% by default, print current date:
 		(member(date(Date), UserOptions) -> true; Date = true),
 		% by default, print entity public predicates:
-		(member(interface(Interface), UserOptions) -> true; Interface = true),
-		% by default, don't print entity relation labels:
 		(member(relation_labels(Relations), UserOptions) -> true; Relations = false),
 		% by default, write diagram to the current directory:
 		(member(output_path(OutputPath), UserOptions) -> true; os::working_directory(OutputPath)),
@@ -160,12 +159,10 @@
 		(member(exclude_files(ExcludedFiles), UserOptions) -> true; ExcludedFiles = []),
 		% by default, don't exclude any library sub-directories:
 		(member(exclude_paths(ExcludedPaths), UserOptions) -> true; ExcludedPaths = []),
-		% by default, don't exclude any entities:
-		(member(exclude_entities(ExcludedEntities), UserOptions) -> true; ExcludedEntities = []),
 		Options = [
-			library_paths(LibraryPaths), file_names(FileNames), date(Date), interface(Interface), relation_labels(Relations),
+			library_paths(LibraryPaths), directory_paths(FileNames), date(Date), relation_labels(Relations),
 			output_path(OutputPath),
-			exclude_files(ExcludedFiles), exclude_paths(ExcludedPaths), exclude_entities(ExcludedEntities)].
+			exclude_files(ExcludedFiles), exclude_paths(ExcludedPaths)].
 
 	default_options(DefaultOptions) :-
 		merge_options([], DefaultOptions).
