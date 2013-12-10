@@ -36,16 +36,12 @@
 	all(UserOptions) :-
 		parameter(1, Format),
 		merge_options(UserOptions, Options),
-		Format::output_file_name(all_files, OutputFile),
-		member(output_path(OutputPath), Options),
-		os::working_directory(Current),
-		os::change_directory(OutputPath),
-		open(OutputFile, write, Stream, [alias(output_file)]),
+		output_file_path(all_files, Options, Format, OutputPath),
+		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::output_file_header(output_file, Options),
 		output_all_files(Options),
 		Format::output_file_footer(output_file, Options),
-		close(Stream),
-		os::change_directory(Current).
+		close(Stream).
 
 	output_all_files(Options) :-
 		logtalk::loaded_file(Path),
@@ -65,16 +61,12 @@
 		parameter(1, Format),
 		merge_options(UserOptions, Options),
 		logtalk::expand_library_path(Library, TopDirectory),
-		Format::output_file_name(Library, OutputFile),
-		member(output_path(OutputPath), Options),
-		os::working_directory(Current),
-		os::change_directory(OutputPath),
-		open(OutputFile, write, Stream, [alias(output_file)]),
+		output_file_path(Library, Options, Format, OutputPath),
+		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::output_file_header(output_file, Options),
 		output_rlibrary(TopDirectory, Options),
 		Format::output_file_footer(output_file, Options),
-		close(Stream),
-		os::change_directory(Current).
+		close(Stream).
 
 	rlibrary(Library) :-
 		rlibrary(Library, []).
@@ -98,16 +90,12 @@
 		parameter(1, Format),
 		merge_options(UserOptions, Options),
 		logtalk::expand_library_path(Library, Path),
-		Format::output_file_name(Library, OutputFile),
-		member(output_path(OutputPath), Options),
-		os::working_directory(Current),
-		os::change_directory(OutputPath),
-		open(OutputFile, write, Stream, [alias(output_file)]),
+		output_file_path(Library, Options, Format, OutputPath),
+		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::output_file_header(output_file, Options),
 		output_library(Path, Path, Options),
 		Format::output_file_footer(output_file, Options),
-		close(Stream),
-		os::change_directory(Current).
+		close(Stream).
 
 	library(Library) :-
 		library(Library, []).
@@ -154,7 +142,7 @@
 		% by default, print entity public predicates:
 		(member(relation_labels(Relations), UserOptions) -> true; Relations = false),
 		% by default, write diagram to the current directory:
-		(member(output_path(OutputPath), UserOptions) -> true; os::working_directory(OutputPath)),
+		(member(output_path(OutputPath), UserOptions) -> true; OutputPath = './'),
 		% by default, don't exclude any source files:
 		(member(exclude_files(ExcludedFiles), UserOptions) -> true; ExcludedFiles = []),
 		% by default, don't exclude any library sub-directories:
@@ -164,8 +152,9 @@
 			output_path(OutputPath),
 			exclude_files(ExcludedFiles), exclude_paths(ExcludedPaths)].
 
-	default_options(DefaultOptions) :-
-		merge_options([], DefaultOptions).
+	output_file_path(Name0, Options, Format, OutputPath) :-
+		atom_concat(Name0, '_file_diagram', Name),
+		^^output_file_path(Name, Options, Format, OutputPath).
 
 	member(Option, [Option| _]) :-
 		!.

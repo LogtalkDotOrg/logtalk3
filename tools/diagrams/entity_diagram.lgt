@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/12/09,
+		date is 2013/12/10,
 		comment is 'Predicates for generating entity diagrams.',
 		argnames is ['Format']
 	]).
@@ -75,18 +75,14 @@
 		parameter(1, Format),
 		merge_options(UserOptions, Options),
 		logtalk::expand_library_path(Library, TopDirectory),
-		Format::output_file_name(Library, OutputFile),
-		member(output_path(OutputPath), Options),
-		os::working_directory(Current),
-		os::change_directory(OutputPath),
-		open(OutputFile, write, Stream, [alias(output_file)]),
+		output_file_path(Library, Options, Format, OutputPath),
+		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::output_file_header(output_file, Options),
 		reset_external_entities,
 		output_rlibrary(TopDirectory, Options),
 		output_external_entities(Options),
 		Format::output_file_footer(output_file, Options),
-		close(Stream),
-		os::change_directory(Current).
+		close(Stream).
 
 	output_rlibrary(TopDirectory, Options) :-
 		parameter(1, Format),
@@ -107,18 +103,14 @@
 		parameter(1, Format),
 		merge_options(UserOptions, Options),
 		logtalk::expand_library_path(Library, Path),
-		Format::output_file_name(Library, OutputFile),
-		member(output_path(OutputPath), Options),
-		os::working_directory(Current),
-		os::change_directory(OutputPath),
-		open(OutputFile, write, Stream, [alias(output_file)]),
+		output_file_path(Library, Options, Format, OutputPath),
+		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::output_file_header(output_file, Options),
 		reset_external_entities,
 		output_library(Path, Path, Options),
 		output_external_entities(Options),
 		Format::output_file_footer(output_file, Options),
-		close(Stream),
-		os::change_directory(Current).
+		close(Stream).
 
 	output_library(RelativePath, Path, Options) :-
 		parameter(1, Format),
@@ -144,17 +136,13 @@
 	files(Project, Paths, UserOptions) :-
 		parameter(1, Format),
 		merge_options(UserOptions, Options),
-		Format::output_file_name(Project, OutputFile),
-		member(output_path(OutputPath), Options),
-		os::working_directory(Current),
-		os::change_directory(OutputPath),
-		open(OutputFile, write, Stream, [alias(output_file)]),
+		output_file_path(Project, Options, Format, OutputPath),
+		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::output_file_header(output_file, Options),
 		reset_external_entities,
 		output_files(Paths, Options),
 		Format::output_file_footer(output_file, Options),
-		close(Stream),
-		os::change_directory(Current).
+		close(Stream).
 
 	output_files([], _Options).
 	output_files([Path| Paths], Options) :-
@@ -173,18 +161,14 @@
 			true
 		;	atom_concat(Source, '.logtalk', Basename)
 		),
-		Format::output_file_name(Source, OutputFile),
-		member(output_path(OutputPath), Options),
-		os::working_directory(Current),
-		os::change_directory(OutputPath),
-		open(OutputFile, write, Stream, [alias(output_file)]),
+		output_file_path(all_files, Options, Format, OutputPath),
+		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::output_file_header(output_file, Options),
 		reset_external_entities,
 		output_file(Basename, Directory, Options),
 		output_external_entities(Options),
 		Format::output_file_footer(output_file, Options),
-		close(Stream),
-		os::change_directory(Current).
+		close(Stream).
 
 	file(Source) :-
 		file(Source, []).
@@ -526,7 +510,7 @@
 		% by default, don't print entity relation labels:
 		(member(relation_labels(Relations), UserOptions) -> true; Relations = false),
 		% by default, write diagram to the current directory:
-		(member(output_path(OutputPath), UserOptions) -> true; os::working_directory(OutputPath)),
+		(member(output_path(OutputPath), UserOptions) -> true; OutputPath = './'),
 		% by default, don't exclude any source files:
 		(member(exclude_files(ExcludedFiles), UserOptions) -> true; ExcludedFiles = []),
 		% by default, don't exclude any library sub-directories:
@@ -537,6 +521,10 @@
 			library_paths(LibraryPaths), file_names(FileNames), date(Date), interface(Interface), relation_labels(Relations),
 			output_path(OutputPath),
 			exclude_files(ExcludedFiles), exclude_paths(ExcludedPaths), exclude_entities(ExcludedEntities)].
+
+	output_file_path(Name0, Options, Format, OutputPath) :-
+		atom_concat(Name0, '_entity_diagram', Name),
+		^^output_file_path(Name, Options, Format, OutputPath).
 
 	member(Option, [Option| _]) :-
 		!.

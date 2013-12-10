@@ -23,12 +23,7 @@
 
 
 :- initialization((
-	logtalk_load(library(types_loader)),
 	logtalk_load([cc(osp), cc(os)], [optimize(on)]),
-	logtalk_load([
-			diagram, entity_diagram, file_diagram,
-			graphp, dot_graph
-		],
-		[optimize(on)]
-	)
+	logtalk_load([diagram, entity_diagram, file_diagram], [optimize(on)]),
+	logtalk_load([graphp, dot_graph], [optimize(on)])
 )).

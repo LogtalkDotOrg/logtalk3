@@ -120,6 +120,22 @@
 		atom_concat(Source4, '.logtalk', Basename),
 		\+ member(Source4, [ExcludedFile| ExcludedFiles]).
 
+	:- protected(output_file_path/4).
+	:- mode(output_file_path(+atom, +list(atom), +object_identifier, -atom), one).
+	:- info(output_file_path/4, [
+		comment is 'Returns the output file path.',
+		argnames is ['Name', 'Options', 'Format', 'Path']
+	]).
+
+	output_file_path(Name, Options, Format, Path) :-
+		Format::output_file_name(Name, Basename),
+		member(output_path(Directory0), Options),
+		(	sub_atom(Directory0, _, _, 0, '/') ->
+			Directory = Directory0
+		;	atom_concat(Directory0, '/', Directory)
+		),
+		atom_concat(Directory, Basename, Path).
+
 	member(Option, [Option| _]) :-
 		!.
 	member(Option, [_| Options]) :-
