@@ -22,42 +22,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(diagram(_Format)).
+:- object(entity_diagram(_Format),
+	extends(diagram)).
 
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2013/12/09,
-		comment is 'Generates entity diagram files for source files and libraries in the specified format.',
+		comment is 'Predicates for generating entity diagrams.',
 		argnames is ['Format']
-	]).
-
-	:- public(rlibrary/2).
-	:- mode(rlibrary(+atom, +list), one).
-	:- info(rlibrary/2, [
-		comment is 'Creates a diagram for all entities in a library its sub-libraries using the specified options.',
-		argnames is ['Library', 'Options']
-	]).
-
-	:- public(rlibrary/1).
-	:- mode(rlibrary(+atom), one).
-	:- info(rlibrary/1, [
-		comment is 'Creates a diagram for all entities in a library and its sub-libraries using default options.',
-		argnames is ['Library']
-	]).
-
-	:- public(library/2).
-	:- mode(library(+atom, +list), one).
-	:- info(library/2, [
-		comment is 'Creates a diagram for all entities in a library using the specified options.',
-		argnames is ['Library', 'Options']
-	]).
-
-	:- public(library/1).
-	:- mode(library(+atom), one).
-	:- info(library/1, [
-		comment is 'Creates a diagram for all entities in a library using default options.',
-		argnames is ['Library']
 	]).
 
 	:- public(files/3).
@@ -88,29 +61,18 @@
 		argnames is ['File']
 	]).
 
-	:- public(default_options/1).
-	:- mode(default_options(-list), one).
-	:- info(default_options/1, [
-		comment is 'Returns a list of the default options used when generating a diagram.',
-		argnames is ['DefaultOptions']
-	]).
-
-	:- public(format_object/2).
-	:- multifile(format_object/2).
-	:- mode(format_object(?atom, ?object_identifier), zero_or_more).
-	:- info(format_object/2, [
-		comment is '.',
-		argnames is ['Format', 'Object']
-	]).
-
 	:- private(included_entity_/1).
 	:- dynamic(included_entity_/1).
 
 	:- private(referenced_entity_/1).
 	:- dynamic(referenced_entity_/1).
 
+	all(UserOptions) :-
+		findall(File, logtalk::loaded_file(File), Files),
+		files(all, Files, UserOptions).
+
 	rlibrary(Library, UserOptions) :-
-		format_object(Format),
+		parameter(1, Format),
 		merge_options(UserOptions, Options),
 		logtalk::expand_library_path(Library, TopDirectory),
 		Format::output_file_name(Library, OutputFile),
@@ -126,11 +88,8 @@
 		close(Stream),
 		os::change_directory(Current).
 
-	rlibrary(Library) :-
-		rlibrary(Library, []).
-
 	output_rlibrary(TopDirectory, Options) :-
-		format_object(Format),
+		parameter(1, Format),
 		Format::graph_header(output_file, TopDirectory, TopDirectory, [bgcolor(snow3)| Options]),
 		member(exclude_paths(ExcludedPaths), Options),
 		forall(
@@ -145,7 +104,7 @@
 		\+ member(RelativePath, ExcludedPaths).
 
 	library(Library, UserOptions) :-
-		format_object(Format),
+		parameter(1, Format),
 		merge_options(UserOptions, Options),
 		logtalk::expand_library_path(Library, Path),
 		Format::output_file_name(Library, OutputFile),
@@ -161,11 +120,8 @@
 		close(Stream),
 		os::change_directory(Current).
 
-	library(Library) :-
-		library(Library, []).
-
 	output_library(RelativePath, Path, Options) :-
-		format_object(Format),
+		parameter(1, Format),
 		(	member(library_paths(true), Options) ->
 			Format::graph_header(output_file, RelativePath, RelativePath, [bgcolor(snow2)| Options]),
 			output_library_files(Path, Options),
@@ -177,31 +133,16 @@
 		member(exclude_files(ExcludedFiles), Options),
 		logtalk::loaded_file_property(Path, directory(Directory)),
 		logtalk::loaded_file_property(Path, basename(Basename)),
-		not_excluded_file(ExcludedFiles, Path, Basename),
+		::not_excluded_file(ExcludedFiles, Path, Basename),
 		output_file(Basename, Directory, Options),
 		fail.
 	output_library_files(_, _).
-
-	not_excluded_file([], _, _).
-	not_excluded_file([ExcludedFile| ExcludedFiles], Path, Basename) :-
-		% files in the exclusion list may be given by full path or by basename
-		\+ member(Path, [ExcludedFile| ExcludedFiles]),
-		\+ member(Basename, [ExcludedFile| ExcludedFiles]),
-		% files in the exclusion list may be given with or without extension
-		atom_concat(Source1, '.lgt', Path),
-		\+ member(Source1, [ExcludedFile| ExcludedFiles]),
-		atom_concat(Source2, '.logtalk', Path),
-		\+ member(Source2, [ExcludedFile| ExcludedFiles]),
-		atom_concat(Source3, '.lgt', Basename),
-		\+ member(Source3, [ExcludedFile| ExcludedFiles]),
-		atom_concat(Source4, '.logtalk', Basename),
-		\+ member(Source4, [ExcludedFile| ExcludedFiles]).
 
 	files(Project, Paths) :-
 		files(Project, Paths, []).
 
 	files(Project, Paths, UserOptions) :-
-		format_object(Format),
+		parameter(1, Format),
 		merge_options(UserOptions, Options),
 		Format::output_file_name(Project, OutputFile),
 		member(output_path(OutputPath), Options),
@@ -220,12 +161,12 @@
 		member(exclude_files(ExcludedFiles), Options),
 		logtalk::loaded_file_property(Path, directory(Directory)),
 		logtalk::loaded_file_property(Path, basename(Basename)),
-		not_excluded_file(ExcludedFiles, Path, Basename),
+		::not_excluded_file(ExcludedFiles, Path, Basename),
 		process(Basename, Directory, Options),
 		output_files(Paths, Options).
 
 	file(Source, UserOptions) :-
-		format_object(Format),
+		parameter(1, Format),
 		locate_file(Source, Basename, Directory),
 		merge_options(UserOptions, Options),
 		(	atom_concat(Source, '.lgt', Basename) ->
@@ -288,7 +229,7 @@
 		).
 
 	output_file(Basename, Directory, Options) :-
-		format_object(Format),
+		parameter(1, Format),
 		(	member(file_names(true), Options) ->
 			% use the full path for the cluster identifier as we
 			% can have more than file with the same basename
@@ -314,7 +255,7 @@
 		retractall(referenced_entity_(Entity)),
 		fail.
 	output_external_entities(Options) :-
-		format_object(Format),
+		parameter(1, Format),
 		Format::graph_header(output_file, other, '(other referenced entities)', [bgcolor(white)| Options]),
 		retract(referenced_entity_(Entity)),
 		(	current_object(Entity) ->
@@ -332,7 +273,7 @@
 		),
 		fail.
 	output_external_entities(Options) :-
-		format_object(Format),
+		parameter(1, Format),
 		Format::graph_footer(output_file, other, '(other referenced entities)', [bgcolor(white)| Options]).
 
 	process(Basename, Directory, Options) :-
@@ -359,7 +300,7 @@
 	process(_, _, _).
 
 	output_protocol(Protocol, Options) :-
-		format_object(Format),
+		parameter(1, Format),
 		print_name(protocol, Protocol, Name),
 		(	member(interface(true), Options) ->
 			protocol_property(Protocol, public(Predicates)),
@@ -370,7 +311,7 @@
 		output_protocol_relations(Protocol, Options).
 
 	output_object(Object, Options) :-
-		format_object(Format),
+		parameter(1, Format),
 		print_name(object, Object, Name),
 		(	member(interface(true), Options) ->
 			object_property(Object, public(Predicates)),
@@ -385,7 +326,7 @@
 		output_object_relations(Object, Options).
 
 	output_category(Category, Options) :-
-		format_object(Format),
+		parameter(1, Format),
 		print_name(category, Category, Name),
 		(	member(interface(true), Options) ->
 			category_property(Category, public(Predicates)),
@@ -396,7 +337,7 @@
 		output_category_relations(Category, Options).
 
 	output_protocol_relations(Protocol, Options) :-
-		format_object(Format),
+		parameter(1, Format),
 		extends_protocol(Protocol, ExtendedProtocol),
 		print_name(protocol, Protocol, ProtocolName),
 		print_name(protocol, ExtendedProtocol, ExtendedProtocolName),
@@ -406,7 +347,7 @@
 	output_protocol_relations(_, _).
 
 	output_object_relations(Object, Options) :-
-		format_object(Format),
+		parameter(1, Format),
 		implements_protocol(Object, Protocol),
 		print_name(object, Object, ObjectName),
 		print_name(protocol, Protocol, ProtocolName),
@@ -414,7 +355,7 @@
 		remember_referenced_entity(Protocol),
 		fail.
 	output_object_relations(Instance, Options) :-
-		format_object(Format),
+		parameter(1, Format),
 		instantiates_class(Instance, Class),
 		print_name(object, Instance, InstanceName),
 		print_name(object, Class, ClassName),
@@ -422,7 +363,7 @@
 		remember_referenced_entity(Class),
 		fail.
 	output_object_relations(Class, Options) :-
-		format_object(Format),
+		parameter(1, Format),
 		specializes_class(Class, SuperClass),
 		print_name(object, Class, ClassName),
 		print_name(object, SuperClass, SuperClassName),
@@ -430,7 +371,7 @@
 		remember_referenced_entity(SuperClass),
 		fail.
 	output_object_relations(Prototype, Options) :-
-		format_object(Format),
+		parameter(1, Format),
 		extends_object(Prototype, Parent),
 		print_name(object, Prototype, PrototypeName),
 		print_name(object, Parent, ParentName),
@@ -438,7 +379,7 @@
 		remember_referenced_entity(Parent),
 		fail.
 	output_object_relations(Object, Options) :-
-		format_object(Format),
+		parameter(1, Format),
 		imports_category(Object, Category),
 		print_name(object, Object, ObjectName),
 		print_name(category, Category, CategoryName),
@@ -446,7 +387,7 @@
 		remember_referenced_entity(Category),
 		fail.
 	output_object_relations(Object, Options) :-
-		format_object(Format),
+		parameter(1, Format),
 		object_property(Object, calls(Other::_, _)),
 		\+ referenced_entity_(Other),
 		print_name(object, Object, ObjectName),
@@ -455,7 +396,7 @@
 		remember_referenced_entity(Other),
 		fail.
 	output_object_relations(Object, Options) :-
-		format_object(Format),
+		parameter(1, Format),
 		object_property(Object, calls(':'(Module,_), _)),
 		\+ referenced_entity_(Module),
 		print_name(object, Object, ObjectName),
@@ -466,7 +407,7 @@
 	output_object_relations(_, _).
 
 	output_category_relations(Category, Options) :-
-		format_object(Format),
+		parameter(1, Format),
 		extends_category(Category, ExtendedCategory),
 		print_name(category, Category, CategoryName),
 		print_name(category, ExtendedCategory, ExtendedCategoryName),
@@ -474,7 +415,7 @@
 		remember_referenced_entity(ExtendedCategory),
 		fail.
 	output_category_relations(Category, Options) :-
-		format_object(Format),
+		parameter(1, Format),
 		implements_protocol(Category, Protocol),
 		print_name(category, Category, CategoryName),
 		print_name(protocol, Protocol, ProtocolName),
@@ -482,7 +423,7 @@
 		remember_referenced_entity(Protocol),
 		fail.
 	output_category_relations(Category, Options) :-
-		format_object(Format),
+		parameter(1, Format),
 		complements_object(Category, Object),
 		print_name(category, Category, CategoryName),
 		print_name(object, Object, ObjectName),
@@ -490,7 +431,7 @@
 		remember_referenced_entity(Object),
 		fail.
 	output_category_relations(Category, Options) :-
-		format_object(Format),
+		parameter(1, Format),
 		category_property(Category, calls(Object::_, _)),
 		\+ referenced_entity_(Object),
 		print_name(category, Category, CategoryName),
@@ -499,7 +440,7 @@
 		remember_referenced_entity(Object),
 		fail.
 	output_category_relations(Category, Options) :-
-		format_object(Format),
+		parameter(1, Format),
 		category_property(Category, calls(':'(Module,_), _)),
 		\+ referenced_entity_(Module),
 		print_name(category, Category, CategoryName),
@@ -596,13 +537,6 @@
 			library_paths(LibraryPaths), file_names(FileNames), date(Date), interface(Interface), relation_labels(Relations),
 			output_path(OutputPath),
 			exclude_files(ExcludedFiles), exclude_paths(ExcludedPaths), exclude_entities(ExcludedEntities)].
-
-	default_options(DefaultOptions) :-
-		merge_options([], DefaultOptions).
-
-	format_object(Object) :-
-		parameter(1, Format),
-		format_object(Format, Object).
 
 	member(Option, [Option| _]) :-
 		!.

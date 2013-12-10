@@ -32,10 +32,7 @@
 		comment is 'Generates entity diagram GXL files for source files and libraries.'
 	]).
 
-	:- multifile(diagram(_)::format_object/2).
-	diagram(_)::format_object(gxl, gxl_graph).
-
-	output_file_name(Name, OutputFile) :-
-		atom_concat(Name, '.gxl', OutputFile).
+	output_file_name(Name, File) :-
+		atom_concat(Name, '.gxl', File).
 
 :- end_object.

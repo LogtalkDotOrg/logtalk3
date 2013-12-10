@@ -32,11 +32,8 @@
 		comment is 'Generates entity diagram GraphML files for source files and libraries.'
 	]).
 
-	:- multifile(diagram(_)::format_object/2).
-	diagram(_)::format_object(graphml, graphml_graph).
-
-	output_file_name(Name, OutputFile) :-
-		atom_concat(Name, '.graphml', OutputFile).
+	output_file_name(Name, File) :-
+		atom_concat(Name, '.graphml', File).
 
 	output_file_header(Stream, _Options) :-
 		write(Stream, '<?xml version="1.0" encoding="UTF-8"?>\n'),
