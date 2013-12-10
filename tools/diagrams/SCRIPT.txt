@@ -27,9 +27,9 @@ ________________________________________________________________________
 ...
 
 
-% check the default list of options used when generating a diagram:
+% check the default list of options used when generating a entity diagram:
 
-| ?- diagram(dot)::default_options(DefaultOptions).
+| ?- entity_diagram(dot_graph)::default_options(DefaultOptions).
 DefaultOptions = ...
 yes
 
@@ -41,7 +41,7 @@ yes
 
 % generating an entity diagram for a source file using default options:
 
-| ?- diagram(dot)::file(points).
+| ?- entity_diagram(dot_graph)::file(points).
 yes
 
 
@@ -50,16 +50,17 @@ yes
 | ?- logtalk_load(searching(loader)).
 ...
 
-% generating an entity diagram for all source files in a library using default options:
+% generating a file loading dependencies diagram for all source files in a
+% library using default options:
 
-| ?- diagram(dot)::library(searching).
+| ?- file_diagram(dot_graph)::library(searching).
 yes
 
 
-% it's also possible to generate an entity diagram for a library and
-% all its sub-libraries using the rlibrary/1 method instead of the
-% library/1 method
+% it's also possible to generate diagrams for a library and all its
+% sub-libraries using the rlibrary/1 method instead of the library/1
+% method
 
 
-% the methods rlibrary/2, library/2, and file/2 allows the specification
-% of the options to be used when generating a diagram
+% the methods all/1, rlibrary/2, library/2, and file/2 allows the
+% specification of the options to be used when generating a diagram

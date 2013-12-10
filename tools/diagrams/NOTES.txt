@@ -21,23 +21,27 @@ Public License 3. Consult the `LICENSE.txt` file for details.
 ________________________________________________________________________
 
 
-To load this example and for sample queries, please see the `SCRIPT.txt`
+To load this tool and for sample queries, please see the `SCRIPT.txt`
 file.
 
-This example illustrates how to generate entity diagrams for source files
-and for libraries of source files using the Logtalk reflection features to
-collect the relevant information and the DOT language for representing the
-diagrams. Limitations in both the DOT language and UML forces the invention
-of a modeling language that can represent all kinds of Logtalk entities and
-entity relations. Currently we use the following DOT shapes (entities) and
-arrows (entity relations):
+This tool generates entity diagrams and file loading dependencies diagrams for
+source files and for libraries of source files using the Logtalk reflection
+features to collect the relevant information and a graph language (e.g. DOT)
+for representing the diagrams.
 
-- object (classes, instances, and prototypes)  
+Limitations in both the graph language and UML forces the invention of a
+modeling language that can represent all kinds of Logtalk entities and
+entity relations. Currently we use the following DOT shapes (entities)
+and arrows (entity relations):
+
+- objects (classes, instances, and prototypes)  
 	box (rectangle)
 - protocols  
 	note (rectangle with folded right-upper corners)
 - categories  
 	component (rectangle with two small rectangles intercepting the left side)
+- modules  
+	box (rectangle)
 
 - specialization relation  
 	onormal (arrow ending with a white triangle)
@@ -51,8 +55,12 @@ arrows (entity relations):
 	box (arrow ending with a black square)
 - complements relation  
 	obox (arrow ending with a white square)
-- uses and use_module relations
+
+- uses and use_module relations  
 	none (line)
+
+- file loading relations  
+	normal (arrow ending with a black triangle)
 
 The entities that are not part of the files or libraries for which you are
 generating a diagram use a dashed border.
@@ -84,7 +92,7 @@ the diagram in page-sized pieces or, preferably, use software capable of
 tiled printing (e.g. Adobe Reader).
 
 A set of options are available to specify the details to include in the
-generated diagrams:
+generated diagrams. For entity diagrams the options are:
 
 - `date(Boolean)`  
 	print/omit current date (`true` or `false`; default is `true`)
@@ -104,6 +112,23 @@ generated diagrams:
 	list of relative paths to exclude (default is `[]`)
 - `exclude_entities(Entities)`  
 	list of entities to exclude (default is `[]`)
+
+For file loading dependencies diagrams the options are:
+
+- `date(Boolean)`  
+	print/omit current date (`true` or `false`; default is `true`)
+- `library_paths(Boolean)`  
+	print/omit library paths (`true` or `false`; default is `true`)
+- `directory_paths(Boolean)`  
+	print/omit file directory paths (`true` or `false`; default is `true`)
+- `relation_labels(Boolean)`  
+	print/omit entity relation labels (`true` or `false`; default is `false`)
+- `output_path(OutputPath)`  
+	directory for the .dot files (an atom; default is `.`)
+- `exclude_files(Files)`  
+	list of source files to exclude (default is `[]`)
+- `exclude_paths(Paths)`  
+	list of relative paths to exclude (default is `[]`)
 
 Be sure to set the `source_data` flag `on` before compiling the libraries
 or files for which you want to generated diagrams.

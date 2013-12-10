@@ -118,11 +118,13 @@
 	entity_shape(instance_or_class, box, solid).
 	entity_shape(protocol, note, solid).
 	entity_shape(category, component, solid).
+	entity_shape(module, box, solid).
 
 	entity_shape(external_prototype, box, dashed).
 	entity_shape(external_instance_or_class, box, dashed).
 	entity_shape(external_protocol, note, dashed).
 	entity_shape(external_category, component, dashed).
+	entity_shape(external_module, box, solid).
 
 	entity_shape(file, box, solid).
 

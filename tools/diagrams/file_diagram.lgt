@@ -136,7 +136,7 @@
 		% by default, print library paths:
 		(member(library_paths(LibraryPaths), UserOptions) -> true; LibraryPaths = true),
 		% by default, print directory paths:
-		(member(directory_paths(FileNames), UserOptions) -> true; FileNames = true),
+		(member(directory_paths(DirectoryPaths), UserOptions) -> true; DirectoryPaths = true),
 		% by default, print current date:
 		(member(date(Date), UserOptions) -> true; Date = true),
 		% by default, print entity public predicates:
@@ -148,7 +148,7 @@
 		% by default, don't exclude any library sub-directories:
 		(member(exclude_paths(ExcludedPaths), UserOptions) -> true; ExcludedPaths = []),
 		Options = [
-			library_paths(LibraryPaths), directory_paths(FileNames), date(Date), relation_labels(Relations),
+			library_paths(LibraryPaths), directory_paths(DirectoryPaths), date(Date), relation_labels(Relations),
 			output_path(OutputPath),
 			exclude_files(ExcludedFiles), exclude_paths(ExcludedPaths)].
 

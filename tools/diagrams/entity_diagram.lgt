@@ -234,9 +234,6 @@
 		retractall(included_entity_(_)),
 		retractall(referenced_entity_(_)).
 
-	output_external_entities(Options) :-
-		member(external_entities(false), Options),
-		!.
 	output_external_entities(_Options) :-
 		retract(included_entity_(Entity)),
 		retractall(referenced_entity_(Entity)),
@@ -568,8 +565,6 @@
 		(member(inheritance_relations(Inheritance), UserOptions) -> true; Inheritance = true),
 		% by default, write cross-referenceing links:
 		(member(cross_reference_relations(CrossReference), UserOptions) -> true; CrossReference = true),
-		% by default, write external entities:
-		(member(external_entities(External), UserOptions) -> true; External = true),
 		% by default, write diagram to the current directory:
 		(member(relation_labels(Relations), UserOptions) -> true; Relations = false),
 		% by default, write diagram to the current directory:
@@ -582,7 +577,7 @@
 		(member(exclude_entities(ExcludedEntities), UserOptions) -> true; ExcludedEntities = []),
 		Options = [
 			library_paths(LibraryPaths), file_names(FileNames), date(Date), interface(Interface), relation_labels(Relations),
-			inheritance_relations(Inheritance), cross_reference_relations(CrossReference), external_entities(External),
+			inheritance_relations(Inheritance), cross_reference_relations(CrossReference),
 			output_path(OutputPath),
 			exclude_files(ExcludedFiles), exclude_paths(ExcludedPaths), exclude_entities(ExcludedEntities)].
 
