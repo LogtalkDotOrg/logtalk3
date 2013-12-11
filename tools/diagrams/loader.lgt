@@ -23,6 +23,7 @@
 
 
 :- initialization((
+	logtalk_load(library(pairs), [optimize(on)]),
 	logtalk_load([cc(osp), cc(os)], [optimize(on)]),
 	logtalk_load([diagram, entity_diagram, file_diagram], [optimize(on)]),
 	logtalk_load([graphp, dot_graph], [optimize(on)])
