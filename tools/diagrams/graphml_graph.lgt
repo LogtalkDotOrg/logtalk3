@@ -45,4 +45,21 @@
 	output_file_footer(Stream, _Options) :-
 		write(Stream, '</graphml>\n').
 
+	graph_header(Stream, Identifier, _Label, _Options) :-
+		write(Stream, '<graph id="'
+		write(Stream, Identifier),
+		write(Stream, '" edgedefault="undirected">\n').
+
+	graph_footer(Stream, _Id, _Label, _Options) :-
+		write(Stream, '  </graph>\n\n').
+
+	edge(Stream, Start, End, Label, Options) :-
+		write(Stream, '    <edge id="'),
+		write(Stream, Identifier),
+		write(Stream, '" source="'),
+		write(Stream, Start),
+		write(Stream, '" target="'),
+		write(Stream, End),
+		write(Stream, '"/>\n').
+
 :- end_object.

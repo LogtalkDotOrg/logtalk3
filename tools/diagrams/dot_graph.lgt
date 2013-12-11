@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/12/09,
+		date is 2013/12/11,
 		comment is 'Generates entity diagram DOT files for source files and libraries.'
 	]).
 
@@ -156,14 +156,16 @@
 	label_edge(loads, normal).
 
 	lines_to_contents([], '').
-	lines_to_contents([Line| Lines], Atom) :-
-		lines_to_contents([Line| Lines], ' <BR/>', Atom).
+	lines_to_contents([Line| Lines], Contents) :-
+		lines_to_contents([Line| Lines], ' <BR/>', Contents).
 
-	lines_to_contents([], Atom, Atom).
-	lines_to_contents([Line| Lines], Atom0, Atom) :-
-		atom_concat(Atom0, '<BR/>', Atom1),
-		atom_concat(Atom1, Line, Atom2),
-		lines_to_contents(Lines, Atom2, Atom).
+	lines_to_contents([], Contents, Contents).
+	lines_to_contents([Line| Lines], Contents0, Contents) :-
+		atom_concat('<![CDATA[', Line, WrappedLine0),
+		atom_concat(WrappedLine0, ']]>', WrappedLine),
+		atom_concat(Contents0, '<BR/>', Contents1),
+		atom_concat(Contents1, WrappedLine, Contents2),
+		lines_to_contents(Lines, Contents2, Contents).
 
 	member(Option, [Option| _]) :-
 		!.
