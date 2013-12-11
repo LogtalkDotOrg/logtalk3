@@ -22,105 +22,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(file_diagram(_Format),
-	extends(diagram)).
+:- object(file_diagram(Format),
+	extends(diagram(Format))).
 
 	:- info([
-		version is 1.0,
+		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2013/12/11,
 		comment is 'Predicates for generating file loading dependency diagrams.',
 		argnames is ['Format']
 	]).
-
-	all(UserOptions) :-
-		parameter(1, Format),
-		merge_options(UserOptions, Options),
-		output_file_path(all_files, Options, Format, OutputPath),
-		open(OutputPath, write, Stream, [alias(output_file)]),
-		Format::output_file_header(output_file, Options),
-		output_all_files(Options),
-		Format::output_file_footer(output_file, Options),
-		close(Stream).
-
-	output_all_files(Options) :-
-		logtalk::loaded_file(Path),
-		logtalk::loaded_file_property(Path, basename(Basename)),
-		logtalk::loaded_file_property(Path, directory(Directory)),
-		output_file(Path, Basename, Directory, Options),
-		fail.
-	output_all_files(Options) :-
-		parameter(1, Format),
-		logtalk::loaded_file(Path),
-		logtalk::loaded_file_property(Path, parent(Parent)),
-		Format::edge(output_file, Parent, Path, loads, Options),
-		fail.
-	output_all_files(_).
-
-	rlibrary(Library, UserOptions) :-
-		parameter(1, Format),
-		merge_options(UserOptions, Options),
-		logtalk::expand_library_path(Library, TopDirectory),
-		output_file_path(Library, Options, Format, OutputPath),
-		open(OutputPath, write, Stream, [alias(output_file)]),
-		Format::output_file_header(output_file, Options),
-		output_rlibrary(TopDirectory, Options),
-		Format::output_file_footer(output_file, Options),
-		close(Stream).
-
-	output_rlibrary(TopDirectory, Options) :-
-		parameter(1, Format),
-		Format::graph_header(output_file, TopDirectory, TopDirectory, [bgcolor(snow3)| Options]),
-		member(exclude_paths(ExcludedPaths), Options),
-		forall(
-			sub_library(TopDirectory, ExcludedPaths, RelativePath, Path),
-			output_library(RelativePath, Path, Options)),
-		Format::graph_footer(output_file, TopDirectory, TopDirectory, [bgcolor(snow3)| Options]).
-
-	sub_library(TopDirectory, ExcludedPaths, RelativePath, Path) :-
-		logtalk_library_path(Library, _),
-		logtalk::expand_library_path(Library, Path),
-		atom_concat(TopDirectory, RelativePath, Path),
-		\+ member(RelativePath, ExcludedPaths).
-
-	library(Library, UserOptions) :-
-		parameter(1, Format),
-		merge_options(UserOptions, Options),
-		logtalk::expand_library_path(Library, Path),
-		output_file_path(Library, Options, Format, OutputPath),
-		open(OutputPath, write, Stream, [alias(output_file)]),
-		Format::output_file_header(output_file, Options),
-		output_library(Path, Path, Options),
-		Format::output_file_footer(output_file, Options),
-		close(Stream).
-
-	output_library(RelativePath, Path, Options) :-
-		parameter(1, Format),
-		(	member(library_paths(true), Options) ->
-			Format::graph_header(output_file, RelativePath, RelativePath, [bgcolor(snow2)| Options]),
-			output_library_files(Path, Options),
-			Format::graph_footer(output_file, RelativePath, RelativePath, Options)
-		;	output_library_files(Path, Options)
-		).
-
-	output_library_files(Directory, Options) :-
-		member(exclude_files(ExcludedFiles), Options),
-		logtalk::loaded_file_property(Path, directory(Directory)),
-		logtalk::loaded_file_property(Path, basename(Basename)),
-		::not_excluded_file(ExcludedFiles, Path, Basename),
-		output_file(Path, Basename, Directory, Options),
-		fail.
-	output_library_files(_, _).
-
-	files(Project, Files, UserOptions) :-
-		parameter(1, Format),
-		merge_options(UserOptions, Options),
-		output_file_path(Project, Options, Format, OutputPath),
-		open(OutputPath, write, Stream, [alias(output_file)]),
-		Format::output_file_header(output_file, Options),
-		output_files(Files, Options),
-		Format::output_file_footer(output_file, Options),
-		close(Stream).
 
 	output_files([], _Options).
 	output_files([File| Files], Options) :-

@@ -22,13 +22,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(entity_diagram(_Format),
-	extends(diagram)).
+:- object(entity_diagram(Format),
+	extends(diagram(Format))).
 
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/12/10,
+		date is 2013/12/11,
 		comment is 'Predicates for generating entity diagrams.',
 		argnames is ['Format']
 	]).
@@ -53,79 +53,25 @@
 	:- private(referenced_entity_/1).
 	:- dynamic(referenced_entity_/1).
 
-	all(UserOptions) :-
-		findall(File, logtalk::loaded_file(File), Files),
-		files(all, Files, UserOptions).
-
 	rlibrary(Library, UserOptions) :-
-		parameter(1, Format),
-		merge_options(UserOptions, Options),
-		logtalk::expand_library_path(Library, TopDirectory),
-		output_file_path(Library, Options, Format, OutputPath),
-		open(OutputPath, write, Stream, [alias(output_file)]),
-		Format::output_file_header(output_file, Options),
 		reset_external_entities,
-		output_rlibrary(TopDirectory, Options),
-		output_external_entities(Options),
-		Format::output_file_footer(output_file, Options),
-		close(Stream).
+		^^rlibrary(Library, UserOptions).
 
 	output_rlibrary(TopDirectory, Options) :-
-		parameter(1, Format),
-		Format::graph_header(output_file, TopDirectory, TopDirectory, [bgcolor(snow3)| Options]),
-		member(exclude_paths(ExcludedPaths), Options),
-		forall(
-			sub_library(TopDirectory, ExcludedPaths, RelativePath, Path),
-			output_library(RelativePath, Path, Options)),
-		Format::graph_footer(output_file, TopDirectory, TopDirectory, [bgcolor(snow3)| Options]).
-
-	sub_library(TopDirectory, ExcludedPaths, RelativePath, Path) :-
-		logtalk_library_path(Library, _),
-		logtalk::expand_library_path(Library, Path),
-		atom_concat(TopDirectory, RelativePath, Path),
-		\+ member(RelativePath, ExcludedPaths).
+		^^output_rlibrary(TopDirectory, Options),
+		output_external_entities(Options).
 
 	library(Library, UserOptions) :-
-		parameter(1, Format),
-		merge_options(UserOptions, Options),
-		logtalk::expand_library_path(Library, Path),
-		output_file_path(Library, Options, Format, OutputPath),
-		open(OutputPath, write, Stream, [alias(output_file)]),
-		Format::output_file_header(output_file, Options),
 		reset_external_entities,
-		output_library(Path, Path, Options),
-		output_external_entities(Options),
-		Format::output_file_footer(output_file, Options),
-		close(Stream).
+		^^library(Library, UserOptions).
 
 	output_library(RelativePath, Path, Options) :-
-		parameter(1, Format),
-		(	member(library_paths(true), Options) ->
-			Format::graph_header(output_file, RelativePath, RelativePath, [bgcolor(snow2)| Options]),
-			output_library_files(Path, Options),
-			Format::graph_footer(output_file, RelativePath, RelativePath, Options)
-		;	output_library_files(Path, Options)
-		).
-
-	output_library_files(Directory, Options) :-
-		member(exclude_files(ExcludedFiles), Options),
-		logtalk::loaded_file_property(Path, directory(Directory)),
-		logtalk::loaded_file_property(Path, basename(Basename)),
-		::not_excluded_file(ExcludedFiles, Path, Basename),
-		output_file(Basename, Directory, Options),
-		fail.
-	output_library_files(_, _).
+		^^output_library(RelativePath, Path, Options),
+		output_external_entities(Options).
 
 	files(Project, Files, UserOptions) :-
-		parameter(1, Format),
-		merge_options(UserOptions, Options),
-		output_file_path(Project, Options, Format, OutputPath),
-		open(OutputPath, write, Stream, [alias(output_file)]),
-		Format::output_file_header(output_file, Options),
 		reset_external_entities,
-		output_files(Files, Options),
-		Format::output_file_footer(output_file, Options),
-		close(Stream).
+		^^files(Project, Files, UserOptions).
 
 	output_files([], _Options).
 	output_files([File| Files], Options) :-
@@ -135,17 +81,13 @@
 
 	file(Source, UserOptions) :-
 		parameter(1, Format),
-		::locate_file(Source, Basename, Directory, _),
+		::locate_file(Source, Basename, Directory, Path),
 		merge_options(UserOptions, Options),
-		(	atom_concat(Source, '.lgt', Basename) ->
-			true
-		;	atom_concat(Source, '.logtalk', Basename)
-		),
 		output_file_path(all_files, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::output_file_header(output_file, Options),
 		reset_external_entities,
-		output_file(Basename, Directory, Options),
+		output_file(Path, Basename, Directory, Options),
 		output_external_entities(Options),
 		Format::output_file_footer(output_file, Options),
 		close(Stream).
@@ -153,12 +95,11 @@
 	file(Source) :-
 		file(Source, []).
 
-	output_file(Basename, Directory, Options) :-
+	output_file(File, Basename, Directory, Options) :-
 		parameter(1, Format),
 		(	member(file_names(true), Options) ->
 			% use the full path for the cluster identifier as we
 			% can have more than file with the same basename
-			atom_concat(Directory, Basename, File),
 			Format::graph_header(output_file, File, Basename, [bgcolor(snow2)| Options]),
 			process(Basename, Directory, Options),
 			Format::graph_footer(output_file, File, Basename, [bgcolor(snow2)| Options])

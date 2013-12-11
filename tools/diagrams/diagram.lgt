@@ -22,13 +22,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(diagram).
+:- object(diagram(_Format)).
 
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2013/12/11,
-		comment is 'Predicates for generating diagrams.'
+		comment is 'Predicates for generating diagrams.',
+		argnames is ['Format']
 	]).
 
 	:- public(all/1).
@@ -37,6 +38,24 @@
 		comment is 'Creates a diagram for all loaded files using the specified options.',
 		argnames is ['Options']
 	]).
+
+	all(UserOptions) :-
+		parameter(1, Format),
+		::merge_options(UserOptions, Options),
+		::output_file_path(all_files, Options, Format, OutputPath),
+		open(OutputPath, write, Stream, [alias(output_file)]),
+		Format::output_file_header(output_file, Options),
+		output_all_files(Options),
+		Format::output_file_footer(output_file, Options),
+		close(Stream).
+
+	output_all_files(Options) :-
+		logtalk::loaded_file(Path),
+		logtalk::loaded_file_property(Path, basename(Basename)),
+		logtalk::loaded_file_property(Path, directory(Directory)),
+		::output_file(Path, Basename, Directory, Options),
+		fail.
+	output_all_files(_).
 
 	:- public(all/0).
 	:- mode(all, one).
@@ -53,6 +72,32 @@
 		comment is 'Creates a diagram for a library and its sub-libraries using the specified options.',
 		argnames is ['Library', 'Options']
 	]).
+
+	rlibrary(Library, UserOptions) :-
+		parameter(1, Format),
+		::merge_options(UserOptions, Options),
+		logtalk::expand_library_path(Library, TopDirectory),
+		::output_file_path(Library, Options, Format, OutputPath),
+		open(OutputPath, write, Stream, [alias(output_file)]),
+		Format::output_file_header(output_file, Options),
+		::output_rlibrary(TopDirectory, Options),
+		Format::output_file_footer(output_file, Options),
+		close(Stream).
+
+	output_rlibrary(TopDirectory, Options) :-
+		parameter(1, Format),
+		Format::graph_header(output_file, TopDirectory, TopDirectory, [bgcolor(snow3)| Options]),
+		member(exclude_paths(ExcludedPaths), Options),
+		forall(
+			sub_library(TopDirectory, ExcludedPaths, RelativePath, Path),
+			output_library(RelativePath, Path, Options)),
+		Format::graph_footer(output_file, TopDirectory, TopDirectory, [bgcolor(snow3)| Options]).
+
+	sub_library(TopDirectory, ExcludedPaths, RelativePath, Path) :-
+		logtalk_library_path(Library, _),
+		logtalk::expand_library_path(Library, Path),
+		atom_concat(TopDirectory, RelativePath, Path),
+		\+ member(RelativePath, ExcludedPaths).
 
 	:- public(rlibrary/1).
 	:- mode(rlibrary(+atom), one).
@@ -71,6 +116,35 @@
 		argnames is ['Library', 'Options']
 	]).
 
+	library(Library, UserOptions) :-
+		parameter(1, Format),
+		::merge_options(UserOptions, Options),
+		logtalk::expand_library_path(Library, Path),
+		::output_file_path(Library, Options, Format, OutputPath),
+		open(OutputPath, write, Stream, [alias(output_file)]),
+		Format::output_file_header(output_file, Options),
+		::output_library(Path, Path, Options),
+		Format::output_file_footer(output_file, Options),
+		close(Stream).
+
+	output_library(RelativePath, Path, Options) :-
+		parameter(1, Format),
+		(	member(library_paths(true), Options) ->
+			Format::graph_header(output_file, RelativePath, RelativePath, [bgcolor(snow2)| Options]),
+			output_library_files(Path, Options),
+			Format::graph_footer(output_file, RelativePath, RelativePath, Options)
+		;	output_library_files(Path, Options)
+		).
+
+	output_library_files(Directory, Options) :-
+		member(exclude_files(ExcludedFiles), Options),
+		logtalk::loaded_file_property(Path, directory(Directory)),
+		logtalk::loaded_file_property(Path, basename(Basename)),
+		::not_excluded_file(ExcludedFiles, Path, Basename),
+		::output_file(Path, Basename, Directory, Options),
+		fail.
+	output_library_files(_, _).
+
 	:- public(library/1).
 	:- mode(library(+atom), one).
 	:- info(library/1, [
@@ -87,6 +161,16 @@
 		comment is 'Creates a diagram for a set of files using the specified options. The file can be given by name, basename, full path, or using library notation.',
 		argnames is ['Project', 'Files', 'Options']
 	]).
+
+	files(Project, Files, UserOptions) :-
+		parameter(1, Format),
+		::merge_options(UserOptions, Options),
+		::output_file_path(Project, Options, Format, OutputPath),
+		open(OutputPath, write, Stream, [alias(output_file)]),
+		Format::output_file_header(output_file, Options),
+		::output_files(Files, Options),
+		Format::output_file_footer(output_file, Options),
+		close(Stream).
 
 	:- public(files/2).
 	:- mode(files(+atom, +list(atom)), one).
@@ -107,6 +191,34 @@
 
 	default_options(DefaultOptions) :-
 		::merge_options([], DefaultOptions).
+
+	:- protected(output_rlibrary/2).
+	:- mode(output_rlibrary(+atom, +list), one).
+	:- info(output_rlibrary/2, [
+		comment is 'Generates diagram output for all sub-libraries of a library.',
+		argnames is ['TopDirectory', 'Options']
+	]).
+
+	:- protected(output_library/3).
+	:- mode(output_library(+atom, +atom, +list), one).
+	:- info(output_library/3, [
+		comment is 'Generates diagram output for a library.',
+		argnames is ['RelativePath', 'Path', 'Options']
+	]).
+
+	:- protected(output_files/2).
+	:- mode(output_files(+list, -list), one).
+	:- info(output_files/2, [
+		comment is 'Generates diagram output for a list of files.',
+		argnames is ['Files', 'Options']
+	]).
+
+	:- protected(output_file/4).
+	:- mode(output_file(+atom, +atom, +atom, +list), one).
+	:- info(output_file/4, [
+		comment is 'Generates diagram output for a list of files.',
+		argnames is ['Path', 'Basename', 'Directory', 'Options']
+	]).
 
 	:- protected(merge_options/2).
 	:- mode(merge_options(+list, -list), one).
