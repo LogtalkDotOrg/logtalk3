@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/11/26,
+		date is 2013/12/11,
 		comment is 'Built-in object providing message priting, debugging, library, source file, and hacking methods.']).
 
 	:- built_in.
@@ -341,11 +341,14 @@
 		atom_concat(Directory, Basename, Path).
 
 	loaded_file_property(Path, Property) :-
-		{'$lgt_loaded_file_'(Basename, Directory, Mode, Flags, TextProperties, PrologFile, TimeStamp)},
-		atom_concat(Directory, Basename, Path),
+		(	var(Path) ->
+			{'$lgt_loaded_file_'(Basename, Directory, Mode, Flags, TextProperties, PrologFile, TimeStamp)},
+			atom_concat(Directory, Basename, Path)
+		;	{'$lgt_loaded_file_'(Basename, Directory, Mode, Flags, TextProperties, PrologFile, TimeStamp)},
+			atom_concat(Directory, Basename, Path),
+			!
+		),
 		loaded_file_property(Property, Basename, Directory, Mode, Flags, TextProperties, PrologFile, TimeStamp).
-	loaded_file_property(Path, parent(Parent)) :-
-		{'$lgt_parent_file_'(Path, Parent)}.
 
 	loaded_file_property(basename(Basename), Basename, _, _, _, _, _, _).
 	loaded_file_property(directory(Directory), _, Directory, _, _, _, _, _).
@@ -354,6 +357,9 @@
 	loaded_file_property(text_properties(TextProperties), _, _, _, _, TextProperties, _, _).
 	loaded_file_property(target(PrologFile), _, _, _, _, _, PrologFile, _).
 	loaded_file_property(modified(TimeStamp), _, _, _, _, _, _, TimeStamp).
+	loaded_file_property(parent(Parent), Basename, Directory, _, _, _, _, _) :-
+		atom_concat(Directory, Basename, Path),
+		{'$lgt_parent_file_'(Path, Parent)}.
 
 	compile_aux_clauses(Clauses) :-
 		{'$lgt_compile_aux_clauses'(Clauses)}.

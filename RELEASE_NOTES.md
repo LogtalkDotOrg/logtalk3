@@ -58,6 +58,9 @@ allowing retrieving file loading dependencies.
 entity predicate property `defines/2` when the predicate resulted from the
 compilation of a grammar rule.
 
+* IMPROVED: The `logtalk::loaded_file_property/2` method is now deterministic
+when called with both arguments instantiated.
+
 Prolog adapter and integration files
 ------------------------------------
 
