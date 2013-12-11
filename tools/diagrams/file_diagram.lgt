@@ -29,7 +29,7 @@
 		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2013/12/11,
-		comment is 'Predicates for generating file loading dependency diagrams.',
+		comment is 'Predicates for generating file loading dependencies diagrams.',
 		argnames is ['Format']
 	]).
 

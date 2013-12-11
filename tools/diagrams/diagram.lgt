@@ -33,7 +33,7 @@
 	]).
 
 	:- public(all/1).
-	:- mode(all(+atom), one).
+	:- mode(all(+list(compound)), one).
 	:- info(all/1, [
 		comment is 'Creates a diagram for all loaded files using the specified options.',
 		argnames is ['Options']
@@ -67,7 +67,7 @@
 		::all([]).
 
 	:- public(rlibrary/2).
-	:- mode(rlibrary(+atom, +list), one).
+	:- mode(rlibrary(+atom, +list(compound)), one).
 	:- info(rlibrary/2, [
 		comment is 'Creates a diagram for a library and its sub-libraries using the specified options.',
 		argnames is ['Library', 'Options']
@@ -110,7 +110,7 @@
 		::rlibrary(Library, []).
 
 	:- public(library/2).
-	:- mode(library(+atom, +list), one).
+	:- mode(library(+atom, +list(compound)), one).
 	:- info(library/2, [
 		comment is 'Creates a diagram for a library using the specified options.',
 		argnames is ['Library', 'Options']
@@ -156,7 +156,7 @@
 		::library(Library, []).
 
 	:- public(files/3).
-	:- mode(files(+atom, +list(atom), +list), one).
+	:- mode(files(+atom, +list(atom), +list(compound)), one).
 	:- info(files/3, [
 		comment is 'Creates a diagram for a set of files using the specified options. The file can be given by name, basename, full path, or using library notation.',
 		argnames is ['Project', 'Files', 'Options']
@@ -183,7 +183,7 @@
 		::files(Project, Files, []).
 
 	:- public(default_options/1).
-	:- mode(default_options(-list), one).
+	:- mode(default_options(-list(compound)), one).
 	:- info(default_options/1, [
 		comment is 'Returns a list of the default options used when generating a diagram.',
 		argnames is ['DefaultOptions']
@@ -192,45 +192,45 @@
 	default_options(DefaultOptions) :-
 		::merge_options([], DefaultOptions).
 
+	:- protected(merge_options/2).
+	:- mode(merge_options(+list(compound), -list(compound)), one).
+	:- info(merge_options/2, [
+		comment is 'Merges the user options with the default options, returning the list of options used when generating a diagram.',
+		argnames is ['UserOptions', 'Options']
+	]).
+
 	:- protected(output_rlibrary/2).
-	:- mode(output_rlibrary(+atom, +list), one).
+	:- mode(output_rlibrary(+atom, +list(compound)), one).
 	:- info(output_rlibrary/2, [
 		comment is 'Generates diagram output for all sub-libraries of a library.',
 		argnames is ['TopDirectory', 'Options']
 	]).
 
 	:- protected(output_library/3).
-	:- mode(output_library(+atom, +atom, +list), one).
+	:- mode(output_library(+atom, +atom, +list(compound)), one).
 	:- info(output_library/3, [
 		comment is 'Generates diagram output for a library.',
 		argnames is ['RelativePath', 'Path', 'Options']
 	]).
 
 	:- protected(output_files/2).
-	:- mode(output_files(+list, -list), one).
+	:- mode(output_files(+list, +list(compound)), one).
 	:- info(output_files/2, [
 		comment is 'Generates diagram output for a list of files.',
 		argnames is ['Files', 'Options']
 	]).
 
 	:- protected(output_file/4).
-	:- mode(output_file(+atom, +atom, +atom, +list), one).
+	:- mode(output_file(+atom, +atom, +atom, +list(compound)), one).
 	:- info(output_file/4, [
-		comment is 'Generates diagram output for a list of files.',
+		comment is 'Generates diagram output for a file.',
 		argnames is ['Path', 'Basename', 'Directory', 'Options']
-	]).
-
-	:- protected(merge_options/2).
-	:- mode(merge_options(+list, -list), one).
-	:- info(merge_options/2, [
-		comment is 'Returns the list of options used when generating a diagram.',
-		argnames is ['UserOptions', 'DefaultOptions']
 	]).
 
 	:- protected(not_excluded_file/3).
 	:- mode(not_excluded_file(+list(atom), +atom, +atom), zero_or_one).
 	:- info(not_excluded_file/3, [
-		comment is 'Returns the list of options used when generating a diagram.',
+		comment is 'True when the given file is not excluded from the generated output.',
 		argnames is ['ExcludedFiles', 'Path', 'Basename']
 	]).
 
@@ -266,7 +266,7 @@
 		atom_concat(Directory, Basename, Path).
 
 	:- protected(locate_file/4).
-	:- mode(locate_file(+atom, +list(atom), +object_identifier, -atom), one).
+	:- mode(locate_file(+atom, +atom, +atom, -atom), one).
 	:- info(locate_file/4, [
 		comment is 'Locates a file given its name, basename, full path, or library notation representation.',
 		argnames is ['File', 'Basename', 'Directory', 'Path']

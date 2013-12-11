@@ -34,7 +34,7 @@
 	]).
 
 	:- public(file/2).
-	:- mode(file(+atom, +list), one).
+	:- mode(file(+atom, +list(compound)), one).
 	:- info(file/2, [
 		comment is 'Creates a diagram for all entities in a loaded source file using the specified options. The file can be given by name, basename, full path, or using library notation.',
 		argnames is ['File', 'Options']
