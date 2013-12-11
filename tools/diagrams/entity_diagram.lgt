@@ -33,20 +33,6 @@
 		argnames is ['Format']
 	]).
 
-	:- public(files/3).
-	:- mode(files(+atom, +list(atom), +list), one).
-	:- info(files/3, [
-		comment is 'Creates a diagram for all entities in a list of loaded source files using the specified options. The file can be given by name, basename, full path, or using library notation.',
-		argnames is ['Project', 'Files', 'Options']
-	]).
-
-	:- public(files/2).
-	:- mode(files(+atom, +list(atom)), one).
-	:- info(files/2, [
-		comment is 'Creates a diagram for all entities in a list of loaded source files using the default options. The file can be given by name, basename, full path, or using library notation.',
-		argnames is ['Project', 'Files']
-	]).
-
 	:- public(file/2).
 	:- mode(file(+atom, +list), one).
 	:- info(file/2, [
@@ -130,32 +116,26 @@
 		fail.
 	output_library_files(_, _).
 
-	files(Project, Paths) :-
-		files(Project, Paths, []).
-
-	files(Project, Paths, UserOptions) :-
+	files(Project, Files, UserOptions) :-
 		parameter(1, Format),
 		merge_options(UserOptions, Options),
 		output_file_path(Project, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::output_file_header(output_file, Options),
 		reset_external_entities,
-		output_files(Paths, Options),
+		output_files(Files, Options),
 		Format::output_file_footer(output_file, Options),
 		close(Stream).
 
 	output_files([], _Options).
-	output_files([Path| Paths], Options) :-
-		member(exclude_files(ExcludedFiles), Options),
-		logtalk::loaded_file_property(Path, directory(Directory)),
-		logtalk::loaded_file_property(Path, basename(Basename)),
-		::not_excluded_file(ExcludedFiles, Path, Basename),
+	output_files([File| Files], Options) :-
+		::locate_file(File, Basename, Directory, _),
 		process(Basename, Directory, Options),
-		output_files(Paths, Options).
+		output_files(Files, Options).
 
 	file(Source, UserOptions) :-
 		parameter(1, Format),
-		locate_file(Source, Basename, Directory),
+		::locate_file(Source, Basename, Directory, _),
 		merge_options(UserOptions, Options),
 		(	atom_concat(Source, '.lgt', Basename) ->
 			true
@@ -172,45 +152,6 @@
 
 	file(Source) :-
 		file(Source, []).
-
-	% file given in library notation
-	locate_file(LibraryNotation, Basename, Directory) :-
-		compound(LibraryNotation),
-		!,
-		LibraryNotation =.. [Library, Name],
-		logtalk::expand_library_path(Library, LibraryPath),
-		atom_concat(LibraryPath, Name, Source),
-		locate_file(Source, Basename, Directory).
-	% file given using its name or basename
-	locate_file(Source, Basename, Directory) :-
-		add_extension(Source, Basename),
-		logtalk::loaded_file_property(Path, basename(Basename)),
-		logtalk::loaded_file_property(Path, directory(Directory)),
-		% check that there isn't another file with the same basename
-		% from a different directory
-		\+ (
-			logtalk::loaded_file_property(OtherPath, basename(Basename)),
-			Path \== OtherPath
-		),
-		!.
-	% file given using a full path
-	locate_file(Source, Basename, Directory) :-
-		add_extension(Source, SourceWithExtension),
-		logtalk::loaded_file_property(Path, basename(Basename)),
-		logtalk::loaded_file_property(Path, directory(Directory)),
-		atom_concat(Directory, Basename, SourceWithExtension),
-		!.
-
-	add_extension(Source, SourceWithExtension) :-
-		atom(Source),
-		(	sub_atom(Source, _, 4, 0, '.lgt') ->
-			SourceWithExtension = Source
-		;	sub_atom(Source, _, 8, 0, '.logtalk') ->
-			SourceWithExtension = Source
-		;	(	atom_concat(Source, '.lgt', SourceWithExtension)
-			;	atom_concat(Source, '.logtalk', SourceWithExtension)
-			)
-		).
 
 	output_file(Basename, Directory, Options) :-
 		parameter(1, Format),

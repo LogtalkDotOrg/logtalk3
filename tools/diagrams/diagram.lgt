@@ -27,7 +27,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/12/09,
+		date is 2013/12/11,
 		comment is 'Predicates for generating diagrams.'
 	]).
 
@@ -80,6 +80,23 @@
 
 	library(Library) :-
 		::library(Library, []).
+
+	:- public(files/3).
+	:- mode(files(+atom, +list(atom), +list), one).
+	:- info(files/3, [
+		comment is 'Creates a diagram for a set of files using the specified options. The file can be given by name, basename, full path, or using library notation.',
+		argnames is ['Project', 'Files', 'Options']
+	]).
+
+	:- public(files/2).
+	:- mode(files(+atom, +list(atom)), one).
+	:- info(files/2, [
+		comment is 'Creates a diagram for a set of files using the default options. The file can be given by name, basename, full path, or using library notation.',
+		argnames is ['Project', 'Files']
+	]).
+
+	files(Project, Files) :-
+		::files(Project, Files, []).
 
 	:- public(default_options/1).
 	:- mode(default_options(-list), one).
@@ -135,6 +152,51 @@
 		;	atom_concat(Directory0, '/', Directory)
 		),
 		atom_concat(Directory, Basename, Path).
+
+	:- protected(locate_file/4).
+	:- mode(locate_file(+atom, +list(atom), +object_identifier, -atom), one).
+	:- info(locate_file/4, [
+		comment is 'Locates a file given its name, basename, full path, or library notation representation.',
+		argnames is ['File', 'Basename', 'Directory', 'Path']
+	]).
+
+	% file given in library notation
+	locate_file(LibraryNotation, Basename, Directory, Path) :-
+		compound(LibraryNotation),
+		!,
+		LibraryNotation =.. [Library, Name],
+		logtalk::expand_library_path(Library, LibraryPath),
+		atom_concat(LibraryPath, Name, Source),
+		locate_file(Source, Basename, Directory, Path).
+	% file given using its name or basename
+	locate_file(Source, Basename, Directory, Path) :-
+		add_extension(Source, Basename),
+		logtalk::loaded_file_property(Path, basename(Basename)),
+		logtalk::loaded_file_property(Path, directory(Directory)),
+		% check that there isn't another file with the same basename
+		% from a different directory
+		\+ (
+			logtalk::loaded_file_property(OtherPath, basename(Basename)),
+			Path \== OtherPath
+		),
+		!.
+	% file given using a full path
+	locate_file(Source, Basename, Directory, Path) :-
+		add_extension(Source, Path),
+		logtalk::loaded_file_property(Path, basename(Basename)),
+		logtalk::loaded_file_property(Path, directory(Directory)),
+		!.
+
+	add_extension(Source, SourceWithExtension) :-
+		atom(Source),
+		(	sub_atom(Source, _, 4, 0, '.lgt') ->
+			SourceWithExtension = Source
+		;	sub_atom(Source, _, 8, 0, '.logtalk') ->
+			SourceWithExtension = Source
+		;	(	atom_concat(Source, '.lgt', SourceWithExtension)
+			;	atom_concat(Source, '.logtalk', SourceWithExtension)
+			)
+		).
 
 	member(Option, [Option| _]) :-
 		!.

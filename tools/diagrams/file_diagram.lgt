@@ -28,7 +28,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/12/10,
+		date is 2013/12/11,
 		comment is 'Predicates for generating file loading dependency diagrams.',
 		argnames is ['Format']
 	]).
@@ -68,9 +68,6 @@
 		Format::output_file_footer(output_file, Options),
 		close(Stream).
 
-	rlibrary(Library) :-
-		rlibrary(Library, []).
-
 	output_rlibrary(TopDirectory, Options) :-
 		parameter(1, Format),
 		Format::graph_header(output_file, TopDirectory, TopDirectory, [bgcolor(snow3)| Options]),
@@ -97,9 +94,6 @@
 		Format::output_file_footer(output_file, Options),
 		close(Stream).
 
-	library(Library) :-
-		library(Library, []).
-
 	output_library(RelativePath, Path, Options) :-
 		parameter(1, Format),
 		(	member(library_paths(true), Options) ->
@@ -117,6 +111,22 @@
 		output_file(Path, Basename, Directory, Options),
 		fail.
 	output_library_files(_, _).
+
+	files(Project, Files, UserOptions) :-
+		parameter(1, Format),
+		merge_options(UserOptions, Options),
+		output_file_path(Project, Options, Format, OutputPath),
+		open(OutputPath, write, Stream, [alias(output_file)]),
+		Format::output_file_header(output_file, Options),
+		output_files(Files, Options),
+		Format::output_file_footer(output_file, Options),
+		close(Stream).
+
+	output_files([], _Options).
+	output_files([File| Files], Options) :-
+		::locate_file(File, Basename, Directory, Path),
+		output_file(Path, Basename, Directory, Options),
+		output_files(Files, Options).
 
 	output_file(Path, Basename, Directory, Options) :-
 		parameter(1, Format),
