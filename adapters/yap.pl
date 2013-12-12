@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for YAP Prolog 6.3.4 and later versions
-%  Last updated on December 4, 2013
+%  Last updated on December 12, 2013
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -812,7 +812,7 @@ user:goal_expansion(phrase(Rule, Input), user:'$lgt_phrase'(Rule, Input, ExCtx))
 user:goal_expansion('::'(Object, Message), user:Goal) :-
 	prolog_load_context(module, Module),
 	Module \== user,
-	catch('$lgt_tr_msg'(Message, Object, Goal, user), _, fail). 
+	catch('$lgt_tr_msg'(Message, Object, Goal, user, _), _, fail). 
 
 
 
