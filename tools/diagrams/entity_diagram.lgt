@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/12/11,
+		date is 2013/12/12,
 		comment is 'Predicates for generating entity diagrams.',
 		argnames is ['Format']
 	]).
@@ -72,12 +72,6 @@
 	files(Project, Files, UserOptions) :-
 		reset_external_entities,
 		^^files(Project, Files, UserOptions).
-
-	output_files([], _Options).
-	output_files([File| Files], Options) :-
-		::locate_file(File, Basename, Directory, _),
-		process(Basename, Directory, Options),
-		output_files(Files, Options).
 
 	file(Source, UserOptions) :-
 		parameter(1, Format),

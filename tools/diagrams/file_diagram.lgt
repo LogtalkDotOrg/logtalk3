@@ -28,16 +28,10 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/12/11,
+		date is 2013/12/12,
 		comment is 'Predicates for generating file loading dependencies diagrams.',
 		argnames is ['Format']
 	]).
-
-	output_files([], _Options).
-	output_files([File| Files], Options) :-
-		::locate_file(File, Basename, Directory, Path),
-		output_file(Path, Basename, Directory, Options),
-		output_files(Files, Options).
 
 	output_file(Path, Basename, Directory, Options) :-
 		parameter(1, Format),

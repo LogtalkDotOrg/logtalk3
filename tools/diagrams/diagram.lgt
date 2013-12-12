@@ -27,7 +27,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/12/11,
+		date is 2013/12/12,
 		comment is 'Predicates for generating diagrams.',
 		argnames is ['Format']
 	]).
@@ -171,6 +171,12 @@
 		::output_files(Files, Options),
 		Format::output_file_footer(output_file, Options),
 		close(Stream).
+
+	output_files([], _Options).
+	output_files([File| Files], Options) :-
+		::locate_file(File, Basename, Directory, Path),
+		::output_file(Path, Basename, Directory, Options),
+		output_files(Files, Options).
 
 	:- public(files/2).
 	:- mode(files(+atom, +list(atom)), one).
