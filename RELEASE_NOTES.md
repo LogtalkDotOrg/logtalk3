@@ -89,6 +89,10 @@ to simplify writing message hooks that intercept failed test messages.
 graph languages. Currently, only DOT is supported but GraphML support is
 expected soon.
 
+* FIXED: Issue in the `help` tool when using SWI-Prolog V7 due to the empty
+list no longer being an atom in this backend Prolog compiler. Thanks to
+Andreas Becker for the bug report.
+
 Examples
 --------
 

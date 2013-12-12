@@ -25,9 +25,9 @@
 :- object(help).
 
 	:- info([
-		version is 0.10,
+		version is 0.11,
 		author is 'Paulo Moura',
-		date is 2013/10/02,
+		date is 2013/12/12,
 		comment is 'Command-line help for Logtalk built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
@@ -262,7 +262,7 @@
 	built_in_method(goal_expansion, 2, '/manuals/refman/methods/', 'goal_expansion2.html').
 
 	control((::), 2, '/manuals/refman/control/', 'to_object2.html').
-	control([], 1, '/manuals/refman/control/', 'delegate1.html').
+	control('[]', 1, '/manuals/refman/control/', 'delegate1.html').
 	control((::), 1, '/manuals/refman/control/', 'to_self1.html').
 	control((^^), 1, '/manuals/refman/control/', 'to_super1.html').
 	control(({}), 1, '/manuals/refman/control/', 'external1.html').
