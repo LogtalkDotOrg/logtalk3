@@ -29,7 +29,7 @@ ________________________________________________________________________
 
 % check the default list of options used when generating a entity diagram:
 
-| ?- entity_diagram(dot_graph)::default_options(DefaultOptions).
+| ?- entity_diagram(dot)::default_options(DefaultOptions).
 DefaultOptions = ...
 yes
 
@@ -41,7 +41,7 @@ yes
 
 % generating an entity diagram for a source file using default options:
 
-| ?- entity_diagram(dot_graph)::file(points).
+| ?- entity_diagram(dot)::file(points).
 yes
 
 
@@ -53,7 +53,7 @@ yes
 % generating a file loading dependencies diagram for all source files in a
 % library using default options:
 
-| ?- file_diagram(dot_graph)::library(searching).
+| ?- file_diagram(dot)::library(searching).
 yes
 
 

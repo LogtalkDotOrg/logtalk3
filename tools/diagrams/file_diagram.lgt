@@ -34,14 +34,14 @@
 	]).
 
 	output_file(Path, Basename, Directory, Options) :-
-		parameter(1, Format),
+		::format_object(Format),
 		(	member(directory_paths(true), Options) ->
 			Format::node(output_file, Path, Basename, [Directory], file, Options)
 		;	Format::node(output_file, Path, Basename, [], file, Options)
 		),
 		fail.
 	output_file(Path, _, _, Options) :-
-		parameter(1, Format),
+		::format_object(Format),
 		logtalk::loaded_file_property(Path, parent(Parent)),
 		Format::edge(output_file, Parent, Path, loads, Options),
 		fail.

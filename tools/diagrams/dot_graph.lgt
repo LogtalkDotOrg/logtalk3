@@ -32,6 +32,9 @@
 		comment is 'Generates entity diagram DOT files for source files and libraries.'
 	]).
 
+ 	:- multifile(diagram(_)::format_object/2).
+	diagram(_)::format_object(dot, dot_graph).
+
 	output_file_name(Name, File) :-
 		atom_concat(Name, '.dot', File).
 

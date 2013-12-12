@@ -40,7 +40,7 @@
 	]).
 
 	all(UserOptions) :-
-		parameter(1, Format),
+		format_object(Format),
 		::merge_options(UserOptions, Options),
 		::output_file_path(all_files, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(output_file)]),
@@ -74,7 +74,7 @@
 	]).
 
 	rlibrary(Library, UserOptions) :-
-		parameter(1, Format),
+		format_object(Format),
 		::merge_options(UserOptions, Options),
 		logtalk::expand_library_path(Library, TopDirectory),
 		::output_file_path(Library, Options, Format, OutputPath),
@@ -85,7 +85,7 @@
 		close(Stream).
 
 	output_rlibrary(TopDirectory, Options) :-
-		parameter(1, Format),
+		format_object(Format),
 		Format::graph_header(output_file, TopDirectory, TopDirectory, [bgcolor(snow3)| Options]),
 		member(exclude_paths(ExcludedPaths), Options),
 		forall(
@@ -117,7 +117,7 @@
 	]).
 
 	library(Library, UserOptions) :-
-		parameter(1, Format),
+		format_object(Format),
 		::merge_options(UserOptions, Options),
 		logtalk::expand_library_path(Library, Path),
 		::output_file_path(Library, Options, Format, OutputPath),
@@ -128,7 +128,7 @@
 		close(Stream).
 
 	output_library(RelativePath, Path, Options) :-
-		parameter(1, Format),
+		format_object(Format),
 		(	member(library_paths(true), Options) ->
 			Format::graph_header(output_file, RelativePath, RelativePath, [bgcolor(snow2)| Options]),
 			output_library_files(Path, Options),
@@ -163,7 +163,7 @@
 	]).
 
 	files(Project, Files, UserOptions) :-
-		parameter(1, Format),
+		format_object(Format),
 		::merge_options(UserOptions, Options),
 		::output_file_path(Project, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(output_file)]),
@@ -197,6 +197,27 @@
 
 	default_options(DefaultOptions) :-
 		::merge_options([], DefaultOptions).
+
+	:- public(format_object/2).
+	:- multifile(format_object/2).
+	:- mode(format_object(?atom, ?object_identifier), zero_or_more).
+	:- info(format_object/2, [
+		comment is 'Table of graph language formats and their implementation objects.',
+		argnames is ['Format', 'Object']
+	]).
+
+	:- public(format_object/1).
+	:- multifile(format_object/1).
+	:- mode(format_object(-object_identifier), zero_or_one).
+	:- info(format_object/1, [
+		comment is 'Returns the identifier of the object implementing the graph language format currently being used. Fails of not format is specified.',
+		argnames is ['Object']
+	]).
+
+	format_object(Object) :-
+		parameter(1, Format),
+		nonvar(Format),
+		format_object(Format, Object).
 
 	:- protected(merge_options/2).
 	:- mode(merge_options(+list(compound), -list(compound)), one).
