@@ -25,7 +25,7 @@
 :- object(help).
 
 	:- info([
-		version is 0.11,
+		version is 0.12,
 		author is 'Paulo Moura',
 		date is 2013/12/12,
 		comment is 'Command-line help for Logtalk built-in control constructs, predicates, non-terminals, and methods.'
@@ -116,6 +116,13 @@
 	completions(Prefix, Completions) :-
 		findall(Completion, completion(Prefix, Completion), Completions).
 
+	:- public(built_in_directive/4).
+	:- mode(built_in_directive(?atom, ?integer, -atom, -atom), zero_or_more).
+	:- info(built_in_directive/4, [
+		comment is 'Provides acess to the HTML documenting files describing built-in directives.',
+		argnames is ['Functor', 'Arity', 'Directory', 'Basename']
+	]).
+
 	built_in_directive(encoding, 1, '/manuals/refman/directives/', 'encoding1.html').
 	built_in_directive(initialization, 1, '/manuals/refman/directives/', 'initialization1.html').
 	built_in_directive(op, 3, '/manuals/refman/directives/', 'op3.html').
@@ -159,6 +166,13 @@
 	built_in_directive(synchronized, 1, '/manuals/refman/directives/', 'synchronized1.html').
 	built_in_directive(uses, 2, '/manuals/refman/directives/', 'uses2.html').
 	built_in_directive(use_module, 2, '/manuals/refman/directives/', 'use_module2.html').
+
+	:- public(built_in_predicate/4).
+	:- mode(built_in_predicate(?atom, ?integer, -atom, -atom), zero_or_more).
+	:- info(built_in_predicate/4, [
+		comment is 'Provides acess to the HTML documenting files describing built-in predicates.',
+		argnames is ['Functor', 'Arity', 'Directory', 'Basename']
+	]).
 
 	built_in_predicate(current_category, 1, '/manuals/refman/builtins/', 'current_category1.html').
 	built_in_predicate(current_object, 1, '/manuals/refman/builtins/', 'current_object1.html').
@@ -219,6 +233,13 @@
 	built_in_predicate(current_logtalk_flag, 2, '/manuals/refman/builtins/', 'current_logtalk_flag2.html').
 	built_in_predicate(set_logtalk_flag, 2, '/manuals/refman/builtins/', 'set_logtalk_flag2.html').
 
+	:- public(built_in_method/4).
+	:- mode(built_in_method(?atom, ?integer, -atom, -atom), zero_or_more).
+	:- info(built_in_method/4, [
+		comment is 'Provides acess to the HTML documenting files describing built-in methods.',
+		argnames is ['Functor', 'Arity', 'Directory', 'Basename']
+	]).
+
 	built_in_method(parameter, 2, '/manuals/refman/methods/', 'parameter2.html').
 	built_in_method(self, 1, '/manuals/refman/methods/', 'self1.html').
 	built_in_method(sender, 1, '/manuals/refman/methods/', 'sender1.html').
@@ -261,6 +282,13 @@
 	built_in_method(expand_goal, 2, '/manuals/refman/methods/', 'expand_goal2.html').
 	built_in_method(goal_expansion, 2, '/manuals/refman/methods/', 'goal_expansion2.html').
 
+	:- public(control/4).
+	:- mode(control(?atom, ?integer, -atom, -atom), zero_or_more).
+	:- info(control/4, [
+		comment is 'Provides acess to the HTML documenting files describing built-in control constructs.',
+		argnames is ['Functor', 'Arity', 'Directory', 'Basename']
+	]).
+
 	control((::), 2, '/manuals/refman/control/', 'to_object2.html').
 	control('[]', 1, '/manuals/refman/control/', 'delegate1.html').
 	control((::), 1, '/manuals/refman/control/', 'to_self1.html').
@@ -268,8 +296,16 @@
 	control(({}), 1, '/manuals/refman/control/', 'external1.html').
 	control((<<), 2, '/manuals/refman/control/', 'context2.html').
 
+	:- public(built_in_non_terminal/4).
+	:- mode(built_in_non_terminal(?atom, ?integer, -atom, -atom), zero_or_more).
+	:- info(built_in_non_terminal/4, [
+		comment is 'Provides acess to the HTML documenting files describing built-in DCG non-terminals.',
+		argnames is ['Functor', 'Arity', 'Directory', 'Basename']
+	]).
+
 	built_in_non_terminal(call, N, '/manuals/refman/methods/', 'call1.html') :-
 		integer::between(1, 6, N).
+	built_in_non_terminal(phrase, 1, '/manuals/refman/methods/', 'phrase1.html').
 
 	:- public(library/0).
 	:- mode(library, one).

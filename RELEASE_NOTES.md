@@ -93,6 +93,10 @@ expected soon.
 list no longer being an atom in this backend Prolog compiler. Thanks to
 Andreas Becker for the bug report.
 
+* UPDATED: The `help` tool predicates `control/4`, `built_in_predicate/4`,
+`built_in_method/4`, `built_in_directive/4`, `built_in_non_terminal/4` are 
+now public.
+
 Examples
 --------
 
