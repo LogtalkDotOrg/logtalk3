@@ -61,6 +61,8 @@ compilation of a grammar rule.
 * IMPROVED: The `logtalk::loaded_file_property/2` method is now deterministic
 when called with both arguments instantiated.
 
+* ADDED: Property `library/1` to the `logtalk::loaded_file_property/2` method.
+
 Prolog adapter and integration files
 ------------------------------------
 

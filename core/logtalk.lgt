@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/12/11,
+		date is 2013/12/12,
 		comment is 'Built-in object providing message priting, debugging, library, source file, and hacking methods.']).
 
 	:- built_in.
@@ -146,7 +146,7 @@
 	:- public(loaded_file_property/2).
 	:- mode(loaded_file_property(?atom, ?compound), zero_or_more).
 	:- info(loaded_file_property/2, [
-		comment is 'Enumerates, by backtracking, all loaded files, returning their full paths. Valid properties are: basename/1, directory/1, mode/1, flags/1, text_properties/1 (encoding/1 and bom/1), target/1, and modified/1.',
+		comment is 'Enumerates, by backtracking, all loaded file properties. Valid properties are: basename/1, directory/1, mode/1, flags/1, text_properties/1 (encoding/1 and bom/1), target/1, modified/1, parent/1, and library/1.',
 		argnames is ['Path', 'Property']
 	]).
 
@@ -360,6 +360,9 @@
 	loaded_file_property(parent(Parent), Basename, Directory, _, _, _, _, _) :-
 		atom_concat(Directory, Basename, Path),
 		{'$lgt_parent_file_'(Path, Parent)}.
+	loaded_file_property(library(Library), _, Directory, _, _, _, _, _) :-
+		logtalk_library_path(Library, Location),
+		{'$lgt_expand_library_path'(Library, Directory)}, !.
 
 	compile_aux_clauses(Clauses) :-
 		{'$lgt_compile_aux_clauses'(Clauses)}.
