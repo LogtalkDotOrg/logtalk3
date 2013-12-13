@@ -97,6 +97,12 @@ Andreas Becker for the bug report.
 `built_in_method/4`, `built_in_directive/4`, `built_in_non_terminal/4` are 
 now public.
 
+Tests
+-----
+
+* FIXED: Only runs tests for the `coinductive/1` directive with backend
+Prolog compilers that support coinduction.
+
 Examples
 --------
 
