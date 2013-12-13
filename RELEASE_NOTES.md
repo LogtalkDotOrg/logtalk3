@@ -92,6 +92,10 @@ integration with development tools such as PDT). Renamed the predicate
 existing code). Replaced all the failed unit test messages by a single one
 to simplify writing message hooks that intercept failed test messages.
 
+* IMPROVED: The `lgtunit` tool now ensures that unit test objects are compiled
+with context-switching calls enabled to help the user in debugging failed unit
+tests.
+
 * FIXED: Issue in the `help` tool when using SWI-Prolog V7 due to the empty
 list no longer being an atom in this backend Prolog compiler. Thanks to
 Andreas Becker for the bug report.

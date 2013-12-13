@@ -30,7 +30,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/11/29,
+		date is 2013/12/13,
 		comment is 'A simple unit test framework featuring predicate clause coverage.'
 	]).
 
@@ -291,15 +291,28 @@
 
 	% different unit test idioms are supported using the term-expansion mechanism;
 	% the unit test objects must be loaded using this object as an hook object
-	term_expansion((:- object(Test, Relation)), [(:- object(Test, Relation))]) :-
+	%
+	% we make sure that context-switching calls are enabled to help the user in
+	% debugging failed unit tests
+	term_expansion(
+			(:- object(Test, Relation)),
+			[(:- object(Test, Relation)), (:- set_logtalk_flag(context_switching_calls,allow))]) :-
 		reset_compilation_counters.
-	term_expansion((:- object(Test, Relation1, Relation2)), [(:- object(Test, Relation1, Relation2))]) :-
+	term_expansion(
+			(:- object(Test, Relation1, Relation2)),
+			[(:- object(Test, Relation1, Relation2)), (:- set_logtalk_flag(context_switching_calls,allow))]) :-
 		reset_compilation_counters.
-	term_expansion((:- object(Test, Relation1, Relation2, Relation3)), [(:- object(Test, Relation1, Relation2, Relation3))]) :-
+	term_expansion(
+			(:- object(Test, Relation1, Relation2, Relation3)),
+			[(:- object(Test, Relation1, Relation2, Relation3)), (:- set_logtalk_flag(context_switching_calls,allow))]) :-
 		reset_compilation_counters.
-	term_expansion((:- object(Test, Relation1, Relation2, Relation3, Relation4)), [(:- object(Test, Relation1, Relation2, Relation3, Relation4))]) :-
+	term_expansion(
+			(:- object(Test, Relation1, Relation2, Relation3, Relation4)),
+			[(:- object(Test, Relation1, Relation2, Relation3, Relation4)), (:- set_logtalk_flag(context_switching_calls,allow))]) :-
 		reset_compilation_counters.
-	term_expansion((:- object(Test, Relation1, Relation2, Relation3, Relation4, Relation5)), [(:- object(Test, Relation1, Relation2, Relation3, Relation4, Relation5))]) :-
+	term_expansion(
+			(:- object(Test, Relation1, Relation2, Relation3, Relation4, Relation5)),
+			[(:- object(Test, Relation1, Relation2, Relation3, Relation4, Relation5)), (:- set_logtalk_flag(context_switching_calls,allow))]) :-
 		reset_compilation_counters.
 
 	% the discontiguous/1 directives usually required when using some of the
