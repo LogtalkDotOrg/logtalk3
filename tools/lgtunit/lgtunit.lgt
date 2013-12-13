@@ -334,14 +334,16 @@
 		increment_skipped_tests_counter.
 
 	% unit test idiom test/2
-	term_expansion((test(Test, Outcome) :- Goal), [(test(Test, Outcome) :- Goal)]) :-
+	term_expansion((test(Test, Outcome0) :- Goal0), [(test(Test, Outcome) :- Goal)]) :-
+		callable(Outcome0),
+		convert_test_outcome(Outcome0, Goal0, Outcome, Goal),
 		check_for_repeated_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
 		(	Outcome == true ->
 			assertz(test_(succeeds(Test, Position)))
 		;	Outcome == fail ->
 			assertz(test_(fails(Test, Position)))
-		;	nonvar(Outcome) ->
+		;	% Outcome = error(Error,_); Outcome = Ball
 			assertz(test_(throws(Test, Outcome, Position)))
 		).
 
@@ -373,6 +375,12 @@
 
 	% support the deprecated unit/1 predicate which may still be in use in old code
 	term_expansion(unit(Entity), [cover(Entity)]).
+
+	convert_test_outcome(true, Goal, true, Goal).
+	convert_test_outcome(true(Test), Goal, true, (Goal, Test)).
+	convert_test_outcome(fail, Goal, fail, Goal).
+	convert_test_outcome(error(Error), Goal, error(Error,_), Goal).
+	convert_test_outcome(ball(Ball), Goal, Ball, Goal).
 
 	test_idiom_head(test(Test, _), Test).
 	test_idiom_head(test(Test), Test).

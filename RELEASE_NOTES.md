@@ -84,6 +84,10 @@ is being considered.
 
 * FIXED: Bug in the `lgtdoc` tool that prevented documenting libraries.
 
+* CHANGED: The `lgtunit` tool `test/2` dialect outcome argument now supports
+`true(Test)`, `error(Error)`, and `ball(Ball)` as additional values. Exception
+errors and terms must now be represented explicitly using the new values.
+
 * CHANGED: The `lgtunit` tool default messages for failed unit tests now
 include both the test file path and the test line numbers (allowing better
 integration with development tools such as PDT). Renamed the predicate

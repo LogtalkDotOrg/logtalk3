@@ -62,17 +62,28 @@ an error cannot be specified. A more versatile dialect is:
 
 	succeeds(Test) :- Goal.
 	fails(Test) :- Goal.
-	throws(Test, Error) :- Goal.
+	throws(Test, Ball) :- Goal.
 
 This is a straightforward dialect. For `succeeds/1` tests, `Goal` is
 expected to succeed. For `fails/1` tests, `Goal` is expected to fail.
-For `throws/2` tests, `Goal` is expected to throw `Error`. An alternative
-that can be used with the same expressive power is:
+For `throws/2` tests, `Goal` is expected to throw the exception term
+`Ball`. An alternative test dialect that can be used with the same
+expressive power is:
 
 	test(Test, Outcome) :- Goal.
 
-In this case, `Outcome` can be the atom `true`, the atom `fail`, or the
-exception term that the test is expected to throw.
+The possible values of the outcome argument are:
+
+- `true`  
+	the test is expected to succeed
+- `true(Test)`  
+	the test is expected to succeed and satisfy the goal `Test`
+- `fail`  
+	the test is expected to fail
+- `error(Error)`  
+	the test is expected to throw the exception term `error(Error, _)`
+- `ball(Ball)`  
+	the test is expected to throw the exception term `Ball`
 
 In all dialects, `Test` is an atom, uniquely identifying a test. A warning is
 printed if duplicated identifiers are found.
