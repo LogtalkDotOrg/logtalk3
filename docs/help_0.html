@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>0.1</code>
+            <code>0.12</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2013/10/2</code>
+            <code>2013/12/12</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -135,6 +135,106 @@
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
               <code>completions(+atom,-lists(pair)) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">built_in_directive/4</h3>
+          <blockquote>
+            <p class="comment">Provides acess to the HTML documenting files describing built-in directives.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>built_in_directive(Functor,Arity,Directory,Basename)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>built_in_directive(?atom,?integer,-atom,-atom) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">built_in_predicate/4</h3>
+          <blockquote>
+            <p class="comment">Provides acess to the HTML documenting files describing built-in predicates.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>built_in_predicate(Functor,Arity,Directory,Basename)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>built_in_predicate(?atom,?integer,-atom,-atom) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">built_in_method/4</h3>
+          <blockquote>
+            <p class="comment">Provides acess to the HTML documenting files describing built-in methods.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>built_in_method(Functor,Arity,Directory,Basename)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>built_in_method(?atom,?integer,-atom,-atom) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">control/4</h3>
+          <blockquote>
+            <p class="comment">Provides acess to the HTML documenting files describing built-in control constructs.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>control(Functor,Arity,Directory,Basename)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>control(?atom,?integer,-atom,-atom) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">built_in_non_terminal/4</h3>
+          <blockquote>
+            <p class="comment">Provides acess to the HTML documenting files describing built-in DCG non-terminals.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>built_in_non_terminal(Functor,Arity,Directory,Basename)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>built_in_non_terminal(?atom,?integer,-atom,-atom) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>

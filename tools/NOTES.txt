@@ -69,6 +69,7 @@ and follow these steps:
 to generate (X)HTML documentation or the command `lgt2pdf` to generate
 PDF documentation. For example:
 
+	$ cd $LOGTALKUSER/docs/tmp
 	$ lgt2html -i tools.html -t "Tools documentation index"
 
 After generating the (X)HTML and/or PDF documentation, you can move the
