@@ -75,6 +75,13 @@ Tools
 * NEW: Assertions tool, defining `assertion/1-2` meta-predicates, for adding
 assertions to your code.
 
+* NEW: The `diagrams` tool now support file loading dependencies diagrams and
+predicate cross-referencing diagrams.
+
+* IMPROVED: Refactored the `diagrams` tool to allow using different output
+graph languages. Currently, only DOT is supported but GXL and GraphML support
+is being considered.
+
 * FIXED: Bug in the `lgtdoc` tool that prevented documenting libraries.
 
 * CHANGED: The `lgtunit` tool default messages for failed unit tests now
@@ -84,10 +91,6 @@ integration with development tools such as PDT). Renamed the predicate
 (the old name is deprecated but still supported for compatibility with
 existing code). Replaced all the failed unit test messages by a single one
 to simplify writing message hooks that intercept failed test messages.
-
-* IMPROVED: Refactored the `diagrams` tool to allow using different output
-graph languages. Currently, only DOT is supported but GraphML support is
-expected soon.
 
 * FIXED: Issue in the `help` tool when using SWI-Prolog V7 due to the empty
 list no longer being an atom in this backend Prolog compiler. Thanks to
