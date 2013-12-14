@@ -75,7 +75,7 @@ Tools
 * NEW: Assertions tool, defining `assertion/1-2` meta-predicates, for adding
 assertions to your code.
 
-* NEW: The `diagrams` tool now support file loading dependencies diagrams and
+* NEW: The `diagrams` tool now support file loading dependency diagrams and
 predicate cross-referencing diagrams.
 
 * IMPROVED: Refactored the `diagrams` tool to allow using different output

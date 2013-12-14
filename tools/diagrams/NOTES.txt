@@ -24,7 +24,7 @@ ________________________________________________________________________
 To load this tool and for sample queries, please see the `SCRIPT.txt`
 file.
 
-This tool generates entity diagrams and file loading dependencies diagrams for
+This tool generates entity diagrams and file loading dependency diagrams for
 source files and for libraries of source files using the Logtalk reflection
 features to collect the relevant information and a graph language (e.g. DOT)
 for representing the diagrams.
@@ -113,7 +113,7 @@ generated diagrams. For entity diagrams the options are:
 - `exclude_entities(Entities)`  
 	list of entities to exclude (default is `[]`)
 
-For file loading dependencies diagrams the options are:
+For file loading dependency diagrams the options are:
 
 - `date(Boolean)`  
 	print/omit current date (`true` or `false`; default is `true`)
