@@ -929,7 +929,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 			<dd>"<code>defines(</code>" predicate_indicator "<code>,</code>" predicate_definition_property_list "<code>)</code>" |</dd>
 			<dd>"<code>includes(</code>" predicate_indicator "<code>,</code>" object_identifier | category_identifier "<code>,</code>" predicate_definition_property_list "<code>)</code>" |</dd>
 			<dd>"<code>provides(</code>" predicate_indicator "<code>,</code>" object_identifier | category_identifier "<code>,</code>" predicate_definition_property_list "<code>)</code>" |</dd>
-			<dd>"<code>calls(</code>" predicate_indicator | object_identifier"<code>::</code>"predicate_indicator | module_identifier<code>:</code>"predicate_indicator "<code>,</code>" predicate_call_property_list "<code>)</code>" |</dd>
+			<dd>"<code>calls(</code>" predicate_called "<code>,</code>" predicate_call_property_list "<code>)</code>" |</dd>
 			<dd>"<code>number_of_clauses(</code>" <em>integer</em> "<code>)</code>" |</dd>
 			<dd>"<code>number_of_user_clauses(</code>" <em>integer</em> "<code>)</code>"</dd>
 	</dl>
@@ -954,7 +954,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 			<dd>"<code>defines(</code>" predicate_indicator "<code>,</code>" predicate_definition_property_list "<code>)</code>" |</dd>
 			<dd>"<code>includes(</code>" predicate_indicator "<code>,</code>" object_identifier | category_identifier "<code>,</code>" predicate_definition_property_list "<code>)</code>" |</dd>
 			<dd>"<code>provides(</code>" predicate_indicator "<code>,</code>" object_identifier | category_identifier "<code>,</code>" predicate_definition_property_list "<code>)</code>"</dd>
-			<dd>"<code>calls(</code>" predicate_indicator | object_identifier"<code>::</code>"predicate_indicator | module_identifier<code>:</code>"predicate_indicator "<code>,</code>" predicate_call_property_list "<code>)</code>" |</dd>
+			<dd>"<code>calls(</code>" predicate_called "<code>,</code>" predicate_call_property_list "<code>)</code>" |</dd>
 			<dd>"<code>number_of_clauses(</code>" <em>integer</em> "<code>)</code>" |</dd>
 			<dd>"<code>number_of_user_clauses(</code>" <em>integer</em> "<code>)</code>"</dd>
 	</dl>
@@ -969,7 +969,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 			<dd>"<code>protected(</code>" predicate_indicator_list "<code>)</code>" |</dd>
 			<dd>"<code>private(</code>" predicate_indicator_list "<code>)</code>" |</dd>
 			<dd>"<code>declares(</code>" predicate_indicator "<code>,</code>" predicate_declaration_property_list "<code>)</code>" |</dd>
-			<dd>"<code>calls(</code>" predicate_indicator | object_identifier"<code>::</code>"predicate_indicator | module_identifier<code>:</code>"predicate_indicator "<code>,</code>" predicate_call_property_list "<code>)</code>" |</dd>
+			<dd>"<code>calls(</code>" predicate_called "<code>,</code>" predicate_call_property_list "<code>)</code>" |</dd>
 			<dd>"<code>number_of_clauses(</code>" <em>integer</em> "<code>)</code>" |</dd>
 			<dd>"<code>number_of_user_clauses(</code>" <em>integer</em> "<code>)</code>"</dd>
 	</dl>
@@ -1014,6 +1014,17 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 			<dd>"<code>non_terminal(</code>" non_terminal_indicator "<code>)</code>" |</dd>
 			<dd>"<code>line_count(</code>" <em>integer</em> "<code>)</code>" |</dd>
 			<dd>"<code>number_of_clauses(</code>" <em>integer</em> "<code>)</code>"</dd>
+	</dl>
+
+	<dl>
+		<dt>predicate_called ::=</dt>
+			<dd>predicate_indicator |</dd>
+			<dd>"<code>^^</code>" predicate_indicator |</dd>
+			<dd>"<code>::</code>" predicate_indicator |</dd>
+			<dd><em>variable</em> "<code>::</code>" predicate_indicator |</dd>
+			<dd>object_identifier "<code>::</code>" predicate_indicator |</dd>
+			<dd><em>variable</em> "<code>:</code>" predicate_indicator |</dd>
+			<dd>module_identifier "<code>:</code>" predicate_indicator</dd>
 	</dl>
 
 	<dl>
@@ -1069,7 +1080,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: December 5, 2013</span>
+		<span>Last updated on: December 15, 2013</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="index.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="index.html">next</a></span><br/>
