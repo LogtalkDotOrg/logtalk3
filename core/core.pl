@@ -278,7 +278,11 @@
 :- dynamic('$lgt_pp_predicate_definition_line_'/3).			% '$lgt_pp_predicate_definition_line_'(Functor, Arity, Line)
 
 :- dynamic('$lgt_pp_defines_predicate_'/4).					% '$lgt_pp_defines_predicate_'(Head, ExCtx, THead, Mode)
+
 :- dynamic('$lgt_pp_calls_predicate_'/4).					% '$lgt_pp_calls_predicate_'(Functor/Arity, TFunctor/TArity, HeadFunctor/HeadArity, Lines)
+:- dynamic('$lgt_pp_calls_self_predicate_'/3).				% '$lgt_pp_calls_self_predicate_'(Functor/Arity, HeadFunctor/HeadArity, Lines)
+:- dynamic('$lgt_pp_calls_super_predicate_'/3).				% '$lgt_pp_calls_super_predicate_'(Functor/Arity, HeadFunctor/HeadArity, Lines)
+
 :- dynamic('$lgt_pp_non_portable_predicate_'/2).			% '$lgt_pp_non_portable_predicate_'(Head, Lines)
 :- dynamic('$lgt_pp_non_portable_function_'/2).				% '$lgt_pp_non_portable_function_'(Function, Lines)
 :- dynamic('$lgt_pp_missing_dynamic_directive_'/2).			% '$lgt_pp_missing_dynamic_directive_'(Head, Lines)
@@ -5217,6 +5221,16 @@ current_logtalk_flag(Flag, Value) :-
 	fail.
 
 '$lgt_add_entity_properties'(end, Entity) :-
+	'$lgt_pp_calls_self_predicate_'(Predicate, Caller, Line-_),
+	assertz('$lgt_pp_entity_property_'(Entity, calls(::Predicate, [caller(Caller), line_count(Line)]))),
+	fail.
+
+'$lgt_add_entity_properties'(end, Entity) :-
+	'$lgt_pp_calls_super_predicate_'(Predicate, Caller, Line-_),
+	assertz('$lgt_pp_entity_property_'(Entity, calls(^^Predicate, [caller(Caller), line_count(Line)]))),
+	fail.
+
+'$lgt_add_entity_properties'(end, Entity) :-
 	'$lgt_pp_calls_predicate_'(Predicate, _, Caller, Line-_),
 	assertz('$lgt_pp_entity_property_'(Entity, calls(Predicate, [caller(Caller), line_count(Line)]))),
 	fail.
@@ -5623,6 +5637,8 @@ current_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_pp_redefined_built_in_'(_, _, _)),
 	retractall('$lgt_pp_defines_predicate_'(_, _, _, _)),
 	retractall('$lgt_pp_calls_predicate_'(_, _, _, _)),
+	retractall('$lgt_pp_calls_self_predicate_'(_, _, _)),
+	retractall('$lgt_pp_calls_super_predicate_'(_, _, _)),
 	retractall('$lgt_pp_non_portable_predicate_'(_, _)),
 	retractall('$lgt_pp_non_portable_function_'(_, _)),
 	retractall('$lgt_pp_missing_dynamic_directive_'(_, _)),
@@ -9188,7 +9204,7 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, _, _, This, Self, _, _, _, ExCtx, _, _),
 	'$lgt_execution_context'(ExCtx, _, This, Self, _, _),
-	'$lgt_tr_self_msg'(Pred, TPred, This, Self).
+	'$lgt_tr_self_msg'(Pred, TPred, Ctx).
 
 '$lgt_tr_body'(^^Pred, TPred, '$lgt_debug'(goal(^^Pred, TPred), ExCtx), Ctx) :-
 	!,
@@ -10439,6 +10455,70 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
+% '$lgt_remember_called_self_predicate'(@callable, +predicate_indicator, @callable)
+%
+% used for checking calls to undefined predicates and for collecting cross-referencing information
+
+'$lgt_remember_called_self_predicate'(runtime, _, _, _).
+
+'$lgt_remember_called_self_predicate'(compile(aux), _, _, _) :-
+	!.
+
+'$lgt_remember_called_self_predicate'(compile(regular), Functor/Arity, Head) :-
+	'$lgt_current_line_numbers'(Lines),
+	% currently, the returned line numbers are for the start and end lines of the clause containing the call
+	(	'$lgt_pp_calls_self_predicate_'(Functor/Arity, _, Lines) ->
+		% already reported for the current clause being compiled (however unlikely!)
+		true
+	;	Head = Object::Predicate ->
+		% call from the body of a Logtalk multifile predicate clause
+		functor(Predicate, HeadFunctor, HeadArity),
+		assertz('$lgt_pp_calls_self_predicate_'(Functor/Arity, Object::HeadFunctor/HeadArity, Lines))
+	;	Head = ':'(Module,Predicate) ->
+		% call from the body of a Prolog module multifile predicate clause
+		functor(Predicate, HeadFunctor, HeadArity),
+		assertz('$lgt_pp_calls_self_predicate_'(Functor/Arity, ':'(Module,HeadFunctor/HeadArity), Lines))
+	;	% call from the body of a local entity clause
+		functor(Head, HeadFunctor, HeadArity) ->
+		assertz('$lgt_pp_calls_self_predicate_'(Functor/Arity, HeadFunctor/HeadArity, Lines))
+	;	% recursive call
+		true
+	).
+
+
+
+% '$lgt_remember_called_super_predicate'(@callable, +predicate_indicator, @callable)
+%
+% used for checking calls to undefined predicates and for collecting cross-referencing information
+
+'$lgt_remember_called_super_predicate'(runtime, _, _, _).
+
+'$lgt_remember_called_super_predicate'(compile(aux), _, _, _) :-
+	!.
+
+'$lgt_remember_called_super_predicate'(compile(regular), Functor/Arity, Head) :-
+	'$lgt_current_line_numbers'(Lines),
+	% currently, the returned line numbers are for the start and end lines of the clause containing the call
+	(	'$lgt_pp_calls_super_predicate_'(Functor/Arity, _, Lines) ->
+		% already reported for the current clause being compiled (however unlikely!)
+		true
+	;	Head = Object::Predicate ->
+		% call from the body of a Logtalk multifile predicate clause
+		functor(Predicate, HeadFunctor, HeadArity),
+		assertz('$lgt_pp_calls_super_predicate_'(Functor/Arity, Object::HeadFunctor/HeadArity, Lines))
+	;	Head = ':'(Module,Predicate) ->
+		% call from the body of a Prolog module multifile predicate clause
+		functor(Predicate, HeadFunctor, HeadArity),
+		assertz('$lgt_pp_calls_super_predicate_'(Functor/Arity, ':'(Module,HeadFunctor/HeadArity), Lines))
+	;	% call from the body of a local entity clause
+		functor(Head, HeadFunctor, HeadArity) ->
+		assertz('$lgt_pp_calls_super_predicate_'(Functor/Arity, HeadFunctor/HeadArity, Lines))
+	;	% recursive call
+		true
+	).
+
+
+
 % '$lgt_convert_existentially_quantified_goal'(@callable, -callable, -callable, -callable)
 %
 % converts a ^/2 goal at runtime (used with bagof/3 and setof/3)
@@ -11157,90 +11237,100 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_tr_self_msg'(@term, -callable, @object_identifier, @object_identifier)
+% '$lgt_tr_self_msg'(@term, -callable, @execution_context)
 %
 % translates the sending of a message to self
 
 
 % translation performed at runtime
 
-'$lgt_tr_self_msg'(Pred, '$lgt_send_to_self'(Self, Pred, This), This, Self) :-
+'$lgt_tr_self_msg'(Pred, '$lgt_send_to_self'(Self, Pred, This), Ctx) :-
 	var(Pred),
-	!.
+	!,
+	'$lgt_comp_ctx_self'(Ctx, Self),
+	'$lgt_comp_ctx_this'(Ctx, This).
 
 % broadcasting control constructs
 
-'$lgt_tr_self_msg'((Pred1, Pred2), (TPred1, TPred2), This, Self) :-
+'$lgt_tr_self_msg'((Pred1, Pred2), (TPred1, TPred2), Ctx) :-
 	!,
-	'$lgt_tr_self_msg'(Pred1, TPred1, This, Self),
-	'$lgt_tr_self_msg'(Pred2, TPred2, This, Self).
+	'$lgt_tr_self_msg'(Pred1, TPred1, Ctx),
+	'$lgt_tr_self_msg'(Pred2, TPred2, Ctx).
 
-'$lgt_tr_self_msg'((Pred1; Pred2), (TPred1; TPred2), This, Self) :-
+'$lgt_tr_self_msg'((Pred1; Pred2), (TPred1; TPred2), Ctx) :-
 	!,
-	'$lgt_tr_self_msg'(Pred1, TPred1, This, Self),
-	'$lgt_tr_self_msg'(Pred2, TPred2, This, Self).
+	'$lgt_tr_self_msg'(Pred1, TPred1, Ctx),
+	'$lgt_tr_self_msg'(Pred2, TPred2, Ctx).
 
-'$lgt_tr_self_msg'((Pred1 -> Pred2), (TPred1 -> TPred2), This, Self) :-
+'$lgt_tr_self_msg'((Pred1 -> Pred2), (TPred1 -> TPred2), Ctx) :-
 	!,
-	'$lgt_tr_self_msg'(Pred1, TPred1, This, Self),
-	'$lgt_tr_self_msg'(Pred2, TPred2, This, Self).
+	'$lgt_tr_self_msg'(Pred1, TPred1, Ctx),
+	'$lgt_tr_self_msg'(Pred2, TPred2, Ctx).
 
-'$lgt_tr_self_msg'('*->'(Pred1, Pred2), '*->'(TPred1, TPred2), This, Self) :-
+'$lgt_tr_self_msg'('*->'(Pred1, Pred2), '*->'(TPred1, TPred2), Ctx) :-
 	'$lgt_predicate_property'('*->'(_, _), built_in),
 	!,
-	'$lgt_tr_self_msg'(Pred1, TPred1, This, Self),
-	'$lgt_tr_self_msg'(Pred2, TPred2, This, Self).
+	'$lgt_tr_self_msg'(Pred1, TPred1, Ctx),
+	'$lgt_tr_self_msg'(Pred2, TPred2, Ctx).
 
 % built-in methods that cannot be redefined
 
-'$lgt_tr_self_msg'(!, !, _, _) :-
+'$lgt_tr_self_msg'(!, !, _) :-
 	!.
 
-'$lgt_tr_self_msg'(true, true, _, _) :-
+'$lgt_tr_self_msg'(true, true, _) :-
 	!.
 
-'$lgt_tr_self_msg'(false, false, _, _) :-
+'$lgt_tr_self_msg'(false, false, _) :-
 	!.
 
-'$lgt_tr_self_msg'(fail, fail, _, _) :-
+'$lgt_tr_self_msg'(fail, fail, _) :-
 	!.
 
-'$lgt_tr_self_msg'(repeat, repeat, _, _) :-
+'$lgt_tr_self_msg'(repeat, repeat, _) :-
 	!.
 
 % reflection built-in predicates
 
-'$lgt_tr_self_msg'(current_op(Priority, Specifier, Operator), '$lgt_current_op'(Self, Priority, Specifier, Operator, This, p(_)), This, Self) :-
+'$lgt_tr_self_msg'(current_op(Priority, Specifier, Operator), '$lgt_current_op'(Self, Priority, Specifier, Operator, This, p(_)), Ctx) :-
 	!,
 	'$lgt_must_be'(var_or_operator_priority, Priority),
 	'$lgt_must_be'(var_or_operator_specifier, Specifier),
-	'$lgt_must_be'(var_or_atom, Operator).
+	'$lgt_must_be'(var_or_atom, Operator),
+	'$lgt_comp_ctx_self'(Ctx, Self),
+	'$lgt_comp_ctx_this'(Ctx, This).
 
-'$lgt_tr_self_msg'(current_predicate(Pred), '$lgt_current_predicate'(Self, Pred, This, p(_)), This, Self) :-
+'$lgt_tr_self_msg'(current_predicate(Pred), '$lgt_current_predicate'(Self, Pred, This, p(_)), Ctx) :-
 	!,
-	'$lgt_must_be'(var_or_predicate_indicator, Pred).	
+	'$lgt_must_be'(var_or_predicate_indicator, Pred),
+	'$lgt_comp_ctx_self'(Ctx, Self),
+	'$lgt_comp_ctx_this'(Ctx, This).
 
-'$lgt_tr_self_msg'(predicate_property(Pred, Prop), '$lgt_predicate_property'(Self, Pred, Prop, This, p(_)), This, Self) :-
+'$lgt_tr_self_msg'(predicate_property(Pred, Prop), '$lgt_predicate_property'(Self, Pred, Prop, This, p(_)), Ctx) :-
 	!,
 	'$lgt_must_be'(var_or_callable, Pred),
-	'$lgt_must_be'(var_or_predicate_property, Prop).
+	'$lgt_must_be'(var_or_predicate_property, Prop),
+	'$lgt_comp_ctx_self'(Ctx, Self),
+	'$lgt_comp_ctx_this'(Ctx, This).
 
 % database handling built-in predicates
 
-'$lgt_tr_self_msg'(abolish(Pred), TPred, This, Self) :-
+'$lgt_tr_self_msg'(abolish(Pred), TPred, Ctx) :-
 	!,
 	(	ground(Pred) ->
 		'$lgt_must_be'(predicate_indicator, Pred),
 		TPred = '$lgt_abolish_checked'(Self, Pred, This, p(_))
 	;	% partially instantiated predicate indicator; runtime check required
 		TPred = '$lgt_abolish'(Self, Pred, This, p(_))
-	).
+	),
+	'$lgt_comp_ctx_self'(Ctx, Self),
+	'$lgt_comp_ctx_this'(Ctx, This).
 
-'$lgt_tr_self_msg'(assert(Clause), TPred, This, Self) :-
+'$lgt_tr_self_msg'(assert(Clause), TPred, Ctx) :-
 	!,
-	'$lgt_tr_self_msg'(assertz(Clause), TPred, This, Self).
+	'$lgt_tr_self_msg'(assertz(Clause), TPred, Ctx).
 
-'$lgt_tr_self_msg'(asserta(Clause), TPred, This, Self) :-
+'$lgt_tr_self_msg'(asserta(Clause), TPred, Ctx) :-
 	!,
 	(	'$lgt_runtime_db_clause_checked'(Clause) ->
 		TPred = '$lgt_asserta'(Self, Clause, This, p(_), p(p))
@@ -11252,9 +11342,11 @@ current_logtalk_flag(Flag, Value) :-
 			)
 		;	TPred = '$lgt_asserta_fact_checked'(Self, Clause, This, p(_), p(p))
 		)
-	).
+	),
+	'$lgt_comp_ctx_self'(Ctx, Self),
+	'$lgt_comp_ctx_this'(Ctx, This).
 
-'$lgt_tr_self_msg'(assertz(Clause), TPred, This, Self) :-
+'$lgt_tr_self_msg'(assertz(Clause), TPred, Ctx) :-
 	!,
 	(	'$lgt_runtime_db_clause_checked'(Clause) ->
 		TPred = '$lgt_assertz'(Self, Clause, This, p(_), p(p))
@@ -11266,17 +11358,21 @@ current_logtalk_flag(Flag, Value) :-
 			)
 		;	TPred = '$lgt_assertz_fact_checked'(Self, Clause, This, p(_), p(p))
 		)
-	).
+	),
+	'$lgt_comp_ctx_self'(Ctx, Self),
+	'$lgt_comp_ctx_this'(Ctx, This).
 
-'$lgt_tr_self_msg'(clause(Head, Body), TPred, This, Self) :-
+'$lgt_tr_self_msg'(clause(Head, Body), TPred, Ctx) :-
 	!,
 	(	'$lgt_runtime_db_clause_checked'((Head :- Body)) ->
 		TPred = '$lgt_clause'(Self, Head, Body, This, p(_))
 	;	'$lgt_must_be'(clause_or_partial_clause, (Head :- Body)),
 		TPred = '$lgt_clause_checked'(Self, Head, Body, This, p(_))
-	).
+	),
+	'$lgt_comp_ctx_self'(Ctx, Self),
+	'$lgt_comp_ctx_this'(Ctx, This).
 
-'$lgt_tr_self_msg'(retract(Clause), TPred, This, Self) :-
+'$lgt_tr_self_msg'(retract(Clause), TPred, Ctx) :-
 	!,
 	(	'$lgt_runtime_db_clause_checked'(Clause) ->
 		TPred = '$lgt_retract'(Self, Clause, This, p(_))
@@ -11290,34 +11386,45 @@ current_logtalk_flag(Flag, Value) :-
 			)
 		;	TPred = '$lgt_retract_fact_checked'(Self, Clause, This, p(_))
 		)
-	).
+	),
+	'$lgt_comp_ctx_self'(Ctx, Self),
+	'$lgt_comp_ctx_this'(Ctx, This).
 
-'$lgt_tr_self_msg'(retractall(Head), TPred, This, Self) :-
+'$lgt_tr_self_msg'(retractall(Head), TPred, Ctx) :-
 	!,
 	(	var(Head) ->
 		TPred = '$lgt_retractall'(Self, Head, This, p(_))
 	;	'$lgt_must_be'(callable, Head),
 		TPred = '$lgt_retractall_checked'(Self, Head, This, p(_))
-	).
+	),
+	'$lgt_comp_ctx_self'(Ctx, Self),
+	'$lgt_comp_ctx_this'(Ctx, This).
 
 % term and goal expansion predicates
 
-'$lgt_tr_self_msg'(expand_term(Term, Expansion), '$lgt_expand_term'(Self, Term, Expansion, This, p(_)), This, Self) :-
-	!.
+'$lgt_tr_self_msg'(expand_term(Term, Expansion), '$lgt_expand_term'(Self, Term, Expansion, This, p(_)), Ctx) :-
+	!,
+	'$lgt_comp_ctx_self'(Ctx, Self),
+	'$lgt_comp_ctx_this'(Ctx, This).
 
-'$lgt_tr_self_msg'(expand_goal(Goal, ExpandedGoal), '$lgt_expand_goal'(Self, Goal, ExpandedGoal, This, p(_)), This, Self) :-
-	!.
+'$lgt_tr_self_msg'(expand_goal(Goal, ExpandedGoal), '$lgt_expand_goal'(Self, Goal, ExpandedGoal, This, p(_)), Ctx) :-
+	!,
+	'$lgt_comp_ctx_self'(Ctx, Self),
+	'$lgt_comp_ctx_this'(Ctx, This).
 
 % invalid message
 
-'$lgt_tr_self_msg'(Pred, _, _, _) :-
+'$lgt_tr_self_msg'(Pred, _, _) :-
 	\+ callable(Pred),
 	throw(type_error(callable, Pred)).
 
 % message is not a built-in control construct or a call to a built-in
 % (meta-)predicate: translation performed at runtime
 
-'$lgt_tr_self_msg'(Pred, '$lgt_send_to_self_'(Self, Pred, This), This, Self) :-
+'$lgt_tr_self_msg'(Pred, '$lgt_send_to_self_'(Self, Pred, This), Ctx) :-
+	'$lgt_comp_ctx'(Ctx, Head, _, This, Self, _, _, _, _, Mode, _),
+	functor(Pred, Functor, Arity),
+	'$lgt_remember_called_self_predicate'(Mode, Functor/Arity, Head),
 	!.
 
 
@@ -11340,13 +11447,15 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		TPred = '$lgt_obj_super_call'(Super, Pred, ExCtx)
 	;	callable(Pred) ->
-		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+		'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, ExCtx, Mode, _),
 		(	'$lgt_compiler_flag'(optimize, on),
 			'$lgt_related_entities_are_static',
 			'$lgt_obj_super_call_static_binding'(Obj, Pred, ExCtx, TPred) ->
 			true
 		;	TPred = '$lgt_obj_super_call_'(Super, Pred, ExCtx)
-		)
+		),
+		functor(Pred, Functor, Arity),
+		'$lgt_remember_called_super_predicate'(Mode, Functor/Arity, Head)
 	;	throw(type_error(callable, Pred))
 	).
 
@@ -11360,13 +11469,15 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		TPred = '$lgt_ctg_super_call'(Ctg, Pred, ExCtx)
 	;	callable(Pred) ->
-		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+		'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, ExCtx, Mode, _),
 		(	'$lgt_compiler_flag'(optimize, on),
 			'$lgt_related_entities_are_static',
 			'$lgt_ctg_super_call_static_binding'(Ctg, Pred, ExCtx, TPred) ->
 			true
 		;	TPred = '$lgt_ctg_super_call_'(Ctg, Pred, ExCtx)
-		)
+		),
+		functor(Pred, Functor, Arity),
+		'$lgt_remember_called_super_predicate'(Mode, Functor/Arity, Head)
 	;	throw(type_error(callable, Pred))
 	).
 
