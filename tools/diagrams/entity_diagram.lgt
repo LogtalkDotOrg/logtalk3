@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/12/12,
+		date is 2013/12/15,
 		comment is 'Predicates for generating entity diagrams.',
 		argnames is ['Format']
 	]).
@@ -217,6 +217,7 @@
 
 	output_protocol_cross_reference_relations(Protocol, Options, Format) :-
 		protocol_property(Protocol, calls(Other::_, _)),
+		nonvar(Other),
 		\+ referenced_entity_(Other),
 		print_name(protocol, Protocol, ProtocolName),
 		print_name(object, Other, OtherName),
@@ -225,6 +226,7 @@
 		fail.
 	output_protocol_cross_reference_relations(Protocol, Options, Format) :-
 		protocol_property(Protocol, calls(':'(Module,_), _)),
+		nonvar(Module),
 		\+ referenced_entity_(Module),
 		print_name(protocol, Protocol, ProtocolName),
 		print_name(module, Module, ModuleName),
@@ -282,6 +284,7 @@
 
 	output_object_cross_reference_relations(Object, Options, Format) :-
 		object_property(Object, calls(Other::_, _)),
+		nonvar(Other),
 		\+ referenced_entity_(Other),
 		print_name(object, Object, ObjectName),
 		print_name(object, Other, OtherName),
@@ -290,6 +293,7 @@
 		fail.
 	output_object_cross_reference_relations(Object, Options, Format) :-
 		object_property(Object, calls(':'(Module,_), _)),
+		nonvar(Module),
 		\+ referenced_entity_(Module),
 		print_name(object, Object, ObjectName),
 		print_name(module, Module, ModuleName),
@@ -333,6 +337,7 @@
 
 	output_category_cross_reference_relations(Category, Options, Format) :-
 		category_property(Category, calls(Object::_, _)),
+		nonvar(Object),
 		\+ referenced_entity_(Object),
 		print_name(category, Category, CategoryName),
 		print_name(object, Object, ObjectName),
@@ -341,6 +346,7 @@
 		fail.
 	output_category_cross_reference_relations(Category, Options, Format) :-
 		category_property(Category, calls(':'(Module,_), _)),
+		nonvar(Module),
 		\+ referenced_entity_(Module),
 		print_name(category, Category, CategoryName),
 		print_name(module, Module, ModuleName),
