@@ -5097,11 +5097,11 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_current_line_numbers'(Lines),
 		(	'$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, _, HeadFunctor/HeadArity, Lines) ->
 			true
-		;	atom(Obj) ->
-			assertz('$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, PredFunctor/PredArity, HeadFunctor/HeadArity, Lines))
-		;	% parametric object
+		;	compound(Obj) ->
+			% parametric object
 			'$lgt_term_template'(Obj, Template),
 			assertz('$lgt_pp_referenced_object_message_'(Template, PredFunctor/PredArity, PredFunctor/PredArity, HeadFunctor/HeadArity, Lines))
+		;	assertz('$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, PredFunctor/PredArity, HeadFunctor/HeadArity, Lines))
 		)
 	).
 
@@ -11196,10 +11196,15 @@ current_logtalk_flag(Flag, Value) :-
 
 % message is not a built-in control construct or a call to a built-in (meta-)predicate
 
-'$lgt_tr_msg'(Pred, Obj, TPred, This, _) :-
+'$lgt_tr_msg'(Pred, Obj, TPred, This, Head) :-
 	var(Obj),
 	% translation performed at runtime
 	!,
+	(	'$lgt_pp_entity_'(_, _, _, _, _) ->
+		'$lgt_add_referenced_object_message'(Obj, Pred, Head)
+	;	% assume runtime translation
+		true
+	),
 	(	'$lgt_compiler_flag'(events, allow) ->
 		TPred = '$lgt_send_to_obj'(Obj, Pred, This)
 	;	TPred = '$lgt_send_to_obj_ne'(Obj, Pred, This)
