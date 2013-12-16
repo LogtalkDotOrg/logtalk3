@@ -86,9 +86,9 @@ script accepts an installation prefix as argument. For example:
 If no prefix is given, the default installation prefix depends on the
 operating-system:
 
-	Mac OS X:				`/opt/local`
-	Debian distributions:	`/usr`
-	Other POSIX systems:	`/usr/local`
+* Mac OS X:				`/opt/local`
+* Debian distributions:	`/usr`
+* Other POSIX systems:	`/usr/local`
 
 The script installs Logtalk in the `$prefix/share` directory with Prolog
 integration and other useful shell scripts written to the `$prefix/bin`
@@ -154,13 +154,10 @@ libraries, and other supporting files) in his/her home directory. These copies
 can be easily made by running the `logtalk_user_setup` shell script (see the
 `scripts/NOTES.txt` file for details):
 
-* POSIX systems:
-
-	% logtalk_user_setup
-
-* Windows:
-
-	C:\> logtalk_user_setup
+* POSIX systems  
+	`% logtalk_user_setup`
+* Windows  
+	`C:\> logtalk_user_setup`
 
 The local copies made by the `logtalk_user_setup` scripts have both read and
 write permissions for the user running the script. When used with one of the 

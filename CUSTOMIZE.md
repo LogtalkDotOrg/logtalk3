@@ -25,14 +25,16 @@ CUSTOMIZATION INSTRUCTIONS
 ==========================
 
 This file contains detailed instructions for customizing your Logtalk 
-installation and working environment. Customization is mostly done on
+installation and working environment. Customization is usually done on
 a per-user basis by editing a settings file on the Logtalk user folder 
 (whose path is stored on the `LOGTALKUSER` environment variable; this
 folder can be (re)created by running the `logtalk_user_setup` shell
 command). The default path for the Logtalk user folder is:
 
-	POSIX systems: $HOME/logtalk
-	Windows: My Documents\Logtalk
+* POSIX systems  
+    `$HOME/logtalk`
+* Windows  
+    `My Documents\Logtalk`
 
 
 1. DEFINING A DEFAULT PROLOG BACK-END COMPILER
@@ -71,8 +73,8 @@ Logtalk when compiling source files (for a full description of these flags,
 consult the `Writing, Running, and Debugging Logtalk Programs` section of
 the User Manual). 
 
-The default compiler flag settings are appropriated for the development (but
-likely not for the deployment) of applications. Check the example settings on
+The default compiler flag settings are appropriated for the *development* (but
+likely not for the *deployment*) of applications. Check the example settings on
 the `settings-sample.lgt` for suggestions.
 
 You may customize the Logtalk compiler flags and add your own library paths
@@ -81,14 +83,14 @@ to `settings.lgt` and editing it. Settings in this file override the default
 values in the adapter files. Some of the default flag values that you may want
 to change include:
 
-* `report`
+* `report`  
     for less verbose startup and compilation reports
 
-* `scratch_directory`
+* `scratch_directory`  
     to move compiler generated temporary files out of the way or to
     collect them for embedding Logtalk applications
 
-* `portability` and `underscore_variables`
+* `portability` and `underscore_variables`  
     essential if you're writing portable Logtalk applications
 
 Check the `adapters/NOTES.txt` file for Prolog specific compatibility notes.

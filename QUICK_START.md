@@ -27,7 +27,7 @@ QUICK START INSTRUCTIONS
 Starting up Logtalk
 -------------------
 
-1. Install Logtalk by using either the installer provided for your 
+Install Logtalk by using either the installer provided for your 
 operating-system (when available) or by following the instructions 
 on the `INSTALL.md` file.
 
@@ -66,15 +66,13 @@ scripts or shortcuts, consult the `adapters/NOTES.txt` file in the Logtalk
 installation folder for compatibility notes. For the integration scripts,
 see also the integration script man page.
 
-2. Open the `manuals/index.html` file with a web browser.
-
-3. Select the `Tutorial` link. This will provide you with a basic 
-understanding of some of the main Logtalk concepts.
-
-4. Go back to the `index.html` file, select the `User Manual` link, then
-the `Installing Logtalk` and `Writing, Running, and Debugging Logtalk
-Programs` links. This will provide you with a basic understanding of 
-how to start Logtalk as well as how to compile and load Logtalk code.
+Open the `manuals/index.html` file with a web browser and select the
+`Tutorial` link. This will provide you with a basic understanding of
+some of the main Logtalk concepts. You can then go back to the `index.html`
+file, select the `User Manual` link, then the `Installing Logtalk` and
+`Writing, Running, and Debugging Logtalk Programs` links. This will
+provide you with a basic understanding of how to start Logtalk as well
+as how to compile and load Logtalk code.
 
 
 Running the examples
@@ -99,8 +97,8 @@ Writing your own programs
 
 Ready to start writing your own programs?
 
-1. Read the User Manual sections on `Programming in Logtalk` and `Running 
-and debugging Logtalk programs`.
+1. Read the User Manual sections on `Programming in Logtalk` and
+`Running and debugging Logtalk programs`.
 
 2. Take a look to the `adapters/NOTES.txt` file for important compatibility
 information about your chosen backend Prolog compiler and for any defined
