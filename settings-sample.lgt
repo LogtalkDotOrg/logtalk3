@@ -48,13 +48,13 @@
 %  customize it (see the examples below), and start Logtalk from the desired
 %  directory. Note that, for setting Logtalk flag values, you must use the
 %  `set_logtalk_flag/2` predicate (wrapped in a `initialization/1` directive)
-%  as the scope of the directive `set_logtalk_flag/2` is always local to the
-%  entity or the source file containing it.
+%  as the scope of the `set_logtalk_flag/2` directive is local to the entity
+%  or the source file containing it.
 %
 %  If you use more than one back-end Prolog compiler and want to use per
 %  compiler settings, you can use the Logtalk conditional compilation
 %  directives and the `prolog_dialect` compiler flag. See the User and
-%   Reference Manuals for details.
+%  Reference Manuals for details.
 %
 %  Logtalk compiles and loads settings files silently but a warning will
 %  be printed by default if syntax errors are found. Be sure to debug and
@@ -142,7 +142,7 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 */
 
 
-% To take advantage of ECLiPSe .eco files, uncomment the
+% To take advantage of ECLiPSe `.eco` files, uncomment the
 % following lines:
 
 /*
@@ -153,7 +153,7 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 */
 
 
-% To take advantage of SWI-Prolog .qlf files, uncomment the
+% To take advantage of SWI-Prolog `.qlf` files, uncomment the
 % following lines:
 
 /*

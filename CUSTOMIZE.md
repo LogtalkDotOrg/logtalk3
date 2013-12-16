@@ -69,13 +69,15 @@ can be found on the `adapters` folder in the Logtalk installation folder.
 These adapter files define default values of the flags that are used by
 Logtalk when compiling source files (for a full description of these flags, 
 consult the `Writing, Running, and Debugging Logtalk Programs` section of
-the User Manual). The default compiler flag settings are appropriated for the
-development (not the deployment) of applications. Check the example settings
-on the `settings-sample.lgt` for suggestions.
+the User Manual). 
 
-You may customize the Logtalk compiler flags and add your own library paths by
-copy or renaming the `settings-sample.lgt` file in your Logtalk user folder to
-`settings.lgt` and editing it. Settings in this file override the default 
+The default compiler flag settings are appropriated for the development (but
+likely not for the deployment) of applications. Check the example settings on
+the `settings-sample.lgt` for suggestions.
+
+You may customize the Logtalk compiler flags and add your own library paths
+by copy or renaming the `settings-sample.lgt` file in your Logtalk user folder
+to `settings.lgt` and editing it. Settings in this file override the default 
 values in the adapter files. Some of the default flag values that you may want
 to change include:
 
