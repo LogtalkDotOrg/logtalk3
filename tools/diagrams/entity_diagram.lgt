@@ -23,12 +23,12 @@
 
 
 :- object(entity_diagram(Format),
-	extends(diagram(Format))).
+	imports(diagram(Format))).
 
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/12/15,
+		date is 2013/12/16,
 		comment is 'Predicates for generating entity diagrams.',
 		argnames is ['Format']
 	]).

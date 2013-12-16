@@ -22,12 +22,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(diagram(_Format)).
+:- category(diagram(_Format)).
 
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/12/12,
+		date is 2013/12/16,
 		comment is 'Predicates for generating diagrams.',
 		argnames is ['Format']
 	]).
@@ -342,4 +342,4 @@
 	member(Option, [_| Options]) :-
 		member(Option, Options).
 
-:- end_object.
+:- end_category.
