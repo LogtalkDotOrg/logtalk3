@@ -17,7 +17,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/11/18,
+		date is 2013/12/16,
 		comment is 'Sample object for testing with the `source_data` flag turned on.']).
 
 	:- set_logtalk_flag(complements, allow).
@@ -26,7 +26,9 @@
 	:- set_logtalk_flag(events, allow).
 
 	:- public(a/1).
-	:- coinductive(a/1).
+	:- if(current_logtalk_flag(coinduction, supported)).
+		:- coinductive(a/1).
+	:- endif.
 	a(1).
 
 	:- protected(b/2).
@@ -111,7 +113,10 @@
 		member((public), Properties1),
 		member(scope(Scope1), Properties1), Scope1 == (public),
 		member(static, Properties1),
-		member(coinductive(Template), Properties1), Template == a(+),
+		(	current_logtalk_flag(coinduction, supported) ->
+			member(coinductive(Template), Properties1), Template == a(+)
+		;	true
+		),
 		member(line_count(LC1), Properties1), integer(LC1),
 		object_property(test_object, declares(b/2, Properties2)),
 		member(protected, Properties2),
