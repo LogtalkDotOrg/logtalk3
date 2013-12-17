@@ -72,11 +72,11 @@
 		argnames is ['Stream', 'Identifier', 'Label', 'Lines', 'Kind', 'Options']
 	]).
 
-	:- public(edge/5).
-	:- mode(edge(+stream_or_alias, +atom, +atom, +atom, +list(compound)), one).
-	:- info(edge/5, [
+	:- public(edge/6).
+	:- mode(edge(+stream_or_alias, +atom, +atom, +atom, +atom, +list(compound)), one).
+	:- info(edge/6, [
 		comment is 'Writes an edge between two nodes using the specified options.',
-		argnames is ['Stream', 'Start', 'End', 'Label', 'Options']
+		argnames is ['Stream', 'Start', 'End', 'Label', 'Kind', 'Options']
 	]).
 
 :- end_protocol.

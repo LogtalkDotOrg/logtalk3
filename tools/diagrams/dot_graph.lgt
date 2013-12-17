@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/12/11,
+		date is 2013/12/17,
 		comment is 'Generates entity diagram DOT files for source files and libraries.'
 	]).
 
@@ -85,9 +85,9 @@
 	output_file_footer(Stream, _Options) :-
 		write(Stream, '}\n').
 
-	graph_header(Stream, Id, Label, Options) :-
+	graph_header(Stream, Identifier, Label, Options) :-
 		write(Stream, 'subgraph "cluster_'),
-		write(Stream, Id),
+		write(Stream, Identifier),
 		write(Stream, '" {\n'),
 		write(Stream, 'bgcolor="'),
 		(	member(bgcolor(BGColor), Options) ->
@@ -99,14 +99,14 @@
 		write(Stream, Label),
 		write(Stream, '"\n').
 
-	graph_footer(Stream, _Id, _Label, _Options) :-
+	graph_footer(Stream, _Identifier, _Label, _Options) :-
 		write(Stream, '}\n\n').
 
-	node(Stream, Id, Label, Lines, Kind, _Options) :-
+	node(Stream, Identifier, Label, Lines, Kind, _Options) :-
 		lines_to_contents(Lines, Contents),
 		entity_shape(Kind, Shape, Style),
 		write(Stream, '"'),
-		write(Stream, Id),
+		write(Stream, Identifier),
 		write(Stream, '" [shape='),
 		write(Stream, Shape),
 		write(Stream, ',style='),
@@ -131,8 +131,8 @@
 
 	entity_shape(file, box, solid).
 
-	edge(Stream, Start, End, Label, Options) :-
-		label_edge(Label, ArrowHead),
+	edge(Stream, Start, End, Label, Kind, Options) :-
+		kind_edge(Kind, ArrowHead),
 		write(Stream, '"'),
 		write(Stream, Start),
 		write(Stream, '" -> "'),
@@ -146,17 +146,16 @@
 		;	write(Stream, ',label=""]\n')
 		).
 
-	label_edge(extends, vee).
-	label_edge(instantiates, normal).
-	label_edge(specializes, onormal).
-	label_edge(implements, dot).
-	label_edge(imports, box).
-	label_edge(complements, obox).
-
-	label_edge(uses, none).
-	label_edge(use_module, none).
-
-	label_edge(loads, normal).
+	kind_edge(extends_object, vee).
+	kind_edge(extends_protocol, vee).
+	kind_edge(extends_category, vee).
+	kind_edge(instantiates_class, normal).
+	kind_edge(specializes_class, onormal).
+	kind_edge(implements_protocol, dot).
+	kind_edge(imports_category, box).
+	kind_edge(complements_object, obox).
+	kind_edge(calls_predicate, none).
+	kind_edge(loads_file, normal).
 
 	lines_to_contents([], '').
 	lines_to_contents([Line| Lines], Contents) :-
