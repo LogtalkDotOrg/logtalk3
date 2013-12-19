@@ -2145,7 +2145,7 @@ current_logtalk_flag(Flag, Value) :-
 % the last argument is an atom: 'aXX' for alpha versions, 'bXX' for beta
 % versions, and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 0, 0, a32)).
+'$lgt_version_data'(logtalk(3, 0, 0, a33)).
 
 
 
@@ -10459,9 +10459,9 @@ current_logtalk_flag(Flag, Value) :-
 %
 % used for checking calls to undefined predicates and for collecting cross-referencing information
 
-'$lgt_remember_called_self_predicate'(runtime, _, _, _).
+'$lgt_remember_called_self_predicate'(runtime, _, _).
 
-'$lgt_remember_called_self_predicate'(compile(aux), _, _, _) :-
+'$lgt_remember_called_self_predicate'(compile(aux), _, _) :-
 	!.
 
 '$lgt_remember_called_self_predicate'(compile(regular), Functor/Arity, Head) :-
@@ -10491,9 +10491,9 @@ current_logtalk_flag(Flag, Value) :-
 %
 % used for checking calls to undefined predicates and for collecting cross-referencing information
 
-'$lgt_remember_called_super_predicate'(runtime, _, _, _).
+'$lgt_remember_called_super_predicate'(runtime, _, _).
 
-'$lgt_remember_called_super_predicate'(compile(aux), _, _, _) :-
+'$lgt_remember_called_super_predicate'(compile(aux), _, _) :-
 	!.
 
 '$lgt_remember_called_super_predicate'(compile(regular), Functor/Arity, Head) :-

@@ -25,6 +25,18 @@ RELEASE NOTES
 =============
 
 
+3.00.0 Alpha 33 - December ??, 2013
+===================================
+
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Compiler bug when saving predicate cross-referencing information
+that resulted in runtime errors when attempting to create objects with an
+initial set of clauses that includes calls to the `(::)/1` and `(^^)/1`
+control constructs. Thanks to Andreas Becker for the bug report.
+
+
 3.00.0 Alpha 32 - December 18, 2013
 ===================================
 
