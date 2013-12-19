@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/11/19,
+		date is 2013/12/19,
 		comment is 'Unit tests for the create_object/4 built-in predicate.'
 	]).
 
@@ -54,5 +54,11 @@
 	succeeds(create_object_1_10) :-
 		create_object(Object, [], [], [foo(1), (bar(X) :- foo(X))]),
 		abolish_object(Object).
+
+	succeeds(create_object_1_11) :-
+		create_object(Parent, [], [public([p/1, q/1])], [p(0), q(0)]),
+		create_object(Descendant, [extends(Parent)], [], [p(1), (p(X) :- ^^p(X)), q(1), (q(X) :- ::p(X))]),
+		abolish_object(Descendant),
+		abolish_object(Parent).
 
 :- end_object.

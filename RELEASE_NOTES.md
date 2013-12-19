@@ -36,6 +36,13 @@ that resulted in runtime errors when attempting to create objects with an
 initial set of clauses that includes calls to the `(::)/1` and `(^^)/1`
 control constructs. Thanks to Andreas Becker for the bug report.
 
+Tests
+-----
+
+* ADDED: Unit tests for the `create_object/4` and `create_category/4` built-in
+predicates to test creation of objects and categories with an initial set of
+predicate rules.
+
 
 3.00.0 Alpha 32 - December 18, 2013
 ===================================
