@@ -43,6 +43,12 @@ Tests
 predicates to test creation of objects and categories with an initial set of
 predicate rules.
 
+Library
+-------
+
+* UPDATED: The library object `term` now uses the `subsumes_term/2` ISO Prolog
+standard predicate when available to implement its `subsumes/2` predicate.
+
 
 3.00.0 Alpha 32 - December 18, 2013
 ===================================

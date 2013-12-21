@@ -27,9 +27,9 @@
 	implements(termp)).
 
 	:- info([
-		version is 1.5,
+		version is 1.6,
 		author is 'Paulo Moura',
-		date is 2010/1/8,
+		date is 2013/12/21,
 		comment is 'Prolog term utility predicates.'
 	]).
 
@@ -100,10 +100,10 @@
 		N2 is N - 1,
 		occurs(N2, Var, Term).
 
-	:- if(predicate_property(subsumes(_, _), built_in)).
+	:- if(predicate_property(subsumes_term(_, _), built_in)).
 
 		subsumes(General, Specific) :-
-			{subsumes(General, Specific)}.
+			{subsumes_term(General, Specific)}.
 
 	:- else.
 
@@ -173,8 +173,8 @@
 	:- else.
 
 		variant(Term1, Term2) :-
-			\+ \+ subsumes(Term1, Term2),
-			\+ \+ subsumes(Term2, Term1).
+			\+ \+ subsumes_term(Term1, Term2),
+			\+ \+ subsumes_term(Term2, Term1).
 
 	:- endif.
 
