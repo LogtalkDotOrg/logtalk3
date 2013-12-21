@@ -61,27 +61,8 @@
 		Term =.. [_| Args],
 		depth(Args, Acc2, MaxSoFar, Depth).
 
-	:- if(predicate_property(ground(_), built_in)).
-
-		ground(Term) :-
-			{ground(Term)}.
-
-	:- else.
-
-		ground(Term) :-
-			(	atomic(Term) ->
-				true
-			;	nonvar(Term),
-				Term =.. [_| Args],
-				ground_args(Args)
-			).
-
-		ground_args([]).
-		ground_args([Arg| Args]) :-
-			ground(Arg),
-			ground_args(Args).
-
-	:- endif.
+	ground(Term) :-
+		{ground(Term)}.
 
 	occurs(Var, Term) :-
 		(	var(Term) ->
@@ -100,41 +81,8 @@
 		N2 is N - 1,
 		occurs(N2, Var, Term).
 
-	:- if(predicate_property(subsumes_term(_, _), built_in)).
-
-		subsumes(General, Specific) :-
-			{subsumes_term(General, Specific)}.
-
-	:- else.
-
-		subsumes(General, Specific) :-
-			variables(Specific, Vars),
-			subsumes(General, Specific, Vars).
-
-		subsumes(General, Specific, Vars) :-
-			var(General),
-			!,
-			(	var_member_chk(General, Vars) ->
-				General == Specific
-			;	General = Specific
-			).
-
-		subsumes(General, Specific, Vars) :-
-			nonvar(Specific),
-			functor(General, Functor, Arity),
-			functor(Specific, Functor, Arity),
-			subsumes(Arity, General, Specific, Vars).
-
-		subsumes(0, _, _, _) :-
-			!.
-		subsumes(N, General, Specific, Vars) :-
-			arg(N, General,  GenArg),
-			arg(N, Specific, SpeArg),
-			subsumes(GenArg, SpeArg, Vars),
-			M is N-1, !,
-			subsumes(M, General, Specific, Vars).
-
-	:- endif.
+	subsumes(General, Specific) :-
+		{subsumes_term(General, Specific)}.
 
 	var_member_chk(Var, [Head| Tail]) :-
 		(	Var == Head ->
@@ -168,13 +116,13 @@
 	)).
 
 		variant(Term1, Term2) :-
-			'=@='(Term1, Term2).
+			{'=@='(Term1, Term2)}.
 
 	:- else.
 
 		variant(Term1, Term2) :-
-			\+ \+ subsumes_term(Term1, Term2),
-			\+ \+ subsumes_term(Term2, Term1).
+			\+ \+ {subsumes_term(Term1, Term2)},
+			\+ \+ {subsumes_term(Term2, Term1)}.
 
 	:- endif.
 
