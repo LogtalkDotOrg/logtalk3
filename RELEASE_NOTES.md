@@ -46,9 +46,14 @@ predicate rules.
 Library
 -------
 
-* UPDATED: The library object `term` now uses the `subsumes_term/2` and
-`ground/1` ISO Prolog standard predicates as these are now widely supported
-by compatible backend Prolog compilers.
+* UPDATED: The library object `term` now uses the `subsumes_term/2`, `ground/1`,
+and `term_variables/2` ISO Prolog standard predicates as these are now widely
+supported by compatible backend Prolog compilers.
+
+* CHANGED: The library object `term` no longer uses the SWI-Prolog and YAP
+proprietary `(=@=)/2` built-in predicate in its implementation of the
+`variant/2` predicate due to inconsistent results when there are shared
+variables between the arguments.
 
 
 3.00.0 Alpha 32 - December 18, 2013

@@ -109,64 +109,15 @@
 
 	check(_).
 
-	:- if((
-		current_logtalk_flag(prolog_dialect, Prolog),
-		(Prolog == swi; Prolog == yap),
-		predicate_property('=@='(_,_), built_in)
-	)).
+	variant(Term1, Term2) :-
+		\+ \+ {subsumes_term(Term1, Term2)},
+		\+ \+ {subsumes_term(Term2, Term1)}.
 
-		variant(Term1, Term2) :-
-			{'=@='(Term1, Term2)}.
+	vars(Term, Vars) :-			% deprecated
+		{term_variables(Term, Vars)}.
 
-	:- else.
-
-		variant(Term1, Term2) :-
-			\+ \+ {subsumes_term(Term1, Term2)},
-			\+ \+ {subsumes_term(Term2, Term1)}.
-
-	:- endif.
-
-	:- if((
-		current_logtalk_flag(prolog_dialect, Prolog),
-		(Prolog == swi; Prolog == yap),
-		predicate_property(term_variables(_,_), built_in)
-	)).
-
-		vars(Term, Vars) :-			% deprecated
-			{term_variables(Term, Vars)}.
-
-		variables(Term, Vars) :-
-			{term_variables(Term, Vars)}.
-
-	:- else.
-
-		vars(Term, Vars) :-			% deprecated
-			variables(Term, Vars).
-
-		variables(Term, Vars) :-
-			vars(Term, [], List),
-			reverse(List, [], Vars).
-
-		vars(Term, Acc, Vars) :-
-			(	var(Term) ->
-				(	var_member_chk(Term, Acc) ->
-					Vars = Acc
-				;	Vars = [Term| Acc]
-				)
-			;	Term =.. [_| Args],
-				vars_list(Args, Acc, Vars)
-			).
-
-		vars_list([], Vars, Vars).
-		vars_list([Term| Terms], Acc, Vars) :-
-			vars(Term, Acc, Acc2),
-			vars_list(Terms, Acc2, Vars).
-
-		reverse([], Reversed, Reversed).
-		reverse([Head| Tail], List, Reversed) :-
-			reverse(Tail, [Head| List], Reversed).
-
-	:- endif.
+	variables(Term, Vars) :-
+		{term_variables(Term, Vars)}.
 
 	singletons(Term, Singletons) :-
 		term_to_vars(Term, [], Vars),
