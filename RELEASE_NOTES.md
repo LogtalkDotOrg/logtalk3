@@ -45,6 +45,10 @@ listing of all the predicates called between entities.
 * CHANGED: The `diagrams` tool predicate `graphp::edge/6` now expects a list
 of labels.
 
+* CHANGED: The `diagrams` tool now represents Prolog modules using the `tab`
+DOT node shape and represents cross-referencing predicate calls using DOT
+`halfopen` arrow heads.
+
 Tests
 -----
 

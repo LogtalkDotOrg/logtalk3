@@ -121,7 +121,7 @@
 	entity_shape(instance_or_class, box, solid).
 	entity_shape(protocol, note, solid).
 	entity_shape(category, component, solid).
-	entity_shape(module, box, solid).
+	entity_shape(module, tab, solid).
 
 	entity_shape(external_prototype, box, dashed).
 	entity_shape(external_instance_or_class, box, dashed).
@@ -152,7 +152,7 @@
 	kind_edge(implements_protocol, dot).
 	kind_edge(imports_category, box).
 	kind_edge(complements_object, obox).
-	kind_edge(calls_predicate, none).
+	kind_edge(calls_predicate, halfopen).
 	kind_edge(loads_file, normal).
 
 	lines_to_contents([], '').
