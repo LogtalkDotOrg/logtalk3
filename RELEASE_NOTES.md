@@ -39,6 +39,9 @@ control constructs. Thanks to Andreas Becker for the bug report.
 Tools
 -----
 
+* NEW: The `diagrams` tool now supports predicate call diagrams with explicit
+listing of all the predicates called between entities.
+
 * CHANGED: The `diagrams` tool predicate `graphp::edge/6` now expects a list
 of labels.
 
