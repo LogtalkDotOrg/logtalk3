@@ -49,6 +49,9 @@ of labels.
 DOT node shape and represents cross-referencing predicate calls using DOT
 `halfopen` arrow heads.
 
+* CHANGED: The `diagrams` tool now omits by default printing directory paths
+when generating file loading dependency diagrams.
+
 Tests
 -----
 

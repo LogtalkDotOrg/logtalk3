@@ -49,7 +49,7 @@
 		% by default, print library paths:
 		(member(library_paths(LibraryPaths), UserOptions) -> true; LibraryPaths = true),
 		% by default, print directory paths:
-		(member(directory_paths(DirectoryPaths), UserOptions) -> true; DirectoryPaths = true),
+		(member(directory_paths(DirectoryPaths), UserOptions) -> true; DirectoryPaths = false),
 		% by default, print current date:
 		(member(date(Date), UserOptions) -> true; Date = true),
 		% by default, print entity public predicates:
