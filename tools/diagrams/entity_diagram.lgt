@@ -122,14 +122,14 @@
 			print_name(object, Entity, Name),
 			(	\+ instantiates_class(Object, _),
 				\+ specializes_class(Object, _) ->
-				Format::node(output_file, Name, Name, [], external_prototype, Options)
-			;	Format::node(output_file, Name, Name, [], external_instance_or_class, Options)
+				::output_node(Name, Name, [], external_prototype, Options)
+			;	::output_node(Name, Name, [], external_instance_or_class, Options)
 			)
 		;	current_protocol(Entity) ->
 			print_name(protocol, Entity, Name),
-			Format::node(output_file, Name, Name, [], external_protocol, Options)
+			::output_node(Name, Name, [], external_protocol, Options)
 		;	print_name(category, Entity, Name),
-			Format::node(output_file, Name, Name, [], external_category, Options)
+			::output_node(Name, Name, [], external_category, Options)
 		),
 		fail.
 	output_external_entities(Options) :-
@@ -160,18 +160,16 @@
 	process(_, _, _).
 
 	output_protocol(Protocol, Options) :-
-		::format_object(Format),
 		print_name(protocol, Protocol, Name),
 		(	member(interface(true), Options) ->
 			protocol_property(Protocol, public(Predicates)),
 			entity_resources_to_atoms(Predicates, Atoms)
 		;	Atoms = []
 		),
-		Format::node(output_file, Name, Name, Atoms, protocol, Options),
-		output_protocol_relations(Protocol, Options, Format).
+		::output_node(Name, Name, Atoms, protocol, Options),
+		output_protocol_relations(Protocol, Options).
 
 	output_object(Object, Options) :-
-		::format_object(Format),
 		print_name(object, Object, Name),
 		(	member(interface(true), Options) ->
 			object_property(Object, public(Predicates)),
@@ -180,180 +178,179 @@
 		),
 		(	\+ instantiates_class(Object, _),
 			\+ specializes_class(Object, _) ->
-			Format::node(output_file, Name, Name, Atoms, prototype, Options)
-		;	Format::node(output_file, Name, Name, Atoms, instance_or_class, Options)
+			::output_node(Name, Name, Atoms, prototype, Options)
+		;	::output_node(Name, Name, Atoms, instance_or_class, Options)
 		),
-		output_object_relations(Object, Options, Format).
+		output_object_relations(Object, Options).
 
 	output_category(Category, Options) :-
-		::format_object(Format),
 		print_name(category, Category, Name),
 		(	member(interface(true), Options) ->
 			category_property(Category, public(Predicates)),
 			entity_resources_to_atoms(Predicates, Atoms)
 		;	Atoms = []
 		),
-		Format::node(output_file, Name, Name, Atoms, category, Options),
-		output_category_relations(Category, Options, Format).
+		::output_node(Name, Name, Atoms, category, Options),
+		output_category_relations(Category, Options).
 
-	output_protocol_relations(Protocol, Options, Format) :-
+	output_protocol_relations(Protocol, Options) :-
 		(	member(inheritance_relations(true), Options) ->
-			output_protocol_inheritance_relations(Protocol, Options, Format)
+			output_protocol_inheritance_relations(Protocol, Options)
 		;	true
 		),
 		(	member(cross_reference_relations(true), Options) ->
-			output_protocol_cross_reference_relations(Protocol, Options, Format)
+			output_protocol_cross_reference_relations(Protocol, Options)
 		;	true
 		).
 
-	output_protocol_inheritance_relations(Protocol, Options, Format) :-
+	output_protocol_inheritance_relations(Protocol, Options) :-
 		extends_protocol(Protocol, ExtendedProtocol),
 		print_name(protocol, Protocol, ProtocolName),
 		print_name(protocol, ExtendedProtocol, ExtendedProtocolName),
-		output_edge(Format, ProtocolName, ExtendedProtocolName, [extends], extends_protocol, Options),
+		::output_edge(ProtocolName, ExtendedProtocolName, [extends], extends_protocol, Options),
 		remember_referenced_entity(ExtendedProtocol),
 		fail.
-	output_protocol_inheritance_relations(_, _, _).
+	output_protocol_inheritance_relations(_, _).
 
-	output_protocol_cross_reference_relations(Protocol, Options, Format) :-
+	output_protocol_cross_reference_relations(Protocol, Options) :-
 		protocol_property(Protocol, calls(Other::_, _)),
 		nonvar(Other),
 		\+ referenced_entity_(Other),
 		print_name(protocol, Protocol, ProtocolName),
 		print_name(object, Other, OtherName),
-		output_edge(Format, ProtocolName, OtherName, [uses], calls_predicate, Options),
+		::output_edge(ProtocolName, OtherName, [uses], calls_predicate, Options),
 		remember_referenced_entity(Other),
 		fail.
-	output_protocol_cross_reference_relations(Protocol, Options, Format) :-
+	output_protocol_cross_reference_relations(Protocol, Options) :-
 		protocol_property(Protocol, calls(':'(Module,_), _)),
 		nonvar(Module),
 		\+ referenced_entity_(Module),
 		print_name(protocol, Protocol, ProtocolName),
 		print_name(module, Module, ModuleName),
-		output_edge(Format, ProtocolName, ModuleName, [use_module], calls_predicate, Options),
+		::output_edge(ProtocolName, ModuleName, [use_module], calls_predicate, Options),
 		remember_referenced_entity(Module),
 		fail.
-	output_protocol_cross_reference_relations(_, _, _).
+	output_protocol_cross_reference_relations(_, _).
 
-	output_object_relations(Object, Options, Format) :-
+	output_object_relations(Object, Options) :-
 		(	member(inheritance_relations(true), Options) ->
-			output_object_inheritance_relations(Object, Options, Format)
+			output_object_inheritance_relations(Object, Options)
 		;	true
 		),
 		(	member(cross_reference_relations(true), Options) ->
-			output_object_cross_reference_relations(Object, Options, Format)
+			output_object_cross_reference_relations(Object, Options)
 		;	true
 		).
 
-	output_object_inheritance_relations(Object, Options, Format) :-
+	output_object_inheritance_relations(Object, Options) :-
 		implements_protocol(Object, Protocol),
 		print_name(object, Object, ObjectName),
 		print_name(protocol, Protocol, ProtocolName),
-		output_edge(Format, ObjectName, ProtocolName, [implements], implements_protocol, Options),
+		::output_edge(ObjectName, ProtocolName, [implements], implements_protocol, Options),
 		remember_referenced_entity(Protocol),
 		fail.
-	output_object_inheritance_relations(Instance, Options, Format) :-
+	output_object_inheritance_relations(Instance, Options) :-
 		instantiates_class(Instance, Class),
 		print_name(object, Instance, InstanceName),
 		print_name(object, Class, ClassName),
-		output_edge(Format, InstanceName, ClassName, [instantiates], instantiates_class, Options),
+		::output_edge(InstanceName, ClassName, [instantiates], instantiates_class, Options),
 		remember_referenced_entity(Class),
 		fail.
-	output_object_inheritance_relations(Class, Options, Format) :-
+	output_object_inheritance_relations(Class, Options) :-
 		specializes_class(Class, SuperClass),
 		print_name(object, Class, ClassName),
 		print_name(object, SuperClass, SuperClassName),
-		output_edge(Format, ClassName, SuperClassName, [specializes], specializes_class, Options),
+		::output_edge(ClassName, SuperClassName, [specializes], specializes_class, Options),
 		remember_referenced_entity(SuperClass),
 		fail.
-	output_object_inheritance_relations(Prototype, Options, Format) :-
+	output_object_inheritance_relations(Prototype, Options) :-
 		extends_object(Prototype, Parent),
 		print_name(object, Prototype, PrototypeName),
 		print_name(object, Parent, ParentName),
-		output_edge(Format, PrototypeName, ParentName, [extends], extends_object, Options),
+		::output_edge(PrototypeName, ParentName, [extends], extends_object, Options),
 		remember_referenced_entity(Parent),
 		fail.
-	output_object_inheritance_relations(Object, Options, Format) :-
+	output_object_inheritance_relations(Object, Options) :-
 		imports_category(Object, Category),
 		print_name(object, Object, ObjectName),
 		print_name(category, Category, CategoryName),
-		output_edge(Format, ObjectName, CategoryName, [imports], imports_category, Options),
+		::output_edge(ObjectName, CategoryName, [imports], imports_category, Options),
 		remember_referenced_entity(Category),
 		fail.
-	output_object_inheritance_relations(_, _, _).
+	output_object_inheritance_relations(_, _).
 
-	output_object_cross_reference_relations(Object, Options, Format) :-
+	output_object_cross_reference_relations(Object, Options) :-
 		object_property(Object, calls(Other::_, _)),
 		nonvar(Other),
 		\+ referenced_entity_(Other),
 		print_name(object, Object, ObjectName),
 		print_name(object, Other, OtherName),
-		output_edge(Format, ObjectName, OtherName, [uses], calls_predicate, Options),
+		::output_edge(ObjectName, OtherName, [uses], calls_predicate, Options),
 		remember_referenced_entity(Other),
 		fail.
-	output_object_cross_reference_relations(Object, Options, Format) :-
+	output_object_cross_reference_relations(Object, Options) :-
 		object_property(Object, calls(':'(Module,_), _)),
 		nonvar(Module),
 		\+ referenced_entity_(Module),
 		print_name(object, Object, ObjectName),
 		print_name(module, Module, ModuleName),
-		output_edge(Format, ObjectName, ModuleName, [use_module], calls_predicate, Options),
+		::output_edge(ObjectName, ModuleName, [use_module], calls_predicate, Options),
 		remember_referenced_entity(Module),
 		fail.
-	output_object_cross_reference_relations(_, _, _).
+	output_object_cross_reference_relations(_, _).
 
-	output_category_relations(Category, Options, Format) :-
+	output_category_relations(Category, Options) :-
 		(	member(inheritance_relations(true), Options) ->
-			output_category_inheritance_relations(Category, Options, Format)
+			output_category_inheritance_relations(Category, Options)
 		;	true
 		),
 		(	member(cross_reference_relations(true), Options) ->
-			output_category_cross_reference_relations(Category, Options, Format)
+			output_category_cross_reference_relations(Category, Options)
 		;	true
 		).
 
-	output_category_inheritance_relations(Category, Options, Format) :-
+	output_category_inheritance_relations(Category, Options) :-
 		extends_category(Category, ExtendedCategory),
 		print_name(category, Category, CategoryName),
 		print_name(category, ExtendedCategory, ExtendedCategoryName),
-		output_edge(Format, CategoryName, ExtendedCategoryName, [extends], extends_category, Options),
+		::output_edge(CategoryName, ExtendedCategoryName, [extends], extends_category, Options),
 		remember_referenced_entity(ExtendedCategory),
 		fail.
-	output_category_inheritance_relations(Category, Options, Format) :-
+	output_category_inheritance_relations(Category, Options) :-
 		implements_protocol(Category, Protocol),
 		print_name(category, Category, CategoryName),
 		print_name(protocol, Protocol, ProtocolName),
-		output_edge(Format, CategoryName, ProtocolName, [implements], implements_protocol, Options),
+		::output_edge(CategoryName, ProtocolName, [implements], implements_protocol, Options),
 		remember_referenced_entity(Protocol),
 		fail.
-	output_category_inheritance_relations(Category, Options, Format) :-
+	output_category_inheritance_relations(Category, Options) :-
 		complements_object(Category, Object),
 		print_name(category, Category, CategoryName),
 		print_name(object, Object, ObjectName),
-		output_edge(Format, ObjectName, CategoryName, [complements], complements_object, Options),
+		::output_edge(ObjectName, CategoryName, [complements], complements_object, Options),
 		remember_referenced_entity(Object),
 		fail.
-	output_category_inheritance_relations(_, _, _).
+	output_category_inheritance_relations(_, _).
 
-	output_category_cross_reference_relations(Category, Options, Format) :-
+	output_category_cross_reference_relations(Category, Options) :-
 		category_property(Category, calls(Object::_, _)),
 		nonvar(Object),
 		\+ referenced_entity_(Object),
 		print_name(category, Category, CategoryName),
 		print_name(object, Object, ObjectName),
-		output_edge(Format, CategoryName, ObjectName, [uses], calls_predicate, Options),
+		::output_edge(CategoryName, ObjectName, [uses], calls_predicate, Options),
 		remember_referenced_entity(Object),
 		fail.
-	output_category_cross_reference_relations(Category, Options, Format) :-
+	output_category_cross_reference_relations(Category, Options) :-
 		category_property(Category, calls(':'(Module,_), _)),
 		nonvar(Module),
 		\+ referenced_entity_(Module),
 		print_name(category, Category, CategoryName),
 		print_name(module, Module, ModuleName),
-		output_edge(Format, CategoryName, ModuleName, [use_module], calls_predicate, Options),
+		::output_edge(CategoryName, ModuleName, [use_module], calls_predicate, Options),
 		remember_referenced_entity(Module),
 		fail.
-	output_category_cross_reference_relations(_, _, _).
+	output_category_cross_reference_relations(_, _).
 
 	print_name(object, Object, ObjectName) :-
 		(	atom(Object) ->
@@ -418,12 +415,6 @@
 		;	true
 		),
 		variables_to_underscore(Args).
-
-	output_edge(Format, From, To, Labels, Kind, Options) :-
-		(	member(relation_labels(true), Options) ->
-			Format::edge(output_file, From, To, Labels, Kind, Options)
-		;	Format::edge(output_file, From, To, [], Kind, Options)
-		).
 
 	merge_options(UserOptions, Options) :-
 		% by default, print library paths:

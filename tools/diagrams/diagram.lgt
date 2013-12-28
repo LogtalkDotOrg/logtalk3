@@ -254,6 +254,31 @@
 		argnames is ['Path', 'Basename', 'Directory', 'Options']
 	]).
 
+	:- protected(output_node/5).
+	:- mode(output_node(+atom, +atom, +list(atom), +atom, +list(compound)), one).
+	:- info(output_node/5, [
+		comment is 'Outputs a graph node.',
+		argnames is ['Identifier', 'Label', 'Lines', 'Kind', 'Options']
+	]).
+
+	output_node(Identifier, Label, Lines, Kind, Options) :-
+		format_object(Format),
+		Format::node(output_file, Identifier, Label, Lines, Kind, Options).
+
+	:- protected(output_edge/5).
+	:- mode(output_edge(+atom, +atom, +list(atom), +atom, +list(compound)), one).
+	:- info(output_edge/5, [
+		comment is 'Outputs a graph edge.',
+		argnames is ['From', 'To', 'Labels', 'Kind', 'Options']
+	]).
+
+	output_edge(From, To, Labels, Kind, Options) :-
+		format_object(Format),
+		(	member(relation_labels(true), Options) ->
+			Format::edge(output_file, From, To, Labels, Kind, Options)
+		;	Format::edge(output_file, From, To, [], Kind, Options)
+		).
+
 	:- protected(not_excluded_file/3).
 	:- mode(not_excluded_file(+list(atom), +atom, +atom), zero_or_one).
 	:- info(not_excluded_file/3, [

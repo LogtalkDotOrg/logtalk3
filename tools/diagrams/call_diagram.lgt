@@ -122,14 +122,14 @@
 			print_name(object, Entity, Name),
 			(	\+ instantiates_class(Object, _),
 				\+ specializes_class(Object, _) ->
-				Format::node(output_file, Name, Name, [], external_prototype, Options)
-			;	Format::node(output_file, Name, Name, [], external_instance_or_class, Options)
+				::output_node(Name, Name, [], external_prototype, Options)
+			;	::output_node(Name, Name, [], external_instance_or_class, Options)
 			)
 		;	current_protocol(Entity) ->
 			print_name(protocol, Entity, Name),
-			Format::node(output_file, Name, Name, [], external_protocol, Options)
+			::output_node(Name, Name, [], external_protocol, Options)
 		;	print_name(category, Entity, Name),
-			Format::node(output_file, Name, Name, [], external_category, Options)
+			::output_node(Name, Name, [], external_category, Options)
 		),
 		fail.
 	output_external_entities(Options) :-
@@ -160,18 +160,16 @@
 	process(_, _, _).
 
 	output_protocol(Protocol, Options) :-
-		::format_object(Format),
 		print_name(protocol, Protocol, Name),
 		(	member(interface(true), Options) ->
 			protocol_property(Protocol, public(Predicates)),
 			entity_resources_to_atoms(Predicates, Atoms)
 		;	Atoms = []
 		),
-		Format::node(output_file, Name, Name, Atoms, protocol, Options),
-		output_protocol_relations(Protocol, Options, Format).
+		::output_node(Name, Name, Atoms, protocol, Options),
+		output_protocol_relations(Protocol, Options).
 
 	output_object(Object, Options) :-
-		::format_object(Format),
 		print_name(object, Object, Name),
 		(	member(interface(true), Options) ->
 			object_property(Object, public(Predicates)),
@@ -180,23 +178,22 @@
 		),
 		(	\+ instantiates_class(Object, _),
 			\+ specializes_class(Object, _) ->
-			Format::node(output_file, Name, Name, Atoms, prototype, Options)
-		;	Format::node(output_file, Name, Name, Atoms, instance_or_class, Options)
+			::output_node(Name, Name, Atoms, prototype, Options)
+		;	::output_node(Name, Name, Atoms, instance_or_class, Options)
 		),
-		output_object_relations(Object, Options, Format).
+		output_object_relations(Object, Options).
 
 	output_category(Category, Options) :-
-		::format_object(Format),
 		print_name(category, Category, Name),
 		(	member(interface(true), Options) ->
 			category_property(Category, public(Predicates)),
 			entity_resources_to_atoms(Predicates, Atoms)
 		;	Atoms = []
 		),
-		Format::node(output_file, Name, Name, Atoms, category, Options),
-		output_category_relations(Category, Options, Format).
+		::output_node(Name, Name, Atoms, category, Options),
+		output_category_relations(Category, Options).
 
-	output_protocol_relations(Protocol, Options, Format) :-
+	output_protocol_relations(Protocol, Options) :-
 		setof(
 			Predicate,
 			Properties^(protocol_property(Protocol, calls(Other::Predicate, Properties)), nonvar(Other), \+ referenced_entity_(Other)),
@@ -205,10 +202,10 @@
 		entity_resources_to_atoms(Predicates, Atoms),
 		print_name(protocol, Protocol, ProtocolName),
 		print_name(object, Other, OtherName),
-		output_edge(Format, ProtocolName, OtherName, Atoms, calls_predicate, Options),
+		::output_edge(ProtocolName, OtherName, Atoms, calls_predicate, Options),
 		remember_referenced_entity(Other),
 		fail.
-	output_protocol_relations(Protocol, Options, Format) :-
+	output_protocol_relations(Protocol, Options) :-
 		setof(
 			Predicate,
 			Properties^(protocol_property(Protocol, calls(':'(Module,Predicate), Properties)), nonvar(Module), \+ referenced_entity_(Module)),
@@ -217,12 +214,12 @@
 		entity_resources_to_atoms(Predicates, Atoms),
 		print_name(protocol, Protocol, ProtocolName),
 		print_name(module, Module, ModuleName),
-		output_edge(Format, ProtocolName, ModuleName, Atoms, calls_predicate, Options),
+		::output_edge(ProtocolName, ModuleName, Atoms, calls_predicate, Options),
 		remember_referenced_entity(Module),
 		fail.
-	output_protocol_relations(_, _, _).
+	output_protocol_relations(_, _).
 
-	output_object_relations(Object, Options, Format) :-
+	output_object_relations(Object, Options) :-
 		setof(
 			Predicate,
 			Properties^(object_property(Object, calls(Other::Predicate, Properties)), nonvar(Other), \+ referenced_entity_(Other)),
@@ -231,10 +228,10 @@
 		entity_resources_to_atoms(Predicates, Atoms),
 		print_name(object, Object, ObjectName),
 		print_name(object, Other, OtherName),
-		output_edge(Format, ObjectName, OtherName, Atoms, calls_predicate, Options),
+		::output_edge(ObjectName, OtherName, Atoms, calls_predicate, Options),
 		remember_referenced_entity(Other),
 		fail.
-	output_object_relations(Object, Options, Format) :-
+	output_object_relations(Object, Options) :-
 		setof(
 			Predicate,
 			Properties^(object_property(Object, calls(':'(Module,Predicate), Properties)), nonvar(Module), \+ referenced_entity_(Module)),
@@ -243,12 +240,12 @@
 		entity_resources_to_atoms(Predicates, Atoms),
 		print_name(object, Object, ObjectName),
 		print_name(module, Module, ModuleName),
-		output_edge(Format, ObjectName, ModuleName, Atoms, calls_predicate, Options),
+		::output_edge(ObjectName, ModuleName, Atoms, calls_predicate, Options),
 		remember_referenced_entity(Module),
 		fail.
-	output_object_relations(_, _, _).
+	output_object_relations(_, _).
 
-	output_category_relations(Category, Options, Format) :-
+	output_category_relations(Category, Options) :-
 		setof(
 			Predicate,
 			Properties^(category_property(Category, calls(Object::Predicate, Properties)), nonvar(Object), \+ referenced_entity_(Object)),
@@ -257,10 +254,10 @@
 		entity_resources_to_atoms(Predicates, Atoms),
 		print_name(category, Category, CategoryName),
 		print_name(object, Object, ObjectName),
-		output_edge(Format, CategoryName, ObjectName, Atoms, calls_predicate, Options),
+		::output_edge(CategoryName, ObjectName, Atoms, calls_predicate, Options),
 		remember_referenced_entity(Object),
 		fail.
-	output_category_relations(Category, Options, Format) :-
+	output_category_relations(Category, Options) :-
 		setof(
 			Predicate,
 			Properties^(category_property(Category, calls(':'(Module,Predicate), Properties)), nonvar(Module), \+ referenced_entity_(Module)),
@@ -269,10 +266,10 @@
 		entity_resources_to_atoms(Predicates, Atoms),
 		print_name(category, Category, CategoryName),
 		print_name(module, Module, ModuleName),
-		output_edge(Format, CategoryName, ModuleName, Atoms, calls_predicate, Options),
+		::output_edge(CategoryName, ModuleName, Atoms, calls_predicate, Options),
 		remember_referenced_entity(Module),
 		fail.
-	output_category_relations(_, _, _).
+	output_category_relations(_, _).
 
 	print_name(object, Object, ObjectName) :-
 		(	atom(Object) ->
@@ -337,12 +334,6 @@
 		;	true
 		),
 		variables_to_underscore(Args).
-
-	output_edge(Format, From, To, Labels, Kind, Options) :-
-		(	member(relation_labels(true), Options) ->
-			Format::edge(output_file, From, To, Labels, Kind, Options)
-		;	Format::edge(output_file, From, To, [], Kind, Options)
-		).
 
 	merge_options(UserOptions, Options) :-
 		% by default, print library paths:
