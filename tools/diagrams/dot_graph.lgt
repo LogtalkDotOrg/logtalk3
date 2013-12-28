@@ -131,7 +131,7 @@
 
 	entity_shape(file, box, solid).
 
-	edge(Stream, Start, End, Labels, Kind, Options) :-
+	edge(Stream, Start, End, Labels, Kind, _Options) :-
 		labels_to_lines(Labels, Lines),
 		kind_edge(Kind, ArrowHead),
 		write(Stream, '"'),
@@ -140,12 +140,9 @@
 		write(Stream, End),
 		write(Stream, '" [arrowhead='),
 		write(Stream, ArrowHead),
-		(	member(relation_labels(true), Options) ->
-			write(Stream, ',label="'),
-			write(Stream, Lines),
-			write(Stream, '"]\n')
-		;	write(Stream, ',label=""]\n')
-		).
+		write(Stream, ',label="'),
+		write(Stream, Lines),
+		write(Stream, '"]\n').
 
 	kind_edge(extends_object, vee).
 	kind_edge(extends_protocol, vee).
