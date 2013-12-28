@@ -36,6 +36,12 @@ that resulted in runtime errors when attempting to create objects with an
 initial set of clauses that includes calls to the `(::)/1` and `(^^)/1`
 control constructs. Thanks to Andreas Becker for the bug report.
 
+Tools
+-----
+
+* CHANGED: The `diagrams` tool predicate `graphp::edge/6` now expects a list
+of labels.
+
 Tests
 -----
 

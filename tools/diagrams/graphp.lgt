@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/12/09,
+		date is 2013/12/28,
 		comment is 'Description']).
 
 	:- public(output_file_name/2).
@@ -73,10 +73,10 @@
 	]).
 
 	:- public(edge/6).
-	:- mode(edge(+stream_or_alias, +atom, +atom, +atom, +atom, +list(compound)), one).
+	:- mode(edge(+stream_or_alias, +atom, +atom, +list(atom), +atom, +list(compound)), one).
 	:- info(edge/6, [
 		comment is 'Writes an edge between two nodes using the specified options.',
-		argnames is ['Stream', 'Start', 'End', 'Label', 'Kind', 'Options']
+		argnames is ['Stream', 'Start', 'End', 'Labels', 'Kind', 'Options']
 	]).
 
 :- end_protocol.

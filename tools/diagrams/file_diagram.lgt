@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/12/18,
+		date is 2013/12/28,
 		comment is 'Predicates for generating file loading dependency diagrams.',
 		argnames is ['Format']
 	]).
@@ -43,7 +43,7 @@
 	output_file(Path, _, _, Options) :-
 		::format_object(Format),
 		logtalk::loaded_file_property(Path, parent(Parent)),
-		Format::edge(output_file, Parent, Path, loads, loads_file, Options),
+		Format::edge(output_file, Parent, Path, [loads], loads_file, Options),
 		fail.
 	output_file(_, _, _, _).
 

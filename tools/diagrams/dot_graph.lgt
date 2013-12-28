@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/12/17,
+		date is 2013/12/28,
 		comment is 'Generates entity diagram DOT files for source files and libraries.'
 	]).
 
@@ -131,7 +131,8 @@
 
 	entity_shape(file, box, solid).
 
-	edge(Stream, Start, End, Label, Kind, Options) :-
+	edge(Stream, Start, End, Labels, Kind, Options) :-
+		labels_to_lines(Labels, Lines),
 		kind_edge(Kind, ArrowHead),
 		write(Stream, '"'),
 		write(Stream, Start),
@@ -141,7 +142,7 @@
 		write(Stream, ArrowHead),
 		(	member(relation_labels(true), Options) ->
 			write(Stream, ',label="'),
-			write(Stream, Label),
+			write(Stream, Lines),
 			write(Stream, '"]\n')
 		;	write(Stream, ',label=""]\n')
 		).
@@ -168,6 +169,16 @@
 		atom_concat(Contents0, '<BR/>', Contents1),
 		atom_concat(Contents1, WrappedLine, Contents2),
 		lines_to_contents(Lines, Contents2, Contents).
+
+	labels_to_lines([], '').
+	labels_to_lines([Line| Lines], Contents) :-
+		labels_to_lines(Lines, Line, Contents).
+
+	labels_to_lines([], Contents, Contents).
+	labels_to_lines([Line| Lines], Contents0, Contents) :-
+		atom_concat(Contents0, '\n', Contents1),
+		atom_concat(Contents1, Line, Contents2),
+		labels_to_lines(Lines, Contents2, Contents).
 
 	member(Option, [Option| _]) :-
 		!.
