@@ -126,11 +126,12 @@
 				::output_node(Name, Name, [], external_prototype, Options)
 			;	::output_node(Name, Name, [], external_instance_or_class, Options)
 			)
-		;	current_protocol(Entity) ->
+		;	current_category(Entity) ->
+			print_name(category, Entity, Name),
+			::output_node(Name, Name, [], external_category, Options)
+		;	% current_protocol(Entity),
 			print_name(protocol, Entity, Name),
 			::output_node(Name, Name, [], external_protocol, Options)
-		;	print_name(category, Entity, Name),
-			::output_node(Name, Name, [], external_category, Options)
 		),
 		fail.
 	output_external_entities(Options) :-
