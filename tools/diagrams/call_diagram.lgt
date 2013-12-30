@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/12/28,
+		date is 2013/12/30,
 		comment is 'Predicates for generating predicate call diagrams.',
 		argnames is ['Format']
 	]).
@@ -94,9 +94,9 @@
 		(	member(file_names(true), Options) ->
 			% use the full path for the cluster identifier as we
 			% can have more than file with the same basename
-			Format::graph_header(output_file, File, Basename, [bgcolor(snow2)| Options]),
+			Format::graph_header(output_file, File, Basename, [bgcolor(snow)| Options]),
 			process(Basename, Directory, Options),
-			Format::graph_footer(output_file, File, Basename, [bgcolor(snow2)| Options])
+			Format::graph_footer(output_file, File, Basename, [bgcolor(snow)| Options])
 		;	process(Basename, Directory, Options)
 		).
 
@@ -122,14 +122,14 @@
 			print_name(object, Entity, Name),
 			(	\+ instantiates_class(Object, _),
 				\+ specializes_class(Object, _) ->
-				::output_node(Name, Name, [], external_prototype, Options)
-			;	::output_node(Name, Name, [], external_instance_or_class, Options)
+				::output_node(Name, Name, [], external_prototype, [fillcolor(beige)| Options])
+			;	::output_node(Name, Name, [], external_instance_or_class, [fillcolor(yellow)| Options])
 			)
 		;	current_protocol(Entity) ->
 			print_name(protocol, Entity, Name),
-			::output_node(Name, Name, [], external_protocol, Options)
+			::output_node(Name, Name, [], external_protocol, [fillcolor(aquamarine)| Options])
 		;	print_name(category, Entity, Name),
-			::output_node(Name, Name, [], external_category, Options)
+			::output_node(Name, Name, [], external_category, [fillcolor(cyan)| Options])
 		),
 		fail.
 	output_external_entities(Options) :-
@@ -166,7 +166,7 @@
 			entity_resources_to_atoms(Predicates, Atoms)
 		;	Atoms = []
 		),
-		::output_node(Name, Name, Atoms, protocol, Options),
+		::output_node(Name, Name, Atoms, protocol, [fillcolor(aquamarine)| Options]),
 		output_protocol_relations(Protocol, Options).
 
 	output_object(Object, Options) :-
@@ -178,8 +178,8 @@
 		),
 		(	\+ instantiates_class(Object, _),
 			\+ specializes_class(Object, _) ->
-			::output_node(Name, Name, Atoms, prototype, Options)
-		;	::output_node(Name, Name, Atoms, instance_or_class, Options)
+			::output_node(Name, Name, Atoms, prototype, [fillcolor(beige)| Options])
+		;	::output_node(Name, Name, Atoms, instance_or_class, [fillcolor(yellow)| Options])
 		),
 		output_object_relations(Object, Options).
 
@@ -190,7 +190,7 @@
 			entity_resources_to_atoms(Predicates, Atoms)
 		;	Atoms = []
 		),
-		::output_node(Name, Name, Atoms, category, Options),
+		::output_node(Name, Name, Atoms, category, [fillcolor(cyan)| Options]),
 		output_category_relations(Category, Options).
 
 	output_protocol_relations(Protocol, Options) :-

@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/12/28,
+		date is 2013/12/30,
 		comment is 'Generates entity diagram DOT files for source files and libraries.'
 	]).
 
@@ -52,7 +52,7 @@
 		write(Stream, 'fontsize=10\n'),
 		write(Stream, 'fontcolor=snow4\n'),
 		write(Stream, 'pencolor=snow4\n'),
-		write(Stream, 'node [shape=ellipse,style=dashed,fillcolor=white,fontname="Courier",fontsize=9]\n'),
+		write(Stream, 'node [shape=ellipse,style=filled,fillcolor=white,fontname="Courier",fontsize=9]\n'),
 		write(Stream, 'edge [fontname="Courier",fontsize=9]\n'),
 		output_date(Stream, Options),
 		nl(Stream).
@@ -95,14 +95,16 @@
 		;	BGColor = white
 		),
 		write(Stream, BGColor),
-		write(Stream, '"\nlabel="'),
+		write(Stream, '"\nstyle="rounded"'),
+		write(Stream, '\nmargin="10"'),
+		write(Stream, '\nlabel="'),
 		write(Stream, Label),
 		write(Stream, '"\n').
 
 	graph_footer(Stream, _Identifier, _Label, _Options) :-
 		write(Stream, '}\n\n').
 
-	node(Stream, Identifier, Label, Lines, Kind, _Options) :-
+	node(Stream, Identifier, Label, Lines, Kind, Options) :-
 		lines_to_contents(Lines, Contents),
 		entity_shape(Kind, Shape, Style),
 		write(Stream, '"'),
@@ -111,25 +113,31 @@
 		write(Stream, Shape),
 		write(Stream, ',style='),
 		write(Stream, Style),
-		write(Stream, ',label=<<B>'),
+		write(Stream, ',fillcolor="'),
+		(	member(fillcolor(FillColor), Options) ->
+			true
+		;	FillColor = white
+		),
+		write(Stream, FillColor),
+		write(Stream, '",label=<<B>'),
 		write(Stream, Label),
 		write(Stream, '</B><BR/>'),
 		write(Stream, Contents),
 		write(Stream, '>]\n').
 
-	entity_shape(prototype, box, solid).
-	entity_shape(instance_or_class, box, solid).
-	entity_shape(protocol, note, solid).
-	entity_shape(category, component, solid).
-	entity_shape(module, tab, solid).
+	entity_shape(prototype, box, filled).
+	entity_shape(instance_or_class, box, filled).
+	entity_shape(protocol, note, filled).
+	entity_shape(category, component, filled).
+	entity_shape(module, tab, filled).
 
-	entity_shape(external_prototype, box, dashed).
-	entity_shape(external_instance_or_class, box, dashed).
-	entity_shape(external_protocol, note, dashed).
-	entity_shape(external_category, component, dashed).
-	entity_shape(external_module, box, solid).
+	entity_shape(external_prototype, box, '"filled,dashed"').
+	entity_shape(external_instance_or_class, box, '"filled,dashed"').
+	entity_shape(external_protocol, note, '"filled,dashed"').
+	entity_shape(external_category, component, '"filled,dashed"').
+	entity_shape(external_module, box, '"filled,dashed"').
 
-	entity_shape(file, box, solid).
+	entity_shape(file, box, filled).
 
 	edge(Stream, Start, End, Labels, Kind, _Options) :-
 		labels_to_lines(Labels, Lines),

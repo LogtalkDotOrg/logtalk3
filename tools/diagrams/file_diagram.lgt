@@ -28,15 +28,15 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/12/28,
+		date is 2013/12/30,
 		comment is 'Predicates for generating file loading dependency diagrams.',
 		argnames is ['Format']
 	]).
 
 	output_file(Path, Basename, Directory, Options) :-
 		(	member(directory_paths(true), Options) ->
-			::output_node(Path, Basename, [Directory], file, Options)
-		;	::output_node(Path, Basename, [], file, Options)
+			::output_node(Path, Basename, [Directory], file, [fillcolor(turquoise)| Options])
+		;	::output_node(Path, Basename, [], file, [fillcolor(turquoise)| Options])
 		),
 		fail.
 	output_file(Path, _, _, Options) :-
