@@ -75,9 +75,10 @@
 
 	file(Source, UserOptions) :-
 		::format_object(Format),
-		::locate_file(Source, Basename, Directory, Path),
+		::locate_file(Source, Basename, Extension, Directory, Path),
+		atom_concat(Name, Extension, Basename),
 		merge_options(UserOptions, Options),
-		output_file_path(all_files, Options, Format, OutputPath),
+		output_file_path(Name, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::output_file_header(output_file, Options),
 		reset_external_entities,
@@ -94,9 +95,9 @@
 		(	member(file_names(true), Options) ->
 			% use the full path for the cluster identifier as we
 			% can have more than file with the same basename
-			Format::graph_header(output_file, File, Basename, [bgcolor(snow)| Options]),
+			Format::graph_header(output_file, File, Basename, file, Options),
 			process(Basename, Directory, Options),
-			Format::graph_footer(output_file, File, Basename, [bgcolor(snow)| Options])
+			Format::graph_footer(output_file, File, Basename, file, Options)
 		;	process(Basename, Directory, Options)
 		).
 
@@ -116,25 +117,25 @@
 		fail.
 	output_external_entities(Options) :-
 		::format_object(Format),
-		Format::graph_header(output_file, other, '(other referenced entities)', [bgcolor(white)| Options]),
+		Format::graph_header(output_file, other, '(other referenced entities)', external, Options),
 		retract(referenced_entity_(Entity)),
 		(	current_object(Entity) ->
 			print_name(object, Entity, Name),
 			(	\+ instantiates_class(Object, _),
 				\+ specializes_class(Object, _) ->
-				::output_node(Name, Name, [], external_prototype, [fillcolor(beige)| Options])
-			;	::output_node(Name, Name, [], external_instance_or_class, [fillcolor(yellow)| Options])
+				::output_node(Name, Name, [], external_prototype, Options)
+			;	::output_node(Name, Name, [], external_instance_or_class, Options)
 			)
 		;	current_protocol(Entity) ->
 			print_name(protocol, Entity, Name),
-			::output_node(Name, Name, [], external_protocol, [fillcolor(aquamarine)| Options])
+			::output_node(Name, Name, [], external_protocol, Options)
 		;	print_name(category, Entity, Name),
-			::output_node(Name, Name, [], external_category, [fillcolor(cyan)| Options])
+			::output_node(Name, Name, [], external_category, Options)
 		),
 		fail.
 	output_external_entities(Options) :-
 		::format_object(Format),
-		Format::graph_footer(output_file, other, '(other referenced entities)', [bgcolor(white)| Options]).
+		Format::graph_footer(output_file, other, '(other referenced entities)', external, Options).
 
 	process(Basename, Directory, Options) :-
 		member(exclude_entities(ExcludedEntities), Options),
@@ -166,7 +167,7 @@
 			entity_resources_to_atoms(Predicates, Atoms)
 		;	Atoms = []
 		),
-		::output_node(Name, Name, Atoms, protocol, [fillcolor(aquamarine)| Options]),
+		::output_node(Name, Name, Atoms, protocol, Options),
 		output_protocol_relations(Protocol, Options).
 
 	output_object(Object, Options) :-
@@ -178,8 +179,8 @@
 		),
 		(	\+ instantiates_class(Object, _),
 			\+ specializes_class(Object, _) ->
-			::output_node(Name, Name, Atoms, prototype, [fillcolor(beige)| Options])
-		;	::output_node(Name, Name, Atoms, instance_or_class, [fillcolor(yellow)| Options])
+			::output_node(Name, Name, Atoms, prototype, Options)
+		;	::output_node(Name, Name, Atoms, instance_or_class, Options)
 		),
 		output_object_relations(Object, Options).
 
@@ -190,7 +191,7 @@
 			entity_resources_to_atoms(Predicates, Atoms)
 		;	Atoms = []
 		),
-		::output_node(Name, Name, Atoms, category, [fillcolor(cyan)| Options]),
+		::output_node(Name, Name, Atoms, category, Options),
 		output_category_relations(Category, Options).
 
 	output_protocol_relations(Protocol, Options) :-
@@ -429,7 +430,7 @@
 		(member(inheritance_relations(Inheritance), UserOptions) -> true; Inheritance = true),
 		% by default, write cross-referenceing links:
 		(member(cross_reference_relations(CrossReference), UserOptions) -> true; CrossReference = true),
-		% by default, write diagram to the current directory:
+		% by default, don't print entity relation labels:
 		(member(relation_labels(Relations), UserOptions) -> true; Relations = false),
 		% by default, write diagram to the current directory:
 		(member(output_path(OutputPath), UserOptions) -> true; OutputPath = './'),

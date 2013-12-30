@@ -25,9 +25,9 @@
 :- protocol(graphp).
 
 	:- info([
-		version is 1.0,
+		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/12/28,
+		date is 2013/12/30,
 		comment is 'Description']).
 
 	:- public(output_file_name/2).
@@ -38,31 +38,31 @@
 	]).
 
 	:- public(output_file_header/2).
-	:- mode(output_file_header(+stream_or_alias, +list), one).
+	:- mode(output_file_header(+stream_or_alias, +list(compound)), one).
 	:- info(output_file_header/2, [
 		comment is 'Writes the output file header using the specified options.',
 		argnames is ['Stream', 'Options']
 	]).
 
 	:- public(output_file_footer/2).
-	:- mode(output_file_footer(+stream_or_alias, +list), one).
+	:- mode(output_file_footer(+stream_or_alias, +list(compound)), one).
 	:- info(output_file_footer/2, [
 		comment is 'Writes the output file footer using the specified options.',
 		argnames is ['Stream', 'Options']
 	]).
 
-	:- public(graph_header/4).
-	:- mode(graph_header(+stream_or_alias, +atom, +atom, +list), one).
-	:- info(graph_header/4, [
+	:- public(graph_header/5).
+	:- mode(graph_header(+stream_or_alias, +atom, +atom, +atom, +list(compound)), one).
+	:- info(graph_header/5, [
 		comment is 'Writes a graph header using the specified options.',
-		argnames is ['Stream', 'Identifier', 'Label', 'Options']
+		argnames is ['Stream', 'Identifier', 'Label', 'Kind', 'Options']
 	]).
 
-	:- public(graph_footer/4).
-	:- mode(graph_footer(+stream_or_alias, +atom, +atom, +list), one).
-	:- info(graph_footer/4, [
+	:- public(graph_footer/5).
+	:- mode(graph_footer(+stream_or_alias, +atom, +atom, +atom, +list(compound)), one).
+	:- info(graph_footer/5, [
 		comment is 'Writes a graph footer using the specified options.',
-		argnames is ['Stream', 'Identifier', 'Label', 'Options']
+		argnames is ['Stream', 'Identifier', 'Label', 'Kind', 'Options']
 	]).
 
 	:- public(node/6).

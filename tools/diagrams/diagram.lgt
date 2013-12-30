@@ -27,7 +27,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/12/16,
+		date is 2013/12/30,
 		comment is 'Predicates for generating diagrams.',
 		argnames is ['Format']
 	]).
@@ -86,12 +86,12 @@
 
 	output_rlibrary(TopDirectory, Options) :-
 		format_object(Format),
-		Format::graph_header(output_file, TopDirectory, TopDirectory, [bgcolor(snow3)| Options]),
+		Format::graph_header(output_file, TopDirectory, TopDirectory, rlibrary, Options),
 		member(exclude_paths(ExcludedPaths), Options),
 		forall(
 			sub_library(TopDirectory, ExcludedPaths, RelativePath, Path),
 			output_library(RelativePath, Path, Options)),
-		Format::graph_footer(output_file, TopDirectory, TopDirectory, [bgcolor(snow3)| Options]).
+		Format::graph_footer(output_file, TopDirectory, TopDirectory, rlibrary, Options).
 
 	sub_library(TopDirectory, ExcludedPaths, RelativePath, Path) :-
 		logtalk_library_path(Library, _),
@@ -130,9 +130,9 @@
 	output_library(RelativePath, Path, Options) :-
 		format_object(Format),
 		(	member(library_paths(true), Options) ->
-			Format::graph_header(output_file, RelativePath, RelativePath, [bgcolor(snow2)| Options]),
+			Format::graph_header(output_file, RelativePath, RelativePath, library, Options),
 			output_library_files(Path, Options),
-			Format::graph_footer(output_file, RelativePath, RelativePath, Options)
+			Format::graph_footer(output_file, RelativePath, RelativePath, library, Options)
 		;	output_library_files(Path, Options)
 		).
 
@@ -174,7 +174,7 @@
 
 	output_files([], _Options).
 	output_files([File| Files], Options) :-
-		::locate_file(File, Basename, Directory, Path),
+		::locate_file(File, Basename, _, Directory, Path),
 		::output_file(Path, Basename, Directory, Options),
 		output_files(Files, Options).
 
@@ -317,24 +317,24 @@
 		),
 		atom_concat(Directory, Basename, Path).
 
-	:- protected(locate_file/4).
-	:- mode(locate_file(+atom, +atom, +atom, -atom), one).
-	:- info(locate_file/4, [
+	:- protected(locate_file/5).
+	:- mode(locate_file(+atom, +atom, +atom, +atom, -atom), one).
+	:- info(locate_file/5, [
 		comment is 'Locates a file given its name, basename, full path, or library notation representation.',
-		argnames is ['File', 'Basename', 'Directory', 'Path']
+		argnames is ['File', 'Basename', 'Extension', 'Directory', 'Path']
 	]).
 
 	% file given in library notation
-	locate_file(LibraryNotation, Basename, Directory, Path) :-
+	locate_file(LibraryNotation, Basename, Extension, Directory, Path) :-
 		compound(LibraryNotation),
 		!,
 		LibraryNotation =.. [Library, Name],
 		logtalk::expand_library_path(Library, LibraryPath),
 		atom_concat(LibraryPath, Name, Source),
-		locate_file(Source, Basename, Directory, Path).
+		locate_file(Source, Basename, Extension, Directory, Path).
 	% file given using its name or basename
-	locate_file(Source, Basename, Directory, Path) :-
-		add_extension(Source, Basename),
+	locate_file(Source, Basename, Extension, Directory, Path) :-
+		add_extension(Source, Basename, Extension),
 		logtalk::loaded_file_property(Path, basename(Basename)),
 		logtalk::loaded_file_property(Path, directory(Directory)),
 		% check that there isn't another file with the same basename
@@ -345,20 +345,24 @@
 		),
 		!.
 	% file given using a full path
-	locate_file(Source, Basename, Directory, Path) :-
-		add_extension(Source, Path),
+	locate_file(Source, Basename, Extension, Directory, Path) :-
+		add_extension(Source, Path, Extension),
 		logtalk::loaded_file_property(Path, basename(Basename)),
 		logtalk::loaded_file_property(Path, directory(Directory)),
 		!.
 
-	add_extension(Source, SourceWithExtension) :-
+	add_extension(Source, SourceWithExtension, Extension) :-
 		atom(Source),
 		(	sub_atom(Source, _, 4, 0, '.lgt') ->
-			SourceWithExtension = Source
+			SourceWithExtension = Source,
+			Extension = '.lgt'
 		;	sub_atom(Source, _, 8, 0, '.logtalk') ->
-			SourceWithExtension = Source
-		;	(	atom_concat(Source, '.lgt', SourceWithExtension)
-			;	atom_concat(Source, '.logtalk', SourceWithExtension)
+			SourceWithExtension = Source,
+			Extension = '.logtalk'
+		;	(	atom_concat(Source, '.lgt', SourceWithExtension),
+				Extension = '.lgt'
+			;	atom_concat(Source, '.logtalk', SourceWithExtension),
+				Extension = '.logtalk'
 			)
 		).
 

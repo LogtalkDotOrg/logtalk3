@@ -35,8 +35,8 @@
 
 	output_file(Path, Basename, Directory, Options) :-
 		(	member(directory_paths(true), Options) ->
-			::output_node(Path, Basename, [Directory], file, [fillcolor(turquoise)| Options])
-		;	::output_node(Path, Basename, [], file, [fillcolor(turquoise)| Options])
+			::output_node(Path, Basename, [Directory], file, Options)
+		;	::output_node(Path, Basename, [], file, Options)
 		),
 		fail.
 	output_file(Path, _, _, Options) :-
