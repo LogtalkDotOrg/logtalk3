@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/12/30,
+		date is 2013/12/31,
 		comment is 'Predicates for generating predicate call diagrams.',
 		argnames is ['Format']
 	]).
@@ -52,6 +52,9 @@
 
 	:- private(referenced_entity_/1).
 	:- dynamic(referenced_entity_/1).
+
+	:- private(referenced_module_/1).
+	:- dynamic(referenced_module_/1).
 
 	rlibrary(Library, UserOptions) :-
 		reset_external_entities,
@@ -107,9 +110,16 @@
 		;	assertz(referenced_entity_(Entity))
 		).
 
+	remember_referenced_module(Module) :-
+		(	referenced_module_(Module) ->
+			true
+		;	assertz(referenced_module_(Module))
+		).
+
 	reset_external_entities :-
 		retractall(included_entity_(_)),
-		retractall(referenced_entity_(_)).
+		retractall(referenced_entity_(_)),
+		retractall(referenced_module_(_)).
 
 	output_external_entities(_Options) :-
 		retract(included_entity_(Entity)),
@@ -133,6 +143,11 @@
 			print_name(protocol, Entity, Name),
 			::output_node(Name, Name, [], external_protocol, Options)
 		),
+		fail.
+	output_external_entities(Options) :-
+		retract(referenced_module_(Module)),
+		print_name(module, Module, Name),
+		::output_node(Name, Name, [], external_module, Options),
 		fail.
 	output_external_entities(Options) :-
 		::format_object(Format),
@@ -210,14 +225,14 @@
 	output_protocol_relations(Protocol, Options) :-
 		setof(
 			Predicate,
-			Properties^(protocol_property(Protocol, calls(':'(Module,Predicate), Properties)), nonvar(Module), \+ referenced_entity_(Module)),
+			Properties^(protocol_property(Protocol, calls(':'(Module,Predicate), Properties)), nonvar(Module), \+ referenced_module_(Module)),
 			Predicates
 		),
 		entity_resources_to_atoms(Predicates, Atoms),
 		print_name(protocol, Protocol, ProtocolName),
 		print_name(module, Module, ModuleName),
 		::output_edge(ProtocolName, ModuleName, Atoms, calls_predicate, Options),
-		remember_referenced_entity(Module),
+		remember_referenced_module(Module),
 		fail.
 	output_protocol_relations(_, _).
 
@@ -236,14 +251,14 @@
 	output_object_relations(Object, Options) :-
 		setof(
 			Predicate,
-			Properties^(object_property(Object, calls(':'(Module,Predicate), Properties)), nonvar(Module), \+ referenced_entity_(Module)),
+			Properties^(object_property(Object, calls(':'(Module,Predicate), Properties)), nonvar(Module), \+ referenced_module_(Module)),
 			Predicates
 		),
 		entity_resources_to_atoms(Predicates, Atoms),
 		print_name(object, Object, ObjectName),
 		print_name(module, Module, ModuleName),
 		::output_edge(ObjectName, ModuleName, Atoms, calls_predicate, Options),
-		remember_referenced_entity(Module),
+		remember_referenced_module(Module),
 		fail.
 	output_object_relations(_, _).
 
@@ -262,14 +277,14 @@
 	output_category_relations(Category, Options) :-
 		setof(
 			Predicate,
-			Properties^(category_property(Category, calls(':'(Module,Predicate), Properties)), nonvar(Module), \+ referenced_entity_(Module)),
+			Properties^(category_property(Category, calls(':'(Module,Predicate), Properties)), nonvar(Module), \+ referenced_module_(Module)),
 			Predicates
 		),
 		entity_resources_to_atoms(Predicates, Atoms),
 		print_name(category, Category, CategoryName),
 		print_name(module, Module, ModuleName),
 		::output_edge(CategoryName, ModuleName, Atoms, calls_predicate, Options),
-		remember_referenced_entity(Module),
+		remember_referenced_module(Module),
 		fail.
 	output_category_relations(_, _).
 
@@ -294,6 +309,7 @@
 			Category =.. [Functor| _],
 			CategoryName =.. [Functor| Names]
 		).
+	print_name(module, Module, Module).
 
 	parameter_names(Entity, Info, Names) :-
 		(	member(parnames(Names), Info) ->

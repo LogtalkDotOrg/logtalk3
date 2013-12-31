@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/12/30,
+		date is 2013/12/31,
 		comment is 'Generates entity diagram DOT files for source files and libraries.'
 	]).
 
@@ -135,7 +135,7 @@
 	node_shape_style_color(external_instance_or_class, box, '"filled,dashed"', yellow).
 	node_shape_style_color(external_protocol, note, '"filled,dashed"', aquamarine).
 	node_shape_style_color(external_category, component, '"filled,dashed"', cyan).
-	node_shape_style_color(external_module, box, '"filled,dashed"', gainsboro).
+	node_shape_style_color(external_module, tab, '"filled,dashed"', gainsboro).
 
 	node_shape_style_color(file, box, filled, turquoise).
 
