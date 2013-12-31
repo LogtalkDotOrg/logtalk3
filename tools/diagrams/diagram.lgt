@@ -76,27 +76,28 @@
 	rlibrary(Library, UserOptions) :-
 		format_object(Format),
 		::merge_options(UserOptions, Options),
-		logtalk::expand_library_path(Library, TopDirectory),
+		logtalk::expand_library_path(Library, Path),
 		::output_file_path(Library, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::output_file_header(output_file, Options),
-		::output_rlibrary(TopDirectory, Options),
+		::output_rlibrary(Library, Path, Options),
 		Format::output_file_footer(output_file, Options),
 		close(Stream).
 
-	output_rlibrary(TopDirectory, Options) :-
+	output_rlibrary(TopLibrary, TopPath, Options) :-
 		format_object(Format),
-		Format::graph_header(output_file, TopDirectory, TopDirectory, rlibrary, Options),
+		Format::graph_header(output_file, TopLibrary, TopLibrary, rlibrary, Options),
 		member(exclude_paths(ExcludedPaths), Options),
 		forall(
-			sub_library(TopDirectory, ExcludedPaths, RelativePath, Path),
-			output_library(RelativePath, Path, Options)),
-		Format::graph_footer(output_file, TopDirectory, TopDirectory, rlibrary, Options).
+			sub_library(TopLibrary, TopPath, ExcludedPaths, Library, Path),
+			output_library(Library, Path, Options)),
+		Format::graph_footer(output_file, TopLibrary, TopLibrary, rlibrary, Options).
 
-	sub_library(TopDirectory, ExcludedPaths, RelativePath, Path) :-
+	sub_library(TopLibrary, TopPath, ExcludedPaths, Library, Path) :-
 		logtalk_library_path(Library, _),
+		Library \== TopLibrary,
 		logtalk::expand_library_path(Library, Path),
-		atom_concat(TopDirectory, RelativePath, Path),
+		atom_concat(TopPath, RelativePath, Path),
 		\+ member(RelativePath, ExcludedPaths).
 
 	:- public(rlibrary/1).
@@ -123,18 +124,15 @@
 		::output_file_path(Library, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::output_file_header(output_file, Options),
-		::output_library(Path, Path, Options),
+		::output_library(Library, Path, Options),
 		Format::output_file_footer(output_file, Options),
 		close(Stream).
 
-	output_library(RelativePath, Path, Options) :-
+	output_library(Library, Path, Options) :-
 		format_object(Format),
-		(	member(library_paths(true), Options) ->
-			Format::graph_header(output_file, RelativePath, RelativePath, library, Options),
-			output_library_files(Path, Options),
-			Format::graph_footer(output_file, RelativePath, RelativePath, library, Options)
-		;	output_library_files(Path, Options)
-		).
+		Format::graph_header(output_file, Library, Library, library, Options),
+		output_library_files(Path, Options),
+		Format::graph_footer(output_file, Library, Library, library, Options).
 
 	output_library_files(Directory, Options) :-
 		member(exclude_files(ExcludedFiles), Options),
@@ -226,18 +224,18 @@
 		argnames is ['UserOptions', 'Options']
 	]).
 
-	:- protected(output_rlibrary/2).
-	:- mode(output_rlibrary(+atom, +list(compound)), one).
-	:- info(output_rlibrary/2, [
+	:- protected(output_rlibrary/3).
+	:- mode(output_rlibrary(+atom, +atom, +list(compound)), one).
+	:- info(output_rlibrary/3, [
 		comment is 'Generates diagram output for all sub-libraries of a library.',
-		argnames is ['TopDirectory', 'Options']
+		argnames is ['Library', 'Path', 'Options']
 	]).
 
 	:- protected(output_library/3).
 	:- mode(output_library(+atom, +atom, +list(compound)), one).
 	:- info(output_library/3, [
 		comment is 'Generates diagram output for a library.',
-		argnames is ['RelativePath', 'Path', 'Options']
+		argnames is ['Library', 'Path', 'Options']
 	]).
 
 	:- protected(output_files/2).

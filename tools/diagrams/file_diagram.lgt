@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/12/30,
+		date is 2013/12/31,
 		comment is 'Predicates for generating file loading dependency diagrams.',
 		argnames is ['Format']
 	]).
@@ -46,9 +46,7 @@
 	output_file(_, _, _, _).
 
 	merge_options(UserOptions, Options) :-
-		% by default, print library paths:
-		(member(library_paths(LibraryPaths), UserOptions) -> true; LibraryPaths = true),
-		% by default, print directory paths:
+		% by default, don't print directory paths:
 		(member(directory_paths(DirectoryPaths), UserOptions) -> true; DirectoryPaths = false),
 		% by default, print current date:
 		(member(date(Date), UserOptions) -> true; Date = true),
@@ -61,7 +59,7 @@
 		% by default, don't exclude any library sub-directories:
 		(member(exclude_paths(ExcludedPaths), UserOptions) -> true; ExcludedPaths = []),
 		Options = [
-			library_paths(LibraryPaths), directory_paths(DirectoryPaths), date(Date), relation_labels(Relations),
+			directory_paths(DirectoryPaths), date(Date), relation_labels(Relations),
 			output_path(OutputPath),
 			exclude_files(ExcludedFiles), exclude_paths(ExcludedPaths)].
 

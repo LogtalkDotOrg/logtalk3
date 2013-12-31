@@ -96,10 +96,6 @@ generated diagrams. For entity diagrams the options are:
 
 - `date(Boolean)`  
 	print/omit current date (`true` or `false`; default is `true`)
-- `library_paths(Boolean)`  
-	print/omit library paths (`true` or `false`; default is `true`)
-- `file_names(Boolean)`  
-	print/omit source file names (`true` or `false`; default is `true`)
 - `interface(Boolean)`  
 	print/omit public predicates (`true` or `false`; default is `true`)
 - `relation_labels(Boolean)`  
@@ -117,8 +113,6 @@ For file loading dependency diagrams the options are:
 
 - `date(Boolean)`  
 	print/omit current date (`true` or `false`; default is `true`)
-- `library_paths(Boolean)`  
-	print/omit library paths (`true` or `false`; default is `true`)
 - `directory_paths(Boolean)`  
 	print/omit file directory paths (`true` or `false`; default is `true`)
 - `relation_labels(Boolean)`  
@@ -134,10 +128,6 @@ For predicate call diagrams the options are:
 
 - `date(Boolean)`  
 	print/omit current date (`true` or `false`; default is `true`)
-- `library_paths(Boolean)`  
-	print/omit library paths (`true` or `false`; default is `true`)
-- `file_names(Boolean)`  
-	print/omit source file names (`true` or `false`; default is `true`)
 - `interface(Boolean)`  
 	print/omit public predicates (`true` or `false`; default is `false`)
 - `directory_paths(Boolean)`  

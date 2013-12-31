@@ -60,16 +60,16 @@
 		reset_external_entities,
 		^^rlibrary(Library, UserOptions).
 
-	output_rlibrary(TopDirectory, Options) :-
-		^^output_rlibrary(TopDirectory, Options),
+	output_rlibrary(Library, Path, Options) :-
+		^^output_rlibrary(Library, Path, Options),
 		output_external_entities(Options).
 
 	library(Library, UserOptions) :-
 		reset_external_entities,
 		^^library(Library, UserOptions).
 
-	output_library(RelativePath, Path, Options) :-
-		^^output_library(RelativePath, Path, Options),
+	output_library(Library, Path, Options) :-
+		^^output_library(Library, Path, Options),
 		output_external_entities(Options).
 
 	files(Project, Files, UserOptions) :-
@@ -95,14 +95,11 @@
 
 	output_file(File, Basename, Directory, Options) :-
 		::format_object(Format),
-		(	member(file_names(true), Options) ->
-			% use the full path for the cluster identifier as we
-			% can have more than file with the same basename
-			Format::graph_header(output_file, File, Basename, file, Options),
-			process(Basename, Directory, Options),
-			Format::graph_footer(output_file, File, Basename, file, Options)
-		;	process(Basename, Directory, Options)
-		).
+		% use the full path for the cluster identifier as we
+		% can have more than file with the same basename
+		Format::graph_header(output_file, File, Basename, file, Options),
+		process(Basename, Directory, Options),
+		Format::graph_footer(output_file, File, Basename, file, Options).
 
 	remember_referenced_entity(Entity) :-
 		(	referenced_entity_(Entity) ->
@@ -354,10 +351,6 @@
 		variables_to_underscore(Args).
 
 	merge_options(UserOptions, Options) :-
-		% by default, print library paths:
-		(member(library_paths(LibraryPaths), UserOptions) -> true; LibraryPaths = true),
-		% by default, print file names:
-		(member(file_names(FileNames), UserOptions) -> true; FileNames = true),
 		% by default, print current date:
 		(member(date(Date), UserOptions) -> true; Date = true),
 		% by default, print entity public predicates:
@@ -373,7 +366,7 @@
 		% by default, don't exclude any entities:
 		(member(exclude_entities(ExcludedEntities), UserOptions) -> true; ExcludedEntities = []),
 		Options = [
-			library_paths(LibraryPaths), file_names(FileNames), date(Date), interface(Interface), relation_labels(Relations),
+			date(Date), interface(Interface), relation_labels(Relations),
 			output_path(OutputPath),
 			exclude_files(ExcludedFiles), exclude_paths(ExcludedPaths), exclude_entities(ExcludedEntities)].
 
