@@ -36,6 +36,9 @@ that resulted in runtime errors when attempting to create objects with an
 initial set of clauses that includes calls to the `(::)/1` and `(^^)/1`
 control constructs. Thanks to Andreas Becker for the bug report.
 
+* FIXED: Bug where the directory from which a settings file have been loaded
+would not be reported.
+
 Tools
 -----
 

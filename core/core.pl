@@ -18817,9 +18817,9 @@ current_logtalk_flag(Flag, Value) :-
 	atom_concat(settings, Extension, SettingsFile),
 	'$lgt_file_exists'(SettingsFile) ->
 	catch(
-		(logtalk_load(SettingsFile, Options), Result = loaded(Startup)),
+		(logtalk_load(SettingsFile, Options), Result = loaded(Directory)),
 		Error,
-		Result = error(Startup, Error)
+		Result = error(Directory, Error)
 	).
 
 
