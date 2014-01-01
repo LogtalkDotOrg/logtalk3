@@ -398,3 +398,17 @@
 		member(Option, Options).
 
 :- end_object.
+
+
+
+:- object(entity_diagram,
+	extends(entity_diagram(dot))).
+
+	:- info([
+		version is 2.0,
+		author is 'Paulo Moura',
+		date is 2014/01/01,
+		comment is 'Predicates for generating entity diagrams in DOT format.'
+	]).
+
+:- end_object.

@@ -73,3 +73,17 @@
 		member(Option, Options).
 
 :- end_object.
+
+
+
+:- object(file_diagram,
+	extends(file_diagram(dot))).
+
+	:- info([
+		version is 2.0,
+		author is 'Paulo Moura',
+		date is 2014/01/01,
+		comment is 'Predicates for generating file loading dependency diagrams in DOT format.'
+	]).
+
+:- end_object.

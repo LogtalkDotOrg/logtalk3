@@ -306,3 +306,17 @@
 		member(Option, Options).
 
 :- end_object.
+
+
+
+:- object(call_diagram,
+	extends(call_diagram(dot))).
+
+	:- info([
+		version is 2.0,
+		author is 'Paulo Moura',
+		date is 2014/01/01,
+		comment is 'Predicates for generating predicate call diagrams in DOT format.'
+	]).
+
+:- end_object.
