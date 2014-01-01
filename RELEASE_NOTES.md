@@ -64,6 +64,10 @@ the option `library_paths/1` and `file_names/1`.
 * IMPROVED: The `diagrams` tool now also outputs external Prolog modules in
 entity and cross-referencing predicate call diagrams.
 
+* FIXED: Bug in the `diagrams` tool where generating diagrams for both a
+library and its sub-libraries would miss the entities and files in the top
+library.
+
 Tests
 -----
 

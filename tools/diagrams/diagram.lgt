@@ -87,6 +87,7 @@
 	output_rlibrary(TopLibrary, TopPath, Options) :-
 		format_object(Format),
 		Format::graph_header(output_file, TopLibrary, TopLibrary, rlibrary, Options),
+		output_library(TopLibrary, TopPath, Options),
 		member(exclude_libraries(ExcludedLibraries), Options),
 		forall(
 			sub_library(TopLibrary, TopPath, ExcludedLibraries, Library, Path),
