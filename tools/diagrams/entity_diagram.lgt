@@ -80,8 +80,8 @@
 		^^format_object(Format),
 		^^locate_file(Source, Basename, Extension, Directory, Path),
 		atom_concat(Name, Extension, Basename),
-		merge_options(UserOptions, Options),
-		output_file_path(Name, Options, Format, OutputPath),
+		^^merge_options(UserOptions, Options),
+		^^output_file_path(Name, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::output_file_header(output_file, Options),
 		reset_external_entities,
@@ -211,6 +211,8 @@
 		),
 		(	member(cross_reference_relations(true), Options) ->
 			output_protocol_cross_reference_relations(Protocol, Options)
+		;	member(cross_reference_calls(true), Options) ->
+			output_protocol_cross_reference_calls(Protocol, Options)
 		;	true
 		).
 
@@ -243,6 +245,30 @@
 		fail.
 	output_protocol_cross_reference_relations(_, _).
 
+	output_protocol_cross_reference_calls(Protocol, Options) :-
+		setof(
+			Predicate,
+			Properties^(protocol_property(Protocol, calls(Other::Predicate, Properties)), nonvar(Other), \+ referenced_entity_(Other)),
+			Predicates
+		),
+		^^ground_entity_identifier(protocol, Protocol, ProtocolName),
+		^^ground_entity_identifier(object, Other, OtherName),
+		^^output_edge(ProtocolName, OtherName, Predicates, calls_predicate, Options),
+		remember_referenced_entity(Other),
+		fail.
+	output_protocol_cross_reference_calls(Protocol, Options) :-
+		setof(
+			Predicate,
+			Properties^(protocol_property(Protocol, calls(':'(Module,Predicate), Properties)), nonvar(Module), \+ referenced_module_(Module)),
+			Predicates
+		),
+		^^ground_entity_identifier(protocol, Protocol, ProtocolName),
+		^^ground_entity_identifier(module, Module, ModuleName),
+		^^output_edge(ProtocolName, ModuleName, Predicates, calls_predicate, Options),
+		remember_referenced_module(Module),
+		fail.
+	output_protocol_cross_reference_calls(_, _).
+
 	output_object_relations(Object, Options) :-
 		(	member(inheritance_relations(true), Options) ->
 			output_object_inheritance_relations(Object, Options)
@@ -250,6 +276,8 @@
 		),
 		(	member(cross_reference_relations(true), Options) ->
 			output_object_cross_reference_relations(Object, Options)
+		;	member(cross_reference_calls(true), Options) ->
+			output_object_cross_reference_calls(Object, Options)
 		;	true
 		).
 
@@ -310,6 +338,30 @@
 		fail.
 	output_object_cross_reference_relations(_, _).
 
+	output_object_cross_reference_calls(Object, Options) :-
+		setof(
+			Predicate,
+			Properties^(object_property(Object, calls(Other::Predicate, Properties)), nonvar(Other), \+ referenced_entity_(Other)),
+			Predicates
+		),
+		^^ground_entity_identifier(object, Object, ObjectName),
+		^^ground_entity_identifier(object, Other, OtherName),
+		^^output_edge(ObjectName, OtherName, Predicates, calls_predicate, Options),
+		remember_referenced_entity(Other),
+		fail.
+	output_object_cross_reference_calls(Object, Options) :-
+		setof(
+			Predicate,
+			Properties^(object_property(Object, calls(':'(Module,Predicate), Properties)), nonvar(Module), \+ referenced_module_(Module)),
+			Predicates
+		),
+		^^ground_entity_identifier(object, Object, ObjectName),
+		^^ground_entity_identifier(module, Module, ModuleName),
+		^^output_edge(ObjectName, ModuleName, Predicates, calls_predicate, Options),
+		remember_referenced_module(Module),
+		fail.
+	output_object_cross_reference_calls(_, _).
+
 	output_category_relations(Category, Options) :-
 		(	member(inheritance_relations(true), Options) ->
 			output_category_inheritance_relations(Category, Options)
@@ -317,6 +369,8 @@
 		),
 		(	member(cross_reference_relations(true), Options) ->
 			output_category_cross_reference_relations(Category, Options)
+		;	member(cross_reference_calls(true), Options) ->
+			output_category_cross_reference_calls(Category, Options)
 		;	true
 		).
 
@@ -363,34 +417,52 @@
 		fail.
 	output_category_cross_reference_relations(_, _).
 
-	merge_options(UserOptions, Options) :-
-		% by default, print current date:
-		(member(date(Date), UserOptions) -> true; Date = true),
-		% by default, print entity public predicates:
-		(member(interface(Interface), UserOptions) -> true; Interface = true),
-		% by default, write inheritance links:
-		(member(inheritance_relations(Inheritance), UserOptions) -> true; Inheritance = true),
-		% by default, write cross-referenceing links:
-		(member(cross_reference_relations(CrossReference), UserOptions) -> true; CrossReference = true),
-		% by default, don't print entity relation labels:
-		(member(relation_labels(Relations), UserOptions) -> true; Relations = false),
-		% by default, write diagram to the current directory:
-		(member(output_path(OutputPath), UserOptions) -> true; OutputPath = './'),
-		% by default, don't exclude any source files:
-		(member(exclude_files(ExcludedFiles), UserOptions) -> true; ExcludedFiles = []),
-		% by default, don't exclude any library sub-directories:
-		(member(exclude_libraries(ExcludedLibraries), UserOptions) -> true; ExcludedLibraries = []),
-		% by default, don't exclude any entities:
-		(member(exclude_entities(ExcludedEntities), UserOptions) -> true; ExcludedEntities = []),
-		Options = [
-			date(Date), interface(Interface), relation_labels(Relations),
-			inheritance_relations(Inheritance), cross_reference_relations(CrossReference),
-			output_path(OutputPath),
-			exclude_files(ExcludedFiles), exclude_libraries(ExcludedLibraries), exclude_entities(ExcludedEntities)].
+	output_category_cross_reference_calls(Category, Options) :-
+		setof(
+			Predicate,
+			Properties^(category_property(Category, calls(Object::Predicate, Properties)), nonvar(Object), \+ referenced_entity_(Object)),
+			Predicates
+		),
+		^^ground_entity_identifier(category, Category, CategoryName),
+		^^ground_entity_identifier(object, Object, ObjectName),
+		^^output_edge(CategoryName, ObjectName, Predicates, calls_predicate, Options),
+		remember_referenced_entity(Object),
+		fail.
+	output_category_cross_reference_calls(Category, Options) :-
+		setof(
+			Predicate,
+			Properties^(category_property(Category, calls(':'(Module,Predicate), Properties)), nonvar(Module), \+ referenced_module_(Module)),
+			Predicates
+		),
+		^^ground_entity_identifier(category, Category, CategoryName),
+		^^ground_entity_identifier(module, Module, ModuleName),
+		^^output_edge(CategoryName, ModuleName, Predicates, calls_predicate, Options),
+		remember_referenced_module(Module),
+		fail.
+	output_category_cross_reference_calls(_, _).
 
-	output_file_path(Name0, Options, Format, OutputPath) :-
-		atom_concat(Name0, '_entity_diagram', Name),
-		^^output_file_path(Name, Options, Format, OutputPath).
+	% by default, print current date:
+	default_option(date(true)).
+	% by default, print entity public predicates:
+	default_option(interface(true)).
+	% by default, write inheritance links:
+	default_option(inheritance_relations(true)).
+	% by default, write cross-referencing links:
+	default_option(cross_reference_relations(true)).
+	% by default, print entity relation labels:
+	default_option(relation_labels(true)).
+	% by default, write cross-referencing calls:
+	default_option(cross_reference_calls(false)).
+	% by default, write diagram to the current directory:
+	default_option(output_path('./')).
+	% by default, don't exclude any source files:
+	default_option(exclude_files([])).
+	% by default, don't exclude any library sub-directories:
+	default_option(exclude_libraries([])).
+	% by default, don't exclude any entities:
+	default_option(exclude_entities([])).
+
+	diagram_name_suffix('_entity_diagram').
 
 	member(Option, [Option| _]) :-
 		!.

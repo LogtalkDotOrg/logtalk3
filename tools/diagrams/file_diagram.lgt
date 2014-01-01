@@ -45,27 +45,20 @@
 		fail.
 	output_file(_, _, _, _).
 
-	merge_options(UserOptions, Options) :-
-		% by default, don't print directory paths:
-		(member(directory_paths(DirectoryPaths), UserOptions) -> true; DirectoryPaths = false),
-		% by default, print current date:
-		(member(date(Date), UserOptions) -> true; Date = true),
-		% by default, print relation labels:
-		(member(relation_labels(Relations), UserOptions) -> true; Relations = false),
-		% by default, write diagram to the current directory:
-		(member(output_path(OutputPath), UserOptions) -> true; OutputPath = './'),
-		% by default, don't exclude any source files:
-		(member(exclude_files(ExcludedFiles), UserOptions) -> true; ExcludedFiles = []),
-		% by default, don't exclude any library sub-directories:
-		(member(exclude_libraries(ExcludedLibraries), UserOptions) -> true; ExcludedLibraries = []),
-		Options = [
-			directory_paths(DirectoryPaths), date(Date), relation_labels(Relations),
-			output_path(OutputPath),
-			exclude_files(ExcludedFiles), exclude_libraries(ExcludedLibraries)].
+	% by default, don't print directory paths:
+	default_option(directory_paths(false)).
+	% by default, print current date:
+	default_option(date(true)).
+	% by default, print relation labels:
+	default_option(relation_labels(true)).
+	% by default, write diagram to the current directory:
+	default_option(output_path('./')).
+	% by default, don't exclude any source files:
+	default_option(exclude_files([])).
+	% by default, don't exclude any library sub-directories:
+	default_option(exclude_libraries([])).
 
-	output_file_path(Name0, Options, Format, OutputPath) :-
-		atom_concat(Name0, '_file_diagram', Name),
-		^^output_file_path(Name, Options, Format, OutputPath).
+	diagram_name_suffix('_file_diagram').
 
 	member(Option, [Option| _]) :-
 		!.

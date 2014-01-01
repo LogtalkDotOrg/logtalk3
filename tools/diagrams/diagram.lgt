@@ -41,7 +41,7 @@
 
 	all(UserOptions) :-
 		format_object(Format),
-		::merge_options(UserOptions, Options),
+		merge_options(UserOptions, Options),
 		::output_file_path(all_files, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::output_file_header(output_file, Options),
@@ -75,7 +75,7 @@
 
 	rlibrary(Library, UserOptions) :-
 		format_object(Format),
-		::merge_options(UserOptions, Options),
+		merge_options(UserOptions, Options),
 		logtalk::expand_library_path(Library, Path),
 		::output_file_path(Library, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(output_file)]),
@@ -120,7 +120,7 @@
 
 	library(Library, UserOptions) :-
 		format_object(Format),
-		::merge_options(UserOptions, Options),
+		merge_options(UserOptions, Options),
 		logtalk::expand_library_path(Library, Path),
 		::output_file_path(Library, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(output_file)]),
@@ -163,7 +163,7 @@
 
 	files(Project, Files, UserOptions) :-
 		format_object(Format),
-		::merge_options(UserOptions, Options),
+		merge_options(UserOptions, Options),
 		::output_file_path(Project, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::output_file_header(output_file, Options),
@@ -187,16 +187,6 @@
 	files(Project, Files) :-
 		::files(Project, Files, []).
 
-	:- public(default_options/1).
-	:- mode(default_options(-list(compound)), one).
-	:- info(default_options/1, [
-		comment is 'Returns a list of the default options used when generating a diagram.',
-		argnames is ['DefaultOptions']
-	]).
-
-	default_options(DefaultOptions) :-
-		::merge_options([], DefaultOptions).
-
 	:- public(format_object/2).
 	:- multifile(format_object/2).
 	:- mode(format_object(?atom, ?object_identifier), zero_or_more).
@@ -218,12 +208,41 @@
 		nonvar(Format),
 		format_object(Format, Object).
 
+	:- public(default_option/1).
+	:- mode(default_option(?compound), zero_or_more).
+	:- info(default_option/1, [
+		comment is 'Returns a list of the default options used when generating a diagram.',
+		argnames is ['DefaultOption']
+	]).
+
+	:- public(default_options/1).
+	:- mode(default_options(-list(compound)), one).
+	:- info(default_options/1, [
+		comment is 'Returns a list of the default options used when generating a diagram.',
+		argnames is ['DefaultOptions']
+	]).
+
+	default_options(DefaultOptions) :-
+		findall(DefaultOption, ::default_option(DefaultOption), DefaultOptions).
+
 	:- protected(merge_options/2).
 	:- mode(merge_options(+list(compound), -list(compound)), one).
 	:- info(merge_options/2, [
 		comment is 'Merges the user options with the default options, returning the list of options used when generating a diagram.',
 		argnames is ['UserOptions', 'Options']
 	]).
+
+	merge_options(UserOptions, Options) :-
+		findall(
+			DefaultOption,
+			(	::default_option(DefaultOption),
+				functor(DefaultOption, OptionName, Arity),
+				functor(UserOption, OptionName, Arity),
+				\+ member(UserOption, UserOptions)
+			),
+			DefaultOptions
+		),
+		append(UserOptions, DefaultOptions, Options).
 
 	:- protected(output_rlibrary/3).
 	:- mode(output_rlibrary(+atom, +atom, +list(compound)), one).
@@ -300,6 +319,16 @@
 		atom_concat(Source4, '.logtalk', Basename),
 		\+ member(Source4, [ExcludedFile| ExcludedFiles]).
 
+	:- protected(diagram_name_suffix/1).
+	:- mode(diagram_name_suffix(-atom), one).
+	:- info(diagram_name_suffix/1, [
+		comment is 'Returns the diagram name suffix.',
+		argnames is ['Suffix']
+	]).
+
+	% default value
+	diagram_name_suffix('_diagram').
+
 	:- protected(output_file_path/4).
 	:- mode(output_file_path(+atom, +list(atom), +object_identifier, -atom), one).
 	:- info(output_file_path/4, [
@@ -307,7 +336,9 @@
 		argnames is ['Name', 'Options', 'Format', 'Path']
 	]).
 
-	output_file_path(Name, Options, Format, Path) :-
+	output_file_path(Name0, Options, Format, Path) :-
+		::diagram_name_suffix(Suffix),
+		atom_concat(Name0, Suffix, Name),
 		Format::output_file_name(Name, Basename),
 		member(output_path(Directory0), Options),
 		(	sub_atom(Directory0, _, _, 0, '/') ->
@@ -411,6 +442,10 @@
 		;	true
 		),
 		variables_to_underscore(Args).
+
+	append([], List, List).
+	append([Head| Tail], List, [Head| Tail2]) :-
+		append(Tail, List, Tail2).
 
 	member(Option, [Option| _]) :-
 		!.
