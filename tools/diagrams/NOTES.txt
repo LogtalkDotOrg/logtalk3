@@ -24,10 +24,18 @@ ________________________________________________________________________
 To load this tool and for sample queries, please see the `SCRIPT.txt`
 file.
 
-This tool generates entity diagrams, predicate call diagrams, and file loading
-dependency diagrams for source files and for libraries of source files using
-the Logtalk reflection features to collect the relevant information and a graph
-language (e.g. DOT) for representing the diagrams.
+This tool generates entity diagrams and file loading dependency diagrams for
+source files and for libraries of source files using the Logtalk reflection
+features to collect the relevant information and a graph language (e.g. DOT)
+for representing the diagrams.
+
+Several entity diagrams are supported, including:
+
+- entity diagrams showing entity public interfaces, entity inheritance
+relations and entity predicate call cross-reference relations
+- call diagrams showing entity predicate cross-reference calls
+- inheritance diagrams showing entity inheritance relations
+- uses diagrams showing predicate call cross-reference relations
 
 Limitations in both the graph language and UML forces the invention of a
 modeling language that can represent all kinds of Logtalk entities and
@@ -35,32 +43,32 @@ entity relations. Currently we use the following DOT shapes (entities)
 and arrows (entity relations):
 
 - objects (classes, instances, and prototypes)  
-	box (rectangle)
+	`box` (rectangle)
 - protocols  
-	note (rectangle with folded right-upper corners)
+	`note` (rectangle with folded right-upper corners)
 - categories  
-	component (rectangle with two small rectangles intercepting the left side)
+	`component` (rectangle with two small rectangles intercepting the left side)
 - modules  
-	tab (rectangle with small tab at top)
+	`tab` (rectangle with small tab at top)
 
 - specialization relation  
-	onormal (arrow ending with a white triangle)
+	`onormal` (arrow ending with a white triangle)
 - instantiation relation  
-	normal (arrow ending with a black triangle)
+	`normal` (arrow ending with a black triangle)
 - extends relation  
-	vee (arrow ending with a "v")
+	`vee` (arrow ending with a "v")
 - implements relation  
-	dot (arrow ending with a black circle)
+	`dot` (arrow ending with a black circle)
 - imports relation  
-	box (arrow ending with a black square)
+	`box` (arrow ending with a black square)
 - complements relation  
-	obox (arrow ending with a white square)
+	`obox` (arrow ending with a white square)
 
 - uses and use_module relations  
-	none (line)
+	`halfopen` (line)
 
 - file loading relations  
-	normal (arrow ending with a black triangle)
+	`normal` (arrow ending with a black triangle)
 
 The entities that are not part of the files or libraries for which you are
 generating a diagram use a dashed border.
@@ -103,9 +111,15 @@ generated diagrams. For entity diagrams the options are:
 - `date(Boolean)`  
 	print/omit current date (`true` or `false`; default is `true`)
 - `interface(Boolean)`  
-	print/omit public predicates (`true` or `false`; default is `true`)
+	print/omit public predicates (default depends on the specific diagram)
 - `relation_labels(Boolean)`  
-	print/omit entity relation labels (`true` or `false`; default is `false`)
+	print/omit entity relation labels (`true` or `false`; default is `true`)
+- `inheritance_relations(Boolean)`  
+	print/omit inheritance relations (default depends on the specific diagram)
+- `cross_reference_relations(Boolean)`  
+	print/omit predicate call cross reference relations (default depends on the specific diagram)
+- `cross_reference_calls(Boolean)`  
+	print/omit predicate cross reference calls (default depends on the specific diagram)
 - `output_path(OutputPath)`  
 	directory for the .dot files (an atom; default is `.`)
 - `exclude_files(Files)`  
@@ -129,25 +143,6 @@ For file loading dependency diagrams the options are:
 	list of source files to exclude (default is `[]`)
 - `exclude_libraries(Libraries)`  
 	list of sub-libraries to exclude (default is `[]`)
-
-For predicate call diagrams the options are:
-
-- `date(Boolean)`  
-	print/omit current date (`true` or `false`; default is `true`)
-- `interface(Boolean)`  
-	print/omit public predicates (`true` or `false`; default is `false`)
-- `directory_paths(Boolean)`  
-	print/omit file directory paths (`true` or `false`; default is `true`)
-- `relation_labels(Boolean)`  
-	print/omit entity relation labels (`true` or `false`; default is `true`)
-- `output_path(OutputPath)`  
-	directory for the .dot files (an atom; default is `.`)
-- `exclude_files(Files)`  
-	list of source files to exclude (default is `[]`)
-- `exclude_libraries(Libraries)`  
-	list of sub-libraries to exclude (default is `[]`)
-- `exclude_entities(Entities)`  
-	list of entities to exclude (default is `[]`)
 
 Be sure to set the `source_data` flag `on` before compiling the libraries
 or files for which you want to generated diagrams.

@@ -51,15 +51,18 @@ yes
 ...
 
 % generating a file loading dependencies diagram for all source files in a
-% library using default options:
+% library using default options and the default graph language (DOT):
 
-| ?- file_diagram(dot)::library(searching).
+| ?- file_diagram::library(searching).
 yes
 
 
 % it's also possible to generate diagrams for a library and all its
 % sub-libraries using the rlibrary/1 method instead of the library/1
-% method
+% method:
+
+| ?- file_diagram(dot)::rlibrary(tools).
+yes
 
 
 % the methods all/1, rlibrary/2, library/2, files/2, and file/2 allows
