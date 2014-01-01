@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////////////////////
 // 
 //   This file is part of Logtalk <http://logtalk.org/>  
-//   Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
+//   Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 // 
 //   Logtalk user folder setup script
 //   Last updated on November 12, 2013

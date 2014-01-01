@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <http://logtalk.org/>  
-Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
+Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -25,8 +25,8 @@ RELEASE NOTES
 =============
 
 
-3.00.0 Alpha 33 - December ??, 2013
-===================================
+3.00.0 Alpha 33 - January ??, 2014
+==================================
 
 Logtalk compiler and runtime
 ----------------------------

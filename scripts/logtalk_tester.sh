@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
-##   Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
+##   Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Unit testing automation script
 ##   Last updated on August 10, 2013

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
-%  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
+%  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for XSB 3.4.1 or later versions
 %  Last updated on November 4, 2013

@@ -15,7 +15,7 @@ class LogtalkLexer(RegexLexer):
     """
     For `Logtalk <http://logtalk.org/>`_ source code.
 
-    :copyright: 2008-2013 by Paulo Moura, Clara Dimene.
+    :copyright: 2008-2014 by Paulo Moura, Clara Dimene.
     :license: BSD, see LICENSE for more details.
     """
 

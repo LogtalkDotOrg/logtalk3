@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
-%  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
+%  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for CxProlog 0.97.7 or a later version
 %  Last updated on November 1, 2013

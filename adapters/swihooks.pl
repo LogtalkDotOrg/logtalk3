@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
-%  Copyright (c) 1998-2013 Paulo Moura <pmoura@logtalk.org>
+%  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Integration code for SWI Prolog 6.0.0 and later versions to compile and
 %  load Logtalk files using SWI Prolog consult/1, to support edit/1 and

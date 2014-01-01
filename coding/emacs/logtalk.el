@@ -1,6 +1,6 @@
 ;; logtalk.el -- font lock support for Logtalk (http://logtalk.org/)
 
-;; Copyright (C) 2003-2013 Paulo Moura
+;; Copyright (c) 2003-2014 Paulo Moura
 
 ;; Author: Paulo Moura <pmoura@logtalk.org>
 ;; Creation date: November 15, 2003
