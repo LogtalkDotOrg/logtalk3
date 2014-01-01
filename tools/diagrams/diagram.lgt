@@ -27,7 +27,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/12/30,
+		date is 2014/01/01,
 		comment is 'Predicates for generating diagrams.',
 		argnames is ['Format']
 	]).
@@ -87,18 +87,18 @@
 	output_rlibrary(TopLibrary, TopPath, Options) :-
 		format_object(Format),
 		Format::graph_header(output_file, TopLibrary, TopLibrary, rlibrary, Options),
-		member(exclude_paths(ExcludedPaths), Options),
+		member(exclude_libraries(ExcludedLibraries), Options),
 		forall(
-			sub_library(TopLibrary, TopPath, ExcludedPaths, Library, Path),
+			sub_library(TopLibrary, TopPath, ExcludedLibraries, Library, Path),
 			output_library(Library, Path, Options)),
 		Format::graph_footer(output_file, TopLibrary, TopLibrary, rlibrary, Options).
 
-	sub_library(TopLibrary, TopPath, ExcludedPaths, Library, Path) :-
+	sub_library(TopLibrary, TopPath, ExcludedLibraries, Library, Path) :-
 		logtalk_library_path(Library, _),
 		Library \== TopLibrary,
+		\+ member(Library, ExcludedLibraries),
 		logtalk::expand_library_path(Library, Path),
-		atom_concat(TopPath, RelativePath, Path),
-		\+ member(RelativePath, ExcludedPaths).
+		atom_concat(TopPath, _RelativePath, Path).
 
 	:- public(rlibrary/1).
 	:- mode(rlibrary(+atom), one).
@@ -172,7 +172,7 @@
 
 	output_files([], _Options).
 	output_files([File| Files], Options) :-
-		::locate_file(File, Basename, _, Directory, Path),
+		locate_file(File, Basename, _, Directory, Path),
 		::output_file(Path, Basename, Directory, Options),
 		output_files(Files, Options).
 
@@ -253,10 +253,10 @@
 	]).
 
 	:- protected(output_node/5).
-	:- mode(output_node(+atom, +atom, +list(atom), +atom, +list(compound)), one).
+	:- mode(output_node(+nonvar, +nonvar, +list(nonvar), +atom, +list(compound)), one).
 	:- info(output_node/5, [
 		comment is 'Outputs a graph node.',
-		argnames is ['Identifier', 'Label', 'Lines', 'Kind', 'Options']
+		argnames is ['Identifier', 'Label', 'Contents', 'Kind', 'Options']
 	]).
 
 	output_node(Identifier, Label, Lines, Kind, Options) :-
@@ -264,7 +264,7 @@
 		Format::node(output_file, Identifier, Label, Lines, Kind, Options).
 
 	:- protected(output_edge/5).
-	:- mode(output_edge(+atom, +atom, +list(atom), +atom, +list(compound)), one).
+	:- mode(output_edge(+nonvar, +nonvar, +list(nonvar), +atom, +list(compound)), one).
 	:- info(output_edge/5, [
 		comment is 'Outputs a graph edge.',
 		argnames is ['From', 'To', 'Labels', 'Kind', 'Options']
@@ -363,6 +363,53 @@
 				Extension = '.logtalk'
 			)
 		).
+
+	:- protected(ground_entity_identifier/3).
+	:- mode(ground_entity_identifier(+atom, +callable, -callable), one).
+	:- info(ground_entity_identifier/3, [
+		comment is 'Converts an entity identifier to a ground term.',
+		argnames is ['Kind', 'Identifier', 'GroundIdentifier']
+	]).
+
+	ground_entity_identifier(object, Object, ObjectName) :-
+		(	atom(Object) ->
+			ObjectName = Object
+		;	(	object_property(Object, info(Info)) ->
+				parameter_names(Object, Info, Names)
+			;	parameter_names(Object, [], Names)
+			),
+			Object =.. [Functor| _],
+			ObjectName =.. [Functor| Names]
+		).
+	ground_entity_identifier(protocol, Protocol, Protocol).
+	ground_entity_identifier(category, Category, CategoryName) :-
+		(	atom(Category) ->
+			CategoryName = Category
+		;	(	category_property(Category, info(Info)) ->
+				parameter_names(Category, Info, Names)
+			;	parameter_names(Category, [], Names)
+			),
+			Category =.. [Functor| _],
+			CategoryName =.. [Functor| Names]
+		).
+	ground_entity_identifier(module, Module, Module).
+
+	parameter_names(Entity, Info, Names) :-
+		(	member(parnames(Names), Info) ->
+			true
+		;	member(parameters(Parameters), Info) ->
+			pairs::keys(Parameters, Names)
+		;	Entity =.. [_| Names],
+			variables_to_underscore(Names)
+		).
+
+	variables_to_underscore([]).
+	variables_to_underscore([Arg| Args]) :-
+		(	var(Arg) ->
+			Arg = '_'
+		;	true
+		),
+		variables_to_underscore(Args).
 
 	member(Option, [Option| _]) :-
 		!.

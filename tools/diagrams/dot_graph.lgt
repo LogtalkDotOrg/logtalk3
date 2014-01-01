@@ -108,8 +108,7 @@
 	graph_style_margin_color(file, rounded, 10, snow).
 	graph_style_margin_color(external, rounded, 10, white).
 
-	node(Stream, Identifier, Label, Lines, Kind, _Options) :-
-		lines_to_contents(Lines, Contents),
+	node(Stream, Identifier, Label, Contents, Kind, _Options) :-
 		node_shape_style_color(Kind, Shape, Style, Color),
 		write(Stream, '"'),
 		write(Stream, Identifier),
@@ -121,8 +120,8 @@
 		write(Stream, Color),
 		write(Stream, '",label=<<B>'),
 		write(Stream, Label),
-		write(Stream, '</B><BR/>'),
-		write(Stream, Contents),
+		write(Stream, '</B><BR/><BR/>'),
+		write_lines(Contents, Stream),
 		write(Stream, '>]\n').
 
 	node_shape_style_color(prototype, box, filled, beige).
@@ -140,7 +139,6 @@
 	node_shape_style_color(file, box, filled, turquoise).
 
 	edge(Stream, Start, End, Labels, Kind, _Options) :-
-		labels_to_lines(Labels, Lines),
 		edge_arrow(Kind, ArrowHead),
 		write(Stream, '"'),
 		write(Stream, Start),
@@ -148,9 +146,9 @@
 		write(Stream, End),
 		write(Stream, '" [arrowhead='),
 		write(Stream, ArrowHead),
-		write(Stream, ',label="'),
-		write(Stream, Lines),
-		write(Stream, '"]\n').
+		write(Stream, ',label=<'),
+		write_lines(Labels, Stream),
+		write(Stream, '>]\n').
 
 	edge_arrow(extends_object, vee).
 	edge_arrow(extends_protocol, vee).
@@ -163,27 +161,12 @@
 	edge_arrow(calls_predicate, halfopen).
 	edge_arrow(loads_file, normal).
 
-	lines_to_contents([], '').
-	lines_to_contents([Line| Lines], Contents) :-
-		lines_to_contents([Line| Lines], ' <BR/>', Contents).
-
-	lines_to_contents([], Contents, Contents).
-	lines_to_contents([Line| Lines], Contents0, Contents) :-
-		atom_concat('<![CDATA[', Line, WrappedLine0),
-		atom_concat(WrappedLine0, ']]>', WrappedLine),
-		atom_concat(Contents0, '<BR/>', Contents1),
-		atom_concat(Contents1, WrappedLine, Contents2),
-		lines_to_contents(Lines, Contents2, Contents).
-
-	labels_to_lines([], '').
-	labels_to_lines([Line| Lines], Contents) :-
-		labels_to_lines(Lines, Line, Contents).
-
-	labels_to_lines([], Contents, Contents).
-	labels_to_lines([Line| Lines], Contents0, Contents) :-
-		atom_concat(Contents0, '\n', Contents1),
-		atom_concat(Contents1, Line, Contents2),
-		labels_to_lines(Lines, Contents2, Contents).
+	write_lines([], _).
+	write_lines([Line| Lines], Stream) :-
+		write(Stream, '<![CDATA['),
+		write(Stream, Line),
+		write(Stream, ']]><BR/>'),
+		write_lines(Lines, Stream).
 
 	member(Option, [Option| _]) :-
 		!.

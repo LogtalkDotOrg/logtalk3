@@ -72,6 +72,12 @@ simply type:
 
 	dot -Tpdf diagram.dot > diagram.pdf
 
+This usaully works fine for entity and predicate call cross-referencing
+diagrams. For file loading dependency diagrams, the `circo` command-line
+executable often produces better results:
+
+	circo -Tpdf diagram.dot > diagram.pdf
+
 When generating diagrams for libraries, is possible to split a diagram with
 several disconnected entity graphs using the `ccomps` command-line executable.
 For example:
@@ -104,8 +110,8 @@ generated diagrams. For entity diagrams the options are:
 	directory for the .dot files (an atom; default is `.`)
 - `exclude_files(Files)`  
 	list of source files to exclude (default is `[]`)
-- `exclude_paths(Paths)`  
-	list of relative paths to exclude (default is `[]`)
+- `exclude_libraries(Libraries)`  
+	list of sub-libraries to exclude (default is `[]`)
 - `exclude_entities(Entities)`  
 	list of entities to exclude (default is `[]`)
 
@@ -121,8 +127,8 @@ For file loading dependency diagrams the options are:
 	directory for the .dot files (an atom; default is `.`)
 - `exclude_files(Files)`  
 	list of source files to exclude (default is `[]`)
-- `exclude_paths(Paths)`  
-	list of relative paths to exclude (default is `[]`)
+- `exclude_libraries(Libraries)`  
+	list of sub-libraries to exclude (default is `[]`)
 
 For predicate call diagrams the options are:
 
@@ -138,8 +144,8 @@ For predicate call diagrams the options are:
 	directory for the .dot files (an atom; default is `.`)
 - `exclude_files(Files)`  
 	list of source files to exclude (default is `[]`)
-- `exclude_paths(Paths)`  
-	list of relative paths to exclude (default is `[]`)
+- `exclude_libraries(Libraries)`  
+	list of sub-libraries to exclude (default is `[]`)
 - `exclude_entities(Entities)`  
 	list of entities to exclude (default is `[]`)
 
