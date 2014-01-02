@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/12/12,
+		date is 2014/01/02,
 		comment is 'Built-in object providing message priting, debugging, library, source file, and hacking methods.']).
 
 	:- built_in.
@@ -130,7 +130,7 @@
 	% file and library predicates
 
 	:- public(expand_library_path/2).
-	:- mode(expand_library_path(?atom, ?atom), zero_or_more).
+	:- mode(expand_library_path(+atom, ?atom), zero_or_one).
 	:- info(expand_library_path/2, [
 		comment is 'Expands a library name into its full path. Uses a depth bound to prevent loops.',
 		argnames is ['Library', 'Path']
