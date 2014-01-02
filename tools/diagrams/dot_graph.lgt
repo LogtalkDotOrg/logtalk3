@@ -120,7 +120,7 @@
 		write(Stream, Color),
 		write(Stream, '",label=<<B>'),
 		write(Stream, Label),
-		write(Stream, '</B><BR/><BR/>'),
+		write(Stream, '</B><BR/> <BR/>'),
 		write_lines(Contents, Stream),
 		write(Stream, '>]\n').
 

@@ -140,11 +140,15 @@ For file loading dependency diagrams the options are:
 - `relation_labels(Boolean)`  
 	print/omit entity relation labels (`true` or `false`; default is `false`)
 - `output_directory(Directory)`  
-	directory for the .dot files (an atom; default is `.`)
+	directory for the `.dot` files (an atom; default is `./`)
 - `exclude_files(Files)`  
 	list of source files to exclude (default is `[]`)
 - `exclude_libraries(Libraries)`  
 	list of sub-libraries to exclude (default is `[]`)
+
+The option `omit_path_prefix(Prefix)` with a non-empty prefix should be
+used together with the option `directory_paths(true)`, in particular when
+generating diagrams for libraries with external files.
 
 Be sure to set the `source_data` flag `on` before compiling the libraries
 or files for which you want to generated diagrams.
