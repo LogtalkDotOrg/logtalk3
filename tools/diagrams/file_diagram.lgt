@@ -44,7 +44,9 @@
 
 	output_file(Path, Basename, Directory, Options) :-
 		(	member(directory_paths(true), Options) ->
-			^^output_node(Path, Basename, [Directory], file, Options)
+			member(omit_path_prefix(Prefix), Options),
+			atom_concat(Prefix, Relative, Directory),
+			^^output_node(Path, Basename, [Relative], file, Options)
 		;	^^output_node(Path, Basename, [], file, Options)
 		),
 		assertz(included_file_(Path)),
@@ -89,18 +91,24 @@
 		retract(referenced_logtalk_file_(Path)),
 		logtalk::loaded_file_property(Path, directory(Directory)),
 		logtalk::loaded_file_property(Path, basename(Basename)),
-		^^output_node(Path, Basename, [Directory], external_file, Options),
+		member(omit_path_prefix(Prefix), Options),
+		atom_concat(Prefix, Relative, Directory),
+		^^output_node(Path, Basename, [Relative], external_file, Options),
 		fail.
 	output_externals(Options) :-
 		retract(referenced_prolog_file_(Path)),
 		prolog_modules_diagram_support::source_file_property(Path, directory(Directory)),
 		prolog_modules_diagram_support::source_file_property(Path, basename(Basename)),
-		^^output_node(Path, Basename, [Directory], external_file, Options),
+		member(omit_path_prefix(Prefix), Options),
+		atom_concat(Prefix, Relative, Directory),
+		^^output_node(Path, Basename, [Relative], external_file, Options),
 		fail.
 	output_externals(Options) :-
 		^^format_object(Format),
 		Format::graph_footer(output_file, other, '(other referenced files)', external, Options).
 
+	% by default, don't omit a path prefix when printing paths
+	default_option(omit_path_prefix('')).
 	% by default, don't print directory paths:
 	default_option(directory_paths(false)).
 	% by default, print current date:

@@ -135,6 +135,8 @@ For file loading dependency diagrams the options are:
 	print/omit current date (`true` or `false`; default is `true`)
 - `directory_paths(Boolean)`  
 	print/omit file directory paths (`true` or `false`; default is `true`)
+- `omit_path_prefix(Prefix)`  
+	omit a common path prefix when printing directory paths (default is `''`)
 - `relation_labels(Boolean)`  
 	print/omit entity relation labels (`true` or `false`; default is `false`)
 - `output_directory(Directory)`  
