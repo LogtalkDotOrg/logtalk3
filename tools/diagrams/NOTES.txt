@@ -120,7 +120,7 @@ generated diagrams. For entity diagrams the options are:
 	print/omit predicate call cross reference relations (default depends on the specific diagram)
 - `cross_reference_calls(Boolean)`  
 	print/omit predicate cross reference calls (default depends on the specific diagram)
-- `output_path(OutputPath)`  
+- `output_directory(Directory)`  
 	directory for the .dot files (an atom; default is `.`)
 - `exclude_files(Files)`  
 	list of source files to exclude (default is `[]`)
@@ -137,7 +137,7 @@ For file loading dependency diagrams the options are:
 	print/omit file directory paths (`true` or `false`; default is `true`)
 - `relation_labels(Boolean)`  
 	print/omit entity relation labels (`true` or `false`; default is `false`)
-- `output_path(OutputPath)`  
+- `output_directory(Directory)`  
 	directory for the .dot files (an atom; default is `.`)
 - `exclude_files(Files)`  
 	list of source files to exclude (default is `[]`)

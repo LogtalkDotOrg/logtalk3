@@ -46,7 +46,7 @@
 	% by default, write cross-referencing calls:
 	default_option(cross_reference_calls(false)).
 	% by default, write diagram to the current directory:
-	default_option(output_path('./')).
+	default_option(output_directory('./')).
 	% by default, don't exclude any source files:
 	default_option(exclude_files([])).
 	% by default, don't exclude any library sub-directories:

@@ -52,7 +52,7 @@
 	% by default, print relation labels:
 	default_option(relation_labels(true)).
 	% by default, write diagram to the current directory:
-	default_option(output_path('./')).
+	default_option(output_directory('./')).
 	% by default, don't exclude any source files:
 	default_option(exclude_files([])).
 	% by default, don't exclude any library sub-directories:

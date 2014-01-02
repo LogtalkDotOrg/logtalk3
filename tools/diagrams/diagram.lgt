@@ -340,7 +340,7 @@
 		::diagram_name_suffix(Suffix),
 		atom_concat(Name0, Suffix, Name),
 		Format::output_file_name(Name, Basename),
-		member(output_path(Directory0), Options),
+		member(output_directory(Directory0), Options),
 		(	sub_atom(Directory0, _, _, 0, '/') ->
 			Directory = Directory0
 		;	atom_concat(Directory0, '/', Directory)
