@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/01,
+		date is 2014/01/02,
 		comment is 'Predicates for generating entity diagrams.',
 		argnames is ['Format']
 	]).
@@ -56,26 +56,6 @@
 	:- private(referenced_module_/1).
 	:- dynamic(referenced_module_/1).
 
-	rlibrary(Library, UserOptions) :-
-		reset_external_entities,
-		^^rlibrary(Library, UserOptions).
-
-	output_rlibrary(Library, Path, Options) :-
-		^^output_rlibrary(Library, Path, Options),
-		output_external_entities(Options).
-
-	library(Library, UserOptions) :-
-		reset_external_entities,
-		^^library(Library, UserOptions).
-
-	output_library(Library, Path, Options) :-
-		^^output_library(Library, Path, Options),
-		output_external_entities(Options).
-
-	files(Project, Files, UserOptions) :-
-		reset_external_entities,
-		^^files(Project, Files, UserOptions).
-
 	file(Source, UserOptions) :-
 		^^format_object(Format),
 		^^locate_file(Source, Basename, Extension, Directory, Path),
@@ -84,9 +64,9 @@
 		^^output_file_path(Name, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::output_file_header(output_file, Options),
-		reset_external_entities,
+		reset_externals,
 		output_file(Path, Basename, Directory, Options),
-		output_external_entities(Options),
+		output_externals(Options),
 		Format::output_file_footer(output_file, Options),
 		close(Stream).
 
@@ -113,16 +93,16 @@
 		;	assertz(referenced_module_(Module))
 		).
 
-	reset_external_entities :-
+	reset_externals :-
 		retractall(included_entity_(_)),
 		retractall(referenced_entity_(_)),
 		retractall(referenced_module_(_)).
 
-	output_external_entities(_Options) :-
+	output_externals(_Options) :-
 		retract(included_entity_(Entity)),
 		retractall(referenced_entity_(Entity)),
 		fail.
-	output_external_entities(Options) :-
+	output_externals(Options) :-
 		^^format_object(Format),
 		Format::graph_header(output_file, other, '(other referenced entities)', external, Options),
 		retract(referenced_entity_(Entity)),
@@ -141,12 +121,12 @@
 			^^output_node(Name, Name, [], external_protocol, Options)
 		),
 		fail.
-	output_external_entities(Options) :-
+	output_externals(Options) :-
 		retract(referenced_module_(Module)),
 		^^ground_entity_identifier(module, Module, Name),
 		^^output_node(Name, Name, [], external_module, Options),
 		fail.
-	output_external_entities(Options) :-
+	output_externals(Options) :-
 		^^format_object(Format),
 		Format::graph_footer(output_file, other, '(other referenced entities)', external, Options).
 
@@ -170,6 +150,14 @@
 		\+ member(Category, ExcludedEntities),
 		output_category(Category, Options),
 		assertz(included_entity_(Category)),
+		fail.
+	process(Basename, Directory, Options) :-
+		member(exclude_entities(ExcludedEntities), Options),
+		atom_concat(Directory, Basename, Path),
+		prolog_modules_diagram_support::module_property(Module, file(Path)),
+		\+ member(Module, ExcludedEntities),
+		output_module(Module, Options),
+		assertz(included_entity_(Module)),
 		fail.
 	process(_, _, _).
 
@@ -203,6 +191,14 @@
 		),
 		^^output_node(Name, Name, Resources, category, Options),
 		output_category_relations(Category, Options).
+
+	output_module(Module, Options) :-
+		^^ground_entity_identifier(module, Module, Name),
+		(	member(interface(true), Options) ->
+			prolog_modules_diagram_support::module_property(Module, exports(Resources))
+		;	Resources = []
+		),
+		^^output_node(Name, Name, Resources, module, Options).
 
 	output_protocol_relations(Protocol, Options) :-
 		(	member(inheritance_relations(true), Options) ->

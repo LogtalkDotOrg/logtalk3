@@ -25,6 +25,7 @@
 :- initialization((
 	logtalk_load(library(pairs), [optimize(on)]),
 	logtalk_load([cc(osp), cc(os)], [optimize(on)]),
+	logtalk_load([prolog_modules_diagram_support], [optimize(on)]),
 	logtalk_load([diagram, entity_diagram, call_diagram, inheritance_diagram, uses_diagram, file_diagram], [optimize(on)]),
 	logtalk_load([graphp, dot_graph], [optimize(on)])
 )).

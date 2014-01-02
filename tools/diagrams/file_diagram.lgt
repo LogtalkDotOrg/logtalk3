@@ -28,22 +28,78 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/01,
+		date is 2014/01/02,
 		comment is 'Predicates for generating file loading dependency diagrams.',
 		argnames is ['Format']
 	]).
+
+	:- private(included_file_/1).
+	:- dynamic(included_file_/1).
+
+	:- private(referenced_logtalk_file_/1).
+	:- dynamic(referenced_logtalk_file_/1).
+
+	:- private(referenced_prolog_file_/1).
+	:- dynamic(referenced_prolog_file_/1).
 
 	output_file(Path, Basename, Directory, Options) :-
 		(	member(directory_paths(true), Options) ->
 			^^output_node(Path, Basename, [Directory], file, Options)
 		;	^^output_node(Path, Basename, [], file, Options)
 		),
+		assertz(included_file_(Path)),
 		fail.
 	output_file(Path, _, _, Options) :-
-		logtalk::loaded_file_property(Path, parent(Parent)),
-		^^output_edge(Parent, Path, [loads], loads_file, Options),
+		logtalk::loaded_file_property(Other, parent(Path)),
+		remember_referenced_logtalk_file(Other),
+		^^output_edge(Path, Other, [loads], loads_file, Options),
+		fail.
+	output_file(Path, _, _, Options) :-
+		prolog_modules_diagram_support::source_file_property(Other, parent(Path)),
+		remember_referenced_prolog_file(Other),
+		^^output_edge(Path, Other, [loads], loads_file, Options),
 		fail.
 	output_file(_, _, _, _).
+
+	remember_referenced_logtalk_file(Path) :-
+		(	referenced_logtalk_file_(Path) ->
+			true
+		;	assertz(referenced_logtalk_file_(Path))
+		).
+
+	remember_referenced_prolog_file(Path) :-
+		(	referenced_prolog_file_(Path) ->
+			true
+		;	assertz(referenced_prolog_file_(Path))
+		).
+
+	reset_externals :-
+		retractall(included_file_(_)),
+		retractall(referenced_logtalk_file_(_)),
+		retractall(referenced_prolog_file_(_)).
+
+	output_externals(_Options) :-
+		retract(included_file_(Path)),
+		retractall(referenced_logtalk_file_(Path)),
+		retractall(referenced_prolog_file_(Path)),
+		fail.
+	output_externals(Options) :-
+		^^format_object(Format),
+		Format::graph_header(output_file, other, '(other referenced files)', external, Options),
+		retract(referenced_logtalk_file_(Path)),
+		logtalk::loaded_file_property(Path, directory(Directory)),
+		logtalk::loaded_file_property(Path, basename(Basename)),
+		^^output_node(Path, Basename, [Directory], external_file, Options),
+		fail.
+	output_externals(Options) :-
+		retract(referenced_prolog_file_(Path)),
+		prolog_modules_diagram_support::source_file_property(Path, directory(Directory)),
+		prolog_modules_diagram_support::source_file_property(Path, basename(Basename)),
+		^^output_node(Path, Basename, [Directory], external_file, Options),
+		fail.
+	output_externals(Options) :-
+		^^format_object(Format),
+		Format::graph_footer(output_file, other, '(other referenced files)', external, Options).
 
 	% by default, don't print directory paths:
 	default_option(directory_paths(false)).

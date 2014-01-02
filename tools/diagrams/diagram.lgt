@@ -27,7 +27,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/01,
+		date is 2014/01/02,
 		comment is 'Predicates for generating diagrams.',
 		argnames is ['Format']
 	]).
@@ -80,6 +80,7 @@
 		::output_file_path(Library, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::output_file_header(output_file, Options),
+		::reset_externals,
 		::output_rlibrary(Library, Path, Options),
 		Format::output_file_footer(output_file, Options),
 		close(Stream).
@@ -92,7 +93,8 @@
 		forall(
 			sub_library(TopLibrary, TopPath, ExcludedLibraries, Library, Path),
 			output_library(Library, Path, Options)),
-		Format::graph_footer(output_file, TopLibrary, TopLibrary, rlibrary, Options).
+		Format::graph_footer(output_file, TopLibrary, TopLibrary, rlibrary, Options),
+		::output_externals(Options).
 
 	sub_library(TopLibrary, TopPath, ExcludedLibraries, Library, Path) :-
 		logtalk_library_path(Library, _),
@@ -125,6 +127,7 @@
 		::output_file_path(Library, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::output_file_header(output_file, Options),
+		::reset_externals,
 		::output_library(Library, Path, Options),
 		Format::output_file_footer(output_file, Options),
 		close(Stream).
@@ -133,12 +136,20 @@
 		format_object(Format),
 		Format::graph_header(output_file, Library, Library, library, Options),
 		output_library_files(Path, Options),
-		Format::graph_footer(output_file, Library, Library, library, Options).
+		Format::graph_footer(output_file, Library, Library, library, Options),
+		::output_externals(Options).
 
 	output_library_files(Directory, Options) :-
 		member(exclude_files(ExcludedFiles), Options),
 		logtalk::loaded_file_property(Path, directory(Directory)),
 		logtalk::loaded_file_property(Path, basename(Basename)),
+		::not_excluded_file(ExcludedFiles, Path, Basename),
+		::output_file(Path, Basename, Directory, Options),
+		fail.
+	output_library_files(Directory, Options) :-
+		member(exclude_files(ExcludedFiles), Options),
+		prolog_modules_diagram_support::source_file_property(Path, directory(Directory)),
+		prolog_modules_diagram_support::source_file_property(Path, basename(Basename)),
 		::not_excluded_file(ExcludedFiles, Path, Basename),
 		::output_file(Path, Basename, Directory, Options),
 		fail.
@@ -167,7 +178,9 @@
 		::output_file_path(Project, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::output_file_header(output_file, Options),
+		::reset_externals,
 		::output_files(Files, Options),
+		::output_externals(Options),
 		Format::output_file_footer(output_file, Options),
 		close(Stream).
 
@@ -270,6 +283,19 @@
 	:- info(output_file/4, [
 		comment is 'Generates diagram output for a file.',
 		argnames is ['Path', 'Basename', 'Directory', 'Options']
+	]).
+
+	:- protected(output_externals/1).
+	:- mode(output_externals(+list(compound)), one).
+	:- info(output_externals/1, [
+		comment is 'Outputs external entities using the specified options.',
+		argnames is ['Options']
+	]).
+
+	:- protected(reset_externals/0).
+	:- mode(reset_externals, one).
+	:- info(reset_externals/0, [
+		comment is 'Resets information on external entities.'
 	]).
 
 	:- protected(output_node/5).
