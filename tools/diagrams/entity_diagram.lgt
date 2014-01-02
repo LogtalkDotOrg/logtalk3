@@ -108,8 +108,8 @@
 		retract(referenced_entity_(Entity)),
 		(	current_object(Entity) ->
 			^^ground_entity_identifier(object, Entity, Name),
-			(	\+ instantiates_class(Object, _),
-				\+ specializes_class(Object, _) ->
+			(	\+ instantiates_class(Entity, _),
+				\+ specializes_class(Entity, _) ->
 				^^output_node(Name, Name, [], external_prototype, Options)
 			;	^^output_node(Name, Name, [], external_instance_or_class, Options)
 			)
