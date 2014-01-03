@@ -75,7 +75,8 @@
 		;	assertz(referenced_prolog_file_(Path))
 		).
 
-	reset_externals :-
+	reset :-
+		^^reset,
 		retractall(included_file_(_)),
 		retractall(referenced_logtalk_file_(_)),
 		retractall(referenced_prolog_file_(_)).

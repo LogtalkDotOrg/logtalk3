@@ -41,7 +41,7 @@
 	libraries(Project, Libraries, UserOptions) :-
 		format_object(Format),
 		merge_options(UserOptions, Options),
-		::reset_externals,
+		::reset,
 		::output_file_path(Project, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::output_file_header(output_file, Options),
@@ -123,7 +123,7 @@
 	rlibrary(Library, UserOptions) :-
 		format_object(Format),
 		merge_options(UserOptions, Options),
-		::reset_externals,
+		::reset,
 		logtalk::expand_library_path(Library, Path),
 		::output_file_path(Library, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(output_file)]),
@@ -180,7 +180,7 @@
 	library(Library, UserOptions) :-
 		format_object(Format),
 		merge_options(UserOptions, Options),
-		::reset_externals,
+		::reset,
 		logtalk::expand_library_path(Library, Path),
 		::output_file_path(Library, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(output_file)]),
@@ -230,7 +230,7 @@
 	files(Project, Files, UserOptions) :-
 		format_object(Format),
 		merge_options(UserOptions, Options),
-		::reset_externals,
+		::reset,
 		::output_file_path(Project, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::output_file_header(output_file, Options),
@@ -385,11 +385,14 @@
 		argnames is ['Options']
 	]).
 
-	:- protected(reset_externals/0).
-	:- mode(reset_externals, one).
-	:- info(reset_externals/0, [
-		comment is 'Resets information on external entities.'
+	:- protected(reset/0).
+	:- mode(reset, one).
+	:- info(reset/0, [
+		comment is 'Resets temporary information used when generating a diagram.'
 	]).
+
+	reset :-
+		::retractall(edge_(_, _, _, _)).
 
 	:- protected(output_node/5).
 	:- mode(output_node(+nonvar, +nonvar, +list(nonvar), +atom, +list(compound)), one).
@@ -401,6 +404,16 @@
 	output_node(Identifier, Label, Lines, Kind, Options) :-
 		format_object(Format),
 		Format::node(output_file, Identifier, Label, Lines, Kind, Options).
+
+	:- protected(edge/4).
+	:- mode(edge(+nonvar, +nonvar, +list(nonvar), +atom), zero_or_more).
+	:- info(edge/4, [
+		comment is 'Table of saved edges.',
+		argnames is ['From', 'To', 'Labels', 'Kind']
+	]).
+
+	edge(From, To, Labels, Kind) :-
+		::edge_(From, To, Labels, Kind).
 
 	:- private(edge_/4).
 	:- dynamic(edge_/4).
@@ -419,7 +432,7 @@
 
 	output_edges(Options) :-
 		format_object(Format),
-		retract(edge_(From, To, Labels, Kind)),
+		::retract(edge_(From, To, Labels, Kind)),
 		Format::edge(output_file, From, To, Labels, Kind, Options),
 		fail.
 	output_edges(_).
@@ -433,8 +446,8 @@
 
 	save_edge(From, To, Labels, Kind, Options) :-
 		(	member(relation_labels(true), Options) ->
-			assertz(edge_(From, To, Labels, Kind))
-		;	assertz(edge_(From, To, [], Kind))
+			::assertz(edge_(From, To, Labels, Kind))
+		;	::assertz(edge_(From, To, [], Kind))
 		).
 
 	:- protected(not_excluded_file/3).

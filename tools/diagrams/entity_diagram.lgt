@@ -61,7 +61,7 @@
 		^^locate_file(Source, Basename, Extension, Directory, Path),
 		atom_concat(Name, Extension, Basename),
 		^^merge_options(UserOptions, Options),
-		reset_externals,
+		reset,
 		^^output_file_path(Name, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::output_file_header(output_file, Options),
@@ -98,7 +98,8 @@
 		;	assertz(referenced_module_(Module))
 		).
 
-	reset_externals :-
+	reset :-
+		^^reset,
 		retractall(included_entity_(_)),
 		retractall(referenced_entity_(_)),
 		retractall(referenced_module_(_)).
@@ -232,6 +233,7 @@
 		\+ referenced_entity_(Other),
 		^^ground_entity_identifier(protocol, Protocol, ProtocolName),
 		^^ground_entity_identifier(object, Other, OtherName),
+		\+ ^^edge(ProtocolName, OtherName, [uses], calls_predicate),
 		^^save_edge(ProtocolName, OtherName, [uses], calls_predicate, Options),
 		remember_referenced_entity(Other),
 		fail.
@@ -241,6 +243,7 @@
 		\+ referenced_module_(Module),
 		^^ground_entity_identifier(protocol, Protocol, ProtocolName),
 		^^ground_entity_identifier(module, Module, ModuleName),
+		\+ ^^edge(ProtocolName, ModuleName, [use_module], calls_predicate),
 		^^save_edge(ProtocolName, ModuleName, [use_module], calls_predicate, Options),
 		remember_referenced_module(Module),
 		fail.
@@ -322,9 +325,9 @@
 	output_object_cross_reference_relations(Object, Options) :-
 		object_property(Object, calls(Other::_, _)),
 		nonvar(Other),
-		\+ referenced_entity_(Other),
 		^^ground_entity_identifier(object, Object, ObjectName),
 		^^ground_entity_identifier(object, Other, OtherName),
+		\+ ^^edge(ObjectName, OtherName, [uses], calls_predicate),
 		^^save_edge(ObjectName, OtherName, [uses], calls_predicate, Options),
 		remember_referenced_entity(Other),
 		fail.
@@ -334,6 +337,7 @@
 		\+ referenced_module_(Module),
 		^^ground_entity_identifier(object, Object, ObjectName),
 		^^ground_entity_identifier(module, Module, ModuleName),
+		\+ ^^edge(ObjectName, ModuleName, [use_module], calls_predicate),
 		^^save_edge(ObjectName, ModuleName, [use_module], calls_predicate, Options),
 		remember_referenced_module(Module),
 		fail.
@@ -404,6 +408,7 @@
 		\+ referenced_entity_(Object),
 		^^ground_entity_identifier(category, Category, CategoryName),
 		^^ground_entity_identifier(object, Object, ObjectName),
+		\+ ^^edge(CategoryName, ObjectName, [uses], calls_predicate),
 		^^save_edge(CategoryName, ObjectName, [uses], calls_predicate, Options),
 		remember_referenced_entity(Object),
 		fail.
@@ -413,6 +418,7 @@
 		\+ referenced_module_(Module),
 		^^ground_entity_identifier(category, Category, CategoryName),
 		^^ground_entity_identifier(module, Module, ModuleName),
+		\+ ^^edge(CategoryName, ModuleName, [use_module], calls_predicate),
 		^^save_edge(CategoryName, ModuleName, [use_module], calls_predicate, Options),
 		remember_referenced_module(Module),
 		fail.
