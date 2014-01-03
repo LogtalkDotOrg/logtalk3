@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/01,
+		date is 2014/01/02,
 		comment is 'Predicates for generating entity inheritance diagrams.',
 		argnames is ['Format']
 	]).
@@ -53,6 +53,8 @@
 	default_option(exclude_libraries([])).
 	% by default, don't exclude any entities:
 	default_option(exclude_entities([])).
+	% by default, print external entities
+	default_option(externals(true)).
 
 	diagram_name_suffix('_inheritance_diagram').
 

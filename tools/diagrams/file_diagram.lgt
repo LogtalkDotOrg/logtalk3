@@ -121,6 +121,8 @@
 	default_option(exclude_files([])).
 	% by default, don't exclude any library sub-directories:
 	default_option(exclude_libraries([])).
+	% by default, print external entities
+	default_option(externals(true)).
 
 	diagram_name_suffix('_file_diagram').
 

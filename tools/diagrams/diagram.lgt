@@ -53,7 +53,7 @@
 		logtalk_library_path(Library, _),
 		logtalk::expand_library_path(Library, Directory),
 		\+ \+ logtalk::loaded_file_property(_, directory(Directory)),
-		::output_rlibrary(Library, Directory, Options),
+		::output_library(Library, Directory, Options),
 		fail.
 	output_all_libraries(_).
 
@@ -98,7 +98,10 @@
 				output_library(Library, Path, Options)
 			),
 			Format::graph_footer(output_file, TopLibrary, TopLibrary, rlibrary, Options),
-			::output_externals(Options)
+			(	member(externals(true), Options) ->
+				::output_externals(Options)
+			;	true
+			)
 		).
 
 	sub_library(TopLibrary, TopPath, ExcludedLibraries, Library, Path) :-
@@ -142,7 +145,10 @@
 		Format::graph_header(output_file, Library, Library, library, Options),
 		output_library_files(Path, Options),
 		Format::graph_footer(output_file, Library, Library, library, Options),
-		::output_externals(Options).
+		(	member(externals(true), Options) ->
+			::output_externals(Options)
+		;	true
+		).
 
 	output_library_files(Directory, Options) :-
 		member(exclude_files(ExcludedFiles), Options),
@@ -219,7 +225,10 @@
 		Format::output_file_header(output_file, Options),
 		::reset_externals,
 		::output_files(Files, Options),
-		::output_externals(Options),
+		(	member(externals(true), Options) ->
+			::output_externals(Options)
+		;	true
+		),
 		Format::output_file_footer(output_file, Options),
 		close(Stream).
 

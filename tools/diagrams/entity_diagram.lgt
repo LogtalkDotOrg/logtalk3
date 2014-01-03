@@ -66,7 +66,10 @@
 		Format::output_file_header(output_file, Options),
 		reset_externals,
 		output_file(Path, Basename, Directory, Options),
-		output_externals(Options),
+		(	member(external(true), Options) ->
+			output_externals(Options)
+		;	true
+		),
 		Format::output_file_footer(output_file, Options),
 		close(Stream).
 
@@ -457,6 +460,8 @@
 	default_option(exclude_libraries([])).
 	% by default, don't exclude any entities:
 	default_option(exclude_entities([])).
+	% by default, print external entities
+	default_option(externals(true)).
 
 	diagram_name_suffix('_entity_diagram').
 
