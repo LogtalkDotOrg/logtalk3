@@ -24,7 +24,7 @@ ________________________________________________________________________
 README
 ======
 
-1. Legal
+1. About
 2. Logtalk web site
 3. Registration
 4. Support
@@ -35,26 +35,21 @@ README
 9. Upgrading
 10. Citations
 11. Contributions
+12. Legal
 
 
-1. LEGAL
+1. ABOUT
 --------
 
-Logtalk is copyrighted by Paulo Moura. The Logtalk use and distribution
-license can be found in the `LICENSE.txt` file. Logtalk follows the GNU
-General Public License 3, plus some additional terms as per Section 7.
-The copyright notice and license applies to all files in this release
-unless otherwise explicitly stated.
-
-Some files that are part of the Logtalk distribution are distributed using
-a different license and/or are copyrighted by a Logtalk contributor.
-
-Some of the included examples are adaptations to Logtalk of Prolog examples
-found elsewhere (e.g. in manuals, tutorials, books, and public mailing list
-discussions). The copyright in the examples original code should be assumed
-to belong to the original authors.
-
-Logtalk is a registered trademark of Paulo Moura.
+Logtalk is an *object-oriented logic programming language* that extends and
+leverages the Prolog language with a feature set suitable for programming
+in the large. As a multi-paradigm language, it includes support for both
+prototypes and classes, protocols (interfaces), component-based programming
+through category-based composition, event-driven programming, coinduction,
+and high-level multi-threading programming. Logtalk uses standard Prolog
+syntax with the addition of some operators and directives and can be used
+with any Prolog implementation compliant with official and de facto
+standards as the back-end compiler.
 
 
 2. LOGTALK WEB SITE
@@ -172,4 +167,21 @@ licenses, which provide a revenue source for the sustained development of
 Logtalk.
 
 
-Happy Logtalking!
+12. LEGAL
+---------
+
+Logtalk is copyrighted by Paulo Moura. The Logtalk use and distribution
+license can be found in the `LICENSE.txt` file. Logtalk follows the GNU
+General Public License 3, plus some additional terms as per Section 7.
+The copyright notice and license applies to all files in this release
+unless otherwise explicitly stated.
+
+Some files that are part of the Logtalk distribution are distributed using
+a different license and/or are copyrighted by a Logtalk contributor.
+
+Some of the included examples are adaptations to Logtalk of Prolog examples
+found elsewhere (e.g. in manuals, tutorials, books, and public mailing list
+discussions). The copyright in the examples original code should be assumed
+to belong to the original authors.
+
+Logtalk is a registered trademark of Paulo Moura.
