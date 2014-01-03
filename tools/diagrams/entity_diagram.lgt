@@ -30,7 +30,7 @@
 		author is 'Paulo Moura',
 		date is 2014/01/02,
 		comment is 'Predicates for generating entity diagrams.',
-		argnames is ['Format']
+		parnames is ['Format']
 	]).
 
 	:- public(file/2).

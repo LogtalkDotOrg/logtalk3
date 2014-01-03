@@ -30,7 +30,7 @@
 		author is 'Paulo Moura',
 		date is 2014/01/02,
 		comment is 'Predicates for generating predicate call diagrams.',
-		argnames is ['Format']
+		parnames is ['Format']
 	]).
 
 	% by default, print current date:

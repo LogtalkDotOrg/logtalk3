@@ -29,7 +29,7 @@
 		author is 'Paulo Moura',
 		date is 2014/01/02,
 		comment is 'Predicates for generating diagrams.',
-		argnames is ['Format']
+		parnames is ['Format']
 	]).
 
 	:- public(libraries/1).
