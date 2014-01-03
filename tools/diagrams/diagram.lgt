@@ -41,7 +41,7 @@
 
 	libraries(UserOptions) :-
 		format_object(Format),
-		merge_options(UserOptions, Options),
+		merge_options([externals(false)| UserOptions], Options),
 		::output_file_path(all_libraries, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::output_file_header(output_file, Options),
