@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/02,
+		date is 2014/01/03,
 		comment is 'Predicates for generating entity diagrams.',
 		parnames is ['Format']
 	]).
@@ -61,16 +61,16 @@
 		^^locate_file(Source, Basename, Extension, Directory, Path),
 		atom_concat(Name, Extension, Basename),
 		^^merge_options(UserOptions, Options),
+		reset_externals,
 		^^output_file_path(Name, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::output_file_header(output_file, Options),
-		reset_externals,
-		output_file(Path, Basename, Directory, Options),
-		(	member(external(true), Options) ->
-			output_externals(Options)
-		;	true
-		),
+		atom_concat(file_, Path, Identifier),
+		Format::graph_header(output_file, Identifier, Basename, file, Options),
+		process(Basename, Directory, Options),
+		output_externals(Options),
 		^^output_edges(Options),
+		Format::graph_footer(output_file, Identifier, Basename, file, Options),
 		Format::output_file_footer(output_file, Options),
 		close(Stream).
 
@@ -109,7 +109,7 @@
 		fail.
 	output_externals(Options) :-
 		^^format_object(Format),
-		Format::graph_header(output_file, other, '(other referenced entities)', external, Options),
+		Format::graph_header(output_file, other, '(external entities)', external, Options),
 		retract(referenced_entity_(Entity)),
 		(	current_object(Entity) ->
 			^^ground_entity_identifier(object, Entity, Name),
@@ -133,7 +133,7 @@
 		fail.
 	output_externals(Options) :-
 		^^format_object(Format),
-		Format::graph_footer(output_file, other, '(other referenced entities)', external, Options).
+		Format::graph_footer(output_file, other, '(external entities)', external, Options).
 
 	process(Basename, Directory, Options) :-
 		member(exclude_entities(ExcludedEntities), Options),
@@ -462,8 +462,6 @@
 	default_option(exclude_libraries([])).
 	% by default, don't exclude any entities:
 	default_option(exclude_entities([])).
-	% by default, print external entities
-	default_option(externals(true)).
 
 	diagram_name_suffix('_entity_diagram').
 

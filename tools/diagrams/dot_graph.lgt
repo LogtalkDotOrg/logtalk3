@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/02,
+		date is 2014/01/03,
 		comment is 'Generates entity diagram DOT files for source files and libraries.'
 	]).
 
@@ -104,7 +104,9 @@
 		write(Stream, '}\n\n').
 
 	graph_style_margin_color(rlibrary, rounded, 10, snow3).
+	graph_style_margin_color(libraries, rounded, 10, snow3).
 	graph_style_margin_color(library, rounded, 10, snow2).
+	graph_style_margin_color(files, rounded, 10, snow2).
 	graph_style_margin_color(file, rounded, 10, snow).
 	graph_style_margin_color(external, rounded, 10, white).
 

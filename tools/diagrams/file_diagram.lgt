@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/02,
+		date is 2014/01/03,
 		comment is 'Predicates for generating file loading dependency diagrams.',
 		parnames is ['Format']
 	]).
@@ -87,7 +87,7 @@
 		fail.
 	output_externals(Options) :-
 		^^format_object(Format),
-		Format::graph_header(output_file, other, '(other referenced files)', external, Options),
+		Format::graph_header(output_file, other, '(external files)', external, Options),
 		retract(referenced_logtalk_file_(Path)),
 		logtalk::loaded_file_property(Path, directory(Directory)),
 		logtalk::loaded_file_property(Path, basename(Basename)),
@@ -105,7 +105,7 @@
 		fail.
 	output_externals(Options) :-
 		^^format_object(Format),
-		Format::graph_footer(output_file, other, '(other referenced files)', external, Options).
+		Format::graph_footer(output_file, other, '(external files)', external, Options).
 
 	% by default, don't omit a path prefix when printing paths
 	default_option(omit_path_prefix('')).
@@ -121,8 +121,6 @@
 	default_option(exclude_files([])).
 	% by default, don't exclude any library sub-directories:
 	default_option(exclude_libraries([])).
-	% by default, print external entities
-	default_option(externals(true)).
 
 	diagram_name_suffix('_file_diagram').
 

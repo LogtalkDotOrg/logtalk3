@@ -128,8 +128,6 @@ generated diagrams. For entity diagrams the options are:
 	list of sub-libraries to exclude (default is `[]`)
 - `exclude_entities(Entities)`  
 	list of entities to exclude (default is `[]`)
-- `externals(Boolean)`  
-	print/omit external entities (default is `true`)
 
 For file loading dependency diagrams the options are:
 
@@ -147,8 +145,6 @@ For file loading dependency diagrams the options are:
 	list of source files to exclude (default is `[]`)
 - `exclude_libraries(Libraries)`  
 	list of sub-libraries to exclude (default is `[]`)
-- `externals(Boolean)`  
-	print/omit external files (default is `true`)
 
 The option `omit_path_prefix(Prefix)` with a non-empty prefix should be
 used together with the option `directory_paths(true)`, in particular when
