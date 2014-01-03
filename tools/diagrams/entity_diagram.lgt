@@ -249,7 +249,7 @@
 	output_protocol_cross_reference_calls(Protocol, Options) :-
 		setof(
 			Predicate,
-			Properties^(protocol_property(Protocol, calls(Other::Predicate, Properties)), nonvar(Other), \+ referenced_entity_(Other)),
+			Properties^(protocol_property(Protocol, calls(Other::Predicate, Properties)), nonvar(Other)),
 			Predicates
 		),
 		^^ground_entity_identifier(protocol, Protocol, ProtocolName),
@@ -260,7 +260,7 @@
 	output_protocol_cross_reference_calls(Protocol, Options) :-
 		setof(
 			Predicate,
-			Properties^(protocol_property(Protocol, calls(':'(Module,Predicate), Properties)), nonvar(Module), \+ referenced_module_(Module)),
+			Properties^(protocol_property(Protocol, calls(':'(Module,Predicate), Properties)), nonvar(Module)),
 			Predicates
 		),
 		^^ground_entity_identifier(protocol, Protocol, ProtocolName),
@@ -342,7 +342,7 @@
 	output_object_cross_reference_calls(Object, Options) :-
 		setof(
 			Predicate,
-			Properties^(object_property(Object, calls(Other::Predicate, Properties)), nonvar(Other), \+ referenced_entity_(Other)),
+			Properties^(object_property(Object, calls(Other::Predicate, Properties)), nonvar(Other)),
 			Predicates
 		),
 		^^ground_entity_identifier(object, Object, ObjectName),
@@ -353,7 +353,7 @@
 	output_object_cross_reference_calls(Object, Options) :-
 		setof(
 			Predicate,
-			Properties^(object_property(Object, calls(':'(Module,Predicate), Properties)), nonvar(Module), \+ referenced_module_(Module)),
+			Properties^(object_property(Object, calls(':'(Module,Predicate), Properties)), nonvar(Module)),
 			Predicates
 		),
 		^^ground_entity_identifier(object, Object, ObjectName),
@@ -421,7 +421,7 @@
 	output_category_cross_reference_calls(Category, Options) :-
 		setof(
 			Predicate,
-			Properties^(category_property(Category, calls(Object::Predicate, Properties)), nonvar(Object), \+ referenced_entity_(Object)),
+			Properties^(category_property(Category, calls(Object::Predicate, Properties)), nonvar(Object)),
 			Predicates
 		),
 		^^ground_entity_identifier(category, Category, CategoryName),
@@ -432,7 +432,7 @@
 	output_category_cross_reference_calls(Category, Options) :-
 		setof(
 			Predicate,
-			Properties^(category_property(Category, calls(':'(Module,Predicate), Properties)), nonvar(Module), \+ referenced_module_(Module)),
+			Properties^(category_property(Category, calls(':'(Module,Predicate), Properties)), nonvar(Module)),
 			Predicates
 		),
 		^^ground_entity_identifier(category, Category, CategoryName),
