@@ -51,7 +51,7 @@ of labels.
 
 * CHANGED: The `diagrams` tool now represents Prolog modules using the `tab`
 DOT node shape and represents cross-referencing predicate calls using DOT
-`halfopen` arrow heads.
+`rdiamond` arrow heads.
 
 * CHANGED: The `diagrams` tool now omits by default printing directory paths
 when generating file loading dependency diagrams.
