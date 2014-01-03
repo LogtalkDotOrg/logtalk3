@@ -81,13 +81,17 @@
 		::output_file_path(Library, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::output_file_header(output_file, Options),
+		::reset_externals,
 		::output_rlibrary(Library, Path, Options),
+		(	member(externals(true), Options) ->
+			::output_externals(Options)
+		;	true
+		),
 		output_edges(Options),
 		Format::output_file_footer(output_file, Options),
 		close(Stream).
 
 	output_rlibrary(TopLibrary, TopPath, Options) :-
-		::reset_externals,
 		member(exclude_libraries(ExcludedLibraries), Options),
 		(	\+ sub_library(TopLibrary, TopPath, ExcludedLibraries, _Library, _Path) ->
 			::output_library(TopLibrary, TopPath, Options)
@@ -99,11 +103,7 @@
 				sub_library(TopLibrary, TopPath, ExcludedLibraries, Library, Path),
 				::output_library(Library, Path, Options)
 			),
-			Format::graph_footer(output_file, TopLibrary, TopLibrary, rlibrary, Options),
-			(	member(externals(true), Options) ->
-				::output_externals(Options)
-			;	true
-			)
+			Format::graph_footer(output_file, TopLibrary, TopLibrary, rlibrary, Options)
 		).
 
 	sub_library(TopLibrary, TopPath, ExcludedLibraries, Library, Path) :-
@@ -137,21 +137,21 @@
 		::output_file_path(Library, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::output_file_header(output_file, Options),
+		::reset_externals,
 		::output_library(Library, Path, Options),
+		(	member(externals(true), Options) ->
+			::output_externals(Options)
+		;	true
+		),
 		output_edges(Options),
 		Format::output_file_footer(output_file, Options),
 		close(Stream).
 
 	output_library(Library, Path, Options) :-
 		format_object(Format),
-		::reset_externals,
 		Format::graph_header(output_file, Library, Library, library, Options),
 		output_library_files(Path, Options),
-		Format::graph_footer(output_file, Library, Library, library, Options),
-		(	member(externals(true), Options) ->
-			::output_externals(Options)
-		;	true
-		).
+		Format::graph_footer(output_file, Library, Library, library, Options).
 
 	output_library_files(Directory, Options) :-
 		member(exclude_files(ExcludedFiles), Options),
