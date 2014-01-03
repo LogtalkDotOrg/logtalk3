@@ -81,9 +81,10 @@
 		^^format_object(Format),
 		% use the full path for the cluster identifier as we
 		% can have more than file with the same basename
-		Format::graph_header(output_file, File, Basename, file, Options),
+		atom_concat(file_, File, Identifier),
+		Format::graph_header(output_file, Identifier, Basename, file, Options),
 		process(Basename, Directory, Options),
-		Format::graph_footer(output_file, File, Basename, file, Options).
+		Format::graph_footer(output_file, Identifier, Basename, file, Options).
 
 	remember_referenced_entity(Entity) :-
 		(	referenced_entity_(Entity) ->

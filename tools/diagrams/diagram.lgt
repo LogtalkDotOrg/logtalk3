@@ -96,14 +96,15 @@
 		(	\+ sub_library(TopLibrary, TopPath, ExcludedLibraries, _Library, _Path) ->
 			::output_library(TopLibrary, TopPath, Options)
 		;	format_object(Format),
-			Format::graph_header(output_file, TopLibrary, TopLibrary, rlibrary, Options),
+			atom_concat(rlibrary_, TopLibrary, Identifier),
+			Format::graph_header(output_file, Identifier, TopLibrary, rlibrary, Options),
 			::output_library(TopLibrary, TopPath, Options),
 			member(exclude_libraries(ExcludedLibraries), Options),
 			forall(
 				sub_library(TopLibrary, TopPath, ExcludedLibraries, Library, Path),
 				::output_library(Library, Path, Options)
 			),
-			Format::graph_footer(output_file, TopLibrary, TopLibrary, rlibrary, Options)
+			Format::graph_footer(output_file, Identifier, TopLibrary, rlibrary, Options)
 		).
 
 	sub_library(TopLibrary, TopPath, ExcludedLibraries, Library, Path) :-
@@ -149,9 +150,10 @@
 
 	output_library(Library, Path, Options) :-
 		format_object(Format),
-		Format::graph_header(output_file, Library, Library, library, Options),
+		atom_concat(library_, Library, Identifier),
+		Format::graph_header(output_file, Identifier, Library, library, Options),
 		output_library_files(Path, Options),
-		Format::graph_footer(output_file, Library, Library, library, Options).
+		Format::graph_footer(output_file, Identifier, Library, library, Options).
 
 	output_library_files(Directory, Options) :-
 		member(exclude_files(ExcludedFiles), Options),
