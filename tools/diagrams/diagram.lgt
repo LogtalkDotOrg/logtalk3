@@ -46,6 +46,7 @@
 		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::output_file_header(output_file, Options),
 		output_all_libraries(Options),
+		output_edges(Options),
 		Format::output_file_footer(output_file, Options),
 		close(Stream).
 
@@ -80,22 +81,23 @@
 		::output_file_path(Library, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::output_file_header(output_file, Options),
-		::reset_externals,
 		::output_rlibrary(Library, Path, Options),
+		output_edges(Options),
 		Format::output_file_footer(output_file, Options),
 		close(Stream).
 
 	output_rlibrary(TopLibrary, TopPath, Options) :-
+		::reset_externals,
 		member(exclude_libraries(ExcludedLibraries), Options),
 		(	\+ sub_library(TopLibrary, TopPath, ExcludedLibraries, _Library, _Path) ->
-			output_library(TopLibrary, TopPath, Options)
+			::output_library(TopLibrary, TopPath, Options)
 		;	format_object(Format),
 			Format::graph_header(output_file, TopLibrary, TopLibrary, rlibrary, Options),
-			output_library(TopLibrary, TopPath, Options),
+			::output_library(TopLibrary, TopPath, Options),
 			member(exclude_libraries(ExcludedLibraries), Options),
 			forall(
 				sub_library(TopLibrary, TopPath, ExcludedLibraries, Library, Path),
-				output_library(Library, Path, Options)
+				::output_library(Library, Path, Options)
 			),
 			Format::graph_footer(output_file, TopLibrary, TopLibrary, rlibrary, Options),
 			(	member(externals(true), Options) ->
@@ -135,13 +137,14 @@
 		::output_file_path(Library, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::output_file_header(output_file, Options),
-		::reset_externals,
 		::output_library(Library, Path, Options),
+		output_edges(Options),
 		Format::output_file_footer(output_file, Options),
 		close(Stream).
 
 	output_library(Library, Path, Options) :-
 		format_object(Format),
+		::reset_externals,
 		Format::graph_header(output_file, Library, Library, library, Options),
 		output_library_files(Path, Options),
 		Format::graph_footer(output_file, Library, Library, library, Options),
@@ -176,6 +179,45 @@
 	library(Library) :-
 		::library(Library, []).
 
+	:- public(files/3).
+	:- mode(files(+atom, +list(atom), +list(compound)), one).
+	:- info(files/3, [
+		comment is 'Creates a diagram for a set of files using the specified options. The file can be given by name, basename, full path, or using library notation.',
+		argnames is ['Project', 'Files', 'Options']
+	]).
+
+	files(Project, Files, UserOptions) :-
+		format_object(Format),
+		merge_options(UserOptions, Options),
+		::output_file_path(Project, Options, Format, OutputPath),
+		open(OutputPath, write, Stream, [alias(output_file)]),
+		Format::output_file_header(output_file, Options),
+		::reset_externals,
+		::output_files(Files, Options),
+		(	member(externals(true), Options) ->
+			::output_externals(Options)
+		;	true
+		),
+		output_edges(Options),
+		Format::output_file_footer(output_file, Options),
+		close(Stream).
+
+	output_files([], _Options).
+	output_files([File| Files], Options) :-
+		locate_file(File, Basename, _, Directory, Path),
+		::output_file(Path, Basename, Directory, Options),
+		output_files(Files, Options).
+
+	:- public(files/2).
+	:- mode(files(+atom, +list(atom)), one).
+	:- info(files/2, [
+		comment is 'Creates a diagram for a set of files using the default options. The file can be given by name, basename, full path, or using library notation.',
+		argnames is ['Project', 'Files']
+	]).
+
+	files(Project, Files) :-
+		::files(Project, Files, []).
+
 	:- public(files/1).
 	:- mode(files(+list(compound)), one).
 	:- info(files/1, [
@@ -209,44 +251,6 @@
 
 	files :-
 		::files([]).
-
-	:- public(files/3).
-	:- mode(files(+atom, +list(atom), +list(compound)), one).
-	:- info(files/3, [
-		comment is 'Creates a diagram for a set of files using the specified options. The file can be given by name, basename, full path, or using library notation.',
-		argnames is ['Project', 'Files', 'Options']
-	]).
-
-	files(Project, Files, UserOptions) :-
-		format_object(Format),
-		merge_options(UserOptions, Options),
-		::output_file_path(Project, Options, Format, OutputPath),
-		open(OutputPath, write, Stream, [alias(output_file)]),
-		Format::output_file_header(output_file, Options),
-		::reset_externals,
-		::output_files(Files, Options),
-		(	member(externals(true), Options) ->
-			::output_externals(Options)
-		;	true
-		),
-		Format::output_file_footer(output_file, Options),
-		close(Stream).
-
-	output_files([], _Options).
-	output_files([File| Files], Options) :-
-		locate_file(File, Basename, _, Directory, Path),
-		::output_file(Path, Basename, Directory, Options),
-		output_files(Files, Options).
-
-	:- public(files/2).
-	:- mode(files(+atom, +list(atom)), one).
-	:- info(files/2, [
-		comment is 'Creates a diagram for a set of files using the default options. The file can be given by name, basename, full path, or using library notation.',
-		argnames is ['Project', 'Files']
-	]).
-
-	files(Project, Files) :-
-		::files(Project, Files, []).
 
 	:- public(format_object/2).
 	:- multifile(format_object/2).
@@ -357,18 +361,39 @@
 		format_object(Format),
 		Format::node(output_file, Identifier, Label, Lines, Kind, Options).
 
-	:- protected(output_edge/5).
-	:- mode(output_edge(+nonvar, +nonvar, +list(nonvar), +atom, +list(compound)), one).
-	:- info(output_edge/5, [
-		comment is 'Outputs a graph edge.',
+	:- private(edge_/4).
+	:- dynamic(edge_/4).
+	:- mode(edge_(+nonvar, +nonvar, +list(nonvar), +atom), zero_or_more).
+	:- info(edge_/4, [
+		comment is 'Table of saved edges.',
+		argnames is ['From', 'To', 'Labels', 'Kind']
+	]).
+
+	:- protected(output_edges/1).
+	:- mode(output_edges(+list(compound)), one).
+	:- info(output_edges/1, [
+		comment is 'Outputs all edges.',
+		argnames is ['Options']
+	]).
+
+	output_edges(Options) :-
+		format_object(Format),
+		retract(edge_(From, To, Labels, Kind)),
+		Format::edge(output_file, From, To, Labels, Kind, Options),
+		fail.
+	output_edges(_).
+
+	:- protected(save_edge/5).
+	:- mode(save_edge(+nonvar, +nonvar, +list(nonvar), +atom, +list(compound)), one).
+	:- info(save_edge/5, [
+		comment is 'Saves a graph edge.',
 		argnames is ['From', 'To', 'Labels', 'Kind', 'Options']
 	]).
 
-	output_edge(From, To, Labels, Kind, Options) :-
-		format_object(Format),
+	save_edge(From, To, Labels, Kind, Options) :-
 		(	member(relation_labels(true), Options) ->
-			Format::edge(output_file, From, To, Labels, Kind, Options)
-		;	Format::edge(output_file, From, To, [], Kind, Options)
+			assertz(edge_(From, To, Labels, Kind))
+		;	assertz(edge_(From, To, [], Kind))
 		).
 
 	:- protected(not_excluded_file/3).

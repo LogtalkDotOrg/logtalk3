@@ -54,12 +54,12 @@
 	output_file(Path, _, _, Options) :-
 		logtalk::loaded_file_property(Other, parent(Path)),
 		remember_referenced_logtalk_file(Other),
-		^^output_edge(Path, Other, [loads], loads_file, Options),
+		^^save_edge(Path, Other, [loads], loads_file, Options),
 		fail.
 	output_file(Path, _, _, Options) :-
 		prolog_modules_diagram_support::source_file_property(Other, parent(Path)),
 		remember_referenced_prolog_file(Other),
-		^^output_edge(Path, Other, [loads], loads_file, Options),
+		^^save_edge(Path, Other, [loads], loads_file, Options),
 		fail.
 	output_file(_, _, _, _).
 

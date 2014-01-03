@@ -69,6 +69,9 @@ entity and cross-referencing predicate call diagrams.
 library and its sub-libraries would miss the entities and files in the top
 library.
 
+* FIXED: Bug in the `diagrams` tool where some diagram nodes may be placed in
+the wrong cluster.
+
 Tests
 -----
 
