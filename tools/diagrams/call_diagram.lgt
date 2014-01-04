@@ -29,7 +29,7 @@
 		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2014/01/03,
-		comment is 'Predicates for generating  predicate call cross-referencing diagrams.',
+		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format']
 	]).
 
