@@ -74,8 +74,8 @@
 			property_module(exports(Exports), Module) :-
 				{get_module_info(Module, raw_interface, Interface)},
 				filter_interface(Interface, Exports).
-			property_module(file(_File), _Module) :-
-				fail.
+			property_module(file(File), Module) :-
+				{current_compiled_file(File, _, Module)}.
 
 			filter_interface([], []).
 			filter_interface([Functor/Arity| Interface], [Functor/Arity| Exports]) :-
@@ -100,10 +100,12 @@
 			property_source_file(parent(_Parent), _File) :-
 				fail.
 			property_source_file(directory(Directory), File) :-
-				{pathname(File, DirectoryString, _, _),
+				{current_compiled_file(File, _, _),
+				 pathname(File, DirectoryString, _, _),
 				 atom_string(Directory, DirectoryString)}.
 			property_source_file(basename(Basename), File) :-
-				{pathname(File, _, NameString, ExtensionString),
+				{current_compiled_file(File, _, _),
+				 pathname(File, _, NameString, ExtensionString),
 				 concat_strings(NameString, ExtensionString, BasenameString),
 				 atom_string(Basename, BasenameString)}.
 
