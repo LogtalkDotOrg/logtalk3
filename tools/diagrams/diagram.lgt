@@ -388,7 +388,7 @@
 	:- protected(reset/0).
 	:- mode(reset, one).
 	:- info(reset/0, [
-		comment is 'Resets temporary information used when generating a diagram.'
+		comment is 'Resets all temporary information used when generating a diagram.'
 	]).
 
 	reset :-
@@ -406,9 +406,9 @@
 		Format::node(output_file, Identifier, Label, Lines, Kind, Options).
 
 	:- protected(edge/4).
-	:- mode(edge(+nonvar, +nonvar, +list(nonvar), +atom), zero_or_more).
+	:- mode(edge(?nonvar, ?nonvar, ?list(nonvar), ?atom), zero_or_more).
 	:- info(edge/4, [
-		comment is 'Table of saved edges.',
+		comment is 'Enumerates, by backtracking, all saved edges.',
 		argnames is ['From', 'To', 'Labels', 'Kind']
 	]).
 
@@ -417,7 +417,7 @@
 
 	:- private(edge_/4).
 	:- dynamic(edge_/4).
-	:- mode(edge_(+nonvar, +nonvar, +list(nonvar), +atom), zero_or_more).
+	:- mode(edge_(?nonvar, ?nonvar, ?list(nonvar), ?atom), zero_or_more).
 	:- info(edge_/4, [
 		comment is 'Table of saved edges.',
 		argnames is ['From', 'To', 'Labels', 'Kind']

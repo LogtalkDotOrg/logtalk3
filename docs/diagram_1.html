@@ -3,13 +3,13 @@
 <?xml-stylesheet href="logtalk.css" type="text/css"?><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <title>diagram(A)</title>
+    <title>diagram(Format)</title>
     <link rel="stylesheet" href="logtalk.css" type="text/css"/>
   </head>
   <body>
     <div class="header">
       <p class="type">category</p>
-      <h1 class="code">diagram(A)</h1>
+      <h1 class="code">diagram(Format)</h1>
       <blockquote>
         <p class="comment">Predicates for generating diagrams.</p>
       </blockquote>
@@ -27,19 +27,13 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2013/12/16</code>
+            <code>2014/1/3</code>
           </dd>
         </dl>
         <dl class="properties">
           <dt class="key">compilation flags:</dt>
           <dd class="value">
             <code>static</code>
-          </dd>
-        </dl>
-        <dl class="properties">
-          <dt class="key">argnames:</dt>
-          <dd class="value">
-            <code>[Format]</code>
           </dd>
         </dl>
         <p class="comment">(no dependencies on other files)</p>
@@ -49,9 +43,9 @@
       <div class="public">
         <h2>Public interface</h2>
         <div class="section">
-          <h3 class="code">all/1</h3>
+          <h3 class="code">libraries/3</h3>
           <blockquote>
-            <p class="comment">Creates a diagram for all loaded files using the specified options.</p>
+            <p class="comment">Creates a diagram for a set of libraries using the specified options.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -60,18 +54,58 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>all(Options)</code>
+              <code>libraries(Project,Libraries,Options)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>all(+list(compound)) &ndash; one</code>
+              <code>libraries(+atom,+list(atom),+list(compound)) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 class="code">all/0</h3>
+          <h3 class="code">libraries/2</h3>
           <blockquote>
-            <p class="comment">Creates a diagram for all loaded files using default options.</p>
+            <p class="comment">Creates a diagram for a set of libraries using the default options.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>libraries(Project,Libraries)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>libraries(+atom,+list(atom)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">libraries/1</h3>
+          <blockquote>
+            <p class="comment">Creates a diagram for all loaded libraries using the specified options.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>libraries(Options)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>libraries(+list(compound)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">libraries/0</h3>
+          <blockquote>
+            <p class="comment">Creates a diagram for all loaded libraries using default options.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -80,7 +114,7 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>all &ndash; one</code>
+              <code>libraries &ndash; one</code>
             </dd>
           </dl>
         </div>
@@ -205,9 +239,9 @@
           </dl>
         </div>
         <div class="section">
-          <h3 class="code">default_options/1</h3>
+          <h3 class="code">files/1</h3>
           <blockquote>
-            <p class="comment">Returns a list of the default options used when generating a diagram.</p>
+            <p class="comment">Creates a diagram for all loaded files using the specified options.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -216,11 +250,27 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>default_options(DefaultOptions)</code>
+              <code>files(Options)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>default_options(-list(compound)) &ndash; one</code>
+              <code>files(+list(compound)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">files/0</h3>
+          <blockquote>
+            <p class="comment">Creates a diagram for all loaded files using default options.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>files &ndash; one</code>
             </dd>
           </dl>
         </div>
@@ -264,6 +314,46 @@
             </dd>
           </dl>
         </div>
+        <div class="section">
+          <h3 class="code">default_option/1</h3>
+          <blockquote>
+            <p class="comment">Returns a list of the default options used when generating a diagram.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>default_option(DefaultOption)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>default_option(?compound) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">default_options/1</h3>
+          <blockquote>
+            <p class="comment">Returns a list of the default options used when generating a diagram.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>default_options(DefaultOptions)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>default_options(-list(compound)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
       </div>
       <div class="protected">
         <h2>Protected interface</h2>
@@ -288,7 +378,7 @@
           </dl>
         </div>
         <div class="section">
-          <h3 class="code">output_rlibrary/2</h3>
+          <h3 class="code">output_rlibrary/3</h3>
           <blockquote>
             <p class="comment">Generates diagram output for all sub-libraries of a library.</p>
           </blockquote>
@@ -299,11 +389,11 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>output_rlibrary(TopDirectory,Options)</code>
+              <code>output_rlibrary(Library,Path,Options)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>output_rlibrary(+atom,+list(compound)) &ndash; one</code>
+              <code>output_rlibrary(+atom,+atom,+list(compound)) &ndash; one</code>
             </dd>
           </dl>
         </div>
@@ -319,7 +409,7 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>output_library(RelativePath,Path,Options)</code>
+              <code>output_library(Library,Path,Options)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
@@ -368,6 +458,122 @@
           </dl>
         </div>
         <div class="section">
+          <h3 class="code">output_externals/1</h3>
+          <blockquote>
+            <p class="comment">Outputs external entities using the specified options.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>output_externals(Options)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>output_externals(+list(compound)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">reset/0</h3>
+          <blockquote>
+            <p class="comment">Resets all temporary information used when generating a diagram.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>reset &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">output_node/5</h3>
+          <blockquote>
+            <p class="comment">Outputs a graph node.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>output_node(Identifier,Label,Contents,Kind,Options)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>output_node(+nonvar,+nonvar,+list(nonvar),+atom,+list(compound)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">edge/4</h3>
+          <blockquote>
+            <p class="comment">Enumerates, by backtracking, all saved edges.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>edge(From,To,Labels,Kind)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>edge(?nonvar,?nonvar,?list(nonvar),?atom) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">output_edges/1</h3>
+          <blockquote>
+            <p class="comment">Outputs all edges.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>output_edges(Options)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>output_edges(+list(compound)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">save_edge/5</h3>
+          <blockquote>
+            <p class="comment">Saves a graph edge.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>save_edge(From,To,Labels,Kind,Options)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>save_edge(+nonvar,+nonvar,+list(nonvar),+atom,+list(compound)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
           <h3 class="code">not_excluded_file/3</h3>
           <blockquote>
             <p class="comment">True when the given file is not excluded from the generated output.</p>
@@ -384,6 +590,26 @@
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
               <code>not_excluded_file(+list(atom),+atom,+atom) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">diagram_name_suffix/1</h3>
+          <blockquote>
+            <p class="comment">Returns the diagram name suffix.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>diagram_name_suffix(Suffix)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>diagram_name_suffix(-atom) &ndash; one</code>
             </dd>
           </dl>
         </div>
@@ -408,7 +634,7 @@
           </dl>
         </div>
         <div class="section">
-          <h3 class="code">locate_file/4</h3>
+          <h3 class="code">locate_file/5</h3>
           <blockquote>
             <p class="comment">Locates a file given its name, basename, full path, or library notation representation.</p>
           </blockquote>
@@ -419,11 +645,31 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>locate_file(File,Basename,Directory,Path)</code>
+              <code>locate_file(File,Basename,Extension,Directory,Path)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>locate_file(+atom,+atom,+atom,-atom) &ndash; one</code>
+              <code>locate_file(+atom,+atom,+atom,+atom,-atom) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">ground_entity_identifier/3</h3>
+          <blockquote>
+            <p class="comment">Converts an entity identifier to a ground term.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>ground_entity_identifier(Kind,Identifier,GroundIdentifier)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>ground_entity_identifier(+atom,+callable,-callable) &ndash; one</code>
             </dd>
           </dl>
         </div>
@@ -431,7 +677,24 @@
       <div class="private">
         <h2>Private predicates</h2>
         <div class="section">
-          <p class="comment">(none)</p>
+          <h3 class="code">edge_/4</h3>
+          <blockquote>
+            <p class="comment">Table of saved edges.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>dynamic</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>edge_(From,To,Labels,Kind)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>edge_(?nonvar,?nonvar,?list(nonvar),?atom) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
         </div>
       </div>
     </div>

@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>1.0</code>
+            <code>2.0</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2013/12/9</code>
+            <code>2014/1/1</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -78,7 +78,7 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>output_file_header(+stream_or_alias,+list) &ndash; one</code>
+              <code>output_file_header(+stream_or_alias,+list(compound)) &ndash; one</code>
             </dd>
           </dl>
         </div>
@@ -98,12 +98,12 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>output_file_footer(+stream_or_alias,+list) &ndash; one</code>
+              <code>output_file_footer(+stream_or_alias,+list(compound)) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 class="code">graph_header/4</h3>
+          <h3 class="code">graph_header/5</h3>
           <blockquote>
             <p class="comment">Writes a graph header using the specified options.</p>
           </blockquote>
@@ -114,16 +114,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>graph_header(Stream,Identifier,Label,Options)</code>
+              <code>graph_header(Stream,Identifier,Label,Kind,Options)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>graph_header(+stream_or_alias,+atom,+atom,+list) &ndash; one</code>
+              <code>graph_header(+stream_or_alias,+atom,+atom,+atom,+list(compound)) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 class="code">graph_footer/4</h3>
+          <h3 class="code">graph_footer/5</h3>
           <blockquote>
             <p class="comment">Writes a graph footer using the specified options.</p>
           </blockquote>
@@ -134,11 +134,11 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>graph_footer(Stream,Identifier,Label,Options)</code>
+              <code>graph_footer(Stream,Identifier,Label,Kind,Options)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>graph_footer(+stream_or_alias,+atom,+atom,+list) &ndash; one</code>
+              <code>graph_footer(+stream_or_alias,+atom,+atom,+atom,+list(compound)) &ndash; one</code>
             </dd>
           </dl>
         </div>
@@ -158,12 +158,12 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>node(+stream_or_alias,+atom,+atom,+list(atom),+atom,+list(compound)) &ndash; one</code>
+              <code>node(+stream_or_alias,+nonvar,+nonvar,+list(nonvar),+atom,+list(compound)) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 class="code">edge/5</h3>
+          <h3 class="code">edge/6</h3>
           <blockquote>
             <p class="comment">Writes an edge between two nodes using the specified options.</p>
           </blockquote>
@@ -174,11 +174,11 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>edge(Stream,Start,End,Label,Options)</code>
+              <code>edge(Stream,Start,End,Labels,Kind,Options)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>edge(+stream_or_alias,+atom,+atom,+atom,+list(compound)) &ndash; one</code>
+              <code>edge(+stream_or_alias,+nonvar,+nonvar,+list(nonvar),+atom,+list(compound)) &ndash; one</code>
             </dd>
           </dl>
         </div>

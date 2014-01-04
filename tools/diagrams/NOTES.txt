@@ -65,7 +65,7 @@ and arrows (entity relations):
 	`obox` (arrow ending with a white square)
 
 - uses and use_module relations  
-	`halfopen` (line)
+	`rdiamond` (arrow ending with a black half diamond)
 
 - file loading relations  
 	`normal` (arrow ending with a black triangle)
@@ -103,7 +103,9 @@ Prolog compiler when generating diagrams.
 
 For printing large diagrams, you will need to either use a tool to slice
 the diagram in page-sized pieces or, preferably, use software capable of
-tiled printing (e.g. Adobe Reader).
+tiled printing (e.g. Adobe Reader). You can also hand-edit the generated
+`.dot` files and play with settings such as aspect ratio for fine-tuning
+the diagrams layout.
 
 A set of options are available to specify the details to include in the
 generated diagrams. For entity diagrams the options are:
