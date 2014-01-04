@@ -115,7 +115,11 @@
 				property_module(Property, Module).
 
 			property_module(exports(Exports), Module) :-
-				fail.
+				{findall(
+					Functor/Arity,
+					(predicate_property(Module:Goal, exported), functor(Goal, Functor, Arity)),
+					Exports
+				)}.
 			property_module(file(File), Module) :-
 				{current_module(Module, File)}.
 
