@@ -155,6 +155,17 @@ generating diagrams for libraries with external files.
 Be sure to set the `source_data` flag `on` before compiling the libraries
 or files for which you want to generated diagrams.
 
+Support for displaying Prolog modules and Prolog module files in diagrams:
+
+- ECLiPSe  
+	file loading dependency diagrams don't display module files
+- SICStus Prolog  
+	file loading dependency diagrams don't display module files
+- SWI-Prolog  
+	full support
+- YAP  
+	full support
+
 For more information on this tool, open the `docs/tools.html` file in a
 web browser.
 
