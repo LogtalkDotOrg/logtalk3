@@ -27,8 +27,9 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/01,
-		comment is 'Description']).
+		date is 2014/01/06,
+		comment is 'Predicates for generating graph files.'
+	]).
 
 	:- public(output_file_name/2).
 	:- mode(output_file_name(+atom, -atom), one).
@@ -37,18 +38,18 @@
 		argnames is ['Name', 'File']
 	]).
 
-	:- public(output_file_header/2).
-	:- mode(output_file_header(+stream_or_alias, +list(compound)), one).
-	:- info(output_file_header/2, [
+	:- public(file_header/3).
+	:- mode(file_header(+stream_or_alias, +atom, +list(compound)), one).
+	:- info(file_header/3, [
 		comment is 'Writes the output file header using the specified options.',
-		argnames is ['Stream', 'Options']
+		argnames is ['Stream', 'Identifier', 'Options']
 	]).
 
-	:- public(output_file_footer/2).
-	:- mode(output_file_footer(+stream_or_alias, +list(compound)), one).
-	:- info(output_file_footer/2, [
+	:- public(file_footer/3).
+	:- mode(file_footer(+stream_or_alias, +atom, +list(compound)), one).
+	:- info(file_footer/3, [
 		comment is 'Writes the output file footer using the specified options.',
-		argnames is ['Stream', 'Options']
+		argnames is ['Stream', 'Identifier', 'Options']
 	]).
 
 	:- public(graph_header/5).

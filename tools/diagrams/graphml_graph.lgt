@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/12/18,
+		date is 2014/01/06,
 		comment is 'Generates entity diagram GraphML files for source files and libraries.'
 	]).
 
@@ -38,7 +38,7 @@
 	output_file_name(Name, File) :-
 		atom_concat(Name, '.graphml', File).
 
-	output_file_header(Stream, _Options) :-
+	file_header(Stream, _Identifier, _Options) :-
 		write(Stream, '<?xml version="1.0" encoding="UTF-8"?>\n'),
 		write(Stream, '<graphml xmlns="http://graphml.graphdrawing.org/xmlns"\n'),
 		write(Stream, '    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"\n'),
@@ -50,7 +50,7 @@
 		write(Stream, '<key id="kind" for="edge" attr.name="kind" attr.type="string"/>\n'),
 		write(Stream, '<key id="label" for="edge" attr.name="label" attr.type="string"/>\n').
 
-	output_file_footer(Stream, _Options) :-
+	file_footer(Stream, _Identifier, _Options) :-
 		write(Stream, '</graphml>\n').
 
 	graph_header(Stream, Identifier, _Label, _Options) :-

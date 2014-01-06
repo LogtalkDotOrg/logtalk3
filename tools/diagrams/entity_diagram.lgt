@@ -64,14 +64,14 @@
 		reset,
 		^^output_file_path(Name, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(output_file)]),
-		Format::output_file_header(output_file, Options),
+		Format::file_header(output_file, Basename, Options),
 		atom_concat(file_, Path, Identifier),
 		Format::graph_header(output_file, Identifier, Basename, file, Options),
 		process(Basename, Directory, Options),
 		output_externals(Options),
 		^^output_edges(Options),
 		Format::graph_footer(output_file, Identifier, Basename, file, Options),
-		Format::output_file_footer(output_file, Options),
+		Format::file_footer(output_file, Basename, Options),
 		close(Stream).
 
 	file(Source) :-

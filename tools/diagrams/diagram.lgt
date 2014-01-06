@@ -31,6 +31,7 @@
 		comment is 'Predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
+
 	:- public(libraries/3).
 	:- mode(libraries(+atom, +list(atom), +list(compound)), one).
 	:- info(libraries/3, [
@@ -44,14 +45,14 @@
 		::reset,
 		::output_file_path(Project, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(output_file)]),
-		Format::output_file_header(output_file, Options),
+		Format::file_header(output_file, Project, Options),
 		atom_concat(libraries_, Project, Identifier),
 		Format::graph_header(output_file, Identifier, Project, libraries, Options),
 		output_libraries(Libraries, Format, Options),
 		::output_externals(Options),
 		::output_edges(Options),
 		Format::graph_footer(output_file, Identifier, Project, libraries, Options),
-		Format::output_file_footer(output_file, Options),
+		Format::file_footer(output_file, Project, Options),
 		close(Stream).
 
 	output_libraries([], _Format, _Options).
@@ -86,10 +87,10 @@
 		merge_options(UserOptions, Options),
 		::output_file_path(all_libraries, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(output_file)]),
-		Format::output_file_header(output_file, Options),
+		Format::file_header(output_file, libraries, Options),
 		output_all_libraries(Options),
 		::output_edges(Options),
-		Format::output_file_footer(output_file, Options),
+		Format::file_footer(output_file, libraries, Options),
 		close(Stream).
 
 	output_all_libraries(Options) :-
@@ -127,14 +128,14 @@
 		logtalk::expand_library_path(Library, Path),
 		::output_file_path(Library, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(output_file)]),
-		Format::output_file_header(output_file, Options),
+		Format::file_header(output_file, Library, Options),
 		atom_concat(rlibrary_, Library, Identifier),
 		Format::graph_header(output_file, Identifier, Library, rlibrary, Options),
 		::output_rlibrary(Library, Path, Options),
 		::output_externals(Options),
 		::output_edges(Options),
 		Format::graph_footer(output_file, Identifier, Library, rlibrary, Options),
-		Format::output_file_footer(output_file, Options),
+		Format::file_footer(output_file, Library, Options),
 		close(Stream).
 
 	output_rlibrary(TopLibrary, TopPath, Options) :-
@@ -184,14 +185,14 @@
 		logtalk::expand_library_path(Library, Path),
 		::output_file_path(Library, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(output_file)]),
-		Format::output_file_header(output_file, Options),
+		Format::file_header(output_file, Library, Options),
 		atom_concat(library_, Library, Identifier),
 		Format::graph_header(output_file, Identifier, Library, library, Options),
 		::output_library(Library, Path, Options),
 		::output_externals(Options),
 		::output_edges(Options),
 		Format::graph_footer(output_file, Identifier, Library, library, Options),
-		Format::output_file_footer(output_file, Options),
+		Format::file_footer(output_file, Library, Options),
 		close(Stream).
 
 	output_library(_Library, Directory, Options) :-
@@ -233,14 +234,14 @@
 		::reset,
 		::output_file_path(Project, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(output_file)]),
-		Format::output_file_header(output_file, Options),
+		Format::file_header(output_file, Project, Options),
 		atom_concat(files_, Project, Identifier),
 		Format::graph_header(output_file, Identifier, Project, files, Options),
 		::output_files(Files, Options),
 		::output_externals(Options)
 		::output_edges(Options),
 		Format::graph_footer(output_file, Identifier, Project, files, Options),
-		Format::output_file_footer(output_file, Options),
+		Format::file_footer(output_file, Project, Options),
 		close(Stream).
 
 	output_files([], _Options).
@@ -271,9 +272,9 @@
 		merge_options(UserOptions, Options),
 		::output_file_path(all_files, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(output_file)]),
-		Format::output_file_header(output_file, Options),
+		Format::file_header(output_file, files, Options),
 		output_all_files(Options),
-		Format::output_file_footer(output_file, Options),
+		Format::file_footer(output_file, files, Options),
 		close(Stream).
 
 	output_all_files(Options) :-

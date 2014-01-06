@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/12/10,
+		date is 2014/01/06,
 		comment is 'Generates entity diagram GXL files for source files and libraries.'
 	]).
 
@@ -38,12 +38,12 @@
 	output_file_name(Name, File) :-
 		atom_concat(Name, '.gxl', File).
 
-	output_file_header(Stream, _Options) :-
+	file_header(Stream, _Identifier, _Options) :-
 		write(Stream, '<?xml version="1.0" encoding="UTF-8"?>\n'),
 		write(Stream, '<gxl xmlns:xlink=" http://www.w3.org/1999/xlink">\n'),
 		write(Stream, '  <graph id="diagram" edgeids="true" edgemode="defaultdirected" hypergraph="false">\n').
 
-	output_file_footer(Stream, _Options) :-
+	file_footer(Stream, _Identifier, _Options) :-
 		write(Stream, '  </graph>\n'),
 		write(Stream, '</gxl>\n').
 

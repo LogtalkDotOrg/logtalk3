@@ -29,7 +29,7 @@
 		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2014/01/06,
-		comment is 'Generates entity diagram DOT files for source files and libraries.'
+		comment is 'Predicates for generating graph files in the DOT language.'
 	]).
 
  	:- multifile(diagram(_)::format_object/2).
@@ -38,8 +38,10 @@
 	output_file_name(Name, File) :-
 		atom_concat(Name, '.dot', File).
 
-	output_file_header(Stream, Options) :-
-		write(Stream, 'digraph G {\n'),
+	file_header(Stream, Identifier, Options) :-
+		write(Stream, 'digraph '),
+		writeq(Stream, Identifier),
+		write(Stream, ' {\n'),
 		write(Stream, 'rankdir=BT\n'),
 		write(Stream, 'ranksep=1.25\n'),
 		write(Stream, 'compound=true\n'),
@@ -82,7 +84,7 @@
 		;	atom_codes(Atom, Codes)
 		).
 
-	output_file_footer(Stream, _Options) :-
+	file_footer(Stream, _Identifier, _Options) :-
 		write(Stream, '}\n').
 
 	graph_header(Stream, Identifier, Label, Kind, _Options) :-
