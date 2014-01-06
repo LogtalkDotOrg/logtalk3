@@ -43,11 +43,14 @@
 	:- dynamic(referenced_prolog_file_/1).
 
 	output_file(Path, Basename, Directory, Options) :-
+		^^linking_options(Path, Options, LinkingOptions),
 		(	member(directory_paths(true), Options) ->
 			member(omit_path_prefix(Prefix), Options),
-			atom_concat(Prefix, Relative, Directory),
-			^^output_node(Path, Basename, [Relative], file, Options)
-		;	^^output_node(Path, Basename, [], file, Options)
+			(	atom_concat(Prefix, Relative, Directory) ->
+				^^output_node(Path, Basename, [Relative], file, LinkingOptions)
+			;	^^output_node(Path, Basename, [Directory], file, LinkingOptions)
+			)
+		;	^^output_node(Path, Basename, [], file, LinkingOptions)
 		),
 		assertz(included_file_(Path)),
 		fail.
@@ -88,7 +91,7 @@
 		fail.
 	output_externals(Options) :-
 		^^format_object(Format),
-		Format::graph_header(output_file, other, '(external files)', external, Options),
+		Format::graph_header(output_file, other, '(external files)', external, [tooltip('(external files)')| Options]),
 		retract(referenced_logtalk_file_(Path)),
 		logtalk::loaded_file_property(Path, directory(Directory)),
 		logtalk::loaded_file_property(Path, basename(Basename)),
@@ -106,9 +109,11 @@
 		fail.
 	output_externals(Options) :-
 		^^format_object(Format),
-		Format::graph_footer(output_file, other, '(external files)', external, Options).
+		Format::graph_footer(output_file, other, '(external files)', external, [tooltip('(external files)')| Options]).
 
-	% by default, don't omit a path prefix when printing paths
+	% by default, don't generate cluster URLs:
+	default_option(url_protocol('')).
+	% by default, don't omit a path prefix when printing paths:
 	default_option(omit_path_prefix('')).
 	% by default, don't print directory paths:
 	default_option(directory_paths(false)).

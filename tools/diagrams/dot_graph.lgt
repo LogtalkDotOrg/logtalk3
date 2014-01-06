@@ -87,11 +87,24 @@
 	file_footer(Stream, _Identifier, _Options) :-
 		write(Stream, '}\n').
 
-	graph_header(Stream, Identifier, Label, Kind, _Options) :-
+	graph_header(Stream, Identifier, Label, Kind, Options) :-
 		graph_style_margin_color(Kind, Style, Margin, Color),
 		write(Stream, 'subgraph "cluster_'),
 		write(Stream, Identifier),
 		write(Stream, '" {\n'),
+		(	member(url(URL), Options) ->
+			write(Stream, 'URL="'),
+			write(Stream, URL),
+			write(Stream, '"\n'),
+			write(Stream, 'tooltip="'),
+			write(Stream, URL),
+			write(Stream, '"\n')
+		;	member(tooltip(Tooltip), Options) ->
+			write(Stream, 'tooltip="'),
+			write(Stream, Tooltip),
+			write(Stream, '"\n')
+		;	true
+		),
 		write(Stream, 'bgcolor="'),
 		write(Stream, Color),
 		write(Stream, '"\nstyle="'),
@@ -118,14 +131,20 @@
 		write(Stream, Identifier),
 		write(Stream, '" [shape='),
 		write(Stream, Shape),
-		write(Stream, ',style='),
-		write(Stream, Style),
-		(	member(tooltip(Tooltip), Options) ->
+		(	member(url(URL), Options) ->
+			write(Stream, ',URL="'),
+			write(Stream, URL),
+			write(Stream, '",tooltip="'),
+			write(Stream, URL),
+			write(Stream, '"')
+		;	member(tooltip(Tooltip), Options) ->
 			write(Stream, ',tooltip="'),
 			write(Stream, Tooltip),
 			write(Stream, '"')
 		;	true
 		),
+		write(Stream, ',style='),
+		write(Stream, Style),
 		write(Stream, ',fillcolor="'),
 		write(Stream, Color),
 		write(Stream, '",label=<<B>'),

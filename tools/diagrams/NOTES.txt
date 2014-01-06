@@ -132,6 +132,10 @@ generated diagrams. For entity diagrams the options are:
 	list of sub-libraries to exclude (default is `[]`)
 - `exclude_entities(Entities)`  
 	list of entities to exclude (default is `[]`)
+- `omit_path_prefix(Prefix)`  
+	omit a common path prefix when printing directory paths (default is `''`)
+- `url_protocol(Protocol)`  
+	URL protocol used when generating cluster links (default is `''`, i.e. none)
 
 For file loading dependency diagrams the options are:
 
@@ -141,6 +145,8 @@ For file loading dependency diagrams the options are:
 	print/omit file directory paths (`true` or `false`; default is `true`)
 - `omit_path_prefix(Prefix)`  
 	omit a common path prefix when printing directory paths (default is `''`)
+- `url_protocol(Protocol)`  
+	URL protocol used when generating cluster links (default is `''`, i.e. none)
 - `relation_labels(Boolean)`  
 	print/omit entity relation labels (`true` or `false`; default is `false`)
 - `output_directory(Directory)`  

@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/03,
+		date is 2014/01/06,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format']
 	]).
@@ -55,6 +55,10 @@
 	default_option(exclude_libraries([])).
 	% by default, don't exclude any entities:
 	default_option(exclude_entities([])).
+	% by default, don't generate cluster URLs:
+	default_option(url_protocol('')).
+	% by default, don't omit a path prefix when printing paths:
+	default_option(omit_path_prefix('')).
 
 	diagram_name_suffix('_call_diagram').
 

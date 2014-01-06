@@ -66,11 +66,12 @@
 		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::file_header(output_file, Basename, Options),
 		atom_concat(file_, Path, Identifier),
-		Format::graph_header(output_file, Identifier, Basename, file, Options),
+		^^linking_options(Path, Options, GraphOptions),
+		Format::graph_header(output_file, Identifier, Basename, file, GraphOptions),
 		process(Basename, Directory, Options),
 		output_externals(Options),
 		^^output_edges(Options),
-		Format::graph_footer(output_file, Identifier, Basename, file, Options),
+		Format::graph_footer(output_file, Identifier, Basename, file, GraphOptions),
 		Format::file_footer(output_file, Basename, Options),
 		close(Stream).
 
@@ -83,9 +84,10 @@
 			% use the full path for the cluster identifier as we
 			% can have more than file with the same basename
 			atom_concat(file_, File, Identifier),
-			Format::graph_header(output_file, Identifier, Basename, file, Options),
+			^^linking_options(File, Options, GraphOptions),
+			Format::graph_header(output_file, Identifier, Basename, file, GraphOptions),
 			process(Basename, Directory, Options),
-			Format::graph_footer(output_file, Identifier, Basename, file, Options)
+			Format::graph_footer(output_file, Identifier, Basename, file, GraphOptions)
 		;	process(Basename, Directory, Options)
 		).
 
@@ -113,7 +115,7 @@
 		fail.
 	output_externals(Options) :-
 		^^format_object(Format),
-		Format::graph_header(output_file, other, '(external entities)', external, Options),
+		Format::graph_header(output_file, other, '(external entities)', external, [tooltip('(external entities)')| Options]),
 		retract(referenced_entity_(Entity)),
 		(	current_object(Entity) ->
 			^^ground_entity_identifier(object, Entity, Name),
@@ -137,7 +139,7 @@
 		fail.
 	output_externals(Options) :-
 		^^format_object(Format),
-		Format::graph_footer(output_file, other, '(external entities)', external, Options).
+		Format::graph_footer(output_file, other, '(external entities)', external, [tooltip('(external entities)')| Options]).
 
 	process(Basename, Directory, Options) :-
 		member(exclude_entities(ExcludedEntities), Options),
@@ -473,6 +475,10 @@
 	default_option(exclude_libraries([])).
 	% by default, don't exclude any entities:
 	default_option(exclude_entities([])).
+	% by default, don't generate cluster URLs:
+	default_option(url_protocol('')).
+	% by default, don't omit a path prefix when printing paths:
+	default_option(omit_path_prefix('')).
 
 	diagram_name_suffix('_entity_diagram').
 

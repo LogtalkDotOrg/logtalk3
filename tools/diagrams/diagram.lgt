@@ -47,11 +47,11 @@
 		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::file_header(output_file, Project, Options),
 		atom_concat(libraries_, Project, Identifier),
-		Format::graph_header(output_file, Identifier, Project, libraries, Options),
+		Format::graph_header(output_file, Identifier, Project, libraries, [tooltip(Project)| Options]),
 		output_libraries(Libraries, Format, Options),
 		::output_externals(Options),
 		::output_edges(Options),
-		Format::graph_footer(output_file, Identifier, Project, libraries, Options),
+		Format::graph_footer(output_file, Identifier, Project, libraries, [tooltip(Project)| Options]),
 		Format::file_footer(output_file, Project, Options),
 		close(Stream).
 
@@ -60,9 +60,10 @@
 		logtalk_library_path(Library, _),
 		logtalk::expand_library_path(Library, Directory),
 		atom_concat(library_, Library, Identifier),
-		Format::graph_header(output_file, Identifier, Library, library, Options),
+		linking_options(Directory, Options, GraphOptions),
+		Format::graph_header(output_file, Identifier, Library, library, GraphOptions),
 		::output_library(Library, Directory, Options),
-		Format::graph_footer(output_file, Identifier, Library, library, Options),
+		Format::graph_footer(output_file, Identifier, Library, library, GraphOptions),
 		output_libraries(Libraries, Format, Options).
 
 	:- public(libraries/2).
@@ -99,9 +100,10 @@
 		logtalk::expand_library_path(Library, Directory),
 		\+ \+ logtalk::loaded_file_property(_, directory(Directory)),
 		atom_concat(library_, Library, Identifier),
-		Format::graph_header(output_file, Identifier, Library, library, Options),
+		linking_options(Directory, Options, GraphOptions),
+		Format::graph_header(output_file, Identifier, Library, library, GraphOptions),
 		::output_library(Library, Directory, Options),
-		Format::graph_footer(output_file, Identifier, Library, library, Options),
+		Format::graph_footer(output_file, Identifier, Library, library, GraphOptions),
 		fail.
 	output_all_libraries(_).
 
@@ -130,11 +132,12 @@
 		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::file_header(output_file, Library, Options),
 		atom_concat(rlibrary_, Library, Identifier),
-		Format::graph_header(output_file, Identifier, Library, rlibrary, Options),
+		linking_options(Path, Options, GraphOptions),
+		Format::graph_header(output_file, Identifier, Library, rlibrary, GraphOptions),
 		::output_rlibrary(Library, Path, Options),
 		::output_externals(Options),
 		::output_edges(Options),
-		Format::graph_footer(output_file, Identifier, Library, rlibrary, Options),
+		Format::graph_footer(output_file, Identifier, Library, rlibrary, GraphOptions),
 		Format::file_footer(output_file, Library, Options),
 		close(Stream).
 
@@ -142,15 +145,17 @@
 		format_object(Format),
 		member(exclude_libraries(ExcludedLibraries), Options),
 		atom_concat(library_, TopLibrary, TopIdentifier),
-		Format::graph_header(output_file, TopIdentifier, TopLibrary, library, Options),
+		linking_options(Path, Options, TopGraphOptions),
+		Format::graph_header(output_file, TopIdentifier, TopLibrary, library, TopGraphOptions),
 		::output_library(TopLibrary, TopPath, Options),
-		Format::graph_footer(output_file, TopIdentifier, TopLibrary, library, Options),
+		Format::graph_footer(output_file, TopIdentifier, TopLibrary, library, TopGraphOptions),
 		forall(
 			sub_library(TopLibrary, TopPath, ExcludedLibraries, Library, Path),
 			(	atom_concat(library_, Library, Identifier),
-				Format::graph_header(output_file, Identifier, Library, library, Options),
+				linking_options(Path, Options, GraphOptions),
+				Format::graph_header(output_file, Identifier, Library, library, GraphOptions),
 				::output_library(Library, Path, Options),
-				Format::graph_footer(output_file, Identifier, Library, library, Options)
+				Format::graph_footer(output_file, Identifier, Library, library, GraphOptions)
 			)
 		).
 
@@ -187,11 +192,12 @@
 		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::file_header(output_file, Library, Options),
 		atom_concat(library_, Library, Identifier),
-		Format::graph_header(output_file, Identifier, Library, library, Options),
+		linking_options(Path, Options, GraphOptions),
+		Format::graph_header(output_file, Identifier, Library, library, GraphOptions),
 		::output_library(Library, Path, Options),
 		::output_externals(Options),
 		::output_edges(Options),
-		Format::graph_footer(output_file, Identifier, Library, library, Options),
+		Format::graph_footer(output_file, Identifier, Library, library, GraphOptions),
 		Format::file_footer(output_file, Library, Options),
 		close(Stream).
 
@@ -236,11 +242,11 @@
 		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::file_header(output_file, Project, Options),
 		atom_concat(files_, Project, Identifier),
-		Format::graph_header(output_file, Identifier, Project, files, Options),
+		Format::graph_header(output_file, Identifier, Project, files, [tooltip(Project)| Options]),
 		::output_files(Files, Options),
 		::output_externals(Options)
 		::output_edges(Options),
-		Format::graph_footer(output_file, Identifier, Project, files, Options),
+		Format::graph_footer(output_file, Identifier, Project, files, [tooltip(Project)| Options]),
 		Format::file_footer(output_file, Project, Options),
 		close(Stream).
 
@@ -596,6 +602,25 @@
 		;	true
 		),
 		variables_to_underscore(Args).
+
+	:- protected(linking_options/3).
+	:- mode(linking_options(+atom, +list(compound), -list(compound)), one).
+	:- info(linking_options/3, [
+		comment is 'Adds url/1 and/or tooltip/1 linking options to the general list of options.',
+		argnames is ['Path', 'Options', 'GraphOptions']
+	]).
+
+	linking_options(Path, Options, LinkingOptions) :-
+		member(omit_path_prefix(Prefix), Options),
+		member(url_protocol(Protocol), Options),
+		(	Protocol \== '',
+			atom_concat(Prefix, Suffix, Path),
+			atom_concat(Protocol, Suffix, URL) ->
+			LinkingOptions = [url(URL)| Options]
+		;	atom_concat(Prefix, Suffix, Path) ->
+			LinkingOptions = [tooltip(Suffix)| Options]
+		;	LinkingOptions = [tooltip(Path)| Options]
+		).
 
 	append([], List, List).
 	append([Head| Tail], List, [Head| Tail2]) :-
