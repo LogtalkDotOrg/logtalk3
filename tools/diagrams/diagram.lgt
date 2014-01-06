@@ -27,7 +27,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/03,
+		date is 2014/01/06,
 		comment is 'Predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
@@ -392,7 +392,7 @@
 	]).
 
 	reset :-
-		::retractall(edge_(_, _, _, _)).
+		::retractall(edge_(_, _, _, _, _)).
 
 	:- protected(output_node/5).
 	:- mode(output_node(+nonvar, +nonvar, +list(nonvar), +atom, +list(compound)), one).
@@ -405,22 +405,22 @@
 		format_object(Format),
 		Format::node(output_file, Identifier, Label, Lines, Kind, Options).
 
-	:- protected(edge/4).
-	:- mode(edge(?nonvar, ?nonvar, ?list(nonvar), ?atom), zero_or_more).
-	:- info(edge/4, [
+	:- protected(edge/5).
+	:- mode(edge(?nonvar, ?nonvar, ?list(nonvar), ?atom, ?list(compound)), zero_or_more).
+	:- info(edge/5, [
 		comment is 'Enumerates, by backtracking, all saved edges.',
-		argnames is ['From', 'To', 'Labels', 'Kind']
+		argnames is ['From', 'To', 'Labels', 'Kind', 'Options']
 	]).
 
-	edge(From, To, Labels, Kind) :-
-		::edge_(From, To, Labels, Kind).
+	edge(From, To, Labels, Kind, Options) :-
+		::edge_(From, To, Labels, Kind, Options).
 
-	:- private(edge_/4).
-	:- dynamic(edge_/4).
-	:- mode(edge_(?nonvar, ?nonvar, ?list(nonvar), ?atom), zero_or_more).
-	:- info(edge_/4, [
+	:- private(edge_/5).
+	:- dynamic(edge_/5).
+	:- mode(edge_(?nonvar, ?nonvar, ?list(nonvar), ?atom, ?list(compound)), zero_or_more).
+	:- info(edge_/5, [
 		comment is 'Table of saved edges.',
-		argnames is ['From', 'To', 'Labels', 'Kind']
+		argnames is ['From', 'To', 'Labels', 'Kind', 'Options']
 	]).
 
 	:- protected(output_edges/1).
@@ -430,10 +430,10 @@
 		argnames is ['Options']
 	]).
 
-	output_edges(Options) :-
+	output_edges(_Options) :-
 		format_object(Format),
-		::retract(edge_(From, To, Labels, Kind)),
-		Format::edge(output_file, From, To, Labels, Kind, Options),
+		::retract(edge_(From, To, Labels, Kind, EdgeOptions)),
+		Format::edge(output_file, From, To, Labels, Kind, EdgeOptions),
 		fail.
 	output_edges(_).
 
@@ -446,8 +446,8 @@
 
 	save_edge(From, To, Labels, Kind, Options) :-
 		(	member(relation_labels(true), Options) ->
-			::assertz(edge_(From, To, Labels, Kind))
-		;	::assertz(edge_(From, To, [], Kind))
+			::assertz(edge_(From, To, Labels, Kind, Options))
+		;	::assertz(edge_(From, To, [], Kind, Options))
 		).
 
 	:- protected(not_excluded_file/3).

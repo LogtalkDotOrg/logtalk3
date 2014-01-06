@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/03,
+		date is 2014/01/06,
 		comment is 'Predicates for generating entity diagrams.',
 		parnames is ['Format']
 	]).
@@ -119,21 +119,21 @@
 			^^ground_entity_identifier(object, Entity, Name),
 			(	\+ instantiates_class(Entity, _),
 				\+ specializes_class(Entity, _) ->
-				^^output_node(Name, Name, [], external_prototype, Options)
-			;	^^output_node(Name, Name, [], external_instance_or_class, Options)
+				^^output_node(Name, Name, [], external_prototype, [tooltip(prototype)| Options])
+			;	^^output_node(Name, Name, [], external_instance_or_class, [tooltip('instance/class')| Options])
 			)
 		;	current_category(Entity) ->
 			^^ground_entity_identifier(category, Entity, Name),
-			^^output_node(Name, Name, [], external_category, Options)
+			^^output_node(Name, Name, [], external_category, [tooltip(category)| Options])
 		;	% current_protocol(Entity),
 			^^ground_entity_identifier(protocol, Entity, Name),
-			^^output_node(Name, Name, [], external_protocol, Options)
+			^^output_node(Name, Name, [], external_protocol, [tooltip(protocol)| Options])
 		),
 		fail.
 	output_externals(Options) :-
 		retract(referenced_module_(Module)),
 		^^ground_entity_identifier(module, Module, Name),
-		^^output_node(Name, Name, [], external_module, Options),
+		^^output_node(Name, Name, [], external_module, [tooltip(module)| Options]),
 		fail.
 	output_externals(Options) :-
 		^^format_object(Format),
@@ -176,7 +176,7 @@
 			protocol_property(Protocol, public(Resources))
 		;	Resources = []
 		),
-		^^output_node(Name, Name, Resources, protocol, Options),
+		^^output_node(Name, Name, Resources, protocol, [tooltip(protocol)| Options]),
 		output_protocol_relations(Protocol, Options).
 
 	output_object(Object, Options) :-
@@ -187,8 +187,8 @@
 		),
 		(	\+ instantiates_class(Object, _),
 			\+ specializes_class(Object, _) ->
-			^^output_node(Name, Name, Resources, prototype, Options)
-		;	^^output_node(Name, Name, Resources, instance_or_class, Options)
+			^^output_node(Name, Name, Resources, prototype, [tooltip(prototype)| Options])
+		;	^^output_node(Name, Name, Resources, instance_or_class, [tooltip('instance/class')| Options])
 		),
 		output_object_relations(Object, Options).
 
@@ -198,7 +198,7 @@
 			category_property(Category, public(Resources))
 		;	Resources = []
 		),
-		^^output_node(Name, Name, Resources, category, Options),
+		^^output_node(Name, Name, Resources, category, [tooltip(category)| Options]),
 		output_category_relations(Category, Options).
 
 	output_module(Module, Options) :-
@@ -207,7 +207,7 @@
 			prolog_modules_diagram_support::module_property(Module, exports(Resources))
 		;	Resources = []
 		),
-		^^output_node(Name, Name, Resources, module, Options).
+		^^output_node(Name, Name, Resources, module, [tooltip(module)| Options]).
 
 	output_protocol_relations(Protocol, Options) :-
 		(	member(inheritance_relations(true), Options) ->
@@ -225,7 +225,7 @@
 		extends_protocol(Protocol, ExtendedProtocol),
 		^^ground_entity_identifier(protocol, Protocol, ProtocolName),
 		^^ground_entity_identifier(protocol, ExtendedProtocol, ExtendedProtocolName),
-		^^save_edge(ProtocolName, ExtendedProtocolName, [extends], extends_protocol, Options),
+		^^save_edge(ProtocolName, ExtendedProtocolName, [extends], extends_protocol, [tooltip(extends)| Options]),
 		remember_referenced_entity(ExtendedProtocol),
 		fail.
 	output_protocol_inheritance_relations(_, _).
@@ -236,8 +236,8 @@
 		\+ referenced_entity_(Other),
 		^^ground_entity_identifier(protocol, Protocol, ProtocolName),
 		^^ground_entity_identifier(object, Other, OtherName),
-		\+ ^^edge(ProtocolName, OtherName, [uses], calls_predicate),
-		^^save_edge(ProtocolName, OtherName, [uses], calls_predicate, Options),
+		\+ ^^edge(ProtocolName, OtherName, [uses], calls_predicate, _),
+		^^save_edge(ProtocolName, OtherName, [uses], calls_predicate, [tooltip(uses)| Options]),
 		remember_referenced_entity(Other),
 		fail.
 	output_protocol_cross_reference_relations(Protocol, Options) :-
@@ -246,8 +246,8 @@
 		\+ referenced_module_(Module),
 		^^ground_entity_identifier(protocol, Protocol, ProtocolName),
 		^^ground_entity_identifier(module, Module, ModuleName),
-		\+ ^^edge(ProtocolName, ModuleName, [use_module], calls_predicate),
-		^^save_edge(ProtocolName, ModuleName, [use_module], calls_predicate, Options),
+		\+ ^^edge(ProtocolName, ModuleName, [use_module], calls_predicate, _),
+		^^save_edge(ProtocolName, ModuleName, [use_module], calls_predicate, [tooltip(use_module)| Options]),
 		remember_referenced_module(Module),
 		fail.
 	output_protocol_cross_reference_relations(_, _).
@@ -260,7 +260,7 @@
 		),
 		^^ground_entity_identifier(protocol, Protocol, ProtocolName),
 		^^ground_entity_identifier(object, Other, OtherName),
-		^^save_edge(ProtocolName, OtherName, Predicates, calls_predicate, Options),
+		^^save_edge(ProtocolName, OtherName, Predicates, calls_predicate, [tooltip(calls)| Options]),
 		remember_referenced_entity(Other),
 		fail.
 	output_protocol_cross_reference_calls(Protocol, Options) :-
@@ -271,7 +271,7 @@
 		),
 		^^ground_entity_identifier(protocol, Protocol, ProtocolName),
 		^^ground_entity_identifier(module, Module, ModuleName),
-		^^save_edge(ProtocolName, ModuleName, Predicates, calls_predicate, Options),
+		^^save_edge(ProtocolName, ModuleName, Predicates, calls_predicate, [tooltip(calls)| Options]),
 		remember_referenced_module(Module),
 		fail.
 	output_protocol_cross_reference_calls(_, _).
@@ -292,35 +292,35 @@
 		implements_protocol(Object, Protocol),
 		^^ground_entity_identifier(object, Object, ObjectName),
 		^^ground_entity_identifier(protocol, Protocol, ProtocolName),
-		^^save_edge(ObjectName, ProtocolName, [implements], implements_protocol, Options),
+		^^save_edge(ObjectName, ProtocolName, [implements], implements_protocol, [tooltip(implements)| Options]),
 		remember_referenced_entity(Protocol),
 		fail.
 	output_object_inheritance_relations(Instance, Options) :-
 		instantiates_class(Instance, Class),
 		^^ground_entity_identifier(object, Instance, InstanceName),
 		^^ground_entity_identifier(object, Class, ClassName),
-		^^save_edge(InstanceName, ClassName, [instantiates], instantiates_class, Options),
+		^^save_edge(InstanceName, ClassName, [instantiates], instantiates_class, [tooltip(instantiates)| Options]),
 		remember_referenced_entity(Class),
 		fail.
 	output_object_inheritance_relations(Class, Options) :-
 		specializes_class(Class, SuperClass),
 		^^ground_entity_identifier(object, Class, ClassName),
 		^^ground_entity_identifier(object, SuperClass, SuperClassName),
-		^^save_edge(ClassName, SuperClassName, [specializes], specializes_class, Options),
+		^^save_edge(ClassName, SuperClassName, [specializes], specializes_class, [tooltip(specializes)| Options]),
 		remember_referenced_entity(SuperClass),
 		fail.
 	output_object_inheritance_relations(Prototype, Options) :-
 		extends_object(Prototype, Parent),
 		^^ground_entity_identifier(object, Prototype, PrototypeName),
 		^^ground_entity_identifier(object, Parent, ParentName),
-		^^save_edge(PrototypeName, ParentName, [extends], extends_object, Options),
+		^^save_edge(PrototypeName, ParentName, [extends], extends_object, [tooltip(extends)| Options]),
 		remember_referenced_entity(Parent),
 		fail.
 	output_object_inheritance_relations(Object, Options) :-
 		imports_category(Object, Category),
 		^^ground_entity_identifier(object, Object, ObjectName),
 		^^ground_entity_identifier(category, Category, CategoryName),
-		^^save_edge(ObjectName, CategoryName, [imports], imports_category, Options),
+		^^save_edge(ObjectName, CategoryName, [imports], imports_category, [tooltip(imports)| Options]),
 		remember_referenced_entity(Category),
 		fail.
 	output_object_inheritance_relations(_, _).
@@ -330,8 +330,8 @@
 		nonvar(Other),
 		^^ground_entity_identifier(object, Object, ObjectName),
 		^^ground_entity_identifier(object, Other, OtherName),
-		\+ ^^edge(ObjectName, OtherName, [uses], calls_predicate),
-		^^save_edge(ObjectName, OtherName, [uses], calls_predicate, Options),
+		\+ ^^edge(ObjectName, OtherName, [uses], calls_predicate, _),
+		^^save_edge(ObjectName, OtherName, [uses], calls_predicate, [tooltip(uses)| Options]),
 		remember_referenced_entity(Other),
 		fail.
 	output_object_cross_reference_relations(Object, Options) :-
@@ -340,8 +340,8 @@
 		\+ referenced_module_(Module),
 		^^ground_entity_identifier(object, Object, ObjectName),
 		^^ground_entity_identifier(module, Module, ModuleName),
-		\+ ^^edge(ObjectName, ModuleName, [use_module], calls_predicate),
-		^^save_edge(ObjectName, ModuleName, [use_module], calls_predicate, Options),
+		\+ ^^edge(ObjectName, ModuleName, [use_module], calls_predicate, _),
+		^^save_edge(ObjectName, ModuleName, [use_module], calls_predicate, [tooltip(use_module)| Options]),
 		remember_referenced_module(Module),
 		fail.
 	output_object_cross_reference_relations(_, _).
@@ -354,7 +354,7 @@
 		),
 		^^ground_entity_identifier(object, Object, ObjectName),
 		^^ground_entity_identifier(object, Other, OtherName),
-		^^save_edge(ObjectName, OtherName, Predicates, calls_predicate, Options),
+		^^save_edge(ObjectName, OtherName, Predicates, calls_predicate, [tooltip(calls)| Options]),
 		remember_referenced_entity(Other),
 		fail.
 	output_object_cross_reference_calls(Object, Options) :-
@@ -365,7 +365,7 @@
 		),
 		^^ground_entity_identifier(object, Object, ObjectName),
 		^^ground_entity_identifier(module, Module, ModuleName),
-		^^save_edge(ObjectName, ModuleName, Predicates, calls_predicate, Options),
+		^^save_edge(ObjectName, ModuleName, Predicates, calls_predicate, [tooltip(calls)| Options]),
 		remember_referenced_module(Module),
 		fail.
 	output_object_cross_reference_calls(_, _).
@@ -386,21 +386,21 @@
 		extends_category(Category, ExtendedCategory),
 		^^ground_entity_identifier(category, Category, CategoryName),
 		^^ground_entity_identifier(category, ExtendedCategory, ExtendedCategoryName),
-		^^save_edge(CategoryName, ExtendedCategoryName, [extends], extends_category, Options),
+		^^save_edge(CategoryName, ExtendedCategoryName, [extends], extends_category, [tooltip(extends)| Options]),
 		remember_referenced_entity(ExtendedCategory),
 		fail.
 	output_category_inheritance_relations(Category, Options) :-
 		implements_protocol(Category, Protocol),
 		^^ground_entity_identifier(category, Category, CategoryName),
 		^^ground_entity_identifier(protocol, Protocol, ProtocolName),
-		^^save_edge(CategoryName, ProtocolName, [implements], implements_protocol, Options),
+		^^save_edge(CategoryName, ProtocolName, [implements], implements_protocol, [tooltip(implements)| Options]),
 		remember_referenced_entity(Protocol),
 		fail.
 	output_category_inheritance_relations(Category, Options) :-
 		complements_object(Category, Object),
 		^^ground_entity_identifier(category, Category, CategoryName),
 		^^ground_entity_identifier(object, Object, ObjectName),
-		^^save_edge(ObjectName, CategoryName, [complements], complements_object, Options),
+		^^save_edge(ObjectName, CategoryName, [complements], complements_object, [tooltip(complements)| Options]),
 		remember_referenced_entity(Object),
 		fail.
 	output_category_inheritance_relations(_, _).
@@ -411,8 +411,8 @@
 		\+ referenced_entity_(Object),
 		^^ground_entity_identifier(category, Category, CategoryName),
 		^^ground_entity_identifier(object, Object, ObjectName),
-		\+ ^^edge(CategoryName, ObjectName, [uses], calls_predicate),
-		^^save_edge(CategoryName, ObjectName, [uses], calls_predicate, Options),
+		\+ ^^edge(CategoryName, ObjectName, [uses], calls_predicate, _),
+		^^save_edge(CategoryName, ObjectName, [uses], calls_predicate, [tooltip(uses)| Options]),
 		remember_referenced_entity(Object),
 		fail.
 	output_category_cross_reference_relations(Category, Options) :-
@@ -421,8 +421,8 @@
 		\+ referenced_module_(Module),
 		^^ground_entity_identifier(category, Category, CategoryName),
 		^^ground_entity_identifier(module, Module, ModuleName),
-		\+ ^^edge(CategoryName, ModuleName, [use_module], calls_predicate),
-		^^save_edge(CategoryName, ModuleName, [use_module], calls_predicate, Options),
+		\+ ^^edge(CategoryName, ModuleName, [use_module], calls_predicate, _),
+		^^save_edge(CategoryName, ModuleName, [use_module], calls_predicate, [tooltip(use_module)| Options]),
 		remember_referenced_module(Module),
 		fail.
 	output_category_cross_reference_relations(_, _).
@@ -435,7 +435,7 @@
 		),
 		^^ground_entity_identifier(category, Category, CategoryName),
 		^^ground_entity_identifier(object, Object, ObjectName),
-		^^save_edge(CategoryName, ObjectName, Predicates, calls_predicate, Options),
+		^^save_edge(CategoryName, ObjectName, Predicates, calls_predicate, [tooltip(calls)| Options]),
 		remember_referenced_entity(Object),
 		fail.
 	output_category_cross_reference_calls(Category, Options) :-
@@ -446,7 +446,7 @@
 		),
 		^^ground_entity_identifier(category, Category, CategoryName),
 		^^ground_entity_identifier(module, Module, ModuleName),
-		^^save_edge(CategoryName, ModuleName, Predicates, calls_predicate, Options),
+		^^save_edge(CategoryName, ModuleName, Predicates, calls_predicate, [tooltip(calls)| Options]),
 		remember_referenced_module(Module),
 		fail.
 	output_category_cross_reference_calls(_, _).

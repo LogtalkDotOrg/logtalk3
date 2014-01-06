@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/03,
+		date is 2014/01/06,
 		comment is 'Generates entity diagram DOT files for source files and libraries.'
 	]).
 
@@ -110,7 +110,7 @@
 	graph_style_margin_color(file, rounded, 10, snow).
 	graph_style_margin_color(external, rounded, 10, white).
 
-	node(Stream, Identifier, Label, Contents, Kind, _Options) :-
+	node(Stream, Identifier, Label, Contents, Kind, Options) :-
 		node_shape_style_color(Kind, Shape, Style, Color),
 		write(Stream, '"'),
 		write(Stream, Identifier),
@@ -118,6 +118,12 @@
 		write(Stream, Shape),
 		write(Stream, ',style='),
 		write(Stream, Style),
+		(	member(tooltip(Tooltip), Options) ->
+			write(Stream, ',tooltip="'),
+			write(Stream, Tooltip),
+			write(Stream, '"')
+		;	true
+		),
 		write(Stream, ',fillcolor="'),
 		write(Stream, Color),
 		write(Stream, '",label=<<B>'),
@@ -143,7 +149,7 @@
 	node_shape_style_color(external_module, tab, '"filled,dashed"', gainsboro).
 	node_shape_style_color(external_file, box, '"filled,dashed"', turquoise).
 
-	edge(Stream, Start, End, Labels, Kind, _Options) :-
+	edge(Stream, Start, End, Labels, Kind, Options) :-
 		edge_arrow(Kind, ArrowHead),
 		write(Stream, '"'),
 		write(Stream, Start),
@@ -151,6 +157,12 @@
 		write(Stream, End),
 		write(Stream, '" [arrowhead='),
 		write(Stream, ArrowHead),
+		(	member(tooltip(Tooltip), Options) ->
+			write(Stream, ',tooltip="'),
+			write(Stream, Tooltip),
+			write(Stream, '"')
+		;	true
+		),
 		write(Stream, ',label=<'),
 		write_lines(Labels, Stream),
 		write(Stream, '>]\n').
