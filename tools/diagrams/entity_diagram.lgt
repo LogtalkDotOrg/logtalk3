@@ -78,13 +78,16 @@
 		file(Source, []).
 
 	output_file(File, Basename, Directory, Options) :-
-		^^format_object(Format),
-		% use the full path for the cluster identifier as we
-		% can have more than file with the same basename
-		atom_concat(file_, File, Identifier),
-		Format::graph_header(output_file, Identifier, Basename, file, Options),
-		process(Basename, Directory, Options),
-		Format::graph_footer(output_file, Identifier, Basename, file, Options).
+		(	member(file_labels(true), Options) ->
+			^^format_object(Format),
+			% use the full path for the cluster identifier as we
+			% can have more than file with the same basename
+			atom_concat(file_, File, Identifier),
+			Format::graph_header(output_file, Identifier, Basename, file, Options),
+			process(Basename, Directory, Options),
+			Format::graph_footer(output_file, Identifier, Basename, file, Options)
+		;	process(Basename, Directory, Options)
+		).
 
 	remember_referenced_entity(Entity) :-
 		(	referenced_entity_(Entity) ->
@@ -452,6 +455,8 @@
 	default_option(date(true)).
 	% by default, print entity public predicates:
 	default_option(interface(true)).
+	% by default, print file labels:
+	default_option(file_labels(true)).
 	% by default, write inheritance links:
 	default_option(inheritance_relations(true)).
 	% by default, write cross-referencing links:

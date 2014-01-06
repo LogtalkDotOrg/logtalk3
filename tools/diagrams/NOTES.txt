@@ -114,6 +114,8 @@ generated diagrams. For entity diagrams the options are:
 	print/omit current date (`true` or `false`; default is `true`)
 - `interface(Boolean)`  
 	print/omit public predicates (default depends on the specific diagram)
+- `file_labels(Boolean)`  
+	print/omit file labels (`true` or `false`; default is `true`)
 - `relation_labels(Boolean)`  
 	print/omit entity relation labels (`true` or `false`; default is `true`)
 - `inheritance_relations(Boolean)`  

@@ -37,6 +37,8 @@
 	default_option(date(true)).
 	% by default, print entity public predicates:
 	default_option(interface(false)).
+	% by default, print file labels:
+	default_option(file_labels(true)).
 	% by default, write inheritance links:
 	default_option(inheritance_relations(true)).
 	% by default, write cross-referencing links:
