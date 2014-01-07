@@ -26,10 +26,10 @@
 	implements(graphp)).
 
 	:- info([
-		version is 2.0,
+		version is 0.1,
 		author is 'Paulo Moura',
-		date is 2014/01/06,
-		comment is 'Generates entity diagram GXL files for source files and libraries.'
+		date is 2014/01/07,
+		comment is 'Predicates for generating graph files in the GXL language.'
 	]).
 
  	:- multifile(diagram(_)::format_object/2).
@@ -46,5 +46,17 @@
 	file_footer(Stream, _Identifier, _Options) :-
 		write(Stream, '  </graph>\n'),
 		write(Stream, '</gxl>\n').
+
+	graph_header(Stream, Identifier, Label, Kind, Options) :-
+		fail.
+
+	graph_footer(Stream, _Identifier, _Label, _Kind, _Options) :-
+		fail.
+
+	node(Stream, Identifier, Label, Contents, Kind, Options) :-
+		fail.
+
+	edge(Stream, Start, End, Labels, Kind, Options) :-
+		fail.
 
 :- end_object.

@@ -26,10 +26,10 @@
 	implements(graphp)).
 
 	:- info([
-		version is 2.0,
+		version is 0.1,
 		author is 'Paulo Moura',
-		date is 2014/01/06,
-		comment is 'Generates entity diagram GraphML files for source files and libraries.'
+		date is 2014/01/07,
+		comment is 'Predicates for generating graph files in the GraphML language.'
 	]).
 
  	:- multifile(diagram(_)::format_object/2).
@@ -48,20 +48,20 @@
 		write(Stream, '<key id="label" for="node" attr.name="label" attr.type="string"/>\n'),
 		write(Stream, '<key id="lines" for="node" attr.name="lines" attr.type="string"/>\n'),
 		write(Stream, '<key id="kind" for="edge" attr.name="kind" attr.type="string"/>\n'),
-		write(Stream, '<key id="label" for="edge" attr.name="label" attr.type="string"/>\n').
+		write(Stream, '<key id="labels" for="edge" attr.name="labels" attr.type="string"/>\n').
 
 	file_footer(Stream, _Identifier, _Options) :-
 		write(Stream, '</graphml>\n').
 
-	graph_header(Stream, Identifier, _Label, _Options) :-
+	graph_header(Stream, Identifier, Label, Kind, Options) :-
 		write(Stream, '<graph id="'),
 		write(Stream, Identifier),
 		write(Stream, '" edgedefault="undirected">\n').
 
-	graph_footer(Stream, _Identifier, _Label, _Options) :-
+	graph_footer(Stream, _Identifier, _Label, _Kind, _Options) :-
 		write(Stream, '</graph>\n\n').
 
-	node(Stream, Identifier, Label, Lines, Kind, _Options) :-
+	node(Stream, Identifier, Label, Contents, Kind, Options) :-
 		write(Stream, '    <node id="'),
 		write(Stream, Identifier),
 		write(Stream, '">\n'),
@@ -72,11 +72,11 @@
 		write(Stream, Label),
 		write(Stream, '</data>\n'),
 		write(Stream, '        <data key="lines">'),
-		write(Stream, Lines),
+		write(Stream, Contents),
 		write(Stream, '</data>\n'),
 		write(Stream, '    </node>\n').
 
-	edge(Stream, Start, End, Label, Kind, _Options) :-
+	edge(Stream, Start, End, Labels, Kind, Options) :-
 		write(Stream, '    <edge source="'),
 		write(Stream, Start),
 		write(Stream, '" target="'),
@@ -86,7 +86,7 @@
 		write(Stream, Kind),
 		write(Stream, '</data>\n'),
 		write(Stream, '        <data key="label">'),
-		write(Stream, Label),
+		write(Stream, Labels),
 		write(Stream, '</data>\n'),
 		write(Stream, '    </edge>\n').
 
