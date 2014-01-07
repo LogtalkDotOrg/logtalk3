@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/06,
+		date is 2014/01/07,
 		comment is 'Predicates for generating entity diagrams.',
 		parnames is ['Format']
 	]).
@@ -224,10 +224,11 @@
 		).
 
 	output_protocol_inheritance_relations(Protocol, Options) :-
-		extends_protocol(Protocol, ExtendedProtocol),
+		extends_protocol(Protocol, ExtendedProtocol, Scope),
 		^^ground_entity_identifier(protocol, Protocol, ProtocolName),
 		^^ground_entity_identifier(protocol, ExtendedProtocol, ExtendedProtocolName),
-		^^save_edge(ProtocolName, ExtendedProtocolName, [extends], extends_protocol, [tooltip(extends)| Options]),
+		scope_relation_label(Scope, extends, Label),
+		^^save_edge(ProtocolName, ExtendedProtocolName, [Label], extends_protocol, [tooltip(Label)| Options]),
 		remember_referenced_entity(ExtendedProtocol),
 		fail.
 	output_protocol_inheritance_relations(_, _).
@@ -291,38 +292,43 @@
 		).
 
 	output_object_inheritance_relations(Object, Options) :-
-		implements_protocol(Object, Protocol),
+		implements_protocol(Object, Protocol, Scope),
 		^^ground_entity_identifier(object, Object, ObjectName),
 		^^ground_entity_identifier(protocol, Protocol, ProtocolName),
-		^^save_edge(ObjectName, ProtocolName, [implements], implements_protocol, [tooltip(implements)| Options]),
+		scope_relation_label(Scope, implements, Label),
+		^^save_edge(ObjectName, ProtocolName, [Label], implements_protocol, [tooltip(Label)| Options]),
 		remember_referenced_entity(Protocol),
 		fail.
 	output_object_inheritance_relations(Instance, Options) :-
-		instantiates_class(Instance, Class),
+		instantiates_class(Instance, Class, Scope),
 		^^ground_entity_identifier(object, Instance, InstanceName),
 		^^ground_entity_identifier(object, Class, ClassName),
-		^^save_edge(InstanceName, ClassName, [instantiates], instantiates_class, [tooltip(instantiates)| Options]),
+		scope_relation_label(Scope, instantiates, Label),
+		^^save_edge(InstanceName, ClassName, [Label], instantiates_class, [tooltip(Label)| Options]),
 		remember_referenced_entity(Class),
 		fail.
 	output_object_inheritance_relations(Class, Options) :-
-		specializes_class(Class, SuperClass),
+		specializes_class(Class, SuperClass, Scope),
 		^^ground_entity_identifier(object, Class, ClassName),
 		^^ground_entity_identifier(object, SuperClass, SuperClassName),
-		^^save_edge(ClassName, SuperClassName, [specializes], specializes_class, [tooltip(specializes)| Options]),
+		scope_relation_label(Scope, specializes, Label),
+		^^save_edge(ClassName, SuperClassName, [Label], specializes_class, [tooltip(Label)| Options]),
 		remember_referenced_entity(SuperClass),
 		fail.
 	output_object_inheritance_relations(Prototype, Options) :-
-		extends_object(Prototype, Parent),
+		extends_object(Prototype, Parent, Scope),
 		^^ground_entity_identifier(object, Prototype, PrototypeName),
 		^^ground_entity_identifier(object, Parent, ParentName),
-		^^save_edge(PrototypeName, ParentName, [extends], extends_object, [tooltip(extends)| Options]),
+		scope_relation_label(Scope, extends, Label),
+		^^save_edge(PrototypeName, ParentName, [Label], extends_object, [tooltip(Label)| Options]),
 		remember_referenced_entity(Parent),
 		fail.
 	output_object_inheritance_relations(Object, Options) :-
-		imports_category(Object, Category),
+		imports_category(Object, Category, Scope),
 		^^ground_entity_identifier(object, Object, ObjectName),
 		^^ground_entity_identifier(category, Category, CategoryName),
-		^^save_edge(ObjectName, CategoryName, [imports], imports_category, [tooltip(imports)| Options]),
+		scope_relation_label(Scope, imports, Label),
+		^^save_edge(ObjectName, CategoryName, [Label], imports_category, [tooltip(Label)| Options]),
 		remember_referenced_entity(Category),
 		fail.
 	output_object_inheritance_relations(_, _).
@@ -385,17 +391,19 @@
 		).
 
 	output_category_inheritance_relations(Category, Options) :-
-		extends_category(Category, ExtendedCategory),
+		extends_category(Category, ExtendedCategory, Scope),
 		^^ground_entity_identifier(category, Category, CategoryName),
 		^^ground_entity_identifier(category, ExtendedCategory, ExtendedCategoryName),
-		^^save_edge(CategoryName, ExtendedCategoryName, [extends], extends_category, [tooltip(extends)| Options]),
+		scope_relation_label(Scope, extends, Label),
+		^^save_edge(CategoryName, ExtendedCategoryName, [Label], extends_category, [tooltip(Label)| Options]),
 		remember_referenced_entity(ExtendedCategory),
 		fail.
 	output_category_inheritance_relations(Category, Options) :-
-		implements_protocol(Category, Protocol),
+		implements_protocol(Category, Protocol, Scope),
 		^^ground_entity_identifier(category, Category, CategoryName),
 		^^ground_entity_identifier(protocol, Protocol, ProtocolName),
-		^^save_edge(CategoryName, ProtocolName, [implements], implements_protocol, [tooltip(implements)| Options]),
+		scope_relation_label(Scope, implements, Label),
+		^^save_edge(CategoryName, ProtocolName, [Label], implements_protocol, [tooltip(Label)| Options]),
 		remember_referenced_entity(Protocol),
 		fail.
 	output_category_inheritance_relations(Category, Options) :-
@@ -452,6 +460,12 @@
 		remember_referenced_module(Module),
 		fail.
 	output_category_cross_reference_calls(_, _).
+
+	scope_relation_label(public, Relation, Relation).
+	scope_relation_label(protected, Relation, Label) :-
+		atom_concat(Relation, ' (protected)', Label).
+	scope_relation_label(private, Relation, Label) :-
+		atom_concat(Relation, ' (private)', Label).
 
 	% by default, print current date:
 	default_option(date(true)).
