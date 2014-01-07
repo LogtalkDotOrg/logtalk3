@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/11/20,
+		date is 2014/01/07,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -90,19 +90,21 @@
 	% entity compilation messages
 
 	logtalk::message_tokens(compiling_entity(Type, Entity), core) -->
-		{copy_term(Entity, EntityCopy), numbervars(EntityCopy, 0, _)},
+		{ground_term_copy(Entity, GroundEntity)},
 		(	{current_logtalk_flag(debug, on)} ->
-			['- compiling ~w ~w in debug mode ... '-[Type, EntityCopy], nl]
-		;	['- compiling ~w ~w ... '-[Type, EntityCopy], nl]
+			['- compiling ~w ~w in debug mode ... '-[Type, GroundEntity], nl]
+		;	['- compiling ~w ~w ... '-[Type, GroundEntity], nl]
 		).
 	logtalk::message_tokens(compiled_entity(_Type, _Entity), core) -->
 		['compiled'-[], nl].
 
 	logtalk::message_tokens(redefining_entity(Type, Entity), core) -->
-		['Redefining ~w ~q'-[Type, Entity], nl].
+		{ground_term_copy(Entity, GroundEntity)},
+		['Redefining ~w ~q'-[Type, GroundEntity], nl].
 
 	logtalk::message_tokens(redefining_entity_from_file(File, Lines, Type, Entity, OldFile), core) -->
-		['Redefining ~w ~q (loaded from file ~w)'-[Type, Entity, OldFile], nl],
+		{ground_term_copy(Entity, GroundEntity)},
+		['Redefining ~w ~q (loaded from file ~w)'-[Type, GroundEntity, OldFile], nl],
 		message_context(File, Lines).
 
 	% make messages
@@ -293,7 +295,7 @@
 		message_context(File, Lines).
 
 	logtalk::message_tokens(unclassified_variables_in_lambda_expression(File, Lines, Type, Entity, UnqualifiedVars, LambdaExpression), core) -->
-		{copy_term(UnqualifiedVars-LambdaExpression, UnqualifiedVarsCopy-LambdaExpressionCopy), numbervars(LambdaExpressionCopy, 0, _)},
+		{ground_term_copy(UnqualifiedVars-LambdaExpression, UnqualifiedVarsCopy-LambdaExpressionCopy)},
 		(	{UnqualifiedVarsCopy = [UnqualifiedVarCopy]} ->
 			['Unclassified variable ~q in lambda expression: ~q'-[UnqualifiedVarCopy, LambdaExpressionCopy], nl]
 		;	['Unclassified variables ~q in lambda expression: ~q'-[UnqualifiedVarsCopy, LambdaExpressionCopy], nl]
@@ -301,7 +303,7 @@
 		message_context(File, Lines, Type, Entity).
 
 	logtalk::message_tokens(variables_with_dual_role_in_lambda_expression(File, Lines, Type, Entity, MixedUpVars, LambdaExpression), core) -->
-		{copy_term(MixedUpVars-LambdaExpression, MixedUpVarsCopy-LambdaExpressionCopy), numbervars(LambdaExpressionCopy, 0, _)},
+		{ground_term_copy(MixedUpVars-LambdaExpression, MixedUpVarsCopy-LambdaExpressionCopy)},
 		(	{MixedUpVarsCopy = [MixedUpVarCopy]} ->
 			['Variable ~q have dual role in lambda expression: ~q'-[MixedUpVarCopy, LambdaExpressionCopy], nl]
 		;	['Variables ~q have dual role in lambda expression: ~q'-[MixedUpVarsCopy, LambdaExpressionCopy], nl]
@@ -512,14 +514,14 @@
 		['~q'-[Functor//Arity]].
 
 	message_context(File, Type, Entity) -->
-		{copy_term(Entity, EntityCopy), numbervars(EntityCopy, 0, _)},
-		['  in file ~w'-[File], nl, '  while compiling ~w ~q'-[Type, EntityCopy], nl].
+		{ground_term_copy(Entity, GroundEntity)},
+		['  in file ~w'-[File], nl, '  while compiling ~w ~q'-[Type, GroundEntity], nl].
 
 	message_context(File, Lines, Type, Entity) -->
-		{copy_term(Entity, EntityCopy), numbervars(EntityCopy, 0, _)},
+		{ground_term_copy(Entity, GroundEntity)},
 		(	{Lines = Line-Line} ->
-			['  in file ~w above line ~d'-[File, Line], nl, '  while compiling ~w ~q'-[Type, EntityCopy], nl]
-		;	['  in file ~w between lines ~w'-[File, Lines], nl, '  while compiling ~w ~q'-[Type, EntityCopy], nl]
+			['  in file ~w above line ~d'-[File, Line], nl, '  while compiling ~w ~q'-[Type, GroundEntity], nl]
+		;	['  in file ~w between lines ~w'-[File, Lines], nl, '  while compiling ~w ~q'-[Type, GroundEntity], nl]
 		).
 
 	message_context(File, Lines) -->
@@ -530,5 +532,9 @@
 
 	message_context(File) -->
 		['  in file ~w'-[File], nl].
+
+	ground_term_copy(Term, GroundTerm) :-
+		copy_term(Term, GroundTerm),
+		numbervars(GroundTerm, 0, _).
 
 :- end_category.

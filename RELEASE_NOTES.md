@@ -39,6 +39,9 @@ control constructs. Thanks to Andreas Becker for the bug report.
 * FIXED: Bug where the directory from which a settings file have been loaded
 would not be reported.
 
+* FIXED: Messages where reporting a parametric entity would print internal
+variable names.
+
 Tools
 -----
 
