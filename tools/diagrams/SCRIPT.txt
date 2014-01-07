@@ -27,7 +27,7 @@ ________________________________________________________________________
 ...
 
 
-% check the default list of options used when generating a entity diagram:
+% check the default options used when generating a entity diagram:
 
 | ?- entity_diagram(dot)::default_options(DefaultOptions).
 DefaultOptions = ...
@@ -65,5 +65,19 @@ yes
 yes
 
 
-% the methods all/1, rlibrary/2, library/2, files/2, and file/2 allows
-% the specification of the options to be used when generating a diagram
+% all methods that generate a diagram have a variant that allows the
+% specification of the options to be used when generating a diagram
+
+
+% when generating a diagram for public publishing, it's often possible
+% to shorten file paths in order to remove a user-dependent prefix:
+
+| ?- file_diagram::library(searching, [omit_path_prefix('/Users/jdoe/logtalk/')]).
+yes
+
+% some final output formats such as SVG support tooltips and URL links;
+% the URL protocol can be specified so that clicking in a node or a
+% cluster of nodes opens the corresponding file or library of files:
+
+| ?- entity_diagram::library(searching, [url_protocol('file:///'), omit_path_prefix('/Users/jdoe/logtalk/')]).
+yes
