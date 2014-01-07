@@ -94,6 +94,11 @@ proprietary `(=@=)/2` built-in predicate in its implementation of the
 `variant/2` predicate due to inconsistent results when there are shared
 variables between the arguments.
 
+Examples
+--------
+
+* IMPROVED: Documentation and sample queries of the `named_databases` example.
+
 
 3.00.0 Alpha 32 - December 18, 2013
 ===================================

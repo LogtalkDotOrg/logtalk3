@@ -14,6 +14,52 @@ ________________________________________________________________________
 ...
 
 
-% :
+% create a new named database:
 
-| ?- 
+| ?- db_create(my_db).
+yes
+
+
+% add some facts to the new database:
+
+| ?- db_dynamic(my_db, foo/1).
+yes
+
+| ?- db_assertz(my_db, foo(1)), db_assertz(my_db, foo(2)), db_assertz(my_db, foo(3)).
+yes
+
+
+% prove goals using the named database:
+
+| ?- db_call(my_db, foo(X)).
+X = 1 ;
+X = 2 ;
+X = 3
+yes
+
+
+% save all dynamic predicates in the database to a file:
+
+| ?- db_save(my_db, 'my_db.pl').
+yes
+
+
+% clear the named database:
+
+| ?- db_clear(my_db).
+yes
+
+
+% load the saved file into a different database:
+
+| ?- db_create(foo_db), db_load(foo_db, 'my_db.pl').
+yes
+
+
+% check that the saved facts are there by retracting them one by one:
+
+| ?- db_retract(foo_db, foo(X)).
+X = 1 ;
+X = 2 ;
+X = 3
+yes
