@@ -22,13 +22,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(file_diagram(Format),
+:- object(file_load_diagram(Format),
 	imports(diagram(Format))).
 
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/06,
+		date is 2014/01/08,
 		comment is 'Predicates for generating file loading dependency diagrams.',
 		parnames is ['Format']
 	]).
@@ -134,7 +134,7 @@
 	% by default, don't exclude any library sub-directories:
 	default_option(exclude_libraries([])).
 
-	diagram_name_suffix('_file_diagram').
+	diagram_name_suffix('_file_load_diagram').
 
 	member(Option, [Option| _]) :-
 		!.
@@ -145,13 +145,13 @@
 
 
 
-:- object(file_diagram,
-	extends(file_diagram(dot))).
+:- object(file_load_diagram,
+	extends(file_load_diagram(dot))).
 
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/01,
+		date is 2014/01/08,
 		comment is 'Predicates for generating file loading dependency diagrams in DOT format.'
 	]).
 

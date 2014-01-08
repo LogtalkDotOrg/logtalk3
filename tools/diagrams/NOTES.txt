@@ -24,11 +24,12 @@ ________________________________________________________________________
 To load this tool and for sample queries, please see the `SCRIPT.txt`
 file.
 
-This tool generates entity diagrams and file loading dependency diagrams for
-source files and for libraries of source files using the Logtalk reflection
-features to collect the relevant information and a graph language for
-representing the diagrams. Currently only the DOT language is supported (see
-<http://www.graphviz.org/> for more information in this graph language).
+This tool generates entity diagrams and file diagrams for source files
+and for libraries of source files using the Logtalk reflection features
+to collect the relevant information and a graph language for representing
+the diagrams. Currently only the DOT language is supported (visit the
+<http://www.graphviz.org/> website for more information in this graph
+language).
 
 The following entity diagrams are supported:
 
@@ -37,6 +38,12 @@ relations and entity predicate call cross-reference relations
 - call diagrams showing entity predicate cross-reference calls
 - inheritance diagrams showing entity inheritance relations
 - uses diagrams showing predicate call cross-reference relations
+
+The following file diagrams are supported:
+
+- file loading dependency diagrams showing which files load other files
+- file uses diagrams showing which files contain entities that call
+predicates of entities defined in other files
 
 Limitations in both the graph language and UML forces the invention of a
 modeling language that can represent all kinds of Logtalk entities and
@@ -82,8 +89,8 @@ simply type:
 	dot -Tpdf diagram.dot > diagram.pdf
 
 This usually works fine for entity and predicate call cross-referencing
-diagrams. For file loading dependency diagrams, the `circo` command-line
-executable often produces better results:
+diagrams. For file diagrams, the `circo` command-line executable often
+produces better results:
 
 	circo -Tpdf diagram.dot > diagram.pdf
 
@@ -143,7 +150,7 @@ generated diagrams. For entity diagrams the options are:
 - `url_protocol(Protocol)`  
 	URL protocol used when generating cluster links (default is `''`, i.e. none)
 
-For file loading dependency diagrams the options are:
+For file diagrams the options are:
 
 - `date(Boolean)`  
 	print/omit current date (`true` or `false`; default is `true`)
@@ -172,9 +179,9 @@ or files for which you want to generated diagrams.
 Support for displaying Prolog modules and Prolog module files in diagrams:
 
 - ECLiPSe  
-	file loading dependency diagrams don't display module files
+	file diagrams don't display module files
 - SICStus Prolog  
-	file loading dependency diagrams don't display module files
+	file diagrams don't display module files
 - SWI-Prolog  
 	full support
 - YAP  
