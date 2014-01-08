@@ -26,10 +26,11 @@ file.
 
 This tool generates entity diagrams and file loading dependency diagrams for
 source files and for libraries of source files using the Logtalk reflection
-features to collect the relevant information and a graph language (e.g. DOT)
-for representing the diagrams.
+features to collect the relevant information and a graph language for
+representing the diagrams. Currently only the DOT language is supported (see
+<http://www.graphviz.org/> for more information in this graph language).
 
-Several entity diagrams are supported, including:
+The following entity diagrams are supported:
 
 - entity diagrams showing entity public interfaces, entity inheritance
 relations and entity predicate call cross-reference relations
@@ -74,17 +75,22 @@ The entities that are not part of the files or libraries for which you are
 generating a diagram use a dashed border.
 
 The diagrams `.dot` files are created on the current directory by default.
-These files can be easily converted into a printable format such as PDF
+These files can be easily converted into a printable format such as SVG, PDF,
 or Postscript. For example, using the `dot` command-line executable we can
 simply type:
 
 	dot -Tpdf diagram.dot > diagram.pdf
 
-This usaully works fine for entity and predicate call cross-referencing
+This usually works fine for entity and predicate call cross-referencing
 diagrams. For file loading dependency diagrams, the `circo` command-line
 executable often produces better results:
 
 	circo -Tpdf diagram.dot > diagram.pdf
+
+Some output formats such as SVG support tooltips and URL links, which can
+be used for showing e.g. entity types, relation types, file paths, and for
+navigating to files and directories of files (libraries). See the relevant
+diagram options below in order to take advantage of these features.
 
 When generating diagrams for libraries, is possible to split a diagram with
 several disconnected entity graphs using the `ccomps` command-line executable.
