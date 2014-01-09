@@ -45,6 +45,10 @@ The following file diagrams are supported:
 - file uses diagrams showing which files contain entities that call
 predicates of entities defined in other files
 
+File uses diagrams are specially useful in revealing file dependencies
+that are not represented in file loading diagrams due to files being
+loaded indirectly by files external to the libraries being documented. 
+
 Limitations in both the graph language and UML forces the invention of a
 modeling language that can represent all kinds of Logtalk entities and
 entity relations. Currently we use the following DOT shapes (entities)

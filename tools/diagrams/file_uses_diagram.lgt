@@ -23,12 +23,12 @@
 
 
 :- object(file_uses_diagram(Format),
-	extends(file_diagram(Format))).
+	imports(file_diagram(Format))).
 
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/08,
+		date is 2014/01/09,
 		comment is 'Predicates for generating file contents dependency diagrams.',
 		parnames is ['Format']
 	]).

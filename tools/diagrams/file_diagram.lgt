@@ -1,11 +1,11 @@
 
-:- object(file_diagram(Format),
-	imports(diagram(Format))).
+:- category(file_diagram(Format),
+	extends(diagram(Format))).
 
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/08,
+		date is 2014/01/09,
 		comment is 'Predicates for generating file diagrams.',
 		parnames is ['Format']
 	]).
@@ -85,4 +85,4 @@
 	member(Option, [_| Options]) :-
 		member(Option, Options).
 
-:- end_object.
+:- end_category.
