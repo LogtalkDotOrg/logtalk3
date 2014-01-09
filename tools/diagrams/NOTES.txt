@@ -42,10 +42,10 @@ relations and entity predicate call cross-reference relations
 The following file diagrams are supported:
 
 - file loading dependency diagrams showing which files load other files
-- file uses diagrams showing which files contain entities that call
+- file depends diagrams showing which files contain entities that call
 predicates of entities defined in other files
 
-File uses diagrams are specially useful in revealing file dependencies
+File depends diagrams are specially useful in revealing file dependencies
 that are not represented in file loading diagrams due to files being
 loaded indirectly by files external to the libraries being documented. 
 
@@ -81,6 +81,8 @@ and arrows (entity relations):
 
 - file loading relations  
 	`normal` (arrow ending with a black triangle)
+- file dependency relations  
+	`rdiamond` (arrow ending with a black half diamond)
 
 The entities that are not part of the files or libraries for which you are
 generating a diagram use a dashed border.

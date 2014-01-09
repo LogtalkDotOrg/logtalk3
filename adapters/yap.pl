@@ -459,8 +459,8 @@
 % compile and load a Prolog file, resulting from a
 % Logtalk source file, given a list of options
 
-'$lgt_load_prolog_code'(File, _, Options) :-
-	load_files(File, Options).
+'$lgt_load_prolog_code'(File, Source, Options) :-
+	load_files(File, [derived_from(Source)| Options]).
 
 
 % '$lgt_file_modification_time'(+atom, -nonvar)

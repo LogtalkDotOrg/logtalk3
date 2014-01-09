@@ -22,14 +22,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(file_uses_diagram(Format),
+:- object(file_depends_diagram(Format),
 	imports(file_diagram(Format))).
 
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2014/01/09,
-		comment is 'Predicates for generating file contents dependency diagrams.',
+		comment is 'Predicates for generating file contents dependency diagrams. A dependency exists when an entity in one file makes a reference to an entity in another file.',
 		parnames is ['Format']
 	]).
 
@@ -50,9 +50,9 @@
 		\+ ^^edge(Path, OtherPath, _, _, _),
 		(	Kind == module ->
 			^^remember_referenced_prolog_file(OtherPath),
-			^^save_edge(Path, OtherPath, [use_module], calls_predicate, [tooltip(use_module)| Options])
+			^^save_edge(Path, OtherPath, [depends], depends_on_file, [tooltip(depends)| Options])
 		;	^^remember_referenced_logtalk_file(OtherPath),
-			^^save_edge(Path, OtherPath, [uses], calls_predicate, [tooltip(uses)| Options])
+			^^save_edge(Path, OtherPath, [depends], depends_on_file, [tooltip(depends)| Options])
 		),
 		fail.		
 	output_file(_, _, _, _).
@@ -133,7 +133,7 @@
 	% by default, don't exclude any library sub-directories:
 	default_option(exclude_libraries([])).
 
-	diagram_name_suffix('_file_uses_diagram').
+	diagram_name_suffix('_file_depends_diagram').
 
 	member(Option, [Option| _]) :-
 		!.
@@ -144,8 +144,8 @@
 
 
 
-:- object(file_uses_diagram,
-	extends(file_uses_diagram(dot))).
+:- object(file_depends_diagram,
+	extends(file_depends_diagram(dot))).
 
 	:- info([
 		version is 2.0,
