@@ -32,6 +32,7 @@
 		call_diagram,
 		inheritance_diagram,
 		uses_diagram,
+		file_diagram,
 		file_load_diagram,
 		file_uses_diagram
 		], [optimize(on)]),

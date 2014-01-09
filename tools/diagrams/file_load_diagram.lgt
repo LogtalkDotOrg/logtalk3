@@ -23,7 +23,7 @@
 
 
 :- object(file_load_diagram(Format),
-	imports(diagram(Format))).
+	extends(file_diagram(Format))).
 
 	:- info([
 		version is 2.0,
@@ -32,15 +32,6 @@
 		comment is 'Predicates for generating file loading dependency diagrams.',
 		parnames is ['Format']
 	]).
-
-	:- private(included_file_/1).
-	:- dynamic(included_file_/1).
-
-	:- private(referenced_logtalk_file_/1).
-	:- dynamic(referenced_logtalk_file_/1).
-
-	:- private(referenced_prolog_file_/1).
-	:- dynamic(referenced_prolog_file_/1).
 
 	output_file(Path, Basename, Directory, Options) :-
 		^^linking_options(Path, Options, LinkingOptions),
@@ -52,70 +43,19 @@
 			)
 		;	^^output_node(Path, Basename, [], file, LinkingOptions)
 		),
-		assertz(included_file_(Path)),
+		^^remember_included_file(Path),
 		fail.
 	output_file(Path, _, _, Options) :-
 		logtalk::loaded_file_property(Other, parent(Path)),
-		remember_referenced_logtalk_file(Other),
+		^^remember_referenced_logtalk_file(Other),
 		^^save_edge(Path, Other, [loads], loads_file, [tooltip(loads)| Options]),
 		fail.
 	output_file(Path, _, _, Options) :-
 		prolog_modules_diagram_support::source_file_property(Other, parent(Path)),
-		remember_referenced_prolog_file(Other),
+		^^remember_referenced_prolog_file(Other),
 		^^save_edge(Path, Other, [loads], loads_file, [tooltip(loads)| Options]),
 		fail.
 	output_file(_, _, _, _).
-
-	remember_referenced_logtalk_file(Path) :-
-		(	referenced_logtalk_file_(Path) ->
-			true
-		;	assertz(referenced_logtalk_file_(Path))
-		).
-
-	remember_referenced_prolog_file(Path) :-
-		(	referenced_prolog_file_(Path) ->
-			true
-		;	assertz(referenced_prolog_file_(Path))
-		).
-
-	reset :-
-		^^reset,
-		retractall(included_file_(_)),
-		retractall(referenced_logtalk_file_(_)),
-		retractall(referenced_prolog_file_(_)).
-
-	output_externals(_Options) :-
-		retract(included_file_(Path)),
-		retractall(referenced_logtalk_file_(Path)),
-		retractall(referenced_prolog_file_(Path)),
-		fail.
-	output_externals(Options) :-
-		^^format_object(Format),
-		Format::graph_header(output_file, other, '(external files)', external, [tooltip('(external files)')| Options]),
-		retract(referenced_logtalk_file_(Path)),
-		logtalk::loaded_file_property(Path, directory(Directory)),
-		logtalk::loaded_file_property(Path, basename(Basename)),
-		member(omit_path_prefix(Prefix), Options),
-		^^linking_options(Path, Options, LinkingOptions),
-		(	atom_concat(Prefix, Relative, Directory) ->
-			^^output_node(Path, Basename, [Relative], external_file, LinkingOptions)
-		;	^^output_node(Path, Basename, [Directory], external_file, LinkingOptions)
-		),
-		fail.
-	output_externals(Options) :-
-		retract(referenced_prolog_file_(Path)),
-		prolog_modules_diagram_support::source_file_property(Path, directory(Directory)),
-		prolog_modules_diagram_support::source_file_property(Path, basename(Basename)),
-		member(omit_path_prefix(Prefix), Options),
-		^^linking_options(Path, Options, LinkingOptions),
-		(	atom_concat(Prefix, Relative, Directory) ->
-			^^output_node(Path, Basename, [Relative], external_file, LinkingOptions)
-		;	^^output_node(Path, Basename, [Directory], external_file, LinkingOptions)
-		),
-		fail.
-	output_externals(Options) :-
-		^^format_object(Format),
-		Format::graph_footer(output_file, other, '(external files)', external, [tooltip('(external files)')| Options]).
 
 	% by default, don't generate cluster URLs:
 	default_option(url_protocol('')).
