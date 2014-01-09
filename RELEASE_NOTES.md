@@ -42,6 +42,9 @@ would not be reported.
 * FIXED: Messages where reporting a parametric entity would print internal
 variable names.
 
+* FIXED: A category parameter access bug when the category is indirectly
+imported by an object due to the use of extended categories.
+
 Tools
 -----
 

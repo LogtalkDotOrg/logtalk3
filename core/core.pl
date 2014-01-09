@@ -15661,9 +15661,28 @@ current_logtalk_flag(Flag, Value) :-
 % and be used e.g. to hold definitions for multifile predicates
 
 '$lgt_category_parameter'(This, Ctg, Arg, Value) :-
-	(	'$lgt_imports_category_'(This, Ctg, _) ->
+	(	'$lgt_connect_object_to_category'(This, Ctg) ->
 		arg(Arg, Ctg, Value)
 	;	arg(Arg, Ctg, Value)
+	).
+
+
+% in the most common case, the object directly imports the category
+'$lgt_connect_object_to_category'(This, Ctg) :-
+	'$lgt_imports_category_'(This, Ctg, _),
+	!.
+% in rare cases, the object imports an intermediate category that
+% extends the category for which we're doing the parameter lookup
+'$lgt_connect_object_to_category'(This, Ctg) :-
+	'$lgt_imports_category_'(This, Ctg0, _),
+	'$lgt_connect_category_to_category'(Ctg0, Ctg).
+
+
+'$lgt_connect_category_to_category'(Ctg0, Ctg) :-
+	(	'$lgt_extends_category_'(Ctg0, Ctg, _) ->
+		true
+	;	'$lgt_extends_category_'(Ctg0, Ctg1, _),
+		'$lgt_connect_category_to_category'(Ctg1, Ctg)
 	).
 
 
