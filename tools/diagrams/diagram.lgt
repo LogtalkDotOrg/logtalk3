@@ -96,7 +96,9 @@
 
 	output_all_libraries(Options) :-
 		format_object(Format),
+		member(exclude_libraries(ExcludedLibraries), Options),
 		logtalk_library_path(Library, _),
+		\+ member(Library, ExcludedLibraries),
 		logtalk::expand_library_path(Library, Directory),
 		\+ \+ logtalk::loaded_file_property(_, directory(Directory)),
 		atom_concat(library_, Library, Identifier),
