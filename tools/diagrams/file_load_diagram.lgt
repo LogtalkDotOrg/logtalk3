@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/09,
+		date is 2014/01/10,
 		comment is 'Predicates for generating file loading dependency diagrams.',
 		parnames is ['Format']
 	]).
@@ -57,14 +57,16 @@
 		fail.
 	output_file(_, _, _, _).
 
+	% by default, diagram title is empty:
+	default_option(title('')).
+	% by default, print current date:
+	default_option(date(true)).
 	% by default, don't generate cluster URLs:
 	default_option(url_protocol('')).
 	% by default, don't omit a path prefix when printing paths:
 	default_option(omit_path_prefix('')).
 	% by default, don't print directory paths:
 	default_option(directory_paths(false)).
-	% by default, print current date:
-	default_option(date(true)).
 	% by default, print relation labels:
 	default_option(relation_labels(true)).
 	% by default, write diagram to the current directory:

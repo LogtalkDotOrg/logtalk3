@@ -33,6 +33,8 @@
 		parnames is ['Format']
 	]).
 
+	% by default, diagram title is empty:
+	default_option(title('')).
 	% by default, print current date:
 	default_option(date(true)).
 	% by default, print entity public predicates:

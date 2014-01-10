@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/09,
+		date is 2014/01/10,
 		comment is 'Predicates for generating file contents dependency diagrams. A dependency exists when an entity in one file makes a reference to an entity in another file.',
 		parnames is ['Format']
 	]).
@@ -116,14 +116,16 @@
 		prolog_modules_diagram_support::source_file_property(Path, basename(Basename)),
 		prolog_modules_diagram_support::source_file_property(Path, directory(Directory)).
 
+	% by default, diagram title is empty:
+	default_option(title('')).
+	% by default, print current date:
+	default_option(date(true)).
 	% by default, don't generate cluster URLs:
 	default_option(url_protocol('')).
 	% by default, don't omit a path prefix when printing paths:
 	default_option(omit_path_prefix('')).
 	% by default, don't print directory paths:
 	default_option(directory_paths(false)).
-	% by default, print current date:
-	default_option(date(true)).
 	% by default, print relation labels:
 	default_option(relation_labels(true)).
 	% by default, write diagram to the current directory:

@@ -129,6 +129,8 @@ the diagrams layout.
 A set of options are available to specify the details to include in the
 generated diagrams. For entity diagrams the options are:
 
+- `title(Title)`  
+	diagram title (an atom; default is `''`)
 - `date(Boolean)`  
 	print/omit current date (`true` or `false`; default is `true`)
 - `interface(Boolean)`  
@@ -146,7 +148,7 @@ generated diagrams. For entity diagrams the options are:
 - `cross_reference_calls(Boolean)`  
 	print/omit predicate cross reference calls (default depends on the specific diagram)
 - `output_directory(Directory)`  
-	directory for the .dot files (an atom; default is `.`)
+	directory for the .dot files (an atom; default is `'./'`)
 - `exclude_files(Files)`  
 	list of source files to exclude (default is `[]`)
 - `exclude_libraries(Libraries)`  
@@ -154,24 +156,26 @@ generated diagrams. For entity diagrams the options are:
 - `exclude_entities(Entities)`  
 	list of entities to exclude (default is `[]`)
 - `omit_path_prefix(Prefix)`  
-	omit a common path prefix when printing directory paths (default is `''`)
+	omit a common path prefix when printing directory paths (an atom; default is `''`)
 - `url_protocol(Protocol)`  
 	URL protocol used when generating cluster links (default is `''`, i.e. none)
 
 For file diagrams the options are:
 
+- `title(Title)`  
+	diagram title (an atom; default is `''`)
 - `date(Boolean)`  
 	print/omit current date (`true` or `false`; default is `true`)
 - `directory_paths(Boolean)`  
 	print/omit file directory paths (`true` or `false`; default is `true`)
 - `omit_path_prefix(Prefix)`  
-	omit a common path prefix when printing directory paths (default is `''`)
+	omit a common path prefix when printing directory paths (an atom; default is `''`)
 - `url_protocol(Protocol)`  
-	URL protocol used when generating cluster links (default is `''`, i.e. none)
+	URL protocol used when generating cluster links (an atom; default is `''`, i.e. none)
 - `relation_labels(Boolean)`  
 	print/omit entity relation labels (`true` or `false`; default is `false`)
 - `output_directory(Directory)`  
-	directory for the `.dot` files (an atom; default is `./`)
+	directory for the .dot files (an atom; default is `'./'`)
 - `exclude_files(Files)`  
 	list of source files to exclude (default is `[]`)
 - `exclude_libraries(Libraries)`  

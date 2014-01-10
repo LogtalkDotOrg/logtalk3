@@ -56,25 +56,38 @@
 		write(Stream, 'pencolor=snow4\n'),
 		write(Stream, 'node [shape=ellipse,style=filled,fillcolor=white,fontname="Courier",fontsize=9]\n'),
 		write(Stream, 'edge [fontname="Courier",fontsize=9]\n'),
-		output_date(Stream, Options),
+		diagram_label(Options, Label),
+		write(Stream, 'label="'),
+		write(Stream, Label),
+		write(Stream, '\n"'),
 		nl(Stream).
 
-	output_date(Stream, Options) :-
+	diagram_label(Options, Label) :-
+		member(title(Title), Options),
+		(	Title \== '' ->
+			atom_concat(Title, '\\l', Label0)
+		;	Label0 = ''
+		),
 		(	member(date(true), Options),
 			catch(os::date_time(Year, Month, Day, Hours, Minutes, _, _), _, fail) ->
+			number_codes(Year, YearCodes),
+			atom_codes(YearAtom, YearCodes),
 			integer_to_padded_atom(Month, PaddedMonth),
 			integer_to_padded_atom(Day, PaddedDay),
 			integer_to_padded_atom(Hours, PaddedHours),
-			integer_to_padded_atom(Minutes, PaddedMinutes),			
-			write(Stream, '\nlabel="Generated on '),
-			write(Stream, Year), write(Stream, '/'),
-			write(Stream, PaddedMonth), write(Stream, '/'),
-			write(Stream, PaddedDay),
-			write(Stream, ', '),
-			write(Stream, PaddedHours), write(Stream, ':'),
-			write(Stream, PaddedMinutes),
-			write(Stream, '"')
-		;	true
+			integer_to_padded_atom(Minutes, PaddedMinutes),
+			atom_concat(Label0, 'Generated on ', Label1),
+			atom_concat(Label1, YearAtom, Label2),
+			atom_concat(Label2, '/', Label3),
+			atom_concat(Label3, PaddedMonth, Label4),
+			atom_concat(Label4, '/', Label5),
+			atom_concat(Label5, PaddedDay, Label6),
+			atom_concat(Label6, ', ', Label7),
+			atom_concat(Label7, PaddedHours, Label8),
+			atom_concat(Label8, ':', Label9),
+			atom_concat(Label9, PaddedMinutes, Label10),
+			atom_concat(Label10, '\\l', Label)
+		;	Label = Label0
 		).
 
 	integer_to_padded_atom(Integer, Atom) :-
