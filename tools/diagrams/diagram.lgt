@@ -147,7 +147,7 @@
 		format_object(Format),
 		member(exclude_libraries(ExcludedLibraries), Options),
 		atom_concat(library_, TopLibrary, TopIdentifier),
-		linking_options(Path, Options, TopGraphOptions),
+		linking_options(TopPath, Options, TopGraphOptions),
 		Format::graph_header(output_file, TopIdentifier, TopLibrary, library, TopGraphOptions),
 		::output_library(TopLibrary, TopPath, Options),
 		Format::graph_footer(output_file, TopIdentifier, TopLibrary, library, TopGraphOptions),
@@ -616,7 +616,7 @@
 	:- protected(linking_options/3).
 	:- mode(linking_options(+atom, +list(compound), -list(compound)), one).
 	:- info(linking_options/3, [
-		comment is 'Adds url/1 and/or tooltip/1 linking options to the general list of options.',
+		comment is 'Adds url/1 and/or tooltip/1 linking options (for use by the graph language) to the general list of options.',
 		argnames is ['Path', 'Options', 'GraphOptions']
 	]).
 
