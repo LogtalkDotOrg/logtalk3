@@ -27,7 +27,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/06,
+		date is 2014/01/10,
 		comment is 'Predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
@@ -587,6 +587,14 @@
 			CategoryName =.. [Functor| Names]
 		).
 	ground_entity_identifier(module, Module, Module).
+	ground_entity_identifier(unknown, Entity, EntityName) :-
+		(	atom(Entity) ->
+			EntityName = Entity
+		;	functor(Entity, Functor, Arity),
+			functor(EntityName, Functor, Arity),
+			EntityName =.. [Functor| Arguments],
+			variables_to_underscore(Arguments)
+		).
 
 	parameter_names(Entity, Info, Names) :-
 		(	member(parnames(Names), Info) ->

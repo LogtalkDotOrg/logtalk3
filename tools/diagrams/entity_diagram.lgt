@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/07,
+		date is 2014/01/10,
 		comment is 'Predicates for generating entity diagrams.',
 		parnames is ['Format']
 	]).
@@ -184,7 +184,13 @@
 	output_object(Object, Options) :-
 		^^ground_entity_identifier(object, Object, Name),
 		(	member(interface(true), Options) ->
-			object_property(Object, public(Resources))
+			object_property(Object, public(PublicPredicates)),
+			findall(
+				To::Predicate,
+				object_property(Object, provides(Predicate, To, _)),
+				MultifilePredicates
+			),
+			append(PublicPredicates, MultifilePredicates, Resources)
 		;	Resources = []
 		),
 		(	\+ instantiates_class(Object, _),
@@ -197,7 +203,13 @@
 	output_category(Category, Options) :-
 		^^ground_entity_identifier(category, Category, Name),
 		(	member(interface(true), Options) ->
-			category_property(Category, public(Resources))
+			category_property(Category, public(PublicPredicates)),
+			findall(
+				To::Predicate,
+				category_property(Category, provides(Predicate, To, _)),
+				MultifilePredicates
+			),
+			append(PublicPredicates, MultifilePredicates, Resources)
 		;	Resources = []
 		),
 		^^output_node(Name, Name, Resources, category, [tooltip(category)| Options]),
@@ -331,6 +343,23 @@
 		^^save_edge(ObjectName, CategoryName, [Label], imports_category, [tooltip(Label)| Options]),
 		remember_referenced_entity(Category),
 		fail.
+	output_object_inheritance_relations(Object, Options) :-
+		setof(
+			Predicate,
+			Properties^object_property(Object, provides(Predicate, To, Properties)),
+			_
+		),
+		^^ground_entity_identifier(object, Object, ObjectName),
+		(	current_object(To) ->
+			^^ground_entity_identifier(object, To, ToName)
+		;	current_category(To) ->
+			^^ground_entity_identifier(category, To, ToName)
+		;	% unknown entity type (entity not loaded)
+			^^ground_entity_identifier(unknown, To, ToName)
+		),
+		^^save_edge(ObjectName, ToName, [provides], provides_clauses, [tooltip(provides)| Options]),
+		remember_referenced_entity(To),
+		fail.
 	output_object_inheritance_relations(_, _).
 
 	output_object_cross_reference_relations(Object, Options) :-
@@ -412,6 +441,23 @@
 		^^ground_entity_identifier(object, Object, ObjectName),
 		^^save_edge(ObjectName, CategoryName, [complements], complements_object, [tooltip(complements)| Options]),
 		remember_referenced_entity(Object),
+		fail.
+	output_category_inheritance_relations(Category, Options) :-
+		setof(
+			Predicate,
+			Properties^category_property(Category, provides(Predicate, To, Properties)),
+			_
+		),
+		^^ground_entity_identifier(category, Category, CategoryName),
+		(	current_object(To) ->
+			^^ground_entity_identifier(object, To, ToName)
+		;	current_category(To) ->
+			^^ground_entity_identifier(category, To, ToName)
+		;	% unknown entity type (entity not loaded)
+			^^ground_entity_identifier(unknown, To, ToName)
+		),
+		^^save_edge(CategoryName, ToName, [provides], provides_clauses, [tooltip(provides)| Options]),
+		remember_referenced_entity(To),
 		fail.
 	output_category_inheritance_relations(_, _).
 
@@ -495,6 +541,10 @@
 	default_option(omit_path_prefix('')).
 
 	diagram_name_suffix('_entity_diagram').
+
+	append([], List, List).
+	append([Head| Tail], List, [Head| Tail2]) :-
+		append(Tail, List, Tail2).
 
 	member(Option, [Option| _]) :-
 		!.

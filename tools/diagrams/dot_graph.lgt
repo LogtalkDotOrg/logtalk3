@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/06,
+		date is 2014/01/10,
 		comment is 'Predicates for generating graph files in the DOT language.'
 	]).
 
@@ -196,6 +196,7 @@
 	edge_arrow(implements_protocol, dot).
 	edge_arrow(imports_category, box).
 	edge_arrow(complements_object, obox).
+	edge_arrow(provides_clauses, inv).
 	edge_arrow(depends_on_file, rdiamond).
 	edge_arrow(loads_file, normal).
 
