@@ -169,13 +169,14 @@
 		),
 		write(Stream, '>]\n').
 
+	% entities belonging to the file or library being documented
 	node_shape_style_color(prototype, box, filled, beige).
 	node_shape_style_color(instance_or_class, box, filled, yellow).
 	node_shape_style_color(protocol, note, filled, aquamarine).
 	node_shape_style_color(category, component, filled, cyan).
 	node_shape_style_color(module, tab, filled, gainsboro).
 	node_shape_style_color(file, box, filled, turquoise).
-
+	% external entities to the file or library being documented
 	node_shape_style_color(external_prototype, box, '"filled,dashed"', beige).
 	node_shape_style_color(external_instance_or_class, box, '"filled,dashed"', yellow).
 	node_shape_style_color(external_protocol, note, '"filled,dashed"', aquamarine).
@@ -201,6 +202,7 @@
 		write_lines(Labels, Stream),
 		write(Stream, '>]\n').
 
+	% entity relations
 	edge_arrow(extends_object, vee).
 	edge_arrow(extends_protocol, vee).
 	edge_arrow(extends_category, vee).
@@ -209,8 +211,12 @@
 	edge_arrow(implements_protocol, dot).
 	edge_arrow(imports_category, box).
 	edge_arrow(complements_object, obox).
+	% multifile predicates
 	edge_arrow(provides_clauses, inv).
-	edge_arrow(depends_on_file, rdiamond).
+	% cross-referencong predicate calls
+	edge_arrow(calls_predicate, rdiamond).
+	% file relations
+	edge_arrow(depends_on_file, normal).
 	edge_arrow(loads_file, normal).
 
 	write_lines([], _).
