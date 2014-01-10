@@ -28,24 +28,26 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/06,
+		date is 2014/01/10,
 		comment is 'Predicates for generating entity inheritance diagrams.',
 		parnames is ['Format']
 	]).
 
 	% by default, print current date:
 	default_option(date(true)).
-	% by default, print entity public predicates:
+	% by default, don't print entity public predicates:
 	default_option(interface(false)).
 	% by default, print file labels:
 	default_option(file_labels(true)).
 	% by default, write inheritance links:
 	default_option(inheritance_relations(true)).
-	% by default, write cross-referencing links:
+	% by default, don't write provide links:
+	default_option(provide_relations(false)).
+	% by default, don't write cross-referencing links:
 	default_option(cross_reference_relations(false)).
 	% by default, print entity relation labels:
 	default_option(relation_labels(true)).
-	% by default, write cross-referencing calls:
+	% by default, don't write cross-referencing calls:
 	default_option(cross_reference_calls(false)).
 	% by default, write diagram to the current directory:
 	default_option(output_directory('./')).

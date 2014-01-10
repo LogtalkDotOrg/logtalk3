@@ -296,6 +296,10 @@
 			output_object_inheritance_relations(Object, Options)
 		;	true
 		),
+		(	member(provide_relations(true), Options) ->
+			output_object_provide_relations(Object, Options)
+		;	true
+		),
 		(	member(cross_reference_relations(true), Options) ->
 			output_object_cross_reference_relations(Object, Options)
 		;	member(cross_reference_calls(true), Options) ->
@@ -343,7 +347,9 @@
 		^^save_edge(ObjectName, CategoryName, [Label], imports_category, [tooltip(Label)| Options]),
 		remember_referenced_entity(Category),
 		fail.
-	output_object_inheritance_relations(Object, Options) :-
+	output_object_inheritance_relations(_, _).
+
+	output_object_provide_relations(Object, Options) :-
 		setof(
 			Predicate,
 			Properties^object_property(Object, provides(Predicate, To, Properties)),
@@ -360,7 +366,7 @@
 		^^save_edge(ObjectName, ToName, [provides], provides_clauses, [tooltip(provides)| Options]),
 		remember_referenced_entity(To),
 		fail.
-	output_object_inheritance_relations(_, _).
+	output_object_provide_relations(_, _).
 
 	output_object_cross_reference_relations(Object, Options) :-
 		object_property(Object, calls(Other::_, _)),
@@ -412,6 +418,10 @@
 			output_category_inheritance_relations(Category, Options)
 		;	true
 		),
+		(	member(provide_relations(true), Options) ->
+			output_category_provide_relations(Category, Options)
+		;	true
+		),
 		(	member(cross_reference_relations(true), Options) ->
 			output_category_cross_reference_relations(Category, Options)
 		;	member(cross_reference_calls(true), Options) ->
@@ -442,7 +452,9 @@
 		^^save_edge(ObjectName, CategoryName, [complements], complements_object, [tooltip(complements)| Options]),
 		remember_referenced_entity(Object),
 		fail.
-	output_category_inheritance_relations(Category, Options) :-
+	output_category_inheritance_relations(_, _).
+
+	output_category_provide_relations(Category, Options) :-
 		setof(
 			Predicate,
 			Properties^category_property(Category, provides(Predicate, To, Properties)),
@@ -459,7 +471,7 @@
 		^^save_edge(CategoryName, ToName, [provides], provides_clauses, [tooltip(provides)| Options]),
 		remember_referenced_entity(To),
 		fail.
-	output_category_inheritance_relations(_, _).
+	output_category_provide_relations(_, _).
 
 	output_category_cross_reference_relations(Category, Options) :-
 		category_property(Category, calls(Object::_, _)),
@@ -521,6 +533,8 @@
 	default_option(file_labels(true)).
 	% by default, write inheritance links:
 	default_option(inheritance_relations(true)).
+	% by default, write provide links:
+	default_option(provide_relations(true)).
 	% by default, write cross-referencing links:
 	default_option(cross_reference_relations(true)).
 	% by default, print entity relation labels:
