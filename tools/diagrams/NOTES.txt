@@ -55,13 +55,13 @@ entity relations. Currently we use the following DOT shapes (entities)
 and arrows (entity relations):
 
 - objects (classes, instances, and prototypes)  
-	`box` (rectangle)
+	`box` (rectangle, yellow for instances/classes and beige for prototypes)
 - protocols  
-	`note` (rectangle with folded right-upper corners)
+	`note` (aqua marine rectangle with folded right-upper corners)
 - categories  
-	`component` (rectangle with two small rectangles intercepting the left side)
+	`component` (cyan rectangle with two small rectangles intercepting the left side)
 - modules  
-	`tab` (rectangle with small tab at top)
+	`tab` (grey rectangle with small tab at top)
 
 - specialization relation  
 	`onormal` (arrow ending with a white triangle)
@@ -82,7 +82,7 @@ and arrows (entity relations):
 - file loading relations  
 	`normal` (arrow ending with a black triangle)
 - file dependency relations  
-	`rdiamond` (arrow ending with a black half diamond)
+	`rdiamond` (arrow ending with a black triangle)
 
 The entities that are not part of the files or libraries for which you are
 generating a diagram use a dashed border.
