@@ -27,7 +27,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/10,
+		date is 2014/01/13,
 		comment is 'Predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
@@ -246,7 +246,7 @@
 		atom_concat(files_, Project, Identifier),
 		Format::graph_header(output_file, Identifier, Project, files, [tooltip(Project)| Options]),
 		::output_files(Files, Options),
-		::output_externals(Options)
+		::output_externals(Options),
 		::output_edges(Options),
 		Format::graph_footer(output_file, Identifier, Project, files, [tooltip(Project)| Options]),
 		Format::file_footer(output_file, Project, Options),
