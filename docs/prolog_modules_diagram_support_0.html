@@ -3,15 +3,15 @@
 <?xml-stylesheet href="logtalk.css" type="text/css"?><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <title>file_diagram(Format)</title>
+    <title>prolog_modules_diagram_support</title>
     <link rel="stylesheet" href="logtalk.css" type="text/css"/>
   </head>
   <body>
     <div class="header">
-      <p class="type">category</p>
-      <h1 class="code">file_diagram(Format)</h1>
+      <p class="type">object</p>
+      <h1 class="code">prolog_modules_diagram_support</h1>
       <blockquote>
-        <p class="comment">Predicates for generating file diagrams.</p>
+        <p class="comment">Utility predicates for supporting Prolog modules in diagrams.</p>
       </blockquote>
     </div>
     <div class="entity">
@@ -23,92 +23,76 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>2.0</code>
+            <code>0.2</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2014/1/9</code>
+            <code>2014/1/4</code>
           </dd>
         </dl>
         <dl class="properties">
           <dt class="key">compilation flags:</dt>
           <dd class="value">
-            <code>static</code>
+            <code>static, context_switching_calls</code>
           </dd>
         </dl>
-        <dl class="relations">
-          <dt class="key">extends:</dt>
-          <dd class="value">
-            <code>public <a href="diagram_1.html">diagram(Format)</a></code>
-          </dd>
-        </dl>
+        <p class="comment">(no dependencies on other files)</p>
       </div>
     </div>
     <div class="predicates">
       <div class="public">
         <h2>Public interface</h2>
         <div class="section">
-          <p class="comment">(see related entities)</p>
+          <h3 class="code">module_property/2</h3>
+          <blockquote>
+            <p class="comment">Access to module properties, at least exports/1 and file/1.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>module_property(Module,Property)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>module_property(?atom,?callable) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">source_file_property/2</h3>
+          <blockquote>
+            <p class="comment">Access to loaded source file properties, at least basename/1, directory/1, and parent/1.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>source_file_property(File,Property)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>source_file_property(?atom,?callable) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
         </div>
       </div>
       <div class="protected">
         <h2>Protected interface</h2>
         <div class="section">
-          <h3 class="code">remember_included_file/1</h3>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 class="code">remember_referenced_logtalk_file/1</h3>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 class="code">remember_referenced_prolog_file/1</h3>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-          </dl>
+          <p class="comment">(none)</p>
         </div>
       </div>
       <div class="private">
         <h2>Private predicates</h2>
         <div class="section">
-          <h3 class="code">included_file_/1</h3>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>dynamic</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 class="code">referenced_logtalk_file_/1</h3>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>dynamic</code>
-            </dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 class="code">referenced_prolog_file_/1</h3>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>dynamic</code>
-            </dd>
-          </dl>
+          <p class="comment">(none)</p>
         </div>
       </div>
     </div>

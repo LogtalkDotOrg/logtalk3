@@ -11,7 +11,7 @@
       <p class="type">protocol</p>
       <h1 class="code">graphp</h1>
       <blockquote>
-        <p class="comment">Description</p>
+        <p class="comment">Predicates for generating graph files.</p>
       </blockquote>
     </div>
     <div class="entity">
@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2014/1/1</code>
+            <code>2014/1/6</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -63,7 +63,7 @@
           </dl>
         </div>
         <div class="section">
-          <h3 class="code">output_file_header/2</h3>
+          <h3 class="code">file_header/3</h3>
           <blockquote>
             <p class="comment">Writes the output file header using the specified options.</p>
           </blockquote>
@@ -74,16 +74,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>output_file_header(Stream,Options)</code>
+              <code>file_header(Stream,Identifier,Options)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>output_file_header(+stream_or_alias,+list(compound)) &ndash; one</code>
+              <code>file_header(+stream_or_alias,+atom,+list(compound)) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 class="code">output_file_footer/2</h3>
+          <h3 class="code">file_footer/3</h3>
           <blockquote>
             <p class="comment">Writes the output file footer using the specified options.</p>
           </blockquote>
@@ -94,11 +94,11 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>output_file_footer(Stream,Options)</code>
+              <code>file_footer(Stream,Identifier,Options)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>output_file_footer(+stream_or_alias,+list(compound)) &ndash; one</code>
+              <code>file_footer(+stream_or_alias,+atom,+list(compound)) &ndash; one</code>
             </dd>
           </dl>
         </div>

@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2014/1/3</code>
+            <code>2014/1/10</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -514,7 +514,7 @@
           </dl>
         </div>
         <div class="section">
-          <h3 class="code">edge/4</h3>
+          <h3 class="code">edge/5</h3>
           <blockquote>
             <p class="comment">Enumerates, by backtracking, all saved edges.</p>
           </blockquote>
@@ -525,11 +525,11 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>edge(From,To,Labels,Kind)</code>
+              <code>edge(From,To,Labels,Kind,Options)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>edge(?nonvar,?nonvar,?list(nonvar),?atom) &ndash; zero_or_more</code>
+              <code>edge(?nonvar,?nonvar,?list(nonvar),?atom,?list(compound)) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
@@ -673,11 +673,31 @@
             </dd>
           </dl>
         </div>
+        <div class="section">
+          <h3 class="code">linking_options/3</h3>
+          <blockquote>
+            <p class="comment">Adds url/1 and/or tooltip/1 linking options (for use by the graph language) to the general list of options.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>linking_options(Path,Options,GraphOptions)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>linking_options(+atom,+list(compound),-list(compound)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
       </div>
       <div class="private">
         <h2>Private predicates</h2>
         <div class="section">
-          <h3 class="code">edge_/4</h3>
+          <h3 class="code">edge_/5</h3>
           <blockquote>
             <p class="comment">Table of saved edges.</p>
           </blockquote>
@@ -688,11 +708,11 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>edge_(From,To,Labels,Kind)</code>
+              <code>edge_(From,To,Labels,Kind,Options)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>edge_(?nonvar,?nonvar,?list(nonvar),?atom) &ndash; zero_or_more</code>
+              <code>edge_(?nonvar,?nonvar,?list(nonvar),?atom,?list(compound)) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
