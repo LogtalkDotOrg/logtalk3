@@ -45,6 +45,13 @@ yes
 yes
 
 
+% generating a predicate call cross-referencing diagram for a source file
+% using default options:
+
+| ?- call_diagram(dot)::file(points).
+yes
+
+
 % load another example for testing:
 
 | ?- logtalk_load(searching(loader)).
@@ -65,10 +72,11 @@ yes
 yes
 
 
-% we can also generate a diagram showing uses (and use_module) relations
-% but abstracting away the file entities:
+% we can also generate a diagram showing dependency relations between
+% files (due to a file containing an entity that refers to an entity
+% in another file):
 
-| ?- file_uses_diagram::library(searching).
+| ?- file_dependency_diagram::library(searching).
 yes
 
 
@@ -79,7 +87,7 @@ yes
 % when generating a diagram for public publishing, it's often possible
 % to shorten file paths in order to remove a user-dependent prefix:
 
-| ?- file_diagram::library(searching, [omit_path_prefix('/Users/jdoe/logtalk/')]).
+| ?- file_dependency_diagram::library(searching, [omit_path_prefix('/Users/jdoe/logtalk/')]).
 yes
 
 % some final output formats such as SVG support tooltips and URL links;
