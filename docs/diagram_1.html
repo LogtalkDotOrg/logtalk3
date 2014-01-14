@@ -11,7 +11,7 @@
       <p class="type">category</p>
       <h1 class="code">diagram(Format)</h1>
       <blockquote>
-        <p class="comment">Predicates for generating diagrams.</p>
+        <p class="comment">Common predicates for generating diagrams.</p>
       </blockquote>
     </div>
     <div class="entity">
@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2014/1/10</code>
+            <code>2014/1/14</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -201,7 +201,7 @@
         <div class="section">
           <h3 class="code">files/3</h3>
           <blockquote>
-            <p class="comment">Creates a diagram for a set of files using the specified options. The file can be given by name, basename, full path, or using library notation.</p>
+            <p class="comment">Creates a diagram for a set of files using the specified options. The file can be specified by name, basename, full path, or using library notation.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -221,7 +221,7 @@
         <div class="section">
           <h3 class="code">files/2</h3>
           <blockquote>
-            <p class="comment">Creates a diagram for a set of files using the default options. The file can be given by name, basename, full path, or using library notation.</p>
+            <p class="comment">Creates a diagram for a set of files using the default options. The file can be specified by name, basename, full path, or using library notation.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -277,7 +277,7 @@
         <div class="section">
           <h3 class="code">format_object/2</h3>
           <blockquote>
-            <p class="comment">Table of graph language formats and their implementation objects.</p>
+            <p class="comment">Table of defined graph languages and their implementation objects.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -297,7 +297,7 @@
         <div class="section">
           <h3 class="code">format_object/1</h3>
           <blockquote>
-            <p class="comment">Returns the identifier of the object implementing the graph language format currently being used. Fails of not format is specified.</p>
+            <p class="comment">Returns the identifier of the object implementing the graph language currently being used. Fails if none is specified.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -317,7 +317,7 @@
         <div class="section">
           <h3 class="code">default_option/1</h3>
           <blockquote>
-            <p class="comment">Returns a list of the default options used when generating a diagram.</p>
+            <p class="comment">Enumerates by backtracking the default options used when generating a diagram.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -380,7 +380,7 @@
         <div class="section">
           <h3 class="code">output_rlibrary/3</h3>
           <blockquote>
-            <p class="comment">Generates diagram output for all sub-libraries of a library.</p>
+            <p class="comment">Generates diagram output for a library and its sub-libraries using the specified options.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -400,7 +400,7 @@
         <div class="section">
           <h3 class="code">output_library/3</h3>
           <blockquote>
-            <p class="comment">Generates diagram output for a library.</p>
+            <p class="comment">Generates diagram output for a library using the specified options.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -420,7 +420,7 @@
         <div class="section">
           <h3 class="code">output_files/2</h3>
           <blockquote>
-            <p class="comment">Generates diagram output for a list of files.</p>
+            <p class="comment">Generates diagram output for a list of files using the specified options.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -440,7 +440,7 @@
         <div class="section">
           <h3 class="code">output_file/4</h3>
           <blockquote>
-            <p class="comment">Generates diagram output for a file.</p>
+            <p class="comment">Generates diagram output for a file using the specified options.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -576,7 +576,7 @@
         <div class="section">
           <h3 class="code">not_excluded_file/3</h3>
           <blockquote>
-            <p class="comment">True when the given file is not excluded from the generated output.</p>
+            <p class="comment">True when the given file is not excluded from the generated output. Excluded files may be specified by full path or by basename and with or without extension.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>

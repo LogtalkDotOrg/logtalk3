@@ -153,7 +153,7 @@
 		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2014/01/08,
-		comment is 'Predicates for generating file dependency diagrams in DOT format.'
+		comment is 'Predicates for generating file contents dependency diagrams in DOT format.'
 	]).
 
 :- end_object.

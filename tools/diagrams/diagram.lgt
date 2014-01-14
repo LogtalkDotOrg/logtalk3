@@ -27,8 +27,8 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/13,
-		comment is 'Predicates for generating diagrams.',
+		date is 2014/01/14,
+		comment is 'Common predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
 
@@ -232,7 +232,7 @@
 	:- public(files/3).
 	:- mode(files(+atom, +list(atom), +list(compound)), one).
 	:- info(files/3, [
-		comment is 'Creates a diagram for a set of files using the specified options. The file can be given by name, basename, full path, or using library notation.',
+		comment is 'Creates a diagram for a set of files using the specified options. The file can be specified by name, basename, full path, or using library notation.',
 		argnames is ['Project', 'Files', 'Options']
 	]).
 
@@ -261,7 +261,7 @@
 	:- public(files/2).
 	:- mode(files(+atom, +list(atom)), one).
 	:- info(files/2, [
-		comment is 'Creates a diagram for a set of files using the default options. The file can be given by name, basename, full path, or using library notation.',
+		comment is 'Creates a diagram for a set of files using the default options. The file can be specified by name, basename, full path, or using library notation.',
 		argnames is ['Project', 'Files']
 	]).
 
@@ -306,15 +306,14 @@
 	:- multifile(format_object/2).
 	:- mode(format_object(?atom, ?object_identifier), zero_or_more).
 	:- info(format_object/2, [
-		comment is 'Table of graph language formats and their implementation objects.',
+		comment is 'Table of defined graph languages and their implementation objects.',
 		argnames is ['Format', 'Object']
 	]).
 
 	:- public(format_object/1).
-	:- multifile(format_object/1).
 	:- mode(format_object(-object_identifier), zero_or_one).
 	:- info(format_object/1, [
-		comment is 'Returns the identifier of the object implementing the graph language format currently being used. Fails of not format is specified.',
+		comment is 'Returns the identifier of the object implementing the graph language currently being used. Fails if none is specified.',
 		argnames is ['Object']
 	]).
 
@@ -326,7 +325,7 @@
 	:- public(default_option/1).
 	:- mode(default_option(?compound), zero_or_more).
 	:- info(default_option/1, [
-		comment is 'Returns a list of the default options used when generating a diagram.',
+		comment is 'Enumerates by backtracking the default options used when generating a diagram.',
 		argnames is ['DefaultOption']
 	]).
 
@@ -362,28 +361,28 @@
 	:- protected(output_rlibrary/3).
 	:- mode(output_rlibrary(+atom, +atom, +list(compound)), one).
 	:- info(output_rlibrary/3, [
-		comment is 'Generates diagram output for all sub-libraries of a library.',
+		comment is 'Generates diagram output for a library and its sub-libraries using the specified options.',
 		argnames is ['Library', 'Path', 'Options']
 	]).
 
 	:- protected(output_library/3).
 	:- mode(output_library(+atom, +atom, +list(compound)), one).
 	:- info(output_library/3, [
-		comment is 'Generates diagram output for a library.',
+		comment is 'Generates diagram output for a library using the specified options.',
 		argnames is ['Library', 'Path', 'Options']
 	]).
 
 	:- protected(output_files/2).
 	:- mode(output_files(+list, +list(compound)), one).
 	:- info(output_files/2, [
-		comment is 'Generates diagram output for a list of files.',
+		comment is 'Generates diagram output for a list of files using the specified options.',
 		argnames is ['Files', 'Options']
 	]).
 
 	:- protected(output_file/4).
 	:- mode(output_file(+atom, +atom, +atom, +list(compound)), one).
 	:- info(output_file/4, [
-		comment is 'Generates diagram output for a file.',
+		comment is 'Generates diagram output for a file using the specified options.',
 		argnames is ['Path', 'Basename', 'Directory', 'Options']
 	]).
 
@@ -462,7 +461,7 @@
 	:- protected(not_excluded_file/3).
 	:- mode(not_excluded_file(+list(atom), +atom, +atom), zero_or_one).
 	:- info(not_excluded_file/3, [
-		comment is 'True when the given file is not excluded from the generated output.',
+		comment is 'True when the given file is not excluded from the generated output. Excluded files may be specified by full path or by basename and with or without extension.',
 		argnames is ['ExcludedFiles', 'Path', 'Basename']
 	]).
 

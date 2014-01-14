@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/10,
+		date is 2014/01/14,
 		comment is 'Predicates for generating entity diagrams.',
 		parnames is ['Format']
 	]).
@@ -36,14 +36,14 @@
 	:- public(file/2).
 	:- mode(file(+atom, +list(compound)), one).
 	:- info(file/2, [
-		comment is 'Creates a diagram for all entities in a loaded source file using the specified options. The file can be given by name, basename, full path, or using library notation.',
+		comment is 'Creates a diagram for all entities in a loaded source file using the specified options. The file can be specified by name, basename, full path, or using library notation.',
 		argnames is ['File', 'Options']
 	]).
 
 	:- public(file/1).
 	:- mode(file(+atom), one).
 	:- info(file/1, [
-		comment is 'Creates a diagram for all entities in a loaded source file using default options. The file can be given by name, basename, full path, or using library notation.',
+		comment is 'Creates a diagram for all entities in a loaded source file using default options. The file can be specified by name, basename, full path, or using library notation.',
 		argnames is ['File']
 	]).
 

@@ -5,8 +5,8 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/09,
-		comment is 'Predicates for generating file diagrams.',
+		date is 2014/01/14,
+		comment is 'Common predicates for generating file diagrams.',
 		parnames is ['Format']
 	]).
 

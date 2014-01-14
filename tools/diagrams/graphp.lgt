@@ -27,15 +27,15 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/06,
+		date is 2014/01/14,
 		comment is 'Predicates for generating graph files.'
 	]).
 
 	:- public(output_file_name/2).
 	:- mode(output_file_name(+atom, -atom), one).
 	:- info(output_file_name/2, [
-		comment is 'Constructs the the diagram file name.',
-		argnames is ['Name', 'File']
+		comment is 'Constructs the diagram file basename by adding a graph language dependent extension to the given name.',
+		argnames is ['Name', 'Basename']
 	]).
 
 	:- public(file_header/3).
