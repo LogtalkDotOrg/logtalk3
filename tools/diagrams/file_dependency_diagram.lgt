@@ -22,13 +22,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(file_depends_diagram(Format),
+:- object(file_dependency_diagram(Format),
 	imports(file_diagram(Format))).
 
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/10,
+		date is 2014/01/14,
 		comment is 'Predicates for generating file contents dependency diagrams. A dependency exists when an entity in one file makes a reference to an entity in another file.',
 		parnames is ['Format']
 	]).
@@ -135,7 +135,10 @@
 	% by default, don't exclude any library sub-directories:
 	default_option(exclude_libraries([])).
 
-	diagram_name_suffix('_file_depends_diagram').
+	diagram_name_suffix('_file_dependency_diagram').
+
+	% auxiliary predicates; we could use the Logtalk standard library but we
+	% prefer to make this object self-contained given its documenting purpose
 
 	member(Option, [Option| _]) :-
 		!.
@@ -146,13 +149,13 @@
 
 
 
-:- object(file_depends_diagram,
-	extends(file_depends_diagram(dot))).
+:- object(file_dependency_diagram,
+	extends(file_dependency_diagram(dot))).
 
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/08,
+		date is 2014/01/14,
 		comment is 'Predicates for generating file contents dependency diagrams in DOT format.'
 	]).
 

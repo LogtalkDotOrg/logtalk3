@@ -80,6 +80,9 @@
 		^^format_object(Format),
 		Format::graph_footer(output_file, other, '(external files)', external, [tooltip('(external files)')| Options]).
 
+	% auxiliary predicates; we could use the Logtalk standard library but we
+	% prefer to make this object self-contained given its documenting purpose
+
 	member(Option, [Option| _]) :-
 		!.
 	member(Option, [_| Options]) :-

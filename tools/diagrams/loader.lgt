@@ -34,7 +34,7 @@
 		uses_diagram,
 		file_diagram,
 		file_load_diagram,
-		file_depends_diagram
+		file_dependency_diagram
 		], [optimize(on)]),
 	logtalk_load([graphp, dot_graph], [optimize(on)])
 )).

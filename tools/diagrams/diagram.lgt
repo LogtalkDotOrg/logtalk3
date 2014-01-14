@@ -631,6 +631,9 @@
 		;	LinkingOptions = [tooltip(Path)| Options]
 		).
 
+	% auxiliary predicates; we could use the Logtalk standard library but we
+	% prefer to make this object self-contained given its documenting purpose
+
 	append([], List, List).
 	append([Head| Tail], List, [Head| Tail2]) :-
 		append(Tail, List, Tail2).
