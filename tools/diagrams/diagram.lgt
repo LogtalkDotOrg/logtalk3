@@ -599,7 +599,7 @@
 		(	member(parnames(Names), Info) ->
 			true
 		;	member(parameters(Parameters), Info) ->
-			pairs::keys(Parameters, Names)
+			keys(Parameters, Names)
 		;	Entity =.. [_| Names],
 			variables_to_underscore(Names)
 		).
@@ -642,5 +642,9 @@
 		!.
 	member(Option, [_| Options]) :-
 		member(Option, Options).
+
+	keys([], []).
+	keys([Key-_| Pairs], [Key| Keys]) :-
+		keys(Pairs, Keys).
 
 :- end_category.

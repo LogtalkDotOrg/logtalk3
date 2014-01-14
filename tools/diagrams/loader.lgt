@@ -23,7 +23,6 @@
 
 
 :- initialization((
-	logtalk_load(library(pairs), [optimize(on)]),
 	logtalk_load([cc(osp), cc(os)], [optimize(on)]),
 	logtalk_load([prolog_modules_diagram_support], [optimize(on)]),
 	logtalk_load([
