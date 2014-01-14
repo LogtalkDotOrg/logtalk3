@@ -48,7 +48,7 @@ yes
 % generating a predicate call cross-referencing diagram for a source file
 % using default options:
 
-| ?- call_diagram(dot)::file(points).
+| ?- xref_diagram(dot)::file(points).
 yes
 
 

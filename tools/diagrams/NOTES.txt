@@ -143,9 +143,9 @@ generated diagrams. For entity diagrams the options are:
 	print/omit inheritance relations (default depends on the specific diagram)
 - `provide_relations(Boolean)`  
 	print/omit provide relations (default depends on the specific diagram)
-- `cross_reference_relations(Boolean)`  
+- `xref_relations(Boolean)`  
 	print/omit predicate call cross reference relations (default depends on the specific diagram)
-- `cross_reference_calls(Boolean)`  
+- `xref_calls(Boolean)`  
 	print/omit predicate cross reference calls (default depends on the specific diagram)
 - `output_directory(Directory)`  
 	directory for the .dot files (an atom; default is `'./'`)

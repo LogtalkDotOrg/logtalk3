@@ -228,10 +228,10 @@
 			output_protocol_inheritance_relations(Protocol, Options)
 		;	true
 		),
-		(	member(cross_reference_relations(true), Options) ->
-			output_protocol_cross_reference_relations(Protocol, Options)
-		;	member(cross_reference_calls(true), Options) ->
-			output_protocol_cross_reference_calls(Protocol, Options)
+		(	member(xref_relations(true), Options) ->
+			output_protocol_xref_relations(Protocol, Options)
+		;	member(xref_calls(true), Options) ->
+			output_protocol_xref_calls(Protocol, Options)
 		;	true
 		).
 
@@ -245,7 +245,7 @@
 		fail.
 	output_protocol_inheritance_relations(_, _).
 
-	output_protocol_cross_reference_relations(Protocol, Options) :-
+	output_protocol_xref_relations(Protocol, Options) :-
 		protocol_property(Protocol, calls(Other::_, _)),
 		nonvar(Other),
 		\+ referenced_entity_(Other),
@@ -255,7 +255,7 @@
 		^^save_edge(ProtocolName, OtherName, [uses], calls_predicate, [tooltip(uses)| Options]),
 		remember_referenced_entity(Other),
 		fail.
-	output_protocol_cross_reference_relations(Protocol, Options) :-
+	output_protocol_xref_relations(Protocol, Options) :-
 		protocol_property(Protocol, calls(':'(Module,_), _)),
 		nonvar(Module),
 		\+ referenced_module_(Module),
@@ -265,9 +265,9 @@
 		^^save_edge(ProtocolName, ModuleName, [use_module], calls_predicate, [tooltip(use_module)| Options]),
 		remember_referenced_module(Module),
 		fail.
-	output_protocol_cross_reference_relations(_, _).
+	output_protocol_xref_relations(_, _).
 
-	output_protocol_cross_reference_calls(Protocol, Options) :-
+	output_protocol_xref_calls(Protocol, Options) :-
 		setof(
 			Predicate,
 			Properties^(protocol_property(Protocol, calls(Other::Predicate, Properties)), nonvar(Other)),
@@ -278,7 +278,7 @@
 		^^save_edge(ProtocolName, OtherName, Predicates, calls_predicate, [tooltip(calls)| Options]),
 		remember_referenced_entity(Other),
 		fail.
-	output_protocol_cross_reference_calls(Protocol, Options) :-
+	output_protocol_xref_calls(Protocol, Options) :-
 		setof(
 			Predicate,
 			Properties^(protocol_property(Protocol, calls(':'(Module,Predicate), Properties)), nonvar(Module)),
@@ -289,7 +289,7 @@
 		^^save_edge(ProtocolName, ModuleName, Predicates, calls_predicate, [tooltip(calls)| Options]),
 		remember_referenced_module(Module),
 		fail.
-	output_protocol_cross_reference_calls(_, _).
+	output_protocol_xref_calls(_, _).
 
 	output_object_relations(Object, Options) :-
 		(	member(inheritance_relations(true), Options) ->
@@ -300,10 +300,10 @@
 			output_object_provide_relations(Object, Options)
 		;	true
 		),
-		(	member(cross_reference_relations(true), Options) ->
-			output_object_cross_reference_relations(Object, Options)
-		;	member(cross_reference_calls(true), Options) ->
-			output_object_cross_reference_calls(Object, Options)
+		(	member(xref_relations(true), Options) ->
+			output_object_xref_relations(Object, Options)
+		;	member(xref_calls(true), Options) ->
+			output_object_xref_calls(Object, Options)
 		;	true
 		).
 
@@ -368,7 +368,7 @@
 		fail.
 	output_object_provide_relations(_, _).
 
-	output_object_cross_reference_relations(Object, Options) :-
+	output_object_xref_relations(Object, Options) :-
 		object_property(Object, calls(Other::_, _)),
 		nonvar(Other),
 		^^ground_entity_identifier(object, Object, ObjectName),
@@ -377,7 +377,7 @@
 		^^save_edge(ObjectName, OtherName, [uses], calls_predicate, [tooltip(uses)| Options]),
 		remember_referenced_entity(Other),
 		fail.
-	output_object_cross_reference_relations(Object, Options) :-
+	output_object_xref_relations(Object, Options) :-
 		object_property(Object, calls(':'(Module,_), _)),
 		nonvar(Module),
 		\+ referenced_module_(Module),
@@ -387,9 +387,9 @@
 		^^save_edge(ObjectName, ModuleName, [use_module], calls_predicate, [tooltip(use_module)| Options]),
 		remember_referenced_module(Module),
 		fail.
-	output_object_cross_reference_relations(_, _).
+	output_object_xref_relations(_, _).
 
-	output_object_cross_reference_calls(Object, Options) :-
+	output_object_xref_calls(Object, Options) :-
 		setof(
 			Predicate,
 			Properties^(object_property(Object, calls(Other::Predicate, Properties)), nonvar(Other)),
@@ -400,7 +400,7 @@
 		^^save_edge(ObjectName, OtherName, Predicates, calls_predicate, [tooltip(calls)| Options]),
 		remember_referenced_entity(Other),
 		fail.
-	output_object_cross_reference_calls(Object, Options) :-
+	output_object_xref_calls(Object, Options) :-
 		setof(
 			Predicate,
 			Properties^(object_property(Object, calls(':'(Module,Predicate), Properties)), nonvar(Module)),
@@ -411,7 +411,7 @@
 		^^save_edge(ObjectName, ModuleName, Predicates, calls_predicate, [tooltip(calls)| Options]),
 		remember_referenced_module(Module),
 		fail.
-	output_object_cross_reference_calls(_, _).
+	output_object_xref_calls(_, _).
 
 	output_category_relations(Category, Options) :-
 		(	member(inheritance_relations(true), Options) ->
@@ -422,10 +422,10 @@
 			output_category_provide_relations(Category, Options)
 		;	true
 		),
-		(	member(cross_reference_relations(true), Options) ->
-			output_category_cross_reference_relations(Category, Options)
-		;	member(cross_reference_calls(true), Options) ->
-			output_category_cross_reference_calls(Category, Options)
+		(	member(xref_relations(true), Options) ->
+			output_category_xref_relations(Category, Options)
+		;	member(xref_calls(true), Options) ->
+			output_category_xref_calls(Category, Options)
 		;	true
 		).
 
@@ -473,7 +473,7 @@
 		fail.
 	output_category_provide_relations(_, _).
 
-	output_category_cross_reference_relations(Category, Options) :-
+	output_category_xref_relations(Category, Options) :-
 		category_property(Category, calls(Object::_, _)),
 		nonvar(Object),
 		\+ referenced_entity_(Object),
@@ -483,7 +483,7 @@
 		^^save_edge(CategoryName, ObjectName, [uses], calls_predicate, [tooltip(uses)| Options]),
 		remember_referenced_entity(Object),
 		fail.
-	output_category_cross_reference_relations(Category, Options) :-
+	output_category_xref_relations(Category, Options) :-
 		category_property(Category, calls(':'(Module,_), _)),
 		nonvar(Module),
 		\+ referenced_module_(Module),
@@ -493,9 +493,9 @@
 		^^save_edge(CategoryName, ModuleName, [use_module], calls_predicate, [tooltip(use_module)| Options]),
 		remember_referenced_module(Module),
 		fail.
-	output_category_cross_reference_relations(_, _).
+	output_category_xref_relations(_, _).
 
-	output_category_cross_reference_calls(Category, Options) :-
+	output_category_xref_calls(Category, Options) :-
 		setof(
 			Predicate,
 			Properties^(category_property(Category, calls(Object::Predicate, Properties)), nonvar(Object)),
@@ -506,7 +506,7 @@
 		^^save_edge(CategoryName, ObjectName, Predicates, calls_predicate, [tooltip(calls)| Options]),
 		remember_referenced_entity(Object),
 		fail.
-	output_category_cross_reference_calls(Category, Options) :-
+	output_category_xref_calls(Category, Options) :-
 		setof(
 			Predicate,
 			Properties^(category_property(Category, calls(':'(Module,Predicate), Properties)), nonvar(Module)),
@@ -517,7 +517,7 @@
 		^^save_edge(CategoryName, ModuleName, Predicates, calls_predicate, [tooltip(calls)| Options]),
 		remember_referenced_module(Module),
 		fail.
-	output_category_cross_reference_calls(_, _).
+	output_category_xref_calls(_, _).
 
 	scope_relation_label(public, Relation, Relation).
 	scope_relation_label(protected, Relation, Label) :-
@@ -538,11 +538,11 @@
 	% by default, write provide links:
 	default_option(provide_relations(true)).
 	% by default, write cross-referencing links:
-	default_option(cross_reference_relations(true)).
+	default_option(xref_relations(true)).
 	% by default, print entity relation labels:
 	default_option(relation_labels(true)).
 	% by default, write cross-referencing calls:
-	default_option(cross_reference_calls(false)).
+	default_option(xref_calls(false)).
 	% by default, write diagram to the current directory:
 	default_option(output_directory('./')).
 	% by default, don't exclude any source files:

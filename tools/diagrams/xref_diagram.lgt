@@ -22,7 +22,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(call_diagram(Format),
+:- object(xref_diagram(Format),
 	extends(entity_diagram(Format))).
 
 	:- info([
@@ -46,11 +46,11 @@
 	% by default, don't write provide links:
 	default_option(provide_relations(false)).
 	% by default, don't write cross-referencing links:
-	default_option(cross_reference_relations(false)).
+	default_option(xref_relations(false)).
 	% by default, print entity relation labels:
 	default_option(relation_labels(true)).
 	% by default, write cross-referencing calls:
-	default_option(cross_reference_calls(true)).
+	default_option(xref_calls(true)).
 	% by default, write diagram to the current directory:
 	default_option(output_directory('./')).
 	% by default, don't exclude any source files:
@@ -64,20 +64,20 @@
 	% by default, don't omit a path prefix when printing paths:
 	default_option(omit_path_prefix('')).
 
-	diagram_name_suffix('_call_diagram').
+	diagram_name_suffix('_xref_diagram').
 
 :- end_object.
 
 
 
-:- object(call_diagram,
-	extends(call_diagram(dot))).
+:- object(xref_diagram,
+	extends(xref_diagram(dot))).
 
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2014/01/01,
-		comment is 'Predicates for generating predicate call diagrams in DOT format.'
+		comment is 'Predicates for generating predicate call cross-referencing diagrams in DOT format.'
 	]).
 
 :- end_object.

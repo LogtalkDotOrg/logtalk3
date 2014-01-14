@@ -46,11 +46,11 @@
 	% by default, don't write provide links:
 	default_option(provide_relations(false)).
 	% by default, write cross-referencing links:
-	default_option(cross_reference_relations(true)).
+	default_option(xref_relations(true)).
 	% by default, print entity relation labels:
 	default_option(relation_labels(true)).
 	% by default, don't write cross-referencing calls:
-	default_option(cross_reference_calls(false)).
+	default_option(xref_calls(false)).
 	% by default, write diagram to the current directory:
 	default_option(output_directory('./')).
 	% by default, don't exclude any source files:

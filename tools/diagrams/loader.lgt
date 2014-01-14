@@ -28,7 +28,7 @@
 	logtalk_load([
 		diagram,
 		entity_diagram,
-		call_diagram,
+		xref_diagram,
 		inheritance_diagram,
 		uses_diagram,
 		file_diagram,
