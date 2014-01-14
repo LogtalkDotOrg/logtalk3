@@ -25,9 +25,9 @@
 :- object(help).
 
 	:- info([
-		version is 0.12,
+		version is 0.13,
 		author is 'Paulo Moura',
-		date is 2013/12/12,
+		date is 2014/01/14,
 		comment is 'Command-line help for Logtalk built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
@@ -135,7 +135,7 @@
 
 	built_in_directive(calls, 1, '/manuals/refman/directives/', 'calls1.html').
 	built_in_directive(category, N, '/manuals/refman/directives/', 'category1_3.html') :-
-		integer::between(1, 3, N).
+		between(1, 3, N).
 	built_in_directive(dynamic, 0, '/manuals/refman/directives/', 'dynamic0.html').
 	built_in_directive(end_category, 0, '/manuals/refman/directives/', 'end_category0.html').
 	built_in_directive(end_object, 0, '/manuals/refman/directives/', 'end_object0.html').
@@ -143,9 +143,9 @@
 	built_in_directive(info, 1, '/manuals/refman/directives/', 'info1.html').
 	built_in_directive(initialization, 1, '/manuals/refman/directives/', 'initialization1.html').
 	built_in_directive(object, N, '/manuals/refman/directives/', 'object1_5.html') :-
-		integer::between(1, 5, N).
+		between(1, 5, N).
 	built_in_directive(protocol, N, '/manuals/refman/directives/', 'protocol1_2.html') :-
-		integer::between(1, 2, N).
+		between(1, 2, N).
 	built_in_directive(synchronized, 0, '/manuals/refman/directives/', 'synchronized0.html').
 	built_in_directive(threaded, 0, '/manuals/refman/directives/', 'threaded0.html').
 	built_in_directive(uses, 1, '/manuals/refman/directives/', 'uses1.html').
@@ -257,7 +257,7 @@
 	built_in_method(retractall, 1, '/manuals/refman/methods/', 'retractall1.html').
 
 	built_in_method(call, N, '/manuals/refman/methods/', 'callN.html') :-
-		integer::between(1, 8, N).
+		between(1, 8, N).
 	built_in_method(once, 1, '/manuals/refman/methods/', 'once1.html').
 	built_in_method((\+), 1, '/manuals/refman/methods/', 'not1.html').
 
@@ -304,7 +304,7 @@
 	]).
 
 	built_in_non_terminal(call, N, '/manuals/refman/methods/', 'call1.html') :-
-		integer::between(1, 6, N).
+		between(1, 6, N).
 	built_in_non_terminal(phrase, 1, '/manuals/refman/methods/', 'phrase1.html').
 
 	:- public(library/0).
@@ -383,5 +383,13 @@
 		;	ConvertedChar = Char
 		),
 		reverse_slashes(Chars, ConvertedChars).
+
+	% we use a simplified version of the integer::between/3
+	% predicate in order to minimize this tool dependecies
+	between(Lower, _, Lower).
+	between(Lower, Upper, Integer) :-
+		Lower < Upper,
+		Next is Lower + 1,
+		between(Next, Upper, Integer).
 
 :- end_object.

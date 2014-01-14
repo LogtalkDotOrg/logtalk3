@@ -48,6 +48,8 @@ imported by an object due to the use of extended categories.
 Tools
 -----
 
+* CHANGED: The `help` tool to remove a dependency on the standard library.
+
 * NEW: The `diagrams` tool now supports predicate call diagrams with explicit
 listing of all the predicates called between entities, entity inheritance
 diagrams, and entity uses diagrams.

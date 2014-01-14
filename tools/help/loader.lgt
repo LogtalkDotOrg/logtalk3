@@ -23,7 +23,6 @@
 
 
 :- initialization((
-	logtalk_load(library(types_loader)),
 	logtalk_load([cc(osp), cc(os)], [optimize(on)]),
 	logtalk_load(help, [optimize(on)])
 )).
