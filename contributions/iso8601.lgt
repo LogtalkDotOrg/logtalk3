@@ -27,7 +27,8 @@
 			'Week numbers:' - 'It is possible for a day (date) to have a week number that belongs to another year. Up to three of the first days of a calendar year may belong to the last week (number) of the prior calendar year, and up to three days of the last days of a calendar year may belong to the first week (number) of the next calendar year. It for this reason that the Week parameter in date/6-7 is a compound term, namely week(WeekNo,ActualYear).',
 			'Computation of Gregorian Easter Sunday:' - 'The algorithm is based upon the "Gaussian rule". Proleptic use is limited to years > 1582 AD, that is, after the introduction of the Gregorian calendar.',
 			'Some Christian feast day offsets from Easter Sunday:' - 'Carnival Monday: -48 days, Mardi Gras (Shrove Tuesday): -47 days, Ash Wednesday: -46 days, Palm Sunday: -7 days, Easter Friday: -2 days, Easter Saturday: -1 day, Easter Monday: +1 day, Ascension of Christ: +39 days, Whitsunday: +49 days, Whitmonday: +50 days, Feast of Corpus Christi: +60 days.'
-			]]).
+		]
+	]).
 
 	% CORE PREDICATES:
 
@@ -39,7 +40,8 @@
 			'JD' - 'Julian day serial number',
 			'Year' - '0 or negative if converted BC year, positive otherwise',
 			'Month' - 'Normally an integer between 1 and 12 inclusive',
-			'Day' - 'Normally an integer between 1 and 31 inclusive depending upon month'],
+			'Day' - 'Normally an integer between 1 and 31 inclusive depending upon month'
+		],
 		examples is [
 			'Current date (i.e., today):' - date(JD,Y,M,D) - {JD = 2453471, Y = 2005, M = 4, D = 10},
 			'Convert a date to its Julian day number:' - date(JD,2000,2,29) - {JD = 2451604},
@@ -48,7 +50,9 @@
 			'What is the Julian of the 1st day prior to 2000-1-1?' - date(J,2000,1,0) - {J = 2451544},
 			'What is the Julian of the 60th day prior to 2000-1-1?' - date(J,2000,1,-59) - {J = 2451485},
 			'Illegal date is auto-adjusted (see also next query)' - date(JD,1900,2,29) - {JD = 2415080},
-			'This is the correct date!' - date(2415080,Y,M,D) - {Y = 1900, M = 3, D = 1}]]).
+			'This is the correct date!' - date(2415080,Y,M,D) - {Y = 1900, M = 3, D = 1}
+		]
+	]).
 
 	:- public(date/5).
 	:- mode(date(?integer, ?integer, ?integer, ?integer, ?integer), zero_or_one).
@@ -59,12 +63,15 @@
 			'Year' - '0 or negative if converted BC year, positive otherwise',
 			'Month' - 'Normally an integer between 1 and 12 inclusive',
 			'Day' - 'Normally an integer between 1 and 31 inclusive depending upon month',
-			'DoW' - 'Day of week, where Monday=1, Tuesday=2, ..., Sunday=7'],
+			'DoW' - 'Day of week, where Monday=1, Tuesday=2, ..., Sunday=7'
+		],
 		examples is [
 			'Get the Julian and the day-of-week # of a date:' - date(JD,2000,2,29,DoW) - {JD = 2451604, DoW = 2},
 			'Check the validity of a given date (day-of-week is 2, not 4):' - date(JD,2002,3,5,4) - {no},
 			'Get the Julian day of a given date if it is a Sunday:' - date(JD,2004,2,29,7) - {JD = 2453065},
-			'Get the date and day-of-week # of a Julian:' - date(2451545,Y,M,D,DoW) - {Y = 2000, M = 1, D = 1, DoW = 6}]]).
+			'Get the date and day-of-week # of a Julian:' - date(2451545,Y,M,D,DoW) - {Y = 2000, M = 1, D = 1, DoW = 6}
+		]
+	]).
 
 	:- public(date/6).
 	:- mode(date(?integer, ?integer, ?integer, ?integer, ?integer, ?compound), zero_or_one).
@@ -76,7 +83,8 @@
 			'Month' - 'Normally an integer between 1 and 12 inclusive',
 			'Day' - 'Normally an integer between 1 and 31 inclusive depending upon month',
 			'DoW' - 'Day of week, where Monday=1, Tuesday=2, ..., Sunday=7',
-			'Week' - 'Compound term, week(WeekNo,ActualYear), of a day'],
+			'Week' - 'Compound term, week(WeekNo,ActualYear), of a day'
+		],
 		examples is [
 			'Get the day-of-week and week number of a date:' - date(_,2000,1,1,DoW,Wk) - {DoW = 6, Wk = week(52,1999)},
 			'Get the week number and year of this week:' - date(_,_,_,_,_,Wk) - {Wk = week(7, 2004)},
@@ -89,7 +97,9 @@
 			'Ditto for Thursday in the prior week:' - date(_,Y,M,D,4,week(0,2005)) - {Y = 2004, M = 12, D = 30},
 			'Ditto for Tuesday two weeks prior:' - date(_,Y,M,D,2,week(-1,2005)) - {Y = 2004, M = 12, D = 21},
 			'Ditto for Saturday:' - date(_,Y,M,D,6,week(53,2004)) - {Y = 2005, M = 1, D = 1},
-			'Ditto for Monday (note automatic compensation of nonexistent week number):' - date(_,Y,M,D,1,week(60,2004)) - {Y = 2005, M = 2, D = 14}]]).
+			'Ditto for Monday (note automatic compensation of nonexistent week number):' - date(_,Y,M,D,1,week(60,2004)) - {Y = 2005, M = 2, D = 14}
+		]
+	]).
 
 	:- public(date/7).
 	:- mode(date(?integer, ?integer, ?integer, ?integer, ?integer, ?compound, ?integer), zero_or_one).
@@ -102,7 +112,8 @@
 			'Day' - 'Normally an integer between 1 and 31 inclusive depending upon month',
 			'DoW' - 'Day of week, where Monday=1, Tuesday=2, ..., Sunday=7',
 			'Week' - 'Compound term, week(WeekNo,ActualYear), of a day',
-			'DoY' - 'Day of year (NB! calendar year, not week # year)'],
+			'DoY' - 'Day of year (NB! calendar year, not week # year)'
+		],
 		examples is [
 			'Get the date and day-of-year of a Julian number:' - date(2451649,Year,Month,Day,_,_,DoY) - {Year = 2000, Month = 4, Day = 14, DoY = 105},
 			'Get the Julian number, week number and day-of-year of a date, confirming that it is a Sunday:' - date(JD,2004,2,29,7,Wk,DoY) - {JD = 2453065, Wk = week(9,2004), DoY = 60},
@@ -111,7 +122,9 @@
 			'Get today''s day-of-year:' - date(_,_,_,_,_,_,DoY) - {DoY = 54},
 			'Get all missing date data (excl. Julian number) for the 60th calendar day of 2004:' - date(_,2004,Month,Day,DoW,Week,60) - {Month = 2, Day = 29, DoW = 7, Week = week(9,2004)},
 			'Match given date data and, if true, return the missing data (excl. Julian number):' - date(_,2004,3,Day,DoW,Week,61) - {Day = 1, DoW = 1, Week = week(10,2004)},
-			'Ditto (the 61st day-of-year cannot be both day 1 and 2 of the month):' - date(_,2004,Month,2,DoW,Week,61) - {no}]]).
+			'Ditto (the 61st day-of-year cannot be both day 1 and 2 of the month):' - date(_,2004,Month,2,DoW,Week,61) - {no}
+		]
+	]).
 
 	:- public(date_string/3).
 	:- mode(date_string(+atom, +integer, ?atom), zero_or_one).
@@ -121,7 +134,8 @@
 		arguments is [
 			'Format' - 'ISO 8601 format',
 			'Components' - 'When bound and String is free, either a Julian number or a [Year,Month,Day] term; it binds to the system day/date if free When free and String is bound, it binds to an integer list representing the numeric elements of String',
-			'String' - 'ISO 8601 formatted string correspondent to Components'],
+			'String' - 'ISO 8601 formatted string correspondent to Components'
+		],
 		examples is [
 			'Date, complete, basic (section 5.2.1.1):' - date_string('YYYYMMDD',[2004,2,29],Str) - {Str = '20040229'},
 			'Date, complete, basic (section 5.2.1.1):' - date_string('YYYYMMDD',Day,'20040229') - {Day = [2004,2,29]},
@@ -148,7 +162,9 @@
 			'Week, reduced, basic (section 5.2.3.2):' - date_string('YYYYWww',[2004,2,29],Str) - {Str = '2004W09'},
 			'Week, reduced, basic (section 5.2.3.2):' - date_string('YYYYWww',Day,'2004W09') - {Day = [2004,9]},
 			'Week, reduced, extended (section 5.2.3.2):' - date_string('YYYY-Www',[2004,2,29],Str) - {Str = '2004-W09'},
-			'Week, reduced, extended (section 5.2.3.2):' - date_string('YYYY-Www',Day,'2004-W09') - {Day = [2004,9]}]]).
+			'Week, reduced, extended (section 5.2.3.2):' - date_string('YYYY-Www',Day,'2004-W09') - {Day = [2004,9]}
+		]
+	]).
 
 	% MISCELLANEOUS PREDICATES (GOODIES):
 
@@ -162,14 +178,16 @@
 			'2004 was also a leap year:' - valid_date(2004,2,29) - {yes},
 			'Only 30 days in April:' - valid_date(2004,4,31) - {no},
 			'1 BC was a leap year:' - valid_date(-1,2,29) - {yes}
-	  ]]).
+		]
+	]).
 
 	:- public(leap_year/1).
 	:- mode(leap_year(?integer), zero_or_one).
 	:- info(leap_year/1, [
 		comment is 'Succeed if given year is a leap year in the Gregorian calendar.',
 		arguments is [
-			'Year' - 'The Gregorian calendar year to investigate. If free, it binds to the system year'],
+			'Year' - 'The Gregorian calendar year to investigate. If free, it binds to the system year'
+		],
 		examples is [
 			'No, the prior centenary was not a leap year:' - leap_year(1900) - {no},
 			'The recent millenium:' - leap_year(2000) - {yes},
@@ -180,7 +198,8 @@
 			'1 BC' - leap_year(-1) - {yes},
 			'4 BC' - leap_year(-4) - {no},
 			'5 BC' - leap_year(-5) - {yes}
-		]]).
+		]
+	]).
 
 	:- public(calendar_month/3).
 	:- mode(calendar_month(?integer, ?integer, -compound), zero_or_one).
@@ -189,9 +208,12 @@
 		arguments is [
 			'Year' - 'The calendar year',
 			'Month' - 'The calendar month',
-			'Calendar' - 'A compound term, m/3, composed of three main arguments specifying year, month, and a list of week and week day numbers (calendar body).'],
+			'Calendar' - 'A compound term, m/3, composed of three main arguments specifying year, month, and a list of week and week day numbers (calendar body).'
+		],
 		examples is [
-			'Compute the calendar of March, 2005:' - calendar_month(2005, 3, Calendar) - {Calendar = m(2005, 3,[w( 9, [ 0,  1,  2,  3,  4,  5,  6]),w(10, [ 7,  8,  9, 10, 11, 12, 13]),w(11, [14, 15, 16, 17, 18, 19, 20]),w(12, [21, 22, 23, 24, 25, 26, 27]),w(13, [28, 29, 30, 31,  0,  0, 0]),w( 0, [ 0,  0,  0,  0,  0,  0,  0])])}]]).
+			'Compute the calendar of March, 2005:' - calendar_month(2005, 3, Calendar) - {Calendar = m(2005, 3,[w( 9, [ 0,  1,  2,  3,  4,  5,  6]),w(10, [ 7,  8,  9, 10, 11, 12, 13]),w(11, [14, 15, 16, 17, 18, 19, 20]),w(12, [21, 22, 23, 24, 25, 26, 27]),w(13, [28, 29, 30, 31,  0,  0, 0]),w( 0, [ 0,  0,  0,  0,  0,  0,  0])])}
+		]
+	]).
 
 	:- public(easter_day/3).
 	:- mode(easter_day(?integer, -integer, -integer), zero_or_one).
@@ -200,11 +222,13 @@
 		arguments is [
 			'Year' - 'Integer specifying the year to be investigated',
 			'Month' - 'Month in which Easter Sunday falls for given year',
-			'Day'- 'Day of month in which Easter Sunday falls for given year'],
+			'Day'- 'Day of month in which Easter Sunday falls for given year'
+		],
 		examples is [
 			'Compute Easter Sunday for a particular year:' - easter_day(2006,Month,Day) - {Month=4, Day=16},
 			'Compute Easter Sunday for the current year:' - easter_day(Year,Month,Day) - {Year = 2005, Month = 3, Day = 27}
-			]]).
+		]
+	]).
 
 
 	/************************

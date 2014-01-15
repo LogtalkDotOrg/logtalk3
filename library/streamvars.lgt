@@ -23,7 +23,9 @@ version 2.1 (http://opensource.org/licenses/osl-2.1.php).
 		comment is 'Makes Variable a stream variable. Initial state will be empty.',
 		argnames is ['Variable'],
 		exceptions is [
-			'Variable is not a variable' - type_error(variable, 'Variable')]]).
+			'Variable is not a variable' - type_error(variable, 'Variable')
+		]
+	]).
 
 	:- public(new/2).
 	:- mode(new(-streamvar, @nonvar), one).
@@ -31,7 +33,9 @@ version 2.1 (http://opensource.org/licenses/osl-2.1.php).
 		comment is 'Makes Variable a stream variable and sets its initial state to Value.',
 		argnames is ['Variable', 'Value'],
 		exceptions is [
-			'Variable is not a variable' - type_error(variable, 'Variable')]]).
+			'Variable is not a variable' - type_error(variable, 'Variable')
+		]
+	]).
 
 	:- public((<=)/2).
 	:- mode(<=(?streamvar, @nonvar), one).

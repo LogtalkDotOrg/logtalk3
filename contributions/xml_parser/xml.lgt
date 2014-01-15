@@ -29,7 +29,8 @@
 			'Compliance-strictness:' - 'It is not as strict, because, while the specification must eliminate ambiguities, not all errors need to be regarded as faults, and some reasonable examples of real XML usage would have to be rejected if they were.',
 			'Compliance-comprehensive:' - 'It is not as comprehensive, because, where the XML specification makes provision for more or less complete DTDs to be provided as part of a document, xml.pl actions the local definition of ENTITIES only. Other DTD extensions are treated as commentary.',
 			'Bi-directional conversions:' - 'The conversions are not completely symmetrical, in that weaker XML is accepted than can be generated. Specifically, in-bound (Chars -> Document) parsing does not require strictly well-formed XML. If Chars does not represent well-formed XML, Document is instantiated to the term malformed(<attributes>, <content>).'
-		]]).
+		]
+	]).
 
 	:- public(parse/2).
 	:- mode(parse(+nonvar, ?nonvar), zero_or_one).

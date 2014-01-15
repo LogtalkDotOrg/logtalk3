@@ -11,7 +11,7 @@
 
 /* Horse show logical puzzle by Sally Quinn
 
-"You’ll be late for your own funeral." Her mother’s words kept repeating in Alex’s head as she approached the fair grounds-late again! It was a curse, no matter how hard she tried, she was always late. This  time she had missed the first class of the local horse show. Not really  a major crisis, but she had to report the results to the local paper. She  couldn’t let her boss know that she had arrived late. His last words were, "If you are late one more time, you’re fired!". She needed to figure out another way to write her article accurately for the paper. As Alex entered the show grounds, she overheard bits of conversation which she jotted down.
+"You'll be late for your own funeral." Her mother's words kept repeating in Alex's head as she approached the fair grounds-late again! It was a curse, no matter how hard she tried, she was always late. This  time she had missed the first class of the local horse show. Not really  a major crisis, but she had to report the results to the local paper. She  couldn't let her boss know that she had arrived late. His last words were, "If you are late one more time, you're fired!". She needed to figure out another way to write her article accurately for the paper. As Alex entered the show grounds, she overheard bits of conversation which she jotted down.
 
 "No horse and rider had the same name" ...
 .."Danny rode his white mare..."...
@@ -33,19 +33,22 @@ Published on the web:
 		version is 1.0,
 		date is 2004/5/1,
 		author is 'Paulo Moura',
-		comment is 'Horse show logical puzzle']).
+		comment is 'Horse show logical puzzle'
+	]).
 
 	:- public(horses/1).
 	:- mode(horses(-list), one).
 	:- info(horses/1, [
 		comment is 'Solution to the puzzle.',
-		argnames is ['Solution']]).
+		argnames is ['Solution']
+	]).
 
 	:- public(print/1).
 	:- mode(print(+list), one).
 	:- info(print/1, [
 		comment is 'Pretty print solution to the puzzle.',
-		argnames is ['Solution']]).
+		argnames is ['Solution']
+	]).
 
 	horses(Solution) :-
 		template(Solution),
