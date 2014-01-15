@@ -33,6 +33,7 @@
 		parnames is ['Format']
 	]).
 
+	% first, output the file node
 	output_file(Path, Basename, Directory, Options) :-
 		^^linking_options(Path, Options, LinkingOptions),
 		(	member(directory_paths(true), Options) ->
@@ -45,15 +46,17 @@
 		),
 		^^remember_included_file(Path),
 		fail.
+	% second, output edges for all files that this file refers to
 	output_file(Path, Basename, Directory, Options) :-
 		depends_file(Basename, Directory, OtherPath, Kind),
+		% ensure that this dependency is not already recorded
 		\+ ^^edge(Path, OtherPath, _, _, _),
-		(	Kind == module ->
-			^^remember_referenced_prolog_file(OtherPath),
-			^^save_edge(Path, OtherPath, [depends], depends_on_file, [tooltip(depends)| Options])
-		;	^^remember_referenced_logtalk_file(OtherPath),
-			^^save_edge(Path, OtherPath, [depends], depends_on_file, [tooltip(depends)| Options])
-		),
+			(	Kind == module ->
+				^^remember_referenced_prolog_file(OtherPath),
+				^^save_edge(Path, OtherPath, [depends], depends_on_file, [tooltip(depends)| Options])
+			;	^^remember_referenced_logtalk_file(OtherPath),
+				^^save_edge(Path, OtherPath, [depends], depends_on_file, [tooltip(depends)| Options])
+			),
 		fail.		
 	output_file(_, _, _, _).
 

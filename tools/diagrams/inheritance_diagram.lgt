@@ -28,8 +28,8 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/10,
-		comment is 'Predicates for generating entity inheritance diagrams.',
+		date is 2014/01/15,
+		comment is 'Predicates for generating entity diagrams with only inheritance relation edges.',
 		parnames is ['Format']
 	]).
 
@@ -76,8 +76,8 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/01,
-		comment is 'Predicates for generating entity inheritance diagrams in DOT format.'
+		date is 2014/01/15,
+		comment is 'Predicates for generating entity diagrams in DOT format with only inheritance relation edges.'
 	]).
 
 :- end_object.

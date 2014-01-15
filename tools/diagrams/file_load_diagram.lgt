@@ -33,6 +33,7 @@
 		parnames is ['Format']
 	]).
 
+	% first, output the file node
 	output_file(Path, Basename, Directory, Options) :-
 		^^linking_options(Path, Options, LinkingOptions),
 		(	member(directory_paths(true), Options) ->
@@ -45,15 +46,16 @@
 		),
 		^^remember_included_file(Path),
 		fail.
+	% second, output edges for all files loaded by this file
 	output_file(Path, _, _, Options) :-
 		logtalk::loaded_file_property(Other, parent(Path)),
-		^^remember_referenced_logtalk_file(Other),
-		^^save_edge(Path, Other, [loads], loads_file, [tooltip(loads)| Options]),
+			^^remember_referenced_logtalk_file(Other),
+			^^save_edge(Path, Other, [loads], loads_file, [tooltip(loads)| Options]),
 		fail.
 	output_file(Path, _, _, Options) :-
 		prolog_modules_diagram_support::source_file_property(Other, parent(Path)),
-		^^remember_referenced_prolog_file(Other),
-		^^save_edge(Path, Other, [loads], loads_file, [tooltip(loads)| Options]),
+			^^remember_referenced_prolog_file(Other),
+			^^save_edge(Path, Other, [loads], loads_file, [tooltip(loads)| Options]),
 		fail.
 	output_file(_, _, _, _).
 

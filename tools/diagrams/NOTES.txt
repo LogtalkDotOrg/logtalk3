@@ -36,16 +36,16 @@ The following entity diagrams are supported:
 - entity diagrams showing entity public interfaces, entity inheritance
 relations and entity predicate call cross-reference relations
 - call diagrams showing entity predicate cross-reference calls
-- inheritance diagrams showing entity inheritance relations
-- uses diagrams showing predicate call cross-reference relations
+- inheritance diagrams showing only entity inheritance relations
+- uses diagrams showing only predicate call cross-reference relations
 
 The following file diagrams are supported:
 
 - file loading dependency diagrams showing which files load other files
-- file depends diagrams showing which files contain entities that call
-predicates of entities defined in other files
+- file dependency diagrams showing which files contain entities with
+references to entities defined in other files
 
-File depends diagrams are specially useful in revealing file dependencies
+File dependency diagrams are specially useful in revealing dependencies
 that are not represented in file loading diagrams due to files being
 loaded indirectly by files external to the libraries being documented. 
 
