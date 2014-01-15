@@ -5,14 +5,14 @@ Section: devel
 Priority: optional
 Architecture: all
 Essential: no
-Description: Logtalk is an object-oriented logic programming language
-that extends and leverages the Prolog language with a feature set suitable
-for programming in the large. As a multi-paradigm language, it includes
-support for both prototypes and classes, protocols (interfaces),
-component-based programming through category-based composition,
-event-driven programming, coinduction, and high-level multi-threading
-programming. Logtalk uses standard Prolog syntax with the addition of
-some operators and directives and can be used with any Prolog
-implementation compliant with official and de facto standards as the
-back-end compiler.
-
+Description: Logtalk - Object-Oriented Logic Programming Language
+ Logtalk is an object-oriented logic programming language that extends
+ and leverages the Prolog language with a feature set suitable for
+ programming in the large. As a multi-paradigm language, it includes
+ support for both prototypes and classes, protocols (interfaces),
+ component-based programming through category-based composition,
+ event-driven programming, coinduction, and high-level multi-threading
+ programming. Logtalk uses standard Prolog syntax with the addition of
+ some operators and directives and can be used with any Prolog
+ implementation compliant with official and de facto standards as the
+ back-end compiler.
