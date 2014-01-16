@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/01/07,
+		date is 2014/01/16,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -124,9 +124,9 @@
 	% Logtalk starup messages
 
 	logtalk::message_tokens(possibly_incompatible_prolog_version(Current, Compatible), core) -->
-		['Possibly incompatible Prolog version detected!'-[], nl,
-		 'Running Prolog version: ~w'-[Current], nl,
-		 'Advised Prolog version: ~w'-[Compatible], nl
+		['Possibly incompatible backend Prolog compiler version detected!'-[], nl,
+		 'Running Prolog compiler version: ~w'-[Current], nl,
+		 'Advised Prolog compiler version: ~w'-[Compatible], nl
 		].
 
 	logtalk::message_tokens(banner, core) -->
@@ -179,10 +179,10 @@
 			'  code_prefix: ~q, hook: ~w'-[Code, Hook], nl,
 			'  optimize: ~w, source_data: ~w, clean: ~w'-[Optimize, SourceData, Clean], nl,
 			'  debug: ~w, reload: ~w'-[Debug, Reload], nl,
-			'Back-end Prolog compiler flags:'-[], nl,
+			'Backend Prolog compiler flags:'-[], nl,
 			'  prolog_compiler: ~w'-[PrologCompiler], nl,
 			'  prolog_loader:   ~w'-[PrologLoader], nl,
-			'Read-only compilation flags (back-end Prolog compiler features):'-[], nl,
+			'Read-only compilation flags (backend Prolog compiler features):'-[], nl,
 			'  prolog_dialect: ~w, modules: ~w, threads: ~w'-[PrologDialect, Modules, Threads], nl,
 			'  encoding_directive: ~w, tabling: ~w, coinduction: ~w'-[Encodings, Tabling, Coinduction], nl, nl
 		].
@@ -192,16 +192,16 @@
 	logtalk::message_tokens(loaded_settings_file(Path), core) -->
 		['Loaded settings file found on directory ~w'-[Path], nl, nl].
 	logtalk::message_tokens(settings_file_disabled, core) -->
-		['Loading of settings file disabled in the Prolog adapter file.'-[], nl, nl].
+		['Loading of settings file disabled in the backend Prolog compiler adapter file.'-[], nl, nl].
 	logtalk::message_tokens(error_loading_settings_file(Path, Error), core) -->
 		['Errors found while loading settings file from directory ~w: ~w'-[Path, Error], nl, nl].
 	logtalk::message_tokens(no_settings_file_found(allow), core) -->
-		['No settings file found in the startup directory or in the Logtalk user'-[], nl,
-		 'directory. Using default flag values set in the Prolog adapter file.'-[], nl, nl
+		['No settings file found in the startup or Logtalk user directories.'-[], nl,
+		 'Using default flag values set in the backend Prolog compiler adapter file.'-[], nl, nl
 		].
 	logtalk::message_tokens(no_settings_file_found(restrict), core) -->
 		['No settings file found in the Logtalk user directory.'-[], nl,
-		 'Using default flag values set in the Prolog adapter file.'-[], nl, nl
+		 'Using default flag values set in the backend Prolog compiler adapter file.'-[], nl, nl
 		].
 
 	% debugging messages

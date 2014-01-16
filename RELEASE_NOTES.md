@@ -25,6 +25,23 @@ RELEASE NOTES
 =============
 
 
+3.00.0 Alpha 34 - January ??, 2014
+==================================
+
+Logtalk compiler and runtime
+----------------------------
+
+* IMPROVED: Performance of database `asserta/1`, `assertz/1`, `retract/1`,
+and `retractall/1` messages when sent to a known object with the `optimize`
+flag turned on by using static binding whenever possible.
+
+Examples
+--------
+
+* UPDATED: The `benchmarks` example to illustrate the use of static binding
+when sending database messages to known objects.
+
+
 3.00.0 Alpha 33 - January 15, 2014
 ==================================
 

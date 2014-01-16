@@ -12,9 +12,9 @@
 :- object(database).
 
 	:- info([
-		version is 3.1,
+		version is 3.2,
 		author is 'Paulo Moura',
-		date is 2011/10/03,
+		date is 2014/01/16,
 		comment is 'Dynamic database benchmark utility predicates.'
 	]).
 
@@ -39,8 +39,8 @@
 		argnames is ['Term']
 	]).
 	
-	:- private([pred_this/4, pred_self/4, pred_obj/4]).
-	:- dynamic([pred_this/4, pred_self/4, pred_obj/4]).
+	:- private([pred_this/4, pred_self/4]).
+	:- dynamic([pred_this/4, pred_self/4]).
 
 	% direct calls to assertz/1 and retract/1:
 	this_dyndb(N) :-
@@ -54,8 +54,21 @@
 
 	% calls to assertz/1 and retract/1 using ::/2:
 	obj_dyndb(N) :-
-		this(This),
-		This::retractall(pred_obj(N, _, _,    _)),
-		This::assertz(pred_obj(N, _, a, 3.14)).
+		database_other::retractall(pred_other(N, _, _,    _)),
+		database_other::assertz(pred_other(N, _, a, 3.14)).
+
+:- end_object.
+
+
+
+:- object(database_self,
+	extends(database)).
+
+	:- info([
+		version is 1.0,
+		author is 'Paulo Moura',
+		date is 2014/01/16,
+		comment is 'Test object for the database predicate benchmarks.'
+	]).
 
 :- end_object.

@@ -2145,7 +2145,7 @@ current_logtalk_flag(Flag, Value) :-
 % the last argument is an atom: 'aXX' for alpha versions, 'bXX' for beta
 % versions, and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 0, 0, a33)).
+'$lgt_version_data'(logtalk(3, 0, 0, a34)).
 
 
 
@@ -9483,7 +9483,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	'$lgt_optimizable_local_db_call'(Clause, TClause) ->
 		TCond = asserta(TClause)
 	;	'$lgt_execution_context_this'(ExCtx, This),
-		(	'$lgt_runtime_db_clause_checked'(Clause) ->
+		(	'$lgt_runtime_checked_db_clause'(Clause) ->
 			TCond = '$lgt_asserta'(This, Clause, This, p(_), p)
 		;	'$lgt_must_be'(clause_or_partial_clause, Clause),
 			(	Clause = (Head :- Body) ->
@@ -9551,7 +9551,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	'$lgt_optimizable_local_db_call'(Clause, TClause) ->
 		TCond = assertz(TClause)
 	;	'$lgt_execution_context_this'(ExCtx, This),
-		(	'$lgt_runtime_db_clause_checked'(Clause) ->
+		(	'$lgt_runtime_checked_db_clause'(Clause) ->
 			TCond = '$lgt_assertz'(This, Clause, This, p(_), p)
 		;	'$lgt_must_be'(clause_or_partial_clause, Clause),
 			(	Clause = (Head :- Body) ->
@@ -9601,7 +9601,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	'$lgt_optimizable_local_db_call'(Head, THead) ->
 		TCond = (clause(THead, TBody), (TBody = ('$lgt_nop'(Body), _) -> true; TBody = Body))
 	;	'$lgt_execution_context_this'(ExCtx, This),
-		(	'$lgt_runtime_db_clause_checked'((Head :- Body)) ->
+		(	'$lgt_runtime_checked_db_clause'((Head :- Body)) ->
 			TCond = '$lgt_clause'(This, Head, Body, This, p(_))
 		;	'$lgt_must_be'(clause_or_partial_clause, (Head :- Body)),
 			TCond = '$lgt_clause_checked'(This, Head, Body, This, p(_))
@@ -9663,7 +9663,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	'$lgt_optimizable_local_db_call'(Clause, TClause) ->
 		TCond = retract(TClause)
 	;	'$lgt_execution_context_this'(ExCtx, This),
-		(	'$lgt_runtime_db_clause_checked'(Clause) ->
+		(	'$lgt_runtime_checked_db_clause'(Clause) ->
 			TCond = '$lgt_retract'(This, Clause, This, p(_))
 		;	'$lgt_must_be'(clause_or_partial_clause, Clause),
 			(	Clause = (Head :- Body) ->
@@ -10962,19 +10962,19 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_runtime_db_clause_checked'(@term)
+% '$lgt_runtime_checked_db_clause'(@term)
 %
 % true if the argument forces runtime validity check
 
-'$lgt_runtime_db_clause_checked'(Pred) :-
+'$lgt_runtime_checked_db_clause'(Pred) :-
 	var(Pred),
 	!.
 
-'$lgt_runtime_db_clause_checked'((Head :- _)) :-
+'$lgt_runtime_checked_db_clause'((Head :- _)) :-
 	var(Head),
 	!.
 
-'$lgt_runtime_db_clause_checked'((_ :- Body)) :-
+'$lgt_runtime_checked_db_clause'((_ :- Body)) :-
 	var(Body).
 
 
@@ -11128,35 +11128,37 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_msg'(asserta(Clause), Obj, TPred, This, _) :-
 	!,
-	(	'$lgt_runtime_db_clause_checked'(Clause) ->
+	(	'$lgt_runtime_checked_db_clause'(Clause) ->
 		TPred = '$lgt_asserta'(Obj, Clause, This, p(p(_)), p(p(p)))
 	;	'$lgt_must_be'(clause_or_partial_clause, Clause),
-		(	Clause = (Head :- Body) ->
-			(	Body == true ->
-				TPred = '$lgt_asserta_fact_checked'(Obj, Head, This, p(p(_)), p(p(p)))
-			;	TPred = '$lgt_asserta_rule_checked'(Obj, Clause, This, p(p(_)), p(p(p)))
+		(	(Clause = (Head :- Body) -> Body == true; Clause = Head) ->
+			(	'$lgt_compiler_flag'(optimize, on),
+				'$lgt_send_to_obj_db_msg_static_binding'(Obj, Head, THead) ->
+				TPred = asserta(THead)
+			;	TPred = '$lgt_asserta_fact_checked'(Obj, Head, This, p(p(_)), p(p(p)))
 			)
-		;	TPred = '$lgt_asserta_fact_checked'(Obj, Clause, This, p(p(_)), p(p(p)))
+		;	TPred = '$lgt_asserta_rule_checked'(Obj, Clause, This, p(p(_)), p(p(p)))
 		)
 	).
 
 '$lgt_tr_msg'(assertz(Clause), Obj, TPred, This, _) :-
 	!,
-	(	'$lgt_runtime_db_clause_checked'(Clause) ->
+	(	'$lgt_runtime_checked_db_clause'(Clause) ->
 		TPred = '$lgt_assertz'(Obj, Clause, This, p(p(_)), p(p(p)))
 	;	'$lgt_must_be'(clause_or_partial_clause, Clause),
-		(	Clause = (Head :- Body) ->
-			(	Body == true ->
-				TPred = '$lgt_assertz_fact_checked'(Obj, Head, This, p(p(_)), p(p(p)))
-			;	TPred = '$lgt_assertz_rule_checked'(Obj, Clause, This, p(p(_)), p(p(p)))
+		(	(Clause = (Head :- Body) -> Body == true; Clause = Head) ->
+			(	'$lgt_compiler_flag'(optimize, on),
+				'$lgt_send_to_obj_db_msg_static_binding'(Obj, Head, THead) ->
+				TPred = assertz(THead)
+			;	TPred = '$lgt_assertz_fact_checked'(Obj, Head, This, p(p(_)), p(p(p)))
 			)
-		;	TPred = '$lgt_assertz_fact_checked'(Obj, Clause, This, p(p(_)), p(p(p)))
+		;	TPred = '$lgt_assertz_rule_checked'(Obj, Clause, This, p(p(_)), p(p(p)))
 		)
 	).
 
 '$lgt_tr_msg'(clause(Head, Body), Obj, TPred, This, _) :-
 	!,
-	(	'$lgt_runtime_db_clause_checked'((Head :- Body)) ->
+	(	'$lgt_runtime_checked_db_clause'((Head :- Body)) ->
 		TPred = '$lgt_clause'(Obj, Head, Body, This, p(p(p)))
 	;	'$lgt_must_be'(clause_or_partial_clause, (Head :- Body)),
 		TPred = '$lgt_clause_checked'(Obj, Head, Body, This, p(p(p)))
@@ -11164,17 +11166,18 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_msg'(retract(Clause), Obj, TPred, This, _) :-
 	!,
-	(	'$lgt_runtime_db_clause_checked'(Clause) ->
+	(	'$lgt_runtime_checked_db_clause'(Clause) ->
 		TPred = '$lgt_retract'(Obj, Clause, This, p(p(p)))
 	;	'$lgt_must_be'(clause_or_partial_clause, Clause),
-		(	Clause = (Head :- Body) ->
-			(	var(Body) ->
-				'$lgt_retract_var_body_checked'(Obj, Clause, This, p(p(p)))
-			;	Body == true ->
-				TPred = '$lgt_retract_fact_checked'(Obj, Head, This, p(p(p)))
-			;	TPred = '$lgt_retract_rule_checked'(Obj, Clause, This, p(p(p)))
+		(	(Clause = (Head :- Body) -> Body == true; Clause = Head) ->
+			(	'$lgt_compiler_flag'(optimize, on),
+				'$lgt_send_to_obj_db_msg_static_binding'(Obj, Head, THead) ->
+				TPred = retract(THead)
+			;	TPred = '$lgt_retract_fact_checked'(Obj, Head, This, p(p(p)))
 			)
-		;	TPred = '$lgt_retract_fact_checked'(Obj, Clause, This, p(p(p)))
+		;	Clause = (_ :- Body), var(Body) ->
+			'$lgt_retract_var_body_checked'(Obj, Clause, This, p(p(p)))
+		;	TPred = '$lgt_retract_rule_checked'(Obj, Clause, This, p(p(p)))
 		)
 	).
 
@@ -11183,7 +11186,11 @@ current_logtalk_flag(Flag, Value) :-
 	(	var(Head) ->
 		TPred = '$lgt_retractall'(Obj, Head, This, p(p(p)))
 	;	'$lgt_must_be'(callable, Head),
-		TPred = '$lgt_retractall_checked'(Obj, Head, This, p(p(p)))
+		(	'$lgt_compiler_flag'(optimize, on),
+			'$lgt_send_to_obj_db_msg_static_binding'(Obj, Head, THead) ->
+			TPred = retractall(THead)
+		;	TPred = '$lgt_retractall_checked'(Obj, Head, This, p(p(p)))
+		)
 	).
 
 % term and goal expansion predicates
@@ -11228,6 +11235,20 @@ current_logtalk_flag(Flag, Value) :-
 		;	TPred = '$lgt_send_to_obj_ne_'(Obj, Pred, This)
 		)
 	).
+
+
+
+'$lgt_clause_tclause'(Obj, Clause, TClause) :-
+	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, _, _, _, Flags),
+	Flags /\ 2 =:= 0,
+	% static object
+	once(call(Dcl, Clause, Scope, _, _, SCtn, _)),
+	Scope = p(p(_)),
+	% public predicate
+	\+ SCtn \= Obj,
+	% locally declared
+	call(Def, Clause, _, TClause, _, _),
+	!.
 
 
 
@@ -11337,7 +11358,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_self_msg'(asserta(Clause), TPred, Ctx) :-
 	!,
-	(	'$lgt_runtime_db_clause_checked'(Clause) ->
+	(	'$lgt_runtime_checked_db_clause'(Clause) ->
 		TPred = '$lgt_asserta'(Self, Clause, This, p(_), p(p))
 	;	'$lgt_must_be'(clause_or_partial_clause, Clause),
 		(	Clause = (Head :- Body) ->
@@ -11353,7 +11374,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_self_msg'(assertz(Clause), TPred, Ctx) :-
 	!,
-	(	'$lgt_runtime_db_clause_checked'(Clause) ->
+	(	'$lgt_runtime_checked_db_clause'(Clause) ->
 		TPred = '$lgt_assertz'(Self, Clause, This, p(_), p(p))
 	;	'$lgt_must_be'(clause_or_partial_clause, Clause),
 		(	Clause = (Head :- Body) ->
@@ -11369,7 +11390,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_self_msg'(clause(Head, Body), TPred, Ctx) :-
 	!,
-	(	'$lgt_runtime_db_clause_checked'((Head :- Body)) ->
+	(	'$lgt_runtime_checked_db_clause'((Head :- Body)) ->
 		TPred = '$lgt_clause'(Self, Head, Body, This, p(_))
 	;	'$lgt_must_be'(clause_or_partial_clause, (Head :- Body)),
 		TPred = '$lgt_clause_checked'(Self, Head, Body, This, p(_))
@@ -11379,7 +11400,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_self_msg'(retract(Clause), TPred, Ctx) :-
 	!,
-	(	'$lgt_runtime_db_clause_checked'(Clause) ->
+	(	'$lgt_runtime_checked_db_clause'(Clause) ->
 		TPred = '$lgt_retract'(Self, Clause, This, p(_))
 	;	'$lgt_must_be'(clause_or_partial_clause, Clause),
 		(	Clause = (Head :- Body) ->
@@ -17815,7 +17836,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_send_to_obj_static_binding'(@object_identifier, @callable, @object_identifier -callable)
+% '$lgt_send_to_obj_static_binding'(@object_identifier, @callable, @object_identifier, -callable)
 %
 % static binding is only used for the (::)/2 control construct when the object receiving the
 % message is static and the support for complementing categories is disallowed (unfortunately,
@@ -17893,7 +17914,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_obj_super_call_static_binding'(@object_identifier, @callable, @execution_context -callable)
+% '$lgt_obj_super_call_static_binding'(@object_identifier, @callable, @execution_context, -callable)
 %
 % static binding for the (^^)/1 control construct (used within objects)
 
@@ -18053,7 +18074,8 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 
-% '$lgt_ctg_super_call_static_binding'(@category_identifier, @callable, @execution_context -callable)
+
+% '$lgt_ctg_super_call_static_binding'(@category_identifier, @callable, @execution_context, -callable)
 %
 % static binding for the (^^)/1 control construct (used within categories)
 
@@ -18082,6 +18104,28 @@ current_logtalk_flag(Flag, Value) :-
 	call(Def, Pred, ExCtx, Call, DefCtn), !,
 	% predicate definition found; use it only if it's safe
 	'$lgt_safe_static_binding_paths'(Ctg, DclCtn, DefCtn).
+
+
+
+% '$lgt_send_to_obj_db_msg_static_binding'(@category_identifier, @callable, -callable)
+%
+% static binding for selected database messages sent to an object
+
+'$lgt_send_to_obj_db_msg_static_binding'(Obj, Head, THead) :-
+	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, _, _, _, ObjFlags),
+	% check that the object is static
+	ObjFlags /\ 2 =:= 0,
+	call(Dcl, Head, Scope, _, PredFlags, SCtn, DCtn), !,
+	% check that the call is within scope
+	Scope = p(p(_)),
+	% check that the the predicate is dynamic
+	PredFlags /\ 2 =:= 2,
+	% check that we're acting on the same entity that declares the predicate dynamic
+	SCtn = Obj,
+	% lookup local predicate definition
+	call(Def, Head, _, THead), !,
+	% predicate definition found; use it only if it's safe
+	'$lgt_static_binding_entity'(DCtn).
 
 
 

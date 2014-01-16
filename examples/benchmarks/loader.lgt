@@ -20,7 +20,7 @@
 		atom_concat(Current, module, Path),
 		ensure_loaded(Path),
 		logtalk_load([category], [events(deny), optimize(on)]),
-		logtalk_load([objects, database, maze, graph], [events(deny), optimize(on)]),
+		logtalk_load([objects, database_other, database, maze, graph], [events(deny), optimize(on)]),
 		logtalk_load([plain, benchmarks], [events(deny), optimize(on)])
 	)).
 
@@ -29,7 +29,7 @@
 	:- initialization((
 		(current_logtalk_flag(modules, supported) -> ensure_loaded(module); true),
 		logtalk_load([category], [events(deny), optimize(on)]),
-		logtalk_load([objects, database, maze, graph], [events(deny), optimize(on)]),
+		logtalk_load([objects, database_other, database, maze, graph], [events(deny), optimize(on)]),
 		logtalk_load([plain, benchmarks], [events(deny), optimize(on)])
 	)).
 
