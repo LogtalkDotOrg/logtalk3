@@ -1,10 +1,10 @@
-/* xml.pl : Contains parse/[2,3] a bi-directional XML parser written in
+/* xml_driver.pl : Contains xml_parse/[2,3] a bi-directional XML parser written in
  * Prolog.
  *
  * Copyright (C) 2001-2005 Binding Time Limited
- * Copyright (C) 2005, 2006 John Fletcher
+ * Copyright (C) 2005-2013 John Fletcher
  *
- * Current Release: $Revision: 2.0 $
+ * Current Release: $Revision: 3.5 $
  * 
  * TERMS AND CONDITIONS:
  *
@@ -17,14 +17,14 @@
 :- object(xml).
 
 	:- info([
-		version is 2.0,
-		author is 'John Fletcher',
-		date is 2006/11/2,
-		copyright is 'Copyright (C) 2001-2005 Binding Time Limited, Copyright (C) 2005, 2006 John Fletcher',
-		license is 'The code has been placed into the public domain, to encourage the use of Prolog with XML. This program is offered free of charge, as unsupported source code. You may use it, copy it, distribute it, modify it or sell it without restriction, but entirely at your own risk.',
+		version is 3.5,
+		author is 'John Fletcher; adapted to Logtalk by Paulo Moura.',
+		date is 2014/01/17,
+		copyright is 'Copyright (C) 2001-2005 Binding Time Limited, Copyright (C) 2005-2013 John Fletcher',
+		license is 'The codThis program is offered free of charge, as unsupported source code. You may use it, copy it, distribute it, modify it or sell it without restriction, but entirely at your own risk.',
 		comment is 'Bi-directional XML parser.',
 		remarks is [
-			'On-line documentation:' - 'http://www.zen37763.zen.co.uk/xml.pl.html',
+			'On-line documentation:' - 'http://www.binding-time.co.uk/xmlpl.html',
 			'Compliance:' - 'This XML parser supports a subset of XML suitable for XML Data and Worldwide Web applications. It is neither as strict nor as comprehensive as the XML 1.0 Specification mandates.',
 			'Compliance-strictness:' - 'It is not as strict, because, while the specification must eliminate ambiguities, not all errors need to be regarded as faults, and some reasonable examples of real XML usage would have to be rejected if they were.',
 			'Compliance-comprehensive:' - 'It is not as comprehensive, because, where the XML specification makes provision for more or less complete DTDs to be provided as part of a document, xml.pl actions the local definition of ENTITIES only. Other DTD extensions are treated as commentary.',
@@ -146,10 +146,7 @@
 			document_generation(Format, Document, Chars0, [] ) ->
 			Chars = Chars0
 		;	fault( Document, [], Culprit, Path, Message ),
-			throw(
-				application_error('XML Parse: ~s in ~q~nCulprit: ~q~nPath: ~s', 
-					[Message,Document,Culprit,Path] )
-				)
+			exception( Message, Document, Culprit, Path )
 		).
 
 	/* subterm( +XMLTerm, ?Subterm ) unifies Subterm with a sub-term of Term.
@@ -189,7 +186,7 @@
 			XML1 = XML,
 			Attributes = []
 		),
-		xml_to_document( XML1, Context, Terms, [], WellFormed ),
+		xml_to_document0( XML1, Context, Terms, [], WellFormed ),
 		xml_to_document1( WellFormed, Attributes, Terms, Document ).
 
 	xml_to_document1( true,  Attributes, Terms, xml(Attributes, Terms) ).
@@ -206,9 +203,9 @@
 		spaces,
 		"?>".
 
-	xml_to_document( [], Context, Terms, [], WF ) :-
+	xml_to_document0( [], Context, Terms, [], WF ) :-
 		close_context( Context, Terms, WF ).
-	xml_to_document( [Char|Chars], Context, Terms, Residue, WF ) :-
+	xml_to_document0( [Char|Chars], Context, Terms, Residue, WF ) :-
 		(	Char =:= 0'< ->
 			markup_structure( Chars, Context, Terms, Residue, WF )
 		;	Char =:= 0'& ->
@@ -276,7 +273,7 @@
 		push_tag1( WF0, Context, Term, Rest, Terms, Residue, WF ).
 
 	push_tag1( true, Context, Term, Chars, [Term|Terms], Residue, WF ) :-
-		xml_to_document( Chars, Context, Terms, Residue, WF ).
+		xml_to_document0( Chars, Context, Terms, Residue, WF ).
 	push_tag1( false, _Context, Term, Chars, [Term], Chars, false ).
 
 	new_element( TagChars, Chars, Context, Attributes0, Type, Term, Residue, WF ) :-
@@ -306,13 +303,13 @@
 	close_tag( empty, Residue, _Context, [], Residue, true ).
 	close_tag( push(Tag), Chars, Context0, Contents, Residue, WF ) :-
 		context_update( element, Context0, Tag, Context1 ),
-		xml_to_document( Chars, Context1, Contents, Residue, WF ).
+		xml_to_document0( Chars, Context1, Contents, Residue, WF ).
 
 	pi_acquisition( Chars, Context, Terms, Residue, WellFormed ) :-
 		(	inline_instruction(Target, Processing, Chars, Rest ),
 			Target \== xml ->
 			Terms = [instructions(Target, Processing)|Terms1],
-			xml_to_document( Rest, Context, Terms1, Residue, WellFormed )
+			xml_to_document0( Rest, Context, Terms1, Residue, WellFormed )
 		;	otherwise ->
 			unparsed( [0'<,0'?|Chars], Context, Terms, Residue, WellFormed )
 		).
@@ -321,7 +318,7 @@
 		(	declaration_type( Chars, Type, Chars1 ),
 			declaration_parse( Type, Context, Term, Context1, Chars1, Rest ) ->
 			Terms = [Term|Terms1],
-			xml_to_document( Rest, Context1, Terms1, Residue, WF )
+			xml_to_document0( Rest, Context1, Terms1, Residue, WF )
 		;	otherwise ->
 			unparsed( [0'<,0'!|Chars], Context, Terms, Residue, WF )
 		).
@@ -398,7 +395,7 @@
 		;	entity_reference_name( Reference, Chars, Rest ),
 			defined_entity( Reference, Context, String ) ->
 			append( String, Rest, Full ),
-			xml_to_document( Full, Context, Terms, Residue, WF )
+			xml_to_document0( Full, Context, Terms, Residue, WF )
 		;	allow_ampersand( Context ) ->
 			Minus = [0'&|Chars1], %'
 			Terms = [pcdata(Plus)|Terms1],
@@ -1282,13 +1279,19 @@
 
 	pp_string( Chars ) :-
 		(	member( Char, Chars ),
-			(Char > 255 ; Char < 9) ->
+			not_shorthand( Char ) ->
 			write( Chars )
 		;	otherwise ->
 			put_quote,
 			pp_string1( Chars ),
 			put_quote
 		).
+
+	not_shorthand( Char ) :-
+		Char > 255.
+	not_shorthand( Char ) :-
+		Char < 9.
+	not_shorthand( 126 ).	% ~ gives syntax errors in LPA Prolog
 
 	put_quote :-
 		put_code( 0'" ). % '
@@ -1346,38 +1349,86 @@
 		lowercase( Chars, LowerCase ).
 
 	extended_character_entities( [
+		"AElig"-[198],		% latin capital letter AE
 		"Aacute"-[193],		% latin capital letter A with acute,
-		"aacute"-[225],		% latin small letter a with acute,
 		"Acirc"-[194],		% latin capital letter A with circumflex,
+		"Agrave"-[192],		% latin capital letter A with grave
+		"Alpha"-[913],		% greek capital letter alpha, U+0391
+		"Aring"-[197],		% latin capital letter A with ring above
+		"Atilde"-[195],		% latin capital letter A with tilde,
+		"Auml"-[196],		% latin capital letter A with diaeresis,
+		"Beta"-[914],		% greek capital letter beta, U+0392
+		"Ccedil"-[199],		% latin capital letter C with cedilla,
+		"Chi"-[935],		% greek capital letter chi, U+03A7
+		"Dagger"-[8225],	% double dagger, U+2021 ISOpub
+		"Delta"-[916],		% greek capital letter delta,
+		"ETH"-[208],		% latin capital letter ETH, U+00D0 ISOlat1>
+		"Eacute"-[201],		% latin capital letter E with acute,
+		"Ecirc"-[202],		% latin capital letter E with circumflex,
+		"Egrave"-[200],		% latin capital letter E with grave,
+		"Epsilon"-[917],	% greek capital letter epsilon, U+0395
+		"Eta"-[919],		% greek capital letter eta, U+0397
+		"Euml"-[203],		% latin capital letter E with diaeresis,
+		"Gamma"-[915],		% greek capital letter gamma,
+		"Iacute"-[205],		% latin capital letter I with acute,
+		"Icirc"-[206],		% latin capital letter I with circumflex,
+		"Igrave"-[204],		% latin capital letter I with grave,
+		"Iota"-[921],		% greek capital letter iota, U+0399
+		"Iuml"-[207],		% latin capital letter I with diaeresis,
+		"Kappa"-[922],		% greek capital letter kappa, U+039A
+		"Lambda"-[923],		% greek capital letter lambda,
+		"Mu"-[924],			% greek capital letter mu, U+039C
+		"Ntilde"-[209],		% latin capital letter N with tilde,
+		"Nu"-[925],			% greek capital letter nu, U+039D
+		"OElig"-[338],		% latin capital ligature OE,
+		"Oacute"-[211],		% latin capital letter O with acute,
+		"Ocirc"-[212],		% latin capital letter O with circumflex,
+		"Ograve"-[210],		% latin capital letter O with grave,
+		"Omega"-[937],		% greek capital letter omega,
+		"Omicron"-[927],	% greek capital letter omicron, U+039F
+		"Oslash"-[216],		% latin capital letter O with stroke
+		"Otilde"-[213],		% latin capital letter O with tilde,
+		"Ouml"-[214],		% latin capital letter O with diaeresis,
+		"Phi"-[934],		% greek capital letter phi,
+		"Pi"-[928],			% greek capital letter pi, U+03A0 ISOgrk3
+		"Prime"-[8243],		% double prime = seconds = inches,
+		"Psi"-[936],		% greek capital letter psi,
+		"Rho"-[929],		% greek capital letter rho, U+03A1
+		"Scaron"-[352],		% latin capital letter S with caron,
+		"Sigma"-[931],		% greek capital letter sigma,
+		"THORN"-[222],		% latin capital letter THORN,
+		"Tau"-[932],		% greek capital letter tau, U+03A4
+		"Theta"-[920],		% greek capital letter theta,
+		"Uacute"-[218],		% latin capital letter U with acute,
+		"Ucirc"-[219],		% latin capital letter U with circumflex,
+		"Ugrave"-[217],		% latin capital letter U with grave,
+		"Upsilon"-[933],	% greek capital letter upsilon,
+		"Uuml"-[220],		% latin capital letter U with diaeresis,
+		"Xi"-[926],			% greek capital letter xi, U+039E ISOgrk3
+		"Yacute"-[221],		% latin capital letter Y with acute,
+		"Yuml"-[376],		% latin capital letter Y with diaeresis,
+		"Zeta"-[918],		% greek capital letter zeta, U+0396
+		"aacute"-[225],		% latin small letter a with acute,
 		"acirc"-[226],		% latin small letter a with circumflex,
 		"acute"-[180],		% acute accent = spacing acute,
-		"AElig"-[198],		% latin capital letter AE
 		"aelig"-[230],		% latin small letter ae
-		"Agrave"-[192],		% latin capital letter A with grave
 		"agrave"-[224],		% latin small letter a with grave
 		"alefsym"-[8501],	% alef symbol = first transfinite cardinal,
-		"Alpha"-[913],		% greek capital letter alpha, U+0391
 		"alpha"-[945],		% greek small letter alpha,
 		"and"-[8743],		% logical and = wedge, U+2227 ISOtech
 		"ang"-[8736],		% angle, U+2220 ISOamso
-		"Aring"-[197],		% latin capital letter A with ring above
 		"aring"-[229],		% latin small letter a with ring above
 		"asymp"-[8776],		% almost equal to = asymptotic to,
-		"Atilde"-[195],		% latin capital letter A with tilde,
 		"atilde"-[227],		% latin small letter a with tilde,
-		"Auml"-[196],		% latin capital letter A with diaeresis,
 		"auml"-[228],		% latin small letter a with diaeresis,
 		"bdquo"-[8222],		% double low-9 quotation mark, U+201E NEW
-		"Beta"-[914],		% greek capital letter beta, U+0392
 		"beta"-[946],		% greek small letter beta, U+03B2 ISOgrk3
 		"brvbar"-[166],		% broken bar = broken vertical bar,
 		"bull"-[8226],		% bullet = black small circle,
 		"cap"-[8745],		% intersection = cap, U+2229 ISOtech
-		"Ccedil"-[199],		% latin capital letter C with cedilla,
 		"ccedil"-[231],		% latin small letter c with cedilla,
 		"cedil"-[184],		% cedilla = spacing cedilla, U+00B8 ISOdia>
 		"cent"-[162],		% cent sign, U+00A2 ISOnum>
-		"Chi"-[935],		% greek capital letter chi, U+03A7
 		"chi"-[967],		% greek small letter chi, U+03C7 ISOgrk3
 		"circ"-[710],		% modifier letter circumflex accent,
 		"clubs"-[9827],		% black club suit = shamrock,
@@ -1386,32 +1437,23 @@
 		"crarr"-[8629],		% downwards arrow with corner leftwards
 		"cup"-[8746],		% union = cup, U+222A ISOtech
 		"curren"-[164],		% currency sign, U+00A4 ISOnum>
-		"dagger"-[8224],	% dagger, U+2020 ISOpub
-		"Dagger"-[8225],	% double dagger, U+2021 ISOpub
-		"darr"-[8595],		% downwards arrow, U+2193 ISOnum
 		"dArr"-[8659],		% downwards double arrow, U+21D3 ISOamsa
+		"dagger"-[8224],	% dagger, U+2020 ISOpub
+		"darr"-[8595],		% downwards arrow, U+2193 ISOnum
 		"deg"-[176],		% degree sign, U+00B0 ISOnum>
-		"Delta"-[916],		% greek capital letter delta,
 		"delta"-[948],		% greek small letter delta,
 		"diams"-[9830],		% black diamond suit, U+2666 ISOpub
 		"divide"-[247],		% division sign, U+00F7 ISOnum>
-		"Eacute"-[201],		% latin capital letter E with acute,
 		"eacute"-[233],		% latin small letter e with acute,
-		"Ecirc"-[202],		% latin capital letter E with circumflex,
 		"ecirc"-[234],		% latin small letter e with circumflex,
-		"Egrave"-[200],		% latin capital letter E with grave,
 		"egrave"-[232],		% latin small letter e with grave,
 		"empty"-[8709],		% empty set = null set = diameter,
 		"emsp"-[8195],		% em space, U+2003 ISOpub
 		"ensp"-[8194],		% en space, U+2002 ISOpub
-		"Epsilon"-[917],	% greek capital letter epsilon, U+0395
 		"epsilon"-[949],	% greek small letter epsilon,
 		"equiv"-[8801],		% identical to, U+2261 ISOtech
-		"Eta"-[919],		% greek capital letter eta, U+0397
 		"eta"-[951],		% greek small letter eta, U+03B7 ISOgrk3
-		"ETH"-[208],		% latin capital letter ETH, U+00D0 ISOlat1>
 		"eth"-[240],		% latin small letter eth, U+00F0 ISOlat1>
-		"Euml"-[203],		% latin capital letter E with diaeresis,
 		"euml"-[235],		% latin small letter e with diaeresis,
 		"euro"-[8364],		% euro sign, U+20AC NEW
 		"exist"-[8707],		% there exists, U+2203 ISOtech
@@ -1421,37 +1463,29 @@
 		"frac14"-[188],		% vulgar fraction one quarter
 		"frac34"-[190],		% vulgar fraction three quarters
 		"frasl"-[8260],		% fraction slash, U+2044 NEW
-		"Gamma"-[915],		% greek capital letter gamma,
 		"gamma"-[947],		% greek small letter gamma,
 		"ge"-[8805],		% greater-than or equal to,
-		"harr"-[8596],		% left right arrow, U+2194 ISOamsa
 		"hArr"-[8660],		% left right double arrow,
+		"harr"-[8596],		% left right arrow, U+2194 ISOamsa
 		"hearts"-[9829],	% black heart suit = valentine,
 		"hellip"-[8230],	% horizontal ellipsis = three dot leader,
-		"Iacute"-[205],		% latin capital letter I with acute,
 		"iacute"-[237],		% latin small letter i with acute,
-		"Icirc"-[206],		% latin capital letter I with circumflex,
 		"icirc"-[238],		% latin small letter i with circumflex,
 		"iexcl"-[161],		% inverted exclamation mark, U+00A1 ISOnum>
-		"Igrave"-[204],		% latin capital letter I with grave,
 		"igrave"-[236],		% latin small letter i with grave,
 		"image"-[8465],		% blackletter capital I = imaginary part,
 		"infin"-[8734],		% infinity, U+221E ISOtech
 		"int"-[8747],		% integral, U+222B ISOtech
-		"Iota"-[921],		% greek capital letter iota, U+0399
 		"iota"-[953],		% greek small letter iota, U+03B9 ISOgrk3
 		"iquest"-[191],		% inverted question mark
 		"isin"-[8712],		% element of, U+2208 ISOtech
-		"Iuml"-[207],		% latin capital letter I with diaeresis,
 		"iuml"-[239],		% latin small letter i with diaeresis,
-		"Kappa"-[922],		% greek capital letter kappa, U+039A
 		"kappa"-[954],		% greek small letter kappa,
-		"Lambda"-[923],		% greek capital letter lambda,
+		"lArr"-[8656],		% leftwards double arrow, U+21D0 ISOtech
 		"lambda"-[955],		% greek small letter lambda,
 		"lang"-[9001],		% left-pointing angle bracket = bra,
 		"laquo"-[171],		% left-pointing double angle quotation mark
 		"larr"-[8592],		% leftwards arrow, U+2190 ISOnum
-		"lArr"-[8656],		% leftwards double arrow, U+21D0 ISOtech
 		"lceil"-[8968],		% left ceiling = apl upstile,
 		"ldquo"-[8220],		% left double quotation mark,
 		"le"-[8804],		% less-than or equal to, U+2264 ISOtech
@@ -1466,7 +1500,6 @@
 		"micro"-[181],		% micro sign, U+00B5 ISOnum>
 		"middot"-[183],		% middle dot = Georgian comma
 		"minus"-[8722],		% minus sign, U+2212 ISOtech
-		"Mu"-[924],			% greek capital letter mu, U+039C
 		"mu"-[956],			% greek small letter mu, U+03BC ISOgrk3
 		"nabla"-[8711],		% nabla = backward difference,
 		"nbsp"-[160],		% no-break space = non-breaking space,
@@ -1476,73 +1509,55 @@
 		"not"-[172],		% not sign, U+00AC ISOnum>
 		"notin"-[8713],		% not an element of, U+2209 ISOtech
 		"nsub"-[8836],		% not a subset of, U+2284 ISOamsn
-		"Ntilde"-[209],		% latin capital letter N with tilde,
 		"ntilde"-[241],		% latin small letter n with tilde,
-		"Nu"-[925],			% greek capital letter nu, U+039D
 		"nu"-[957],			% greek small letter nu, U+03BD ISOgrk3
-		"Oacute"-[211],		% latin capital letter O with acute,
 		"oacute"-[243],		% latin small letter o with acute,
-		"Ocirc"-[212],		% latin capital letter O with circumflex,
 		"ocirc"-[244],		% latin small letter o with circumflex,
-		"OElig"-[338],		% latin capital ligature OE,
 		"oelig"-[339],		% latin small ligature oe, U+0153 ISOlat2
-		"Ograve"-[210],		% latin capital letter O with grave,
 		"ograve"-[242],		% latin small letter o with grave,
 		"oline"-[8254],		% overline = spacing overscore,
-		"Omega"-[937],		% greek capital letter omega,
 		"omega"-[969],		% greek small letter omega,
-		"Omicron"-[927],	% greek capital letter omicron, U+039F
 		"omicron"-[959],	% greek small letter omicron, U+03BF NEW
 		"oplus"-[8853],		% circled plus = direct sum,
 		"or"-[8744],		% logical or = vee, U+2228 ISOtech
 		"ordf"-[170],		% feminine ordinal indicator, U+00AA ISOnum>
 		"ordm"-[186],		% masculine ordinal indicator,
-		"Oslash"-[216],		% latin capital letter O with stroke
 		"oslash"-[248],		% latin small letter o with stroke,
-		"Otilde"-[213],		% latin capital letter O with tilde,
 		"otilde"-[245],		% latin small letter o with tilde,
 		"otimes"-[8855],	% circled times = vector product,
-		"Ouml"-[214],		% latin capital letter O with diaeresis,
 		"ouml"-[246],		% latin small letter o with diaeresis,
 		"para"-[182],		% pilcrow sign = paragraph sign,
 		"part"-[8706],		% partial differential, U+2202 ISOtech
 		"permil"-[8240],	% per mille sign, U+2030 ISOtech
 		"perp"-[8869],		% up tack = orthogonal to = perpendicular,
-		"Phi"-[934],		% greek capital letter phi,
 		"phi"-[966],		% greek small letter phi, U+03C6 ISOgrk3
-		"Pi"-[928],			% greek capital letter pi, U+03A0 ISOgrk3
 		"pi"-[960],			% greek small letter pi, U+03C0 ISOgrk3
 		"piv"-[982],		% greek pi symbol, U+03D6 ISOgrk3
 		"plusmn"-[177],		% plus-minus sign = plus-or-minus sign,
 		"pound"-[163],		% pound sign, U+00A3 ISOnum>
 		"prime"-[8242],		% prime = minutes = feet, U+2032 ISOtech
-		"Prime"-[8243],		% double prime = seconds = inches,
 		"prod"-[8719],		% n-ary product = product sign,
 		"prop"-[8733],		% proportional to, U+221D ISOtech
-		"Psi"-[936],		% greek capital letter psi,
 		"psi"-[968],		% greek small letter psi, U+03C8 ISOgrk3
+		"rArr"-[8658],		% rightwards double arrow,
 		"radic"-[8730],		% square root = radical sign,
 		"rang"-[9002],		% right-pointing angle bracket = ket,
 		"raquo"-[187],		% right-pointing double angle quotation mark
 		"rarr"-[8594],		% rightwards arrow, U+2192 ISOnum
-		"rArr"-[8658],		% rightwards double arrow,
 		"rceil"-[8969],		% right ceiling, U+2309 ISOamsc
 		"rdquo"-[8221],		% right double quotation mark,
 		"real"-[8476],		% blackletter capital R = real part symbol,
 		"reg"-[174],		% registered sign = registered trade mark sign,
 		"rfloor"-[8971],	% right floor, U+230B ISOamsc
-		"Rho"-[929],		% greek capital letter rho, U+03A1
 		"rho"-[961],		% greek small letter rho, U+03C1 ISOgrk3
 		"rlm"-[8207],		% right-to-left mark, U+200F NEW RFC 2070
 		"rsaquo"-[8250],	% single right-pointing angle quotation mark,
 		"rsquo"-[8217],		% right single quotation mark,
 		"sbquo"-[8218],		% single low-9 quotation mark, U+201A NEW
-		"Scaron"-[352],		% latin capital letter S with caron,
 		"scaron"-[353],		% latin small letter s with caron,
 		"sdot"-[8901],		% dot operator, U+22C5 ISOamsb
 		"sect"-[167],		% section sign, U+00A7 ISOnum>
 		"shy"-[173],		% soft hyphen = discretionary hyphen,
-		"Sigma"-[931],		% greek capital letter sigma,
 		"sigma"-[963],		% greek small letter sigma,
 		"sigmaf"-[962],		% greek small letter final sigma,
 		"sim"-[8764],		% tilde operator = varies with = similar to,
@@ -1556,45 +1571,33 @@
 		"sup3"-[179],		% superscript three = superscript digit three
 		"supe"-[8839],		% superset of or equal to,
 		"szlig"-[223],		% latin small letter sharp s = ess-zed,
-		"Tau"-[932],		% greek capital letter tau, U+03A4
 		"tau"-[964],		% greek small letter tau, U+03C4 ISOgrk3
 		"there4"-[8756],	% therefore, U+2234 ISOtech
-		"Theta"-[920],		% greek capital letter theta,
 		"theta"-[952],		% greek small letter theta,
 		"thetasym"-[977],	% greek small letter theta symbol,
 		"thinsp"-[8201],	% thin space, U+2009 ISOpub
-		"THORN"-[222],		% latin capital letter THORN,
 		"thorn"-[254],		% latin small letter thorn with,
 		"tilde"-[732],		% small tilde, U+02DC ISOdia
 		"times"-[215],		% multiplication sign, U+00D7 ISOnum>
 		"trade"-[8482],		% trade mark sign, U+2122 ISOnum
-		"Uacute"-[218],		% latin capital letter U with acute,
+		"uArr"-[8657],		% upwards double arrow, U+21D1 ISOamsa
 		"uacute"-[250],		% latin small letter u with acute,
 		"uarr"-[8593],		% upwards arrow, U+2191 ISOnum
-		"uArr"-[8657],		% upwards double arrow, U+21D1 ISOamsa
-		"Ucirc"-[219],		% latin capital letter U with circumflex,
 		"ucirc"-[251],		% latin small letter u with circumflex,
-		"Ugrave"-[217],		% latin capital letter U with grave,
 		"ugrave"-[249],		% latin small letter u with grave,
 		"uml"-[168],		% diaeresis = spacing diaeresis,
 		"upsih"-[978],		% greek upsilon with hook symbol,
-		"Upsilon"-[933],	% greek capital letter upsilon,
 		"upsilon"-[965],	% greek small letter upsilon,
-		"Uuml"-[220],		% latin capital letter U with diaeresis,
 		"uuml"-[252],		% latin small letter u with diaeresis,
 		"weierp"-[8472],	% script capital P = power set
-		"Xi"-[926],			% greek capital letter xi, U+039E ISOgrk3
 		"xi"-[958],			% greek small letter xi, U+03BE ISOgrk3
-		"Yacute"-[221],		% latin capital letter Y with acute,
 		"yacute"-[253],		% latin small letter y with acute,
 		"yen"-[165],		% yen sign = yuan sign, U+00A5 ISOnum>
 		"yuml"-[255],		% latin small letter y with diaeresis,
-		"Yuml"-[376],		% latin capital letter Y with diaeresis,
-		"Zeta"-[918],		% greek capital letter zeta, U+0396
 		"zeta"-[950],		% greek small letter zeta, U+03B6 ISOgrk3
 		"zwj"-[8205],		% zero width joiner, U+200D NEW RFC 2070
 		"zwnj"-[8204]		% zero width non-joiner,
-		] ).
+	] ).
 
 
 	/* chars( ?Chars, ?Plus, ?Minus ) used as chars( ?Chars ) in a DCG to
@@ -1690,6 +1693,29 @@
 	fault_id( _Attributes ) --> "".
 
 
+	/* exception( +Message, +Document, +Culprit, +Path ) is a hook to
+	 * raise an exception to be raised in respect of a fault in the XML Term:
+	 * Document.
+	 *  - Culprit is a sub-term of Document which cannot be serialized;
+	 *  - Message is an atom naming the type of error;
+	 *  - Path is a string encoding a list of SubTerm's ancestor elements in the
+	 *    form <tag>{(id)}* where <tag> is the element tag and <id> is the value
+	 *    of any attribute _named_ id.
+	 */
+	:- private(exception/4).
+	:- mode(exception(+atom, +nonvar, +nonvar, +nonvar), one).
+	:- info(exception/4, [
+		comment is 'Hook to raise an exception to be raised in respect of a fault in the XML Term: Document.',
+		argnames is ['Message', 'Document', 'Culprit', 'Path']
+	]).
+
+	exception( Message, Document, Culprit, Path ) :-
+		throw(
+			application_error('XML Parse: ~s in ~q~nCulprit: ~q~nPath: ~s', 
+				[Message,Document,Culprit,Path] )
+			).
+
+
 	/* document_generation( +Format, +Document ) is a DCG generating Document
 	 * as a list of character codes. Format is true|false defining whether layouts,
 	 * to provide indentation, should be added between the element content of
@@ -1734,7 +1760,7 @@
 		"<?", generated_name(Target), " ", chars( Process ) ,"?>".
 	generation( pcdata(Chars), _Prefix, Format0, _Indent, Format1 ) -->
 		pcdata_generation( Chars ),
-		{pcdata_format( Chars, Format0, Format1 )}.
+		{character_data_format( Chars, Format0, Format1 )}.
 	generation( comment( Comment ), _Prefix, Format, Indent, Format ) -->
 		indent( Format, Indent ),
 		"<!--", chars( Comment ), "-->".
@@ -1846,10 +1872,19 @@
 
 	quoted_string2( [], _LayoutPlus, _LayoutMinus, List, List ).
 	quoted_string2( [Char|Chars], LayoutPlus, LayoutMinus, Plus, Minus ) :-
-		(	Char =< 0'  ->
+		(	Char =< 0' ,
+			legal_xml_unicode( Char ) ->
 			Plus = Plus1,
 			LayoutMinus = [Char|LayoutMinus1],
 			LayoutPlus = LayoutPlus1
+		;	Char == 34 ->
+			Plus = LayoutPlus,
+			escaped_quote( LayoutMinus, Plus1 ),
+			LayoutPlus1 = LayoutMinus1
+		;	Char == 39 ->
+			Plus = LayoutPlus,
+			apos( LayoutMinus, Plus1 ),
+			LayoutPlus1 = LayoutMinus1
 		;	Char =< 127 ->
 			Plus = LayoutPlus,
 			pcdata_7bit( Char, LayoutMinus, Plus1 ),
@@ -1869,6 +1904,10 @@
 	indent( false, _Indent ) --> [].
 	indent( true, Indent ) -->
 		"\n",	chars( Indent ).
+
+	apos --> "&apos;".
+
+	escaped_quote --> "&quot;".
 
 	/* pcdata_generation( +Chars ) is a DCG representing Chars, a list of character
 	 * codes as legal XML "Parsed character data" (PCDATA) string. Any codes
@@ -1963,7 +2002,7 @@
 	pcdata_7bit( 59 ) --> ";".
 	pcdata_7bit( 60 ) --> "&lt;".
 	pcdata_7bit( 61 ) --> "=".
-	pcdata_7bit( 62 ) --> "&gt;".
+	pcdata_7bit( 62 ) --> "&gt;". % escaping necessary to prevent ']]>' sequences in pcdata.
 	pcdata_7bit( 63 ) --> "?".
 	pcdata_7bit( 64 ) --> "@".
 	pcdata_7bit( 65 ) --> "A".
@@ -2033,19 +2072,19 @@
 	pcdata_8bits_plus( Codes ) -->
 		"&#", chars( Codes ), ";".
 
-	/* pcdata_format( +Chars, +Format0, ?Format1 ) holds when Format0 and Format1
-	 * are the statuses of XML formatting before and after Chars - which may be
-	 * null.
+	/* character_data_format( +Chars, +Format0, ?Format1 ) holds when Format0 and
+	 * Format1 are the statuses of XML formatting before and after Chars - 
+	 * which may be null.
 	 */
-	:- private(pcdata_format/3).
-	:- mode(pcdata_format(+nonvar, +nonvar, ?nonvar), zero_or_one).
-	:- info(pcdata_format/3, [
+	:- private(character_data_format/3).
+	:- mode(character_data_format(+nonvar, +nonvar, ?nonvar), zero_or_one).
+	:- info(character_data_format/3, [
 		comment is 'Holds when Format0 and Format1 are the statuses of XML formatting before and after Chars - which may be null.',
 		argnames is ['Chars', 'Format0', 'Format1']
 	]).
 
-	pcdata_format( [], Format, Format ).
-	pcdata_format( [_Char|_Chars], _Format, false ).
+	character_data_format( [], Format, Format ).
+	character_data_format( [_Char|_Chars], _Format, false ).
 
 	/* cdata_generation( +Chars ) is a DCG representing Chars, a list of character
 	 * codes as a legal XML CDATA string. Any character codes disallowed by the XML

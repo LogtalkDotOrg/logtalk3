@@ -41,6 +41,11 @@ Examples
 * UPDATED: The `benchmarks` example to illustrate the use of static binding
 when sending database messages to known objects.
 
+Contributions
+-------------
+
+* UPDATED: Port of John Fletcher's Prolog XML parser to release 3.5.
+
 
 3.00.0 Alpha 33 - January 15, 2014
 ==================================
