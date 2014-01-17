@@ -130,7 +130,7 @@
 	benchmark(d2, plain_dyndb(_)).
 	benchmark(d3, database::this_dyndb(_)).
 	benchmark(d4, database::self_dyndb(_)).
-	benchmark(d5, database::obj_dyndb(_)).
+	benchmark(d5, database::other_dyndb(_)).
 
 	% repeat a goal N times without using call/1 and using a failure-driven loop to 
 	% try to avoid the interference of Prolog compiler memory management mechanism
@@ -271,7 +271,7 @@
 
 	do_benchmark(d5, N) :-
 		{my_repeat(N)},
-			database::obj_dyndb(N),
+			database::other_dyndb(N),
 		fail.
 	do_benchmark(d5, _).
 

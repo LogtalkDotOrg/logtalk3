@@ -32,9 +32,9 @@
 		argnames is ['Term']
 	]).
 
-	:- public(obj_dyndb/1).
-	:- mode(obj_dyndb(+nonvar), one).
-	:- info(obj_dyndb/1, [
+	:- public(other_dyndb/1).
+	:- mode(other_dyndb(+nonvar), one).
+	:- info(other_dyndb/1, [
 		comment is 'Asserts and retracts a fact using ::/2.',
 		argnames is ['Term']
 	]).
@@ -44,17 +44,17 @@
 
 	% direct calls to assertz/1 and retract/1:
 	this_dyndb(N) :-
-		retractall(pred_this(N, _, _,    _)),
+		retractall(pred_this(N, _, _, _)),
 		assertz(pred_this(N, _, a, 3.14)).
 
 	% calls to assertz/1 and retract/1 using ::/1:
 	self_dyndb(N) :-
-		::retractall(pred_self(N, _, _,    _)),
+		::retractall(pred_self(N, _, _, _)),
 		::assertz(pred_self(N, _, a, 3.14)).
 
 	% calls to assertz/1 and retract/1 using ::/2:
-	obj_dyndb(N) :-
-		database_other::retractall(pred_other(N, _, _,    _)),
+	other_dyndb(N) :-
+		database_other::retractall(pred_other(N, _, _, _)),
 		database_other::assertz(pred_other(N, _, a, 3.14)).
 
 :- end_object.
