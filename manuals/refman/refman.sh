@@ -170,7 +170,7 @@ eval $xslt_proc -o control/send_to_object_2.section refman.xsl control/send_to_o
 eval $xslt_proc -o control/send_to_self_1.section refman.xsl control/send_to_self_1.html
 eval $xslt_proc -o control/call_super_1.section refman.xsl control/call_super_1.html
 eval $xslt_proc -o control/delegate_message_1.section refman.xsl control/delegate_message_1.html
-eval $xslt_proc -o control/external_call_1.section refman.xsl control/external_1.html
+eval $xslt_proc -o control/external_call_1.section refman.xsl control/external_call_1.html
 eval $xslt_proc -o control/context_switch_2.section refman.xsl control/context_switch_2.html
 
 cat -s \

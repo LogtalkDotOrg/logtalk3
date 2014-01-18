@@ -44,7 +44,7 @@ Defines an expansion for a goal. The first argument is the goal to be expanded. 
 Goal expansion may be used either by calling the <code>expand_goal/2</code> method explicitly or by using <em><a class="glossary" title="Go to glossary definition" href="../../glossary.html#hook">hook objects</a></em>. Clauses for the <code>goal_expansion/2</code> predicate defined within an object or a category are <strong>never</strong> used in the compilation of the object or the category itself.
 </p>
 <p>
-Any expanded goal wrapped in the <a title="Consult reference manual" href="../control/external_1.html"><code>{}/1</code></a> compiler bypass control construct will not be further compiled but used as-is.
+Any expanded goal wrapped in the <a title="Consult reference manual" href="../control/external_call_1.html"><code>{}/1</code></a> compiler bypass control construct will not be further compiled but used as-is.
 </p>
 <p>
 Objects and categories implementing this predicate should declare that they implement the <code>expanding</code> protocol.
