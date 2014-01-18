@@ -71,7 +71,7 @@ We can define a new object in the same way we write Prolog code: by using a text
 Object names can be atoms or compound terms (when defining parametric objects, see below). Objects, categories, and protocols share the same name space: we cannot have an object with the same name as a protocol or a category.
 </p>
 <p>
-Object code (directives and predicates) is textually encapsulated by using two Logtalk directives: <a title="Consult reference manual" href="../refman/directives/object1_5.html"><code>object/1-5</code></a> and <a title="Consult reference manual" href="../refman/directives/end_object0.html"><code>end_object/0</code></a>. The most simple object will be one that is self-contained, not depending on any other Logtalk entity:
+Object code (directives and predicates) is textually encapsulated by using two Logtalk directives: <a title="Consult reference manual" href="../refman/directives/object_1_5.html"><code>object/1-5</code></a> and <a title="Consult reference manual" href="../refman/directives/end_object_0.html"><code>end_object/0</code></a>. The most simple object will be one that is self-contained, not depending on any other Logtalk entity:
 </p>
 <pre>:- object(Object).
     ...
@@ -171,7 +171,7 @@ We can use, in the same application, both prototype and class-based hierarchies 
 Parametric objects have a compound term for name instead of an atom. This compound term usually contains free variables that can be instantiated when sending a message to the object, thus acting as object parameters. The object predicates can then be coded to depend on the parameter values. When an object state is set at object creation and never changed, parameters provide a better solution than using the object's database via asserts. Parametric objects can also be used to associate a set of predicates to terms that share a common functor and arity.
 </p>
 <p>
-In order to give access to an object parameters, Logtalk provides the <a title="Consult reference manual" href="../refman/methods/parameter2.html"><code>parameter/2</code></a> built-in local method:
+In order to give access to an object parameters, Logtalk provides the <a title="Consult reference manual" href="../refman/methods/parameter_2.html"><code>parameter/2</code></a> built-in local method:
 </p>
 <pre>:- object(Functor(Arg1, Arg2, ...)).
 
@@ -182,7 +182,7 @@ In order to give access to an object parameters, Logtalk provides the <a title="
         parameter(Number, Value),
         ... .</pre>
 <p>
-An alternative solution is to use the built-in local method <a title="Consult reference manual" href="../refman/methods/this1.html"><code>this/1</code></a>. For example:
+An alternative solution is to use the built-in local method <a title="Consult reference manual" href="../refman/methods/this_1.html"><code>this/1</code></a>. For example:
 </p>
 <pre>:- object(foo(Arg)).
 
@@ -193,7 +193,7 @@ An alternative solution is to use the built-in local method <a title="Consult re
         this(foo(Arg)),
         ... .</pre>
 <p>
-Both solutions are equally efficient because the runtime cost of the methods <code>this/1</code> and <code>parameter/2</code> is negligible. The drawback of this second solution is that we must check all calls of <code>this/1</code> if we change the object name. Note that we can't use these method with the message sending operators (<a title="Consult reference manual" href="../refman/control/to_object2.html"><code>::/2</code></a>, <a title="Consult reference manual" href="../refman/control/to_self1.html"><code>::/1</code></a>, or <a title="Consult reference manual" href="../refman/control/to_object2.html"><code>^^/1</code></a>).
+Both solutions are equally efficient because the runtime cost of the methods <code>this/1</code> and <code>parameter/2</code> is negligible. The drawback of this second solution is that we must check all calls of <code>this/1</code> if we change the object name. Note that we can't use these method with the message sending operators (<a title="Consult reference manual" href="../refman/control/send_to_object_2.html"><code>::/2</code></a>, <a title="Consult reference manual" href="../refman/control/send_to_self_1.html"><code>::/1</code></a>, or <a title="Consult reference manual" href="../refman/control/call_super_1.html"><code>^^/1</code></a>).
 </p>
 <p>
 When storing a parametric object in its own source file, the convention is to name the file after the object, with the object arity appended. For instance, when defining an object named <code>sort(Type)</code>, we may save it in a <code>sort_1.lgt</code> text file. This way it is easy to avoid file name clashes when saving Logtalk entities that have the same functor but different arity.
@@ -209,7 +209,7 @@ In this context, the proxy argument is proved as a plain Prolog goal. If success
 <h2 id="objects_finding">Finding defined objects</h2>
 
 <p>
-We can find, by backtracking, all defined objects by calling the <a title="Consult reference manual" href="../refman/builtins/current_object1.html"><code>current_object/1</code></a> built-in predicate with a non-instantiated variable:
+We can find, by backtracking, all defined objects by calling the <a title="Consult reference manual" href="../refman/predicates/current_object_1.html"><code>current_object/1</code></a> built-in predicate with a non-instantiated variable:
 </p>
 <pre>| ?- current_object(Object).</pre>
 <p>
@@ -219,7 +219,7 @@ This predicate can also be used to test if an object is defined by calling it wi
 <h2 id="objects_creating">Creating a new object in runtime</h2>
 
 <p>
-An object can be dynamically created at runtime by using the <a title="Consult reference manual" href="../refman/builtins/create_object4.html"><code>create_object/4</code></a> built-in predicate:
+An object can be dynamically created at runtime by using the <a title="Consult reference manual" href="../refman/predicates/create_object_4.html"><code>create_object/4</code></a> built-in predicate:
 </p>
 <pre>| ?- create_object(Object, Relations, Directives, Clauses).</pre>
 <p>
@@ -250,7 +250,7 @@ If we need to create a lot of (dynamic) objects at runtime, then is best to defi
 <h2 id="objects_abolishing">Abolishing an existing object</h2>
 
 <p>
-Dynamic objects can be abolished using the <a title="Consult reference manual" href="../refman/builtins/abolish_object1.html"><code>abolish_object/1</code></a> built-in predicate:
+Dynamic objects can be abolished using the <a title="Consult reference manual" href="../refman/predicates/abolish_object_1.html"><code>abolish_object/1</code></a> built-in predicate:
 </p>
 <pre>| ?- abolish_object(Object).</pre>
 <p>
@@ -266,7 +266,7 @@ Object directives are used to set initialization goals and object properties and
 <h3 id="objects_initialization">Object initialization</h3>
 
 <p>
-We can define a goal to be executed as soon as an object is (compiled and) loaded to memory with the <a title="Consult reference manual" href="../refman/directives/initialization1.html"><code>initialization/1</code></a> directive:
+We can define a goal to be executed as soon as an object is (compiled and) loaded to memory with the <a title="Consult reference manual" href="../refman/directives/initialization_1.html"><code>initialization/1</code></a> directive:
 </p>
 <pre>:- initialization(Goal).</pre>
 <p>
@@ -309,17 +309,17 @@ Note, however, that descendant objects do not inherit initialization directives.
 <h3 id="objects_synchronized">Synchronized objects</h3>
 
 <p>
-When doing multi-threading programming, is possible to synchronize all the predicates of an object using the <a title="Consult reference manual" href="../refman/directives/synchronized0.html"><code>synchronized/0</code></a> directive in the object source code:
+When doing multi-threading programming, is possible to synchronize all the predicates of an object using the <a title="Consult reference manual" href="../refman/directives/synchronized_0.html"><code>synchronized/0</code></a> directive in the object source code:
 </p>
 <pre>:- synchronized.</pre>
 <p>
-This directive results in using internally the same mutex for synchronizing the execution of all defined object predicates. For fine-grained predicate synchronization, the <a title="Consult reference manual" href="../refman/directives/synchronized1.html"><code>synchronized/1</code></a> directive may be used instead.
+This directive results in using internally the same mutex for synchronizing the execution of all defined object predicates. For fine-grained predicate synchronization, the <a title="Consult reference manual" href="../refman/directives/synchronized_1.html"><code>synchronized/1</code></a> directive may be used instead.
 </p>
 
 <h3 id="objects_dynamic">Dynamic objects</h3>
 
 <p>
-Similar to Prolog predicates, an object can be either static or dynamic. An object created during the execution of a program is always dynamic. An object defined in a file can be either dynamic or static. Dynamic objects are declared by using the <a title="Consult reference manual" href="../refman/directives/dynamic0.html"><code>dynamic/0</code></a> directive in the object source code:
+Similar to Prolog predicates, an object can be either static or dynamic. An object created during the execution of a program is always dynamic. An object defined in a file can be either dynamic or static. Dynamic objects are declared by using the <a title="Consult reference manual" href="../refman/directives/dynamic_0.html"><code>dynamic/0</code></a> directive in the object source code:
 </p>
 <pre>:- dynamic.</pre>
 <p>
@@ -329,7 +329,7 @@ The directive must precede any predicate directives or clauses. Please be aware 
 <h3 id="objects_documentation">Object documentation</h3>
 
 <p>
-An object can be documented with arbitrary user-defined information by using the <a title="Consult reference manual" href="../refman/directives/info1.html"><code>info/1</code></a> directive:
+An object can be documented with arbitrary user-defined information by using the <a title="Consult reference manual" href="../refman/directives/info_1.html"><code>info/1</code></a> directive:
 </p>
 <pre>:- info(List).</pre>
 <p>
@@ -342,7 +342,7 @@ See the <a href="documenting.html">documenting Logtalk programs</a> session for 
 Logtalk provides six sets of built-in predicates that enable us to query the system about the possible relationships that an object may have with other entities.
 </p>
 <p>
-The built-in predicates <a title="Consult reference manual" href="../refman/builtins/instantiates_class2_3.html"><code>instantiates_class/2</code></a> and <a title="Consult reference manual" href="../refman/builtins/instantiates_class2_3.html"><code>instantiates_class/3</code></a> can be used to query all instantiation relations:
+The built-in predicates <a title="Consult reference manual" href="../refman/predicates/instantiates_class_2_3.html"><code>instantiates_class/2</code></a> and <a title="Consult reference manual" href="../refman/predicates/instantiates_class_2_3.html"><code>instantiates_class/3</code></a> can be used to query all instantiation relations:
 </p>
 <pre>| ?- instantiates_class(Instance, Class).</pre>
 <p>
@@ -350,7 +350,7 @@ or, if we want to know the instantiation scope:
 </p>
 <pre>| ?- instantiates_class(Instance, Class, Scope).</pre>
 <p>
-Specialization relations can be found by using either the <a title="Consult reference manual" href="../refman/builtins/specializes_class2_3.html"><code>specializes_class/2</code></a> or the <a title="Consult reference manual" href="../refman/builtins/specializes_class2_3.html"><code>specializes_class/3</code></a> built-in predicates:
+Specialization relations can be found by using either the <a title="Consult reference manual" href="../refman/predicates/specializes_class_2_3.html"><code>specializes_class/2</code></a> or the <a title="Consult reference manual" href="../refman/predicates/specializes_class_2_3.html"><code>specializes_class/3</code></a> built-in predicates:
 </p>
 <pre>| ?- specializes_class(Class, Superclass).</pre>
 <p>
@@ -358,7 +358,7 @@ or, if we want to know the specialization scope:
 </p>
 <pre>| ?- specializes_class(Class, Superclass, Scope).</pre>
 <p>
-For prototypes, we can query extension relations with the <a title="Consult reference manual" href="../refman/builtins/extends_object2_3.html"><code>extends_object/2</code></a> or the <a title="Consult reference manual" href="../refman/builtins/extends_object2_3.html"><code>extends_object/3</code></a> built-in predicates:
+For prototypes, we can query extension relations with the <a title="Consult reference manual" href="../refman/predicates/extends_object_2_3.html"><code>extends_object/2</code></a> or the <a title="Consult reference manual" href="../refman/predicates/extends_object_2_3.html"><code>extends_object/3</code></a> built-in predicates:
 </p>
 <pre>| ?- extends_object(Object, Parent).</pre>
 <p>
@@ -366,7 +366,7 @@ or, if we want to know the extension scope:
 </p>
 <pre>| ?- extends_object(Object, Parent, Scope).</pre>
 <p>
-In order to find which objects import which categories we can use the built-in predicates <a title="Consult reference manual" href="../refman/builtins/imports_category2_3.html"><code>imports_category/2</code></a> or <a title="Consult reference manual" href="../refman/builtins/imports_category2_3.html"><code>imports_category/3</code></a>:
+In order to find which objects import which categories we can use the built-in predicates <a title="Consult reference manual" href="../refman/predicates/imports_category_2_3.html"><code>imports_category/2</code></a> or <a title="Consult reference manual" href="../refman/predicates/imports_category_2_3.html"><code>imports_category/3</code></a>:
 </p>
 <pre>| ?- imports_category(Object, Category).</pre>
 <p>
@@ -374,7 +374,7 @@ or, if we want to know the importation scope:
 </p>
 <pre>| ?- imports_category(Object, Category, Scope).</pre>
 <p>
-To find which objects implements which protocols we can use the <a title="Consult reference manual" href="../refman/builtins/implements_protocol2_3.html"><code>implements_protocol/2-3</code></a> and <a title="Consult reference manual" href="../refman/builtins/conforms_to_protocol2_3.html"><code>conforms_to_protocol/2-3</code></a> built-in predicates:
+To find which objects implements which protocols we can use the <a title="Consult reference manual" href="../refman/predicates/implements_protocol_2_3.html"><code>implements_protocol/2-3</code></a> and <a title="Consult reference manual" href="../refman/predicates/conforms_to_protocol_2_3.html"><code>conforms_to_protocol/2-3</code></a> built-in predicates:
 </p>
 <pre>| ?- implements_protocol(Object, Protocol, Scope).</pre>
 <p>
@@ -382,11 +382,11 @@ or, if we also want inherited protocols:
 </p>
 <pre>| ?- conforms_to_protocol(Object, Protocol, Scope).</pre>
 <p>
-Note that, if we use a non-instantiated variable for the first argument, we will need to use the <a title="Consult reference manual" href="../refman/builtins/current_object1.html"><code>current_object/1</code></a> built-in predicate to ensure that the entity returned is an object and not a category.
+Note that, if we use a non-instantiated variable for the first argument, we will need to use the <a title="Consult reference manual" href="../refman/predicates/current_object_1.html"><code>current_object/1</code></a> built-in predicate to ensure that the entity returned is an object and not a category.
 </p>
 <p>
 To find which objects are explicitly complemented by categories we can use the 
-<a title="Consult reference manual" href="../refman/builtins/complements_object2.html"><code>complements_object/2</code></a> built-in predicate:
+<a title="Consult reference manual" href="../refman/predicates/complements_object_2.html"><code>complements_object/2</code></a> built-in predicate:
 </p>
 <pre>| ?- complements_object(Category, Object).</pre>
 <p>
@@ -397,11 +397,11 @@ Note that more than one category may explicitly complement a single object.
 <h2 id="objects_properties">Object properties</h2>
 
 <p>
-We can find the properties of defined objects by calling the built-in predicate <a title="Consult reference manual" href="../refman/builtins/object_property2.html"><code>object_property/2</code></a>:
+We can find the properties of defined objects by calling the built-in predicate <a title="Consult reference manual" href="../refman/predicates/object_property_2.html"><code>object_property/2</code></a>:
 </p>
 <pre>| ?- object_property(Object, Property).</pre>
 <p>
-An object may have the property <code>static</code>, <code>dynamic</code>, or <code>built_in</code>. Dynamic objects can be abolished in runtime by calling the <a title="Consult reference manual" href="../refman/builtins/abolish_object1.html"><code>abolish_object/1</code></a> built-in predicate. An object may also have the properties <code>synchronized</code> and <code>threaded</code>, which are related to multi-threading programming. Depending on the back-end Prolog compiler, an object may have additional properties related to the source file where it is defined.
+An object may have the property <code>static</code>, <code>dynamic</code>, or <code>built_in</code>. Dynamic objects can be abolished in runtime by calling the <a title="Consult reference manual" href="../refman/predicates/abolish_object_1.html"><code>abolish_object/1</code></a> built-in predicate. An object may also have the properties <code>synchronized</code> and <code>threaded</code>, which are related to multi-threading programming. Depending on the back-end Prolog compiler, an object may have additional properties related to the source file where it is defined.
 </p>
 
 <h2 id="objects_built_in">Built-in objects</h2>

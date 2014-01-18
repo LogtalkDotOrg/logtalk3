@@ -56,7 +56,7 @@ It is assumed that these operators remain active (once the Logtalk compiler and 
 <h2 id="messages_sending">Sending a message to an object</h2>
 
 <p>
-Sending a message to an object is accomplished by using the <a title="Consult reference manual" href="../refman/control/to_object2.html"><code>::/2</code></a> infix operator:
+Sending a message to an object is accomplished by using the <a title="Consult reference manual" href="../refman/control/send_to_object_2.html"><code>::/2</code></a> infix operator:
 </p>
 <pre>| ?- Object::Message.</pre>
 <p>
@@ -66,7 +66,7 @@ The message must match a public predicate declared for the receiving object or a
 <h2 id="messages_delegating">Delegating a message to an object</h2>
 
 <p>
-It is also possible to send a message to an object while preserving the original <em>sender</em> by using the <a title="Consult reference manual" href="../refman/control/delegate1.html"><code>[]/1</code></a> delegation control construct:
+It is also possible to send a message to an object while preserving the original <em>sender</em> by using the <a title="Consult reference manual" href="../refman/control/delegate_message_1.html"><code>[]/1</code></a> delegation control construct:
 </p>
 <pre>..., [Object::Message], ....</pre>
 <p>
@@ -76,7 +76,7 @@ This control construct can only be used within objects and categories (at the in
 <h2>Sending a message to <em>self</em><a id="messages_self"></a></h2>
 
 <p>
-While defining a predicate, we sometimes need to send a message to <em>self</em>, i.e., to the same object that has received the original message. This is done in Logtalk through the <a title="Consult reference manual" href="../refman/control/to_self1.html"><code>::/1</code></a> control construct:
+While defining a predicate, we sometimes need to send a message to <em>self</em>, i.e., to the same object that has received the original message. This is done in Logtalk through the <a title="Consult reference manual" href="../refman/control/send_to_self_1.html"><code>::/1</code></a> control construct:
 </p>
 <pre>::Message</pre>
 <p>
@@ -100,7 +100,7 @@ This extended syntax may also be used with the <code>::/1</code> message sending
 <h2 id="messages_super">Calling imported and inherited predicate definitions</h2>
 
 <p>
-When redefining a predicate, sometimes we need to call the inherited definition in the new code. This functionality, introduced by the Smalltalk language through the <code>super</code> primitive, is available in Logtalk using the <a title="Consult reference manual" href="../refman/control/super1.html"><code>^^/1</code></a> control construct:
+When redefining a predicate, sometimes we need to call the inherited definition in the new code. This functionality, introduced by the Smalltalk language through the <code>super</code> primitive, is available in Logtalk using the <a title="Consult reference manual" href="../refman/control/call_super_1.html"><code>^^/1</code></a> control construct:
 </p>
 <pre>^^Predicate</pre>
 <p>
@@ -117,7 +117,7 @@ This control construct is generalized in Logtalk where it may be used to call an
 <h2 id="messages_events">Message sending and event generation</h2>
 
 <p>
-Every message sent using the <a title="Consult reference manual" href="../refman/control/to_object2.html"><code>::/2</code></a> operator generates two events, one before and one after the message execution. Messages that are sent using the <a title="Consult reference manual" href="../refman/control/to_self1.html"><code>::/1</code></a> (message to <em>self</em>) operator or the <a title="Consult reference manual" href="../refman/control/super1.html"><code>^^/1</code></a> super mechanism described above do not generate any events. The rational behind this distinction is that messages to <em>self</em> and <em>super</em> calls are only used internally in the definition of methods or to execute additional messages with the same target object (represented by <em>self</em>). In other words, events are only generated when using an object's public interface; they cannot be used to break object encapsulation.
+Every message sent using the <a title="Consult reference manual" href="../refman/control/send_to_object_2.html"><code>::/2</code></a> operator generates two events, one before and one after the message execution. Messages that are sent using the <a title="Consult reference manual" href="../refman/control/send_to_self_1.html"><code>::/1</code></a> (message to <em>self</em>) operator or the <a title="Consult reference manual" href="../refman/control/call_super_1.html"><code>^^/1</code></a> super mechanism described above do not generate any events. The rational behind this distinction is that messages to <em>self</em> and <em>super</em> calls are only used internally in the definition of methods or to execute additional messages with the same target object (represented by <em>self</em>). In other words, events are only generated when using an object's public interface; they cannot be used to break object encapsulation.
 </p>
 <p>
 If we need to generate events for a public message sent to <em>self</em>, then we just need to write something like:

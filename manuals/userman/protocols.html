@@ -50,7 +50,7 @@ We can define a new object in the same way we write Prolog code: by using a text
 Protocol names must be atoms. Objects, categories and protocols share the same name space: we cannot have a protocol with the same name as an object or a category.
 </p>
 <p>
-Protocol directives are textually encapsulated by using two Logtalk directives: <a title="Consult reference manual" href="../refman/directives/protocol1_2.html"><code>protocol/1-2</code></a> and <a title="Consult reference manual" href="../refman/directives/end_protocol0.html"><code>end_protocol/0</code></a>. The most simple protocol will be one that is self-contained, not depending on any other Logtalk entity:
+Protocol directives are textually encapsulated by using two Logtalk directives: <a title="Consult reference manual" href="../refman/directives/protocol_1_2.html"><code>protocol/1-2</code></a> and <a title="Consult reference manual" href="../refman/directives/end_protocol_0.html"><code>end_protocol/0</code></a>. The most simple protocol will be one that is self-contained, not depending on any other Logtalk entity:
 </p>
 <pre>:- protocol(Protocol).
     ...
@@ -69,7 +69,7 @@ In order to maximize protocol reuse, all predicates specified in a protocol shou
 <h2 id="protocols_finding">Finding defined protocols</h2>
 
 <p>
-We can find, by backtracking, all defined protocols by using the <a title="Consult reference manual" href="../refman/builtins/current_protocol1.html"><code>current_protocol/1</code></a> built-in predicate with a non-instantiated variable:
+We can find, by backtracking, all defined protocols by using the <a title="Consult reference manual" href="../refman/predicates/current_protocol_1.html"><code>current_protocol/1</code></a> built-in predicate with a non-instantiated variable:
 </p>
 <pre>| ?- current_protocol(Protocol).</pre>
 <p>
@@ -79,7 +79,7 @@ This predicate can also be used to test if a protocol is defined by calling it w
 <h2 id="protocols_creating">Creating a new protocol in runtime</h2>
 
 <p>
-We can create a new (dynamic) protocol in runtime by calling the Logtalk built-in predicate <a title="Consult reference manual" href="../refman/builtins/create_protocol3.html"><code>create_protocol/3</code></a>:
+We can create a new (dynamic) protocol in runtime by calling the Logtalk built-in predicate <a title="Consult reference manual" href="../refman/predicates/create_protocol_3.html"><code>create_protocol/3</code></a>:
 </p>
 <pre>| ?- create_protocol(Protocol, Relations, Directives).</pre>
 <p>
@@ -107,7 +107,7 @@ If we need to create a lot of (dynamic) protocols at runtime, then is best to de
 <h2 id="protocols_abolishing">Abolishing an existing protocol</h2>
 
 <p>
-Dynamic protocols can be abolished using the <a title="Consult reference manual" href="../refman/builtins/abolish_protocol1.html"><code>abolish_protocol/1</code></a> built-in predicate:
+Dynamic protocols can be abolished using the <a title="Consult reference manual" href="../refman/predicates/abolish_protocol_1.html"><code>abolish_protocol/1</code></a> built-in predicate:
 </p>
 <pre>| ?- abolish_protocol(Protocol).</pre>
 <p>
@@ -123,7 +123,7 @@ Protocol directives are used to set initialization goals and protocol properties
 <h3 id="protocols_initialization">Protocol initialization</h3>
 
 <p>
-We can define a goal to be executed as soon as a protocol is (compiled and) loaded to memory with the <a title="Consult reference manual" href="../refman/directives/initialization1.html"><code>initialization/1</code></a> directive:
+We can define a goal to be executed as soon as a protocol is (compiled and) loaded to memory with the <a title="Consult reference manual" href="../refman/directives/initialization_1.html"><code>initialization/1</code></a> directive:
 </p>
 <pre>:- initialization(Goal).</pre>
 <p>
@@ -133,7 +133,7 @@ The argument can be any valid Prolog or Logtalk goal, including a message sendin
 <h3 id="protocols_dynamic">Dynamic protocols</h3>
 
 <p>
-As usually happens with Prolog code, a protocol can be either static or dynamic. A protocol created during the execution of a program is always dynamic. A protocol defined in a file can be either dynamic or static. Dynamic protocols are declared by using the <a title="Consult reference manual" href="../refman/directives/dynamic0.html"><code>dynamic/0</code></a> directive in the protocol source code:
+As usually happens with Prolog code, a protocol can be either static or dynamic. A protocol created during the execution of a program is always dynamic. A protocol defined in a file can be either dynamic or static. Dynamic protocols are declared by using the <a title="Consult reference manual" href="../refman/directives/dynamic_0.html"><code>dynamic/0</code></a> directive in the protocol source code:
 </p>
 <pre>:- dynamic.</pre>
 <p>
@@ -143,7 +143,7 @@ The directive must precede any predicate directives. Please be aware that using 
 <h3 id="protocols_documentation">Protocol documentation</h3>
 
 <p>
-A protocol can be documented with arbitrary user-defined information by using the <a title="Consult reference manual" href="../refman/directives/info1.html"><code>info/1</code></a> directive:
+A protocol can be documented with arbitrary user-defined information by using the <a title="Consult reference manual" href="../refman/directives/info_1.html"><code>info/1</code></a> directive:
 </p>
 <pre>:- info(List).</pre>
 <p>
@@ -156,7 +156,7 @@ See the <a href="documenting.html">documenting Logtalk programs</a> session for 
 Logtalk provides two sets of built-in predicates that enable us to query the system about the possible relationships that a protocol have with other entities.
 </p>
 <p>
-The built-in predicates <a title="Consult reference manual" href="../refman/builtins/extends_protocol2_3.html"><code>extends_protocol/2</code></a> and <a title="Consult reference manual" href="../refman/builtins/extends_protocol2_3.html"><code>extends_protocol/3</code></a> return all pairs of protocols so that the first one extends the second:
+The built-in predicates <a title="Consult reference manual" href="../refman/predicates/extends_protocol_2_3.html"><code>extends_protocol/2</code></a> and <a title="Consult reference manual" href="../refman/predicates/extends_protocol_2_3.html"><code>extends_protocol/3</code></a> return all pairs of protocols so that the first one extends the second:
 </p>
 <pre>| ?- extends_protocol(Protocol1, Protocol2).</pre>
 <p>
@@ -164,7 +164,7 @@ or, if we want to know the extension scope:
 </p>
 <pre>| ?- extends_protocol(Protocol1, Protocol2, Scope).</pre>
 <p>
-To find which objects or categories implement which protocols we can call the <a title="Consult reference manual" href="../refman/builtins/implements_protocol2_3.html"><code>implements_protocol/2</code></a> or <a title="Consult reference manual" href="../refman/builtins/implements_protocol2_3.html"><code>implements_protocol/2</code></a> built-in predicates:
+To find which objects or categories implement which protocols we can call the <a title="Consult reference manual" href="../refman/predicates/implements_protocol_2_3.html"><code>implements_protocol/2</code></a> or <a title="Consult reference manual" href="../refman/predicates/implements_protocol_2_3.html"><code>implements_protocol/2</code></a> built-in predicates:
 </p>
 <pre>| ?- implements_protocol(ObjectOrCategory, Protocol).</pre>
 <p>
@@ -172,17 +172,17 @@ or, if we want to know the implementation scope:
 </p>
 <pre>| ?- implements_protocol(ObjectOrCategory, Protocol, Scope).</pre>
 <p>
-Note that, if we use a non-instantiated variable for the first argument, we will need to use the <a title="Consult reference manual" href="../refman/builtins/current_object1.html"><code>current_object/1</code></a> or <a title="Consult reference manual" href="../refman/builtins/current_category1.html"><code>current_category/1</code></a> built-in predicates to identify the kind of entity returned.
+Note that, if we use a non-instantiated variable for the first argument, we will need to use the <a title="Consult reference manual" href="../refman/predicates/current_object_1.html"><code>current_object/1</code></a> or <a title="Consult reference manual" href="../refman/predicates/current_category_1.html"><code>current_category/1</code></a> built-in predicates to identify the kind of entity returned.
 </p>
 
 <h2 id="protocols_properties">Protocol properties</h2>
 
 <p>
-We can find the properties of defined protocols by calling the <a title="Consult reference manual" href="../refman/builtins/protocol_property2.html"><code>protocol_property/2</code></a> built-in predicate:
+We can find the properties of defined protocols by calling the <a title="Consult reference manual" href="../refman/predicates/protocol_property_2.html"><code>protocol_property/2</code></a> built-in predicate:
 </p>
 <pre>| ?- protocol_property(Protocol, Property).</pre>
 <p>
-A protocol may have the property <code>static</code>, <code>dynamic</code>, or <code>built_in</code>. Dynamic protocols can be abolished in runtime by calling the <a title="Consult reference manual" href="../refman/builtins/abolish_protocol1.html"><code>abolish_protocol/1</code></a> built-in predicate. Depending on the back-end Prolog compiler, a protocol may have additional properties related to the source file where it is defined.
+A protocol may have the property <code>static</code>, <code>dynamic</code>, or <code>built_in</code>. Dynamic protocols can be abolished in runtime by calling the <a title="Consult reference manual" href="../refman/predicates/abolish_protocol_1.html"><code>abolish_protocol/1</code></a> built-in predicate. Depending on the back-end Prolog compiler, a protocol may have additional properties related to the source file where it is defined.
 </p>
 
 <h2 id="protocols_implementing">Implementing protocols</h2>
@@ -247,7 +247,7 @@ Logtalk defines a built-in protocol named <code>monitoring</code> that contains 
 <h3 id="protocols_forwarding">The built-in protocol <em>forwarding</em></h3>
 
 <p>
-Logtalk defines a built-in protocol named <code>forwarding</code> that contains a declaration for the <code>forward/1</code> user-defined message forwarding handler, which is automatically called (if defined) by the runtime for any message that the receiving object does not understand. See also the <a href="../refman/control/delegate1.html">[]/1</a> control construct.
+Logtalk defines a built-in protocol named <code>forwarding</code> that contains a declaration for the <code>forward/1</code> user-defined message forwarding handler, which is automatically called (if defined) by the runtime for any message that the receiving object does not understand. See also the <a href="../refman/control/delegate_message_1.html">[]/1</a> control construct.
 </p>
 
 <div class="footer">

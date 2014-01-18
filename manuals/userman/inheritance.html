@@ -38,7 +38,7 @@
 The inheritance mechanisms found on object-oriented programming languages allow us the specialization of previously defined objects, avoiding the unnecessary repetition of code. In the context of logic programming, we can interpret inheritance as a form of theory extension: an object will virtually contain, besides its own predicates, all the predicates inherited from other objects that are not redefined by itself.
 </p>
 <p>
-Logtalk uses a depth-first lookup procedure for finding predicate declarations and predicate definitions, as explained below. The <a title="Consult reference manual" href="../refman/directives/alias3.html"><code>alias/3</code></a> predicate directive may be used to solve inheritance conflicts and for defining alternative names for inherited predicates.
+Logtalk uses a depth-first lookup procedure for finding predicate declarations and predicate definitions, as explained below. The <a title="Consult reference manual" href="../refman/directives/alias_3.html"><code>alias/3</code></a> predicate directive may be used to solve inheritance conflicts and for defining alternative names for inherited predicates.
 </p>
 
 <h2 id="inheritance_protocol">Protocol inheritance</h2>
@@ -122,7 +122,7 @@ However, we can explicitly program other behaviors. Let us see a few examples.
 <h4 id="inheritance_specialization">Specialization inheritance</h4>
 
 <p>
-Specialization of inherited definitions: the new definition uses the inherited definitions, adding to this new code. This is accomplished by calling the <a title="Consult reference manual" href="../refman/control/super1.html"><code>^^/1</code></a> operator in the new definition.
+Specialization of inherited definitions: the new definition uses the inherited definitions, adding to this new code. This is accomplished by calling the <a title="Consult reference manual" href="../refman/control/call_super_1.html"><code>^^/1</code></a> operator in the new definition.
 </p>
 <pre>:- object(root).
 
@@ -154,7 +154,7 @@ yes</pre>
 <h4 id="inheritance_union">Union inheritance</h4>
 
 <p>
-Union of the new with the inherited definitions: all the definitions are taken into account, the calling order being defined by the inheritance mechanisms. This can be accomplished by writing a clause that just calls, using the <a title="Consult reference manual" href="../refman/control/super1.html"><code>^^/1</code></a> operator, the inherited definitions. The relative position of this clause among the other definition clauses sets the calling order for the local and inherited definitions.
+Union of the new with the inherited definitions: all the definitions are taken into account, the calling order being defined by the inheritance mechanisms. This can be accomplished by writing a clause that just calls, using the <a title="Consult reference manual" href="../refman/control/call_super_1.html"><code>^^/1</code></a> operator, the inherited definitions. The relative position of this clause among the other definition clauses sets the calling order for the local and inherited definitions.
 </p>
 <pre>:- object(root).
 
@@ -187,7 +187,7 @@ no</pre>
 <h4 id="inheritance_selective">Selective inheritance</h4>
 
 <p>
-Hiding some of the inherited definitions, or differential inheritance: this form of inheritance is normally used in the representation of exceptions to generic definitions. Here we will need to use the <a title="Consult reference manual" href="../refman/control/super1.html"><code>^^/1</code></a> operator to test and possibly reject some of the inherited definitions.
+Hiding some of the inherited definitions, or differential inheritance: this form of inheritance is normally used in the representation of exceptions to generic definitions. Here we will need to use the <a title="Consult reference manual" href="../refman/control/call_super_1.html"><code>^^/1</code></a> operator to test and possibly reject some of the inherited definitions.
 </p>
 <pre>:- object(bird).
 
@@ -260,7 +260,7 @@ It is not possible to discuss inheritance mechanisms without referring to the lo
 Until now, no solution that we might consider satisfactory for all the problems presented by the multiple inheritance mechanisms has been found. From the simplicity of some extensions that use the Prolog search strategy like <a href="../bibliography.html#McCabe92">[McCabe 92]</a> or <a href="../bibliography.html#Moss94">[Moss 94]</a> and to the sophisticated algorithms of CLOS <a href="../bibliography.html#Bobrow88">[Bobrow 88]</a>, there is no adequate solution for all the situations. Besides, the use of multiple inheritance carries some complex problems in the domain of software engineering, particularly in the reuse and maintenance of the applications. All these problems are substantially reduced if we preferably use in our software development composition mechanisms instead of specialization mechanisms <a href="../bibliography.html#Taenzer89">[Taenzer 89]</a>. Multiple inheritance can and should be seen more as a useful analysis and project abstraction, than as an implementation technique <a href="../bibliography.html#Shan93">[Shan 93]</a>. Logtalk provides first-class support for software composition using <a title="Consult user manual" href="categories.html"><em>categories</em></a>.
 </p>
 <p>
-Nevertheless, Logtalk supports multi-inheritance by enabling an object to extend, instantiate, or specialize more than one object. The current Logtalk release provides a predicate directive, <a title="Consult reference manual" href="../refman/directives/alias3.html"><code>alias/3</code></a>, which may be used to solve some multi-inheritance conflicts. Lastly, it should be noted that the multi-inheritance support does not compromise performance when we use single-inheritance.
+Nevertheless, Logtalk supports multi-inheritance by enabling an object to extend, instantiate, or specialize more than one object. The current Logtalk release provides a predicate directive, <a title="Consult reference manual" href="../refman/directives/alias_3.html"><code>alias/3</code></a>, which may be used to solve some multi-inheritance conflicts. Lastly, it should be noted that the multi-inheritance support does not compromise performance when we use single-inheritance.
 </p>
 
 <div class="footer">

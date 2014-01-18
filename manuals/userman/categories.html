@@ -50,7 +50,7 @@ We can define a new category in the same way we write Prolog code: by using a te
 Category names can be atoms or compound terms (when defining parametric categories). Objects, categories, and protocols share the same name space: we cannot have a category with the same name as an object or a protocol.
 </p>
 <p>
-Category code (directives and predicates) is textually encapsulated by using two Logtalk directives: <a title="Consult reference manual" href="../refman/directives/category1_3.html"><code>category/1-3</code></a> and <a title="Consult reference manual" href="../refman/directives/end_category0.html"><code>end_category/0</code></a>. The most simple category will be one that is self-contained, not depending on any other Logtalk entity:
+Category code (directives and predicates) is textually encapsulated by using two Logtalk directives: <a title="Consult reference manual" href="../refman/directives/category_1_3.html"><code>category/1-3</code></a> and <a title="Consult reference manual" href="../refman/directives/end_category_0.html"><code>end_category/0</code></a>. The most simple category will be one that is self-contained, not depending on any other Logtalk entity:
 </p>
 <pre>:- category(Category).
     ...
@@ -70,7 +70,7 @@ A category may be defined as a composition of other categories by writing:
     ...
 :- end_category.</pre>
 <p>
-This feature should only be used when extending a category without breaking its functional cohesion (for example, when a modified version of a category is needed for importing on several unrelated objects). The preferred way of composing several categories is by importing them into an object. When a category overrides a predicate defined in an extended category, the overridden definition can still be used by using the <a title="Consult reference manual" href="../refman/directives/alias3.html"><code>alias/3</code></a> predicate directive.
+This feature should only be used when extending a category without breaking its functional cohesion (for example, when a modified version of a category is needed for importing on several unrelated objects). The preferred way of composing several categories is by importing them into an object. When a category overrides a predicate defined in an extended category, the overridden definition can still be used by using the <a title="Consult reference manual" href="../refman/directives/alias_3.html"><code>alias/3</code></a> predicate directive.
 </p>
 <p>
 A category may explicitly complement one or more existing objects, thus providing functionality similar to Objective-C categories:
@@ -146,7 +146,7 @@ The meta-arguments of built-in meta-predicates are called either in <em><a class
 <h2 id="categories_finding">Finding defined categories</h2>
 
 <p>
-We can find, by backtracking, all defined categories by using the <a title="Consult reference manual" href="../refman/builtins/current_category1.html"><code>current_category/1</code></a> Logtalk built-in predicate with a non-instantiated variable:
+We can find, by backtracking, all defined categories by using the <a title="Consult reference manual" href="../refman/predicates/current_category_1.html"><code>current_category/1</code></a> Logtalk built-in predicate with a non-instantiated variable:
 </p>
 <pre>| ?- current_category(Category).</pre>
 <p>
@@ -156,7 +156,7 @@ This predicate can also be used to test if a category is defined by calling it w
 <h2 id="categories_creating">Creating a new category in runtime</h2>
 
 <p>
-A category can be dynamically created at runtime by using the <a title="Consult reference manual" href="../refman/builtins/create_category4.html"><code>create_category/4</code></a> built-in predicate:
+A category can be dynamically created at runtime by using the <a title="Consult reference manual" href="../refman/predicates/create_category_4.html"><code>create_category/4</code></a> built-in predicate:
 </p>
 <pre>| ?- create_category(Category, Relations, Directives, Clauses).</pre>
 <p>
@@ -193,7 +193,7 @@ If we need to create a lot of (dynamic) categories at runtime, then is best to t
 <h2 id="categories_abolishing">Abolishing an existing category</h2>
 
 <p>
-Dynamic categories can be abolished using the <a title="Consult reference manual" href="../refman/builtins/abolish_category1.html"><code>abolish_category/1</code></a> built-in predicate:
+Dynamic categories can be abolished using the <a title="Consult reference manual" href="../refman/predicates/abolish_category_1.html"><code>abolish_category/1</code></a> built-in predicate:
 </p>
 <pre>| ?- abolish_category(Category).</pre>
 <p>
@@ -209,7 +209,7 @@ Category directives are used to set initialization goals and category properties
 <h3 id="categories_initialization">Category initialization</h3>
 
 <p>
-We can define a goal to be executed as soon as a category is (compiled and) loaded to memory with the <a title="Consult reference manual" href="../refman/directives/initialization1.html"><code>initialization/1</code></a> directive:
+We can define a goal to be executed as soon as a category is (compiled and) loaded to memory with the <a title="Consult reference manual" href="../refman/directives/initialization_1.html"><code>initialization/1</code></a> directive:
 </p>
 <pre>:- initialization(Goal).</pre>
 <p>
@@ -219,7 +219,7 @@ The argument can be any valid Prolog or Logtalk goal, including a message sendin
 <h3 id="categories_dynamic">Dynamic categories</h3>
 
 <p>
-As usually happens with Prolog code, a category can be either static or dynamic. A category created during the execution of a program is always dynamic. A category defined in a file can be either dynamic or static. Dynamic categories are declared by using the <a title="Consult reference manual" href="../refman/directives/dynamic0.html"><code>dynamic/0</code></a> directive in the category source code:
+As usually happens with Prolog code, a category can be either static or dynamic. A category created during the execution of a program is always dynamic. A category defined in a file can be either dynamic or static. Dynamic categories are declared by using the <a title="Consult reference manual" href="../refman/directives/dynamic_0.html"><code>dynamic/0</code></a> directive in the category source code:
 </p>
 <pre>:- dynamic.</pre>
 <p>
@@ -229,7 +229,7 @@ The directive must precede any predicate directives or clauses. Please be aware 
 <h3 id="categories_documentation">Category documentation</h3>
 
 <p>
-A category can be documented with arbitrary user-defined information by using the <a title="Consult reference manual" href="../refman/directives/info1.html"><code>info/1</code></a> directive:
+A category can be documented with arbitrary user-defined information by using the <a title="Consult reference manual" href="../refman/directives/info_1.html"><code>info/1</code></a> directive:
 </p>
 <pre>:- info(List).</pre>
 <p>
@@ -242,7 +242,7 @@ See the <a href="documenting.html">documenting Logtalk programs</a> session for 
 Logtalk provides two sets of built-in predicates that enable us to query the system about the possible relationships that a category can have with other entities.
 </p>
 <p>
-The built-in predicates <a title="Consult reference manual" href="../refman/builtins/implements_protocol2_3.html"><code>implements_protocol/2-3</code></a> and <a title="Consult reference manual" href="../refman/builtins/conforms_to_protocol2_3.html"><code>conforms_to_protocol/2-3</code></a> allows us to find which categories implements which protocols:
+The built-in predicates <a title="Consult reference manual" href="../refman/predicates/implements_protocol_2_3.html"><code>implements_protocol/2-3</code></a> and <a title="Consult reference manual" href="../refman/predicates/conforms_to_protocol_2_3.html"><code>conforms_to_protocol/2-3</code></a> allows us to find which categories implements which protocols:
 </p>
 <pre>| ?- implements_protocol(Category, Protocol, Scope).</pre>
 <p>
@@ -250,11 +250,11 @@ or, if we also want inherited protocols:
 </p>
 <pre>| ?- conforms_to_protocol(Category, Protocol, Scope).</pre>
 <p>
-Note that, if we use a non-instantiated variable for the first argument, we will need to use the <a title="Consult reference manual" href="../refman/builtins/current_category1.html"><code>current_category/1</code></a> built-in predicate to ensure that the returned entity is a category and not an object.
+Note that, if we use a non-instantiated variable for the first argument, we will need to use the <a title="Consult reference manual" href="../refman/predicates/current_category_1.html"><code>current_category/1</code></a> built-in predicate to ensure that the returned entity is a category and not an object.
 </p>
 <p>
 To find which objects import which categories we can use the 
-<a title="Consult reference manual" href="../refman/builtins/imports_category2_3.html"><code>imports_category/2</code></a> or <a title="Consult reference manual" href="../refman/builtins/imports_category2_3.html"><code>imports_category/3</code></a> built-in predicates:
+<a title="Consult reference manual" href="../refman/predicates/imports_category_2_3.html"><code>imports_category/2</code></a> or <a title="Consult reference manual" href="../refman/predicates/imports_category_2_3.html"><code>imports_category/3</code></a> built-in predicates:
 </p>
 <pre>| ?- imports_category(Object, Category).</pre>
 <p>
@@ -266,7 +266,7 @@ Note that a category may be imported by several objects.
 </p>
 <p>
 To find which categories extend other categories we can use the 
-<a title="Consult reference manual" href="../refman/builtins/extends_category2_3.html"><code>extends_category/2</code></a> or <a title="Consult reference manual" href="../refman/builtins/extends_category2_3.html"><code>extends_category/3</code></a> built-in predicates:
+<a title="Consult reference manual" href="../refman/predicates/extends_category_2_3.html"><code>extends_category/2</code></a> or <a title="Consult reference manual" href="../refman/predicates/extends_category_2_3.html"><code>extends_category/3</code></a> built-in predicates:
 </p>
 <pre>| ?- extends_category(Category1, Category2).</pre>
 <p>
@@ -278,7 +278,7 @@ Note that a category may be extended by several categories.
 </p>
 <p>
 To find which categories explicitly complement existing objects we can use the 
-<a title="Consult reference manual" href="../refman/builtins/complements_object2.html"><code>complements_object/2</code></a> built-in predicate:
+<a title="Consult reference manual" href="../refman/predicates/complements_object_2.html"><code>complements_object/2</code></a> built-in predicate:
 </p>
 <pre>| ?- complements_object(Category, Object).</pre>
 <p>
@@ -288,11 +288,11 @@ Note that a category may explicitly complement several objects.
 <h2 id="categories_properties">Category properties</h2>
 
 <p>
-We can find the properties of defined categories by calling the built-in predicate <a title="Consult reference manual" href="../refman/builtins/category_property2.html"><code>category_property/2</code></a>:
+We can find the properties of defined categories by calling the built-in predicate <a title="Consult reference manual" href="../refman/predicates/category_property_2.html"><code>category_property/2</code></a>:
 </p>
 <pre>| ?- category_property(Category, Property).</pre>
 <p>
-A category may have the property <code>static</code>, <code>dynamic</code>, or <code>built_in</code>. Dynamic categories can be abolished in runtime by calling the <a title="Consult reference manual" href="../refman/builtins/abolish_category1.html"><code>abolish_category/1</code></a> built-in predicate. A category may also have the property <code>synchronized</code>, which is related to multi-threading programming. Depending on the back-end Prolog compiler, a category may have additional properties related to the source file where it is defined.
+A category may have the property <code>static</code>, <code>dynamic</code>, or <code>built_in</code>. Dynamic categories can be abolished in runtime by calling the <a title="Consult reference manual" href="../refman/predicates/abolish_category_1.html"><code>abolish_category/1</code></a> built-in predicate. A category may also have the property <code>synchronized</code>, which is related to multi-threading programming. Depending on the back-end Prolog compiler, a category may have additional properties related to the source file where it is defined.
 </p>
 
 <h2 id="categories_importing">Importing categories</h2>
@@ -356,7 +356,7 @@ Using the message sending mechanisms, the predicate <code>out/1</code> can be ca
 This is the recommended way of calling category predicates as it supports the specialization/redefinition of the category predicate in a descendant object (as the predicate declaration and definition lookups will start from <em>self</em>). Messages to <em>self</em> usually imply the use of dynamic binding as the actual object that will receive the message is only known at runtime. This translates to a small performance penalty when compared with calls to local object predicates.
 </p>
 <p>
-It is also possible to perform direct calls to predicates from imported categories without using the message sending mechanisms with the <a title="Consult reference manual" href="../refman/control/super1.html"><code>^^/1</code></a> control construct. For example:
+It is also possible to perform direct calls to predicates from imported categories without using the message sending mechanisms with the <a title="Consult reference manual" href="../refman/control/call_super_1.html"><code>^^/1</code></a> control construct. For example:
 </p>
 <pre>:- object(worker,
     imports(output)).
@@ -375,7 +375,7 @@ This alternative should only be used when the user knows a priori that the categ
 <h2 id="categories_parametric">Parametric categories</h2>
 
 <p>
-Category predicates can be parameterized in the same way as object predicates by using a compound term as the category identifier and by calling the <a title="Consult reference manual" href="../refman/methods/parameter2.html"><code>parameter/2</code></a> built-in local method in the category predicate clauses. Category parameter values can be defined by the importing objects. For example:
+Category predicates can be parameterized in the same way as object predicates by using a compound term as the category identifier and by calling the <a title="Consult reference manual" href="../refman/methods/parameter_2.html"><code>parameter/2</code></a> built-in local method in the category predicate clauses. Category parameter values can be defined by the importing objects. For example:
 </p>
 <pre>:- object(speech(Season, Event),
     imports(dress(Season), speech(Event))).
@@ -384,7 +384,7 @@ Category predicates can be parameterized in the same way as object predicates by
 
 :- end_object.</pre>
 <p>
-Note that access to category parameters is only possible using the <code>parameter/2</code> method from within the category. Calls to the <a title="Consult reference manual" href="../refman/methods/this1.html"><code>this/1</code></a> built-in local method from category predicates always access the importing object identifier (and thus object parameters, not category parameters).
+Note that access to category parameters is only possible using the <code>parameter/2</code> method from within the category. Calls to the <a title="Consult reference manual" href="../refman/methods/this_1.html"><code>this/1</code></a> built-in local method from category predicates always access the importing object identifier (and thus object parameters, not category parameters).
 </p>
 
 

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<!--
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  
+%  This file is part of Logtalk <http://logtalk.org/>    
+%  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
+%  
+%  Logtalk is free software. You can redistribute it and/or modify it under
+%  the terms of the FSF GNU General Public License 3  (plus some additional
+%  terms per section 7).        Consult the `LICENSE.txt` file for details.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="application/xml+xhtml; charset=utf-8" />
+	<title>Logtalk predicate directive: coinductive/1</title>
+	<link rel="stylesheet" href="../../screen.css" type="text/css" media="screen"/>
+	<link rel="stylesheet" href="../../print.css" type="text/css" media="print"/>
+</head>
+
+<body>
+
+<div class="top-left">Logtalk reference manual</div>
+<div class="top-right">Predicate directive: coinductive/1</div>
+<div class="bottom-left"><span class="page"/></div>
+<div class="bottom-right"><span class="page"/></div>
+<div class="navtop"><a href="../../index.html">Contents</a> &gt; <a href="../index.html">Reference Manual</a> &gt; <a href="../index.html#directives">Directives</a> &gt; coinductive/1</div>
+
+<h2 id="directives_coinductive_1" class="codenp">coinductive/1</h2>
+
+<h4>Description</h4>
+
+<pre>coinductive(Functor/Arity)
+coinductive((Functor1/Arity1, Functor2/Arity2, ...))
+coinductive([Functor1/Arity1, Functor2/Arity2, ...])
+
+coinductive(Template)
+coinductive((Template1, Template2, ...))
+coinductive([Template1, Template2, ...])</pre>
+
+<p>
+This is an <strong>experimental</strong> directive, used for declaring coinductive predicates. Requires a back-end Prolog compiler with minimal support for cyclic terms. The current implementation of coinduction allows the generation of only the <em>basic cycles</em> but all valid solutions should be recognized. Use a predicate indicator as argument when all the coinductive predicate arguments are relevant for coinductive success. Use a template when only some coinductive predicate arguments (represented by a "<code>+</code>") should be considered when testing for coinductive success (represent the arguments that should be disregarded by a "<code>-</code>"). It's possible to define local <a href="../methods/coinductive_success_hook_1_2.html"><code>coinductive_success_hook/2</code></a> or <a href="../methods/coinductive_success_hook_1_2.html"><code>coinductive_success_hook/1</code></a> predicates that are automatically called with the coinductive predicate term resulting from a successful unification with an ancestor goal as first argument. The second argument, when present, is the coinductive hypothesis (i.e. the ancestor goal) used. These hook predicates can provide an alternative to the use of tabling when defining some coinductive predicates. There is no overhead when these hook predicates are not defined.
+</p>
+<p>
+This directive must precede any calls to the declared coinductive predicates.
+</p>
+
+<h4>Template and modes</h4>
+
+<pre>coinductive(+predicate_indicator_term)
+coinductive(+coinductive_predicate_template_term)</pre>
+
+
+<h4>Examples</h4>
+
+<pre>:- coinductive(comember/2).
+:- coinductive(controller(+,+,+,-,-)).</pre>
+
+<div class="footer">
+	<div class="copyright">
+		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
+		<span>Last updated on: May 14, 2013</span>
+	</div>
+	<div class="navbottom">
+		<span><a href="alias_3.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="discontiguous_1.html">next</a></span><br/>
+		<span><a href="http://validator.w3.org/check/referer">XHTML</a> + <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a></span>
+	</div>
+</div>
+
+</body>
+
+</html>

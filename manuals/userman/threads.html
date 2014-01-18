@@ -47,23 +47,23 @@ Multi-threading support may be disabled by default. It can be enabled on the Pro
 <h2 id="threads_directive">Enabling objects to make multi-threading calls</h2>
 
 <p>
-The <a title="Consult reference manual" href="../refman/directives/threaded0.html"><code>threaded/0</code></a> object directive is used to enable an object to make multi-threading calls:
+The <a title="Consult reference manual" href="../refman/directives/threaded_0.html"><code>threaded/0</code></a> object directive is used to enable an object to make multi-threading calls:
 </p>
 <pre>:- threaded.</pre>
 <p>
 This directive results in the automatic creation and set up an object message queue when the object is loaded or created at runtime. Object message queues are used for exchanging thread notifications and for storing concurrent goal solutions and replies to the <em>multi-threading calls</em> made within the object. The message queue for the pseudo-object <code>user</code> is automatically created when Logtalk is loaded (provided that multi-threading programming is supported and enabled for the chosen Prolog compiler).
 </p>
 
-<h2 id="threads_builtins">Multi-threading built-in predicates</h2>
+<h2 id="threads_predicates">Multi-threading built-in predicates</h2>
 
 <p>
-Logtalk provides a small set of built-in predicates for multi-threading programming. For simple tasks where you simply want to prove a set of goals, each one in its own thread, Logtalk provides a <a title="Consult reference manual" href="../refman/builtins/threaded1.html"><code>threaded/1</code></a> built-in predicate. The remaining predicates allow for fine-grained control, including postponing retrieving of thread goal results at a later time, supporting non-deterministic thread goals, and making <em>one-way</em> asynchronous calls. Together, these predicates provide high-level support for multi-threading programming, covering most common use cases.
+Logtalk provides a small set of built-in predicates for multi-threading programming. For simple tasks where you simply want to prove a set of goals, each one in its own thread, Logtalk provides a <a title="Consult reference manual" href="../refman/predicates/threaded_1.html"><code>threaded/1</code></a> built-in predicate. The remaining predicates allow for fine-grained control, including postponing retrieving of thread goal results at a later time, supporting non-deterministic thread goals, and making <em>one-way</em> asynchronous calls. Together, these predicates provide high-level support for multi-threading programming, covering most common use cases.
 </p>
 
 <h3 id="threads_threaded">Proving goals concurrently using threads</h3>
 
 <p>
-A set of goals may be proved concurrently by calling the Logtalk built-in predicate <a title="Consult reference manual" href="../refman/builtins/threaded1.html"><code>threaded/1</code></a>. Each goal in the set runs in its own thread. 
+A set of goals may be proved concurrently by calling the Logtalk built-in predicate <a title="Consult reference manual" href="../refman/predicates/threaded_1.html"><code>threaded/1</code></a>. Each goal in the set runs in its own thread. 
 </p>
 <p>
 When the <code>threaded/1</code> predicate argument is a conjunction of goals, the predicate call is akin to <em>and-parallelism</em>. For example, assume that we want to find all the prime numbers in a given interval, <code>[N, M]</code>. We can split the interval in two parts and then span two threads to compute the primes numbers in each sub-interval:
@@ -103,13 +103,13 @@ The <code>threaded/1</code> built-in predicate is most useful for lengthy, indep
 <h3 id="threads_call">Proving goals asynchronously using threads</h3>
 
 <p>
-A goal may be proved asynchronously using a new thread by calling the Logtalk built-in predicate <a title="Consult reference manual" href="../refman/builtins/threaded_call1_2.html"><code>threaded_call/1</code></a>. Calls to this predicate are always true and return immediately (assuming a callable argument). The term representing the goal is copied, not shared with the thread.
+A goal may be proved asynchronously using a new thread by calling the Logtalk built-in predicate <a title="Consult reference manual" href="../refman/predicates/threaded_call_1_2.html"><code>threaded_call/1</code></a>. Calls to this predicate are always true and return immediately (assuming a callable argument). The term representing the goal is copied, not shared with the thread.
 </p>
 <p>
-The results of proving a goal asynchronously in a new thread may be later retrieved by calling the Logtalk built-in predicate <a title="Consult reference manual" href="../refman/builtins/threaded_exit1_2.html"><code>threaded_exit/1</code></a> within the same object where the call to the <code>threaded_call/1</code> predicate was made. The <code>threaded_exit/1</code> calls block execution until the results of the <code>threaded_call/1</code> calls are sent back to the object message queue.
+The results of proving a goal asynchronously in a new thread may be later retrieved by calling the Logtalk built-in predicate <a title="Consult reference manual" href="../refman/predicates/threaded_exit_1_2.html"><code>threaded_exit/1</code></a> within the same object where the call to the <code>threaded_call/1</code> predicate was made. The <code>threaded_exit/1</code> calls block execution until the results of the <code>threaded_call/1</code> calls are sent back to the object message queue.
 </p>
 <p>
-The <code>threaded_exit/1</code> predicate allow us to retrieve alternative solutions through backtracking (if you want to commit to the first solution, you may use the <a title="Consult reference manual" href="../refman/builtins/threaded_once1_2.html"><code>threaded_once/1</code></a> predicate instead of the <code>threaded_call/1</code> predicate). For example, assuming a <code>lists</code> object implementing the usual <code>member/2</code> predicate, we could write:
+The <code>threaded_exit/1</code> predicate allow us to retrieve alternative solutions through backtracking (if you want to commit to the first solution, you may use the <a title="Consult reference manual" href="../refman/predicates/threaded_once_1_2.html"><code>threaded_once/1</code></a> predicate instead of the <code>threaded_call/1</code> predicate). For example, assuming a <code>lists</code> object implementing the usual <code>member/2</code> predicate, we could write:
 </p>
 <pre>| ?- threaded_call(lists::member(X, [1,2,3])).
 
@@ -127,7 +127,7 @@ no
 In this case, the <code>threaded_call/1</code> and the <code>threaded_exit/1</code> calls are made within the pseudo-object <em>user</em>. The implicit thread running the <code>lists::member/2</code> goal suspends itself after providing a solution, waiting for a request to an alternative solution; the thread is automatically terminated when the runtime engine detects that backtracking to the <code>threaded_exit/1</code> call is no longer possible.
 </p>
 <p>
-Calls to the <code>threaded_exit/1</code> predicate block the caller until the object message queue receives the reply to the asynchronous call. The predicate <a title="Consult reference manual" href="../refman/builtins/threaded_peek1_2.html"><code>threaded_peek/1</code></a> may be used to check if a reply is already available without removing it from the thread queue. The <code>threaded_peek/1</code> predicate call succeeds or fails immediately without blocking the caller. However, keep in mind that repeated use of this predicate is equivalent to polling a message queue, which may severely hurt performance.
+Calls to the <code>threaded_exit/1</code> predicate block the caller until the object message queue receives the reply to the asynchronous call. The predicate <a title="Consult reference manual" href="../refman/predicates/threaded_peek_1_2.html"><code>threaded_peek/1</code></a> may be used to check if a reply is already available without removing it from the thread queue. The <code>threaded_peek/1</code> predicate call succeeds or fails immediately without blocking the caller. However, keep in mind that repeated use of this predicate is equivalent to polling a message queue, which may severely hurt performance.
 </p>
 <p>
 Be careful when using the <code>threaded_exit/1</code> predicate inside failure-driven loops. When all the solutions have been found (and the thread generating them is therefore terminated), re-calling the predicate will generate an exception. Note that failing instead of throwing an exception is not an acceptable solution as it could be misinterpreted as a failure of the <code>threaded_exit/1</code> argument.
@@ -148,7 +148,7 @@ prime_numbers(N, M, Acc, Primes) :-
     ...
 </pre>
 <p>
-When using asynchronous calls, the link between a <code>threaded_exit/1</code> call and the corresponding <code>threaded_call/1</code> call is made using unification. If there are several <code>threaded_call/1</code> calls for a matching <code>threaded_exit/1</code> call, the connection can potentially be established with any of them. Nevertheless, you can easily use a tag the calls by using the extended <a title="Consult reference manual" href="../refman/builtins/threaded_call1_2.html"><code>threaded_call/2</code></a> and <a title="Consult reference manual" href="../refman/builtins/threaded_exit1_2.html"><code>threaded_exit/2</code></a> built-in predicates. For example:
+When using asynchronous calls, the link between a <code>threaded_exit/1</code> call and the corresponding <code>threaded_call/1</code> call is made using unification. If there are several <code>threaded_call/1</code> calls for a matching <code>threaded_exit/1</code> call, the connection can potentially be established with any of them. Nevertheless, you can easily use a tag the calls by using the extended <a title="Consult reference manual" href="../refman/predicates/threaded_call_1_2.html"><code>threaded_call/2</code></a> and <a title="Consult reference manual" href="../refman/predicates/threaded_exit_1_2.html"><code>threaded_exit/2</code></a> built-in predicates. For example:
 </p>
 <pre>
 ?- threaded_call(member(X, [1,2,3]), Tag).
@@ -175,7 +175,7 @@ When using these predicates, the tags shall be considered as an opaque term; use
 <h2 id="threads_ignore">One-way asynchronous calls</h2>
 
 <p>
-Sometimes we want to prove a goal in a new thread without caring about the results. This may be accomplished by using the built-in predicate <a title="Consult reference manual" href="../refman/builtins/threaded_ignore1.html"><code>threaded_ignore/1</code></a>. For example, assume that we are developing a multi-agent application where an agent may send an "happy birthday" message to another agent. We could write:
+Sometimes we want to prove a goal in a new thread without caring about the results. This may be accomplished by using the built-in predicate <a title="Consult reference manual" href="../refman/predicates/threaded_ignore_1.html"><code>threaded_ignore/1</code></a>. For example, assume that we are developing a multi-agent application where an agent may send an "happy birthday" message to another agent. We could write:
 </p>
 <pre>threaded_ignore(agent::happy_birthday), ...
 </pre>
@@ -186,7 +186,7 @@ The call succeeds with no reply of the goal success, failure, or even exception 
 <h2 id="threads_synchronized_predicates">Asynchronous calls and synchronized predicates</h2>
 
 <p>
-Proving a goal asynchronously using a new thread may lead to problems when the goal results in side-effects such as input/output operations or modifications to an object database. For example, if a new thread is started with the same goal before the first one finished its job, we may end up with mixed output, a corrupted database, or unexpected goal failures. In order to solve this problem, predicates (and grammar rule non-terminals) with side-effects can be declared as <em>synchronized</em> by using the <a title="Consult reference manual" href="../refman/directives/synchronized1.html"><code>synchronized/1</code></a> predicate directive. Proving a query to a synchronized predicate (or synchronized non-terminal) is internally protected by a mutex, thus allowing for easy thread synchronization. For example:
+Proving a goal asynchronously using a new thread may lead to problems when the goal results in side-effects such as input/output operations or modifications to an object database. For example, if a new thread is started with the same goal before the first one finished its job, we may end up with mixed output, a corrupted database, or unexpected goal failures. In order to solve this problem, predicates (and grammar rule non-terminals) with side-effects can be declared as <em>synchronized</em> by using the <a title="Consult reference manual" href="../refman/directives/synchronized_1.html"><code>synchronized/1</code></a> predicate directive. Proving a query to a synchronized predicate (or synchronized non-terminal) is internally protected by a mutex, thus allowing for easy thread synchronization. For example:
 </p>
 <pre>:- synchronized(db_update/1).   % ensure thread synchronization
 
@@ -226,7 +226,7 @@ Note that, in a more realistic scenario, the two <code>threaded_ignore/1</code> 
 The <code>synchronized/1</code> directive must precede any local calls to the synchronized predicate (or synchronized non-terminal) in order to ensure proper compilation. In addition, as each Logtalk entity is independently compiled, this directive must be included in every object or category that contains a definition for the described predicate, even if the predicate declaration is inherited from another entity, in order to ensure proper compilation. Note that a synchronized predicate cannot be declared dynamic. To ensure atomic updates of a dynamic predicate, declare as synchronized the predicate performing the update.
 </p>
 <p>
-We may declare all predicates of an object (or a category) as synchronized by using the entity directive <a title="Consult reference manual" href="../refman/directives/synchronized0.html"><code>synchronized/0</code></a>. In this case, the <code>synchronized/1</code> predicate directive is not necessary and should not be used.
+We may declare all predicates of an object (or a category) as synchronized by using the entity directive <a title="Consult reference manual" href="../refman/directives/synchronized_0.html"><code>synchronized/0</code></a>. In this case, the <code>synchronized/1</code> predicate directive is not necessary and should not be used.
 </p>
 <p>
 Synchronized predicates may be used as wrappers to messages sent to objects that are not multi-threading aware. For example, assume a <code>random</code> object defining a <code>random/1</code> predicate that generates random numbers, using side-effects on its implementation (e.g. for storing the generator seed). We can specify and define e.g. a <code>sync_random/1</code> predicate as follows:
@@ -247,8 +247,8 @@ The synchronization entity and predicate directives may be used when defining ob
 <h2 id="threads_notifications">Synchronizing threads through notifications</h2>
 
 <p>
-Declaring a set of predicates as synchronized can only ensure that they are not executed at the same time by different threads. Sometimes we need to suspend a thread not on a synchronization lock but on some condition that must hold true for a thread goal to proceed. I.e. we want a thread goal to be suspended until a condition becomes true instead of simply failing. The built-in predicate <a title="Consult reference manual" href="../refman/builtins/threaded_wait1.html"><code>threaded_wait/1</code></a> allows us to suspend a predicate execution (running in its own thread) until a notification is received. Notifications are posted using the built-in predicate
- <a title="Consult reference manual" href="../refman/builtins/threaded_notify1.html"><code>threaded_notify/1</code></a>. A notification is a Prolog term that a programmer chooses to represent some condition becoming true. Any Prolog term can be used as a notification argument for these predicates. Related calls to the <code>threaded_wait/1</code> and <code>threaded_notify/1</code> must be made within the same object, <em>this</em>, as the object message queue is used internally for posting and retrieving notifications.
+Declaring a set of predicates as synchronized can only ensure that they are not executed at the same time by different threads. Sometimes we need to suspend a thread not on a synchronization lock but on some condition that must hold true for a thread goal to proceed. I.e. we want a thread goal to be suspended until a condition becomes true instead of simply failing. The built-in predicate <a title="Consult reference manual" href="../refman/predicates/threaded_wait_1.html"><code>threaded_wait/1</code></a> allows us to suspend a predicate execution (running in its own thread) until a notification is received. Notifications are posted using the built-in predicate
+ <a title="Consult reference manual" href="../refman/predicates/threaded_notify_1.html"><code>threaded_notify/1</code></a>. A notification is a Prolog term that a programmer chooses to represent some condition becoming true. Any Prolog term can be used as a notification argument for these predicates. Related calls to the <code>threaded_wait/1</code> and <code>threaded_notify/1</code> must be made within the same object, <em>this</em>, as the object message queue is used internally for posting and retrieving notifications.
 </p>
 <p>
 Each notification posted by a call to the <code>threaded_notify/1</code> predicate is consumed by a single <code>threaded_wait/1</code> predicate call (i.e. these predicates implement a peer-to-peer mechanism). Care should be taken to avoid deadlocks when two (or more) threads both wait and post notifications to each other.

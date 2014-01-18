@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<!--
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  
+%  This file is part of Logtalk <http://logtalk.org/>    
+%  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
+%  
+%  Logtalk is free software. You can redistribute it and/or modify it under
+%  the terms of the FSF GNU General Public License 3  (plus some additional
+%  terms per section 7).        Consult the `LICENSE.txt` file for details.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="application/xml+xhtml; charset=utf-8" />
+	<title>Logtalk control construct: {}/1</title>
+	<link rel="stylesheet" href="../../screen.css" type="text/css" media="screen"/>
+	<link rel="stylesheet" href="../../print.css" type="text/css" media="print"/>
+</head>
+
+<body>
+
+<div class="top-left">Logtalk reference manual</div>
+<div class="top-right">Control construct: {}/1</div>
+<div class="bottom-left"><span class="page"/></div>
+<div class="bottom-right"><span class="page"/></div>
+<div class="navtop"><a href="../../index.html">Contents</a> &gt; <a href="../index.html">Reference Manual</a> &gt; <a href="../index.html#constructs">Control Constructs</a> &gt; {}/1</div>
+
+<h2 id="control_external_call_1" class="codenp">{}/1</h2>
+
+<h4>Description</h4>
+
+<pre>{Term}
+{Goal}</pre>
+<p>
+This control construct allows the programmer to bypass the Logtalk compiler. It can be used to wrap a source file term or a goal. In the case of a goal, it is opaque to cuts and the argument is called within the context of the pseudo-object <a class="glossary" title="Go to glossary definition" href="../../userman/objects.html#objects_user">user</a>. It is also possible to use <code>{Closure}</code> as the first argument of <code>call/2-N</code> calls. In this case, <code>Closure</code> will be extended with the remaining arguments of the <code>call/2-N</code> call in order to construct a goal that will be called within the context of <code>user</code>.
+</p>
+<p>
+This control construct may also be used in place of an object identifier when sending a message. In this case, the result of proving its argument as a goal (within the context of the pseudo-object <code>user</code>) is used as an object identifier in the message sending call.
+</p>
+
+<h4>Template and modes</h4>
+
+<pre>{+callable}</pre>
+
+<h4>Errors</h4>
+
+<dl>
+	<dt>Term or Goal is a variable:</dt>
+		<dd><code>instantiation_error</code></dd>
+	<dt>Term or Goal is neither a variable nor a callable term:</dt>
+		<dd><code>type_error(callable, Goal)</code></dd>
+</dl>
+
+<h4>Examples</h4>
+
+<pre>{:- load_foreign_resource(file)}.
+
+N1/D1 &lt; N2/D2 :-
+    {N1*D2 &lt; N2*D1}.
+
+call_in_user(F, X, Y, Z) :-
+    call({F}, X, Y, Z).
+
+| ?- {circle(Id, Radius, Color)}::area(Area).
+</pre>
+
+<div class="footer">
+	<div class="copyright">
+		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
+		<span>Last updated on: November 15, 2013</span>
+	</div>
+	<div class="navbottom">
+		<span><a href="../index.html#constructs">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="../index.html#constructs">next</a></span><br/>
+		<span><a href="http://validator.w3.org/check/referer">XHTML</a> + <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a></span>
+	</div>
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<!--
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  
+%  This file is part of Logtalk <http://logtalk.org/>    
+%  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
+%  
+%  Logtalk is free software. You can redistribute it and/or modify it under
+%  the terms of the FSF GNU General Public License 3  (plus some additional
+%  terms per section 7).        Consult the `LICENSE.txt` file for details.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="application/xml+xhtml; charset=utf-8" />
+	<title>Logtalk entity directive: uses/2</title>
+	<link rel="stylesheet" href="../../screen.css" type="text/css" media="screen"/>
+	<link rel="stylesheet" href="../../print.css" type="text/css" media="print"/>
+</head>
+
+<body>
+
+<div class="top-left">Logtalk reference manual</div>
+<div class="top-right">Entity directive: uses/2</div>
+<div class="bottom-left"><span class="page"/></div>
+<div class="bottom-right"><span class="page"/></div>
+<div class="navtop"><a href="../../index.html">Contents</a> &gt; <a href="../index.html">Reference Manual</a> &gt; <a href="../index.html#directives">Directives</a> &gt; uses/2</div>
+
+<h2 id="directives_uses_2" class="codenp">uses/2</h2>
+
+<h4>Description</h4>
+
+<pre>uses(Object, Predicates)
+uses(Object, PredicatesAndAliases)</pre>
+<pre>uses(Object, NonTerminals)
+uses(Object, NonTerminalsAndAliases)</pre>
+<p>
+Declares that all calls (made from predicates defined in the category or object containing the directive) to the specified predicates are to be interpreted as messages to the specified object. Thus, this directive may be used to simplify writing of predicate definitions by allowing the programmer to omit the <code>Object::</code> prefix when using the predicates listed in the directive (as long as the predicate calls do not occur as arguments for non-standard Prolog meta-predicates not declared on the adapter files). It is also possible to include operator declarations, <code>op(Precedence, Associativity, Operator)</code>, in the second argument.
+</p>
+<p>
+This directive is also used when compiling calls to the database and reflection built-in methods by looking into these methods predicate arguments.
+</p>
+<p>
+It is possible to specify a predicate alias using the notation <code>Functor/Arity::Alias/Arity</code>. Aliases may be used either for avoiding conflicts between predicates specified in <code>use_module/2</code> and <code>uses/2</code> directives or for giving more meaningful names considering the using context of the predicates.
+</p>
+
+<h4>Template and modes</h4>
+
+<pre>uses(+object_identifier, +predicate_indicator_list)
+uses(+object_identifier, +predicate_indicator_alias_list)</pre>
+<pre>uses(+object_identifier, +non_terminal_indicator_list)
+uses(+object_identifier, +non_terminal_indicator_alias_list)</pre>
+
+
+<h4>Examples</h4>
+
+<pre>:- uses(list, [append/3, member/2]).
+:- uses(store, [data/2]).
+
+foo :-
+    ...,
+    findall(X, member(X, L), A),    % the same as findall(X, list::member(X, L), A)
+    append(A, B, C),                % the same as list::append(A, B, C)
+    assertz(data(X, C)),            % the same as store::assertz(data(X, C))
+    ...</pre>
+<p>
+Another example, using the extended notation that allows us to define predicate aliases:
+</p>
+<pre>:- uses(btrees, [new/1::new_btree/1]).
+:- uses(queues, [new/1::new_queue/1]).
+
+btree_to_queue :-
+    ...,
+    new_btree(Tree),     % the same as btrees::new(Tree)
+    new_queue(Queue),    % the same as queues::new(Queue)
+    ...</pre>
+
+<div class="footer">
+	<div class="copyright">
+		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
+		<span>Last updated on: May 16, 2013</span>
+	</div>
+	<div class="navbottom">
+		<span><a href="synchronized_1.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="../index.html#directives">next</a></span><br/>
+		<span><a href="http://validator.w3.org/check/referer">XHTML</a> + <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a></span>
+	</div>
+</div>
+
+</body>
+
+</html>

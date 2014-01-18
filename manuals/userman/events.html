@@ -108,7 +108,7 @@ The implementation of the monitor notion in Logtalk enjoys the following propert
 <h2 id="events_generation">Event generation</h2>
 
 <p>
-For each message that is sent (using the <a title="Consult reference manual" href="../refman/control/to_object2.html"><code>::/2</code></a> message sending mechanism) the runtime system automatically generates two events. The first &mdash; <code>before event</code> &mdash; is generated when the message is sent. The second &mdash; <code>after event</code> &mdash; is generated after the message has successfully been executed.
+For each message that is sent (using the <a title="Consult reference manual" href="../refman/control/send_to_object_2.html"><code>::/2</code></a> message sending mechanism) the runtime system automatically generates two events. The first &mdash; <code>before event</code> &mdash; is generated when the message is sent. The second &mdash; <code>after event</code> &mdash; is generated after the message has successfully been executed.
 </p>
 
 <h2 id="events_communicating">Communicating events to monitors</h2>
@@ -156,7 +156,7 @@ Logtalk provides three built-in predicates for event handling. These predicates 
 <h3 id="events_finding">Finding defined events</h3>
 
 <p>
-The events that are currently defined can be retrieved using the Logtalk built-in predicate <a title="Consult reference manual" href="../refman/builtins/current_event5.html"><code>current_event/5</code></a>:
+The events that are currently defined can be retrieved using the Logtalk built-in predicate <a title="Consult reference manual" href="../refman/predicates/current_event_5.html"><code>current_event/5</code></a>:
 </p>
 <pre>| ?- current_event(Event, Object, Message, Sender, Monitor).</pre>
 <p>
@@ -166,7 +166,7 @@ Note that this predicate will return a <strong>set</strong> of matching events i
 <h3 id="events_defining">Defining new events</h3>
 
 <p>
-New events can be defined using the Logtalk built-in predicate <a title="Consult reference manual" href="../refman/builtins/define_events5.html"><code>define_events/5</code></a>:
+New events can be defined using the Logtalk built-in predicate <a title="Consult reference manual" href="../refman/predicates/define_events_5.html"><code>define_events/5</code></a>:
 </p>
 <pre>| ?- define_events(Event, Object, Message, Sender, Monitor).</pre>
 <p>
@@ -176,7 +176,7 @@ Note that if any of the <code>Event</code>, <code>Object</code>, <code>Message</
 <h3 id="events_abolishing">Abolishing defined events</h3>
 
 <p>
-Events that are no longer needed may be abolished using the <a title="Consult reference manual" href="../refman/builtins/abolish_events5.html"><code>abolish_events/5</code></a> built-in predicate:
+Events that are no longer needed may be abolished using the <a title="Consult reference manual" href="../refman/predicates/abolish_events_5.html"><code>abolish_events/5</code></a> built-in predicate:
 </p>
 <pre>| ?- abolish_events(Event, Object, Message, Sender, Monitor).</pre>
 <p>
@@ -186,7 +186,7 @@ If called with free variables, this goal will remove all matching events.
 <h3 id="events_handlers">Defining event handlers</h3>
 
 <p>
-The <code>monitoring</code> built-in protocol declares two public predicates, <a title="Consult reference manual" href="../refman/methods/before3.html"><code>before/3</code></a> and <a title="Consult reference manual" href="../refman/methods/after3.html"><code>after/3</code></a>, that are automatically called to handle <code>before</code> and <code>after</code> events. Any object that plays the role of monitor must define one or both of these event handler methods: 
+The <code>monitoring</code> built-in protocol declares two public predicates, <a title="Consult reference manual" href="../refman/methods/before_3.html"><code>before/3</code></a> and <a title="Consult reference manual" href="../refman/methods/after_3.html"><code>after/3</code></a>, that are automatically called to handle <code>before</code> and <code>after</code> events. Any object that plays the role of monitor must define one or both of these event handler methods: 
 </p>
 <pre>before(Object, Message, Sender) :-
     ... .

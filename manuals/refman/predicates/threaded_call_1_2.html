@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<!--
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  
+%  This file is part of Logtalk <http://logtalk.org/>    
+%  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
+%  
+%  Logtalk is free software. You can redistribute it and/or modify it under
+%  the terms of the FSF GNU General Public License 3  (plus some additional
+%  terms per section 7).        Consult the `LICENSE.txt` file for details.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="application/xml+xhtml; charset=utf-8" />
+	<title>Logtalk built-in predicate: threaded_call/1-2</title>
+	<link rel="stylesheet" href="../../screen.css" type="text/css" media="screen"/>
+	<link rel="stylesheet" href="../../print.css" type="text/css" media="print"/>
+</head>
+
+<body>
+
+<div class="top-left">Logtalk reference manual</div>
+<div class="top-right">Built-in predicate: threaded_call/1-2</div>
+<div class="bottom-left"><span class="page"/></div>
+<div class="bottom-right"><span class="page"/></div>
+<div class="navtop"><a href="../../index.html">Contents</a> &gt; <a href="../index.html">Reference Manual</a> &gt; <a href="../index.html#predicates">Built-in Predicates</a> &gt; threaded_call/1-2</div>
+
+<h2 id="predicates_threaded_call_1_2" class="codenp">threaded_call/1-2</h2>
+
+<h4>Description</h4>
+
+<pre>threaded_call(Goal)
+threaded_call(Goal, Tag)</pre>
+<p>
+Proves <code>Goal</code> asynchronously using a new thread. The argument can be a message sending goal. Calls to this predicate always succeeds and return immediately. The results (success, failure, or exception) are sent back to the message queue of the object containing the call (<a class="glossary" title="Go to glossary definition" href="../../glossary.html#this"><em>this</em></a>); they can be retrieved by calling the <a title="Consult reference manual" href="threaded_exit_1_2.html"><code>threaded_exit/1</code></a> predicate.
+</p>
+<p>
+The variant <code>threaded_call/2</code> returns a threaded call identifier tag that can be used with the <a title="Consult reference manual" href="threaded_exit_1_2.html"><code>threaded_exit/2</code></a> predicate. Tags shall be regarded as an opaque term; users shall not rely on its type.
+</p>
+
+<h4>Template and modes</h4>
+
+<pre>threaded_call(@callable)
+threaded_call(@callable, -nonvar)</pre>
+
+<h4>Errors</h4>
+
+<dl>
+	<dt>Goal is a variable:</dt>
+		<dd><code>instantiation_error</code></dd>
+	<dt>Goal is neither a variable nor a callable term:</dt>
+		<dd><code>type_error(callable, Goal)</code></dd>
+	<dt>Tag is not a variable:</dt>
+		<dd><code>type_error(variable, Goal)</code></dd>
+</dl>
+
+<h4>Examples</h4>
+
+<dl>
+	<dt>Prove <code>Goal</code> asynchronously in a new thread:</dt>
+		<dd><code>threaded_call(Goal)</code></dd>
+	<dt>Prove <code>::Message</code> asynchronously in a new thread:</dt>
+		<dd><code>threaded_call(::Message)</code></dd>
+	<dt>Prove <code>Object::Message</code> asynchronously in a new thread:</dt>
+		<dd><code>threaded_call(Object::Message)</code></dd>
+</dl>
+
+<div class="footer">
+	<div class="copyright">
+		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
+		<span>Last updated on: October 24, 2008</span>
+	</div>
+	<div class="navbottom">
+		<span><a href="../index.html#predicates">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="threaded_once_1_2.html">next</a></span><br/>
+		<span><a href="http://validator.w3.org/check/referer">XHTML</a> + <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a></span>
+	</div>
+</div>
+
+</body>
+
+</html>

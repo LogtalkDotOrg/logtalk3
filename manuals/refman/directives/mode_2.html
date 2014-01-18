@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<!--
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  
+%  This file is part of Logtalk <http://logtalk.org/>    
+%  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
+%  
+%  Logtalk is free software. You can redistribute it and/or modify it under
+%  the terms of the FSF GNU General Public License 3  (plus some additional
+%  terms per section 7).        Consult the `LICENSE.txt` file for details.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+	<head>
+	<meta http-equiv="content-type" content="application/xml+xhtml; charset=utf-8" />
+		<title>Logtalk predicate directive: mode/2</title>
+		<link rel="stylesheet" href="../../screen.css" type="text/css" media="screen"/>
+	<link rel="stylesheet" href="../../print.css" type="text/css" media="print"/>
+	</head>
+
+<body>
+
+<div class="top-left">Logtalk reference manual</div>
+<div class="top-right">Predicate directive: mode/2</div>
+<div class="bottom-left"><span class="page"/></div>
+<div class="bottom-right"><span class="page"/></div>
+<div class="navtop"><a href="../../index.html">Contents</a> &gt; <a href="../index.html">Reference Manual</a> &gt; <a href="../index.html#directives">Directives</a> &gt; mode/2</div>
+
+<h2 id="directives_mode_2" class="codenp">mode/2</h2>
+
+<h4>Description</h4>
+
+<pre>mode(Mode, NumberOfSolutions)</pre>
+<p>
+Most predicates can be used with several instantiations modes. This directive enables the specification of each instantiation mode and the corresponding number of solutions (not necessarily distinct). You may also use this directive for documenting grammar rule non-terminals. Multiple directives may be used to specify the same predicate or grammar rule non-terminal.
+</p>
+
+<h4>Template and modes</h4>
+
+<pre>mode(+predicate_mode_term, +number_of_solutions)
+mode(+non_terminal_mode_term, +number_of_solutions)</pre>
+
+<h4>Examples</h4>
+
+<pre>:- mode(atom_concat(-atom, -atom, +atom), one_or_more).
+:- mode(atom_concat(+atom, +atom, -atom), one).
+
+:- mode(var(@term), zero_or_one).
+
+:- mode(solve(+callable, -list(atom)), zero_or_one).</pre>
+
+<div class="footer">
+	<div class="copyright">
+		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
+		<span>Last updated on: September 4, 2010</span>
+	</div>
+	<div class="navbottom">
+		<span><a href="meta_predicate_1.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="multifile_1.html">next</a></span><br/>
+		<span><a href="http://validator.w3.org/check/referer">XHTML</a> + <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a></span>
+	</div>
+</div>
+
+</body>
+
+</html>

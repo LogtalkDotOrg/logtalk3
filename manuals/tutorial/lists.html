@@ -74,10 +74,10 @@ We will start by defining an object, <code>list</code>, containing predicate def
 
 :- end_object.</pre>
 <p>
-What is different here from a regular Prolog program? The definitions of the list predicates are the usual ones. We have two new directives, <a title="Consult reference manual" href="../refman/directives/object1_5.html"><code>object/1</code></a> and <a title="Consult reference manual" href="../refman/directives/end_object0.html"><code>end_object/0</code></a>, that encapsulate the object's code. In Logtalk, by default, all object predicates are private; therefore, we have to explicitly declare all predicates that we want to be public, that is, that we want to call from outside the object. This is done using the <a title="Consult reference manual" href="../refman/directives/public1.html"><code>public/1</code></a> scope directive.
+What is different here from a regular Prolog program? The definitions of the list predicates are the usual ones. We have two new directives, <a title="Consult reference manual" href="../refman/directives/object_1_5.html"><code>object/1</code></a> and <a title="Consult reference manual" href="../refman/directives/end_object_0.html"><code>end_object/0</code></a>, that encapsulate the object's code. In Logtalk, by default, all object predicates are private; therefore, we have to explicitly declare all predicates that we want to be public, that is, that we want to call from outside the object. This is done using the <a title="Consult reference manual" href="../refman/directives/public_1.html"><code>public/1</code></a> scope directive.
 </p>
 <p>
-After we copy the object code to a text file and saved it under the name <code>list.lgt</code>, we need to change the Prolog working directory to the one used to save our file (consult your Prolog compiler reference manual). Then, after starting Logtalk (see the <a title="Consult user manual" href="../userman/installing.html#programming">Installing and running Logtalk</a> session on the User Manual), we can compile and load the object using the <a title="Consult reference manual" href="../refman/builtins/logtalk_load1.html"><code>logtalk_load/1</code></a> Logtalk built-in predicate:
+After we copy the object code to a text file and saved it under the name <code>list.lgt</code>, we need to change the Prolog working directory to the one used to save our file (consult your Prolog compiler reference manual). Then, after starting Logtalk (see the <a title="Consult user manual" href="../userman/installing.html#programming">Installing and running Logtalk</a> session on the User Manual), we can compile and load the object using the <a title="Consult reference manual" href="../refman/predicates/logtalk_load_1.html"><code>logtalk_load/1</code></a> Logtalk built-in predicate:
 </p>
 <pre>| ?- logtalk_load(list).
 
@@ -100,7 +100,7 @@ or:
 L = 3
 yes</pre>
 <p>
-The infix operator <a title="Consult reference manual" href="../refman/control/to_object2.html"><code>::/2</code></a> is used in Logtalk to send a message to an object. The message must match a public object predicate. If we try to call a non-public predicate such as the <code>length/3</code> auxiliary predicate an exception will be generated:
+The infix operator <a title="Consult reference manual" href="../refman/control/send_to_object_2.html"><code>::/2</code></a> is used in Logtalk to send a message to an object. The message must match a public object predicate. If we try to call a non-public predicate such as the <code>length/3</code> auxiliary predicate an exception will be generated:
 </p>
 <pre>| ?- list::length([1, 2, 3], 0, L).
 
@@ -126,7 +126,7 @@ As we saw in the above example, a Logtalk object may contain predicate directive
 
 :- end_protocol.</pre>
 <p>
-Similar to what we have done for objects, we use the directives <a title="Consult reference manual" href="../refman/directives/protocol1_2.html"><code>protocol/1</code></a> and <a title="Consult reference manual" href="../refman/directives/end_protocol0.html"><code>end_protocol/0</code></a> to encapsulate the predicate directives. We can improve this protocol by documenting the call/return modes and the number of solutions of each predicate using the <a title="Consult reference manual" href="../refman/directives/mode2.html"><code>mode/2</code></a> directive:
+Similar to what we have done for objects, we use the directives <a title="Consult reference manual" href="../refman/directives/protocol_1_2.html"><code>protocol/1</code></a> and <a title="Consult reference manual" href="../refman/directives/end_protocol_0.html"><code>end_protocol/0</code></a> to encapsulate the predicate directives. We can improve this protocol by documenting the call/return modes and the number of solutions of each predicate using the <a title="Consult reference manual" href="../refman/directives/mode_2.html"><code>mode/2</code></a> directive:
 </p>
 <pre>:- protocol(listp).
 

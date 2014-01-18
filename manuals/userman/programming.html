@@ -53,7 +53,7 @@ Logtalk source files may contain any number of objects, categories, protocols, a
 Logtalk source files may contain arbitrary Prolog directives and clauses interleaved with Logtalk entity definitions. These directives and clauses are  be copied unchanged to the corresponding Prolog output file. This feature is included to help the integration of Logtalk with Prolog extensions such as, for example, constraint programming extensions. The following Prolog directives are processed when read (thus affecting the compilation of the source code that follows): <code>ensure_loaded/1</code>, <code>use_module/1-2</code>, <code>op/3</code>, and <code>set_prolog_flag/2</code>. The <code>initialization/1</code> directive may be used for defining an initialization goal to be executed when loading a source file.
 </p>
 <p>
-The text encoding used in a source file may be declared using the <a title="Consult reference manual" href="../refman/directives/encoding1.html"><code>encoding/1</code></a> directive when running Logtalk with some back-end Prolog compilers that support multiple encodings (check the <code>encoding_directive</code> flag in the adapter file of your Prolog compiler). The encoding used (and, in the case of a Unicode encoding, any BOM present) in a source file will be used for the generated Prolog and XML files. Logtalk uses the encoding names specified by <a title="" href="http://www.iana.org/assignments/character-sets">IANA</a> (in those cases where a preferred MIME name alias is specified, the alias is used instead).
+The text encoding used in a source file may be declared using the <a title="Consult reference manual" href="../refman/directives/encoding_1.html"><code>encoding/1</code></a> directive when running Logtalk with some back-end Prolog compilers that support multiple encodings (check the <code>encoding_directive</code> flag in the adapter file of your Prolog compiler). The encoding used (and, in the case of a Unicode encoding, any BOM present) in a source file will be used for the generated Prolog and XML files. Logtalk uses the encoding names specified by <a title="" href="http://www.iana.org/assignments/character-sets">IANA</a> (in those cases where a preferred MIME name alias is specified, the alias is used instead).
 </p>
 
 <h3 id="programming_portability">Portable programs</h3>
@@ -65,7 +65,7 @@ Logtalk is compatible with almost all modern Prolog compilers. However, this doe
 <h3 id="programming_cc">Conditional compilation</h3>
 
 <p>
-Logtalk supports conditional compilation within source files using the <a title="Consult reference manual" href="../refman/directives/if1.html"><code>if/1</code></a>, <a title="Consult reference manual" href="../refman/directives/elif1.html"><code>elif/1</code></a>, <a title="Consult reference manual" href="../refman/directives/else0.html"><code>else/0</code></a>, and <a title="Consult reference manual" href="../refman/directives/endif0.html"><code>endif/0</code></a> directives. This support is similar to the support found in some Prolog compilers such as ECLiPSe, SWI-Prolog, or YAP.
+Logtalk supports conditional compilation within source files using the <a title="Consult reference manual" href="../refman/directives/if_1.html"><code>if/1</code></a>, <a title="Consult reference manual" href="../refman/directives/elif_1.html"><code>elif/1</code></a>, <a title="Consult reference manual" href="../refman/directives/else_0.html"><code>else/0</code></a>, and <a title="Consult reference manual" href="../refman/directives/endif_0.html"><code>endif/0</code></a> directives. This support is similar to the support found in some Prolog compilers such as ECLiPSe, SWI-Prolog, or YAP.
 </p>
 
 <h3 id="programming_errors">Avoiding common errors</h3>
@@ -124,14 +124,14 @@ Most Prolog compilers support automatic loading of an initialization file, which
 
 <p>
 Your programs will be made of source files containing your objects, protocols, and categories. The source files can be compiled to disk by calling the Logtalk built-in predicate  
-<a title="Consult reference manual" href="../refman/builtins/logtalk_compile1.html"><code>logtalk_compile/1</code></a>:
+<a title="Consult reference manual" href="../refman/predicates/logtalk_compile_1.html"><code>logtalk_compile/1</code></a>:
 </p>
 <pre>| ?- logtalk_compile([source_file1, source_file2, ...]).</pre>
 <p>
 This predicate runs the compiler on each file and, if no fatal errors are found, outputs Prolog source files that can then be consulted or compiled in the usual way by your Prolog compiler.
 </p>
 <p>
-To compile to disk and also load into memory the source files we can use the Logtalk built-in predicate <a title="Consult reference manual" href="../refman/builtins/logtalk_load1.html"><code>logtalk_load/1</code></a>:
+To compile to disk and also load into memory the source files we can use the Logtalk built-in predicate <a title="Consult reference manual" href="../refman/predicates/logtalk_load_1.html"><code>logtalk_load/1</code></a>:
 </p>
 <pre>| ?- logtalk_load([source_file1, source_file2, ...]).</pre>
 <p>
@@ -147,7 +147,7 @@ If you have more than a few source files then you may want to use a loader helpe
 With most Prolog back-end compilers, you can use the shorthands <code>{File}</code> for <code>logtalk_load(File)</code> and <code>{File1, File2, ...}</code> for <code>logtalk_load([File1, File2, ...])</code>. The use these shorthands should be restricted to the Logtalk/Prolog top-level interpreter as their are not part of the language specification and may be commented out in case of conflicts with backend Prolog compiler features.
 </p>
 <p>
-The built-in predicate <a title="Consult reference manual" href="../refman/builtins/logtalk_make0.html"><code>logtalk_make/0</code></a> can be used to reload all modified source files. Note, however, that only Logtalk source files are reloaded. An extended version of this predicate, <a title="Consult reference manual" href="../refman/builtins/logtalk_make1.html"><code>logtalk_make/1</code></a>, accepts <code>all</code> and <code>clean</code> arguments for, respectively, reloading modified Logtalk source files and deleting any intermediate files generated by the compilation of Logtalk source files. With most Prolog backend compilers, you can use the shorthands <code>{*}</code> for <code>logtalk_make(all)</code> and <code>{!}</code> for <code>logtalk_make(clean)</code>. The <code>logtalk_make(clean)</code> goal can be specially useful when reloading unmodified source files after changing compiler flags such as <code>debug</code> or before switching backend Prolog compilers.
+The built-in predicate <a title="Consult reference manual" href="../refman/predicates/logtalk_make_0.html"><code>logtalk_make/0</code></a> can be used to reload all modified source files. Note, however, that only Logtalk source files are reloaded. An extended version of this predicate, <a title="Consult reference manual" href="../refman/predicates/logtalk_make_1.html"><code>logtalk_make/1</code></a>, accepts <code>all</code> and <code>clean</code> arguments for, respectively, reloading modified Logtalk source files and deleting any intermediate files generated by the compilation of Logtalk source files. With most Prolog backend compilers, you can use the shorthands <code>{*}</code> for <code>logtalk_make(all)</code> and <code>{!}</code> for <code>logtalk_make(clean)</code>. The <code>logtalk_make(clean)</code> goal can be specially useful when reloading unmodified source files after changing compiler flags such as <code>debug</code> or before switching backend Prolog compilers.
 </p>
 
 <h3 id="programming_loaders">Loader utility files</h3>
@@ -157,7 +157,7 @@ Most examples directories contain a Logtalk utility file that can be used to loa
 </p>
 <pre>| ?- logtalk_load(loader).</pre>
 <p>
-Usually these files contain a call to the Logtalk built-in predicates <a title="Consult reference manual" href="../refman/builtins/set_logtalk_flag2.html"><code>set_logtalk_flag/2</code></a> (e.g. for setting global, <em>project-specific</em>, flag values) and <a title="Consult reference manual" href="../refman/builtins/logtalk_load1.html"><code>logtalk_load/1</code></a> or <a title="Consult reference manual" href="../refman/builtins/logtalk_load2.html"><code>logtalk_load/2</code></a> (for loading project files), wrapped inside an <code>initialization/1</code> directive. For instance, if your code is split in three Logtalk source files named <code>source1.lgt</code>, <code>source2.lgt</code>, and <code>source3.lgt</code>, then the contents of your loader file could be:
+Usually these files contain a call to the Logtalk built-in predicates <a title="Consult reference manual" href="../refman/predicates/set_logtalk_flag_2.html"><code>set_logtalk_flag/2</code></a> (e.g. for setting global, <em>project-specific</em>, flag values) and <a title="Consult reference manual" href="../refman/predicates/logtalk_load_1.html"><code>logtalk_load/1</code></a> or <a title="Consult reference manual" href="../refman/predicates/logtalk_load_2.html"><code>logtalk_load/2</code></a> (for loading project files), wrapped inside an <code>initialization/1</code> directive. For instance, if your code is split in three Logtalk source files named <code>source1.lgt</code>, <code>source2.lgt</code>, and <code>source3.lgt</code>, then the contents of your loader file could be:
 </p>
 <pre>:- initialization((
     set_logtalk_flag(events, allow),           % set project-specific flags
@@ -197,7 +197,7 @@ Note that, by using a directive, the flag is local to the loader file. If one of
 <h3 id="programming_libraries">Libraries of source files</h3>
 
 <p>
-Logtalk defines a <em>library</em> simply as a directory containing source files. Library locations can be specified by defining or asserting clauses for the dynamic and multifile predicate <a title="Consult reference manual" href="../refman/builtins/logtalk_library_path2.html"><code>logtalk_library_path/2</code></a>. For example:
+Logtalk defines a <em>library</em> simply as a directory containing source files. Library locations can be specified by defining or asserting clauses for the dynamic and multifile predicate <a title="Consult reference manual" href="../refman/predicates/logtalk_library_path_2.html"><code>logtalk_library_path/2</code></a>. For example:
 </p>
 <pre>| ?- assertz(logtalk_library_path(shapes, '$LOGTALKUSER/examples/shapes/')). </pre>
 <p>
@@ -220,7 +220,7 @@ The library notation provides functionality inspired by the <code>file_search_pa
 <h3 id="programming_flags">Compiler flags</h3>
 
 <p>
-The <a title="Consult reference manual" href="../refman/builtins/logtalk_load1.html"><code>logtalk_load/1</code></a> and <a title="Consult reference manual" href="../refman/builtins/logtalk_compile1.html"><code>logtalk_compile/1</code></a> always use the current set of default compiler flags as specified in your settings file and the Logtalk adapter files or changed for the current session using the built-in predicate <a title="Consult reference manual" href="../refman/builtins/set_logtalk_flag2.html"><code>set_logtalk_flag/2</code></a>. Although the default flag values cover the usual cases, you may want to use a different set of flag values while compiling or loading some of your Logtalk source files. This can be accomplished by using the <a title="Consult reference manual" href="../refman/builtins/logtalk_load2.html"><code>logtalk_load/2</code></a> or the <a title="Consult reference manual" href="../refman/builtins/logtalk_compile2.html"><code>logtalk_compile/2</code></a> built-in predicates. These two predicates accept a list of flag values affecting how a Logtalk source file is compiled and loaded:
+The <a title="Consult reference manual" href="../refman/predicates/logtalk_load_1.html"><code>logtalk_load/1</code></a> and <a title="Consult reference manual" href="../refman/predicates/logtalk_compile_1.html"><code>logtalk_compile/1</code></a> always use the current set of default compiler flags as specified in your settings file and the Logtalk adapter files or changed for the current session using the built-in predicate <a title="Consult reference manual" href="../refman/predicates/set_logtalk_flag_2.html"><code>set_logtalk_flag/2</code></a>. Although the default flag values cover the usual cases, you may want to use a different set of flag values while compiling or loading some of your Logtalk source files. This can be accomplished by using the <a title="Consult reference manual" href="../refman/predicates/logtalk_load_2.html"><code>logtalk_load/2</code></a> or the <a title="Consult reference manual" href="../refman/predicates/logtalk_compile_2.html"><code>logtalk_compile/2</code></a> built-in predicates. These two predicates accept a list of flag values affecting how a Logtalk source file is compiled and loaded:
 </p>
 <pre>| ?- logtalk_compile(Files, Flags).</pre>
 <p>
@@ -231,18 +231,18 @@ or:
 In fact, the <code>logtalk_load/1</code> and <code>logtalk_compile/1</code> predicates are just shortcuts to the extended versions called with the default compiler flag values.
 </p>
 <p>
-We may also change the default flag values from the ones loaded from the adapter file by using the <a title="Consult reference manual" href="../refman/builtins/set_logtalk_flag2.html"><code>set_logtalk_flag/2</code></a> built-in predicate. For example:
+We may also change the default flag values from the ones loaded from the adapter file by using the <a title="Consult reference manual" href="../refman/predicates/set_logtalk_flag_2.html"><code>set_logtalk_flag/2</code></a> built-in predicate. For example:
 </p>
 <pre>| ?- set_logtalk_flag(unknown_entities, silent).</pre>
 <p>
-The current default flags values can be enumerated using the <a title="Consult reference manual" href="../refman/builtins/current_logtalk_flag2.html"><code>current_logtalk_flag/2</code></a> built-in predicate:
+The current default flags values can be enumerated using the <a title="Consult reference manual" href="../refman/predicates/current_logtalk_flag_2.html"><code>current_logtalk_flag/2</code></a> built-in predicate:
 </p>
 <pre>| ?- current_logtalk_flag(unknown_entities, Value).
 
 Value = silent
 yes</pre>
 <p>
-Logtalk also implements a <a title="Consult reference manual" href="../refman/directives/set_logtalk_flag2.html"><code>set_logtalk_flag/2</code></a> directive, which can be used to set flags within a source file or within an entity. For example:
+Logtalk also implements a <a title="Consult reference manual" href="../refman/directives/set_logtalk_flag_2.html"><code>set_logtalk_flag/2</code></a> directive, which can be used to set flags within a source file or within an entity. For example:
 </p>
 <pre>
 % compile all objects in the source file with event support
@@ -366,7 +366,7 @@ Note that the scope of the <code>set_logtalk_flag/2</code> directive is local to
 	</dl>
 	<dl>
 		<dt><code>hook(Object)</code></dt>
-			<dd>Allows the definition of compiler hooks that are called for each term read form a source file and for each compiled goal. This option specifies an object (which can be the pseudo-object <code>user</code>) implementing the <code>expanding</code> built-in protocol. It's also possible to specify a Prolog module instead of a Logtalk object but the module must be pre-loaded and its identifier must be different from any object identifier. The object is expected to define clauses for the <a title="Consult reference manual" href="../refman/methods/term_expansion2.html"><code>term_expansion/2</code></a> and <a title="Consult reference manual" href="../refman/methods/goal_expansion2.html"><code>goal_expansion/2</code></a> predicates. In the case of the <code>term_expansion/2</code> predicate, the first argument is the term read form the source file while the second argument returns a list of terms corresponding to the expansion of the first argument. In the case of the <code>goal_expansion/2</code> predicate, the second argument should be a goal resulting from the expansion of the goal in the first argument. The predicate <code>goal_expansion/2</code> is called on the expanded goals so care must be taken to avoid compilation loops.</dd>
+			<dd>Allows the definition of compiler hooks that are called for each term read form a source file and for each compiled goal. This option specifies an object (which can be the pseudo-object <code>user</code>) implementing the <code>expanding</code> built-in protocol. It's also possible to specify a Prolog module instead of a Logtalk object but the module must be pre-loaded and its identifier must be different from any object identifier. The object is expected to define clauses for the <a title="Consult reference manual" href="../refman/methods/term_expansion_2.html"><code>term_expansion/2</code></a> and <a title="Consult reference manual" href="../refman/methods/goal_expansion_2.html"><code>goal_expansion/2</code></a> predicates. In the case of the <code>term_expansion/2</code> predicate, the first argument is the term read form the source file while the second argument returns a list of terms corresponding to the expansion of the first argument. In the case of the <code>goal_expansion/2</code> predicate, the second argument should be a goal resulting from the expansion of the goal in the first argument. The predicate <code>goal_expansion/2</code> is called on the expanded goals so care must be taken to avoid compilation loops.</dd>
 	</dl>
 	<dl>
 		<dt><code>clean(Option)</code></dt>
@@ -643,7 +643,7 @@ The debugger pauses at leashed posts when tracing or when finding a spy point fo
 <h3 id="programming_context">Context-switching calls</h3>
 
 <p>
-Logtalk provides a control construct, <a title="Consult reference manual" href="../refman/control/context2.html"><code>&lt;&lt;/2</code></a>, which allows the execution of a query within the context of an object. Common debugging uses include checking an object local predicates (e.g. predicates representing internal dynamic state) and sending a message from within an object. This control construct may also be used to write unit tests.
+Logtalk provides a control construct, <a title="Consult reference manual" href="../refman/control/context_switch_2.html"><code>&lt;&lt;/2</code></a>, which allows the execution of a query within the context of an object. Common debugging uses include checking an object local predicates (e.g. predicates representing internal dynamic state) and sending a message from within an object. This control construct may also be used to write unit tests.
 </p>
 <p>
 Consider the following toy example:
