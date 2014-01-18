@@ -41,7 +41,10 @@
 Calls an imported or inherited predicate definition. The call fails if the predicate is declared but there is no imported and no inherited predicate definition. This control construct may be used within objects or categories in the body of a predicate definition. When used within a category, the predicate definition lookup is restricted to the extended categories.
 </p>
 <p>
-This control construct is a generalization of the Smalltalk <em>super</em> keyword to take into account Logtalk support for prototypes and categories besides classes. The lookup for the predicate definition starts at the imported categories, if any. If an imported predicate definition is not found, the lookup proceeds to the ancestor objects. The lookups for the predicate declaration and the predicate definition are performed using a depth-first strategy.
+This control construct is a generalization of the Smalltalk <em>super</em> keyword to take into account Logtalk support for prototypes and categories besides classes. The lookup for the predicate definition starts at the imported categories, if any. If an imported predicate definition is not found, the lookup proceeds to the ancestor objects.
+</p>
+<p>
+The lookups for the predicate declaration and the predicate definition are performed using a depth-first strategy. Depending on the value of the <code>optimize</code> flag, there lookups are performed at compile time whenever sufficient information is available. When the lookups are performed at runtime, a caching mechanism is used to improve performance in subsequent calls.
 </p>
 
 <h4>Template and modes</h4>
@@ -70,7 +73,7 @@ This control construct is a generalization of the Smalltalk <em>super</em> keywo
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: April 19, 2012</span>
+		<span>Last updated on: January 18, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="send_to_self_1.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="../index.html#constructs">next</a></span><br/>
