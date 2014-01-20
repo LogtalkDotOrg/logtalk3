@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2013/9/29</code>
+            <code>2014/1/2</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -234,7 +234,7 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>expand_library_path(?atom,?atom) &ndash; zero_or_more</code>
+              <code>expand_library_path(+atom,?atom) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
@@ -261,7 +261,7 @@
         <div class="section">
           <h3 class="code">loaded_file_property/2</h3>
           <blockquote>
-            <p class="comment">Enumerates, by backtracking, all loaded files, returning their full paths. Valid properties are: basename/1, directory/1, flags/1, text_properties/1 (encoding/1 and bom/1), target/1, and modified/1.</p>
+            <p class="comment">Enumerates, by backtracking, all loaded file properties. Valid properties are: basename/1, directory/1, mode/1, flags/1, text_properties/1 (encoding/1 and bom/1), target/1, modified/1, parent/1, and library/1.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -452,7 +452,24 @@
       <div class="private">
         <h2>Private predicates</h2>
         <div class="section">
-          <p class="comment">(none)</p>
+          <h3 class="code">execution_context_this_rest/3</h3>
+          <blockquote>
+            <p class="comment">Conversion between an execution context term data and "this" plus the remaining elements of the context.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>execution_context_this_rest(ExecutionContext,This,Rest)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>execution_context_this_rest(?nonvar,?object_identifier,?object_identifier) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
         </div>
       </div>
     </div>
