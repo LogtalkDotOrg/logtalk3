@@ -35,6 +35,12 @@ Logtalk compiler and runtime
 and `retractall/1` messages when sent to a known object with the `optimize`
 flag turned on by using static binding whenever possible.
 
+Tools
+-----
+
+* IMPROVED: The `lgtdoc` tool now also lists the multifile predicates that
+an object or a category defines for other entities.
+
 Examples
 --------
 

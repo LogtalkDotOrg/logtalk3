@@ -319,6 +319,15 @@
 				</fo:block>
 				<xsl:apply-templates select="specializes"/>
 			</xsl:if>
+			<xsl:if test="provides">
+				<fo:block
+						font-size="10pt"
+						font-family="serif" 
+						keep-with-next="always">
+					provides:
+				</fo:block>
+				<xsl:apply-templates select="provides"/>
+			</xsl:if>
 			<xsl:if test="uses">
 				<fo:block
 						font-size="10pt"
@@ -357,6 +366,16 @@
 			</fo:block>
 		</xsl:otherwise>
 	</xsl:choose>
+</xsl:template>
+
+
+<xsl:template match="logtalk/relations/provides" priority="1">
+	<fo:block
+			font-size="9pt"
+			font-family="monospace"
+			margin-left="10mm">
+		<xsl:value-of select="name"/>
+	</fo:block>
 </xsl:template>
 
 

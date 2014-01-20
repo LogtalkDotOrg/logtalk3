@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/11/28,
+		date is 2014/01/20,
 		comment is 'Documenting tool.',
 		remarks is [
 			'Compiling files for generating XML documentation' - 'All source files must be compiled with the "source_data" compiler flag turned on.',
@@ -871,6 +871,14 @@
 		specializes_class(Entity, Superclass, Scope),
 			write_xml_relation(Stream, Entity, Superclass, specializes, Scope),
 		fail.
+	write_xml_object_relations(Stream, Entity) :-
+		entity_property(Entity, provides(Functor/Arity, To, _)),
+			entity_property(To, declares(Functor/Arity, Properties)),
+			(	member(non_terminal(Functor//Args), Properties) ->
+				write_xml_provides_relation(Stream, Entity, To, To::Functor//Args)
+			;	write_xml_provides_relation(Stream, Entity, To, To::Functor/Arity)
+			),
+		fail.
 	write_xml_object_relations(_, _).
 
 	write_xml_protocol_relations(Stream, Entity) :-
@@ -891,6 +899,14 @@
 		complements_object(Entity, Object),
 			write_xml_relation(Stream, Entity, Object, complements),
 		fail.
+	write_xml_category_relations(Stream, Entity) :-
+		entity_property(Entity, provides(Functor/Arity, To, _)),
+			entity_property(To, declares(Functor/Arity, Properties)),
+			(	member(non_terminal(Functor//Args), Properties) ->
+				write_xml_provides_relation(Stream, Entity, To, To::Functor//Args)
+			;	write_xml_provides_relation(Stream, Entity, To, To::Functor/Arity)
+			),
+		fail.
 	write_xml_category_relations(_, _).
 
 	write_xml_relation(Stream, Entity, Relation, Tag, Scope) :-
@@ -909,6 +925,14 @@
 		write_xml_cdata_element(Stream, name, [], Relation),
 		write_xml_cdata_element(Stream, file, [], File),
 		write_xml_close_tag(Stream, Tag).
+
+	write_xml_provides_relation(Stream, Entity, To, Predicate) :-
+		relation_to_xml_term(Entity, To),
+		relation_to_xml_filename(To, File),
+		write_xml_open_tag(Stream, provides, []),
+		write_xml_cdata_element(Stream, name, [], Predicate),
+		write_xml_cdata_element(Stream, file, [], File),
+		write_xml_close_tag(Stream, provides).
 
 	write_xml_operators(Stream, Entity) :-
 		write_xml_open_tag(Stream, operators, []),

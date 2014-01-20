@@ -130,6 +130,10 @@
 				<xsl:text>specializes:</xsl:text><xsl:value-of select="$nl" />
 				<xsl:apply-templates select="specializes" />
 			</xsl:if>
+			<xsl:if test="provides">
+				<xsl:text>provides:</xsl:text><xsl:value-of select="$nl" />
+				<xsl:apply-templates select="provides" />
+			</xsl:if>
 			<xsl:if test="uses">
 				<xsl:text>uses:</xsl:text><xsl:value-of select="$nl" />
 				<xsl:apply-templates select="uses" />
@@ -148,6 +152,11 @@
 		</xsl:otherwise>
 	</xsl:choose>
 	<xsl:value-of select="$nl" />
+</xsl:template>
+
+
+<xsl:template match="logtalk/relations/provides" priority="1">
+	<xsl:value-of select="$tab" /><xsl:value-of select="name" /><xsl:value-of select="$nl" />
 </xsl:template>
 
 
