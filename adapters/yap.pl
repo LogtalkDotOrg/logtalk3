@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for YAP Prolog 6.3.4 and later versions
-%  Last updated on December 12, 2013
+%  Last updated on January 21, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -460,7 +460,7 @@
 % Logtalk source file, given a list of options
 
 '$lgt_load_prolog_code'(File, Source, Options) :-
-	load_files(File, [derived_from(Source)| Options]).
+	load_files(File, Options).
 
 
 % '$lgt_file_modification_time'(+atom, -nonvar)
