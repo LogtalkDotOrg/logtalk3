@@ -50,6 +50,8 @@ Tools
 * IMPROVED: The `lgtdoc` tool now also lists the multifile predicates that
 an object or a category defines for other entities.
 
+* FIXED: Bash shell typos in the `logtalk_tester.sh` script.
+
 Examples
 --------
 

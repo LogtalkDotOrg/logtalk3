@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Unit testing automation script
-##   Last updated on August 10, 2013
+##   Last updated on January 22, 2014
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -29,11 +29,11 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "`basename $0` 0.11"
+	echo "`basename $0` 0.12"
 	exit 0
 }
 
-if [ "$LOGTALKHOME" != "" ] && [ "$LOGTALKUSER" != "" ] && [ "$LOGTALKHOME" = "$LOGTALKUSER" ] ; then
+if [ "$LOGTALKHOME" != "" ] && [ "$LOGTALKUSER" != "" ] && [ "$LOGTALKHOME" == "$LOGTALKUSER" ] ; then
 	# assume that we're running Logtalk without using the installer scripts
 	extension='.sh'
 else
@@ -94,64 +94,64 @@ do
 	esac
 done
 
-if [ "$p_arg" = "b" ] ; then
+if [ "$p_arg" == "b" ] ; then
 	prolog='B-Prolog'
 	logtalk="bplgt$extension -g"
-elif [ "$p_arg" = "cx" ] ; then
+elif [ "$p_arg" == "cx" ] ; then
 	prolog='CxProlog'
 	logtalk="cxlgt$extension --goal"
-elif [ "$p_arg" = "eclipse" ] ; then
+elif [ "$p_arg" == "eclipse" ] ; then
 	prolog='ECLiPSe'
 	logtalk="eclipselgt$extension -e"
-elif [ "$p_arg" = "gnu" ] ; then
+elif [ "$p_arg" == "gnu" ] ; then
 	prolog='GNU Prolog'
 	logtalk="gplgt$extension --query-goal"
-elif [ "$p_arg" = "qp" ] ; then
+elif [ "$p_arg" == "qp" ] ; then
 	prolog='Qu-Prolog'
 	logtalk="qplgt$extension -g"
 	versions_goal=$versions_goal_dot
 	tester_optimal_goal=$tester_optimal_goal_dot
 	tester_normal_goal=$tester_normal_goal_dot
 	tester_debug_goal=$tester_debug_goal_dot
-elif [ "$p_arg" = "sicstus" ] ; then
+elif [ "$p_arg" == "sicstus" ] ; then
 	prolog='SICStus Prolog'
 	logtalk="sicstuslgt$extension --goal"
 	versions_goal=$versions_goal_dot
 	tester_optimal_goal=$tester_optimal_goal_dot
 	tester_normal_goal=$tester_normal_goal_dot
 	tester_debug_goal=$tester_debug_goal_dot
-elif [ "$p_arg" = "swi" ] ; then
+elif [ "$p_arg" == "swi" ] ; then
 	prolog='SWI-Prolog'
 	logtalk="swilgt$extension -g"
-elif [ "$p_arg" = "xsb" ] ; then
+elif [ "$p_arg" == "xsb" ] ; then
 	prolog='XSB'
 	logtalk="xsblgt$extension -e"
 	versions_goal=$versions_goal_dot
 	tester_optimal_goal=$tester_optimal_goal_dot
 	tester_normal_goal=$tester_normal_goal_dot
 	tester_debug_goal=$tester_debug_goal_dot
-elif [ "$p_arg" = "xsb64" ] ; then
+elif [ "$p_arg" == "xsb64" ] ; then
 	prolog='XSB 64 bits'
 	logtalk="xsb64lgt$extension -e"
 	versions_goal=$versions_goal_dot
 	tester_optimal_goal=$tester_optimal_goal_dot
 	tester_normal_goal=$tester_normal_goal_dot
 	tester_debug_goal=$tester_debug_goal_dot
-elif [ "$p_arg" = "xsbmt" ] ; then
+elif [ "$p_arg" == "xsbmt" ] ; then
 	prolog='XSB-MT'
 	logtalk="xsbmtlgt$extension -e"
 	versions_goal=$versions_goal_dot
 	tester_optimal_goal=$tester_optimal_goal_dot
 	tester_normal_goal=$tester_normal_goal_dot
 	tester_debug_goal=$tester_debug_goal_dot
-elif [ "$p_arg" = "xsbmt64" ] ; then
+elif [ "$p_arg" == "xsbmt64" ] ; then
 	prolog='XSB-MT 64 bits'
 	logtalk="xsbmt64lgt$extension -e"
 	versions_goal=$versions_goal_dot
 	tester_optimal_goal=$tester_optimal_goal_dot
 	tester_normal_goal=$tester_normal_goal_dot
 	tester_debug_goal=$tester_debug_goal_dot
-elif [ "$p_arg" = "yap" ] ; then
+elif [ "$p_arg" == "yap" ] ; then
 	prolog='YAP'
 	logtalk="yaplgt$extension -g"
 elif [ "$p_arg" != "" ] ; then
@@ -164,13 +164,13 @@ elif [ ! `which $backend` ] ; then
     exit 1
 fi
 
-if [ "$m_arg" = "optimal" ] ; then
+if [ "$m_arg" == "optimal" ] ; then
 	mode='optimal'
-elif [ "$m_arg" = "normal" ] ; then
+elif [ "$m_arg" == "normal" ] ; then
 	mode='normal'
-elif [ "$m_arg" = "debug" ] ; then
+elif [ "$m_arg" == "debug" ] ; then
 	mode='debug'
-elif [ "$m_arg" = "all" ] ; then
+elif [ "$m_arg" == "all" ] ; then
 	mode='all'
 elif [ "$m_arg" != "" ] ; then
 	echo "Error! Unknow compilation mode: $m_arg"
@@ -207,21 +207,21 @@ do
 			echo '*******************************************************************************'
 			echo "***** Testing $unit"
 			name=$(echo $unit|sed 's|/|__|g')
-			if [ $mode = 'optimal' ] || [ $mode = 'all' ] ; then
+			if [ $mode == 'optimal' ] || [ $mode == 'all' ] ; then
 				$logtalk $tester_optimal_goal > "$results/$name.results" 2> "$results/$name.errors"
 				grep 'tests:' "$results/$name.results" | sed 's/%/***** (opt)  /'
 				grep 'tests:' "$results/$name.results" | sed 's/\(% \)\([0-9]*\)\(.*\)/\2/' >> "$results/total"
 				grep 'tests:' "$results/$name.results" | sed 's/\(% [0-9]* tests: \)\([0-9]*\)\(.*\)/\2/' >> "$results/skipped"
 				grep 'tests:' "$results/$name.results" | sed 's/\(% [0-9]* tests: [0-9]* skipped, \)\([0-9]*\)\(.*\)/\2/' >> "$results/passed"
 			fi
-			if [ $mode = 'normal' ] || [ $mode = 'all' ] ; then
+			if [ $mode == 'normal' ] || [ $mode == 'all' ] ; then
 				$logtalk $tester_normal_goal > "$results/$name.results" 2> "$results/$name.errors"
 				grep 'tests:' "$results/$name.results" | sed 's/%/*****        /'
 				grep 'tests:' "$results/$name.results" | sed 's/\(% \)\([0-9]*\)\(.*\)/\2/' >> "$results/total"
 				grep 'tests:' "$results/$name.results" | sed 's/\(% [0-9]* tests: \)\([0-9]*\)\(.*\)/\2/' >> "$results/skipped"
 				grep 'tests:' "$results/$name.results" | sed 's/\(% [0-9]* tests: [0-9]* skipped, \)\([0-9]*\)\(.*\)/\2/' >> "$results/passed"
 			fi
-			if [ $mode = 'debug' ] || [ $mode = 'all' ] ; then
+			if [ $mode == 'debug' ] || [ $mode == 'all' ] ; then
 				$logtalk $tester_debug_goal > "$results/$name.results" 2> "$results/$name.errors"
 				grep 'tests:' "$results/$name.results" | sed 's/%/***** (debug)/'
 				grep 'tests:' "$results/$name.results" | sed 's/\(% \)\([0-9]*\)\(.*\)/\2/' >> "$results/total"
@@ -240,21 +240,21 @@ do
 					echo '*******************************************************************************'
 					echo "***** Testing $unit/$subunit"
 					subname=$(echo $unit/$subunit|sed 's|/|__|g')
-					if [ $mode = 'optimal' ] || [ $mode = 'all' ] ; then
+					if [ $mode == 'optimal' ] || [ $mode == 'all' ] ; then
 						$logtalk $tester_optimal_goal > "$results/$subname.results" 2> "$results/$subname.errors"
 						grep 'tests:' "$results/$subname.results" | sed 's/%/***** (opt)  /'
 						grep 'tests:' "$results/$subname.results" | sed 's/\(% \)\([0-9]*\)\(.*\)/\2/' >> "$results/total"
 						grep 'tests:' "$results/$subname.results" | sed 's/\(% [0-9]* tests: \)\([0-9]*\)\(.*\)/\2/' >> "$results/skipped"
 						grep 'tests:' "$results/$subname.results" | sed 's/\(% [0-9]* tests: [0-9]* skipped, \)\([0-9]*\)\(.*\)/\2/' >> "$results/passed"
 					fi
-					if [ $mode = 'normal' ] || [ $mode = 'all' ] ; then
+					if [ $mode == 'normal' ] || [ $mode == 'all' ] ; then
 						$logtalk $tester_normal_goal > "$results/$subname.results" 2> "$results/$subname.errors"
 						grep 'tests:' "$results/$subname.results" | sed 's/%/*****        /'
 						grep 'tests:' "$results/$subname.results" | sed 's/\(% \)\([0-9]*\)\(.*\)/\2/' >> "$results/total"
 						grep 'tests:' "$results/$subname.results" | sed 's/\(% [0-9]* tests: \)\([0-9]*\)\(.*\)/\2/' >> "$results/skipped"
 						grep 'tests:' "$results/$subname.results" | sed 's/\(% [0-9]* tests: [0-9]* skipped, \)\([0-9]*\)\(.*\)/\2/' >> "$results/passed"
 					fi
-					if [ $mode = 'debug' ] || [ $mode = 'all' ] ; then
+					if [ $mode == 'debug' ] || [ $mode == 'all' ] ; then
 						$logtalk $tester_debug_goal > "$results/$subname.results" 2> "$results/$subname.errors"
 						grep 'tests:' "$results/$subname.results" | sed 's/%/***** (debug)/'
 						grep 'tests:' "$results/$subname.results" | sed 's/\(% \)\([0-9]*\)\(.*\)/\2/' >> "$results/total"
