@@ -35,6 +35,12 @@ Logtalk compiler and runtime
 and `retractall/1` messages when sent to a known object with the `optimize`
 flag turned on by using static binding whenever possible.
 
+Prolog adapter and integration files
+------------------------------------
+
+* FIXED: Compatibility issues with the YAP adapter file when using versions
+older than 6.3.4.
+
 Tools
 -----
 
