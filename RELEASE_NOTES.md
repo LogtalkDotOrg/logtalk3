@@ -41,6 +41,9 @@ Prolog adapter and integration files
 * FIXED: Compatibility issues with the YAP adapter file when using versions
 older than 6.3.4.
 
+* CHANGED: The POSIX integration scripts for GNU Prolog and SWI-Prolog for
+compatibility with the bash shell implementation provided by Git for Windows.
+
 Tools
 -----
 

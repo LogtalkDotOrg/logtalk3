@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Integration script for GNU Prolog
-##   Last updated on October 11, 2013
+##   Last updated on January 22, 2014
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -101,4 +101,10 @@ echo
 
 export LOGTALK_STARTUP_DIRECTORY=`pwd`
 
-exec gprolog --init-goal "['$LOGTALKHOME/integration/logtalk_gp.pl']" "$@"
+operating_system=`uname -s`
+if [ "${operating_system:0:10}" == "MINGW32_NT" ] ; then
+	# assume that we're running on Windows using the Git for Windows bash shell
+	export LINEDIT='gui=no'
+fi
+
+exec gprolog --init-goal "['\$LOGTALKHOME/integration/logtalk_gp.pl']" "$@"

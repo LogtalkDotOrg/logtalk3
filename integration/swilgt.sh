@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Integration script for SWI-Prolog
-##   Last updated on October 11, 2013
+##   Last updated on January 22, 2014
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -101,8 +101,4 @@ echo
 
 export LOGTALK_STARTUP_DIRECTORY=`pwd`
 
-if swipl -t halt 2>&1 | grep "SWI-Prolog" > /dev/null; then
-	exec swipl -s "$LOGTALKHOME/integration/logtalk_swi.pl" "$@"
-elif pl -t halt 2>&1 | grep "SWI-Prolog" > /dev/null; then
-	exec pl -s "$LOGTALKHOME/integration/logtalk_swi.pl" "$@"
-fi
+exec swipl -s "$LOGTALKHOME/integration/logtalk_swi.pl" "$@"
