@@ -69,6 +69,11 @@ Contributions
 
 * UPDATED: Port of John Fletcher's Prolog XML parser to release 3.5.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* UPDATED: Instructions on using the LaTeX `lstlang0.sty` file.
+
 
 3.00.0 Alpha 33 - January 15, 2014
 ==================================

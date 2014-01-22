@@ -9,15 +9,43 @@ ________________________________________________________________________
 
 
 This folder contains a simple Logtalk language definition for the
-LaTeX package "listings":
+LaTeX package `listings`:
 
 	http://www.ctan.org/tex-archive/macros/latex/contrib/listings/
 
-To use the language definition copy the "lstlang0.sty" to the same
+To use the language definition copy the `lstlang0.sty` to the same
 folder where you have the LaTeX source files that you're typesetting
-and add the following line to your main LaTeX file:
+and add the following lines to your main LaTeX file:
 
-\usepackage{textcomp}
+	\usepackage{listings}
+	\usepackage{textcomp}
 
 This package is required as the Logtalk language definition sets the
-"upquote" option to true.
+`upquote` option to true.
+
+If you want keywords in bold face in the code listings, you will also
+need one of the following packages:
+
+	\usepackage[scaled=0.8]{couriers}
+
+or:
+
+	\usepackage{pxfonts}
+
+Default options for all code listings can be set using something like:
+
+	\lstset{
+		language=Logtalk,
+		basicstyle=\small\ttfamily,
+		keywordstyle=\bfseries,
+		tabsize=4,
+		numbers=none, numberstyle=\tiny, stepnumber=1, numbersep=5pt,
+		showspaces=false, showstringspaces=false,
+		captionpos=b,
+		frame=lines,
+		upquote=true,
+		framextopmargin=6pt, framexbottommargin=6pt, aboveskip=\medskipamount, lineskip={-2.0pt}
+	}
+
+Experiment with the above settings to get the exact appearance that your
+publication requires.
