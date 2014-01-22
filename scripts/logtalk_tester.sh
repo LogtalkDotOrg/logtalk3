@@ -33,7 +33,12 @@ print_version() {
 	exit 0
 }
 
-if [ "$LOGTALKHOME" != "" ] && [ "$LOGTALKUSER" != "" ] && [ "$LOGTALKHOME" == "$LOGTALKUSER" ] ; then
+operating_system=`uname -s`
+
+if [ "${operating_system:0:10}" == "MINGW32_NT" ] ; then
+	# assume that we're running on Windows using the Git for Windows bash shell
+	extension='.sh'
+elif [ "$LOGTALKHOME" != "" ] && [ "$LOGTALKUSER" != "" ] && [ "$LOGTALKHOME" == "$LOGTALKUSER" ] ; then
 	# assume that we're running Logtalk without using the installer scripts
 	extension='.sh'
 else
