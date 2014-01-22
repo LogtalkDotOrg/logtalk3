@@ -142,7 +142,7 @@
 
 % '$lgt_predicate_property'(+callable, ?predicate_property)
 
-:- if((current_prolog_flag(version_data, yap(Major,Minor,_,_)), (Major,Minor) @< (6,3))).
+:- if((current_prolog_flag(version_data, yap(Major,Minor,_,_)), (Major,Minor) @< (6,3,4))).
 	'$lgt_predicate_property'(Pred, Prop) :-
 		predicate_property(Pred, Prop).
 :- else.
