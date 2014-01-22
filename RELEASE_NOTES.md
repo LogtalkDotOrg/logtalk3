@@ -52,6 +52,9 @@ an object or a category defines for other entities.
 
 * FIXED: Bash shell typos in the `logtalk_tester.sh` script.
 
+* ADDED: Notes on how to use the `logtalk_tester.sh` POSIX shell script on
+Windows to the `scripts/NOTES.txt` file.
+
 Examples
 --------
 

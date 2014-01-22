@@ -59,7 +59,12 @@ from `http://msdn.microsoft.com/downloads/list/webdev.asp`).
 	compilation warnings and errors (note that, depending on the tests,
 	these warnings and errors might be expected); know issue: the output
 	of some of the multi-threading examples may interfere with the computation
-	of the test/skipped/passed/failed totals
+	of the test/skipped/passed/failed totals; you can use this script on
+	Windows operating-systems by installing Git for Windows (which provides a
+	bash shell implementation and is available from <http://msysgit.github.io>)
+	and by adding the `$LOGTALKHOME/scripts` and `$LOGTALKHOME/integration`
+	directories plus the backend Prolog compiler executable directories to the
+	system path environment variable
 
 - `logtalk_version_select.sh`  
 	shell script for switching between installed Logtalk versions for POSIX
