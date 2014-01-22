@@ -44,6 +44,9 @@ older than 6.3.4.
 * CHANGED: The POSIX integration scripts for GNU Prolog and SWI-Prolog for
 compatibility with the bash shell implementation provided by Git for Windows.
 
+* FIXED: Issues with file paths containing spaces in the integration scripts
+when checking the version of an existing Logtalk user folder.
+
 Tools
 -----
 

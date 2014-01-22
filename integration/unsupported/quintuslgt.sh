@@ -83,8 +83,8 @@ if [ -d "$LOGTALKUSER" ]; then
 		echo "Creating an up-to-date Logtalk user directory..."
 		logtalk_user_setup
 	else
-		system_version=`cat $LOGTALKHOME/VERSION.txt`
-		user_version=`cat $LOGTALKUSER/VERSION.txt`
+		system_version=`cat "$LOGTALKHOME/VERSION.txt"`
+		user_version=`cat "$LOGTALKUSER/VERSION.txt"`
 		if [ "$user_version" \< "$system_version" ]; then
 			echo "Logtalk user directory at $LOGTALKUSER is outdated: "
 			echo "    $user_version < $system_version"
