@@ -8,8 +8,8 @@ terms per section 7).        Consult the `LICENSE.txt` file for details.
 ________________________________________________________________________
 
 
-This folder contains a simple Logtalk language definition for the
-LaTeX package `listings`:
+This folder contains a simple Logtalk language definition for the LaTeX
+package `listings`:
 
 	http://www.ctan.org/tex-archive/macros/latex/contrib/listings/
 
@@ -24,14 +24,13 @@ The `textcomp` package is required as the Logtalk language definition
 sets the `upquote` option to true.
 
 If you want keywords in bold face in the code listings, you will also
-need to use fonts that support that face. You can use e.g. one of the
-following packages:
+need to use fonts that support that face. You can use e.g. *one* of the
+following font packages:
 
 	\usepackage[scaled=0.8]{couriers}
-
-or:
-
 	\usepackage{pxfonts}
+	\usepackage{lmodern}
+	\usepackage{txfonts}
 
 Default options for all code listings can be set using something like:
 
@@ -54,6 +53,12 @@ If you need to highlight additional keywords, you can always use the
 file. For example:
 
 	morekeywords={extends_object, implements_protocol}
+
+For inline code use `\lstinline{...}` and for code blocks use:
+
+	\begin{lstlisting}[language=Logtalk, ...]
+		...
+	\end{lstlisting}
 
 Consult the `listings` package documentation (e.g. by running the command
 `texdoc listings`) and experiment with the above settings to get the exact
