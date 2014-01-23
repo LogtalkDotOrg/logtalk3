@@ -58,11 +58,22 @@ an object or a category defines for other entities.
 * ADDED: Notes on how to use the `logtalk_tester.sh` POSIX shell script on
 Windows to the `scripts/NOTES.txt` file.
 
+Library
+-------
+
+* ADDED: Portable operating-system interface, moved from the `cc` example.
+It can be loaded using the `os_loader.lgt` file and notes on its limitations
+can be found in the `os.txt` file.
+
 Examples
 --------
 
 * UPDATED: The `benchmarks` example to illustrate the use of static binding
 when sending database messages to known objects.
+
+* CHANGED: The `cc/osp.lgt` and `cc/os.lgt` example files have been moved to
+the library. But the `cc/loader.lgt` file and unit test files are kept for
+compatibility with existing code.
 
 Contributions
 -------------

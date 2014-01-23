@@ -10,6 +10,6 @@
 
 
 :- initialization((
-	logtalk_load(cc(loader)),
+	logtalk_load(library(os_loader)),
 	logtalk_load([double, triple, reverse, local])
 )).

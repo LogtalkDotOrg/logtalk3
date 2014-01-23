@@ -10,5 +10,5 @@
 
 
 :- initialization(
-	logtalk_load([osp, os])
+	logtalk_load(library(os_loader))
 ).

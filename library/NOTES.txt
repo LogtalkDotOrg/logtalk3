@@ -54,6 +54,10 @@ own loader and notes files:
 	`metapredicates_loader.lgt`
 	`metapredicates.txt`
 
+* os 
+	`os_loader.lgt`
+	`os.txt`
+
 * random  
 	`random_loader.lgt`
 	`random.txt`
@@ -109,6 +113,7 @@ library entities using the queries:
 to generate (X)HTML documentation or the command `lgt2pdf` to generate PDF
 documentation. For example:
 
+	$ cd $LOGTALKUSER/docs/tmp
 	$ lgt2html -i library.html -t "Library documentation index"
 
 After generating the (X)HTML and/or PDF documentation, you can move the

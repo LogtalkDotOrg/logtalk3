@@ -10,12 +10,9 @@ ________________________________________________________________________
 
 To load this example and for sample queries, please see the SCRIPT.txt file.
 
-This folder contains an example of using conditional compilation to implement
-a portable operating-system interface for the following Prolog compilers: YAP,
-SWI-Prolog, XSB, GNU-Prolog, B-Prolog, SICStus Prolog, ECLiPSe, Ciao, CxProlog,
-Qu-Prolog, and Lean Prolog. For other back-end Prolog compilers, a warning is
-printed.
-
-Note that this is just an example of using the conditional compilation
-directives. This code should not be used without careful testing in a
-production environment.
+This folder used to contain an example of using conditional compilation to
+implement a portable operating-system interface for the supported backend
+Prolog compilers. Those resources have been moved as per Logtalk release
+3.00.0 Alpha 34 to the library directory. This example is kept, however,
+to maintain compatibility with existing applications that use this portable
+operating-system interface and to hold for now a set of unit tests.
