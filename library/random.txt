@@ -21,8 +21,8 @@ Public License 3. Consult the `LICENSE.txt` file for details.
 ________________________________________________________________________
 
 
-To load all entities in this library load the random_loader.lgt utility 
-file:
+To load all entities in this library load the `random_loader.lgt`
+utility file:
 
 	| ?- logtalk_load(library(random_loader)).
 

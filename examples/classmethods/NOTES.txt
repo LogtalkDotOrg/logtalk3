@@ -8,7 +8,8 @@ terms per section 7).        Consult the `LICENSE.txt` file for details.
 ________________________________________________________________________
 
 
-To load this example and for sample queries, please see the SCRIPT.txt file.
+To load this example and for sample queries, please see the `SCRIPT.txt`
+file.
 
 This example illustrates how to define "class methods" as found on class-
 based object-oriented programming languages such as Java or Objective-C.
@@ -17,13 +18,13 @@ methods defined in the class of the class, i.e. in its meta-class.
 
 This example defines the following objects:
 
-	circle
-		class representing common features of geometric circles
-		such as radius and position
+- `circle`  
+	class representing common features of geometric circles
+	such as radius and position
 
-	metacircle
-		meta-class of class circle defining "class methods" for
-		creating instances and calculating areas
+- `metacircle`  
+	meta-class of class circle defining "class methods" for
+	creating instances and calculating areas
 
-	c42
-		static instance of class "circle"	
+- `c42`  
+	static instance of class `circle`

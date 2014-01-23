@@ -21,7 +21,7 @@ Public License 3. Consult the `LICENSE.txt` file for details.
 ________________________________________________________________________
 
 
-To load all entities in this group load the dates_loader.lgt utility 
+To load all entities in this group load the `dates_loader.lgt` utility 
 file:
 
 	| ?- logtalk_load(library(dates_loader)).

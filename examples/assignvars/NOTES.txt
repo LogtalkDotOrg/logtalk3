@@ -8,15 +8,15 @@ terms per section 7).        Consult the `LICENSE.txt` file for details.
 ________________________________________________________________________
 
 
-To load this example and for sample queries, please see the SCRIPT.txt file.
+To load this example and for sample queries, please see the `SCRIPT.txt` file.
 
 This example illustrates the use of assignable variables and parametric 
 objects as alternative implementation to dynamic object predicates for
-storing (backtracable) object state. For more information on assignable 
+storing (backtrackable) object state. For more information on assignable 
 variables please consult the URL:
 	
 	http://www.kprolog.com/en/logical_assignment/
 
-The objects in this example make use of the library category "assignvars".
+The objects in this example make use of the library category `assignvars`.
 This category contains an adaptation of the pure logical subset implementation
 of assignable variables by Nobukuni Kino, which can be found on the URL above.

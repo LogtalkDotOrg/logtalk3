@@ -21,7 +21,7 @@ Public License 3. Consult the `LICENSE.txt` file for details.
 ________________________________________________________________________
 
 
-The all_loader.lgt file will load all the entities loaded by the other
+The `all_loader.lgt` file will load all the entities loaded by the other
 loader files:
 
 	| ?- logtalk_load(library(all_loader)).

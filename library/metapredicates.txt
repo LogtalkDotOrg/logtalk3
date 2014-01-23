@@ -21,7 +21,7 @@ Public License 3. Consult the `LICENSE.txt` file for details.
 ________________________________________________________________________
 
 
-To load all entities in this group load the metapredicates_loader.lgt 
+To load all entities in this group load the `metapredicates_loader.lgt`
 utility file:
 
 	| ?- logtalk_load(library(metapredicates_loader)).
@@ -29,5 +29,5 @@ utility file:
 The object loop implements several kinds of loops typical of imperative 
 languages.
 
-The object meta implements common Prolog metapredicates like apply/2 
-and map/3.
+The object meta implements common Prolog meta-predicates like `apply/2`
+and `map/3`.
