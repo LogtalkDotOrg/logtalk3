@@ -8,7 +8,8 @@ terms per section 7).        Consult the `LICENSE.txt` file for details.
 ________________________________________________________________________
 
 
-To load this example and for sample queries, please see the `SCRIPT.txt` file.
+To load this example and for sample queries, please see the `SCRIPT.txt`
+file.
 
 This folder contains an example of instance defined methods. When using 
 classes and instances, methods must be declared in a class but the method 
@@ -17,14 +18,14 @@ the class definitions.
 
 This example defines the following objects:
 
-	root
-		root class defining a method named method/0
+- `root`  
+	root class defining a method named `method/0`
 
-	instance1
-		simple instance of root inheriting method/0
+- `instance1`  
+	simple instance of root inheriting `method/0`
 
-	instance2
-		instance of root overriding the inherited method method/0		
+- `instance2`  
+	instance of root overriding the inherited method `method/0`
 
-	instance3
-		instance of root specializing the inherited method method/0		
+- `instance3`  
+	instance of root specializing the inherited method `method/0`

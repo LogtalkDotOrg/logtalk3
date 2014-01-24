@@ -8,19 +8,20 @@ terms per section 7).        Consult the `LICENSE.txt` file for details.
 ________________________________________________________________________
 
 
-To load this example and for sample queries, please see the `SCRIPT.txt` file.
+To load this example and for sample queries, please see the `SCRIPT.txt`
+file.
 
 This folder contains an example of using parametric objects to implement
 symbolic expression differentiation and simplification.
 
 Current limitations:
 
-	- the expression that we intend to differentiate or simplify 
-	must be a compound term. Accepted functors are *, +, -, **, and log.
+- the expression that we intend to differentiate or simplify must be a
+compound term. Accepted functors are `*`, `+`, `-`, `**`, and `log`.
 
-	- use as a variable the atom x.
+- use as a variable the atom `x`.
 
-	- only integers can be used as constants.
+- only integers can be used as constants.
 
 This example is still incomplete. For example, using sum distribution 
 property to simplify expressions is not yet implemented. 

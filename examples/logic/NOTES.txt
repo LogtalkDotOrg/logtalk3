@@ -19,19 +19,19 @@ C. S. Mellish.
 
 The following operators are used for representing logic connectives:
 
-	negation: ~
-	disjunction: v
-	conjunction: &
-	implication: =>
-	equivalence: <=>
+- negation: `~`
+- disjunction: `v`
+- conjunction: `&`
+- implication: `=>`
+- equivalence: `<=>`
 
 Quantifiers are represented using the following notation:
 
-	universal: all(X, P)
-	existential: exists(X, P)
+- universal: `all(X, P)`
+- existential: `exists(X, P)`
 
-The two main object predicates are translate/2 and step_by_step/2.
-The first predicate, translate/2, translate a logic proposition to 
-a list of clauses. The second predicate, step_by_step/2, performs 
-the same translations as translate/2 but also prints the results 
+The two main object predicates are `translate/2` and `step_by_step/2`.
+The first predicate, `translate/2`, translate a logic proposition to 
+a list of clauses. The second predicate, `step_by_step/2`, performs 
+the same translations as `translate/2` but also prints the results 
 of each conversion step.

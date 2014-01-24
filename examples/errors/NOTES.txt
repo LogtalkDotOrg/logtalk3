@@ -19,5 +19,5 @@ deals with common programming errors.
 
 Note that the warnings and errors that you will get while compiling 
 your source files depend on your compiler flags (defined explicitly 
-as parameters for the logtalk_compile/2 or logtalk_load/2 built-in 
+as parameters for the `logtalk_compile/2` or `logtalk_load/2` built-in 
 predicates or by default in your Prolog adapter file).

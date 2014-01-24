@@ -8,18 +8,14 @@ terms per section 7).        Consult the `LICENSE.txt` file for details.
 ________________________________________________________________________
 
 
-To load this example and for sample queries, please see the `SCRIPT.txt` file.
-
-You will also need to load the following files in the library directory: 
-dates_loader, types_loader, events_loader, metapredicates_loader, and 
-hierarchies_loader. Alternatively, you can just load the library all_loader 
+To load this example and for sample queries, please see the `SCRIPT.txt`
 file.
 
 Some of the code in this folder is adapted, with permission, from the book 
 "Prolog Programming for Artificial Intelligence" by Ivan Bratko.
 
 For a description of the search problems, please see a classical AI book 
-(such as the one above) or visit the url <http://www.plastelina.net/games>.
+(such as the one above) or visit <http://www.plastelina.net/games>.
 
 This example defines two hierarchies of objects, one for representing 
 state-spaces and another for representing search methods:
@@ -43,6 +39,6 @@ state-spaces and another for representing search methods:
 
 Taken together, these two hierarchies implement a framework for solving 
 state-space search problems in Logtalk. There is also a monitor object, 
-"performance", which tries to measure the time taken to find a solution, 
+`performance`, which tries to measure the time taken to find a solution, 
 the branching factor while searching for a solution, and the number of 
 transitions made to find a solution.

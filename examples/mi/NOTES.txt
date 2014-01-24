@@ -8,7 +8,8 @@ terms per section 7).        Consult the `LICENSE.txt` file for details.
 ________________________________________________________________________
 
 
-To load this example and for sample queries, please see the `SCRIPT.txt` file.
+To load this example and for sample queries, please see the `SCRIPT.txt`
+file.
 
 There are two examples in this folder. The first one is an adoption of a 
 multi-inheritance C++ example found on the D. M. Capper book "Introducing 
@@ -18,24 +19,24 @@ example is a variant of the first one using parametric objects.
 
 This example defines the following objects:
 
-	xyz
-		this object space stores spatial coordinates using a dynamic 
-		predicate
+- `xyz`  
+	this object space stores spatial coordinates using a dynamic 
+	predicate
 
-	t
-		this object stores a time stamp using a dynamic predicate
+- `t`  
+	this object stores a time stamp using a dynamic predicate
 
-	xyzt
-		this object inherits from both the objects "xyz" and "t"
+- `xyzt`  
+	this object inherits from both the objects `xyz` and `t`
 
 
-	xyz(_,_,_)
-		similar to object space but using parameters instead of dynamic 
-		predicates
+- `xyz(_,_,_)`  
+	similar to object space but using parameters instead of dynamic 
+	predicates
 
-	t(_)
-		similar to object space but using a parameter instead of a dynamic 
-		predicate
+- `t(_)`  
+	similar to object space but using a parameter instead of a dynamic 
+	predicate
 
-	xyzt(_,_,_,_)
-		this object inherits from both the objects "xyz(_,_,_)" and "t(_)"
+- `xyzt(_,_,_,_)`  
+	this object inherits from both the objects `xyz(_,_,_)` and `t(_)`

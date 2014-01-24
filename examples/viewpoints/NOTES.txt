@@ -8,7 +8,8 @@ terms per section 7).        Consult the `LICENSE.txt` file for details.
 ________________________________________________________________________
 
 
-To load this example and for sample queries, please see the `SCRIPT.txt` file.
+To load this example and for sample queries, please see the `SCRIPT.txt`
+file.
 
 Example adapted from the chapter "Classifying Prototype-Based Programming
 Languages" by Christophe Dony, Jacques Malenfant, and Daniel Bardou, found 
@@ -18,10 +19,11 @@ Applications" published by Springer.
 
 This prototype programming example illustrates how we can do both property 
 sharing and value sharing in Logtalk by calling the built-in predicate 
-modification methods asserta/1, assertz/1, and retract/1 either in the 
-context of "this" or in the context of "self".
+modification methods `asserta/1`, `assertz/1`, and `retract/1` either in
+the context of "this" or in the context of "self".
 
-In this example we have a prototype, joePerson, containing general data on 
-Joe such as its age, name, or address, and four descendant prototypes or 
-viewpoints, joeSportsman, joeEmployee, joeChessPlayer, and joeFilmEnthusiast.
-Each descendant contains data related to a particular viewpoint about Joe.
+In this example we have a prototype, `joePerson`, containing general data
+on Joe such as its age, name, or address, and four descendant prototypes
+or viewpoints, `joeSportsman`, `joeEmployee`, `joeChessPlayer`, and
+`joeFilmEnthusiast`. Each descendant contains data related to a particular
+viewpoint about Joe.

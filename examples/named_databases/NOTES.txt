@@ -8,7 +8,8 @@ terms per section 7).        Consult the `LICENSE.txt` file for details.
 ________________________________________________________________________
 
 
-To load this example and for sample queries, please see the `SCRIPT.txt` file.
+To load this example and for sample queries, please see the `SCRIPT.txt`
+file.
 
 This example implements "named databases", providing a *portable* API based
 on Lean Prolog implementation of this functionality. The goal is to provide
@@ -30,38 +31,38 @@ predicates within object and categories.
 
 API description:
 
-* db_create(Database)
+- `db_create(Database)`  
 	Creates a new named database
 
-* db_dynamic(Database, Predicate)
+- `db_dynamic(Database, Predicate)`  
 	Declares a new dynamic predicate
 
-* db_abolish(Database, Predicate)
+- `db_abolish(Database, Predicate)`  
 	Abolishes a dynamic predicate
 
-* db_asserta(Database, Clause)
+- `db_asserta(Database, Clause)`  
 	Asserts a clause for a dynamic predicate
 
-* db_assertz(Database, Clause)
+- `db_assertz(Database, Clause)`  
 	Asserts a clause for a dynamic predicate
 
-* db_retract(Database, Clause)
+- `db_retract(Database, Clause)`  
 	Retracts a matching clause for a dynamic predicate
 
-* db_retractall(Database, Head)
+- `db_retractall(Database, Head)`  
 	Retracts all clauses for a dynamic predicate with a matching head
 
-* db_clause(Database, Head, Body)
+- `db_clause(Database, Head, Body)`  
 	Retrieves clauses for dynamic predicates in the named database
 
-* db_call(Database, Goal)
+- `db_call(Database, Goal)`  
 	Proves a goal using the predicate clauses in the named database
 
-* db_load(Database, File)
+- `db_load(Database, File)`  
 	Loads a Prolog file into a named database
 
-* db_save(Database, File)
+- `db_save(Database, File)`  
 	Saves all dynamic predicates to a file
 
-* db_clear(Database)
+- `db_clear(Database)`  
 	Abolishes all dynamic predicates

@@ -8,12 +8,13 @@ terms per section 7).        Consult the `LICENSE.txt` file for details.
 ________________________________________________________________________
 
 
-To load this example and for sample queries, please see the `SCRIPT.txt` file.
+To load this example and for sample queries, please see the `SCRIPT.txt`
+file.
 
-This folder contains an example that shows how to implement instance variables 
-as defined in class-based object-oriented programming languages.
+This folder contains an example that shows how to implement instance
+variables as defined in class-based object-oriented programming languages.
 
-This example defines a root class (root) and three instances (instance1, 
-instance2, and instance3). The root class defines an instance variable 
+This example defines a root class, `root`, and three instances, `instance1`, 
+`instance2`, and `instance3`. The root class defines an instance variable 
 (using a dynamic predicate) and the corresponding setter and getter methods.
 The root class is used to store a default value for the instance variable.

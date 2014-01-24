@@ -11,11 +11,10 @@ ________________________________________________________________________
 To load this example and for sample queries, please see the `SCRIPT.txt`
 file.
 
-The "expansion.lgt" source file illustrates how the scope of the
-term and goal-expansion predicates affects the results of the
-expansion mechanisms.
+The `expansion.lgt` source file illustrates how the scope of the term and
+goal-expansion predicates affects the results of the expansion mechanisms.
 
-The "hooks.lgt" and "raw.lgt" source files illustrate how to define
-and combine hook objects.
+The `hooks.lgt` and `raw.lgt` source files illustrate how to define and
+combine hook objects.
 
 For more details, please see the comments in the source files.

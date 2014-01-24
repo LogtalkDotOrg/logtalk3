@@ -13,10 +13,10 @@ To load this example and for sample queries, please see the `SCRIPT.txt` file.
 This folder contains examples of public, protected, and private inheritance,
 for both prototype-based and class-based hierarchies.
 
-This example defines a category named "predicates" which specifies three 
+This example defines a category named `predicates` which specifies three 
 predicates, one public, one protected, and one private. This category is 
-imported by the root objects: "parent" for the prototype hierarchy and 
-"root" for the class hierarchy. Each root object have a set of three 
+imported by the root objects: `parent` for the prototype hierarchy and 
+`root` for the class hierarchy. Each root object have a set of three 
 descendants, each one using one of the inheritance types.
 
 The two object hierarchies are organized as follows:
@@ -37,5 +37,5 @@ The two object hierarchies are organized as follows:
 		subclass3				% private inheritance
 			instance3
 
-A second category named "interface", imported by all objects except the 
+A second category named `interface`, imported by all objects except the 
 sub-class instances, allows us to query the objects about their interfaces.

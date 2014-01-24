@@ -16,27 +16,25 @@ body of the predicate definition.
 
 This example defines the following objects:
 
-    company
-        usage example of the map_reduce/5 meta-predicate
+- `company`  
+    usage example of the `map_reduce/5` meta-predicate
 
-    fibonacci
-        example of calculating Fibonacci numbers using the fold_left/4
-        meta-predicate
+- `fibonacci`  
+    example of calculating Fibonacci numbers using the `fold_left/4`
+    meta-predicate
 
-	sort(_)
-		this is a parametric object containing a method that implements the
-		quicksort sorting algorithm; the parameter is interpreted as the type
-		of the elements being sorted
-	
-	tracer
-		this object implements a meta-predicate that is used by sort(_) to 
-		trace the sorting algorithm steps
+- `sort(_)`  
+	this is a parametric object containing a method that implements the
+	quicksort sorting algorithm; the parameter is interpreted as the type
+	of the elements being sorted
 
-	metapreds
-	descendant
-	test
-		objects used for illustrating the use of clusures as meta-arguments
+- `tracer`  
+	this object implements a meta-predicate that is used by `sort(_)` to 
+	trace the sorting algorithm steps
 
-	predicates
-		object defining some predicates for testing meta-predicates defined 
-		in the Logtalk library
+- `metapreds`, `descendant`, `test`  
+	objects used for illustrating the use of closures as meta-arguments
+
+- `predicates`  
+	object defining some predicates for testing meta-predicates defined 
+	in the Logtalk library

@@ -8,7 +8,8 @@ terms per section 7).        Consult the `LICENSE.txt` file for details.
 ________________________________________________________________________
 
 
-To load this example and for sample queries, please see the `SCRIPT.txt` file.
+To load this example and for sample queries, please see the `SCRIPT.txt`
+file.
 
 This folder contains rewritten versions of some of the objects provided 
 with previous, 1.x versions, of the Logtalk system. They are intended to 
@@ -18,31 +19,31 @@ distribution.
 
 Short description of each example entity:
 
-	class
-		default metaclass for all classes
-	classp
-		protocol of class class
+- `class`  
+	default metaclass for all classes
+- `classp`  
+	protocol of class `class`
 
-	abstract_class
-		default metaclass for all abstract classes
-	abstract_classp
-		protocol of class abstract_class
-	
-	object
-		root class for class-based hierarchies
-	objectp
-		protocol of class object
-	
-	initialization
-		category defining methods for object initialization
-	
-	proto
-		root prototype for prototype-based hierarchies
-	protop
-		protocol for prototype proto
+- `abstract_class`  
+	default metaclass for all abstract classes
+- `abstract_classp`  
+	protocol of class `abstract_class`
 
-	nil
-		object used to represent a void reference
+- `object`  
+	root class for class-based hierarchies
+- `objectp`  
+	protocol of class `object`
+
+- `initialization`  
+	category defining methods for object initialization
+
+- `proto`  
+	root prototype for prototype-based hierarchies
+- `protop`  
+	protocol for prototype `proto`
+
+- `nil`  
+	object used to represent a void reference
 
 Please note that the entities above are just example definitions. There is 
 nothing fundamental about any of them; they can and should be replaced by 
