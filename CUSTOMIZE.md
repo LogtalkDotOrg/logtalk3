@@ -57,7 +57,7 @@ Inside your Logtalk user folder, you will find a `paths` folder containing
 a sample file which, when loaded, defines the library paths for the Logtalk 
 standard library and for all the supplied examples. This file may need to be 
 edited to match both your Logtalk installation and your Prolog compiler and 
-operating-system requirements. For details, see the `paths/NOTES.txt` file.
+operating-system requirements. For details, see the `paths/NOTES.md` file.
 
 Library paths for your own source files directories are preferably defined in
 your settings file, described next.
@@ -93,7 +93,7 @@ to change include:
 * `portability` and `underscore_variables`  
     essential if you're writing portable Logtalk applications
 
-Check the `adapters/NOTES.txt` file for Prolog specific compatibility notes.
+Check the `adapters/NOTES.md` file for Prolog specific compatibility notes.
 Some back-end Prolog compilers don't support all the possible compilation
 flags values. In addition, some back-end Prolog compilers provide limited
 support for settings files in some operating-systems.
@@ -110,7 +110,7 @@ customize the CSS and XSLT files to modify the layout or style of the resulting
 PDF/(X)HTML files or to write new scripts and transformations to generate other
 formats. You may also edit the file `custom.ent` in order to specify XML entities
 for your personal data that can be used on Logtalk documenting directives. For
-details, see the `tools/lgtdoc/NOTES.txt` file.
+details, see the `tools/lgtdoc/NOTES.md` file.
 
 
 5. ADDING LOGTALK SUPPORT TO TEXT EDITORS
@@ -120,4 +120,4 @@ Inside your Logtalk user folder, you will find a `coding` folder, containing
 support files for several text editors, which add support for syntax 
 highlighting and other text editing services for Logtalk source files.
 Support for several syntax highlighters (used e.g. by wikis and issue
-trackers) is also included. For details, see the `coding/NOTES.txt` file.
+trackers) is also included. For details, see the `coding/NOTES.md` file.

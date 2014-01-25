@@ -134,8 +134,9 @@ a previous Logtalk version.
 The documentation for the core, library, tools, and contributions entities
 is provided in XHTML format and can be found in the `docs` directory.
 
-Most directories include `NOTES.txt` documenting files, which can be also
-rendered as Markdown files (for e.g. easy conversion to HTML).
+Most directories include `NOTES.md` documenting files, which can be viewed
+as plain text in any text editor but also nicely rendered as Markdown files
+(for e.g. easy conversion to HTML).
 
 
 9. UPGRADING

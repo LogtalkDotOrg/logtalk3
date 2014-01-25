@@ -24,14 +24,14 @@ ________________________________________________________________________
 This folder contains several examples of Logtalk programs. A brief 
 description of each example is included below.
 
-Each example folder contains a `NOTES.txt` file and a loader helper file 
+Each example folder contains a `NOTES.md` file and a loader helper file 
 (usually `loader.lgt`) that may be used to load all the example entities. 
 Most examples also contain a `SCRIPT.txt` file with instructions on how 
 to load the example and sample queries for you to try.
 
 Most of these examples require objects, protocols, and categories that 
 are defined in the Logtalk standard library or in other examples. See 
-the `NOTES.txt` files inside the library folder, plus the `NOTES.txt` 
+the `NOTES.md` files inside the library folder, plus the `NOTES.md` 
 and `SCRIPT.txt` files inside each example folder.
 
 Some examples may redefine objects already loaded from other examples.

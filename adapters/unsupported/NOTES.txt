@@ -36,7 +36,7 @@ Amzi! Prolog 7.6.1 and later versions
 	compiler to compile the files "adapters/amzi.pl", "core/core.pl", 
 	and "paths/paths.pl" and then load the resulting ".plm" files 
 	using the predicate load/1 (you will need to edit the "paths.pl" file 
-	by following the instructions on the "paths/NOTES.txt" file).
+	by following the instructions on the "paths/NOTES.md" file).
 
 	You will probably need to increase some of the default values (e.g. the 
 	"control" parameter) in the "amzi.cfg" file in order to be able to load 

@@ -34,7 +34,7 @@ compiling and loading predicates. For example:
 	| ?- logtalk_load(lgtunit(loader)).
 
 Currently, the following tools are available, each one with its own
-`loader.lgt` and `NOTES.txt` files:
+`loader.lgt` and `NOTES.md` files:
 
 - assertions
 - debugger
@@ -47,7 +47,7 @@ Currently, the following tools are available, each one with its own
 All source files are formatted using tabs (the recommended setting is a tab
 width equivalent to 4 spaces).
 
-Specific notes about each tool can be found in the corresponding `NOTES.txt`
+Specific notes about each tool can be found in the corresponding `NOTES.md`
 files. Basic XHTML documentation about each tool can be found on the `docs`
 directory (open the `tools.html` file in your web browser). To regenerate
 this documentation, start Logtalk with your favorite back-end Prolog compiler

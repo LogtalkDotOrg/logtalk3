@@ -47,7 +47,7 @@ a short description of each included contribution:
 
 	This folder contains a Logtalk version of John Fletcher's 
 	Prolog XML parser (`http://www.zen37763.zen.co.uk/xml.pl.html`).
-	See the `xml_parser/NOTES.txt` file for details.
+	See the `xml_parser/NOTES.md` file for details.
 
 See the copyright and license information on the contributed files for 
 usage and distributions conditions.
@@ -56,11 +56,11 @@ The `contributions/loader.lgt` file loads all contributions and is
 mainly used when generating the XHTML documentation by follwing the
 steps:
 
-1. Load all contributions using the query:
+(1) Load all contributions using the query:
 
     | ?- {contributions(loader)}.
 
-2. Load the `lgtdoc` tool and generate the XML documenting files for all
+(2) Load the `lgtdoc` tool and generate the XML documenting files for all
 library entities using the queries:
 
 	| ?- {lgtdoc(loader)}.
@@ -72,7 +72,7 @@ library entities using the queries:
 		lgtdoc::library(xml_parser, [xmldir('$LOGTALKUSER/docs/tmp4')]),
 		lgtdoc::file(iso8601, [xmldir('$LOGTALKUSER/docs/tmp5')]).
 
-3. Run the command `lgt2html` on the temporary directories to generate the
+(3) Run the command `lgt2html` on the temporary directories to generate the
 (X)HTML documentation or the command `lgt2pdf` to generate PDF documentation:
 
 	$ cd "$LOGTALKUSER/docs/tmp1" && lgt2html -i flags.html -t "Flags"

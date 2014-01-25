@@ -56,7 +56,7 @@ an object or a category defines for other entities.
 * FIXED: Bash shell typos in the `logtalk_tester.sh` script.
 
 * ADDED: Notes on how to use the `logtalk_tester.sh` POSIX shell script on
-Windows to the `scripts/NOTES.txt` file.
+Windows to the `scripts/NOTES.md` file.
 
 Library
 -------
@@ -64,6 +64,12 @@ Library
 * ADDED: Portable operating-system interface, moved from the `cc` example.
 It can be loaded using the `os_loader.lgt` file and notes on its limitations
 can be found in the `os.txt` file.
+
+Documentation
+-------------
+
+* CHANGED: Renamed most documentation `NOTES.txt` files that use Markdown
+syntax to `NOTES.md`.
 
 Examples
 --------

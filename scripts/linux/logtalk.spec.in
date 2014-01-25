@@ -131,7 +131,7 @@ echo "Make sure that the Prolog compilers are properly installed and available"
 echo "on your execution path."
 echo
 echo "If you get an unexpected failure when using one of the Prolog integration"
-echo "scripts, consult the \"/usr/local/share/logtalk/adapters/NOTES.txt\" file"
+echo "scripts, consult the \"/usr/local/share/logtalk/adapters/NOTES.md\" file"
 echo "for compatibility notes or consult the integration script man page."
 echo
 mkdir -p /etc/profile.d

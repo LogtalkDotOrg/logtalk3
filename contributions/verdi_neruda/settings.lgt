@@ -55,7 +55,7 @@
 %  Limitations of the back-end Prolog compilers may prevent settings files
 %  to work from directories other than the Logtalk user directory, specially
 %  when running on non-POSIX operating systems such as Windows. Check the 
-%  "adapters/NOTES.txt" file for compatibility details.
+%  "adapters/NOTES.md" file for compatibility details.
 
 
 %  To load the "help" example at startup, which provides basic on-line help

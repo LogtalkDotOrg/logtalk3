@@ -62,7 +62,7 @@ privileges depending on the XSB installation (right-click on the shortcut
 and select the "Run as administrator" option).
 
 If you get an unexpected failure when using one of the Prolog integration
-scripts or shortcuts, consult the `adapters/NOTES.txt` file in the Logtalk
+scripts or shortcuts, consult the `adapters/NOTES.md` file in the Logtalk
 installation folder for compatibility notes. For the integration scripts,
 see also the integration script man page.
 
@@ -81,11 +81,11 @@ Running the examples
 You may now try some of the provided examples:
 
 1. Open the `examples` sub-directory. There you find several sub-directories
-with ready to run examples and a `NOTES.txt` file containing general 
+with ready to run examples and a `NOTES.md` file containing general 
 instructions and a brief description of each example. Select and open one 
 of the examples sub-directory.
 
-2. Read the example `NOTES.txt` file for a description of the example.
+2. Read the example `NOTES.md` file for a description of the example.
 
 3. Open the `SCRIPT.txt` file for instructions on how to load the example 
 and for sample queries that you may try by copying-and-pasting them to 
@@ -100,7 +100,7 @@ Ready to start writing your own programs?
 1. Read the User Manual sections on `Programming in Logtalk` and
 `Running and debugging Logtalk programs`.
 
-2. Take a look to the `adapters/NOTES.txt` file for important compatibility
+2. Take a look to the `adapters/NOTES.md` file for important compatibility
 information about your chosen backend Prolog compiler and for any defined
 shorthands for commonly used load and make predicates.
 

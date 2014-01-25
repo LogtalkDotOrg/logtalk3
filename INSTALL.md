@@ -27,7 +27,7 @@ MANUAL INSTALLATION INSTRUCTIONS
 The recommended way of installing Logtalk is to use, whenever possible, one 
 of the provided installers. This file contains detailed instructions for 
 *manual* installation and configuration of Logtalk. You should also consult 
-the `scripts/NOTES.txt` and `integration/NOTES.txt` files for a description 
+the `scripts/NOTES.md` and `integration/NOTES.md` files for a description 
 of a set of shell scripts that might be used for Logtalk installation on 
 some operating-systems and for easy Logtalk integration with popular Prolog 
 compilers.
@@ -99,7 +99,7 @@ defining the `LOGTALKHOME` environment variable described below.
 If you're using Windows, you can simply use the provided GUI installer (which
 supports both admin and non-admin users) to perform a full installation. You
 can also easily generate the GUI installer yourself. See the instructions on
-the `scripts/windows/NOTES.txt` file.
+the `scripts/windows/NOTES.md` file.
 
 
 2. SETTING LOGTALK ENVIRONMENT VARIABLES
@@ -152,7 +152,7 @@ to point to the same directory.
 Each user must make a local copy of the Logtalk user-modifiable files (examples,
 libraries, and other supporting files) in his/her home directory. These copies
 can be easily made by running the `logtalk_user_setup` shell script (see the
-`scripts/NOTES.txt` file for details):
+`scripts/NOTES.md` file for details):
 
 * POSIX systems  
 	`% logtalk_user_setup`
@@ -180,7 +180,7 @@ Logtalk compiler/runtime. The `$LOGTALKHOME/integration` sub-directory
 contains several pre-made scripts (named `*lgt.*`) for running Logtalk with 
 selected back-end Prolog compilers. You can use these scripts as examples 
 when creating initialization files for other Prolog compilers. Be sure to 
-read the `adapters/NOTES.txt` file notes on the Prolog compilers that you 
+read the `adapters/NOTES.md` file notes on the Prolog compilers that you 
 intend to use.
 
 

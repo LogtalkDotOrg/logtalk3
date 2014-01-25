@@ -182,7 +182,7 @@ echo "\"$prefix/share/logtalk\" and then run the \"logtalk_user_setup\" shell sc
 echo "once before running the integration scripts."
 echo
 echo "If you get an unexpected failure when using one of the Prolog integration"
-echo "scripts, consult the \"$prefix/share/logtalk/adapters/NOTES.txt\" file"
+echo "scripts, consult the \"$prefix/share/logtalk/adapters/NOTES.md\" file"
 echo "for compatibility notes or consult the integration script man page."
 echo
 
