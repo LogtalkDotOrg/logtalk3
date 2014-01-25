@@ -45,18 +45,18 @@ entities documentation. To regenerate the documentation of these libraries,
 start Logtalk with your favorite back-end Prolog compiler and follow these
 steps:
 
-1. If the `source_data` flag is not `on` by default, type the query:
+(1) If the `source_data` flag is not `on` by default, type the query:
 
 	| ?- set_logtalk_flag(source_data, on).
 
-2. Load the `lgtdoc` tool and generate the XML documenting files for all
+(2) Load the `lgtdoc` tool and generate the XML documenting files for all
 core entities using the queries:
 
 	| ?- {lgtdoc(loader)}.
 	...
 	| ?- lgtdoc::library(core, [xmldir('$LOGTALKUSER/docs/tmp')]).
 
-3. Run the command `lgt2html` on the `$LOGTALKUSER/docs/tmp` directory
+(3) Run the command `lgt2html` on the `$LOGTALKUSER/docs/tmp` directory
 to generate (X)HTML documentation or the command `lgt2pdf` to generate PDF
 documentation. For example:
 

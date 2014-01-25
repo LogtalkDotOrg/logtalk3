@@ -54,7 +54,7 @@ own loader and notes files:
 	`metapredicates_loader.lgt`
 	`metapredicates.txt`
 
-* os 
+* os  
 	`os_loader.lgt`
 	`os.txt`
 
@@ -94,22 +94,22 @@ documentation. To regenerate documentation of the Logtalk libraries,
 start Logtalk with your favorite back-end Prolog compiler and follow these
 steps:
 
-1. If the `source_data` flag is not `on` by default, type the query:
+(1) If the `source_data` flag is not `on` by default, type the query:
 
 	| ?- set_logtalk_flag(source_data, on).
 
-2. Load all library entities using the query:
+(2) Load all library entities using the query:
 
     | ?- {library(all_loader)}.
 
-3. Load the `lgtdoc` tool and generate the XML documenting files for all
+(3) Load the `lgtdoc` tool and generate the XML documenting files for all
 library entities using the queries:
 
 	| ?- {lgtdoc(loader)}.
 	...
 	| ?- lgtdoc::rlibrary(library, [xmldir('$LOGTALKUSER/docs/tmp')]).
 
-4. Run the command `lgt2html` on the `$LOGTALKUSER/docs/tmp` directory
+(4) Run the command `lgt2html` on the `$LOGTALKUSER/docs/tmp` directory
 to generate (X)HTML documentation or the command `lgt2pdf` to generate PDF
 documentation. For example:
 

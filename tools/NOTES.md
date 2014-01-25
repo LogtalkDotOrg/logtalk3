@@ -53,19 +53,19 @@ directory (open the `tools.html` file in your web browser). To regenerate
 this documentation, start Logtalk with your favorite back-end Prolog compiler
 and follow these steps:
 
-1. If the `source_data` flag is not `on` by default, type the query:
+(1) If the `source_data` flag is not `on` by default, type the query:
 
 	| ?- set_logtalk_flag(source_data, on).
 
-2. Load all the tools using the query:
+(2) Load all the tools using the query:
 
     | ?- {tools(loader)}.
 
-3. Generate the XML documenting files for all loaded tools using the query:
+(3) Generate the XML documenting files for all loaded tools using the query:
 
 	| ?- lgtdoc::rlibrary(tools, [xmldir('$LOGTALKUSER/docs/tmp')]).
 
-4. Run the command `lgt2html` on the `$LOGTALKUSER/docs/tmp` directory 
+(4) Run the command `lgt2html` on the `$LOGTALKUSER/docs/tmp` directory 
 to generate (X)HTML documentation or the command `lgt2pdf` to generate
 PDF documentation. For example:
 
