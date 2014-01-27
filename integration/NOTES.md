@@ -46,7 +46,20 @@ For more information about these scripts and their dependencies, consult
 the corresponding `man` page (e.g. `man yaplgt`).
 
 On Windows systems, the Logtalk installer makes the Prolog integration 
-shortcuts available from the `Start Menu/Programs/Logtalk` menu.
+shortcuts available from the `Start Menu/Programs/Logtalk` menu. But
+the POSIX shell scripts above can also be used by installing a shell
+shell implementation for Windows. The easiest way is to install Git for
+Windows from:
+
+	http://msysgit.github.io/
+
+After installation, you can start the bash shell by selecting Git Bash from
+the context menu. You will also need to add the `$LOGTALKHOME/scripts` and
+`$LOGTALKHOME/integration` directories plus the backend Prolog compiler
+executable directories to the system path environment variable. This can be
+accomplished by e.g. defining a `~/.profile` file with the necessary export
+commands. The integration scripts will need to be called, however, without
+omitting the `.sh` extension.
 
 The first run of the XSB integration scripts must be made by an user with
 administrative rights. On POSIX systems, run them once as root or using
@@ -55,7 +68,7 @@ must be made from an administrative account (right-click on the shortcut
 and select the "Run as administrator" option).
 
 The GNU Prolog integration script provides adequate performance for 
-development. For production environments, improved performance may be 
+development. For production environments, improved performance can be 
 achieved by generating a new GNU-Prolog top-level that includes Logtalk.
 
 The environment variables `LOGTALKHOME` and `LOGTALKUSER` should be defined 
