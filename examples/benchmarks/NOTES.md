@@ -33,12 +33,12 @@ This example is made of four loader files and five source files:
 - `module.pl` (not loaded by default; see below)  
 	contains the same definitions of the list length and list reverse
 	predicates encapsulated in a module
-- objects.lgt  
+- `objects.lgt`  
 	contains an object encapsulating the same definitions of list length
 	and list reverse predicates, plus two descendant objects to simulate
 	a small hierarchy (used for testing calls to imported category
 	predicates)
-- `database.lgt`  
+- `database.lgt` and `database_other.lgt`  
 	contains predicates for testing the performance of the built-in 
 	database methods `assertz/1` and `retract/1`
 - `category.lgt`  

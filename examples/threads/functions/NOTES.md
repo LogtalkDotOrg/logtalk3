@@ -8,9 +8,10 @@ terms per section 7).        Consult the `LICENSE.txt` file for details.
 ________________________________________________________________________
 
 
-To load this example and for sample queries, please see the `SCRIPT.txt` file.
+To load this example and for sample queries, please see the `SCRIPT.txt`
+file.
 
 This folder contains a simple multi-threading example illustrating how 
 to create threads for competing goals, which one performing the same 
-task using diferent methods. The first goal to complete leads to the 
+task using different methods. The first goal to complete leads to the 
 immediate termination of the threads running the remaining goals.

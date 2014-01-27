@@ -28,49 +28,49 @@ for rational terms in these two Prolog compilers.
 
 For more information see:
 
-@inproceedings{1778186,
-	author = {Gupta, Gopal and Bansal, Ajay and Min, Richard and Simon, Luke and Mallya, Ajay},
-	title = {Coinductive logic programming and its applications},
-	booktitle = {Proceedings of the 23rd International Conference on Logic programming (ICLP)},
-	year = {2007},
-	isbn = {3-540-74608-0, 978-3-540-74608-9},
-	pages = {27--44},
-	location = {Porto, Portugal},
-	publisher = {Springer-Verlag},
-	address = {Berlin, Heidelberg},
-}
-
-@inproceedings{
-	author = {Neda Saeedloei and Gopal Gupta},
-	title = {Verifying Complex Continuous Real-Time Systems with Coinductive CLP(R)},
-	booktitle = {Proceedings of the 19th Workshop on Logic-based methods in Programming Environments (WLPE)},
-	year = {2009},
-	location = {Pasadena, California, USA}
-}
-
-@inproceedings{saeedloei_et_al:LIPIcs:2010:2599,
-	author ={Neda Saeedloei and Gopal Gupta},
-	title = {Timed Definite Clause Omega-Grammars},
-	booktitle ={Technical Communications of the 26th International Conference on Logic Programming},
-	pages = {212--221},
-	series = {Leibniz International Proceedings in Informatics (LIPIcs)},
-	isbn = {978-3-939897-17-0},
-	issn = {1868-8969},
-	year = {2010},
-	volume = {7},
-	editor = {Manuel Hermenegildo and Torsten Schaub},
-	publisher = {Schloss Dagstuhl--Leibniz-Zentrum fuer Informatik},
-	address = {Dagstuhl, Germany},
-	URL = {http://drops.dagstuhl.de/opus/volltexte/2010/2599},
-	doi = {http://dx.doi.org/10.4230/LIPIcs.ICLP.2010.212},
-	annote = {Keywords: Constraint Logic Programming over reals, Co-induction, Context-Free Grammars, Omega-Grammars}
-}
-
-@inproceedings{AnconaSAC12,
-  author = {Ancona, D.},
-  title = {Regular corecursion in {P}rolog},
-  booktitle = {A{CM} {S}ymposium on {A}pplied {C}omputing ({SAC} 2012)},
-  ftp = {ftp://ftp.disi.unige.it/person/AnconaD/AnconaSAC12.pdf},
-  keywords = {coinduction,corecursion},
-  year = 2012
-}
+	@inproceedings{1778186,
+		author = {Gupta, Gopal and Bansal, Ajay and Min, Richard and Simon, Luke and Mallya, Ajay},
+		title = {Coinductive logic programming and its applications},
+		booktitle = {Proceedings of the 23rd International Conference on Logic programming (ICLP)},
+		year = {2007},
+		isbn = {3-540-74608-0, 978-3-540-74608-9},
+		pages = {27--44},
+		location = {Porto, Portugal},
+		publisher = {Springer-Verlag},
+		address = {Berlin, Heidelberg},
+	}
+	
+	@inproceedings{
+		author = {Neda Saeedloei and Gopal Gupta},
+		title = {Verifying Complex Continuous Real-Time Systems with Coinductive CLP(R)},
+		booktitle = {Proceedings of the 19th Workshop on Logic-based methods in Programming Environments (WLPE)},
+		year = {2009},
+		location = {Pasadena, California, USA}
+	}
+	
+	@inproceedings{saeedloei_et_al:LIPIcs:2010:2599,
+		author ={Neda Saeedloei and Gopal Gupta},
+		title = {Timed Definite Clause Omega-Grammars},
+		booktitle ={Technical Communications of the 26th International Conference on Logic Programming},
+		pages = {212--221},
+		series = {Leibniz International Proceedings in Informatics (LIPIcs)},
+		isbn = {978-3-939897-17-0},
+		issn = {1868-8969},
+		year = {2010},
+		volume = {7},
+		editor = {Manuel Hermenegildo and Torsten Schaub},
+		publisher = {Schloss Dagstuhl--Leibniz-Zentrum fuer Informatik},
+		address = {Dagstuhl, Germany},
+		URL = {http://drops.dagstuhl.de/opus/volltexte/2010/2599},
+		doi = {http://dx.doi.org/10.4230/LIPIcs.ICLP.2010.212},
+		annote = {Keywords: Constraint Logic Programming over reals, Co-induction, Context-Free Grammars, Omega-Grammars}
+	}
+	
+	@inproceedings{AnconaSAC12,
+	  author = {Ancona, D.},
+	  title = {Regular corecursion in {P}rolog},
+	  booktitle = {A{CM} {S}ymposium on {A}pplied {C}omputing ({SAC} 2012)},
+	  ftp = {ftp://ftp.disi.unige.it/person/AnconaD/AnconaSAC12.pdf},
+	  keywords = {coinduction,corecursion},
+	  year = 2012
+	}

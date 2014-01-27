@@ -11,7 +11,7 @@ ________________________________________________________________________
 To load this example and for sample queries, please see the `SCRIPT.txt` file.
 
 This example shows the use of meta-predicates in Logtalk. Meta-predicates are 
-predicates whose head contains arguments that will be called as goals in the 
+predicates whose head includes arguments that will be called as goals in the 
 body of the predicate definition.
 
 This example defines the following objects:
@@ -32,7 +32,7 @@ This example defines the following objects:
 	this object implements a meta-predicate that is used by `sort(_)` to 
 	trace the sorting algorithm steps
 
-- `metapreds`, `descendant`, `test`  
+- `metapreds`, `descendant`, and `test`  
 	objects used for illustrating the use of closures as meta-arguments
 
 - `predicates`  

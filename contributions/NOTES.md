@@ -53,7 +53,7 @@ See the copyright and license information on the contributed files for
 usage and distributions conditions.
 
 The `contributions/loader.lgt` file loads all contributions and is
-mainly used when generating the XHTML documentation by follwing the
+mainly used when generating the XHTML documentation by following the
 steps:
 
 (1) Load all contributions using the query:

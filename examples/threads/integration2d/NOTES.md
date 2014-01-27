@@ -18,30 +18,30 @@ as they compensate for functional variation along the integral domain. This
 is accomplished by using a larger sampling of points in regions with large 
 function variations.
 
-Two objects, "quadrec2d" and "quadsplit2d", implement two versions of the 
+Two objects, `quadrec2d` and `quadsplit2d`, implement two versions of the 
 quadrature methods.
 
-In the quadrec2d object, the multi-threading method used is to divide 
+In the `quadrec2d` object, the multi-threading method used is to divide 
 the integral volume amongst the number of threads used (a power of 4) and 
 then recursively apply the same method in each interval. The implementation 
-uses the threaded/1 Logtalk built-in predicate.
+uses the `threaded/1` Logtalk built-in predicate.
 
-In the quadsplit2d object, a divide and conquer approach is also used but 
+In the `quadsplit2d` object, a divide and conquer approach is also used but 
 the original domain is split along a single dimension. A thread is spawned 
 for each sub-interval. This method can use any number of threads. However, 
 by splitting along a single dimension, this method may perform poorly for 
 functions where the splitting leaves must of work to just a few threads 
 (resulting in load balancing problems).
 
-The split/spawn/collect of thread goals uses the Logtalk built-in predicates 
-threaded_once/1 and threaded_exit/1.
+The split/span/collect of thread goals uses the Logtalk built-in predicates 
+`threaded_once/1` and `threaded_exit/1`.
 
 Both objects implement the same protocol:
 
     integrate(Function, A, B, C, D, NP, Error, Integral)
 
 This predicate allows us to find the integral of a function of two variables 
-on the rectangular domain [A,B][C,D] given a maximum approximation error.
+on the rectangular domain `[A,B][C,D]` given a maximum approximation error.
 NP represents the method to be used (0,1,2,3). For NP = 0, an adaptive 
 trapezoidal rule is used. For NP = 1, 2, 3 an adaptive gaussian quadrature of
 1, 2, or 3 points is used.

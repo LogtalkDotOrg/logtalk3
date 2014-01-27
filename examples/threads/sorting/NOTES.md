@@ -13,7 +13,7 @@ To load this example and for sample queries, please see the `SCRIPT.txt` file.
 This folder contains a multi-threading implementation of the merge sort 
 algorithm.  Depending on the size of the lists that are ordered, using 
 only one thread can be faster. The number of threads to be use in sorting 
-is set using the msort/1 object parameter. You may need to adjust the 
+is set using the `msort/1` object parameter. You may need to adjust the 
 size of the memory areas used by your Prolog compiler, depending on the 
 size of the lists you want to sort.
 

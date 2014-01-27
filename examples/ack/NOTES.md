@@ -12,4 +12,6 @@ To load this example and for sample queries, please see the `SCRIPT.txt`
 file.
 
 This folder contains an implementation of the Ackermann function (general 
-recursive function).
+recursive function). For a description of this function see e.g.
+
+	https://en.wikipedia.org/wiki/Ackermann_function

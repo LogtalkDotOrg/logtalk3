@@ -8,9 +8,10 @@ terms per section 7).        Consult the `LICENSE.txt` file for details.
 ________________________________________________________________________
 
 
-To load this example and for sample queries, please see the `SCRIPT.txt` file.
+To load this example and for sample queries, please see the `SCRIPT.txt`
+file.
 
 This folder contains a simple multi-threading example illustrating how 
-to use the Logtalk built-in predicates threaded_wait/1 and threaded_notify/1 
-for synchronizing threads writing to and reading from a buffer that can 
-only contain an item at the same time. 
+to use the Logtalk built-in `threaded_wait/1` and `threaded_notify/1`
+predicates for synchronizing threads writing to and reading from a buffer
+that can only contain an item at the same time. 

@@ -8,7 +8,8 @@ terms per section 7).        Consult the `LICENSE.txt` file for details.
 ________________________________________________________________________
 
 
-To load this example and for sample queries, please see the `SCRIPT.txt` file.
+To load this example and for sample queries, please see the `SCRIPT.txt`
+file.
 
 This folder contains an example of a bird identification expert system 
 adapted with permission from the book "Adventure in Prolog" by Amzi! inc. 
@@ -26,35 +27,35 @@ as follows:
 		<family>
 			<bird>
 
-order
-	falconiforms
-		falcon
-			peregrine_falcon
-			sparrow_hawk
-		vulture
-			california_condor
-			turkey_vulture
-	passerformes
-		flycatcher
-			ash_throated_flycatcher
-			great_crested_flycatcher
-		swallow
-			barn_swallow
-			cliff_swallow
-			purple_martin
-	tubenose
-		fulmar
-		albatross
-			black_footed_albatross
-			laysan_albatross
-	waterfowl
-		duck
-			female_mallard
-			male_mallard
-			pintail
-		goose
-			canada_goose
-			snow_goose
-		swan
-			trumpeter_swan
-			whistling_swan
+	order
+		falconiforms
+			falcon
+				peregrine_falcon
+				sparrow_hawk
+			vulture
+				california_condor
+				turkey_vulture
+		passerformes
+			flycatcher
+				ash_throated_flycatcher
+				great_crested_flycatcher
+			swallow
+				barn_swallow
+				cliff_swallow
+				purple_martin
+		tubenose
+			fulmar
+			albatross
+				black_footed_albatross
+				laysan_albatross
+		waterfowl
+			duck
+				female_mallard
+				male_mallard
+				pintail
+			goose
+				canada_goose
+				snow_goose
+			swan
+				trumpeter_swan
+				whistling_swan

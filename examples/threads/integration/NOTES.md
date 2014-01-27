@@ -18,24 +18,24 @@ integration as they compensate for functional variation along the
 integral domain, effectively in regions with large function variations 
 a larger sampling of point are used.
 
-The objects (quad) implement the integrate protocol :
+There are two parametric objects, `quadrec/1` and `quadsplit/1`, both
+implementing the same integration predicate:
 
-Integrate Protocol : argnames is ['Function', 'A', 'B', 'NP','Error', 'Integral']]).
+	integrate(Function, Left, Right, NP, Epsilon, Integral)
 
-Find the integral of a function of one variable in the interval [A, B] given 
-a maximum approximation error. NP-represents the method to be used (0,1,2,3) 
+Find the integral of a function of one variable in the interval `[Left, Right]`
+given a maximum approximation error. `NP` represents the method to be used, one
+of (0,1,2,3).
 
 For NP = 0 an adaptive trapezoidal rule is used.
 FOR NP=1,2,3,4 an adaptive gaussian quadrature of 1, 2, 3, or points is used.
 
-There are 2 versions quadrec and quadsplit.
-
-For quadrec, the method used for the multithreading is simply to divide the 
+For `quadrec/1`, the method used for the multithreading is simply to divide the 
 initial area amongst the number of threads available (a power of 2) and then 
-in each interval the recursive method is applied. The threaded/1 predicate 
+in each interval the recursive method is applied. The `threaded/1` predicate 
 is used.
 
-For quadsplit, the method used is again division (split) of the original area 
-amongst the number of threads specified. This method has no restriction on 
-the number of threads and uses a spwan/collect idea for proving thread goals 
-and the predicates threaded_once/1 and threaded_exit/1.
+For `quadsplit/1`, the method used is again division (split) of the original
+area amongst the number of threads specified. This method has no restriction
+on the number of threads and uses a span/collect idea for proving thread goals 
+and the predicates `threaded_once/1` and `threaded_exit/1`.

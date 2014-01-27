@@ -36,7 +36,7 @@ objects and categories:
 	parsing of walker movements and calculation of distance
 	travelled
 - `bypass`  
-	using the {} DCG construct together with the {} Logtalk control 
+	using the `{}/1` DCG construct together with the `{}/1` Logtalk control 
 	construct
 - `tokenizer`  
 	natural language tokenizer example
@@ -46,15 +46,15 @@ objects and categories:
 	decoder for Morse code messages; illustrate how to use scope 
 	directives to declare grammar rule non-terminals
 
-This folder contains an example, `tokenizer`, adapted with permission from 
+This folder includes an example, `tokenizer`, adapted with permission from 
 a Michael A. Covington example:
 
 	http://www.ai.uga.edu/~mc/
 
 See the file `tokenizer.lgt` for more details.
 
-This folder contains two examples of DCGs, `bom` and `faa`, adapted with 
-permission from the Amzi! Prolog documentation. The documentation is 
+This folder also includes two examples of DCGs, `bom` and `faa`, adapted
+with permission from the Amzi! Prolog documentation. The documentation is 
 available on-line in HTML format at the URL:
 
 	http://www.amzi.com/

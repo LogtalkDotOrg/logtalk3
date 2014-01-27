@@ -8,10 +8,11 @@ terms per section 7).        Consult the `LICENSE.txt` file for details.
 ________________________________________________________________________
 
 
-To load this example and for sample queries, please see the `SCRIPT.txt` file.
+To load this example and for sample queries, please see the `SCRIPT.txt`
+file.
 
-This folder contains an implementation of an atomic updates task
-and it was coded for a contribution to the Rosetta Code website.
+This folder contains an implementation of an atomic updates task and it
+was coded for a contribution to the Rosetta Code website.
 
 For more information see:
 
