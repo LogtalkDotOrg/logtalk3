@@ -100,7 +100,7 @@ steps:
 
 (2) Load all library entities using the query:
 
-    | ?- {library(all_loader)}.
+	| ?- {library(all_loader)}.
 
 (3) Load the `lgtdoc` tool and generate the XML documenting files for all
 library entities using the queries:

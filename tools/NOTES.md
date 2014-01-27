@@ -59,7 +59,7 @@ and follow these steps:
 
 (2) Load all the tools using the query:
 
-    | ?- {tools(loader)}.
+	| ?- {tools(loader)}.
 
 (3) Generate the XML documenting files for all loaded tools using the query:
 

@@ -58,7 +58,7 @@ steps:
 
 (1) Load all contributions using the query:
 
-    | ?- {contributions(loader)}.
+	| ?- {contributions(loader)}.
 
 (2) Load the `lgtdoc` tool and generate the XML documenting files for all
 library entities using the queries:
