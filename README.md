@@ -57,7 +57,7 @@ standards as the back-end compiler.
 
 The latest release of the Logtalk is always available at the URL:
 
-    http://logtalk.org/
+	<http://logtalk.org/>
 
 At this address you can also find additional documentation and information
 about Logtalk.
@@ -69,11 +69,11 @@ about Logtalk.
 To register as a Logtalk user either use the registration form found at 
 the Logtalk web site:
 
-    http://logtalk.org/regform.html
+	<http://logtalk.org/regform.html>
 
 or send an email message to:
 
-	registration@logtalk.org
+	<registration@logtalk.org>
 
 with the following information:
 
@@ -88,7 +88,7 @@ you intend to use Logtalk (optional)
 
 For support options, please consult the page:
 
-    http://logtalk.org/support.html
+	<http://logtalk.org/support.html>
 
 
 5. INSTALLATION
