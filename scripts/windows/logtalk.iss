@@ -75,7 +75,7 @@ Name: shortcut; Description: "&Create a desktop shortcut to the Logtalk user fol
 Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Messages]
-BeveledLabel=Logtalk 3.00.0 © Paulo Moura, Copyright (c) 1998-2014
+BeveledLabel={#MyAppName} {#MyAppVer} © Paulo Moura, Copyright (c) 1998-2014
 
 [Dirs]
 Name: {code:GetLgtUserDir}; Components: user; Flags: uninsneveruninstall
