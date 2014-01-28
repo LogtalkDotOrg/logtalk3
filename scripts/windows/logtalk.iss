@@ -111,9 +111,9 @@ Type: files; Name: "{app}\paths\*.xwam"
 Name: "{group}\Bibliography"; Filename: "{app}\BIBLIOGRAPHY.bib"; Components: base
 Name: "{group}\User and Reference Manuals"; Filename: "{app}\manuals\index.html"; Components: base
 Name: "{group}\License"; Filename: "{app}\LICENSE.txt"; Components: base
-Name: "{group}\Release Notes"; Filename: "{app}\RELEASE_NOTES.txt"; Components: base
-Name: "{group}\Read Me"; Filename: "{app}\README.txt"; Components: base
-Name: "{group}\Customization instructions"; Filename: "{app}\CUSTOMIZE.txt"; Components: base
+Name: "{group}\Release Notes"; Filename: "{app}\RELEASE_NOTES.md"; Components: base
+Name: "{group}\Read Me"; Filename: "{app}\README.md"; Components: base
+Name: "{group}\Customization instructions"; Filename: "{app}\CUSTOMIZE.md"; Components: base
 Name: "{group}\Default settings"; Filename: "%LOGTALKUSER%\settings-sample.lgt"; Components: base
 Name: "{group}\Entity documentation"; Filename: "%LOGTALKUSER%\docs\index.html"; Components: base
 
@@ -145,9 +145,9 @@ Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"; 
 
 Name: "{code:GetLgtUserDir}\Bibliography"; Filename: "{app}\BIBLIOGRAPHY.bib"; Components: user
 Name: "{code:GetLgtUserDir}\License"; Filename: "{app}\LICENSE.txt"; Components: user
-Name: "{code:GetLgtUserDir}\Release Notes"; Filename: "{app}\RELEASE_NOTES.txt"; Components: user
-Name: "{code:GetLgtUserDir}\Read Me"; Filename: "{app}\README.txt"; Components: user
-Name: "{code:GetLgtUserDir}\Customization instructions"; Filename: "{app}\CUSTOMIZE.txt"; Components: user
+Name: "{code:GetLgtUserDir}\Release Notes"; Filename: "{app}\RELEASE_NOTES.md"; Components: user
+Name: "{code:GetLgtUserDir}\Read Me"; Filename: "{app}\README.md"; Components: user
+Name: "{code:GetLgtUserDir}\Customization instructions"; Filename: "{app}\CUSTOMIZE.md"; Components: user
 Name: "{code:GetLgtUserDir}\adapters"; Filename: "{app}\adapters"; Components: user
 Name: "{code:GetLgtUserDir}\manuals"; Filename: "{app}\manuals"; Components: user
 Name: "{code:GetLgtUserDir}\paths"; Filename: "{app}\paths"; Components: user
@@ -184,8 +184,8 @@ Root: HKCU; Subkey: "SOFTWARE\Classes\.md"; ValueType: string; ValueName: "Conte
 Root: HKCU; Subkey: "SOFTWARE\Classes\.md"; ValueType: string; ValueName: "PerceivedType"; ValueData: "text"; Components: base; Flags: uninsdeletevalue createvalueifdoesntexist; Check: not IsAdminLoggedOn
 
 [Run]
-Filename: "{app}\RELEASE_NOTES.txt"; Description: "View the release notes"; Components: base; Flags: postinstall shellexec skipifsilent
-Filename: "{app}\CUSTOMIZE.txt"; Description: "Read the customization instructions for completing your setup"; Components: base; Flags: postinstall shellexec skipifsilent
+Filename: "{app}\RELEASE_NOTES.md"; Description: "View the release notes"; Components: base; Flags: postinstall shellexec skipifsilent
+Filename: "{app}\CUSTOMIZE.md"; Description: "Read the customization instructions for completing your setup"; Components: base; Flags: postinstall shellexec skipifsilent
 
 Filename: "{app}\{#MyAppRegUrlName}"; Components: base; Flags: shellexec nowait; Tasks: registration
 
