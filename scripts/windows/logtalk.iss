@@ -82,15 +82,7 @@ Name: {code:GetLgtUserDir}; Components: user; Flags: uninsneveruninstall
 Name: "{userdocs}\Logtalk uninstaller"
 
 [Files]
-Source: "{#MyBaseDir}\*"; Excludes: "*.md,.*"; DestDir: "{app}"; Components: base; Flags: ignoreversion recursesubdirs createallsubdirs
-
-Source: "{#MyBaseDir}\ACKNOWLEDGMENTS.md"; DestDir: "{app}"; DestName: "ACKNOWLEDGMENTS.txt"; Components: base; Flags: ignoreversion skipifsourcedoesntexist
-Source: "{#MyBaseDir}\CUSTOMIZE.md"; DestDir: "{app}"; DestName: "CUSTOMIZE.txt"; Components: base; Flags: ignoreversion skipifsourcedoesntexist
-Source: "{#MyBaseDir}\INSTALL.md"; DestDir: "{app}"; DestName: "INSTALL.txt"; Components: base; Flags: ignoreversion skipifsourcedoesntexist
-Source: "{#MyBaseDir}\QUICK_START.md"; DestDir: "{app}"; DestName: "QUICK_START.txt"; Components: base; Flags: ignoreversion skipifsourcedoesntexist
-Source: "{#MyBaseDir}\README.md"; DestDir: "{app}"; DestName: "README.txt"; Components: base; Flags: ignoreversion skipifsourcedoesntexist
-Source: "{#MyBaseDir}\RELEASE_NOTES.md"; DestDir: "{app}"; DestName: "RELEASE_NOTES.txt"; Components: base; Flags: ignoreversion skipifsourcedoesntexist
-Source: "{#MyBaseDir}\UPGRADING.md"; DestDir: "{app}"; DestName: "UPGRADING.txt"; Components: base; Flags: ignoreversion skipifsourcedoesntexist
+Source: "{#MyBaseDir}\*"; Excludes: ".*"; DestDir: "{app}"; Components: base; Flags: ignoreversion recursesubdirs createallsubdirs
 
 Source: "{#MyBaseDir}\contributions\*"; Excludes: ".*"; DestDir: "{code:GetLgtUserDir}\contributions"; Components: user; Flags: ignoreversion recursesubdirs createallsubdirs uninsneveruninstall
 Source: "{#MyBaseDir}\docs\*"; Excludes: ".*"; DestDir: "{code:GetLgtUserDir}\docs"; Components: user; Flags: ignoreversion recursesubdirs createallsubdirs uninsneveruninstall
@@ -174,6 +166,9 @@ Root: HKLM; Subkey: "SOFTWARE\Classes\MIME\Database\Content Type\text/x-logtalk"
 Root: HKCR; Subkey: ".lgt"; ValueType: string; ValueName: ""; ValueData: "LogtalkSourceFile"; Components: base; Flags: uninsdeletevalue; Check: IsAdminLoggedOn
 Root: HKCR; Subkey: ".logtalk"; ValueType: string; ValueName: ""; ValueData: "LogtalkSourceFile"; Components: base; Flags: uninsdeletevalue; Check: IsAdminLoggedOn
 Root: HKCR; Subkey: "LogtalkSourceFile"; ValueType: string; ValueName: ""; ValueData: "Logtalk source file"; Components: base; Flags: uninsdeletekey; Check: IsAdminLoggedOn
+Root: HKCR; Subkey: ".md"; ValueType: string; ValueName: ""; ValueData: "txtfile"; Components: base; Flags: uninsdeletevalue createvalueifdoesntexist; Check: IsAdminLoggedOn
+Root: HKCR; Subkey: ".md"; ValueType: string; ValueName: "Content Type"; ValueData: "text/plain"; Components: base; Flags: uninsdeletevalue createvalueifdoesntexist; Check: IsAdminLoggedOn
+Root: HKCR; Subkey: ".md"; ValueType: string; ValueName: "PerceivedType"; ValueData: "text"; Components: base; Flags: uninsdeletevalue createvalueifdoesntexist; Check: IsAdminLoggedOn
 ; non-admin users
 Root: HKCU; Subkey: "Software\Logtalk"; ValueType: string; ValueName: "Version"; ValueData: "{#MyAppVer}"; Components: base; Flags: deletevalue uninsdeletevalue; Check: not IsAdminLoggedOn
 Root: HKCU; Subkey: "Environment"; ValueType: expandsz; ValueName: "LOGTALKHOME"; ValueData: "{app}"; Components: base; Flags: deletevalue uninsdeletevalue; Check: not IsAdminLoggedOn
@@ -184,6 +179,9 @@ Root: HKCU; Subkey: "SOFTWARE\Classes\MIME\Database\Content Type\text/x-logtalk"
 Root: HKCU; Subkey: "SOFTWARE\Classes\.lgt"; ValueType: string; ValueName: ""; ValueData: "LogtalkSourceFile"; Components: base; Flags: uninsdeletevalue; Check: not IsAdminLoggedOn
 Root: HKCU; Subkey: "SOFTWARE\Classes\.logtalk"; ValueType: string; ValueName: ""; ValueData: "LogtalkSourceFile"; Components: base; Flags: uninsdeletevalue; Check: not IsAdminLoggedOn
 Root: HKCU; Subkey: "SOFTWARE\Classes\LogtalkSourceFile"; ValueType: string; ValueName: ""; ValueData: "Logtalk source file"; Components: base; Flags: uninsdeletekey; Check: not IsAdminLoggedOn
+Root: HKCU; Subkey: "SOFTWARE\Classes\.md"; ValueType: string; ValueName: ""; ValueData: "txtfile"; Components: base; Flags: uninsdeletevalue createvalueifdoesntexist; Check: not IsAdminLoggedOn
+Root: HKCU; Subkey: "SOFTWARE\Classes\.md"; ValueType: string; ValueName: "Content Type"; ValueData: "text/plain"; Components: base; Flags: uninsdeletevalue createvalueifdoesntexist; Check: not IsAdminLoggedOn
+Root: HKCU; Subkey: "SOFTWARE\Classes\.md"; ValueType: string; ValueName: "PerceivedType"; ValueData: "text"; Components: base; Flags: uninsdeletevalue createvalueifdoesntexist; Check: not IsAdminLoggedOn
 
 [Run]
 Filename: "{app}\RELEASE_NOTES.txt"; Description: "View the release notes"; Components: base; Flags: postinstall shellexec skipifsilent

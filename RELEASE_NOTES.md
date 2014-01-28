@@ -71,6 +71,14 @@ Documentation
 * CHANGED: Renamed most documentation `NOTES.txt` files that use Markdown
 syntax to `NOTES.md`.
 
+Installers and installation scripts
+-----------------------------------
+
+* UPDATED: The `logtalk.iss` Inno Setup script now ensures that `.md` files
+are recognized as text files if no HKCR registry entry exists when the
+installer is run by administrator users or if no HKCU registry entry exists
+when the installer is run by non-administrator users.
+
 Examples
 --------
 
