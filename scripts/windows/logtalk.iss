@@ -184,9 +184,7 @@ Root: HKCU; Subkey: "SOFTWARE\Classes\.md"; ValueType: string; ValueName: "Conte
 Root: HKCU; Subkey: "SOFTWARE\Classes\.md"; ValueType: string; ValueName: "PerceivedType"; ValueData: "text"; Components: base; Flags: uninsdeletevalue createvalueifdoesntexist; Check: not IsAdminLoggedOn
 
 [Run]
-Filename: "{app}\RELEASE_NOTES.md"; Description: "View the release notes"; Components: base; Flags: postinstall shellexec skipifsilent
-Filename: "{app}\CUSTOMIZE.md"; Description: "Read the customization instructions for completing your setup"; Components: base; Flags: postinstall shellexec skipifsilent
-
+Filename: "{app}\README.md"; Description: "Open the README.md file"; Components: base; Flags: postinstall shellexec skipifsilent
 Filename: "{app}\{#MyAppRegUrlName}"; Components: base; Flags: shellexec nowait; Tasks: registration
 
 [UninstallDelete]
