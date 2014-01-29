@@ -89,5 +89,10 @@ if [ -x /usr/bin/update-mime-database ]; then
 	echo "Added the Logtalk mime-type to the Shared MIME-info Database."
 	echo
 fi
+
+if [ `builtin type -p xdg-open` ]; then
+	/usr/bin/xdg-open /usr/share/logtalk/README.md
+fi
+
 echo "Logtalk basic installation completed."
 echo
