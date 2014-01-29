@@ -67,6 +67,7 @@ gzip --best $directory/debian/usr/share/doc/logtalk/*.txt
 gzip --best $directory/debian/usr/share/doc/logtalk/changelog 
 gzip --best $directory/debian/usr/share/doc/logtalk/changelog.Debian
 cp debian/control $directory/debian/DEBIAN
+sudo sed -e "s/^Version:.*/Version: $version/" -i '' $directory/debian/DEBIAN/control
 cp debian/postinst $directory/debian/DEBIAN
 cp debian/prerm $directory/debian/DEBIAN
 cp debian/postrm $directory/debian/DEBIAN
