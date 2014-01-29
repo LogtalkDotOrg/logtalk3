@@ -81,7 +81,8 @@ echo "If you get an unexpected failure when using one of the Prolog integration"
 echo "scripts, consult see the \"/usr/share/logtalk/adapters/NOTES.md\" file"
 echo "for compatibility notes or consult the integration script man page."
 echo
-if [ -x /usr/bin/update-mime-database ]; then
+
+if [ -x /usr/bin/update-mime-database ] ; then
 	mkdir -p /usr/share/mime/packages
 	rm -f /usr/share/mime/packages/logtalk.xml
 	cp /usr/share/logtalk/scripts/freedesktop/logtalk.xml /usr/share/mime/packages/logtalk.xml
@@ -90,8 +91,9 @@ if [ -x /usr/bin/update-mime-database ]; then
 	echo
 fi
 
-if [ `type -p xdg-open` ]; then
-	/usr/bin/xdg-open /usr/share/logtalk/README.md
+xdgopenpath=`command -v xdg-open`
+if [ -x "$xdgopenpath" ] ; then
+	"$xdgopenpath" /usr/share/logtalk/README.md
 fi
 
 echo "Logtalk basic installation completed."
