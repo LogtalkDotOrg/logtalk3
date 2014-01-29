@@ -27,9 +27,10 @@ MANUAL INSTALLATION INSTRUCTIONS
 The recommended way of installing Logtalk is to use, whenever possible, one 
 of the provided installers. This file contains detailed instructions for 
 *manual* installation and configuration of Logtalk. You should also consult 
-the `scripts/NOTES.md` and `integration/NOTES.md` files for a description 
-of a set of shell scripts that might be used for Logtalk installation on 
-some operating-systems and for easy Logtalk integration with popular Prolog 
+the [scripts/NOTES.md](scripts/NOTES.md) and
+[integration/NOTES.md](integration/NOTES.md) files for a description of a
+set of shell scripts that might be used for Logtalk installation on some
+operating-systems and for easy Logtalk integration with popular Prolog 
 compilers.
 
 The POSIX shell scripts assume that `/bin/bash` is available.
@@ -65,7 +66,7 @@ supports both admin and non-admin users) to perform a full installation.
 The Windows installer is built using Inno Setup, which is freely available.
 If you need to customize the installer (e.g. to recognize Prolog compilers
 installed in non-standard locations), edit the Inno Setup script found on
-the `scripts/windows` directory and regenerate the installer.
+the [scripts/windows](scripts/windows) directory and regenerate the installer.
 
 
 * Installing for one or more users by a user with administrative rights:
@@ -187,5 +188,5 @@ intend to use.
 5. CUSTOMIZING LOGTALK
 ----------------------
 
-Please see the file `CUSTOMIZE.md` for details on how to customize your 
-Logtalk installation and working environment.
+Please see the file [CUSTOMIZE.md](CUSTOMIZE.md) for details on how to
+customize your Logtalk installation and working environment.

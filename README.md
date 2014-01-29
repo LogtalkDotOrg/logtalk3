@@ -96,26 +96,27 @@ For support options, please consult the page:
 
 Logtalk can be installed either from sources by running a few shell scripts 
 or by using one of the provided installers, depending on your operating 
-system. For manual installation, see the [INSTALL](INSTALL.md) file for
+system. For manual installation, see the [INSTALL.md](INSTALL.md) file for
 detailed instructions.
 
-See the user manual for a description of the source files organization 
-and for using instructions (to read the user manual open the file 
-`manuals/index.html` with a web browser). Most files are formatted using
-tabs (the recommended setting is a tab width equivalent to 4 spaces).
+See the user manual for a description of the source files organization
+and for using instructions (to read the user manual open the
+[index](manuals/index.html) file in a web browser). Most files are
+formatted using tabs (the recommended setting is a tab width equivalent
+to 4 spaces).
 
 
 6. CUSTOMIZATION
 ----------------
 
-The [CUSTOMIZE](CUSTOMIZE.md) file provides detailed instructions for
+The [CUSTOMIZE.md](CUSTOMIZE.md) file provides detailed instructions for
 customizing the Logtalk installation and working environment.
 
 
 7. RUNNING
 ----------
 
-The [QUICK_START](QUICK_START.md) file provides quick instructions for
+The [QUICK_START.md](QUICK_START.md) file provides quick instructions for
 those of you in a hurry to run Logtalk, provided that your favorite
 Prolog compiler is supported and installed.
 
@@ -124,14 +125,14 @@ Prolog compiler is supported and installed.
 ----------------
 
 The reference and user manuals and the tutorial are provided in XHTML and
-PDF formats and can be found in the `manuals` directory.
+PDF formats and can be found in the [manuals](manuals/) directory.
 
-The [RELEASE_NOTES](RELEASE_NOTES.md) file contains descriptions of all
+The [RELEASE_NOTES.md](RELEASE_NOTES.md) file contains descriptions of all
 Logtalk updates since the first public version. Read it carefully if you
 have been using a previous Logtalk version.
 
 The documentation for the core, library, tools, and contributions entities
-is provided in XHTML format and can be found in the `docs` directory.
+is provided in XHTML format and can be found in the [docs](docs/) directory.
 
 Most directories include `NOTES.md` documenting files, which can be viewed
 as plain text in any text editor but also nicely rendered as Markdown files
@@ -142,7 +143,7 @@ as plain text in any text editor but also nicely rendered as Markdown files
 ------------
 
 If you are upgrading from a previous Logtalk version, please check the 
-[UPGRADING](UPGRADING.md) file for instructions on how to upgrade your
+[UPGRADING.md](UPGRADING.md) file for instructions on how to upgrade your
 programs or your custom adapter files to run under this new version.
 
 
@@ -150,9 +151,9 @@ programs or your custom adapter files to run under this new version.
 -------------
 
 If you find Logtalk useful, please include a citation on your publications.
-Consult the [BIBLIOGRAPHY](BIBLIOGRAPHY.bib) file for bibliographic references
-in BibTeX format (the Logtalk technical report published on 2000 and the 2003
-PhD thesis on Logtalk are good choices).
+Consult the [BIBLIOGRAPHY.bib](BIBLIOGRAPHY.bib) file for bibliographic
+references in BibTeX format (the Logtalk technical report published on 2000
+and the 2003 PhD thesis on Logtalk are good choices).
 
 
 11. CONTRIBUTIONS
@@ -171,7 +172,7 @@ Logtalk.
 ---------
 
 Logtalk is copyrighted by Paulo Moura. The Logtalk use and distribution
-license can be found in the [LICENSE](LICENSE.txt) file. Logtalk follows
+license can be found in the [LICENSE.txt](LICENSE.txt) file. Logtalk follows
 the GNU General Public License 3, plus some additional terms as per Section 7.
 The copyright notice and license applies to all files in this release unless
 otherwise explicitly stated.
