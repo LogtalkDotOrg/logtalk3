@@ -93,7 +93,8 @@ fi
 
 xdgopenpath=`command -v xdg-open`
 if [ -x "$xdgopenpath" ] ; then
-	"$xdgopenpath" /usr/share/logtalk/README.md
+	ln -sf /usr/share/logtalk/README.md /tmp/README.txt
+	"$xdgopenpath" /tmp/README.txt
 fi
 
 echo "Logtalk basic installation completed."
