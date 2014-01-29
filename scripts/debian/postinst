@@ -90,9 +90,10 @@ if [ -x /usr/bin/update-mime-database ]; then
 	echo
 fi
 
-if [ `builtin type -p xdg-open` ]; then
+if [ `type -p xdg-open` ]; then
 	/usr/bin/xdg-open /usr/share/logtalk/README.md
 fi
 
 echo "Logtalk basic installation completed."
 echo
+exit 0
