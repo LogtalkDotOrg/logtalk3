@@ -55,8 +55,7 @@ echo "Creating a link to the Logtalk installation folder in the /Applications fo
 /bin/ln -sf /opt/local/share/logtalk /Applications/Logtalk
 /usr/bin/open /Applications/Logtalk/
 /usr/bin/open /Applications/Logtalk/scripts/macosx/command_files
-/usr/bin/open /Applications/Logtalk/QUICK_START.md
-/usr/bin/open /Applications/Logtalk/RELEASE_NOTES.md
+/usr/bin/open /Applications/Logtalk/README.md
 
 echo ""
 echo "You have succesfully installed Logtalk!"
