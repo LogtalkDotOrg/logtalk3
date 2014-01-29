@@ -164,7 +164,9 @@ Root: HKLM; Subkey: "SOFTWARE\Classes\MIME\Database\Content Type\text/x-logtalk"
 Root: HKLM; Subkey: "SOFTWARE\Classes\MIME\Database\Content Type\text/x-logtalk"; ValueType: string; ValueName: "Extension"; ValueData: ".lgt"; Components: base; Flags: deletevalue uninsdeletevalue; Check: IsAdminLoggedOn
 Root: HKLM; Subkey: "SOFTWARE\Classes\MIME\Database\Content Type\text/x-logtalk"; ValueType: string; ValueName: "Extension"; ValueData: ".logtalk"; Components: base; Flags: deletevalue uninsdeletevalue; Check: IsAdminLoggedOn
 Root: HKCR; Subkey: ".lgt"; ValueType: string; ValueName: ""; ValueData: "LogtalkSourceFile"; Components: base; Flags: uninsdeletevalue; Check: IsAdminLoggedOn
+Root: HKCR; Subkey: ".lgt"; ValueType: string; ValueName: "Content Type"; ValueData: "text/x-logtalk"; Components: base; Flags: uninsdeletevalue; Check: IsAdminLoggedOn
 Root: HKCR; Subkey: ".logtalk"; ValueType: string; ValueName: ""; ValueData: "LogtalkSourceFile"; Components: base; Flags: uninsdeletevalue; Check: IsAdminLoggedOn
+Root: HKCR; Subkey: ".logtalk"; ValueType: string; ValueName: "Content Type"; ValueData: "text/x-logtalk"; Components: base; Flags: uninsdeletevalue; Check: IsAdminLoggedOn
 Root: HKCR; Subkey: "LogtalkSourceFile"; ValueType: string; ValueName: ""; ValueData: "Logtalk source file"; Components: base; Flags: uninsdeletekey; Check: IsAdminLoggedOn
 Root: HKCR; Subkey: ".md"; ValueType: string; ValueName: ""; ValueData: "txtfile"; Components: base; Flags: uninsdeletevalue createvalueifdoesntexist; Check: IsAdminLoggedOn
 Root: HKCR; Subkey: ".md"; ValueType: string; ValueName: "Content Type"; ValueData: "text/plain"; Components: base; Flags: uninsdeletevalue createvalueifdoesntexist; Check: IsAdminLoggedOn
@@ -177,7 +179,9 @@ Root: HKCU; Subkey: "SOFTWARE\Classes\MIME\Database\Content Type\text/x-logtalk"
 Root: HKCU; Subkey: "SOFTWARE\Classes\MIME\Database\Content Type\text/x-logtalk"; ValueType: string; ValueName: "Extension"; ValueData: ".lgt"; Components: base; Flags: deletevalue uninsdeletevalue; Check: not IsAdminLoggedOn
 Root: HKCU; Subkey: "SOFTWARE\Classes\MIME\Database\Content Type\text/x-logtalk"; ValueType: string; ValueName: "Extension"; ValueData: ".logtalk"; Components: base; Flags: deletevalue uninsdeletevalue; Check: not IsAdminLoggedOn
 Root: HKCU; Subkey: "SOFTWARE\Classes\.lgt"; ValueType: string; ValueName: ""; ValueData: "LogtalkSourceFile"; Components: base; Flags: uninsdeletevalue; Check: not IsAdminLoggedOn
+Root: HKCU; Subkey: "SOFTWARE\Classes\.lgt"; ValueType: string; ValueName: "Content Type"; ValueData: "text/x-logtalk"; Components: base; Flags: uninsdeletevalue; Check: not IsAdminLoggedOn
 Root: HKCU; Subkey: "SOFTWARE\Classes\.logtalk"; ValueType: string; ValueName: ""; ValueData: "LogtalkSourceFile"; Components: base; Flags: uninsdeletevalue; Check: not IsAdminLoggedOn
+Root: HKCU; Subkey: "SOFTWARE\Classes\.logtalk"; ValueType: string; ValueName: "Content Type"; ValueData: "text/x-logtalk"; Components: base; Flags: uninsdeletevalue; Check: not IsAdminLoggedOn
 Root: HKCU; Subkey: "SOFTWARE\Classes\LogtalkSourceFile"; ValueType: string; ValueName: ""; ValueData: "Logtalk source file"; Components: base; Flags: uninsdeletekey; Check: not IsAdminLoggedOn
 Root: HKCU; Subkey: "SOFTWARE\Classes\.md"; ValueType: string; ValueName: ""; ValueData: "txtfile"; Components: base; Flags: uninsdeletevalue createvalueifdoesntexist; Check: not IsAdminLoggedOn
 Root: HKCU; Subkey: "SOFTWARE\Classes\.md"; ValueType: string; ValueName: "Content Type"; ValueData: "text/plain"; Components: base; Flags: uninsdeletevalue createvalueifdoesntexist; Check: not IsAdminLoggedOn
