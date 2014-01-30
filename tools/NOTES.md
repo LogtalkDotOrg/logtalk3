@@ -63,15 +63,26 @@ and follow these steps:
 
 (3) Generate the XML documenting files for all loaded tools using the query:
 
-	| ?- lgtdoc::rlibrary(tools, [xmldir('$LOGTALKUSER/docs/tmp')]).
+	| ?- lgtdoc::library(assertions, [xmldir('$LOGTALKUSER/docs/tmp_assertions')]),
+		lgtdoc::library(debugger, [xmldir('$LOGTALKUSER/docs/tmp_debugger')]),
+		lgtdoc::library(diagrams, [xmldir('$LOGTALKUSER/docs/tmp_diagrams')]),
+		lgtdoc::library(help, [xmldir('$LOGTALKUSER/docs/tmp_help')]),
+		lgtdoc::library(lgtdoc, [xmldir('$LOGTALKUSER/docs/tmp_lgtdoc')]),
+		lgtdoc::library(lgtunit, [xmldir('$LOGTALKUSER/docs/tmp_lgtunit')]),
+		lgtdoc::library(profiler, [xmldir('$LOGTALKUSER/docs/tmp_profiler')]).
 
-(4) Run the command `lgt2html` on the `$LOGTALKUSER/docs/tmp` directory 
-to generate (X)HTML documentation or the command `lgt2pdf` to generate
-PDF documentation. For example:
+(4) Run the command `lgt2html` on the temporary directories to generate the
+(X)HTML documentation or the command `lgt2pdf` to generate PDF documentation:
 
-	$ cd $LOGTALKUSER/docs/tmp
-	$ lgt2html -i tools.html -t "Tools documentation index"
+	$ cd $LOGTALKUSER/docs/tmp_assertions && lgt2html -i assertions_tool.html -t "Assertions" && mv *.html ..
+	$ cd ../tmp_debugger && lgt2html -i debugger_tool.html -t "Debugger" && mv *.html ..
+	$ cd ../tmp_diagrams && lgt2html -i diagrams_tool.html -t "Diagrams" && mv *.html ..
+	$ cd ../tmp_help && lgt2html -i help_tool.html -t "Help" && mv *.html ..
+	$ cd ../tmp_lgtdoc && lgt2html -i lgtdoc_tool.html -t "LgtDoc" && mv *.html ..
+	$ cd ../tmp_lgtunit && lgt2html -i lgtunit_tool.html -t "LgtUnit" && mv *.html ..
+	$ cd ../tmp_profiler && lgt2html -i profiler_tool.html -t "Profiler" && mv *.html ..
 
-After generating the (X)HTML and/or PDF documentation, you can move the
-files to the upper directory, `$LOGTALKUSER/docs`, and delete the temporary
-directory.
+After generating the (X)HTML and/or PDF documentation, you can delete the
+temporary directories:
+
+	$ rm -rf $LOGTALKUSER/docs/tmp_*

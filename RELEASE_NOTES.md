@@ -25,6 +25,15 @@ RELEASE NOTES
 =============
 
 
+3.00.0 Alpha 35 - February ??, 2014
+===================================
+
+Documentation
+-------------
+
+* IMPROVED: Navigation of the tools HTML documentation.
+
+
 3.00.0 Alpha 34 - January 30, 2014
 ==================================
 
