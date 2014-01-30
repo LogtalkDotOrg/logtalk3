@@ -91,12 +91,6 @@ if [ -x /usr/bin/update-mime-database ] ; then
 	echo
 fi
 
-xdgopenpath=`command -v xdg-open`
-if [ -x "$xdgopenpath" ] ; then
-	ln -sf /usr/share/logtalk/README.md /tmp/README.txt
-	"$xdgopenpath" /tmp/README.txt
-fi
-
 echo "Logtalk basic installation completed."
 echo
 exit 0
