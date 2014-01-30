@@ -16,31 +16,31 @@ supports the W3C standards XML, XSLT, CSS, and HTML 4 or XHTML 1.0.
 
 The shell and command-line scripts should be called from the directory 
 containing the XML documenting files that you wish to convert. See the 
-description of each script below for details.
+description of each script below for details. The `.sh` files are bash
+shell scripts while the `.js` files are JScript command-line scripts for
+Windows (requiring WSH 5.6 or later version). These scripts assumes that
+the `LOGTALKHOME` and `LOGTALKUSER` environment variables are defined and
+that the chosen XSLT processor is available in the path.
 
-MAKE SURE THAT THE XSL PROCESSORS YOU INTEND TO USE ARE PROPERLY INSTALLED 
-AND WORKING BEFORE RUNNING THESE SCRIPTS!
+*MAKE SURE THAT THE XSL PROCESSORS YOU INTEND TO USE ARE PROPERLY INSTALLED 
+AND WORKING BEFORE RUNNING THESE SCRIPTS!*
 
 Regarding conversion to (X)HTML, the links to the XSL files on the XML 
 files and the links to the CSS files in the generated HTML files assume 
 that all files reside in the same directory.
 
-The default XSL file to use ("lgtxml.xsl", described below) is set in the
-adapter files. You may choose a different default XSL file in your settings
-file or by using the "xslfile" flag. You may also override the default XSL
-file by using the xslfile/1 compiler option in the logtalk_compile/2 and
-logtalk_load/2 calls.
+The default XSL file to use (`lgtxml.xsl`, described below) is set in the
+`lgtdoc` tool. You may choose a different default XSL file by using the
+`xslfile` option.
 
 The documenting files can be generated either as standalone XML files or
-containing a reference to either the Logtalk DTD file, "logtalk.dtd", or
-to the Logtalk XML Schema file, "logtalk.xsd". The reference to the XML
-specification file can be either a local reference or a URI reference. By
-default, all XML documenting files contain a local reference but that can
-be changed in your settings file, by setting the "xmlsref" Logtalk compiler
-flag, or by using the xmlsref/1 compiler option. Choose the option value
-that works best with your XSLT tools. To choose between the DTD or XSD 
-specifications use the "xmlspec" compiler flag or the xmlsref/1 compiler
-option.
+containing a reference to either the Logtalk DTD file, `logtalk.dtd`, or
+to the Logtalk XML Schema file, `logtalk.xsd`. The reference to the XML
+specification file can be either a local reference or a URI reference.
+By default, all XML documenting files contain a local reference but that
+can be changed by using the `xmlsref` option. Choose the option value
+that works best with your XSLT tools. To choose between the DTD or XSD
+specifications use the `xmlspec` or `xmlsref` options.
 
 As Logtalk uses a single namespace for all objects, categories, and protocols,
 you may want to define an alternate, global compilation directory to store all 
@@ -52,185 +52,122 @@ Logtalk user folder for details.
 Brief description of each file in this folder:
 
 
-lgtxml.xsl
-
+- `lgtxml.xsl`  
 	XSLT file for viewing XML files directly in a browser. The links 
 	in the (internally generated) HTML 4.01 files point to related XML 
 	files. UTF-8 encoding is assumed. Edit the file if you use a different 
 	encoding.
 
-
-lgthtml.xsl
-
+- `lgthtml.xsl`  
 	XSLT file to output HTML 4.01 files from the XML files. The links in 
 	the generated HTML files point to related HTML files. It can be used 
 	to batch convert XML files to HTML files. UTF-8 encoding is assumed.
 	Edit the file if you use a different encoding.
 
-
-lgtxhtml.xsl
-
+- `lgtxhtml.xsl`  
 	XSLT file to output XHTML 1.1 files from the XML files. The links in 
 	the generated XHTML files point to related XHTML files. It can be used 
 	to batch convert XML files to XHTML files. UTF-8 encoding is assumed. 
 	Edit the file if you use a different encoding.
 
-lgttxt.xsl
-
+- `lgttxt.xsl`  
 	XSLT file to output simple text files from the XML files. UTF-8 encoding 
 	is assumed. Edit the file if you use a different encoding.
 
-lgtpdf.xsl
-lgtpdfa4.xsl
-lgtpdfus.xsl
-
+- `lgtpdf.xsl`, `lgtpdfa4.xsl`, and `lgtpdfus.xsl`  
 	XSLT files to generate PDF files from the XML files (formatted either 
 	for A4 paper or US Letter paper) using XSL Formatting Objects. Tested 
-	with the XSL-FO processors RenderX 4.4 (http://www.renderx.com/) and 
-	Apache FOP 0.94 (http://xmlgraphics.apache.org/fop/).
+	with the XSL-FO processors RenderX 4.4 (<http://www.renderx.com/>) and 
+	Apache FOP 0.94 (<http://xmlgraphics.apache.org/fop/>).
 
-	The "lgtpdf.xsl" file defines a parameter for the paper format (either 
-	A4 or US Letter). The files "lgtpdfa4.xsl" and "lgtpdfus.xsl" import the
-	"lgtpdf.xsl" file and set the paper format parameter to the appropriate 
+	The `lgtpdf.xsl` file defines a parameter for the paper format (either 
+	A4 or US Letter). The files `lgtpdfa4.xsl` and `lgtpdfus.xsl` import the
+	`lgtpdf.xsl` file and set the paper format parameter to the appropriate 
 	value.
 
-
-ie50.xsl
-
+- `ie50.xsl`  
 	XSLT file for viewing XML files in Microsoft Internet Explorer 5.x 
 	(using the outdated Microsoft XML Parser; works with both Macintosh 
 	and Windows versions). The links in the (internally generated) HTML 
 	files point to related XML files. It can be used to browse and view 
 	the XML files directly.
 
-
-logtalk.dtd
-
+- `logtalk.dtd`  
 	DTD file describing the structure of the XML files generated by 
 	Logtalk.
-	
 
-custom.ent
-
+- `custom.ent`  
 	Document type description defining XML entities for personal data 
 	that may be used on Logtalk documenting directives.
 
-
-logtalk.rng
-
+- `logtalk.rng`  
 	RELAX NG file describing the structure of the XML files generated 
 	by Logtalk.
 
-
-logtalk.xsd
-
+- `logtalk.xsd`  
 	XML Schema file describing the structure of the XML files generated 
 	by Logtalk.
 
-
-logtalk.css
-
+- `logtalk.css`  
 	Cascade style sheet file to render the HTML/XHTML output of the XSL 
 	files in a web browser.
 
 
-lgt2pdf.sh
-	(bash shell script)
-lgt2pdf.js
-	(JScript command-line script for Windows; requires WSH 5.6 or later 
-	version)
-
+- `lgt2pdf.sh` and `lgt2pdf.js` 
 	Sample scripts to batch convert XML files to PDF files
 
-	Supported XSL-FO processors:
-		* Apache FOP processor (tested with version 0.94)
-			http://xmlgraphics.apache.org/fop/ 
-		* Lunasil Xinc processor (tested with version 2.02)
-			http://www.lunasil.com/index.html
-		* RenderX XEP processor (tested with version 3.8.1)
-			http://www.renderx.com/  
-
-	These script assume that the LOGTALKHOME and LOGTALKUSER environment 
-	variables are defined and that the chosen XSL-FO processor is available 
-	in the path.
+	Supported XSL-FO processors:  
+		* [Apache FOP processor](http://xmlgraphics.apache.org/fop/) (tested with version 0.94)  
+		* [Lunasil Xinc processor](http://www.lunasil.com/index.html) (tested with version 2.02)  
+		* [RenderX XEP processor](http://www.renderx.com/) (tested with version 3.8.1)  
 
 	The scripts should be called from the directory containing the XML 
 	files you wish to convert. Call the scripts with the help option for 
-	a description of the available optional parameters (type "cscript 
-	lgt2pdf.js help" or "lgt2pdf.sh -h"; depending on your Logtalk 
-	installation, you may simply need to type "lgt2pdf" in order to run 
+	a description of the available optional parameters (type `cscript 
+	lgt2pdf.js help` or `lgt2pdf.sh -h`; depending on your Logtalk 
+	installation, you may simply need to type `lgt2pdf` in order to run 
 	the script).
 
-
-lgt2html.sh
-	(bash shell script)
-lgt2html.js
-	(JScript command-line script for Windows; requires WSH 5.6 or 
-	later version)
-
+- `lgt2html.sh` and `lgt2html.js`  
 	Sample scripts to batch convert XML files to HTML files. These 
-	scripts also generate an "index.html" file which contains links 
+	scripts also generate an `index.html` file which contains links 
 	to all the converted files.
 	
-	Supported XSLT processors:
-		* libxslt (tested with version 1.1.8)
-			http://xmlsoft.org/XSLT/
-		* Xalan (tested with version 1.7.0)
-			http://xml.apache.org/xalan-c/index.html
-		* Sablotron (tested with version 1.0.1)
-			http://www.gingerall.com/charlie/ga/xml/p_sab.xml
-		* Microsoft MSXSL (only for the Windows JScript script)
-			http://msdn.microsoft.com/XML/XMLDownloads/default.aspx
-
-	These scripts assumes that the LOGTALKHOME and LOGTALKUSER environment 
-	variables are defined and that the chosen XSLT processor is available in 
-	the path.
+	Supported XSLT processors:  
+		* [libxslt](http://xmlsoft.org/XSLT/) (tested with version 1.1.8)  
+		* [Xalan](http://xml.apache.org/xalan-c/index.html) (tested with version 1.7.0)  
+		* [Sablotron](http://www.gingerall.com/charlie/ga/xml/p_sab.xml) (tested with version 1.0.1)  
+		* [Microsoft MSXSL](http://msdn.microsoft.com/XML/XMLDownloads/default.aspx) (only for the Windows JScript script)
 
 	The scripts should be called from the directory containing the XML files 
 	you wish to convert. Call the scripts with the help option for a description 
-	of the available optional parameters (type "cscript lgt2html.js help" or 
-	"lgt2html.sh -h"; depending on your Logtalk installation, you may simply 
-	need to type "lgt2html" in order to run the script).
+	of the available optional parameters (type `cscript lgt2html.js help` or 
+	`lgt2html.sh -h`; depending on your Logtalk installation, you may simply 
+	need to type `lgt2html` in order to run the script).
 
 
-lgt2xml.sh
-	(bash shell script)
-lgt2xml.js
-	(JScript command-line script for Windows; requires WSH 5.6 or 
-	later version)
+- `lgt2xml.sh` and `lgt2xml.js`  
 
 	Sample scripts for indexing the XML files in the current directory 
-	by generating an "index.html" file which contains links to all the 
-	files. In addition, these scripts also copies of the "lgtxml.xsl" 
-	and "logtalk.css" files to the current directory, allowing direct 
+	by generating an `index.html` file which contains links to all the 
+	files. In addition, these scripts also copies of the `lgtxml.xsl` 
+	and `logtalk.css` files to the current directory, allowing direct 
 	visualization of the XML files on a supported web browser.
-
-	These scripts assumes that the LOGTALKHOME and LOGTALKUSER environment 
-	variables are defined.
 
 	The scripts should be called from the directory containing the XML files 
 	you wish to index. Call the scripts with the help option for a description 
-	of the available optional parameters (type "cscript lgt2xml.js help" or 
-	"lgt2xml.sh -h"; depending on your Logtalk installation, you may simply 
-	need to type "lgt2xml" in order to run the script).
+	of the available optional parameters (type `cscript lgt2xml.js help` or 
+	`lgt2xml.sh -h`; depending on your Logtalk installation, you may simply 
+	need to type `lgt2xml` in order to run the script).
 
-
-lgt2txt.sh
-	(bash shell script)
-lgt2txt.js
-	(JScript command-line script for Windows; requires WSH 5.6 or 
-	later version)
-
+- `lgt2txt.sh` and `lgt2txt.js`  
 	Sample scripts to batch convert XML files to text files.
-
-	These scripts assumes that the LOGTALKHOME and LOGTALKUSER environment 
-	variables are defined.
 
 	The scripts should be called from the directory containing the XML files 
 	you wish to convert. Call the scripts with the help option for a description 
-	of the available optional parameters (type "cscript lgt2txt.js help" or 
-	"lgt2txt.sh -h"; depending on your Logtalk installation, you may simply 
-	need to type "lgt2txt" in order to run the script).
+	of the available optional parameters (type `cscript lgt2txt.js help` or 
+	`lgt2txt.sh -h`; depending on your Logtalk installation, you may simply 
+	need to type `lgt2txt` in order to run the script).
 
 
 Note that you can write other XSL files for converting the XML files to 
