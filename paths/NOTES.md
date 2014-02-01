@@ -36,7 +36,7 @@ Windows, Linux, Unix, and Unix-like operating-systems.
 Although you could customize this file by adding the paths to your own
 "libraries" (in order to easily load your own source code), this is
 preferably accomplished by customizing the settings file in the Logtalk
-user directory.
+user directory or in your Logtalk application directory.
 
 When manually loading Logtalk (instead of using the provided integration
 scripts and shortcuts), you will need to load the `paths.pl` into your

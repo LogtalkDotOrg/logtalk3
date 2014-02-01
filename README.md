@@ -138,6 +138,9 @@ Most directories include `NOTES.md` documenting files, which can be viewed
 as plain text in any text editor but also nicely rendered as Markdown files
 (for e.g. easy conversion to HTML).
 
+On POSIX systems, there's also a man page for each shell script. A list of
+all the scripts can be generated using the `apropos logtalk` command.
+
 
 9. UPGRADING
 ------------

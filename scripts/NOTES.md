@@ -29,6 +29,9 @@ they require WSH 5.6 or later version to be installed and should be run
 using `cscript.exe` from a DOS command line shell (you may download WSH 5.6
 from `http://msdn.microsoft.com/downloads/list/webdev.asp`).
 
+Man pages are provided for all POSIX shell scripts, which can be listed
+using the `apropos logtalk` command.
+
 - `build_release.sh`  
 	helper script for building most of the distribution files of a new 
 	Logtalk release; accepts as an optional argument a version identifier

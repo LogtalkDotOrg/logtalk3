@@ -26,4 +26,5 @@ by the Logtalk compiler at startup. If you delete this folder by accident,
 it will be recreated the next time you run Logtalk.
 
 You may set the value of the `scratch_directory` to this folder if you
-want to collect all temporary files in the same location.
+want to collect in the same location the Prolog temporary files that are
+generated when compiling Logtalk source files.
