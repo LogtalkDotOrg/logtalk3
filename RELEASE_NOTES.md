@@ -33,6 +33,8 @@ Documentation
 
 * IMPROVED: Navigation of the tools HTML documentation.
 
+* IMPROVED: Appearance of the POSIX shell script man pages.
+
 Tests
 -----
 
