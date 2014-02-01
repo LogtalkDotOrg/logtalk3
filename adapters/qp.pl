@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Qu-Prolog 9.0 and later versions
-%  Last updated on November 9, 2013
+%  Last updated on February 1, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -580,8 +580,20 @@ format(Format, Arguments) :-
 
 % '$lgt_prolog_term_expansion'(@callable, -callable)
 
-'$lgt_prolog_term_expansion'(_, _) :-
-	fail.
+% '$lgt_prolog_term_expansion'(@callable, -callable)
+
+'$lgt_prolog_term_expansion'((:- Directive), Expanded) :-
+	'$lgt_qp_directive_expansion'(Directive, Expanded0),
+	(	Expanded0 == [] ->
+		Expanded  == []
+	;	Expanded0 =  {ExpandedDirective} ->
+		Expanded  =  {(:- ExpandedDirective)}
+	;	Expanded  =  (:- Expanded0)
+	).
+
+
+'$lgt_qp_directive_expansion'(op(Priority, Specifier, ':'(Module,Operators)), {op(Priority, Specifier, Operators)}) :-
+	Module == user.
 
 
 % '$lgt_prolog_goal_expansion'(@callable, -callable)

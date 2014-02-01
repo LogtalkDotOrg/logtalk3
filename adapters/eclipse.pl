@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on November 9, 2013
+%  Last updated on February 1, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -559,6 +559,9 @@ setup_call_cleanup(_, _, _) :-
 '$lgt_eclipse_directive_expansion'(export(domain(Domain)), {export(domain(Domain))}).
 '$lgt_eclipse_directive_expansion'(export(struct(Struct)), {export(struct(Struct))}).
 '$lgt_eclipse_directive_expansion'(export(syntax_option(SyntaxOption)), {export(syntax_option(SyntaxOption))}).
+
+'$lgt_eclipse_directive_expansion'(op(Priority, Specifier, ':'(Module,Operators)), {op(Priority, Specifier, Operators)}) :-
+	Module == user.
 
 '$lgt_eclipse_directive_expansion'(pragma(Pragma), {pragma(Pragma)}).
 

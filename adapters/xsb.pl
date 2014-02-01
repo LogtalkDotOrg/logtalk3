@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for XSB 3.4.1 or later versions
-%  Last updated on November 4, 2013
+%  Last updated on February 1, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -533,6 +533,9 @@ setup_call_catcher_cleanup(Setup, Call, Catcher, Cleanup) :-
 
 '$lgt_xsb_directive_expansion'(local(PIs1), private(PIs2)) :-
 	'$lgt_xsb_conjunction_to_list'(PIs1, PIs2).
+
+'$lgt_xsb_directive_expansion'(op(Priority, Specifier, ':'(Module,Operators)), {op(Priority, Specifier, Operators)}) :-
+	Module == user.
 
 
 '$lgt_xsb_conjunction_to_list'(Term, [Term]) :-

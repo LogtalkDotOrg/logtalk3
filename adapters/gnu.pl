@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for GNU Prolog 1.4.2 (and later versions)
-%  Last updated on November 1, 2013
+%  Last updated on February 1, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -487,6 +487,8 @@ setup_call_cleanup(_, _, _) :-
 '$lgt_gnu_directive_expansion'(built_in_fd, {built_in_fd}).
 '$lgt_gnu_directive_expansion'(foreign(Template, Options), {foreign(Template, Options)}).
 '$lgt_gnu_directive_expansion'(foreign(Template), {foreign(Template)}).
+'$lgt_gnu_directive_expansion'(op(Priority, Specifier, ':'(Module,Operators)), {op(Priority, Specifier, Operators)}) :-
+	Module == user.
 
 
 % '$lgt_prolog_goal_expansion'(@callable, -callable)

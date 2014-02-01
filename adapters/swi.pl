@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SWI Prolog 6.0.0 and later versions
-%  Last updated on December 12, 2013
+%  Last updated on February 1, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -620,6 +620,9 @@
 	'$lgt_pp_module_'(_),
 	% ensure_loaded/1 directive used within a module (sloppy replacement for the use_module/1-2 directives)
 	'$lgt_swi_list_of_exports'(File, Module, Imports).
+
+'$lgt_swi_directive_expansion'(op(Priority, Specifier, Module:Operators), {op(Priority, Specifier, Operators)}) :-
+	Module == user.
 
 '$lgt_swi_directive_expansion'(reexport(File), reexport(Module, Exports)) :-
 	'$lgt_swi_list_of_exports'(File, Module, Exports).

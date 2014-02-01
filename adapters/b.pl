@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for B-Prolog 7.8 and later versions
-%  Last updated on November 1, 2013
+%  Last updated on February 1, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -520,6 +520,9 @@
 
 
 '$lgt_b_directive_expansion'(eager_consume, {eager_consume}).
+
+'$lgt_b_directive_expansion'(op(Priority, Specifier, ':'(Module,Operators)), {op(Priority, Specifier, Operators)}) :-
+	Module == user.
 
 '$lgt_b_directive_expansion'(table(':'(Head, N)), {table(':'(THead, N))}) :-
 	logtalk_load_context(entity_type, _),

@@ -28,6 +28,12 @@ RELEASE NOTES
 3.00.0 Alpha 35 - February ??, 2014
 ===================================
 
+Prolog adapter and integration files
+------------------------------------
+
+* ADDED: Support for compiling `op/3` directives where the declared operators
+are module explicit-qualified by `user`.
+
 Documentation
 -------------
 

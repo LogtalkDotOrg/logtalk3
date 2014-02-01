@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for YAP Prolog 6.3.4 and later versions
-%  Last updated on January 21, 2014
+%  Last updated on February 1, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -653,6 +653,9 @@
 	logtalk_load_context(entity_type, module),
 	% ensure_loaded/1 directive used within a module (sloppy replacement for the use_module/1-2 directives)
 	'$lgt_yap_list_of_exports'(File, Module, Imports).
+
+'$lgt_yap_directive_expansion'(op(Priority, Specifier, ':'(Module,Operators)), {op(Priority, Specifier, Operators)}) :-
+	Module == user.
 
 '$lgt_yap_directive_expansion'(reexport(File), reexport(Module, Exports)) :-
 	'$lgt_yap_list_of_exports'(File, Module, Exports).
