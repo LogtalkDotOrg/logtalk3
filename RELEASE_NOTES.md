@@ -33,6 +33,12 @@ Documentation
 
 * IMPROVED: Navigation of the tools HTML documentation.
 
+Tests
+-----
+
+* IMPROVED: The `logtalk_tester.sh` POSIX shell script now accepts any
+directory for saving test results instead of only local directories.
+
 
 3.00.0 Alpha 34 - January 30, 2014
 ==================================

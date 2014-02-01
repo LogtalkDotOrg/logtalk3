@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Unit testing automation script
-##   Last updated on January 22, 2014
+##   Last updated on January 31, 2014
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "`basename $0` 0.12"
+	echo "`basename $0` 0.13"
 	exit 0
 }
 
@@ -45,6 +45,7 @@ else
 	extension=''
 fi
 
+# default argument values
 base="$PWD"
 results="$base/tester_results"
 backend=yap
@@ -81,7 +82,7 @@ usage_help()
 	echo "     (possible values are b, cx, eclipse, gnu, qp, sicstus, swi, xsb, xsb64, xsbmt, xsbmt64, and yap)"
 	echo "  -m compilation mode (default is $mode)"
 	echo "     (possible values are optimal, normal, debug, and all)"
-	echo "  -d name of the sub-directory to store the test results (default is tester_results)"
+	echo "  -d directory to store the test results (default is ./tester_results)"
 	echo "  -h help"
 	echo
 	exit 0
@@ -184,7 +185,7 @@ elif [ "$m_arg" != "" ] ; then
 fi
 
 if [ "$d_arg" != "" ] ; then
-	results="$base/$d_arg"
+	results="$d_arg"
 fi
 
 mkdir -p "$results"
