@@ -31,6 +31,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: The `predicate_property/2` built-in method now returns the property
+`number_of_clauses(0)` for non-defined predicates.
+
 * FIXED: The `predicate_property/2` built-in method would not take into account
 multifile predicate clauses when computing the `number_of_clauses/1` property.
 

@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2012/07/03,
+		date is 2014/02/04,
 		comment is 'Unit tests for the "aliases" example.'
 	]).
 
@@ -36,7 +36,7 @@
 	test(aliases_3) :-
 		findall(Property, square(2)::predicate_property(side(_), Property), PropertiesUnsorted),
 		list::msort(PropertiesUnsorted, PropertiesSorted),
-		PropertiesSorted = [logtalk, public, static, alias_of(width(_)), declared_in(rectangle(_, _)), defined_in(rectangle(_, _)), scope(public)].
+		PropertiesSorted = [logtalk, public, static, alias_of(width(_)), declared_in(rectangle(_, _)), defined_in(rectangle(_, _)), number_of_clauses(_), scope(public)].
 
 	test(aliases_4) :-
 		findall(Property, square(2)::predicate_property(width(_), Property), AllProperties),
@@ -56,7 +56,7 @@
 	test(aliases_7) :-
 		findall(Property, circle(3)::predicate_property(r(_), Property), PropertiesUnsorted),
 		list::msort(PropertiesUnsorted, PropertiesSorted),
-		PropertiesSorted = [logtalk, public, static, alias_of(rx(_)), declared_in(ellipse(_, _)), defined_in(ellipse(_, _)), scope(public)].
+		PropertiesSorted = [logtalk, public, static, alias_of(rx(_)), declared_in(ellipse(_, _)), defined_in(ellipse(_, _)), number_of_clauses(_), scope(public)].
 
 	test(aliases_8) :-
 		findall(Property, circle(3)::predicate_property(rx(_), Property), AllProperties),
