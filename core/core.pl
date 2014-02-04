@@ -2359,12 +2359,14 @@ current_logtalk_flag(Flag, Value) :-
 	% we cannot make the mode/2 property deterministic as a predicate can support several different modes
 	'$lgt_predicate_property_'(TCtn, Functor/Arity, mode(Mode, Solutions)).
 '$lgt_predicate_property_user'(number_of_clauses(N), Pred, _, _, _, _, _, Def, _) :-
-	(	call(Def, Pred, _, _, _, DCtn),
-		functor(Pred, Functor, Arity),
-		'$lgt_predicate_property_'(DCtn, Functor/Arity, flags_clauses_line(_, N, _)) ->
+	call(Def, Pred, _, _, _, DCtn),
+	functor(Pred, Functor, Arity),
+	(	'$lgt_predicate_property_'(DCtn, Functor/Arity, flags_clauses_line(_, N0, _)) ->
 		true
-	;	fail
-	).
+	;	N0 is 0
+	),
+	findall(N1, '$lgt_predicate_property_'(DCtn, Functor/Arity, number_of_clauses_from(N1, _)), N1s),
+	'$lgt_sum_list'([N0| N1s], N).
 
 
 '$lgt_predicate_property_built_in_method'(logtalk, _, _, _, _).

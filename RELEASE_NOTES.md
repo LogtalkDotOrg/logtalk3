@@ -31,6 +31,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* FIXED: The `predicate_property/2` built-in method would not take into account
+multifile predicate clauses when computing the `number_of_clauses/1` property.
+
 * FIXED: Don't try to calculate the number of clauses of module multifile
 predicates defined within objects or categories as that information is not
 currently available using the reflection API.
