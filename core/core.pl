@@ -8363,7 +8363,7 @@ current_logtalk_flag(Flag, Value) :-
 % entity) for use with the reflection built-in predicates and methods
 
 '$lgt_clause_number'(Other::Head, N) :-
-	% clause for multifile predicate
+	% clause for object or category multifile predicate
 	!,
 	functor(Head, Functor, Arity),
 	(	retract('$lgt_pp_number_of_clauses_'(Other, Functor, Arity, N0)) ->
@@ -8373,6 +8373,10 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_save_predicate_line_definition_property'(Other, Functor, Arity)
 	),
 	assertz('$lgt_pp_number_of_clauses_'(Other, Functor, Arity, N)).
+
+'$lgt_clause_number'(':'(_, _), 0) :-
+	% clause for module multifile predicate
+	!.
 
 '$lgt_clause_number'({Head}, N) :-
 	% pre-compiled predicate clause

@@ -28,6 +28,13 @@ RELEASE NOTES
 3.00.0 Alpha 35 - February ??, 2014
 ===================================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Don't try to calculate the number of clauses of module multifile
+predicates defined within objects or categories as that information is not
+currently available using the reflection API.
+
 Prolog adapter and integration files
 ------------------------------------
 
