@@ -300,6 +300,14 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% '$lgt_prolog_os_file_name'(+atom, -atom)
+% '$lgt_prolog_os_file_name'(-atom, +atom)
+%
+% converts between Prolog internal file paths and operating-system paths
+
+'$lgt_prolog_os_file_name'(Path, Path).
+
+
 % '$lgt_expand_path'(+nonvar, -atom)
 %
 % expands a file path to a full path
