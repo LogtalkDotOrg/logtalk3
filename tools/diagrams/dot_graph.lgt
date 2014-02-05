@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/10,
+		date is 2014/02/05,
 		comment is 'Predicates for generating graph files in the DOT language.'
 	]).
 
@@ -137,6 +137,7 @@
 	graph_style_margin_color(files, rounded, 10, snow2).
 	graph_style_margin_color(file, rounded, 10, snow).
 	graph_style_margin_color(external, rounded, 10, white).
+	graph_style_margin_color(entity, rounded, 10, snow).
 
 	node(Stream, Identifier, Label, Contents, Kind, Options) :-
 		node_shape_style_color(Kind, Shape, Style, Color),
@@ -183,6 +184,9 @@
 	node_shape_style_color(external_category, component, '"filled,dashed"', cyan).
 	node_shape_style_color(external_module, tab, '"filled,dashed"', gainsboro).
 	node_shape_style_color(external_file, box, '"filled,dashed"', turquoise).
+	% predicates
+	node_shape_style_color(predicate, ellipse, filled, gold).
+	node_shape_style_color(external_predicate, ellipse, '"filled,dashed"', gold).
 
 	edge(Stream, Start, End, Labels, Kind, Options) :-
 		edge_arrow(Kind, ArrowHead),

@@ -54,6 +54,12 @@ Documentation
 
 * IMPROVED: Appearance of the POSIX shell script man pages.
 
+Tools
+-----
+
+* ADDED: Support for generating entity predicate call graph diagrams for a
+single entity to the `diagrams` tool.
+
 Tests
 -----
 

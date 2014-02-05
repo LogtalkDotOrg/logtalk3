@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2014/1/10</code>
+            <code>2014/2/5</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -48,7 +48,44 @@
       <div class="public">
         <h2>Public interface</h2>
         <div class="section">
-          <p class="comment">(see related entities)</p>
+          <h3 class="code">entity/2</h3>
+          <blockquote>
+            <p class="comment">Creates a diagram for a single entity using the specified options.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>entity(Entity,Options)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>entity(+atom,+list(compound)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 class="code">entity/1</h3>
+          <blockquote>
+            <p class="comment">Creates a diagram for a single entity using default options.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>entity(Entity)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>entity(+atom) &ndash; one</code>
+            </dd>
+          </dl>
         </div>
       </div>
       <div class="protected">
@@ -60,7 +97,13 @@
       <div class="private">
         <h2>Private predicates</h2>
         <div class="section">
-          <p class="comment">(see related entities)</p>
+          <h3 class="code">external_predicate_/1</h3>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>dynamic</code>
+            </dd>
+          </dl>
         </div>
       </div>
     </div>
