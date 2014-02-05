@@ -352,7 +352,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 
 '$lgt_directory_exists'(Directory) :-
 	'$lgt_expand_path'(Directory, ExpandedPath),
-	absolute_file_name(ExpandedPath, [access(exist), file_type(directory)], _).
+	absolute_file_name(ExpandedPath, [access(exist), file_type(directory), file_errors(fail)], _).
 
 
 % '$lgt_current_directory'(-atom)
@@ -377,7 +377,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 
 '$lgt_make_directory'(Directory) :-
 	'$lgt_expand_path'(Directory, Path),
-	(	absolute_file_name(Path, [access(exist), file_type(directory)], _) ->
+	(	absolute_file_name(Path, [access(exist), file_type(directory), file_errors(fail)], _) ->
 		true
 	;	atom_concat('mkdir ', Path, Command),
 		unix(system(Command))
