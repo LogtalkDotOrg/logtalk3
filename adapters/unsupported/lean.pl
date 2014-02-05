@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Lean Prolog 3.7.10 and later versions
-%  Last updated on November 1, 2013
+%  Last updated on February 5, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -206,7 +206,7 @@ setup_call_cleanup(_, _, _) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_prolog_meta_predicate'(+callable, ?callable, ?atom)
+% '$lgt_prolog_meta_predicate'(@callable, ?callable, ?atom)
 %
 % table of meta-predicate patterns for proprietary built-in predicates;
 % the third argument, which must be either "predicate" or "control_construct",

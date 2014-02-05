@@ -121,7 +121,7 @@ numbervars(Term, From, Next) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_prolog_meta_predicate'(+callable, ?callable, ?atom)
+% '$lgt_prolog_meta_predicate'(@callable, ?callable, ?atom)
 %
 % table of meta-predicate patterns for proprietary built-in predicates;
 % the third argument, which must be either "predicate" or "control_construct",

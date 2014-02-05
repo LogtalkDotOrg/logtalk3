@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for BinProlog 8.x~10.x
-%  Last updated on November 1, 2013
+%  Last updated on February 5, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -164,45 +164,45 @@ setup_call_cleanup(_, _, _) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_prolog_meta_predicate'(?callable, ?atom).
+% '$lgt_prolog_meta_predicate'(@callable, ?callable, ?atom)
 
-'$lgt_prolog_meta_predicate'(all_answers(*, 0, *), predicate).
-'$lgt_prolog_meta_predicate'(all_but_at_least(*, *, 0, *), predicate).
-'$lgt_prolog_meta_predicate'(answer_of(*, 0), predicate).
+'$lgt_prolog_meta_predicate'(all_answers(_, _, _), all_answers(*, 0, *), predicate).
+'$lgt_prolog_meta_predicate'(all_but_at_least(_, _, _, _), all_but_at_least(*, *, 0, *), predicate).
+'$lgt_prolog_meta_predicate'(answer_of(_, _), answer_of(*, 0), predicate).
 
-'$lgt_prolog_meta_predicate'(bg(0), predicate).
-'$lgt_prolog_meta_predicate'(bg(0, *), predicate).
-'$lgt_prolog_meta_predicate'(bg(0, *, *), predicate).
-'$lgt_prolog_meta_predicate'(bg(0, *, *, *), predicate).
-'$lgt_prolog_meta_predicate'(bg(0, *, *, *, *, *, *), predicate).
+'$lgt_prolog_meta_predicate'(bg(_), bg(0), predicate).
+'$lgt_prolog_meta_predicate'(bg(_, _), bg(0, *), predicate).
+'$lgt_prolog_meta_predicate'(bg(_, _, _), bg(0, *, *), predicate).
+'$lgt_prolog_meta_predicate'(bg(_, _, _, _), bg(0, *, *, *), predicate).
+'$lgt_prolog_meta_predicate'(bg(_, _, _, _, _, _, _), bg(0, *, *, *, *, *, *), predicate).
 
-'$lgt_prolog_meta_predicate'(bp_only(0), predicate).
-'$lgt_prolog_meta_predicate'(bp_only(0, 0), predicate).
+'$lgt_prolog_meta_predicate'(bp_only(_), bp_only(0), predicate).
+'$lgt_prolog_meta_predicate'(bp_only(_, _), bp_only(0, 0), predicate).
 
-'$lgt_prolog_meta_predicate'(calls_cont(0), predicate).
-'$lgt_prolog_meta_predicate'(call_ifdef(0, 0), predicate).
+'$lgt_prolog_meta_predicate'(calls_cont(_), calls_cont(0), predicate).
+'$lgt_prolog_meta_predicate'(call_ifdef(_, _), call_ifdef(0, 0), predicate).
 
-'$lgt_prolog_meta_predicate'(det_call(0), predicate).
+'$lgt_prolog_meta_predicate'(det_call(_), det_call(0), predicate).
 
-'$lgt_prolog_meta_predicate'(find_at_most(*, *, 0, *), predicate).
-'$lgt_prolog_meta_predicate'(findall(*, 0, *, *), predicate).
+'$lgt_prolog_meta_predicate'(find_at_most(_, _, _, _), find_at_most(*, *, 0, *), predicate).
+'$lgt_prolog_meta_predicate'(findall(_, _, _, _), findall(*, 0, *, *), predicate).
 
-'$lgt_prolog_meta_predicate'(forall(0), predicate).
+'$lgt_prolog_meta_predicate'(forall(_), forall(0), predicate).
 
-'$lgt_prolog_meta_predicate'(gc_call(0), predicate).
+'$lgt_prolog_meta_predicate'(gc_call(_), gc_call(0), predicate).
 
-'$lgt_prolog_meta_predicate'(if_any(0, 0, 0), predicate).
+'$lgt_prolog_meta_predicate'(if_any(_, _, _), if_any(0, 0, 0), predicate).
 
-'$lgt_prolog_meta_predicate'(new_engine(0, *, *), predicate).
-'$lgt_prolog_meta_predicate'(open_engine(0, *, *), predicate).
+'$lgt_prolog_meta_predicate'(new_engine(_, _, _), new_engine(0, *, *), predicate).
+'$lgt_prolog_meta_predicate'(open_engine(_, _, _), open_engine(0, *, *), predicate).
 
-'$lgt_prolog_meta_predicate'(not(0), predicate).
+'$lgt_prolog_meta_predicate'(not(_), not(0), predicate).
 
-'$lgt_prolog_meta_predicate'(nth_answer(*, 0), predicate).
+'$lgt_prolog_meta_predicate'(nth_answer(_, _), nth_answer(*, 0), predicate).
 
-'$lgt_prolog_meta_predicate'(timed_call(*, 0, *, *), predicate).
+'$lgt_prolog_meta_predicate'(timed_call(_, _, _, _), timed_call(*, 0, *, *), predicate).
 
-'$lgt_prolog_meta_predicate'(topcall(0), predicate).
+'$lgt_prolog_meta_predicate'(topcall(_), topcall(0), predicate).
 
 
 % '$lgt_prolog_meta_directive'(@callable, -callable)

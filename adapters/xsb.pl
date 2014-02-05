@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for XSB 3.4.1 or later versions
-%  Last updated on February 1, 2014
+%  Last updated on February 5, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -121,7 +121,7 @@ setup_call_catcher_cleanup(Setup, Call, Catcher, Cleanup) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_prolog_meta_predicate'(+callable, ?callable, ?atom)
+% '$lgt_prolog_meta_predicate'(@callable, ?callable, ?atom)
 %
 % table of meta-predicate patterns for proprietary built-in predicates;
 % the third argument, which must be either "predicate" or "control_construct",

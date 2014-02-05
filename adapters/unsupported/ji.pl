@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for JIProlog 3.1.0-1 or later versions
-%  Last updated on November 1, 2013
+%  Last updated on February 5, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -162,7 +162,7 @@ format(Format, Arguments) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_prolog_meta_predicate'(?callable, ?atom).
+% '$lgt_prolog_meta_predicate'(@callable, ?callable, ?atom)
 
 '$lgt_prolog_meta_predicate'(not(_), not(0), predicate).
 '$lgt_prolog_meta_predicate'(one(_), one(0), predicate).

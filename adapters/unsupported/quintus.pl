@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Quintus Prolog 3.3~3.5
-%  Last updated on November 1, 2013
+%  Last updated on February 5, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -180,10 +180,10 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_prolog_meta_predicate'(?callable, ?atom).
+% '$lgt_prolog_meta_predicate'(@callable, ?callable, ?atom)
 
-'$lgt_prolog_meta_predicate'(not(0), predicate).
-'$lgt_prolog_meta_predicate'(on_exception(*, 0, 0), predicate).
+'$lgt_prolog_meta_predicate'(not(_), not(0), predicate).
+'$lgt_prolog_meta_predicate'(on_exception(_, _, _), on_exception(*, 0, 0), predicate).
 
 
 % '$lgt_prolog_meta_directive'(@callable, -callable)
@@ -544,11 +544,11 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_read_term'(@stream, -term, +list, -position)
+% '$lgt_read_term'(@stream, -term, +list, -position, -list)
 
-'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd) :-
+'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, Variables) :-
 	line_count(Stream, LineBegin),
-	read_term(Stream, Options, Term),
+	read_term(Stream, [variable_names(Variables)| Options], Term),
 	line_count(Stream, LineEnd).
 
 
@@ -647,6 +647,20 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 
 %:- multifile('$logtalk.print_message_token'/3).
 %:- dynamic('$logtalk.print_message_token'/3).
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  term hashing
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% term_hash(@callable, +integer, +integer, -integer)
+
+term_hash(_, _, _, _) :-
+	fail.
 
 
 
