@@ -14556,7 +14556,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_write_encoding_directive'(Stream) :-
 	(	'$lgt_prolog_feature'(encoding_directive, full),
 		'$lgt_pp_file_encoding_'(_, Encoding) ->
-		write_canonical(Stream, (:- encoding(Encoding))), write(Stream, '.\n')
+		write_canonical(Stream, (:- encoding(Encoding))), write(Stream, '.'), nl(Stream)
 	;	true
 	).
 
@@ -14568,7 +14568,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_write_logtalk_directives'(Stream) :-
 	'$lgt_pp_directive_'(Directive),
-		write_canonical(Stream, (:- Directive)), write(Stream, '.\n'),
+		write_canonical(Stream, (:- Directive)), write(Stream, '.'), nl(Stream),
 	fail.
 
 '$lgt_write_logtalk_directives'(_).
@@ -14586,7 +14586,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_write_prolog_terms'(off, Stream) :-
 	'$lgt_pp_prolog_term_'(Term, _),
-		write_canonical(Stream, Term), write(Stream, '.\n'),
+		write_canonical(Stream, Term), write(Stream, '.'), nl(Stream),
 	fail.
 
 '$lgt_write_prolog_terms'(_, _).
@@ -14616,7 +14616,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_write_dcl_clauses'(off, Stream, _) :-
 	'$lgt_pp_dcl_'(Clause),
-		write_canonical(Stream, Clause), write(Stream, '.\n'),
+		write_canonical(Stream, Clause), write(Stream, '.'), nl(Stream),
 	fail.
 
 '$lgt_write_dcl_clauses'(_, _, _).
@@ -14629,7 +14629,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_write_def_clauses'(off, Stream, _) :-
 	'$lgt_pp_final_def_'(Clause),
-		write_canonical(Stream, Clause), write(Stream, '.\n'),
+		write_canonical(Stream, Clause), write(Stream, '.'), nl(Stream),
 	fail.
 
 '$lgt_write_def_clauses'(_, _, _).
@@ -14642,7 +14642,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_write_ddef_clauses'(off, Stream, _) :-
 	'$lgt_pp_final_ddef_'(Clause),
-		write_canonical(Stream, Clause), write(Stream, '.\n'),
+		write_canonical(Stream, Clause), write(Stream, '.'), nl(Stream),
 	fail.
 
 '$lgt_write_ddef_clauses'(_, _, _).
@@ -14655,7 +14655,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_write_super_clauses'(off, Stream, _) :-
 	'$lgt_pp_super_'(Clause),
-		write_canonical(Stream, Clause), write(Stream, '.\n'),
+		write_canonical(Stream, Clause), write(Stream, '.'), nl(Stream),
 	fail.
 
 '$lgt_write_super_clauses'(_, _, _).
@@ -14670,14 +14670,14 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_write_alias_clauses'(off, Stream, _, Rnm) :-
 	'$lgt_pp_predicate_alias_'(Entity, Pred, Alias),
 		Clause =.. [Rnm, Entity, Pred, Alias],
-		write_canonical(Stream, Clause), write(Stream, '.\n'),
+		write_canonical(Stream, Clause), write(Stream, '.'), nl(Stream),
 	fail.
 
 '$lgt_write_alias_clauses'(SourceData, Stream, Path, Rnm) :-
 	Catchall =.. [Rnm, _, Pred, Pred],
 	(	SourceData == on ->
 		'$lgt_write_term_and_source_location'(Stream, Catchall, aux, Path+1)
-	;	write_canonical(Stream, Catchall), write(Stream, '.\n')
+	;	write_canonical(Stream, Catchall), write(Stream, '.'), nl(Stream)
 	).
 
 
@@ -14688,7 +14688,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_write_entity_clauses'(off, Stream) :-
 	'$lgt_pp_final_entity_clause_'(Clause, _),
-		write_canonical(Stream, Clause), write(Stream, '.\n'),
+		write_canonical(Stream, Clause), write(Stream, '.'), nl(Stream),
 	fail.
 
 '$lgt_write_entity_clauses'(_, _).
@@ -14701,7 +14701,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_write_entity_aux_clauses'(off, Stream, _) :-
 	'$lgt_pp_final_entity_aux_clause_'(Clause),
-		write_canonical(Stream, Clause), write(Stream, '.\n'),
+		write_canonical(Stream, Clause), write(Stream, '.'), nl(Stream),
 	fail.
 
 '$lgt_write_entity_aux_clauses'(_, _, _).
@@ -14730,8 +14730,8 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_extends_protocol_'/3),
 	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_complemented_object_'/5),
 	% file runtime clauses
-	write_canonical(Stream, (:- multifile('$lgt_loaded_file_'/7))), write(Stream, '.\n'),
-	write_canonical(Stream, (:- dynamic('$lgt_loaded_file_'/7))), write(Stream, '.\n'),
+	write_canonical(Stream, (:- multifile('$lgt_loaded_file_'/7))), write(Stream, '.'), nl(Stream),
+	write_canonical(Stream, (:- dynamic('$lgt_loaded_file_'/7))), write(Stream, '.'), nl(Stream),
 	% we must keep the list of flags sorted so that we can use a simple term comparison
 	% to later check when reloading a file if the explicit flags are the same as before
 	(	setof(Flag, Name^Value^('$lgt_pp_file_compiler_flag_'(Name,Value), Flag =.. [Name,Value]), Flags) ->
@@ -14755,7 +14755,7 @@ current_logtalk_flag(Flag, Value) :-
 	Clause = '$lgt_loaded_file_'(Basename, Directory, Mode, Flags, TextProperties, PrologFile, TimeStamp),
 	(	SourceData == on ->
 		'$lgt_write_term_and_source_location'(Stream, Clause, aux, Path+1)
-	;	write_canonical(Stream, Clause), write(Stream, '.\n')
+	;	write_canonical(Stream, Clause), write(Stream, '.'), nl(Stream)
 	).
 
 
@@ -14763,8 +14763,8 @@ current_logtalk_flag(Flag, Value) :-
 	functor(Clause, Functor, Arity),
 	(	\+ '$lgt_pp_file_runtime_clause_'(Clause) ->
 		true
-	;	write_canonical(Stream, (:- multifile(Functor/Arity))), write(Stream, '.\n'),
-		write_canonical(Stream, (:- dynamic(Functor/Arity))), write(Stream, '.\n'),
+	;	write_canonical(Stream, (:- multifile(Functor/Arity))), write(Stream, '.'), nl(Stream),
+		write_canonical(Stream, (:- dynamic(Functor/Arity))), write(Stream, '.'), nl(Stream),
 		(	SourceData == on ->
 			(	'$lgt_pp_file_runtime_clause_'(Clause),
 				'$lgt_write_term_and_source_location'(Stream, Clause, aux, Path+1),
@@ -14772,7 +14772,7 @@ current_logtalk_flag(Flag, Value) :-
 			;	true
 			)
 		;	(	'$lgt_pp_file_runtime_clause_'(Clause),
-				write_canonical(Stream, Clause), write(Stream, '.\n'),
+				write_canonical(Stream, Clause), write(Stream, '.'), nl(Stream),
 				fail
 			;	true
 			)
@@ -14792,7 +14792,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_initialization_goal'(Goal),
 	(	Goal == true ->
 		true
-	;	write_canonical(Stream, (:- initialization(Goal))), write(Stream, '.\n')
+	;	write_canonical(Stream, (:- initialization(Goal))), write(Stream, '.'), nl(Stream)
 	).
 
 
