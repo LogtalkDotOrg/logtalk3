@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/01/02,
+		date is 2014/02/06,
 		comment is 'Built-in object providing message priting, debugging, library, source file, and hacking methods.']).
 
 	:- built_in.
@@ -361,7 +361,7 @@
 		atom_concat(Directory, Basename, Path),
 		{'$lgt_parent_file_'(Path, Parent)}.
 	loaded_file_property(library(Library), _, Directory, _, _, _, _, _) :-
-		logtalk_library_path(Library, Location),
+		logtalk_library_path(Library, _),
 		{'$lgt_expand_library_path'(Library, Directory)}, !.
 
 	compile_aux_clauses(Clauses) :-
