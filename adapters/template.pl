@@ -549,8 +549,8 @@ numbervars(Term, From, Next) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%:- multifile('$logtalk.print_message_token'/3).
-%:- dynamic('$logtalk.print_message_token'/3).
+%:- multifile('$logtalk.print_message_token'/5).
+%:- dynamic('$logtalk.print_message_token'/5).
 
 
 

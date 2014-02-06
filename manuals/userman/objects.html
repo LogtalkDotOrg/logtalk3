@@ -460,7 +460,7 @@ The following predicates are defined:
 		<dd>Prints a message term after converting it into a list of tokens using the <code>message_tokens//2</code> hook non-terminal. When the conversion fails, the message term itself is printed.</dd>
 	<dt><code>print_message_tokens(Stream, Prefix, Tokens)</code></dt>
 		<dd>Prints a list of message tokens to the specified stream and prefixing each line with the specified prefix.</dd>
-	<dt><code>print_message_token(Stream, Token)</code></dt>
+	<dt><code>print_message_token(Stream, Prefix, Token, Tokens)</code></dt>
 		<dd>Hook predicate, declared multifile and dynamic, allowing the default printing of a token to be overridden.</dd>
 	<dt><code>message_tokens(Term, Component)</code></dt>
 		<dd>Hook non-terminal, declared multifile and dynamic, allowing the translation of a message into a list of tokens for printing.</dd>
@@ -484,7 +484,7 @@ To use these predicates, simply send the corresponding message to the <code>logt
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: December 12, 2013</span>
+		<span>Last updated on: February 6, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="messages.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="protocols.html">next</a></span><br/>

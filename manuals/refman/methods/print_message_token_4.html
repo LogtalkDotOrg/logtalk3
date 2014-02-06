@@ -19,7 +19,7 @@
 
 <head>
 	<meta http-equiv="content-type" content="application/xml+xhtml; charset=utf-8" />
-	<title>Logtalk built-in method: print_message_token/2</title>
+	<title>Logtalk built-in method: print_message_token/4</title>
 	<link rel="stylesheet" href="../../screen.css" type="text/css" media="screen"/>
 	<link rel="stylesheet" href="../../print.css" type="text/css" media="print"/>
 </head>
@@ -27,23 +27,23 @@
 <body>
 
 <div class="top-left">Logtalk reference manual</div>
-<div class="top-right">Built-in method: print_message_token/2</div>
+<div class="top-right">Built-in method: print_message_token/4</div>
 <div class="bottom-left"><span class="page"/></div>
 <div class="bottom-right"><span class="page"/></div>
-<div class="navtop"><a href="../../index.html">Contents</a> &gt; <a href="../index.html">Reference Manual</a> &gt; <a href="../index.html#methods">Built-in Methods</a> &gt; print_message_token/2</div>
+<div class="navtop"><a href="../../index.html">Contents</a> &gt; <a href="../index.html">Reference Manual</a> &gt; <a href="../index.html#methods">Built-in Methods</a> &gt; print_message_token/4</div>
 
-<h2 id="methods_print_message_token_2" class="codenp">print_message_token/2</h2>
+<h2 id="methods_print_message_token_4" class="codenp">print_message_token/4</h2>
 
 <h4>Description</h4>
 
-<pre>print_message_token(Stream, Token)</pre>
+<pre>print_message_token(Stream, Prefix, Token, Tokens)</pre>
 <p>
 User-defined hook method for printing a message token, declared in the <code>logtalk</code> built-in object as a public, multifile, and dynamic predicate. It allows the user to intercept the printing of a message token. This hook method is automatically called by the <a href="print_message_tokens_3.html"><code>print_message_tokens/3</code></a> built-in method for each token.
 </p>
 
 <h4>Template and modes</h4>
 
-<pre>print_message_token(@stream_or_alias, @callable)</pre>
+<pre>print_message_token(@stream_or_alias, @atom, @nonvar, @list(nonvar))</pre>
 
 <h4>Errors</h4>
 
@@ -53,17 +53,17 @@ User-defined hook method for printing a message token, declared in the <code>log
 
 <h4>Examples</h4>
 
-<pre>:- multifile(logtalk::print_message_token/2).
-:- dynamic(logtalk::print_message_token/2).
+<pre>:- multifile(logtalk::print_message_token/4).
+:- dynamic(logtalk::print_message_token/4).
 
 % ignore all flush tokens
-logtalk::print_message_token(_, flush).
+logtalk::print_message_token(_Stream, _Prefix, flush, _Tokens).
 </pre>
 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: May 13, 2013</span>
+		<span>Last updated on: February 6, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="print_message_tokens_3.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="../index.html#methods">next</a></span><br/>

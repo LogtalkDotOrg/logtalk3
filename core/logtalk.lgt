@@ -50,25 +50,25 @@
 	]).
 
 	:- public(print_message_tokens/3).
-	:- mode(print_message_tokens(@stream_or_alias, +atom, @list(term)), one).
+	:- mode(print_message_tokens(@stream_or_alias, +atom, @list(nonvar)), one).
 	:- info(print_message_tokens/3, [
 		comment is 'Print the messages tokens to the given stream, prefixing each line with the specified atom.',
 		argnames is ['Stream', 'Prefix', 'Tokens']
 	]).
 
-	:- public(print_message_token/2).
-	:- multifile(print_message_token/2).
-	:- dynamic(print_message_token/2).
-	:- mode(print_message_token(@steream_or_alias, @nonvar), zero_or_one).
-	:- info(print_message_token/2, [
+	:- public(print_message_token/4).
+	:- multifile(print_message_token/4).
+	:- dynamic(print_message_token/4).
+	:- mode(print_message_token(@stream_or_alias, @atom, @nonvar, @list(nonvar)), zero_or_one).
+	:- info(print_message_token/4, [
 		comment is 'User-defined hook predicate for printing a message token (at_same_line, nl, flush, Format-Arguments, ansi(Attributes,Format,Arguments), begin(Kind,Variable), and end(Variable)).',
-		argnames is ['Stream', 'Token']
+		argnames is ['Stream', 'Prefix', 'Token', 'Tokens']
 	]).
 
 	:- public(message_tokens//2).
 	:- multifile(message_tokens//2).
 	:- dynamic(message_tokens//2).
-	:- mode(message_tokens(@steream_or_alias, -list(term)), zero_or_one).
+	:- mode(message_tokens(@steream_or_alias, -list(nonvar)), zero_or_one).
 	:- info(message_tokens//2, [
 		comment is 'User-defined hook grammar rule for converting a message into a list of tokens (at_same_line, nl, flush, Format-Arguments, ansi(Attributes,Format,Arguments), begin(Kind,Variable), and end(Variable)).',
 		argnames is ['Message', 'Tokens']
@@ -77,7 +77,7 @@
 	:- public(message_prefix_stream/4).
 	:- multifile(message_prefix_stream/4).
 	:- dynamic(message_prefix_stream/4).
-	:- mode(message_prefix_stream(@nonvar, @callable, @atom, @list(term)), zero_or_more).
+	:- mode(message_prefix_stream(@nonvar, @callable, @atom, @stream_or_alias), zero_or_more).
 	:- info(message_prefix_stream/4, [
 		comment is 'Message line prefix and stream to be used when printing a message given its kind and component.',
 		argnames is ['Kind', 'Component', 'Prefix', 'Stream']
@@ -86,7 +86,7 @@
 	:- public(message_hook/4).
 	:- multifile(message_hook/4).
 	:- dynamic(message_hook/4).
-	:- mode(message_hook(@nonvar, @callable, @atom, @list(term)), zero_or_more).
+	:- mode(message_hook(@nonvar, @callable, @atom, @list(nonvar)), zero_or_more).
 	:- info(message_hook/4, [
 		comment is 'User-defined hook predicate for intercepting message printing calls.',
 		argnames is ['Message', 'Kind', 'Component', 'Tokens']
@@ -300,7 +300,7 @@
 	print_message_tokens_((-), _, _).
 	print_message_tokens_([], _, _).
 	print_message_tokens_([Token| Tokens], Stream, Prefix) :-
-		(	print_message_token(Stream, Token) ->
+		(	print_message_token(Stream, Prefix, Token, Tokens) ->
 			% token printing intercepted by user-defined code
 			true
 		;	% no user-defined token printing; use Logtalk default

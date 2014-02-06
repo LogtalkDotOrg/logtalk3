@@ -31,6 +31,12 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: The `logtalk::print_message_token/2` method have been extended with
+two arguments (the line prefix and the list of remaining tokens) as some
+applications require this additional information. Definitions of this hook
+predicate must be changed to comply with the `logtalk::print_message_token/4`
+method declaration.
+
 * CHANGED: The `predicate_property/2` built-in method now returns the property
 `number_of_clauses(0)` for non-defined predicates.
 
