@@ -523,7 +523,9 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 % '$lgt_current_date'(?integer, ?integer, ?integer)
 
 '$lgt_current_date'(Year, Month, Day) :-
-	date(date(Day, Month, Year)).
+	date(date(Year0, Month0, Day)),
+	Year is 1900 + Year0,
+	Month is Month0 + 1.
 
 
 % '$lgt_current_time'(?integer, ?integer, ?integer)
