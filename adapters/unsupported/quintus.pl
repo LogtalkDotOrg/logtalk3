@@ -546,6 +546,41 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
+%  abstraction of the standard open/4 and close/1 predicates for dealing
+%  with the alias/1 option in old non-compliant systems
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% '$lgt_open'(+atom, +atom, -stream, @list)
+
+'$lgt_open'(File, Mode, Stream, Options) :-
+	(	Options = [alias(Alias)| OtherOptions]) ->
+		open(File, Mode, OtherOptions, Stream),
+		'$lgt_quintus_save_stream_alias'(Stream, Alias)
+	;	open(Source, Mode, Options, Stream)
+	).
+
+
+% '$lgt_close'(@stream)
+
+'$lgt_close'(Stream) :-
+	retractall('$lgt_quintus_stream_alias'(Stream, _)),
+	close(Stream).
+
+
+'$lgt_quintus_save_stream_alias'(Stream, Alias) :-
+	retractall('$lgt_quintus_stream_alias'(Stream, _)),
+	asserta('$lgt_quintus_stream_alias'(Stream, Alias)).
+
+
+stream_property(Stream, alias(Alias)) :-
+	'$lgt_quintus_stream_alias'(Stream, Alias), !.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
 %  customized version of the read_term/3 predicate for returning the term
 %  position (start and end lines; needed for improved error messages)
 %

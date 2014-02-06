@@ -4853,7 +4853,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_file'(SourceFile, PrologFile) :-
 	% open the Logtalk source code file for reading
 	catch(
-		open(SourceFile, read, Input, [alias(logtalk_compiler_input)]),
+		'$lgt_open'(SourceFile, read, Input, [alias(logtalk_compiler_input)]),
 		OpenError,
 		'$lgt_compiler_open_stream_error_handler'(OpenError)
 	),
@@ -4870,7 +4870,7 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	% open a corresponding Prolog file for writing generated code using any found encoding/1 directive
 	catch(
-		open(PrologFile, write, Output, [alias(logtalk_compiler_output)| OutputOptions]),
+		'$lgt_open'(PrologFile, write, Output, [alias(logtalk_compiler_output)| OutputOptions]),
 		OpenError,
 		'$lgt_compiler_error_handler'(OpenError)
 	),
@@ -4885,14 +4885,14 @@ current_logtalk_flag(Flag, Value) :-
 		Error,
 		'$lgt_compiler_error_handler'(Error)
 	),
-	close(NewInput),
+	'$lgt_close'(NewInput),
 	% finish writing the generated Prolog file
 	catch(
 		'$lgt_write_runtime_tables'(Output),
 		OutputError,
 		'$lgt_compiler_stream_io_error_handler'(Output, OutputError)
 	),
-	close(Output),
+	'$lgt_close'(Output),
 	'$lgt_restore_global_operator_table'.
 
 
@@ -4932,8 +4932,8 @@ current_logtalk_flag(Flag, Value) :-
 	;	% the conversion between Logtalk and Prolog encodings is defined in the adapter files
 		'$lgt_logtalk_prolog_encoding'(LogtalkEncoding, PrologEncoding, Input) ->
 		assertz('$lgt_pp_file_encoding_'(LogtalkEncoding, PrologEncoding)),
-		close(Input),
-		open(Source, read, NewInput, [alias(logtalk_compiler_input), encoding(PrologEncoding)]),
+		'$lgt_close'(Input),
+		'$lgt_open'(Source, read, NewInput, [alias(logtalk_compiler_input), encoding(PrologEncoding)]),
 		(	catch(stream_property(NewInput, bom(Boolean)), _, fail) ->
 			% SWI-Prolog and YAP
 			BOM = [bom(Boolean)],
@@ -5372,9 +5372,9 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_clean_pp_file_clauses',
 	'$lgt_clean_pp_entity_clauses',
 	'$lgt_reset_warnings_counter',
-	catch(close(Input), _, true),
+	catch('$lgt_close'(Input), _, true),
 	(	nonvar(Output) ->
-		catch(close(Output), _, true),
+		catch('$lgt_close'(Output), _, true),
 		% try to delete the intermediate Prolog files in order to prevent
 		% problems by mistaken the broken files by good ones
 		'$lgt_file_name'(prolog, Path, _, _, PrologFile),
@@ -5397,7 +5397,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_clean_pp_file_clauses',
 	'$lgt_clean_pp_entity_clauses',
 	'$lgt_reset_warnings_counter',
-	catch(close(Stream), _, true),
+	catch('$lgt_close'(Stream), _, true),
 	!,
 	fail.
 

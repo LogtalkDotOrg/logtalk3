@@ -60,14 +60,6 @@ flush_output(_).
 flush_output.
 
 
-open(Source, Mode, Stream, Options) :-
-	(	'$lgt_member'(alias(Alias), Options) ->
-		open(Source, Mode, Stream),
-		set_alias(Stream, Alias)
-	;	open(Source, Mode, Stream)
-	).
-
-
 stream_property(Stream, alias(Alias)) :-
 	get_alias(Stream, Alias),
 	!.
@@ -604,6 +596,31 @@ to_engine(Interactor, Pattern, Goal) :-
 % '$lgt_stream_current_line_number'(@stream, -integer)
 
 '$lgt_stream_current_line_number'(_, -1).
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  abstraction of the standard open/4 and close/1 predicates for dealing
+%  with the alias/1 option in old non-compliant systems
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% '$lgt_open'(+atom, +atom, -stream, @list)
+
+'$lgt_open'(File, Mode, Stream, Options) :-
+	(	'$lgt_member'(alias(Alias), Options) ->
+		open(File, Mode, Stream),
+		set_alias(Stream, Alias)
+	;	open(File, Mode, Stream)
+	).
+
+
+% '$lgt_close'(@stream)
+
+'$lgt_close'(Stream) :-
+	close(Stream).
 
 
 
