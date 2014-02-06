@@ -25,12 +25,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- [library(files)].
 :- [library(directory)].
 :- [library(date)].
 :- [library(strings)].
 :- [library(environ)].
+:- [library(subsumes)].
 
 
 
@@ -58,6 +58,7 @@
 '$lgt_iso_predicate'(number_codes(_, _)).
 '$lgt_iso_predicate'(once(_)).
 '$lgt_iso_predicate'(sub_atom(_, _, _, _, _)).
+'$lgt_iso_predicate'(subsumes_term(_, _)).
 '$lgt_iso_predicate'(throw(_)).
 
 
@@ -101,6 +102,10 @@ once(Goal) :-
 
 sub_atom(Atom, Before, Length, After, SubAtom) :-
 	substring(Atom, SubAtom, Before, Length, After).
+
+
+subsumes_term(General, Specific) :-
+	subsumes(General, Specific).
 
 
 throw(Ball) :-
