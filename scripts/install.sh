@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Logtalk installation script
-##   Last updated on December 3, 2013
+##   Last updated on February 6, 2014
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -141,6 +141,7 @@ ln -sf ../share/logtalk/integration/bplgt.sh bplgt
 ln -sf ../share/logtalk/integration/cxlgt.sh cxlgt
 ln -sf ../share/logtalk/integration/eclipselgt.sh eclipselgt
 ln -sf ../share/logtalk/integration/gplgt.sh gplgt
+ln -sf ../share/logtalk/integration/lplgt.sh lplgt
 ln -sf ../share/logtalk/integration/qplgt.sh qplgt
 ln -sf ../share/logtalk/integration/sicstuslgt.sh sicstuslgt
 ln -sf ../share/logtalk/integration/swilgt.sh swilgt
@@ -164,6 +165,7 @@ echo "* B-Prolog (version 7.8 or later):         bplgt"
 echo "* CxProlog (version 0.97.7 or later):      cxlgt"
 echo "* ECLiPSe (version 6.1#143 or later):      eclipselgt"
 echo "* GNU Prolog (version 1.4.2 or later):     gplgt"
+echo "* Lean Prolog (version 3.8.4 or later):    lplgt"
 echo "* Qu-Prolog (version 9.0 or later):        qplgt"
 echo "* SICStus Prolog (version 4.1.0 or later): sicstuslgt"
 echo "* SWI-Prolog (version 6.0.0 or later):     swilgt"

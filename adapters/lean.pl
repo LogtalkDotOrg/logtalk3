@@ -3,7 +3,7 @@
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
-%  Adapter file for Lean Prolog 3.7.10 and later versions
+%  Adapter file for Lean Prolog 3.8.4 and later versions
 %  Last updated on February 6, 2014
 %
 %  This program is free software: you can redistribute it and/or modify

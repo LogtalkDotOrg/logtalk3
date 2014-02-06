@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Logtalk uninstall script
-##   Last updated on October 28, 2013
+##   Last updated on February 6, 2014
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -78,6 +78,7 @@ rm -f logtalk_backend_select
 rm -f logtalk_tester
 rm -f logtalk_user_setup
 rm -f logtalk_version_select
+rm -f lplgt
 rm -f qplgt
 rm -f sicstuslgt
 rm -f swilgt

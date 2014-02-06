@@ -180,6 +180,22 @@ to type:
 	$ logtalk
 
 
+Lean Prolog 3.8.4 and later versions
+-------------------------------------
+
+		lean.pl
+
+The support for this Prolog compiler is experimental due to Lean Prolog
+lack of compliance with official and de facto standards. Notably, it
+lacks support for stream aliases and escape sequences in atoms. Moreover,
+due to Lean Prolog limitation of compiling more than one file per session,
+the compilation of Logtalk source files generates intermediate Prolog
+files that are consulted (i.e. interpreted) instead of being compiled,
+seriously hurting performance. Thus, practical use requires embedding
+Logtalk and the Logtalk application in Lean Prolog by including all
+necessary files in a single file than can then be compiled.
+
+
 Qu-Prolog 9.0 and later versions
 --------------------------------
 

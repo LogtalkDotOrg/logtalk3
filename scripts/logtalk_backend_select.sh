@@ -6,6 +6,7 @@
 ##   Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Logtalk back-end Prolog compiler select script
+##   Last updated on Febuary 6, 2014
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -28,7 +29,7 @@
 
 print_version() {
 	echo "Current `basename $0` version:"
-	echo "  0.4"
+	echo "  0.5"
 	exit 0
 }
 
@@ -46,6 +47,9 @@ list_backends() {
 	fi
 	if [ -e `which gplgt` ]  && [ "`which gprolog`" != "" ] ; then
 		echo -n "  gplgt"
+	fi
+	if [ -e `which lplgt` ]  && [ "`which lprolog`" != "" ] ; then
+		echo -n "  lplgt"
 	fi
 	if [ -e `which qplgt` ]  && [ "`which qp`" != "" ] ; then
 		echo -n "  qplgt"
@@ -118,6 +122,8 @@ valid_backend() {
 	elif [ "$1" == "eclipselgt" ] && [ -e `which eclipselgt` ]  && [ "`which eclipse`" != "" ] ; then
 		return 0
 	elif [ "$1" == "gplgt" ] && [ -e `which gplgt` ]  && [ "`which gprolog`" != "" ] ; then
+		return 0
+	elif [ "$1" == "lplgt" ] && [ -e `which lplgt` ]  && [ "`which lprolog`" != "" ] ; then
 		return 0
 	elif [ "$1" == "qplgt" ] && [ -e `which qplgt` ]  && [ "`which qp`" != "" ] ; then
 		return 0
