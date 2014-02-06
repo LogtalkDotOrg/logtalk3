@@ -31,6 +31,7 @@
 :- [library(strings)].
 :- [library(environ)].
 :- [library(subsumes)].
+:- [library(unify)].
 
 
 
@@ -54,12 +55,15 @@
 '$lgt_iso_predicate'(_ \= _).
 '$lgt_iso_predicate'(atom_codes(_, _)).
 '$lgt_iso_predicate'(atom_concat(_, _, _)).
+'$lgt_iso_predicate'(atom_length(_, _)).
 '$lgt_iso_predicate'(catch(_, _, _)).
+'$lgt_iso_predicate'(char_code(_, _)).
 '$lgt_iso_predicate'(number_codes(_, _)).
 '$lgt_iso_predicate'(once(_)).
 '$lgt_iso_predicate'(sub_atom(_, _, _, _, _)).
 '$lgt_iso_predicate'(subsumes_term(_, _)).
 '$lgt_iso_predicate'(throw(_)).
+'$lgt_iso_predicate'(unify_with_occurs_check(_, _)).
 
 
 Term1 \= Term2 :-
@@ -87,8 +91,17 @@ atom_concat(Atom1, Atom2, Atom3) :-
 	atom_chars(Atom2, Codes2).
 
 
+atom_length(Atom, Length) :-
+	atom_chars(Atom, Codes),
+	length(Codes, Length).
+
+
 catch(Goal, Catcher, Recovery) :-
 	on_exception(Catcher, Goal, Recovery).
+
+
+char_code(Char, Code) :-
+	atom_chars(Char, [Code]).
 
 
 number_codes(Number, Codes) :-
@@ -110,6 +123,10 @@ subsumes_term(General, Specific) :-
 
 throw(Ball) :-
 	raise_exception(Ball).
+
+
+unify_with_occurs_check(Term1, Term2) :-
+	unify(Term1, Term2).
 
 
 
