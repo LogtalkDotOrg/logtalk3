@@ -658,7 +658,8 @@ stream_property(Stream, alias(Alias)) :-
 
 '$lgt_write_term_and_source_location'(Stream, Term, _Kind, _Location) :-
 	write_canonical(Stream, Term),
-	write(Stream, '.\n').
+	write(Stream, '.'),
+	nl(Stream).
 
 
 % '$lgt_assertz_entity_clause'(@clause, +atom)
