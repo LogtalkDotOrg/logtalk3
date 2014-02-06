@@ -284,7 +284,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 '$lgt_default_flag'(events, deny).
 '$lgt_default_flag'(context_switching_calls, allow).
 % other compilation flags:
-'$lgt_default_flag'(scratch_directory, './lgt_tmp/').
+'$lgt_default_flag'(scratch_directory, './').
 '$lgt_default_flag'(report, on).
 '$lgt_default_flag'(clean, off).
 '$lgt_default_flag'(code_prefix, '$').
