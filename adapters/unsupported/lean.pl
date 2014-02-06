@@ -111,7 +111,8 @@ format_(['~', Spec| Chars], Stream, Arguments) :-
 	format_spec_(Spec, Stream, Arguments, RemainingArguments),
 	format_(Chars, Stream, RemainingArguments).
 format_([Char| Chars], Stream, Arguments) :-
-	put_char(Stream, Char),
+	char_code(Char, Code),
+	put_code(Stream, Code),
 	format_(Chars, Stream, Arguments).
 
 format_spec_('a', Stream, [Argument| Arguments], Arguments) :-
@@ -142,7 +143,8 @@ format_spec_('i', _, [_| Arguments], Arguments).
 format_spec_('n', Stream, Arguments, Arguments) :-
 	nl(Stream).
 format_spec_('~', Stream, Arguments, Arguments) :-
-	put_char(Stream, '~').
+	char_code('~', Code),
+	put_code(Stream, Code).
 
 
 % format(+character_code_list_or_atom, +list)
@@ -632,10 +634,10 @@ to_engine(Interactor, Pattern, Goal) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_read_term'(@stream, -term, +list, -position)
+% '$lgt_read_term'(@stream, -term, +list, -position, -list)
 
-'$lgt_read_term'(Stream, Term, [singletons([])], LineBegin-LineEnd) :-
-	read_term(Stream, yes, Term, _, LineBegin, LineEnd).
+'$lgt_read_term'(Stream, Term, [singletons([])], LineBegin-LineEnd, Variables) :-
+	read_term(Stream, yes, Term, Variables, LineBegin, LineEnd).
 
 
 
@@ -787,7 +789,7 @@ mutex_unlock(_) :-
 
 '$lgt_write_term_and_source_location'(Stream, Term, _Kind, _Location) :-
 	write_canonical(Stream, Term),
-	write(Stream, '.\n').
+	write(Stream, '.'), nl(Stream).
 
 
 % '$lgt_assertz_entity_clause'(@clause, +atom)
