@@ -245,9 +245,9 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 % back-end Prolog compiler supported features (that are compatible with Logtalk)
 
 '$lgt_prolog_feature'(prolog_dialect, quintus).
-'$lgt_prolog_feature'(prolog_version, _) :-
-	fail.
-'$lgt_prolog_feature'(prolog_compatible_version, @>=((3,3))).
+'$lgt_prolog_feature'(prolog_version, Version) :-
+	prolog_flag(version, Version),
+'$lgt_prolog_feature'(prolog_compatible_version, @>=(('3.3'))).
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
 '$lgt_prolog_feature'(tabling, unsupported).
