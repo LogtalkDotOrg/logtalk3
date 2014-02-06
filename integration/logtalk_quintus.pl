@@ -26,7 +26,16 @@
 
 
 :- 	unix(args([LOGTALKHOME| _])),	% hack for workaround the lack of support for environment variables in file names
-	atom_chars(LOGTALKHOME, LH),
+	atom_chars(LOGTALKHOME, LH0),
+	quintus_reverse_slashes(LH0, LH),
 	atom_chars('/adapters/quintus.pl', LC), append(LH, LC, L1), atom_chars(AdapterFile, L1), compile(AdapterFile),
 	atom_chars('/paths/paths.pl', LP), append(LH, LP, L3), atom_chars(PathsFile, L3), compile(PathsFile),
 	atom_chars('/core/core.pl', LL), append(LH, LL, L2), atom_chars(CompilerFile, L2), compile(CompilerFile).
+
+quintus_reverse_slashes([], []).
+quintus_reverse_slashes([Char| Chars], [ConvertedChar| ConvertedChars]) :-
+	(	Char =:= 0'\ ->
+		ConvertedChar = 0'/
+	;	ConvertedChar = Char
+	),
+	quintus_reverse_slashes(Chars, ConvertedChars).

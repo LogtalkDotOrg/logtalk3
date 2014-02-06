@@ -131,7 +131,7 @@ Name: "{group}\Logtalk - GNU Prolog"; Filename: "{code:GetGPExePath}"; Parameter
 
 Name: "{group}\Logtalk - Lean Prolog"; Filename: "{code:GetLeanPrologExePath}"; Parameters: """['$LOGTALKHOME/integration/logtalk_lean']"""; Comment: "Runs Logtalk with Lean Prolog"; WorkingDir: "%CD%"; Components: prolog\lean; Flags: createonlyiffileexists
 
-Name: "{group}\Logtalk - Quintus Prolog"; Filename: "{code:GetQuintusExePath}"; Parameters: "+l ""%LOGTALKHOME%\integration\logtalk_quintus.pl"" +z ""$LOGTALKHOME"" ""$LOGTALKUSER"""; Comment: "Runs Logtalk with Quintus Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\quintus; Flags: createonlyiffileexists
+Name: "{group}\Logtalk - Quintus Prolog"; Filename: "{code:GetQuintusExePath}"; Parameters: "+l ""%LOGTALKHOME%\integration\logtalk_quintus.pl"" +z ""%LOGTALKHOME%"" ""%LOGTALKUSER%"""; Comment: "Runs Logtalk with Quintus Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\quintus; Flags: createonlyiffileexists
 
 Name: "{group}\Logtalk - SICStus Prolog"; Filename: "{code:GetSICStusExePath}"; Parameters: "-l ""%LOGTALKHOME%\integration\logtalk_sicstus.pl"""; Comment: "Runs Logtalk with SICStus Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\sicstus; Flags: createonlyiffileexists
 
@@ -612,6 +612,7 @@ begin
       (EclipseExePath = 'prolog_compiler_not_installed') and
       (GPExePath = 'prolog_compiler_not_installed') and
       (LeanPrologExePath = 'prolog_compiler_not_installed') and
+      (QuintusExePath = 'prolog_compiler_not_installed') and
       (SICStusExePath = 'prolog_compiler_not_installed') and
       (SWIConExePath = 'prolog_compiler_not_installed') and
       (SWIWinExePath = 'prolog_compiler_not_installed') and
