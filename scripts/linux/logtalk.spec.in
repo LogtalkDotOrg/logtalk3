@@ -70,6 +70,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr/local/bin/gplgt
 /usr/local/bin/lplgt
 /usr/local/bin/qplgt
+/usr/local/bin/quintuslgt
 /usr/local/bin/sicstuslgt
 /usr/local/bin/swilgt
 /usr/local/bin/xsblgt
@@ -92,6 +93,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr/local/share/man/man1/logtalk_version_select.1.gz
 /usr/local/share/man/man1/lplgt.1.gz
 /usr/local/share/man/man1/qplgt.1.gz
+/usr/local/share/man/man1/quintuslgt.1.gz
 /usr/local/share/man/man1/sicstuslgt.1.gz
 /usr/local/share/man/man1/swilgt.1.gz
 /usr/local/share/man/man1/xsb64lgt.1.gz
@@ -120,6 +122,7 @@ echo "* ECLiPSe (version 6.1#143 or later):      eclipselgt"
 echo "* GNU Prolog (version 1.4.2 or later):     gplgt"
 echo "* Lean Prolog (version 3.8.4 or later):    lplgt"
 echo "* Qu-Prolog (version 9.0 or later):        qplgt"
+echo "* Quintus Prolog (version 3.3 or later):   quintuslgt"
 echo "* SICStus Prolog (version 4.1.0 or later): sicstuslgt"
 echo "* SWI-Prolog (version 6.0.0 or later):     swilgt"
 echo "* XSB (version 3.4.1 or later):            xsblgt     (first run may require sudo)"

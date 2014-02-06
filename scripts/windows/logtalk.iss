@@ -60,6 +60,7 @@ Name: "prolog\cxprolog"; Description: "CxProlog integration (version 0.97.7 or l
 Name: "prolog\eclipse"; Description: "ECLiPSe integration (version 6.1#143 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\gprolog"; Description: "GNU Prolog integration (version 1.4.2 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\lean"; Description: "Lean Prolog Prolog integration (version 3.8.4 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
+Name: "prolog\quintus"; Description: "Quintus Prolog integration (version 3.3 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\sicstus"; Description: "SICStus Prolog integration (version 4.1.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\swicon"; Description: "SWI-Prolog (console) integration (version 6.0.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\swiwin"; Description: "SWI-Prolog (window) integration (version 6.0.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
@@ -129,6 +130,8 @@ Name: "{group}\Logtalk - ECLiPSe"; Filename: "{code:GetEclipseExePath}"; Paramet
 Name: "{group}\Logtalk - GNU Prolog"; Filename: "{code:GetGPExePath}"; Parameters: "--init-goal ""['$LOGTALKHOME/integration/logtalk_gp.pl']"""; Comment: "Runs Logtalk with GNU Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\gprolog; Flags: createonlyiffileexists
 
 Name: "{group}\Logtalk - Lean Prolog"; Filename: "{code:GetLeanPrologExePath}"; Parameters: """['$LOGTALKHOME/integration/logtalk_lean']"""; Comment: "Runs Logtalk with Lean Prolog"; WorkingDir: "%CD%"; Components: prolog\lean; Flags: createonlyiffileexists
+
+Name: "{group}\Logtalk - Quintus Prolog"; Filename: "{code:GetQuintusExePath}"; Parameters: "+l ""%LOGTALKHOME%\integration\logtalk_quintus.pl"" +z ""$LOGTALKHOME"" ""$LOGTALKUSER"""; Comment: "Runs Logtalk with Quintus Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\quintus; Flags: createonlyiffileexists
 
 Name: "{group}\Logtalk - SICStus Prolog"; Filename: "{code:GetSICStusExePath}"; Parameters: "-l ""%LOGTALKHOME%\integration\logtalk_sicstus.pl"""; Comment: "Runs Logtalk with SICStus Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\sicstus; Flags: createonlyiffileexists
 
@@ -348,6 +351,32 @@ begin
   begin
     Warning := 'Failed to detect Lean Prolog installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
     MsgBox(Warning, mbError, MB_OK);
+  end
+end;
+
+function QuintusExePath: String;
+var
+  SP_PATH: String;
+begin
+  if FileExists(ExpandConstant('{pf}') + '\Quintus Prolog 3.5\bin\ix86\qpwin.exe') then
+    Result := ExpandConstant('{pf}') + '\Quintus Prolog 3.5\bin\ix86\qpwin.exe'
+  else if FileExists(ExpandConstant('{pf}') + '\Quintus Prolog 3.4\bin\ix86\qpwin.exe') then
+    Result := ExpandConstant('{pf}') + '\Quintus Prolog 3.4\bin\ix86\qpwin.exe'
+  else if FileExists(ExpandConstant('{pf}') + '\Quintus Prolog 3.3\bin\ix86\qpwin.exe') then
+    Result := ExpandConstant('{pf}') + '\Quintus Prolog 3.3\bin\ix86\qpwin.exe'
+  else
+    Result := 'prolog_compiler_not_installed'
+end;
+
+function GetQuintusExePath(Param: String): String;
+var
+  Warning: String;
+begin
+  Result := QuintusExePath;
+  if Result = 'prolog_compiler_not_installed' then
+  begin
+    Warning := 'Failed to detect Quintus Prolog installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
+  MsgBox(Warning, mbError, MB_OK);
   end
 end;
 

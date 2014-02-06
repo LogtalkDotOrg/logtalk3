@@ -153,19 +153,3 @@ LPA WinProlog32 4.0x
 	file twice. Supports smart compilation of source files. Does not support 
 	the "altdirs" compiler flag. Settings files are not supported (must be 
 	manually loaded).
-
-
-Quintus Prolog 3.3~3.5
-
-	quintus.pl
-
-	Written and tested with help of a friend of mine, Paulo Urbano, for a 
-	previous version. Adopted for the current release using the Windows 
-	version for testing. You must patch the Logtalk compiler due to the 
-	different argument order of the built-in predicates read_term/3 and 
-	open/4: for all calls of both predicates, exchange the last two 
-	arguments (these patches render Logtalk incompatible with all the
-	other compilers). Don't forget to use the unix(cd(Dir)) predicate to
-	set the working directory before loading the library or an example.
-	Supports smart compilation of source files. Settings files are not
-	supported (must be manually loaded after starting Logtalk).

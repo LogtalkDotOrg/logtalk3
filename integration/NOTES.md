@@ -35,6 +35,7 @@ system path):
 * GNU Prolog (version 1.4.2 or later):     `gplgt`
 * Lean Prolog (version 3.8.4 or later):    `lplgt`
 * Qu-Prolog (version 9.0 or later):        `qplgt`
+* Quintus Prolog (version 3.3 or later):   `quintuslgt`
 * SICStus Prolog (version 4.1.0 or later): `sicstuslgt`
 * SWI-Prolog (version 6.0.0 or later):     `swilgt`
 * XSB (version 3.4.1 or later):            `xsblgt`     (first run may require `sudo`)

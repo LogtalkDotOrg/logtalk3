@@ -210,6 +210,18 @@ in this operating-system.
 Written and tested with the help of Peter Robinson.
 
 
+Quintus Prolog 3.3~3.5
+
+	quintus.pl
+
+Experimental. Written and tested with help of a friend of mine, Paulo
+Urbano, for a previous version. Adopted for the current release using
+the Windows version for testing. Don't forget to use the unix(cd(Dir))
+predicate to set the working directory before loading the library or
+an example. Supports smart compilation of source files. Settings files
+are not supported (must be manually loaded after starting Logtalk).
+
+
 SICStus Prolog 4.1.0 and later versions
 ---------------------------------------
 

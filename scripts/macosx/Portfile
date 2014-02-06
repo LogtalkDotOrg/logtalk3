@@ -67,6 +67,7 @@ post-activate {
 	ui_msg "* GNU Prolog (version 1.4.2 or later):     gplgt"
 	ui_msg "* Lean Prolog (version 3.8.4 or later):    lplgt"
 	ui_msg "* Qu-Prolog (version 9.0 or later):        qplgt"
+	ui_msg "* Quintus Prolog (version 3.3 or later):   quintuslgt"
 	ui_msg "* SICStus Prolog (version 4.1.0 or later): sicstuslgt"
 	ui_msg "* SWI-Prolog (version 6.0.0 or later):     swilgt"
 	ui_msg "* XSB (version 3.4.1 or later):            xsblgt     (first run may require sudo)"

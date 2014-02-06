@@ -1,0 +1,56 @@
+.TH quintuslgt 1 "February 6, 2014" "Logtalk 3.00.0" "Logtalk Documentation"
+
+.SH NAME
+quintuslgt \- Logtalk integration script for Quintus Prolog
+
+.SH SYNOPSIS
+.B quintuslgt
+
+.SH DESCRIPTION
+\f3quintuslgt\f1 is a Logtalk integration script for Quintus Prolog. It automatically loads the Quintus Prolog adapter file, the Logtalk compiler and runtime, the Logtalk default table of library names and paths, and any existing settings file found on the startup directory or in the Logtalk user directory.
+
+.SH REQUIREMENTS
+Quintus Prolog 3.3 (or later versions) is required.
+
+.SH ENVIRONMENT
+.TP
+.B LOGTALKHOME
+Specifies the location of the Logtalk installation.
+.TP
+.B LOGTALKUSER
+Specifies the location of the Logtalk user directory.
+
+.SH FILES
+.TP
+.BI $LOGTALKHOME/integration/logtalk_quintus.pl
+Prolog file used for loading the necessary files for starting Logtalk using Quintus Prolog as the back-end compiler.
+.TP
+.BI $LOGTALKHOME/adapters/quintus.pl
+The Quintus Prolog adapter file.
+.TP
+.BI $LOGTALKHOME/core/core.pl
+The Logtalk core compiler and runtime file.
+.TP
+.BI $LOGTALKHOME/paths/paths.pl
+The default table of library names and paths.
+.TP
+.BI ./settings.lgt
+Logtalk settings file (for overriding default settings in the adapter files). May not exist.
+.TP
+.BI $LOGTALKUSER/settings.lgt
+Logtalk settings file (for overriding default settings in the adapter files). May not exist.
+
+.SH "SEE ALSO"
+The Logtalk website at <http://logtalk.org/>
+.PP
+The Logtalk User and Reference Manuals at \f2$LOGTALKHOME/manuals/index.html\f1
+.PP
+The Quintus Prolog website at <http://http://quintus.sics.se/>
+.PP
+logtalk_user_setup(1),\ logtalk_version_select(1),\ logtalk_backend_select(1)
+
+.SH AUTHOR
+Paulo Moura <pmoura@logtalk.org>
+
+.SH COPYRIGHT
+Copyright (c) 1998-2014 Paulo Moura.

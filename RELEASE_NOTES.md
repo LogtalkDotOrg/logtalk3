@@ -50,7 +50,7 @@ currently available using the reflection API.
 Prolog adapter and integration files
 ------------------------------------
 
-* ADDED: Restored experimental support for Lean Prolog.
+* ADDED: Restored experimental support for Lean Prolog and Quintus Prolog.
 
 * ADDED: Support for compiling `op/3` directives where the declared operators
 are module explicit-qualified by `user`.

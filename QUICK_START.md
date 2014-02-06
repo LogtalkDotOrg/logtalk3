@@ -42,6 +42,7 @@ scripts!):
 * GNU Prolog:     `gplgt`
 * Lean Prolog:    `lplgt`
 * Qu-Prolog:      `qplgt`
+* Quintus Prolog: `quintuslgt`
 * SICStus Prolog: `sicstuslgt`
 * SWI-Prolog:     `swilgt`
 * XSB:            `xsblgt`     (first run may require `sudo`)
