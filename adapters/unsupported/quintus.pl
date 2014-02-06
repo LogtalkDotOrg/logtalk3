@@ -303,7 +303,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 % other compilation flags:
 '$lgt_default_flag'(scratch_directory, './').
 '$lgt_default_flag'(report, on).
-'$lgt_default_flag'(clean, off).
+'$lgt_default_flag'(clean, on).
 '$lgt_default_flag'(code_prefix, '$').
 '$lgt_default_flag'(optimize, off).
 '$lgt_default_flag'(source_data, on).
