@@ -246,7 +246,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 
 '$lgt_prolog_feature'(prolog_dialect, quintus).
 '$lgt_prolog_feature'(prolog_version, Version) :-
-	prolog_flag(version, Version),
+	prolog_flag(version, Version).
 '$lgt_prolog_feature'(prolog_compatible_version, @>=(('3.3'))).
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
