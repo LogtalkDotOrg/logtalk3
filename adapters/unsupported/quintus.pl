@@ -555,7 +555,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 % '$lgt_open'(+atom, +atom, -stream, @list)
 
 '$lgt_open'(File, Mode, Stream, Options) :-
-	(	Options = [alias(Alias)| OtherOptions]) ->
+	(	Options = [alias(Alias)| OtherOptions] ->
 		open(File, Mode, OtherOptions, Stream),
 		'$lgt_quintus_save_stream_alias'(Stream, Alias)
 	;	open(Source, Mode, Options, Stream)
@@ -567,6 +567,9 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 '$lgt_close'(Stream) :-
 	retractall('$lgt_quintus_stream_alias'(Stream, _)),
 	close(Stream).
+
+
+:- dynamic('$lgt_quintus_stream_alias'/2).
 
 
 '$lgt_quintus_save_stream_alias'(Stream, Alias) :-
