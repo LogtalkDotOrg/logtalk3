@@ -558,7 +558,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 	(	Options = [alias(Alias)| OtherOptions] ->
 		open(File, Mode, OtherOptions, Stream),
 		'$lgt_quintus_save_stream_alias'(Stream, Alias)
-	;	open(Source, Mode, Options, Stream)
+	;	open(File, Mode, Options, Stream)
 	).
 
 
