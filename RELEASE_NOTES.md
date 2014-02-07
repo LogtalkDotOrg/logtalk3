@@ -123,6 +123,9 @@ built-in command in the `logtalk_backend_select.sh`, `logtalk_tester.sh`, and
 `install.sh` POSIX shell scripts to avoid `which` verbose output in some
 operating-systems.
 
+* FIXED: The `logtalk_tester.sh` POSIX shell script now also print the status
+of the current Logtalk release when printing its version string.
+
 Library
 -------
 
