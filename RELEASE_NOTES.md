@@ -55,6 +55,10 @@ Prolog adapter and integration files
 * ADDED: Support for compiling `op/3` directives where the declared operators
 are module explicit-qualified by `user`.
 
+* UPDATED: The GNU Prolog adapter file now only provides dummy definitions for
+the `current_module/1`, `ensure_loaded/1`, and `use_module/1-2` predicates if
+they are not already built-in predicates.
+
 Documentation
 -------------
 

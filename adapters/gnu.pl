@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for GNU Prolog 1.4.2 (and later versions)
-%  Last updated on February 6, 2014
+%  Last updated on February 7, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -576,10 +576,22 @@ setup_call_cleanup(_, _, _) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-current_module(_) :- fail.
-ensure_loaded(_) :- fail.
-use_module(_) :- fail.
-use_module(_, _) :- fail.
+:- if(\+ predicate_property(current_module(_), built_in)).
+	current_module(_) :- fail.
+:- endif.
+
+:- if(\+ predicate_property(ensure_loaded(_), built_in)).
+	ensure_loaded(_) :- fail.
+:- endif.
+
+:- if(\+ predicate_property(use_module(_), built_in)).
+	use_module(_) :- fail.
+:- endif.
+
+:- if(\+ predicate_property(use_module(_, _), built_in)).
+	use_module(_, _) :- fail.
+:- endif.
+
 mutex_create(_, _) :- fail.
 mutex_lock(_) :- fail.
 mutex_unlock(_) :- fail.
