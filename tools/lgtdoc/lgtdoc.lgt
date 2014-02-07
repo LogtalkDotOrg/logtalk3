@@ -1161,7 +1161,7 @@
 	member_var(V, [_| T]) :-
 		member_var(V, T).
 
-	is_atom_list(-) :-
+	is_atom_list((-)) :-
 		!,
 		fail.
 	is_atom_list([]).
