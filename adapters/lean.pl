@@ -3,8 +3,8 @@
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
-%  Adapter file for Lean Prolog 3.8.4 and later versions
-%  Last updated on February 6, 2014
+%  Adapter file for Lean Prolog 3.8.5 and later versions
+%  Last updated on February 7, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -50,7 +50,6 @@
 '$lgt_iso_predicate'(flush_output).
 '$lgt_iso_predicate'(open(_, _, _, _)).
 '$lgt_iso_predicate'(stream_property(_, _)).
-'$lgt_iso_predicate'(subsumes_term(_, _)).
 '$lgt_iso_predicate'(write_term(_, _)).
 '$lgt_iso_predicate'(write_term(_, _, _)).
 
@@ -64,40 +63,6 @@ flush_output.
 stream_property(Stream, alias(Alias)) :-
 	get_alias(Stream, Alias),
 	!.
-
-
-subsumes_term(General, Specific) :-
-	term_variables(Specific, Vars),
-	'$lgt_lean_subsumes_term'(General, Specific, Vars).
-
-'$lgt_lean_subsumes_term'(General, Specific, Vars) :-
-	var(General),
-	!,
-	(	'$lgt_qp_var_member_chk'(General, Vars) ->
-		General == Specific
-	;	\+ General \= Specific
-	).
-
-'$lgt_lean_subsumes_term'(General, Specific, Vars) :-
-	nonvar(Specific),
-	functor(General, Functor, Arity),
-	functor(Specific, Functor, Arity),
-	'$lgt_lean_subsumes_term'(Arity, General, Specific, Vars).
-
-'$lgt_lean_subsumes_term'(0, _, _, _) :-
-	!.
-'$lgt_lean_subsumes_term'(N, General, Specific, Vars) :-
-	arg(N, General,  GenArg),
-	arg(N, Specific, SpeArg),
-	'$lgt_lean_subsumes_term'(GenArg, SpeArg, Vars),
-	M is N-1, !,
-	'$lgt_lean_subsumes_term'(M, General, Specific, Vars).
-
-'$lgt_qp_var_member_chk'(Var, [Head| Tail]) :-
-	(	Var == Head ->
-		true
-	;	'$lgt_qp_var_member_chk'(Var, Tail)
-	).
 
 
 write_term(Term, Options) :-
@@ -338,7 +303,7 @@ to_engine(Interactor, Pattern, Goal) :-
 '$lgt_prolog_feature'(prolog_dialect, lean).
 '$lgt_prolog_feature'(prolog_version, (Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, lprolog(Major, Minor, Patch, _)).
-'$lgt_prolog_feature'(prolog_compatible_version, '@>='((3, 7, 10))).
+'$lgt_prolog_feature'(prolog_compatible_version, '@>='((3, 8, 5))).
 
 '$lgt_prolog_feature'(encoding_directive, source).
 '$lgt_prolog_feature'(tabling, unsupported).

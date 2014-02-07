@@ -180,16 +180,16 @@ to type:
 	$ logtalk
 
 
-Lean Prolog 3.8.4 and later versions
--------------------------------------
+Lean Prolog 3.8.5 and later versions
+------------------------------------
 
 		lean.pl
 
-The support for this Prolog compiler is experimental due to Lean Prolog
-lack of compliance with official and de facto standards. Notably, it
-lacks support for stream aliases and escape sequences in atoms. Moreover,
-due to Lean Prolog limitation of compiling more than one file per session,
-the compilation of Logtalk source files generates intermediate Prolog
+Experimental. Lean Prolog lacks compliance with official and de facto
+standards. Notably, it lacks support for stream aliases, for `0'Char`
+notation, and for escape sequences in atoms. Moreover, due to Lean
+Prolog limitation of compiling more than one file per session, the
+compilation of Logtalk source files generates intermediate Prolog
 files that are consulted (i.e. interpreted) instead of being compiled,
 seriously hurting performance. Thus, practical use requires embedding
 Logtalk and the Logtalk application in Lean Prolog by including all
@@ -211,15 +211,22 @@ Written and tested with the help of Peter Robinson.
 
 
 Quintus Prolog 3.3~3.5
+----------------------
 
 	quintus.pl
 
-Experimental. Written and tested with help of a friend of mine, Paulo
-Urbano, for a previous version. Adopted for the current release using
-the Windows version for testing. Don't forget to use the unix(cd(Dir))
-predicate to set the working directory before loading the library or
-an example. Supports smart compilation of source files. Settings files
-are not supported (must be manually loaded after starting Logtalk).
+Experimental. Quintus Prolog is still maintained but (apparently) no
+longer developed and thus it lacks compliance with current official and
+de facto standards. Notably, the `open/4`, `read_term/3`, and `write_term/3`
+built-in predicates use a different argument order and there are also
+significant differences in arithmetic functions support.
+
+Settings files are not supported (must be manually loaded after starting
+Logtalk).
+
+The original version of this adapter file was written and tested with help
+of a friend of mine, Paulo Urbano, for a previous version. Adopted for the
+current release using the Windows version for testing.
 
 
 SICStus Prolog 4.1.0 and later versions

@@ -59,8 +59,8 @@ Name: "prolog\bp"; Description: "B-Prolog integration (version 7.8 or later)"; T
 Name: "prolog\cxprolog"; Description: "CxProlog integration (version 0.97.7 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\eclipse"; Description: "ECLiPSe integration (version 6.1#143 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\gprolog"; Description: "GNU Prolog integration (version 1.4.2 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
-Name: "prolog\lean"; Description: "Lean Prolog Prolog integration (version 3.8.4 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
-Name: "prolog\quintus"; Description: "Quintus Prolog integration (version 3.3 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
+Name: "prolog\lean"; Description: "Lean Prolog (experimental) integration (version 3.8.5 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
+Name: "prolog\quintus"; Description: "Quintus Prolog (experimental) integration (version 3.3 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\sicstus"; Description: "SICStus Prolog integration (version 4.1.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\swicon"; Description: "SWI-Prolog (console) integration (version 6.0.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\swiwin"; Description: "SWI-Prolog (window) integration (version 6.0.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
