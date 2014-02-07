@@ -2,9 +2,9 @@
 :- object(prolog_modules_diagram_support).
 
 	:- info([
-		version is 0.3,
+		version is 0.4,
 		author is 'Paulo Moura',
-		date is 2014/01/15,
+		date is 2014/02/07,
 		comment is 'Utility predicates for supporting Prolog modules in diagrams.'
 	]).
 
@@ -136,15 +136,19 @@
 			atom_concat(Name, Extension, Basename).
 
 		decompose_file_name(File, Directory, Name, Extension) :-
+			% avoid using 0'Char notation as backend Prolog compilers
+			% that don't support it also need to *parse* this code
+			char_code('/', SlashCode),
+			char_code('.', PeriodCode),
 			atom_codes(File, FileCodes),
-			(	strrch(FileCodes, 0'/, [_Slash| BasenameCodes]) ->
+			(	strrch(FileCodes, SlashCode, [_Slash| BasenameCodes]) ->
 				atom_codes(Basename, BasenameCodes),
 				atom_concat(Directory, Basename, File)
 			;	Directory = './',
 				atom_codes(Basename, FileCodes),
 				BasenameCodes = FileCodes
 			),
-			(	strrch(BasenameCodes, 0'., ExtensionCodes) ->
+			(	strrch(BasenameCodes, PeriodCode, ExtensionCodes) ->
 				atom_codes(Extension, ExtensionCodes),
 				atom_concat(Name, Extension, Basename)
 			;	Name = Basename,

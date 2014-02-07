@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/02/05,
+		date is 2014/02/07,
 		comment is 'Predicates for generating graph files in the DOT language.'
 	]).
 
@@ -41,25 +41,25 @@
 	file_header(Stream, Identifier, Options) :-
 		write(Stream, 'digraph '),
 		writeq(Stream, Identifier),
-		write(Stream, ' {\n'),
-		write(Stream, 'rankdir=BT\n'),
-		write(Stream, 'ranksep=1.25\n'),
-		write(Stream, 'compound=true\n'),
-		write(Stream, 'splines=true\n'),
-		write(Stream, 'pack=true\n'),
-		write(Stream, 'clusterrank=local\n'),
-		write(Stream, 'labeljust=l\n'),
-		write(Stream, 'margin=1.0\n'),
-		write(Stream, 'fontname="Courier"\n'),
-		write(Stream, 'fontsize=10\n'),
-		write(Stream, 'fontcolor=snow4\n'),
-		write(Stream, 'pencolor=snow4\n'),
-		write(Stream, 'node [shape=ellipse,style=filled,fillcolor=white,fontname="Courier",fontsize=9]\n'),
-		write(Stream, 'edge [fontname="Courier",fontsize=9]\n'),
+		write(Stream, ' {'), nl(Stream),
+		write(Stream, 'rankdir=BT'), nl(Stream),
+		write(Stream, 'ranksep=1.25'), nl(Stream),
+		write(Stream, 'compound=true'), nl(Stream),
+		write(Stream, 'splines=true'), nl(Stream),
+		write(Stream, 'pack=true'), nl(Stream),
+		write(Stream, 'clusterrank=local'), nl(Stream),
+		write(Stream, 'labeljust=l'), nl(Stream),
+		write(Stream, 'margin=1.0'), nl(Stream),
+		write(Stream, 'fontname="Courier"'), nl(Stream),
+		write(Stream, 'fontsize=10'), nl(Stream),
+		write(Stream, 'fontcolor=snow4'), nl(Stream),
+		write(Stream, 'pencolor=snow4'), nl(Stream),
+		write(Stream, 'node [shape=ellipse,style=filled,fillcolor=white,fontname="Courier",fontsize=9]'), nl(Stream),
+		write(Stream, 'edge [fontname="Courier",fontsize=9]'), nl(Stream),
 		diagram_label(Options, Label),
 		write(Stream, 'label="'),
 		write(Stream, Label),
-		write(Stream, '\n"'),
+		write(Stream, '"'), nl(Stream),
 		nl(Stream).
 
 	diagram_label(Options, Label) :-
@@ -93,43 +93,44 @@
 	integer_to_padded_atom(Integer, Atom) :-
 		number_codes(Integer, Codes),
 		(	Integer < 10 ->
-			atom_codes(Atom, [0'0| Codes])
+			char_code('0', ZeroCode),
+			atom_codes(Atom, [ZeroCode| Codes])
 		;	atom_codes(Atom, Codes)
 		).
 
 	file_footer(Stream, _Identifier, _Options) :-
-		write(Stream, '}\n').
+		write(Stream, '}'), nl(Stream).
 
 	graph_header(Stream, Identifier, Label, Kind, Options) :-
 		graph_style_margin_color(Kind, Style, Margin, Color),
 		write(Stream, 'subgraph "cluster_'),
 		write(Stream, Identifier),
-		write(Stream, '" {\n'),
+		write(Stream, '" {'), nl(Stream),
 		(	member(url(URL), Options) ->
 			write(Stream, 'URL="'),
 			write(Stream, URL),
-			write(Stream, '"\n'),
+			write(Stream, '"'), nl(Stream),
 			write(Stream, 'tooltip="'),
 			write(Stream, URL),
-			write(Stream, '"\n')
+			write(Stream, '"'), nl(Stream)
 		;	member(tooltip(Tooltip), Options) ->
 			write(Stream, 'tooltip="'),
 			write(Stream, Tooltip),
-			write(Stream, '"\n')
+			write(Stream, '"'), nl(Stream)
 		;	true
 		),
 		write(Stream, 'bgcolor="'),
-		write(Stream, Color),
-		write(Stream, '"\nstyle="'),
-		write(Stream, Style),
-		write(Stream, '"\nmargin="'),
-		write(Stream, Margin),
-		write(Stream, '"\nlabel="'),
+		write(Stream, Color), nl(Stream),
+		write(Stream, '"style="'),
+		write(Stream, Style), nl(Stream),
+		write(Stream, '"margin="'),
+		write(Stream, Margin), nl(Stream),
+		write(Stream, '"label="'),
 		write(Stream, Label),
-		write(Stream, '"\n').
+		write(Stream, '"'), nl(Stream).
 
 	graph_footer(Stream, _Identifier, _Label, _Kind, _Options) :-
-		write(Stream, '}\n\n').
+		write(Stream, '}'), nl(Stream), nl(Stream).
 
 	graph_style_margin_color(rlibrary, rounded, 10, snow3).
 	graph_style_margin_color(libraries, rounded, 10, snow3).
@@ -168,7 +169,7 @@
 		;	write(Stream, '</B><BR/> <BR/>'),
 			write_lines(Contents, Stream)
 		),
-		write(Stream, '>]\n').
+		write(Stream, '>]'), nl(Stream).
 
 	% entities belonging to the file or library being documented
 	node_shape_style_color(prototype, box, filled, beige).
@@ -204,7 +205,7 @@
 		),
 		write(Stream, ',label=<'),
 		write_lines(Labels, Stream),
-		write(Stream, '>]\n').
+		write(Stream, '>]'), nl(Stream).
 
 	% entity relations
 	edge_arrow(extends_object, vee).
