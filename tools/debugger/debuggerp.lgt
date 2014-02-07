@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/04/23,
+		date is 2014/02/07,
 		comment is 'Debugger protocol.'
 	]).
 
@@ -59,7 +59,7 @@
 	]).
 
 	:- public(debugging/1).
-	:- mode(debugging(@dictionary), zero_or_one).
+	:- mode(debugging(+entity_identifier), zero_or_one).
 	:- info(debugging/1, [
 		comment is 'True if the entity is being debugged.',
 		argnames is ['Entity']
@@ -102,7 +102,7 @@
 	]).
 
 	:- public((nospy)/4).
-	:- mode(nospy(@callable, +dictionary, -dictionary, ?), one).
+	:- mode(nospy(@term, @term, @term, @term), one).
 	:- info((nospy)/4, [
 		comment is 'Removes all matching context spy points.',
 		argnames is ['Sender', 'This', 'Self', 'Goal']
