@@ -11,7 +11,7 @@
 
 :- initialization((
 	set_logtalk_flag(report, warnings),
-	logtalk_load(library(types_loader)),
+	logtalk_load(library(basic_types_loader)),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(reflection, [unknown_entities(silent), debug(on), source_data(on)]),
 	logtalk_load(tests, [hook(lgtunit)]),

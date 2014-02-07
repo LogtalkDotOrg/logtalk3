@@ -16,7 +16,7 @@
 	% also test parsing of use_module/1 directives, which
 	% is only supported by some backend Prolog compilers
 	catch((logtalk_load(client, [debug(on), source_data(on)]) -> true; true), _, true),
-	logtalk_load(library(types_loader)),
+	logtalk_load(library(basic_types_loader)),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run
 )).

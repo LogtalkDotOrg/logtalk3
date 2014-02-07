@@ -10,7 +10,7 @@
 
 
 :- initialization((
-	logtalk_load(library(types_loader)),
+	logtalk_load(library(basic_types_loader)),
 	logtalk_load(library(metapredicates_loader)),
 	logtalk_load(primes(loader)),
 	logtalk_load(sorting(loader)),

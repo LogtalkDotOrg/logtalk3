@@ -67,6 +67,7 @@ own loader and notes files:
 	`statistics.txt`
 
 * types  
+	`basic_types_loader.lgt`
 	`types_loader.lgt`
 	`types.txt`
 

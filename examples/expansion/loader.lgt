@@ -17,7 +17,7 @@
 
 
 :- initialization((
-	logtalk_load(library(types_loader)),
+	logtalk_load(library(basic_types_loader)),
 	logtalk_load([expansion, hooks]),
 	logtalk_load(raw, [hook(hh)])
 )).

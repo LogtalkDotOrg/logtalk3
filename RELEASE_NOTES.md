@@ -62,6 +62,12 @@ Documentation
 
 * IMPROVED: Appearance of the POSIX shell script man pages.
 
+Library
+-------
+
+* ADDED: New utility loader file, `basic_types_loader.lgt`, to load only basic
+types as a lighter alternative to the `types_loader.lgt` file.
+
 Tools
 -----
 

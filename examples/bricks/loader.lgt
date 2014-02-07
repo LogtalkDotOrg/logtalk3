@@ -10,7 +10,7 @@
 
 
 :- initialization((
-	logtalk_load(library(types_loader)),			% allow for static binding
+	logtalk_load(library(basic_types_loader)),			% allow for static binding
 	logtalk_load(library(metapredicates_loader)),	% allow for static binding
 	logtalk_load(roots(loader)),					% allow for static binding
 	logtalk_load(relations(loader)),				% allow for static binding

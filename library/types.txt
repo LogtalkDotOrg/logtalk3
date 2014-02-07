@@ -29,3 +29,9 @@ file:
 These objects implement predicates over common Prolog terms and 
 structures such as lists, difference lists, binary trees, queues, 
 dictionaries, and sets.
+
+In case your code only requires the basic types, you can load in
+alternative the `basic_types_loader.lgt` utility 
+file:
+
+	| ?- logtalk_load(library(basic_types_loader)).

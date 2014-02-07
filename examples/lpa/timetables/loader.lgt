@@ -10,6 +10,6 @@
 
 
 :- initialization((
-	logtalk_load(library(types_loader)),
+	logtalk_load(library(basic_types_loader)),
 	logtalk_load([timetable, forms, periods, subjects, teachers], [unknown_entities(silent)])
 )).

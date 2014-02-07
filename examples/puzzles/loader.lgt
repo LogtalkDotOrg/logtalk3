@@ -10,6 +10,6 @@
 
 
 :- initialization((
-	logtalk_load(library(types_loader)),
+	logtalk_load(library(basic_types_loader)),
 	logtalk_load([potions, jam_thief, horses, houses, note, camp_swampy, stolen_cake])
 )). 
