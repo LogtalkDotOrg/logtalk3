@@ -190,7 +190,7 @@ echo "scripts, consult the \"$prefix/share/logtalk/adapters/NOTES.md\" file"
 echo "for compatibility notes or consult the integration script man page."
 echo
 
-if [ "`which update-mime-database`" != "" ]; then
+if [ "`command -v update-mime-database`" != "" ]; then
 	mkdir -p $prefix/share/mime/packages
 	rm -f $prefix/share/mime/packages/logtalk.xml
 	cp $prefix/share/$directory/scripts/freedesktop/logtalk.xml $prefix/share/mime/packages/logtalk.xml

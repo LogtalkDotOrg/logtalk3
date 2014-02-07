@@ -118,6 +118,11 @@ an object or a category defines for other entities.
 * ADDED: Notes on how to use the `logtalk_tester.sh` POSIX shell script on
 Windows to the `scripts/NOTES.md` file.
 
+* FIXED: Replaced usage of the external `which` command by the bash `command`
+built-in command in the `logtalk_backend_select.sh`, `logtalk_tester.sh`, and
+`install.sh` POSIX shell scripts to avoid `which` verbose output in some
+operating-systems.
+
 Library
 -------
 

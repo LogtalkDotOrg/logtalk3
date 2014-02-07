@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Logtalk back-end Prolog compiler select script
-##   Last updated on Febuary 6, 2014
+##   Last updated on Febuary 7, 2014
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -36,43 +36,43 @@ print_version() {
 
 list_backends() {
     echo "Available back-end Prolog compilers:"
-	if [ -e `which bplgt` ]  && [ "`which bp`" != "" ] ; then
+	if [ -e `command -v bplgt` ]  && [ "`command -v bp`" != "" ] ; then
 		echo -n "  bplgt"
 	fi
-	if [ -e `which cxlgt` ]  && [ "`which cxprolog`" != "" ] ; then
+	if [ -e `command -v cxlgt1` ]  && [ "`command -v cxprolog1`" != "" ] ; then
 		echo -n "  cxlgt"
 	fi
-	if [ -e `which eclipselgt` ]  && [ "`which eclipse`" != "" ] ; then
+	if [ -e `command -v eclipselgt` ]  && [ "`command -v eclipse`" != "" ] ; then
 		echo -n "  eclipselgt"
 	fi
-	if [ -e `which gplgt` ]  && [ "`which gprolog`" != "" ] ; then
+	if [ -e `command -v gplgt` ]  && [ "`command -v gprolog`" != "" ] ; then
 		echo -n "  gplgt"
 	fi
-	if [ -e `which lplgt` ]  && [ "`which lprolog`" != "" ] ; then
+	if [ -e `command -v lplgt` ]  && [ "`command -v lprolog`" != "" ] ; then
 		echo -n "  lplgt"
 	fi
-	if [ -e `which qplgt` ]  && [ "`which qp`" != "" ] ; then
+	if [ -e `command -v qplgt` ]  && [ "`command -v qp`" != "" ] ; then
 		echo -n "  qplgt"
 	fi
-	if [ -e `which sicstuslgt` ]  && [ "`which sicstus`" != "" ] ; then
+	if [ -e `command -v sicstuslgt` ]  && [ "`command -v sicstus`" != "" ] ; then
 		echo -n "  sicstuslgt"
 	fi
-	if [ -e `which swilgt` ]  && [ "`which swipl`" != "" ] ; then
+	if [ -e `command -v swilgt` ]  && [ "`command -v swipl`" != "" ] ; then
 		echo -n "  swilgt"
 	fi
-	if [ -e `which xsblgt` ]  && [ "`which xsb`" != "" ] ; then
+	if [ -e `command -v xsblgt` ]  && [ "`command -v xsb`" != "" ] ; then
 		echo -n "  xsblgt"
 	fi
-	if [ -e `which xsb64lgt` ]  && [ "`which xsb-bits64`" != "" ] ; then
+	if [ -e `command -v xsb64lgt` ]  && [ "`command -v xsb-bits64`" != "" ] ; then
 		echo -n "  xsb64lgt"
 	fi
-	if [ -e `which xsbmtlgt` ]  && [ "`which xsb-mt`" != "" ] ; then
+	if [ -e `command -v xsbmtlgt` ]  && [ "`command -v xsb-mt`" != "" ] ; then
 		echo -n "  xsbmtlgt"
 	fi
-	if [ -e `which xsbmt64lgt` ]  && [ "`which xsb-bits64-mt`" != "" ] ; then
+	if [ -e `command -v xsbmt64lgt` ]  && [ "`command -v xsb-bits64-mt`" != "" ] ; then
 		echo -n "  xsbmt64lgt"
 	fi
-	if [ -e `which yaplgt` ]  && [ "`which yap`" != "" ] ; then
+	if [ -e `command -v yaplgt` ]  && [ "`command -v yap`" != "" ] ; then
 		echo -n "  yaplgt"
 	fi
 	echo
@@ -82,9 +82,9 @@ list_backends() {
 
 show_selected() {
     echo "Current Prolog integration script:"
-    if [ -e `which logtalk` ] && [ "`which logtalk`" != "" ] ; then
+    if [ -e `command -v logtalk` ] && [ "`command -v logtalk`" != "" ] ; then
 		echo -n "  "
-		readlink `which logtalk`
+		readlink `command -v logtalk`
     else
         echo "  none"
     fi
@@ -115,31 +115,31 @@ usage_help() {
 
 
 valid_backend() {
-	if [ "$1" == "bplgt" ] && [ -e `which bplgt` ]  && [ "`which bp`" != "" ] ; then
+	if [ "$1" == "bplgt" ] && [ -e `command -v bplgt` ]  && [ "`command -v bp`" != "" ] ; then
 		return 0
-	elif [ "$1" == "cxlgt" ] && [ -e `which cxlgt` ]  && [ "`which cxprolog`" != "" ] ; then
+	elif [ "$1" == "cxlgt" ] && [ -e `command -v cxlgt` ]  && [ "`command -v cxprolog`" != "" ] ; then
 		return 0
-	elif [ "$1" == "eclipselgt" ] && [ -e `which eclipselgt` ]  && [ "`which eclipse`" != "" ] ; then
+	elif [ "$1" == "eclipselgt" ] && [ -e `command -v eclipselgt` ]  && [ "`command -v eclipse`" != "" ] ; then
 		return 0
-	elif [ "$1" == "gplgt" ] && [ -e `which gplgt` ]  && [ "`which gprolog`" != "" ] ; then
+	elif [ "$1" == "gplgt" ] && [ -e `command -v gplgt` ]  && [ "`command -v gprolog`" != "" ] ; then
 		return 0
-	elif [ "$1" == "lplgt" ] && [ -e `which lplgt` ]  && [ "`which lprolog`" != "" ] ; then
+	elif [ "$1" == "lplgt" ] && [ -e `command -v lplgt` ]  && [ "`command -v lprolog`" != "" ] ; then
 		return 0
-	elif [ "$1" == "qplgt" ] && [ -e `which qplgt` ]  && [ "`which qp`" != "" ] ; then
+	elif [ "$1" == "qplgt" ] && [ -e `command -v qplgt` ]  && [ "`command -v qp`" != "" ] ; then
 		return 0
-	elif [ "$1" == "sicstuslgt" ] && [ -e `which sicstuslgt` ]  && [ "`which sicstus`" != "" ] ; then
+	elif [ "$1" == "sicstuslgt" ] && [ -e `command -v sicstuslgt` ]  && [ "`command -v sicstus`" != "" ] ; then
 		return 0
-	elif [ "$1" == "swilgt" ] && [ -e `which swilgt` ]  && [ "`which swipl`" != "" ] ; then
+	elif [ "$1" == "swilgt" ] && [ -e `command -v swilgt` ]  && [ "`command -v swipl`" != "" ] ; then
 		return 0
-	elif [ "$1" == "xsblgt" ] && [ -e `which xsblgt` ]  && [ "`which xsb`" != "" ] ; then
+	elif [ "$1" == "xsblgt" ] && [ -e `command -v xsblgt` ]  && [ "`command -v xsb`" != "" ] ; then
 		return 0
-	elif [ "$1" == "xsb64lgt" ] && [ -e `which xsb64lgt` ]  && [ "`which xsb-bits64`" != "" ] ; then
+	elif [ "$1" == "xsb64lgt" ] && [ -e `command -v xsb64lgt` ]  && [ "`command -v xsb-bits64`" != "" ] ; then
 		return 0
-	elif [ "$1" == "xsbmtlgt" ] && [ -e `which xsbmtlgt` ]  && [ "`which xsb-mt`" != "" ] ; then
+	elif [ "$1" == "xsbmtlgt" ] && [ -e `command -v xsbmtlgt` ]  && [ "`command -v xsb-mt`" != "" ] ; then
 		return 0
-	elif [ "$1" == "xsbmt64lgt" ] && [ -e `which xsbmt64lgt` ]  && [ "`which xsb-bits64-mt`" != "" ] ; then
+	elif [ "$1" == "xsbmt64lgt" ] && [ -e `command -v xsbmt64lgt` ]  && [ "`command -v xsb-bits64-mt`" != "" ] ; then
 		return 0
-	elif [ "$1" == "yaplgt" ] && [ -e `which yaplgt` ]  && [ "`which yap`" != "" ] ; then
+	elif [ "$1" == "yaplgt" ] && [ -e `command -v yaplgt` ]  && [ "`command -v yap`" != "" ] ; then
 		return 0
 	else
 		return 1
@@ -153,7 +153,7 @@ switch_backend() {
     	echo "Invalid Prolog integration script: $1"
     	exit 1
 	else
-		cd $(dirname `which $1`)
+		cd $(dirname `command -v $1`)
 		rm -f logtalk
 		ln -sf $1 logtalk
 		error=$?
