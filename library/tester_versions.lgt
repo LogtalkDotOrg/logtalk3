@@ -24,10 +24,10 @@
 
 
 :- initialization((
-	current_logtalk_flag(version_data, logtalk(Major, Minor, Patch, Status)),
+	current_logtalk_flag(version_data, logtalk(LogtalkMajor, LogtalkMinor, LogtalkPatch, LogtalkStatus)),
 	write('*****         Logtalk version: '),
-	write(Major), write('.'), write(Minor), write('.'), write(Patch), write('-'), write(Status), nl,
-	current_logtalk_flag(prolog_version, (Major, Minor, Patch)),
+	write(LogtalkMajor), write('.'), write(LogtalkMinor), write('.'), write(LogtalkPatch), write('-'), write(LogtalkStatus), nl,
+	current_logtalk_flag(prolog_version, (PrologMajor, PrologMinor, PrologPatch)),
 	write('*****         Prolog version: '),
-	write(Major), write('.'), write(Minor), write('.'), write(Patch), nl
+	write(PrologMajor), write('.'), write(PrologMinor), write('.'), write(PrologPatch), nl
 )).
