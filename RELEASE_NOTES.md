@@ -38,7 +38,7 @@ predicate must be changed to comply with the `logtalk::print_message_token/4`
 method declaration.
 
 * CHANGED: The `predicate_property/2` built-in method now returns the property
-`number_of_clauses(0)` for non-defined predicates.
+`number_of_clauses(0)` for declared but not defined predicates.
 
 * FIXED: The `predicate_property/2` built-in method would not take into account
 multifile predicate clauses when computing the `number_of_clauses/1` property.
@@ -57,7 +57,9 @@ are module explicit-qualified by `user`.
 
 * UPDATED: The GNU Prolog adapter file now only provides dummy definitions for
 the `current_module/1`, `ensure_loaded/1`, and `use_module/1-2` predicates if
-they are not already built-in predicates.
+they are not already built-in predicates. These dummy definitions are only
+used to avoid errors when embedding Logtalk in a GNU Prolog executable
+application.
 
 Documentation
 -------------
@@ -76,7 +78,16 @@ Tools
 -----
 
 * ADDED: Support for generating entity predicate call graph diagrams for a
-single entity to the `diagrams` tool.
+single entity to the `diagrams` tool. These diagrams show internal entity
+predicate calling relations plus calls to external predicates.
+
+* FIXED: Replaced usage of the external `which` command by the bash `command`
+built-in command in the `logtalk_backend_select.sh`, `logtalk_tester.sh`, and
+`install.sh` POSIX shell scripts to avoid `which` verbose output in some
+operating-systems.
+
+* FIXED: The `logtalk_tester.sh` POSIX shell script now also print the status
+of the current Logtalk release when printing its version string.
 
 Tests
 -----
@@ -117,14 +128,6 @@ an object or a category defines for other entities.
 
 * ADDED: Notes on how to use the `logtalk_tester.sh` POSIX shell script on
 Windows to the `scripts/NOTES.md` file.
-
-* FIXED: Replaced usage of the external `which` command by the bash `command`
-built-in command in the `logtalk_backend_select.sh`, `logtalk_tester.sh`, and
-`install.sh` POSIX shell scripts to avoid `which` verbose output in some
-operating-systems.
-
-* FIXED: The `logtalk_tester.sh` POSIX shell script now also print the status
-of the current Logtalk release when printing its version string.
 
 Library
 -------
