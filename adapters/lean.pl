@@ -387,7 +387,8 @@ to_engine(Interactor, Pattern, Goal) :-
 		\+ atom_concat('$', _, Path),
 		working_directory(Current, Current),
 		atom_concat(Current, '/', ExpandedPath0),
-		atom_concat(ExpandedPath0, Path, ExpandedPath)
+		atom_concat(ExpandedPath0, Path, ExpandedPath1),
+		absolute_file_name(ExpandedPath1, ExpandedPath)
 	;	absolute_file_name(Path, ExpandedPath)
 	).
 
