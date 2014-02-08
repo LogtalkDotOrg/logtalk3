@@ -22,7 +22,7 @@
 	:- op(501, xfx, jkl).
 
 	% test operator overriding
-	:- public(op(600, xfx, :)).
+	:- public(op(600, xfx, (:))).
 
 	% test for call in "self"
 	:- public(operators/1).
@@ -53,7 +53,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/12/11,
+		date is 2014/02/08,
 		comment is 'Unit tests for the current_op/3 built-in directive.'
 	]).
 
@@ -86,11 +86,11 @@
 		Operators == [abc].
 
 	succeeds(current_op_3_8) :-
-		current_op_3_test_object_1::current_op(600, xfx, :),
-		\+ current_op_3_test_object_1::current_op(600, xfy, :).
+		current_op_3_test_object_1::current_op(600, xfx, (:)),
+		\+ current_op_3_test_object_1::current_op(600, xfy, (:)).
 
 	succeeds(current_op_3_9) :-
-		\+ current_op_3_test_object_2::current_op(600, xfx, :).
+		\+ current_op_3_test_object_2::current_op(600, xfx, (:)).
 
 	succeeds(current_op_3_10) :-
 		current_op_3_test_object_1::operators(Operators),

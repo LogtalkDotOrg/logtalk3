@@ -17,7 +17,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/12/16,
+		date is 2014/02/08,
 		comment is 'Sample category for testing with the `source_data` flag turned on.']).
 
 	:- public(a/1).
@@ -102,7 +102,7 @@
 		member(scope(Scope1), Properties1), Scope1 == (public),
 		member(static, Properties1),
 		(	current_logtalk_flag(coinduction, supported) ->
-			member(coinductive(Template), Properties1), Template == a(+)
+			member(coinductive(Template), Properties1), Template == a((+))
 		;	true
 		),
 		member(line_count(LC1), Properties1), integer(LC1),

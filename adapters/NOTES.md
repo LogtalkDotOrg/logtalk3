@@ -187,9 +187,10 @@ Lean Prolog 3.8.5 and later versions
 
 Experimental. Lean Prolog lacks compliance with official and de facto
 standards. Notably, it lacks support for stream aliases, for `0'Char`
-notation, and for escape sequences in atoms. Moreover, due to Lean
-Prolog limitation of compiling more than one file per session, the
-compilation of Logtalk source files generates intermediate Prolog
+notation, for escape sequences in atoms, and its limited parser often
+requires atoms to be quoted and/or write between ()'s. Moreover, due
+to Lean Prolog limitation of compiling more than one file per session,
+the compilation of Logtalk source files generates intermediate Prolog
 files that are consulted (i.e. interpreted) instead of being compiled,
 seriously hurting performance. Thus, practical use requires embedding
 Logtalk and the Logtalk application in Lean Prolog by including all
