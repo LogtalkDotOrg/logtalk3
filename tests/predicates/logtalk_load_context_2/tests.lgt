@@ -70,7 +70,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/10/08,
+		date is 2014/02/08,
 		comment is 'Unit tests for the logtalk_load_context/2 built-in predicate.'
 	]).
 
@@ -84,10 +84,11 @@
 	test(logtalk_load_context_2_2) :-
 		this(This),
 		object_property(This, file(_, Directory)),
+		write(directory-Directory), nl,
 		atom_concat(Directory, 'sample.lgt', Source),
 		logtalk_load(Source, [hook(hook)]),
 		result(source, Source0), Source0 == Source,
-		result(file, Source0), Source0 == Source,
+		result(file, Source1), Source1 == Source,
 		result(basename, Basename), Basename == 'sample.lgt',
 		result(directory, Directory0), Directory0 == Directory,
 		result(target, PrologFile0), atom(PrologFile0),
@@ -98,7 +99,7 @@
 		result(variable_names, VariableNames), variable_names_list(VariableNames),
 		result(stream, Stream), ground(Stream).
 
-	variable_names_list(-) :-
+	variable_names_list((-)) :-
 		!,
 		fail.
 	variable_names_list([]).
@@ -106,7 +107,7 @@
 		variable_names_pair(Pair),
 		variable_names_list(Pairs).
 
-	variable_names_pair(-) :-
+	variable_names_pair((-)) :-
 		!,
 		fail.
 	variable_names_pair(Name = Variable) :-
