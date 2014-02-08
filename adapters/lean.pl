@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Lean Prolog 3.8.5 and later versions
-%  Last updated on February 7, 2014
+%  Last updated on February 8, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -622,6 +622,7 @@ to_engine(Interactor, Pattern, Goal) :-
 % '$lgt_close'(@stream)
 
 '$lgt_close'(Stream) :-
+	remove_alias(Stream),
 	close(Stream).
 
 
