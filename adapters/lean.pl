@@ -812,7 +812,6 @@ mutex_property(_, _) :-
 
 abort :- throw(abort).
 
-':'(_, _) :- fail.
 break :- fail.
 current_module(_) :- fail.
 ensure_loaded(_) :- fail.
