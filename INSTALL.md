@@ -125,9 +125,9 @@ For POSIX systems, add the following lines to your `~/.profile` file:
 If you use instead a csh shell, add the following line to your `~/.cshrc` file:
 
 	setenv LOGTALKHOME /your/logtalk/installation/directory
-	setenv LOGTALKUSER $HOME/logtalk
-	setenv PATH $PATH:$LOGTALKHOME/tools/lgtdoc/xml:$LOGTALKHOME/scripts:$LOGTALKHOME/integration
-	setenv MANPATH $MANPATH:$LOGTALKHOME/man
+	setenv LOGTALKUSER ${HOME}/logtalk
+	setenv PATH ${PATH}:${LOGTALKHOME}/tools/lgtdoc/xml:${LOGTALKHOME}/scripts:${LOGTALKHOME}/integration
+	setenv MANPATH ${MANPATH}:${LOGTALKHOME}/man
 
 Don't use relative paths such as `../` or `./` in the definition of the environment
 variables. Some Prolog compilers don't expand environment variables, resulting
