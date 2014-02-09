@@ -48,7 +48,6 @@
 
 '$lgt_iso_predicate'(flush_output(_)).
 '$lgt_iso_predicate'(flush_output).
-'$lgt_iso_predicate'(open(_, _, _, _)).
 '$lgt_iso_predicate'(stream_property(_, _)).
 '$lgt_iso_predicate'(write_term(_, _)).
 '$lgt_iso_predicate'(write_term(_, _, _)).
