@@ -349,9 +349,9 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 
 '$lgt_quintus_reverse_slashes'([], []).
 '$lgt_quintus_reverse_slashes'([Char| Chars], [ConvertedChar| ConvertedChars]) :-
-	(	Char =:= 0'\ ->
-		ConvertedChar = 0'/
-	;	ConvertedChar = Char
+	(	char_code('\\', Code) ->
+		char_code('/', ConvertedCode)
+	;	ConvertedCode = Code
 	),
 	'$lgt_quintus_reverse_slashes'(Chars, ConvertedChars).
 
