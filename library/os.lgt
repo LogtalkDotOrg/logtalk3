@@ -36,9 +36,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.5,
+		version is 1.6,
 		author is 'Paulo Moura',
-		date is 2013/09/24,
+		date is 2014/02/09,
 		comment is 'Simple example of using conditional compilation to implement a portable operating-system interface for selected back-end Prolog compilers.'
 	]).
 
@@ -976,6 +976,108 @@
 
 		command_line_arguments(Arguments) :-
 			{get_cmd_line_args(Arguments)}.
+
+	:- elif(current_logtalk_flag(prolog_dialect, quintus)).
+
+		pid(_) :-
+			throw(not_available(pid/1)).
+
+		shell(_, _) :-
+			throw(not_available(shell/2)).
+
+		shell(Command) :-
+			{unix(shell(Command))}.
+
+		expand_path(Path, ExpandedPath) :-
+			{expanded_file_name(Path, ExpandedPath0)},
+			expand_path_(ExpandedPath0, ExpandedPath).
+
+		expand_path_(File, Converted) :-
+			atom_codes(File, FileCodes),
+			expand_path_reverse_slashes(FileCodes, ConvertedCodes),
+			atom_codes(Converted, ConvertedCodes).
+
+		expand_path_reverse_slashes([], []).
+		expand_path_reverse_slashes([Code| Codes], [ConvertedCode| ConvertedCodes]) :-
+			(	char_code('\\', Code) ->
+				char_code('/', ConvertedCode)
+			;	ConvertedCode = Code
+			),
+			expand_path_reverse_slashes(Codes, ConvertedCodes).
+
+		make_directory(Directory) :-
+			expand_path(Directory, Path),
+			(	{absolute_file_name(Path, [access(exist), file_type(directory), file_errors(fail)], _)} ->
+				true
+			;	atom_concat('mkdir ', Path, Command),
+				{unix(system(Command))}
+			).
+
+		delete_directory(Directory) :-
+			expand_path(Directory, Path),
+			{delete_directory(Path)}.
+
+		change_directory(Directory) :-
+			{unix(cd(Directory))}.
+
+		working_directory(Directory) :-
+			{absolute_file_name('.', Directory)}.
+
+		directory_exists(Directory) :-
+			expand_path(Directory, ExpandedPath),
+			{absolute_file_name(ExpandedPath, [access(exist), file_type(directory), file_errors(fail)], _)}.
+
+		file_exists(File) :-
+			expand_path(File, Path),
+			{file_exists(Path)}.
+
+		file_modification_time(File, Time) :-
+			expand_path(File, Path),
+			{file_property(Path, modify_time, Time)}.
+
+		file_size(File, Size) :-
+			expand_path(File, Path),
+			{file_property(Path, size_in_bytes, Size)}.
+
+		file_permission(File, Permission) :-
+			expand_path(File, Path),
+			{file_exists(Path, Permission)}.
+ 
+		delete_file(File) :-
+			expand_path(File, Path),
+			{delete_file(Path)}.
+
+		rename_file(Old, New) :-
+			expand_path(Old, OldPath),
+			expand_path(New, NewPath),
+			{rename_file(OldPath, NewPath)}.
+
+		environment_variable(Variable, Value) :-
+			{environ(Variable, Value)}.
+
+		time_stamp(Time) :-
+			{now(Time)}.
+
+		date_time(Year, Month, Day, Hours, Minutes, Seconds, 0) :-
+			{date(date(Year0, Month0, Day))},
+			Year is 1900 + Year0,
+			Month is Month0 + 1,
+			{time(time(Hours, Minutes, Seconds))}.
+
+		cpu_time(Time) :-
+			{statistics(runtime, [Miliseconds| _]), Time is Miliseconds/1000}.
+
+		wall_time(Time) :-
+			{statistics(real_time, [Time, _])}.
+
+		operating_system_type(Type) :-
+			(	{environ('COMSPEC', _)} ->
+				Type = windows
+			;	Type = unix
+			).
+
+		command_line_arguments(Arguments) :-
+			{unix(argv(Arguments))}.
 
 	:- else.
 
