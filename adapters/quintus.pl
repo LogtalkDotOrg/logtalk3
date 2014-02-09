@@ -343,17 +343,17 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 	'$lgt_quintus_convert_file_path'(ExpandedPath0, ExpandedPath).
 
 '$lgt_quintus_convert_file_path'(File, Converted) :-
-	atom_codes(File, FileChars),
-	'$lgt_quintus_reverse_slashes'(FileChars, ConvertedChars),
-	atom_codes(Converted, ConvertedChars).
+	atom_codes(File, FileCodes),
+	'$lgt_quintus_reverse_slashes'(FileCodes, ConvertedCodes),
+	atom_codes(Converted, ConvertedCodes).
 
 '$lgt_quintus_reverse_slashes'([], []).
-'$lgt_quintus_reverse_slashes'([Char| Chars], [ConvertedChar| ConvertedChars]) :-
+'$lgt_quintus_reverse_slashes'([Code| Codes], [ConvertedCode| ConvertedCodes]) :-
 	(	char_code('\\', Code) ->
 		char_code('/', ConvertedCode)
 	;	ConvertedCode = Code
 	),
-	'$lgt_quintus_reverse_slashes'(Chars, ConvertedChars).
+	'$lgt_quintus_reverse_slashes'(Codes, ConvertedCodes).
 
 
 % '$lgt_file_exists'(+atom)
