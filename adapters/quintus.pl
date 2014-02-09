@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Quintus Prolog 3.3~3.5
-%  Last updated on February 6, 2014
+%  Last updated on February 9, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -48,6 +48,7 @@
 
 
 :- op(700, xfx, \=).
+:- op(200, xfx, **).
 
 
 % '$lgt_iso_predicate'(?callable).
