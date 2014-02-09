@@ -62,8 +62,12 @@
 '$lgt_iso_predicate'(atom_length(_, _)).
 '$lgt_iso_predicate'(catch(_, _, _)).
 '$lgt_iso_predicate'(char_code(_, _)).
+'$lgt_iso_predicate'(get_code(_)).
+'$lgt_iso_predicate'(get_code(_, _)).
 '$lgt_iso_predicate'(number_codes(_, _)).
 '$lgt_iso_predicate'(once(_)).
+'$lgt_iso_predicate'(peek_code(_)).
+'$lgt_iso_predicate'(peek_code(_, _)).
 '$lgt_iso_predicate'(sub_atom(_, _, _, _, _)).
 '$lgt_iso_predicate'(subsumes_term(_, _)).
 '$lgt_iso_predicate'(throw(_)).
@@ -108,6 +112,14 @@ char_code(Char, Code) :-
 	atom_chars(Char, [Code]).
 
 
+get_code(Stream, Code) :-
+	get0(Stream, Code).
+
+
+get_code(Code) :-
+	get0(Code).
+
+
 number_codes(Number, Codes) :-
 	number_chars(Number, Codes).
 
@@ -115,6 +127,14 @@ number_codes(Number, Codes) :-
 once(Goal) :-
 	call(Goal),
 	!.
+
+
+peek_code(Stream, Code) :-
+	peek_char(Stream, Code).
+
+
+peek_code(Code) :-
+	peek_char(Code).
 
 
 sub_atom(Atom, Before, Length, After, SubAtom) :-
