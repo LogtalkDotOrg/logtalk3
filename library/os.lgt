@@ -1015,7 +1015,11 @@
 
 		delete_directory(Directory) :-
 			expand_path(Directory, Path),
-			{delete_directory(Path)}.
+			(	{absolute_file_name(Path, [access(exist), file_type(directory), file_errors(fail)], _)} ->
+				atom_concat('rmdir ', Path, Command),
+				{unix(system(Command))}
+			;	true
+			).
 
 		change_directory(Directory) :-
 			{unix(cd(Directory))}.
