@@ -730,8 +730,9 @@ stream_property(Stream, alias(Alias)) :-
 
 % '$lgt_prolog_goal_expansion'(@callable, -callable)
 
-'$lgt_prolog_goal_expansion'(_, _) :-
-	fail.
+'$lgt_prolog_goal_expansion'(read_term(Term, Options), {read_term(Options, Term)}).
+'$lgt_prolog_goal_expansion'(read_term(Stream, Term, Options), {read_term(Stream, Options, Term)}).
+'$lgt_prolog_goal_expansion'(open(File, Mode, Stream, Options), {open(File, Mode, Options, Stream)}).
 
 
 
