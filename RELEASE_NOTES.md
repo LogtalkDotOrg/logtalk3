@@ -69,6 +69,12 @@ Documentation
 
 * IMPROVED: Appearance of the POSIX shell script man pages.
 
+Installers and installation scripts
+-----------------------------------
+
+* FIXED: The Windows installer failed to copy the `tests` directory to the
+Logtalk user folder.
+
 Library
 -------
 
