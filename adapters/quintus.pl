@@ -34,6 +34,7 @@
 :- [library(environ)].
 :- [library(subsumes)].
 :- [library(unify)].
+:- [library(math)].
 
 
 
@@ -59,6 +60,8 @@
 % '$lgt_iso_predicate'(?callable).
 
 '$lgt_iso_predicate'(_ \= _).
+'$lgt_iso_predicate'(at_end_of_stream).
+'$lgt_iso_predicate'(at_end_of_stream(_)).
 '$lgt_iso_predicate'(atom_codes(_, _)).
 '$lgt_iso_predicate'(atom_concat(_, _, _)).
 '$lgt_iso_predicate'(atom_length(_, _)).
@@ -82,6 +85,14 @@
 
 Term1 \= Term2 :-
 	\+ (Term1 = Term2).
+
+
+at_end_of_stream :-
+	at_end_of_file.
+
+
+at_end_of_stream(Stream) :-
+	at_end_of_file(Stream).
 
 
 atom_codes(Atom, Codes) :-
@@ -730,9 +741,68 @@ stream_property(Stream, alias(Alias)) :-
 
 % '$lgt_prolog_goal_expansion'(@callable, -callable)
 
+% some built-in predicate use a argument order different from the one that become the standard
 '$lgt_prolog_goal_expansion'(read_term(Term, Options), {read_term(Options, Term)}).
 '$lgt_prolog_goal_expansion'(read_term(Stream, Term, Options), {read_term(Stream, Options, Term)}).
 '$lgt_prolog_goal_expansion'(open(File, Mode, Stream, Options), {open(File, Mode, Options, Stream)}).
+% most arothmetic functions are implemented as predicates
+'$lgt_prolog_goal_expansion'(Result is Expression, {Goal}) :-
+	'$lgt_quintus_arithmetic_expression_to_goal'(Expression, Result, Goal).
+'$lgt_prolog_goal_expansion'(X =:= Y, {GoalX, GoalY, ResultX =:= ResultY}) :-
+	'$lgt_quintus_arithmetic_expression_to_goal'(X, ResultX, GoalX),
+	'$lgt_quintus_arithmetic_expression_to_goal'(Y, ResultY, GoalY).
+'$lgt_prolog_goal_expansion'(X =\= Y, {GoalX, GoalY, ResultX =\= ResultY}) :-
+	'$lgt_quintus_arithmetic_expression_to_goal'(X, ResultX, GoalX),
+	'$lgt_quintus_arithmetic_expression_to_goal'(Y, ResultY, GoalY).
+'$lgt_prolog_goal_expansion'(X < Y, {GoalX, GoalY, ResultX < ResultY}) :-
+	'$lgt_quintus_arithmetic_expression_to_goal'(X, ResultX, GoalX),
+	'$lgt_quintus_arithmetic_expression_to_goal'(Y, ResultY, GoalY).
+'$lgt_prolog_goal_expansion'(X =< Y, {GoalX, GoalY, ResultX =< ResultY}) :-
+	'$lgt_quintus_arithmetic_expression_to_goal'(X, ResultX, GoalX),
+	'$lgt_quintus_arithmetic_expression_to_goal'(Y, ResultY, GoalY).
+'$lgt_prolog_goal_expansion'(X > Y, {GoalX, GoalY, ResultX > ResultY}) :-
+	'$lgt_quintus_arithmetic_expression_to_goal'(X, ResultX, GoalX),
+	'$lgt_quintus_arithmetic_expression_to_goal'(Y, ResultY, GoalY).
+'$lgt_prolog_goal_expansion'(X >= Y, {GoalX, GoalY, ResultX >= ResultY}) :-
+	'$lgt_quintus_arithmetic_expression_to_goal'(X, ResultX, GoalX),
+	'$lgt_quintus_arithmetic_expression_to_goal'(Y, ResultY, GoalY).
+
+'$lgt_quintus_arithmetic_expression_to_goal'(Expression, Result, ExpressionGoal) :-
+	(	var(Expression) ->
+		ExpressionGoal = (Result is Expression)
+	;	number(Expression) ->
+		ExpressionGoal = (Result is Expression)
+	;	'$lgt_quintus_arithmetic_function_1'(Expression, Result, X, ResultX, Goal) ->
+		'$lgt_quintus_arithmetic_expression_to_goal'(X, ResultX, GoalX),
+		ExpressionGoal = (GoalX, Goal)
+	;	'$lgt_quintus_arithmetic_function_2'(Expression, Result, X, ResultX, Y, ResultY, Goal) ->
+		'$lgt_quintus_arithmetic_expression_to_goal'(X, ResultX, GoalX),
+		'$lgt_quintus_arithmetic_expression_to_goal'(Y, ResultY, GoalY),
+		ExpressionGoal = (GoalX, GoalY, Goal)
+	).
+
+'$lgt_quintus_arithmetic_function_1'(abs(X), Result, X, ResultX, abs(ResultX, Result)).
+'$lgt_quintus_arithmetic_function_1'(atan(X), Result, X, ResultX, atan(ResultX, Result)).
+'$lgt_quintus_arithmetic_function_1'(ceiling(X), Result, X, ResultX, ceiling(ResultX, Result)).
+'$lgt_quintus_arithmetic_function_1'(cos(X), Result, X, ResultX, cos(ResultX, Result)).
+'$lgt_quintus_arithmetic_function_1'(float(X), Result, X, ResultX, float(ResultX, Result)).
+'$lgt_quintus_arithmetic_function_1'(floor(X), Result, X, ResultX, floor(ResultX, Result)).
+'$lgt_quintus_arithmetic_function_1'(log(X), Result, X, ResultX, log(ResultX, Result)).
+'$lgt_quintus_arithmetic_function_1'(round(X), Result, X, ResultX, round(ResultX, Result)).
+'$lgt_quintus_arithmetic_function_1'(sign(X), Result, X, ResultX, sign(ResultX, Result)).
+'$lgt_quintus_arithmetic_function_1'(sin(X), Result, X, ResultX, sin(ResultX, Result)).
+'$lgt_quintus_arithmetic_function_1'(sqrt(X), Result, X, ResultX, sqrt(ResultX, Result)).
+'$lgt_quintus_arithmetic_function_1'(truncate(X), Result, X, ResultX, truncate(ResultX, Result)).
+
+'$lgt_quintus_arithmetic_function_2'(X + Y, Result, X, ResultX, Y, ResultY, Result is ResultX + ResultY).
+'$lgt_quintus_arithmetic_function_2'(X - Y, Result, X, ResultX, Y, ResultY, Result is ResultX - ResultY).
+'$lgt_quintus_arithmetic_function_2'(X * Y, Result, X, ResultX, Y, ResultY, Result is ResultX * ResultY).
+'$lgt_quintus_arithmetic_function_2'(X / Y, Result, X, ResultX, Y, ResultY, Result is ResultX / ResultY).
+'$lgt_quintus_arithmetic_function_2'(X // Y, Result, X, ResultX, Y, ResultY, Result is ResultX // ResultY).
+'$lgt_quintus_arithmetic_function_2'(X ** Y, Result, X, ResultX, Y, ResultY, pow(ResultX, ResultY, Result)).
+'$lgt_quintus_arithmetic_function_2'(X mod Y, Result, X, ResultX, Y, ResultY, Result is ResultX mod ResultY).
+'$lgt_quintus_arithmetic_function_2'(min(X, Y), Result, X, ResultX, Y, ResultY, min(ResultX, ResultY, Result)).
+'$lgt_quintus_arithmetic_function_2'(max(X, Y), Result, X, ResultX, Y, ResultY, max(ResultX, ResultY, Result)).
 
 
 
