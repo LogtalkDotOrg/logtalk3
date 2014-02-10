@@ -50,7 +50,8 @@ currently available using the reflection API.
 Prolog adapter and integration files
 ------------------------------------
 
-* ADDED: Restored experimental support for Lean Prolog and Quintus Prolog.
+* ADDED: Experimental support for Lean Prolog and Quintus Prolog. Consult the
+`adapters/NOTES.md` file for some of the know issues.
 
 * ADDED: Support for compiling `op/3` directives where the declared operators
 are module explicit-qualified by `user`.
@@ -86,7 +87,7 @@ built-in command in the `logtalk_backend_select.sh`, `logtalk_tester.sh`, and
 `install.sh` POSIX shell scripts to avoid `which` verbose output in some
 operating-systems.
 
-* FIXED: The `logtalk_tester.sh` POSIX shell script now also print the status
+* FIXED: The `logtalk_tester.sh` POSIX shell script now also prints the status
 of the current Logtalk release when printing its version string.
 
 Tests
