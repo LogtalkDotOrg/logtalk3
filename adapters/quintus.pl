@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Quintus Prolog 3.3~3.5
-%  Last updated on February 9, 2014
+%  Last updated on February 10, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -25,6 +25,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+:- [library(between)].
+:- [library(foreach)].
 :- [library(files)].
 :- [library(directory)].
 :- [library(date)].
@@ -70,6 +72,7 @@
 '$lgt_iso_predicate'(peek_code(_, _)).
 '$lgt_iso_predicate'(sub_atom(_, _, _, _, _)).
 '$lgt_iso_predicate'(subsumes_term(_, _)).
+'$lgt_iso_predicate'(term_variables(_, _)).
 '$lgt_iso_predicate'(throw(_)).
 '$lgt_iso_predicate'(unify_with_occurs_check(_, _)).
 
@@ -145,12 +148,65 @@ subsumes_term(General, Specific) :-
 	subsumes(General, Specific).
 
 
+term_variables(Term, Variables) :-
+	'$lgt_quintus_term_variables'(Term, [], List),
+	'$lgt_quintus_reverse'(List, [], Variables).
+
+'$lgt_quintus_term_variables'(Term, Acc, Variables) :-
+	(	var(Term) ->
+		(	'$lgt_quintus_var_member_chk'(Term, Acc) ->
+			Variables = Acc
+		;	Variables = [Term| Acc]
+		)
+	;	Term =.. [_| Args],
+		'$lgt_quintus_term_variables_list'(Args, Acc, Variables)
+	).
+
+'$lgt_quintus_term_variables_list'([], Variables, Variables).
+'$lgt_quintus_term_variables_list'([Term| Terms], Acc, Variables) :-
+	'$lgt_quintus_term_variables'(Term, Acc, Acc2),
+	'$lgt_quintus_term_variables_list'(Terms, Acc2, Variables).
+
+'$lgt_quintus_var_member_chk'(Variable, [Head| Tail]) :-
+	(	Variable == Head ->
+		true
+	;	'$lgt_quintus_var_member_chk'(Variable, Tail)
+	).
+
+'$lgt_quintus_reverse'([], Reversed, Reversed).
+'$lgt_quintus_reverse'([Head| Tail], List, Reversed) :-
+	'$lgt_quintus_reverse'(Tail, [Head| List], Reversed).
+
+
 throw(Ball) :-
 	raise_exception(Ball).
 
 
 unify_with_occurs_check(Term1, Term2) :-
 	unify(Term1, Term2).
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  de facto standard Prolog predicates that might be missing
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% between(+integer, +integer, ?integer) -- library predicate
+
+
+% forall(+callable, +callable) -- library predicate
+
+
+% format(+stream_or_alias, +character_code_list_or_atom, +list) -- built-in
+
+
+% format(+character_code_list_or_atom, +list) -- built-in
+
+
+% numbervars(?term, +integer, ?integer) -- built-in
 
 
 
@@ -167,6 +223,8 @@ unify_with_occurs_check(Term1, Term2) :-
 % '$lgt_predicate_property'(+callable, ?predicate_property)
 
 
+'$lgt_predicate_property'(Pred, static) :-
+	predicate_property(Pred, compiled).
 '$lgt_predicate_property'(Pred, Prop) :-
 	predicate_property(Pred, Prop).
 
@@ -183,12 +241,6 @@ unify_with_occurs_check(Term1, Term2) :-
 
 setup_call_cleanup(_, _, _) :-
 	throw(not_supported(setup_call_cleanup/3)).
-
-
-% forall(+callable, +callable)
-
-forall(Generate, Test) :-
-	\+ (Generate, \+ Test).
 
 
 % call/2-7
@@ -293,7 +345,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 '$lgt_prolog_feature'(encoding_directive, unsupported).
 '$lgt_prolog_feature'(tabling, unsupported).
 '$lgt_prolog_feature'(threads, unsupported).
-'$lgt_prolog_feature'(modules, unsupported).
+'$lgt_prolog_feature'(modules, supported).
 '$lgt_prolog_feature'(coinduction, unsupported).
 
 
