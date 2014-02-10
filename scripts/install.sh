@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Logtalk installation script
-##   Last updated on February 7, 2014
+##   Last updated on February 10, 2014
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -166,7 +166,7 @@ echo "* B-Prolog (version 7.8 or later):         bplgt"
 echo "* CxProlog (version 0.97.7 or later):      cxlgt"
 echo "* ECLiPSe (version 6.1#143 or later):      eclipselgt"
 echo "* GNU Prolog (version 1.4.2 or later):     gplgt"
-echo "* Lean Prolog (version 3.8.6 or later):    lplgt       (experimental)"
+echo "* Lean Prolog (version 3.8.8 or later):    lplgt       (experimental)"
 echo "* Qu-Prolog (version 9.0 or later):        qplgt"
 echo "* Quintus Prolog (version 3.3 or later):   quintuslgt  (experimental)"
 echo "* SICStus Prolog (version 4.1.0 or later): sicstuslgt"

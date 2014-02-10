@@ -3,8 +3,8 @@
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
-%  Adapter file for Lean Prolog 3.8.6 and later versions
-%  Last updated on February 9, 2014
+%  Adapter file for Lean Prolog 3.8.8 and later versions
+%  Last updated on February 10, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -46,28 +46,8 @@
 %
 % table of missing ISO predicates which are defined in this file
 
-'$lgt_iso_predicate'(write_term(_, _)).
-'$lgt_iso_predicate'(write_term(_, _, _)).
-
-
-write_term(Term, Options) :-
-	current_output(Stream),
-	write_term(Stream, Term, Options).
-
-
-write_term(Stream, Term, Options) :-
-	'$lgt_member'(quoted(true), Options),
-	!,
-	current_output(Current),
-	set_output(Stream),
-	writeq(Term),
-	set_output(Current).
-
-write_term(Stream, Term, _) :-
-	current_output(Current),
-	set_output(Stream),
-	write(Term),
-	set_output(Current).
+'$lgt_iso_predicate'(_) :-
+	fail.
 
 
 
@@ -288,7 +268,7 @@ to_engine(Interactor, Pattern, Goal) :-
 '$lgt_prolog_feature'(prolog_dialect, lean).
 '$lgt_prolog_feature'(prolog_version, (Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, lprolog(Major, Minor, Patch, _)).
-'$lgt_prolog_feature'(prolog_compatible_version, '@>='((3, 8, 6))).
+'$lgt_prolog_feature'(prolog_compatible_version, '@>='((3, 8, 8))).
 
 '$lgt_prolog_feature'(encoding_directive, source).
 '$lgt_prolog_feature'(tabling, unsupported).
@@ -598,11 +578,7 @@ to_engine(Interactor, Pattern, Goal) :-
 % '$lgt_open'(+atom, +atom, -stream, @list)
 
 '$lgt_open'(File, Mode, Stream, Options) :-
-	(	'$lgt_member'(alias(Alias), Options) ->
-		open(File, Mode, Stream),
-		set_alias(Stream, Alias)
-	;	open(File, Mode, Stream)
-	).
+	open(File, Mode, Stream, Options).
 
 
 % '$lgt_close'(@stream)

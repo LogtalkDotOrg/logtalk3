@@ -180,7 +180,7 @@ to type:
 	$ logtalk
 
 
-Lean Prolog 3.8.6 and later versions
+Lean Prolog 3.8.8 and later versions
 ------------------------------------
 
 		lean.pl

@@ -33,7 +33,7 @@ system path):
 * CxProlog (version 0.97.7 or later):      `cxlgt`
 * ECLiPSe (version 6.1#143 or later):      `eclipselgt`
 * GNU Prolog (version 1.4.2 or later):     `gplgt`
-* Lean Prolog (version 3.8.6 or later):    `lplgt`
+* Lean Prolog (version 3.8.8 or later):    `lplgt`
 * Qu-Prolog (version 9.0 or later):        `qplgt`
 * Quintus Prolog (version 3.3 or later):   `quintuslgt`
 * SICStus Prolog (version 4.1.0 or later): `sicstuslgt`
