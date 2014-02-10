@@ -64,6 +64,7 @@
 '$lgt_iso_predicate'(atom_length(_, _)).
 '$lgt_iso_predicate'(catch(_, _, _)).
 '$lgt_iso_predicate'(char_code(_, _)).
+'$lgt_iso_predicate'(flush_output).
 '$lgt_iso_predicate'(get_code(_)).
 '$lgt_iso_predicate'(get_code(_, _)).
 '$lgt_iso_predicate'(number_codes(_, _)).
@@ -115,6 +116,11 @@ catch(Goal, Catcher, Recovery) :-
 
 char_code(Char, Code) :-
 	atom_chars(Char, [Code]).
+
+
+flush_output :-
+	current_output(Stream),
+	flush_output(Stream).
 
 
 get_code(Stream, Code) :-
