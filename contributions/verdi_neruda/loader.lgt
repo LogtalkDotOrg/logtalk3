@@ -23,11 +23,6 @@ load_interpreters([I|Is]) :-
 		 library(random_loader)],
 		[report(off)]
 	),
-	logtalk_load(
-		[library(heapp),
-		 library(heaps)],
-		[report(off)]
-	),
 	logtalk_load(counter, [report(off)]),
 	logtalk_load(magic, [report(off)]),
 	logtalk_load(flatting, [report(off)]),
