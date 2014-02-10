@@ -70,6 +70,8 @@
 '$lgt_iso_predicate'(once(_)).
 '$lgt_iso_predicate'(peek_code(_)).
 '$lgt_iso_predicate'(peek_code(_, _)).
+'$lgt_iso_predicate'(put_code(_)).
+'$lgt_iso_predicate'(put_code(_, _)).
 '$lgt_iso_predicate'(sub_atom(_, _, _, _, _)).
 '$lgt_iso_predicate'(subsumes_term(_, _)).
 '$lgt_iso_predicate'(term_variables(_, _)).
@@ -138,6 +140,14 @@ peek_code(Stream, Code) :-
 
 peek_code(Code) :-
 	peek_char(Code).
+
+
+put_code(Stream, Code) :-
+	put(Stream, Code).
+
+
+put_code(Code) :-
+	put(Code).
 
 
 sub_atom(Atom, Before, Length, After, SubAtom) :-
