@@ -218,16 +218,17 @@ Quintus Prolog 3.3~3.5
 
 Experimental. Quintus Prolog is still maintained but (apparently) no
 longer developed and thus it lacks compliance with current official and
-de facto standards. Notably, the `open/4`, `read_term/3`, and `write_term/3`
-built-in predicates use a different argument order and there are also
-significant differences in arithmetic functions support.
+de facto standards. Notably, the `open/4` and `read_term/2-3` built-in
+predicates use a different argument order and there are also significant
+differences in arithmetic functions support. This adapter file copes with
+some of these issues using the dialect-level goal-expansion mechanism.
 
 Settings files are not supported (must be manually loaded after starting
 Logtalk).
 
 The original version of this adapter file was written and tested with help
 of a friend of mine, Paulo Urbano, for a previous version. Adopted for the
-current release using the Windows version for testing.
+current release using version 3.5 for Windows for testing.
 
 
 SICStus Prolog 4.1.0 and later versions
