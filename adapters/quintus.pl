@@ -745,7 +745,9 @@ stream_property(Stream, alias(Alias)) :-
 '$lgt_prolog_goal_expansion'(read_term(Term, Options), {read_term(Options, Term)}).
 '$lgt_prolog_goal_expansion'(read_term(Stream, Term, Options), {read_term(Stream, Options, Term)}).
 '$lgt_prolog_goal_expansion'(open(File, Mode, Stream, Options), {open(File, Mode, Options, Stream)}).
-% most arothmetic functions are implemented as predicates
+% most arithmetic functions are implemented as predicates; the following workaround works for
+% most cases as long that the expanded goals don't appear as goals in bagof/3 and setof/3 calls
+% as this solution introduces additional variables
 '$lgt_prolog_goal_expansion'(Result is Expression, {Goal}) :-
 	'$lgt_quintus_arithmetic_expression_to_goal'(Expression, Result, Goal).
 '$lgt_prolog_goal_expansion'(X =:= Y, {GoalX, GoalY, ResultX =:= ResultY}) :-
