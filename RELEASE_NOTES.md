@@ -47,6 +47,11 @@ multifile predicate clauses when computing the `number_of_clauses/1` property.
 predicates defined within objects or categories as that information is not
 currently available using the reflection API.
 
+* FIXED: Debug code generated for clauses with pre-compiled heads now uses
+the form `user::Head` instead of `{Head}` in order to avoid predicate call
+reporting issues in the `debugger` and `lgtunit` tools.
+
+
 Prolog adapter and integration files
 ------------------------------------
 

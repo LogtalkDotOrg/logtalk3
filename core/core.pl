@@ -8318,7 +8318,7 @@ current_logtalk_flag(Flag, Value) :-
 %
 % translates an entity clause into a normal clause and a debug clause
 
-'$lgt_tr_clause'((Head:-Body), (THead:-'$lgt_nop'(Body), SBody), (THead:-'$lgt_nop'(Body),'$lgt_debug'(rule(Entity, Head, N), ExCtx),DBody), Ctx) :-
+'$lgt_tr_clause'((Head:-Body), (THead:-'$lgt_nop'(Body), SBody), (THead:-'$lgt_nop'(Body),DHead,DBody), Ctx) :-
 	'$lgt_pp_dynamic_'(Head),
 	!,
 	'$lgt_pp_entity_'(_, Entity, _, _, _),
@@ -8330,9 +8330,13 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_simplify_goal'(TBody, SBody)
 	;	SBody = TBody
 	),
+	(	Head = {UserHead} ->
+		DHead = '$lgt_debug'(fact(Entity, user::UserHead, N), ExCtx)
+	;	DHead = '$lgt_debug'(fact(Entity, Head, N), ExCtx)
+	),
 	'$lgt_clause_number'(Head, N).
 
-'$lgt_tr_clause'((Head:-Body), TClause, (THead:-'$lgt_debug'(rule(Entity, Head, N), ExCtx),DBody), Ctx) :-
+'$lgt_tr_clause'((Head:-Body), TClause, (THead:-DHead,DBody), Ctx) :-
 	!,
 	'$lgt_pp_entity_'(_, Entity, _, _, _),
 	'$lgt_head_meta_variables'(Head, MetaVars),
@@ -8347,12 +8351,20 @@ current_logtalk_flag(Flag, Value) :-
 		)
 	;	TClause = (THead:-TBody)
 	),
+	(	Head = {UserHead} ->
+		DHead = '$lgt_debug'(fact(Entity, user::UserHead, N), ExCtx)
+	;	DHead = '$lgt_debug'(fact(Entity, Head, N), ExCtx)
+	),
 	'$lgt_clause_number'(Head, N).
 
-'$lgt_tr_clause'(Fact, TFact, (TFact:-'$lgt_debug'(fact(Entity, Fact, N), ExCtx)), Ctx) :-
+'$lgt_tr_clause'(Fact, TFact, (TFact:-DHead), Ctx) :-
 	'$lgt_pp_entity_'(_, Entity, _, _, _),
 	'$lgt_tr_head'(Fact, TFact, Ctx),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	(	Fact = {UserFact} ->
+		DHead = '$lgt_debug'(fact(Entity, user::UserFact, N), ExCtx)
+	;	DHead = '$lgt_debug'(fact(Entity, Fact, N), ExCtx)
+	),
 	'$lgt_clause_number'(Fact, N).
 
 
