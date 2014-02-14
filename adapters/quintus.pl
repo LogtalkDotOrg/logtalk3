@@ -809,6 +809,7 @@ stream_property(Stream, alias(Alias)) :-
 '$lgt_quintus_arithmetic_function_1'(atan(X), Result, X, ResultX, atan(ResultX, Result)).
 '$lgt_quintus_arithmetic_function_1'(ceiling(X), Result, X, ResultX, ceiling(ResultX, Result)).
 '$lgt_quintus_arithmetic_function_1'(cos(X), Result, X, ResultX, cos(ResultX, Result)).
+'$lgt_quintus_arithmetic_function_1'(exp(X), Result, X, ResultX, exp(ResultX, Result)).
 '$lgt_quintus_arithmetic_function_1'(float(X), Result, X, ResultX, float(ResultX, Result)).
 '$lgt_quintus_arithmetic_function_1'(floor(X), Result, X, ResultX, floor(ResultX, Result)).
 '$lgt_quintus_arithmetic_function_1'(log(X), Result, X, ResultX, log(ResultX, Result)).
