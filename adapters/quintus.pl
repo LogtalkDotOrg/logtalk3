@@ -67,6 +67,8 @@
 '$lgt_iso_predicate'(atom_length(_, _)).
 '$lgt_iso_predicate'(catch(_, _, _)).
 '$lgt_iso_predicate'(char_code(_, _)).
+'$lgt_iso_predicate'(current_predicate(_)).
+'$lgt_iso_predicate'(current_prolog_flag(_, _)).
 '$lgt_iso_predicate'(flush_output).
 '$lgt_iso_predicate'(get_code(_)).
 '$lgt_iso_predicate'(get_code(_, _)).
@@ -76,6 +78,8 @@
 '$lgt_iso_predicate'(peek_code(_, _)).
 '$lgt_iso_predicate'(put_code(_)).
 '$lgt_iso_predicate'(put_code(_, _)).
+'$lgt_iso_predicate'(set_prolog_flag(_, _)).
+'$lgt_iso_predicate'(stream_property(_, _)).
 '$lgt_iso_predicate'(sub_atom(_, _, _, _, _)).
 '$lgt_iso_predicate'(subsumes_term(_, _)).
 '$lgt_iso_predicate'(term_variables(_, _)).
@@ -129,6 +133,18 @@ char_code(Char, Code) :-
 	atom_chars(Char, [Code]).
 
 
+current_predicate(Functor/Arity) :-
+	current_predicate(_, Callable),
+	functor(Callable, Functor, Arity).
+current_predicate(Module:Functor/Arity) :-
+	current_predicate(_, Module:Callable),
+	functor(Callable, Functor, Arity).
+
+
+current_prolog_flag(Flag, Value) :-
+	prolog_flag(Flag, Value).
+
+
 flush_output :-
 	current_output(Stream),
 	flush_output(Stream).
@@ -165,6 +181,18 @@ put_code(Stream, Code) :-
 
 put_code(Code) :-
 	put(Code).
+
+
+stream_property(Stream, alias(Alias)) :-
+	(	var(Stream) ->
+		'$lgt_quintus_stream_alias'(Stream, Alias)
+	;	'$lgt_quintus_stream_alias'(Stream, Alias),
+		!
+	).
+
+
+set_prolog_flag(Flag, Value) :-
+	prolog_flag(Flag, _, Value).
 
 
 sub_atom(Atom, Before, Length, After, SubAtom) :-
@@ -707,10 +735,6 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 '$lgt_quintus_save_stream_alias'(Stream, Alias) :-
 	retractall('$lgt_quintus_stream_alias'(Stream, _)),
 	asserta('$lgt_quintus_stream_alias'(Stream, Alias)).
-
-
-stream_property(Stream, alias(Alias)) :-
-	'$lgt_quintus_stream_alias'(Stream, Alias), !.
 
 
 
