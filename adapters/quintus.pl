@@ -438,8 +438,13 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 % expands a file path to a full path
 
 '$lgt_expand_path'(Path, ExpandedPath) :-
+	% first expand any environment variable in the path
 	expanded_file_name(Path, ExpandedPath0),
-	'$lgt_quintus_convert_file_path'(ExpandedPath0, ExpandedPath).
+	'$lgt_quintus_convert_file_path'(ExpandedPath0, ExpandedPath1),
+	(	absolute_file_name(ExpandedPath1, [file_errors(fail)], ExpandedPath) ->
+		true
+	;	absolute_file_name(ExpandedPath1, [file_type(directory), file_errors(fail)], ExpandedPath)
+	).
 
 '$lgt_quintus_convert_file_path'(File, Converted) :-
 	atom_codes(File, FileCodes),
