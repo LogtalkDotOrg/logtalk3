@@ -749,37 +749,37 @@ stream_property(Stream, alias(Alias)) :-
 '$lgt_prolog_goal_expansion'(Result is Expression, {Head}) :-
 	'$lgt_quintus_arithmetic_expression_to_head'(Result is Expression, Head),
 	'$lgt_quintus_arithmetic_expression_to_goal'(Expression, Result, Goal),
-	'$lgt_compile_aux_clauses'([{Head} :- {Goal}]).
+	'$lgt_compile_aux_clauses'([({Head} :- {Goal})]).
 '$lgt_prolog_goal_expansion'(X =:= Y, {Head}) :-
 	'$lgt_quintus_arithmetic_expression_to_head'(X =:= Y, Head),
 	'$lgt_quintus_arithmetic_expression_to_goal'(X, ResultX, GoalX),
 	'$lgt_quintus_arithmetic_expression_to_goal'(Y, ResultY, GoalY),
-	'$lgt_compile_aux_clauses'([{Head} :- {GoalX, GoalY, ResultX =:= ResultY}]).
+	'$lgt_compile_aux_clauses'([({Head} :- {GoalX, GoalY, ResultX =:= ResultY})]).
 '$lgt_prolog_goal_expansion'(X =\= Y, {Head}) :-
 	'$lgt_quintus_arithmetic_expression_to_head'(X =\= Y, Head),
 	'$lgt_quintus_arithmetic_expression_to_goal'(X, ResultX, GoalX),
 	'$lgt_quintus_arithmetic_expression_to_goal'(Y, ResultY, GoalY),
-	'$lgt_compile_aux_clauses'([{Head} :- {GoalX, GoalY, ResultX =\= ResultY}]).
+	'$lgt_compile_aux_clauses'([({Head} :- {GoalX, GoalY, ResultX =\= ResultY})]).
 '$lgt_prolog_goal_expansion'(X < Y, {Head}) :-
 	'$lgt_quintus_arithmetic_expression_to_head'(X < Y, Head),
 	'$lgt_quintus_arithmetic_expression_to_goal'(X, ResultX, GoalX),
 	'$lgt_quintus_arithmetic_expression_to_goal'(Y, ResultY, GoalY),
-	'$lgt_compile_aux_clauses'([{Head} :- {GoalX, GoalY, ResultX < ResultY}]).
+	'$lgt_compile_aux_clauses'([({Head} :- {GoalX, GoalY, ResultX < ResultY})]).
 '$lgt_prolog_goal_expansion'(X =< Y, {Head}) :-
 	'$lgt_quintus_arithmetic_expression_to_head'(X =< Y, Head),
 	'$lgt_quintus_arithmetic_expression_to_goal'(X, ResultX, GoalX),
 	'$lgt_quintus_arithmetic_expression_to_goal'(Y, ResultY, GoalY),
-	'$lgt_compile_aux_clauses'([{Head} :- {GoalX, GoalY, ResultX =< ResultY}]).
+	'$lgt_compile_aux_clauses'([({Head} :- {GoalX, GoalY, ResultX =< ResultY})]).
 '$lgt_prolog_goal_expansion'(X > Y, {Head}) :-
 	'$lgt_quintus_arithmetic_expression_to_head'(X > Y, Head),
 	'$lgt_quintus_arithmetic_expression_to_goal'(X, ResultX, GoalX),
 	'$lgt_quintus_arithmetic_expression_to_goal'(Y, ResultY, GoalY),
-	'$lgt_compile_aux_clauses'([{Head} :- {GoalX, GoalY, ResultX > ResultY}]).
+	'$lgt_compile_aux_clauses'([({Head} :- {GoalX, GoalY, ResultX > ResultY})]).
 '$lgt_prolog_goal_expansion'(X >= Y, {Head}) :-
 	'$lgt_quintus_arithmetic_expression_to_head'(X >= Y, Head),
 	'$lgt_quintus_arithmetic_expression_to_goal'(X, ResultX, GoalX),
 	'$lgt_quintus_arithmetic_expression_to_goal'(Y, ResultY, GoalY),
-	'$lgt_compile_aux_clauses'([{Head} :- {GoalX, GoalY, ResultX >= ResultY}]).
+	'$lgt_compile_aux_clauses'([({Head} :- {GoalX, GoalY, ResultX >= ResultY})]).
 
 '$lgt_quintus_arithmetic_expression_to_head'(Expression, Head) :-
 	term_variables(Expression, Variables),
