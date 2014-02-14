@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Quintus Prolog 3.3~3.5
-%  Last updated on February 10, 2014
+%  Last updated on February 14, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -745,29 +745,46 @@ stream_property(Stream, alias(Alias)) :-
 '$lgt_prolog_goal_expansion'(read_term(Term, Options), {read_term(Options, Term)}).
 '$lgt_prolog_goal_expansion'(read_term(Stream, Term, Options), {read_term(Stream, Options, Term)}).
 '$lgt_prolog_goal_expansion'(open(File, Mode, Stream, Options), {open(File, Mode, Options, Stream)}).
-% most arithmetic functions are implemented as predicates; the following workaround works for
-% most cases as long that the expanded goals don't appear as goals in bagof/3 and setof/3 calls
-% as this solution introduces additional variables
-'$lgt_prolog_goal_expansion'(Result is Expression, {Goal}) :-
-	'$lgt_quintus_arithmetic_expression_to_goal'(Expression, Result, Goal).
-'$lgt_prolog_goal_expansion'(X =:= Y, {GoalX, GoalY, ResultX =:= ResultY}) :-
+% most arithmetic functions are implemented as predicates
+'$lgt_prolog_goal_expansion'(Result is Expression, {Head}) :-
+	'$lgt_quintus_arithmetic_expression_to_head'(Result is Expression, Head),
+	'$lgt_quintus_arithmetic_expression_to_goal'(Expression, Result, Goal),
+	'$lgt_compile_aux_clauses'([{Head :- Goal}]).
+'$lgt_prolog_goal_expansion'(X =:= Y, {Head}) :-
+	'$lgt_quintus_arithmetic_expression_to_head'(X =:= Y, Head),
 	'$lgt_quintus_arithmetic_expression_to_goal'(X, ResultX, GoalX),
-	'$lgt_quintus_arithmetic_expression_to_goal'(Y, ResultY, GoalY).
-'$lgt_prolog_goal_expansion'(X =\= Y, {GoalX, GoalY, ResultX =\= ResultY}) :-
+	'$lgt_quintus_arithmetic_expression_to_goal'(Y, ResultY, GoalY),
+	'$lgt_compile_aux_clauses'([{Head :- GoalX, GoalY, ResultX =:= ResultY}]).
+'$lgt_prolog_goal_expansion'(X =\= Y, {Head}) :-
+	'$lgt_quintus_arithmetic_expression_to_head'(X =\= Y, Head),
 	'$lgt_quintus_arithmetic_expression_to_goal'(X, ResultX, GoalX),
-	'$lgt_quintus_arithmetic_expression_to_goal'(Y, ResultY, GoalY).
-'$lgt_prolog_goal_expansion'(X < Y, {GoalX, GoalY, ResultX < ResultY}) :-
+	'$lgt_quintus_arithmetic_expression_to_goal'(Y, ResultY, GoalY),
+	'$lgt_compile_aux_clauses'([{Head :- GoalX, GoalY, ResultX =\= ResultY}]).
+'$lgt_prolog_goal_expansion'(X < Y, {Head}) :-
+	'$lgt_quintus_arithmetic_expression_to_head'(X < Y, Head),
 	'$lgt_quintus_arithmetic_expression_to_goal'(X, ResultX, GoalX),
-	'$lgt_quintus_arithmetic_expression_to_goal'(Y, ResultY, GoalY).
-'$lgt_prolog_goal_expansion'(X =< Y, {GoalX, GoalY, ResultX =< ResultY}) :-
+	'$lgt_quintus_arithmetic_expression_to_goal'(Y, ResultY, GoalY),
+	'$lgt_compile_aux_clauses'([{Head :- GoalX, GoalY, ResultX < ResultY}]).
+'$lgt_prolog_goal_expansion'(X =< Y, {Head}) :-
+	'$lgt_quintus_arithmetic_expression_to_head'(X =< Y, Head),
 	'$lgt_quintus_arithmetic_expression_to_goal'(X, ResultX, GoalX),
-	'$lgt_quintus_arithmetic_expression_to_goal'(Y, ResultY, GoalY).
-'$lgt_prolog_goal_expansion'(X > Y, {GoalX, GoalY, ResultX > ResultY}) :-
+	'$lgt_quintus_arithmetic_expression_to_goal'(Y, ResultY, GoalY),
+	'$lgt_compile_aux_clauses'([{Head :- GoalX, GoalY, ResultX =< ResultY}]).
+'$lgt_prolog_goal_expansion'(X > Y, {Head}) :-
+	'$lgt_quintus_arithmetic_expression_to_head'(X > Y, Head),
 	'$lgt_quintus_arithmetic_expression_to_goal'(X, ResultX, GoalX),
-	'$lgt_quintus_arithmetic_expression_to_goal'(Y, ResultY, GoalY).
-'$lgt_prolog_goal_expansion'(X >= Y, {GoalX, GoalY, ResultX >= ResultY}) :-
+	'$lgt_quintus_arithmetic_expression_to_goal'(Y, ResultY, GoalY),
+	'$lgt_compile_aux_clauses'([{Head :- GoalX, GoalY, ResultX > ResultY}]).
+'$lgt_prolog_goal_expansion'(X >= Y, {Head}) :-
+	'$lgt_quintus_arithmetic_expression_to_head'(X >= Y, Head),
 	'$lgt_quintus_arithmetic_expression_to_goal'(X, ResultX, GoalX),
-	'$lgt_quintus_arithmetic_expression_to_goal'(Y, ResultY, GoalY).
+	'$lgt_quintus_arithmetic_expression_to_goal'(Y, ResultY, GoalY),
+	'$lgt_compile_aux_clauses'([{Head :- GoalX, GoalY, ResultX >= ResultY}]).
+
+'$lgt_quintus_arithmetic_expression_to_head'(Expression, Head) :-
+	term_variables(Expression, Variables),
+	gensym('$lgt_quintus_ae_', Functor),
+	Head =.. [Functor| Variables].
 
 '$lgt_quintus_arithmetic_expression_to_goal'(Expression, Result, ExpressionGoal) :-
 	(	var(Expression) ->
