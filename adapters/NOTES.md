@@ -126,12 +126,10 @@ instead of replacing them.
 
 On Windows, settings files are only supported on the Logtalk user folder.
 A workaround is to copy the integration shortcut to where you want to start
-Logtalk and edit its `Target` field contents to start with the following
-text:
+Logtalk, delete the contents of the `Start in` field, and edit its `Target`
+field contents to start with the following text:
 
 	C:\Windows\System32\cmd.exe /c set LOGTALK_STARTUP_DIRECTORY=%CD% &&
-
-You must also delete the contents of the `Start in` field.
 
 The Logtalk flag `prolog_compiler` is not usable due to lack of ECLiPSe
 built-in predicates for separate compilation and loading. To generate
@@ -223,8 +221,12 @@ predicates use a different argument order and there are also significant
 differences in arithmetic functions support. This adapter file copes with
 some of these issues using the dialect-level goal-expansion mechanism.
 
-Settings files are not supported (must be manually loaded after starting
-Logtalk).
+On Windows, settings files are only supported on the Logtalk user folder.
+A workaround is to copy the integration shortcut to where you want to start
+Logtalk, delete the contents of the `Start in` field, and edit its `Target`
+field contents to start with the following text:
+
+	C:\Windows\System32\cmd.exe /c set LOGTALK_STARTUP_DIRECTORY=%CD% &&
 
 The original version of this adapter file was written and tested with help
 of a friend of mine, Paulo Urbano, for a previous version. Adopted for the
