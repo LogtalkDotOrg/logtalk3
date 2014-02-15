@@ -38,7 +38,7 @@
 	:- info([
 		version is 1.6,
 		author is 'Paulo Moura',
-		date is 2014/02/09,
+		date is 2014/02/15,
 		comment is 'Simple example of using conditional compilation to implement a portable operating-system interface for selected back-end Prolog compilers.'
 	]).
 
@@ -899,10 +899,11 @@
 
 		expand_path(Path, ExpandedPath) :-
 			(	\+ atom_concat('/', _, Path),
-				\+ atom_concat('$', _, Path) ->
+				\+ atom_concat('$', _, Path),
 				{working_directory(Current, Current)},
 				atom_concat(Current, '/', ExpandedPath0),
-				atom_concat(ExpandedPath0, Path, ExpandedPath)
+				atom_concat(ExpandedPath0, Path, ExpandedPath1),
+				{absolute_file_name(ExpandedPath1, ExpandedPath)}
 			;	{absolute_file_name(Path, ExpandedPath)}
 			).
 
@@ -992,10 +993,14 @@
 			{expanded_file_name(Path, ExpandedPath0)},
 			expand_path_(ExpandedPath0, ExpandedPath).
 
-		expand_path_(File, Converted) :-
-			atom_codes(File, FileCodes),
-			expand_path_reverse_slashes(FileCodes, ConvertedCodes),
-			atom_codes(Converted, ConvertedCodes).
+		expand_path_(Path, ExpandedPath) :-
+			atom_codes(Path, PathCodes),
+			expand_path_reverse_slashes(PathCodes, ConvertedCodes),
+			atom_codes(ConvertedPath, ConvertedCodes),
+			(	{absolute_file_name(ConvertedPath, [file_errors(fail)], ExpandedPath)} ->
+				true
+			;	{absolute_file_name(ConvertedPath, [file_type(directory), file_errors(fail)], ExpandedPath)}
+			).
 
 		expand_path_reverse_slashes([], []).
 		expand_path_reverse_slashes([Code| Codes], [ConvertedCode| ConvertedCodes]) :-
