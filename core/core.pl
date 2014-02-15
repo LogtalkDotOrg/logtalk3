@@ -18855,16 +18855,12 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_load_settings_file'(Result, Value) :-
 	'$lgt_default_flag'(settings_file, Value),
-	% save the current directory
-	'$lgt_current_directory'(Current),
 	% find the location of the default scratch directory
 	'$lgt_expand_library_path'(logtalk_user, LogtalkUserDirectory),
 	atom_concat(LogtalkUserDirectory, 'scratch/', ScratchDirectory),
 	% define the compiler options to be used for compiling and loading the settings file
 	Options = [report(off), clean(on), scratch_directory(ScratchDirectory)],
-	'$lgt_load_settings_file'(Value, Options, Result),
-	% restore the current directory
-	'$lgt_change_directory'(Current).
+	'$lgt_load_settings_file'(Value, Options, Result).
 
 
 '$lgt_load_settings_file'(deny, _, disabled).
@@ -18893,14 +18889,20 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_load_settings_file_from_directory'(Directory, Options, Result) :-
-	'$lgt_change_directory'(Directory),
-	'$lgt_file_extension'(logtalk, Extension),
-	atom_concat(settings, Extension, SettingsFile),
-	'$lgt_file_exists'(SettingsFile) ->
-	catch(
-		(logtalk_load(SettingsFile, Options), Result = loaded(Directory)),
-		Error,
-		Result = error(Directory, Error)
+	(	'$lgt_file_extension'(logtalk, Extension),
+		atom_concat(settings, Extension, SettingsFile),
+		(	sub_atom(Directory, _, _, 0, '/') ->
+			atom_concat(Directory, SettingsFile, SettingsPath)
+		;	atom_concat(Directory, '/', DirectorySlash),
+			atom_concat(DirectorySlash, SettingsFile, SettingsPath)
+		),
+		'$lgt_file_exists'(SettingsPath) ->
+		catch(
+			(logtalk_load(SettingsPath, Options), Result = loaded(Directory)),
+			Error,
+			Result = error(Directory, Error)
+		)
+	;	fail
 	).
 
 
