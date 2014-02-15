@@ -4563,10 +4563,10 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_delete_intermediate_files'(PrologFile) :-
 	% try to delete any Prolog-specific auxiliary files (ignore failure or error)
-	'$lgt_decompose_file_name'(PrologFile, Directory, Name, _),
-	atom_concat(Directory, Name, File),
-	'$lgt_file_extension'(tmp, Extension),
-	atom_concat(File, Extension, TmpFile),
+	'$lgt_file_extension'(prolog, PrologExtension),
+	atom_concat(Name, PrologExtension, PrologFile),
+	'$lgt_file_extension'(tmp, TmpExtension),
+	atom_concat(Name, TmpExtension, TmpFile),
 	'$lgt_file_exists'(TmpFile),
 	catch('$lgt_delete_file'(TmpFile), _, true),
 	fail.
