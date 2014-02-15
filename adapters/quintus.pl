@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Quintus Prolog 3.3~3.5
-%  Last updated on February 14, 2014
+%  Last updated on February 15, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -580,7 +580,8 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 % returns the Logtalk startup directory 
 
 '$lgt_startup_directory'(Directory) :-
-	environ('LOGTALK_STARTUP_DIRECTORY', Directory).
+	environ('LOGTALK_STARTUP_DIRECTORY', Directory0),
+	'$lgt_quintus_convert_file_path'(Directory0, Directory).
 
 
 % '$lgt_user_directory'(-atom)
@@ -588,7 +589,8 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 % returns the Logtalk user directory; fails if unknown
 
 '$lgt_user_directory'(Directory) :-
-	environ('LOGTALKUSER', Directory).
+	environ('LOGTALKUSER', Directory0),
+	'$lgt_quintus_convert_file_path'(Directory0, Directory).
 
 
 % '$lgt_home_directory'(-atom)
