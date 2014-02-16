@@ -41,6 +41,9 @@ This page provides an overview of Logtalk installation requirements and instruct
 <p>
 The preferred installation scenario is to have Logtalk installed in a system-wide location, thus available for all users, and a local copy of user-modifiable files on each user home directory (even when you are the single user of your computer). This scenario allows each user to independently customize Logtalk and to freely modify the provided programming examples. Logtalk installers, installation shell scripts, and Prolog integration scripts favor this installation scenario, although alternative installation scenarios are always possible. The installers set two environment variables, <code>LOGTALKHOME</code> and <code>LOGTALKUSER</code>, pointing, respectively, to the Logtalk installation folder and to the Logtalk user folder.
 </p>
+<p>
+User applications should preferable be kept outside of the Logtalk user folder created by the installation process, however, as updating Logtalk often results in updating the contents of this folder. If your applications depend on customizations to the distribution files, backup those changes before updating Logtalk.
+</p>
 
 <h2 id="installing_requirements">Hardware &amp; software requirements</h2>
 
@@ -189,7 +192,7 @@ In the Logtalk installation directory, you will find the following files and dir
 		<dd><code>NOTES.md</code> &ndash; notes on the provided programming tools</dd>
 		<dd><code>...</code> &ndash; programming tools</dd>
 </dl>
-<!-->
+<!--
 <dl>
 	<dt><code>xml</code></dt>
 		<dd><code>NOTES.md</code> &ndash; notes on the automatic generation of XML documentation files</dd>
@@ -315,7 +318,7 @@ Logtalk source files are text files containing one or more entity definitions (o
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &ndash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: November 20, 2013</span>
+		<span>Last updated on: February 16, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="documenting.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="programming.html">next</a></span><br/>

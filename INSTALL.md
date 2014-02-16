@@ -45,9 +45,9 @@ installation script, and defining a couple of environment variables. You can
 install Logtalk in any user accessible location. Whenever possible, it is
 recommended that Logtalk be installed by a user with administrative rights,
 as described below. This leads to a setup where each Logtalk user may freely
-try and modify the provided examples, library, and adapter files with the 
-option of, at any time, restoring the files to its original state by simply
-running one of the provided scripts.
+try and modify the provided examples, library, and tool files with the option
+of, at any time, restoring the files to its original state by simply running
+one of the provided scripts.
 
 
 * Installing for a single user with no administrative rights:
@@ -151,9 +151,9 @@ if you have set both Logtalk environment variables (`LOGTALKHOME` and `LOGTALKUS
 to point to the same directory.
 
 Each user must make a local copy of the Logtalk user-modifiable files (examples,
-libraries, and other supporting files) in his/her home directory. These copies
-can be easily made by running the `logtalk_user_setup` shell script (see the
-`scripts/NOTES.md` file for details):
+libraries, tools, and other supporting files) in his/her home directory. These
+copies can be easily made by running the `logtalk_user_setup` shell script (see
+the `scripts/NOTES.md` file for details):
 
 * POSIX systems  
 	`% logtalk_user_setup`
@@ -169,6 +169,13 @@ paths, and modify and experiment with the provided libraries and examples.
 
 Windows (admin and non-admin) users may also use the Logtalk GUI installer
 to setup their Logtalk user folder and the `LOGTALKUSER` environment variable.
+
+User applications should preferable be kept outside of the Logtalk user folder
+created by the scripts above as updating Logtalk often results in updating the
+contents of this folder. If your applications depend on customizations to the
+distribution files, backup those changes before updating Logtalk (the scripts
+above automatically make a backup of any existing Logtalk user folder but you
+should rely on your own backups).
 
 
 4. CREATING NEW PROLOG TOP-LEVELS FOR AUTOMATIC LOADING OF LOGTALK
