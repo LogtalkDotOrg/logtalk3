@@ -151,11 +151,13 @@ the steps (exemplified for POSIX systems):
 	$ gplgt
 	...
 	| ?- logtalk_compile([
-		logtalk_home('core/core_messages'),
-		logtalk_home('core/expanding'),
-		logtalk_home('core/monitoring'),
-		logtalk_home('core/forwarding')],
-		[scratch_directory('$HOME/collect')]).
+			core(expanding),
+			core(monitoring),
+			core(forwarding),
+			core(user),
+			core(logtalk),
+			core(core_messages)],
+			[scratch_directory('$HOME/collect')]).
 
 	$ cp $LOGTALKHOME/adapters/gnu.pl $HOME/collect/gnu.pl
 	$ cp $LOGTALKHOME/paths/paths.pl $HOME/collect/paths.pl
@@ -165,7 +167,7 @@ Edit the `$HOME/collect/core.pl` file and add the line `:- built_in.` to
 the top. Then:
 
 	$ cd $HOME/collect
-	$ gplc -o logtalk gnu.pl paths.pl core_messages.pl expanding.pl monitoring.pl forwarding.pl core.pl
+	$ gplc -o logtalk gnu.pl paths.pl expanding.pl monitoring.pl forwarding.pl user.pl logtalk.pl core_messages.pl core.pl
 
 Finally, move the new executable to a directory in your system PATH.
 For example:
