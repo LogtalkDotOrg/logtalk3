@@ -183,18 +183,38 @@ to type:
 Lean Prolog 3.8.8 and later versions
 ------------------------------------
 
-		lean.pl
+	lean.pl
 
-Experimental. Lean Prolog lacks compliance with official and de facto
-standards. Notably, it lacks support for stream aliases, for `0'Char`
+Experimental. Lean Prolog lacks compliance with both official and de facto
+standards. Notably, it lacks support for stream aliases, for the `0'Char`
 notation, for escape sequences in atoms, and its limited parser often
-requires atoms to be quoted and/or write between ()'s. Moreover, due
-to Lean Prolog limitation of compiling more than one file per session,
-the compilation of Logtalk source files generates intermediate Prolog
-files that are consulted (i.e. interpreted) instead of being compiled,
-seriously hurting performance. Thus, practical use requires embedding
-Logtalk and the Logtalk application in Lean Prolog by including all
-necessary files in a single file than can then be compiled.
+requires atoms to be quoted and/or write between ()'s. Moreover, due to
+Lean Prolog limitation of compiling more than one file per session, the
+compilation of Logtalk source files generates intermediate Prolog files
+that are consulted (i.e. interpreted) instead of being compiled, severely
+hurting performance. Thus, practical use requires embedding Logtalk and the
+Logtalk application in Lean Prolog by including all necessary files in a
+single file than can then be compiled. For example, you can collect all
+Logtalk core files in a single file by following the steps (exemplified
+for POSIX systems):
+
+	$ lplgt
+	...
+	| ?- logtalk_compile([
+			core(expanding),
+			core(monitoring),
+			core(forwarding),
+			core(user),
+			core(logtalk),
+			core(core_messages)],
+			[scratch_directory('$HOME/collect')]).
+
+	$ cp $LOGTALKHOME/adapters/lean.pl $HOME/collect/lean.pl
+	$ cp $LOGTALKHOME/paths/paths.pl $HOME/collect/paths.pl
+	$ cp $LOGTALKHOME/core/core.pl $HOME/collect/core.pl
+
+	$ cd $HOME/collect
+	$ cat $(ls -t *.pl) > logtalk_core.pl
 
 
 Qu-Prolog 9.0 and later versions
