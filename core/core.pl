@@ -2145,7 +2145,7 @@ current_logtalk_flag(Flag, Value) :-
 % the last argument is an atom: 'aXX' for alpha versions, 'bXX' for beta
 % versions, and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 0, 0, a35)).
+'$lgt_version_data'(logtalk(3, 0, 0, a36)).
 
 
 
@@ -15476,7 +15476,7 @@ current_logtalk_flag(Flag, Value) :-
 % control constructs
 '$lgt_built_in_method_spec'(_::_, p(p(p)), '::'(*, 0), 1).
 '$lgt_built_in_method_spec'(::_, p, '::'(0), 1).
-'$lgt_built_in_method_spec'('.'(_,_), p, [(::)], 1).
+'$lgt_built_in_method_spec'([_], p, [(::)], 1).
 '$lgt_built_in_method_spec'(^^_, p, '^^'(0), 1).
 '$lgt_built_in_method_spec'(_<<_, p(p(p)), '<<'(*, 0), 1).
 '$lgt_built_in_method_spec'(_>>_, p, '>>'(*, 0), 1).

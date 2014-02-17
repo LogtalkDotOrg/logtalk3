@@ -25,6 +25,16 @@ RELEASE NOTES
 =============
 
 
+3.00.0 Alpha 36 - March ??, 2014
+================================
+
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Don't make assumptions about the list functor. This change avoids a
+conflict with forthcoming SWI-Prolog versions.
+
+
 3.00.0 Alpha 35 - February 17, 2014
 ===================================
 
