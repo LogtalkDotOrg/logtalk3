@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for B-Prolog 7.8 and later versions
-%  Last updated on February 6, 2014
+%  Last updated on February 18, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -137,7 +137,9 @@
 '$lgt_prolog_meta_predicate'(fd_maximize(_, _), fd_maximize(0, *), predicate).
 '$lgt_prolog_meta_predicate'(freeze(_, _), freeze(*, 0), predicate).
 '$lgt_prolog_meta_predicate'(minof(_, _), minof(0, *), predicate).
+'$lgt_prolog_meta_predicate'(minof(_, _, _), minof(0, *, *), predicate).
 '$lgt_prolog_meta_predicate'(maxof(_, _), maxof(0, *), predicate).
+'$lgt_prolog_meta_predicate'(maxof(_, _, _), maxof(0, *, *), predicate).
 '$lgt_prolog_meta_predicate'(not(_), not(0), predicate).
 '$lgt_prolog_meta_predicate'(table_cardinality_limit(_, _), table_cardinality_limit(/, *), predicate).
 '$lgt_prolog_meta_predicate'(table_find_all(_, _), table_find_all(0, *), predicate).

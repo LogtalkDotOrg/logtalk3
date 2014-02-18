@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for YAP Prolog 6.3.4 and later versions
-%  Last updated on February 15, 2014
+%  Last updated on February 18, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -192,6 +192,16 @@
 :- if(predicate_property(call_residue_vars(_, _), built_in)).
 	'$lgt_prolog_meta_predicate'(call_residue_vars(_, _), call_residue_vars(0, *), predicate).
 :- endif.
+'$lgt_prolog_meta_predicate'(call_with_args(_, _, _, _, _, _, _, _, _, _), call_with_args(9, *, *, *, *, *, *, *, *, *), predicate).
+'$lgt_prolog_meta_predicate'(call_with_args(_, _, _, _, _, _, _, _, _), call_with_args(8, *, *, *, *, *, *, *, *), predicate).
+'$lgt_prolog_meta_predicate'(call_with_args(_, _, _, _, _, _, _, _), call_with_args(7, *, *, *, *, *, *, *), predicate).
+'$lgt_prolog_meta_predicate'(call_with_args(_, _, _, _, _, _, _), call_with_args(6, *, *, *, *, *, *), predicate).
+'$lgt_prolog_meta_predicate'(call_with_args(_, _, _, _, _, _), call_with_args(5, *, *, *, *, *), predicate).
+'$lgt_prolog_meta_predicate'(call_with_args(_, _, _, _, _), call_with_args(4, *, *, *, *), predicate).
+'$lgt_prolog_meta_predicate'(call_with_args(_, _, _, _), call_with_args(3, *, *, *), predicate).
+'$lgt_prolog_meta_predicate'(call_with_args(_, _, _), call_with_args(2, *, *), predicate).
+'$lgt_prolog_meta_predicate'(call_with_args(_, _), call_with_args(1, *), predicate).
+'$lgt_prolog_meta_predicate'(call_with_args(_), call_with_args(0), predicate).
 :- if(predicate_property(depth_bound_call(_, _), built_in)).
 	'$lgt_prolog_meta_predicate'(depth_bound_call(_, _), depth_bound_call(0, *), predicate).
 :- endif.
@@ -238,9 +248,11 @@
 
 % '$lgt_prolog_meta_directive'(@callable, -callable)
 
+'$lgt_prolog_meta_directive'(at_halt(_), at_halt(0)).
 '$lgt_prolog_meta_directive'(initialization(_, _), initialization(0, *)).
 '$lgt_prolog_meta_directive'(thread_initialization(_), thread_initialization(0)).
 '$lgt_prolog_meta_directive'(thread_local(_), thread_local(/)).
+'$lgt_prolog_meta_directive'(volatile(_), volatile(/)).
 
 
 % '$lgt_prolog_to_logtalk_meta_argument_specifier_hook'(@nonvar, -atom)
