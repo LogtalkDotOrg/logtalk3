@@ -32,7 +32,8 @@ Logtalk compiler and runtime
 ----------------------------
 
 * FIXED: Don't make assumptions about the list functor. This change avoids a
-conflict with forthcoming SWI-Prolog versions.
+conflict with forthcoming SWI-Prolog versions. Thanks to Jan Wielemaker for
+his help in diagnosing this issue.
 
 
 3.00.0 Alpha 35 - February 17, 2014

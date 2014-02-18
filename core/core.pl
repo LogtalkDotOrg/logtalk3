@@ -4102,10 +4102,6 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 '$lgt_metacall'(Goal, MetaCallCtx, Prefix, Sender, This, Self) :-
-	% as the meta-call context can include existentially-quantified goals, we cannot
-	% simply test for membership of the meta-call to decide if it should take place
-	% in "this" or in "sender"; thus, we "reverse" the test (the computational cost
-	% is essentially the same)
 	(	'$lgt_member_var'(Goal, MetaCallCtx) ->
 		'$lgt_metacall_sender'(Goal, Sender, This, [])
 	;	'$lgt_metacall_this'(Goal, Prefix, Sender, This, Self)
@@ -8916,18 +8912,21 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, _, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, _, _),
 	(	var(QGoal), '$lgt_member_var'(QGoal, MetaVars) ->
+		% runtime meta-call in the context of the "sender"
 		TPred = ('$lgt_convert_existentially_quantified_goal'(QGoal, Goal, TQGoal, TGoal), bagof(Term, TQGoal, List)),
 		DPred = ('$lgt_convert_existentially_quantified_goal'(QGoal, Goal, DQGoal, DGoal), bagof(Term, DQGoal, List)),
 		'$lgt_execution_context'(ExCtx, Sender, This, Self, MetaCallCtx, _),
 		TGoal = '$lgt_^metacall'(Goal, MetaCallCtx, Prefix, Sender, This, Self),
 		DGoal = '$lgt_debug'(goal(Goal, TGoal), ExCtx)
 	;	var(QGoal) ->
+		% local runtime meta-call
 		TPred = ('$lgt_convert_existentially_quantified_goal'(QGoal, Goal, TQGoal, TGoal), bagof(Term, TQGoal, List)),
 		DPred = ('$lgt_convert_existentially_quantified_goal'(QGoal, Goal, DQGoal, DGoal), bagof(Term, DQGoal, List)),
 		'$lgt_execution_context'(ExCtx, Sender, This, Self, _, _),
 		TGoal = '$lgt_^metacall'(Goal, [], Prefix, Sender, This, Self),
 		DGoal = '$lgt_debug'(goal(Goal, TGoal), ExCtx)
-	;	TPred = bagof(Term, TGoal, List),
+	;	% compile time local call
+		TPred = bagof(Term, TGoal, List),
 		DPred = bagof(Term, DGoal, List),
 		'$lgt_tr_body'(QGoal, TGoal, DGoal, Ctx)
 	).
@@ -8947,18 +8946,21 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, _, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, _, _),
 	(	var(QGoal), '$lgt_member_var'(QGoal, MetaVars) ->
+		% runtime meta-call in the context of the "sender"
 		TPred = ('$lgt_convert_existentially_quantified_goal'(QGoal, Goal, TQGoal, TGoal), setof(Term, TQGoal, List)),
 		DPred = ('$lgt_convert_existentially_quantified_goal'(QGoal, Goal, DQGoal, DGoal), setof(Term, DQGoal, List)),
 		'$lgt_execution_context'(ExCtx, Sender, This, Self, MetaCallCtx, _),
 		TGoal = '$lgt_^metacall'(Goal, MetaCallCtx, Prefix, Sender, This, Self),
 		DGoal = '$lgt_debug'(goal(Goal, TGoal), ExCtx)
 	;	var(QGoal) ->
+		% local runtime meta-call
 		TPred = ('$lgt_convert_existentially_quantified_goal'(QGoal, Goal, TQGoal, TGoal), setof(Term, TQGoal, List)),
 		DPred = ('$lgt_convert_existentially_quantified_goal'(QGoal, Goal, DQGoal, DGoal), setof(Term, DQGoal, List)),
 		'$lgt_execution_context'(ExCtx, Sender, This, Self, _, _),
 		TGoal = '$lgt_^metacall'(Goal, [], Prefix, Sender, This, Self),
 		DGoal = '$lgt_debug'(goal(Goal, TGoal), ExCtx)
-	;	TPred = setof(Term, TGoal, List),
+	;	% compile time local call
+		TPred = setof(Term, TGoal, List),
 		DPred = setof(Term, DGoal, List),
 		'$lgt_tr_body'(QGoal, TGoal, DGoal, Ctx)
 	).
@@ -10537,9 +10539,9 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_convert_existentially_quantified_goal'(@callable, -callable, -callable, -callable)
+% '$lgt_convert_existentially_quantified_goal'(@callable, -callable, -callable, +callable)
 %
-% converts a ^/2 goal at runtime (used with bagof/3 and setof/3)
+% converts a ^/2 goal at runtime (used with bagof/3 and setof/3 calls)
 
 '$lgt_convert_existentially_quantified_goal'(Goal, Goal, TGoal, TGoal) :-
 	var(Goal),
