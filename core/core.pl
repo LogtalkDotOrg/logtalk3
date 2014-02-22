@@ -10221,22 +10221,27 @@ current_logtalk_flag(Flag, Value) :-
 
 % call to a meta-predicate from a user-defined meta-predicate;
 % must check the number of arguments for shared closures
+%
+% note that getting the meta-predicate template for non-declared
+% built-in meta-predicates or for module meta-predicates is fragile
+% due to lack of standardization of meta-predicate specifications
 
 '$lgt_tr_body'(Pred, _, _, Ctx) :-
 	'$lgt_comp_ctx_meta_vars'(Ctx, [_| _]),
+	% we're compiling a clause for a meta-predicate
 	(	'$lgt_pp_meta_predicate_'(Pred, Meta) ->
 		% user-defined meta-predicate
 		true
 	;	'$lgt_prolog_meta_predicate'(Pred, Meta, predicate) ->
-		% proprietary built-in meta-predicates declared in the adapter files
+		% proprietary built-in meta-predicate declared in the adapter files
 		true
-	;	% non-declared proprietary built-in meta-predicates (fragile hack
-		% due to lack of standardization of meta-predicate specifications)
+	;	'$lgt_predicate_property'(Pred, built_in),
 		catch('$lgt_predicate_property'(Pred, meta_predicate(Meta)), _, fail) ->
+		% non-declared proprietary built-in meta-predicate
 		true
-	;	% meta-predicates specified in use_module/2 directives
-		'$lgt_pp_use_module_predicate_'(Module, Original, Pred),
+	;	'$lgt_pp_use_module_predicate_'(Module, Original, Pred),
 		catch('$lgt_predicate_property'(':'(Module, Original), meta_predicate(Meta)), _, fail) ->
+		% meta-predicates specified in a use_module/2 directive
 		true
 	;	fail
 	),
@@ -10293,7 +10298,9 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_body'(Alias, TPred, DPred, Ctx) :-
 	'$lgt_pp_uses_predicate_'(user, Pred, Alias),
-	'$lgt_prolog_meta_predicate'(Pred, Meta, Type),
+	(	'$lgt_prolog_meta_predicate'(Pred, Meta, Type)
+	;	catch('$lgt_predicate_property'(Pred, meta_predicate(Meta)), _, fail)
+	),
 	!,
 	Pred =.. [Functor| Args],
 	Meta =.. [Functor| MArgs],
@@ -10311,7 +10318,11 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 '$lgt_tr_body'(Pred, TPred, DPred, Ctx) :-
-	'$lgt_prolog_meta_predicate'(Pred, Meta, Type),
+	(	'$lgt_prolog_meta_predicate'(Pred, Meta, Type) ->
+		true
+	;	'$lgt_predicate_property'(Pred, built_in),
+		catch('$lgt_predicate_property'(Pred, meta_predicate(Meta)), _, fail)
+	),
 	functor(Pred, Functor, Arity),
 	(	'$lgt_comp_ctx_mode'(Ctx, runtime) ->
 		true

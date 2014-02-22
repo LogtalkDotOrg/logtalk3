@@ -31,6 +31,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Support for calling Prolog proprietary built-in meta-predicates not
+declared in the adapter files as long as their meta-predicate templates are
+usable.
+
 * FIXED: Don't make assumptions about the list functor. This change avoids a
 conflict with forthcoming SWI-Prolog versions. Thanks to Jan Wielemaker for
 his help in diagnosing this issue.
