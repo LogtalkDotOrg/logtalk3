@@ -8,7 +8,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on September 30, 2013
+%  Last updated on February 22, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -113,11 +113,10 @@ user:prolog_predicate_name(user:'$lgt_send_to_self'(_, _, _), '::/1') :- !.
 user:prolog_predicate_name(user:'$lgt_obj_super_call'(_, _, _), '^^/2 (from obj; same pred)') :- !.
 user:prolog_predicate_name(user:'$lgt_ctg_super_call'(_, _, _), '^^/2 (from ctg; same pred)') :- !.
 
-user:prolog_predicate_name(user:'$lgt_metacall'(_, _, _, _, _, _, _), 'call/N') :- !.
 user:prolog_predicate_name(user:'$lgt_metacall'(_, _, _, _, _, _), 'call/N') :- !.
-user:prolog_predicate_name(user:'$lgt_^metacall'(_, _, _, _, _, _), 'call/N') :- !.
-user:prolog_predicate_name(user:'$lgt_metacall_this'(_, _, _, _, _), 'call/N') :- !.
-user:prolog_predicate_name(user:'$lgt_metacall_sender'(_, _, _), 'call/N') :- !.
+user:prolog_predicate_name(user:'$lgt_metacall'(_, _, _, _, _), 'call/1') :- !.
+user:prolog_predicate_name(user:'$lgt_metacall_this'(_, _, _, _, _), 'call/1') :- !.
+user:prolog_predicate_name(user:'$lgt_metacall_sender'(_, _, _, _), 'call/1') :- !.
 
 user:prolog_predicate_name(user:'$lgt_expand_term'(_, _, _, _, _), 'expand_term/2') :- !.
 user:prolog_predicate_name(user:'$lgt_expand_goal'(_, _, _, _, _), 'expand_goal/2') :- !.
@@ -349,17 +348,24 @@ user:portray(c(This, r(Sender, Self, MetaVars, CoinductionStack))) :-
 	'$lgt_swi_unify_clause_body'(Goal, Entity, TGoal, TermPos0, TermPos1),
 	'$lgt_swi_unify_clause_body'(Recover, Entity, TRecover, TermPos1, TermPos).
 
-'$lgt_swi_unify_clause_body'(CallN, _, '$lgt_metacall'(Closure, ExtraArgs, _, _, _, _, _), TermPos, TermPos) :- !,
+'$lgt_swi_unify_clause_body'(CallN, _, '$lgt_metacall'('$lgt_local'(Closure), ExtraArgs, _, _, _, _), TermPos, TermPos) :- !,
 	functor(CallN, call, Arity),
 	!,
 	length(ExtraArgs, N),
 	Arity is N + 1,
-	catch(arg(1, CallN, Closure), Error, (writeln('ERROR 2'-Error), throw(Error))),
+	arg(1, CallN, Closure),
 	'$lgt_swi_call_n_args'(ExtraArgs, 2, CallN).
-'$lgt_swi_unify_clause_body'(Goal, _, '$lgt_metacall'(Goal, _, _, _, _, _), TermPos, TermPos) :- !.
-'$lgt_swi_unify_clause_body'(Goal, _, '$lgt_^metacall'(Goal, _, _, _, _, _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(CallN, _, '$lgt_metacall'(Closure, ExtraArgs, _, _, _, _), TermPos, TermPos) :- !,
+	functor(CallN, call, Arity),
+	!,
+	length(ExtraArgs, N),
+	Arity is N + 1,
+	arg(1, CallN, Closure),
+	'$lgt_swi_call_n_args'(ExtraArgs, 2, CallN).
+'$lgt_swi_unify_clause_body'(Goal, _, '$lgt_metacall'('$lgt_local'(Goal), _, _, _, _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(Goal, _, '$lgt_metacall'(Goal, _, _, _, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(Goal, _, '$lgt_metacall_this'(Goal, _, _, _, _), TermPos, TermPos) :- !.
-'$lgt_swi_unify_clause_body'(Goal, _, '$lgt_metacall_sender'(Goal, _, _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(Goal, _, '$lgt_metacall_sender'(Goal, _, _, _), TermPos, TermPos) :- !.
 
 '$lgt_swi_unify_clause_body'(bagof(Term, Goal, List), Entity, bagof(Term, TGoal, List), TermPos0, TermPos) :- !,
 	'$lgt_swi_unify_clause_body'(Goal, Entity, TGoal, TermPos0, TermPos).
@@ -558,7 +564,7 @@ user:portray(c(This, r(Sender, Self, MetaVars, CoinductionStack))) :-
 
 '$lgt_swi_call_n_args'([], _, _).
 '$lgt_swi_call_n_args'([Arg| Args], N, CallN) :-
-	catch(arg(N, CallN, Arg), Error, (writeln('ERROR 1'-Error), throw(Error))),
+	arg(N, CallN, Arg),
 	N2 is N + 1,
 	'$lgt_swi_call_n_args'(Args, N2, CallN).
 
@@ -582,9 +588,9 @@ user:portray(c(This, r(Sender, Self, MetaVars, CoinductionStack))) :-
 :- '$set_predicate_attribute'('$lgt_call_in_this'/2, trace, 1).
 
 :- '$set_predicate_attribute'('$lgt_metacall'/6, trace, 1).
-:- '$set_predicate_attribute'('$lgt_metacall'/7, trace, 1).
+:- '$set_predicate_attribute'('$lgt_metacall'/5, trace, 1).
 :- '$set_predicate_attribute'('$lgt_metacall_this'/5, trace, 1).
-:- '$set_predicate_attribute'('$lgt_metacall_sender'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_metacall_sender'/4, trace, 1).
 
 :- '$set_predicate_attribute'('$lgt_expand_term'/5, trace, 1).
 :- '$set_predicate_attribute'('$lgt_expand_goal'/5, trace, 1).

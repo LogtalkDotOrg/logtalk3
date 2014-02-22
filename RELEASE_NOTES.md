@@ -31,6 +31,11 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: Simplified and optimized the compilation and execution of calls to
+entity meta-predicates. The `logtalk::execution_context/6` method is changed
+to `logtalk::execution_context/5` as it's no longer necessary to keep track of
+the list of arguments at meta positions.
+
 * ADDED: Support for calling Prolog proprietary built-in meta-predicates not
 declared in the adapter files as long as their meta-predicate templates are
 usable.

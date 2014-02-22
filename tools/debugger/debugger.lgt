@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/08/03,
+		date is 2014/02/22,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -313,7 +313,7 @@
 		!.
 
 	spying(_, Goal, ExCtx, '*') :-
-		logtalk::execution_context(ExCtx, Sender, This, Self, _, _),
+		logtalk::execution_context(ExCtx, Sender, This, Self, _),
 		\+ \+ spying_(Sender, This, Self, Goal).
 
 	:- multifile(logtalk::debug_handler_provider/1).
@@ -590,11 +590,10 @@
 		fail.
 
 	do_port_option(x, _, _, _, _, ExCtx, _) :-
-		logtalk::execution_context(ExCtx, Sender, This, Self, MetaCallCtx, Stack),
+		logtalk::execution_context(ExCtx, Sender, This, Self, Stack),
 		write('  Sender:            '), writeq(Sender), nl,
 		write('  This:              '), writeq(This), nl,
 		write('  Self:              '), writeq(Self), nl,
-		write('  Meta-call context: '), writeq(MetaCallCtx), nl,
 		write('  Coinduction stack: '), writeq(Stack), nl,
 		fail.
 

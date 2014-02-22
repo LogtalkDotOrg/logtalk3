@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2014/1/2</code>
+            <code>2014/2/22</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -78,12 +78,12 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>print_message_tokens(@stream_or_alias,+atom,@list(term)) &ndash; one</code>
+              <code>print_message_tokens(@stream_or_alias,+atom,@list(nonvar)) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 class="code">print_message_token/2</h3>
+          <h3 class="code">print_message_token/4</h3>
           <blockquote>
             <p class="comment">User-defined hook predicate for printing a message token (at_same_line, nl, flush, Format-Arguments, ansi(Attributes,Format,Arguments), begin(Kind,Variable), and end(Variable)).</p>
           </blockquote>
@@ -94,11 +94,11 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>print_message_token(Stream,Token)</code>
+              <code>print_message_token(Stream,Prefix,Token,Tokens)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>print_message_token(@steream_or_alias,@nonvar) &ndash; zero_or_one</code>
+              <code>print_message_token(@stream_or_alias,@atom,@nonvar,@list(nonvar)) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
@@ -134,7 +134,7 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>message_prefix_stream(@nonvar,@callable,@atom,@list(term)) &ndash; zero_or_more</code>
+              <code>message_prefix_stream(@nonvar,@callable,@atom,@stream_or_alias) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
@@ -154,7 +154,7 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>message_hook(@nonvar,@callable,@atom,@list(term)) &ndash; zero_or_more</code>
+              <code>message_hook(@nonvar,@callable,@atom,@list(nonvar)) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
@@ -423,7 +423,7 @@
           </dl>
         </div>
         <div class="section">
-          <h3 class="code">execution_context/6</h3>
+          <h3 class="code">execution_context/5</h3>
           <blockquote>
             <p class="comment">Execution context term data. Execution context terms should be considered opaque terms subject to change without notice.</p>
           </blockquote>
@@ -434,11 +434,11 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>execution_context(ExecutionContext,Sender,This,Self,MetaCallContext,Stack)</code>
+              <code>execution_context(ExecutionContext,Sender,This,Self,Stack)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>execution_context(?nonvar,?object_identifier,?object_identifier,?object_identifier,@list(callable),@list(callable)) &ndash; zero_or_one</code>
+              <code>execution_context(?nonvar,?object_identifier,?object_identifier,?object_identifier,@list(callable)) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>

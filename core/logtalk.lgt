@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/02/06,
+		date is 2014/02/22,
 		comment is 'Built-in object providing message priting, debugging, library, source file, and hacking methods.']).
 
 	:- built_in.
@@ -202,11 +202,11 @@
 		argnames is ['CompiledPredicateIndicators', 'Entity', 'Type', 'PredicateIndicators']
 	]).
 
-	:- public(execution_context/6).
-	:- mode(execution_context(?nonvar, ?object_identifier, ?object_identifier, ?object_identifier, @list(callable), @list(callable)), zero_or_one).
-	:- info(execution_context/6, [
+	:- public(execution_context/5).
+	:- mode(execution_context(?nonvar, ?object_identifier, ?object_identifier, ?object_identifier, @list(callable)), zero_or_one).
+	:- info(execution_context/5, [
 		comment is 'Execution context term data. Execution context terms should be considered opaque terms subject to change without notice.',
-		argnames is ['ExecutionContext', 'Sender', 'This', 'Self', 'MetaCallContext', 'Stack']
+		argnames is ['ExecutionContext', 'Sender', 'This', 'Self', 'Stack']
 	]).
 
 	:- private(execution_context_this_rest/3).
@@ -382,7 +382,7 @@
 	decompile_predicate_heads(THeads, Entity, Type, Heads) :-
 		{'$lgt_decompile_predicate_heads'(THeads, Entity, Type, Heads)}.
 
-	execution_context(c(This, r(Sender, Self, MetaCallContext, CoinductionStack)), Sender, This, Self, MetaCallContext, CoinductionStack).
+	execution_context(c(This, r(Sender, Self, CoinductionStack)), Sender, This, Self, CoinductionStack).
 
 	execution_context_this_rest(c(This, Rest), This, Rest).
 

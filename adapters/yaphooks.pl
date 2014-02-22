@@ -5,7 +5,8 @@
 %
 %  integration code for YAP 6.3.4 and later versions to improve
 %  usability when using the YAP profilers
-%  Last updated on December 3, 2013
+%
+%  Last updated on February 22, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -45,11 +46,10 @@ user:prolog_predicate_name(user:'$lgt_send_to_self'(_, _, _), '::/1') :- !.
 user:prolog_predicate_name(user:'$lgt_obj_super_call'(_, _, _), '^^/2 (from obj; same pred)') :- !.
 user:prolog_predicate_name(user:'$lgt_ctg_super_call'(_, _, _), '^^/2 (from ctg; same pred)') :- !.
 
-user:prolog_predicate_name(user:'$lgt_metacall'(_, _, _, _, _, _, _), 'call/N') :- !.
 user:prolog_predicate_name(user:'$lgt_metacall'(_, _, _, _, _, _), 'call/N') :- !.
-user:prolog_predicate_name(user:'$lgt_^metacall'(_, _, _, _, _, _), 'call/N') :- !.
-user:prolog_predicate_name(user:'$lgt_metacall_this'(_, _, _, _, _), 'call/N') :- !.
-user:prolog_predicate_name(user:'$lgt_metacall_sender'(_, _, _), 'call/N') :- !.
+user:prolog_predicate_name(user:'$lgt_metacall'(_, _, _, _, _), 'call/1') :- !.
+user:prolog_predicate_name(user:'$lgt_metacall_this'(_, _, _, _, _), 'call/1') :- !.
+user:prolog_predicate_name(user:'$lgt_metacall_sender'(_, _, _, _), 'call/1') :- !.
 
 user:prolog_predicate_name(user:'$lgt_expand_term'(_, _, _, _, _), 'expand_term/2') :- !.
 user:prolog_predicate_name(user:'$lgt_expand_goal'(_, _, _, _, _), 'expand_goal/2') :- !.
