@@ -4026,7 +4026,6 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_metacall'('$lgt_local'(Closure), ExtraArgs, _, Prefix, Sender, This, Self) :-
 	!,
-	writeq('$lgt_local'(Closure)), nl,
 	'$lgt_metacall'(Closure, ExtraArgs, local, Prefix, Sender, This, Self).
 
 '$lgt_metacall'(Closure, ExtraArgs, Where, Prefix, Sender, This, Self) :-
