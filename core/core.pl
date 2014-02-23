@@ -4024,6 +4024,11 @@ current_logtalk_flag(Flag, Value) :-
 	;	throw(error(representation_error(lambda_parameters), logtalk(Parameters>>Lambda, This)))
 	).
 
+'$lgt_metacall'('$lgt_local'(Closure), ExtraArgs, _, Prefix, Sender, This, Self) :-
+	!,
+	writeq('$lgt_local'(Closure)), nl,
+	'$lgt_metacall'(Closure, ExtraArgs, local, Prefix, Sender, This, Self).
+
 '$lgt_metacall'(Closure, ExtraArgs, Where, Prefix, Sender, This, Self) :-
 	(	atom(Closure) ->
 		Goal =.. [Closure| ExtraArgs]
