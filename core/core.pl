@@ -8631,17 +8631,11 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
 	var(Pred),
 	!,
-	'$lgt_comp_ctx'(Ctx, _, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, _, _),
-	(	'$lgt_member_var'(Pred, MetaVars) ->
-		% we're compiling a clause for a meta-predicate; therefore, we need
-		% to connect the execution context and the meta-call context arguments
-		'$lgt_execution_context'(ExCtx, Sender, This, Self, MetaCallCtx, _),
-		TPred = '$lgt_metacall'(Pred, MetaCallCtx, Prefix, Sender, This, Self)
-	;	% we're either compiling a clause for a normal predicate (i.e. MetaVars == [])
-		% or the meta-call should be local as it corresponds to a non meta-argument
-		'$lgt_execution_context'(ExCtx, Sender, This, Self, _, _),
-		TPred = '$lgt_metacall'(Pred, [], Prefix, Sender, This, Self)
-	).
+	'$lgt_comp_ctx'(Ctx, _, Sender, This, Self, Prefix, _, MetaCallCtx, ExCtx, _, _),
+	% we're compiling a runtime meta-call; therefore, we need to connect
+	% the execution context and the meta-call context arguments
+	'$lgt_execution_context'(ExCtx, Sender, This, Self, MetaCallCtx, _),
+	TPred = '$lgt_metacall'(Pred, MetaCallCtx, Prefix, Sender, This, Self).
 
 
 % compiler bypass (call of external code)
@@ -8767,13 +8761,13 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_body'('$lgt_callN'(Closure, ExtraArgs), TPred, DPred, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, _, _),
-	(	var(Closure), '$lgt_member_var'(Closure, MetaVars) ->
-		% we're compiling a clause for a meta-predicate; therefore, we need
-		% to connect the execution context and the meta-call context arguments
+	'$lgt_comp_ctx'(Ctx, _, Sender, This, Self, Prefix, _, MetaCallCtx, ExCtx, _, _),
+	(	var(Closure) ->
+		% we're compiling a runtime meta-call; therefore, we need to connect
+		% the execution context and the meta-call context arguments
 		'$lgt_execution_context'(ExCtx, Sender, This, Self, MetaCallCtx, _),
 		TPred = '$lgt_metacall'(Closure, ExtraArgs, MetaCallCtx, Prefix, Sender, This, Self)
-	;	callable(Closure), \+ '$lgt_member_var'(Closure, MetaVars),
+	;	callable(Closure),
 		% we're either compiling a clause for a normal predicate (i.e. MetaVars == [])
 		% or the meta-call should be local as it corresponds to a non meta-argument
 		'$lgt_extend_closure'(Closure, ExtraArgs, Goal),
@@ -8824,18 +8818,11 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_body'(Free/Parameters>>Lambda, TPred, DPred, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, _, _),
-	(	var(Lambda), '$lgt_member_var'(Lambda, MetaVars) ->
-		% we're compiling a clause for a meta-predicate; therefore, we need
-		% to connect the execution context and the meta-call context arguments
-		'$lgt_execution_context'(ExCtx, Sender, This, Self, MetaCallCtx, _),
-		TPred = '$lgt_metacall'(Free/Parameters>>Lambda, [], MetaCallCtx, Prefix, Sender, This, Self)
-	;	% we're either compiling a clause for a normal predicate (i.e. MetaVars == [])
-		% or the meta-call should be local as it corresponds to a non meta-argument
-		% or the meta-call is an explicitly qualifed call (::/2, ::/1, :/2)
-		'$lgt_execution_context'(ExCtx, Sender, This, Self, _, _),
-		TPred = '$lgt_metacall'(Free/Parameters>>Lambda, [], [], Prefix, Sender, This, Self)
-	),
+	'$lgt_comp_ctx'(Ctx, _, Sender, This, Self, Prefix, _, MetaCallCtx, ExCtx, _, _),
+	% lambda expressions are handled as meta-calls; therefore, we need to
+	% connect the execution context and the meta-call context arguments
+	'$lgt_execution_context'(ExCtx, Sender, This, Self, MetaCallCtx, _),
+	TPred = '$lgt_metacall'(Free/Parameters>>Lambda, [], MetaCallCtx, Prefix, Sender, This, Self),
 	DPred = '$lgt_debug'(goal(Free/Parameters>>Lambda, TPred), ExCtx).
 
 '$lgt_tr_body'(Parameters>>Lambda, TPred, DPred, Ctx) :-
@@ -8848,18 +8835,11 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_body'(Parameters>>Lambda, TPred, DPred, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, _, _),
-	(	var(Lambda), '$lgt_member_var'(Lambda, MetaVars) ->
-		% we're compiling a clause for a meta-predicate; therefore, we need
-		% to connect the execution context and the meta-call context arguments
-		'$lgt_execution_context'(ExCtx, Sender, This, Self, MetaCallCtx, _),
-		TPred = '$lgt_metacall'(Parameters>>Lambda, [], MetaCallCtx, Prefix, Sender, This, Self)
-	;	% we're either compiling a clause for a normal predicate (i.e. MetaVars == [])
-		% or the meta-call should be local as it corresponds to a non meta-argument
-		% or the meta-call is an explicitly qualifed call (::/2, ::/1, :/2)
-		'$lgt_execution_context'(ExCtx, Sender, This, Self, _, _),
-		TPred = '$lgt_metacall'(Parameters>>Lambda, [], [], Prefix, Sender, This, Self)
-	),
+	'$lgt_comp_ctx'(Ctx, _, Sender, This, Self, Prefix, _, MetaCallCtx, ExCtx, _, _),
+	% lambda expressions are handled as meta-calls; therefore, we need to
+	% connect the execution context and the meta-call context arguments
+	'$lgt_execution_context'(ExCtx, Sender, This, Self, MetaCallCtx, _),
+	TPred = '$lgt_metacall'(Parameters>>Lambda, [], MetaCallCtx, Prefix, Sender, This, Self),
 	DPred = '$lgt_debug'(goal(Parameters>>Lambda, TPred), ExCtx).
 
 '$lgt_tr_body'(Free/Lambda, _, _, Ctx) :-
@@ -8891,18 +8871,11 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_body'(Free/Lambda, TPred, DPred, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, _, _),
-	(	var(Lambda), '$lgt_member_var'(Lambda, MetaVars) ->
-		% we're compiling a clause for a meta-predicate; therefore, we need
-		% to connect the execution context and the meta-call context arguments
-		'$lgt_execution_context'(ExCtx, Sender, This, Self, MetaCallCtx, _),
-		TPred = '$lgt_metacall'(Free/Lambda, [], MetaCallCtx, Prefix, Sender, This, Self)
-	;	% we're either compiling a clause for a normal predicate (i.e. MetaVars == [])
-		% or the meta-call should be local as it corresponds to a non meta-argument
-		% or the meta-call is an explicitly qualifed call (::/2, ::/1, :/2)
-		'$lgt_execution_context'(ExCtx, Sender, This, Self, _, _),
-		TPred = '$lgt_metacall'(Free/Lambda, [], [], Prefix, Sender, This, Self)
-	),
+	'$lgt_comp_ctx'(Ctx, _, Sender, This, Self, Prefix, _, MetaCallCtx, ExCtx, _, _),
+	% lambda expressions are handled as meta-calls; therefore, we need to
+	% connect the execution context and the meta-call context arguments
+	'$lgt_execution_context'(ExCtx, Sender, This, Self, MetaCallCtx, _),
+	TPred = '$lgt_metacall'(Free/Lambda, [], MetaCallCtx, Prefix, Sender, This, Self),
 	DPred = '$lgt_debug'(goal(Free/Lambda, TPred), ExCtx).
 
 
@@ -8910,20 +8883,13 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_body'(bagof(Term, QGoal, List), TPred, '$lgt_debug'(goal(bagof(Term, QGoal, List), DPred), ExCtx), Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, _, _),
-	(	var(QGoal), '$lgt_member_var'(QGoal, MetaVars) ->
-		% runtime meta-call in the context of the "sender"
+	'$lgt_comp_ctx'(Ctx, _, Sender, This, Self, Prefix, _, MetaCallCtx, ExCtx, _, _),
+	(	var(QGoal) ->
+		% runtime meta-call
 		TPred = ('$lgt_convert_existentially_quantified_goal'(QGoal, Goal, TQGoal, TGoal), bagof(Term, TQGoal, List)),
 		DPred = ('$lgt_convert_existentially_quantified_goal'(QGoal, Goal, DQGoal, DGoal), bagof(Term, DQGoal, List)),
 		'$lgt_execution_context'(ExCtx, Sender, This, Self, MetaCallCtx, _),
 		TGoal = '$lgt_^metacall'(Goal, MetaCallCtx, Prefix, Sender, This, Self),
-		DGoal = '$lgt_debug'(goal(Goal, TGoal), ExCtx)
-	;	var(QGoal) ->
-		% local runtime meta-call
-		TPred = ('$lgt_convert_existentially_quantified_goal'(QGoal, Goal, TQGoal, TGoal), bagof(Term, TQGoal, List)),
-		DPred = ('$lgt_convert_existentially_quantified_goal'(QGoal, Goal, DQGoal, DGoal), bagof(Term, DQGoal, List)),
-		'$lgt_execution_context'(ExCtx, Sender, This, Self, _, _),
-		TGoal = '$lgt_^metacall'(Goal, [], Prefix, Sender, This, Self),
 		DGoal = '$lgt_debug'(goal(Goal, TGoal), ExCtx)
 	;	% compile time local call
 		TPred = bagof(Term, TGoal, List),
@@ -8944,20 +8910,13 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_body'(setof(Term, QGoal, List), TPred, '$lgt_debug'(goal(setof(Term, QGoal, List), DPred), ExCtx), Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, _, _),
-	(	var(QGoal), '$lgt_member_var'(QGoal, MetaVars) ->
-		% runtime meta-call in the context of the "sender"
+	'$lgt_comp_ctx'(Ctx, _, Sender, This, Self, Prefix, _, MetaCallCtx, ExCtx, _, _),
+	(	var(QGoal) ->
+		% runtime meta-call
 		TPred = ('$lgt_convert_existentially_quantified_goal'(QGoal, Goal, TQGoal, TGoal), setof(Term, TQGoal, List)),
 		DPred = ('$lgt_convert_existentially_quantified_goal'(QGoal, Goal, DQGoal, DGoal), setof(Term, DQGoal, List)),
 		'$lgt_execution_context'(ExCtx, Sender, This, Self, MetaCallCtx, _),
 		TGoal = '$lgt_^metacall'(Goal, MetaCallCtx, Prefix, Sender, This, Self),
-		DGoal = '$lgt_debug'(goal(Goal, TGoal), ExCtx)
-	;	var(QGoal) ->
-		% local runtime meta-call
-		TPred = ('$lgt_convert_existentially_quantified_goal'(QGoal, Goal, TQGoal, TGoal), setof(Term, TQGoal, List)),
-		DPred = ('$lgt_convert_existentially_quantified_goal'(QGoal, Goal, DQGoal, DGoal), setof(Term, DQGoal, List)),
-		'$lgt_execution_context'(ExCtx, Sender, This, Self, _, _),
-		TGoal = '$lgt_^metacall'(Goal, [], Prefix, Sender, This, Self),
 		DGoal = '$lgt_debug'(goal(Goal, TGoal), ExCtx)
 	;	% compile time local call
 		TPred = setof(Term, TGoal, List),

@@ -39,6 +39,9 @@ usable.
 conflict with forthcoming SWI-Prolog versions. Thanks to Jan Wielemaker for
 his help in diagnosing this issue.
 
+* FIXED: Compilation of local meta-calls that result in calls to predicates
+that make meta-calls in the context of *sender*.
+
 
 3.00.0 Alpha 35 - February 17, 2014
 ===================================
