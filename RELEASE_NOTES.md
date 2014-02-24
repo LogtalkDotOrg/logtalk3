@@ -42,6 +42,12 @@ his help in diagnosing this issue.
 * FIXED: Compilation of local meta-calls that result in calls to predicates
 that make meta-calls in the context of *sender*.
 
+Library
+-------
+
+* UPDATED: The library `os.lgt` now uses the `getpid/1` built-in predicate
+provided by B-Prolog 8.1 when using this back-end compiler.
+
 
 3.00.0 Alpha 35 - February 17, 2014
 ===================================
