@@ -8736,11 +8736,17 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
 
-'$lgt_tr_body'(call(Goal), call(TGoal), '$lgt_debug'(goal(call(Goal), call(DGoal)), ExCtx), Ctx) :-
+'$lgt_tr_body'(call(Goal), TPred, '$lgt_debug'(goal(call(Goal), DPred), ExCtx), Ctx) :-
 	!,
-	% we must keep the call/1 wrapper in order to preserve cut semantics
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	'$lgt_tr_body'(Goal, TGoal, DGoal, Ctx).
+	'$lgt_tr_body'(Goal, TGoal, DGoal, Ctx),
+	(	functor(TGoal, '$lgt_metacall', _) ->
+		TPred = TGoal,
+		DPred = DGoal
+	;	% be conservative and keep the call/1 wrapper to ensure cut semantics
+		TPred = call(TGoal),
+		DPred = call(DGoal)
+	).
 
 '$lgt_tr_body'('$lgt_callN'(Closure, ExtraArgs), _, _, Ctx) :-
 	var(Closure),
@@ -8767,16 +8773,13 @@ current_logtalk_flag(Flag, Value) :-
 		% the execution context and the meta-call context arguments
 		'$lgt_execution_context'(ExCtx, Sender, This, Self, MetaCallCtx, _),
 		TPred = '$lgt_metacall'(Closure, ExtraArgs, MetaCallCtx, Prefix, Sender, This, Self)
-	;	callable(Closure),
-		% we're either compiling a clause for a normal predicate (i.e. MetaVars == [])
-		% or the meta-call should be local as it corresponds to a non meta-argument
-		'$lgt_extend_closure'(Closure, ExtraArgs, Goal),
-		% make sure the constructed goal is not a call to call/2-N itself
+	;	'$lgt_extend_closure'(Closure, ExtraArgs, Goal),
 		\+ (functor(Goal, call, Arity), Arity >= 2) ->
+		% not a call to call/2-N itself; safe to compile it
 		'$lgt_tr_body'(Goal, TPred, _, Ctx)
 	;	% runtime resolved meta-call
-		'$lgt_execution_context'(ExCtx, Sender, This, Self, _, _),
-		TPred = '$lgt_metacall'(Closure, ExtraArgs, [], Prefix, Sender, This, Self)
+		'$lgt_execution_context'(ExCtx, Sender, This, Self, MetaCallCtx, _),
+		TPred = '$lgt_metacall'(Closure, ExtraArgs, MetaCallCtx, Prefix, Sender, This, Self)
 	),
 	CallN =.. [call, Closure| ExtraArgs],
 	DPred = '$lgt_debug'(goal(CallN, TPred), ExCtx).

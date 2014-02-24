@@ -35,6 +35,9 @@ Logtalk compiler and runtime
 declared in the adapter files as long as their meta-predicate templates are
 usable.
 
+* IMPROVED: When compiling `call/1` goals, only keep the `call/1` wrapper if
+necessary to ensure cut semantics.
+
 * FIXED: Don't make assumptions about the list functor. This change avoids a
 conflict with forthcoming SWI-Prolog versions. Thanks to Jan Wielemaker for
 his help in diagnosing this issue.
@@ -45,7 +48,7 @@ that make meta-calls in the context of *sender*.
 Library
 -------
 
-* UPDATED: The library `os.lgt` now uses the `getpid/1` built-in predicate
+* UPDATED: The library `os.lgt` file now uses the `getpid/1` built-in predicate
 provided by B-Prolog 8.1 when using this back-end compiler.
 
 
