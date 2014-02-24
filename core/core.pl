@@ -3405,7 +3405,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_send_to_self_nv'(Obj, Pred, Sender) :-
 	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, _, _, _, _),
 	(	% lookup predicate declaration
-		call(Dcl, Pred, Scope, Meta, _, SCtn, _) ->
+		call(Dcl, Pred, Scope, _, _, SCtn, _) ->
 		(	% check scope
 			(Scope = p(_); Sender = SCtn) ->
 			(	% construct predicate, object, and "sender" templates
@@ -3415,13 +3415,11 @@ current_logtalk_flag(Flag, Value) :-
 				% lookup predicate definition
 				'$lgt_execution_context'(ExCtx, GSender, GObj, GObj, []),
 				call(Def, GPred, ExCtx, GCall, _, _) ->
-				% ensure that meta-arguments are called in sender
-				'$lgt_qualify_meta_arguments'(Meta, GSender, GCall, QGCall),
 				% cache lookup result
-				asserta(('$lgt_send_to_self_'(GObj, GPred, GSender) :- !, QGCall)),
+				asserta(('$lgt_send_to_self_'(GObj, GPred, GSender) :- !, GCall)),
 				% unify message arguments and call method
 				GObj = Obj, GPred = Pred, GSender = Sender,
-				call(QGCall)
+				call(GCall)
 			;	% no definition found; fail as per closed-world assumption
 				fail
 			)
@@ -3487,7 +3485,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, _, _, _, _),
 	!,
 	(	% lookup predicate declaration
-		call(Dcl, Pred, Scope, Meta, _, SCtn, _) ->
+		call(Dcl, Pred, Scope, _, _, SCtn, _) ->
 		(	% check public scope
 			Scope = p(p(_)) ->
 			(	% construct predicate and object templates
@@ -3496,14 +3494,12 @@ current_logtalk_flag(Flag, Value) :-
 				% lookup predicate definition
 				'$lgt_execution_context'(ExCtx, GSender, GObj, GObj, []),
 				call(Def, GPred, ExCtx, GCall, _, _) ->
-				% ensure that meta-arguments are called in sender
-				'$lgt_qualify_meta_arguments'(Meta, GSender, GCall, QGCall),
-				GGCall = '$lgt_guarded_method_call'(GObj, GPred, GSender, QGCall),
+				GGCall = '$lgt_guarded_method_call'(GObj, GPred, GSender, GCall),
 				% cache lookup result
 				asserta(('$lgt_send_to_obj_'(GObj, GPred, GSender) :- !, GGCall)),
 				% unify message arguments and call method
 				GObj = Obj, GPred = Pred, GSender = Sender,
-				call(QGCall)
+				call(GCall)
 			;	% no definition found; fail as per closed-world assumption
 				fail
 			)
@@ -3614,7 +3610,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, _, _, _, _),
 	!,
 	(	% lookup predicate declaration
-		call(Dcl, Pred, Scope, Meta, _, SCtn, _) ->
+		call(Dcl, Pred, Scope, _, _, SCtn, _) ->
 		(	% check public scope
 			Scope = p(p(_)) ->
 			(	% construct predicate and object templates
@@ -3623,13 +3619,11 @@ current_logtalk_flag(Flag, Value) :-
 				% lookup predicate definition
 				'$lgt_execution_context'(ExCtx, GSender, GObj, GObj, []),
 				call(Def, GPred, ExCtx, GCall, _, _) ->
-				% ensure that meta-arguments are called in sender
-				'$lgt_qualify_meta_arguments'(Meta, GSender, GCall, QGCall),
 				% cache lookup result
-				asserta(('$lgt_send_to_obj_ne_'(GObj, GPred, GSender) :- !, QGCall)),
+				asserta(('$lgt_send_to_obj_ne_'(GObj, GPred, GSender) :- !, GCall)),
 				% unify message arguments and call method
 				GObj = Obj, GPred = Pred, GSender = Sender,
-				call(QGCall)
+				call(GCall)
 			;	% no definition found; fail as per closed-world assumption
 				fail
 			)
@@ -3859,18 +3853,18 @@ current_logtalk_flag(Flag, Value) :-
 %
 % performs a meta-call at runtime on behalf of call/2-N
 
-'$lgt_metacall'(Sender<<Closure, ExtraArgs, Prefix, Sender, This, Self) :-
+'$lgt_metacall'('$lgt_local'(Closure), ExtraArgs, Prefix, _, This, Self) :-
 	!,
-	'$lgt_metacall'(Closure, ExtraArgs, sender, Prefix, Sender, This, Self).
+	'$lgt_metacall'(Closure, ExtraArgs, local, Prefix, This, This, Self).
 
 '$lgt_metacall'(Closure, ExtraArgs, Prefix, Sender, This, Self) :-
-	'$lgt_metacall'(Closure, ExtraArgs, local, Prefix, Sender, This, Self).
+	'$lgt_metacall'(Closure, ExtraArgs, sender, Prefix, Sender, This, Self).
 
 
 
-% '$lgt_metacall'(?term, +list, +atom, +atom, +object_identifier, +object_identifier, +object_identifier)
+% '$lgt_metacall'(?term, +list, @atom, +atom, +object_identifier, +object_identifier, +object_identifier)
 %
-% performs a meta-call at runtime on behalf of call/2-N
+% performs a meta-call constructed from a closure and a list of additional arguments
 
 '$lgt_metacall'(Closure, ExtraArgs, _, _, _, This, _) :-
 	var(Closure),
@@ -4007,28 +4001,32 @@ current_logtalk_flag(Flag, Value) :-
 		throw(error(type_error(callable, Closure), logtalk(Call, This)))
 	).
 
-'$lgt_metacall'(Free/Lambda, ExtraArgs, Where, Prefix, Sender, This, Self) :-
+'$lgt_metacall'(Free/Lambda, ExtraArgs, LambdaMetaCallCtx, Prefix, Sender, This, Self) :-
 	!,
 	'$lgt_must_be'(curly_bracketed_term, Free, logtalk(Free/Lambda, This)),
 	'$lgt_copy_term_without_constraints'(Free/Lambda, Free/LambdaCopy),
-	'$lgt_metacall'(LambdaCopy, ExtraArgs, Where, Prefix, Sender, This, Self).
+	'$lgt_metacall'(LambdaCopy, ExtraArgs, LambdaMetaCallCtx, Prefix, Sender, This, Self).
 
-'$lgt_metacall'(Free/Parameters>>Lambda, ExtraArgs, Where, Prefix, Sender, This, Self) :-
+'$lgt_metacall'(Free/Parameters>>Lambda, ExtraArgs, LambdaMetaCallCtx, Prefix, Sender, This, Self) :-
 	!,
 	'$lgt_must_be'(curly_bracketed_term, Free, logtalk(Free/Parameters>>Lambda, This)),
 	(	'$lgt_copy_term_without_constraints'(Free/Parameters>>Lambda, Free/ParametersCopy>>LambdaCopy),
 		'$lgt_unify_lambda_parameters'(ParametersCopy, ExtraArgs, Rest, Free/Parameters>>Lambda, This) ->
-		'$lgt_metacall'(LambdaCopy, Rest, Where, Prefix, Sender, This, Self)
+		'$lgt_metacall'(LambdaCopy, Rest, LambdaMetaCallCtx, Prefix, Sender, This, Self)
 	;	throw(error(representation_error(lambda_parameters), logtalk(Free/Parameters>>Lambda, This)))
 	).
 
-'$lgt_metacall'(Parameters>>Lambda, ExtraArgs, Where, Prefix, Sender, This, Self) :-
+'$lgt_metacall'(Parameters>>Lambda, ExtraArgs, LambdaMetaCallCtx, Prefix, Sender, This, Self) :-
 	!,
 	(	'$lgt_copy_term_without_constraints'(Parameters>>Lambda, ParametersCopy>>LambdaCopy),
 		'$lgt_unify_lambda_parameters'(ParametersCopy, ExtraArgs, Rest, Parameters>>Lambda, This) ->
-		'$lgt_metacall'(LambdaCopy, Rest, Where, Prefix, Sender, This, Self)
+		'$lgt_metacall'(LambdaCopy, Rest, LambdaMetaCallCtx, Prefix, Sender, This, Self)
 	;	throw(error(representation_error(lambda_parameters), logtalk(Parameters>>Lambda, This)))
 	).
+
+'$lgt_metacall'('$lgt_local'(Closure), ExtraArgs, _, Prefix, Sender, This, Self) :-
+	!,
+	'$lgt_metacall'(Closure, ExtraArgs, local, Prefix, Sender, This, Self).
 
 '$lgt_metacall'(Closure, ExtraArgs, Where, Prefix, Sender, This, Self) :-
 	(	atom(Closure) ->
@@ -4041,7 +4039,7 @@ current_logtalk_flag(Flag, Value) :-
 		throw(error(type_error(callable, Closure), logtalk(Call, This)))
 	),
 	(	Where == sender ->
-		'$lgt_metacall_sender'(Goal, Sender, This, [])
+		'$lgt_metacall_sender'(Goal, Sender, This, ExtraArgs)
 	;	'$lgt_metacall_this'(Goal, Prefix, Sender, This, Self)
 	).
 
@@ -4064,10 +4062,6 @@ current_logtalk_flag(Flag, Value) :-
 %
 % performs a meta-call at runtime on behalf of call/1
 
-'$lgt_metacall'(Goal, Prefix, Sender, This, Self) :-
-	writeq('$lgt_metacall'(Goal, Prefix, Sender, This, Self)), nl,
-	fail.
-
 '$lgt_metacall'(Goal, _, _, This, _) :-
 	var(Goal),
 	throw(error(instantiation_error, logtalk(call(Goal), This))).
@@ -4082,18 +4076,18 @@ current_logtalk_flag(Flag, Value) :-
 	;	throw(error(type_error(callable, Goal), logtalk({Goal}, This)))
 	).
 
-'$lgt_metacall'(Sender<<Goal, _, Sender, This, _) :-
+'$lgt_metacall'('$lgt_local'(Goal), Prefix, Sender, This, Self) :-
+	!,
 	(	callable(Goal) ->
-		'$lgt_metacall_sender'(Goal, Sender, This, [])
+		'$lgt_metacall_this'(Goal, Prefix, Sender, This, Self)
 	;	var(Goal) ->
 		throw(error(instantiation_error, logtalk(call(Goal), This)))
 	;	throw(error(type_error(callable, Goal), logtalk(call(Goal), This)))
 	).
 
-'$lgt_metacall'(Goal, Prefix, Sender, This, Self) :-
-	!,
+'$lgt_metacall'(Goal, _, Sender, This, _) :-
 	(	callable(Goal) ->
-		'$lgt_metacall_this'(Goal, Prefix, Sender, This, Self)
+		'$lgt_metacall_sender'(Goal, Sender, This, [])
 	;	var(Goal) ->
 		throw(error(instantiation_error, logtalk(call(Goal), This)))
 	;	throw(error(type_error(callable, Goal), logtalk(call(Goal), This)))
@@ -8588,7 +8582,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	% we're either compiling a clause for a normal predicate (i.e. MetaVars == [])
 		% or the meta-call should be local as it corresponds to a non meta-argument
 		'$lgt_execution_context'(ExCtx, Sender, This, Self, _),
-		TPred = '$lgt_metacall'(Pred, Prefix, Sender, This, Self)
+		TPred = '$lgt_metacall'('$lgt_local'(Pred), Prefix, Sender, This, Self)
 	).
 
 
@@ -8730,7 +8724,7 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_tr_body'(Goal, TPred, _, Ctx)
 	;	% runtime resolved meta-call
 		'$lgt_execution_context'(ExCtx, Sender, This, Self, _),
-		TPred = '$lgt_metacall'(Closure, ExtraArgs, Prefix, Sender, This, Self)
+		TPred = '$lgt_metacall'('$lgt_local'(Closure), ExtraArgs, Prefix, Sender, This, Self)
 	),
 	CallN =.. [call, Closure| ExtraArgs],
 	DPred = '$lgt_debug'(goal(CallN, TPred), ExCtx).
@@ -8782,7 +8776,7 @@ current_logtalk_flag(Flag, Value) :-
 		% or the meta-call should be local as it corresponds to a non meta-argument
 		% or the meta-call is an explicitly qualifed call (::/2, ::/1, :/2)
 		'$lgt_execution_context'(ExCtx, Sender, This, Self, _),
-		TPred = '$lgt_metacall'(Free/Parameters>>Lambda, [], Prefix, Sender, This, Self)
+		TPred = '$lgt_metacall'('$lgt_local'(Free/Parameters>>Lambda), [], Prefix, Sender, This, Self)
 	),
 	DPred = '$lgt_debug'(goal(Free/Parameters>>Lambda, TPred), ExCtx).
 
@@ -8806,7 +8800,7 @@ current_logtalk_flag(Flag, Value) :-
 		% or the meta-call should be local as it corresponds to a non meta-argument
 		% or the meta-call is an explicitly qualifed call (::/2, ::/1, :/2)
 		'$lgt_execution_context'(ExCtx, Sender, This, Self, _),
-		TPred = '$lgt_metacall'(Parameters>>Lambda, [], Prefix, Sender, This, Self)
+		TPred = '$lgt_metacall'('$lgt_local'(Parameters>>Lambda), [], Prefix, Sender, This, Self)
 	),
 	DPred = '$lgt_debug'(goal(Parameters>>Lambda, TPred), ExCtx).
 
@@ -8849,7 +8843,7 @@ current_logtalk_flag(Flag, Value) :-
 		% or the meta-call should be local as it corresponds to a non meta-argument
 		% or the meta-call is an explicitly qualifed call (::/2, ::/1, :/2)
 		'$lgt_execution_context'(ExCtx, Sender, This, Self, _),
-		TPred = '$lgt_metacall'(Free/Lambda, [], Prefix, Sender, This, Self)
+		TPred = '$lgt_metacall'('$lgt_local'(Free/Lambda), [], Prefix, Sender, This, Self)
 	),
 	DPred = '$lgt_debug'(goal(Free/Lambda, TPred), ExCtx).
 
@@ -8871,7 +8865,7 @@ current_logtalk_flag(Flag, Value) :-
 		TPred = ('$lgt_convert_existentially_quantified_goal'(QGoal, Goal, TQGoal, TGoal), bagof(Term, TQGoal, List)),
 		DPred = ('$lgt_convert_existentially_quantified_goal'(QGoal, Goal, DQGoal, DGoal), bagof(Term, DQGoal, List)),
 		'$lgt_execution_context'(ExCtx, Sender, This, Self, _),
-		TGoal = '$lgt_metacall'(Goal, Prefix, Sender, This, Self),
+		TGoal = '$lgt_metacall'('$lgt_local'(Goal), Prefix, Sender, This, Self),
 		DGoal = '$lgt_debug'(goal(Goal, TGoal), ExCtx)
 	;	% compile time local call
 		TPred = bagof(Term, TGoal, List),
@@ -8905,7 +8899,7 @@ current_logtalk_flag(Flag, Value) :-
 		TPred = ('$lgt_convert_existentially_quantified_goal'(QGoal, Goal, TQGoal, TGoal), setof(Term, TQGoal, List)),
 		DPred = ('$lgt_convert_existentially_quantified_goal'(QGoal, Goal, DQGoal, DGoal), setof(Term, DQGoal, List)),
 		'$lgt_execution_context'(ExCtx, Sender, This, Self, _),
-		TGoal = '$lgt_metacall'(Goal, Prefix, Sender, This, Self),
+		TGoal = '$lgt_metacall'('$lgt_local'(Goal), Prefix, Sender, This, Self),
 		DGoal = '$lgt_debug'(goal(Goal, TGoal), ExCtx)
 	;	% compile time local call
 		TPred = setof(Term, TGoal, List),
@@ -10364,12 +10358,14 @@ current_logtalk_flag(Flag, Value) :-
 % goal is a call to a local user-defined predicate
 
 '$lgt_tr_body'(Pred, TCPred, '$lgt_debug'(goal(DPred, TCPred), ExCtx), Ctx) :-
-	'$lgt_pp_coinductive_'(Pred, _, TCPred, _, DPred),
+	'$lgt_pp_coinductive_'(Pred, _, _, _, _),
 	!,
+	'$lgt_fix_meta_arguments_scope'(Pred, FPred, Ctx),
+	'$lgt_pp_coinductive_'(FPred, _, TCPred, _, DPred),
 	% convert the call to the original coinductive predicate into a call to the auxiliary
 	% predicate whose compiled normal and debug forms are already computed
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, ExCtx, Mode, _),
-	functor(Pred, Functor, Arity),
+	functor(FPred, Functor, Arity),
 	functor(TCPred, TCFunctor, TCArity),
 	% set the execution context of the call to the auxiliary predicate
 	arg(TCArity, TCPred, ExCtx),
@@ -10378,8 +10374,9 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
 	'$lgt_pp_synchronized_'(Pred, _),
 	!,
+	'$lgt_fix_meta_arguments_scope'(Pred, FPred, Ctx),
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, Prefix, _, ExCtx, Mode, _),
-	functor(Pred, Functor, Arity),
+	functor(FPred, Functor, Arity),
 	'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	(	functor(Head, Functor, Arity) ->
 		% recursive call
@@ -10388,16 +10385,54 @@ current_logtalk_flag(Flag, Value) :-
 		atom_concat(TFunctor, '__sync', STFunctor)
 	),
 	functor(TPred, STFunctor, TArity),
-	'$lgt_unify_head_thead_arguments'(Pred, TPred, ExCtx),
+	'$lgt_unify_head_thead_arguments'(FPred, TPred, ExCtx),
 	'$lgt_remember_called_predicate'(Mode, Functor/Arity, STFunctor/TArity, Head).
 
 '$lgt_tr_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
+	'$lgt_fix_meta_arguments_scope'(Pred, FPred, Ctx),
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, Prefix, _, ExCtx, Mode, _),
-	functor(Pred, Functor, Arity),
+	functor(FPred, Functor, Arity),
 	'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	functor(TPred, TFunctor, TArity),
-	'$lgt_unify_head_thead_arguments'(Pred, TPred, ExCtx),
+	'$lgt_unify_head_thead_arguments'(FPred, TPred, ExCtx),
 	'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head).
+
+
+
+% '$lgt_fix_meta_arguments_scope'(Pred, FPred, Ctx)
+%
+% ensure that any meta-arguments that are not also meta-variables are called locally
+
+'$lgt_fix_meta_arguments_scope'(Pred, FPred, Ctx) :-
+	'$lgt_pp_meta_predicate_'(Pred, Meta),
+	!,
+	Pred =.. [Functor| PredArgs],
+	Meta =.. [Functor| MetaArgs],
+	'$lgt_comp_ctx_head'(Ctx, Head),
+	nonvar(Head),
+	% ignore multifile predicates
+	Head \= ':'(_, _),
+	Head \= _::_,
+	'$lgt_comp_ctx_meta_vars'(Ctx, MetaVars),
+	'$lgt_fix_meta_arguments_scope'(MetaArgs, PredArgs, MetaVars, FPredArgs),
+	FPred =.. [Functor| FPredArgs].
+
+'$lgt_fix_meta_arguments_scope'(Pred, Pred, _).
+
+
+'$lgt_fix_meta_arguments_scope'([], [], _, []).
+
+'$lgt_fix_meta_arguments_scope'([N| MetaArgs], [PredArg| PredArgs], MetaVars, [FPredArg| FPredArgs]) :-
+	integer(N),
+	!,
+	(	'$lgt_member_var'(PredArg, MetaVars) ->
+		FPredArg = PredArg
+	;	FPredArg = '$lgt_local'(PredArg)
+	),
+	'$lgt_fix_meta_arguments_scope'(MetaArgs, PredArgs, MetaVars, FPredArgs).
+
+'$lgt_fix_meta_arguments_scope'([_| MetaArgs], [PredArg| PredArgs], MetaVars, [PredArg| FPredArgs]) :-
+	'$lgt_fix_meta_arguments_scope'(MetaArgs, PredArgs, MetaVars, FPredArgs).
 
 
 
@@ -11580,31 +11615,6 @@ current_logtalk_flag(Flag, Value) :-
 		Meta =.. [_| MArgs],
 		'$lgt_extract_meta_variables'(Args, MArgs, MetaVars)
 	).
-
-
-
-% '$lgt_qualify_meta_arguments'(Meta, Sender, Call, QCall)
-%
-% qualify meta-arguments so that they will be called in the sender
-
-'$lgt_qualify_meta_arguments'(no, _, Call, Call) :-
-	!.
-
-'$lgt_qualify_meta_arguments'(Meta, Sender, Call, QCall) :-
-	Meta =.. [_| MetaArgs],
-	Call =.. [Functor| Args],
-	'$lgt_qualify_meta_arguments_'(MetaArgs, Sender, Args, QArgs),
-	QCall =.. [Functor| QArgs].
-
-
-'$lgt_qualify_meta_arguments_'([], _, QArgs, QArgs).
-
-'$lgt_qualify_meta_arguments_'([(*)| MetaArgs], Sender, [Arg| Args], [Arg| QArgs]) :-
-	!,
-	'$lgt_qualify_meta_arguments_'(MetaArgs, Sender, Args, QArgs).
-
-'$lgt_qualify_meta_arguments_'([_| MetaArgs], Sender, [Arg| Args], [Sender<<Arg| QArgs]) :-
-	'$lgt_qualify_meta_arguments_'(MetaArgs, Sender, Args, QArgs).
 
 
 
@@ -17871,12 +17881,10 @@ current_logtalk_flag(Flag, Value) :-
 		),
 		% predicate definition found; use it only if it's safe
 		'$lgt_safe_static_binding_paths'(Obj, DclCtn, DefCtn),
-		% ensure that meta-arguments are called in sender
-		'$lgt_qualify_meta_arguments'(Meta, GSender, GCall, QGCall),
 		(	Meta == no ->
 			% cache only normal predicates
-			assertz('$lgt_send_to_obj_static_binding_'(GObj, GPred, GSender, QGCall)),
-			Obj = GObj, Pred = GPred, Sender = GSender, Call = QGCall
+			assertz('$lgt_send_to_obj_static_binding_'(GObj, GPred, GSender, GCall)),
+			Obj = GObj, Pred = GPred, Sender = GSender, Call = GCall
 		;	% meta-predicates cannot be cached as they require translation of the meta-arguments
 			Meta =.. [PredFunctor| MArgs],
 			Pred =.. [PredFunctor| Args],
@@ -17887,7 +17895,7 @@ current_logtalk_flag(Flag, Value) :-
 			'$lgt_execution_context'(ExCtx, Sender, Sender, Obj, []),
 			'$lgt_tr_static_binding_meta_args'(Args, MArgs, Ctx, TArgs, _),
 			TPred =.. [PredFunctor| TArgs],
-			Obj = GObj, TPred = GPred, Sender = GSender, Call = QGCall
+			Obj = GObj, TPred = GPred, Sender = GSender, Call = GCall
 		)
 	).
 
