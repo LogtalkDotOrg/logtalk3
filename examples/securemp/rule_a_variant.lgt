@@ -24,11 +24,13 @@
 
 	:- public(map/3).
 	:- meta_predicate(map(*, 2, *)).
-	map(In, Closure, Out) :- 
-		(	Closure = scale(_) -> 
-			map_(In, scale(3), Out)		% the second argument will trigger a
-		;	map_(In, Closure, Out)		% runtime error because scale/3 is not
-		).								% defined in "library_a_variant"
+	map(In, Closure, Out) :-
+		(	Closure = scale(_) ->
+			% the second argument will trigger a runtime error
+			% as scale/3 is not defined in "library_a_variant"
+			map_(In, scale(3), Out)
+		;	map_(In, Closure, Out)
+		).
 
 :- end_object.
 

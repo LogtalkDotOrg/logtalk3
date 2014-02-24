@@ -15,7 +15,7 @@
 :- object(sorting).
 
 	:- public(sort/3).
-	:- meta_predicate(sort(2, *, *)).
+	:- meta_predicate(sort(3, *, *)).
 
 	:- meta_predicate(merge(3, *, *, *)).
 
