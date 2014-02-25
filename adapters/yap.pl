@@ -74,7 +74,7 @@
 		dynamic('$lgt_db_lookup_cache_'/5), hide_predicate('$lgt_db_lookup_cache_'/5),
 		dynamic('$logtalk.message_tokens'/5), hide_predicate('$logtalk.message_tokens'/5),
 		dynamic('$logtalk.message_prefix_stream'/5), hide_predicate('$logtalk.message_prefix_stream'/5),
-		dynamic('$logtalk.print_message_token'/3), hide_predicate('$logtalk.print_message_token'/3),
+		dynamic('$logtalk.print_message_token'/5), hide_predicate('$logtalk.print_message_token'/5),
 		dynamic('$logtalk.trace_event'/3), hide_predicate('$logtalk.trace_event'/3)
 	;	true
 	).
