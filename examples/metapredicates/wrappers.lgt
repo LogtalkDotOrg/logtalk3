@@ -20,6 +20,12 @@
 	my_setof(Term, Goal, List) :-
 		setof(Term, Goal, List).
 
+	:- public(my_bagof/3).
+	:- meta_predicate(my_bagof(*, ^, *)).
+
+	my_bagof(Term, Goal, List) :-
+		bagof(Term, Goal, List).
+
 :- end_object.
 
 
@@ -29,16 +35,24 @@
 	p(L) :-
 		wrappers::my_setof(X, Y^p(X, Y), L).
 
-	p(1, one).
-	p(2, two).
-	p(3, three).
-
 	:- public(q/1).
 	q(L) :-
 		wrappers::my_setof(X, Y^Z^q(X, Y, Z), L).
 
-	q(1, one, 'ONE').
+	:- public(r/1).
+	r(L) :-
+		wrappers::my_bagof(X, Y^p(X, Y), L).
+
+	:- public(s/1).
+	s(L) :-
+		wrappers::my_bagof(X, Y^Z^q(X, Y, Z), L).
+
+	p(2, two).
+	p(1, one).
+	p(3, three).
+
 	q(2, two, 'TWO').
+	q(1, one, 'ONE').
 	q(3, three, 'THREE').
 
 :- end_object.

@@ -120,9 +120,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2012/03/03,
+		date is 2014/02/25,
 		comment is 'Unit tests for the "metapredicates" example.'
 	]).
 
@@ -247,5 +247,13 @@
 	test(metapredicates_24) :-
 		object::q(L),
 		L == [1, 2, 3].
+
+	test(metapredicates_25) :-
+		object::r(L),
+		L == [2, 1, 3].
+
+	test(metapredicates_26) :-
+		object::s(L),
+		L == [2, 1, 3].
 
 :- end_object.
