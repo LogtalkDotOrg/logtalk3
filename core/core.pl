@@ -2623,8 +2623,8 @@ current_logtalk_flag(Flag, Value) :-
 		% either a dynamic predicate or a dynamic object that is both the sender and the predicate scope container
 		(	(Scope = TestScope; Sender = SCtn) ->
 			'$lgt_assert_pred_def'(Def, DDef, Prefix, Head, ExCtx, THead, _),
-			'$lgt_goal_meta_variables'(Head, Meta, MetaVars),
-			'$lgt_comp_ctx'(Ctx, Head, _, _, _, Prefix, MetaVars, _, ExCtx, runtime, _),
+			'$lgt_goal_meta_arguments'(Meta, Head, MetaArgs),
+			'$lgt_comp_ctx'(Ctx, Head, _, _, _, Prefix, MetaArgs, _, ExCtx, runtime, _),
 			'$lgt_tr_body'(Body, TBody, DBody, Ctx),
 			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
@@ -2712,8 +2712,8 @@ current_logtalk_flag(Flag, Value) :-
 		% either a dynamic predicate or a dynamic object that is both the sender and the predicate scope container
 		(	(Scope = TestScope; Sender = SCtn) ->
 			'$lgt_assert_pred_def'(Def, DDef, Prefix, Head, ExCtx, THead, _),
-			'$lgt_goal_meta_variables'(Head, Meta, MetaVars),
-			'$lgt_comp_ctx'(Ctx, Head, _, _, _, Prefix, MetaVars, _, ExCtx, runtime, _),
+			'$lgt_goal_meta_arguments'(Meta, Head, MetaArgs),
+			'$lgt_comp_ctx'(Ctx, Head, _, _, _, Prefix, MetaArgs, _, ExCtx, runtime, _),
 			'$lgt_tr_body'(Body, TBody, DBody, Ctx),
 			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
@@ -3412,10 +3412,10 @@ current_logtalk_flag(Flag, Value) :-
 				'$lgt_term_template'(Pred, GPred),
 				'$lgt_term_template'(Obj, GObj),
 				'$lgt_term_template'(Sender, GSender),
-				% construct list of the meta-variables that will be called in the "sender"
-				'$lgt_goal_meta_variables'(GPred, Meta, GMetaVars),
+				% construct list of the meta-arguments that will be called in the "sender"
+				'$lgt_goal_meta_arguments'(Meta, GPred, GMetaArgs),
 				% lookup predicate definition
-				'$lgt_execution_context'(ExCtx, GSender, GObj, GObj, GMetaVars, []),
+				'$lgt_execution_context'(ExCtx, GSender, GObj, GObj, GMetaArgs, []),
 				call(Def, GPred, ExCtx, GCall, _, _) ->
 				% cache lookup result
 				asserta(('$lgt_send_to_self_'(GObj, GPred, GSender) :- !, GCall)),
@@ -3493,10 +3493,10 @@ current_logtalk_flag(Flag, Value) :-
 			(	% construct predicate and object templates
 				'$lgt_term_template'(Pred, GPred),
 				'$lgt_term_template'(Obj, GObj),
-				% construct list of the meta-variables that will be called in the "sender"
-				'$lgt_goal_meta_variables'(GPred, Meta, GMetaVars),
+				% construct list of the meta-arguments that will be called in the "sender"
+				'$lgt_goal_meta_arguments'(Meta, GPred, GMetaArgs),
 				% lookup predicate definition
-				'$lgt_execution_context'(ExCtx, GSender, GObj, GObj, GMetaVars, []),
+				'$lgt_execution_context'(ExCtx, GSender, GObj, GObj, GMetaArgs, []),
 				call(Def, GPred, ExCtx, GCall, _, _) ->
 				GGCall = '$lgt_guarded_method_call'(GObj, GPred, GSender, GCall),
 				% cache lookup result
@@ -3620,10 +3620,10 @@ current_logtalk_flag(Flag, Value) :-
 			(	% construct predicate and object templates
 				'$lgt_term_template'(Pred, GPred),
 				'$lgt_term_template'(Obj, GObj),
-				% construct list of the meta-variables that will be called in the "sender"
-				'$lgt_goal_meta_variables'(GPred, Meta, GMetaVars),
+				% construct list of the meta-arguments that will be called in the "sender"
+				'$lgt_goal_meta_arguments'(Meta, GPred, GMetaArgs),
 				% lookup predicate definition
-				'$lgt_execution_context'(ExCtx, GSender, GObj, GObj, GMetaVars, []),
+				'$lgt_execution_context'(ExCtx, GSender, GObj, GObj, GMetaArgs, []),
 				call(Def, GPred, ExCtx, GCall, _, _) ->
 				% cache lookup result
 				asserta(('$lgt_send_to_obj_ne_'(GObj, GPred, GSender) :- !, GCall)),
@@ -11592,17 +11592,26 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_goal_meta_variables'(+callable, +callable, -list(variable))
+% '$lgt_goal_meta_arguments'(+callable, +callable, -list(term))
 %
-% constructs a list of all variables that occur in a
-% position corresponding to a meta-argument in a goal
+% constructs a list of all meta-arguments in a goal
 
-'$lgt_goal_meta_variables'(Goal, Meta, MetaVars) :-
-	(	Meta == no ->
-		MetaVars = []
-	;	Goal =.. [_| Args],
-		Meta =.. [_| MArgs],
-		'$lgt_extract_meta_variables'(Args, MArgs, MetaVars)
+'$lgt_goal_meta_arguments'(no, _, []) :-
+	!.
+
+'$lgt_goal_meta_arguments'(Meta, Goal, MetaArgs) :-
+	Meta =.. [_| MArgs],
+	Goal =.. [_| Args],
+	'$lgt_extract_meta_arguments'(MArgs, Args, MetaArgs).
+
+
+'$lgt_extract_meta_arguments'([], [], []).
+
+'$lgt_extract_meta_arguments'([MArg| MArgs], [Arg| Args], MetaArgs) :-
+	(	MArg == (*) ->
+		'$lgt_extract_meta_arguments'(MArgs, Args, MetaArgs)
+	;	MetaArgs = [Arg| RestMetaArgs],
+		'$lgt_extract_meta_arguments'(MArgs, Args, RestMetaArgs)
 	).
 
 
@@ -17857,10 +17866,12 @@ current_logtalk_flag(Flag, Value) :-
 		ObjFlags /\ 32 =\= 32,
 		% support for complementing categories is disallowed
 		call(Dcl, Pred, p(p(p)), Meta, PredFlags, _, DclCtn), !,
+		% construct predicate and object templates
 		'$lgt_term_template'(Obj, GObj),
 		'$lgt_term_template'(Pred, GPred),
-		'$lgt_goal_meta_variables'(GPred, Meta, GMetaVars),
-		'$lgt_execution_context'(GExCtx, GSender, GObj, GObj, GMetaVars, []),
+		% construct list of the meta-arguments that will be called in the "sender"
+		'$lgt_goal_meta_arguments'(Meta, GPred, GMetaArgs),
+		'$lgt_execution_context'(GExCtx, GSender, GObj, GObj, GMetaArgs, []),
 		call(Def, GPred, GExCtx, GCall, _, DefCtn), !,
 		(	PredFlags /\ 2 =:= 0 ->
 			% Type == static

@@ -38,7 +38,8 @@ usable.
 * IMPROVED: When compiling `call/1` goals, only keep the `call/1` wrapper if
 necessary to ensure cut semantics.
 
-* IMPROVED: Compilation and execution of `bagof/3` and `setof/3` goals.
+* IMPROVED: Compilation of `bagof/3` and `setof/3` calls and performance of
+calls whose goals are only know at runtime.
 
 * FIXED: Don't make assumptions about the list functor. This change avoids a
 conflict with forthcoming SWI-Prolog versions. Thanks to Jan Wielemaker for
