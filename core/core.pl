@@ -8878,20 +8878,19 @@ current_logtalk_flag(Flag, Value) :-
 
 % built-in meta-predicates
 
-'$lgt_tr_body'(bagof(Term, QGoal, List), TPred, '$lgt_debug'(goal(bagof(Term, QGoal, List), DPred), ExCtx), Ctx) :-
+'$lgt_tr_body'(bagof(Term, QGoal, List), TPred, DPred, Ctx) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, _, Sender, This, Self, Prefix, _, MetaCallCtx, ExCtx, _, _),
 	(	var(QGoal) ->
 		% runtime meta-call
-		TPred = ('$lgt_convert_existentially_quantified_goal'(QGoal, TGoal, TQGoal), bagof(Term, TQGoal, List)),
-		DPred = ('$lgt_convert_existentially_quantified_goal'(QGoal, DGoal, DQGoal), bagof(Term, DQGoal, List)),
 		'$lgt_execution_context'(ExCtx, Sender, This, Self, MetaCallCtx, _),
-		TGoal = '$lgt_qmetacall'(QGoal, MetaCallCtx, Prefix, Sender, This, Self),
-		DGoal = '$lgt_debug'(goal(QGoal, TGoal), ExCtx)
+		TPred = '$lgt_bagof'(Term, QGoal, List, Prefix, ExCtx),
+		DPred = '$lgt_debug'(goal(bagof(Term, QGoal, List), TPred), ExCtx)
 	;	% compile time local call
+		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+		'$lgt_tr_body'(QGoal, TGoal, DGoal, Ctx),
 		TPred = bagof(Term, TGoal, List),
-		DPred = bagof(Term, DGoal, List),
-		'$lgt_tr_body'(QGoal, TGoal, DGoal, Ctx)
+		DPred = '$lgt_debug'(goal(bagof(Term, QGoal, List), bagof(Term, DGoal, List)), ExCtx)
 	).
 
 '$lgt_tr_body'(findall(Term, Goal, List), findall(Term, TGoal, List), '$lgt_debug'(goal(findall(Term, Goal, List), findall(Term, DGoal, List)), ExCtx), Ctx) :-
@@ -8905,20 +8904,19 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_tr_body'(Gen, TGen, DGen, Ctx),
 	'$lgt_tr_body'(Test, TTest, DTest, Ctx).
 
-'$lgt_tr_body'(setof(Term, QGoal, List), TPred, '$lgt_debug'(goal(setof(Term, QGoal, List), DPred), ExCtx), Ctx) :-
+'$lgt_tr_body'(setof(Term, QGoal, List), TPred, DPred, Ctx) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, _, Sender, This, Self, Prefix, _, MetaCallCtx, ExCtx, _, _),
 	(	var(QGoal) ->
 		% runtime meta-call
-		TPred = ('$lgt_convert_existentially_quantified_goal'(QGoal, TGoal, TQGoal), setof(Term, TQGoal, List)),
-		DPred = ('$lgt_convert_existentially_quantified_goal'(QGoal, DGoal, DQGoal), setof(Term, DQGoal, List)),
 		'$lgt_execution_context'(ExCtx, Sender, This, Self, MetaCallCtx, _),
-		TGoal = '$lgt_qmetacall'(QGoal, MetaCallCtx, Prefix, Sender, This, Self),
-		DGoal = '$lgt_debug'(goal(QGoal, TGoal), ExCtx)
+		TPred = '$lgt_setof'(Term, QGoal, List, Prefix, ExCtx),
+		DPred = '$lgt_debug'(goal(setof(Term, QGoal, List), TPred), ExCtx)
 	;	% compile time local call
+		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+		'$lgt_tr_body'(QGoal, TGoal, DGoal, Ctx),
 		TPred = setof(Term, TGoal, List),
-		DPred = setof(Term, DGoal, List),
-		'$lgt_tr_body'(QGoal, TGoal, DGoal, Ctx)
+		DPred = '$lgt_debug'(goal(setof(Term, QGoal, List), setof(Term, DGoal, List)), ExCtx)
 	).
 
 
@@ -10506,19 +10504,41 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_convert_existentially_quantified_goal'(@callable, +callable, -callable)
+% '$lgt_bagof'(Term, QGoal, List, Prefix, ExCtx)
+%
+% handles bagof/3 calls with goals only known at runtime
+
+'$lgt_bagof'(Term, QGoal, List, Prefix, ExCtx) :-
+	'$lgt_execution_context'(ExCtx, Sender, This, Self, MetaCallCtx, _),
+	'$lgt_convert_qgoal'(QGoal, '$lgt_qmetacall'(QGoal, MetaCallCtx, Prefix, Sender, This, Self), TQGoal),
+	bagof(Term, TQGoal, List).
+
+
+
+% '$lgt_setof'(Term, QGoal, List, Prefix, ExCtx)
+%
+% handles setof/3 calls with goals only known at runtime
+
+'$lgt_setof'(Term, QGoal, List, Prefix, ExCtx) :-
+	'$lgt_execution_context'(ExCtx, Sender, This, Self, MetaCallCtx, _),
+	'$lgt_convert_qgoal'(QGoal, '$lgt_qmetacall'(QGoal, MetaCallCtx, Prefix, Sender, This, Self), TQGoal),
+	setof(Term, TQGoal, List).
+
+
+
+% '$lgt_convert_qgoal'(@callable, +callable, -callable)
 %
 % converts a ^/2 goal at runtime (used with bagof/3 and setof/3 calls)
 
-'$lgt_convert_existentially_quantified_goal'(Goal, TGoal, TGoal) :-
+'$lgt_convert_qgoal'(Goal, TGoal, TGoal) :-
 	var(Goal),
 	!.
 
-'$lgt_convert_existentially_quantified_goal'(Var^Term, TGoal, Var^TTerm) :-
+'$lgt_convert_qgoal'(Var^Term, TGoal, Var^TTerm) :-
 	!,
-	'$lgt_convert_existentially_quantified_goal'(Term, TGoal, TTerm).
+	'$lgt_convert_qgoal'(Term, TGoal, TTerm).
 
-'$lgt_convert_existentially_quantified_goal'(_, TGoal, TGoal).
+'$lgt_convert_qgoal'(_, TGoal, TGoal).
 
 
 
