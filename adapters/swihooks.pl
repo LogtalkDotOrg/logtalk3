@@ -114,10 +114,9 @@ user:prolog_predicate_name(user:'$lgt_obj_super_call'(_, _, _), '^^/2 (from obj;
 user:prolog_predicate_name(user:'$lgt_ctg_super_call'(_, _, _), '^^/2 (from ctg; same pred)') :- !.
 
 user:prolog_predicate_name(user:'$lgt_metacall'(_, _, _, _, _, _, _), 'call/N') :- !.
-user:prolog_predicate_name(user:'$lgt_metacall'(_, _, _, _, _, _), 'call/N') :- !.
-user:prolog_predicate_name(user:'$lgt_qmetacall'(_, _, _, _, _, _), 'call/N') :- !.
-user:prolog_predicate_name(user:'$lgt_metacall_this'(_, _, _, _, _), 'call/N') :- !.
-user:prolog_predicate_name(user:'$lgt_metacall_sender'(_, _, _), 'call/N') :- !.
+user:prolog_predicate_name(user:'$lgt_metacall'(_, _, _, _, _, _), 'call/1') :- !.
+user:prolog_predicate_name(user:'$lgt_metacall_this'(_, _, _, _, _), 'call/1') :- !.
+user:prolog_predicate_name(user:'$lgt_metacall_sender'(_, _, _), 'call/1') :- !.
 
 user:prolog_predicate_name(user:'$lgt_bagof'(_, _, _, _, _), 'bagof/3') :- !.
 user:prolog_predicate_name(user:'$lgt_setof'(_, _, _, _, _), 'setof/3') :- !.
@@ -360,7 +359,6 @@ user:portray(c(This, r(Sender, Self, MetaVars, CoinductionStack))) :-
 	catch(arg(1, CallN, Closure), Error, (writeln('ERROR 2'-Error), throw(Error))),
 	'$lgt_swi_call_n_args'(ExtraArgs, 2, CallN).
 '$lgt_swi_unify_clause_body'(Goal, _, '$lgt_metacall'(Goal, _, _, _, _, _), TermPos, TermPos) :- !.
-'$lgt_swi_unify_clause_body'(Goal, _, '$lgt_^metacall'(Goal, _, _, _, _, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(Goal, _, '$lgt_metacall_this'(Goal, _, _, _, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(Goal, _, '$lgt_metacall_sender'(Goal, _, _), TermPos, TermPos) :- !.
 
