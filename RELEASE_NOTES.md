@@ -53,6 +53,12 @@ Library
 * UPDATED: The library `os.lgt` file now uses the `getpid/1` built-in predicate
 provided by B-Prolog 8.1 when using this back-end compiler.
 
+Tests
+-----
+
+* ADDED: Unit tests for error conditions of `bagof/3` and `setof/3` built-in
+method calls.
+
 
 3.00.0 Alpha 35 - February 17, 2014
 ===================================
