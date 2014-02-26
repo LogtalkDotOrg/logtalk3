@@ -3882,15 +3882,12 @@ current_logtalk_flag(Flag, Value) :-
 		throw(error(type_error(callable, Closure), logtalk(Call, This)))
 	).
 
-'$lgt_metacall'(::Closure, ExtraArgs, MetaCallCtx, _, Sender0, This, Self) :-
-	% passing ::/1 goals to meta-predicates will fail to work as the user-expected
-	% as the value of "self" is lost during the roundtrip to the object that defines
-	% the meta-predicate when the meta-call should take place on the "sender"
+'$lgt_metacall'(::Closure, ExtraArgs, MetaCallCtx, _, Sender, This, Self) :-
 	!,
-	(	\+ '$lgt_member'(::Closure, MetaCallCtx) ->
-		Sender = This
-	;	Sender = Sender0
-	),
+	% ::/1 closures are only supported for local meta-calls as the user-expected
+	% as the value of "self" would be lost during the roundtrip to an object defining
+	% a meta-predicate when the meta-call should take place on the "sender"
+	\+ '$lgt_member'(::Closure, MetaCallCtx),
 	(	atom(Closure) ->
 		Goal =.. [Closure| ExtraArgs],
 		'$lgt_send_to_self_'(Self, Goal, Sender)

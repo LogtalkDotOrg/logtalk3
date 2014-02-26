@@ -55,6 +55,11 @@ his help in diagnosing this issue.
 * FIXED: Compilation of local meta-calls that result in calls to predicates
 that make meta-calls in the context of the sender.
 
+* CHANGED: Attempts to use `::Closure` closures as argument to meta-predicates
+called using message sending now always fails to prevent using the limitation
+of this closures to local meta-calls to break the encapsulation of the object
+defining the meta-predicate.
+
 Library
 -------
 

@@ -43,6 +43,9 @@ call(::Closure, Arg1, ...)</pre>
 <p>
 Calls a goal, which might be constructed by appending additional arguments to a closure. The upper limit for <code>N</code> depends on the upper limit for the arity of a compound term of the back-end Prolog compiler. This built-in meta-predicate is declared as a private method and thus cannot be used as a message to an object. When using a back-end Prolog compiler supporting a module system, calls in the format <code>call(Module:Closure, Arg1, ...)</code> may also be used.
 </p>
+<p>
+Note that <code>::Closure</code> closures are only supported for local meta-calls. Passing this kind of closure as an argument of a meta-predicate called using message sending is not supported and always fails as the value of <em>self</em> is lost in the round-trip to the object defining the meta-predicate. The workaround is to simply call the <code>self(Self)</code> built-in method and use the returned value with a <code>Self::Closure</code> closure instead.
+</p>
 
 <h4>Template and modes</h4>
 
@@ -78,7 +81,7 @@ call(+callable, ?term, ?term)
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
-		<span>Last updated on: April 7, 2010</span>
+		<span>Last updated on: February 26, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="../index.html#methods">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="ignore_1.html">next</a></span><br/>
