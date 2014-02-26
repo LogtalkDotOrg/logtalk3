@@ -31,6 +31,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Support for using runtime `(^^)/1` closures with the `call/2-N`
+built-in predicates.
+
 * ADDED: Support for calling Prolog proprietary built-in meta-predicates not
 declared in the adapter files as long as their meta-predicate templates are
 usable.

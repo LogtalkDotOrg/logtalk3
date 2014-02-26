@@ -21,6 +21,10 @@
 	:- private(s/1).
 	s(2).
 
+	:- public(t1/1).
+
+	:- public(t2/1).
+
 :- end_object.
 
 
@@ -29,6 +33,13 @@
 
 	p(Goal) :-
 		^^Goal.
+
+	t1(X) :-
+		^^q(X).
+
+	t2(X) :-
+		Closure = ^^q,
+		call(Closure, X).
 
 :- end_object.
 
@@ -39,7 +50,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/12/05,
+		date is 2014/02/26,
 		comment is 'Unit tests for the (^^)/1 built-in control construct.'
 	]).
 
@@ -59,7 +70,14 @@
 		call_super_test_object_2::p(q(X)),
 		X == 1.
 
-	fails(call_super_1_6) :-
+	succeeds(call_super_1_6) :-
+		call_super_test_object_2::t1(X),
+		X == 1.
+	succeeds(call_super_1_7) :-
+		call_super_test_object_2::t2(X),
+		X == 1.
+
+	fails(call_super_1_8) :-
 		call_super_test_object_2::p(r(_)).
 
 :- end_object.

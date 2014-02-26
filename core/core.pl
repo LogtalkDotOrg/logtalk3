@@ -3906,6 +3906,27 @@ current_logtalk_flag(Flag, Value) :-
 		throw(error(type_error(callable, Closure), logtalk(Call, This)))
 	).
 
+'$lgt_metacall'(^^Closure, ExtraArgs, _, Prefix, Sender, This, Self) :-
+	!,
+	(	atom(Closure) ->
+		Goal =.. [Closure| ExtraArgs]
+	;	callable(Closure) ->
+		Closure =.. [Functor| Args],
+		'$lgt_append'(Args, ExtraArgs, FullArgs),
+		Goal =.. [Functor| FullArgs]
+	;	var(Closure) ->
+		Call =.. [call, ^^Closure| ExtraArgs],
+		throw(error(instantiation_error, logtalk(Call, This)))
+	;	Call =.. [call, ^^Closure| ExtraArgs],
+		throw(error(type_error(callable, Closure), logtalk(Call, This)))
+	),
+	'$lgt_execution_context'(ExCtx, Sender, This, Self, [], []),
+	(	'$lgt_current_category_'(Ctg, Prefix, _, _, _, _) ->
+		'$lgt_ctg_super_call_'(Ctg, Goal, ExCtx)
+	;	'$lgt_current_object_'(_, Prefix, _, _, Super, _, _, _, _, _, _), !,
+		'$lgt_obj_super_call_'(Super, Goal, ExCtx)
+	).
+
 '$lgt_metacall'(Obj::Closure, ExtraArgs, MetaCallCtx, _, Sender0, This, _) :-
 	!,
 	(	\+ '$lgt_member'(Obj::Closure, MetaCallCtx) ->
@@ -8764,7 +8785,7 @@ current_logtalk_flag(Flag, Value) :-
 		\+ (functor(Goal, call, Arity), Arity >= 2) ->
 		% not a call to call/2-N itself; safe to compile it
 		'$lgt_tr_body'(Goal, TPred, _, Ctx)
-	;	% runtime resolved meta-call
+	;	% runtime resolved meta-call (e.g. a lambda expression)
 		'$lgt_execution_context'(ExCtx, Sender, This, Self, MetaCallCtx, _),
 		TPred = '$lgt_metacall'(Closure, ExtraArgs, MetaCallCtx, Prefix, Sender, This, Self)
 	),
