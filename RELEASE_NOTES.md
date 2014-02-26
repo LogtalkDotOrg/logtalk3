@@ -41,12 +41,16 @@ necessary to ensure cut semantics.
 * IMPROVED: Compilation of `bagof/3` and `setof/3` calls and performance of
 calls whose goals are only know at runtime.
 
+* IMPROVED: Also support message sending static binding for meta-predicates
+when the sender is an existing object instead of only when it's the object
+being compiled.
+
 * FIXED: Don't make assumptions about the list functor. This change avoids a
 conflict with forthcoming SWI-Prolog versions. Thanks to Jan Wielemaker for
 his help in diagnosing this issue.
 
 * FIXED: Compilation of local meta-calls that result in calls to predicates
-that make meta-calls in the context of *sender*.
+that make meta-calls in the context of the sender.
 
 Library
 -------

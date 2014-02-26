@@ -17891,9 +17891,13 @@ current_logtalk_flag(Flag, Value) :-
 		;	% meta-predicates cannot be cached as they require translation of the meta-arguments
 			Meta =.. [PredFunctor| MArgs],
 			Pred =.. [PredFunctor| Args],
-			% next we cannot call '$lgt_current_object_'/11 to find the Prefix as Sender may not be
+			% next we must be careful when find the sender's prefix as the Sender argument may not be
 			% instantiated (e.g. when meta-predicate calls are made within other meta-predicate calls)
-			'$lgt_pp_entity_'(_, _, Prefix, _, _),
+			(	'$lgt_pp_entity_'(_, _, Prefix, _, _) ->
+				true
+			;	nonvar(Sender),
+				'$lgt_current_object_'(Sender, Prefix, _, _, _, _, _, _, _, _, _)
+			),
 			'$lgt_comp_ctx'(Ctx, _, Sender, Sender, Obj, Prefix, [], _, ExCtx, _, []),
 			'$lgt_execution_context'(ExCtx, Sender, Sender, Obj, [], []),
 			'$lgt_tr_static_binding_meta_args'(Args, MArgs, Ctx, TArgs, _),
