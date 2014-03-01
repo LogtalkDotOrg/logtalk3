@@ -25,6 +25,16 @@ RELEASE NOTES
 =============
 
 
+3.00.0 Beta 1 - March ??, 2014
+==============================
+
+Tools
+-----
+
+* UPDATED: The `logtalk_tester.sh` POSIX shell script now sets its exit code
+to the number of failed tests.
+
+
 3.00.0 Alpha 36 - February 26, 2014
 ===================================
 

@@ -303,3 +303,5 @@ grep ': failure' *.results | sed 's/: failure/ failed/' | sed 's/.results/:/' | 
 echo "*******************************************************************************"
 echo "***** $total tests: $skipped skipped, $passed passed, $failed failed"
 echo "*******************************************************************************"
+
+exit $failed
