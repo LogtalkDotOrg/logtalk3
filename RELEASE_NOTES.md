@@ -31,8 +31,8 @@ RELEASE NOTES
 Tools
 -----
 
-* UPDATED: The `logtalk_tester.sh` POSIX shell script now sets its exit code
-to the number of failed tests.
+* UPDATED: The `logtalk_tester.sh` POSIX shell script now returns an exit
+code of `1` when there are failed unit tests.
 
 
 3.00.0 Alpha 36 - February 26, 2014
