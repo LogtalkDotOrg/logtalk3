@@ -5082,8 +5082,8 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_add_referenced_object_message'(@object_identifier, @callable, @callable)
-% '$lgt_add_referenced_object_message'(@object_identifier, @callable, @callable, @callable)
+% '$lgt_add_referenced_object_message'(@object_identifier, @callable, @term)
+% '$lgt_add_referenced_object_message'(@object_identifier, @callable, @callable, @term)
 %
 % adds referenced object and message for supporting using reflection to
 % retrieve cross-reference information
@@ -5130,8 +5130,8 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_add_referenced_module_predicate'(@object_identifier, @callable, @callable)
-% '$lgt_add_referenced_module_predicate'(@object_identifier, @callable, @callable, @callable)
+% '$lgt_add_referenced_module_predicate'(@object_identifier, @callable, @term)
+% '$lgt_add_referenced_module_predicate'(@object_identifier, @callable, @callable, @term)
 %
 % adds referenced module for later cheking of references to unknown modules
 % we also save the line numbers for the first reference to the module
@@ -7428,7 +7428,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	'$lgt_current_category_'(Entity, _, Dcl, _, _, _)
 	),
 	!,
-	% predicate must declared public and multifile
+	% predicate must be declared public and multifile
 	(	call(Dcl, Pred, p(p(p)), _, Flags) ->
 		Flags /\ 16 =:= 16
 	;	fail
@@ -8439,7 +8439,6 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_must_be'(callable, Head).
 
-
 % not the first clause for this predicate
 
 '$lgt_tr_head'(Head, THead, Ctx) :-
@@ -8451,7 +8450,6 @@ current_logtalk_flag(Flag, Value) :-
 	;	'$lgt_check_discontiguous_predicate'(Head, Ctx)
 	).
 
-
 % definition of dynamic predicates inside categories
 
 '$lgt_tr_head'(Head, _, _) :-
@@ -8459,7 +8457,6 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_pp_dynamic_'(Head),
 	functor(Head, Functor, Arity),
 	throw(permission_error(define, dynamic_predicate, Functor/Arity)).
-
 
 % redefinition of Logtalk built-in methods
 
@@ -8473,7 +8470,6 @@ current_logtalk_flag(Flag, Value) :-
 	functor(Head, Functor, Arity),
 	throw(permission_error(modify, built_in_method, Functor/Arity)).
 
-
 % conflict with a predicate specified in a uses/2 directive
 
 '$lgt_tr_head'(Alias, _, _) :-
@@ -8481,14 +8477,12 @@ current_logtalk_flag(Flag, Value) :-
 	functor(Alias, Functor, Arity),
 	throw(permission_error(modify, uses_object_predicate, Functor/Arity)).
 
-
 % conflict with a predicate specified in a use_module/2 directive
 
 '$lgt_tr_head'(Alias, _, _) :-
 	'$lgt_pp_use_module_predicate_'(_, _, Alias),
 	functor(Alias, Functor, Arity),
 	throw(permission_error(modify, uses_module_predicate, Functor/Arity)).
-
 
 % definition of event handlers without reference to the "monitoring" built-in protocol
 
@@ -8510,7 +8504,6 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_print_message'(warning(general), core, missing_reference_to_built_in_protocol(Path, Type, Entity, monitoring)),
 	fail.
 
-
 % definition of term- and goal-expansion predicates without reference to the "expanding" built-in protocol
 
 '$lgt_tr_head'(term_expansion(_, _), _, Ctx) :-
@@ -8531,7 +8524,6 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_print_message'(warning(general), core, missing_reference_to_built_in_protocol(Path, Type, Entity, expanding)),
 	fail.
 
-
 % definition of a message forwarding handler without reference to the "forwarding" built-in protocol
 
 '$lgt_tr_head'(forward(_), _, Ctx) :-
@@ -8542,7 +8534,6 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_warning_context'(Path, _, Type, Entity),
 	'$lgt_print_message'(warning(general), core, missing_reference_to_built_in_protocol(Path, Type, Entity, forwarding)),
 	fail.
-
 
 % translate the head of a clause of another entity predicate (which we assume declared multifile)
 
@@ -8610,7 +8601,6 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	'$lgt_comp_ctx_head'(Ctx, ':'(Module, Head)).
 
-
 % translate the head of a clause of a user defined predicate
 
 '$lgt_tr_head'(Head, THead, Ctx) :-
@@ -8642,14 +8632,12 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_execution_context'(ExCtx, Sender, This, Self, MetaCallCtx, _),
 	TPred = '$lgt_metacall'(Pred, MetaCallCtx, Prefix, Sender, This, Self).
 
-
 % compiler bypass (call of external code)
 
 '$lgt_tr_body'({Pred}, {call(Pred)}, '$lgt_debug'(goal({Pred}, {call(Pred)}), ExCtx), Ctx) :-
 	!,
 	'$lgt_must_be'(var_or_callable, Pred),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
-
 
 % goal expansion (only applied at compile time)
 
@@ -8658,7 +8646,6 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_tr_expand_goal'(Pred, ExpandedPred),
 	!,
 	'$lgt_tr_body'(ExpandedPred, TPred, DPred, Ctx).
-
 
 % message delegation (send a message while preserving the original sender)
 
@@ -8685,13 +8672,11 @@ current_logtalk_flag(Flag, Value) :-
 	TPred = (Obj \= Sender -> TPred0; throw(error(permission_error(access, object, Sender), logtalk([Obj::Pred], This)))),
 	'$lgt_execution_context'(ExCtx, Sender, This, _, _, _).
 
-
 % bagof/3 and setof/3 existential quantifiers
 
 '$lgt_tr_body'(Var^Pred, Var^TPred, Var^DPred, Ctx) :-
 	!,
 	'$lgt_tr_body'(Pred, TPred, DPred, Ctx).
-
 
 % control constructs
 
@@ -8809,7 +8794,6 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
 
-
 % lambda expressions support predicates
 
 '$lgt_tr_body'(Parameters>>Lambda, _, _, Ctx) :-
@@ -8886,7 +8870,6 @@ current_logtalk_flag(Flag, Value) :-
 	TPred = '$lgt_metacall'(Free/Lambda, [], MetaCallCtx, Prefix, Sender, This, Self),
 	DPred = '$lgt_debug'(goal(Free/Lambda, TPred), ExCtx).
 
-
 % built-in meta-predicates
 
 '$lgt_tr_body'(bagof(Term, QGoal, List), TPred, DPred, Ctx) :-
@@ -8929,7 +8912,6 @@ current_logtalk_flag(Flag, Value) :-
 		TPred = setof(Term, TGoal, List),
 		DPred = '$lgt_debug'(goal(setof(Term, QGoal, List), setof(Term, DGoal, List)), ExCtx)
 	).
-
 
 % multi-threading meta-predicates
 
@@ -9168,7 +9150,6 @@ current_logtalk_flag(Flag, Value) :-
 		MTPred = '$lgt_threaded_notify_ctg'(Msg, This)
 	).
 
-
 % message sending
 
 '$lgt_tr_body'(Obj::Pred, TPred, '$lgt_debug'(goal(Obj::Pred, TPred), ExCtx), Ctx) :-
@@ -9196,7 +9177,6 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_tr_super_call'(Pred, TPred, Ctx).
 
-
 % context-switching
 
 '$lgt_tr_body'(Obj<<Pred, TPred, '$lgt_debug'(goal(Obj<<Pred, TPred), ExCtx), Ctx) :-
@@ -9204,7 +9184,6 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, _, _),
 	'$lgt_execution_context_this'(ExCtx, This),
 	'$lgt_tr_ctx_call'(Obj, Pred, TPred, This).
-
 
 % calling category predicates directly (depreacated control construct)
 
@@ -9218,7 +9197,6 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_tr_super_call'(Pred, TPred, Ctx).
-
 
 % calling explicitly qualified module predicates
 
@@ -9271,7 +9249,6 @@ current_logtalk_flag(Flag, Value) :-
 		TPred = ':'(Module, Pred),
 		DPred = '$lgt_debug'(goal(':'(Module, Pred), TPred), ExCtx)
 	).
-
 
 % reflection built-in predicates
 
@@ -9356,7 +9333,6 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_execution_context_this'(ExCtx, This),
 	TPred = '$lgt_predicate_property'(This, Pred, Prop, This, p(_)),
 	DPred = '$lgt_debug'(goal(predicate_property(Pred, Prop), TPred), ExCtx).
-
 
 % database handling built-in predicates
 
@@ -9708,7 +9684,6 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	DCond = '$lgt_debug'(goal(retractall(Head), TCond), ExCtx).
 
-
 % term and goal expansion predicates
 
 '$lgt_tr_body'(expand_term(Term, Expansion), TPred, '$lgt_debug'(goal(expand_term(Term, Expansion), TPred), ExCtx), Ctx) :-
@@ -9722,7 +9697,6 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, _, _),
 	'$lgt_execution_context_this'(ExCtx, This),
 	TPred = '$lgt_expand_goal'(This, Goal, ExpandedGoal, This, p(_)).
-
 
 % DCG predicates
 
@@ -9761,7 +9735,6 @@ current_logtalk_flag(Flag, Value) :-
 	DPred = (Input = S0, Rest = S, DPred0),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_tr_body'(Pred, TPred0, DPred0, Ctx).
-
 
 % execution-context methods
 %
@@ -9880,7 +9853,6 @@ current_logtalk_flag(Flag, Value) :-
 	;	throw(domain_error([1,Arity], Arg))
 	).
 
-
 % term input predicates that need to be operator aware
 % (these translations are only applied if there are local entity operators declared)
 
@@ -9903,7 +9875,6 @@ current_logtalk_flag(Flag, Value) :-
 	bagof(op(Pr, Spec, Op), Scope^'$lgt_pp_entity_operator_'(Pr, Spec, Op, Scope), Ops),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	!.
-
 
 % term output predicates that need to be operator aware
 % (these translations are only applied if there are local entity operators declared)
@@ -9940,7 +9911,6 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	!.
 
-
 % Logtalk flag predicates (just error cheking when one of the arguments isn't instantiated)
 
 '$lgt_tr_body'(set_logtalk_flag(Flag, Value), TPred, '$lgt_debug'(goal(DPred, TPred), ExCtx), Ctx) :-
@@ -9972,7 +9942,6 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_body'(current_logtalk_flag(Flag, _), _, _, _) :-
 	'$lgt_must_be'(var_or_flag, Flag),
 	fail.
-
 
 % Prolog flag predicates (just basic error and portability cheking)
 
@@ -10034,7 +10003,6 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	fail.
 
-
 % arithmetic predicates (portability checks)
 
 '$lgt_tr_body'(_ is Exp, _, _, Ctx) :-
@@ -10078,7 +10046,6 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_check_non_portable_functions'(Exp1),
 	'$lgt_check_non_portable_functions'(Exp2),
 	fail.
-
 
 % blackboard predicates (requires a back-end Prolog compiler natively supporting these built-in predicates)
 
@@ -10142,7 +10109,6 @@ current_logtalk_flag(Flag, Value) :-
 	;	throw(type_error(atomic, Key))
 	).
 
-
 % call/2-N built-in control construct
 
 '$lgt_tr_body'(CallN, TPred, DPred, Ctx) :-
@@ -10152,7 +10118,6 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_check_closure'(Closure, Ctx),
 	'$lgt_tr_body'('$lgt_callN'(Closure, ExtraArgs), TPred, DPred, Ctx).
-
 
 % predicates specified in uses/2 directives
 
@@ -10176,13 +10141,11 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	!.
 
-
 % non-callable terms
 
 '$lgt_tr_body'(Pred, _, _, _) :-
 	\+ callable(Pred),
 	throw(type_error(callable, Pred)).
-
 
 % call to a meta-predicate from a user-defined meta-predicate;
 % must check the number of arguments for shared closures
@@ -10224,7 +10187,6 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_same_number_of_closure_extra_args'(PredArgs, CMetaArgs, HeadArgs, HeadMetaArgs),
 	fail.
 
-
 % predicates specified in use_module/2 directives
 
 '$lgt_tr_body'(Alias, TPred, '$lgt_debug'(goal(Alias, TPred), ExCtx), Ctx) :-
@@ -10234,7 +10196,6 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_comp_ctx_head'(Ctx, Head),
 	'$lgt_add_referenced_module_predicate'(Module, Pred, Alias, Head),
 	'$lgt_tr_body'(':'(Module,Pred), TPred, _, Ctx).
-
 
 % remember non-portable Prolog built-in predicate calls
 
@@ -10257,7 +10218,6 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_current_line_numbers'(Lines),
 	assertz('$lgt_pp_non_portable_predicate_'(Head, Lines)),
 	fail.
-
 
 % Prolog proprietary built-in meta-predicates (must be declared in the adapter files)
 
@@ -10323,7 +10283,6 @@ current_logtalk_flag(Flag, Value) :-
 		throw(domain_error(meta_predicate_template, Meta))
 	).
 
-
 % Logtalk and Prolog built-in predicates
 
 '$lgt_tr_body'(Alias, Pred, '$lgt_debug'(goal(Alias, Pred), ExCtx), Ctx) :-
@@ -10349,7 +10308,6 @@ current_logtalk_flag(Flag, Value) :-
 	DPred = '$lgt_debug'(goal(Pred, TPred), ExCtx),
 	!.
 
-
 % goal is a call to a dynamic predicate within a category
 
 '$lgt_tr_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
@@ -10358,7 +10316,6 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	TPred = '$lgt_call_in_this'(Pred, ExCtx).
-
 
 % runtime translation
 
@@ -10376,7 +10333,6 @@ current_logtalk_flag(Flag, Value) :-
 		)
 	),
 	!.
-
 
 % goal is a call to a local user-defined predicate
 
@@ -11050,7 +11006,6 @@ current_logtalk_flag(Flag, Value) :-
 	Obj = {Proxy},
 	!,
 	'$lgt_tr_msg'(Pred, Proxy, TPred, This, Head).
-
 
 % messages to the pseudo-object "user"
 
