@@ -35,6 +35,9 @@ Logtalk compiler and runtime
 with the `optimize` flag turned on is now performed during the second compiler
 stage.
 
+* FIXED: Only fold left unifications during optimization of the generated code
+if they don't result in cyclic terms. 
+
 Prolog adapter and integration files
 ------------------------------------
 
