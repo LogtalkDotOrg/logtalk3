@@ -150,11 +150,11 @@
 		).
 
 	/* subterm( +XMLTerm, ?Subterm ) unifies Subterm with a sub-term of Term.
-	 * Note that XMLTerm is a sub-term of itself. 
+	 * Note that XMLTerm is a sub-term of itself.
 	 */
 	subterm( Term, Term ).
 	subterm( xml(_Attributes, Content), Term ) :-
-		subterm( Content, Term ).	
+		subterm( Content, Term ).
 	subterm( [H|T], Term ) :-
 		(	subterm( H, Term )
 		;	subterm( T, Term )
@@ -211,7 +211,7 @@
 		;	Char =:= 0'& ->
 			entity_reference( Chars, Context, Terms, Residue, WF )
 		;	Char =< 0' ,
-			\+ space_preserve( Context ) ->		
+			\+ space_preserve( Context ) ->
 			layouts( Chars, Context, [Char|T], T, Terms, Residue, WF )
 		;	void_context( Context ) ->
 			unparsed( [Char|Chars], Context, Terms, Residue, WF )
@@ -525,7 +525,7 @@
 		entity_value( Quote, Namespaces0, String ),
 		spaces,
 		">",
-		{\+ character_entity( Name, _StandardChar ), 
+		{\+ character_entity( Name, _StandardChar ),
 		 % Don't allow &lt; &quote; etc. to be updated
 		 context_update( entity(Name), Namespaces0, String, Namespaces2 )
 		 },
@@ -652,8 +652,8 @@
 		(	standard_character_entity( _SomeChar, Plus, _Rest ) ->
 			String = [0'&|String1], % ' Character entities are unparsed
 			Mid = Plus
-		;	entity_reference_name( Name, Plus, Suffix ), 
-			defined_entity( Name, Namespaces, Text ) -> 
+		;	entity_reference_name( Name, Plus, Suffix ),
+			defined_entity( Name, Namespaces, Text ) ->
 			String = String1,
 			append( Text, Suffix, Mid )
 		),
@@ -1247,7 +1247,7 @@
 		Context = context(_Element,_Preserve,_Current,_Default,Entities,
 			_Namespaces,_RPFA,_Amp),
 		map_member( Reference, Entities, String ).
-	
+
 	close_context( Context, Terms, WellFormed ) :-
 		Context = context(Element,_Preserve,_Current,_Default,_Entities,
 			_Namespaces,_RPFA,_Amp),
@@ -1711,7 +1711,7 @@
 
 	exception( Message, Document, Culprit, Path ) :-
 		throw(
-			application_error('XML Parse: ~s in ~q~nCulprit: ~q~nPath: ~s', 
+			application_error('XML Parse: ~s in ~q~nCulprit: ~q~nPath: ~s',
 				[Message,Document,Culprit,Path] )
 			).
 
@@ -1768,12 +1768,12 @@
 			_Prefix0, Format, Indent, Format ) -->
 		indent( Format, Indent ),
 		"<", generated_prefixed_name( Prefix, Name ),
-		generated_prefixed_attributes( Prefix, URI, Atts, Format, Format1 ), 
+		generated_prefixed_attributes( Prefix, URI, Atts, Format, Format1 ),
 		generated_content( Content, Format1, Indent, Prefix, Name ).
 	generation( element(Name, Atts, Content), Prefix, Format, Indent, Format ) -->
 		indent( Format, Indent ),
 		"<", generated_prefixed_name( Prefix, Name ),
-		generated_attributes( Atts, Format, Format1 ), 
+		generated_attributes( Atts, Format, Format1 ),
 		generated_content( Content, Format1, Indent, Prefix, Name ).
 	generation( cdata(CData), _Prefix, Format, Indent, Format ) -->
 		indent( Format, Indent ),
@@ -2073,7 +2073,7 @@
 		"&#", chars( Codes ), ";".
 
 	/* character_data_format( +Chars, +Format0, ?Format1 ) holds when Format0 and
-	 * Format1 are the statuses of XML formatting before and after Chars - 
+	 * Format1 are the statuses of XML formatting before and after Chars -
 	 * which may be null.
 	 */
 	:- private(character_data_format/3).
@@ -2135,7 +2135,7 @@
 
 	letter  --> (basechar ; ideographic).
 
-	basechar  --> 
+	basechar  -->
 		( range( 16'0041, 16'005A )
 		; range( 16'0061, 16'007A )
 		; range( 16'00C0, 16'00D6 )

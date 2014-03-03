@@ -14,7 +14,7 @@
 	instantiates($metaclasses),
 	specializes($superclasses)).
 #end
-	
+
 #prompt ( "Version:" $version "1.0" )
 #prompt ( "Author name:" $authorname )
 #prompt ( "Comment:" $comment )

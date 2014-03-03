@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -51,7 +51,7 @@
 		write(LD), nl,
 		write('time : '), write(Y), nl.
 
-	donald(LD,Lab):-
+	donald(LD,Lab) :-
 		fd_set_vector_max(9),
 		LD = [D,O,N,A,L,G,E,R,B,T],
 		fd_all_different(LD),
@@ -64,17 +64,17 @@
 
 		lab(Lab, LD).
 
-	lab(normal, L):-  
+	lab(normal, L) :-
 		fd_labeling(L).
-	lab(ff, L):-
+	lab(ff, L) :-
 		fd_labelingff(L).
 
-	get_fd_labeling(Lab):- 
+	get_fd_labeling(Lab) :-
 		argument_counter(C),
 		get_labeling1(C, Lab).
 
 	get_labeling1(1, normal).
-	get_labeling1(2, Lab):-
+	get_labeling1(2, Lab) :-
 		argument_value(1, Lab).
 
 :- end_object.

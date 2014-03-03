@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -38,12 +38,12 @@
 
 	:- public(solve/3).
 
-	solve(Start, Destination, Steps) :- 
+	solve(Start, Destination, Steps) :-
 		path(Start, Destination, [Start], Path),
 		reverse(Path, Steps).
 
 	path(Destination, Destination, Path, Path).
-	path(Node, Destination, Path0, Path) :- 
+	path(Node, Destination, Path0, Path) :-
 		link(Node, Next),
 		\+ member(Next, Path0),
 		path(Next, Destination, [Next | Path0], Path).
@@ -62,7 +62,7 @@
 	member(Element, [Element| _]).
 	member(Element, [_| List]) :-
 		member(Element, List).
-    
+
 	reverse(List, Reversed) :-
 		reverse(List, [], Reversed, Reversed).
 

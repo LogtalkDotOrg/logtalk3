@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -58,29 +58,29 @@
 
 
 	/* These facts specify some game-specific information. */
-	
+
 	alive(fly).
-	
+
 	lit(bedroom).
 	lit(den).
-	
+
 	visible_object('light switch').
-	
+
 	/* These rules describe how to pick up an object. */
-	
+
 	take(fly) :-
 	    write('It is too fast for you!'), nl,
 		nl,
 	    !, fail.
-	
+
 	take('light switch') :-
 	    take(switch).
-	
+
 	take(switch) :-
 	    write('It is firmly embedded in the wall!'), nl,
 		nl,
 	    !, fail.
-	
+
 	take(X) :-
 		(	i_am_holding(X) ->
 			write('You are already holding it!'), nl,
@@ -93,9 +93,9 @@
 		;	write('I do not see it here.'), nl,
 			nl
 		).
-	
+
 	/* These rules describe how to put down an object. */
-	
+
 	drop(X) :-
 		(	i_am_holding(X) ->
 			i_am_at(Place),
@@ -127,7 +127,7 @@
 		nl,
 		fail.
 
-	
+
 	/* This rule tells how to move in a given direction. */
 
 	go(Direction) :-
@@ -139,17 +139,17 @@
 		;	write('You can not go that way.'), nl,
 			nl
 		).
-	
+
 	/* This rule tells how to look about you. */
 
 	look :-
 		i_am_at(Place),
 		describe(Place),
 		notice_objects_at(Place).
-	
-	
+
+
 	/* These rules set up a loop to mention all the objects in your vicinity. */
-	
+
 	notice_objects_at(Place) :-
 	    lit(Place),
 		at(X, Place),
@@ -162,7 +162,7 @@
 
 
 	/* These rules are specific to this particular game. */
-	
+
 	use(flyswatter) :-
 	    swat(fly).
 

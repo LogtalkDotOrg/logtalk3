@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -48,9 +48,9 @@
 
 	trapezium_volume(Function, A, B, C, D, Volume) :-
 		functions2d::eval(Function, A, C, F1),
-		functions2d::eval(Function, B, C, F2),	
+		functions2d::eval(Function, B, C, F2),
 		functions2d::eval(Function, A, D, F3),
-		functions2d::eval(Function, B, D, F4),		    
+		functions2d::eval(Function, B, D, F4),
 		Volume is 0.25*(B-A)*(D-C)*(F1+F2+F3+F4).
 
 	w(1,1, 1.000000000000000).

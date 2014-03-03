@@ -424,7 +424,7 @@ setup_call_catcher_cleanup(Setup, Call, Catcher, Cleanup) :-
 	path_sysop(extension, File, Extension0),
 	(	Extension0 = '' ->
 		Extension = Extension0
-	;	atom_concat('.', Extension0, Extension)	
+	;	atom_concat('.', Extension0, Extension)
 	).
 
 

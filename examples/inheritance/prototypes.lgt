@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -47,7 +47,7 @@ interface/0, for listing the object interface.
 :- object(descendant1,
 	imports(interface),
 	extends(prototype1)).
-	
+
 :- end_object.
 
 
@@ -63,7 +63,7 @@ interface/0, for listing the object interface.
 :- object(descendant2,
 	imports(interface),
 	extends(prototype2)).
-	
+
 :- end_object.
 
 
@@ -79,5 +79,5 @@ interface/0, for listing the object interface.
 :- object(descendant3,
 	imports(interface),
 	extends(prototype3)).
-	
+
 :- end_object.

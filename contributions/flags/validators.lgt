@@ -202,7 +202,7 @@
 
 :- object(in_domain(_List),
 	implements(flags_validator)).
-	
+
 	validate :-
 		parameter(1, List),
 		is_proper_list(List).
@@ -217,7 +217,7 @@
 	is_proper_list([]).
 	is_proper_list([_| T]) :-
 		is_proper_list(T).
-	
+
 	memberchk(X, [X|_]) :- !.
 	memberchk(X, [_|T]) :-
 		memberchk(X, T).

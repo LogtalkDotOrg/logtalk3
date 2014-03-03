@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -31,7 +31,7 @@
 	test(tabling_1) :-
 		setof(Y, paths::path(1, Y), Ys),
 		Ys = [2, 3, 4, 5].
-	
+
 	test(tabling_2) :-
 		fibonacci::fib(30, F),
 		F == 1346269.

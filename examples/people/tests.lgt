@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -32,7 +32,7 @@
 		Name == 'Oscar the Grouch',
 		Id1::birth(Birth),
 		Birth == '1969/11/10'.
-		
+
 	test(people_2) :-
 		person::new(Id2, 'Cookie Monster', '1969/12/02'),
 		Id2::name(Name),
@@ -48,7 +48,7 @@
 		Birth == '1969/11/10',
 		Id3::office(Office),
 		Office == '3.2'.
-		
+
 	test(people_4) :-
 		student::new(Id4, 'Roosevelt Franklin', '1969/11/10', 'Blue'),
 		Id4::name(Name),

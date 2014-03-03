@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -22,7 +22,7 @@
 	:- uses(list, [append/3]).
 	:- uses(numberlist, [min/2, max/2]).
 	:- uses(set, [insert/3, insert_all/3, select/3]).
-	
+
 	initial_state(start, ([], right, [1,3,6,8,12])).
 
 	goal_state(end, ([1,3,6,8,12], left, [])).

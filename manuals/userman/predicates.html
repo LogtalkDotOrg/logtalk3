@@ -780,7 +780,7 @@ The Logtalk message printing mechanism provides you with a set of predicates, de
 	<dt><code>warning</code> and <code>warning(Group)</code></dt>
 		<dd>warning messages (generated e.g. by the compiler)</dd>
 	<dt><code>error</code> and <code>error(Group)</code></dt>
-		<dd>error messages (generated e.g. by the compiler)</dd>	
+		<dd>error messages (generated e.g. by the compiler)</dd>
 </dl>
 <p>
 Note that you can define your own alternative message kind identifiers, for your own components, together with suitable definitions for their associated prefixes and output streams. In this case, the <code>report</code> flag will only have an effect when turned off as, by default, this setting suppresses printing of all messages.
@@ -815,7 +815,7 @@ The following tokens can be used when translating a message:
 	<dt><code>begin(Kind, Var)</code></dt>
 		<dd>Taken from SWI-Prolog; by default, do nothing; can be used together with <code>end(Var)</code> to wrap a message tokens</dd>
 	<dt><code>end(Var)</code></dt>
-		<dd>Taken from SWI-Prolog; by default, do nothing</dd>	
+		<dd>Taken from SWI-Prolog; by default, do nothing</dd>
 </dl>
 <p>
 There are also predicates for printing a list of tokens, <a title="Consult reference manual" href="../refman/methods/print_message_tokens_3.html"><code>logtalk::print_message_tokens(Stream, Prefix, Tokens)</code></a>, for hooking into printing an individual token, <a title="Consult reference manual" href="../refman/methods/print_message_token_4.html"><code>logtalk::print_message_token(Stream, Prefix, Token, Tokens)</code></a>, and for setting default output stream and message prefixes, <a title="Consult reference manual" href="../refman/methods/message_prefix_stream_4.html"><code>logtalk::message_prefix_stream(Kind, Component, Prefix, Stream)</code></a>. For example, the SWI-Prolog adapter file uses the <code>print_message_token/4</code> hook predicate to enable coloring of messages printed on a console.
@@ -930,7 +930,7 @@ Prolog built-in meta-predicates may only be called locally within objects or cat
 
 <div class="footer">
 	<div class="copyright">
-		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
+		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
 		<span>Last updated on: February 6, 2014</span>
 	</div>
 	<div class="navbottom">

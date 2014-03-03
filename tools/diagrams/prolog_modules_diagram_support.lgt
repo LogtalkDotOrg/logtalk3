@@ -163,7 +163,7 @@
 				strrch1(Xs1, G, Xs, Ys)
 			;	strrch(Xs1, G, Ys)
 			).
-		
+
 		strrch1(Xs, _G, _Prev, _Ys) :-
 			var(Xs),
 			!,

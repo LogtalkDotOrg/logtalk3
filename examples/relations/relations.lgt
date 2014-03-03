@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -409,7 +409,7 @@
 	set_domains(Domains) :-
 		::descriptor(Descriptor),
 		set_domains(Domains, Descriptor).
-		
+
 
 	set_domains([], []).
 	set_domains([Role| Roles], [Domain| Domains]) :-
@@ -464,7 +464,7 @@
 	set_keys(Keys) :-
 		::retractall(key_(_)),
 		set_keys2(Keys).
-	
+
 	set_keys2([]).
 	set_keys2([Key| Keys]) :-
 		::assertz(key_(Key)),

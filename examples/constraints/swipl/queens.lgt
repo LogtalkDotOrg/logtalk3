@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -53,11 +53,11 @@
 
 	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	   Animation.
-	
+
 	   For each N of the domain of queen Q, a reified constraint of the form
-	
+
 	      Q #= N #<==> B
-	
+
 	   is posted. When N vanishes from the domain, B becomes 0. A frozen
 	   goal then emits PostScript instructions for graying out the field.
 	   When B becomes 1, the frozen goal emits instructions for placing
@@ -86,9 +86,9 @@
 
 	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	   PostScript definitions.
-	
+
 	   Sample instructions, with these definitions loaded:
-	
+
 	   2 init   % initialize a 2x2 board
 	   1 1 q    % place a queen on 1-1
 	   1 2 q

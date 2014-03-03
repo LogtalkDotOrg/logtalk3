@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -172,7 +172,7 @@
 		LeftStick::put_down,
 		RightStick::put_down.
 
-	% writing a message needs to be synchronized as it's accomplished  
+	% writing a message needs to be synchronized as it's accomplished
 	% using a combination of individual write/1 and nl/0 calls:
 	message([]) :-
 		nl,
@@ -285,7 +285,7 @@
 		LeftStick::put_down,
 		RightStick::put_down.
 
-	% writing a message needs to be synchronized as it's accomplished  
+	% writing a message needs to be synchronized as it's accomplished
 	% using a combination of individual write/1 and nl/0 calls:
 	message([]) :-
 		nl,

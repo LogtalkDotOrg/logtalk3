@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -69,7 +69,7 @@ plan(Prob,Len,N,Plan):-
     goal(Prob,GoalState),
     %
     action_constraints(States,GoalState),
-%    no_cycle_constraints(States),    
+%    no_cycle_constraints(States),
     %
     label(MidStates),
     extract_plan(States,Plan).
@@ -121,7 +121,7 @@ generate_state(Prob,State):-
     functor(State,state,NBlocks),
     declare_domains(State,1,NBlocks),
     state_constraints(State).
-    
+
 declare_domains(State,I,N):-I>N,!.
 declare_domains(State,I,N):-
     arg(I,State,block(Above,Below)),
@@ -129,7 +129,7 @@ declare_domains(State,I,N):-
     domain(Below,0,N), 
     I1 is I+1,
     declare_domains(State,I1,N).
-    
+
 get_below_vars(State,BVars):-
     functor(State,_,N),
     get_below_vars(N,State,BVars).
@@ -174,7 +174,7 @@ outof_below(Below,State,I,J):-
 % block J is below I, then I must be above Above J
 below_relationship(J,State,I):-
      freeze(J,(J=\= 0->arg(J,State,block(AboveJ,BelowJ)),AboveJ=I;true)).
-                   
+
 % block J is above I, then I must be below Above J
 above_relationship(J,State,I):-
      freeze(J,(J=\=0->arg(J,State,block(AboveJ,BelowJ)),BelowJ=I;true)).

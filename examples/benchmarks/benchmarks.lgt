@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -132,9 +132,9 @@
 	benchmark(d4, database::self_dyndb(_)).
 	benchmark(d5, database::other_dyndb(_)).
 
-	% repeat a goal N times without using call/1 and using a failure-driven loop to 
+	% repeat a goal N times without using call/1 and using a failure-driven loop to
 	% try to avoid the interference of Prolog compiler memory management mechanism
-	% (such as garbage collection) on the results 
+	% (such as garbage collection) on the results
 	do_benchmark(empty_loop, N) :-
 		{my_repeat(N)},
 		fail.

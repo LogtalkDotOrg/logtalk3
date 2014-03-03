@@ -26,11 +26,11 @@
 
 	not_attack([],_,_) <- true.
 	not_attack([Y|Ys],X,N) <-
-		{X =\= Y+N} & 
+		{X =\= Y+N} &
 		{X =\= Y-N} &
 		{N1 is N+1} &
 		not_attack(Ys,X,N1).
-	
+
 	select([X|Xs],Xs,X) <- true.
 	select([Y|Ys],[Y|Zs],X) <- select(Ys,Zs,X).
 
@@ -44,4 +44,3 @@
 	bench_goal(queens(4, [2, 4, 3, 1])).
 
 :- end_object.
-				

@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -79,7 +79,7 @@ Published on the web:
 	print([]).
 	print([Student| Students]) :-
 		write(Student), nl,
-		print(Students).	
+		print(Students).
 
 	% h(Name, Subject, Color, Place)
 	template([s(_, _, _, 1), s(_, _, _, 2), s(_, _, _, 3), s(_, _, _, 4), s(_, _, _, 5)]).

@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -64,13 +64,13 @@ Published on the web:
 		member(h(_, _, _, sue, Pi), Solution), member(h(april, _, _, _, Pj), Solution), Pi < Pj,
 		member(h(april, _, _, _, Pj), Solution), member(h(_, mare, black, _, Pk), Solution), Pj < Pk,
 		next(h(_, gelding, chestnut, april, _), h(_, _, bay, _, _), Solution),
-		member(h(_, _, _, gopher, _), Solution),		
+		member(h(_, _, _, gopher, _), Solution),
 		\+ member(h(N, _, _, N, _), Solution).
 
 	print([]).
 	print([Place| Places]) :-
 		print_place(Place),
-		print(Places).	
+		print(Places).
 
 	print_place(h(H, S, C, R, P)) :-
 		write(P), write(' place: '),

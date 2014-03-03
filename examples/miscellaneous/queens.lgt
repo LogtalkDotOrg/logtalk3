@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -91,7 +91,7 @@
 		|   |   | Q |   |		4
 		+---+---+---+---+
 
-    could be represented by board(2,4,1,3).  
+    could be represented by board(2,4,1,3).
 
     How are we going to place the queens?  The first idea that springs
     to mind is to place them one after another, but we can do better than

@@ -184,7 +184,7 @@
 		compare(Order, Key0, Key),
 		update_red(Order, red(Left,Key0,Value0,Right), Key, OldValue, Value, NewTree).
 
-	update_black(=, black(Left,Key0,Value0,Right), _, Value0, Value, black(Left,Key0,Value,Right)). 
+	update_black(=, black(Left,Key0,Value0,Right), _, Value0, Value, black(Left,Key0,Value,Right)).
 	update_black(>, black(Left,Key0,Value0,Right), Key, OldValue, Value, black(NewLeft,Key0,Value0,Right)) :-
 		update(Left, Key, OldValue, Value, NewLeft).
 	update_black(<, black(Left,Key0,Value0,Right), Key, OldValue, Value, black(Left,Key0,Value0,NewRight)) :-
@@ -234,7 +234,7 @@
 		fix_root(Tree1, Tree).
 
 	%
-	% Cormen et al present the algorithm as 
+	% Cormen et al present the algorithm as
 	% (1) standard tree insertion;
 	% (2) from the viewpoint of the newly inserted node:
 	%     partially fix the tree;
@@ -274,7 +274,7 @@
 	insert_black(<, black(Left,Key0,Value0,Right), Key, Value, Nil, NewTree, Flag) :-
 		insert(Left, Key, Value, Nil, IL, Flag0),
 		fix_left(Flag0, black(IL,Key0,Value0,Right), NewTree, Flag).
-	insert_black(=, black(Left,Key0,_,Right), _, Value, _, black(Left,Key0,Value,Right), done). 
+	insert_black(=, black(Left,Key0,_,Right), _, Value, _, black(Left,Key0,Value,Right), done).
 	insert_black(>, black(Left,Key0,Value0,Right), Key, Value, Nil, NewTree, Flag) :-
 		insert(Right, Key, Value, Nil, IR, Flag0),
 		fix_right(Flag0, black(Left,Key0,Value0,IR), NewTree, Flag).
@@ -417,8 +417,8 @@
 	delete_red_node(L1, L2, L1, done) :- L1 == L2, !.
 	delete_red_node(black('',_,_,''), Right, Right, done) :-  !.
 	delete_red_node(Left, black('',_,_,''), Left, done) :-  !.
-	delete_red_node(Left, Right, OUT, Done) :- 	
-		delete_next(Right, NewKey, NewValue, NewRight, Done0),	
+	delete_red_node(Left, Right, OUT, Done) :-
+		delete_next(Right, NewKey, NewValue, NewRight, Done0),
 		fixup_right(Done0, red(Left,NewKey,NewValue,NewRight), OUT, Done).
 
 	delete_black_node(L1, L2, L1, not_done) :- L1 == L2, !.
@@ -612,7 +612,7 @@
 		!.
 	partial_map(red(Left,Key,Value,Right), Map, MapF, Nil, Closure, red(NewLeft,Key,NewValue,NewRight)) :-
 		partial_map(Left, Map, MapI, Nil, Closure, NewLeft),
-		(	MapI == [] -> 
+		(	MapI == [] ->
 			NewRight = Right, NewValue = Value, MapF = []
 		;	MapI = [K1| MapR],
 			(	Key == K1 ->
@@ -628,7 +628,7 @@
 		).
 	partial_map(black(Left,Key,Value,Right), Map, MapF, Nil, Closure, black(NewLeft,Key,NewValue,NewRight)) :-
 		partial_map(Left, Map, MapI, Nil, Closure, NewLeft),
-		(	MapI == [] -> 
+		(	MapI == [] ->
 			NewRight = Right, NewValue = Value, MapF = []
 		;	MapI = [K1| MapR],
 			(	Key == K1 ->
@@ -757,7 +757,7 @@
 		(Key @> Min ; Min == -inf),
 		(Key @< Max ; Max == +inf),
 		!.
-	check_val(Key, Min, Max) :- 
+	check_val(Key, Min, Max) :-
 		throw(not_ordered_between(Key,Min,Max)).
 
 	check_red_child(black(_,_,_,_)).

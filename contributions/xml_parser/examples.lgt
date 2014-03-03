@@ -379,7 +379,7 @@ put_codes( [Code|Codes], Output ) :-
 	put_code( Output, Code ),
 	put_codes( Codes, Output ).
 
-	
+
 get_codes( Input, [Code|Codes] ) :-
 	\+ at_end_of_stream( Input ),
 	get_code( Input, Code ),

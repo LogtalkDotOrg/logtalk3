@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -9,15 +9,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-/*	This example illustrates how to associate a set of predicates with a 
-	compound term.   Parameters can be accessed from within an object by 
-	using the execution-context built-in methods this/1 and parameter/2; 
+/*	This example illustrates how to associate a set of predicates with a
+	compound term.   Parameters can be accessed from within an object by
+	using the execution-context built-in methods this/1 and parameter/2;
 	both alternatives are illustrated below.
 */
 
 
 
-/*	The first parametric object defines some useful predicates for working  
+/*	The first parametric object defines some useful predicates for working
 	with lists.
 */
 
@@ -64,7 +64,7 @@
 
 % dealing with empty lists must also be done but it's a bit tricky:
 
-:- object('[]',				% the empty list is usually an atom, not a compound term, 
+:- object('[]',				% the empty list is usually an atom, not a compound term,
 	extends([[_| _]])).		% so the "extends" relation would be always wrong
 
 	last(_) :-				% the trick is to redefine all inherited predicates
@@ -80,7 +80,7 @@
 
 
 
-/*	The next two parametric objects represent time and date values as 
+/*	The next two parametric objects represent time and date values as
 	compound terms using the object's identifiers.
 */
 
@@ -212,9 +212,9 @@
 
 
 
-/*	The following parametric object illustrates a solution for implementing 
-	backtracable object state. The idea is to represent object state by using 
-	object parameters, defining "setter" predicates/methods that return the 
+/*	The following parametric object illustrates a solution for implementing
+	backtracable object state. The idea is to represent object state by using
+	object parameters, defining "setter" predicates/methods that return the
 	updated object identifier.
 */
 

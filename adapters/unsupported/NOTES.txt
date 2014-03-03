@@ -60,14 +60,14 @@ Bin-Prolog 8.x~10.x
 	workaround the restriction of only one top-level file per interactive 
 	session. For instance, the project file for the "metapredicates" example
 	will look like (in the Unix version):
-	
+
 		:- ['$LOGTALKHOME/adapters/bin.pl'].
 		:- ['$LOGTALKHOME/core/core.pl'].
 		...
 		:- ['$LOGTALKUSER/examples/metapredicates/meta.pl'].
 		:- ['$LOGTALKUSER/examples/metapredicates/sort1.pl'].
 		...
-	
+
 	You will probably want to have a project file including only the adapter
 	and the compiler/runtime files (core.pl) in order to compile the
 	examples using logtalk_compile/1-2 (do NOT use logtalk_load/1-2 or the 

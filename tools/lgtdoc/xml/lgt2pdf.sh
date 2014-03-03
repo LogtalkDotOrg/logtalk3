@@ -68,7 +68,7 @@ if ! [ "$LOGTALKUSER" ]; then
 	echo "to your Logtalk user directory!"
 	echo "Trying the default location for the Logtalk user directory..."
 	export LOGTALKUSER=$HOME/logtalk
-	if [ -d "$LOGTALKUSER" ]; then		
+	if [ -d "$LOGTALKUSER" ]; then
 		echo "... using Logtalk user directory found at $LOGTALKUSER"
 	else
 		echo "... Logtalk user directory not found at default location. Creating a new"

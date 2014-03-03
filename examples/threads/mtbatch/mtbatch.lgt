@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -372,9 +372,9 @@
 		Goaltime is Walltime4 - Walltime3,
 		Average is (Goaltime - Looptime)/N.
 
-	% repeat a goal N times without using call/1 and using a failure-driven loop to 
-	% avoid the interference of Prolog compiler memory management mechanism (such as 
-	% garbage collection) on the results 
+	% repeat a goal N times without using call/1 and using a failure-driven loop to
+	% avoid the interference of Prolog compiler memory management mechanism (such as
+	% garbage collection) on the results
 	do_benchmark(empty_loop, N) :-
 		repeat(N),
 		fail.

@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -44,8 +44,8 @@
 		SolutionsSorted = [
 			t(_)-1-t-t,
             translate(_)-1-t-translate,
-			rotate(_,_,_)-3-xyz-rotate, 
-			xyz(_,_,_)-3-xyz-xyz, 
+			rotate(_,_,_)-3-xyz-rotate,
+			xyz(_,_,_)-3-xyz-xyz,
 			xyzt(_,_,_,_)-4-xyzt-xyzt
 		].
 

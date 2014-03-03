@@ -16,4 +16,4 @@
 	term_expansion((Goal & Goals), [Goal|List]) :-
 		phrase(::flatten_goals(Goals), List).
 
-:- end_object.  
+:- end_object.

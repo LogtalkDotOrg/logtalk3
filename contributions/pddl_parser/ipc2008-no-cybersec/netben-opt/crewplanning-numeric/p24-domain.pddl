@@ -12,7 +12,7 @@
 	(done_exercise  ?c - CrewMember ?d - Day)
 	(not_sleeping ?c - CrewMember)
 
-	
+
 	;; Predicates to order actions in RPCM's Perform HTN schema
 	(done_first_reconfigure_thermal_loop ?r - RPCM)
 	(done_remove_sleep_station ?r - RPCM)

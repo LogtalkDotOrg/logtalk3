@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -35,7 +35,7 @@
 	:- public(p/2).
 	:- coinductive(p/2).
 
-	p(_, Y) :- 
+	p(_, Y) :-
 		findall(T, s(T), Bag),
 		member(Y, Bag).
 

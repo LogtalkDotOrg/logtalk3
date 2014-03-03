@@ -14,7 +14,7 @@ This example illustrates the use of assignable variables and parametric
 objects as alternative implementation to dynamic object predicates for
 storing (backtrackable) object state. For more information on assignable 
 variables please consult the URL:
-	
+
 	http://www.kprolog.com/en/logical_assignment/
 
 The objects in this example make use of the library category `assignvars`.

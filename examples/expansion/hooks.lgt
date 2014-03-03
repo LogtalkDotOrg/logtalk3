@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -73,7 +73,7 @@
 		hb::term_expansion((:- end_object), HB0),
 		list::append(HB, [(:- end_object)], HB0),
 		hc::term_expansion((:- end_object), HC0),
-		list::append(HC, [(:- end_object)], HC0),		
+		list::append(HC, [(:- end_object)], HC0),
 		list::append([HA, HB, HC, [(:- end_object)]], Expansion).
 
 	% here we just try each individual hook object in succesion but more

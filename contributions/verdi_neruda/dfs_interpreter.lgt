@@ -9,7 +9,7 @@
 		comment is 'Depth-first interpreter for general logic programs.'
 	]).
 
-	prove(Goal, DB) :- 
+	prove(Goal, DB) :-
 		prove_body([Goal], -1, DB).
 
 	prove(Goal, Limit, DB) :-
@@ -35,6 +35,6 @@
 			call(Goal),
 			Body = Tail
 		;	DB::rule(Head, Body, Tail)
-		).	
+		).
 
 :- end_object.

@@ -205,7 +205,7 @@
 
 	before(FlagType, validate(FlagValue), _Sender) :-
 		write('Validating: '), write(FlagValue), write(' with type: '), write(FlagType), nl.
-    
+
 	after(FlagType, validate(FlagValue), _Sender) :-
 		write('Validated: '), write(FlagValue), write(' with type: '), write(FlagType), nl.
 

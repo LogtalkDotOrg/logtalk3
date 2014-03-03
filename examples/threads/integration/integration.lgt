@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -56,12 +56,12 @@
 			quadrature(Function, Threads, Left, Right, InitialArea, NP, Epsilon, Integral)
 		).
 
-	quadrature(Function, Threads, Left, Right, Area, NP, Epsilon, Integral) :-		
+	quadrature(Function, Threads, Left, Right, Area, NP, Epsilon, Integral) :-
 		Middle is 0.5*(Right+Left),
 		^^interval_area(Function, Left,   Middle, NP, NP, 0.0, Area1),
-		^^interval_area(Function, Middle, Right,  NP, NP, 0.0, Area2),	
+		^^interval_area(Function, Middle, Right,  NP, NP, 0.0, Area2),
 		Error is abs(Area-Area1-Area2),
-		(	Error > Epsilon -> 	
+		(	Error > Epsilon ->
 			(	Threads =:= 1 ->
 				quadrature(Function, Threads, Left,   Middle, Area1, NP, Epsilon, I1),
 				quadrature(Function, Threads, Middle, Right,  Area2, NP, Epsilon, I2)
@@ -149,11 +149,11 @@
 	% wait for the threads to finish and then we will collect the results summing as we go
 	collect([], Integral, Integral).
 	collect([start(Function,Left,Right,NP,Epsilon,Subarea)| Goals], Acc, Integral) :-
-		threaded_exit(start(Function,Left,Right,NP,Epsilon,Subarea)),		
+		threaded_exit(start(Function,Left,Right,NP,Epsilon,Subarea)),
 		Acc2 is Acc + Subarea,
 		collect(Goals, Acc2, Integral).
 
-	% predicate that the threads will start	
+	% predicate that the threads will start
 	start(Function, Left, Right, NP, Epsilon, Integral) :-
 		(	NP =:= 0 -> 
 			functions::eval(Function, Left, Fleft),
@@ -168,9 +168,9 @@
 	quadrature(Function, Left, Right, Area, NP, Epsilon, Integral) :-
 		Middle is 0.5*(Right+Left),
 		^^interval_area(Function, Left,   Middle, NP, NP, 0.0, Area1),
-		^^interval_area(Function, Middle, Right,  NP, NP, 0.0, Area2),	
+		^^interval_area(Function, Middle, Right,  NP, NP, 0.0, Area2),
 		Error is abs(Area-Area1-Area2),
-		(	Error > Epsilon -> 	
+		(	Error > Epsilon ->
 			quadrature(Function, Left, Middle,  Area1, NP, Epsilon, I1),
 			quadrature(Function, Middle, Right, Area2, NP, Epsilon, I2),
 			Integral is I1 + I2
@@ -182,7 +182,7 @@
 		functions::eval(Function, Middle, Fmiddle),
 		^^trapezium_area(Left,   Middle, Fleft,   Fmiddle, Area1),
 		^^trapezium_area(Middle, Right,  Fmiddle, Fright,  Area2),
-		Error is abs(Area-Area1-Area2),	
+		Error is abs(Area-Area1-Area2),
 		(	Error > Epsilon -> 
 			trapezium(Function, Left,   Middle, Fleft,   Fmiddle, Area1, Epsilon, I1),
 			trapezium(Function, Middle, Right,  Fmiddle, Fright,  Area2, Epsilon, I2),

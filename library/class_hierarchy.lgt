@@ -129,7 +129,7 @@
 	leaf_class(Leaf) :-
 		self(Self),
   		leaf_class(Self, Leaf).
-  		
+  
   	leaf_class(Self, Leaf) :-
   		specializes_class(Leaf, Self),
   		\+ specializes_class(_, Leaf).
@@ -167,7 +167,7 @@
 	descendant_class(Descendant) :-
 		self(Self),
 		descendant_class(Self, Descendant).
-		
+
 	descendant_class(Self, Descendant) :-
 		specializes_class(Descendant, Self).
 	descendant_class(Self, Descendant) :-

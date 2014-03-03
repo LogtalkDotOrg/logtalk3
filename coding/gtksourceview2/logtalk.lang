@@ -53,7 +53,7 @@
 			<start>"</start>
 			<end>"</end>
 		</context>
-	
+
 		<context id="quoted-atom" style-ref="string" end-at-line-end="true">
 			<start>'</start>
 			<end>'</end>
@@ -63,14 +63,14 @@
 				</context>
 			</include>
 		</context>
-	
+
 		<context id="line-comment" style-ref="comment" end-at-line-end="true">
 			<start>%</start>
 			<include>
 				<context ref="def:in-line-comment"/>
 			</include>
 		</context>
-	
+
 		<context id="block-comment" style-ref="comment">
 			<start>/\*</start>
 			<end>\*/</end>
@@ -85,10 +85,10 @@
 
 		<context id="entity-directives" style-ref="entity">
 			<prefix>^\s*:-\s</prefix>
-			<keyword>(object)(?=[(])</keyword>			
-			<keyword>(protocol)(?=[(])</keyword>			
-			<keyword>(category)(?=[(])</keyword>			
-			<keyword>(end_(object|protocol|category))(?=[.])</keyword>			
+			<keyword>(object)(?=[(])</keyword>
+			<keyword>(protocol)(?=[(])</keyword>
+			<keyword>(category)(?=[(])</keyword>
+			<keyword>(end_(object|protocol|category))(?=[.])</keyword>
 		</context>
 
 		<context id="entity-relations" style-ref="entity">
@@ -100,37 +100,37 @@
 
 		<context id="conditional-compilation-directives" style-ref="directive">
  			<prefix>^\s*:-\s</prefix>
-			<keyword>(e(lse|ndif))(?=[.])</keyword>			
-			<keyword>((el)?if)(?=[(])</keyword>			
+			<keyword>(e(lse|ndif))(?=[.])</keyword>
+			<keyword>((el)?if)(?=[(])</keyword>
 		</context>
 
 		<context id="source-file-directives" style-ref="directive">
  			<prefix>^\s*:-\s</prefix>
-			<keyword>(en(coding|sure_loaded))(?=[(])</keyword>			
-			<keyword>(set_(logtalk|prolog)_flag)(?=[(])</keyword>			
+			<keyword>(en(coding|sure_loaded))(?=[(])</keyword>
+			<keyword>(set_(logtalk|prolog)_flag)(?=[(])</keyword>
 		</context>
 
 		<context id="predicate-directives" style-ref="directive">
  			<prefix>^\s*:-\s</prefix>
 			<!-- Scope directives -->
-			<keyword>(p(ublic|r(otected|ivate)))(?=[(])</keyword>			
+			<keyword>(p(ublic|r(otected|ivate)))(?=[(])</keyword>
  			<!-- Multi-threading directives -->
-			<keyword>(synchronized)(?=[(])</keyword>			
-			<keyword>(synchronized)(?=[.])</keyword>			
-			<keyword>(threaded)(?=[.])</keyword>			
+			<keyword>(synchronized)(?=[(])</keyword>
+			<keyword>(synchronized)(?=[.])</keyword>
+			<keyword>(threaded)(?=[.])</keyword>
 			<!-- Other directives -->
 			<keyword>(alias)(?=[(])</keyword>
 			<keyword>((re)?export)(?=[(])</keyword>
-			<keyword>(in(clude|itialization|fo))(?=[(])</keyword>			
-			<keyword>(mod(e|ule))(?=[(])</keyword>			
-			<keyword>(built_in)(?=[.])</keyword>			
-			<keyword>(dynamic)(?=[(])</keyword>			
-			<keyword>(dynamic)(?=[.])</keyword>			
-			<keyword>(discontiguous)(?=[(])</keyword>			
-			<keyword>(m(eta_(non_terminal|predicate)|ultifile))(?=[(])</keyword>			
-			<keyword>(op)(?=[(])</keyword>			
-			<keyword>(c(alls|oinductive))(?=[(])</keyword>			
-			<keyword>(use(s|_module))(?=[(])</keyword>			
+			<keyword>(in(clude|itialization|fo))(?=[(])</keyword>
+			<keyword>(mod(e|ule))(?=[(])</keyword>
+			<keyword>(built_in)(?=[.])</keyword>
+			<keyword>(dynamic)(?=[(])</keyword>
+			<keyword>(dynamic)(?=[.])</keyword>
+			<keyword>(discontiguous)(?=[(])</keyword>
+			<keyword>(m(eta_(non_terminal|predicate)|ultifile))(?=[(])</keyword>
+			<keyword>(op)(?=[(])</keyword>
+			<keyword>(c(alls|oinductive))(?=[(])</keyword>
+			<keyword>(use(s|_module))(?=[(])</keyword>
 		</context>
 
 		<context id="built-in-methods" style-ref="built-in">
@@ -303,13 +303,13 @@
 			<!-- Existential quantifier -->
 			<keyword>\^</keyword>
 		</context>
-	
+
 		<context id="number" style-ref="number">
 			<match extended="true">
 	        \b(0'.|0b[0-1]+|0o[0-7]+|0x[0-9a-fA-F]+|\d+(\.\d+)?([eE]([-+])?\d+)?)
 			</match>
 		</context>
-	
+
 		<context id="variable" style-ref="variable">
 			<match extended="true">
 			\b[A-Z_][a-zA-Z0-9_]*
@@ -319,27 +319,27 @@
 		<context id="message-sending-operators" style-ref="built-in">
 			<prefix></prefix>
 			<suffix></suffix>
-			<keyword>::</keyword>			
+			<keyword>::</keyword>
 			<keyword>\^\^</keyword>
 		</context>
 
 		<context id="category-predicate-direct-call" style-ref="built-in">
 			<prefix></prefix>
 			<suffix></suffix>
-			<keyword>:</keyword>			
+			<keyword>:</keyword>
 		</context>
 
 		<context id="external-call-operator" style-ref="built-in">
 			<prefix></prefix>
 			<suffix></suffix>
-			<keyword>\{</keyword>			
+			<keyword>\{</keyword>
 			<keyword>\}</keyword>
 		</context>
 <!--
 		<context id="mode-operators" style-ref="built-in">
 			<prefix></prefix>
 			<suffix></suffix>
-			<keyword>\+</keyword>	
+			<keyword>\+</keyword>
 			<keyword>-</keyword>
 			<keyword>\?</keyword>
 			<keyword>@</keyword>

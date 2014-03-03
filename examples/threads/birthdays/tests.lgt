@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -22,7 +22,7 @@
 	:- set_logtalk_flag(unknown_entities, silent).
 
 	setup :-
-		set_logtalk_flag(events, allow).		
+		set_logtalk_flag(events, allow).
 
 	test(birthdays_1) :-
 		agent::new(paul, 40, male),

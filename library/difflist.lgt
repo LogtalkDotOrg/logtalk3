@@ -117,7 +117,7 @@
 	keysort(Difflist, Sorted) :-
 		as_list(Difflist, List),
 		list::keysort(List, List2),
-		list::as_difflist(List2, Sorted).		
+		list::as_difflist(List2, Sorted).
 
 	last(List-Back, Last) :-
 		List \== Back,
@@ -184,7 +184,7 @@
 	msort(Difflist, Sorted) :-
 		as_list(Difflist, List),
 		list::msort(List, List2),
-		list::as_difflist(List2, Sorted).		
+		list::as_difflist(List2, Sorted).
 
 	nth0(Position, List, Element) :-
 		nth(Element, List, 0, Position, _).
@@ -236,7 +236,7 @@
 		List =[X| Xs],
 		compare(Order, X, Y),
 		partition(Order, X, Xs-Back, Y, Less, Equal, Greater).
-	
+
 	partition(<, X, Xs-Back, Y, [X| Less]-LBack, Equal, Greater) :-
 		partition(Xs-Back, Y, Less-LBack, Equal, Greater).
 	partition(=, X, Xs-Back, Y, Less, [X| Equal]-EBack, Greater) :-

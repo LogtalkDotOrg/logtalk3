@@ -3,7 +3,7 @@
 %%   Simple parser of PDDL domain file into prolog syntax.
 %% Author: Robert Sasak, Charles University in Prague
 %%
-%% Example: 
+%% Example:
 %% ?-domain::parse('blocks_world.pddl', O).
 %%   O = domain(blocks,
 %%        [strips, typing, 'action-costs'],

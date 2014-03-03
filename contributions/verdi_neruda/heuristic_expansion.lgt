@@ -20,4 +20,4 @@
 
 	term_expansion((:- end_object), [(rule(Head,Body) :- rule(Head,Body, _, [])), (:- end_object)]).
 
-:- end_object.  
+:- end_object.

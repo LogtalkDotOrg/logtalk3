@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -51,7 +51,7 @@
 		I7 is I-2,  J7 is J+1,
 		I8 is I-2,  J8 is J-1,
 		addFeasiblePositions([(I1,J1),(I2,J2),(I3,J3),(I4,J4),(I5,J5),(I6,J6),(I7,J7),(I8,J8)],D).
-    
+
 	addFeasiblePositions([],D):-D=[].
 	addFeasiblePositions([(I,J)|IJs],D):-
 		(I>=1,I=<8,J>=1,J=<8),!,

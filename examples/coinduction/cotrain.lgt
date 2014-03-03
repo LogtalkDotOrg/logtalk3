@@ -120,9 +120,9 @@
 :- elif((current_logtalk_flag(prolog_dialect, Dialect), (Dialect = sicstus; Dialect = swi; Dialect = yap))).
 
 	:- use_module(library(clpr), []).
-	
+
 	:- object(cotrain).
-	
+
 		:- info([
 			version is 0.2,
 			author is 'Neda Saeedloei and Gopal Gupta. Adapted to Logtalk by Paulo Moura.',
@@ -163,17 +163,17 @@
 			append(R1, [(up,T2) |_], R),
 			append(_, [(down,T1)|_], R1),
 			clpr:{N < T2 - T1, T2 - T1 < M, M > 0, N > 0}.
-	
+
 		ttrans(s0, approach, s1).
 		ttrans(s1, in,       s2).
 		ttrans(s2, out,      s3).
 		ttrans(s3, exit,     s0).
-	
+
 		ctrans(s0, approach, s1).
 		ctrans(s1, lower,    s2).
 		ctrans(s2, exit,     s3).
 		ctrans(s3, raise,    s0).
-	
+
 		gtrans(s0, lower, s1).
 		gtrans(s1, down,  s2).
 		gtrans(s2, raise, s3).
@@ -228,7 +228,7 @@
 			update_stream(Wall, W3),
 			append(R, [(M, W2)], R2),
 			update_stream(Results, R2).
-	
+
 		append([], X, X).
 		append([H| T], Y, [H| Z]) :-
 			append(T, Y, Z).

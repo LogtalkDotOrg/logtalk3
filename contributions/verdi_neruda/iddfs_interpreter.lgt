@@ -1,7 +1,7 @@
 %%TODO: Only allow a new bound if some progress has been made.
 
 :- object(iddfs_interpreter(_Increment),
-	implements(interpreterp)).	
+	implements(interpreterp)).
 
 	:- info([
 		version is 1.0,
@@ -12,7 +12,7 @@
 	]).
 
 	prove(Goal, DB) :-
-		prove(Goal, -1, DB).		
+		prove(Goal, -1, DB).
 
 	prove(Goal, Limit, DB) :-
 		parameter(1, Increment),
@@ -30,25 +30,25 @@
 		Remaining < Increment.
 	prove(Goals, Bound, Increment, Limit, DB) :-
 		Limit =\= 0,
-		Limit0 is Limit - 1,		 
+		Limit0 is Limit - 1,
 		Bound1 is Bound + Increment,
 		prove(Goals, Bound1, Increment, Limit0, DB).
 
 	bounded_prove([], Remaining, Remaining, _).
 	bounded_prove([not(Goal)|Goals], Bound, Remaining, DB) :-
 		%%TODO::Rewrite as an if-then-else instead?
-		!, 
+		!,
 		Bound1 is Bound - 1,
 		Bound1 >= 0,
 		%%This is a temporary workaround that allows iddfs to handle negation.
-		(	dfs_interpreter::prove(Goal, DB) -> 
-			fail 
+		(	dfs_interpreter::prove(Goal, DB) ->
+			fail
 		; 	counter::increment, %Inference counting.
 			bounded_prove(Goals, Bound1, Remaining, DB)
 		).
 	bounded_prove([Goal|Goals], Bound, Remaining, DB) :-
 		Bound1 is Bound - 1,
-		Bound1 >= 0,		
+		Bound1 >= 0,
 		rule(Goal, Body, Goals, DB),
 		counter::increment, %Inference counting.
 		bounded_prove(Body, Bound1, Remaining, DB).
@@ -58,6 +58,6 @@
 			call(Goal),
 			Body = Tail
 		;	DB::rule(Head, Body, Tail)
-		).	
- 
+		).
+
 :- end_object.

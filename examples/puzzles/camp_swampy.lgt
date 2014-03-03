@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -82,7 +82,7 @@ Published on the web:
 	print([]).
 	print([Place| Places]) :-
 		print_boy(Place),
-		print(Places).	
+		print(Places).
 
 	print_boy(b(First, Last, State, Bed)) :-
 		write(First), write(' '), write(Last), write(', from '), write(State),

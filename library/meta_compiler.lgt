@@ -173,7 +173,7 @@
 				partition_([], _, _, [], [], []),
 				(partition_([X| Xs], Y, GArgs, RLess, REqual, RGreater) :-
 					Goal,
-					partition_(Order, X, Xs, Y, GArgs, RLess, REqual, RGreater)),		
+					partition_(Order, X, Xs, Y, GArgs, RLess, REqual, RGreater)),
 				(partition_(<, X, Xs, Y, GArgs, [X| RLess], REqual, RGreater) :-
 					partition_(Xs, Y, GArgs, RLess, REqual, RGreater)),
 				(partition_(=, X, Xs, Y, GArgs, RLess, [X| REqual], RGreater) :-

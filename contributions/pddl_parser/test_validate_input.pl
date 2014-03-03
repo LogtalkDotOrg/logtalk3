@@ -52,7 +52,7 @@ test :-
 	write('Testing problem set woodworking'), nl,
 	test_colection,
 	'$lgt_change_directory'('../../../').
-	
+
 
 test_colection:-
 	parse_file('p01.pddl'),

@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -111,7 +111,7 @@
 		random::random(0, Limit, Delta),
 		transfer(FromBucket, Delta, ToBucket),
 		redistribute_loop(N).
-	
+
 	display_loop(0) :-
 		!.
 	display_loop(N) :-

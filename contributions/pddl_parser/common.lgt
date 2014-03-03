@@ -24,7 +24,7 @@
 	zeroOrMore(_, [])		--> [].
 
 	% BNF description include operator <term>+ to mark zero or more replacements.
-	% This DCG extension to overcome this. 
+	% This DCG extension to overcome this.
 	oneOrMore(W, [R| Rs])	--> call(W, R), oneOrMore(W, Rs).
 	oneOrMore(_, [])		--> [].
 

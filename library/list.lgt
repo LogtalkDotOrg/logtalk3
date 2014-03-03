@@ -99,7 +99,7 @@
 		hamming_distance(Xs, Ys, Distance1, Distance).
 
 	keysort(List, Sorted) :-
-		{keysort(List, Sorted)}.		
+		{keysort(List, Sorted)}.
 
 	last([Head| Tail], Last) :-
 		last(Tail, Head, Last).
@@ -252,7 +252,7 @@
 	partition([X| Xs], Y, Less, Equal, Greater) :-
 		compare(Order, X, Y),
 		partition(Order, X, Xs, Y, Less, Equal, Greater).
-	
+
 	partition(<, X, Xs, Y, [X| Less], Equal, Greater) :-
 		partition(Xs, Y, Less, Equal, Greater).
 	partition(=, X, Xs, Y, Less, [X| Equal], Greater) :-
@@ -333,12 +333,12 @@
 	:- if(predicate_property(sort(_, _), built_in)).
 
 		sort(List, Sorted) :-
-			{sort(List, Sorted)}.		
+			{sort(List, Sorted)}.
 
 	:- else.
 
 		sort(List, Sorted) :-
-			setof(Element, member(Element, List), Sorted).		
+			setof(Element, member(Element, List), Sorted).
 
 	:- endif.
 

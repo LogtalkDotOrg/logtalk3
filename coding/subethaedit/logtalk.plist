@@ -12,7 +12,7 @@
 		<key>Valid Characters for Variables</key>
 		<string>_0987654321abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
 	</dict>
-	
+
     <key>Styles</key>
 	<array>
 
@@ -64,46 +64,46 @@
 			<false/>
 			<key>Regular Expressions</key>
 			<array>
-				<string>\:\-[[:space:]](if)\(</string>			
-				<string>\:\-[[:space:]](elif)\(</string>			
-				<string>\:\-[[:space:]](else)\.</string>			
-				<string>\:\-[[:space:]](endif)\.</string>			
-				<string>\:\-[[:space:]](object)\(</string>			
-				<string>\:\-[[:space:]](end_object)\.</string>			
-				<string>\:\-[[:space:]](protocol)\(</string>			
-				<string>\:\-[[:space:]](end_protocol)\.</string>			
-				<string>\:\-[[:space:]](category)\(</string>			
-				<string>\:\-[[:space:]](end_category)\.</string>			
-				<string>\:\-[[:space:]](alias)\(</string>			
-				<string>\:\-[[:space:]](encoding)\(</string>			
-				<string>\:\-[[:space:]](ensure_loaded)\(</string>			
-				<string>\:\-[[:space:]](export)\(</string>			
-				<string>\:\-[[:space:]](reexport)\(</string>			
-				<string>\:\-[[:space:]](include)\(</string>			
-				<string>\:\-[[:space:]](initialization)\(</string>			
-				<string>\:\-[[:space:]](info)\(</string>			
-				<string>\:\-[[:space:]](mode)\(</string>			
-				<string>\:\-[[:space:]](module)\(</string>			
-				<string>\:\-[[:space:]](built_in)\.</string>			
-				<string>\:\-[[:space:]](dynamic)\(</string>			
-				<string>\:\-[[:space:]](dynamic)\.</string>			
-				<string>\:\-[[:space:]](discontiguous)\(</string>			
-				<string>\:\-[[:space:]](public)\(</string>			
-				<string>\:\-[[:space:]](protected)\(</string>			
-				<string>\:\-[[:space:]](private)\(</string>			
-				<string>\:\-[[:space:]](meta_predicate)\(</string>			
-				<string>\:\-[[:space:]](meta_non_terminal)\(</string>			
-				<string>\:\-[[:space:]](multifile)\(</string>			
-				<string>\:\-[[:space:]](coinductive)\(</string>			
-				<string>\:\-[[:space:]](op)\(</string>			
-				<string>\:\-[[:space:]](calls)\(</string>			
-				<string>\:\-[[:space:]](uses)\(</string>			
-				<string>\:\-[[:space:]](use_module)\(</string>			
-				<string>\:\-[[:space:]](set_logtalk_flag)\(</string>			
-				<string>\:\-[[:space:]](set_prolog_flag)\(</string>			
-				<string>\:\-[[:space:]](synchronized)\(</string>			
-				<string>\:\-[[:space:]](synchronized)\.</string>			
-				<string>\:\-[[:space:]](threaded)\.</string>			
+				<string>\:\-[[:space:]](if)\(</string>
+				<string>\:\-[[:space:]](elif)\(</string>
+				<string>\:\-[[:space:]](else)\.</string>
+				<string>\:\-[[:space:]](endif)\.</string>
+				<string>\:\-[[:space:]](object)\(</string>
+				<string>\:\-[[:space:]](end_object)\.</string>
+				<string>\:\-[[:space:]](protocol)\(</string>
+				<string>\:\-[[:space:]](end_protocol)\.</string>
+				<string>\:\-[[:space:]](category)\(</string>
+				<string>\:\-[[:space:]](end_category)\.</string>
+				<string>\:\-[[:space:]](alias)\(</string>
+				<string>\:\-[[:space:]](encoding)\(</string>
+				<string>\:\-[[:space:]](ensure_loaded)\(</string>
+				<string>\:\-[[:space:]](export)\(</string>
+				<string>\:\-[[:space:]](reexport)\(</string>
+				<string>\:\-[[:space:]](include)\(</string>
+				<string>\:\-[[:space:]](initialization)\(</string>
+				<string>\:\-[[:space:]](info)\(</string>
+				<string>\:\-[[:space:]](mode)\(</string>
+				<string>\:\-[[:space:]](module)\(</string>
+				<string>\:\-[[:space:]](built_in)\.</string>
+				<string>\:\-[[:space:]](dynamic)\(</string>
+				<string>\:\-[[:space:]](dynamic)\.</string>
+				<string>\:\-[[:space:]](discontiguous)\(</string>
+				<string>\:\-[[:space:]](public)\(</string>
+				<string>\:\-[[:space:]](protected)\(</string>
+				<string>\:\-[[:space:]](private)\(</string>
+				<string>\:\-[[:space:]](meta_predicate)\(</string>
+				<string>\:\-[[:space:]](meta_non_terminal)\(</string>
+				<string>\:\-[[:space:]](multifile)\(</string>
+				<string>\:\-[[:space:]](coinductive)\(</string>
+				<string>\:\-[[:space:]](op)\(</string>
+				<string>\:\-[[:space:]](calls)\(</string>
+				<string>\:\-[[:space:]](uses)\(</string>
+				<string>\:\-[[:space:]](use_module)\(</string>
+				<string>\:\-[[:space:]](set_logtalk_flag)\(</string>
+				<string>\:\-[[:space:]](set_prolog_flag)\(</string>
+				<string>\:\-[[:space:]](synchronized)\(</string>
+				<string>\:\-[[:space:]](synchronized)\.</string>
+				<string>\:\-[[:space:]](threaded)\.</string>
 			</array>
 		</dict>
 
@@ -142,8 +142,8 @@
 			<false/>
 			<key>Regular Expressions</key>
 			<array>
-				<string>::</string>			
-				<string>\^\^</string>			
+				<string>::</string>
+				<string>\^\^</string>
 			</array>
 		</dict>
 
@@ -503,7 +503,7 @@
 			<true/>
 			<key>Regular Expressions</key>
 			<array>
-				<string>%.*</string>			
+				<string>%.*</string>
 			</array>
 		</dict>
 

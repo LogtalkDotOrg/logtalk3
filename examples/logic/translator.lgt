@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -57,25 +57,25 @@
 
 	step_by_step(P, Cs) :-
 		nl, write('Processing proposition: '), write(P), nl, nl,
-		write('  1. Remove implications: '), 
+		write('  1. Remove implications: '),
 		remove_implications(P, P2),
 		write(P2), nl,
-		write('  2. Distribute negation: '), 
+		write('  2. Distribute negation: '),
 		distribute_negation(P2, P3),
 		write(P3), nl,
-		write('  3. Remove existential quantifiers: '), 
+		write('  3. Remove existential quantifiers: '),
 		remove_existential_quantifiers(P3, P4),
 		write(P4), nl,
-		write('  4. Convert to prenex normal form: '), 
+		write('  4. Convert to prenex normal form: '),
 		convert_to_prenex_normal_form(P4, P5),
 		write(P5), nl,
-		write('  5. Remove universal quantifiers: '), 
+		write('  5. Remove universal quantifiers: '),
 		remove_universal_quantifiers(P5, P6),
 		write(P6), nl,
-		write('  6. Convert to conjunctive normal form: '), 
+		write('  6. Convert to conjunctive normal form: '),
 		convert_to_conjunctive_normal_form(P6, P7),
 		write(P7), nl,
-		write('  7. Convert to clauses: '), 
+		write('  7. Convert to clauses: '),
 		convert_to_clauses(P7, Cs),
 		write(Cs), nl, nl,
 		write('Clauses in Prolog-like notation:'), nl,

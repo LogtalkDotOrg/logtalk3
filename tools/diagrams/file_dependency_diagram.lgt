@@ -57,7 +57,7 @@
 			;	^^remember_referenced_logtalk_file(OtherPath),
 				^^save_edge(Path, OtherPath, [depends], depends_on_file, [tooltip(depends)| Options])
 			),
-		fail.		
+		fail.
 	output_file(_, _, _, _).
 
 	depends_file(Basename, Directory, OtherPath, Kind) :-

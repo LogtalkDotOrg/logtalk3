@@ -1,5 +1,5 @@
 
-:- object(bench_dcg, 
+:- object(bench_dcg,
 	implements(databasep)).
 
 	:- info([

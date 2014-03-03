@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -56,7 +56,7 @@
 		^^ctg_pred.
 
 	:- public(obj_local/0).
-	% call a local object predicate directly; used for comparing performance with 
+	% call a local object predicate directly; used for comparing performance with
 	% calls to category predicates using the ::/1 and ^^/1 control constructs
 	obj_local :-
 		{generate_list(20, List)},

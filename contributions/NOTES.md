@@ -12,13 +12,13 @@ This folder contains code contributions from Logtalk users. Follows
 a short description of each included contribution:
 
 * `flags`  
-	Contributed by: Theofrastos Mantadelis	
+	Contributed by: Theofrastos Mantadelis
 
 	This folder contains an implementation of persistent object
 	flags. Includes usage examples.
 
 * `iso8601.lgt`  
-	Contributed by: Daniel L. Dudley	
+	Contributed by: Daniel L. Dudley
 
 	This is a partial implementation of the ISO 8601 standard, 
 	providing a library of date predicates. The time predicates 

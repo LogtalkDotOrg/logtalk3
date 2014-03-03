@@ -61,11 +61,11 @@
 	% Selected is the list of substrings of Prefix that matched
 	% the parenthesized components of RE.
 
-	re_match_1(union(RE1, _RE2), S, U, Selected) :- 
+	re_match_1(union(RE1, _RE2), S, U, Selected) :-
 		re_match_1(RE1, S, U, Selected).
-	re_match_1(union(_RE1, RE2), S, U, Selected) :- 
+	re_match_1(union(_RE1, RE2), S, U, Selected) :-
 		re_match_1(RE2, S, U, Selected).
-	re_match_1(conc(RE1, RE2), S, U, Selected) :- 
+	re_match_1(conc(RE1, RE2), S, U, Selected) :-
 		re_match_1(RE1, S, U1, Sel1),
 		re_match_1(RE2, U1, U, Sel2),
 		append(Sel1, Sel2, Selected).
@@ -88,7 +88,7 @@
 
 	re_match_1(any, [_C1|U], U, []).
 	% Note that the following works for matching both regular
-	% characters and metacharacters.  
+	% characters and metacharacters.
 	re_match_1(char(C), [C|U], U, []).
 
 	re_match_1(eos, [], [], []).
@@ -108,7 +108,7 @@
 	%
 	%  tokenize(RE, Input, Output) is true if
 	%    - RE is the string representation of a regular expression,
-	%         with tokens identified by parenthesized subexpressions 
+	%         with tokens identified by parenthesized subexpressions
 	%    - Input is an input string
 	%    - Output is the list of tokens extracted by repeated application
 	%      of RE to Input.
@@ -126,7 +126,7 @@
 
 	names([], []).
 	names([Sym1|MoreSymbols], [Str1|MoreStrings]) :-
-		name(Sym1, Str1), 
+		name(Sym1, Str1),
 		names(MoreSymbols, MoreStrings).
 
 	append([], List, List).

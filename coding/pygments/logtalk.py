@@ -168,10 +168,10 @@ class LogtalkLexer(RegexLexer):
 
         'directive': [
 			# Conditional compilation directives
-            (r'(el)?if(?=[(])', Keyword, 'root'),		
+            (r'(el)?if(?=[(])', Keyword, 'root'),
             (r'(e(lse|ndif))[.]', Keyword, 'root'),
             # Entity directives
-            (r'(category|object|protocol)(?=[(])', Keyword, 'entityrelations'),		
+            (r'(category|object|protocol)(?=[(])', Keyword, 'entityrelations'),
             (r'(end_(category|object|protocol))[.]',Keyword, 'root'),
             # Predicate scope directives
             (r'(public|protected|private)(?=[(])', Keyword, 'root'),

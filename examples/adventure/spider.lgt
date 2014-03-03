@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -62,20 +62,20 @@
 		write('The door appears to be locked.'), nl,
 		nl,
 		fail.
-	
+
 	% These facts tell where the various objects in the game are located.
-	
+
 	at(ruby, spider).
 	at(key, cave_entrance).
 	at(flashlight, building).
 	at(sword, closet).
-	
+
 	% This fact specifies that the spider is alive.
-	
+
 	alive(spider).
-	
+
 	% These rules describe how to pick up an object.
-	
+
 	take(X) :-
 		(	at(X, in_hand) ->
 			write('You are already holding it!'), nl,
@@ -88,9 +88,9 @@
 		;	write('I do not see it here.'), nl,
 			nl
 		).
-	
+
 	% These rules describe how to put down an object.
-	
+
 	drop(X) :-
 		(	at(X, in_hand),
 			i_am_at(Place) ->
@@ -211,9 +211,9 @@
 		nl,
 		fail.
 
-	
+
 	% This rule prints out instructions and tells where you are.
-	
+
 	start :-
 		do(help),
 		do(look),

@@ -17,7 +17,7 @@
    )
 
   (:functions (total-cost) (stack-cost))
-	
+
   (:action open-new-stack
     :parameters (?open ?new-open - count)
     :precondition (and (stacks-avail ?open) (not (making-product))

@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -66,7 +66,7 @@
 
 	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	   Animation.
-	
+
 	   A frozen goal for each variable emits PostScript instructions to
 	   draw a number. On backtracking, the field is cleared.
 	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -90,7 +90,7 @@
 
 	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	   PostScript definitions. Place a number N and clear a cell with:
-	
+
 	   (N) Col Row num
 	   Col Row clear
 	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

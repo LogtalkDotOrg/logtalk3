@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -81,7 +81,7 @@
 	/* Defining the negated variables */
 
 		not(A1,A1n),not(A2,A2n),not(A3,A3n),not(A4,A4n),not(A5,A5n),
-		not(A6,A6n),not(A7,A7n),       
+		not(A6,A6n),not(A7,A7n),
 		not(B2,B2n),not(B4,B4n),not(B6,B6n),not(B8,B8n),
 		not(E6,E6n),not(E7,E7n),not(E8,E8n),not(E9,E9n),not(E10,E10n),
 	/*Redundant constraints   */

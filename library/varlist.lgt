@@ -168,7 +168,7 @@
 		sublist(Tail, Head, Sublist).
 	sublist([Head| Tail], Element1, Sublist) :-
 		(	var(Sublist) ->
-			Sublist = [Element1| Subtail]		
+			Sublist = [Element1| Subtail]
 		;	Sublist = [Element2| Subtail],
 			Element1 == Element2
 		),

@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -16,7 +16,7 @@
 	% required for this secondary declaration to be valid
 	:- multifile(parameter_2_multifile_test_object_1(_)::p/1).
 	:- dynamic(parameter_2_multifile_test_object_1(_)::p/1).
-	
+
 	parameter_2_multifile_test_object_1(_)::p(Parameter) :-
 		parameter(1, Parameter).
 

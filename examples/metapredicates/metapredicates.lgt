@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -34,7 +34,7 @@
 		write('call: '), writeq(Goal), nl,
 		call(Goal),		% Goal is called in the context of the object sending the message trace/1
 		write('exit: '), writeq(Goal), nl.
-		
+
 	trace(Goal) :-
 		write('fail: '), writeq(Goal), nl,
 		fail.

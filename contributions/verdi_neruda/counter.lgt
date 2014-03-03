@@ -22,7 +22,7 @@
 		comment is 'Increments the counter by the specified amount.',
 		argname is ['I']
 	]).
-	
+
 	:- public(set/1).
 	:- mode(set(+number), one).
 	:- info(set/1, [
@@ -54,20 +54,20 @@
 		retract(c(N0)),
 		N is N0 + 1,
 		asserta(c(N)).
-   
+
 	increase(I) :-
 		retract(c(N0)),
 		N is N0 + I,
-		asserta(c(N)).   
+		asserta(c(N)).
 
 	set(N) :-
 		retract(c(_)),
-		asserta(c(N)).   
+		asserta(c(N)).
 
-	value(N) :- 
+	value(N) :-
 		c(N).
 
-	reset :- 
+	reset :-
 		retract(c(_)),
 		asserta(c(0)).
 

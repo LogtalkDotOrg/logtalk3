@@ -3,7 +3,7 @@
 %%   Author: Robert Sasak, Charles University in Prague
 %%
 %% Examples:
-%% 
+%%
 %% ?- pddl::parse_domain('blocks_world.pddl', O).
 %%   O = domain(blocks,
 %%        [strips, typing, 'action-costs'],
@@ -345,7 +345,7 @@
 	% This parser do not fully NOT support PDDL 3.0
 	% However you will find comment out lines ready for futher development.
 
-	problem(problem(Name, Domain, Requirements, ObjectDeclaration, Init, Goal, _, MetricSpec, LengthSpec)) --> 
+	problem(problem(Name, Domain, Requirements, ObjectDeclaration, Init, Goal, _, MetricSpec, LengthSpec)) -->
 		['(', define, '(', problem, Name, ')', '(', ':', domain, Domain, ')'],
 		(require_def(Requirements)             ; []),
 		(object_declaration(ObjectDeclaration) ; []),
@@ -445,7 +445,7 @@
 	zeroOrMore(_, []) --> [].
 
 	% BNF description include operator <term>+ to mark zero or more replacements.
-	% This DCG extension to overcome this. 
+	% This DCG extension to overcome this.
 	oneOrMore(W, [R| Rs]) --> call(W, R), oneOrMore(W, Rs).
 	oneOrMore(_, [])      --> [].
 
@@ -453,7 +453,7 @@
 
 		atomic_list_concat([E |Es], S, A) :-
 			atomic_list_concat(Es, S, E, A).
-	
+
 		atomic_list_concat([], _, A, A).
 		atomic_list_concat([E |Es], S, A0, A) :-
 			atom_concat(A0, S, A1),

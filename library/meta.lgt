@@ -116,7 +116,7 @@
 	partition_([X| Xs], Closure, Y, Less, Equal, Greater) :-
 		call(Closure, Order, X, Y),
 		partition_(Order, X, Xs, Closure, Y, Less, Equal, Greater).
-	
+
 	partition_(<, X, Xs, Closure, Y, [X| Less], Equal, Greater) :-
 		partition_(Xs, Closure, Y, Less, Equal, Greater).
 	partition_(=, X, Xs, Closure, Y, Less, [X| Equal], Greater) :-

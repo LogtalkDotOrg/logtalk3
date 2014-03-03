@@ -31,25 +31,25 @@
 	edge(4, 7) <- true.
 	edge(6, 9) <- true.
 
-	connected(X, Z) <-	 
+	connected(X, Z) <-
 		edge(X,Y) &
 		connected(Y, Z).
 	connected(X, Y) <- edge(X, Y).
 
 %%These are various permutations of connected/2. Uncomment them if they are of interest.
 
-%	 connected(X, Z) <-	 
+%	 connected(X, Z) <-
 %		 connected(Y, Z) &
 %		 edge(X,Y).
 %	 connected(X, Y) <- edge(X, Y).
 
 %	 connected(X, Y) <- edge(X, Y).
-%	 connected(X, Z) <-	 
+%	 connected(X, Z) <-
 %		 edge(X,Y) &
 %		 connected(Y, Z).
 
 %	 connected(X, Y) <- edge(X, Y).
-%	 connected(X, Z) <-	 
+%	 connected(X, Z) <-
 %		 connected(Y, Z) &
 %		 edge(X,Y).
 

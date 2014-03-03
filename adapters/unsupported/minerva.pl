@@ -394,7 +394,7 @@ compare(<, X, Y) :-
 
 compare(=, X, Y) :-
 	X == Y, !.
-	
+
 compare(>, X, Y) :-
 	X @> Y.
 

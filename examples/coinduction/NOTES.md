@@ -39,7 +39,7 @@ For more information see:
 		publisher = {Springer-Verlag},
 		address = {Berlin, Heidelberg},
 	}
-	
+
 	@inproceedings{
 		author = {Neda Saeedloei and Gopal Gupta},
 		title = {Verifying Complex Continuous Real-Time Systems with Coinductive CLP(R)},
@@ -47,7 +47,7 @@ For more information see:
 		year = {2009},
 		location = {Pasadena, California, USA}
 	}
-	
+
 	@inproceedings{saeedloei_et_al:LIPIcs:2010:2599,
 		author ={Neda Saeedloei and Gopal Gupta},
 		title = {Timed Definite Clause Omega-Grammars},
@@ -65,7 +65,7 @@ For more information see:
 		doi = {http://dx.doi.org/10.4230/LIPIcs.ICLP.2010.212},
 		annote = {Keywords: Constraint Logic Programming over reals, Co-induction, Context-Free Grammars, Omega-Grammars}
 	}
-	
+
 	@inproceedings{AnconaSAC12,
 	  author = {Ancona, D.},
 	  title = {Regular corecursion in {P}rolog},

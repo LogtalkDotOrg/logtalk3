@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -87,7 +87,7 @@
 
 	% adapted from a Richard O'Keefe example
 	:- public(common_prefix/3).
-	common_prefix(Front, Xs, Ys) :-	
+	common_prefix(Front, Xs, Ys) :-
 		meta::map({Front}/(list::append(Front)), Xs, Ys).
 
 	% an alternative definition
@@ -127,13 +127,13 @@
 :- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == swi; Dialect == xsb; Dialect == yap))).
 
 	:- object(lambda_benchmarks).
-	
+
 		:- public([bench1/0, bench2/0]).
-	
+
 		:- if(current_logtalk_flag(prolog_dialect, swi)).
 			:- use_module(prolog_statistics, [time/1]).
 		:- endif.
-	
+
 		:- uses(integer, [between/3, sequence/3]).
 		:- uses(meta, [map/2, map/3]).
 
@@ -143,7 +143,7 @@
 			time(map(less(0), List)),
 			write('Using map/2 with a lambda for testing less(0, X) with X in [1..100000]:  '), nl,
 			time(map([X]>>less(0,X), List)).
-		
+
 		less(X, Y) :-
 			X < Y.
 

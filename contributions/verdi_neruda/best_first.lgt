@@ -22,16 +22,16 @@
 	prove(Goal, Limit, DB) :-
 		minheap::as_heap([1 - state([Goal], 1, 0, [])], Heap),
 		prove_branch(Heap, Limit, DB).
-	
+
 	prove_branch(Heap, _, _) :-
 		minheap::top(Heap, _, state([], _, _, Bindings)),
 		execute_bindings(Bindings).
 	prove_branch(Heap, Limit, DB) :-
 		minheap::delete(Heap, Cost, State, Heap1),
 		State = state(Goals, Length, Depth, Bindings),
-		0 =\= Depth - Limit, 
+		0 =\= Depth - Limit,
 		(   Goals = [not(G)|Gs] ->
-			(   prove(G, DB) -> 
+			(   prove(G, DB) ->
 				prove_branch(Heap1, Limit, DB)
 			;	Length1 is Length - 1,
 				Depth1 is Depth + 1,
@@ -66,7 +66,7 @@
 			Body = Tail,
 			Length = 0
 		;	DB::rule(Head, Body, Length, Tail)
-		).   
+		).
 
 	add_bindings([], _, _, []).
 	add_bindings([Cost - State0|States0], Goal, Bindings, [Cost - State|States]) :-

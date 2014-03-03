@@ -147,7 +147,7 @@
 				<xsl:apply-templates select="alias" />
 			</xsl:if>
 		</xsl:when>
-		<xsl:otherwise>	
+		<xsl:otherwise>
 			<xsl:text>(no dependencies on other files)</xsl:text><xsl:value-of select="$nl" />
 		</xsl:otherwise>
 	</xsl:choose>
@@ -187,7 +187,7 @@
 		<xsl:when test="public/predicate">
 			<xsl:apply-templates select="public/predicate" />
 		</xsl:when>
-		<xsl:when test="/logtalk/relations/*">		
+		<xsl:when test="/logtalk/relations/*">
 			<xsl:text>(see related entities)</xsl:text><xsl:value-of select="$nl2" />
 		</xsl:when>
 		<xsl:otherwise>
@@ -200,7 +200,7 @@
 		<xsl:when test="protected/predicate">
 			<xsl:apply-templates select="protected/predicate" />
 		</xsl:when>
-		<xsl:when test="/logtalk/relations/*">		
+		<xsl:when test="/logtalk/relations/*">
 			<xsl:text>(see related entities)</xsl:text><xsl:value-of select="$nl2" />
 		</xsl:when>
 		<xsl:otherwise>
@@ -213,7 +213,7 @@
 		<xsl:when test="private/predicate">
 			<xsl:apply-templates select="private/predicate" />
 		</xsl:when>
-		<xsl:when test="/logtalk/relations/*">		
+		<xsl:when test="/logtalk/relations/*">
 			<xsl:text>(see related entities)</xsl:text><xsl:value-of select="$nl2" />
 		</xsl:when>
 		<xsl:otherwise>

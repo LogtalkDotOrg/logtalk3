@@ -10,7 +10,7 @@
 	]).
 
 	prove(Goal, DB) :-
-		prove(Goal, -1, DB).			
+		prove(Goal, -1, DB).
 	%%Does not work with negated goals! This is a minor issue since these goals
 	%%can be rewritten as rules instead.
 	prove(Goal, Limit, DB) :-
@@ -32,7 +32,7 @@
 		(	\+ list::member(X, FixPoint) ->
 			Satisfied = [not(X)|Satisfied1],
 			satisfy_negative_literals(Pending, FixPoint, Satisfied1)
-		;	satisfy_negative_literals(Pending, FixPoint, Satisfied)						
+		;	satisfy_negative_literals(Pending, FixPoint, Satisfied)
 		).
 
 	subsumption_iterate(Goal, _, DI, _, _, _, _, _) :-
@@ -118,18 +118,18 @@
 		!,
 		(	satisfy_atom(Int, not(X), DB) ->
 			satisfy_all(Xs, Int, Pending, DB)
-		;	satisfy_atom(Int, X, DB) -> 
+		;	satisfy_atom(Int, X, DB) ->
 			fail
 		;	Pending = [not(X)]
 		).
-						  
+
 	satisfy_all([X|Xs], Int, Pending, DB) :-
 		satisfy_atom(Int, X, DB),
 		satisfy_all(Xs, Int, Pending, DB).
 
 	satisfy_atom(_, {A}, _) :-
 		!,
-		counter::increment,		%Inference counting.			  
+		counter::increment,		%Inference counting.
 		call(A).
 
 	satisfy_atom([X| Xs], A, DB) :-
@@ -145,7 +145,7 @@
 	%%The double negation is a dirty hack to avoid binding any variables.
 	subsumed(X, Y) :-
 		%counter::increment, %Uncomment this if the subsumed operation should be counted
-							 %as 1 inference. 
+							 %as 1 inference.
 		\+ \+ term::subsumes(Y, X).
 
 :- end_object.

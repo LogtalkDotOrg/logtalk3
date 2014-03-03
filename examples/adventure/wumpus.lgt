@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -459,7 +459,7 @@
 	% The following code was written by Amzi! inc. for reading a
 	% whole line of text and converting it into a list.  See:
 	% http://www.amzi.com/AdventureInProlog/index.htm
-	
+
 	read_list(L) :-
 		read_line(CL),
 		phrase(wordlist(L), CL), !.

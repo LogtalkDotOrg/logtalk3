@@ -76,7 +76,7 @@
 		</fo:layout-master-set>
 
 		<fo:page-sequence master-reference="simple">
-		
+
 			<fo:static-content flow-name="xsl-region-before">
 				<fo:block>
 					<fo:leader leader-pattern="rule" leader-length.optimum="100%"/>
@@ -102,7 +102,7 @@
 					<fo:page-number/> of <fo:page-number-citation ref-id="end"/>
 				</fo:block>
 			</fo:static-content> 
-	
+
 			<fo:flow flow-name="xsl-region-body">
     	   		<fo:block
     	   				font-size="18pt" 
@@ -356,7 +356,7 @@
 				<xsl:apply-templates select="alias"/>
 			</xsl:if>
 		</xsl:when>
-		<xsl:otherwise>	
+		<xsl:otherwise>
 			<fo:block
 					font-size="10pt" 
 					font-family="serif" 
@@ -434,7 +434,7 @@
 		<xsl:when test="public/predicate">
 			<xsl:apply-templates select="public/predicate"/>
 		</xsl:when>
-		<xsl:when test="/logtalk/relations/*">		
+		<xsl:when test="/logtalk/relations/*">
 			<fo:block
 					font-size="10pt" 
 					font-family="serif" 
@@ -466,7 +466,7 @@
 		<xsl:when test="protected/predicate">
 			<xsl:apply-templates select="protected/predicate"/>
 		</xsl:when>
-		<xsl:when test="/logtalk/relations/*">		
+		<xsl:when test="/logtalk/relations/*">
 			<fo:block
 					font-size="10pt" 
 					font-family="serif" 
@@ -498,7 +498,7 @@
 		<xsl:when test="private/predicate">
 			<xsl:apply-templates select="private/predicate"/>
 		</xsl:when>
-		<xsl:when test="/logtalk/relations/*">		
+		<xsl:when test="/logtalk/relations/*">
 			<fo:block
 					font-size="10pt" 
 					font-family="serif" 
@@ -730,7 +730,7 @@
 				</fo:block>
 			</xsl:for-each>
 		</xsl:when>
-		<xsl:otherwise>	
+		<xsl:otherwise>
 			<fo:block
 					font-size="10pt" 
 					font-family="serif" 
@@ -773,7 +773,7 @@
 				</fo:block>
 			</xsl:for-each>
 		</xsl:when>
-		<xsl:otherwise>	
+		<xsl:otherwise>
 			<fo:block
 					font-size="10pt" 
 					font-family="serif" 

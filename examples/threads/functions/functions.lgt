@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -60,7 +60,7 @@
 	implements(functionp)).
 
 	% x^2 - 4
-	% 2.0 
+	% 2.0
 
 	eval(X, Y) :-
 		Y is X * X - 4.
@@ -77,12 +77,12 @@
 
 	% x^7 + 9x^5 - 13x - 17
 	% 1.29999999999945448
- 
+
 	eval(X, Y) :-
-		Y is X**7 + 9*X**5 - 13*X - 17. 
+		Y is X**7 + 9*X**5 - 13*X - 17.
 
 	evald(X, Y) :-
-		Y is 7*X**6 + 45*X**4 - 13. 
+		Y is 7*X**6 + 45*X**4 - 13.
 
 :- end_object.
 
@@ -93,12 +93,12 @@
 
 	% (x - sqrt(2))^7
 	% 1.41421356237309537
- 
+
 	eval(X, Y) :-
 		Y is (X - sqrt(2.0))**8.
 
 	evald(X, Y) :-
-		Y is 8*(X - sqrt(2.0))**7. 
+		Y is 8*(X - sqrt(2.0))**7.
 
 :- end_object.
 
@@ -109,12 +109,12 @@
 
 	% x + x^2*sin(2.0/x)
 	% 0.0
- 
+
 	eval(X, Y) :-
 		Y is X + (X**2)*sin(2.0/X).
 
 	evald(X, Y) :-
-		Y is 1 + 2*X*sin(2.0/X) - 2*cos(2.0/X). 
+		Y is 1 + 2*X*sin(2.0/X) - 2*cos(2.0/X).
 
 :- end_object.
 
@@ -186,7 +186,7 @@
 	]).
 
     find_root(Function, Xa, Xb, Deviation, Zero) :-
-		Ac is (Xb - Xa) / 2,		
+		Ac is (Xb - Xa) / 2,
 		newton(Function, Xa, Ac, Deviation, Zero).
 
 	newton(_, Zero, Ac, Deviation, Zero) :-
@@ -197,7 +197,7 @@
         Function::eval(Xn1, Fx),
         Function::evald(Xn1, DFx),
         Ac2 is -(Fx/DFx),
-        newton(Function, Xn1, Ac2, Deviation, Zero).	
+        newton(Function, Xn1, Ac2, Deviation, Zero).
 
 :- end_object.
 
@@ -213,7 +213,7 @@
 	]).
 
 	find_root(Function, Xa, Xb, Deviation, Zero) :-
-		Xc is (Xa + Xb) / 2.0, 
+		Xc is (Xa + Xb) / 2.0,
 		muller(Function, Xa, Xc, Xb, Deviation, Zero).
 
 	muller(Function, Xa, Xb, Xc, Deviation, Zero) :-
@@ -226,7 +226,7 @@
 		muller(Function, Xa, Xb, Xc, Deviation, Ya, Yb, Yc, Ac, H1, DDba, Zero).
 
 	muller(_, _, _, Xc, Deviation, _, _, _, Ac, _, _, Xc) :-
-		abs(Ac) < Deviation,  
+		abs(Ac) < Deviation,
 		!.
 	muller(Function, Xa, Xb, Xc, Deviation, _, Yb, Yc, _, _, DDba, Zero) :-
 		H2n is Xc - Xb,

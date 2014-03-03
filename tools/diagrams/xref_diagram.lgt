@@ -131,7 +131,7 @@
 		(	external_predicate_(Predicate) ->
 			true
 		;	assertz(external_predicate_(Predicate))
-		).	
+		).
 
 	output_externals(Options) :-
 		^^format_object(Format),
@@ -146,7 +146,7 @@
 		fail.
 	output_externals(Options) :-
 		^^format_object(Format),
-		Format::graph_footer(output_file, other, '(external predicates)', external, [tooltip('(external predicates)')| Options]).		
+		Format::graph_footer(output_file, other, '(external predicates)', external, [tooltip('(external predicates)')| Options]).
 
 	% by default, diagram title is empty:
 	default_option(title('')).

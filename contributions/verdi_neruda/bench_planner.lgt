@@ -13,7 +13,7 @@
 	member(X, [_|Xs]) <-
 		member(X, Xs).
 
-	transform(State1,State2,Plan) <- 
+	transform(State1,State2,Plan) <-
 		transform(State1,State2, [State1], Plan).
 
 	transform(State,State,_,[]) <- true.
@@ -23,12 +23,12 @@
 	   not(member(State,Visited)) &
 	   transform(State,State2,[State|Visited],Actions).
 
-	legal_action(to_place(Block,Y,Place),State) <- 
+	legal_action(to_place(Block,Y,Place),State) <-
 	   on(Block,Y,State) &
 	   clear(Block,State) &
 	   place(Place) &
 	   clear(Place,State).
-	legal_action(to_block(Block1,Y,Block2),State) <- 
+	legal_action(to_block(Block1,Y,Block2),State) <-
 	   on(Block1,Y,State) &
 	   clear(Block1,State) &
 	   block(Block2) &

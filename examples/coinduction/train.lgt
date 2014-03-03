@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -48,7 +48,7 @@
 		train(X, down, X, _T1, T2, T2).
 		train(X, raise, X, _T1, T2, T2).
 		train(X, up, X, _T1, T2, T2).
-	
+
 		controller(s0, approach, s1, T1, _T2, T3) :-
 			ic:(T3 =:= T1).
 		controller(s1, lower, s2, T1, T2, T3) :-
@@ -60,7 +60,7 @@
 		controller(X, up, X, _T1, T2, T2).
 		controller(X, out, X, _T1, T2, T2).
 		controller(X, down, X, _T1, T2, T2).
-	
+
 		gate(s0, lower, s1, T1, _T2, T3) :-
 			ic:(T3 =:= T1).
 		gate(s1, down, s2, T1, T2, T3) :-
@@ -79,9 +79,9 @@
 :- elif((current_logtalk_flag(prolog_dialect, Dialect), (Dialect = sicstus; Dialect = swi; Dialect = yap))).
 
 	:- use_module(library(clpr), []).
-	
+
 	:- object(train).
-	
+
 		:- info([
 			version is 0.4,
 			author is 'Neda Saeedloei and Gopal Gupta. Adapted to Logtalk by Paulo Moura.',
@@ -103,7 +103,7 @@
 			controller(S2, X, S20, T, T2, T20),
 			clpr:{TA > T},
 			driver(S00, S10, S20, Rest, R, TA, T00, T10, T20).
-	
+
 		train(s0, approach, s1, T1, _T2, T3) :-
 			clpr:{T3 = T1}.
 		train(s1, in, s2, T1, T2, T3) :-
@@ -115,7 +115,7 @@
 		train(X, down, X, _T1, T2, T2).
 		train(X, raise, X, _T1, T2, T2).
 		train(X, up, X, _T1, T2, T2).
-	
+
 		controller(s0, approach, s1, T1, _T2, T3) :-
 			clpr:{T3 = T1}.
 		controller(s1, lower, s2, T1, T2, T3) :-
@@ -127,7 +127,7 @@
 		controller(X, up, X, _T1, T2, T2).
 		controller(X, out, X, _T1, T2, T2).
 		controller(X, down, X, _T1, T2, T2).
-	
+
 		gate(s0, lower, s1, T1, _T2, T3) :-
 			clpr:{T3 = T1}.
 		gate(s1, down, s2, T1, T2, T3) :-
@@ -140,7 +140,7 @@
 		gate(X, in, X, _T1, T2, T2).
 		gate(X, out, X, _T1, T2, T2).
 		gate(X, exit, X, _T1, T2, T2).
-	
+
 	:- end_object.
 
 :- endif.

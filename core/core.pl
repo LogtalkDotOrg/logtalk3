@@ -4649,7 +4649,7 @@ current_logtalk_flag(Flag, Value) :-
 			'$lgt_compile_file'(SourceFile, PrologFile, Flags, loading, Current),
 			retractall('$lgt_loaded_file_'(Basename, Directory, _, _, _, _, _)),
 			'$lgt_load_compiled_file'(SourceFile, PrologFile),
-			'$lgt_print_message'(comment(loading), core, reloaded_file(SourceFile, Flags))			
+			'$lgt_print_message'(comment(loading), core, reloaded_file(SourceFile, Flags))
 		)
 	;	% first time loading this source file
 		'$lgt_print_message'(silent(loading), core, loading_file(SourceFile, Flags)),
@@ -6796,7 +6796,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_warning_context'(Path, Lines, Type, Entity),
-		'$lgt_print_message'(warning(general), core, deprecated_directive(Path, Lines, Type, Entity, uses/1))		
+		'$lgt_print_message'(warning(general), core, deprecated_directive(Path, Lines, Type, Entity, uses/1))
 	;	true
 	).
 
@@ -6834,7 +6834,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_warning_context'(Path, Lines, Type, Entity),
-		'$lgt_print_message'(warning(general), core, deprecated_directive(Path, Lines, Type, Entity, calls/1))		
+		'$lgt_print_message'(warning(general), core, deprecated_directive(Path, Lines, Type, Entity, calls/1))
 	;	true
 	).
 
@@ -7164,7 +7164,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_add_predicate_scope_directive'(protected, Functor, Arity) :-
 	assertz('$lgt_pp_protected_'(Functor, Arity)).
-	
+
 '$lgt_add_predicate_scope_directive'(private, Functor, Arity) :-
 	assertz('$lgt_pp_private_'(Functor, Arity)).
 
@@ -7303,7 +7303,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_discontiguous_directive'([Resource| Resources]) :-
 	'$lgt_tr_discontiguous_directive_resource'(Resource),
 	'$lgt_tr_discontiguous_directive'(Resources).
-	
+
 
 '$lgt_tr_discontiguous_directive_resource'(Entity::Pred) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
@@ -7373,7 +7373,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_meta_predicate_directive'([Meta| Metas]) :-
 	'$lgt_tr_meta_predicate_directive_resource'(Meta),
 	'$lgt_tr_meta_predicate_directive'(Metas).
-	
+
 
 '$lgt_tr_meta_predicate_directive_resource'(Entity::Meta) :-
 	'$lgt_valid_meta_predicate_template'(Meta),
@@ -7966,12 +7966,12 @@ current_logtalk_flag(Flag, Value) :-
 	;	throw(domain_error(meta_argument_specifier, Arg))
 	),
 	'$lgt_prolog_to_logtalk_meta_argument_specifiers'(Args, TArgs).
-	
+
 
 % goals and closures are denoted by integers >= 0
 '$lgt_prolog_to_logtalk_meta_argument_specifier'(N, N) :-
 	integer(N).
-% Prolog to Logtalk notation; this is fragile due to the lack of standardization	
+% Prolog to Logtalk notation; this is fragile due to the lack of standardization
 '$lgt_prolog_to_logtalk_meta_argument_specifier'((:), (::)).
 % mixed-up notation or overriding meta-predicate template being used
 '$lgt_prolog_to_logtalk_meta_argument_specifier'((::), (::)).
@@ -9319,7 +9319,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_warning_context'(Path, Lines, Type, Entity),
-		'$lgt_print_message'(warning(general), core, deprecated_control_construct(Path, Lines, Type, Entity, (:)/1))		
+		'$lgt_print_message'(warning(general), core, deprecated_control_construct(Path, Lines, Type, Entity, (:)/1))
 	;	true
 	),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
@@ -9414,7 +9414,7 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		TPred = {current_predicate(':'(Module, HeadFunctor/Arity))},
 		DPred = '$lgt_debug'(goal(current_predicate(':'(Module, HeadFunctor/Arity)), TPred), ExCtx)
-	;	fail	
+	;	fail
 	),
 	!.
 
@@ -9938,7 +9938,7 @@ current_logtalk_flag(Flag, Value) :-
 	% we must delay unification to runtime as Other is only used for
 	% stating to which entity the multifile predicate clause belongs
 	(	'$lgt_current_object_'(Other, _, _, _, _, _, _, _, _, _, _) ->
-		TPred = arg(Arg, This, Value)	
+		TPred = arg(Arg, This, Value)
 	;	% category
 		TPred = '$lgt_category_parameter'(This, Other, Arg, Value)
 	).
@@ -10490,7 +10490,7 @@ current_logtalk_flag(Flag, Value) :-
 	functor(TPred, STFunctor, TArity),
 	'$lgt_unify_head_thead_arguments'(Pred, TPred, ExCtx),
 	'$lgt_remember_called_predicate'(Mode, Functor/Arity, STFunctor/TArity, Head).
-	
+
 '$lgt_tr_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, Prefix, _, _, ExCtx, Mode, _),
 	functor(Pred, Functor, Arity),
@@ -10648,7 +10648,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	retract('$lgt_pp_aux_predicate_counter_'(Old)) ->
 		New is Old + 1
 	;	New is 1
-	),	
+	),
 	asserta('$lgt_pp_aux_predicate_counter_'(New)),
 	number_codes(New, NewCodes),
 	atom_codes(NewAtom, NewCodes),
@@ -11207,7 +11207,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_msg'(current_predicate(Pred), Obj, '$lgt_current_predicate'(Obj, Pred, This, p(p(p))), This, _) :-
 	!,
-	'$lgt_must_be'(var_or_predicate_indicator, Pred).	
+	'$lgt_must_be'(var_or_predicate_indicator, Pred).
 
 '$lgt_tr_msg'(predicate_property(Pred, Prop), Obj, '$lgt_predicate_property'(Obj, Pred, Prop, This, p(p(p))), This, _) :-
 	!,
@@ -11222,7 +11222,7 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_must_be'(predicate_indicator, Pred),
 		TPred = '$lgt_abolish_checked'(Obj, Pred, This, p(p(p)))
 	;	% partially instantiated predicate indicator; runtime check required
-		TPred = '$lgt_abolish'(Obj, Pred, This, p(p(p)))	
+		TPred = '$lgt_abolish'(Obj, Pred, This, p(p(p)))
 	).
 
 '$lgt_tr_msg'(assert(Clause), Obj, TPred, This, Head) :-
@@ -12786,7 +12786,7 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_warning_context'(Path, Lines, Type, Entity),
 		'$lgt_print_message'(warning(redefined_built_ins), core, redefined_logtalk_built_in_predicate(Path, Lines, Type, Entity, Functor/Arity))
-	;	true	
+	;	true
 	).
 
 '$lgt_check_for_redefined_built_in'(Head, ExCtx, THead, Mode) :-
@@ -12800,7 +12800,7 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_warning_context'(Path, Lines, Type, Entity),
 		'$lgt_print_message'(warning(redefined_built_ins), core, redefined_prolog_built_in_predicate(Path, Lines, Type, Entity, Functor/Arity))
-	;	true	
+	;	true
 	).
 
 '$lgt_check_for_redefined_built_in'(_, _, _, _).
@@ -14151,7 +14151,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_add_coinductive_predicate_aux_clause'(Head, TestHead, TCHead, THead, DHead) :-
 	'$lgt_execution_context'(HeadExCtx, Sender, This, Self, MetaCallCtx, HeadStack),
-	'$lgt_execution_context'(BodyExCtx, Sender, This, Self, MetaCallCtx, BodyStack),	
+	'$lgt_execution_context'(BodyExCtx, Sender, This, Self, MetaCallCtx, BodyStack),
 	functor(TCHead, _, TCArity),
 	arg(TCArity, TCHead, HeadExCtx),
 	functor(THead, _, TArity),
@@ -14413,7 +14413,7 @@ current_logtalk_flag(Flag, Value) :-
 	Meta0 =.. [_| MArgs0],
 	'$lgt_prolog_to_logtalk_meta_argument_specifiers'(MArgs0, MArgs),
 	'$lgt_fix_predicate_calls_in_meta_arguments'(Args, MArgs, TArgs),
-	TPred =.. [Functor| TArgs].	
+	TPred =.. [Functor| TArgs].
 
 '$lgt_fix_body_predicate_calls'(Pred, Pred).
 
@@ -14514,8 +14514,8 @@ current_logtalk_flag(Flag, Value) :-
 	once((	'$lgt_pp_public_'(Functor, ExtArity)
 		;	'$lgt_pp_protected_'(Functor, ExtArity)
 		;	'$lgt_pp_private_'(Functor, ExtArity)
+	% but there is a scope directive for the non-terminal
 	)).
-	% but there is a scope directive for the non-terminal or the corresponding predicate
 
 
 
@@ -14967,7 +14967,7 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	(	bagof(EntityInitGoal, '$lgt_pp_final_entity_initialization_'(EntityInitGoal), EntityInitGoals) ->
 		'$lgt_list_to_conjunction'(EntityInitGoals, Goal3),
-		'$lgt_remove_redundant_calls'((Goal1, Goal2, Goal3), Goal)	
+		'$lgt_remove_redundant_calls'((Goal1, Goal2, Goal3), Goal)
 	;	'$lgt_remove_redundant_calls'((Goal1, Goal2), Goal)
 	),
 	(	Goal == true ->
@@ -15725,7 +15725,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_logtalk_predicate_directive'(multifile(_)).
 '$lgt_logtalk_predicate_directive'(coinductive(_)).
 % Prolog module directive that are recognized when compiling modules as objects
-'$lgt_logtalk_predicate_directive'(export(_)).			
+'$lgt_logtalk_predicate_directive'(export(_)).
 '$lgt_logtalk_predicate_directive'(reexport(_, _)).
 
 
@@ -18475,7 +18475,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	atom(Term) ->
 		true
 	;	var(Term) ->
-		throw(error(instantiation_error, Context))	
+		throw(error(instantiation_error, Context))
 	;	throw(error(type_error(atom, Term), Context))
 	).
 
@@ -18493,7 +18493,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	'$lgt_string'(Term) ->
 		true
 	;	var(Term) ->
-		throw(error(instantiation_error, Context))	
+		throw(error(instantiation_error, Context))
 	;	throw(error(type_error(atom_or_string, Term), Context))
 	).
 
@@ -18519,7 +18519,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	\+ integer(Term) ->
 		throw(error(type_error(integer, Term), Context))
 	;	Term < 0 ->
-		throw(error(domain_error(not_less_than_zero, Term), Context))	
+		throw(error(domain_error(not_less_than_zero, Term), Context))
 	;	true
 	).
 
@@ -18529,7 +18529,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	\+ integer(Term) ->
 		throw(error(type_error(integer, Term), Context))
 	;	Term < 0 ->
-		throw(error(domain_error(not_less_than_zero, Term), Context))	
+		throw(error(domain_error(not_less_than_zero, Term), Context))
 	;	true
 	).
 
@@ -18537,7 +18537,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	float(Term) ->
 		true
 	;	var(Term) ->
-		throw(error(instantiation_error, Context))	
+		throw(error(instantiation_error, Context))
 	;	throw(error(type_error(float, Term), Context))
 	).
 
@@ -18555,7 +18555,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	'$lgt_string'(Term) ->
 		true
 	;	var(Term) ->
-		throw(error(instantiation_error, Context))	
+		throw(error(instantiation_error, Context))
 	;	throw(error(type_error(atomic_or_string, Term), Context))
 	).
 
@@ -18583,7 +18583,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	callable(Term) ->
 		true
 	;	var(Term) ->
-		throw(error(instantiation_error, Context))	
+		throw(error(instantiation_error, Context))
 	;	throw(error(type_error(callable, Term), Context))
 	).
 
@@ -18699,7 +18699,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	callable(Term) ->
 		true
 	;	var(Term) ->
-		throw(error(instantiation_error, Context))	
+		throw(error(instantiation_error, Context))
 	;	throw(error(type_error(category_identifier, Term), Context))
 	).
 
@@ -18715,7 +18715,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	callable(Term) ->
 		true
 	;	var(Term) ->
-		throw(error(instantiation_error, Context))	
+		throw(error(instantiation_error, Context))
 	;	throw(error(type_error(entity_identifier, Term), Context))
 	).
 
@@ -18731,7 +18731,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	atom(Term) ->
 		true
 	;	var(Term) ->
-		throw(error(instantiation_error, Context))	
+		throw(error(instantiation_error, Context))
 	;	throw(error(type_error(module_identifier, Term), Context))
 	).
 

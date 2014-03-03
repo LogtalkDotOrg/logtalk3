@@ -10,19 +10,19 @@
 
 	durative_action_def -->
 		['(', ':', 'durative-action'], da_symbol,
-		[':', 'parameters'], 
+		[':', 'parameters'],
 		da_def_body, [')'].
 
 	da_def_body -->
 		[':', 'duration'], duration_constraint,
 		[':', 'condition'], emptyOr(da_gd),
-		[':', 'effect'], emptyOr(da_effect).		
+		[':', 'effect'], emptyOr(da_effect).
 
 	da_symbol --> name.
 
 	da_gd --> pref_timed_gd.
 	da_gd --> ['(', and], zeroOrMore(da_gd, T), [')'].
-	da_gd --> pref_timed_gd.	
+	da_gd --> pref_timed_gd.
 
 	pref_timed_gd --> timed_gd.
 	pref_timed_gd --> ['(', preference, ], pref_name, timed_gd, [')'].

@@ -132,7 +132,7 @@ Brief description of each file in this folder:
 	Sample scripts to batch convert XML files to HTML files. These 
 	scripts also generate an `index.html` file which contains links 
 	to all the converted files.
-	
+
 	Supported XSLT processors:  
 		* [libxslt](http://xmlsoft.org/XSLT/) (tested with version 1.1.8)  
 		* [Xalan](http://xml.apache.org/xalan-c/index.html) (tested with version 1.7.0)  

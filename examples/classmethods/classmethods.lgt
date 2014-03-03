@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -19,7 +19,7 @@
 		argnames is ['X', 'Y', 'Radius', 'Circle']
 	]).
 
-	new(Radius, X, Y, Circle) :-		% this would be a "constructor" in other languages 
+	new(Radius, X, Y, Circle) :-		% this would be a "constructor" in other languages
 		self(Self),						% we may be instantiating a subclass of "circle"
 		create_object(Circle, [instantiates(Self)], [], [position(X, Y), radius(Radius)]).
 

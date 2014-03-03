@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -46,7 +46,7 @@
 	% Integral = 21.33333
 	eval(circle, X, Y, Fxy) :-
 		Fxy is X*X + Y*Y - 2.0*2.0.
-		
+
 	% [-2,2-2,2]
 	% Integral =  5.88698
 	eval(poly6, X, Y, Fxy) :-

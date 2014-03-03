@@ -15,7 +15,7 @@
 \^
 
 :- end_object.
-!		
+!
 
 
 !TEXT=Prototype with parent

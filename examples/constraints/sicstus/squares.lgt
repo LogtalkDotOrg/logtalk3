@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -111,7 +111,7 @@
 	state_no_overlap(X, Y, S, [X1|Xs], [Y1|Ys], [S1|Ss], Type) :-
 		no_overlap(Type, X, Y, S, X1, Y1, S1),
 		state_no_overlap(X, Y, S, Xs, Ys, Ss, Type).
-	
+
 	no_overlap(spec, X1, _Y1, S1, X2, _Y2, _S2) :-
 			leqc(X1, S1, X2).
 	no_overlap(spec, X1, _Y1, _S1, X2, _Y2, S2) :-

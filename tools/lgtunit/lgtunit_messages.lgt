@@ -103,7 +103,7 @@
 
 	logtalk::message_tokens(entity_clause_coverage(Entity, Predicate, Ratio, Covered), lgtunit) -->
 		{numbervars(Entity, 0, _)},
-		['~q: ~q - ~w - ~w'-[Entity, Predicate, Ratio, Covered], nl]. 
+		['~q: ~q - ~w - ~w'-[Entity, Predicate, Ratio, Covered], nl].
 
 	logtalk::message_tokens(no_code_coverage_information_collected, lgtunit) -->
 		['no code coverage information collected'-[], nl].

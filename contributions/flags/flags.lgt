@@ -415,7 +415,7 @@
 		(var(Type) -> Type = nonvar; true),
 		(var(Default) -> built_in_flag(Type, Default); true),
 		(var(Description) -> Description = Flag; true),
-		(var(Access) -> Access = read_write; true).	
+		(var(Access) -> Access = read_write; true).
 	process_options([group(Group)| Options], Flag, Group, Type, Default, Description, Access) :-
 		process_options(Options, Flag, Group, Type, Default, Description, Access).
 	process_options([type(Type)| Options], Flag, Group, Type, Default, Description, Access) :-
@@ -532,7 +532,7 @@
 		fail.
 	print_flags.
 
-	:- if((	\+ current_logtalk_flag(prolog_dialect, gnu),	% GNU Prolog format/2-3 doesn't support setting tabs	
+	:- if((	\+ current_logtalk_flag(prolog_dialect, gnu),	% GNU Prolog format/2-3 doesn't support setting tabs
 			predicate_property(format(_, _), built_in)		% format/2-3 are not standard Prolog predicates
 	)).
 

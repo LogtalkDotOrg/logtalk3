@@ -269,18 +269,18 @@
 				<begin><regex>/\*</regex></begin>
 				<end><regex>\*/</regex></end>
 			</state>
-		
+
 			<state id="Single Comment" color="#236E25" font-style="italic" useforautocomplete="no">
 			<begin><regex>(?&lt;!0')%</regex></begin>
 			<end><regex>[\n\r]</regex></end>
 		</state>
-	
+
 			<state id="Entity" foldable="yes">
 				<begin><regex>:-\s(?:object|protocol|category)\(</regex></begin>
 				<end><regex>:-\send_(?:object|protocol|category)\.</regex></end>
 				<import />
 			</state>
-	
+
 			<state id="Conditional Compilation" foldable="yes">
 				<begin><regex>:-\sif\(</regex></begin>
 				<end><regex>:-\sendif\.</regex></end>

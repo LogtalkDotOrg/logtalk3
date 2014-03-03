@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -48,6 +48,6 @@
 	:- dynamic(g/6).
 
 	test(dynamic_1_5) :-
-		\+ predicate_property(g(_,_,_,_,_,_), _).		
+		\+ predicate_property(g(_,_,_,_,_,_), _).
 
 :- end_object.

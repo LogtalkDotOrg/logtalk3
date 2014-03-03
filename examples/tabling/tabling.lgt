@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -65,7 +65,7 @@
 	:- set_prolog_flag(tabling_mode, local).
 
 	:- object(mdt_paths_first).
-	
+
 		:- info([
 			version is 1.0,
 			author is 'Joao Santos and Ricardo Rocha. Adapted to Logtalk by Paulo Moura',
@@ -73,13 +73,13 @@
 			comment is 'Simple tabling example using graph paths.',
 			source is 'SLATE 2012 paper on mode directed tabling.'
 		]).
-	
+
 		:- public(path/3).
 		:- table(path(index, index, first)).
-	
+
 		path(X, Y, N) :- path(X, Z, N1), edge(Z, Y), N is N1 + 1.
 		path(X, Y, 1) :- edge(X, Y).
-	
+
 		edge(a, b).
 		edge(b, a).
 
@@ -87,7 +87,7 @@
 
 
 	:- object(mdt_paths_min).
-	
+
 		:- info([
 			version is 1.0,
 			author is 'Joao Santos and Ricardo Rocha. Adapted to Logtalk by Paulo Moura',
@@ -98,10 +98,10 @@
 
 		:- public(path/3).
 		:- table(path(index, index, min)).
-	
+
 		path(X, Y, C) :- path(X, Z, C1), edge(Z, Y, C2), C is C1 + C2.
 		path(X, Y, C) :- edge(X, Y, C).
-	
+
 		edge(a, b, 1).
 		edge(b, c, 1).
 		edge(b, d, 4).
@@ -111,7 +111,7 @@
 
 
 	:- object(mdt_paths_min_all).
-	
+
 		:- info([
 			version is 1.0,
 			author is 'Joao Santos and Ricardo Rocha. Adapted to Logtalk by Paulo Moura',
@@ -119,13 +119,13 @@
 			comment is 'Simple tabling example using graph paths.',
 			source is 'SLATE 2012 paper on mode directed tabling.'
 		]).
-	
+
 		:- public(path/4).
 		:- table(path(index, index, min, all)).
-	
+
 		path(X, Z, C, N) :- path(X, Y, C1, N1), edge(Y, Z, C2), C is C1 + C2, N is N1 + 1.
 		path(X, Z, C, 1) :- edge(X, Z, C).
-	
+
 		edge(a, b, 2).
 		edge(a, c, 1).
 		edge(c, b, 1).

@@ -15,7 +15,7 @@
 		write_release_information,
 		nl,
 		nl,
-		write_welcoming_message, 
+		write_welcoming_message,
 		repl.
 
 	repl :-
@@ -70,11 +70,11 @@
 	dispatch(load(Database), _) :-
 		load_database(Database, rule_expansion(production)).
 	dispatch(listing(Database), _) :-
-		findall(rule(Head, Body), 
+		findall(rule(Head, Body),
 			    (
-				 Database::rule(Head, Body), 
+				 Database::rule(Head, Body),
 				 numbervars(rule(Head, Body), 0, _)
-				), 
+				),
 			   Rules),
 		meta::map(write_rule, Rules).
 	dispatch(programs(Database), _) :-
@@ -90,17 +90,17 @@
 	dispatch(interpreters, _) :-
 		this(shell(Interpreters0)),
 		pairs::keys(Interpreters0, Interpreters),
-		numbervars(Interpreters, 0, _),				   
+		numbervars(Interpreters, 0, _),
 		meta::map(writeln, Interpreters).
 	dispatch(prove(Interpreter, Goal, Database), VarNames) :-
-		valid_interpreter(Interpreter, Expander),						
+		valid_interpreter(Interpreter, Expander),
 		load_database(Database, Expander),
 		prove(Interpreter, Goal, Database, VarNames).
 	dispatch(prove(Interpreter, Goal, Limit, Database), VarNames) :-
-		valid_interpreter(Interpreter, Expander),		
+		valid_interpreter(Interpreter, Expander),
 		load_database(Database, Expander),
 		prove(Interpreter, Goal, Limit, Database, VarNames).
-	
+
 	:- if(predicate_property(statistics(_,_), built_in)).
 
 		dispatch(benchmark_all(Name, Statistic, N, Database), _) :-
@@ -115,7 +115,7 @@
 				load_database(Database, Expander),
 				write_benchmark(Stream, Interpreter, Statistic, N, Goal, Database),
 				fail
-			;	write('Done.'), nl, 
+			;	write('Done.'), nl,
 				close(Stream)
 			).
 
@@ -133,7 +133,7 @@
 			load_database(Database, Expander),
 			write_benchmark(Stream, Interpreter, Goal, Database),
 			fail
-		;	write('Done.'), nl, 
+		;	write('Done.'), nl,
 			close(Stream)
 		).
 
@@ -150,7 +150,7 @@
 			Res is Res0/N,
 			write(Res), nl.
 
-	:- endif.	
+	:- endif.
 
 	dispatch(benchmark(Interpreter, Goal, Database), _) :-
 		valid_interpreter(Interpreter, Expander),
@@ -166,7 +166,7 @@
 		prove(dfs_interpreter, Goal, demodb, VarNames).
 
 	:- if(predicate_property(statistics(_,_), built_in)).
-		
+
 		benchmark(_, _, 0, _, 0, _) :- !.
 		benchmark(Interpreter, Statistic, N, Goal, Res, Database) :-
 			N1 is N - 1,
@@ -181,7 +181,7 @@
 			N1 is N - 1,
 			benchmark_failure(Interpreter, Statistic, N1, Goal, Res0, Database),
 			statistics(Statistic, Before),
-			\+ Interpreter::prove(Goal, 1000000, Database), 
+			\+ Interpreter::prove(Goal, 1000000, Database),
 			statistics(Statistic, After),
 			Res is Res0 + (After - Before).
 	:- endif.
@@ -194,7 +194,7 @@
 	benchmark_failure(Interpreter, Goal, Inferences, Database) :-
 		counter::reset,
 		\+ Interpreter::prove(Goal, 1000000, Database), !,
-		counter::value(Inferences).		
+		counter::value(Inferences).
 
 	prove(Interpreter, Goal, Database, VarNames) :-
 		Interpreter::prove(Goal, Database),
@@ -211,7 +211,7 @@
 				nl
 			;	meta::map(writeln, VarNames)
 		).
-		 
+
 	unify_variable_names([]).
 	unify_variable_names([Var = Name| VarNames]) :-
 		(	var(Var) ->
@@ -227,18 +227,18 @@
 		list::member(InterpreterTemplate - Expander, Interpreters).
 
 	load_database(Database, Expander) :-
-		logtalk_load(Database, [hook(Expander), report(off)]). 
+		logtalk_load(Database, [hook(Expander), report(off)]).
 
 	write_release_information :-
 		Version = '1.0',
 		Author = 'Victor Lagerkvist',
 		write('Verdi Neruda version '),
 		write(Version),
-		write(' by '), 
+		write(' by '),
 		write(Author),
 		write('.').
 
-	write_welcoming_message :- 
+	write_welcoming_message :-
 		 write('Welcome, noble adventurer, your destiny awaits you!'), nl,
 		 write('Type "help." for online help.'), nl.
 
@@ -254,7 +254,7 @@
 			fail
 		;	true
 		).
-		
+
 	write_rule(rule(Head, Body)) :-
 		write(Head),
 		write(' '),
@@ -273,14 +273,14 @@
 		write(true),
 		write('.').
 	write_body([G|Gs]) :-
-		write('	  '),	
+		write('	  '),
 		write(G),
 		write(' '),
 		write('&'), nl,
 		write_body(Gs).
 
 	write_benchmark(Stream, Interpreter, Statistic, N, Goal, Database) :-
-		write(Stream, ' '), 
+		write(Stream, ' '),
 		(	benchmark(Interpreter, Statistic, N, Goal, Res, Database), !
 		;	benchmark_failure(Interpreter, Statistic, N, Goal, Res, Database),
 			write(Stream, '(F) ')
@@ -288,9 +288,9 @@
 		write(Stream, Goal),
 		write(Stream, '-'),
 		write_statistics(Stream, Statistic, N, Res).
-		
+
 	write_benchmark(Stream, Interpreter, Goal, Database) :-
-		write(Stream, ' '),					
+		write(Stream, ' '),
 		(	benchmark(Interpreter, Goal, Inferences, Database), !
 		;	benchmark_failure(Interpreter,  Goal, Inferences, Database),
 			write(Stream, '(F) ')
@@ -301,7 +301,7 @@
 
 	writeln(X) :-
 		write(X),
-		nl.		
+		nl.
 
 	writeln(Stream, X) :-
 		write(Stream, X),

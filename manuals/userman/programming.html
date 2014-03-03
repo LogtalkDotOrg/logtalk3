@@ -184,7 +184,7 @@ A common mistake is to try to set compiler options using <code>logtalk_load/2</c
 </p>
 <pre>| ?- logtalk_load(loader, [underscore_variables(dont_care), source_data(off)]).</pre>
 <p>
-This will not work as you might expect as the compiler options will only be used in the compilation of the <code>loader.lgt</code> file itself and will not affect the compilation of files loaded through the <code>initialization/1</code> directive contained on the loader file.	
+This will not work as you might expect as the compiler options will only be used in the compilation of the <code>loader.lgt</code> file itself and will not affect the compilation of files loaded through the <code>initialization/1</code> directive contained on the loader file.
 </p>
 <p>
 When developing new applications, it's a good idea to set the <code>reload</code> flag for the loader file to <code>always</code> by adding the directive:
@@ -721,7 +721,7 @@ When objects or categories containing grammar rules are compiled in debug mode, 
 
 <div class="footer">
 	<div class="copyright">
-		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>	
+		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
 		<span>Last updated on: December 8, 2013</span>
 	</div>
 	<div class="navbottom">

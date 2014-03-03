@@ -13,19 +13,19 @@
 
 	fib_rec(1, 1) <- true.
 	fib_rec(2, 1) <- true.
-	fib_rec(N, X) <- 
-		{N > 2} & 
+	fib_rec(N, X) <-
+		{N > 2} &
 		{N1 is N - 1} &
-		{N2 is N - 2} &		
+		{N2 is N - 2} &
 		fib_rec(N1, X1) &
 		fib_rec(N2, X2) &
-		{X is X1 + X2}. 
+		{X is X1 + X2}.
 
 	%%Calculates the n:th Fibonacci number iteratively.
 
 	fib_iter(1, 1) <- true.
 	fib_iter(2, 1) <- true.
-	fib_iter(N, X) <- 
+	fib_iter(N, X) <-
 		{N > 2} &
 		fib_iter(2, N, 1, 1, X).
 

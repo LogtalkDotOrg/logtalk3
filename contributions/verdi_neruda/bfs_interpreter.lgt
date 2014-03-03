@@ -10,7 +10,7 @@
 	]).
 
 	prove(Goal, DB) :-
-		prove(Goal, -1, DB).	
+		prove(Goal, -1, DB).
 
 	prove(Goal, Limit, DB) :-
 		State = state([Goal], 0, []),
@@ -18,13 +18,13 @@
 		prove_branch(Q, Limit, DB).
 
 	prove_branch(Q, _, _) :-
-		queue::head(Q, State), 
-		State = state([], _, Bindings), %Goal state.	  
+		queue::head(Q, State),
+		State = state([], _, Bindings), %Goal state.
 		execute_bindings(Bindings).
 	prove_branch(Q, Limit, DB) :-
 		queue::serve(Q, State, Q1),
 		State = state(Goals, Depth, Bindings),
-		0 =\= Depth - Limit, 
+		0 =\= Depth - Limit,
 		(	Goals = [not(G)|Gs] ->
 			(	prove(G, DB) ->
 				prove_branch(Q1, Limit, DB) %The whole branch failed. Move on!
@@ -63,7 +63,7 @@
 		State = state(Goals, Depth, [Goal = Goal0|Bindings]),
 		add_bindings(States0, Goal, Bindings, States, Tail).
 
-	execute_bindings([]).	
+	execute_bindings([]).
 	execute_bindings([X = Y|Bs]) :-
 		X = Y,
 		execute_bindings(Bs).
@@ -73,6 +73,6 @@
 			call(Goal),
 			Body = Tail
 		;	DB::rule(Head, Body, Tail)
-		).	
+		).
 
 :- end_object.

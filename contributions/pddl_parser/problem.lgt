@@ -3,7 +3,7 @@
 %%   Simple parser of PDDL domain file into prolog syntax.
 %% Author: Robert Sasak, Charles University in Prague
 %%
-%% Example: 
+%% Example:
 %% ?-problem::parse('problem.pddl', O).
 %%   O = problem('blocks-4-0',						%name
 %%              blocks,								%domain name
@@ -47,7 +47,7 @@
 	% However you will find comment out lines ready for futher development.
 	% Some of the rules are already implemented in parseDomain.pl
 	%:-[parseDomain]. %make sure that it is loaded.
-	problem(problem(Name, Domain, R, OD, I, G, _, MS, LS)) --> 
+	problem(problem(Name, Domain, R, OD, I, G, _, MS, LS)) -->
 		['(', define, '(', problem, Name, ')', '(', ':', domain, Domain, ')'],
 		(:require_def(R)		; []),
 		(object_declaration(OD)	; []),
@@ -109,7 +109,7 @@
 
 		atomic_list_concat([E |Es], S, A) :-
 			atomic_list_concat(Es, S, E, A).
-	
+
 		atomic_list_concat([], _, A, A).
 		atomic_list_concat([E |Es], S, A0, A) :-
 			atom_concat(A0, S, A1),

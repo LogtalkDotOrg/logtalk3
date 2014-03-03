@@ -12,10 +12,10 @@
 	append([], Ys, Ys) <- true.
 	append([X|Xs], Ys, [X|Zs]) <-
 		append(Xs, Ys, Zs).
-  
+
 	theorem(_, [m, i]) <- true.
 	theorem(_, []) <- fail.
-	theorem(Depth, R) <- 
+	theorem(Depth, R) <-
 		Depth > 0 &
 		D is Depth - 1 &
 		theorem(D, S) &
@@ -29,7 +29,7 @@
 	rule1(S, R) <-
 		append(X, [i], S) &
 		append(X, [i,u], R).
-	
+
 	rule2([m|T], [m|R]) <-
 		append(T, T, R).
 

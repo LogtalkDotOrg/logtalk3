@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -69,12 +69,12 @@ generate_list(M, N, [M| Ms]) :-
 
 
 
-maze_solve(Start, Destination, Steps) :- 
+maze_solve(Start, Destination, Steps) :-
 	maze_path(Start, Destination, [Start], Path),
 	maze_reverse(Path, Steps).
 
 maze_path(Destination, Destination, Path, Path).
-maze_path(Node, Destination, Path0, Path) :- 
+maze_path(Node, Destination, Path0, Path) :-
 	maze_link(Node, Next),
 	\+ my_member(Next, Path0),
 	maze_path(Next, Destination, [Next | Path0], Path).
@@ -89,7 +89,7 @@ maze_arc(2, 9).
 maze_arc(3, 6).
 maze_arc(4, 5). maze_arc(4, 7).
 maze_arc(5, 8).
-    
+
 maze_reverse(List, Reversed) :-
 	maze_reverse(List, [], Reversed, Reversed).
 

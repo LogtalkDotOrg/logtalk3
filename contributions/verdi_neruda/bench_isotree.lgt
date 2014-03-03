@@ -13,7 +13,7 @@
 
 	isotree(void, void) <- true.
 
-	%Normal version.  
+	%Normal version.
 	isotree(t(X, L1, R1), t(X, L2, R2)) <-
 		isotree(L1, L2) &
 		isotree(R1, R2).
@@ -40,7 +40,7 @@
 	tree3(t(1, t(3, t(1, void, void), t(3, void, void)), t(1, t(4, t(4, void, void), t(2, t(2, t(0, void, void), t(4, void, void)), t(4, void, void))), t(1, t(1, t(2, void, void), t(2, void, void)), t(0, t(2, void, void), t(3, void, void)))))).
 
 	tree3_non_iso(t(1, t(3, t(1, void, void), t(3, void, void)), t(1, t(4, t(2, t(4, void, void), t(2, t(4, void, void), t(0, void, void))), t(4, void, void)), t(1, t(0, t(2, void, void), t(3, void, void)), t(1, t(2, void, void), t(x, void, void)))))).
- 
+
 	bench_goal(isotree(T, IsoT)) :- tree1(T), tree1_iso(IsoT).
 	bench_goal(isotree(T, IsoT)) :- tree2(T), tree2_iso(IsoT).
 	bench_goal(isotree(T, NonIsoT)) :- tree3(T), tree3_non_iso(NonIsoT).

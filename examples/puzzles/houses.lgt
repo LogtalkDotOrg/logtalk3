@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -61,7 +61,7 @@ Who owns the zebra and who drinks water?
 		next(h(_, _, _, _, green), h(_, _, _, _, white), Solution),			%  6
 		member(h(_, snake, winston, _, _), Solution), 						%  7
 		member(h(_, _, kool, _, yellow), Solution),							%  8
-		Solution = [_, _, h(_, _, _, milk, _), _, _],						%  9	
+		Solution = [_, _, h(_, _, _, milk, _), _, _],						%  9
         Solution = [h(norwegian, _, _, _, _)| _],			   				% 10
 		next(h(_, fox, _, _, _), h(_, _, chesterfield, _, _), Solution),	% 11
 		next(h(_, _, kool, _, _), h(_, horse, _, _, _), Solution),			% 12
@@ -74,7 +74,7 @@ Who owns the zebra and who drinks water?
 	print([]).
 	print([House| Houses]) :-
 		write(House), nl,
-		print(Houses).	
+		print(Houses).
 
 	% h(Nationality, Pet, Cigarette, Drink, Color)
 	template([h(_, _, _, _, _), h(_, _, _, _, _), h(_, _, _, _, _), h(_, _, _, _, _), h(_, _, _, _, _)]).

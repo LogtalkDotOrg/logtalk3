@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
-%  This file is part of Logtalk <http://logtalk.org/>    
+%  This file is part of Logtalk <http://logtalk.org/>
 %  
 %  Logtalk is free software. You can redistribute it and/or modify it under
 %  the terms of the FSF GNU General Public License 3  (plus some additional
@@ -26,7 +26,7 @@
 		Integral =~= -21.3333333333.
 
 	test(integration2d_2) :-
-		quadsplit2d(4)::integrate(circle, -2, 2, -2, 2, 2, 2.5e-10, Integral), 
+		quadsplit2d(4)::integrate(circle, -2, 2, -2, 2, 2, 2.5e-10, Integral),
 		Integral =~= -21.3333333333.
 
 	test(integration2d_3) :-

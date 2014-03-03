@@ -3,8 +3,8 @@
 %%%  This is a modified version for parsing pddl files.
 %%%  Read the input file character by character and parse it
 %%%  into a list. Brackets, comma, period and question marks
-%%%  are treated as separate words. White spaces separed 
-%%%  words. 
+%%%  are treated as separate words. White spaces separed
+%%%  words.
 %%%
 %%%  Similar to read_sent in Pereira and Shieber, Prolog and
 %%%        Natural Language Analysis, CSLI, 1987.
@@ -51,7 +51,7 @@
 	read_line(Words) :-
 		get_code(C),
 		read_rest(C, Words).
-          
+
 	/* Ends the input. */
 	read_rest(-1, []) :- !.
 
@@ -72,7 +72,7 @@
 	/* Read comments to the end of line (;) */
 	read_rest(59, Words) :-
 		get_code(Next),
-		!, 
+		!,
 		read_comment(Next, Last),
 		read_rest(Last, Words).
 
@@ -133,7 +133,7 @@
 		get_code(Next),
 		read_comment(Next, Last).
 
-	/* for reference ... 
+	/* for reference ...
 	newline(10).
 	comma(44).
 	space(32).

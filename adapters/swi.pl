@@ -471,7 +471,7 @@
 	file_name_extension(Name, Extension0, Basename),
 	(	Extension0 = '' ->
 		Extension = Extension0
-	;	atom_concat('.', Extension0, Extension)	
+	;	atom_concat('.', Extension0, Extension)
 	).
 
 

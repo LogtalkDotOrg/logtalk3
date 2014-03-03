@@ -29,7 +29,7 @@
 		list::append(Left,[Y|_],Body),
 		Y \= {_},
 		magic_head(Y,NewHead).
-		
+
 	magic_head(not(X), Y) :-
 		!,
 		magic_head(X, Y).

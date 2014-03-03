@@ -16,7 +16,7 @@ either SICStus Prolog 4 or YAP. The example includes two files:
 
 - `yap_profiler.lgt`  
 	simple wrapper for the YAP count profiler 
-	
+
 - `sicstus_profiler.lgt`  
 	simple wrapper for the SICStus Prolog 4 profiler
 
