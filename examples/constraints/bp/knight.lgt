@@ -13,8 +13,8 @@
 % distributed with B-Prolog (November 2010)
 
 /* 
-    Find a knight tour that connects all the squares 
-    by Neng-Fa Zhou, 2001, modified in 2005
+	Find a knight tour that connects all the squares 
+	by Neng-Fa Zhou, 2001, modified in 2005
 */
 
 :- object(knight).

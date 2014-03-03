@@ -135,8 +135,8 @@
 	:- endif.
 
 	sequence(Inf, Sup, List) :-
-        Inf =< Sup,
-        gen_sequence(Inf, Sup, List).
+		Inf =< Sup,
+		gen_sequence(Inf, Sup, List).
 
 	gen_sequence(Sup, Sup, List) :-
 		!,

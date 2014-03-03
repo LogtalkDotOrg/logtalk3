@@ -38,30 +38,30 @@
 
 :- object(steiner).
 
-    :- public(steiner/2).
+	:- public(steiner/2).
 
 	:- use_module(ic, [(#=<)/2]).
 	:- use_module(ic_sets, [(#)/2, intsets/4, insetdomain/4]).
 
-    :- op(1100, xfy, do).               % ECLiPSe "do" operator is not available when the library(iso) is used
+	:- op(1100, xfy, do).               % ECLiPSe "do" operator is not available when the library(iso) is used
 
-    steiner(N, Sets) :-
-    	NB is N * (N-1) // 6,           % compute number of triplets
-    	intsets(Sets, NB, 1, N),        % initialise the set variables
-    	( foreach(S,Sets) do
-    	    #(S,3)                      % constrain their cardinality to 3
-    	),
-    	( fromto(Sets,[S1|Ss],Ss,[]) do
-    	    ( foreach(S2,Ss), param(S1) do
-    	        #(S1 /\ S2, C),         % constrain the cardinality
-    	        C #=< 1                 % of pairwise intersections to 1
-    	    )
-    	),
-    	label_sets(Sets).               % search
+	steiner(N, Sets) :-
+		NB is N * (N-1) // 6,           % compute number of triplets
+		intsets(Sets, NB, 1, N),        % initialise the set variables
+		( foreach(S,Sets) do
+		    #(S,3)                      % constrain their cardinality to 3
+		),
+		( fromto(Sets,[S1|Ss],Ss,[]) do
+		    ( foreach(S2,Ss), param(S1) do
+		        #(S1 /\ S2, C),         % constrain the cardinality
+		        C #=< 1                 % of pairwise intersections to 1
+		    )
+		),
+		label_sets(Sets).               % search
 
-    label_sets([]).
-    label_sets([S|Ss]) :-
-	    insetdomain(S,_,_,_),
-	    label_sets(Ss).
+	label_sets([]).
+	label_sets([S|Ss]) :-
+		insetdomain(S,_,_,_),
+		label_sets(Ss).
 
 :- end_object.

@@ -90,11 +90,11 @@
 	as_dictionary_([Key1-Value1, Key2-Value2], t(Key1, Value1, t(Key2, Value2, t, t), t)) :-
 		!.
 	as_dictionary_(Pairs, t(Key, Value, Left, Right)) :-
-        list::length(Pairs, N),
-        N1 is floor(N/2),
-        split(Pairs, N1, Pairs1, [Key-Value| Pairs2]),
-        as_dictionary_(Pairs1, Left),
-        as_dictionary_(Pairs2, Right).
+		list::length(Pairs, N),
+		N1 is floor(N/2),
+		split(Pairs, N1, Pairs1, [Key-Value| Pairs2]),
+		as_dictionary_(Pairs1, Left),
+		as_dictionary_(Pairs2, Right).
 
 	split(Pairs, 0, [], Pairs) :-
 		!.

@@ -50,7 +50,7 @@
 	ancestor(Self, Ancestor) :-
 		instantiates_class(Self, Class),
 		superclass(Class, Ancestor).
-  
+
 	ancestors(Ancestors) :-
 		self(Self),
 		findall(Ancestor, ancestor(Self, Ancestor), Ancestors).
@@ -110,13 +110,13 @@
 
 	leaf_instance(Leaf) :-
 		self(Self),
-  		leaf_instance(Self, Leaf).
+		leaf_instance(Self, Leaf).
 
-  	leaf_instance(Self, Leaf) :-
-  		instantiates_class(Leaf, Self),
-  		\+ instantiates_class(_, Leaf).
-  	leaf_instance(Self, Leaf) :-
-  		specializes_class(Subclass, Self),
+	leaf_instance(Self, Leaf) :-
+		instantiates_class(Leaf, Self),
+		\+ instantiates_class(_, Leaf).
+	leaf_instance(Self, Leaf) :-
+		specializes_class(Subclass, Self),
 		leaf_instance(Subclass, Leaf).
 
 	leaf_instances(Leaves) :-
@@ -128,13 +128,13 @@
 
 	leaf_class(Leaf) :-
 		self(Self),
-  		leaf_class(Self, Leaf).
-  
-  	leaf_class(Self, Leaf) :-
-  		specializes_class(Leaf, Self),
-  		\+ specializes_class(_, Leaf).
-  	leaf_class(Self, Leaf) :-
-  		specializes_class(Subclass, Self),
+		leaf_class(Self, Leaf).
+
+	leaf_class(Self, Leaf) :-
+		specializes_class(Leaf, Self),
+		\+ specializes_class(_, Leaf).
+	leaf_class(Self, Leaf) :-
+		specializes_class(Subclass, Self),
 		leaf_class(Subclass, Leaf).
 
 	leaf_classes(Leaves) :-

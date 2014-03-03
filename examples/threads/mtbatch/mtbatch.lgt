@@ -424,37 +424,37 @@
 
 	do_benchmark(quadrec(Threads, Function, Inf, Sup, NP, Epsilon), N) :-
 		repeat(N),
-			(   quadrec(Threads)::integrate(Function, Inf, Sup, NP, Epsilon, _) ->
-			    true
-			;   throw(error(failure))
-            ),
+			(	quadrec(Threads)::integrate(Function, Inf, Sup, NP, Epsilon, _) ->
+				true
+			;	throw(error(failure))
+			),
 		fail.
 	do_benchmark(quadrec(_, _, _, _, _, _), _).
 
 	do_benchmark(quadsplit(Threads, Function, Inf, Sup, NP, Epsilon), N) :-
 		repeat(N),
-			(   quadsplit(Threads)::integrate(Function, Inf, Sup, NP, Epsilon, _) ->
-			    true
-			;   throw(error(failure))
-            ),
+			(	quadsplit(Threads)::integrate(Function, Inf, Sup, NP, Epsilon, _) ->
+				true
+			;	throw(error(failure))
+			),
 		fail.
 	do_benchmark(quadsplit(_, _, _, _, _, _), _).
 
 	do_benchmark(quadrec2d(Threads, Function, A, B, C, D, NP, Epsilon), N) :-
 		repeat(N),
-			(   quadrec2d(Threads)::integrate(Function, A, B, C, D, NP, Epsilon, _) ->
-			    true
-			;   throw(error(failure))
-            ),
+			(	quadrec2d(Threads)::integrate(Function, A, B, C, D, NP, Epsilon, _) ->
+				true
+			;	throw(error(failure))
+			),
 		fail.
 	do_benchmark(quadrec2d(_, _, _, _, _, _, _, _), _).
 
 	do_benchmark(quadsplit2d(Threads, Function, A, B, C, D, NP, Epsilon), N) :-
 		repeat(N),
-			(   quadsplit2d(Threads)::integrate(Function,A, B, C, D, NP, Epsilon, _) ->
-			    true
-			;   throw(error(failure))
-            ),
+			(	quadsplit2d(Threads)::integrate(Function,A, B, C, D, NP, Epsilon, _) ->
+				true
+			;	throw(error(failure))
+			),
 		fail.
 	do_benchmark(quadsplit2d(_, _, _, _, _, _, _, _), _).
 

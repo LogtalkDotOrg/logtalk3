@@ -97,7 +97,7 @@
 	]).
 
 	route([Town| Towns], Route) :-
-  		route(Towns, Town, Route).
+		route(Towns, Town, Route).
 
 	route([], Route, Route).
 	route([Town| Towns], Route, Route2) :-
@@ -176,7 +176,7 @@
 
 	arrange(Towns, Sorted) :-
 		centre(Towns, X, Y),
-    	quick(geographic(X, Y))::sort(Towns, Sorted).
+		quick(geographic(X, Y))::sort(Towns, Sorted).
 
 	centre(Towns, X, Y) :-
 		average(Towns, 0, 0, U, V, 0, L),

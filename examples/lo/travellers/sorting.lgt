@@ -104,44 +104,44 @@
 		angle(Town2, Angle2),
 		Angle1 < Angle2.
 
-    angle(Town, Angle) :-
+	angle(Town, Angle) :-
 		Town::at(X, Y),
 		parameter(1, OX),
 		parameter(2, OY),
-    	angle(X, Y, OX, OY, Angle).
+		angle(X, Y, OX, OY, Angle).
 
-    angle(X, Y, OX, OY, Angle) :-
+	angle(X, Y, OX, OY, Angle) :-
 		X > OX,
 		Y >= OY,
 		Angle is atan((Y-OY)/(X-OX)).
 
-    angle(X, Y, OX, OY, Angle) :-
+	angle(X, Y, OX, OY, Angle) :-
 		X > OX,
 		Y < OY,
 		pi(Pi),
 		Angle is Pi + Pi - atan((OY-Y)/(X-OX)).
 
-    angle(X, Y, OX, OY, Angle) :-
+	angle(X, Y, OX, OY, Angle) :-
 		X < OX,
 		Y >= OY,
 		pi(Pi),
 		Angle is Pi - atan((Y-OY)/(OX-X)).
 
-    angle(X, Y, OX, OY, Angle) :-
+	angle(X, Y, OX, OY, Angle) :-
 		X < OX,
 		Y < OY,
 		pi(Pi),
 		Angle is Pi + atan((OY-Y)/(OX-X)).
 
-    angle(OX, Y, OX, OY, Angle) :- 
+	angle(OX, Y, OX, OY, Angle) :- 
 		Y > OY,
-    	pi(Pi),
-    	Angle is Pi / 2.
+		pi(Pi),
+		Angle is Pi / 2.
 
-    angle(OX, Y, OX, OY, Angle) :-
+	angle(OX, Y, OX, OY, Angle) :-
 		Y =< OY,
-    	pi(Pi),
-    	Angle is 1.5 * Pi.
+		pi(Pi),
+		Angle is 1.5 * Pi.
 
 	pi(Pi) :-
 		Pi is 4.0*atan(1.0).

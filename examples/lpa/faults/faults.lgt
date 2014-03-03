@@ -49,7 +49,7 @@
 		retractall(told_by_user_(_, _)),
 		write('Please answer all questions with yes or no.'), nl, nl,
 		forall(
- 			(::descendant(Where), Where::find(Description)),
+			(::descendant(Where), Where::find(Description)),
 			(nl, write('Location      : '), write(Where), nl,
 			 write('Possible Fault: '), write(Description), nl)),
 		nl, write('No (more) explanations found.').

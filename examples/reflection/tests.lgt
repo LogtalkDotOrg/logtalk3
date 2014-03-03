@@ -59,7 +59,7 @@
 		Instances == [i].
 
 	succeeds(reflection_6) :-
-    	\+ i::current_predicate(_Predicate).
+		\+ i::current_predicate(_Predicate).
 
 	succeeds(reflection_7) :-
 		object::new(j),

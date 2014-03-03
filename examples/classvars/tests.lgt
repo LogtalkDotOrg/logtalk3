@@ -32,7 +32,7 @@
 
 	% test 2.  Note: Depends on previous test.
 	test(classvars_2) :-
-    	instance1::set_cv(1).
+		instance1::set_cv(1).
 
 	% test 3.   Note: Depends on previous test.
 	test(classvars_3) :-

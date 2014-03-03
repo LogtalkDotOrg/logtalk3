@@ -38,7 +38,7 @@
 		simple::p.
 
 	succeeds(coinduction_simple_2) :-
-    	simple::p(hoho).
+		simple::p(hoho).
 
 	succeeds(coinduction_simple_3) :-
 		simple::p(hoho, X),

@@ -185,19 +185,19 @@
 		comment is 'Newton algorithm.'
 	]).
 
-    find_root(Function, Xa, Xb, Deviation, Zero) :-
+	find_root(Function, Xa, Xb, Deviation, Zero) :-
 		Ac is (Xb - Xa) / 2,
 		newton(Function, Xa, Ac, Deviation, Zero).
 
 	newton(_, Zero, Ac, Deviation, Zero) :-
 		abs(Ac) < Deviation,
 		!.
-    newton(Function, X0, Ac, Deviation, Zero):-
-        Xn1 is X0 + Ac,
-        Function::eval(Xn1, Fx),
-        Function::evald(Xn1, DFx),
-        Ac2 is -(Fx/DFx),
-        newton(Function, Xn1, Ac2, Deviation, Zero).
+	newton(Function, X0, Ac, Deviation, Zero):-
+		Xn1 is X0 + Ac,
+		Function::eval(Xn1, Fx),
+		Function::evald(Xn1, DFx),
+		Ac2 is -(Fx/DFx),
+		newton(Function, Xn1, Ac2, Deviation, Zero).
 
 :- end_object.
 

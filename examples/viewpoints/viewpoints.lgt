@@ -78,11 +78,11 @@
 % information on Joe as an chess player:
 
 :- object(joeChessPlayer,
-    extends(joePerson)).
+	extends(joePerson)).
 
-    :- public(category/1).
+	:- public(category/1).
 
-    category('National Master').
+	category('National Master').
 
 :- end_object.
 
@@ -110,11 +110,11 @@
 :- object(joeSportsman,
 	extends(joePerson)).
 
-    :- public(sport/1).
+	:- public(sport/1).
 	:- public(stamina/1).
 	:- public(weight/1).
 
-    sport(snowboard).
+	sport(snowboard).
 
 	stamina(30).
 

@@ -20,10 +20,10 @@
 
 	:- private(interval_volume/9).
 
-    interval_volume(_, _, _, C, D , 0, _, Acc, Volume) :-
+	interval_volume(_, _, _, C, D , 0, _, Acc, Volume) :-
 		Volume is (D-C)*Acc,
 		!.
-    interval_volume(Function, A, B, Down, Up, N, NP, Acc, Volume) :-
+	interval_volume(Function, A, B, Down, Up, N, NP, Acc, Volume) :-
 		c(NP, N, C),
 		w(NP, N, W),
 		YK is Down + (Up-Down)*C,

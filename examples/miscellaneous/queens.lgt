@@ -59,27 +59,27 @@
 
 
 /*  The N-queens problem is to place N queens on an NxN chessboard so
-    that no two queens attack each other.  Suppose we have a queen in
-    (Row1,Col1) and a queen in (Row2,Col2).  They attack each other if
+	that no two queens attack each other.  Suppose we have a queen in
+	(Row1,Col1) and a queen in (Row2,Col2).  They attack each other if
 	1.  Same rank:		Row1 = Row2.
 	2.  Same file:		Col1 = Col2.
 	3.  Same NW-SE diagonal Row2 - Row1 = Col2 - Col1.
 	4.  Same SW-NE diagonal Row2 - Row1 = Col1 - Col2.
-    We can express 3 and 4 another way:
+	We can express 3 and 4 another way:
 	3.			Row2 - Col2 = Row1 - Col1.
 	4.			Row2 + Col2 = Row1 + Col1.
-    So each of the N queens has four numbers associated with it,
-    (Row,Col,Dif,Sum), and any two queens must have different numbers
-    in all these positions.  The possible values are
+	So each of the N queens has four numbers associated with it,
+	(Row,Col,Dif,Sum), and any two queens must have different numbers
+	in all these positions.  The possible values are
 	Row : 1 .. N
 	Col : 1 .. N
 	Sum : 1 .. 2N
 	Dif : 1-N .. N-1
 
-    The first question is, how shall we represent the board?
-    It is sufficient to have a table indexed by rows, whose elements
-    are the columns in which the corresponding queen is placed.  For
-    example, with rows horizontal and columns vertical
+	The first question is, how shall we represent the board?
+	It is sufficient to have a table indexed by rows, whose elements
+	are the columns in which the corresponding queen is placed.  For
+	example, with rows horizontal and columns vertical
 		  1   2   3   4	   -column /  row
 		+---+---+---+---+
 		|   | Q |   |   |		1
@@ -91,16 +91,16 @@
 		|   |   | Q |   |		4
 		+---+---+---+---+
 
-    could be represented by board(2,4,1,3).
+	could be represented by board(2,4,1,3).
 
-    How are we going to place the queens?  The first idea that springs
-    to mind is to place them one after another, but we can do better than
-    that.  Let us maintain a table of (QueenRow/PossibleColumns), and at
-    each step pick the queen with the fewest possible columns, place it,
-    and prune the remaining sets.
+	How are we going to place the queens?  The first idea that springs
+	to mind is to place them one after another, but we can do better than
+	that.  Let us maintain a table of (QueenRow/PossibleColumns), and at
+	each step pick the queen with the fewest possible columns, place it,
+	and prune the remaining sets.
 
-    Let's start by writing a predicate to generate this table.  For N=4
-    it will look like [1/[1,2,3,4], 2/[1,2,3,4], 3/[1,2,3,4], 4/[1,2,3,4]].
+	Let's start by writing a predicate to generate this table.  For N=4
+	it will look like [1/[1,2,3,4], 2/[1,2,3,4], 3/[1,2,3,4], 4/[1,2,3,4]].
 */
 
 	make_initial_table(N, Table) :-
@@ -124,18 +124,18 @@
 
 /*  This actually generates the reverse of what I said, so we'd get
 	[4/[4,3,2,1], 3/[4,3,2,1], 2/[4,3,2,1], 1/[4,3,2,1]],
-    but since it was to be a set of number/set pairs, that's ok.
-    We shall only be operating on these sets an element at a time,
-    so it the order doesn't matter.
+	but since it was to be a set of number/set pairs, that's ok.
+	We shall only be operating on these sets an element at a time,
+	so it the order doesn't matter.
 
-    Now the problem is solved if there are no queens left to place.
-    Otherwise, we pick the queen with the fewest possible columns,
-    backtrack over those possible columns, prune the possible columns
-    sets of the remaining queens, and recur.
+	Now the problem is solved if there are no queens left to place.
+	Otherwise, we pick the queen with the fewest possible columns,
+	backtrack over those possible columns, prune the possible columns
+	sets of the remaining queens, and recur.
 
-    We are given a set of Row/PossCols pairs for the unplaced queens,
-    and we are to return a set of Row-Col pairs saying where we put
-    the queens.
+	We are given a set of Row/PossCols pairs for the unplaced queens,
+	and we are to return a set of Row-Col pairs saying where we put
+	the queens.
 */
 
 	place([], []).
@@ -147,12 +147,12 @@
 
 
 /*  If you haven't done this sort of thing before, least_room_to_move
-    can be quite tricky.  The idea is the we wander down the list of
-    pairs, keeping the current best pair apart, and when we find that
-    there is a better pair we have to put the current pair back in the list.
-    But because these are sets, it doesn't matter *where* the pairs go in
-    the list.  Note that we don't need a cut in the first clause of place/2
-    because least_room_to_move will fail on an empty list.
+	can be quite tricky.  The idea is the we wander down the list of
+	pairs, keeping the current best pair apart, and when we find that
+	there is a better pair we have to put the current pair back in the list.
+	But because these are sets, it doesn't matter *where* the pairs go in
+	the list.  Note that we don't need a cut in the first clause of place/2
+	because least_room_to_move will fail on an empty list.
 */
 
 	least_room_to_move([Q/C|Table], Qbest, Cbest, Rest) :-

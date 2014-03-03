@@ -44,8 +44,8 @@
 			(writeq(Object), nl,
 			 write('  total of calls: '), write(Calls), nl,
 			 write('  total of exits: '),
-             (	::exits(Object, Exits) ->
-                write(Exits), nl, nl
+			 (	::exits(Object, Exits) ->
+			 	write(Exits), nl, nl
 			 ;	write(0), nl, nl
 			 ),
 			forall(

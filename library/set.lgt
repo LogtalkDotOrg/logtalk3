@@ -131,13 +131,13 @@
 		member_var(Element, Set).
 
 	member_nonvar(Element, [Head| Tail]) :-
-	    compare(Order, Element, Head),
-	    member_nonvar(Order, Element, Tail).
+		compare(Order, Element, Head),
+		member_nonvar(Order, Element, Tail).
 
 	member_nonvar(=, _, _).
 	member_nonvar(>, Element, [Head| Tail]) :-
-    	compare(Order, Element, Head),
-    	member_nonvar(Order, Element, Tail).
+		compare(Order, Element, Head),
+		member_nonvar(Order, Element, Tail).
 
 	memberchk(Element, Set) :-
 		member_nonvar(Element, Set),

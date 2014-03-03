@@ -187,7 +187,7 @@
 		Acc2 is Acc + SubVolume,
 		collect(Goals, Acc2, Integral).
 
-    % predicate that the threads will start
+	% predicate that the threads will start
 	start(Function, A, B, C, D, NP, Epsilon, Integral) :-
 		(	NP =:= 0 -> 
 			^^trapezium_volume(Function, A, B, C, D, InitialVolume),

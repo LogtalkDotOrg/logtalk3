@@ -40,7 +40,7 @@
 		Solutions == [[i, would, love, to, have, dinner, with, you, tonight]].
 
 	test(dcgs_05) :-
-    	sentence::parse([the, girl, likes, the, boy], Result),
+		sentence::parse([the, girl, likes, the, boy], Result),
 		Result == true.
 
 	test(dcgs_06) :-

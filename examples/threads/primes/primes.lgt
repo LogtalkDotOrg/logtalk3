@@ -83,7 +83,7 @@
 		(	N > Sqrt ->
 			true
 		;	Prime mod N > 0,
- 			N2 is N + 2,
+			N2 is N + 2,
 			is_prime(N2, Sqrt, Prime)
 		).
 

@@ -87,7 +87,7 @@
 	insert(N, Key, Value, t(K1,V1,L1,R1), t(K2,V2,L2,R2)) :-
 		E is N mod 2,
 		M is N // 2,
-    	%   M > 0,		%  only called from as_heap/4, insert/4
+		%   M > 0,		%  only called from as_heap/4, insert/4
 		sort(Key, Value, K1, V1, K2, V2, K3, V3),
 		insert(E, M, K3, V3, L1, R1, L2, R2).
 

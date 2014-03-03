@@ -79,7 +79,7 @@
 		parameter(2, P2),
 		P1::distance(P2, Length).
 
-    intersects(Line2) :-
+	intersects(Line2) :-
 		/* succeeds if Line2 intersects the owner line.             */
 		/* this isn't necessarily a good method, but shows how to   */
 		/* call class procedures from within the class definition.  */
@@ -209,13 +209,13 @@ run :-
 setup_points(P45, P66, AnotherP45, Pm4m3, P00) :-
 	P45 = point(4, 5),
 	P66 = point(6, 6),
-    AnotherP45 = P45,
+	AnotherP45 = P45,
 	Pm4m3 = point(-4, -3),
 	P00 = point(0, 0).
 
 
 setup_lines(L1, L2, L3, L4) :-
-    setup_points(P45, P66, _, Pm4m3, P00),
+	setup_points(P45, P66, _, Pm4m3, P00),
 	L1 = line(P00, P45),
 	L2 = line(Pm4m3, P66),
 	L3 = line(Pm4m3, P45),
@@ -223,63 +223,63 @@ setup_lines(L1, L2, L3, L4) :-
 
 
 banner :-
-    write('Logtalk adaptation of a Ben Staveley-Taylor POEM example.'), nl,
-    write('Original banner:'), nl, nl,
-    nl,
-    write('POEM demonstration file.'), nl, nl,
-    write('The example output that follows is produced by Prolog code'), nl,
-    write('using the object language enhancement POEM.  Please look'), nl,
-    write('through the code file "shapes.pl" provided to understand how'), nl,
-    write('the class facilities are being used.'), nl.
+	write('Logtalk adaptation of a Ben Staveley-Taylor POEM example.'), nl,
+	write('Original banner:'), nl, nl,
+	nl,
+	write('POEM demonstration file.'), nl, nl,
+	write('The example output that follows is produced by Prolog code'), nl,
+	write('using the object language enhancement POEM.  Please look'), nl,
+	write('through the code file "shapes.pl" provided to understand how'), nl,
+	write('the class facilities are being used.'), nl.
 
 
 points :-
-    nl,
-    write('(1) point manipulation:'), nl,
-    setup_points(P45, P66, AnotherP45, _, P00),
-    write('distance from (4,5) to (6,6) is '),
-    P45::distance(P66, D),
-    write(D), nl,
-    P45::identical(AnotherP45),
-    write('P45 and AnotherP45 are identical points'), nl,
-    \+ P00::identical(P66),
-    write('P00 and P66 are different points'), nl.
+	nl,
+	write('(1) point manipulation:'), nl,
+	setup_points(P45, P66, AnotherP45, _, P00),
+	write('distance from (4,5) to (6,6) is '),
+	P45::distance(P66, D),
+	write(D), nl,
+	P45::identical(AnotherP45),
+	write('P45 and AnotherP45 are identical points'), nl,
+	\+ P00::identical(P66),
+	write('P00 and P66 are different points'), nl.
 
 
 ellipse :-
-    nl,
-    write('(2) ellipse manipulation:'), nl,
+	nl,
+	write('(2) ellipse manipulation:'), nl,
 	P56 = point(5, 6),
 	E = ellipse(P56, 3, 5),
-    write('Area of ellipse of semi-axes 3 and 5 is '),
-    E::area(A),
-    write(A), nl.
+	write('Area of ellipse of semi-axes 3 and 5 is '),
+	E::area(A),
+	write(A), nl.
 
 
 lines :-
-    nl,
-    write('(3) line manipulation:'), nl,
-    setup_lines( L1, L2, L3, L4 ),
+	nl,
+	write('(3) line manipulation:'), nl,
+	setup_lines( L1, L2, L3, L4 ),
 	P33 = point(3, 3),
-    write('distance from '),write(L2),write(' to '),write(P33),write(' is '),
-    L2::distance(P33, D),
-    write(D), nl,
-    L1::intersects(L2),
-    write(L1), write(' intesects '), write(L2), nl,
-    \+ L3::intersects(L4),
-    write(L3), write(' does not intersect '), write(L4), nl.
+	write('distance from '),write(L2),write(' to '),write(P33),write(' is '),
+	L2::distance(P33, D),
+	write(D), nl,
+	L1::intersects(L2),
+	write(L1), write(' intesects '), write(L2), nl,
+	\+ L3::intersects(L4),
+	write(L3), write(' does not intersect '), write(L4), nl.
 
 
 circle :-
-    nl,
-    write('(4) circle manipulation:'), nl,
-    write('  Circles are subsets of ellipses, so the "area" function'), nl,
-    write('  is available, and a new "circumference" function.'), nl,
+	nl,
+	write('(4) circle manipulation:'), nl,
+	write('  Circles are subsets of ellipses, so the "area" function'), nl,
+	write('  is available, and a new "circumference" function.'), nl,
 	P22 = point(2, 2),
 	C = circle(P22, 3),
-    write('Area of circle radius 3 is '),
-    C::area(A),
-    write(A), nl,
-    write('Circumference of circle radius 3 is '),
-    C::circumference(Circ),
-    write(Circ), nl, nl.
+	write('Area of circle radius 3 is '),
+	C::area(A),
+	write(A), nl,
+	write('Circumference of circle radius 3 is '),
+	C::circumference(Circ),
+	write(Circ), nl, nl.

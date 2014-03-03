@@ -195,7 +195,7 @@
 
 		file_permission(File, Permission) :-
 			{file_exists(File, Permission)}.
- 
+
 		delete_file(File) :-
 			{delete_file(File)}.
 
@@ -282,7 +282,7 @@
 
 		file_permission(File, execute) :-
 			{path_sysop(executable, File)}.
- 
+
 		delete_file(File) :-
 			{path_sysop(rm, File)}.
 
@@ -357,7 +357,7 @@
 
 		file_permission(File, Permission) :-
 			{file_permission(File, Permission)}.
- 
+
 		delete_file(File) :-
 			{delete_file(File)}.
 
@@ -445,7 +445,7 @@
 
 		file_permission(File, Permission) :-
 			{file_property(File, permission(Permission))}.
- 
+
 		delete_file(File) :-
 			{delete_file(File)}.
 
@@ -527,7 +527,7 @@
 		file_permission(File, Permission) :-
 			expand_path(File, Path),
 			{file_exists(Path, Permission)}.
- 
+
 		delete_file(File) :-
 			expand_path(File, Path),
 			{delete_file(Path)}.
@@ -1056,7 +1056,7 @@
 		file_permission(File, Permission) :-
 			expand_path(File, Path),
 			{file_exists(Path, Permission)}.
- 
+
 		delete_file(File) :-
 			expand_path(File, Path),
 			{delete_file(Path)}.

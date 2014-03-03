@@ -40,7 +40,7 @@
 
 
 :- object(polygon,
-    extends(shape)).
+	extends(shape)).
 
 	:- info([
 		author is 'Paulo Moura',
@@ -74,7 +74,7 @@
 
 
 :- object(regular_polygon,
-    extends(polygon)).
+	extends(polygon)).
 
 	:- info([
 		author is 'Paulo Moura',
@@ -101,7 +101,7 @@
 
 
 :- object(square,
-    extends(regular_polygon)).
+	extends(regular_polygon)).
 
 	:- info([
 		author is 'Paulo Moura',
@@ -120,13 +120,13 @@
 
 
 :- object(q1,
-    extends(square)).
+	extends(square)).
 
 :- end_object.
 
 
 :- object(q2,
-    extends(square)).
+	extends(square)).
 
 	position(2, 3).
 

@@ -32,7 +32,7 @@
 		comment is 'Predicates for generating graph files in the GraphML language.'
 	]).
 
- 	:- multifile(diagram(_)::format_object/2).
+	:- multifile(diagram(_)::format_object/2).
 	diagram(_)::format_object(graphml, graphml_graph).
 
 	output_file_name(Name, File) :-

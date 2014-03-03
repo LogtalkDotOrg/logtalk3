@@ -43,7 +43,7 @@
 		list::msort(Solutions,SolutionsSorted),
 		SolutionsSorted = [
 			t(_)-1-t-t,
-            translate(_)-1-t-translate,
+			translate(_)-1-t-translate,
 			rotate(_,_,_)-3-xyz-rotate,
 			xyz(_,_,_)-3-xyz-xyz,
 			xyzt(_,_,_,_)-4-xyzt-xyzt

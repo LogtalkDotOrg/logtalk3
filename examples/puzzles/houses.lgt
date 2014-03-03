@@ -62,7 +62,7 @@ Who owns the zebra and who drinks water?
 		member(h(_, snake, winston, _, _), Solution), 						%  7
 		member(h(_, _, kool, _, yellow), Solution),							%  8
 		Solution = [_, _, h(_, _, _, milk, _), _, _],						%  9
-        Solution = [h(norwegian, _, _, _, _)| _],			   				% 10
+		Solution = [h(norwegian, _, _, _, _)| _],			   				% 10
 		next(h(_, fox, _, _, _), h(_, _, chesterfield, _, _), Solution),	% 11
 		next(h(_, _, kool, _, _), h(_, horse, _, _, _), Solution),			% 12
 		member(h(_, _, lucky, juice, _), Solution),							% 13

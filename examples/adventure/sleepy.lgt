@@ -278,7 +278,7 @@
 	    \+ at(fly, Place),
 	    write('You swish the flyswatter through the air.'), nl.
 
-    /* Have flyswatter, room is lit, fly is here and alive. */
+	/* Have flyswatter, room is lit, fly is here and alive. */
 
 	swat :-
 		(	buzz_off ->

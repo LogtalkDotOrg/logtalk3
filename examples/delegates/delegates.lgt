@@ -91,16 +91,16 @@
 % test the delegation solution when this file is compiled and loaded
 /*
 :- initialization((
-    % without a delegate:
-    a_delegator::operation(String1),
+	% without a delegate:
+	a_delegator::operation(String1),
 	String1 == 'default implementation',
-    % with a delegate that does not implement thing/1:
-    a_delegator::set_delegate(an_object),
-    a_delegator::operation(String2),
+	% with a delegate that does not implement thing/1:
+	a_delegator::set_delegate(an_object),
+	a_delegator::operation(String2),
 	String2 == 'default implementation',
-    % with a delegate that implements thing/1:
-    a_delegator::set_delegate(a_delegate),
-    a_delegator::operation(String3),
+	% with a delegate that implements thing/1:
+	a_delegator::set_delegate(a_delegate),
+	a_delegator::operation(String3),
 	String3 == 'delegate implementation'
 )).
 */

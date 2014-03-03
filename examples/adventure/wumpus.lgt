@@ -348,7 +348,7 @@
 		\+ location(X, Y),
 		write('I probably can''t yell loud enough for him to hear me!'), nl,
 		fail.
- 
+
 	sell(boat) :-
 		in(dock),
 		location(boat, dock),
@@ -372,7 +372,7 @@
 	sell(_) :-
 		write('I''m not sure that''s possible.'), nl,
 		fail.
- 
+
 	buy(bow) :-
 		in(canyon),
 		location(bow,canyon),

@@ -46,8 +46,8 @@
 % "polygon" abstract class
 
 :- object(polygon,
-    instantiates(abstract_class),
-    specializes(shape)).
+	instantiates(abstract_class),
+	specializes(shape)).
 
 	:- info([
 		author is 'Paulo Moura',
@@ -83,8 +83,8 @@
 % "regular_polygon" abstract class
 
 :- object(regular_polygon,
-    instantiates(abstract_class),
-    specializes(polygon)).
+	instantiates(abstract_class),
+	specializes(polygon)).
 
 	:- info([
 		author is 'Paulo Moura',
@@ -113,8 +113,8 @@
 % "square" instantiable class
 
 :- object(square,
-    instantiates(class),
-    specializes(regular_polygon)).
+	instantiates(class),
+	specializes(regular_polygon)).
 
 	:- info([
 		author is 'Paulo Moura',
@@ -133,7 +133,7 @@
 
 
 :- object(q1,
-    instantiates(square)).
+	instantiates(square)).
 
 	% inherits default values for position/2, color/1, and side/1
 
@@ -141,7 +141,7 @@
 
 
 :- object(q2,
-    instantiates(square)).
+	instantiates(square)).
 
 	position(2, 3).
 

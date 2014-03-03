@@ -108,7 +108,7 @@
 		partition_(Args, Closure, RestIncluded, RestExcluded).
 
 	:- meta_predicate(partition(1, *, *, *)).
-    partition(Closure, List, Included, Excluded) :-
+	partition(Closure, List, Included, Excluded) :-
 		partition_(List, Closure, Included, Excluded).
 
 	:- meta_predicate(partition(*, 3, *, *, *, *)).

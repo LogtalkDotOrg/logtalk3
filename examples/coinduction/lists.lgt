@@ -75,33 +75,33 @@
 
 :- initialization((
 	write('Query1'), nl,
-    X = [0, s(0), s(s(0))],
-    member2(s(0), X),
-    write('Yes1 !'), nl
+	X = [0, s(0), s(s(0))],
+	member2(s(0), X),
+	write('Yes1 !'), nl
 )).
 
 :- initialization((
 	write('Query2'), nl,
-    X = [0, s(0), s(s(0))],
-    member1(s( 0), X),
-    write('Yes2 !'), nl
+	X = [0, s(0), s(s(0))],
+	member1(s( 0), X),
+	write('Yes2 !'), nl
 )).
 
 :- initialization((
 	(	write('Query3'), nl,
-    	X = [0, s(0), s(s(0))],
-    	comember(s(0), X) ->
-    	write('WHAT? SHOULD HAVE FAILED !'), nl
+	X = [0, s(0), s(s(0))],
+	comember(s(0), X) ->
+	write('WHAT? SHOULD HAVE FAILED !'), nl
 	;	true
 	)
 )).
 
 :- initialization((
 	write('Query4'), nl,
-    X = [0, s(0), s(s(0))| X], write(' HERE!'),
-    once(comember(s(0), X)),
-    write('Yes4 !'), nl,
-    write_term(X, [max_depth(10)]), nl
+	X = [0, s(0), s(s(0))| X], write(' HERE!'),
+	once(comember(s(0), X)),
+	write('Yes4 !'), nl,
+	write_term(X, [max_depth(10)]), nl
 )).
 
 */

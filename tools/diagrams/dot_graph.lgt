@@ -32,7 +32,7 @@
 		comment is 'Predicates for generating graph files in the DOT language.'
 	]).
 
- 	:- multifile(diagram(_)::format_object/2).
+	:- multifile(diagram(_)::format_object/2).
 	diagram(_)::format_object(dot, dot_graph).
 
 	output_file_name(Name, File) :-

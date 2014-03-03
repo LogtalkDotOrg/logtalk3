@@ -42,7 +42,7 @@
 		End1 @< Start2.
 
 	after(Interval1, Interval2) :-
-        before(Interval2, Interval1).
+		before(Interval2, Interval1).
 
 	meets([_, Point], [Point, _]).
 

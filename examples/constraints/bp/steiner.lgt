@@ -20,7 +20,7 @@ The ternary Steiner problem of order n is to find n(n-1)/6 sets of elements in {
 each set contains three elements and any two sets have at most one element in common. For example, 
 the following shows a solution for size n=7:
 
-      {1,2,3}, {1,4,5}, {1,6,7}, {2,4,6}, {2,5,7}, {3,4,7}, {3,5,6}
+	  {1,2,3}, {1,4,5}, {1,6,7}, {2,4,6}, {2,5,7}, {3,4,7}, {3,5,6}
 
 Problem taken from:
   C. Gervet: Interval Propagation to Reason about Sets: Definition and Implementation of a Practical 
@@ -32,34 +32,34 @@ Problem taken from:
 
 	:- public(go/0).
 
-    go:-
-        cputime(Start),
-        top,
-        cputime(End),
-        T is End-Start,
-        write('cputime='),write(T),nl.
+	go:-
+		cputime(Start),
+		top,
+		cputime(End),
+		T is End-Start,
+		write('cputime='),write(T),nl.
 
-    top:-
-        steiner(9).
-    top.
+	top:-
+		steiner(9).
+	top.
 
-    steiner(N):-
-        NoSets is N*(N-1)//6,
-        length(Lsets,NoSets),
-        Lsets in {}..{1..N},
-        constrain(Lsets),
-        labeling(Lsets),
-        write(Lsets),nl.
+	steiner(N):-
+		NoSets is N*(N-1)//6,
+		length(Lsets,NoSets),
+		Lsets in {}..{1..N},
+		constrain(Lsets),
+		labeling(Lsets),
+		write(Lsets),nl.
 
-    constrain([]).
-    constrain([X|Xs]):-
-        #X #= 3,
-        constrain_pairs(X,Xs),
-        constrain(Xs).
+	constrain([]).
+	constrain([X|Xs]):-
+		#X #= 3,
+		constrain_pairs(X,Xs),
+		constrain(Xs).
 
-    constrain_pairs(_,[]).
-    constrain_pairs(X,[Y|Ys]):-
-        #(X /\ Y) #=< 1,
-        constrain_pairs(X,Ys).
+	constrain_pairs(_,[]).
+	constrain_pairs(X,[Y|Ys]):-
+		#(X /\ Y) #=< 1,
+		constrain_pairs(X,Ys).
 
 :- end_object.

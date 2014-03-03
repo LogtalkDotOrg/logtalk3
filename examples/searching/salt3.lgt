@@ -99,10 +99,10 @@ Remarks:
 		 ).
 
 	% throwing out the contents of a measure; does not afect the accumulator
- 	next_state((Acc, X, Y, Step), (Acc, 0, Y, empty(m1)), 1) :-
+	next_state((Acc, X, Y, Step), (Acc, 0, Y, empty(m1)), 1) :-
 		X > 0,
 		Step \= fill(m1).
- 	next_state((Acc, X, Y, Step), (Acc, X, 0, empty(m2)), 1) :-
+	next_state((Acc, X, Y, Step), (Acc, X, 0, empty(m2)), 1) :-
 		Y > 0,
 		Step \= fill(m2).
 

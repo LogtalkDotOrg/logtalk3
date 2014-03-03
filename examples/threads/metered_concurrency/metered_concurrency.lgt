@@ -36,7 +36,7 @@
 		% tell the semaphore thread to stop
 		threaded_notify(worker(stop, _)).
 
-    :- public(run/0).
+	:- public(run/0).
 	run :-
 		% default values: 7 workers, 2 concurrent workers
 		run(7, 2).

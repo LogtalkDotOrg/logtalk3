@@ -66,7 +66,7 @@
 	eval(test03, X, Y) :-
 		Y is exp(X)*cos(X).
 
- 	% [0, 1] integral = (5*pi^2)/96 = 0.51404189589
+	% [0, 1] integral = (5*pi^2)/96 = 0.51404189589
 	eval(test04, X, Y) :-
 		W is sqrt(2.0+X*X),
 		Y is atan(W)/(W*(1.0+X*X)).

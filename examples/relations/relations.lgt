@@ -360,12 +360,14 @@
 
 	plays_roles(Object, Roles) :-
 		::descriptor(Descriptor),
-		setof(Role,
+		setof(
+			Role,
 			Tuple^Position^ (::tuple(Tuple),
-                           member(Object, Tuple),
-                           nth1(Position, Tuple, Object),
-                           once(nth1(Position, Descriptor, Role))),
-         Roles).
+				member(Object, Tuple),
+				nth1(Position, Tuple, Object),
+				once(nth1(Position, Descriptor, Role))),
+			Roles
+		).
 
 	plays_role_in_tuple(Object, Role, Tuple) :-
 		::descriptor(Descriptor),
@@ -819,16 +821,18 @@
 		^^print,
 		::descriptor(Descriptor),
 		write('call activation points:'), nl,
-		findall(Messages,
-			(member(Role, Descriptor),
-             ::activ_points(Role, before, Messages)),
-           CallList),
+		findall(
+			Messages,
+			(member(Role, Descriptor), ::activ_points(Role, before, Messages)),
+			CallList
+		),
 		write('  '), writeq(CallList), nl,
 		write('exit activation points:'), nl,
-		findall(Messages,
-			(member(Role, Descriptor),
-			 ::activ_points(Role, after, Messages)),
-           ExitList),
+		findall(
+			Messages,
+			(member(Role, Descriptor), ::activ_points(Role, after, Messages)),
+			ExitList
+		),
 		write('  '), writeq(ExitList), nl.
 
 :- end_object.

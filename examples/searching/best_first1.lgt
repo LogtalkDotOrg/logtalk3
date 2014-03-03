@@ -40,7 +40,7 @@
 			succlist(G, Successors, Trees, Threshold, Space),
 			bestf(Trees, F2, Threshold),
 			expand(Path, t(State, F2/G, Trees), Threshold, Tree, Solved, Solution, Space, Cost)
-      	;	Solved = never
+		;	Solved = never
 		).
 	expand(Path, t(State, F/G,[Tree| Trees]), Threshold, Tree3, Solved, Solution, Space, Cost) :-
 		F =< Threshold,

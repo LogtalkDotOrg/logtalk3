@@ -140,8 +140,8 @@
 :- object(cambridge,
 	extends(location(254, 92))).
 
-    links([
-    	(nottingham, 82),
+	links([
+		(nottingham, 82),
 		(oxford, 80),
 		(london, 54),
 		(birmingham, 97)]).
@@ -152,8 +152,8 @@
 :- object(cardiff,
 	extends(location(148, 56))).
 
-    links([
-    	(bristol, 44),
+	links([
+		(bristol, 44),
 		(swansea, 45)]).
 
 :- end_object.
@@ -265,8 +265,8 @@
 :- object(manchester,
 	extends(location(180, 156))).
 
-    links([
-    	(leeds, 41),
+	links([
+		(leeds, 41),
 		(liverpool, 35),
 		(sheffield, 38)]).
 
@@ -276,8 +276,8 @@
 :- object(newcastle,
 	extends(location(210, 230))).
 
-    links([
-    	(edinburgh, 104),
+	links([
+		(edinburgh, 104),
 		(carlisle, 58),
 		(york, 80)]).
 
@@ -287,8 +287,8 @@
 :- object(nottingham,
 	extends(location(216, 128))).
 
-    links([
-    	(birmingham, 48),
+	links([
+		(birmingham, 48),
 		(cambridge, 82),
 		(sheffield, 38)]).
 
@@ -298,8 +298,8 @@
 :- object(oxford,
 	extends(location(214, 66))).
 
-    links([
-    	(bristol, 71),
+	links([
+		(bristol, 71),
 		(birmingham, 63),
 		(cambridge, 80),
 		(london, 57)]).
@@ -310,8 +310,8 @@
 :- object(penzance,
 	extends(location(10, 0))).
 
-    links([(
-    	exeter, 112)]).
+	links([(
+		exeter, 112)]).
 
 :- end_object.
 
@@ -319,8 +319,8 @@
 :- object(portsmouth,
 	extends(location(216, 22))).
 
-    links([
-    	(brighton, 49),
+	links([
+		(brighton, 49),
 		(exeter, 126),
 		(london, 72)]).
 
@@ -330,8 +330,8 @@
 :- object(sheffield,
 	extends(location(208, 142))).
 
-    links([
-    	(birmingham, 75),
+	links([
+		(birmingham, 75),
 		(hull, 65),
 		(leeds, 34),
 		(liverpool, 70),
@@ -344,8 +344,8 @@
 :- object(swansea,
 	extends(location(126, 66))).
 
-    links([
-    	(cardiff, 45),
+	links([
+		(cardiff, 45),
 		(aberystwyth, 75)]).
 
 :- end_object.
@@ -354,8 +354,8 @@
 :- object(york,
 	extends(location(218, 184))).
 
-    links([
-    	(leeds, 23),
+	links([
+		(leeds, 23),
 		(hull, 37),
 		(newcastle, 80)]).
 
