@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Qu-Prolog 9.0 and later versions
-%  Last updated on February 6, 2014
+%  Last updated on March 3, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -41,9 +41,12 @@
 
 % '$lgt_iso_predicate'(?callable).
 
+'$lgt_iso_predicate'(acyclic_term(_)).
 '$lgt_iso_predicate'(sub_atom(_, _, _, _, _)).
 '$lgt_iso_predicate'(subsumes_term(_, _)).
 '$lgt_iso_predicate'(term_variables(_, _)).
+
+acyclic_term(_).
 
 sub_atom(Atom, Before, Length, After, SubAtom) :-
 	string_to_atom(String, Atom),

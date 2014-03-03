@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Lean Prolog 3.8.8 and later versions
-%  Last updated on February 10, 2014
+%  Last updated on March 3, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -46,8 +46,9 @@
 %
 % table of missing ISO predicates which are defined in this file
 
-'$lgt_iso_predicate'(_) :-
-	fail.
+'$lgt_iso_predicate'(acyclic_term(_)).
+
+acyclic_term(_).
 
 
 

@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SICStus Prolog 4.1.0 and later versions
-%  Last updated on February 6, 2014
+%  Last updated on March 3, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -53,14 +53,33 @@
 
 % '$lgt_iso_predicate'(?callable).
 
-'$lgt_iso_predicate'(subsumes_term(_, _)).
-'$lgt_iso_predicate'(term_variables(_, _)).
+:- if(\+ predicate_property(acyclic_term(_), built_in)).
+	'$lgt_iso_predicate'(acyclic_term(_)).
+:- endif.
 
-subsumes_term(General, Specific) :-
-	prolog:subsumes_chk(General, Specific).
+:- if(\+ predicate_property(subsumes_term(_, _), built_in)).
+	'$lgt_iso_predicate'(subsumes_term(_, _)).
+:- endif.
 
-term_variables(Term, Variables) :-
-	prolog:term_variables(Term, Variables).
+:- if(\+ predicate_property(term_variables(_, _), built_in)).
+	'$lgt_iso_predicate'(term_variables(_, _)).
+:- endif.
+
+:- if(\+ predicate_property(acyclic_term(_), built_in)).
+	:- use_module(library(terms), []).
+	acyclic_term(Term) :-
+		terms:acyclic_term(Term).
+:- endif.
+
+:- if(\+ predicate_property(subsumes_term(_, _), built_in)).
+	subsumes_term(General, Specific) :-
+		prolog:subsumes_chk(General, Specific).
+:- endif.
+
+:- if(\+ predicate_property(term_variables(_, _), built_in)).
+	term_variables(Term, Variables) :-
+		prolog:term_variables(Term, Variables).
+:- endif.
 
 
 
