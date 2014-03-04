@@ -53,10 +53,11 @@ The example folders may contain two files, `tests.lgt` and `tester.lgt`.
 The file `tests.lgt` contains unit tests for the example. These unit tests
 are based on the sample queries found on the example `SCRIPT.txt` file.
 The file `tester.lgt` is a loader file that, when loaded, will automatically
-run all the example unit tests. On POSIX operating-systems, you can run all
-the unit tests, for all the examples, by calling the `logtalk_tester` shell
-script from the command-line. Type `man logtalk_tester` for usage details.
-
+run all the example unit tests. You can automate running all these tests by
+calling the `logtalk_tester` shell script from the command-line (see the
+`scripts/NOTES.md` file for details on how to use with POSIX and Windows
+operating-systems). Type `man logtalk_tester` or `logtalk_tester -h` for
+usage details, including how to select the back-end Prolog compiler.
 
 Follows a short description of each included example (in alphabetical order):
 
@@ -67,7 +68,7 @@ Follows a short description of each included example (in alphabetical order):
     some simple examples of text adventures
 
 - `aliases`  
-	example of using the alias/3 predicate directive to provide 
+	example of using the `alias/3` predicate directive to provide 
 	alternative names to inherited predicates in order to improve 
 	readability or to solve multi-inheritance conflicts
 
