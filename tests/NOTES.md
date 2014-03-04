@@ -14,10 +14,11 @@ there are also unit tests defined for most of the examples and for some of
 the code contributions. Some of tests, specially for directives, are just
 parsing tests for all the supported syntaxes.
 
-On POSIX operating-systems, you can run all these tests by calling the shell
-script `logtalk_tester` from the command-line. Type `man logtalk_tester` or
-`logtalk_tester -h` for usage details, including how to select the back-end
-Prolog compiler.
+You can automate running all these tests by calling the `logtalk_tester`
+shell script from the command-line (see the `scripts/NOTES.md` file for
+details on how to use with POSIX and Windows operating-systems). Type `man
+logtalk_tester` or `logtalk_tester -h` for usage details, including how to
+select the back-end Prolog compiler.
 
 To run all the provided unit tests with e.g. SWI-Prolog as the back-end
 compiler, open a terminal and type:
