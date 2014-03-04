@@ -56,19 +56,19 @@
 	throws(asserta_1_6, error(permission_error(modify, protected_predicate, q/2), logtalk(asserta_1_test_object::asserta(q(_,_)),user))) :-
 		{asserta_1_test_object::asserta(q(_,_))}.
 
-	throws(asserta_1_7, error(permission_error(modify, protected_predicate, q/2), logtalk(asserta_1_test_object::asserta((q(_,_):-nl)),user))) :-
+	throws(asserta_1_7, error(permission_error(modify, protected_predicate, q/2), logtalk(asserta_1_test_object::asserta((q(_,_) :-nl)),user))) :-
 		{asserta_1_test_object::asserta((q(_,_) :- nl))}.
 
 	throws(asserta_1_8, error(permission_error(modify, private_predicate, r/3), logtalk(asserta_1_test_object::asserta(r(_,_,_)),user))) :-
 		{asserta_1_test_object::asserta(r(_,_,_))}.
 
-	throws(asserta_1_9, error(permission_error(modify, private_predicate, r/3), logtalk(asserta_1_test_object::asserta((r(_,_,_):-nl)),user))) :-
+	throws(asserta_1_9, error(permission_error(modify, private_predicate, r/3), logtalk(asserta_1_test_object::asserta((r(_,_,_) :-nl)),user))) :-
 		{asserta_1_test_object::asserta((r(_,_,_) :- nl))}.
 
 	throws(asserta_1_10, error(permission_error(modify, static_predicate, s/4), logtalk(asserta_1_test_object::asserta(s(_,_,_,_)),user))) :-
 		{asserta_1_test_object::asserta(s(_,_,_,_))}.
 
-	throws(asserta_1_11, error(permission_error(modify, static_predicate, s/4), logtalk(asserta_1_test_object::asserta((s(_,_,_,_):-nl)),user))) :-
+	throws(asserta_1_11, error(permission_error(modify, static_predicate, s/4), logtalk(asserta_1_test_object::asserta((s(_,_,_,_) :-nl)),user))) :-
 		{asserta_1_test_object::asserta((s(_,_,_,_) :- nl))}.
 
 	throws(asserta_1_12, error(permission_error(create, predicate_declaration, new/0), logtalk(asserta_1_test_object::asserta(new),user))) :-

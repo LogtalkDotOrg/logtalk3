@@ -55,18 +55,18 @@
 		plan_drive(Self, To, [], _, Route).
 
 	% go directly
-	plan_drive(From, To, _, Distance, From-To):-
+	plan_drive(From, To, _, Distance, From-To) :-
 		To::links(Links),
 		member((From, Distance), Links).
 
 	% go indirectly
-	plan_drive(From, To, R, D+DI, Route-To):-
+	plan_drive(From, To, R, D+DI, Route-To) :-
 		To::links(Links),
 		nearest(Links, From, Int, DI),
 		\+ member(Int, R),
 		plan_drive(From, Int, [To| R], D, Route).
 
-	nearest(Links, To, Int, Distance):-
+	nearest(Links, To, Int, Distance) :-
 		quick(metric(To))::sort(Links, Sorted),
 		member((Int, Distance), Sorted).
 

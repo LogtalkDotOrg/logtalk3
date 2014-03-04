@@ -99,19 +99,19 @@ maze_reverse([Head| Tail], List, Reversed, [_| Bound]) :-
 
 
 
-graph_path(X, Y, L):-
+graph_path(X, Y, L) :-
 	graph_path(X, Y, [X], L).
 
-graph_path(X, Y, L, [Y| L]):-
+graph_path(X, Y, L, [Y| L]) :-
 	\+ my_member(Y, L),
 	graph_edge(X, Y).
-graph_path(X, Y, L, R):-
+graph_path(X, Y, L, R) :-
 	graph_edge(X, Z),
 	Z =\= Y,
 	\+ my_member(Z, L),
 	graph_path(Z, Y, [Z| L], R).
 
-graph_edge(X, Y):-
+graph_edge(X, Y) :-
 	graph_node(X),
 	graph_node(Y),
 	X =\= Y.

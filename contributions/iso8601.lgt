@@ -571,7 +571,7 @@
 	% Purpose: Prepend or append a list of 0's (zeros) to a given list
 	% Called by: calendar_month/3
 
-	zeros(0,L,L):- !.
+	zeros(0,L,L) :- !.
 	zeros(DoW,Build,List) :-
 		Next is DoW - 1,
 		zeros(Next,[0|Build],List).
@@ -612,7 +612,7 @@
 	%==============================================================================
 	% easter_day(?Year, -Month, -Day)
 
-	easter_day(Year,Month,Day):-
+	easter_day(Year,Month,Day) :-
 		(nonvar(Year) -> true ; date(_,Year,_,_)),
 		Year > 1582,
 		A is Year mod 19,
@@ -630,7 +630,7 @@
 	% Purpose: Calculate intermediate values M and N
 	% Called by: easter_day/3
 
-	calc_M_and_N(Year,M,N):-
+	calc_M_and_N(Year,M,N) :-
 		T is Year // 100,
 		P is (13 + 8 * T) // 25,
 		Q is T // 4,
@@ -642,7 +642,7 @@
 	% Purpose: Calculate the Easter Sunday month and likely day
 	% Called by: easter_day/3
 
-	calc_month_and_day(R,4,Day):-  % April
+	calc_month_and_day(R,4,Day) :-  % April
 		R > 31,
 		!,
 		Day is R - 31.
@@ -653,9 +653,9 @@
 	% Purpose: Calculate the actual Easter Sunday
 	% Called by: easter_day/3
 
-	corr_day(_,4,_,29,6,19):-  % April, Gregorian exception 1
+	corr_day(_,4,_,29,6,19) :-  % April, Gregorian exception 1
 		!.
-	corr_day(_,4,A,28,6,18):-  % April, Gregorian exception 2
+	corr_day(_,4,A,28,6,18) :-  % April, Gregorian exception 2
 		A > 10,
 		!.
 	corr_day(Day,_,_,_,_,Day).  % Otherwise

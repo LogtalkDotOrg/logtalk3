@@ -154,13 +154,13 @@
 		Count2 is Count - 1,
 		run(Count2, MaxTime).
 
-	think(MaxTime):-
+	think(MaxTime) :-
 		this(Philosopher),
 		random(1, MaxTime, ThinkTime),
 		message(['Philosopher ', Philosopher, ' thinking for ', ThinkTime, ' seconds.']),
 		thread_sleep(ThinkTime).
 
-	eat(MaxTime):-
+	eat(MaxTime) :-
 		this(Philosopher),
 		random(1, MaxTime, EatTime),
 		::left_chopstick(LeftStick),
@@ -267,13 +267,13 @@
 		Count2 is Count - 1,
 		run(Count2, MaxTime).
 
-	think(MaxTime):-
+	think(MaxTime) :-
 		random(1, MaxTime, ThinkTime),
 		parameter(1, Philosopher),
 		message(['Philosopher ', Philosopher, ' thinking for ', ThinkTime, ' seconds.']),
 		thread_sleep(ThinkTime).
 
-	eat(MaxTime):-
+	eat(MaxTime) :-
 		random(1, MaxTime, EatTime),
 		parameter(2, LeftStick),
 		parameter(3, RightStick),

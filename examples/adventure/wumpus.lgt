@@ -210,7 +210,7 @@
 		retract(have(hay)),
 		retract(lit(hay)),
 		look.
-	goto(Place):-
+	goto(Place) :-
 		can_go(Place),
 		move(Place),
 		look.
@@ -218,15 +218,15 @@
 		write('Uh... I''m not sure how to do that.'), nl,
 		fail.
 
-	can_go(Place):-
+	can_go(Place) :-
 		in(X),
 		pathway(X, Place).
 
-	move(Place):-
+	move(Place) :-
 		retract(in(_)),
 		asserta(in(Place)).
 
-	take(X):-
+	take(X) :-
 		can_take(X),
 		take_object(X).
 
@@ -247,7 +247,7 @@
 		write('You can''t do that'),
 		nl, fail.
 
-	take_object(X):-
+	take_object(X) :-
 		retract(location(X, _)),
 		asserta(have(X)),
 		write('taken'), nl.
@@ -528,11 +528,11 @@
 		slain(wumpus),
 		write('Congratulations').
 
-	do(help):- (help), !.
-	do(goto(X)):- goto(X), !.
-	do(go(X)):- goto(X), !.
-	do(inventory):- inventory, !.
-	do(look):- look, !.
+	do(help) :- (help), !.
+	do(goto(X)) :- goto(X), !.
+	do(go(X)) :- goto(X), !.
+	do(inventory) :- inventory, !.
+	do(look) :- look, !.
 	do(take(X)) :- take(X), !.
 	do(talk(X)) :- talk(X), !.
 	do(fight(X)) :- fight(X), !.

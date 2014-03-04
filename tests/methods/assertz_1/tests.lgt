@@ -56,19 +56,19 @@
 	throws(assertz_1_6, error(permission_error(modify, protected_predicate, q/2), logtalk(assertz_1_test_object::assertz(q(_,_)),user))) :-
 		{assertz_1_test_object::assertz(q(_,_))}.
 
-	throws(assertz_1_7, error(permission_error(modify, protected_predicate, q/2), logtalk(assertz_1_test_object::assertz((q(_,_):-nl)),user))) :-
+	throws(assertz_1_7, error(permission_error(modify, protected_predicate, q/2), logtalk(assertz_1_test_object::assertz((q(_,_) :-nl)),user))) :-
 		{assertz_1_test_object::assertz((q(_,_) :- nl))}.
 
 	throws(assertz_1_8, error(permission_error(modify, private_predicate, r/3), logtalk(assertz_1_test_object::assertz(r(_,_,_)),user))) :-
 		{assertz_1_test_object::assertz(r(_,_,_))}.
 
-	throws(assertz_1_9, error(permission_error(modify, private_predicate, r/3), logtalk(assertz_1_test_object::assertz((r(_,_,_):-nl)),user))) :-
+	throws(assertz_1_9, error(permission_error(modify, private_predicate, r/3), logtalk(assertz_1_test_object::assertz((r(_,_,_) :-nl)),user))) :-
 		{assertz_1_test_object::assertz((r(_,_,_) :- nl))}.
 
 	throws(assertz_1_10, error(permission_error(modify, static_predicate, s/4), logtalk(assertz_1_test_object::assertz(s(_,_,_,_)),user))) :-
 		{assertz_1_test_object::assertz(s(_,_,_,_))}.
 
-	throws(assertz_1_11, error(permission_error(modify, static_predicate, s/4), logtalk(assertz_1_test_object::assertz((s(_,_,_,_):-nl)),user))) :-
+	throws(assertz_1_11, error(permission_error(modify, static_predicate, s/4), logtalk(assertz_1_test_object::assertz((s(_,_,_,_) :-nl)),user))) :-
 		{assertz_1_test_object::assertz((s(_,_,_,_) :- nl))}.
 
 	throws(assertz_1_12, error(permission_error(create, predicate_declaration, new/0), logtalk(assertz_1_test_object::assertz(new),user))) :-

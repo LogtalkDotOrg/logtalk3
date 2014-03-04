@@ -184,7 +184,7 @@
 		Y is V/L.
 
 	average([], U, V, U, V, L, L).
-	average([Town| Towns], UX, VX, U, V, I, L):-
+	average([Town| Towns], UX, VX, U, V, I, L) :-
 		Town::at(UT, VT),
 		UX2 is UX+UT,
 		VX2 is VX+VT,
@@ -261,7 +261,7 @@
 		permute(Towns3, Towns2).
 
 	delete([Head| Tail], Head, Tail).
-	delete([Head| Tail], Element, [Head| Tail2]):-
+	delete([Head| Tail], Element, [Head| Tail2]) :-
 		delete(Tail, Element, Tail2).
 
 	route_length(Town, 0) :-

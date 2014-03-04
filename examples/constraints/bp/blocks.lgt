@@ -26,7 +26,7 @@
 	go:-
 		go(1).
 
-	go(Prob):-
+	go(Prob) :-
 		T1 is cputime,
 		blocks(Prob,Blocks),
 		length(Blocks,N),
@@ -38,29 +38,29 @@
 		write('plan found in '),write(T), write('milliseconds'),nl,
 		write(Plan),nl.
 
-	find_best_plan(Prob,Len,N,Plan):-
+	find_best_plan(Prob,Len,N,Plan) :-
 		plan(Prob,Len,N,Plan),!.
-	find_best_plan(Prob,Len,N,Plan):-
+	find_best_plan(Prob,Len,N,Plan) :-
 		Len1 is Len+1,
 		find_best_plan(Prob,Len1,N,Plan).
 
 /*
-	find_best_plan(Prob,Len,N,Plan):-
+	find_best_plan(Prob,Len,N,Plan) :-
 		not(not(find_plan(Prob,Len,N,Plan))),!,
 		current_best_plan(CurBestPlan),
 		length(CurBestPlan,CurBestLen),
 		write(CurBestLen),write(' '),write(CurBestPlan),nl,
 		find_best_plan(Prob,CurBestLen,N,Plan).
-	find_best_plan(Prob,Len,N,Plan):-
+	find_best_plan(Prob,Len,N,Plan) :-
 		retract(current_best_plan(Plan)).
 
-	find_plan(Prob,Len,N,Plan):-
+	find_plan(Prob,Len,N,Plan) :-
 		plan(Prob,Len,N,Plan),!,
 		(retract(current_best_plan(_))->true;true),
 		assert(current_best_plan(Plan)).
 */
 
-	plan(Prob,Len,N,Plan):-
+	plan(Prob,Len,N,Plan) :-
 		generate_states(Prob,Len,States),
 		%
 		States=[InitState|States1],
@@ -74,17 +74,17 @@
 		label(MidStates),
 		extract_plan(States,Plan).
 
-	last_state([X],Last,Rest):-!,Rest=[],Last=X.
-	last_state([X|Xs],Last,[X|Rest]):-last_state(Xs,Last,Rest).
+	last_state([X],Last,Rest) :-!,Rest=[],Last=X.
+	last_state([X|Xs],Last,[X|Rest]) :-last_state(Xs,Last,Rest).
 
-	extract_plan([S1],Plan):-!,Plan=[].
-	extract_plan([S1,S2|States],Plan):-
+	extract_plan([S1],Plan) :-!,Plan=[].
+	extract_plan([S1,S2|States],Plan) :-
 		functor(S1,_,N),
 		add_moved_block(S1,S2,N,Plan,PlanR),
 		extract_plan([S2|States],PlanR).
  
-	add_moved_block(S1,S2,I,Plan,PlanR):-I=:=0,!,Plan=PlanR.
-	add_moved_block(S1,S2,I,Plan,PlanR):-
+	add_moved_block(S1,S2,I,Plan,PlanR) :-I=:=0,!,Plan=PlanR.
+	add_moved_block(S1,S2,I,Plan,PlanR) :-
 		arg(I,S1,block(_,Below1)),
 		arg(I,S2,block(_,Below2)),
 		(	Below1=\=Below2->Plan=[(I=>Below2)|PlanR]
@@ -93,7 +93,7 @@
 		).
 
 	% instantiate states forward.
-	label([State|States]):-
+	label([State|States]) :-
 		get_below_vars(State,BVars),
 		labeling_ffc(BVars),
 		label(States).
@@ -108,34 +108,34 @@
    the block i, respectively. Ai is 0 if the block is clear and Bi is 0 if the block 
    is on the table
 */
-	generate_states(Prob,N,States):-N>0,!,
+	generate_states(Prob,N,States) :-N>0,!,
 		States=[State|StatesR],
 		generate_state(Prob,State),
 		N1 is N-1,
 		generate_states(Prob,N1,StatesR).
-	generate_states(Prob,N,States):-States=[].
+	generate_states(Prob,N,States) :-States=[].
 
-	generate_state(Prob,State):-
+	generate_state(Prob,State) :-
 		blocks(Prob,Blocks),
 		length(Blocks,NBlocks),
 		functor(State,state,NBlocks),
 		declare_domains(State,1,NBlocks),
 		state_constraints(State).
 
-	declare_domains(State,I,N):-I>N,!.
-	declare_domains(State,I,N):-
+	declare_domains(State,I,N) :-I>N,!.
+	declare_domains(State,I,N) :-
 		arg(I,State,block(Above,Below)),
 		domain(Above,0,N), 
 		domain(Below,0,N), 
 		I1 is I+1,
 		declare_domains(State,I1,N).
 
-	get_below_vars(State,BVars):-
+	get_below_vars(State,BVars) :-
 		functor(State,_,N),
 		get_below_vars(N,State,BVars).
 
-	get_below_vars(I,State,BVars):-I=:=0,!,BVars=[].
-	get_below_vars(I,State,BVars):-BVars=[Below|BVarsR],
+	get_below_vars(I,State,BVars) :-I=:=0,!,BVars=[].
+	get_below_vars(I,State,BVars) :-BVars=[Below|BVarsR],
 		arg(I,State,block(_,Below)),
 		I1 is I-1,
 		get_below_vars(I1,State,BVarsR).
@@ -146,12 +146,12 @@
   (2) For each block, there is at most one block above it and there is 
 	  also at most one block below it.
 */
-	state_constraints(State):-
+	state_constraints(State) :-
 		functor(State,_,N),
 		state_constraints(State,1,N).
 
-	state_constraints(State,I,N):-I>N,!.
-	state_constraints(State,I,N):-
+	state_constraints(State,I,N) :-I>N,!.
+	state_constraints(State,I,N) :-
 		arg(I,State,block(Above,Below)),
 		below_relationship(Below,State,I),
 		above_relationship(Above,State,I),
@@ -160,11 +160,11 @@
 		state_constraints(State,I1,N).
 
 % if Below, which is not 0, is below I, then Below cannot be below any other blocks
-	only_one_below(Below,State,I,N):-
+	only_one_below(Below,State,I,N) :-
 		freeze(Below,(Below\== 0->outof_below(Below,State,I,N);true)).
 
-	outof_below(Below,State,I,J):-J=:=0,!.
-	outof_below(Below,State,I,J):-
+	outof_below(Below,State,I,J) :-J=:=0,!.
+	outof_below(Below,State,I,J) :-
 		(I=:=J->true;
 		 arg(J,State,block(AboveJ,BelowJ)),
 		 BelowJ #\= Below),
@@ -172,28 +172,28 @@
 		 outof_below(Below,State,I,J1).
 
 	% block J is below I, then I must be above Above J
-	below_relationship(J,State,I):-
+	below_relationship(J,State,I) :-
 		freeze(J,(J=\= 0->arg(J,State,block(AboveJ,BelowJ)),AboveJ=I;true)).
 
 	% block J is above I, then I must be below Above J
-	above_relationship(J,State,I):-
+	above_relationship(J,State,I) :-
 		freeze(J,(J=\=0->arg(J,State,block(AboveJ,BelowJ)),BelowJ=I;true)).
 
 	/*
 	  A transition from Si to Sj is valid if only one block that is clear in Si is moved.
 	*/
-	action_constraints([_],GoalState):-!.
-	action_constraints([S1,S2|States],GoalState):-
+	action_constraints([_],GoalState) :-!.
+	action_constraints([S1,S2|States],GoalState) :-
 		transition_constraint(S1,S2,GoalState),
 		action_constraints([S2|States],GoalState).
 
-	transition_constraint(S1,S2,GoalState):-
+	transition_constraint(S1,S2,GoalState) :-
 		functor(S1,_,N), % N blocks
 		transition_constraint(S1,S2,GoalState,1,N,0).
 
-	transition_constraint(S1,S2,GoalState,I,N,DiffBSum):-I>N,!,
+	transition_constraint(S1,S2,GoalState,I,N,DiffBSum) :-I>N,!,
 		DiffBSum #=< 1.  % at most one block is moved each time
-	transition_constraint(S1,S2,GoalState,I,N,DiffBSum):-
+	transition_constraint(S1,S2,GoalState,I,N,DiffBSum) :-
 		arg(I,S1,block(A1,B1)),
 		arg(I,S2,block(A2,B2)),
 		arg(I,GoalState,block(A3,B3)),
@@ -205,7 +205,7 @@
 		transition_constraint(S1,S2,GoalState,I1,N,DiffB+DiffBSum).
 
 	% block i is moved to block j only when block j is in its final position
-	block_in_final_position(I,S,GoalState):-
+	block_in_final_position(I,S,GoalState) :-
 		arg(I,S,block(A,B)),
 		arg(I,GoalState,block(A,B)),
 		(B=\=0->block_in_final_position(B,S,GoalState);true).
@@ -214,23 +214,23 @@
 	   No two states in a plan can be the same. Action constraints already guarantee that 
 	   any two neiboring states are different
 	*/
-	no_cycle_constraints([_]):-!.
-	no_cycle_constraints([_,_]):-!.
-	no_cycle_constraints([S1,S2|States]):-
+	no_cycle_constraints([_]) :-!.
+	no_cycle_constraints([_,_]) :-!.
+	no_cycle_constraints([S1,S2|States]) :-
 		no_cycle_constraints(S1,States),
 		no_cycle_constraints([S2|States]).
 
 	no_cycle_constraints(S1,[]).
-	no_cycle_constraints(S1,[S2|States]):-
+	no_cycle_constraints(S1,[S2|States]) :-
 		different_states(S1,S2),
 		no_cycle_constraints(S1,States).
 
-	different_states(S1,S2):-
+	different_states(S1,S2) :-
 		functor(S1,_,N),
 		different_states(N,S1,S2,0).
 
-	different_states(I,S1,S2,Sum):-I=:=0,!,Sum#\=0.
-	different_states(I,S1,S2,Sum):-
+	different_states(I,S1,S2,Sum) :-I=:=0,!,Sum#\=0.
+	different_states(I,S1,S2,Sum) :-
 		arg(I,S1,block(_,B1)),
 		arg(I,S2,block(_,B2)),
 		(B1#=B2 #<=> Same),
@@ -244,34 +244,34 @@
 	   on(B1,B2,S): block B1 is one Block B2 in state S.
 	*/
 	%%
-	clear(I,S):-
+	clear(I,S) :-
 		arg(I,S,block(Above,Below)),
 		Above=0.
 
-	on(I1,I2,S):-
+	on(I1,I2,S) :-
 		arg(I1,S,block(Above1,Below1)),
 		arg(I2,S,block(Above2,Below2)),
 		Above2=I1,
 		Below1=I2.
 
-	on_table(I,S):-
+	on_table(I,S) :-
 		arg(I,S,block(Above,Below)),
 		Below= 0.
 
 	%p-0
 	blocks(0,[1,2]).
-	initial(0,S):-
+	initial(0,S) :-
 		clear(1,S),
 		on(1,2,S),
 		on_table(2,S).
 
-	goal(0,S):-
+	goal(0,S) :-
 		on_table(1,S),
 		clear(2,S).
 
 	% p-1
 	blocks(01,[1,2,3,4,5,6,7,8,9]).
-	initial(01,S):-
+	initial(01,S) :-
 		clear(3,S),
 		clear(5,S),
 		clear(9,S),
@@ -285,7 +285,7 @@
 		on_table(4,S),
 		on_table(6,S).
 
-	goal(01,S):-
+	goal(01,S) :-
 		clear(1,S),
 		clear(2,S),
 		clear(8,S),
@@ -301,7 +301,7 @@
 
 	%p-2
 	blocks(2,[1,2,3,4,5,6,7,8,9,10,11]).
-	initial(2,S):-
+	initial(2,S) :-
 		clear(11,S),
 		clear(3,S),
 		clear(9,S),
@@ -316,7 +316,7 @@
 		on_table(1,S),
 		on_table(4,S),
 		on_table(6,S).
-	goal(2,S):-
+	goal(2,S) :-
 		clear(1,S),
 		clear(2,S),
 		clear(8,S),
@@ -334,7 +334,7 @@
 
 	%p3
 	blocks(3,[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]).
-	initial(3,S):-
+	initial(3,S) :-
 		clear(11,S),
 		clear(3,S),
 		clear(9,S),
@@ -353,7 +353,7 @@
 		on_table(13,S),
 		on_table(15,S),
 		on_table(6,S).
-	goal(3,S):-
+	goal(3,S) :-
 		clear(12,S),
 		clear(14,S),
 		clear(15,S),
@@ -375,7 +375,7 @@
 
 	%p4
 	blocks(4,[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]).
-	initial(4,S):-
+	initial(4,S) :-
 		clear(1,S),
 		clear(11,S),
 		clear(19,S),
@@ -400,7 +400,7 @@
 		on_table(2,S),
 		on_table(6,S).
 
-	goal(4,S):-
+	goal(4,S) :-
 		clear(12,S),
 		clear(15,S),
 		clear(17,S),

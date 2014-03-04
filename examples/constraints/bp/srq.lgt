@@ -44,7 +44,7 @@
 
 	:- private(iff/3).		% avoid spurious compilation warnings
 
-	srq(L):-
+	srq(L) :-
 		L=[A,B,C,D,E],
 
 	/* Defining domain variables and their domains */
@@ -181,7 +181,7 @@
 
 	/* eq/11 calculates the equality between two question in the SRQ */
 
-	eq(X1,X2,X3,X4,X5,Y1,Y2,Y3,Y4,Y5,Result):-
+	eq(X1,X2,X3,X4,X5,Y1,Y2,Y3,Y4,Y5,Result) :-
 		equiv(X1,Y1,Z1),equiv(X2,Y2,Z2),equiv(X3,Y3,Z3),equiv(X4,Y4,Z4),
 		equiv(X5,Y5,Z5),
 		and(Z1,Z2,Z12),and(Z3,Z4,Z34),and(Z12,Z34,Z1234),
@@ -197,15 +197,15 @@
 	/*DIFFERENT LABELING STRATEGY. Use the most appropiate in the solution */
 
 	/* Normal */
-	labeling_list([]):-!.
-	labeling_list([A|B]):-labeling(A),labeling_list(B).
+	labeling_list([]) :-!.
+	labeling_list([A|B]) :-labeling(A),labeling_list(B).
 
 	/*first fail heuristic*/
-	labelingff_list([]):-!.
-	labelingff_list([A|B]):-labelingff(A),labelingff_list(B).
+	labelingff_list([]) :-!.
+	labelingff_list([A|B]) :-labelingff(A),labelingff_list(B).
 
 	/*Smallest domain. Using deleteff */
-	labelingffc_list([]):-!.
-	labelingffc_list([A|B]):- labelingffc(A),labelingffc_list(B).
+	labelingffc_list([]) :-!.
+	labelingffc_list([A|B]) :- labelingffc(A),labelingffc_list(B).
 
 :- end_object.

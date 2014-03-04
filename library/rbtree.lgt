@@ -430,7 +430,7 @@
 		delete_next(Right, NewKey, NewValue, NewRight, Done0),
 		fixup_right(Done0, black(Left,NewKey,NewValue,NewRight), OUT, Done).
 
-	delete_next(red(black('',_,_,''),Key,Value,Right), Key, Value, Right, done) :- 	!.
+	delete_next(red(black('',_,_,''),Key,Value,Right), Key, Value, Right, done) :- !.
 	delete_next(black(black('',_,_,''),Key,Value,red(L1,K1,V1,R1)), Key, Value, black(L1,K1,V1,R1), done) :- !.
 	delete_next(black(black('',_,_,''),Key,Value,Right), Key, Value, Right, not_done) :- !.
 	delete_next(red(Left,Key,Value,Right), Key0, Value0, OUT, Done) :-
@@ -498,7 +498,7 @@
 		done) :- !.
 	fixup3(black(black(black(Fi,KE,VE,Ep),KD,VD,black(De,KC,VC,Ga)),KB,VB,black(Be,KA,VA,Al)),
 		black(red(black(Fi,KE,VE,Ep),KD,VD,black(De,KC,VC,Ga)),KB,VB,black(Be,KA,VA,Al)),
-		not_done):- !.
+		not_done) :- !.
 	%
 	% case 3: x stays put, shift left and do a 4
 	%

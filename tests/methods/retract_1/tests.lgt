@@ -67,20 +67,20 @@
 		{retract_1_test_object::retract(unknown(_))}.
 
 	succeeds(retract_1_9) :-
-		retract_1_test_object::retract((t(X):-true)),
+		retract_1_test_object::retract((t(X) :-true)),
 		X == 1,
-		retract_1_test_object::retract((t(2):-Body1)),
+		retract_1_test_object::retract((t(2) :-Body1)),
 		Body1 == t(1),
-		retract_1_test_object::retract((t(3):-Body2)),
+		retract_1_test_object::retract((t(3) :-Body2)),
 		Body2 == (t(1), t(2)).
 
 	succeeds(retract_1_10) :-
-		create_object(Object, [], [public(t/1), dynamic(t/1)], [t(1), (t(2):-t(1)), (t(3):-t(1),t(2))]),
-		Object::retract((t(X):-true)),
+		create_object(Object, [], [public(t/1), dynamic(t/1)], [t(1), (t(2) :-t(1)), (t(3) :-t(1),t(2))]),
+		Object::retract((t(X) :-true)),
 		X == 1,
-		Object::retract((t(2):-Body1)),
+		Object::retract((t(2) :-Body1)),
 		Body1 == t(1),
-		Object::retract((t(3):-Body2)),
+		Object::retract((t(3) :-Body2)),
 		Body2 == (t(1), t(2)),
 		abolish_object(Object).
 

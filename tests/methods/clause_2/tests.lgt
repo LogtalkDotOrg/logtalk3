@@ -72,7 +72,7 @@
 		Body2 == (t(1), t(2)).
 
 	succeeds(clause_2_9) :-
-		create_object(Object, [], [public(t/1), dynamic(t/1)], [t(1), (t(2):-t(1)), (t(3):-t(1),t(2))]),
+		create_object(Object, [], [public(t/1), dynamic(t/1)], [t(1), (t(2) :-t(1)), (t(3) :-t(1),t(2))]),
 		Object::clause(t(X), true),
 		X == 1,
 		Object::clause(t(2), Body1),

@@ -33,18 +33,18 @@
 		move(Disks, left, middle, right).
 
 
-	move(1, Left, _, Right):-
+	move(1, Left, _, Right) :-
 		!,
 		report(Left, Right).
 
-	move(Disks, Left, Aux, Right):-
+	move(Disks, Left, Aux, Right) :-
 		Disks2 is Disks - 1,
 		move(Disks2, Left, Right, Aux),
 		report(Left, Right),
 		move(Disks2, Aux, Left, Right).
 
 
-	report(Pole1, Pole2):-
+	report(Pole1, Pole2) :-
 		write('Move a disk from '),
 		writeq(Pole1),
 		write(' to '),

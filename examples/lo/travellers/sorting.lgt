@@ -24,19 +24,19 @@
 	:- mode(sort(+list, -list), one).
 
 	sort([], []).
-	sort([X| L], S):-
+	sort([X| L], S) :-
 		split(L, X, L1, L2),
 		sort(L1, S1),
 		sort(L2, S2),
 		app(S1, [X| S2], S).
 
 	split([], _, [], []).
-	split([D| L], X, [D| L1], L2):-
+	split([D| L], X, [D| L1], L2) :-
 		parameter(1, Order),
 		Order::less(D, X),
 		!,
 		split(L, X, L1, L2).
-	split([D| L], X, L1, [D| L2]):-
+	split([D| L], X, L1, [D| L2]) :-
 		split(L, X, L1, L2).
 
 	app([], L, L).
@@ -59,7 +59,7 @@
 
 	:- public(less/2).
 
-	less(X, Y):-
+	less(X, Y) :-
 		X >= Y.
 
 :- end_object.
@@ -80,7 +80,7 @@
 
 	:- public(less/2).
 
-	less(X, Y):-
+	less(X, Y) :-
 		X < Y.
 
 :- end_object.
@@ -99,7 +99,7 @@
 
 	:- public(less/2).
 
-	less(Town1, Town2):-
+	less(Town1, Town2) :-
 		angle(Town1, Angle1),
 		angle(Town2, Angle2),
 		Angle1 < Angle2.
@@ -162,7 +162,7 @@
 
 	:- public(less/2).
 
-	less((Town1, _), (Town2, _)):-
+	less((Town1, _), (Town2, _)) :-
 		parameter(1, Town),
 		Town::crow_flies(Town1, Distance1),
 		Town::crow_flies(Town2, Distance2),

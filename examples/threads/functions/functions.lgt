@@ -192,7 +192,7 @@
 	newton(_, Zero, Ac, Deviation, Zero) :-
 		abs(Ac) < Deviation,
 		!.
-	newton(Function, X0, Ac, Deviation, Zero):-
+	newton(Function, X0, Ac, Deviation, Zero) :-
 		Xn1 is X0 + Ac,
 		Function::eval(Xn1, Fx),
 		Function::evald(Xn1, DFx),

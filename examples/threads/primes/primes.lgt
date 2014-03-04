@@ -73,13 +73,13 @@
 		primes(N2, M, Acc, Primes2).
 
 	is_prime(2) :- !.
-	is_prime(Prime):-
+	is_prime(Prime) :-
 		Prime > 2,
 		Prime mod 2 =:= 1,
 		Sqrt is sqrt(Prime),
 		is_prime(3, Sqrt, Prime).
 
-	is_prime(N, Sqrt, Prime):-
+	is_prime(N, Sqrt, Prime) :-
 		(	N > Sqrt ->
 			true
 		;	Prime mod N > 0,

@@ -46,7 +46,7 @@
 		writeln(Rows).
 
 	sumRows([],_).
-	sumRows([Row|Rows],Sum):-
+	sumRows([Row|Rows],Sum) :-
 		sum(Row) #= Sum,
 		sumRows(Rows,Sum).
 

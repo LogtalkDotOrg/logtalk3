@@ -37,7 +37,7 @@
 		vertices(Vs),
 		clique(Vs,17).
 
-	clique(Vs,N):-
+	clique(Vs,N) :-
 		write(clique(N)),nl,
 		{list_to_set(Vs,VSet)},	 % list_to_set/2 is not declared built-in...
 		Clique in {}..VSet,
@@ -46,24 +46,24 @@
 		{set_to_list(Clique,List)}, % set_to_list/2 is not declared built-in...
 		all_connected(List),
 		write(Clique),nl.
-	clique(Vs,N):-
+	clique(Vs,N) :-
 		N1 is N-1,
 		clique(Vs,N1).
 
 	all_connected([]).
-	all_connected([V|Vs]):-
+	all_connected([V|Vs]) :-
 		all_connected(V,Vs),
 		all_connected(Vs).
 
 	all_connected(_,[]).
-	all_connected(V,[V1|Vs]):-
+	all_connected(V,[V1|Vs]) :-
 		connected(V,V1),
 		all_connected(V,Vs).
 
 	vertices([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]).
 
-	connected(X,Y):-edge(X,Y),!.
-	connected(X,Y):-edge(Y,X).
+	connected(X,Y) :-edge(X,Y),!.
+	connected(X,Y) :-edge(Y,X).
 
 	%% The database can be accessed fast if written in matching clause
 	% by taking advantage of the information that both arguments are input

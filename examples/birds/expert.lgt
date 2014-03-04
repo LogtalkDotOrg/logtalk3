@@ -49,80 +49,80 @@
 			 Bird::Predicate),
 			call(Predicate)).
 
-	bill(X):-
+	bill(X) :-
 		ask(bill, X).
 
-	cheek(X):-
+	cheek(X) :-
 		ask(cheek, X).
 
-	color(X):-
+	color(X) :-
 		ask(color, X).
 
-	eats(X):-
+	eats(X) :-
 		ask(eats, X).
 
-	feed(X):-
+	feed(X) :-
 		ask(feed,X).
 
-	feet(X):-
+	feet(X) :-
 		ask(feet, X).
 
-	flight(X):-
+	flight(X) :-
 		menuask(flight, X, [ponderous, powerful, agile, flap_glide, other]).
 
-	flight_profile(X):-
+	flight_profile(X) :-
 		menuask(flight_profile, X, [flat, v_shaped, other]).
 
-	head(X):-
+	head(X) :-
 		ask(head,X).
 
 	live(X) :-
 		ask(live, X).
 
-	neck(X):-
+	neck(X) :-
 		ask(neck, X).
 
-	nostrils(X):-
+	nostrils(X) :-
 		ask(nostrils, X).
 
-	size(X):-
+	size(X) :-
 		menuask(size, X, [large, plump, medium, small]).
 
-	tail(X):-
+	tail(X) :-
 		menuask(tail, X, [narrow_at_tip, forked, long_rusty, square, other]).
 
-	throat(X):-
+	throat(X) :-
 		ask(throat, X).
 
-	voice(X):-
+	voice(X) :-
 		ask(voice,X).
 
-	wings(X):-
+	wings(X) :-
 		ask(wings, X).
 
-	ask(Attribute, Value):-
+	ask(Attribute, Value) :-
 		::known_(yes, Attribute, Value),
 		!.
-	ask(Attribute, Value):-
+	ask(Attribute, Value) :-
 		::known_(_, Attribute, Value),
 		!, fail.
-	ask(Attribute, _):-
+	ask(Attribute, _) :-
 		::known_(yes, Attribute, _),
 		!, fail.
-	ask(Attribute, Value):-
+	ask(Attribute, Value) :-
 		write(Attribute), write(': '), write(Value),
 		write('? (yes or no): '),
 		read(Answer),
 		::asserta(known_(Answer, Attribute, Value)),
 		Answer = yes.
 
-	menuask(Attribute,Value, _):-
+	menuask(Attribute,Value, _) :-
 		::known_(yes, Attribute, Value),
 		!.
-	menuask(Attribute, _, _):-
+	menuask(Attribute, _, _) :-
 		::known_(yes, Attribute, _),
 		!, fail.
-	menuask(Attribute, AskValue, Menu):-
+	menuask(Attribute, AskValue, Menu) :-
 		nl, write('What is the value for '), write(Attribute), write('?'), nl,
 		display_menu(Menu),
 		write('Enter the number of choice> '),
@@ -131,16 +131,16 @@
 		::asserta(known_(yes,Attribute,AnswerValue)),
 		AskValue = AnswerValue.
 
-	display_menu(Menu):-
+	display_menu(Menu) :-
 		display_menu(Menu, 1).
 
 	display_menu([], _).
-	display_menu([Item| Rest], N):-
+	display_menu([Item| Rest], N) :-
 		write(N), write(' : '), write(Item), nl,
 		NN is N + 1,
 		display_menu(Rest, NN).
 
-	pick_menu(N, Val, Menu):-
+	pick_menu(N, Val, Menu) :-
 		integer(N),
 		pic_menu(1, N, Val, Menu),
 		!.
@@ -149,7 +149,7 @@
 
 	pic_menu(_, _, none_of_the_above, []).
 	pic_menu(N, N, Item, [Item| _]).
-	pic_menu(Ctr, N, Val, [_| Rest]):-
+	pic_menu(Ctr, N, Val, [_| Rest]) :-
 		NextCtr is Ctr + 1,
 		pic_menu(NextCtr, N, Val, Rest).
 

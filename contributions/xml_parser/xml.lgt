@@ -1195,12 +1195,12 @@
 			Namespaces,RemoveAttributePrefixes,Amp),
 		Context1 = context(tag(Tag),Preserve,Current,Default,Entities,
 			Namespaces,RemoveAttributePrefixes,Amp).
-	context_update( default_namespace, Context0, URI, Context1 ):-
+	context_update( default_namespace, Context0, URI, Context1 ) :-
 		Context0 = context(Element,Preserve,Current,_Default,Entities,
 			Namespaces,RemoveAttributePrefixes,Amp),
 		Context1 = context(Element,Preserve,Current,URI,Entities,
 			Namespaces,RemoveAttributePrefixes,Amp).
-	context_update( space_preserve, Context0, Boolean, Context1 ):-
+	context_update( space_preserve, Context0, Boolean, Context1 ) :-
 		Context0 = context(Element,_Preserve,Current,Default,Entities,
 			Namespaces,RemoveAttributePrefixes,Amp),
 		Context1 = context(Element,Boolean,Current,Default,Entities,

@@ -38,7 +38,7 @@
 
 	test(metainterpreters_3) :-
 		findall(X-Tree,database::proof_tree(p(X), Tree),Solutions),
-		Solutions == [1-(p(1):- (q(1, a):- (s(1):-true), (t(1, a):-true)), (r(a):-true)),2-(p(2):- (q(2, b):- (s(2):-true), (t(2, b):-true)), (r(b):-true))].
+		Solutions == [1-(p(1) :- (q(1, a) :- (s(1) :-true), (t(1, a) :-true)), (r(a) :-true)),2-(p(2) :- (q(2, b) :- (s(2) :-true), (t(2, b) :-true)), (r(b) :-true))].
 
 	test(metainterpreters_4) :-
 		findall(Weather, rules::prove(weather(Weather)),Solutions),

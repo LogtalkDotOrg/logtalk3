@@ -62,7 +62,7 @@ fsm([red-0-red, red-1-green, red-2-red,		% a simple finite state machine example
 		transition(Transitions, Event, Current, Next).
 
 	transition([Current-Event-Next| _], Event, Current, Next).
-	transition([_| Transitions], Event, Current, Next):-
+	transition([_| Transitions], Event, Current, Next) :-
 		transition(Transitions, Event, Current, Next).
 
 	final_state(State) :-

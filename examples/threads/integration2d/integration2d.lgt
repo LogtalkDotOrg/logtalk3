@@ -158,13 +158,13 @@
 		).
 
 	% split an interval into a list of intervals
-	split(Inf, Sup, N, Intervals):-
+	split(Inf, Sup, N, Intervals) :-
 		Width is (Sup - Inf) / N,
 		split(1, N, Width, Sup, Inf, Intervals).
 
 	split(N, N, _, Sup, Current, [Current-Sup]) :-
 		!.
-	split(I, N, Width, Sup, Current, [Current-Next| Intervals]):-
+	split(I, N, Width, Sup, Current, [Current-Next| Intervals]) :-
 		I2 is I + 1,
 		Next is Current + Width,
 		split(I2, N, Width, Sup, Next, Intervals).

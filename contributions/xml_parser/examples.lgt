@@ -347,7 +347,7 @@ range( [_Key-Datum|Pairs], [Datum|Data] ) :-
 /* minimum( +List, ?Min ) is true if Min is the least member of List in the
  * standard order.
  */
-minimum( [H|T], Min ):-
+minimum( [H|T], Min ) :-
 	minimum1( T, H, Min ).
 
 minimum1( [], Min, Min ).

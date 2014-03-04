@@ -69,7 +69,7 @@
 		\+ retractall_1_test_object::t(_).
 
 	succeeds(retractall_1_8) :-
-		create_object(Object, [], [public(t/1), dynamic(t/1)], [t(1), (t(2):-t(1)), (t(3):-t(1),t(2))]),
+		create_object(Object, [], [public(t/1), dynamic(t/1)], [t(1), (t(2) :-t(1)), (t(3) :-t(1),t(2))]),
 		Object::retractall(t(3)),
 		Object::t(1),
 		Object::t(2),

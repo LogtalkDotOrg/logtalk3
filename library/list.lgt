@@ -116,7 +116,7 @@
 			length(List, 0, Length)
 		).
 
-	make_list(N, List):-
+	make_list(N, List) :-
 		(	N =:= 0 ->
 			List = []
 		;	M is N-1,
@@ -381,13 +381,13 @@
 	split_aux(List, _, [], List).
 
 	sublist(List, List).
-	sublist(Sublist, [Head| Tail]):-
+	sublist(Sublist, [Head| Tail]) :-
 		sublist(Tail, Head, Sublist).
 
 	sublist(Sublist, _, Sublist).
-	sublist([Head| Tail], _, Sublist):-
+	sublist([Head| Tail], _, Sublist) :-
 		sublist(Tail, Head, Sublist).
-	sublist([Head| Tail], Element, [Element| Sublist]):-
+	sublist([Head| Tail], Element, [Element| Sublist]) :-
 		sublist(Tail, Head, Sublist).
 
 	subsequence([], [], []).

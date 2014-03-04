@@ -146,10 +146,10 @@
 		Acc2 is Acc + 1,
 		length(Tail-Back, Acc2, Length).
 
-	make_list(0, List):-
+	make_list(0, List) :-
 		!,
 		unify_with_occurs_check(List, Back-Back).
-	make_list(N, List-Back):-
+	make_list(N, List-Back) :-
 		List \== Back,
 		List = [_| Tail],
 		M is N-1,
@@ -370,18 +370,18 @@
 
 	sublist(Sublist, List) :-
 		unify_with_occurs_check(Sublist, List).
-	sublist(Sublist-Back, List-Back):-
+	sublist(Sublist-Back, List-Back) :-
 		List \== Back,
 		List = [Head| Tail],
 		sublist(Tail-Back, Head, Sublist-Back).
 
 	sublist(List, _, Sublist) :-
 		unify_with_occurs_check(List, Sublist).
-	sublist(List-Back, _, Sublist-Back):-
+	sublist(List-Back, _, Sublist-Back) :-
 		List \== Back,
 		List = [Head| Tail],
 		sublist(Tail-Back, Head, Sublist-Back).
-	sublist(List-Back, Element, [Element| Sublist]-Back):-
+	sublist(List-Back, Element, [Element| Sublist]-Back) :-
 		List \== Back,
 		List = [Head| Tail],
 		sublist(Tail-Back, Head, Sublist-Back).

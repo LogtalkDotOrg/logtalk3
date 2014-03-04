@@ -43,7 +43,7 @@ Problem taken from:
 		steiner(9).
 	top.
 
-	steiner(N):-
+	steiner(N) :-
 		NoSets is N*(N-1)//6,
 		length(Lsets,NoSets),
 		Lsets in {}..{1..N},
@@ -52,13 +52,13 @@ Problem taken from:
 		write(Lsets),nl.
 
 	constrain([]).
-	constrain([X|Xs]):-
+	constrain([X|Xs]) :-
 		#X #= 3,
 		constrain_pairs(X,Xs),
 		constrain(Xs).
 
 	constrain_pairs(_,[]).
-	constrain_pairs(X,[Y|Ys]):-
+	constrain_pairs(X,[Y|Ys]) :-
 		#(X /\ Y) #=< 1,
 		constrain_pairs(X,Ys).
 
