@@ -104,8 +104,8 @@
 			(	setof(
 					Calls-[Predicate,ChoicePoints,Instructions],
 					(member(Predicate-Calls, CallsData), Calls > 0,
-				 	member(Predicate-ChoicePoints, ChoicePointsData),
-				 	member(Predicate-Instructions, InstructionsData)),
+					member(Predicate-ChoicePoints, ChoicePointsData),
+					member(Predicate-Instructions, InstructionsData)),
 					Data) ->
 				write_profile_data(Data)
 			;	write_profile_data([])

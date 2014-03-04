@@ -25,19 +25,19 @@
 	]).
 
 	run :-
-	    write('Testing expand_term/2 predicate ...'), nl, nl,
-	    gr_tr_test(N, GR, Result),
-	    write(N), write(':  '), writeq(GR), write('  ---  '),
-	    write(Result), write(' expected'), nl,
-	    (    catch(
-	             expand_term(GR, Clause),
-	             Error,
-	             (write('  error: '), write(Error), nl, fail)) ->
-	         write('  '), writeq(Clause)
-	    ;    write('  expansion failed!')
-	    ),
-	    nl, nl, 
-	    fail. 
+		write('Testing expand_term/2 predicate ...'), nl, nl,
+		gr_tr_test(N, GR, Result),
+		write(N), write(':  '), writeq(GR), write('  ---  '),
+		write(Result), write(' expected'), nl,
+		(	catch(
+				expand_term(GR, Clause),
+				Error,
+				(write('  error: '), write(Error), nl, fail)) ->
+			write('  '), writeq(Clause)
+		;	write('  expansion failed!')
+		),
+		nl, nl,
+		fail.
 	run.
 
 	write_error(Error) :-

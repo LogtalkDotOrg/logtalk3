@@ -178,7 +178,7 @@
 			'Querying file last access date:' - file_property(foo, access_time(Time)) - {Time = 811042},
 			'Querying file modification date:' - file_property(foo, modification_time(Time)) - {Time = 811042},
 			'Querying file permissions:' - file_property(foo, permission(Permission)) - {Permission = read}
-	  ]]).
+	]]).
 
 	:- public(current_environment_variable/1).
 	:- mode(current_environment_variable(?atom), zero_or_more).
@@ -358,7 +358,7 @@
 			'Querying file extension:' - file_name_part(foo, extension(Extension)) - {Extension = ''},
 			'Querying file search pairs:' - file_name_part('http://user@www.prolog-standard.org/updates.cgi?date=today', search(Pairs)) - {Pairs = [date=today]},
 			'Querying file fragment:' - file_name_part('http://user@www.prolog-standard.org/updates.html#latest', fragment(Fragment)) - {Fragment = latest}
-	  ]]).
+	]]).
 
 	:- public(file_name_parts/2).
 	:- mode(file_name_parts(+atom, -list(compound)), one).

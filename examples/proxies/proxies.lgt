@@ -15,7 +15,7 @@
 :- object(circle(_Id, _Radius, _Color)).
 
 	:- public([
-	    id/1, radius/1, color/1,
+		id/1, radius/1, color/1,
 		area/1, perimeter/1,
 		print/0
 	]).
@@ -38,7 +38,7 @@
 		Perimeter is 2*3.14159265358979*Radius.
 
 	print :-
-	    id(Id), write('id: '), write(Id),
+		id(Id), write('id: '), write(Id),
 		area(Area), write(', area: '), write(Area),
 		perimeter(Perimeter), write(', perimeter: '), write(Perimeter),
 		color(Color), write(', color: '), write(Color), nl.

@@ -147,68 +147,68 @@
 	  also at most one block below it.
 */
 	state_constraints(State):-
-		 functor(State,_,N),
-		 state_constraints(State,1,N).
+		functor(State,_,N),
+		state_constraints(State,1,N).
 
 	state_constraints(State,I,N):-I>N,!.
 	state_constraints(State,I,N):-
-		 arg(I,State,block(Above,Below)),
-		 below_relationship(Below,State,I),
-		 above_relationship(Above,State,I),
-		 only_one_below(Below,State,I,N),
-		 I1 is I+1,
-		 state_constraints(State,I1,N).
+		arg(I,State,block(Above,Below)),
+		below_relationship(Below,State,I),
+		above_relationship(Above,State,I),
+		only_one_below(Below,State,I,N),
+		I1 is I+1,
+		state_constraints(State,I1,N).
 
 % if Below, which is not 0, is below I, then Below cannot be below any other blocks
 	only_one_below(Below,State,I,N):-
-		 freeze(Below,(Below\== 0->outof_below(Below,State,I,N);true)).
+		freeze(Below,(Below\== 0->outof_below(Below,State,I,N);true)).
 
 	outof_below(Below,State,I,J):-J=:=0,!.
 	outof_below(Below,State,I,J):-
-		 (I=:=J->true;
-		  arg(J,State,block(AboveJ,BelowJ)),
-		  BelowJ #\= Below),
+		(I=:=J->true;
+		 arg(J,State,block(AboveJ,BelowJ)),
+		 BelowJ #\= Below),
 		 J1 is J-1,
 		 outof_below(Below,State,I,J1).
 
 	% block J is below I, then I must be above Above J
 	below_relationship(J,State,I):-
-		 freeze(J,(J=\= 0->arg(J,State,block(AboveJ,BelowJ)),AboveJ=I;true)).
+		freeze(J,(J=\= 0->arg(J,State,block(AboveJ,BelowJ)),AboveJ=I;true)).
 
 	% block J is above I, then I must be below Above J
 	above_relationship(J,State,I):-
-		 freeze(J,(J=\=0->arg(J,State,block(AboveJ,BelowJ)),BelowJ=I;true)).
+		freeze(J,(J=\=0->arg(J,State,block(AboveJ,BelowJ)),BelowJ=I;true)).
 
 	/*
-	   A transition from Si to Sj is valid if only one block that is clear in Si is moved.
+	  A transition from Si to Sj is valid if only one block that is clear in Si is moved.
 	*/
 	action_constraints([_],GoalState):-!.
 	action_constraints([S1,S2|States],GoalState):-
-		  transition_constraint(S1,S2,GoalState),
-		  action_constraints([S2|States],GoalState).
+		transition_constraint(S1,S2,GoalState),
+		action_constraints([S2|States],GoalState).
 
 	transition_constraint(S1,S2,GoalState):-
-		  functor(S1,_,N), % N blocks
-		  transition_constraint(S1,S2,GoalState,1,N,0).
+		functor(S1,_,N), % N blocks
+		transition_constraint(S1,S2,GoalState,1,N,0).
 
 	transition_constraint(S1,S2,GoalState,I,N,DiffBSum):-I>N,!,
-		  DiffBSum #=< 1.  % at most one block is moved each time
+		DiffBSum #=< 1.  % at most one block is moved each time
 	transition_constraint(S1,S2,GoalState,I,N,DiffBSum):-
-		  arg(I,S1,block(A1,B1)),
-		  arg(I,S2,block(A2,B2)),
-		  arg(I,GoalState,block(A3,B3)),
-		  (B1#\=B2 #=> A1#=0 #/\A2#=0), % the moved block must be clear
-		  ((B1 #\= B2) #<=> DiffB),
-		  ((B #\=B2 #/\ B2#\=0) #=> B2#=B3), % make sure the move is required by the goal
-		  freeze(B1,freeze(B2,((B1=\=B2,B2=\=0)-> block_in_final_position(B2,S2,GoalState);true))),
-		  I1 is I+1,
-		  transition_constraint(S1,S2,GoalState,I1,N,DiffB+DiffBSum).
+		arg(I,S1,block(A1,B1)),
+		arg(I,S2,block(A2,B2)),
+		arg(I,GoalState,block(A3,B3)),
+		(B1#\=B2 #=> A1#=0 #/\A2#=0), % the moved block must be clear
+		((B1 #\= B2) #<=> DiffB),
+		((B #\=B2 #/\ B2#\=0) #=> B2#=B3), % make sure the move is required by the goal
+		freeze(B1,freeze(B2,((B1=\=B2,B2=\=0)-> block_in_final_position(B2,S2,GoalState);true))),
+		I1 is I+1,
+		transition_constraint(S1,S2,GoalState,I1,N,DiffB+DiffBSum).
 
 	% block i is moved to block j only when block j is in its final position
 	block_in_final_position(I,S,GoalState):-
-		  arg(I,S,block(A,B)),
-		  arg(I,GoalState,block(A,B)),
-		  (B=\=0->block_in_final_position(B,S,GoalState);true).
+		arg(I,S,block(A,B)),
+		arg(I,GoalState,block(A,B)),
+		(B=\=0->block_in_final_position(B,S,GoalState);true).
 
 	/* 
 	   No two states in a plan can be the same. Action constraints already guarantee that 
@@ -217,25 +217,25 @@
 	no_cycle_constraints([_]):-!.
 	no_cycle_constraints([_,_]):-!.
 	no_cycle_constraints([S1,S2|States]):-
-	   no_cycle_constraints(S1,States),
-	   no_cycle_constraints([S2|States]).
+		no_cycle_constraints(S1,States),
+		no_cycle_constraints([S2|States]).
 
 	no_cycle_constraints(S1,[]).
 	no_cycle_constraints(S1,[S2|States]):-
-	   different_states(S1,S2),
-	   no_cycle_constraints(S1,States).
+		different_states(S1,S2),
+		no_cycle_constraints(S1,States).
 
 	different_states(S1,S2):-
-	   functor(S1,_,N),
-	   different_states(N,S1,S2,0).
+		functor(S1,_,N),
+		different_states(N,S1,S2,0).
 
 	different_states(I,S1,S2,Sum):-I=:=0,!,Sum#\=0.
 	different_states(I,S1,S2,Sum):-
-		 arg(I,S1,block(_,B1)),
-		 arg(I,S2,block(_,B2)),
-		 (B1#=B2 #<=> Same),
-		 I1 is I-1,
-		 different_states(I1,S1,S2,Sum+Same).
+		arg(I,S1,block(_,B1)),
+		arg(I,S2,block(_,B2)),
+		(B1#=B2 #<=> Same),
+		I1 is I-1,
+		different_states(I1,S1,S2,Sum+Same).
 
 	/* 
 	   blocks are numbered 1,2,3, and so on. 
@@ -261,13 +261,13 @@
 	%p-0
 	blocks(0,[1,2]).
 	initial(0,S):-
-	   clear(1,S),
-	   on(1,2,S),
-	   on_table(2,S).
+		clear(1,S),
+		on(1,2,S),
+		on_table(2,S).
 
 	goal(0,S):-
-	   on_table(1,S),
-	   clear(2,S).
+		on_table(1,S),
+		clear(2,S).
 
 	% p-1
 	blocks(01,[1,2,3,4,5,6,7,8,9]).

@@ -32,15 +32,15 @@
 		argnames is ['Function', 'Integral']
 	]).
 
-	integral(circle,  -21.33333).
-	integral(poly6,     5.88698).
+	integral(circle,   -21.33333).
+	integral(poly6,      5.88698).
 	integral(i14,      11.947778).
-	integral(i15,	      7.7359).
+	integral(i15,         7.7359).
 	integral(bailey1,   0.765196).
-	integral(bailey2,   1.07664).
-	integral(bailey3,   3.17344).
-	integral(bailey4,   4.66927).
-	integral(bailey5,   1.82396).
+	integral(bailey2,    1.07664).
+	integral(bailey3,    3.17344).
+	integral(bailey4,    4.66927).
+	integral(bailey5,    1.82396).
 
 	% [-2,2-2,2]
 	% Integral = 21.33333

@@ -37,9 +37,9 @@
 		library_b_1::meta(goal).
 
 	goal :-
-	    write('goal meta-argument in object client'), nl.
+		write('goal meta-argument in object client'), nl.
 
 	local :-
-	    write('local predicate in object client'), nl.
+		write('local predicate in object client'), nl.
 
 :- end_object.

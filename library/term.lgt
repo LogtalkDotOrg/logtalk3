@@ -42,7 +42,7 @@
 		var(Var),
 		!,
 		(	Acc > MaxSoFar ->
-		 	Depth = Acc
+			Depth = Acc
 		;	Depth = MaxSoFar
 		).
 	depth(Atomic, Acc, MaxSoFar, Depth) :-

@@ -93,20 +93,20 @@
 
 	:- if(predicate_property(plus(_, _, _), built_in)).
 
-	    plus(I, J, Sum) :-
-	    	{plus(I, J, Sum)}.
+		plus(I, J, Sum) :-
+			{plus(I, J, Sum)}.
 
 	:- else.
 
-	    plus(I, J, Sum) :-
+		plus(I, J, Sum) :-
 			integer(I),
 			integer(J), !,
 			Sum is I + J.
-	    plus(I, J, Sum) :-
+		plus(I, J, Sum) :-
 			integer(I),
 			integer(Sum), !,
 			J is Sum - I.
-	    plus(I, J, Sum) :-
+		plus(I, J, Sum) :-
 			integer(J),
 			integer(Sum), !,
 			I is Sum - J.
@@ -127,7 +127,7 @@
 		succ(I, J) :-
 			integer(J),
 			(	J =:= 0 ->
-			   	fail
+				fail
 			;	J > 0,
 				I is J - 1
 			).

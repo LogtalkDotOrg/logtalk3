@@ -59,7 +59,7 @@
 	/*                                                                               */
 	/* fft(N, F, Ft) is true if the list Ft contains the Fourier transform of        */
 	/*   the N -- a power of two -- samples in the list F.  Each sample is a         */
-	/*   complex number represented by c(RealPart, ImaginaryPart).			         */
+	/*   complex number represented by c(RealPart, ImaginaryPart).                   */
 	st_fft(1, Ft, Ft) :-
 		!.
 	st_fft(N, F, Ft) :-
@@ -87,12 +87,12 @@
 	/* evens_and_odds(Xs, Evens, Odds) is true if Evens is the list of the	        */
 	/*   even-positioned elements of the list Xs, and Odds is the list of the       */
 	/*   odd-positioned elements of the list Xs, where the first element of Xs      */
-	/*   is considered to be at an even position.							        */
+	/*   is considered to be at an even position.                                   */
 	evens_and_odds([], [], []).
 	evens_and_odds([X| Xs], [X| Ys], Zs) :-
 		evens_and_odds(Xs, Zs, Ys).
 
-	/* sum(A, B, C) is true if C is the sum of the complex numbers A and B.	        */
+	/* sum(A, B, C) is true if C is the sum of the complex numbers A and B. */
 	sum(c(Ra, Ia), c(Rb, Ib), c(Rc, Ic)) :-
 		Rc is Ra + Rb,
 		Ic is Ia + Ib.
@@ -107,10 +107,10 @@
 		R is cos(2.0*pi/N),
 		I is sin(2.0*pi/N).
 
-	w(	   1, c( 1.0, 0.0)).
-	w(	   2, c(-1.0, 0.0)).
-	w(	   4, c( 0.0, 1.0)).
-	w(	   8, c( 0.707106781186548, 0.707106781186547)).
+	w(     1, c( 1.0, 0.0)).
+	w(     2, c(-1.0, 0.0)).
+	w(     4, c( 0.0, 1.0)).
+	w(     8, c( 0.707106781186548, 0.707106781186547)).
 	w(    16, c( 0.923879532511287, 0.382683432365090)).
 	w(    32, c( 0.980785280403230, 0.195090322016128)).
 	w(    64, c( 0.995184726672197, 0.098017140329561)).

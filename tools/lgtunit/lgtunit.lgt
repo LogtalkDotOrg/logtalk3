@@ -404,7 +404,7 @@
 			epsilon(Epsilon), abs(Float1 - Float2) < 100*Epsilon ->
 			true
 		;	% if that fails, test the relative error (protected by a catch/3 to avoid division errors)
-		 	% by using as the divisor the larger float in order to make argument order irrelevant:
+			% by using as the divisor the larger float in order to make argument order irrelevant:
 			abs(Float1) > abs(Float2) ->
 			catch(abs((Float1 - Float2) / Float1) < 0.00001, _, fail)	% 99.999% accuracy
 		;	catch(abs((Float1 - Float2) / Float2) < 0.00001, _, fail)

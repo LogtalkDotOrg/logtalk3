@@ -54,7 +54,7 @@
 		geometric_mean(Xs, Lacc2, Pacc2, Mean).
 
 	harmonic_mean([X| Xs], Mean) :-
-	    Sum is 1.0 / X,
+		Sum is 1.0 / X,
 		harmonic_mean(Xs, 1, Sum, Mean).
 
 	harmonic_mean([], Length, Sum, Mean) :-

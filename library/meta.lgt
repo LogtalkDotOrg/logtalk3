@@ -75,9 +75,9 @@
 	findall_member_([Head| Tail], Member, Test, Result) :-
 		\+ (Head = Member, call(Test)),
 		!,
-	    findall_member_(Tail, Member, Test, Result).
+		findall_member_(Tail, Member, Test, Result).
 	findall_member_([Head| Tail], Member, Test, [Head| Result]) :-
-	    findall_member_(Tail, Member, Test, Result).
+		findall_member_(Tail, Member, Test, Result).
 
 	:- meta_predicate(findall_member(*, *, 0, *)).
 	findall_member(Member, List, Test, Result) :-
@@ -86,11 +86,11 @@
 	:- meta_predicate(findall_member_(*, *, 0, *, *)).
 	findall_member_([], _, _, Result, Result).
 	findall_member_([Head| Tail], Member, Test, Result0, Result) :-
-	    \+ (Head = Member, call(Test)),
-	    !,
-	    findall_member_(Tail, Member, Test, Result0, Result).
+		\+ (Head = Member, call(Test)),
+		!,
+		findall_member_(Tail, Member, Test, Result0, Result).
 	findall_member_([Head| Tail], Member, Test, [Head| Result0], Result) :-
-	    findall_member_(Tail, Member, Test, Result0, Result).
+		findall_member_(Tail, Member, Test, Result0, Result).
 
 	:- meta_predicate(findall_member(*, *, 0, *, *)).
 	findall_member(Member, List, Test, Result, Tail) :-

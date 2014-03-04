@@ -69,7 +69,7 @@
 			Primes = [N| Primes2]
 		;	Primes = Primes2
 		),
-	    N2 is N + 1,
+		N2 is N + 1,
 		primes(N2, M, Acc, Primes2).
 
 	is_prime(2) :- !.

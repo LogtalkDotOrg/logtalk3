@@ -40,8 +40,8 @@
 
 	path(bedroom, n, den) :- lit(bedroom).
 	path(bedroom, n, den) :-
-	    write('You trip over something in the dark.'), nl,
-	    !, fail.
+		write('You trip over something in the dark.'), nl,
+		!, fail.
 	path(den, s, bedroom).
 
 	path(bedroom, d, bed).
@@ -69,17 +69,17 @@
 	/* These rules describe how to pick up an object. */
 
 	take(fly) :-
-	    write('It is too fast for you!'), nl,
+		write('It is too fast for you!'), nl,
 		nl,
-	    !, fail.
+		!, fail.
 
 	take('light switch') :-
-	    take(switch).
+		take(switch).
 
 	take(switch) :-
-	    write('It is firmly embedded in the wall!'), nl,
+		write('It is firmly embedded in the wall!'), nl,
 		nl,
-	    !, fail.
+		!, fail.
 
 	take(X) :-
 		(	i_am_holding(X) ->
@@ -151,9 +151,9 @@
 	/* These rules set up a loop to mention all the objects in your vicinity. */
 
 	notice_objects_at(Place) :-
-	    lit(Place),
+		lit(Place),
 		at(X, Place),
-	    visible_object(X),
+		visible_object(X),
 		write('There is a '), write(X), write(' here.'), nl,
 		fail.
 
@@ -164,16 +164,16 @@
 	/* These rules are specific to this particular game. */
 
 	use(flyswatter) :-
-	    swat(fly).
+		swat(fly).
 
 	use(bed) :-
-	    i_am_at(bedroom),
-	    go(d).
+		i_am_at(bedroom),
+		go(d).
 
 	use(bed) :-
-	    write('It is in the bedroom!'), nl,
+		write('It is in the bedroom!'), nl,
 		nl,
-	    !, fail.
+		!, fail.
 
 	use(switch) :-
 		(	i_am_at(Place),	lit(Place) ->
@@ -182,31 +182,31 @@
 		).
 
 	on :-
-	    i_am_at(bed),
-	    write('You can not reach the light switch from here.'), nl,
+		i_am_at(bed),
+		write('You can not reach the light switch from here.'), nl,
 		nl,
-	    !, fail.
+		!, fail.
 
 	on :-
-	    i_am_at(Place),
-	    lit(Place),
+		i_am_at(Place),
+		lit(Place),
 		!,
-	    write('The lights are already on.'), nl,
+		write('The lights are already on.'), nl,
 		nl.
 
 	on :-
-	    i_am_at(Place),
-	    assertz(lit(Place)),
-	    write('The room lights come on.'), nl,
-	    optional_buzz_off,
+		i_am_at(Place),
+		assertz(lit(Place)),
+		write('The room lights come on.'), nl,
+		optional_buzz_off,
 		!,
-	    look.
+		look.
 
 	off :-
-	    i_am_at(bed),
-	    write('You can not reach the light switch from here.'), nl,
+		i_am_at(bed),
+		write('You can not reach the light switch from here.'), nl,
 		nl,
-	    !, fail.
+		!, fail.
 
 	off :-
 		i_am_at(Place),
@@ -216,67 +216,67 @@
 		write('It is now dark in here.'), nl.
 
 	off :-
-	    write('The lights are already off.'), nl.
+		write('The lights are already off.'), nl.
 
 	sleep :-
-	    \+ i_am_at(bed),
-	    write('You find it hard to sleep standing up.'), nl,
+		\+ i_am_at(bed),
+		write('You find it hard to sleep standing up.'), nl,
 		nl,
-	    !, fail.
+		!, fail.
 
 	sleep :-
-	    lit(bedroom),
-	    write('You can not get to sleep with the light on.'), nl,
+		lit(bedroom),
+		write('You can not get to sleep with the light on.'), nl,
 		nl,
-	    !, fail.
+		!, fail.
 
 	sleep :-
-	    lit(den),
-	    write('The light from the den is keeping you awake.'), nl,
+		lit(den),
+		write('The light from the den is keeping you awake.'), nl,
 		nl,
-	    !, fail.
+		!, fail.
 
 	sleep :- 
-	    (i_am_holding(flyswatter); at(flyswatter, bed)),
-	    write('What? Sleep with a dirty old flyswatter?'), nl,
+		(i_am_holding(flyswatter); at(flyswatter, bed)),
+		write('What? Sleep with a dirty old flyswatter?'), nl,
 		nl,
-	    !, fail.
+		!, fail.
 
 	sleep :-
-	    alive(fly),
-	    write('As soon as you start to doze off, a fly lands'), nl,
-	    write('on your face and wakes you up again.'), nl,
+		alive(fly),
+		write('As soon as you start to doze off, a fly lands'), nl,
+		write('on your face and wakes you up again.'), nl,
 		nl,
-	    make_visible(fly),
-	    make_visible(flyswatter),
-	    !, fail.
+		make_visible(fly),
+		make_visible(flyswatter),
+		!, fail.
 
 	sleep :-
-	    write('Ahhh...you (yawn) made...it...zzzzzzzz.'), nl,
+		write('Ahhh...you (yawn) made...it...zzzzzzzz.'), nl,
 		nl,
-	    finish.
+		finish.
 
 	swat(fly) :-
-	    swat.
+		swat.
 
 	swat :-
-	    i_am_at(Place),
-	    \+ lit(Place),
-	    write('You flail aimlessly in the dark!'), nl.
+		i_am_at(Place),
+		\+ lit(Place),
+		write('You flail aimlessly in the dark!'), nl.
 
 	swat :-
-	    \+ i_am_holding(flyswatter),
-	    write('You are not holding the flyswatter.'), nl,
-	    !, fail.
+		\+ i_am_holding(flyswatter),
+		write('You are not holding the flyswatter.'), nl,
+		!, fail.
 
 	swat :-
-	    \+ alive(fly),
-	    write('He is dead, Jim.'), nl.
+		\+ alive(fly),
+		write('He is dead, Jim.'), nl.
 
 	swat :-
-	    i_am_at(Place),
-	    \+ at(fly, Place),
-	    write('You swish the flyswatter through the air.'), nl.
+		i_am_at(Place),
+		\+ at(fly, Place),
+		write('You swish the flyswatter through the air.'), nl.
 
 	/* Have flyswatter, room is lit, fly is here and alive. */
 

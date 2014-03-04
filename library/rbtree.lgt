@@ -489,7 +489,7 @@
 	%
 	fixup3(black(red(black(Fi,KE,VE,Ep),KD,VD,black(De,KC,VC,Ga)),KB,VB,black(Be,KA,VA,Al)),
 		black(black(Fi,KE,VE,Ep),KD,VD,T1),done) :- !,
-	        fixup3(red(black(De,KC,VC,Ga),KB,VB,black(Be,KA,VA,Al)),T1,_).
+		fixup3(red(black(De,KC,VC,Ga),KB,VB,black(Be,KA,VA,Al)),T1,_).
 	%
 	% case 2: x moves up, change one to red
 	%
@@ -616,7 +616,7 @@
 			NewRight = Right, NewValue = Value, MapF = []
 		;	MapI = [K1| MapR],
 			(	Key == K1 ->
-		    	(	call(Closure, Key-Value, Key-NewValue) ->
+				(	call(Closure, Key-Value, Key-NewValue) ->
 					true
 				;	NewValue = Value
 				),

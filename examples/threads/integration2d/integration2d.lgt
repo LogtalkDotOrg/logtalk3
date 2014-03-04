@@ -63,7 +63,7 @@
 		^^interval_volume(Function, MiddleX, B,       MiddleY, D,       NP, NP, 0.0, Volume4),
 		Error is abs(Volume-Volume1-Volume2-Volume3-Volume4),
 		(	Error > Epsilon ->
-		    Epsilon4 is Epsilon/4.0,
+			Epsilon4 is Epsilon/4.0,
 			quadrature(Threads, Function, A,       MiddleX, C,       MiddleY, Volume1, NP, Epsilon4, I1),
 			quadrature(Threads, Function, MiddleX, B,       C,       MiddleY, Volume2, NP, Epsilon4, I2),
 			quadrature(Threads, Function, A,       MiddleX, MiddleY, D,       Volume3, NP, Epsilon4, I3),
@@ -149,7 +149,7 @@
 		(	Threads =:= 1 ->
 			start(Function, A, B, C, D, NP, Epsilon, Integral)
 		;	% Threads > 1
-		    Threads2 is round(sqrt(Threads)),
+			Threads2 is round(sqrt(Threads)),
 			Epsilon2 is Epsilon/Threads,
 			split(A, B, Threads2, ABIntervals),
 			split(C, D, Threads2, CDIntervals),

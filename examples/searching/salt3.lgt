@@ -82,21 +82,19 @@ Remarks:
 		(X + Y >= MaxX ->
 			W = MaxX,
 			Z is Y - (MaxX - X)
-			;
-			W is X + Y,
+		;	W is X + Y,
 			Z = 0
-		 ).
+		).
 	next_state((Acc, X, Y, _), (Acc, W, Z, transfer(m1, m2)), 1) :-
 		parameter(3, MaxY),
 		X > 0,
 		Y < MaxY,
-		(X + Y >= MaxY ->
+		(	X + Y >= MaxY ->
 			W is X - (MaxY - Y),
 			Z = MaxY
-			;
-			W = 0,
+		;	W = 0,
 			Z is X + Y
-		 ).
+		).
 
 	% throwing out the contents of a measure; does not afect the accumulator
 	next_state((Acc, X, Y, Step), (Acc, 0, Y, empty(m1)), 1) :-

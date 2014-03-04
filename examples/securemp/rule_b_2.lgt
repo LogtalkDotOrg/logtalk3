@@ -32,6 +32,6 @@
 		library_b_2::pred(term).
 
 	term :-
-	    write('local predicate in object client'), nl.
+		write('local predicate in object client'), nl.
 
 :- end_object.

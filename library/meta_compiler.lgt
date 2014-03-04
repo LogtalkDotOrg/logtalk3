@@ -112,9 +112,9 @@
 				(findall_member_([GHead| GTail], GMember, GArgs, GResult) :-
 					\+ (GHead = GMember, GGoal),
 					!,
-	    			findall_member_(GTail, GMember, GArgs, GResult)),
+					findall_member_(GTail, GMember, GArgs, GResult)),
 				(findall_member_([GHead| GTail], GMember, GArgs, [GHead| GResult]) :-
-	    			findall_member_(GTail, GMember, GArgs, GResult))
+					findall_member_(GTail, GMember, GArgs, GResult))
 				],
 			replace_functor([findall_member_(List, Member, Args, Result)| Clauses0], findall_member_, AuxFunctor, [ExpandedGoal| Clauses]),
 			logtalk::compile_aux_clauses(Clauses),
