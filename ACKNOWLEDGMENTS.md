@@ -82,6 +82,12 @@ Contact us also if, for some reason, you don't want your name on this
 list.
 
 
+RESEARCH SUPPORT
+================
+
+Center for Research in Advanced Computing Systems (CRACS), INESC TEC, Portugal
+
+
 SPONSORS
 ========
 
