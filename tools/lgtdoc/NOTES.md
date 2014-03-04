@@ -52,7 +52,9 @@ source code file, a library of source files, or all loaded source
 files. The documenting predicates allows you to set several options
 for the XML files, including the output directory. To consult the
 documentation of the `lgtdoc` tool, open the `docs/tools.html` file
-in a web browser.
+in a web browser. The `lgtdoc/xml` directory includes several ready
+to use scripts for converting the XML documenting files to e.g. PDF
+or (X)HTML. See the `lgtdoc/xml/NOTES.md` for details.
 
 All source files are formatted using tabs (the recommended setting
 is a tab width equivalent to 4 spaces).
