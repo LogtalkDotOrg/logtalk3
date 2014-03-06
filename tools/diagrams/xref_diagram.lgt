@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/02/05,
+		date is 2014/03/06,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format']
 	]).
@@ -65,7 +65,7 @@
 		^^linking_options(Path, Options, GraphOptions),
 		Format::graph_header(output_file, Identifier, Name, entity, GraphOptions),
 		process(Kind, Entity, Options),
-		output_externals(Options),
+		output_external_predicates(Options),
 		^^output_edges(Options),
 		Format::graph_footer(output_file, Identifier, Name, entity, GraphOptions),
 		Format::file_footer(output_file, Identifier, Options),
@@ -133,18 +133,18 @@
 		;	assertz(external_predicate_(Predicate))
 		).
 
-	output_externals(Options) :-
+	output_external_predicates(Options) :-
 		^^format_object(Format),
 		Format::graph_header(output_file, other, '(external predicates)', external, [tooltip('(external predicates)')| Options]),
 		retract(external_predicate_(Object::Predicate)),
 		^^ground_entity_identifier(object, Object, Name),
 		^^output_node(Name::Predicate, Name::Predicate, [], external_predicate, Options),
 		fail.
-	output_externals(Options) :-
+	output_external_predicates(Options) :-
 		retract(external_predicate_(':'(Module,Predicate))),
 		^^output_node(':'(Module,Predicate), ':'(Module,Predicate), [], external_predicate, Options),
 		fail.
-	output_externals(Options) :-
+	output_external_predicates(Options) :-
 		^^format_object(Format),
 		Format::graph_footer(output_file, other, '(external predicates)', external, [tooltip('(external predicates)')| Options]).
 

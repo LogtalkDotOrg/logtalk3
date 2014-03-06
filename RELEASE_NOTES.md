@@ -58,6 +58,9 @@ code of `1` when there are failed unit tests.
 the lack of support for character escapes in some back-end compilers, that
 would result in DOT warnings. Thanks to Sergio Castro for the bug report.
 
+* FIXED: Bug in the `diagrams` tool where cross-reference diagrams would not
+display external entities correctly.
+ 
 
 3.00.0 Alpha 36 - February 26, 2014
 ===================================
