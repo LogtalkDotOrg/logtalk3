@@ -889,7 +889,8 @@ protocol_property(Ptc, Prop) :-
 
 '$lgt_object_property_declares'(Obj, Dcl, DDcl, EntityFlags, Functor/Arity, Properties) :-
 	(	call(Dcl, Predicate, Scope0, Meta, Flags)
-	;	EntityFlags /\ 128 =:= 128,	% dynamic predicate declarations enabled
+	;	EntityFlags /\ 128 =:= 128,
+		% dynamic predicate declarations enabled
 		call(DDcl, Predicate, Scope0),
 		Meta = no,
 		Flags = 2
@@ -2244,7 +2245,7 @@ logtalk_load_context(stream, Stream) :-
 
 % set_logtalk_flag(+atom, +nonvar)
 %
-% sets a Logtalk flag
+% sets a Logtalk global flag
 
 set_logtalk_flag(Name, Value) :-
 	'$lgt_must_be'(read_write_flag, Name, logtalk(set_logtalk_flag(Name, Value), _)),
@@ -2280,9 +2281,10 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_version_data'(?compound)
 %
-% current Logtalk version for use with the current_logtalk_flag/2 predicate;
-% the last argument is an atom: 'aXX' for alpha versions, 'bXX' for beta
-% versions, and 'stable' for stable versions
+% current Logtalk version for use with the current_logtalk_flag/2 predicate
+%
+% the last argument is an atom: 'aN' for alpha versions, 'bN' for beta versions
+% (with N being a natural number), and 'stable' for stable versions
 
 '$lgt_version_data'(logtalk(3, 0, 0, b1)).
 
@@ -6445,8 +6447,8 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_tr_file_directive'(@nonvar, +compilation_context)
 %
-% translates file-level directives, i.e. directives that are not encapsulated in a Logtalk entity
-% error-checking is delegated in most cases to the back-end Prolog compiler
+% translates file-level directives, i.e. directives that are not encapsulated in a Logtalk
+% entity error-checking is delegated in most cases to the back-end Prolog compiler
 
 '$lgt_tr_file_directive'(encoding(_), _) :-
 	% the encoding/1 directive is already processed
@@ -6555,6 +6557,8 @@ current_logtalk_flag(Flag, Value) :-
 %
 % translates a Logtalk directive and its (possibly empty) list of arguments
 
+% object opening and closing directives
+
 '$lgt_tr_logtalk_directive'(object(Obj), Ctx) :-
 	'$lgt_tr_logtalk_directive'(object_(Obj, []), Ctx).
 
@@ -6614,6 +6618,7 @@ current_logtalk_flag(Flag, Value) :-
 		throw(existence_error(directive, object/1))
 	).
 
+% protocol opening and closing directives
 
 '$lgt_tr_logtalk_directive'(protocol(Ptc), Ctx) :-
 	'$lgt_tr_logtalk_directive'(protocol_(Ptc, []), Ctx).
@@ -6663,6 +6668,7 @@ current_logtalk_flag(Flag, Value) :-
 		throw(existence_error(directive, protocol/1))
 	).
 
+% category opening and closing directives
 
 '$lgt_tr_logtalk_directive'(category(Ctg), Ctx) :-
 	'$lgt_tr_logtalk_directive'(category_(Ctg, []), Ctx).
@@ -6715,7 +6721,6 @@ current_logtalk_flag(Flag, Value) :-
 		throw(existence_error(directive, category/1))
 	).
 
-
 % compile modules as objects
 
 '$lgt_tr_logtalk_directive'(module(Module), Ctx) :-
@@ -6736,7 +6741,6 @@ current_logtalk_flag(Flag, Value) :-
 	% make the export list public predicates
 	'$lgt_tr_logtalk_directive'(public(Exports), Ctx).
 
-
 % set_logtalk_flag/2 entity directive
 
 '$lgt_tr_logtalk_directive'(set_logtalk_flag(Flag, Value), Ctx) :-
@@ -6746,12 +6750,10 @@ current_logtalk_flag(Flag, Value) :-
 	assertz('$lgt_pp_entity_compiler_flag_'(Flag, Value)),
 	'$lgt_check_for_renamed_flag'(Flag, Ctx).
 
-
 % declare an entity as built-in
 
 '$lgt_tr_logtalk_directive'(built_in, _) :-
 	assertz('$lgt_pp_built_in_').
-
 
 % create a message queue at object initialization
 
@@ -6762,7 +6764,6 @@ current_logtalk_flag(Flag, Value) :-
 		assertz('$lgt_pp_threaded_')
 	;	throw(domain_error(object_directive, threaded/0))
 	).
-
 
 % make all object (or category) predicates synchronized using the same mutex
 %
@@ -6780,14 +6781,12 @@ current_logtalk_flag(Flag, Value) :-
 	;	true
 	).
 
-
 % dynamic/0 entity directive
 %
 % (entities are static by default but can be declared dynamic using this directive)
 
 '$lgt_tr_logtalk_directive'((dynamic), _) :-
 	assertz('$lgt_pp_dynamic_').
-
 
 % initialization/1 entity directive
 
@@ -6803,13 +6802,11 @@ current_logtalk_flag(Flag, Value) :-
 	;	assertz('$lgt_pp_entity_initialization_'(TGoal))
 	).
 
-
 % op/3 entity directive (operators are local to entities)
 
 '$lgt_tr_logtalk_directive'(op(Priority, Specifier, Operators), _) :-
 	'$lgt_must_be'(operator_specification, op(Priority, Specifier, Operators)),
 	'$lgt_activate_entity_operators'(Priority, Specifier, Operators, l).
-
 
 % uses/2 entity directive
 
@@ -6818,8 +6815,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_add_referenced_object'(Obj),
 	'$lgt_tr_uses_directive'(Resources, Resources, Obj, Ctx).
 
-
-% uses/1 entity directive
+% uses/1 entity directive (deprecated)
 
 '$lgt_tr_logtalk_directive'(uses(Obj), Ctx) :-
 	'$lgt_must_be'(object_identifier, Obj),
@@ -6830,7 +6826,6 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_print_message'(warning(general), core, deprecated_directive(Path, Lines, Type, Entity, uses/1))
 	;	true
 	).
-
 
 % use_module/2 module directive
 
@@ -6845,7 +6840,6 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_tr_use_module_directive'(Imports, Module, Ctx)
 	).
 
-
 % reexport/2 module directive
 
 '$lgt_tr_logtalk_directive'(reexport(Module, Exports), Ctx) :-
@@ -6856,8 +6850,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_must_be'(list, Exports),
 	'$lgt_tr_reexport_directive'(Exports, Module, Ctx).
 
-
-% calls/1 entity directive
+% calls/1 entity directive (deprecated)
 
 '$lgt_tr_logtalk_directive'(calls(Ptcs), Ctx) :-
 	'$lgt_flatten_list'([Ptcs], PtcsFlatted),
@@ -6869,13 +6862,11 @@ current_logtalk_flag(Flag, Value) :-
 	;	true
 	).
 
-
 % info/1 entity directive
 
 '$lgt_tr_logtalk_directive'(info(Pairs), _) :-
 	'$lgt_tr_entity_info_directive'(Pairs, TPairs),
 	assertz('$lgt_pp_info_'(TPairs)).
-
 
 % info/2 predicate directive
 
@@ -6887,7 +6878,6 @@ current_logtalk_flag(Flag, Value) :-
 		throw(instantiation_error)
 	;	throw(type_error(predicate_indicator, Pred))
 	).
-
 
 % synchronized/1 predicate directive
 %
@@ -6913,7 +6903,6 @@ current_logtalk_flag(Flag, Value) :-
 		true
 	).
 
-
 % scope directives
 
 '$lgt_tr_logtalk_directive'(public(Resources), _) :-
@@ -6928,7 +6917,6 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_flatten_list'([Resources], ResourcesFlatted),
 	'$lgt_tr_private_directive'(ResourcesFlatted).
 
-
 % export/1 module directive
 %
 % module exported predicates are compiled as object public predicates
@@ -6939,16 +6927,17 @@ current_logtalk_flag(Flag, Value) :-
 	% make the export list public resources
 	'$lgt_tr_logtalk_directive'(public(Exports), Ctx).
 
+% dynamic/1 and discontiguous/1 predicate directives
 
 '$lgt_tr_logtalk_directive'(dynamic(Resources), _) :-
 	'$lgt_flatten_list'([Resources], ResourcesFlatted),
 	'$lgt_tr_dynamic_directive'(ResourcesFlatted).
 
-
 '$lgt_tr_logtalk_directive'(discontiguous(Resources), _) :-
 	'$lgt_flatten_list'([Resources], ResourcesFlatted),
 	'$lgt_tr_discontiguous_directive'(ResourcesFlatted).
 
+% meta_predicate/2 and meta_non_terminal/1 predicate directives
 
 '$lgt_tr_logtalk_directive'(meta_predicate(Preds), _) :-
 	'$lgt_flatten_list'([Preds], PredsFlatted),
@@ -6963,6 +6952,8 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_logtalk_directive'(meta_non_terminal(Preds), _) :-
 	'$lgt_flatten_list'([Preds], PredsFlatted),
 	'$lgt_tr_meta_non_terminal_directive'(PredsFlatted).
+
+% mode/2 predicate directive
 
 '$lgt_tr_logtalk_directive'(mode(Mode, Solutions), _) :-
 	(var(Mode); var(Solutions)),
@@ -6979,11 +6970,13 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_logtalk_directive'(mode(Mode, Solutions), _) :-
 	assertz('$lgt_pp_mode_'(Mode, Solutions)).
 
+% multifile/2 predicate directive
 
 '$lgt_tr_logtalk_directive'(multifile(Preds), _) :-
 	'$lgt_flatten_list'([Preds], PredsFlatted),
 	'$lgt_tr_multifile_directive'(PredsFlatted).
 
+% coinductive/1 predicate directive
 
 '$lgt_tr_logtalk_directive'(coinductive(Preds), Ctx) :-
 	(	'$lgt_prolog_feature'(coinduction, supported) ->
@@ -6992,6 +6985,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	throw(resource_error(coinduction))
 	).
 
+% alias/3 predicate directive
 
 '$lgt_tr_logtalk_directive'(alias(Entity, Pred, Alias), _) :-
 	'$lgt_must_be'(entity_identifier, Entity),
@@ -19091,8 +19085,8 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_load_settings_file'(deny, _, disabled).
 
 '$lgt_load_settings_file'(restrict, Options, Result) :-
-	(	% lookup for a settings file in the Logtalk user folder
-		'$lgt_user_directory'(User),
+	% lookup for a settings file restricted to the Logtalk user folder
+	(	'$lgt_user_directory'(User),
 		'$lgt_load_settings_file_from_directory'(User, Options, Result) ->
 		true
 	;	% no settings file found
@@ -19186,6 +19180,9 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_check_prolog_version'
 %
 % checks for a compatible back-end Prolog compiler version
+%
+% note, however, that an old and incompatible back-end Prolog version may
+% break Logtalk initialization before this cheking predicate is called
 
 '$lgt_check_prolog_version' :-
 	'$lgt_prolog_feature'(prolog_version, Current),
