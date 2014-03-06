@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/02/07,
+		date is 2014/03/06,
 		comment is 'Predicates for generating graph files in the DOT language.'
 	]).
 
@@ -42,24 +42,22 @@
 		write(Stream, 'digraph '),
 		writeq(Stream, Identifier),
 		write(Stream, ' {'), nl(Stream),
-		write(Stream, 'rankdir=BT'), nl(Stream),
-		write(Stream, 'ranksep=1.25'), nl(Stream),
-		write(Stream, 'compound=true'), nl(Stream),
-		write(Stream, 'splines=true'), nl(Stream),
-		write(Stream, 'pack=true'), nl(Stream),
-		write(Stream, 'clusterrank=local'), nl(Stream),
-		write(Stream, 'labeljust=l'), nl(Stream),
-		write(Stream, 'margin=1.0'), nl(Stream),
-		write(Stream, 'fontname="Courier"'), nl(Stream),
-		write(Stream, 'fontsize=10'), nl(Stream),
-		write(Stream, 'fontcolor=snow4'), nl(Stream),
-		write(Stream, 'pencolor=snow4'), nl(Stream),
-		write(Stream, 'node [shape=ellipse,style=filled,fillcolor=white,fontname="Courier",fontsize=9]'), nl(Stream),
-		write(Stream, 'edge [fontname="Courier",fontsize=9]'), nl(Stream),
+		write_key_value_nl(Stream, rankdir, 'BT'),
+		write_key_value_nl(Stream, ranksep, '1.25'),
+		write_key_value_nl(Stream, compound, true),
+		write_key_value_nl(Stream, splines, true),
+		write_key_value_nl(Stream, pack, true),
+		write_key_value_nl(Stream, clusterrank, local),
+		write_key_value_nl(Stream, labeljust, l),
+		write_key_value_nl(Stream, margin, '1.0'),
+		write_key_value_nl(Stream, fontname, 'Courier'),
+		write_key_value_nl(Stream, fontsize, 10),
+		write_key_value_nl(Stream, fontcolor, snow4),
+		write_key_value_nl(Stream, pencolor, snow4),
+		write(Stream, 'node [shape="ellipse",style="filled",fillcolor="white",fontname="Courier",fontsize="9"]'), nl(Stream),
+		write(Stream, 'edge [fontname="Courier",fontsize="9"]'), nl(Stream),
 		diagram_label(Options, Label),
-		write(Stream, 'label="'),
-		write(Stream, Label),
-		write(Stream, '"'), nl(Stream),
+		write_key_value_nl(Stream, label, Label),
 		nl(Stream).
 
 	diagram_label(Options, Label) :-
@@ -107,27 +105,16 @@
 		write(Stream, Identifier),
 		write(Stream, '" {'), nl(Stream),
 		(	member(url(URL), Options) ->
-			write(Stream, 'URL="'),
-			write(Stream, URL),
-			write(Stream, '"'), nl(Stream),
-			write(Stream, 'tooltip="'),
-			write(Stream, URL),
-			write(Stream, '"'), nl(Stream)
+			write_key_value_nl(Stream, 'URL', URL),
+			write_key_value_nl(Stream, tooltip, URL)
 		;	member(tooltip(Tooltip), Options) ->
-			write(Stream, 'tooltip="'),
-			write(Stream, Tooltip),
-			write(Stream, '"'), nl(Stream)
+			write_key_value_nl(Stream, tooltip, Tooltip)
 		;	true
 		),
-		write(Stream, 'bgcolor="'),
-		write(Stream, Color), nl(Stream),
-		write(Stream, '"style="'),
-		write(Stream, Style), nl(Stream),
-		write(Stream, '"margin="'),
-		write(Stream, Margin), nl(Stream),
-		write(Stream, '"label="'),
-		write(Stream, Label),
-		write(Stream, '"'), nl(Stream).
+		write_key_value_nl(Stream, bgcolor, Color),
+		write_key_value_nl(Stream, style, Style),
+		write_key_value_nl(Stream, margin, Margin),
+		write_key_value_nl(Stream, label, Label).
 
 	graph_footer(Stream, _Identifier, _Label, _Kind, _Options) :-
 		write(Stream, '}'), nl(Stream), nl(Stream).
@@ -144,25 +131,18 @@
 		node_shape_style_color(Kind, Shape, Style, Color),
 		write(Stream, '"'),
 		write(Stream, Identifier),
-		write(Stream, '" [shape='),
-		write(Stream, Shape),
+		write(Stream, '" ['),
+		write_key_value_comma(Stream, shape, Shape),
 		(	member(url(URL), Options) ->
-			write(Stream, ',URL="'),
-			write(Stream, URL),
-			write(Stream, '",tooltip="'),
-			write(Stream, URL),
-			write(Stream, '"')
+			write_key_value_comma(Stream, 'URL', URL),
+			write_key_value_comma(Stream, tooltip, URL)
 		;	member(tooltip(Tooltip), Options) ->
-			write(Stream, ',tooltip="'),
-			write(Stream, Tooltip),
-			write(Stream, '"')
+			write_key_value_comma(Stream, tooltip, Tooltip)
 		;	true
 		),
-		write(Stream, ',style='),
-		write(Stream, Style),
-		write(Stream, ',fillcolor="'),
-		write(Stream, Color),
-		write(Stream, '",label=<<B>'),
+		write_key_value_comma(Stream, style, Style),
+		write_key_value_comma(Stream, fillcolor, Color),
+		write(Stream, 'label=<<B>'),
 		write(Stream, Label),
 		(	Contents == [] ->
 			write(Stream, '</B>')
@@ -179,15 +159,15 @@
 	node_shape_style_color(module, tab, filled, gainsboro).
 	node_shape_style_color(file, box, filled, turquoise).
 	% external entities to the file or library being documented
-	node_shape_style_color(external_prototype, box, '"filled,dashed"', beige).
-	node_shape_style_color(external_instance_or_class, box, '"filled,dashed"', yellow).
-	node_shape_style_color(external_protocol, note, '"filled,dashed"', aquamarine).
-	node_shape_style_color(external_category, component, '"filled,dashed"', cyan).
-	node_shape_style_color(external_module, tab, '"filled,dashed"', gainsboro).
-	node_shape_style_color(external_file, box, '"filled,dashed"', turquoise).
+	node_shape_style_color(external_prototype, box, 'filled,dashed', beige).
+	node_shape_style_color(external_instance_or_class, box, 'filled,dashed', yellow).
+	node_shape_style_color(external_protocol, note, 'filled,dashed', aquamarine).
+	node_shape_style_color(external_category, component, 'filled,dashed', cyan).
+	node_shape_style_color(external_module, tab, 'filled,dashed', gainsboro).
+	node_shape_style_color(external_file, box, 'filled,dashed', turquoise).
 	% predicates
 	node_shape_style_color(predicate, ellipse, filled, gold).
-	node_shape_style_color(external_predicate, ellipse, '"filled,dashed"', gold).
+	node_shape_style_color(external_predicate, ellipse, 'filled,dashed', gold).
 
 	edge(Stream, Start, End, Labels, Kind, Options) :-
 		edge_arrow(Kind, ArrowHead),
@@ -195,15 +175,13 @@
 		write(Stream, Start),
 		write(Stream, '" -> "'),
 		write(Stream, End),
-		write(Stream, '" [arrowhead='),
-		write(Stream, ArrowHead),
+		write(Stream, '" ['),
+		write_key_value_comma(Stream, arrowhead, ArrowHead),
 		(	member(tooltip(Tooltip), Options) ->
-			write(Stream, ',tooltip="'),
-			write(Stream, Tooltip),
-			write(Stream, '"')
+			write_key_value_comma(Stream, tooltip, Tooltip)
 		;	true
 		),
-		write(Stream, ',label=<'),
+		write(Stream, 'label=<'),
 		write_lines(Labels, Stream),
 		write(Stream, '>]'), nl(Stream).
 
@@ -223,6 +201,20 @@
 	% file relations
 	edge_arrow(depends_on_file, normal).
 	edge_arrow(loads_file, normal).
+
+	write_key_value_nl(Stream, Key, Value) :-
+		write_key_value(Stream, Key, Value),
+		nl(Stream).
+
+	write_key_value_comma(Stream, Key, Value) :-
+		write_key_value(Stream, Key, Value),
+		write(Stream, ',').
+
+	write_key_value(Stream, Key, Value) :-
+		write(Stream, Key),
+		write(Stream, '="'),
+		write(Stream, Value),
+		write(Stream, '"').
 
 	write_lines([], _).
 	write_lines([Line| Lines], Stream) :-

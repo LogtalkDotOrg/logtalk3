@@ -36,7 +36,7 @@ with the `optimize` flag turned on is now only performed during the second
 compiler stage.
 
 * FIXED: Only fold left unifications during optimization of the generated code
-if they don't result in cyclic terms. 
+if they don't result in cyclic terms.
 
 Prolog adapter and integration files
 ------------------------------------
@@ -53,6 +53,10 @@ Tools
 
 * UPDATED: The `logtalk_tester.sh` POSIX shell script now returns an exit
 code of `1` when there are failed unit tests.
+
+* FIXED: Regression in the `diagrams` tool, introduced when working around
+the lack of support for character escapes in some back-end compilers, that
+would result in DOT warnings. Thanks to Sergio Castro for the bug report.
 
 
 3.00.0 Alpha 36 - February 26, 2014
