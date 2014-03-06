@@ -29,7 +29,7 @@
 		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2014/03/06,
-		comment is 'Predicates for generating graph files in the DOT language.'
+		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
 	:- multifile(diagram(_)::format_object/2).

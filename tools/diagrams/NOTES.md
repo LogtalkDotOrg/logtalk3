@@ -27,9 +27,9 @@ file.
 This tool generates entity diagrams and file diagrams for source files
 and for libraries of source files using the Logtalk reflection features
 to collect the relevant information and a graph language for representing
-the diagrams. Currently only the DOT language is supported (visit the
-<http://www.graphviz.org/> website for more information in this graph
-language).
+the diagrams. Currently only the DOT language is supported (tested with
+version 2.36.0; visit the <http://www.graphviz.org/> website for more
+information in this graph language).
 
 The following entity diagrams are supported:
 
