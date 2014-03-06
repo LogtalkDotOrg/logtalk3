@@ -4682,8 +4682,10 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_load_compiled_file'(SourceFile, PrologFile) :-
+	% loading a file can result in the redefinition of existing
+	% entities thus potentially invalidating cache entries 
 	'$lgt_clean_lookup_caches',
-	'$lgt_check_redefined_entities',
+	'$lgt_report_redefined_entities',
 	'$lgt_compiler_flag'(prolog_loader, Options),
 	(	'$lgt_pp_file_encoding_'(_, Encoding) ->
 		% use the same encoding as the original source file
@@ -4715,12 +4717,13 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_check_redefined_entities'
+% '$lgt_report_redefined_entities'
 %
-% checks and prints a warning for all entities that are about to be redefined;
-% also retract old runtime clauses for the entity being redefined for safety
+% prints a warning for all entities that are about to be redefined
+%
+% also retracts old runtime clauses for the entity being redefined for safety
 
-'$lgt_check_redefined_entities' :-
+'$lgt_report_redefined_entities' :-
 	(	'$lgt_pp_file_runtime_clause_'('$lgt_current_protocol_'(Entity, _, _, _, _))
 	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_category_'(Entity, _, _, _, _, _))
 	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_object_'(Entity, _, _, _, _, _, _, _, _, _, _))
@@ -4730,7 +4733,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_retract_old_runtime_clauses'(Entity),
 	fail.
 
-'$lgt_check_redefined_entities'.
+'$lgt_report_redefined_entities'.
 
 
 
@@ -4777,7 +4780,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_report_redefined_entity'(+atom, @entity_identifier, +atom, +atom, +nonvar)
 %
-% prints a warning for redefined entities
+% prints an informative message or a warning for a redefined entity
 
 '$lgt_report_redefined_entity'(Type, Entity, OldFile, NewFile, Lines) :-
 	(	NewFile == nil ->
@@ -5589,9 +5592,10 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_tr_entity_flags'(+atom, -integer)
 %
-% defines the entity flags value when creating a new entity;
-% we use integers in decimal notation instead of binary notation
-% to avoid standard-compliance issues with some Prolog compilers
+% defines the entity flags value when compiling or dynamically creating a new entity
+%
+% we use integers in decimal notation instead of binary notation to avoid standards
+% compliance issues with some Prolog compilers
 
 '$lgt_tr_entity_flags'(protocol, Flags) :-
 	(	'$lgt_compiler_flag'(debug, on) ->
@@ -5803,6 +5807,11 @@ current_logtalk_flag(Flag, Value) :-
 
 
 % '$lgt_clean_lookup_caches'
+%
+% cleans all entries for all dynamic binding lookup caches
+%
+% this also have the side-effect of removing the catchall
+% clauses that generate the cache entries
 
 '$lgt_clean_lookup_caches' :-
 	retractall('$lgt_send_to_obj_'(_, _, _)),
@@ -5814,7 +5823,14 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_reassert_lookup_cache_catchall_clauses'.
 
 
+
 % '$lgt_clean_lookup_caches'(@callable)
+%
+% cleans all entries for a given predicate for all dynamic
+% binding lookup caches
+%
+% this also have the side-effect of removing the catchall
+% clauses that generate the cache entries
 
 '$lgt_clean_lookup_caches'(Pred) :-
 	retractall('$lgt_send_to_obj_'(_, Pred, _)),
@@ -5825,6 +5841,12 @@ current_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_db_lookup_cache_'(_, Pred, _, _, _)),
 	'$lgt_reassert_lookup_cache_catchall_clauses'.
 
+
+
+% '$lgt_reassert_lookup_cache_catchall_clauses'
+%
+% reasserts the catchall clauses for the dynamic binding
+% lookup cache predicates that generate the cache entries
 
 '$lgt_reassert_lookup_cache_catchall_clauses' :-
 	assertz(('$lgt_send_to_obj_'(Obj, Pred, Sender) :- '$lgt_send_to_obj_nv'(Obj, Pred, Sender))),
@@ -5837,7 +5859,9 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_restore_global_operator_table'
 %
-% restores current operator table
+% restores the global operator table
+%
+% called after compiling a source file or after dynamically creating a new entity
 
 '$lgt_restore_global_operator_table' :-
 	retract('$lgt_pp_entity_operator_'(_, Specifier, Operator, _)),
@@ -5860,7 +5884,9 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_restore_file_operator_table'
 %
-% restores current operator table
+% restores the file operator table
+%
+% called after compiling a source file entity
 
 '$lgt_restore_file_operator_table' :-
 	retract('$lgt_pp_entity_operator_'(_, Specifier, Operator, _)),
@@ -5878,7 +5904,9 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_activate_file_operators'(+integer, +operator_specifier, +atom_or_atom_list)
 %
-% asserts local file operators
+% activates local file operator definitions
+%
+% any conflicting global operator is saved so that it can be restored later
 
 '$lgt_activate_file_operators'(_, _, []) :-
 	!.
@@ -5905,7 +5933,9 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_activate_entity_operators'(+integer, +operator_specifier, +atom_or_atom_list, +scope)
 %
-% asserts local entity operators
+% activates local entity operator definitions
+%
+% any conflicting file operator is saved so that it can be restored later
 
 '$lgt_activate_entity_operators'(_, _, [], _) :-
 	!.
@@ -5982,9 +6012,10 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_tr_expand_goal'(+callable, -callable)
 %
-% expands a goal; fails if no goal expansion hook is defined;
-% the callers of this predicate ensure that a goal is repeatedly
-% expanded until a fixed-point is reached
+% expands a goal; fails if no goal expansion hook is defined
+%
+% the callers of this predicate must ensure that a goal
+% is repeatedly expanded until a fixed-point is reached
 
 '$lgt_tr_expand_goal'(Goal, ExpandedGoal) :-
 	(	% source-file specific compiler hook
@@ -6002,7 +6033,6 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_must_be'(callable, ExpandedGoal, goal_expansion(Goal, ExpandedGoal)).
 
 
-
 '$lgt_prolog_goal_expansion_portability_warnings'(Goal, ExpandedGoal) :-
 	(	'$lgt_compiler_flag'(portability, warning) ->
 		'$lgt_increment_compile_warnings_counter',
@@ -6018,7 +6048,8 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_tr_file_term'(@nonvar, +compilation_context)
 %
-% translates a source file term (clause, directive, or grammar rule);
+% translates a source file term (clause, directive, or grammar rule)
+%
 % we allow non-callable terms to be term-expanded; only if that fails
 % we throw an error
 
