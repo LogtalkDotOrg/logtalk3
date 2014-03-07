@@ -10865,6 +10865,13 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_tr_prolog_meta_argument'([/], Args, Ctx, TArgs, DArgs).
 
 
+
+% '$lgt_extend_closure'(@callable, @list(term), -callable)
+%
+% extends a closure by appending a list of arguments to contruct a goal
+%
+% this predicate fails if the closure can only be extended at runtime
+
 '$lgt_extend_closure'(Obj::Closure, ExtArgs, Obj::Msg) :-
 	!,
 	'$lgt_extend_closure_basic'(Closure, ExtArgs, Msg).
@@ -10917,6 +10924,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_extend_closure_basic'(Closure, ExtArgs, Goal) :-
 	callable(Closure),
+	% compile-time closure extension possible
 	Closure =.. [Functor| Args],
 	'$lgt_append'(Args, ExtArgs, FullArgs),
 	Goal =.. [Functor| FullArgs].
@@ -16052,8 +16060,8 @@ current_logtalk_flag(Flag, Value) :-
 		nonvar(Free),
 		nonvar(Parameters),
 		nonvar(Goal) ->
-		'$lgt_check_lambda_expression_unclassified_vars'(Free/Parameters>>Goal),
-		'$lgt_check_lambda_expression_mixed_up_vars'(Free/Parameters>>Goal)
+		'$lgt_check_lambda_expression_unclassified_variables'(Free/Parameters>>Goal),
+		'$lgt_check_lambda_expression_mixed_up_variables'(Free/Parameters>>Goal)
 	;	true
 	).
 
@@ -16069,7 +16077,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 		nonvar(Parameters),
 		nonvar(Goal) ->
-		'$lgt_check_lambda_expression_unclassified_vars'(Parameters>>Goal)
+		'$lgt_check_lambda_expression_unclassified_variables'(Parameters>>Goal)
 	;	true
 	).
 
@@ -16077,8 +16085,8 @@ current_logtalk_flag(Flag, Value) :-
 
 % each lambda goal variable should be either a lambda free variable or a lambda parameter
 
-'$lgt_check_lambda_expression_unclassified_vars'(Parameters>>Goal) :-
-	'$lgt_check_lambda_expression_unclassified_vars'(Goal, GoalVars),
+'$lgt_check_lambda_expression_unclassified_variables'(Parameters>>Goal) :-
+	'$lgt_check_lambda_expression_unclassified_variables'(Goal, GoalVars),
 	term_variables(Parameters, ParameterVars),
 	'$lgt_var_subtract'(GoalVars, ParameterVars, UnqualifiedVars),
 	(	UnqualifiedVars \== [] ->
@@ -16089,20 +16097,20 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 
-'$lgt_check_lambda_expression_unclassified_vars'(Parameters>>Goal, UnqualifiedVars) :-
+'$lgt_check_lambda_expression_unclassified_variables'(Parameters>>Goal, UnqualifiedVars) :-
 	!,
-	'$lgt_check_lambda_expression_unclassified_vars'(Goal, GoalVars),
+	'$lgt_check_lambda_expression_unclassified_variables'(Goal, GoalVars),
 	term_variables(Parameters, ParameterVars),
 	'$lgt_var_subtract'(GoalVars, ParameterVars, UnqualifiedVars).
 
-'$lgt_check_lambda_expression_unclassified_vars'(Goal, UnqualifiedVars) :-
+'$lgt_check_lambda_expression_unclassified_variables'(Goal, UnqualifiedVars) :-
 	term_variables(Goal, UnqualifiedVars).
 
 
 
 % no lambda goal variable should be both a lambda free variable and a lambda parameter
 
-'$lgt_check_lambda_expression_mixed_up_vars'(Free/Parameters>>Goal) :-
+'$lgt_check_lambda_expression_mixed_up_variables'(Free/Parameters>>Goal) :-
 	term_variables(Free, FreeVars),
 	term_variables(Parameters, ParameterVars),
 	'$lgt_intersection'(FreeVars, ParameterVars, MixedUpVars),
