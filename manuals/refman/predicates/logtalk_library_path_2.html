@@ -40,6 +40,12 @@
 <p>
 Dynamic and multifile user-defined predicate, allowing the declaration of aliases to library paths. Library aliases may also be used on the second argument (using the notation <em>alias(path)</em>). Paths must always end with the path directory separator character (<em>"/"</em>).
 </p>
+<p>
+Relative paths (e.g. <code>'../'</code> or <code>'./'</code>) should only be used within the <em>alias(path)</em>) notation so that library paths can always be expanded to absolute paths independently of the (usually unpredictable) current directory at the time the <code>logtalk_library_path/2</code> predicate is called.
+</p>
+<p>
+When working with a relocatable application, the actual application installation directory can be retrieved by calling the <a title="Consult reference manual" href="logtalk_load_context_2.html"><code>logtalk_load_context/2</code></a> predicate with the <code>directory</code> key and using the returned value to define the <code>logtalk_library_path/2</code> predicate. On a settings file, simply use an <a title="Consult reference manual" href="../directives/initialization_1.html"><code>initialization/1</code></a> directive to wrap the call to the <code>logtalk_load_context/2</code> predicate and the assert of the <code>logtalk_library_path/2</code> fact.
+</p>
 
 <h4>Template and modes</h4>
 
@@ -77,7 +83,7 @@ yes</pre>
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: August 25, 2008</span>
+		<span>Last updated on: March 7, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="logtalk_make_0.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="logtalk_load_context_2.html">next</a></span><br/>

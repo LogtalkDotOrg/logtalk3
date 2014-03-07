@@ -48,6 +48,11 @@ built-ins before adding workaround definitions for them.
 * ADDED: Workaround definition for the missing `acyclic_term/1` standard
 predicate to the adapter files of Lean Prolog, Qu-Prolog, and SICStus Prolog.
 
+Documentation
+-------------
+
+* IMPROVED: Documentation of the `logtalk_library_path/2` built-in predicate.
+
 Tools
 -----
 
