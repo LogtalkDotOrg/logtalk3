@@ -253,7 +253,7 @@
 
 <xsl:template match="*/predicate">
 	<div class="section">
-	<a name="#{name}"></a>
+	<a name="{name}"></a>
 	<h3 class="code"><xsl:value-of select="name" /></h3>
 	<blockquote>
 	<xsl:if test="comment">
