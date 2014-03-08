@@ -63,6 +63,9 @@ all diagrams. Suggested by Sergio Castro.
 * IMPROVED: The `diagrams` tool processing of the `output_directory/1` option
 now creates the directory if it doesn't exist.
 
+* IMPROVED: The `lgtdoc` tool scripts that generate (X)HTML documentation now
+add anchors to each predicate section using as name the predicate indicator.
+
 * UPDATED: The `logtalk_tester.sh` POSIX shell script now returns an exit
 code of `1` when there are failed unit tests.
 
