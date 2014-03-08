@@ -49,6 +49,10 @@ File dependency diagrams are specially useful in revealing dependencies
 that are not represented in file loading diagrams due to files being
 loaded indirectly by files external to the libraries being documented. 
 
+An utility object, `diagrams`, is provided for generating all supported
+diagrams in one step. This object provides an interface common to all
+diagrams.
+
 Limitations in both the graph language and UML forces the invention of a
 modeling language that can represent all kinds of Logtalk entities and
 entity relations. Currently we use the following DOT shapes (entities)

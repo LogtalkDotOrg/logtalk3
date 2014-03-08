@@ -56,6 +56,10 @@ Documentation
 Tools
 -----
 
+* ADDED: Utility object `diagrams` to the `diagrams` tool for generating all
+supported diagrams in one step. This object provides an interface common to
+all diagrams. Suggested by Sergio Castro.
+
 * UPDATED: The `logtalk_tester.sh` POSIX shell script now returns an exit
 code of `1` when there are failed unit tests.
 
