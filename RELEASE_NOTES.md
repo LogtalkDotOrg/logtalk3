@@ -60,6 +60,9 @@ Tools
 supported diagrams in one step. This object provides an interface common to
 all diagrams. Suggested by Sergio Castro.
 
+* IMPROVED: The `diagrams` tool processing of the `output_directory/1` option
+now creates the directory if it doesn't exist.
+
 * UPDATED: The `logtalk_tester.sh` POSIX shell script now returns an exit
 code of `1` when there are failed unit tests.
 

@@ -27,7 +27,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/14,
+		date is 2014/03/08,
 		comment is 'Common predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
@@ -506,6 +506,7 @@
 			Directory = Directory0
 		;	atom_concat(Directory0, '/', Directory)
 		),
+		os::make_directory(Directory),
 		atom_concat(Directory, Basename, Path).
 
 	:- protected(locate_file/5).
