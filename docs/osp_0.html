@@ -43,6 +43,7 @@
       <div class="public">
         <h2>Public interface</h2>
         <div class="section">
+          <a name="pid/1"/>
           <h3 class="code">pid/1</h3>
           <blockquote>
             <p class="comment">Returns the process identitifer of the running process.</p>
@@ -63,6 +64,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="shell/2"/>
           <h3 class="code">shell/2</h3>
           <blockquote>
             <p class="comment">Runs an operating-system shell command, returning in Status the exit status of Command.</p>
@@ -83,6 +85,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="shell/1"/>
           <h3 class="code">shell/1</h3>
           <blockquote>
             <p class="comment">Runs an operating-system shell command.</p>
@@ -103,6 +106,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="expand_path/2"/>
           <h3 class="code">expand_path/2</h3>
           <blockquote>
             <p class="comment">Expands a file path to an absolute file path.</p>
@@ -123,6 +127,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="make_directory/1"/>
           <h3 class="code">make_directory/1</h3>
           <blockquote>
             <p class="comment">Makes a new directory. Succeeds if the directory already exists.</p>
@@ -143,6 +148,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="delete_directory/1"/>
           <h3 class="code">delete_directory/1</h3>
           <blockquote>
             <p class="comment">Deletes an empty directory.</p>
@@ -163,6 +169,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="change_directory/1"/>
           <h3 class="code">change_directory/1</h3>
           <blockquote>
             <p class="comment">Changes current working directory.</p>
@@ -183,6 +190,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="working_directory/1"/>
           <h3 class="code">working_directory/1</h3>
           <blockquote>
             <p class="comment">Current working directory.</p>
@@ -203,6 +211,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="directory_exists/1"/>
           <h3 class="code">directory_exists/1</h3>
           <blockquote>
             <p class="comment">True if the specified directory exists (irrespective of directory permissions).</p>
@@ -223,6 +232,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="file_exists/1"/>
           <h3 class="code">file_exists/1</h3>
           <blockquote>
             <p class="comment">True if the specified file exists (irrespective of type and file permissions).</p>
@@ -243,6 +253,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="file_modification_time/2"/>
           <h3 class="code">file_modification_time/2</h3>
           <blockquote>
             <p class="comment">File modification time (which can be used for comparison).</p>
@@ -263,6 +274,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="file_size/2"/>
           <h3 class="code">file_size/2</h3>
           <blockquote>
             <p class="comment">File size (in bytes).</p>
@@ -283,6 +295,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="file_permission/2"/>
           <h3 class="code">file_permission/2</h3>
           <blockquote>
             <p class="comment">True if the specified file has the specified permission.</p>
@@ -303,6 +316,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="rename_file/2"/>
           <h3 class="code">rename_file/2</h3>
           <blockquote>
             <p class="comment">Renames a file or a directory.</p>
@@ -323,6 +337,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="delete_file/1"/>
           <h3 class="code">delete_file/1</h3>
           <blockquote>
             <p class="comment">Deletes a file.</p>
@@ -343,6 +358,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="environment_variable/2"/>
           <h3 class="code">environment_variable/2</h3>
           <blockquote>
             <p class="comment">Returns an environment variable value. Fails if the variable does not exists.</p>
@@ -363,6 +379,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="time_stamp/1"/>
           <h3 class="code">time_stamp/1</h3>
           <blockquote>
             <p class="comment">Returns a system-dependent time stamp (which can be used for sorting).</p>
@@ -383,6 +400,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="date_time/7"/>
           <h3 class="code">date_time/7</h3>
           <blockquote>
             <p class="comment">Returns the current date and time.</p>
@@ -403,6 +421,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="cpu_time/1"/>
           <h3 class="code">cpu_time/1</h3>
           <blockquote>
             <p class="comment">System cpu time in seconds.</p>
@@ -423,6 +442,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="wall_time/1"/>
           <h3 class="code">wall_time/1</h3>
           <blockquote>
             <p class="comment">Wall time in seconds.</p>
@@ -443,6 +463,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="operating_system_type/1"/>
           <h3 class="code">operating_system_type/1</h3>
           <blockquote>
             <p class="comment">Operating system type. Possible values are "unix", "windows", and "unknown".</p>
@@ -463,6 +484,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="command_line_arguments/1"/>
           <h3 class="code">command_line_arguments/1</h3>
           <blockquote>
             <p class="comment">Returns a list with the command line arguments that occur after "--".</p>

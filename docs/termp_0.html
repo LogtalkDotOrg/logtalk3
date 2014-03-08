@@ -43,6 +43,7 @@
       <div class="public">
         <h2>Public interface</h2>
         <div class="section">
+          <a name="depth/2"/>
           <h3 class="code">depth/2</h3>
           <blockquote>
             <p class="comment">True if the depth of Term is Depth. The depth of atomic terms is zero; the depth of a compound term is one plus the maximum depth of its sub-terms.</p>
@@ -63,6 +64,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="ground/1"/>
           <h3 class="code">ground/1</h3>
           <blockquote>
             <p class="comment">True if the argument is ground.</p>
@@ -83,6 +85,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="new/1"/>
           <h3 class="code">new/1</h3>
           <blockquote>
             <p class="comment">Creates a new term instance (if meaningful).</p>
@@ -103,6 +106,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="occurs/2"/>
           <h3 class="code">occurs/2</h3>
           <blockquote>
             <p class="comment">True if the variable occurs in the term.</p>
@@ -123,6 +127,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="subsumes/2"/>
           <h3 class="code">subsumes/2</h3>
           <blockquote>
             <p class="comment">The first term subsumes the second term.</p>
@@ -143,6 +148,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="subterm/2"/>
           <h3 class="code">subterm/2</h3>
           <blockquote>
             <p class="comment">The first term is a subterm of the second term.</p>
@@ -163,6 +169,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="valid/1"/>
           <h3 class="code">valid/1</h3>
           <blockquote>
             <p class="comment">Term is valid.</p>
@@ -183,6 +190,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="check/1"/>
           <h3 class="code">check/1</h3>
           <blockquote>
             <p class="comment">Checks if a term is valid. Throws an exception if the term is not valid.</p>
@@ -203,6 +211,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="variant/2"/>
           <h3 class="code">variant/2</h3>
           <blockquote>
             <p class="comment">Each term is a variant of the other (i.e. they are structurally equivalent).</p>
@@ -223,6 +232,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="variables/2"/>
           <h3 class="code">variables/2</h3>
           <blockquote>
             <p class="comment">Returns a list of all term variables (ordered as found when doing a depth-first, left-to-right traversal of Term).</p>
@@ -243,6 +253,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="singletons/2"/>
           <h3 class="code">singletons/2</h3>
           <blockquote>
             <p class="comment">Returns a list of all term singleton variables (ordered as found when doing a depth-first, left-to-right traversal of Term).</p>

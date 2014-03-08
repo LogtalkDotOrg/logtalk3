@@ -19,23 +19,23 @@
         <dl class="properties">
           <dt class="key">author:</dt>
           <dd class="value">
-            <code>John Fletcher</code>
+            <code>John Fletcher; adapted to Logtalk by Paulo Moura.</code>
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>2.0</code>
+            <code>3.5</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2006/11/2</code>
+            <code>2014/1/17</code>
           </dd>
           <dt class="key">copyright:</dt>
           <dd class="value">
-            <code>Copyright (C) 2001-2005 Binding Time Limited, Copyright (C) 2005, 2006 John Fletcher</code>
+            <code>Copyright (C) 2001-2005 Binding Time Limited, Copyright (C) 2005-2013 John Fletcher</code>
           </dd>
           <dt class="key">license:</dt>
           <dd class="value">
-            <code>The code has been placed into the public domain, to encourage the use of Prolog with XML. This program is offered free of charge, as unsupported source code. You may use it, copy it, distribute it, modify it or sell it without restriction, but entirely at your own risk.</code>
+            <code>The codThis program is offered free of charge, as unsupported source code. You may use it, copy it, distribute it, modify it or sell it without restriction, but entirely at your own risk.</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -51,6 +51,7 @@
       <div class="public">
         <h2>Public interface</h2>
         <div class="section">
+          <a name="parse/2"/>
           <h3 class="code">parse/2</h3>
           <blockquote>
             <p class="comment">Parses Chars to/from a data structure of the form xml(&lt;atts&gt;, &lt;content&gt;).</p>
@@ -74,6 +75,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="parse/3"/>
           <h3 class="code">parse/3</h3>
           <blockquote>
             <p class="comment">Parses Chars to/from a data structure of the form xml(&lt;atts&gt;, &lt;content&gt;).</p>
@@ -97,6 +99,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="subterm/2"/>
           <h3 class="code">subterm/2</h3>
           <blockquote>
             <p class="comment">Unifies Subterm with a sub-term of XMLTerm. Note that XMLTerm is a sub-term of itself.</p>
@@ -117,6 +120,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="pp/1"/>
           <h3 class="code">pp/1</h3>
           <blockquote>
             <p class="comment">Pretty prints a XML document on the current output stream.</p>
@@ -146,6 +150,7 @@
       <div class="private">
         <h2>Private predicates</h2>
         <div class="section">
+          <a name="xml_to_document/3"/>
           <h3 class="code">xml_to_document/3</h3>
           <blockquote>
             <p class="comment">Translates the list of character codes XML into the Prolog term Document. Controls is a list of terms controlling the treatment of layout characters and character entities.</p>
@@ -166,6 +171,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="empty_map/1"/>
           <h3 class="code">empty_map/1</h3>
           <blockquote>
             <p class="comment">True if Map is a null map.</p>
@@ -186,6 +192,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="map_member/3"/>
           <h3 class="code">map_member/3</h3>
           <blockquote>
             <p class="comment">True if Map is a ordered map structure which records the pair Key-Data. Key must be ground.</p>
@@ -206,6 +213,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="map_store/4"/>
           <h3 class="code">map_store/4</h3>
           <blockquote>
             <p class="comment">True if Map0 is an ordered map structure, Key must be ground, and Map1 is identical to Map0 except that the pair Key-Data is recorded by Map1.</p>
@@ -226,6 +234,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="pp_string/1"/>
           <h3 class="code">pp_string/1</h3>
           <blockquote>
             <p class="comment">Prints String onto the current output stream. If String contains only 7-bit chars it is printed in shorthand quoted format, otherwise it is written as a list.</p>
@@ -246,6 +255,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="fault/5"/>
           <h3 class="code">fault/5</h3>
           <blockquote>
             <p class="comment">Identifies SubTerm as a sub-term of Term which cannot be serialized after Indentation. Message is an atom naming the type of error; Path is a string encoding a list of SubTerm's ancestor elements in the form &lt;tag&gt;{(id)}* where &lt;tag&gt; is the element tag and &lt;id&gt; is the value of any attribute _named_ id.</p>
@@ -266,6 +276,28 @@
           </dl>
         </div>
         <div class="section">
+          <a name="exception/4"/>
+          <h3 class="code">exception/4</h3>
+          <blockquote>
+            <p class="comment">Hook to raise an exception to be raised in respect of a fault in the XML Term: Document.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>exception(Message,Document,Culprit,Path)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>exception(+atom,+nonvar,+nonvar,+nonvar) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <a name="document_generation//2"/>
           <h3 class="code">document_generation//2</h3>
           <blockquote>
             <p class="comment">DCG generating Document as a list of character codes. Format is true|false defining whether layouts, to provide indentation, should be added between the element content of the resultant "string". Note that formatting is disabled for elements that are interspersed with pcdata/1 terms, such as XHTML's 'inline' elements. Also, Format is over-ridden, for an individual element, by an explicit 'xml:space'="preserve" attribute.</p>
@@ -282,6 +314,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="pcdata_7bit//1"/>
           <h3 class="code">pcdata_7bit//1</h3>
           <blockquote>
             <p class="comment">Represents the ascii character set in its simplest format, using the character entities &amp;amp; &amp;quot; &amp;lt; and &amp;gt; which are common to both XML and HTML. The numeric entity &amp;#39; is used in place of &amp;apos;, because browsers don't recognize it in HTML.</p>
@@ -298,7 +331,8 @@
           </dl>
         </div>
         <div class="section">
-          <h3 class="code">pcdata_format/3</h3>
+          <a name="character_data_format/3"/>
+          <h3 class="code">character_data_format/3</h3>
           <blockquote>
             <p class="comment">Holds when Format0 and Format1 are the statuses of XML formatting before and after Chars - which may be null.</p>
           </blockquote>
@@ -309,15 +343,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>pcdata_format(Chars,Format0,Format1)</code>
+              <code>character_data_format(Chars,Format0,Format1)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>pcdata_format(+nonvar,+nonvar,?nonvar) &ndash; zero_or_one</code>
+              <code>character_data_format(+nonvar,+nonvar,?nonvar) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
+          <a name="cdata_generation//1"/>
           <h3 class="code">cdata_generation//1</h3>
           <blockquote>
             <p class="comment">Holds when Format0 and Format1 are the statuses of XML formatting before and after Chars - which may be null.</p>
@@ -346,7 +381,7 @@
       <div class="section">
         <dl class="remarks">
           <dt class="comment">On-line documentation:</dt>
-          <dd class="text">http://www.zen37763.zen.co.uk/xml.pl.html</dd>
+          <dd class="text">http://www.binding-time.co.uk/xmlpl.html</dd>
         </dl>
         <dl class="remarks">
           <dt class="comment">Compliance:</dt>

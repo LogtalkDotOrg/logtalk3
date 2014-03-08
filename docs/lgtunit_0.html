@@ -54,6 +54,7 @@
       <div class="public">
         <h2>Public interface</h2>
         <div class="section">
+          <a name="cover/1"/>
           <h3 class="code">cover/1</h3>
           <blockquote>
             <p class="comment">Declares entities being tested for which code coverage information should be collected.</p>
@@ -70,6 +71,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="run/2"/>
           <h3 class="code">run/2</h3>
           <blockquote>
             <p class="comment">Runs the unit tests, writing the results to the specified file. Mode can be either "write" (to create a new file) or "append" (to add results to an existing file).</p>
@@ -90,6 +92,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="run/0"/>
           <h3 class="code">run/0</h3>
           <blockquote>
             <p class="comment">Runs the unit tests, writing the results to the current output stream.</p>
@@ -106,6 +109,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="=~= / 2"/>
           <h3 class="code">=~= / 2</h3>
           <blockquote>
             <p class="comment">Compares two floats for approximate equality using 100*epsilon for the absolute error and, if that fails, 99.999% accuracy for the relative error. Handy when writing certain unit tests but the default precision values may not be adequate for all cases.</p>
@@ -129,6 +133,7 @@
       <div class="protected">
         <h2>Protected interface</h2>
         <div class="section">
+          <a name="run_tests/0"/>
           <h3 class="code">run_tests/0</h3>
           <blockquote>
             <p class="comment">Runs all defined unit tests.</p>
@@ -145,6 +150,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="run_tests/2"/>
           <h3 class="code">run_tests/2</h3>
           <blockquote>
             <p class="comment">Runs a list of defined tests.</p>
@@ -165,6 +171,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="setup/0"/>
           <h3 class="code">setup/0</h3>
           <blockquote>
             <p class="comment">Setup environment before running the test set. Defaults to the goal true.</p>
@@ -181,6 +188,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="cleanup/0"/>
           <h3 class="code">cleanup/0</h3>
           <blockquote>
             <p class="comment">Cleanup environment after running the test set. Defaults to the goal true.</p>
@@ -200,6 +208,7 @@
       <div class="private">
         <h2>Private predicates</h2>
         <div class="section">
+          <a name="test/2"/>
           <h3 class="code">test/2</h3>
           <blockquote>
             <p class="comment">Specifies a unit test.</p>
@@ -220,6 +229,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="test_/1"/>
           <h3 class="code">test_/1</h3>
           <blockquote>
             <p class="comment">Table of defined tests.</p>
@@ -240,6 +250,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="skipped_/1"/>
           <h3 class="code">skipped_/1</h3>
           <blockquote>
             <p class="comment">Counter for skipped tests.</p>
@@ -260,6 +271,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="passed_/1"/>
           <h3 class="code">passed_/1</h3>
           <blockquote>
             <p class="comment">Counter for passed tests.</p>
@@ -280,6 +292,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="failed_/1"/>
           <h3 class="code">failed_/1</h3>
           <blockquote>
             <p class="comment">Counter for failed tests.</p>
@@ -300,6 +313,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="fired_/3"/>
           <h3 class="code">fired_/3</h3>
           <blockquote>
             <p class="comment">Fired clauses when running the unit tests.</p>
@@ -320,6 +334,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="covered_/2"/>
           <h3 class="code">covered_/2</h3>
           <blockquote>
             <p class="comment">Auxiliary predicate for collecting statistics on clause coverage.</p>
