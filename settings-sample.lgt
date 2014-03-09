@@ -78,7 +78,7 @@
 */
 
 
-%  To define a "library" path for your projects, edit and uncomment the
+%  To define a "library" alias for your projects, edit and uncomment the
 %  following lines (the library path must end with a slash character):
 
 /*

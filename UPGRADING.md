@@ -44,8 +44,16 @@ may be able to use conditional compilation directives to allow you code to
 compile and run under multiple versions.
 
 
-MAJOR CHANGES FROM LOGTALK 2.x TO LOGTALK 3.x
-=============================================
+MAJOR LANGUAGE CHANGES FROM LOGTALK 2.x TO LOGTALK 3.x
+======================================================
+
+
+Structured message printing
+---------------------------
+
+The new structured message printing, an extended implementation of the same
+mechanism available in some Prolog systems, allows fine grained control over
+printing of informative, warning, and error messages.
 
 
 Source file paths
@@ -72,10 +80,9 @@ responsibility of the `lgtdoc` tool. The debugger is also no longer a built-in
 object but a separate tool, `debugger`. Logtalk 3.x greatly improves support
 for source file paths, removing the need for the `altdirs` flag. The flag
 `startup_message` is removed due to the introduction on structured message
-printing in Logtalk 3.x, which allows fine grained control over message
-printing (see also the provided sample settings file). The `smart_compilation`
-flag is no longer necessary and the old behavior can now be controlled using
-the `clean` flag.
+printing in Logtalk 3.x (see also the provided sample settings file). The
+`smart_compilation` flag is no longer necessary and the old behavior can now
+be controlled using the `clean` flag.
 
 The `reload` flag, is no longer considered or required for static binding
 optimizations, which now depend on the `optimize` flag. In addition, the
@@ -116,5 +123,6 @@ The `{}/1` control construct is now opaque to cuts.
 Reflection support
 ------------------
 
-Logtalk 3.x adds new entity properties such as `calls/2` but also removes
-subsumed Logtalk 2.x properties such as `uses/3` and `use_module/3`.
+Logtalk 3.x includes major improvements to reflection support. In particular,
+it adds entity properties such as `calls/2` but also removes some subsumed
+Logtalk 2.x properties such as `uses/3` and `use_module/3`.

@@ -112,11 +112,14 @@ other text services when editing Logtalk source files. There's also
 support for syntax highlighters used for publishing source code.
 
 4. Create a directory with a suitable name to hold all the files of your
-application. You may want to define the application directory path in a
-`settings.lgt` file in order to easily load your application (see the
-file `CUSTOMIZE.md` for details).
+application. 
 
-5. Copy to this sub-directory the `loader-sample.lgt` file, rename it to 
+5. Copy to this directory the `settings-sample.lgt` file, rename it
+to  `settings.lgt`, and modify it to define a library alias for your
+application directory and for defining global compiler options (see
+the file `CUSTOMIZE.md` for details).
+
+6. Copy to this directory the `loader-sample.lgt` file, rename it to 
 `loader.lgt`, and modify it to load your application source files.
 
-6. Have fun!
+7. Have fun!
