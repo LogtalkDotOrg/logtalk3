@@ -28,8 +28,8 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/03/07,
-		comment is 'Predicates for generating all supported diagrams in the specified format. Only common options should be specified: title/1, date/1, output_directory/1, relation_labels/1, exclude_files/1, exclude_libraries/1, url_protocol/1, and omit_path_prefix/1.',
+		date is 2014/03/09,
+		comment is 'Predicates for generating all supported diagrams for libraries and files in one step using the specified format. Only common options should be specified: title/1, date/1, output_directory/1, relation_labels/1, exclude_files/1, exclude_libraries/1, url_protocol/1, and omit_path_prefix/1.',
 		parnames is ['Format']
 	]).
 
@@ -175,6 +175,7 @@
 	files :-
 		::files([]).
 
+	% supported_diagram(+atom, -entity_identifier)
 	supported_diagram(Format, entity_diagram(Format)).
 	supported_diagram(Format, inheritance_diagram(Format)).
 	supported_diagram(Format, uses_diagram(Format)).
@@ -192,8 +193,8 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/03/07,
-		comment is 'Predicates for generating all supported diagrams in DOT format.'
+		date is 2014/03/09,
+		comment is 'Predicates for generating all supported diagrams for libraries and files in one step using the DOT format.'
 	]).
 
 :- end_object.
