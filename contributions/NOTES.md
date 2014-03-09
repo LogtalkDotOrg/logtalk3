@@ -75,12 +75,13 @@ library entities using the queries:
 (3) Run the command `lgt2html` on the temporary directories to generate the
 (X)HTML documentation or the command `lgt2pdf` to generate PDF documentation:
 
-	$ cd "$LOGTALKUSER/docs/tmp1" && lgt2html -i flags.html -t "Flags"
-	$ cd ../tmp2 && lgt2html -i pddl_parser.html -t "PDDL Parser"
-	$ cd ../tmp3 && lgt2html -i verdi_neruda.html -t "Verdi Neruda"
-	$ cd ../tmp4 && lgt2html -i xml_parser.html -t "XML Parser"
-	$ cd ../tmp5 && lgt2html && rm index.html
+	$ cd "$LOGTALKUSER/docs/tmp1" && lgt2html -i flags.html -t "Flags" && mv *.html ..
+	$ cd ../tmp2 && lgt2html -i pddl_parser.html -t "PDDL Parser" && mv *.html ..
+	$ cd ../tmp3 && lgt2html -i verdi_neruda.html -t "Verdi Neruda" && mv *.html ..
+	$ cd ../tmp4 && lgt2html -i xml_parser.html -t "XML Parser" && mv *.html ..
+	$ cd ../tmp5 && lgt2html && rm index.html && mv *.html ..
 
-After generating the (X)HTML and/or PDF documentation, you can move the
-files to the upper directory, `$LOGTALKUSER/docs`, and delete the temporary
-directories.
+After generating the (X)HTML and/or PDF documentation, you can delete the
+temporary directories:
+
+	$ rm -rf $LOGTALKUSER/docs/tmp*

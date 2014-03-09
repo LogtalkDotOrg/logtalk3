@@ -91,9 +91,8 @@ All source files are formatted using tabs (the recommended setting is a tab
 width equivalent to 4 spaces).
 
 The `$LOGTALKUSER/docs` directory includes a XHTML version of the library
-documentation. To regenerate documentation of the Logtalk libraries,
-start Logtalk with your favorite back-end Prolog compiler and follow these
-steps:
+documentation. To regenerate documentation of the Logtalk libraries, start
+Logtalk with your favorite back-end Prolog compiler and follow these steps:
 
 (1) If the `source_data` flag is not `on` by default, type the query:
 
@@ -115,8 +114,9 @@ to generate (X)HTML documentation or the command `lgt2pdf` to generate PDF
 documentation. For example:
 
 	$ cd $LOGTALKUSER/docs/tmp
-	$ lgt2html -i library.html -t "Library documentation index"
+	$ lgt2html -i library.html -t "Library documentation index" && mv *.html ..
 
-After generating the (X)HTML and/or PDF documentation, you can move the
-files to the upper directory, `$LOGTALKUSER/docs`, and delete the temporary
-directory.
+After generating the (X)HTML and/or PDF documentation, you can delete the
+temporary directories:
+
+	$ rm -rf $LOGTALKUSER/docs/tmp
