@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2014/1/2</code>
+            <code>2014/2/6</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -43,6 +43,7 @@
       <div class="public">
         <h2>Public interface</h2>
         <div class="section">
+          <a name="print_message/3"/>
           <h3 class="code">print_message/3</h3>
           <blockquote>
             <p class="comment">Prints a message of the given kind for the specificed component.</p>
@@ -63,6 +64,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="print_message_tokens/3"/>
           <h3 class="code">print_message_tokens/3</h3>
           <blockquote>
             <p class="comment">Print the messages tokens to the given stream, prefixing each line with the specified atom.</p>
@@ -78,12 +80,13 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>print_message_tokens(@stream_or_alias,+atom,@list(term)) &ndash; one</code>
+              <code>print_message_tokens(@stream_or_alias,+atom,@list(nonvar)) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 class="code">print_message_token/2</h3>
+          <a name="print_message_token/4"/>
+          <h3 class="code">print_message_token/4</h3>
           <blockquote>
             <p class="comment">User-defined hook predicate for printing a message token (at_same_line, nl, flush, Format-Arguments, ansi(Attributes,Format,Arguments), begin(Kind,Variable), and end(Variable)).</p>
           </blockquote>
@@ -94,15 +97,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>print_message_token(Stream,Token)</code>
+              <code>print_message_token(Stream,Prefix,Token,Tokens)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>print_message_token(@steream_or_alias,@nonvar) &ndash; zero_or_one</code>
+              <code>print_message_token(@stream_or_alias,@atom,@nonvar,@list(nonvar)) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
+          <a name="message_tokens//2"/>
           <h3 class="code">message_tokens//2</h3>
           <blockquote>
             <p class="comment">User-defined hook grammar rule for converting a message into a list of tokens (at_same_line, nl, flush, Format-Arguments, ansi(Attributes,Format,Arguments), begin(Kind,Variable), and end(Variable)).</p>
@@ -119,6 +123,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="message_prefix_stream/4"/>
           <h3 class="code">message_prefix_stream/4</h3>
           <blockquote>
             <p class="comment">Message line prefix and stream to be used when printing a message given its kind and component.</p>
@@ -134,11 +139,12 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>message_prefix_stream(@nonvar,@callable,@atom,@list(term)) &ndash; zero_or_more</code>
+              <code>message_prefix_stream(@nonvar,@callable,@atom,@stream_or_alias) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
         <div class="section">
+          <a name="message_hook/4"/>
           <h3 class="code">message_hook/4</h3>
           <blockquote>
             <p class="comment">User-defined hook predicate for intercepting message printing calls.</p>
@@ -154,11 +160,12 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>message_hook(@nonvar,@callable,@atom,@list(term)) &ndash; zero_or_more</code>
+              <code>message_hook(@nonvar,@callable,@atom,@list(nonvar)) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
         <div class="section">
+          <a name="trace_event/2"/>
           <h3 class="code">trace_event/2</h3>
           <blockquote>
             <p class="comment">Trace event handler. The runtime calls all trace event handlers using a failure-driven loop before calling the debug event handler.</p>
@@ -179,6 +186,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="debug_handler_provider/1"/>
           <h3 class="code">debug_handler_provider/1</h3>
           <blockquote>
             <p class="comment">Declares an object as the debug handler provider. There should be at most one debug handler provider loaded at any given moment.</p>
@@ -199,6 +207,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="debug_handler/2"/>
           <h3 class="code">debug_handler/2</h3>
           <blockquote>
             <p class="comment">Debug event handler.The two defined events are top_goal(Goal,TGoal) and goal(Goal,TGoal) where Goal is the source goal and TGoal is the corresponding compiled goal.</p>
@@ -219,6 +228,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="expand_library_path/2"/>
           <h3 class="code">expand_library_path/2</h3>
           <blockquote>
             <p class="comment">Expands a library name into its full path. Uses a depth bound to prevent loops.</p>
@@ -239,6 +249,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="loaded_file/1"/>
           <h3 class="code">loaded_file/1</h3>
           <blockquote>
             <p class="comment">Enumerates, by backtracking, all loaded files, returning their full paths.</p>
@@ -259,6 +270,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="loaded_file_property/2"/>
           <h3 class="code">loaded_file_property/2</h3>
           <blockquote>
             <p class="comment">Enumerates, by backtracking, all loaded file properties. Valid properties are: basename/1, directory/1, mode/1, flags/1, text_properties/1 (encoding/1 and bom/1), target/1, modified/1, parent/1, and library/1.</p>
@@ -279,6 +291,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="compile_aux_clauses/1"/>
           <h3 class="code">compile_aux_clauses/1</h3>
           <blockquote>
             <p class="comment">Compiles a list of auxiliary clauses.</p>
@@ -299,6 +312,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="entity_prefix/2"/>
           <h3 class="code">entity_prefix/2</h3>
           <blockquote>
             <p class="comment">Converts between an entity identifier and the entity prefix that is used for its compiled code. When none of the arguments is instantiated, it returns the identifier and the prefix of the entity under compilation, if any.</p>
@@ -319,6 +333,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="compile_predicate_heads/4"/>
           <h3 class="code">compile_predicate_heads/4</h3>
           <blockquote>
             <p class="comment">Compiles clause heads. The heads are compiled in the context of the entity under compilation when the entity argument is not instantiated.</p>
@@ -345,6 +360,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="compile_predicate_indicators/3"/>
           <h3 class="code">compile_predicate_indicators/3</h3>
           <blockquote>
             <p class="comment">Compiles predicate indicators. The predicate are compiled in the context of the entity under compilation when the entity argument is not instantiated.</p>
@@ -371,6 +387,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="decompile_predicate_heads/4"/>
           <h3 class="code">decompile_predicate_heads/4</h3>
           <blockquote>
             <p class="comment">Decompiles clause heads. All compiled clause heads must belong to the same entity, which must be loaded.</p>
@@ -397,6 +414,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="decompile_predicate_indicators/4"/>
           <h3 class="code">decompile_predicate_indicators/4</h3>
           <blockquote>
             <p class="comment">Decompiles predicate indicators. All compiled predicate indicators must belong to the same entity, which must be loaded.</p>
@@ -423,6 +441,7 @@
           </dl>
         </div>
         <div class="section">
+          <a name="execution_context/6"/>
           <h3 class="code">execution_context/6</h3>
           <blockquote>
             <p class="comment">Execution context term data. Execution context terms should be considered opaque terms subject to change without notice.</p>
@@ -452,6 +471,7 @@
       <div class="private">
         <h2>Private predicates</h2>
         <div class="section">
+          <a name="execution_context_this_rest/3"/>
           <h3 class="code">execution_context_this_rest/3</h3>
           <blockquote>
             <p class="comment">Conversion between an execution context term data and "this" plus the remaining elements of the context.</p>
