@@ -9,10 +9,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(user_predicates),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+foo(1).
+
+:- meta_predicate(bar(0)).
+bar(X) :-
+	call(X).

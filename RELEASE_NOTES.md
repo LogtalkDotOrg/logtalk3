@@ -82,7 +82,13 @@ would result in DOT warnings. Thanks to Sergio Castro for the bug report.
 
 * FIXED: Bug in the `diagrams` tool where cross-reference diagrams would not
 display external entities correctly.
- 
+
+Tests
+-----
+
+* ADDED: Two more unit tests for the `uses/2` directive for testing calling
+user-defined predicates and meta-predicates in `user`.
+
 
 3.00.0 Alpha 36 - February 26, 2014
 ===================================
