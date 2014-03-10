@@ -35,8 +35,8 @@ Logtalk compiler and runtime
 with the `optimize` flag turned on is now only performed during the second
 compiler stage.
 
-* IMPROVED: Allow using `uses/2` directives to call predicates defined in the
-`user` pseudo-object that are not built-in predicates.
+* FIXED: Allow using `uses/2` directives to call meta-predicates defined in
+the `user` pseudo-object that are not built-in predicates.
 
 * FIXED: Only fold left unifications during optimization of the generated code
 if they don't result in cyclic terms.
