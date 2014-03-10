@@ -10323,6 +10323,10 @@ current_logtalk_flag(Flag, Value) :-
 		catch('$lgt_predicate_property'(':'(Module, Original), meta_predicate(Meta)), _, fail) ->
 		% meta-predicates specified in a use_module/2 directive
 		true
+	;	'$lgt_pp_uses_predicate_'(user, Original, Pred),
+		catch('$lgt_predicate_property'(Original, meta_predicate(Meta)), _, fail) ->
+		% Prolog meta-predicate undeclared in the adapter file (may not be a built-in)
+		true
 	;	fail
 	),
 	Pred =.. [_| PredArgs],

@@ -38,6 +38,10 @@ compiler stage.
 * FIXED: Only fold left unifications during optimization of the generated code
 if they don't result in cyclic terms.
 
+* FIXED: Calls to Prolog proprietary meta-predicates that are not built-in
+predicates but are specified in `uses/2` directives would not be checked for
+safety when called from a user-defined meta-predicate.
+
 Prolog adapter and integration files
 ------------------------------------
 
