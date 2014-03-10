@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Integration file for SWI-Prolog
-%  Last updated on October 11, 2013
+%  Last updated on March 10, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -31,8 +31,10 @@
 	atom_concat(LogtalkHome, '/adapters/swi.pl', AdapterFile), consult(AdapterFile),
 	atom_concat(LogtalkHome, '/paths/paths.pl', PathsFile), consult(PathsFile),
 	atom_concat(LogtalkHome, '/integration/logtalk_comp_swi.pl', IntegrationFile), consult(IntegrationFile),
-	atom_concat(LogtalkHome, '/adapters/swihooks.pl', HooksFile), consult(HooksFile),
-	(	absolute_file_name(library(pce), _, [file_type(prolog), access(read), file_errors(fail)]) ->
-		atom_concat(LogtalkHome, '/adapters/xpcehooks.pl', XPCEHooksFile), consult(XPCEHooksFile)
-	;	true
-	).
+	atom_concat(LogtalkHome, '/adapters/swihooks.pl', HooksFile), consult(HooksFile).
+
+% uncomment the following lines if you want the XPCE hooks file to load automatically at startup
+%	(	absolute_file_name(library(pce), _, [file_type(prolog), access(read), file_errors(fail)]) ->
+%		atom_concat(LogtalkHome, '/adapters/xpcehooks.pl', XPCEHooksFile), consult(XPCEHooksFile)
+%	;	true
+%	).

@@ -55,6 +55,10 @@ built-ins before adding workaround definitions for them.
 * ADDED: Workaround definition for the missing `acyclic_term/1` standard
 predicate to the adapter files of Lean Prolog, Qu-Prolog, and SICStus Prolog.
 
+* CHANGED: The SWI-Prolog integration files no longer load the `xpcehooks.pl`
+file at startup to avoid errors due to broken XPCE installations, specially in
+some Linux distributions.
+
 Documentation
 -------------
 
