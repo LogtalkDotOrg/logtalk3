@@ -10275,22 +10275,12 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_body'(Alias, TPred, '$lgt_debug'(goal(Alias, TPred), ExCtx), Ctx) :-
 	'$lgt_pp_uses_predicate_'(Obj, Pred, Alias),
-	(	Obj == user ->
-		(	'$lgt_prolog_built_in_predicate'(Pred) ->
-			% delegate translation to the clauses that deal with Prolog
-			% built-in predicates; the uses/2 directive is typically used
-			% in this case to help document built-in predicate dependencies
-			fail
-		;	% user-defined predicate
-			TPred = Pred,
-			'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx)
-		)
-	;	% an object other than the pseudo-object "user"
-		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-		'$lgt_comp_ctx_head'(Ctx, Head),
-		'$lgt_add_referenced_object_message'(Obj, Pred, Alias, Head),
-		'$lgt_tr_body'(Obj::Pred, TPred, _, Ctx)
-	),
+	Obj \== user,
+	!,
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	'$lgt_comp_ctx_head'(Ctx, Head),
+	'$lgt_add_referenced_object_message'(Obj, Pred, Alias, Head),
+	'$lgt_tr_body'(Obj::Pred, TPred, _, Ctx),
 	!.
 
 % non-callable terms
@@ -10375,12 +10365,14 @@ current_logtalk_flag(Flag, Value) :-
 	assertz('$lgt_pp_non_portable_predicate_'(Head, Lines)),
 	fail.
 
-% Prolog proprietary built-in meta-predicates (must be declared in the adapter files)
+% Prolog proprietary meta-predicates
 
 '$lgt_tr_body'(Alias, TPred, DPred, Ctx) :-
 	'$lgt_pp_uses_predicate_'(user, Pred, Alias),
 	(	'$lgt_prolog_meta_predicate'(Pred, Meta, Type)
+		% built-in Prolog meta-predicate declared in the adapter file in use
 	;	catch('$lgt_predicate_property'(Pred, meta_predicate(Meta)), _, fail)
+		% Prolog meta-predicate undeclared in the adapter file (may not be a built-in)
 	),
 	!,
 	Pred =.. [Functor| Args],
@@ -10439,13 +10431,17 @@ current_logtalk_flag(Flag, Value) :-
 		throw(domain_error(meta_predicate_template, Meta))
 	).
 
-% Logtalk and Prolog built-in predicates
+% predicates defined in the pseudo-object "user" as specified in uses/2 directives
+%
+% the uses/2 directive is typically used in this case to help document dependencies
+% on Prolog-defined predicates (usually, but not necessarily, built-in predicates)  
 
 '$lgt_tr_body'(Alias, Pred, '$lgt_debug'(goal(Alias, Pred), ExCtx), Ctx) :-
 	'$lgt_pp_uses_predicate_'(user, Pred, Alias),
-	'$lgt_built_in_predicate'(Pred),
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
+
+% Logtalk and Prolog built-in predicates
 
 '$lgt_tr_body'(Pred, TPred, DPred, Ctx) :-
 	'$lgt_built_in_predicate'(Pred),
@@ -11077,7 +11073,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_optimizable_local_db_call'(Pred, TPred) :-
 	nonvar(Pred),
-	% only for objects...
+	% only for objects
 	'$lgt_pp_entity_'(object, _, Prefix, _, _),
 	% only for facts
 	(	Pred = (Head :- Body) ->
