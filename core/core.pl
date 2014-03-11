@@ -40,7 +40,7 @@
 :- op(600, xfy, ::).
 % send to "self"
 :- op(600,  fy, ::).
-% "super" call (calls an overriden, inherited method definition)
+% "super" call (calls an overridden, inherited method definition)
 :- op(600,  fy, ^^).
 
 
@@ -3987,7 +3987,7 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_lambda'(+curly_bracketed_term, @callable)
 %
 % calls a lambda-call with free variables but no parameters (Free/Goal) where the
-% arguments are already cheked and compiled; typically used in bagof/3 and setof/3
+% arguments are already checked and compiled; typically used in bagof/3 and setof/3
 % as an alternative to the enumeration of all existentially quantified variables
 
 '$lgt_lambda'(Free, Goal) :-
@@ -4556,7 +4556,7 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_print_message'(+atom_or_compound, +atom, +nonvar)
 %
 % internal predicate used by the compiler and runtime to print a message;
-% we fake the execution context argument to call the correspoding method
+% we fake the execution context argument to call the corresponding method
 % in the "logtalk" built-in object
 
 '$lgt_print_message'(Kind, Component, Term) :-
@@ -4634,7 +4634,7 @@ current_logtalk_flag(Flag, Value) :-
 		% we're attempting to reload a file
 		'$lgt_compiler_flag'(reload, Reload),
 		(	Reload == skip ->
-			% default or file-specific reload flag set to skip if file alreay loaded
+			% default or file-specific reload flag set to skip if file already loaded
 			'$lgt_print_message'(comment(loading), core, skipping_reloading_file(SourceFile, Flags))
 		;	'$lgt_member'(reload(skip), PreviousFlags) ->
 			% file marked as load once the first time it was loaded
@@ -4883,7 +4883,7 @@ current_logtalk_flag(Flag, Value) :-
 %
 % with some backend Prolog compilers, a syntax error while reading the terms in a source
 % file results in a printed message and failure instead of an exception but we need to
-% restore the original directory before passsing the failure up to the caller
+% restore the original directory before passing the failure up to the caller
 
 '$lgt_compile_file'(SourceFile, PrologFile, Flags, Action, Directory) :-
 	(	'$lgt_compile_file'(SourceFile, PrologFile, Flags, Action) ->
@@ -5131,7 +5131,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_file_term'(end_of_file, _, _) :-
 	'$lgt_pp_cc_if_found_'(_),
-	% unexpected end-of-file while compiling a conditinal compilation block
+	% unexpected end-of-file while compiling a conditional compilation block
 	throw(error(existence_error(directive, endif/0), term(end_of_file))).
 
 '$lgt_tr_file_term'(end_of_file, _, _) :-
@@ -5162,7 +5162,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_add_referenced_object'(@object_identifier)
 %
-% adds referenced object for later cheking of references to unknown objects;
+% adds referenced object for later checking of references to unknown objects;
 % we also save the line numbers for the first reference to the object
 
 '$lgt_add_referenced_object'(Obj) :-
@@ -5181,7 +5181,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_add_referenced_protocol'(@protocol_identifier)
 %
-% adds referenced protocol for later cheking of references to unknown protocols
+% adds referenced protocol for later checking of references to unknown protocols
 % we also save the line numbers for the first reference to the protocol
 
 '$lgt_add_referenced_protocol'(Ptc) :-
@@ -5195,7 +5195,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_add_referenced_category'(@category_identifier)
 %
-% adds referenced category for later cheking of references to unknown categories
+% adds referenced category for later checking of references to unknown categories
 % we also save the line numbers for the first reference to the category
 
 '$lgt_add_referenced_category'(Ctg) :-
@@ -5214,7 +5214,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_add_referenced_module'(@protocol_identifier)
 %
-% adds referenced module for later cheking of references to unknown modules
+% adds referenced module for later checking of references to unknown modules
 % we also save the line numbers for the first reference to the module
 
 '$lgt_add_referenced_module'(Module) :-
@@ -5277,7 +5277,7 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_add_referenced_module_predicate'(@object_identifier, @callable, @term)
 % '$lgt_add_referenced_module_predicate'(@object_identifier, @callable, @callable, @term)
 %
-% adds referenced module for later cheking of references to unknown modules
+% adds referenced module for later checking of references to unknown modules
 % we also save the line numbers for the first reference to the module
 
 '$lgt_add_referenced_module_predicate'(Module, Pred, Head) :-
@@ -6182,7 +6182,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_tr_runtime_term'(@term, +compilation_context)
 %
-% translates a rumtime term (a clause, directive, or grammar rule)
+% translates a runtime term (a clause, directive, or grammar rule)
 
 '$lgt_tr_runtime_term'((-), _) :-
 	% catch variables
@@ -9337,7 +9337,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_execution_context_this'(ExCtx, This),
 	'$lgt_tr_ctx_call'(Obj, Pred, TPred, This).
 
-% calling category predicates directly (depreacated control construct)
+% calling category predicates directly (deprecated control construct)
 
 '$lgt_tr_body'(:Pred, TPred, '$lgt_debug'(goal(:Pred, TPred), ExCtx), Ctx) :-
 	!,
@@ -10063,7 +10063,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	!.
 
-% Logtalk flag predicates (just error cheking when one of the arguments isn't instantiated)
+% Logtalk flag predicates (just error checking when one of the arguments isn't instantiated)
 
 '$lgt_tr_body'(set_logtalk_flag(Flag, Value), TPred, '$lgt_debug'(goal(DPred, TPred), ExCtx), Ctx) :-
 	nonvar(Flag),
@@ -10095,7 +10095,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_must_be'(var_or_flag, Flag),
 	fail.
 
-% Prolog flag predicates (just basic error and portability cheking)
+% Prolog flag predicates (just basic error and portability checking)
 
 '$lgt_tr_body'(set_prolog_flag(Flag, _), _, _, Ctx) :-
 	'$lgt_must_be'(var_or_atom, Flag),
@@ -10868,7 +10868,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_extend_closure'(@callable, @list(term), -callable)
 %
-% extends a closure by appending a list of arguments to contruct a goal
+% extends a closure by appending a list of arguments to construct a goal
 %
 % this predicate fails if the closure can only be extended at runtime
 
@@ -11378,7 +11378,7 @@ current_logtalk_flag(Flag, Value) :-
 %
 % calls a parametric object proxy; used to simplify the code generated by
 % the compilation of messages to parametric object proxies and to abstract
-% thr necessary error handling
+% the necessary error handling
 
 '$lgt_call_proxy'(Proxy, Pred, This) :-
 	catch(Proxy, error(Error, _), throw(error(Error, logtalk({Proxy}::Pred, This)))).
@@ -12235,7 +12235,7 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_tr_implements_protocol'(+list, @object_identifier)
 % '$lgt_tr_implements_protocol'(+list, @category_identifier)
 %
-% translates an "implementents" relation between a category or an object and a list of protocols
+% translates an "implements" relation between a category or an object and a list of protocols
 
 '$lgt_tr_implements_protocol'([], _).
 
@@ -12595,7 +12595,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_current_line_numbers'(@stream)
 %
-% returns the current term line numbers, reprtesented as a pair StartLine-EndLine
+% returns the current term line numbers, represented as a pair StartLine-EndLine
 
 '$lgt_current_line_numbers'(Lines) :-
 	(	'$lgt_pp_term_position_variables_'(Lines, _) ->
@@ -13714,8 +13714,7 @@ current_logtalk_flag(Flag, Value) :-
 % a predicate declaration for a descendant instance
 
 '$lgt_gen_ic_idcl_clauses'(Local, Obj, Dcl, IDcl, DDcl) :-
-	% generate linking clauses for accessing declarations in related
-	% entities
+	% generate linking clauses for accessing declarations in related entities
 	'$lgt_compiler_flag'(complements, Complements),
 	(	Complements == allow ->
 		% complementing categories are allowed to override local predicate declarations
@@ -14069,7 +14068,7 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_fix_predicate_defs'
 %
 % ensure that calls to synchronized or coinductive predicates
-% are routed to the corresponding auxilary clauses
+% are routed to the corresponding auxiliary clauses
 
 '$lgt_fix_predicate_defs' :-
 	(	'$lgt_pp_synchronized_'(_, _) ->
@@ -14142,7 +14141,7 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_fix_coinductive_predicates_defs'
 %
 % ensure that calls to coinductive predicates are routed to the
-% auxilary clauses that perform the check for coinductive success
+% auxiliary clauses that perform the check for coinductive success
 
 '$lgt_fix_coinductive_predicates_defs' :-
 	(	'$lgt_pp_object_'(_, _, _, Def, _, _, _, _, DDef, _, _) ->
@@ -14222,7 +14221,7 @@ current_logtalk_flag(Flag, Value) :-
 % fixes predicate calls in entity clause rules and in initialization goals
 %
 % this compiler second stage is mainly required for dealing with redefined
-% built-in predicates which may be textualy defined in an entity after their
+% built-in predicates which may be textually defined in an entity after their
 % calls as predicate definition order is irrelevant
 
 '$lgt_fix_predicate_calls' :-
@@ -18039,7 +18038,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_new_threaded_tag'(-integer)
 %
-% generates a new multi-threading tag; used in the built-in assynchronous
+% generates a new multi-threading tag; used in the built-in asynchronous
 % multi-threading predicates
 
 '$lgt_new_threaded_tag'(New) :-
@@ -18081,7 +18080,7 @@ current_logtalk_flag(Flag, Value) :-
 % message is static and the support for complementing categories is disallowed (unfortunately,
 % allowing hot patching of a static object would easily lead to inconsistencies as there isn't
 % any portable solution for updating in-place the definition of patched object predicates that
-% were already directly called due to the previou use of static binding)
+% were already directly called due to the previous use of static binding)
 
 '$lgt_send_to_obj_static_binding'(Obj, Pred, Sender, Call) :-
 	(	'$lgt_send_to_obj_static_binding_'(Obj, Pred, Sender, Call) ->
@@ -19036,7 +19035,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_load_default_entities'
 %
-% loads all default built-in entities if not already loaded (when embbeding
+% loads all default built-in entities if not already loaded (when embedding
 % Logtalk, the pre-compiled entities are loaded prior to this file)
 
 '$lgt_load_default_entities' :-
@@ -19168,7 +19167,7 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_start_runtime_threading'
 %
 % initializes the asynchronous threaded calls tag counter support for
-% compilers supporting multi-threading programming (curently we use
+% compilers supporting multi-threading programming (currently we use
 % integers, which impose a limitation on the maximum number of tags
 % on back-end Prolog compilers with bounded integers)
 
@@ -19190,7 +19189,7 @@ current_logtalk_flag(Flag, Value) :-
 % checks for a compatible back-end Prolog compiler version
 %
 % note, however, that an old and incompatible back-end Prolog version may
-% break Logtalk initialization before this cheking predicate is called
+% break Logtalk initialization before this checking predicate is called
 
 '$lgt_check_prolog_version' :-
 	'$lgt_prolog_feature'(prolog_version, Current),
