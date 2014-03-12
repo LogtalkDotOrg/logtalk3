@@ -215,6 +215,7 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 '$lgt_file_extension'(logtalk, '.lgt').
 '$lgt_file_extension'(logtalk, '.logtalk').
 '$lgt_file_extension'(prolog, '.pl').
+'$lgt_file_extension'(tmp, '.po').
 
 
 
