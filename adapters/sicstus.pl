@@ -262,7 +262,11 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 '$lgt_default_flag'(portability, silent).
 '$lgt_default_flag'(redefined_built_ins, silent).
 '$lgt_default_flag'(missing_directives, warning).
-'$lgt_default_flag'(underscore_variables, singletons).
+:- if((current_prolog_flag(version_data, sicstus(Major,Minor,_,_,_)), (Major,Minor) @>= (4,3))).
+	'$lgt_default_flag'(underscore_variables, dont_care).
+:- else.
+	'$lgt_default_flag'(underscore_variables, singletons).
+:- endif.
 % optional features compilation flags:
 '$lgt_default_flag'(complements, deny).
 '$lgt_default_flag'(dynamic_declarations, deny).
