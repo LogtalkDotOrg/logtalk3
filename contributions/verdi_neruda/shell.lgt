@@ -2,9 +2,9 @@
 :- object(shell(_Interpreters)).
 
 	:- info([
-		version is 1.0,
+		version is 1.01,
 		author is 'Victor Lagerkvist and Paulo Moura',
-		date is 2010/06/13,
+		date is 2014/03/12,
 		comment is 'Prolog shell for the interpreters.',
 		parnames is ['Interpreters']
 	]).
@@ -242,7 +242,7 @@
 		 write('Welcome, noble adventurer, your destiny awaits you!'), nl,
 		 write('Type "help." for online help.'), nl.
 
-	write_statistics(Stream, Statistic, N, Res0) :-
+	write_statistics(Stream, _Statistic, N, Res0) :-
 		Res1 is Res0/N,
 		Res is floor(Res1),
 		write(Stream, Res).
@@ -264,16 +264,16 @@
 
 	write_body([G]) :-
 		!,
-		write('	  '),
+		write('    '),
 		write(G),
 		write('.').
 	write_body([]) :-
 		!,
-		write('	  '),
+		write('    '),
 		write(true),
 		write('.').
 	write_body([G|Gs]) :-
-		write('	  '),
+		write('    '),
 		write(G),
 		write(' '),
 		write('&'), nl,

@@ -93,6 +93,12 @@ Tests
 * ADDED: Two more unit tests for the `uses/2` directive for testing calling
 user-defined predicates and meta-predicates in `user`.
 
+Contributions
+-------------
+
+* FIXED: Minor changes to the `verdi_neruda` contribution to avoid a warning
+and a syntax error when using SICStus Prolog as the back-end compiler.
+
 
 3.00.0 Alpha 36 - February 26, 2014
 ===================================
