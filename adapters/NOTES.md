@@ -101,6 +101,9 @@ CxProlog 0.97.7 or later versions
 
 Developed and tested with the help of the CxProlog author, Artur Miguel Dias.
 
+Due to the long release cycle of CxProlog, you may need to use its development
+version if the recommended version is not yet available as a stable release.
+
 
 ECLiPSe 6.1#143 or later versions
 ---------------------------------
@@ -123,13 +126,6 @@ With this Prolog compiler, avoid reloading Logtalk source files defining
 dynamic predicates. Due to the semantics of the ECLiPSe built-in predicate
 `compile/1`, new clauses for dynamic predicates are appended to the old ones
 instead of replacing them.
-
-On Windows, settings files are only supported on the Logtalk user folder.
-A workaround is to copy the integration shortcut to where you want to start
-Logtalk, delete the contents of the `Start in` field, and edit its `Target`
-field contents to start with the following text:
-
-	C:\Windows\System32\cmd.exe /c set LOGTALK_STARTUP_DIRECTORY=%CD% &&
 
 The Logtalk flag `prolog_compiler` is not usable due to lack of ECLiPSe
 built-in predicates for separate compilation and loading. To generate
@@ -243,13 +239,6 @@ predicates use a different argument order and there are also significant
 differences in arithmetic functions support. This adapter file copes with
 some of these issues using the dialect-level goal-expansion mechanism.
 
-On Windows, settings files are only supported on the Logtalk user folder.
-A workaround is to copy the integration shortcut to where you want to start
-Logtalk, delete the contents of the `Start in` field, and edit its `Target`
-field contents to start with the following text:
-
-	C:\Windows\System32\cmd.exe /c set LOGTALK_STARTUP_DIRECTORY=%CD% &&
-
 The original version of this adapter file was written and tested with help
 of a friend of mine, Paulo Urbano, for a previous version. Adopted for the
 current release using version 3.5 for Windows for testing.
@@ -260,7 +249,9 @@ SICStus Prolog 4.1.0 and later versions
 
 	sicstus.pl
 
-Adapter file for SICStus Prolog.
+Adapter file for SICStus Prolog. Use of the latest SICStus Prolog version
+is recommended due to improved standards compliance. No problems expected.
+Please report any problem found (with a solution if possible).
 
 
 SWI Prolog 6.0.0 and later versions
@@ -282,7 +273,7 @@ The adapter file may set the `iso` SWI-Prolog flag to `true`. This setting
 may improve compatibility of Logtalk code across different back-end 
 Prolog compilers buy may also cause compatibility problems with some 
 SWI-Prolog libraries. Comment out the corresponding `set_prolog_flag/2` 
-call if necessary.
+directive if necessary.
 
 If you intend to use Logtalk and XPCE at the same time, you may load the 
 `xpcehooks.pl` file in order to support Logtalk message sending goals as
@@ -346,6 +337,9 @@ Prolog source files (thus including the Logtalk core files). Thus, you
 must either install Logtalk on on a location where you have write access
 or perform the first run of the integration scripts from an admin account.
 
+Due to the long release cycle of XSB, you may need to use its development
+version if the recommended version is not yet available as a stable release.
+
 Know issue in XSB 3.4.1: this version doesn't support static multifile
 predicates. This limitation may be fixed in later versions.
 
@@ -358,7 +352,8 @@ YAP 6.3.4 and later versions
 
 The adapter file may set the flag `language` to `iso`, but that is only
 recommended and should not be needed to run Logtalk as some of the YAP
-libraries may not be compatible with this flag setting.
+libraries may not be compatible with this flag setting. Comment out the
+corresponding `set_prolog_flag/2` directive if necessary.
 
 The `yaphooks.pl` file defines YAP hook predicates for improving the
 integration between Logtalk and YAP.
