@@ -99,6 +99,12 @@ Contributions
 * FIXED: Minor changes to the `verdi_neruda` contribution to avoid a warning
 and a syntax error when using SICStus Prolog as the back-end compiler.
 
+Examples
+--------
+
+* CHANGED: Names of the objects defined in the `wrappers` example to avoid
+name conflicts when loading this example with the `roots` example.
+
 
 3.00.0 Alpha 36 - February 26, 2014
 ===================================

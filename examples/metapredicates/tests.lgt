@@ -241,19 +241,19 @@
 		L2s == [1, 2, 3].
 
 	test(metapredicates_23) :-
-		object::p(L),
+		wrappers_client::p(L),
 		L == [1, 2, 3].
 
 	test(metapredicates_24) :-
-		object::q(L),
+		wrappers_client::q(L),
 		L == [1, 2, 3].
 
 	test(metapredicates_25) :-
-		object::r(L),
+		wrappers_client::r(L),
 		L == [2, 1, 3].
 
 	test(metapredicates_26) :-
-		object::s(L),
+		wrappers_client::s(L),
 		L == [2, 1, 3].
 
 :- end_object.

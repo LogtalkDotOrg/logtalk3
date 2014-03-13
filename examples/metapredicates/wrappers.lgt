@@ -12,7 +12,7 @@
 % example of defining wrappers for the bagof/3 and setof/3 built-in methods
 % where the meta-argument may contain existentially qualified variables
 
-:- object(wrappers).
+:- object(wrappers_library).
 
 	:- public(my_setof/3).
 	:- meta_predicate(my_setof(*, ^, *)).
@@ -29,23 +29,23 @@
 :- end_object.
 
 
-:- object(object).
+:- object(wrappers_client).
 
 	:- public(p/1).
 	p(L) :-
-		wrappers::my_setof(X, Y^p(X, Y), L).
+		wrappers_library::my_setof(X, Y^p(X, Y), L).
 
 	:- public(q/1).
 	q(L) :-
-		wrappers::my_setof(X, Y^Z^q(X, Y, Z), L).
+		wrappers_library::my_setof(X, Y^Z^q(X, Y, Z), L).
 
 	:- public(r/1).
 	r(L) :-
-		wrappers::my_bagof(X, Y^p(X, Y), L).
+		wrappers_library::my_bagof(X, Y^p(X, Y), L).
 
 	:- public(s/1).
 	s(L) :-
-		wrappers::my_bagof(X, Y^Z^q(X, Y, Z), L).
+		wrappers_library::my_bagof(X, Y^Z^q(X, Y, Z), L).
 
 	p(2, two).
 	p(1, one).
