@@ -43,7 +43,19 @@
 %  files by changing the definition of the read-only flag `settings_file`
 %  in the used Prolog adapter file.
 %
-%  To use this feature, copy this file to your Logtalk user directory or to
+%  Logtalk uses the value of the `LOGTALK_STARTUP_DIRECTORY` environment
+%  variable for the startup directory and the value of the `LOGTALKUSER`
+%  environment variable for the Logtalk user directory. The POSIX integration
+%  scripts automatically set the the `LOGTALK_STARTUP_DIRECTORY` variable.
+%  On Windows systems, the integration shortcuts `Start in` field is set by
+%  default to `%LOGTALKUSER%` as the `%CD%` alternative only works on some
+%  versions. A workaround to use per-project settings files is to copy the
+%  shortcut to the project directory and to and edit its `Target` field to
+%  prefix its content with:
+%
+%	C:\Windows\System32\cmd.exe /c set LOGTALK_STARTUP_DIRECTORY=%CD% &&
+%
+%  To use settings files, copy this file to your Logtalk user directory or to
 %  the directory containing your project files, rename it to `settings.lgt`,
 %  customize it (see the examples below), and start Logtalk from the desired
 %  directory. Note that, for setting Logtalk flag values, you must use the
