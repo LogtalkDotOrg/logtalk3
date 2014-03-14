@@ -391,19 +391,23 @@ var
   SP_PATH: String;
 begin
   if IsWin64 then
-    if RegQueryStringValue(HKLM64, 'Software\SICS\SICStus4.2_x86-win32-nt-4\', 'SP_PATH', SP_PATH) or
+    if RegQueryStringValue(HKLM64, 'Software\SICS\SICStus4.3_win32\', 'SP_PATH', SP_PATH) or
+	   RegQueryStringValue(HKLM32, 'Software\SICS\SICStus4.3_win32\', 'SP_PATH', SP_PATH) or
+       RegQueryStringValue(HKLM64, 'Software\SICS\SICStus4.2_x86-win32-nt-4\', 'SP_PATH', SP_PATH) or
        RegQueryStringValue(HKLM32, 'Software\SICS\SICStus4.2_x86-win32-nt-4\', 'SP_PATH', SP_PATH) or
        RegQueryStringValue(HKLM32, 'Software\SICS\SICStus4.1_x86-win32-nt-4\', 'SP_PATH', SP_PATH)
     then
       Result := SP_PATH + '\bin\spwin.exe'  
     else
       Result := 'prolog_compiler_not_installed'
-  else if RegQueryStringValue(HKLM, 'Software\SICS\SICStus4.2_x86-win32-nt-4\', 'SP_PATH', SP_PATH) then
-    Result := SP_PATH + '\bin\spwin.exe'
-  else if RegQueryStringValue(HKLM, 'Software\SICS\SICStus4.1_x86-win32-nt-4\', 'SP_PATH', SP_PATH) then
-    Result := SP_PATH + '\bin\spwin.exe'
   else
-    Result := 'prolog_compiler_not_installed'
+    if RegQueryStringValue(HKLM, 'Software\SICS\SICStus4.3_win32\', 'SP_PATH', SP_PATH) or
+       RegQueryStringValue(HKLM, 'Software\SICS\SICStus4.2_x86-win32-nt-4\', 'SP_PATH', SP_PATH) or
+       RegQueryStringValue(HKLM, 'Software\SICS\SICStus4.1_x86-win32-nt-4\', 'SP_PATH', SP_PATH)
+    then
+      Result := SP_PATH + '\bin\spwin.exe'
+    else
+      Result := 'prolog_compiler_not_installed'
 end;
 
 function GetSICStusExePath(Param: String): String;

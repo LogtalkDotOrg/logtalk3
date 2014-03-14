@@ -59,6 +59,12 @@ predicate to the adapter files of Lean Prolog, Qu-Prolog, and SICStus Prolog.
 file at startup to avoid errors due to broken XPCE installations, specially in
 some Linux distributions.
 
+Installers and installation scripts
+-----------------------------------
+
+* UPDATED: The Windows installer now also detects version 4.3 of SICStus
+Prolog.
+
 Documentation
 -------------
 
