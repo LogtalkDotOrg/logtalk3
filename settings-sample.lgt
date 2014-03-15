@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  sample settings file
-%  Last updated on November 20, 2013
+%  Last updated on March 15, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -327,6 +327,27 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 
 	% uncomment the next line to suppress the startup printing of settings information (except warnings and errors)
 	%logtalk::message_hook(_, comment(settings), core, _).
+
+:- end_category.
+*/
+
+
+%  To print all otherwise silent compiler messages, uncomment the following
+%  lines:
+
+/*
+:- category(my_logtalk_startup_settings).
+
+	:- multifile(logtalk::message_hook/4).
+	:- dynamic(logtalk::message_hook/4).
+
+	logtalk::message_hook(_Message, silent, core, Tokens) :-
+		logtalk::message_prefix_stream(comment, core, Prefix, Stream),
+		logtalk::print_message_tokens(Stream, Prefix, Tokens).
+
+	logtalk::message_hook(_Message, silent(Key), core, Tokens) :-
+		logtalk::message_prefix_stream(comment(Key), core, Prefix, Stream),
+		logtalk::print_message_tokens(Stream, Prefix, Tokens).
 
 :- end_category.
 */
