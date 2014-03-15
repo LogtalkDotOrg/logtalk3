@@ -51,9 +51,8 @@ all otherwise silent compiler messages.
 Prolog adapter and integration files
 ------------------------------------
 
-* IMPROVED: The SICStus Prolog adapter file now tests for the availability of
-the `acyclic_term/1`, `subsumes_term/2`, and `term_variables/2` predicates as
-built-ins before adding workaround definitions for them.
+* UPDATED: The SICStus Prolog adapter file is now compatible with the
+forthcoming 4.3 release (tested with the 4.3.0 beta 7 version).
 
 * ADDED: Workaround definition for the missing `acyclic_term/1` standard
 predicate to the adapter files of Lean Prolog, Qu-Prolog, and SICStus Prolog.

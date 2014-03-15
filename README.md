@@ -86,7 +86,7 @@ you intend to use Logtalk (optional)
 4. SUPPORT
 ----------
 
-For support options, please consult the page:
+For support options, please consult the web page:
 
 <http://logtalk.org/support.html>
 
