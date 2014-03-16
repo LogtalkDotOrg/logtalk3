@@ -212,7 +212,7 @@
 :- dynamic('$lgt_threaded_tag_counter_'/1).
 
 
-% debugging predicates
+% debugging hook predicates
 
 :- multifile('$logtalk.trace_event'/3).
 :- dynamic('$logtalk.trace_event'/3).
@@ -1818,7 +1818,7 @@ logtalk_compile(Files) :-
 % compiles to disk a source file or a list of source files using a list of flag options
 %
 % note that we can only clean the compiler flags after reporting warning numbers as the
-% report/1 flag might be being in the list of flags but we cannot test for it as its
+% report/1 flag might be included in the list of flags but we cannot test for it as its
 % value should only be used in the default code for printing messages
 
 logtalk_compile(Files, Flags) :-
@@ -2176,6 +2176,9 @@ logtalk_make(Target) :-
 	'$lgt_print_message'(comment(make), core, intermediate_files_deleted).
 
 
+% deal with changes to the default compilation mode
+% when no explicit compilation mode as specified
+
 '$lgt_changed_compilation_mode'(debug, Flags) :-
 	\+ '$lgt_member'(debug(_), Flags),
 	\+ '$lgt_compiler_flag'(debug, on).
@@ -2199,6 +2202,10 @@ logtalk_make(Target) :-
 % this predicate is the Logtalk version of the prolog_load_context/2
 % predicate found on some compilers such as Quintus Prolog, SICStus
 % Prolog, SWI-Prolog, and YAP
+%
+% keys that use information from the '$lgt_pp_file_data_'/4 predicate can be
+% used in calls wrapped by initialization/1 directives as this predicate is
+% only reinitialized after loading the generated intermediate Prolog file
 
 logtalk_load_context(source, Path) :-
 	'$lgt_pp_file_data_'(_, _, Path, _).
@@ -2245,7 +2252,12 @@ logtalk_load_context(stream, Stream) :-
 
 % set_logtalk_flag(+atom, +nonvar)
 %
-% sets a Logtalk global flag
+% sets a global flag value
+%
+% global flag values can always be overridden when compiling and loading source
+% files by using either a set_logtalk_flag/2 directive (whose scope is local to
+% the file containing it) or by passing a list of flag values in the calls to
+% the logtalk_compile/2 and logtalk_load/2 predicates
 
 set_logtalk_flag(Name, Value) :-
 	'$lgt_must_be'(read_write_flag, Name, logtalk(set_logtalk_flag(Name, Value), _)),
@@ -2266,7 +2278,7 @@ set_logtalk_flag(Name, Value) :-
 
 % current_logtalk_flag(?atom, ?nonvar)
 %
-% tests/gets Logtalk flags
+% tests/gets flag values
 
 current_logtalk_flag(Flag, Value) :-
 	(	var(Flag) ->
@@ -4515,8 +4527,6 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_debug'(+compound, @execution_context)
 %
-% debug events and corresponding hook predicates
-%
 % calls all defined trace event handlers and either use a loaded
 % provider for the debug event handler or simply call the debugging
 % goals to prevent execution of code compiled in debug mode to simply fail
@@ -4564,7 +4574,8 @@ current_logtalk_flag(Flag, Value) :-
 		% "logtalk" built-in object loaded
 		'$logtalk.execution_context'(ExCtx, logtalk, logtalk, logtalk, [], [], _),
 		'$logtalk.print_message'(Kind, Component, Term, ExCtx)
-	;	% something wrong happen when loading the default entities
+	;	% still compiling the default built-in entities or
+		% something wrong happened when loading those entities
 		'$lgt_compiler_flag'(report, off) ->
 		% no message printing required
 		true
@@ -15510,7 +15521,8 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_compile_hooks'(+callable)
 %
-% compiles the user-defined compiler hook
+% compiles the user-defined compiler hooks
+% (replacing any perviously defined hooks)
 
 '$lgt_compile_hooks'(Obj) :-
 	(	Obj == user ->
