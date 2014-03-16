@@ -70,7 +70,8 @@ Prolog.
 Documentation
 -------------
 
-* IMPROVED: Documentation of the `logtalk_library_path/2` built-in predicate.
+* IMPROVED: Documentation of the built-in predicates `logtalk_library_path/2`
+and `logtalk_load_context/2`.
 
 Tools
 -----
