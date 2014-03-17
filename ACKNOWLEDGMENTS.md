@@ -63,6 +63,7 @@ CONTRIBUTORS
 * Robert Sasak (PDDL 3.0 parser contribution)
 * Robert Shiplett (bug reports)
 * Rui Marques (bug reports)
+* Sergio Castro (testing, suggestions, and bug reports)
 * Timon Van Overveldt (multi-threading optimization and bug reports)
 * Theofrastos Mantadelis ("flags" contribution, ProbLog integration support, benchmark tests)
 * Ulrich Neumerkel (lambda expression examples and bug reports)
@@ -91,7 +92,7 @@ Center for Research in Advanced Computing Systems (CRACS), INESC TEC, Portugal
 SPONSORS
 ========
 
-VivoMind Research, LLC
+VivoMind Research, LLC - 2012-2013
 
 
 OPEN-SOURCE SOFTWARE USED IN LOGTALK DEVELOPMENT AND DISTRIBUTION
