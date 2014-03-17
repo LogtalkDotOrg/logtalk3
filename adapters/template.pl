@@ -159,6 +159,10 @@ numbervars(Term, From, Next) :-
 %  you may want to change the extension for Prolog files to match 
 %  the one expected by default by your Prolog compiler
 %
+%  there should only a single extension defined for Prolog source
+%  files but multiple extensions can be defined for Logtalk source
+%  files and for back-end specific temporary files
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 

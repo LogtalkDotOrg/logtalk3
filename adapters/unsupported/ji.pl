@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for JIProlog 3.1.0-1 or later versions
-%  Last updated on February 6, 2014
+%  Last updated on March 17, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -194,6 +194,10 @@ format(Format, Arguments) :-
 %
 %  you may want to change the extension for Prolog files to match 
 %  the one expected by default by your Prolog compiler
+%
+%  there should only a single extension defined for Prolog source
+%  files but multiple extensions can be defined for Logtalk source
+%  files and for back-end specific temporary files
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

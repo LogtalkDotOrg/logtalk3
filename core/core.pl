@@ -2331,6 +2331,8 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_current_op'(+object_identifier, ?operator_priority, ?operator_specifier, ?atom, +object_identifier, +scope)
 %
 % current_op/3 built-in method
+%
+% local operator declarations without a scope declaration are invisible
 
 '$lgt_current_op'(Obj, Priority, Specifier, Operator, Sender, Scope) :-
 	'$lgt_must_be'(object, Obj, logtalk(Obj::current_op(Priority, Specifier, Operator), Sender)),
@@ -2342,7 +2344,7 @@ current_logtalk_flag(Flag, Value) :-
 		OpScope \== l,
 		% check that the operator declaration is within the scope of the caller
 		\+ \+ (OpScope = Scope; Obj = Sender)
-	;	% also return global operators that aren't overriden by entity operators
+	;	% also return global operators that aren't overridden by entity operators
 		current_op(Priority, Specifier, Operator),
 		\+ (	'$lgt_entity_property_'(Obj, op(_, OtherSpecifier, Operator, _)),
 				'$lgt_same_operator_class'(Specifier, OtherSpecifier)
@@ -2354,6 +2356,8 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_current_predicate'(+object_identifier, ?predicate_indicator, +object_identifier, +scope)
 %
 % current_predicate/1 built-in method
+%
+% local predicates without a scope declaration are invisible
 
 '$lgt_current_predicate'(Obj, Pred, Sender, _) :-
 	'$lgt_must_be'(var_or_predicate_indicator, Pred, logtalk(Obj::current_predicate(Pred), Sender)),
@@ -2392,8 +2396,12 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_predicate_property'(+object_identifier, @callable, ?predicate_property, +object_identifier, +scope)
 %
-% predicate_property/2 built-in method; the implementation ensures that no spurious choice-points are
-% created when the method is called with a bound property argument
+% predicate_property/2 built-in method
+%
+% local predicates without a scope declaration are invisible
+%
+% the implementation ensures that no spurious choice-points are created when
+% the method is called with a bound property argument
 
 '$lgt_predicate_property'(Obj, Pred, Prop, Sender, _) :-
 	'$lgt_must_be'(callable, Pred, logtalk(Obj::predicate_property(Pred, Prop), Sender)),
@@ -2750,6 +2758,9 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_asserta'(+object_identifier, @clause, +object_identifier, +scope, +scope)
 %
 % asserta/1 built-in method
+%
+% asserting facts uses a caching mechanism that saves the compiled form of the
+% facts to improve performance
 
 '$lgt_asserta'(Obj, Clause, Sender, _, _) :-
 	nonvar(Clause),
@@ -2839,6 +2850,9 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_assertz'(+object_identifier, @clause, +object_identifier, +scope, +scope)
 %
 % assertz/1 built-in method
+%
+% asserting facts uses a caching mechanism that saves the compiled form of the
+% facts to improve performance
 
 '$lgt_assertz'(Obj, Clause, Sender, _, _) :-
 	nonvar(Clause),
@@ -3052,6 +3066,10 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_retract'(+object_identifier, @clause, +object_identifier, +scope)
 %
 % retract/1 built-in method
+%
+% the implementation must ensure that retracting the last clause for a
+% predicate allows any inherited clauses to be found again as they are
+% no longer being overridden
 
 '$lgt_retract'(Obj, Clause, Sender, TestScope) :-
 	'$lgt_must_be'(clause_or_partial_clause, Clause, logtalk(Obj::retract(Clause), Sender)),
@@ -3220,6 +3238,10 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_retractall'(+object_identifier, @callable, +object_identifier, +scope)
 %
 % retractall/1 built-in method
+%
+% the implementation must ensure that retracting the last clause for a
+% predicate allows any inherited clauses to be found again as they are
+% no longer being overridden
 
 '$lgt_retractall'(Obj, Head, Sender, TestScope) :-
 	'$lgt_must_be'(callable, Head, logtalk(Obj::retractall(Head), Sender)),
@@ -3284,8 +3306,9 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_nop'(+clause)
 %
-% used in the implementation of the built-in method
-% clause/2 to store the original clause body
+% used as the first goal in the body of asserted predicate clauses that are
+% rules to save the original clause body and thus support the implementation
+% of the clause/2 built-in method
 
 '$lgt_nop'(_).
 
@@ -4945,6 +4968,11 @@ current_logtalk_flag(Flag, Value) :-
 % (which can be either absolute or relative and may or may not include a
 % file name extension) the file directory, the file basename (name plus
 % extension), and the full file path
+%
+% when the file path input argument doesn't include an extension, this
+% predicate provides a solution for each defined Logtalk source file
+% extension; callers should test if the returned full path exists and
+% commit to that solution when not simply generating possible solutions
 
 '$lgt_file_name'(logtalk, FilePath, Directory, Basename, FullPath) :-
 	!,

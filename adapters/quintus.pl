@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Quintus Prolog 3.3~3.5
-%  Last updated on February 15, 2014
+%  Last updated on March 17, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -369,6 +369,10 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 %
 %  you may want to change the extension for Prolog files to match 
 %  the one expected by default by your Prolog compiler
+%
+%  there should only a single extension defined for Prolog source
+%  files but multiple extensions can be defined for Logtalk source
+%  files and for back-end specific temporary files
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
