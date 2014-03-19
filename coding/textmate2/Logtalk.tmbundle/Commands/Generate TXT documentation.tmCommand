@@ -5,9 +5,12 @@
 	<key>beforeRunningCommand</key>
 	<string>nop</string>
 	<key>command</key>
-	<string>cd "$TM_DIRECTORY"
-FILE=`basename "$TM_FILENAME" .lgt`
-$LOGTALK_COMMAND "set_logtalk_flag(altdirs, on), set_logtalk_flag(xmldir, 'xml_docs/'), logtalk_compile($FILE), halt."
+	<string>#!/usr/bin/env bash
+[[ -f "${TM_SUPPORT_PATH}/lib/bash_init.sh" ]] &amp;&amp; . "${TM_SUPPORT_PATH}/lib/bash_init.sh"
+
+cd "$TM_DIRECTORY"
+FILE=`basename $TM_FILENAME .lgt`
+$LOGTALK_COMMAND "logtalk_load(lgtdoc(loader)), set_logtalk_flag(source_data, on), logtalk_load($FILE), lgtdoc::file($FILE), halt."
 cd "$TM_DIRECTORY/xml_docs"
 $LOGTALK_TXT_COMMAND
 open *.txt

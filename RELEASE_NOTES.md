@@ -114,6 +114,12 @@ Examples
 * CHANGED: Names of the objects defined in the `wrappers` example to avoid
 name conflicts when loading this example with the `roots` example.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* FIXED: TextMate 2 bundle commands for generating (X)HTML, PDF, and text
+documentation for source files.
+
 
 3.00.0 Alpha 36 - February 26, 2014
 ===================================
