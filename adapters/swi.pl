@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SWI Prolog 6.0.0 and later versions
-%  Last updated on March 17, 2014
+%  Last updated on March 22, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -163,6 +163,7 @@
 '$lgt_prolog_meta_predicate'(ensure_loaded(_), ensure_loaded(*), predicate).
 '$lgt_prolog_meta_predicate'(format(_, _), format(*, *), predicate).
 '$lgt_prolog_meta_predicate'(format(_, _, _), format(*, *, *), predicate).
+'$lgt_prolog_meta_predicate'(load_files(_), load_files(*), predicate).
 '$lgt_prolog_meta_predicate'(load_files(_, _), load_files(*, *), predicate).
 '$lgt_prolog_meta_predicate'(use_module(_), use_module(*), predicate).
 '$lgt_prolog_meta_predicate'(use_module(_, _), use_module(*, *), predicate).
