@@ -45,6 +45,9 @@ if they don't result in cyclic terms.
 predicates but are specified in `uses/2` directives would not be checked for
 safety when called from a user-defined meta-predicate.
 
+* FIXED: Non-informative error message when trying to compile a call to a
+non-compatible proprietary built-in meta-predicate.
+
 * UPDATED: The `settings-sample.lgt` file now includes sample code for printing
 all otherwise silent compiler messages.
 
