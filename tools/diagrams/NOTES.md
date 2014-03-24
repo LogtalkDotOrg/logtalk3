@@ -163,8 +163,8 @@ generated diagrams. For entity diagrams the options are:
 	omit a common path prefix when printing directory paths (an atom; default is `''`)
 - `url_prefixes(FilePrefix, DocPrefix)`  
 	URL file and entity documenting URL prefixes used when generating cluster, file, and entity links (atoms; defaults are `''`)
-- `entity_url_suffix(Suffix)`  
-	extension for entity documenting URLs (an atom; default is `'.html'`)
+- `entity_url_suffix_target(Suffix, Target)`  
+	extension for entity documenting URLs (an atom; default is `'.html'`) and target separating symbols (an atom; default is `'#'`)
 
 For file diagrams the options are:
 
