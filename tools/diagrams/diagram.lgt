@@ -27,7 +27,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/03/08,
+		date is 2014/03/24,
 		comment is 'Common predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
@@ -49,7 +49,7 @@
 		atom_concat(libraries_, Project, Identifier),
 		Format::graph_header(output_file, Identifier, Project, libraries, [tooltip(Project)| Options]),
 		output_libraries(Libraries, Format, Options),
-		::output_externals(Options),
+		output_externals(Options),
 		::output_edges(Options),
 		Format::graph_footer(output_file, Identifier, Project, libraries, [tooltip(Project)| Options]),
 		Format::file_footer(output_file, Project, Options),
@@ -62,7 +62,7 @@
 		atom_concat(library_, Library, Identifier),
 		linking_options(Directory, Options, GraphOptions),
 		Format::graph_header(output_file, Identifier, Library, library, GraphOptions),
-		::output_library(Library, Directory, Options),
+		::output_library(Library, Directory, GraphOptions),
 		Format::graph_footer(output_file, Identifier, Library, library, GraphOptions),
 		output_libraries(Libraries, Format, Options).
 
@@ -104,7 +104,7 @@
 		atom_concat(library_, Library, Identifier),
 		linking_options(Directory, Options, GraphOptions),
 		Format::graph_header(output_file, Identifier, Library, library, GraphOptions),
-		::output_library(Library, Directory, Options),
+		::output_library(Library, Directory, GraphOptions),
 		Format::graph_footer(output_file, Identifier, Library, library, GraphOptions),
 		fail.
 	output_all_libraries(_).
@@ -136,8 +136,8 @@
 		atom_concat(rlibrary_, Library, Identifier),
 		linking_options(Path, Options, GraphOptions),
 		Format::graph_header(output_file, Identifier, Library, rlibrary, GraphOptions),
-		::output_rlibrary(Library, Path, Options),
-		::output_externals(Options),
+		::output_rlibrary(Library, Path, GraphOptions),
+		output_externals(Options),
 		::output_edges(Options),
 		Format::graph_footer(output_file, Identifier, Library, rlibrary, GraphOptions),
 		Format::file_footer(output_file, Library, Options),
@@ -149,14 +149,14 @@
 		atom_concat(library_, TopLibrary, TopIdentifier),
 		linking_options(TopPath, Options, TopGraphOptions),
 		Format::graph_header(output_file, TopIdentifier, TopLibrary, library, TopGraphOptions),
-		::output_library(TopLibrary, TopPath, Options),
+		::output_library(TopLibrary, TopPath, TopGraphOptions),
 		Format::graph_footer(output_file, TopIdentifier, TopLibrary, library, TopGraphOptions),
 		forall(
 			sub_library(TopLibrary, TopPath, ExcludedLibraries, Library, Path),
 			(	atom_concat(library_, Library, Identifier),
 				linking_options(Path, Options, GraphOptions),
 				Format::graph_header(output_file, Identifier, Library, library, GraphOptions),
-				::output_library(Library, Path, Options),
+				::output_library(Library, Path, GraphOptions),
 				Format::graph_footer(output_file, Identifier, Library, library, GraphOptions)
 			)
 		).
@@ -196,8 +196,8 @@
 		atom_concat(library_, Library, Identifier),
 		linking_options(Path, Options, GraphOptions),
 		Format::graph_header(output_file, Identifier, Library, library, GraphOptions),
-		::output_library(Library, Path, Options),
-		::output_externals(Options),
+		::output_library(Library, Path, GraphOptions),
+		output_externals(Options),
 		::output_edges(Options),
 		Format::graph_footer(output_file, Identifier, Library, library, GraphOptions),
 		Format::file_footer(output_file, Library, Options),
@@ -246,7 +246,7 @@
 		atom_concat(files_, Project, Identifier),
 		Format::graph_header(output_file, Identifier, Project, files, [tooltip(Project)| Options]),
 		::output_files(Files, Options),
-		::output_externals(Options),
+		output_externals(Options),
 		::output_edges(Options),
 		Format::graph_footer(output_file, Identifier, Project, files, [tooltip(Project)| Options]),
 		Format::file_footer(output_file, Project, Options),
@@ -392,6 +392,15 @@
 		comment is 'Outputs external entities using the specified options.',
 		argnames is ['Options']
 	]).
+
+	output_externals(Options) :-
+		% as externals can be defined in several places, use the file
+		% prefix, if defined, for file URL links
+		(	member(url_prefixes(FilePrefix, DocPrefix), Options) ->
+			ExternalsOptions = [urls(FilePrefix,DocPrefix)| Options]
+		;	ExternalsOptions = Options
+		),
+		::output_externals(ExternalsOptions).
 
 	:- protected(reset/0).
 	:- mode(reset, one).
@@ -616,21 +625,16 @@
 	:- protected(linking_options/3).
 	:- mode(linking_options(+atom, +list(compound), -list(compound)), one).
 	:- info(linking_options/3, [
-		comment is 'Adds url/1 and/or tooltip/1 linking options (for use by the graph language) to the general list of options.',
+		comment is 'Adds urls/2 and/or tooltip/1 linking options (for use by the graph language) to the general list of options.',
 		argnames is ['Path', 'Options', 'GraphOptions']
 	]).
 
 	linking_options(Path, Options, LinkingOptions) :-
 		member(omit_path_prefix(Prefix), Options),
-		member(url_protocol(Protocol), Options),
-		(	Protocol \== '',
-			atom_concat(Prefix, Suffix, Path),
-			atom_concat(Protocol, Suffix, URL) ->
-			LinkingOptions = [url(URL)| Options]
-		;	atom_concat(Prefix, Suffix, Path) ->
-			LinkingOptions = [tooltip(Suffix)| Options]
-		;	LinkingOptions = [tooltip(Path)| Options]
-		).
+		member(url_prefixes(FilePrefix, DocPrefix), Options),
+		atom_concat(Prefix, Suffix, Path),
+		atom_concat(FilePrefix, Suffix, FileURL),
+		LinkingOptions = [urls(FileURL,DocPrefix), tooltip(Suffix)| Options].
 
 	% auxiliary predicates; we could use the Logtalk standard library but we
 	% prefer to make this object self-contained given its documenting purpose

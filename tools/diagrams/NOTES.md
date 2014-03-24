@@ -161,8 +161,10 @@ generated diagrams. For entity diagrams the options are:
 	list of entities to exclude (default is `[]`)
 - `omit_path_prefix(Prefix)`  
 	omit a common path prefix when printing directory paths (an atom; default is `''`)
-- `url_protocol(Protocol)`  
-	URL protocol used when generating cluster links (default is `''`, i.e. none)
+- `url_prefixes(FilePrefix, DocPrefix)`  
+	URL file and entity documenting URL prefixes used when generating cluster, file, and entity links (atoms; defaults are `''`)
+- `entity_url_suffix(Suffix)`  
+	extension for entity documenting URLs (an atom; default is `'.html'`)
 
 For file diagrams the options are:
 
@@ -174,8 +176,8 @@ For file diagrams the options are:
 	print/omit file directory paths (`true` or `false`; default is `true`)
 - `omit_path_prefix(Prefix)`  
 	omit a common path prefix when printing directory paths (an atom; default is `''`)
-- `url_protocol(Protocol)`  
-	URL protocol used when generating cluster links (an atom; default is `''`, i.e. none)
+- `url_prefixes(FilePrefix, DocPrefix)`  
+	URL file and entity documenting URL prefixes used when generating cluster, file, and entity links (atoms; defaults are `''`)
 - `relation_labels(Boolean)`  
 	print/omit entity relation labels (`true` or `false`; default is `false`)
 - `output_directory(Directory)`  

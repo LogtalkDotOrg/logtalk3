@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/03/06,
+		date is 2014/03/24,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format']
 	]).
@@ -87,7 +87,14 @@
 	process(Kind, Entity, Options) :-
 		entity_property(Kind, Entity, defines(Caller, Properties)),
 		\+ member(auxiliary, Properties),
-		^^output_node(Caller, Caller, [], predicate, Options),
+		add_predicate_documentation_url(Options, Entity, Caller, PredicateOptions),
+		^^output_node(Caller, Caller, [], predicate, PredicateOptions),
+		fail.
+	process(Kind, Entity, Options) :-
+		entity_property(Kind, Entity, declares(Caller, _)),
+		\+ entity_property(Kind, Entity, defines(Caller, _)),
+		add_predicate_documentation_url(Options, Entity, Caller, PredicateOptions),
+		^^output_node(Caller, Caller, [], predicate, PredicateOptions),
 		fail.
 	process(Kind, Entity, Options) :-
 		calls_local_predicate(Kind, Entity, Caller, Callee),
@@ -101,6 +108,31 @@
 		^^save_edge(Caller, Callee, [calls], calls_predicate, [tooltip(calls)| Options]),
 		fail.
 	process(_, _, _).
+
+	add_predicate_documentation_url(Options, Entity, Functor/Arity, PredicateOptions) :-
+		!,
+		(	member(url_prefixes(FilePrefix, DocPrefix), Options) ->
+			functor(Entity, EntityFunctor, EntityArity),
+			atom_concat(DocPrefix, EntityFunctor, URL0),
+			atom_concat(URL0, '_', URL1),
+			number_codes(EntityArity, EntityArityCodes),
+			atom_codes(EntityArityAtom, EntityArityCodes),
+			atom_concat(URL1, EntityArityAtom, URL2),
+			member(entity_url_suffix_target(Suffix, Target), Options),
+			(	Target == '' ->
+				atom_concat(URL2, Suffix, URL)
+			;	atom_concat(URL2, Suffix, URL3),
+				atom_concat(URL3, Target, URL4),
+				atom_concat(URL4, Functor, URL5),
+				atom_concat(URL5, '/', URL6),
+				number_codes(Arity, ArityCodes),
+				atom_codes(ArityAtom, ArityCodes),
+				atom_concat(URL6, ArityAtom, URL)
+			),
+			PredicateOptions = [urls(FilePrefix, URL)| Options]
+		;	PredicateOptions = Options
+		).
+	add_predicate_documentation_url(Options, _, Options).
 
 	calls_local_predicate(Kind, Entity, Caller, Callee) :-
 		entity_property(Kind, Entity, calls(Callee, Properties)),
@@ -174,10 +206,12 @@
 	default_option(exclude_libraries([])).
 	% by default, don't exclude any entities:
 	default_option(exclude_entities([])).
-	% by default, don't generate cluster URLs:
-	default_option(url_protocol('')).
+	% by default, don't generate cluster, file, and entity URLs:
+	default_option(url_prefixes('', '')).
 	% by default, don't omit a path prefix when printing paths:
 	default_option(omit_path_prefix('')).
+	% by default, use a '.html' suffix for entity documentation URLs:
+	default_option(entity_url_suffix_target('.html', '#')).
 
 	diagram_name_suffix('_xref_diagram').
 

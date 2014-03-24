@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/14,
+		date is 2014/03/24,
 		comment is 'Predicates for generating entity diagrams.',
 		parnames is ['Format']
 	]).
@@ -69,7 +69,13 @@
 		^^linking_options(Path, Options, GraphOptions),
 		Format::graph_header(output_file, Identifier, Basename, file, GraphOptions),
 		process(Basename, Directory, Options),
-		output_externals(Options),
+		% as externals can be defined in several places, use the file
+		% prefix, if defined, for file URL links
+		(	member(url_prefixes(FilePrefix, DocPrefix), Options) ->
+			ExternalsOptions = [urls(FilePrefix,DocPrefix)| Options]
+		;	ExternalsOptions = Options
+		),
+		output_externals(ExternalsOptions),
 		^^output_edges(Options),
 		Format::graph_footer(output_file, Identifier, Basename, file, GraphOptions),
 		Format::file_footer(output_file, Basename, Options),
@@ -117,19 +123,20 @@
 		^^format_object(Format),
 		Format::graph_header(output_file, other, '(external entities)', external, [tooltip('(external entities)')| Options]),
 		retract(referenced_entity_(Entity)),
+		add_entity_documentation_url(Options, Entity, EntityOptions),
 		(	current_object(Entity) ->
 			^^ground_entity_identifier(object, Entity, Name),
 			(	\+ instantiates_class(Entity, _),
 				\+ specializes_class(Entity, _) ->
-				^^output_node(Name, Name, [], external_prototype, [tooltip(prototype)| Options])
-			;	^^output_node(Name, Name, [], external_instance_or_class, [tooltip('instance/class')| Options])
+				^^output_node(Name, Name, [], external_prototype, [tooltip(prototype)| EntityOptions])
+			;	^^output_node(Name, Name, [], external_instance_or_class, [tooltip('instance/class')| EntityOptions])
 			)
 		;	current_category(Entity) ->
 			^^ground_entity_identifier(category, Entity, Name),
-			^^output_node(Name, Name, [], external_category, [tooltip(category)| Options])
+			^^output_node(Name, Name, [], external_category, [tooltip(category)| EntityOptions])
 		;	% current_protocol(Entity),
 			^^ground_entity_identifier(protocol, Entity, Name),
-			^^output_node(Name, Name, [], external_protocol, [tooltip(protocol)| Options])
+			^^output_node(Name, Name, [], external_protocol, [tooltip(protocol)| EntityOptions])
 		),
 		fail.
 	output_externals(Options) :-
@@ -145,21 +152,24 @@
 		member(exclude_entities(ExcludedEntities), Options),
 		protocol_property(Protocol, file(Basename, Directory)),
 		\+ member(Protocol, ExcludedEntities),
-		output_protocol(Protocol, Options),
+		add_entity_documentation_url(Options, Protocol, ProtocolOptions),
+		output_protocol(Protocol, ProtocolOptions),
 		assertz(included_entity_(Protocol)),
 		fail.
 	process(Basename, Directory, Options) :-
 		member(exclude_entities(ExcludedEntities), Options),
 		object_property(Object, file(Basename, Directory)),
 		\+ member(Object, ExcludedEntities),
-		output_object(Object, Options),
+		add_entity_documentation_url(Options, Object, ObjectOptions),
+		output_object(Object, ObjectOptions),
 		assertz(included_entity_(Object)),
 		fail.
 	process(Basename, Directory, Options) :-
 		member(exclude_entities(ExcludedEntities), Options),
 		category_property(Category, file(Basename, Directory)),
 		\+ member(Category, ExcludedEntities),
-		output_category(Category, Options),
+		add_entity_documentation_url(Options, Category, CategoryOptions),
+		output_category(Category, CategoryOptions),
 		assertz(included_entity_(Category)),
 		fail.
 	process(Basename, Directory, Options) :-
@@ -171,6 +181,20 @@
 		assertz(included_entity_(Module)),
 		fail.
 	process(_, _, _).
+
+	add_entity_documentation_url(Options, Entity, EntityOptions) :-
+		(	member(urls(FilePrefix, DocPrefix), Options) ->
+			functor(Entity, Functor, Arity),
+			atom_concat(DocPrefix, Functor, URL0),
+			atom_concat(URL0, '_', URL1),
+			number_codes(Arity, ArityCodes),
+			atom_codes(ArityAtom, ArityCodes),
+			atom_concat(URL1, ArityAtom, URL2),
+			member(entity_url_suffix_target(Suffix, _), Options),
+			atom_concat(URL2, Suffix, URL),
+			EntityOptions = [urls(FilePrefix, URL)| Options]
+		;	EntityOptions = Options
+		).
 
 	output_protocol(Protocol, Options) :-
 		^^ground_entity_identifier(protocol, Protocol, Name),
@@ -551,10 +575,12 @@
 	default_option(exclude_libraries([])).
 	% by default, don't exclude any entities:
 	default_option(exclude_entities([])).
-	% by default, don't generate cluster URLs:
-	default_option(url_protocol('')).
+	% by default, don't generate cluster, file, and entity URLs:
+	default_option(url_prefixes('', '')).
 	% by default, don't omit a path prefix when printing paths:
 	default_option(omit_path_prefix('')).
+	% by default, use a '.html' suffix for entity documentation URLs:
+	default_option(entity_url_suffix_target('.html', '#')).
 
 	diagram_name_suffix('_entity_diagram').
 

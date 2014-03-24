@@ -59,10 +59,12 @@
 	default_option(exclude_libraries([])).
 	% by default, don't exclude any entities:
 	default_option(exclude_entities([])).
-	% by default, don't generate cluster URLs:
-	default_option(url_protocol('')).
+	% by default, don't generate cluster, file, and entity URLs:
+	default_option(url_prefixes('', '')).
 	% by default, don't omit a path prefix when printing paths:
 	default_option(omit_path_prefix('')).
+	% by default, use a '.html' suffix for entity documentation URLs:
+	default_option(entity_url_suffix_target('.html', '#')).
 
 	diagram_name_suffix('_inheritance_diagram').
 

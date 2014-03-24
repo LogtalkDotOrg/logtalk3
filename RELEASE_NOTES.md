@@ -83,6 +83,13 @@ Tools
 supported diagrams in one step. This object provides an interface common to
 all diagrams. Suggested by Sergio Castro.
 
+* ADDED: The `diagrams` tool can now add URLs to clusters, file nodes, and
+entity nodes liking to, respectively, directories, source files, and entity
+documentation files.
+
+* CHANGED: Renamed the `diagrams` tool option `url_protocol/1` to
+`url_prefixes/2` and added a new option `entity_url_suffix_target/2`.
+
 * IMPROVED: The `diagrams` tool processing of the `output_directory/1` option
 now creates the directory if it doesn't exist.
 

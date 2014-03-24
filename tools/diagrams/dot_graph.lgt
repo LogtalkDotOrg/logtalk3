@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/03/06,
+		date is 2014/03/24,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -104,7 +104,7 @@
 		write(Stream, 'subgraph "cluster_'),
 		write(Stream, Identifier),
 		write(Stream, '" {'), nl(Stream),
-		(	member(url(URL), Options) ->
+		(	member(urls(URL, _), Options) ->
 			write_key_value_nl(Stream, 'URL', URL),
 			write_key_value_nl(Stream, tooltip, URL)
 		;	member(tooltip(Tooltip), Options) ->
@@ -133,7 +133,10 @@
 		write(Stream, Identifier),
 		write(Stream, '" ['),
 		write_key_value_comma(Stream, shape, Shape),
-		(	member(url(URL), Options) ->
+		(	(	Kind == file, member(urls(URL, _), Options)
+			;	Kind == external_file, member(urls(URL, _), Options)
+			;	member(urls(_, URL), Options)	% entities or predicates
+			) ->
 			write_key_value_comma(Stream, 'URL', URL),
 			write_key_value_comma(Stream, tooltip, URL)
 		;	member(tooltip(Tooltip), Options) ->

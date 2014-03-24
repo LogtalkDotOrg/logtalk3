@@ -91,8 +91,8 @@ yes
 yes
 
 % some final output formats such as SVG support tooltips and URL links;
-% the URL protocol can be specified so that clicking in a node or a
+% the URL prefixes can be specified so that clicking in a node or a
 % cluster of nodes opens the corresponding file or library of files:
 
-| ?- entity_diagram::library(searching, [url_protocol('file:///'), omit_path_prefix('/Users/jdoe/logtalk/')]).
+| ?- entity_diagram::rlibrary(tools, [url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/', 'http://logtalk.org/library/'), omit_path_prefix('/Users/pmoura/logtalk/')]).
 yes
