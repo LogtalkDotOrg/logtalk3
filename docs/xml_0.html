@@ -51,8 +51,7 @@
       <div class="public">
         <h2>Public interface</h2>
         <div class="section">
-          <a name="parse/2"/>
-          <h3 class="code">parse/2</h3>
+          <h3 id="parse/2" class="code">parse/2</h3>
           <blockquote>
             <p class="comment">Parses Chars to/from a data structure of the form xml(&lt;atts&gt;, &lt;content&gt;).</p>
           </blockquote>
@@ -75,8 +74,7 @@
           </dl>
         </div>
         <div class="section">
-          <a name="parse/3"/>
-          <h3 class="code">parse/3</h3>
+          <h3 id="parse/3" class="code">parse/3</h3>
           <blockquote>
             <p class="comment">Parses Chars to/from a data structure of the form xml(&lt;atts&gt;, &lt;content&gt;).</p>
           </blockquote>
@@ -99,8 +97,7 @@
           </dl>
         </div>
         <div class="section">
-          <a name="subterm/2"/>
-          <h3 class="code">subterm/2</h3>
+          <h3 id="subterm/2" class="code">subterm/2</h3>
           <blockquote>
             <p class="comment">Unifies Subterm with a sub-term of XMLTerm. Note that XMLTerm is a sub-term of itself.</p>
           </blockquote>
@@ -120,8 +117,7 @@
           </dl>
         </div>
         <div class="section">
-          <a name="pp/1"/>
-          <h3 class="code">pp/1</h3>
+          <h3 id="pp/1" class="code">pp/1</h3>
           <blockquote>
             <p class="comment">Pretty prints a XML document on the current output stream.</p>
           </blockquote>
@@ -150,8 +146,7 @@
       <div class="private">
         <h2>Private predicates</h2>
         <div class="section">
-          <a name="xml_to_document/3"/>
-          <h3 class="code">xml_to_document/3</h3>
+          <h3 id="xml_to_document/3" class="code">xml_to_document/3</h3>
           <blockquote>
             <p class="comment">Translates the list of character codes XML into the Prolog term Document. Controls is a list of terms controlling the treatment of layout characters and character entities.</p>
           </blockquote>
@@ -171,8 +166,7 @@
           </dl>
         </div>
         <div class="section">
-          <a name="empty_map/1"/>
-          <h3 class="code">empty_map/1</h3>
+          <h3 id="empty_map/1" class="code">empty_map/1</h3>
           <blockquote>
             <p class="comment">True if Map is a null map.</p>
           </blockquote>
@@ -192,8 +186,7 @@
           </dl>
         </div>
         <div class="section">
-          <a name="map_member/3"/>
-          <h3 class="code">map_member/3</h3>
+          <h3 id="map_member/3" class="code">map_member/3</h3>
           <blockquote>
             <p class="comment">True if Map is a ordered map structure which records the pair Key-Data. Key must be ground.</p>
           </blockquote>
@@ -213,8 +206,7 @@
           </dl>
         </div>
         <div class="section">
-          <a name="map_store/4"/>
-          <h3 class="code">map_store/4</h3>
+          <h3 id="map_store/4" class="code">map_store/4</h3>
           <blockquote>
             <p class="comment">True if Map0 is an ordered map structure, Key must be ground, and Map1 is identical to Map0 except that the pair Key-Data is recorded by Map1.</p>
           </blockquote>
@@ -234,8 +226,7 @@
           </dl>
         </div>
         <div class="section">
-          <a name="pp_string/1"/>
-          <h3 class="code">pp_string/1</h3>
+          <h3 id="pp_string/1" class="code">pp_string/1</h3>
           <blockquote>
             <p class="comment">Prints String onto the current output stream. If String contains only 7-bit chars it is printed in shorthand quoted format, otherwise it is written as a list.</p>
           </blockquote>
@@ -255,8 +246,7 @@
           </dl>
         </div>
         <div class="section">
-          <a name="fault/5"/>
-          <h3 class="code">fault/5</h3>
+          <h3 id="fault/5" class="code">fault/5</h3>
           <blockquote>
             <p class="comment">Identifies SubTerm as a sub-term of Term which cannot be serialized after Indentation. Message is an atom naming the type of error; Path is a string encoding a list of SubTerm's ancestor elements in the form &lt;tag&gt;{(id)}* where &lt;tag&gt; is the element tag and &lt;id&gt; is the value of any attribute _named_ id.</p>
           </blockquote>
@@ -276,8 +266,7 @@
           </dl>
         </div>
         <div class="section">
-          <a name="exception/4"/>
-          <h3 class="code">exception/4</h3>
+          <h3 id="exception/4" class="code">exception/4</h3>
           <blockquote>
             <p class="comment">Hook to raise an exception to be raised in respect of a fault in the XML Term: Document.</p>
           </blockquote>
@@ -297,8 +286,7 @@
           </dl>
         </div>
         <div class="section">
-          <a name="document_generation//2"/>
-          <h3 class="code">document_generation//2</h3>
+          <h3 id="document_generation//2" class="code">document_generation//2</h3>
           <blockquote>
             <p class="comment">DCG generating Document as a list of character codes. Format is true|false defining whether layouts, to provide indentation, should be added between the element content of the resultant "string". Note that formatting is disabled for elements that are interspersed with pcdata/1 terms, such as XHTML's 'inline' elements. Also, Format is over-ridden, for an individual element, by an explicit 'xml:space'="preserve" attribute.</p>
           </blockquote>
@@ -314,8 +302,7 @@
           </dl>
         </div>
         <div class="section">
-          <a name="pcdata_7bit//1"/>
-          <h3 class="code">pcdata_7bit//1</h3>
+          <h3 id="pcdata_7bit//1" class="code">pcdata_7bit//1</h3>
           <blockquote>
             <p class="comment">Represents the ascii character set in its simplest format, using the character entities &amp;amp; &amp;quot; &amp;lt; and &amp;gt; which are common to both XML and HTML. The numeric entity &amp;#39; is used in place of &amp;apos;, because browsers don't recognize it in HTML.</p>
           </blockquote>
@@ -331,8 +318,7 @@
           </dl>
         </div>
         <div class="section">
-          <a name="character_data_format/3"/>
-          <h3 class="code">character_data_format/3</h3>
+          <h3 id="character_data_format/3" class="code">character_data_format/3</h3>
           <blockquote>
             <p class="comment">Holds when Format0 and Format1 are the statuses of XML formatting before and after Chars - which may be null.</p>
           </blockquote>
@@ -352,8 +338,7 @@
           </dl>
         </div>
         <div class="section">
-          <a name="cdata_generation//1"/>
-          <h3 class="code">cdata_generation//1</h3>
+          <h3 id="cdata_generation//1" class="code">cdata_generation//1</h3>
           <blockquote>
             <p class="comment">Holds when Format0 and Format1 are the statuses of XML formatting before and after Chars - which may be null.</p>
           </blockquote>
