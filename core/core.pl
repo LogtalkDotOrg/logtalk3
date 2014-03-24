@@ -9408,11 +9408,13 @@ current_logtalk_flag(Flag, Value) :-
 		TPred = ':'(Module, Pred),
 		DPred = '$lgt_debug'(goal(':'(Module, Pred), TPred), ExCtx)
 	;	\+ '$lgt_prolog_built_in_database_predicate'(Pred),
-		% the meta-predicate templates for the database predicates are usually not
-		% usable from Logtalk due the ambiguity of the ":" meta-argument qualifier
+		% the meta-predicate templates for the back-end Prolog database predicates are usually
+		% not usable from Logtalk due the ambiguity of the ":" meta-argument qualifier but they
+		% pose no problems when operating in a module database; in this particular case, the
+		% explicit-qualified call can be compiled as-is
 		(	'$lgt_pp_meta_predicate_'(':'(Module, Pred), ':'(Module, Meta))
 			% we're either overriding the original meta-predicate template or working around a
-			% backend Prolog compiler limitation in providing access to meta-predicate templates
+			% back-end Prolog compiler limitation in providing access to meta-predicate templates
 		;	catch('$lgt_predicate_property'(':'(Module, Pred), meta_predicate(Meta)), _, fail)
 		) ->
 		% we're compiling a call to a module meta-predicate
