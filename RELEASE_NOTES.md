@@ -125,6 +125,9 @@ and a syntax error when using SICStus Prolog as the back-end compiler.
 Examples
 --------
 
+* NEW: An example, `jpl`, of a minimal abstraction of the JPL API for calling
+Java from Logtalk using familiar message sending syntax.
+
 * CHANGED: Names of the objects defined in the `wrappers` example to avoid
 name conflicts when loading this example with the `roots` example.
 

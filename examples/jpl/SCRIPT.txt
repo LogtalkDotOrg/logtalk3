@@ -1,0 +1,36 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the `LICENSE.txt` file for details.
+________________________________________________________________________
+
+
+% start by loading the example:
+
+| ?- logtalk_load(jpl(loader)).
+...
+
+
+% get the Java version:
+
+| ?- java('java.lang.System', Version)::getProperty('java.version').
+
+Version = '1.7.0_51'
+yes
+
+
+% get the value of the "pi" constant:
+
+| ?- java('java.lang.Math')::get_field('PI', Pi).
+
+Pi = 3.141592653589793
+yes
+
+
+% create a new instance of ArrayList and add some elements to it:
+
+| ?- java('java.util.ArrayList')::new(ArrayList), java(ArrayList)::(add('Paulo'), add('Carlos'), add('Helena')).
+yes

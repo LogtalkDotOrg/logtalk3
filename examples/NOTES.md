@@ -178,6 +178,10 @@ Follows a short description of each included example (in alphabetical order):
 	example of defining instance variables, default variable values,
 	and setter and getter methods
 
+- `jpl`  
+	example of defining a minimal abstraction of the JPL API for
+	calling Java from Logtalk using familiar message sending syntax
+
 - `lambdas`  
 	example of using lambda expressions
 

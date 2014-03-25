@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Default library paths 
-%  Last updated on October 1, 2013
+%  Last updated on March 25, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -133,6 +133,7 @@ logtalk_library_path(instmethods, examples('instmethods/')).
 logtalk_library_path(instvars, examples('instvars/')).
 logtalk_library_path(integration, threads('integration/')).
 logtalk_library_path(integration2d, threads('integration2d/')).
+logtalk_library_path(jpl, examples('jpl/')).
 logtalk_library_path(lambdas, examples('lambdas/')).
 logtalk_library_path(lambdas_compiled, examples('lambdas_compiled/')).
 logtalk_library_path(lo_planner, examples('lo/planner/')).
