@@ -93,18 +93,22 @@ documentation files.
 * IMPROVED: The `diagrams` tool processing of the `output_directory/1` option
 now creates the directory if it doesn't exist.
 
-* IMPROVED: The `lgtdoc` tool scripts that generate (X)HTML documentation now
-add anchors to each predicate section using as name the predicate indicator.
-
-* UPDATED: The `logtalk_tester.sh` POSIX shell script now returns an exit
-code of `1` when there are failed unit tests.
-
 * FIXED: Regression in the `diagrams` tool, introduced when working around
 the lack of support for character escapes in some back-end compilers, that
 would result in DOT warnings. Thanks to Sergio Castro for the bug report.
 
 * FIXED: Bug in the `diagrams` tool where cross-reference diagrams would not
 display external entities correctly.
+
+* IMPROVED: The `lgtdoc` tool scripts that generate (X)HTML documentation now
+add anchors to each predicate section using as name the predicate indicator.
+
+* UPDATED: The `logtalk_tester.sh` POSIX shell script now returns an exit
+code of `1` when there are failed unit tests.
+
+* FIXED: Code coverage bug in the `lgtunit` tool where coverage statistics
+would be computed using the total number of clauses instead of the total
+number of user clauses.
 
 Tests
 -----

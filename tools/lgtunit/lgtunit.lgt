@@ -30,7 +30,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/12/13,
+		date is 2014/03/25,
 		comment is 'A simple unit test framework featuring predicate clause coverage.'
 	]).
 
@@ -525,9 +525,9 @@
 	entities_number_of_clauses([], Total, Total).
 	entities_number_of_clauses([Entity| Entities], Total0, Total) :-
 		(	current_object(Entity) ->
-			object_property(Entity, number_of_clauses(EntityTotal))
+			object_property(Entity, number_of_user_clauses(EntityTotal))
 		;	current_category(Entity) ->
-			category_property(Entity, number_of_clauses(EntityTotal))
+			category_property(Entity, number_of_user_clauses(EntityTotal))
 		;	% protocol
 			EntityTotal = 0
 		),
