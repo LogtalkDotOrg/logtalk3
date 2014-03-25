@@ -100,6 +100,10 @@ would result in DOT warnings. Thanks to Sergio Castro for the bug report.
 * FIXED: Bug in the `diagrams` tool where cross-reference diagrams would not
 display external entities correctly.
 
+* FIXED: Bug in the `diagrams` tool where references to multifile predicates
+for parametric objects would be printed with internal variable names for the
+parameters.
+
 * IMPROVED: The `lgtdoc` tool scripts that generate (X)HTML documentation now
 add anchors to each predicate section using as name the predicate indicator.
 

@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/03/24,
+		date is 2014/03/25,
 		comment is 'Predicates for generating entity diagrams.',
 		parnames is ['Format']
 	]).
@@ -210,8 +210,13 @@
 		(	member(interface(true), Options) ->
 			object_property(Object, public(PublicPredicates)),
 			findall(
-				To::Predicate,
-				object_property(Object, provides(Predicate, To, _)),
+				ToName::Predicate,
+				(	object_property(Object, provides(Predicate, To, _)),
+					(	current_object(To) ->
+						^^ground_entity_identifier(object, To, ToName)
+					;	^^ground_entity_identifier(category, To, ToName)
+					)
+				),
 				MultifilePredicates
 			),
 			append(PublicPredicates, MultifilePredicates, Resources)
@@ -229,8 +234,13 @@
 		(	member(interface(true), Options) ->
 			category_property(Category, public(PublicPredicates)),
 			findall(
-				To::Predicate,
-				category_property(Category, provides(Predicate, To, _)),
+				ToName::Predicate,
+				(	category_property(Category, provides(Predicate, To, _)),
+					(	current_object(To) ->
+						^^ground_entity_identifier(object, To, ToName)
+					;	^^ground_entity_identifier(category, To, ToName)
+					)
+				),
 				MultifilePredicates
 			),
 			append(PublicPredicates, MultifilePredicates, Resources)
