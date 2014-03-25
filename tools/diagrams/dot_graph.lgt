@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/03/24,
+		date is 2014/03/25,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -145,11 +145,11 @@
 		),
 		write_key_value_comma(Stream, style, Style),
 		write_key_value_comma(Stream, fillcolor, Color),
-		write(Stream, 'label=<<B>'),
+		write(Stream, 'label=<<FONT POINT-SIZE="11">'),
 		write(Stream, Label),
 		(	Contents == [] ->
-			write(Stream, '</B>')
-		;	write(Stream, '</B><BR/> <BR/>'),
+			write(Stream, '</FONT>')
+		;	write(Stream, '</FONT><BR/> <BR/>'),
 			write_lines(Contents, Stream)
 		),
 		write(Stream, '>]'), nl(Stream).

@@ -90,6 +90,10 @@ documentation files.
 * CHANGED: Renamed the `diagrams` tool option `url_protocol/1` to
 `url_prefixes/2` and added a new option `entity_url_suffix_target/2`.
 
+* CHANGED: The `diagrams` tool now uses a bigger font for node labels instead
+of a bold font style as these fail to render properly in e.g. PDF outputs when
+using the current Graphviz version (2.36.0).
+
 * IMPROVED: The `diagrams` tool processing of the `output_directory/1` option
 now creates the directory if it doesn't exist.
 
