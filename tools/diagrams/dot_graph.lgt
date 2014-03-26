@@ -39,9 +39,9 @@
 		atom_concat(Name, '.dot', File).
 
 	file_header(Stream, Identifier, Options) :-
-		write(Stream, 'digraph '),
-		writeq(Stream, Identifier),
-		write(Stream, ' {'), nl(Stream),
+		write(Stream, 'digraph "'),
+		write(Stream, Identifier),
+		write(Stream, '" {'), nl(Stream),
 		write_key_value_nl(Stream, rankdir, 'BT'),
 		write_key_value_nl(Stream, ranksep, '1.25'),
 		write_key_value_nl(Stream, compound, true),

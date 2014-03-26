@@ -108,6 +108,9 @@ display external entities correctly.
 for parametric objects would be printed with internal variable names for the
 parameters.
 
+* FIXED: Bug in the `diagrams` tool where the name of the generated graph when
+using the DOT language could be invalid.
+
 * IMPROVED: The `lgtdoc` tool scripts that generate (X)HTML documentation now
 add anchors to each predicate section using as name the predicate indicator.
 
