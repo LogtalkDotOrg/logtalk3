@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/03/09,
+		date is 2014/03/26,
 		comment is 'Predicates for generating all supported diagrams for libraries and files in one step using the specified format. Only common options should be specified: title/1, date/1, output_directory/1, relation_labels/1, exclude_files/1, exclude_libraries/1, url_prefixes/1, and omit_path_prefix/1.',
 		parnames is ['Format']
 	]).
@@ -57,28 +57,28 @@
 	libraries(Project, Libraries) :-
 		::libraries(Project, Libraries, []).
 
-	:- public(libraries/1).
-	:- mode(libraries(+list(compound)), one).
-	:- info(libraries/1, [
+	:- public(all_libraries/1).
+	:- mode(all_libraries(+list(compound)), one).
+	:- info(all_libraries/1, [
 		comment is 'Creates all supported diagrams for all loaded libraries using the specified options.',
 		argnames is ['Options']
 	]).
 
-	libraries(Options) :-
+	all_libraries(Options) :-
 		parameter(1, Format),
 		forall(
 			supported_diagram(Format, Diagram),
-			Diagram::libraries(Options)
+			Diagram::all_libraries(Options)
 		).
 
-	:- public(libraries/0).
-	:- mode(libraries, one).
-	:- info(libraries/0, [
+	:- public(all_libraries/0).
+	:- mode(all_libraries, one).
+	:- info(all_libraries/0, [
 		comment is 'Creates all supported diagrams for all loaded libraries using default options.'
 	]).
 
-	libraries :-
-		::libraries([]).
+	all_libraries :-
+		::all_libraries([]).
 
 	:- public(rlibrary/2).
 	:- mode(rlibrary(+atom, +list(compound)), one).
@@ -152,28 +152,28 @@
 	files(Project, Files) :-
 		::files(Project, Files, []).
 
-	:- public(files/1).
-	:- mode(files(+list(compound)), one).
-	:- info(files/1, [
+	:- public(all_files/1).
+	:- mode(all_files(+list(compound)), one).
+	:- info(all_files/1, [
 		comment is 'Creates all supported diagrams for all loaded files using the specified options.',
 		argnames is ['Options']
 	]).
 
-	files(Options) :-
+	all_files(Options) :-
 		parameter(1, Format),
 		forall(
 			supported_diagram(Format, Diagram),
 			Diagram::files(Options)
 		).
 
-	:- public(files/0).
-	:- mode(files, one).
-	:- info(files/0, [
+	:- public(all_files/0).
+	:- mode(all_files, one).
+	:- info(all_files/0, [
 		comment is 'Creates all supported diagrams for all loaded files using default options.'
 	]).
 
-	files :-
-		::files([]).
+	all_files :-
+		::all_files([]).
 
 	% supported_diagram(+atom, -entity_identifier)
 	supported_diagram(Format, entity_diagram(Format)).
