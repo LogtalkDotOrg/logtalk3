@@ -76,14 +76,14 @@
 	libraries(Project, Libraries) :-
 		::libraries(Project, Libraries, []).
 
-	:- public(libraries/1).
-	:- mode(libraries(+list(compound)), one).
-	:- info(libraries/1, [
+	:- public(all_libraries/1).
+	:- mode(all_libraries(+list(compound)), one).
+	:- info(all_libraries/1, [
 		comment is 'Creates a diagram for all loaded libraries using the specified options.',
 		argnames is ['Options']
 	]).
 
-	libraries(UserOptions) :-
+	all_libraries(UserOptions) :-
 		format_object(Format),
 		merge_options(UserOptions, Options),
 		::output_file_path(all_libraries, Options, Format, OutputPath),
@@ -109,14 +109,14 @@
 		fail.
 	output_all_libraries(_).
 
-	:- public(libraries/0).
-	:- mode(libraries, one).
-	:- info(libraries/0, [
+	:- public(all_libraries/0).
+	:- mode(all_libraries, one).
+	:- info(all_libraries/0, [
 		comment is 'Creates a diagram for all loaded libraries using default options.'
 	]).
 
-	libraries :-
-		::libraries([]).
+	all_libraries :-
+		::all_libraries([]).
 
 	:- public(rlibrary/2).
 	:- mode(rlibrary(+atom, +list(compound)), one).
@@ -269,20 +269,22 @@
 	files(Project, Files) :-
 		::files(Project, Files, []).
 
-	:- public(files/1).
-	:- mode(files(+list(compound)), one).
-	:- info(files/1, [
+	:- public(all_files/1).
+	:- mode(all_files(+list(compound)), one).
+	:- info(all_files/1, [
 		comment is 'Creates a diagram for all loaded files using the specified options.',
 		argnames is ['Options']
 	]).
 
-	files(UserOptions) :-
+	all_files(UserOptions) :-
 		format_object(Format),
 		merge_options(UserOptions, Options),
 		::output_file_path(all_files, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::file_header(output_file, files, Options),
 		output_all_files(Options),
+		output_externals(Options),
+		::output_edges(Options),
 		Format::file_footer(output_file, files, Options),
 		close(Stream).
 
@@ -294,14 +296,14 @@
 		fail.
 	output_all_files(_).
 
-	:- public(files/0).
-	:- mode(files, one).
-	:- info(files/0, [
+	:- public(all_files/0).
+	:- mode(all_files, one).
+	:- info(all_files/0, [
 		comment is 'Creates a diagram for all loaded files using default options.'
 	]).
 
-	files :-
-		::files([]).
+	all_files :-
+		::all_files([]).
 
 	:- public(format_object/2).
 	:- multifile(format_object/2).

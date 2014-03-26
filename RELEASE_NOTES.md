@@ -87,6 +87,9 @@ all diagrams. Suggested by Sergio Castro.
 entity nodes liking to, respectively, directories, source files, and entity
 documentation files.
 
+* CHANGED: Renamed the `diagrams` tool methods `files/0-1` to `all_files/0-1`
+and `libraries/0-1` to `all_libraries/0-1`.
+
 * CHANGED: Renamed the `diagrams` tool option `url_protocol/1` to
 `url_prefixes/2` and added a new option `entity_url_suffix_target/2`.
 
