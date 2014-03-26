@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/03/25,
+		date is 2014/03/26,
 		comment is 'Predicates for generating entity diagrams.',
 		parnames is ['Format']
 	]).
@@ -587,8 +587,8 @@
 	default_option(exclude_entities([])).
 	% by default, don't generate cluster, file, and entity URLs:
 	default_option(url_prefixes('', '')).
-	% by default, don't omit a path prefix when printing paths:
-	default_option(omit_path_prefix('')).
+	% by default, don't omit any path prefixes when printing paths:
+	default_option(omit_path_prefixes([])).
 	% by default, use a '.html' suffix for entity documentation URLs:
 	default_option(entity_url_suffix_target('.html', '#')).
 

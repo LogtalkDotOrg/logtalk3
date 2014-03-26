@@ -5,7 +5,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/14,
+		date is 2014/03/26,
 		comment is 'Common predicates for generating file diagrams.',
 		parnames is ['Format']
 	]).
@@ -58,9 +58,10 @@
 		::retract(referenced_logtalk_file_(Path)),
 		logtalk::loaded_file_property(Path, directory(Directory)),
 		logtalk::loaded_file_property(Path, basename(Basename)),
-		member(omit_path_prefix(Prefix), Options),
+		memberchk(omit_path_prefixes(Prefixes), Options),
 		^^add_link_options(Path, Options, LinkingOptions),
-		(	atom_concat(Prefix, Relative, Directory) ->
+		(	member(Prefix, Prefixes),
+			atom_concat(Prefix, Relative, Directory) ->
 			^^output_node(Path, Basename, [Relative], external_file, LinkingOptions)
 		;	^^output_node(Path, Basename, [Directory], external_file, LinkingOptions)
 		),
@@ -69,9 +70,10 @@
 		::retract(referenced_prolog_file_(Path)),
 		prolog_modules_diagram_support::source_file_property(Path, directory(Directory)),
 		prolog_modules_diagram_support::source_file_property(Path, basename(Basename)),
-		member(omit_path_prefix(Prefix), Options),
+		memberchk(omit_path_prefixes(Prefixes), Options),
 		^^add_link_options(Path, Options, LinkingOptions),
-		(	atom_concat(Prefix, Relative, Directory) ->
+		(	member(Prefix, Prefixes),
+			atom_concat(Prefix, Relative, Directory) ->
 			^^output_node(Path, Basename, [Relative], external_file, LinkingOptions)
 		;	^^output_node(Path, Basename, [Directory], external_file, LinkingOptions)
 		),
@@ -83,9 +85,13 @@
 	% auxiliary predicates; we could use the Logtalk standard library but we
 	% prefer to make this object self-contained given its documenting purpose
 
-	member(Option, [Option| _]) :-
-		!.
+	member(Option, [Option| _]).
 	member(Option, [_| Options]) :-
 		member(Option, Options).
+
+	memberchk(Option, [Option| _]) :-
+		!.
+	memberchk(Option, [_| Options]) :-
+		memberchk(Option, Options).
 
 :- end_category.

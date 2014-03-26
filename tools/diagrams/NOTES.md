@@ -159,8 +159,8 @@ generated diagrams. For entity diagrams the options are:
 	list of sub-libraries to exclude (default is `[]`)
 - `exclude_entities(Entities)`  
 	list of entities to exclude (default is `[]`)
-- `omit_path_prefix(Prefix)`  
-	omit a common path prefix when printing directory paths (an atom; default is `''`)
+- `omit_path_prefixes(Prefixes)`  
+	omit common path prefixes when printing directory paths (a list of atoms; default is `[]`)
 - `url_prefixes(FilePrefix, DocPrefix)`  
 	URL file and entity documenting URL prefixes used when generating cluster, file, and entity links (atoms; defaults are `''`)
 - `entity_url_suffix_target(Suffix, Target)`  
@@ -174,8 +174,8 @@ For file diagrams the options are:
 	print/omit current date (`true` or `false`; default is `true`)
 - `directory_paths(Boolean)`  
 	print/omit file directory paths (`true` or `false`; default is `true`)
-- `omit_path_prefix(Prefix)`  
-	omit a common path prefix when printing directory paths (an atom; default is `''`)
+- `omit_path_prefixes(Prefixes)`  
+	omit common path prefixes when printing directory paths (a list of atoms; default is `[]`)
 - `url_prefixes(FilePrefix, DocPrefix)`  
 	URL file and entity documenting URL prefixes used when generating cluster, file, and entity links (atoms; defaults are `''`)
 - `relation_labels(Boolean)`  
@@ -187,9 +187,9 @@ For file diagrams the options are:
 - `exclude_libraries(Libraries)`  
 	list of sub-libraries to exclude (default is `[]`)
 
-The option `omit_path_prefix(Prefix)` with a non-empty prefix should be
-used together with the option `directory_paths(true)`, in particular when
-generating diagrams for libraries with external files.
+The option `omit_path_prefixes(Prefixes)` with a non-empty list of prefixes
+should be used together with the option `directory_paths(true)`, in particular
+when generating diagrams for libraries with external files.
 
 Be sure to set the `source_data` flag `on` before compiling the libraries
 or files for which you want to generated diagrams.

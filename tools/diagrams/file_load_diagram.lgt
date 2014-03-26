@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/03/24,
+		date is 2014/03/26,
 		comment is 'Predicates for generating file loading dependency diagrams.',
 		parnames is ['Format']
 	]).
@@ -36,9 +36,10 @@
 	% first, output the file node
 	output_file(Path, Basename, Directory, Options) :-
 		^^add_link_options(Path, Options, LinkingOptions),
-		(	member(directory_paths(true), Options) ->
-			member(omit_path_prefix(Prefix), Options),
-			(	atom_concat(Prefix, Relative, Directory) ->
+		(	memberchk(directory_paths(true), Options) ->
+			memberchk(omit_path_prefixes(Prefixes), Options),
+			(	member(Prefix, Prefixes),
+				atom_concat(Prefix, Relative, Directory) ->
 				^^output_node(Path, Basename, [Relative], file, LinkingOptions)
 			;	^^output_node(Path, Basename, [Directory], file, LinkingOptions)
 			)
@@ -65,8 +66,8 @@
 	default_option(date(true)).
 	% by default, don't generate cluster, file, and entity URLs:
 	default_option(url_prefixes('', '')).
-	% by default, don't omit a path prefix when printing paths:
-	default_option(omit_path_prefix('')).
+	% by default, don't omit any path prefixes when printing paths:
+	default_option(omit_path_prefixes([])).
 	% by default, don't print directory paths:
 	default_option(directory_paths(false)).
 	% by default, print relation labels:
@@ -84,6 +85,11 @@
 		!.
 	member(Option, [_| Options]) :-
 		member(Option, Options).
+
+	memberchk(Option, [Option| _]) :-
+		!.
+	memberchk(Option, [_| Options]) :-
+		memberchk(Option, Options).
 
 :- end_object.
 

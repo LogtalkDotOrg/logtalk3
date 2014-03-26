@@ -91,7 +91,8 @@ documentation files.
 and `libraries/0-1` to `all_libraries/0-1`.
 
 * CHANGED: Renamed the `diagrams` tool option `url_protocol/1` to
-`url_prefixes/2` and added a new option `entity_url_suffix_target/2`.
+`url_prefixes/2` and added new options `entity_url_suffix_target/2` and
+`omit_path_prefixes/1`.
 
 * CHANGED: The `diagrams` tool now uses a bigger font for node labels instead
 of a bold font style as these fail to render properly in e.g. PDF outputs when

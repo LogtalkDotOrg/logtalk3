@@ -96,9 +96,9 @@
 
 	output_all_libraries(Options) :-
 		format_object(Format),
-		member(exclude_libraries(ExcludedLibraries), Options),
+		memberchk(exclude_libraries(ExcludedLibraries), Options),
 		logtalk_library_path(Library, _),
-		\+ member(Library, ExcludedLibraries),
+		\+ memberchk(Library, ExcludedLibraries),
 		logtalk::expand_library_path(Library, Directory),
 		\+ \+ logtalk::loaded_file_property(_, directory(Directory)),
 		atom_concat(library_, Library, Identifier),
@@ -145,7 +145,7 @@
 
 	output_rlibrary(TopLibrary, TopPath, Options) :-
 		format_object(Format),
-		member(exclude_libraries(ExcludedLibraries), Options),
+		memberchk(exclude_libraries(ExcludedLibraries), Options),
 		atom_concat(library_, TopLibrary, TopIdentifier),
 		add_link_options(TopPath, Options, TopGraphOptions),
 		Format::graph_header(output_file, TopIdentifier, TopLibrary, library, TopGraphOptions),
@@ -164,7 +164,7 @@
 	sub_library(TopLibrary, TopPath, ExcludedLibraries, Library, Path) :-
 		logtalk_library_path(Library, _),
 		Library \== TopLibrary,
-		\+ member(Library, ExcludedLibraries),
+		\+ memberchk(Library, ExcludedLibraries),
 		logtalk::expand_library_path(Library, Path),
 		atom_concat(TopPath, _RelativePath, Path).
 
@@ -204,14 +204,14 @@
 		close(Stream).
 
 	output_library(_Library, Directory, Options) :-
-		member(exclude_files(ExcludedFiles), Options),
+		memberchk(exclude_files(ExcludedFiles), Options),
 		logtalk::loaded_file_property(Path, directory(Directory)),
 		logtalk::loaded_file_property(Path, basename(Basename)),
 		::not_excluded_file(ExcludedFiles, Path, Basename),
 		::output_file(Path, Basename, Directory, Options),
 		fail.
 	output_library(_Library, Directory, Options) :-
-		member(exclude_files(ExcludedFiles), Options),
+		memberchk(exclude_files(ExcludedFiles), Options),
 		prolog_modules_diagram_support::source_file_property(Path, directory(Directory)),
 		prolog_modules_diagram_support::source_file_property(Path, basename(Basename)),
 		::not_excluded_file(ExcludedFiles, Path, Basename),
@@ -399,7 +399,7 @@
 	output_externals(Options) :-
 		% as externals can be defined in several places, use the file
 		% prefix, if defined, for file URL links
-		(	member(url_prefixes(FilePrefix, DocPrefix), Options) ->
+		(	memberchk(url_prefixes(FilePrefix, DocPrefix), Options) ->
 			ExternalsOptions = [urls(FilePrefix,DocPrefix)| Options]
 		;	ExternalsOptions = Options
 		),
@@ -465,7 +465,7 @@
 	]).
 
 	save_edge(From, To, Labels, Kind, Options) :-
-		(	member(relation_labels(true), Options) ->
+		(	memberchk(relation_labels(true), Options) ->
 			::assertz(edge_(From, To, Labels, Kind, Options))
 		;	::assertz(edge_(From, To, [], Kind, Options))
 		).
@@ -513,7 +513,7 @@
 		::diagram_name_suffix(Suffix),
 		atom_concat(Name0, Suffix, Name),
 		Format::output_file_name(Name, Basename),
-		member(output_directory(Directory0), Options),
+		memberchk(output_directory(Directory0), Options),
 		(	sub_atom(Directory0, _, _, 0, '/') ->
 			Directory = Directory0
 		;	atom_concat(Directory0, '/', Directory)
@@ -633,10 +633,13 @@
 	]).
 
 	add_link_options(Path, Options, LinkingOptions) :-
-		member(omit_path_prefix(Prefix), Options),
-		member(url_prefixes(FilePrefix, DocPrefix), Options),
-		atom_concat(Prefix, Suffix, Path),
-		atom_concat(FilePrefix, Suffix, FileURL),
+		memberchk(omit_path_prefixes(Prefixes), Options),
+		memberchk(url_prefixes(FilePrefix, DocPrefix), Options),
+		(	member(Prefix, Prefixes),
+			atom_concat(Prefix, Suffix, Path) ->
+			atom_concat(FilePrefix, Suffix, FileURL)
+		;	FileURL = FilePrefix
+		),
 		LinkingOptions = [urls(FileURL,DocPrefix), tooltip(Suffix)| Options].
 
 	% auxiliary predicates; we could use the Logtalk standard library but we
@@ -650,6 +653,11 @@
 		!.
 	member(Option, [_| Options]) :-
 		member(Option, Options).
+
+	memberchk(Option, [Option| _]) :-
+		!.
+	memberchk(Option, [_| Options]) :-
+		memberchk(Option, Options).
 
 	keys([], []).
 	keys([Key-_| Pairs], [Key| Keys]) :-

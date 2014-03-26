@@ -87,12 +87,12 @@ yes
 % when generating a diagram for public publishing, it's often possible
 % to shorten file paths in order to remove a user-dependent prefix:
 
-| ?- file_dependency_diagram::library(searching, [omit_path_prefix('/Users/jdoe/logtalk/')]).
+| ?- file_dependency_diagram::library(searching, [omit_path_prefixes(['/Users/jdoe/logtalk/]')]).
 yes
 
 % some final output formats such as SVG support tooltips and URL links;
 % the URL prefixes can be specified so that clicking in a node or a
 % cluster of nodes opens the corresponding file or library of files:
 
-| ?- entity_diagram::rlibrary(tools, [url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/', 'http://logtalk.org/library/'), omit_path_prefix('/Users/pmoura/logtalk/')]).
+| ?- entity_diagram::rlibrary(tools, [url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/', 'http://logtalk.org/library/'), omit_path_prefixes(['/Users/jdoe/logtalk/'])]).
 yes
