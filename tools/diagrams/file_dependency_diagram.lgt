@@ -35,7 +35,7 @@
 
 	% first, output the file node
 	output_file(Path, Basename, Directory, Options) :-
-		^^linking_options(Path, Options, LinkingOptions),
+		^^add_link_options(Path, Options, LinkingOptions),
 		(	member(directory_paths(true), Options) ->
 			member(omit_path_prefix(Prefix), Options),
 			(	atom_concat(Prefix, Relative, Directory) ->

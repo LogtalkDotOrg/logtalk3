@@ -62,7 +62,7 @@
 		Format::file_header(output_file, Identifier, Options),
 		entity_property(Kind, Entity, file(Basename, Directory)),
 		atom_concat(Directory, Basename, Path),
-		^^linking_options(Path, Options, GraphOptions),
+		^^add_link_options(Path, Options, GraphOptions),
 		Format::graph_header(output_file, Identifier, Name, entity, GraphOptions),
 		process(Kind, Entity, Options),
 		output_external_predicates(Options),

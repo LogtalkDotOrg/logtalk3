@@ -59,7 +59,7 @@
 		logtalk::loaded_file_property(Path, directory(Directory)),
 		logtalk::loaded_file_property(Path, basename(Basename)),
 		member(omit_path_prefix(Prefix), Options),
-		^^linking_options(Path, Options, LinkingOptions),
+		^^add_link_options(Path, Options, LinkingOptions),
 		(	atom_concat(Prefix, Relative, Directory) ->
 			^^output_node(Path, Basename, [Relative], external_file, LinkingOptions)
 		;	^^output_node(Path, Basename, [Directory], external_file, LinkingOptions)
@@ -70,7 +70,7 @@
 		prolog_modules_diagram_support::source_file_property(Path, directory(Directory)),
 		prolog_modules_diagram_support::source_file_property(Path, basename(Basename)),
 		member(omit_path_prefix(Prefix), Options),
-		^^linking_options(Path, Options, LinkingOptions),
+		^^add_link_options(Path, Options, LinkingOptions),
 		(	atom_concat(Prefix, Relative, Directory) ->
 			^^output_node(Path, Basename, [Relative], external_file, LinkingOptions)
 		;	^^output_node(Path, Basename, [Directory], external_file, LinkingOptions)

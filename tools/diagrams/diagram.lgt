@@ -27,7 +27,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/03/24,
+		date is 2014/03/26,
 		comment is 'Common predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
@@ -60,7 +60,7 @@
 		logtalk_library_path(Library, _),
 		logtalk::expand_library_path(Library, Directory),
 		atom_concat(library_, Library, Identifier),
-		linking_options(Directory, Options, GraphOptions),
+		add_link_options(Directory, Options, GraphOptions),
 		Format::graph_header(output_file, Identifier, Library, library, GraphOptions),
 		::output_library(Library, Directory, GraphOptions),
 		Format::graph_footer(output_file, Identifier, Library, library, GraphOptions),
@@ -102,7 +102,7 @@
 		logtalk::expand_library_path(Library, Directory),
 		\+ \+ logtalk::loaded_file_property(_, directory(Directory)),
 		atom_concat(library_, Library, Identifier),
-		linking_options(Directory, Options, GraphOptions),
+		add_link_options(Directory, Options, GraphOptions),
 		Format::graph_header(output_file, Identifier, Library, library, GraphOptions),
 		::output_library(Library, Directory, GraphOptions),
 		Format::graph_footer(output_file, Identifier, Library, library, GraphOptions),
@@ -134,7 +134,7 @@
 		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::file_header(output_file, Library, Options),
 		atom_concat(rlibrary_, Library, Identifier),
-		linking_options(Path, Options, GraphOptions),
+		add_link_options(Path, Options, GraphOptions),
 		Format::graph_header(output_file, Identifier, Library, rlibrary, GraphOptions),
 		::output_rlibrary(Library, Path, GraphOptions),
 		output_externals(Options),
@@ -147,14 +147,14 @@
 		format_object(Format),
 		member(exclude_libraries(ExcludedLibraries), Options),
 		atom_concat(library_, TopLibrary, TopIdentifier),
-		linking_options(TopPath, Options, TopGraphOptions),
+		add_link_options(TopPath, Options, TopGraphOptions),
 		Format::graph_header(output_file, TopIdentifier, TopLibrary, library, TopGraphOptions),
 		::output_library(TopLibrary, TopPath, TopGraphOptions),
 		Format::graph_footer(output_file, TopIdentifier, TopLibrary, library, TopGraphOptions),
 		forall(
 			sub_library(TopLibrary, TopPath, ExcludedLibraries, Library, Path),
 			(	atom_concat(library_, Library, Identifier),
-				linking_options(Path, Options, GraphOptions),
+				add_link_options(Path, Options, GraphOptions),
 				Format::graph_header(output_file, Identifier, Library, library, GraphOptions),
 				::output_library(Library, Path, GraphOptions),
 				Format::graph_footer(output_file, Identifier, Library, library, GraphOptions)
@@ -194,7 +194,7 @@
 		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::file_header(output_file, Library, Options),
 		atom_concat(library_, Library, Identifier),
-		linking_options(Path, Options, GraphOptions),
+		add_link_options(Path, Options, GraphOptions),
 		Format::graph_header(output_file, Identifier, Library, library, GraphOptions),
 		::output_library(Library, Path, GraphOptions),
 		output_externals(Options),
@@ -255,7 +255,7 @@
 	output_files([], _Options).
 	output_files([File| Files], Options) :-
 		locate_file(File, Basename, _, Directory, Path),
-		linking_options(Path, Options, FileOptions),
+		add_link_options(Path, Options, FileOptions),
 		::output_file(Path, Basename, Directory, FileOptions),
 		output_files(Files, Options).
 
@@ -623,14 +623,14 @@
 		),
 		variables_to_underscore(Args).
 
-	:- protected(linking_options/3).
-	:- mode(linking_options(+atom, +list(compound), -list(compound)), one).
-	:- info(linking_options/3, [
-		comment is 'Adds urls/2 and/or tooltip/1 linking options (for use by the graph language) to the general list of options.',
+	:- protected(add_link_options/3).
+	:- mode(add_link_options(+atom, +list(compound), -list(compound)), one).
+	:- info(add_link_options/3, [
+		comment is 'Adds urls/2 and tooltip/1 link options (for use by the graph language) based on the specified path to the list of options.',
 		argnames is ['Path', 'Options', 'GraphOptions']
 	]).
 
-	linking_options(Path, Options, LinkingOptions) :-
+	add_link_options(Path, Options, LinkingOptions) :-
 		member(omit_path_prefix(Prefix), Options),
 		member(url_prefixes(FilePrefix, DocPrefix), Options),
 		atom_concat(Prefix, Suffix, Path),

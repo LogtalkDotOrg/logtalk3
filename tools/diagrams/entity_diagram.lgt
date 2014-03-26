@@ -66,7 +66,7 @@
 		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::file_header(output_file, Basename, Options),
 		atom_concat(file_, Path, Identifier),
-		^^linking_options(Path, Options, GraphOptions),
+		^^add_link_options(Path, Options, GraphOptions),
 		Format::graph_header(output_file, Identifier, Basename, file, GraphOptions),
 		process(Basename, Directory, GraphOptions),
 		% as externals can be defined in several places, use the file
@@ -90,7 +90,7 @@
 			% use the full path for the cluster identifier as we
 			% can have more than file with the same basename
 			atom_concat(file_, File, Identifier),
-			^^linking_options(File, Options, GraphOptions),
+			^^add_link_options(File, Options, GraphOptions),
 			Format::graph_header(output_file, Identifier, Basename, file, GraphOptions),
 			process(Basename, Directory, Options),
 			Format::graph_footer(output_file, Identifier, Basename, file, GraphOptions)
