@@ -68,7 +68,7 @@
 		atom_concat(file_, Path, Identifier),
 		^^linking_options(Path, Options, GraphOptions),
 		Format::graph_header(output_file, Identifier, Basename, file, GraphOptions),
-		process(Basename, Directory, Options),
+		process(Basename, Directory, GraphOptions),
 		% as externals can be defined in several places, use the file
 		% prefix, if defined, for file URL links
 		(	member(url_prefixes(FilePrefix, DocPrefix), Options) ->

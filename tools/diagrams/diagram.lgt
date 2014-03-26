@@ -255,7 +255,8 @@
 	output_files([], _Options).
 	output_files([File| Files], Options) :-
 		locate_file(File, Basename, _, Directory, Path),
-		::output_file(Path, Basename, Directory, Options),
+		linking_options(Path, Options, FileOptions),
+		::output_file(Path, Basename, Directory, FileOptions),
 		output_files(Files, Options).
 
 	:- public(files/2).
