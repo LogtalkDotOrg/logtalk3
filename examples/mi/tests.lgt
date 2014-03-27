@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2012/07/04,
+		date is 2014/03/27,
 		comment is 'Unit tests for the "mi" example.'
 	]).
 
@@ -37,7 +37,10 @@
 	test(mi_2) :-
 		findall(
 			Pred-Arity-Object-Functor,
-			xyzt::(current_predicate(Functor/Arity), functor(Pred, Functor, Arity), predicate_property(Pred, declared_in(Object))),
+			(	xyzt::current_predicate(Functor/Arity),
+				functor(Pred, Functor, Arity),
+				xyzt::predicate_property(Pred, declared_in(Object))
+			),
 			Solutions
 		),
 		list::msort(Solutions,SolutionsSorted),
@@ -60,7 +63,10 @@
 	test(mi_5) :-
 		findall(
 			Pred-Arity-Object-Functor,
-			xyzt(2,3,4,7)::(current_predicate(Functor/Arity), functor(Pred, Functor, Arity), predicate_property(Pred, declared_in(Object))),
+			(	xyzt(2,3,4,7)::current_predicate(Functor/Arity),
+				functor(Pred, Functor, Arity),
+				predicate_property(Pred, declared_in(Object))
+			),
 			Solutions
 		),
 		list::msort(Solutions,SolutionsSorted),
