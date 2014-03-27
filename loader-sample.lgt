@@ -35,7 +35,7 @@
 
 %  Is handy to be able to reload a loader file even if not modified in
 %  order to reload any modified application source files.  This can be
-%  ensured, independent of global vaue of the `reload` flag, using the
+%  ensured, independent of global value of the `reload` flag, using the
 %  following directive (whose scope is local to this file):
 
 :- set_logtalk_flag(reload, always).
