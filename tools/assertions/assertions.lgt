@@ -22,15 +22,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(assertions,
-	implements(expanding)).		% built-in protocol for term and goal expansion methods
+:- object(assertions).
 
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/11/28,
+		date is 2014/03/27,
 		comment is 'A simple assertions framework.'
 	]).
 

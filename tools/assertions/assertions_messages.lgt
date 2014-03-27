@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/11/28,
+		date is 2014/04/27,
 		comment is 'Assertions framework default message translations.'
 	]).
 
@@ -38,7 +38,7 @@
 	:- multifile(logtalk::message_prefix_stream/4).
 	:- dynamic(logtalk::message_prefix_stream/4).
 
-	% Quintus Prolog based prefixes (also used in SICStus Prolog):
+	% Quintus Prolog based prefixes (also used in e.g. SICStus Prolog):
 	logtalk::message_prefix_stream(information, assertions, '% ', user_output).
 	logtalk::message_prefix_stream(warning, assertions, '*     ', user_output).
 	logtalk::message_prefix_stream(error, assertions,   '!     ', user_output).
@@ -67,7 +67,5 @@
 
 	logtalk::message_tokens(assertion_error(Context, Goal, Error), assertions) -->
 		['assertion goal error ~w - ~w in context ~w'-[Goal, Error, Context], nl].
-
-	foo.
 
 :- end_category.
