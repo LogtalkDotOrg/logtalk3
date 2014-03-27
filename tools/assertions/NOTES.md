@@ -64,13 +64,29 @@ output stream. These messages, however, can be intercepted by defining
 the `logtalk::message_hook/4` multifile predicate. For example:
 
 	:- category(my_assertions_settings).
-
+	
 		:- initialization(open('bugs.lgt', append, _, [alias(bugs)])).
-
+	
 		:- multifile(logtalk::message_hook/4).
 		:- dynamic(logtalk::message_hook/4).
-
-		logtalk::message_hook(_, assertion_failure(Context, Goal), assertions, _) :-
+	
+		logtalk::message_hook(assertion_failure(Context, Goal), _, assertions, _) :-
 			writeq(bugs, assertion_failure(Context, Goal)), write('.\n').
+	
+	:- end_category.
 
+
+Converting assertion failures into errors
+-----------------------------------------
+
+	:- category(assertions_to_errors).
+	
+		:- multifile(logtalk::message_hook/4).
+		:- dynamic(logtalk::message_hook/4).
+	
+		logtalk::message_hook(assertion_failure(Context, Goal), _, assertions, Tokens) :-
+			logtalk::message_prefix_stream(error, assertions, Prefix, Stream),
+			logtalk::print_message_tokens(Stream, Prefix, Tokens),
+			throw(error(assertion_failure(Goal), Context)).
+	
 	:- end_category.

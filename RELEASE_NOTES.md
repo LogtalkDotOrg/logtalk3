@@ -125,6 +125,9 @@ code of `1` when there are failed unit tests.
 would be computed using the total number of clauses instead of the total
 number of user clauses.
 
+* ADDED: Sample code to the documentation of the `assertions` tool for
+converting assertion failures into errors.
+
 Tests
 -----
 
