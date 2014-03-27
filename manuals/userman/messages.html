@@ -60,7 +60,7 @@ Sending a message to an object is accomplished by using the <a title="Consult re
 </p>
 <pre>| ?- Object::Message.</pre>
 <p>
-The message must match a public predicate declared for the receiving object or a Logtalk/Prolog built-in predicate (the message may also correspond to a protected or private predicate if the <em>sender</em> matches the predicate scope container). The Logtalk and Prolog built-in predicates are implicitly declared as object public predicates (unless redefined inside an object). However, Logtalk and Prolog built-in meta-predicates cannot be used as messages. Care should be taken when using Prolog built-in predicates as messages as different Prolog compilers provide different sets of built-in predicates.
+The message must match a public predicate declared for the receiving object. The message may also correspond to a protected or private predicate if the <em>sender</em> matches the predicate scope container.
 </p>
 
 <h2 id="messages_delegating">Delegating a message to an object</h2>
@@ -80,7 +80,7 @@ While defining a predicate, we sometimes need to send a message to <em>self</em>
 </p>
 <pre>::Message</pre>
 <p>
-The message must match a public or protected predicate declared for the receiving object, a private predicate within the scope of the <em>sender</em>, or a Logtalk/Prolog built-in predicate otherwise an error will be thrown (see the Reference Manual for details). If the message is sent from inside a category or if we are using private inheritance, then the message may also match a private predicate.
+The message must match either a public or protected predicate declared for the receiving object or a private predicate within the scope of the <em>sender</em> otherwise an error will be thrown (see the Reference Manual for details). If the message is sent from inside a category or if we are using private inheritance, then the message may also match a private predicate.
 </p>
 
 <h2 id="messages_broadcasting">Broadcasting</h2>

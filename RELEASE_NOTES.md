@@ -31,6 +31,14 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: Logtalk and Prolog built-in predicates can no longer be used as
+messages. This change helps avoiding code portability issues due to different
+back-end Prolog compilers providing different sets of built-in predicates. In
+particular, it makes definitions for the `forward/1` unknown message handler
+work as expected across back-end Prolog compilers when some of them happen to
+provide a built-in predicate with the same predicate indicator as an otherwise
+unknown message sent to an object.
+
 * CHANGED: Simplification of the code generated when compiling source files
 with the `optimize` flag turned on is now only performed during the second
 compiler stage.

@@ -32,7 +32,7 @@ send_to_object_test_object(2).
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/12/05,
+		date is 2014/03/27,
 		comment is 'Unit tests for the (::)/2 built-in control construct.'
 	]).
 
@@ -54,30 +54,33 @@ send_to_object_test_object(2).
 	throws(send_to_object_2_6, error(existence_error(predicate_declaration,foo/0), logtalk(logtalk::foo,user))) :-
 		{logtalk::foo}.
 
-	throws(send_to_object_2_7, error(permission_error(access,protected_predicate,r/3), logtalk(send_to_object_test_object(_)::r(_,_,_),user))) :-
+	throws(send_to_object_2_7, error(existence_error(predicate_declaration,write/1), logtalk(logtalk::write(foo),user))) :-
+		{logtalk::write(foo)}.
+
+	throws(send_to_object_2_8, error(permission_error(access,protected_predicate,r/3), logtalk(send_to_object_test_object(_)::r(_,_,_),user))) :-
 		{send_to_object_test_object(_)::r(_,_,_)}.
 
-	throws(send_to_object_2_8, error(permission_error(access, private_predicate,s/4), logtalk(send_to_object_test_object(_)::s(_,_,_,_),user))) :-
+	throws(send_to_object_2_9, error(permission_error(access, private_predicate,s/4), logtalk(send_to_object_test_object(_)::s(_,_,_,_),user))) :-
 		{send_to_object_test_object(_)::s(_,_,_,_)}.
 
-	throws(send_to_object_2_9, error(instantiation_error, logtalk({_}::true,user))) :-
+	throws(send_to_object_2_10, error(instantiation_error, logtalk({_}::true,user))) :-
 		{{_}::true}.
 
-	throws(send_to_object_2_10, error(type_error(object_identifier,1), logtalk({1}::true,user))) :-
+	throws(send_to_object_2_11, error(type_error(object_identifier,1), logtalk({1}::true,user))) :-
 		{{1}::true}.
 
-	throws(send_to_object_2_11, error(existence_error(procedure,foo/0), logtalk({foo}::true,user))) :-
+	throws(send_to_object_2_12, error(existence_error(procedure,foo/0), logtalk({foo}::true,user))) :-
 		{{foo}::true}.
 
-	succeeds(send_to_object_2_12) :-
+	succeeds(send_to_object_2_13) :-
 		send_to_object_test_object(1)::p(X),
 		X == 1.
 
-	succeeds(send_to_object_2_13) :-
+	succeeds(send_to_object_2_14) :-
 		{send_to_object_test_object(_)}::p(X),
 		X == 2.
 
-	fails(send_to_object_2_14) :-
+	fails(send_to_object_2_15) :-
 		send_to_object_test_object(_)::q(_, _).
 
 :- end_object.

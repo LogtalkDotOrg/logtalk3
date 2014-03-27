@@ -42,7 +42,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/12/05,
+		date is 2014/03/27,
 		comment is 'Unit tests for the (::)/1 built-in control construct.'
 	]).
 
@@ -58,15 +58,18 @@
 	throws(send_to_self_1_4, error(existence_error(predicate_declaration,u/1),logtalk(::u(_),send_to_self_test_object_1))) :-
 		send_to_self_test_object_2::p(u(_)).
 
-	succeeds(send_to_self_1_5) :-
+	throws(send_to_self_1_5, error(existence_error(predicate_declaration,write/1),logtalk(::write(foo),send_to_self_test_object_1))) :-
+		send_to_self_test_object_2::p(write(foo)).
+
+	succeeds(send_to_self_1_6) :-
 		send_to_self_test_object_2::p(s(X)),
 		X == 2.
 
-	succeeds(send_to_self_1_6) :-
+	succeeds(send_to_self_1_7) :-
 		send_to_self_test_object_2::p(q(X)),
 		X == 3.
 
-	fails(send_to_self_1_7) :-
+	fails(send_to_self_1_8) :-
 		send_to_self_test_object_2::p(r(_)).
 
 :- end_object.

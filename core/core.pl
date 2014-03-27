@@ -3605,13 +3605,10 @@ current_logtalk_flag(Flag, Value) :-
 			functor(Pred, Functor, Arity),
 			throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(::Pred, Sender)))
 		)
-	;	% no predicate declaration, check if it's a private built-in method or a Prolog built-in meta-predicate
-		('$lgt_built_in_method'(Pred, p, _, _); '$lgt_prolog_meta_predicate'(Pred, _, _)) ->
+	;	% no predicate declaration, check if it's a private built-in method
+		'$lgt_built_in_method'(Pred, p, _, _) ->
 		functor(Pred, Functor, Arity),
 		throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(::Pred, Sender)))
-	;	% not a private built-in predicate, check if it's a public built-in predicate
-		'$lgt_built_in_predicate'(Pred) ->
-		call(Pred)
 	;	% message not understood; check for a message forwarding handler
 		call(Def, forward(Pred), ExCtx, Call, _, _) ->
 		'$lgt_execution_context'(ExCtx, Sender, Obj, Obj, [], []),
@@ -3708,13 +3705,10 @@ current_logtalk_flag(Flag, Value) :-
 			;	throw(error(permission_error(access, protected_predicate, Functor/Arity), logtalk(Obj::Pred, Sender)))
 			)
 		)
-	;	% no predicate declaration, check if it's a private built-in method or a Prolog built-in meta-predicate
-		('$lgt_built_in_method'(Pred, p, _, _); '$lgt_prolog_meta_predicate'(Pred, _, _)) ->
+	;	% no predicate declaration, check if it's a private built-in method
+		'$lgt_built_in_method'(Pred, p, _, _) ->
 		functor(Pred, Functor, Arity),
 		throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(Obj::Pred, Sender)))
-	;	% not a private built-in predicate, check if it's a public built-in predicate
-		'$lgt_built_in_predicate'(Pred) ->
-		call(Pred)
 	;	% message not understood; check for a message forwarding handler
 		call(Def, forward(Pred), ExCtx, Call, _, _) ->
 		'$lgt_execution_context'(ExCtx, Sender, Obj, Obj, [], []),
@@ -3833,13 +3827,10 @@ current_logtalk_flag(Flag, Value) :-
 			;	throw(error(permission_error(access, protected_predicate, Functor/Arity), logtalk(Obj::Pred, Sender)))
 			)
 		)
-	;	% no predicate declaration, check if it's a private built-in method or a Prolog built-in meta-predicate
-		('$lgt_built_in_method'(Pred, p, _, _); '$lgt_prolog_meta_predicate'(Pred, _, _)) ->
+	;	% no predicate declaration, check if it's a private built-in method
+		'$lgt_built_in_method'(Pred, p, _, _) ->
 		functor(Pred, Functor, Arity),
 		throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(Obj::Pred, Sender)))
-	;	% not a private built-in predicate, check if it's a public built-in predicate
-		'$lgt_built_in_predicate'(Pred) ->
-		call(Pred)
 	;	% message not understood; check for a message forwarding handler
 		call(Def, forward(Pred), ExCtx, Call, _, _) ->
 		'$lgt_execution_context'(ExCtx, Sender, Obj, Obj, [], []),
@@ -3931,13 +3922,10 @@ current_logtalk_flag(Flag, Value) :-
 			functor(Pred, Functor, Arity),
 			throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(^^Pred, This)))
 		)
-	;	% no predicate declaration, check if it's a private built-in method or a Prolog built-in meta-predicate
-		('$lgt_built_in_method'(Pred, p, _, _); '$lgt_prolog_meta_predicate'(Pred, _, _)) ->
+	;	% no predicate declaration, check if it's a private built-in method
+		'$lgt_built_in_method'(Pred, p, _, _) ->
 		functor(Pred, Functor, Arity),
 		throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(^^Pred, This)))
-	;	% not a private built-in predicate, check if it's a public built-in predicate
-		'$lgt_built_in_predicate'(Pred) ->
-		call(Pred)
 	;	% give up and throw an existence error
 		functor(Pred, Functor, Arity),
 		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(^^Pred, This)))
@@ -3996,13 +3984,10 @@ current_logtalk_flag(Flag, Value) :-
 			functor(Pred, Functor, Arity),
 			throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(^^Pred, Ctg)))
 		)
-	;	% no predicate declaration, check if it's a private built-in method or a Prolog built-in meta-predicate
-		('$lgt_built_in_method'(Pred, p, _, _); '$lgt_prolog_meta_predicate'(Pred, _, _)) ->
+	;	% no predicate declaration, check if it's a private built-in method
+		'$lgt_built_in_method'(Pred, p, _, _) ->
 		functor(Pred, Functor, Arity),
 		throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(^^Pred, Ctg)))
-	;	% not a private built-in predicate, check if it's a public built-in predicate
-		'$lgt_built_in_predicate'(Pred) ->
-		call(Pred)
 	;	% give up and throw an existence error
 		functor(Pred, Functor, Arity),
 		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(^^Pred, Ctg)))
@@ -15651,11 +15636,11 @@ current_logtalk_flag(Flag, Value) :-
 
 
 % control constructs
-'$lgt_built_in_method_spec'(_::_, p(p(p)), '::'(*, 0), 1).
+'$lgt_built_in_method_spec'(_::_, p, '::'(*, 0), 1).
 '$lgt_built_in_method_spec'(::_, p, '::'(0), 1).
 '$lgt_built_in_method_spec'([_], p, [(::)], 1).
 '$lgt_built_in_method_spec'(^^_, p, '^^'(0), 1).
-'$lgt_built_in_method_spec'(_<<_, p(p(p)), '<<'(*, 0), 1).
+'$lgt_built_in_method_spec'(_<<_, p, '<<'(*, 0), 1).
 '$lgt_built_in_method_spec'(_>>_, p, '>>'(*, 0), 1).
 '$lgt_built_in_method_spec'(':'(_), p, ':'(0), 1).	% deprecated
 '$lgt_built_in_method_spec'(':'(_,_), p, ':'(*, 0), 1) :-
