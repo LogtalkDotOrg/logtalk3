@@ -14,7 +14,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura and Sergio Castro',
-		date is 2014/03/25,
+		date is 2014/03/27,
 		comment is 'Protocol for a minimal abstraction of the JPL API for calling Java from Logtalk using familiar message sending syntax.'
 	]).
 
@@ -26,7 +26,7 @@
 	]).
 
 	:- public(set_field/2).
-	:- mode(set_field(+atom, +nonvar), zero_or_one).
+	:- mode(set_field(+atom, +nonvar), one).
 	:- info(set_field/2, [
 		comment is 'Sets the value of a class field.',
 		argnames is ['Field', 'Value']
@@ -46,11 +46,11 @@
 		argnames is ['Instance']
 	]).
 
-	:- public(invoke/2).
-	:- mode(invoke(+atom, +list(nonvar)), one).
-	:- info(invoke/2, [
-		comment is 'Creates a new instance using the specified parameter values.',
-		argnames is ['Reference', 'Parameters']
+	:- public(invoke/1).
+	:- mode(invoke(@nonvar), one).
+	:- info(invoke/1, [
+		comment is 'Invokes a method. This is more efficient than relying on the forward/1 handler.',
+		argnames is ['Message']
 	]).
 
 :- end_protocol.
@@ -62,7 +62,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura and Sergio Castro',
-		date is 2014/03/25,
+		date is 2014/03/27,
 		comment is 'Minimal abstraction of the JPL API for calling Java from Logtalk using familiar message sending syntax.',
 		parnames is ['Reference', 'ReturnValue']
 	]).
@@ -89,8 +89,9 @@
 	new(Instance) :- 
 		new([], Instance).
 
-	invoke(Functor, Arguments) :-
+	invoke(Message) :-
 		parameter(1, Reference),
+		Message =.. [Functor| Arguments],
 		jpl_call(Reference, Functor, Arguments, Output),
 		parameter(2, Output).
 

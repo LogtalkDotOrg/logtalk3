@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura and Sergio Castro',
-		date is 2014/03/25,
+		date is 2014/03/27,
 		comment is 'Unit tests for the "jpl" example.'
 	]).
 
@@ -30,7 +30,7 @@
 		atom(Version).
 
 	test(jpl_3) :-
-		java('java.lang.System', Version)::invoke(getProperty, ['java.version']),
+		java('java.lang.System', Version)::invoke(getProperty('java.version')),
 		atom(Version).
 
 	test(jpl_4) :-
