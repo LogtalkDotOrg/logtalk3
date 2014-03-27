@@ -65,7 +65,7 @@
 			Pred-Arity-Object-Functor,
 			(	xyzt(2,3,4,7)::current_predicate(Functor/Arity),
 				functor(Pred, Functor, Arity),
-				predicate_property(Pred, declared_in(Object))
+				xyzt(2,3,4,7)::predicate_property(Pred, declared_in(Object))
 			),
 			Solutions
 		),
