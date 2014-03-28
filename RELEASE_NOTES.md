@@ -39,6 +39,11 @@ work as expected across back-end Prolog compilers when some of them happen to
 provide a built-in predicate with the same predicate indicator as an otherwise
 unknown message sent to an object.
 
+* CHANGED: Allow the `{}/1` compiler bypass control construct to be used as
+a message. This provides a workaround for the fact that built-in predicates
+are no longer supported as messages and it's useful mainly within message
+broadcasting control constructs.
+
 * CHANGED: Simplification of the code generated when compiling source files
 with the `optimize` flag turned on is now only performed during the second
 compiler stage.

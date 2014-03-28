@@ -11209,12 +11209,6 @@ current_logtalk_flag(Flag, Value) :-
 	;	TPred = '$lgt_send_to_obj_ne'(Obj, Pred, This)
 	).
 
-% invalid message
-
-'$lgt_tr_msg'(Pred, _, _, _, _) :-
-	\+ callable(Pred),
-	throw(type_error(callable, Pred)).
-
 % broadcasting control constructs
 
 '$lgt_tr_msg'((Pred1, Pred2), Obj, (TPred1, TPred2), This, Head) :-
@@ -11361,6 +11355,18 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_msg'(expand_goal(Goal, ExpandedGoal), Obj, '$lgt_expand_goal'(Obj, Goal, ExpandedGoal, This, p(p(p))), This, _) :-
 	!.
+
+% compiler bypass control construct
+
+'$lgt_tr_msg'({Goal}, _, call(Goal), _, _) :-
+	'$lgt_must_be'(var_or_callable, Goal),	
+	!.
+
+% invalid message
+
+'$lgt_tr_msg'(Pred, _, _, _, _) :-
+	\+ callable(Pred),
+	throw(type_error(callable, Pred)).
 
 % message is not a built-in control construct or a call to a built-in (meta-)predicate
 
@@ -15645,7 +15651,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_built_in_method_spec'(':'(_), p, ':'(0), 1).	% deprecated
 '$lgt_built_in_method_spec'(':'(_,_), p, ':'(*, 0), 1) :-
 	'$lgt_prolog_feature'(modules, supported).
-'$lgt_built_in_method_spec'({_}, p, '{}'(0), 1).
+'$lgt_built_in_method_spec'({_}, p(p(p)), '{}'(0), 1).
 '$lgt_built_in_method_spec'((_,_), p(p(p)), ','(0, 0), 1).
 '$lgt_built_in_method_spec'((_;_), p(p(p)), ';'(0, 0), 1).
 '$lgt_built_in_method_spec'((_->_), p(p(p)), '->'(0, 0), 1).
