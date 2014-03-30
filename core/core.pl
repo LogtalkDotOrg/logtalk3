@@ -11591,6 +11591,12 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_comp_ctx_self'(Ctx, Self),
 	'$lgt_comp_ctx_this'(Ctx, This).
 
+% compiler bypass control construct
+
+'$lgt_tr_self_msg'({Goal}, call(Goal), _) :-
+	'$lgt_must_be'(var_or_callable, Goal),	
+	!.
+
 % invalid message
 
 '$lgt_tr_self_msg'(Pred, _, _) :-

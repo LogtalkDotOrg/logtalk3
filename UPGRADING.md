@@ -121,8 +121,10 @@ The `{}/1` control construct is now opaque to cuts, thus ensuring the same
 semantics when its argument is known at compile and when it's only known at
 runtime.
 
-Logtalk and Prolog built-in predicates can no longer be used as messages in
-order to avoid code portability issues.
+Logtalk and Prolog built-in predicates can no longer be used as messages
+in order to avoid code portability issues. The workaround is to wrap calls
+to these predicates using the `{}/1` control construct when using them as
+messages.
 
 
 Reflection support
