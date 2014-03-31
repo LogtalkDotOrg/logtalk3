@@ -48,6 +48,9 @@ broadcasting control constructs.
 with the `optimize` flag turned on is now only performed during the second
 compiler stage.
 
+* FIXED: Implemented support for using broadcasting control construct and
+built-in methods in runtime bound messages.
+
 * FIXED: Allow using `uses/2` directives to call meta-predicates defined in
 the `user` pseudo-object that are not built-in predicates.
 

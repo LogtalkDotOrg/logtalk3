@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SWI Prolog 6.0.0 and later versions
-%  Last updated on March 22, 2014
+%  Last updated on March 31, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -823,7 +823,8 @@ user:goal_expansion(phrase(Rule, Input), user:'$lgt_phrase'(Rule, Input, ExCtx))
 user:goal_expansion('::'(Object, Message), user:Goal) :-
 	prolog_load_context(module, Module),
 	Module \== user,
-	catch('$lgt_tr_msg'(Message, Object, Goal, user, _), _, fail). 
+	'$lgt_compiler_flag'(events, Events),
+	catch('$lgt_tr_msg'(Message, Object, Goal, user, _, Events), _, fail). 
 
 
 
