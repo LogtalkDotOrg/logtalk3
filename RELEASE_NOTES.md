@@ -150,6 +150,9 @@ Tests
 * ADDED: Two more unit tests for the `uses/2` directive for testing calling
 user-defined predicates and meta-predicates in `user`.
 
+* ADDED: Several tests for the `::/1-2` and `{}/1` control constructs for
+testing runtime bound messages.
+
 Contributions
 -------------
 

@@ -38,13 +38,13 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/11/15,
+		date is 2014/03/31,
 		comment is 'Unit tests for the {}/1 built-in control construct.'
 	]).
 
-	:- discontiguous(succeeds/1).
-	:- discontiguous(fails/1).
-	:- discontiguous(throws/2).
+	:- discontiguous([
+		succeeds/1, fails/1, throws/2
+	]).
 
 	throws(external_call_1_1, error(instantiation_error,_)) :-
 		external_call_test_object::p(_).
@@ -52,18 +52,25 @@
 	throws(external_call_1_2, error(type_error(callable,1),_)) :-
 		external_call_test_object::p(1).
 
-	succeeds(external_call_1_3) :-
+	throws(external_call_1_3, error(existence_error(predicate_declaration,atom_concat/3),_)) :-
+		external_call_test_object::atom_concat(a, b, _).
+
+	succeeds(external_call_1_4) :-
 		external_call_test_object::p(true).
 
-	fails(external_call_1_4) :-
+	fails(external_call_1_5) :-
 		external_call_test_object::p(fail).
 
-	succeeds(external_call_1_5) :-
+	succeeds(external_call_1_6) :-
 		external_call_test_object::q(Xs),
 		Xs == [1,2,3].
 
-	succeeds(external_call_1_6) :-
+	succeeds(external_call_1_7) :-
 		external_call_test_object::r(Xs),
 		Xs == [1,2,3].
+
+	succeeds(external_call_1_8) :-
+		external_call_test_object::{atom_concat(a, b, AB)},
+		AB == ab.
 
 :- end_object.
