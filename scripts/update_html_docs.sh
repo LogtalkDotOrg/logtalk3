@@ -161,7 +161,7 @@ cd ../tmp_diagrams && lgt2html -i diagrams_tool.html -t "Diagrams tool" && mv *.
 cd ../tmp_help && lgt2html -i help_tool.html -t "Help tool" && mv *.html ..
 cd ../tmp_lgtdoc && lgt2html -i lgtdoc_tool.html -t "Logtalk documenting tool" && mv *.html ..
 cd ../tmp_lgtunit && lgt2html -i lgtunit_tool.html -t "Logtalk unit testing tool" && mv *.html ..
-cd ../tmp_profiler && lgt2html -i profiler_tool.html -t "Profiler tools" && mv *.html ..
+cd ../tmp_profiler && lgt2html -i profiler_tool.html -t "Profiler tool" && mv *.html ..
 
 rm -rf ../tmp_*
 
