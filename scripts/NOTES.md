@@ -110,3 +110,6 @@ using the `apropos logtalk` command.
 	directory)
 - `logtalk_user_setup.bat`  
 	wrapper for the `logtalk_user_setup.js` script to simplify its use
+
+- `update_html_docs.sh`  
+	shell script for updating the library and tools HTML documentation

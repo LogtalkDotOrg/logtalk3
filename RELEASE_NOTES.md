@@ -25,7 +25,7 @@ RELEASE NOTES
 =============
 
 
-3.00.0 Beta 1 - March ??, 2014
+3.00.0 Beta 1 - April ??, 2014
 ==============================
 
 Logtalk compiler and runtime
@@ -82,6 +82,9 @@ some Linux distributions.
 
 Installers and installation scripts
 -----------------------------------
+
+* ADDED: `update_html_docs.sh` POSIX shell script for updating the HTML
+documentation of the library and the development tools.
 
 * UPDATED: The Windows installer now also detects version 4.3 of SICStus
 Prolog.
