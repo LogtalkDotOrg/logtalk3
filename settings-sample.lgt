@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  sample settings file
-%  Last updated on March 15, 2014
+%  Last updated on April 1, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -119,8 +119,9 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 
 /*
 :- initialization((
-	%set_logtalk_flag(prolog_loader, [silent(true)]),	% for SWI-Prolog and YAP
-	%set_stream(log_output, null),						% for ECLiPSe
+	%set_logtalk_flag(prolog_loader, [silent(true)]),   % for SWI-Prolog and YAP
+	%set_stream(log_output, null),                      % for ECLiPSe
+	%set_prolog_flag(informational, off),               % SICStus Prolog
 	set_logtalk_flag(report, off)
 )).
 */
