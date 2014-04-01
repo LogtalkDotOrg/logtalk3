@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2012/10/19</code>
+            <code>2012 / 10 / 19</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -43,7 +43,7 @@
       <div class="public">
         <h2>Public interface</h2>
         <div class="section">
-          <h3 id="pid/1" class="code">pid/1</h3>
+          <h3 id="pid / 1" class="code">pid / 1</h3>
           <blockquote>
             <p class="comment">Returns the process identitifer of the running process.</p>
           </blockquote>
@@ -58,12 +58,12 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>pid(-integer) &ndash; one</code>
+              <code>pid(- integer) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="shell/2" class="code">shell/2</h3>
+          <h3 id="shell / 2" class="code">shell / 2</h3>
           <blockquote>
             <p class="comment">Runs an operating-system shell command, returning in Status the exit status of Command.</p>
           </blockquote>
@@ -74,16 +74,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>shell(Command,Status)</code>
+              <code>shell(Command, Status)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>shell(+atom,-integer) &ndash; one</code>
+              <code>shell(+ atom, - integer) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="shell/1" class="code">shell/1</h3>
+          <h3 id="shell / 1" class="code">shell / 1</h3>
           <blockquote>
             <p class="comment">Runs an operating-system shell command.</p>
           </blockquote>
@@ -98,12 +98,12 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>shell(+atom) &ndash; zero_or_one</code>
+              <code>shell(+ atom) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="expand_path/2" class="code">expand_path/2</h3>
+          <h3 id="expand_path / 2" class="code">expand_path / 2</h3>
           <blockquote>
             <p class="comment">Expands a file path to an absolute file path.</p>
           </blockquote>
@@ -114,16 +114,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>expand_path(Path,ExpandedPath)</code>
+              <code>expand_path(Path, ExpandedPath)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>expand_path(+atom,-atom) &ndash; one</code>
+              <code>expand_path(+ atom, - atom) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="make_directory/1" class="code">make_directory/1</h3>
+          <h3 id="make_directory / 1" class="code">make_directory / 1</h3>
           <blockquote>
             <p class="comment">Makes a new directory. Succeeds if the directory already exists.</p>
           </blockquote>
@@ -138,12 +138,12 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>make_directory(+atom) &ndash; one</code>
+              <code>make_directory(+ atom) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="delete_directory/1" class="code">delete_directory/1</h3>
+          <h3 id="delete_directory / 1" class="code">delete_directory / 1</h3>
           <blockquote>
             <p class="comment">Deletes an empty directory.</p>
           </blockquote>
@@ -158,12 +158,12 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>delete_directory(+atom) &ndash; one</code>
+              <code>delete_directory(+ atom) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="change_directory/1" class="code">change_directory/1</h3>
+          <h3 id="change_directory / 1" class="code">change_directory / 1</h3>
           <blockquote>
             <p class="comment">Changes current working directory.</p>
           </blockquote>
@@ -178,12 +178,12 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>change_directory(+atom) &ndash; one</code>
+              <code>change_directory(+ atom) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="working_directory/1" class="code">working_directory/1</h3>
+          <h3 id="working_directory / 1" class="code">working_directory / 1</h3>
           <blockquote>
             <p class="comment">Current working directory.</p>
           </blockquote>
@@ -198,12 +198,12 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>working_directory(?atom) &ndash; zero_or_one</code>
+              <code>working_directory(? atom) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="directory_exists/1" class="code">directory_exists/1</h3>
+          <h3 id="directory_exists / 1" class="code">directory_exists / 1</h3>
           <blockquote>
             <p class="comment">True if the specified directory exists (irrespective of directory permissions).</p>
           </blockquote>
@@ -218,12 +218,12 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>directory_exists(+atom) &ndash; zero_or_one</code>
+              <code>directory_exists(+ atom) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="file_exists/1" class="code">file_exists/1</h3>
+          <h3 id="file_exists / 1" class="code">file_exists / 1</h3>
           <blockquote>
             <p class="comment">True if the specified file exists (irrespective of type and file permissions).</p>
           </blockquote>
@@ -238,12 +238,12 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>file_exists(+atom) &ndash; zero_or_one</code>
+              <code>file_exists(+ atom) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="file_modification_time/2" class="code">file_modification_time/2</h3>
+          <h3 id="file_modification_time / 2" class="code">file_modification_time / 2</h3>
           <blockquote>
             <p class="comment">File modification time (which can be used for comparison).</p>
           </blockquote>
@@ -254,16 +254,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>file_modification_time(File,Time)</code>
+              <code>file_modification_time(File, Time)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>file_modification_time(+atom,-integer) &ndash; zero_or_one</code>
+              <code>file_modification_time(+ atom, - integer) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="file_size/2" class="code">file_size/2</h3>
+          <h3 id="file_size / 2" class="code">file_size / 2</h3>
           <blockquote>
             <p class="comment">File size (in bytes).</p>
           </blockquote>
@@ -274,16 +274,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>file_size(File,Size)</code>
+              <code>file_size(File, Size)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>file_size(+atom,-integer) &ndash; zero_or_one</code>
+              <code>file_size(+ atom, - integer) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="file_permission/2" class="code">file_permission/2</h3>
+          <h3 id="file_permission / 2" class="code">file_permission / 2</h3>
           <blockquote>
             <p class="comment">True if the specified file has the specified permission.</p>
           </blockquote>
@@ -294,16 +294,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>file_permission(File,Permission)</code>
+              <code>file_permission(File, Permission)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>file_permission(+atom,?atom) &ndash; zero_or_one</code>
+              <code>file_permission(+ atom, ? atom) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="rename_file/2" class="code">rename_file/2</h3>
+          <h3 id="rename_file / 2" class="code">rename_file / 2</h3>
           <blockquote>
             <p class="comment">Renames a file or a directory.</p>
           </blockquote>
@@ -314,16 +314,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>rename_file(Old,New)</code>
+              <code>rename_file(Old, New)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>rename_file(+atom,+atom) &ndash; zero_or_one</code>
+              <code>rename_file(+ atom, + atom) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="delete_file/1" class="code">delete_file/1</h3>
+          <h3 id="delete_file / 1" class="code">delete_file / 1</h3>
           <blockquote>
             <p class="comment">Deletes a file.</p>
           </blockquote>
@@ -338,12 +338,12 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>delete_file(+atom) &ndash; one</code>
+              <code>delete_file(+ atom) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="environment_variable/2" class="code">environment_variable/2</h3>
+          <h3 id="environment_variable / 2" class="code">environment_variable / 2</h3>
           <blockquote>
             <p class="comment">Returns an environment variable value. Fails if the variable does not exists.</p>
           </blockquote>
@@ -354,16 +354,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>environment_variable(Variable,Value)</code>
+              <code>environment_variable(Variable, Value)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>environment_variable(+atom,?atom) &ndash; zero_or_one</code>
+              <code>environment_variable(+ atom, ? atom) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="time_stamp/1" class="code">time_stamp/1</h3>
+          <h3 id="time_stamp / 1" class="code">time_stamp / 1</h3>
           <blockquote>
             <p class="comment">Returns a system-dependent time stamp (which can be used for sorting).</p>
           </blockquote>
@@ -378,12 +378,12 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>time_stamp(-number) &ndash; one</code>
+              <code>time_stamp(- number) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="date_time/7" class="code">date_time/7</h3>
+          <h3 id="date_time / 7" class="code">date_time / 7</h3>
           <blockquote>
             <p class="comment">Returns the current date and time.</p>
           </blockquote>
@@ -394,16 +394,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>date_time(Year,Month,Day,Hours,Mins,Secs,Milisecs)</code>
+              <code>date_time(Year, Month, Day, Hours, Mins, Secs, Milisecs)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>date_time(-integer,-integer,-integer,-integer,-integer,-integer,-integer) &ndash; one</code>
+              <code>date_time(- integer, - integer, - integer, - integer, - integer, - integer, - integer) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="cpu_time/1" class="code">cpu_time/1</h3>
+          <h3 id="cpu_time / 1" class="code">cpu_time / 1</h3>
           <blockquote>
             <p class="comment">System cpu time in seconds.</p>
           </blockquote>
@@ -418,12 +418,12 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>cpu_time(-number) &ndash; one</code>
+              <code>cpu_time(- number) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="wall_time/1" class="code">wall_time/1</h3>
+          <h3 id="wall_time / 1" class="code">wall_time / 1</h3>
           <blockquote>
             <p class="comment">Wall time in seconds.</p>
           </blockquote>
@@ -438,12 +438,12 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>wall_time(-number) &ndash; one</code>
+              <code>wall_time(- number) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="operating_system_type/1" class="code">operating_system_type/1</h3>
+          <h3 id="operating_system_type / 1" class="code">operating_system_type / 1</h3>
           <blockquote>
             <p class="comment">Operating system type. Possible values are "unix", "windows", and "unknown".</p>
           </blockquote>
@@ -458,12 +458,12 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>operating_system_type(?atom) &ndash; one</code>
+              <code>operating_system_type(? atom) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="command_line_arguments/1" class="code">command_line_arguments/1</h3>
+          <h3 id="command_line_arguments / 1" class="code">command_line_arguments / 1</h3>
           <blockquote>
             <p class="comment">Returns a list with the command line arguments that occur after "--".</p>
           </blockquote>
@@ -478,7 +478,7 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>command_line_arguments(-list(atom)) &ndash; one</code>
+              <code>command_line_arguments(- list(atom)) &ndash; one</code>
             </dd>
           </dl>
         </div>

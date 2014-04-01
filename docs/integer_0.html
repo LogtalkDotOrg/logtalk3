@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2011/9/19</code>
+            <code>2011 / 9 / 19</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -48,7 +48,7 @@
       <div class="public">
         <h2>Public interface</h2>
         <div class="section">
-          <h3 id="between/3" class="code">between/3</h3>
+          <h3 id="between / 3" class="code">between / 3</h3>
           <blockquote>
             <p class="comment">Returns integers in the interval defined by the two first arguments.</p>
           </blockquote>
@@ -59,19 +59,19 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>between(Lower,Upper,Integer)</code>
+              <code>between(Lower, Upper, Integer)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>between(+integer,+integer,+integer) &ndash; zero_or_one</code>
+              <code>between(+ integer, + integer, + integer) &ndash; zero_or_one</code>
             </dd>
             <dd class="value">
-              <code>between(+integer,+integer,-integer) &ndash; zero_or_more</code>
+              <code>between(+ integer, + integer, - integer) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="plus/3" class="code">plus/3</h3>
+          <h3 id="plus / 3" class="code">plus / 3</h3>
           <blockquote>
             <p class="comment">Reversible integer sum. At least two of the arguments must be instantiated to integers.</p>
           </blockquote>
@@ -82,22 +82,22 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>plus(I,J,Sum)</code>
+              <code>plus(I, J, Sum)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>plus(+integer,+integer,?integer) &ndash; zero_or_one</code>
+              <code>plus(+ integer, + integer, ? integer) &ndash; zero_or_one</code>
             </dd>
             <dd class="value">
-              <code>plus(+integer,?integer,+integer) &ndash; zero_or_one</code>
+              <code>plus(+ integer, ? integer, + integer) &ndash; zero_or_one</code>
             </dd>
             <dd class="value">
-              <code>plus(?integer,+integer,+integer) &ndash; zero_or_one</code>
+              <code>plus(? integer, + integer, + integer) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="succ/2" class="code">succ/2</h3>
+          <h3 id="succ / 2" class="code">succ / 2</h3>
           <blockquote>
             <p class="comment">Successor of a natural number. At least one of the arguments must be instantiated to a natural number.</p>
           </blockquote>
@@ -108,19 +108,19 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>succ(I,J)</code>
+              <code>succ(I, J)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>succ(+integer,?integer) &ndash; zero_or_one</code>
+              <code>succ(+ integer, ? integer) &ndash; zero_or_one</code>
             </dd>
             <dd class="value">
-              <code>succ(?integer,+integer) &ndash; zero_or_one</code>
+              <code>succ(? integer, + integer) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="sequence/3" class="code">sequence/3</h3>
+          <h3 id="sequence / 3" class="code">sequence / 3</h3>
           <blockquote>
             <p class="comment">Generates a list with the sequence of all integers in the interval [Inf, Sup], assuming Inf =&lt; Sup.</p>
           </blockquote>
@@ -131,11 +131,11 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>sequence(Inf,Sup,List)</code>
+              <code>sequence(Inf, Sup, List)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>sequence(+integer,+integer,-list(integer)) &ndash; zero_or_one</code>
+              <code>sequence(+ integer, + integer, - list(integer)) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>

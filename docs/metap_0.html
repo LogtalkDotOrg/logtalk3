@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2011/1/18</code>
+            <code>2011 / 1 / 18</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -43,7 +43,7 @@
       <div class="public">
         <h2>Public interface</h2>
         <div class="section">
-          <h3 id="include/3" class="code">include/3</h3>
+          <h3 id="include / 3" class="code">include / 3</h3>
           <blockquote>
             <p class="comment">Returns a list of all list elements that satisfy a predicate.</p>
           </blockquote>
@@ -54,20 +54,20 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>include(Closure,List,Included)</code>
+              <code>include(Closure, List, Included)</code>
             </dd>
             <dt class="key">meta-predicate template:</dt>
             <dd class="value">
-              <code>include(1,*,*)</code>
+              <code>include(1, *, *)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>include(+callable,+list,-list) &ndash; one</code>
+              <code>include(+ callable, + list, - list) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="exclude/3" class="code">exclude/3</h3>
+          <h3 id="exclude / 3" class="code">exclude / 3</h3>
           <blockquote>
             <p class="comment">Returns a list of all list elements that fail to satisfy a predicate.</p>
           </blockquote>
@@ -78,20 +78,20 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>exclude(Closure,List,Excluded)</code>
+              <code>exclude(Closure, List, Excluded)</code>
             </dd>
             <dt class="key">meta-predicate template:</dt>
             <dd class="value">
-              <code>exclude(1,*,*)</code>
+              <code>exclude(1, *, *)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>exclude(+callable,+list,-list) &ndash; one</code>
+              <code>exclude(+ callable, + list, - list) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="findall_member/4" class="code">findall_member/4</h3>
+          <h3 id="findall_member / 4" class="code">findall_member / 4</h3>
           <blockquote>
             <p class="comment">Finds all members of a list that satisfy a given test.</p>
           </blockquote>
@@ -102,20 +102,20 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>findall_member(Member,List,Test,Result)</code>
+              <code>findall_member(Member, List, Test, Result)</code>
             </dd>
             <dt class="key">meta-predicate template:</dt>
             <dd class="value">
-              <code>findall_member(*,*,0,*)</code>
+              <code>findall_member(*, *, 0, *)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>findall_member(@term,+list,@callable,-list) &ndash; one</code>
+              <code>findall_member(@ term, + list, @ callable, - list) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="findall_member/5" class="code">findall_member/5</h3>
+          <h3 id="findall_member / 5" class="code">findall_member / 5</h3>
           <blockquote>
             <p class="comment">Finds all members of a list that satisfy a given test appending the given tail to the result.</p>
           </blockquote>
@@ -126,20 +126,20 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>findall_member(Member,List,Test,Result,Tail)</code>
+              <code>findall_member(Member, List, Test, Result, Tail)</code>
             </dd>
             <dt class="key">meta-predicate template:</dt>
             <dd class="value">
-              <code>findall_member(*,*,0,*,*)</code>
+              <code>findall_member(*, *, 0, *, *)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>findall_member(@term,+list,@callable,-list,+list) &ndash; one</code>
+              <code>findall_member(@ term, + list, @ callable, - list, + list) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="partition/4" class="code">partition/4</h3>
+          <h3 id="partition / 4" class="code">partition / 4</h3>
           <blockquote>
             <p class="comment">Partition a list of elements in two lists using a predicate.</p>
           </blockquote>
@@ -150,20 +150,20 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>partition(Closure,List,Included,Excluded)</code>
+              <code>partition(Closure, List, Included, Excluded)</code>
             </dd>
             <dt class="key">meta-predicate template:</dt>
             <dd class="value">
-              <code>partition(1,*,*,*)</code>
+              <code>partition(1, *, *, *)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>partition(+callable,+list,-list,-list) &ndash; one</code>
+              <code>partition(+ callable, + list, - list, - list) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="partition/6" class="code">partition/6</h3>
+          <h3 id="partition / 6" class="code">partition / 6</h3>
           <blockquote>
             <p class="comment">Partitions a list in lists with values less, equal, and greater than a given value using a comparison predicate with the same argument order as compare/3.</p>
           </blockquote>
@@ -174,20 +174,20 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>partition(Closure,List,Value,Less,Equal,Greater)</code>
+              <code>partition(Closure, List, Value, Less, Equal, Greater)</code>
             </dd>
             <dt class="key">meta-predicate template:</dt>
             <dd class="value">
-              <code>partition(3,*,*,*,*,*)</code>
+              <code>partition(3, *, *, *, *, *)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>partition(+callable,+list,@term,-list,-list,-list) &ndash; one</code>
+              <code>partition(+ callable, + list, @ term, - list, - list, - list) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="fold_left/4" class="code">fold_left/4</h3>
+          <h3 id="fold_left / 4" class="code">fold_left / 4</h3>
           <blockquote>
             <p class="comment">List folding (left associative).</p>
           </blockquote>
@@ -198,20 +198,20 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>fold_left(Closure,Accumulator,List,Result)</code>
+              <code>fold_left(Closure, Accumulator, List, Result)</code>
             </dd>
             <dt class="key">meta-predicate template:</dt>
             <dd class="value">
-              <code>fold_left(3,*,*,*)</code>
+              <code>fold_left(3, *, *, *)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>fold_left(+callable,?term,+list,?term) &ndash; zero_or_more</code>
+              <code>fold_left(+ callable, ? term, + list, ? term) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="scan_left/4" class="code">scan_left/4</h3>
+          <h3 id="scan_left / 4" class="code">scan_left / 4</h3>
           <blockquote>
             <p class="comment">List scanning; similar to folding but returns the intermediate and final results (left associative).</p>
           </blockquote>
@@ -222,20 +222,20 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>scan_left(Closure,Accumulator,List,Results)</code>
+              <code>scan_left(Closure, Accumulator, List, Results)</code>
             </dd>
             <dt class="key">meta-predicate template:</dt>
             <dd class="value">
-              <code>scan_left(3,*,*,*)</code>
+              <code>scan_left(3, *, *, *)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>scan_left(+callable,?term,+list,?list) &ndash; zero_or_more</code>
+              <code>scan_left(+ callable, ? term, + list, ? list) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="fold_right/4" class="code">fold_right/4</h3>
+          <h3 id="fold_right / 4" class="code">fold_right / 4</h3>
           <blockquote>
             <p class="comment">List folding (right associative).</p>
           </blockquote>
@@ -246,20 +246,20 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>fold_right(Closure,Accumulator,List,Result)</code>
+              <code>fold_right(Closure, Accumulator, List, Result)</code>
             </dd>
             <dt class="key">meta-predicate template:</dt>
             <dd class="value">
-              <code>fold_right(3,*,*,*)</code>
+              <code>fold_right(3, *, *, *)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>fold_right(+callable,?term,+list,?term) &ndash; zero_or_more</code>
+              <code>fold_right(+ callable, ? term, + list, ? term) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="scan_right/4" class="code">scan_right/4</h3>
+          <h3 id="scan_right / 4" class="code">scan_right / 4</h3>
           <blockquote>
             <p class="comment">List scanning; similar to folding but returns the intermediate and final results (right associative).</p>
           </blockquote>
@@ -270,20 +270,20 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>scan_right(Closure,Accumulator,List,Results)</code>
+              <code>scan_right(Closure, Accumulator, List, Results)</code>
             </dd>
             <dt class="key">meta-predicate template:</dt>
             <dd class="value">
-              <code>scan_right(3,*,*,*)</code>
+              <code>scan_right(3, *, *, *)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>scan_right(+callable,?term,+list,?list) &ndash; zero_or_more</code>
+              <code>scan_right(+ callable, ? term, + list, ? list) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="map/2" class="code">map/2</h3>
+          <h3 id="map / 2" class="code">map / 2</h3>
           <blockquote>
             <p class="comment">True if the predicate succeeds for each list element.</p>
           </blockquote>
@@ -294,20 +294,20 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>map(Closure,List)</code>
+              <code>map(Closure, List)</code>
             </dd>
             <dt class="key">meta-predicate template:</dt>
             <dd class="value">
-              <code>map(1,*)</code>
+              <code>map(1, *)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>map(+callable,?list) &ndash; zero_or_more</code>
+              <code>map(+ callable, ? list) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="map/3" class="code">map/3</h3>
+          <h3 id="map / 3" class="code">map / 3</h3>
           <blockquote>
             <p class="comment">List mapping predicate taken arguments from two lists of elements.</p>
           </blockquote>
@@ -318,20 +318,20 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>map(Closure,List1,List2)</code>
+              <code>map(Closure, List1, List2)</code>
             </dd>
             <dt class="key">meta-predicate template:</dt>
             <dd class="value">
-              <code>map(2,*,*)</code>
+              <code>map(2, *, *)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>map(+callable,?list,?list) &ndash; zero_or_more</code>
+              <code>map(+ callable, ? list, ? list) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="map/4" class="code">map/4</h3>
+          <h3 id="map / 4" class="code">map / 4</h3>
           <blockquote>
             <p class="comment">List mapping predicate taken arguments from three lists of elements.</p>
           </blockquote>
@@ -342,20 +342,20 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>map(Closure,List1,List2,List3)</code>
+              <code>map(Closure, List1, List2, List3)</code>
             </dd>
             <dt class="key">meta-predicate template:</dt>
             <dd class="value">
-              <code>map(3,*,*,*)</code>
+              <code>map(3, *, *, *)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>map(+callable,?list,?list,?list) &ndash; zero_or_more</code>
+              <code>map(+ callable, ? list, ? list, ? list) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="map/5" class="code">map/5</h3>
+          <h3 id="map / 5" class="code">map / 5</h3>
           <blockquote>
             <p class="comment">List mapping predicate taken arguments from four lists of elements.</p>
           </blockquote>
@@ -366,20 +366,20 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>map(Closure,List1,List2,List3,List4)</code>
+              <code>map(Closure, List1, List2, List3, List4)</code>
             </dd>
             <dt class="key">meta-predicate template:</dt>
             <dd class="value">
-              <code>map(4,*,*,*,*)</code>
+              <code>map(4, *, *, *, *)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>map(+callable,?list,?list,?list,?list) &ndash; zero_or_more</code>
+              <code>map(+ callable, ? list, ? list, ? list, ? list) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="map/6" class="code">map/6</h3>
+          <h3 id="map / 6" class="code">map / 6</h3>
           <blockquote>
             <p class="comment">List mapping predicate taken arguments from five lists of elements.</p>
           </blockquote>
@@ -390,20 +390,20 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>map(Closure,List1,List2,List3,List4,List5)</code>
+              <code>map(Closure, List1, List2, List3, List4, List5)</code>
             </dd>
             <dt class="key">meta-predicate template:</dt>
             <dd class="value">
-              <code>map(5,*,*,*,*,*)</code>
+              <code>map(5, *, *, *, *, *)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>map(+callable,?list,?list,?list,?list,?list) &ndash; zero_or_more</code>
+              <code>map(+ callable, ? list, ? list, ? list, ? list, ? list) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="map/7" class="code">map/7</h3>
+          <h3 id="map / 7" class="code">map / 7</h3>
           <blockquote>
             <p class="comment">List mapping predicate taken arguments from six lists of elements.</p>
           </blockquote>
@@ -414,20 +414,20 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>map(Closure,List1,List2,List3,List4,List5,List6)</code>
+              <code>map(Closure, List1, List2, List3, List4, List5, List6)</code>
             </dd>
             <dt class="key">meta-predicate template:</dt>
             <dd class="value">
-              <code>map(6,*,*,*,*,*,*)</code>
+              <code>map(6, *, *, *, *, *, *)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>map(+callable,?list,?list,?list,?list,?list,?list) &ndash; zero_or_more</code>
+              <code>map(+ callable, ? list, ? list, ? list, ? list, ? list, ? list) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="map/8" class="code">map/8</h3>
+          <h3 id="map / 8" class="code">map / 8</h3>
           <blockquote>
             <p class="comment">List mapping predicate taken arguments from seven lists of elements.</p>
           </blockquote>
@@ -438,20 +438,20 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>map(Closure,List1,List2,List3,List4,List5,List6,List7)</code>
+              <code>map(Closure, List1, List2, List3, List4, List5, List6, List7)</code>
             </dd>
             <dt class="key">meta-predicate template:</dt>
             <dd class="value">
-              <code>map(7,*,*,*,*,*,*,*)</code>
+              <code>map(7, *, *, *, *, *, *, *)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>map(+callable,?list,?list,?list,?list,?list,?list,?list) &ndash; zero_or_more</code>
+              <code>map(+ callable, ? list, ? list, ? list, ? list, ? list, ? list, ? list) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="map_reduce/5" class="code">map_reduce/5</h3>
+          <h3 id="map_reduce / 5" class="code">map_reduce / 5</h3>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
             <dd class="value">
@@ -459,11 +459,11 @@
             </dd>
             <dt class="key">meta-predicate template:</dt>
             <dd class="value">
-              <code>map_reduce(2,3,*,*,*)</code>
+              <code>map_reduce(2, 3, *, *, *)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>map_reduce(+callable,+callable,+term,?list,?term) &ndash; zero_or_more</code>
+              <code>map_reduce(+ callable, + callable, + term, ? list, ? term) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>

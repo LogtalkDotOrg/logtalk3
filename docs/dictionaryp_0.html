@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2010/2/26</code>
+            <code>2010 / 2 / 26</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -43,7 +43,7 @@
       <div class="public">
         <h2>Public interface</h2>
         <div class="section">
-          <h3 id="as_dictionary/2" class="code">as_dictionary/2</h3>
+          <h3 id="as_dictionary / 2" class="code">as_dictionary / 2</h3>
           <blockquote>
             <p class="comment">Converts a list of key-value pairs to a dictionary.</p>
           </blockquote>
@@ -54,16 +54,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>as_dictionary(Pairs,Dictionary)</code>
+              <code>as_dictionary(Pairs, Dictionary)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>as_dictionary(@list(pairs),-dictionary) &ndash; one</code>
+              <code>as_dictionary(@ list(pairs), - dictionary) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="as_list/2" class="code">as_list/2</h3>
+          <h3 id="as_list / 2" class="code">as_list / 2</h3>
           <blockquote>
             <p class="comment">Converts a dictionary to a ordered list of key-value pairs.</p>
           </blockquote>
@@ -74,16 +74,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>as_list(Dictionary,Pairs)</code>
+              <code>as_list(Dictionary, Pairs)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>as_list(@dictionary,-list(pairs)) &ndash; one</code>
+              <code>as_list(@ dictionary, - list(pairs)) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="clone/3" class="code">clone/3</h3>
+          <h3 id="clone / 3" class="code">clone / 3</h3>
           <blockquote>
             <p class="comment">Clones a dictionary using the same keys but with all values unbound and returning a list of all the pairs in the new clone.</p>
           </blockquote>
@@ -94,16 +94,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>clone(Dictionary,Clone,ClonePairs)</code>
+              <code>clone(Dictionary, Clone, ClonePairs)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>clone(+tree,-tree,-list(pairs)) &ndash; one</code>
+              <code>clone(+ tree, - tree, - list(pairs)) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="clone/4" class="code">clone/4</h3>
+          <h3 id="clone / 4" class="code">clone / 4</h3>
           <blockquote>
             <p class="comment">Clones a dictionary using the same keys but with all values unbound and returning the list of all pairs in the dictionary and in the clone.</p>
           </blockquote>
@@ -114,16 +114,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>clone(Dictionary,Pairs,Clone,ClonePairs)</code>
+              <code>clone(Dictionary, Pairs, Clone, ClonePairs)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>clone(+tree,-list(pairs),-tree,-list(pairs)) &ndash; one</code>
+              <code>clone(+ tree, - list(pairs), - tree, - list(pairs)) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="insert/4" class="code">insert/4</h3>
+          <h3 id="insert / 4" class="code">insert / 4</h3>
           <blockquote>
             <p class="comment">Inserts a Key-Value pair into a dictionary, returning the updated dictionary. When the key already exists, the associated value is updated.</p>
           </blockquote>
@@ -134,16 +134,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>insert(OldDictionary,Key,Value,NewDictionary)</code>
+              <code>insert(OldDictionary, Key, Value, NewDictionary)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>insert(+dictionary,+ground,@term,-dictionary) &ndash; one</code>
+              <code>insert(+ dictionary, + ground, @ term, - dictionary) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="delete/4" class="code">delete/4</h3>
+          <h3 id="delete / 4" class="code">delete / 4</h3>
           <blockquote>
             <p class="comment">Deletes a matching Key-Value pair from a dictionary, returning the updated dictionary.</p>
           </blockquote>
@@ -154,16 +154,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>delete(OldDictionary,Key,Value,NewDictionary)</code>
+              <code>delete(OldDictionary, Key, Value, NewDictionary)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>delete(+dictionary,@ground,?term,-dictionary) &ndash; zero_or_one</code>
+              <code>delete(+ dictionary, @ ground, ? term, - dictionary) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="update/4" class="code">update/4</h3>
+          <h3 id="update / 4" class="code">update / 4</h3>
           <blockquote>
             <p class="comment">Updates the value associated with Key in a dictionary, returning the updated dictionary. Fails if it cannot find the key.</p>
           </blockquote>
@@ -174,16 +174,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>update(OldDictionary,Key,NewValue,NewDictionary)</code>
+              <code>update(OldDictionary, Key, NewValue, NewDictionary)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>update(+dictionary,@ground,+term,-dictionary) &ndash; zero_or_one</code>
+              <code>update(+ dictionary, @ ground, + term, - dictionary) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="update/5" class="code">update/5</h3>
+          <h3 id="update / 5" class="code">update / 5</h3>
           <blockquote>
             <p class="comment">Updates the value associated with Key in a dictionary, returning the updated dictionary. Fails if it cannot find the key or if the existing value does not match OldValue.</p>
           </blockquote>
@@ -194,16 +194,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>update(OldDictionary,Key,OldValue,NewValue,NewDictionary)</code>
+              <code>update(OldDictionary, Key, OldValue, NewValue, NewDictionary)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>update(+dictionary,@ground,?term,+term,-dictionary) &ndash; zero_or_one</code>
+              <code>update(+ dictionary, @ ground, ? term, + term, - dictionary) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="empty/1" class="code">empty/1</h3>
+          <h3 id="empty / 1" class="code">empty / 1</h3>
           <blockquote>
             <p class="comment">True if the dictionary is empty.</p>
           </blockquote>
@@ -218,12 +218,12 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>empty(@dictionary) &ndash; zero_or_one</code>
+              <code>empty(@ dictionary) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="lookup/3" class="code">lookup/3</h3>
+          <h3 id="lookup / 3" class="code">lookup / 3</h3>
           <blockquote>
             <p class="comment">Lookups a matching Key-Value pair from a dictionary.</p>
           </blockquote>
@@ -234,19 +234,19 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>lookup(Key,Value,Dictionary)</code>
+              <code>lookup(Key, Value, Dictionary)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>lookup(+ground,?term,@dictionary) &ndash; zero_or_one</code>
+              <code>lookup(+ ground, ? term, @ dictionary) &ndash; zero_or_one</code>
             </dd>
             <dd class="value">
-              <code>lookup(-ground,?term,@dictionary) &ndash; zero_or_more</code>
+              <code>lookup(- ground, ? term, @ dictionary) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="previous/4" class="code">previous/4</h3>
+          <h3 id="previous / 4" class="code">previous / 4</h3>
           <blockquote>
             <p class="comment">Returns the previous pair in a dictionary given a key.</p>
           </blockquote>
@@ -257,16 +257,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>previous(Dictionary,Key,Previous,Value)</code>
+              <code>previous(Dictionary, Key, Previous, Value)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>previous(+dictionary,+key,-key,-value) &ndash; zero_or_one</code>
+              <code>previous(+ dictionary, + key, - key, - value) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="next/4" class="code">next/4</h3>
+          <h3 id="next / 4" class="code">next / 4</h3>
           <blockquote>
             <p class="comment">Returns the next pair in a dictionary given a key.</p>
           </blockquote>
@@ -277,16 +277,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>next(Dictionary,Key,Next,Value)</code>
+              <code>next(Dictionary, Key, Next, Value)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>next(+dictionary,+key,-key,-value) &ndash; zero_or_one</code>
+              <code>next(+ dictionary, + key, - key, - value) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="min/3" class="code">min/3</h3>
+          <h3 id="min / 3" class="code">min / 3</h3>
           <blockquote>
             <p class="comment">Returns the pair with the minimum key in a dictionary. Fails if the dictionary is empty.</p>
           </blockquote>
@@ -297,16 +297,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>min(Dictionary,Key,Value)</code>
+              <code>min(Dictionary, Key, Value)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>min(+dictionary,-key,-value) &ndash; zero_or_one</code>
+              <code>min(+ dictionary, - key, - value) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="max/3" class="code">max/3</h3>
+          <h3 id="max / 3" class="code">max / 3</h3>
           <blockquote>
             <p class="comment">Returns the pair with the maximum key in a dictionary. Fails if the dictionary is empty.</p>
           </blockquote>
@@ -317,16 +317,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>max(Dictionary,Key,Value)</code>
+              <code>max(Dictionary, Key, Value)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>max(+dictionary,-key,-value) &ndash; zero_or_one</code>
+              <code>max(+ dictionary, - key, - value) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="delete_min/4" class="code">delete_min/4</h3>
+          <h3 id="delete_min / 4" class="code">delete_min / 4</h3>
           <blockquote>
             <p class="comment">Deletes the pair with the minimum key from a dictionary, returning the deleted pair and the updated dictionary.</p>
           </blockquote>
@@ -337,16 +337,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>delete_min(OldDictionary,Key,Value,NewDictionary)</code>
+              <code>delete_min(OldDictionary, Key, Value, NewDictionary)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>delete_min(+dictionary,-key,-value,-dictionary) &ndash; zero_or_one</code>
+              <code>delete_min(+ dictionary, - key, - value, - dictionary) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="delete_max/4" class="code">delete_max/4</h3>
+          <h3 id="delete_max / 4" class="code">delete_max / 4</h3>
           <blockquote>
             <p class="comment">Deletes the pair with the maximum key from a dictionary, returning the deleted pair and the updated dictionary.</p>
           </blockquote>
@@ -357,16 +357,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>delete_max(OldDictionary,Key,Value,NewDictionary)</code>
+              <code>delete_max(OldDictionary, Key, Value, NewDictionary)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>delete_max(+dictionary,-key,-value,-dictionary) &ndash; zero_or_one</code>
+              <code>delete_max(+ dictionary, - key, - value, - dictionary) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="keys/2" class="code">keys/2</h3>
+          <h3 id="keys / 2" class="code">keys / 2</h3>
           <blockquote>
             <p class="comment">Returns a list with all dictionary keys.</p>
           </blockquote>
@@ -377,16 +377,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>keys(Dictionary,List)</code>
+              <code>keys(Dictionary, List)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>keys(@dictionary,-list) &ndash; one</code>
+              <code>keys(@ dictionary, - list) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="map/2" class="code">map/2</h3>
+          <h3 id="map / 2" class="code">map / 2</h3>
           <blockquote>
             <p class="comment">Maps a closure over each dictionary key-value pair. Fails if the mapped closure attempts to modify the keys.</p>
           </blockquote>
@@ -397,20 +397,20 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>map(Closure,Dictionary)</code>
+              <code>map(Closure, Dictionary)</code>
             </dd>
             <dt class="key">meta-predicate template:</dt>
             <dd class="value">
-              <code>map(1,*)</code>
+              <code>map(1, *)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>map(@callable,+dictionary) &ndash; zero_or_more</code>
+              <code>map(@ callable, + dictionary) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="map/3" class="code">map/3</h3>
+          <h3 id="map / 3" class="code">map / 3</h3>
           <blockquote>
             <p class="comment">Maps a closure over each dictionary key-value pair, returning the new dictionary. Fails if the mapped closure attempts to modify the keys.</p>
           </blockquote>
@@ -421,20 +421,20 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>map(Closure,OldDictionary,NewDictionary)</code>
+              <code>map(Closure, OldDictionary, NewDictionary)</code>
             </dd>
             <dt class="key">meta-predicate template:</dt>
             <dd class="value">
-              <code>map(2,*,*)</code>
+              <code>map(2, *, *)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>map(@callable,+dictionary,-dictionary) &ndash; zero_or_more</code>
+              <code>map(@ callable, + dictionary, - dictionary) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="apply/4" class="code">apply/4</h3>
+          <h3 id="apply / 4" class="code">apply / 4</h3>
           <blockquote>
             <p class="comment">Applies a closure to a specific key-value pair, returning the new dictionary. Fails if the key cannot be found or if the mapped closure attempts to modify the key.</p>
           </blockquote>
@@ -445,20 +445,20 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>apply(Closure,OldDictionary,Key,NewDictionary)</code>
+              <code>apply(Closure, OldDictionary, Key, NewDictionary)</code>
             </dd>
             <dt class="key">meta-predicate template:</dt>
             <dd class="value">
-              <code>apply(2,*,*,*)</code>
+              <code>apply(2, *, *, *)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>apply(+callable,+dictionary,+key,-dictionary) &ndash; zero_or_one</code>
+              <code>apply(+ callable, + dictionary, + key, - dictionary) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="size/2" class="code">size/2</h3>
+          <h3 id="size / 2" class="code">size / 2</h3>
           <blockquote>
             <p class="comment">Number of dictionary entries.</p>
           </blockquote>
@@ -469,11 +469,11 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>size(Dictionary,Size)</code>
+              <code>size(Dictionary, Size)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>size(@dictionary,?integer) &ndash; zero_or_one</code>
+              <code>size(@ dictionary, ? integer) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>

@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2009/10/8</code>
+            <code>2009 / 10 / 8</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -43,7 +43,7 @@
       <div class="public">
         <h2>Public interface</h2>
         <div class="section">
-          <h3 id="monitors/1" class="code">monitors/1</h3>
+          <h3 id="monitors / 1" class="code">monitors / 1</h3>
           <blockquote>
             <p class="comment">Returns a list of all current monitors.</p>
           </blockquote>
@@ -58,12 +58,12 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>monitors(-list(object_identifier)) &ndash; one</code>
+              <code>monitors(- list(object_identifier)) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="monitor/1" class="code">monitor/1</h3>
+          <h3 id="monitor / 1" class="code">monitor / 1</h3>
           <blockquote>
             <p class="comment">Monitor is an object playing the role of a monitor.</p>
           </blockquote>
@@ -78,15 +78,15 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>monitor(-object_identifier) &ndash; zero_or_more</code>
+              <code>monitor(- object_identifier) &ndash; zero_or_more</code>
             </dd>
             <dd class="value">
-              <code>monitor(+object_identifier) &ndash; zero_or_one</code>
+              <code>monitor(+ object_identifier) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="monitored/1" class="code">monitored/1</h3>
+          <h3 id="monitored / 1" class="code">monitored / 1</h3>
           <blockquote>
             <p class="comment">Returns a list of all currently monitored objects.</p>
           </blockquote>
@@ -101,12 +101,12 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>monitored(-list(object_identifier)) &ndash; one</code>
+              <code>monitored(- list(object_identifier)) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="monitor/4" class="code">monitor/4</h3>
+          <h3 id="monitor / 4" class="code">monitor / 4</h3>
           <blockquote>
             <p class="comment">True if the arguments describe a currently defined monitored event.</p>
           </blockquote>
@@ -117,16 +117,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>monitor(Object,Message,Sender,Monitor)</code>
+              <code>monitor(Object, Message, Sender, Monitor)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>monitor(?object_identifier,?nonvar,?object_identifier,?object_identifier) &ndash; zero_or_more</code>
+              <code>monitor(? object_identifier, ? nonvar, ? object_identifier, ? object_identifier) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="set_monitor/4" class="code">set_monitor/4</h3>
+          <h3 id="set_monitor / 4" class="code">set_monitor / 4</h3>
           <blockquote>
             <p class="comment">Sets a monitor for the set of matching events.</p>
           </blockquote>
@@ -137,16 +137,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>set_monitor(Object,Message,Sender,Monitor)</code>
+              <code>set_monitor(Object, Message, Sender, Monitor)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>set_monitor(?object_identifier,?nonvar,?object_identifier,+object_identifier) &ndash; zero_or_one</code>
+              <code>set_monitor(? object_identifier, ? nonvar, ? object_identifier, + object_identifier) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="del_monitors/4" class="code">del_monitors/4</h3>
+          <h3 id="del_monitors / 4" class="code">del_monitors / 4</h3>
           <blockquote>
             <p class="comment">Deletes all matching monitored events.</p>
           </blockquote>
@@ -157,16 +157,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>del_monitors(Object,Message,Sender,Monitor)</code>
+              <code>del_monitors(Object, Message, Sender, Monitor)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>del_monitors(?object_identifier,?nonvar,?object_identifier,?object_identifier) &ndash; one</code>
+              <code>del_monitors(? object_identifier, ? nonvar, ? object_identifier, ? object_identifier) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="del_monitors/0" class="code">del_monitors/0</h3>
+          <h3 id="del_monitors / 0" class="code">del_monitors / 0</h3>
           <blockquote>
             <p class="comment">Deletes all monitored events.</p>
           </blockquote>
