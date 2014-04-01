@@ -11,29 +11,22 @@
 
 % general information about Joe:
 
-:- object(joePerson).
+:- object(joe_person).
 
-	:- public(getOlder/0).
+	:- public([
+		grow_older/0, address/1, age/1, name/1,
+		phone/1, score/1, set_score/1
+	]).
 
-	:- public(address/1).
+	:- dynamic([
+		age/1, score/1
+	]).
 
-	:- public(age/1).
-	:- dynamic(age/1).
-
-	:- public(name/1).
-
-	:- public(phone/1).
-
-	:- public(score/1).
-	:- dynamic(score/1).
-
-	:- public(setScore/1).
-
-	getOlder :-						% this predicate uses property sharing, i.e.
+	grow_older :-					% this predicate uses property sharing, i.e.
 		retract(age(Old)),			% the property and its value are shared by all 
 		New is Old + 1,				% descendant prototypes/viewpoints; changes
 		asserta(age(New)).			% are shared no matter which viewpoint receives
-									% the getOlder/1 message
+									% the grow_older/1 message
 	address('8 Octave Street').
 
 	age(30).
@@ -44,30 +37,29 @@
 
 	score(0).						% default value for the score/1 property,
 									% shared by all descendant prototypes/viewpoints;
-	setScore(Score) :-				% changing the default value results in
+	set_score(Score) :-				% changing the default value results in
 		::retractall(score(_)),		% in a local value stored in the descendant
-		::asserta(score(Score)).	% prototype that received the setScore/1 message
+		::asserta(score(Score)).	% prototype that received the set_score/1 message
 
 :- end_object.
 
 
 % information on Joe as an employee:
 
-:- object(joeEmployee,
-	extends(joePerson)).
+:- object(joe_employee,
+	extends(joe_person)).
 
-	:- public(worksFor/1).
+	:- public([
+		works_for/1, salary/1, give_raise/1
+	]).
 
-	:- public(salary/1).
 	:- dynamic(salary/1).
 
-	:- public(giveRaise/1).
-
-	worksFor('ToonTown').
+	works_for('ToonTown').
 
 	salary(1500).
 
-	giveRaise(Raise) :-				% another example of property sharing
+	give_raise(Raise) :-			% another example of property sharing
 		retract(salary(Old)),
 		New is Old + Raise,
 		asserta(salary(New)).
@@ -77,8 +69,8 @@
 
 % information on Joe as an chess player:
 
-:- object(joeChessPlayer,
-	extends(joePerson)).
+:- object(joe_chess_player,
+	extends(joe_person)).
 
 	:- public(category/1).
 
@@ -89,30 +81,30 @@
 
 % information on Joe as a movies fan:
 
-:- object(joeFilmEnthusiast,
-	extends(joePerson)).
+:- object(joe_film_enthusiast,
+	extends(joe_person)).
 
-	:- public(favActor/1).
-	:- public(favFilm/1).
-	:- public(favDirector/1).
+	:- public([
+		favorite_actor/1, favorite_film/1, favorite_director/1
+	]).
 
-	favActor('Fred Filistone').
+	favorite_actor('Fred Filistone').
 
-	favFilm('The Wizard of Oz').
+	favorite_film('The Wizard of Oz').
 
-	favDirector('Krzystof Kieslowski').
+	favorite_director('Krzystof Kieslowski').
 
 :- end_object.
 
 
 % information on Joe as a sportsman:
 
-:- object(joeSportsman,
-	extends(joePerson)).
+:- object(joe_sportsman,
+	extends(joe_person)).
 
-	:- public(sport/1).
-	:- public(stamina/1).
-	:- public(weight/1).
+	:- public([
+		sport/1, stamina/1, weight/1
+	]).
 
 	sport(snowboard).
 

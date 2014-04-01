@@ -11,11 +11,10 @@
 
 :- category(ctg).					% categories are fine-grained units of code reuse
 									% that can be imported by any number of objects
-	:- public(get_default/1).
-	:- public(set_default/1).
-
-	:- public(get_value/1).
-	:- public(set_value/1).
+	:- public([
+		get_default/1, set_default/1,
+		get_value/1, set_value/1
+	]).
 
 	:- private(state/1).			% categories can declare and handle dynamic
 	:- dynamic(state/1).			% predicates but cannot contain clauses for them

@@ -22,7 +22,9 @@
 	% categories by writing:
 	:- set_logtalk_flag(complements, allow).
 
-	:- public([name/1, age/1, salary/1]).
+	:- public([
+		name/1, age/1, salary/1
+	]).
 
 	name(john).
 	age(42).

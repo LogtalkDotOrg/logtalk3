@@ -24,12 +24,14 @@ imported in two car models, "sedan" and "coupe".
 
 :- protocol(enginep).
 
-	:- public(reference/1).
-	:- public(capacity/1).
-	:- public(cylinders/1).
-	:- public(horsepower_rpm/2).
-	:- public(bore_stroke/2).
-	:- public(fuel/1).
+	:- public([
+		reference/1,
+		capacity/1,
+		cylinders/1,
+		horsepower_rpm/2,
+		bore_stroke/2,
+		fuel/1
+	]).
 
 :- end_protocol.
 

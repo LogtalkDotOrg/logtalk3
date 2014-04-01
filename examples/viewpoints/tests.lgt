@@ -19,49 +19,49 @@
 		comment is 'Unit tests for the "viewpoints" example.'
 	]).
 
-	cover(joePerson).
-	cover(joeSportsman).
-	cover(joeChessPlayer).
-	cover(joeFilmEnthusiast).
-	cover(joeEmployee).
+	cover(joe_person).
+	cover(joe_sportsman).
+	cover(joe_chess_player).
+	cover(joe_film_enthusiast).
+	cover(joe_employee).
 
 	test(viewpoints_1) :-
-		joePerson::age(Age),
+		joe_person::age(Age),
 		Age == 30.
 
 	test(viewpoints_2) :-
-		joeSportsman::age(Age),
+		joe_sportsman::age(Age),
 		Age == 30.
 
 	test(viewpoints_3) :-
-		joePerson::getOlder,
-		joeChessPlayer::age(Age),
+		joe_person::grow_older,
+		joe_chess_player::age(Age),
 		Age == 31.
 
 	test(viewpoints_4) :-
-		joeEmployee::getOlder,
-		joePerson::age(Age),
+		joe_employee::grow_older,
+		joe_person::age(Age),
 		Age == 32.
 
 	test(viewpoints_5) :-
-		joePerson::score(Score),
+		joe_person::score(Score),
 		Score == 0.
 
 	test(viewpoints_6) :-
-		joeEmployee::score(Score),
+		joe_employee::score(Score),
 		Score == 0.
 
 	% don't use message broadcasting syntax in order to workaround a XSB parser bug
 	test(viewpoints_7) :-
-		joeChessPlayer::setScore(2200), joeChessPlayer::score(Score),
+		joe_chess_player::set_score(2200), joe_chess_player::score(Score),
 		Score == 2200.
 
 	test(viewpoints_8) :-
-		joePerson::score(Score),
+		joe_person::score(Score),
 		Score == 0.
 
 	test(viewpoints_9) :-
-		joeSportsman::score(Score),
+		joe_sportsman::score(Score),
 		Score == 0.
 
 :- end_object.

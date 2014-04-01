@@ -16,7 +16,7 @@ ________________________________________________________________________
 
 % we can start by asking joe its age:
 
-| ?- joePerson::age(Age).
+| ?- joe_person::age(Age).
 
 Age = 30
 yes
@@ -24,7 +24,7 @@ yes
 
 % the same question could be made via any of its viewpoints:
 
-| ?- joeSportsman::age(Age).
+| ?- joe_sportsman::age(Age).
 
 Age = 30
 yes
@@ -32,23 +32,23 @@ yes
 
 % now let's tell joe to get older:
 
-| ?- joePerson::getOlder.
+| ?- joe_person::grow_older.
 
 yes
 
 
 % we can verify the effect of the above message from any of the viewpoints:
 
-| ?- joeChessPlayer::age(Age).
+| ?- joe_chess_player::age(Age).
 
 Age = 31
 yes
 
 
 % because the growOld/0 and the age/1 predicates are implemented using 
-% property sharing, we can send the getOlder/0 message to any viewpoint:
+% property sharing, we can send the grow_older/0 message to any viewpoint:
 
-| ?- joeEmployee::getOlder.
+| ?- joe_employee::grow_older.
 
 yes
 
@@ -56,7 +56,7 @@ yes
 % we can check this by asking joe its age:
 
 
-| ?- joePerson::age(Age).
+| ?- joe_person::age(Age).
 
 Age = 32
 yes
@@ -67,46 +67,46 @@ yes
 
 
 % to illustrate value sharing we use a couple of predicates, score/1 and
-% setScore/0, defined in joePerson:
+% set_score/0, defined in joe_person:
 
 
-| ?- joePerson::score(Score).
+| ?- joe_person::score(Score).
 
 Score = 0
 yes
 
 
-% initially, score/1 is only defined for joePerson, so every descendant 
+% initially, score/1 is only defined for joe_person, so every descendant 
 % or viewpoint will share its value/definition:
 
-| ?- joeEmployee::score(Score).
+| ?- joe_employee::score(Score).
 
 Score = 0
 yes
 
 
-% but if we decide to increment the counter by sending the setScore/0 message to a descendant
+% but if we decide to increment the counter by sending the set_score/0 message to a descendant
 % (don't use message broadcasting syntax in order to workaround a XSB parser bug):
 
-| ?- joeChessPlayer::setScore(2200), joeChessPlayer::score(Score).
+| ?- joe_chess_player::set_score(2200), joe_chess_player::score(Score).
 
 Score = 2200
 yes
 
 
 % then the descendant will now have a local definition for counter/1,
-% independent of the definition in its parent, joePerson:
+% independent of the definition in its parent, joe_person:
 
-| ?- joePerson::score(Score).
+| ?- joe_person::score(Score).
 
 Score = 0
 yes
 
 
 % the other descendants/viewpoints will continue to share the definition 
-% in joePerson:
+% in joe_person:
 
-| ?- joeSportsman::score(Score).
+| ?- joe_sportsman::score(Score).
 
 Score = 0
 yes

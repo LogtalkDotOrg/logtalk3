@@ -120,7 +120,7 @@
 		parameter(3, Day).
 
 	today :-
-		{'$lgt_current_date'(Year, Month, Day)},	% defined in the adapter files
+		date::today(Year, Month, Day),
 		parameter(1, Year),
 		parameter(2, Month),
 		parameter(3, Day).
@@ -138,7 +138,7 @@
 		this(date(_, _, Day)).
 
 	today :-
-		{'$lgt_current_date'(Year, Month, Day)},	% defined in the adapter files
+		date::today(Year, Month, Day),
 		this(date(Year, Month, Day)).
 
 */
@@ -185,7 +185,7 @@
 		parameter(3, Secs).
 
 	now :-
-		{'$lgt_current_time'(Hours, Mins, Secs)},	% defined in the adapter files
+		time::now(Hours, Mins, Secs),
 		parameter(1, Hours),
 		parameter(2, Mins),
 		parameter(3, Secs).
@@ -203,7 +203,7 @@
 		this(time(_, _, Secs)).
 
 	now :-
-		{'$lgt_current_time'(Hours, Mins, Secs)},	% defined in the adapter files
+		time::now(Hours, Mins, Secs),
 		this(time(Hours, Mins, Secs)).
 
 */
@@ -436,7 +436,9 @@
 	:- public(advice/0).
 
 	advice :-
-		^^clothes(Clothes), write('Clothes: '), write(Clothes), nl,
-		^^speech(Speech), write('Speech:  '), write(Speech), nl, nl.
+		^^clothes(Clothes),
+		write('Clothes: '), write(Clothes), nl,
+		^^speech(Speech),
+		write('Speech:  '), write(Speech), nl, nl.
 
 :- end_object.

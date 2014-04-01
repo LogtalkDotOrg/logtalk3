@@ -19,9 +19,9 @@ defining alternative names for inherited predicates.
 
 :- object(rectangle(_Width, _Height)).
 
-	:- public(width/1).
-	:- public(height/1).
-	:- public(area/1).
+	:- public([
+		width/1, height/1, area/1
+	]).
 
 	width(Width) :-
 		parameter(1, Width).
@@ -52,9 +52,9 @@ defining alternative names for inherited predicates.
 
 :- object(ellipse(_RX, _RY)).
 
-	:- public(rx/1).
-	:- public(ry/1).
-	:- public(area/1).
+	:- public([
+		rx/1, ry/1, area/1
+	]).
 
 	rx(Rx) :-
 		parameter(1, Rx).

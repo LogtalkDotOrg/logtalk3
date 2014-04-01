@@ -22,8 +22,8 @@ sharing and value sharing in Logtalk by calling the built-in predicate
 modification methods `asserta/1`, `assertz/1`, and `retract/1` either in
 the context of "this" or in the context of "self".
 
-In this example we have a prototype, `joePerson`, containing general data
+In this example we have a prototype, `joe_person`, containing general data
 on Joe such as its age, name, or address, and four descendant prototypes
-or viewpoints, `joeSportsman`, `joeEmployee`, `joeChessPlayer`, and
-`joeFilmEnthusiast`. Each descendant contains data related to a particular
+or viewpoints, `joe_sportsman`, `joe_employee`, `joe_chess_player`, and
+`joe_film_enthusiast`. Each descendant contains data related to a particular
 viewpoint about Joe.

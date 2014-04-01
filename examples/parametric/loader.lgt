@@ -14,6 +14,7 @@ On POSIX systems, the compilation of this example may generate invalid
 file names for the XML documenting files.
 */
 
-:- initialization(
+:- initialization((
+	logtalk_load(library(dates_loader)),
 	logtalk_load(parametric)
-).
+)).

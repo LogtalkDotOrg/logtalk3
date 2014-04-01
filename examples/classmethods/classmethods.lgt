@@ -46,7 +46,8 @@
 		argnames is ['X', 'Y']
 	]).
 
-	position(0.0, 0.0).					% default position
+	% default position
+	position(0.0, 0.0).
 
 	:- public(radius/1).
 	:- mode(radius(?float), zero_or_one).
@@ -55,7 +56,8 @@
 		argnames is ['Radius']
 	]).
 
-	radius(1.0).						% default radius
+	% default radius
+	radius(1.0).
 
 	:- public(area/1).
 	:- mode(area(-float), one).
@@ -65,7 +67,8 @@
 	]).
 
 	area(Area) :-
-		::radius(Radius),				% ask the circle's instance that received the area/1 message its radius
+		% ask the circle's instance that received the area/1 message its radius
+		::radius(Radius),
 		Area is 4*atan(1.0)*Radius*Radius.
 
 :- end_object.

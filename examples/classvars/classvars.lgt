@@ -22,14 +22,18 @@
 	:- public(set_cv/1).
 	:- mode(set_cv(+integer), one).
 
-	cv_(0).						% cv_/1 value is stored locally, in this class
+	% cv_/1 value is stored locally, in this class
+	cv_(0).
 
 	cv(Value) :-
-		cv_(Value).				% retrive cv_/1 value, shared for all instances
+		% retrive cv_/1 value, shared for all instances
+		cv_(Value).
 
 	set_cv(Value) :-
-		retractall(cv_(_)),		% retract old cv_/1 value from this class
-		asserta(cv_(Value)).	% assert the new value into this class
+		% retract old cv_/1 value from this class
+		retractall(cv_(_)),
+		% assert the new value into this class
+		asserta(cv_(Value)).
 
 :- end_object.
 

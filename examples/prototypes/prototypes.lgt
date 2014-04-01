@@ -15,8 +15,9 @@
 :- object(alf).	% a prototype, which is also a stand-alone object
 
 	% prototypes declare predicates for themselves (and derived prototypes)
-	:- public(
-		[name/1, planet/1, stomachs/1, favorite_food/1, chases/1, motto/1]).
+	:- public([
+		name/1, planet/1, stomachs/1, favorite_food/1, chases/1, motto/1
+	]).
 
 	name('Gordon Shumway').
 	planet('Melmac').

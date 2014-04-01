@@ -89,8 +89,10 @@
 	]).
 
 	new(Person, Name, Birth, Office) :-
-		::new(Person, Name, Birth),			% create a "generic" person and
-		Person::assertz(office(Office)).	% add "teacher" specific data
+		% create a "generic" person and ...
+		::new(Person, Name, Birth),
+		% ... add "teacher" specific data
+		Person::assertz(office(Office)).
 
 	print :-
 		^^print,
@@ -124,8 +126,10 @@
 	]).
 
 	new(Person, Name, Birth, Dorm) :-
-		::new(Person, Name, Birth),			% create a "generic" person and
-		Person::assertz(dorm(Dorm)).		% add "student" specific data
+		% create a "generic" person and ...
+		::new(Person, Name, Birth),
+		% ... add "student" specific data
+		Person::assertz(dorm(Dorm)).
 
 	print :-
 		^^print,
