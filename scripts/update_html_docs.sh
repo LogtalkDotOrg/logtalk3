@@ -42,7 +42,7 @@ fi
 
 # default to SWI-Prolog as some of the documentation should be
 # generated using a multi-threaded back-end Prolog compiler
-backend=swi
+backend=swipl
 prolog='SWI-Prolog'
 logtalk="swilgt$extension -g"
 
@@ -155,14 +155,14 @@ $logtalk $lgtunit_goal
 $logtalk $profiler_goal
 
 cd ../docs/tmp_library && lgt2html -i library.html -t "Library documentation index" && mv *.html ..
-cd ../docs/tmp_assertions && lgt2html -i assertions_tool.html -t "Assertions" && mv *.html ..
-cd ../tmp_debugger && lgt2html -i debugger_tool.html -t "Debugger" && mv *.html ..
-cd ../tmp_diagrams && lgt2html -i diagrams_tool.html -t "Diagrams" && mv *.html ..
-cd ../tmp_help && lgt2html -i help_tool.html -t "Help" && mv *.html ..
-cd ../tmp_lgtdoc && lgt2html -i lgtdoc_tool.html -t "LgtDoc" && mv *.html ..
-cd ../tmp_lgtunit && lgt2html -i lgtunit_tool.html -t "LgtUnit" && mv *.html ..
-cd ../tmp_profiler && lgt2html -i profiler_tool.html -t "Profiler" && mv *.html ..
+cd ../tmp_assertions && lgt2html -i assertions_tool.html -t "Assertions tool" && mv *.html ..
+cd ../tmp_debugger && lgt2html -i debugger_tool.html -t "Debugger tool" && mv *.html ..
+cd ../tmp_diagrams && lgt2html -i diagrams_tool.html -t "Diagrams tool" && mv *.html ..
+cd ../tmp_help && lgt2html -i help_tool.html -t "Help tool" && mv *.html ..
+cd ../tmp_lgtdoc && lgt2html -i lgtdoc_tool.html -t "Logtalk documenting tool" && mv *.html ..
+cd ../tmp_lgtunit && lgt2html -i lgtunit_tool.html -t "Logtalk unit testing tool" && mv *.html ..
+cd ../tmp_profiler && lgt2html -i profiler_tool.html -t "Profiler tools" && mv *.html ..
 
-rm -rf ../docs/tmp_*
+rm -rf ../tmp_*
 
 exit 0
