@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2014 / 2 / 7</code>
+            <code>2014/2/7</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -43,7 +43,7 @@
       <div class="public">
         <h2>Public interface</h2>
         <div class="section">
-          <h3 id="reset / 0" class="code">reset / 0</h3>
+          <h3 id="reset/0" class="code">reset/0</h3>
           <blockquote>
             <p class="comment">Resets all debugging settings, including spy points and context spy points.</p>
           </blockquote>
@@ -59,7 +59,7 @@
           </dl>
         </div>
         <div class="section">
-          <h3 id="debug / 0" class="code">debug / 0</h3>
+          <h3 id="debug/0" class="code">debug/0</h3>
           <blockquote>
             <p class="comment">Starts debugging for all defined spy points and context spy points.</p>
           </blockquote>
@@ -75,7 +75,7 @@
           </dl>
         </div>
         <div class="section">
-          <h3 id="nodebug / 0" class="code">nodebug / 0</h3>
+          <h3 id="nodebug/0" class="code">nodebug/0</h3>
           <blockquote>
             <p class="comment">Stops debugging for all defined spy points and context spy points.</p>
           </blockquote>
@@ -91,7 +91,7 @@
           </dl>
         </div>
         <div class="section">
-          <h3 id="debugging / 0" class="code">debugging / 0</h3>
+          <h3 id="debugging/0" class="code">debugging/0</h3>
           <blockquote>
             <p class="comment">Reports current debugging settings, including spy points and context spy points.</p>
           </blockquote>
@@ -107,7 +107,7 @@
           </dl>
         </div>
         <div class="section">
-          <h3 id="debugging / 1" class="code">debugging / 1</h3>
+          <h3 id="debugging/1" class="code">debugging/1</h3>
           <blockquote>
             <p class="comment">True if the entity is being debugged.</p>
           </blockquote>
@@ -122,12 +122,12 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>debugging(+ entity_identifier) &ndash; zero_or_one</code>
+              <code>debugging(+entity_identifier) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="trace / 0" class="code">trace / 0</h3>
+          <h3 id="trace/0" class="code">trace/0</h3>
           <blockquote>
             <p class="comment">Starts tracing all calls compiled in debug mode.</p>
           </blockquote>
@@ -143,7 +143,7 @@
           </dl>
         </div>
         <div class="section">
-          <h3 id="notrace / 0" class="code">notrace / 0</h3>
+          <h3 id="notrace/0" class="code">notrace/0</h3>
           <blockquote>
             <p class="comment">Stops tracing of call compiled in debug mode.</p>
           </blockquote>
@@ -159,7 +159,7 @@
           </dl>
         </div>
         <div class="section">
-          <h3 id="spy / 1" class="code">spy / 1</h3>
+          <h3 id="spy/1" class="code">spy/1</h3>
           <blockquote>
             <p class="comment">Sets a spy point for a predicate or a list of predicates.</p>
           </blockquote>
@@ -170,19 +170,19 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>spy Predicate</code>
+              <code>spy(Predicate)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>spy + predicate_indicator &ndash; one</code>
+              <code>spy(+predicate_indicator) &ndash; one</code>
             </dd>
             <dd class="value">
-              <code>spy + list(predicate_indicator) &ndash; one</code>
+              <code>spy(+list(predicate_indicator)) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="spy / 4" class="code">spy / 4</h3>
+          <h3 id="spy/4" class="code">spy/4</h3>
           <blockquote>
             <p class="comment">Sets a context spy point.</p>
           </blockquote>
@@ -193,16 +193,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>spy(Sender, This, Self, Goal)</code>
+              <code>spy(Sender,This,Self,Goal)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>spy(@ term, @ term, @ term, @ term) &ndash; one</code>
+              <code>spy(@term,@term,@term,@term) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="nospy / 1" class="code">nospy / 1</h3>
+          <h3 id="nospy/1" class="code">nospy/1</h3>
           <blockquote>
             <p class="comment">Removes all matching predicate spy points.</p>
           </blockquote>
@@ -213,22 +213,22 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>nospy Predicate</code>
+              <code>nospy(Predicate)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>nospy @ variable &ndash; one</code>
+              <code>nospy(@variable) &ndash; one</code>
             </dd>
             <dd class="value">
-              <code>nospy + predicate_indicator &ndash; one</code>
+              <code>nospy(+predicate_indicator) &ndash; one</code>
             </dd>
             <dd class="value">
-              <code>nospy + list(predicate_indicator) &ndash; one</code>
+              <code>nospy(+list(predicate_indicator)) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="nospy / 4" class="code">nospy / 4</h3>
+          <h3 id="nospy/4" class="code">nospy/4</h3>
           <blockquote>
             <p class="comment">Removes all matching context spy points.</p>
           </blockquote>
@@ -239,16 +239,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>nospy(Sender, This, Self, Goal)</code>
+              <code>nospy(Sender,This,Self,Goal)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>nospy(@ term, @ term, @ term, @ term) &ndash; one</code>
+              <code>nospy(@term,@term,@term,@term) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="nospyall / 0" class="code">nospyall / 0</h3>
+          <h3 id="nospyall/0" class="code">nospyall/0</h3>
           <blockquote>
             <p class="comment">Removes all spy points.</p>
           </blockquote>
@@ -264,7 +264,7 @@
           </dl>
         </div>
         <div class="section">
-          <h3 id="leash / 1" class="code">leash / 1</h3>
+          <h3 id="leash/1" class="code">leash/1</h3>
           <blockquote>
             <p class="comment">Sets the debugger leash ports using an abbreviation (none, loose, half, tight, or full) or a list of ports (valid ports are fact, rule, call, exit, redo, fail, and exception).</p>
           </blockquote>
@@ -279,10 +279,10 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>leash(+ atom) &ndash; one</code>
+              <code>leash(+atom) &ndash; one</code>
             </dd>
             <dd class="value">
-              <code>leash(+ list(atom)) &ndash; one</code>
+              <code>leash(+list(atom)) &ndash; one</code>
             </dd>
           </dl>
         </div>

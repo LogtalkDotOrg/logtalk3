@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2010 / 6 / 9</code>
+            <code>2010/6/9</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -43,7 +43,7 @@
       <div class="public">
         <h2>Public interface</h2>
         <div class="section">
-          <h3 id="depth / 2" class="code">depth / 2</h3>
+          <h3 id="depth/2" class="code">depth/2</h3>
           <blockquote>
             <p class="comment">True if the depth of Term is Depth. The depth of atomic terms is zero; the depth of a compound term is one plus the maximum depth of its sub-terms.</p>
           </blockquote>
@@ -54,16 +54,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>depth(Term, Depth)</code>
+              <code>depth(Term,Depth)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>depth(@ term, ? integer) &ndash; zero_or_one</code>
+              <code>depth(@term,?integer) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="ground / 1" class="code">ground / 1</h3>
+          <h3 id="ground/1" class="code">ground/1</h3>
           <blockquote>
             <p class="comment">True if the argument is ground.</p>
           </blockquote>
@@ -78,12 +78,12 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>ground(@ term) &ndash; zero_or_one</code>
+              <code>ground(@term) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="new / 1" class="code">new / 1</h3>
+          <h3 id="new/1" class="code">new/1</h3>
           <blockquote>
             <p class="comment">Creates a new term instance (if meaningful).</p>
           </blockquote>
@@ -98,12 +98,12 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>new(- nonvar) &ndash; zero_or_one</code>
+              <code>new(-nonvar) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="occurs / 2" class="code">occurs / 2</h3>
+          <h3 id="occurs/2" class="code">occurs/2</h3>
           <blockquote>
             <p class="comment">True if the variable occurs in the term.</p>
           </blockquote>
@@ -114,16 +114,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>occurs(Variable, Term)</code>
+              <code>occurs(Variable,Term)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>occurs(@ var, @ term) &ndash; zero_or_one</code>
+              <code>occurs(@var,@term) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="subsumes / 2" class="code">subsumes / 2</h3>
+          <h3 id="subsumes/2" class="code">subsumes/2</h3>
           <blockquote>
             <p class="comment">The first term subsumes the second term.</p>
           </blockquote>
@@ -134,16 +134,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>subsumes(General, Specific)</code>
+              <code>subsumes(General,Specific)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>subsumes(? term, @ term) &ndash; zero_or_one</code>
+              <code>subsumes(?term,@term) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="subterm / 2" class="code">subterm / 2</h3>
+          <h3 id="subterm/2" class="code">subterm/2</h3>
           <blockquote>
             <p class="comment">The first term is a subterm of the second term.</p>
           </blockquote>
@@ -154,16 +154,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>subterm(Subterm, Term)</code>
+              <code>subterm(Subterm,Term)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>subterm(? term, + term) &ndash; zero_or_more</code>
+              <code>subterm(?term,+term) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="valid / 1" class="code">valid / 1</h3>
+          <h3 id="valid/1" class="code">valid/1</h3>
           <blockquote>
             <p class="comment">Term is valid.</p>
           </blockquote>
@@ -178,12 +178,12 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>valid(@ nonvar) &ndash; zero_or_one</code>
+              <code>valid(@nonvar) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="check / 1" class="code">check / 1</h3>
+          <h3 id="check/1" class="code">check/1</h3>
           <blockquote>
             <p class="comment">Checks if a term is valid. Throws an exception if the term is not valid.</p>
           </blockquote>
@@ -198,12 +198,12 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>check(@ nonvar) &ndash; one</code>
+              <code>check(@nonvar) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="variant / 2" class="code">variant / 2</h3>
+          <h3 id="variant/2" class="code">variant/2</h3>
           <blockquote>
             <p class="comment">Each term is a variant of the other (i.e. they are structurally equivalent).</p>
           </blockquote>
@@ -214,16 +214,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>variant(Term1, Term2)</code>
+              <code>variant(Term1,Term2)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>variant(@ term, @ term) &ndash; zero_or_one</code>
+              <code>variant(@term,@term) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="variables / 2" class="code">variables / 2</h3>
+          <h3 id="variables/2" class="code">variables/2</h3>
           <blockquote>
             <p class="comment">Returns a list of all term variables (ordered as found when doing a depth-first, left-to-right traversal of Term).</p>
           </blockquote>
@@ -234,16 +234,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>variables(Term, List)</code>
+              <code>variables(Term,List)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>variables(@ term, - list) &ndash; one</code>
+              <code>variables(@term,-list) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="singletons / 2" class="code">singletons / 2</h3>
+          <h3 id="singletons/2" class="code">singletons/2</h3>
           <blockquote>
             <p class="comment">Returns a list of all term singleton variables (ordered as found when doing a depth-first, left-to-right traversal of Term).</p>
           </blockquote>
@@ -254,11 +254,11 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>singletons(Term, Singletons)</code>
+              <code>singletons(Term,Singletons)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>singletons(@ term, - list) &ndash; one</code>
+              <code>singletons(@term,-list) &ndash; one</code>
             </dd>
           </dl>
         </div>

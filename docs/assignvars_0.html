@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2005 / 1 / 7</code>
+            <code>2005/1/7</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -43,7 +43,7 @@
       <div class="public">
         <h2>Public interface</h2>
         <div class="section">
-          <h3 id="assignable / 1" class="code">assignable / 1</h3>
+          <h3 id="assignable/1" class="code">assignable/1</h3>
           <blockquote>
             <p class="comment">Makes Variable an assignable variable. Initial state will be empty.</p>
           </blockquote>
@@ -58,14 +58,14 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>assignable(- assignvar) &ndash; one</code>
+              <code>assignable(-assignvar) &ndash; one</code>
             </dd>
             <dt class="key">exceptions:</dt>
-            <dd class="value">Variable is not a variable: <code>type_error(variable, Variable)</code></dd>
+            <dd class="value">Variable is not a variable: <code>type_error(variable,Variable)</code></dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="assignable / 2" class="code">assignable / 2</h3>
+          <h3 id="assignable/2" class="code">assignable/2</h3>
           <blockquote>
             <p class="comment">Makes Variable an assignable variable and sets its initial state to Value.</p>
           </blockquote>
@@ -76,19 +76,19 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>assignable(Variable, Value)</code>
+              <code>assignable(Variable,Value)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>assignable(- assignvar, @ nonvar) &ndash; one</code>
+              <code>assignable(-assignvar,@nonvar) &ndash; one</code>
             </dd>
             <dt class="key">exceptions:</dt>
-            <dd class="value">Variable is not a variable: <code>type_error(variable, Variable)</code></dd>
+            <dd class="value">Variable is not a variable: <code>type_error(variable,Variable)</code></dd>
             <dd class="value">Value is not instantiated: <code>instantiation_error</code></dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="&lt;= / 2" class="code">&lt;= / 2</h3>
+          <h3 id="(&lt;=)/2" class="code">(&lt;=)/2</h3>
           <blockquote>
             <p class="comment">Sets the state of the assignable variable Variable to Value (initializing the variable if needed).</p>
           </blockquote>
@@ -99,18 +99,18 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>Variable &lt;= Value</code>
+              <code>Variable&lt;=Value</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>(? assignvar) &lt;= (@ nonvar) &ndash; one</code>
+              <code>(?assignvar)&lt;= (@nonvar) &ndash; one</code>
             </dd>
             <dt class="key">exceptions:</dt>
             <dd class="value">Value is not instantiated: <code>instantiation_error</code></dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="=&gt; / 2" class="code">=&gt; / 2</h3>
+          <h3 id="(=&gt;)/2" class="code">(=&gt;)/2</h3>
           <blockquote>
             <p class="comment">Unifies Value with the current state of the assignable variable Variable.</p>
           </blockquote>
@@ -121,11 +121,11 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>Variable =&gt; Value</code>
+              <code>Variable=&gt;Value</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>(+ assignvar) =&gt; (? nonvar) &ndash; zero_or_one</code>
+              <code>(+assignvar)=&gt; (?nonvar) &ndash; zero_or_one</code>
             </dd>
             <dt class="key">exceptions:</dt>
             <dd class="value">Variable is not instantiated: <code>instantiation_error</code></dd>

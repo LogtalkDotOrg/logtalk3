@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2000 / 7 / 24</code>
+            <code>2000/7/24</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -43,7 +43,7 @@
       <div class="public">
         <h2>Public interface</h2>
         <div class="section">
-          <h3 id="monitor_activated / 0" class="code">monitor_activated / 0</h3>
+          <h3 id="monitor_activated/0" class="code">monitor_activated/0</h3>
           <blockquote>
             <p class="comment">True if monitor is currently active.</p>
           </blockquote>
@@ -59,7 +59,7 @@
           </dl>
         </div>
         <div class="section">
-          <h3 id="activate_monitor / 0" class="code">activate_monitor / 0</h3>
+          <h3 id="activate_monitor/0" class="code">activate_monitor/0</h3>
           <blockquote>
             <p class="comment">Activates all spy points and start monitoring.</p>
           </blockquote>
@@ -75,7 +75,7 @@
           </dl>
         </div>
         <div class="section">
-          <h3 id="suspend_monitor / 0" class="code">suspend_monitor / 0</h3>
+          <h3 id="suspend_monitor/0" class="code">suspend_monitor/0</h3>
           <blockquote>
             <p class="comment">Suspends monitoring, deactivating all spy points.</p>
           </blockquote>
@@ -91,7 +91,7 @@
           </dl>
         </div>
         <div class="section">
-          <h3 id="reset_monitor / 0" class="code">reset_monitor / 0</h3>
+          <h3 id="reset_monitor/0" class="code">reset_monitor/0</h3>
           <blockquote>
             <p class="comment">Resets monitor, deactivating and deleting all spy points.</p>
           </blockquote>
@@ -107,7 +107,7 @@
           </dl>
         </div>
         <div class="section">
-          <h3 id="spy_point / 4" class="code">spy_point / 4</h3>
+          <h3 id="spy_point/4" class="code">spy_point/4</h3>
           <blockquote>
             <p class="comment">Current spy point.</p>
           </blockquote>
@@ -118,16 +118,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>spy_point(Event, Object, Message, Sender)</code>
+              <code>spy_point(Event,Object,Message,Sender)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>spy_point(? event, ? object, ? callable, ? object) &ndash; zero_or_more</code>
+              <code>spy_point(?event,?object,?callable,?object) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="set_spy_point / 4" class="code">set_spy_point / 4</h3>
+          <h3 id="set_spy_point/4" class="code">set_spy_point/4</h3>
           <blockquote>
             <p class="comment">Sets a spy point.</p>
           </blockquote>
@@ -138,16 +138,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>set_spy_point(Event, Object, Message, Sender)</code>
+              <code>set_spy_point(Event,Object,Message,Sender)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>set_spy_point(? event, ? object, ? callable, ? object) &ndash; one</code>
+              <code>set_spy_point(?event,?object,?callable,?object) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="del_spy_points / 4" class="code">del_spy_points / 4</h3>
+          <h3 id="del_spy_points/4" class="code">del_spy_points/4</h3>
           <blockquote>
             <p class="comment">Deletes all matching spy points.</p>
           </blockquote>
@@ -158,11 +158,11 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>del_spy_points(Event, Object, Message, Sender)</code>
+              <code>del_spy_points(Event,Object,Message,Sender)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>del_spy_points(@ event, @ object, @ callable, @ object) &ndash; one</code>
+              <code>del_spy_points(@event,@object,@callable,@object) &ndash; one</code>
             </dd>
           </dl>
         </div>

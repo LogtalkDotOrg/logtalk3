@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2011 / 8 / 17</code>
+            <code>2011/8/17</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -43,7 +43,7 @@
       <div class="public">
         <h2>Public interface</h2>
         <div class="section">
-          <h3 id="new / 1" class="code">new / 1</h3>
+          <h3 id="new/1" class="code">new/1</h3>
           <blockquote>
             <p class="comment">Makes Variable a stream variable. Initial state will be empty.</p>
           </blockquote>
@@ -58,14 +58,14 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>new(- streamvar) &ndash; one</code>
+              <code>new(-streamvar) &ndash; one</code>
             </dd>
             <dt class="key">exceptions:</dt>
-            <dd class="value">Variable is not a variable: <code>type_error(variable, Variable)</code></dd>
+            <dd class="value">Variable is not a variable: <code>type_error(variable,Variable)</code></dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="new / 2" class="code">new / 2</h3>
+          <h3 id="new/2" class="code">new/2</h3>
           <blockquote>
             <p class="comment">Makes Variable a stream variable and sets its initial state to Value.</p>
           </blockquote>
@@ -76,18 +76,18 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>new(Variable, Value)</code>
+              <code>new(Variable,Value)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>new(- streamvar, @ nonvar) &ndash; one</code>
+              <code>new(-streamvar,@nonvar) &ndash; one</code>
             </dd>
             <dt class="key">exceptions:</dt>
-            <dd class="value">Variable is not a variable: <code>type_error(variable, Variable)</code></dd>
+            <dd class="value">Variable is not a variable: <code>type_error(variable,Variable)</code></dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="&lt;= / 2" class="code">&lt;= / 2</h3>
+          <h3 id="(&lt;=)/2" class="code">(&lt;=)/2</h3>
           <blockquote>
             <p class="comment">Sets the state of the stream variable Variable to Value (initializing the variable if needed).</p>
           </blockquote>
@@ -98,16 +98,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>Variable &lt;= Value</code>
+              <code>Variable&lt;=Value</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>(? streamvar) &lt;= (@ nonvar) &ndash; one</code>
+              <code>(?streamvar)&lt;= (@nonvar) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="=&gt; / 2" class="code">=&gt; / 2</h3>
+          <h3 id="(=&gt;)/2" class="code">(=&gt;)/2</h3>
           <blockquote>
             <p class="comment">Unifies Value with the current state of the stream variable Variable.</p>
           </blockquote>
@@ -118,11 +118,11 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>Variable =&gt; Value</code>
+              <code>Variable=&gt;Value</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>(+ streamvar) =&gt; (? nonvar) &ndash; zero_or_one</code>
+              <code>(+streamvar)=&gt; (?nonvar) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
@@ -145,8 +145,8 @@
       <div class="section">
         <dl class="properties">
           <dt class="key">local operator declarations:</dt>
-          <dd class="code">op(100, xfx, &lt;=) (public)</dd>
-          <dd class="code">op(100, xfx, =&gt;) (public)</dd>
+          <dd class="code">op(100,xfx,&lt;=) (public)</dd>
+          <dd class="code">op(100,xfx,=&gt;) (public)</dd>
         </dl>
       </div>
     </div>

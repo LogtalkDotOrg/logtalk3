@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2011 / 11 / 9</code>
+            <code>2011/11/9</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -43,14 +43,14 @@
       <div class="public">
         <h2>Public interface</h2>
         <div class="section">
-          <h3 id="reset_gensym / 0" class="code">reset_gensym / 0</h3>
+          <h3 id="reset_gensym/0" class="code">reset_gensym/0</h3>
           <blockquote>
             <p class="comment">Resets the generator counter for all bases.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
             <dd class="value">
-              <code>static</code>
+              <code>static, synchronized</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
@@ -59,14 +59,14 @@
           </dl>
         </div>
         <div class="section">
-          <h3 id="reset_gensym / 1" class="code">reset_gensym / 1</h3>
+          <h3 id="reset_gensym/1" class="code">reset_gensym/1</h3>
           <blockquote>
             <p class="comment">Resets the generator counter for a given base.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
             <dd class="value">
-              <code>static</code>
+              <code>static, synchronized</code>
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
@@ -74,27 +74,27 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>reset_gensym(+ atom) &ndash; one</code>
+              <code>reset_gensym(+atom) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="gensym / 2" class="code">gensym / 2</h3>
+          <h3 id="gensym/2" class="code">gensym/2</h3>
           <blockquote>
             <p class="comment">Returns a new unique atom with a given base (prefix).</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
             <dd class="value">
-              <code>static</code>
+              <code>static, synchronized</code>
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>gensym(Base, Unique)</code>
+              <code>gensym(Base,Unique)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>gensym(+ atom, - atom) &ndash; one</code>
+              <code>gensym(+atom,-atom) &ndash; one</code>
             </dd>
           </dl>
         </div>
@@ -108,7 +108,7 @@
       <div class="private">
         <h2>Private predicates</h2>
         <div class="section">
-          <h3 id="base_ / 2" class="code">base_ / 2</h3>
+          <h3 id="base_/2" class="code">base_/2</h3>
           <blockquote>
             <p class="comment">Table of generator bases and respective counters.</p>
           </blockquote>
@@ -119,11 +119,11 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>base_(Base, Counter)</code>
+              <code>base_(Base,Counter)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>base_(? atom, ? integer) &ndash; zero_or_more</code>
+              <code>base_(?atom,?integer) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>

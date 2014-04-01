@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2008 / 10 / 31</code>
+            <code>2008/10/31</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -43,14 +43,14 @@
       <div class="public">
         <h2>Public interface</h2>
         <div class="section">
-          <h3 id="random / 1" class="code">random / 1</h3>
+          <h3 id="random/1" class="code">random/1</h3>
           <blockquote>
             <p class="comment">Returns a new random float value in the interval [0.0, 1.0[.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
             <dd class="value">
-              <code>static</code>
+              <code>static, synchronized</code>
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
@@ -58,88 +58,88 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>random(- float) &ndash; one</code>
+              <code>random(-float) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="random / 3" class="code">random / 3</h3>
+          <h3 id="random/3" class="code">random/3</h3>
           <blockquote>
             <p class="comment">Returns a new random value in the interval [Lower, Upper[.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
             <dd class="value">
-              <code>static</code>
+              <code>static, synchronized</code>
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>random(Lower, Upper, Random)</code>
+              <code>random(Lower,Upper,Random)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>random(+ integer, + integer, - integer) &ndash; zero_or_one</code>
+              <code>random(+integer,+integer,-integer) &ndash; zero_or_one</code>
             </dd>
             <dd class="value">
-              <code>random(+ float, + float, - float) &ndash; zero_or_one</code>
+              <code>random(+float,+float,-float) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="randseq / 4" class="code">randseq / 4</h3>
+          <h3 id="randseq/4" class="code">randseq/4</h3>
           <blockquote>
             <p class="comment">Returns a list of Length random values in the interval [Lower, Upper[.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
             <dd class="value">
-              <code>static</code>
+              <code>static, synchronized</code>
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>randseq(Length, Lower, Upper, List)</code>
+              <code>randseq(Length,Lower,Upper,List)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>randseq(+ integer, + integer, + integer, - list(integer)) &ndash; zero_or_one</code>
+              <code>randseq(+integer,+integer,+integer,-list(integer)) &ndash; zero_or_one</code>
             </dd>
             <dd class="value">
-              <code>randseq(+ integer, + float, + float, - list(float)) &ndash; zero_or_one</code>
+              <code>randseq(+integer,+float,+float,-list(float)) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="randset / 4" class="code">randset / 4</h3>
+          <h3 id="randset/4" class="code">randset/4</h3>
           <blockquote>
             <p class="comment">Returns an ordered set of Length random values in the interval [Lower, Upper[.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
             <dd class="value">
-              <code>static</code>
+              <code>static, synchronized</code>
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>randset(Length, Lower, Upper, Set)</code>
+              <code>randset(Length,Lower,Upper,Set)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>randset(+ integer, + integer, + integer, - list(integer)) &ndash; zero_or_one</code>
+              <code>randset(+integer,+integer,+integer,-list(integer)) &ndash; zero_or_one</code>
             </dd>
             <dd class="value">
-              <code>randset(+ integer, + float, + float, - list(float)) &ndash; zero_or_one</code>
+              <code>randset(+integer,+float,+float,-list(float)) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="reset_seed / 0" class="code">reset_seed / 0</h3>
+          <h3 id="reset_seed/0" class="code">reset_seed/0</h3>
           <blockquote>
             <p class="comment">Resets the random seed to its default value.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
             <dd class="value">
-              <code>static</code>
+              <code>static, synchronized</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
@@ -148,14 +148,14 @@
           </dl>
         </div>
         <div class="section">
-          <h3 id="set_seed / 1" class="code">set_seed / 1</h3>
+          <h3 id="set_seed/1" class="code">set_seed/1</h3>
           <blockquote>
             <p class="comment">Sets the random seed to the given value.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
             <dd class="value">
-              <code>static</code>
+              <code>static, synchronized</code>
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
@@ -163,7 +163,7 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>set_seed(+ integer) &ndash; zero_or_one</code>
+              <code>set_seed(+integer) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>

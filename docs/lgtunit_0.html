@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2014 / 3 / 25</code>
+            <code>2013/12/13</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -44,7 +44,7 @@
           <dt class="key">provides:</dt>
           <dd class="value">
             <code>
-              <a href="logtalk_0.html">logtalk :: trace_event / 2</a>
+              <a href="logtalk_0.html">logtalk::trace_event/2</a>
             </code>
           </dd>
         </dl>
@@ -54,7 +54,7 @@
       <div class="public">
         <h2>Public interface</h2>
         <div class="section">
-          <h3 id="cover / 1" class="code">cover / 1</h3>
+          <h3 id="cover/1" class="code">cover/1</h3>
           <blockquote>
             <p class="comment">Declares entities being tested for which code coverage information should be collected.</p>
           </blockquote>
@@ -65,12 +65,12 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>cover(? entity_identifier) &ndash; zero_or_more</code>
+              <code>cover(?entity_identifier) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="run / 2" class="code">run / 2</h3>
+          <h3 id="run/2" class="code">run/2</h3>
           <blockquote>
             <p class="comment">Runs the unit tests, writing the results to the specified file. Mode can be either "write" (to create a new file) or "append" (to add results to an existing file).</p>
           </blockquote>
@@ -81,16 +81,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>run(File, Mode)</code>
+              <code>run(File,Mode)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>run(+ atom, + atom) &ndash; one</code>
+              <code>run(+atom,+atom) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="run / 0" class="code">run / 0</h3>
+          <h3 id="run/0" class="code">run/0</h3>
           <blockquote>
             <p class="comment">Runs the unit tests, writing the results to the current output stream.</p>
           </blockquote>
@@ -117,11 +117,11 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>=~=(Float1, Float2)</code>
+              <code>=~=(Float1,Float2)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>=~=(+ float, + float) &ndash; zero_or_one</code>
+              <code>=~=(+float,+float) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
@@ -129,7 +129,7 @@
       <div class="protected">
         <h2>Protected interface</h2>
         <div class="section">
-          <h3 id="run_tests / 0" class="code">run_tests / 0</h3>
+          <h3 id="run_tests/0" class="code">run_tests/0</h3>
           <blockquote>
             <p class="comment">Runs all defined unit tests.</p>
           </blockquote>
@@ -145,7 +145,7 @@
           </dl>
         </div>
         <div class="section">
-          <h3 id="run_tests / 2" class="code">run_tests / 2</h3>
+          <h3 id="run_tests/2" class="code">run_tests/2</h3>
           <blockquote>
             <p class="comment">Runs a list of defined tests.</p>
           </blockquote>
@@ -156,16 +156,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>run_tests(Tests, File)</code>
+              <code>run_tests(Tests,File)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>run_tests(+ list(callable), + atom) &ndash; one</code>
+              <code>run_tests(+list(callable),+atom) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="setup / 0" class="code">setup / 0</h3>
+          <h3 id="setup/0" class="code">setup/0</h3>
           <blockquote>
             <p class="comment">Setup environment before running the test set. Defaults to the goal true.</p>
           </blockquote>
@@ -181,7 +181,7 @@
           </dl>
         </div>
         <div class="section">
-          <h3 id="cleanup / 0" class="code">cleanup / 0</h3>
+          <h3 id="cleanup/0" class="code">cleanup/0</h3>
           <blockquote>
             <p class="comment">Cleanup environment after running the test set. Defaults to the goal true.</p>
           </blockquote>
@@ -200,7 +200,7 @@
       <div class="private">
         <h2>Private predicates</h2>
         <div class="section">
-          <h3 id="test / 2" class="code">test / 2</h3>
+          <h3 id="test/2" class="code">test/2</h3>
           <blockquote>
             <p class="comment">Specifies a unit test.</p>
           </blockquote>
@@ -211,16 +211,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>test(Identifier, Outcome)</code>
+              <code>test(Identifier,Outcome)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>test(? atom, ? nonvar) &ndash; zero_or_more</code>
+              <code>test(?atom,?nonvar) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="test_ / 1" class="code">test_ / 1</h3>
+          <h3 id="test_/1" class="code">test_/1</h3>
           <blockquote>
             <p class="comment">Table of defined tests.</p>
           </blockquote>
@@ -235,12 +235,12 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>test_(? compound) &ndash; zero_or_more</code>
+              <code>test_(?compound) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="skipped_ / 1" class="code">skipped_ / 1</h3>
+          <h3 id="skipped_/1" class="code">skipped_/1</h3>
           <blockquote>
             <p class="comment">Counter for skipped tests.</p>
           </blockquote>
@@ -255,12 +255,12 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>skipped_(? integer) &ndash; zero_or_one</code>
+              <code>skipped_(?integer) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="passed_ / 1" class="code">passed_ / 1</h3>
+          <h3 id="passed_/1" class="code">passed_/1</h3>
           <blockquote>
             <p class="comment">Counter for passed tests.</p>
           </blockquote>
@@ -275,12 +275,12 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>passed_(? integer) &ndash; zero_or_one</code>
+              <code>passed_(?integer) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="failed_ / 1" class="code">failed_ / 1</h3>
+          <h3 id="failed_/1" class="code">failed_/1</h3>
           <blockquote>
             <p class="comment">Counter for failed tests.</p>
           </blockquote>
@@ -295,12 +295,12 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>failed_(? callable) &ndash; zero_or_one</code>
+              <code>failed_(?callable) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="fired_ / 3" class="code">fired_ / 3</h3>
+          <h3 id="fired_/3" class="code">fired_/3</h3>
           <blockquote>
             <p class="comment">Fired clauses when running the unit tests.</p>
           </blockquote>
@@ -311,16 +311,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>fired_(Entity, Predicate, Clause)</code>
+              <code>fired_(Entity,Predicate,Clause)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>fired_(? entity_identifier, ? predicate_indicator, ? integer) &ndash; zero_or_more</code>
+              <code>fired_(?entity_identifier,?predicate_indicator,?integer) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="covered_ / 2" class="code">covered_ / 2</h3>
+          <h3 id="covered_/2" class="code">covered_/2</h3>
           <blockquote>
             <p class="comment">Auxiliary predicate for collecting statistics on clause coverage.</p>
           </blockquote>
@@ -331,11 +331,11 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>covered_(Covered, Total)</code>
+              <code>covered_(Covered,Total)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>covered_(? integer, ? integer) &ndash; zero_or_more</code>
+              <code>covered_(?integer,?integer) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
@@ -346,7 +346,7 @@
       <div class="section">
         <dl class="properties">
           <dt class="key">local operator declarations:</dt>
-          <dd class="code">op(700, xfx, =~=) (public)</dd>
+          <dd class="code">op(700,xfx,=~=) (public)</dd>
         </dl>
       </div>
     </div>
