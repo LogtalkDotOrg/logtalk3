@@ -57,30 +57,22 @@
 	]).
 
 	assertion(Goal) :-
-		(	catch(Goal, Error, assertion_error_handler(Goal, Error, Flag)) ->
-			(	var(Flag) ->
+		(	catch(Goal, Error, true) ->
+			(	var(Error) ->
 				print_message(silent, assertions, assertion_sucess(Goal))
-			;	% Goal generated an exception, which was already reported
-				true
+			;	print_message(error, assertions, assertion_error(Goal, Error))
 			)
 		;	print_message(error, assertions, assertion_failure(Goal))
 		).
 
-	assertion_error_handler(Goal, Error, error) :-
-		print_message(error, assertions, assertion_error(Goal, Error)).
-
 	assertion(Context, Goal) :-
-		(	catch(Goal, Error, assertion_error_handler(Context, Goal, Error, Flag)) ->
-			(	var(Flag) ->
+		(	catch(Goal, Error, true) ->
+			(	var(Error) ->
 				print_message(silent, assertions, assertion_sucess(Context, Goal))
-			;	% Goal generated an exception, which was already reported
-				true
+			;	print_message(error, assertions, assertion_error(Context, Goal, Error))
 			)
 		;	print_message(error, assertions, assertion_failure(Context, Goal))
 		).
-
-	assertion_error_handler(Context, Goal, Error, error) :-
-		print_message(error, assertions, assertion_error(Context, Goal, Error)).
 
 	% add file and line context information to calls to the assertion/1 predicate
 	% when using this object as a hook object
