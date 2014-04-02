@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>1.0</code>
+            <code>2.0</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2014/3/27</code>
+            <code>2014/4/2</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -36,7 +36,12 @@
             <code>static, context_switching_calls</code>
           </dd>
         </dl>
-        <p class="comment">(no dependencies on other files)</p>
+        <dl class="relations">
+          <dt class="key">implements:</dt>
+          <dd class="value">
+            <code>public <a href="expanding_0.html">expanding</a></code>
+          </dd>
+        </dl>
       </div>
     </div>
     <div class="predicates">
@@ -45,7 +50,7 @@
         <div class="section">
           <h3 id="assertion/1" class="code">assertion/1</h3>
           <blockquote>
-            <p class="comment">Checks that the assertion goal is true.</p>
+            <p class="comment">Checks that an assertion is true. Uses the structured message printing mechanism for printing the results.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -62,14 +67,14 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>assertion(@callable) &ndash; zero_or_one</code>
+              <code>assertion(@callable) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
           <h3 id="assertion/2" class="code">assertion/2</h3>
           <blockquote>
-            <p class="comment">Checks that the assertion goal is true. The context argument allows addtional information to be passed when reporting the assertion results.</p>
+            <p class="comment">Checks that an assertion is true. Uses the structured message printing mechanism for printing the results. The context argument can be used to track location information.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -86,7 +91,7 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>assertion(@term,@callable) &ndash; zero_or_one</code>
+              <code>assertion(@term,@callable) &ndash; one</code>
             </dd>
           </dl>
         </div>
@@ -94,13 +99,13 @@
       <div class="protected">
         <h2>Protected interface</h2>
         <div class="section">
-          <p class="comment">(none)</p>
+          <p class="comment">(see related entities)</p>
         </div>
       </div>
       <div class="private">
         <h2>Private predicates</h2>
         <div class="section">
-          <p class="comment">(none)</p>
+          <p class="comment">(see related entities)</p>
         </div>
       </div>
     </div>

@@ -22,30 +22,31 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(assertions).
+:- object(assertions,
+	implements(expanding)).
 
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 1.0,
+		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/03/27,
+		date is 2014/04/02,
 		comment is 'A simple assertions framework.'
 	]).
 
 	:- public(assertion/1).
 	:- meta_predicate(assertion(0)).
-	:- mode(assertion(@callable), zero_or_one).
+	:- mode(assertion(@callable), one).
 	:- info(assertion/1, [
-		comment is 'Checks that the assertion goal is true.',
+		comment is 'Checks that an assertion is true. Uses the structured message printing mechanism for printing the results.',
 		argnames is ['Goal']
 	]).
 
 	:- public(assertion/2).
 	:- meta_predicate(assertion(*, 0)).
-	:- mode(assertion(@term, @callable), zero_or_one).
+	:- mode(assertion(@term, @callable), one).
 	:- info(assertion/2, [
-		comment is 'Checks that the assertion goal is true. The context argument allows addtional information to be passed when reporting the assertion results.',
+		comment is 'Checks that an assertion is true. Uses the structured message printing mechanism for printing the results. The context argument can be used to track location information.',
 		argnames is ['Context', 'Goal']
 	]).
 
@@ -56,25 +57,35 @@
 	]).
 
 	assertion(Goal) :-
-		(	catch(Goal, Error, assertion_error_handler(Goal, Error)) ->
-			print_message(silent, assertions, assertion_sucess(Goal))
-		;	print_message(error, assertions, assertion_failure(Goal)),
-			fail
+		(	catch(Goal, Error, assertion_error_handler(Goal, Error, Flag)) ->
+			(	var(Flag) ->
+				print_message(silent, assertions, assertion_sucess(Goal))
+			;	% Goal generated an exception, which was already reported
+				true
+			)
+		;	print_message(error, assertions, assertion_failure(Goal))
 		).
 
-	assertion_error_handler(Goal, Error) :-
-		print_message(error, assertions, assertion_error(Goal, Error)),
-		throw(Error).
+	assertion_error_handler(Goal, Error, error) :-
+		print_message(error, assertions, assertion_error(Goal, Error)).
 
 	assertion(Context, Goal) :-
-		(	catch(Goal, Error, assertion_error_handler(Context, Goal, Error)) ->
-			print_message(silent, assertions, assertion_sucess(Context, Goal))
-		;	print_message(error, assertions, assertion_failure(Context, Goal)),
-			fail
+		(	catch(Goal, Error, assertion_error_handler(Context, Goal, Error, Flag)) ->
+			(	var(Flag) ->
+				print_message(silent, assertions, assertion_sucess(Context, Goal))
+			;	% Goal generated an exception, which was already reported
+				true
+			)
+		;	print_message(error, assertions, assertion_failure(Context, Goal))
 		).
 
-	assertion_error_handler(Context, Goal, Error) :-
-		print_message(error, assertions, assertion_error(Context, Goal, Error)),
-		throw(Error).
+	assertion_error_handler(Context, Goal, Error, error) :-
+		print_message(error, assertions, assertion_error(Context, Goal, Error)).
+
+	% add file and line context information to calls to the assertion/1 predicate
+	% when using this object as a hook object
+	goal_expansion(assertion(Goal), assertion(file_lines(File,Position), Goal)) :-
+		logtalk_load_context(source, File),
+		logtalk_load_context(term_position, Position).
 
 :- end_object.

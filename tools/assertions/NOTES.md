@@ -33,8 +33,8 @@ throw an exception. For more information on these entities, open the
 `docs/tools.html` file in a web browser.
 
 
-Adding assertions to your code
-------------------------------
+Adding assertions to your source code
+-------------------------------------
 
 The `assertion/1` predicate takes a goal as argument. For example,
 assuming that you're writing a unit test:
@@ -51,27 +51,39 @@ context information and a goal. Using again a unit test as an example:
 		2 is 1 + 1.
 
 When using a large number of assertions, you can use a lighter syntax
-by adding a `uses/2` directive:
+by adding a `uses/2` directive. For example:
 
 	:- uses(assertions, [assertion/1, assertion/2]).
 
 
-Intercepting assertion messages
--------------------------------
+Automatically adding file and line context information to assertions
+--------------------------------------------------------------------
+
+The `assertions` object can be used as a hook object to automatically
+add file and line context information, represented by the term
+`file_lines(File, BeginLine-EndLine)`, to calls to the `assertion/1`
+predicate by goal-expanding it to calls to the `assertion/2` predicate.
+For example, assuming the file using assertions is named `source`, it
+would be compiled and loaded using the call:
+
+	logtalk_load(source, [hook(assertions)])
+
+
+Redirecting assertion failure messages
+--------------------------------------
 
 By default, assertion failures and errors are printed to the standard
 output stream. These messages, however, can be intercepted by defining
 the `logtalk::message_hook/4` multifile predicate. For example:
 
-	:- category(my_assertions_settings).
-	
-		:- initialization(open('bugs.lgt', append, _, [alias(bugs)])).
+	:- category(redirect_assertions_messages(_File)).
 	
 		:- multifile(logtalk::message_hook/4).
 		:- dynamic(logtalk::message_hook/4).
 	
-		logtalk::message_hook(assertion_failure(Context, Goal), _, assertions, _) :-
-			writeq(bugs, assertion_failure(Context, Goal)), write('.\n').
+		logtalk::message_hook(Message, error, assertions, _) :-
+			parameter(1, File),
+			writeq(File, Message), write(File, '.'), nl(File).
 	
 	:- end_category.
 
@@ -79,14 +91,19 @@ the `logtalk::message_hook/4` multifile predicate. For example:
 Converting assertion failures into errors
 -----------------------------------------
 
-	:- category(assertions_to_errors).
+If you want an assertion failure to result in a runtime error, you can
+intercept the assertion failure messages, optionally still printing them,
+and throw an error. For example:
+
+	:- category(assertions_failures_to_errors).
 	
 		:- multifile(logtalk::message_hook/4).
 		:- dynamic(logtalk::message_hook/4).
 	
-		logtalk::message_hook(assertion_failure(Context, Goal), _, assertions, Tokens) :-
-			logtalk::message_prefix_stream(error, assertions, Prefix, Stream),
-			logtalk::print_message_tokens(Stream, Prefix, Tokens),
-			throw(error(assertion_failure(Goal), Context)).
+		logtalk::message_hook(Message, error, assertions, Tokens) :-
+			% uncomment the next two lines to also print the default assertion failure message
+			% logtalk::message_prefix_stream(error, assertions, Prefix, Stream),
+			% logtalk::print_message_tokens(Stream, Prefix, Tokens),
+			throw(error(Message, _)).
 	
 	:- end_category.

@@ -25,9 +25,9 @@
 :- category(assertions_messages).
 
 	:- info([
-		version is 1.0,
+		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/04/27,
+		date is 2014/04/02,
 		comment is 'Assertions framework default message translations.'
 	]).
 
@@ -47,24 +47,18 @@
 	:- dynamic(logtalk::message_tokens//2).
 
 	% assertion/1 messages
-
 	logtalk::message_tokens(assertion_sucess(Goal), assertions) -->
 		['assertion goal sucess: ~w'-[Goal], nl].
-
 	logtalk::message_tokens(assertion_failure(Goal), assertions) -->
 		['assertion goal failure: ~w'-[Goal], nl].
-
 	logtalk::message_tokens(assertion_error(Goal, Error), assertions) -->
 		['assertion goal error: ~w - ~w'-[Goal, Error], nl].
 
 	% assertion/2 messages
-
 	logtalk::message_tokens(assertion_sucess(Context, Goal), assertions) -->
 		['assertion goal sucess ~w in context '-[Goal, Context], nl].
-
 	logtalk::message_tokens(assertion_failure(Context, Goal), assertions) -->
 		['assertion goal failure ~w in context ~w'-[Goal, Context], nl].
-
 	logtalk::message_tokens(assertion_error(Context, Goal, Error), assertions) -->
 		['assertion goal error ~w - ~w in context ~w'-[Goal, Error, Context], nl].
 

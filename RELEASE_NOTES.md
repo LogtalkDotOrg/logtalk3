@@ -144,8 +144,12 @@ code of `1` when there are failed unit tests.
 would be computed using the total number of clauses instead of the total
 number of user clauses.
 
-* ADDED: Sample code to the documentation of the `assertions` tool for
-converting assertion failures into errors.
+* CHANGED: New version of the `assertions` tool with changed semantics for
+the `assertion/1-2` predicates, which now always succeed by default. Added
+support for using the term-expansion mechanism for automatically generating
+context information for the assertion calls. Also added sample code for
+converting assertion failures into errors and updated the sample code for
+redirecting assertions messages to a file.
 
 Tests
 -----
