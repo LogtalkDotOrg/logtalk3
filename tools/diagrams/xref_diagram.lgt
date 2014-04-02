@@ -28,10 +28,12 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/03/26,
+		date is 2014/04/02,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format']
 	]).
+
+	:- uses(list, [member/2, memberchk/2]).
 
 	:- public(entity/2).
 	:- mode(entity(+atom, +list(compound)), one).
@@ -118,7 +120,7 @@
 			number_codes(EntityArity, EntityArityCodes),
 			atom_codes(EntityArityAtom, EntityArityCodes),
 			atom_concat(URL1, EntityArityAtom, URL2),
-			member(entity_url_suffix_target(Suffix, Target), Options),
+			memberchk(entity_url_suffix_target(Suffix, Target), Options),
 			(	Target == '' ->
 				atom_concat(URL2, Suffix, URL)
 			;	atom_concat(URL2, Suffix, URL3),
@@ -138,16 +140,16 @@
 		entity_property(Kind, Entity, calls(Callee, Properties)),
 		Callee \= _::_,
 		Callee \= ':'(_, _),
-		once(member(caller(Caller), Properties)).
+		memberchk(caller(Caller), Properties).
 
 	calls_external_predicate(Kind, Entity, Caller, Object::Callee) :-
 		entity_property(Kind, Entity, calls(Object::Callee, Properties)),
 		nonvar(Object),
-		once(member(caller(Caller), Properties)).
+		memberchk(caller(Caller), Properties).
 	calls_external_predicate(Kind, Entity, Caller, ':'(Module,Callee)) :-
 		entity_property(Kind, Entity, calls(':'(Module,Callee), Properties)),
 		nonvar(Module),
-		once(member(caller(Caller), Properties)).
+		memberchk(caller(Caller), Properties).
 
 	entity_property(object, Entity, Property) :-
 		object_property(Entity, Property).
@@ -214,11 +216,6 @@
 	default_option(entity_url_suffix_target('.html', '#')).
 
 	diagram_name_suffix('_xref_diagram').
-
-	member(Option, [Option| _]) :-
-		!.
-	member(Option, [_| Options]) :-
-		member(Option, Options).
 
 :- end_object.
 

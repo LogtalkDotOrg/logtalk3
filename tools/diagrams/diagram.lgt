@@ -27,10 +27,13 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/03/26,
+		date is 2014/04/02,
 		comment is 'Common predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
+
+	:- uses(list, [append/3, member/2, memberchk/2]).
+	:- uses(pairs, [keys/2]).
 
 	:- public(libraries/3).
 	:- mode(libraries(+atom, +list(atom), +list(compound)), one).
@@ -641,26 +644,5 @@
 		;	FileURL = FilePrefix
 		),
 		LinkingOptions = [urls(FileURL,DocPrefix), tooltip(Suffix)| Options].
-
-	% auxiliary predicates; we could use the Logtalk standard library but we
-	% prefer to make this object self-contained given its documenting purpose
-
-	append([], List, List).
-	append([Head| Tail], List, [Head| Tail2]) :-
-		append(Tail, List, Tail2).
-
-	member(Option, [Option| _]) :-
-		!.
-	member(Option, [_| Options]) :-
-		member(Option, Options).
-
-	memberchk(Option, [Option| _]) :-
-		!.
-	memberchk(Option, [_| Options]) :-
-		memberchk(Option, Options).
-
-	keys([], []).
-	keys([Key-_| Pairs], [Key| Keys]) :-
-		keys(Pairs, Keys).
 
 :- end_category.

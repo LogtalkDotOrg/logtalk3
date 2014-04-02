@@ -28,10 +28,12 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/03/26,
+		date is 2014/04/02,
 		comment is 'Predicates for generating file loading dependency diagrams.',
 		parnames is ['Format']
 	]).
+
+	:- uses(list, [member/2, memberchk/2]).
 
 	% first, output the file node
 	output_file(Path, Basename, Directory, Options) :-
@@ -80,16 +82,6 @@
 	default_option(exclude_libraries([])).
 
 	diagram_name_suffix('_file_load_diagram').
-
-	member(Option, [Option| _]) :-
-		!.
-	member(Option, [_| Options]) :-
-		member(Option, Options).
-
-	memberchk(Option, [Option| _]) :-
-		!.
-	memberchk(Option, [_| Options]) :-
-		memberchk(Option, Options).
 
 :- end_object.
 

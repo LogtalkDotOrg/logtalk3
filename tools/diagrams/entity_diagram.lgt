@@ -28,10 +28,12 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/03/26,
+		date is 2014/04/02,
 		comment is 'Predicates for generating entity diagrams.',
 		parnames is ['Format']
 	]).
+
+	:- uses(list, [append/3, member/2, memberchk/2]).
 
 	:- public(file/2).
 	:- mode(file(+atom, +list(compound)), one).
@@ -149,7 +151,7 @@
 		Format::graph_footer(output_file, other, '(external entities)', external, [tooltip('(external entities)')| Options]).
 
 	process(Basename, Directory, Options) :-
-		member(exclude_entities(ExcludedEntities), Options),
+		memberchk(exclude_entities(ExcludedEntities), Options),
 		protocol_property(Protocol, file(Basename, Directory)),
 		\+ member(Protocol, ExcludedEntities),
 		add_entity_documentation_url(Options, Protocol, ProtocolOptions),
@@ -157,7 +159,7 @@
 		assertz(included_entity_(Protocol)),
 		fail.
 	process(Basename, Directory, Options) :-
-		member(exclude_entities(ExcludedEntities), Options),
+		memberchk(exclude_entities(ExcludedEntities), Options),
 		object_property(Object, file(Basename, Directory)),
 		\+ member(Object, ExcludedEntities),
 		add_entity_documentation_url(Options, Object, ObjectOptions),
@@ -165,7 +167,7 @@
 		assertz(included_entity_(Object)),
 		fail.
 	process(Basename, Directory, Options) :-
-		member(exclude_entities(ExcludedEntities), Options),
+		memberchk(exclude_entities(ExcludedEntities), Options),
 		category_property(Category, file(Basename, Directory)),
 		\+ member(Category, ExcludedEntities),
 		add_entity_documentation_url(Options, Category, CategoryOptions),
@@ -173,7 +175,7 @@
 		assertz(included_entity_(Category)),
 		fail.
 	process(Basename, Directory, Options) :-
-		member(exclude_entities(ExcludedEntities), Options),
+		memberchk(exclude_entities(ExcludedEntities), Options),
 		atom_concat(Directory, Basename, Path),
 		prolog_modules_diagram_support::module_property(Module, file(Path)),
 		\+ member(Module, ExcludedEntities),
@@ -190,7 +192,7 @@
 			number_codes(Arity, ArityCodes),
 			atom_codes(ArityAtom, ArityCodes),
 			atom_concat(URL1, ArityAtom, URL2),
-			member(entity_url_suffix_target(Suffix, _), Options),
+			memberchk(entity_url_suffix_target(Suffix, _), Options),
 			atom_concat(URL2, Suffix, URL),
 			EntityOptions = [urls(FilePrefix, URL)| Options]
 		;	EntityOptions = Options
@@ -593,18 +595,6 @@
 	default_option(entity_url_suffix_target('.html', '#')).
 
 	diagram_name_suffix('_entity_diagram').
-
-	% auxiliary predicates; we could use the Logtalk standard library but we
-	% prefer to make this object self-contained given its documenting purpose
-
-	append([], List, List).
-	append([Head| Tail], List, [Head| Tail2]) :-
-		append(Tail, List, Tail2).
-
-	member(Option, [Option| _]) :-
-		!.
-	member(Option, [_| Options]) :-
-		member(Option, Options).
 
 :- end_object.
 

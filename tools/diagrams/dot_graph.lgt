@@ -28,9 +28,11 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/03/26,
+		date is 2014/04/02,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
+
+	:- uses(list, [member/2, memberchk/2]).
 
 	:- multifile(diagram(_)::format_object/2).
 	diagram(_)::format_object(dot, dot_graph).
@@ -61,12 +63,12 @@
 		nl(Stream).
 
 	diagram_label(Options, Label) :-
-		member(title(Title), Options),
+		memberchk(title(Title), Options),
 		(	Title \== '' ->
 			atom_concat(Title, '\\l', Label0)
 		;	Label0 = ''
 		),
-		(	member(date(true), Options),
+		(	memberchk(date(true), Options),
 			catch(os::date_time(Year, Month, Day, Hours, Minutes, _, _), _, fail) ->
 			number_codes(Year, YearCodes),
 			atom_codes(YearAtom, YearCodes),
@@ -104,7 +106,7 @@
 		write(Stream, 'subgraph "cluster_'),
 		write(Stream, Identifier),
 		write(Stream, '" {'), nl(Stream),
-		(	member(urls(URL, _), Options), URL \== '' ->
+		(	memberchk(urls(URL, _), Options), URL \== '' ->
 			write_key_value_nl(Stream, 'URL', URL),
 			write_key_value_nl(Stream, tooltip, URL)
 		;	member(tooltip(Tooltip), Options) ->
@@ -226,10 +228,5 @@
 		write(Stream, Line),
 		write(Stream, ']]><BR/>'),
 		write_lines(Lines, Stream).
-
-	member(Option, [Option| _]) :-
-		!.
-	member(Option, [_| Options]) :-
-		member(Option, Options).
 
 :- end_object.

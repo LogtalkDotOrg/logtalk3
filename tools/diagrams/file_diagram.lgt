@@ -5,10 +5,12 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/03/26,
+		date is 2014/04/02,
 		comment is 'Common predicates for generating file diagrams.',
 		parnames is ['Format']
 	]).
+
+	:- uses(list, [member/2, memberchk/2]).
 
 	:- protected(remember_included_file/1).
 	:- protected(remember_referenced_logtalk_file/1).
@@ -81,17 +83,5 @@
 	output_externals(Options) :-
 		^^format_object(Format),
 		Format::graph_footer(output_file, other, '(external files)', external, [tooltip('(external files)')| Options]).
-
-	% auxiliary predicates; we could use the Logtalk standard library but we
-	% prefer to make this object self-contained given its documenting purpose
-
-	member(Option, [Option| _]).
-	member(Option, [_| Options]) :-
-		member(Option, Options).
-
-	memberchk(Option, [Option| _]) :-
-		!.
-	memberchk(Option, [_| Options]) :-
-		memberchk(Option, Options).
 
 :- end_category.
