@@ -84,7 +84,11 @@
 
 	% add file and line context information to calls to the assertion/1 predicate
 	% when using this object as a hook object
-	goal_expansion(assertion(Goal), assertion(file_lines(File,Position), Goal)) :-
+	goal_expansion(This::assertion(Goal), ExpandedGoal) :-
+		this(This),
+		goal_expansion(assertion(Goal), ExpandedGoal).
+	goal_expansion(assertion(Goal), This::assertion(file_lines(File,Position), Goal)) :-
+		this(This),
 		logtalk_load_context(source, File),
 		logtalk_load_context(term_position, Position).
 
