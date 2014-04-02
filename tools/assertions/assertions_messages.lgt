@@ -56,10 +56,10 @@
 
 	% assertion/2 messages
 	logtalk::message_tokens(assertion_sucess(Context, Goal), assertions) -->
-		['assertion goal sucess ~w in context '-[Goal, Context], nl].
+		['assertion goal sucess: ~w in context '-[Goal, Context], nl].
 	logtalk::message_tokens(assertion_failure(Context, Goal), assertions) -->
-		['assertion goal failure ~w in context ~w'-[Goal, Context], nl].
+		['assertion goal failure: ~w in context ~w'-[Goal, Context], nl].
 	logtalk::message_tokens(assertion_error(Context, Goal, Error), assertions) -->
-		['assertion goal error ~w - ~w in context ~w'-[Goal, Error, Context], nl].
+		['assertion goal error: ~w - ~w in context ~w'-[Goal, Error, Context], nl].
 
 :- end_category.
