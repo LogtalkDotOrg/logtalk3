@@ -17641,11 +17641,10 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_mt_det_goal'(Queue, Goal, This, Self, Tag) :-
 	thread_self(Id),
-	(	catch(Goal, Error, thread_send_message(Queue, '$lgt_reply'(Goal, This, Self, Tag, Error, Id))) ->
+	(	catch(Goal, Error, true) ->
 		(	var(Error) ->
 			thread_send_message(Queue, '$lgt_reply'(Goal, This, Self, Tag, success, Id))
-		;	% Goal generated an exception, which was already reported
-			true
+		;	thread_send_message(Queue, '$lgt_reply'(Goal, This, Self, Tag, Error, Id))
 		)
 	;	thread_send_message(Queue, '$lgt_reply'(Goal, This, Self, Tag, failure, Id))
 	).
@@ -17658,7 +17657,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_mt_non_det_goal'(Queue, Goal, This, Self, Tag) :-
 	thread_self(Id),
-	(	catch(Goal, Error, thread_send_message(Queue, '$lgt_reply'(Goal, This, Self, Tag, Error, Id))),
+	(	catch(Goal, Error, true),
 		(	var(Error) ->
 			thread_send_message(Queue, '$lgt_reply'(Goal, This, Self, Tag, success, Id)),
 			thread_get_message(Message),
@@ -17668,8 +17667,7 @@ current_logtalk_flag(Flag, Value) :-
 			;	% otherwise assume Message = '$lgt_exit' and terminate thread
 				true
 			)
-		;	% Goal generated an exception, which was already reported
-			true
+		;	thread_send_message(Queue, '$lgt_reply'(Goal, This, Self, Tag, Error, Id))
 		)
 	;	% no (more) solutions
 		thread_send_message(Queue, '$lgt_reply'(Goal, This, Self, Tag, failure, Id))
