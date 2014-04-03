@@ -59,25 +59,29 @@ by adding a `uses/2` directive. For example:
 Automatically adding file and line context information to assertions
 --------------------------------------------------------------------
 
-The `assertions_hook/1` parametric object can be used as a hook object to
+The `assertions/1` parametric object can be used as a hook object to
 automatically add file and line context information, represented by the
 term `file_lines(File, BeginLine-EndLine)`, to calls to the `assertion/1`
-predicate by goal-expanding it to calls to the `assertion/2` predicate.
-For example, assuming the file using assertions is named `source`, it
-would be compiled and loaded using the call:
+predicate by goal-expanding it to calls to the `assertion/2` predicate
+(the expansion assumes that a `uses/2` directive is being used in the code
+that will be expanded to direct `assertion/1` calls to the `assertions`
+object). For example, assuming the file using assertions is named `source`,
+it would be compiled and loaded using the call:
 
-	logtalk_load(source, [hook(assertions_hook(debug))])
+	logtalk_load(source, [hook(assertions(debug))])
 
 
 Suppressing assertion calls from source code
 --------------------------------------------
 
-The `assertions_hook/1` parametric object can be used as a hook object to
-suppress calls to the `assertion/1-2` predicates. For example, assuming the
-file using assertions is named `source`, it would be compiled and loaded
-using the call:
+The `assertions/1` parametric object can be used as a hook object to
+suppress calls to the `assertion/1-2` predicates using goal-expansion
+(the expansion assumes that a `uses/2` directive is being used in the
+code that will be expanded to direct `assertion/1-2` calls to the
+`assertions` object). For example, assuming the file using assertions
+is named `source`, it would be compiled and loaded using the call:
 
-	logtalk_load(source, [hook(assertions_hook(production))])
+	logtalk_load(source, [hook(assertions(production))])
 
 
 Redirecting assertion failure messages

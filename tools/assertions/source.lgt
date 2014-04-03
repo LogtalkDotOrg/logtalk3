@@ -9,7 +9,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- set_logtalk_flag(hook, assertions_hook(debug)).
+:- set_logtalk_flag(hook, assertions(debug)).
 
 
 :- object(source).

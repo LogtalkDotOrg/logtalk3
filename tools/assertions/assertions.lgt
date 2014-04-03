@@ -22,22 +22,25 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(assertions).
+:- set_logtalk_flag(debug, off).
 
-	:- set_logtalk_flag(debug, off).
+
+:- object(assertions(_Mode),
+	implements(expanding)).
 
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/04/02,
-		comment is 'A simple assertions framework.'
+		date is 2014/04/03,
+		comment is 'A simple assertions framework. Can be used as a hook object for either suppressing assertions ("production" mode) or expanding them with file context information ("debug" mode).',
+		parnames is ['Mode']
 	]).
 
 	:- public(assertion/1).
 	:- meta_predicate(assertion(0)).
 	:- mode(assertion(@callable), one).
 	:- info(assertion/1, [
-		comment is 'Checks that an assertion is true. Uses the structured message printing mechanism for printing the results.',
+		comment is 'Checks that an assertion is true. Uses the structured message printing mechanism for printing the results using a silent message for assertion success and a error message for assertion failure.',
 		argnames is ['Goal']
 	]).
 
@@ -45,7 +48,7 @@
 	:- meta_predicate(assertion(*, 0)).
 	:- mode(assertion(@term, @callable), one).
 	:- info(assertion/2, [
-		comment is 'Checks that an assertion is true. Uses the structured message printing mechanism for printing the results. The context argument can be used to track location information.',
+		comment is 'Checks that an assertion is true. Uses the structured message printing mechanism for printing the results using a silent message for assertion success and a error message for assertion failure. The context argument can be used to track location information.',
 		argnames is ['Context', 'Goal']
 	]).
 
@@ -58,7 +61,7 @@
 	assertion(Goal) :-
 		(	catch(Goal, Error, true) ->
 			(	var(Error) ->
-				print_message(silent, assertions, assertion_sucess(Goal))
+				print_message(silent, assertions, assertion_success(Goal))
 			;	print_message(error, assertions, assertion_error(Goal, Error))
 			)
 		;	print_message(error, assertions, assertion_failure(Goal))
@@ -67,29 +70,14 @@
 	assertion(Context, Goal) :-
 		(	catch(Goal, Error, true) ->
 			(	var(Error) ->
-				print_message(silent, assertions, assertion_sucess(Context, Goal))
+				print_message(silent, assertions, assertion_success(Context, Goal))
 			;	print_message(error, assertions, assertion_error(Context, Goal, Error))
 			)
 		;	print_message(error, assertions, assertion_failure(Context, Goal))
 		).
 
-:- end_object.
-
-
-
-:- object(assertions_hook(_Mode),
-	implements(expanding)).
-
-	:- set_logtalk_flag(debug, off).
-
-	:- info([
-		version is 2.0,
-		author is 'Paulo Moura',
-		date is 2014/04/02,
-		comment is 'Hook object for the assertions tool for either suppressing assertions ("production" mode) or expanding them with file context information ("debug" mode).',
-		parnames is ['Mode']
-	]).
-
+	% the following clauses for the goal_expansion/2 predicate are only used when
+	% this object is used as a hook object with its parameter instantiated
 	goal_expansion(assertion(Goal), ExpandedGoal) :-
 		parameter(1, Mode),
 		(	Mode == debug ->
@@ -98,9 +86,21 @@
 			ExpandedGoal = assertions::assertion(file_lines(File,Position), Goal)
 		;	ExpandedGoal = true
 		).
-
 	goal_expansion(assertion(_, _), true) :-
 		parameter(1, Mode),
 		Mode == production.
+
+:- end_object.
+
+
+:- object(assertions,
+	extends(assertions(_Mode))).
+
+	:- info([
+		version is 2.0,
+		author is 'Paulo Moura',
+		date is 2014/04/03,
+		comment is 'Proxy object for simplifying the use of the assertion meta-predicates.'
+	]).
 
 :- end_object.

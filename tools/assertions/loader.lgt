@@ -23,5 +23,5 @@
 
 
 :- initialization((
-	logtalk_load([assertions, assertions_messages])
+	logtalk_load([assertions, assertions_messages], [optimize(on)])
 )).
