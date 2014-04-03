@@ -11212,15 +11212,14 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_msg'(Pred, Obj, Pred, _, _, _) :-
 	Obj == user,
-	'$lgt_must_be'(var_or_callable, Pred),
-	!.
+	!,
+	'$lgt_must_be'(var_or_callable, Pred).
 
 % translation performed at runtime
 
-'$lgt_tr_msg'(Pred, Obj, TPred, This, Head, Events) :-
+'$lgt_tr_msg'(Pred, Obj, '$lgt_send_to_obj_rt'(Obj, Pred, This, Head, Events), This, Head, Events) :-
 	var(Pred),
-	!,
-	TPred = '$lgt_send_to_obj_rt'(Obj, Pred, This, Head, Events).
+	!.
 
 % broadcasting control constructs
 
@@ -11372,8 +11371,8 @@ current_logtalk_flag(Flag, Value) :-
 % compiler bypass control construct
 
 '$lgt_tr_msg'({Goal}, _, call(Goal), _, _, _) :-
-	'$lgt_must_be'(var_or_callable, Goal),	
-	!.
+	!,
+	'$lgt_must_be'(var_or_callable, Goal).
 
 % invalid message
 
@@ -11607,8 +11606,8 @@ current_logtalk_flag(Flag, Value) :-
 % compiler bypass control construct
 
 '$lgt_tr_self_msg'({Goal}, call(Goal), _) :-
-	'$lgt_must_be'(var_or_callable, Goal),	
-	!.
+	!,
+	'$lgt_must_be'(var_or_callable, Goal).
 
 % invalid message
 
