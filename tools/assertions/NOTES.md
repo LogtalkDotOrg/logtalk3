@@ -59,14 +59,25 @@ by adding a `uses/2` directive. For example:
 Automatically adding file and line context information to assertions
 --------------------------------------------------------------------
 
-The `assertions` object can be used as a hook object to automatically
-add file and line context information, represented by the term
-`file_lines(File, BeginLine-EndLine)`, to calls to the `assertion/1`
+The `assertions_hook/1` parametric object can be used as a hook object to
+automatically add file and line context information, represented by the
+term `file_lines(File, BeginLine-EndLine)`, to calls to the `assertion/1`
 predicate by goal-expanding it to calls to the `assertion/2` predicate.
 For example, assuming the file using assertions is named `source`, it
 would be compiled and loaded using the call:
 
-	logtalk_load(source, [hook(assertions)])
+	logtalk_load(source, [hook(assertions_hook(debug))])
+
+
+Suppressing assertion calls from source code
+--------------------------------------------
+
+The `assertions_hook/1` parametric object can be used as a hook object to
+suppress calls to the `assertion/1-2` predicates. For example, assuming the
+file using assertions is named `source`, it would be compiled and loaded
+using the call:
+
+	logtalk_load(source, [hook(assertions_hook(production))])
 
 
 Redirecting assertion failure messages

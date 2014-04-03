@@ -22,8 +22,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(assertions,
-	implements(expanding)).
+:- object(assertions).
 
 	:- set_logtalk_flag(debug, off).
 
@@ -74,14 +73,34 @@
 		;	print_message(error, assertions, assertion_failure(Context, Goal))
 		).
 
-	% add file and line context information to calls to the assertion/1 predicate
-	% when using this object as a hook object
-	goal_expansion(This::assertion(Goal), ExpandedGoal) :-
-		this(This),
-		goal_expansion(assertion(Goal), ExpandedGoal).
-	goal_expansion(assertion(Goal), This::assertion(file_lines(File,Position), Goal)) :-
-		this(This),
-		logtalk_load_context(source, File),
-		logtalk_load_context(term_position, Position).
+:- end_object.
+
+
+
+:- object(assertions_hook(_Mode),
+	implements(expanding)).
+
+	:- set_logtalk_flag(debug, off).
+
+	:- info([
+		version is 2.0,
+		author is 'Paulo Moura',
+		date is 2014/04/02,
+		comment is 'Hook object for the assertions tool for either suppressing assertions ("production" mode) or expanding them with file context information ("debug" mode).',
+		parnames is ['Mode']
+	]).
+
+	goal_expansion(assertion(Goal), ExpandedGoal) :-
+		parameter(1, Mode),
+		(	Mode == debug ->
+			logtalk_load_context(source, File),
+			logtalk_load_context(term_position, Position),
+			ExpandedGoal = assertions::assertion(file_lines(File,Position), Goal)
+		;	ExpandedGoal = true
+		).
+
+	goal_expansion(assertion(_, _), true) :-
+		parameter(1, Mode),
+		Mode == production.
 
 :- end_object.
