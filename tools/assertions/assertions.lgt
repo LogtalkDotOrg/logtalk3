@@ -84,7 +84,9 @@
 			logtalk_load_context(source, File),
 			logtalk_load_context(term_position, Position),
 			ExpandedGoal = assertions::assertion(file_lines(File,Position), Goal)
-		;	ExpandedGoal = true
+		;	Mode == production ->
+			ExpandedGoal = true
+		;	fail
 		).
 	goal_expansion(assertion(_, _), true) :-
 		parameter(1, Mode),
