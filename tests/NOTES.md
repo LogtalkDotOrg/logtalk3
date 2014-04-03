@@ -26,6 +26,9 @@ compiler, open a terminal and type:
 	$ cd $LOGTALKUSER/tests
 	$ logtalk_tester -p swi
 	...
+	$ cd ../tools
+	$ logtalk_tester -p swi
+	...
 	$ cd ../examples
 	$ logtalk_tester -p swi
 	...
