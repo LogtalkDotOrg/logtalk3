@@ -3560,8 +3560,10 @@ current_logtalk_flag(Flag, Value) :-
 % known at compile time
 
 '$lgt_send_to_self'(Pred, Sender, Ctx) :-
+	% we must ensure that the argument is valid before translating the message
+	% sending goal otherwise there would be a potential for an endless loop
 	'$lgt_must_be'(callable, Pred, logtalk(::Pred, Sender)),
-	'$lgt_tr_self_msg'(Pred, TPred, Ctx),
+	catch('$lgt_tr_self_msg'(Pred, TPred, Ctx), Error, error(Error, logtalk(::Pred, Sender))),
 	call(TPred).
 
 
@@ -3629,9 +3631,11 @@ current_logtalk_flag(Flag, Value) :-
 % object and the message are not known at compile time
 
 '$lgt_send_to_obj_rt'(Obj, Pred, Sender, Head, Events) :-
+	% we must ensure that the arguments are valid before translating the message
+	% sending goal otherwise there would be a potential for an endless loop
 	'$lgt_must_be'(object_identifier, Obj, logtalk(Obj::Pred, Sender)),
 	'$lgt_must_be'(callable, Pred, logtalk(Obj::Pred, Sender)),
-	'$lgt_tr_msg'(Pred, Obj, TPred, Sender, Head, Events),
+	catch('$lgt_tr_msg'(Pred, Obj, TPred, Sender, Head, Events), Error, error(Error, logtalk(Obj::Pred, Sender))),
 	call(TPred).
 
 
