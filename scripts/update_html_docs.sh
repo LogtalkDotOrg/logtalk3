@@ -48,6 +48,7 @@ logtalk="swilgt$extension -g"
 
 
 # documentation goals
+core_goal="logtalk_load(lgtdoc(loader)),lgtdoc::library(core,[xmldir('../docs/tmp_core')]),halt."
 library_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(library(all_loader)),lgtdoc::rlibrary(library,[xmldir('../docs/tmp_library')]),halt."
 assertions_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(assertions(loader)),lgtdoc::library(assertions,[xmldir('../docs/tmp_assertions')]),halt."
 debugger_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(debugger(loader)),lgtdoc::library(debugger,[xmldir('../docs/tmp_debugger')]),halt."
@@ -145,6 +146,7 @@ elif [ ! `command -v $backend` ] ; then
 fi
 
 
+$logtalk $core_goal
 $logtalk $library_goal
 $logtalk $assertions_goal
 $logtalk $debugger_goal
@@ -154,7 +156,8 @@ $logtalk $lgtdoc_goal
 $logtalk $lgtunit_goal
 $logtalk $profiler_goal
 
-cd ../docs/tmp_library && lgt2html -i library.html -t "Library documentation index" && mv *.html ..
+cd ../docs/tmp_core && lgt2html -i core.html -t "Core entities documentation index" && mv *.html ..
+cd ../tmp_library && lgt2html -i library.html -t "Library documentation index" && mv *.html ..
 cd ../tmp_assertions && lgt2html -i assertions_tool.html -t "Assertions tool" && mv *.html ..
 cd ../tmp_debugger && lgt2html -i debugger_tool.html -t "Debugger tool" && mv *.html ..
 cd ../tmp_diagrams && lgt2html -i diagrams_tool.html -t "Diagrams tool" && mv *.html ..
