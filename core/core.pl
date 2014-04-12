@@ -9388,7 +9388,14 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, _, _),
 	'$lgt_execution_context_this'(ExCtx, This),
-	'$lgt_tr_ctx_call'(Obj, Pred, TPred, This).
+	(	nonvar(Obj),
+		Obj \= _/_,
+		'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+		'$lgt_pp_package_'(Package),
+		\+ '$lgt_pp_uses_'(Obj) ->
+		'$lgt_tr_ctx_call'(Package/Obj, Pred, TPred, This)
+	;	'$lgt_tr_ctx_call'(Obj, Pred, TPred, This)
+	).
 
 % calling category predicates directly (deprecated control construct)
 
@@ -11231,6 +11238,16 @@ current_logtalk_flag(Flag, Value) :-
 	Obj == user,
 	!,
 	'$lgt_must_be'(var_or_callable, Pred).
+
+% objects declared in uses/1 directives
+
+'$lgt_tr_msg'(Pred, Obj, TPred, This, Head, Events) :-
+	nonvar(Obj),
+	Obj \= _/_,
+	'$lgt_pp_package_'(Package),
+	\+ '$lgt_pp_uses_'(Obj),
+	!,
+	'$lgt_tr_msg'(Pred, Package/Obj, TPred, This, Head, Events).
 
 % translation performed at runtime
 
