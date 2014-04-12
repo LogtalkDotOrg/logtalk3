@@ -15362,7 +15362,10 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_qualifier_to_atom'(Parts/Part, Atom) :-
+	!,
 	'$lgt_qualifier_to_atom'(Parts, Part, Atom).
+
+'$lgt_qualifier_to_atom'(Atom, Atom).
 
 
 '$lgt_qualifier_to_atom'(Parts/Part, Atom0, Atom) :-
