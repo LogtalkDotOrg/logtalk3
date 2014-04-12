@@ -239,6 +239,9 @@
 
 
 
+% '$lgt_pp_package_'(Package)
+:- dynamic('$lgt_pp_package_'/1).
+
 % '$lgt_pp_file_compiler_flag_'(Name, Value)
 :- dynamic('$lgt_pp_file_compiler_flag_'/2).
 % '$lgt_pp_entity_compiler_flag_'(Name, Value)
@@ -1035,8 +1038,8 @@ create_object(Obj, Relations, Directives, Clauses) :-
 		'$lgt_gen_entity_identifier'(o, Obj)
 	;	true
 	),
-	'$lgt_tr_object_identifier'(Obj, Relations),
-	'$lgt_tr_object_relations'(Relations, Obj),
+	'$lgt_tr_object_identifier'(Obj, Relations, QObj),
+	'$lgt_tr_object_relations'(Relations, QObj),
 	% set the initial compilation context for compiling the object directives and clauses
 	'$lgt_comp_ctx_mode'(Ctx, runtime),
 	'$lgt_tr_logtalk_directives'([(dynamic)| Directives], Ctx),
@@ -1084,8 +1087,8 @@ create_category(Ctg, Relations, Directives, Clauses) :-
 		'$lgt_gen_entity_identifier'(c, Ctg)
 	;	true
 	),
-	'$lgt_tr_category_identifier'(Ctg),
-	'$lgt_tr_category_relations'(Relations, Ctg),
+	'$lgt_tr_category_identifier'(Ctg, QCtg),
+	'$lgt_tr_category_relations'(Relations, QCtg),
 	% set the initial compilation context for compiling the category directives and clauses
 	'$lgt_comp_ctx_mode'(Ctx, runtime),
 	'$lgt_tr_logtalk_directives'([(dynamic)| Directives], Ctx),
@@ -1138,8 +1141,8 @@ create_protocol(Ptc, Relations, Directives) :-
 		'$lgt_gen_entity_identifier'(p, Ptc)
 	;	true
 	),
-	'$lgt_tr_protocol_identifier'(Ptc),
-	'$lgt_tr_protocol_relations'(Relations, Ptc),
+	'$lgt_tr_protocol_identifier'(Ptc, QPtc),
+	'$lgt_tr_protocol_relations'(Relations, QPtc),
 	% set the initial compilation context for compiling the protocol directives
 	'$lgt_comp_ctx_mode'(Ctx, runtime),
 	'$lgt_tr_logtalk_directives'([(dynamic)| Directives], Ctx),
@@ -3321,13 +3324,13 @@ current_logtalk_flag(Flag, Value) :-
 % adds a new database lookup cache entry (when an update goal is not required)
 
 '$lgt_add_db_lookup_cache_entry'(Obj, Head, Scope, Type, Sender, THead) :-
-	'$lgt_term_template'(Obj, GObj),
+	'$lgt_entity_template'(Obj, GObj),
 	'$lgt_term_template'(Head, GHead),
 	'$lgt_term_template'(THead, GTHead),
 	'$lgt_unify_head_thead_arguments'(GHead, GTHead),
 	(	(Scope = p(p(p)), Type == (dynamic)) ->
 		asserta('$lgt_db_lookup_cache_'(GObj, GHead, _, GTHead, true))
-	;	'$lgt_term_template'(Sender, GSender),
+	;	'$lgt_entity_template'(Sender, GSender),
 		asserta('$lgt_db_lookup_cache_'(GObj, GHead, GSender, GTHead, true))
 	).
 
@@ -3338,7 +3341,7 @@ current_logtalk_flag(Flag, Value) :-
 % adds a new database lookup cache entry
 
 '$lgt_add_db_lookup_cache_entry'(Obj, Head, SCtn, Scope, Type, Sender, THead, DDef, NeedsUpdate) :-
-	'$lgt_term_template'(Obj, GObj),
+	'$lgt_entity_template'(Obj, GObj),
 	'$lgt_term_template'(Head, GHead),
 	'$lgt_term_template'(THead, GTHead),
 	'$lgt_unify_head_thead_arguments'(GHead, GTHead),
@@ -3350,12 +3353,12 @@ current_logtalk_flag(Flag, Value) :-
 		arg(3, UClause, UTHead),
 		(	(Scope = p(p(p)), Type == (dynamic)) ->
 			asserta('$lgt_db_lookup_cache_'(GObj, GHead, _, GTHead, update(UHead, UTHead, UClause)))
-		;	'$lgt_term_template'(Sender, GSender),
+		;	'$lgt_entity_template'(Sender, GSender),
 			asserta('$lgt_db_lookup_cache_'(GObj, GHead, GSender, GTHead, update(UHead, UTHead, UClause)))
 		)
 	;	(	(Scope = p(p(p)), Type == (dynamic)) ->
 			asserta('$lgt_db_lookup_cache_'(GObj, GHead, _, GTHead, true))
-		;	'$lgt_term_template'(Sender, GSender),
+		;	'$lgt_entity_template'(Sender, GSender),
 			asserta('$lgt_db_lookup_cache_'(GObj, GHead, GSender, GTHead, true))
 		)
 	).
@@ -3591,8 +3594,8 @@ current_logtalk_flag(Flag, Value) :-
 			(Scope = p(_); Sender = SCtn) ->
 			(	% construct predicate, object, and "sender" templates
 				'$lgt_term_template'(Pred, GPred),
-				'$lgt_term_template'(Obj, GObj),
-				'$lgt_term_template'(Sender, GSender),
+				'$lgt_entity_template'(Obj, GObj),
+				'$lgt_entity_template'(Sender, GSender),
 				% construct list of the meta-arguments that will be called in the "sender"
 				'$lgt_goal_meta_arguments'(Meta, GPred, GMetaArgs),
 				% lookup predicate definition
@@ -3684,7 +3687,7 @@ current_logtalk_flag(Flag, Value) :-
 			Scope = p(p(_)) ->
 			(	% construct predicate and object templates
 				'$lgt_term_template'(Pred, GPred),
-				'$lgt_term_template'(Obj, GObj),
+				'$lgt_entity_template'(Obj, GObj),
 				% construct list of the meta-arguments that will be called in the "sender"
 				'$lgt_goal_meta_arguments'(Meta, GPred, GMetaArgs),
 				% lookup predicate definition
@@ -3703,8 +3706,8 @@ current_logtalk_flag(Flag, Value) :-
 			Sender = SCtn ->
 			(	% construct predicate, object, and "sender" templates
 				'$lgt_term_template'(Pred, GPred),
-				'$lgt_term_template'(Obj, GObj),
-				'$lgt_term_template'(Sender, GSender),
+				'$lgt_entity_template'(Obj, GObj),
+				'$lgt_entity_template'(Sender, GSender),
 				'$lgt_execution_context'(ExCtx, GSender, GObj, GObj, _, []),
 				% lookup predicate definition
 				call(Def, GPred, ExCtx, GCall, _, _) ->
@@ -3807,7 +3810,7 @@ current_logtalk_flag(Flag, Value) :-
 			Scope = p(p(_)) ->
 			(	% construct predicate and object templates
 				'$lgt_term_template'(Pred, GPred),
-				'$lgt_term_template'(Obj, GObj),
+				'$lgt_entity_template'(Obj, GObj),
 				% construct list of the meta-arguments that will be called in the "sender"
 				'$lgt_goal_meta_arguments'(Meta, GPred, GMetaArgs),
 				% lookup predicate definition
@@ -3825,8 +3828,8 @@ current_logtalk_flag(Flag, Value) :-
 			Sender = SCtn ->
 			(	% construct predicate, object, and "sender" templates
 				'$lgt_term_template'(Pred, GPred),
-				'$lgt_term_template'(Obj, GObj),
-				'$lgt_term_template'(Sender, GSender),
+				'$lgt_entity_template'(Obj, GObj),
+				'$lgt_entity_template'(Sender, GSender),
 				% lookup predicate definition
 				'$lgt_execution_context'(ExCtx, GSender, GObj, GObj, _, []),
 				call(Def, GPred, ExCtx, GCall, _, _) ->
@@ -3918,8 +3921,8 @@ current_logtalk_flag(Flag, Value) :-
 			(Scope = p(_); This = SCtn) ->
 			(	% construct predicate, "this", and "self" templates
 				'$lgt_term_template'(Pred, GPred),
-				'$lgt_term_template'(This, GThis),
-				'$lgt_term_template'(Self, GSelf),
+				'$lgt_entity_template'(This, GThis),
+				'$lgt_entity_template'(Self, GSelf),
 				% check if we have a dependency on "self" to select the correct "super" clause
 				(	'$lgt_extends_object_'(GThis, _, _) ->
 					true
@@ -3985,7 +3988,7 @@ current_logtalk_flag(Flag, Value) :-
 		(	% check that the call is within scope (i.e. public or protected)
 			Scope = p(_) ->
 			(	% construct category and predicate templates
-				'$lgt_term_template'(Ctg, GCtg),
+				'$lgt_entity_template'(Ctg, GCtg),
 				'$lgt_term_template'(Pred, GPred),
 				% lookup predicate definition (the predicate must not be
 				% defined in the same entity making the "super" call)
@@ -5214,7 +5217,7 @@ current_logtalk_flag(Flag, Value) :-
 		(	atom(Obj) ->
 			assertz('$lgt_pp_referenced_object_'(Obj, Lines))
 		;	% parametric object
-			'$lgt_term_template'(Obj, Template),
+			'$lgt_entity_template'(Obj, Template),
 			assertz('$lgt_pp_referenced_object_'(Template, Lines))
 		)
 	).
@@ -5247,7 +5250,7 @@ current_logtalk_flag(Flag, Value) :-
 		(	atom(Ctg) ->
 			assertz('$lgt_pp_referenced_category_'(Ctg, Lines))
 		;	% parametric category
-			'$lgt_term_template'(Ctg, Template),
+			'$lgt_entity_template'(Ctg, Template),
 			assertz('$lgt_pp_referenced_category_'(Template, Lines))
 		)
 	).
@@ -5288,7 +5291,7 @@ current_logtalk_flag(Flag, Value) :-
 			true
 		;	compound(Obj) ->
 			% parametric object
-			'$lgt_term_template'(Obj, Template),
+			'$lgt_entity_template'(Obj, Template),
 			assertz('$lgt_pp_referenced_object_message_'(Template, PredFunctor/PredArity, PredFunctor/PredArity, HeadFunctor/HeadArity, Lines))
 		;	assertz('$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, PredFunctor/PredArity, HeadFunctor/HeadArity, Lines))
 		)
@@ -5308,7 +5311,7 @@ current_logtalk_flag(Flag, Value) :-
 			(	atom(Obj) ->
 				assertz('$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, AliasFunctor/AliasArity, HeadFunctor/HeadArity, Lines))
 			;	% parametric object
-				'$lgt_term_template'(Obj, Template),
+				'$lgt_entity_template'(Obj, Template),
 				assertz('$lgt_pp_referenced_object_message_'(Template, PredFunctor/PredArity, AliasFunctor/AliasArity, HeadFunctor/HeadArity, Lines))
 			)
 		)
@@ -5742,6 +5745,7 @@ current_logtalk_flag(Flag, Value) :-
 % and loading predicates)
 
 '$lgt_clean_pp_file_clauses' :-
+	retractall('$lgt_pp_package_'(_)),
 	retractall('$lgt_pp_file_initialization_'(_)),
 	retractall('$lgt_pp_file_entity_initialization_'(_, _, _)),
 	retractall('$lgt_pp_file_encoding_'(_, _)),
@@ -6496,6 +6500,12 @@ current_logtalk_flag(Flag, Value) :-
 	% the encoding/1 directive is already processed
 	!.
 
+'$lgt_tr_file_directive'(package(Package), _) :-
+	!,
+	retractall('$lgt_pp_package_'(_)),
+	assertz('$lgt_pp_package_'(Package)).
+
+
 '$lgt_tr_file_directive'(ensure_loaded(File), _) :-
 	% assume that ensure_loaded/1 is also a built-in predicate
 	!,
@@ -6643,8 +6653,8 @@ current_logtalk_flag(Flag, Value) :-
 		;	true
 		),
 		'$lgt_add_entity_source_data'(start, Obj),
-		'$lgt_tr_object_identifier'(Obj, Relations),
-		'$lgt_tr_object_relations'(Relations, Obj)
+		'$lgt_tr_object_identifier'(Obj, Relations, QObj),
+		'$lgt_tr_object_relations'(Relations, QObj)
 	).
 
 '$lgt_tr_logtalk_directive'(end_object, Ctx) :-
@@ -6693,8 +6703,8 @@ current_logtalk_flag(Flag, Value) :-
 		;	true
 		),
 		'$lgt_add_entity_source_data'(start, Ptc),
-		'$lgt_tr_protocol_identifier'(Ptc),
-		'$lgt_tr_protocol_relations'(Relations, Ptc)
+		'$lgt_tr_protocol_identifier'(Ptc, QPtc),
+		'$lgt_tr_protocol_relations'(Relations, QPtc)
 	).
 
 '$lgt_tr_logtalk_directive'(end_protocol, Ctx) :-
@@ -6746,8 +6756,8 @@ current_logtalk_flag(Flag, Value) :-
 		;	true
 		),
 		'$lgt_add_entity_source_data'(start, Ctg),
-		'$lgt_tr_category_identifier'(Ctg),
-		'$lgt_tr_category_relations'(Relations, Ctg)
+		'$lgt_tr_category_identifier'(Ctg, QCtg),
+		'$lgt_tr_category_relations'(Relations, QCtg)
 	).
 
 '$lgt_tr_logtalk_directive'(end_category, Ctx) :-
@@ -10021,10 +10031,14 @@ current_logtalk_flag(Flag, Value) :-
 	throw(type_error(parametric_entity, Entity)).
 
 '$lgt_tr_body'(parameter(Arg, Value), TPred, '$lgt_debug'(goal(parameter(Arg, Value), DPred), ExCtx), Ctx) :-
-	'$lgt_pp_entity_'(object, This, _, _, _),
+	'$lgt_pp_entity_'(object, QThis, _, _, _),
 	!,
-	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, _, _),
-	'$lgt_execution_context_this'(ExCtx, This),
+	'$lgt_comp_ctx'(Ctx, _, _, QThis, _, _, _, _, ExCtx, _, _),
+	'$lgt_execution_context_this'(ExCtx, QThis),
+	(	QThis = _/This ->
+		true
+	;	This = QThis
+	),
 	functor(This, _, Arity),
 	(	1 =< Arg, Arg =< Arity ->
 		arg(Arg, This, Value0),
@@ -12223,23 +12237,33 @@ current_logtalk_flag(Flag, Value) :-
 % from the object identifier construct the set of
 % functor prefixes used in the compiled code clauses
 
-'$lgt_tr_object_identifier'(Obj, Relations) :-
-	(	atom(Obj) ->
-		GObj = Obj
+'$lgt_tr_object_identifier'(QObj, Relations, Package/QObj) :-
+	QObj \= _/_,
+	'$lgt_pp_package_'(Package),
+	!,
+	'$lgt_tr_object_identifier'(Package/QObj, Relations, _).
+
+'$lgt_tr_object_identifier'(QObj, Relations, QObj) :-
+	(	atom(QObj) ->
+		GQObj = QObj
+	;	QObj = Qualifier/Obj ->
+		% qualified object
+		'$lgt_entity_template'(Obj, GObj),
+		GQObj = Qualifier/GObj
 	;	% parametric object
-		'$lgt_term_template'(Obj, GObj)
+		'$lgt_entity_template'(QObj, GQObj)
 	),
-	'$lgt_add_referenced_object'(GObj),
+	'$lgt_add_referenced_object'(GQObj),
 	(	'$lgt_member'(instantiates(_), Relations) ->
-		'$lgt_construct_ic_functors'(GObj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm)
+		'$lgt_construct_ic_functors'(GQObj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm)
 	;	'$lgt_member'(specializes(_), Relations) ->
-		'$lgt_construct_ic_functors'(GObj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm)
-	;	'$lgt_construct_prototype_functors'(GObj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm)
+		'$lgt_construct_ic_functors'(GQObj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm)
+	;	'$lgt_construct_prototype_functors'(GQObj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm)
 	),
 	% the object flags are only computed at the end of the entity compilation
-	assertz('$lgt_pp_object_'(GObj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, _)),
+	assertz('$lgt_pp_object_'(GQObj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, _)),
 	% provide quick access to some common used data on the entity being compiled
-	assertz('$lgt_pp_entity_'(object, Obj, Prefix, Dcl, Rnm)),
+	assertz('$lgt_pp_entity_'(object, QObj, Prefix, Dcl, Rnm)),
 	% initialize the predicate mutex counter
 	asserta('$lgt_pp_predicate_mutex_counter_'(0)).
 
@@ -12250,18 +12274,28 @@ current_logtalk_flag(Flag, Value) :-
 % from the category identifier construct the set of
 % functor prefixes used in the compiled code clauses
 
-'$lgt_tr_category_identifier'(Ctg) :-
-	(	atom(Ctg) ->
-		GCtg = Ctg
+'$lgt_tr_category_identifier'(Ctg, Package/Ctg) :-
+	Ctg \= _/_,
+	'$lgt_pp_package_'(Package),
+	!,
+	'$lgt_tr_category_identifier'(Package/Ctg, _).
+
+'$lgt_tr_category_identifier'(QCtg, QCtg) :-
+	(	atom(QCtg) ->
+		GQCtg = QCtg
+	;	QCtg = Qualifier/Ctg ->
+		% qualified object
+		'$lgt_entity_template'(Ctg, GCtg),
+		GQCtg = Qualifier/GCtg
 	;	% parametric category
-		'$lgt_term_template'(Ctg, GCtg)
+		'$lgt_entity_template'(QCtg, GQCtg)
 	),
-	'$lgt_add_referenced_category'(GCtg),
-	'$lgt_construct_category_functors'(GCtg, Prefix, Dcl, Def, Rnm),
+	'$lgt_add_referenced_category'(GQCtg),
+	'$lgt_construct_category_functors'(GQCtg, Prefix, Dcl, Def, Rnm),
 	% the category flags are only computed at the end of the entity compilation
-	assertz('$lgt_pp_category_'(GCtg, Prefix, Dcl, Def, Rnm, _)),
+	assertz('$lgt_pp_category_'(GQCtg, Prefix, Dcl, Def, Rnm, _)),
 	% provide quick access to some common used data on the entity being compiled
-	assertz('$lgt_pp_entity_'(category, Ctg, Prefix, Dcl, Rnm)),
+	assertz('$lgt_pp_entity_'(category, QCtg, Prefix, Dcl, Rnm)),
 	% initialize the predicate mutex counter
 	asserta('$lgt_pp_predicate_mutex_counter_'(0)).
 
@@ -12272,7 +12306,13 @@ current_logtalk_flag(Flag, Value) :-
 % from the protocol identifier construct the set of
 % functor prefixes used in the compiled code clauses
 
-'$lgt_tr_protocol_identifier'(Ptc) :-
+'$lgt_tr_protocol_identifier'(Ptc, Package/Ptc) :-
+	Ptc \= _/_,
+	'$lgt_pp_package_'(Package),
+	!,
+	'$lgt_tr_protocol_identifier'(Package/Ptc, _).
+
+'$lgt_tr_protocol_identifier'(Ptc, Ptc) :-
 	'$lgt_add_referenced_protocol'(Ptc),
 	'$lgt_construct_protocol_functors'(Ptc, Prefix, Dcl, Rnm),
 	% the protocol flags are only computed at the end of the entity compilation
@@ -12317,7 +12357,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_imports_category'([Ref| Refs], Obj) :-
 	'$lgt_check_entity_reference'(category, Ref, Scope, Ctg),
-	(	'$lgt_term_template'(Obj, Ctg) ->
+	(	'$lgt_entity_template'(Obj, Ctg) ->
 		throw(permission_error(import, self, Obj))
 	;	'$lgt_is_object'(Ctg) ->
 		throw(type_error(category, Ctg))
@@ -12365,7 +12405,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_specializes_class'([Ref| Refs], Class) :-
 	'$lgt_check_entity_reference'(object, Ref, Scope, Superclass),
-	(	'$lgt_term_template'(Class, Superclass) ->
+	(	'$lgt_entity_template'(Class, Superclass) ->
 		throw(permission_error(specialize, self, Class))
 	;	'$lgt_is_protocol'(Superclass) ->
 		throw(type_error(object, Superclass))
@@ -12392,7 +12432,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_extends_object'([Ref| Refs], Obj) :-
 	'$lgt_check_entity_reference'(object, Ref, Scope, Parent),
-	(	'$lgt_term_template'(Obj, Parent) ->
+	(	'$lgt_entity_template'(Obj, Parent) ->
 		throw(permission_error(extend, self, Obj))
 	;	'$lgt_is_protocol'(Parent) ->
 		throw(type_error(object, Parent))
@@ -12444,7 +12484,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_extends_category'([Ref| Refs], Ctg) :-
 	'$lgt_check_entity_reference'(category, Ref, Scope, ExtCtg),
-	(	'$lgt_term_template'(Ctg, ExtCtg) ->
+	(	'$lgt_entity_template'(Ctg, ExtCtg) ->
 		throw(permission_error(extend, self, Ctg))
 	;	'$lgt_is_object'(ExtCtg) ->
 		throw(type_error(category, ExtCtg))
@@ -12476,7 +12516,7 @@ current_logtalk_flag(Flag, Value) :-
 		throw(type_error(object, Obj))
 	;	'$lgt_is_category'(Obj) ->
 		throw(type_error(object, Obj))
-	;	'$lgt_term_template'(Obj, Ctg) ->
+	;	'$lgt_entity_template'(Obj, Ctg) ->
 		throw(permission_error(complement, self, Obj))
 	;	fail
 	).
@@ -15297,6 +15337,15 @@ current_logtalk_flag(Flag, Value) :-
 % parametric entities: Code prefix + Entity functor + "." + Entity arity + "."
 % other entities: Code prefix + Entity functor + "."
 
+'$lgt_construct_entity_prefix'(Qualifier/Identifier, Prefix) :-
+	!,
+	'$lgt_qualifier_to_atom'(Qualifier, QualifierAtom),
+	atom_concat(QualifierAtom, '/', Prefix0),
+	Identifier =.. [Functor0| Args],
+	atom_concat(Prefix0, Functor0, Functor),
+	Entity =.. [Functor| Args],
+	'$lgt_construct_entity_prefix'(Entity, Prefix).
+
 '$lgt_construct_entity_prefix'(Entity, Prefix) :-
 	'$lgt_compiler_flag'(code_prefix, CodePrefix),
 	(	atom(Entity) ->
@@ -15310,6 +15359,21 @@ current_logtalk_flag(Flag, Value) :-
 		atom_concat(Prefix1, ArityAtom, Prefix2),
 		atom_concat(Prefix2, '.', Prefix)
 	).
+
+
+'$lgt_qualifier_to_atom'(Parts/Part, Atom) :-
+	'$lgt_qualifier_to_atom'(Parts, Part, Atom).
+
+
+'$lgt_qualifier_to_atom'(Parts/Part, Atom0, Atom) :-
+	!,
+	atom_concat('/', Atom0, Atom1),
+	atom_concat(Part, Atom1, Atom2),
+	'$lgt_qualifier_to_atom'(Parts, Atom2, Atom).
+
+'$lgt_qualifier_to_atom'(Part, Atom0, Atom) :-
+	atom_concat('/', Atom0, Atom1),
+	atom_concat(Part, Atom1, Atom).
 
 
 
@@ -15917,6 +15981,21 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
+% '$lgt_entity_template'(@callable, -callable)
+%
+% constructs a template for an entity identifier
+
+'$lgt_entity_template'(Qualifier/Entity, Qualifier/GEntity) :-
+	!,
+	functor(Entity, Functor, Arity),
+	functor(GEntity, Functor, Arity).
+
+'$lgt_entity_template'(Term, Template) :-
+	functor(Term, Functor, Arity),
+	functor(Template, Functor, Arity).
+
+
+
 % '$lgt_term_template'(@callable, -callable)
 %
 % constructs a template for a callable term
@@ -16020,30 +16099,48 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_check_entity_reference'(+atom, @term, -atom, -entity_identifier)
 
 '$lgt_check_entity_reference'(object, Ref, Scope, Object) :-
-	(	Ref = Scope::Object ->
+	(	Ref = Scope::Object0 ->
 		'$lgt_must_be'(scope, Scope),
-		'$lgt_must_be'(object_identifier, Object)
-	;	Ref = Object,
+		'$lgt_must_be'(object_identifier, Object0)
+	;	Ref = Object0,
 		Scope = (public),
-		'$lgt_must_be'(object_identifier, Object)
+		'$lgt_must_be'(object_identifier, Object0)
+	),
+	(	Object0 = _/_ ->
+		Object = Object0
+	;	'$lgt_pp_package_'(Package) ->
+		Object = Package/Object0
+	;	Object = Object0
 	).
 
 '$lgt_check_entity_reference'(protocol, Ref, Scope, Protocol) :-
-	(	Ref = Scope::Protocol ->
+	(	Ref = Scope::Protocol0 ->
 		'$lgt_must_be'(scope, Scope),
-		'$lgt_must_be'(protocol_identifier, Protocol)
-	;	Ref = Protocol,
+		'$lgt_must_be'(protocol_identifier, Protocol0)
+	;	Ref = Protocol0,
 		Scope = (public),
-		'$lgt_must_be'(protocol_identifier, Protocol)
+		'$lgt_must_be'(protocol_identifier, Protocol0)
+	),
+	(	Protocol0 = _/_ ->
+		Protocol = Protocol0
+	;	'$lgt_pp_package_'(Package) ->
+		Protocol = Package/Protocol0
+	;	Protocol = Protocol0
 	).
 
 '$lgt_check_entity_reference'(category, Ref, Scope, Category) :-
-	(	Ref = Scope::Category ->
+	(	Ref = Scope::Category0 ->
 		'$lgt_must_be'(scope, Scope),
-		'$lgt_must_be'(category_identifier, Category)
-	;	Ref = Category,
+		'$lgt_must_be'(category_identifier, Category0)
+	;	Ref = Category0,
 		Scope = (public),
-		'$lgt_must_be'(category_identifier, Category)
+		'$lgt_must_be'(category_identifier, Category0)
+	),
+	(	Category0 = _/_ ->
+		Category = Category0
+	;	'$lgt_pp_package_'(Package) ->
+		Category = Package/Category0
+	;	Category = Category0
 	).
 
 
@@ -18146,7 +18243,7 @@ current_logtalk_flag(Flag, Value) :-
 		% support for complementing categories is disallowed
 		call(Dcl, Pred, p(p(p)), Meta, PredFlags, _, DclCtn), !,
 		% construct predicate and object templates
-		'$lgt_term_template'(Obj, GObj),
+		'$lgt_entity_template'(Obj, GObj),
 		'$lgt_term_template'(Pred, GPred),
 		% construct list of the meta-arguments that will be called in the "sender"
 		'$lgt_goal_meta_arguments'(Meta, GPred, GMetaArgs),
