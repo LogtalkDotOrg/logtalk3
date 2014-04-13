@@ -6506,6 +6506,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_file_directive'(package(Package), _) :-
 	!,
+	'$lgt_must_be'(package, Package),
 	retractall('$lgt_pp_package_'(_)),
 	assertz('$lgt_pp_package_'(Package)).
 
@@ -19147,6 +19148,17 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_must_be'(atom, Key, Context),
 		'$lgt_must_be'(nonvar, Value, Context)
 	;	throw(error(type_error(key_value_info_pair, Term), Context))
+	).
+
+'$lgt_must_be'(package, Term, Context) :-
+	(	var(Term) ->
+		throw(error(instantiation_error, Context))
+	;	atom(Term) ->
+		true
+	;	Term = Parts/Part ->
+		'$lgt_must_be'(atom, Part, Context),
+		'$lgt_must_be'(package, Parts, Context)
+	;	throw(error(type_error(package, Term), Context))
 	).
 
 
