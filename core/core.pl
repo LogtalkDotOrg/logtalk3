@@ -12248,27 +12248,14 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_tr_object_identifier'(@object_identifier, @list)
+% '$lgt_tr_object_identifier'(@object_identifier, @list, -object_identifier)
 %
 % from the object identifier construct the set of
 % functor prefixes used in the compiled code clauses
 
-'$lgt_tr_object_identifier'(QObj, Relations, Package/QObj) :-
-	QObj \= _/_,
-	'$lgt_pp_package_'(Package),
-	!,
-	'$lgt_tr_object_identifier'(Package/QObj, Relations, _).
-
-'$lgt_tr_object_identifier'(QObj, Relations, QObj) :-
-	(	atom(QObj) ->
-		GQObj = QObj
-	;	QObj = Qualifier/Obj ->
-		% qualified object
-		'$lgt_entity_template'(Obj, GObj),
-		GQObj = Qualifier/GObj
-	;	% parametric object
-		'$lgt_entity_template'(QObj, GQObj)
-	),
+'$lgt_tr_object_identifier'(Obj, Relations, QObj) :-
+	'$lgt_qualify_entity_identifier'(Obj, QObj),
+	'$lgt_entity_template'(QObj, GQObj),
 	'$lgt_add_referenced_object'(GQObj),
 	(	'$lgt_member'(instantiates(_), Relations) ->
 		'$lgt_construct_ic_functors'(GQObj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm)
@@ -12285,27 +12272,14 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_tr_category_identifier'(@category_identifier)
+% '$lgt_tr_category_identifier'(@category_identifier, -category_identifier)
 %
 % from the category identifier construct the set of
 % functor prefixes used in the compiled code clauses
 
-'$lgt_tr_category_identifier'(Ctg, Package/Ctg) :-
-	Ctg \= _/_,
-	'$lgt_pp_package_'(Package),
-	!,
-	'$lgt_tr_category_identifier'(Package/Ctg, _).
-
-'$lgt_tr_category_identifier'(QCtg, QCtg) :-
-	(	atom(QCtg) ->
-		GQCtg = QCtg
-	;	QCtg = Qualifier/Ctg ->
-		% qualified object
-		'$lgt_entity_template'(Ctg, GCtg),
-		GQCtg = Qualifier/GCtg
-	;	% parametric category
-		'$lgt_entity_template'(QCtg, GQCtg)
-	),
+'$lgt_tr_category_identifier'(Ctg, QCtg) :-
+	'$lgt_qualify_entity_identifier'(Ctg, QCtg),
+	'$lgt_entity_template'(QCtg, GQCtg),
 	'$lgt_add_referenced_category'(GQCtg),
 	'$lgt_construct_category_functors'(GQCtg, Prefix, Dcl, Def, Rnm),
 	% the category flags are only computed at the end of the entity compilation
@@ -12317,27 +12291,35 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_tr_protocol_identifier'(@protocol_identifier)
+% '$lgt_tr_protocol_identifier'(@protocol_identifier, -protocol_identifier)
 %
 % from the protocol identifier construct the set of
 % functor prefixes used in the compiled code clauses
 
-'$lgt_tr_protocol_identifier'(Ptc, Package/Ptc) :-
-	Ptc \= _/_,
-	'$lgt_pp_package_'(Package),
-	!,
-	'$lgt_tr_protocol_identifier'(Package/Ptc, _).
-
-'$lgt_tr_protocol_identifier'(Ptc, Ptc) :-
-	'$lgt_add_referenced_protocol'(Ptc),
-	'$lgt_construct_protocol_functors'(Ptc, Prefix, Dcl, Rnm),
+'$lgt_tr_protocol_identifier'(Ptc, QPtc) :-
+	'$lgt_qualify_entity_identifier'(Ptc, QPtc),
+	'$lgt_add_referenced_protocol'(QPtc),
+	'$lgt_construct_protocol_functors'(QPtc, Prefix, Dcl, Rnm),
 	% the protocol flags are only computed at the end of the entity compilation
-	assertz('$lgt_pp_protocol_'(Ptc, Prefix, Dcl, Rnm, _)),
+	assertz('$lgt_pp_protocol_'(QPtc, Prefix, Dcl, Rnm, _)),
 	% provide quick access to some common used data on the entity being compiled
-	assertz('$lgt_pp_entity_'(protocol, Ptc, Prefix, Dcl, Rnm)),
+	assertz('$lgt_pp_entity_'(protocol, QPtc, Prefix, Dcl, Rnm)),
 	% initialize the predicate mutex counter; necessary in order to be able to
 	% save synchronized predicate properties
 	asserta('$lgt_pp_predicate_mutex_counter_'(0)).
+
+
+
+% '$lgt_qualify_entity_identifier'(@entity_identifier, -entity_identifier)
+
+'$lgt_qualify_entity_identifier'(Package/Entity, Package/Entity) :-
+	!.
+
+'$lgt_qualify_entity_identifier'(Entity, Package/Entity) :-
+	'$lgt_pp_package_'(Package),
+	!.
+
+'$lgt_qualify_entity_identifier'(Entity, Entity).
 
 
 
@@ -16117,50 +16099,35 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_check_entity_reference'(+atom, @term, -atom, -entity_identifier)
 
-'$lgt_check_entity_reference'(object, Ref, Scope, Object) :-
-	(	Ref = Scope::Object0 ->
+'$lgt_check_entity_reference'(object, Ref, Scope, QObject) :-
+	(	Ref = Scope::Object ->
 		'$lgt_must_be'(scope, Scope),
-		'$lgt_must_be'(object_identifier, Object0)
-	;	Ref = Object0,
+		'$lgt_must_be'(object_identifier, Object)
+	;	Ref = Object,
 		Scope = (public),
-		'$lgt_must_be'(object_identifier, Object0)
+		'$lgt_must_be'(object_identifier, Object)
 	),
-	(	Object0 = _/_ ->
-		Object = Object0
-	;	'$lgt_pp_package_'(Package) ->
-		Object = Package/Object0
-	;	Object = Object0
-	).
+	'$lgt_qualify_entity_identifier'(Object, QObject).
 
-'$lgt_check_entity_reference'(protocol, Ref, Scope, Protocol) :-
-	(	Ref = Scope::Protocol0 ->
+'$lgt_check_entity_reference'(protocol, Ref, Scope, QProtocol) :-
+	(	Ref = Scope::Protocol ->
 		'$lgt_must_be'(scope, Scope),
-		'$lgt_must_be'(protocol_identifier, Protocol0)
-	;	Ref = Protocol0,
+		'$lgt_must_be'(protocol_identifier, Protocol)
+	;	Ref = Protocol,
 		Scope = (public),
-		'$lgt_must_be'(protocol_identifier, Protocol0)
+		'$lgt_must_be'(protocol_identifier, Protocol)
 	),
-	(	Protocol0 = _/_ ->
-		Protocol = Protocol0
-	;	'$lgt_pp_package_'(Package) ->
-		Protocol = Package/Protocol0
-	;	Protocol = Protocol0
-	).
+	'$lgt_qualify_entity_identifier'(Protocol, QProtocol).
 
-'$lgt_check_entity_reference'(category, Ref, Scope, Category) :-
-	(	Ref = Scope::Category0 ->
+'$lgt_check_entity_reference'(category, Ref, Scope, QCategory) :-
+	(	Ref = Scope::Category ->
 		'$lgt_must_be'(scope, Scope),
-		'$lgt_must_be'(category_identifier, Category0)
-	;	Ref = Category0,
+		'$lgt_must_be'(category_identifier, Category)
+	;	Ref = Category,
 		Scope = (public),
-		'$lgt_must_be'(category_identifier, Category0)
+		'$lgt_must_be'(category_identifier, Category)
 	),
-	(	Category0 = _/_ ->
-		Category = Category0
-	;	'$lgt_pp_package_'(Package) ->
-		Category = Package/Category0
-	;	Category = Category0
-	).
+	'$lgt_qualify_entity_identifier'(Category, QCategory).
 
 
 
