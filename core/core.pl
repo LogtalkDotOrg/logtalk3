@@ -6794,7 +6794,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	true
 	),
 	'$lgt_add_entity_source_data'(start, Module),
-	'$lgt_tr_object_identifier'(Module, []),
+	'$lgt_tr_object_identifier'(Module, [], _),
 	% make the export list public predicates
 	'$lgt_tr_logtalk_directive'(public(Exports), Ctx).
 
