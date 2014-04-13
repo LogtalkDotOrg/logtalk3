@@ -3569,7 +3569,7 @@ current_logtalk_flag(Flag, Value) :-
 	% we must ensure that the argument is valid before translating the message
 	% sending goal otherwise there would be a potential for an endless loop
 	'$lgt_must_be'(callable, Pred, logtalk(::Pred, Sender)),
-	catch('$lgt_tr_self_msg'(Pred, TPred, Ctx), Error, error(Error, logtalk(::Pred, Sender))),
+	catch('$lgt_tr_self_msg'(Pred, TPred, Ctx), Error, throw(error(Error, logtalk(::Pred, Sender)))),
 	call(TPred).
 
 
@@ -3641,7 +3641,7 @@ current_logtalk_flag(Flag, Value) :-
 	% sending goal otherwise there would be a potential for an endless loop
 	'$lgt_must_be'(object_identifier, Obj, logtalk(Obj::Pred, Sender)),
 	'$lgt_must_be'(callable, Pred, logtalk(Obj::Pred, Sender)),
-	catch('$lgt_tr_msg'(Pred, Obj, TPred, Sender, Head, Events), Error, error(Error, logtalk(Obj::Pred, Sender))),
+	catch('$lgt_tr_msg'(Pred, Obj, TPred, Sender, Head, Events), Error, throw(error(Error, logtalk(Obj::Pred, Sender)))),
 	call(TPred).
 
 
