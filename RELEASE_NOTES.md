@@ -28,7 +28,12 @@ RELEASE NOTES
 3.00.0 Beta 2 - May ??, 2014
 ============================
 
+* FIXED: Reporting of `multifile/1` predicate directive existence errors
+where the callable form of the predicate would be used instead of the
+predicate indicator.
 
+* FIXED: Bug introduced when handling errors found when calling the `::/1-2`
+message sending control constructs with arguments only bound at runtime.
 
 
 3.00.0 Beta 1 - April 9, 2014
