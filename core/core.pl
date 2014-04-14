@@ -6867,15 +6867,21 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_logtalk_directive'(uses(Obj, Resources), Ctx) :-
 	'$lgt_must_be'(object_identifier, Obj),
-	'$lgt_add_referenced_object'(Obj),
-	'$lgt_tr_uses_directive'(Resources, Resources, Obj, Ctx).
+	'$lgt_qualify_entity_identifier'(Obj, QObj),
+	'$lgt_add_referenced_object'(QObj),
+	'$lgt_tr_uses_directive'(Resources, Resources, QObj, Ctx).
 
-% uses/1 entity directive
+% uses/1 entity directive (deprecated)
 
-'$lgt_tr_logtalk_directive'(uses(Obj), _) :-
+'$lgt_tr_logtalk_directive'(uses(Obj), Ctx) :-
 	'$lgt_must_be'(object_identifier, Obj),
 	'$lgt_add_referenced_object'(Obj),
-	assertz('$lgt_pp_uses_'(Obj)).
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
+		'$lgt_increment_compile_warnings_counter',
+		'$lgt_warning_context'(Path, Lines, Type, Entity),
+		'$lgt_print_message'(warning(general), core, deprecated_directive(Path, Lines, Type, Entity, uses/1))
+	;	true
+	).
 
 % use_module/2 module directive
 
@@ -8872,15 +8878,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_body'([Obj::Pred], TPred, '$lgt_debug'(goal([Obj::Pred], TPred), ExCtx), Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, Sender, This, _, _, _, _, ExCtx, Mode, _),
-	(	Mode = compile(_),
-		This \== user,
-		nonvar(Obj),
-		Obj \= {_} ->
-		% not runtime message translation; remember object receiving message
-		'$lgt_add_referenced_object'(Obj)
-	;	true
-	),
+	'$lgt_comp_ctx'(Ctx, Head, Sender, This, _, _, _, _, ExCtx, _, _),
 	% as delegation keeps the original sender, we cannot use a recursive call
 	% to the '$lgt_tr_body'/4 predicate to compile the ::/2 goal as that would
 	% reset the sender to "this"
@@ -9371,16 +9369,8 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_body'(Obj::Pred, TPred, '$lgt_debug'(goal(Obj::Pred, TPred), ExCtx), Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, _, This, _, _, _, _, ExCtx, Mode, _),
+	'$lgt_comp_ctx'(Ctx, Head, _, This, _, _, _, _, ExCtx, _, _),
 	'$lgt_execution_context_this'(ExCtx, This),
-	(	Mode = compile(_),
-		This \== user,
-		nonvar(Obj),
-		Obj \= {_} ->
-		% not runtime message translation; remember object receiving message
-		'$lgt_add_referenced_object'(Obj)
-	;	true
-	),
 	'$lgt_compiler_flag'(events, Events),
 	'$lgt_tr_msg'(Pred, Obj, TPred, This, Head, Events).
 
@@ -11257,11 +11247,17 @@ current_logtalk_flag(Flag, Value) :-
 	nonvar(Obj),
 	Obj \= _/_,
 	Obj \= /_,
-	\+ '$lgt_pp_uses_'(Obj),
 	'$lgt_compiler_flag'(namespace, Namespace),
 	Namespace \== '',
 	!,
 	'$lgt_tr_msg'(Pred, Namespace/Obj, TPred, This, Head, Events).
+
+% remember the object receiving the message
+
+'$lgt_tr_msg'(_, Obj, _, _, _, _) :-
+	nonvar(Obj),
+	'$lgt_add_referenced_object'(Obj),
+	fail.
 
 % translation performed at runtime
 
