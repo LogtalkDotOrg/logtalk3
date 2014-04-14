@@ -239,9 +239,6 @@
 
 
 
-% '$lgt_pp_package_'(Package)
-:- dynamic('$lgt_pp_package_'/1).
-
 % '$lgt_pp_file_compiler_flag_'(Name, Value)
 :- dynamic('$lgt_pp_file_compiler_flag_'/2).
 % '$lgt_pp_entity_compiler_flag_'(Name, Value)
@@ -5748,7 +5745,6 @@ current_logtalk_flag(Flag, Value) :-
 % and loading predicates)
 
 '$lgt_clean_pp_file_clauses' :-
-	retractall('$lgt_pp_package_'(_)),
 	retractall('$lgt_pp_file_initialization_'(_)),
 	retractall('$lgt_pp_file_entity_initialization_'(_, _, _)),
 	retractall('$lgt_pp_file_encoding_'(_, _)),
@@ -6504,12 +6500,6 @@ current_logtalk_flag(Flag, Value) :-
 	% the encoding/1 directive is already processed
 	!.
 
-'$lgt_tr_file_directive'(package(Package), _) :-
-	!,
-	'$lgt_must_be'(package, Package),
-	retractall('$lgt_pp_package_'(_)),
-	assertz('$lgt_pp_package_'(Package)).
-
 
 '$lgt_tr_file_directive'(ensure_loaded(File), _) :-
 	% assume that ensure_loaded/1 is also a built-in predicate
@@ -7052,22 +7042,24 @@ current_logtalk_flag(Flag, Value) :-
 % auxiliary predicate for translating alias/3 directives
 
 '$lgt_tr_predicate_alias_directive'(Entity, _, _) :-
-	\+ '$lgt_pp_extended_protocol_'(Entity, _, _, _, _),
-	\+ '$lgt_pp_implemented_protocol_'(Entity, _, _, _, _),
-	\+ '$lgt_pp_extended_category_'(Entity, _, _, _, _, _),
-	\+ '$lgt_pp_imported_category_'(Entity, _, _, _, _, _),
-	\+ '$lgt_pp_extended_object_'(Entity, _, _, _, _, _, _, _, _, _, _),
-	\+ '$lgt_pp_instantiated_class_'(Entity, _, _, _, _, _, _, _, _, _, _),
-	\+ '$lgt_pp_specialized_class_'(Entity, _, _, _, _, _, _, _, _, _, _),
-	\+ '$lgt_pp_complemented_object_'(Entity, _, _, _, _),
-	throw(reference_error(entity_identifier, Entity)).
+	'$lgt_qualify_entity_identifier'(Entity, QEntity),
+	\+ '$lgt_pp_extended_protocol_'(QEntity, _, _, _, _),
+	\+ '$lgt_pp_implemented_protocol_'(QEntity, _, _, _, _),
+	\+ '$lgt_pp_extended_category_'(QEntity, _, _, _, _, _),
+	\+ '$lgt_pp_imported_category_'(QEntity, _, _, _, _, _),
+	\+ '$lgt_pp_extended_object_'(QEntity, _, _, _, _, _, _, _, _, _, _),
+	\+ '$lgt_pp_instantiated_class_'(QEntity, _, _, _, _, _, _, _, _, _, _),
+	\+ '$lgt_pp_specialized_class_'(QEntity, _, _, _, _, _, _, _, _, _, _),
+	\+ '$lgt_pp_complemented_object_'(QEntity, _, _, _, _),
+	throw(reference_error(entity_identifier, QEntity)).
 
 '$lgt_tr_predicate_alias_directive'(Entity, Functor1/Arity, Functor2/Arity) :-
 	!,
 	functor(Pred, Functor1, Arity),
 	Pred =.. [Functor1| Args],
 	Alias =.. [Functor2| Args],
-	assertz('$lgt_pp_predicate_alias_'(Entity, Pred, Alias)).
+	'$lgt_qualify_entity_identifier'(Entity, QEntity),
+	assertz('$lgt_pp_predicate_alias_'(QEntity, Pred, Alias)).
 
 '$lgt_tr_predicate_alias_directive'(Entity, Functor1//Arity, Functor2//Arity) :-
 	!,
@@ -7075,7 +7067,8 @@ current_logtalk_flag(Flag, Value) :-
 	functor(Pred, Functor1, ExtArity),
 	Pred =.. [Functor1| Args],
 	Alias =.. [Functor2| Args],
-	assertz('$lgt_pp_predicate_alias_'(Entity, Pred, Alias)).
+	'$lgt_qualify_entity_identifier'(Entity, QEntity),
+	assertz('$lgt_pp_predicate_alias_'(QEntity, Pred, Alias)).
 
 '$lgt_tr_predicate_alias_directive'(_, _//Arity1, _//Arity2) :-
 	Arity1 =\= Arity2,
@@ -9392,9 +9385,10 @@ current_logtalk_flag(Flag, Value) :-
 	(	nonvar(Obj),
 		Obj \= _/_,
 		'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-		'$lgt_pp_package_'(Package),
+		'$lgt_compiler_flag'(namespace, Namespace),
+		Namespace \== '', 
 		\+ '$lgt_pp_uses_'(Obj) ->
-		'$lgt_tr_ctx_call'(Package/Obj, Pred, TPred, This)
+		'$lgt_tr_ctx_call'(Namespace/Obj, Pred, TPred, This)
 	;	'$lgt_tr_ctx_call'(Obj, Pred, TPred, This)
 	).
 
@@ -11245,10 +11239,11 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_msg'(Pred, Obj, TPred, This, Head, Events) :-
 	nonvar(Obj),
 	Obj \= _/_,
-	'$lgt_pp_package_'(Package),
+	'$lgt_compiler_flag'(namespace, Namespace),
+	Namespace \== '', 
 	\+ '$lgt_pp_uses_'(Obj),
 	!,
-	'$lgt_tr_msg'(Pred, Package/Obj, TPred, This, Head, Events).
+	'$lgt_tr_msg'(Pred, Namespace/Obj, TPred, This, Head, Events).
 
 % translation performed at runtime
 
@@ -12313,11 +12308,12 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_qualify_entity_identifier'(@entity_identifier, -entity_identifier)
 
-'$lgt_qualify_entity_identifier'(Package/Entity, Package/Entity) :-
+'$lgt_qualify_entity_identifier'(Namespace/Entity, Namespace/Entity) :-
 	!.
 
-'$lgt_qualify_entity_identifier'(Entity, Package/Entity) :-
-	'$lgt_pp_package_'(Package),
+'$lgt_qualify_entity_identifier'(Entity, Namespace/Entity) :-
+	'$lgt_compiler_flag'(namespace, Namespace),
+	Namespace \== '', 
 	!.
 
 '$lgt_qualify_entity_identifier'(Entity, Entity).
@@ -16533,6 +16529,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_valid_flag'(events).
 '$lgt_valid_flag'(context_switching_calls).
 % other compilation flags
+'$lgt_valid_flag'(namespace).
 '$lgt_valid_flag'(scratch_directory).
 '$lgt_valid_flag'(report).
 '$lgt_valid_flag'(hook).
@@ -16650,6 +16647,15 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_valid_flag_value'(hook, Obj) :-
 	callable(Obj).
+
+'$lgt_valid_flag_value'(namespace, Namespace) :-
+	!,
+	(	atom(Namespace) ->
+		true
+	;	Namespace = Parts/Part,
+		atom(Part),
+		'$lgt_valid_flag_value'(namespace, Parts)
+	).
 
 '$lgt_valid_flag_value'(scratch_directory, Directory) :-
 	atom(Directory).
@@ -19150,15 +19156,15 @@ current_logtalk_flag(Flag, Value) :-
 	;	throw(error(type_error(key_value_info_pair, Term), Context))
 	).
 
-'$lgt_must_be'(package, Term, Context) :-
+'$lgt_must_be'(namespace, Term, Context) :-
 	(	var(Term) ->
 		throw(error(instantiation_error, Context))
 	;	atom(Term) ->
 		true
 	;	Term = Parts/Part ->
 		'$lgt_must_be'(atom, Part, Context),
-		'$lgt_must_be'(package, Parts, Context)
-	;	throw(error(type_error(package, Term), Context))
+		'$lgt_must_be'(namespace, Parts, Context)
+	;	throw(error(type_error(namespace, Term), Context))
 	).
 
 

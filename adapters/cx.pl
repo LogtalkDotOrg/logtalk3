@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for CxProlog 0.97.7 or a later version
-%  Last updated on March 17, 2014
+%  Last updated on April 14, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -262,6 +262,7 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 '$lgt_default_flag'(events, deny).
 '$lgt_default_flag'(context_switching_calls, allow).
 % other compilation flags:
+'$lgt_default_flag'(namespace, '').
 '$lgt_default_flag'(scratch_directory, ScratchDirectory) :-
 	(	os_name(unix) ->
 		ScratchDirectory = './.lgt_tmp/'

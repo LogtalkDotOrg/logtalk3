@@ -226,6 +226,7 @@ numbervars(Term, From, Next) :-
 '$lgt_default_flag'(events, deny).
 '$lgt_default_flag'(context_switching_calls, allow).
 % other compilation flags:
+'$lgt_default_flag'(namespace, '').
 '$lgt_default_flag'(scratch_directory, './lgt_tmp/').
 '$lgt_default_flag'(report, on).
 '$lgt_default_flag'(clean, off).

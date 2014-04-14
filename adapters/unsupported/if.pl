@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for IF/Prolog 5.3
-%  Last updated on March 17, 2014
+%  Last updated on April 14, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -232,6 +232,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 '$lgt_default_flag'(events, deny).
 '$lgt_default_flag'(context_switching_calls, allow).
 % other compilation flags:
+'$lgt_default_flag'(namespace, '').
 '$lgt_default_flag'(scratch_directory, './lgt_tmp/').
 '$lgt_default_flag'(report, on).
 '$lgt_default_flag'(clean, off).
