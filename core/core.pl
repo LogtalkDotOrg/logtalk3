@@ -7571,9 +7571,10 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_must_be'(entity_identifier, Entity),
 	(	Entity == user ->
 		assertz('$lgt_pp_directive_'(multifile(Functor/Arity)))
-	;	functor(Template, Functor, Arity),
-		'$lgt_check_for_public_multifile_declaration'(Entity, Template) ->
-		'$lgt_entity_to_prefix'(Entity, Prefix),
+	;	'$lgt_qualify_entity_identifier'(Entity, QEntity),
+		functor(Template, Functor, Arity),
+		'$lgt_check_for_public_multifile_declaration'(QEntity, Template) ->
+		'$lgt_entity_to_prefix'(QEntity, Prefix),
 		'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity)))
 	;	throw(permission_error(modify, predicate_declaration, Pred))
@@ -7585,9 +7586,10 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_must_be'(entity_identifier, Entity),
 	(	Entity == user ->
 		assertz('$lgt_pp_directive_'(multifile(Functor/ExtArity)))
-	;	functor(Template, Functor, ExtArity),
-		'$lgt_check_for_public_multifile_declaration'(Entity, Template) ->
-		'$lgt_entity_to_prefix'(Entity, Prefix),
+	;	'$lgt_qualify_entity_identifier'(Entity, QEntity),
+		functor(Template, Functor, ExtArity),
+		'$lgt_check_for_public_multifile_declaration'(QEntity, Template) ->
+		'$lgt_entity_to_prefix'(QEntity, Prefix),
 		'$lgt_construct_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity)))
 	;	throw(permission_error(modify, non_terminal_declaration, NonTerminal))
@@ -8771,16 +8773,17 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_head'(Other::Head, THead, Ctx) :-
 	!,
 	functor(Head, Functor, Arity),
-	'$lgt_entity_to_prefix'(Other, Prefix),
+	'$lgt_qualify_entity_identifier'(Other, QOther),
+	'$lgt_entity_to_prefix'(QOther, Prefix),
 	'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	(	'$lgt_pp_directive_'(multifile(TFunctor/TArity)) ->
 		true
-	;	throw(existence_error(directive, multifile(Other::Functor/Arity)))
+	;	throw(existence_error(directive, multifile(QOther::Functor/Arity)))
 	),
 	functor(THead, TFunctor, TArity),
 	'$lgt_unify_head_thead_arguments'(Head, THead, ExCtx),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	'$lgt_comp_ctx_head'(Ctx, Other::Head).
+	'$lgt_comp_ctx_head'(Ctx, QOther::Head).
 
 % translate the head of a clause of a module predicate (which we assume declared multifile)
 
