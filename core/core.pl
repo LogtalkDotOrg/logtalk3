@@ -8243,13 +8243,21 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_entity_info_directive_pair'(parameters, Parameters, parameters(Parameters)) :-
 	!,
-	'$lgt_pp_entity_'(_, Entity, _, _, _),
+	'$lgt_pp_entity_'(_, QEntity, _, _, _),
+	(	QEntity = _/Entity ->
+		true
+	;	Entity = QEntity
+	),
 	functor(Entity, _, Arity),
 	'$lgt_check_entity_info_parameters'(Parameters, Parameters, 0, Arity).
 
 '$lgt_tr_entity_info_directive_pair'(parnames, Parnames, parnames(Parnames)) :-
 	!,
-	'$lgt_pp_entity_'(_, Entity, _, _, _),
+	'$lgt_pp_entity_'(_, QEntity, _, _, _),
+	(	QEntity = _/Entity ->
+		true
+	;	Entity = QEntity
+	),
 	functor(Entity, _, Arity),
 	'$lgt_check_entity_info_parnames'(Parnames, Parnames, 0, Arity).
 
