@@ -34,6 +34,14 @@
 
 
 
+% namespace operators
+
+% standard operator used as delimiter
+:- op(400, yfx, /).
+% prefix operator for absolute references
+:- op(400, fy,  /).
+
+
 % message sending operators
 
 % send to object
@@ -11237,6 +11245,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_msg'(Pred, Obj, TPred, This, Head, Events) :-
 	nonvar(Obj),
 	Obj \= _/_,
+	Obj \= /_,
 	\+ '$lgt_pp_uses_'(Obj),
 	'$lgt_compiler_flag'(namespace, Namespace),
 	Namespace \== '',
@@ -12305,6 +12314,9 @@ current_logtalk_flag(Flag, Value) :-
 
 
 % '$lgt_qualify_entity_identifier'(@entity_identifier, -entity_identifier)
+
+'$lgt_qualify_entity_identifier'(/Entity, /Entity) :-
+	!.
 
 '$lgt_qualify_entity_identifier'(Namespace/Entity, Namespace/Entity) :-
 	!.
@@ -15980,6 +15992,11 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_entity_template'(@callable, -callable)
 %
 % constructs a template for an entity identifier
+
+'$lgt_entity_template'(/Entity, /GEntity) :-
+	!,
+	functor(Entity, Functor, Arity),
+	functor(GEntity, Functor, Arity).
 
 '$lgt_entity_template'(Qualifier/Entity, Qualifier/GEntity) :-
 	!,
