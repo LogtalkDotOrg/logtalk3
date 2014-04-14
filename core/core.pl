@@ -9383,12 +9383,10 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, _, _),
 	'$lgt_execution_context_this'(ExCtx, This),
 	(	nonvar(Obj),
-		Obj \= _/_,
-		'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-		'$lgt_compiler_flag'(namespace, Namespace),
-		Namespace \== '', 
-		\+ '$lgt_pp_uses_'(Obj) ->
-		'$lgt_tr_ctx_call'(Namespace/Obj, Pred, TPred, This)
+		\+ '$lgt_pp_uses_'(Obj),
+		'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
+		'$lgt_qualify_entity_identifier'(Obj, QObj), 
+		'$lgt_tr_ctx_call'(QObj, Pred, TPred, This)
 	;	'$lgt_tr_ctx_call'(Obj, Pred, TPred, This)
 	).
 
@@ -11234,14 +11232,14 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_must_be'(var_or_callable, Pred).
 
-% objects declared in uses/1 directives
+% objects that may require namespace qualification
 
 '$lgt_tr_msg'(Pred, Obj, TPred, This, Head, Events) :-
 	nonvar(Obj),
 	Obj \= _/_,
-	'$lgt_compiler_flag'(namespace, Namespace),
-	Namespace \== '', 
 	\+ '$lgt_pp_uses_'(Obj),
+	'$lgt_compiler_flag'(namespace, Namespace),
+	Namespace \== '',
 	!,
 	'$lgt_tr_msg'(Pred, Namespace/Obj, TPred, This, Head, Events).
 
