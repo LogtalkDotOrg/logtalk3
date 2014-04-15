@@ -31,6 +31,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: Code generated for calls to the `{}/1` compiler bypass control
+construct.
+
 * FIXED: Reporting of `multifile/1` predicate directive existence errors
 where the callable form of the predicate would be used instead of the
 predicate indicator.

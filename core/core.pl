@@ -8828,9 +8828,15 @@ current_logtalk_flag(Flag, Value) :-
 
 % compiler bypass (call of external code)
 
-'$lgt_tr_body'({Pred}, {call(Pred)}, '$lgt_debug'(goal({Pred}, {call(Pred)}), ExCtx), Ctx) :-
+'$lgt_tr_body'({Pred}, TPred, '$lgt_debug'(goal({Pred}, TPred), ExCtx), Ctx) :-
 	!,
-	'$lgt_must_be'(var_or_callable, Pred),
+	(	var(Pred) ->
+		TPred = {call(Pred)}
+	;	Pred == ! ->
+		TPred = true
+	;	'$lgt_must_be'(callable, Pred),
+		TPred = {Pred}
+	),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
 
 % goal expansion (only applied at compile time)
