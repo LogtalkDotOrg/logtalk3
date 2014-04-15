@@ -28,12 +28,21 @@ RELEASE NOTES
 3.00.0 Beta 2 - May ??, 2014
 ============================
 
+Logtalk compiler and runtime
+----------------------------
+
 * FIXED: Reporting of `multifile/1` predicate directive existence errors
 where the callable form of the predicate would be used instead of the
 predicate indicator.
 
 * FIXED: Bug introduced when handling errors found when calling the `::/1-2`
 message sending control constructs with arguments only bound at runtime.
+
+Prolog adapter and integration files
+------------------------------------
+
+* FIXED: Added dummy definition for the `mutex_property/2` predicate to the
+GNU Prolog adapter file. Thanks to Michael Wernicki for the bug report.
 
 
 3.00.0 Beta 1 - April 9, 2014

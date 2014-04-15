@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for GNU Prolog 1.4.2 (and later versions)
-%  Last updated on March 17, 2014
+%  Last updated on April 15, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -596,6 +596,7 @@ setup_call_cleanup(_, _, _) :-
 
 mutex_create(_, _) :- fail.
 mutex_lock(_) :- fail.
+mutex_property(_, _) :- fail.
 mutex_unlock(_) :- fail.
 thread_create(_, _, _) :- fail.
 thread_get_message(_) :- fail.
