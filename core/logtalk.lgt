@@ -389,6 +389,11 @@
 :- end_object.
 
 
-:- if(current_logtalk_flag(prolog_dialect, xsb)).
+:- if(current_logtalk_flag(prolog_dialect, gnu)).
+	% workaround apparent gplc bug when dealing with multifile predicates
+	:- multifile(logtalk_library_path/2).
+	:- dynamic(logtalk_library_path/2).
+:- elif(current_logtalk_flag(prolog_dialect, xsb)).
+	% workaround XSB atom-based module system
 	:- import(from(/(format,3), format)).
 :- endif.

@@ -41,6 +41,10 @@ predicate indicator.
 * FIXED: Bug introduced when handling errors found when calling the `::/1-2`
 message sending control constructs with arguments only bound at runtime.
 
+* FIXED: Updated the `core/logtalk.lgt` file to workaround an apparent `gplc`
+bug with multifile predicates when generating executables that embed Logtalk
+using GNU Prolog.
+
 Prolog adapter and integration files
 ------------------------------------
 
