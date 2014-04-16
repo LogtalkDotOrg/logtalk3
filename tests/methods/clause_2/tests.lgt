@@ -28,6 +28,15 @@
 	t(2) :- t(1).
 	t(3) :- t(1), t(2).
 
+	:- public(ie/1).
+	ie(Object) :-
+		Object::clause(foo, _).
+
+	:- public(te/0).
+	te :-
+		Object = 1,
+		Object::clause(foo, _).
+
 :- end_object.
 
 
@@ -38,7 +47,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/06/07,
+		date is 2014/04/16,
 		comment is 'Unit tests for the clause/2 built-in method.'
 	]).
 
@@ -63,7 +72,13 @@
 	throws(clause_2_7, error(existence_error(predicate_declaration, unknown/1), logtalk(clause_2_test_object::clause(unknown(_),_),user))) :-
 		{clause_2_test_object::clause(unknown(_), _)}.
 
-	succeeds(clause_2_8) :-
+	throws(clause_2_8, error(instantiation_error, logtalk(_::clause(foo,_),clause_2_test_object))) :-
+		{clause_2_test_object::ie(_)}.
+
+	throws(clause_2_9, error(type_error(object_identifier, 1), logtalk(1::clause(foo,_),clause_2_test_object))) :-
+		{clause_2_test_object::te}.
+
+	succeeds(clause_2_10) :-
 		clause_2_test_object::clause(t(X), true),
 		X == 1,
 		clause_2_test_object::clause(t(2), Body1),
@@ -71,7 +86,7 @@
 		clause_2_test_object::clause(t(3), Body2),
 		Body2 == (t(1), t(2)).
 
-	succeeds(clause_2_9) :-
+	succeeds(clause_2_11) :-
 		create_object(Object, [], [public(t/1), dynamic(t/1)], [t(1), (t(2) :-t(1)), (t(3) :-t(1),t(2))]),
 		Object::clause(t(X), true),
 		X == 1,

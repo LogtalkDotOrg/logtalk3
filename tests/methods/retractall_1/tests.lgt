@@ -28,6 +28,16 @@
 	t(2) :- t(1).
 	t(3) :- t(1), t(2).
 
+	:- public(ie/1).
+
+	ie(Object) :-
+		Object::retractall(foo).
+
+	:- public(te/0).
+	te :-
+		Object = 1,
+		Object::retractall(foo).
+
 :- end_object.
 
 
@@ -38,7 +48,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/06/07,
+		date is 2014/04/16,
 		comment is 'Unit tests for the retractall/1 built-in method.'
 	]).
 
@@ -60,7 +70,13 @@
 	throws(retractall_1_6, error(existence_error(predicate_declaration, unknown/1), logtalk(retractall_1_test_object::retractall(unknown(_)),user))) :-
 		{retractall_1_test_object::retractall(unknown(_))}.
 
-	succeeds(retractall_1_7) :-
+	throws(retractall_1_7, error(instantiation_error, logtalk(_::retractall(foo),retractall_1_test_object))) :-
+		{retractall_1_test_object::ie(_)}.
+
+	throws(retractall_1_8, error(type_error(object_identifier, 1), logtalk(1::retractall(foo),retractall_1_test_object))) :-
+		{retractall_1_test_object::te}.
+
+	succeeds(retractall_1_9) :-
 		retractall_1_test_object::retractall(t(3)),
 		retractall_1_test_object::t(1),
 		retractall_1_test_object::t(2),
@@ -68,7 +84,7 @@
 		retractall_1_test_object::retractall(t(_)),
 		\+ retractall_1_test_object::t(_).
 
-	succeeds(retractall_1_8) :-
+	succeeds(retractall_1_10) :-
 		create_object(Object, [], [public(t/1), dynamic(t/1)], [t(1), (t(2) :-t(1)), (t(3) :-t(1),t(2))]),
 		Object::retractall(t(3)),
 		Object::t(1),

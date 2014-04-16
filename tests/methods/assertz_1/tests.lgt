@@ -24,6 +24,15 @@
 
 	:- public(s/4).
 
+	:- public(ie/1).
+	ie(Object) :-
+		Object::assertz(foo).
+
+	:- public(te/0).
+	te :-
+		Object = 1,
+		Object::assertz(foo).
+
 :- end_object.
 
 
@@ -34,7 +43,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/06/07,
+		date is 2014/04/16,
 		comment is 'Unit tests for the assertz/1 built-in method.'
 	]).
 
@@ -74,7 +83,13 @@
 	throws(assertz_1_12, error(permission_error(create, predicate_declaration, new/0), logtalk(assertz_1_test_object::assertz(new),user))) :-
 		{assertz_1_test_object::assertz(new)}.
 
-	succeeds(assertz_1_13) :-
+	throws(assertz_1_13, error(instantiation_error, logtalk(_::assertz(foo),assertz_1_test_object))) :-
+		{assertz_1_test_object::ie(_)}.
+
+	throws(assertz_1_14, error(type_error(object_identifier, 1), logtalk(1::assertz(foo),assertz_1_test_object))) :-
+		{assertz_1_test_object::te}.
+
+	succeeds(assertz_1_15) :-
 		create_object(Object, [], [public(a/1), public(p/1)], []),
 		Object::assertz(a(1)),
 		Object::assertz(a(2)),
@@ -86,7 +101,7 @@
 		Ys == [1,2,3],
 		abolish_object(Object).
 
-	succeeds(assertz_1_14) :-
+	succeeds(assertz_1_16) :-
 		create_object(Object, [], [set_logtalk_flag(dynamic_declarations, allow)], []),
 		Object::assertz(a(1)),
 		Object::assertz(a(2)),
