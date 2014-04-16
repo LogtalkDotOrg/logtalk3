@@ -2708,6 +2708,7 @@ current_logtalk_flag(Flag, Value) :-
 % abolish/1 built-in method
 
 '$lgt_abolish'(Obj, Pred, Sender, TestScope) :-
+	'$lgt_must_be'(object_identifier, Obj, logtalk(Obj::abolish(Pred), Sender)),
 	'$lgt_must_be'(predicate_indicator, Pred, logtalk(Obj::abolish(Pred), Sender)),
 	'$lgt_abolish_checked'(Obj, Pred, Sender, TestScope).
 
@@ -2776,12 +2777,14 @@ current_logtalk_flag(Flag, Value) :-
 % facts to improve performance
 
 '$lgt_asserta'(Obj, Clause, Sender, _, _) :-
+	nonvar(Obj),
 	nonvar(Clause),
 	'$lgt_db_lookup_cache_'(Obj, Clause, Sender, TClause, _),
 	!,
 	asserta(TClause).
 
 '$lgt_asserta'(Obj, Clause, Sender, TestScope, DclScope) :-
+	'$lgt_must_be'(object_identifier, Obj, logtalk(Obj::asserta(Clause), Sender)),
 	'$lgt_must_be'(clause, Clause, logtalk(Obj::asserta(Clause), Sender)),
 	(	Clause = (Head :- Body) ->
 		(	Body == true ->
@@ -2868,12 +2871,14 @@ current_logtalk_flag(Flag, Value) :-
 % facts to improve performance
 
 '$lgt_assertz'(Obj, Clause, Sender, _, _) :-
+	nonvar(Obj),
 	nonvar(Clause),
 	'$lgt_db_lookup_cache_'(Obj, Clause, Sender, TClause, _),
 	!,
 	assertz(TClause).
 
 '$lgt_assertz'(Obj, Clause, Sender, TestScope, DclScope) :-
+	'$lgt_must_be'(object_identifier, Obj, logtalk(Obj::assertz(Clause), Sender)),
 	'$lgt_must_be'(clause, Clause, logtalk(Obj::assertz(Clause), Sender)),
 	(	Clause = (Head :- Body) ->
 		(	Body == true ->
@@ -3011,6 +3016,7 @@ current_logtalk_flag(Flag, Value) :-
 % clause/2 built-in method
 
 '$lgt_clause'(Obj, Head, Body, Sender, TestScope) :-
+	'$lgt_must_be'(object_identifier, Obj, logtalk(Obj::clause(Head, Body), Sender)),
 	'$lgt_must_be'(clause_or_partial_clause, (Head:-Body), logtalk(Obj::clause(Head, Body), Sender)),
 	'$lgt_clause_checked'(Obj, Head, Body, Sender, TestScope).
 
@@ -3084,7 +3090,16 @@ current_logtalk_flag(Flag, Value) :-
 % predicate allows any inherited clauses to be found again as they are
 % no longer being overridden
 
+'$lgt_retract'(Obj, Clause, Sender, _, _) :-
+	nonvar(Obj),
+	nonvar(Clause),
+	'$lgt_db_lookup_cache_'(Obj, Clause, Sender, TClause, UClause),
+	!,
+	retract(TClause),
+	'$lgt_update_ddef_table_opt'(UClause).
+
 '$lgt_retract'(Obj, Clause, Sender, TestScope) :-
+	'$lgt_must_be'(object_identifier, Obj, logtalk(Obj::retract(Clause), Sender)),
 	'$lgt_must_be'(clause_or_partial_clause, Clause, logtalk(Obj::retract(Clause), Sender)),
 	(	Clause = (Head :- Body) ->
 		(	var(Body) ->
@@ -3256,7 +3271,16 @@ current_logtalk_flag(Flag, Value) :-
 % predicate allows any inherited clauses to be found again as they are
 % no longer being overridden
 
+'$lgt_retractall'(Obj, Head, Sender, _) :-
+	nonvar(Obj),
+	nonvar(Head),
+	'$lgt_db_lookup_cache_'(Obj, Head, Sender, THead, UClause),
+	!,
+	retractall(THead),
+	'$lgt_update_ddef_table_opt'(UClause).
+
 '$lgt_retractall'(Obj, Head, Sender, TestScope) :-
+	'$lgt_must_be'(object_identifier, Obj, logtalk(Obj::retractall(Head), Sender)),
 	'$lgt_must_be'(callable, Head, logtalk(Obj::retractall(Head), Sender)),
 	'$lgt_retractall_checked'(Obj, Head, Sender, TestScope).
 
@@ -11332,8 +11356,11 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_msg'(abolish(Pred), Obj, TPred, This, _, _) :-
 	!,
-	(	ground(Pred) ->
-		'$lgt_must_be'(predicate_indicator, Pred),
+	'$lgt_must_be'(var_or_predicate_indicator, Pred),
+	'$lgt_must_be'(var_or_object_identifier, Obj),
+	(	var(Obj) ->
+		TPred = '$lgt_abolish'(Obj, Pred, This, p(p(p)))
+	;	ground(Pred) ->
 		TPred = '$lgt_abolish_checked'(Obj, Pred, This, p(p(p)))
 	;	% partially instantiated predicate indicator; runtime check required
 		TPred = '$lgt_abolish'(Obj, Pred, This, p(p(p)))
@@ -11345,7 +11372,10 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_msg'(asserta(Clause), Obj, TPred, This, _, _) :-
 	!,
+	'$lgt_must_be'(var_or_object_identifier, Obj),
 	(	'$lgt_runtime_checked_db_clause'(Clause) ->
+		TPred = '$lgt_asserta'(Obj, Clause, This, p(p(_)), p(p(p)))
+	;	var(Obj) ->
 		TPred = '$lgt_asserta'(Obj, Clause, This, p(p(_)), p(p(p)))
 	;	'$lgt_must_be'(clause_or_partial_clause, Clause),
 		(	(Clause = (Head :- Body) -> Body == true; Clause = Head) ->
@@ -11360,7 +11390,10 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_msg'(assertz(Clause), Obj, TPred, This, _, _) :-
 	!,
+	'$lgt_must_be'(var_or_object_identifier, Obj),
 	(	'$lgt_runtime_checked_db_clause'(Clause) ->
+		TPred = '$lgt_assertz'(Obj, Clause, This, p(p(_)), p(p(p)))
+	;	var(Obj) ->
 		TPred = '$lgt_assertz'(Obj, Clause, This, p(p(_)), p(p(p)))
 	;	'$lgt_must_be'(clause_or_partial_clause, Clause),
 		(	(Clause = (Head :- Body) -> Body == true; Clause = Head) ->
@@ -11375,39 +11408,46 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_msg'(clause(Head, Body), Obj, TPred, This, _, _) :-
 	!,
+	'$lgt_must_be'(clause_or_partial_clause, (Head :- Body)),
+	'$lgt_must_be'(var_or_object_identifier, Obj),
 	(	'$lgt_runtime_checked_db_clause'((Head :- Body)) ->
 		TPred = '$lgt_clause'(Obj, Head, Body, This, p(p(p)))
-	;	'$lgt_must_be'(clause_or_partial_clause, (Head :- Body)),
-		TPred = '$lgt_clause_checked'(Obj, Head, Body, This, p(p(p)))
+	;	var(Obj) ->
+		TPred = '$lgt_clause'(Obj, Head, Body, This, p(p(p)))
+	;	TPred = '$lgt_clause_checked'(Obj, Head, Body, This, p(p(p)))
 	).
 
 '$lgt_tr_msg'(retract(Clause), Obj, TPred, This, _, _) :-
 	!,
+	'$lgt_must_be'(clause_or_partial_clause, Clause),
+	'$lgt_must_be'(var_or_object_identifier, Obj),
 	(	'$lgt_runtime_checked_db_clause'(Clause) ->
 		TPred = '$lgt_retract'(Obj, Clause, This, p(p(p)))
-	;	'$lgt_must_be'(clause_or_partial_clause, Clause),
-		(	(Clause = (Head :- Body) -> Body == true; Clause = Head) ->
-			(	'$lgt_compiler_flag'(optimize, on),
-				'$lgt_send_to_obj_db_msg_static_binding'(Obj, Head, THead) ->
-				TPred = retract(THead)
-			;	TPred = '$lgt_retract_fact_checked'(Obj, Head, This, p(p(p)))
-			)
-		;	Clause = (_ :- Body), var(Body) ->
-			'$lgt_retract_var_body_checked'(Obj, Clause, This, p(p(p)))
-		;	TPred = '$lgt_retract_rule_checked'(Obj, Clause, This, p(p(p)))
+	;	var(Obj) ->
+		TPred = '$lgt_retract'(Obj, Clause, This, p(p(p)))
+	;	(Clause = (Head :- Body) -> Body == true; Clause = Head) ->
+		(	'$lgt_compiler_flag'(optimize, on),
+			'$lgt_send_to_obj_db_msg_static_binding'(Obj, Head, THead) ->
+			TPred = retract(THead)
+		;	TPred = '$lgt_retract_fact_checked'(Obj, Head, This, p(p(p)))
 		)
+	;	Clause = (_ :- Body), var(Body) ->
+		'$lgt_retract_var_body_checked'(Obj, Clause, This, p(p(p)))
+	;	TPred = '$lgt_retract_rule_checked'(Obj, Clause, This, p(p(p)))
 	).
 
 '$lgt_tr_msg'(retractall(Head), Obj, TPred, This, _, _) :-
 	!,
+	'$lgt_must_be'(var_or_callable, Head),
+	'$lgt_must_be'(var_or_object_identifier, Obj),
 	(	var(Head) ->
 		TPred = '$lgt_retractall'(Obj, Head, This, p(p(p)))
-	;	'$lgt_must_be'(callable, Head),
-		(	'$lgt_compiler_flag'(optimize, on),
-			'$lgt_send_to_obj_db_msg_static_binding'(Obj, Head, THead) ->
-			TPred = retractall(THead)
-		;	TPred = '$lgt_retractall_checked'(Obj, Head, This, p(p(p)))
-		)
+	;	var(Obj) ->
+		TPred = '$lgt_retractall'(Obj, Head, This, p(p(p)))
+	;	'$lgt_compiler_flag'(optimize, on),
+		'$lgt_send_to_obj_db_msg_static_binding'(Obj, Head, THead) ->
+		TPred = retractall(THead)
+	;	TPred = '$lgt_retractall_checked'(Obj, Head, This, p(p(p)))
 	).
 
 % term and goal expansion predicates
