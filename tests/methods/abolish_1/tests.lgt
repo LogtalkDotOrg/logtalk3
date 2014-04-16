@@ -20,6 +20,15 @@
 
 	:- public(s/4).
 
+	:- public(ie/1).
+	ie(Object) :-
+		Object::abolish(foo/1).
+
+	:- public(te/0).
+	te :-
+		Object = 1,
+		Object::abolish(foo/1).
+
 :- end_object.
 
 
@@ -29,7 +38,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/06/07,
+		date is 2014/04/16,
 		comment is 'Unit tests for the abolish/1 built-in method.'
 	]).
 
@@ -69,7 +78,13 @@
 	throws(abolish_1_12, error(existence_error(predicate_declaration, foo/0), logtalk(abolish_1_test_object::abolish(foo/0),user))) :-
 		{abolish_1_test_object::abolish(foo/0)}.
 
-	succeeds(abolish_1_13) :-
+	throws(abolish_1_13, error(instantiation_error, logtalk(_::abolish(foo/1),abolish_1_test_object))) :-
+		{abolish_1_test_object::ie(_)}.
+
+	throws(abolish_1_14, error(type_error(object_identifier, 1), logtalk(1::abolish(foo/1),abolish_1_test_object))) :-
+		{abolish_1_test_object::te}.
+
+	succeeds(abolish_1_15) :-
 		create_object(Object, [], [set_logtalk_flag(dynamic_declarations, allow)], []),
 		Object::assertz(a(1)),
 		Object::current_predicate(a/1),

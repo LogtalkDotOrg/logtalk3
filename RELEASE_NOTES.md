@@ -58,6 +58,12 @@ to the GNU Prolog adapter file. Thanks to Michael Wernicki for the bug report.
 bug with multifile predicates when generating executables that embed Logtalk
 using GNU Prolog.
 
+Tests
+-----
+
+* ADDED: Built-in database methods unit tests for testing the errors generated
+when sending the corresponding messages to invalid object identifiers.
+
 
 3.00.0 Beta 1 - April 9, 2014
 =============================

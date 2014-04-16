@@ -28,6 +28,16 @@
 	t(2) :- t(1).
 	t(3) :- t(1), t(2).
 
+	:- public(ie/1).
+
+	ie(Object) :-
+		Object::retract(foo).
+
+	:- public(te/0).
+	te :-
+		Object = 1,
+		Object::retract(foo).
+
 :- end_object.
 
 
@@ -38,7 +48,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/06/07,
+		date is 2014/04/16,
 		comment is 'Unit tests for the retract/1 built-in method.'
 	]).
 
@@ -66,7 +76,13 @@
 	throws(retract_1_8, error(existence_error(predicate_declaration, unknown/1), logtalk(retract_1_test_object::retract(unknown(_)),user))) :-
 		{retract_1_test_object::retract(unknown(_))}.
 
-	succeeds(retract_1_9) :-
+	throws(retract_1_9, error(instantiation_error, logtalk(_::retract(foo),retract_1_test_object))) :-
+		{retract_1_test_object::ie(_)}.
+
+	throws(retract_1_10, error(type_error(object_identifier, 1), logtalk(1::retract(foo),retract_1_test_object))) :-
+		{retract_1_test_object::te}.
+
+	succeeds(retract_1_11) :-
 		retract_1_test_object::retract((t(X) :-true)),
 		X == 1,
 		retract_1_test_object::retract((t(2) :-Body1)),
@@ -74,7 +90,7 @@
 		retract_1_test_object::retract((t(3) :-Body2)),
 		Body2 == (t(1), t(2)).
 
-	succeeds(retract_1_10) :-
+	succeeds(retract_1_12) :-
 		create_object(Object, [], [public(t/1), dynamic(t/1)], [t(1), (t(2) :-t(1)), (t(3) :-t(1),t(2))]),
 		Object::retract((t(X) :-true)),
 		X == 1,

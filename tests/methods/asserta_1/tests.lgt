@@ -24,6 +24,15 @@
 
 	:- public(s/4).
 
+	:- public(ie/1).
+	ie(Object) :-
+		Object::asserta(foo).
+
+	:- public(te/0).
+	te :-
+		Object = 1,
+		Object::asserta(foo).
+
 :- end_object.
 
 
@@ -34,7 +43,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/06/07,
+		date is 2014/04/16,
 		comment is 'Unit tests for the asserta/1 built-in method.'
 	]).
 
@@ -74,7 +83,13 @@
 	throws(asserta_1_12, error(permission_error(create, predicate_declaration, new/0), logtalk(asserta_1_test_object::asserta(new),user))) :-
 		{asserta_1_test_object::asserta(new)}.
 
-	succeeds(asserta_1_13) :-
+	throws(asserta_1_13, error(instantiation_error, logtalk(_::asserta(foo),asserta_1_test_object))) :-
+		{asserta_1_test_object::ie(_)}.
+
+	throws(asserta_1_14, error(type_error(object_identifier, 1), logtalk(1::asserta(foo),asserta_1_test_object))) :-
+		{asserta_1_test_object::te}.
+
+	succeeds(asserta_1_15) :-
 		create_object(Object, [], [public(a/1), public(p/1)], []),
 		Object::asserta(a(1)),
 		Object::asserta(a(2)),
@@ -86,7 +101,7 @@
 		Ys == [3,2,1],
 		abolish_object(Object).
 
-	succeeds(asserta_1_14) :-
+	succeeds(asserta_1_16) :-
 		create_object(Object, [], [set_logtalk_flag(dynamic_declarations, allow)], []),
 		Object::asserta(a(1)),
 		Object::asserta(a(2)),
