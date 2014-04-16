@@ -34,6 +34,13 @@ Logtalk compiler and runtime
 * IMPROVED: Code generated for calls to the `{}/1` compiler bypass control
 construct.
 
+* FIXED: Cases where sending a database message to an invalid object
+identifier would result in an existence error instead of a type error.
+
+* FIXED: Cases where sending a database message to a non-instantiated object
+identifier could result in misuse of the lookup cache for asserting and
+retracting dynamic facts instead of generating an instantiation error.
+
 * FIXED: Reporting of `multifile/1` predicate directive existence errors
 where the callable form of the predicate would be used instead of the
 predicate indicator.
@@ -41,15 +48,15 @@ predicate indicator.
 * FIXED: Bug introduced when handling errors found when calling the `::/1-2`
 message sending control constructs with arguments only bound at runtime.
 
-* FIXED: Updated the `core/logtalk.lgt` file to workaround an apparent `gplc`
-bug with multifile predicates when generating executables that embed Logtalk
-using GNU Prolog.
-
 Prolog adapter and integration files
 ------------------------------------
 
-* FIXED: Added dummy definition for the `mutex_property/2` predicate to the
-GNU Prolog adapter file. Thanks to Michael Wernicki for the bug report.
+* FIXED: Added missing dummy definition for the `mutex_property/2` predicate
+to the GNU Prolog adapter file. Thanks to Michael Wernicki for the bug report.
+
+* FIXED: Updated the `core/logtalk.lgt` file to workaround an apparent `gplc`
+bug with multifile predicates when generating executables that embed Logtalk
+using GNU Prolog.
 
 
 3.00.0 Beta 1 - April 9, 2014
