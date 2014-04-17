@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for XSB 3.4.1 or later versions
-%  Last updated on April 14, 2014
+%  Last updated on April 17, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -709,8 +709,8 @@ setup_call_catcher_cleanup(Setup, Call, Catcher, Cleanup) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%:- multifile('$logtalk.print_message_token'/5).
-%:- dynamic('$logtalk.print_message_token'/5).
+%:- multifile('$logtalk#0.print_message_token'/5).
+%:- dynamic('$logtalk#0.print_message_token'/5).
 
 
 

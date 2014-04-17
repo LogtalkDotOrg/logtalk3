@@ -5243,7 +5243,10 @@ current_logtalk_flag(Flag, Value) :-
 % we also save the line numbers for the first reference to the object
 
 '$lgt_add_referenced_object'(Obj) :-
-	(	'$lgt_pp_referenced_object_'(Obj, _) ->
+	(	\+ '$lgt_pp_file_data_'(_, _, _, _) ->
+		% not compiling a source file
+		true
+	;	'$lgt_pp_referenced_object_'(Obj, _) ->
 		true
 	;	'$lgt_current_line_numbers'(Lines),
 		(	atom(Obj) ->
@@ -5262,7 +5265,10 @@ current_logtalk_flag(Flag, Value) :-
 % we also save the line numbers for the first reference to the protocol
 
 '$lgt_add_referenced_protocol'(Ptc) :-
-	(	'$lgt_pp_referenced_protocol_'(Ptc, _) ->
+	(	\+ '$lgt_pp_file_data_'(_, _, _, _) ->
+		% not compiling a source file
+		true
+	;	'$lgt_pp_referenced_protocol_'(Ptc, _) ->
 		true
 	;	'$lgt_current_line_numbers'(Lines),
 		assertz('$lgt_pp_referenced_protocol_'(Ptc, Lines))
@@ -5276,7 +5282,10 @@ current_logtalk_flag(Flag, Value) :-
 % we also save the line numbers for the first reference to the category
 
 '$lgt_add_referenced_category'(Ctg) :-
-	(	'$lgt_pp_referenced_category_'(Ctg, _) ->
+	(	\+ '$lgt_pp_file_data_'(_, _, _, _) ->
+		% not compiling a source file
+		true
+	;	'$lgt_pp_referenced_category_'(Ctg, _) ->
 		true
 	;	'$lgt_current_line_numbers'(Lines),
 		(	atom(Ctg) ->
@@ -6654,7 +6663,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_tr_logtalk_directive'(object_(Obj, [Relation1, Relation2, Relation3, Relation4]), Ctx).
 
 % auxiliary predicate to translate all variants to the object opening directive
-'$lgt_tr_logtalk_directive'(object_(Obj, Relations), Ctx) :-
+'$lgt_tr_logtalk_directive'(object_(Obj, Relations), _) :-
 	(	var(Obj) ->
 		throw(instantiation_error)
 	;	\+ callable(Obj) ->
@@ -6675,10 +6684,7 @@ current_logtalk_flag(Flag, Value) :-
 		;	% Type == category,
 			throw(existence_error(directive, end_category/0))
 		)
-	;	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
-			'$lgt_print_message'(silent(compiling), core, compiling_entity(object, Obj))
-		;	true
-		),
+	;	'$lgt_print_message'(silent(compiling), core, compiling_entity(object, Obj)),
 		'$lgt_add_entity_source_data'(start, Obj),
 		'$lgt_tr_object_identifier'(Obj, Relations, QObj),
 		'$lgt_tr_object_relations'(Relations, QObj)
@@ -6689,10 +6695,7 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_add_entity_source_data'(end, Obj),
 		'$lgt_tr_entity'(object, Obj, Ctx),
 		'$lgt_restore_file_operator_table',
-		(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
-			'$lgt_print_message'(silent(compiling), core, compiled_entity(object, Obj))
-		;	true
-		)
+		'$lgt_print_message'(silent(compiling), core, compiled_entity(object, Obj))
 	;	% entity ending directive mismatch 
 		throw(existence_error(directive, object/1))
 	).
@@ -6706,7 +6709,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_tr_logtalk_directive'(protocol_(Ptc, [Relation]), Ctx).
 
 % auxiliary predicate to translate all variants to the protocol opening directive
-'$lgt_tr_logtalk_directive'(protocol_(Ptc, Relations), Ctx) :-
+'$lgt_tr_logtalk_directive'(protocol_(Ptc, Relations), _) :-
 	(	var(Ptc) ->
 		throw(instantiation_error)
 	;	\+ atom(Ptc) ->
@@ -6725,10 +6728,7 @@ current_logtalk_flag(Flag, Value) :-
 		;	% Type == category,
 			throw(existence_error(directive, end_category/0))
 		)
-	;	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
-			'$lgt_print_message'(silent(compiling), core, compiling_entity(protocol, Ptc))
-		;	true
-		),
+	;	'$lgt_print_message'(silent(compiling), core, compiling_entity(protocol, Ptc)),
 		'$lgt_add_entity_source_data'(start, Ptc),
 		'$lgt_tr_protocol_identifier'(Ptc, QPtc),
 		'$lgt_tr_protocol_relations'(Relations, QPtc)
@@ -6739,10 +6739,7 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_add_entity_source_data'(end, Ptc),
 		'$lgt_tr_entity'(protocol, Ptc, Ctx),
 		'$lgt_restore_file_operator_table',
-		(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
-			'$lgt_print_message'(silent(compiling), core, compiled_entity(protocol, Ptc))
-		;	true
-		)
+		'$lgt_print_message'(silent(compiling), core, compiled_entity(protocol, Ptc))
 	;	% entity ending directive mismatch 
 		throw(existence_error(directive, protocol/1))
 	).
@@ -6759,7 +6756,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_tr_logtalk_directive'(category_(Ctg, [Relation1, Relation2]), Ctx).
 
 % auxiliary predicate to translate all variants to the category opening directive
-'$lgt_tr_logtalk_directive'(category_(Ctg, Relations), Ctx) :-
+'$lgt_tr_logtalk_directive'(category_(Ctg, Relations), _) :-
 	(	var(Ctg) ->
 		throw(instantiation_error)
 	;	\+ callable(Ctg) ->
@@ -6778,10 +6775,7 @@ current_logtalk_flag(Flag, Value) :-
 		;	% Type == category,
 			throw(existence_error(directive, end_category/0))
 		)
-	;	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
-			'$lgt_print_message'(silent(compiling), core, compiling_entity(category, Ctg))
-		;	true
-		),
+	;	'$lgt_print_message'(silent(compiling), core, compiling_entity(category, Ctg)),
 		'$lgt_add_entity_source_data'(start, Ctg),
 		'$lgt_tr_category_identifier'(Ctg, QCtg),
 		'$lgt_tr_category_relations'(Relations, QCtg)
@@ -6792,10 +6786,7 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_add_entity_source_data'(end, Ctg),
 		'$lgt_tr_entity'(category, Ctg, Ctx),
 		'$lgt_restore_file_operator_table',
-		(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
-			'$lgt_print_message'(silent(compiling), core, compiled_entity(category, Ctg))
-		;	true
-		)
+		'$lgt_print_message'(silent(compiling), core, compiled_entity(category, Ctg))
 	;	% entity ending directive mismatch 
 		throw(existence_error(directive, category/1))
 	).
@@ -6811,10 +6802,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_must_be'(list, Exports),
 	% remember we are compiling a module
 	assertz('$lgt_pp_module_'(Module)),
-	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
-		'$lgt_print_message'(silent(compiling), core, compiling_entity(module, Module))
-	;	true
-	),
+	'$lgt_print_message'(silent(compiling), core, compiling_entity(module, Module)),
 	'$lgt_add_entity_source_data'(start, Module),
 	'$lgt_tr_object_identifier'(Module, [], _),
 	% make the export list public predicates
@@ -8914,6 +8902,7 @@ current_logtalk_flag(Flag, Value) :-
 	% reset the sender to "this"
 	'$lgt_compiler_flag'(events, Events),
 	'$lgt_tr_msg'(Pred, Obj, TPred0, Sender, Head, Events),
+	% ensure that this control construct cannot be used to break object encapsulation 
 	TPred = (Obj \= Sender -> TPred0; throw(error(permission_error(access, object, Sender), logtalk([Obj::Pred], This)))),
 	'$lgt_execution_context'(ExCtx, Sender, This, _, _, _).
 

@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for YAP Prolog 6.3.4 and later versions
-%  Last updated on April 14, 2014
+%  Last updated on April 17, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -72,10 +72,10 @@
 		dynamic('$lgt_ctg_super_call_'/3), hide_predicate('$lgt_ctg_super_call_'/3),
 		dynamic('$lgt_obj_super_call_'/3), hide_predicate('$lgt_obj_super_call_'/3),
 		dynamic('$lgt_db_lookup_cache_'/5), hide_predicate('$lgt_db_lookup_cache_'/5),
-		dynamic('$logtalk.message_tokens'/5), hide_predicate('$logtalk.message_tokens'/5),
-		dynamic('$logtalk.message_prefix_stream'/5), hide_predicate('$logtalk.message_prefix_stream'/5),
-		dynamic('$logtalk.print_message_token'/5), hide_predicate('$logtalk.print_message_token'/5),
-		dynamic('$logtalk.trace_event'/3), hide_predicate('$logtalk.trace_event'/3)
+		dynamic('$logtalk#0.message_tokens'/5), hide_predicate('$logtalk#0.message_tokens'/5),
+		dynamic('$logtalk#0.message_prefix_stream'/5), hide_predicate('$logtalk#0.message_prefix_stream'/5),
+		dynamic('$logtalk#0.print_message_token'/5), hide_predicate('$logtalk#0.print_message_token'/5),
+		dynamic('$logtalk#0.trace_event'/3), hide_predicate('$logtalk#0.trace_event'/3)
 	;	true
 	).
 
@@ -845,12 +845,12 @@ user:goal_expansion(phrase(Rule, Input, Rest), user:'$lgt_phrase'(Rule, Input, R
 	nonvar(Rule),
 	functor(Rule, '::', 2),
 	!,
-	'$logtalk.execution_context'(ExCtx, user, user, user, [], [], _).
+	'$logtalk#0.execution_context'(ExCtx, user, user, user, [], [], _).
 user:goal_expansion(phrase(Rule, Input), user:'$lgt_phrase'(Rule, Input, ExCtx)) :-
 	nonvar(Rule),
 	functor(Rule, '::', 2),
 	!,
-	'$logtalk.execution_context'(ExCtx, user, user, user, [], [], _).
+	'$logtalk#0.execution_context'(ExCtx, user, user, user, [], [], _).
 
 user:goal_expansion('::'(Object, Message), user:Goal) :-
 	prolog_load_context(module, Module),
@@ -904,8 +904,8 @@ user:goal_expansion('::'(Object, Message), user:Goal) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%:- multifile('$logtalk.print_message_token'/5).
-%:- dynamic('$logtalk.print_message_token'/5).
+%:- multifile('$logtalk#0.print_message_token'/5).
+%:- dynamic('$logtalk#0.print_message_token'/5).
 
 
 

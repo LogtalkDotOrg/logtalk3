@@ -45,7 +45,7 @@
 
 	:- public(ct_b2/0).
 	ct_b2 :-
-		::({atom(a)}, {number(1)}).
+		::(({atom(a)}, {number(1)})).
 
 	:- public(ct_b3/0).
 	ct_b3 :-

@@ -633,11 +633,11 @@ with_mutex(_, _) :- fail.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- multifile('$logtalk.print_message_token'/5).
-:- dynamic('$logtalk.print_message_token'/5).
+:- multifile('$logtalk#0.print_message_token'/5).
+:- dynamic('$logtalk#0.print_message_token'/5).
 
 %  ugly hack to deal with GNU Prolog's non-standard format/3 predicate
-'$logtalk.print_message_token'(Stream, _, Format-Args, _, _) :-
+'$logtalk#0.print_message_token'(Stream, _, Format-Args, _, _) :-
 	'$lgt_gnu_filter_format'(Format, FilteredFormat),
 	format(Stream, FilteredFormat, Args).
 
