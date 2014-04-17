@@ -8880,20 +8880,13 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_body'([Obj::Pred], TPred, '$lgt_debug'(goal([Obj::Pred], TPred), ExCtx), Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, Sender, This, _, _, _, _, ExCtx, Mode, _),
-	(	Mode = compile(_),
-		This \== user,
-		nonvar(Obj),
-		Obj \= {_} ->
-		% not runtime message translation; remember object receiving message
-		'$lgt_add_referenced_object'(Obj)
-	;	true
-	),
+	'$lgt_comp_ctx'(Ctx, Head, Sender, This, _, _, _, _, ExCtx, _, _),
 	% as delegation keeps the original sender, we cannot use a recursive call
 	% to the '$lgt_tr_body'/4 predicate to compile the ::/2 goal as that would
 	% reset the sender to "this"
 	'$lgt_compiler_flag'(events, Events),
 	'$lgt_tr_msg'(Pred, Obj, TPred0, Sender, Head, Events),
+	% ensure that this control construct cannot be used to break object encapsulation 
 	TPred = (Obj \= Sender -> TPred0; throw(error(permission_error(access, object, Sender), logtalk([Obj::Pred], This)))),
 	'$lgt_execution_context'(ExCtx, Sender, This, _, _, _).
 
@@ -9379,16 +9372,8 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_body'(Obj::Pred, TPred, '$lgt_debug'(goal(Obj::Pred, TPred), ExCtx), Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, _, This, _, _, _, _, ExCtx, Mode, _),
+	'$lgt_comp_ctx'(Ctx, Head, _, This, _, _, _, _, ExCtx, _, _),
 	'$lgt_execution_context_this'(ExCtx, This),
-	(	Mode = compile(_),
-		This \== user,
-		nonvar(Obj),
-		Obj \= {_} ->
-		% not runtime message translation; remember object receiving message
-		'$lgt_add_referenced_object'(Obj)
-	;	true
-	),
 	'$lgt_compiler_flag'(events, Events),
 	'$lgt_tr_msg'(Pred, Obj, TPred, This, Head, Events).
 
@@ -11248,6 +11233,13 @@ current_logtalk_flag(Flag, Value) :-
 	Obj == user,
 	!,
 	'$lgt_must_be'(var_or_callable, Pred).
+
+% remember the object receiving the message
+
+'$lgt_tr_msg'(_, Obj, _, _, _, _) :-
+	nonvar(Obj),
+	'$lgt_add_referenced_object'(Obj),
+	fail.
 
 % translation performed at runtime
 

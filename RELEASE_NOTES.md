@@ -54,8 +54,12 @@ retracting dynamic facts instead of generating an instantiation error.
 where the callable form of the predicate would be used instead of the
 predicate indicator.
 
-* FIXED: Bug introduced when handling errors found when calling the `::/1-2`
-message sending control constructs with arguments only bound at runtime.
+* FIXED: Bug introduced in previous release in handling errors found when
+calling the `::/1-2` message sending control constructs with arguments only
+bound at runtime.
+
+* FIXED: Sending a message to a parametric object proxy would not check for
+references to unknown objects during source file compilation. 
 
 Prolog adapter and integration files
 ------------------------------------
