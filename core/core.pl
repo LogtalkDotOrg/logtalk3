@@ -15365,8 +15365,9 @@ current_logtalk_flag(Flag, Value) :-
 	atom_concat(Entity1, '.', Entity0),
 	% locate the rightmost #
 	sub_atom(Entity1, Before, 1, After, '#'),
-	Rest is Before + 1,
-	\+ sub_atom(Entity1, Rest, 1, _, '#'), !,
+	Position is Before + 1,
+	sub_atom(Entity1, Position, _, 0, Rest),
+	\+ sub_atom(Rest, _, 1, _, '#'), !,
 	sub_atom(Entity1, 0, Before, _, Functor),
 	sub_atom(Entity1, _, After, 0, ArityAtom),
 	atom_codes(ArityAtom, ArityCodes),
