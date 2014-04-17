@@ -34,6 +34,10 @@ Logtalk compiler and runtime
 * IMPROVED: Code generated for calls to the `{}/1` compiler bypass control
 construct.
 
+* CHANGED: Restrict the valid values for the `code_prefix` flag to single
+character atoms. This is necessary to ensure that we can always reconstruct
+the entity identifier from the internal entity prefix.
+
 * FIXED: Cases where sending a database message to an invalid object
 identifier would result in an existence error instead of a type error.
 

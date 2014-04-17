@@ -16582,7 +16582,8 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_valid_flag_value'(underscore_variables, singletons) :- !.
 
 '$lgt_valid_flag_value'(code_prefix, Prefix) :-
-	atom(Prefix).
+	atom(Prefix),
+	atom_length(Prefix, 1).
 
 '$lgt_valid_flag_value'(optimize, on) :- !.
 '$lgt_valid_flag_value'(optimize, off) :- !.
