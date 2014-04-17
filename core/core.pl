@@ -214,12 +214,12 @@
 
 % debugging hook predicates
 
-:- multifile('$logtalk.trace_event'/3).
-:- dynamic('$logtalk.trace_event'/3).
+:- multifile('$logtalk#0.trace_event'/3).
+:- dynamic('$logtalk#0.trace_event'/3).
 
-:- multifile('$logtalk.debug_handler_provider'/2).
+:- multifile('$logtalk#0.debug_handler_provider'/2).
 
-:- multifile('$logtalk.debug_handler'/3).
+:- multifile('$logtalk#0.debug_handler'/3).
 
 
 % internal initialization flag
@@ -4584,13 +4584,13 @@ current_logtalk_flag(Flag, Value) :-
 % we can have multiple trace event handlers but only one debug handler
 
 '$lgt_debug'(Event, ExCtx) :-
-	'$logtalk.trace_event'(Event, ExCtx, _),
+	'$logtalk#0.trace_event'(Event, ExCtx, _),
 	fail.
 
 '$lgt_debug'(Event, ExCtx) :-
-	'$logtalk.debug_handler_provider'(_, _),
+	'$logtalk#0.debug_handler_provider'(_, _),
 	!,
-	'$logtalk.debug_handler'(Event, ExCtx, _).
+	'$logtalk#0.debug_handler'(Event, ExCtx, _).
 
 '$lgt_debug'(top_goal(_, TGoal), _) :-
 	!,
@@ -4622,8 +4622,8 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_print_message'(Kind, Component, Term) :-
 	(	'$lgt_default_entities_loaded_' ->
 		% "logtalk" built-in object loaded
-		'$logtalk.execution_context'(ExCtx, logtalk, logtalk, logtalk, [], [], _),
-		'$logtalk.print_message'(Kind, Component, Term, ExCtx)
+		'$logtalk#0.execution_context'(ExCtx, logtalk, logtalk, logtalk, [], [], _),
+		'$logtalk#0.print_message'(Kind, Component, Term, ExCtx)
 	;	% still compiling the default built-in entities or
 		% something wrong happened when loading those entities
 		'$lgt_compiler_flag'(report, off) ->
@@ -8776,7 +8776,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_head'(logtalk::debug_handler_provider(_), _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-	'$logtalk.debug_handler_provider'(Provider, _),
+	'$logtalk#0.debug_handler_provider'(Provider, _),
 	'$lgt_warning_context'(Path, Lines, Type, Entity),
 	'$lgt_print_message'(warning(general), core, debug_handler_provider_already_exists(Path, Lines, Type, Entity, Provider)),
 	fail.
@@ -15340,22 +15340,17 @@ current_logtalk_flag(Flag, Value) :-
 %
 % constructs the entity prefix used in the compiled code from the entity identifier
 %
-% parametric entities: Code prefix + Entity functor + "." + Entity arity + "."
-% other entities: Code prefix + Entity functor + "."
+% prefix = code prefix + entity functor + "#" + entity arity + "."
 
 '$lgt_construct_entity_prefix'(Entity, Prefix) :-
 	'$lgt_compiler_flag'(code_prefix, CodePrefix),
-	(	atom(Entity) ->
-		atom_concat(CodePrefix, Entity, Prefix0),
-		atom_concat(Prefix0, '.', Prefix)
-	;	functor(Entity, Functor, Arity),
-		atom_concat(CodePrefix, Functor, Prefix0),
-		atom_concat(Prefix0, '.', Prefix1),
-		number_codes(Arity, ArityCodes),
-		atom_codes(ArityAtom, ArityCodes),
-		atom_concat(Prefix1, ArityAtom, Prefix2),
-		atom_concat(Prefix2, '.', Prefix)
-	).
+	functor(Entity, Functor, Arity),
+	atom_concat(CodePrefix, Functor, Prefix0),
+	number_codes(Arity, ArityCodes),
+	atom_codes(ArityAtom, ArityCodes),
+	atom_concat(Prefix0, '#', Prefix1),
+	atom_concat(Prefix1, ArityAtom, Prefix2),
+	atom_concat(Prefix2, '.', Prefix).
 
 
 
@@ -15365,18 +15360,18 @@ current_logtalk_flag(Flag, Value) :-
 % returning the corresponding entity identifier
 
 '$lgt_deconstruct_entity_prefix'(Prefix, Entity) :-
-	'$lgt_compiler_flag'(code_prefix, CodePrefix),
-	atom_concat(CodePrefix, Entity0, Prefix),
+	% valid values of the code_prefix flag are a single character atoms
+	sub_atom(Prefix, 1, _, 0, Entity0),
 	atom_concat(Entity1, '.', Entity0),
-	(	atom_concat(FunctorDolar, ArityAtom, Entity1),
-		atom_concat(Functor, '.', FunctorDolar) ->
-		atom_codes(ArityAtom, ArityCodes),
-		number_codes(Arity, ArityCodes)
-	;	Functor = Entity1,
-		Arity = 0
-	),
-	functor(Entity, Functor, Arity),
-	!.
+	% locate the rightmost #
+	sub_atom(Entity1, Before, 1, After, '#'),
+	Rest is Before + 1,
+	\+ sub_atom(Entity1, Rest, 1, _, '#'), !,
+	sub_atom(Entity1, 0, Before, _, Functor),
+	sub_atom(Entity1, _, After, 0, ArityAtom),
+	atom_codes(ArityAtom, ArityCodes),
+	number_codes(Arity, ArityCodes),
+	functor(Entity, Functor, Arity).
 
 
 
@@ -15916,15 +15911,15 @@ current_logtalk_flag(Flag, Value) :-
 % in the "logtalk" built-in object
 
 '$lgt_execution_context'(ExCtx, Sender, OldThis, Self, MetaCallCtx, Stack) :-
-	'$logtalk.execution_context'(ExCtx, Sender, OldThis, Self, MetaCallCtx, Stack, _).
+	'$logtalk#0.execution_context'(ExCtx, Sender, OldThis, Self, MetaCallCtx, Stack, _).
 
 % inheritance only requires updating "this"
 '$lgt_execution_context_update_this'(OldExCtx, OldThis, NewExCtx, NewThis) :-
-	'$logtalk.execution_context_this_rest'(OldExCtx, OldThis, Rest, _),
-	'$logtalk.execution_context_this_rest'(NewExCtx, NewThis, Rest, _).
+	'$logtalk#0.execution_context_this_rest'(OldExCtx, OldThis, Rest, _),
+	'$logtalk#0.execution_context_this_rest'(NewExCtx, NewThis, Rest, _).
 
 '$lgt_execution_context_this'(ExCtx, This) :-
-	'$logtalk.execution_context_this_rest'(ExCtx, This, _, _).
+	'$logtalk#0.execution_context_this_rest'(ExCtx, This, _, _).
 
 
 
