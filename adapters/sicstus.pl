@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SICStus Prolog 4.1.0 and later versions
-%  Last updated on March 17, 2014
+%  Last updated on April 17, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -759,8 +759,8 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%:- multifile('$logtalk.print_message_token'/5).
-%:- dynamic('$logtalk.print_message_token'/5).
+%:- multifile('$logtalk#0.print_message_token'/5).
+%:- dynamic('$logtalk#0.print_message_token'/5).
 
 
 
