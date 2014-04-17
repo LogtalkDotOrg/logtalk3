@@ -77,6 +77,8 @@ Tests
 * ADDED: Built-in database methods unit tests for testing the errors generated
 when sending the corresponding messages to invalid object identifiers.
 
+* FIXED: Bug in the test object for the `::/1` control construct.
+
 
 3.00.0 Beta 1 - April 9, 2014
 =============================
