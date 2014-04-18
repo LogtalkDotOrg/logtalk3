@@ -9,13 +9,27 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+:- object(current_predicate_1_test_object).
+
+	:- public(ie/1).
+	ie(Object) :-
+		Object::current_predicate(foo/1).
+
+	:- public(te/0).
+	te :-
+		Object = 1,
+		Object::current_predicate(foo/1).
+
+:- end_object.
+
+
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/12/03,
+		date is 2014/04/18,
 		comment is 'Unit tests for the current_predicate/1 built-in method.'
 	]).
 
@@ -34,5 +48,11 @@
 	throws(current_predicate_1_4, error(domain_error(not_less_than_zero, -1), logtalk(This::current_predicate(a/(-1)),user))) :-
 		this(This),
 		{This::current_predicate(a/(-1))}.
+
+	throws(current_predicate_1_5, error(instantiation_error, logtalk(_::current_predicate(foo/1),current_predicate_1_test_object))) :-
+		{current_predicate_1_test_object::ie(_)}.
+
+	throws(current_predicate_1_6, error(type_error(object_identifier, 1), logtalk(1::current_predicate(foo/1),current_predicate_1_test_object))) :-
+		{current_predicate_1_test_object::te}.
 
 :- end_object.

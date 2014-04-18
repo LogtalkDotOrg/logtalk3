@@ -29,6 +29,16 @@
 	operators(Operators) :-
 		setof(Operator, ::current_op(501, xfx, Operator), Operators).
 
+	% tests for invalid object identifiers
+	:- public(ie/1).
+	ie(Object) :-
+		Object::current_op(_, _, _).
+
+	:- public(te/0).
+	te :-
+		Object = 1,
+		Object::current_op(_, _, _).
+
 :- end_object.
 
 
@@ -53,7 +63,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/02/08,
+		date is 2014/04/18,
 		comment is 'Unit tests for the current_op/3 built-in directive.'
 	]).
 
@@ -77,26 +87,32 @@
 		this(This),
 		{This::current_op(_, _, 1)}.
 
-	succeeds(current_op_3_6) :-
+	throws(current_op_3_6, error(instantiation_error, logtalk(_::current_op(_,_,_),current_op_3_test_object_1))) :-
+		{current_op_3_test_object_1::ie(_)}.
+
+	throws(current_op_3_7, error(type_error(object_identifier, 1), logtalk(1::current_op(_,_,_),current_op_3_test_object_1))) :-
+		{current_op_3_test_object_1::te}.
+
+	succeeds(current_op_3_8) :-
 		setof(Operator, current_op_3_test_object_1<<current_op(501, xfx, Operator), Operators),
 		Operators == [abc, def, ghi].
 
-	succeeds(current_op_3_7) :-
+	succeeds(current_op_3_9) :-
 		setof(Operator, current_op_3_test_object_1::current_op(501, xfx, Operator), Operators),
 		Operators == [abc].
 
-	succeeds(current_op_3_8) :-
+	succeeds(current_op_3_10) :-
 		current_op_3_test_object_1::current_op(600, xfx, (:)),
 		\+ current_op_3_test_object_1::current_op(600, xfy, (:)).
 
-	succeeds(current_op_3_9) :-
+	succeeds(current_op_3_11) :-
 		\+ current_op_3_test_object_2::current_op(600, xfx, (:)).
 
-	succeeds(current_op_3_10) :-
+	succeeds(current_op_3_12) :-
 		current_op_3_test_object_1::operators(Operators),
 		Operators == [abc, def, ghi].
 
-	succeeds(current_op_3_11) :-
+	succeeds(current_op_3_13) :-
 		current_op_3_test_object_2::operators(Operators),
 		Operators == [opq, rst].
 
