@@ -12357,7 +12357,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_qualify_entity_identifier'(@entity_identifier, -entity_identifier)
 
-'$lgt_qualify_entity_identifier'(/Entity, /Entity) :-
+'$lgt_qualify_entity_identifier'(/Entity, Entity) :-
 	!.
 
 '$lgt_qualify_entity_identifier'(Namespace/Entity, Namespace/Entity) :-
@@ -15383,14 +15383,18 @@ current_logtalk_flag(Flag, Value) :-
 %
 % prefix = code prefix + entity functor + "#" + entity arity + "."
 
-'$lgt_construct_entity_prefix'(Qualifier/Identifier, Prefix) :-
+'$lgt_construct_entity_prefix'(/Entity, Prefix) :-
+	!,
+	'$lgt_construct_entity_prefix'(Entity, Prefix).
+
+'$lgt_construct_entity_prefix'(Qualifier/Entity, Prefix) :-
 	!,
 	'$lgt_qualifier_to_atom'(Qualifier, QualifierAtom),
 	atom_concat(QualifierAtom, '/', Prefix0),
-	Identifier =.. [Functor0| Args],
+	Entity =.. [Functor0| Args],
 	atom_concat(Prefix0, Functor0, Functor),
-	Entity =.. [Functor| Args],
-	'$lgt_construct_entity_prefix'(Entity, Prefix).
+	Prefix1 =.. [Functor| Args],
+	'$lgt_construct_entity_prefix'(Prefix1, Prefix).
 
 '$lgt_construct_entity_prefix'(Entity, Prefix) :-
 	'$lgt_compiler_flag'(code_prefix, CodePrefix),
