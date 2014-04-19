@@ -3649,7 +3649,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_send_to_obj_rt'(@object_identifier, ?term, +object_identifier)
+% '$lgt_send_to_obj_rt'(+object_identifier, +callable, +object_identifier)
 %
 % runtime processing of a message sending call when both the receiver
 % object and the message are not known at compile time
@@ -3664,7 +3664,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_send_to_obj'(@object_identifier, ?term, +object_identifier)
+% '$lgt_send_to_obj'(+object_identifier, +callable, +object_identifier)
 %
 % runtime processing of an event-aware message sending call when the
 % receiver object is not known at compile time
@@ -3675,7 +3675,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_send_to_obj_'(+object_identifier, +term, +object_identifier)
+% '$lgt_send_to_obj_'(+object_identifier, +callable, +object_identifier)
 %
 % the last clause of this cache predicate must always exist and must
 % call the predicate that generates the missing cache entry
@@ -3796,7 +3796,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_send_to_obj_ne'(@object_identifier, ?term, +object_identifier)
+% '$lgt_send_to_obj_ne'(+object_identifier, +callable, +object_identifier)
 %
 % runtime processing of an event-transparent message sending call when
 % the receiver object is not known at compile time
@@ -3807,7 +3807,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_send_to_obj_ne_'(+object_identifier, +term, +object_identifier)
+% '$lgt_send_to_obj_ne_'(+object_identifier, +callable, +object_identifier)
 %
 % the last clause of this cache predicate must always exist and must
 % call the predicate that generates the missing cache entry
