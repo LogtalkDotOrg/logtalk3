@@ -25,8 +25,8 @@ RELEASE NOTES
 =============
 
 
-3.00.0 Beta 2 - May ??, 2014
-============================
+3.00.0 Beta 2 - April 21, 2014
+==============================
 
 Logtalk compiler and runtime
 ----------------------------
@@ -65,7 +65,8 @@ Prolog adapter and integration files
 ------------------------------------
 
 * FIXED: Added missing dummy definition for the `mutex_property/2` predicate
-to the GNU Prolog adapter file. Thanks to Michael Wernicki for the bug report.
+to the GNU Prolog adapter file (required when embedding Logtalk for generating
+an executable). Thanks to Michael Wernicki for the bug report.
 
 * FIXED: Updated the `core/logtalk.lgt` file to workaround an apparent `gplc`
 bug with multifile predicates when generating executables that embed Logtalk
