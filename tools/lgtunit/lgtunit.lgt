@@ -30,7 +30,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/03/25,
+		date is 2014/04/21,
 		comment is 'A simple unit test framework featuring predicate clause coverage.'
 	]).
 
@@ -98,7 +98,7 @@
 	:- mode(test_(?compound), zero_or_more).
 	:- info(test_/1, [
 		comment is 'Table of defined tests.',
-		argnames is ['Counter']
+		argnames is ['Test']
 	]).
 
 	:- private(skipped_/1).
@@ -192,7 +192,7 @@
 		run_tests([], _).
 
 	run_test(succeeds(Test, Position), File) :-
-		(	catch(::test(Test, _), Error, failed_test(Test, File, Position, error_instead_of_success(Error))) ->
+		(	catch(::test(Test, true), Error, failed_test(Test, File, Position, error_instead_of_success(Error))) ->
 			(	var(Error) ->
 				passed_test(Test, File, Position)
 			;	true
@@ -200,7 +200,7 @@
 		;	failed_test(Test, File, Position, failure_instead_of_success)
 		).
 	run_test(fails(Test, Position), File) :-
-		(	catch(::test(Test, _), Error, failed_test(Test, File, Position, error_instead_of_failure(Error))) ->
+		(	catch(::test(Test, fail), Error, failed_test(Test, File, Position, error_instead_of_failure(Error))) ->
 			(	var(Error) ->
 				failed_test(Test, File, Position, success_instead_of_failure)
 			;	true
@@ -330,14 +330,14 @@
 	% skipped tests
 	term_expansion((- Head :- _), []) :-
 		test_idiom_head(Head, Test),
-		check_for_repeated_test_identifier(Test),
+		check_for_valid_test_identifier(Test),
 		increment_skipped_tests_counter.
 
 	% unit test idiom test/2
 	term_expansion((test(Test, Outcome0) :- Goal0), [(test(Test, Outcome) :- Goal)]) :-
 		callable(Outcome0),
 		convert_test_outcome(Outcome0, Goal0, Outcome, Goal),
-		check_for_repeated_test_identifier(Test),
+		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
 		(	Outcome == true ->
 			assertz(test_(succeeds(Test, Position)))
@@ -349,21 +349,21 @@
 
 	% unit test idiom test/1
 	term_expansion((test(Test) :- Goal), [(test(Test, true) :- Goal)]) :-
-		check_for_repeated_test_identifier(Test),
+		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
 		assertz(test_(succeeds(Test, Position))).
 
 	% unit test idiom succeeds/1 + fails/1 + throws/2
 	term_expansion((succeeds(Test) :- Goal), [(test(Test, true) :- Goal)]) :-
-		check_for_repeated_test_identifier(Test),
+		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
 		assertz(test_(succeeds(Test, Position))).
 	term_expansion((fails(Test) :- Goal), [(test(Test, fail) :- Goal)]) :-
-		check_for_repeated_test_identifier(Test),
+		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
 		assertz(test_(fails(Test, Position))).
 	term_expansion((throws(Test, Error) :- Goal), [(test(Test, Error) :- Goal)]) :-
-		check_for_repeated_test_identifier(Test),
+		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
 		assertz(test_(throws(Test, Error, Position))).
 
@@ -388,14 +388,14 @@
 	test_idiom_head(fails(Test), Test).
 	test_idiom_head(throws(Test, _), Test).
 
-	check_for_repeated_test_identifier(Test) :-
+	check_for_valid_test_identifier(Test) :-
 		(	var(Test) ->
-			print_message(warning, lgtunit, non_instantiated_test_identifier)
-		;	(	test_(succeeds(Test))
-			;	test_(fails(Test))
-			;	test_(throws(Test, _))
+			print_message(error, lgtunit, non_instantiated_test_identifier)
+		;	(	test_(succeeds(Test, _))
+			;	test_(fails(Test, _))
+			;	test_(throws(Test, _, _))
 			) ->
-			print_message(warning, lgtunit, repeated_test_identifier(Test))
+			print_message(error, lgtunit, repeated_test_identifier(Test))
 		;	true
 		).
 

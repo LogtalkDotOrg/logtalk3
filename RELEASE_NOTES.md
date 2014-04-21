@@ -28,7 +28,29 @@ RELEASE NOTES
 3.00.0 Beta 3 - May ??, 2014
 ============================
 
+Logtalk compiler and runtime
+----------------------------
 
+* ADDED: Support for accessing parametric object proxies when using the `<</2`
+control construct using the standard `{Proxy}` syntax.
+
+* IMPROVED: Faster generation of entity identifiers when dynamically creating
+a large number of entities at runtime.
+
+Tools
+-----
+
+* CHANGED: The `lgtunit` tool now prints invalid test identifier messages as
+errors instead of warnings as a non-instantiated or repeated test identifier
+can result in misleading test reports.
+
+* FIXED: Regression on the `lgtunit` tool where duplicated test identifiers
+would no longer be detected and reported.
+
+Tests
+-----
+
+* ADDED: Unit tests for testing the `{Proxy}<<Goal` syntax support.
 
 
 3.00.0 Beta 2 - April 21, 2014

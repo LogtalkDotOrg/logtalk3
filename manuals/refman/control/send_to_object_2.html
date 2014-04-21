@@ -42,7 +42,7 @@
 Sends a message to an object. The message argument must match a public predicate of the receiver object. When the message corresponds to a protected or private predicate, the call is only valid if the <em>sender</em> matches the predicate <em>scope container</em>.
 </p>
 <p>
-The <code>{Proxy}::Message</code> syntax construct allows simplified access to parametric object <em>proxies</em>. Its operational semantics is equivalent to the goal conjunction <code>(call(Proxy), Proxy::Message)</code>. I.e. <code>Proxy</code> is proved within the context of the pseudo-object <code>user</code> and, if successful, the goal term is used as a parametric object identifier. Exceptions thrown when proving <code>Proxy</code> are handled by the <code>::/2</code> control construct. This syntax construct supports backtracking over the <code>{Proxy}</code> goal.
+The <code>{Proxy}::Message</code> syntax allows simplified access to parametric object <em>proxies</em>. Its operational semantics is equivalent to the goal conjunction <code>(call(Proxy), Proxy::Message)</code>. I.e. <code>Proxy</code> is proved within the context of the pseudo-object <code>user</code> and, if successful, the goal term is used as a parametric object identifier. Exceptions thrown when proving <code>Proxy</code> are handled by the <code>::/2</code> control construct. This syntax construct supports backtracking over the <code>{Proxy}</code> goal.
 </p>
 <p>
 The lookups for the message declaration and the corresponding method are performed using a depth-first strategy. Depending on the value of the <code>optimize</code> flag, these lookups are performed at compile time whenever sufficient information is available. When the lookups are performed at runtime, a caching mechanism is used to improve performance in subsequent messages.
@@ -92,7 +92,7 @@ yes</pre>
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: March 27, 2014</span>
+		<span>Last updated on: April 21, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="../index.html#constructs">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="send_to_self_1.html">next</a></span><br/>

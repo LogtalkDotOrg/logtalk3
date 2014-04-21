@@ -214,7 +214,10 @@
 :- dynamic('$lgt_hook_goal_expansion_'/2).
 
 
-% multi-threading tags
+% counters
+
+% '$lgt_dynamic_entity_counter_'(Kind, Base, Count)
+:- dynamic('$lgt_dynamic_entity_counter_'/3).
 
 % '$lgt_threaded_tag_counter_'(Tag)
 :- dynamic('$lgt_threaded_tag_counter_'/1).
@@ -1043,7 +1046,7 @@ create_object(Obj, Relations, Directives, Clauses) :-
 
 '$lgt_create_object'(Obj, Relations, Directives, Clauses) :-
 	(	var(Obj) ->
-		'$lgt_gen_entity_identifier'(o, Obj)
+		'$lgt_gen_entity_identifier'(object, Obj)
 	;	true
 	),
 	'$lgt_tr_object_identifier'(Obj, Relations, QObj),
@@ -1092,7 +1095,7 @@ create_category(Ctg, Relations, Directives, Clauses) :-
 
 '$lgt_create_category'(Ctg, Relations, Directives, Clauses) :-
 	(	var(Ctg) ->
-		'$lgt_gen_entity_identifier'(c, Ctg)
+		'$lgt_gen_entity_identifier'(category, Ctg)
 	;	true
 	),
 	'$lgt_tr_category_identifier'(Ctg, QCtg),
@@ -1146,7 +1149,7 @@ create_protocol(Ptc, Relations, Directives) :-
 
 '$lgt_create_protocol'(Ptc, Relations, Directives) :-
 	(	var(Ptc) ->
-		'$lgt_gen_entity_identifier'(p, Ptc)
+		'$lgt_gen_entity_identifier'(protocol, Ptc)
 	;	true
 	),
 	'$lgt_tr_protocol_identifier'(Ptc, QPtc),
@@ -1163,19 +1166,24 @@ create_protocol(Ptc, Relations, Directives) :-
 
 
 
-% '$lgt_gen_entity_identifier'(+char, -entity_identifier)
+% '$lgt_gen_entity_identifier'(+atom, -entity_identifier)
 %
 % generates a new, unique, entity identifier by appending an integer to a base char
+%
+% note that it's possible to run out of (generated) entity identifiers when using a
+% back-end Prolog compiler with bounded integer support
 
-'$lgt_gen_entity_identifier'(Base, Identifier) :-
+'$lgt_gen_entity_identifier'(Kind, Identifier) :-
+	retract('$lgt_dynamic_entity_counter_'(Kind, Base, Count)),
 	char_code(Base, Code),
 	repeat,
-		'$lgt_next_integer'(1, New),
+		'$lgt_next_integer'(Count, New),
 		number_codes(New, Codes),
 		atom_codes(Identifier, [Code| Codes]),
 	\+ '$lgt_current_protocol_'(Identifier, _, _, _, _),
 	\+ '$lgt_current_object_'(Identifier, _, _, _, _, _, _, _, _, _, _),
 	\+ '$lgt_current_category_'(Identifier, _, _, _, _, _),
+	asserta('$lgt_dynamic_entity_counter_'(Kind, Base, New)),
 	!.
 
 
@@ -4204,7 +4212,7 @@ current_logtalk_flag(Flag, Value) :-
 		Closure =.. [Functor| Args],
 		'$lgt_append'(Args, ExtraArgs, FullArgs),
 		Goal =.. [Functor| FullArgs],
-		'$lgt_call_within_context_nv'(Obj, Goal, Sender)
+		'$lgt_call_within_context'(Obj, Goal, Sender)
 	;	var(Obj) ->
 		Call =.. [call, Obj<<Closure| ExtraArgs],
 		throw(error(instantiation_error, logtalk(Call, This)))
@@ -4472,7 +4480,8 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_call_within_context'(?term, ?term, +object_identifier)
 %
-% calls a goal within the context of the specified object
+% calls a goal within the context of the specified object when the object and/or the
+% goal are only known at runtime
 %
 % used mostly for debugging and for writing unit tests, the permission to perform a
 % context-switching call can be disabled in a per-object basis by using the compiler
@@ -4481,7 +4490,8 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_call_within_context'(Obj, Goal, This) :-
 	'$lgt_must_be'(object_identifier, Obj, logtalk(Obj<<Goal, This)),
 	'$lgt_must_be'(callable, Goal, logtalk(Obj<<Goal, This)),
-	'$lgt_call_within_context_nv'(Obj, Goal, This).
+	'$lgt_tr_ctx_call'(Obj, Goal, TGoal, This),
+	call(TGoal).
 
 
 
@@ -11789,6 +11799,14 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_tr_ctx_call'(@term, @term, -callable, @object_identifier)
 %
 % translates context switching calls
+
+% convenient access to parametric object proxies
+
+'$lgt_tr_ctx_call'(Obj, Goal, ('$lgt_call_proxy'(Proxy, Goal, This), TGoal), This) :-
+	nonvar(Obj),
+	Obj = {Proxy},
+	!,
+	'$lgt_tr_ctx_call'(Proxy, Goal, TGoal, This).
 
 '$lgt_tr_ctx_call'(Obj, Goal, TGoal, This) :-
 	'$lgt_must_be'(var_or_object_identifier, Obj),
@@ -19245,6 +19263,17 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
+% '$lgt_initialize_dynamic_entity_counters'
+%
+% counters used when generating identifiers for dynamically created entities
+
+'$lgt_initialize_dynamic_entity_counters' :-
+	assertz('$lgt_dynamic_entity_counter_'(object,   o, 1)),
+	assertz('$lgt_dynamic_entity_counter_'(protocol, p, 1)),
+	assertz('$lgt_dynamic_entity_counter_'(category, c, 1)).
+
+
+
 % '$lgt_load_default_entities'
 %
 % loads all default built-in entities if not already loaded (when embedding
@@ -19418,6 +19447,7 @@ current_logtalk_flag(Flag, Value) :-
 % Logtalk runtime initialization goal
 
 :- initialization((
+	'$lgt_initialize_dynamic_entity_counters',
 	'$lgt_load_default_entities',
 	'$lgt_load_settings_file'(Result, Flag),
 	'$lgt_print_message'(banner, core, banner),
