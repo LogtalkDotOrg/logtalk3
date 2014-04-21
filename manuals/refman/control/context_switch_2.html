@@ -36,9 +36,13 @@
 
 <h4>Description</h4>
 
-<pre>Object&lt;&lt;Goal</pre>
+<pre>Object&lt;&lt;Message
+{Proxy}&lt;&lt;Message</pre>
 <p>
 Calls a goal within the context of the specified object. Goal is called with the execution context (<a class="glossary" title="Go to glossary definition" href="../../glossary.html#sender"><em>sender</em></a>, <a class="glossary" title="Go to glossary definition" href="../../glossary.html#this"><em>this</em></a>, and <a class="glossary" title="Go to glossary definition" href="../../glossary.html#self"><em>self</em></a>) set to Object. Goal may need to be written within brackets to avoid parsing errors due to operator clashes. This control construct should only be used for debugging or for writing unit tests. This control construct can only be used for objects compiled with the compiler option <code>context_switching_calls</code> set to <code>allow</code>. Set this compiler option to <code>deny</code> to disable this control construct and thus preventing using it to break encapsulation.
+</p>
+<p>
+The <code>{Proxy}&lt;&lt;Message</code> syntax allows simplified access to parametric object <em>proxies</em>. Its operational semantics is equivalent to the goal conjunction <code>(call(Proxy), Proxy&lt;&lt;Message)</code>. I.e. <code>Proxy</code> is proved within the context of the pseudo-object <code>user</code> and, if successful, the goal term is used as a parametric object identifier. Exceptions thrown when proving <code>Proxy</code> are handled by the <code>&lt;&lt;/2</code> control construct. This syntax construct supports backtracking over the <code>{Proxy}</code> goal.
 </p>
 <p>
 Caveat: although the goal argument is fully compiled before calling, some of the necessary information for the second compiler pass may not be available at runtime.
@@ -73,7 +77,7 @@ Caveat: although the goal argument is fully compiled before calling, some of the
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: November 15, 2013</span>
+		<span>Last updated on: April 21, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="../index.html#constructs">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="../index.html#constructs">next</a></span><br/>

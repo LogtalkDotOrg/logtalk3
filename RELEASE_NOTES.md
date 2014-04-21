@@ -31,8 +31,16 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Support for accessing parametric object proxies when using the `<</2`
+control construct using the standard `{Proxy}` syntax.
+
 * IMPROVED: Faster generation of entity identifiers when dynamically creating
 a large number of entities at runtime.
+
+Tests
+-----
+
+* ADDED: Unit tests for testing the `{Proxy}<<Goal` syntax support.
 
 
 3.00.0 Beta 2 - April 21, 2014

@@ -4201,7 +4201,7 @@ current_logtalk_flag(Flag, Value) :-
 		Closure =.. [Functor| Args],
 		'$lgt_append'(Args, ExtraArgs, FullArgs),
 		Goal =.. [Functor| FullArgs],
-		'$lgt_call_within_context_nv'(Obj, Goal, Sender)
+		'$lgt_call_within_context'(Obj, Goal, Sender)
 	;	var(Obj) ->
 		Call =.. [call, Obj<<Closure| ExtraArgs],
 		throw(error(instantiation_error, logtalk(Call, This)))
@@ -4469,7 +4469,8 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_call_within_context'(?term, ?term, +object_identifier)
 %
-% calls a goal within the context of the specified object
+% calls a goal within the context of the specified object when the object and/or the
+% goal are only known at runtime
 %
 % used mostly for debugging and for writing unit tests, the permission to perform a
 % context-switching call can be disabled in a per-object basis by using the compiler
@@ -4478,7 +4479,8 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_call_within_context'(Obj, Goal, This) :-
 	'$lgt_must_be'(object_identifier, Obj, logtalk(Obj<<Goal, This)),
 	'$lgt_must_be'(callable, Goal, logtalk(Obj<<Goal, This)),
-	'$lgt_call_within_context_nv'(Obj, Goal, This).
+	'$lgt_tr_ctx_call'(Obj, Goal, TGoal, This),
+	call(TGoal).
 
 
 
@@ -11748,6 +11750,14 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_tr_ctx_call'(@term, @term, -callable, @object_identifier)
 %
 % translates context switching calls
+
+% convenient access to parametric object proxies
+
+'$lgt_tr_ctx_call'(Obj, Goal, ('$lgt_call_proxy'(Proxy, Goal, This), TGoal), This) :-
+	nonvar(Obj),
+	Obj = {Proxy},
+	!,
+	'$lgt_tr_ctx_call'(Proxy, Goal, TGoal, This).
 
 '$lgt_tr_ctx_call'(Obj, Goal, TGoal, This) :-
 	'$lgt_must_be'(var_or_object_identifier, Obj),

@@ -18,6 +18,20 @@
 :- end_object.
 
 
+:- object(context_switch_test_object(_)).
+
+	:- set_logtalk_flag(context_switching_calls, allow).
+
+	p(X) :-
+		parameter(1, X).
+
+:- end_object.
+
+
+context_switch_test_object(1).
+context_switch_test_object(2).
+context_switch_test_object(3).
+
 
 :- object(tests,
 	extends(lgtunit)).
@@ -65,17 +79,24 @@
 		Xs == [1,2,3],
 		abolish_object(Object).
 
-	fails(context_switch_2_11) :-
-		{user << fail}.
+	succeeds(context_switch_2_11) :-
+		findall(X, {context_switch_test_object(_)}<<p(X), Xs),
+		Xs == [1,2,3].
 
 	fails(context_switch_2_12) :-
+		{user << fail}.
+
+	fails(context_switch_2_13) :-
 		logtalk::assertz(foo(_)),
 		logtalk::retractall(foo(_)),
 		logtalk << foo(_).
 
-	fails(context_switch_2_13) :-
+	fails(context_switch_2_14) :-
 		this(This),
 		{This << a(4)}.
+
+	fails(context_switch_2_15) :-
+		{context_switch_test_object(_)}<<p(4).
 
 	a(1). a(2). a(3).
 
