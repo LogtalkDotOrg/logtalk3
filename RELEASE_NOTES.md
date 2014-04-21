@@ -28,7 +28,11 @@ RELEASE NOTES
 3.00.0 Beta 3 - May ??, 2014
 ============================
 
+Logtalk compiler and runtime
+----------------------------
 
+* IMPROVED: Faster generation of entity identifiers when dynamically creating
+a large number of entities at runtime.
 
 
 3.00.0 Beta 2 - April 21, 2014
