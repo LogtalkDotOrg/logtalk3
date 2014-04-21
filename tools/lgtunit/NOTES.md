@@ -85,8 +85,9 @@ The possible values of the outcome argument are:
 - `ball(Ball)`  
 	the test is expected to throw the exception term `Ball`
 
-In all dialects, `Test` is an atom, uniquely identifying a test. A warning is
-printed if duplicated identifiers are found.
+In all dialects, `Test` is an atom, uniquely identifying a test. An error
+message is printed if duplicated identifiers are found. These errors must
+be corrected otherwise the test results can be misleading.
 
 Tests that for some reason should be skipped can have the test clause head
 prefixed with the `(-)/1` operator. An alternative is to use the conditional

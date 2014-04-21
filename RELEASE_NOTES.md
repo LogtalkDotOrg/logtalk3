@@ -40,6 +40,10 @@ a large number of entities at runtime.
 Tools
 -----
 
+* CHANGED: The `lgtunit` tool now prints invalid test identifier messages as
+errors instead of warnings as a non-instantiated or repeated test identifier
+can result in misleading test reports.
+
 * FIXED: Regression on the `lgtunit` tool where duplicated test identifiers
 would no longer be detected and reported.
 
