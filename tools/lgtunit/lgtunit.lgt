@@ -30,7 +30,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/03/25,
+		date is 2014/04/21,
 		comment is 'A simple unit test framework featuring predicate clause coverage.'
 	]).
 
@@ -98,7 +98,7 @@
 	:- mode(test_(?compound), zero_or_more).
 	:- info(test_/1, [
 		comment is 'Table of defined tests.',
-		argnames is ['Counter']
+		argnames is ['Test']
 	]).
 
 	:- private(skipped_/1).
@@ -391,9 +391,9 @@
 	check_for_repeated_test_identifier(Test) :-
 		(	var(Test) ->
 			print_message(warning, lgtunit, non_instantiated_test_identifier)
-		;	(	test_(succeeds(Test))
-			;	test_(fails(Test))
-			;	test_(throws(Test, _))
+		;	(	test_(succeeds(Test, _))
+			;	test_(fails(Test, _))
+			;	test_(throws(Test, _, _))
 			) ->
 			print_message(warning, lgtunit, repeated_test_identifier(Test))
 		;	true

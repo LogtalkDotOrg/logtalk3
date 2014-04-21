@@ -37,6 +37,12 @@ control construct using the standard `{Proxy}` syntax.
 * IMPROVED: Faster generation of entity identifiers when dynamically creating
 a large number of entities at runtime.
 
+Tools
+-----
+
+* FIXED: Regression on the `lgtunit` tool where duplicated test identifiers
+would no longer be detected and reported.
+
 Tests
 -----
 
