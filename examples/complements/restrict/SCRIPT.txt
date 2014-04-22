@@ -1,0 +1,47 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the `LICENSE.txt` file for details.
+________________________________________________________________________
+
+
+% start by loading the non-patched vault objects:
+
+| ?- logtalk_load(complements_restrict(vaults)).
+...
+
+
+%  open the "my_vault" vault using the correct password:
+
+| ?- my_vault::open('!"#$%&/()=').
+yes
+
+
+% any other password will be rejected; for example:
+
+| ?- my_vault::open('abc123').
+no
+
+
+% now load the "hacker" complementing category:
+
+| ?- logtalk_load(complements_restrict(hacker)).
+...
+
+
+% try the hacker replaced password and fail miserably:
+
+| ?- my_vault::open('1234567890').
+You have been hacked by SmartPants!
+no
+
+
+% the correct, original, password is still the only one capable
+% of opening the vault, despite the hacked messages:
+
+| ?- my_vault::open('!"#$%&/()=').
+You have been hacked by SmartPants!
+yes

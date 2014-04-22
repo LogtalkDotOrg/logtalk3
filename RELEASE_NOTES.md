@@ -52,6 +52,13 @@ Tests
 
 * ADDED: Unit tests for testing the `{Proxy}<<Goal` syntax support.
 
+Examples
+--------
+
+* IMPROVED: Extended the `complements` example to better illustrate the
+functionality of complementing categories when using different settings
+for the `complements` flag.
+
 
 3.00.0 Beta 2 - April 21, 2014
 ==============================

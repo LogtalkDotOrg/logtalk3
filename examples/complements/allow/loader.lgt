@@ -10,10 +10,6 @@
 
 
 :- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(library(basic_types_loader)),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(complements, [complements(allow), debug(on), source_data(on)]),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
+	logtalk_load(employee),
+	logtalk_load(add_on)
 )).

@@ -11,13 +11,13 @@ ________________________________________________________________________
 To load this example and for sample queries, please see the `SCRIPT.txt`
 file.
 
-This folder contains an example that shows how to use a category to 
-explicitly complement an existing object (without modifying its source 
+This folder contains two examples that show how to use a category to 
+explicitly complement existing objects (without modifying its source 
 code), thus providing functionality similar to Objective-C categories.
 
 The complemented objects need to be compiled with the flag `complements` 
-set to `allow` (its default value is `deny`). This solution was adapted
-to improve performance of applications that doesn't use complementing
-categories and to provide a solution for preventing the use of categories
-to break object encapsulation. Note that the `complements` flag can be
-set on a per-object basis.
+set to either `allow` or `restrict` (its default value is `deny`; this
+solution was adapted to improve performance of applications that doesn't
+use complementing categories and to provide a solution for preventing
+the use of categories to break object encapsulation). Note that the
+`complements` flag can be set on a per-object basis as in this example.

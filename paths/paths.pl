@@ -110,7 +110,8 @@ logtalk_library_path(clp_sicstus, constraints('sicstus/')).
 logtalk_library_path(clp_swipl, constraints('swipl/')).
 logtalk_library_path(clp_yap, constraints('yap/')).
 logtalk_library_path(coinduction, examples('coinduction/')).
-logtalk_library_path(complements, examples('complements/')).
+logtalk_library_path(complements_allow, examples('complements/allow/')).
+logtalk_library_path(complements_restrict, examples('complements/restrict/')).
 logtalk_library_path(constraints, examples('constraints/')).
 logtalk_library_path(dcgs, examples('dcgs/')).
 logtalk_library_path(debug_hooks, examples('debug_hooks/')).

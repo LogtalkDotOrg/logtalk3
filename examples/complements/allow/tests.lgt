@@ -15,8 +15,8 @@
 	:- info([
 		version is 1.3,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2012/07/03,
-		comment is 'Unit tests for the "complements" example.'
+		date is 2014/04/22,
+		comment is 'Unit tests for the "complements/allow" example.'
 	]).
 
 	cover(employee).
