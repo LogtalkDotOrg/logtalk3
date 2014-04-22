@@ -59,6 +59,11 @@ Examples
 functionality of complementing categories when using different settings
 for the `complements` flag.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* ADDED: Support for the JavaScript-based Ace embeddable code editor.
+
 
 3.00.0 Beta 2 - April 21, 2014
 ==============================
