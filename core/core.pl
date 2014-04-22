@@ -11753,20 +11753,19 @@ current_logtalk_flag(Flag, Value) :-
 
 % convenient access to parametric object proxies
 
-'$lgt_tr_ctx_call'(Obj, Goal, ('$lgt_call_proxy'(Proxy, Goal, This), TGoal), This) :-
-	nonvar(Obj),
-	Obj = {Proxy},
-	!,
-	'$lgt_tr_ctx_call'(Proxy, Goal, TGoal, This).
-
 '$lgt_tr_ctx_call'(Obj, Goal, TGoal, This) :-
-	'$lgt_must_be'(var_or_object_identifier, Obj),
-	'$lgt_must_be'(var_or_callable, Goal),
 	(	var(Obj) ->
+		'$lgt_must_be'(var_or_callable, Goal),
 		TGoal = '$lgt_call_within_context'(Obj, Goal, This)
+	;	Obj = {Proxy} ->
+		TGoal = ('$lgt_call_proxy'(Proxy, Goal, This), TGoal0),
+		'$lgt_tr_ctx_call'(Proxy, Goal, TGoal0, This)
 	;	var(Goal) ->
+		'$lgt_must_be'(var_or_object_identifier, Obj),
 		TGoal = '$lgt_call_within_context'(Obj, Goal, This)
-	;	TGoal = '$lgt_call_within_context_nv'(Obj, Goal, This)
+	;	'$lgt_must_be'(object_identifier, Obj),
+		'$lgt_must_be'(callable, Goal),
+		TGoal = '$lgt_call_within_context_nv'(Obj, Goal, This)
 	).
 
 
