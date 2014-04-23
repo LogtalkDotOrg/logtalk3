@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Lean Prolog 3.8.8 and later versions
-%  Last updated on April 17, 2014
+%  Last updated on April 23, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -841,17 +841,17 @@ use_module(_, _) :- fail.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- multifile('$logtalk#0.print_message_token'/5).
-:- dynamic('$logtalk#0.print_message_token'/5).
+:- multifile('$logtalk#0.print_message_token#4'/5).
+:- dynamic('$logtalk#0.print_message_token#4'/5).
 
 % nasty workaround for the lack of support for stream aliases in Lean Prolog
-'$logtalk#0.print_message_token'(user_output, Prefix, Token, Tokens, _) :-
+'$logtalk#0.print_message_token#4'(user_output, Prefix, Token, Tokens, _) :-
 	current_output(Stream),
 	'$lgt_lean_print_message_token'(Token, Tokens, Prefix, Stream).
-'$logtalk#0.print_message_token'(user_error, Prefix, Token, Tokens, _) :-
+'$logtalk#0.print_message_token#4'(user_error, Prefix, Token, Tokens, _) :-
 	current_output(Stream),
 	'$lgt_lean_print_message_token'(Token, Tokens, Prefix, Stream).
-'$logtalk#0.print_message_token'(Alias, Prefix, Token, Tokens, _) :-
+'$logtalk#0.print_message_token#4'(Alias, Prefix, Token, Tokens, _) :-
 	atom(Alias),
 	get_alias(Stream, Alias),
 	'$lgt_lean_print_message_token'(Token, Tokens, Prefix, Stream).

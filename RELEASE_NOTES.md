@@ -37,6 +37,9 @@ control construct using the standard `{Proxy}` syntax.
 * IMPROVED: Faster generation of entity identifiers when dynamically creating
 a large number of entities at runtime.
 
+* IMPROVED: Eliminate the (remote) possibility that a user defined entity
+predicate would clash with an internal entity bookkeeping predicate.
+
 Tools
 -----
 
