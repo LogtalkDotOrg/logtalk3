@@ -40,6 +40,14 @@ a large number of entities at runtime.
 * IMPROVED: Eliminate the (remote) possibility that a user defined entity
 predicate would clash with an internal entity bookkeeping predicate.
 
+Documentation
+-------------
+
+* IMPROVED: User Manual sections on calling user-defined Prolog predicates from
+within objects and categories and on the closed-world assumption semantics used
+by the `::/1-2` and `^^/2` control constructs when a predicate is declared but
+not defined.
+
 Tools
 -----
 

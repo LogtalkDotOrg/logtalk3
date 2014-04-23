@@ -39,7 +39,7 @@
 <pre>Object::Message
 {Proxy}::Message</pre>
 <p>
-Sends a message to an object. The message argument must match a public predicate of the receiver object. When the message corresponds to a protected or private predicate, the call is only valid if the <em>sender</em> matches the predicate <em>scope container</em>.
+Sends a message to an object. The message argument must match a public predicate of the receiver object. When the message corresponds to a protected or private predicate, the call is only valid if the <em>sender</em> matches the predicate <em>scope container</em>. When the predicate is declared but not defined, the message simply fails (as per the closed-world assumption).
 </p>
 <p>
 The <code>{Proxy}::Message</code> syntax allows simplified access to parametric object <em>proxies</em>. Its operational semantics is equivalent to the goal conjunction <code>(call(Proxy), Proxy::Message)</code>. I.e. <code>Proxy</code> is proved within the context of the pseudo-object <code>user</code> and, if successful, the goal term is used as a parametric object identifier. Exceptions thrown when proving <code>Proxy</code> are handled by the <code>::/2</code> control construct. This syntax construct supports backtracking over the <code>{Proxy}</code> goal.
@@ -92,7 +92,7 @@ yes</pre>
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: April 21, 2014</span>
+		<span>Last updated on: April 23, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="../index.html#constructs">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="send_to_self_1.html">next</a></span><br/>
