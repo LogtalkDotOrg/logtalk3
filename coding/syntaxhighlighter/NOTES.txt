@@ -19,11 +19,11 @@ These support files are dual-licensed under the GNU General Public License 3
 and the SyntaxHighlighter license.
 
 In order to check if your SyntaxHighlighter distribution already includes 
-support for Logtalk, look for a file named "shBrushLogtalk.js" in the
-"scripts" folder. If support for Logtalk is not included or if it is
-outdated, copy the file "shBrushLogtalk.js" to the "scripts" folder.
+support for Logtalk, look for a file named `shBrushLogtalk.js` in the
+`scripts` folder. If support for Logtalk is not included or if it is
+outdated, copy the file `shBrushLogtalk.js` to the `scripts` folder.
 
-The file "source.html" is a test file based on the "../tests/source.lgt"
+The file `source.html` is a test file based on the `../tests/source.lgt`
 file. In order to use this test file, copy the referenced SyntaxHighlighter
-files ("shCore.js", "shCore.css", and "shThemeEclipse.css") to the same
+files (`shCore.js`, `shCore.css`, and `shThemeEclipse.css`) to the same
 directory and open it in your favorite web browser.

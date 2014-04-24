@@ -20,15 +20,15 @@ website:
 These support files are dual-licensed under the GNU General Public
 License 3 and the GtkSourceView 2.x license.
 
-To install, copy the file "logtalk.lang" to the following system-wide
+To install, copy the file `logtalk.lang` to the following system-wide
 directory:
 
 	${prefix}/share/gtksourceview-2.0/language-specs/
 
-The ${prefix} can be e.g. "/usr", "/usr/local", or "/opt", depending 
+The ${prefix} can be e.g. `/usr`, `/usr/local`, or `/opt`, depending 
 on your system configuration.
 
-Alternatively, you can copy the "logtalk.lang" file to the following 
+Alternatively, you can copy the `logtalk.lang` file to the following 
 location on your home directory:
 
 	~./gnome2/gtksourceview-2.0/language-specs/

@@ -16,12 +16,12 @@ GeSHi 1.0.8.6 or later versions:
 These support files are dual-licensed under the GNU General Public
 License 3 and the GeSHi license.
 
-To install, copy the file "logtalk.php" to the GeSHi languages folder.
+To install, copy the file `logtalk.php` to the GeSHi languages folder.
 
-The file "source.php" is a test file. After copying it to your web
+The file `source.php` is a test file. After copying it to your web
 server documents folder, open the following URL with a web browser:
 
 	http://127.0.0.1/source.php
 
-The file assumes that GeSHi is installed in "/usr/share/php-geshi/".
+The file assumes that GeSHi is installed in `/usr/share/php-geshi/`.
 Edit the file (line 2) if GeSHi is installed elsewhere.

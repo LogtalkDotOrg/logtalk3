@@ -21,23 +21,23 @@ Recent versions of Vim already contain support for Logtalk. However,
 this directory may contain updated support files. If that is the case,
 install the Logtalk support files by performing the following steps:
 
-1. Copy the file "syntax/logtalk.vim" to the "syntax" sub-directory in 
+1. Copy the file `syntax/logtalk.vim` to the `syntax` sub-directory in 
 your VIM installation directory (replacing any existing older file).
 
-2. Add the following entries to the "filetype.vim" configuration file 
+2. Add the following entries to the `filetype.vim` configuration file 
 (only if not already present):
 
-" Logtalk source files
-au BufNewFile,BufRead *.lgt                     setf logtalk
-au BufNewFile,BufRead *.logtalk                 setf logtalk
+	" Logtalk source files
+	au BufNewFile,BufRead *.lgt                     setf logtalk
+	au BufNewFile,BufRead *.logtalk                 setf logtalk
 
-3. Copy the file "indent/logtalk.vim" to the "indent" sub-directory in 
+3. Copy the file `indent/logtalk.vim` to the `indent` sub-directory in 
 your VIM installation directory (replacing any existing older file).
 
-4. Copy the files "completion/logtalk.dict" and "ftplugin/logtalk.vim" 
-to the "ftplugin" sub-directory in your Vim installation directory 
+4. Copy the files `completion/logtalk.dict` and `ftplugin/logtalk.vim` 
+to the `ftplugin` sub-directory in your Vim installation directory 
 (replacing any existing files; current Vim versions are distributed
-with a "ftplugin/logtalk.vim" that comments out some of the necessary
+with a `ftplugin/logtalk.vim` that comments out some of the necessary
 settings despite their local scope!).
 
 5. Add the following lines to your ~/.vimrc file:
@@ -49,6 +49,6 @@ settings despite their local scope!).
 You may then perform code completion by typing CTRL-X, CTRL-K and then 
 CTRL-P or CTRL-N to cycle between all the completion choices.
 
-6. Check the "coding/ctags" in the Logtalk installation directory for
+6. Check the `coding/ctags` in the Logtalk installation directory for
 instructions on how to enable a source code browser for Logtalk source
 files using the Vim plugin Taglist.
