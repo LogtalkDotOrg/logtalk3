@@ -40,6 +40,9 @@ a large number of entities at runtime.
 * IMPROVED: Eliminate the (remote) possibility that a user defined entity
 predicate would clash with an internal entity bookkeeping predicate.
 
+* FIXED: Compilation in debug mode of calls to meta-predicates specified in
+`uses/2` directives.
+
 Documentation
 -------------
 

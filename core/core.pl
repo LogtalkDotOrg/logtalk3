@@ -4603,14 +4603,14 @@ current_logtalk_flag(Flag, Value) :-
 	'$logtalk#0.debug_handler#2'(Event, ExCtx, _).
 
 '$lgt_debug'(top_goal(_, TGoal), _) :-
-	!,
 	call(TGoal).
 
 '$lgt_debug'(goal(_, TGoal), _) :-
-	!,
 	call(TGoal).
 
-'$lgt_debug'(_, _).
+'$lgt_debug'(fact(_, _, _), _).
+
+'$lgt_debug'(rule(_, _, _), _).
 
 
 
@@ -10439,10 +10439,11 @@ current_logtalk_flag(Flag, Value) :-
 	(	'$lgt_prolog_to_logtalk_meta_argument_specifiers'(MArgs, CMArgs),
 		'$lgt_tr_prolog_meta_arguments'(Args, CMArgs, Ctx, TArgs, DArgs) ->
 		TPred =.. [Functor| TArgs],
+		DGoal =.. [Functor| DArgs],
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		(	Type == control_construct ->
-			DPred =.. [Functor| DArgs]
-		;	DPred = '$lgt_debug'(goal(Alias, Pred), ExCtx)
+			DPred = DGoal
+		;	DPred = '$lgt_debug'(goal(Alias, DGoal), ExCtx)
 		)
 	;	% meta-predicate template is not usable
 		'$lgt_prolog_meta_predicate'(Pred, Meta, _),
@@ -10471,18 +10472,18 @@ current_logtalk_flag(Flag, Value) :-
 	(	'$lgt_prolog_to_logtalk_meta_argument_specifiers'(MArgs, CMArgs),
 		'$lgt_tr_prolog_meta_arguments'(Args, CMArgs, Ctx, TArgs, DArgs) ->
 		TGoal =.. [Functor| TArgs],
+		DGoal =.. [Functor| DArgs],
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		(	'$lgt_comp_ctx_mode'(Ctx, runtime) ->
 			TPred = TGoal,
 			(	Type == control_construct ->
-				DPred =.. [Functor| DArgs]
-			;	DPred = '$lgt_debug'(goal(Pred, TPred), ExCtx)
+				DPred = DGoal
+			;	DPred = '$lgt_debug'(goal(Pred, DGoal), ExCtx)
 			)
 		;	TPred = '$lgt_call_built_in'(Pred, TGoal, ExCtx),
 			(	Type == control_construct ->
-				DGoal =.. [Functor| DArgs],
 				DPred = '$lgt_call_built_in'(Pred, DGoal, ExCtx)
-			;	DPred = '$lgt_debug'(goal(Pred, TPred), ExCtx)
+			;	DPred = '$lgt_debug'(goal(Pred, DGoal), ExCtx)
 			)
 		)
 	;	% meta-predicate template is not usable
