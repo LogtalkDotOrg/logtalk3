@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for LPA WinProlog 4.00
-%  Last updated on April 17, 2014
+%  Last updated on April 23, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -672,8 +672,8 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%:- multifile('$logtalk#0.print_message_token'/5).
-%:- dynamic('$logtalk#0.print_message_token'/5).
+%:- multifile('$logtalk#0.print_message_token#4'/5).
+%:- dynamic('$logtalk#0.print_message_token#4'/5).
 
 
 

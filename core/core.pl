@@ -225,12 +225,12 @@
 
 % debugging hook predicates
 
-:- multifile('$logtalk#0.trace_event'/3).
-:- dynamic('$logtalk#0.trace_event'/3).
+:- multifile('$logtalk#0.trace_event#2'/3).
+:- dynamic('$logtalk#0.trace_event#2'/3).
 
-:- multifile('$logtalk#0.debug_handler_provider'/2).
+:- multifile('$logtalk#0.debug_handler_provider#1'/2).
 
-:- multifile('$logtalk#0.debug_handler'/3).
+:- multifile('$logtalk#0.debug_handler#2'/3).
 
 
 % internal initialization flag
@@ -3007,7 +3007,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	% no definition lookup entry exists; construct and assert a dynamic one
 		functor(Head, Functor, Arity),
 		functor(GHead, Functor, Arity),
-		'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
+		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		functor(THead, TFunctor, TArity),
 		'$lgt_unify_head_thead_arguments'(GHead, THead, ExCtx),
 		DDefClause =.. [DDef, GHead, ExCtx, THead],
@@ -4605,13 +4605,13 @@ current_logtalk_flag(Flag, Value) :-
 % we can have multiple trace event handlers but only one debug handler
 
 '$lgt_debug'(Event, ExCtx) :-
-	'$logtalk#0.trace_event'(Event, ExCtx, _),
+	'$logtalk#0.trace_event#2'(Event, ExCtx, _),
 	fail.
 
 '$lgt_debug'(Event, ExCtx) :-
-	'$logtalk#0.debug_handler_provider'(_, _),
+	'$logtalk#0.debug_handler_provider#1'(_, _),
 	!,
-	'$logtalk#0.debug_handler'(Event, ExCtx, _).
+	'$logtalk#0.debug_handler#2'(Event, ExCtx, _).
 
 '$lgt_debug'(top_goal(_, TGoal), _) :-
 	!,
@@ -4643,8 +4643,8 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_print_message'(Kind, Component, Term) :-
 	(	'$lgt_default_entities_loaded_' ->
 		% "logtalk" built-in object loaded
-		'$logtalk#0.execution_context'(ExCtx, logtalk, logtalk, logtalk, [], [], _),
-		'$logtalk#0.print_message'(Kind, Component, Term, ExCtx)
+		'$logtalk#0.execution_context#6'(ExCtx, logtalk, logtalk, logtalk, [], [], _),
+		'$logtalk#0.print_message#3'(Kind, Component, Term, ExCtx)
 	;	% still compiling the default built-in entities or
 		% something wrong happened when loading those entities
 		'$lgt_compiler_flag'(report, off) ->
@@ -7338,7 +7338,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	Entity == user ->
 		assertz('$lgt_pp_directive_'(dynamic(Functor/Arity)))
 	;	'$lgt_entity_to_prefix'(Entity, Prefix),
-		'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
+		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(dynamic(TFunctor/TArity)))
 	).
 
@@ -7349,7 +7349,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	Entity == user ->
 		assertz('$lgt_pp_directive_'(dynamic(Functor/ExtArity)))
 	;	'$lgt_entity_to_prefix'(Entity, Prefix),
-		'$lgt_construct_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
+		'$lgt_compile_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(dynamic(TFunctor/TArity)))
 	).
 
@@ -7418,7 +7418,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	Entity == user ->
 		assertz('$lgt_pp_directive_'(discontiguous(Functor/Arity)))
 	;	'$lgt_entity_to_prefix'(Entity, Prefix),
-		'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
+		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(discontiguous(TFunctor/TArity)))
 	).
 
@@ -7429,7 +7429,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	Entity == user ->
 		assertz('$lgt_pp_directive_'(discontiguous(Functor/ExtArity)))
 	;	'$lgt_entity_to_prefix'(Entity, Prefix),
-		'$lgt_construct_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
+		'$lgt_compile_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(discontiguous(TFunctor/TArity)))
 	).
 
@@ -7603,7 +7603,7 @@ current_logtalk_flag(Flag, Value) :-
 		functor(Template, Functor, Arity),
 		'$lgt_check_for_public_multifile_declaration'(QEntity, Template) ->
 		'$lgt_entity_to_prefix'(QEntity, Prefix),
-		'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
+		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity)))
 	;	throw(permission_error(modify, predicate_declaration, Pred))
 	).
@@ -7618,7 +7618,7 @@ current_logtalk_flag(Flag, Value) :-
 		functor(Template, Functor, ExtArity),
 		'$lgt_check_for_public_multifile_declaration'(QEntity, Template) ->
 		'$lgt_entity_to_prefix'(QEntity, Prefix),
-		'$lgt_construct_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
+		'$lgt_compile_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity)))
 	;	throw(permission_error(modify, non_terminal_declaration, NonTerminal))
 	).
@@ -7648,7 +7648,7 @@ current_logtalk_flag(Flag, Value) :-
 	functor(Head, Functor, Arity),
 	assertz('$lgt_pp_multifile_'(Head, Lines)),
 	'$lgt_pp_entity_'(_, _, Prefix, _, _),
-	'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
+	'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity))).
 
 '$lgt_tr_multifile_directive_resource'(NonTerminal) :-
@@ -7658,7 +7658,7 @@ current_logtalk_flag(Flag, Value) :-
 	functor(Head, Functor, ExtArity),
 	assertz('$lgt_pp_multifile_'(Head, Lines)),
 	'$lgt_pp_entity_'(_, _, Prefix, _, _),
-	'$lgt_construct_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
+	'$lgt_compile_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
 	assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity))).
 
 '$lgt_tr_multifile_directive_resource'(Resource) :-
@@ -7701,10 +7701,10 @@ current_logtalk_flag(Flag, Value) :-
 	Head =.. [_| Args],
 	DHead =.. [_| Args],
 	'$lgt_pp_entity_'(_, Entity, Prefix, _, _),
-	'$lgt_construct_predicate_indicator'(Prefix, CFunctor/Arity, TCFunctor/TCArity),
+	'$lgt_compile_predicate_indicator'(Prefix, CFunctor/Arity, TCFunctor/TCArity),
 	functor(TCHead, TCFunctor, TCArity),
 	'$lgt_unify_head_thead_arguments'(Head, TCHead),
-	'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
+	'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	functor(THead, TFunctor, TArity),
 	'$lgt_unify_head_thead_arguments'(Head, THead),
 	assertz('$lgt_pp_coinductive_'(Head, TestHead, TCHead, THead, DHead)),
@@ -8801,7 +8801,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_head'(logtalk::debug_handler_provider(_), _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-	'$logtalk#0.debug_handler_provider'(Provider, _),
+	'$logtalk#0.debug_handler_provider#1'(Provider, _),
 	'$lgt_warning_context'(Path, Lines, Type, Entity),
 	'$lgt_print_message'(warning(general), core, debug_handler_provider_already_exists(Path, Lines, Type, Entity, Provider)),
 	fail.
@@ -8811,7 +8811,7 @@ current_logtalk_flag(Flag, Value) :-
 	functor(Head, Functor, Arity),
 	'$lgt_qualify_entity_identifier'(Other, QOther),
 	'$lgt_entity_to_prefix'(QOther, Prefix),
-	'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
+	'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	(	'$lgt_pp_directive_'(multifile(TFunctor/TArity)) ->
 		true
 	;	throw(existence_error(directive, multifile(QOther::Functor/Arity)))
@@ -10601,7 +10601,7 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, Prefix, _, _, ExCtx, Mode, _),
 	functor(Pred, Functor, Arity),
-	'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
+	'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	(	functor(Head, Functor, Arity) ->
 		% recursive call
 		STFunctor = TFunctor
@@ -10615,7 +10615,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, Prefix, _, _, ExCtx, Mode, _),
 	functor(Pred, Functor, Arity),
-	'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
+	'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	functor(TPred, TFunctor, TArity),
 	'$lgt_unify_head_thead_arguments'(Pred, TPred, ExCtx),
 	'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head).
@@ -11189,7 +11189,7 @@ current_logtalk_flag(Flag, Value) :-
 	% not compiled in debug mode
 	'$lgt_compiler_flag'(debug, off),
 	% compile the fact
-	'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
+	'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	functor(TPred, TFunctor, TArity),
 	'$lgt_unify_head_thead_arguments'(Head, TPred).
 
@@ -11800,22 +11800,19 @@ current_logtalk_flag(Flag, Value) :-
 %
 % translates context switching calls
 
-% convenient access to parametric object proxies
-
-'$lgt_tr_ctx_call'(Obj, Goal, ('$lgt_call_proxy'(Proxy, Goal, This), TGoal), This) :-
-	nonvar(Obj),
-	Obj = {Proxy},
-	!,
-	'$lgt_tr_ctx_call'(Proxy, Goal, TGoal, This).
-
 '$lgt_tr_ctx_call'(Obj, Goal, TGoal, This) :-
-	'$lgt_must_be'(var_or_object_identifier, Obj),
-	'$lgt_must_be'(var_or_callable, Goal),
 	(	var(Obj) ->
+		'$lgt_must_be'(var_or_callable, Goal),
 		TGoal = '$lgt_call_within_context'(Obj, Goal, This)
+	;	Obj = {Proxy} ->
+		TGoal = ('$lgt_call_proxy'(Proxy, Goal, This), TGoal0),
+		'$lgt_tr_ctx_call'(Proxy, Goal, TGoal0, This)
 	;	var(Goal) ->
+		'$lgt_must_be'(var_or_object_identifier, Obj),
 		TGoal = '$lgt_call_within_context'(Obj, Goal, This)
-	;	TGoal = '$lgt_call_within_context_nv'(Obj, Goal, This)
+	;	'$lgt_must_be'(object_identifier, Obj),
+		'$lgt_must_be'(callable, Goal),
+		TGoal = '$lgt_call_within_context_nv'(Obj, Goal, This)
 	).
 
 
@@ -12903,7 +12900,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_add_def_clause'(Head, Functor, Arity, THead, Ctx) :-
 	functor(HeadTemplate, Functor, Arity),
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, Prefix, _, _, ExCtx, Mode, _),
-	'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
+	'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	functor(THeadTemplate, TFunctor, TArity),
 	'$lgt_unify_head_thead_arguments'(HeadTemplate, THeadTemplate, ExCtxTemplate),
 	(	'$lgt_pp_object_'(_, _, _, Def, _, _, _, _, _, _, _) ->
@@ -12928,7 +12925,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_add_ddef_clause'(Head, Functor, Arity, THead, Ctx) :-
 	functor(HeadTemplate, Functor, Arity),
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, Prefix, _, _, ExCtx, Mode, _),
-	'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
+	'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	functor(THeadTemplate, TFunctor, TArity),
 	'$lgt_unify_head_thead_arguments'(HeadTemplate, THeadTemplate, ExCtxTemplate),
 	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, DDef, _, _),
@@ -13176,7 +13173,7 @@ current_logtalk_flag(Flag, Value) :-
 	assertz('$lgt_pp_directive_'(dynamic(DDef/3))),
 	'$lgt_pp_dynamic_'(Head),
 		functor(Head, Functor, Arity),
-		'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
+		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(dynamic(TFunctor/TArity))),
 	fail.
 
@@ -13187,7 +13184,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_gen_object_discontiguous_directives' :-
 	'$lgt_pp_object_'(_, Prefix, _, _, _, _, _, _, _, _, _),
 	'$lgt_pp_discontiguous_'(Functor, Arity),
-		'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
+		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(discontiguous(TFunctor/TArity))),
 	fail.
 
@@ -13211,7 +13208,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_gen_category_discontiguous_directives' :-
 	'$lgt_pp_category_'(_, Prefix, _, _, _, _),
 	'$lgt_pp_discontiguous_'(Functor, Arity),
-		'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
+		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(discontiguous(TFunctor/TArity))),
 	fail.
 
@@ -15542,7 +15539,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_predicate_heads_aux'(Head, Prefix, THead, Ctx) :-
 	'$lgt_must_be'(callable, Head),
 	functor(Head, Functor, Arity),
-	'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
+	'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	functor(THead, TFunctor, TArity),
 	'$lgt_unify_head_thead_arguments'(Head, THead, Ctx).
 
@@ -15586,10 +15583,7 @@ current_logtalk_flag(Flag, Value) :-
 		)
 	;	true
 	),
-	atom_concat(Prefix, Functor, TFunctor),
-	% subtract execution context argument
-	Arity is TArity - 1,
-	Arity >= 0,
+	'$lgt_decompile_predicate_indicator'(Prefix, TFunctor/TArity, Functor/Arity),
 	functor(Head, Functor, Arity),
 	'$lgt_unify_head_thead_arguments'(Head, THead),
 	!.
@@ -15630,22 +15624,45 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_predicate_indicators_aux'(PI, Prefix, TFunctor/TArity) :-
 	(	'$lgt_valid_predicate_indicator'(PI, Functor, Arity) ->
-		'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity)
+		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity)
 	;	'$lgt_valid_non_terminal_indicator'(PI, Functor, _, ExtArity) ->
-		'$lgt_construct_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity)
+		'$lgt_compile_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity)
 	;	throw(type_error(predicate_indicator, PI))
 	).
 
 
 
-% '$lgt_construct_predicate_indicator'(+atom, +predicate_indicator, -predicate_indicator)
+% '$lgt_compile_predicate_indicator'(+atom, +predicate_indicator, -predicate_indicator)
 %
-% constructs the predicate indicator used for a compiled predicate
+% compiles the user predicate indicator using the encoding entity prefix + functor + # + arity
 
-'$lgt_construct_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity) :-
-	atom_concat(Prefix, Functor, TFunctor),
+'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity) :-
+	atom_concat(Prefix, Functor, TFunctor0),
+	atom_concat(TFunctor0, '#', TFunctor1),
+	number_codes(Arity, ArityCodes),
+	atom_codes(ArityAtom, ArityCodes),
+	atom_concat(TFunctor1, ArityAtom, TFunctor),
 	% add execution context argument
 	TArity is Arity + 1.
+
+
+
+% '$lgt_decompile_predicate_indicator'(+atom, +predicate_indicator, -predicate_indicator)
+%
+% decompiles an internal predicate indicator used for a user predicate
+
+'$lgt_decompile_predicate_indicator'(Prefix, TFunctor/TArity, Functor/Arity) :-
+	atom_concat(Prefix, Predicate, TFunctor),
+	% locate the rightmost #
+	sub_atom(Predicate, Before, 1, _, '#'),
+	Position is Before + 1,
+	sub_atom(Predicate, Position, _, 0, Rest),
+	\+ sub_atom(Rest, _, 1, _, '#'),
+	sub_atom(Predicate, 0, Before, _, Functor),	
+	% subtract execution context argument
+	Arity is TArity - 1,
+	Arity >= 0,
+	!.
 
 
 
@@ -15685,10 +15702,7 @@ current_logtalk_flag(Flag, Value) :-
 		)
 	;	true
 	),
-	atom_concat(Prefix, Functor, TFunctor),
-	% subtract execution context argument
-	Arity is TArity - 1,
-	Arity >= 0,
+	'$lgt_decompile_predicate_indicator'(Prefix, TFunctor/TArity, Functor/Arity),
 	!.
 
 
@@ -16002,15 +16016,15 @@ current_logtalk_flag(Flag, Value) :-
 % in the "logtalk" built-in object
 
 '$lgt_execution_context'(ExCtx, Sender, OldThis, Self, MetaCallCtx, Stack) :-
-	'$logtalk#0.execution_context'(ExCtx, Sender, OldThis, Self, MetaCallCtx, Stack, _).
+	'$logtalk#0.execution_context#6'(ExCtx, Sender, OldThis, Self, MetaCallCtx, Stack, _).
 
 % inheritance only requires updating "this"
 '$lgt_execution_context_update_this'(OldExCtx, OldThis, NewExCtx, NewThis) :-
-	'$logtalk#0.execution_context_this_rest'(OldExCtx, OldThis, Rest, _),
-	'$logtalk#0.execution_context_this_rest'(NewExCtx, NewThis, Rest, _).
+	'$logtalk#0.execution_context_this_rest#3'(OldExCtx, OldThis, Rest, _),
+	'$logtalk#0.execution_context_this_rest#3'(NewExCtx, NewThis, Rest, _).
 
 '$lgt_execution_context_this'(ExCtx, This) :-
-	'$logtalk#0.execution_context_this_rest'(ExCtx, This, _, _).
+	'$logtalk#0.execution_context_this_rest#3'(ExCtx, This, _, _).
 
 
 

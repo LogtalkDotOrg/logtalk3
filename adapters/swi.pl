@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SWI Prolog 6.0.0 and later versions
-%  Last updated on April 17, 2014
+%  Last updated on April 23, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -814,12 +814,12 @@ user:goal_expansion(phrase(Rule, Input, Rest), user:'$lgt_phrase'(Rule, Input, R
 	nonvar(Rule),
 	functor(Rule, '::', 2),
 	!,
-	'$logtalk#0.execution_context'(ExCtx, user, user, user, [], [], _).
+	'$logtalk#0.execution_context#6'(ExCtx, user, user, user, [], [], _).
 user:goal_expansion(phrase(Rule, Input), user:'$lgt_phrase'(Rule, Input, ExCtx)) :-
 	nonvar(Rule),
 	functor(Rule, '::', 2),
 	!,
-	'$logtalk#0.execution_context'(ExCtx, user, user, user, [], [], _).
+	'$logtalk#0.execution_context#6'(ExCtx, user, user, user, [], [], _).
 
 user:goal_expansion('::'(Object, Message), user:Goal) :-
 	prolog_load_context(module, Module),
@@ -965,17 +965,17 @@ user:goal_expansion('::'(Object, Message), user:Goal) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- multifile('$logtalk#0.print_message_token'/5).
-:- dynamic('$logtalk#0.print_message_token'/5).
+:- multifile('$logtalk#0.print_message_token#4'/5).
+:- dynamic('$logtalk#0.print_message_token#4'/5).
 
-'$logtalk#0.print_message_token'(Stream, _, ansi(Attributes, Format, Arguments), _, _) :-
+'$logtalk#0.print_message_token#4'(Stream, _, ansi(Attributes, Format, Arguments), _, _) :-
 	prolog:message_line_element(Stream, ansi(Attributes, Format, Arguments)).
 
-'$logtalk#0.print_message_token'(Stream, _, begin(Kind0, Var), _, _) :-
+'$logtalk#0.print_message_token#4'(Stream, _, begin(Kind0, Var), _, _) :-
 	'$lgt_swi_convert_message_kind'(Kind0, Kind),
 	prolog:message_line_element(Stream, begin(Kind, Var)).
 
-'$logtalk#0.print_message_token'(Stream, _, end(Var), _, _) :-
+'$logtalk#0.print_message_token#4'(Stream, _, end(Var), _, _) :-
 	prolog:message_line_element(Stream, end(Var)).
 
 

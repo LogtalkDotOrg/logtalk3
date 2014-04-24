@@ -41,7 +41,7 @@
 Calls an imported or inherited predicate definition. The call fails if the predicate is declared but there is no imported and no inherited predicate definition. This control construct may be used within objects or categories in the body of a predicate definition. When used within a category, the predicate definition lookup is restricted to the extended categories.
 </p>
 <p>
-The called predicate should be declared public or protected. It may also be declared private if within the scope of the entity where the method making the call is defined.
+The called predicate should be declared public or protected. It may also be declared private if within the scope of the entity where the method making the call is defined. When the predicate is declared but not defined, the message simply fails (as per the closed-world assumption).
 </p>
 <p>
 This control construct is a generalization of the Smalltalk <em>super</em> keyword to take into account Logtalk support for prototypes and categories besides classes. The lookup for the predicate definition starts at the imported categories, if any. If an imported predicate definition is not found, the lookup proceeds to the ancestor objects.
@@ -76,7 +76,7 @@ The lookups for the predicate declaration and the predicate definition are perfo
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: March 27, 2014</span>
+		<span>Last updated on: April 23, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="send_to_self_1.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="../index.html#constructs">next</a></span><br/>

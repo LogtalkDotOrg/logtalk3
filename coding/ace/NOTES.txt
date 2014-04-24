@@ -1,0 +1,24 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the `LICENSE.txt` file for details.
+________________________________________________________________________
+
+
+Ace is an embeddable code editor written in JavaScript available from:
+
+	http://ace.c9.io/
+
+In order to use Ace for editing Logtalk source files, copy the files
+`logtalk.js` and `logtalk_highlight_rules.js` to the `lib/ace/mode`
+sub-directory of your Ace installation directory.
+
+The supporting files are work in progress and were obtained by first
+automatically converting the `Logtalk.tmLanguage` TextMate file using
+Ace's TMLanguage Tool and fixing some of the resulting conversion issues.
+
+The `logtalk.js` and `logtalk_highlight_rules.js` are licensed under the
+BSD license as other Ace mode files.

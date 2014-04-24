@@ -37,6 +37,17 @@ control construct using the standard `{Proxy}` syntax.
 * IMPROVED: Faster generation of entity identifiers when dynamically creating
 a large number of entities at runtime.
 
+* IMPROVED: Eliminate the (remote) possibility that a user defined entity
+predicate would clash with an internal entity bookkeeping predicate.
+
+Documentation
+-------------
+
+* IMPROVED: User Manual sections on calling user-defined Prolog predicates from
+within objects and categories and on the closed-world assumption semantics used
+by the `::/1-2` and `^^/2` control constructs when a predicate is declared but
+not defined.
+
 Tools
 -----
 
@@ -51,6 +62,18 @@ Tests
 -----
 
 * ADDED: Unit tests for testing the `{Proxy}<<Goal` syntax support.
+
+Examples
+--------
+
+* IMPROVED: Extended the `complements` example to better illustrate the
+functionality of complementing categories when using different settings
+for the `complements` flag.
+
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* ADDED: Support for the JavaScript-based Ace embeddable code editor.
 
 
 3.00.0 Beta 2 - April 21, 2014

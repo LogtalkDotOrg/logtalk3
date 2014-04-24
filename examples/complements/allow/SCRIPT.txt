@@ -8,9 +8,31 @@ terms per section 7).        Consult the `LICENSE.txt` file for details.
 ________________________________________________________________________
 
 
-% start by loading the example:
+% start by loading the non-patched object "employee":
 
-| ?- logtalk_load(complements(loader)).
+| ?- logtalk_load(complements_allow(employee)).
+...
+
+
+%  ask "employee" its name:
+
+| ?- employee::name(Name).
+
+Name = john
+yes
+
+
+% check the protocol of the object "employee":
+
+| ?- findall(Predicate, employee::current_predicate(Predicate), Predicates).
+
+Predicates = [age/1, name/1, salary/1]
+yes
+
+
+% now load the "add_on" complementing category:
+
+| ?- logtalk_load(complements_allow(add_on)).
 ...
 
 
@@ -22,14 +44,6 @@ Object = employee.
 yes 
 
 
-% turn event support on for messages sent at the command-line
-% (i.e. for messages sent from the pseudo-object "user"):
-
-| ?- set_logtalk_flag(events, allow).
-
-yes
-
-
 % use the event handler defined in the "add_on" category for the object "employee":
 
 | ?- employee::name(Name).
@@ -39,7 +53,7 @@ Name = john
 yes
 
 
-% check the protocol of the object "employee":
+% check the new protocol of the object "employee":
 
 | ?- employee::predicates(Predicates).
 Received message predicates(_G180) from user
@@ -49,23 +63,25 @@ yes
 
 | ?- employee::predicate_property(predicates(_), Property).
 
-Property = public ;
+Property = logtalk ;
+Property = scope(public) ;
+Property = (public) ;
 Property = static ;
 Property = declared_in(add_on) ;
-Property = defined_in(add_on)
+Property = declared_in(add_on, 29) ;
+Property = defined_in(add_on) ;
+Property = defined_in(add_on, 31) ;
+Property = number_of_clauses(1)
 yes
 
 | ?- employee::predicate_property(income(_), Property).
 
-Property = public ;
+Property = logtalk ;
+Property = scope(public) ;
+Property = (public) ;
 Property = static ;
 Property = declared_in(employee) ;
-Property = alias_of(salary(_70)) ;
-Property = defined_in(employee)
-
-
-% turn event support off:
-
-| ?- set_logtalk_flag(events, deny).
-
+Property = alias_of(salary(_G3724)) ;
+Property = defined_in(employee) ;
+Property = number_of_clauses(0)
 yes

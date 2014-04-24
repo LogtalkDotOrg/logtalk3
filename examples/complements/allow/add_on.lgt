@@ -9,34 +9,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% setup the object employee as a monitor for any message sent to itself:
+% setup the object "employee" as a monitor for any message sent to itself:
 
-:- initialization(define_events(before, employee, _, _, employee)).
-
-
-% define an innocent "employee" object, which is about to be complemented:
-
-:- object(employee).
-
-	% we can ensure that an object is compiled by allowing complementing
-	% categories by writing:
-	:- set_logtalk_flag(complements, allow).
-
-	:- public([
-		name/1, age/1, salary/1
-	]).
-
-	name(john).
-	age(42).
-	salary(23500).
-
-:- end_object.
+:- initialization((
+	define_events(before, employee, _, _, employee),
+	set_logtalk_flag(events, allow)
+)).
 
 
 % define a category that adds new functionality to the "employee" object:
 
 :- category(add_on,
-	implements(monitoring),		% built-in protocol for event handler methods
+	implements(monitoring),		% built-in protocol for the event handler methods
 	complements(employee)).		% add the category predicates to the employee object
 
 	% define a "before" event handler for the complemented object:
