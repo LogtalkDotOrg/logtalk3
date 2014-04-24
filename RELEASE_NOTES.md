@@ -78,6 +78,9 @@ IDEs, text editors, and syntax highlighters support
 
 * ADDED: Support for the JavaScript-based Ace embeddable code editor.
 
+* ADDED: Support for the JavaScript-based Google Code Prettify syntax
+highlighter.
+
 
 3.00.0 Beta 2 - April 21, 2014
 ==============================

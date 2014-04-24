@@ -1,0 +1,22 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the `LICENSE.txt` file for details.
+________________________________________________________________________
+
+
+This directory contains files that provide support for using Google Code
+Prettify:
+
+	https://code.google.com/p/google-code-prettify/
+
+In order to check if your Google Code Prettify distribution already includes 
+support for Logtalk, look for a file named `lang-logtalk.js` in the `src`
+directory. If support for Logtalk is not included or if it is outdated, copy
+the provided `lang-logtalk.js` file to the `src` folder.
+
+The `lang-logtalk.js` file is licensed under the Apache License, Version 2.0,
+as other Google Code Prettify language mode files.
