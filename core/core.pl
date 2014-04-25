@@ -5245,8 +5245,10 @@ current_logtalk_flag(Flag, Value) :-
 		% not compiling a source file
 		true
 	;	'$lgt_pp_referenced_object_'(Obj, _) ->
+		% not the first reference to the object
 		true
-	;	'$lgt_current_line_numbers'(Lines),
+	;	% first reference to this object
+		'$lgt_current_line_numbers'(Lines),
 		(	atom(Obj) ->
 			assertz('$lgt_pp_referenced_object_'(Obj, Lines))
 		;	% parametric object
@@ -5267,8 +5269,10 @@ current_logtalk_flag(Flag, Value) :-
 		% not compiling a source file
 		true
 	;	'$lgt_pp_referenced_protocol_'(Ptc, _) ->
+		% not the first reference to the protocol
 		true
-	;	'$lgt_current_line_numbers'(Lines),
+	;	% first reference to this protocol
+		'$lgt_current_line_numbers'(Lines),
 		assertz('$lgt_pp_referenced_protocol_'(Ptc, Lines))
 	).
 
@@ -5284,8 +5288,10 @@ current_logtalk_flag(Flag, Value) :-
 		% not compiling a source file
 		true
 	;	'$lgt_pp_referenced_category_'(Ctg, _) ->
+		% not the first reference to the category
 		true
-	;	'$lgt_current_line_numbers'(Lines),
+	;	% first reference to this category
+		'$lgt_current_line_numbers'(Lines),
 		(	atom(Ctg) ->
 			assertz('$lgt_pp_referenced_category_'(Ctg, Lines))
 		;	% parametric category
@@ -5302,9 +5308,14 @@ current_logtalk_flag(Flag, Value) :-
 % we also save the line numbers for the first reference to the module
 
 '$lgt_add_referenced_module'(Module) :-
-	(	'$lgt_pp_referenced_module_'(Module, _) ->
+	(	\+ '$lgt_pp_file_data_'(_, _, _, _) ->
+		% not compiling a source file
 		true
-	;	'$lgt_current_line_numbers'(Lines),
+	;	'$lgt_pp_referenced_module_'(Module, _) ->
+		% not the first reference to the module
+		true
+	;	% first reference to this module
+		'$lgt_current_line_numbers'(Lines),
 		assertz('$lgt_pp_referenced_module_'(Module, Lines))
 	).
 
@@ -5319,10 +5330,13 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_add_referenced_object_message'(Obj, Pred, Head) :-
 	functor(Pred, PredFunctor, PredArity),
 	(	var(Head) ->
+		% not compiling a clause
 		true
 	;	\+ '$lgt_pp_defines_predicate_'(Head, _, _, compile(regular)) ->
+		% not compiling a source file user clause
 		true
 	;	'$lgt_pp_uses_predicate_'(Obj, PredFunctor/PredArity, _) ->
+		% not the first reference
 		true
 	;	functor(Head, HeadFunctor, HeadArity),
 		'$lgt_current_line_numbers'(Lines),
@@ -5338,8 +5352,10 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_add_referenced_object_message'(Obj, Pred, Alias, Head) :-
 	(	var(Head) ->
+		% not compiling a clause
 		true
 	;	\+ '$lgt_pp_defines_predicate_'(Head, _, _, compile(regular)) ->
+		% not compiling a source file user clause
 		true
 	;	functor(Pred, PredFunctor, PredArity),
 		functor(Head, HeadFunctor, HeadArity),
@@ -5367,10 +5383,13 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_add_referenced_module_predicate'(Module, Pred, Head) :-
 	functor(Pred, PredFunctor, PredArity),
 	(	var(Head) ->
+		% not compiling a clause
 		true
 	;	\+ '$lgt_pp_defines_predicate_'(Head, _, _, compile(regular)) ->
+		% not compiling a source file user clause
 		true
 	;	'$lgt_pp_use_module_predicate_'(Module, PredFunctor/PredArity, _) ->
+		% not the first reference
 		true
 	;	functor(Head, HeadFunctor, HeadArity),
 		'$lgt_current_line_numbers'(Lines),
@@ -5382,8 +5401,10 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_add_referenced_module_predicate'(Module, Pred, Alias, Head) :-
 	(	var(Head) ->
+		% not compiling a clause
 		true
 	;	\+ '$lgt_pp_defines_predicate_'(Head, _, _, compile(regular)) ->
+		% not compiling a source file user clause
 		true
 	;	functor(Pred, PredFunctor, PredArity),
 		functor(Alias, AliasFunctor, AliasArity),
@@ -11426,22 +11447,14 @@ current_logtalk_flag(Flag, Value) :-
 	var(Obj),
 	% translation performed at runtime
 	!,
-	(	'$lgt_pp_entity_'(_, _, _, _, _) ->
-		'$lgt_add_referenced_object_message'(Obj, Pred, Head)
-	;	% assume runtime translation
-		true
-	),
+	'$lgt_add_referenced_object_message'(Obj, Pred, Head),
 	(	Events == allow ->
 		TPred = '$lgt_send_to_obj'(Obj, Pred, This)
 	;	TPred = '$lgt_send_to_obj_ne'(Obj, Pred, This)
 	).
 
 '$lgt_tr_msg'(Pred, Obj, TPred, This, Head, Events) :-
-	(	'$lgt_pp_entity_'(_, _, _, _, _) ->
-		'$lgt_add_referenced_object_message'(Obj, Pred, Head)
-	;	% assume runtime translation
-		true
-	),
+	'$lgt_add_referenced_object_message'(Obj, Pred, Head),
 	(	Events == allow ->
 		(	'$lgt_compiler_flag'(optimize, on),
 			'$lgt_send_to_obj_static_binding'(Obj, Pred, This, Call) ->
