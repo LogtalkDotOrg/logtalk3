@@ -14,13 +14,13 @@ the UltraEdit text editor:
 
 	http://www.ultraedit.com/
 
-To install copy the file "logtalk.uew" to the user "wordfiles" folder.
+To install copy the file `logtalk.uew` to the user `wordfiles` folder.
 The default location of this folder depends on the operating-system:
 
 	MacOS X:	~/Library/Application Support/UltraEdit
 	Windows:	%appdata%\IDMComp\UltraEdit\wordfiles
 	Linux:		~/.idm/uex
 
-Make sure the "logtalk.uew" file uses DOS line terminators (CR/LF). You
+Make sure the `logtalk.uew` file uses DOS line terminators (CR/LF). You
 can use UltraEdit itself to convert the file to DOS line terminators if
 necessary.

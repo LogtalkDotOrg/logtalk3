@@ -17,15 +17,14 @@ version:
 
 Install the supporting files by performing the following steps:
 
-1.	Copy the file "Logtalk.syn" to the "Syntax" directory in your 
+1.	Copy the file `Logtalk.syn` to the `Syntax` directory in your 
 	SuperEdi installation directory (replacing any existing older file).
 
-2.	Copy the file "Logtalk.col" to the "Syntax" directory in your 
+2.	Copy the file `Logtalk.col` to the `Syntax` directory in your 
 	SuperEdi installation directory (replacing any existing older file).
 
 3.	Go to the Tools/Options dialog and create a new file type named 
-	"Logtalk". Set the file extensions to "lgt" and "logtalk" and the
-	syntax and color scheme to "Logtalk". Set the tab size to "4".
-
+	`Logtalk`. Set the file extensions to `lgt` and `logtalk` and the
+	syntax and color scheme to `Logtalk`. Set the tab size to `4`.
 
 THESE SYNTAX COLORING SUPPORT FILES ARE UNDER DEVELOPMENT.

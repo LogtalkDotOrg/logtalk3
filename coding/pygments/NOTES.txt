@@ -8,7 +8,7 @@ terms per section 7).        Consult the `LICENSE.txt` file for details.
 ________________________________________________________________________
 
 
-This directory contains the "logtalk.py" file that provides syntax 
+This directory contains the `logtalk.py` file that provides syntax 
 coloring support for Pygments (version 0.9 or later):
 
 	http://pygments.org/
@@ -23,7 +23,7 @@ for Logtalk, use the following command:
 	% pygmentize -H lexer logtalk
 
 If support for Logtalk is not included or if it is outdated, compile the 
-file "logtalk.py" into a "logtalk.pyc" byte code file and copy the two 
+file `logtalk.py` into a `logtalk.pyc` byte code file and copy the two 
 files into the folder:
 
 	site-packages/pygments/lexers/
@@ -34,20 +34,20 @@ Next, rebuild the lexer mappings by typing:
 
 Logtalk source files (including the library entities and the programming
 examples) are formatted using tabs (the recommended setting is a tab width
-equivalent to 4 spaces). This can be specified by using the "whitespace"
-filter option "tabsize":
+equivalent to 4 spaces). This can be specified by using the `whitespace`
+filter option `tabsize`:
 
 	$ pygmentize -F whitespace:tabs=True,tabsize=4 -O full,style=friendly -o source.html source.lgt
 
 When your source file uses an encoding other than ASCII or ISO-Latin-1, 
-you will need to use the "encoding" option. For example:
+you will need to use the `encoding` option. For example:
 
 	$ pygmentize -F whitespace:tabs=True,tabsize=4 -O encoding=utf8 -o babel.html babel.lgt
 
-As the Pygments syntax highlighting engine itself, the "logtalk.py" file 
+As the Pygments syntax highlighting engine itself, the `logtalk.py` file 
 is licensed under the BSD license.
 
-You may also use the Logtalk lexer with plain Prolog files by using the "-l" 
+You may also use the Logtalk lexer with plain Prolog files by using the `-l` 
 option. For example:
 
 	$ pygmentize -l logtalk -F whitespace:tabs=True,tabsize=4 -o source.html source.pl
