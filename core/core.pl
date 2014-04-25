@@ -3657,15 +3657,14 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_send_to_obj_rt'(+object_identifier, +callable, +object_identifier)
+% '$lgt_send_to_obj_rt'(+object_identifier, +callable, +object_identifier, +callable, +atom)
 %
-% runtime processing of a message sending call when both the receiver
-% object and the message are not known at compile time
+% runtime processing of a message sending call when the message and possibly the receiver
+% object are not known at compile time
 
 '$lgt_send_to_obj_rt'(Obj, Pred, Sender, Head, Events) :-
-	% we must ensure that the arguments are valid before translating the message
-	% sending goal otherwise there would be a potential for an endless loop
-	'$lgt_must_be'(object_identifier, Obj, logtalk(Obj::Pred, Sender)),
+	% we must ensure that the message is valid before translating the message
+	% sending goal otherwise there an endless loop would result
 	'$lgt_must_be'(callable, Pred, logtalk(Obj::Pred, Sender)),
 	catch('$lgt_tr_msg'(Pred, Obj, TPred, Sender, Head, Events), Error, throw(error(Error, logtalk(Obj::Pred, Sender)))),
 	call(TPred).
