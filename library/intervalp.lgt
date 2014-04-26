@@ -26,10 +26,17 @@
 :- protocol(intervalp).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2011/01/06,
+		date is 2014/04/26,
 		comment is 'Basic temporal interval relations protocol (based on James F. Allen Interval Algebra work).'
+	]).
+
+	:- public(new/3).
+	:- mode(new(@ground, @ground, -interval), zero_or_one).
+	:- info(new/3, [
+		comment is 'Constructs a new interval given start and end points. The start point must strictly precede the end point.',
+		argnames is ['Start', 'End', 'Interval']
 	]).
 
 	:- public(valid/1).

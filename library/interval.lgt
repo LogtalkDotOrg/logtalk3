@@ -27,49 +27,55 @@
 	implements(intervalp)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2011/01/06,
-		comment is 'Basic temporal interval relations. An interval is represented by a list with two ground terms, the start and end points.'
+		date is 2014/04/26,
+		comment is 'Basic temporal interval relations. An interval is represented by a compound term, i/2, with two ground arguments, the start and end points.'
 	]).
 
-	valid([Start, End]) :-
+	new(Start, End, Interval) :-
+		ground(Start),
+		ground(End),
+		Start @< End,
+		Interval = i(Start, End).
+
+	valid(i(Start, End)) :-
 		ground(Start),
 		ground(End),
 		Start @< End.
 
-	before([_, End1], [Start2, _]) :-
+	before(i(_, End1), i(Start2, _)) :-
 		End1 @< Start2.
 
 	after(Interval1, Interval2) :-
 		before(Interval2, Interval1).
 
-	meets([_, Point], [Point, _]).
+	meets(i(_, Point), i(Point, _)).
 
 	met_by(Interval1, Interval2) :-
 		meets(Interval2, Interval1).
 
-	overlaps([Start1, End1], [Start2, End2]) :-
+	overlaps(i(Start1, End1), i(Start2, End2)) :-
 		Start1 @< Start2,
 		End1 @< End2.
 
 	overlapped_by(Interval1, Interval2) :-
 		overlaps(Interval2, Interval1).
 
-	starts([Start, End1], [Start, End2]) :-
+	starts(i(Start, End1), i(Start, End2)) :-
 		End1 @< End2.
 
 	started_by(Interval1, Interval2) :-
 		starts(Interval2, Interval1).
 
-	during([Start1, End1], [Start2, End2]) :-
+	during(i(Start1, End1), i(Start2, End2)) :-
 		Start2 @< Start1,
 		End1 @< End2.
 
 	contains(Interval1, Interval2) :-
 		during(Interval2, Interval1).
 
-	finishes([Start1, End], [Start2, End]) :-
+	finishes(i(Start1, End), i(Start2, End)) :-
 		Start2 @< Start1.
 
 	finished_by(Interval1, Interval2) :-

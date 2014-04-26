@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>1.0</code>
+            <code>1.1</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2011/1/6</code>
+            <code>2014/4/26</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -42,6 +42,26 @@
     <div class="predicates">
       <div class="public">
         <h2>Public interface</h2>
+        <div class="section">
+          <h3 id="new/3" class="code">new/3</h3>
+          <blockquote>
+            <p class="comment">Constructs a new interval given start and end points. The start point must strictly precede the end point.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>new(Start,End,Interval)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>new(@ground,@ground,-interval) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
         <div class="section">
           <h3 id="valid/1" class="code">valid/1</h3>
           <blockquote>

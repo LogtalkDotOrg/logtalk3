@@ -51,6 +51,13 @@ within objects and categories and on the closed-world assumption semantics used
 by the `::/1-2` and `^^/2` control constructs when a predicate is declared but
 not defined.
 
+Library
+-------
+
+* IMPROVED: More efficient interval representation for the implementation of
+temporal interval relations in the `interval` object. Added a constructor 
+predicate, `new/3`, to the `intervalp` protocol and the `interval` object.
+
 Tools
 -----
 
