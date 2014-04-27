@@ -78,6 +78,13 @@ Tests
 
 * ADDED: Unit tests for testing the `{Proxy}<<Goal` syntax support.
 
+Contributions
+-------------
+
+* CHANGED: Loading of the test files used in the unit tests of the PDDL parser
+contribution to workaround portability issues when using SICStus Prolog as the
+back-end compiler.
+
 Examples
 --------
 
