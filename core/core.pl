@@ -6348,6 +6348,10 @@ current_logtalk_flag(Flag, Value) :-
 	!,	% workaround lack of standardization of the predicate_property/2 predicate
 	'$lgt_tr_directive'(if('$lgt_predicate_property'(Pred, Prop)), Ctx).
 
+'$lgt_tr_directive'(if(\+ predicate_property(Pred, Prop)), Ctx) :-
+	!,	% workaround lack of standardization of the predicate_property/2 predicate
+	'$lgt_tr_directive'(if(\+ '$lgt_predicate_property'(Pred, Prop)), Ctx).
+
 '$lgt_tr_directive'(if(Goal), _) :-
 	'$lgt_pp_cc_mode_'(Value),
 	% not top-level if
@@ -6396,6 +6400,10 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_directive'(elif(predicate_property(Pred, Prop)), Ctx) :-
 	!,	% workaround lack of standardization of the predicate_property/2 predicate
 	'$lgt_tr_directive'(elif('$lgt_predicate_property'(Pred, Prop)), Ctx).
+
+'$lgt_tr_directive'(elif(\+ predicate_property(Pred, Prop)), Ctx) :-
+	!,	% workaround lack of standardization of the predicate_property/2 predicate
+	'$lgt_tr_directive'(elif(\+ '$lgt_predicate_property'(Pred, Prop)), Ctx).
 
 '$lgt_tr_directive'(elif(Goal), _) :-
 	'$lgt_pp_cc_mode_'(Mode),

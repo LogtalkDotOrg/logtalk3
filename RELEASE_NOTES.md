@@ -34,6 +34,11 @@ Logtalk compiler and runtime
 * ADDED: Support for accessing parametric object proxies when using the `<</2`
 control construct using the standard `{Proxy}` syntax.
 
+* ADDED: Workaround for lack of standardization of the `predicate_property/2`
+predicate when used as negated argument in conditional compilation directives.
+Notably, this allows using the PDDL parser contribution when using ECLiPSe as
+the back-end Prolog compiler.
+
 * IMPROVED: Faster generation of entity identifiers when dynamically creating
 a large number of entities at runtime.
 
