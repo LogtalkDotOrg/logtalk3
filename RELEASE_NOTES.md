@@ -86,6 +86,8 @@ Tests
 
 * ADDED: Unit tests for testing the `{Proxy}<<Goal` syntax support.
 
+* ADDED: Unit tests for the `use_module/2` predicate directive.
+
 Contributions
 -------------
 
