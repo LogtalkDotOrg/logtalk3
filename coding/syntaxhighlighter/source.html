@@ -59,9 +59,9 @@ comment
 	extends(parent)).
 
 	:- info([
-		version is 1.17,
+		version is 1.18,
 		author is 'Paulo Moura',
-		date is 2013/09/16,
+		date is 2014/04/28,
 		comment is 'Sample prototype for testing syntax coloring.'
 	]).
 
@@ -73,11 +73,11 @@ comment
 	:- calls(some_other_protocol).
 	:- uses(another_object).
 
-	:- alias(set, member/2, set_member/2).
-	:- alias(words, singular//0, peculiar//0).
+	:- alias(set, [member/2 as set_member/2]).
+	:- alias(words, [singular//0 as peculiar//0]).
 
 	:- uses(list, [append/3, member/2]).
-	:- uses(queues, [new/1::new_queue/1]).
+	:- uses(queues, [new/1 as new_queue/1]).
 
 	:- use_module(module).
 	:- use_module(module, [append/3, member/2]).

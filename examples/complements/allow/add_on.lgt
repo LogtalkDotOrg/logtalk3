@@ -35,6 +35,6 @@
 		setof(Predicate, ::current_predicate(Predicate), Predicates). 
 
 	% define an alias for a predicate of the complemented object:
-	:- alias(employee, salary/1, income/1).
+	:- alias(employee, [salary/1 as income/1]).
 
 :- end_category.
