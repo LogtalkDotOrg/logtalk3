@@ -21,11 +21,17 @@
 
 	% test all possible syntaxes for the directive
 
-	:- alias(lgtunit, [run/0 as run_alias/0]).
+	:- alias(lgtunit, [run/0 as run_alias1/0]).
+	:- alias(lgtunit, [run/0 :: run_alias2/0]).
 
 	test(alias_2_1) :-
-		predicate_property(run_alias, alias_of(run)),
-		predicate_property(run_alias, declared_in(lgtunit)),
-		predicate_property(run_alias, defined_in(lgtunit)).
+		predicate_property(run_alias1, alias_of(run)),
+		predicate_property(run_alias1, declared_in(lgtunit)),
+		predicate_property(run_alias1, defined_in(lgtunit)).
+
+	test(alias_2_2) :-
+		predicate_property(run_alias2, alias_of(run)),
+		predicate_property(run_alias2, declared_in(lgtunit)),
+		predicate_property(run_alias2, defined_in(lgtunit)).
 
 :- end_object.
