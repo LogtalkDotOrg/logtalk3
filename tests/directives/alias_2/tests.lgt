@@ -15,15 +15,15 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/11/18,
-		comment is 'Unit tests for the alias/3 built-in directive.'
+		date is 2014/04/28,
+		comment is 'Unit tests for the alias/2 built-in directive.'
 	]).
 
 	% test all possible syntaxes for the directive
 
-	:- alias(lgtunit, run/0, run_alias/0).
+	:- alias(lgtunit, [run/0 as run_alias/0]).
 
-	test(alias_3_1) :-
+	test(alias_2_1) :-
 		predicate_property(run_alias, alias_of(run)),
 		predicate_property(run_alias, declared_in(lgtunit)),
 		predicate_property(run_alias, defined_in(lgtunit)).

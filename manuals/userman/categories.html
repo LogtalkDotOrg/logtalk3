@@ -70,7 +70,7 @@ A category may be defined as a composition of other categories by writing:
     ...
 :- end_category.</pre>
 <p>
-This feature should only be used when extending a category without breaking its functional cohesion (for example, when a modified version of a category is needed for importing on several unrelated objects). The preferred way of composing several categories is by importing them into an object. When a category overrides a predicate defined in an extended category, the overridden definition can still be used by using the <a title="Consult reference manual" href="../refman/directives/alias_3.html"><code>alias/3</code></a> predicate directive.
+This feature should only be used when extending a category without breaking its functional cohesion (for example, when a modified version of a category is needed for importing on several unrelated objects). The preferred way of composing several categories is by importing them into an object. When a category overrides a predicate defined in an extended category, the overridden definition can still be used by using the <a title="Consult reference manual" href="../refman/directives/alias_2.html"><code>alias/2</code></a> predicate directive.
 </p>
 <p>
 A category may explicitly complement one or more existing objects, thus providing functionality similar to Objective-C categories:
@@ -391,7 +391,7 @@ Note that access to category parameters is only possible using the <code>paramet
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: September 24, 2013</span>
+		<span>Last updated on: April 28, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="protocols.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="predicates.html">next</a></span><br/>

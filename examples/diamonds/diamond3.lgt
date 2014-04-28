@@ -15,7 +15,7 @@ a prototype hierarchy.
 
 In this simple case, a solution is presented for making two conflicting 
 definitions inherited by the bottom object visible through the use of the 
-alias/3 predicate directive. 
+alias/2 predicate directive. 
 */
 
 
@@ -61,12 +61,12 @@ alias/3 predicate directive.
 
 % bottom object, descending from the two previous objects and, as such, inheriting
 % two definitions for the predicate m/0; both inherited definitions are renamed 
-% using the alias/3 directive:
+% using the alias/2 directive:
 
 :- object(d3,
 	extends(b3, c3)).
 
-	:- alias(b3, m/0, b3_m/0).
-	:- alias(c3, m/0, c3_m/0).
+	:- alias(b3, [m/0 as b3_m/0]).
+	:- alias(c3, [m/0 as c3_m/0]).
 
 :- end_object.

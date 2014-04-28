@@ -33,12 +33,14 @@
 		comment is 'Some useful meta-predicates.'
 	]).
 
-	:- alias(metap, map/2, succeeds/2).
-	:- alias(metap, include/3, filter/3).
-	:- alias(metap, fold_left/4, foldl/4).
-	:- alias(metap, fold_right/4, foldr/4).
-	:- alias(metap, scan_left/4, scanl/4).
-	:- alias(metap, scan_right/4, scanr/4).
+	:- alias(metap, [
+		map/2 as succeeds/2,
+		include/3 as filter/3,
+		fold_left/4 as foldl/4,
+		fold_right/4 as foldr/4,
+		scan_left/4 as scanl/4,
+		scan_right/4 as scanr/4
+	]).
 
 	:- meta_predicate(include_(*, 1, *)).
 	include_([], _, []).

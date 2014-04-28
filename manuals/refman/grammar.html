@@ -521,7 +521,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 				<dd>"<code>:- synchronized.</code>" |</dd>
 				<dd>"<code>:- dynamic.</code>" |</dd>
 				<dd>"<code>:- uses(</code>" object_identifier "<code>).</code>" |</dd>
-				<dd>"<code>:- use_module(</code>" module_identifier  "<code>,</code>" predicate_indicator_alias_list "<code>).</code>" |</dd>
+				<dd>"<code>:- use_module(</code>" module_identifier  "<code>,</code>" module_predicate_indicator_alias_list "<code>).</code>" |</dd>
 				<dd>"<code>:- calls(</code>" protocol_identifiers "<code>).</code>" |</dd>
 				<dd>"<code>:- info(</code>" info_list "<code>).</code>" |</dd>
 				<dd>"<code>:- set_logtalk_flag(</code>" <em>atom</em> "<code>,</code>" <em>nonvar</em> "<code>).</code>" |</dd>
@@ -656,6 +656,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 		<dl>
 			<dt>predicate_indicator_alias ::=</dt>
 				<dd><em>predicate_indicator</em> |</dd>
+				<dd><em>predicate_indicator</em> "<code>as</code>" <em>predicate_indicator</em> |</dd>
 				<dd><em>predicate_indicator</em> "<code>::</code>" <em>predicate_indicator</em> |</dd>
 				<dd><em>predicate_indicator</em> "<code>:</code>" <em>predicate_indicator</em></dd>
 		</dl>
@@ -667,6 +668,21 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 		<dl>
 			<dt>predicate_indicator_alias_list ::=</dt>
 				<dd>"<code>[</code>" predicate_indicator_alias_sequence "<code>]</code>"</dd>
+		</dl>
+		<dl>
+			<dt>module_predicate_indicator_alias ::=</dt>
+				<dd><em>predicate_indicator</em> |</dd>
+				<dd><em>predicate_indicator</em> "<code>as</code>" <em>predicate_indicator</em> |</dd>
+				<dd><em>predicate_indicator</em> "<code>:</code>" <em>predicate_indicator</em></dd>
+		</dl>
+		<dl>
+			<dt>module_predicate_indicator_alias_sequence ::=</dt>
+				<dd>module_predicate_indicator_alias |</dd>
+				<dd>module_predicate_indicator_alias "<code>,</code>" module_predicate_indicator_alias_sequence</dd>
+		</dl>
+		<dl>
+			<dt>module_predicate_indicator_alias_list ::=</dt>
+				<dd>"<code>[</code>" module_predicate_indicator_alias_sequence "<code>]</code>"</dd>
 		</dl>
 		<dl>
 			<dt>non_terminal_indicator_term ::=</dt>
@@ -690,6 +706,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 		<dl>
 			<dt>non_terminal_indicator_alias ::=</dt>
 				<dd><em>non_terminal_indicator</em> |</dd>
+				<dd><em>non_terminal_indicator</em> "<code>as</code>" <em>non_terminal_indicator</em></dd>
 				<dd><em>non_terminal_indicator</em> "<code>::</code>" <em>non_terminal_indicator</em></dd>
 		</dl>
 		<dl>
@@ -1080,7 +1097,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: December 15, 2013</span>
+		<span>Last updated on: April 28, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="index.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="index.html">next</a></span><br/>

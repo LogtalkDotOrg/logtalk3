@@ -343,6 +343,15 @@ version if the recommended version is not yet available as a stable release.
 Know issue in XSB 3.4.1: this version doesn't support static multifile
 predicates. This limitation may be fixed in later versions.
 
+The definition of the `as` operator used in Logtalk when declaring predicate
+(or non-terminal) aliases conflicts with the definition of this operator in
+XSB due to the use of a different priority. XSB uses this operator within
+`table/1` directives to represent tabling options. In practice there's only
+a conflict when, in the same `table/1` directive, more than one predicate is
+declared as tabled and/or when more than one tabling option is specified.
+This cases are not common, however. The workaround is to use parenthesis
+around the predicates and/or the tabling options.
+
 
 YAP 6.3.4 and later versions
 ----------------------------

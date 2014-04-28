@@ -68,7 +68,7 @@ eval $xslt_proc -o directives/object_1_5.section refman.xsl directives/object_1_
 eval $xslt_proc -o directives/protocol_1_2.section refman.xsl directives/protocol_1_2.html
 eval $xslt_proc -o directives/synchronized_0.section refman.xsl directives/synchronized_0.html
 eval $xslt_proc -o directives/threaded_0.section refman.xsl directives/threaded_0.html
-eval $xslt_proc -o directives/alias_3.section refman.xsl directives/alias_3.html
+eval $xslt_proc -o directives/alias_2.section refman.xsl directives/alias_2.html
 eval $xslt_proc -o directives/coinductive_1.section refman.xsl directives/coinductive_1.html
 eval $xslt_proc -o directives/discontiguous_1.section refman.xsl directives/discontiguous_1.html
 eval $xslt_proc -o directives/dynamic_1.section refman.xsl directives/dynamic_1.html
@@ -198,7 +198,7 @@ cat -s \
 	directives/protocol_1_2.section \
 	directives/synchronized_0.section \
 	directives/threaded_0.section \
-	directives/alias_3.section \
+	directives/alias_2.section \
 	directives/coinductive_1.section \
 	directives/discontiguous_1.section \
 	directives/dynamic_1.section \

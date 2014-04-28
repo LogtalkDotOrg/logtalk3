@@ -10,7 +10,7 @@
 
 
 /*
-This example illustrates the use of the predicate directive alias/3 for 
+This example illustrates the use of the predicate directive alias/2 for 
 defining alternative names for inherited predicates.
 */
 
@@ -43,7 +43,7 @@ defining alternative names for inherited predicates.
 :- object(square(Side),
 	extends(rectangle(Side, Side))).
 
-	:- alias(rectangle(_, _), width/1, side/1).
+	:- alias(rectangle(_, _), [width/1 as side/1]).
 
 :- end_object.
 
@@ -76,6 +76,6 @@ defining alternative names for inherited predicates.
 :- object(circle(Radius),
 	extends(ellipse(Radius, Radius))).
 
-	:- alias(ellipse(_, _), rx/1, r/1).
+	:- alias(ellipse(_, _), [rx/1 as r/1]).
 
 :- end_object.

@@ -31,6 +31,14 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: The `alias/3` predicate directive is deprecated and replaced by the
+new `alias/2` predicate directive.
+
+* ADDED: New infix operator `as`, used as an alternative and preferred notation
+for the declaration of predicate (and non-terminal) aliases within the `alias/2`
+and `uses/2` predicate directives. This operator is already in the use in e.g.
+YAP and SWI-Prolog for similar purposes.
+
 * ADDED: Support for accessing parametric object proxies when using the `<</2`
 control construct using the standard `{Proxy}` syntax.
 

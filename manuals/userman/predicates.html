@@ -228,10 +228,10 @@ foo :-
     select(Y, C, R),
     ...</pre>
 <p>
-Logtalk also supports an extended version of this directive that allows the declaration of predicate alias using the notation <code>Predicate::Alias</code>. For example:
+Logtalk also supports an extended version of this directive that allows the declaration of predicate alias using the notation <code>Predicate as Alias</code> (or the alternative notation <code>Predicate::Alias</code>). For example:
 </p>
-<pre>:- uses(btrees, [new/1::new_btree/1]).
-:- uses(queues, [new/1::new_queue/1]).</pre>
+<pre>:- uses(btrees, [new/1 as new_btree/1]).
+:- uses(queues, [new/1 as new_queue/1]).</pre>
 <p>
 You may use this extended version for solving conflicts between predicates declared on several <code>uses/2</code> directives or just for giving new names to the predicates that will be more meaningful on their using context.
 </p>
@@ -245,40 +245,40 @@ In the current Logtalk version, the omission of the <code>Object::</code> prefix
 <h3 id="predicates_alias">Alias directive</h3>
 
 <p>
-Logtalk allows the definition of an alternative name for an inherited or imported predicate (or for an inherited or imported grammar rule non-terminal) through the use of the <a title="Consult reference manual" href="../refman/directives/alias_3.html"><code>alias/3</code></a> directive:
+Logtalk allows the definition of an alternative name for an inherited or imported predicate (or for an inherited or imported grammar rule non-terminal) through the use of the <a title="Consult reference manual" href="../refman/directives/alias_2.html"><code>alias/2</code></a> directive:
 </p>
-<pre>:- alias(Entity, Predicate, Alias).</pre>
+<pre>:- alias(Entity, [Predicate1 as Alias1, Predicate2 as Alias2, ...]).</pre>
 <p>
-This directive can be used in objects, protocols, or categories. The first argument, <code>Entity</code>, must be an entity referenced in the opening directive of the entity containing the <code>alias/3</code> directive. It can be an implemented protocol, an imported category, an extended prototype, an instantiated class, or a specialized class. The second and third arguments are predicate indicators (or grammar rule non-terminal indicators).
+This directive can be used in objects, protocols, or categories. The first argument, <code>Entity</code>, must be an entity referenced in the opening directive of the entity containing the <code>alias/2</code> directive. It can be an implemented protocol, an imported category, an extended prototype, an instantiated class, or a specialized class. The second and third arguments are predicate indicators (or grammar rule non-terminal indicators).
 </p>
 <p>
-A common use for the <code>alias/3</code> directive is to give an alternative name to an inherited predicate in order to improve readability. For example:
+A common use for the <code>alias/2</code> directive is to give an alternative name to an inherited predicate in order to improve readability. For example:
 </p>
 <pre>:- object(square,
     extends(rectangle)).
 
-    :- alias(rectangle, width/1, side/1).
+    :- alias(rectangle, [width/1 as side/1]).
 
     ...
 
 :- end_object.</pre>
 <p>
-The directive allows both <code>width/1</code> and <code>side/1</code> to be used as messages to the object <code>square</code>. Thus, using this directive, there is no need to explicitly declare and define a "new" <code>side/1</code> predicate. Note that the <code>alias/3</code> directive does not rename a predicate, only provides an alternative, additional name; the original name continues to be available.
+The directive allows both <code>width/1</code> and <code>side/1</code> to be used as messages to the object <code>square</code>. Thus, using this directive, there is no need to explicitly declare and define a "new" <code>side/1</code> predicate. Note that the <code>alias/2</code> directive does not rename a predicate, only provides an alternative, additional name; the original name continues to be available.
 </p>
 <p>
-Another common use for this directive is to solve conflicts when two inherited predicates have the same functor and arity. We may want to call the predicate which is masked out by the Logtalk lookup algorithm (see the <a href="inheritance.html">Inheritance</a> section) or we may need to call both predicates. This is simply accomplished by using the <code>alias/3</code> directive to give alternative names to masked out or conflicting predicates. Consider the following example:
+Another common use for this directive is to solve conflicts when two inherited predicates have the same functor and arity. We may want to call the predicate which is masked out by the Logtalk lookup algorithm (see the <a href="inheritance.html">Inheritance</a> section) or we may need to call both predicates. This is simply accomplished by using the <code>alias/2</code> directive to give alternative names to masked out or conflicting predicates. Consider the following example:
 </p>
 <pre>:- object(my_data_structure,
     extends(list, set)).
 
-    :- alias(list, member/2, list_member/2).
-    :- alias(set, member/2, set_member/2).
+    :- alias(list, [member/2 as list_member/2]).
+    :- alias(set,  [member/2 as set_member/2]).
 
     ...
 
 :- end_object.</pre>
 <p>
-Assuming that both <code>list</code> and <code>set</code> objects define a <code>member/2</code> predicate, without the <code>alias/3</code> directives, only the definition of <code>member/2</code> predicate in the object <code>list</code> would be visible on the object <code>my_data_structure</code>, as a result of the application of the Logtalk predicate lookup algorithm. By using the <code>alias/3</code> directives, all the following messages would be valid (assuming a public scope for the predicates):
+Assuming that both <code>list</code> and <code>set</code> objects define a <code>member/2</code> predicate, without the <code>alias/2</code> directives, only the definition of <code>member/2</code> predicate in the object <code>list</code> would be visible on the object <code>my_data_structure</code>, as a result of the application of the Logtalk predicate lookup algorithm. By using the <code>alias/2</code> directives, all the following messages would be valid (assuming a public scope for the predicates):
 </p>
 <pre>| ?- my_data_structure::list_member(X, L).    % uses list member/2
 
@@ -286,19 +286,19 @@ Assuming that both <code>list</code> and <code>set</code> objects define a <code
 
 | ?- my_data_structure::member(X, L).         % uses list member/2</pre>
 <p>
-When used this way, the <code>alias/3</code> directive provides functionality similar to programming constructs of other object-oriented languages which support multi-inheritance (the most notable example probably being the renaming of inherited features in Eiffel).
+When used this way, the <code>alias/2</code> directive provides functionality similar to programming constructs of other object-oriented languages which support multi-inheritance (the most notable example probably being the renaming of inherited features in Eiffel).
 </p>
 <p>
-Note that the <code>alias/3</code> directive never hides a predicate which is visible on the entity containing the directive as a result of the Logtalk lookup algorithm. However, it may be used to make visible a predicate which otherwise would be masked by another predicate, as illustrated in the above example.
+Note that the <code>alias/2</code> directive never hides a predicate which is visible on the entity containing the directive as a result of the Logtalk lookup algorithm. However, it may be used to make visible a predicate which otherwise would be masked by another predicate, as illustrated in the above example.
 </p>
 <p>
-The <code>alias/3</code> directive may also be used to give access to an inherited predicate, which otherwise would be masked by another inherited predicate, while keeping the original name as follows:
+The <code>alias/2</code> directive may also be used to give access to an inherited predicate, which otherwise would be masked by another inherited predicate, while keeping the original name as follows:
 </p>
 <pre>:- object(my_data_structure,
     extends(list, set)).
 
-    :- alias(list, member/2, list_member/2).
-    :- alias(set, member/2, set_member/2).
+    :- alias(list, [member/2 as list_member/2]).
+    :- alias(set,  [member/2 as set_member/2]).
 
     member(X, L) :-
         ::set_member(X, L).

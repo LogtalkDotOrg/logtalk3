@@ -27,13 +27,13 @@
 	implements(termp)).
 
 	:- info([
-		version is 1.6,
+		version is 1.7,
 		author is 'Paulo Moura',
-		date is 2013/12/21,
+		date is 2014/04/28,
 		comment is 'Prolog term utility predicates.'
 	]).
 
-	:- alias(termp, variables/2, vars/2).
+	:- alias(termp, [variables/2 as vars/2]).
 
 	depth(Term, Depth) :-
 		depth(Term, 0, 0, Depth).

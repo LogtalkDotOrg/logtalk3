@@ -68,7 +68,7 @@ Follows a short description of each included example (in alphabetical order):
     some simple examples of text adventures
 
 - `aliases`  
-	example of using the `alias/3` predicate directive to provide 
+	example of using the `alias/2` predicate directive to provide 
 	alternative names to inherited predicates in order to improve 
 	readability or to solve multi-inheritance conflicts
 

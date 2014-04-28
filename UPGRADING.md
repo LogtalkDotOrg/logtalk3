@@ -106,6 +106,9 @@ reflection API in Logtalk 3.x now returns all object (and module) dependencies
 found on sufficiently instantiated `::/2` and `:/2` calls when compiling an
 object or a category.
 
+The `alias/3` directive is deprecated and replaced by the new `alias/2`
+directive.
+
 The `version` flag is deprecated. New code that doesn't require compatibility
 with Logtalk 2.x should use instead the new `version_data` flag.
 
