@@ -35,7 +35,7 @@
 
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
-		(Dialect == eclipse; Dialect = swi; Dialect = yap)
+		(Dialect == eclipse; Dialect == sicstus; Dialect = swi; Dialect = yap)
 	)).
 
 	:- uses(user, [bar/1]).
@@ -58,7 +58,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/03/10,
+		date is 2014/04/28,
 		comment is 'Unit tests for the uses/2 built-in directive.'
 	]).
 
@@ -78,7 +78,7 @@
 
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
-		(Dialect == eclipse; Dialect = swi; Dialect = yap)
+		(Dialect == eclipse; Dialect == sicstus; Dialect = swi; Dialect = yap)
 	)).
 	
 	test(uses_2_4) :-

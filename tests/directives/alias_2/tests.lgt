@@ -20,7 +20,6 @@
 	]).
 
 	% test all possible syntaxes for the directive
-
 	:- alias(lgtunit, [run/0 as run_alias1/0]).
 	:- alias(lgtunit, [run/0 :: run_alias2/0]).
 
