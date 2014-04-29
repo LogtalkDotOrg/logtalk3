@@ -26,35 +26,14 @@
 
 
 % load Logtalk core files
-:-	(	stat('$LOGTALKHOME/adapters/qp.pl', stat(AdapterSource, _)),
-		stat('$LOGTALKUSER/.qp.qo', stat(AdapterObject, _)) ->
-		(	AdapterObject < AdapterSource ->
-			fcompile('$LOGTALKUSER/.qp.pl', [assemble_only(true), object_file('$LOGTALKUSER/.qp.qo')])
-		;	true
-		)
-	;	os(system('ln -sf $LOGTALKHOME/adapters/qp.pl $LOGTALKUSER/.qp.pl')),
-		fcompile('$LOGTALKUSER/.qp.pl', [assemble_only(true), object_file('$LOGTALKUSER/.qp.qo')])
-	),
+:-	os(system('ln -sf $LOGTALKHOME/adapters/qp.pl $LOGTALKUSER/.qp.pl')),
+	fcompile('$LOGTALKUSER/.qp.pl', [assemble_only(true), object_file('$LOGTALKUSER/.qp.qo')]),
 	load('$LOGTALKUSER/.qp.qo'),
-	(	stat('$LOGTALKHOME/paths/paths.pl', stat(PathSource, _)),
-		stat('$LOGTALKUSER/.paths.qo', stat(PathsObject, _)) ->
-		(	PathsObject < PathSource ->
-			fcompile('$LOGTALKUSER/.paths.pl', [assemble_only(true), object_file('$LOGTALKUSER/.paths.qo')])
-		;	true
-		)
-	;	os(system('ln -sf $LOGTALKHOME/paths/paths.pl $LOGTALKUSER/.paths.pl')),
-		fcompile('$LOGTALKUSER/.paths.pl', [assemble_only(true), object_file('$LOGTALKUSER/.paths.qo')])
-	),
+	os(system('ln -sf $LOGTALKHOME/paths/paths.pl $LOGTALKUSER/.paths.pl')),
+	fcompile('$LOGTALKUSER/.paths.pl', [assemble_only(true), object_file('$LOGTALKUSER/.paths.qo')]),
 	load('$LOGTALKUSER/.paths.qo'),
-	(	stat('$LOGTALKHOME/core/core.pl', stat(CompilerSource, _)),
-		stat('$LOGTALKUSER/.core.qo', stat(CompilerObject, _)) ->
-		(	CompilerObject < CompilerSource ->
-			fcompile('$LOGTALKUSER/.core.pl', [assemble_only(true), object_file('$LOGTALKUSER/.core.qo'), compiler_heap(2048), string_table(256)])
-		;	true
-		)
-	;	os(system('ln -sf $LOGTALKHOME/core/core.pl $LOGTALKUSER/.core.pl')),
-		fcompile('$LOGTALKUSER/.core.pl', [assemble_only(true), object_file('$LOGTALKUSER/.core.qo'), compiler_heap(2048), string_table(256)])
-	),
+	os(system('ln -sf $LOGTALKHOME/core/core.pl $LOGTALKUSER/.core.pl')),
+	fcompile('$LOGTALKUSER/.core.pl', [assemble_only(true), object_file('$LOGTALKUSER/.core.qo'), compiler_heap(2048), string_table(256)]),
 	load('$LOGTALKUSER/.core.qo').
 
 % workaround the lack of support for static multifile predicates

@@ -56,6 +56,12 @@ predicate would clash with an internal entity bookkeeping predicate.
 * FIXED: Compilation in debug mode of calls to meta-predicates specified in
 `uses/2` directives.
 
+Prolog adapter and integration files
+------------------------------------
+
+* IMPROVED: Updated Qu-Prolog adapter and integration files for more reliable
+startup. Complex applications, however, may still need to adjust memory areas.
+
 Documentation
 -------------
 
