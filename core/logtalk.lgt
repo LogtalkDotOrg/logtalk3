@@ -22,6 +22,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% the compiler/runtime must be able to call some of the code generated
+% by the compilation of the `logtalk` object directly, thus forcing us
+% to fix the code prefix that is used in its compilation
+:- set_logtalk_flag(code_prefix, '$').
+
+
 :- object(logtalk).
 
 	:- info([

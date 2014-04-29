@@ -53,6 +53,10 @@ a large number of entities at runtime.
 * IMPROVED: Eliminate the (remote) possibility that a user defined entity
 predicate would clash with an internal entity bookkeeping predicate.
 
+* IMPROVED: Ensure that the `logtalk` built-in object is compiled (as required
+by the compiler/runtime) with the `code_prefix` flag set to `$` independently
+of the setting of this flag.
+
 * FIXED: Compilation in debug mode of calls to meta-predicates specified in
 `uses/2` directives.
 
