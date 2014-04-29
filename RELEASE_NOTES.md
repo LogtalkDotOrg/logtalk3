@@ -81,6 +81,9 @@ can result in misleading test reports.
 * FIXED: Regression on the `lgtunit` tool where duplicated test identifiers
 would no longer be detected and reported.
 
+* FIXED: Workaround lack of support for static multifile predicates in XSB
+and Qu-Prolog when running the `diagrams` tool.
+
 Tests
 -----
 

@@ -28,11 +28,14 @@
 	:- info([
 		version is 0.1,
 		author is 'Paulo Moura',
-		date is 2014/01/07,
+		date is 2014/04/29,
 		comment is 'Predicates for generating graph files in the GXL language.'
 	]).
 
 	:- multifile(diagram(_)::format_object/2).
+	:- if((current_logtalk_flag(prolog_dialect, qp); current_logtalk_flag(prolog_dialect, xsb))).
+		:- dynamic(diagram(_)::format_object/2).
+	:- endif.
 	diagram(_)::format_object(gxl, gxl_graph).
 
 	output_file_name(Name, File) :-

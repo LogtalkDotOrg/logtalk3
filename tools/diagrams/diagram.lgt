@@ -27,7 +27,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/04/02,
+		date is 2014/04/29,
 		comment is 'Common predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
@@ -310,6 +310,9 @@
 
 	:- public(format_object/2).
 	:- multifile(format_object/2).
+	:- if((current_logtalk_flag(prolog_dialect, qp); current_logtalk_flag(prolog_dialect, xsb))).
+		:- dynamic(format_object/2).
+	:- endif.
 	:- mode(format_object(?atom, ?object_identifier), zero_or_more).
 	:- info(format_object/2, [
 		comment is 'Table of defined graph languages and their implementation objects.',
