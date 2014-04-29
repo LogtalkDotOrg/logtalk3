@@ -7088,13 +7088,15 @@ current_logtalk_flag(Flag, Value) :-
 % alias/3 predicate directive (deprecated)
 
 '$lgt_tr_logtalk_directive'(alias(Entity, Original, Alias), Ctx) :-
-	'$lgt_tr_logtalk_directive'(alias(Entity, [as(Original,Alias)]), Ctx),
-	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
+	(	\+ '$lgt_pp_predicate_alias_'(_, _, _),
+		% not already reported (we assume that there's no mix of alias/2 and alias/3 directives!)
+		'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_warning_context'(Path, Lines, Type, This),
 		'$lgt_print_message'(warning(general), core, deprecated_directive(Path, Lines, Type, This, alias/3))
 	;	true
-	).
+	),
+	'$lgt_tr_logtalk_directive'(alias(Entity, [as(Original,Alias)]), Ctx).
 
 
 
