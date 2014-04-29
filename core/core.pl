@@ -13820,7 +13820,7 @@ current_logtalk_flag(Flag, Value) :-
 	% finaly, generate linking clauses for accessing declarations
 	% when we reach the class being compiled during a lookup
 	% from a descendant instance
-	'$lgt_gen_ic_idcl_clauses'(Local, Obj, Dcl, IDcl, DDcl).
+	'$lgt_gen_ic_idcl_clauses'(Local, Obj, Dcl, IDcl, DDcl, Rnm).
 
 
 
@@ -13859,7 +13859,7 @@ current_logtalk_flag(Flag, Value) :-
 % when traversing specialization links in order to lookup
 % a predicate declaration for a descendant instance
 
-'$lgt_gen_ic_idcl_clauses'(Local, Obj, Dcl, IDcl, DDcl) :-
+'$lgt_gen_ic_idcl_clauses'(Local, Obj, Dcl, IDcl, DDcl, Rnm) :-
 	% generate linking clauses for accessing declarations in related entities
 	'$lgt_compiler_flag'(complements, Complements),
 	(	Complements == allow ->

@@ -56,6 +56,9 @@ predicate would clash with an internal entity bookkeeping predicate.
 * FIXED: Compilation in debug mode of calls to meta-predicates specified in
 `uses/2` directives.
 
+* FIXED: Compilation error when compiling classes or instances that define
+predicate aliases.
+
 Prolog adapter and integration files
 ------------------------------------
 
