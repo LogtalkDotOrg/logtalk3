@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Integration file for XSB
-%  Last updated on February 15, 2014
+%  Last updated on April 29, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -44,11 +44,11 @@
 #include ../core/core.pl
 
 % workaround the lack of support for static multifile predicates
-:- multifile('$logtalk#0.debug_handler_provider'/2).
-:- dynamic('$logtalk#0.debug_handler_provider'/2).
+:- multifile('$logtalk#0.debug_handler_provider#1'/2).
+:- dynamic('$logtalk#0.debug_handler_provider#1'/2).
 
-:- multifile('$logtalk#0.debug_handler'/3).
-:- dynamic('$logtalk#0.debug_handler'/3).
+:- multifile('$logtalk#0.debug_handler#2'/3).
+:- dynamic('$logtalk#0.debug_handler#2'/3).
 
 % tables of defined events and monitors
 :- thread_shared('$lgt_before_event_'/5).
@@ -95,5 +95,6 @@
 :- thread_shared('$lgt_hook_term_expansion_'/2).
 :- thread_shared('$lgt_hook_goal_expansion_'/2).
 
-% multi-threading tags
+% counters
+:- thread_shared('$lgt_dynamic_entity_counter_'/3).
 :- thread_shared('$lgt_threaded_tag_counter_'/1).

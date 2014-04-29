@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Integration file for XSB
-%  Last updated on October 11, 2013
+%  Last updated on April 29, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -44,8 +44,8 @@
 #include ../core/core.pl
 
 % workaround the lack of support for static multifile predicates
-:- multifile('$logtalk#0.debug_handler_provider'/2).
-:- dynamic('$logtalk#0.debug_handler_provider'/2).
+:- multifile('$logtalk#0.debug_handler_provider#1'/2).
+:- dynamic('$logtalk#0.debug_handler_provider#1'/2).
 
-:- multifile('$logtalk#0.debug_handler'/3).
-:- dynamic('$logtalk#0.debug_handler'/3).
+:- multifile('$logtalk#0.debug_handler#2'/3).
+:- dynamic('$logtalk#0.debug_handler#2'/3).
