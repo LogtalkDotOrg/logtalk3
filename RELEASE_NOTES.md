@@ -100,6 +100,9 @@ Tests
 
 * ADDED: Unit tests for the `use_module/2` predicate directive.
 
+* ADDED: Unit tests for the definition of predicate aliases in instances and
+classes.
+
 Contributions
 -------------
 
