@@ -8,7 +8,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on April 25, 2014
+%  Last updated on April 29, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -570,6 +570,7 @@ user:portray(c(This, r(Sender, Self, MetaVars, CoinductionStack))) :-
 % the following directives are necessary when using the SWI-Prolog
 % graphical tracer as predicates whose name start with a $ have by
 % default a "notrace" property
+:- '$set_predicate_attribute'('$lgt_send_to_obj_rt'/5, trace, 1).
 :- '$set_predicate_attribute'('$lgt_send_to_self_nv'/3, trace, 1).
 :- '$set_predicate_attribute'('$lgt_send_to_self'/3, trace, 1).
 :- '$set_predicate_attribute'('$lgt_send_to_self_'/3, trace, 1).

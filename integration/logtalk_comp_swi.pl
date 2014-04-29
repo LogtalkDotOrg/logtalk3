@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Integration file for SWI-Prolog
-%  Last updated on February 15, 2014
+%  Last updated on April 29, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -28,17 +28,6 @@
 
 :- set_prolog_flag(generate_debug_info, false).
 
-:- op(600, xfy, ::).
-:- op(600,  fy, ::).
-:- op(600,  fy, ^^).
-:- op(200,  fy,  +).
-:- op(200,  fy,  ?).
-:- op(200,  fy,  @).
-:- op(200,  fy,  -).
-:- op(400, yfx, <<).
-:- op(600,  fy,  :).
-:- op(400, yfx, >>).
-
 :- '$hide'((::)/2).
 :- '$hide'((<<)/2).
 
@@ -53,6 +42,7 @@
 	'$lgt_compiler_flag'/2, '$lgt_default_flag'/2, '$lgt_current_flag_'/2, '$lgt_pp_compiler_flag_'/2,
 	'$lgt_prolog_feature'/2,
 	'$lgt_execution_context'/6, '$lgt_goal_meta_variables'/3,
+	'$lgt_send_to_obj_rt'/5,
 	'$lgt_send_to_self_nv'/3,
 	'$lgt_send_to_self'/3, '$lgt_send_to_self_'/3,
 	'$lgt_send_to_obj'/3, '$lgt_send_to_obj_'/3,
@@ -63,7 +53,7 @@
 	'$lgt_ctg_super_call'/3, '$lgt_ctg_super_call_'/3,
 	'$lgt_db_lookup_cache_'/5,
 	'$lgt_hook_term_expansion_'/2, '$lgt_hook_goal_expansion_'/2,
-	'$lgt_threaded_tag_counter_'/1,
+	'$lgt_dynamic_entity_counter_'/3, '$lgt_threaded_tag_counter_'/1,
 	'$lgt_metacall'/6, '$lgt_metacall'/7
 )).
 
