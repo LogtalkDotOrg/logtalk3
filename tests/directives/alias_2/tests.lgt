@@ -9,6 +9,43 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% entities for testing predicate aliases defined in protocols and categories
+
+:- protocol(alias_2_test_protocol_1).
+
+	:- public(a/1).
+
+:- end_protocol.
+
+
+:- protocol(alias_2_test_protocol_2,
+	extends(alias_2_test_protocol_1)).
+
+	:- alias(alias_2_test_protocol_1, [
+		a/1 as b/1
+	]).
+
+:- end_protocol.
+
+
+:- category(alias_2_test_category,
+	implements(alias_2_test_protocol_2)).
+
+	:- alias(alias_2_test_protocol_2, [
+		b/1 as c/1
+	]).
+
+	c(1).
+
+:- end_category.
+
+
+:- object(alias_2_test_prototype,
+	imports(alias_2_test_category)).
+
+:- end_object.
+
+
 % objects for testing predicate aliases defined in classes and instances
 
 :- object(alias_2_test_metaclass,
@@ -75,14 +112,25 @@
 		predicate_property(run_alias2, declared_in(lgtunit)),
 		predicate_property(run_alias2, defined_in(lgtunit)).
 
-	% tests for predicate aliases defined in instances and classes
+	% tests for predicate aliases defined in protocols and categories
 
 	test(alias_2_3) :-
+		alias_2_test_prototype::predicate_property(c(_), alias_of(b(_))),
+		alias_2_test_prototype::predicate_property(c(_), declared_in(alias_2_test_protocol_1)),
+		alias_2_test_prototype::predicate_property(c(_), defined_in(alias_2_test_category)).
+
+	test(alias_2_4) :-
+		alias_2_test_prototype::predicate_property(b(_), alias_of(a(_))),
+		alias_2_test_prototype::predicate_property(b(_), declared_in(alias_2_test_protocol_1)).
+
+	% tests for predicate aliases defined in instances and classes
+
+	test(alias_2_5) :-
 		alias_2_test_instance::predicate_property(q(_), alias_of(p(_))),
 		alias_2_test_instance::predicate_property(q(_), declared_in(alias_2_test_class)),
 		alias_2_test_instance::predicate_property(q(_), defined_in(alias_2_test_class)).
 
-	test(alias_2_4) :-
+	test(alias_2_6) :-
 		alias_2_test_instance::predicate_property(r(_), alias_of(p(_))),
 		alias_2_test_instance::predicate_property(r(_), declared_in(alias_2_test_class)),
 		alias_2_test_instance::predicate_property(r(_), defined_in(alias_2_test_class)).
