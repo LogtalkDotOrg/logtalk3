@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SWI Prolog 6.0.0 and later versions
-%  Last updated on April 23, 2014
+%  Last updated on April 30, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -67,6 +67,9 @@
 
 
 % between(+integer, +integer, ?integer) -- built-in
+
+
+% findall(?term, +callable, ?list, +list) -- built-in
 
 
 % forall(+callable, +callable) -- built-in

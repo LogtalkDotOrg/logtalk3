@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Quintus Prolog 3.3~3.5
-%  Last updated on April 23, 2014
+%  Last updated on April 30, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -250,6 +250,13 @@ unify_with_occurs_check(Term1, Term2) :-
 
 
 % between(+integer, +integer, ?integer) -- library predicate
+
+
+% findall(?term, +callable, ?list, +list)
+
+findall(Term, Goal, List, Tail) :-
+	findall(Term, Goal, List0),
+	'$lgt_append'(List0, Tail, List).
 
 
 % forall(+callable, +callable) -- library predicate

@@ -58,6 +58,9 @@
 % between(+integer, +integer, ?integer) -- built-in ????
 
 
+% findall(?term, +callable, ?list, +list) -- built-in ????
+
+
 % forall(+callable, +callable) -- built-in ????
 
 forall(Generate, Test) :-

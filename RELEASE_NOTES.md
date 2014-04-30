@@ -66,6 +66,9 @@ predicate aliases.
 Prolog adapter and integration files
 ------------------------------------
 
+* ADDED: Support for the de facto standard predicate `findall/4` (when not a
+built-in predicate) to all adapter files.
+
 * IMPROVED: Updated Qu-Prolog adapter and integration files for more reliable
 startup. Complex applications, however, may still need to adjust memory areas.
 

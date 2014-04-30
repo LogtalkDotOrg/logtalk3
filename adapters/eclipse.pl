@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on April 23, 2014
+%  Last updated on April 30, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -69,6 +69,17 @@
 % between(+integer, +integer, ?integer)
 
 :- import between/3 from util.
+
+
+% findall(?term, +callable, ?list, +list)
+
+:- if(\+ get_flag(findall/4, type, built_in)).
+
+	findall(Term, Goal, List, Tail) :-
+		findall(Term, Goal, List0),
+		append(List0, Tail, List).
+
+:- endif.
 
 
 % forall(+callable, +callable)

@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for GNU Prolog 1.4.2 (and later versions)
-%  Last updated on April 23, 2014
+%  Last updated on April 30, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -58,6 +58,17 @@
 
 
 % between(+integer, +integer, ?integer) -- built-in
+
+
+% findall(?term, +callable, ?list, +list)
+
+:- if(\+ predicate_property(findall(_,_,_,_), built_in)).
+
+	findall(Term, Goal, List, Tail) :-
+		findall(Term, Goal, List0),
+		append(List0, Tail, List).
+
+:- endif.
 
 
 % forall(+callable, +callable) -- built-in

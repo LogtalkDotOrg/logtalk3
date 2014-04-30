@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for CxProlog 0.97.7 or a later version
-%  Last updated on April 23, 2014
+%  Last updated on April 30, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -93,6 +93,13 @@ subsumes_term(General, Specific) :-
 
 
 % between(+integer, +integer, ?integer) -- built-in
+
+
+% findall(?term, +callable, ?list, +list)
+
+findall(Term, Goal, List, Tail) :-
+	findall(Term, Goal, List0),
+	'$lgt_append'(List0, Tail, List).
 
 
 % forall(+callable, +callable) -- built-in
