@@ -112,6 +112,10 @@ Tests
 * ADDED: Unit tests for the definition of predicate aliases in protocols,
 categories, instances and classes.
 
+* ADDED: Unit tests for the `findall/3`, `bagof/3`, and `setof/3` built-in
+methods adapted from the corresponding examples in the ISO Prolog Core
+standard.
+
 Contributions
 -------------
 
