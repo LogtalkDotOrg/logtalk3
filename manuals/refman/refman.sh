@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Reference Manual XHTML to PDF conversion script
-##   Last updated on February 6, 2013
+##   Last updated on April 30, 2014
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -146,6 +146,7 @@ eval $xslt_proc -o methods/catch_3.section refman.xsl methods/catch_3.html
 eval $xslt_proc -o methods/throw_1.section refman.xsl methods/throw_1.html
 eval $xslt_proc -o methods/bagof_3.section refman.xsl methods/bagof_3.html
 eval $xslt_proc -o methods/findall_3.section refman.xsl methods/findall_3.html
+eval $xslt_proc -o methods/findall_4.section refman.xsl methods/findall_4.html
 eval $xslt_proc -o methods/forall_2.section refman.xsl methods/forall_2.html
 eval $xslt_proc -o methods/setof_3.section refman.xsl methods/setof_3.html
 eval $xslt_proc -o methods/before_3.section refman.xsl methods/before_3.html
@@ -278,6 +279,7 @@ cat -s \
 	methods/throw_1.section \
 	methods/bagof_3.section \
 	methods/findall_3.section \
+	methods/findall_4.section \
 	methods/forall_2.section \
 	methods/setof_3.section \
 	methods/before_3.section \

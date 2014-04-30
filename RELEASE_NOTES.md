@@ -39,6 +39,8 @@ for the declaration of predicate (and non-terminal) aliases within the `alias/2`
 and `uses/2` predicate directives. This operator is already in the use in e.g.
 YAP and SWI-Prolog for similar purposes.
 
+* ADDED: Built-in method `findall/4`.
+
 * ADDED: Support for accessing parametric object proxies when using the `<</2`
 control construct using the standard `{Proxy}` syntax.
 

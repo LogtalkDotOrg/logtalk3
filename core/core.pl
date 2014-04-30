@@ -9169,6 +9169,11 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_tr_body'(Goal, TGoal, DGoal, Ctx).
 
+'$lgt_tr_body'(findall(Term, Goal, List, Tail), findall(Term, TGoal, List, Tail), '$lgt_debug'(goal(findall(Term, Goal, List, Tail), findall(Term, DGoal, List, Tail)), ExCtx), Ctx) :-
+	!,
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	'$lgt_tr_body'(Goal, TGoal, DGoal, Ctx).
+
 '$lgt_tr_body'(forall(Gen, Test), \+ (TGen, \+ TTest), '$lgt_debug'(goal(forall(Gen, Test), \+ (DGen, \+ DTest)), ExCtx), Ctx) :-
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
@@ -12258,6 +12263,10 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_remove_redundant_calls'(Goal, SGoal).
 
+'$lgt_remove_redundant_calls'(findall(Term, Goal, List, Tail), findall(Term, SGoal, List, Tail)) :-
+	!,
+	'$lgt_remove_redundant_calls'(Goal, SGoal).
+
 '$lgt_remove_redundant_calls'(forall(Goal1, Goal2), forall(SGoal1, SGoal2)) :-
 	!,
 	'$lgt_remove_redundant_calls'(Goal1, SGoal1),
@@ -14506,6 +14515,10 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_fix_body_predicate_calls'(Pred, TPred).
 
+'$lgt_fix_body_predicate_calls'(findall(Term, Pred, List, Tail), findall(Term, TPred, List, Tail)) :-
+	!,
+	'$lgt_fix_body_predicate_calls'(Pred, TPred).
+
 '$lgt_fix_body_predicate_calls'(forall(Gen, Test), forall(TGen, TTest)) :-
 	!,
 	'$lgt_fix_body_predicate_calls'(Gen, TGen),
@@ -15827,6 +15840,7 @@ current_logtalk_flag(Flag, Value) :-
 % all solutions methods
 '$lgt_built_in_method_spec'(bagof(_,_,_), p, bagof(*, ^, *), 1).
 '$lgt_built_in_method_spec'(findall(_,_,_), p, findall(*, 0, *), 1).
+'$lgt_built_in_method_spec'(findall(_,_,_,_), p, findall(*, 0, *, *), 1).
 '$lgt_built_in_method_spec'(forall(_,_,_), p, forall(0, 0), 1).
 '$lgt_built_in_method_spec'(setof(_,_,_), p, setof(*, ^, *), 1).
 

@@ -25,9 +25,9 @@
 :- object(help).
 
 	:- info([
-		version is 0.15,
+		version is 0.16,
 		author is 'Paulo Moura',
-		date is 2014/04/28,
+		date is 2014/04/30,
 		comment is 'Command-line help for Logtalk built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
@@ -266,6 +266,7 @@
 
 	built_in_method(bagof, 3, '/manuals/refman/methods/', 'bagof_3.html').
 	built_in_method(findall, 3, '/manuals/refman/methods/', 'findall_3.html').
+	built_in_method(findall, 4, '/manuals/refman/methods/', 'findall_4.html').
 	built_in_method(forall, 2, '/manuals/refman/methods/', 'forall_2.html').
 	built_in_method(setof, 3, '/manuals/refman/methods/', 'setof_3.html').
 
