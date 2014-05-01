@@ -25,8 +25,8 @@ RELEASE NOTES
 =============
 
 
-3.00.0 Beta 3 - May ??, 2014
-============================
+3.00.0 Beta 3 - May 2, 2014
+===========================
 
 Logtalk compiler and runtime
 ----------------------------
@@ -64,6 +64,9 @@ of the setting of this flag.
 
 * FIXED: Compilation error when compiling classes or instances that define
 predicate aliases.
+
+* FIXED: The `predicate_property/2` built-in method would fail to return all
+predicate properties when querying for a predicate alias.
 
 Prolog adapter and integration files
 ------------------------------------

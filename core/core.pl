@@ -2425,13 +2425,30 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_predicate_property'(Obj, Pred, Prop, Sender, Scope) :-
 	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, _, _, Rnm, _),
 	call(Dcl, Pred, PScope, Meta, Flags, SCtn, TCtn),
+	% predicate declaration found
 	!,
 	(	\+ \+ PScope = Scope ->
 		true
 	;	Sender = SCtn
 	),
+	% query is within scope
 	'$lgt_scope'(CScope, PScope),
-	'$lgt_predicate_property_user'(Prop, Pred, CScope, Meta, Flags, TCtn, Obj, Def, Rnm).
+	(	'$lgt_current_object_'(TCtn, _, TCtnDcl, _, _, _, _, _, _, _, _) ->
+		true
+	;	'$lgt_current_protocol_'(TCtn, _, TCtnDcl, _, _) ->
+	 	true
+	;	'$lgt_current_category_'(TCtn, _, TCtnDcl, _, _, _)
+	),
+	(	call(TCtnDcl, Pred, _, _, _) ->
+		% found static declaration for the predicate
+		'$lgt_predicate_property_user'(Prop, Pred, Pred, CScope, Meta, Flags, TCtn, Obj, Def, Rnm)
+	;	Flags /\ 2 =:= 2 ->
+		% dynamic predicate; aliases can only be defined for static predicates
+		'$lgt_predicate_property_user'(Prop, Pred, Pred, CScope, Meta, Flags, TCtn, Obj, Def, Rnm)
+	;	% assume that we are querying properties of a predicate alias
+		'$lgt_find_original_predicate'(Obj, Rnm, Pred, Original),
+		'$lgt_predicate_property_user'(Prop, Pred, Original, CScope, Meta, Flags, TCtn, Obj, Def, Rnm)
+	).
 
 '$lgt_predicate_property'(Obj, Pred, Prop, Sender, Scope) :-
 	'$lgt_built_in_method'(Pred, PScope, Meta, Flags),
@@ -2454,87 +2471,86 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_predicate_property_prolog_built_in'(Prop, Pred).
 
 
-'$lgt_predicate_property_user'(logtalk, _, _, _, _, _, _, _, _).
-'$lgt_predicate_property_user'(scope(Scope), _, Scope, _, _, _, _, _, _).
-'$lgt_predicate_property_user'((public), _, (public), _, _, _, _, _, _).
-'$lgt_predicate_property_user'(protected, _, protected, _, _, _, _, _, _).
-'$lgt_predicate_property_user'(private, _, private, _, _, _, _, _, _).
-'$lgt_predicate_property_user'((dynamic), _, _, _, Flags, _, _, _, _) :-
+'$lgt_predicate_property_user'(alias_of(Original), Alias, Original, _, _, _, _, _, _, _) :-
+	Alias \= Original.
+'$lgt_predicate_property_user'(logtalk, _, _, _, _, _, _, _, _, _).
+'$lgt_predicate_property_user'(scope(Scope), _, _, Scope, _, _, _, _, _, _).
+'$lgt_predicate_property_user'((public), _, _, (public), _, _, _, _, _, _).
+'$lgt_predicate_property_user'(protected, _, _, protected, _, _, _, _, _, _).
+'$lgt_predicate_property_user'(private, _, _, private, _, _, _, _, _, _).
+'$lgt_predicate_property_user'((dynamic), _, _, _, _, Flags, _, _, _, _) :-
 	Flags /\ 2 =:= 2.
-'$lgt_predicate_property_user'(static, _, _, _, Flags, _, _, _, _) :-
+'$lgt_predicate_property_user'(static, _, _, _, _, Flags, _, _, _, _) :-
 	Flags /\ 2 =\= 2.
-'$lgt_predicate_property_user'(declared_in(TCtn), _, _, _, _, TCtn, _, _, _).
-'$lgt_predicate_property_user'(declared_in(TCtn, Line), Pred, _, _, _, TCtn, _, _, _) :-
-	functor(Pred, Functor, Arity),
+'$lgt_predicate_property_user'(declared_in(TCtn), _, _, _, _, _, TCtn, _, _, _).
+'$lgt_predicate_property_user'(declared_in(TCtn, Line), _, Original, _, _, _, TCtn, _, _, _) :-
+	functor(Original, Functor, Arity),
 	(	'$lgt_predicate_property_'(TCtn, Functor/Arity, declaration_line(Line)) ->
 		true
 	;	fail
 	).
-'$lgt_predicate_property_user'(meta_predicate(Meta), Pred, _, Meta0, _, _, _, _, _) :-
+'$lgt_predicate_property_user'(meta_predicate(Meta), Alias, _, _, Meta0, _, _, _, _, _) :-
 	Meta0 \== no,
-	functor(Pred, Functor, _),
-	% Pred can be an alias and thus using a different functor
+	functor(Alias, AliasFunctor, _),
 	Meta0 =.. [_| MetaArgs],
-	Meta =.. [Functor| MetaArgs].
-'$lgt_predicate_property_user'(coinductive(Template), Pred, _, _, _, TCtn, _, _, _) :-
-	functor(Pred, Functor, Arity),
-	(	'$lgt_predicate_property_'(TCtn, Functor/Arity, coinductive(Template)) ->
-		true
+	Meta =.. [AliasFunctor| MetaArgs].
+'$lgt_predicate_property_user'(coinductive(Template), Alias, Original, _, _, _, TCtn, _, _, _) :-
+	functor(Original, Functor, Arity),
+	(	'$lgt_predicate_property_'(TCtn, Functor/Arity, coinductive(Template0)) ->
+		functor(Alias, AliasFunctor, _),
+		Template0 =.. [_| ModeArgs],
+		Template =.. [AliasFunctor| ModeArgs]
 	;	fail
 	).
-'$lgt_predicate_property_user'((multifile), _, _, _, Flags, _, _, _, _) :-
+'$lgt_predicate_property_user'((multifile), _, _, _, _, Flags, _, _, _, _) :-
 	Flags /\ 16 =:= 16.
-'$lgt_predicate_property_user'(non_terminal(Functor//Arity), Pred, _, _, Flags, _, _, _, _) :-
+'$lgt_predicate_property_user'(non_terminal(Functor//Arity), Alias, _, _, _, Flags, _, _, _, _) :-
 	Flags /\ 8 =:= 8,
-	functor(Pred, Functor, ExtArity),
+	functor(Alias, Functor, ExtArity),
 	Arity is ExtArity - 2.
-'$lgt_predicate_property_user'(synchronized, _, _, _, Flags, _, _, _, _) :-
+'$lgt_predicate_property_user'(synchronized, _, _, _, _, Flags, _, _, _, _) :-
 	Flags /\ 4 =:= 4.
-'$lgt_predicate_property_user'(alias_of(Original), Pred, _, _, _, TCtn, Obj, _, Rnm) :-
-	once((	'$lgt_current_object_'(TCtn, _, TCtnDcl, _, _, _, _, _, _, _, _)
-		 ;	'$lgt_current_category_'(TCtn, _, TCtnDcl, _, _, _)
-		 ;	'$lgt_current_protocol_'(TCtn, _, TCtnDcl, _, _)
-	)),
-	\+ call(TCtnDcl, Pred, _, _, _),
-	'$lgt_find_original_predicate'(Obj, Rnm, Pred, Original).
-'$lgt_predicate_property_user'(defined_in(DCtn), Pred, _, _, _, _, _, Def, _) :-
-	(	call(Def, Pred, _, _, _, DCtn) ->
+'$lgt_predicate_property_user'(defined_in(DCtn), Alias, _, _, _, _, _, _, Def, _) :-
+	(	call(Def, Alias, _, _, _, DCtn) ->
 		true
 	;	fail
 	).
-'$lgt_predicate_property_user'(defined_in(DCtn, Line), Pred, _, _, _, _, _, Def, _) :-
-	(	call(Def, Pred, _, _, _, DCtn),
-		functor(Pred, Functor, Arity),
+'$lgt_predicate_property_user'(defined_in(DCtn, Line), Alias, Original, _, _, _, _, _, Def, _) :-
+	(	call(Def, Alias, _, _, _, DCtn),
+		functor(Original, Functor, Arity),
 		'$lgt_predicate_property_'(DCtn, Functor/Arity, flags_clauses_line(_, _, Line)) ->
 		true
 	;	fail
 	).
-'$lgt_predicate_property_user'(redefined_from(Super), Pred, _, _, _, _, Obj, Def, _) :-
-	(	call(Def, Pred, _, _, _, DCtn) ->
-		'$lgt_find_overridden_predicate'(DCtn, Obj, Pred, Super)
+'$lgt_predicate_property_user'(redefined_from(Super), Alias, _, _, _, _, _, Obj, Def, _) :-
+	(	call(Def, Alias, _, _, _, DCtn) ->
+		'$lgt_find_overridden_predicate'(DCtn, Obj, Alias, Super)
 	;	fail
 	).
-'$lgt_predicate_property_user'(redefined_from(Super, Line), Pred, _, _, _, _, Obj, Def, _) :-
-	(	call(Def, Pred, _, _, _, DCtn),
-		'$lgt_find_overridden_predicate'(DCtn, Obj, Pred, Super),
-		functor(Pred, Functor, Arity),
+'$lgt_predicate_property_user'(redefined_from(Super, Line), Alias, Original, _, _, _, _, Obj, Def, _) :-
+	(	call(Def, Alias, _, _, _, DCtn),
+		'$lgt_find_overridden_predicate'(DCtn, Obj, Alias, Super),
+		functor(Original, Functor, Arity),
 		'$lgt_predicate_property_'(Super, Functor/Arity, flags_clauses_line(_, _, Line)) ->
 		true
 	;	fail
 	).
-'$lgt_predicate_property_user'(info(Info), Pred, _, _, _, TCtn, _, _, _) :-
-	functor(Pred, Functor, Arity),
+'$lgt_predicate_property_user'(info(Info), _, Original, _, _, _, TCtn, _, _, _) :-
+	functor(Original, Functor, Arity),
 	(	'$lgt_predicate_property_'(TCtn, Functor/Arity, info(Info)) ->
 		true
 	;	fail
 	).
-'$lgt_predicate_property_user'(mode(Mode, Solutions), Pred, _, _, _, TCtn, _, _, _) :-
-	functor(Pred, Functor, Arity),
+'$lgt_predicate_property_user'(mode(Mode, Solutions), Alias, Original, _, _, _, TCtn, _, _, _) :-
+	functor(Original, Functor, Arity),
 	% we cannot make the mode/2 property deterministic as a predicate can support several different modes
-	'$lgt_predicate_property_'(TCtn, Functor/Arity, mode(Mode, Solutions)).
-'$lgt_predicate_property_user'(number_of_clauses(N), Pred, _, _, _, _, _, Def, _) :-
-	call(Def, Pred, _, _, _, DCtn),
-	functor(Pred, Functor, Arity),
+	'$lgt_predicate_property_'(TCtn, Functor/Arity, mode(Mode0, Solutions)),
+	functor(Alias, AliasFunctor, _),
+	Mode0 =.. [_| ModeArgs],
+	Mode =.. [AliasFunctor| ModeArgs].
+'$lgt_predicate_property_user'(number_of_clauses(N), Alias, Original, _, _, _, _, _, Def, _) :-
+	call(Def, Alias, _, _, _, DCtn),
+	functor(Original, Functor, Arity),
 	(	'$lgt_predicate_property_'(DCtn, Functor/Arity, flags_clauses_line(_, N0, _)) ->
 		true
 	;	N0 is 0
