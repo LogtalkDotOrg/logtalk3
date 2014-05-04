@@ -28,7 +28,12 @@ RELEASE NOTES
 3.00.0 Beta 4 - May ??, 2014
 ============================
 
+Logtalk compiler and runtime
+----------------------------
 
+* FIXED: The built-in method `predicate_property/2` would return properties for
+Prolog built-in predicates (which are interpreted as private predicates) when
+the *sender* is not the same object as *this*.
 
 
 3.00.0 Beta 3 - May 2, 2014

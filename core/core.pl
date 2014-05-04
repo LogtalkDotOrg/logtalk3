@@ -2465,7 +2465,7 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_predicate_property_logtalk_built_in'(Prop).
 
-'$lgt_predicate_property'(_, Pred, Prop, _, _) :-
+'$lgt_predicate_property'(Obj, Pred, Prop, Obj, _) :-
 	'$lgt_prolog_built_in_predicate'(Pred),
 	!,
 	'$lgt_predicate_property_prolog_built_in'(Prop, Pred).
@@ -2588,15 +2588,12 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_predicate_property_prolog_built_in'(prolog, _).
-'$lgt_predicate_property_prolog_built_in'(private, Pred) :-
-	'$lgt_prolog_meta_predicate'(Pred, _, _).
+'$lgt_predicate_property_prolog_built_in'(private, _).
 '$lgt_predicate_property_prolog_built_in'(meta_predicate(Meta), Pred) :-
 	'$lgt_prolog_meta_predicate'(Pred, Meta0, _),
 	Meta0 =.. [_| MetaArgs0],
 	'$lgt_prolog_to_logtalk_meta_argument_specifiers'(MetaArgs0, MetaArgs),
 	Meta =.. [_| MetaArgs].
-'$lgt_predicate_property_prolog_built_in'((public), Pred) :-
-	\+ '$lgt_prolog_meta_predicate'(Pred, _, _).
 '$lgt_predicate_property_prolog_built_in'(built_in, _).
 '$lgt_predicate_property_prolog_built_in'((dynamic), Pred) :-
 	'$lgt_predicate_property'(Pred, (dynamic)).
