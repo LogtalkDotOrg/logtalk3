@@ -31,6 +31,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Support for querying `meta_predicate/1` properties for Logtalk
+built-in predicates using the `predicate_property/2` built-in method.
+
 * FIXED: The built-in method `predicate_property/2` would return properties
 for Logtalk and Prolog built-in predicates (which are interpreted as private
 predicates) when the *sender* is not the same object as *this*.

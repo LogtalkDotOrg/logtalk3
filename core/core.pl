@@ -2462,9 +2462,9 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_predicate_property_built_in_method'(Prop, Pred, CScope, Meta, Flags).
 
 '$lgt_predicate_property'(Obj, Pred, Prop, Obj, _) :-
-	'$lgt_logtalk_built_in_predicate'(Pred),
+	'$lgt_logtalk_built_in_predicate'(Pred, Meta),
 	!,
-	'$lgt_predicate_property_logtalk_built_in'(Prop).
+	'$lgt_predicate_property_logtalk_built_in'(Prop, Meta).
 
 '$lgt_predicate_property'(Obj, Pred, Prop, Obj, _) :-
 	'$lgt_prolog_built_in_predicate'(Pred),
@@ -2582,11 +2582,12 @@ current_logtalk_flag(Flag, Value) :-
 	Flags /\ 4 =:= 4.
 
 
-'$lgt_predicate_property_logtalk_built_in'(logtalk).
-'$lgt_predicate_property_logtalk_built_in'(scope(private)).
-'$lgt_predicate_property_logtalk_built_in'((private)).
-'$lgt_predicate_property_logtalk_built_in'(built_in).
-'$lgt_predicate_property_logtalk_built_in'(static).
+'$lgt_predicate_property_logtalk_built_in'(logtalk, _).
+'$lgt_predicate_property_logtalk_built_in'(scope(private), _).
+'$lgt_predicate_property_logtalk_built_in'((private), _).
+'$lgt_predicate_property_logtalk_built_in'(built_in, _).
+'$lgt_predicate_property_logtalk_built_in'(static, _).
+'$lgt_predicate_property_logtalk_built_in'(meta_predicate(Meta), Meta).
 
 
 '$lgt_predicate_property_prolog_built_in'(prolog, _).
@@ -10492,7 +10493,7 @@ current_logtalk_flag(Flag, Value) :-
 	% not previously recorded as a non portable call
 	'$lgt_compiler_flag'(portability, warning),
 	'$lgt_predicate_property'(Pred, built_in),
-	\+ '$lgt_logtalk_built_in_predicate'(Pred),
+	\+ '$lgt_logtalk_built_in_predicate'(Pred, _),
 	\+ '$lgt_iso_spec_predicate'(Pred),
 	% bona fide Prolog built-in predicate
 	functor(Pred, Functor, Arity),
@@ -12982,7 +12983,7 @@ current_logtalk_flag(Flag, Value) :-
 	!.
 
 '$lgt_check_for_redefined_built_in'(Head, ExCtx, THead, Mode) :-
-	'$lgt_logtalk_built_in_predicate'(Head),
+	'$lgt_logtalk_built_in_predicate'(Head, _),
 	!,
 	assertz('$lgt_pp_redefined_built_in_'(Head, ExCtx, THead)),
 	retractall('$lgt_pp_non_portable_predicate_'(Head, _)),
@@ -14607,7 +14608,7 @@ current_logtalk_flag(Flag, Value) :-
 	!.
 
 '$lgt_fix_body_predicate_calls'(Pred, Pred) :-
-	'$lgt_logtalk_built_in_predicate'(Pred),
+	'$lgt_logtalk_built_in_predicate'(Pred, _),
 	!.
 
 '$lgt_fix_body_predicate_calls'(Pred, Pred) :-
@@ -15729,7 +15730,7 @@ current_logtalk_flag(Flag, Value) :-
 % checks if the argument is either a Logtalk or a Prolog built-in predicate
 
 '$lgt_built_in_predicate'(Pred) :-
-	'$lgt_logtalk_built_in_predicate'(Pred),
+	'$lgt_logtalk_built_in_predicate'(Pred, _),
 	!.
 
 '$lgt_built_in_predicate'(Pred) :-
@@ -15750,7 +15751,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_prolog_built_in_predicate'(Pred) :-
 	'$lgt_predicate_property'(Pred, built_in),
 	% Logtalk built-ins may also have the property built_in
-	\+ '$lgt_logtalk_built_in_predicate'(Pred),
+	\+ '$lgt_logtalk_built_in_predicate'(Pred, _),
 	!.
 
 '$lgt_prolog_built_in_predicate'(Pred) :-
@@ -16880,75 +16881,75 @@ current_logtalk_flag(Flag, Value) :-
 
 % Logtalk built-in predicates
 %
-% '$lgt_logtalk_built_in_predicate'(?callable)
+% '$lgt_logtalk_built_in_predicate'(?callable, ?callable)
 
 % message sending and context switching control constructs
-'$lgt_logtalk_built_in_predicate'(_ :: _).
-'$lgt_logtalk_built_in_predicate'(_ << _).
+'$lgt_logtalk_built_in_predicate'(_ :: _, no).
+'$lgt_logtalk_built_in_predicate'(_ << _, no).
 % compiling and loading predicates
-'$lgt_logtalk_built_in_predicate'(logtalk_compile(_)).
-'$lgt_logtalk_built_in_predicate'(logtalk_compile(_, _)).
-'$lgt_logtalk_built_in_predicate'(logtalk_load(_)).
-'$lgt_logtalk_built_in_predicate'(logtalk_load(_, _)).
-'$lgt_logtalk_built_in_predicate'(logtalk_make).
-'$lgt_logtalk_built_in_predicate'(logtalk_make(_)).
-'$lgt_logtalk_built_in_predicate'(logtalk_load_context(_, _)).
-'$lgt_logtalk_built_in_predicate'(logtalk_library_path(_, _)).
+'$lgt_logtalk_built_in_predicate'(logtalk_compile(_), no).
+'$lgt_logtalk_built_in_predicate'(logtalk_compile(_, _), no).
+'$lgt_logtalk_built_in_predicate'(logtalk_load(_), no).
+'$lgt_logtalk_built_in_predicate'(logtalk_load(_, _), no).
+'$lgt_logtalk_built_in_predicate'(logtalk_make, no).
+'$lgt_logtalk_built_in_predicate'(logtalk_make(_), no).
+'$lgt_logtalk_built_in_predicate'(logtalk_load_context(_, _), no).
+'$lgt_logtalk_built_in_predicate'(logtalk_library_path(_, _), no).
 % entity properties
-'$lgt_logtalk_built_in_predicate'(protocol_property(_, _)).
-'$lgt_logtalk_built_in_predicate'(category_property(_, _)).
-'$lgt_logtalk_built_in_predicate'(object_property(_, _)).
+'$lgt_logtalk_built_in_predicate'(protocol_property(_, _), no).
+'$lgt_logtalk_built_in_predicate'(category_property(_, _), no).
+'$lgt_logtalk_built_in_predicate'(object_property(_, _), no).
 % entity enumeration
-'$lgt_logtalk_built_in_predicate'(current_protocol(_)).
-'$lgt_logtalk_built_in_predicate'(current_category(_)).
-'$lgt_logtalk_built_in_predicate'(current_object(_)).
+'$lgt_logtalk_built_in_predicate'(current_protocol(_), no).
+'$lgt_logtalk_built_in_predicate'(current_category(_), no).
+'$lgt_logtalk_built_in_predicate'(current_object(_), no).
 % entity creation predicates
-'$lgt_logtalk_built_in_predicate'(create_object(_, _, _, _)).
-'$lgt_logtalk_built_in_predicate'(create_category(_, _, _, _)).
-'$lgt_logtalk_built_in_predicate'(create_protocol(_, _, _)).
+'$lgt_logtalk_built_in_predicate'(create_object(_, _, _, _), no).
+'$lgt_logtalk_built_in_predicate'(create_category(_, _, _, _), no).
+'$lgt_logtalk_built_in_predicate'(create_protocol(_, _, _), no).
 % entity abolishing predicates
-'$lgt_logtalk_built_in_predicate'(abolish_object(_)).
-'$lgt_logtalk_built_in_predicate'(abolish_category(_)).
-'$lgt_logtalk_built_in_predicate'(abolish_protocol(_)).
+'$lgt_logtalk_built_in_predicate'(abolish_object(_), no).
+'$lgt_logtalk_built_in_predicate'(abolish_category(_), no).
+'$lgt_logtalk_built_in_predicate'(abolish_protocol(_), no).
 % entity relations
-'$lgt_logtalk_built_in_predicate'(implements_protocol(_, _)).
-'$lgt_logtalk_built_in_predicate'(implements_protocol(_, _, _)).
-'$lgt_logtalk_built_in_predicate'(imports_category(_, _)).
-'$lgt_logtalk_built_in_predicate'(imports_category(_, _, _)).
-'$lgt_logtalk_built_in_predicate'(instantiates_class(_, _)).
-'$lgt_logtalk_built_in_predicate'(instantiates_class(_, _, _)).
-'$lgt_logtalk_built_in_predicate'(specializes_class(_, _)).
-'$lgt_logtalk_built_in_predicate'(specializes_class(_, _, _)).
-'$lgt_logtalk_built_in_predicate'(extends_protocol(_, _)).
-'$lgt_logtalk_built_in_predicate'(extends_protocol(_, _, _)).
-'$lgt_logtalk_built_in_predicate'(extends_object(_, _)).
-'$lgt_logtalk_built_in_predicate'(extends_object(_, _, _)).
-'$lgt_logtalk_built_in_predicate'(extends_category(_, _)).
-'$lgt_logtalk_built_in_predicate'(extends_category(_, _, _)).
-'$lgt_logtalk_built_in_predicate'(complements_object(_, _)).
+'$lgt_logtalk_built_in_predicate'(implements_protocol(_, _), no).
+'$lgt_logtalk_built_in_predicate'(implements_protocol(_, _, _), no).
+'$lgt_logtalk_built_in_predicate'(imports_category(_, _), no).
+'$lgt_logtalk_built_in_predicate'(imports_category(_, _, _), no).
+'$lgt_logtalk_built_in_predicate'(instantiates_class(_, _), no).
+'$lgt_logtalk_built_in_predicate'(instantiates_class(_, _, _), no).
+'$lgt_logtalk_built_in_predicate'(specializes_class(_, _), no).
+'$lgt_logtalk_built_in_predicate'(specializes_class(_, _, _), no).
+'$lgt_logtalk_built_in_predicate'(extends_protocol(_, _), no).
+'$lgt_logtalk_built_in_predicate'(extends_protocol(_, _, _), no).
+'$lgt_logtalk_built_in_predicate'(extends_object(_, _), no).
+'$lgt_logtalk_built_in_predicate'(extends_object(_, _, _), no).
+'$lgt_logtalk_built_in_predicate'(extends_category(_, _), no).
+'$lgt_logtalk_built_in_predicate'(extends_category(_, _, _), no).
+'$lgt_logtalk_built_in_predicate'(complements_object(_, _), no).
 % protocol conformance
-'$lgt_logtalk_built_in_predicate'(conforms_to_protocol(_, _)).
-'$lgt_logtalk_built_in_predicate'(conforms_to_protocol(_, _, _)).
+'$lgt_logtalk_built_in_predicate'(conforms_to_protocol(_, _), no).
+'$lgt_logtalk_built_in_predicate'(conforms_to_protocol(_, _, _), no).
 % events
-'$lgt_logtalk_built_in_predicate'(abolish_events(_, _, _, _, _)).
-'$lgt_logtalk_built_in_predicate'(define_events(_, _, _, _, _)).
-'$lgt_logtalk_built_in_predicate'(current_event(_, _, _, _, _)).
+'$lgt_logtalk_built_in_predicate'(abolish_events(_, _, _, _, _), no).
+'$lgt_logtalk_built_in_predicate'(define_events(_, _, _, _, _), no).
+'$lgt_logtalk_built_in_predicate'(current_event(_, _, _, _, _), no).
 % flags
-'$lgt_logtalk_built_in_predicate'(current_logtalk_flag(_, _)).
-'$lgt_logtalk_built_in_predicate'(set_logtalk_flag(_, _)).
+'$lgt_logtalk_built_in_predicate'(current_logtalk_flag(_, _), no).
+'$lgt_logtalk_built_in_predicate'(set_logtalk_flag(_, _), no).
 % multi-threading predicates
-'$lgt_logtalk_built_in_predicate'(threaded(_)).
-'$lgt_logtalk_built_in_predicate'(threaded_call(_, _)).
-'$lgt_logtalk_built_in_predicate'(threaded_call(_)).
-'$lgt_logtalk_built_in_predicate'(threaded_once(_, _)).
-'$lgt_logtalk_built_in_predicate'(threaded_once(_)).
-'$lgt_logtalk_built_in_predicate'(threaded_ignore(_)).
-'$lgt_logtalk_built_in_predicate'(threaded_exit(_, _)).
-'$lgt_logtalk_built_in_predicate'(threaded_exit(_)).
-'$lgt_logtalk_built_in_predicate'(threaded_peek(_, _)).
-'$lgt_logtalk_built_in_predicate'(threaded_peek(_)).
-'$lgt_logtalk_built_in_predicate'(threaded_wait(_)).
-'$lgt_logtalk_built_in_predicate'(threaded_notify(_)).
+'$lgt_logtalk_built_in_predicate'(threaded(_), threaded(0)).
+'$lgt_logtalk_built_in_predicate'(threaded_call(_, _), threaded_call(0, *)).
+'$lgt_logtalk_built_in_predicate'(threaded_call(_), threaded_call(0)).
+'$lgt_logtalk_built_in_predicate'(threaded_once(_, _), threaded_once(0, *)).
+'$lgt_logtalk_built_in_predicate'(threaded_once(_), threaded_once(0)).
+'$lgt_logtalk_built_in_predicate'(threaded_ignore(_), threaded_ignore(0)).
+'$lgt_logtalk_built_in_predicate'(threaded_exit(_, _), threaded_exit(::, *)).
+'$lgt_logtalk_built_in_predicate'(threaded_exit(_), threaded_exit(::)).
+'$lgt_logtalk_built_in_predicate'(threaded_peek(_, _), threaded_peek(::, *)).
+'$lgt_logtalk_built_in_predicate'(threaded_peek(_), threaded_peek(::)).
+'$lgt_logtalk_built_in_predicate'(threaded_wait(_), no).
+'$lgt_logtalk_built_in_predicate'(threaded_notify(_), bo).
 
 
 
