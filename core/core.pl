@@ -2393,7 +2393,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_member'(Functor/Arity, Preds).
 
 
-% '$lgt_visible_predicate'(@object_identifier, ?callable, @object_identifier, @term)
+% '$lgt_visible_predicate'(+object_identifier, ?callable, +object_identifier, +scope)
 %
 % checks/returns object predicates visible/within the scope of the sender
 
@@ -2411,10 +2411,11 @@ current_logtalk_flag(Flag, Value) :-
 %
 % predicate_property/2 built-in method
 %
-% local predicates without a scope declaration are invisible
+% local predicates without a scope declaration are invisible and Prolog
+% built-in predicates are interpreted as private predicates
 %
 % the implementation ensures that no spurious choice-points are created when
-% the method is called with a bound property argument
+% the method is called with a bound and deterministic property argument
 
 '$lgt_predicate_property'(Obj, Pred, Prop, Sender, _) :-
 	'$lgt_must_be'(callable, Pred, logtalk(Obj::predicate_property(Pred, Prop), Sender)),
@@ -2443,7 +2444,7 @@ current_logtalk_flag(Flag, Value) :-
 		% found static declaration for the predicate
 		'$lgt_predicate_property_user'(Prop, Pred, Pred, CScope, Meta, Flags, TCtn, Obj, Def, Rnm)
 	;	Flags /\ 2 =:= 2 ->
-		% dynamic predicate; aliases can only be defined for static predicates
+		% dynamically declared predicate; aliases can only be defined for staticly declared predicates
 		'$lgt_predicate_property_user'(Prop, Pred, Pred, CScope, Meta, Flags, TCtn, Obj, Def, Rnm)
 	;	% assume that we are querying properties of a predicate alias
 		'$lgt_find_original_predicate'(Obj, Rnm, Pred, Original),
