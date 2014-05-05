@@ -2583,12 +2583,14 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_predicate_property_logtalk_built_in'(logtalk).
+'$lgt_predicate_property_logtalk_built_in'(scope(public)).
 '$lgt_predicate_property_logtalk_built_in'((public)).
 '$lgt_predicate_property_logtalk_built_in'(built_in).
 '$lgt_predicate_property_logtalk_built_in'(static).
 
 
 '$lgt_predicate_property_prolog_built_in'(prolog, _).
+'$lgt_predicate_property_prolog_built_in'(scope(private), _).
 '$lgt_predicate_property_prolog_built_in'(private, _).
 '$lgt_predicate_property_prolog_built_in'(meta_predicate(Meta), Pred) :-
 	'$lgt_prolog_meta_predicate'(Pred, Meta0, _),
