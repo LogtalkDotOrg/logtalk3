@@ -31,9 +31,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* FIXED: The built-in method `predicate_property/2` would return properties for
-Prolog built-in predicates (which are interpreted as private predicates) when
-the *sender* is not the same object as *this*.
+* FIXED: The built-in method `predicate_property/2` would return properties
+for Logtalk and Prolog built-in predicates (which are interpreted as private
+predicates) when the *sender* is not the same object as *this*.
 
 * FIXED: The built-in method `predicate_property/2` would not return the
 `scope/1` property for Logtalk or Prolog built-in predicates.

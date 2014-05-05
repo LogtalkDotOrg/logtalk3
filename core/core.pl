@@ -2461,7 +2461,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_scope'(CScope, PScope),
 	'$lgt_predicate_property_built_in_method'(Prop, Pred, CScope, Meta, Flags).
 
-'$lgt_predicate_property'(_, Pred, Prop, _, _) :-
+'$lgt_predicate_property'(Obj, Pred, Prop, Obj, _) :-
 	'$lgt_logtalk_built_in_predicate'(Pred),
 	!,
 	'$lgt_predicate_property_logtalk_built_in'(Prop).
@@ -2583,8 +2583,8 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_predicate_property_logtalk_built_in'(logtalk).
-'$lgt_predicate_property_logtalk_built_in'(scope(public)).
-'$lgt_predicate_property_logtalk_built_in'((public)).
+'$lgt_predicate_property_logtalk_built_in'(scope(private)).
+'$lgt_predicate_property_logtalk_built_in'((private)).
 '$lgt_predicate_property_logtalk_built_in'(built_in).
 '$lgt_predicate_property_logtalk_built_in'(static).
 
