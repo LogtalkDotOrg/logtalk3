@@ -67,7 +67,7 @@
 :- op(400, yfx, >>).
 
 
-% predicate alias operator
+% predicate alias operator (alternative to use the operators ::/2 or :/2 depending on the context)
 :- op(700, xfx, as).
 
 
@@ -895,30 +895,30 @@ protocol_property(Ptc, Prop) :-
 
 
 '$lgt_object_property_declares'(Obj, Dcl, DDcl, EntityFlags, Functor/Arity, Properties) :-
-	(	call(Dcl, Predicate, Scope0, Meta, Flags)
+	(	call(Dcl, Predicate, Scope, Meta, Flags)
 	;	EntityFlags /\ 128 =:= 128,
 		% dynamic predicate declarations enabled
-		call(DDcl, Predicate, Scope0),
+		call(DDcl, Predicate, Scope),
 		Meta = no,
 		Flags = 2
 	),
 	functor(Predicate, Functor, Arity),
-	'$lgt_scope'(Scope, Scope0),
-	'$lgt_entity_property_declares'(Obj, Functor/Arity, Scope, Meta, Flags, Properties).
+	'$lgt_scope'(ScopeAsAtom, Scope),
+	'$lgt_entity_property_declares'(Obj, Functor/Arity, ScopeAsAtom, Meta, Flags, Properties).
 
 
 '$lgt_category_property_declares'(Ctg, Dcl, Functor/Arity, Properties) :-
-	call(Dcl, Predicate, Scope0, Meta, Flags, Ctg),
+	call(Dcl, Predicate, Scope, Meta, Flags, Ctg),
 	functor(Predicate, Functor, Arity),
-	'$lgt_scope'(Scope, Scope0),
-	'$lgt_entity_property_declares'(Ctg, Functor/Arity, Scope, Meta, Flags, Properties).
+	'$lgt_scope'(ScopeAsAtom, Scope),
+	'$lgt_entity_property_declares'(Ctg, Functor/Arity, ScopeAsAtom, Meta, Flags, Properties).
 
 
 '$lgt_protocol_property_declares'(Ptc, Dcl, Functor/Arity, Properties) :-
-	call(Dcl, Predicate, Scope0, Meta, Flags, Ptc),
+	call(Dcl, Predicate, Scope, Meta, Flags, Ptc),
 	functor(Predicate, Functor, Arity),
-	'$lgt_scope'(Scope, Scope0),
-	'$lgt_entity_property_declares'(Ptc, Functor/Arity, Scope, Meta, Flags, Properties).
+	'$lgt_scope'(ScopeAsAtom, Scope),
+	'$lgt_entity_property_declares'(Ptc, Functor/Arity, ScopeAsAtom, Meta, Flags, Properties).
 
 
 '$lgt_entity_property_declares'(Entity, Functor/Arity, Scope, Meta, Flags, Properties) :-
@@ -1543,7 +1543,9 @@ conforms_to_protocol(ObjOrCtg, Protocol, Scope) :-
 	'$lgt_filter_scope'(ExtensionScope, InheritedScope, Scope).
 
 
+% public relations don't change predicate scopes
 '$lgt_filter_scope'((public), Scope, Scope).
+% protected relatiosn change public predicates to protected predicates
 '$lgt_filter_scope'(protected, Scope, protected) :-
 	Scope \= private.
 
@@ -2377,18 +2379,18 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_must_be'(object, Obj, logtalk(Obj::current_predicate(Pred), Sender)),
 	fail.
 
-'$lgt_current_predicate'(Obj, Functor/Arity, Sender, Scope) :-
+'$lgt_current_predicate'(Obj, Functor/Arity, Sender, LookupScope) :-
 	nonvar(Functor),
 	nonvar(Arity),
 	!,
 	functor(Pred, Functor, Arity),
-	'$lgt_visible_predicate'(Obj, Pred, Sender, Scope),
+	'$lgt_visible_predicate'(Obj, Pred, Sender, LookupScope),
 	!.
 
-'$lgt_current_predicate'(Obj, Functor/Arity, Sender, Scope) :-
+'$lgt_current_predicate'(Obj, Functor/Arity, Sender, LookupScope) :-
 	setof(
 		Functor/Arity,
-		(Pred, Scope)^('$lgt_visible_predicate'(Obj, Pred, Sender, Scope), functor(Pred, Functor, Arity)),
+		(Pred, LookupScope)^('$lgt_visible_predicate'(Obj, Pred, Sender, LookupScope), functor(Pred, Functor, Arity)),
 		Preds),
 	'$lgt_member'(Functor/Arity, Preds).
 
@@ -2397,10 +2399,10 @@ current_logtalk_flag(Flag, Value) :-
 %
 % checks/returns object predicates visible/within the scope of the sender
 
-'$lgt_visible_predicate'(Obj, Pred, Sender, Scope) :-
+'$lgt_visible_predicate'(Obj, Pred, Sender, LookupScope) :-
 	'$lgt_current_object_'(Obj, _, Dcl, _, _, _, _, _, _, _, _),
-	call(Dcl, Pred, PScope, _, _, SCtn, _),
-	(	\+ \+ PScope = Scope ->
+	call(Dcl, Pred, PredScope, _, _, SCtn, _),
+	(	\+ \+ PredScope = LookupScope ->
 		true
 	;	Sender = SCtn
 	).
@@ -2423,17 +2425,17 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_must_be'(object, Obj, logtalk(Obj::predicate_property(Pred, Prop), Sender)),
 	fail.
 
-'$lgt_predicate_property'(Obj, Pred, Prop, Sender, Scope) :-
+'$lgt_predicate_property'(Obj, Pred, Prop, Sender, LookupScope) :-
 	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, _, _, Rnm, _),
-	call(Dcl, Pred, PScope, Meta, Flags, SCtn, TCtn),
+	call(Dcl, Pred, PredScope, Meta, Flags, SCtn, TCtn),
 	% predicate declaration found
 	!,
-	(	\+ \+ PScope = Scope ->
+	(	\+ \+ PredScope = LookupScope ->
 		true
 	;	Sender = SCtn
 	),
 	% query is within scope
-	'$lgt_scope'(CScope, PScope),
+	'$lgt_scope'(ScopeAsAtom, PredScope),
 	(	'$lgt_current_object_'(TCtn, _, TCtnDcl, _, _, _, _, _, _, _, _) ->
 		true
 	;	'$lgt_current_protocol_'(TCtn, _, TCtnDcl, _, _) ->
@@ -2442,24 +2444,24 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	(	call(TCtnDcl, Pred, _, _, _) ->
 		% found static declaration for the predicate
-		'$lgt_predicate_property_user'(Prop, Pred, Pred, CScope, Meta, Flags, TCtn, Obj, Def, Rnm)
+		'$lgt_predicate_property_user'(Prop, Pred, Pred, ScopeAsAtom, Meta, Flags, TCtn, Obj, Def, Rnm)
 	;	Flags /\ 2 =:= 2 ->
 		% dynamically declared predicate; aliases can only be defined for staticly declared predicates
-		'$lgt_predicate_property_user'(Prop, Pred, Pred, CScope, Meta, Flags, TCtn, Obj, Def, Rnm)
+		'$lgt_predicate_property_user'(Prop, Pred, Pred, ScopeAsAtom, Meta, Flags, TCtn, Obj, Def, Rnm)
 	;	% assume that we are querying properties of a predicate alias
 		'$lgt_find_original_predicate'(Obj, Rnm, Pred, Original),
-		'$lgt_predicate_property_user'(Prop, Pred, Original, CScope, Meta, Flags, TCtn, Obj, Def, Rnm)
+		'$lgt_predicate_property_user'(Prop, Pred, Original, ScopeAsAtom, Meta, Flags, TCtn, Obj, Def, Rnm)
 	).
 
-'$lgt_predicate_property'(Obj, Pred, Prop, Sender, Scope) :-
-	'$lgt_built_in_method'(Pred, PScope, Meta, Flags),
+'$lgt_predicate_property'(Obj, Pred, Prop, Sender, LookupScope) :-
+	'$lgt_built_in_method'(Pred, PredScope, Meta, Flags),
 	!,
-	(	\+ \+ PScope = Scope ->
+	(	\+ \+ PredScope = LookupScope ->
 		true
 	;	Sender = Obj
 	),
-	'$lgt_scope'(CScope, PScope),
-	'$lgt_predicate_property_built_in_method'(Prop, Pred, CScope, Meta, Flags).
+	'$lgt_scope'(ScopeAsAtom, PredScope),
+	'$lgt_predicate_property_built_in_method'(Prop, Pred, ScopeAsAtom, Meta, Flags).
 
 '$lgt_predicate_property'(Obj, Pred, Prop, Obj, _) :-
 	'$lgt_logtalk_built_in_predicate'(Pred, Meta),
@@ -3527,10 +3529,10 @@ current_logtalk_flag(Flag, Value) :-
 % when there is no scope directive, then we call any local definition when the sender
 % and the target object are the same
 
-'$lgt_term_expansion'(Obj, Term, Expansion, Sender, Scope) :-
+'$lgt_term_expansion'(Obj, Term, Expansion, Sender, LookupScope) :-
 	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, _, DDef, _, _),
-	(	call(Dcl, term_expansion(_, _), PScope, _, _, SCtn, _) ->
-		(	(PScope = Scope; Sender = SCtn) ->
+	(	call(Dcl, term_expansion(_, _), PredScope, _, _, SCtn, _) ->
+		(	(PredScope = LookupScope; Sender = SCtn) ->
 			'$lgt_execution_context'(ExCtx, Sender, Obj, Obj, _, _),
 			call(Def, term_expansion(Term, Expansion), ExCtx, Call, _, _)
 		;	fail
@@ -3555,10 +3557,10 @@ current_logtalk_flag(Flag, Value) :-
 % when there is no scope directive but the sender and the target objects are the
 % same, it calls any local definition of the goal_expansion/2 user-defined method
 
-'$lgt_expand_goal'(Obj, Goal, ExpandedGoal, Sender, Scope) :-
+'$lgt_expand_goal'(Obj, Goal, ExpandedGoal, Sender, LookupScope) :-
 	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, _, DDef, _, _),
-	(	call(Dcl, goal_expansion(_, _), PScope, _, _, SCtn, _) ->
-		(	(PScope = Scope; Sender = SCtn) ->
+	(	call(Dcl, goal_expansion(_, _), PredScope, _, _, SCtn, _) ->
+		(	(PredScope = LookupScope; Sender = SCtn) ->
 			'$lgt_execution_context'(ExCtx, Sender, Obj, Obj, _, _),
 			'$lgt_expand_goal_scoped'(Goal, ExpandedGoal, Def, ExCtx)
 		;	ExpandedGoal = Goal
