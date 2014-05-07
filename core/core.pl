@@ -1972,11 +1972,7 @@ logtalk_compile(Files, Flags) :-
 	logtalk_library_path(Library, Location), !,
 	(	atom(Location) ->
 		% assume the final component of the library path
-		% and make sure that it ends with a slash
-		(	sub_atom(Location, _, _, 0, '/') ->
-			Path = Location
-		;	atom_concat(Location, '/', Path)
-		)
+		Path = Location
 	;	% assume library notation (a compound term)
 		N > 0,
 		N2 is N - 1,
