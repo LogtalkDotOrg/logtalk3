@@ -6179,7 +6179,10 @@ current_logtalk_flag(Flag, Value) :-
 % we throw an error
 
 '$lgt_tr_file_term'(Term, Ctx) :-
-	(	'$lgt_pp_hook_term_expansion_'(Term, ExpandedTerms) ->
+	(	Term = {_} ->
+		% bypass control construct; skip term-expansion
+		'$lgt_tr_expanded_term'(Term, Term, Ctx)
+	;	'$lgt_pp_hook_term_expansion_'(Term, ExpandedTerms) ->
 		% source-file specific compiler hook
 		'$lgt_tr_expanded_terms'(ExpandedTerms, Term, Ctx)
 	;	'$lgt_hook_term_expansion_'(Term, ExpandedTerms) ->

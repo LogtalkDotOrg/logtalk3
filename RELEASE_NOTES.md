@@ -41,6 +41,9 @@ predicates) when the *sender* is not the same object as *this*.
 * FIXED: The built-in method `predicate_property/2` would not return the
 `scope/1` property for Logtalk or Prolog built-in predicates.
 
+* FIXED: The compiler would try to expand source file terms wrapped using the
+`{}/1` control construct.
+
 Tests
 -----
 
