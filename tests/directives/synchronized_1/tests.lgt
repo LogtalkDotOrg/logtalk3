@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/02/28,
+		date is 2014/05/07,
 		comment is 'Unit tests for the synchronized/1 built-in directive.'
 	]).
 
@@ -24,8 +24,11 @@
 	:- private(a/0).
 	:- synchronized(a/0).
 
-	:- private([b/1, c/2]).
-	:- synchronized([b/1, c/2]).
+	:- private((b/1, c/2)).
+	:- synchronized((b/1, c/2)).
+
+	:- private([d/3, e/4]).
+	:- synchronized([d/3, e/4]).
 
 	:- if(current_logtalk_flag(threads, supported)).
 
@@ -35,11 +38,15 @@
 
 		test(synchronized_1_2) :-
 			predicate_property(b(_), private),
-			predicate_property(b(_), synchronized).
-
-		test(synchronized_1_3) :-
+			predicate_property(b(_), synchronized),
 			predicate_property(c(_,_), private),
 			predicate_property(c(_,_), synchronized).
+
+		test(synchronized_1_3) :-
+			predicate_property(d(_,_,_), private),
+			predicate_property(d(_,_,_), synchronized),
+			predicate_property(e(_,_,_,_), private),
+			predicate_property(e(_,_,_,_), synchronized).
 
 	:- else.
 
@@ -51,11 +58,15 @@
 
 		test(synchronized_1_2) :-
 			predicate_property(b(_), private),
-			\+ predicate_property(b(_), synchronized).
-
-		test(synchronized_1_3) :-
+			\+ predicate_property(b(_), synchronized),
 			predicate_property(c(_,_), private),
 			\+ predicate_property(c(_,_), synchronized).
+
+		test(synchronized_1_3) :-
+			predicate_property(d(_,_,_), private),
+			\+ predicate_property(d(_,_,_), synchronized),
+			predicate_property(e(_,_,_,_), private),
+			\+ predicate_property(e(_,_,_,_), synchronized).
 
 	:- endif.
 

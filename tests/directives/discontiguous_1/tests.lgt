@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/05/27,
+		date is 2014/05/07,
 		comment is 'Unit tests for the discontiguous/1 built-in directive.'
 	]).
 
@@ -24,15 +24,22 @@
 	:- private(a/1).
 	:- discontiguous(a/1).
 
-	:- private([b/1, c/1]).
-	:- discontiguous([b/1, c/1]).
+	:- private((b/1, c/1)).
+	:- discontiguous((b/1, c/1)).
+
+	:- private([d/3, e/4]).
+	:- discontiguous([d/3, e/4]).
 
 	a(1).
 	b(1).
+	d(1,2,3).
 	a(2).
+	e(a,e,i,o).
+	d(4,5,6).
 	c(1).
 	b(2).
 	c(2).
+	e(x,y,z,t).
 
 	test(discontiguous_1_1) :-
 		findall(X, a(X), L),

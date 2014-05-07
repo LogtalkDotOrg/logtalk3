@@ -50,6 +50,9 @@ Tests
 * ADDED: Some more unit tests for the built-in methods `current_predicate/1`
 and `predicate_property/2`.
 
+* ADDED: Tests for several predicate directives to check the less used syntax
+where a conjunction of predicate indicators is used instead of a list.
+
 
 3.00.0 Beta 3 - May 2, 2014
 ===========================
