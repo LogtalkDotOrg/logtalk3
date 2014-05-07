@@ -87,6 +87,11 @@ particular, code adopted from the Edinburgh Prolog library. The definition
 of predicate `reverse/2` in object list is from Richard O'Keefe and can be
 found in its book "The Craft of Prolog".
 
+Some elements of this library are inspired by Richard O'Keefe library proposal
+available at:
+
+	http://www.cs.otago.ac.nz/staffpriv/ok/pllib.htm
+
 All source files are formatted using tabs (the recommended setting is a tab
 width equivalent to 4 spaces).
 

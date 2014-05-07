@@ -34,7 +34,6 @@ ________________________________________________________________________
 
 
 % when using ECLiPSe, you will need to write the object name "help" between
-% paranthesis to avoid a clash with the "help" built-in operator:
+% parentheses to avoid a clash with the "help" built-in operator:
 
 | ?- (help)::help.
-

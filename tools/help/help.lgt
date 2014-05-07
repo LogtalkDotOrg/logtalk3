@@ -386,7 +386,7 @@
 		reverse_slashes(Chars, ConvertedChars).
 
 	% we use a simplified version of the integer::between/3
-	% predicate in order to minimize this tool dependecies
+	% predicate in order to minimize this tool dependencies
 	between(Lower, _, Lower).
 	between(Lower, Upper, Integer) :-
 		Lower < Upper,

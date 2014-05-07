@@ -38,9 +38,9 @@ To compile and load this framework type:
 
 	| ?- logtalk_load(lgtunit(loader)).
 
-The unit tests framework is inspired on the works of Joachim Schimpf 
-(ECLiPSe library `test_util`) and Jan Wielemaker (SWI-Prolog `plunit` 
-package).
+The unit tests framework is inspired by Java's JUnit and by the works of
+Joachim Schimpf (ECLiPSe library `test_util`) and Jan Wielemaker (SWI-Prolog
+`plunit` package).
 
 In order to write your own unit tests, define objects extending the 
 `lgtunit` object. These objects must be compiled using the compiler
@@ -115,7 +115,7 @@ Setup and cleanup goals
 
 A unit test object can define `setup/0` and `cleanup/0`. goals. The `setup/0`
 predicate is called, when defined, before running the object unit tests. The
-`cleanup/0` predciate is called, when defined, after running all the object
+`cleanup/0` predicate is called, when defined, after running all the object
 unit tests.
 
 

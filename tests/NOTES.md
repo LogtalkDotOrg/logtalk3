@@ -32,3 +32,6 @@ compiler, open a terminal and type:
 	$ cd ../examples
 	$ logtalk_tester -p swi
 	...
+	$ cd ../contributions
+	$ logtalk_tester -p swi
+	...
