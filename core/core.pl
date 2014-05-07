@@ -6663,7 +6663,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_file_directive'(multifile(Preds), _) :-
 	% perform basic error checking
 	'$lgt_must_be'(ground, Preds),
-	'$lgt_flatten_to_list'([Preds], PredsFlatted),
+	'$lgt_flatten_to_list'(Preds, PredsFlatted),
 	'$lgt_member'(Obj::Functor/Arity, PredsFlatted),
 	% Logtalk multifile predicates must be defined within an entity but
 	% be sure there isn't a non-instantiation error in the directive
@@ -6974,7 +6974,7 @@ current_logtalk_flag(Flag, Value) :-
 % calls/1 entity directive (deprecated)
 
 '$lgt_tr_logtalk_directive'(calls(Ptcs), Ctx) :-
-	'$lgt_flatten_list'([Ptcs], PtcsFlatted),
+	'$lgt_flatten_to_list'(Ptcs, PtcsFlatted),
 	'$lgt_tr_calls_directive'(PtcsFlatted),
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
 		'$lgt_increment_compile_warnings_counter',
@@ -7017,7 +7017,7 @@ current_logtalk_flag(Flag, Value) :-
 			;	true
 			)
 		;	% process the directive
-			'$lgt_flatten_list'([Resources], ResourcesFlatted),
+			'$lgt_flatten_to_list'(Resources, ResourcesFlatted),
 			'$lgt_tr_synchronized_directive'(ResourcesFlatted)
 		)
 	;	% ignore the directive
@@ -7027,15 +7027,15 @@ current_logtalk_flag(Flag, Value) :-
 % scope directives
 
 '$lgt_tr_logtalk_directive'(public(Resources), _) :-
-	'$lgt_flatten_list'([Resources], ResourcesFlatted),
+	'$lgt_flatten_to_list'(Resources, ResourcesFlatted),
 	'$lgt_tr_public_directive'(ResourcesFlatted).
 
 '$lgt_tr_logtalk_directive'(protected(Resources), _) :-
-	'$lgt_flatten_list'([Resources], ResourcesFlatted),
+	'$lgt_flatten_to_list'(Resources, ResourcesFlatted),
 	'$lgt_tr_protected_directive'(ResourcesFlatted).
 
 '$lgt_tr_logtalk_directive'(private(Resources), _) :-
-	'$lgt_flatten_list'([Resources], ResourcesFlatted),
+	'$lgt_flatten_to_list'(Resources, ResourcesFlatted),
 	'$lgt_tr_private_directive'(ResourcesFlatted).
 
 % export/1 module directive
@@ -7051,17 +7051,17 @@ current_logtalk_flag(Flag, Value) :-
 % dynamic/1 and discontiguous/1 predicate directives
 
 '$lgt_tr_logtalk_directive'(dynamic(Resources), _) :-
-	'$lgt_flatten_list'([Resources], ResourcesFlatted),
+	'$lgt_flatten_to_list'(Resources, ResourcesFlatted),
 	'$lgt_tr_dynamic_directive'(ResourcesFlatted).
 
 '$lgt_tr_logtalk_directive'(discontiguous(Resources), _) :-
-	'$lgt_flatten_list'([Resources], ResourcesFlatted),
+	'$lgt_flatten_to_list'(Resources, ResourcesFlatted),
 	'$lgt_tr_discontiguous_directive'(ResourcesFlatted).
 
 % meta_predicate/2 and meta_non_terminal/1 predicate directives
 
 '$lgt_tr_logtalk_directive'(meta_predicate(Preds), _) :-
-	'$lgt_flatten_list'([Preds], PredsFlatted),
+	'$lgt_flatten_to_list'(Preds, PredsFlatted),
 	(	'$lgt_pp_module_'(_) ->
 		% we're compiling a module as an object
 		'$lgt_tr_module_meta_predicate_directive'(PredsFlatted, TPredsFlatted)
@@ -7071,7 +7071,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_tr_meta_predicate_directive'(TPredsFlatted).
 
 '$lgt_tr_logtalk_directive'(meta_non_terminal(Preds), _) :-
-	'$lgt_flatten_list'([Preds], PredsFlatted),
+	'$lgt_flatten_to_list'(Preds, PredsFlatted),
 	'$lgt_tr_meta_non_terminal_directive'(PredsFlatted).
 
 % mode/2 predicate directive
@@ -7094,14 +7094,14 @@ current_logtalk_flag(Flag, Value) :-
 % multifile/2 predicate directive
 
 '$lgt_tr_logtalk_directive'(multifile(Preds), _) :-
-	'$lgt_flatten_list'([Preds], PredsFlatted),
+	'$lgt_flatten_to_list'(Preds, PredsFlatted),
 	'$lgt_tr_multifile_directive'(PredsFlatted).
 
 % coinductive/1 predicate directive
 
 '$lgt_tr_logtalk_directive'(coinductive(Preds), Ctx) :-
 	(	'$lgt_prolog_feature'(coinduction, supported) ->
-		'$lgt_flatten_list'([Preds], PredsFlatted),
+		'$lgt_flatten_to_list'(Preds, PredsFlatted),
 		'$lgt_tr_coinductive_directive'(PredsFlatted, Ctx)
 	;	throw(resource_error(coinduction))
 	).
@@ -8189,7 +8189,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	var(Relation) ->
 		throw(instantiation_error)
 	;	Relation =.. [Functor| Args],
-		'$lgt_flatten_list'(Args, FlattenedArgs),
+		'$lgt_flatten_to_list'(Args, FlattenedArgs),
 		'$lgt_tr_object_relation'(Functor, FlattenedArgs, Obj) ->
 		true
 	;	callable(Relation) ->
@@ -8236,7 +8236,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	var(Relation) ->
 		throw(instantiation_error)
 	;	Relation =.. [Functor| Args],
-		'$lgt_flatten_list'(Args, FlattenedArgs),
+		'$lgt_flatten_to_list'(Args, FlattenedArgs),
 		'$lgt_tr_protocol_relation'(Functor, FlattenedArgs, Ptc) ->
 		true
 	;	callable(Relation) ->
@@ -8271,7 +8271,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	var(Relation) ->
 		throw(instantiation_error)
 	;	Relation =.. [Functor| Args],
-		'$lgt_flatten_list'(Args, FlattenedArgs),
+		'$lgt_flatten_to_list'(Args, FlattenedArgs),
 		'$lgt_tr_category_relation'(Functor, FlattenedArgs, Ctg) ->
 		true
 	;	callable(Relation) ->
@@ -16087,24 +16087,21 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_flatten_list'(+list, -list)
+% '$lgt_flatten_to_list'(+term, -list)
 %
-% flattens a list of terms
+% flattens an item, a list of items, or a conjuction of items into a list
 
-'$lgt_flatten_list'([[A|B]], [A|B]) :-		% list containing a single list
+'$lgt_flatten_to_list'([A|B], [A|B]) :-
 	!.
 
-'$lgt_flatten_list'([[]], []) :-			% list containing a single empty list
+'$lgt_flatten_to_list'([], []) :-
 	!.
 
-'$lgt_flatten_list'([(A, B)], [A|BB]) :-	% list containing a single element,
-	!,										% which is a sequence: (A, B, ...)
-	'$lgt_flatten_list'([B], BB).
+'$lgt_flatten_to_list'((A, B), [A|BB]) :-
+	!,
+	'$lgt_flatten_to_list'(B, BB).
 
-'$lgt_flatten_list'([A|B], [A|B]) :-		% already flattened list
-	!.
-
-'$lgt_flatten_list'([], []).				% empty  list
+'$lgt_flatten_to_list'(A, [A]).
 
 
 
