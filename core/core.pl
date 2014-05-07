@@ -6589,22 +6589,29 @@ current_logtalk_flag(Flag, Value) :-
 	!.
 
 '$lgt_tr_file_directive'(ensure_loaded(File), _) :-
-	% assume that ensure_loaded/1 is also a built-in predicate
 	!,
+	% perform basic error checking
+	'$lgt_must_be'(ground, File),
+	% assume that ensure_loaded/1 is also a built-in predicate
 	ensure_loaded(File),
 	'$lgt_pp_term_location'(Location),
 	assertz('$lgt_pp_prolog_term_'((:- ensure_loaded(File)), Location)).
 
 '$lgt_tr_file_directive'(use_module(File), _) :-
-	% assume that use_module/1 is also a built-in predicate
 	!,
+	% perform basic error checking
+	'$lgt_must_be'(ground, File),
+	% assume that use_module/1 is also a built-in predicate
 	use_module(File),
 	'$lgt_pp_term_location'(Location),
 	assertz('$lgt_pp_prolog_term_'((:- use_module(File)), Location)).
 
 '$lgt_tr_file_directive'(use_module(File, Imports), _) :-
-	% assume that use_module/2 is also a built-in predicate
 	!,
+	% perform basic error checking
+	'$lgt_must_be'(ground, File),
+	'$lgt_must_be'(ground, Imports),
+	% assume that use_module/2 is also a built-in predicate
 	use_module(File, Imports),
 	'$lgt_pp_term_location'(Location),
 	assertz('$lgt_pp_prolog_term_'((:- use_module(File, Imports)), Location)).
@@ -6654,7 +6661,9 @@ current_logtalk_flag(Flag, Value) :-
 	assertz('$lgt_pp_prolog_term_'((:- set_prolog_flag(Flag, Value)), Location)).
 
 '$lgt_tr_file_directive'(multifile(Preds), _) :-
-	'$lgt_flatten_list'([Preds], PredsFlatted),
+	% perform basic error checking
+	'$lgt_must_be'(ground, Preds),
+	'$lgt_flatten_to_list'([Preds], PredsFlatted),
 	'$lgt_member'(Obj::Functor/Arity, PredsFlatted),
 	% Logtalk multifile predicates must be defined within an entity but
 	% be sure there isn't a non-instantiation error in the directive
