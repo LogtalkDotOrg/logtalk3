@@ -34,6 +34,8 @@ Logtalk compiler and runtime
 * ADDED: Support for querying `meta_predicate/1` properties for Logtalk
 built-in predicates using the `predicate_property/2` built-in method.
 
+* ADDED: Initial support for the `foreign` predicate property (not yet in use).
+
 * IMPROVED: Perform basic error checking for file-level `ensure_loaded/1`,
 `use_module/1-2`, and `multifile/1` directives.
 

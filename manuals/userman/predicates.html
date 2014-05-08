@@ -840,7 +840,7 @@ Possible predicate properties values are:
 	<li><code>scope(Scope)</code></li>
 	<li><code>public</code>, <code>protected</code>, <code>private</code></li>
 	<li><code>static</code>, <code>dynamic</code></li>
-	<li><code>logtalk</code>, <code>prolog</code></li>
+	<li><code>logtalk</code>, <code>prolog</code>, <code>foreign</code></li>
 	<li><code>built_in</code></li>
 	<li><code>multifile</code></li>
 	<li><code>meta_predicate(Template)</code></li>
@@ -865,7 +865,7 @@ Some properties are only available when the source files containing the entities
 	<li><code>redefined_from(Entity, Line)</code></li>
 </ul>
 <p>
-The properties <code>logtalk</code> and <code>prolog</code> allows us to distinguish between predicates defined by Logtalk and predicates defined by the back-end Prolog compiler.
+The properties <code>logtalk</code>, <code>prolog</code>, and <code>foreign</code> allows us to distinguish between predicates defined, respectively, in Logtalk, Prolog (e.g. defined by the back-end Prolog compiler), or foreign (e.g. C) source code.
 </p>
 <p>
 The properties <code>declared_in/1-2</code>, <code>defined_in/1-2</code>, and <code>redefined_from/1-2</code> do not apply to built-in methods and Logtalk or Prolog built-in predicates. Note that if a predicate is declared in a category imported by the object, it will be the category name &mdash; not the object name &mdash; that will be returned by the property <code>declared_in/1</code>. The same is true for protocol declared predicates.
@@ -984,7 +984,7 @@ This workaround is sometimes necessary when calling module meta-predicates whose
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: April 30, 2014</span>
+		<span>Last updated on: May 8, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="categories.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="inheritance.html">next</a></span><br/>

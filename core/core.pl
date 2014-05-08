@@ -16457,10 +16457,12 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_valid_predicate_property'((dynamic)).
 % static predicate
 '$lgt_valid_predicate_property'(static).
-% predicate is defined in Logtalk
+% predicate is defined in Logtalk source code
 '$lgt_valid_predicate_property'(logtalk).
-% predicate is defined in Prolog
+% predicate is defined in Prolog source code
 '$lgt_valid_predicate_property'(prolog).
+% predicate is defined in foreign source code (e.g. C)
+'$lgt_valid_predicate_property'(foreign).
 
 % entity containing the predicate scope directive
 '$lgt_valid_predicate_property'(declared_in(_)).
@@ -16567,7 +16569,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_valid_object_property'(context_switching_calls).
 % object supports dynamic declaration of new predicates
 '$lgt_valid_object_property'(dynamic_declarations).
-% object can be complemented by categories
+% object can be complemented by categories (old Logtalk 2.x property)
 '$lgt_valid_object_property'(complements).
 % object can be complemented by categories
 '$lgt_valid_object_property'(complements(_)).
@@ -16952,7 +16954,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_logtalk_built_in_predicate'(threaded_peek(_, _), threaded_peek('::', *)).
 '$lgt_logtalk_built_in_predicate'(threaded_peek(_), threaded_peek('::')).
 '$lgt_logtalk_built_in_predicate'(threaded_wait(_), no).
-'$lgt_logtalk_built_in_predicate'(threaded_notify(_), bo).
+'$lgt_logtalk_built_in_predicate'(threaded_notify(_), no).
 
 
 
@@ -18339,10 +18341,12 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_static_binding_meta_arg'(N, Arg, Ctx, {Arg}, {Arg}) :-
 	% the {}/1 construct signals a pre-compiled metacall
-	integer(N), N > 0,			% closure
+	integer(N), N > 0,
+	% closure
 	!,
-	nonvar(Arg),				% not using the {}/1 control
-	\+ functor(Arg, {}, 1),		% construct already
+	nonvar(Arg),
+	\+ functor(Arg, {}, 1),
+	% not using the {}/1 control construct already
 	'$lgt_comp_ctx_sender'(Ctx, Sender), Sender == user.
 
 '$lgt_tr_static_binding_meta_arg'((*), Arg, _, Arg, Arg).
