@@ -47,6 +47,8 @@ predicates) when the *sender* is not the same object as *this*.
 * FIXED: The compiler would try to expand source file terms wrapped using the
 `{}/1` control construct.
 
+* FIXED: Protocol `initialization/1` goals would not be lint checked.
+
 Tests
 -----
 

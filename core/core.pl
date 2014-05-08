@@ -12744,15 +12744,11 @@ current_logtalk_flag(Flag, Value) :-
 % reports any potential problem found while compiling an entity
 
 '$lgt_report_problems'(Type, Entity) :-
-	(	Type == protocol ->
-		'$lgt_report_unknown_entities'(Type, Entity)
-	;	% object or category
-		'$lgt_report_undefined_calls'(Type, Entity),
-		'$lgt_report_missing_directives'(Type, Entity),
-		'$lgt_report_misspelt_calls'(Type, Entity),
-		'$lgt_report_non_portable_calls'(Type, Entity),
-		'$lgt_report_unknown_entities'(Type, Entity)
-	).
+	'$lgt_report_undefined_calls'(Type, Entity),
+	'$lgt_report_missing_directives'(Type, Entity),
+	'$lgt_report_misspelt_calls'(Type, Entity),
+	'$lgt_report_non_portable_calls'(Type, Entity),
+	'$lgt_report_unknown_entities'(Type, Entity).
 
 
 
