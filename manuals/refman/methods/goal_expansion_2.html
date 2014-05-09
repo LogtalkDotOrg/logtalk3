@@ -60,13 +60,14 @@ Objects and categories implementing this predicate should declare that they impl
 <h4>Examples</h4>
 
 <dl>
-	<dt>goal_expansion(write(Term), (write_term(Term, []), nl)).</dt>
+	<dt><code>goal_expansion(write(Term), (write_term(Term, []), nl)).</code></dt>
+	<dt><code>goal_expansion(read(Term), (write('Input: '), {read(Term)})).</code></dt>
 </dl>
 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: May 7, 2014</span>
+		<span>Last updated on: May 9, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="expand_goal_2.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="../index.html#methods">next</a></span><br/>
