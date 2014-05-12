@@ -1968,18 +1968,23 @@ logtalk_compile(Files, Flags) :-
 	).
 
 
-'$lgt_expand_library_path'(Library, Path, N) :-
+'$lgt_expand_library_path'(Library, Path, Depth) :-
 	logtalk_library_path(Library, Location), !,
 	(	atom(Location) ->
 		% assume the final component of the library path
 		Path = Location
 	;	% assume library notation (a compound term)
-		N > 0,
-		N2 is N - 1,
-		functor(Location, Library2, 1),
-		arg(1, Location, Location2),
-		'$lgt_expand_library_path'(Library2, Path2, N2),
-		atom_concat(Path2, Location2, Path)
+		Depth > 0,
+		NewDepth is Depth - 1,
+		functor(Location, Prefix, 1),
+		arg(1, Location, Directory),
+		'$lgt_expand_library_path'(Prefix, PrefixPath0, NewDepth),
+		% make sure that the directory path ends with a slash
+		(	sub_atom(PrefixPath0, _, _, 0, '/') ->
+			atom_concat(PrefixPath0, Directory, Path)
+		;	atom_concat(PrefixPath0, '/', PrefixPath1),
+			atom_concat(PrefixPath1, Directory, Path)
+		)
 	).
 
 
