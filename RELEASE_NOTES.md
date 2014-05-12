@@ -36,6 +36,9 @@ built-in predicates using the `predicate_property/2` built-in method.
 
 * ADDED: Initial support for the `foreign` predicate property (not yet in use).
 
+* IMPROVED: Detection, handling, and recovering when possible of user errors in
+the definition of library paths using the `logtalk_library_path/2` predicate.
+
 * IMPROVED: Perform basic error checking for file-level `ensure_loaded/1`,
 `use_module/1-2`, and `multifile/1` directives.
 
