@@ -9665,7 +9665,8 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		TCond = {abolish(':'(Module, HeadFunctor/Arity))},
 		DCond = '$lgt_debug'(goal(abolish(':'(Module, HeadFunctor/Arity)), TCond), ExCtx)
-	;	fail
+	;	% proceed to next clause
+		fail
 	),
 	!.
 
@@ -9724,7 +9725,8 @@ current_logtalk_flag(Flag, Value) :-
 			'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 			TCond = {asserta((':'(Module,Head) :- Body))},
 			DCond = '$lgt_debug'(goal(asserta((':'(Module,Head) :- Body)), TCond), ExCtx)
-		;	fail
+		;	% proceed to next clause
+			fail
 		)
 	;	Clause = Alias,
 		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias) ->
@@ -9733,7 +9735,8 @@ current_logtalk_flag(Flag, Value) :-
 			'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 			TCond = {asserta(':'(Module,Head))},
 			DCond = '$lgt_debug'(goal(asserta(':'(Module,Head)), TCond), ExCtx)
-		;	fail
+		;	% proceed to next clause
+			fail
 		)
 	),
 	!.
@@ -9792,7 +9795,8 @@ current_logtalk_flag(Flag, Value) :-
 			'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 			TCond = {assertz((':'(Module,Head) :- Body))},
 			DCond = '$lgt_debug'(goal(assertz((':'(Module,Head) :- Body)), TCond), ExCtx)
-		;	fail
+		;	% proceed to next clause
+			fail
 		)
 	;	Clause = Alias,
 		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias) ->
@@ -9801,7 +9805,8 @@ current_logtalk_flag(Flag, Value) :-
 			'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 			TCond = {assertz(':'(Module,Head))},
 			DCond = '$lgt_debug'(goal(assertz(':'(Module,Head)), TCond), ExCtx)
-		;	fail
+		;	% proceed to next clause
+			fail
 		)
 	),
 	!.
@@ -9904,7 +9909,8 @@ current_logtalk_flag(Flag, Value) :-
 			'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 			TCond = {retract((':'(Module,Head) :- Body))},
 			DCond = '$lgt_debug'(goal(retract((':'(Module,Head) :- Body)), TCond), ExCtx)
-		;	fail
+		;	% proceed to next clause
+			fail
 		)
 	;	Clause = Alias,
 		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias) ->
@@ -9913,7 +9919,8 @@ current_logtalk_flag(Flag, Value) :-
 			'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 			TCond = {retract(':'(Module,Head))},
 			DCond = '$lgt_debug'(goal(retract(':'(Module,Head)), TCond), ExCtx)
-		;	fail
+		;	% proceed to next clause
+			fail
 		)
 	),
 	!.
@@ -9966,7 +9973,8 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		TCond = {retractall(':'(Module,Head))},
 		DCond = '$lgt_debug'(goal(retractall(':'(Module,Head)), TCond), ExCtx)
-	;	fail
+	;	% proceed to next clause
+		fail
 	),
 	!.
 
@@ -11152,26 +11160,6 @@ current_logtalk_flag(Flag, Value) :-
 	var(Term),
 	% runtime argument
 	!.
-
-'$lgt_check_dynamic_directive'((':'(Module, Head) :- _)) :-
-	% module explicit qualification
-	!,
-	(	nonvar(Module),
-		'$lgt_pp_module_'(Module) ->
-		% same module we're compiling
-		'$lgt_check_dynamic_directive'(Head)
-	;	true
-	).
-
-'$lgt_check_dynamic_directive'(':'(Module, Term)) :-
-	% module explicit qualification
-	!,
-	(	nonvar(Module),
-		'$lgt_pp_module_'(Module) ->
-		% same module we're compiling
-		'$lgt_check_dynamic_directive'(Term)
-	;	true
-	).
 
 '$lgt_check_dynamic_directive'((Head :- _)) :-
 	% clause rule
