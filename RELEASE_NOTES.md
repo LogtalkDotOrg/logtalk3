@@ -42,6 +42,11 @@ the definition of library paths using the `logtalk_library_path/2` predicate.
 * IMPROVED: Perform basic error checking for file-level `ensure_loaded/1`,
 `use_module/1-2`, and `multifile/1` directives.
 
+* FIXED: The top-level interpreter versions of the `::/2` and `<</2` control
+constructs would fail to correctly set the execution context and to test if
+the receiver object was compiled in debug mode when using the `{}/1` syntax
+to access parametric object proxies.
+
 * FIXED: The built-in method `predicate_property/2` would return properties
 for Logtalk and Prolog built-in predicates (which are interpreted as private
 predicates) when the *sender* is not the same object as *this*.
