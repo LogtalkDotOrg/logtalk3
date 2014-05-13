@@ -501,9 +501,9 @@ Obj::Pred :-
 		Flags /\ 512 =:= 512 ->
 		% object compiled in debug mode
 		'$lgt_execution_context'(ExCtx, user, user, Obj, [], []),
-		catch('$lgt_debug'(top_goal({Obj}::Pred, Call), ExCtx), Error, '$lgt_runtime_error_handler'(error(Error, logtalk({Obj}::Pred, user))))
+		catch('$lgt_debug'(top_goal({Obj}::Pred, Call), ExCtx), Error, '$lgt_runtime_error_handler'(Error))
 	;	% object not compiled in debug mode or non-existing object
-		catch(Call, Error, '$lgt_runtime_error_handler'(error(Error, logtalk({Obj}::Pred, user))))
+		catch(Call, Error, '$lgt_runtime_error_handler'(Error))
 	).
 
 Obj::Pred :-
@@ -513,9 +513,9 @@ Obj::Pred :-
 		Flags /\ 512 =:= 512 ->
 		% object compiled in debug mode
 		'$lgt_execution_context'(ExCtx, user, user, Obj, [], []),
-		catch('$lgt_debug'(top_goal(Obj::Pred, Call), ExCtx), Error, '$lgt_runtime_error_handler'(error(Error, logtalk(Obj::Pred, user))))
+		catch('$lgt_debug'(top_goal(Obj::Pred, Call), ExCtx), Error, '$lgt_runtime_error_handler'(Error))
 	;	% object not compiled in debug mode or non-existing object
-		catch(Call, Error, '$lgt_runtime_error_handler'(error(Error, logtalk(Obj::Pred, user))))
+		catch(Call, Error, '$lgt_runtime_error_handler'(Error))
 	).
 
 
@@ -533,9 +533,9 @@ Obj<<Goal :-
 		Flags /\ 512 =:= 512 ->
 		% object compiled in debug mode
 		'$lgt_execution_context'(ExCtx, user, user, Obj, [], []),
-		catch('$lgt_debug'(top_goal({Obj}<<Goal, Call), ExCtx), Error, '$lgt_runtime_error_handler'(error(Error, logtalk({Obj}<<Goal, user))))
+		catch('$lgt_debug'(top_goal({Obj}<<Goal, Call), ExCtx), Error, '$lgt_runtime_error_handler'(Error))
 	;	% object not compiled in debug mode or non-existing object
-		catch(Call, Error, '$lgt_runtime_error_handler'(error(Error, logtalk({Obj}<<Goal, user))))
+		catch(Call, Error, '$lgt_runtime_error_handler'(Error))
 	).
 
 Obj<<Goal :-
@@ -544,9 +544,9 @@ Obj<<Goal :-
 		Flags /\ 512 =:= 512 ->
 		% object compiled in debug mode
 		'$lgt_execution_context'(ExCtx, user, user, Obj, [], []),
-		catch('$lgt_debug'(top_goal(Obj<<Goal, Call), ExCtx), Error, '$lgt_runtime_error_handler'(error(Error, logtalk(Obj<<Goal, user))))
+		catch('$lgt_debug'(top_goal(Obj<<Goal, Call), ExCtx), Error, '$lgt_runtime_error_handler'(Error))
 	;	% object not compiled in debug mode or non-existing object
-		catch(Call, Error, '$lgt_runtime_error_handler'(error(Error, logtalk(Obj<<Goal, user))))
+		catch(Call, Error, '$lgt_runtime_error_handler'(Error))
 	).
 
 
