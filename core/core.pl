@@ -8355,7 +8355,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_tr_entity_info_directive_pair'(+atom, @nonvar, -atom, -nonvar)
+% '$lgt_tr_entity_info_directive_pair'(+atom, @nonvar, -compound)
 %
 % translates an entity info/1 directive key-value pair
 
@@ -8478,7 +8478,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_tr_predicate_info_directive_pair'(+atom, @nonvar, +atom, +integer, -atom, -nonvar)
+% '$lgt_tr_predicate_info_directive_pair'(+atom, @nonvar, +atom, +integer, -compound)
 %
 % translates a predicate info/2 directive key-value pair
 
