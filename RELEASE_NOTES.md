@@ -25,7 +25,7 @@ RELEASE NOTES
 =============
 
 
-3.00.0 Beta 4 - May ??, 2014
+3.00.0 Beta 4 - May 14, 2014
 ============================
 
 Logtalk compiler and runtime
