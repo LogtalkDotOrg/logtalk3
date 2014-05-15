@@ -284,7 +284,7 @@ Note that the scope of the <code>set_logtalk_flag/2</code> directive is local to
 	</dl>
 	<dl>
 		<dt><code>undefined_predicates(Option)</code></dt>
-			<dd>Defines the compiler behavior when calls to declared but undefined predicates (or non-terminals) are found. Possible option values are <code>error</code>, <code>warning</code> (the usual default), and <code>silent</code> (not recommended).</dd>
+			<dd>Defines the compiler behavior when calls to declared but undefined predicates (or non-terminals) are found. Note that calls to declared but undefined predicates fail as per closed-world assumption. Possible option values are <code>error</code>, <code>warning</code> (the usual default), and <code>silent</code> (not recommended).</dd>
 	</dl>
 	<dl>
 		<dt><code>portability(Option)</code></dt>
