@@ -293,11 +293,11 @@ construct but this is only used within objects and categories.
 Logtalk doesn't rely on the SWI-Prolog auto-loading mechanism for library
 predicates. Calls of these predicates within objects and categories must
 be explicitly qualified or implicit qualified by listing the predicates
-in `use_module/2` directives). You may also set the Logtalk `portability`
-and `misspelt_calls` compiler flags to `warning` in order to detect
-unqualified calls to library predicates. The module libraries should be
-loaded prior to compilation of object and categories containing calls to
-the library predicates.
+in `use_module/2` directives). You may also set the Logtalk `portability`,
+and `unknown_predicates` compiler flags to `warning` in order to detect
+unqualified calls to library predicates. All the module libraries should
+be loaded prior to compilation of object and categories containing calls
+to the library predicates.
 
 MacOS X users of the `SWI-Prolog.app` application, must add the definitions
 for the `LOGTALKHOME` and `LOGTALKUSER` environment variables to their

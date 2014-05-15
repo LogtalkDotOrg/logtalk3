@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  sample settings file
-%  Last updated on April 1, 2014
+%  Last updated on May 15, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -146,7 +146,8 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 	set_logtalk_flag(clean, on),
 	set_logtalk_flag(reload, always),
 	set_logtalk_flag(unknown_entities, warning),
-	set_logtalk_flag(misspelt_calls, warning),
+	set_logtalk_flag(unknown_predicates, warning),
+	set_logtalk_flag(undefined_predicates, warning),
 	set_logtalk_flag(singleton_variables, warning),
 	set_logtalk_flag(context_switching_calls, allow),
 	set_logtalk_flag(optimize, off),
@@ -189,7 +190,8 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 		set_logtalk_flag(clean, on),
 		set_logtalk_flag(reload, always),
 		set_logtalk_flag(unknown_entities, warning),
-		set_logtalk_flag(misspelt_calls, warning),
+		set_logtalk_flag(unknown_predicates, warning),
+		set_logtalk_flag(undefined_predicates, warning),
 		set_logtalk_flag(singleton_variables, warning),
 		set_logtalk_flag(context_switching_calls, allow),
 		set_logtalk_flag(code_prefix, '.'),

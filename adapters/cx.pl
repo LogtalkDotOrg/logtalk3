@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for CxProlog 0.97.7 or a later version
-%  Last updated on April 30, 2014
+%  Last updated on May 15, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -257,7 +257,8 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 '$lgt_default_flag'(settings_file, allow).
 % lint compilation flags:
 '$lgt_default_flag'(unknown_entities, warning).
-'$lgt_default_flag'(misspelt_calls, warning).
+'$lgt_default_flag'(unknown_predicates, warning).
+'$lgt_default_flag'(undefined_predicates, warning).
 '$lgt_default_flag'(singleton_variables, warning).
 '$lgt_default_flag'(portability, silent).
 '$lgt_default_flag'(redefined_built_ins, silent).

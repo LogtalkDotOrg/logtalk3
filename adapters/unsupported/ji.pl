@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for JIProlog 3.1.0-1 or later versions
-%  Last updated on April 23, 2014
+%  Last updated on May 15, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -252,7 +252,8 @@ format(Format, Arguments) :-
 '$lgt_default_flag'(settings_file, allow).
 % lint compilation flags:
 '$lgt_default_flag'(unknown_entities, warning).
-'$lgt_default_flag'(misspelt_calls, warning).
+'$lgt_default_flag'(unknown_predicates, warning).
+'$lgt_default_flag'(undefined_predicates, warning).
 '$lgt_default_flag'(singleton_variables, warning).
 '$lgt_default_flag'(portability, silent).
 '$lgt_default_flag'(redefined_built_ins, silent).

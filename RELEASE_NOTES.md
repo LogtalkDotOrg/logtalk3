@@ -28,7 +28,11 @@ RELEASE NOTES
 3.00.0 Beta 5 - June ??, 2014
 =============================
 
+Logtalk compiler and runtime
+----------------------------
 
+* CHANGED: The compiler flag `misspelt_calls` is replaced by the new flags
+`unknown_predicates` and `undefined_predicates`.
 
 
 3.00.0 Beta 4 - May 14, 2014

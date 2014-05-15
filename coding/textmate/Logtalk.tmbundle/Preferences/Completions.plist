@@ -211,7 +211,8 @@
 			<!-- flag names -->
 			<string>unknown_entities</string>
 			<string>singleton_variables</string>
-			<string>misspelt_calls</string>
+			<string>unknown_predicates</string>
+			<string>undefined_predicates</string>
 			<string>underscore_variables</string>
 			<string>portability</string>
 			<string>redefined_built_ins</string>

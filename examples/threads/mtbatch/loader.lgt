@@ -33,5 +33,5 @@
 		searching(best_first1),
 		searching(hill_climbing1)
 	]),
-	logtalk_load(mtbatch, [misspelt_calls(silent)])
+	logtalk_load(mtbatch, [undefined_predicates(silent)])
 )).

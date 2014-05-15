@@ -74,6 +74,7 @@ attempting to use them will result in compiler errors:
 * `altdirs`
 * `startup_message`
 * `smart_compilation`
+* `misspelt`
 
 The XML related flags were removed as generating documenting files is now the
 responsibility of the `lgtdoc` tool. The debugger is also no longer a built-in
@@ -112,9 +113,9 @@ directive.
 The `version` flag is deprecated. New code that doesn't require compatibility
 with Logtalk 2.x should use instead the new `version_data` flag.
 
-The Logtalk 2.x `unknown`, `misspelt`, `singletons`, and `tmpdir` are renamed
-in Logtalk 3.x for clarity. The old names are deprecated and should only be
-used when compatibility with Logtalk 2.x is still required.
+The Logtalk 2.x `unknown`, `singletons`, and `tmpdir` are renamed in Logtalk
+3.x for clarity. The old names are deprecated and should only be used when
+compatibility with Logtalk 2.x is still required.
 
 
 Control constructs semantic changes

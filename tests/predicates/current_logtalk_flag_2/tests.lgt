@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2013/05/02,
+		date is 2013/05/15,
 		comment is 'Unit tests for the current_logtalk_flag/2 built-in predicate.'
 	]).
 
@@ -31,8 +31,10 @@
 
 	succeeds(unknown_entities_flag) :-
 		test_flag(unknown_entities, warning, silent).
-	succeeds(misspelt_calls_flag) :-
-		test_flag(misspelt_calls, warning, silent).
+	succeeds(unknown_predicates_flag) :-
+		test_flag(unknown_predicates, warning, silent).
+	succeeds(undefined_predicates_flag) :-
+		test_flag(undefined_predicates, warning, silent).
 	succeeds(portability_flag) :-
 		test_flag(portability, warning, silent).
 	succeeds(singleton_variables_flag) :-

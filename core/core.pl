@@ -12776,9 +12776,9 @@ current_logtalk_flag(Flag, Value) :-
 % reports any potential problem found while compiling an entity
 
 '$lgt_report_problems'(Type, Entity) :-
-	'$lgt_report_undefined_calls'(Type, Entity),
 	'$lgt_report_missing_directives'(Type, Entity),
-	'$lgt_report_misspelt_calls'(Type, Entity),
+	'$lgt_report_unknown_predicate_calls'(Type, Entity),
+	'$lgt_report_undefined_predicate_calls'(Type, Entity),
 	'$lgt_report_non_portable_calls'(Type, Entity),
 	'$lgt_report_unknown_entities'(Type, Entity).
 
@@ -14694,79 +14694,6 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% reports calls to declared, static but undefined predicates and
-% non-terminals in the body of object and category predicates
-
-'$lgt_report_undefined_calls'(Type, Entity) :-
-	'$lgt_compiler_flag'(misspelt_calls, Value),
-	'$lgt_report_undefined_calls'(Value, Type, Entity).
-
-
-'$lgt_report_undefined_calls'(silent, _, _).
-
-'$lgt_report_undefined_calls'(error, _, _) :-
-	(	'$lgt_undefined_predicate_call'(Pred, _, _) ->
-		throw(existence_error(procedure, Pred))
-	;	'$lgt_undefined_non_terminal_call'(NonTerminal, _, _) ->
-		throw(existence_error(procedure, NonTerminal))
-	;	true
-	).
-
-'$lgt_report_undefined_calls'(warning, Type, Entity) :-
-	'$lgt_pp_file_data_'(_, _, Path, _),
-	(	'$lgt_undefined_predicate_call'(Pred, _, Lines),
-		'$lgt_increment_compile_warnings_counter',
-		'$lgt_print_message'(warning(misspelt_calls), core, declared_static_predicate_called_but_not_defined(Path, Lines, Type, Entity, Pred)),
-		fail
-	;	'$lgt_undefined_non_terminal_call'(NonTerminal, _, Lines),
-		'$lgt_increment_compile_warnings_counter',
-		'$lgt_print_message'(warning(misspelt_calls), core, declared_static_non_terminal_called_but_not_defined(Path, Lines, Type, Entity, NonTerminal)),
-		fail
-	;	true
-	).
-
-
-'$lgt_undefined_predicate_call'(Functor/Arity, TFunctor/TArity, Lines) :-
-	'$lgt_pp_calls_predicate_'(Functor/Arity, TFunctor/TArity, _, Lines),
-	functor(Head, Functor, Arity),
-	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _),
-	% predicate not defined in object/category
-	\+ '$lgt_pp_dynamic_'(Head),
-	% predicate not declared dynamic in object/category
-	\+ '$lgt_pp_multifile_'(Head, _),
-	% predicate not declared multifile in object/category
-	Arity2 is Arity - 2,
-	% only return predicates that are not the expansion of grammar rules
-	\+ '$lgt_pp_calls_non_terminal_'(Functor, Arity2, _),
-	once((	'$lgt_pp_public_'(Functor, Arity)
-		;	'$lgt_pp_protected_'(Functor, Arity)
-		;	'$lgt_pp_private_'(Functor, Arity)
-	% but there is a scope directive for the predicate
-	)).
-
-
-'$lgt_undefined_non_terminal_call'(Functor//Arity, TFunctor/TArity, Lines) :-
-	'$lgt_pp_calls_predicate_'(Functor/ExtArity, TFunctor/TArity, _, _),
-	Arity is ExtArity - 2,
-	Arity >= 0,
-	'$lgt_pp_calls_non_terminal_'(Functor, Arity, Lines),
-	\+ '$lgt_pp_defines_non_terminal_'(Functor, Arity),
-	% non-terminal not defined in object/category
-	functor(Head, Functor, ExtArity),
-	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _),
-	% no corresponding predicate is defined
-	\+ '$lgt_pp_dynamic_'(Head),
-	% no dynamic directive for the corresponding predicate
-	\+ '$lgt_pp_multifile_'(Head, _),
-	% predicate not declared multifile in object/category
-	once((	'$lgt_pp_public_'(Functor, ExtArity)
-		;	'$lgt_pp_protected_'(Functor, ExtArity)
-		;	'$lgt_pp_private_'(Functor, ExtArity)
-	% but there is a scope directive for the non-terminal
-	)).
-
-
-
 % reports missing predicate directives
 
 '$lgt_report_missing_directives'(Type, Entity) :-
@@ -14814,43 +14741,43 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% reports possible misspelt predicate calls in the body of object and category predicates
+% reports unknown predicates and non-terminals
 
-'$lgt_report_misspelt_calls'(Type, Entity) :-
-	'$lgt_compiler_flag'(misspelt_calls, FlagValue),
-	'$lgt_report_misspelt_calls'(FlagValue, Type, Entity).
+'$lgt_report_unknown_predicate_calls'(Type, Entity) :-
+	'$lgt_compiler_flag'(unknown_predicates, Value),
+	'$lgt_report_unknown_predicate_calls'(Value, Type, Entity).
 
 
-'$lgt_report_misspelt_calls'(silent, _, _).
+'$lgt_report_unknown_predicate_calls'(silent, _, _).
 
-'$lgt_report_misspelt_calls'(error, _, _) :-
-	(	'$lgt_misspelt_predicate_call'(Predicate, _) ->
+'$lgt_report_unknown_predicate_calls'(error, _, _) :-
+	(	'$lgt_unknown_predicate_call'(Predicate, _) ->
 		throw(existence_error(predicate, Predicate))
-	;	'$lgt_misspelt_non_terminal_call'(NonTerminal, _) ->
+	;	'$lgt_unknown_non_terminal_call'(NonTerminal, _) ->
 		throw(existence_error(non_terminal, NonTerminal))
 	;	true
 	).
 
-'$lgt_report_misspelt_calls'(warning, Type, Entity) :-
+'$lgt_report_unknown_predicate_calls'(warning, Type, Entity) :-
 	'$lgt_pp_file_data_'(_, _, Path, _),
-	'$lgt_report_misspelt_predicate_calls'(Type, Entity, Path),
-	'$lgt_report_misspelt_non_terminal_calls'(Type, Entity, Path).
+	'$lgt_report_unknown_predicate_calls'(Type, Entity, Path),
+	'$lgt_report_unknown_non_terminal_calls'(Type, Entity, Path).
 
 
-'$lgt_report_misspelt_predicate_calls'(Type, Entity, Path) :-
-	'$lgt_misspelt_predicate_call'(Pred, Lines),
+'$lgt_report_unknown_predicate_calls'(Type, Entity, Path) :-
+	'$lgt_unknown_predicate_call'(Pred, Lines),
 		'$lgt_increment_compile_warnings_counter',
-		'$lgt_print_message'(warning(misspelt_calls), core, predicate_called_but_not_defined(Path, Lines, Type, Entity, Pred)),
+		'$lgt_print_message'(warning(unknown_predicates), core, predicate_called_but_not_defined(Path, Lines, Type, Entity, Pred)),
 	fail.
 
-'$lgt_report_misspelt_predicate_calls'(_, _, _).
+'$lgt_report_unknown_predicate_calls'(_, _, _).
 
 
-% when enumerating misspelt predicate calls, we don't check if the
+% when enumerating calls to unknown predicates, we don't check if the
 % called predicate is declared multifile as multifile predicates
 % must also have a public directive
 
-'$lgt_misspelt_predicate_call'(Functor/Arity, Lines) :-
+'$lgt_unknown_predicate_call'(Functor/Arity, Lines) :-
 	'$lgt_pp_calls_predicate_'(Functor/Arity, _, _, Lines),
 	functor(Head, Functor, Arity),
 	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _),
@@ -14858,21 +14785,21 @@ current_logtalk_flag(Flag, Value) :-
 	\+ '$lgt_pp_public_'(Functor, Arity),
 	\+ '$lgt_pp_protected_'(Functor, Arity),
 	\+ '$lgt_pp_private_'(Functor, Arity),
-	% misspelt non-terminal calls are found and reported separately
+	% calls to unknown non-terminals are found and reported separately
 	Arity2 is Arity - 2,
 	\+ '$lgt_pp_calls_non_terminal_'(Functor, Arity2, _).
 
 
-'$lgt_report_misspelt_non_terminal_calls'(Type, Entity, Path) :-
-	'$lgt_misspelt_non_terminal_call'(NonTerminal, Lines),
+'$lgt_report_unknown_non_terminal_calls'(Type, Entity, Path) :-
+	'$lgt_unknown_non_terminal_call'(NonTerminal, Lines),
 		'$lgt_increment_compile_warnings_counter',
-		'$lgt_print_message'(warning(misspelt_calls), core, non_terminal_called_but_not_defined(Path, Lines, Type, Entity, NonTerminal)),
+		'$lgt_print_message'(warning(unknown_predicates), core, non_terminal_called_but_not_defined(Path, Lines, Type, Entity, NonTerminal)),
 	fail.
 
-'$lgt_report_misspelt_non_terminal_calls'(_, _, _).
+'$lgt_report_unknown_non_terminal_calls'(_, _, _).
 
 
-'$lgt_misspelt_non_terminal_call'(Functor//Arity, Lines) :-
+'$lgt_unknown_non_terminal_call'(Functor//Arity, Lines) :-
 	'$lgt_pp_calls_non_terminal_'(Functor, Arity, Lines),
 	\+ '$lgt_pp_defines_non_terminal_'(Functor, Arity),
 	ExtArity is Arity + 2,
@@ -14882,6 +14809,79 @@ current_logtalk_flag(Flag, Value) :-
 	\+ '$lgt_pp_public_'(Functor, ExtArity),
 	\+ '$lgt_pp_protected_'(Functor, ExtArity),
 	\+ '$lgt_pp_private_'(Functor, ExtArity).
+
+
+
+% reports calls to declared, static but undefined predicates and non-terminals
+
+'$lgt_report_undefined_predicate_calls'(Type, Entity) :-
+	'$lgt_compiler_flag'(undefined_predicates, Value),
+	% reports calls to declared, static but undefined predicates and non-terminals
+	'$lgt_report_undefined_predicate_calls'(Value, Type, Entity).
+
+
+'$lgt_report_undefined_predicate_calls'(silent, _, _).
+
+'$lgt_report_undefined_predicate_calls'(error, _, _) :-
+	(	'$lgt_undefined_predicate_call'(Pred, _, _) ->
+		throw(existence_error(procedure, Pred))
+	;	'$lgt_undefined_non_terminal_call'(NonTerminal, _, _) ->
+		throw(existence_error(procedure, NonTerminal))
+	;	true
+	).
+
+'$lgt_report_undefined_predicate_calls'(warning, Type, Entity) :-
+	'$lgt_pp_file_data_'(_, _, Path, _),
+	(	'$lgt_undefined_predicate_call'(Pred, _, Lines),
+		'$lgt_increment_compile_warnings_counter',
+		'$lgt_print_message'(warning(undefined_predicates), core, declared_static_predicate_called_but_not_defined(Path, Lines, Type, Entity, Pred)),
+		fail
+	;	'$lgt_undefined_non_terminal_call'(NonTerminal, _, Lines),
+		'$lgt_increment_compile_warnings_counter',
+		'$lgt_print_message'(warning(undefined_predicates), core, declared_static_non_terminal_called_but_not_defined(Path, Lines, Type, Entity, NonTerminal)),
+		fail
+	;	true
+	).
+
+
+'$lgt_undefined_predicate_call'(Functor/Arity, TFunctor/TArity, Lines) :-
+	'$lgt_pp_calls_predicate_'(Functor/Arity, TFunctor/TArity, _, Lines),
+	functor(Head, Functor, Arity),
+	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _),
+	% predicate not defined in object/category
+	\+ '$lgt_pp_dynamic_'(Head),
+	% predicate not declared dynamic in object/category
+	\+ '$lgt_pp_multifile_'(Head, _),
+	% predicate not declared multifile in object/category
+	Arity2 is Arity - 2,
+	% only return predicates that are not the expansion of grammar rules
+	\+ '$lgt_pp_calls_non_terminal_'(Functor, Arity2, _),
+	once((	'$lgt_pp_public_'(Functor, Arity)
+		;	'$lgt_pp_protected_'(Functor, Arity)
+		;	'$lgt_pp_private_'(Functor, Arity)
+	% but there is a scope directive for the predicate
+	)).
+
+
+'$lgt_undefined_non_terminal_call'(Functor//Arity, TFunctor/TArity, Lines) :-
+	'$lgt_pp_calls_predicate_'(Functor/ExtArity, TFunctor/TArity, _, _),
+	Arity is ExtArity - 2,
+	Arity >= 0,
+	'$lgt_pp_calls_non_terminal_'(Functor, Arity, Lines),
+	\+ '$lgt_pp_defines_non_terminal_'(Functor, Arity),
+	% non-terminal not defined in object/category
+	functor(Head, Functor, ExtArity),
+	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _),
+	% no corresponding predicate is defined
+	\+ '$lgt_pp_dynamic_'(Head),
+	% no dynamic directive for the corresponding predicate
+	\+ '$lgt_pp_multifile_'(Head, _),
+	% predicate not declared multifile in object/category
+	once((	'$lgt_pp_public_'(Functor, ExtArity)
+		;	'$lgt_pp_protected_'(Functor, ExtArity)
+		;	'$lgt_pp_private_'(Functor, ExtArity)
+	% but there is a scope directive for the non-terminal
+	)).
 
 
 
@@ -16615,7 +16615,8 @@ current_logtalk_flag(Flag, Value) :-
 % lint compilation flags
 '$lgt_valid_flag'(unknown_entities).
 '$lgt_valid_flag'(singleton_variables).
-'$lgt_valid_flag'(misspelt_calls).
+'$lgt_valid_flag'(unknown_predicates).
+'$lgt_valid_flag'(undefined_predicates).
 '$lgt_valid_flag'(underscore_variables).
 '$lgt_valid_flag'(portability).
 '$lgt_valid_flag'(redefined_built_ins).
@@ -16654,7 +16655,6 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_valid_flag'(prolog_loader).
 % renamed (and thus deprecated) flags
 '$lgt_valid_flag'(unknown).
-'$lgt_valid_flag'(misspelt).
 '$lgt_valid_flag'(singletons).
 '$lgt_valid_flag'(tmpdir).
 
@@ -16689,9 +16689,13 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_valid_flag_value'(singleton_variables, silent) :- !.
 '$lgt_valid_flag_value'(singleton_variables, warning) :- !.
 
-'$lgt_valid_flag_value'(misspelt_calls, silent) :- !.
-'$lgt_valid_flag_value'(misspelt_calls, warning) :- !.
-'$lgt_valid_flag_value'(misspelt_calls, error) :- !.
+'$lgt_valid_flag_value'(unknown_predicates, silent) :- !.
+'$lgt_valid_flag_value'(unknown_predicates, warning) :- !.
+'$lgt_valid_flag_value'(unknown_predicates, error) :- !.
+
+'$lgt_valid_flag_value'(undefined_predicates, silent) :- !.
+'$lgt_valid_flag_value'(undefined_predicates, warning) :- !.
+'$lgt_valid_flag_value'(undefined_predicates, error) :- !.
 
 '$lgt_valid_flag_value'(portability, silent) :- !.
 '$lgt_valid_flag_value'(portability, warning) :- !.
@@ -16798,7 +16802,6 @@ current_logtalk_flag(Flag, Value) :-
 % renamed compiler flags (from Logtalk 2.x)
 
 '$lgt_renamed_compiler_flag'(unknown, unknown_entities).
-'$lgt_renamed_compiler_flag'(misspelt, misspelt_calls).
 '$lgt_renamed_compiler_flag'(singletons, singleton_variables).
 '$lgt_renamed_compiler_flag'(tmpdir, scratch_directory).
 

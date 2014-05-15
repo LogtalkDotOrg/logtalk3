@@ -219,7 +219,8 @@ numbervars(Term, From, Next) :-
 '$lgt_default_flag'(settings_file, allow).
 % lint compilation flags:
 '$lgt_default_flag'(unknown_entities, warning).
-'$lgt_default_flag'(misspelt_calls, warning).
+'$lgt_default_flag'(unknown_predicates, warning).
+'$lgt_default_flag'(undefined_predicates, warning).
 '$lgt_default_flag'(singleton_variables, warning).
 '$lgt_default_flag'(portability, silent).
 '$lgt_default_flag'(underscore_variables, singletons).

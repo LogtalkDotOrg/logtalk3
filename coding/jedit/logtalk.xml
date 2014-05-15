@@ -7,7 +7,7 @@
 	written by		Paulo Moura
 	version			1.300
 	created on		May 5, 2002
-	last revised	September 14, 2013
+	last revised	May 15, 2014
 
 	To install, copy this file to the "modes" subdirectory in jEdit 
 	directory installation.   Next, check the "catalog" file in the 
@@ -422,7 +422,8 @@
 			<!-- flag names -->
 			<NULL>unknown_entities</NULL>
 			<NULL>singleton_variables</NULL>
-			<NULL>misspelt_calls</NULL>
+			<NULL>unknown_predicates</NULL>
+			<NULL>undefined_predicates</NULL>
 			<NULL>underscore_variables</NULL>
 			<NULL>portability</NULL>
 			<NULL>redefined_built_ins</NULL>
