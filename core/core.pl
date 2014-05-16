@@ -2630,9 +2630,9 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_predicate_property_prolog_built_in'(foreign, Pred) :-
-	'$lgt_predicate_property'(Pred, foreign).
+	catch('$lgt_predicate_property'(Pred, foreign), _, fail).
 '$lgt_predicate_property_prolog_built_in'(prolog, Pred) :-
-	\+ '$lgt_predicate_property'(Pred, foreign).
+	\+ catch('$lgt_predicate_property'(Pred, foreign), _, fail).
 '$lgt_predicate_property_prolog_built_in'(scope(private), _).
 '$lgt_predicate_property_prolog_built_in'(private, _).
 '$lgt_predicate_property_prolog_built_in'(meta_predicate(Meta), Pred) :-
