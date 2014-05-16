@@ -33,7 +33,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/02/06,
+		date is 2014/05/16,
 		comment is 'Built-in object providing message priting, debugging, library, source file, and hacking methods.']).
 
 	:- built_in.
@@ -152,7 +152,7 @@
 	:- public(loaded_file_property/2).
 	:- mode(loaded_file_property(?atom, ?compound), zero_or_more).
 	:- info(loaded_file_property/2, [
-		comment is 'Enumerates, by backtracking, all loaded file properties. Valid properties are: basename/1, directory/1, mode/1, flags/1, text_properties/1 (encoding/1 and bom/1), target/1, modified/1, parent/1, and library/1.',
+		comment is 'Enumerates, by backtracking, all loaded file properties. Valid properties are: basename/1, directory/1, mode/1, flags/1, text_properties/1 (encoding/1 and bom/1), target/1, modified/1, parent/1, library/1, object/1, protocol/1, and category/1.',
 		argnames is ['Path', 'Property']
 	]).
 
@@ -366,6 +366,15 @@
 	loaded_file_property(parent(Parent), Basename, Directory, _, _, _, _, _) :-
 		atom_concat(Directory, Basename, Path),
 		{'$lgt_parent_file_'(Path, Parent)}.
+	loaded_file_property(object(Object), Basename, Directory, _, _, _, _, _) :-
+		{'$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _),
+		 '$lgt_entity_property_'(Object, file_lines(Basename, Directory, _, _))}.
+	loaded_file_property(protocol(Protocol), Basename, Directory, _, _, _, _, _) :-
+		{'$lgt_current_protocol_'(Protocol, _, _, _, _),
+		 '$lgt_entity_property_'(Protocol, file_lines(Basename, Directory, _, _))}.
+	loaded_file_property(category(Category), Basename, Directory, _, _, _, _, _) :-
+		{'$lgt_current_category_'(Category, _, _, _, _, _),
+		 '$lgt_entity_property_'(Category, file_lines(Basename, Directory, _, _))}.
 	loaded_file_property(library(Library), _, Directory, _, _, _, _, _) :-
 		logtalk_library_path(Library, _),
 		{'$lgt_expand_library_path'(Library, Directory)}, !.

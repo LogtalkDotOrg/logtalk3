@@ -34,6 +34,8 @@ Logtalk compiler and runtime
 * CHANGED: The compiler flag `misspelt_calls` is replaced by the new flags
 `unknown_predicates` and `undefined_predicates`.
 
+* ADDED: Loaded file properties `object/1`, `protocol/1`, and `category/1`.
+
 
 3.00.0 Beta 4 - May 14, 2014
 ============================
