@@ -2,9 +2,9 @@
 :- object(prolog_modules_diagram_support).
 
 	:- info([
-		version is 0.4,
+		version is 0.5,
 		author is 'Paulo Moura',
-		date is 2014/02/07,
+		date is 2014/05/16,
 		comment is 'Utility predicates for supporting Prolog modules in diagrams.'
 	]).
 
@@ -15,9 +15,9 @@
 		argnames is ['Module', 'Property']
 	]).
 
-	:- public(source_file_property/2).
-	:- mode(source_file_property(?atom, ?callable), zero_or_more).
-	:- info(source_file_property/2, [
+	:- public(loaded_file_property/2).
+	:- mode(loaded_file_property(?atom, ?callable), zero_or_more).
+	:- info(loaded_file_property/2, [
 		comment is 'Access to loaded source file properties, at least basename/1, directory/1, and parent/1.',
 		argnames is ['File', 'Property']
 	]).
@@ -27,7 +27,7 @@
 		module_property(Module, Property) :-
 			{module_property(Module, Property)}.
 
-		source_file_property(File, Property) :-
+		loaded_file_property(File, Property) :-
 			property_source_file(Property, File),
 			\+ sub_atom(File, _, 4, 0, '.lgt'),
 			\+ sub_atom(File, _, 8, 0, '.logtalk').
@@ -51,7 +51,7 @@
 		module_property(Module, Property) :-
 			{module_property(Module, Property)}.
 
-		source_file_property(File, Property) :-
+		loaded_file_property(File, Property) :-
 			property_source_file(Property, File),
 			\+ sub_atom(File, _, 4, 0, '.lgt'),
 			\+ sub_atom(File, _, 8, 0, '.logtalk').
@@ -95,7 +95,7 @@
 		filter_interface([_| Interface], Exports) :-
 			filter_interface(Interface, Exports).
 
-		source_file_property(File, Property) :-
+		loaded_file_property(File, Property) :-
 			property_source_file(Property, File).
 
 		property_source_file(parent(_Parent), _File) :-
@@ -124,7 +124,7 @@
 		property_module(file(File), Module) :-
 			{current_module(Module, File)}.
 
-		source_file_property(File, Property) :-
+		loaded_file_property(File, Property) :-
 			property_source_file(Property, File).
 
 		property_source_file(parent(_Parent), _File) :-

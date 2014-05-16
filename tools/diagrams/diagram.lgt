@@ -215,8 +215,8 @@
 		fail.
 	output_library(_Library, Directory, Options) :-
 		memberchk(exclude_files(ExcludedFiles), Options),
-		prolog_modules_diagram_support::source_file_property(Path, directory(Directory)),
-		prolog_modules_diagram_support::source_file_property(Path, basename(Basename)),
+		prolog_modules_diagram_support::loaded_file_property(Path, directory(Directory)),
+		prolog_modules_diagram_support::loaded_file_property(Path, basename(Basename)),
 		::not_excluded_file(ExcludedFiles, Path, Basename),
 		::output_file(Path, Basename, Directory, Options),
 		fail.

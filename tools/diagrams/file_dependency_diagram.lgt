@@ -119,8 +119,8 @@
 		category_property(Entity, file(Basename, Directory)).
 	entity_basename_directory(module, Entity, Basename, Directory) :-
 		prolog_modules_diagram_support::module_property(Entity, file(Path)),
-		prolog_modules_diagram_support::source_file_property(Path, basename(Basename)),
-		prolog_modules_diagram_support::source_file_property(Path, directory(Directory)).
+		prolog_modules_diagram_support::loaded_file_property(Path, basename(Basename)),
+		prolog_modules_diagram_support::loaded_file_property(Path, directory(Directory)).
 
 	% by default, diagram title is empty:
 	default_option(title('')).
