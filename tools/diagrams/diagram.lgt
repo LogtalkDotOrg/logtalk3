@@ -27,7 +27,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/04/29,
+		date is 2014/05/16,
 		comment is 'Common predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
@@ -534,7 +534,7 @@
 		argnames is ['File', 'Basename', 'Extension', 'Directory', 'Path']
 	]).
 
-	% file given in library notation
+	% Logtalk file given in library notation
 	locate_file(LibraryNotation, Basename, Extension, Directory, Path) :-
 		compound(LibraryNotation),
 		!,
@@ -542,9 +542,9 @@
 		logtalk::expand_library_path(Library, LibraryPath),
 		atom_concat(LibraryPath, Name, Source),
 		locate_file(Source, Basename, Extension, Directory, Path).
-	% file given using its name or basename
+	% Logtalk file given using its name or basename
 	locate_file(Source, Basename, Extension, Directory, Path) :-
-		add_extension(Source, Basename, Extension),
+		add_extension(logtalk, Source, Basename, Extension),
 		logtalk::loaded_file_property(Path, basename(Basename)),
 		logtalk::loaded_file_property(Path, directory(Directory)),
 		% check that there isn't another file with the same basename
@@ -554,27 +554,56 @@
 			Path \== OtherPath
 		),
 		!.
-	% file given using a full path
+	% Prolog file given using its name or basename
 	locate_file(Source, Basename, Extension, Directory, Path) :-
-		add_extension(Source, Path, Extension),
+		add_extension(prolog, Source, Basename, Extension),
+		prolog_modules_diagram_support::loaded_file_property(Path, basename(Basename)),
+		prolog_modules_diagram_support::loaded_file_property(Path, directory(Directory)),
+		% check that there isn't another file with the same basename
+		% from a different directory
+		\+ (
+			prolog_modules_diagram_support::loaded_file_property(OtherPath, basename(Basename)),
+			Path \== OtherPath
+		),
+		!.
+	% Logtalk file given using a full path
+	locate_file(Source, Basename, Extension, Directory, Path) :-
+		add_extension(logtalk, Source, Path, Extension),
 		logtalk::loaded_file_property(Path, basename(Basename)),
 		logtalk::loaded_file_property(Path, directory(Directory)),
 		!.
+	% Prolog file given using a full path
+	locate_file(Source, Basename, Extension, Directory, Path) :-
+		add_extension(prolog, Source, Path, Extension),
+		prolog_modules_diagram_support::loaded_file_property(Source, basename(Basename)),
+		prolog_modules_diagram_support::loaded_file_property(Source, directory(Directory)),
+		!.
 
-	add_extension(Source, SourceWithExtension, Extension) :-
+	add_extension(logtalk, Source, SourceWithExtension, Extension) :-
 		atom(Source),
-		(	sub_atom(Source, _, 4, 0, '.lgt') ->
-			SourceWithExtension = Source,
-			Extension = '.lgt'
-		;	sub_atom(Source, _, 8, 0, '.logtalk') ->
-			SourceWithExtension = Source,
-			Extension = '.logtalk'
-		;	(	atom_concat(Source, '.lgt', SourceWithExtension),
-				Extension = '.lgt'
-			;	atom_concat(Source, '.logtalk', SourceWithExtension),
-				Extension = '.logtalk'
-			)
-		).
+		\+ sub_atom(Source, _, _, 0, '.pl'),
+		\+ sub_atom(Source, _, _, 0, '.prolog'),
+		(	Extension = '.lgt'
+		;	Extension = '.logtalk'
+		),
+		(	sub_atom(Source, _, _, 0, Extension) ->
+			SourceWithExtension = Source
+		;	atom_concat(Source, Extension, SourceWithExtension)
+		),
+		!.
+
+	add_extension(prolog, Source, SourceWithExtension, Extension) :-
+		atom(Source),
+		\+ sub_atom(Source, _, _, 0, '.lgt'),
+		\+ sub_atom(Source, _, _, 0, '.logtalk'),
+		(	Extension = '.pl'
+		;	Extension = '.prolog'
+		),
+		(	sub_atom(Source, _, _, 0, Extension) ->
+			SourceWithExtension = Source
+		;	atom_concat(Source, Extension, SourceWithExtension)
+		),
+		!.
 
 	:- protected(ground_entity_identifier/3).
 	:- mode(ground_entity_identifier(+atom, +callable, -callable), one).

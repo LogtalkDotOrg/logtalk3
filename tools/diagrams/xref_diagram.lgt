@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/04/02,
+		date is 2014/05/16,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format']
 	]).
@@ -81,8 +81,12 @@
 			Kind = object
 		;	current_category(Entity) ->
 			Kind = category
-		;	% current_protocol(Entity),
+		;	current_protocol(Entity) ->
 			Kind = protocol
+		;	atom(Entity),
+			current_logtalk_flag(modules, supported),
+			current_module(Entity),
+			Kind = module
 		),
 		^^ground_entity_identifier(Kind, Entity, Name).
 
@@ -157,6 +161,8 @@
 		category_property(Entity, Property).
 	entity_property(protocol, Entity, Property) :-
 		protocol_property(Entity, Property).
+	entity_property(module, Entity, Property) :-
+		prolog_modules_diagram_support::module_property(Entity, Property).
 
 	reset :-
 		retractall(external_predicate_(_)).
