@@ -15950,7 +15950,7 @@ current_logtalk_flag(Flag, Value) :-
 % Prolog module directives
 '$lgt_logtalk_opening_directive'(module(_)).
 '$lgt_logtalk_opening_directive'(module(_, _)).
-% module/3 directives are not supported but must 
+% module/3 directives are currently not supported but must 
 % be recognized as entity opening directives
 '$lgt_logtalk_opening_directive'(module(_, _, _)).
 
@@ -15971,7 +15971,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_logtalk_entity_directive'(synchronized).
 '$lgt_logtalk_entity_directive'(threaded).
 '$lgt_logtalk_entity_directive'(set_logtalk_flag(_, _)).
-% Prolog module directive that can be used within objects and categories
+% Prolog module directives that can be used within objects and categories
 '$lgt_logtalk_entity_directive'(use_module(_, _)).
 
 
@@ -15989,7 +15989,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_logtalk_predicate_directive'(alias(_, _, _)).	% deprecated
 '$lgt_logtalk_predicate_directive'(multifile(_)).
 '$lgt_logtalk_predicate_directive'(coinductive(_)).
-% Prolog module directive that are recognized when compiling modules as objects
+% Prolog module directives that are recognized when compiling modules as objects
 '$lgt_logtalk_predicate_directive'(export(_)).
 '$lgt_logtalk_predicate_directive'(reexport(_, _)).
 

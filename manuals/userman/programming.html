@@ -280,11 +280,11 @@ Note that the scope of the <code>set_logtalk_flag/2</code> directive is local to
 	</dl>
 	<dl>
 		<dt><code>unknown_predicates(Option)</code></dt>
-			<dd>Defines the compiler behavior when calls to unknown predicates (or non-terminals) are found. Possible option values are <code>error</code>, <code>warning</code> (the usual default), and <code>silent</code> (not recommended).</dd>
+			<dd>Defines the compiler behavior when calls to unknown predicates (or non-terminals) are found. An unknown predicate is a called predicate that is neither locally declared (using a scope or a dynamic directive) or defined. Possible option values are <code>error</code>, <code>warning</code> (the usual default), and <code>silent</code> (not recommended).</dd>
 	</dl>
 	<dl>
 		<dt><code>undefined_predicates(Option)</code></dt>
-			<dd>Defines the compiler behavior when calls to declared but undefined predicates (or non-terminals) are found. Note that calls to declared but undefined predicates fail as per closed-world assumption. Possible option values are <code>error</code>, <code>warning</code> (the usual default), and <code>silent</code> (not recommended).</dd>
+			<dd>Defines the compiler behavior when calls to declared but undefined predicates (or non-terminals) are found. Note that calls to declared but undefined predicates (or non-terminals) fail as per closed-world assumption. Possible option values are <code>error</code>, <code>warning</code> (the usual default), and <code>silent</code> (not recommended).</dd>
 	</dl>
 	<dl>
 		<dt><code>portability(Option)</code></dt>
@@ -726,7 +726,7 @@ When objects or categories containing grammar rules are compiled in debug mode, 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: May 15, 2014</span>
+		<span>Last updated on: May 17, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="installing.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="migration.html">next</a></span><br/>
