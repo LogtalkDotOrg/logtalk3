@@ -3,8 +3,8 @@
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
-%  Adapter file for LPA WinProlog 4.00
-%  Last updated on May 15, 2014
+%  Adapter file for LPA WinProlog 5.00
+%  Last updated on May 19, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -47,6 +47,7 @@
 
 % '$lgt_iso_predicate'(?callable).
 
+'$lgt_iso_predicate'(acyclic_term(_)).
 '$lgt_iso_predicate'(atom_codes(_, _)).
 '$lgt_iso_predicate'(atom_concat(_, _, _)).
 '$lgt_iso_predicate'(catch(_, _, _)).
@@ -57,9 +58,14 @@
 '$lgt_iso_predicate'(open(_, _, _)).
 '$lgt_iso_predicate'(open(_, _, _, _)).
 '$lgt_iso_predicate'(read_term(_, _, _)).
+'$lgt_iso_predicate'(subsumes_term(_, _)).
+'$lgt_iso_predicate'(term_variables(_, _)).
 '$lgt_iso_predicate'(throw(_)).
 '$lgt_iso_predicate'(write_canonical(_, _)).
 '$lgt_iso_predicate'(write_term(_, _, _)).
+
+
+acyclic_term(_).
 
 
 atom_codes(Atom, Codes) :-
@@ -96,25 +102,23 @@ catch(Error, Goal) :-
 
 catch(Goal, Catcher, Recovery) :-
 	lpa_catch(Error, Goal),
-	(Error = 0 ->
+	(	Error = 0 ->
 		true
-		;
-		(Error = -1 ->
-			!, fail
-			;
-			(Error = 999 ->
-				retract(lgt_exception_(Ball)),
-				!,
-				(Catcher = Ball ->
-					call(Recovery)
-					;
-					throw(Ball))
-				;
-				error_message(Error, Message),
-				(Catcher = Message ->
-					call(Recovery)
-					;
-					write(Message), nl, abort)))).
+	;	Error = -1 ->
+		!, fail
+	;	Error = 999 ->
+		retract(lgt_exception_(Ball)),
+		!,
+		(	Catcher = Ball ->
+			call(Recovery)
+		;	throw(Ball)
+		)
+	;	error_message(Error, Message),
+		(	Catcher = Message ->
+			call(Recovery)
+		;	write(Message), nl, abort
+		)
+	).
 
 
 :- hide(close).
@@ -152,16 +156,19 @@ open(File, Mode, Stream, []) :-
 
 read_term(Stream, Term, [singletons([])]) :-
 	!,
-	input(Current),
-	input(Stream),
-	read(Term),
-	input(Current).
+	read(Term) <~ Stream.
 
 read_term(Stream, Term, _) :-
-	input(Current),
-	input(Stream),
-	read(Term),
-	input(Current).
+	read(Term) <~ Stream.
+
+subsumes_term(General, Specific) :-
+	subsumes_chk(General, Specific),
+	copy_term(Specific, SpecificCopy),
+	General = SpecificCopy.
+
+
+term_variables(Term, Variables) :-
+	vars(Term, Variables).
 
 
 throw(Error) :-
@@ -170,24 +177,94 @@ throw(Error) :-
 
 
 write_canonical(Stream, Term) :-
-	output(Current),
-	output(Stream),
-	writeq(Term),
-	output(Current).
+	writeq(Term) ~> Stream.
 
 
 write_term(Stream, Term, [quoted(true)]) :-
 	!,
-	output(Current),
-	output(Stream),
-	writeq(Term),
-	output(Current).
+	writeq(Term) ~> Stream.
 
 write_term(Stream, Term, _) :-
-	output(Current),
+	write(Term) ~> Stream.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  de facto standard Prolog predicates that might be missing
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% between(+integer, +integer, ?integer) -- built-in
+
+
+% findall(?term, +callable, ?list, +list)
+
+findall(Term, Goal, List, Tail) :-
+	findall(Term, Goal, List0),
+	append(List0, Tail, List).
+
+
+% forall(+callable, +callable) -- built-in
+
+
+% format(+stream_or_alias, +character_code_list_or_atom, +list)
+
+format(Stream, Format, Arguments) :-
+	atom_chars(Format, Chars),
+	format_(Chars, Stream, Arguments).
+
+format_([], _, []).
+format_(['~', Spec| Chars], Stream, Arguments) :-
+	!,
+	format_spec_(Spec, Stream, Arguments, RemainingArguments),
+	format_(Chars, Stream, RemainingArguments).
+format_([Char| Chars], Stream, Arguments) :-
+	atom_chars(Char, [Code]),
+	put(Code) ~> Stream,
+	format_(Chars, Stream, Arguments).
+
+format_spec_('a', Stream, [Argument| Arguments], Arguments) :-
+%	atom(Argument),
+	write(Argument) ~> Stream.
+format_spec_('c', Stream, [Argument| Arguments], Arguments) :-
+	put(Argument) ~> Stream.
+format_spec_('s', Stream, [Argument| Arguments], Arguments) :-
+	atom_codes(Atom, Argument),
+	write(Atom) ~> Stream.
+format_spec_('w', Stream, [Argument| Arguments], Arguments) :-
+	write(Argument) ~> Stream.
+format_spec_('q', Stream, [Argument| Arguments], Arguments) :-
+	writeq(Argument) ~> Stream.
+format_spec_('k', Stream, [Argument| Arguments], Arguments) :-
+	writeq(Argument) ~> Stream.
+format_spec_('d', Stream, [Argument| Arguments], Arguments) :-
+	write(Argument) ~> Stream.
+format_spec_('D', Stream, [Argument| Arguments], Arguments) :-
+	write(Argument) ~> Stream.
+format_spec_('f', Stream, [Argument| Arguments], Arguments) :-
+	write(Argument) ~> Stream.
+format_spec_('g', Stream, [Argument| Arguments], Arguments) :-
+	write(Argument) ~> Stream.
+format_spec_('G', Stream, [Argument| Arguments], Arguments) :-
+	write(Argument) ~> Stream.
+format_spec_('i', _, [_| Arguments], Arguments).
+format_spec_('n', Stream, Arguments, Arguments) :-
+	nl ~> Stream.
+format_spec_('~', Stream, Arguments, Arguments) :-
+	atom_chars('~', [Code]),
+	put(Code) ~> Stream.
+
+
+% format(+character_code_list_or_atom, +list)
+
+format(Format, Arguments) :-
 	output(Stream),
-	write(Term),
-	output(Current).
+	format(Stream, Format, Arguments).
+
+
+% numbervars(?term, +integer, ?integer) -- built-in
 
 
 
@@ -318,7 +395,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 '$lgt_prolog_feature'(prolog_dialect, lpa).
 '$lgt_prolog_feature'(prolog_version, _) :-
 	fail.
-'$lgt_prolog_feature'(prolog_compatible_version, ==((4,0))).
+'$lgt_prolog_feature'(prolog_compatible_version, ==((5,0))).
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
 '$lgt_prolog_feature'(tabling, unsupported).
@@ -381,8 +458,8 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 %
 % expands a file path to a full path
 
-'$lgt_expand_path'(_, _) :-
-	fail.
+'$lgt_expand_path'(Path, ExpandedPath) :-
+	absolute_file_name(Path, ExpandedPath).
 
 
 % '$lgt_file_exists'(+atom)
@@ -398,8 +475,8 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 %
 % deletes a file
 
-'$lgt_delete_file'(_) :-
-	fail.
+'$lgt_delete_file'(File) :-
+	del(file).
 
 
 % '$lgt_directory_exists'(+atom)
@@ -407,8 +484,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 % checks if a directory exists
 
 '$lgt_directory_exists'(Directory) :-
-	absolute_file_name(Directory, [access(exist)], _),
-	absolute_file_name(Directory, [file_type(directory)], _).
+	absolute_file_name(Directory, [access(exist)], _).
 
 
 % '$lgt_current_directory'(-atom)
@@ -432,8 +508,8 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 %
 % makes a new directory; succeeds if the directory already exists
 
-'$lgt_make_directory'(_) :-
-	throw(not_supported('$lgt_make_directory'/1)).
+'$lgt_make_directory'(Directory) :-
+	mkdir(Directory).
 
 
 % '$lgt_compile_prolog_code'(+atom, +atom, +list)
@@ -450,7 +526,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 % Logtalk source file, given a list of options
 
 '$lgt_load_prolog_code'(File, _, _) :-
-	reconsult(File).
+	compile(File).
 
 
 % '$lgt_file_modification_time'(+atom, -nonvar)
@@ -465,8 +541,9 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 %
 % access to operating-system environment variables
 
-'$lgt_environment_variable'(_, _) :-
-	fail.
+'$lgt_environment_variable'(Variable, Value) :-
+	env(Variables),
+	member((Variable,Value), Variables).
 
 
 % '$lgt_startup_directory'(-atom)
@@ -474,23 +551,29 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 % returns the Logtalk startup directory 
 
 '$lgt_startup_directory'(Directory) :-
-	fail.
+	(	env(Variables),
+		member(('LOGTALK_STARTUP_DIRECTORY',Directory), Variables) ->
+		true
+	;	working_directory(Directory)
+	).
 
 
 % '$lgt_user_directory'(-atom)
 %
 % returns the Logtalk user directory; fails if unknown
 
-'$lgt_user_directory'(_) :-
-	fail.
+'$lgt_user_directory'(Directory) :-
+	env(Variables),
+	member(('LOGTALKUSER',Directory), Variables), !.
 
 
 % '$lgt_home_directory'(-atom)
 %
 % returns the Logtalk home directory; fails if unknown
 
-'$lgt_home_directory'(_) :-
-	fail.
+'$lgt_home_directory'(Directory) :-
+	env(Variables),
+	member(('LOGTALKHOME',Directory), Variables), !.
 
 
 
@@ -573,10 +656,10 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_read_term'(@stream, -term, +list, -position)
+% '$lgt_read_term'(@stream, -term, +list, -position, -list)
 
-'$lgt_read_term'(Stream, Term, Options, '-'(-1, -1)) :-
-	read_term(Stream, Term, Options).
+'$lgt_read_term'(Stream, Term, _Options, '-'(-1, -1), Variables) :-
+	eread(Term, Variables) <~ Stream.
 
 
 
@@ -638,8 +721,8 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 % '$lgt_write_term_and_source_location'(@stream, @callable, +atom, @callable)
 
 '$lgt_write_term_and_source_location'(Stream, Term, _Kind, _Location) :-
-	write_canonical(Stream, Term),
-	write(Stream, '.\n').
+	writeq(Term) ~> Stream.
+	nl ~> Stream.
 
 
 % '$lgt_assertz_entity_clause'(@clause, +atom)
@@ -686,15 +769,15 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 
 % '$lgt_string'(@term)
 
-'$lgt_string'(_) :-
-	fail.
+'$lgt_string'(Term) :-
+	string(Term).
 
 
 % '$lgt_string_codes'(+string, -list(codes))
 % '$lgt_string_codes'(-string, +list(codes))
 
-'$lgt_string_codes'(_, _) :-
-	fail.
+'$lgt_string_codes'(String, Codes) :-
+	string_chars(String, Codes).
 
 
 
