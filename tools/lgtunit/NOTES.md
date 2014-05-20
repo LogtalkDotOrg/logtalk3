@@ -25,10 +25,13 @@ ________________________________________________________________________
 Overview
 --------
 
-The `lgtunit.lgt` file contains a simple framework for defining and
-running unit tests in Logtalk. The `lgtunit_messages.lgt` file defines
+The `lgtunit.lgt` source file contains a simple framework for defining and
+running unit tests in Logtalk. The `lgtunit_messages.lgt` source file defines
 the default message translations. For more information on these entities,
 open the `docs/tools.html` file in a web browser.
+
+All source files are formatted using tabs (the recommended setting is a tab
+width equivalent to 4 spaces).
 
 
 Compiling and loading unit tests
@@ -177,5 +180,9 @@ terms that can be useful:
 * XSB: `set_file_write_depth/1` predicate
 * YAP: `write_depth/2-3` predicates
 
-All source files are formatted using tabs (the recommended setting is a tab
-width equivalent to 4 spaces).
+
+Automating running unit tests
+-----------------------------
+
+You can use the `scripts/logtalk_tester.sh` Bash shell script for automating
+running unit tests. See the `scripts/NOTES.md` file for details.
