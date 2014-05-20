@@ -51,13 +51,13 @@
 '$lgt_iso_predicate'(atom_codes(_, _)).
 '$lgt_iso_predicate'(atom_concat(_, _, _)).
 '$lgt_iso_predicate'(catch(_, _, _)).
-'$lgt_iso_predicate'(close(_)).
 '$lgt_iso_predicate'(nl(_)).
 '$lgt_iso_predicate'(number_codes(_, _)).
 '$lgt_iso_predicate'(once(_)).
 '$lgt_iso_predicate'(open(_, _, _)).
 '$lgt_iso_predicate'(open(_, _, _, _)).
 '$lgt_iso_predicate'(read_term(_, _, _)).
+'$lgt_iso_predicate'(sub_atom(_, _, _, _, _)).
 '$lgt_iso_predicate'(subsumes_term(_, _)).
 '$lgt_iso_predicate'(term_variables(_, _)).
 '$lgt_iso_predicate'(throw(_)).
@@ -93,7 +93,7 @@ lpa_catch(Error, Goal) :-
 	catch(Error, Goal).
 
 
-:- hide(catch).
+:- hide(catch, 1).
 
 
 catch(Error, Goal) :-
@@ -121,13 +121,6 @@ catch(Goal, Catcher, Recovery) :-
 	).
 
 
-:- hide(close).
-
-
-close(Stream) :-
-	fclose(Stream).
-
-
 nl(Stream) :-
 	output(Current),
 	output(Stream),
@@ -141,6 +134,9 @@ number_codes(Number, Codes) :-
 
 once(Goal) :-
 	one(Goal).
+
+
+:- hide(open, 1).
 
 
 open(File, read, File) :-
@@ -160,6 +156,12 @@ read_term(Stream, Term, [singletons([])]) :-
 
 read_term(Stream, Term, _) :-
 	read(Term) <~ Stream.
+
+
+sub_atom(Atom, Before, Length, After, SubAtom) :-
+	cat([_,SubAtom,_], Atom, [Before, Length, After]),
+	len(SubAtom, Length).
+
 
 subsumes_term(General, Specific) :-
 	subsumes_chk(General, Specific),
@@ -216,7 +218,7 @@ format(Stream, Format, Arguments) :-
 	format_(Chars, Stream, Arguments).
 
 format_([], _, []).
-format_(['~', Spec| Chars], Stream, Arguments) :-
+format_(['~~', Spec| Chars], Stream, Arguments) :-
 	!,
 	format_spec_(Spec, Stream, Arguments, RemainingArguments),
 	format_(Chars, Stream, RemainingArguments).
@@ -252,8 +254,8 @@ format_spec_('G', Stream, [Argument| Arguments], Arguments) :-
 format_spec_('i', _, [_| Arguments], Arguments).
 format_spec_('n', Stream, Arguments, Arguments) :-
 	nl ~> Stream.
-format_spec_('~', Stream, Arguments, Arguments) :-
-	atom_chars('~', [Code]),
+format_spec_('~~', Stream, Arguments, Arguments) :-
+	atom_chars('~~', [Code]),
 	put(Code) ~> Stream.
 
 
@@ -302,6 +304,8 @@ setup_call_cleanup(_, _, _) :-
 
 
 % call/2-7
+
+:- hide(call, 1).
 
 call(F, A) :-
 	F(A).
@@ -650,6 +654,27 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
+%  abstraction of the standard open/4 and close/1 predicates for dealing
+%  with the alias/1 option in old non-compliant systems
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% '$lgt_open'(+atom, +atom, -stream, @list)
+
+'$lgt_open'(File, Mode, File, _Options) :-
+	open(File, Mode).
+
+
+% '$lgt_close'(@stream)
+
+'$lgt_close'(Stream) :-
+	close(Stream).
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
 %  customized version of the read_term/3 predicate for returning the term
 %  position (start and end lines; needed for improved error messages)
 %
@@ -721,7 +746,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 % '$lgt_write_term_and_source_location'(@stream, @callable, +atom, @callable)
 
 '$lgt_write_term_and_source_location'(Stream, Term, _Kind, _Location) :-
-	writeq(Term) ~> Stream.
+	writeq(Term) ~> Stream,
 	nl ~> Stream.
 
 
