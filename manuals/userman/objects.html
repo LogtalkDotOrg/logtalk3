@@ -168,7 +168,7 @@ We can use, in the same application, both prototype and class-based hierarchies 
 <h2 id="objects_parametric">Parametric objects</h2>
 
 <p>
-Parametric objects have a compound term for name instead of an atom. This compound term usually contains free variables that can be instantiated when sending a message to the object, thus acting as object parameters. The object predicates can then be coded to depend on the parameter values. When an object state is set at object creation and never changed, parameters provide a better solution than using the object's database via asserts. Parametric objects can also be used to associate a set of predicates to terms that share a common functor and arity.
+Parametric objects have a compound term for name instead of an atom. This compound term usually contains free variables that can be instantiated when sending or as a consequence of sending a message to the object, thus acting as object parameters. The object predicates can then be coded to depend on those parameters, which are logical variables shared by all object predicates. When an object state is set at object creation and never changed, parameters provide a better solution than using the object's database via asserts. Parametric objects can also be used to associate a set of predicates to terms that share a common functor and arity.
 </p>
 <p>
 In order to give access to an object parameters, Logtalk provides the <a title="Consult reference manual" href="../refman/methods/parameter_2.html"><code>parameter/2</code></a> built-in local method:
@@ -484,7 +484,7 @@ To use these predicates, simply send the corresponding message to the <code>logt
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: February 6, 2014</span>
+		<span>Last updated on: May 20, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="messages.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="protocols.html">next</a></span><br/>
