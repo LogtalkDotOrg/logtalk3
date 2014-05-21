@@ -260,7 +260,7 @@ The argument must be an identifier of a defined dynamic object, otherwise an err
 <h2 id="objects_directives">Object directives</h2>
 
 <p>
-Object directives are used to set initialization goals and object properties and to document an object dependencies on other Logtalk entities.
+Object directives are used to set initialization goals, define object properties, to document an object dependencies on other Logtalk entities, and to load the contents of files into an object.
 </p>
 
 <h3 id="objects_initialization">Object initialization</h3>
@@ -333,8 +333,26 @@ An object can be documented with arbitrary user-defined information by using the
 </p>
 <pre>:- info(List).</pre>
 <p>
-See the <a href="documenting.html">documenting Logtalk programs</a> session for details.
+See the <a href="documenting.html">documenting Logtalk programs</a> section for details.
 </p>
+
+<h3 id="objects_include">Loading files into an object</h3>
+
+<p>
+The <a title="Consult reference manual" href="../refman/directives/include_1.html"><code>include/1</code></a> directive can be used to load the contents of a file into an object. A typical usage scenario is to load a plain Prolog database into an object thus providing a simple way to encapsulate it. For example, assume a <code>cities.pl</code> file defining facts for a <code>city/4</code> predicate. We could define a wrapper for this database by writing:
+</p>
+<pre>:- object(cities).
+
+	:- public(city/4).
+
+	:- include(includes(databases('cities.pl'))).
+
+:- end_object.
+</pre>
+<p>
+The <code>include/1</code> directive can also be used when creating an object dynamically. For example:
+</p>
+<pre>| ?- create_object(cities, [], [public(city/4), include(databases('cities.pl'))], []).</pre>
 
 <h2 id="objects_relationships">Object relationships</h2>
 
@@ -484,7 +502,7 @@ To use these predicates, simply send the corresponding message to the <code>logt
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: May 20, 2014</span>
+		<span>Last updated on: May 21, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="messages.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="protocols.html">next</a></span><br/>
