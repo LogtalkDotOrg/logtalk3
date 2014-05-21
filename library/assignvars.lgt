@@ -16,9 +16,9 @@ version 2.1 (http://opensource.org/licenses/osl-2.1.php).
 :- category(assignvars).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Nobukuni Kino and Paulo Moura',
-		date is 2005/1/7,
+		date is 2014/05/21,
 		comment is 'Assignable variables (supporting logical, backtracable assignement of non-variable terms).'
 	]).
 
@@ -70,26 +70,26 @@ version 2.1 (http://opensource.org/licenses/osl-2.1.php).
 		nonvar(Assig),
 		self(Self),
 		sender(Sender),
-		throw(error(type_error(variable, Assig), Self::assignable(Assig), Sender)).
+		throw(error(type_error(variable, Assig), logtalk(Self::assignable(Assig), Sender))).
 	assignable([_| _]).
 
 	assignable(Assig, Init) :-
 		nonvar(Assig),
 		self(Self),
 		sender(Sender),
-		throw(error(type_error(variable, Assig), Self::assignable(Assig, Init), Sender)).
+		throw(error(type_error(variable, Assig), logtalk(Self::assignable(Assig, Init), Sender))).
 	assignable(Assig, Init) :-
 		var(Init),
 		self(Self),
 		sender(Sender),
-		throw(error(instantiation_error, Self::assignable(Assig, Init), Sender)).
+		throw(error(instantiation_error, logtalk(Self::assignable(Assig, Init), Sender))).
 	assignable([_, Init| _], Init).
 
 	Assig <= Value :-
 		var(Value),
 		self(Self),
 		sender(Sender),
-		throw(error(instantiation_error, Self::Assig <= Value, Sender)).
+		throw(error(instantiation_error, logtalk(Self::Assig <= Value, Sender))).
 
 	[_| Tail] <= Value :-
 		(	nonvar(Tail) ->
@@ -101,7 +101,7 @@ version 2.1 (http://opensource.org/licenses/osl-2.1.php).
 		var(Assig),
 		self(Self),
 		sender(Sender),
-		throw(error(instantiation_error, Self::Assig => Value, Sender)).
+		throw(error(instantiation_error, logtalk(Self::Assig => Value, Sender))).
 
 	[Current| Tail] => Value :-
 		(	nonvar(Tail) ->

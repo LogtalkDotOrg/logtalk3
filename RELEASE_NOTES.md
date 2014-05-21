@@ -36,6 +36,11 @@ Logtalk compiler and runtime
 
 * ADDED: Loaded file properties `object/1`, `protocol/1`, and `category/1`.
 
+Library
+-------
+
+* UPDATED: The `assignvars` object now uses standard `error/2` terms.
+
 
 3.00.0 Beta 4 - May 14, 2014
 ============================
