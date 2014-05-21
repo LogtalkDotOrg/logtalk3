@@ -1,0 +1,38 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the `LICENSE.txt` file for details.
+________________________________________________________________________
+
+
+% start by loading the example:
+
+| ?- logtalk_load(includes(loader)).
+...
+
+
+% test the include/1 directive as a file directive:
+
+| ?- findall(Vowel, vowel(Vowel), Vowels).
+
+Vowels = [a,e,i,o,u]
+yes
+
+
+% get a list of all capitals:
+
+| ?- countries::capitals(Capitals).
+
+Capitals = [berlim, lisbon, madrid, paris, varsovia]
+yes
+
+
+% get sets of countries with the same population:
+
+| ?- setof(Countries, countries::same_population(Countries), Solutions).
+
+Solutions = [[france, polony], [germany, spain], [portugal]]
+yes

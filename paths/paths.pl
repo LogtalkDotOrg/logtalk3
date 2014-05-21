@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Default library paths 
-%  Last updated on March 25, 2014
+%  Last updated on May 21, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -129,6 +129,7 @@ logtalk_library_path(hailstone, examples('hailstone/')).
 logtalk_library_path(hanoi, threads('hanoi/')).
 logtalk_library_path(hello_world, examples('hello_world/')).
 logtalk_library_path(hooks, examples('hooks/')).
+logtalk_library_path(includes, examples('includes/')).
 logtalk_library_path(inheritance, examples('inheritance/')).
 logtalk_library_path(instmethods, examples('instmethods/')).
 logtalk_library_path(instvars, examples('instvars/')).

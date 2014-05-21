@@ -166,6 +166,10 @@ Follows a short description of each included example (in alphabetical order):
 - `hooks`  
 	simple example of using compiler hook objects and predicates
 
+- `includes`  
+	simple example of using the `include/1` directive as both a
+	file directive and an entity directive
+
 - `inheritance`  
 	examples of public, protected, and private inheritance using both 
 	prototypes and classes/instances
