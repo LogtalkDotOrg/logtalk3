@@ -6215,6 +6215,25 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
+% '$lgt_tr_file_terms'(+list(term), +compilation_context)
+%
+% translates a list of file terms (clauses, directives, or grammar rules)
+
+'$lgt_tr_file_terms'((-), _) :-
+	% catch variables and lists with unbound tails
+	throw(error(instantiantion_error, term(_))).
+
+'$lgt_tr_file_terms'([], _).
+
+'$lgt_tr_file_terms'([Term| Terms], Ctx) :-
+	% only the compilation context mode should be shared between different terms
+	'$lgt_comp_ctx_mode'(Ctx, Mode),
+	'$lgt_comp_ctx_mode'(NewCtx, Mode),
+	'$lgt_tr_file_term'(Term, NewCtx),
+	'$lgt_tr_file_terms'(Terms, Ctx).
+
+
+
 % '$lgt_tr_file_term'(@nonvar, +compilation_context)
 %
 % translates a source file term (clause, directive, or grammar rule)
@@ -6714,6 +6733,10 @@ current_logtalk_flag(Flag, Value) :-
 	ground(Obj::Functor/Arity),
 	throw(permission_error(declare, multifile_predicate, Obj::Functor/Arity)).
 
+'$lgt_tr_file_directive'(include(File), Ctx) :-
+	'$lgt_read_file_to_terms'(File, Terms),
+	'$lgt_tr_file_terms'(Terms, Ctx).
+
 '$lgt_tr_file_directive'(Directive, _) :-
 	'$lgt_pp_term_location'(Location),
 	% directive will be copied to the generated Prolog file
@@ -6743,6 +6766,13 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_tr_logtalk_directive'(+atom, +list, +compilation_context)
 %
 % translates a Logtalk directive and its (possibly empty) list of arguments
+
+'$lgt_tr_logtalk_directive'(include(File), Ctx) :-
+	'$lgt_read_file_to_terms'(File, Terms),
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
+		'$lgt_tr_file_terms'(Terms, Ctx)
+	;	'$lgt_tr_runtime_terms'(Terms, Ctx)
+	).
 
 % object opening and closing directives
 
@@ -15934,6 +15964,9 @@ current_logtalk_flag(Flag, Value) :-
 	!.
 
 
+'$lgt_logtalk_opening_directive'(include(_)).
+
+
 % objects
 '$lgt_logtalk_opening_directive'(object(_)).
 '$lgt_logtalk_opening_directive'(object(_, _)).
@@ -18714,6 +18747,41 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_sum_list'([Value| Values], Sum0, Sum) :-
 	Sum1 is Sum0 + Value,
 	'$lgt_sum_list'(Values, Sum1, Sum).
+
+
+'$lgt_read_file_to_terms'(File, Terms) :-
+	catch(
+		'$lgt_check_source_file'(File, ExpandedFile),
+		error(FileError, _),
+		'$lgt_compiler_open_stream_error_handler'(FileError)
+	),
+	(	'$lgt_file_exists'(ExpandedFile) ->
+		true
+	;	throw(existence_error(file, File))
+	),
+	catch(
+		'$lgt_open'(ExpandedFile, read, Stream, []),
+		OpenError,
+		'$lgt_compiler_open_stream_error_handler'(OpenError)
+	),
+	catch(
+		'$lgt_read_stream_to_terms'(Stream, Terms),
+		TermError,
+		('$lgt_close'(Stream), '$lgt_compiler_error_handler'(TermError))
+	),
+	'$lgt_close'(Stream).
+
+'$lgt_read_stream_to_terms'(Stream, Terms) :-
+	'$lgt_read_term'(Stream, Term, [singletons(Singletons)]),
+	'$lgt_read_stream_to_terms'(Term, Singletons, Stream, Terms).
+
+
+'$lgt_read_stream_to_terms'(end_of_file, _, _, []) :-
+	!.
+'$lgt_read_stream_to_terms'(Term, Singletons, Stream, [Term| Terms]) :-
+	'$lgt_report_singleton_variables'(Singletons, Term),
+	'$lgt_read_term'(Stream, NextTerm, [singletons(NextSingletons)]),
+	'$lgt_read_stream_to_terms'(NextTerm, NextSingletons, Stream, Terms).
 
 
 
