@@ -31,6 +31,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: `include/1` source file and entity directive. Whew used as an entity
+directive, is supported in both file defined entities and dynamically created
+entities.
+
 * CHANGED: The compiler flag `misspelt_calls` is replaced by the new flags
 `unknown_predicates` and `undefined_predicates`.
 
@@ -42,6 +46,12 @@ Library
 * FIXED: Bug in the `assignvars` object where getting the current value for
 an empty assignable variable would succeed (bug in the original code adapted
 to Logtalk). Also, this object now uses standard `error/2` terms.
+
+Examples
+--------
+
+* ADDED: Example `includes`, illustrating the use of the new `include/1`
+directive.
 
 
 3.00.0 Beta 4 - May 14, 2014
