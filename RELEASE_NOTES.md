@@ -39,7 +39,9 @@ Logtalk compiler and runtime
 Library
 -------
 
-* UPDATED: The `assignvars` object now uses standard `error/2` terms.
+* FIXED: Bug in the `assignvars` object where getting the current value for
+an empty assignable variable would succeed (bug in the original code adapted
+to Logtalk). Also, this object now uses standard `error/2` terms.
 
 
 3.00.0 Beta 4 - May 14, 2014

@@ -16,9 +16,9 @@ version 2.1 (http://opensource.org/licenses/osl-2.1.php).
 :- category(assignvars).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Nobukuni Kino and Paulo Moura',
-		date is 2014/05/21,
+		date is 2014/05/22,
 		comment is 'Assignable variables (supporting logical, backtracable assignement of non-variable terms).'
 	]).
 
@@ -103,9 +103,13 @@ version 2.1 (http://opensource.org/licenses/osl-2.1.php).
 		sender(Sender),
 		throw(error(instantiation_error, logtalk(Self::Assig => Value, Sender))).
 
-	[Current| Tail] => Value :-
+	[_| Tail] => Value :-
+		nonvar(Tail),
+		peek_assign(Tail, Value).
+
+	peek_assign([Current| Tail], Value) :-
 		(	nonvar(Tail) ->
-			Tail => Value
+			peek_assign(Tail, Value)
 		;	Current = Value
 		).
 
