@@ -10180,7 +10180,9 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 '$lgt_tr_body'(parameter(Arg, Value), TPred, '$lgt_debug'(goal(parameter(Arg, Value), TPred), ExCtx), Ctx) :-
-	'$lgt_comp_ctx'(Ctx, Other::_, _, This, _, _, _, _, ExCtx, _, _),
+	'$lgt_comp_ctx'(Ctx, Head, _, This, _, _, _, _, ExCtx, _, _),
+	nonvar(Head),
+	Head = Other::_,
 	% we're compiling a clause for a multifile predicate
 	!,
 	'$lgt_must_be'(integer, Arg),
@@ -10208,8 +10210,21 @@ current_logtalk_flag(Flag, Value) :-
 	\+ compound(Entity),
 	throw(type_error(parametric_entity, Entity)).
 
+'$lgt_tr_body'(parameter(Arg, Value), TPred, '$lgt_debug'(goal(parameter(Arg, Value), TPred), ExCtx), Ctx) :-
+	'$lgt_pp_entity_'(category, Ctg, _, _, _),
+	!,
+	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, _, _),
+	'$lgt_execution_context_this'(ExCtx, This),
+	functor(Ctg, _, Arity),
+	(	1 =< Arg, Arg =< Arity ->
+		TPred = '$lgt_category_parameter'(This, Ctg, Arg, Value)
+	;	throw(domain_error([1,Arity], Arg))
+	).
+
 '$lgt_tr_body'(parameter(Arg, Value), TPred, '$lgt_debug'(goal(parameter(Arg, Value), DPred), ExCtx), Ctx) :-
-	'$lgt_pp_entity_'(object, This, _, _, _),
+	(	'$lgt_pp_entity_'(object, This, _, _, _)
+	;	'$lgt_comp_ctx_mode'(Ctx, runtime)	% <</2 call
+	),
 	!,
 	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, _, _),
 	'$lgt_execution_context_this'(ExCtx, This),
@@ -10225,17 +10240,6 @@ current_logtalk_flag(Flag, Value) :-
 			TPred = (Value0 = Value),
 			DPred = TPred
 		)
-	;	throw(domain_error([1,Arity], Arg))
-	).
-
-'$lgt_tr_body'(parameter(Arg, Value), TPred, '$lgt_debug'(goal(parameter(Arg, Value), TPred), ExCtx), Ctx) :-
-	'$lgt_pp_entity_'(category, Ctg, _, _, _),
-	!,
-	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, _, _),
-	'$lgt_execution_context_this'(ExCtx, This),
-	functor(Ctg, _, Arity),
-	(	1 =< Arg, Arg =< Arity ->
-		TPred = '$lgt_category_parameter'(This, Ctg, Arg, Value)
 	;	throw(domain_error([1,Arity], Arg))
 	).
 
