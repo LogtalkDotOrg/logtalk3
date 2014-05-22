@@ -9493,9 +9493,13 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_body'(threaded_wait(Msg), MTPred, '$lgt_debug'(goal(threaded_wait(Msg), MTPred), ExCtx), Ctx) :-
 	!,
-	'$lgt_pp_entity_'(Type, _, Prefix, _, _),
+	(	'$lgt_pp_entity_'(Type, _, Prefix, _, _) ->
+		true
+	;	Type = object	% <</2 call
+	),
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, Prefix, _, _, ExCtx, _, _),
-	(	'$lgt_pp_synchronized_'(Head, Mutex) ->
+	(	nonvar(Head),
+		'$lgt_pp_synchronized_'(Head, Mutex) ->
 		(	Type == object ->
 			% we're compiling an object predicate
 			MTPred = '$lgt_threaded_wait_synch'(Mutex, Msg, Prefix)
@@ -9522,7 +9526,10 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_body'(threaded_notify(Msg), MTPred, '$lgt_debug'(goal(threaded_notify(Msg), MTPred), ExCtx), Ctx) :-
 	!,
-	'$lgt_pp_entity_'(Type, _, Prefix, _, _),
+	(	'$lgt_pp_entity_'(Type, _, Prefix, _, _) ->
+		true
+	;	Type = object	% <</2 call
+	),
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, Prefix, _, _, ExCtx, _, _),
 	(	Type == object ->
 		% we're compiling an object predicate
@@ -10204,9 +10211,12 @@ current_logtalk_flag(Flag, Value) :-
 		TPred = '$lgt_category_parameter'(This, Other, Arg, Value)
 	).
 
-'$lgt_tr_body'(parameter(Arg, _), _, _, _) :-
+'$lgt_tr_body'(parameter(Arg, _), _, _, Ctx) :-
 	'$lgt_must_be'(integer, Arg),
-	'$lgt_pp_entity_'(_, Entity, _, _, _),
+	(	'$lgt_pp_entity_'(_, Entity, _, _, _) ->
+		true
+	;	'$lgt_comp_ctx_this'(Ctx, Entity)	% <</2 call
+	),
 	\+ compound(Entity),
 	throw(type_error(parametric_entity, Entity)).
 

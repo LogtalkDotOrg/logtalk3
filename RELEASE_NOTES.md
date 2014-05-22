@@ -40,8 +40,9 @@ entities.
 
 * ADDED: Loaded file properties `object/1`, `protocol/1`, and `category/1`.
 
-* FIXED: Bug that prevented calling the `parameter/2` built-in method at
-runtime using the `<</2` control construct.
+* FIXED: Bugs that prevented calling the `parameter/2` built-in method or the
+`threaded_wait/2` and `threaded_notify/2` built-in predicates at runtime using
+the `<</2` control construct.
 
 Library
 -------
