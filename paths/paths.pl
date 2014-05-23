@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Default library paths 
-%  Last updated on May 21, 2014
+%  Last updated on May 23, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -160,6 +160,7 @@ logtalk_library_path(nondet, threads('nondet/')).
 logtalk_library_path(operators, examples('operators/')).
 logtalk_library_path(patching, examples('patching/')).
 logtalk_library_path(parametric, examples('parametric/')).
+logtalk_library_path(pardicts, examples('pardicts/')).
 logtalk_library_path(people, examples('people/')).
 logtalk_library_path(philosophers, threads('philosophers/')).
 logtalk_library_path(poem, examples('poem/')).

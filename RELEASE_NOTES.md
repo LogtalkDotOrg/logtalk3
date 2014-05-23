@@ -57,6 +57,9 @@ Examples
 * ADDED: Example `includes`, illustrating the use of the new `include/1`
 directive.
 
+* ADDED: SWI-Prolog backend only example `pardicts` of using a dictionary
+term for representing object parameters.
+
 
 3.00.0 Beta 4 - May 14, 2014
 ============================

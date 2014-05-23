@@ -252,6 +252,10 @@ Follows a short description of each included example (in alphabetical order):
 - `parametric`  
 	simple example of parametric objects
 
+- `pardicts`  
+	simple SWI-Prolog only example of using a dictionary term
+	for representing object parameters
+
 - `people`  
 	simple example of defining object constructors
 

@@ -1,0 +1,35 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the `LICENSE.txt` file for details.
+________________________________________________________________________
+
+
+% start by loading the example:
+
+?- logtalk_load(pardicts(loader)).
+...
+
+
+% backtrackable update of an individual parameter:
+
+?- obj(Dict)::init([a-1, b-2, c-3]), (obj(Dict)::b_set(b, 9), obj(Dict)::get(b, B), write(b-B), nl, fail; obj(Dict)::get(b, B), write(b-B), nl).
+
+b-9
+b-2
+Dict = p{a:1, b:2, c:3},
+B = 2.
+
+
+% non-backtrackable update of an individual parameter:
+
+?- obj(Dict)::init([a-1, b-2, c-3]), (obj(Dict)::nb_set(b, 9), obj(Dict)::get(b, B), write(b-B), nl, fail; obj(Dict)::get(b, B), write(b-B), nl).
+
+b-9
+b-9
+Dict = p{a:1, b:9, c:3},
+B = 9.
+
