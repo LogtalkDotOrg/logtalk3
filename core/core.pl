@@ -10635,7 +10635,6 @@ current_logtalk_flag(Flag, Value) :-
 		;	DPred = '$lgt_debug'(goal(Alias, DGoal), ExCtx)
 		)
 	;	% meta-predicate template is not usable
-		'$lgt_prolog_meta_predicate'(Pred, Meta, _),
 		throw(domain_error(meta_predicate_template, Meta))
 	).
 

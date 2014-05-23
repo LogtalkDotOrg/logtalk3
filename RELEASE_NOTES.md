@@ -44,6 +44,10 @@ entities.
 `threaded_wait/2` and `threaded_notify/2` built-in predicates at runtime using
 the `<</2` control construct.
 
+* FIXED: Compiler failure instead of an informative error when trying to compile
+a user meta-predicate defined in plain Prolog with an ambiguous meta-predicate
+template.
+
 Prolog adapter and integration files
 ------------------------------------
 
