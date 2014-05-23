@@ -259,7 +259,6 @@ SWI Prolog 6.0.0 and later versions
 
 	swi.pl
 	swihooks.pl
-	xpcehooks.pl
 
 No problems expected. Please report any problem found (with a solution 
 if possible).
@@ -275,9 +274,8 @@ Prolog compilers buy may also cause compatibility problems with some
 SWI-Prolog libraries. Comment out the corresponding `set_prolog_flag/2` 
 directive if necessary.
 
-If you intend to use Logtalk and XPCE at the same time, you may load the 
-`xpcehooks.pl` file in order to support Logtalk message sending goals as
-XPCE call-back goals.
+For using XPCE from Logtalk, see the `xpce` example in the Logtalk
+distribution.
 
 With multi-threading support turned on, you may get an harmless message
 when halting the system regarding threads that wouldn't die: you can 

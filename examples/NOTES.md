@@ -335,3 +335,6 @@ Follows a short description of each included example (in alphabetical order):
 - `viewpoints`  
 	example on how to implement property sharing and value sharing 
 	with prototypes
+
+- `xpce`  
+	SWI-Prolog only example of using XPCE from Logtalk

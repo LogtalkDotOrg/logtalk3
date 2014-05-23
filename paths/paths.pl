@@ -189,3 +189,4 @@ logtalk_library_path(team, threads('team/')).
 logtalk_library_path(testing, examples('testing/')).
 logtalk_library_path(threads, examples('threads/')).
 logtalk_library_path(viewpoints, examples('viewpoints/')).
+logtalk_library_path(xpce, examples('xpce/')).

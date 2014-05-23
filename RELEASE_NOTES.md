@@ -44,6 +44,12 @@ entities.
 `threaded_wait/2` and `threaded_notify/2` built-in predicates at runtime using
 the `<</2` control construct.
 
+Prolog adapter and integration files
+------------------------------------
+
+* CHANGED: The `adapters/xpcehooks.pl` file have been renamed and moved to the
+`xpce` example.
+
 Library
 -------
 
@@ -57,8 +63,10 @@ Examples
 * ADDED: Example `includes`, illustrating the use of the new `include/1`
 directive.
 
-* ADDED: SWI-Prolog backend only example `pardicts` of using a dictionary
-term for representing object parameters.
+* ADDED: SWI-Prolog backend only example, `pardicts`, of using a native
+dictionary term for representing object parameters.
+
+* ADDED: SWI-Prolog backend only example, `xpce`, of using XPCE from Logtalk.
 
 
 3.00.0 Beta 4 - May 14, 2014
