@@ -48,6 +48,9 @@ the `<</2` control construct.
 a user meta-predicate defined in plain Prolog with an ambiguous meta-predicate
 template.
 
+* FIXED: Code generation bug when compiling an object that instantiates or
+specializes multiple classes. 
+
 Prolog adapter and integration files
 ------------------------------------
 

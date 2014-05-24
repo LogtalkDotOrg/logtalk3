@@ -1073,8 +1073,8 @@ create_object(Obj, Relations, Directives, Clauses) :-
 		'$lgt_gen_entity_identifier'(object, Obj)
 	;	true
 	),
-	'$lgt_tr_object_identifier'(Obj, Relations),
 	'$lgt_tr_object_relations'(Relations, Obj),
+	'$lgt_tr_object_identifier'(Obj),
 	% set the initial compilation context for compiling the object directives and clauses
 	'$lgt_comp_ctx_mode'(Ctx, runtime),
 	'$lgt_tr_logtalk_directives'([(dynamic)| Directives], Ctx),
@@ -6815,8 +6815,8 @@ current_logtalk_flag(Flag, Value) :-
 		)
 	;	'$lgt_print_message'(silent(compiling), core, compiling_entity(object, Obj)),
 		'$lgt_add_entity_source_data'(start, Obj),
-		'$lgt_tr_object_identifier'(Obj, Relations),
-		'$lgt_tr_object_relations'(Relations, Obj)
+		'$lgt_tr_object_relations'(Relations, Obj),
+		'$lgt_tr_object_identifier'(Obj)
 	).
 
 '$lgt_tr_logtalk_directive'(end_object, Ctx) :-
@@ -6933,7 +6933,7 @@ current_logtalk_flag(Flag, Value) :-
 	assertz('$lgt_pp_module_'(Module)),
 	'$lgt_print_message'(silent(compiling), core, compiling_entity(module, Module)),
 	'$lgt_add_entity_source_data'(start, Module),
-	'$lgt_tr_object_identifier'(Module, []),
+	'$lgt_tr_object_identifier'(Module),
 	% make the export list public predicates
 	'$lgt_tr_logtalk_directive'(public(Exports), Ctx).
 
@@ -12424,21 +12424,21 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_tr_object_identifier'(@object_identifier, @list)
+% '$lgt_tr_object_identifier'(@object_identifier)
 %
 % from the object identifier construct the set of
 % functor prefixes used in the compiled code clauses
 
-'$lgt_tr_object_identifier'(Obj, Relations) :-
+'$lgt_tr_object_identifier'(Obj) :-
 	(	atom(Obj) ->
 		GObj = Obj
 	;	% parametric object
 		'$lgt_term_template'(Obj, GObj)
 	),
 	'$lgt_add_referenced_object'(GObj),
-	(	'$lgt_member'(instantiates(_), Relations) ->
+	(	'$lgt_pp_instantiates_class_'(_, _, _) ->
 		'$lgt_construct_ic_functors'(GObj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm)
-	;	'$lgt_member'(specializes(_), Relations) ->
+	;	'$lgt_pp_specializes_class_'(_, _, _) ->
 		'$lgt_construct_ic_functors'(GObj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm)
 	;	'$lgt_construct_prototype_functors'(GObj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm)
 	),
