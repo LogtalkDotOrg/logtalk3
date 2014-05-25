@@ -38,6 +38,12 @@ entities.
 * CHANGED: The compiler flag `misspelt_calls` is replaced by the new flags
 `unknown_predicates` and `undefined_predicates`.
 
+* CHANGED: Attempting to load a file now always registers it as loaded even
+if its compilation and loading fails due to some syntax error. This simplifies
+the make functionality for the user. Notably, it's no longer necessary to set
+the `reload` flag to `always` for loader files during development. Thanks to
+Jan Wielemaker for his feedback on this issue.
+
 * ADDED: Loaded file properties `object/1`, `protocol/1`, and `category/1`.
 
 * FIXED: Bugs that prevented calling the `parameter/2` built-in method or the

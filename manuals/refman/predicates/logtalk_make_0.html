@@ -41,7 +41,7 @@
 Reloads all Logtalk source files that have been modified since the time they are last loaded.
 </p>
 <p>
-There are some caveats when using this built-in predicate, however. First, only Logtalk source files are reloaded. Second, source files are reloaded using the same explicit compiler options used the last time they are loaded but no check is made if the implicit compiler options have changed between loads.
+There are some caveats when using this built-in predicate, however. First, only Logtalk source files are reloaded. Second, when a source file have not been modified since last loaded, it will not be reloaded if the same explicit compiler options are being used and there are no changes to the <code>debug/1</code> and <code>optimize/1</code> options (i.e. there is no change to the file compilation mode). No check is made for other implicit compiler options that may have changed between loads.
 </p>
 
 <h4>Template and modes</h4>
@@ -61,7 +61,7 @@ There are some caveats when using this built-in predicate, however. First, only 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: September 11, 2013</span>
+		<span>Last updated on: May 25, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="logtalk_load_2.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="logtalk_make_1.html">next</a></span><br/>

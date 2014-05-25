@@ -147,7 +147,6 @@
 % table of loaded files
 
 % '$lgt_loaded_file_'(Basename, Directory, Mode, Flags, TextProperties, PrologFile, TimeStamp)
-:- multifile('$lgt_loaded_file_'/7).
 :- dynamic('$lgt_loaded_file_'/7).
 
 % '$lgt_parent_file_'(SourceFile, ParentSourceFile)
@@ -2170,6 +2169,7 @@ logtalk_load(Files, Flags) :-
 	'$lgt_load_files'(ExpandedFiles, Flags),
 	'$lgt_report_warning_numbers'(logtalk_load(Files, Flags)),
 	'$lgt_clear_compiler_flags'.
+
 
 '$lgt_logtalk_load_error_handler'(Error, Files, Flags) :-
 	'$lgt_clear_compiler_flags',
@@ -4780,13 +4780,14 @@ current_logtalk_flag(Flag, Value) :-
 			'$lgt_print_message'(comment(loading), core, skipping_reloading_file(SourceFile, Flags))
 		;	% we're reloading a source file
 			'$lgt_print_message'(silent(loading), core, reloading_file(SourceFile, Flags)),
+			'$lgt_update_loaded_file'(Directory, Basename, SourceFile, Flags, PrologFile),
 			'$lgt_compile_file'(SourceFile, PrologFile, Flags, loading, Current),
-			retractall('$lgt_loaded_file_'(Basename, Directory, _, _, _, _, _)),
 			'$lgt_load_compiled_file'(SourceFile, PrologFile),
 			'$lgt_print_message'(comment(loading), core, reloaded_file(SourceFile, Flags))
 		)
 	;	% first time loading this source file
 		'$lgt_print_message'(silent(loading), core, loading_file(SourceFile, Flags)),
+		'$lgt_add_loaded_file'(Directory, Basename, SourceFile, Flags, PrologFile),
 		'$lgt_compile_file'(SourceFile, PrologFile, Flags, loading, Current),
 		% save the file loading dependency on a parent file if it exists
 		(	'$lgt_file_loading_stack_'(ParentSourceFile) ->
@@ -4813,6 +4814,28 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	'$lgt_change_directory'(Current).
 
+
+'$lgt_update_loaded_file'(Directory, Basename, Path, Flags, PrologFile) :-
+	retractall('$lgt_loaded_file_'(Basename, Directory, _, _, _, _, _)),
+	'$lgt_add_loaded_file'(Directory, Basename, Path, Flags, PrologFile).
+
+
+'$lgt_add_loaded_file'(Directory, Basename, Path, Flags, PrologFile) :-
+	(	'$lgt_compiler_flag'(debug, on) ->
+		Mode = debug
+	;	'$lgt_compiler_flag'(optimize, on) ->
+		Mode = optimal
+	;	Mode = normal
+	),
+	(	'$lgt_pp_file_encoding_'(Encoding, _) ->
+		(	'$lgt_pp_file_bom_'(BOM) ->
+			TextProperties = [encoding(Encoding), BOM]
+		;	TextProperties = [encoding(Encoding)]
+		)
+	;	TextProperties = []
+	),
+	'$lgt_file_modification_time'(Path, TimeStamp),
+	assertz('$lgt_loaded_file_'(Basename, Directory, Mode, Flags, TextProperties, PrologFile, TimeStamp)).
 
 
 '$lgt_load_compiled_file'(SourceFile, PrologFile) :-
@@ -15121,8 +15144,7 @@ current_logtalk_flag(Flag, Value) :-
 % runtime clauses for all defined entities
 
 '$lgt_write_runtime_clauses'(SourceData, Stream) :-
-	'$lgt_pp_file_data_'(Basename, Directory, Path, PrologFile),
-	% entity runtime clauses
+	'$lgt_pp_file_data_'(_, _, Path, _),
 	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_current_protocol_'/5),
 	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_current_category_'/6),
 	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_current_object_'/11),
@@ -15135,35 +15157,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_extends_category_'/3),
 	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_extends_object_'/3),
 	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_extends_protocol_'/3),
-	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_complemented_object_'/5),
-	% file runtime clauses
-	write_canonical(Stream, (:- multifile('$lgt_loaded_file_'/7))), write(Stream, '.'), nl(Stream),
-	write_canonical(Stream, (:- dynamic('$lgt_loaded_file_'/7))), write(Stream, '.'), nl(Stream),
-	% we must keep the list of flags sorted so that we can use a simple term comparison
-	% to later check when reloading a file if the explicit flags are the same as before
-	(	setof(Flag, Name^Value^('$lgt_pp_file_compiler_flag_'(Name,Value), Flag =.. [Name,Value]), Flags) ->
-		true
-	;	Flags = []
-	),
-	(	'$lgt_compiler_flag'(debug, on) ->
-		Mode = debug
-	;	'$lgt_compiler_flag'(optimize, on) ->
-		Mode = optimal
-	;	Mode = normal
-	),
-	(	'$lgt_pp_file_encoding_'(Encoding, _) ->
-		(	'$lgt_pp_file_bom_'(BOM) ->
-			TextProperties = [encoding(Encoding), BOM]
-		;	TextProperties = [encoding(Encoding)]
-		)
-	;	TextProperties = []
-	),
-	'$lgt_file_modification_time'(Path, TimeStamp),
-	Clause = '$lgt_loaded_file_'(Basename, Directory, Mode, Flags, TextProperties, PrologFile, TimeStamp),
-	(	SourceData == on ->
-		'$lgt_write_term_and_source_location'(Stream, Clause, aux, Path+1)
-	;	write_canonical(Stream, Clause), write(Stream, '.'), nl(Stream)
-	).
+	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_complemented_object_'/5).
 
 
 '$lgt_write_runtime_clauses'(SourceData, Stream, Path, Functor/Arity) :-

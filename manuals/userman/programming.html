@@ -56,7 +56,7 @@ Logtalk source files may contain arbitrary Prolog directives and clauses interle
 The text encoding used in a source file may be declared using the <a title="Consult reference manual" href="../refman/directives/encoding_1.html"><code>encoding/1</code></a> directive when running Logtalk with some back-end Prolog compilers that support multiple encodings (check the <code>encoding_directive</code> flag in the adapter file of your Prolog compiler). The encoding used (and, in the case of a Unicode encoding, any BOM present) in a source file will be used for the generated Prolog and XML files. Logtalk uses the encoding names specified by <a title="" href="http://www.iana.org/assignments/character-sets">IANA</a> (in those cases where a preferred MIME name alias is specified, the alias is used instead).
 </p>
 <p>
-Logtalk source files can include the text of other files by using the <a title="Consult reference manual" href="../refman/directives/include_1.html"><code>include/1</code></a> directive. Although there's also a standard Prolog <code>include/1</code></a> directive, any occurrences of this directive in a Logtalk source file is handled by the Logtalk compiler, not by the backend Prolog compiler.
+Logtalk source files can include the text of other files by using the <a title="Consult reference manual" href="../refman/directives/include_1.html"><code>include/1</code></a> directive. Although there's also a standard Prolog <code>include/1</code> directive, any occurrences of this directive in a Logtalk source file is handled by the Logtalk compiler, not by the backend Prolog compiler.
 </p>
 
 <h3 id="programming_portability">Portable programs</h3>
@@ -188,13 +188,6 @@ A common mistake is to try to set compiler options using <code>logtalk_load/2</c
 <pre>| ?- logtalk_load(loader, [underscore_variables(dont_care), source_data(off)]).</pre>
 <p>
 This will not work as you might expect as the compiler options will only be used in the compilation of the <code>loader.lgt</code> file itself and will not affect the compilation of files loaded through the <code>initialization/1</code> directive contained on the loader file.
-</p>
-<p>
-When developing new applications, it's a good idea to set the <code>reload</code> flag for the loader file to <code>always</code> by adding the directive:
-</p>
-<pre>:- set_logtalk_flag(reload, always).</pre>
-<p>
-Note that, by using a directive, the flag is local to the loader file. If one of the files loaded by the loader file fails to compile and load due to syntax errors, you can then simply reload the loader file after fixing those errors to load that file. If the <code>reload</code> flag was set to its default value, <code>changed</code>, you would not be able to simply reload the loader file to load the now fixed files. The <code>logtalk_make/0-1</code> predicates (which reload modified files since loaded) would also be of no avail as those files with syntax errors were never loaded in the first place.
 </p>
 
 <h3 id="programming_libraries">Libraries of source files</h3>
@@ -729,7 +722,7 @@ When objects or categories containing grammar rules are compiled in debug mode, 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: May 21, 2014</span>
+		<span>Last updated on: May 25, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="installing.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="migration.html">next</a></span><br/>
