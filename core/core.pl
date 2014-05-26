@@ -1879,8 +1879,7 @@ logtalk_compile(Files, Flags) :-
 	'$lgt_check_source_files'(Files, ExpandedFiles),
 	'$lgt_check_compiler_flags'(Flags),
 	'$lgt_compile_files'(ExpandedFiles, Flags),
-	'$lgt_report_warning_numbers'(logtalk_compile(Files, Flags)),
-	'$lgt_clean_pp_file_clauses'.
+	'$lgt_report_warning_numbers'(logtalk_compile(Files, Flags), Flags).
 
 
 '$lgt_logtalk_compile_error_handler'(Error, Files, Flags) :-
@@ -1935,13 +1934,27 @@ logtalk_compile(Files, Flags) :-
 	assertz('$lgt_pp_loading_warnings_counter_'(New)).
 
 
-'$lgt_report_warning_numbers'(Goal) :-
+'$lgt_report_warning_numbers'(Goal, Flags) :-
 	(	retract('$lgt_pp_warnings_top_goal_directory_'(Goal, _)),
 		% top compilation/loading goal
 		retract('$lgt_pp_compilation_warnings_counter_'(CCounter)),
 		retract('$lgt_pp_loading_warnings_counter_'(LCounter)) ->
 		% report compilation and loading warnings
-		'$lgt_print_message'(comment(warnings), core, compilation_and_loading_warnings(CCounter, LCounter))
+		(	'$lgt_member'(report(Report), Flags) ->
+			% use specified report flag value for reporting
+			catch(
+				(	asserta('$lgt_pp_file_compiler_flag_'(report, Report)),
+					'$lgt_print_message'(comment(warnings), core, compilation_and_loading_warnings(CCounter, LCounter)),
+					retractall('$lgt_pp_file_compiler_flag_'(report, _))
+				),
+				Error,
+				(	retractall('$lgt_pp_file_compiler_flag_'(report, _)),
+					throw(Error)
+				)
+			)
+		;	% use default report flag value for reporting
+			'$lgt_print_message'(comment(warnings), core, compilation_and_loading_warnings(CCounter, LCounter))
+		)
 	;	% not top compilation/loading goal
 		true
 	).
@@ -2153,8 +2166,7 @@ logtalk_load(Files, Flags) :-
 	'$lgt_check_source_files'(Files, ExpandedFiles),
 	'$lgt_check_compiler_flags'(Flags),
 	'$lgt_load_files'(ExpandedFiles, Flags),
-	'$lgt_report_warning_numbers'(logtalk_load(Files, Flags)),
-	'$lgt_clean_pp_file_clauses'.
+	'$lgt_report_warning_numbers'(logtalk_load(Files, Flags), Flags).
 
 
 '$lgt_logtalk_load_error_handler'(Error, Files, Flags) :-
@@ -4711,13 +4723,9 @@ current_logtalk_flag(Flag, Value) :-
 % a call to this predicate can trigger other calls to it, therefore we must clean
 % the compilation auxiliary predicates before compiling a file
 
-'$lgt_load_files'([], Flags) :-
+'$lgt_load_files'([], _) :-
 	!,
-	% make sure there are no leftovers
-	'$lgt_clean_pp_file_clauses',
-	% the caller of this predicate might need the flags set
-	% (e.g. for reporting loading and compilation warnings)
-	'$lgt_set_compiler_flags'(Flags).
+	'$lgt_clean_pp_file_clauses'.
 
 '$lgt_load_files'([File| Files], Flags) :-
 	!,
@@ -4967,13 +4975,9 @@ current_logtalk_flag(Flag, Value) :-
 % a call to this predicate can trigger other calls to it, therefore we must clean
 % the compilation auxiliary predicates before compiling a file
 
-'$lgt_compile_files'([], Flags) :-
+'$lgt_compile_files'([], _) :-
 	!,
-	% make sure there are no leftovers
-	'$lgt_clean_pp_file_clauses',
-	% the caller of this predicate might need the flags set
-	% (e.g. for reporting loading and compilation warnings)
-	'$lgt_set_compiler_flags'(Flags).
+	'$lgt_clean_pp_file_clauses'.
 
 '$lgt_compile_files'([File| Files], Flags) :-
 	!,
