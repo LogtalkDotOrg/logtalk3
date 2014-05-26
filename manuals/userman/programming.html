@@ -362,7 +362,7 @@ Note that the scope of the <code>set_logtalk_flag/2</code> directive is local to
 	</dl>
 	<dl>
 		<dt><code>reload(Option)</code></dt>
-			<dd>Defines the reloading behavior for source files. Possible option values are <code>skip</code> (skip loading of already loaded files; this value can be used to get similar functionality to the Prolog directive <code>ensure_loaded/1</code>), <code>changed</code> (reload files that are changed since last loaded provided that the any explicit flags are the same as the before), and <code>always</code> (always reload files).</dd>
+			<dd>Defines the reloading behavior for source files. Possible option values are <code>skip</code> (skip loading of already loaded files; this value can be used to get similar functionality to the Prolog directive <code>ensure_loaded/1</code> but should be used only with fully debugged code), <code>changed</code> (the usual default; reload files that are changed since last loaded provided that the any explicit flags and the compilation mode are the same as before), and <code>always</code> (always reload files).</dd>
 	</dl>
 	<dl>
 		<dt><code>hook(Object)</code></dt>
@@ -722,7 +722,7 @@ When objects or categories containing grammar rules are compiled in debug mode, 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: May 25, 2014</span>
+		<span>Last updated on: May 26, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="installing.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="migration.html">next</a></span><br/>
