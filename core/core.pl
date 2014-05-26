@@ -1086,7 +1086,7 @@ create_object(Obj, Relations, Directives, Clauses) :-
 	'$lgt_gen_object_directives',
 	'$lgt_assert_tr_entity',
 	'$lgt_restore_global_operator_table',
-	'$lgt_clean_pp_file_clauses',
+	'$lgt_clean_pp_cc_clauses',
 	'$lgt_clean_pp_entity_clauses'.
 
 
@@ -1135,7 +1135,7 @@ create_category(Ctg, Relations, Directives, Clauses) :-
 	'$lgt_gen_category_directives',
 	'$lgt_assert_tr_entity',
 	'$lgt_restore_global_operator_table',
-	'$lgt_clean_pp_file_clauses',
+	'$lgt_clean_pp_cc_clauses',
 	'$lgt_clean_pp_entity_clauses',
 	% complementing categories can invalidate dynamic binding cache entries
 	(	'$lgt_member'(Relation, Relations),
@@ -1184,7 +1184,7 @@ create_protocol(Ptc, Relations, Directives) :-
 	'$lgt_gen_protocol_directives',
 	'$lgt_assert_tr_entity',
 	'$lgt_restore_global_operator_table',
-	'$lgt_clean_pp_file_clauses',
+	'$lgt_clean_pp_cc_clauses',
 	'$lgt_clean_pp_entity_clauses'.
 
 
@@ -5897,15 +5897,22 @@ current_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_pp_file_data_'(_, _, _, _)),
 	retractall('$lgt_pp_file_compiler_flag_'(_, _)),
 	retractall('$lgt_pp_file_runtime_clause_'(_)),
-	retractall('$lgt_pp_cc_if_found_'(_)),
-	retractall('$lgt_pp_cc_skipping_'),
-	retractall('$lgt_pp_cc_mode_'(_)),
 	retractall('$lgt_pp_term_position_variables_'(_, _)),
 	% a Logtalk source file may contain only plain Prolog terms
 	% instead of plain Prolog terms intermixed between entities
 	% definitions; there might also be plain Prolog terms after
 	% the last entity definition
-	retractall('$lgt_pp_prolog_term_'(_, _)).
+	retractall('$lgt_pp_prolog_term_'(_, _)),
+	'$lgt_clean_pp_cc_clauses'.
+
+
+
+% cleans up all dynamic predicates used for conditional compilation
+
+'$lgt_clean_pp_cc_clauses' :-
+	retractall('$lgt_pp_cc_if_found_'(_)),
+	retractall('$lgt_pp_cc_skipping_'),
+	retractall('$lgt_pp_cc_mode_'(_)).
 
 
 
