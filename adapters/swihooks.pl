@@ -8,7 +8,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on May 13, 2014
+%  Last updated on May 26, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -74,7 +74,7 @@ prolog_edit:locate(Name, source_file(Source), [file(Source)]) :-
 	file_name_extension(Name, 'pl', PrologFile),
 	source_file(Path),
 	file_base_name(Path, PrologFile),
-	'$derived_source'(Path, Source, _),
+	source_file_property(Path, derived_from(Source,_)),
 	file_base_name(Source, LogtalkFile),
 	(	file_name_extension(Name, 'lgt', LogtalkFile)
 	;	file_name_extension(Name, 'logtalk', LogtalkFile)
@@ -88,7 +88,7 @@ prolog_edit:locate(Spec, source_file(Source), [file(Source)]) :-
 	file_name_extension(Name, 'pl', PrologFile),
 	source_file(Path),
 	file_base_name(Path, PrologFile),
-	'$derived_source'(Path, Source, _),
+	source_file_property(Path, derived_from(Source,_)),
 	file_base_name(Source, LogtalkFile),
 	(	file_name_extension(Name, 'lgt', LogtalkFile)
 	;	file_name_extension(Name, 'logtalk', LogtalkFile)
