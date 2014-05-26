@@ -25,8 +25,8 @@ RELEASE NOTES
 =============
 
 
-3.00.0 Beta 5 - June ??, 2014
-=============================
+3.00.0 Beta 5 - May 26, 2014
+============================
 
 Logtalk compiler and runtime
 ----------------------------
@@ -55,7 +55,8 @@ a user meta-predicate defined in plain Prolog with an ambiguous meta-predicate
 template.
 
 * FIXED: Code generation bug when compiling an object that instantiates or
-specializes multiple classes. 
+specializes multiple classes using the `instantiates/2-N` or `specializes/2-N`
+syntax.
 
 Prolog adapter and integration files
 ------------------------------------
