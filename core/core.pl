@@ -4758,25 +4758,25 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	'$lgt_file_name'(prolog, File, _, _, PrologFile),
 	assertz('$lgt_pp_file_data_'(Basename, Directory, SourceFile, PrologFile)),
-	% change the directory to the directory of the file being loaded as
-	% it can be a loader file loading other files in its directory
+	% change the directory to the directory of the file being loaded as it can be
+	% a loader file loading other files in its directory using a relative path
 	'$lgt_current_directory'(Current),
 	'$lgt_change_directory'(Directory),
 	(	'$lgt_loaded_file_'(Basename, Directory, PreviousMode, PreviousFlags, _, _, LoadingTimeStamp) ->
 		% we're attempting to reload a file
-		'$lgt_compiler_flag'(reload, Reload),
+		(	'$lgt_member'(reload(Reload), PreviousFlags) ->
+			true
+		;	'$lgt_compiler_flag'(reload, Reload)
+		),
 		(	Reload == skip ->
-			% default or file-specific reload flag set to skip if file already loaded
-			'$lgt_print_message'(comment(loading), core, skipping_reloading_file(SourceFile, Flags))
-		;	'$lgt_member'(reload(skip), PreviousFlags) ->
-			% file marked as load once the first time it was loaded
+			% skip reloading already loaded files
 			'$lgt_print_message'(comment(loading), core, skipping_reloading_file(SourceFile, Flags))
 		;	Reload == changed,
 			PreviousFlags == Flags,
 			\+ '$lgt_changed_compilation_mode'(PreviousMode, PreviousFlags),
 			'$lgt_file_modification_time'(SourceFile, CurrentTimeStamp),
 			CurrentTimeStamp @=< LoadingTimeStamp ->
-			% file was not modified since loaded and same explicit flags as before
+			% file was not modified since loaded and same explicit flags and compilation mode as before
 			'$lgt_print_message'(comment(loading), core, skipping_reloading_file(SourceFile, Flags))
 		;	% we're reloading a source file
 			'$lgt_print_message'(silent(loading), core, reloading_file(SourceFile, Flags)),
