@@ -3,6 +3,9 @@ ________________________________________________________________________
 This file is part of Logtalk <http://logtalk.org/>  
 Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 
+Notes on supported backend Prolog compilers
+Last updated on May 26, 2014
+
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
@@ -267,6 +270,10 @@ To improve the integration between Logtalk and SWI-Prolog, the file
 `swihooks.pl` allows loading of Logtalk source files using SWI-Prolog
 `load_files/2` and `consult/1` predicates and adds support for the `edit/1`
 and `make/0` predicates, the XPCE profiler, and the XPCE graphical tracer.
+Note, however, that in the case of syntax errors in a Logtalk source file,
+the `make/0` predicate will not detect the fixed file as no intermediate
+Prolog file was generated in the first loading attempt (use instead the
+`logtalk_make/0-1` predicates in this case).
 
 The adapter file may set the `iso` SWI-Prolog flag to `true`. This setting
 may improve compatibility of Logtalk code across different back-end 
@@ -323,6 +330,11 @@ built-in predicates for separate compilation and loading. To generate
 `.qlf` files when compiling Logtalk source files, set the Logtalk `clean`
 flag to `off` and add the option `qcompile(auto)` to the Logtalk flag
 `prolog_loader`.
+
+Compilation of Logtalk source files with the `source_data` flag turned on
+generates large intermediate Prolog files as in addition to the information
+collected for Logtalk own features, all file terms are decorated with
+additional information for integration with SWI-Prolog development tools.
 
 
 XSB 3.4.1 and later versions
