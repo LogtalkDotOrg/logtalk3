@@ -1880,11 +1880,10 @@ logtalk_compile(Files, Flags) :-
 	'$lgt_check_compiler_flags'(Flags),
 	'$lgt_compile_files'(ExpandedFiles, Flags),
 	'$lgt_report_warning_numbers'(logtalk_compile(Files, Flags)),
-	'$lgt_clear_compiler_flags'.
+	'$lgt_clean_pp_file_clauses'.
 
 
 '$lgt_logtalk_compile_error_handler'(Error, Files, Flags) :-
-	'$lgt_clear_compiler_flags',
 	'$lgt_clean_pp_file_clauses',
 	'$lgt_clean_pp_entity_clauses',
 	'$lgt_reset_warnings_counter'(logtalk_compile(Files, Flags)),
@@ -2115,19 +2114,6 @@ logtalk_compile(Files, Flags) :-
 
 
 
-% '$lgt_clear_compiler_flags'
-%
-% clears the compiler flag options
-
-'$lgt_clear_compiler_flags' :-
-	% retract all file-specific flag values
-	retractall('$lgt_pp_file_compiler_flag_'(_, _)),
-	% retract all file-specific term and goal expansion hooks
-	retractall('$lgt_pp_hook_term_expansion_'(_, _)),
-	retractall('$lgt_pp_hook_goal_expansion_'(_, _)).
-
-
-
 % logtalk_load(@source_file_name)
 % logtalk_load(@list(source_file_name))
 %
@@ -2168,11 +2154,10 @@ logtalk_load(Files, Flags) :-
 	'$lgt_check_compiler_flags'(Flags),
 	'$lgt_load_files'(ExpandedFiles, Flags),
 	'$lgt_report_warning_numbers'(logtalk_load(Files, Flags)),
-	'$lgt_clear_compiler_flags'.
+	'$lgt_clean_pp_file_clauses'.
 
 
 '$lgt_logtalk_load_error_handler'(Error, Files, Flags) :-
-	'$lgt_clear_compiler_flags',
 	'$lgt_clean_pp_file_clauses',
 	'$lgt_clean_pp_entity_clauses',
 	'$lgt_reset_warnings_counter'(logtalk_load(Files, Flags)),
@@ -5886,8 +5871,6 @@ current_logtalk_flag(Flag, Value) :-
 
 
 % cleans up all dynamic predicates used during source file compilation
-% (except any user-defined compiler options specified on the compiling
-% and loading predicates)
 
 '$lgt_clean_pp_file_clauses' :-
 	retractall('$lgt_pp_file_initialization_'(_)),
@@ -5903,6 +5886,11 @@ current_logtalk_flag(Flag, Value) :-
 	% definitions; there might also be plain Prolog terms after
 	% the last entity definition
 	retractall('$lgt_pp_prolog_term_'(_, _)),
+	% retract all file-specific flag values
+	retractall('$lgt_pp_file_compiler_flag_'(_, _)),
+	% retract all file-specific term and goal expansion hooks
+	retractall('$lgt_pp_hook_term_expansion_'(_, _)),
+	retractall('$lgt_pp_hook_goal_expansion_'(_, _)),
 	'$lgt_clean_pp_cc_clauses'.
 
 

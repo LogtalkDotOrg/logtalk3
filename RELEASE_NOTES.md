@@ -28,7 +28,12 @@ RELEASE NOTES
 3.00.0 Beta 6 - June ??, 2014
 =============================
 
+Logtalk compiler and runtime
+----------------------------
 
+* FIXED: Compiler bug where compiling a list of files using an `hook/1` option
+would result in redundant cached clauses used for optimizing the calls to the
+term- and goal-expansion methods.
 
 
 3.00.0 Beta 5 - May 26, 2014
