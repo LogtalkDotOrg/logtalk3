@@ -1081,7 +1081,7 @@ create_object(Obj, Relations, Directives, Clauses) :-
 	'$lgt_tr_runtime_terms'(Clauses, Ctx),
 	'$lgt_gen_def_table_clauses'(Ctx),
 	'$lgt_fix_predicate_defs',
-	'$lgt_fix_predicate_calls',
+	'$lgt_tr_predicate_calls',
 	'$lgt_gen_object_clauses',
 	'$lgt_gen_object_directives',
 	'$lgt_assert_tr_entity',
@@ -1130,7 +1130,7 @@ create_category(Ctg, Relations, Directives, Clauses) :-
 	'$lgt_tr_runtime_terms'(Clauses, Ctx),
 	'$lgt_gen_def_table_clauses'(Ctx),
 	'$lgt_fix_predicate_defs',
-	'$lgt_fix_predicate_calls',
+	'$lgt_tr_predicate_calls',
 	'$lgt_gen_category_clauses',
 	'$lgt_gen_category_directives',
 	'$lgt_assert_tr_entity',
@@ -4500,31 +4500,6 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_call_built_in'(+callable, +callable, +execution_context)
-%
-% necessary for runtime translation of dynamic clauses, for dealing
-% with meta-calls that turn out to be calls to built-in predicates,
-% and for dealing with <</2 calls to redefined built-in predicates
-%
-% the first argument, Pred, is the original predicate call, while the second
-% argument, MetaExPred, is equal to the first argument for normal predicates
-% but is meta-argument expanded for non-redefined built-in meta-predicates
-
-'$lgt_call_built_in'(Pred, MetaExPred, ExCtx) :-
-	'$lgt_execution_context_this'(ExCtx, This),
-	'$lgt_current_object_'(This, _, _, Def, _, _, _, _, DDef, _, _),
-	(	call(Def, Pred, ExCtx, TPred) ->
-		% call a static redefinition of a built-in predicate
-		call(TPred)
-	;	call(DDef, Pred, ExCtx, TPred) ->
-		% call a dynamic redefinition of a built-in predicate
-		call(TPred)
-	;	% no redefinition; call the built-in predicate
-		catch(MetaExPred, error(Error,_), throw(error(Error,logtalk(MetaExPred,This))))
-	).
-
-
-
 % '$lgt_call_within_context'(?term, ?term, +object_identifier)
 %
 % calls a goal within the context of the specified object when the object and/or the
@@ -4562,13 +4537,11 @@ current_logtalk_flag(Flag, Value) :-
 				catch(TGoal, Error, '$lgt_runtime_error_handler'(error(Error, logtalk(Obj<<Goal, This))))
 			;	% in the worst case we need to compile the goal
 				'$lgt_comp_ctx'(Ctx, _, Obj, Obj, Obj, Prefix, [], _, ExCtx, runtime, []),
-				catch('$lgt_tr_body'(Goal, TGoal0, DGoal0, Ctx), Error, throw(error(Error, logtalk(Obj<<Goal, This)))),
+				catch('$lgt_tr_body'(Goal, TGoal, DGoal, Ctx), Error, throw(error(Error, logtalk(Obj<<Goal, This)))),
 				(	Flags /\ 512 =:= 512 ->
 					% object compiled in debug mode
-					catch('$lgt_fix_body_predicate_calls'(DGoal0, DGoal), Error, throw(error(Error, logtalk(Obj<<Goal, This)))),
 					catch(DGoal, Error, throw(error(Error, logtalk(Obj<<Goal, This))))
-				;	catch('$lgt_fix_body_predicate_calls'(TGoal0, TGoal), Error, throw(error(Error, logtalk(Obj<<Goal, This)))),
-					catch(TGoal, Error, '$lgt_runtime_error_handler'(error(Error, logtalk(Obj<<Goal, This))))
+				;	catch(TGoal, Error, '$lgt_runtime_error_handler'(error(Error, logtalk(Obj<<Goal, This))))
 				)
 			)
 		;	throw(error(permission_error(access, database, Goal), logtalk(Obj<<Goal, This)))
@@ -5395,8 +5368,8 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_add_referenced_object_message'(@object_identifier, @callable, @term)
-% '$lgt_add_referenced_object_message'(@object_identifier, @callable, @callable, @term)
+% '$lgt_add_referenced_object_message'(@term, @callable, @term)
+% '$lgt_add_referenced_object_message'(@term, @callable, @callable, @term)
 %
 % adds referenced object and message for supporting using reflection to
 % retrieve cross-reference information
@@ -5409,12 +5382,13 @@ current_logtalk_flag(Flag, Value) :-
 	;	\+ '$lgt_pp_defines_predicate_'(Head, _, _, compile(regular)) ->
 		% not compiling a source file user clause
 		true
-	;	'$lgt_pp_uses_predicate_'(Obj, PredFunctor/PredArity, _) ->
-		% not the first reference
+	;	nonvar(Obj), '$lgt_pp_uses_predicate_'(Obj, PredFunctor/PredArity, _) ->
+		% already referenced from an uses/2 directive
 		true
-	;	functor(Head, HeadFunctor, HeadArity),
+	;	% add reference if first but be careful to not instantiate the object argument which may only be known at runtime
+		functor(Head, HeadFunctor, HeadArity),
 		'$lgt_current_line_numbers'(Lines),
-		(	'$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, _, HeadFunctor/HeadArity, Lines) ->
+		(	\+ \+ '$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, _, HeadFunctor/HeadArity, Lines) ->
 			true
 		;	compound(Obj) ->
 			% parametric object
@@ -5431,17 +5405,18 @@ current_logtalk_flag(Flag, Value) :-
 	;	\+ '$lgt_pp_defines_predicate_'(Head, _, _, compile(regular)) ->
 		% not compiling a source file user clause
 		true
-	;	functor(Pred, PredFunctor, PredArity),
+	;	% add reference if first but be careful to not instantiate the object argument which may only be known at runtime
+		functor(Pred, PredFunctor, PredArity),
 		functor(Head, HeadFunctor, HeadArity),
 		'$lgt_current_line_numbers'(Lines),
-		(	'$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, _, HeadFunctor/HeadArity, Lines) ->
+		(	\+ \+ '$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, _, HeadFunctor/HeadArity, Lines) ->
 			true
 		;	functor(Alias, AliasFunctor, AliasArity),
-			(	atom(Obj) ->
-				assertz('$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, AliasFunctor/AliasArity, HeadFunctor/HeadArity, Lines))
-			;	% parametric object
+			(	compound(Obj) ->
+				% parametric object
 				'$lgt_term_template'(Obj, Template),
 				assertz('$lgt_pp_referenced_object_message_'(Template, PredFunctor/PredArity, AliasFunctor/AliasArity, HeadFunctor/HeadArity, Lines))
+			;	assertz('$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, AliasFunctor/AliasArity, HeadFunctor/HeadArity, Lines))
 			)
 		)
 	).
@@ -7014,10 +6989,9 @@ current_logtalk_flag(Flag, Value) :-
 	% MetaVars = [] as we're compiling a local call
 	'$lgt_comp_ctx'(Ctx, (:- initialization(Goal)), Entity, Entity, Entity, Prefix, [], _, ExCtx, _, []),
 	'$lgt_execution_context'(ExCtx, Entity, Entity, Entity, [], []),
-	'$lgt_tr_body'(Goal, TGoal, DGoal, Ctx),
 	(	'$lgt_compiler_flag'(debug, on) ->
-		assertz('$lgt_pp_entity_initialization_'(DGoal))
-	;	assertz('$lgt_pp_entity_initialization_'(TGoal))
+		assertz('$lgt_pp_entity_initialization_'(dgoal(Goal,Ctx)))
+	;	assertz('$lgt_pp_entity_initialization_'(sgoal(Goal,Ctx)))
 	).
 
 % op/3 entity directive (operators are local to entities)
@@ -8731,34 +8705,32 @@ current_logtalk_flag(Flag, Value) :-
 %
 % translates an entity clause into a normal clause and a debug clause
 
-'$lgt_tr_clause'((Head:-Body), (THead:-'$lgt_nop'(Body), TBody), (THead:-'$lgt_nop'(Body),DHead,DBody), Ctx) :-
+'$lgt_tr_clause'((Head:-Body), drule(THead,'$lgt_nop'(Body),Body,Ctx), ddrule(THead,'$lgt_nop'(Body),DHead,Body,Ctx), Ctx) :-
 	'$lgt_pp_dynamic_'(Head),
 	!,
 	'$lgt_pp_entity_'(_, Entity, _, _, _),
 	'$lgt_head_meta_variables'(Head, MetaVars),
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, MetaVars, _, ExCtx, _, _),
 	'$lgt_tr_head'(Head, THead, Ctx),
-	'$lgt_tr_body'(Body, TBody, DBody, Ctx),
 	(	Head = {UserHead} ->
 		DHead = '$lgt_debug'(fact(Entity, user::UserHead, N), ExCtx)
 	;	DHead = '$lgt_debug'(fact(Entity, Head, N), ExCtx)
 	),
 	'$lgt_clause_number'(Head, N).
 
-'$lgt_tr_clause'((Head:-Body), (THead:-TBody), (THead:-DHead,DBody), Ctx) :-
+'$lgt_tr_clause'((Head:-Body), srule(THead,Body,Ctx), dsrule(THead,DHead,Body,Ctx), Ctx) :-
 	!,
 	'$lgt_pp_entity_'(_, Entity, _, _, _),
 	'$lgt_head_meta_variables'(Head, MetaVars),
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, MetaVars, _, ExCtx, _, _),
 	'$lgt_tr_head'(Head, THead, Ctx),
-	'$lgt_tr_body'(Body, TBody, DBody, Ctx),
 	(	Head = {UserHead} ->
 		DHead = '$lgt_debug'(fact(Entity, user::UserHead, N), ExCtx)
 	;	DHead = '$lgt_debug'(fact(Entity, Head, N), ExCtx)
 	),
 	'$lgt_clause_number'(Head, N).
 
-'$lgt_tr_clause'(Fact, TFact, (TFact:-DHead), Ctx) :-
+'$lgt_tr_clause'(Fact, sfact(TFact), dfact(TFact,DHead), Ctx) :-
 	'$lgt_pp_entity_'(_, Entity, _, _, _),
 	'$lgt_tr_head'(Fact, TFact, Ctx),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
@@ -9037,11 +9009,11 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_tr_body'({Pred}, TPred, '$lgt_debug'(goal({Pred}, TPred), ExCtx), Ctx) :-
 	!,
 	(	var(Pred) ->
-		TPred = {call(Pred)}
+		TPred = call(Pred)
 	;	Pred == ! ->
 		TPred = true
 	;	'$lgt_must_be'(callable, Pred),
-		TPred = {Pred}
+		TPred = Pred
 	),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
 
@@ -9604,6 +9576,12 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_tr_super_call'(Pred, TPred, Ctx).
 
 % calling explicitly qualified module predicates
+
+'$lgt_tr_body'(':'(_, Callable), TPred, DPred, Ctx) :-
+	nonvar(Callable),
+	Callable = ':'(Module, Pred),
+	!,
+	'$lgt_tr_body'(':'(Module, Pred), TPred, DPred, Ctx).
 
 '$lgt_tr_body'(':'(Module, Pred), TPred, DPred, Ctx) :-
 	!,
@@ -10473,60 +10451,64 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_body'(bb_put(Key, Term), TPred, DPred, Ctx) :-
 	'$lgt_prolog_built_in_predicate'(bb_put(_, _)),
+	\+ '$lgt_pp_defines_predicate_'(bb_put(_, _), _, _, _),
 	!,
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, Prefix, _, _, ExCtx, _, _),
 	(	atomic(Key) ->
 		'$lgt_tr_bb_key'(Key, Prefix, TKey),
-		TPred = '$lgt_call_built_in'(bb_put(Key, Term), bb_put(TKey, Term), ExCtx),
+		TPred = bb_put(TKey, Term),
 		DPred = '$lgt_debug'(goal(bb_put(Key, Term), TPred), ExCtx)
 	;	var(Key) ->
 		% runtime key translation
-		TPred = '$lgt_call_built_in'(bb_put(Key, Term), ('$lgt_tr_bb_key'(Key, Prefix, TKey, bb_put(Key, Term)), bb_put(TKey, Term)), ExCtx),
+		TPred = ('$lgt_tr_bb_key'(Key, Prefix, TKey, bb_put(Key, Term)), bb_put(TKey, Term)),
 		DPred = '$lgt_debug'(goal(bb_put(Key, Term), TPred), ExCtx)
 	;	throw(type_error(atomic, Key))
 	).
 
 '$lgt_tr_body'(bb_get(Key, Term), TPred, DPred, Ctx) :-
 	'$lgt_prolog_built_in_predicate'(bb_get(_, _)),
+	\+ '$lgt_pp_defines_predicate_'(bb_get(_, _), _, _, _),
 	!,
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, Prefix, _, _, ExCtx, _, _),
 	(	atomic(Key) ->
 		'$lgt_tr_bb_key'(Key, Prefix, TKey),
-		TPred = '$lgt_call_built_in'(bb_get(Key, Term), bb_get(TKey, Term), ExCtx),
+		TPred = bb_get(TKey, Term),
 		DPred = '$lgt_debug'(goal(bb_get(Key, Term), TPred), ExCtx)
 	;	var(Key) ->
 		% runtime key translation
-		TPred = '$lgt_call_built_in'(bb_get(Key, Term), ('$lgt_tr_bb_key'(Key, Prefix, TKey, bb_get(Key, Term)), bb_get(TKey, Term)), ExCtx),
+		TPred = ('$lgt_tr_bb_key'(Key, Prefix, TKey, bb_get(Key, Term)), bb_get(TKey, Term)),
 		DPred = '$lgt_debug'(goal(bb_get(Key, Term), TPred), ExCtx)
 	;	throw(type_error(atomic, Key))
 	).
 
 '$lgt_tr_body'(bb_delete(Key, Term), TPred, DPred, Ctx) :-
 	'$lgt_prolog_built_in_predicate'(bb_delete(_, _)),
+	\+ '$lgt_pp_defines_predicate_'(bb_delete(_, _), _, _, _),
 	!,
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, Prefix, _, _, ExCtx, _, _),
 	(	atomic(Key) ->
 		'$lgt_tr_bb_key'(Key, Prefix, TKey),
-		TPred = '$lgt_call_built_in'(bb_delete(Key, Term), bb_delete(TKey, Term), ExCtx),
+		TPred = bb_delete(Key, Term), bb_delete(TKey, Term),
 		DPred = '$lgt_debug'(goal(bb_delete(Key, Term), TPred), ExCtx)
 	;	var(Key) ->
 		% runtime key translation
-		TPred = '$lgt_call_built_in'(bb_delete(Key, Term), ('$lgt_tr_bb_key'(Key, Prefix, TKey, bb_delete(Key, Term)), bb_delete(TKey, Term)), ExCtx),
+		TPred = ('$lgt_tr_bb_key'(Key, Prefix, TKey, bb_delete(Key, Term)), bb_delete(TKey, Term)),
 		DPred = '$lgt_debug'(goal(bb_delete(Key, Term), TPred), ExCtx)
 	;	throw(type_error(atomic, Key))
 	).
 
 '$lgt_tr_body'(bb_update(Key, Term, New), TPred, DPred, Ctx) :-
 	'$lgt_prolog_built_in_predicate'(bb_update(_, _, _)),
+	\+ '$lgt_pp_defines_predicate_'(bb_update(_, _, _), _, _, _),
 	!,
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, Prefix, _, _, ExCtx, _, _),
 	(	atomic(Key) ->
 		'$lgt_tr_bb_key'(Key, Prefix, TKey),
-		TPred = '$lgt_call_built_in'(bb_update(Key, Term, New), bb_update(TKey, Term, New), ExCtx),
+		TPred = bb_update(TKey, Term, New),
 		DPred = '$lgt_debug'(goal(bb_update(Key, Term, New), TPred), ExCtx)
 	;	var(Key) ->
 		% runtime key translation
-		TPred = '$lgt_call_built_in'(bb_update(Key, Term, New), ('$lgt_tr_bb_key'(Key, Prefix, TKey, bb_update(Key, Term, New)), bb_update(TKey, Term, New)), ExCtx),
+		TPred = ('$lgt_tr_bb_key'(Key, Prefix, TKey, bb_update(Key, Term, New)), bb_update(TKey, Term, New)),
 		DPred = '$lgt_debug'(goal(bb_update(Key, Term, New), TPred), ExCtx)
 	;	throw(type_error(atomic, Key))
 	).
@@ -10666,15 +10648,13 @@ current_logtalk_flag(Flag, Value) :-
 	;	'$lgt_predicate_property'(Pred, built_in),
 		catch('$lgt_predicate_property'(Pred, meta_predicate(Meta)), _, fail)
 	),
-	functor(Pred, Functor, Arity),
 	(	'$lgt_comp_ctx_mode'(Ctx, runtime) ->
 		true
 	;	\+ '$lgt_pp_defines_predicate_'(Pred, _, _, _),
+		functor(Pred, Functor, Arity),
 		\+ '$lgt_pp_public_'(Functor, Arity),
 		\+ '$lgt_pp_protected_'(Functor, Arity),
-		\+ '$lgt_pp_private_'(Functor, Arity),
-		\+ '$lgt_pp_redefined_built_in_'(Pred, _, _)
-		% not a redefined built-in... unless the redefinition is yet to be compiled
+		\+ '$lgt_pp_private_'(Functor, Arity)
 	),
 	!,
 	Pred =.. [_| Args],
@@ -10684,17 +10664,10 @@ current_logtalk_flag(Flag, Value) :-
 		TGoal =.. [Functor| TArgs],
 		DGoal =.. [Functor| DArgs],
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-		(	'$lgt_comp_ctx_mode'(Ctx, runtime) ->
-			TPred = TGoal,
-			(	Type == control_construct ->
-				DPred = DGoal
-			;	DPred = '$lgt_debug'(goal(Pred, DGoal), ExCtx)
-			)
-		;	TPred = '$lgt_call_built_in'(Pred, TGoal, ExCtx),
-			(	Type == control_construct ->
-				DPred = '$lgt_call_built_in'(Pred, DGoal, ExCtx)
-			;	DPred = '$lgt_debug'(goal(Pred, DGoal), ExCtx)
-			)
+		TPred = TGoal,
+		(	Type == control_construct ->
+			DPred = DGoal
+		;	DPred = '$lgt_debug'(goal(Pred, DGoal), ExCtx)
 		)
 	;	% meta-predicate template is not usable
 		throw(domain_error(meta_predicate_template, Meta))
@@ -10712,21 +10685,17 @@ current_logtalk_flag(Flag, Value) :-
 
 % Logtalk and Prolog built-in predicates
 
-'$lgt_tr_body'(Pred, TPred, DPred, Ctx) :-
+'$lgt_tr_body'(Pred, Pred, '$lgt_debug'(goal(Pred, Pred), ExCtx), Ctx) :-
 	'$lgt_built_in_predicate'(Pred),
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, ExCtx, Mode, _),
 	(	Mode == runtime ->
-		TPred = Pred
+		true
 	;	\+ '$lgt_pp_defines_predicate_'(Pred, _, _, _),
-		\+ '$lgt_pp_redefined_built_in_'(Pred, _, _),
 		functor(Pred, Functor, Arity),
 		\+ '$lgt_pp_public_'(Functor, Arity),
 		\+ '$lgt_pp_protected_'(Functor, Arity),
-		\+ '$lgt_pp_private_'(Functor, Arity),
-		% not a redefined built-in... unless the redefinition is yet to be compiled
-		TPred = '$lgt_call_built_in'(Pred, Pred, ExCtx)
+		\+ '$lgt_pp_private_'(Functor, Arity)
 	),
-	DPred = '$lgt_debug'(goal(Pred, TPred), ExCtx),
 	!.
 
 % goal is a call to a dynamic predicate within a category
@@ -10786,12 +10755,43 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_remember_called_predicate'(Mode, Functor/Arity, STFunctor/TArity, Head).
 
 '$lgt_tr_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, Prefix, _, _, ExCtx, Mode, _),
+	'$lgt_pp_defines_predicate_'(Pred, ExCtx, TPred, _),
+	!,
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
+
+'$lgt_tr_body'(Pred, fail, '$lgt_debug'(goal(Pred, fail), ExCtx), Ctx) :-
+	\+ '$lgt_pp_dynamic_'(Pred),
+	% predicate not declared dynamic in object/category
+	\+ '$lgt_pp_multifile_'(Pred, _),
+	% predicate not declared multifile in object/category
 	functor(Pred, Functor, Arity),
+	(	'$lgt_pp_public_'(Functor, Arity)
+	;	'$lgt_pp_protected_'(Functor, Arity)
+	;	'$lgt_pp_private_'(Functor, Arity)
+	),
+	% but there is a scope directive for the predicate
+	!,
+	% calls to static, declared but undefined predicates
+	% must fail instead of throwing an exception
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
+
+
+
+%	(	'$lgt_undefined_predicate_call'(_, Functor/Arity, _)
+%	;	'$lgt_undefined_non_terminal_call'(_, Functor/Arity, _)
+%		% calls to static, declared but undefined non terminals
+%		% must fail instead of throwing an exception
+%	),
+%	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+%	!.
+
+'$lgt_tr_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, Prefix, _, _, ExCtx, Mode, _),
+ 	functor(Pred, Functor, Arity),
 	'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
-	functor(TPred, TFunctor, TArity),
+ 	functor(TPred, TFunctor, TArity),
 	'$lgt_unify_head_thead_arguments'(Pred, TPred, ExCtx),
-	'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head).
+ 	'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head).
 
 
 
@@ -11052,8 +11052,8 @@ current_logtalk_flag(Flag, Value) :-
 	THelper =.. [THelperFunctor, Arg, ExCtx],
 	TExtHelper =.. [THelperFunctor, Arg, ExCtx| ExtArgs],
 	(	'$lgt_compiler_flag'(debug, on) ->
-		assertz('$lgt_pp_entity_aux_clause_'((TExtHelper :- DArg0)))
-	;	assertz('$lgt_pp_entity_aux_clause_'((TExtHelper :- TArg0)))
+		assertz('$lgt_pp_entity_aux_clause_'({(TExtHelper :- DArg0)}))
+	;	assertz('$lgt_pp_entity_aux_clause_'({(TExtHelper :- TArg0)}))
 	),
 	(	'$lgt_pp_object_'(Entity, _, _, Def, _, _, _, _, _, _, _) ->
 		true
@@ -13201,7 +13201,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_generate_entity_code'(protocol, _) :-
 	% protocols may contain initialization directives
-	'$lgt_fix_predicate_calls',
+	'$lgt_tr_predicate_calls',
 	'$lgt_gen_protocol_clauses',
 	'$lgt_gen_protocol_directives',
 	'$lgt_gen_file_entity_initialization_goal'.
@@ -13209,7 +13209,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_generate_entity_code'(object, Ctx) :-
 	'$lgt_gen_def_table_clauses'(Ctx),
 	'$lgt_fix_predicate_defs',
-	'$lgt_fix_predicate_calls',
+	'$lgt_tr_predicate_calls',
 	'$lgt_gen_object_clauses',
 	'$lgt_gen_object_directives',
 	'$lgt_gen_file_entity_initialization_goal'.
@@ -13217,7 +13217,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_generate_entity_code'(category, Ctx) :-
 	'$lgt_gen_def_table_clauses'(Ctx),
 	'$lgt_fix_predicate_defs',
-	'$lgt_fix_predicate_calls',
+	'$lgt_tr_predicate_calls',
 	'$lgt_gen_category_clauses',
 	'$lgt_gen_category_directives',
 	'$lgt_gen_file_entity_initialization_goal'.
@@ -14393,7 +14393,7 @@ current_logtalk_flag(Flag, Value) :-
 		atom_concat(TFunctor, '__sync', MFunctor),
 		MHead =.. [MFunctor| Args],
 		assertz('$lgt_pp_final_def_'(New)),
-		assertz('$lgt_pp_entity_aux_clause_'((MHead:-with_mutex(Mutex, THead)))),
+		assertz('$lgt_pp_entity_aux_clause_'({(MHead:-with_mutex(Mutex, THead))})),
 	fail.
 
 '$lgt_fix_synchronized_predicate_defs'(_).
@@ -14408,7 +14408,7 @@ current_logtalk_flag(Flag, Value) :-
 		atom_concat(TFunctor, '__sync', MFunctor),
 		MHead =.. [MFunctor| Args],
 		assertz('$lgt_pp_final_ddef_'(New)),
-		assertz('$lgt_pp_entity_aux_clause_'((MHead:-with_mutex(Mutex, THead)))),
+		assertz('$lgt_pp_entity_aux_clause_'({(MHead:-with_mutex(Mutex, THead))})),
 	fail.
 
 '$lgt_fix_synchronized_predicate_ddefs'(_).
@@ -14465,26 +14465,27 @@ current_logtalk_flag(Flag, Value) :-
 	arg(TCArity, TCHead, HeadExCtx),
 	functor(THead, _, TArity),
 	arg(TArity, THead, BodyExCtx),
+	'$lgt_coinductive_success_hook'(Head, Hypothesis, HeadExCtx, HeadStack, BodyStack, Hook),
 	(	'$lgt_compiler_flag'(debug, on) ->
 		'$lgt_pp_entity_'(_, Entity, _, _, _),
 		Header = '$lgt_debug'(rule(Entity, DHead, 0), BodyExCtx),
 		If = '$lgt_debug'(goal(check_coinductive_success(TestHead, HeadStack), '$lgt_check_coinductive_success'(TestHead, HeadStack, Hypothesis)), BodyExCtx),
-		Then = '$lgt_debug'(goal(coinductive_success_hook(Head, Hypothesis), '$lgt_coinductive_success_hook'(Head, Hypothesis, HeadExCtx, HeadStack, BodyStack)), BodyExCtx),
+		Then = '$lgt_debug'(goal(coinductive_success_hook(Head, Hypothesis), Hook), BodyExCtx),
 		Else = (
 			'$lgt_debug'(goal(push_coinductive_hypothesis(TestHead, HeadStack, BodyStack), BodyStack = [Head| HeadStack]), BodyExCtx),
 			'$lgt_debug'(goal(Head, THead), BodyExCtx)
 		)
 	;	Header = true,
 		If = '$lgt_check_coinductive_success'(TestHead, HeadStack, Hypothesis),
-		Then = '$lgt_coinductive_success_hook'(Head, Hypothesis, HeadExCtx, HeadStack, BodyStack),
+		Then = Hook,
 		Else = (BodyStack = [Head| HeadStack], THead)
 	),
 	(	'$lgt_prolog_meta_predicate'('*->'(_, _), _, _) ->
 		% back-end Prolog compiler supports the soft-cut control construct
-		assertz('$lgt_pp_entity_aux_clause_'((TCHead :- Header, ('*->'(If, Then); Else))))
+		assertz('$lgt_pp_entity_aux_clause_'({(TCHead :- Header, ('*->'(If, Then); Else))}))
 	;	'$lgt_prolog_meta_predicate'(if(_, _, _), _, _) ->
 		% back-end Prolog compiler supports the if/3 soft-cut built-in meta-predicate
-		assertz('$lgt_pp_entity_aux_clause_'((TCHead :- Header, if(If, Then, Else))))
+		assertz('$lgt_pp_entity_aux_clause_'({(TCHead :- Header, if(If, Then, Else))}))
 	;	% the adapter file for the backend Prolog compiler declares that coinduction
 		% is supported but it seems to be missing the necessary declaration for the
 		% soft-cut control construct or meta-predicate
@@ -14492,8 +14493,39 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 
+'$lgt_coinductive_success_hook'(Head, Hypothesis, ExCtx, HeadStack, BodyStack, Hook) :-
+	% ensure zero performance penalties when defining coinductive predicates without a definition
+	% for the coinductive success hook predicates
+	(	'$lgt_pp_defines_predicate_'(coinductive_success_hook(Head,Hypothesis), ExCtx, THead, _),
+		\+ \+ (
+			'$lgt_pp_entity_term_'(sfact(THead), _)
+		;	'$lgt_pp_entity_term_'(srule(THead,_,_), _)
+		;	'$lgt_pp_entity_term_'(dfact(THead,_), _)
+		;	'$lgt_pp_entity_term_'(drule(THead,_,_,_), _)
+		;	'$lgt_pp_final_entity_term_'(THead, _)
+		;	'$lgt_pp_final_entity_term_'((THead :- _), _)
+		) ->
+		% ... with at least one clause for this particular coinductive predicate head
+		Hook = ((HeadStack = BodyStack), THead)
+	;	% we only consider coinductive_success_hook/1 clauses if no coinductive_success_hook/2 clause applies
+		'$lgt_pp_defines_predicate_'(coinductive_success_hook(Head), ExCtx, THead, _),
+		\+ \+ (
+			'$lgt_pp_entity_term_'(sfact(THead), _)
+		;	'$lgt_pp_entity_term_'(srule(THead,_,_), _)
+		;	'$lgt_pp_entity_term_'(dfact(THead,_), _)
+		;	'$lgt_pp_entity_term_'(drule(THead,_,_,_), _)
+		;	'$lgt_pp_final_entity_term_'(THead, _)
+		;	'$lgt_pp_final_entity_term_'((THead :- _), _)
+		) ->
+		% ... with at least one clause for this particular coinductive predicate head
+		Hook = ((HeadStack = BodyStack), THead)
+	;	% no hook predicates defined or defined but with no clause for this particular coinductive predicate head
+		Hook = (HeadStack = BodyStack)
+	).
 
-% '$lgt_fix_predicate_calls'
+
+
+% '$lgt_tr_predicate_calls'
 %
 % fixes predicate calls in entity clause rules and in initialization goals
 %
@@ -14501,261 +14533,96 @@ current_logtalk_flag(Flag, Value) :-
 % built-in predicates which may be textually defined in an entity after their
 % calls as predicate definition order is irrelevant
 
-'$lgt_fix_predicate_calls' :-
+'$lgt_tr_predicate_calls' :-
 	retract('$lgt_pp_entity_term_'(Term, Location)),
-		'$lgt_fix_predicate_calls'(Term, FTerm),
+		'$lgt_tr_predicate_calls'(Term, FTerm),
 		assertz('$lgt_pp_final_entity_term_'(FTerm, Location)),
 	fail.
 
-'$lgt_fix_predicate_calls' :-
+'$lgt_tr_predicate_calls' :-
 	retract('$lgt_pp_entity_aux_clause_'(Clause)),
-		'$lgt_fix_predicate_calls'(Clause, FClause),
+		'$lgt_tr_predicate_calls'(Clause, FClause),
 		assertz('$lgt_pp_final_entity_aux_clause_'(FClause)),
 	fail.
 
-'$lgt_fix_predicate_calls' :-
-	retract('$lgt_pp_entity_initialization_'(Call)),
-		'$lgt_fix_body_predicate_calls'(Call, Fixed),
+'$lgt_tr_predicate_calls' :-
+	retract('$lgt_pp_entity_initialization_'(Goal)),
+		'$lgt_tr_predicate_calls'(Goal, Fixed),
 		assertz('$lgt_pp_final_entity_initialization_'(Fixed)),
 	fail.
 
-'$lgt_fix_predicate_calls'.
+'$lgt_tr_predicate_calls'.
 
 
 
-% '$lgt_fix_predicate_calls'(+nonvar, -nonvar)
+% '$lgt_tr_predicate_calls'(+nonvar, -nonvar)
 
-'$lgt_fix_predicate_calls'({Term}, Term) :-
+'$lgt_tr_predicate_calls'({Term}, Term).
 	% entity term is final
-	!.
 
-'$lgt_fix_predicate_calls'((Head:-Body), Clause) :-
-	% fix predicate calls in the clause rule body
-	!,
-	'$lgt_fix_body_predicate_calls'(Body, FBody),
+'$lgt_tr_predicate_calls'(srule(THead,Body,Ctx), Clause) :-
+	'$lgt_tr_body'(Body, FBody, _, Ctx),
 	(	'$lgt_compiler_flag'(optimize, on) ->
 		'$lgt_simplify_goal'(FBody, SBody)
 	;	SBody = FBody
 	),
 	(	SBody == true ->
-		Clause = Head
-	;	Clause = (Head:-SBody)
+		Clause = THead
+	;	Clause = (THead:-SBody)
 	).
 
-% catchall clause for facts and directives
-'$lgt_fix_predicate_calls'(Term, Term).
-
-
-
-% '$lgt_fix_body_predicate_calls'(+body, -body)
-%
-% fixes predicate calls in a clause body
-
-'$lgt_fix_body_predicate_calls'(Pred, Pred) :-
-	var(Pred),
-	!.
-
-'$lgt_fix_body_predicate_calls'('$lgt_coinductive_success_hook'(Head, Hypothesis, ExCtx, HeadStack, BodyStack), Pred) :-
-	!,
-	% ensure zero performance penalties when defining coinductive predicates without a definition
-	% for the coinductive success hook predicates
-	(	'$lgt_pp_defines_predicate_'(coinductive_success_hook(Head,Hypothesis), ExCtx, THead, _),
-		\+ \+ (
-			'$lgt_pp_entity_term_'(THead, _)
-		;	'$lgt_pp_entity_term_'((THead :- _), _)
-		;	'$lgt_pp_final_entity_term_'(THead, _)
-		;	'$lgt_pp_final_entity_term_'((THead :- _), _)
-		) ->
-		% ... with at least one clause for this particular coinductive predicate head
-		Pred = ((HeadStack = BodyStack), THead)
-	;	% we only consider coinductive_success_hook/1 clauses if no coinductive_success_hook/2 clause applies
-		'$lgt_pp_defines_predicate_'(coinductive_success_hook(Head), ExCtx, THead, _),
-		\+ \+ (
-			'$lgt_pp_entity_term_'(THead, _)
-		;	'$lgt_pp_entity_term_'((THead :- _), _)
-		;	'$lgt_pp_final_entity_term_'(THead, _)
-		;	'$lgt_pp_final_entity_term_'((THead :- _), _)
-		) ->
-		% ... with at least one clause for this particular coinductive predicate head
-		Pred = ((HeadStack = BodyStack), THead)
-	;	% no hook predicates defined or defined but with no clause for this particular coinductive predicate head
-		Pred = (HeadStack = BodyStack)
-	).
-
-'$lgt_fix_body_predicate_calls'({Pred}, Pred) :-
-	!.
-
-'$lgt_fix_body_predicate_calls'((Pred1, Pred2), (TPred1, TPred2)) :-
-	!,
-	'$lgt_fix_body_predicate_calls'(Pred1, TPred1),
-	'$lgt_fix_body_predicate_calls'(Pred2, TPred2).
-
-'$lgt_fix_body_predicate_calls'((Pred1; Pred2), (TPred1; TPred2)) :-
-	!,
-	'$lgt_fix_body_predicate_calls'(Pred1, TPred1),
-	'$lgt_fix_body_predicate_calls'(Pred2, TPred2).
-
-'$lgt_fix_body_predicate_calls'((Pred1 -> Pred2), (TPred1 -> TPred2)) :-
-	!,
-	'$lgt_fix_body_predicate_calls'(Pred1, TPred1),
-	'$lgt_fix_body_predicate_calls'(Pred2, TPred2).
-
-'$lgt_fix_body_predicate_calls'('*->'(Pred1, Pred2), '*->'(TPred1, TPred2)) :-
-	'$lgt_predicate_property'('*->'(_, _), built_in),
-	!,
-	'$lgt_fix_body_predicate_calls'(Pred1, TPred1),
-	'$lgt_fix_body_predicate_calls'(Pred2, TPred2).
-
-'$lgt_fix_body_predicate_calls'(\+ Pred, \+ TPred) :-
-	!,
-	'$lgt_fix_body_predicate_calls'(Pred, TPred).
-
-'$lgt_fix_body_predicate_calls'(Var^Pred, Var^TPred) :-
-	!,
-	'$lgt_fix_body_predicate_calls'(Pred, TPred).
-
-'$lgt_fix_body_predicate_calls'(call(Pred), call(TPred)) :-
-	!,
-	'$lgt_fix_body_predicate_calls'(Pred, TPred).
-
-'$lgt_fix_body_predicate_calls'(once(Pred), once(TPred)) :-
-	!,
-	'$lgt_fix_body_predicate_calls'(Pred, TPred).
-
-'$lgt_fix_body_predicate_calls'(catch(Goal, Catcher, Recovery), catch(TGoal, Catcher, TRecovery)) :-
-	!,
-	'$lgt_fix_body_predicate_calls'(Goal, TGoal),
-	'$lgt_fix_body_predicate_calls'(Recovery, TRecovery).
-
-'$lgt_fix_body_predicate_calls'(bagof(Term, Pred, List), bagof(Term, TPred, List)) :-
-	!,
-	'$lgt_fix_body_predicate_calls'(Pred, TPred).
-
-'$lgt_fix_body_predicate_calls'(findall(Term, Pred, List), findall(Term, TPred, List)) :-
-	!,
-	'$lgt_fix_body_predicate_calls'(Pred, TPred).
-
-'$lgt_fix_body_predicate_calls'(findall(Term, Pred, List, Tail), findall(Term, TPred, List, Tail)) :-
-	!,
-	'$lgt_fix_body_predicate_calls'(Pred, TPred).
-
-'$lgt_fix_body_predicate_calls'(forall(Gen, Test), forall(TGen, TTest)) :-
-	!,
-	'$lgt_fix_body_predicate_calls'(Gen, TGen),
-	'$lgt_fix_body_predicate_calls'(Test, TTest).
-
-'$lgt_fix_body_predicate_calls'(setof(Term, Pred, List), setof(Term, TPred, List)) :-
-	!,
-	'$lgt_fix_body_predicate_calls'(Pred, TPred).
-
-'$lgt_fix_body_predicate_calls'('$lgt_threaded_or'(Queue, MTGoals, Results), '$lgt_threaded_or'(Queue, TMTGoals, Results)) :-
-	!,
-	'$lgt_fix_body_predicate_calls'(MTGoals, TMTGoals).
-
-'$lgt_fix_body_predicate_calls'('$lgt_threaded_and'(Queue, MTGoals, Results), '$lgt_threaded_and'(Queue, TMTGoals, Results)) :-
-	!,
-	'$lgt_fix_body_predicate_calls'(MTGoals, TMTGoals).
-
-'$lgt_fix_body_predicate_calls'('$lgt_threaded_goal'(Pred, TVars, Queue, Id), '$lgt_threaded_goal'(TPred, TVars, Queue, Id)) :-
-	!,
-	'$lgt_fix_body_predicate_calls'(Pred, TPred).
-
-'$lgt_fix_body_predicate_calls'('$lgt_threaded_ignore'(Pred), '$lgt_threaded_ignore'(TPred)) :-
-	!,
-	'$lgt_fix_body_predicate_calls'(Pred, TPred).
-
-'$lgt_fix_body_predicate_calls'('$lgt_debug'(goal(OPred, Pred), ExCtx), '$lgt_debug'(goal(OPred, TPred), ExCtx)) :-
-	% calls in debug mode
-	!,
-	'$lgt_fix_body_predicate_calls'(Pred, TPred).
-
-'$lgt_fix_body_predicate_calls'('$lgt_call_built_in'(Pred, MetaExPred, ExCtx), TPred) :-
-	% calls to Logtalk and Prolog built-in (meta-)predicates
-	!,
-	(	'$lgt_pp_redefined_built_in_'(Pred, ExCtx, TPred) ->
-		true
-	;	'$lgt_fix_body_predicate_calls'(MetaExPred, TPred)
-	).
-
-'$lgt_fix_body_predicate_calls'(':'(Module, Pred), ':'(Module, Pred)) :-
-	var(Pred),
-	!.
-
-'$lgt_fix_body_predicate_calls'(':'(_, ':'(Module, Pred)), TPred) :-
-	!,
-	'$lgt_fix_body_predicate_calls'(':'(Module, Pred), TPred).
-
-'$lgt_fix_body_predicate_calls'(':'(Module, Pred), ':'(Module, TPred)) :-
-	(	'$lgt_pp_meta_predicate_'(':'(Module, Pred), ':'(Module, Meta))
-		% we're either overriding the original meta-predicate template or working around a
-		% backend Prolog compiler limitation in providing access to meta-predicate templates
-	;	catch('$lgt_predicate_property'(':'(Module, Pred), meta_predicate(Meta)), _, fail)
+'$lgt_tr_predicate_calls'(dsrule(THead,DHead,Body,Ctx), Clause) :-
+	'$lgt_tr_body'(Body, FBody, _, Ctx),
+	(	'$lgt_compiler_flag'(optimize, on) ->
+		'$lgt_simplify_goal'(FBody, SBody)
+	;	SBody = FBody
 	),
-	!,
-	% fixing a call to a Prolog module meta-predicate
-	Pred =.. [Functor| Args],
-	Meta =.. [Functor| MArgs],
-	'$lgt_prolog_to_logtalk_meta_argument_specifiers'(MArgs, CMArgs),
-	'$lgt_fix_predicate_calls_in_meta_arguments'(Args, CMArgs, TArgs),
-	TPred =.. [Functor| TArgs].
+	(	SBody == true ->
+		Clause = (THead:-DHead)
+	;	Clause = (THead:-DHead,SBody)
+	).
 
-'$lgt_fix_body_predicate_calls'(Pred, fail) :-
-	functor(Pred, Functor, Arity),
-	(	'$lgt_undefined_predicate_call'(_, Functor/Arity, _)
-		% calls to static, declared but undefined predicates
-		% must fail instead of throwing an exception
-	;	'$lgt_undefined_non_terminal_call'(_, Functor/Arity, _)
-		% calls to static, declared but undefined non terminals
-		% must fail instead of throwing an exception
+'$lgt_tr_predicate_calls'(drule(THead,Nop,Body,Ctx), Clause) :-
+	'$lgt_tr_body'(Body, FBody, _, Ctx),
+	(	'$lgt_compiler_flag'(optimize, on) ->
+		'$lgt_simplify_goal'(FBody, SBody)
+	;	SBody = FBody
 	),
-	!.
+	(	SBody == true ->
+		Clause = (THead:-Nop)
+	;	Clause = (THead:-Nop,SBody)
+	).
 
-'$lgt_fix_body_predicate_calls'(Pred, Pred) :-
-	'$lgt_logtalk_built_in_predicate'(Pred, _),
-	!.
+'$lgt_tr_predicate_calls'(ddrule(THead,Nop,DHead,Body,Ctx), Clause) :-
+	'$lgt_tr_body'(Body, FBody, _, Ctx),
+	(	'$lgt_compiler_flag'(optimize, on) ->
+		'$lgt_simplify_goal'(FBody, SBody)
+	;	SBody = FBody
+	),
+	(	SBody == true ->
+		Clause = (THead:-Nop,DHead)
+	;	Clause = (THead:-Nop,DHead,SBody)
+	).
 
-'$lgt_fix_body_predicate_calls'(Pred, Pred) :-
-	'$lgt_built_in_method'(Pred, _, _, _),
-	!.
+'$lgt_tr_predicate_calls'(sgoal(Body,Ctx), TBody) :-
+	'$lgt_tr_body'(Body, FBody, _, Ctx),
+	(	'$lgt_compiler_flag'(optimize, on) ->
+		'$lgt_simplify_goal'(FBody, TBody)
+	;	TBody = FBody
+	).
 
-'$lgt_fix_body_predicate_calls'(Pred, TPred) :-
-	'$lgt_prolog_meta_predicate'(Pred, Meta0, _),
-	% call to a non-standard Prolog built-in meta-predicate
-	!,
-	Pred =.. [Functor| Args],
-	Meta0 =.. [_| MArgs0],
-	'$lgt_prolog_to_logtalk_meta_argument_specifiers'(MArgs0, MArgs),
-	'$lgt_fix_predicate_calls_in_meta_arguments'(Args, MArgs, TArgs),
-	TPred =.. [Functor| TArgs].
+'$lgt_tr_predicate_calls'(dgoal(Body,Ctx), TBody) :-
+	'$lgt_tr_body'(Body, _, FBody, Ctx),
+	(	'$lgt_compiler_flag'(optimize, on) ->
+		'$lgt_simplify_goal'(FBody, TBody)
+	;	TBody = FBody
+	).
 
-'$lgt_fix_body_predicate_calls'(Pred, Pred).
+'$lgt_tr_predicate_calls'(sfact(TFact), TFact).
 
+'$lgt_tr_predicate_calls'(dfact(TFact,DHead), (TFact:-DHead)).
 
-
-% '$lgt_fix_predicate_calls_in_meta_arguments'(@list, @list, -list)
-%
-% fixes predicate calls in non-standard meta-arguments
-
-'$lgt_fix_predicate_calls_in_meta_arguments'([], [], []).
-
-'$lgt_fix_predicate_calls_in_meta_arguments'([Arg| Args], [MArg| MArgs], [TArg| TArgs]) :-
-	'$lgt_fix_predicate_calls_in_meta_argument'(MArg, Arg, TArg),
-	'$lgt_fix_predicate_calls_in_meta_arguments'(Args, MArgs, TArgs).
-
-
-'$lgt_fix_predicate_calls_in_meta_argument'(0, Arg, TArg) :-
-	!,
-	'$lgt_fix_body_predicate_calls'(Arg, TArg).
-
-'$lgt_fix_predicate_calls_in_meta_argument'([0], [Arg| Args], [TArg| TArgs]) :-
-	!,
-	'$lgt_fix_body_predicate_calls'(Arg, TArg),
-	'$lgt_fix_predicate_calls_in_meta_argument'([0], Args, TArgs).
-
-'$lgt_fix_predicate_calls_in_meta_argument'([0], [], []) :-
-	!.
-
-'$lgt_fix_predicate_calls_in_meta_argument'(_, Arg, Arg).
+'$lgt_tr_predicate_calls'((:- Directive), (:- Directive)).
 
 
 
@@ -18425,11 +18292,9 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_tr_static_binding_meta_arg'((*), Arg, _, Arg, Arg).
 
-'$lgt_tr_static_binding_meta_arg'(0, Arg, Ctx, {FTArg}, {FDArg}) :-
+'$lgt_tr_static_binding_meta_arg'(0, Arg, Ctx, TArg, DArg) :-
 	% the {}/1 construct signals a pre-compiled metacall
-	'$lgt_tr_body'(Arg, TArg, DArg, Ctx),
-	'$lgt_fix_body_predicate_calls'(TArg, FTArg),
-	'$lgt_fix_body_predicate_calls'(DArg, FDArg).
+	'$lgt_tr_body'(Arg, TArg, DArg, Ctx).
 
 
 
