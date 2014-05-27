@@ -8,7 +8,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on May 26, 2014
+%  Last updated on May 27, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -664,7 +664,6 @@ user:portray(c(This, r(Sender, Self, MetaVars, CoinductionStack))) :-
 :- meta_predicate user:'$lgt_threaded_or'(*,*,*).
 :- meta_predicate user:'$lgt_mt_non_det_goal'(*,*,*,*,*).
 :- meta_predicate user:'$lgt_protocol_property_declares'(*,*,*,*).
-:- meta_predicate user:'$lgt_call_built_in'(*,*,*).
 :- meta_predicate user:'$lgt_guarded_method_call'(*,*,*,*).
 :- meta_predicate user:'$lgt_threaded_and'(*,*,*).
 :- meta_predicate user:'$lgt_category_property_defines'(*,*,*,*).
