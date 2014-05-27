@@ -10488,7 +10488,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, Prefix, _, _, ExCtx, _, _),
 	(	atomic(Key) ->
 		'$lgt_tr_bb_key'(Key, Prefix, TKey),
-		TPred = bb_delete(Key, Term), bb_delete(TKey, Term),
+		TPred = bb_delete(TKey, Term),
 		DPred = '$lgt_debug'(goal(bb_delete(Key, Term), TPred), ExCtx)
 	;	var(Key) ->
 		% runtime key translation
