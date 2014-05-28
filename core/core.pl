@@ -5227,13 +5227,13 @@ current_logtalk_flag(Flag, Value) :-
 	% catch variables
 	throw(instantiation_error).
 
-'$lgt_compile_file_term'(end_of_file, _, _, _) :-
+'$lgt_compile_file_term'(end_of_file, _, Position, _) :-
 	'$lgt_pp_module_'(Module),
 	% module definitions start with an opening module/1-2 directive and are assumed
 	% to end at the end of a source file; there is no module closing directive
 	'$lgt_pp_object_'(Module, _, _, _, _, _, _, _, _, _, _),
-	% set the initial compilation context for compiling the end_of_file term
-	'$lgt_comp_ctx_mode'(Ctx, compile(regular)),
+	% set the initial compilation context and the position for compiling the end_of_file term
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, compile(regular), _, Position),
 	'$lgt_compile_file_term'(end_of_file, Ctx),
 	'$lgt_add_entity_source_data'(end, Module),
 	'$lgt_compile_entity'(object, Module, Ctx),
@@ -5257,7 +5257,7 @@ current_logtalk_flag(Flag, Value) :-
 	throw(error(existence_error(directive, endif/0), term(end_of_file))).
 
 '$lgt_compile_file_term'(end_of_file, _, Position, _) :-
-	% set the initial compilation context and the position for compiling the term
+	% set the initial compilation context and the position for compiling the end_of_file term
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, compile(regular), _, Position),
 	% allow for term-expansion of the end_of_file term
 	'$lgt_compile_file_term'(end_of_file, Ctx),
@@ -6991,7 +6991,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_execution_context'(ExCtx, Entity, Entity, Entity, [], []),
 	(	'$lgt_compiler_flag'(debug, on) ->
 		assertz('$lgt_pp_entity_initialization_'(dgoal(Goal,Ctx)))
-	;	assertz('$lgt_pp_entity_initialization_'(sgoal(Goal,Ctx)))
+	;	assertz('$lgt_pp_entity_initialization_'(goal(Goal,Ctx)))
 	).
 
 % op/3 entity directive (operators are local to entities)
@@ -8646,7 +8646,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_compile_clause'(+clause, +compilation_context)
 %
-% translates a source file clause
+% compiles a source file clause
 
 '$lgt_compile_clause'(Clause, Ctx) :-
 	'$lgt_pp_entity_'(Type, Entity, Prefix, _, _),
@@ -8703,7 +8703,13 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_compile_clause'(+clause, -clause, -clause, +compilation_context)
 %
-% translates an entity clause into a normal clause and a debug clause
+% compiles an entity clause into a normal clause and a debug clause
+%
+% in this first compiler stage only the clause heads are compiled, which
+% allows collecting infornation about all entity defined predicates; the
+% compilation of clause bodies is delayed to the compiler second stage to
+% take advantage of the collected information to notably simplify handling
+% of redefined built-in predicates
 
 '$lgt_compile_clause'((Head:-Body), drule(THead,'$lgt_nop'(Body),Body,Ctx), ddrule(THead,'$lgt_nop'(Body),DHead,Body,Ctx), Ctx) :-
 	'$lgt_pp_dynamic_'(Head),
@@ -14516,20 +14522,20 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_predicate_calls' :-
 	retract('$lgt_pp_entity_term_'(Term, Location)),
-		'$lgt_compile_predicate_calls'(Term, FTerm),
-		assertz('$lgt_pp_final_entity_term_'(FTerm, Location)),
+		'$lgt_compile_predicate_calls'(Term, TTerm),
+		assertz('$lgt_pp_final_entity_term_'(TTerm, Location)),
 	fail.
 
 '$lgt_compile_predicate_calls' :-
 	retract('$lgt_pp_entity_aux_clause_'(Clause)),
-		'$lgt_compile_predicate_calls'(Clause, FClause),
-		assertz('$lgt_pp_final_entity_aux_clause_'(FClause)),
+		'$lgt_compile_predicate_calls'(Clause, TClause),
+		assertz('$lgt_pp_final_entity_aux_clause_'(TClause)),
 	fail.
 
 '$lgt_compile_predicate_calls' :-
 	retract('$lgt_pp_entity_initialization_'(Goal)),
-		'$lgt_compile_predicate_calls'(Goal, Fixed),
-		assertz('$lgt_pp_final_entity_initialization_'(Fixed)),
+		'$lgt_compile_predicate_calls'(Goal, TGoal),
+		assertz('$lgt_pp_final_entity_initialization_'(TGoal)),
 	fail.
 
 '$lgt_compile_predicate_calls'.
@@ -14537,72 +14543,84 @@ current_logtalk_flag(Flag, Value) :-
 
 
 % '$lgt_compile_predicate_calls'(+nonvar, -nonvar)
+%
+% all predicate calls are compiled on the second stage to take advantage of
+% the information about defined predicates collected on the first stage
 
+% entity term is final
 '$lgt_compile_predicate_calls'({Term}, Term).
-	% entity term is final
 
-'$lgt_compile_predicate_calls'(srule(THead,Body,Ctx), Clause) :-
+% static predicate rule
+'$lgt_compile_predicate_calls'(srule(THead,Body,Ctx), TClause) :-
 	'$lgt_compile_body'(Body, FBody, _, Ctx),
 	(	'$lgt_compiler_flag'(optimize, on) ->
 		'$lgt_simplify_goal'(FBody, SBody)
 	;	SBody = FBody
 	),
 	(	SBody == true ->
-		Clause = THead
-	;	Clause = (THead:-SBody)
+		TClause = THead
+	;	TClause = (THead:-SBody)
 	).
 
-'$lgt_compile_predicate_calls'(dsrule(THead,DHead,Body,Ctx), Clause) :-
+% debug version of static predicate rule
+'$lgt_compile_predicate_calls'(dsrule(THead,DHead,Body,Ctx), TClause) :-
 	'$lgt_compile_body'(Body, FBody, _, Ctx),
 	(	'$lgt_compiler_flag'(optimize, on) ->
 		'$lgt_simplify_goal'(FBody, SBody)
 	;	SBody = FBody
 	),
 	(	SBody == true ->
-		Clause = (THead:-DHead)
-	;	Clause = (THead:-DHead,SBody)
+		TClause = (THead:-DHead)
+	;	TClause = (THead:-DHead,SBody)
 	).
 
-'$lgt_compile_predicate_calls'(drule(THead,Nop,Body,Ctx), Clause) :-
-	'$lgt_compile_body'(Body, FBody, _, Ctx),
+% dynamic predicate rule
+'$lgt_compile_predicate_calls'(drule(THead,Nop,Body,Ctx), TClause) :-
+	'$lgt_compile_body'(Body, TBody0, _, Ctx),
 	(	'$lgt_compiler_flag'(optimize, on) ->
-		'$lgt_simplify_goal'(FBody, SBody)
-	;	SBody = FBody
+		'$lgt_simplify_goal'(TBody0, TBody)
+	;	TBody = TBody0
 	),
-	(	SBody == true ->
-		Clause = (THead:-Nop)
-	;	Clause = (THead:-Nop,SBody)
+	(	TBody == true ->
+		TClause = (THead:-Nop)
+	;	TClause = (THead:-Nop,TBody)
 	).
 
-'$lgt_compile_predicate_calls'(ddrule(THead,Nop,DHead,Body,Ctx), Clause) :-
-	'$lgt_compile_body'(Body, FBody, _, Ctx),
+% debug version of dynamic predicate rule
+'$lgt_compile_predicate_calls'(ddrule(THead,Nop,DHead,Body,Ctx), TClause) :-
+	'$lgt_compile_body'(Body, TBody0, _, Ctx),
 	(	'$lgt_compiler_flag'(optimize, on) ->
-		'$lgt_simplify_goal'(FBody, SBody)
-	;	SBody = FBody
+		'$lgt_simplify_goal'(TBody0, TBody)
+	;	TBody = TBody0
 	),
-	(	SBody == true ->
-		Clause = (THead:-Nop,DHead)
-	;	Clause = (THead:-Nop,DHead,SBody)
+	(	TBody == true ->
+		TClause = (THead:-Nop,DHead)
+	;	TClause = (THead:-Nop,DHead,TBody)
 	).
 
-'$lgt_compile_predicate_calls'(sgoal(Body,Ctx), TBody) :-
-	'$lgt_compile_body'(Body, FBody, _, Ctx),
+% goal
+'$lgt_compile_predicate_calls'(goal(Body,Ctx), TBody) :-
+	'$lgt_compile_body'(Body, TBody0, _, Ctx),
 	(	'$lgt_compiler_flag'(optimize, on) ->
-		'$lgt_simplify_goal'(FBody, TBody)
-	;	TBody = FBody
+		'$lgt_simplify_goal'(TBody0, TBody)
+	;	TBody = TBody0
 	).
 
+% debug version of goal
 '$lgt_compile_predicate_calls'(dgoal(Body,Ctx), TBody) :-
-	'$lgt_compile_body'(Body, _, FBody, Ctx),
+	'$lgt_compile_body'(Body, _, TBody0, Ctx),
 	(	'$lgt_compiler_flag'(optimize, on) ->
-		'$lgt_simplify_goal'(FBody, TBody)
-	;	TBody = FBody
+		'$lgt_simplify_goal'(TBody0, TBody)
+	;	TBody = TBody0
 	).
 
+% static predicate fact
 '$lgt_compile_predicate_calls'(sfact(TFact), TFact).
 
+% dynamic predicate fact
 '$lgt_compile_predicate_calls'(dfact(TFact,DHead), (TFact:-DHead)).
 
+% directive
 '$lgt_compile_predicate_calls'((:- Directive), (:- Directive)).
 
 
