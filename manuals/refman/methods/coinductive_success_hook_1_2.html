@@ -44,6 +44,9 @@ User-defined hook predicates that are automatically called in case of coinductiv
 <p> 
 When both hook predicates are defined, the <code>coinductive_success_hook/1</code> clauses are only used if no <code>coinductive_success_hook/2</code> clause applies. The compiler ensures zero performance penalties when defining coinductive predicates without a corresponding definition for the coinductive success hook predicates.
 </p>
+<p>
+The compiler assumes that these hook predicates are defined as static predicates in order to optimize their use.
+</p>
 
 <h4>Template and modes</h4>
 
@@ -53,37 +56,19 @@ coinductive_success_hook(+callable)</pre>
 <h4>Errors</h4>
 
 <dl>
-	<dt>Head is a variable:</dt>
-		<dd><code>instantiation_error</code></dd>
-	<dt>Head is a neither a variable nor a callable term:</dt>
-		<dd><code>type_error(callable, Head)</code></dd>
-	<dt>Body is a neither a variable nor a callable term:</dt>
-		<dd><code>type_error(callable, Body)</code></dd>
-	<dt>The predicate indicator of Head, Functor/Arity, is that of a private predicate:</dt>
-		<dd><code>permission_error(access, private_predicate, Functor/Arity)</code></dd>
-	<dt>The predicate indicator of Head, Functor/Arity, is that of a protected predicate:</dt>
-		<dd><code>permission_error(access, protected_predicate, Functor/Arity)</code></dd>
-	<dt>The predicate indicator of Head, Functor/Arity, is that of a static predicate:</dt>
-		<dd><code>permission_error(access, static_predicate, Functor/Arity)</code></dd>
-	<dt>Head is not a declared predicate:</dt>
-		<dd><code>existence_error(predicate_declaration, Functor/Arity)</code></dd>
+	<dt><code>(none)</code></dt>
 </dl>
 
 <h4>Examples</h4>
 
 <dl>
-	<dt>To retrieve a matching clause of any dynamic predicate in <em><a class="glossary" title="Go to glossary definition" href="../../glossary.html#this">this</a></em>:</dt>
-		<dd><code>clause(Head, Body)</code></dd>
-	<dt>To retrieve a matching clause of a public or protected dynamic predicate in <em><a class="glossary" title="Go to glossary definition" href="../../glossary.html#self">self</a></em>:</dt>
-		<dd><code>::clause(Head, Body)</code></dd>
-	<dt>To retrieve a matching clause of a public dynamic predicate in an explicit object:</dt>
-		<dd><code>Object::clause(Head, Body)</code></dd>
+	<dt><code>(none)</code></dt>
 </dl>
 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: May 14, 2013</span>
+		<span>Last updated on: May 28, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="../index.html#methods">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="../index.html#methods">next</a></span><br/>

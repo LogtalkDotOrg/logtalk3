@@ -14492,8 +14492,6 @@ current_logtalk_flag(Flag, Value) :-
 		\+ \+ (
 			'$lgt_pp_entity_term_'(sfact(THead), _)
 		;	'$lgt_pp_entity_term_'(srule(THead,_,_), _)
-		;	'$lgt_pp_entity_term_'(dfact(THead,_), _)
-		;	'$lgt_pp_entity_term_'(drule(THead,_,_,_), _)
 		;	'$lgt_pp_final_entity_term_'(THead, _)
 		;	'$lgt_pp_final_entity_term_'((THead :- _), _)
 		) ->
@@ -14504,8 +14502,6 @@ current_logtalk_flag(Flag, Value) :-
 		\+ \+ (
 			'$lgt_pp_entity_term_'(sfact(THead), _)
 		;	'$lgt_pp_entity_term_'(srule(THead,_,_), _)
-		;	'$lgt_pp_entity_term_'(dfact(THead,_), _)
-		;	'$lgt_pp_entity_term_'(drule(THead,_,_,_), _)
 		;	'$lgt_pp_final_entity_term_'(THead, _)
 		;	'$lgt_pp_final_entity_term_'((THead :- _), _)
 		) ->
