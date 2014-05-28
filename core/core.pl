@@ -7163,9 +7163,9 @@ current_logtalk_flag(Flag, Value) :-
 
 % multifile/2 predicate directive
 
-'$lgt_compile_logtalk_directive'(multifile(Preds), _) :-
+'$lgt_compile_logtalk_directive'(multifile(Preds), Ctx) :-
 	'$lgt_flatten_to_list'(Preds, PredsFlatted),
-	'$lgt_compile_multifile_directive'(PredsFlatted).
+	'$lgt_compile_multifile_directive'(PredsFlatted, Ctx).
 
 % coinductive/1 predicate directive
 
@@ -7731,18 +7731,18 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_compile_multifile_directive'(+list)
+% '$lgt_compile_multifile_directive'(+list, +compilation_context)
 %
 % auxiliary predicate for compiling multifile/1 directives
 
-'$lgt_compile_multifile_directive'([]).
+'$lgt_compile_multifile_directive'([], _).
 
-'$lgt_compile_multifile_directive'([Resource| Resources]) :-
-	'$lgt_compile_multifile_directive_resource'(Resource),
-	'$lgt_compile_multifile_directive'(Resources).
+'$lgt_compile_multifile_directive'([Resource| Resources], Ctx) :-
+	'$lgt_compile_multifile_directive_resource'(Resource, Ctx),
+	'$lgt_compile_multifile_directive'(Resources, Ctx).
 
 
-'$lgt_compile_multifile_directive_resource'(Entity::Pred) :-
+'$lgt_compile_multifile_directive_resource'(Entity::Pred, _) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
 	'$lgt_must_be'(entity_identifier, Entity),
@@ -7756,7 +7756,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	throw(permission_error(modify, predicate_declaration, Pred))
 	).
 
-'$lgt_compile_multifile_directive_resource'(Entity::NonTerminal) :-
+'$lgt_compile_multifile_directive_resource'(Entity::NonTerminal, _) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, _, ExtArity),
 	!,
 	'$lgt_must_be'(entity_identifier, Entity),
@@ -7770,7 +7770,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	throw(permission_error(modify, non_terminal_declaration, NonTerminal))
 	).
 
-'$lgt_compile_multifile_directive_resource'(':'(Module, Pred)) :-
+'$lgt_compile_multifile_directive_resource'(':'(Module, Pred), _) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
 	'$lgt_must_be'(module_identifier, Module),
@@ -7779,7 +7779,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	assertz('$lgt_pp_directive_'(multifile(':'(Module, Functor/Arity))))
 	).
 
-'$lgt_compile_multifile_directive_resource'(':'(Module, NonTerminal)) :-
+'$lgt_compile_multifile_directive_resource'(':'(Module, NonTerminal), _) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, _, ExtArity),
 	!,
 	'$lgt_must_be'(module_identifier, Module),
@@ -7788,31 +7788,31 @@ current_logtalk_flag(Flag, Value) :-
 	;	assertz('$lgt_pp_directive_'(multifile(':'(Module, Functor/ExtArity))))
 	).
 
-'$lgt_compile_multifile_directive_resource'(Pred) :-
+'$lgt_compile_multifile_directive_resource'(Pred, Ctx) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
-	'$lgt_current_line_numbers'(Lines),
+	'$lgt_comp_ctx_position'(Ctx, Lines),
 	functor(Head, Functor, Arity),
 	assertz('$lgt_pp_multifile_'(Head, Lines)),
 	'$lgt_pp_entity_'(_, _, Prefix, _, _),
 	'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity))).
 
-'$lgt_compile_multifile_directive_resource'(NonTerminal) :-
+'$lgt_compile_multifile_directive_resource'(NonTerminal, Ctx) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, _, ExtArity),
 	!,
-	'$lgt_current_line_numbers'(Lines),
+	'$lgt_comp_ctx_position'(Ctx, Lines),
 	functor(Head, Functor, ExtArity),
 	assertz('$lgt_pp_multifile_'(Head, Lines)),
 	'$lgt_pp_entity_'(_, _, Prefix, _, _),
 	'$lgt_compile_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
 	assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity))).
 
-'$lgt_compile_multifile_directive_resource'(Resource) :-
+'$lgt_compile_multifile_directive_resource'(Resource, _) :-
 	ground(Resource),
 	throw(type_error(predicate_indicator, Resource)).
 
-'$lgt_compile_multifile_directive_resource'(_) :-
+'$lgt_compile_multifile_directive_resource'(_, _) :-
 	throw(instantiation_error).
 
 
@@ -9769,10 +9769,12 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_body'(assert(Clause), TCond, DCond, Ctx) :-
 	!,
-	(	'$lgt_pp_non_portable_predicate_'(assert(_), _) ->
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, Mode, _, Lines),
+	(	Mode == runtime ->
 		true
-	;	'$lgt_current_line_numbers'(Lines),
-		assertz('$lgt_pp_non_portable_predicate_'(assert(_), Lines))
+	;	'$lgt_pp_non_portable_predicate_'(assert(_), _) ->
+		true
+	;	assertz('$lgt_pp_non_portable_predicate_'(assert(_), Lines))
 	),
 	'$lgt_compile_body'(assertz(Clause), TCond, DCond, Ctx).
 
@@ -10406,45 +10408,45 @@ current_logtalk_flag(Flag, Value) :-
 % arithmetic predicates (portability checks)
 
 '$lgt_compile_body'(_ is Exp, _, _, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, compile(_), _, Lines),
 	'$lgt_compiler_flag'(portability, warning),
-	'$lgt_check_non_portable_functions'(Exp),
+	'$lgt_check_non_portable_functions'(Exp, Lines),
 	fail.
 '$lgt_compile_body'(Exp1 =:= Exp2, _, _, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, compile(_), _, Lines),
 	'$lgt_compiler_flag'(portability, warning),
-	'$lgt_check_non_portable_functions'(Exp1),
-	'$lgt_check_non_portable_functions'(Exp2),
+	'$lgt_check_non_portable_functions'(Exp1, Lines),
+	'$lgt_check_non_portable_functions'(Exp2, Lines),
 	fail.
 '$lgt_compile_body'(Exp1 =\= Exp2, _, _, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, compile(_), _, Lines),
 	'$lgt_compiler_flag'(portability, warning),
-	'$lgt_check_non_portable_functions'(Exp1),
-	'$lgt_check_non_portable_functions'(Exp2),
+	'$lgt_check_non_portable_functions'(Exp1, Lines),
+	'$lgt_check_non_portable_functions'(Exp2, Lines),
 	fail.
 '$lgt_compile_body'(Exp1 < Exp2, _, _, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, compile(_), _, Lines),
 	'$lgt_compiler_flag'(portability, warning),
-	'$lgt_check_non_portable_functions'(Exp1),
-	'$lgt_check_non_portable_functions'(Exp2),
+	'$lgt_check_non_portable_functions'(Exp1, Lines),
+	'$lgt_check_non_portable_functions'(Exp2, Lines),
 	fail.
 '$lgt_compile_body'(Exp1 =< Exp2, _, _, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, compile(_), _, Lines),
 	'$lgt_compiler_flag'(portability, warning),
-	'$lgt_check_non_portable_functions'(Exp1),
-	'$lgt_check_non_portable_functions'(Exp2),
+	'$lgt_check_non_portable_functions'(Exp1, Lines),
+	'$lgt_check_non_portable_functions'(Exp2, Lines),
 	fail.
 '$lgt_compile_body'(Exp1 > Exp2, _, _, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, compile(_), _, Lines),
 	'$lgt_compiler_flag'(portability, warning),
-	'$lgt_check_non_portable_functions'(Exp1),
-	'$lgt_check_non_portable_functions'(Exp2),
+	'$lgt_check_non_portable_functions'(Exp1, Lines),
+	'$lgt_check_non_portable_functions'(Exp2, Lines),
 	fail.
 '$lgt_compile_body'(Exp1 >= Exp2, _, _, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, compile(_), _, Lines),
 	'$lgt_compiler_flag'(portability, warning),
-	'$lgt_check_non_portable_functions'(Exp1),
-	'$lgt_check_non_portable_functions'(Exp2),
+	'$lgt_check_non_portable_functions'(Exp1, Lines),
+	'$lgt_check_non_portable_functions'(Exp2, Lines),
 	fail.
 
 % blackboard predicates (requires a back-end Prolog compiler natively supporting these built-in predicates)
@@ -11351,11 +11353,11 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_check_non_portable_functions'(@term)
+% '$lgt_check_non_portable_functions'(@term, @term)
 %
 % checks an arithmetic expression for calls to non-standard Prolog functions
 
-'$lgt_check_non_portable_functions'(Expression) :-
+'$lgt_check_non_portable_functions'(Expression, Lines) :-
 	compound(Expression),
 	!,
 	(	'$lgt_iso_spec_function'(Expression) ->
@@ -11365,20 +11367,19 @@ current_logtalk_flag(Flag, Value) :-
 		true
 	;	% first occurrence; not yet recorded
 		'$lgt_term_template'(Expression, Template),
-		'$lgt_current_line_numbers'(Lines),
 		assertz('$lgt_pp_non_portable_function_'(Template, Lines))
 	),
 	Expression =.. [_| Expressions],
 	'$lgt_check_non_portable_function_args'(Expressions).
 
-'$lgt_check_non_portable_functions'(_).		% variables and numbers
+'$lgt_check_non_portable_functions'(_, _).		% variables and numbers
 
 
-'$lgt_check_non_portable_function_args'([]).
+'$lgt_check_non_portable_function_args'([], _).
 
-'$lgt_check_non_portable_function_args'([Expression| Expressions]) :-
-	'$lgt_check_non_portable_functions'(Expression),
-	'$lgt_check_non_portable_function_args'(Expressions).
+'$lgt_check_non_portable_function_args'([Expression| Expressions], Lines) :-
+	'$lgt_check_non_portable_functions'(Expression, Lines),
+	'$lgt_check_non_portable_function_args'(Expressions, Lines).
 
 
 
@@ -17128,9 +17129,8 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_dcg_body'(NonTerminal, S0, S, Goal, Ctx) :-
 	'$lgt_dcg_non_terminal'(NonTerminal, S0, S, Goal),
 	functor(NonTerminal, Functor, Arity),
-	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	(	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, compile(_), _, Lines),
 		\+ '$lgt_pp_calls_non_terminal_'(Functor, Arity, _) ->
-		'$lgt_current_line_numbers'(Lines),
 		assertz('$lgt_pp_calls_non_terminal_'(Functor, Arity, Lines))
 	;	true
 	).
