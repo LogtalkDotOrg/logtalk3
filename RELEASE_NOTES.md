@@ -31,6 +31,13 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: Detection and handling of redefined built-in predicates. Changed the
+compiler first stage to compile only predicate heads and collect information
+about defined predicates. The compilation of predicate bodies is delayed to the
+second stage. This greatly simplifies the second stage, improves the overall
+compiler performance, and allows reporting undefined and unknown predicates as
+they are found.
+
 * FIXED: Compiler bug where compiling a list of files using an `hook/1` option
 would result in redundant cached clauses used for optimizing the calls to the
 term- and goal-expansion methods.
