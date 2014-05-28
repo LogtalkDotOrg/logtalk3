@@ -9753,10 +9753,10 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_body'(abolish(Pred), TCond, DCond, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, Mode, _, _),
+	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
 	'$lgt_execution_context_this'(ExCtx, This),
 	(	Mode = compile(_) ->
-		'$lgt_check_dynamic_directive'(Pred)
+		'$lgt_check_dynamic_directive'(Pred, Lines)
 	;	true
 	),
 	(	ground(Pred) ->
@@ -9824,9 +9824,9 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_body'(asserta(Clause), TCond, DCond, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, Mode, _, _),
+	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
 	(	Mode = compile(_) ->
-		'$lgt_check_dynamic_directive'(Clause)
+		'$lgt_check_dynamic_directive'(Clause, Lines)
 	;	true
 	),
 	(	'$lgt_optimizable_local_db_call'(Clause, TClause) ->
@@ -9894,9 +9894,9 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_body'(assertz(Clause), TCond, DCond, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, Mode, _, _),
+	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
 	(	Mode = compile(_) ->
-		'$lgt_check_dynamic_directive'(Clause)
+		'$lgt_check_dynamic_directive'(Clause, Lines)
 	;	true
 	),
 	(	'$lgt_optimizable_local_db_call'(Clause, TClause) ->
@@ -9944,9 +9944,9 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_body'(clause(Head, Body), TCond, DCond, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, Mode, _, _),
+	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
 	(	Mode = compile(_) ->
-		'$lgt_check_dynamic_directive'(Head)
+		'$lgt_check_dynamic_directive'(Head, Lines)
 	;	true
 	),
 	(	'$lgt_optimizable_local_db_call'(Head, THead) ->
@@ -10008,9 +10008,9 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_body'(retract(Clause), TCond, DCond, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, Mode, _, _),
+	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
 	(	Mode = compile(_) ->
-		'$lgt_check_dynamic_directive'(Clause)
+		'$lgt_check_dynamic_directive'(Clause, Lines)
 	;	true
 	),
 	(	'$lgt_optimizable_local_db_call'(Clause, TClause) ->
@@ -10061,9 +10061,9 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_body'(retractall(Head), TCond, DCond, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, Mode, _, _),
+	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
 	(	Mode = compile(_) ->
-		'$lgt_check_dynamic_directive'(Head)
+		'$lgt_check_dynamic_directive'(Head, Lines)
 	;	true
 	),
 	(	'$lgt_optimizable_local_db_call'(Head, THead) ->
@@ -10598,7 +10598,7 @@ current_logtalk_flag(Flag, Value) :-
 % remember non-portable Prolog built-in predicate calls
 
 '$lgt_compile_body'(Pred, _, _, Ctx) :-
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, compile(_), _, Lines),
 	\+ '$lgt_pp_non_portable_predicate_'(Pred, _),
 	% not previously recorded as a non portable call
 	'$lgt_compiler_flag'(portability, warning),
@@ -10613,7 +10613,6 @@ current_logtalk_flag(Flag, Value) :-
 	\+ '$lgt_pp_redefined_built_in_'(Pred, _, _),
 	% not a redefined Prolog built-in predicate; remember it
 	functor(Head, Functor, Arity),
-	'$lgt_current_line_numbers'(Lines),
 	assertz('$lgt_pp_non_portable_predicate_'(Head, Lines)),
 	fail.
 
@@ -11250,22 +11249,22 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_check_dynamic_directive'(@term)
+% '$lgt_check_dynamic_directive'(@term, @term)
 %
 % checks for a dynamic/1 directive for a predicate that is an argument to the
 % database built-in methods
 
-'$lgt_check_dynamic_directive'(Term) :-
+'$lgt_check_dynamic_directive'(Term, _) :-
 	var(Term),
 	% runtime argument
 	!.
 
-'$lgt_check_dynamic_directive'((Head :- _)) :-
+'$lgt_check_dynamic_directive'((Head :- _), Lines) :-
 	% clause rule
 	!,
-	'$lgt_check_dynamic_directive'(Head).
+	'$lgt_check_dynamic_directive'(Head, Lines).
 
-'$lgt_check_dynamic_directive'(Term) :-
+'$lgt_check_dynamic_directive'(Term, Lines) :-
 	'$lgt_valid_predicate_indicator'(Term, Functor, Arity),
 	% predicate indicator
 	!,
@@ -11273,34 +11272,31 @@ current_logtalk_flag(Flag, Value) :-
 	(	\+ '$lgt_pp_dynamic_'(Head),
 		% dynamic directive not (yet) found
 		\+ '$lgt_pp_missing_dynamic_directive_'(Head, _) ->
-		'$lgt_current_line_numbers'(Lines),
 		assertz('$lgt_pp_missing_dynamic_directive_'(Head, Lines))
 	;	true
 	).
 
-'$lgt_check_dynamic_directive'(Head) :-
+'$lgt_check_dynamic_directive'(Head, Lines) :-
 	% clause fact
 	(	\+ '$lgt_pp_dynamic_'(Head),
 		% dynamic directive not (yet) found
 		\+ '$lgt_pp_missing_dynamic_directive_'(Head, _) ->
-		'$lgt_current_line_numbers'(Lines),
 		assertz('$lgt_pp_missing_dynamic_directive_'(Head, Lines))
 	;	true
 	).
 
 
 
-% '$lgt_check_discontiguous_directive'(@predicate_indicator)
+% '$lgt_check_discontiguous_directive'(@predicate_indicator, @term)
 %
 % checks for a discontiguous/1 directive for a predicate
 
-'$lgt_check_discontiguous_directive'(Functor, Arity) :-
+'$lgt_check_discontiguous_directive'(Functor, Arity, Lines) :-
 	(	'$lgt_pp_discontiguous_'(Functor, Arity) ->
 		true
 	;	'$lgt_pp_missing_discontiguous_directive_'(Functor, Arity, _) ->
 		true
-	;	'$lgt_current_line_numbers'(Lines),
-		assertz('$lgt_pp_missing_discontiguous_directive_'(Functor, Arity, Lines))
+	;	assertz('$lgt_pp_missing_discontiguous_directive_'(Functor, Arity, Lines))
 	).
 
 
@@ -13136,11 +13132,11 @@ current_logtalk_flag(Flag, Value) :-
 % and when compiling auxiliary predicates
 
 '$lgt_check_discontiguous_predicate'(Head, Ctx) :-
-	(	'$lgt_comp_ctx_mode'(Ctx, compile(regular)),
+	(	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, compile(regular), _, Lines),
 		'$lgt_pp_previous_predicate_'(_) ->
 		% clauses for the predicate are discontiguous
 		functor(Head, Functor, Arity),
-		'$lgt_check_discontiguous_directive'(Functor, Arity)
+		'$lgt_check_discontiguous_directive'(Functor, Arity, Lines)
 	;	true
 	).
 
