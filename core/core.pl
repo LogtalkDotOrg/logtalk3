@@ -14652,8 +14652,8 @@ current_logtalk_flag(Flag, Value) :-
 	Arity2 is Arity - 2,
 	'$lgt_increment_compile_warnings_counter',
 	(	'$lgt_pp_calls_non_terminal_'(Functor, Arity2, _) ->
-		'$lgt_print_message'(warning(unknown_predicates), core, non_terminal_called_but_not_defined(Path, Lines, Type, Entity, Functor//Arity2))	
-	;	'$lgt_print_message'(warning(unknown_predicates), core, predicate_called_but_not_defined(Path, Lines, Type, Entity, Functor/Arity))
+		'$lgt_print_message'(warning(unknown_predicates), core, unknown_non_terminal_called_but_not_defined(Path, Lines, Type, Entity, Functor//Arity2))	
+	;	'$lgt_print_message'(warning(unknown_predicates), core, unknown_predicate_called_but_not_defined(Path, Lines, Type, Entity, Functor/Arity))
 	).
 
 

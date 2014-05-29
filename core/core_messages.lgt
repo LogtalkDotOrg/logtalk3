@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/05/15,
+		date is 2014/05/29,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -333,19 +333,19 @@
 		message_context(File, Lines).
 
 	logtalk::message_tokens(declared_static_predicate_called_but_not_defined(File, Lines, Type, Entity, Predicate), core) -->
-		['This declared static predicate is called but never defined: ~q'-[Predicate], nl],
+		['Declared static predicate called but not defined: ~q'-[Predicate], nl],
 		message_context(File, Lines, Type, Entity).
 
 	logtalk::message_tokens(declared_static_non_terminal_called_but_not_defined(File, Lines, Type, Entity, NonTerminal), core) -->
-		['This declared static non terminal is called but never defined: ~q'-[NonTerminal], nl],
+		['Declared static non terminal called but not defined: ~q'-[NonTerminal], nl],
 		message_context(File, Lines, Type, Entity).
 
-	logtalk::message_tokens(predicate_called_but_not_defined(File, Lines, Type, Entity, Predicate), core) -->
-		['This predicate is called but never defined: ~q'-[Predicate], nl],
+	logtalk::message_tokens(unknown_predicate_called_but_not_defined(File, Lines, Type, Entity, Predicate), core) -->
+		['Unknown predicate called but not defined: ~q'-[Predicate], nl],
 		message_context(File, Lines, Type, Entity).
 
-	logtalk::message_tokens(non_terminal_called_but_not_defined(File, Lines, Type, Entity, NonTerminal), core) -->
-		['This non-terminal is called but never defined: ~q'-[NonTerminal], nl],
+	logtalk::message_tokens(unknown_non_terminal_called_but_not_defined(File, Lines, Type, Entity, NonTerminal), core) -->
+		['Unknown non-terminal called but not defined: ~q'-[NonTerminal], nl],
 		message_context(File, Lines, Type, Entity).
 
 	logtalk::message_tokens(missing_reference_to_built_in_protocol(File, Type, Entity, Protocol), core) -->
