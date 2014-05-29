@@ -13013,8 +13013,8 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_add_def_clause'(+callable, +atom, +integer, -callable, +compilation_context)
 %
-% adds a "def clause" (used to translate a predicate call) and returns
-% the translated clause head
+% adds a "def" clause (used to translate between user predicate names and internal names)
+% and returns the translated clause head
 
 '$lgt_add_def_clause'(Head, Functor, Arity, THead, Ctx) :-
 	functor(HeadTemplate, Functor, Arity),
@@ -13026,14 +13026,7 @@ current_logtalk_flag(Flag, Value) :-
 		true
 	;	'$lgt_pp_category_'(_, _, _, Def, _, _)
 	),
-	(	'$lgt_pp_synchronized_'(HeadTemplate, Mutex) ->
-		(	'$lgt_prolog_feature'(threads, supported) ->
-			Clause =.. [Def, HeadTemplate, ExCtxTemplate, with_mutex(Mutex,THeadTemplate)]
-		;	% in single-threaded systems, with_mutex/2 is equivalent to once/1
-			Clause =.. [Def, HeadTemplate, ExCtxTemplate, once(THeadTemplate)]	
-		)
-	;	Clause =.. [Def, HeadTemplate, ExCtxTemplate, THeadTemplate]
-	),
+	'$lgt_construct_def_clause'(Def, HeadTemplate, ExCtxTemplate, THeadTemplate, Clause),
 	assertz('$lgt_pp_def_'(Clause)),
 	'$lgt_check_for_redefined_built_in'(HeadTemplate, ExCtxTemplate, THeadTemplate, Mode),
 	'$lgt_remember_defined_predicate'(HeadTemplate, Functor, Arity, ExCtxTemplate, THeadTemplate, Mode),
@@ -13045,8 +13038,8 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_add_ddef_clause'(+callable, +atom, +integer, -callable, +compilation_context)
 %
-% adds a "ddef clause" (used to translate a predicate call) and returns
-% the translated clause head
+% adds a "ddef" clause (used to translate between user predicate names and internal names)
+% and returns the translated clause head
 
 '$lgt_add_ddef_clause'(Head, Functor, Arity, THead, Ctx) :-
 	functor(HeadTemplate, Functor, Arity),
@@ -13055,20 +13048,29 @@ current_logtalk_flag(Flag, Value) :-
 	functor(THeadTemplate, TFunctor, TArity),
 	'$lgt_unify_head_thead_arguments'(HeadTemplate, THeadTemplate, ExCtxTemplate),
 	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, DDef, _, _),
-	(	'$lgt_pp_synchronized_'(HeadTemplate, Mutex) ->
-		(	'$lgt_prolog_feature'(threads, supported) ->
-			Clause =.. [DDef, HeadTemplate, ExCtxTemplate, with_mutex(Mutex,THeadTemplate)]
-		;	% in single-threaded systems, with_mutex/2 is equivalent to once/1
-			Clause =.. [DDef, HeadTemplate, ExCtxTemplate, once(THeadTemplate)]	
-		)
-	;	Clause =.. [DDef, HeadTemplate, ExCtxTemplate, THeadTemplate]
-	),
+	'$lgt_construct_def_clause'(DDef, HeadTemplate, ExCtxTemplate, THeadTemplate, Clause),
 	assertz('$lgt_pp_ddef_'(Clause)),
 	'$lgt_check_for_redefined_built_in'(HeadTemplate, ExCtxTemplate, THeadTemplate, Mode),
 	'$lgt_remember_defined_predicate'(HeadTemplate, Functor, Arity, ExCtxTemplate, THeadTemplate, Mode),
 	Head = HeadTemplate,
 	ExCtx = ExCtxTemplate,
 	THead = THeadTemplate.
+
+
+
+% '$lgt_construct_def_clause'(+callable, +callable, +execution_context, +callable, -clause)
+%
+% constructs a "def" or "ddef" clause (used to translate between user predicate names and internal names)
+
+'$lgt_construct_def_clause'(Def, HeadTemplate, ExCtxTemplate, THeadTemplate, Clause) :-
+	(	'$lgt_pp_synchronized_'(HeadTemplate, Mutex) ->
+		(	'$lgt_prolog_feature'(threads, supported) ->
+			Clause =.. [Def, HeadTemplate, ExCtxTemplate, with_mutex(Mutex,THeadTemplate)]
+		;	% in single-threaded systems, with_mutex/2 is equivalent to once/1
+			Clause =.. [Def, HeadTemplate, ExCtxTemplate, once(THeadTemplate)]	
+		)
+	;	Clause =.. [Def, HeadTemplate, ExCtxTemplate, THeadTemplate]
+	).
 
 
 
