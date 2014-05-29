@@ -10778,17 +10778,18 @@ current_logtalk_flag(Flag, Value) :-
  	functor(Pred, Functor, Arity),
 	'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
  	'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head, Lines),
-	(	\+ '$lgt_pp_dynamic_'(Pred),
-		% predicate not declared dynamic in object/category
-		\+ '$lgt_pp_multifile_'(Pred, _),
-		% predicate not declared multifile in object/category
-		% but there is a scope directive for the predicate
-		(	'$lgt_pp_public_'(Functor, Arity)
+	(	(	'$lgt_pp_dynamic_'(Pred)
+		;	'$lgt_pp_multifile_'(Pred, _)
+		) ->
+		functor(TPred0, TFunctor, TArity),
+		'$lgt_unify_head_thead_arguments'(Pred, TPred0, ExCtx),
+		TPred = TPred0
+	;	(	'$lgt_pp_public_'(Functor, Arity)
 		;	'$lgt_pp_protected_'(Functor, Arity)
 		;	'$lgt_pp_private_'(Functor, Arity)
 		) ->
-		% closed-world assumption: calls to static, declared but undefined
-		% predicates must fail instead of throwing an exception,
+		% closed-world assumption: calls to static, non-multifile, declared
+		% but undefined predicates must fail instead of throwing an exception
 		'$lgt_report_undefined_predicate_call'(Mode, Functor/Arity, Lines),
 		TPred = fail
 	;	% call to an unkown predicate, likely a typo or an error
