@@ -45,6 +45,12 @@ require the generation and use of an auxiliary wrapper clause.
 would result in redundant cached clauses used for optimizing the calls to the
 term- and goal-expansion methods.
 
+Tools
+-----
+
+* CHANGED: The `diagrams` tool now uses by default lighter colors for files and
+categories for better contrast when printing diagrams.
+
 
 3.00.0 Beta 5 - May 26, 2014
 ============================

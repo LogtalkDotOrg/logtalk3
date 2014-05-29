@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/04/29,
+		date is 2014/05/29,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -164,16 +164,16 @@
 	node_shape_style_color(prototype, box, filled, beige).
 	node_shape_style_color(instance_or_class, box, filled, yellow).
 	node_shape_style_color(protocol, note, filled, aquamarine).
-	node_shape_style_color(category, component, filled, cyan).
+	node_shape_style_color(category, component, filled, lightcyan).
 	node_shape_style_color(module, tab, filled, gainsboro).
-	node_shape_style_color(file, box, filled, turquoise).
+	node_shape_style_color(file, box, filled, paleturquoise).
 	% external entities to the file or library being documented
 	node_shape_style_color(external_prototype, box, 'filled,dashed', beige).
 	node_shape_style_color(external_instance_or_class, box, 'filled,dashed', yellow).
 	node_shape_style_color(external_protocol, note, 'filled,dashed', aquamarine).
-	node_shape_style_color(external_category, component, 'filled,dashed', cyan).
+	node_shape_style_color(external_category, component, 'filled,dashed', lightcyan).
 	node_shape_style_color(external_module, tab, 'filled,dashed', gainsboro).
-	node_shape_style_color(external_file, box, 'filled,dashed', turquoise).
+	node_shape_style_color(external_file, box, 'filled,dashed', paleturquoise).
 	% predicates
 	node_shape_style_color(predicate, ellipse, filled, gold).
 	node_shape_style_color(external_predicate, ellipse, 'filled,dashed', gold).
