@@ -13055,7 +13055,14 @@ current_logtalk_flag(Flag, Value) :-
 	functor(THeadTemplate, TFunctor, TArity),
 	'$lgt_unify_head_thead_arguments'(HeadTemplate, THeadTemplate, ExCtxTemplate),
 	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, DDef, _, _),
-	Clause =.. [DDef, HeadTemplate, ExCtxTemplate, THeadTemplate],
+	(	'$lgt_pp_synchronized_'(HeadTemplate, Mutex) ->
+		(	'$lgt_prolog_feature'(threads, supported) ->
+			Clause =.. [DDef, HeadTemplate, ExCtxTemplate, with_mutex(Mutex,THeadTemplate)]
+		;	% in single-threaded systems, with_mutex/2 is equivalent to once/1
+			Clause =.. [DDef, HeadTemplate, ExCtxTemplate, once(THeadTemplate)]	
+		)
+	;	Clause =.. [DDef, HeadTemplate, ExCtxTemplate, THeadTemplate]
+	),
 	assertz('$lgt_pp_ddef_'(Clause)),
 	'$lgt_check_for_redefined_built_in'(HeadTemplate, ExCtxTemplate, THeadTemplate, Mode),
 	'$lgt_remember_defined_predicate'(HeadTemplate, Functor, Arity, ExCtxTemplate, THeadTemplate, Mode),
