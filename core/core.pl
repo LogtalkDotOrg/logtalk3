@@ -10746,20 +10746,25 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_remember_called_predicate'(Mode, Functor/Arity,  TCFunctor/TCArity, Head, Lines).
 
 '$lgt_compile_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
-	'$lgt_pp_synchronized_'(Pred, _),
-	!,
+	'$lgt_pp_synchronized_'(Pred, Mutex),
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, Prefix, _, _, ExCtx, Mode, _, Lines),
 	functor(Pred, Functor, Arity),
-	'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
-	(	functor(Head, Functor, Arity) ->
-		% recursive call
-		STFunctor = TFunctor
-	;	% call the mutex protected version of the predicate instead
-		atom_concat(TFunctor, '__sync', STFunctor)
-	),
-	functor(TPred, STFunctor, TArity),
-	'$lgt_unify_head_thead_arguments'(Pred, TPred, ExCtx),
-	'$lgt_remember_called_predicate'(Mode, Functor/Arity, STFunctor/TArity, Head, Lines).
+	\+ (nonvar(Head), functor(Head, Functor, Arity)),
+	% not a recursive call
+	!,
+	(	'$lgt_pp_defines_predicate_'(Pred, ExCtx, TPred0, _) ->
+		(	'$lgt_prolog_feature'(threads, supported) ->
+			TPred = with_mutex(Mutex, TPred0)
+		;	% in single-threaded systems, with_mutex/2 is equivalent to once/1
+			TPred = once(TPred0)
+		)
+	;	'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
+		'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head, Lines),
+		% closed-world assumption: calls to static, declared but undefined
+		% predicates must fail instead of throwing an exception,
+		'$lgt_report_undefined_predicate_call'(Mode, Functor/Arity, Lines),
+		TPred = fail
+	).
 
 '$lgt_compile_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
 	'$lgt_pp_defines_predicate_'(Pred, ExCtx, TPred, _),
@@ -13020,7 +13025,14 @@ current_logtalk_flag(Flag, Value) :-
 		true
 	;	'$lgt_pp_category_'(_, _, _, Def, _, _)
 	),
-	Clause =.. [Def, HeadTemplate, ExCtxTemplate, THeadTemplate],
+	(	'$lgt_pp_synchronized_'(HeadTemplate, Mutex) ->
+		(	'$lgt_prolog_feature'(threads, supported) ->
+			Clause =.. [Def, HeadTemplate, ExCtxTemplate, with_mutex(Mutex,THeadTemplate)]
+		;	% in single-threaded systems, with_mutex/2 is equivalent to once/1
+			Clause =.. [Def, HeadTemplate, ExCtxTemplate, once(THeadTemplate)]	
+		)
+	;	Clause =.. [Def, HeadTemplate, ExCtxTemplate, THeadTemplate]
+	),
 	assertz('$lgt_pp_def_'(Clause)),
 	'$lgt_check_for_redefined_built_in'(HeadTemplate, ExCtxTemplate, THeadTemplate, Mode),
 	'$lgt_remember_defined_predicate'(HeadTemplate, Functor, Arity, ExCtxTemplate, THeadTemplate, Mode),
@@ -14339,10 +14351,6 @@ current_logtalk_flag(Flag, Value) :-
 % are routed to the corresponding auxiliary clauses
 
 '$lgt_fix_predicate_defs' :-
-	(	'$lgt_pp_synchronized_'(_, _) ->
-		'$lgt_fix_synchronized_predicate_defs'
-	;	true
-	),
 	(	'$lgt_pp_coinductive_'(_, _, _, _, _) ->
 		'$lgt_fix_coinductive_predicates_defs'
 	;	true
@@ -14350,59 +14358,6 @@ current_logtalk_flag(Flag, Value) :-
 	% link to the remaining '$lgt_pp_def_'/1 and '$lgt_pp_ddef_'/1 clauses
 	assertz(('$lgt_pp_final_def_'(Clause) :- '$lgt_pp_def_'(Clause))),
 	assertz(('$lgt_pp_final_ddef_'(Clause) :- '$lgt_pp_ddef_'(Clause))).
-
-
-
-% '$lgt_fix_synchronized_predicate_defs'
-%
-% adds mutex wrappers for calling synchronized predicates
-%
-% for Prolog compilers that do not support multi-threading,
-% synchronized predicates are compiled as normal predicates
-
-'$lgt_fix_synchronized_predicate_defs' :-
-	(	'$lgt_prolog_feature'(threads, unsupported) ->
-		% nothing to fix
-		true
-	;	'$lgt_pp_object_'(_, _, _, Def, _, _, _, _, DDef, _, _) ->
-		'$lgt_fix_synchronized_predicate_defs'(Def),
-		'$lgt_fix_synchronized_predicate_ddefs'(DDef)
-	;	'$lgt_pp_category_'(_, _, _, Def, _, _) ->
-		% categories can only define static predicates
-		'$lgt_fix_synchronized_predicate_defs'(Def)
-	;	% protocols don't contain predicate definitions
-		true
-	).
-
-
-'$lgt_fix_synchronized_predicate_defs'(Def) :-
-	Old =.. [Def, Head, ExCtx, THead],
-	New =.. [Def, Head, ExCtx, MHead],
-	'$lgt_pp_synchronized_'(Head, Mutex),
-		retract('$lgt_pp_def_'(Old)),
-		THead =.. [TFunctor| Args],
-		atom_concat(TFunctor, '__sync', MFunctor),
-		MHead =.. [MFunctor| Args],
-		assertz('$lgt_pp_final_def_'(New)),
-		assertz('$lgt_pp_entity_aux_clause_'({(MHead:-with_mutex(Mutex, THead))})),
-	fail.
-
-'$lgt_fix_synchronized_predicate_defs'(_).
-
-
-'$lgt_fix_synchronized_predicate_ddefs'(DDef) :-
-	Old =.. [DDef, Head, ExCtx, THead],
-	New =.. [DDef, Head, ExCtx, MHead],
-	'$lgt_pp_synchronized_'(Head, Mutex),
-		retract('$lgt_pp_ddef_'(Old)),
-		THead =.. [TFunctor| Args],
-		atom_concat(TFunctor, '__sync', MFunctor),
-		MHead =.. [MFunctor| Args],
-		assertz('$lgt_pp_final_ddef_'(New)),
-		assertz('$lgt_pp_entity_aux_clause_'({(MHead:-with_mutex(Mutex, THead))})),
-	fail.
-
-'$lgt_fix_synchronized_predicate_ddefs'(_).
 
 
 

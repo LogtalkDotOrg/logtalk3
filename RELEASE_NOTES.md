@@ -38,6 +38,9 @@ second stage. This greatly simplifies the second stage, improves the overall
 compiler performance, and allows reporting undefined and unknown predicates as
 they are found.
 
+* IMPROVED: Simplified compilation of synchronized predicates, which no longer
+require the generation and use of an auxiliary wrapper clause.
+
 * FIXED: Compiler bug where compiling a list of files using an `hook/1` option
 would result in redundant cached clauses used for optimizing the calls to the
 term- and goal-expansion methods.
