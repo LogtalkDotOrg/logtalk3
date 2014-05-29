@@ -10772,8 +10772,6 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, Prefix, _, _, ExCtx, Mode, _, Lines),
  	functor(Pred, Functor, Arity),
 	'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
- 	functor(TPred0, TFunctor, TArity),
-	'$lgt_unify_head_thead_arguments'(Pred, TPred0, ExCtx),
  	'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head, Lines),
 	(	\+ '$lgt_pp_dynamic_'(Pred),
 		% predicate not declared dynamic in object/category
@@ -10790,6 +10788,8 @@ current_logtalk_flag(Flag, Value) :-
 		TPred = fail
 	;	% call to an unkown predicate, likely a typo or an error
 		'$lgt_report_unknown_predicate_call'(Mode, Functor/Arity, Lines),
+		functor(TPred0, TFunctor, TArity),
+		'$lgt_unify_head_thead_arguments'(Pred, TPred0, ExCtx),
 		TPred = TPred0
 	).
 
