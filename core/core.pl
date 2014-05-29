@@ -13062,14 +13062,18 @@ current_logtalk_flag(Flag, Value) :-
 %
 % constructs a "def" or "ddef" clause (used to translate between user predicate names and internal names)
 
-'$lgt_construct_def_clause'(Def, HeadTemplate, ExCtxTemplate, THeadTemplate, Clause) :-
-	(	'$lgt_pp_synchronized_'(HeadTemplate, Mutex) ->
+'$lgt_construct_def_clause'(Def, Head, ExCtx, THead, Clause) :-
+	(	'$lgt_pp_synchronized_'(Head, Mutex) ->
 		(	'$lgt_prolog_feature'(threads, supported) ->
-			Clause =.. [Def, HeadTemplate, ExCtxTemplate, with_mutex(Mutex,THeadTemplate)]
+			Clause =.. [Def, Head, ExCtx, with_mutex(Mutex,THead)]
 		;	% in single-threaded systems, with_mutex/2 is equivalent to once/1
-			Clause =.. [Def, HeadTemplate, ExCtxTemplate, once(THeadTemplate)]	
+			Clause =.. [Def, Head, ExCtx, once(THead)]	
 		)
-	;	Clause =.. [Def, HeadTemplate, ExCtxTemplate, THeadTemplate]
+	;	'$lgt_pp_coinductive_'(Head, _, TCHead, _, _) ->
+		functor(TCHead, _, TCArity),
+		arg(TCArity, TCHead, ExCtx),
+		Clause =.. [Def, Head, ExCtx, TCHead]
+	;	Clause =.. [Def, Head, ExCtx, THead]
 	).
 
 
@@ -14356,13 +14360,10 @@ current_logtalk_flag(Flag, Value) :-
 
 
 % '$lgt_fix_predicate_defs'
-%
-% ensure that calls to synchronized or coinductive predicates
-% are routed to the corresponding auxiliary clauses
 
 '$lgt_fix_predicate_defs' :-
 	(	'$lgt_pp_coinductive_'(_, _, _, _, _) ->
-		'$lgt_fix_coinductive_predicates_defs'
+		'$lgt_add_coinductive_predicate_aux_clauses'
 	;	true
 	),
 	% link to the remaining '$lgt_pp_def_'/1 and '$lgt_pp_ddef_'/1 clauses
@@ -14370,48 +14371,12 @@ current_logtalk_flag(Flag, Value) :-
 	assertz(('$lgt_pp_final_ddef_'(Clause) :- '$lgt_pp_ddef_'(Clause))).
 
 
-
-% '$lgt_fix_coinductive_predicates_defs'
-%
-% ensure that calls to coinductive predicates are routed to the
-% auxiliary clauses that perform the check for coinductive success
-
-'$lgt_fix_coinductive_predicates_defs' :-
-	(	'$lgt_pp_object_'(_, _, _, Def, _, _, _, _, DDef, _, _) ->
-		'$lgt_fix_coinductive_predicates_defs'(Def),
-		'$lgt_fix_coinductive_predicates_ddefs'(DDef)
-	;	'$lgt_pp_category_'(_, _, _, Def, _, _) ->
-		% categories can only define static predicates
-		'$lgt_fix_coinductive_predicates_defs'(Def)
-	;	% protocols don't contain predicate definitions
-		true
-	).
-
-
-'$lgt_fix_coinductive_predicates_defs'(Def) :-
-	Old =.. [Def, Head, _, _],
-	New =.. [Def, Head, HeadExCtx, TCHead],
+'$lgt_add_coinductive_predicate_aux_clauses' :-
 	'$lgt_pp_coinductive_'(Head, TestHead, TCHead, THead, DHead),
-		retract('$lgt_pp_def_'(Old)),
-		functor(TCHead, _, TCArity),
-		arg(TCArity, TCHead, HeadExCtx),
-		assertz('$lgt_pp_final_def_'(New)),
 		'$lgt_add_coinductive_predicate_aux_clause'(Head, TestHead, TCHead, THead, DHead),
 	fail.
 
-'$lgt_fix_coinductive_predicates_defs'(_).
-
-
-'$lgt_fix_coinductive_predicates_ddefs'(DDef) :-
-	Old =.. [DDef, Head, ExCtx, THead],
-	New =.. [DDef, Head, ExCtx, TCHead],
-	'$lgt_pp_coinductive_'(Head, TestHead, TCHead, THead, DHead),
-		retract('$lgt_pp_ddef_'(Old)),
-		assertz('$lgt_pp_final_ddef_'(New)),
-		'$lgt_add_coinductive_predicate_aux_clause'(Head, TestHead, TCHead, THead, DHead),
-	fail.
-
-'$lgt_fix_coinductive_predicates_ddefs'(_).
+'$lgt_add_coinductive_predicate_aux_clauses'.
 
 
 '$lgt_add_coinductive_predicate_aux_clause'(Head, TestHead, TCHead, THead, DHead) :-
