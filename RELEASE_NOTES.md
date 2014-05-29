@@ -38,6 +38,9 @@ second stage. This greatly simplifies the second stage, improves the overall
 compiler performance, and allows reporting undefined and unknown predicates as
 they are found.
 
+* CHANGED: Message term and message text used for reporting calls to unknown
+predicates.
+
 * IMPROVED: Simplified compilation of synchronized predicates, which no longer
 require the generation and use of an auxiliary wrapper clause.
 
