@@ -55,17 +55,23 @@ diagrams.
 
 Limitations in both the graph language and UML forces the invention of a
 modeling language that can represent all kinds of Logtalk entities and
-entity relations. Currently we use the following DOT shapes (entities)
-and arrows (entity relations):
+entity relations. Currently we use the following DOT shapes (entities,
+predicates, and files) and arrows (entity, predicate, and file relations):
 
 - objects (classes, instances, and prototypes)  
 	`box` (rectangle, yellow for instances/classes and beige for prototypes)
 - protocols  
 	`note` (aqua marine rectangle with folded right-upper corners)
 - categories  
-	`component` (cyan rectangle with two small rectangles intercepting the left side)
+	`component` (light cyan rectangle with two small rectangles intercepting the left side)
 - modules  
 	`tab` (grey rectangle with small tab at top)
+
+- predicates  
+	`ellipse` (gold ellipse)
+
+- files  
+	`box` (pale turquoise rectangle)
 
 - specialization relation  
 	`onormal` (arrow ending with a white triangle)
@@ -80,16 +86,16 @@ and arrows (entity relations):
 - complements relation  
 	`obox` (arrow ending with a white square)
 
-- uses and use_module relations  
+- uses and use module relations  
 	`rdiamond` (arrow ending with a black half diamond)
 
 - file loading relations  
 	`normal` (arrow ending with a black triangle)
 - file dependency relations  
-	`rdiamond` (arrow ending with a black triangle)
+	`rdiamond` (arrow ending with a black half diamond)
 
-The entities that are not part of the files or libraries for which you are
-generating a diagram use a dashed border.
+The entities, predicates, and files that are not part of the files or libraries
+for which you are generating a diagram use a dashed border.
 
 The diagrams `.dot` files are created on the current directory by default.
 These files can be easily converted into a printable format such as SVG, PDF,
