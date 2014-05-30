@@ -44,6 +44,9 @@ predicates.
 * IMPROVED: Simplified compilation of synchronized predicates, which no longer
 require the generation and use of an auxiliary wrapper clause.
 
+* IMPROVED: Simplified compilation of coinductive predicates by moving some of
+the steps from the second compiler stage to the first stage.
+
 * FIXED: Compiler bug where compiling a list of files using an `hook/1` option
 would result in redundant cached clauses used for optimizing the calls to the
 term- and goal-expansion methods.

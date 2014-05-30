@@ -284,8 +284,8 @@
 :- dynamic('$lgt_pp_non_terminal_'/3).
 % '$lgt_pp_multifile_'(Head, Lines)
 :- dynamic('$lgt_pp_multifile_'/2).
-% '$lgt_pp_coinductive_'(Head, TestHead, TCHead, THead, DHead)
-:- dynamic('$lgt_pp_coinductive_'/5).
+% '$lgt_pp_coinductive_'(Head, TestHead, HeadExCtx, TCHead, BodyExCtx, THead, DHead)
+:- dynamic('$lgt_pp_coinductive_'/7).
 
 % '$lgt_pp_object_'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, Flags)
 :- dynamic('$lgt_pp_object_'/11).
@@ -5920,7 +5920,7 @@ current_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_pp_dynamic_'(_)),
 	retractall('$lgt_pp_discontiguous_'(_, _)),
 	retractall('$lgt_pp_multifile_'(_, _)),
-	retractall('$lgt_pp_coinductive_'(_, _, _, _, _)),
+	retractall('$lgt_pp_coinductive_'(_, _, _, _, _, _, _)),
 	retractall('$lgt_pp_mode_'(_, _)),
 	retractall('$lgt_pp_meta_predicate_'(_, _)),
 	retractall('$lgt_pp_predicate_alias_'(_, _, _)),
@@ -7844,11 +7844,11 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_pp_entity_'(_, Entity, Prefix, _, _),
 	'$lgt_compile_predicate_indicator'(Prefix, CFunctor/Arity, TCFunctor/TCArity),
 	functor(TCHead, TCFunctor, TCArity),
-	'$lgt_unify_head_thead_arguments'(Head, TCHead),
+	'$lgt_unify_head_thead_arguments'(Head, TCHead, HeadExCtx),
 	'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	functor(THead, TFunctor, TArity),
-	'$lgt_unify_head_thead_arguments'(Head, THead),
-	assertz('$lgt_pp_coinductive_'(Head, TestHead, TCHead, THead, DHead)),
+	'$lgt_unify_head_thead_arguments'(Head, THead, BodyExCtx),
+	assertz('$lgt_pp_coinductive_'(Head, TestHead, HeadExCtx, TCHead, BodyExCtx, THead, DHead)),
 	assertz('$lgt_pp_predicate_property_'(Entity, Functor/Arity, coinductive(Template))),
 	'$lgt_compile_coinductive_directive'(Preds, Ctx).
 
@@ -10728,15 +10728,13 @@ current_logtalk_flag(Flag, Value) :-
 % goal is a call to a local user-defined predicate
 
 '$lgt_compile_body'(Pred, TCPred, '$lgt_debug'(goal(DPred, TCPred), ExCtx), Ctx) :-
-	'$lgt_pp_coinductive_'(Pred, _, TCPred, _, DPred),
+	'$lgt_pp_coinductive_'(Pred, _, ExCtx, TCPred, _, _, DPred),
 	!,
 	% convert the call to the original coinductive predicate into a call to the auxiliary
 	% predicate whose compiled normal and debug forms are already computed
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
 	functor(Pred, Functor, Arity),
 	functor(TCPred, TCFunctor, TCArity),
-	% set the execution context of the call to the auxiliary predicate
-	arg(TCArity, TCPred, ExCtx),
 	'$lgt_remember_called_predicate'(Mode, Functor/Arity,  TCFunctor/TCArity, Head, Lines).
 
 '$lgt_compile_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
@@ -13063,9 +13061,7 @@ current_logtalk_flag(Flag, Value) :-
 		;	% in single-threaded systems, with_mutex/2 is equivalent to once/1
 			Clause =.. [Def, Head, ExCtx, once(THead)]	
 		)
-	;	'$lgt_pp_coinductive_'(Head, _, TCHead, _, _) ->
-		functor(TCHead, _, TCArity),
-		arg(TCArity, TCHead, ExCtx),
+	;	'$lgt_pp_coinductive_'(Head, _, ExCtx, TCHead, _, _, _) ->
 		Clause =.. [Def, Head, ExCtx, TCHead]
 	;	Clause =.. [Def, Head, ExCtx, THead]
 	).
@@ -13378,7 +13374,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	Meta = no,
 		MetaPredicate = 0
 	),
-	(	'$lgt_pp_coinductive_'(Pred, _, _, _, _) ->
+	(	'$lgt_pp_coinductive_'(Pred, _, _, _, _, _, _) ->
 		Coinductive = 32				% 0b00100000
 	;	Coinductive = 0
 	),
@@ -14366,8 +14362,8 @@ current_logtalk_flag(Flag, Value) :-
 	fail.
 
 '$lgt_compile_predicate_calls' :-
-	'$lgt_pp_coinductive_'(Head, TestHead, TCHead, THead, DHead),
-		'$lgt_add_coinductive_predicate_aux_clause'(Head, TestHead, TCHead, THead, DHead),
+	'$lgt_pp_coinductive_'(Head, TestHead, HeadExCtx, TCHead, BodyExCtx, THead, DHead),
+		'$lgt_add_coinductive_predicate_aux_clause'(Head, TestHead, HeadExCtx, TCHead, BodyExCtx, THead, DHead),
 	fail.
 
 '$lgt_compile_predicate_calls' :-
@@ -14469,13 +14465,9 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-'$lgt_add_coinductive_predicate_aux_clause'(Head, TestHead, TCHead, THead, DHead) :-
+'$lgt_add_coinductive_predicate_aux_clause'(Head, TestHead, HeadExCtx, TCHead, BodyExCtx, THead, DHead) :-
 	'$lgt_execution_context'(HeadExCtx, Sender, This, Self, MetaCallCtx, HeadStack),
 	'$lgt_execution_context'(BodyExCtx, Sender, This, Self, MetaCallCtx, BodyStack),
-	functor(TCHead, _, TCArity),
-	arg(TCArity, TCHead, HeadExCtx),
-	functor(THead, _, TArity),
-	arg(TArity, THead, BodyExCtx),
 	'$lgt_coinductive_success_hook'(Head, Hypothesis, HeadExCtx, HeadStack, BodyStack, Hook),
 	(	'$lgt_compiler_flag'(debug, on) ->
 		'$lgt_pp_entity_'(_, Entity, _, _, _),
