@@ -5235,8 +5235,9 @@ current_logtalk_flag(Flag, Value) :-
 	% set the initial compilation context and the position for compiling the end_of_file term
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, compile(regular), _, Position),
 	'$lgt_compile_file_term'(end_of_file, Ctx),
-	'$lgt_add_entity_source_data'(end, Module),
 	'$lgt_compile_entity'(object, Module, Ctx),
+	'$lgt_add_entity_source_data'(end, Module),
+	'$lgt_save_entity_runtime_clauses',
 	'$lgt_print_message'(silent(compiling), core, compiled_entity(module, Module)),
 	!.
 
@@ -5740,9 +5741,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_entity'(Type, Entity, Ctx) :-
 	'$lgt_generate_entity_code'(Type, Ctx),
 	'$lgt_report_problems'(Type, Entity),
-	'$lgt_write_entity_code',
-	'$lgt_save_entity_runtime_clauses',
-	'$lgt_clean_pp_entity_clauses'.
+	'$lgt_write_entity_code'.
 
 
 
@@ -6802,9 +6801,11 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_logtalk_directive'(end_object, Ctx) :-
 	(	'$lgt_pp_object_'(Obj, _, _, _, _, _, _, _, _, _, _) ->
-		'$lgt_add_entity_source_data'(end, Obj),
 		'$lgt_compile_entity'(object, Obj, Ctx),
+		'$lgt_add_entity_source_data'(end, Obj),
+		'$lgt_save_entity_runtime_clauses',
 		'$lgt_restore_file_operator_table',
+		'$lgt_clean_pp_entity_clauses',
 		'$lgt_print_message'(silent(compiling), core, compiled_entity(object, Obj))
 	;	% entity ending directive mismatch 
 		throw(existence_error(directive, object/1))
@@ -6846,9 +6847,11 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_logtalk_directive'(end_protocol, Ctx) :-
 	(	'$lgt_pp_protocol_'(Ptc, _, _, _, _) ->
-		'$lgt_add_entity_source_data'(end, Ptc),
 		'$lgt_compile_entity'(protocol, Ptc, Ctx),
+		'$lgt_add_entity_source_data'(end, Ptc),
+		'$lgt_save_entity_runtime_clauses',
 		'$lgt_restore_file_operator_table',
+		'$lgt_clean_pp_entity_clauses',
 		'$lgt_print_message'(silent(compiling), core, compiled_entity(protocol, Ptc))
 	;	% entity ending directive mismatch 
 		throw(existence_error(directive, protocol/1))
@@ -6893,9 +6896,11 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_logtalk_directive'(end_category, Ctx) :-
 	(	'$lgt_pp_category_'(Ctg, _, _, _, _, _) ->
-		'$lgt_add_entity_source_data'(end, Ctg),
 		'$lgt_compile_entity'(category, Ctg, Ctx),
+		'$lgt_add_entity_source_data'(end, Ctg),
+		'$lgt_save_entity_runtime_clauses',
 		'$lgt_restore_file_operator_table',
+		'$lgt_clean_pp_entity_clauses',
 		'$lgt_print_message'(silent(compiling), core, compiled_entity(category, Ctg))
 	;	% entity ending directive mismatch 
 		throw(existence_error(directive, category/1))
