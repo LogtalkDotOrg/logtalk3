@@ -3455,7 +3455,7 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_unify_head_thead_arguments'(+callable, +callable)
 % '$lgt_unify_head_thead_arguments'(+callable, +callable, @term)
 %
-% translated clause heads use an extra argument for passing the execution context
+% compiled clause heads use an extra argument for passing the execution context
 
 '$lgt_unify_head_thead_arguments'(Head, THead) :-
 	Head =.. [_| Args],
@@ -3660,8 +3660,8 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_send_to_self_'(+object_identifier, +term, +object_identifier)
 %
-% the last clause of this cache predicate must always exist and must
-% call the predicate that generates the missing cache entry
+% the last clause of this dynamic binding cache predicate must always exist
+% and must call the predicate that generates the missing cache entry
 
 '$lgt_send_to_self_'(Obj, Pred, Sender) :-
 	'$lgt_send_to_self_nv'(Obj, Pred, Sender).
@@ -3742,8 +3742,8 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_send_to_obj_'(+object_identifier, +callable, +object_identifier)
 %
-% the last clause of this cache predicate must always exist and must
-% call the predicate that generates the missing cache entry
+% the last clause of this dynamic binding cache predicate must always exist
+% and must call the predicate that generates the missing cache entry
 
 '$lgt_send_to_obj_'(Obj, Pred, Sender) :-
 	'$lgt_send_to_obj_nv'(Obj, Pred, Sender).
@@ -3874,8 +3874,8 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_send_to_obj_ne_'(+object_identifier, +callable, +object_identifier)
 %
-% the last clause of this cache predicate must always exist and must
-% call the predicate that generates the missing cache entry
+% the last clause of this dynamic binding cache predicate must always exist
+% and must call the predicate that generates the missing cache entry
 
 '$lgt_send_to_obj_ne_'(Obj, Pred, Sender) :-
 	'$lgt_send_to_obj_ne_nv'(Obj, Pred, Sender).
@@ -3980,8 +3980,8 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_obj_super_call_'(+atom, +callable, +execution_context)
 %
-% the last clause of this cache predicate must always exist and must
-% call the predicate that generates the missing cache entry
+% the last clause of this dynamic binding cache predicate must always exist
+% and must call the predicate that generates the missing cache entry
 
 '$lgt_obj_super_call_'(Super, Pred, ExCtx) :-
 	'$lgt_obj_super_call_nv'(Super, Pred, ExCtx).
@@ -4053,8 +4053,8 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_ctg_super_call_'(+category_identifier, +callable, +execution_context)
 %
-% the last clause of this cache predicate must always exist and must
-% call the predicate that generates the missing cache entry
+% the last clause of this dynamic binding cache predicate must always exist
+% and must call the predicate that generates the missing cache entry
 
 '$lgt_ctg_super_call_'(Ctg, Pred, ExCtx) :-
 	'$lgt_ctg_super_call_nv'(Ctg, Pred, ExCtx).
@@ -5012,7 +5012,9 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_compare_file_modification_times'(?atom, +atom, +atom)
 %
-% compare file modification times
+% compare file modification times; same argument order as the
+% standard compare/3 predicate and same possible values for the
+% first argument (<, >, or =)
 
 '$lgt_compare_file_modification_times'(Result, File1, File2) :-
 	'$lgt_file_modification_time'(File1, Time1),
@@ -5229,8 +5231,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_file_term'(end_of_file, _, Position, _) :-
 	'$lgt_pp_module_'(Module),
 	% module definitions start with an opening module/1-2 directive and are assumed
-	% to end at the end of a source file; there is no module closing directive
-	'$lgt_pp_object_'(Module, _, _, _, _, _, _, _, _, _, _),
+	% to end at the end of a source file; there is no module closing directive;
 	% set the initial compilation context and the position for compiling the end_of_file term
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, compile(regular), _, Position),
 	'$lgt_compile_file_term'(end_of_file, Ctx),
@@ -5930,6 +5931,7 @@ current_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_pp_non_terminal_'(_, _, _)),
 	retractall('$lgt_pp_entity_initialization_'(_)),
 	retractall('$lgt_pp_final_entity_initialization_'(_)),
+	retractall('$lgt_pp_entity_meta_directive_'(_)),
 	retractall('$lgt_pp_dcl_'(_)),
 	retractall('$lgt_pp_def_'(_)),
 	retractall('$lgt_pp_ddef_'(_)),
@@ -6365,7 +6367,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_compile_runtime_term'(@term, +compilation_context)
 %
-% translates a runtime term (a clause, directive, or grammar rule)
+% compiles a runtime term (a clause, directive, or grammar rule)
 
 '$lgt_compile_runtime_term'((-), _) :-
 	% catch variables
@@ -6405,7 +6407,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_compile_directive'(+term, +compilation_context)
 %
-% translates a directive
+% compiles a directive
 
 '$lgt_compile_directive'((-), _) :-
 	% catch variables
@@ -6560,7 +6562,7 @@ current_logtalk_flag(Flag, Value) :-
 		;	% Directive == end_category ->
 			throw(error(existence_error(directive, category/1), directive(Directive)))
 		)
-	;	% translate it as a source file-level directive
+	;	% compile it as a source file-level directive
 		catch(
 			'$lgt_compile_file_directive'(Directive, Ctx),
 			Error,
@@ -6605,7 +6607,7 @@ current_logtalk_flag(Flag, Value) :-
 	Directive \= use_module(_),
 	Directive \= ensure_loaded(_),
 	!,
-	% translate query as an initialization goal
+	% compile query as an initialization goal
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 		'$lgt_compiler_flag'(portability, warning) ->
 		'$lgt_increment_compile_warnings_counter',
@@ -6623,7 +6625,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_compile_file_directive'(@nonvar, +compilation_context)
 %
-% translates file-level directives, i.e. directives that are not encapsulated in a Logtalk
+% compiles file-level directives, i.e. directives that are not encapsulated in a Logtalk
 % entity error-checking is delegated in most cases to the back-end Prolog compiler
 
 '$lgt_compile_file_directive'(encoding(_), _) :-
@@ -6725,7 +6727,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_compile_logtalk_directives'(+list, +compilation_context)
 %
-% translates a list of directives
+% compiles a list of directives
 
 '$lgt_compile_logtalk_directives'((-), _) :-
 	% catch variables and lists with unbound tails
@@ -6770,7 +6772,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_logtalk_directive'(object(Obj, Relation1, Relation2, Relation3, Relation4), Ctx) :-
 	'$lgt_compile_logtalk_directive'(object_(Obj, [Relation1, Relation2, Relation3, Relation4]), Ctx).
 
-% auxiliary predicate to translate all variants to the object opening directive
+% auxiliary predicate to compile all variants to the object opening directive
 '$lgt_compile_logtalk_directive'(object_(Obj, Relations), _) :-
 	(	var(Obj) ->
 		throw(instantiation_error)
@@ -6816,7 +6818,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_logtalk_directive'(protocol(Ptc, Relation), Ctx) :-
 	'$lgt_compile_logtalk_directive'(protocol_(Ptc, [Relation]), Ctx).
 
-% auxiliary predicate to translate all variants to the protocol opening directive
+% auxiliary predicate to compile all variants to the protocol opening directive
 '$lgt_compile_logtalk_directive'(protocol_(Ptc, Relations), _) :-
 	(	var(Ptc) ->
 		throw(instantiation_error)
@@ -6863,7 +6865,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_logtalk_directive'(category(Ctg, Relation1, Relation2), Ctx) :-
 	'$lgt_compile_logtalk_directive'(category_(Ctg, [Relation1, Relation2]), Ctx).
 
-% auxiliary predicate to translate all variants to the category opening directive
+% auxiliary predicate to compile all variants to the category opening directive
 '$lgt_compile_logtalk_directive'(category_(Ctg, Relations), _) :-
 	(	var(Ctg) ->
 		throw(instantiation_error)
@@ -8229,7 +8231,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_compile_object_relations'(+list, @object_identifier)
 %
-% translates the relations of an object with other entities
+% compiles the relations of an object with other entities
 
 '$lgt_compile_object_relations'((-), _) :-
 	% catch variables and lists with unbound tails
@@ -8790,7 +8792,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_compile_head'(+callable, -callable, +compilation_context)
 %
-% translates an entity clause head
+% compiles an entity clause head
 
 
 % pre-compiled clause head (we only check for some basic errors)
@@ -8895,7 +8897,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_print_message'(warning(general), core, missing_reference_to_built_in_protocol(Path, Type, Entity, forwarding)),
 	fail.
 
-% translate the head of a clause of another entity predicate (which we assume declared multifile)
+% compile the head of a clause of another entity predicate (which we assume declared multifile)
 
 '$lgt_compile_head'(Other::Head, _, _) :-
 	'$lgt_must_be'(entity_identifier, Other),
@@ -8937,7 +8939,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_comp_ctx_head'(Ctx, Other::Head).
 
-% translate the head of a clause of a module predicate (which we assume declared multifile)
+% compile the head of a clause of a module predicate (which we assume declared multifile)
 
 '$lgt_compile_head'(':'(Module, Head), THead, Ctx) :-
 	!,
@@ -8961,7 +8963,7 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	'$lgt_comp_ctx_head'(Ctx, ':'(Module, Head)).
 
-% translate the head of a clause of a user defined predicate
+% compile the head of a clause of a user defined predicate
 
 '$lgt_compile_head'(Head, THead, Ctx) :-
 	% first clause for this predicate
@@ -8970,8 +8972,11 @@ current_logtalk_flag(Flag, Value) :-
 		\+ '$lgt_pp_public_'(Functor, Arity),
 		\+ '$lgt_pp_protected_'(Functor, Arity),
 		\+ '$lgt_pp_private_'(Functor, Arity) ->
+		% dynamic predicate without a scope directive; can be abolished if declared
+		% in an object and the abolish message sender is the object itself
 		'$lgt_add_ddef_clause'(Head, Functor, Arity, THead, Ctx)
-	;	'$lgt_add_def_clause'(Head, Functor, Arity, THead, Ctx)
+	;	% static predicate and/or scoped dynamic predicate; cannot be abolished
+		'$lgt_add_def_clause'(Head, Functor, Arity, THead, Ctx)
 	).
 
 
@@ -10901,7 +10906,7 @@ current_logtalk_flag(Flag, Value) :-
 %
 % converts a ^/2 goal at runtime (used with bagof/3 and setof/3 calls)
 %
-% returns both the original goal without existential variables and the translated
+% returns both the original goal without existential variables and the compiled
 % goal that will be used as the argument for the bagof/3 and setof/3 calls
 
 '$lgt_convert_quantified_goal'(Goal, Goal, TGoal, TGoal) :-
@@ -10965,7 +10970,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_compile_threaded_call'(+callable, -callable)
 %
-% translates the argument of a call to the built-in predicate threaded/1
+% compiles the argument of a call to the built-in predicate threaded/1
 
 '$lgt_compile_threaded_call'((TGoal; TGoals), '$lgt_threaded_or'(Queue, MTGoals, Results)) :-
 	!,
@@ -11377,7 +11382,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_compile_message_to_object'(@term, @object_identifier, -callable, @object_identifier, @term, +atom)
 %
-% translates a message sending call
+% compiles a message sending call
 
 
 % invalid object identifier
@@ -11632,7 +11637,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_compile_message_to_self'(@term, -callable, @execution_context)
 %
-% translates the sending of a message to self
+% compiles the sending of a message to self
 
 
 % translation performed at runtime
@@ -12313,7 +12318,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_remove_redundant_calls'(+callable, -callable)
 %
-% removes redundant calls to true/0 from a translated clause body (we must
+% removes redundant calls to true/0 from a compiled clause body (we must
 % be careful with control constructs that are opaque to cuts such as call/1
 % and once/1) and folds pairs of consecutive variable unifications
 % (Var1 = Var2, Var2 = Var3) that are usually generated as a by-product of
@@ -12495,7 +12500,7 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_compile_implements_protocol_relation('+list, @object_identifier)
 % '$lgt_compile_implements_protocol_relation'(+list, @category_identifier)
 %
-% translates an "implements" relation between a category or an object and a list of protocols
+% compiles an "implements" relation between a category or an object and a list of protocols
 
 '$lgt_compile_implements_protocol_relation'([], _).
 
@@ -12518,7 +12523,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_compile_imports_category_relation'(+list, @object_identifier)
 %
-% translates an "imports" relation between an object and a list of categories
+% compiles an "imports" relation between an object and a list of categories
 
 '$lgt_compile_imports_category_relation'([], _).
 
@@ -12541,7 +12546,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_compile_instantiates_class_relation'(+list, @object_identifier)
 %
-% translates an "instantiates" relation between an instance and a list of classes
+% compiles an "instantiates" relation between an instance and a list of classes
 
 '$lgt_compile_instantiates_class_relation'([], _).
 
@@ -12566,7 +12571,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_compile_specializes_class_relation'(+list, @object_identifier)
 %
-% translates a "specializes" relation between a class and a list of superclasses
+% compiles a "specializes" relation between a class and a list of superclasses
 
 '$lgt_compile_specializes_class_relation'([], _).
 
@@ -12593,7 +12598,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_compile_extends_object_relation'(+list, @object_identifier)
 %
-% translates an "extends" relation between a prototype and a list of parents
+% compiles an "extends" relation between a prototype and a list of parents
 
 '$lgt_compile_extends_object_relation'([], _).
 
@@ -12622,7 +12627,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_compile_extends_protocol_relation'(+list, @protocol_identifier)
 %
-% translates an "extends" relation between a protocol and a list of protocols
+% compiles an "extends" relation between a protocol and a list of protocols
 
 '$lgt_compile_extends_protocol_relation'([], _).
 
@@ -12645,7 +12650,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_compile_extends_category_relation'(+list, @category_identifier)
 %
-% translates an "extends" relation between a category and a list of categories
+% compiles an "extends" relation between a category and a list of categories
 
 '$lgt_compile_extends_category_relation'([], _).
 
@@ -12668,7 +12673,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_compile_complements_object_relation'(+list, @category_identifier)
 %
-% translates a "complements" relation between a category and a list of objects
+% compiles a "complements" relation between a category and a list of objects
 
 '$lgt_compile_complements_object_relation'(Objs, Ctg) :-
 	'$lgt_pp_category_'(Ctg, _, Dcl, Def, Rnm, _),
@@ -12994,7 +12999,7 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_add_def_clause'(+callable, +atom, +integer, -callable, +compilation_context)
 %
 % adds a "def" clause (used to translate between user predicate names and internal names)
-% and returns the translated clause head
+% and returns the compiled clause head
 
 '$lgt_add_def_clause'(Head, Functor, Arity, THead, Ctx) :-
 	functor(HeadTemplate, Functor, Arity),
@@ -13019,7 +13024,7 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_add_ddef_clause'(+callable, +atom, +integer, -callable, +compilation_context)
 %
 % adds a "ddef" clause (used to translate between user predicate names and internal names)
-% and returns the translated clause head
+% and returns the compiled clause head
 
 '$lgt_add_ddef_clause'(Head, Functor, Arity, THead, Ctx) :-
 	functor(HeadTemplate, Functor, Arity),
@@ -14684,7 +14689,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_write_logtalk_directives'(@stream)
 %
-% writes the translated entity directives
+% writes the compiled entity directives
 
 '$lgt_write_logtalk_directives'(Stream) :-
 	'$lgt_pp_directive_'(Directive),
