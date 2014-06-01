@@ -358,6 +358,9 @@
 % '$lgt_pp_final_entity_initialization_'(Goal)
 :- dynamic('$lgt_pp_final_entity_initialization_'/1).
 
+% '$lgt_pp_entity_meta_directive_'(Directive)
+:- dynamic('$lgt_pp_entity_meta_directive_'/1).
+
 % '$lgt_pp_redefined_built_in_'(Head, ExCtx, THead)
 :- dynamic('$lgt_pp_redefined_built_in_'/3).
 
@@ -6584,22 +6587,7 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_print_message'(warning(portability), core, compiling_proprietary_prolog_directive(Path, Lines, Type, Entity, Directive))
 	;	true
 	),
-	Directive =.. [Functor| Args],
-	Meta =.. [Functor| MArgs],
-	'$lgt_pp_entity_'(_, Entity, Prefix, _, _),
-	% MetaVars = [] as we're compiling a local call
-	'$lgt_comp_ctx'(Ctx, _, Entity, Entity, Entity, Prefix, [], _, _, _, _, _),
-	(	'$lgt_prolog_to_logtalk_meta_argument_specifiers'(MArgs, CMArgs),
-		'$lgt_compile_prolog_meta_arguments'(Args, CMArgs, Ctx, TArgs, DArgs) ->
-		(	'$lgt_compiler_flag'(debug, on) ->
-			TDirective =.. [Functor| DArgs]
-		;	TDirective =.. [Functor| TArgs]
-		),
-		assertz('$lgt_pp_directive_'(TDirective))
-	;	% the template is not usable, report it as an error
-		'$lgt_prolog_meta_directive'(_, Meta),
-		throw(error(domain_error(meta_predicate_template, Meta), directive(Directive)))
-	).
+	assertz('$lgt_pp_entity_meta_directive_'(directive(Directive, Meta))).
 
 '$lgt_compile_directive'(Directive, Ctx) :-
 	'$lgt_pp_module_'(_),
@@ -14378,6 +14366,12 @@ current_logtalk_flag(Flag, Value) :-
 		assertz('$lgt_pp_final_entity_initialization_'(TGoal)),
 	fail.
 
+'$lgt_compile_predicate_calls' :-
+	retract('$lgt_pp_entity_meta_directive_'(Directive)),
+		'$lgt_compile_predicate_calls'(Directive, TDirective),
+		assertz('$lgt_pp_directive_'(TDirective)),
+	fail.
+
 '$lgt_compile_predicate_calls'.
 
 
@@ -14459,6 +14453,22 @@ current_logtalk_flag(Flag, Value) :-
 
 % dynamic predicate fact
 '$lgt_compile_predicate_calls'(dfact(TFact,DHead), (TFact:-DHead)).
+
+% supported Prolog meta-directives (specified in the adapter files) 
+'$lgt_compile_predicate_calls'(directive(Directive,Meta), TDirective) :-
+	Directive =.. [Functor| Args],
+	Meta =.. [Functor| MArgs],
+	'$lgt_pp_entity_'(_, Entity, Prefix, _, _),
+	% MetaVars = [] as we're compiling a local call
+	'$lgt_comp_ctx'(Ctx, _, Entity, Entity, Entity, Prefix, [], _, _, _, [], _),
+	(	'$lgt_compile_prolog_meta_arguments'(Args, MArgs, Ctx, TArgs, DArgs) ->
+		(	'$lgt_compiler_flag'(debug, on) ->
+			TDirective =.. [Functor| DArgs]
+		;	TDirective =.. [Functor| TArgs]
+		)
+	;	% the meta-directive template is not usable, report it as an error
+		throw(domain_error(meta_directive_template, Meta))
+	).
 
 % directive
 '$lgt_compile_predicate_calls'((:- Directive), (:- Directive)).
