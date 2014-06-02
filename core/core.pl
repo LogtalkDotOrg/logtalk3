@@ -11352,7 +11352,7 @@ current_logtalk_flag(Flag, Value) :-
 		assertz('$lgt_pp_non_portable_function_'(Template, Lines))
 	),
 	Expression =.. [_| Expressions],
-	'$lgt_check_non_portable_function_args'(Expressions).
+	'$lgt_check_non_portable_function_args'(Expressions, Lines).
 
 '$lgt_check_non_portable_functions'(_, _).		% variables and numbers
 
