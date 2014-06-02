@@ -311,28 +311,6 @@
 % '$lgt_pp_info_'(Functor/Arity, List) or '$lgt_pp_info_'(Functor//Args, List)
 :- dynamic('$lgt_pp_info_'/2).
 
-% '$lgt_pp_entity_property_'(Entity, Property)
-:- dynamic('$lgt_pp_entity_property_'/2).
-% '$lgt_pp_predicate_property_'(Entity, Predicate, Property)))
-:- dynamic('$lgt_pp_predicate_property_'/3).
-
-% '$lgt_pp_implements_protocol_'(ObjOrCtg, Ptc, Scope)
-:- dynamic('$lgt_pp_implements_protocol_'/3).
-% '$lgt_pp_imports_category_'(Obj, Ctg, Scope)
-:- dynamic('$lgt_pp_imports_category_'/3).
-% '$lgt_pp_instantiates_class_'(Obj, Class, Scope)
-:- dynamic('$lgt_pp_instantiates_class_'/3).
-% '$lgt_pp_specializes_class_'(Class, Superclass, Scope)
-:- dynamic('$lgt_pp_specializes_class_'/3).
-% '$lgt_pp_extends_object_'(Obj, Parent, Scope)
-:- dynamic('$lgt_pp_extends_object_'/3).
-% '$lgt_pp_extends_protocol_'(Ptc, ExtPtc, Scope)
-:- dynamic('$lgt_pp_extends_protocol_'/3).
-% '$lgt_pp_extends_category_'(Ctg, ExtCtg, Scope)
-:- dynamic('$lgt_pp_extends_category_'/3).
-% '$lgt_pp_complemented_object_'(Obj, Ctg, Dcl, Def, Rnm)
-:- dynamic('$lgt_pp_complemented_object_'/5).
-
 % '$lgt_pp_implemented_protocol_'(Ptc, ObjOrCtg, Prefix, Dcl, Scope)
 :- dynamic('$lgt_pp_implemented_protocol_'/5).
 % '$lgt_pp_imported_category_'(Ctg, Obj, Prefix, Dcl, Def, Scope)
@@ -347,6 +325,8 @@
 :- dynamic('$lgt_pp_extended_protocol_'/5).
 % '$lgt_pp_extended_category_'(ExtCtg, Ctg, Prefix, Dcl, Def, Scope)
 :- dynamic('$lgt_pp_extended_category_'/6).
+% '$lgt_pp_complemented_object_'(Obj, Ctg, Dcl, Def, Rnm)
+:- dynamic('$lgt_pp_complemented_object_'/5).
 
 % '$lgt_pp_file_initialization_'(Goal)
 :- dynamic('$lgt_pp_file_initialization_'/1).
@@ -459,8 +439,8 @@
 % '$lgt_pp_file_data_'(Basename, Directory, Path, PrologFile)
 :- dynamic('$lgt_pp_file_data_'/4).
 
-% '$lgt_pp_file_runtime_clause_'(Clause)
-:- dynamic('$lgt_pp_file_runtime_clause_'/1).
+% '$lgt_pp_runtime_clause_'(Clause)
+:- dynamic('$lgt_pp_runtime_clause_'/1).
 
 % '$lgt_pp_cc_if_found_'(Goal)
 :- dynamic('$lgt_pp_cc_if_found_'/1).
@@ -1084,10 +1064,11 @@ create_object(Obj, Relations, Directives, Clauses) :-
 	'$lgt_compile_predicate_calls',
 	'$lgt_generate_object_clauses',
 	'$lgt_generate_object_directives',
-	'$lgt_assert_dynamic_entity',
+	'$lgt_assert_dynamic_entity'(object),
 	'$lgt_restore_global_operator_table',
 	'$lgt_clean_pp_cc_clauses',
-	'$lgt_clean_pp_entity_clauses'.
+	'$lgt_clean_pp_entity_clauses',
+	'$lgt_clean_pp_runtime_clauses'.
 
 
 
@@ -1132,10 +1113,11 @@ create_category(Ctg, Relations, Directives, Clauses) :-
 	'$lgt_compile_predicate_calls',
 	'$lgt_generate_category_clauses',
 	'$lgt_generate_category_directives',
-	'$lgt_assert_dynamic_entity',
+	'$lgt_assert_dynamic_entity'(category),
 	'$lgt_restore_global_operator_table',
 	'$lgt_clean_pp_cc_clauses',
 	'$lgt_clean_pp_entity_clauses',
+	'$lgt_clean_pp_runtime_clauses',
 	% complementing categories can invalidate dynamic binding cache entries
 	(	'$lgt_member'(Relation, Relations),
 		 functor(Relation, complements, _) ->
@@ -1181,10 +1163,11 @@ create_protocol(Ptc, Relations, Directives) :-
 	'$lgt_compile_logtalk_directives'([(dynamic)| Directives], Ctx),
 	'$lgt_generate_protocol_clauses',
 	'$lgt_generate_protocol_directives',
-	'$lgt_assert_dynamic_entity',
+	'$lgt_assert_dynamic_entity'(protocol),
 	'$lgt_restore_global_operator_table',
 	'$lgt_clean_pp_cc_clauses',
-	'$lgt_clean_pp_entity_clauses'.
+	'$lgt_clean_pp_entity_clauses',
+	'$lgt_clean_pp_runtime_clauses'.
 
 
 
@@ -4846,9 +4829,9 @@ current_logtalk_flag(Flag, Value) :-
 % also retracts old runtime clauses for the entity being redefined for safety
 
 '$lgt_report_redefined_entities' :-
-	(	'$lgt_pp_file_runtime_clause_'('$lgt_current_protocol_'(Entity, _, _, _, _))
-	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_category_'(Entity, _, _, _, _, _))
-	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_object_'(Entity, _, _, _, _, _, _, _, _, _, _))
+	(	'$lgt_pp_runtime_clause_'('$lgt_current_protocol_'(Entity, _, _, _, _))
+	;	'$lgt_pp_runtime_clause_'('$lgt_current_category_'(Entity, _, _, _, _, _))
+	;	'$lgt_pp_runtime_clause_'('$lgt_current_object_'(Entity, _, _, _, _, _, _, _, _, _, _))
 	),
 	'$lgt_redefined_entity'(Entity, Type, OldFile, NewFile, Lines),
 	'$lgt_report_redefined_entity'(Type, Entity, OldFile, NewFile, Lines),
@@ -4881,7 +4864,7 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	(	% check file information using the file_lines/4 entity property, if available
 		'$lgt_entity_property_'(Entity, file_lines(OldBasename, OldDirectory, _, _)),
-		'$lgt_pp_file_runtime_clause_'('$lgt_entity_property_'(Entity, file_lines(NewBasename, NewDirectory, Start, End))) ->
+		'$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, file_lines(NewBasename, NewDirectory, Start, End))) ->
 		atom_concat(OldDirectory, OldBasename, OldFile0),
 		atom_concat(NewDirectory, NewBasename, NewFile0), 
 		Lines = Start-End,
@@ -5493,7 +5476,7 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_pp_referenced_category_'(Entity, Start-_)	
 	),
 	'$lgt_pp_term_position_variables_'(_-End, _),
-	assertz('$lgt_pp_entity_property_'(Entity, file_lines(Basename, Directory, Start, End))),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, file_lines(Basename, Directory, Start, End)))),
 	fail.
 
 '$lgt_add_entity_properties'(_, Entity) :-
@@ -5502,7 +5485,7 @@ current_logtalk_flag(Flag, Value) :-
 		Properties = [caller(Caller), line_count(Line)]
 	;	Properties = [caller(Caller), line_count(Line), as(AliasFunctor/AliasArity)]
 	),
-	assertz('$lgt_pp_entity_property_'(Entity, calls(Object::Functor/Arity, Properties))),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, calls(Object::Functor/Arity, Properties)))),
 	fail.
 
 '$lgt_add_entity_properties'(_, Entity) :-
@@ -5511,39 +5494,39 @@ current_logtalk_flag(Flag, Value) :-
 		Properties = [caller(Caller), line_count(Line)]
 	;	Properties = [caller(Caller), line_count(Line), as(AliasFunctor/AliasArity)]
 	),
-	assertz('$lgt_pp_entity_property_'(Entity, calls(':'(Module,Functor/Arity), Properties))),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, calls(':'(Module,Functor/Arity), Properties)))),
 	fail.
 
 '$lgt_add_entity_properties'(_, Entity) :-
 	'$lgt_pp_calls_self_predicate_'(Predicate, Caller, Line-_),
-	assertz('$lgt_pp_entity_property_'(Entity, calls(::Predicate, [caller(Caller), line_count(Line)]))),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, calls(::Predicate, [caller(Caller), line_count(Line)])))),
 	fail.
 
 '$lgt_add_entity_properties'(_, Entity) :-
 	'$lgt_pp_calls_super_predicate_'(Predicate, Caller, Line-_),
-	assertz('$lgt_pp_entity_property_'(Entity, calls(^^Predicate, [caller(Caller), line_count(Line)]))),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, calls(^^Predicate, [caller(Caller), line_count(Line)])))),
 	fail.
 
 '$lgt_add_entity_properties'(_, Entity) :-
 	'$lgt_pp_calls_predicate_'(Predicate, _, Caller, Line-_),
-	assertz('$lgt_pp_entity_property_'(Entity, calls(Predicate, [caller(Caller), line_count(Line)]))),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, calls(Predicate, [caller(Caller), line_count(Line)])))),
 	fail.
 
 '$lgt_add_entity_properties'(_, Entity) :-
 	'$lgt_pp_info_'(Info),
-	assertz('$lgt_pp_entity_property_'(Entity, info(Info))),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, info(Info)))),
 	fail.
 
 '$lgt_add_entity_properties'(_, Entity) :-
-	findall(Define, '$lgt_pp_predicate_property_'(Entity, _, flags_clauses_line(_, Define, _)), Defines),
+	findall(Define, '$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, _, flags_clauses_line(_, Define, _))), Defines),
 	'$lgt_sum_list'(Defines, TotalDefines),
-	findall(AuxDefine, ('$lgt_pp_predicate_property_'(Entity, _, flags_clauses_line(Flags, AuxDefine, _)), Flags /\ 1 =:= 1), AuxDefines),
+	findall(AuxDefine, ('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, _, flags_clauses_line(Flags, AuxDefine, _))), Flags /\ 1 =:= 1), AuxDefines),
 	'$lgt_sum_list'(AuxDefines, TotalAuxDefines),
-	findall(Provide, '$lgt_pp_predicate_property_'(_, _, number_of_clauses_from(Provide, Entity)), Provides),
+	findall(Provide, '$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(_, _, number_of_clauses_from(Provide, Entity))), Provides),
 	'$lgt_sum_list'(Provides, TotalProvides),
 	Total is TotalDefines + TotalProvides,
 	TotalUser is Total - TotalAuxDefines,
-	assertz('$lgt_pp_entity_property_'(Entity, number_of_clauses(Total, TotalUser))),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, number_of_clauses(Total, TotalUser)))),
 	fail.
 
 '$lgt_add_entity_properties'(_, _).
@@ -5557,7 +5540,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_add_entity_predicate_properties'(Entity) :-
 	'$lgt_pp_number_of_clauses_'(Other, Functor, Arity, N),
-	assertz('$lgt_pp_predicate_property_'(Other, Functor/Arity, number_of_clauses_from(N, Entity))),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Other, Functor/Arity, number_of_clauses_from(N, Entity)))),
 	fail.
 
 '$lgt_add_entity_predicate_properties'(Entity) :-
@@ -5576,24 +5559,24 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_pp_predicate_definition_line_'(Functor, Arity, Line)
 	),
 	'$lgt_pp_number_of_clauses_'(Functor, Arity, N),
-	assertz('$lgt_pp_predicate_property_'(Entity, Functor/Arity, flags_clauses_line(Flags, N, Line))),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/Arity, flags_clauses_line(Flags, N, Line)))),
 	fail.
 
 '$lgt_add_entity_predicate_properties'(Entity) :-
 	'$lgt_pp_mode_'(Mode, Solutions),
 		functor(Mode, Functor, Arity),
-		assertz('$lgt_pp_predicate_property_'(Entity, Functor/Arity, mode(Mode, Solutions))),
+		assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/Arity, mode(Mode, Solutions)))),
 	fail.
 
 '$lgt_add_entity_predicate_properties'(Entity) :-
 	'$lgt_pp_info_'(Functor/Arity, Info),
-		assertz('$lgt_pp_predicate_property_'(Entity, Functor/Arity, info(Info))),
+		assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/Arity, info(Info)))),
 	fail.
 
 '$lgt_add_entity_predicate_properties'(Entity) :-
 	'$lgt_pp_info_'(Functor//Arity, Info),
 		ExtArity is Arity + 2,
-		assertz('$lgt_pp_predicate_property_'(Entity, Functor/ExtArity, info(Info))),
+		assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/ExtArity, info(Info)))),
 	fail.
 
 '$lgt_add_entity_predicate_properties'(_).
@@ -5735,7 +5718,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_report_problems'(Type, Entity),
 	'$lgt_write_entity_code',
 	'$lgt_add_entity_source_data'(Type, Entity),
-	'$lgt_save_entity_runtime_clauses',
+	'$lgt_save_entity_runtime_clause'(Type),
 	'$lgt_restore_file_operator_table',
 	'$lgt_clean_pp_entity_clauses'.
 
@@ -5829,18 +5812,22 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% saves entity runtime clauses in order to be able to check for redefined
-% entities when loading the intermediate Prolog files generated by the
-% Logtalk compiler and for writing the entity runtime multifile and dynamic
-% directives and the entity runtime clauses for all defined entities at the
-% end of the generated Prolog file
+% saves the entity runtime clause after computing the final value of its flags
 
-'$lgt_save_entity_runtime_clauses' :-
-	'$lgt_pp_entity_runtime_clause'(Clause),
-	assertz('$lgt_pp_file_runtime_clause_'(Clause)),
-	fail.
+'$lgt_save_entity_runtime_clause'(object) :-
+	'$lgt_pp_object_'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, _),
+	'$lgt_compile_entity_flags'(object, Flags),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_current_object_'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, Flags))).
 
-'$lgt_save_entity_runtime_clauses'.
+'$lgt_save_entity_runtime_clause'(protocol) :-
+	'$lgt_pp_protocol_'(Ptc, Prefix, Dcl, Rnm, _),
+	'$lgt_compile_entity_flags'(protocol, Flags),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_current_protocol_'(Ptc, Prefix, Dcl, Rnm, Flags))).
+
+'$lgt_save_entity_runtime_clause'(category) :-
+	'$lgt_pp_category_'(Ctg, Prefix, Dcl, Def, Rnm, _),
+	'$lgt_compile_entity_flags'(category, Flags),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_current_category_'(Ctg, Prefix, Dcl, Def, Rnm, Flags))).
 
 
 
@@ -5853,7 +5840,6 @@ current_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_pp_file_bom_'(_)),
 	retractall('$lgt_pp_file_data_'(_, _, _, _)),
 	retractall('$lgt_pp_file_compiler_flag_'(_, _)),
-	retractall('$lgt_pp_file_runtime_clause_'(_)),
 	retractall('$lgt_pp_term_position_variables_'(_, _)),
 	% a Logtalk source file may contain only plain Prolog terms
 	% instead of plain Prolog terms intermixed between entities
@@ -5865,7 +5851,8 @@ current_logtalk_flag(Flag, Value) :-
 	% retract all file-specific term and goal expansion hooks
 	retractall('$lgt_pp_hook_term_expansion_'(_, _)),
 	retractall('$lgt_pp_hook_goal_expansion_'(_, _)),
-	'$lgt_clean_pp_cc_clauses'.
+	'$lgt_clean_pp_cc_clauses',
+	'$lgt_clean_pp_runtime_clauses'.
 
 
 
@@ -5878,6 +5865,13 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
+% cleans up the dynamic predicate used for entity runtime clauses
+
+'$lgt_clean_pp_runtime_clauses' :-
+	retractall('$lgt_pp_runtime_clause_'(_)).
+
+
+
 % cleans up all dynamic predicates used during entity compilation
 
 '$lgt_clean_pp_entity_clauses' :-
@@ -5887,15 +5881,6 @@ current_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_pp_category_'(_, _, _, _, _, _)),
 	retractall('$lgt_pp_entity_'(_, _, _, _, _)),
 	retractall('$lgt_pp_module_'(_)),
-	retractall('$lgt_pp_entity_property_'(_, _)),
-	retractall('$lgt_pp_predicate_property_'(_, _, _)),
-	retractall('$lgt_pp_implements_protocol_'(_, _, _)),
-	retractall('$lgt_pp_imports_category_'(_, _, _)),
-	retractall('$lgt_pp_instantiates_class_'(_, _, _)),
-	retractall('$lgt_pp_specializes_class_'(_, _, _)),
-	retractall('$lgt_pp_extends_object_'(_, _, _)),
-	retractall('$lgt_pp_extends_protocol_'(_, _, _)),
-	retractall('$lgt_pp_extends_category_'(_, _, _)),
 	retractall('$lgt_pp_complemented_object_'(_, _, _, _, _)),
 	retractall('$lgt_pp_implemented_protocol_'(_, _, _, _, _)),
 	retractall('$lgt_pp_imported_category_'(_, _, _, _, _, _)),
@@ -6118,55 +6103,7 @@ current_logtalk_flag(Flag, Value) :-
 	op(Priority, Specifier, Operator),
 	assertz('$lgt_pp_entity_operator_'(Priority, Specifier, Operator, Scope)),
 	'$lgt_pp_entity_'(_, Entity, _, _, _),
-	assertz('$lgt_pp_entity_property_'(Entity, op(Priority, Specifier, Operator, Scope))).
-
-
-
-% '$lgt_pp_entity_runtime_clause'(-compound)
-%
-% returns runtime table clauses for the entity being compiled
-
-'$lgt_pp_entity_runtime_clause'('$lgt_entity_property_'(Entity, Property)) :-
-	'$lgt_pp_entity_property_'(Entity, Property).
-
-'$lgt_pp_entity_runtime_clause'('$lgt_predicate_property_'(Entity, Predicate, Property)) :-
-	'$lgt_pp_predicate_property_'(Entity, Predicate, Property).
-
-'$lgt_pp_entity_runtime_clause'('$lgt_implements_protocol_'(ObjOrCtg, Ptc, Scope)) :-
-	'$lgt_pp_implements_protocol_'(ObjOrCtg, Ptc, Scope).
-
-'$lgt_pp_entity_runtime_clause'('$lgt_imports_category_'(Obj, Ctg, Scope)) :-
-	'$lgt_pp_imports_category_'(Obj, Ctg, Scope).
-
-'$lgt_pp_entity_runtime_clause'('$lgt_instantiates_class_'(Obj, Class, Scope)) :-
-	'$lgt_pp_instantiates_class_'(Obj, Class, Scope).
-
-'$lgt_pp_entity_runtime_clause'('$lgt_specializes_class_'(Class, Superclass, Scope)) :-
-	'$lgt_pp_specializes_class_'(Class, Superclass, Scope).
-
-'$lgt_pp_entity_runtime_clause'('$lgt_extends_object_'(Obj, Parent, Scope)) :-
-	'$lgt_pp_extends_object_'(Obj, Parent, Scope).
-
-'$lgt_pp_entity_runtime_clause'('$lgt_extends_protocol_'(Ptc, ExtPtc, Scope)) :-
-	'$lgt_pp_extends_protocol_'(Ptc, ExtPtc, Scope).
-
-'$lgt_pp_entity_runtime_clause'('$lgt_extends_category_'(Ctg, ExtCtg, Scope)) :-
-	'$lgt_pp_extends_category_'(Ctg, ExtCtg, Scope).
-
-'$lgt_pp_entity_runtime_clause'('$lgt_complemented_object_'(Obj, Ctg, Dcl, Def, Rnm)) :-
-	'$lgt_pp_complemented_object_'(Obj, Ctg, Dcl, Def, Rnm).
-
-'$lgt_pp_entity_runtime_clause'(Clause) :-
-	(	'$lgt_pp_object_'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, _) ->
-		'$lgt_compile_entity_flags'(object, Flags),
-		Clause = '$lgt_current_object_'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, Flags)
-	;	'$lgt_pp_protocol_'(Ptc, Prefix, Dcl, Rnm, _) ->
-		'$lgt_compile_entity_flags'(protocol, Flags),
-		Clause = '$lgt_current_protocol_'(Ptc, Prefix, Dcl, Rnm, Flags)
-	;	'$lgt_pp_category_'(Ctg, Prefix, Dcl, Def, Rnm, _),
-		'$lgt_compile_entity_flags'(category, Flags),
-		Clause = '$lgt_current_category_'(Ctg, Prefix, Dcl, Def, Rnm, Flags)
-	).
+	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, op(Priority, Specifier, Operator, Scope)))).
 
 
 
@@ -6773,11 +6710,11 @@ current_logtalk_flag(Flag, Value) :-
 		throw(instantiation_error)
 	;	\+ callable(Obj) ->
 		throw(type_error(object_identifier, Obj))
-	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, _)) ->
+	;	'$lgt_pp_runtime_clause_'('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, _)) ->
 		throw(permission_error(modify, object, Obj))
-	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_protocol_'(Obj, _, _, _, _)) ->
+	;	'$lgt_pp_runtime_clause_'('$lgt_current_protocol_'(Obj, _, _, _, _)) ->
 		throw(permission_error(modify, protocol, Obj))
-	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_category_'(Obj, _, _, _, _, _)) ->
+	;	'$lgt_pp_runtime_clause_'('$lgt_current_category_'(Obj, _, _, _, _, _)) ->
 		throw(permission_error(modify, category, Obj))
 	;	functor(Obj, '{}', 1) ->
 		throw(permission_error(create, object, Obj))
@@ -6816,11 +6753,11 @@ current_logtalk_flag(Flag, Value) :-
 		throw(instantiation_error)
 	;	\+ atom(Ptc) ->
 		throw(type_error(protocol_identifier, Ptc))
-	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_object_'(Ptc, _, _, _, _, _, _, _, _, _, _)) ->
+	;	'$lgt_pp_runtime_clause_'('$lgt_current_object_'(Ptc, _, _, _, _, _, _, _, _, _, _)) ->
 		throw(permission_error(modify, object, Ptc))
-	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_protocol_'(Ptc, _, _, _, _)) ->
+	;	'$lgt_pp_runtime_clause_'('$lgt_current_protocol_'(Ptc, _, _, _, _)) ->
 		throw(permission_error(modify, protocol, Ptc))
-	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_category_'(Ptc, _, _, _, _, _)) ->
+	;	'$lgt_pp_runtime_clause_'('$lgt_current_category_'(Ptc, _, _, _, _, _)) ->
 		throw(permission_error(modify, category, Ptc))
 	;	'$lgt_pp_entity_'(Type, _, _, _, _) ->
 		(	Type == object ->
@@ -6860,11 +6797,11 @@ current_logtalk_flag(Flag, Value) :-
 		throw(instantiation_error)
 	;	\+ callable(Ctg) ->
 		throw(type_error(category_identifier, Ctg))
-	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_object_'(Ctg, _, _, _, _, _, _, _, _, _, _)) ->
+	;	'$lgt_pp_runtime_clause_'('$lgt_current_object_'(Ctg, _, _, _, _, _, _, _, _, _, _)) ->
 		throw(permission_error(modify, object, Ctg))
-	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_protocol_'(Ctg, _, _, _, _)) ->
+	;	'$lgt_pp_runtime_clause_'('$lgt_current_protocol_'(Ctg, _, _, _, _)) ->
 		throw(permission_error(modify, protocol, Ctg))
-	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_category_'(Ctg, _, _, _, _, _)) ->
+	;	'$lgt_pp_runtime_clause_'('$lgt_current_category_'(Ctg, _, _, _, _, _)) ->
 		throw(permission_error(modify, category, Ctg))
 	;	'$lgt_pp_entity_'(Type, _, _, _, _) ->
 		(	Type == object ->
@@ -7432,7 +7369,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	'$lgt_compiler_flag'(source_data, on),
 		'$lgt_pp_term_position_variables_'(Line-_, _) ->
 		'$lgt_pp_entity_'(_, Entity, _, _, _),
-		assertz('$lgt_pp_predicate_property_'(Entity, PredicateIndicator, declaration_line(Line)))
+		assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, PredicateIndicator, declaration_line(Line))))
 	;	true
 	).
 
@@ -7824,7 +7761,7 @@ current_logtalk_flag(Flag, Value) :-
 	functor(THead, TFunctor, TArity),
 	'$lgt_unify_head_thead_arguments'(Head, THead, BodyExCtx),
 	assertz('$lgt_pp_coinductive_'(Head, TestHead, HeadExCtx, TCHead, BodyExCtx, THead, DHead)),
-	assertz('$lgt_pp_predicate_property_'(Entity, Functor/Arity, coinductive(Template))),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/Arity, coinductive(Template)))),
 	'$lgt_compile_coinductive_directive'(Preds, Ctx).
 
 '$lgt_compile_coinductive_directive'([Pred| _], _) :-
@@ -8761,7 +8698,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	'$lgt_compiler_flag'(source_data, on),
 		'$lgt_pp_term_position_variables_'(Line-_, _) ->
 		'$lgt_pp_entity_'(_, Entity, _, _, _),
-		assertz('$lgt_pp_predicate_property_'(Other, Functor/Arity, definition_line_from(Line,Entity)))
+		assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Other, Functor/Arity, definition_line_from(Line,Entity))))
 	;	true
 	).
 
@@ -11041,8 +10978,8 @@ current_logtalk_flag(Flag, Value) :-
 	assertz('$lgt_pp_def_'(Clause)),
 	% add, if applicable, source data information for the auxiliary clause
 	(	'$lgt_compiler_flag'(source_data, on) ->
-		assertz('$lgt_pp_predicate_property_'(Entity, HelperFunctor/Arity, auxiliary)),
-		assertz('$lgt_pp_predicate_property_'(Entity, HelperFunctor/Arity, number_of_clauses(1)))
+		assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, HelperFunctor/Arity, auxiliary))),
+		assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, HelperFunctor/Arity, number_of_clauses(1))))
 	;	true
 	),
 	(	'$lgt_prolog_feature'(modules, supported),
@@ -11825,10 +11762,10 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_super_call'(Pred, TPred, Ctx) :-
 	'$lgt_pp_object_'(Obj, _, _, _, Super, _, _, _, _, _, _),
 	!,
-	(	\+ '$lgt_pp_extends_object_'(_, _, _),
-		\+ '$lgt_pp_instantiates_class_'(_, _, _),
-		\+ '$lgt_pp_specializes_class_'(_, _, _),
-		\+ '$lgt_pp_imports_category_'(_, _, _) ->
+	(	\+ '$lgt_pp_extended_object_'(_, _, _, _, _, _, _, _, _, _, _),
+		\+ '$lgt_pp_instantiated_class_'(_, _, _, _, _, _, _, _, _, _, _),
+		\+ '$lgt_pp_specialized_class_'(_, _, _, _, _, _, _, _, _, _, _),
+		\+ '$lgt_pp_imported_category_'(_, _, _, _, _, _) ->
 		% invalid goal (no ancestor entity)
 		throw(existence_error(ancestor, object))
 	;	var(Pred) ->
@@ -11850,7 +11787,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_super_call'(Pred, TPred, Ctx) :-
 	'$lgt_pp_category_'(Ctg, _, _, _, _, _),
-	(	\+ '$lgt_pp_extends_category_'(_, _, _) ->
+	(	\+ '$lgt_pp_extended_category_'(_, _, _, _, _, _) ->
 		% invalid goal (not an extended category)
 		throw(existence_error(ancestor, category))
 	;	var(Pred) ->
@@ -12427,9 +12364,9 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_term_template'(Obj, GObj)
 	),
 	'$lgt_add_referenced_object'(GObj),
-	(	'$lgt_pp_instantiates_class_'(_, _, _) ->
+	(	'$lgt_pp_instantiated_class_'(_, _, _, _, _, _, _, _, _, _, _) ->
 		'$lgt_construct_ic_functors'(GObj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm)
-	;	'$lgt_pp_specializes_class_'(_, _, _) ->
+	;	'$lgt_pp_specialized_class_'(_, _, _, _, _, _, _, _, _, _, _) ->
 		'$lgt_construct_ic_functors'(GObj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm)
 	;	'$lgt_construct_prototype_functors'(GObj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm)
 	),
@@ -12498,7 +12435,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	'$lgt_is_category'(Ptc) ->
 		throw(type_error(protocol, Ptc))
 	;	'$lgt_add_referenced_protocol'(Ptc),
-		assertz('$lgt_pp_implements_protocol_'(ObjOrCtg, Ptc, Scope)),
+		assertz('$lgt_pp_runtime_clause_'('$lgt_implements_protocol_'(ObjOrCtg, Ptc, Scope))),
 		'$lgt_construct_protocol_functors'(Ptc, Prefix, Dcl, _),
 		assertz('$lgt_pp_implemented_protocol_'(Ptc, ObjOrCtg, Prefix, Dcl, Scope)),
 		'$lgt_compile_implements_protocol_relation'(Refs, ObjOrCtg)
@@ -12521,7 +12458,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	'$lgt_is_protocol'(Ctg) ->
 		throw(type_error(category, Ctg))
 	;	'$lgt_add_referenced_category'(Ctg),
-		assertz('$lgt_pp_imports_category_'(Obj, Ctg, Scope)),
+		assertz('$lgt_pp_runtime_clause_'('$lgt_imports_category_'(Obj, Ctg, Scope))),
 		'$lgt_construct_category_functors'(Ctg, Prefix, Dcl, Def, _),
 		assertz('$lgt_pp_imported_category_'(Ctg, Obj, Prefix, Dcl, Def, Scope)),
 		'$lgt_compile_imports_category_relation'(Refs, Obj)
@@ -12543,10 +12480,10 @@ current_logtalk_flag(Flag, Value) :-
 		throw(type_error(object, Class))
 	;	'$lgt_is_prototype'(Class) ->
 		throw(domain_error(class, Class))
-	;	'$lgt_pp_extends_object_'(Obj, _, _) ->
+	;	'$lgt_pp_extended_object_'(_, _, _, _, _, _, _, _, _, _, _) ->
 		throw(permission_error(instantiate, class, Class))
 	;	'$lgt_add_referenced_object'(Class),
-		assertz('$lgt_pp_instantiates_class_'(Obj, Class, Scope)),
+		assertz('$lgt_pp_runtime_clause_'('$lgt_instantiates_class_'(Obj, Class, Scope))),
 		'$lgt_construct_ic_functors'(Class, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, _),
 		assertz('$lgt_pp_instantiated_class_'(Class, Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Scope)),
 		'$lgt_compile_instantiates_class_relation'(Refs, Obj)
@@ -12570,10 +12507,10 @@ current_logtalk_flag(Flag, Value) :-
 		throw(type_error(object, Superclass))
 	;	'$lgt_is_prototype'(Class) ->
 		throw(domain_error(class, Class))
-	;	'$lgt_pp_extends_object_'(Class, _, _) ->
+	;	'$lgt_pp_extended_object_'(_, _, _, _, _, _, _, _, _, _, _) ->
 		throw(permission_error(specialize, class, Class))
 	;	'$lgt_add_referenced_object'(Superclass),
-		assertz('$lgt_pp_specializes_class_'(Class, Superclass, Scope)),
+		assertz('$lgt_pp_runtime_clause_'('$lgt_specializes_class_'(Class, Superclass, Scope))),
 		'$lgt_construct_ic_functors'(Superclass, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, _),
 		assertz('$lgt_pp_specialized_class_'(Superclass, Class, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Scope)),
 		'$lgt_compile_specializes_class_relation'(Refs, Class)
@@ -12597,12 +12534,12 @@ current_logtalk_flag(Flag, Value) :-
 		throw(type_error(object, Parent))
 	;	'$lgt_is_class'(Parent) ->
 		throw(domain_error(prototype, Parent))
-	;	'$lgt_pp_instantiates_class_'(Obj, _, _) ->
+	;	'$lgt_pp_instantiated_class_'(_, _, _, _, _, _, _, _, _, _, _) ->
 		throw(permission_error(extend, prototype, Parent))
-	;	'$lgt_pp_specializes_class_'(Obj, _, _) ->
+	;	'$lgt_pp_specialized_class_'(_, _, _, _, _, _, _, _, _, _, _) ->
 		throw(permission_error(extend, prototype, Parent))
 	;	'$lgt_add_referenced_object'(Parent),
-		assertz('$lgt_pp_extends_object_'(Obj, Parent, Scope)),
+		assertz('$lgt_pp_runtime_clause_'('$lgt_extends_object_'(Obj, Parent, Scope))),
 		'$lgt_construct_prototype_functors'(Parent, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, _),
 		assertz('$lgt_pp_extended_object_'(Parent, Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Scope)),
 		'$lgt_compile_extends_object_relation'(Refs, Obj)
@@ -12625,7 +12562,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	'$lgt_is_category'(ExtPtc) ->
 		throw(type_error(protocol, ExtPtc))
 	;	'$lgt_add_referenced_protocol'(ExtPtc),
-		assertz('$lgt_pp_extends_protocol_'(Ptc, ExtPtc, Scope)),
+		assertz('$lgt_pp_runtime_clause_'('$lgt_extends_protocol_'(Ptc, ExtPtc, Scope))),
 		'$lgt_construct_protocol_functors'(ExtPtc, Prefix, Dcl, _),
 		assertz('$lgt_pp_extended_protocol_'(ExtPtc, Ptc, Prefix, Dcl, Scope)),
 		'$lgt_compile_extends_protocol_relation'(Refs, Ptc)
@@ -12648,7 +12585,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	'$lgt_is_protocol'(ExtCtg) ->
 		throw(type_error(category, ExtCtg))
 	;	'$lgt_add_referenced_category'(ExtCtg),
-		assertz('$lgt_pp_extends_category_'(Ctg, ExtCtg, Scope)),
+		assertz('$lgt_pp_runtime_clause_'('$lgt_extends_category_'(Ctg, ExtCtg, Scope))),
 		'$lgt_construct_category_functors'(ExtCtg, Prefix, Dcl, Def, _),
 		assertz('$lgt_pp_extended_category_'(ExtCtg, Ctg, Prefix, Dcl, Def, Scope)),
 		'$lgt_compile_extends_category_relation'(Refs, Ctg)
@@ -12683,7 +12620,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags) ->
 		% loaded object
 		true
-	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags))
+	;	'$lgt_pp_runtime_clause_'('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags))
 		% object being redefined in the same file as the complementing category;
 		% possible but unlikely in practice (except, maybe, in classroom examples)
 	),
@@ -12697,6 +12634,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_complements_object_relation'([Obj| Objs], Ctg, Dcl, Def, Rnm) :-
 	'$lgt_add_referenced_object'(Obj),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_complemented_object_'(Obj, Ctg, Dcl, Def, Rnm))),
 	assertz('$lgt_pp_complemented_object_'(Obj, Ctg, Dcl, Def, Rnm)),
 	'$lgt_compile_complements_object_relation'(Objs, Ctg, Dcl, Def, Rnm).
 
@@ -12709,19 +12647,19 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_is_prototype'(Obj) :-
 	(	'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, _) ->
 		% existing object; first, check that is not being compiled as a different kind of entity
-		\+ '$lgt_pp_file_runtime_clause_'('$lgt_current_protocol_'(Obj, _, _, _, _)),
-		\+ '$lgt_pp_file_runtime_clause_'('$lgt_current_category_'(Obj, _, _, _, _, _)),
+		\+ '$lgt_pp_runtime_clause_'('$lgt_current_protocol_'(Obj, _, _, _, _)),
+		\+ '$lgt_pp_runtime_clause_'('$lgt_current_category_'(Obj, _, _, _, _, _)),
 		% second, check that it's a prototype
 		\+ '$lgt_instantiates_class_'(Obj, _, _),
 		\+ '$lgt_instantiates_class_'(_, Obj, _),
 		\+ '$lgt_specializes_class_'(Obj, _, _),
 		\+ '$lgt_specializes_class_'(_, Obj, _)
-	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, _)) ->
+	;	'$lgt_pp_runtime_clause_'('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, _)) ->
 		% object defined previously in the same file; check that it's a prototype
-		\+ '$lgt_pp_file_runtime_clause_'('$lgt_instantiates_class_'(Obj, _, _)),
-		\+ '$lgt_pp_file_runtime_clause_'('$lgt_instantiates_class_'(_, Obj, _)),
-		\+ '$lgt_pp_file_runtime_clause_'('$lgt_specializes_class_'(Obj, _, _)),
-		\+ '$lgt_pp_file_runtime_clause_'('$lgt_specializes_class_'(_, Obj, _))
+		\+ '$lgt_pp_runtime_clause_'('$lgt_instantiates_class_'(Obj, _, _)),
+		\+ '$lgt_pp_runtime_clause_'('$lgt_instantiates_class_'(_, Obj, _)),
+		\+ '$lgt_pp_runtime_clause_'('$lgt_specializes_class_'(Obj, _, _)),
+		\+ '$lgt_pp_runtime_clause_'('$lgt_specializes_class_'(_, Obj, _))
 	;	fail
 	).
 
@@ -12734,20 +12672,20 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_is_class'(Obj) :-
 	(	'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, _) ->
 		% existing object; first, check that is not being compiled as a different kind of entity
-		\+ '$lgt_pp_file_runtime_clause_'('$lgt_current_protocol_'(Obj, _, _, _, _)),
-		\+ '$lgt_pp_file_runtime_clause_'('$lgt_current_category_'(Obj, _, _, _, _, _)),
+		\+ '$lgt_pp_runtime_clause_'('$lgt_current_protocol_'(Obj, _, _, _, _)),
+		\+ '$lgt_pp_runtime_clause_'('$lgt_current_category_'(Obj, _, _, _, _, _)),
 		% second, check that it's an instance or a class
 		(	'$lgt_instantiates_class_'(Obj, _, _)
 		;	'$lgt_instantiates_class_'(_, Obj, _)
 		;	'$lgt_specializes_class_'(Obj, _, _)
 		;	'$lgt_specializes_class_'(_, Obj, _)
 		)
-	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, _)) ->
+	;	'$lgt_pp_runtime_clause_'('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, _)) ->
 		% object defined previously in the same file; check that it's an instance or a class
-		(	'$lgt_pp_file_runtime_clause_'('$lgt_instantiates_class_'(Obj, _, _))
-		;	'$lgt_pp_file_runtime_clause_'('$lgt_instantiates_class_'(_, Obj, _))
-		;	'$lgt_pp_file_runtime_clause_'('$lgt_specializes_class_'(Obj, _, _))
-		;	'$lgt_pp_file_runtime_clause_'('$lgt_specializes_class_'(_, Obj, _))
+		(	'$lgt_pp_runtime_clause_'('$lgt_instantiates_class_'(Obj, _, _))
+		;	'$lgt_pp_runtime_clause_'('$lgt_instantiates_class_'(_, Obj, _))
+		;	'$lgt_pp_runtime_clause_'('$lgt_specializes_class_'(Obj, _, _))
+		;	'$lgt_pp_runtime_clause_'('$lgt_specializes_class_'(_, Obj, _))
 		)
 	;	fail
 	).
@@ -12761,9 +12699,9 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_is_object'(Obj) :-
 	(	'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, _) ->
 		% existing object; check that is not being compiled as a different kind of entity
-		\+ '$lgt_pp_file_runtime_clause_'('$lgt_current_protocol_'(Obj, _, _, _, _)),
-		\+ '$lgt_pp_file_runtime_clause_'('$lgt_current_category_'(Obj, _, _, _, _, _))
-	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, _)) ->
+		\+ '$lgt_pp_runtime_clause_'('$lgt_current_protocol_'(Obj, _, _, _, _)),
+		\+ '$lgt_pp_runtime_clause_'('$lgt_current_category_'(Obj, _, _, _, _, _))
+	;	'$lgt_pp_runtime_clause_'('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, _)) ->
 		% object defined in the same file we're compiling
 		true
 	;	fail
@@ -12778,9 +12716,9 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_is_protocol'(Ptc) :-
 	(	'$lgt_current_protocol_'(Ptc, _, _, _, _) ->
 		% existing protocol; check that is not being compiled as a different kind of entity
-		\+ '$lgt_pp_file_runtime_clause_'('$lgt_current_object_'(Ptc, _, _, _, _, _, _, _, _, _, _)),
-		\+ '$lgt_pp_file_runtime_clause_'('$lgt_current_category_'(Ptc, _, _, _, _, _))
-	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_protocol_'(Ptc, _, _, _, _)) ->
+		\+ '$lgt_pp_runtime_clause_'('$lgt_current_object_'(Ptc, _, _, _, _, _, _, _, _, _, _)),
+		\+ '$lgt_pp_runtime_clause_'('$lgt_current_category_'(Ptc, _, _, _, _, _))
+	;	'$lgt_pp_runtime_clause_'('$lgt_current_protocol_'(Ptc, _, _, _, _)) ->
 		% protocol defined in the same file we're compiling
 		true
 	;	fail
@@ -12795,9 +12733,9 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_is_category'(Ctg) :-
 	(	'$lgt_current_category_'(Ctg, _, _, _, _, _) ->
 		% existing category; check that is not being compiled as a different kind of entity
-		\+ '$lgt_pp_file_runtime_clause_'('$lgt_current_object_'(Ctg, _, _, _, _, _, _, _, _, _, _)),
-		\+ '$lgt_pp_file_runtime_clause_'('$lgt_current_protocol_'(Ctg, _, _, _, _))
-	;	'$lgt_pp_file_runtime_clause_'('$lgt_current_category_'(Ctg, _, _, _, _, _)) ->
+		\+ '$lgt_pp_runtime_clause_'('$lgt_current_object_'(Ctg, _, _, _, _, _, _, _, _, _, _)),
+		\+ '$lgt_pp_runtime_clause_'('$lgt_current_protocol_'(Ctg, _, _, _, _))
+	;	'$lgt_pp_runtime_clause_'('$lgt_current_category_'(Ctg, _, _, _, _, _)) ->
 		% category defined in the same file we're compiling
 		true
 	;	fail
@@ -12879,7 +12817,7 @@ current_logtalk_flag(Flag, Value) :-
 		% not the object being compiled (self reference)
 		\+ '$lgt_pp_object_'(Object, _, _, _, _, _, _, _, _, _, _),
 		% not an object defined in the source file being compiled
-		\+ '$lgt_pp_file_runtime_clause_'('$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _)),
+		\+ '$lgt_pp_runtime_clause_'('$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _)),
 		% not a currently loaded module
 		\+ (atom(Object), '$lgt_prolog_feature'(modules, supported), current_module(Object)),
 		'$lgt_increment_compile_warnings_counter',
@@ -12901,7 +12839,7 @@ current_logtalk_flag(Flag, Value) :-
 		% not the protocol being compiled (self reference)
 		\+ '$lgt_pp_protocol_'(Protocol, _, _, _, _),
 		% not a protocol defined in the source file being compiled
-		\+ '$lgt_pp_file_runtime_clause_'('$lgt_current_protocol_'(Protocol, _, _, _, _)),
+		\+ '$lgt_pp_runtime_clause_'('$lgt_current_protocol_'(Protocol, _, _, _, _)),
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_print_message'(warning(unknown_entities), core, reference_to_unknown_protocol(Path, Lines, Type, Entity, Protocol)),
 	fail.
@@ -12921,7 +12859,7 @@ current_logtalk_flag(Flag, Value) :-
 		% not the category being compiled (self reference)
 		\+ '$lgt_pp_category_'(Category, _, _, _, _, _),
 		% not a category defined in the source file being compiled
-		\+ '$lgt_pp_file_runtime_clause_'('$lgt_current_category_'(Category, _, _, _, _, _)),
+		\+ '$lgt_pp_runtime_clause_'('$lgt_current_category_'(Category, _, _, _, _, _)),
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_print_message'(warning(unknown_entities), core, reference_to_unknown_category(Path, Lines, Type, Entity, Category)),
 	fail.
@@ -13322,9 +13260,9 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_generate_object_clauses' :-
-	(	'$lgt_pp_specializes_class_'(_, _, _) ->
+	(	'$lgt_pp_specialized_class_'(_, _, _, _, _, _, _, _, _, _, _) ->
 		'$lgt_generate_ic_clauses'
-	;	'$lgt_pp_instantiates_class_'(_, _, _) ->
+	;	'$lgt_pp_instantiated_class_'(_, _, _, _, _, _, _, _, _, _, _) ->
 		'$lgt_generate_ic_clauses'
 	;	% objects without an instantiation or specialization relation
 		% are always compiled as prototypes
@@ -13713,9 +13651,9 @@ current_logtalk_flag(Flag, Value) :-
 		HeadDDcl =.. [Dcl, Pred, Scope, no, 2, Obj, Obj],
 		BodyDDcl =.. [DDcl, Pred, Scope],
 		assertz('$lgt_pp_dcl_'((HeadDDcl:-BodyDDcl)))
-	;	\+ '$lgt_pp_implements_protocol_'(_, _, _),
-		\+ '$lgt_pp_imports_category_'(_, _, _),
-		\+ '$lgt_pp_extends_object_'(_, _, _) ->
+	;	\+ '$lgt_pp_implemented_protocol_'(_, _, _, _, _),
+		\+ '$lgt_pp_imported_category_'(_, _, _, _, _, _),
+		\+ '$lgt_pp_extended_object_'(_, _, _, _, _, _, _, _, _, _, _) ->
 		functor(HeadDDcl, Dcl, 6),
 		assertz('$lgt_pp_dcl_'((HeadDDcl:-fail)))
 	;	true
@@ -13875,8 +13813,8 @@ current_logtalk_flag(Flag, Value) :-
 % we can have a root object where super have nowhere to go ...
 
 '$lgt_generate_prototype_super_clauses'(Super, _) :-
-	\+ '$lgt_pp_imports_category_'(_, _, _),
-	\+ '$lgt_pp_extends_object_'(_, _, _),
+	\+ '$lgt_pp_imported_category_'(_, _, _, _, _, _),
+	\+ '$lgt_pp_extended_object_'(_, _, _, _, _, _, _, _, _, _, _),
 	functor(Head, Super, 5),
 	assertz('$lgt_pp_super_'((Head:-fail))),
 	!.
@@ -13939,7 +13877,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_generate_ic_instantiates_dcl_clauses'(ODcl, _) :-
-	\+ '$lgt_pp_instantiates_class_'(_, _, _),
+	\+ '$lgt_pp_instantiated_class_'(_, _, _, _, _, _, _, _, _, _, _),
 	% no meta-class for the class we're compiling
 	!,
 	functor(Head, ODcl, 6),
@@ -14016,9 +13954,9 @@ current_logtalk_flag(Flag, Value) :-
 		HeadDDcl =.. [IDcl, Pred, Scope, no, 2, Obj, Obj],
 		BodyDDcl =.. [DDcl, Pred, Scope],
 		assertz('$lgt_pp_dcl_'((HeadDDcl:-BodyDDcl)))
-	;	\+ '$lgt_pp_implements_protocol_'(_, _, _),
-		\+ '$lgt_pp_imports_category_'(_, _, _),
-		\+ '$lgt_pp_specializes_class_'(_, _, _) ->
+	;	\+ '$lgt_pp_implemented_protocol_'(_, _, _, _, _),
+		\+ '$lgt_pp_imported_category_'(_, _, _, _, _, _),
+		\+ '$lgt_pp_specialized_class_'(_, _, _, _, _, _, _, _, _, _, _) ->
 		functor(HeadDDcl, IDcl, 6),
 		assertz('$lgt_pp_dcl_'((HeadDDcl:-fail)))
 	;	true
@@ -14265,9 +14203,9 @@ current_logtalk_flag(Flag, Value) :-
 % we can have a root object where "super" have nowhere to go ...
 
 '$lgt_generate_ic_super_clauses'(Obj, Super, _) :-
-	\+ '$lgt_pp_imports_category_'(_, _, _),
-	\+ '$lgt_pp_specializes_class_'(_, _, _),
-	\+ ('$lgt_pp_instantiates_class_'(_, Class, _), Class \= Obj),
+	\+ '$lgt_pp_imported_category_'(_, _, _, _, _, _),
+	\+ '$lgt_pp_specialized_class_'(_, _, _, _, _, _, _, _, _, _, _),
+	\+ ('$lgt_pp_instantiated_class_'(Class, _, _, _, _, _, _, _, _, _, _), Class \= Obj),
 	functor(Head, Super, 5),
 	assertz('$lgt_pp_super_'((Head:-fail))),
 	!.
@@ -14842,17 +14780,17 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_write_runtime_clauses'(SourceData, Stream, Path, Functor/Arity) :-
 	functor(Clause, Functor, Arity),
-	(	\+ '$lgt_pp_file_runtime_clause_'(Clause) ->
+	(	\+ '$lgt_pp_runtime_clause_'(Clause) ->
 		true
 	;	write_canonical(Stream, (:- multifile(Functor/Arity))), write(Stream, '.'), nl(Stream),
 		write_canonical(Stream, (:- dynamic(Functor/Arity))), write(Stream, '.'), nl(Stream),
 		(	SourceData == on ->
-			(	'$lgt_pp_file_runtime_clause_'(Clause),
+			(	'$lgt_pp_runtime_clause_'(Clause),
 				'$lgt_write_term_and_source_location'(Stream, Clause, aux, Path+1),
 				fail
 			;	true
 			)
-		;	(	'$lgt_pp_file_runtime_clause_'(Clause),
+		;	(	'$lgt_pp_runtime_clause_'(Clause),
 				write_canonical(Stream, Clause), write(Stream, '.'), nl(Stream),
 				fail
 			;	true
@@ -14942,11 +14880,11 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$'$lgt_assert_dynamic_entity''
+% '$lgt_assert_dynamic_entity'(+atom)
 %
 % adds a dynamically created entity to memory
 
-'$lgt_assert_dynamic_entity' :-
+'$lgt_assert_dynamic_entity'(Kind) :-
 	'$lgt_assert_directives',
 	'$lgt_assert_dcl_clauses',
 	'$lgt_assert_def_clauses',
@@ -14955,7 +14893,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_assert_alias_clauses',
 	'$lgt_assert_entity_clauses',
 	'$lgt_assert_entity_aux_clauses',
-	'$lgt_assert_runtime_clauses',
+	'$lgt_assert_runtime_clauses'(Kind),
 	'$lgt_assert_initialization_goal'.
 
 
@@ -15038,12 +14976,16 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_assert_entity_aux_clauses'.
 
 
-'$lgt_assert_runtime_clauses' :-
-	'$lgt_pp_entity_runtime_clause'(Clause),
+'$lgt_assert_runtime_clauses'(Type) :-
+	'$lgt_save_entity_runtime_clause'(Type),
+	fail.
+
+'$lgt_assert_runtime_clauses'(_) :-
+	'$lgt_pp_runtime_clause_'(Clause),
 		'$lgt_assertz_entity_clause'(Clause, aux),
 	fail.
 
-'$lgt_assert_runtime_clauses'.
+'$lgt_assert_runtime_clauses'(_).
 
 
 
@@ -18119,17 +18061,17 @@ current_logtalk_flag(Flag, Value) :-
 % static binding for the (^^)/1 control construct (used within objects)
 
 '$lgt_obj_super_call_static_binding'(Obj, Pred, ExCtx, Call) :-
-	(	'$lgt_pp_imports_category_'(_, _, _),
+	(	'$lgt_pp_imported_category_'(_, _, _, _, _, _),
 		'$lgt_obj_super_call_static_binding_category'(Obj, Pred, ExCtx, Call) ->
 		true
-	;	'$lgt_pp_extends_object_'(_, _, _) ->
+	;	'$lgt_pp_extended_object_'(_, _, _, _, _, _, _, _, _, _, _) ->
 		'$lgt_obj_super_call_static_binding_prototype'(Obj, Pred, ExCtx, Call)
-	;	'$lgt_pp_instantiates_class_'(_, _, _),
-		'$lgt_pp_specializes_class_'(_, _, _) ->
+	;	'$lgt_pp_instantiated_class_'(_, _, _, _, _, _, _, _, _, _, _),
+		'$lgt_pp_specialized_class_'(_, _, _, _, _, _, _, _, _, _, _) ->
 		'$lgt_obj_super_call_static_binding_instance_class'(Obj, Pred, ExCtx, Call)
-	;	'$lgt_pp_instantiates_class_'(_, _, _) ->
+	;	'$lgt_pp_instantiated_class_'(_, _, _, _, _, _, _, _, _, _, _) ->
 		'$lgt_obj_super_call_static_binding_instance'(Obj, Pred, ExCtx, Call)
-	;	'$lgt_pp_specializes_class_'(_, _, _) ->
+	;	'$lgt_pp_specialized_class_'(_, _, _, _, _, _, _, _, _, _, _) ->
 		'$lgt_obj_super_call_static_binding_class'(Obj, Pred, ExCtx, Call)
 	;	fail
 	).
@@ -18138,7 +18080,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_obj_super_call_static_binding_category'(Obj, Alias, ExCtx, Call) :-
 	% when working with parametric entities, we must connect the parameters
 	% between related entities
-	'$lgt_pp_imports_category_'(Obj, Ctg, _),
+	'$lgt_pp_runtime_clause_'('$lgt_imports_category_'(Obj, Ctg, _)),
 	'$lgt_current_category_'(Ctg, _, Dcl, Def, _, _),
 	% we may be aliasing the predicate
 	(	'$lgt_pp_predicate_alias_'(Ctg, Pred, Alias) ->
@@ -18158,7 +18100,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_obj_super_call_static_binding_prototype'(Obj, Alias, ExCtx, Call) :-
 	% when working with parametric entities, we must connect the parameters
 	% between related entities
-	'$lgt_pp_extends_object_'(Obj, Parent, RelationScope),
+	'$lgt_pp_runtime_clause_'('$lgt_extends_object_'(Obj, Parent, RelationScope)),
 	'$lgt_current_object_'(Parent, _, Dcl, Def, _, _, _, _, _, _, _),
 	% we may be aliasing the predicate
 	(	'$lgt_pp_predicate_alias_'(Parent, Pred, Alias) ->
@@ -18193,7 +18135,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_obj_super_call_static_binding_instance'(Obj, Alias, ExCtx, Call) :-
 	% when working with parametric entities, we must connect the parameters
 	% between related entities
-	'$lgt_pp_instantiates_class_'(Obj, Class, RelationScope),
+	'$lgt_pp_runtime_clause_'('$lgt_instantiates_class_'(Obj, Class, RelationScope)),
 	'$lgt_current_object_'(Class, _, _, _, _, IDcl, IDef, _, _, _, _),
 	% we may be aliasing the predicate
 	(	'$lgt_pp_predicate_alias_'(Class, Pred, Alias) ->
@@ -18228,7 +18170,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_obj_super_call_static_binding_class'(Obj, Alias, ExCtx, Call) :-
 	% when working with parametric entities, we must connect the parameters
 	% between related entities
-	'$lgt_pp_specializes_class_'(Obj, Superclass, RelationScope),
+	'$lgt_pp_runtime_clause_'('$lgt_specializes_class_'(Obj, Superclass, RelationScope)),
 	'$lgt_current_object_'(Superclass, _, _, _, _, IDcl, IDef, _, _, _, _),
 	% we may be aliasing the predicate
 	(	'$lgt_pp_predicate_alias_'(Superclass, Pred, Alias) ->
@@ -18282,7 +18224,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_ctg_super_call_static_binding'(Ctg, Alias, ExCtx, Call) :-
 	% when working with parametric entities, we must connect the parameters
 	% between related entities
-	'$lgt_pp_extends_category_'(Ctg, ExtCtg, RelationScope),
+	'$lgt_pp_runtime_clause_'('$lgt_extends_category_'(Ctg, ExtCtg, RelationScope)),
 	'$lgt_current_category_'(ExtCtg, _, Dcl, Def, _, _),
 	% we may be aliasing the predicate
 	(	'$lgt_pp_predicate_alias_'(ExtCtg, Pred, Alias) ->
