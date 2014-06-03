@@ -152,7 +152,7 @@ The following meta-predicate mode arguments are for use only when writing backen
 To the best of my knowledge, the use of non-negative integers to specify closures has first introduced on Quintus Prolog for providing information for predicate cross-reference tools.
 </p>
 <p>
-The <code>meta_predicate/1</code> directive must precede the meta-predicate definition and any local calls to the meta-predicate in order to ensure proper compilation. In addition, as each Logtalk entity is independently compiled, this directive must be included in every object or category that contains a definition for the described predicate, even if the predicate declaration is inherited from another entity, to ensure proper compilation of meta-arguments.
+As each Logtalk entity is independently compiled, this directive must be included in every object or category that contains a definition for the described predicate, even if the predicate declaration is inherited from another entity, to ensure proper compilation of meta-arguments.
 </p>
 
 <h3 id="predicates_discontiguous">Discontiguous directive</h3>
@@ -984,7 +984,7 @@ This workaround is sometimes necessary when calling module meta-predicates whose
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: May 21, 2014</span>
+		<span>Last updated on: June 3, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="categories.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="inheritance.html">next</a></span><br/>

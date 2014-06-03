@@ -223,7 +223,7 @@ Note that, in a more realistic scenario, the two <code>threaded_ignore/1</code> 
 </p>
 
 <p>
-The <code>synchronized/1</code> directive must precede any local calls to the synchronized predicate (or synchronized non-terminal) in order to ensure proper compilation. In addition, as each Logtalk entity is independently compiled, this directive must be included in every object or category that contains a definition for the described predicate, even if the predicate declaration is inherited from another entity, in order to ensure proper compilation. Note that a synchronized predicate cannot be declared dynamic. To ensure atomic updates of a dynamic predicate, declare as synchronized the predicate performing the update.
+As each Logtalk entity is independently compiled, this directive must be included in every object or category that contains a definition for the described predicate, even if the predicate declaration is inherited from another entity, in order to ensure proper compilation. Note that a synchronized predicate cannot be declared dynamic. To ensure atomic updates of a dynamic predicate, declare as synchronized the predicate performing the update.
 </p>
 <p>
 We may declare all predicates of an object (or a category) as synchronized by using the entity directive <a title="Consult reference manual" href="../refman/directives/synchronized_0.html"><code>synchronized/0</code></a>. In this case, the <code>synchronized/1</code> predicate directive is not necessary and should not be used.
@@ -263,7 +263,7 @@ The performance of multi-threading applications is highly dependent on the back-
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: February 25, 2013</span>
+		<span>Last updated on: June 3, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="events.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="errors.html">next</a></span><br/>

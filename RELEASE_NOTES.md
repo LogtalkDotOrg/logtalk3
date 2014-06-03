@@ -41,6 +41,9 @@ they are found.
 * CHANGED: Message term and message text used for reporting calls to unknown
 predicates.
 
+* CHANGED: Calls to synchronized predicates are now wrapped using the `once/1`
+standard meta-predicate when using a single-threaded backend Prolog compiler.
+
 * IMPROVED: It's no longer necessary for checking if a call to a meta-predicate
 or a coinductive predicate precedes the corresponding directive.
 
