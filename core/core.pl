@@ -13348,7 +13348,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	'$lgt_pp_public_'(Functor, Arity)
 	;	'$lgt_pp_protected_'(Functor, Arity)
 	;	'$lgt_pp_private_'(Functor, Arity)
-	;	'$lgt_pp_synchronized_'(Head, _)
+	;	'$lgt_pp_synchronized_'(Head, _), nonvar(Head)
 	;	'$lgt_pp_coinductive_'(Head, _, _, _, _, _, _)
 	),
 	functor(Head, Functor, Arity),
