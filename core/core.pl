@@ -13048,18 +13048,12 @@ current_logtalk_flag(Flag, Value) :-
 % it's necessary to remember which predicates are defined in order to deal with
 % redefinition of built-in predicates, detect missing predicate directives, and
 % speed up compilation of other clauses for the same predicates
-%
-% the check for discontiguous predicates is not performed when compiling clauses
-% for auxiliary predicates (using the logtalk::compile_aux_clauses/1 hook predicate)
 
 '$lgt_remember_defined_predicate'(Head, ExCtx, THead, Mode) :-
 	assertz('$lgt_pp_defines_predicate_'(Head, ExCtx, THead, Mode)),
 	retractall('$lgt_pp_non_portable_predicate_'(Head, _)),
-	(	Mode == compile(aux) ->
-		true
-	;	retractall('$lgt_pp_previous_predicate_'(_)),
-		assertz('$lgt_pp_previous_predicate_'(Head))
-	).
+	retractall('$lgt_pp_previous_predicate_'(_)),
+	assertz('$lgt_pp_previous_predicate_'(Head)).
 
 
 
@@ -13071,6 +13065,10 @@ current_logtalk_flag(Flag, Value) :-
 % found predicate that is not the previous compiled predicate if such a
 % predicate exists; this test is skipped for runtime clause compilation
 % and when compiling auxiliary predicates
+%
+% the check for discontiguous predicates is not performed when compiling
+% clauses for auxiliary predicates (using the logtalk::compile_aux_clauses/1
+% hook predicate)
 
 '$lgt_check_discontiguous_predicate'(Head, Ctx) :-
 	(	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, compile(regular), _, Lines),
