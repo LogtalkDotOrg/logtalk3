@@ -41,6 +41,9 @@ they are found.
 * CHANGED: Message term and message text used for reporting calls to unknown
 predicates.
 
+* IMPROVED: It's no longer necessary for checking if a call to a meta-predicate
+or a coinductive predicate precedes the corresponding directive.
+
 * IMPROVED: Simplified compilation of synchronized predicates, which no longer
 require the generation and use of an auxiliary wrapper clause.
 

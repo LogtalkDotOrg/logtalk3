@@ -7553,8 +7553,6 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_meta_predicate_directive_resource'(Meta) :-
 	'$lgt_valid_meta_predicate_template'(Meta),
 	!,
-	functor(Meta, Functor, Arity),
-	'$lgt_check_for_directive_after_call'(Functor/Arity),
 	'$lgt_term_template'(Meta, Template),
 	assertz('$lgt_pp_meta_predicate_'(Template, Meta)).
 
@@ -7601,9 +7599,6 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_meta_non_terminal_directive_resource'(Meta) :-
 	'$lgt_valid_meta_predicate_template'(Meta),
 	!,
-	functor(Meta, Functor, Arity),
-	ExtArity is Arity + 2,
-	'$lgt_check_for_directive_after_call'(Functor/ExtArity),
 	Meta =.. [Functor| Args],
 	'$lgt_compile_meta_non_terminal_directive_args'(Args, ExtendedArgs),
 	ExtendedMeta =.. [Functor| ExtendedArgs],
@@ -7616,14 +7611,6 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_meta_non_terminal_directive_resource'(_) :-
 	throw(instantiation_error).
-
-
-
-'$lgt_check_for_directive_after_call'(Functor/Arity) :-
-	(	'$lgt_pp_calls_predicate_'(Functor/Arity, _, _, _) ->
-		throw(permission_error(modify, predicate_interpretation, Functor/Arity))
-	;	true
-	).
 
 
 '$lgt_compile_meta_non_terminal_directive_args'([], [*, *]).
@@ -7745,7 +7732,6 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_coinductive_directive'([Pred| Preds], Ctx) :-
 	'$lgt_valid_coinductive_template'(Pred, Functor, Arity, Head, TestHead, Template),
 	!,
-	'$lgt_check_for_directive_after_call'(Functor/Arity),
 	% construct functor for the auxiliary predicate
 	atom_concat(Functor, '__coinductive', CFunctor),
 	% construct functor for debugging calls to the auxiliary predicate
