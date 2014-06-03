@@ -60,8 +60,8 @@ synchronized but not defined.
 would result in redundant cached clauses used for optimizing the calls to the
 term- and goal-expansion methods.
 
-* FIXED: Bug where an instantiation error in a `mode/2` predicate directive
-would be missed.
+* FIXED: Several cases where the compiler would miss instantiation errors when
+type-checking directives.
 
 Tools
 -----

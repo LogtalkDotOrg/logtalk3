@@ -6345,7 +6345,6 @@ current_logtalk_flag(Flag, Value) :-
 	% catch variables
 	throw(error(instantiantion_error, directive(_))).
 
-
 % conditional compilation directives
 
 '$lgt_compile_directive'(if(Goal), Ctx) :-
@@ -6475,7 +6474,6 @@ current_logtalk_flag(Flag, Value) :-
 	;	true
 	),
 	!.
-
 
 % remaining directives
 
@@ -7181,6 +7179,10 @@ current_logtalk_flag(Flag, Value) :-
 %
 % auxiliary predicate for compiling calls/1 directives
 
+'$lgt_compile_calls_directive'((-)) :-
+	% catch variables and lists with unbound tails
+	throw(instantiation_error).
+
 '$lgt_compile_calls_directive'([]).
 
 '$lgt_compile_calls_directive'([Ptc| Ptcs]) :-
@@ -7209,6 +7211,10 @@ current_logtalk_flag(Flag, Value) :-
 	atom_concat(Prefix, 'pred_mutex_', Aux),
 	atom_concat(Aux, Atom, Mutex).
 
+
+'$lgt_compile_synchronized_directive'((-), _) :-
+	% catch variables and lists with unbound tails
+	throw(instantiation_error).
 
 '$lgt_compile_synchronized_directive'([], _).
 
@@ -7254,6 +7260,10 @@ current_logtalk_flag(Flag, Value) :-
 %
 % auxiliary predicate for compiling public/1 directives
 
+'$lgt_compile_public_directive'((-)) :-
+	% catch variables and lists with unbound tails
+	throw(instantiation_error).
+
 '$lgt_compile_public_directive'([]).
 
 '$lgt_compile_public_directive'([Resource| Resources]) :-
@@ -7266,6 +7276,10 @@ current_logtalk_flag(Flag, Value) :-
 %
 % auxiliary predicate for compiling protected/1 directives
 
+'$lgt_compile_protected_directive'((-)) :-
+	% catch variables and lists with unbound tails
+	throw(instantiation_error).
+
 '$lgt_compile_protected_directive'([]).
 
 '$lgt_compile_protected_directive'([Resource| Resources]) :-
@@ -7277,6 +7291,10 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_compile_private_directive'(+list)
 %
 % auxiliary predicate for compiling private/1 directives
+
+'$lgt_compile_private_directive'((-)) :-
+	% catch variables and lists with unbound tails
+	throw(instantiation_error).
 
 '$lgt_compile_private_directive'([]).
 
@@ -7379,6 +7397,10 @@ current_logtalk_flag(Flag, Value) :-
 %
 % auxiliary predicate for compiling dynamic/1 directives
 
+'$lgt_compile_dynamic_directive'((-)) :-
+	% catch variables and lists with unbound tails
+	throw(instantiation_error).
+
 '$lgt_compile_dynamic_directive'([]).
 
 '$lgt_compile_dynamic_directive'([Resource| Resources]) :-
@@ -7458,6 +7480,10 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_compile_discontiguous_directive'(+list)
 %
 % auxiliary predicate for compiling discontiguous/1 directives
+
+'$lgt_compile_discontiguous_directive'((-)) :-
+	% catch variables and lists with unbound tails
+	throw(instantiation_error).
 
 '$lgt_compile_discontiguous_directive'([]).
 
@@ -7569,6 +7595,10 @@ current_logtalk_flag(Flag, Value) :-
 %
 % auxiliary predicate for compiling meta_non_terminal/1 directives
 
+'$lgt_compile_meta_non_terminal_directive'((-)) :-
+	% catch variables and lists with unbound tails
+	throw(instantiation_error).
+
 '$lgt_compile_meta_non_terminal_directive'([]).
 
 '$lgt_compile_meta_non_terminal_directive'([Meta| Metas]) :-
@@ -7627,6 +7657,10 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_compile_multifile_directive'(+list, +compilation_context)
 %
 % auxiliary predicate for compiling multifile/1 directives
+
+'$lgt_compile_multifile_directive'((-), _) :-
+	% catch variables and lists with unbound tails
+	throw(instantiation_error).
 
 '$lgt_compile_multifile_directive'([], _).
 
@@ -7726,6 +7760,10 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_compile_coinductive_directive'(+list, +compilation_context)
 %
 % auxiliary predicate for compiling coinductive/1 directives
+
+'$lgt_compile_coinductive_directive'((-), _) :-
+	% catch variables and lists with unbound tails
+	throw(instantiation_error).
 
 '$lgt_compile_coinductive_directive'([], _).
 
@@ -8079,6 +8117,10 @@ current_logtalk_flag(Flag, Value) :-
 
 % auxiliary predicate for compiling module's meta predicate directives
 % into Logtalk ones by translating the meta-argument specifiers
+
+'$lgt_compile_module_meta_predicate_directive'((-), _) :-
+	% catch variables and lists with unbound tails
+	throw(instantiation_error).
 
 '$lgt_compile_module_meta_predicate_directive'([], []).
 
