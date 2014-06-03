@@ -10642,15 +10642,27 @@ current_logtalk_flag(Flag, Value) :-
 
 % goal is a call to a local user-defined predicate
 
-'$lgt_compile_body'(Pred, TCPred, '$lgt_debug'(goal(DPred, TCPred), ExCtx), Ctx) :-
-	'$lgt_pp_coinductive_'(Pred, _, ExCtx, TCPred, _, _, DPred),
+'$lgt_compile_body'(Pred, TPred, '$lgt_debug'(goal(DPred, TPred), ExCtx), Ctx) :-
+	'$lgt_pp_coinductive_'(Pred, _, ExCtx, TCPred, _, _, DCPred),
 	!,
-	% convert the call to the original coinductive predicate into a call to the auxiliary
-	% predicate whose compiled normal and debug forms are already computed
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
 	functor(Pred, Functor, Arity),
-	functor(TCPred, TCFunctor, TCArity),
-	'$lgt_remember_called_predicate'(Mode, Functor/Arity, TCFunctor/TCArity, Head, Lines).
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, Prefix, _, _, ExCtx, Mode, _, Lines),
+	(	'$lgt_pp_defines_predicate_'(Pred, _, _, _) ->
+		% convert the call to the original coinductive predicate into a call to the auxiliary
+		% predicate whose compiled normal and debug forms are already computed
+		functor(TCPred, TCFunctor, TCArity),
+		'$lgt_remember_called_predicate'(Mode, Functor/Arity, TCFunctor/TCArity, Head, Lines),
+		TPred = TCPred,
+		DPred = DCPred
+	;	% undefined coinductive predicate
+		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
+		'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head, Lines),
+		% closed-world assumption: calls to static, declared but undefined
+		% predicates must fail instead of throwing an exception,
+		'$lgt_report_undefined_predicate_call'(Mode, Functor/Arity, Lines),
+		TPred = fail,
+		DPred = Pred
+	).
 
 '$lgt_compile_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
 	'$lgt_pp_synchronized_'(Pred, Mutex),
@@ -10665,7 +10677,8 @@ current_logtalk_flag(Flag, Value) :-
 		;	% in single-threaded systems, with_mutex/2 is equivalent to once/1
 			TPred = once(TPred0)
 		)
-	;	'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
+	;	% undefined synchronized predicate
+		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head, Lines),
 		% closed-world assumption: calls to static, declared but undefined
 		% predicates must fail instead of throwing an exception,
@@ -13335,6 +13348,8 @@ current_logtalk_flag(Flag, Value) :-
 	(	'$lgt_pp_public_'(Functor, Arity)
 	;	'$lgt_pp_protected_'(Functor, Arity)
 	;	'$lgt_pp_private_'(Functor, Arity)
+	;	'$lgt_pp_synchronized_'(Head, _)
+	;	'$lgt_pp_coinductive_'(Head, _, _, _, _, _, _)
 	),
 	functor(Head, Functor, Arity),
 	\+ '$lgt_pp_multifile_'(Head, _),
@@ -13358,7 +13373,9 @@ current_logtalk_flag(Flag, Value) :-
 	functor(Head, Functor, Arity),
 	(	\+ '$lgt_pp_public_'(Functor, Arity),
 		\+ '$lgt_pp_protected_'(Functor, Arity),
-		\+ '$lgt_pp_private_'(Functor, Arity) ->
+		\+ '$lgt_pp_private_'(Functor, Arity),
+		\+ '$lgt_pp_synchronized_'(Head, _),
+		\+ '$lgt_pp_coinductive_'(Head, _, _, _, _, _, _) ->
 		'$lgt_add_ddef_clause'(Head, Functor, Arity, _, Ctx)
 	;	'$lgt_add_def_clause'(Head, Functor, Arity, _, Ctx)
 	),
@@ -14279,6 +14296,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_predicate_calls' :-
 	'$lgt_pp_coinductive_'(Head, TestHead, HeadExCtx, TCHead, BodyExCtx, THead, DHead),
+	'$lgt_pp_defines_predicate_'(Head, _, _, _),
 		'$lgt_add_coinductive_predicate_aux_clause'(Head, TestHead, HeadExCtx, TCHead, BodyExCtx, THead, DHead),
 	fail.
 
