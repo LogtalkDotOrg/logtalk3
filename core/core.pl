@@ -10650,7 +10650,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
 	functor(Pred, Functor, Arity),
 	functor(TCPred, TCFunctor, TCArity),
-	'$lgt_remember_called_predicate'(Mode, Functor/Arity,  TCFunctor/TCArity, Head, Lines).
+	'$lgt_remember_called_predicate'(Mode, Functor/Arity, TCFunctor/TCArity, Head, Lines).
 
 '$lgt_compile_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
 	'$lgt_pp_synchronized_'(Pred, Mutex),
@@ -10676,7 +10676,10 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
 	'$lgt_pp_defines_predicate_'(Pred, ExCtx, TPred, _),
 	!,
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
+	functor(Pred, Functor, Arity),
+	functor(TPred, TFunctor, TArity),
+	'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head, Lines).
 
 % call to an undefined or unkown predicate
 
