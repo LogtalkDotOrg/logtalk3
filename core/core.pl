@@ -16056,6 +16056,7 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_valid_meta_predicate_template'(+nonvar)
 
 '$lgt_valid_meta_predicate_template'(Pred) :-
+	callable(Pred),
 	Pred =.. [_| Args],
 	'$lgt_valid_meta_predicate_template_args'(Args).
 
@@ -16063,7 +16064,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_valid_meta_predicate_template_args'([]).
 
 '$lgt_valid_meta_predicate_template_args'([Arg| Args]) :-
-	nonvar(Arg),
+	ground(Arg),
 	'$lgt_valid_meta_predicate_template_arg'(Arg),
 	'$lgt_valid_meta_predicate_template_args'(Args).
 
@@ -16074,11 +16075,11 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_valid_meta_predicate_template_arg'(*) :- !.
 % predicate indicator
 '$lgt_valid_meta_predicate_template_arg'(/) :- !.
+% list of predicate indicators
+'$lgt_valid_meta_predicate_template_arg'([/]) :- !.
 % list of goals/closures
 '$lgt_valid_meta_predicate_template_arg'([N]) :-
 	!, integer(N), N >= 0.
-	% list of predicate indicators
-'$lgt_valid_meta_predicate_template_arg'([/]) :- !.
 % goal with possible existential variables qualification
 '$lgt_valid_meta_predicate_template_arg'(^) :- !.
 % goal or closure
@@ -16097,9 +16098,9 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_valid_mode_template_args'([]).
 
 '$lgt_valid_mode_template_args'([Arg| Args]) :-
-	(	var(Arg) ->
-		throw(instantiation_error)
-	;	'$lgt_valid_mode_template_arg'(Arg)
+	(	ground(Arg) ->
+		'$lgt_valid_mode_template_arg'(Arg)
+	;	throw(instantiation_error)
 	),
 	'$lgt_valid_mode_template_args'(Args).
 
