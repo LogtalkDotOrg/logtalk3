@@ -12940,7 +12940,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_construct_def_clause'(Def, HeadTemplate, ExCtxTemplate, THeadTemplate, Clause),
 	assertz('$lgt_pp_def_'(Clause)),
 	'$lgt_check_for_redefined_built_in'(HeadTemplate, ExCtxTemplate, THeadTemplate, Mode),
-	'$lgt_remember_defined_predicate'(HeadTemplate, Functor, Arity, ExCtxTemplate, THeadTemplate, Mode),
+	'$lgt_remember_defined_predicate'(HeadTemplate, ExCtxTemplate, THeadTemplate, Mode),
 	Head = HeadTemplate,
 	ExCtx = ExCtxTemplate,
 	THead = THeadTemplate.
@@ -12962,7 +12962,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_construct_def_clause'(DDef, HeadTemplate, ExCtxTemplate, THeadTemplate, Clause),
 	assertz('$lgt_pp_ddef_'(Clause)),
 	'$lgt_check_for_redefined_built_in'(HeadTemplate, ExCtxTemplate, THeadTemplate, Mode),
-	'$lgt_remember_defined_predicate'(HeadTemplate, Functor, Arity, ExCtxTemplate, THeadTemplate, Mode),
+	'$lgt_remember_defined_predicate'(HeadTemplate, ExCtxTemplate, THeadTemplate, Mode),
 	Head = HeadTemplate,
 	ExCtx = ExCtxTemplate,
 	THead = THeadTemplate.
@@ -13043,7 +13043,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_remember_defined_predicate'(@callable, +atom, +integer, +execution_context, @callable, +compound)
+% '$lgt_remember_defined_predicate'(@callable, +execution_context, @callable, +compound)
 %
 % it's necessary to remember which predicates are defined in order to deal with
 % redefinition of built-in predicates, detect missing predicate directives, and
@@ -13052,14 +13052,13 @@ current_logtalk_flag(Flag, Value) :-
 % the check for discontiguous predicates is not performed when compiling clauses
 % for auxiliary predicates (using the logtalk::compile_aux_clauses/1 hook predicate)
 
-'$lgt_remember_defined_predicate'(Head, Functor, Arity, ExCtx, THead, Mode) :-
+'$lgt_remember_defined_predicate'(Head, ExCtx, THead, Mode) :-
 	assertz('$lgt_pp_defines_predicate_'(Head, ExCtx, THead, Mode)),
 	retractall('$lgt_pp_non_portable_predicate_'(Head, _)),
 	(	Mode == compile(aux) ->
 		true
-	;	functor(Template, Functor, Arity),
-		retractall('$lgt_pp_previous_predicate_'(_)),
-		assertz('$lgt_pp_previous_predicate_'(Template))
+	;	retractall('$lgt_pp_previous_predicate_'(_)),
+		assertz('$lgt_pp_previous_predicate_'(Head))
 	).
 
 
