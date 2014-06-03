@@ -60,6 +60,9 @@ synchronized but not defined.
 would result in redundant cached clauses used for optimizing the calls to the
 term- and goal-expansion methods.
 
+* FIXED: Bug where an instantiation error in a `mode/2` predicate directive
+would be missed.
+
 Tools
 -----
 

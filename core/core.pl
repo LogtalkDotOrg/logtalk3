@@ -16087,7 +16087,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_valid_mode_template'(+nonvar)
+% '$lgt_valid_mode_template'(@nonvar)
 
 '$lgt_valid_mode_template'(Pred) :-
 	Pred =.. [_| Args],
@@ -16097,7 +16097,10 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_valid_mode_template_args'([]).
 
 '$lgt_valid_mode_template_args'([Arg| Args]) :-
-	'$lgt_valid_mode_template_arg'(Arg),
+	(	var(Arg) ->
+		throw(instantiation_error)
+	;	'$lgt_valid_mode_template_arg'(Arg)
+	),
 	'$lgt_valid_mode_template_args'(Args).
 
 
@@ -16119,28 +16122,20 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_valid_number_of_solutions'(@term)
-
-'$lgt_valid_number_of_solutions'(Solutions) :-
-	atom(Solutions),
-	'$lgt_pred_number_of_solutions'(Solutions).
-
-
-
-% '$lgt_pred_number_of_solutions'(+atom)
+% '$lgt_valid_number_of_solutions'(@nonvar)
 
 % calling the predicate using the specified mode always fails
-'$lgt_pred_number_of_solutions'(zero).
+'$lgt_valid_number_of_solutions'(zero).
 % calling the predicate using the specified mode always succeeds once
-'$lgt_pred_number_of_solutions'(one).
+'$lgt_valid_number_of_solutions'(one).
 % calling the predicate using the specified mode may succeed once or fail
-'$lgt_pred_number_of_solutions'(zero_or_one).
+'$lgt_valid_number_of_solutions'(zero_or_one).
 % calling the predicate using the specified mode may fail or succeed multiple times
-'$lgt_pred_number_of_solutions'(zero_or_more).
+'$lgt_valid_number_of_solutions'(zero_or_more).
 % calling the predicate using the specified mode always succeed at least once
-'$lgt_pred_number_of_solutions'(one_or_more).
+'$lgt_valid_number_of_solutions'(one_or_more).
 % calling the predicate using the specified mode throws an error
-'$lgt_pred_number_of_solutions'(error).
+'$lgt_valid_number_of_solutions'(error).
 
 
 
