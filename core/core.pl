@@ -14259,36 +14259,41 @@ current_logtalk_flag(Flag, Value) :-
 % calls as predicate definition order is irrelevant
 
 '$lgt_compile_predicate_calls' :-
+	'$lgt_compiler_flag'(optimize, Optimize),
+	'$lgt_compile_predicate_calls'(Optimize).
+
+
+'$lgt_compile_predicate_calls'(Optimize) :-
 	retract('$lgt_pp_entity_term_'(Term, Location)),
-		'$lgt_compile_predicate_calls'(Term, TTerm),
+		'$lgt_compile_predicate_calls'(Term, Optimize, TTerm),
 		assertz('$lgt_pp_final_entity_term_'(TTerm, Location)),
 	fail.
 
-'$lgt_compile_predicate_calls' :-
+'$lgt_compile_predicate_calls'(_) :-
 	'$lgt_pp_coinductive_'(Head, TestHead, HeadExCtx, TCHead, BodyExCtx, THead, DHead),
 	'$lgt_pp_defines_predicate_'(Head, _, _, _),
 		'$lgt_add_coinductive_predicate_aux_clause'(Head, TestHead, HeadExCtx, TCHead, BodyExCtx, THead, DHead),
 	fail.
 
-'$lgt_compile_predicate_calls' :-
+'$lgt_compile_predicate_calls'(Optimize) :-
 	retract('$lgt_pp_entity_aux_clause_'(Clause)),
-		'$lgt_compile_predicate_calls'(Clause, TClause),
+		'$lgt_compile_predicate_calls'(Clause, Optimize, TClause),
 		assertz('$lgt_pp_final_entity_aux_clause_'(TClause)),
 	fail.
 
-'$lgt_compile_predicate_calls' :-
+'$lgt_compile_predicate_calls'(Optimize) :-
 	retract('$lgt_pp_entity_initialization_'(Goal)),
-		'$lgt_compile_predicate_calls'(Goal, TGoal),
+		'$lgt_compile_predicate_calls'(Goal, Optimize, TGoal),
 		assertz('$lgt_pp_final_entity_initialization_'(TGoal)),
 	fail.
 
-'$lgt_compile_predicate_calls' :-
+'$lgt_compile_predicate_calls'(Optimize) :-
 	retract('$lgt_pp_entity_meta_directive_'(Directive)),
-		'$lgt_compile_predicate_calls'(Directive, TDirective),
+		'$lgt_compile_predicate_calls'(Directive, Optimize, TDirective),
 		assertz('$lgt_pp_directive_'(TDirective)),
 	fail.
 
-'$lgt_compile_predicate_calls'.
+'$lgt_compile_predicate_calls'(_).
 
 
 
@@ -14298,12 +14303,12 @@ current_logtalk_flag(Flag, Value) :-
 % the information about defined predicates collected on the first stage
 
 % entity term is final
-'$lgt_compile_predicate_calls'({Term}, Term).
+'$lgt_compile_predicate_calls'({Term}, _, Term).
 
 % static predicate rule
-'$lgt_compile_predicate_calls'(srule(THead,Body,Ctx), TClause) :-
+'$lgt_compile_predicate_calls'(srule(THead,Body,Ctx), Optimize, TClause) :-
 	'$lgt_compile_body'(Body, FBody, _, Ctx),
-	(	'$lgt_compiler_flag'(optimize, on) ->
+	(	Optimize == on ->
 		'$lgt_simplify_goal'(FBody, SBody)
 	;	SBody = FBody
 	),
@@ -14313,9 +14318,9 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 % debug version of static predicate rule
-'$lgt_compile_predicate_calls'(dsrule(THead,DHead,Body,Ctx), TClause) :-
+'$lgt_compile_predicate_calls'(dsrule(THead,DHead,Body,Ctx), Optimize, TClause) :-
 	'$lgt_compile_body'(Body, FBody, _, Ctx),
-	(	'$lgt_compiler_flag'(optimize, on) ->
+	(	Optimize == on ->
 		'$lgt_simplify_goal'(FBody, SBody)
 	;	SBody = FBody
 	),
@@ -14325,9 +14330,9 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 % dynamic predicate rule
-'$lgt_compile_predicate_calls'(drule(THead,Nop,Body,Ctx), TClause) :-
+'$lgt_compile_predicate_calls'(drule(THead,Nop,Body,Ctx), Optimize, TClause) :-
 	'$lgt_compile_body'(Body, TBody0, _, Ctx),
-	(	'$lgt_compiler_flag'(optimize, on) ->
+	(	Optimize == on ->
 		'$lgt_simplify_goal'(TBody0, TBody)
 	;	TBody = TBody0
 	),
@@ -14337,9 +14342,9 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 % debug version of dynamic predicate rule
-'$lgt_compile_predicate_calls'(ddrule(THead,Nop,DHead,Body,Ctx), TClause) :-
+'$lgt_compile_predicate_calls'(ddrule(THead,Nop,DHead,Body,Ctx), Optimize, TClause) :-
 	'$lgt_compile_body'(Body, TBody0, _, Ctx),
-	(	'$lgt_compiler_flag'(optimize, on) ->
+	(	Optimize == on ->
 		'$lgt_simplify_goal'(TBody0, TBody)
 	;	TBody = TBody0
 	),
@@ -14349,29 +14354,29 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 % goal
-'$lgt_compile_predicate_calls'(goal(Body,Ctx), TBody) :-
+'$lgt_compile_predicate_calls'(goal(Body,Ctx), Optimize, TBody) :-
 	'$lgt_compile_body'(Body, TBody0, _, Ctx),
-	(	'$lgt_compiler_flag'(optimize, on) ->
+	(	Optimize == on ->
 		'$lgt_simplify_goal'(TBody0, TBody)
 	;	TBody = TBody0
 	).
 
 % debug version of goal
-'$lgt_compile_predicate_calls'(dgoal(Body,Ctx), TBody) :-
+'$lgt_compile_predicate_calls'(dgoal(Body,Ctx), Optimize, TBody) :-
 	'$lgt_compile_body'(Body, _, TBody0, Ctx),
-	(	'$lgt_compiler_flag'(optimize, on) ->
+	(	Optimize == on ->
 		'$lgt_simplify_goal'(TBody0, TBody)
 	;	TBody = TBody0
 	).
 
 % static predicate fact
-'$lgt_compile_predicate_calls'(sfact(TFact), TFact).
+'$lgt_compile_predicate_calls'(sfact(TFact), _, TFact).
 
 % dynamic predicate fact
-'$lgt_compile_predicate_calls'(dfact(TFact,DHead), (TFact:-DHead)).
+'$lgt_compile_predicate_calls'(dfact(TFact,DHead), _, (TFact:-DHead)).
 
 % supported Prolog meta-directives (specified in the adapter files) 
-'$lgt_compile_predicate_calls'(directive(Directive,Meta), TDirective) :-
+'$lgt_compile_predicate_calls'(directive(Directive,Meta), _, TDirective) :-
 	Directive =.. [Functor| Args],
 	Meta =.. [Functor| MArgs],
 	'$lgt_pp_entity_'(_, Entity, Prefix, _, _),
@@ -14387,7 +14392,7 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 % directive
-'$lgt_compile_predicate_calls'((:- Directive), (:- Directive)).
+'$lgt_compile_predicate_calls'((:- Directive), _, (:- Directive)).
 
 
 
