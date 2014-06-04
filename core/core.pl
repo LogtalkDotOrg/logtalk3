@@ -346,11 +346,11 @@
 
 % '$lgt_pp_directive_'(Directive)
 :- dynamic('$lgt_pp_directive_'/1).
-% '$lgt_pp_prolog_term_'(Term, Location)
+% '$lgt_pp_prolog_term_'(Term, Position)
 :- dynamic('$lgt_pp_prolog_term_'/2).
-% '$lgt_pp_entity_term_'(Term, Location)
+% '$lgt_pp_entity_term_'(Term, Position)
 :- dynamic('$lgt_pp_entity_term_'/2).
-% '$lgt_pp_final_entity_term_'(Term, Location)
+% '$lgt_pp_final_entity_term_'(Term, Position)
 :- dynamic('$lgt_pp_final_entity_term_'/2).
 % '$lgt_pp_entity_aux_clause_'(Clause)
 :- dynamic('$lgt_pp_entity_aux_clause_'/1).
@@ -5022,10 +5022,11 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_write_entity_code'(SourceData, Output) :-
+	'$lgt_pp_file_data_'(_, _, Path, _),
 	% write any plain Prolog terms that precede the entity definition
-	'$lgt_write_prolog_terms'(SourceData, Output),
+	'$lgt_write_prolog_terms'(SourceData, Output, Path),
 	'$lgt_write_logtalk_directives'(Output),
-	'$lgt_write_logtalk_clauses'(SourceData, Output).
+	'$lgt_write_logtalk_clauses'(SourceData, Output, Path).
 
 
 
@@ -5150,10 +5151,11 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_write_runtime_tables'(Output) :-
 	% the reflective information to be written depends on the source_data flag
 	'$lgt_compiler_flag'(source_data, SourceData),
+	'$lgt_pp_file_data_'(_, _, Path, _),
 	% write out any Prolog code occurring after the last source file entity
-	'$lgt_write_prolog_terms'(SourceData, Output),
+	'$lgt_write_prolog_terms'(SourceData, Output, Path),
 	% write entity runtime directives and clauses
-	'$lgt_write_runtime_clauses'(SourceData, Output),
+	'$lgt_write_runtime_clauses'(SourceData, Output, Path),
 	% write initialization/1 directive at the end of the file to improve
 	% compatibility with non-ISO compliant Prolog compilers
 	'$lgt_write_initialization_call'(Output).
@@ -6237,17 +6239,16 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_expanded_term'(end_of_file, _, _) :-
 	!.
 
-'$lgt_compile_expanded_term'({ExpandedTerm}, Term, _) :-
+'$lgt_compile_expanded_term'({ExpandedTerm}, Term, Ctx) :-
 	% bypass control construct; expanded term is final
 	!,
 	(	callable(ExpandedTerm) ->
+		'$lgt_comp_ctx_position'(Ctx, Position),
 		(	'$lgt_pp_entity_'(_, _, _, _, _) ->
-			'$lgt_pp_term_location'(Location),
 			% ensure that the relative order of the entity terms is kept
-			assertz('$lgt_pp_entity_term_'({ExpandedTerm}, Location))
+			assertz('$lgt_pp_entity_term_'({ExpandedTerm}, Position))
 		;	% non-entity terms
-			'$lgt_pp_term_location'(Location),
-			assertz('$lgt_pp_prolog_term_'(ExpandedTerm, Location))
+			assertz('$lgt_pp_prolog_term_'(ExpandedTerm, Position))
 		)
 	;	var(ExpandedTerm) ->
 		throw(error(instantiantion_error, term_expansion(Term, {ExpandedTerm})))
@@ -6298,12 +6299,12 @@ current_logtalk_flag(Flag, Value) :-
 	% catch variables
 	throw(error(instantiantion_error, term(_))).
 
-'$lgt_compile_runtime_term'({Term}, _) :-
+'$lgt_compile_runtime_term'({Term}, Ctx) :-
 	% bypass control construct; term is final
 	!,
 	(	callable(Term) ->
-		'$lgt_pp_term_location'(Location),
-		assertz('$lgt_pp_entity_term_'({Term}, Location))
+		'$lgt_comp_ctx_position'(Ctx, Position),
+		assertz('$lgt_pp_entity_term_'({Term}, Position))
 	;	var(Term) ->
 		throw(error(instantiantion_error, term({Term})))
 	;	throw(error(type_error(callable, Term), term({Term})))
@@ -6555,33 +6556,33 @@ current_logtalk_flag(Flag, Value) :-
 	% the encoding/1 directive is already processed
 	!.
 
-'$lgt_compile_file_directive'(ensure_loaded(File), _) :-
+'$lgt_compile_file_directive'(ensure_loaded(File), Ctx) :-
 	!,
 	% perform basic error checking
 	'$lgt_must_be'(ground, File),
 	% assume that ensure_loaded/1 is also a built-in predicate
 	ensure_loaded(File),
-	'$lgt_pp_term_location'(Location),
-	assertz('$lgt_pp_prolog_term_'((:- ensure_loaded(File)), Location)).
+	'$lgt_comp_ctx_position'(Ctx, Position),
+	assertz('$lgt_pp_prolog_term_'((:- ensure_loaded(File)), Position)).
 
-'$lgt_compile_file_directive'(use_module(File), _) :-
+'$lgt_compile_file_directive'(use_module(File), Ctx) :-
 	!,
 	% perform basic error checking
 	'$lgt_must_be'(ground, File),
 	% assume that use_module/1 is also a built-in predicate
 	use_module(File),
-	'$lgt_pp_term_location'(Location),
-	assertz('$lgt_pp_prolog_term_'((:- use_module(File)), Location)).
+	'$lgt_comp_ctx_position'(Ctx, Position),
+	assertz('$lgt_pp_prolog_term_'((:- use_module(File)), Position)).
 
-'$lgt_compile_file_directive'(use_module(File, Imports), _) :-
+'$lgt_compile_file_directive'(use_module(File, Imports), Ctx) :-
 	!,
 	% perform basic error checking
 	'$lgt_must_be'(ground, File),
 	'$lgt_must_be'(ground, Imports),
 	% assume that use_module/2 is also a built-in predicate
 	use_module(File, Imports),
-	'$lgt_pp_term_location'(Location),
-	assertz('$lgt_pp_prolog_term_'((:- use_module(File, Imports)), Location)).
+	'$lgt_comp_ctx_position'(Ctx, Position),
+	assertz('$lgt_pp_prolog_term_'((:- use_module(File, Imports)), Position)).
 
 '$lgt_compile_file_directive'(initialization(Goal), Ctx) :-
 	'$lgt_must_be'(callable, Goal),
@@ -6598,12 +6599,12 @@ current_logtalk_flag(Flag, Value) :-
 	% to minimize compatibility issues with backend Prolog compilers
 	assertz('$lgt_pp_file_initialization_'(Goal)).
 
-'$lgt_compile_file_directive'(op(Priority, Specifier, Operators), _) :-
+'$lgt_compile_file_directive'(op(Priority, Specifier, Operators), Ctx) :-
 	!,
 	'$lgt_must_be'(operator_specification, op(Priority, Specifier, Operators)),
 	'$lgt_activate_file_operators'(Priority, Specifier, Operators),
-	'$lgt_pp_term_location'(Location),
-	assertz('$lgt_pp_prolog_term_'((:- op(Priority, Specifier, Operators)), Location)).
+	'$lgt_comp_ctx_position'(Ctx, Position),
+	assertz('$lgt_pp_prolog_term_'((:- op(Priority, Specifier, Operators)), Position)).
 
 '$lgt_compile_file_directive'(set_logtalk_flag(Name, Value), Ctx) :-
 	!,
@@ -6614,7 +6615,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_set_compiler_flags'([Flag]),
 	'$lgt_check_for_renamed_flag'(Name, Ctx).
 
-'$lgt_compile_file_directive'(set_prolog_flag(Flag, Value), _) :-
+'$lgt_compile_file_directive'(set_prolog_flag(Flag, Value), Ctx) :-
 	!,
 	% perform basic error and portability checking
 	'$lgt_compile_body'(set_prolog_flag(Flag, Value), _, _, _),
@@ -6624,8 +6625,8 @@ current_logtalk_flag(Flag, Value) :-
 	% depending on the flag and on the back-end Prolog compiler
 	set_prolog_flag(Flag, Value),
 	% we also copy the directive to the generated intermediate Prolog file
-	'$lgt_pp_term_location'(Location),
-	assertz('$lgt_pp_prolog_term_'((:- set_prolog_flag(Flag, Value)), Location)).
+	'$lgt_comp_ctx_position'(Ctx, Position),
+	assertz('$lgt_pp_prolog_term_'((:- set_prolog_flag(Flag, Value)), Position)).
 
 '$lgt_compile_file_directive'(multifile(Preds), _) :-
 	% perform basic error checking
@@ -6641,10 +6642,10 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_read_file_to_terms'(File, Terms),
 	'$lgt_compile_file_terms'(Terms, Ctx).
 
-'$lgt_compile_file_directive'(Directive, _) :-
-	'$lgt_pp_term_location'(Location),
+'$lgt_compile_file_directive'(Directive, Ctx) :-
+	'$lgt_comp_ctx_position'(Ctx, Position),
 	% directive will be copied to the generated Prolog file
-	assertz('$lgt_pp_prolog_term_'((:- Directive), Location)).
+	assertz('$lgt_pp_prolog_term_'((:- Directive), Position)).
 
 
 
@@ -8527,6 +8528,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_clause'(Clause, Ctx) :-
 	'$lgt_must_be'(clause, Clause, clause(Clause)),
 	'$lgt_pp_entity_'(Type, Entity, Prefix, _, _),
+	% compiling an entity clause
 	(	Type == protocol ->
 		% protocols cannot contain predicate definitions
 		throw(error(permission_error(define, clause, Entity), clause(Clause)))
@@ -8547,25 +8549,23 @@ current_logtalk_flag(Flag, Value) :-
 	(	'$lgt_compiler_flag'(debug, on) ->
 		(	Mode == compile(aux) ->
 			assertz('$lgt_pp_entity_aux_clause_'(DClause))
-		;	'$lgt_pp_term_location'(Location),
-			assertz('$lgt_pp_entity_term_'(DClause, Location))
+		;	assertz('$lgt_pp_entity_term_'(DClause, Position))
 		)
 	;	(	Mode == compile(aux) ->
 			assertz('$lgt_pp_entity_aux_clause_'(TClause))
-		;	'$lgt_pp_term_location'(Location),
-			assertz('$lgt_pp_entity_term_'(TClause, Location))
+		;	assertz('$lgt_pp_entity_term_'(TClause, Position))
 		)
 	),
 	!.
 
-'$lgt_compile_clause'(Clause, _) :-
+'$lgt_compile_clause'(Clause, Ctx) :-
 	\+ '$lgt_pp_entity_'(_, _, _, _, _),
 	% clause occurs before an opening entity directive
 	!,
 	'$lgt_must_be'(clause, Clause, clause(Clause)),
-	'$lgt_pp_term_location'(Location),
+	'$lgt_comp_ctx_position'(Ctx, Position),
 	% copy it unchanged to the generated Prolog file
-	assertz('$lgt_pp_prolog_term_'(Clause, Location)).
+	assertz('$lgt_pp_prolog_term_'(Clause, Position)).
 
 '$lgt_compile_clause'(Clause, _) :-
 	% deal with unexpected clause translation failures
@@ -12873,22 +12873,6 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_pp_term_location'(-nonvar)
-%
-% returns the location of the last source file term read;
-% returns the atom "none" if the location information is not available
-
-'$lgt_pp_term_location'(Location) :-
-	(	'$lgt_pp_term_position_variables_'(Line-_, _),
-		'$lgt_pp_file_data_'(_, _, Path, _) ->
-		Location = Path+Line
-	;	'$lgt_pp_file_data_'(_, _, Path, _) ->
-		Location = Path+1
-	;	Location = none
-	).
-
-
-
 % '$lgt_add_uses_def_clause'(+callable, +callable)
 %
 % adds a "def clause" for predicates specified in uses/2 directives
@@ -14264,9 +14248,9 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_compile_predicate_calls'(Optimize) :-
-	retract('$lgt_pp_entity_term_'(Term, Location)),
+	retract('$lgt_pp_entity_term_'(Term, Position)),
 		'$lgt_compile_predicate_calls'(Term, Optimize, TTerm),
-		assertz('$lgt_pp_final_entity_term_'(TTerm, Location)),
+		assertz('$lgt_pp_final_entity_term_'(TTerm, Position)),
 	fail.
 
 '$lgt_compile_predicate_calls'(_) :-
@@ -14616,37 +14600,36 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_write_prolog_terms'(+atom, @stream)
+% '$lgt_write_prolog_terms'(+atom, @stream, atom)
 %
 % writes any Prolog clauses that appear before an entity opening directive
 
-'$lgt_write_prolog_terms'(on, Stream) :-
-	'$lgt_pp_prolog_term_'(Term, Location),
-		'$lgt_write_term_and_source_location'(Stream, Term, user, Location),
+'$lgt_write_prolog_terms'(on, Stream, Path) :-
+	'$lgt_pp_prolog_term_'(Term, Line-_),
+		'$lgt_write_term_and_source_location'(Stream, Term, user, Path+Line),
 	fail.
 
-'$lgt_write_prolog_terms'(off, Stream) :-
+'$lgt_write_prolog_terms'(off, Stream, _) :-
 	'$lgt_pp_prolog_term_'(Term, _),
 		write_canonical(Stream, Term), write(Stream, '.'), nl(Stream),
 	fail.
 
-'$lgt_write_prolog_terms'(_, _).
+'$lgt_write_prolog_terms'(_, _, _).
 
 
 
-% '$lgt_write_logtalk_clauses'(+atom, @stream)
+% '$lgt_write_logtalk_clauses'(+atom, @stream, +atom)
 %
 % writes Logtalk entity clauses
 
-'$lgt_write_logtalk_clauses'(SourceData, Stream) :-
-	'$lgt_pp_file_data_'(_, _, Path, _),
+'$lgt_write_logtalk_clauses'(SourceData, Stream, Path) :-
 	'$lgt_write_dcl_clauses'(SourceData, Stream, Path),
 	'$lgt_write_def_clauses'(SourceData, Stream, Path),
 	'$lgt_write_ddef_clauses'(SourceData, Stream, Path),
 	'$lgt_write_super_clauses'(SourceData, Stream, Path),
 	'$lgt_pp_entity_'(_, _, _, _, Rnm),
 	'$lgt_write_alias_clauses'(SourceData, Stream, Path, Rnm),
-	'$lgt_write_entity_clauses'(SourceData, Stream),
+	'$lgt_write_entity_clauses'(SourceData, Stream, Path),
 	'$lgt_write_entity_aux_clauses'(SourceData, Stream, Path).
 
 
@@ -14722,17 +14705,17 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 
-'$lgt_write_entity_clauses'(on, Stream) :-
-	'$lgt_pp_final_entity_term_'(Clause, Location),
-		'$lgt_write_term_and_source_location'(Stream, Clause, user, Location),
+'$lgt_write_entity_clauses'(on, Stream, Path) :-
+	'$lgt_pp_final_entity_term_'(Clause, Line-_),
+		'$lgt_write_term_and_source_location'(Stream, Clause, user, Path+Line),
 	fail.
 
-'$lgt_write_entity_clauses'(off, Stream) :-
+'$lgt_write_entity_clauses'(off, Stream, _) :-
 	'$lgt_pp_final_entity_term_'(Clause, _),
 		write_canonical(Stream, Clause), write(Stream, '.'), nl(Stream),
 	fail.
 
-'$lgt_write_entity_clauses'(_, _).
+'$lgt_write_entity_clauses'(_, _, _).
 
 
 '$lgt_write_entity_aux_clauses'(on, Stream, Path) :-
@@ -14749,13 +14732,12 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_write_runtime_clauses'(+atom, @stream)
+% '$lgt_write_runtime_clauses'(+atom, @stream, +atom)
 %
 % writes the entity runtime multifile and dynamic directives and the entity
 % runtime clauses for all defined entities
 
-'$lgt_write_runtime_clauses'(SourceData, Stream) :-
-	'$lgt_pp_file_data_'(_, _, Path, _),
+'$lgt_write_runtime_clauses'(SourceData, Stream, Path) :-
 	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_current_protocol_'/5),
 	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_current_category_'/6),
 	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_current_object_'/11),
