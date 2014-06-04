@@ -10646,15 +10646,16 @@ current_logtalk_flag(Flag, Value) :-
 			TPred = with_mutex(Mutex, TPred0)
 		;	% in single-threaded systems, with_mutex/2 is equivalent to once/1
 			TPred = once(TPred0)
-		)
+		),
+		functor(TPred0, TFunctor, TArity)
 	;	% undefined synchronized predicate
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
-		'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head, Lines),
 		% closed-world assumption: calls to static, declared but undefined
 		% predicates must fail instead of throwing an exception,
 		'$lgt_report_undefined_predicate_call'(Mode, Functor/Arity, Lines),
 		TPred = fail
-	).
+	),
+	'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head, Lines).
 
 '$lgt_compile_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
 	'$lgt_pp_defines_predicate_'(Pred, ExCtx, TPred, _),
