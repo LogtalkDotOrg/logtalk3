@@ -8306,6 +8306,12 @@ current_logtalk_flag(Flag, Value) :-
 %
 % compiles the entity info/1 directive key-value pairs
 
+'$lgt_compile_entity_info_directive'((-), _) :-
+	% catch variables and lists with unbound tails
+	throw(instantiation_error).
+
+'$lgt_compile_entity_info_directive'([], []).
+
 '$lgt_compile_entity_info_directive'([Pair| Pairs], [TPair| TPairs]) :-
 	(	'$lgt_valid_info_key_value_pair'(Pair, Key, Value) ->
 		'$lgt_compile_entity_info_directive_pair'(Key, Value, TPair),
@@ -8313,8 +8319,6 @@ current_logtalk_flag(Flag, Value) :-
 	;	% non-valid pair; generate an error
 		'$lgt_must_be'(key_value_info_pair, Pair)
 	).
-
-'$lgt_compile_entity_info_directive'([], []).
 
 
 
@@ -8429,6 +8433,12 @@ current_logtalk_flag(Flag, Value) :-
 %
 % compiles the predicate info/2 directive key-value pairs
 
+'$lgt_compile_predicate_info_directive'((-), _, _, _) :-
+	% catch variables and lists with unbound tails
+	throw(instantiation_error).
+
+'$lgt_compile_predicate_info_directive'([], _, _, []).
+
 '$lgt_compile_predicate_info_directive'([Pair| Pairs], Functor, Arity, [TPair| TPairs]) :-
 	(	'$lgt_valid_info_key_value_pair'(Pair, Key, Value) ->
 		'$lgt_compile_predicate_info_directive_pair'(Key, Value, Functor, Arity, TPair),
@@ -8436,8 +8446,6 @@ current_logtalk_flag(Flag, Value) :-
 	;	% non-valid pair; generate an error
 		'$lgt_must_be'(key_value_info_pair, Pair)
 	).
-
-'$lgt_compile_predicate_info_directive'([], _, _, []).
 
 
 
