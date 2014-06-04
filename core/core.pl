@@ -6149,9 +6149,9 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_file_terms'([Term| Terms], Ctx) :-
 	'$lgt_must_be'(nonvar, Term, term(Term)),
-	% only the compilation context mode should be shared between different terms
-	'$lgt_comp_ctx_mode'(Ctx, Mode),
-	'$lgt_comp_ctx_mode'(NewCtx, Mode),
+	% only the compilation context mode and position should be shared between different terms
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, Mode, _, Position),
+	'$lgt_comp_ctx'(NewCtx, _, _, _, _, _, _, _, _, Mode, _, Position),
 	'$lgt_compile_file_term'(Term, NewCtx),
 	'$lgt_compile_file_terms'(Terms, Ctx).
 
