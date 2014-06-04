@@ -5211,7 +5211,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_file_term'((-), _, _, _) :-
 	% catch variables
-	throw(instantiation_error).
+	throw(error(instantiation_error, term(_))).
 
 '$lgt_compile_file_term'(end_of_file, _, Position, _) :-
 	'$lgt_pp_module_'(Module),
@@ -14249,8 +14249,11 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_predicate_calls'(Optimize) :-
 	retract('$lgt_pp_entity_term_'(Term, Position)),
-		'$lgt_compile_predicate_calls'(Term, Optimize, TTerm),
-		assertz('$lgt_pp_final_entity_term_'(TTerm, Position)),
+	(	'$lgt_compile_predicate_calls'(Term, Optimize, TTerm) ->
+		assertz('$lgt_pp_final_entity_term_'(TTerm, Position))
+	;	'$lgt_internal_term_to_goal_and_user_term'(Term, Goal, UserTerm),
+		throw(error(domain_error(goal,Goal), term(UserTerm)))
+	),
 	fail.
 
 '$lgt_compile_predicate_calls'(_) :-
@@ -14261,23 +14264,53 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_predicate_calls'(Optimize) :-
 	retract('$lgt_pp_entity_aux_clause_'(Clause)),
-		'$lgt_compile_predicate_calls'(Clause, Optimize, TClause),
-		assertz('$lgt_pp_final_entity_aux_clause_'(TClause)),
+	(	'$lgt_compile_predicate_calls'(Clause, Optimize, TClause) ->
+		assertz('$lgt_pp_final_entity_aux_clause_'(TClause))
+	;	'$lgt_internal_term_to_goal_and_user_term'(Clause, Goal, UserClause),
+		throw(error(domain_error(goal,Goal), clause(UserClause)))
+	),
 	fail.
 
 '$lgt_compile_predicate_calls'(Optimize) :-
 	retract('$lgt_pp_entity_initialization_'(Goal)),
-		'$lgt_compile_predicate_calls'(Goal, Optimize, TGoal),
-		assertz('$lgt_pp_final_entity_initialization_'(TGoal)),
+	(	'$lgt_compile_predicate_calls'(Goal, Optimize, TGoal) ->
+		assertz('$lgt_pp_final_entity_initialization_'(TGoal))
+	;	'$lgt_internal_term_to_goal_and_user_term'(Goal, UserGoal, UserDirective),
+		throw(error(domain_error(goal,UserGoal), directive(UserDirective)))
+	),
 	fail.
 
 '$lgt_compile_predicate_calls'(Optimize) :-
 	retract('$lgt_pp_entity_meta_directive_'(Directive)),
-		'$lgt_compile_predicate_calls'(Directive, Optimize, TDirective),
-		assertz('$lgt_pp_directive_'(TDirective)),
+	(	'$lgt_compile_predicate_calls'(Directive, Optimize, TDirective) ->
+		assertz('$lgt_pp_directive_'(TDirective))
+	;	'$lgt_internal_term_to_goal_and_user_term'(Directive, Goal, UserDirective),
+		throw(error(domain_error(goal,Goal), directive(UserDirective)))
+	),
 	fail.
 
 '$lgt_compile_predicate_calls'(_).
+
+
+'$lgt_internal_term_to_goal_and_user_term'(srule(_,Body,Ctx), Body, (Head:-Body)) :-
+	'$lgt_comp_ctx_head'(Ctx, Head).
+
+'$lgt_internal_term_to_goal_and_user_term'(dsrule(_,_,Body,Ctx), Body, (Head:-Body)) :-
+	'$lgt_comp_ctx_head'(Ctx, Head).
+
+'$lgt_internal_term_to_goal_and_user_term'(drule(_,_,Body,Ctx), Body, (Head:-Body)) :-
+	'$lgt_comp_ctx_head'(Ctx, Head).
+
+'$lgt_internal_term_to_goal_and_user_term'(ddrule(_,_,_,Body,Ctx), Body, (Head:-Body)) :-
+	'$lgt_comp_ctx_head'(Ctx, Head).
+
+'$lgt_internal_term_to_goal_and_user_term'(goal(Body,_), Body, (:-initialization(Body))).
+
+'$lgt_internal_term_to_goal_and_user_term'(dgoal(Body,_), Body, (:-initialization(Body))).
+
+'$lgt_internal_term_to_goal_and_user_term'(directive(Directive,_), Directive, (:-Directive)).
+
+'$lgt_internal_term_to_goal_and_user_term'(Term, Term, Term).
 
 
 
