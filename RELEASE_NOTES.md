@@ -63,6 +63,9 @@ term- and goal-expansion methods.
 * FIXED: Several cases where the compiler would miss instantiation errors when
 type-checking directives.
 
+* FIXED: Don't try to reuse internal entity functors when recompiling an entity
+as the `code_prefix` flag may have changed between compilations.
+
 Tools
 -----
 
