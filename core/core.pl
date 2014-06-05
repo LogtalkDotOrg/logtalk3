@@ -10422,12 +10422,6 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_compile_body'(Obj::Pred, TPred, _, Ctx),
 	!.
 
-% non-callable terms
-
-'$lgt_compile_body'(Pred, _, _, _) :-
-	\+ callable(Pred),
-	throw(type_error(callable, Pred)).
-
 % call to a meta-predicate from a user-defined meta-predicate;
 % must check the number of arguments for shared closures
 %
@@ -10482,28 +10476,10 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_add_referenced_module_predicate'(Module, Pred, Alias, Head),
 	'$lgt_compile_body'(':'(Module,Pred), TPred, _, Ctx).
 
-% remember non-portable Prolog built-in predicate calls
-
-'$lgt_compile_body'(Pred, _, _, Ctx) :-
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, compile(_), _, Lines),
-	\+ '$lgt_pp_non_portable_predicate_'(Pred, _),
-	% not previously recorded as a non portable call
-	'$lgt_compiler_flag'(portability, warning),
-	'$lgt_predicate_property'(Pred, built_in),
-	\+ '$lgt_logtalk_built_in_predicate'(Pred, _),
-	\+ '$lgt_iso_spec_predicate'(Pred),
-	% bona fide Prolog built-in predicate
-	functor(Pred, Functor, Arity),
-	\+ '$lgt_pp_public_'(Functor, Arity),
-	\+ '$lgt_pp_protected_'(Functor, Arity),
-	\+ '$lgt_pp_private_'(Functor, Arity),
-	\+ '$lgt_pp_redefined_built_in_'(Pred, _, _),
-	% not a redefined Prolog built-in predicate; remember it
-	functor(Head, Functor, Arity),
-	assertz('$lgt_pp_non_portable_predicate_'(Head, Lines)),
-	fail.
-
-% Prolog proprietary meta-predicates
+% predicates defined in the pseudo-object "user" as specified in uses/2 directives
+%
+% the uses/2 directive is typically used in this case to help document dependencies
+% on Prolog-defined predicates (usually, but not necessarily, built-in predicates)  
 
 '$lgt_compile_body'(Alias, TPred, DPred, Ctx) :-
 	'$lgt_pp_uses_predicate_'(user, Pred, Alias),
@@ -10528,61 +10504,10 @@ current_logtalk_flag(Flag, Value) :-
 		throw(domain_error(meta_predicate_template, Meta))
 	).
 
-'$lgt_compile_body'(Pred, TPred, DPred, Ctx) :-
-	(	'$lgt_prolog_meta_predicate'(Pred, Meta, Type) ->
-		true
-	;	'$lgt_predicate_property'(Pred, built_in),
-		catch('$lgt_predicate_property'(Pred, meta_predicate(Meta)), _, fail)
-	),
-	(	'$lgt_comp_ctx_mode'(Ctx, runtime) ->
-		true
-	;	\+ '$lgt_pp_defines_predicate_'(Pred, _, _, _),
-		functor(Pred, Functor, Arity),
-		\+ '$lgt_pp_public_'(Functor, Arity),
-		\+ '$lgt_pp_protected_'(Functor, Arity),
-		\+ '$lgt_pp_private_'(Functor, Arity)
-	),
-	!,
-	Pred =.. [_| Args],
-	Meta =.. [_| MArgs],
-	(	'$lgt_prolog_to_logtalk_meta_argument_specifiers'(MArgs, CMArgs),
-		'$lgt_compile_prolog_meta_arguments'(Args, CMArgs, Ctx, TArgs, DArgs) ->
-		TGoal =.. [Functor| TArgs],
-		DGoal =.. [Functor| DArgs],
-		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-		TPred = TGoal,
-		(	Type == control_construct ->
-			DPred = DGoal
-		;	DPred = '$lgt_debug'(goal(Pred, DGoal), ExCtx)
-		)
-	;	% meta-predicate template is not usable
-		throw(domain_error(meta_predicate_template, Meta))
-	).
-
-% predicates defined in the pseudo-object "user" as specified in uses/2 directives
-%
-% the uses/2 directive is typically used in this case to help document dependencies
-% on Prolog-defined predicates (usually, but not necessarily, built-in predicates)  
-
 '$lgt_compile_body'(Alias, Pred, '$lgt_debug'(goal(Alias, Pred), ExCtx), Ctx) :-
 	'$lgt_pp_uses_predicate_'(user, Pred, Alias),
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
-
-% Logtalk and Prolog built-in predicates
-
-'$lgt_compile_body'(Pred, Pred, '$lgt_debug'(goal(Pred, Pred), ExCtx), Ctx) :-
-	'$lgt_built_in_predicate'(Pred),
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, ExCtx, Mode, _, _),
-	(	Mode == runtime ->
-		true
-	;	\+ '$lgt_pp_defines_predicate_'(Pred, _, _, _),
-		functor(Pred, Functor, Arity),
-		\+ '$lgt_pp_public_'(Functor, Arity),
-		\+ '$lgt_pp_protected_'(Functor, Arity),
-		\+ '$lgt_pp_private_'(Functor, Arity)
-	),
-	!.
 
 % goal is a call to a dynamic predicate within a category
 
@@ -10592,6 +10517,12 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	TPred = '$lgt_call_in_this'(Pred, ExCtx).
+
+% non-callable terms
+
+'$lgt_compile_body'(Pred, _, _, _) :-
+	\+ callable(Pred),
+	throw(type_error(callable, Pred)).
 
 % runtime translation
 
@@ -10610,7 +10541,7 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	!.
 
-% goal is a call to a local user-defined predicate
+% call to a local user-defined predicate
 
 '$lgt_compile_body'(Pred, TPred, '$lgt_debug'(goal(DPred, TPred), ExCtx), Ctx) :-
 	'$lgt_pp_coinductive_'(Pred, _, ExCtx, TCPred, _, _, DCPred),
@@ -10665,32 +10596,100 @@ current_logtalk_flag(Flag, Value) :-
 	functor(TPred, TFunctor, TArity),
 	'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head, Lines).
 
-% call to an undefined or unkown predicate
+% call to a declared but undefined predicate
+
+'$lgt_compile_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
+	(	'$lgt_pp_dynamic_'(Pred)
+	;	'$lgt_pp_multifile_'(Pred, _)
+	),
+	!,
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, Prefix, _, _, ExCtx, Mode, _, Lines),
+	functor(Pred, Functor, Arity),
+	'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
+	functor(TPred, TFunctor, TArity),
+	'$lgt_unify_head_thead_arguments'(Pred, TPred, ExCtx),
+ 	'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head, Lines).
+
+'$lgt_compile_body'(Pred, fail, '$lgt_debug'(goal(Pred, fail), ExCtx), Ctx) :-
+	functor(Pred, Functor, Arity),
+	(	'$lgt_pp_public_'(Functor, Arity)
+	;	'$lgt_pp_protected_'(Functor, Arity)
+	;	'$lgt_pp_private_'(Functor, Arity)
+	),
+	!,
+	% closed-world assumption: calls to static, non-multifile, declared
+	% but undefined predicates must fail instead of throwing an exception
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, Prefix, _, _, ExCtx, Mode, _, Lines),
+	'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
+ 	'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head, Lines),
+	'$lgt_report_undefined_predicate_call'(Mode, Functor/Arity, Lines).
+
+% call to a Prolog built-in meta-predicate
+
+'$lgt_compile_body'(Pred, TPred, DPred, Ctx) :-
+	(	'$lgt_prolog_meta_predicate'(Pred, Meta, Type) ->
+		true
+	;	'$lgt_predicate_property'(Pred, built_in),
+		catch('$lgt_predicate_property'(Pred, meta_predicate(Meta)), _, fail)
+	),
+	!,
+	Pred =.. [Functor| Args],
+	Meta =.. [Functor| MArgs],
+	(	'$lgt_prolog_to_logtalk_meta_argument_specifiers'(MArgs, CMArgs),
+		'$lgt_compile_prolog_meta_arguments'(Args, CMArgs, Ctx, TArgs, DArgs) ->
+		TGoal =.. [Functor| TArgs],
+		DGoal =.. [Functor| DArgs],
+		'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
+		TPred = TGoal,
+		(	Type == control_construct ->
+			DPred = DGoal
+		;	DPred = '$lgt_debug'(goal(Pred, DGoal), ExCtx)
+		),
+		'$lgt_check_non_portable_prolog_built_in_call'(Mode, Pred, Lines)
+	;	% meta-predicate template is not usable
+		throw(domain_error(meta_predicate_template, Meta))
+	).
+
+% call to a Prolog built-in predicate
+
+'$lgt_compile_body'(Pred, Pred, '$lgt_debug'(goal(Pred, Pred), ExCtx), Ctx) :-
+	'$lgt_prolog_built_in_predicate'(Pred),
+	!,
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
+	'$lgt_check_non_portable_prolog_built_in_call'(Mode, Pred, Lines).
+
+% call to a Logtalk built-in predicate (not already handled)
+
+'$lgt_compile_body'(Pred, Pred, '$lgt_debug'(goal(Pred, Pred), ExCtx), Ctx) :-
+	'$lgt_logtalk_built_in_predicate'(Pred, _),
+	!,
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
+
+% call to a unkown predicate
 
 '$lgt_compile_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, Prefix, _, _, ExCtx, Mode, _, Lines),
  	functor(Pred, Functor, Arity),
 	'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
+	functor(TPred, TFunctor, TArity),
+	'$lgt_unify_head_thead_arguments'(Pred, TPred, ExCtx),
  	'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head, Lines),
-	(	(	'$lgt_pp_dynamic_'(Pred)
-		;	'$lgt_pp_multifile_'(Pred, _)
-		) ->
-		functor(TPred0, TFunctor, TArity),
-		'$lgt_unify_head_thead_arguments'(Pred, TPred0, ExCtx),
-		TPred = TPred0
-	;	(	'$lgt_pp_public_'(Functor, Arity)
-		;	'$lgt_pp_protected_'(Functor, Arity)
-		;	'$lgt_pp_private_'(Functor, Arity)
-		) ->
-		% closed-world assumption: calls to static, non-multifile, declared
-		% but undefined predicates must fail instead of throwing an exception
-		'$lgt_report_undefined_predicate_call'(Mode, Functor/Arity, Lines),
-		TPred = fail
-	;	% call to an unkown predicate, likely a typo or an error
-		'$lgt_report_unknown_predicate_call'(Mode, Functor/Arity, Lines),
-		functor(TPred0, TFunctor, TArity),
-		'$lgt_unify_head_thead_arguments'(Pred, TPred0, ExCtx),
-		TPred = TPred0
+	'$lgt_report_unknown_predicate_call'(Mode, Functor/Arity, Lines).
+
+
+
+% remember non-portable Prolog built-in predicate calls
+
+'$lgt_check_non_portable_prolog_built_in_call'(runtime, _, _).
+
+'$lgt_check_non_portable_prolog_built_in_call'(compile(_), Pred, Lines) :-
+	(	\+ '$lgt_pp_non_portable_predicate_'(Pred, _),
+		% not previously recorded as a non portable call
+		\+ '$lgt_iso_spec_predicate'(Pred) ->
+		% bona fide non-portable Prolog built-in predicate
+		'$lgt_term_template'(Pred, Template),
+		assertz('$lgt_pp_non_portable_predicate_'(Template, Lines))
+	;	true
 	).
 
 
