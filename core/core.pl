@@ -11178,7 +11178,6 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	functor(Head, Functor, Arity),
 	(	\+ '$lgt_pp_dynamic_'(Head),
-		% dynamic directive not (yet) found
 		\+ '$lgt_pp_missing_dynamic_directive_'(Head, _) ->
 		assertz('$lgt_pp_missing_dynamic_directive_'(Head, Lines))
 	;	true
@@ -11187,7 +11186,6 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_check_dynamic_directive'(Head, Lines) :-
 	% clause fact
 	(	\+ '$lgt_pp_dynamic_'(Head),
-		% dynamic directive not (yet) found
 		\+ '$lgt_pp_missing_dynamic_directive_'(Head, _) ->
 		assertz('$lgt_pp_missing_dynamic_directive_'(Head, Lines))
 	;	true
