@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Reference Manual XHTML to PDF conversion script
-##   Last updated on May 21, 2014
+##   Last updated on June 5, 2014
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -67,7 +67,6 @@ eval $xslt_proc -o directives/initialization_1.section refman.xsl directives/ini
 eval $xslt_proc -o directives/multifile_1.section refman.xsl directives/multifile_1.html
 eval $xslt_proc -o directives/object_1_5.section refman.xsl directives/object_1_5.html
 eval $xslt_proc -o directives/protocol_1_2.section refman.xsl directives/protocol_1_2.html
-eval $xslt_proc -o directives/synchronized_0.section refman.xsl directives/synchronized_0.html
 eval $xslt_proc -o directives/threaded_0.section refman.xsl directives/threaded_0.html
 eval $xslt_proc -o directives/alias_2.section refman.xsl directives/alias_2.html
 eval $xslt_proc -o directives/coinductive_1.section refman.xsl directives/coinductive_1.html
@@ -199,7 +198,6 @@ cat -s \
 	directives/multifile_1.section \
 	directives/object_1_5.section \
 	directives/protocol_1_2.section \
-	directives/synchronized_0.section \
 	directives/threaded_0.section \
 	directives/alias_2.section \
 	directives/coinductive_1.section \

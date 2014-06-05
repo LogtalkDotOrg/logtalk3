@@ -63,6 +63,14 @@ Relative and absolute source file paths are now fully supported by the
 compiling and loading built-in predicates.
 
 
+Removed directives
+------------------
+
+The `synchronized/0` entity directive is no longer supported. But any usage
+of this directive can be replaced by using instead the `synchronized/1`
+predicate directive.
+
+
 Removed flags
 -------------
 

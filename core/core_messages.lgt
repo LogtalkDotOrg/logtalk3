@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/05/29,
+		date is 2014/06/05,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -358,10 +358,6 @@
 
 	logtalk::message_tokens(compiling_query_as_initialization_goal(File, Lines, Type, Entity, Directive), core) -->
 		['Compiling query as an initialization goal: ~q'-[Directive], nl],
-		message_context(File, Lines, Type, Entity).
-
-	logtalk::message_tokens(ignoring_synchronized_predicate_directive(File, Lines, Type, Entity), core) -->
-		['Ignoring synchronized predicate directive: ~w already declared as synchronized'-[Type], nl],
 		message_context(File, Lines, Type, Entity).
 
 	logtalk::message_tokens(singleton_variables(File, Lines, Type, Entity, Names, Term), core) -->

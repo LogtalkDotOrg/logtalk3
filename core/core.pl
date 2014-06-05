@@ -429,8 +429,6 @@
 :- dynamic('$lgt_pp_dynamic_'/0).
 % '$lgt_pp_threaded_'
 :- dynamic('$lgt_pp_threaded_'/0).
-% '$lgt_pp_synchronized_'
-:- dynamic('$lgt_pp_synchronized_'/0).
 
 % '$lgt_pp_file_encoding_'(LogtalkEncoding, PrologEncoding)
 :- dynamic('$lgt_pp_file_encoding_'/2).
@@ -5757,10 +5755,6 @@ current_logtalk_flag(Flag, Value) :-
 		Events = 16						% 0b0000001000
 	;	Events = 0
 	),
-	(	'$lgt_pp_synchronized_' ->
-		Synchronized = 4				% 0b0000000100
-	;	Synchronized = 0
-	),
 	(	'$lgt_pp_dynamic_' ->
 		Dynamic = 2						% 0b0000000010
 	;	Dynamic = 0
@@ -5769,7 +5763,7 @@ current_logtalk_flag(Flag, Value) :-
 		BuiltIn = 1						% 0b0000000001
 	;	BuiltIn = 0
 	),
-	Flags is Debug + Events + Synchronized + Dynamic + BuiltIn.
+	Flags is Debug + Events + Dynamic + BuiltIn.
 
 '$lgt_compile_entity_flags'(object, Flags) :-
 	(	'$lgt_compiler_flag'(debug, on) ->
@@ -5798,10 +5792,6 @@ current_logtalk_flag(Flag, Value) :-
 		Threaded = 8					% 0b0000001000
 	;	Threaded = 0
 	),
-	(	'$lgt_pp_synchronized_' ->
-		Synchronized = 4				% 0b0000000100
-	;	Synchronized = 0
-	),
 	(	'$lgt_pp_dynamic_' ->
 		Dynamic = 2						% 0b0000000010
 	;	Dynamic = 0
@@ -5810,7 +5800,7 @@ current_logtalk_flag(Flag, Value) :-
 		BuiltIn = 1						% 0b0000000001
 	;	BuiltIn = 0
 	),
-	Flags is Debug + ContextSwitchingCalls + DynamicDeclarations + Complements + Events + Threaded + Synchronized + Dynamic + BuiltIn.
+	Flags is Debug + ContextSwitchingCalls + DynamicDeclarations + Complements + Events + Threaded + Dynamic + BuiltIn.
 
 
 
@@ -5948,7 +5938,6 @@ current_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_pp_built_in_'),
 	retractall('$lgt_pp_dynamic_'),
 	retractall('$lgt_pp_threaded_'),
-	retractall('$lgt_pp_synchronized_'),
 	retractall('$lgt_pp_aux_predicate_counter_'(_)).
 
 
@@ -6856,22 +6845,6 @@ current_logtalk_flag(Flag, Value) :-
 	;	throw(domain_error(object_directive, threaded/0))
 	).
 
-% make all object (or category) predicates synchronized using the same mutex
-%
-% this directive is ignored when using a back-end Prolog compiler that don't
-% provide a compatible threads implementation
-
-'$lgt_compile_logtalk_directive'(synchronized, _) :-
-	'$lgt_pp_entity_'(Type, _, Prefix, _, _),
-	(	Type == protocol ->
-		throw(domain_error(directive, synchronized/0))
-	;	'$lgt_prolog_feature'(threads, supported) ->
-		atom_concat(Prefix, 'mutex_', Mutex),
-		assertz('$lgt_pp_synchronized_'),
-		assertz('$lgt_pp_synchronized_'(_, Mutex))
-	;	true
-	).
-
 % dynamic/0 entity directive
 %
 % (entities are static by default but can be declared dynamic using this directive)
@@ -6973,21 +6946,10 @@ current_logtalk_flag(Flag, Value) :-
 % this directive is ignored when using a back-end Prolog compiler
 % that does not provide a compatible threads implementation
 
-'$lgt_compile_logtalk_directive'(synchronized(Resources), Ctx) :-
+'$lgt_compile_logtalk_directive'(synchronized(Resources), _) :-
 	(	'$lgt_prolog_feature'(threads, supported) ->
-		(	'$lgt_pp_synchronized_' ->
-			% the entity itself is declared synchronized; thus all its
-			% predicates are already being compiled as synchronized 
-			(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
-				'$lgt_increment_compile_warnings_counter',
-				'$lgt_warning_context'(Path, Lines, Type, Entity),
-				'$lgt_print_message'(warning(general), core, ignoring_synchronized_predicate_directive(Path, Lines, Type, Entity))
-			;	true
-			)
-		;	% process the directive
-			'$lgt_flatten_to_list'(Resources, ResourcesFlatted),
-			'$lgt_compile_synchronized_directive'(ResourcesFlatted)
-		)
+		'$lgt_flatten_to_list'(Resources, ResourcesFlatted),
+		'$lgt_compile_synchronized_directive'(ResourcesFlatted)
 	;	% ignore the directive
 		true
 	).
@@ -13300,7 +13262,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	'$lgt_pp_public_'(Functor, Arity)
 	;	'$lgt_pp_protected_'(Functor, Arity)
 	;	'$lgt_pp_private_'(Functor, Arity)
-	;	'$lgt_pp_synchronized_'(Head, _), nonvar(Head)
+	;	'$lgt_pp_synchronized_'(Head, _)
 	;	'$lgt_pp_coinductive_'(Head, _, _, _, _, _, _)
 	),
 	functor(Head, Functor, Arity),
@@ -15624,7 +15586,6 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_logtalk_entity_directive'((dynamic)).
 '$lgt_logtalk_entity_directive'(op(_, _, _)).
 '$lgt_logtalk_entity_directive'(info(_)).
-'$lgt_logtalk_entity_directive'(synchronized).
 '$lgt_logtalk_entity_directive'(threaded).
 '$lgt_logtalk_entity_directive'(set_logtalk_flag(_, _)).
 % Prolog module directives that can be used within objects and categories
@@ -16234,8 +16195,6 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_valid_protocol_property'(Property), !.
 % messages sent from the object using the ::/2 control construct generate events
 '$lgt_valid_category_property'(events).
-% all predicates are synchronized (using the same mutex)
-'$lgt_valid_category_property'(synchronized).
 % list of definition properties for a predicate defined in the category
 '$lgt_valid_category_property'(defines(_, _)).
 % list of definition properties for a multifile predicate defined in contributing entities

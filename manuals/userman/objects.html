@@ -305,16 +305,6 @@ The initialization goal can also be a message to <i>self</i> in order to call an
 <p>
 Note, however, that descendant objects do not inherit initialization directives. In this context, <i>self</i> denotes the object that contains the directive. Also note that by initialization we do not necessarily mean setting an object dynamic state.
 </p>
- 
-<h3 id="objects_synchronized">Synchronized objects</h3>
-
-<p>
-When doing multi-threading programming, is possible to synchronize all the predicates of an object using the <a title="Consult reference manual" href="../refman/directives/synchronized_0.html"><code>synchronized/0</code></a> directive in the object source code:
-</p>
-<pre>:- synchronized.</pre>
-<p>
-This directive results in using internally the same mutex for synchronizing the execution of all defined object predicates. For fine-grained predicate synchronization, the <a title="Consult reference manual" href="../refman/directives/synchronized_1.html"><code>synchronized/1</code></a> directive may be used instead.
-</p>
 
 <h3 id="objects_dynamic">Dynamic objects</h3>
 
@@ -419,7 +409,7 @@ We can find the properties of defined objects by calling the built-in predicate 
 </p>
 <pre>| ?- object_property(Object, Property).</pre>
 <p>
-An object may have the property <code>static</code>, <code>dynamic</code>, or <code>built_in</code>. Dynamic objects can be abolished in runtime by calling the <a title="Consult reference manual" href="../refman/predicates/abolish_object_1.html"><code>abolish_object/1</code></a> built-in predicate. An object may also have the properties <code>synchronized</code> and <code>threaded</code>, which are related to multi-threading programming. Depending on the back-end Prolog compiler, an object may have additional properties related to the source file where it is defined.
+An object may have the property <code>static</code>, <code>dynamic</code>, or <code>built_in</code>. Dynamic objects can be abolished in runtime by calling the <a title="Consult reference manual" href="../refman/predicates/abolish_object_1.html"><code>abolish_object/1</code></a> built-in predicate. Depending on the back-end Prolog compiler, an object may have additional properties related to the source file where it is defined.
 </p>
 
 <h2 id="objects_built_in">Built-in objects</h2>
@@ -502,7 +492,7 @@ To use these predicates, simply send the corresponding message to the <code>logt
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: May 21, 2014</span>
+		<span>Last updated on: June 5, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="messages.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="protocols.html">next</a></span><br/>
