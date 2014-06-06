@@ -10445,31 +10445,32 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_body'(Alias, TPred, DPred, Ctx) :-
 	'$lgt_pp_uses_predicate_'(user, Pred, Alias),
-	(	'$lgt_prolog_meta_predicate'(Pred, Meta, Type)
-		% built-in Prolog meta-predicate declared in the adapter file in use
-	;	catch('$lgt_predicate_property'(Pred, meta_predicate(Meta)), _, fail)
-		% Prolog meta-predicate undeclared in the adapter file (may not be a built-in)
-	),
 	!,
-	Pred =.. [Functor| Args],
-	Meta =.. [Functor| MArgs],
-	(	'$lgt_prolog_to_logtalk_meta_argument_specifiers'(MArgs, CMArgs),
-		'$lgt_compile_prolog_meta_arguments'(Args, CMArgs, Ctx, TArgs, DArgs) ->
-		TPred =.. [Functor| TArgs],
-		DGoal =.. [Functor| DArgs],
-		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-		(	Type == control_construct ->
-			DPred = DGoal
-		;	DPred = '$lgt_debug'(goal(Alias, DGoal), ExCtx)
+	(	(	'$lgt_prolog_meta_predicate'(Pred, Meta, Type)
+			% built-in Prolog meta-predicate declared in the adapter file in use
+			;	catch('$lgt_predicate_property'(Pred, meta_predicate(Meta)), _, fail)
+			% Prolog meta-predicate undeclared in the adapter file (may not be a built-in)
+		) ->
+		% meta-predicate
+		Pred =.. [Functor| Args],
+		Meta =.. [Functor| MArgs],
+		(	'$lgt_prolog_to_logtalk_meta_argument_specifiers'(MArgs, CMArgs),
+			'$lgt_compile_prolog_meta_arguments'(Args, CMArgs, Ctx, TArgs, DArgs) ->
+			TPred =.. [Functor| TArgs],
+			DGoal =.. [Functor| DArgs],
+			'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+			(	Type == control_construct ->
+				DPred = DGoal
+			;	DPred = '$lgt_debug'(goal(Alias, DGoal), ExCtx)
+			)
+		;	% meta-predicate template is not usable
+			throw(domain_error(meta_predicate_template, Meta))
 		)
-	;	% meta-predicate template is not usable
-		throw(domain_error(meta_predicate_template, Meta))
+	;	% non meta-predicate
+		TPred = Pred,
+		DPred = '$lgt_debug'(goal(Alias, Pred), ExCtx),
+		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx)
 	).
-
-'$lgt_compile_body'(Alias, Pred, '$lgt_debug'(goal(Alias, Pred), ExCtx), Ctx) :-
-	'$lgt_pp_uses_predicate_'(user, Pred, Alias),
-	!,
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
 
 % goal is a call to a dynamic predicate within a category
 
@@ -10486,7 +10487,7 @@ current_logtalk_flag(Flag, Value) :-
 	\+ callable(Pred),
 	throw(type_error(callable, Pred)).
 
-% runtime translation
+% runtime translation (covers only the common case of calling a user-defined predicate)
 
 '$lgt_compile_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
 	'$lgt_comp_ctx'(Ctx, _, Sender, This, _, _, MetaVars, _, ExCtx, runtime, _, _),
@@ -10589,36 +10590,35 @@ current_logtalk_flag(Flag, Value) :-
 % call to a Prolog built-in meta-predicate
 
 '$lgt_compile_body'(Pred, TPred, DPred, Ctx) :-
-	(	'$lgt_prolog_meta_predicate'(Pred, Meta, Type) ->
-		true
-	;	'$lgt_predicate_property'(Pred, built_in),
-		catch('$lgt_predicate_property'(Pred, meta_predicate(Meta)), _, fail)
-	),
-	!,
-	Pred =.. [Functor| Args],
-	Meta =.. [Functor| MArgs],
-	(	'$lgt_prolog_to_logtalk_meta_argument_specifiers'(MArgs, CMArgs),
-		'$lgt_compile_prolog_meta_arguments'(Args, CMArgs, Ctx, TArgs, DArgs) ->
-		TGoal =.. [Functor| TArgs],
-		DGoal =.. [Functor| DArgs],
-		'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
-		TPred = TGoal,
-		(	Type == control_construct ->
-			DPred = DGoal
-		;	DPred = '$lgt_debug'(goal(Pred, DGoal), ExCtx)
-		),
-		'$lgt_check_non_portable_prolog_built_in_call'(Mode, Pred, Lines)
-	;	% meta-predicate template is not usable
-		throw(domain_error(meta_predicate_template, Meta))
-	).
-
-% call to a Prolog built-in predicate
-
-'$lgt_compile_body'(Pred, Pred, '$lgt_debug'(goal(Pred, Pred), ExCtx), Ctx) :-
 	'$lgt_prolog_built_in_predicate'(Pred),
 	!,
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
-	'$lgt_check_non_portable_prolog_built_in_call'(Mode, Pred, Lines).
+	(	(	'$lgt_prolog_meta_predicate'(Pred, Meta, Type) ->
+			true
+		;	catch('$lgt_predicate_property'(Pred, meta_predicate(Meta)), _, fail)
+		) ->
+		% meta-predicate
+		Pred =.. [Functor| Args],
+		Meta =.. [Functor| MArgs],
+		(	'$lgt_prolog_to_logtalk_meta_argument_specifiers'(MArgs, CMArgs),
+			'$lgt_compile_prolog_meta_arguments'(Args, CMArgs, Ctx, TArgs, DArgs) ->
+			TGoal =.. [Functor| TArgs],
+			DGoal =.. [Functor| DArgs],
+			'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
+			TPred = TGoal,
+			(	Type == control_construct ->
+				DPred = DGoal
+			;	DPred = '$lgt_debug'(goal(Pred, DGoal), ExCtx)
+			),
+			'$lgt_check_non_portable_prolog_built_in_call'(Mode, Pred, Lines)
+		;	% meta-predicate template is not usable
+			throw(domain_error(meta_predicate_template, Meta))
+		)
+	;	% non meta-predicate
+		TPred = Pred,
+		DPred = '$lgt_debug'(goal(Pred, Pred), ExCtx),
+		'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
+		'$lgt_check_non_portable_prolog_built_in_call'(Mode, Pred, Lines)
+	).
 
 % call to a Logtalk built-in predicate (not already handled)
 
