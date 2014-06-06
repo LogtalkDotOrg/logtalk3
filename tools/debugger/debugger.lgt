@@ -339,13 +339,13 @@
 
 	debug_handler(fact(_, Fact, N), ExCtx) :-
 		(	debugging_, \+ skipping_ ->
-			port(fact(N), _, Fact, _, ExCtx, Action),
+			port(fact(N), _, Fact, _, _, ExCtx, Action),
 			{Action}
 		;	true
 		).
 	debug_handler(rule(_, Head, N), ExCtx) :-
 		(	debugging_, \+ skipping_ ->
-			port(rule(N), _, Head, _, ExCtx, Action),
+			port(rule(N), _, Head, _, _, ExCtx, Action),
 			{Action}
 		;	true
 		).
@@ -401,7 +401,7 @@
 			Action = true
 		).
 
-	port(_, _, _, _, _, true).
+	port(_, _, _, _, _, _, true).
 
 	write_invocation_number(fact(_), _) :- !.
 	write_invocation_number(rule(_), _) :- !.
