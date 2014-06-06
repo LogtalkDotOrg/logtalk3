@@ -14968,15 +14968,19 @@ current_logtalk_flag(Flag, Value) :-
 % constructs functors used in the compiled code of a prototype
 
 '$lgt_construct_prototype_functors'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm) :-
-	'$lgt_construct_entity_prefix'(Obj, Prefix),
-	atom_concat(Prefix, '_dcl', Dcl),
-	atom_concat(Prefix, '_def', Def),
-	atom_concat(Prefix, '_super', Super),
-	IDcl = Dcl,
-	IDef = Def,
-	atom_concat(Prefix, '_ddcl', DDcl),
-	atom_concat(Prefix, '_ddef', DDef),
-	atom_concat(Prefix, '_alias', Rnm).
+	(	'$lgt_current_object_'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, Flags),
+		Flags /\ 1 =:= 1 ->		% built-in object
+		true
+	;	'$lgt_construct_entity_prefix'(Obj, Prefix),
+		atom_concat(Prefix, '_dcl', Dcl),
+		atom_concat(Prefix, '_def', Def),
+		atom_concat(Prefix, '_super', Super),
+		IDcl = Dcl,
+		IDef = Def,
+		atom_concat(Prefix, '_ddcl', DDcl),
+		atom_concat(Prefix, '_ddef', DDef),
+		atom_concat(Prefix, '_alias', Rnm)
+	).
 
 
 
@@ -14985,15 +14989,19 @@ current_logtalk_flag(Flag, Value) :-
 % constructs functors used in the compiled code of a class or an instance
 
 '$lgt_construct_ic_functors'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm) :-
-	'$lgt_construct_entity_prefix'(Obj, Prefix),
-	atom_concat(Prefix, '_dcl', Dcl),
-	atom_concat(Prefix, '_def', Def),
-	atom_concat(Prefix, '_super', Super),
-	atom_concat(Prefix, '_idcl', IDcl),
-	atom_concat(Prefix, '_idef', IDef),
-	atom_concat(Prefix, '_ddcl', DDcl),
-	atom_concat(Prefix, '_ddef', DDef),
-	atom_concat(Prefix, '_alias', Rnm).
+	(	'$lgt_current_object_'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, Flags),
+		Flags /\ 1 =:= 1 ->		% built-in object
+		true
+	;	'$lgt_construct_entity_prefix'(Obj, Prefix),
+		atom_concat(Prefix, '_dcl', Dcl),
+		atom_concat(Prefix, '_def', Def),
+		atom_concat(Prefix, '_super', Super),
+		atom_concat(Prefix, '_idcl', IDcl),
+		atom_concat(Prefix, '_idef', IDef),
+		atom_concat(Prefix, '_ddcl', DDcl),
+		atom_concat(Prefix, '_ddef', DDef),
+		atom_concat(Prefix, '_alias', Rnm)
+	).
 
 
 
@@ -15002,9 +15010,13 @@ current_logtalk_flag(Flag, Value) :-
 % constructs functors used in the compiled code of a protocol
 
 '$lgt_construct_protocol_functors'(Ptc, Prefix, Dcl, Rnm) :-
-	'$lgt_construct_entity_prefix'(Ptc, Prefix),
-	atom_concat(Prefix, '_dcl', Dcl),
-	atom_concat(Prefix, '_alias', Rnm).
+	(	'$lgt_current_protocol_'(Ptc, Prefix, Dcl, Rnm, Flags),
+		Flags /\ 1 =:= 1 ->		% built-in protocol
+		true
+	;	'$lgt_construct_entity_prefix'(Ptc, Prefix),
+		atom_concat(Prefix, '_dcl', Dcl),
+		atom_concat(Prefix, '_alias', Rnm)
+	).
 
 
 
@@ -15013,10 +15025,14 @@ current_logtalk_flag(Flag, Value) :-
 % constructs functors used in the compiled code of a category
 
 '$lgt_construct_category_functors'(Ctg, Prefix, Dcl, Def, Rnm) :-
-	'$lgt_construct_entity_prefix'(Ctg, Prefix),
-	atom_concat(Prefix, '_dcl', Dcl),
-	atom_concat(Prefix, '_def', Def),
-	atom_concat(Prefix, '_alias', Rnm).
+	(	'$lgt_current_category_'(Ctg, Prefix, Dcl, Def, Rnm, Flags),
+		Flags /\ 1 =:= 1 ->		% built-in category
+		true
+	;	'$lgt_construct_entity_prefix'(Ctg, Prefix),
+		atom_concat(Prefix, '_dcl', Dcl),
+		atom_concat(Prefix, '_def', Def),
+		atom_concat(Prefix, '_alias', Rnm)
+	).
 
 
 
