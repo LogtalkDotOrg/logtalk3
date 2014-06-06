@@ -359,11 +359,16 @@
 				(	(CAction == ignore; CAction == unify) ->
 					true
 				;	{CAction},
-					catch({TGoal}, Error, exception(N, Goal, TGoal, Error, ExCtx)),
-					(	port(exit, N, Goal, TGoal, _, ExCtx, EAction),
+					catch(call_goal(TGoal, Deterministic), Error, exception(N, Goal, TGoal, Error, ExCtx)),
+					(	Deterministic == true ->
+						!,
+						port(exit, N, Goal, TGoal, _, ExCtx, EAction),
 						{EAction}
-					;	port(redo, N, Goal, TGoal, _, ExCtx, RAction),
-						RAction == ignore
+					;	(	port(exit, N, Goal, TGoal, _, ExCtx, EAction),
+							{EAction}
+						;	port(redo, N, Goal, TGoal, _, ExCtx, RAction),
+							RAction == ignore
+						)
 					)
 				;	retractall(skipping_),
 					port(fail, N, Goal, TGoal, _, ExCtx, _),
@@ -373,6 +378,36 @@
 			retractall(skipping_)
 		;	{TGoal}
 		).
+
+	:- if((	current_logtalk_flag(prolog_dialect, b),
+			(Dialect == b; Dialect == qp; Dialect == swi; Dialect == yap)
+	)).
+
+		call_goal(TGoal, Deterministic) :-
+			{setup_call_cleanup(true, TGoal, Deterministic = true)}.
+
+	:- elif((	current_logtalk_flag(prolog_dialect, b),
+			(Dialect == cx; Dialect == sicstus; Dialect == xsb)
+	)).
+
+		call_goal(TGoal, Deterministic) :-
+			{call_cleanup(TGoal, Deterministic = true)}.
+
+	:- elif(current_logtalk_flag(prolog_dialect, gnu)).
+
+		call_goal(TGoal, Deterministic) :-
+			{call_det(TGoal, Deterministic0)},
+			(	Deterministic0 == true ->
+				Deterministic = Deterministic0
+			;	true
+			).
+
+	:- else.
+
+		call_goal(TGoal, _) :-
+			{TGoal}.
+
+	:- endif.
 
 	exception(_, _, _, logtalk_debugger_aborted, _) :-
 		throw(logtalk_debugger_aborted).
