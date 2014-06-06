@@ -8557,8 +8557,8 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, MetaVars, _, ExCtx, _, _, _),
 	'$lgt_compile_head'(Head, THead, Ctx),
 	(	Head = {UserHead} ->
-		DHead = '$lgt_debug'(fact(Entity, user::UserHead, N), ExCtx)
-	;	DHead = '$lgt_debug'(fact(Entity, Head, N), ExCtx)
+		DHead = '$lgt_debug'(rule(Entity, user::UserHead, N), ExCtx)
+	;	DHead = '$lgt_debug'(rule(Entity, Head, N), ExCtx)
 	),
 	'$lgt_clause_number'(Head, N).
 
@@ -8569,8 +8569,8 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, MetaVars, _, ExCtx, _, _, _),
 	'$lgt_compile_head'(Head, THead, Ctx),
 	(	Head = {UserHead} ->
-		DHead = '$lgt_debug'(fact(Entity, user::UserHead, N), ExCtx)
-	;	DHead = '$lgt_debug'(fact(Entity, Head, N), ExCtx)
+		DHead = '$lgt_debug'(rule(Entity, user::UserHead, N), ExCtx)
+	;	DHead = '$lgt_debug'(rule(Entity, Head, N), ExCtx)
 	),
 	'$lgt_clause_number'(Head, N).
 

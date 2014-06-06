@@ -68,6 +68,9 @@ type-checking directives.
 * FIXED: Don't try to reuse internal entity functors when recompiling an entity
 as the `code_prefix` flag may have changed between compilations.
 
+* FIXED: Compiler bug when generating debug code for predicate rules where the
+rule head would be printed by the debugger as a fact.
+
 Tools
 -----
 
