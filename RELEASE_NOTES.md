@@ -77,6 +77,10 @@ Tools
 * CHANGED: The `diagrams` tool now uses by default lighter colors for files and
 categories for better contrast when printing diagrams.
 
+* FIXED: The `debugger` tool failed to declare itself as a debug handler
+provider due to recent changes to the meaning of *this* in multifile predicate
+clauses.
+
 
 3.00.0 Beta 5 - May 26, 2014
 ============================

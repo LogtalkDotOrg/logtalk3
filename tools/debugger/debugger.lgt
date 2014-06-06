@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2013/08/03,
+		date is 2014/06/06,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -326,8 +326,7 @@
 	% the Logtalk runtime uses the logtalk::debug_handler_provider/1 hook
 	% predicate for detecting multiple instances of the handler and for
 	% better error reporting
-	logtalk::debug_handler_provider(This) :-
-		this(This).
+	logtalk::debug_handler_provider(debugger).
 
 	:- multifile(logtalk::debug_handler/2).
 	:- if((current_logtalk_flag(prolog_dialect, qp); current_logtalk_flag(prolog_dialect, xsb))).
