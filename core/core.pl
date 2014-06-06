@@ -14295,16 +14295,8 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 % debug version of static predicate rule
-'$lgt_compile_predicate_calls'(dsrule(THead,DHead,Body,Ctx), Optimize, TClause) :-
-	'$lgt_compile_body'(Body, FBody, _, Ctx),
-	(	Optimize == on ->
-		'$lgt_simplify_goal'(FBody, SBody)
-	;	SBody = FBody
-	),
-	(	SBody == true ->
-		TClause = (THead:-DHead)
-	;	TClause = (THead:-DHead,SBody)
-	).
+'$lgt_compile_predicate_calls'(dsrule(THead,DHead,Body,Ctx), _, (THead:-DHead,DBody)) :-
+	'$lgt_compile_body'(Body, _, DBody, Ctx).
 
 % dynamic predicate rule
 '$lgt_compile_predicate_calls'(drule(THead,Nop,Body,Ctx), Optimize, TClause) :-
@@ -14319,16 +14311,8 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 % debug version of dynamic predicate rule
-'$lgt_compile_predicate_calls'(ddrule(THead,Nop,DHead,Body,Ctx), Optimize, TClause) :-
-	'$lgt_compile_body'(Body, TBody0, _, Ctx),
-	(	Optimize == on ->
-		'$lgt_simplify_goal'(TBody0, TBody)
-	;	TBody = TBody0
-	),
-	(	TBody == true ->
-		TClause = (THead:-Nop,DHead)
-	;	TClause = (THead:-Nop,DHead,TBody)
-	).
+'$lgt_compile_predicate_calls'(ddrule(THead,Nop,DHead,Body,Ctx), _, (THead:-Nop,DHead,DBody)) :-
+	'$lgt_compile_body'(Body, _, DBody, Ctx).
 
 % goal
 '$lgt_compile_predicate_calls'(goal(Body,Ctx), Optimize, TBody) :-
@@ -14339,12 +14323,8 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 % debug version of goal
-'$lgt_compile_predicate_calls'(dgoal(Body,Ctx), Optimize, TBody) :-
-	'$lgt_compile_body'(Body, _, TBody0, Ctx),
-	(	Optimize == on ->
-		'$lgt_simplify_goal'(TBody0, TBody)
-	;	TBody = TBody0
-	).
+'$lgt_compile_predicate_calls'(dgoal(Body,Ctx), _, DBody) :-
+	'$lgt_compile_body'(Body, _, DBody, Ctx).
 
 % static predicate fact
 '$lgt_compile_predicate_calls'(sfact(TFact), _, TFact).
