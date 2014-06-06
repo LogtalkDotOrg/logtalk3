@@ -55,6 +55,9 @@ require the generation and use of an auxiliary wrapper clause.
 * IMPROVED: Simplified compilation of coinductive predicates by moving some of
 the steps from the second compiler stage to the first stage.
 
+* IMPROVED: Debug code generated for calls to the `parameter/2`, `sender/1`,
+and `this/1` built-in context methods.
+
 * FIXED: Ensure closed-world semantics for predicates declared coinductive or
 synchronized but not defined.
 

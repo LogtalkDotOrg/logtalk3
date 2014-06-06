@@ -9985,7 +9985,7 @@ current_logtalk_flag(Flag, Value) :-
 % calls with instantiated arguments are not inlined as the call may be used
 % as e.g. a condition in an if-then-else control construct
 
-'$lgt_compile_body'(sender(Sender), TPred, '$lgt_debug'(goal(sender(Sender), DPred), ExCtx), Ctx) :-
+'$lgt_compile_body'(sender(Sender), TPred, '$lgt_debug'(goal(sender(DSender), DPred), ExCtx), Ctx) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, _, Sender0, _, _, _, _, _, ExCtx, _, _, _),
 	'$lgt_execution_context'(ExCtx, Sender0, _, _, _, _),
@@ -9993,13 +9993,14 @@ current_logtalk_flag(Flag, Value) :-
 		% compile time unification
 		Sender0 = Sender,
 		TPred = true,
-		DPred = (Sender0 = Sender)
+		DPred = (DSender = Sender)
 	;	% we must delay unification to runtime
 		TPred = (Sender0 = Sender),
-		DPred = TPred
+		DPred = TPred,
+		DSender = Sender
 	).
 
-'$lgt_compile_body'(this(This), TPred, '$lgt_debug'(goal(this(This), DPred), ExCtx), Ctx) :-
+'$lgt_compile_body'(this(This), TPred, '$lgt_debug'(goal(this(DThis), DPred), ExCtx), Ctx) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, _, _, This0, _, _, _, _, ExCtx, _, _, _),
 	'$lgt_execution_context_this'(ExCtx, This0),
@@ -10007,10 +10008,11 @@ current_logtalk_flag(Flag, Value) :-
 		% compile time unification
 		This0 = This,
 		TPred = true,
-		DPred = (This0 = This)
+		DPred = (DThis = This)
 	;	% we must delay unification to runtime
 		TPred = (This0 = This),
-		DPred = TPred
+		DPred = TPred,
+		DThis = This
 	),
 	(	nonvar(This0),
 		nonvar(This),
@@ -10021,7 +10023,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	true
 	).
 
-'$lgt_compile_body'(self(Self), TPred, '$lgt_debug'(goal(self(Self), DPred), ExCtx), Ctx) :-
+'$lgt_compile_body'(self(Self), TPred, '$lgt_debug'(goal(self(DSelf), DPred), ExCtx), Ctx) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, _, _, _, Self0, _, _, _, ExCtx, _, _, _),
 	'$lgt_execution_context'(ExCtx, _, _, Self0, _, _),
@@ -10029,10 +10031,11 @@ current_logtalk_flag(Flag, Value) :-
 		% compile time unification
 		Self0 = Self,
 		TPred = true,
-		DPred = (Self0 = Self)
+		DPred = (DSelf = Self)
 	;	% we must delay unification to runtime
 		TPred = (Self0 = Self),
-		DPred = TPred
+		DPred = TPred,
+		DSelf = Self
 	).
 
 '$lgt_compile_body'(parameter(Arg, Value), TPred, '$lgt_debug'(goal(parameter(Arg, Value), TPred), ExCtx), Ctx) :-
@@ -10080,7 +10083,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	throw(domain_error([1,Arity], Arg))
 	).
 
-'$lgt_compile_body'(parameter(Arg, Value), TPred, '$lgt_debug'(goal(parameter(Arg, Value), DPred), ExCtx), Ctx) :-
+'$lgt_compile_body'(parameter(Arg, Value), TPred, '$lgt_debug'(goal(parameter(Arg, DValue), DPred), ExCtx), Ctx) :-
 	(	'$lgt_pp_entity_'(object, This, _, _, _)
 	;	'$lgt_comp_ctx_mode'(Ctx, runtime)	% <</2 call
 	),
@@ -10094,10 +10097,11 @@ current_logtalk_flag(Flag, Value) :-
 			% parameter compile time unification
 			Value0 = Value,
 			TPred = true,
-			DPred = (Value0=Value)
+			DPred = (DValue = Value)
 		;	% we must delay unification to runtime
 			TPred = (Value0 = Value),
-			DPred = TPred
+			DPred = TPred,
+			DValue = Value
 		)
 	;	throw(domain_error([1,Arity], Arg))
 	).
