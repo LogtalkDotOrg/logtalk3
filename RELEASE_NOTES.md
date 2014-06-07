@@ -78,6 +78,10 @@ rule head would be printed by the debugger as a fact.
 method when its argument is only known at runtime. Thanks to Andreas Becker
 for the bug report.
 
+* FIXED: The top-level interpreter versions of the `::/2` and `<</2` control
+constructs would fail to detect an instantiation error with the `debug` flag
+turned on while using the `{}/1` syntax to access parametric object proxies.
+
 Prolog adapter and integration files
 ------------------------------------
 

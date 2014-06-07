@@ -475,12 +475,13 @@ Obj::Pred :-
 	!,
 	'$lgt_compiler_flag'(events, Events),
 	catch('$lgt_compile_message_to_object'(Pred, {Obj}, Call, user, _, Events), Error, '$lgt_runtime_error_handler'(error(Error, logtalk({Obj}::Pred, user)))),
-	(	'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags),
+	(	nonvar(Obj),
+		'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags),
 		Flags /\ 512 =:= 512 ->
 		% object compiled in debug mode
 		'$lgt_execution_context'(ExCtx, user, user, Obj, [], []),
 		catch('$lgt_debug'(top_goal({Obj}::Pred, Call), ExCtx), Error, '$lgt_runtime_error_handler'(Error))
-	;	% object not compiled in debug mode or non-existing object
+	;	% object not compiled in debug mode or non-existing object or invalid object identifier
 		catch(Call, Error, '$lgt_runtime_error_handler'(Error))
 	).
 
@@ -507,12 +508,13 @@ Obj<<Goal :-
 {Obj}<<Goal :-
 	!,
 	catch('$lgt_compile_context_switch_call'({Obj}, Goal, Call, user), Error, '$lgt_runtime_error_handler'(error(Error, logtalk({Obj}<<Goal, user)))),
-	(	'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags),
+	(	nonvar(Obj),
+		'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags),
 		Flags /\ 512 =:= 512 ->
 		% object compiled in debug mode
 		'$lgt_execution_context'(ExCtx, user, user, Obj, [], []),
 		catch('$lgt_debug'(top_goal({Obj}<<Goal, Call), ExCtx), Error, '$lgt_runtime_error_handler'(Error))
-	;	% object not compiled in debug mode or non-existing object
+	;	% object not compiled in debug mode or non-existing object or invalid object identifier
 		catch(Call, Error, '$lgt_runtime_error_handler'(Error))
 	).
 
