@@ -74,6 +74,10 @@ as the `code_prefix` flag may have changed between compilations.
 * FIXED: Compiler bug when generating debug code for predicate rules where the
 rule head would be printed by the debugger as a fact.
 
+* FIXED: Type-checking bug when compiling calls to the `retract/1` built-in
+method when its argument is only known at runtime. Thanks to Andreas Becker
+for the bug report.
+
 Prolog adapter and integration files
 ------------------------------------
 

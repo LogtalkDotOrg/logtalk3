@@ -11213,12 +11213,14 @@ current_logtalk_flag(Flag, Value) :-
 	var(Pred),
 	!.
 
-'$lgt_runtime_checked_db_clause'((Head :- _)) :-
+'$lgt_runtime_checked_db_clause'((Head :- Body)) :-
 	var(Head),
-	!.
+	!,
+	'$lgt_must_be'(var_or_callable, Body).
 
-'$lgt_runtime_checked_db_clause'((_ :- Body)) :-
-	var(Body).
+'$lgt_runtime_checked_db_clause'((Head :- Body)) :-
+	var(Body),
+	'$lgt_must_be'(var_or_callable, Head).
 
 
 
@@ -11353,8 +11355,8 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_message_to_object'(abolish(Pred), Obj, TPred, This, _, _) :-
 	!,
-	'$lgt_must_be'(var_or_predicate_indicator, Pred),
 	'$lgt_must_be'(var_or_object_identifier, Obj),
+	'$lgt_must_be'(var_or_predicate_indicator, Pred),
 	(	var(Obj) ->
 		TPred = '$lgt_abolish'(Obj, Pred, This, p(p(p)))
 	;	ground(Pred) ->
@@ -11416,13 +11418,13 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_message_to_object'(retract(Clause), Obj, TPred, This, _, _) :-
 	!,
-	'$lgt_must_be'(clause_or_partial_clause, Clause),
 	'$lgt_must_be'(var_or_object_identifier, Obj),
 	(	'$lgt_runtime_checked_db_clause'(Clause) ->
 		TPred = '$lgt_retract'(Obj, Clause, This, p(p(p)))
 	;	var(Obj) ->
 		TPred = '$lgt_retract'(Obj, Clause, This, p(p(p)))
-	;	(Clause = (Head :- Body) -> Body == true; Clause = Head) ->
+	;	'$lgt_must_be'(clause_or_partial_clause, Clause),
+		(Clause = (Head :- Body) -> Body == true; Clause = Head) ->
 		(	'$lgt_compiler_flag'(optimize, on),
 			'$lgt_send_to_obj_db_msg_static_binding'(Obj, Head, THead) ->
 			TPred = retract(THead)
