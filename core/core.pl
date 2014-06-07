@@ -14209,6 +14209,7 @@ current_logtalk_flag(Flag, Value) :-
 % calls as predicate definition order is irrelevant
 
 '$lgt_compile_predicate_calls' :-
+	% avoid querying the optimize flag for each compiled term
 	'$lgt_compiler_flag'(optimize, Optimize),
 	'$lgt_compile_predicate_calls'(Optimize).
 
@@ -14258,6 +14259,8 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_predicate_calls'(_).
 
 
+% auxiliary predicate for error handling
+
 '$lgt_internal_term_to_goal_and_user_term'(srule(_,Body,Ctx), Body, (Head:-Body)) :-
 	'$lgt_comp_ctx_head'(Ctx, Head).
 
@@ -14276,11 +14279,9 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_internal_term_to_goal_and_user_term'(directive(Directive,_), Directive, (:-Directive)).
 
-'$lgt_internal_term_to_goal_and_user_term'(Term, Term, Term).
 
 
-
-% '$lgt_compile_predicate_calls'(+nonvar, -nonvar)
+% '$lgt_compile_predicate_calls'(+callable, +atom, -callable)
 %
 % all predicate calls are compiled on the second stage to take advantage of
 % the information about defined predicates collected on the first stage
@@ -14353,9 +14354,6 @@ current_logtalk_flag(Flag, Value) :-
 	;	% the meta-directive template is not usable, report it as an error
 		throw(domain_error(meta_directive_template, Meta))
 	).
-
-% directive
-'$lgt_compile_predicate_calls'((:- Directive), _, (:- Directive)).
 
 
 
