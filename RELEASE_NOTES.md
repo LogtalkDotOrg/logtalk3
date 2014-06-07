@@ -74,6 +74,12 @@ as the `code_prefix` flag may have changed between compilations.
 * FIXED: Compiler bug when generating debug code for predicate rules where the
 rule head would be printed by the debugger as a fact.
 
+Prolog adapter and integration files
+------------------------------------
+
+* FIXED: Added missing definition for the standard `acyclic_term/1` predicate
+to the Quintus Prolog adapter file.
+
 Tools
 -----
 

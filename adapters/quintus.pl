@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Quintus Prolog 3.3~3.5
-%  Last updated on May 15, 2014
+%  Last updated on June 7, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -60,6 +60,7 @@
 % '$lgt_iso_predicate'(?callable).
 
 '$lgt_iso_predicate'(_ \= _).
+'$lgt_iso_predicate'(acyclic_term(_)).
 '$lgt_iso_predicate'(at_end_of_stream).
 '$lgt_iso_predicate'(at_end_of_stream(_)).
 '$lgt_iso_predicate'(atom_codes(_, _)).
@@ -89,6 +90,9 @@
 
 Term1 \= Term2 :-
 	\+ (Term1 = Term2).
+
+
+acyclic_term(_).
 
 
 at_end_of_stream :-
