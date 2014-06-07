@@ -14393,9 +14393,7 @@ current_logtalk_flag(Flag, Value) :-
 	% for the coinductive success hook predicates
 	(	'$lgt_pp_defines_predicate_'(coinductive_success_hook(Head,Hypothesis), ExCtx, THead, _),
 		\+ \+ (
-			'$lgt_pp_entity_term_'(sfact(THead), _)
-		;	'$lgt_pp_entity_term_'(srule(THead,_,_), _)
-		;	'$lgt_pp_final_entity_term_'(THead, _)
+			'$lgt_pp_final_entity_term_'(THead, _)
 		;	'$lgt_pp_final_entity_term_'((THead :- _), _)
 		) ->
 		% ... with at least one clause for this particular coinductive predicate head
@@ -14403,9 +14401,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	% we only consider coinductive_success_hook/1 clauses if no coinductive_success_hook/2 clause applies
 		'$lgt_pp_defines_predicate_'(coinductive_success_hook(Head), ExCtx, THead, _),
 		\+ \+ (
-			'$lgt_pp_entity_term_'(sfact(THead), _)
-		;	'$lgt_pp_entity_term_'(srule(THead,_,_), _)
-		;	'$lgt_pp_final_entity_term_'(THead, _)
+			'$lgt_pp_final_entity_term_'(THead, _)
 		;	'$lgt_pp_final_entity_term_'((THead :- _), _)
 		) ->
 		% ... with at least one clause for this particular coinductive predicate head
