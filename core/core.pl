@@ -17995,7 +17995,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_static_binding_meta_argument'((*), Arg, _, Arg, Arg).
 
-'$lgt_compile_static_binding_meta_argument'(0, Arg, Ctx, TArg, DArg) :-
+'$lgt_compile_static_binding_meta_argument'(0, Arg, Ctx, {TArg}, {DArg}) :-
 	% the {}/1 construct signals a pre-compiled metacall
 	'$lgt_compile_body'(Arg, TArg, DArg, Ctx).
 
