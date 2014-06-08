@@ -10398,7 +10398,7 @@ current_logtalk_flag(Flag, Value) :-
 % due to lack of standardization of meta-predicate specifications
 
 '$lgt_compile_body'(Pred, _, _, Ctx) :-
-	'$lgt_comp_ctx_meta_vars'(Ctx, [_| _]),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, [_| _], _, _, compile(_), _, _),
 	% we're compiling a clause for a meta-predicate
 	(	'$lgt_pp_meta_predicate_'(Pred, Meta) ->
 		% user-defined meta-predicate
@@ -10423,7 +10423,6 @@ current_logtalk_flag(Flag, Value) :-
 	Pred =.. [_| PredArgs],
 	Meta =.. [_| MetaArgs],
 	'$lgt_prolog_to_logtalk_meta_argument_specifiers'(MetaArgs, CMetaArgs),
-	'$lgt_comp_ctx_head'(Ctx, Head),
 	nonvar(Head),
 	% ignore multifile predicates
 	Head \= ':'(_, _),
