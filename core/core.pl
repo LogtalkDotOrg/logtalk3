@@ -9460,7 +9460,7 @@ current_logtalk_flag(Flag, Value) :-
 		) ->
 		% we're compiling a call to a module meta-predicate
 		'$lgt_add_referenced_module'(Module),
-		'$lgt_comp_ctx_head'(Ctx, Head),
+		'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, ExCtx, _, _, _),
 		'$lgt_add_referenced_module_predicate'(Module, Pred, Head),
 		Pred =.. [Functor| Args],
 		Meta =.. [Functor| MArgs],
@@ -9471,15 +9471,13 @@ current_logtalk_flag(Flag, Value) :-
 		;	'$lgt_compile_prolog_meta_arguments'(Args, CMArgs, Ctx, TArgs, DArgs),
 			TPred0 =.. [Functor| TArgs],
 			TPred = ':'(Module, TPred0),
-			'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 			DPred0 =.. [Functor| DArgs],
 			DPred = '$lgt_debug'(goal(':'(Module, Pred), DPred0), ExCtx)
 		)
 	;	% we're compiling a call to a module predicate
 		'$lgt_add_referenced_module'(Module),
-		'$lgt_comp_ctx_head'(Ctx, Head),
+		'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, ExCtx, _, _, _),
 		'$lgt_add_referenced_module_predicate'(Module, Pred, Head),
-		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		TPred = ':'(Module, Pred),
 		DPred = '$lgt_debug'(goal(':'(Module, Pred), TPred), ExCtx)
 	).
@@ -10384,11 +10382,9 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_pp_uses_predicate_'(Obj, Pred, Alias),
 	Obj \== user,
 	!,
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	'$lgt_comp_ctx_head'(Ctx, Head),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, ExCtx, _, _, _),
 	'$lgt_add_referenced_object_message'(Obj, Pred, Alias, Head),
-	'$lgt_compile_body'(Obj::Pred, TPred, _, Ctx),
-	!.
+	'$lgt_compile_body'(Obj::Pred, TPred, _, Ctx).
 
 % call to a meta-predicate from a user-defined meta-predicate;
 % must check the number of arguments for shared closures
@@ -10438,8 +10434,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_body'(Alias, TPred, '$lgt_debug'(goal(Alias, TPred), ExCtx), Ctx) :-
 	'$lgt_pp_use_module_predicate_'(Module, Pred, Alias),
 	!,
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	'$lgt_comp_ctx_head'(Ctx, Head),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, ExCtx, _, _, _),
 	'$lgt_add_referenced_module_predicate'(Module, Pred, Alias, Head),
 	'$lgt_compile_body'(':'(Module,Pred), TPred, _, Ctx).
 
