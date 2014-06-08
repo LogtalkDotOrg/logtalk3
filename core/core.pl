@@ -10376,16 +10376,6 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_check_closure'(Closure, Ctx),
 	'$lgt_compile_body'('$lgt_callN'(Closure, ExtraArgs), TPred, DPred, Ctx).
 
-% predicates specified in uses/2 directives
-
-'$lgt_compile_body'(Alias, TPred, '$lgt_debug'(goal(Alias, TPred), ExCtx), Ctx) :-
-	'$lgt_pp_uses_predicate_'(Obj, Pred, Alias),
-	Obj \== user,
-	!,
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, ExCtx, _, _, _),
-	'$lgt_add_referenced_object_message'(Obj, Pred, Alias, Head),
-	'$lgt_compile_body'(Obj::Pred, TPred, _, Ctx).
-
 % call to a meta-predicate from a user-defined meta-predicate;
 % must check the number of arguments for shared closures
 %
@@ -10395,7 +10385,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_body'(Pred, _, _, Ctx) :-
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, [_| _], _, _, compile(_), _, _),
-	% we're compiling a clause for a meta-predicate
+	% we're compiling a clause for a meta-predicate as the list of meta-variables is non empty
 	(	'$lgt_pp_meta_predicate_'(Pred, Meta) ->
 		% user-defined meta-predicate
 		true
@@ -10438,38 +10428,46 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_add_referenced_module_predicate'(Module, Pred, Alias, Head),
 	'$lgt_compile_body'(':'(Module,Pred), TPred, _, Ctx).
 
-% predicates defined in the pseudo-object "user" as specified in uses/2 directives
+% predicates specified in uses/2 directives
 %
-% the uses/2 directive is typically used in this case to help document dependencies
-% on Prolog-defined predicates (usually, but not necessarily, built-in predicates)  
+% in the case of predicates defined in the pseudo-object "user"  the uses/2
+% directive is typically used in this case to help document dependencies on
+% Prolog-defined predicates (usually, but not necessarily, built-in predicates)  
 
 '$lgt_compile_body'(Alias, TPred, DPred, Ctx) :-
-	'$lgt_pp_uses_predicate_'(user, Pred, Alias),
+	'$lgt_pp_uses_predicate_'(Obj, Pred, Alias),
 	!,
-	(	(	'$lgt_prolog_meta_predicate'(Pred, Meta, Type)
-			% built-in Prolog meta-predicate declared in the adapter file in use
+	(	Obj == user ->
+		(	(	'$lgt_prolog_meta_predicate'(Pred, Meta, Type)
+				% built-in Prolog meta-predicate declared in the adapter file in use
 			;	catch('$lgt_predicate_property'(Pred, meta_predicate(Meta)), _, fail)
-			% Prolog meta-predicate undeclared in the adapter file (may not be a built-in)
-		) ->
-		% meta-predicate
-		Pred =.. [Functor| Args],
-		Meta =.. [Functor| MArgs],
-		(	'$lgt_prolog_to_logtalk_meta_argument_specifiers'(MArgs, CMArgs),
-			'$lgt_compile_prolog_meta_arguments'(Args, CMArgs, Ctx, TArgs, DArgs) ->
-			TPred =.. [Functor| TArgs],
-			DGoal =.. [Functor| DArgs],
-			'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-			(	Type == control_construct ->
-				DPred = DGoal
-			;	DPred = '$lgt_debug'(goal(Alias, DGoal), ExCtx)
+				% Prolog meta-predicate undeclared in the adapter file (may not be a built-in)
+			) ->
+			% meta-predicate
+			Pred =.. [Functor| Args],
+			Meta =.. [Functor| MArgs],
+			(	'$lgt_prolog_to_logtalk_meta_argument_specifiers'(MArgs, CMArgs),
+				'$lgt_compile_prolog_meta_arguments'(Args, CMArgs, Ctx, TArgs, DArgs) ->
+				TPred =.. [Functor| TArgs],
+				DGoal =.. [Functor| DArgs],
+				'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+				(	Type == control_construct ->
+					DPred = DGoal
+				;	DPred = '$lgt_debug'(goal(Alias, DGoal), ExCtx)
+				)
+			;	% meta-predicate template is not usable
+				throw(domain_error(meta_predicate_template, Meta))
 			)
-		;	% meta-predicate template is not usable
-			throw(domain_error(meta_predicate_template, Meta))
+		;	% non meta-predicate
+			TPred = Pred,
+			DPred = '$lgt_debug'(goal(Alias, Pred), ExCtx),
+			'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx)
 		)
-	;	% non meta-predicate
-		TPred = Pred,
-		DPred = '$lgt_debug'(goal(Alias, Pred), ExCtx),
-		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx)
+	;	% objects other than the pseudo-object "user"
+		'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, ExCtx, _, _, _),
+		'$lgt_add_referenced_object_message'(Obj, Pred, Alias, Head),
+		'$lgt_compile_body'(Obj::Pred, TPred, _, Ctx),
+		DPred = '$lgt_debug'(goal(Alias, TPred), ExCtx)
 	).
 
 % goal is a call to a dynamic predicate within a category
