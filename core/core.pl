@@ -8556,46 +8556,46 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_pp_entity_'(_, Entity, _, _, _),
 	'$lgt_head_meta_variables'(Head, MetaVars),
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, MetaVars, _, ExCtx, _, _, _),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, MetaVars, _, ExCtx, _, _, Line-_),
 	'$lgt_compile_head'(Head, THead, Ctx),
 	(	Head = {UserHead} ->
 		DHead = '$lgt_debug'(rule(Entity, user::UserHead, N), ExCtx)
 	;	DHead = '$lgt_debug'(rule(Entity, Head, N), ExCtx)
 	),
-	'$lgt_clause_number'(Head, N).
+	'$lgt_clause_number'(Head, Entity, Line, N).
 
 '$lgt_compile_clause'((Head:-Body), srule(THead,Body,Ctx), dsrule(THead,DHead,Body,Ctx), Ctx) :-
 	!,
 	'$lgt_pp_entity_'(_, Entity, _, _, _),
 	'$lgt_head_meta_variables'(Head, MetaVars),
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, MetaVars, _, ExCtx, _, _, _),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, MetaVars, _, ExCtx, _, _, Line-_),
 	'$lgt_compile_head'(Head, THead, Ctx),
 	(	Head = {UserHead} ->
 		DHead = '$lgt_debug'(rule(Entity, user::UserHead, N), ExCtx)
 	;	DHead = '$lgt_debug'(rule(Entity, Head, N), ExCtx)
 	),
-	'$lgt_clause_number'(Head, N).
+	'$lgt_clause_number'(Head, Entity, Line, N).
 
 '$lgt_compile_clause'(Fact, sfact(TFact), dfact(TFact,DHead), Ctx) :-
 	'$lgt_pp_entity_'(_, Entity, _, _, _),
 	'$lgt_compile_head'(Fact, TFact, Ctx),
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, ExCtx, _, _, Line-_),
 	(	Fact = {UserFact} ->
 		DHead = '$lgt_debug'(fact(Entity, user::UserFact, N), ExCtx)
 	;	DHead = '$lgt_debug'(fact(Entity, Fact, N), ExCtx)
 	),
-	'$lgt_clause_number'(Fact, N).
+	'$lgt_clause_number'(Fact, Entity, Line, N).
 
 
 
-% '$lgt_clause_number'(@callable, -integer)
+% '$lgt_clause_number'(@callable, @entity_identifier, +intger, -integer)
 %
 % returns the clause number for a compiled predicate; when the clause is the
 % first one for the predicate, we also save the definition line in the source
 % file (assuming that we're not compiling a clause for a dynamically created
 % entity) for use with the reflection built-in predicates and methods
 
-'$lgt_clause_number'(Other::Head, N) :-
+'$lgt_clause_number'(Other::Head, Entity, Line, N) :-
 	% clause for object or category multifile predicate
 	!,
 	functor(Head, Functor, Arity),
@@ -8603,46 +8603,29 @@ current_logtalk_flag(Flag, Value) :-
 		N is N0 + 1
 	;	% first clause found for this predicate
 		N = 1,
-		'$lgt_save_predicate_line_definition_property'(Other, Functor, Arity)
+		assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Other, Functor/Arity, definition_line_from(Line,Entity))))
 	),
 	assertz('$lgt_pp_number_of_clauses_'(Other, Functor, Arity, N)).
 
-'$lgt_clause_number'(':'(_, _), 0) :-
+'$lgt_clause_number'(':'(_, _), _, _, 0) :-
 	% clause for module multifile predicate
 	!.
 
-'$lgt_clause_number'({Head}, N) :-
+'$lgt_clause_number'({Head}, Entity, Line, N) :-
 	% pre-compiled predicate clause
 	!,
-	'$lgt_clause_number'(user::Head, N).
+	'$lgt_clause_number'(user::Head, Entity, Line, N).
 
-'$lgt_clause_number'(Head, N) :-
+'$lgt_clause_number'(Head, _, Line, N) :-
 	% predicate clause for the entity being compiled
 	functor(Head, Functor, Arity),
 	(	retract('$lgt_pp_number_of_clauses_'(Functor, Arity, N0)) ->
 		N is N0 + 1
 	;	% first clause found for this predicate
 		N = 1,
-		'$lgt_save_predicate_line_definition_property'(Functor, Arity)
+		assertz('$lgt_pp_predicate_definition_line_'(Functor, Arity, Line))
 	),
 	assertz('$lgt_pp_number_of_clauses_'(Functor, Arity, N)).
-
-
-'$lgt_save_predicate_line_definition_property'(Other, Functor, Arity) :-
-	(	'$lgt_compiler_flag'(source_data, on),
-		'$lgt_pp_term_position_variables_'(Line-_, _) ->
-		'$lgt_pp_entity_'(_, Entity, _, _, _),
-		assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Other, Functor/Arity, definition_line_from(Line,Entity))))
-	;	true
-	).
-
-
-'$lgt_save_predicate_line_definition_property'(Functor, Arity) :-
-	(	'$lgt_compiler_flag'(source_data, on),
-		'$lgt_pp_term_position_variables_'(Line-_, _) ->
-		assertz('$lgt_pp_predicate_definition_line_'(Functor, Arity, Line))
-	;	true
-	).
 
 
 
