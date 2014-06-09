@@ -95,8 +95,7 @@ Tools
 categories for better contrast when printing diagrams.
 
 * IMPROVED: The `debugger` tool now avoids introducing spurious choice-points
-when using a backend Prolog compiler other than ECLiPSe, Lean Prolog, and
-Quintus Prolog.
+when using a backend Prolog compiler other than Lean Prolog and Quintus Prolog.
 
 * FIXED: Bug in the `debugger` tool that prevented printing information at
 unification ports.

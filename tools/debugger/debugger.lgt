@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/06/06,
+		date is 2014/06/09,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -399,6 +399,18 @@
 			{call_det(TGoal, Deterministic0)},
 			(	Deterministic0 == true ->
 				Deterministic = Deterministic0
+			;	true
+			).
+
+	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
+
+		call_goal(TGoal, Deterministic) :-
+			{sepia_kernel:get_cut(Before),
+			 TGoal,
+			 sepia_kernel:get_cut(After)},
+			(	Before == After ->
+				!,
+				Deterministic = true
 			;	true
 			).
 
