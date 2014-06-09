@@ -18480,9 +18480,7 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 '$lgt_must_be'(clause, Term, Context) :-
-	(	var(Term) ->
-		throw(error(instantiation_error, Context))
-	;	Term = (Head :- Body) ->
+	(	Term = (Head :- Body) ->
 		'$lgt_must_be'(callable, Head, Context),
 		'$lgt_must_be'(callable, Body, Context)
 	;	callable(Term) ->
@@ -18491,9 +18489,7 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 '$lgt_must_be'(clause_or_partial_clause, Term, Context) :-
-	(	var(Term) ->
-		throw(error(instantiation_error, Context))
-	;	Term = (Head :- Body) ->
+	(	Term = (Head :- Body) ->
 		'$lgt_must_be'(callable, Head, Context),
 		'$lgt_must_be'(var_or_callable, Body, Context)
 	;	callable(Term) ->
@@ -18628,9 +18624,7 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 '$lgt_must_be'(predicate_indicator, Term, Context) :-
-	(	var(Term) ->
-		throw(error(instantiation_error, Context))
-	;	Term = Functor/Arity ->
+	(	Term = Functor/Arity ->
 		'$lgt_must_be'(atom, Functor, Context),
 		'$lgt_must_be'(non_negative_integer, Arity, Context)
 	;	throw(error(type_error(predicate_indicator, Term), Context))
@@ -18646,9 +18640,7 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 '$lgt_must_be'(predicate_or_non_terminal_indicator, Term, Context) :-
-	(	var(Term) ->
-		throw(error(instantiation_error, Context))
-	;	Term = Functor/Arity ->
+	(	Term = Functor/Arity ->
 		'$lgt_must_be'(atom, Functor, Context),
 		'$lgt_must_be'(non_negative_integer, Arity, Context)
 	;	Term = Functor//Arity ->
@@ -18687,9 +18679,7 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 '$lgt_must_be'(operator_specification, Term, Context) :-
-	(	var(Term) ->
-		throw(error(instantiation_error, Context))
-	;	Term = op(Priority, Specifier, Operators) ->
+	(	Term = op(Priority, Specifier, Operators) ->
 		'$lgt_must_be'(operator_priority, Priority, Context),
 		'$lgt_must_be'(operator_specifier, Specifier, Context),
 		'$lgt_must_be'(operator_names, Operators, Context)
@@ -18857,9 +18847,7 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 '$lgt_must_be'(key_value_info_pair, Term, Context) :-
-	(	var(Term) ->
-		throw(error(instantiation_error, Context))
-	;	Term = (Key is Value) ->
+	(	Term = (Key is Value) ->
 		'$lgt_must_be'(atom, Key, Context),
 		'$lgt_must_be'(nonvar, Value, Context)
 	;	throw(error(type_error(key_value_info_pair, Term), Context))
