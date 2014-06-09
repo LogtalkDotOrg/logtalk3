@@ -8504,7 +8504,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_comp_ctx'(NewCtx, _, _, _, _, Prefix, _, _, _, Mode, _, Position),
 	% we're compiling an entity clause
 	catch(
-		'$lgt_compile_clause'(Clause, TClause, DClause, NewCtx),
+		'$lgt_compile_clause'(Clause, Entity, TClause, DClause, NewCtx),
 		Error,
 		throw(error(Error, clause(Clause)))
 	),
@@ -8541,7 +8541,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_compile_clause'(+clause, -clause, -clause, +compilation_context)
+% '$lgt_compile_clause'(+clause. +entity_identifier, -clause, -clause, +compilation_context)
 %
 % compiles an entity clause into a normal clause and a debug clause
 %
@@ -8551,10 +8551,9 @@ current_logtalk_flag(Flag, Value) :-
 % take advantage of the collected information to notably simplify handling
 % of redefined built-in predicates
 
-'$lgt_compile_clause'((Head:-Body), drule(THead,'$lgt_nop'(Body),Body,Ctx), ddrule(THead,'$lgt_nop'(Body),DHead,Body,Ctx), Ctx) :-
+'$lgt_compile_clause'((Head:-Body), Entity, drule(THead,'$lgt_nop'(Body),Body,Ctx), ddrule(THead,'$lgt_nop'(Body),DHead,Body,Ctx), Ctx) :-
 	'$lgt_pp_dynamic_'(Head),
 	!,
-	'$lgt_pp_entity_'(_, Entity, _, _, _),
 	'$lgt_head_meta_variables'(Head, MetaVars),
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, MetaVars, _, ExCtx, _, _, Line-_),
 	'$lgt_compile_head'(Head, THead, Ctx),
@@ -8564,9 +8563,8 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	'$lgt_clause_number'(Head, Entity, Line, N).
 
-'$lgt_compile_clause'((Head:-Body), srule(THead,Body,Ctx), dsrule(THead,DHead,Body,Ctx), Ctx) :-
+'$lgt_compile_clause'((Head:-Body), Entity, srule(THead,Body,Ctx), dsrule(THead,DHead,Body,Ctx), Ctx) :-
 	!,
-	'$lgt_pp_entity_'(_, Entity, _, _, _),
 	'$lgt_head_meta_variables'(Head, MetaVars),
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, MetaVars, _, ExCtx, _, _, Line-_),
 	'$lgt_compile_head'(Head, THead, Ctx),
@@ -8576,8 +8574,7 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	'$lgt_clause_number'(Head, Entity, Line, N).
 
-'$lgt_compile_clause'(Fact, sfact(TFact), dfact(TFact,DHead), Ctx) :-
-	'$lgt_pp_entity_'(_, Entity, _, _, _),
+'$lgt_compile_clause'(Fact, Entity, sfact(TFact), dfact(TFact,DHead), Ctx) :-
 	'$lgt_compile_head'(Fact, TFact, Ctx),
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, ExCtx, _, _, Line-_),
 	(	Fact = {UserFact} ->
