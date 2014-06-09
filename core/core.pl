@@ -1059,7 +1059,7 @@ create_object(Obj, Relations, Directives, Clauses) :-
 	'$lgt_comp_ctx_mode'(Ctx, runtime),
 	'$lgt_compile_logtalk_directives'([(dynamic)| Directives], Ctx),
 	% the list of clauses may also include grammar rules
-	'$lgt_compile_runtime_terms'(Clauses, Ctx),
+	'$lgt_compile_runtime_terms'(Clauses),
 	'$lgt_generate_def_table_clauses'(Ctx),
 	'$lgt_compile_predicate_calls',
 	'$lgt_generate_object_clauses',
@@ -1108,7 +1108,7 @@ create_category(Ctg, Relations, Directives, Clauses) :-
 	'$lgt_comp_ctx_mode'(Ctx, runtime),
 	'$lgt_compile_logtalk_directives'([(dynamic)| Directives], Ctx),
 	% the list of clauses may also include grammar rules
-	'$lgt_compile_runtime_terms'(Clauses, Ctx),
+	'$lgt_compile_runtime_terms'(Clauses),
 	'$lgt_generate_def_table_clauses'(Ctx),
 	'$lgt_compile_predicate_calls',
 	'$lgt_generate_category_clauses',
@@ -6267,18 +6267,16 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_compile_runtime_terms'(+list(term), +compilation_context)
+% '$lgt_compile_runtime_terms'(+list(term))
 %
 % compiles a list of runtime terms (clauses, directives, or grammar rules)
 
-'$lgt_compile_runtime_terms'([Term| Terms], Ctx) :-
-	% only the compilation context mode should be shared between different terms
-	'$lgt_comp_ctx_mode'(Ctx, Mode),
-	'$lgt_comp_ctx_mode'(NewCtx, Mode),
-	'$lgt_compile_runtime_term'(Term, NewCtx),
-	'$lgt_compile_runtime_terms'(Terms, Ctx).
+'$lgt_compile_runtime_terms'([Term| Terms]) :-
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, runtime, _, 0-0),
+	'$lgt_compile_runtime_term'(Term, Ctx),
+	'$lgt_compile_runtime_terms'(Terms).
 
-'$lgt_compile_runtime_terms'([], _).
+'$lgt_compile_runtime_terms'([]).
 
 
 
@@ -6667,7 +6665,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_read_file_to_terms'(File, Terms),
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
 		'$lgt_compile_file_terms'(Terms, Ctx)
-	;	'$lgt_compile_runtime_terms'(Terms, Ctx)
+	;	'$lgt_compile_runtime_terms'(Terms)
 	).
 
 % object opening and closing directives
@@ -8609,7 +8607,7 @@ current_logtalk_flag(Flag, Value) :-
 	!.
 
 '$lgt_clause_number'({Head}, Entity, Line, N) :-
-	% pre-compiled predicate clause
+	% pre-compiled predicate clause head
 	!,
 	'$lgt_clause_number'(user::Head, Entity, Line, N).
 
@@ -13233,7 +13231,7 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_generate_def_table_clauses'(+compilation_context)
 %
 % generates predicate definition table clauses for undefined but
-% declared (using scope and/or dynamic directives) predicates
+% declared (using a predicate directive) predicates
 
 '$lgt_generate_def_table_clauses'(Ctx) :-
 	\+ '$lgt_pp_dynamic_',
@@ -13262,7 +13260,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	'$lgt_pp_multifile_'(Head, _)
 	),
 	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _),
-	% dynamic predicate with no initial set of clauses
+	% dynamic or multifile predicate with no initial set of clauses
 	'$lgt_comp_ctx_prefix'(Ctx, Prefix),
 	functor(Head, Functor, Arity),
 	(	\+ '$lgt_pp_public_'(Functor, Arity),
@@ -15083,17 +15081,15 @@ current_logtalk_flag(Flag, Value) :-
 % compiles a list of auxiliary predicate clauses;
 % used mainly in conjunction with goal_expansion/2 hooks
 
-'$lgt_compile_aux_clauses'(Clauses) :-
-	% avoid making a predicate discontiguous by accident
-	'$lgt_comp_ctx_mode'(Ctx, compile(aux)),
-	'$lgt_compile_aux_clauses'(Clauses, Ctx).
-
-
-'$lgt_compile_aux_clauses'([Clause| Clauses], Ctx) :-
+'$lgt_compile_aux_clauses'([Clause| Clauses]) :-
+	% avoid making a predicate discontiguous by accident by using a
+	% compilation mode that ensures that the auxiliary clauses will
+	% be written after the user clauses
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, compile(aux), _, 0-0),
 	'$lgt_compile_clause'(Clause, Ctx),
-	'$lgt_compile_aux_clauses'(Clauses, Ctx).
+	'$lgt_compile_aux_clauses'(Clauses).
 
-'$lgt_compile_aux_clauses'([], _).
+'$lgt_compile_aux_clauses'([]).
 
 
 
@@ -15770,6 +15766,7 @@ current_logtalk_flag(Flag, Value) :-
 	atom(Functor),
 	integer(Arity),
 	Arity >= 0.
+
 
 
 % '$lgt_valid_info_key_value_pair'(?nonvar, -atom, -integer)
