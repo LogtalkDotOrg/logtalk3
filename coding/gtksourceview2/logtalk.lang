@@ -302,6 +302,8 @@
 			<keyword>(\\\+|!)</keyword>
 			<!-- Existential quantifier -->
 			<keyword>\^</keyword>
+			<!-- Predicate aliases -->
+			<keyword>as</keyword>
 		</context>
 
 		<context id="number" style-ref="number">

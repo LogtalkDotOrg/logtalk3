@@ -12,7 +12,9 @@
  *
  * CHANGES
  * -------
- * 2013/09/11 (1.1.12)
+ * 2014/06/10 (1.1.15)
+ *  -  Added syntax coloring of the as/2 alias operator
+ * 2013/09/11 (1.1.14)
  *  -  Added syntax coloring of logtalk_load_context/2 predicate
  * 2013/09/11 (1.1.13)
  *  -  Added syntax coloring of logtalk_make/1 predicate
@@ -245,7 +247,9 @@ $language_data = array(
             // term to list predicate
             '=..',
             // unification
-            '=', '\\='
+            '=', '\\=',
+			// alias operator
+			'as'
             ),
         2 => array(
             // clause and directive functors

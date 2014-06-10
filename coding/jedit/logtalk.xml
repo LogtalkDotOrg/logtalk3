@@ -5,9 +5,9 @@
 <!--	jEdit 4.3 Logtalk syntax file
 
 	written by		Paulo Moura
-	version			1.300
+	version			1.400
 	created on		May 5, 2002
-	last revised	May 15, 2014
+	last revised	June 10, 2014
 
 	To install, copy this file to the "modes" subdirectory in jEdit 
 	directory installation.   Next, check the "catalog" file in the 
@@ -190,10 +190,13 @@
 		<!-- Term creation and decomposition -->
 		<SEQ TYPE="OPERATOR">=..</SEQ>
 
-		<!-- Arithemtic evaluation -->
+		<!-- Predicate aliases -->
+		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="OPERATOR">\bas\b</SEQ_REGEXP>
+
+		<!-- Arithmetic evaluation -->
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="OPERATOR">\bis\b</SEQ_REGEXP>
 
-		<!-- Arithemtic comparison -->
+		<!-- Arithmetic comparison -->
 		<SEQ TYPE="OPERATOR">=:=</SEQ>
 		<SEQ TYPE="OPERATOR">=\=</SEQ>
 		<SEQ TYPE="OPERATOR">&lt;</SEQ>

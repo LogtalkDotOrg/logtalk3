@@ -119,9 +119,11 @@
 				<regex>\b(copy_term)\(</regex>
 				<regex>\b(numbervars)\(</regex>
 				<regex>\b(term_variables)\(</regex>
-				<!-- Arithemtic evaluation -->
+				<!-- Predicate aliases -->
+				<regex>\s(as)\s</regex>
+				<!-- Arithmetic evaluation -->
 				<regex>\s(is)\s</regex>
-				<!-- Arithemtic comparison -->
+				<!-- Arithmetic comparison -->
 				<regex>(=:=)</regex>
 				<regex>(=\\=)</regex>
 				<regex>(&lt;)</regex>

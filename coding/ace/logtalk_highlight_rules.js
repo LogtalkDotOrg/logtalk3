@@ -110,7 +110,7 @@ var LogtalkHighlightRules = function() {
          { token: 'keyword.operator.evaluable.logtalk',
            regex: '(\\*\\*|\\+|-|\\*|/|//)' },
          { token: 'keyword.operator.misc.logtalk',
-           regex: '(:-|!|\\\\+|,|;|-->|->|=|\\=|\\.|=\\.\\.|\\^|\\bis\\b)' },
+           regex: '(:-|!|\\\\+|,|;|-->|->|=|\\=|\\.|=\\.\\.|\\^|\\bas\\b|\\bis\\b)' },
          { caseInsensitive: false,
            token: 'support.function.evaluable.logtalk',
            regex: '\\b(a(bs|cos|sin|tan)|c(eiling|os)|exp|flo(at(_(integer|fractional)_part)?|or)|log|m(ax|in|od)|r(em|ound)|s(i(n|gn)|qrt)|truncate)(?=[(])' },

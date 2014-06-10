@@ -2,7 +2,7 @@
 "
 " Language:	Logtalk
 " Maintainer:	Paulo Moura <pmoura@logtalk.org>
-" Last Change:	September 11, 2013
+" Last Change:	June 10, 2014
 
 
 " Quit when a syntax file was already loaded:
@@ -232,12 +232,17 @@ syn match	logtalkKeyword		"\<numbervars\ze("
 syn match	logtalkKeyword		"\<term_variables\ze("
 
 
-" Arithemtic evaluation
+" Predicate aliases
+
+syn match	logtalkOperator		"\<as\>"
+
+
+" Arithmetic evaluation
 
 syn match	logtalkOperator		"\<is\>"
 
 
-" Arithemtic comparison
+" Arithmetic comparison
 
 syn match	logtalkOperator		"=:="
 syn match	logtalkOperator		"=\\="

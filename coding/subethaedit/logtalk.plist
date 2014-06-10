@@ -350,9 +350,11 @@
 				<string>[^A-Za-z0-9_](copy_term)\(</string>
 				<string>[^A-Za-z0-9_](numbervars)\(</string>
 				<string>[^A-Za-z0-9_](term_variables)\(</string>
-				<!-- Arithemtic evaluation -->
+				<!-- Predicate aliases -->
+				<string>[[:space:]]+(as)[[:space:]]+</string>
+				<!-- Arithmetic evaluation -->
 				<string>[[:space:]]+(is)[[:space:]]+</string>
-				<!-- Arithemtic comparison -->
+				<!-- Arithmetic comparison -->
 				<string>[[:space:]]+(=:=)[[:space:]]+</string>
 				<string>[[:space:]]+(=\=)[[:space:]]+</string>
 				<string>[[:space:]]+(&lt;)[[:space:]]+</string>

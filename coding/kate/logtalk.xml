@@ -112,9 +112,11 @@
 				<Detect2Chars char = "/" char1 = "\" attribute = "Operator" context = "#stay" />
 				<Detect2Chars char = "\" char1 = "/" attribute = "Operator" context = "#stay" />
 				<Detect2Chars char = "\" char1 = "\" attribute = "Operator" context = "#stay" />
-				<!-- Arithemtic evaluation -->
+				<!-- Predicate aliases -->
+				<RegExpr String = "\bas\b" attribute = "Operator" context = "#stay" />
+				<!-- Arithmetic evaluation -->
 				<RegExpr String = "\bis\b" attribute = "Operator" context = "#stay" />
-				<!-- Arithemtic comparison -->
+				<!-- Arithmetic comparison -->
 				<StringDetect String = "=:=" attribute = "Operator" context = "#stay" />
 				<StringDetect String = "=\=" attribute = "Operator" context = "#stay" />
 				<DetectChar char = "&lt;" attribute = "Operator" context = "#stay" />

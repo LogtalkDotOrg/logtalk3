@@ -124,6 +124,8 @@ class LogtalkLexer(RegexLexer):
             (r'(key)?sort(?=[(])', Keyword),
             # Bitwise functors
             (r'(>>|<<|/\\|\\\\|\\)', Operator),
+            # Predicate aliases
+            (r'\bas\b', Operator),
             # Arithemtic evaluation
             (r'\bis\b', Keyword),
             # Arithemtic comparison

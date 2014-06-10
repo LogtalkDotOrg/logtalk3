@@ -254,7 +254,10 @@ Keywords={
   { Id=4, --Logtalk external-call control construct
     Regex=[[ ([{}]) ]],
   },
-  { Id=4,
+  { Id=4, --Logtalk predicate aliases operator
+    Regex=[[ \b(as)\b ]],
+  },
+  { Id=4, --arithmetic evaluation operator
     Regex=[[ \b(is)\b ]],
   },
   { Id=4, --operators

@@ -5,7 +5,7 @@
 
 	function Brush()
 	{
-		// Contributed by Paulo Moura (http://logtalk.org/); last revised on September 11, 2013
+		// Contributed by Paulo Moura (http://logtalk.org/); last revised on June 10, 2014
 
 		this.regexList = [
 		  // variables
@@ -104,6 +104,8 @@
 			{ regex: new RegExp("(::|\\^\\^|<<|:)", 'g'), css: 'constants'},
 			// Logtalk external-call control construct
 			{ regex: new RegExp("(\\{|\\})", 'g'), css: 'constants'},
+			// Logtalk predicate aliases
+			{ regex: new RegExp("\\b(as)\\b", 'g'), css: 'constants'},
 			// Prolog operators
 			{ regex: new RegExp("(\\\\\+|\\-\\->|\\->|=\\.\\.|;|!|:\-|\\^)", 'g'), css: 'constants'},
 			// Prolog arithmetic operators

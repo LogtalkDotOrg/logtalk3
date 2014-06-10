@@ -104,6 +104,12 @@ unification ports.
 provider due to recent changes to the meaning of *this* in multifile predicate
 clauses.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* ADDED: Syntax coloring support for the `as/2` predicate alias operator to
+most of the supported text editors and syntax highlighters.
+
 
 3.00.0 Beta 5 - May 26, 2014
 ============================

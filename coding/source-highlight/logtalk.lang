@@ -1,7 +1,7 @@
 # highlighting for Logtalk source files (http://logtalk.org/)
 #
 #	written by Paulo Moura (pmoura@logtalk.org)
-#	last revised on September 11, 2013
+#	last revised on June 10, 2014
 
 comment start "%"
 comment delim "/*" "*/" multiline nested
@@ -60,7 +60,7 @@ keyword =	'\<(after|before)(?=\()',
 			'\<(ignore|once)(?=\()',
 			'\<((key)?sort)(?=\()',
 			'\<(true|fa(il|lse)|repeat)\>',
-			'\<(e|pi|is|rem|mod)\>'
+			'\<(e|pi|as|is|rem|mod)\>'
 
 
 variable =	'\<[A-Z_][A-Za-z0-9_]*'
