@@ -49,9 +49,9 @@ comment
 	extends(parent)).
 
 	:- info([
-		version is 1.18,
+		version is 1.19,
 		author is 'Paulo Moura',
-		date is 2014/04/28,
+		date is 2014/06/10,
 		comment is 'Sample prototype for testing syntax coloring.'
 	]).
 
@@ -224,6 +224,9 @@ comment
 
 	context_switching_calls :-
 		Object<<Goal.
+
+	lambda_expressions :-
+		{X,Y,Z}/[P,Q]>>Goal.
 
 	explicitly_qualified_module_calls :-
 		Module:Goal.
