@@ -1,6 +1,9 @@
 ; This file is part of Logtalk <http://logtalk.org/>  
 ; Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 ; 
+; Logtalk Inno Setup script for generating Windows installers
+; Last updated on June 11, 2014
+; 
 ; Logtalk is free software. You can redistribute it and/or modify it under
 ; the terms of the FSF GNU General Public License 3  (plus some additional
 ; terms per section 7).        Consult the `LICENSE.txt` file for details.
@@ -96,6 +99,7 @@ Source: "{#MyBaseDir}\tools\*"; Excludes: ".*"; DestDir: "{code:GetLgtUserDir}\t
 
 Source: "{#MyBaseDir}\loader-sample.lgt"; DestDir: "{code:GetLgtUserDir}"; DestName: "loader-sample.lgt"; Components: user; Flags: ignoreversion uninsneveruninstall
 Source: "{#MyBaseDir}\settings-sample.lgt"; DestDir: "{code:GetLgtUserDir}"; DestName: "settings-sample.lgt"; Components: user; Flags: ignoreversion uninsneveruninstall
+Source: "{#MyBaseDir}\tester-sample.lgt"; DestDir: "{code:GetLgtUserDir}"; DestName: "tester-sample.lgt"; Components: user; Flags: ignoreversion uninsneveruninstall
 Source: "{#MyBaseDir}\VERSION.txt"; DestDir: "{code:GetLgtUserDir}"; DestName: "VERSION.txt"; Components: user; Flags: ignoreversion uninsneveruninstall
 
 Source: "{#MyBaseDir}\scripts\*.bat"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminLoggedOn

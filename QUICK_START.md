@@ -120,6 +120,8 @@ application directory and for defining global compiler options (see
 the file `CUSTOMIZE.md` for details).
 
 6. Copy to this directory the `loader-sample.lgt` file, rename it to 
-`loader.lgt`, and modify it to load your application source files.
+`loader.lgt`, and modify it to load your application source files. You
+may also copy the `tester-sample.lgt` file, renaming it to `tester.lgt`,
+and editing it to run your application unit tests.
 
 7. Have fun!
