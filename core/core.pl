@@ -7072,17 +7072,14 @@ current_logtalk_flag(Flag, Value) :-
 	\+ '$lgt_pp_complemented_object_'(Entity, _, _, _, _),
 	throw(reference_error(entity_identifier, Entity)).
 
-'$lgt_compile_alias_directive'((-), _, _, _) :-
-	throw(instantiation_error).
-
-'$lgt_compile_alias_directive'([], _, _, _) :-
-	!.
-
 '$lgt_compile_alias_directive'([Resource| Resources], Argument, Entity, Ctx) :-
 	!,
 	'$lgt_must_be'(ground, Resource),
 	'$lgt_compile_alias_directive_resource'(Resource, Entity, Ctx),
 	'$lgt_compile_alias_directive'(Resources, Argument, Entity, Ctx).
+
+'$lgt_compile_alias_directive'([], _, _, _) :-
+	!.
 
 '$lgt_compile_alias_directive'(_, Argument, _, _) :-
 	throw(type_error(list, Argument)).
@@ -7765,17 +7762,14 @@ current_logtalk_flag(Flag, Value) :-
 %
 % auxiliary predicate for compiling uses/2 directives
 
-'$lgt_compile_uses_directive'((-), _, _, _) :-
-	throw(instantiation_error).
-
-'$lgt_compile_uses_directive'([], _, _, _) :-
-	!.
-
 '$lgt_compile_uses_directive'([Resource| Resources], Argument, Obj, Ctx) :-
 	!,
 	'$lgt_must_be'(ground, Resource),
 	'$lgt_compile_uses_directive_resource'(Resource, Obj, Ctx),
 	'$lgt_compile_uses_directive'(Resources, Argument, Obj, Ctx).
+
+'$lgt_compile_uses_directive'([], _, _, _) :-
+	!.
 
 '$lgt_compile_uses_directive'(_, Argument, _, _) :-
 	throw(type_error(list, Argument)).
@@ -7875,17 +7869,14 @@ current_logtalk_flag(Flag, Value) :-
 %
 % auxiliary predicate for compiling use_module/2 directives in objects or categories
 
-'$lgt_compile_use_module_directive'((-), _, _, _) :-
-	throw(instantiation_error).
-
-'$lgt_compile_use_module_directive'([], _, _, _) :-
-	!.
-
 '$lgt_compile_use_module_directive'([Resource| Resources], Argument, Module, Ctx) :-
 	!,
 	'$lgt_must_be'(ground, Resource),
 	'$lgt_compile_use_module_directive_resource'(Resource, Module, Ctx),
 	'$lgt_compile_use_module_directive'(Resources, Argument, Module, Ctx).
+
+'$lgt_compile_use_module_directive'([], _, _, _) :-
+	!.
 
 '$lgt_compile_use_module_directive'(_, Argument, _, _) :-
 	throw(type_error(list, Argument)).
@@ -8038,18 +8029,14 @@ current_logtalk_flag(Flag, Value) :-
 % auxiliary predicate for compiling module's meta predicate directives
 % into Logtalk ones by translating the meta-argument specifiers
 
-'$lgt_compile_module_meta_predicate_directive'((-), _) :-
-	% catch variables and lists with unbound tails
-	throw(instantiation_error).
-
-'$lgt_compile_module_meta_predicate_directive'([], []).
-
 '$lgt_compile_module_meta_predicate_directive'([Template| Templates], [ConvertedTemplate| ConvertedTemplates]) :-
 	'$lgt_must_be'(callable, Template),
 	Template =.. [Functor| Args],
 	'$lgt_prolog_to_logtalk_meta_argument_specifiers'(Args, ConvertedArgs),
 	ConvertedTemplate =.. [Functor| ConvertedArgs],
 	'$lgt_compile_module_meta_predicate_directive'(Templates, ConvertedTemplates).
+
+'$lgt_compile_module_meta_predicate_directive'([], []).
 
 
 
@@ -8287,10 +8274,6 @@ current_logtalk_flag(Flag, Value) :-
 	arg(1, TPair, Value).
 
 
-'$lgt_check_entity_info_parameters'((-), _, _, _) :-
-	% catch variables and lists with unbound tails
-	throw(instantiation_error).
-
 '$lgt_check_entity_info_parameters'([Pair| Pairs], Parameters, Counter0, Arity) :-
 	!,
 	(	Pair = Name - Description ->
@@ -8311,10 +8294,6 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_check_entity_info_parameters'(_, Parameters, _, _) :-
 	throw(type_error(list, Parameters)).
 
-
-'$lgt_check_entity_info_parnames'((-), _, _, _) :-
-	% catch variables and lists with unbound tails
-	throw(instantiation_error).
 
 '$lgt_check_entity_info_parnames'([Name| Names], Parnames, Counter0, Arity) :-
 	!,
@@ -8404,10 +8383,6 @@ current_logtalk_flag(Flag, Value) :-
 	arg(1, TPair, Value).
 
 
-'$lgt_check_predicate_info_arguments'((-), _, _, _) :-
-	% catch variables and lists with unbound tails
-	throw(instantiation_error).
-
 '$lgt_check_predicate_info_arguments'([Pair| Pairs], Arguments, Counter0, Arity) :-
 	!,
 	(	Pair = Name - Description ->
@@ -8429,9 +8404,11 @@ current_logtalk_flag(Flag, Value) :-
 	throw(type_error(list, Arguments)).
 
 
-'$lgt_check_predicate_info_argnames'((-), _, _, _) :-
-	% catch variables and lists with unbound tails
-	throw(instantiation_error).
+'$lgt_check_predicate_info_argnames'([Name| Names], Arguments, Counter0, Arity) :-
+	!,
+	'$lgt_must_be'(atom_or_string, Name),
+	Counter1 is Counter0 + 1,
+	'$lgt_check_predicate_info_argnames'(Names, Arguments, Counter1, Arity).
 
 '$lgt_check_predicate_info_argnames'([], _, Counter, Arity) :-
 	!,
@@ -8439,12 +8416,6 @@ current_logtalk_flag(Flag, Value) :-
 		true
 	;	throw(domain_error({Arity}, {Counter}))
 	).
-
-'$lgt_check_predicate_info_argnames'([Name| Names], Arguments, Counter0, Arity) :-
-	!,
-	'$lgt_must_be'(atom_or_string, Name),
-	Counter1 is Counter0 + 1,
-	'$lgt_check_predicate_info_argnames'(Names, Arguments, Counter1, Arity).
 
 '$lgt_check_predicate_info_argnames'(_, Arguments, _, _) :-
 	throw(type_error(list, Arguments)).
