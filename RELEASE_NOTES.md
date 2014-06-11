@@ -25,7 +25,7 @@ RELEASE NOTES
 =============
 
 
-3.00.0 Beta 6 - June ??, 2014
+3.00.0 Beta 6 - June 11, 2014
 =============================
 
 Logtalk compiler and runtime
