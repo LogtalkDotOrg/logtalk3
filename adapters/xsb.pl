@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for XSB 3.4.1 or later versions
-%  Last updated on May 15, 2014
+%  Last updated on June 12, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -126,6 +126,7 @@ setup_call_catcher_cleanup(Setup, Call, Catcher, Cleanup) :-
 % the third argument, which must be either "predicate" or "control_construct",
 % is used to guide the compilation of these meta-predicates in debug mode
 
+'$lgt_prolog_meta_predicate'(call_cleanup(_, _), call_cleanup(0, 0), predicate).
 '$lgt_prolog_meta_predicate'(fail_if(_), fail_if(0), predicate).
 '$lgt_prolog_meta_predicate'(findall(_, _, _, _), findall(*, 0, *, *), predicate).
 '$lgt_prolog_meta_predicate'(not(_), not(0), predicate).

@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for CxProlog 0.97.7 or a later version
-%  Last updated on May 15, 2014
+%  Last updated on June 12, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -160,6 +160,7 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 % the third argument, which must be either "predicate" or "control_construct",
 % is used to guide the compilation of these meta-predicates in debug mode
 
+'$lgt_prolog_meta_predicate'(call_cleanup(_, _), call_cleanup(0, 0), predicate).
 '$lgt_prolog_meta_predicate'(*->(_, _), *->(0, 0), control_construct).
 '$lgt_prolog_meta_predicate'(catch(_, _, _, _), catch(0, *, *, 0), predicate).
 '$lgt_prolog_meta_predicate'(gen(_), gen(0), predicate).

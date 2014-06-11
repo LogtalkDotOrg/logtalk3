@@ -28,6 +28,11 @@ RELEASE NOTES
 3.00.0 Beta 7 - July ??, 2014
 =============================
 
+Prolog adapter and integration files
+------------------------------------
+
+* FIXED: Added missing declaration for the proprietary `call_cleanup/2`
+built-in meta-predicate to the adapter files of CxProlog and XSB.
 
 Tools
 -----
