@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for B-Prolog 7.8 and later versions
-%  Last updated on May 15, 2014
+%  Last updated on June 11, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -297,12 +297,17 @@ findall(Term, Goal, List, Tail) :-
 % expands a file path to a full path
 
 '$lgt_expand_path'(Path, ExpandedPath) :-
+	% first expand any environment variable
 	expand_environment(Path, ExpandedPath0),
 	(	(	sub_atom(ExpandedPath0, 0, 1, _, '/')
+			% assume POSIX full path 
 		;	sub_atom(ExpandedPath0, 1, 1, _, ':')
+			% assume Windows full Path starting with a drive letter followed by ":"
 		) ->
+		% assume full path
 		ExpandedPath = ExpandedPath0
-	;	working_directory(Current),
+	;	% assume path relative to the current directory
+		working_directory(Current),
 		atom_concat(Current, '/', Directory),
 		atom_concat(Directory, ExpandedPath0, ExpandedPath)
 	).
