@@ -1185,6 +1185,9 @@ create_protocol(Ptc, Relations, Directives) :-
 		'$lgt_next_integer'(Count, New),
 		number_codes(New, Codes),
 		atom_codes(Identifier, [Code| Codes]),
+	% objects, protocols, and categories share a single namespace and there's
+	% no guarantee that a user named entity will not clash with the genearated
+	% identifier despite the use of a per entity type base character
 	\+ '$lgt_current_protocol_'(Identifier, _, _, _, _),
 	\+ '$lgt_current_object_'(Identifier, _, _, _, _, _, _, _, _, _, _),
 	\+ '$lgt_current_category_'(Identifier, _, _, _, _, _),
@@ -18172,7 +18175,7 @@ current_logtalk_flag(Flag, Value) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Utility predicates
+%  utility predicates
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -18871,7 +18874,17 @@ current_logtalk_flag(Flag, Value) :-
 		true
 	;	logtalk_load(
 			core(File),
-			[code_prefix('$'), optimize(on), report(off), clean(on), reload(skip), scratch_directory(ScratchDirectory)]
+			[	% we need a fixed code prefix as some of the "logtalk"
+				% object predicates must be called directly
+				code_prefix('$'),
+				% delete the generated intermediate files as they may be non-portable
+				clean(on),
+				% use a scratch directory where we expect to have writing permission
+				scratch_directory(ScratchDirectory),
+				% optimize entity code, allow static binding to these entity resources,
+				% and prevent their redefinition
+				optimize(on), report(off), reload(skip)
+			]
 		)
 	).
 
@@ -18925,19 +18938,23 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_load_settings_file_from_directory'(Directory, Options, Result) :-
 	(	'$lgt_file_extension'(logtalk, Extension),
+		% more than one possible extension may be listed in the used adapter file
 		atom_concat(settings, Extension, SettingsFile),
+		% construct full path to the possible settings file
 		(	sub_atom(Directory, _, _, 0, '/') ->
 			atom_concat(Directory, SettingsFile, SettingsPath)
 		;	atom_concat(Directory, '/', DirectorySlash),
 			atom_concat(DirectorySlash, SettingsFile, SettingsPath)
 		),
 		'$lgt_file_exists'(SettingsPath) ->
+		% settings file found; try to load it
 		catch(
 			(logtalk_load(SettingsPath, Options), Result = loaded(Directory)),
 			Error,
 			Result = error(Directory, Error)
 		)
-	;	fail
+	;	% no settings file in this directory
+		fail
 	).
 
 
@@ -18963,7 +18980,7 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_compile_default_hooks'
 %
 % compiles the default hooks specified on the backend Prolog compiler
-% adapter file
+% adapter file for better performance when compiling source files
 
 '$lgt_compile_default_hooks' :-
 	(	'$lgt_compiler_flag'(hook, Hook) ->
