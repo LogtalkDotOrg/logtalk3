@@ -15691,16 +15691,6 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_term_template'(@callable, -callable, -integer)
-%
-% constructs a template for a callable term and returns the term arity
-
-'$lgt_term_template'(Term, Template, Arity) :-
-	functor(Term, Functor, Arity),
-	functor(Template, Functor, Arity).
-
-
-
 % '$lgt_flatten_to_list'(+term, -list)
 %
 % flattens an item, a list of items, or a conjuction of items into a list
