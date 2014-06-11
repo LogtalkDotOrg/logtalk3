@@ -88,6 +88,12 @@ Prolog adapter and integration files
 * FIXED: Added missing definition for the standard `acyclic_term/1` predicate
 to the Quintus Prolog adapter file.
 
+Documentation
+-------------
+
+* ADDED: Sample tester file, `tester-sample.lgt`, for helping automating
+running unit tests.
+
 Tools
 -----
 
