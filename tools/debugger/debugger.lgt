@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/06/09,
+		date is 2014/06/11,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -406,7 +406,7 @@
 
 		call_goal(TGoal, Deterministic) :-
 			{sepia_kernel:get_cut(Before),
-			 TGoal,
+			 call(TGoal),
 			 sepia_kernel:get_cut(After)},
 			(	Before == After ->
 				!,
