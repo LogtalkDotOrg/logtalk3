@@ -29,6 +29,12 @@ RELEASE NOTES
 =============================
 
 
+Tools
+-----
+
+* FIXED: Typos in the `debugger` tool new code for avoiding introducing
+spurious choice-points that prevented it working as expected with most
+of the supported backend Prolog compilers.
 
 
 3.00.0 Beta 6 - June 11, 2014

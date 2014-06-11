@@ -379,14 +379,14 @@
 		;	{TGoal}
 		).
 
-	:- if((	current_logtalk_flag(prolog_dialect, b),
+	:- if((	current_logtalk_flag(prolog_dialect, Dialect),
 			(Dialect == b; Dialect == qp; Dialect == swi; Dialect == yap)
 	)).
 
 		call_goal(TGoal, Deterministic) :-
 			{setup_call_cleanup(true, TGoal, Deterministic = true)}.
 
-	:- elif((	current_logtalk_flag(prolog_dialect, b),
+	:- elif((	current_logtalk_flag(prolog_dialect, Dialect),
 			(Dialect == cx; Dialect == sicstus; Dialect == xsb)
 	)).
 
