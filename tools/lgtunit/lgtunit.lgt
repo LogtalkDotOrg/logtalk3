@@ -30,7 +30,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/04/21,
+		date is 2014/06/12,
 		comment is 'A simple unit test framework featuring predicate clause coverage.'
 	]).
 
@@ -51,6 +51,14 @@
 	:- mode(run, one).
 	:- info(run/0, [
 		comment is 'Runs the unit tests, writing the results to the current output stream.'
+	]).
+
+	:- public(deterministic/1).
+	:- meta_predicate(deterministic(0)).
+	:- mode(deterministic(+callable), zero_or_one).
+	:- info(deterministic/1, [
+		comment is 'True if a goal succeeds once without leaving choice-points.',
+		argnames is ['Goal']
 	]).
 
 	:- public(op(700, xfx, ('=~='))).
@@ -199,6 +207,14 @@
 			)
 		;	failed_test(Test, File, Position, failure_instead_of_success)
 		).
+	run_test(deterministic(Test, Position), File) :-
+		(	catch(::test(Test, deterministic), Error, failed_test(Test, File, Position, error_instead_of_success(Error))) ->
+			(	var(Error) ->
+				passed_test(Test, File, Position)
+			;	true
+			)
+		;	failed_test(Test, File, Position, failure_instead_of_success)
+		).
 	run_test(fails(Test, Position), File) :-
 		(	catch(::test(Test, fail), Error, failed_test(Test, File, Position, error_instead_of_failure(Error))) ->
 			(	var(Error) ->
@@ -322,6 +338,7 @@
 		;	Functor/Arity == test/2
 		;	Functor/Arity == test/1
 		;	Functor/Arity == succeeds/1
+		;	Functor/Arity == deterministic/1
 		;	Functor/Arity == fails/1
 		;	Functor/Arity == throws/2
 		),
@@ -341,6 +358,8 @@
 		logtalk_load_context(term_position, Position),
 		(	Outcome == true ->
 			assertz(test_(succeeds(Test, Position)))
+		;	Outcome == deterministic ->
+			assertz(test_(deterministic(Test, Position)))
 		;	Outcome == fail ->
 			assertz(test_(fails(Test, Position)))
 		;	% Outcome = error(Error,_); Outcome = Ball
@@ -353,11 +372,15 @@
 		logtalk_load_context(term_position, Position),
 		assertz(test_(succeeds(Test, Position))).
 
-	% unit test idiom succeeds/1 + fails/1 + throws/2
+	% unit test idiom succeeds/1 + deterministic/1 + fails/1 + throws/2
 	term_expansion((succeeds(Test) :- Goal), [(test(Test, true) :- Goal)]) :-
 		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
 		assertz(test_(succeeds(Test, Position))).
+	term_expansion((deterministic(Test) :- Goal), [(test(Test, deterministic) :- lgtunit::deterministic(Goal))]) :-
+		check_for_valid_test_identifier(Test),
+		logtalk_load_context(term_position, Position),
+		assertz(test_(deterministic(Test, Position))).
 	term_expansion((fails(Test) :- Goal), [(test(Test, fail) :- Goal)]) :-
 		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
@@ -378,6 +401,8 @@
 
 	convert_test_outcome(true, Goal, true, Goal).
 	convert_test_outcome(true(Test), Goal, true, (Goal, Test)).
+	convert_test_outcome(deterministic, Goal, deterministic, lgtunit::deterministic(Goal)).
+	convert_test_outcome(deterministic(Test), Goal, deterministic, (lgtunit::deterministic(Goal), Test)).
 	convert_test_outcome(fail, Goal, fail, Goal).
 	convert_test_outcome(error(Error), Goal, error(Error,_), Goal).
 	convert_test_outcome(ball(Ball), Goal, Ball, Goal).
@@ -385,6 +410,7 @@
 	test_idiom_head(test(Test, _), Test).
 	test_idiom_head(test(Test), Test).
 	test_idiom_head(succeeds(Test), Test).
+	test_idiom_head(deterministic(Test), Test).
 	test_idiom_head(fails(Test), Test).
 	test_idiom_head(throws(Test, _), Test).
 
@@ -392,12 +418,50 @@
 		(	var(Test) ->
 			print_message(error, lgtunit, non_instantiated_test_identifier)
 		;	(	test_(succeeds(Test, _))
+			;	test_(deterministic(Test, _))
 			;	test_(fails(Test, _))
 			;	test_(throws(Test, _, _))
 			) ->
 			print_message(error, lgtunit, repeated_test_identifier(Test))
 		;	true
 		).
+
+	:- if((	current_logtalk_flag(prolog_dialect, Dialect),
+			(Dialect == b; Dialect == qp; Dialect == swi; Dialect == yap)
+	)).
+		deterministic(Goal) :-
+			setup_call_cleanup(true, Goal, Deterministic = true),
+			(	nonvar(Deterministic) ->
+				!
+			;	!,
+				fail
+			).
+	:- elif((	current_logtalk_flag(prolog_dialect, Dialect),
+			(Dialect == cx; Dialect == sicstus; Dialect == xsb)
+	)).
+		deterministic(Goal) :-
+			call_cleanup(Goal, Deterministic = true),
+			(	var(Deterministic) ->
+				!,
+				fail
+			;	!
+			).
+	:- elif(current_logtalk_flag(prolog_dialect, gnu)).
+		deterministic(Goal) :-
+			call_det(Goal, Deterministic),
+			!,
+			Deterministic == true.
+	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
+		deterministic(Goal) :-
+			{sepia_kernel:get_cut(Before)},
+			call(Goal),
+			{sepia_kernel:get_cut(After)},
+			!,
+			Before == After.
+	:- else.
+		deterministic(_) :-
+			throw(error(resource_error, deterministic/1)).
+	:- endif.
 
 	'=~='(Float1, Float2) :-
 		(	% first test the absolute error, for meaningful results with numbers very close to zero:

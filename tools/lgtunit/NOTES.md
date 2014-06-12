@@ -64,14 +64,16 @@ that are expected to succeed. However, tests that are expected to throw
 an error cannot be specified. A more versatile dialect is:
 
 	succeeds(Test) :- Goal.
+	deterministic(Test) :- Goal.
 	fails(Test) :- Goal.
 	throws(Test, Ball) :- Goal.
 
 This is a straightforward dialect. For `succeeds/1` tests, `Goal` is
-expected to succeed. For `fails/1` tests, `Goal` is expected to fail.
-For `throws/2` tests, `Goal` is expected to throw the exception term
-`Ball`. An alternative test dialect that can be used with the same
-expressive power is:
+expected to succeed. For `deterministic!` tests, `Goal` is expected to
+succeed once without leaving a choice-point. For `fails/1` tests, `Goal`
+is expected to fail. For `throws/2` tests, `Goal` is expected to throw
+the exception term `Ball`. An alternative test dialect that can be used
+with the same expressive power is:
 
 	test(Test, Outcome) :- Goal.
 
@@ -81,6 +83,10 @@ The possible values of the outcome argument are:
 	the test is expected to succeed
 - `true(Test)`  
 	the test is expected to succeed and satisfy the goal `Test`
+- `deterministic`  
+	the test is expected to succeed once without leaving a choice-point
+- `deterministic(Test)`  
+	the test is expected to succeed once without leaving a choice-point and satisfy the goal `Test`
 - `fail`  
 	the test is expected to fail
 - `error(Error)`  
@@ -96,6 +102,9 @@ Tests that for some reason should be skipped can have the test clause head
 prefixed with the `(-)/1` operator. An alternative is to use the conditional
 compilation directives. The number of skipped tests is reported together with
 the numbers of passed and failed tests.
+
+Deterministic unit tests are currently not available when using Lean Prolog
+or Quintus Prolog as backend compilers.
 
 A single unit test object my include tests for one or more entities (objects,
 protocols, and categories). The entities being tested by an unit test object

@@ -46,6 +46,9 @@ built-in meta-predicate to the adapter files of CxProlog and XSB.
 Tools
 -----
 
+* ADDED: Support to the `lgtunit` tool for defining tests that check if a goal
+is deterministic, i.e. that it succeeds once without leaving a choice-point.
+
 * FIXED: Typos in the `debugger` tool new code for avoiding introducing
 spurious choice-points that prevented it working as expected with most
 of the supported backend Prolog compilers.
