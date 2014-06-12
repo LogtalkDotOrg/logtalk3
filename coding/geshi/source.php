@@ -49,15 +49,14 @@ comment
 	extends(parent)).
 
 	:- info([
-		version is 1.19,
+		version is 1.20,
 		author is 'Paulo Moura',
-		date is 2014/06/10,
+		date is 2014/06/12,
 		comment is 'Sample prototype for testing syntax coloring.'
 	]).
 
 	:- built_in.
 	:- threaded.
-	:- synchronized.
 	:- dynamic.
 	:- initialization(some_goal(X, Y)).
 	:- calls(some_other_protocol).

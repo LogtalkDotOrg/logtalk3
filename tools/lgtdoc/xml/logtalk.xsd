@@ -82,11 +82,8 @@
 	<xsd:restriction base="xsd:string">
 		<xsd:enumeration value="static"/>
 		<xsd:enumeration value="static, threaded"/>
-		<xsd:enumeration value="static, synchronized"/>
-		<xsd:enumeration value="static, threaded, synchronized"/>
 		<xsd:enumeration value="dynamic"/>
 		<xsd:enumeration value="dynamic, threaded"/>
-		<xsd:enumeration value="dynamic, threaded, synchronized"/>
 	</xsd:restriction>
 </xsd:simpleType>
 

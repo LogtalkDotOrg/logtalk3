@@ -104,11 +104,8 @@
 			<choice>
 				<value>static</value>
 				<value>static, threaded</value>
-				<value>static, synchronized</value>
-				<value>static, threaded, synchronized</value>
 				<value>dynamic</value>
 				<value>dynamic, threaded</value>
-				<value>dynamic, threaded, synchronized</value>
 			</choice>
 		</element>
 	</define>
