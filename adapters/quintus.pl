@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Quintus Prolog 3.3~3.5
-%  Last updated on June 7, 2014
+%  Last updated on June 12, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -983,6 +983,19 @@ term_hash(_, _, _, _) :-
 
 '$lgt_string_codes'(_, _) :-
 	fail.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  default user module
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% '$lgt_user_module_qualification'(@callable, -callable)
+
+'$lgt_user_module_qualification'(Goal, user:Goal).
 
 
 

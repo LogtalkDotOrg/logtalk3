@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Ciao Prolog 1.14.0
-%  Last updated on May 15, 2014
+%  Last updated on June 12, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -721,6 +721,19 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 
 '$lgt_string_codes'(_, _) :-
 	fail.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  default user module
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% '$lgt_user_module_qualification'(@callable, -callable)
+
+'$lgt_user_module_qualification'(Goal, user:Goal).
 
 
 

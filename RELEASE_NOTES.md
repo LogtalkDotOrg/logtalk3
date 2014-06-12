@@ -28,6 +28,13 @@ RELEASE NOTES
 3.00.0 Beta 7 - July ??, 2014
 =============================
 
+Logtalk compiler and runtime
+----------------------------
+
+IMPROVED: Abstract how to qualify a goal so that it's called in the default
+user module thus removing any reference to specific backend Prolog compilers
+from the core compiler/runtime code.
+
 Prolog adapter and integration files
 ------------------------------------
 

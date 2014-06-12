@@ -10880,11 +10880,10 @@ current_logtalk_flag(Flag, Value) :-
 		assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, HelperFunctor/Arity, number_of_clauses(1))))
 	;	true
 	),
-	(	'$lgt_prolog_feature'(modules, supported),
-		\+ '$lgt_prolog_feature'(prolog_dialect, eclipse) ->
-		% make sure the call is made in the correct context
-		TArg = ':'(user, THelper),
-		DArg = ':'(user, THelper)
+	(	'$lgt_prolog_feature'(modules, supported) ->
+		% make sure the calls are made in the correct context
+		'$lgt_user_module_qualification'(THelper, TArg),
+		'$lgt_user_module_qualification'(THelper, DArg)
 	;	TArg = THelper,
 		DArg = THelper
 	).
@@ -10897,11 +10896,10 @@ current_logtalk_flag(Flag, Value) :-
 		% the compiled call is already explicitly-qualified
 		TArg = TArg0,
 		DArg = DArg0
-	;	'$lgt_prolog_feature'(modules, supported),
-		\+ '$lgt_prolog_feature'(prolog_dialect, eclipse) ->
-		% make sure the call is made in the correct context
-		TArg = ':'(user, TArg0),
-		DArg = ':'(user, DArg0)
+	;	'$lgt_prolog_feature'(modules, supported) ->
+		% make sure the calls are made in the correct context
+		'$lgt_user_module_qualification'(TArg0, TArg),
+		'$lgt_user_module_qualification'(DArg0, DArg)
 	;	TArg = TArg0,
 		DArg = DArg0
 	).
@@ -10929,10 +10927,9 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_compile_prolog_meta_argument'((/), Args, Ctx, TArgs, DArgs).
 '$lgt_compile_prolog_meta_argument'((/), Arg, _, TArg, TArg) :-
 	'$lgt_compile_predicate_indicators'(Arg, _, TArg0),
-	(	'$lgt_prolog_feature'(modules, supported),
-		\+ '$lgt_prolog_feature'(prolog_dialect, eclipse) ->
+	(	'$lgt_prolog_feature'(modules, supported) ->
 		% make sure the predicate indicator refers to the correct context
-		TArg = ':'(user, TArg0)
+		'$lgt_user_module_qualification'(TArg0, TArg)
 	;	TArg = TArg0
 	).
 
