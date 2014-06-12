@@ -4462,25 +4462,28 @@ current_logtalk_flag(Flag, Value) :-
 % performs a meta-call in "sender" at runtime
 
 '$lgt_metacall_sender'(Pred, Sender, This, ExtraVars) :-
-	'$lgt_current_object_'(Sender, Prefix, _, Def, _, _, _, _, DDef, _, Flags),
-	'$lgt_execution_context'(ExCtx, This, Sender, Sender, ExtraVars, []),
-	(	% in the most common case we're meta-calling a user defined static predicate
-		call(Def, Pred, ExCtx, TPred) ->
-		call(TPred)
-	;	% or a user defined dynamic predicate
-		call(DDef, Pred, ExCtx, TPred) ->
-		call(TPred)
-	;	% in the worst case we have a control construct or a built-in predicate
-		'$lgt_comp_ctx'(Ctx, _, This, Sender, Sender, Prefix, ExtraVars, _, ExCtx, runtime, [], _),
-		catch('$lgt_compile_body'(Pred, TPred, DPred, Ctx), Error, throw(error(Error, logtalk(call(Pred), Sender)))) ->
-		(	Flags /\ 512 =:= 512 ->
-			% object compiled in debug mode
-			catch(DPred, error(Error,_), throw(error(Error, logtalk(call(Pred), Sender))))
-		;	catch(TPred, error(Error,_), throw(error(Error, logtalk(call(Pred), Sender))))
+	(	Sender == user ->
+		catch(Pred, error(Error,_), throw(error(Error, logtalk(call(Pred), Sender))))
+	;	'$lgt_current_object_'(Sender, Prefix, _, Def, _, _, _, _, DDef, _, Flags),
+		'$lgt_execution_context'(ExCtx, This, Sender, Sender, ExtraVars, []),
+		(	% in the most common case we're meta-calling a user defined static predicate
+			call(Def, Pred, ExCtx, TPred) ->
+			call(TPred)
+		;	% or a user defined dynamic predicate
+			call(DDef, Pred, ExCtx, TPred) ->
+			call(TPred)
+		;	% in the worst case we have a control construct or a built-in predicate
+			'$lgt_comp_ctx'(Ctx, _, This, Sender, Sender, Prefix, ExtraVars, _, ExCtx, runtime, [], _),
+			catch('$lgt_compile_body'(Pred, TPred, DPred, Ctx), Error, throw(error(Error, logtalk(call(Pred), Sender)))) ->
+			(	Flags /\ 512 =:= 512 ->
+				% object compiled in debug mode
+				catch(DPred, error(Error,_), throw(error(Error, logtalk(call(Pred), Sender))))
+			;	catch(TPred, error(Error,_), throw(error(Error, logtalk(call(Pred), Sender))))
+			)
+		;	% of course, the meta-call may happen to be an unfortunate mistake
+			functor(Pred, Functor, Arity),
+			throw(error(existence_error(procedure, Functor/Arity), logtalk(call(Pred), Sender)))
 		)
-	;	% of course, the meta-call may happen to be an unfortunate mistake
-		functor(Pred, Functor, Arity),
-		throw(error(existence_error(procedure, Functor/Arity), logtalk(call(Pred), Sender)))
 	).
 
 

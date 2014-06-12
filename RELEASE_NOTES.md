@@ -31,9 +31,11 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-IMPROVED: Abstract how to qualify a goal so that it's called in the default
+* IMPROVED: Abstract how to qualify a goal so that it's called in the default
 user module thus removing any reference to specific backend Prolog compilers
 from the core compiler/runtime code.
+
+* FIXED: Calling meta-arguments in the context of the pseudo-object "user".
 
 Prolog adapter and integration files
 ------------------------------------
