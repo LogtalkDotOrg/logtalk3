@@ -53,6 +53,9 @@ is deterministic, i.e. that it succeeds once without leaving a choice-point.
 spurious choice-points that prevented it working as expected with most
 of the supported backend Prolog compilers.
 
+* FIXED: The `lgtdoc` tool was still expecting the removed `synchronized/0`
+directive and corresponding object and category property.
+
 
 3.00.0 Beta 6 - June 11, 2014
 =============================

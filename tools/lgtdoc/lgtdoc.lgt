@@ -362,12 +362,8 @@
 		;	Flags4 = Flags3
 		),
 		(	object_property(Entity, threaded) ->
-			atom_concat(Flags4, ', threaded', Flags5)
-		;	Flags5 = Flags4
-		),
-		(	object_property(Entity, synchronized) ->
-			atom_concat(Flags5, ', synchronized', Flags)
-		;	Flags = Flags5
+			atom_concat(Flags4, ', threaded', Flags)
+		;	Flags = Flags4
 		).
 	xml_entity_compilation_text(category, Entity, Flags) :-
 		(	category_property(Entity, static) ->
@@ -379,12 +375,8 @@
 		;	Flags0 = Mode
 		),
 		(	category_property(Entity, events) ->
-			atom_concat(Flags0, ', events', Flags1)
-		;	Flags1 = Flags0
-		),
-		(	category_property(Entity, synchronized) ->
-			atom_concat(Flags1, ', synchronized', Flags)
-		;	Flags = Flags1
+			atom_concat(Flags0, ', events', Flags)
+		;	Flags = Flags0
 		).
 	xml_entity_compilation_text(protocol, Entity, Flags) :-
 		(	protocol_property(Entity, static) ->
