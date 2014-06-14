@@ -1969,8 +1969,7 @@ logtalk_compile(Files, Flags) :-
 		throw(error(instantiation_error, _))
 	;	atom(File) ->
 		Path = File
-	;	functor(File, Library, 1),
-		arg(1, File, Basename),
+	;	File =.. [Library, Basename],
 		atom(Basename) ->
 		(	'$lgt_expand_library_path'(Library, Directory) ->
 			atom_concat(Directory, Basename, Path)
@@ -2777,14 +2776,11 @@ current_logtalk_flag(Flag, Value) :-
 	;	% no static predicate declaration...
 		ObjFlags /\ 128 =:= 128,
 		% ... but dynamic declarations are allowed
-		functor(DDclClause, DDcl, 2),
-		arg(1, DDclClause, Pred),
+		DDclClause =.. [DDcl, Pred, _],
 		call(DDclClause) ->
 		retractall(DDclClause),
-		functor(DDefClause, DDef, 3),
-		arg(1, DDefClause, Pred),
+		DDefClause =.. [DDef, Pred, _, TPred],
 		(	call(DDefClause) ->
-			arg(3, DDefClause, TPred),
 			functor(TPred, TFunctor, TArity),
 			abolish(TFunctor/TArity),
 			retractall(DDefClause),
@@ -2792,11 +2788,9 @@ current_logtalk_flag(Flag, Value) :-
 		;	true
 		)
 	;	% no dynamic predicate declaration found
-		functor(DDefClause, DDef, 3),
-		arg(1, DDefClause, Pred),
+		DDefClause =.. [DDef, Pred, _, TPred],
 		call(DDefClause) ->
 		% local dynamic predicate
-		arg(3, DDefClause, TPred),
 		functor(TPred, TFunctor, TArity),
 		abolish(TFunctor/TArity),
 		retractall(DDefClause),
@@ -3421,9 +3415,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	NeedsUpdate == true, Sender \= SCtn ->
 		'$lgt_term_template'(Head, UHead),
 		'$lgt_term_template'(THead, UTHead),
-		functor(UClause, DDef, 3),
-		arg(1, UClause, UHead),
-		arg(3, UClause, UTHead),
+		UClause =.. [DDef, UHead, _, UTHead],
 		(	(Scope = p(p(p)), Type == (dynamic)) ->
 			asserta('$lgt_db_lookup_cache_'(GObj, GHead, _, GTHead, update(UHead, UTHead, UClause)))
 		;	'$lgt_term_template'(Sender, GSender),
@@ -8276,8 +8268,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % user-defined entity info pair; no checking
 '$lgt_compile_entity_info_directive_pair'(Key, Value, TPair) :-
-	functor(TPair, Key, 1),
-	arg(1, TPair, Value).
+	TPair =.. [Key, Value].
 
 
 '$lgt_check_entity_info_parameters'([Pair| Pairs], Parameters, Counter0, Arity) :-
@@ -8385,8 +8376,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % user-defined predicate info pair; no checking
 '$lgt_compile_predicate_info_directive_pair'(Key, Value, _, _, TPair) :-
-	functor(TPair, Key, 1),
-	arg(1, TPair, Value).
+	TPair =.. [Key, Value].
 
 
 '$lgt_check_predicate_info_arguments'([Pair| Pairs], Arguments, Counter0, Arity) :-
@@ -12971,8 +12961,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_term_template'(THead, GTHead),
 	(	clause(GTHead, _) ->
 		true
-	;	functor(DDefClause, DDef, 3),
-		arg(1, DDefClause, Head),
+	;	DDefClause =.. [DDef, Head, _, _],
 		retractall(DDefClause),
 		'$lgt_clean_lookup_caches'(Head)
 	).
