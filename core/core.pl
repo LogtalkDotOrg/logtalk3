@@ -8610,7 +8610,8 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	(	'$lgt_pp_previous_predicate_'(Head) ->
 		true
-	;	'$lgt_check_discontiguous_predicate'(Head, Ctx)
+	;	% clauses for the predicate are discontiguous
+		'$lgt_check_discontiguous_directive'(Head, Ctx)
 	).
 
 % definition of dynamic predicates inside categories
@@ -11098,12 +11099,15 @@ current_logtalk_flag(Flag, Value) :-
 %
 % checks for a discontiguous/1 directive for a predicate
 
-'$lgt_check_discontiguous_directive'(Functor, Arity, Lines) :-
+'$lgt_check_discontiguous_directive'(Head, Ctx) :-
+	functor(Head, Functor, Arity),
 	(	'$lgt_pp_discontiguous_'(Functor, Arity) ->
 		true
 	;	'$lgt_pp_missing_discontiguous_directive_'(Functor, Arity, _) ->
 		true
-	;	assertz('$lgt_pp_missing_discontiguous_directive_'(Functor, Arity, Lines))
+	;	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, compile(_), _, Lines) ->
+		assertz('$lgt_pp_missing_discontiguous_directive_'(Functor, Arity, Lines))
+	;	true
 	).
 
 
@@ -12807,8 +12811,10 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	'$lgt_construct_def_clause'(Def, HeadTemplate, ExCtxTemplate, THeadTemplate, Clause),
 	assertz('$lgt_pp_def_'(Clause)),
+	% the following two calls have side effects, thus ...
 	'$lgt_check_for_redefined_built_in'(HeadTemplate, ExCtxTemplate, THeadTemplate, Mode),
 	'$lgt_remember_defined_predicate'(HeadTemplate, ExCtxTemplate, THeadTemplate, Mode),
+	% ... we need to delay output unifications to after they succeed
 	Head = HeadTemplate,
 	ExCtx = ExCtxTemplate,
 	THead = THeadTemplate.
@@ -12826,11 +12832,14 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	functor(THeadTemplate, TFunctor, TArity),
 	'$lgt_unify_head_thead_arguments'(HeadTemplate, THeadTemplate, ExCtxTemplate),
+	% only objects can define clauses for dynamic predicates
 	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, DDef, _, _),
 	'$lgt_construct_def_clause'(DDef, HeadTemplate, ExCtxTemplate, THeadTemplate, Clause),
 	assertz('$lgt_pp_ddef_'(Clause)),
+	% the following two calls have side effects, thus ...
 	'$lgt_check_for_redefined_built_in'(HeadTemplate, ExCtxTemplate, THeadTemplate, Mode),
 	'$lgt_remember_defined_predicate'(HeadTemplate, ExCtxTemplate, THeadTemplate, Mode),
+	% ... we need to delay output unifications to after they succeed
 	Head = HeadTemplate,
 	ExCtx = ExCtxTemplate,
 	THead = THeadTemplate.
@@ -12920,30 +12929,6 @@ current_logtalk_flag(Flag, Value) :-
 	assertz('$lgt_pp_defines_predicate_'(Head, ExCtx, THead, Mode)),
 	retractall('$lgt_pp_previous_predicate_'(_)),
 	assertz('$lgt_pp_previous_predicate_'(Head)).
-
-
-
-% '$lgt_check_discontiguous_predicate'(@callable, @compilation_context)
-%
-% check if the predicate whose clause is being compiled is discontiguous
-%
-% this predicate is called when compiling another clause for an already
-% found predicate that is not the previous compiled predicate if such a
-% predicate exists; this test is skipped for runtime clause compilation
-% and when compiling auxiliary predicates
-%
-% the check for discontiguous predicates is not performed when compiling
-% clauses for auxiliary predicates (using the logtalk::compile_aux_clauses/1
-% hook predicate)
-
-'$lgt_check_discontiguous_predicate'(Head, Ctx) :-
-	(	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, compile(regular), _, Lines),
-		'$lgt_pp_previous_predicate_'(_) ->
-		% clauses for the predicate are discontiguous
-		functor(Head, Functor, Arity),
-		'$lgt_check_discontiguous_directive'(Functor, Arity, Lines)
-	;	true
-	).
 
 
 
