@@ -717,6 +717,6 @@ user:portray(c(This, r(Sender, Self, MetaVars, CoinductionStack))) :-
 :- meta_predicate user:'$lgt_metacall'(*,*,*,*,*,*).
 :- meta_predicate user:'$lgt_quantified_metacall'(*,*,*,*,*,*,*).
 :- meta_predicate user:'$lgt_metacall_sender'(*,*,*,*).
-:- meta_predicate user:'$lgt_metacall_sender'(*,*,*,*,*).
+:- meta_predicate user:'$lgt_metacall_this'(*,*,*,*,*).
 
 :- meta_predicate user:'$user#0.forward#1'(*,*).
