@@ -12874,10 +12874,9 @@ current_logtalk_flag(Flag, Value) :-
 
 
 % '$lgt_check_for_redefined_built_in'(@callable, @execution_context, @callable, @compound)
-
-'$lgt_check_for_redefined_built_in'(Head, _, _, _) :-
-	'$lgt_pp_redefined_built_in_'(Head, _, _),
-	!.
+%
+% this predicate is called when adding a def/ddef clause after finding the first clause
+% for a predicate or when no cluses are defined for a declared predicate
 
 '$lgt_check_for_redefined_built_in'(Head, ExCtx, THead, Mode) :-
 	'$lgt_logtalk_built_in_predicate'(Head, _),
