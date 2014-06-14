@@ -700,8 +700,6 @@ object_property(Obj, Prop) :-
 '$lgt_object_property'(events, _, _, _, _, _, Flags) :-
 	Flags /\ 16 =:= 16.
 '$lgt_object_property'(threaded, _, _, _, _, _, Flags) :-
-	Flags /\ 8 =:= 8.
-'$lgt_object_property'(synchronized, _, _, _, _, _, Flags) :-
 	Flags /\ 4 =:= 4.
 '$lgt_object_property'((dynamic), _, _, _, _, _, Flags) :-
 	Flags /\ 2 =:= 2.
@@ -5733,71 +5731,71 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_entity_flags'(protocol, Flags) :-
 	(	'$lgt_compiler_flag'(debug, on) ->
-		Debug = 512						% 0b1000000000
+		Debug = 512
 	;	Debug = 0
 	),
 	(	'$lgt_pp_dynamic_' ->
-		Dynamic = 2						% 0b0000000010
+		Dynamic = 2
 	;	Dynamic = 0
 	),
 	(	'$lgt_pp_built_in_' ->
-		BuiltIn = 1						% 0b0000000001
+		BuiltIn = 1
 	;	BuiltIn = 0
 	),
 	Flags is Debug + Dynamic + BuiltIn.
 
 '$lgt_compile_entity_flags'(category, Flags) :-
 	(	'$lgt_compiler_flag'(debug, on) ->
-		Debug = 512						% 0b1000000000
+		Debug = 512
 	;	Debug = 0
 	),
 	(	'$lgt_compiler_flag'(events, allow) ->
-		Events = 16						% 0b0000001000
+		Events = 16
 	;	Events = 0
 	),
 	(	'$lgt_pp_dynamic_' ->
-		Dynamic = 2						% 0b0000000010
+		Dynamic = 2
 	;	Dynamic = 0
 	),
 	(	'$lgt_pp_built_in_' ->
-		BuiltIn = 1						% 0b0000000001
+		BuiltIn = 1
 	;	BuiltIn = 0
 	),
 	Flags is Debug + Events + Dynamic + BuiltIn.
 
 '$lgt_compile_entity_flags'(object, Flags) :-
 	(	'$lgt_compiler_flag'(debug, on) ->
-		Debug = 512						% 0b1000000000
+		Debug = 512
 	;	Debug = 0
 	),
 	(	'$lgt_compiler_flag'(context_switching_calls, allow) ->
-		ContextSwitchingCalls = 256		% 0b0100000000
+		ContextSwitchingCalls = 256
 	;	ContextSwitchingCalls = 0
 	),
 	(	'$lgt_compiler_flag'(dynamic_declarations, allow) ->
-		DynamicDeclarations = 128		% 0b0010000000
+		DynamicDeclarations = 128
 	;	DynamicDeclarations = 0
 	),
 	(	'$lgt_compiler_flag'(complements, allow) ->
-		Complements = 64				% 0b0001000000
+		Complements = 64
 	;	'$lgt_compiler_flag'(complements, restrict) ->
-		Complements = 32				% 0b0000100000
+		Complements = 32
 	;	Complements = 0
 	),
 	(	'$lgt_compiler_flag'(events, allow) ->
-		Events = 16						% 0b0000010000
+		Events = 16
 	;	Events = 0
 	),
 	(	'$lgt_pp_threaded_' ->
-		Threaded = 8					% 0b0000001000
+		Threaded = 4
 	;	Threaded = 0
 	),
 	(	'$lgt_pp_dynamic_' ->
-		Dynamic = 2						% 0b0000000010
+		Dynamic = 2
 	;	Dynamic = 0
 	),
 	(	'$lgt_pp_built_in_' ->
-		BuiltIn = 1						% 0b0000000001
+		BuiltIn = 1
 	;	BuiltIn = 0
 	),
 	Flags is Debug + ContextSwitchingCalls + DynamicDeclarations + Complements + Events + Threaded + Dynamic + BuiltIn.
