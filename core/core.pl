@@ -1053,10 +1053,10 @@ create_object(Obj, Relations, Directives, Clauses) :-
 		'$lgt_generate_entity_identifier'(object, Obj)
 	;	true
 	),
-	'$lgt_compile_object_relations'(Relations, Obj),
-	'$lgt_compile_object_identifier'(Obj),
 	% set the initial compilation context for compiling the object directives and clauses
 	'$lgt_comp_ctx_mode'(Ctx, runtime),
+	'$lgt_compile_object_relations'(Relations, Obj),
+	'$lgt_compile_object_identifier'(Obj),
 	'$lgt_compile_logtalk_directives'([(dynamic)| Directives], Ctx),
 	% the list of clauses may also include grammar rules
 	'$lgt_compile_runtime_terms'(Clauses),
@@ -1102,10 +1102,10 @@ create_category(Ctg, Relations, Directives, Clauses) :-
 		'$lgt_generate_entity_identifier'(category, Ctg)
 	;	true
 	),
-	'$lgt_compile_category_identifier'(Ctg),
-	'$lgt_compile_category_relations'(Relations, Ctg),
 	% set the initial compilation context for compiling the category directives and clauses
 	'$lgt_comp_ctx_mode'(Ctx, runtime),
+	'$lgt_compile_category_identifier'(Ctg),
+	'$lgt_compile_category_relations'(Relations, Ctg, Ctx),
 	'$lgt_compile_logtalk_directives'([(dynamic)| Directives], Ctx),
 	% the list of clauses may also include grammar rules
 	'$lgt_compile_runtime_terms'(Clauses),
@@ -1156,10 +1156,10 @@ create_protocol(Ptc, Relations, Directives) :-
 		'$lgt_generate_entity_identifier'(protocol, Ptc)
 	;	true
 	),
-	'$lgt_compile_protocol_identifier'(Ptc),
-	'$lgt_compile_protocol_relations'(Relations, Ptc),
 	% set the initial compilation context for compiling the protocol directives
 	'$lgt_comp_ctx_mode'(Ctx, runtime),
+	'$lgt_compile_protocol_identifier'(Ptc),
+	'$lgt_compile_protocol_relations'(Relations, Ptc),
 	'$lgt_compile_logtalk_directives'([(dynamic)| Directives], Ctx),
 	'$lgt_generate_protocol_clauses',
 	'$lgt_generate_protocol_directives',
@@ -6771,7 +6771,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_compile_logtalk_directive'(category_(Ctg, [Relation1, Relation2]), Ctx).
 
 % auxiliary predicate to compile all variants to the category opening directive
-'$lgt_compile_logtalk_directive'(category_(Ctg, Relations), _) :-
+'$lgt_compile_logtalk_directive'(category_(Ctg, Relations), Ctx) :-
 	(	var(Ctg) ->
 		throw(instantiation_error)
 	;	\+ callable(Ctg) ->
@@ -6792,7 +6792,7 @@ current_logtalk_flag(Flag, Value) :-
 		)
 	;	'$lgt_print_message'(silent(compiling), core, compiling_entity(category, Ctg)),
 		'$lgt_compile_category_identifier'(Ctg),
-		'$lgt_compile_category_relations'(Relations, Ctg)
+		'$lgt_compile_category_relations'(Relations, Ctg, Ctx)
 	).
 
 '$lgt_compile_logtalk_directive'(end_category, Ctx) :-
@@ -8159,40 +8159,40 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_compile_category_relations'(+list, @category_identifier)
+% '$lgt_compile_category_relations'(+list, @category_identifier, @compilation_context)
 %
 % compiles the relations of a category with other entities
 
-'$lgt_compile_category_relations'([Relation| Relations], Ctg) :-
+'$lgt_compile_category_relations'([Relation| Relations], Ctg, Ctx) :-
 	(	var(Relation) ->
 		throw(instantiation_error)
 	;	Relation =.. [Functor| Args],
 		'$lgt_flatten_to_list'(Args, FlattenedArgs),
-		'$lgt_compile_category_relation'(Functor, FlattenedArgs, Ctg) ->
+		'$lgt_compile_category_relation'(Functor, FlattenedArgs, Ctg, Ctx) ->
 		true
 	;	callable(Relation) ->
 		functor(Relation, Functor, Arity),
 		throw(domain_error(category_relation, Functor/Arity))
 	;	throw(type_error(callable, Relation))
 	),
-	'$lgt_compile_category_relations'(Relations, Ctg).
+	'$lgt_compile_category_relations'(Relations, Ctg, Ctx).
 
-'$lgt_compile_category_relations'([], _).
+'$lgt_compile_category_relations'([], _, _).
 
 
 
-% '$lgt_compile_category_relation'(+atom, +list, @category_identifier)
+% '$lgt_compile_category_relation'(+atom, +list, @category_identifier, @compilation_context)
 %
 % compiles a relation between a category (the last argument) with other entities
 
-'$lgt_compile_category_relation'(implements, Ptcs, Ctg) :-
+'$lgt_compile_category_relation'(implements, Ptcs, Ctg, _) :-
 	'$lgt_compile_implements_protocol_relation'(Ptcs, Ctg).
 
-'$lgt_compile_category_relation'(extends, Ctgs, Ctg) :-
+'$lgt_compile_category_relation'(extends, Ctgs, Ctg, _) :-
 	'$lgt_compile_extends_category_relation'(Ctgs, Ctg).
 
-'$lgt_compile_category_relation'(complements, Objs, Ctg) :-
-	'$lgt_compile_complements_object_relation'(Objs, Ctg).
+'$lgt_compile_category_relation'(complements, Objs, Ctg, Ctx) :-
+	'$lgt_compile_complements_object_relation'(Objs, Ctg, Ctx).
 
 
 
@@ -12485,18 +12485,18 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_compile_complements_object_relation'(+list, @category_identifier)
+% '$lgt_compile_complements_object_relation'(+list, @category_identifier, @compilation_context)
 %
 % compiles a "complements" relation between a category and a list of objects
 
-'$lgt_compile_complements_object_relation'(Objs, Ctg) :-
+'$lgt_compile_complements_object_relation'(Objs, Ctg, Ctx) :-
 	'$lgt_pp_category_'(Ctg, _, Dcl, Def, Rnm, _),
-	'$lgt_compile_complements_object_relation'(Objs, Ctg, Dcl, Def, Rnm).
+	'$lgt_compile_complements_object_relation'(Objs, Ctg, Dcl, Def, Rnm, Ctx).
 
 
-'$lgt_compile_complements_object_relation'([], _, _, _, _).
+'$lgt_compile_complements_object_relation'([], _, _, _, _, _).
 
-'$lgt_compile_complements_object_relation'([Obj| _], Ctg, _, _, _) :-
+'$lgt_compile_complements_object_relation'([Obj| _], Ctg, _, _, _, _) :-
 	'$lgt_must_be'(object_identifier, Obj),
 	(	'$lgt_is_protocol'(Obj) ->
 		throw(type_error(object, Obj))
@@ -12507,7 +12507,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	fail
 	).
 
-'$lgt_compile_complements_object_relation'([Obj| _], Ctg, _, _, Ctx) :-
+'$lgt_compile_complements_object_relation'([Obj| _], Ctg, _, _, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 	(	'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags) ->
 		% loaded object
@@ -12524,11 +12524,11 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_print_message'(warning(general), core, complementing_category_ignored(Path, Lines, Ctg, Obj)),
 	fail.
 
-'$lgt_compile_complements_object_relation'([Obj| Objs], Ctg, Dcl, Def, Rnm) :-
+'$lgt_compile_complements_object_relation'([Obj| Objs], Ctg, Dcl, Def, Rnm, Ctx) :-
 	'$lgt_add_referenced_object'(Obj),
 	assertz('$lgt_pp_runtime_clause_'('$lgt_complemented_object_'(Obj, Ctg, Dcl, Def, Rnm))),
 	assertz('$lgt_pp_complemented_object_'(Obj, Ctg, Dcl, Def, Rnm)),
-	'$lgt_compile_complements_object_relation'(Objs, Ctg, Dcl, Def, Rnm).
+	'$lgt_compile_complements_object_relation'(Objs, Ctg, Dcl, Def, Rnm, Ctx).
 
 
 
