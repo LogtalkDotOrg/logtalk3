@@ -40,6 +40,9 @@ from the core compiler/runtime code.
 Prolog adapter and integration files
 ------------------------------------
 
+* UPDATED: Dummy `meta_predicate/1` directives for compiler/runtime internal
+predicates for SWI-Prolog that avoid cluttering the make/0 analysis report.
+
 * FIXED: Added missing declaration for the proprietary `call_cleanup/2`
 built-in meta-predicate to the adapter files of CxProlog and XSB.
 
