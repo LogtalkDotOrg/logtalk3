@@ -12761,7 +12761,6 @@ current_logtalk_flag(Flag, Value) :-
 % reports any references to unknown modules found while compiling an entity
 
 '$lgt_report_unknown_modules'(Type, Entity, Path) :-
-	'$lgt_prolog_feature'(modules, supported),
 	'$lgt_pp_referenced_module_'(Module, Lines),
 		% not a currently loaded module
 		\+ current_module(Module),
