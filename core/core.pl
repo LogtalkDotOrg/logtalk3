@@ -12918,7 +12918,6 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_remember_defined_predicate'(Head, ExCtx, THead, Mode) :-
 	assertz('$lgt_pp_defines_predicate_'(Head, ExCtx, THead, Mode)),
-	retractall('$lgt_pp_non_portable_predicate_'(Head, _)),
 	retractall('$lgt_pp_previous_predicate_'(_)),
 	assertz('$lgt_pp_previous_predicate_'(Head)).
 
