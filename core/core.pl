@@ -3044,7 +3044,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_clause'(+object_identifier, @callable, @callable, +object_identifier, +scope)
+% '$lgt_clause'(+object_identifier, +callable, ?callable, +object_identifier, +scope)
 %
 % clause/2 built-in method
 
@@ -9546,12 +9546,9 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
 	'$lgt_execution_context_this'(ExCtx, This),
-	(	Mode = compile(_) ->
-		'$lgt_check_dynamic_directive'(Pred, Lines)
-	;	true
-	),
+	'$lgt_must_be'(var_or_predicate_indicator, Pred),
+	'$lgt_check_dynamic_directive'(Mode, Pred, Lines),
 	(	ground(Pred) ->
-		'$lgt_must_be'(predicate_indicator, Pred),
 		TCond = '$lgt_abolish_checked'(This, Pred, This, p(_))
 	;	% partially instantiated predicate indicator; runtime check required
 		TCond = '$lgt_abolish'(This, Pred, This, p(_))
@@ -9561,12 +9558,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_body'(assert(Clause), TCond, DCond, Ctx) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, Mode, _, Lines),
-	(	Mode == runtime ->
-		true
-	;	'$lgt_pp_non_portable_predicate_'(assert(_), _) ->
-		true
-	;	assertz('$lgt_pp_non_portable_predicate_'(assert(_), Lines))
-	),
+	'$lgt_check_non_portable_prolog_built_in_call'(Mode, assert(Clause), Lines),
 	'$lgt_compile_body'(assertz(Clause), TCond, DCond, Ctx).
 
 '$lgt_compile_body'(asserta(QClause), TCond, DCond, Ctx) :-
@@ -9618,10 +9610,6 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_body'(asserta(Clause), TCond, DCond, Ctx) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
-	(	Mode = compile(_) ->
-		'$lgt_check_dynamic_directive'(Clause, Lines)
-	;	true
-	),
 	(	'$lgt_optimizable_local_db_call'(Clause, TClause) ->
 		TCond = asserta(TClause)
 	;	'$lgt_execution_context_this'(ExCtx, This),
@@ -9635,7 +9623,8 @@ current_logtalk_flag(Flag, Value) :-
 				)
 			;	TCond = '$lgt_asserta_fact_checked'(This, Clause, This, p(_), p)
 			)
-		)
+		),
+		'$lgt_check_dynamic_directive'(Mode, Clause, Lines)
 	),
 	DCond = '$lgt_debug'(goal(asserta(Clause), TCond), ExCtx).
 
@@ -9688,10 +9677,6 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_body'(assertz(Clause), TCond, DCond, Ctx) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
-	(	Mode = compile(_) ->
-		'$lgt_check_dynamic_directive'(Clause, Lines)
-	;	true
-	),
 	(	'$lgt_optimizable_local_db_call'(Clause, TClause) ->
 		TCond = assertz(TClause)
 	;	'$lgt_execution_context_this'(ExCtx, This),
@@ -9705,7 +9690,8 @@ current_logtalk_flag(Flag, Value) :-
 				)
 			;	TCond = '$lgt_assertz_fact_checked'(This, Clause, This, p(_), p)
 			)
-		)
+		),
+		'$lgt_check_dynamic_directive'(Mode, Clause, Lines)
 	),
 	DCond = '$lgt_debug'(goal(assertz(Clause), TCond), ExCtx).
 
@@ -9738,18 +9724,16 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_body'(clause(Head, Body), TCond, DCond, Ctx) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
-	(	Mode = compile(_) ->
-		'$lgt_check_dynamic_directive'(Head, Lines)
-	;	true
-	),
 	(	'$lgt_optimizable_local_db_call'(Head, THead) ->
+		'$lgt_must_be'(var_or_callable, Body),
 		TCond = (clause(THead, TBody), (TBody = ('$lgt_nop'(Body), _) -> true; TBody = Body))
 	;	'$lgt_execution_context_this'(ExCtx, This),
 		(	'$lgt_runtime_checked_db_clause'((Head :- Body)) ->
 			TCond = '$lgt_clause'(This, Head, Body, This, p(_))
 		;	'$lgt_must_be'(clause_or_partial_clause, (Head :- Body)),
 			TCond = '$lgt_clause_checked'(This, Head, Body, This, p(_))
-		)
+		),
+		'$lgt_check_dynamic_directive'(Mode, Head, Lines)
 	),
 	DCond = '$lgt_debug'(goal(clause(Head, Body), TCond), ExCtx).
 
@@ -9802,10 +9786,6 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_body'(retract(Clause), TCond, DCond, Ctx) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
-	(	Mode = compile(_) ->
-		'$lgt_check_dynamic_directive'(Clause, Lines)
-	;	true
-	),
 	(	'$lgt_optimizable_local_db_call'(Clause, TClause) ->
 		TCond = retract(TClause)
 	;	'$lgt_execution_context_this'(ExCtx, This),
@@ -9821,7 +9801,8 @@ current_logtalk_flag(Flag, Value) :-
 				)
 			;	TCond = '$lgt_retract_fact_checked'(This, Clause, This, p(_))
 			)
-		)
+		),
+		'$lgt_check_dynamic_directive'(Mode, Clause, Lines)
 	),
 	DCond = '$lgt_debug'(goal(retract(Clause), TCond), ExCtx).
 
@@ -9855,10 +9836,6 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_body'(retractall(Head), TCond, DCond, Ctx) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
-	(	Mode = compile(_) ->
-		'$lgt_check_dynamic_directive'(Head, Lines)
-	;	true
-	),
 	(	'$lgt_optimizable_local_db_call'(Head, THead) ->
 		TCond = retractall(THead)
 	;	'$lgt_execution_context_this'(ExCtx, This),
@@ -9866,7 +9843,8 @@ current_logtalk_flag(Flag, Value) :-
 			TCond = '$lgt_retractall'(This, Head, This, p(_))
 		;	'$lgt_must_be'(callable, Head),
 			TCond = '$lgt_retractall_checked'(This, Head, This, p(_))
-		)
+		),
+		'$lgt_check_dynamic_directive'(Mode, Head, Lines)
 	),
 	DCond = '$lgt_debug'(goal(retractall(Head), TCond), ExCtx).
 
@@ -11057,14 +11035,21 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_check_dynamic_directive'(@term, @term)
+% '$lgt_check_dynamic_directive'(+atom, @term, @term)
 %
 % checks for a dynamic/1 directive for a predicate that is an argument to the
-% database built-in methods
+% database built-in methods; the predicate may be non-instantiated or only
+% partially instantiated but must be valid
+
+'$lgt_check_dynamic_directive'(runtime, _, _).
+
+'$lgt_check_dynamic_directive'(compile(_), Term, Lines) :-
+	'$lgt_check_dynamic_directive'(Term, Lines).
+
 
 '$lgt_check_dynamic_directive'(Term, _) :-
 	var(Term),
-	% runtime argument
+	% runtime binding argument
 	!.
 
 '$lgt_check_dynamic_directive'((Head :- _), Lines) :-
@@ -11072,14 +11057,12 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_check_dynamic_directive'(Head, Lines).
 
-'$lgt_check_dynamic_directive'(Term, Lines) :-
-	'$lgt_valid_predicate_indicator'(Term, Functor, Arity),
+'$lgt_check_dynamic_directive'(Functor/Arity, Lines) :-
 	% predicate indicator
 	!,
-	functor(Head, Functor, Arity),
-	(	\+ '$lgt_pp_dynamic_'(Head),
-		\+ '$lgt_pp_missing_dynamic_directive_'(Head, _) ->
-		assertz('$lgt_pp_missing_dynamic_directive_'(Head, Lines))
+	(	ground(Functor/Arity) ->
+		functor(Head, Functor, Arity),
+		'$lgt_check_dynamic_directive'(Head, Lines)
 	;	true
 	).
 
@@ -11293,7 +11276,6 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_message_to_object'(abolish(Pred), Obj, TPred, This, _, _) :-
 	!,
-	'$lgt_must_be'(var_or_object_identifier, Obj),
 	'$lgt_must_be'(var_or_predicate_indicator, Pred),
 	(	var(Obj) ->
 		TPred = '$lgt_abolish'(Obj, Pred, This, p(p(p)))
@@ -11309,10 +11291,10 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_message_to_object'(asserta(Clause), Obj, TPred, This, _, _) :-
 	!,
-	'$lgt_must_be'(var_or_object_identifier, Obj),
 	(	'$lgt_runtime_checked_db_clause'(Clause) ->
 		TPred = '$lgt_asserta'(Obj, Clause, This, p(p(_)), p(p(p)))
 	;	var(Obj) ->
+		'$lgt_must_be'(clause_or_partial_clause, Clause),
 		TPred = '$lgt_asserta'(Obj, Clause, This, p(p(_)), p(p(p)))
 	;	'$lgt_must_be'(clause_or_partial_clause, Clause),
 		(	(Clause = (Head :- Body) -> Body == true; Clause = Head) ->
@@ -11327,10 +11309,10 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_message_to_object'(assertz(Clause), Obj, TPred, This, _, _) :-
 	!,
-	'$lgt_must_be'(var_or_object_identifier, Obj),
 	(	'$lgt_runtime_checked_db_clause'(Clause) ->
 		TPred = '$lgt_assertz'(Obj, Clause, This, p(p(_)), p(p(p)))
 	;	var(Obj) ->
+		'$lgt_must_be'(clause_or_partial_clause, Clause),
 		TPred = '$lgt_assertz'(Obj, Clause, This, p(p(_)), p(p(p)))
 	;	'$lgt_must_be'(clause_or_partial_clause, Clause),
 		(	(Clause = (Head :- Body) -> Body == true; Clause = Head) ->
@@ -11345,46 +11327,51 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_message_to_object'(clause(Head, Body), Obj, TPred, This, _, _) :-
 	!,
-	'$lgt_must_be'(clause_or_partial_clause, (Head :- Body)),
-	'$lgt_must_be'(var_or_object_identifier, Obj),
 	(	'$lgt_runtime_checked_db_clause'((Head :- Body)) ->
 		TPred = '$lgt_clause'(Obj, Head, Body, This, p(p(p)))
-	;	var(Obj) ->
-		TPred = '$lgt_clause'(Obj, Head, Body, This, p(p(p)))
-	;	TPred = '$lgt_clause_checked'(Obj, Head, Body, This, p(p(p)))
+	;	'$lgt_must_be'(clause_or_partial_clause, (Head :- Body)),
+		(	var(Obj) ->
+			TPred = '$lgt_clause'(Obj, Head, Body, This, p(p(p)))
+		;	TPred = '$lgt_clause_checked'(Obj, Head, Body, This, p(p(p)))
+		)
 	).
 
 '$lgt_compile_message_to_object'(retract(Clause), Obj, TPred, This, _, _) :-
 	!,
-	'$lgt_must_be'(var_or_object_identifier, Obj),
 	(	'$lgt_runtime_checked_db_clause'(Clause) ->
 		TPred = '$lgt_retract'(Obj, Clause, This, p(p(p)))
 	;	var(Obj) ->
+		'$lgt_must_be'(clause_or_partial_clause, Clause),
 		TPred = '$lgt_retract'(Obj, Clause, This, p(p(p)))
 	;	'$lgt_must_be'(clause_or_partial_clause, Clause),
-		(Clause = (Head :- Body) -> Body == true; Clause = Head) ->
-		(	'$lgt_compiler_flag'(optimize, on),
-			'$lgt_send_to_obj_db_msg_static_binding'(Obj, Head, THead) ->
-			TPred = retract(THead)
-		;	TPred = '$lgt_retract_fact_checked'(Obj, Head, This, p(p(p)))
+		(	Clause = (Head :- Body) ->
+			(	var(Body) ->
+				'$lgt_retract_var_body_checked'(Obj, Clause, This, p(p(p)))
+			;	Body == true ->
+				(	'$lgt_compiler_flag'(optimize, on),
+					'$lgt_send_to_obj_db_msg_static_binding'(Obj, Head, THead) ->
+					TPred = retract(THead)
+				;	TPred = '$lgt_retract_fact_checked'(Obj, Head, This, p(p(p)))
+				)
+			;	TPred = '$lgt_retract_rule_checked'(Obj, Clause, This, p(p(p)))
+			)
+		;	TPred = '$lgt_retract_fact_checked'(Obj, Clause, This, p(p(p)))
 		)
-	;	Clause = (_ :- Body), var(Body) ->
-		'$lgt_retract_var_body_checked'(Obj, Clause, This, p(p(p)))
-	;	TPred = '$lgt_retract_rule_checked'(Obj, Clause, This, p(p(p)))
 	).
 
 '$lgt_compile_message_to_object'(retractall(Head), Obj, TPred, This, _, _) :-
 	!,
-	'$lgt_must_be'(var_or_callable, Head),
-	'$lgt_must_be'(var_or_object_identifier, Obj),
 	(	var(Head) ->
 		TPred = '$lgt_retractall'(Obj, Head, This, p(p(p)))
 	;	var(Obj) ->
+		'$lgt_must_be'(callable, Head),
 		TPred = '$lgt_retractall'(Obj, Head, This, p(p(p)))
-	;	'$lgt_compiler_flag'(optimize, on),
-		'$lgt_send_to_obj_db_msg_static_binding'(Obj, Head, THead) ->
-		TPred = retractall(THead)
-	;	TPred = '$lgt_retractall_checked'(Obj, Head, This, p(p(p)))
+	;	'$lgt_must_be'(callable, Head),
+		(	'$lgt_compiler_flag'(optimize, on),
+			'$lgt_send_to_obj_db_msg_static_binding'(Obj, Head, THead) ->
+			TPred = retractall(THead)
+		;	TPred = '$lgt_retractall_checked'(Obj, Head, This, p(p(p)))
+		)
 	).
 
 % term and goal expansion predicates
@@ -11527,8 +11514,8 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_message_to_self'(abolish(Pred), TPred, Ctx) :-
 	!,
+	'$lgt_must_be'(var_or_predicate_indicator, Pred),
 	(	ground(Pred) ->
-		'$lgt_must_be'(predicate_indicator, Pred),
 		TPred = '$lgt_abolish_checked'(Self, Pred, This, p(_))
 	;	% partially instantiated predicate indicator; runtime check required
 		TPred = '$lgt_abolish'(Self, Pred, This, p(_))

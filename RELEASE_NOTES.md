@@ -37,6 +37,12 @@ from the core compiler/runtime code.
 
 * FIXED: Calling meta-arguments in the context of the pseudo-object "user".
 
+* FIXED: When compiling a `clause/2` message to an object, the head argument
+is only required to be instantiated at runtime.
+
+* FIXED: Some cases where compile-time type errors in calls to the built-in
+database methods would be missed by the compiler.
+
 Prolog adapter and integration files
 ------------------------------------
 
