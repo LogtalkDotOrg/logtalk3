@@ -11180,12 +11180,12 @@ current_logtalk_flag(Flag, Value) :-
 % compiles a message sending call
 
 
-% invalid object identifier
+% messages to the pseudo-object "user"
 
-'$lgt_compile_message_to_object'(_, Obj, _, _, _, _) :-
-	nonvar(Obj),
-	\+ callable(Obj),
-	throw(type_error(object_identifier, Obj)).
+'$lgt_compile_message_to_object'(Pred, Obj, Pred, _, _, _) :-
+	Obj == user,
+	!,
+	'$lgt_must_be'(var_or_callable, Pred).
 
 % convenient access to parametric object proxies
 
@@ -11195,12 +11195,12 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_compile_message_to_object'(Pred, Proxy, TPred, This, Head, Events).
 
-% messages to the pseudo-object "user"
+% invalid object identifier
 
-'$lgt_compile_message_to_object'(Pred, Obj, Pred, _, _, _) :-
-	Obj == user,
-	!,
-	'$lgt_must_be'(var_or_callable, Pred).
+'$lgt_compile_message_to_object'(_, Obj, _, _, _, _) :-
+	nonvar(Obj),
+	\+ callable(Obj),
+	throw(type_error(object_identifier, Obj)).
 
 % remember the object receiving the message
 
