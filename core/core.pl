@@ -11652,7 +11652,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	callable(Pred) ->
 		'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
 		(	'$lgt_compiler_flag'(optimize, on),
-			'$lgt_related_entities_are_static',
+			'$lgt_obj_related_entities_are_static',
 			'$lgt_obj_super_call_static_binding'(Obj, Pred, ExCtx, TPred) ->
 			true
 		;	TPred = '$lgt_obj_super_call_'(Super, Pred, ExCtx)
@@ -11674,7 +11674,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	callable(Pred) ->
 		'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
 		(	'$lgt_compiler_flag'(optimize, on),
-			'$lgt_related_entities_are_static',
+			'$lgt_ctg_related_entities_are_static',
 			'$lgt_ctg_super_call_static_binding'(Ctg, Pred, ExCtx, TPred) ->
 			true
 		;	TPred = '$lgt_ctg_super_call_'(Ctg, Pred, ExCtx)
@@ -11685,7 +11685,7 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 
-'$lgt_related_entities_are_static' :-
+'$lgt_obj_related_entities_are_static' :-
 	forall(
 		'$lgt_pp_extended_object_'(Obj, _, _, _, _, _, _, _, _, _, _),
 		('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags), Flags /\ 2 =:= 0)
@@ -11702,6 +11702,13 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_pp_imported_category_'(Ctg, _, _, _, _, _),
 		('$lgt_current_category_'(Ctg, _, _, _, _, Flags), Flags /\ 2 =:= 0)
 	),
+	forall(
+		'$lgt_pp_implemented_protocol_'(Ptc, _, _, _, _),
+		('$lgt_current_protocol_'(Ptc, _, _, _, Flags), Flags /\ 2 =:= 0)
+	).
+
+
+'$lgt_ctg_related_entities_are_static' :-
 	forall(
 		'$lgt_pp_extended_category_'(Ctg, _, _, _, _, _),
 		('$lgt_current_category_'(Ctg, _, _, _, _, Flags), Flags /\ 2 =:= 0)
