@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Logtalk script for updating the HTML library and tools documentation
-##   Last updated on April 1, 2014
+##   Last updated on June 17, 2014
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -123,15 +123,9 @@ elif [ "$p_arg" == "swi" ] ; then
 elif [ "$p_arg" == "xsb" ] ; then
 	prolog='XSB'
 	logtalk="xsblgt$extension -e"
-elif [ "$p_arg" == "xsb64" ] ; then
-	prolog='XSB 64 bits'
-	logtalk="xsb64lgt$extension -e"
 elif [ "$p_arg" == "xsbmt" ] ; then
 	prolog='XSB-MT'
 	logtalk="xsbmtlgt$extension -e"
-elif [ "$p_arg" == "xsbmt64" ] ; then
-	prolog='XSB-MT 64 bits'
-	logtalk="xsbmt64lgt$extension -e"
 elif [ "$p_arg" == "yap" ] ; then
 	prolog='YAP'
 	logtalk="yaplgt$extension -g"

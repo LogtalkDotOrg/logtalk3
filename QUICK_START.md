@@ -46,9 +46,7 @@ scripts!):
 * SICStus Prolog: `sicstuslgt`
 * SWI-Prolog:     `swilgt`
 * XSB:            `xsblgt`     (first run may require `sudo`)
-* XSB 64 bits:    `xsb64lgt`   (first run may require `sudo`)
 * XSB MT:         `xsbmtlgt`   (first run may require `sudo`)
-* XSB MT 64 bits: `xsbmt64lgt` (first run may require `sudo`)
 * YAP:            `yaplgt`
 
 On MacOS X systems, `/opt/local/bin` must be in your PATH to run the scripts.

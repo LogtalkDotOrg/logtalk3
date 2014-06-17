@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Logtalk installation script
-##   Last updated on February 10, 2014
+##   Last updated on June 17, 2014
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -172,9 +172,7 @@ echo "* Quintus Prolog (version 3.3 or later):   quintuslgt  (experimental)"
 echo "* SICStus Prolog (version 4.1.0 or later): sicstuslgt"
 echo "* SWI-Prolog (version 6.0.0 or later):     swilgt"
 echo "* XSB (version 3.4.1 or later):            xsblgt      (first run may require sudo)"
-echo "* XSB 64 bits (version 3.4.1 or later):    xsb64lgt    (first run may require sudo)"
 echo "* XSB MT (version 3.4.1 or later):         xsbmtlgt    (first run may require sudo)"
-echo "* XSB MT 64 bits (version 3.4.1 or later): xsbmt64lgt  (first run may require sudo)"
 echo "* YAP (version 6.3.4 or later):            yaplgt"
 echo
 echo "Links to the Prolog integration scripts can be found on \"$prefix/bin\"."

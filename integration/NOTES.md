@@ -39,9 +39,7 @@ system path):
 * SICStus Prolog (version 4.1.0 or later): `sicstuslgt`
 * SWI-Prolog (version 6.0.0 or later):     `swilgt`
 * XSB (version 3.4.1 or later):            `xsblgt`     (first run may require `sudo`)
-* XSB 64 bits (version 3.4.1 or later):    `xsb64lgt`   (first run may require `sudo`)
 * XSB MT (version 3.4.1 or later):         `xsbmtlgt`   (first run may require `sudo`)
-* XSB MT 64 bits (version 3.4.1 or later): `xsbmt64lgt` (first run may require `sudo`)
 * YAP (version 6.3.4 or later):            `yaplgt`
 
 For more information about these scripts and their dependencies, consult

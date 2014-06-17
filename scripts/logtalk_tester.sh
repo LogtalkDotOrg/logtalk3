@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Unit testing automation script
-##   Last updated on February 7, 2014
+##   Last updated on June 7, 2014
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -139,23 +139,9 @@ elif [ "$p_arg" == "xsb" ] ; then
 	tester_optimal_goal=$tester_optimal_goal_dot
 	tester_normal_goal=$tester_normal_goal_dot
 	tester_debug_goal=$tester_debug_goal_dot
-elif [ "$p_arg" == "xsb64" ] ; then
-	prolog='XSB 64 bits'
-	logtalk="xsb64lgt$extension -e"
-	versions_goal=$versions_goal_dot
-	tester_optimal_goal=$tester_optimal_goal_dot
-	tester_normal_goal=$tester_normal_goal_dot
-	tester_debug_goal=$tester_debug_goal_dot
 elif [ "$p_arg" == "xsbmt" ] ; then
 	prolog='XSB-MT'
 	logtalk="xsbmtlgt$extension -e"
-	versions_goal=$versions_goal_dot
-	tester_optimal_goal=$tester_optimal_goal_dot
-	tester_normal_goal=$tester_normal_goal_dot
-	tester_debug_goal=$tester_debug_goal_dot
-elif [ "$p_arg" == "xsbmt64" ] ; then
-	prolog='XSB-MT 64 bits'
-	logtalk="xsbmt64lgt$extension -e"
 	versions_goal=$versions_goal_dot
 	tester_optimal_goal=$tester_optimal_goal_dot
 	tester_normal_goal=$tester_normal_goal_dot

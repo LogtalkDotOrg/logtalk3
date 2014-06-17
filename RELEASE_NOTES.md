@@ -28,7 +28,12 @@ RELEASE NOTES
 3.00.0 Beta 8 - July ??, 2014
 =============================
 
+Prolog adapter and integration files
+------------------------------------
 
+* REMOVED: Specific integration scripts for 64 bits versions of XSB as nowadays
+this system seems to be usually compiled 64 bits using the generic executable
+names `xsb` and `xsb-mt`.
 
 
 3.00.0 Beta 7 - June 17, 2014
