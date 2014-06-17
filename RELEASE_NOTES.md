@@ -25,7 +25,7 @@ RELEASE NOTES
 =============
 
 
-3.00.0 Beta 7 - July ??, 2014
+3.00.0 Beta 7 - June 17, 2014
 =============================
 
 Logtalk compiler and runtime
@@ -34,6 +34,8 @@ Logtalk compiler and runtime
 * IMPROVED: Abstract how to qualify a goal so that it's called in the default
 user module thus removing any reference to specific backend Prolog compilers
 from the core compiler/runtime code.
+
+* IMPROVED: Minor compiler performance enhancements.
 
 * FIXED: Calling meta-arguments in the context of the pseudo-object "user".
 
