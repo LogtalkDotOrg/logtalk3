@@ -15455,9 +15455,6 @@ current_logtalk_flag(Flag, Value) :-
 	!.
 
 
-'$lgt_logtalk_opening_directive'(include(_)).
-
-
 % objects
 '$lgt_logtalk_opening_directive'(object(_)).
 '$lgt_logtalk_opening_directive'(object(_, _)).
@@ -15488,6 +15485,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_logtalk_entity_directive'(calls(_)).	% deprecated
 '$lgt_logtalk_entity_directive'(uses(_)).	% deprecated
 '$lgt_logtalk_entity_directive'(uses(_, _)).
+'$lgt_logtalk_entity_directive'(include(_)).
 '$lgt_logtalk_entity_directive'(initialization(_)).
 '$lgt_logtalk_entity_directive'((dynamic)).
 '$lgt_logtalk_entity_directive'(op(_, _, _)).
