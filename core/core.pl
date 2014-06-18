@@ -6615,13 +6615,14 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_file_directive'(multifile(Preds), _) :-
 	% perform basic error checking
-	'$lgt_must_be'(ground, Preds),
+	'$lgt_must_be'(list, Preds),
 	'$lgt_flatten_to_list'(Preds, PredsFlatted),
-	'$lgt_member'(Obj::Functor/Arity, PredsFlatted),
+	'$lgt_member'(Obj::Pred, PredsFlatted),
 	% Logtalk multifile predicates must be defined within an entity but
-	% be sure there isn't a non-instantiation error in the directive
-	ground(Obj::Functor/Arity),
-	throw(permission_error(declare, multifile_predicate, Obj::Functor/Arity)).
+	% be sure there aren't instantiation or type errors in the directive
+	'$lgt_must_be'(object_identifier, Obj),
+	'$lgt_must_be'(predicate_indicator, Pred),
+	throw(permission_error(declare, multifile_predicate, Obj::Pred)).
 
 '$lgt_compile_file_directive'(include(File), Ctx) :-
 	'$lgt_read_file_to_terms'(File, Terms),
