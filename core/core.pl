@@ -6614,6 +6614,7 @@ current_logtalk_flag(Flag, Value) :-
 	assertz('$lgt_pp_prolog_term_'((:- set_prolog_flag(Flag, Value)), Position)).
 
 '$lgt_compile_file_directive'(multifile(Preds), _) :-
+	!,
 	% perform basic error checking
 	'$lgt_must_be'(list, Preds),
 	'$lgt_flatten_to_list'(Preds, PredsFlatted),
@@ -6625,6 +6626,7 @@ current_logtalk_flag(Flag, Value) :-
 	throw(permission_error(declare, multifile_predicate, Obj::Pred)).
 
 '$lgt_compile_file_directive'(include(File), Ctx) :-
+	!,
 	'$lgt_read_file_to_terms'(File, Terms),
 	'$lgt_compile_file_terms'(Terms, Ctx).
 
