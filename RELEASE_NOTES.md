@@ -35,6 +35,12 @@ Prolog adapter and integration files
 this system seems to be usually compiled 64 bits using the generic executable
 names `xsb` and `xsb-mt`.
 
+Tools
+-----
+
+* FIXED: Avoid a spurious warning when loading the `diagrams` tool while using
+a backend Prolog compiler that doesn't support modules.
+
 
 3.00.0 Beta 7 - June 17, 2014
 =============================

@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/05/16,
+		date is 2014/06/18,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format']
 	]).
@@ -85,7 +85,7 @@
 			Kind = protocol
 		;	atom(Entity),
 			current_logtalk_flag(modules, supported),
-			current_module(Entity),
+			{current_module(Entity)},
 			Kind = module
 		),
 		^^ground_entity_identifier(Kind, Entity, Name).
