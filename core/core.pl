@@ -199,7 +199,7 @@
 :- dynamic(logtalk_library_path/2).
 
 
-% term- and goal-expansion compiler hooks
+% term- and goal-expansion default compiler hooks
 
 % '$lgt_hook_term_expansion_'(Term, ExpandedTerms)
 :- dynamic('$lgt_hook_term_expansion_'/2).
@@ -2051,18 +2051,16 @@ logtalk_compile(Files, Flags) :-
 	'$lgt_assert_compiler_flags'(Flags),
 	(	'$lgt_pp_file_compiler_flag_'(hook, HookEntity) ->
 		% pre-compile hooks in order to speed up entity compilation
-		(	HookEntity == user ->
-			TermExpansionGoal = term_expansion(Term, Terms),
-			GoalExpansionGoal = goal_expansion(Goal, ExpandedGoal)
+		(	current_object(HookEntity) ->
+			'$lgt_compiler_flag'(events, Events),
+			'$lgt_compile_message_to_object'(term_expansion(Term, Terms), HookEntity, TermExpansionGoal, user, _, Events),
+			'$lgt_compile_message_to_object'(goal_expansion(Goal, ExpandedGoal), HookEntity, GoalExpansionGoal, user, _, Events)
 		;	atom(HookEntity),
-			\+ current_object(HookEntity),
 			'$lgt_prolog_feature'(modules, supported),
 			current_module(HookEntity) ->
 			TermExpansionGoal = ':'(HookEntity, term_expansion(Term, Terms)),
 			GoalExpansionGoal = ':'(HookEntity, goal_expansion(Goal, ExpandedGoal))
-		;	'$lgt_compiler_flag'(events, Events),
-			'$lgt_compile_message_to_object'(term_expansion(Term, Terms), HookEntity, TermExpansionGoal, user, _, Events),
-			'$lgt_compile_message_to_object'(goal_expansion(Goal, ExpandedGoal), HookEntity, GoalExpansionGoal, user, _, Events)
+		;	throw(error(existence_error(object, HookEntity), _))
 		),
 		assertz((
 			'$lgt_pp_hook_term_expansion_'(Term, Terms) :-
@@ -15260,26 +15258,22 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_compile_hooks'(+callable)
 %
-% compiles the user-defined compiler hooks
+% compiles the user-defined default compiler hooks
 % (replacing any previously defined hooks)
 
-'$lgt_compile_hooks'(Obj) :-
-	(	Obj == user ->
-		TermExpansionGoal = term_expansion(Term, ExpandedTerm),
-		GoalExpansionGoal = goal_expansion(Term, ExpandedTerm)
-	;	'$lgt_compiler_flag'(events, Events),
-		'$lgt_compile_message_to_object'(term_expansion(Term, ExpandedTerm), Obj, TermExpansionGoal, user, _, Events),
-		'$lgt_compile_message_to_object'(goal_expansion(Term, ExpandedTerm), Obj, GoalExpansionGoal, user, _, Events)
-	),
+'$lgt_compile_hooks'(HookEntity) :-
+	'$lgt_compiler_flag'(events, Events),
+	'$lgt_compile_message_to_object'(term_expansion(Term, ExpandedTerm), HookEntity, TermExpansionGoal, user, _, Events),
+	'$lgt_compile_message_to_object'(goal_expansion(Term, ExpandedTerm), HookEntity, GoalExpansionGoal, user, _, Events),
 	retractall('$lgt_hook_term_expansion_'(_, _)),
 	assertz((
 		'$lgt_hook_term_expansion_'(Term, ExpandedTerm) :-
-			catch(TermExpansionGoal, Error, '$lgt_term_expansion_error'(Obj, Term, Error))
+			catch(TermExpansionGoal, Error, '$lgt_term_expansion_error'(HookEntity, Term, Error))
 	)),
 	retractall('$lgt_hook_goal_expansion_'(_, _)),
 	assertz((
 		'$lgt_hook_goal_expansion_'(Term, ExpandedTerm) :-
-			catch(GoalExpansionGoal, Error, '$lgt_goal_expansion_error'(Obj, Term, Error))
+			catch(GoalExpansionGoal, Error, '$lgt_goal_expansion_error'(HookEntity, Term, Error))
 	)).
 
 
