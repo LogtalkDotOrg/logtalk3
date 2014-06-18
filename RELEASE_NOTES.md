@@ -38,6 +38,9 @@ names `xsb` and `xsb-mt`.
 Tools
 -----
 
+* ADDED: Option `node_type_captions/1` (false by default) to the `diagrams` tool
+for printing a small caption for the node type.
+
 * FIXED: Avoid a spurious warning when loading the `diagrams` tool while using
 a backend Prolog compiler that doesn't support modules.
 

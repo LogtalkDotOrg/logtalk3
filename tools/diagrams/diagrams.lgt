@@ -29,7 +29,7 @@
 		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2014/03/26,
-		comment is 'Predicates for generating all supported diagrams for libraries and files in one step using the specified format. Only common options should be specified: title/1, date/1, output_directory/1, relation_labels/1, exclude_files/1, exclude_libraries/1, url_prefixes/1, and omit_path_prefix/1.',
+		comment is 'Predicates for generating all supported diagrams for libraries and files in one step using the specified format. Only common options should be specified: title/1, date/1, output_directory/1, relation_labels/1, node_type_captions/1, exclude_files/1, exclude_libraries/1, url_prefixes/1, and omit_path_prefix/1.',
 		parnames is ['Format']
 	]).
 

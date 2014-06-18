@@ -206,6 +206,8 @@
 	default_option(relation_labels(true)).
 	% by default, write cross-referencing calls:
 	default_option(xref_calls(true)).
+	% by default, don't print node type captions
+	default_option(node_type_captions(false)).
 	% by default, write diagram to the current directory:
 	default_option(output_directory('./')).
 	% by default, don't exclude any source files:

@@ -133,7 +133,7 @@
 	graph_style_margin_color(entity, rounded, 10, snow).
 
 	node(Stream, Identifier, Label, Contents, Kind, Options) :-
-		node_shape_style_color(Kind, Shape, Style, Color),
+		node_caption_shape_style_color(Kind, Caption, Shape, Style, Color),
 		write(Stream, '"'),
 		write(Stream, Identifier),
 		write(Stream, '" ['),
@@ -153,30 +153,37 @@
 		write_key_value_comma(Stream, fillcolor, Color),
 		write(Stream, 'label=<<FONT POINT-SIZE="11">'),
 		write(Stream, Label),
-		(	Contents == [] ->
+		write(Stream, '</FONT>'),
+		(	member(node_type_captions(true), Options) ->
+			write(Stream, '<BR /><FONT POINT-SIZE="7">'),
+			write(Stream, Caption),
 			write(Stream, '</FONT>')
-		;	write(Stream, '</FONT><BR/> <BR/>'),
+		;	true
+		),
+		(	Contents == [] ->
+			true
+		;	write(Stream, '<BR/> <BR/>'),
 			write_lines(Contents, Stream)
 		),
 		write(Stream, '>]'), nl(Stream).
 
 	% entities belonging to the file or library being documented
-	node_shape_style_color(prototype, box, filled, beige).
-	node_shape_style_color(instance_or_class, box, filled, yellow).
-	node_shape_style_color(protocol, note, filled, aquamarine).
-	node_shape_style_color(category, component, filled, lightcyan).
-	node_shape_style_color(module, tab, filled, gainsboro).
-	node_shape_style_color(file, box, filled, paleturquoise).
+	node_caption_shape_style_color(prototype, prototype, box, filled, beige).
+	node_caption_shape_style_color(instance_or_class, 'instance/class', box, filled, yellow).
+	node_caption_shape_style_color(protocol, protocol, note, filled, aquamarine).
+	node_caption_shape_style_color(category, category, component, filled, lightcyan).
+	node_caption_shape_style_color(module, module, tab, filled, gainsboro).
+	node_caption_shape_style_color(file, file, box, filled, paleturquoise).
 	% external entities to the file or library being documented
-	node_shape_style_color(external_prototype, box, 'filled,dashed', beige).
-	node_shape_style_color(external_instance_or_class, box, 'filled,dashed', yellow).
-	node_shape_style_color(external_protocol, note, 'filled,dashed', aquamarine).
-	node_shape_style_color(external_category, component, 'filled,dashed', lightcyan).
-	node_shape_style_color(external_module, tab, 'filled,dashed', gainsboro).
-	node_shape_style_color(external_file, box, 'filled,dashed', paleturquoise).
+	node_caption_shape_style_color(external_prototype, prototype, box, 'filled,dashed', beige).
+	node_caption_shape_style_color(external_instance_or_class, 'instance/class', box, 'filled,dashed', yellow).
+	node_caption_shape_style_color(external_protocol, protocol, note, 'filled,dashed', aquamarine).
+	node_caption_shape_style_color(external_category, category, component, 'filled,dashed', lightcyan).
+	node_caption_shape_style_color(external_module, module, tab, 'filled,dashed', gainsboro).
+	node_caption_shape_style_color(external_file, file, box, 'filled,dashed', paleturquoise).
 	% predicates
-	node_shape_style_color(predicate, ellipse, filled, gold).
-	node_shape_style_color(external_predicate, ellipse, 'filled,dashed', gold).
+	node_caption_shape_style_color(predicate, predicate, ellipse, filled, gold).
+	node_caption_shape_style_color(external_predicate, predicate, ellipse, 'filled,dashed', gold).
 
 	edge(Stream, Start, End, Labels, Kind, Options) :-
 		edge_arrow(Kind, ArrowHead),
