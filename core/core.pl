@@ -6612,9 +6612,7 @@ current_logtalk_flag(Flag, Value) :-
 	assertz('$lgt_pp_prolog_term_'((:- set_prolog_flag(Flag, Value)), Position)).
 
 '$lgt_compile_file_directive'(multifile(Preds), _) :-
-	!,
 	% perform basic error checking
-	'$lgt_must_be'(list, Preds),
 	'$lgt_flatten_to_list'(Preds, PredsFlatted),
 	'$lgt_member'(Obj::Pred, PredsFlatted),
 	% Logtalk multifile predicates must be defined within an entity but
