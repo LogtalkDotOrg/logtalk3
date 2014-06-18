@@ -149,6 +149,8 @@ generated diagrams. For entity diagrams the options are:
 	print/omit file labels (`true` or `false`; default is `true`)
 - `relation_labels(Boolean)`  
 	print/omit entity relation labels (`true` or `false`; default is `true`)
+- `node_type_captions(Boolean)`  
+	print/omit node type captions (`true` or `false`; default is `false`)
 - `inheritance_relations(Boolean)`  
 	print/omit inheritance relations (default depends on the specific diagram)
 - `provide_relations(Boolean)`  
@@ -186,6 +188,8 @@ For file diagrams the options are:
 	URL file and entity documenting URL prefixes used when generating cluster, file, and entity links (atoms; defaults are `''`)
 - `relation_labels(Boolean)`  
 	print/omit entity relation labels (`true` or `false`; default is `false`)
+- `node_type_captions(Boolean)`  
+	print/omit node type captions (`true` or `false`; default is `false`)
 - `output_directory(Directory)`  
 	directory for the .dot files (an atom; default is `'./'`)
 - `exclude_files(Files)`  

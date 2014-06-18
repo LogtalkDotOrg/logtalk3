@@ -44,6 +44,9 @@ for printing a small caption for the node type.
 * FIXED: Avoid a spurious warning when loading the `diagrams` tool while using
 a backend Prolog compiler that doesn't support modules.
 
+* FIXED: Workaround a B-Prolog limitation with atoms length when loading the
+`diagrams` tool using this backend Prolog compiler.
+
 
 3.00.0 Beta 7 - June 17, 2014
 =============================
