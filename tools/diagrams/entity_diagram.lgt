@@ -28,8 +28,8 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/06/18,
-		comment is 'Predicates for generating entity diagrams.',
+		date is 2014/06/20,
+		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parnames is ['Format']
 	]).
 
@@ -609,7 +609,7 @@
 		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2014/01/01,
-		comment is 'Predicates for generating entity diagrams in DOT format.'
+		comment is 'Predicates for generating entity diagrams in DOT format with both inheritance and cross-referencing relation edges.'
 	]).
 
 :- end_object.

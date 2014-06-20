@@ -41,6 +41,9 @@ Tools
 * ADDED: Option `node_type_captions/1` (false by default) to the `diagrams` tool
 for printing a small caption for the node type.
 
+* CHANGED: By default, inheritance and uses diagrams now also print the entity
+public interfaces.
+
 * FIXED: Avoid a spurious warning when loading the `diagrams` tool while using
 a backend Prolog compiler that doesn't support modules.
 

@@ -28,8 +28,8 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/06/18,
-		comment is 'Predicates for generating entity diagrams with only inheritance relation edges.',
+		date is 2014/06/20,
+		comment is 'Predicates for generating entity diagrams in the specified format with inheritance relation edges but no cross-referencing relation edges.',
 		parnames is ['Format']
 	]).
 
@@ -37,8 +37,8 @@
 	default_option(title('')).
 	% by default, print current date:
 	default_option(date(true)).
-	% by default, don't print entity public predicates:
-	default_option(interface(false)).
+	% by default, print entity public predicates:
+	default_option(interface(true)).
 	% by default, print file labels:
 	default_option(file_labels(true)).
 	% by default, write inheritance links:
@@ -81,7 +81,7 @@
 		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2014/01/15,
-		comment is 'Predicates for generating entity diagrams in DOT format with only inheritance relation edges.'
+		comment is 'Predicates for generating entity diagrams in DOT format with inheritance relation edges but no cross-referencing relation edges.'
 	]).
 
 :- end_object.
