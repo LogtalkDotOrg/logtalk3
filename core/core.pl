@@ -10587,7 +10587,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_remember_called_predicate'(compile(regular), Functor/Arity, TFunctor/TArity, Head, Lines) :-
 	% currently, the returned line numbers are for the start and end lines of the clause containing the call
 	(	'$lgt_pp_calls_predicate_'(Functor/Arity, _, _, Lines) ->
-		% already reported for the current clause being compiled
+		% already recorded for the current clause being compiled
 		true
 	;	Head = Object::Predicate ->
 		% call from the body of a Logtalk multifile predicate clause
@@ -10619,7 +10619,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_remember_called_self_predicate'(compile(regular), Functor/Arity, Head, Lines) :-
 	% currently, the returned line numbers are for the start and end lines of the clause containing the call
 	(	'$lgt_pp_calls_self_predicate_'(Functor/Arity, _, Lines) ->
-		% already reported for the current clause being compiled (however unlikely!)
+		% already recorded for the current clause being compiled (however unlikely!)
 		true
 	;	Head = Object::Predicate ->
 		% call from the body of a Logtalk multifile predicate clause
@@ -10650,7 +10650,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_remember_called_super_predicate'(compile(regular), Functor/Arity, Head, Lines) :-
 	% currently, the returned line numbers are for the start and end lines of the clause containing the call
 	(	'$lgt_pp_calls_super_predicate_'(Functor/Arity, _, Lines) ->
-		% already reported for the current clause being compiled (however unlikely!)
+		% already recorded for the current clause being compiled (however unlikely!)
 		true
 	;	Head = Object::Predicate ->
 		% call from the body of a Logtalk multifile predicate clause
