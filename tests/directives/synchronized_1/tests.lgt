@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/05/07,
+		date is 2014/06/23,
 		comment is 'Unit tests for the synchronized/1 built-in directive.'
 	]).
 
@@ -30,44 +30,45 @@
 	:- private([d/3, e/4]).
 	:- synchronized([d/3, e/4]).
 
-	:- if(current_logtalk_flag(threads, supported)).
+	% test synchronized predicate calls
 
-		test(synchronized_1_1) :-
-			predicate_property(a, private),
-			predicate_property(a, synchronized).
+	:- public(s/1).
+	:- synchronized(s/1).
 
-		test(synchronized_1_2) :-
-			predicate_property(b(_), private),
-			predicate_property(b(_), synchronized),
-			predicate_property(c(_,_), private),
-			predicate_property(c(_,_), synchronized).
+	s(1).
+	s(2).
+	s(3).
 
-		test(synchronized_1_3) :-
-			predicate_property(d(_,_,_), private),
-			predicate_property(d(_,_,_), synchronized),
-			predicate_property(e(_,_,_,_), private),
-			predicate_property(e(_,_,_,_), synchronized).
+	:- public(t/1).
 
-	:- else.
+	t(X) :-
+		s(X).
 
-		% when threads are not supported, the synchronized/1 directive is ignored
+	test(synchronized_1_1) :-
+		predicate_property(a, private),
+		predicate_property(a, synchronized).
 
-		test(synchronized_1_1) :-
-			predicate_property(a, private),
-			\+ predicate_property(a, synchronized).
+	test(synchronized_1_2) :-
+		predicate_property(b(_), private),
+		predicate_property(b(_), synchronized),
+		predicate_property(c(_,_), private),
+		predicate_property(c(_,_), synchronized).
 
-		test(synchronized_1_2) :-
-			predicate_property(b(_), private),
-			\+ predicate_property(b(_), synchronized),
-			predicate_property(c(_,_), private),
-			\+ predicate_property(c(_,_), synchronized).
+	test(synchronized_1_3) :-
+		predicate_property(d(_,_,_), private),
+		predicate_property(d(_,_,_), synchronized),
+		predicate_property(e(_,_,_,_), private),
+		predicate_property(e(_,_,_,_), synchronized).
 
-		test(synchronized_1_3) :-
-			predicate_property(d(_,_,_), private),
-			\+ predicate_property(d(_,_,_), synchronized),
-			predicate_property(e(_,_,_,_), private),
-			\+ predicate_property(e(_,_,_,_), synchronized).
+		% when threads are not supported, the synchronized/1 directive simply makes
+		% the predicates deterministic by wrapping its calls using once/1
 
-	:- endif.
+	test(synchronized_1_4) :-
+		findall(X, s(X), L),
+		L == [1].
+
+	test(synchronized_1_5) :-
+		findall(X, t(X), L),
+		L == [1].
 
 :- end_object.

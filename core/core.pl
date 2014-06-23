@@ -6937,17 +6937,10 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 % synchronized/1 predicate directive
-%
-% this directive is ignored when using a back-end Prolog compiler
-% that does not provide a compatible threads implementation
 
 '$lgt_compile_logtalk_directive'(synchronized(Resources), _) :-
-	(	'$lgt_prolog_feature'(threads, supported) ->
-		'$lgt_flatten_to_list'(Resources, ResourcesFlatted),
-		'$lgt_compile_synchronized_directive'(ResourcesFlatted)
-	;	% ignore the directive
-		true
-	).
+	'$lgt_flatten_to_list'(Resources, ResourcesFlatted),
+	'$lgt_compile_synchronized_directive'(ResourcesFlatted).
 
 % scope directives
 
@@ -14716,7 +14709,8 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_generate_file_entity_initialization_goal' :-
 	'$lgt_pp_entity_'(Type, Entity, Prefix, _, _),
-	(	setof(Mutex, Head^'$lgt_pp_synchronized_'(Head, Mutex), Mutexes) ->
+	(	'$lgt_prolog_feature'(threads, supported),
+		setof(Mutex, Head^'$lgt_pp_synchronized_'(Head, Mutex), Mutexes) ->
 		Goal1 = '$lgt_create_mutexes'(Mutexes)
 	;	Goal1 = true
 	),

@@ -28,6 +28,16 @@ RELEASE NOTES
 3.00.0 Beta 8 - July ??, 2014
 =============================
 
+Logtalk compiler and runtime
+----------------------------
+
+* CHANGED: Predicates declared as synchronized now always have the property
+`synchronized` even when using backend Prolog compilers that don't support
+a compatible threads implementation.
+
+* FIXED: Compilation of synchronized predicates when using backend Prolog
+compilers that don't support a compatible threads implementation.
+
 Prolog adapter and integration files
 ------------------------------------
 
