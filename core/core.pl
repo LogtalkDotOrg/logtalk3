@@ -1053,6 +1053,9 @@ create_object(Obj, Relations, Directives, Clauses) :-
 	),
 	% set the initial compilation context for compiling the object directives and clauses
 	'$lgt_comp_ctx_mode'(Ctx, runtime),
+	% we need to compile the object relations first as we need to know if we are compiling
+	% a prototype or an instance/class when compiling the object identifier as the generated
+	% internal functors are different for each case
 	'$lgt_compile_object_relations'(Relations, Obj),
 	'$lgt_compile_object_identifier'(Obj),
 	'$lgt_compile_logtalk_directives'([(dynamic)| Directives], Ctx),
@@ -3390,7 +3393,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_term_template'(Obj, GObj),
 	'$lgt_term_template'(Head, GHead),
 	'$lgt_term_template'(THead, GTHead),
-	'$lgt_unify_head_thead_arguments'(GHead, GTHead),
+	'$lgt_unify_head_thead_arguments'(GHead, GTHead, _),
 	(	(Scope = p(p(p)), Type == (dynamic)) ->
 		asserta('$lgt_db_lookup_cache_'(GObj, GHead, _, GTHead, true))
 	;	'$lgt_term_template'(Sender, GSender),
@@ -3407,7 +3410,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_term_template'(Obj, GObj),
 	'$lgt_term_template'(Head, GHead),
 	'$lgt_term_template'(THead, GTHead),
-	'$lgt_unify_head_thead_arguments'(GHead, GTHead),
+	'$lgt_unify_head_thead_arguments'(GHead, GTHead, _),
 	(	NeedsUpdate == true, Sender \= SCtn ->
 		'$lgt_term_template'(Head, UHead),
 		'$lgt_term_template'(THead, UTHead),
@@ -3426,27 +3429,14 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_unify_head_thead_arguments'(+callable, +callable)
 % '$lgt_unify_head_thead_arguments'(+callable, +callable, @term)
 %
 % compiled clause heads use an extra argument for passing the execution context
-
-'$lgt_unify_head_thead_arguments'(Head, THead) :-
-	Head =.. [_| Args],
-	THead =.. [_| TArgs],
-	'$lgt_unify_arguments'(Args, TArgs).
-
 
 '$lgt_unify_head_thead_arguments'(Head, THead, ExCtx) :-
 	Head =.. [_| Args],
 	THead =.. [_| TArgs],
 	'$lgt_unify_arguments'(Args, TArgs, ExCtx).
-
-
-'$lgt_unify_arguments'([], [_]).
-
-'$lgt_unify_arguments'([Arg| Args], [Arg| TArgs]) :-
-	'$lgt_unify_arguments'(Args, TArgs).
 
 
 '$lgt_unify_arguments'([], [ExCtx], ExCtx).
@@ -8689,7 +8679,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_print_message'(warning(general), core, missing_reference_to_built_in_protocol(Path, Type, Entity, forwarding)),
 	fail.
 
-% compile the head of a clause of another entity predicate (which we assume declared multifile)
+% compile the head of a clause of another entity predicate (which we check if declared multifile)
 
 '$lgt_compile_head'(Other::Head, _, _) :-
 	'$lgt_must_be'(entity_identifier, Other),
@@ -8731,7 +8721,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_comp_ctx_head'(Ctx, Other::Head).
 
-% compile the head of a clause of a module predicate (which we assume declared multifile)
+% compile the head of a clause of a module predicate (which we check if declared multifile)
 
 '$lgt_compile_head'(':'(Module, Head), THead, Ctx) :-
 	!,
@@ -10344,9 +10334,9 @@ current_logtalk_flag(Flag, Value) :-
 
 % predicates specified in uses/2 directives
 %
-% in the case of predicates defined in the pseudo-object "user"  the uses/2
-% directive is typically used in this case to help document dependencies on
-% Prolog-defined predicates (usually, but not necessarily, built-in predicates)  
+% in the case of predicates defined in the pseudo-object "user", the uses/2
+% directive is typically used to help document dependencies on Prolog-defined
+% predicates (usually, but not necessarily, built-in predicates)  
 
 '$lgt_compile_body'(Alias, TPred, DPred, Ctx) :-
 	'$lgt_pp_uses_predicate_'(Obj, Pred, Alias),
@@ -11075,12 +11065,16 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_check_discontiguous_directive'(Head, Ctx) :-
 	functor(Head, Functor, Arity),
 	(	'$lgt_pp_discontiguous_'(Functor, Arity) ->
+		% discontiguous directive present
 		true
 	;	'$lgt_pp_missing_discontiguous_directive_'(Functor, Arity, _) ->
+		% discontiguous directive missing already recorded
 		true
 	;	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, compile(_), _, Lines) ->
+		% compiling a source file; record missing discontiguous directive
 		assertz('$lgt_pp_missing_discontiguous_directive_'(Functor, Arity, Lines))
-	;	true
+	;	% runtime compilation
+		true
 	).
 
 
@@ -11100,7 +11094,6 @@ current_logtalk_flag(Flag, Value) :-
 	;	Head = Pred
 	),
 	callable(Head),
-	% instantiated fact
 	% a dynamic directive must be present
 	'$lgt_pp_dynamic_'(Head),
 	% a scope directive must be present
@@ -11114,7 +11107,7 @@ current_logtalk_flag(Flag, Value) :-
 	% compile the fact
 	'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	functor(TPred, TFunctor, TArity),
-	'$lgt_unify_head_thead_arguments'(Head, TPred).
+	'$lgt_unify_head_thead_arguments'(Head, TPred, _).
 
 
 
@@ -11142,21 +11135,22 @@ current_logtalk_flag(Flag, Value) :-
 % checks an arithmetic expression for calls to non-standard Prolog functions
 
 '$lgt_check_non_portable_functions'(Expression, Lines) :-
-	compound(Expression),
+	compound(Expression),	% function
 	!,
 	(	'$lgt_iso_spec_function'(Expression) ->
+		% portable call (we assume...!)
 		true
-	;	% non-portable function
-		'$lgt_pp_non_portable_function_'(Expression, _) ->
+	;	'$lgt_pp_non_portable_function_'(Expression, _) ->
+		% non-portable function already recorded
 		true
-	;	% first occurrence; not yet recorded
+	;	% first occurrence of this non-portable function; record it
 		'$lgt_term_template'(Expression, Template),
 		assertz('$lgt_pp_non_portable_function_'(Template, Lines))
 	),
 	Expression =.. [_| Expressions],
 	'$lgt_check_non_portable_function_args'(Expressions, Lines).
 
-'$lgt_check_non_portable_functions'(_, _).		% variables and numbers
+'$lgt_check_non_portable_functions'(_, _).	% variables and numbers
 
 
 '$lgt_check_non_portable_function_args'([], _).
@@ -15126,7 +15120,7 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	'$lgt_decompile_predicate_indicator'(Prefix, TFunctor/TArity, Functor/Arity),
 	functor(Head, Functor, Arity),
-	'$lgt_unify_head_thead_arguments'(Head, THead),
+	'$lgt_unify_head_thead_arguments'(Head, THead, _),
 	!.
 
 
