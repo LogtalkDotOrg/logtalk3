@@ -45,6 +45,10 @@ Prolog adapter and integration files
 this system seems to be usually compiled 64 bits using the generic executable
 names `xsb` and `xsb-mt`.
 
+* FIXED: Updated the `core/logtalk.lgt` file to workaround an apparent `gplc`
+bug with multifile predicates when generating executables that embed Logtalk
+using GNU Prolog.
+
 Tools
 -----
 

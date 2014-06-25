@@ -408,6 +408,10 @@
 	% workaround apparent gplc bug when dealing with multifile predicates
 	:- multifile(logtalk_library_path/2).
 	:- dynamic(logtalk_library_path/2).
+	:- multifile('$lgt_current_protocol_'/5).
+	:- dynamic('$lgt_current_protocol_'/5).
+	:- multifile('$lgt_current_category_'/6).
+	:- dynamic('$lgt_current_category_'/6).
 :- elif(current_logtalk_flag(prolog_dialect, xsb)).
 	% workaround XSB atom-based module system
 	:- import(from(/(format,3), format)).
