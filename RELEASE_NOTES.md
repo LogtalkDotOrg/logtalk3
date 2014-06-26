@@ -49,6 +49,10 @@ names `xsb` and `xsb-mt`.
 bug with multifile predicates when generating executables that embed Logtalk
 using GNU Prolog.
 
+* IMPROVED: The SWI-Prolog specific `portray/1` rule for pretty-printing an
+entity predicate execution context is now less likely to be triggered for
+non-related terms using the same functor and arity.
+
 Tools
 -----
 
@@ -67,9 +71,9 @@ a backend Prolog compiler that doesn't support modules.
 Examples
 --------
 
-* ADDED: Simple example of implementation of linear and intuitionistic
-assumptions adapted from a paper published by Paul Tarau, Veronica Dahl,
-and Andrew Fall.
+* ADDED: Simple example of implementation of ground linear and intuitionistic
+assumptions adapted from a paper published by Paul Tarau, Veronica Dahl, and
+Andrew Fall.
 
 
 3.00.0 Beta 7 - June 17, 2014

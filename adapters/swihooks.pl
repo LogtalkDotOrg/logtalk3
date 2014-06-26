@@ -8,7 +8,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on June 14, 2014
+%  Last updated on June 26, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -279,7 +279,9 @@ prolog_clause:make_varnames_hook(_, (user:THead :- _), Offsets, Names, Bindings)
 :- multifile(user:portray/1).
 :- dynamic(user:portray/1).
 
-user:portray(c(This, r(Sender, Self, MetaVars, CoinductionStack))) :-
+user:portray(c(This, Rest)) :-
+	callable(Rest),
+	Rest = r(Sender, Self, MetaVars, CoinductionStack),
 	write('<'),
 	writeq(Sender), write(','),
 	writeq(This), write(','),
