@@ -77,7 +77,7 @@ Follows a short description of each included example (in alphabetical order):
 	objects in order to represent object state
 
 - `assumptions`  
-	simple example of implementation of linear and intuitionistic
+	simple example of implementation of ground linear and intuitionistic
 	assumptions
 
 - `attvars`  

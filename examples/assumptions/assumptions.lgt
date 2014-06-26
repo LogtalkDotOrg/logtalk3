@@ -15,12 +15,12 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2014/06/26,
-		comment is 'Simple implementation of linear and intuitionistic assumptions.']).
+		comment is 'Simple implementation of ground linear and intuitionistic assumptions.']).
 
 	:- public(assumel/1).
 	:- mode(assumel(+callable), one).
 	:- info(assumel/1, [
-		comment is 'Assume a fact to be used once.',
+		comment is 'Assume a ground fact to be used once.',
 		argnames is ['Fact']]).
 
 	assumel(Fact) :-
@@ -29,7 +29,7 @@
 	:- public(assumei/1).
 	:- mode(assumei(+callable), one).
 	:- info(assumei/1, [
-		comment is 'Assume a fact to be used any number of times.',
+		comment is 'Assume a ground fact to be used any number of times.',
 		argnames is ['Fact']]).
 
 	assumei(Fact) :-

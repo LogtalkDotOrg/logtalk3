@@ -16,7 +16,8 @@
 		version is 1.0,
 		author is 'Orginal example by Paul Tarau et al. Adapted to Logtalk by Paulo Moura.',
 		date is 2014/06/26,
-		comment is '']).
+		comment is 'Example of defining a switch...case control construct using linear assumptions.'
+	]).
 
 	:- public(test/1).
 	:- mode(test(+integer), one).

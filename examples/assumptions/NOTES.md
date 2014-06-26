@@ -11,8 +11,8 @@ ________________________________________________________________________
 To load this example and for sample queries, please see the `SCRIPT.txt`
 file.
 
-This example provides a simple, limited, implementation of linear and
-intuitionistic assumptions as discussed in the following paper:
+This example provides a simple, limited, implementation of ground linear
+and intuitionistic assumptions as discussed in the following paper:
 
 	@inproceedings{DBLP:conf/slp/TarauDF95,
 	  author    = {Paul Tarau and
