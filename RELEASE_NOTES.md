@@ -64,6 +64,13 @@ a backend Prolog compiler that doesn't support modules.
 * FIXED: Workaround a B-Prolog limitation with atoms length when loading the
 `diagrams` tool using this backend Prolog compiler.
 
+Examples
+--------
+
+* ADDED: Simple example of implementation of linear and intuitionistic
+assumptions adapted from a paper published by Paul Tarau, Veronica Dahl,
+and Andrew Fall.
+
 
 3.00.0 Beta 7 - June 17, 2014
 =============================

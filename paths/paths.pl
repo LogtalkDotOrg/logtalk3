@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Default library paths 
-%  Last updated on May 23, 2014
+%  Last updated on June 26, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -89,6 +89,7 @@ logtalk_library_path(ack, examples('ack/')).
 logtalk_library_path(adventure, examples('adventure/')).
 logtalk_library_path(aliases, examples('aliases/')).
 logtalk_library_path(assignvars, examples('assignvars/')).
+logtalk_library_path(assumptions, examples('assumptions/')).
 logtalk_library_path(attvars, examples('attvars/')).
 logtalk_library_path(barriers, threads('barriers/')).
 logtalk_library_path(benchmarks, examples('benchmarks/')).

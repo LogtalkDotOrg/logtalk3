@@ -1,0 +1,40 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the `LICENSE.txt` file for details.
+________________________________________________________________________
+
+
+% start by loading the example:
+
+| ?- logtalk_load(assumptions(loader)).
+...
+
+
+% paths example:
+
+| ?- paths::init.
+yes
+
+?- paths::path(1,5,Xs).
+Xs = [1, 2, 4, 5] ;
+Xs = [1, 3, 5] ;
+no
+
+
+% switch example:
+
+| ?- switch::test(2).
+two
+yes
+
+?- switch::test(1).
+one
+yes
+
+?- switch::test(4).
+unexpected(4)
+yes

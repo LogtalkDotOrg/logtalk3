@@ -76,6 +76,10 @@ Follows a short description of each included example (in alphabetical order):
 	example of using assignable variables in the context of parametric 
 	objects in order to represent object state
 
+- `assumptions`  
+	simple example of implementation of linear and intuitionistic
+	assumptions
+
 - `attvars`  
 	experimental example of of using attributed variables within
 	Logtalk objects and categories
