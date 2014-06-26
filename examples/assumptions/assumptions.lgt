@@ -24,7 +24,11 @@
 		argnames is ['Fact']]).
 
 	assumel(Fact) :-
-		assertz((Fact :- retractall(Fact))).
+		(	assertz((Fact :- retractall(Fact)))
+		;	retractall(Fact),
+			!,
+			fail
+		).
 
 	:- public(assumei/1).
 	:- mode(assumei(+callable), one).
