@@ -20,8 +20,7 @@
 	]).
 
 	test(assumptions_1) :-
-		paths::init,
-		findall(Path, paths::path(1,5,Path), Paths),
+		findall(Path, (paths::init, paths::path(1,5,Path)), Paths),
 		Paths == [[1,2,4,5], [1,3,5]].
 
 :- end_object.

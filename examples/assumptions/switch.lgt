@@ -23,7 +23,8 @@
 	:- mode(test(+integer), one).
 	:- info(test/1, [
 		comment is 'Test predicate for the switch control construct.',
-		argnames is ['Value']]).
+		argnames is ['Value']
+	]).
 
 	switch(Selector,Body) :-
 		^^assumel(case(Selector)),

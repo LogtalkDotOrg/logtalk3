@@ -16,7 +16,8 @@
 		version is 1.0,
 		author is 'Orginal example by Paul Tarau et al. Adapted to Logtalk by Paulo Moura.',
 		date is 2014/06/26,
-		comment is 'Find paths avoiding loops using linear assumptions.']).
+		comment is 'Find paths avoiding loops using linear assumptions.'
+	]).
 
 	:- public(init/0).
 	init :-
