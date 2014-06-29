@@ -8,7 +8,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on June 26, 2014
+%  Last updated on June 29, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -107,7 +107,7 @@ user:prolog_predicate_name(user:'$lgt_obj_super_call_'(_, _, _), '^^/2 (from obj
 user:prolog_predicate_name(user:'$lgt_ctg_super_call_'(_, _, _), '^^/2 (from ctg; same pred)') :- !.
 user:prolog_predicate_name(user:'$lgt_call_in_this'(_, _), 'call/1') :- !.
 
-user:prolog_predicate_name(user:'$lgt_send_to_obj_rt'(_, _, _, _, _), '::/2 (runtime)') :- !.
+user:prolog_predicate_name(user:'$lgt_send_to_obj_rt'(_, _, _, _), '::/2 (runtime)') :- !.
 user:prolog_predicate_name(user:'$lgt_send_to_obj'(_, _, _), '::/2 (event transparent)') :- !.
 user:prolog_predicate_name(user:'$lgt_send_to_obj_ne'(_, _, _), '::/2 (event transparent)') :- !.
 user:prolog_predicate_name(user:'$lgt_send_to_self'(_, _, _), '::/1') :- !.
@@ -572,7 +572,7 @@ user:portray(c(This, Rest)) :-
 % the following directives are necessary when using the SWI-Prolog
 % graphical tracer as predicates whose name start with a $ have by
 % default a "notrace" property
-:- '$set_predicate_attribute'('$lgt_send_to_obj_rt'/5, trace, 1).
+:- '$set_predicate_attribute'('$lgt_send_to_obj_rt'/4, trace, 1).
 :- '$set_predicate_attribute'('$lgt_send_to_self_nv'/3, trace, 1).
 :- '$set_predicate_attribute'('$lgt_send_to_self'/3, trace, 1).
 :- '$set_predicate_attribute'('$lgt_send_to_self_'/3, trace, 1).
@@ -706,7 +706,7 @@ user:portray(c(This, Rest)) :-
 :- meta_predicate user:'$lgt_send_to_self_'(*,*,*).
 :- meta_predicate user:'$lgt_threaded_call_tagged'(*,*,*,*).
 
-:- meta_predicate user:'$lgt_send_to_obj_rt'(*,*,*,*,*).
+:- meta_predicate user:'$lgt_send_to_obj_rt'(*,*,*,*).
 :- meta_predicate user:'$lgt_send_to_obj_ne'(*,*,*).
 :- meta_predicate user:'$lgt_ctg_super_call'(*,*,*).
 :- meta_predicate user:'$lgt_obj_super_call'(*,*,*).

@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SWI Prolog 6.0.0 and later versions
-%  Last updated on June 12, 2014
+%  Last updated on June 29, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -817,18 +817,20 @@ user:goal_expansion(phrase(Rule, Input, Rest), user:'$lgt_phrase'(Rule, Input, R
 	nonvar(Rule),
 	functor(Rule, '::', 2),
 	!,
-	'$logtalk#0.execution_context#6'(ExCtx, user, user, user, [], [], _).
+	'$lgt_execution_context'(ExCtx, user, user, user, [], []).
 user:goal_expansion(phrase(Rule, Input), user:'$lgt_phrase'(Rule, Input, ExCtx)) :-
 	nonvar(Rule),
 	functor(Rule, '::', 2),
 	!,
-	'$logtalk#0.execution_context#6'(ExCtx, user, user, user, [], [], _).
+	'$lgt_execution_context'(ExCtx, user, user, user, [], []).
 
 user:goal_expansion('::'(Object, Message), user:Goal) :-
 	prolog_load_context(module, Module),
 	Module \== user,
 	'$lgt_compiler_flag'(events, Events),
-	catch('$lgt_compile_message_to_object'(Message, Object, Goal, user, _, Events), _, fail). 
+	'$lgt_comp_ctx'(Ctx, _, user, user, Obj, _, [], [], ExCtx, compile(regular), [], _),
+	'$lgt_execution_context'(ExCtx, user, user, Obj, [], []),
+	catch('$lgt_compile_message_to_object'(Message, Object, Goal, Events, Ctx), _, fail). 
 
 
 

@@ -474,12 +474,13 @@ Obj::Pred :-
 {Obj}::Pred :-
 	!,
 	'$lgt_compiler_flag'(events, Events),
-	catch('$lgt_compile_message_to_object'(Pred, {Obj}, Call, user, _, Events), Error, '$lgt_runtime_error_handler'(error(Error, logtalk({Obj}::Pred, user)))),
+	'$lgt_comp_ctx'(Ctx, _, user, user, Obj, _, [], [], ExCtx, runtime, [], _),
+	'$lgt_execution_context'(ExCtx, user, user, Obj, [], []),
+	catch('$lgt_compile_message_to_object'(Pred, {Obj}, Call, Events, Ctx), Error, '$lgt_runtime_error_handler'(error(Error, logtalk({Obj}::Pred, user)))),
 	(	nonvar(Obj),
 		'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags),
 		Flags /\ 512 =:= 512 ->
 		% object compiled in debug mode
-		'$lgt_execution_context'(ExCtx, user, user, Obj, [], []),
 		catch('$lgt_debug'(top_goal({Obj}::Pred, Call), ExCtx), Error, '$lgt_runtime_error_handler'(Error))
 	;	% object not compiled in debug mode or non-existing object or invalid object identifier
 		catch(Call, Error, '$lgt_runtime_error_handler'(Error))
@@ -487,11 +488,12 @@ Obj::Pred :-
 
 Obj::Pred :-
 	'$lgt_compiler_flag'(events, Events),
-	catch('$lgt_compile_message_to_object'(Pred, Obj, Call, user, _, Events), Error, '$lgt_runtime_error_handler'(error(Error, logtalk(Obj::Pred, user)))),
+	'$lgt_comp_ctx'(Ctx, _, user, user, Obj, _, [], [], ExCtx, runtime, [], _),
+	'$lgt_execution_context'(ExCtx, user, user, Obj, [], []),
+	catch('$lgt_compile_message_to_object'(Pred, Obj, Call, Events, Ctx), Error, '$lgt_runtime_error_handler'(error(Error, logtalk(Obj::Pred, user)))),
 	(	'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags),
 		Flags /\ 512 =:= 512 ->
 		% object compiled in debug mode
-		'$lgt_execution_context'(ExCtx, user, user, Obj, [], []),
 		catch('$lgt_debug'(top_goal(Obj::Pred, Call), ExCtx), Error, '$lgt_runtime_error_handler'(Error))
 	;	% object not compiled in debug mode or non-existing object
 		catch(Call, Error, '$lgt_runtime_error_handler'(Error))
@@ -2056,8 +2058,10 @@ logtalk_compile(Files, Flags) :-
 		% pre-compile hooks in order to speed up entity compilation
 		(	current_object(HookEntity) ->
 			'$lgt_compiler_flag'(events, Events),
-			'$lgt_compile_message_to_object'(term_expansion(Term, Terms), HookEntity, TermExpansionGoal, user, _, Events),
-			'$lgt_compile_message_to_object'(goal_expansion(Goal, ExpandedGoal), HookEntity, GoalExpansionGoal, user, _, Events)
+			'$lgt_comp_ctx'(Ctx, _, user, user, HookEntity, _, [], [], ExCtx, runtime, [], _),
+			'$lgt_execution_context'(ExCtx, user, user, HookEntity, [], []),
+			'$lgt_compile_message_to_object'(term_expansion(Term, Terms), HookEntity, TermExpansionGoal, Events, Ctx),
+			'$lgt_compile_message_to_object'(goal_expansion(Goal, ExpandedGoal), HookEntity, GoalExpansionGoal, Events, Ctx)
 		;	atom(HookEntity),
 			'$lgt_prolog_feature'(modules, supported),
 			current_module(HookEntity) ->
@@ -3679,16 +3683,17 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_send_to_obj_rt'(+object_identifier, +callable, +object_identifier, +callable, +atom)
+% '$lgt_send_to_obj_rt'(+object_identifier, +callable, +atom, +compilation_context)
 %
 % runtime processing of a message sending call when the message and possibly the receiver
 % object are not known at compile time
 
-'$lgt_send_to_obj_rt'(Obj, Pred, Sender, Head, Events) :-
-	% we must ensure that the message is valid before compiling the message
-	% sending goal otherwise there an endless loop would result
+'$lgt_send_to_obj_rt'(Obj, Pred, Events, Ctx) :-
+	% we must ensure that the message is valid before compiling the
+	% message sending goal otherwise an endless loop would result
+	'$lgt_comp_ctx_this'(Ctx, Sender),
 	'$lgt_must_be'(callable, Pred, logtalk(Obj::Pred, Sender)),
-	catch('$lgt_compile_message_to_object'(Pred, Obj, TPred, Sender, Head, Events), Error, throw(error(Error, logtalk(Obj::Pred, Sender)))),
+	catch('$lgt_compile_message_to_object'(Pred, Obj, TPred, Events, Ctx), Error, throw(error(Error, logtalk(Obj::Pred, Sender)))),
 	call(TPred).
 
 
@@ -7812,8 +7817,9 @@ current_logtalk_flag(Flag, Value) :-
 	TAlias =.. [_| Args],
 	% allow for runtime use
 	(	'$lgt_compiler_flag'(optimize, on),
-		'$lgt_comp_ctx_this'(Ctx, This),
-		'$lgt_send_to_obj_static_binding'(Obj, TOriginal, This, Call) ->
+		'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, _, _, _),
+		'$lgt_execution_context_this'(ExCtx, This),
+		'$lgt_send_to_obj_static_binding'(Obj, TOriginal, Call, Ctx) ->
 		'$lgt_add_uses_def_clause'(TAlias, This, Call)
 	;	'$lgt_compile_aux_clauses'([(TAlias :- Obj::TOriginal)])
 	),
@@ -8809,12 +8815,14 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_body'([Obj::Pred], TPred, '$lgt_debug'(goal([Obj::Pred], TPred), ExCtx), Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, Sender, This, _, _, _, _, ExCtx, _, _, _),
 	% as delegation keeps the original sender, we cannot use a recursive call
-	% to the '$lgt_compile_body'/4 predicate to compile the ::/2 goal as that would
-	% reset the sender to "this"
+	% to the '$lgt_compile_body'/4 predicate to compile the ::/2 goal as that
+	% would reset the sender to "this"
+	'$lgt_comp_ctx'(Ctx, Head, Sender, This, _, Prefix, MetaVars, MetaCallCtx, ExCtx, Mode, Stack, Position),
+	'$lgt_comp_ctx'(NewCtx, Head, _, Sender, _, Prefix, MetaVars, MetaCallCtx, NewExCtx, Mode, Stack, Position),
+	'$lgt_execution_context_this'(NewExCtx, Sender),
 	'$lgt_compiler_flag'(events, Events),
-	'$lgt_compile_message_to_object'(Pred, Obj, TPred0, Sender, Head, Events),
+	'$lgt_compile_message_to_object'(Pred, Obj, TPred0, Events, NewCtx),
 	% ensure that this control construct cannot be used to break object encapsulation 
 	TPred = (Obj \= Sender -> TPred0; throw(error(permission_error(access, object, Sender), logtalk([Obj::Pred], This)))),
 	'$lgt_execution_context'(ExCtx, Sender, This, _, _, _).
@@ -9313,10 +9321,10 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_body'(Obj::Pred, TPred, '$lgt_debug'(goal(Obj::Pred, TPred), ExCtx), Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, _, This, _, _, _, _, ExCtx, _, _, _),
+	'$lgt_comp_ctx'(Ctx, _, _, This, _, _, _, _, ExCtx, _, _, _),
 	'$lgt_execution_context_this'(ExCtx, This),
 	'$lgt_compiler_flag'(events, Events),
-	'$lgt_compile_message_to_object'(Pred, Obj, TPred, This, Head, Events).
+	'$lgt_compile_message_to_object'(Pred, Obj, TPred, Events, Ctx).
 
 '$lgt_compile_body'(::Pred, TPred, '$lgt_debug'(goal(::Pred, TPred), ExCtx), Ctx) :-
 	!,
@@ -11161,108 +11169,120 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_compile_message_to_object'(@term, @object_identifier, -callable, @object_identifier, @term, +atom)
+% '$lgt_compile_message_to_object'(@term, @object_identifier, -callable, +atom, +compilation_context)
 %
 % compiles a message sending call
 
 
 % messages to the pseudo-object "user"
 
-'$lgt_compile_message_to_object'(Pred, Obj, Pred, _, _, _) :-
+'$lgt_compile_message_to_object'(Pred, Obj, Pred, _, _) :-
 	Obj == user,
 	!,
 	'$lgt_must_be'(var_or_callable, Pred).
 
 % convenient access to parametric object proxies
 
-'$lgt_compile_message_to_object'(Pred, Obj, ('$lgt_call_proxy'(Proxy, Pred, This), TPred), This, Head, Events) :-
+'$lgt_compile_message_to_object'(Pred, Obj, ('$lgt_call_proxy'(Proxy, Pred, This), TPred), Events, Ctx) :-
 	nonvar(Obj),
 	Obj = {Proxy},
 	!,
-	'$lgt_compile_message_to_object'(Pred, Proxy, TPred, This, Head, Events).
+	'$lgt_comp_ctx_this'(Ctx, This),
+	'$lgt_compile_message_to_object'(Pred, Proxy, TPred, Events, Ctx).
 
 % invalid object identifier
 
-'$lgt_compile_message_to_object'(_, Obj, _, _, _, _) :-
+'$lgt_compile_message_to_object'(_, Obj, _, _, _) :-
 	nonvar(Obj),
 	\+ callable(Obj),
 	throw(type_error(object_identifier, Obj)).
 
 % remember the object receiving the message
 
-'$lgt_compile_message_to_object'(_, Obj, _, _, _, _) :-
+'$lgt_compile_message_to_object'(_, Obj, _, _, _) :-
 	nonvar(Obj),
 	'$lgt_add_referenced_object'(Obj),
 	fail.
 
 % translation performed at runtime
 
-'$lgt_compile_message_to_object'(Pred, Obj, '$lgt_send_to_obj_rt'(Obj, Pred, This, Head, Events), This, Head, Events) :-
+'$lgt_compile_message_to_object'(Pred, Obj, '$lgt_send_to_obj_rt'(Obj, Pred, Events, NewCtx), Events, Ctx) :-
 	var(Pred),
-	!.
+	!,
+	'$lgt_comp_ctx'(Ctx, Head, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, _, Stack, Position),
+	'$lgt_comp_ctx'(NewCtx, Head, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, runtime, Stack, Position).
 
 % broadcasting control constructs
 
-'$lgt_compile_message_to_object'((Pred1, Pred2), Obj, (TPred1, TPred2), This, Head, Events) :-
+'$lgt_compile_message_to_object'((Pred1, Pred2), Obj, (TPred1, TPred2), Events, Ctx) :-
 	!,
-	'$lgt_compile_message_to_object'(Pred1, Obj, TPred1, This, Head, Events),
-	'$lgt_compile_message_to_object'(Pred2, Obj, TPred2, This, Head, Events).
+	'$lgt_compile_message_to_object'(Pred1, Obj, TPred1, Events, Ctx),
+	'$lgt_compile_message_to_object'(Pred2, Obj, TPred2, Events, Ctx).
 
-'$lgt_compile_message_to_object'((Pred1; Pred2), Obj, (TPred1; TPred2), This, Head, Events) :-
+'$lgt_compile_message_to_object'((Pred1; Pred2), Obj, (TPred1; TPred2), Events, Ctx) :-
 	!,
-	'$lgt_compile_message_to_object'(Pred1, Obj, TPred1, This, Head, Events),
-	'$lgt_compile_message_to_object'(Pred2, Obj, TPred2, This, Head, Events).
+	'$lgt_compile_message_to_object'(Pred1, Obj, TPred1, Events, Ctx),
+	'$lgt_compile_message_to_object'(Pred2, Obj, TPred2, Events, Ctx).
 
-'$lgt_compile_message_to_object'((Pred1 -> Pred2), Obj, (TPred1 -> TPred2), This, Head, Events) :-
+'$lgt_compile_message_to_object'((Pred1 -> Pred2), Obj, (TPred1 -> TPred2), Events, Ctx) :-
 	!,
-	'$lgt_compile_message_to_object'(Pred1, Obj, TPred1, This, Head, Events),
-	'$lgt_compile_message_to_object'(Pred2, Obj, TPred2, This, Head, Events).
+	'$lgt_compile_message_to_object'(Pred1, Obj, TPred1, Events, Ctx),
+	'$lgt_compile_message_to_object'(Pred2, Obj, TPred2, Events, Ctx).
 
-'$lgt_compile_message_to_object'('*->'(Pred1, Pred2), Obj, '*->'(TPred1, TPred2), This, Head, Events) :-
+'$lgt_compile_message_to_object'('*->'(Pred1, Pred2), Obj, '*->'(TPred1, TPred2), Events, Ctx) :-
 	'$lgt_predicate_property'('*->'(_, _), built_in),
 	!,
-	'$lgt_compile_message_to_object'(Pred1, Obj, TPred1, This, Head, Events),
-	'$lgt_compile_message_to_object'(Pred2, Obj, TPred2, This, Head, Events).
+	'$lgt_compile_message_to_object'(Pred1, Obj, TPred1, Events, Ctx),
+	'$lgt_compile_message_to_object'(Pred2, Obj, TPred2, Events, Ctx).
 
 % built-in methods that cannot be redefined
 
-'$lgt_compile_message_to_object'(!, Obj, ('$lgt_object_exists'(Obj, !, This), !), This, _, _) :-
-	!.
+'$lgt_compile_message_to_object'(!, Obj, ('$lgt_object_exists'(Obj, !, This), !), _, Ctx) :-
+	!,
+	'$lgt_comp_ctx_this'(Ctx, This).
 
-'$lgt_compile_message_to_object'(true, Obj, ('$lgt_object_exists'(Obj, true, This), true), This, _, _) :-
-	!.
+'$lgt_compile_message_to_object'(true, Obj, ('$lgt_object_exists'(Obj, true, This), true), _, Ctx) :-
+	!,
+	'$lgt_comp_ctx_this'(Ctx, This).
 
-'$lgt_compile_message_to_object'(fail, Obj, ('$lgt_object_exists'(Obj, fail, This), fail), This, _, _) :-
-	!.
+'$lgt_compile_message_to_object'(fail, Obj, ('$lgt_object_exists'(Obj, fail, This), fail), _, Ctx) :-
+	!,
+	'$lgt_comp_ctx_this'(Ctx, This).
 
-'$lgt_compile_message_to_object'(false, Obj, ('$lgt_object_exists'(Obj, false, This), false), This, _, _) :-
-	!.
+'$lgt_compile_message_to_object'(false, Obj, ('$lgt_object_exists'(Obj, false, This), false), _, Ctx) :-
+	!,
+	'$lgt_comp_ctx_this'(Ctx, This).
 
-'$lgt_compile_message_to_object'(repeat, Obj, ('$lgt_object_exists'(Obj, repeat, This), repeat), This, _, _) :-
-	!.
+'$lgt_compile_message_to_object'(repeat, Obj, ('$lgt_object_exists'(Obj, repeat, This), repeat), _, Ctx) :-
+	!,
+	'$lgt_comp_ctx_this'(Ctx, This).
 
 % reflection built-in predicates
 
-'$lgt_compile_message_to_object'(current_op(Priority, Specifier, Operator), Obj, '$lgt_current_op'(Obj, Priority, Specifier, Operator, This, p(p(p))), This, _, _) :-
+'$lgt_compile_message_to_object'(current_op(Priority, Specifier, Operator), Obj, '$lgt_current_op'(Obj, Priority, Specifier, Operator, This, p(p(p))), _, Ctx) :-
 	!,
 	'$lgt_must_be'(var_or_operator_priority, Priority),
 	'$lgt_must_be'(var_or_operator_specifier, Specifier),
-	'$lgt_must_be'(var_or_atom, Operator).
+	'$lgt_must_be'(var_or_atom, Operator),
+	'$lgt_comp_ctx_this'(Ctx, This).
 
-'$lgt_compile_message_to_object'(current_predicate(Pred), Obj, '$lgt_current_predicate'(Obj, Pred, This, p(p(p))), This, _, _) :-
+'$lgt_compile_message_to_object'(current_predicate(Pred), Obj, '$lgt_current_predicate'(Obj, Pred, This, p(p(p))), _, Ctx) :-
 	!,
-	'$lgt_must_be'(var_or_predicate_indicator, Pred).
+	'$lgt_must_be'(var_or_predicate_indicator, Pred),
+	'$lgt_comp_ctx_this'(Ctx, This).
 
-'$lgt_compile_message_to_object'(predicate_property(Pred, Prop), Obj, '$lgt_predicate_property'(Obj, Pred, Prop, This, p(p(p))), This, _, _) :-
+'$lgt_compile_message_to_object'(predicate_property(Pred, Prop), Obj, '$lgt_predicate_property'(Obj, Pred, Prop, This, p(p(p))), _, Ctx) :-
 	!,
 	'$lgt_must_be'(var_or_callable, Pred),
-	'$lgt_must_be'(var_or_predicate_property, Prop).
+	'$lgt_must_be'(var_or_predicate_property, Prop),
+	'$lgt_comp_ctx_this'(Ctx, This).
 
 % database handling built-in predicates
 
-'$lgt_compile_message_to_object'(abolish(Pred), Obj, TPred, This, _, _) :-
+'$lgt_compile_message_to_object'(abolish(Pred), Obj, TPred, _, Ctx) :-
 	!,
 	'$lgt_must_be'(var_or_predicate_indicator, Pred),
+	'$lgt_comp_ctx_this'(Ctx, This),
 	(	var(Obj) ->
 		TPred = '$lgt_abolish'(Obj, Pred, This, p(p(p)))
 	;	ground(Pred) ->
@@ -11271,11 +11291,11 @@ current_logtalk_flag(Flag, Value) :-
 		TPred = '$lgt_abolish'(Obj, Pred, This, p(p(p)))
 	).
 
-'$lgt_compile_message_to_object'(assert(Clause), Obj, TPred, This, Head, Events) :-
+'$lgt_compile_message_to_object'(assert(Clause), Obj, TPred, Events, Ctx) :-
 	!,
-	'$lgt_compile_message_to_object'(assertz(Clause), Obj, TPred, This, Head, Events).
+	'$lgt_compile_message_to_object'(assertz(Clause), Obj, TPred, Events, Ctx).
 
-'$lgt_compile_message_to_object'(asserta(Clause), Obj, TPred, This, _, _) :-
+'$lgt_compile_message_to_object'(asserta(Clause), Obj, TPred, _, Ctx) :-
 	!,
 	(	'$lgt_runtime_checked_db_clause'(Clause) ->
 		TPred = '$lgt_asserta'(Obj, Clause, This, p(p(_)), p(p(p)))
@@ -11291,9 +11311,10 @@ current_logtalk_flag(Flag, Value) :-
 			)
 		;	TPred = '$lgt_asserta_rule_checked'(Obj, Clause, This, p(p(_)), p(p(p)))
 		)
-	).
+	),
+	'$lgt_comp_ctx_this'(Ctx, This).
 
-'$lgt_compile_message_to_object'(assertz(Clause), Obj, TPred, This, _, _) :-
+'$lgt_compile_message_to_object'(assertz(Clause), Obj, TPred, _, Ctx) :-
 	!,
 	(	'$lgt_runtime_checked_db_clause'(Clause) ->
 		TPred = '$lgt_assertz'(Obj, Clause, This, p(p(_)), p(p(p)))
@@ -11309,9 +11330,10 @@ current_logtalk_flag(Flag, Value) :-
 			)
 		;	TPred = '$lgt_assertz_rule_checked'(Obj, Clause, This, p(p(_)), p(p(p)))
 		)
-	).
+	),
+	'$lgt_comp_ctx_this'(Ctx, This).
 
-'$lgt_compile_message_to_object'(clause(Head, Body), Obj, TPred, This, _, _) :-
+'$lgt_compile_message_to_object'(clause(Head, Body), Obj, TPred, _, Ctx) :-
 	!,
 	(	'$lgt_runtime_checked_db_clause'((Head :- Body)) ->
 		TPred = '$lgt_clause'(Obj, Head, Body, This, p(p(p)))
@@ -11320,9 +11342,10 @@ current_logtalk_flag(Flag, Value) :-
 			TPred = '$lgt_clause'(Obj, Head, Body, This, p(p(p)))
 		;	TPred = '$lgt_clause_checked'(Obj, Head, Body, This, p(p(p)))
 		)
-	).
+	),
+	'$lgt_comp_ctx_this'(Ctx, This).
 
-'$lgt_compile_message_to_object'(retract(Clause), Obj, TPred, This, _, _) :-
+'$lgt_compile_message_to_object'(retract(Clause), Obj, TPred, _, Ctx) :-
 	!,
 	(	'$lgt_runtime_checked_db_clause'(Clause) ->
 		TPred = '$lgt_retract'(Obj, Clause, This, p(p(p)))
@@ -11343,9 +11366,10 @@ current_logtalk_flag(Flag, Value) :-
 			)
 		;	TPred = '$lgt_retract_fact_checked'(Obj, Clause, This, p(p(p)))
 		)
-	).
+	),
+	'$lgt_comp_ctx_this'(Ctx, This).
 
-'$lgt_compile_message_to_object'(retractall(Head), Obj, TPred, This, _, _) :-
+'$lgt_compile_message_to_object'(retractall(Head), Obj, TPred, _, Ctx) :-
 	!,
 	(	var(Head) ->
 		TPred = '$lgt_retractall'(Obj, Head, This, p(p(p)))
@@ -11358,50 +11382,55 @@ current_logtalk_flag(Flag, Value) :-
 			TPred = retractall(THead)
 		;	TPred = '$lgt_retractall_checked'(Obj, Head, This, p(p(p)))
 		)
-	).
+	),
+	'$lgt_comp_ctx_this'(Ctx, This).
 
 % term and goal expansion predicates
 
-'$lgt_compile_message_to_object'(expand_term(Term, Expansion), Obj, '$lgt_expand_term'(Obj, Term, Expansion, This, p(p(p))), This, _, _) :-
-	!.
+'$lgt_compile_message_to_object'(expand_term(Term, Expansion), Obj, '$lgt_expand_term'(Obj, Term, Expansion, This, p(p(p))), _, Ctx) :-
+	!,
+	'$lgt_comp_ctx_this'(Ctx, This).
 
-'$lgt_compile_message_to_object'(expand_goal(Goal, ExpandedGoal), Obj, '$lgt_expand_goal'(Obj, Goal, ExpandedGoal, This, p(p(p))), This, _, _) :-
-	!.
+'$lgt_compile_message_to_object'(expand_goal(Goal, ExpandedGoal), Obj, '$lgt_expand_goal'(Obj, Goal, ExpandedGoal, This, p(p(p))), _, Ctx) :-
+	!,
+	'$lgt_comp_ctx_this'(Ctx, This).
 
 % compiler bypass control construct
 
-'$lgt_compile_message_to_object'({Goal}, _, call(Goal), _, _, _) :-
+'$lgt_compile_message_to_object'({Goal}, _, call(Goal), _, _) :-
 	!,
 	'$lgt_must_be'(var_or_callable, Goal).
 
 % invalid message
 
-'$lgt_compile_message_to_object'(Pred, _, _, _, _, _) :-
+'$lgt_compile_message_to_object'(Pred, _, _, _, _) :-
 	\+ callable(Pred),
 	throw(type_error(callable, Pred)).
 
 % message is not a built-in control construct or a call to a built-in (meta-)predicate
 
-'$lgt_compile_message_to_object'(Pred, Obj, TPred, This, Head, Events) :-
+'$lgt_compile_message_to_object'(Pred, Obj, TPred, Events, Ctx) :-
 	var(Obj),
 	% translation performed at runtime
 	!,
+	'$lgt_comp_ctx'(Ctx, Head, _, This, _, _, _, _, _, _, _, _),
 	'$lgt_add_referenced_object_message'(Obj, Pred, Head),
 	(	Events == allow ->
 		TPred = '$lgt_send_to_obj'(Obj, Pred, This)
 	;	TPred = '$lgt_send_to_obj_ne'(Obj, Pred, This)
 	).
 
-'$lgt_compile_message_to_object'(Pred, Obj, TPred, This, Head, Events) :-
+'$lgt_compile_message_to_object'(Pred, Obj, TPred, Events, Ctx) :-
+	'$lgt_comp_ctx'(Ctx, Head, _, This, _, _, _, _, _, _, _, _),
 	'$lgt_add_referenced_object_message'(Obj, Pred, Head),
 	(	Events == allow ->
 		(	'$lgt_compiler_flag'(optimize, on),
-			'$lgt_send_to_obj_static_binding'(Obj, Pred, This, Call) ->
+			'$lgt_send_to_obj_static_binding'(Obj, Pred, Call, Ctx) ->
 			TPred = '$lgt_guarded_method_call'(Obj, Pred, This, Call)
 		;	TPred = '$lgt_send_to_obj_'(Obj, Pred, This)
 		)
 	;	(	'$lgt_compiler_flag'(optimize, on),
-			'$lgt_send_to_obj_static_binding'(Obj, Pred, This, TPred) ->
+			'$lgt_send_to_obj_static_binding'(Obj, Pred, TPred, Ctx) ->
 			true
 		;	TPred = '$lgt_send_to_obj_ne_'(Obj, Pred, This)
 		)
@@ -15249,8 +15278,10 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_hooks'(HookEntity) :-
 	'$lgt_compiler_flag'(events, Events),
-	'$lgt_compile_message_to_object'(term_expansion(Term, ExpandedTerm), HookEntity, TermExpansionGoal, user, _, Events),
-	'$lgt_compile_message_to_object'(goal_expansion(Term, ExpandedTerm), HookEntity, GoalExpansionGoal, user, _, Events),
+	'$lgt_comp_ctx'(Ctx, _, user, user, HookEntity, _, [], [], ExCtx, runtime, [], _),
+	'$lgt_execution_context'(ExCtx, user, user, HookEntity, [], []),
+	'$lgt_compile_message_to_object'(term_expansion(Term, ExpandedTerm), HookEntity, TermExpansionGoal, Events, Ctx),
+	'$lgt_compile_message_to_object'(goal_expansion(Term, ExpandedTerm), HookEntity, GoalExpansionGoal, Events, Ctx),
 	retractall('$lgt_hook_term_expansion_'(_, _)),
 	assertz((
 		'$lgt_hook_term_expansion_'(Term, ExpandedTerm) :-
@@ -17800,12 +17831,13 @@ current_logtalk_flag(Flag, Value) :-
 %
 % static binding is only used for the (::)/2 control construct when the object receiving the
 % message is static and the support for complementing categories is disallowed (unfortunately,
-% allowing hot patching of a static object would easily lead to inconsistencies as there isn't
-% any portable solution for updating in-place the definition of patched object predicates that
+% allowing hot patching of an object would easily lead to inconsistencies as there isn't any
+% portable solution for updating in-place the definition of patched object predicates that
 % were already directly called due to the previous use of static binding)
 
-'$lgt_send_to_obj_static_binding'(Obj, Pred, Sender, Call) :-
-	(	'$lgt_send_to_obj_static_binding_'(Obj, Pred, Sender, Call) ->
+'$lgt_send_to_obj_static_binding'(Obj, Pred, Call, Ctx) :-
+	'$lgt_comp_ctx_this'(Ctx, This),
+	(	'$lgt_send_to_obj_static_binding_'(Obj, Pred, This, Call) ->
 		true
 	;	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, _, _, _, ObjFlags),
 		ObjFlags /\ 2 =:= 0,
@@ -17819,7 +17851,7 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_term_template'(Pred, GPred),
 		% construct list of the meta-arguments that will be called in the "sender"
 		'$lgt_goal_meta_arguments'(Meta, GPred, GMetaArgs),
-		'$lgt_execution_context'(GExCtx, GSender, GObj, GObj, GMetaArgs, []),
+		'$lgt_execution_context'(GExCtx, GThis, GObj, GObj, GMetaArgs, []),
 		call(Def, GPred, GExCtx, GCall, _, DefCtn), !,
 		(	PredFlags /\ 2 =:= 0 ->
 			% Type == static
@@ -17834,49 +17866,48 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_safe_static_binding_paths'(Obj, DclCtn, DefCtn),
 		(	Meta == no ->
 			% cache only normal predicates
-			assertz('$lgt_send_to_obj_static_binding_'(GObj, GPred, GSender, GCall)),
-			Obj = GObj, Pred = GPred, Sender = GSender, Call = GCall
-		;	% meta-predicates cannot be cached as they require translation of the meta-arguments
+			assertz('$lgt_send_to_obj_static_binding_'(GObj, GPred, GThis, GCall)),
+			Obj = GObj, Pred = GPred, This = GThis, Call = GCall
+		;	% meta-predicates cannot be cached as they require translation of
+			% the meta-arguments, which must succeed to allow static binding
 			Meta =.. [PredFunctor| MArgs],
 			Pred =.. [PredFunctor| Args],
-			% next we must be careful when find the sender's prefix as the Sender argument may not be
-			% instantiated (e.g. when meta-predicate calls are made within other meta-predicate calls)
-			(	'$lgt_pp_entity_'(_, _, Prefix, _, _) ->
-				true
-			;	nonvar(Sender),
-				'$lgt_current_object_'(Sender, Prefix, _, _, _, _, _, _, _, _, _)
-			),
-			'$lgt_comp_ctx'(Ctx, _, Sender, Sender, Obj, Prefix, [], _, ExCtx, _, [], _),
-			'$lgt_execution_context'(ExCtx, Sender, Sender, Obj, [], []),
-			'$lgt_compile_static_binding_meta_arguments'(Args, MArgs, Ctx, TArgs, _),
+			'$lgt_compile_static_binding_meta_arguments'(Args, MArgs, Ctx, TArgs),
 			TPred =.. [PredFunctor| TArgs],
-			Obj = GObj, TPred = GPred, Sender = GSender, Call = GCall
+			Obj = GObj, TPred = GPred, This = GThis, Call = GCall
 		)
 	).
 
 
-'$lgt_compile_static_binding_meta_arguments'([], [], _, [], []).
+'$lgt_compile_static_binding_meta_arguments'([], [], _, []).
 
-'$lgt_compile_static_binding_meta_arguments'([Arg| Args], [MArg| MArgs], Ctx, [TArg| TArgs], [DArg| DArgs]) :-
-	'$lgt_compile_static_binding_meta_argument'(MArg, Arg, Ctx, TArg, DArg),
-	'$lgt_compile_static_binding_meta_arguments'(Args, MArgs, Ctx, TArgs, DArgs).
+'$lgt_compile_static_binding_meta_arguments'([Arg| Args], [MArg| MArgs], Ctx, [TArg| TArgs]) :-
+	'$lgt_compile_static_binding_meta_argument'(MArg, Arg, Ctx, TArg),
+	'$lgt_compile_static_binding_meta_arguments'(Args, MArgs, Ctx, TArgs).
 
 
-'$lgt_compile_static_binding_meta_argument'(N, Arg, Ctx, {Arg}, {Arg}) :-
+'$lgt_compile_static_binding_meta_argument'(N, Arg, Ctx, {Arg}) :-
 	% the {}/1 construct signals a pre-compiled metacall
 	integer(N), N > 0,
 	% closure
 	!,
-	nonvar(Arg),
+	callable(Arg),
 	\+ functor(Arg, '{}', 1),
 	% not using the {}/1 control construct already
-	'$lgt_comp_ctx_sender'(Ctx, Sender), Sender == user.
+	'$lgt_length'(ExtArgs, 0, N),
+	'$lgt_extend_closure'(Arg, ExtArgs, ExtArg),
+	% compiling the meta-argument allows predicate cross-referencing information to be
+	% collected despite the compilation result not being used due to the clash between
+	% the execution argument and the appending of arguments to a closure to form a goal
+	'$lgt_compile_body'(ExtArg, _, _, Ctx),
+	% the clash doesn't exist, however, when the closure corresponds to a "user" predicate
+	'$lgt_comp_ctx_this'(Ctx, Sender), Sender == user.
 
-'$lgt_compile_static_binding_meta_argument'((*), Arg, _, Arg, Arg).
+'$lgt_compile_static_binding_meta_argument'((*), Arg, _, Arg).
 
-'$lgt_compile_static_binding_meta_argument'(0, Arg, Ctx, {TArg}, {DArg}) :-
+'$lgt_compile_static_binding_meta_argument'(0, Arg, Ctx, {TArg}) :-
 	% the {}/1 construct signals a pre-compiled metacall
-	'$lgt_compile_body'(Arg, TArg, DArg, Ctx).
+	'$lgt_compile_body'(Arg, TArg, _, Ctx).
 
 
 

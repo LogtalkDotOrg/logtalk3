@@ -38,6 +38,9 @@ a compatible threads implementation.
 * FIXED: Compilation of synchronized predicates when using backend Prolog
 compilers that don't support a compatible threads implementation.
 
+* FIXED: Bug where closure arguments in calls to meta-predicates failed to be
+recorded when collecting predicate cross-referencing information.
+
 * FIXED: Bug when extending an explicitly-qualified module closure to a goal.
 
 Prolog adapter and integration files
