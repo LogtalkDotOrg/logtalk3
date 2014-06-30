@@ -152,7 +152,7 @@ The following meta-predicate mode arguments are for use only when writing backen
 To the best of my knowledge, the use of non-negative integers to specify closures has first introduced on Quintus Prolog for providing information for predicate cross-reference tools.
 </p>
 <p>
-As each Logtalk entity is independently compiled, this directive must be included in every object or category that contains a definition for the described predicate, even if the predicate declaration is inherited from another entity, to ensure proper compilation of meta-arguments.
+As each Logtalk entity is independently compiled, this directive must be included in every object or category that contains a definition for the described meta-predicate, even if the meta-predicate declaration is inherited from another entity, to ensure proper compilation of meta-arguments.
 </p>
 
 <h3 id="predicates_discontiguous">Discontiguous directive</h3>
@@ -447,7 +447,10 @@ all_true(Closure, [Arg| Args]) :-
     call(Closure, Arg),
     all_true(Closure, Args).</pre>
 <p>
-Note that the meta-predicate directive specifies that the closure will be extended with exactly one extra argument.
+Note that in this case the meta-predicate directive specifies that the closure will be extended with exactly one extra argument.
+</p>
+<p>
+When calling a meta-predicate, a closure can correspond to a user-defined predicate, a built-in predicate, a lambda expression, or one of the following control constructs: <code>::/2</code>, <code>^^/2</code>, <code>&lt;&lt;/2</code>, <code>[]/1</code>, <code>{}/1</code>, or <code>:/2</code>. Use of the <code>::/1</code> control construct is not supported, however, as the value of <em>self</em> would be lost during the roundtrip to an object defining a meta-predicate when the meta-call should take place on the <em>sender</em>. The workaround is to call the <code>self/1</code> built-in method first and to pass instead to the meta-predicate a <code>Self::Closure</code> closure.
 </p>
 
 <h3 id="predicates_lambdas">Lambda expressions</h3>
@@ -984,7 +987,7 @@ This workaround is sometimes necessary when calling module meta-predicates whose
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: June 3, 2014</span>
+		<span>Last updated on: June 30, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="categories.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="inheritance.html">next</a></span><br/>
