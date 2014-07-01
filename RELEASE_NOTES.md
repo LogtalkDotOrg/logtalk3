@@ -88,6 +88,9 @@ a backend Prolog compiler that doesn't support modules.
 * FIXED: Workaround a B-Prolog limitation with atoms length when loading the
 `diagrams` tool using this backend Prolog compiler.
 
+* FIXED: The `debugger` tool option to print the compiled form of a goal is
+only valid at the `call`, `redo`, `exit`, and `fail` ports.
+
 Examples
 --------
 

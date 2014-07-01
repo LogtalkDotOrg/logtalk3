@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/06/11,
+		date is 2014/07/01,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -498,7 +498,10 @@
 	valid_port_option(p, _, _) :- !.
 	valid_port_option(d, _, _) :- !.
 	valid_port_option(w, _, _) :- !.
-	valid_port_option('$', _, _) :- !.
+	valid_port_option('$', call, _) :- !.
+	valid_port_option('$', redo, _) :- !.
+	valid_port_option('$', exit, _) :- !.
+	valid_port_option('$', fail, _) :- !.
 	valid_port_option(x, _, _) :- !.
 	valid_port_option(h, _, _) :- !.
 	valid_port_option((?), _, _) :- !.
