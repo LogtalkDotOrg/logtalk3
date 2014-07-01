@@ -22,7 +22,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(debuggerp),
-	logtalk_load(debugger)
-)).
+:- initialization(
+	logtalk_load([
+		debuggerp,
+		debugger,
+		debugger_messages
+	])
+).

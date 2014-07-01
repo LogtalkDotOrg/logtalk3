@@ -38,8 +38,11 @@ In alternative, you may also turn on the `debug` flag globally by typing:
 Logtalk also provides basic support for the SWI-Prolog graphical tracer.
 The required settings are described in the `settings-sample.lgt` file.
 
-For help using the debugger, open the `docs/tools.html` file in a
-web browser and consult the debugging section of the User Manual.
+The `debugger_messages.lgt` source file defines the default debugger
+message translations. For more information on the debugger entities,
+open the `docs/tools.html` file in a web browser. For help using the
+debugger, open the `manuals/index.html` file in a web browser and
+consult the debugging section of the User Manual.
 
 All source files are formatted using tabs (the recommended setting is
 a tab width equivalent to 4 spaces).

@@ -66,6 +66,12 @@
 		:- thread_shared(invocation_number_/1).
 	:- endif.
 
+	% we use the structured printing mechanism in order to allow debugger
+	% messages to be intercepted for alternative interaction by e.g. GUI IDEs
+	:- uses(logtalk, [
+		print_message/3
+	]).
+
 	reset :-
 		nospyall,
 		leash(full),
@@ -74,19 +80,19 @@
 
 	debug :-
 		(	debugging_ ->
-			write('Debugger is on: showing spy points for all objects compiled in debug mode.'), nl
+			print_message(comment, debugger, debugger_on_spying)
 		;	assertz(debugging_),
 			retractall(tracing_),
 			reset_invocation_number(_),
-			write('Debugger switched on: showing spy points for all objects compiled in debug mode.'), nl
+			print_message(comment, debugger, debugger_switched_on_spying)
 		).
 
 	nodebug :-
 		(	debugging_ ->
 			retractall(debugging_),
 			retractall(tracing_),
-			write('Debugger switched off.'), nl
-		;	write('Debugger is off.'), nl
+			print_message(comment, debugger, debugger_switched_off)
+		;	print_message(comment, debugger, debugger_off)
 		).
 
 	suspend(Tracing) :-
@@ -108,51 +114,42 @@
 
 	trace :-
 		(	tracing_ ->
-			write('Debugger is on: tracing everything for all objects compiled in debug mode.'), nl
+			print_message(comment, debugger, debugger_on_tracing)
 		;	assertz(tracing_),
 			retractall(debugging_),
 			assertz(debugging_),
 			reset_invocation_number(_),
-			write('Debugger switched on: tracing everything for all objects compiled in debug mode.'), nl
+			print_message(comment, debugger, debugger_switched_on_tracing)
 		).
 
 	notrace :-
 		(	tracing_ ->
 			retractall(tracing_),
 			retractall(debugging_),
-			write('Debugger switched off.'), nl
-		;	write('Debugger is off.'), nl
+			print_message(comment, debugger, debugger_switched_off)
+		;	print_message(comment, debugger, debugger_off)
 		).
 
 	debugging :-
 		(	debugging_ ->
-			write('Debugger is on: '),
 			(	tracing_ ->
-				write('tracing everything.'), nl
-			;	write('showing spy points.'), nl
+				print_message(information, debugger, debugger_on_tracing)
+			;	print_message(information, debugger, debugger_on_spying)
 			)
-		;	write('Debugger is off.'), nl
-		), nl,
-		(	spying_(_, _) ->
-			write('Defined predicate spy points (Functor/Arity):'), nl,
-			forall(
-				spying_(Functor, Arity),
-				(write('    '), writeq(Functor), write('/'), write(Arity), nl))
-		;	write('No predicate spy points are defined.'), nl
-		), nl,
-		(	spying_(_, _, _, _) ->
-			write('Defined context spy points (Sender, This, Self, Goal):'), nl,
-			forall(
-				spying_(Sender, This, Self, Goal),
-				(write('    '), pretty_print_spy_point(Sender, This, Self, Goal), nl))
-		;	write('No context spy points are defined.'), nl
-		), nl,
-		write('Leashed ports:'), nl, write('    '),
-		(	leashing_(_) ->
-			forall(leashing_(Port), (write(Port), write(' ')))
-		;	write((none))
+		;	print_message(information, debugger, debugger_off)
 		),
-		nl.
+		(	spying_(_, _) ->
+			findall(Functor/Arity, spying_(Functor,Arity), PredicateSpyPoints),
+			print_message(information, debugger, predicate_spy_points(PredicateSpyPoints))
+		;	print_message(information, debugger, no_predicate_spy_points_defined)
+		),
+		(	spying_(_, _, _, _) ->
+			findall((Sender,This,Self,Goal), spying_(Sender,This,Self,Goal), ContextSpyPoints),
+			print_message(information, debugger, predicate_spy_points(ContextSpyPoints))
+		;	print_message(information, debugger, no_context_spy_points_defined)
+		),
+		findall(Port, leashing_(Port), Ports),
+		print_message(information, debugger, leashed_ports(Ports)).
 
 	debugging(Entity) :-
 		(	current_object(Entity) ->
@@ -164,31 +161,10 @@
 		;	fail
 		).
 
-	pretty_print_spy_point(Sender, This, Self, Goal) :-
-		current_output(Output),
-		(	var(Sender) -> write('_, ')
-		;	pretty_print_vars_quoted(Output, Sender), write(', ')
-		),
-		(	var(This) -> write('_, ')
-		;	pretty_print_vars_quoted(Output, This), write(', ')
-		),
-		(	var(Self) -> write('_, ')
-		;	pretty_print_vars_quoted(Output, Self), write(', ')
-		),
-		(	var(Goal) -> write('_')
-		;	pretty_print_vars_quoted(Output, Goal)
-		).
-
-	pretty_print_vars_quoted(Stream, Term) :-
-		\+ \+ (
-			numbervars(Term, 0, _),
-			write_term(Stream, Term, [numbervars(true), quoted(true)])
-		).
-
 	spy(Preds) :-
 		nonvar(Preds),
 		spy_aux(Preds),
-		write('Predicate spy points set.'), nl,
+		print_message(information, debugger, predicate_spy_point_set),
 		(	debugging_ ->
 			true
 		;	debug
@@ -213,7 +189,7 @@
 
 	nospy(Preds) :-
 		nospy_aux(Preds),
-		write('All matching predicate spy points removed.'), nl.
+		print_message(information, debugger, matching_predicate_spy_points_removed).
 
 	nospy_aux(Preds) :-
 		(	var(Preds) ->
@@ -230,7 +206,7 @@
 
 	spy(Sender, This, Self, Goal) :-
 		asserta(spying_(Sender, This, Self, Goal)),
-		write('Context spy point set.'), nl,
+		print_message(information, debugger, context_spy_point_set),
 		(	debugging_ ->
 			true
 		;	debug
@@ -238,19 +214,19 @@
 
 	nospy(Sender, This, Self, Goal) :-
 		retractall(spying_(Sender, This, Self, Goal)),
-		write('All matching context spy points removed.'), nl.
+		print_message(comment, debugger, matching_context_spy_points_removed).
 
 	nospyall :-
 		retractall(spying_(_, _)),
-		write('All predicate spy points removed.'), nl,
+		print_message(comment, debugger, all_predicate_spy_points_removed),
 		retractall(spying_(_, _, _, _)),
-		write('All context spy points removed.'), nl.
+		print_message(comment, debugger, all_context_spy_points_removed).
 
 	leash(Value) :-
 		valid_leash_value(Value, Ports),
 		retractall(leashing_(_)),
 		set_leash_ports(Ports),
-		write('Debugger leash ports set to '), write(Ports), nl.
+		print_message(comment, debugger, leashed_ports(Ports)).
 
 	set_leash_ports([]).
 	set_leash_ports([Port| Ports]) :-
@@ -436,45 +412,19 @@
 		!,
 		(	leashing(Port, Goal, ExCtx, Code) ->
 			repeat,
-				write(Code), write_port_name(Port), write_invocation_number(Port, N), writeq(Goal), write(' ? '),
+				print_message(information, debugger, leashing_port(Code, Port, N, Goal)),
 				catch(read_single_char(Option), _, fail),
 			valid_port_option(Option, Port, Code),
 			do_port_option(Option, Port, Goal, TGoal, Error, ExCtx, Action),
 			!
 		;	(	tracing_ ->
-				write(' '), write_port_name(Port), write_invocation_number(Port, N), writeq(Goal), nl
+				print_message(information, debugger, tracing_port(' ', Port, N, Goal))
 			;	true
 			),
 			Action = true
 		).
 
 	port(_, _, _, _, _, _, true).
-
-	write_invocation_number(fact(_), _) :- !.
-	write_invocation_number(rule(_), _) :- !.
-	write_invocation_number(_, N) :-
-		write('('), write(N), write(') ').
-
-	write_port_name(fact(N)) :-
-		(	N =:= 0 ->
-			write(' Fact: ')
-		;	write(' Fact: (clause #'), write(N), write(') ')
-		).
-	write_port_name(rule(N)) :-
-		(	N =:= 0 ->
-			write(' Rule: ')
-		;	write(' Rule: (clause #'), write(N), write(') ')
-		).
-	write_port_name(call) :-
-		write(' Call: ').
-	write_port_name(exit) :-
-		write(' Exit: ').
-	write_port_name(redo) :-
-		write(' Redo: ').
-	write_port_name(fail) :-
-		write(' Fail: ').
-	write_port_name(exception) :-
-		write(' Exception: ').
 
 	valid_port_option('\r', _, _) :- !.
 	valid_port_option('\n', _, _) :- !.
@@ -608,7 +558,7 @@
 	:- else.
 
 	do_port_option(b, _, _, _, _, _, _) :-
-		write('  break/0 not supported by the back-end Prolog compiler.'), nl,
+		print_message(warning, debugger, break_not_supported),
 		fail.
 
 	:- endif.
@@ -621,63 +571,32 @@
 		halt.
 
 	do_port_option(p, _, Goal, _, _, _, _) :-
-		% use the {}/1 control construct to avoid compilation warnings on
-		% back-end Prolog compilers that don't provide the print/1 predicate
-		write('  Current goal: '), catch({print(Goal)}, _, writeq(Goal)), nl,
+		print_message(information, debugger, print_current_goal(Goal)),
 		fail.
 
 	do_port_option(d, _, Goal, _, _, _, _) :-
-		write('  Current goal: '), write_term(Goal, [quoted(true), ignore_ops(true), numbervars(false)]), nl,
+		print_message(information, debugger, display_current_goal(Goal)),
 		fail.
 
 	do_port_option(w, _, Goal, _, _, _, _) :-
-		write('  Current goal: '), write_term(Goal, [quoted(true), ignore_ops(false), numbervars(true)]), nl,
+		print_message(information, debugger, write_current_goal(Goal)),
 		fail.
 
 	do_port_option('$', _, _, TGoal, _, _, _) :-
-		write('  Compiled goal: '), write_term(TGoal, [quoted(true), ignore_ops(false), numbervars(true)]), nl,
+		print_message(information, debugger, write_compiled_goal(TGoal)),
 		fail.
 
 	do_port_option(x, _, _, _, _, ExCtx, _) :-
 		logtalk::execution_context(ExCtx, Sender, This, Self, MetaCallCtx, Stack),
-		write('  Sender:            '), writeq(Sender), nl,
-		write('  This:              '), writeq(This), nl,
-		write('  Self:              '), writeq(Self), nl,
-		write('  Meta-call context: '), writeq(MetaCallCtx), nl,
-		write('  Coinduction stack: '), writeq(Stack), nl,
+		print_message(information, debugger, execution_context(Sender,This,Self,MetaCallCtx,Stack)),
 		fail.
 
 	do_port_option(e, _, _, _, Error, _, _) :-
-		write('  Exception term: '), writeq(Error), nl,
+		print_message(information, debugger, write_exception_term(Error)),
 		fail.
 
 	do_port_option(h, _, _, _, _, _, _) :-
-		write('  Available options are:'), nl,
-		write('      c - creep (go on; you may use also the spacebar, return, or enter keys)'), nl,
-		write('      l - leap (continues execution until the next spy point is found)'), nl,
-		write('      s - skip (skips debugging for the current goal; only meaningful at call and redo ports)'), nl,
-		write('      i - ignore (ignores goal, assumes that it succeeded; only valid at call and redo ports)'), nl,
-		write('      f - fail (forces backtracking; may also be used to convert an exception into a failure)'), nl,
-		write('      u - unify (reads and unifies a term with the current goal; only valid at the call port)'), nl,
-		write('      n - nodebug (turns off debugging)'), nl,
-		write('      ! - command (reads and executes a query)'), nl,
-		write('      @ - command (reads and executes a query)'), nl,
-		write('      b - break (suspends execution and starts new interpreter; type end_of_file to terminate)'), nl,
-		write('      a - abort (returns to top level interpreter)'), nl,
-		write('      Q - quit (quits Logtalk)'), nl,
-		write('      p - print (writes current goal using print/1 if available)'), nl,
-		write('      d - display (writes current goal without using operator notation)'), nl,
-		write('      w - write (writes current goal quoting atoms if necessary)'), nl,
-		write('      $ - outputs the compiled form of the current goal (for low-level debugging)'), nl,
-		write('      x - context (prints execution context)'), nl,
-		write('      e - exception (prints exception term thrown by current goal)'), nl,
-		write('      = - debugging (prints debugging information)'), nl,
-		write('      * - add (adds a context spy point for current goal)'), nl,
-		write('      / - remove (removes a context spy point for current goal)'), nl,
-		write('      + - add (adds a predicate spy point for current goal)'), nl,
-		write('      - - remove (removes a predicate spy point for current goal)'), nl,
-		write('      h - help (prints this list of options)'), nl,
-		write('      ? - help (prints this list of options)'), nl,
+		print_message(information, debugger, help),
 		fail.
 
 	do_port_option((?), Port, Goal, TGoal, Error, ExCtx, Action) :-
