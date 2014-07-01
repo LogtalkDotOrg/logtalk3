@@ -4415,11 +4415,11 @@ current_logtalk_flag(Flag, Value) :-
 			call(TPred)
 		;	% in the worst case we need to compile the meta-call
 			'$lgt_comp_ctx'(Ctx, _, Sender, This, Self, Prefix, [], _, ExCtx, runtime, [], _),
-			catch('$lgt_compile_body'(Pred, TPred, DPred, Ctx), Error, throw(error(Error, logtalk(call(Pred), This)))) ->
+			catch('$lgt_compile_body'(Pred, TPred, DPred, Ctx), Error, throw(error(Error, logtalk(call(Pred), Ctg)))) ->
 			(	Flags /\ 512 =:= 512 ->
-				% object compiled in debug mode
-				catch(DPred, error(Error,_), throw(error(Error, logtalk(call(Pred), This))))
-			;	catch(TPred, error(Error,_), throw(error(Error, logtalk(call(Pred), This))))
+				% category compiled in debug mode
+				catch(DPred, error(Error,_), throw(error(Error, logtalk(call(Pred), Ctg))))
+			;	catch(TPred, error(Error,_), throw(error(Error, logtalk(call(Pred), Ctg))))
 			)
 		;	% of course, the meta-call may happen to be an unfortunate mistake
 			functor(Pred, Functor, Arity),

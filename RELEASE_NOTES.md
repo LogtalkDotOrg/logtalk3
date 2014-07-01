@@ -55,6 +55,9 @@ recorded when collecting predicate cross-referencing information.
 * FIXED: Bug when printing a message that a parametric entity is being compiled
 where the entity identifier would not be printed as a quoted term.
 
+* FIXED: Bug when reporting a local meta-call error for a category predicate
+where the value of *this* would be used instead of the category identifier.
+
 Prolog adapter and integration files
 ------------------------------------
 
