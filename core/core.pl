@@ -15375,9 +15375,9 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_built_in_method_spec'('*->'(_,_), p(p(p)), '*->'(0, 0), 1) :-
 	'$lgt_prolog_built_in_predicate'('*->'(_, _)).
 % reflection methods
-'$lgt_built_in_method_spec'(current_op(_,_,_), p(p(p)), no, 1).
-'$lgt_built_in_method_spec'(current_predicate(_), p(p(p)), no, 1).
-'$lgt_built_in_method_spec'(predicate_property(_,_), p(p(p)), no, 1).
+'$lgt_built_in_method_spec'(current_op(_,_,_), p(p(p)), current_op(*,*,::), 1).
+'$lgt_built_in_method_spec'(current_predicate(_), p(p(p)), current_predicate(::), 1).
+'$lgt_built_in_method_spec'(predicate_property(_,_), p(p(p)), predicate_property(::,*), 1).
 % database methods
 '$lgt_built_in_method_spec'(abolish(_), p(p(p)), abolish((::)), 1).
 '$lgt_built_in_method_spec'(assert(_), p(p(p)), assert((::)), 1).	% just for compatibility with old code!

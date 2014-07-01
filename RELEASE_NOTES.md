@@ -41,6 +41,9 @@ goal would only work for local meta-calls and would fail silently for calls in
 the context of the *sender*. The workaround is to call the `self/1` built-in
 method first and to pass to the meta-predicate a `Self::Closure` closure.
 
+* ADDED: Meta-predicate properties to the built-in methods `current_op/3`,
+`current_predicate/1`, and `predicate_property/2`.
+
 * FIXED: Compilation of synchronized predicates when using backend Prolog
 compilers that don't support a compatible threads implementation.
 
