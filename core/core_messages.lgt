@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/06/05,
+		date is 2014/07/01,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -92,8 +92,8 @@
 	logtalk::message_tokens(compiling_entity(Type, Entity), core) -->
 		{ground_term_copy(Entity, GroundEntity)},
 		(	{current_logtalk_flag(debug, on)} ->
-			['- compiling ~w ~w in debug mode ... '-[Type, GroundEntity], nl]
-		;	['- compiling ~w ~w ... '-[Type, GroundEntity], nl]
+			['- compiling ~w ~q in debug mode ... '-[Type, GroundEntity], nl]
+		;	['- compiling ~w ~q ... '-[Type, GroundEntity], nl]
 		).
 	logtalk::message_tokens(compiled_entity(_Type, _Entity), core) -->
 		['compiled'-[], nl].

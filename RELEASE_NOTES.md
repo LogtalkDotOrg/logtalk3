@@ -52,6 +52,9 @@ recorded when collecting predicate cross-referencing information.
 
 * FIXED: Bug when extending an explicitly-qualified module closure to a goal.
 
+* FIXED: Bug when printing a message that a parametric entity is being compiled
+where the entity identifier would not be printed as a quoted term.
+
 Prolog adapter and integration files
 ------------------------------------
 
