@@ -4285,7 +4285,7 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	(	'$lgt_member_var'(Closure, MetaCallCtx) ->
 		'$lgt_metacall_sender'(Goal, Sender, This, ExtraArgs)
-	;	'$lgt_metacall_this'(Goal, Prefix, Sender, This, Self)
+	;	'$lgt_metacall_local'(Goal, Prefix, Sender, This, Self)
 	).
 
 
@@ -4345,7 +4345,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_metacall'(Goal, MetaCallCtx, Prefix, Sender, This, Self) :-
 	(	'$lgt_member_var'(Goal, MetaCallCtx) ->
 		'$lgt_metacall_sender'(Goal, Sender, This, [])
-	;	'$lgt_metacall_this'(Goal, Prefix, Sender, This, Self)
+	;	'$lgt_metacall_local'(Goal, Prefix, Sender, This, Self)
 	).
 
 
@@ -4376,16 +4376,19 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_quantified_metacall'(QGoal, Goal, MetaCallCtx, Prefix, Sender, This, Self) :-
 	(	'$lgt_member_var'(QGoal, MetaCallCtx) ->
 		'$lgt_metacall_sender'(Goal, Sender, This, [])
-	;	'$lgt_metacall_this'(Goal, Prefix, Sender, This, Self)
+	;	'$lgt_metacall_local'(Goal, Prefix, Sender, This, Self)
 	).
 
 
 
-% '$lgt_metacall_this'(+nonvar, +atom, +object_identifier, +object_identifier, +object_identifier)
+% '$lgt_metacall_local'(+callable, +atom, +object_identifier, +object_identifier, +object_identifier)
 %
-% performs a meta-call in "this" at runtime
+% performs a local meta-call at runtime
+%
+% the prefix argument allows us to distinguish between a
+% call local to an object and a call local to a category
 
-'$lgt_metacall_this'(Pred, Prefix, Sender, This, Self) :-
+'$lgt_metacall_local'(Pred, Prefix, Sender, This, Self) :-
 	'$lgt_execution_context'(ExCtx, Sender, This, Self, [], []),
 	(	'$lgt_current_object_'(This, Prefix, _, Def, _, _, _, _, DDef, _, Flags) ->
 		(	% in the most common case we're meta-calling a user defined static predicate
@@ -4426,7 +4429,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_metacall_sender'(+nonvar, +object_identifier, +object_identifier, +list)
+% '$lgt_metacall_sender'(+callable, +object_identifier, +object_identifier, +list)
 %
 % performs a meta-call in "sender" at runtime
 
