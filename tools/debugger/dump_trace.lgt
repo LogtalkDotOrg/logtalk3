@@ -27,12 +27,13 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/07/01,
+		date is 2014/07/02,
 		comment is 'Simple solution for redirecting a debugger trace to a file.'
 	]).
 
 	:- public(start_redirect_to_file/2).
-	:- mode(start_redirect_to_file(+atom, +callable), zero_or_one).
+	:- meta_predicate(start_redirect_to_file(*, 0)).
+	:- mode(start_redirect_to_file(+atom, +callable), zero_or_more).
 	:- info(start_redirect_to_file/2, [
 		comment is 'Starts redirecting debugger trace messages to a file.',
 		argnames is ['File', 'Goal']
@@ -53,7 +54,7 @@
 		)),
 		debugger::trace,
 		debugger::leash(none),
-		{Goal}.
+		call(Goal).
 
 	stop_redirect_to_file :-
 		debugger::reset,
