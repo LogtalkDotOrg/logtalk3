@@ -4623,7 +4623,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_print_message'(Kind, Component, Term) :-
 	(	'$lgt_default_entities_loaded_' ->
 		% "logtalk" built-in object loaded
-		'$logtalk#0.execution_context#6'(ExCtx, logtalk, logtalk, logtalk, [], [], _),
+		'$lgt_execution_context'(ExCtx, logtalk, logtalk, logtalk, [], []),
 		'$logtalk#0.print_message#3'(Kind, Component, Term, ExCtx)
 	;	% still compiling the default built-in entities or
 		% something wrong happened when loading those entities
@@ -15571,16 +15571,12 @@ current_logtalk_flag(Flag, Value) :-
 % the actual format of the execution context terms is defined
 % in the "logtalk" built-in object
 
-'$lgt_execution_context'(ExCtx, Sender, OldThis, Self, MetaCallCtx, Stack) :-
-	'$logtalk#0.execution_context#6'(ExCtx, Sender, OldThis, Self, MetaCallCtx, Stack, _).
+'$lgt_execution_context'(c(This, r(Sender, Self, MetaCallContext, Stack)), Sender, This, Self, MetaCallContext, Stack).
 
 % inheritance only requires updating "this"
-'$lgt_execution_context_update_this'(OldExCtx, OldThis, NewExCtx, NewThis) :-
-	'$logtalk#0.execution_context_this_rest#3'(OldExCtx, OldThis, Rest, _),
-	'$logtalk#0.execution_context_this_rest#3'(NewExCtx, NewThis, Rest, _).
+'$lgt_execution_context_update_this'(c(OldThis, Rest), OldThis, c(NewThis, Rest), NewThis).
 
-'$lgt_execution_context_this'(ExCtx, This) :-
-	'$logtalk#0.execution_context_this_rest#3'(ExCtx, This, _, _).
+'$lgt_execution_context_this'(c(This, _), This).
 
 
 
