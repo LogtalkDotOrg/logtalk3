@@ -32,7 +32,7 @@
 	]).
 
 	% structured message printing predicates;
-	% the main reason to not write directly to an output stream is to allows
+	% the main reason to not write directly to an output stream is to allow
 	% other tools such as IDEs to intercept and handle debugger messages
 
 	:- multifile(logtalk::message_prefix_stream/4).

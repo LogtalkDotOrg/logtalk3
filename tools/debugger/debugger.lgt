@@ -145,7 +145,7 @@
 		),
 		(	spying_(_, _, _, _) ->
 			findall((Sender,This,Self,Goal), spying_(Sender,This,Self,Goal), ContextSpyPoints),
-			print_message(information, debugger, predicate_spy_points(ContextSpyPoints))
+			print_message(information, debugger, context_spy_points(ContextSpyPoints))
 		;	print_message(information, debugger, no_context_spy_points_defined)
 		),
 		findall(Port, leashing_(Port), Ports),
