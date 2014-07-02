@@ -761,14 +761,14 @@ Logtalk provides a <a title="Consult reference manual" href="../refman/predicate
 Logtalk features a <em>structured message printing</em> mechanism. This feature gives the programmer full control of message printing, allowing it to filter, rewrite, or redirect any message. The origins of the mechanism for message printing that inspired the Logtalk implementation go back to Quintus Prolog, where it was implemented, apparently, by Dave Bowen (thanks to Richard O'Keefe for the historical bits). This mechanism can also be found currently on e.g. SICStus Prolog, SWI-Prolog, and YAP.
 </p>
 <p>
-Why a mechanism for printing messages? Consider the different components in a Logtalk application development and execution. At the bottom level, you have the Logtalk compiler and runtime. The Logtalk compiler writes messages related to e.g. compiling and loading files, compiling entities, compilation warnings and errors. The Logtalk runtime writes banner messages and handles execution errors that may result in printing human-level messages. The development environment can be console-based or you may be using a GUI tool such as PDT. In the latter case, PDT needs to intercept the Logtalk compiler and runtime messages to do its magic and present the relevant information using its GUI. Then you have all the other components in a typical application. For example, your own libraries and third-party libraries. The libraries may want to print messages on its own, e.g banners, debugging information, or logging information. As you assemble all your application components, you want to have the final word on which messages are printed, where, an in what conditions.
+Why a mechanism for printing messages? Consider the different components in a Logtalk application development and execution. At the bottom level, you have the Logtalk compiler and runtime. The Logtalk compiler writes messages related to e.g. compiling and loading files, compiling entities, compilation warnings and errors. The Logtalk runtime many write banner messages and handles execution errors that may result in printing human-level messages. The development environment can be console-based or you may be using a GUI tool such as PDT. In the latter case, PDT needs to intercept the Logtalk compiler and runtime messages to do its magic and present the relevant information using its GUI. Then you have all the other components in a typical application. For example, your own libraries and third-party libraries. The libraries may want to print messages on its own, e.g banners, debugging information, or logging information. As you assemble all your application components, you want to have the final word on which messages are printed, where, an in what conditions.
 </p>
 <p>
 The Logtalk message printing mechanism provides you with a set of predicates, defined in the <code>logtalk</code> built-in object, and some hook predicates. Two of the most important predicates are <a title="Consult reference manual" href="../refman/methods/print_message_3.html"><code>logtalk::print_message(Kind, Component, Term)</code></a>, which is used for printing a message, and <a title="Consult reference manual" href="../refman/methods/message_hook_4.html"><code>logtalk::message_hook(Term, Kind, Component, Tokens)</code></a>, a user-defined hook predicate used for intercepting messages. The <code>Kind</code> argument is used to represent the nature of the message being printed. It can be e.g. a logging message, a warning message or an error message, In Logtalk this argument can be either an atom, e.g. <code>error</code>, or a compound term, e.g. <code>comment(loading)</code>. Using a compound term allows easy partitioning of messages of the same kind in different groups. The following kinds of message are recognized by default:
 </p>
 <dl>
 	<dt><code>banner</code></dt>
-		<dd>banner messages (used e.g. when loading tools or main application components; can be suppressed by setting the <code>report</code> flag to <code>warnings</code>)</dd>
+		<dd>banner messages (used e.g. when loading tools or main application components; can be suppressed by setting the <code>report</code> flag to <code>warnings</code> or <code>off</code>)</dd>
 	<dt><code>help</code></dt>
 		<dd>messages printed in reply for the user asking for help (mostly for helping port existing Prolog code)</dd>
 	<dt><code>information</code> and <code>information(Group)</code></dt>
@@ -776,14 +776,14 @@ The Logtalk message printing mechanism provides you with a set of predicates, de
 	<dt><code>silent</code> and <code>silent(Group)</code></dt>
 		<dd>not printed by default (but can be intercepted using the <code>message_hook/4</code> predicate)</dd>
 	<dt><code>comment</code> and <code>comment(Group)</code></dt>
-		<dd>useful but usually not essential messages (can be suppressed by setting the <code>report</code> flag to <code>warnings</code>)</dd>
+		<dd>useful but usually not essential messages (can be suppressed by setting the <code>report</code> flag to <code>warnings</code> or <code>off</code>)</dd>
 	<dt><code>warning</code> and <code>warning(Group)</code></dt>
-		<dd>warning messages (generated e.g. by the compiler)</dd>
+		<dd>warning messages (generated e.g. by the compiler; can be suppressed by turning off the <code>report</code> flag)</dd>
 	<dt><code>error</code> and <code>error(Group)</code></dt>
 		<dd>error messages (generated e.g. by the compiler)</dd>
 </dl>
 <p>
-Note that you can define your own alternative message kind identifiers, for your own components, together with suitable definitions for their associated prefixes and output streams. In this case, the <code>report</code> flag will only have an effect when turned off as, by default, this setting suppresses printing of all messages.
+Note that you can define your own alternative message kind identifiers, for your own components, together with suitable definitions for their associated prefixes and output streams.
 </p>
 <p>
 Messages are represented by atoms or compound terms, handy for machine-processing, and converted into a list of tokens, for human consumption. This conversion is performed using the non-terminal <a title="Consult reference manual" href="../refman/methods/message_tokens_2.html"><code>logtalk::message_tokens(Term, Component)</code></a>. A simple example is:
@@ -987,7 +987,7 @@ This workaround is sometimes necessary when calling module meta-predicates whose
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: June 30, 2014</span>
+		<span>Last updated on: July 2, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="categories.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="inheritance.html">next</a></span><br/>

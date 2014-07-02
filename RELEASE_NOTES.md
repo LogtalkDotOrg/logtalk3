@@ -58,6 +58,10 @@ where the entity identifier would not be printed as a quoted term.
 * FIXED: Bug when reporting a local meta-call error for a category predicate
 where the value of *this* would be used instead of the category identifier.
 
+* FIXED: Turning off the `report` flag no longer suppresses printing of
+messages other than `banner`, `comment`, `comment(_)`, `warning`, and
+`warning(_)` messages.
+
 Prolog adapter and integration files
 ------------------------------------
 

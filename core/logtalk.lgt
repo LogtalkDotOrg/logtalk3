@@ -33,7 +33,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/05/16,
+		date is 2014/07/02,
 		comment is 'Built-in object providing message priting, debugging, library, source file, and hacking methods.']).
 
 	:- built_in.
@@ -249,21 +249,24 @@
 	% default_print_message(+atom_or_compound, +atom, +compound, +list, +compound)
 	%
 	% print a message that was not intercepted by the user
-	default_print_message(_, _, _, _, _) :-
-		current_logtalk_flag(report, off),
-		!.
 	default_print_message(silent, _, _, _, _) :-
 		!.
 	default_print_message(silent(_), _, _, _, _) :-
 		!.
 	default_print_message(banner, _, _, _, _) :-
-		current_logtalk_flag(report, warnings),
+		\+ current_logtalk_flag(report, on),
 		!.
 	default_print_message(comment, _, _, _, _) :-
-		current_logtalk_flag(report, warnings),
+		\+ current_logtalk_flag(report, on),
 		!.
 	default_print_message(comment(_), _, _, _, _) :-
-		current_logtalk_flag(report, warnings),
+		\+ current_logtalk_flag(report, on),
+		!.
+	default_print_message(warning, _, _, _, _) :-
+		current_logtalk_flag(report, off),
+		!.
+	default_print_message(warning(_), _, _, _, _) :-
+		current_logtalk_flag(report, off),
 		!.
 	default_print_message(Kind, Component, BeginToken, Tokens, EndToken) :-
 		(	message_prefix_stream(Kind, Component, Prefix, Stream) ->
