@@ -44,5 +44,8 @@ open the `docs/tools.html` file in a web browser. For help using the
 debugger, open the `manuals/index.html` file in a web browser and
 consult the debugging section of the User Manual.
 
+The `dump_trace.lgt` contains a simple code example on how to redirect
+a goal trace to a file.
+
 All source files are formatted using tabs (the recommended setting is
 a tab width equivalent to 4 spaces).
