@@ -159,6 +159,74 @@
           </dl>
         </div>
         <div class="section">
+          <h3 id="ask_question/5" class="code">ask_question/5</h3>
+          <blockquote>
+            <p class="comment">Asks a question an reads the answer until the check predicate is true.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>ask_question(Kind,Component,Question,Check,Answer)</code>
+            </dd>
+            <dt class="key">meta-predicate template:</dt>
+            <dd class="value">
+              <code>ask_question(*,*,*,1,*)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>ask_question(+nonvar,+atom,+nonvar,+callable,-term) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="question_hook/5" class="code">question_hook/5</h3>
+          <blockquote>
+            <p class="comment">User-defined hook predicate for intercepting question asking calls.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>dynamic</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>question_hook(Question,Kind,Component,Check,Answer)</code>
+            </dd>
+            <dt class="key">meta-predicate template:</dt>
+            <dd class="value">
+              <code>question_hook(*,*,*,1,*)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>question_hook(+nonvar,+nonvar,+atom,+callable,-term) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="question_prompt_stream/4" class="code">question_prompt_stream/4</h3>
+          <blockquote>
+            <p class="comment">Prompt and input stream to be used when asking a question given its kind and component.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>dynamic</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>question_prompt_stream(Kind,Component,Prompt,Stream)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>question_prompt_stream(?nonvar,?atom,?atom,?stream_or_alias) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
           <h3 id="trace_event/2" class="code">trace_event/2</h3>
           <blockquote>
             <p class="comment">Trace event handler. The runtime calls all trace event handlers using a failure-driven loop before calling the debug event handler.</p>

@@ -45,6 +45,12 @@ method first and to pass to the meta-predicate a `Self::Closure` closure.
 context arguments from the `logtalk` built-in object to the compiler for a
 small performance improvement.
 
+* ADDED: Structured question asking support to the `logtalk` built-in object,
+complementing the structured message printing support already in place. This
+new feature abstracts the common operation of asking a user a question and
+reading a term as the answer, which allows integration code and tools such
+as IDEs to intercept and handle user input.
+
 * ADDED: Meta-predicate properties to the built-in methods `current_op/3`,
 `current_predicate/1`, and `predicate_property/2`.
 

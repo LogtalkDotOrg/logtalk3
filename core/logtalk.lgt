@@ -98,6 +98,35 @@
 		argnames is ['Message', 'Kind', 'Component', 'Tokens']
 	]).
 
+	% question asking predicates
+
+	:- public(ask_question/5).
+	:- meta_predicate(ask_question(*, *, *, 1, *)).
+	:- mode(ask_question(+nonvar, +atom, +nonvar, +callable, -term), one).
+	:- info(ask_question/5, [
+		comment is 'Asks a question an reads the answer until the check predicate is true.',
+		argnames is ['Kind', 'Component', 'Question', 'Check', 'Answer']
+	]).
+
+	:- public(question_hook/5).
+	:- multifile(question_hook/5).
+	:- dynamic(question_hook/5).
+	:- meta_predicate(question_hook(*, *, *, 1, *)).
+	:- mode(question_hook(+nonvar, +nonvar, +atom, +callable, -term), zero_or_one).
+	:- info(question_hook/5, [
+		comment is 'User-defined hook predicate for intercepting question asking calls.',
+		argnames is ['Question', 'Kind', 'Component', 'Check', 'Answer']
+	]).
+
+	:- public(question_prompt_stream/4).
+	:- multifile(question_prompt_stream/4).
+	:- dynamic(question_prompt_stream/4).
+	:- mode(question_prompt_stream(?nonvar, ?atom, ?atom, ?stream_or_alias), zero_or_more).
+	:- info(question_prompt_stream/4, [
+		comment is 'Prompt and input stream to be used when asking a question given its kind and component.',
+		argnames is ['Kind', 'Component', 'Prompt', 'Stream']
+	]).
+
 	% debugging predicates
 
 	:- public(trace_event/2).
@@ -338,6 +367,35 @@
 		{format(Stream, Format, Arguments)}.
 	default_print_message_token(begin(_, _), _, _, _).
 	default_print_message_token(end(_), _, _, _).
+
+	ask_question(Kind, Component, Question, Check, Answer) :-
+		(	question_hook(Question, Kind, Component, Check, Answer) ->
+			% question asking intercepted; assume that the question was answered
+			true
+		;	% print the question text
+			print_message(Kind, Component, Question),
+			% find the output stream for printing the question prompt
+			(	message_prefix_stream(Kind, Component, _, OutputStream) ->
+				true
+			;	% no user-defined prefix and stream; use default definition
+				default_message_prefix_stream(Kind, _, OutputStream) ->
+				true
+			;	% no such kind of message; use "information" instead
+				default_message_prefix_stream(information, _, OutputStream)
+			),
+			% find the prompt and the input stream
+			(	question_prompt_stream(Kind, Component, Prompt, InputStream) ->
+				true
+			;	default_question_prompt_stream(Kind, Component, Prompt, InputStream)
+			),
+			repeat,
+				write(OutputStream, Prompt),
+				read(InputStream, Answer),
+			call(Check, Answer),
+			!
+		).
+
+	default_question_prompt_stream(question, _, '> ', user_input).
 
 	expand_library_path(Library, Path) :-
 		{'$lgt_expand_library_path'(Library, Path)}.
