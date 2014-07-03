@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/07/01,
+		date is 2014/07/03,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -69,7 +69,8 @@
 	% we use the structured printing mechanism in order to allow debugger
 	% messages to be intercepted for alternative interaction by e.g. GUI IDEs
 	:- uses(logtalk, [
-		print_message/3
+		print_message/3,
+		ask_question/5
 	]).
 
 	reset :-
@@ -484,8 +485,7 @@
 	do_port_option(f, _, _, _, _, _, fail).
 
 	do_port_option(u, _, Goal, _, _, _, Result) :-
-		write('  |: '),
-		read(Term),
+		ask_question(question, debugger, enter_goal, callable, Term),
 		(	Goal = Term ->
 			Result = unify
 		;	Result = fail
@@ -522,28 +522,23 @@
 
 	do_port_option((*), _, Goal, _, _, _, _) :-
 		functor(Goal, Functor, Arity),
-		functor(GoalTemplate, Functor, Arity),
-		write('  Enter a context spy point term formatted as (Sender, This, Self, Goal): '),
-		read(Spypoint),
-		Spypoint = (Sender, This, Self, GoalTemplate),
-		spy(Sender, This, Self, GoalTemplate),
+		functor(Template, Functor, Arity),
+		ask_question(question, debugger, enter_context_spy_point(Template), '='((Sender,This,Self,Template)), (Sender,This,Self,Template)),
+		spy(Sender, This, Self, Template),
 		fail.
 
 	do_port_option((/), _, Goal, _, _, _, _) :-
 		functor(Goal, Functor, Arity),
-		functor(GoalTemplate, Functor, Arity),
-		write('  Enter a context spy point term formatted as (Sender, This, Self, Goal): '),
-		read(Spypoint),
-		Spypoint = (Sender, This, Self, GoalTemplate),
-		nospy(Sender, This, Self, GoalTemplate),
+		functor(Template, Functor, Arity),
+		ask_question(question, debugger, enter_context_spy_point(Template), '='((Sender,This,Self,Template)), (Sender,This,Self,Template)),
+		nospy(Sender, This, Self, Template),
 		fail.
 
 	do_port_option(!, Port, Goal, TGoal, Error, ExCtx, Action) :-
 		do_port_option((@), Port, Goal, TGoal, Error, ExCtx, Action).
 
 	do_port_option((@), _, _, _, _, _, _) :-
-		write('  ?- '),
-		read(Goal),
+		ask_question(question, debugger, enter_query, callable, Goal),
 		{once(Goal)},
 		fail.
 

@@ -27,25 +27,47 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/07/01,
+		date is 2014/07/03,
 		comment is 'Logtalk debugger default message translations.'
 	]).
 
-	% structured message printing predicates;
+	% structured message printing settings;
 	% the main reason to not write directly to an output stream is to allow
-	% other tools such as IDEs to intercept and handle debugger messages
+	% other tools such as IDEs to intercept and handle debugger output
 
 	:- multifile(logtalk::message_prefix_stream/4).
 	:- dynamic(logtalk::message_prefix_stream/4).
 
 	% Quintus Prolog based prefixes (also used in SICStus Prolog):
+	logtalk::message_prefix_stream(question,    debugger, '', user_output).
 	logtalk::message_prefix_stream(comment,     debugger, '', user_output).
 	logtalk::message_prefix_stream(information, debugger, '', user_output).
 	logtalk::message_prefix_stream(warning,     debugger, '', user_output).
 	logtalk::message_prefix_stream(error,       debugger, '', user_output).
 
+	% structured question asking settings;
+	% the main reason to not read directly from an input stream is to allow
+	% other tools such as IDEs to intercept and handle debugger user input
+
+	:- multifile(logtalk::question_prompt_stream/4).
+	:- dynamic(logtalk::question_prompt_stream/4).
+
+	logtalk::question_prompt_stream(question, debugger, '    > ', user_input).
+
 	:- multifile(logtalk::message_tokens//2).
 	:- dynamic(logtalk::message_tokens//2).
+
+	% questions
+
+	logtalk::message_tokens(enter_query, debugger) -->
+		['    Enter a query to be executed deterministically'-[], nl].
+
+	logtalk::message_tokens(enter_goal, debugger) -->
+		['    Enter a goal to unify with the current goal'-[], nl].
+
+	logtalk::message_tokens(enter_context_spy_point(GoalTemplate), debugger) -->
+		{ground_term_copy(GoalTemplate, GroundGoalTemplate)},
+		['    Enter a context spy point term formatted as (Sender, This, Self, ~q)'-[GroundGoalTemplate], nl].
 
 	% debugger status and switching
 
@@ -172,10 +194,10 @@
 			'        x - context (prints execution context)'-[], nl,
 			'        e - exception (prints exception term thrown by current goal)'-[], nl,
 			'        = - debugging (prints debugging information)'-[], nl,
-			'        * - add (adds a context spy point for current goal)'-[], nl,
-			'        / - remove (removes a context spy point for current goal)'-[], nl,
-			'        + - add (adds a predicate spy point for current goal)'-[], nl,
-			'        - - remove (removes a predicate spy point for current goal)'-[], nl,
+			'        * - add (adds a context spy point for the current goal)'-[], nl,
+			'        / - remove (removes a context spy point for the current goal)'-[], nl,
+			'        + - add (adds a predicate spy point for the current goal)'-[], nl,
+			'        - - remove (removes a predicate spy point for the current goal)'-[], nl,
 			'        h - help (prints this list of options)'-[], nl,
 			'        ? - help (prints this list of options)'-[], nl
 		].
