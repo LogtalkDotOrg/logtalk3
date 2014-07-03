@@ -229,7 +229,7 @@
 
 % internal initialization flag
 
-:- dynamic('$lgt_default_entities_loaded_'/0).
+:- dynamic('$lgt_built_in_entities_loaded_'/0).
 
 
 
@@ -4620,18 +4620,17 @@ current_logtalk_flag(Flag, Value) :-
 % we fake the execution context argument to call the corresponding method
 % in the "logtalk" built-in object
 
-'$lgt_print_message'(Kind, Component, Term) :-
-	(	'$lgt_default_entities_loaded_' ->
+'$lgt_print_message'(Kind, Component, Message) :-
+	(	'$lgt_built_in_entities_loaded_' ->
 		% "logtalk" built-in object loaded
 		'$lgt_execution_context'(ExCtx, logtalk, logtalk, logtalk, [], []),
-		'$logtalk#0.print_message#3'(Kind, Component, Term, ExCtx)
-	;	% still compiling the default built-in entities or
-		% something wrong happened when loading those entities
+		'$logtalk#0.print_message#3'(Kind, Component, Message, ExCtx)
+	;	% still compiling the default built-in entities
 		'$lgt_compiler_flag'(report, off) ->
 		% no message printing required
 		true
 	;	% bare-bones message printing
-		writeq(Component), write(' '), write(Kind), write(': '), writeq(Term), nl
+		writeq(Component), write(' '), write(Kind), write(': '), writeq(Message), nl
  	).
 
 
@@ -18805,24 +18804,24 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_load_default_entities'
+% '$lgt_load_built_in_entities'(-atom)
 %
-% loads all default built-in entities if not already loaded (when embedding
+% loads all built-in entities if not already loaded (when embedding
 % Logtalk, the pre-compiled entities are loaded prior to this file)
 
-'$lgt_load_default_entities' :-
+'$lgt_load_built_in_entities'(ScratchDirectory) :-
 	'$lgt_expand_library_path'(logtalk_user, LogtalkUserDirectory),
 	atom_concat(LogtalkUserDirectory, 'scratch/', ScratchDirectory),
-	'$lgt_load_default_entities'(expanding, protocol, 'expanding', ScratchDirectory),
-	'$lgt_load_default_entities'(monitoring, protocol, 'monitoring', ScratchDirectory),
-	'$lgt_load_default_entities'(forwarding, protocol, 'forwarding', ScratchDirectory),
-	'$lgt_load_default_entities'(user, object, 'user', ScratchDirectory),
-	'$lgt_load_default_entities'(logtalk, object, 'logtalk', ScratchDirectory),
-	'$lgt_load_default_entities'(core_messages, category, 'core_messages', ScratchDirectory),
-	assertz('$lgt_default_entities_loaded_').
+	'$lgt_load_built_in_entities'(expanding, protocol, 'expanding', ScratchDirectory),
+	'$lgt_load_built_in_entities'(monitoring, protocol, 'monitoring', ScratchDirectory),
+	'$lgt_load_built_in_entities'(forwarding, protocol, 'forwarding', ScratchDirectory),
+	'$lgt_load_built_in_entities'(user, object, 'user', ScratchDirectory),
+	'$lgt_load_built_in_entities'(logtalk, object, 'logtalk', ScratchDirectory),
+	'$lgt_load_built_in_entities'(core_messages, category, 'core_messages', ScratchDirectory),
+	assertz('$lgt_built_in_entities_loaded_').
 
 
-'$lgt_load_default_entities'(Entity, Type, File, ScratchDirectory) :-
+'$lgt_load_built_in_entities'(Entity, Type, File, ScratchDirectory) :-
 	(	Type == protocol,
 		current_protocol(Entity) ->
 		true
@@ -18834,8 +18833,8 @@ current_logtalk_flag(Flag, Value) :-
 		true
 	;	logtalk_load(
 			core(File),
-			[	% we need a fixed code prefix as some of the "logtalk"
-				% object predicates must be called directly
+			[	% we need a fixed code prefix as some of the "logtalk" object predicates
+				% must be called directly
 				code_prefix('$'),
 				% delete the generated intermediate files as they may be non-portable
 				clean(on),
@@ -18843,14 +18842,16 @@ current_logtalk_flag(Flag, Value) :-
 				scratch_directory(ScratchDirectory),
 				% optimize entity code, allow static binding to these entity resources,
 				% and prevent their redefinition
-				optimize(on), report(off), reload(skip)
+				optimize(on), reload(skip),
+				% don't print any messages on the compilation and loading of these entities
+				report(off)
 			]
 		)
 	).
 
 
 
-% '$lgt_load_settings_file'(-compound, -atom)
+% '$lgt_load_settings_file'(+atom, -compound)
 %
 % loads any settings file defined by the user; settings files are compiled
 % and loaded silently, ignoring any errors;  the intermediate Prolog files
@@ -18861,14 +18862,9 @@ current_logtalk_flag(Flag, Value) :-
 % adapter files; these extensions will be tried in sequence when the test
 % for the settings file existence fails
 
-'$lgt_load_settings_file'(Result, Value) :-
+'$lgt_load_settings_file'(ScratchDirectory, Result) :-
 	'$lgt_default_flag'(settings_file, Value),
-	% find the location of the default scratch directory
-	'$lgt_expand_library_path'(logtalk_user, LogtalkUserDirectory),
-	atom_concat(LogtalkUserDirectory, 'scratch/', ScratchDirectory),
-	% define the compiler options to be used for compiling and loading the settings file
-	Options = [report(off), clean(on), scratch_directory(ScratchDirectory)],
-	'$lgt_load_settings_file'(Value, Options, Result).
+	'$lgt_load_settings_file'(Value, [report(off), clean(on), scratch_directory(ScratchDirectory)], Result).
 
 
 '$lgt_load_settings_file'(deny, _, disabled).
@@ -18879,7 +18875,7 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_load_settings_file_from_directory'(User, Options, Result) ->
 		true
 	;	% no settings file found
-		Result = none
+		Result = none(restrict)
 	).
 
 '$lgt_load_settings_file'(allow, Options, Result) :-
@@ -18892,7 +18888,7 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_load_settings_file_from_directory'(User, Options, Result) ->
 		true
 	;	% no settings file found
-		Result = none
+		Result = none(allow)
 	).
 
 
@@ -18919,20 +18915,20 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_report_settings_file'(+compound)
+% '$lgt_report_settings_file'(+compound, +atom)
 %
 % reports result of the attempt to load a settings file defined by the user
 
-'$lgt_report_settings_file'(loaded(Path), _) :-
+'$lgt_report_settings_file'(loaded(Path)) :-
 	'$lgt_print_message'(comment(settings), core, loaded_settings_file(Path)).
 
-'$lgt_report_settings_file'(disabled, _) :-
+'$lgt_report_settings_file'(disabled) :-
 	'$lgt_print_message'(comment(settings), core, settings_file_disabled).
 
-'$lgt_report_settings_file'(error(Path, Error), _) :-
+'$lgt_report_settings_file'(error(Path, Error)) :-
 	'$lgt_print_message'(error, core, error_loading_settings_file(Path, Error)).
 
-'$lgt_report_settings_file'(none, Flag) :-
+'$lgt_report_settings_file'(none(Flag)) :-
 	'$lgt_print_message'(comment(settings), core, no_settings_file_found(Flag)).
 
 
@@ -18993,13 +18989,13 @@ current_logtalk_flag(Flag, Value) :-
 
 :- initialization((
 	'$lgt_initialize_dynamic_entity_counters',
-	'$lgt_load_default_entities',
-	'$lgt_load_settings_file'(Result, Flag),
+	'$lgt_load_built_in_entities'(ScratchDirectory),
+	'$lgt_load_settings_file'(ScratchDirectory, Result),
 	'$lgt_print_message'(banner, core, banner),
 	'$lgt_print_message'(comment(settings), core, default_flags),
 	'$lgt_compile_default_hooks',
 	'$lgt_start_runtime_threading',
-	'$lgt_report_settings_file'(Result, Flag),
+	'$lgt_report_settings_file'(Result),
 	'$lgt_check_prolog_version'
 )).
 
