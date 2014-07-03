@@ -33,7 +33,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/07/02,
+		date is 2014/07/03,
 		comment is 'Built-in object providing message priting, debugging, library, source file, and hacking methods.']).
 
 	:- built_in.
@@ -49,7 +49,7 @@
 	% message printing predicates
 
 	:- public(print_message/3).
-	:- mode(print_message(@nonvar, +atom, @nonvar), zero_or_more).
+	:- mode(print_message(+nonvar, +atom, +nonvar), one).
 	:- info(print_message/3, [
 		comment is 'Prints a message of the given kind for the specificed component.',
 		argnames is ['Kind', 'Component', 'Message']
@@ -83,16 +83,16 @@
 	:- public(message_prefix_stream/4).
 	:- multifile(message_prefix_stream/4).
 	:- dynamic(message_prefix_stream/4).
-	:- mode(message_prefix_stream(@nonvar, @callable, @atom, @stream_or_alias), zero_or_more).
+	:- mode(message_prefix_stream(?nonvar, ?atom, ?atom, ?stream_or_alias), zero_or_more).
 	:- info(message_prefix_stream/4, [
-		comment is 'Message line prefix and stream to be used when printing a message given its kind and component.',
+		comment is 'Message line prefix and output stream to be used when printing a message given its kind and component.',
 		argnames is ['Kind', 'Component', 'Prefix', 'Stream']
 	]).
 
 	:- public(message_hook/4).
 	:- multifile(message_hook/4).
 	:- dynamic(message_hook/4).
-	:- mode(message_hook(@nonvar, @callable, @atom, @list(nonvar)), zero_or_more).
+	:- mode(message_hook(+nonvar, +nonvar, +atom, +list(nonvar)), zero_or_one).
 	:- info(message_hook/4, [
 		comment is 'User-defined hook predicate for intercepting message printing calls.',
 		argnames is ['Message', 'Kind', 'Component', 'Tokens']
@@ -215,10 +215,10 @@
 		argnames is ['ExecutionContext', 'Sender', 'This', 'Self', 'MetaCallContext', 'Stack']
 	]).
 
-	print_message(Kind, Component, Term) :-
-		message_term_to_tokens(Term, Kind, Component, Tokens),
-		(	nonvar(Term),
-			message_hook(Term, Kind, Component, Tokens) ->
+	print_message(Kind, Component, Message) :-
+		message_term_to_tokens(Message, Kind, Component, Tokens),
+		(	nonvar(Message),
+			message_hook(Message, Kind, Component, Tokens) ->
 			% message intercepted; assume that the message is printed
 			true
 		;	% add begin/2 and end/1 tokens to, respectively, the start and the end of the list of tokens
@@ -231,12 +231,12 @@
 	% message_term_to_tokens(@term, @term, @term, -list)
 	%
 	% translates a message term to tokens
-	message_term_to_tokens(Term, Kind, Component, Tokens) :-
-		(	var(Term) ->
+	message_term_to_tokens(Message, Kind, Component, Tokens) :-
+		(	var(Message) ->
 			Tokens = ['Non-instantiated ~q message for component ~q!'-[Kind, Component], nl]
-		;	phrase(message_tokens(Term, Component), Tokens) ->
+		;	phrase(message_tokens(Message, Component), Tokens) ->
 			true
-		;	Tokens = ['Unknown ~q message for component ~q: ~q'-[Kind, Component, Term], nl]
+		;	Tokens = ['Unknown ~q message for component ~q: ~q'-[Kind, Component, Message], nl]
 		).
 
 	% default_print_message(+atom_or_compound, +atom, +compound, +list, +compound)
@@ -264,27 +264,31 @@
 	default_print_message(Kind, Component, BeginToken, Tokens, EndToken) :-
 		(	message_prefix_stream(Kind, Component, Prefix, Stream) ->
 			true
-		;	% no user-defined prefix and stream; use Logtalk default definition
-			default_message_prefix_stream(Kind, Component, Prefix, Stream)
+		;	% no user-defined prefix and stream; use default definition
+			default_message_prefix_stream(Kind, Prefix, Stream) ->
+			true
+		;	% no such kind of message; use "information" instead
+			default_message_prefix_stream(information, Prefix, Stream)
 		),
 		print_message_tokens(Stream, Prefix, [BeginToken| Tokens]),
 		print_message_tokens(Stream, Prefix, [at_same_line, EndToken]).
 
-	% default_message_prefix_stream(?atom_or_compound, ?term, ?atom, ?stream_or_alias)
+	% default_message_prefix_stream(?atom_or_compound, ?atom, ?stream_or_alias)
 	%
-	% default definitions for the line prefix and output stream when printing messages;
-	% the definitions used here are based on Quintus Prolog and are also used in other
-	% Prolog compilers
-	default_message_prefix_stream(banner, _, '', user_output).
-	default_message_prefix_stream(help, _, '', user_output).
-	default_message_prefix_stream(information, _, '% ', user_output).
-	default_message_prefix_stream(information(_), _, '% ', user_output).
-	default_message_prefix_stream(comment, _, '% ', user_output).
-	default_message_prefix_stream(comment(_), _, '% ', user_output).
-	default_message_prefix_stream(warning, _, '*     ', user_error).
-	default_message_prefix_stream(warning(_), _, '*     ', user_error).
-	default_message_prefix_stream(error, _,   '!     ', user_error).
-	default_message_prefix_stream(error(_), _,   '!     ', user_error).
+	% default definitions for any component for the line prefix and output stream used
+	% when printing messages; the definitions used here are based on Quintus Prolog and
+	% are also used in other Prolog compilers
+	default_message_prefix_stream(banner,         '',       user_output).
+	default_message_prefix_stream(help,           '',       user_output).
+	default_message_prefix_stream(question,       '',       user_output).
+	default_message_prefix_stream(information,    '% ',     user_output).
+	default_message_prefix_stream(information(_), '% ',     user_output).
+	default_message_prefix_stream(comment,        '% ',     user_output).
+	default_message_prefix_stream(comment(_),     '% ',     user_output).
+	default_message_prefix_stream(warning,        '*     ', user_error).
+	default_message_prefix_stream(warning(_),     '*     ', user_error).
+	default_message_prefix_stream(error,          '!     ', user_error).
+	default_message_prefix_stream(error(_),       '!     ', user_error).
 
 	print_message_tokens(Stream, Prefix, Tokens) :-
 		(	Tokens = [at_same_line| _] ->

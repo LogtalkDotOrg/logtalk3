@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2014/7/2</code>
+            <code>2014/7/3</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -58,7 +58,7 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>print_message(@nonvar,+atom,@nonvar) &ndash; zero_or_more</code>
+              <code>print_message(+nonvar,+atom,+nonvar) &ndash; one</code>
             </dd>
           </dl>
         </div>
@@ -121,7 +121,7 @@
         <div class="section">
           <h3 id="message_prefix_stream/4" class="code">message_prefix_stream/4</h3>
           <blockquote>
-            <p class="comment">Message line prefix and stream to be used when printing a message given its kind and component.</p>
+            <p class="comment">Message line prefix and output stream to be used when printing a message given its kind and component.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -134,7 +134,7 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>message_prefix_stream(@nonvar,@callable,@atom,@stream_or_alias) &ndash; zero_or_more</code>
+              <code>message_prefix_stream(?nonvar,?atom,?atom,?stream_or_alias) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
@@ -154,7 +154,7 @@
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>message_hook(@nonvar,@callable,@atom,@list(nonvar)) &ndash; zero_or_more</code>
+              <code>message_hook(+nonvar,+nonvar,+atom,+list(nonvar)) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>

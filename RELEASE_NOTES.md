@@ -66,6 +66,9 @@ where the value of *this* would be used instead of the category identifier.
 messages other than `banner`, `comment`, `comment(_)`, `warning`, and
 `warning(_)` messages.
 
+* FIXED: Ensure that the `logtalk::print_message/3` predicate doesn't fail
+when the message kind is unknown.
+
 Prolog adapter and integration files
 ------------------------------------
 
