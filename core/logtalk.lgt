@@ -74,10 +74,10 @@
 	:- public(message_tokens//2).
 	:- multifile(message_tokens//2).
 	:- dynamic(message_tokens//2).
-	:- mode(message_tokens(@steream_or_alias, -list(nonvar)), zero_or_one).
+	:- mode(message_tokens(+nonvar, -list(nonvar)), zero_or_one).
 	:- info(message_tokens//2, [
 		comment is 'User-defined hook grammar rule for converting a message into a list of tokens (at_same_line, nl, flush, Format-Arguments, ansi(Attributes,Format,Arguments), begin(Kind,Variable), and end(Variable)).',
-		argnames is ['Message', 'Tokens']
+		argnames is ['Message', 'Component']
 	]).
 
 	:- public(message_prefix_stream/4).

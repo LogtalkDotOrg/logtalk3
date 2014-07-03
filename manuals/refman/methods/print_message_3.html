@@ -40,10 +40,13 @@
 <p>
 Built-in method for printing a message represented by a term, which is converted to the message text using the <a href="message_tokens_2.html"><code>logtalk::message_tokens(Term, Component)</code></a> hook predicate. This method is declared in the <code>logtalk</code> built-in object as a public predicate. The line prefix and the output stream used for each <code>Kind-Component</code> pair can be found using the <a href="message_prefix_stream_4.html"><code>logtalk::message_prefix_stream(Kind, Component, Prefix, Stream)</code></a> hook predicate.
 </p>
+<p>
+This predicate starts by converting the message term to a list of tokens and by calling the <a href="message_hook_4.html"><code>logtalk::message_hook(Message, Kind, Component, Tokens)</code></a> hook predicate. If this predicate succeeds, the <code>print_message/3</code> predicate assumes that the message have been successfully printed.
+</p>
 
 <h4>Template and modes</h4>
 
-<pre>print_message(@callable, @callable, @callable)</pre>
+<pre>print_message(+nonvar, +atom, +nonvar)</pre>
 
 <h4>Errors</h4>
 
@@ -58,7 +61,7 @@ Built-in method for printing a message represented by a term, which is converted
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: January 18, 2014</span>
+		<span>Last updated on: July 3, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="../index.html#methods">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="message_tokens_2.html">next</a></span><br/>

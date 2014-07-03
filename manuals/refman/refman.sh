@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Reference Manual XHTML to PDF conversion script
-##   Last updated on June 5, 2014
+##   Last updated on July 3, 2014
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -166,6 +166,9 @@ eval $xslt_proc -o methods/message_hook_4.section refman.xsl methods/message_hoo
 eval $xslt_proc -o methods/message_prefix_stream_4.section refman.xsl methods/message_prefix_stream_4.html
 eval $xslt_proc -o methods/print_message_tokens_3.section refman.xsl methods/print_message_tokens_3.html
 eval $xslt_proc -o methods/print_message_token_4.section refman.xsl methods/print_message_token_4.html
+eval $xslt_proc -o methods/ask_question_5.section refman.xsl methods/ask_question_5.html
+eval $xslt_proc -o methods/question_hook_5.section refman.xsl methods/question_hook_5.html
+eval $xslt_proc -o methods/question_prompt_stream_4.section refman.xsl methods/question_prompt_stream_4.html
 eval $xslt_proc -o methods/coinductive_success_hook_1_2.section refman.xsl methods/coinductive_success_hook_1_2.html
 eval $xslt_proc -o control/send_to_object_2.section refman.xsl control/send_to_object_2.html
 eval $xslt_proc -o control/send_to_self_1.section refman.xsl control/send_to_self_1.html
@@ -299,6 +302,9 @@ cat -s \
 	methods/message_prefix_stream_4.section \
 	methods/print_message_tokens_3.section \
 	methods/print_message_token_4.section \
+	methods/ask_question_5.section \
+	methods/question_hook_5.section \
+	methods/question_prompt_stream_4.section \
 	methods/coinductive_success_hook_1_2.section \
 	control.header \
 	control/send_to_object_2.section \
