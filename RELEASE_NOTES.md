@@ -64,7 +64,9 @@ as IDEs to intercept and handle user input.
 compilers that don't support a compatible threads implementation.
 
 * FIXED: Bug where closure arguments in calls to meta-predicates failed to be
-recorded when collecting predicate cross-referencing information.
+recorded when collecting predicate cross-referencing information. Collecting
+information on closures currently requires, however, compilation of source
+files with the `optimize` flag turned on.
 
 * FIXED: Bug when extending an explicitly-qualified module closure to a goal.
 
@@ -112,7 +114,7 @@ a backend Prolog compiler that doesn't support modules.
 `diagrams` tool using this backend Prolog compiler.
 
 * IMPROVED: Updated the `debugger` tool to use the structured message printing
-and structured question asking mechanisms for most of its output to make it
+and structured question asking mechanisms for its input and output to make it
 easier to integrate with GUI IDEs and redirect execution traces to a file.
 
 * ADDED: Simple code example to the `debugger` tool on how to redirect a goal
