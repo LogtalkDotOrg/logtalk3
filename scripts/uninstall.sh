@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Logtalk uninstall script
-##   Last updated on February 6, 2014
+##   Last updated on July 4, 2014
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -84,9 +84,7 @@ rm -f quintuslgt
 rm -f sicstuslgt
 rm -f swilgt
 rm -f xsblgt
-rm -f xsb64lgt
 rm -f xsbmtlgt
-rm -f xsbmt64lgt
 rm -f yaplgt
 cd ../share/man/man1
 rm -f bplgt.1.gz
@@ -105,9 +103,7 @@ rm -f qplgt.1.gz
 rm -f quintuslgt.1.gz
 rm -f sicstuslgt.1.gz
 rm -f swilgt.1.gz
-rm -f xsb64lgt.1.gz
 rm -f xsblgt.1.gz
-rm -f xsbmt64lgt.1.gz
 rm -f xsbmtlgt.1.gz
 rm -f yaplgt.1.gz
 

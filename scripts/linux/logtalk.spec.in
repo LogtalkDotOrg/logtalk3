@@ -75,9 +75,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr/local/bin/sicstuslgt
 /usr/local/bin/swilgt
 /usr/local/bin/xsblgt
-/usr/local/bin/xsb64lgt
 /usr/local/bin/xsbmtlgt
-/usr/local/bin/xsbmt64lgt
 /usr/local/bin/yaplgt
 /usr/local/share/man/man1/bplgt.1.gz
 /usr/local/share/man/man1/ciaolgt.1.gz
@@ -97,9 +95,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr/local/share/man/man1/quintuslgt.1.gz
 /usr/local/share/man/man1/sicstuslgt.1.gz
 /usr/local/share/man/man1/swilgt.1.gz
-/usr/local/share/man/man1/xsb64lgt.1.gz
 /usr/local/share/man/man1/xsblgt.1.gz
-/usr/local/share/man/man1/xsbmt64lgt.1.gz
 /usr/local/share/man/man1/xsbmtlgt.1.gz
 /usr/local/share/man/man1/yaplgt.1.gz
 %exclude /usr/local/share/mime

@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Logtalk back-end Prolog compiler select script
-##   Last updated on Febuary 7, 2014
+##   Last updated on July 4, 2014
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -63,14 +63,8 @@ list_backends() {
 	if [ -e `command -v xsblgt` ]  && [ "`command -v xsb`" != "" ] ; then
 		echo -n "  xsblgt"
 	fi
-	if [ -e `command -v xsb64lgt` ]  && [ "`command -v xsb-bits64`" != "" ] ; then
-		echo -n "  xsb64lgt"
-	fi
 	if [ -e `command -v xsbmtlgt` ]  && [ "`command -v xsb-mt`" != "" ] ; then
 		echo -n "  xsbmtlgt"
-	fi
-	if [ -e `command -v xsbmt64lgt` ]  && [ "`command -v xsb-bits64-mt`" != "" ] ; then
-		echo -n "  xsbmt64lgt"
 	fi
 	if [ -e `command -v yaplgt` ]  && [ "`command -v yap`" != "" ] ; then
 		echo -n "  yaplgt"
@@ -133,11 +127,7 @@ valid_backend() {
 		return 0
 	elif [ "$1" == "xsblgt" ] && [ -e `command -v xsblgt` ]  && [ "`command -v xsb`" != "" ] ; then
 		return 0
-	elif [ "$1" == "xsb64lgt" ] && [ -e `command -v xsb64lgt` ]  && [ "`command -v xsb-bits64`" != "" ] ; then
-		return 0
 	elif [ "$1" == "xsbmtlgt" ] && [ -e `command -v xsbmtlgt` ]  && [ "`command -v xsb-mt`" != "" ] ; then
-		return 0
-	elif [ "$1" == "xsbmt64lgt" ] && [ -e `command -v xsbmt64lgt` ]  && [ "`command -v xsb-bits64-mt`" != "" ] ; then
 		return 0
 	elif [ "$1" == "yaplgt" ] && [ -e `command -v yaplgt` ]  && [ "`command -v yap`" != "" ] ; then
 		return 0

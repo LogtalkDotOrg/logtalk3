@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Logtalk installation script
-##   Last updated on June 17, 2014
+##   Last updated on July 4, 2014
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -147,9 +147,7 @@ ln -sf ../share/logtalk/integration/quintuslgt.sh quintuslgt
 ln -sf ../share/logtalk/integration/sicstuslgt.sh sicstuslgt
 ln -sf ../share/logtalk/integration/swilgt.sh swilgt
 ln -sf ../share/logtalk/integration/xsblgt.sh xsblgt
-ln -sf ../share/logtalk/integration/xsb64lgt.sh xsb64lgt
 ln -sf ../share/logtalk/integration/xsbmtlgt.sh xsbmtlgt
-ln -sf ../share/logtalk/integration/xsbmt64lgt.sh xsbmt64lgt
 ln -sf ../share/logtalk/integration/yaplgt.sh yaplgt
 
 mkdir -p ../share/man/man1

@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Logtalk script for updating the HTML library and tools documentation
-##   Last updated on June 17, 2014
+##   Last updated on July 4, 2014
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -77,7 +77,7 @@ usage_help()
 	echo
 	echo "Optional arguments:"
 	echo "  -p back-end Prolog compiler (default is $backend)"
-	echo "     (possible values are b, cx, eclipse, gnu, lean, qp, sicstus, swi, xsb, xsb64, xsbmt, xsbmt64, and yap)"
+	echo "     (possible values are b, cx, eclipse, gnu, lean, qp, sicstus, swi, xsb, xsbmt, and yap)"
 	echo "  -v print version of `basename $0`"
 	echo "  -h help"
 	echo

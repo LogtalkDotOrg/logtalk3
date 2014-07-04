@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Unit testing automation script
-##   Last updated on June 7, 2014
+##   Last updated on July 4, 2014
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -79,7 +79,7 @@ usage_help()
 	echo "Optional arguments:"
 	echo "  -v print version of `basename $0`"
 	echo "  -p back-end Prolog compiler (default is $backend)"
-	echo "     (possible values are b, cx, eclipse, gnu, lean, qp, sicstus, swi, xsb, xsb64, xsbmt, xsbmt64, and yap)"
+	echo "     (possible values are b, cx, eclipse, gnu, lean, qp, sicstus, swi, xsb, xsbmt, and yap)"
 	echo "  -m compilation mode (default is $mode)"
 	echo "     (possible values are optimal, normal, debug, and all)"
 	echo "  -d directory to store the test results (default is ./tester_results)"
