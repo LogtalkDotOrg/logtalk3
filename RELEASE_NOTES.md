@@ -25,14 +25,15 @@ RELEASE NOTES
 =============
 
 
-3.00.0 Beta 8 - July ??, 2014
-=============================
+3.00.0 Beta 8 - July 4, 2014
+============================
 
 Logtalk license
 ---------------
 
 * CHANGED: Allow Logtalk to be used with commercial backend Prolog compilers
-in proprietary applications.
+in proprietary applications. Also removed the (mostly redundant) additional
+restrictions that were used as per GNU GPLv3 Section 7.
 
 Logtalk compiler and runtime
 ----------------------------
