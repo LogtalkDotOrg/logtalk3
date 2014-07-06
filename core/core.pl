@@ -36,11 +36,11 @@
 
 % message sending operators
 
-% send to object
+% message sending to an explicit object
 :- op(600, xfy, ::).
-% send to "self"
+% message sending to "self"
 :- op(600,  fy, ::).
-% "super" call (calls an overridden, inherited method definition)
+% "super" call (calls an inherited method definition)
 :- op(600,  fy, ^^).
 % imported category predicate call operator (deprecated)
 :- op(600,  fy,  :).
@@ -8485,7 +8485,7 @@ current_logtalk_flag(Flag, Value) :-
 % compiles an entity clause into a normal clause and a debug clause
 %
 % in this first compiler stage only the clause heads are compiled, which
-% allows collecting infornation about all entity defined predicates; the
+% allows collecting information about all entity defined predicates; the
 % compilation of clause bodies is delayed to the compiler second stage to
 % take advantage of the collected information to notably simplify handling
 % of redefined built-in predicates
@@ -10525,7 +10525,7 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
 
-% call to a unkown predicate
+% call to a unknown predicate
 
 '$lgt_compile_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, Prefix, _, _, ExCtx, Mode, _, Lines),
@@ -12880,7 +12880,7 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_check_for_redefined_built_in'(@callable, @execution_context, @callable, @compound)
 %
 % this predicate is called when adding a def/ddef clause after finding the first clause
-% for a predicate or when no cluses are defined for a declared predicate
+% for a predicate or when no clauses are defined for a declared predicate
 
 '$lgt_check_for_redefined_built_in'(Head, ExCtx, THead, Mode) :-
 	'$lgt_logtalk_built_in_predicate'(Head, _),
@@ -15626,7 +15626,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_flatten_to_list'(+term, -list)
 %
-% flattens an item, a list of items, or a conjuction of items into a list
+% flattens an item, a list of items, or a conjunction of items into a list
 
 '$lgt_flatten_to_list'([A|B], [A|B]) :-
 	!.
