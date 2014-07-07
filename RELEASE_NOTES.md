@@ -28,7 +28,17 @@ RELEASE NOTES
 3.00.0 Beta 9 - July ??, 2014
 =============================
 
+Prolog adapter and integration files
+------------------------------------
 
+* FIXED: Compatibility with Lean Prolog by using a workaround for this compiler
+limited parser in the compiler/runtime.
+
+Documentation
+-------------
+
+* IMPROVED: Reference manual documentation of the methods `goal_expansion/2`
+and `term_expansion/2`.
 
 
 3.00.0 Beta 8 - July 4, 2014

@@ -38,13 +38,13 @@
 
 <pre>goal_expansion(Goal, ExpandedGoal)</pre>
 <p>
-Defines an expansion for a goal. The first argument is the goal to be expanded. The expanded goal is returned in the second argument. This predicate is called recursively on the expanded goal until there are no changes. Thus, care must be taken to avoid compilation loops. This predicate, when defined, is automatically called by the <a href="expand_goal_2.html"><code>expand_goal/2</code></a> method. Use of this predicate by the <code>expand_goal/2</code> method may be restricted by using a scope directive for it.
+Defines an expansion for a goal. The first argument is the goal to be expanded. The expanded goal is returned in the second argument. This predicate is called recursively on the expanded goal until there are no changes. Thus, care must be taken to avoid compilation loops. This predicate, when defined, is automatically called by the <a href="expand_goal_2.html"><code>expand_goal/2</code></a> method. Use of this predicate by the <code>expand_goal/2</code> method may be restricted by changing its default public scope.
 </p>
 <p>
 Goal expansion may be also be applied when compiling source files by defining the object providing access to the <code>goal_expansion/2</code> clauses as a <em><a class="glossary" title="Go to glossary definition" href="../../glossary.html#hook">hook object</a></em>. Clauses for the <code>goal_expansion/2</code> predicate defined within an object or a category are <strong>never</strong> used in the compilation of the object or the category itself. Moreover, goals wrapped using the <a title="Consult reference manual" href="../control/external_call_1.html"><code>{}/1</code></a> compiler bypass control construct are not expanded and any expanded goal wrapped in this control construct will not be further expanded.
 </p>
 <p>
-Objects and categories implementing this predicate should declare that they implement the <code>expanding</code> protocol.
+Objects and categories implementing this predicate should declare that they implement the <code>expanding</code> protocol. This protocol implementation relation can be declared as either protected or private to restrict the scope of this predicate.
 </p>
 
 <h4>Template and modes</h4>
@@ -67,7 +67,7 @@ Objects and categories implementing this predicate should declare that they impl
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: May 9, 2014</span>
+		<span>Last updated on: July 7, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="expand_goal_2.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="../index.html#methods">next</a></span><br/>
