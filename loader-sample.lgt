@@ -29,8 +29,9 @@
 %  files whose main purpose is to load your application files.
 %
 %  During development, loader files can be reloaded repeatedly. Therefore,
-%  generic settings shared by several applications, such as library paths
-%  and global flag values should be done preferably using a settings file.
+%  generic settings shared by all source files, such as library paths and
+%  global flag values should be done preferably using a settings file in
+%  the main application directory.
 
 
 %  Load your application files:
