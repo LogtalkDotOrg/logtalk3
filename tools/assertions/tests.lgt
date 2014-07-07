@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/11/28,
+		date is 2014/07/07,
 		comment is 'Unit tests for the "assertions" tool.'
 	]).
 
@@ -73,15 +73,15 @@
 		ground(Message),
 		message(Message, Kind).
 
-	message(assertion_sucess(ground(x)), silent).
+	message(assertion_success(ground(x)), silent).
 	message(assertion_failure(22 is 2+2), error).
 	message(assertion_error(1,error(type_error(callable,1),logtalk(call(1),tests))), error).
 
-	message(assertion_sucess(assertions_4,ground(x)), error).
+	message(assertion_success(assertions_4,ground(x)), error).
 	message(assertion_failure(assertions_5,22 is 2+2), error).
 	message(assertion_error(assertions_6,1,error(type_error(callable,1),logtalk(call(1),tests))), error).
 
-	message(assertion_sucess(Context,ground(x)), error) :-
+	message(assertion_success(Context,ground(x)), error) :-
 		check_context(Context).
 	message(assertion_failure(Context,22 is 2+2), error) :-
 		check_context(Context).
