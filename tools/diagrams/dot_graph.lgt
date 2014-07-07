@@ -212,7 +212,7 @@
 	edge_arrow(complements_object, obox).
 	% multifile predicates
 	edge_arrow(provides_clauses, inv).
-	% cross-referencong predicate calls
+	% cross-referencing predicate calls
 	edge_arrow(calls_predicate, rdiamond).
 	% file relations
 	edge_arrow(depends_on_file, normal).
