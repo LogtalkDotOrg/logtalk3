@@ -77,11 +77,11 @@
 	message(assertion_failure(22 is 2+2), error).
 	message(assertion_error(1,error(type_error(callable,1),logtalk(call(1),tests))), error).
 
-	message(assertion_success(assertions_4,ground(x)), error).
+	message(assertion_success(assertions_4,ground(x)), silent).
 	message(assertion_failure(assertions_5,22 is 2+2), error).
 	message(assertion_error(assertions_6,1,error(type_error(callable,1),logtalk(call(1),tests))), error).
 
-	message(assertion_success(Context,ground(x)), error) :-
+	message(assertion_success(Context,ground(x)), silent) :-
 		check_context(Context).
 	message(assertion_failure(Context,22 is 2+2), error) :-
 		check_context(Context).
