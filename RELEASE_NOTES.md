@@ -46,8 +46,9 @@ Tools
 * FIXED: The `lgtdoc` tool now also prints multifile predicate properties and
 predicate coinduction templates.
 
-* FIXED: The `lgtdoc` tool default value for the `xmldir` option was relative
-to the current working directory instead of the source files directory.
+* CHANGED: The `lgtdoc` tool default value for the `xmldir` option is now
+relative to the source files directory when instead of the current working
+directory using the `rlibrary/1-2`, `library/1-2`, and `file/1-2` predicates.
 
 
 3.00.0 Beta 8 - July 4, 2014

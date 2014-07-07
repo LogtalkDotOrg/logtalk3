@@ -55,10 +55,11 @@
 	rlibrary(Library, UserOptions) :-
 		merge_options(UserOptions, Options),
 		logtalk::expand_library_path(Library, TopPath),
-		member(xmldir(Directory), Options), !,
+		member(xmldir(XMLDirectory), Options), !,
 		os::working_directory(Current),
-		os::make_directory(Directory),
-		os::change_directory(Directory),
+		os::change_directory(TopPath),
+		os::make_directory(XMLDirectory),
+		os::change_directory(XMLDirectory),
 		output_rlibrary(TopPath, Options),
 		os::change_directory(Current).
 
@@ -83,6 +84,7 @@
 		logtalk::expand_library_path(Library, Path),
 		member(xmldir(XMLDirectory), Options), !,
 		os::working_directory(Current),
+		os::change_directory(Path),
 		os::make_directory(XMLDirectory),
 		os::change_directory(XMLDirectory),
 		output_library_files(Path, Options),
@@ -112,6 +114,7 @@
 		merge_options(UserOptions, Options),
 		member(xmldir(XMLDirectory), Options), !,
 		os::working_directory(Current),
+		os::change_directory(Directory),
 		os::make_directory(XMLDirectory),
 		os::change_directory(XMLDirectory),
 		process(Basename, Directory, Options, StreamOptions),
