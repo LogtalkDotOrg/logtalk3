@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/20,
+		date is 2014/07/07,
 		comment is 'Documenting tool.',
 		remarks is [
 			'Compiling files for generating XML documentation' - 'All source files must be compiled with the "source_data" compiler flag turned on.',
@@ -717,10 +717,16 @@
 		write_xml_cdata_element(Stream, name, [], Name),
 		write_xml_element(Stream, scope, [], Scope),
 		(	(entity_property(Entity, (dynamic)); member((dynamic), Properties)) ->
-			Compilation = (dynamic)
-		;	member(synchronized, Properties) ->
-			Compilation = 'static, synchronized'
-		;	Compilation = static
+			Compilation0 = (dynamic)
+		;	Compilation0 = static
+		),
+		(	member((multifile), Properties) ->
+			atom_concat(Compilation0, ', multifile', Compilation1)
+		;	Compilation1 = Compilation0
+		),
+		(	member(synchronized, Properties) ->
+			atom_concat(Compilation1, ', synchronized', Compilation)
+		;	Compilation = Compilation1
 		),
 		write_xml_element(Stream, compilation, [], Compilation),
 		functor(Meta, Functor, Arity),

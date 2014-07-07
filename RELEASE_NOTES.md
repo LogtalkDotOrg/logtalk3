@@ -31,7 +31,7 @@ RELEASE NOTES
 Prolog adapter and integration files
 ------------------------------------
 
-* FIXED: Compatibility with Lean Prolog by using a workaround for this compiler
+* FIXED: Compatibility with Lean Prolog by using a workaround for this system
 limited parser in the compiler/runtime.
 
 Documentation
@@ -39,6 +39,11 @@ Documentation
 
 * IMPROVED: Reference manual documentation of the methods `goal_expansion/2`
 and `term_expansion/2`.
+
+Tools
+-----
+
+* FIXED: The `lgtdoc` tool now also prints multifile predicate properties.
 
 
 3.00.0 Beta 8 - July 4, 2014
