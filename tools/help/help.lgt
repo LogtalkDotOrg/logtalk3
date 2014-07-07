@@ -119,7 +119,7 @@
 	:- public(built_in_directive/4).
 	:- mode(built_in_directive(?atom, ?integer, -atom, -atom), zero_or_more).
 	:- info(built_in_directive/4, [
-		comment is 'Provides acess to the HTML documenting files describing built-in directives.',
+		comment is 'Provides access to the HTML documenting files describing built-in directives.',
 		argnames is ['Functor', 'Arity', 'Directory', 'Basename']
 	]).
 
@@ -170,7 +170,7 @@
 	:- public(built_in_predicate/4).
 	:- mode(built_in_predicate(?atom, ?integer, -atom, -atom), zero_or_more).
 	:- info(built_in_predicate/4, [
-		comment is 'Provides acess to the HTML documenting files describing built-in predicates.',
+		comment is 'Provides access to the HTML documenting files describing built-in predicates.',
 		argnames is ['Functor', 'Arity', 'Directory', 'Basename']
 	]).
 
@@ -236,7 +236,7 @@
 	:- public(built_in_method/4).
 	:- mode(built_in_method(?atom, ?integer, -atom, -atom), zero_or_more).
 	:- info(built_in_method/4, [
-		comment is 'Provides acess to the HTML documenting files describing built-in methods.',
+		comment is 'Provides access to the HTML documenting files describing built-in methods.',
 		argnames is ['Functor', 'Arity', 'Directory', 'Basename']
 	]).
 
@@ -286,7 +286,7 @@
 	:- public(control/4).
 	:- mode(control(?atom, ?integer, -atom, -atom), zero_or_more).
 	:- info(control/4, [
-		comment is 'Provides acess to the HTML documenting files describing built-in control constructs.',
+		comment is 'Provides access to the HTML documenting files describing built-in control constructs.',
 		argnames is ['Functor', 'Arity', 'Directory', 'Basename']
 	]).
 
@@ -300,7 +300,7 @@
 	:- public(built_in_non_terminal/4).
 	:- mode(built_in_non_terminal(?atom, ?integer, -atom, -atom), zero_or_more).
 	:- info(built_in_non_terminal/4, [
-		comment is 'Provides acess to the HTML documenting files describing built-in DCG non-terminals.',
+		comment is 'Provides access to the HTML documenting files describing built-in DCG non-terminals.',
 		argnames is ['Functor', 'Arity', 'Directory', 'Basename']
 	]).
 
