@@ -738,6 +738,14 @@
 			)
 		;	true
 		),
+		(	member(coinductive(Coinductive), Properties) ->
+			(	Name = _/_ ->
+				write_xml_cdata_element(Stream, coinductive, [], Coinductive)
+			;	convert_coinductive_to_coinductive_non_terminal(Coinductive, NonTerminalCoinductive),
+				write_xml_cdata_element(Stream, coinductive, [], NonTerminalCoinductive)
+			)
+		;	true
+		),
 		functor(Template, Functor, Arity),
 		forall(
 			member(mode(Template, Solutions), Properties),
@@ -752,7 +760,6 @@
 		),
 		write_xml_close_tag(Stream, predicate).
 
-
 	convert_meta_predicate_to_meta_non_terminal(Meta, NonTerminalMeta) :-
 		Meta =.. [Functor| MetaArgs],
 		convert_meta_predicate_to_meta_non_terminal_args(MetaArgs, NonTerminalArgs),
@@ -765,7 +772,17 @@
 			NonTerminalArg is MetaArg - 2
 		;	NonTerminalArg = MetaArg
 		),
-	convert_meta_predicate_to_meta_non_terminal_args(MetaArgs, NonTerminalArgs).
+		convert_meta_predicate_to_meta_non_terminal_args(MetaArgs, NonTerminalArgs).
+
+	convert_coinductive_to_coinductive_non_terminal(Coinductive, NonTerminalCoinductive) :-
+		Coinductive =.. [Functor| Args],
+		convert_coinductive_to_coinductive_non_terminal_args(Args, NonTerminalArgs),
+		NonTerminalCoinductive =.. [Functor| NonTerminalArgs].
+
+	convert_coinductive_to_coinductive_non_terminal_args([_, _], []) :-
+		!.
+	convert_coinductive_to_coinductive_non_terminal_args([Arg| Args], [Arg| NonTerminalArgs]) :-
+		convert_coinductive_to_coinductive_non_terminal_args(Args, NonTerminalArgs).
 
 	write_xml_predicate_info(Stream, Entity, Functor, Arity, Info) :-
 		(	member(comment(Comment), Info) ->
@@ -1078,7 +1095,7 @@
 	default_option(xslfile, 'lgtxml.xsl').
 	default_option(xmlspec, dtd).
 	default_option(xmlsref, local).
-	default_option(xmldir, 'xml_docs/').
+	default_option(xmldir, './xml_docs/').
 	default_option(bom, true).
 	default_option(encoding, 'UTF-8').
 	default_option(exclude_files, []).

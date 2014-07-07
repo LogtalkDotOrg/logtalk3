@@ -43,7 +43,11 @@ and `term_expansion/2`.
 Tools
 -----
 
-* FIXED: The `lgtdoc` tool now also prints multifile predicate properties.
+* FIXED: The `lgtdoc` tool now also prints multifile predicate properties and
+predicate coinduction templates.
+
+* FIXED: The `lgtdoc` tool default value for the `xmldir` option was relative
+to the current working directory instead of the source files directory.
 
 
 3.00.0 Beta 8 - July 4, 2014

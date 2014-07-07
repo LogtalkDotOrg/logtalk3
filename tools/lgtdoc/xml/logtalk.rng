@@ -350,6 +350,9 @@
 			<optional>
 				<ref name="meta"/>
 			</optional>
+			<optional>
+				<ref name="coinductive"/>
+			</optional>
 			<zeroOrMore>
 				<ref name="mode"/>
 			</zeroOrMore>
@@ -379,6 +382,12 @@
 
 	<define name="meta">
 		<element name="meta">
+			<text/>
+		</element>
+	</define>
+
+	<define name="coinductive">
+		<element name="coinductive">
 			<text/>
 		</element>
 	</define>

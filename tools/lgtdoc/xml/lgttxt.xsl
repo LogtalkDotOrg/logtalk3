@@ -243,6 +243,10 @@
 		<xsl:text>meta-predicate template:</xsl:text><xsl:value-of select="$nl" />
 		<xsl:value-of select="$tab" /><xsl:value-of select="meta" /><xsl:value-of select="$nl" />
 	</xsl:if>
+	<xsl:if test="coinductive">
+		<xsl:text>coinduction predicate template:</xsl:text><xsl:value-of select="$nl" />
+		<xsl:value-of select="$tab" /><xsl:value-of select="coinductive" /><xsl:value-of select="$nl" />
+	</xsl:if>
 	<xsl:if test="mode">
 		<xsl:text>mode - number of solutions:</xsl:text><xsl:value-of select="$nl" />
 		<xsl:for-each select="mode">

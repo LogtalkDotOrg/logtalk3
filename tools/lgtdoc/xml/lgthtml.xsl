@@ -276,6 +276,10 @@
 		<dt class ="key">meta-predicate template:</dt>
 			<dd class ="value"><code><xsl:value-of select="meta" /></code></dd>
 		</xsl:if>
+		<xsl:if test="coinductive">
+		<dt class ="key">coinductive predicate template:</dt>
+			<dd class ="value"><code><xsl:value-of select="coinductive" /></code></dd>
+		</xsl:if>
 		<xsl:if test="mode">
 		<dt class ="key">mode<xsl:text disable-output-escaping="yes"> &amp;ndash; </xsl:text>number of solutions:</dt>
 		<xsl:for-each select="mode">

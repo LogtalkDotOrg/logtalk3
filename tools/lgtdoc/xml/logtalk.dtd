@@ -102,7 +102,7 @@
 <!ELEMENT private (predicate*)>
 
 
-<!ELEMENT predicate (name, scope, compilation, meta?, mode*, comment?, template?, (argnames|arguments)?, exceptions?, info*, examples?)>
+<!ELEMENT predicate (name, scope, compilation, meta?, coinductive?, mode*, comment?, template?, (argnames|arguments)?, exceptions?, info*, examples?)>
 
 <!ELEMENT meta (#PCDATA)>
 

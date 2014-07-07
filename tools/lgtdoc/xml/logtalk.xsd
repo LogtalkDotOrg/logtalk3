@@ -205,6 +205,7 @@
 		<xsd:element name="scope"		type="scope"/>
 		<xsd:element name="compilation"	type="predicate_compilation"/>
 		<xsd:element name="meta"		type="xsd:string"		minOccurs="0"/>
+		<xsd:element name="coinductive"	type="xsd:string"		minOccurs="0"/>
 		<xsd:element name="mode"		type="mode"				minOccurs="0" maxOccurs="unbounded"/>
 		<xsd:element name="comment"		type="xsd:string"		minOccurs="0"/>
 		<xsd:element name="template"	type="xsd:string"		minOccurs="0" maxOccurs="unbounded"/>

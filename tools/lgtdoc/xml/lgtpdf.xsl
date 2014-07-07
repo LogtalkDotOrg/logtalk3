@@ -605,6 +605,22 @@
 		</fo:block>
 	</xsl:if>
 
+	<xsl:if test="coinductive">
+      	<fo:block
+				font-size="10pt"
+				font-family="serif" 
+				keep-with-next="always"
+				space-before="4pt">
+     		coinductive predicate template:
+     	</fo:block>
+		<fo:block
+				font-size="9pt"
+				font-family="monospace"
+				margin-left="10mm">
+			<xsl:value-of select="coinductive"/>
+		</fo:block>
+	</xsl:if>
+
 	<xsl:if test="mode">
        	<fo:block
 				font-size="10pt"
