@@ -34,7 +34,7 @@
 		version is 1.0,
 		author is 'Paulo Moura',
 		date is 2014/07/03,
-		comment is 'Built-in object providing message priting, debugging, library, source file, and hacking methods.']).
+		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.']).
 
 	:- built_in.
 
@@ -252,7 +252,7 @@
 			true
 		;	% add begin/2 and end/1 tokens to, respectively, the start and the end of the list of tokens
 			% but pass them using discrete arguments instead of doing an expensive list append operation;
-			% these two tokens can be intercepted by the user for suporting e.g. message coloring
+			% these two tokens can be intercepted by the user for supporting e.g. message coloring
 			functor(Kind, Functor, _),
 			default_print_message(Kind, Component, begin(Functor,Ctx), Tokens, end(Ctx))
 		).
