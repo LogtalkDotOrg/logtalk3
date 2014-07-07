@@ -484,7 +484,7 @@ format(Format, Arguments) :-
 		Extension = ''
 	).
 
-% the following auxiliar predicate was written by Per Mildner and 
+% the following auxiliary predicate was written by Per Mildner and 
 % is used here (renamed just to avoid conflicts) with permission
 
 '$lgt_strrch'(Xs, G, Ys) :-

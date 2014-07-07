@@ -639,7 +639,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 		Extension = ''
 	).
 
-% the following auxiliar predicate was written by Per Mildner and 
+% the following auxiliary predicate was written by Per Mildner and 
 % is used here (renamed just to avoid conflicts) with permission
 
 '$lgt_strrch'(Xs, G, Ys) :-
