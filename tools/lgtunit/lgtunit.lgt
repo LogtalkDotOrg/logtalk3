@@ -437,7 +437,7 @@
 				fail
 			).
 	:- elif((	current_logtalk_flag(prolog_dialect, Dialect),
-			(Dialect == cx; Dialect == sicstus; Dialect == xsb)
+				(Dialect == cx; Dialect == sicstus; Dialect == xsb)
 	)).
 		deterministic(Goal) :-
 			call_cleanup(Goal, Deterministic = true),
@@ -474,7 +474,9 @@
 		;	catch(abs((Float1 - Float2) / Float2) < 0.00001, _, fail)
 		).
 
-	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == swi; Dialect == yap; Dialect == gnu; Dialect == b; Dialect == cx))).
+	:- if((	current_logtalk_flag(prolog_dialect, Dialect),
+			(Dialect == swi; Dialect == yap; Dialect == gnu; Dialect == b; Dialect == cx)
+	)).
 		epsilon(Epsilon) :-
 			Epsilon is epsilon.
 	:- else.

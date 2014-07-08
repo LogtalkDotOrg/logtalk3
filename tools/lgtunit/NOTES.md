@@ -27,8 +27,10 @@ Overview
 
 The `lgtunit.lgt` source file contains a simple framework for defining and
 running unit tests in Logtalk. The `lgtunit_messages.lgt` source file defines
-the default message translations. For more information on these entities,
-open the `docs/tools.html` file in a web browser.
+the default translations for the messages printed when running unit tests.
+These messages can be intercepted to customize output, e.g. to make it less
+verbose, or to integrate this tool with e.g. GUI IDEs. For more information
+on these entities, open the `docs/tools.html` file in a web browser.
 
 All source files are formatted using tabs (the recommended setting is a tab
 width equivalent to 4 spaces).
@@ -69,7 +71,7 @@ an error cannot be specified. A more versatile dialect is:
 	throws(Test, Ball) :- Goal.
 
 This is a straightforward dialect. For `succeeds/1` tests, `Goal` is
-expected to succeed. For `deterministic!` tests, `Goal` is expected to
+expected to succeed. For `deterministic/1` tests, `Goal` is expected to
 succeed once without leaving a choice-point. For `fails/1` tests, `Goal`
 is expected to fail. For `throws/2` tests, `Goal` is expected to throw
 the exception term `Ball`. An alternative test dialect that can be used
@@ -99,9 +101,10 @@ message is printed if duplicated identifiers are found. These errors must
 be corrected otherwise the test results can be misleading.
 
 Tests that for some reason should be skipped can have the test clause head
-prefixed with the `(-)/1` operator. An alternative is to use the conditional
-compilation directives. The number of skipped tests is reported together with
-the numbers of passed and failed tests.
+prefixed with the `(-)/1` operator. The number of skipped tests is reported
+together with the numbers of passed and failed tests. The conditional
+compilation directives can also be used in alternative but note that in this
+case there will be no report on the number of skipped tests.
 
 Deterministic unit tests are currently not available when using Lean Prolog
 or Quintus Prolog as backend compilers.
@@ -178,9 +181,9 @@ use of dynamic predicates with clauses asserted at runtime. You may easily
 identify dynamic predicates in the results as their clauses often have a
 initial count equal to zero.
 
-The list of indexes of the covered predicate clauses can be long. Some backend
-Prolog compilers provide a flag or a predicate to control the depth of printed
-terms that can be useful:
+The list of indexes of the covered predicate clauses can be quite long.
+Some backend Prolog compilers provide a flag or a predicate to control
+the depth of printed terms that can be useful:
 
 * CxProlog: `write_depth/2` predicate
 * ECLiPSe: `print_depth` flag
