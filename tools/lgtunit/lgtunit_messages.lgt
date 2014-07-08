@@ -86,7 +86,7 @@
 
 	logtalk::message_tokens(declared_entities_and_clause_numbers(Entities, Clauses), lgtunit) -->
 		entity_tokens(Entities),
-		[' declared as covered in the test file containing '-[]],
+		[' declared as covered containing '-[]],
 		clause_tokens(Clauses),
 		[nl].
 
