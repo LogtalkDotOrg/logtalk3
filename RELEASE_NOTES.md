@@ -34,6 +34,10 @@ Prolog adapter and integration files
 * FIXED: Compatibility with Lean Prolog by using a workaround for this system
 limited parser in the compiler/runtime.
 
+* FIXED: SICStus Prolog expansion of `ensure_loaded/1` and `use_module/1-2`
+directives when the file path is relative to the directory of the enclosing
+entity source file.
+
 Documentation
 -------------
 
@@ -47,8 +51,8 @@ Tools
 predicate coinduction templates.
 
 * CHANGED: The `lgtdoc` tool default value for the `xmldir` option is now
-relative to the source files directory when instead of the current working
-directory using the `rlibrary/1-2`, `library/1-2`, and `file/1-2` predicates.
+relative to the source files directory instead of the current working directory
+when using the `rlibrary/1-2`, `library/1-2`, and `file/1-2` predicates.
 
 
 3.00.0 Beta 8 - July 4, 2014

@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SICStus Prolog 4.1.0 and later versions
-%  Last updated on June 12, 2014
+%  Last updated on July 8, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -625,14 +625,17 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 '$lgt_sicstus_directive_expansion'(ensure_loaded(File), use_module(Module, Imports)) :-
 	logtalk_load_context(entity_type, module),
 	% ensure_loaded/1 directive used within a module (sloppy replacement for the use_module/1-2 directives)
-	'$lgt_sicstus_list_of_exports'(File, Module, Imports).
+	logtalk_load_context(directory, Directory),
+	'$lgt_sicstus_list_of_exports'(File, Directory, Module, Imports).
 '$lgt_sicstus_directive_expansion'(module(Module, Exports, _), module(Module, Exports)).
 '$lgt_sicstus_directive_expansion'(use_module(File, Imports), use_module(Module, Imports)) :-
 	logtalk_load_context(entity_type, _),
-	'$lgt_sicstus_list_of_exports'(File, Module, _).
+	logtalk_load_context(directory, Directory),
+	'$lgt_sicstus_list_of_exports'(File, Directory, Module, _).
 '$lgt_sicstus_directive_expansion'(use_module(File), use_module(Module, Imports)) :-
 	logtalk_load_context(entity_type, _),
-	'$lgt_sicstus_list_of_exports'(File, Module, Imports).
+	logtalk_load_context(directory, Directory),
+	'$lgt_sicstus_list_of_exports'(File, Directory, Module, Imports).
 '$lgt_sicstus_directive_expansion'(use_module(Module, File, Imports), Directive) :-
 	logtalk_load_context(entity_type, _),
 	(	var(Module) ->
@@ -641,9 +644,9 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 	).
 
 
-'$lgt_sicstus_list_of_exports'(File, Module, Exports) :-
+'$lgt_sicstus_list_of_exports'(File, Directory, Module, Exports) :-
 	nonvar(File),
-	absolute_file_name(File, Path, [extensions(['.pl', '.pro']), access(read), file_errors(fail)]),
+	absolute_file_name(File, Path, [extensions(['.pl', '.pro']), access(read), file_errors(fail), relative_to(Directory)]),
 	current_module(Module, Path),	% this only succeeds for already loaded modules
 	findall(
 		Functor/Arity,
@@ -651,10 +654,10 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 		Exports),
 	!.
 
-'$lgt_sicstus_list_of_exports'(File, Module, Exports) :-
-	(	absolute_file_name(File, Path, [extensions(['.pl', '.pro']), access(read), file_errors(fail)])
+'$lgt_sicstus_list_of_exports'(File, Directory, Module, Exports) :-
+	(	absolute_file_name(File, Path, [extensions(['.pl', '.pro']), access(read), file_errors(fail), relative_to(Directory)])
 	;	% we may be compiling Prolog module files as Logtalk objects
-		absolute_file_name(File, Path, [extensions(['.lgt']), access(read), file_errors(fail)])
+		absolute_file_name(File, Path, [extensions(['.lgt']), access(read), file_errors(fail), relative_to(Directory)])
 	),
 	open(Path, read, In),
 	call_cleanup(read(In, ModuleDecl), close(In)),
