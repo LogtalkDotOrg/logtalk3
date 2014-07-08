@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/11/29,
+		date is 2014/07/08,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -86,7 +86,7 @@
 
 	logtalk::message_tokens(declared_entities_and_clause_numbers(Entities, Clauses), lgtunit) -->
 		entity_tokens(Entities),
-		[' declared in the test file containing '-[]],
+		[' declared as covered in the test file containing '-[]],
 		clause_tokens(Clauses),
 		[nl].
 
