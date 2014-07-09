@@ -44,6 +44,9 @@ Documentation
 * IMPROVED: Reference manual documentation of the methods `goal_expansion/2`
 and `term_expansion/2`.
 
+* FIXED: Distinguish between valid key-value pairs for the `info/1` entity
+directive and for the `info/2` predicate directive.
+
 Tools
 -----
 
