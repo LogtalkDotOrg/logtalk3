@@ -12566,14 +12566,14 @@ current_logtalk_flag(Flag, Value) :-
 		;	'$lgt_instantiates_class_'(_, Obj, _)
 		;	'$lgt_specializes_class_'(Obj, _, _)
 		;	'$lgt_specializes_class_'(_, Obj, _)
-		)
+		), !
 	;	'$lgt_pp_runtime_clause_'('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, _)) ->
 		% object defined previously in the same file; check that it's an instance or a class
 		(	'$lgt_pp_runtime_clause_'('$lgt_instantiates_class_'(Obj, _, _))
 		;	'$lgt_pp_runtime_clause_'('$lgt_instantiates_class_'(_, Obj, _))
 		;	'$lgt_pp_runtime_clause_'('$lgt_specializes_class_'(Obj, _, _))
 		;	'$lgt_pp_runtime_clause_'('$lgt_specializes_class_'(_, Obj, _))
-		)
+		), !
 	;	fail
 	).
 
