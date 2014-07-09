@@ -9,9 +9,9 @@ ________________________________________________________________________
 
 
 This folder contains supporting files for converting and/or indexing XML 
-documentation files (which are created when compiling objects, categories, 
-or protocols) to PDF files or (X)HTML files using XSL style sheets. The 
-documentation files may also be viewed directly on a web browser that 
+documenting files (which are created using the `lgtdoc` tool) to PDF
+files, (X)HTML files, or plain text files using XSL style sheets. The
+documenting files may also be viewed directly on a web browser that
 supports the W3C standards XML, XSLT, CSS, and HTML 4 or XHTML 1.0.
 
 The shell and command-line scripts should be called from the directory 
@@ -60,15 +60,17 @@ Brief description of each file in this folder:
 
 - `lgthtml.xsl`  
 	XSLT file to output HTML 4.01 files from the XML files. The links in 
-	the generated HTML files point to related HTML files. It can be used 
-	to batch convert XML files to HTML files. UTF-8 encoding is assumed.
-	Edit the file if you use a different encoding.
+	the generated HTML files point to related HTML files. UTF-8 encoding
+	is assumed. Edit the file if you use a different encoding. This XSLT
+	file adds anchors to each predicate section using as name the predicate
+	indicator.
 
 - `lgtxhtml.xsl`  
 	XSLT file to output XHTML 1.1 files from the XML files. The links in 
-	the generated XHTML files point to related XHTML files. It can be used 
-	to batch convert XML files to XHTML files. UTF-8 encoding is assumed. 
-	Edit the file if you use a different encoding.
+	the generated XHTML files point to related XHTML files. UTF-8 encoding
+	is assumed. Edit the file if you use a different encoding. This XSLT
+	file adds anchors to each predicate section using as name the predicate
+	indicator.
 
 - `lgttxt.xsl`  
 	XSLT file to output simple text files from the XML files. UTF-8 encoding 

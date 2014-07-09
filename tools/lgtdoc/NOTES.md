@@ -28,7 +28,7 @@ be loaded by typing:
 
 Documenting Logtalk source code (with this tool) requires compiling
 source files using the `source_data(on)` compiler option. For a single
-source file, you can type, example:
+source file, you can type, for example:
 
 	| ?- logtalk_load(source_file, [source_data(on)]).
 
