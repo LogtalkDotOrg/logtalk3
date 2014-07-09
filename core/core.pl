@@ -8250,7 +8250,7 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	(	Counter =:= Arity ->
 		true
-	;	throw(domain_error({Arity}, {Counter}))
+	;	throw(domain_error({Arity}, Counter))
 	).
 
 '$lgt_check_entity_info_parameters'(_, Parameters, _, _) :-
@@ -8267,7 +8267,7 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	(	Counter =:= Arity ->
 		true
-	;	throw(domain_error({Arity}, {Counter}))
+	;	throw(domain_error({Arity}, Counter))
 	).
 
 '$lgt_check_entity_info_parnames'(_, Parnames, _, _) :-
@@ -8358,7 +8358,7 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	(	Counter =:= Arity ->
 		true
-	;	throw(domain_error({Arity}, {Counter}))
+	;	throw(domain_error({Arity}, Counter))
 	).
 
 '$lgt_check_predicate_info_arguments'(_, Arguments, _, _) :-
@@ -8375,7 +8375,7 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	(	Counter =:= Arity ->
 		true
-	;	throw(domain_error({Arity}, {Counter}))
+	;	throw(domain_error({Arity}, Counter))
 	).
 
 '$lgt_check_predicate_info_argnames'(_, Arguments, _, _) :-
