@@ -4094,7 +4094,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_metacall'(?term, +list, @term, +atom, +object_identifier, +object_identifier, +object_identifier)
 %
-% performs a meta-call constructed from a closure and a list of additional arguments
+% performs a runtime meta-call constructed from a closure and a list of additional arguments
 
 '$lgt_metacall'(Closure, ExtraArgs, _, _, _, This, _) :-
 	var(Closure),
@@ -4103,7 +4103,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_metacall'({Closure}, ExtraArgs, _, _, _, This, _) :-
 	!,
-	% pre-compiled closures or calls in "user" (compiler bypass)
+	% compiler bypass (call of external code)
 	(	atom(Closure) ->
 		Goal =.. [Closure| ExtraArgs],
 		call(Goal)
@@ -4122,7 +4122,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_metacall'(::Closure, ExtraArgs, _, _, _, This, _) :-
 	% ::/1 closures are not supported as the value of "self" would be lost
 	% during the roundtrip to an object defining a meta-predicate when the
-	% meta-call should take place on the "sender"
+	% meta-call should take place in the context of the "sender"
 	Call =.. [call, ::Closure| ExtraArgs],
 	throw(error(domain_error(closure, ::Closure), logtalk(Call, This))).
 
