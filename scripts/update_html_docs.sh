@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Logtalk script for updating the HTML library and tools documentation
-##   Last updated on July 4, 2014
+##   Last updated on July 10, 2014
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -48,19 +48,19 @@ logtalk="swilgt$extension -g"
 
 
 # documentation goals
-core_goal="logtalk_load(lgtdoc(loader)),lgtdoc::library(core,[xmldir('../docs/tmp_core')]),halt."
-library_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(library(all_loader)),lgtdoc::rlibrary(library,[xmldir('../docs/tmp_library')]),halt."
-assertions_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(assertions(loader)),lgtdoc::library(assertions,[xmldir('../docs/tmp_assertions')]),halt."
-debugger_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(debugger(loader)),lgtdoc::library(debugger,[xmldir('../docs/tmp_debugger')]),halt."
-diagrams_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(diagrams(loader)),lgtdoc::library(diagrams,[xmldir('../docs/tmp_diagrams')]),halt."
-help_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(help(loader)),lgtdoc::library(help,[xmldir('../docs/tmp_help')]),halt."
-lgtdoc_goal="set_logtalk_flag(source_data,on),logtalk_load(lgtdoc(loader)),lgtdoc::library(lgtdoc,[xmldir('../docs/tmp_lgtdoc')]),halt."
-lgtunit_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(lgtunit(loader)),lgtdoc::library(lgtunit,[xmldir('../docs/tmp_lgtunit')]),halt."
-profiler_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(profiler(loader)),lgtdoc::library(profiler,[xmldir('../docs/tmp_profiler')]),halt."
+core_goal="logtalk_load(lgtdoc(loader)),lgtdoc::library(core,[xmldir('$LOGTALKUSER/docs/tmp_core')]),halt."
+library_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(library(all_loader)),lgtdoc::rlibrary(library,[xmldir('$LOGTALKUSER/docs/tmp_library')]),halt."
+assertions_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(assertions(loader)),lgtdoc::library(assertions,[xmldir('$LOGTALKUSER/docs/tmp_assertions')]),halt."
+debugger_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(debugger(loader)),lgtdoc::library(debugger,[xmldir('$LOGTALKUSER/docs/tmp_debugger')]),halt."
+diagrams_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(diagrams(loader)),lgtdoc::library(diagrams,[xmldir('$LOGTALKUSER/docs/tmp_diagrams')]),halt."
+help_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(help(loader)),lgtdoc::library(help,[xmldir('$LOGTALKUSER/docs/tmp_help')]),halt."
+lgtdoc_goal="set_logtalk_flag(source_data,on),logtalk_load(lgtdoc(loader)),lgtdoc::library(lgtdoc,[xmldir('$LOGTALKUSER/docs/tmp_lgtdoc')]),halt."
+lgtunit_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(lgtunit(loader)),lgtdoc::library(lgtunit,[xmldir('$LOGTALKUSER/docs/tmp_lgtunit')]),halt."
+profiler_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(profiler(loader)),lgtdoc::library(profiler,[xmldir('$LOGTALKUSER/docs/tmp_profiler')]),halt."
 
 
 print_version() {
-	echo "`basename $0` 0.1"
+	echo "`basename $0` 0.2"
 	exit 0
 }
 
@@ -150,7 +150,7 @@ $logtalk $lgtdoc_goal
 $logtalk $lgtunit_goal
 $logtalk $profiler_goal
 
-cd ../docs/tmp_core && lgt2html -i core.html -t "Core entities documentation index" && mv *.html ..
+cd $LOGTALKUSER/docs/tmp_core && lgt2html -i core.html -t "Core entities documentation index" && mv *.html ..
 cd ../tmp_library && lgt2html -i library.html -t "Library documentation index" && mv *.html ..
 cd ../tmp_assertions && lgt2html -i assertions_tool.html -t "Assertions tool" && mv *.html ..
 cd ../tmp_debugger && lgt2html -i debugger_tool.html -t "Debugger tool" && mv *.html ..
