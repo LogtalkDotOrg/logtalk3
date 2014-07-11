@@ -8,7 +8,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on July 1, 2014
+%  Last updated on July 10, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -114,9 +114,10 @@ user:prolog_predicate_name(user:'$lgt_send_to_self'(_, _, _), '::/1') :- !.
 user:prolog_predicate_name(user:'$lgt_obj_super_call'(_, _, _), '^^/2 (from obj; same pred)') :- !.
 user:prolog_predicate_name(user:'$lgt_ctg_super_call'(_, _, _), '^^/2 (from ctg; same pred)') :- !.
 
-user:prolog_predicate_name(user:'$lgt_metacall'(_, _, _, _, _, _, _), 'call/N') :- !.
-user:prolog_predicate_name(user:'$lgt_metacall'(_, _, _, _, _, _), 'call/1') :- !.
-user:prolog_predicate_name(user:'$lgt_metacall_local'(_, _, _, _, _), 'call/1') :- !.
+user:prolog_predicate_name(user:'$lgt_metacall'(_, _, _, _), 'call/N') :- !.
+user:prolog_predicate_name(user:'$lgt_metacall'(_, _, _), 'call/1') :- !.
+user:prolog_predicate_name(user:'$lgt_quantified_metacall'(_, _, _, _), 'call/1') :- !.
+user:prolog_predicate_name(user:'$lgt_metacall_local'(_, _, _), 'call/1') :- !.
 user:prolog_predicate_name(user:'$lgt_metacall_sender'(_, _, _, _), 'call/1') :- !.
 
 user:prolog_predicate_name(user:'$lgt_bagof'(_, _, _, _, _), 'bagof/3') :- !.
@@ -354,15 +355,16 @@ user:portray(c(This, Rest)) :-
 	'$lgt_swi_unify_clause_body'(Goal, Entity, TGoal, TermPos0, TermPos1),
 	'$lgt_swi_unify_clause_body'(Recover, Entity, TRecover, TermPos1, TermPos).
 
-'$lgt_swi_unify_clause_body'(CallN, _, '$lgt_metacall'(Closure, ExtraArgs, _, _, _, _, _), TermPos, TermPos) :- !,
+'$lgt_swi_unify_clause_body'(CallN, _, '$lgt_metacall'(Closure, ExtraArgs, _, _), TermPos, TermPos) :- !,
 	functor(CallN, call, Arity),
 	!,
 	length(ExtraArgs, N),
 	Arity is N + 1,
 	catch(arg(1, CallN, Closure), Error, (writeln('ERROR 2'-Error), throw(Error))),
 	'$lgt_swi_call_n_args'(ExtraArgs, 2, CallN).
-'$lgt_swi_unify_clause_body'(Goal, _, '$lgt_metacall'(Goal, _, _, _, _, _), TermPos, TermPos) :- !.
-'$lgt_swi_unify_clause_body'(Goal, _, '$lgt_metacall_local'(Goal, _, _, _, _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(Goal, _, '$lgt_metacall'(Goal, _, _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(Goal, _, '$lgt_quantified_metacall'(Goal, _, _, _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(Goal, _, '$lgt_metacall_local'(Goal, _, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(Goal, _, '$lgt_metacall_sender'(Goal, _, _, _), TermPos, TermPos) :- !.
 
 '$lgt_swi_unify_clause_body'(bagof(Term, QGoal, List), _, '$lgt_bagof'(Term, QGoal, List, _, _), TermPos, TermPos) :- !.
@@ -588,9 +590,10 @@ user:portray(c(This, Rest)) :-
 :- '$set_predicate_attribute'('$lgt_ctg_super_call_'/3, trace, 1).
 :- '$set_predicate_attribute'('$lgt_call_in_this'/2, trace, 1).
 
-:- '$set_predicate_attribute'('$lgt_metacall'/6, trace, 1).
-:- '$set_predicate_attribute'('$lgt_metacall'/7, trace, 1).
-:- '$set_predicate_attribute'('$lgt_metacall_local'/5, trace, 1).
+:- '$set_predicate_attribute'('$lgt_metacall'/3, trace, 1).
+:- '$set_predicate_attribute'('$lgt_metacall'/4, trace, 1).
+:- '$set_predicate_attribute'('$lgt_quantified_metacall'/4, trace, 1).
+:- '$set_predicate_attribute'('$lgt_metacall_local'/3, trace, 1).
 :- '$set_predicate_attribute'('$lgt_metacall_sender'/4, trace, 1).
 
 :- '$set_predicate_attribute'('$lgt_expand_term'/5, trace, 1).
@@ -716,9 +719,9 @@ user:portray(c(This, Rest)) :-
 :- meta_predicate user:'$lgt_call_within_context_nv'(*,*,*).
 :- meta_predicate user:'$lgt_call_within_context'(*,*,*).
 
-:- meta_predicate user:'$lgt_metacall'(*,*,*,*,*,*).
-:- meta_predicate user:'$lgt_quantified_metacall'(*,*,*,*,*,*,*).
+:- meta_predicate user:'$lgt_metacall'(*,*,*,*).
+:- meta_predicate user:'$lgt_quantified_metacall'(*,*,*,*).
 :- meta_predicate user:'$lgt_metacall_sender'(*,*,*,*).
-:- meta_predicate user:'$lgt_metacall_local'(*,*,*,*,*).
+:- meta_predicate user:'$lgt_metacall_local'(*,*,*).
 
 :- meta_predicate user:'$user#0.forward#1'(*,*).

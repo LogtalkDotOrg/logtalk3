@@ -6,7 +6,7 @@
 %  integration code for YAP 6.3.4 and later versions to improve
 %  usability when using the YAP profilers
 %
-%  Last updated on July 1, 2014
+%  Last updated on July 10, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -27,10 +27,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
-:- op(600, xfy, ::).	% message-sending operator
-
-
 :- multifile(user:prolog_predicate_name/2).
 
 user:prolog_predicate_name(user:'$lgt_send_to_obj_'(_, _, _), '::/2 (event-aware)') :- !.
@@ -47,10 +43,11 @@ user:prolog_predicate_name(user:'$lgt_send_to_self'(_, _, _), '::/1') :- !.
 user:prolog_predicate_name(user:'$lgt_obj_super_call'(_, _, _), '^^/2 (from obj; same pred)') :- !.
 user:prolog_predicate_name(user:'$lgt_ctg_super_call'(_, _, _), '^^/2 (from ctg; same pred)') :- !.
 
-user:prolog_predicate_name(user:'$lgt_metacall'(_, _, _, _, _, _, _), 'call/N') :- !.
-user:prolog_predicate_name(user:'$lgt_metacall'(_, _, _, _, _, _), 'call/1') :- !.
-user:prolog_predicate_name(user:'$lgt_metacall_local'(_, _, _, _, _), 'call/1') :- !.
-user:prolog_predicate_name(user:'$lgt_metacall_sender'(_, _, _), 'call/1') :- !.
+user:prolog_predicate_name(user:'$lgt_metacall'(_, _, _, _), 'call/N') :- !.
+user:prolog_predicate_name(user:'$lgt_metacall'(_, _, _), 'call/1') :- !.
+user:prolog_predicate_name(user:'$lgt_quantified_metacall'(_, _, _, _), 'call/1') :- !.
+user:prolog_predicate_name(user:'$lgt_metacall_local'(_, _, _), 'call/1') :- !.
+user:prolog_predicate_name(user:'$lgt_metacall_sender'(_, _, _, _), 'call/1') :- !.
 
 user:prolog_predicate_name(user:'$lgt_bagof'(_, _, _, _, _), 'bagof/3') :- !.
 user:prolog_predicate_name(user:'$lgt_setof'(_, _, _, _, _), 'setof/3') :- !.
@@ -119,7 +116,7 @@ user:prolog_predicate_name(user:'$lgt_threaded_notify_ctg'(_, _), 'threaded_noti
 user:prolog_predicate_name(user:'$lgt_threaded_notify'(_, _), 'threaded_notify/1') :- !.
 
 user:prolog_predicate_name(Goal, Label) :-
-	Goal \= _::_,
+	Goal \= '::'(_, _),
 	(	Goal = Module:THead ->
 		Module == user
 	;	Goal = THead
