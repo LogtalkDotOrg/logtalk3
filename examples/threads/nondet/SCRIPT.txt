@@ -31,7 +31,7 @@ X = 3 ;
 no
 
 
-% make a threaded call by commiting to the first solution found:
+% make a threaded call by committing to the first solution found:
 
 | ?- threaded_once(lists::member(X, [1,2,3])).
 

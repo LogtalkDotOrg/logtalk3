@@ -33,7 +33,7 @@ Initial = (north,north,north,north) ?
 yes
 
 
-% missionaires and cannibals problem, solved using a hill-climbing strategy
+% missionaries and cannibals problem, solved using a hill-climbing strategy
 
 | ?- miss_cann::initial_state(Initial), hill_climbing(16)::solve(miss_cann, Initial, Path, Cost), miss_cann::print_path(Path).
 

@@ -14,7 +14,7 @@ ________________________________________________________________________
 ...
 
 
-% integrate the function "quiver" using the recursive adaptive trapezio method with 4 threads
+% integrate the function "quiver" using the recursive adaptive trapezium method with 4 threads
 
 ?- quadrec(4)::integrate(quiver, 0.001, 0.999, 0, 1.0e-10, Integral).
 Integral = 6.66134e-16.

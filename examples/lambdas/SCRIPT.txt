@@ -239,7 +239,7 @@ _B in inf..sup ?
 yes
 
 
-% examples on symplifying setof/3 and similar predicates usage:
+% examples on simplifying setof/3 and similar predicates usage:
 
 | ?- countries::currencies_wrong(Currencies).
 Currencies = [pound_sterling] ;

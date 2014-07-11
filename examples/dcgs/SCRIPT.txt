@@ -47,7 +47,7 @@ Message = [i, would, love, to, have, dinner, with, you, tonight]
 yes
 
 
-% recognizing gramatically correct sentences:
+% recognizing grammatically correct sentences:
 
 | ?- sentence::parse([the, girl, likes, the, boy], Result).
 
@@ -90,7 +90,7 @@ L = [pwd,'cd ..','ls -a'] ?
 yes
 
 
-% convert a string to a list of tokens (words, numbers, ponctuation):
+% convert a string to a list of tokens (words, numbers, punctuation):
 
 | ?- tokenizer::tokens(" We owe $1,048,576.24 to Agent 007 for Version 3.14159! ", Tokens).
 
