@@ -17893,11 +17893,11 @@ current_logtalk_flag(Flag, Value) :-
 	% the execution argument and the appending of arguments to a closure to form a goal
 	'$lgt_compile_body'(Goal, TGoal, _, Ctx),
 	% the clash doesn't exist, however, when the closure corresponds to a predicate
-	% defined in the "user" built-in object or a backend Prolog built-in predicate
+	% defined in the "user" pseudo built-in object or a built-in predicate
 	(	'$lgt_comp_ctx_this'(Ctx, Sender),
 		Sender == user ->
 		true
-	;	'$lgt_prolog_built_in_predicate'(TGoal)
+	;	'$lgt_built_in_predicate'(TGoal)
 	).
 
 '$lgt_compile_static_binding_meta_argument'((*), Arg, _, Arg).
