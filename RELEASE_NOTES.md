@@ -28,6 +28,12 @@ RELEASE NOTES
 3.00.0 Beta 9 - July ??, 2014
 =============================
 
+Logtalk compiler and runtime
+----------------------------
+
+* IMPROVED: Optimize the performance of closures corresponding to backend
+Prolog built-in predicates.
+
 Prolog adapter and integration files
 ------------------------------------
 

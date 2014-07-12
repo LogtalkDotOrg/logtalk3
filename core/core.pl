@@ -17878,28 +17878,33 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_compile_static_binding_meta_arguments'(Args, MArgs, Ctx, TArgs).
 
 
-'$lgt_compile_static_binding_meta_argument'(N, Arg, Ctx, {Arg}) :-
+'$lgt_compile_static_binding_meta_argument'(N, Closure, Ctx, {Closure}) :-
 	% the {}/1 construct signals a pre-compiled metacall
 	integer(N), N > 0,
 	% closure
 	!,
-	callable(Arg),
-	\+ functor(Arg, '{}', 1),
+	callable(Closure),
+	\+ functor(Closure, '{}', 1),
 	% not using the {}/1 control construct already
 	'$lgt_length'(ExtArgs, 0, N),
-	'$lgt_extend_closure'(Arg, ExtArgs, ExtArg),
+	'$lgt_extend_closure'(Closure, ExtArgs, Goal),
 	% compiling the meta-argument allows predicate cross-referencing information to be
 	% collected despite the compilation result not being used due to the clash between
 	% the execution argument and the appending of arguments to a closure to form a goal
-	'$lgt_compile_body'(ExtArg, _, _, Ctx),
-	% the clash doesn't exist, however, when the closure corresponds to a "user" predicate
-	'$lgt_comp_ctx_this'(Ctx, Sender), Sender == user.
+	'$lgt_compile_body'(Goal, TGoal, _, Ctx),
+	% the clash doesn't exist, however, when the closure corresponds to a predicate
+	% defined in the "user" built-in object or a backend Prolog built-in predicate
+	(	'$lgt_comp_ctx_this'(Ctx, Sender),
+		Sender == user ->
+		true
+	;	'$lgt_prolog_built_in_predicate'(TGoal)
+	).
 
 '$lgt_compile_static_binding_meta_argument'((*), Arg, _, Arg).
 
-'$lgt_compile_static_binding_meta_argument'(0, Arg, Ctx, {TArg}) :-
+'$lgt_compile_static_binding_meta_argument'(0, Goal, Ctx, {TGoal}) :-
 	% the {}/1 construct signals a pre-compiled metacall
-	'$lgt_compile_body'(Arg, TArg, _, Ctx).
+	'$lgt_compile_body'(Goal, TGoal, _, Ctx).
 
 
 
