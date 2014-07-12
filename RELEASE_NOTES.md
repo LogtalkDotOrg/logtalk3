@@ -31,8 +31,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* IMPROVED: Optimize the performance of closures corresponding to a built-in
-predicate.
+* IMPROVED: Optimize the performance of closures corresponding to built-in
+predicates and user-defined entity predicates whose calls can be resolved at
+compile time.
 
 Prolog adapter and integration files
 ------------------------------------

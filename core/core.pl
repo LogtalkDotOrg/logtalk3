@@ -4110,6 +4110,12 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_execution_context_this'(ExCtx, This),
 	throw(error(domain_error(closure, ::Closure), logtalk(Call, This))).
 
+'$lgt_metacall'('$lgt_closure'(TFunctor, TArgs, ExCtx), ExtraArgs, _, _) :-
+	!,
+	'$lgt_append'(TArgs, ExtraArgs, FullArgs),
+	TGoal =.. [TFunctor| FullArgs],
+	call(TGoal, ExCtx).
+
 '$lgt_metacall'({Closure}, ExtraArgs, _, ExCtx) :-
 	!,
 	% compiler bypass (call of external code)
@@ -17878,8 +17884,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_compile_static_binding_meta_arguments'(Args, MArgs, Ctx, TArgs).
 
 
-'$lgt_compile_static_binding_meta_argument'(N, Closure, Ctx, {Closure}) :-
-	% the {}/1 construct signals a pre-compiled metacall
+'$lgt_compile_static_binding_meta_argument'(N, Closure, Ctx, TClosure) :-
 	integer(N), N > 0,
 	% closure
 	!,
@@ -17889,15 +17894,19 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_length'(ExtArgs, 0, N),
 	'$lgt_extend_closure'(Closure, ExtArgs, Goal),
 	% compiling the meta-argument allows predicate cross-referencing information to be
-	% collected despite the compilation result not being used due to the clash between
-	% the execution argument and the appending of arguments to a closure to form a goal
+	% collected even if the compilation result cannot be used
 	'$lgt_compile_body'(Goal, TGoal, _, Ctx),
-	% the clash doesn't exist, however, when the closure corresponds to a predicate
-	% defined in the "user" pseudo built-in object or a built-in predicate
 	(	'$lgt_comp_ctx_this'(Ctx, Sender),
 		Sender == user ->
-		true
-	;	'$lgt_built_in_predicate'(TGoal)
+		TClosure = {Closure}
+	;	'$lgt_built_in_predicate'(TGoal) ->
+		TClosure = {Closure}
+	;	functor(TGoal, TFunctor, _),
+		\+ sub_atom(TFunctor, 0, 5, _, '$lgt_') ->
+		'$lgt_goal_to_closure'(N, TGoal, TFunctor, TArgs, ExCtx),
+		TClosure = '$lgt_closure'(TFunctor, TArgs, ExCtx)
+	;	% runtime resolved meta-call
+		fail
 	).
 
 '$lgt_compile_static_binding_meta_argument'((*), Arg, _, Arg).
@@ -17905,6 +17914,16 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_static_binding_meta_argument'(0, Goal, Ctx, {TGoal}) :-
 	% the {}/1 construct signals a pre-compiled metacall
 	'$lgt_compile_body'(Goal, TGoal, _, Ctx).
+
+
+'$lgt_goal_to_closure'(N, TGoal, TFunctor, TArgs, ExCtx) :-
+	functor(TGoal, TFunctor, TArity),
+	TGoal =.. [TFunctor| TAllArgs],
+	Arity is TArity - N - 1,
+	'$lgt_length'(TArgs, 0, Arity),
+	'$lgt_append'(TArgs, _, TAllArgs),
+	arg(TArity, TGoal, ExCtx),
+	!.
 
 
 
