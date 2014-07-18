@@ -33,7 +33,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/07/10,
+		date is 2014/07/18,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.']).
 
 	:- built_in.
@@ -104,7 +104,7 @@
 	:- meta_predicate(ask_question(*, *, *, 1, *)).
 	:- mode(ask_question(+nonvar, +atom, +nonvar, +callable, -term), one).
 	:- info(ask_question/5, [
-		comment is 'Asks a question an reads the answer until the check predicate is true.',
+		comment is 'Asks a question and reads the answer until the check predicate is true.',
 		argnames is ['Kind', 'Component', 'Question', 'Check', 'Answer']
 	]).
 
