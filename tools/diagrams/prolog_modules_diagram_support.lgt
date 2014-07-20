@@ -2,9 +2,9 @@
 :- object(prolog_modules_diagram_support).
 
 	:- info([
-		version is 0.5,
+		version is 0.6,
 		author is 'Paulo Moura',
-		date is 2014/05/16,
+		date is 2014/07/20,
 		comment is 'Utility predicates for supporting Prolog modules in diagrams.'
 	]).
 
@@ -48,8 +48,41 @@
 
 	:- elif(current_logtalk_flag(prolog_dialect, swi)).
 
+		{:- use_module(library(prolog_xref))}.
+
 		module_property(Module, Property) :-
-			{module_property(Module, Property)}.
+			property_module(Property, Module).
+
+		property_module(exports(Exports), Module) :-
+			{module_property(Module, exports(Exports))}.
+		property_module(file(File), Module) :-
+			{module_property(Module, file(File))}.
+		property_module(file(Basename, Directory), Module) :-
+			{module_property(Module, file(File)),
+			 file_directory_name(File, Directory0),
+			 atom_concat(Directory0, '/', Directory),
+			 file_base_name(File, Basename)			
+			}.
+		property_module(calls(Callee, [caller(CallerFunctor/CallerArity)]), Module) :-
+			{module_property(Module, file(File)),
+			 xref_source(File),
+			 xref_called(File, Callee0, Caller),
+			 functor(Caller, CallerFunctor, CallerArity),
+			 (	Callee0 = Object::Callee1 ->
+			 	functor(Callee1, CalleeFunctor, CalleeArity),
+				Callee = Object::CalleeFunctor/CalleeArity
+			 ;	Callee0 = ':'(OtherModule,Callee1) ->
+			 	functor(Callee1, CalleeFunctor, CalleeArity),
+				Callee = ':'(OtherModule,CalleeFunctor/CalleeArity)
+			 ;	xref_defined(File, Callee0, imported(FromFile)) ->
+			 	once(module_property(FromModule, file(FromFile))),
+			 	functor(Callee0, CalleeFunctor, CalleeArity),
+			 	Callee = ':'(FromModule,CalleeFunctor/CalleeArity)
+			 ;	% assume local predicate
+			 	functor(Callee0, CalleeFunctor, CalleeArity),
+			 	Callee = CalleeFunctor/CalleeArity
+			 )
+			}.
 
 		loaded_file_property(File, Property) :-
 			property_source_file(Property, File),

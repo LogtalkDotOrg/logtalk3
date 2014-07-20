@@ -59,6 +59,9 @@ directive and for the `info/2` predicate directive.
 Tools
 -----
 
+* ADDED: Support to the `diagrams` tool to generate cross-reference diagrams
+for Prolog modules when using SWI-Prolog as the backend compiler.
+
 * FIXED: The `lgtdoc` tool now also prints multifile predicate properties and
 predicate coinduction templates.
 

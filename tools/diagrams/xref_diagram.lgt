@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/06/18,
+		date is 2014/07/20,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format']
 	]).
@@ -140,12 +140,25 @@
 		).
 	add_predicate_documentation_url(Options, _, Options).
 
+	calls_local_predicate(module, Entity, Caller, Callee) :-
+		!,
+		prolog_modules_diagram_support::module_property(Entity, calls(Callee, Properties)),
+		Callee \= _::_,
+		Callee \= ':'(_, _),
+		memberchk(caller(Caller), Properties).
 	calls_local_predicate(Kind, Entity, Caller, Callee) :-
 		entity_property(Kind, Entity, calls(Callee, Properties)),
 		Callee \= _::_,
 		Callee \= ':'(_, _),
 		memberchk(caller(Caller), Properties).
 
+	calls_external_predicate(module, Entity, Caller, Callee) :-
+		!,
+		prolog_modules_diagram_support::module_property(Entity, calls(Callee, Properties)),
+		(	Callee = Object::_, nonvar(Object)
+		;	Callee = ':'(Module,_), nonvar(Module)
+		),
+		memberchk(caller(Caller), Properties).
 	calls_external_predicate(Kind, Entity, Caller, Object::Callee) :-
 		entity_property(Kind, Entity, calls(Object::Callee, Properties)),
 		nonvar(Object),
