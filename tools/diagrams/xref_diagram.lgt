@@ -88,7 +88,15 @@
 			{current_module(Entity)},
 			Kind = module
 		),
-		^^ground_entity_identifier(Kind, Entity, Name).
+		(	atom(Entity) ->
+			Name = Entity
+		;	^^ground_entity_identifier(Kind, Entity, GroundEntity),
+			functor(GroundEntity, Functor, Arity),
+			number_chars(Arity, Chars),
+			atom_chars(ArityAtom, Chars),
+			atom_concat(Functor, '_', Name0),
+			atom_concat(Name0, ArityAtom, Name)
+		).
 
 	process(Kind, Entity, Options) :-
 		entity_property(Kind, Entity, defines(Caller, Properties)),

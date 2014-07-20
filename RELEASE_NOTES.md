@@ -62,6 +62,9 @@ Tools
 * ADDED: Support to the `diagrams` tool to generate cross-reference diagrams
 for Prolog modules when using SWI-Prolog as the backend compiler.
 
+* FIXED: Bug in the `diagrams` tool when generating cross-referencing diagrams
+for parametric entities.
+
 * FIXED: The `lgtdoc` tool now also prints multifile predicate properties and
 predicate coinduction templates.
 
