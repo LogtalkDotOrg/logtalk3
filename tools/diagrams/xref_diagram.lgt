@@ -53,7 +53,7 @@
 	:- dynamic(external_predicate_/1).
 
 	entity(Entity, UserOptions) :-
-		entity_kind(Entity, Kind, Name),
+		entity_kind(Entity, Kind, GroundEntity, Name),
 		atom_concat(Name, '_', Identifier0),
 		atom_concat(Identifier0, Kind, Identifier),
 		^^format_object(Format),
@@ -65,18 +65,18 @@
 		entity_property(Kind, Entity, file(Basename, Directory)),
 		atom_concat(Directory, Basename, Path),
 		^^add_link_options(Path, Options, GraphOptions),
-		Format::graph_header(output_file, Identifier, Name, entity, GraphOptions),
+		Format::graph_header(output_file, Identifier, GroundEntity, entity, GraphOptions),
 		process(Kind, Entity, Options),
 		output_external_predicates(Options),
 		^^output_edges(Options),
-		Format::graph_footer(output_file, Identifier, Name, entity, GraphOptions),
+		Format::graph_footer(output_file, Identifier, GroundEntity, entity, GraphOptions),
 		Format::file_footer(output_file, Identifier, Options),
 		close(Stream).
 
 	entity(Entity) :-
 		entity(Entity, []).
 
-	entity_kind(Entity, Kind, Name) :-
+	entity_kind(Entity, Kind, GroundEntity, Name) :-
 		(	current_object(Entity) ->
 			Kind = object
 		;	current_category(Entity) ->
