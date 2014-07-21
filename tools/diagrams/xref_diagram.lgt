@@ -89,6 +89,7 @@
 			Kind = module
 		),
 		(	atom(Entity) ->
+			GroundEntity = Entity,
 			Name = Entity
 		;	^^ground_entity_identifier(Kind, Entity, GroundEntity),
 			functor(GroundEntity, Functor, Arity),
