@@ -62,6 +62,9 @@ Tools
 * ADDED: Support to the `diagrams` tool to generate cross-reference diagrams
 for Prolog modules when using SWI-Prolog as the backend compiler.
 
+* ADDED: Support to the `diagrams` tool to specify backend Prolog compiler
+specific file name extensions for Prolog source files.
+
 * FIXED: Bug in the `diagrams` tool when generating cross-referencing diagrams
 for parametric entities.
 

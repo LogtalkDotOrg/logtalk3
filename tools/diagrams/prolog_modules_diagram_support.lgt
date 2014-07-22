@@ -2,9 +2,9 @@
 :- object(prolog_modules_diagram_support).
 
 	:- info([
-		version is 0.6,
+		version is 0.7,
 		author is 'Paulo Moura',
-		date is 2014/07/20,
+		date is 2014/07/22,
 		comment is 'Utility predicates for supporting Prolog modules in diagrams.'
 	]).
 
@@ -20,6 +20,13 @@
 	:- info(loaded_file_property/2, [
 		comment is 'Access to loaded source file properties, at least basename/1, directory/1, and parent/1.',
 		argnames is ['File', 'Property']
+	]).
+
+	:- public(source_file_extension/1).
+	:- mode(source_file_extension(?atom), one_or_more).
+	:- info(source_file_extension/1, [
+		comment is 'Valid source file extension for Prolog source files',
+		argnames is ['Extension']
 	]).
 
 	:- if(current_logtalk_flag(prolog_dialect, yap)).
@@ -45,6 +52,10 @@
 		property_source_file(basename(Basename), File) :-
 			{source_file(File),
 			 file_base_name(File, Basename)}.
+
+		source_file_extension('.pl').
+		source_file_extension('.prolog').
+		source_file_extension('.yap').
 
 	:- elif(current_logtalk_flag(prolog_dialect, swi)).
 
@@ -100,6 +111,9 @@
 			{source_file(File),
 			 file_base_name(File, Basename)}.
 
+		source_file_extension('.pl').
+		source_file_extension('.prolog').
+
 	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
 
 		module_property(Module, Property) :-
@@ -142,6 +156,9 @@
 			 pathname(File, _, NameString, ExtensionString),
 			 concat_strings(NameString, ExtensionString, BasenameString),
 			 atom_string(Basename, BasenameString)}.
+
+		source_file_extension('.pl').
+		source_file_extension('.prolog').
 
 	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
 
@@ -209,6 +226,9 @@
 				strrch1(Xs1, G, Xs, Ys)
 			;	strrch1(Xs1, G, Prev, Ys)
 			).
+
+		source_file_extension('.pl').
+		source_file_extension('.prolog').
 
 	:- endif.
 

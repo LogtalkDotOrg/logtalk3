@@ -27,7 +27,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/05/16,
+		date is 2014/07/23,
 		comment is 'Common predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
@@ -581,29 +581,34 @@
 
 	add_extension(logtalk, Source, SourceWithExtension, Extension) :-
 		atom(Source),
-		\+ sub_atom(Source, _, _, 0, '.pl'),
-		\+ sub_atom(Source, _, _, 0, '.prolog'),
-		(	Extension = '.lgt'
-		;	Extension = '.logtalk'
+		\+ (
+			prolog_modules_diagram_support::source_file_extension(PrologExtension),
+			sub_atom(Source, _, _, 0, PrologExtension)
 		),
-		(	sub_atom(Source, _, _, 0, Extension) ->
+		(	source_file_extension(Extension),
+			sub_atom(Source, _, _, 0, Extension) ->
 			SourceWithExtension = Source
-		;	atom_concat(Source, Extension, SourceWithExtension)
-		),
-		!.
+		;	% no recognized extension in use
+			source_file_extension(Extension),
+			atom_concat(Source, Extension, SourceWithExtension)
+		).
 
 	add_extension(prolog, Source, SourceWithExtension, Extension) :-
 		atom(Source),
-		\+ sub_atom(Source, _, _, 0, '.lgt'),
-		\+ sub_atom(Source, _, _, 0, '.logtalk'),
-		(	Extension = '.pl'
-		;	Extension = '.prolog'
+		\+ (
+			source_file_extension(Extension),
+			sub_atom(Source, _, _, 0, Extension)
 		),
-		(	sub_atom(Source, _, _, 0, Extension) ->
+		(	prolog_modules_diagram_support::source_file_extension(Extension),
+			sub_atom(Source, _, _, 0, Extension) ->
 			SourceWithExtension = Source
-		;	atom_concat(Source, Extension, SourceWithExtension)
-		),
-		!.
+		;	% no recognized extension in use
+			prolog_modules_diagram_support::source_file_extension(Extension),
+			atom_concat(Source, Extension, SourceWithExtension)
+		).
+
+	source_file_extension('.lgt').
+	source_file_extension('.logtalk').
 
 	:- protected(ground_entity_identifier/3).
 	:- mode(ground_entity_identifier(+atom, +callable, -callable), one).
