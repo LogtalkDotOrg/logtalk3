@@ -296,9 +296,8 @@
 		nonvar(Module),
 		\+ referenced_module_(Module),
 		^^ground_entity_identifier(protocol, Protocol, ProtocolName),
-		^^ground_entity_identifier(module, Module, ModuleName),
-		\+ ^^edge(ProtocolName, ModuleName, [use_module], calls_predicate, _),
-		^^save_edge(ProtocolName, ModuleName, [use_module], calls_predicate, [tooltip(use_module)| Options]),
+		\+ ^^edge(ProtocolName, Module, [use_module], calls_predicate, _),
+		^^save_edge(ProtocolName, Module, [use_module], calls_predicate, [tooltip(use_module)| Options]),
 		remember_referenced_module(Module),
 		fail.
 	output_protocol_xref_relations(_, _).
@@ -321,8 +320,7 @@
 			Predicates
 		),
 		^^ground_entity_identifier(protocol, Protocol, ProtocolName),
-		^^ground_entity_identifier(module, Module, ModuleName),
-		^^save_edge(ProtocolName, ModuleName, Predicates, calls_predicate, [tooltip(calls)| Options]),
+		^^save_edge(ProtocolName, Module, Predicates, calls_predicate, [tooltip(calls)| Options]),
 		remember_referenced_module(Module),
 		fail.
 	output_protocol_xref_calls(_, _).
@@ -418,9 +416,8 @@
 		nonvar(Module),
 		\+ referenced_module_(Module),
 		^^ground_entity_identifier(object, Object, ObjectName),
-		^^ground_entity_identifier(module, Module, ModuleName),
-		\+ ^^edge(ObjectName, ModuleName, [use_module], calls_predicate, _),
-		^^save_edge(ObjectName, ModuleName, [use_module], calls_predicate, [tooltip(use_module)| Options]),
+		\+ ^^edge(ObjectName, Module, [use_module], calls_predicate, _),
+		^^save_edge(ObjectName, Module, [use_module], calls_predicate, [tooltip(use_module)| Options]),
 		remember_referenced_module(Module),
 		fail.
 	output_object_xref_relations(_, _).
@@ -443,8 +440,7 @@
 			Predicates
 		),
 		^^ground_entity_identifier(object, Object, ObjectName),
-		^^ground_entity_identifier(module, Module, ModuleName),
-		^^save_edge(ObjectName, ModuleName, Predicates, calls_predicate, [tooltip(calls)| Options]),
+		^^save_edge(ObjectName, Module, Predicates, calls_predicate, [tooltip(calls)| Options]),
 		remember_referenced_module(Module),
 		fail.
 	output_object_xref_calls(_, _).
@@ -524,9 +520,8 @@
 		nonvar(Module),
 		\+ referenced_module_(Module),
 		^^ground_entity_identifier(category, Category, CategoryName),
-		^^ground_entity_identifier(module, Module, ModuleName),
-		\+ ^^edge(CategoryName, ModuleName, [use_module], calls_predicate, _),
-		^^save_edge(CategoryName, ModuleName, [use_module], calls_predicate, [tooltip(use_module)| Options]),
+		\+ ^^edge(CategoryName, Module, [use_module], calls_predicate, _),
+		^^save_edge(CategoryName, Module, [use_module], calls_predicate, [tooltip(use_module)| Options]),
 		remember_referenced_module(Module),
 		fail.
 	output_category_xref_relations(_, _).
@@ -549,8 +544,7 @@
 			Predicates
 		),
 		^^ground_entity_identifier(category, Category, CategoryName),
-		^^ground_entity_identifier(module, Module, ModuleName),
-		^^save_edge(CategoryName, ModuleName, Predicates, calls_predicate, [tooltip(calls)| Options]),
+		^^save_edge(CategoryName, Module, Predicates, calls_predicate, [tooltip(calls)| Options]),
 		remember_referenced_module(Module),
 		fail.
 	output_category_xref_calls(_, _).
