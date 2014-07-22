@@ -60,7 +60,7 @@ Tools
 -----
 
 * ADDED: Support to the `diagrams` tool to generate cross-reference diagrams
-for Prolog modules when using SWI-Prolog as the backend compiler.
+for Prolog modules when using SWI-Prolog or YAP as the backend compilers.
 
 * ADDED: Support to the `diagrams` tool to specify backend Prolog compiler
 specific file name extensions for Prolog source files.

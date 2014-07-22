@@ -120,6 +120,7 @@
 	output_externals(_Options) :-
 		retract(included_entity_(Entity)),
 		retractall(referenced_entity_(Entity)),
+		retractall(referenced_module_(Entity)),
 		fail.
 	output_externals(Options) :-
 		^^format_object(Format),
@@ -143,8 +144,7 @@
 		fail.
 	output_externals(Options) :-
 		retract(referenced_module_(Module)),
-		^^ground_entity_identifier(module, Module, Name),
-		^^output_node(Name, Name, [], external_module, [tooltip(module)| Options]),
+		^^output_node(Module, Module, [], external_module, [tooltip(module)| Options]),
 		fail.
 	output_externals(Options) :-
 		^^format_object(Format),
@@ -252,12 +252,12 @@
 		output_category_relations(Category, Options).
 
 	output_module(Module, Options) :-
-		^^ground_entity_identifier(module, Module, Name),
 		(	member(interface(true), Options) ->
 			prolog_modules_diagram_support::module_property(Module, exports(Resources))
 		;	Resources = []
 		),
-		^^output_node(Name, Name, Resources, module, [tooltip(module)| Options]).
+		^^output_node(Module, Module, Resources, module, [tooltip(module)| Options]),
+		output_module_relations(Module, Options).
 
 	output_protocol_relations(Protocol, Options) :-
 		(	member(inheritance_relations(true), Options) ->
@@ -554,6 +554,87 @@
 		remember_referenced_module(Module),
 		fail.
 	output_category_xref_calls(_, _).
+
+	output_module_relations(Module, Options) :-
+%		(	member(inheritance_relations(true), Options) ->
+%			output_module_inheritance_relations(Module, Options)
+%		;	true
+%		),
+%		(	member(provide_relations(true), Options) ->
+%			output_module_provide_relations(Module, Options)
+%		;	true
+%		),
+		(	member(xref_relations(true), Options) ->
+			output_module_xref_relations(Module, Options)
+		;	member(xref_calls(true), Options) ->
+			output_module_xref_calls(Module, Options)
+		;	true
+		).
+
+%	output_module_inheritance_relations(Module, Options) :-
+%		extends_category(Module, ExtendedModule, Scope),
+%		scope_relation_label(Scope, extends, Label),
+%		^^save_edge(ModuleName, ExtendedModuleName, [Label], extends_category, [tooltip(Label)| Options]),
+%		remember_referenced_entity(ExtendedModule),
+%		fail.
+%	output_module_inheritance_relations(Module, Options) :-
+%		implements_protocol(Module, Protocol, Scope),
+%		scope_relation_label(Scope, implements, Label),
+%		^^save_edge(ModuleName, ProtocolName, [Label], implements_protocol, [tooltip(Label)| Options]),
+%		remember_referenced_entity(Protocol),
+%		fail.
+	output_module_inheritance_relations(_, _).
+
+%	output_module_provide_relations(Module, Options) :-
+%		setof(
+%			Predicate,
+%			Properties^prolog_modules_diagram_support::module_property(Module, provides(Predicate, To, Properties)),
+%			_
+%		),
+%		^^save_edge(Module, To, [provides], provides_clauses, [tooltip(provides)| Options]),
+%		remember_referenced_entity(To),
+%		fail.
+	output_module_provide_relations(_, _).
+
+	output_module_xref_relations(Module, Options) :-
+		prolog_modules_diagram_support::module_property(Module, calls(Object::_, _)),
+		nonvar(Object),
+		\+ referenced_entity_(Object),
+		^^ground_entity_identifier(object, Object, ObjectName),
+		\+ ^^edge(Module, ObjectName, [uses], calls_predicate, _),
+		^^save_edge(Module, ObjectName, [uses], calls_predicate, [tooltip(uses)| Options]),
+		remember_referenced_entity(Object),
+		fail.
+	output_module_xref_relations(Module, Options) :-
+		prolog_modules_diagram_support::module_property(Module, calls(':'(FromModule,_), _)),
+		nonvar(Module),
+		\+ referenced_module_(FromModule),
+		\+ ^^edge(ModuleName, FromModule, [use_module], calls_predicate, _),
+		^^save_edge(ModuleName, FromModule, [use_module], calls_predicate, [tooltip(use_module)| Options]),
+		remember_referenced_module(FromModule),
+		fail.
+	output_module_xref_relations(_, _).
+
+	output_module_xref_calls(Module, Options) :-
+		setof(
+			Predicate,
+			Properties^(prolog_modules_diagram_support::module_property(Module, calls(Object::Predicate, Properties)), nonvar(Object)),
+			Predicates
+		),
+		^^ground_entity_identifier(object, Object, ObjectName),
+		^^save_edge(Module, ObjectName, Predicates, calls_predicate, [tooltip(calls)| Options]),
+		remember_referenced_entity(Object),
+		fail.
+	output_module_xref_calls(Module, Options) :-
+		setof(
+			Predicate,
+			Properties^(prolog_modules_diagram_support::module_property(Module, calls(':'(FromModule,Predicate), Properties)), nonvar(Module)),
+			Predicates
+		),
+		^^save_edge(Module, FromModule, Predicates, calls_predicate, [tooltip(calls)| Options]),
+		remember_referenced_module(Module),
+		fail.
+	output_module_xref_calls(_, _).
 
 	scope_relation_label(public, Relation, Relation).
 	scope_relation_label(protected, Relation, Label) :-
