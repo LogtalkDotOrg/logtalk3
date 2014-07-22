@@ -35,6 +35,9 @@ Logtalk compiler and runtime
 predicates and user-defined entity predicates whose calls can be resolved at
 compile time.
 
+* IMPROVED: Always reload a file when the previous loading attempt failed due
+to some compilation error.
+
 Prolog adapter and integration files
 ------------------------------------
 

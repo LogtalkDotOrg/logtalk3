@@ -149,6 +149,9 @@
 % '$lgt_loaded_file_'(Basename, Directory, Mode, Flags, TextProperties, PrologFile, TimeStamp)
 :- dynamic('$lgt_loaded_file_'/7).
 
+% '$lgt_failed_file_'(SourceFile)
+:- dynamic('$lgt_failed_file_'/1).
+
 % '$lgt_parent_file_'(SourceFile, ParentSourceFile)
 :- dynamic('$lgt_parent_file_'/2).
 
@@ -4717,7 +4720,8 @@ current_logtalk_flag(Flag, Value) :-
 	% a loader file loading other files in its directory using a relative path
 	'$lgt_current_directory'(Current),
 	'$lgt_change_directory'(Directory),
-	(	'$lgt_loaded_file_'(Basename, Directory, PreviousMode, PreviousFlags, _, _, LoadingTimeStamp) ->
+	(	'$lgt_loaded_file_'(Basename, Directory, PreviousMode, PreviousFlags, _, _, LoadingTimeStamp),
+		\+ '$lgt_failed_file_'(SourceFile) ->
 		% we're attempting to reload a file
 		(	'$lgt_member'(reload(Reload), PreviousFlags) ->
 			true
@@ -4742,7 +4746,10 @@ current_logtalk_flag(Flag, Value) :-
 		)
 	;	% first time loading this source file
 		'$lgt_print_message'(silent(loading), core, loading_file(SourceFile, Flags)),
+		% remember the file was loaded before it is successfully compiled and loaded
+		% so that we can use the make feature to reload it in case of error
 		'$lgt_add_loaded_file'(Directory, Basename, SourceFile, Flags, PrologFile),
+		% compile the file to disk
 		'$lgt_compile_file'(SourceFile, PrologFile, Flags, loading, Current),
 		% save the file loading dependency on a parent file if it exists
 		(	'$lgt_file_loading_stack_'(ParentSourceFile) ->
@@ -4776,6 +4783,9 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_add_loaded_file'(Directory, Basename, Path, Flags, PrologFile) :-
+	% compilation of the file may have failed in previous attempt;
+	% ensure that there aren't duplicate entries
+	retractall('$lgt_loaded_file_'(Basename, Directory, _, _, _, _, _)),
 	(	'$lgt_compiler_flag'(debug, on) ->
 		Mode = debug
 	;	'$lgt_compiler_flag'(optimize, on) ->
@@ -4993,8 +5003,9 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_file'(SourceFile, PrologFile, Flags, Action, Directory) :-
 	(	'$lgt_compile_file'(SourceFile, PrologFile, Flags, Action) ->
-		true
+		retractall('$lgt_failed_file_'(SourceFile))
 	;	'$lgt_change_directory'(Directory),
+		assertz('$lgt_failed_file_'(SourceFile)),
 		fail
 	).
 
@@ -10924,7 +10935,7 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_extend_closure_basic'(Closure, ExtArgs, Msg).
 
-'$lgt_extend_closure'(:Closure, ExtArgs, :Msg) :-
+'$lgt_extend_closure'(:Closure, ExtArgs, :Msg) :-	% deprecated control construct
 	!,
 	'$lgt_extend_closure_basic'(Closure, ExtArgs, Msg).
 
