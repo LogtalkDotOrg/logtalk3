@@ -35,8 +35,9 @@ Logtalk compiler and runtime
 predicates and user-defined entity predicates whose calls can be resolved at
 compile time.
 
-* IMPROVED: Always reload a file when the previous loading attempt failed due
-to some compilation error.
+* IMPROVED: Update the implementation of the `logtalk_load/1-2` built-in
+predicates to always reload a file when the previous loading attempt failed
+due to some compilation or loading error.
 
 Prolog adapter and integration files
 ------------------------------------

@@ -4759,18 +4759,7 @@ current_logtalk_flag(Flag, Value) :-
 			true
 		),
 		asserta('$lgt_file_loading_stack_'(SourceFile)),
-		% sometimes there are syntax errors in the generated intermediate Prolog files
-		% that are due to write_canonical/2 and read_term/3 bugs; thus we must ensure
-		% that the '$lgt_file_loading_stack_'/1 and '$lgt_parent_file_'/2 entries are
-		% deleted in case of error
-		catch(
-			'$lgt_load_compiled_file'(SourceFile, PrologFile),
-			Error,
-			(	retract('$lgt_file_loading_stack_'(SourceFile)),
-			 	retractall('$lgt_parent_file_'(SourceFile, _)),
-				throw(Error)
-			)
-		),
+		'$lgt_load_compiled_file'(SourceFile, PrologFile),
 		retract('$lgt_file_loading_stack_'(SourceFile)),
 		'$lgt_print_message'(comment(loading), core, loaded_file(SourceFile, Flags))
 	),
@@ -4804,11 +4793,25 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_load_compiled_file'(SourceFile, PrologFile) :-
+	% retrieve the backend Prolog specific file loading options
+	'$lgt_compiler_flag'(prolog_loader, Options),
+	% sometimes there are syntax errors in the generated intermediate Prolog files
+	% that are due to write_canonical/2 and read_term/3 bugs; thus we must ensure
+	% that the '$lgt_file_loading_stack_'/1 and '$lgt_parent_file_'/2 entries are
+	% deleted in case of error
+	catch(
+		'$lgt_load_compiled_file'(SourceFile, PrologFile, Options),
+		Error,
+		'$lgt_load_compiled_file_error_handler'(SourceFile, Error)
+	),
+	retractall('$lgt_failed_file_'(SourceFile)).
+
+
+'$lgt_load_compiled_file'(SourceFile, PrologFile, Options) :-
 	% loading a file can result in the redefinition of existing
 	% entities thus potentially invalidating cache entries 
 	'$lgt_clean_lookup_caches',
 	'$lgt_report_redefined_entities',
-	'$lgt_compiler_flag'(prolog_loader, Options),
 	(	'$lgt_pp_file_encoding_'(_, Encoding) ->
 		% use the same encoding as the original source file
 		'$lgt_load_prolog_code'(PrologFile, SourceFile, [encoding(Encoding)| Options])
@@ -4836,6 +4839,13 @@ current_logtalk_flag(Flag, Value) :-
 	fail.
 
 '$lgt_delete_intermediate_files'(_).
+
+
+'$lgt_load_compiled_file_error_handler'(SourceFile, Error) :-
+	retract('$lgt_file_loading_stack_'(SourceFile)),
+	retractall('$lgt_parent_file_'(SourceFile, _)),
+	assertz('$lgt_failed_file_'(SourceFile)),
+	throw(Error).
 
 
 
