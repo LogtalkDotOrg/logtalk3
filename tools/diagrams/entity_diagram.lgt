@@ -586,7 +586,7 @@
 			_
 		),
 		^^save_edge(Module, To, [provides], provides_clauses, [tooltip(provides)| Options]),
-		remember_referenced_entity(To),
+		remember_referenced_module(To),
 		fail.
 	output_module_provide_relations(_, _).
 
@@ -626,7 +626,7 @@
 			Predicates
 		),
 		^^save_edge(Module, FromModule, Predicates, calls_predicate, [tooltip(calls)| Options]),
-		remember_referenced_module(Module),
+		remember_referenced_module(FromModule),
 		fail.
 	output_module_xref_calls(_, _).
 
