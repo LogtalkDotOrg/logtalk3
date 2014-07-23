@@ -41,7 +41,7 @@
 		property_module(provides(Predicate, To, []), Module) :-
 			{module_property(Module, file(File)),
 			 xref_source(File),
-			 xref_defined(File, To:Predicate, multifile(_)),
+			 xref_defined(File, To:Predicate, _),
 			 To \== Module
 			}.
 		property_module(file(File), Module) :-
