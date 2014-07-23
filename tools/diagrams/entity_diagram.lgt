@@ -554,10 +554,10 @@
 %			output_module_inheritance_relations(Module, Options)
 %		;	true
 %		),
-%		(	member(provide_relations(true), Options) ->
-%			output_module_provide_relations(Module, Options)
-%		;	true
-%		),
+		(	member(provide_relations(true), Options) ->
+			output_module_provide_relations(Module, Options)
+		;	true
+		),
 		(	member(xref_relations(true), Options) ->
 			output_module_xref_relations(Module, Options)
 		;	member(xref_calls(true), Options) ->
@@ -579,15 +579,15 @@
 %		fail.
 	output_module_inheritance_relations(_, _).
 
-%	output_module_provide_relations(Module, Options) :-
-%		setof(
-%			Predicate,
-%			Properties^prolog_modules_diagram_support::module_property(Module, provides(Predicate, To, Properties)),
-%			_
-%		),
-%		^^save_edge(Module, To, [provides], provides_clauses, [tooltip(provides)| Options]),
-%		remember_referenced_entity(To),
-%		fail.
+	output_module_provide_relations(Module, Options) :-
+		setof(
+			Predicate,
+			Properties^(prolog_modules_diagram_support::module_property(Module, provides(Predicate, To, Properties))),
+			_
+		),
+		^^save_edge(Module, To, [provides], provides_clauses, [tooltip(provides)| Options]),
+		remember_referenced_entity(To),
+		fail.
 	output_module_provide_relations(_, _).
 
 	output_module_xref_relations(Module, Options) :-
@@ -603,8 +603,8 @@
 		prolog_modules_diagram_support::module_property(Module, calls(':'(FromModule,_), _)),
 		nonvar(Module),
 		\+ referenced_module_(FromModule),
-		\+ ^^edge(ModuleName, FromModule, [use_module], calls_predicate, _),
-		^^save_edge(ModuleName, FromModule, [use_module], calls_predicate, [tooltip(use_module)| Options]),
+		\+ ^^edge(Module, FromModule, [use_module], calls_predicate, _),
+		^^save_edge(Module, FromModule, [use_module], calls_predicate, [tooltip(use_module)| Options]),
 		remember_referenced_module(FromModule),
 		fail.
 	output_module_xref_relations(_, _).

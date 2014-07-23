@@ -2,9 +2,9 @@
 :- object(prolog_modules_diagram_support).
 
 	:- info([
-		version is 0.7,
+		version is 0.8,
 		author is 'Paulo Moura',
-		date is 2014/07/22,
+		date is 2014/07/23,
 		comment is 'Utility predicates for supporting Prolog modules in diagrams.'
 	]).
 
@@ -38,6 +38,12 @@
 
 		property_module(exports(Exports), Module) :-
 			{module_property(Module, exports(Exports))}.
+		property_module(provides(Predicate, To, []), Module) :-
+			{module_property(Module, file(File)),
+			 xref_source(File),
+			 xref_defined(File, To:Predicate, multifile(_)),
+			 To \== Module
+			}.
 		property_module(file(File), Module) :-
 			{module_property(Module, file(File))}.
 		property_module(file(Basename, Directory), Module) :-
@@ -99,6 +105,12 @@
 
 		property_module(exports(Exports), Module) :-
 			{module_property(Module, exports(Exports))}.
+		property_module(provides(Predicate, To, []), Module) :-
+			{module_property(Module, file(File)),
+			 xref_source(File),
+			 xref_defined(File, To:Predicate, multifile(_)),
+			 To \== Module
+			}.
 		property_module(file(File), Module) :-
 			{module_property(Module, file(File))}.
 		property_module(file(Basename, Directory), Module) :-
