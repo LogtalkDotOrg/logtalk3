@@ -211,9 +211,9 @@ Support for displaying Prolog modules and Prolog module files in diagrams:
 - SICStus Prolog  
 	file diagrams don't display module files
 - SWI-Prolog  
-	full support
+	full support (uses the SWI-Prolog `prolog_xref` library)
 - YAP  
-	full support
+	full support (uses the YAP `prolog_xref` library)
 
 For more information on this tool, open the `docs/tools.html` file in a
 web browser.

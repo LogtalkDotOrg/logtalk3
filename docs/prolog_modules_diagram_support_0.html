@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>0.5</code>
+            <code>0.8</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2014/5/16</code>
+            <code>2014/7/23</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -45,7 +45,7 @@
         <div class="section">
           <h3 id="module_property/2" class="code">module_property/2</h3>
           <blockquote>
-            <p class="comment">Access to module properties, at least exports/1 and file/1.</p>
+            <p class="comment">Access to module properties, at least exports/1 and file/1 but also calls/2 and provides/3 when possible.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -65,7 +65,7 @@
         <div class="section">
           <h3 id="loaded_file_property/2" class="code">loaded_file_property/2</h3>
           <blockquote>
-            <p class="comment">Access to loaded source file properties, at least basename/1, directory/1, and parent/1.</p>
+            <p class="comment">Access to loaded source file properties, at least basename/1, directory/1 but also parent/1 when possible.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -79,6 +79,26 @@
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
               <code>loaded_file_property(?atom,?callable) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="source_file_extension/1" class="code">source_file_extension/1</h3>
+          <blockquote>
+            <p class="comment">Valid source file extension for Prolog source files.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>source_file_extension(Extension)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>source_file_extension(?atom) &ndash; one_or_more</code>
             </dd>
           </dl>
         </div>

@@ -11,21 +11,21 @@
 	:- public(module_property/2).
 	:- mode(module_property(?atom, ?callable), zero_or_more).
 	:- info(module_property/2, [
-		comment is 'Access to module properties, at least exports/1 and file/1.',
+		comment is 'Access to module properties, at least exports/1 and file/1 but also calls/2 and provides/3 when possible.',
 		argnames is ['Module', 'Property']
 	]).
 
 	:- public(loaded_file_property/2).
 	:- mode(loaded_file_property(?atom, ?callable), zero_or_more).
 	:- info(loaded_file_property/2, [
-		comment is 'Access to loaded source file properties, at least basename/1, directory/1, and parent/1.',
+		comment is 'Access to loaded source file properties, at least basename/1, directory/1 but also parent/1 when possible.',
 		argnames is ['File', 'Property']
 	]).
 
 	:- public(source_file_extension/1).
 	:- mode(source_file_extension(?atom), one_or_more).
 	:- info(source_file_extension/1, [
-		comment is 'Valid source file extension for Prolog source files',
+		comment is 'Valid source file extension for Prolog source files.',
 		argnames is ['Extension']
 	]).
 
