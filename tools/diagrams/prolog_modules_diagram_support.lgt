@@ -38,11 +38,12 @@
 
 		property_module(exports(Exports), Module) :-
 			{module_property(Module, exports(Exports))}.
-		property_module(provides(Predicate, To, []), Module) :-
+		property_module(provides(Functor/Arity, To, []), Module) :-
 			{module_property(Module, file(File)),
 			 xref_source(File),
-			 xref_defined(File, To:Predicate, _),
-			 To \== Module
+			 setof(Location, xref_defined(File, To:Predicate, local(Location)), _),
+			 To \== Module,
+			 functor(Predicate, Functor, Arity)
 			}.
 		property_module(file(File), Module) :-
 			{module_property(Module, file(File))}.
@@ -105,11 +106,12 @@
 
 		property_module(exports(Exports), Module) :-
 			{module_property(Module, exports(Exports))}.
-		property_module(provides(Predicate, To, []), Module) :-
+		property_module(provides(Functor/Arity, To, []), Module) :-
 			{module_property(Module, file(File)),
 			 xref_source(File),
-			 xref_defined(File, To:Predicate, multifile(_)),
-			 To \== Module
+			 setof(Location, xref_defined(File, To:Predicate, local(Location)), _),
+			 To \== Module,
+			 functor(Predicate, Functor, Arity)
 			}.
 		property_module(file(File), Module) :-
 			{module_property(Module, file(File))}.

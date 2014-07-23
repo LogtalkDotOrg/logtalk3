@@ -253,7 +253,13 @@
 
 	output_module(Module, Options) :-
 		(	member(interface(true), Options) ->
-			prolog_modules_diagram_support::module_property(Module, exports(Resources))
+			prolog_modules_diagram_support::module_property(Module, exports(ExportedPredicates)),
+			findall(
+				To:Predicate,
+				prolog_modules_diagram_support::module_property(Module, provides(Predicate, To, _)),
+				MultifilePredicates
+			),
+			append(ExportedPredicates, MultifilePredicates, Resources)
 		;	Resources = []
 		),
 		^^output_node(Module, Module, Resources, module, [tooltip(module)| Options]),
