@@ -70,8 +70,8 @@
 		fail.
 	output_externals(Options) :-
 		::retract(referenced_prolog_file_(Path)),
-		prolog_modules_diagram_support::loaded_file_property(Path, directory(Directory)),
-		prolog_modules_diagram_support::loaded_file_property(Path, basename(Basename)),
+		modules_diagram_support::loaded_file_property(Path, directory(Directory)),
+		modules_diagram_support::loaded_file_property(Path, basename(Basename)),
 		memberchk(omit_path_prefixes(Prefixes), Options),
 		^^add_link_options(Path, Options, LinkingOptions),
 		(	member(Prefix, Prefixes),

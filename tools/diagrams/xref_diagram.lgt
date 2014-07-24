@@ -151,7 +151,7 @@
 
 	calls_local_predicate(module, Entity, Caller, Callee) :-
 		!,
-		prolog_modules_diagram_support::module_property(Entity, calls(Callee, Properties)),
+		modules_diagram_support::module_property(Entity, calls(Callee, Properties)),
 		Callee \= _::_,
 		Callee \= ':'(_, _),
 		memberchk(caller(Caller), Properties).
@@ -163,7 +163,7 @@
 
 	calls_external_predicate(module, Entity, Caller, Callee) :-
 		!,
-		prolog_modules_diagram_support::module_property(Entity, calls(Callee, Properties)),
+		modules_diagram_support::module_property(Entity, calls(Callee, Properties)),
 		(	Callee = Object::_, nonvar(Object)
 		;	Callee = ':'(Module,_), nonvar(Module)
 		),
@@ -184,7 +184,7 @@
 	entity_property(protocol, Entity, Property) :-
 		protocol_property(Entity, Property).
 	entity_property(module, Entity, Property) :-
-		prolog_modules_diagram_support::module_property(Entity, Property).
+		modules_diagram_support::module_property(Entity, Property).
 
 	reset :-
 		retractall(external_predicate_(_)).

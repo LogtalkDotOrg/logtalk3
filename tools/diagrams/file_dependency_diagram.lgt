@@ -72,7 +72,7 @@
 			depends_protocol(Protocol, Kind, Other)
 		;	category_property(Category, file(Basename, Directory)),
 			depends_category(Category, Kind, Other)
-		;	prolog_modules_diagram_support::module_property(Module, file(Basename, Directory)),
+		;	modules_diagram_support::module_property(Module, file(Basename, Directory)),
 			depends_module(Module, Kind, Other)
 		),
 		entity_basename_directory(Kind, Other, OtherBasename, OtherDirectory),
@@ -116,9 +116,9 @@
 		implements_protocol(Category, Other).
 
 	depends_module(Module, object, Other) :-
-		prolog_modules_diagram_support::module_property(Module, calls(Other::_,_)), nonvar(Other).
+		modules_diagram_support::module_property(Module, calls(Other::_,_)), nonvar(Other).
 	depends_module(Module, module, Other) :-
-		prolog_modules_diagram_support::module_property(Module, calls(':'(Other,_),_)), nonvar(Other).
+		modules_diagram_support::module_property(Module, calls(':'(Other,_),_)), nonvar(Other).
 
 	entity_basename_directory(object, Entity, Basename, Directory) :-
 		object_property(Entity, file(Basename, Directory)).
@@ -127,7 +127,7 @@
 	entity_basename_directory(category, Entity, Basename, Directory) :-
 		category_property(Entity, file(Basename, Directory)).
 	entity_basename_directory(module, Entity, Basename, Directory) :-
-		prolog_modules_diagram_support::module_property(Entity, file(Basename, Directory)).
+		modules_diagram_support::module_property(Entity, file(Basename, Directory)).
 
 	% by default, diagram title is empty:
 	default_option(title('')).

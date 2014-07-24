@@ -215,8 +215,8 @@
 		fail.
 	output_library(_Library, Directory, Options) :-
 		memberchk(exclude_files(ExcludedFiles), Options),
-		prolog_modules_diagram_support::loaded_file_property(Path, directory(Directory)),
-		prolog_modules_diagram_support::loaded_file_property(Path, basename(Basename)),
+		modules_diagram_support::loaded_file_property(Path, directory(Directory)),
+		modules_diagram_support::loaded_file_property(Path, basename(Basename)),
 		::not_excluded_file(ExcludedFiles, Path, Basename),
 		::output_file(Path, Basename, Directory, Options),
 		fail.
@@ -557,12 +557,12 @@
 	% Prolog file given using its name or basename
 	locate_file(Source, Basename, Extension, Directory, Path) :-
 		add_extension(prolog, Source, Basename, Extension),
-		prolog_modules_diagram_support::loaded_file_property(Path, basename(Basename)),
-		prolog_modules_diagram_support::loaded_file_property(Path, directory(Directory)),
+		modules_diagram_support::loaded_file_property(Path, basename(Basename)),
+		modules_diagram_support::loaded_file_property(Path, directory(Directory)),
 		% check that there isn't another file with the same basename
 		% from a different directory
 		\+ (
-			prolog_modules_diagram_support::loaded_file_property(OtherPath, basename(Basename)),
+			modules_diagram_support::loaded_file_property(OtherPath, basename(Basename)),
 			Path \== OtherPath
 		),
 		!.
@@ -575,14 +575,14 @@
 	% Prolog file given using a full path
 	locate_file(Source, Basename, Extension, Directory, Path) :-
 		add_extension(prolog, Source, Path, Extension),
-		prolog_modules_diagram_support::loaded_file_property(Source, basename(Basename)),
-		prolog_modules_diagram_support::loaded_file_property(Source, directory(Directory)),
+		modules_diagram_support::loaded_file_property(Source, basename(Basename)),
+		modules_diagram_support::loaded_file_property(Source, directory(Directory)),
 		!.
 
 	add_extension(logtalk, Source, SourceWithExtension, Extension) :-
 		atom(Source),
 		\+ (
-			prolog_modules_diagram_support::source_file_extension(PrologExtension),
+			modules_diagram_support::source_file_extension(PrologExtension),
 			sub_atom(Source, _, _, 0, PrologExtension)
 		),
 		(	source_file_extension(Extension),
@@ -599,11 +599,11 @@
 			source_file_extension(Extension),
 			sub_atom(Source, _, _, 0, Extension)
 		),
-		(	prolog_modules_diagram_support::source_file_extension(Extension),
+		(	modules_diagram_support::source_file_extension(Extension),
 			sub_atom(Source, _, _, 0, Extension) ->
 			SourceWithExtension = Source
 		;	% no recognized extension in use
-			prolog_modules_diagram_support::source_file_extension(Extension),
+			modules_diagram_support::source_file_extension(Extension),
 			atom_concat(Source, Extension, SourceWithExtension)
 		).
 

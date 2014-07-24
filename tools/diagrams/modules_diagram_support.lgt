@@ -1,5 +1,5 @@
 
-:- object(prolog_modules_diagram_support).
+:- object(modules_diagram_support).
 
 	:- info([
 		version is 0.8,

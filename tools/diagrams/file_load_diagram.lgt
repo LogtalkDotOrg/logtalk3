@@ -56,7 +56,7 @@
 			^^save_edge(Path, Other, [loads], loads_file, [tooltip(loads)| Options]),
 		fail.
 	output_file(Path, _, _, Options) :-
-		prolog_modules_diagram_support::loaded_file_property(Other, parent(Path)),
+		modules_diagram_support::loaded_file_property(Other, parent(Path)),
 			^^remember_referenced_prolog_file(Other),
 			^^save_edge(Path, Other, [loads], loads_file, [tooltip(loads)| Options]),
 		fail.

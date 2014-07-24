@@ -177,7 +177,7 @@
 	process(Basename, Directory, Options) :-
 		memberchk(exclude_entities(ExcludedEntities), Options),
 		atom_concat(Directory, Basename, Path),
-		prolog_modules_diagram_support::module_property(Module, file(Path)),
+		modules_diagram_support::module_property(Module, file(Path)),
 		\+ member(Module, ExcludedEntities),
 		output_module(Module, Options),
 		assertz(included_entity_(Module)),
@@ -253,10 +253,10 @@
 
 	output_module(Module, Options) :-
 		(	member(interface(true), Options) ->
-			prolog_modules_diagram_support::module_property(Module, exports(ExportedPredicates)),
+			modules_diagram_support::module_property(Module, exports(ExportedPredicates)),
 			findall(
 				To:Predicate,
-				prolog_modules_diagram_support::module_property(Module, provides(Predicate, To, _)),
+				modules_diagram_support::module_property(Module, provides(Predicate, To, _)),
 				MultifilePredicates
 			),
 			append(ExportedPredicates, MultifilePredicates, Resources)
@@ -570,7 +570,7 @@
 	output_module_provide_relations(Module, Options) :-
 		setof(
 			Predicate,
-			Properties^(prolog_modules_diagram_support::module_property(Module, provides(Predicate, To, Properties))),
+			Properties^(modules_diagram_support::module_property(Module, provides(Predicate, To, Properties))),
 			_
 		),
 		^^save_edge(Module, To, [provides], provides_clauses, [tooltip(provides)| Options]),
@@ -579,7 +579,7 @@
 	output_module_provide_relations(_, _).
 
 	output_module_xref_relations(Module, Options) :-
-		prolog_modules_diagram_support::module_property(Module, calls(Object::_, _)),
+		modules_diagram_support::module_property(Module, calls(Object::_, _)),
 		nonvar(Object),
 		\+ referenced_entity_(Object),
 		^^ground_entity_identifier(object, Object, ObjectName),
@@ -588,7 +588,7 @@
 		remember_referenced_entity(Object),
 		fail.
 	output_module_xref_relations(Module, Options) :-
-		prolog_modules_diagram_support::module_property(Module, calls(':'(FromModule,_), _)),
+		modules_diagram_support::module_property(Module, calls(':'(FromModule,_), _)),
 		nonvar(Module),
 		\+ referenced_module_(FromModule),
 		\+ ^^edge(Module, FromModule, [use_module], calls_predicate, _),
@@ -600,7 +600,7 @@
 	output_module_xref_calls(Module, Options) :-
 		setof(
 			Predicate,
-			Properties^(prolog_modules_diagram_support::module_property(Module, calls(Object::Predicate, Properties)), nonvar(Object)),
+			Properties^(modules_diagram_support::module_property(Module, calls(Object::Predicate, Properties)), nonvar(Object)),
 			Predicates
 		),
 		^^ground_entity_identifier(object, Object, ObjectName),
@@ -610,7 +610,7 @@
 	output_module_xref_calls(Module, Options) :-
 		setof(
 			Predicate,
-			Properties^(prolog_modules_diagram_support::module_property(Module, calls(':'(FromModule,Predicate), Properties)), nonvar(Module)),
+			Properties^(modules_diagram_support::module_property(Module, calls(':'(FromModule,Predicate), Properties)), nonvar(Module)),
 			Predicates
 		),
 		^^save_edge(Module, FromModule, Predicates, calls_predicate, [tooltip(calls)| Options]),
