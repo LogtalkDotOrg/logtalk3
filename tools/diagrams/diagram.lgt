@@ -207,6 +207,57 @@
 	library(Library) :-
 		::library(Library, []).
 
+	:- public(directories/3).
+	:- mode(directories(+atom, +list(atom), +list(compound)), one).
+	:- info(directories/3, [
+		comment is 'Creates a diagram for a set of directories using the specified options.',
+		argnames is ['Project', 'Directories', 'Options']
+	]).
+
+	directories(Project, Directories, UserOptions) :-
+		format_object(Format),
+		merge_options(UserOptions, Options),
+		::reset,
+		::output_file_path(Project, Options, Format, OutputPath),
+		open(OutputPath, write, Stream, [alias(output_file)]),
+		Format::file_header(output_file, Project, Options),
+		atom_concat(libraries_, Project, Identifier),
+		Format::graph_header(output_file, Identifier, Project, directories, [tooltip(Project)| Options]),
+		normalize_directory_paths(Directories, NormalizedDirectories),
+		output_directories(NormalizedDirectories, Format, Options),
+		output_externals(Options),
+		::output_edges(Options),
+		Format::graph_footer(output_file, Identifier, Project, directories, [tooltip(Project)| Options]),
+		Format::file_footer(output_file, Project, Options),
+		close(Stream).
+
+	normalize_directory_paths([], []).
+	normalize_directory_paths([Directory| Directories], [NormalizedDirectory| NormalizedDirectories]) :-
+		(	sub_atom(Directory, _, _, 0, '/') ->
+			NormalizedDirectory = Directory
+		;	atom_concat(Directory, '/', NormalizedDirectory)
+		),
+		normalize_directory_paths(Directories, NormalizedDirectories).
+
+	output_directories([], _Format, _Options).
+	output_directories([Directory| Directories], Format, Options) :-
+		atom_concat(directory_, Directory, Identifier),
+		add_link_options(Directory, Options, GraphOptions),
+		Format::graph_header(output_file, Identifier, Directory, directory, GraphOptions),
+		::output_library(Directory, Directory, GraphOptions),
+		Format::graph_footer(output_file, Identifier, Directory, directory, GraphOptions),
+		output_directories(Directories, Format, Options).
+
+	:- public(directories/2).
+	:- mode(directories(+atom, +list(atom)), one).
+	:- info(directories/2, [
+		comment is 'Creates a diagram for a set of directories using the default options.',
+		argnames is ['Project', 'Directories']
+	]).
+
+	directories(Project, Directories) :-
+		::directories(Project, Directories, []).
+
 	:- public(directory/3).
 	:- mode(directory(+atom, +atom, +list(compound)), one).
 	:- info(directory/3, [
@@ -214,7 +265,7 @@
 		argnames is ['Project', 'Directory', 'Options']
 	]).
 
-	directory(Project, Path, UserOptions) :-
+	directory(Project, Directory, UserOptions) :-
 		format_object(Format),
 		merge_options(UserOptions, Options),
 		::reset,
@@ -222,9 +273,10 @@
 		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::file_header(output_file, Project, Options),
 		atom_concat(directory_, Project, Identifier),
-		add_link_options(Path, Options, GraphOptions),
+		add_link_options(Directory, Options, GraphOptions),
 		Format::graph_header(output_file, Identifier, Project, directory, GraphOptions),
-		::output_library(Project, Path, GraphOptions),
+		normalize_directory_paths([Directory], [NormalizedDirectory]),
+		::output_library(Project, NormalizedDirectory, GraphOptions),
 		output_externals(Options),
 		::output_edges(Options),
 		Format::graph_footer(output_file, Identifier, Project, directory, GraphOptions),
