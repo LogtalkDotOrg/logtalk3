@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/05/29,
+		date is 2014/07/24,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -127,6 +127,9 @@
 	graph_style_margin_color(rlibrary, rounded, 10, snow3).
 	graph_style_margin_color(libraries, rounded, 10, snow3).
 	graph_style_margin_color(library, rounded, 10, snow2).
+	graph_style_margin_color(rdirectory, rounded, 10, snow3).
+	graph_style_margin_color(directories, rounded, 10, snow3).
+	graph_style_margin_color(directory, rounded, 10, snow2).
 	graph_style_margin_color(files, rounded, 10, snow2).
 	graph_style_margin_color(file, rounded, 10, snow).
 	graph_style_margin_color(external, rounded, 10, white).

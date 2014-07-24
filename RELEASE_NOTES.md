@@ -70,6 +70,9 @@ the backend compilers.
 * ADDED: Support to the `diagrams` tool to specify backend Prolog compiler
 specific file name extensions for Prolog source files.
 
+* ADDED: Two new predicates, `directory/2-3`, to the `diagrams` tool for
+generating diagrams for all (loaded) source files from a given directory.
+
 * FIXED: Bug in the `diagrams` tool when generating cross-referencing diagrams
 for parametric entities.
 

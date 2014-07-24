@@ -146,31 +146,6 @@
 		Format::file_footer(output_file, Library, Options),
 		close(Stream).
 
-	output_rlibrary(TopLibrary, TopPath, Options) :-
-		format_object(Format),
-		memberchk(exclude_libraries(ExcludedLibraries), Options),
-		atom_concat(library_, TopLibrary, TopIdentifier),
-		add_link_options(TopPath, Options, TopGraphOptions),
-		Format::graph_header(output_file, TopIdentifier, TopLibrary, library, TopGraphOptions),
-		::output_library(TopLibrary, TopPath, TopGraphOptions),
-		Format::graph_footer(output_file, TopIdentifier, TopLibrary, library, TopGraphOptions),
-		forall(
-			sub_library(TopLibrary, TopPath, ExcludedLibraries, Library, Path),
-			(	atom_concat(library_, Library, Identifier),
-				add_link_options(Path, Options, GraphOptions),
-				Format::graph_header(output_file, Identifier, Library, library, GraphOptions),
-				::output_library(Library, Path, GraphOptions),
-				Format::graph_footer(output_file, Identifier, Library, library, GraphOptions)
-			)
-		).
-
-	sub_library(TopLibrary, TopPath, ExcludedLibraries, Library, Path) :-
-		logtalk_library_path(Library, _),
-		Library \== TopLibrary,
-		\+ memberchk(Library, ExcludedLibraries),
-		logtalk::expand_library_path(Library, Path),
-		atom_concat(TopPath, _RelativePath, Path).
-
 	:- public(rlibrary/1).
 	:- mode(rlibrary(+atom), one).
 	:- info(rlibrary/1, [
@@ -231,6 +206,40 @@
 
 	library(Library) :-
 		::library(Library, []).
+
+	:- public(directory/3).
+	:- mode(directory(+atom, +atom, +list(compound)), one).
+	:- info(directory/3, [
+		comment is 'Creates a diagram for a directory using the specified options.',
+		argnames is ['Project', 'Directory', 'Options']
+	]).
+
+	directory(Project, Path, UserOptions) :-
+		format_object(Format),
+		merge_options(UserOptions, Options),
+		::reset,
+		::output_file_path(Project, Options, Format, OutputPath),
+		open(OutputPath, write, Stream, [alias(output_file)]),
+		Format::file_header(output_file, Project, Options),
+		atom_concat(directory_, Project, Identifier),
+		add_link_options(Path, Options, GraphOptions),
+		Format::graph_header(output_file, Identifier, Project, directory, GraphOptions),
+		::output_library(Project, Path, GraphOptions),
+		output_externals(Options),
+		::output_edges(Options),
+		Format::graph_footer(output_file, Identifier, Project, directory, GraphOptions),
+		Format::file_footer(output_file, Project, Options),
+		close(Stream).
+
+	:- public(directory/2).
+	:- mode(directory(+atom, +atom), one).
+	:- info(directory/2, [
+		comment is 'Creates a diagram for a directory using default options.',
+		argnames is ['Project', 'Directory']
+	]).
+
+	directory(Project, Directory) :-
+		::directory(Project, Directory, []).
 
 	:- public(files/3).
 	:- mode(files(+atom, +list(atom), +list(compound)), one).
@@ -373,6 +382,31 @@
 		comment is 'Generates diagram output for a library and its sub-libraries using the specified options.',
 		argnames is ['Library', 'Path', 'Options']
 	]).
+
+	output_rlibrary(TopLibrary, TopPath, Options) :-
+		format_object(Format),
+		memberchk(exclude_libraries(ExcludedLibraries), Options),
+		atom_concat(library_, TopLibrary, TopIdentifier),
+		add_link_options(TopPath, Options, TopGraphOptions),
+		Format::graph_header(output_file, TopIdentifier, TopLibrary, library, TopGraphOptions),
+		::output_library(TopLibrary, TopPath, TopGraphOptions),
+		Format::graph_footer(output_file, TopIdentifier, TopLibrary, library, TopGraphOptions),
+		forall(
+			sub_library(TopLibrary, TopPath, ExcludedLibraries, Library, Path),
+			(	atom_concat(library_, Library, Identifier),
+				add_link_options(Path, Options, GraphOptions),
+				Format::graph_header(output_file, Identifier, Library, library, GraphOptions),
+				::output_library(Library, Path, GraphOptions),
+				Format::graph_footer(output_file, Identifier, Library, library, GraphOptions)
+			)
+		).
+
+	sub_library(TopLibrary, TopPath, ExcludedLibraries, Library, Path) :-
+		logtalk_library_path(Library, _),
+		Library \== TopLibrary,
+		\+ memberchk(Library, ExcludedLibraries),
+		logtalk::expand_library_path(Library, Path),
+		atom_concat(TopPath, _RelativePath, Path).
 
 	:- protected(output_library/3).
 	:- mode(output_library(+atom, +atom, +list(compound)), one).
