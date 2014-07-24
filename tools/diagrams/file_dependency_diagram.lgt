@@ -28,12 +28,14 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/06/18,
+		date is 2014/07/24,
 		comment is 'Predicates for generating file contents dependency diagrams. A dependency exists when an entity in one file makes a reference to an entity in another file.',
 		parnames is ['Format']
 	]).
 
-	:- uses(list, [member/2, memberchk/2]).
+	:- uses(list, [
+		member/2, memberchk/2
+	]).
 
 	% first, output the file node
 	output_file(Path, Basename, Directory, Options) :-
@@ -70,6 +72,8 @@
 			depends_protocol(Protocol, Kind, Other)
 		;	category_property(Category, file(Basename, Directory)),
 			depends_category(Category, Kind, Other)
+		;	prolog_modules_diagram_support::module_property(Module, file(Basename, Directory)),
+			depends_module(Module, Kind, Other)
 		),
 		entity_basename_directory(Kind, Other, OtherBasename, OtherDirectory),
 		(	OtherBasename \== Basename ->
@@ -111,6 +115,11 @@
 	depends_category(Category, protocol, Other) :-
 		implements_protocol(Category, Other).
 
+	depends_module(Module, object, Other) :-
+		prolog_modules_diagram_support::module_property(Module, calls(Other::_,_)), nonvar(Other).
+	depends_module(Module, module, Other) :-
+		prolog_modules_diagram_support::module_property(Module, calls(':'(Other,_),_)), nonvar(Other).
+
 	entity_basename_directory(object, Entity, Basename, Directory) :-
 		object_property(Entity, file(Basename, Directory)).
 	entity_basename_directory(protocol, Entity, Basename, Directory) :-
@@ -118,9 +127,7 @@
 	entity_basename_directory(category, Entity, Basename, Directory) :-
 		category_property(Entity, file(Basename, Directory)).
 	entity_basename_directory(module, Entity, Basename, Directory) :-
-		prolog_modules_diagram_support::module_property(Entity, file(Path)),
-		prolog_modules_diagram_support::loaded_file_property(Path, basename(Basename)),
-		prolog_modules_diagram_support::loaded_file_property(Path, directory(Directory)).
+		prolog_modules_diagram_support::module_property(Entity, file(Basename, Directory)).
 
 	% by default, diagram title is empty:
 	default_option(title('')).

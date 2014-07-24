@@ -63,9 +63,9 @@ directive and for the `info/2` predicate directive.
 Tools
 -----
 
-* ADDED: Support to the `diagrams` tool to generate cross-reference and
-entity diagrams for Prolog modules when using SWI-Prolog or YAP as the
-backend compilers.
+* ADDED: Support to the `diagrams` tool to generate file, cross-reference, and
+entity diagrams for Prolog module applications when using SWI-Prolog or YAP as
+the backend compilers.
 
 * ADDED: Support to the `diagrams` tool to specify backend Prolog compiler
 specific file name extensions for Prolog source files.

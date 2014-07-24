@@ -11,7 +11,7 @@
 	:- public(module_property/2).
 	:- mode(module_property(?atom, ?callable), zero_or_more).
 	:- info(module_property/2, [
-		comment is 'Access to module properties, at least exports/1 and file/1 but also calls/2 and provides/3 when possible.',
+		comment is 'Access to module properties, at least exports/1, file/1, and file/2 but also calls/2 and provides/3 when possible.',
 		argnames is ['Module', 'Property']
 	]).
 
@@ -175,6 +175,13 @@
 			filter_interface(Interface, Exports).
 		property_module(file(File), Module) :-
 			{current_compiled_file(File, _, Module)}.
+		property_module(file(Basename, Directory), Module) :-
+			{current_compiled_file(File, _, Module),
+			 pathname(File, DirectoryString, NameString, ExtensionString),
+			 atom_string(Directory, DirectoryString),
+			 concat_strings(NameString, ExtensionString, BasenameString),
+			 atom_string(Basename, BasenameString)
+			}.
 
 		filter_interface([], []).
 		filter_interface([Functor/Arity| Interface], [Functor/Arity| Exports]) :-
@@ -224,6 +231,11 @@
 			)}.
 		property_module(file(File), Module) :-
 			{current_module(Module, File)}.
+		property_module(file(Basename, Directory), Module) :-
+			{current_module(Module, File),
+			 decompose_file_name(File, Directory, Name, Extension),
+			 atom_concat(Name, Extension, Basename)
+			}.
 
 		loaded_file_property(File, Property) :-
 			property_source_file(Property, File).
