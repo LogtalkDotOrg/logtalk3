@@ -556,10 +556,6 @@
 	output_category_xref_calls(_, _).
 
 	output_module_relations(Module, Options) :-
-%		(	member(inheritance_relations(true), Options) ->
-%			output_module_inheritance_relations(Module, Options)
-%		;	true
-%		),
 		(	member(provide_relations(true), Options) ->
 			output_module_provide_relations(Module, Options)
 		;	true
@@ -570,20 +566,6 @@
 			output_module_xref_calls(Module, Options)
 		;	true
 		).
-
-%	output_module_inheritance_relations(Module, Options) :-
-%		extends_category(Module, ExtendedModule, Scope),
-%		scope_relation_label(Scope, extends, Label),
-%		^^save_edge(ModuleName, ExtendedModuleName, [Label], extends_category, [tooltip(Label)| Options]),
-%		remember_referenced_entity(ExtendedModule),
-%		fail.
-%	output_module_inheritance_relations(Module, Options) :-
-%		implements_protocol(Module, Protocol, Scope),
-%		scope_relation_label(Scope, implements, Label),
-%		^^save_edge(ModuleName, ProtocolName, [Label], implements_protocol, [tooltip(Label)| Options]),
-%		remember_referenced_entity(Protocol),
-%		fail.
-	output_module_inheritance_relations(_, _).
 
 	output_module_provide_relations(Module, Options) :-
 		setof(

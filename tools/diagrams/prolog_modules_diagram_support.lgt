@@ -4,7 +4,7 @@
 	:- info([
 		version is 0.8,
 		author is 'Paulo Moura',
-		date is 2014/07/23,
+		date is 2014/07/24,
 		comment is 'Utility predicates for supporting Prolog modules in diagrams.'
 	]).
 
@@ -150,6 +150,10 @@
 		property_source_file(parent(Parent), File) :-
 			{source_file_property(File, load_context(user, Parent:_, _)),
 			 \+ source_file_property(Parent, derived_from(_))}.
+		property_source_file(parent(Parent), File) :-
+			{source_file_property(File, load_context(Module, _, _)),
+			 module_property(Module, file(Parent))
+			}.
 		property_source_file(directory(Directory), File) :-
 			{source_file(File),
 			 file_directory_name(File, Directory0),
