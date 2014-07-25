@@ -154,13 +154,13 @@
 		),
 		write_key_value_comma(Stream, style, Style),
 		write_key_value_comma(Stream, fillcolor, Color),
-		write(Stream, 'label=<<FONT POINT-SIZE="11">'),
+		write(Stream, 'label=<<FONT POINT-SIZE="11"><![CDATA['),
 		write(Stream, Label),
-		write(Stream, '</FONT>'),
+		write(Stream, ']]></FONT>'),
 		(	member(node_type_captions(true), Options) ->
-			write(Stream, '<BR /><FONT POINT-SIZE="7">'),
+			write(Stream, '<BR /><FONT POINT-SIZE="7"><![CDATA['),
 			write(Stream, Caption),
-			write(Stream, '</FONT>')
+			write(Stream, ']]></FONT>')
 		;	true
 		),
 		(	Contents == [] ->
