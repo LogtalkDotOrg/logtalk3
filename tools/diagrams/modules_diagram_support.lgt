@@ -60,10 +60,16 @@
 			 atom_concat(Directory0, '/', Directory),
 			 file_base_name(File, Basename)			
 			}.
-		property_module(calls(Callee, [caller(CallerFunctor/CallerArity)]), Module) :-
+		property_module(calls(Callee, [caller(Caller)]), Module) :-
 			{module_property(Module, file(File)),
 			 xref_source(File),
-			 xref_called(File, Callee0, Caller),
+			 xref_called(File, Callee0, Caller0),
+			 (	Caller0 = ':'(ForModule,Caller1) ->
+			 	functor(Caller1, CallerFunctor, CallerArity),
+				Caller = ':'(ForModule,CallerFunctor/CallerArity)
+			 ;	functor(Caller0, CallerFunctor, CallerArity),
+			 	Caller = CallerFunctor/CallerArity
+			 ),
 			 functor(Caller, CallerFunctor, CallerArity),
 			 (	Callee0 = Object::Callee1 ->
 			 	functor(Callee1, CalleeFunctor, CalleeArity),
@@ -135,11 +141,16 @@
 			 atom_concat(Directory0, '/', Directory),
 			 file_base_name(File, Basename)			
 			}.
-		property_module(calls(Callee, [caller(CallerFunctor/CallerArity)]), Module) :-
+		property_module(calls(Callee, [caller(Caller)]), Module) :-
 			{module_property(Module, file(File)),
 			 xref_source(File),
-			 xref_called(File, Callee0, Caller),
-			 functor(Caller, CallerFunctor, CallerArity),
+			 xref_called(File, Callee0, Caller0),
+			 (	Caller0 = ':'(ForModule,Caller1) ->
+			 	functor(Caller1, CallerFunctor, CallerArity),
+				Caller = ':'(ForModule,CallerFunctor/CallerArity)
+			 ;	functor(Caller0, CallerFunctor, CallerArity),
+			 	Caller = CallerFunctor/CallerArity
+			 ),
 			 (	Callee0 = Object::Callee1 ->
 			 	functor(Callee1, CalleeFunctor, CalleeArity),
 				Callee = Object::CalleeFunctor/CalleeArity
