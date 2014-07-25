@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/07/24,
+		date is 2014/07/25,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -187,6 +187,7 @@
 	% predicates
 	node_caption_shape_style_color(predicate, predicate, ellipse, filled, gold).
 	node_caption_shape_style_color(external_predicate, predicate, ellipse, 'filled,dashed', gold).
+	node_caption_shape_style_color(multifile, predicate, ellipse, filled, coral).
 
 	edge(Stream, Start, End, Labels, Kind, Options) :-
 		edge_arrow(Kind, ArrowHead),

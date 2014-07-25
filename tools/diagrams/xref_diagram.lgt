@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/07/20,
+		date is 2014/07/25,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format']
 	]).
@@ -100,16 +100,25 @@
 		).
 
 	process(Kind, Entity, Options) :-
-		entity_property(Kind, Entity, defines(Caller, Properties)),
+		entity_property(Kind, Entity, defines(Predicate, Properties)),
 		\+ member(auxiliary, Properties),
-		add_predicate_documentation_url(Options, Entity, Caller, PredicateOptions),
-		^^output_node(Caller, Caller, [], predicate, PredicateOptions),
+		add_predicate_documentation_url(Options, Entity, Predicate, PredicateOptions),
+		^^output_node(Predicate, Predicate, [], predicate, PredicateOptions),
 		fail.
 	process(Kind, Entity, Options) :-
-		entity_property(Kind, Entity, declares(Caller, _)),
-		\+ entity_property(Kind, Entity, defines(Caller, _)),
-		add_predicate_documentation_url(Options, Entity, Caller, PredicateOptions),
-		^^output_node(Caller, Caller, [], predicate, PredicateOptions),
+		entity_property(Kind, Entity, declares(Predicate, _)),
+		\+ entity_property(Kind, Entity, defines(Predicate, _)),
+		add_predicate_documentation_url(Options, Entity, Predicate, PredicateOptions),
+		^^output_node(Predicate, Predicate, [], predicate, PredicateOptions),
+		fail.
+	process(Kind, Entity, Options) :-
+		entity_property(Kind, Entity, provides(Predicate, To, Properties)),
+		\+ member(auxiliary, Properties),
+		(	Kind == module ->
+			^^output_node(':'(To,Predicate), ':'(To,Predicate), [], multifile, Options)
+		;	add_predicate_documentation_url(Options, Entity, To::Predicate, PredicateOptions),
+			^^output_node(To::Predicate, To::Predicate, [], multifile, PredicateOptions)
+		),
 		fail.
 	process(Kind, Entity, Options) :-
 		calls_local_predicate(Kind, Entity, Caller, Callee),
@@ -124,6 +133,9 @@
 		fail.
 	process(_, _, _).
 
+	add_predicate_documentation_url(Options, _, Entity::Functor/Arity, PredicateOptions) :-
+		!,
+		add_predicate_documentation_url(Options, Entity, Functor/Arity, PredicateOptions).
 	add_predicate_documentation_url(Options, Entity, Functor/Arity, PredicateOptions) :-
 		!,
 		(	member(url_prefixes(FilePrefix, DocPrefix), Options) ->

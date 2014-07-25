@@ -74,6 +74,9 @@ specific file name extensions for Prolog source files.
 `diagrams` tool for generating diagrams for all (loaded) source files from a
 given directory or set of directories.
 
+* IMPROVED: The `diagrams` tool now also display multifile predicates when
+generating entity predicate cross-reference diagrams.
+
 * FIXED: Bug in the `diagrams` tool when generating cross-referencing diagrams
 for parametric entities.
 
