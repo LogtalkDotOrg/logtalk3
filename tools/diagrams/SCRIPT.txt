@@ -21,13 +21,13 @@ Public License 3. Consult the `LICENSE.txt` file for details.
 ________________________________________________________________________
 
 
-% start by loading the example:
+% start by loading the tool:
 
 | ?- logtalk_load(diagrams(loader)).
 ...
 
 
-% check the default options used when generating a entity diagram:
+% check the default options used when generating an entity diagram:
 
 | ?- entity_diagram(dot)::default_options(DefaultOptions).
 DefaultOptions = ...
@@ -49,6 +49,13 @@ yes
 % using default options:
 
 | ?- xref_diagram(dot)::file(points).
+yes
+
+
+% we can also generate a predicate call cross-referencing diagram for a
+% single entity showing its internal dependencies:
+
+| ?- xref_diagram(dot)::entity(point).
 yes
 
 
@@ -95,6 +102,13 @@ yes
 % the corresponding directory (local or remote), clicking on a file node
 % opens the corresponding file, and clicking on an entity or predicate
 % node opens its documentation:
+
+| ?- inheritance_diagram::rlibrary(tools, [title('Logtalk development tools'), url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/', 'http://logtalk.org/library/'), omit_path_prefixes(['/Users/pmoura/logtalk/', '/opt/local/share/logtalk/'])]).
+yes
+
+
+% the utility objects diagrams/0-1 allows generating all supported diagrams
+% at once:
 
 | ?- diagrams::rlibrary(tools, [title('Logtalk development tools'), url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/', 'http://logtalk.org/library/'), omit_path_prefixes(['/Users/pmoura/logtalk/', '/opt/local/share/logtalk/'])]).
 yes
