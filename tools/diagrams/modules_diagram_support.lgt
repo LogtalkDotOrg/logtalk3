@@ -41,12 +41,9 @@
 		property_module(defines(Functor/Arity, []), Module) :-
 			{module_property(Module, file(File)),
 			 xref_source(File),
-			 (	setof(Location, xref_defined(File, Predicate, local(Location)), _)
-			 ;	setof(Location, xref_defined(File, Predicate, dynamic(Location)), _)
-			 ;	setof(Location, xref_defined(File, Predicate, multifile(Location)), _)
-			 ;	setof(Location, xref_defined(File, Predicate, thread_local(Location)), _)
-			 ),
+			 setof(How, xref_defined(File, Predicate, How), _),
 			 Predicate \= ':'(_,_),
+			 \+ xref_defined(File, Predicate, imported(_)),
 			 functor(Predicate, Functor, Arity)
 			}.
 		property_module(provides(Functor/Arity, To, []), Module) :-
@@ -126,12 +123,9 @@
 		property_module(defines(Functor/Arity, []), Module) :-
 			{module_property(Module, file(File)),
 			 xref_source(File),
-			 (	setof(Location, xref_defined(File, Predicate, local(Location)), _)
-			 ;	setof(Location, xref_defined(File, Predicate, dynamic(Location)), _)
-			 ;	setof(Location, xref_defined(File, Predicate, multifile(Location)), _)
-			 ;	setof(Location, xref_defined(File, Predicate, thread_local(Location)), _)
-			 ),
+			 setof(How, xref_defined(File, Predicate, How), _),
 			 Predicate \= ':'(_,_),
+			 \+ xref_defined(File, Predicate, imported(_)),
 			 functor(Predicate, Functor, Arity)
 			}.
 		property_module(provides(Functor/Arity, To, []), Module) :-
