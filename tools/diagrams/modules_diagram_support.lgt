@@ -2,16 +2,16 @@
 :- object(modules_diagram_support).
 
 	:- info([
-		version is 0.8,
+		version is 0.9,
 		author is 'Paulo Moura',
-		date is 2014/07/24,
+		date is 2014/07/25,
 		comment is 'Utility predicates for supporting Prolog modules in diagrams.'
 	]).
 
 	:- public(module_property/2).
 	:- mode(module_property(?atom, ?callable), zero_or_more).
 	:- info(module_property/2, [
-		comment is 'Access to module properties, at least exports/1, file/1, and file/2 but also calls/2 and provides/3 when possible.',
+		comment is 'Access to module properties, at least exports/1, file/1, and file/2 but also defines/2, calls/2, and provides/3 when possible.',
 		argnames is ['Module', 'Property']
 	]).
 
@@ -38,6 +38,13 @@
 
 		property_module(exports(Exports), Module) :-
 			{module_property(Module, exports(Exports))}.
+		property_module(defines(Functor/Arity, []), Module) :-
+			{module_property(Module, file(File)),
+			 xref_source(File),
+			 setof(Location, xref_defined(File, Predicate, local(Location)), _),
+			 Predicate \= ':'(_,_),
+			 functor(Predicate, Functor, Arity)
+			}.
 		property_module(provides(Functor/Arity, To, []), Module) :-
 			{module_property(Module, file(File)),
 			 xref_source(File),
@@ -106,6 +113,13 @@
 
 		property_module(exports(Exports), Module) :-
 			{module_property(Module, exports(Exports))}.
+		property_module(defines(Functor/Arity, []), Module) :-
+			{module_property(Module, file(File)),
+			 xref_source(File),
+			 setof(Location, xref_defined(File, Predicate, local(Location)), _),
+			 Predicate \= ':'(_,_),
+			 functor(Predicate, Functor, Arity)
+			}.
 		property_module(provides(Functor/Arity, To, []), Module) :-
 			{module_property(Module, file(File)),
 			 xref_source(File),
