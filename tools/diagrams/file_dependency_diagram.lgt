@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/07/24,
+		date is 2014/07/26,
 		comment is 'Predicates for generating file contents dependency diagrams. A dependency exists when an entity in one file makes a reference to an entity in another file.',
 		parnames is ['Format']
 	]).
@@ -129,6 +129,8 @@
 	entity_basename_directory(module, Entity, Basename, Directory) :-
 		modules_diagram_support::module_property(Entity, file(Basename, Directory)).
 
+	% by default, diagram layout is top to bottom:
+	default_option(layout(top_to_bottom)).
 	% by default, diagram title is empty:
 	default_option(title('')).
 	% by default, print current date:

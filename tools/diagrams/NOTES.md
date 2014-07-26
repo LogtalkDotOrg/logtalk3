@@ -141,6 +141,8 @@ the diagrams layout.
 A set of options are available to specify the details to include in the
 generated diagrams. For entity diagrams the options are:
 
+- `layout(Layout)`  
+	diagram layout (one of the atoms `{top_to_bottom,bottom_to_top,left_to_right,right_to_left}`; default depends on the kind of diagram)
 - `title(Title)`  
 	diagram title (an atom; default is `''`)
 - `date(Boolean)`  
@@ -178,6 +180,8 @@ generated diagrams. For entity diagrams the options are:
 
 For file diagrams the options are:
 
+- `layout(Layout)`  
+	diagram layout (one of the atoms `{top_to_bottom,bottom_to_top,left_to_right,right_to_left}`; default depends on the kind of diagram)
 - `title(Title)`  
 	diagram title (an atom; default is `''`)
 - `date(Boolean)`  
@@ -216,6 +220,11 @@ Support for displaying Prolog modules and Prolog module files in diagrams:
 	full support (uses the SWI-Prolog `prolog_xref` library)
 - YAP  
 	full support (uses the YAP `prolog_xref` library)
+
+When using SWI-Prolog or YAP as the backend compilers, diagrams can also be
+generated for (loaded) Prolog source files (containing module definitions)
+and for (loaded) Prolog modules. However, the diagraming methods that take
+a library name as argument are not currently usable.
 
 For more information on this tool, open the `docs/tools.html` file in a
 web browser.

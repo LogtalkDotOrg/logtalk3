@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/07/25,
+		date is 2014/07/26,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format']
 	]).
@@ -222,6 +222,8 @@
 		^^format_object(Format),
 		Format::graph_footer(output_file, other, '(external predicates)', external, [tooltip('(external predicates)')| Options]).
 
+	% by default, diagram layout is top to bottom:
+	default_option(layout(top_to_bottom)).
 	% by default, diagram title is empty:
 	default_option(title('')).
 	% by default, print current date:

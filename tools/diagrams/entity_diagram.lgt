@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/06/20,
+		date is 2014/07/26,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parnames is ['Format']
 	]).
@@ -624,6 +624,8 @@
 	scope_relation_label(private, Relation, Label) :-
 		atom_concat(Relation, ' (private)', Label).
 
+	% by default, diagram layout is bottom to top:
+	default_option(layout(bottom_to_top)).
 	% by default, diagram title is empty:
 	default_option(title('')).
 	% by default, print current date:

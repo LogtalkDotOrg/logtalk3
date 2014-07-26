@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/06/18,
+		date is 2014/07/26,
 		comment is 'Predicates for generating file loading dependency diagrams.',
 		parnames is ['Format']
 	]).
@@ -62,6 +62,8 @@
 		fail.
 	output_file(_, _, _, _).
 
+	% by default, diagram layout is top to bottom:
+	default_option(layout(top_to_bottom)).
 	% by default, diagram title is empty:
 	default_option(title('')).
 	% by default, print current date:

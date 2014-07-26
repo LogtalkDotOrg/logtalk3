@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/07/25,
+		date is 2014/07/26,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -47,7 +47,9 @@
 		write(Stream, 'digraph "'),
 		write(Stream, Identifier),
 		write(Stream, '" {'), nl(Stream),
-		write_key_value_nl(Stream, rankdir, 'BT'),
+		memberchk(layout(Layout), Options),
+		convert_layout(Layout, RankDir),
+		write_key_value_nl(Stream, rankdir, RankDir),
 		write_key_value_nl(Stream, ranksep, '1.25'),
 		write_key_value_nl(Stream, compound, true),
 		write_key_value_nl(Stream, splines, true),
@@ -64,6 +66,11 @@
 		diagram_label(Options, Label),
 		write_key_value_nl(Stream, label, Label),
 		nl(Stream).
+
+	convert_layout(top_to_bottom, 'TB').
+	convert_layout(bottom_to_top, 'BT').
+	convert_layout(left_to_right, 'LR').
+	convert_layout(right_to_left, 'RL').
 
 	diagram_label(Options, Label) :-
 		memberchk(title(Title), Options),

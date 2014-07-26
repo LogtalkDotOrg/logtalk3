@@ -77,6 +77,9 @@ given directory or set of directories.
 * IMPROVED: The `diagrams` tool now also display multifile predicates when
 generating entity predicate cross-reference diagrams.
 
+* IMPROVED: The `diagrams` tool now allows overriding the default diagrams
+layout direction.
+
 * FIXED: Bug in the `diagrams` tool when generating cross-referencing diagrams
 for parametric entities.
 
