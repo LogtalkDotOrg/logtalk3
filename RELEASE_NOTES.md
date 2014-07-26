@@ -80,6 +80,9 @@ generating entity predicate cross-reference diagrams.
 * IMPROVED: The `diagrams` tool now allows overriding the default diagrams
 layout direction.
 
+* IMPROVED: The `diagrams` tool now prints public (or exported) predicate
+nodes using a bold border and multifile predicate nodes using a lighter color.
+
 * FIXED: Bug in the `diagrams` tool when generating cross-referencing diagrams
 for parametric entities.
 

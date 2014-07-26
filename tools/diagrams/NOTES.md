@@ -112,6 +112,9 @@ produces better results:
 
 	circo -Tpdf diagram.dot > diagram.pdf
 
+It's also worth to experiment with different layouts to find the one that
+produces the best results (see the `layout/1` option described below).
+
 Some output formats such as SVG support tooltips and URL links, which can
 be used for showing e.g. entity types, relation types, file paths, and for
 navigating to files and directories of files (libraries). See the relevant

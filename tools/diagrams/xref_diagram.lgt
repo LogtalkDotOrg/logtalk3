@@ -49,6 +49,12 @@
 		argnames is ['Entity']
 	]).
 
+	:- private(included_predicate_/1).
+	:- dynamic(included_predicate_/1).
+
+	:- private(referenced_predicate_/1).
+	:- dynamic(referenced_predicate_/1).
+
 	:- private(external_predicate_/1).
 	:- dynamic(external_predicate_/1).
 
@@ -100,29 +106,37 @@
 		).
 
 	process(Kind, Entity, Options) :-
-		entity_property(Kind, Entity, defines(Predicate, Properties)),
-		\+ member(auxiliary, Properties),
+		entity_property(Kind, Entity, declares(Predicate, _)),
+		predicate_kind(Kind, Entity, Predicate, PredicateKind),
 		add_predicate_documentation_url(Options, Entity, Predicate, PredicateOptions),
-		^^output_node(Predicate, Predicate, [], predicate, PredicateOptions),
+		^^output_node(Predicate, Predicate, [], PredicateKind, PredicateOptions),
+		assertz(included_predicate_(Predicate)),
 		fail.
 	process(Kind, Entity, Options) :-
-		entity_property(Kind, Entity, declares(Predicate, _)),
-		\+ entity_property(Kind, Entity, defines(Predicate, _)),
+		entity_property(Kind, Entity, defines(Predicate, Properties)),
+		\+ entity_property(Kind, Entity, declares(Predicate, _)),
+		\+ member(auxiliary, Properties),
+		predicate_kind(Kind, Entity, Predicate, PredicateKind),
 		add_predicate_documentation_url(Options, Entity, Predicate, PredicateOptions),
-		^^output_node(Predicate, Predicate, [], predicate, PredicateOptions),
+		^^output_node(Predicate, Predicate, [], PredicateKind, PredicateOptions),
+		assertz(included_predicate_(Predicate)),
 		fail.
 	process(Kind, Entity, Options) :-
 		entity_property(Kind, Entity, provides(Predicate, To, Properties)),
 		\+ member(auxiliary, Properties),
 		(	Kind == module ->
-			^^output_node(':'(To,Predicate), ':'(To,Predicate), [], multifile, Options)
+			^^output_node(':'(To,Predicate), ':'(To,Predicate), [], multifile_predicate, Options),
+			assertz(included_predicate_(':'(To,Predicate)))
 		;	add_predicate_documentation_url(Options, Entity, To::Predicate, PredicateOptions),
-			^^output_node(To::Predicate, To::Predicate, [], multifile, PredicateOptions)
+			^^output_node(To::Predicate, To::Predicate, [], multifile_predicate, PredicateOptions),
+			assertz(included_predicate_(To::Predicate))
 		),
 		fail.
 	process(Kind, Entity, Options) :-
 		calls_local_predicate(Kind, Entity, Caller, Callee),
 		\+ ^^edge(Caller, Callee, [calls], calls_predicate, _),
+		remember_referenced_predicate(Caller),
+		remember_referenced_predicate(Callee),
 		^^save_edge(Caller, Callee, [calls], calls_predicate, [tooltip(calls)| Options]),
 		fail.
 	process(Kind, Entity, Options) :-
@@ -131,7 +145,29 @@
 		\+ ^^edge(Caller, Callee, [calls], calls_predicate, _),
 		^^save_edge(Caller, Callee, [calls], calls_predicate, [tooltip(calls)| Options]),
 		fail.
-	process(_, _, _).
+	process(_, _, _) :-
+		retract(included_predicate_(Predicate)),
+		retractall(referenced_predicate_(Predicate)),
+		fail.
+	process(_, _, Options) :-
+		retract(referenced_predicate_(Functor/Arity)),
+		^^output_node(Functor/Arity, Functor/Arity, [], predicate, Options),
+		fail.
+	process(_, _, _).		
+
+	predicate_kind(module, Entity, Predicate, PredicateKind) :-
+		!,
+		modules_diagram_support::module_property(Entity, exports(Exports)),
+		(	member(Predicate, Exports) ->
+			PredicateKind = public_predicate
+		;	PredicateKind = predicate
+		).
+	predicate_kind(Kind, Entity, Predicate, PredicateKind) :-
+		entity_property(Kind, Entity, declares(Predicate, Properties)),
+		(	member((public), Properties) ->
+			PredicateKind = public_predicate
+		;	PredicateKind = predicate
+		).
 
 	add_predicate_documentation_url(Options, _, Entity::Functor/Arity, PredicateOptions) :-
 		!,
@@ -199,7 +235,15 @@
 		modules_diagram_support::module_property(Entity, Property).
 
 	reset :-
+		retractall(included_predicate_(_)),
+		retractall(referenced_predicate_(_)),
 		retractall(external_predicate_(_)).
+
+	remember_referenced_predicate(Predicate) :-
+		(	referenced_predicate_(Predicate) ->
+			true
+		;	assertz(referenced_predicate_(Predicate))
+		).
 
 	remember_external_predicate(Predicate) :-
 		(	external_predicate_(Predicate) ->
@@ -217,6 +261,10 @@
 	output_external_predicates(Options) :-
 		retract(external_predicate_(':'(Module,Predicate))),
 		^^output_node(':'(Module,Predicate), ':'(Module,Predicate), [], external_predicate, Options),
+		fail.
+	output_external_predicates(Options) :-
+		retract(referenced_predicate_(Predicate)),
+		^^output_node(Predicate, Predicate, [], external_predicate, Options),
 		fail.
 	output_external_predicates(Options) :-
 		^^format_object(Format),

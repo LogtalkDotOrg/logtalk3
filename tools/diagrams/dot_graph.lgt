@@ -193,8 +193,9 @@
 	node_caption_shape_style_color(external_file, file, box, 'filled,dashed', paleturquoise).
 	% predicates
 	node_caption_shape_style_color(predicate, predicate, ellipse, filled, gold).
+	node_caption_shape_style_color(public_predicate, predicate, ellipse, 'filled,bold', gold).
+	node_caption_shape_style_color(multifile_predicate, predicate, ellipse, filled, yellow).
 	node_caption_shape_style_color(external_predicate, predicate, ellipse, 'filled,dashed', lightgrey).
-	node_caption_shape_style_color(multifile, predicate, ellipse, filled, coral).
 
 	edge(Stream, Start, End, Labels, Kind, Options) :-
 		edge_arrow(Kind, ArrowHead),

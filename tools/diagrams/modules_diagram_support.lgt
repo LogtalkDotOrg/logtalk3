@@ -31,6 +31,7 @@
 
 	:- if(current_logtalk_flag(prolog_dialect, yap)).
 
+		{:- use_module(library(lists))}.
 		{:- use_module(library(prolog_xref))}.
 
 		module_property(Module, Property) :-
@@ -38,6 +39,10 @@
 
 		property_module(exports(Exports), Module) :-
 			{module_property(Module, exports(Exports))}.
+		property_module(declares(Functor/Arity, []), Module) :-
+			{module_property(Module, exports(Exports)),
+			 member(Functor/Arity, Exports)
+			}.
 		property_module(defines(Functor/Arity, []), Module) :-
 			{module_property(Module, file(File)),
 			 xref_source(File),
@@ -120,6 +125,10 @@
 
 		property_module(exports(Exports), Module) :-
 			{module_property(Module, exports(Exports))}.
+		property_module(declares(Functor/Arity, []), Module) :-
+			{module_property(Module, exports(Exports)),
+			 member(Functor/Arity, Exports)
+			}.
 		property_module(defines(Functor/Arity, []), Module) :-
 			{module_property(Module, file(File)),
 			 xref_source(File),
