@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/02/07,
+		date is 2014/07/27,
 		comment is 'Debugger protocol.'
 	]).
 
@@ -37,25 +37,25 @@
 	:- public(reset/0).
 	:- mode(reset, one).
 	:- info(reset/0, [
-		comment is 'Resets all debugging settings, including spy points and context spy points.'
+		comment is 'Resets all debugging settings, including spy points.'
 	]).
 
 	:- public(debug/0).
 	:- mode(debug, one).
 	:- info(debug/0, [
-		comment is 'Starts debugging for all defined spy points and context spy points.'
+		comment is 'Starts debugging for all defined spy points.'
 	]).
 
 	:- public(nodebug/0).
 	:- mode(nodebug, one).
 	:- info(nodebug/0, [
-		comment is 'Stops debugging for all defined spy points and context spy points.'
+		comment is 'Stops debugging for all defined spy points.'
 	]).
 
 	:- public(debugging/0).
 	:- mode(debugging, one).
 	:- info(debugging/0, [
-		comment is 'Reports current debugging settings, including spy points and context spy points.'
+		comment is 'Reports current debugging settings, including spy points.'
 	]).
 
 	:- public(debugging/1).
@@ -78,11 +78,11 @@
 	]).
 
 	:- public((spy)/1).
-	:- mode(spy(+predicate_indicator), one).
-	:- mode(spy(+list(predicate_indicator)), one).
+	:- mode(spy(+spy_point), one).
+	:- mode(spy(+list(spy_point)), one).
 	:- info((spy)/1, [
-		comment is 'Sets a spy point for a predicate or a list of predicates.',
-		argnames is ['Predicate']
+		comment is 'Sets a line number spy point or a predicate spy point or a list of spy points.',
+		argnames is ['SpyPoint']
 	]).
 
 	:- public((spy)/4).
@@ -94,11 +94,11 @@
 
 	:- public((nospy)/1).
 	:- mode(nospy(@variable), one).
-	:- mode(nospy(+predicate_indicator), one).
-	:- mode(nospy(+list(predicate_indicator)), one).
+	:- mode(nospy(+spy_point), one).
+	:- mode(nospy(+list(spy_point)), one).
 	:- info((nospy)/1, [
-		comment is 'Removes all matching predicate spy points.',
-		argnames is ['Predicate']
+		comment is 'Removes all matching line number spy points and predicate spy points.',
+		argnames is ['SpyPoint']
 	]).
 
 	:- public((nospy)/4).
@@ -111,7 +111,7 @@
 	:- public(nospyall/0).
 	:- mode(nospyall, one).
 	:- info(nospyall/0, [
-		comment is 'Removes all spy points.'
+		comment is 'Removes all line number, predicate, and context spy points.'
 	]).
 
 	:- public(leash/1).

@@ -2849,7 +2849,7 @@ current_logtalk_flag(Flag, Value) :-
 			'$lgt_compile_body'(Body, TBody, DBody, Ctx),
 			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
-				asserta((THead :- ('$lgt_nop'(Body), '$lgt_debug'(rule(Obj, Head, 0), ExCtx), DBody)))
+				asserta((THead :- ('$lgt_nop'(Body), '$lgt_debug'(rule(Obj, Head, 0, 0), ExCtx), DBody)))
 			;	asserta((THead :- ('$lgt_nop'(Body), TBody)))
 			)
 		;	% predicate is not within the scope of the sender
@@ -2883,7 +2883,7 @@ current_logtalk_flag(Flag, Value) :-
 			'$lgt_assert_pred_def'(Def, DDef, Prefix, Head, ExCtx, THead, Update),
 			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
-				asserta((THead :- '$lgt_debug'(fact(Obj, Head, 0), ExCtx)))
+				asserta((THead :- '$lgt_debug'(fact(Obj, Head, 0, 0), ExCtx)))
 			;	'$lgt_add_db_lookup_cache_entry'(Obj, Head, SCtn, DclScope, Type, Sender, THead, DDef, Update),
 				asserta(THead)
 			)
@@ -2943,7 +2943,7 @@ current_logtalk_flag(Flag, Value) :-
 			'$lgt_compile_body'(Body, TBody, DBody, Ctx),
 			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
-				assertz((THead :- ('$lgt_nop'(Body), '$lgt_debug'(rule(Obj, Head, 0), ExCtx), DBody)))
+				assertz((THead :- ('$lgt_nop'(Body), '$lgt_debug'(rule(Obj, Head, 0, 0), ExCtx), DBody)))
 			;	assertz((THead :- ('$lgt_nop'(Body), TBody)))
 			)
 		;	% predicate is not within the scope of the sender
@@ -2977,7 +2977,7 @@ current_logtalk_flag(Flag, Value) :-
 			'$lgt_assert_pred_def'(Def, DDef, Prefix, Head, ExCtx, THead, Update),
 			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
-				assertz((THead :- '$lgt_debug'(fact(Obj, Head, 0), ExCtx)))
+				assertz((THead :- '$lgt_debug'(fact(Obj, Head, 0, 0), ExCtx)))
 			;	'$lgt_add_db_lookup_cache_entry'(Obj, Head, SCtn, DclScope, Type, Sender, THead, DDef, Update),
 				assertz(THead)
 			)
@@ -3069,7 +3069,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	TBody = ('$lgt_nop'(Body), _) ->
 		% rules (compiled both in normal and debug mode)
 		true
-	;	TBody = '$lgt_debug'(fact(_, _, _), _) ->
+	;	TBody = '$lgt_debug'(fact(_, _, _, _), _) ->
 		% facts compiled in debug mode
 		Body = true
 	;	% facts compiled in normal mode
@@ -3087,7 +3087,7 @@ current_logtalk_flag(Flag, Value) :-
 					clause(THead, TBody),
 					(	TBody = ('$lgt_nop'(Body), _) ->
 						true
-					;	TBody = '$lgt_debug'(fact(_, _, _), _) ->
+					;	TBody = '$lgt_debug'(fact(_, _, _, _), _) ->
 						Body = true
 					;	TBody = Body
 					)
@@ -3109,7 +3109,7 @@ current_logtalk_flag(Flag, Value) :-
 			clause(THead, TBody),
 			(	TBody = ('$lgt_nop'(Body), _) ->
 				true
-			;	TBody = '$lgt_debug'(fact(_, _, _), _) ->
+			;	TBody = '$lgt_debug'(fact(_, _, _, _), _) ->
 				Body = true
 			;	TBody = Body
 			)
@@ -3164,7 +3164,7 @@ current_logtalk_flag(Flag, Value) :-
 					retract((THead :- TBody)),
 					(	TBody = ('$lgt_nop'(Body), _) ->
 						true
-					;	TBody = '$lgt_debug'(fact(_, _, _), _) ->
+					;	TBody = '$lgt_debug'(fact(_, _, _, _), _) ->
 						Body = true
 					;	TBody = Body
 					),
@@ -3173,7 +3173,7 @@ current_logtalk_flag(Flag, Value) :-
 					retract((THead :- TBody)),
 					(	TBody = ('$lgt_nop'(Body), _) ->
 						true
-					;	TBody = '$lgt_debug'(fact(_, _, _), _) ->
+					;	TBody = '$lgt_debug'(fact(_, _, _, _), _) ->
 						Body = true
 					;	TBody = Body
 					)
@@ -3195,7 +3195,7 @@ current_logtalk_flag(Flag, Value) :-
 			retract((THead :- TBody)),
 			(	TBody = ('$lgt_nop'(Body), _) ->
 				true
-			;	TBody = '$lgt_debug'(fact(_, _, _), _) ->
+			;	TBody = '$lgt_debug'(fact(_, _, _, _), _) ->
 				Body = true
 			;	TBody = Body
 			)
@@ -3262,7 +3262,7 @@ current_logtalk_flag(Flag, Value) :-
 				(	call(DDef, Head, _, THead) ->
 					(	ObjFlags /\ 512 =:= 512 ->
 						% object compiled in debug mode
-						retract((THead :- '$lgt_debug'(fact(_, _, _), _)))
+						retract((THead :- '$lgt_debug'(fact(_, _, _, _), _)))
 					;	'$lgt_add_db_lookup_cache_entry'(Obj, Head, SCtn, Scope, Type, Sender, THead, DDef, true),
 						retract(THead)
 					),
@@ -3270,7 +3270,7 @@ current_logtalk_flag(Flag, Value) :-
 				;	call(Def, Head, _, THead) ->
 					(	ObjFlags /\ 512 =:= 512 ->
 						% object compiled in debug mode
-						retract((THead :- '$lgt_debug'(fact(_, _, _), _)))
+						retract((THead :- '$lgt_debug'(fact(_, _, _, _), _)))
 					;	'$lgt_add_db_lookup_cache_entry'(Obj, Head, Scope, Type, Sender, THead),
 						retract(THead)
 					)
@@ -3290,7 +3290,7 @@ current_logtalk_flag(Flag, Value) :-
 		(	call(DDef, Head, _, THead) ->
 			(	ObjFlags /\ 512 =:= 512 ->
 				% object compiled in debug mode
-				retract((THead :- '$lgt_debug'(fact(_, _, _), _)))
+				retract((THead :- '$lgt_debug'(fact(_, _, _, _), _)))
 			;	'$lgt_add_db_lookup_cache_entry'(Obj, Head, p, (dynamic), Sender, THead),
 				retract(THead)
 			)
@@ -4632,9 +4632,9 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_debug'(goal(_, TGoal), _) :-
 	call(TGoal).
 
-'$lgt_debug'(fact(_, _, _), _).
+'$lgt_debug'(fact(_, _, _, _), _).
 
-'$lgt_debug'(rule(_, _, _), _).
+'$lgt_debug'(rule(_, _, _, _), _).
 
 
 
@@ -8548,8 +8548,8 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, MetaVars, _, ExCtx, _, _, Line-_),
 	'$lgt_compile_head'(Head, THead, Ctx),
 	(	Head = {UserHead} ->
-		DHead = '$lgt_debug'(rule(Entity, user::UserHead, N), ExCtx)
-	;	DHead = '$lgt_debug'(rule(Entity, Head, N), ExCtx)
+		DHead = '$lgt_debug'(rule(Entity, user::UserHead, N, Line), ExCtx)
+	;	DHead = '$lgt_debug'(rule(Entity, Head, N), ExCtx, Line)
 	),
 	'$lgt_clause_number'(Head, Entity, Line, N).
 
@@ -8559,8 +8559,8 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, MetaVars, _, ExCtx, _, _, Line-_),
 	'$lgt_compile_head'(Head, THead, Ctx),
 	(	Head = {UserHead} ->
-		DHead = '$lgt_debug'(rule(Entity, user::UserHead, N), ExCtx)
-	;	DHead = '$lgt_debug'(rule(Entity, Head, N), ExCtx)
+		DHead = '$lgt_debug'(rule(Entity, user::UserHead, N, Line), ExCtx)
+	;	DHead = '$lgt_debug'(rule(Entity, Head, N, Line), ExCtx)
 	),
 	'$lgt_clause_number'(Head, Entity, Line, N).
 
@@ -8568,8 +8568,8 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_compile_head'(Fact, TFact, Ctx),
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, ExCtx, _, _, Line-_),
 	(	Fact = {UserFact} ->
-		DHead = '$lgt_debug'(fact(Entity, user::UserFact, N), ExCtx)
-	;	DHead = '$lgt_debug'(fact(Entity, Fact, N), ExCtx)
+		DHead = '$lgt_debug'(fact(Entity, user::UserFact, N, Line), ExCtx)
+	;	DHead = '$lgt_debug'(fact(Entity, Fact, N, Line), ExCtx)
 	),
 	'$lgt_clause_number'(Fact, Entity, Line, N).
 
@@ -14310,7 +14310,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_coinductive_success_hook'(Head, Hypothesis, HeadExCtx, HeadStack, BodyStack, Hook),
 	(	'$lgt_compiler_flag'(debug, on) ->
 		'$lgt_pp_entity_'(_, Entity, _, _, _),
-		Header = '$lgt_debug'(rule(Entity, DHead, 0), BodyExCtx),
+		Header = '$lgt_debug'(rule(Entity, DHead, 0, 0), BodyExCtx),
 		If = '$lgt_debug'(goal(check_coinductive_success(TestHead, HeadStack), '$lgt_check_coinductive_success'(TestHead, HeadStack, Hypothesis)), BodyExCtx),
 		Then = '$lgt_debug'(goal(coinductive_success_hook(Head, Hypothesis), Hook), BodyExCtx),
 		Else = (

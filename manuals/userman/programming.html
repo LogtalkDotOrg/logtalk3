@@ -400,7 +400,7 @@ The Logtalk distribution includes in its <code>tools</code> directory a command-
 </p>
 <pre>| ?- logtalk_load(debugger(loader)).</pre>
 <p>
-This tool implements debugging features similar to those found on most Prolog compilers. However, there are some differences between the usual implementation of Prolog debuggers and the current implementation of the Logtalk debugger that you should be aware. First, unlike some Prolog debuggers, the Logtalk debugger is not implemented as a meta-interpreter. This translates to a different, although similar, set of debugging features with some limitations when compared with some Prolog debuggers. Second, debugging is only possible for objects compiled in debug mode. When compiling an object in debug mode, Logtalk keeps each clause goal in both source form and compiled form in order to allow tracing of the goal execution. Third, implementation of spy points allows the user to specify the execution context for entering the debugger. This feature is a consequence of the encapsulation of predicates inside objects.
+This tool implements debugging features similar to those found on most Prolog compilers. However, there are some differences between the usual implementation of Prolog debuggers and the current implementation of the Logtalk debugger that you should be aware. First, unlike some Prolog debuggers, the Logtalk debugger is not implemented as a meta-interpreter. This translates to a different, although similar, set of debugging features with some limitations when compared with some Prolog debuggers. Second, debugging is only possible for entities compiled in debug mode. When compiling an entity in debug mode, Logtalk keeps each clause goal in both source form and compiled form in order to allow tracing of the goal execution. Third, implementation of spy points allows the user to specify the execution context for entering the debugger. This feature is a consequence of the encapsulation of predicates inside objects.
 </p>
 
 <h3 id="programming_debugmode">Compiling entities in debug mode</h3>
@@ -481,15 +481,20 @@ The abbreviations defined in Logtalk are similar to those defined on some Prolog
 <h3>Defining spy points<a id="programming_spypoints"></a></h3>
 
 <p>
-Logtalk spy points can be defined by simply stating which predicates should be spied, as in most Prolog debuggers, or by fully specifying the context for activating a spy point. 
+Logtalk spy points can be defined by simply stating which file line numbers or predicates should be spied, as in most Prolog debuggers, or by fully specifying the context for activating a spy point. In the case of line number spy points, the line number must correspond to the first line of an entity clause. To simplify the definition of line number spy points, these are specified using the entity identifier instead of the file name (as all entities share a single namespace, an entity can only be defined in a single file). 
 </p>
 
-<h4>Defining predicate spy points<a id="programming_pspypoints"></a></h4>
+<h4>Defining line number and predicate spy points<a id="programming_pspypoints"></a></h4>
 
 <p>
-Predicate spy points are specified using the method <code>spy/1</code>. The argument can be either a predicate indicator (<code>Functor/Arity</code>) or a list of predicate indicators. For example:
+Line number and predicate spy points are specified using the method <code>spy/1</code>. The argument can be either a pair entity identifier - line number (<code>Entity-Line</code>) or a predicate indicator (<code>Functor/Arity</code>) or a list of spy points. For example:
 </p>
-<pre>| ?- debugger::spy(foo/2).
+<pre>| ?- debugger::spy(person-42).
+
+Spy points set.
+yes
+
+| ?- debugger::spy(foo/2).
 
 Spy points set.
 yes
@@ -499,7 +504,7 @@ yes
 Spy points set.
 yes</pre>
 <p>
-Predicate spy points can be removed by using the method <code>nospy/1</code>. The argument can be a predicate indicator, a list of predicate indicators, or a non-instantiated variable in which case all predicate spy points will be removed. For example:
+Line numbers and predicate spy points can be removed by using the method <code>nospy/1</code>. The argument can be a spy point, a list of spy points, or a non-instantiated variable in which case all spy points will be removed. For example:
 </p>
 <pre>| ?- debugger::nospy(_).
 
@@ -540,10 +545,11 @@ will remove all context spy points where the value of <em>Self</em> matches the 
 <h4>Removing all spy points<a id="programming_nospyall"></a></h4>
 
 <p>
-We may remove all predicate spy points and all context spy points by using the method <code>nospyall/0</code>:
+We may remove all line number, predicate, and context spy points by using the method <code>nospyall/0</code>:
 </p>
 <pre>| ?- debugger::nospyall.
 
+All line number spy points removed.
 All predicate spy points removed.
 All context spy points removed.
 yes</pre>
@@ -576,7 +582,7 @@ Tracing a program execution may generate large amounts of debugging data. Debugg
 
 yes</pre>
 <p>
-At the beginning of a port description, the debugger will print a <code>+</code> or a <code>*</code> before the current goal if there is, respectively, a predicate spy point or a context spy point defined.
+At the beginning of a port description, the debugger will print a <code>#</code>, <code>+</code>, or <code>*</code> character before the current goal if there is, respectively, a line number, a predicate, or a context spy point defined.
 </p>
 <p>
 To stop the debugger, write:
@@ -635,7 +641,7 @@ The debugger pauses at leashed posts when tracing or when finding a spy point fo
 	<dt><code>+</code> &mdash; add</dt>
 		<dd>adds a predicate spy point for the current goal</dd>
 	<dt><code>-</code> &mdash; remove</dt>
-		<dd>removes a predicate spy point for the current goal</dd>
+		<dd>removes a line number of a predicate spy point for the current goal</dd>
 	<dt><code>h</code> &mdash; help</dt>
 		<dd>prints list of command options; <code>?</code> can be used in alternative</dd>
 </dl>
@@ -722,7 +728,7 @@ When objects or categories containing grammar rules are compiled in debug mode, 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: July 2, 2014</span>
+		<span>Last updated on: July 27, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="installing.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="migration.html">next</a></span><br/>

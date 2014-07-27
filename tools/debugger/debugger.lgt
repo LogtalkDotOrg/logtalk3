@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/07/03,
+		date is 2014/07/27,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -44,11 +44,14 @@
 	:- private(skipping_/0).
 	:- dynamic(skipping_/0).
 
-	:- private(spying_/2).
-	:- dynamic(spying_/2).
+	:- private(spying_line_number_/2).
+	:- dynamic(spying_line_number_/2).
 
-	:- private(spying_/4).
-	:- dynamic(spying_/4).
+	:- private(spying_predicate_/2).
+	:- dynamic(spying_predicate_/2).
+
+	:- private(spying_context_/4).
+	:- dynamic(spying_context_/4).
 
 	:- private(leashing_/1).
 	:- dynamic(leashing_/1).
@@ -139,13 +142,18 @@
 			)
 		;	print_message(information, debugger, debugger_off)
 		),
-		(	spying_(_, _) ->
-			findall(Functor/Arity, spying_(Functor,Arity), PredicateSpyPoints),
+		(	spying_line_number_(_, _) ->
+			findall(Entity-Line, spying_line_number_(Entity,Line), LineNumberSpyPoints),
+			print_message(information, debugger, line_number_spy_points(LineNumberSpyPoints))
+		;	print_message(information, debugger, no_line_number_spy_points_defined)
+		),
+		(	spying_predicate_(_, _) ->
+			findall(Functor/Arity, spying_predicate_(Functor,Arity), PredicateSpyPoints),
 			print_message(information, debugger, predicate_spy_points(PredicateSpyPoints))
 		;	print_message(information, debugger, no_predicate_spy_points_defined)
 		),
-		(	spying_(_, _, _, _) ->
-			findall((Sender,This,Self,Goal), spying_(Sender,This,Self,Goal), ContextSpyPoints),
+		(	spying_context_(_, _, _, _) ->
+			findall((Sender,This,Self,Goal), spying_context_(Sender,This,Self,Goal), ContextSpyPoints),
 			print_message(information, debugger, context_spy_points(ContextSpyPoints))
 		;	print_message(information, debugger, no_context_spy_points_defined)
 		),
@@ -162,51 +170,60 @@
 		;	fail
 		).
 
-	spy(Preds) :-
-		nonvar(Preds),
-		spy_aux(Preds),
-		print_message(information, debugger, predicate_spy_point_set),
+	spy(SpyPoints) :-
+		nonvar(SpyPoints),
+		spy_aux(SpyPoints),
+		print_message(information, debugger, all_spy_points_set),
 		(	debugging_ ->
 			true
 		;	debug
 		).
 
 	spy_aux([]).
-	spy_aux([Functor/Arity| Preds]) :-
-		nonvar(Functor),
-		nonvar(Arity),
-		(	spying_(Functor, Arity) ->
+	spy_aux([SpyPoint| SpyPoints]) :-
+		nonvar(SpyPoint),
+		spy_aux(SpyPoint),
+		spy_aux(SpyPoints).
+	spy_aux(Entity-Line) :-
+		callable(Entity),
+		integer(Line),
+		functor(Entity, Functor, Arity),
+		functor(Template, Functor, Arity),
+		(	spying_line_number_(Template, Line) ->
 			true
-		;	assertz(spying_(Functor, Arity))
-		),
-		spy_aux(Preds).
+		;	assertz(spying_line_number_(Template, Line))
+		).
 	spy_aux(Functor/Arity) :-
 		nonvar(Functor),
 		nonvar(Arity),
-		(	spying_(Functor, Arity) ->
+		(	spying_predicate_(Functor, Arity) ->
 			true
-		;	assertz(spying_(Functor, Arity))
+		;	assertz(spying_predicate_(Functor, Arity))
 		).
 
-	nospy(Preds) :-
-		nospy_aux(Preds),
-		print_message(information, debugger, matching_predicate_spy_points_removed).
+	nospy(SpyPoints) :-
+		nospy_aux(SpyPoints),
+		print_message(information, debugger, matching_spy_points_removed).
 
-	nospy_aux(Preds) :-
-		(	var(Preds) ->
-			retractall(spying_(_, _))
-		;	nospy_aux2(Preds)
+	nospy_aux(SpyPoints) :-
+		(	var(SpyPoints) ->
+			retractall(spying_line_number_(_, _)),
+			retractall(spying_predicate_(_, _))
+		;	nospy_aux2(SpyPoints)
 		).
 
 	nospy_aux2([]).
-	nospy_aux2([Functor/Arity| Preds]) :-
-		retractall(spying_(Functor, Arity)),
-		nospy_aux2(Preds).
+	nospy_aux2([SpyPoint| SpyPoints]) :-
+		nonvar(SpyPoint),
+		nospy_aux2(SpyPoint),
+		nospy_aux2(SpyPoints).
+	nospy_aux2(Entity-Line) :-
+		retractall(spying_line_number_(Entity, Line)).
 	nospy_aux2(Functor/Arity) :-
-		retractall(spying_(Functor, Arity)).
+		retractall(spying_predicate_(Functor, Arity)).
 
 	spy(Sender, This, Self, Goal) :-
-		asserta(spying_(Sender, This, Self, Goal)),
+		asserta(spying_context_(Sender, This, Self, Goal)),
 		print_message(information, debugger, context_spy_point_set),
 		(	debugging_ ->
 			true
@@ -214,13 +231,15 @@
 		).
 
 	nospy(Sender, This, Self, Goal) :-
-		retractall(spying_(Sender, This, Self, Goal)),
+		retractall(spying_context_(Sender, This, Self, Goal)),
 		print_message(comment, debugger, matching_context_spy_points_removed).
 
 	nospyall :-
-		retractall(spying_(_, _)),
+		retractall(spying_line_number_(_, _)),
+		print_message(comment, debugger, all_line_number_spy_points_removed),
+		retractall(spying_predicate_(_, _)),
 		print_message(comment, debugger, all_predicate_spy_points_removed),
-		retractall(spying_(_, _, _, _)),
+		retractall(spying_context_(_, _, _, _)),
 		print_message(comment, debugger, all_context_spy_points_removed).
 
 	leash(Value) :-
@@ -284,14 +303,19 @@
 			)
 		).
 
+	spying(fact(Entity,_,Line), _, _, '#') :-
+		spying_line_number_(Entity, Line),
+		!.
+	spying(rule(Entity,_,Line), _, _, '#') :-
+		spying_line_number_(Entity, Line),
+		!.
 	spying(_, Goal, _, '+') :-
 		functor(Goal, Functor, Arity),
-		\+ \+ spying_(Functor, Arity),
+		\+ \+ spying_predicate_(Functor, Arity),
 		!.
-
 	spying(_, Goal, ExCtx, '*') :-
 		logtalk::execution_context(ExCtx, Sender, This, Self, _, _),
-		\+ \+ spying_(Sender, This, Self, Goal).
+		\+ \+ spying_context_(Sender, This, Self, Goal).
 
 	:- multifile(logtalk::debug_handler_provider/1).
 	:- if((current_logtalk_flag(prolog_dialect, qp); current_logtalk_flag(prolog_dialect, xsb))).
@@ -314,15 +338,15 @@
 	logtalk::debug_handler(Event, ExCtx) :-
 		debug_handler(Event, ExCtx).
 
-	debug_handler(fact(_, Fact, N), ExCtx) :-
+	debug_handler(fact(Entity, Fact, N, Line), ExCtx) :-
 		(	debugging_, \+ skipping_ ->
-			port(fact(N), _, Fact, _, _, ExCtx, Action),
+			port(fact(Entity, N, Line), _, Fact, _, _, ExCtx, Action),
 			{Action}
 		;	true
 		).
-	debug_handler(rule(_, Head, N), ExCtx) :-
+	debug_handler(rule(Entity, Head, N, Line), ExCtx) :-
 		(	debugging_, \+ skipping_ ->
-			port(rule(N), _, Head, _, _, ExCtx, Action),
+			port(rule(Entity, N, Line), _, Head, _, _, ExCtx, Action),
 			{Action}
 		;	true
 		).
@@ -459,6 +483,7 @@
 	valid_port_option((=), _, _) :- !.
 	valid_port_option((*), _, ' ') :- !.
 	valid_port_option((+), _, ' ') :- !.
+	valid_port_option((-), _, (#)) :- !.
 	valid_port_option((-), _, (+)) :- !.
 	valid_port_option(e, exception, _) :- !.
 
@@ -513,12 +538,17 @@
 		spy(Functor/Arity),
 		fail.
 
-	do_port_option((-), _, Goal, _, _, _, true) :-
-		(	Goal = (_ :: Pred) ->
-			functor(Pred, Functor, Arity)
-		;	functor(Goal, Functor, Arity)
-		),
-		nospy(Functor/Arity).
+	do_port_option((-), Port, Goal, _, _, _, true) :-
+		(	Port = fact(Entity, _, Line) ->
+			nospy(Entity-Line)
+		;	Port = rule(Entity, _, Line) ->
+			nospy(Entity-Line)
+		;	Goal = (_ :: Pred) ->
+			functor(Pred, Functor, Arity),
+			nospy(Functor/Arity)
+		;	functor(Goal, Functor, Arity),
+			nospy(Functor/Arity)
+		).
 
 	do_port_option((*), _, Goal, _, _, _, _) :-
 		functor(Goal, Functor, Arity),

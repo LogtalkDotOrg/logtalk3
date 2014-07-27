@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2014/2/7</code>
+            <code>2014/7/27</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -45,7 +45,7 @@
         <div class="section">
           <h3 id="reset/0" class="code">reset/0</h3>
           <blockquote>
-            <p class="comment">Resets all debugging settings, including spy points and context spy points.</p>
+            <p class="comment">Resets all debugging settings, including spy points.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -61,7 +61,7 @@
         <div class="section">
           <h3 id="debug/0" class="code">debug/0</h3>
           <blockquote>
-            <p class="comment">Starts debugging for all defined spy points and context spy points.</p>
+            <p class="comment">Starts debugging for all defined spy points.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -77,7 +77,7 @@
         <div class="section">
           <h3 id="nodebug/0" class="code">nodebug/0</h3>
           <blockquote>
-            <p class="comment">Stops debugging for all defined spy points and context spy points.</p>
+            <p class="comment">Stops debugging for all defined spy points.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -93,7 +93,7 @@
         <div class="section">
           <h3 id="debugging/0" class="code">debugging/0</h3>
           <blockquote>
-            <p class="comment">Reports current debugging settings, including spy points and context spy points.</p>
+            <p class="comment">Reports current debugging settings, including spy points.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -161,7 +161,7 @@
         <div class="section">
           <h3 id="spy/1" class="code">spy/1</h3>
           <blockquote>
-            <p class="comment">Sets a spy point for a predicate or a list of predicates.</p>
+            <p class="comment">Sets a line number spy point or a predicate spy point or a list of spy points.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -170,14 +170,14 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>spy(Predicate)</code>
+              <code>spy(SpyPoint)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>spy(+predicate_indicator) &ndash; one</code>
+              <code>spy(+spy_point) &ndash; one</code>
             </dd>
             <dd class="value">
-              <code>spy(+list(predicate_indicator)) &ndash; one</code>
+              <code>spy(+list(spy_point)) &ndash; one</code>
             </dd>
           </dl>
         </div>
@@ -204,7 +204,7 @@
         <div class="section">
           <h3 id="nospy/1" class="code">nospy/1</h3>
           <blockquote>
-            <p class="comment">Removes all matching predicate spy points.</p>
+            <p class="comment">Removes all matching line number spy points and predicate spy points.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -213,17 +213,17 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>nospy(Predicate)</code>
+              <code>nospy(SpyPoint)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
               <code>nospy(@variable) &ndash; one</code>
             </dd>
             <dd class="value">
-              <code>nospy(+predicate_indicator) &ndash; one</code>
+              <code>nospy(+spy_point) &ndash; one</code>
             </dd>
             <dd class="value">
-              <code>nospy(+list(predicate_indicator)) &ndash; one</code>
+              <code>nospy(+list(spy_point)) &ndash; one</code>
             </dd>
           </dl>
         </div>
@@ -250,7 +250,7 @@
         <div class="section">
           <h3 id="nospyall/0" class="code">nospyall/0</h3>
           <blockquote>
-            <p class="comment">Removes all spy points.</p>
+            <p class="comment">Removes all line number, predicate, and context spy points.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>

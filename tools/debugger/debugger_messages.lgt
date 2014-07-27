@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/07/03,
+		date is 2014/07/27,
 		comment is 'Logtalk debugger default message translations.'
 	]).
 
@@ -99,18 +99,28 @@
 
 	% predicate spy points
 
+	logtalk::message_tokens(line_number_spy_points(SpyPoints), debugger) -->
+		['    Defined line number spy points (Entity-Line):'-[], nl],
+		spy_points(SpyPoints).
+
 	logtalk::message_tokens(predicate_spy_points(SpyPoints), debugger) -->
 		['    Defined predicate spy points (Functor/Arity):'-[], nl],
-		predicate_spy_points(SpyPoints).
+		spy_points(SpyPoints).
 
-	logtalk::message_tokens(matching_predicate_spy_points_removed, debugger) -->
-		['    All matching predicate spy points removed.'-[], nl].
+	logtalk::message_tokens(matching_spy_points_removed, debugger) -->
+		['    All matching line number and predicate spy points removed.'-[], nl].
+
+	logtalk::message_tokens(all_line_number_spy_points_removed, debugger) -->
+		['    All line number spy points removed.'-[], nl].
 
 	logtalk::message_tokens(all_predicate_spy_points_removed, debugger) -->
 		['    All predicate spy points removed.'-[], nl].
 
-	logtalk::message_tokens(predicate_spy_point_set, debugger) -->
-		['    Predicate spy points set.'-[], nl].
+	logtalk::message_tokens(all_spy_points_set, debugger) -->
+		['    All specified spy points set.'-[], nl].
+
+	logtalk::message_tokens(no_line_number_spy_points_defined, debugger) -->
+		['    No line number spy points are defined.'-[], nl].
 
 	logtalk::message_tokens(no_predicate_spy_points_defined, debugger) -->
 		['    No predicate spy points are defined.'-[], nl].
@@ -217,12 +227,12 @@
 		leashed_ports(Ports).
 	leashed_ports([]) --> [].
 
-	port_name(fact(N)) -->
+	port_name(fact(_,N,_)) -->
 		(	{N =:= 0} ->
 			[' Fact: '-[]]
 		;	[' Fact: (clause #~w) '-[N]]
 		).
-	port_name(rule(N)) -->
+	port_name(rule(_,N,_)) -->
 		(	{N =:= 0} ->
 			[' Rule: '-[]]
 		;	[' Rule: (clause #~w) '-[N]]
@@ -240,21 +250,24 @@
 
 	% invocation number
 
-	invocation_number(fact(_), _) -->
+	invocation_number(fact(_,_,_), _) -->
 		!, [].
-	invocation_number(rule(_), _) -->
+	invocation_number(rule(_,_,_), _) -->
 		!, [].
 	invocation_number(_, N) -->
 		['(~w) '-[N]].
 
 	% auxiliary grammar rules
 
-	predicate_spy_points([SpyPoint| SpyPoints]) -->
-		predicate_spy_point(SpyPoint),
-		predicate_spy_points(SpyPoints).
-	predicate_spy_points([]) --> [].
+	spy_points([SpyPoint| SpyPoints]) -->
+		spy_point(SpyPoint),
+		spy_points(SpyPoints).
+	spy_points([]) --> [].
 
-	predicate_spy_point(Functor/Arity) -->
+	spy_point(Entity-Line) -->
+		{ground_term_copy(Entity, GroundEntity)},
+		['        ~q'-[GroundEntity-Line], nl].
+	spy_point(Functor/Arity) -->
 		['        ~q'-[Functor/Arity], nl].
 
 	context_spy_points([SpyPoint| SpyPoints]) -->
