@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2014/6/20</code>
+            <code>2014/7/27</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -199,6 +199,86 @@
           </dl>
         </div>
         <div class="section">
+          <h3 id="directories/3" class="code">directories/3</h3>
+          <blockquote>
+            <p class="comment">Creates all supported diagrams for a set of directories using the specified options.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>directories(Project,Directories,Options)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>directories(+atom,+list(atom),+list(compound)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="directories/2" class="code">directories/2</h3>
+          <blockquote>
+            <p class="comment">Creates all supported diagrams for a set of directories using the default options.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>directories(Project,Directories)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>directories(+atom,+list(atom)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="directory/3" class="code">directory/3</h3>
+          <blockquote>
+            <p class="comment">Creates all supported diagrams for a directory using the specified options.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>directory(Project,Directory,Options)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>directory(+atom,+atom,+list(compound)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="directory/2" class="code">directory/2</h3>
+          <blockquote>
+            <p class="comment">Creates all supported diagrams for a directory using default options.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>directory(Project,Directory)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>directory(+atom,+atom) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
           <h3 id="files/3" class="code">files/3</h3>
           <blockquote>
             <p class="comment">Creates all supported diagrams for a set of files using the specified options. The file can be specified by name, basename, full path, or using library notation.</p>
@@ -299,7 +379,7 @@
       <div class="section">
         <dl class="remarks">
           <dt class="comment">Common options:</dt>
-          <dd class="text">title/1, date/1, output_directory/1, relation_labels/1, node_type_captions/1, exclude_files/1, exclude_libraries/1, url_prefixes/1, and omit_path_prefix/1.</dd>
+          <dd class="text">title/1, date/1, output_directory/1, relation_labels/1, node_type_captions/1, exclude_files/1, exclude_libraries/1, url_prefixes/1, omit_path_prefix/1, entity_url_suffix_target/2, and layout/1.</dd>
         </dl>
       </div>
     </div>

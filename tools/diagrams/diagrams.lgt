@@ -28,11 +28,11 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/06/20,
+		date is 2014/07/27,
 		comment is 'Predicates for generating all supported diagrams for libraries and files in one step using the specified format.',
 		parnames is ['Format'],
 		remarks is [
-			'Common options:' - 'title/1, date/1, output_directory/1, relation_labels/1, node_type_captions/1, exclude_files/1, exclude_libraries/1, url_prefixes/1, and omit_path_prefix/1.'
+			'Common options:' - 'title/1, date/1, output_directory/1, relation_labels/1, node_type_captions/1, exclude_files/1, exclude_libraries/1, url_prefixes/1, omit_path_prefix/1, entity_url_suffix_target/2, and layout/1.'
 		]
 	]).
 
@@ -130,6 +130,54 @@
 
 	library(Library) :-
 		::library(Library, []).
+
+	:- public(directories/3).
+	:- mode(directories(+atom, +list(atom), +list(compound)), one).
+	:- info(directories/3, [
+		comment is 'Creates all supported diagrams for a set of directories using the specified options.',
+		argnames is ['Project', 'Directories', 'Options']
+	]).
+
+	directories(Project, Directories, Options) :-
+		parameter(1, Format),
+		forall(
+			supported_diagram(Format, Diagram),
+			Diagram::directories(Project, Directories, Options)
+		).
+
+	:- public(directories/2).
+	:- mode(directories(+atom, +list(atom)), one).
+	:- info(directories/2, [
+		comment is 'Creates all supported diagrams for a set of directories using the default options.',
+		argnames is ['Project', 'Directories']
+	]).
+
+	directories(Project, Directories) :-
+		::directories(Project, Directories, []).
+
+	:- public(directory/3).
+	:- mode(directory(+atom, +atom, +list(compound)), one).
+	:- info(directory/3, [
+		comment is 'Creates all supported diagrams for a directory using the specified options.',
+		argnames is ['Project', 'Directory', 'Options']
+	]).
+
+	directory(Project, Directory, Options) :-
+		parameter(1, Format),
+		forall(
+			supported_diagram(Format, Diagram),
+			Diagram::directory(Project, Directory, Options)
+		).
+
+	:- public(directory/2).
+	:- mode(directory(+atom, +atom), one).
+	:- info(directory/2, [
+		comment is 'Creates all supported diagrams for a directory using default options.',
+		argnames is ['Project', 'Directory']
+	]).
+
+	directory(Project, Directory) :-
+		::directory(Project, Directory, []).
 
 	:- public(files/3).
 	:- mode(files(+atom, +list(atom), +list(compound)), one).
