@@ -4739,39 +4739,39 @@ current_logtalk_flag(Flag, Value) :-
 			'$lgt_print_message'(comment(loading), core, skipping_reloading_file(SourceFile, Flags))
 		;	% we're reloading a source file
 			'$lgt_print_message'(silent(loading), core, reloading_file(SourceFile, Flags)),
-			'$lgt_update_loaded_file'(Directory, Basename, SourceFile, Flags, PrologFile),
-			'$lgt_compile_file'(SourceFile, PrologFile, Flags, loading, Current),
-			'$lgt_load_compiled_file'(SourceFile, PrologFile),
+			'$lgt_compile_and_load_file'(Directory, Basename, SourceFile, Flags, PrologFile, Current),
 			'$lgt_print_message'(comment(loading), core, reloaded_file(SourceFile, Flags))
 		)
-	;	% first time loading this source file
+	;	% first time loading this source file or previous attempt failed due compilation error
 		'$lgt_print_message'(silent(loading), core, loading_file(SourceFile, Flags)),
-		% remember the file was loaded before it is successfully compiled and loaded
-		% so that we can use the make feature to reload it in case of error
-		'$lgt_add_loaded_file'(Directory, Basename, SourceFile, Flags, PrologFile),
-		% compile the file to disk
-		'$lgt_compile_file'(SourceFile, PrologFile, Flags, loading, Current),
-		% save the file loading dependency on a parent file if it exists
-		(	'$lgt_file_loading_stack_'(ParentSourceFile) ->
-			retractall('$lgt_parent_file_'(SourceFile, _)),
-			asserta('$lgt_parent_file_'(SourceFile, ParentSourceFile))
-		;	% no parent file
-			true
-		),
-		asserta('$lgt_file_loading_stack_'(SourceFile)),
-		'$lgt_load_compiled_file'(SourceFile, PrologFile),
-		retract('$lgt_file_loading_stack_'(SourceFile)),
+		'$lgt_compile_and_load_file'(Directory, Basename, SourceFile, Flags, PrologFile, Current),
 		'$lgt_print_message'(comment(loading), core, loaded_file(SourceFile, Flags))
 	),
 	'$lgt_change_directory'(Current).
 
 
+'$lgt_compile_and_load_file'(Directory, Basename, SourceFile, Flags, PrologFile, Current) :-
+	retractall('$lgt_failed_file_'(SourceFile)),
+	% remember the file was loaded before it is successfully compiled and loaded
+	% so that we can use the make feature to reload it in case of error
+	'$lgt_update_loaded_file'(Directory, Basename, SourceFile, Flags, PrologFile),
+	% save the file loading dependency on a parent file if it exists
+	(	'$lgt_file_loading_stack_'(ParentSourceFile) ->
+		retractall('$lgt_parent_file_'(SourceFile, _)),
+		asserta('$lgt_parent_file_'(SourceFile, ParentSourceFile))
+	;	% no parent file
+		true
+	),
+	% compile the file to disk
+	'$lgt_compile_file'(SourceFile, PrologFile, Flags, loading, Current),
+	% load the compiled file
+	asserta('$lgt_file_loading_stack_'(SourceFile)),
+	'$lgt_load_compiled_file'(SourceFile, PrologFile),
+	retract('$lgt_file_loading_stack_'(SourceFile)).
+
+
+
 '$lgt_update_loaded_file'(Directory, Basename, Path, Flags, PrologFile) :-
-	retractall('$lgt_loaded_file_'(Basename, Directory, _, _, _, _, _)),
-	'$lgt_add_loaded_file'(Directory, Basename, Path, Flags, PrologFile).
-
-
-'$lgt_add_loaded_file'(Directory, Basename, Path, Flags, PrologFile) :-
 	% compilation of the file may have failed in previous attempt;
 	% ensure that there aren't duplicate entries
 	retractall('$lgt_loaded_file_'(Basename, Directory, _, _, _, _, _)),
@@ -4803,8 +4803,7 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_load_compiled_file'(SourceFile, PrologFile, Options),
 		Error,
 		'$lgt_load_compiled_file_error_handler'(SourceFile, Error)
-	),
-	retractall('$lgt_failed_file_'(SourceFile)).
+	).
 
 
 '$lgt_load_compiled_file'(SourceFile, PrologFile, Options) :-
@@ -5016,7 +5015,16 @@ current_logtalk_flag(Flag, Value) :-
 		retractall('$lgt_failed_file_'(SourceFile))
 	;	'$lgt_change_directory'(Directory),
 		assertz('$lgt_failed_file_'(SourceFile)),
+		'$lgt_propagate_failure_to_parent_files'(SourceFile),
 		fail
+	).
+
+
+'$lgt_propagate_failure_to_parent_files'(File) :-
+	(	'$lgt_parent_file_'(File, Parent) ->
+		assertz('$lgt_failed_file_'(Parent)),
+		'$lgt_propagate_failure_to_parent_files'(Parent)
+	;	true
 	).
 
 
