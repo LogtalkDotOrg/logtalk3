@@ -4762,13 +4762,12 @@ current_logtalk_flag(Flag, Value) :-
 	;	% no parent file
 		true
 	),
-	% compile the file to disk
+	% compile the source file to an intermediate Prolog file on disk
 	'$lgt_compile_file'(SourceFile, PrologFile, Flags, loading, Current),
-	% load the compiled file
+	% compile and load the intermediate Prolog file
 	asserta('$lgt_file_loading_stack_'(SourceFile)),
 	'$lgt_load_compiled_file'(SourceFile, PrologFile),
-	retract('$lgt_file_loading_stack_'(SourceFile)).
-
+	retractall('$lgt_file_loading_stack_'(SourceFile)).
 
 
 '$lgt_update_loaded_file'(Directory, Basename, Path, Flags, PrologFile) :-
@@ -4794,27 +4793,23 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_load_compiled_file'(SourceFile, PrologFile) :-
 	% retrieve the backend Prolog specific file loading options
-	'$lgt_compiler_flag'(prolog_loader, Options),
-	% sometimes there are syntax errors in the generated intermediate Prolog files
-	% that are due to write_canonical/2 and read_term/3 bugs; thus we must ensure
-	% that the '$lgt_file_loading_stack_'/1 and '$lgt_parent_file_'/2 entries are
-	% deleted in case of error
-	catch(
-		'$lgt_load_compiled_file'(SourceFile, PrologFile, Options),
-		Error,
-		'$lgt_load_compiled_file_error_handler'(SourceFile, Error)
-	).
-
-
-'$lgt_load_compiled_file'(SourceFile, PrologFile, Options) :-
+	'$lgt_compiler_flag'(prolog_loader, DefaultOptions),
 	% loading a file can result in the redefinition of existing
 	% entities thus potentially invalidating cache entries 
 	'$lgt_clean_lookup_caches',
 	'$lgt_report_redefined_entities',
 	(	'$lgt_pp_file_encoding_'(_, Encoding) ->
 		% use the same encoding as the original source file
-		'$lgt_load_prolog_code'(PrologFile, SourceFile, [encoding(Encoding)| Options])
-	;	'$lgt_load_prolog_code'(PrologFile, SourceFile, Options)
+		Options = [encoding(Encoding)| Options]
+	;	Options = DefaultOptions
+	),
+	(	catch('$lgt_load_prolog_code'(PrologFile, SourceFile, Options), _, fail) ->
+		true
+	;	% sometimes there are syntax errors in the generated intermediate Prolog
+		% files that are due to write_canonical/2 and read_term/3 bugs
+		retractall('$lgt_file_loading_stack_'(SourceFile)),
+		assertz('$lgt_failed_file_'(SourceFile)),
+		'$lgt_propagate_failure_to_parent_files'(SourceFile)
 	),
 	(	'$lgt_compiler_flag'(clean, on) ->
 		'$lgt_delete_intermediate_files'(PrologFile)
@@ -4838,13 +4833,6 @@ current_logtalk_flag(Flag, Value) :-
 	fail.
 
 '$lgt_delete_intermediate_files'(_).
-
-
-'$lgt_load_compiled_file_error_handler'(SourceFile, Error) :-
-	retract('$lgt_file_loading_stack_'(SourceFile)),
-	retractall('$lgt_parent_file_'(SourceFile, _)),
-	assertz('$lgt_failed_file_'(SourceFile)),
-	throw(Error).
 
 
 
