@@ -221,6 +221,8 @@
 			'        / - remove (removes a context spy point for the current goal)'-[], nl,
 			'        + - add (adds a predicate spy point for the current goal)'-[], nl,
 			'        - - remove (removes a predicate spy point for the current goal)'-[], nl,
+			'        # - add (adds a line number spy point for the current clause)'-[], nl,
+			'        | - remove (removes a line number spy point for the current clause)'-[], nl,
 			'        h - help (prints this list of options)'-[], nl,
 			'        ? - help (prints this list of options)'-[], nl
 		].

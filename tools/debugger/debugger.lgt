@@ -486,8 +486,9 @@
 	valid_port_option((*), _, ' ') :- !.
 	valid_port_option((/), _, (*)) :- !.
 	valid_port_option((+), _, ' ') :- !.
-	valid_port_option((-), _, (#)) :- !.
 	valid_port_option((-), _, (+)) :- !.
+	valid_port_option((#), _, ' ') :- !.
+	valid_port_option(('|'), _, (#)) :- !.
 	valid_port_option(e, exception, _) :- !.
 
 	do_port_option('\r', _, _, _, _, _, true).
@@ -534,23 +535,33 @@
 		fail.
 
 	do_port_option((+), _, Goal, _, _, _, _) :-
-		(	Goal = (_ :: Pred) ->
-			functor(Pred, Functor, Arity)
+		(	Goal = (_ :: Predicate) ->
+			functor(Predicate, Functor, Arity)
 		;	functor(Goal, Functor, Arity)
 		),
 		spy(Functor/Arity),
 		fail.
 
-	do_port_option((-), Port, Goal, _, _, _, true) :-
-		(	Port = fact(Entity, _, Line) ->
-			nospy(Entity-Line)
-		;	Port = rule(Entity, _, Line) ->
-			nospy(Entity-Line)
-		;	Goal = (_ :: Pred) ->
-			functor(Pred, Functor, Arity),
+	do_port_option((-), _, Goal, _, _, _, true) :-
+		(	Goal = (_ :: Predicate) ->
+			functor(Predicate, Functor, Arity),
 			nospy(Functor/Arity)
 		;	functor(Goal, Functor, Arity),
 			nospy(Functor/Arity)
+		).
+
+	do_port_option((#), Port, _, _, _, _, true) :-
+		(	Port = fact(Entity, _, Line) ->
+			spy(Entity-Line)
+		;	Port = rule(Entity, _, Line),
+			spy(Entity-Line)
+		).
+
+	do_port_option(('|'), Port, _, _, _, _, true) :-
+		(	Port = fact(Entity, _, Line) ->
+			nospy(Entity-Line)
+		;	Port = rule(Entity, _, Line),
+			nospy(Entity-Line)
 		).
 
 	do_port_option((*), _, Goal, _, _, _, _) :-
