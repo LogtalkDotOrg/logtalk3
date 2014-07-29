@@ -96,8 +96,8 @@ predicates, and files) and arrows (entity, predicate, and file relations):
 - file dependency relations  
 	`rdiamond` (arrow ending with a black half diamond)
 
-The entities, predicates, and files that are not part of the files or libraries
-for which you are generating a diagram use a dashed border.
+The entity, predicate, and file nodes that are not part of the entities, files,
+or libraries for which you are generating a diagram use a dashed border.
 
 The diagrams `.dot` files are created on the current directory by default.
 These files can be easily converted into a printable format such as SVG, PDF,
@@ -120,9 +120,9 @@ be used for showing e.g. entity types, relation types, file paths, and for
 navigating to files and directories of files (libraries). See the relevant
 diagram options below in order to take advantage of these features.
 
-When generating diagrams for libraries, is possible to split a diagram with
-several disconnected entity graphs using the `ccomps` command-line executable.
-For example:
+When generating diagrams for multiple libraries or directories, it's possible
+to split a diagram with several disconnected library or directory graphs using
+the `ccomps` command-line executable. For example:
 
 	ccomps -x -o subdiagram.dot diagram.dot
 
@@ -208,7 +208,7 @@ For file diagrams the options are:
 
 The option `omit_path_prefixes(Prefixes)` with a non-empty list of prefixes
 should be used together with the option `directory_paths(true)`, in particular
-when generating diagrams for libraries with external files.
+when generating diagrams for libraries and directories with external files.
 
 Be sure to set the `source_data` flag `on` before compiling the libraries
 or files for which you want to generated diagrams.

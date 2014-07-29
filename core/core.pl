@@ -4806,7 +4806,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	catch('$lgt_load_prolog_code'(PrologFile, SourceFile, Options), _, fail) ->
 		true
 	;	% sometimes there are syntax errors in the generated intermediate Prolog
-		% files that are due to write_canonical/2 and read_term/3 bugs
+		% files that are due to write_canonical/2 and/or read_term/3 bugs
 		retractall('$lgt_file_loading_stack_'(SourceFile)),
 		assertz('$lgt_failed_file_'(SourceFile)),
 		'$lgt_propagate_failure_to_parent_files'(SourceFile)
@@ -4994,9 +4994,9 @@ current_logtalk_flag(Flag, Value) :-
 
 % auxiliary predicate when compiling a file as a consequence of a logtalk_load/1-2 call
 %
-% with some backend Prolog compilers, a syntax error while reading the terms in a source
-% file results in a printed message and failure instead of an exception but we need to
-% restore the original directory before passing the failure up to the caller
+% a syntax error while reading the terms in a source file results in a printed message
+% and failure instead of an exception but we need to restore the original directory
+% before passing the failure up to the caller
 
 '$lgt_compile_file'(SourceFile, PrologFile, Flags, Action, Directory) :-
 	(	'$lgt_compile_file'(SourceFile, PrologFile, Flags, Action) ->
@@ -5007,6 +5007,12 @@ current_logtalk_flag(Flag, Value) :-
 		fail
 	).
 
+
+% a file can be loaded by a loader file that, in turn, may also be loaded by
+% another loader file; propagating a file loading failure to its parent files
+% provides better top-level usability allowing realoding of fixed files by
+% simply relaoding the loader files, which also ensures loading of any files
+% loaded after the broken file that were not loaded in the previous attempt
 
 '$lgt_propagate_failure_to_parent_files'(File) :-
 	(	'$lgt_parent_file_'(File, Parent) ->
