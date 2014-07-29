@@ -66,6 +66,9 @@ Tools
 * ADDED: The `debugger` tool now supports the definition of file line number
 spy points.
 
+* FIXED: Bug in the `debugger` tool that prevented forcing a failure at an
+unification port.
+
 * ADDED: Support to the `diagrams` tool to generate file, cross-reference, and
 entity diagrams for Prolog module applications when using SWI-Prolog or YAP as
 the backend compilers.
