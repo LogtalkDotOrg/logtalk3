@@ -72,6 +72,9 @@ number, entity, predicate, and clause number information.
 * FIXED: Bug in the `debugger` tool that prevented forcing a failure at an
 unification port.
 
+* FIXED: Bug in the `debugger` tool that prevented removing a context spy
+point.
+
 * ADDED: Support to the `diagrams` tool to generate file, cross-reference, and
 entity diagrams for Prolog module applications when using SWI-Prolog or YAP as
 the backend compilers.

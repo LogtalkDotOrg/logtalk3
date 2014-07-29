@@ -484,6 +484,7 @@
 	valid_port_option((?), _, _) :- !.
 	valid_port_option((=), _, _) :- !.
 	valid_port_option((*), _, ' ') :- !.
+	valid_port_option((/), _, (*)) :- !.
 	valid_port_option((+), _, ' ') :- !.
 	valid_port_option((-), _, (#)) :- !.
 	valid_port_option((-), _, (+)) :- !.
