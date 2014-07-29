@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/07/27,
+		date is 2014/07/29,
 		comment is 'Logtalk debugger default message translations.'
 	]).
 
@@ -154,6 +154,18 @@
 			'    Coinduction stack: ~q'-[Stack], nl
 		].
 
+	% file context
+
+	logtalk::message_tokens(file_context(Basename, Directory, Entity, Predicate, Clause, Line), debugger) -->
+		{atom_concat(Directory, Basename, File)},
+		[
+			'    File:              ~w'-[File], nl,
+			'    Line number:       ~w'-[Line], nl,
+			'    Entity:            ~q'-[Entity], nl,
+			'    Predicate:         ~q'-[Predicate], nl,
+			'    Clause:            ~w'-[Clause], nl
+		].
+
 	% goals
 
 	logtalk::message_tokens(print_current_goal(Goal), debugger) -->
@@ -202,6 +214,7 @@
 			'        w - write (writes current goal quoting atoms if necessary)'-[], nl,
 			'        $ - outputs the compiled form of the current goal (for low-level debugging)'-[], nl,
 			'        x - context (prints execution context)'-[], nl,
+			'        . - file (prints file, entity, predicate, and line number information at an unification port)'-[], nl,
 			'        e - exception (prints exception term thrown by current goal)'-[], nl,
 			'        = - debugging (prints debugging information)'-[], nl,
 			'        * - add (adds a context spy point for the current goal)'-[], nl,

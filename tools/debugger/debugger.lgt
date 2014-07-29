@@ -478,6 +478,8 @@
 	valid_port_option('$', exit, _) :- !.
 	valid_port_option('$', fail, _) :- !.
 	valid_port_option(x, _, _) :- !.
+	valid_port_option('.', fact(_,_,_), _) :- !.
+	valid_port_option('.', rule(_,_,_), _) :- !.
 	valid_port_option(h, _, _) :- !.
 	valid_port_option((?), _, _) :- !.
 	valid_port_option((=), _, _) :- !.
@@ -614,6 +616,25 @@
 	do_port_option(x, _, _, _, _, ExCtx, _) :-
 		logtalk::execution_context(ExCtx, Sender, This, Self, MetaCallCtx, Stack),
 		print_message(information, debugger, execution_context(Sender,This,Self,MetaCallCtx,Stack)),
+		fail.
+
+	do_port_option('.', Port, Goal, _, _, _, _) :-
+		(	Port = fact(Entity,Clause,Line) ->
+			true
+		;	Port = rule(Entity,Clause,Line)
+		),
+		(	current_object(Entity) ->
+			object_property(Entity, file(Basename,Directory))
+		;	current_category(Entity) ->
+			category_property(Entity, file(Basename,Directory))
+		;	current_protocol(Entity),
+			protocol_property(Entity, file(Basename,Directory))
+		),
+		(	Goal = (_ :: Predicate) ->
+			functor(Predicate, Functor, Arity)
+		;	functor(Goal, Functor, Arity)
+		),
+		print_message(information, debugger, file_context(Basename,Directory,Entity,Functor/Arity,Clause,Line)),
 		fail.
 
 	do_port_option(e, _, _, _, Error, _, _) :-

@@ -66,6 +66,9 @@ Tools
 * ADDED: The `debugger` tool now supports the definition of file line number
 spy points.
 
+* ADDED: The `debugger` tool now supports a `.` command to print file, line
+number, entity, predicate, and clause number information.
+
 * FIXED: Bug in the `debugger` tool that prevented forcing a failure at an
 unification port.
 
