@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/07/30,
+		date is 2014/07/31,
 		comment is 'Logtalk debugger default message translations.'
 	]).
 
@@ -68,6 +68,9 @@
 	logtalk::message_tokens(enter_context_spy_point(GoalTemplate), debugger) -->
 		{ground_term_copy(GoalTemplate, GroundGoalTemplate)},
 		['    Enter a context spy point term formatted as (Sender, This, Self, ~q)'-[GroundGoalTemplate], nl].
+
+	logtalk::message_tokens(enter_invocation_number, debugger) -->
+		['    Enter an invocation number to jump to'-[], nl].
 
 	% debugger status and switching
 
@@ -224,6 +227,7 @@
 			'        c - creep (go on; you may use also the spacebar, return, or enter keys)'-[], nl,
 			'        l - leap (continues execution until the next spy point is found)'-[], nl,
 			'        s - skip (skips debugging for the current goal; only meaningful at call and redo ports)'-[], nl,
+			'        j - jump (reads invocation number and continues execution until a port is reached for that number)'-[], nl,
 			'        i - ignore (ignores goal, assumes that it succeeded; only valid at call and redo ports)'-[], nl,
 			'        f - fail (forces backtracking; may also be used to convert an exception into a failure)'-[], nl,
 			'        u - unify (reads and unifies a term with the current goal; only valid at the call port)'-[], nl,

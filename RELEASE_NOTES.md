@@ -69,6 +69,10 @@ spy points.
 * ADDED: The `debugger` tool now supports a `.` command to print file, line
 number, entity, predicate, and clause number information.
 
+* ADDED: The `debugger` tool now supports a `j` command to read an invocation
+number and continue execution (i.e. jump) until a leashed port with the same
+number is reached.
+
 * CHANGED: The `debugger` tool now prints the invocation number at unification
 ports instead of the clause number (which can still be accessed using the new
 `.` command).

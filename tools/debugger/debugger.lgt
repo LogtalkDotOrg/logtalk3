@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/07/30,
+		date is 2014/07/31,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -58,6 +58,9 @@
 
 	:- private(invocation_number_/1).
 	:- dynamic(invocation_number_/1).
+
+	:- private(jump_to_invocation_number_/1).
+	:- dynamic(jump_to_invocation_number_/1).
 
 	:- if((current_logtalk_flag(prolog_dialect, xsb), current_logtalk_flag(threads, supported))).
 		:- thread_shared(debugging_/0).
@@ -301,10 +304,16 @@
 	leash_shortand_ports(tight, [fact, rule, call, redo, fail, exception]).
 	leash_shortand_ports(full, [fact, rule, call, exit, redo, fail, exception]).
 
-	leashing(Port, Goal, ExCtx, Code) :-
+	leashing(Port, N, Goal, ExCtx, Code) :-
 		functor(Port, PortName, _),
 		leashing_(PortName),
-		(	spying(Port, Goal, ExCtx, Code) ->
+		(	retract(jump_to_invocation_number_(N)) ->
+			(	tracing_ ->
+				true
+			;	assertz(tracing_)
+			),
+			Code = ' '
+		;	spying(Port, Goal, ExCtx, Code) ->
 			(	tracing_ ->
 				true
 			;	assertz(tracing_)
@@ -448,15 +457,15 @@
 	port(Port, N, Goal, TGoal, Error, ExCtx, Action) :-
 		debugging_,
 		!,
-		(	leashing(Port, Goal, ExCtx, _) ->
+		(	leashing(Port, N, Goal, ExCtx, _) ->
 			repeat,
 				% the do_port_option/7 call can fail but still chnage the value of Code
 				% (e.g. when adding or removing a spy point)
-				leashing(Port, Goal, ExCtx, Code),
+				leashing(Port, N, Goal, ExCtx, Code),
 				print_message(information, debugger, leashing_port(Code, Port, N, Goal)),
 				catch(read_single_char(Option), _, fail),
 				valid_port_option(Option, Port, Code),
-			do_port_option(Option, Port, Goal, TGoal, Error, ExCtx, Action),
+			do_port_option(Option, Port, N, Goal, TGoal, Error, ExCtx, Action),
 			!
 		;	(	tracing_ ->
 				print_message(information, debugger, tracing_port(' ', Port, N, Goal))
@@ -473,6 +482,7 @@
 	valid_port_option(c, _, _) :- !.
 	valid_port_option(l, _, _) :- !.
 	valid_port_option(s, _, _) :- !.
+	valid_port_option(j, _, _) :- !.
 	valid_port_option(i, call, _) :- !.
 	valid_port_option(i, redo, _) :- !.
 	valid_port_option(f, call, _) :- !.
@@ -507,50 +517,56 @@
 	valid_port_option(('|'), _, (#)) :- !.
 	valid_port_option(e, exception, _) :- !.
 
-	do_port_option('\r', _, _, _, _, _, true).
-	do_port_option('\n', _, _, _, _, _, true).
-	do_port_option(' ', _, _, _, _, _, true).
-	do_port_option(c, _, _, _, _, _, true).
+	do_port_option('\r', _, _, _, _, _, _, true).
+	do_port_option('\n', _, _, _, _, _, _, true).
+	do_port_option(' ', _, _, _, _, _, _, true).
+	do_port_option(c, _, _, _, _, _, _, true).
 
-	do_port_option(l, _, _, _, _, _, true) :-
+	do_port_option(l, _, _, _, _, _, _, true) :-
 		retractall(tracing_).
 
-	do_port_option(s, call, _, _, _, _, true) :-
+	do_port_option(s, call, _, _, _, _, _, true) :-
 		!,
 		retractall(skipping_),
 		assertz(skipping_).
-	do_port_option(s, redo, _, _, _, _, fail) :-
+	do_port_option(s, redo, _, _, _, _, _, fail) :-
 		!,
 		retractall(skipping_),
 		assertz(skipping_).
-	do_port_option(s, _, _, _, _, _, true).
+	do_port_option(s, _, _, _, _, _, _, true).
 
-	do_port_option(i, _, _, _, _, _, ignore).
+	do_port_option(j, _, _, _, _, _, _, true) :-
+		ask_question(question, debugger, enter_invocation_number, integer, N),
+		retractall(jump_to_invocation_number_(_)),
+		assertz(jump_to_invocation_number_(N)),
+		retractall(tracing_).
 
-	do_port_option(f, _, _, _, _, _, fail).
+	do_port_option(i, _, _, _, _, _, _, ignore).
 
-	do_port_option(u, _, Goal, _, _, _, Result) :-
+	do_port_option(f, _, _, _, _, _, _, fail).
+
+	do_port_option(u, _, _, Goal, _, _, _, Result) :-
 		ask_question(question, debugger, enter_goal, callable, Term),
 		(	Goal = Term ->
 			Result = unify
 		;	Result = fail
 		).
 
-	do_port_option(t, _, _, _, _, _, _) :-
+	do_port_option(t, _, _, _, _, _, _, _) :-
 		(	tracing_ ->
 			true
 		;	assertz(tracing_)
 		),
 		fail.
 
-	do_port_option(n, _, _, _, _, _, true) :-
+	do_port_option(n, _, _, _, _, _, _, true) :-
 		nodebug.
 
-	do_port_option((=), _, _, _, _, _, _) :-
+	do_port_option((=), _, _, _, _, _, _, _) :-
 		debugging,
 		fail.
 
-	do_port_option((+), _, Goal, _, _, _, _) :-
+	do_port_option((+), _, _, Goal, _, _, _, _) :-
 		(	Goal = (_ :: Predicate) ->
 			functor(Predicate, Functor, Arity)
 		;	functor(Goal, Functor, Arity)
@@ -559,7 +575,7 @@
 		print_message(information, debugger, predicate_spy_point_added),
 		fail.
 
-	do_port_option((-), _, Goal, _, _, _, _) :-
+	do_port_option((-), _, _, Goal, _, _, _, _) :-
 		(	Goal = (_ :: Predicate) ->
 			functor(Predicate, Functor, Arity)
 		;	functor(Goal, Functor, Arity)
@@ -568,7 +584,7 @@
 		print_message(information, debugger, predicate_spy_point_removed),
 		fail.
 
-	do_port_option((#), Port, _, _, _, _, _) :-
+	do_port_option((#), Port, _, _, _, _, _, _) :-
 		(	Port = fact(Entity, _, Line) ->
 			true
 		;	Port = rule(Entity, _, Line)
@@ -577,7 +593,7 @@
 		print_message(information, debugger, line_number_spy_point_added),
 		fail.
 
-	do_port_option(('|'), Port, _, _, _, _, _) :-
+	do_port_option(('|'), Port, _, _, _, _, _, _) :-
 		(	Port = fact(Entity, _, Line) ->
 			true
 		;	Port = rule(Entity, _, Line)
@@ -586,31 +602,31 @@
 		print_message(information, debugger, line_number_spy_point_removed),
 		fail.
 
-	do_port_option((*), _, Goal, _, _, _, _) :-
+	do_port_option((*), _, _, Goal, _, _, _, _) :-
 		functor(Goal, Functor, Arity),
 		functor(Template, Functor, Arity),
 		ask_question(question, debugger, enter_context_spy_point(Template), '='((Sender,This,Self,Template)), (Sender,This,Self,Template)),
 		spy(Sender, This, Self, Template),
 		fail.
 
-	do_port_option((/), _, Goal, _, _, _, _) :-
+	do_port_option((/), _, _, Goal, _, _, _, _) :-
 		functor(Goal, Functor, Arity),
 		functor(Template, Functor, Arity),
 		ask_question(question, debugger, enter_context_spy_point(Template), '='((Sender,This,Self,Template)), (Sender,This,Self,Template)),
 		nospy(Sender, This, Self, Template),
 		fail.
 
-	do_port_option(!, Port, Goal, TGoal, Error, ExCtx, Action) :-
-		do_port_option((@), Port, Goal, TGoal, Error, ExCtx, Action).
+	do_port_option(!, Port, N, Goal, TGoal, Error, ExCtx, Action) :-
+		do_port_option((@), Port, N, Goal, TGoal, Error, ExCtx, Action).
 
-	do_port_option((@), _, _, _, _, _, _) :-
+	do_port_option((@), _, _, _, _, _, _, _) :-
 		ask_question(question, debugger, enter_query, callable, Goal),
 		{once(Goal)},
 		fail.
 
 	:- if(predicate_property(break, built_in)).
 
-	do_port_option(b, _, _, _, _, _, _) :-
+	do_port_option(b, _, _, _, _, _, _, _) :-
 		suspend(Tracing),
 		break,
 		resume(Tracing),
@@ -618,41 +634,41 @@
 
 	:- else.
 
-	do_port_option(b, _, _, _, _, _, _) :-
+	do_port_option(b, _, _, _, _, _, _, _) :-
 		print_message(warning, debugger, break_not_supported),
 		fail.
 
 	:- endif.
 
-	do_port_option(a, _, _, _, _, _, _) :-
+	do_port_option(a, _, _, _, _, _, _, _) :-
 		retractall(skipping_),
 		throw(logtalk_debugger_aborted).
 
-	do_port_option('Q', _, _, _, _, _, _) :-
+	do_port_option('Q', _, _, _, _, _, _, _) :-
 		halt.
 
-	do_port_option(p, _, Goal, _, _, _, _) :-
+	do_port_option(p, _, _, Goal, _, _, _, _) :-
 		print_message(information, debugger, print_current_goal(Goal)),
 		fail.
 
-	do_port_option(d, _, Goal, _, _, _, _) :-
+	do_port_option(d, _, _, Goal, _, _, _, _) :-
 		print_message(information, debugger, display_current_goal(Goal)),
 		fail.
 
-	do_port_option(w, _, Goal, _, _, _, _) :-
+	do_port_option(w, _, _, Goal, _, _, _, _) :-
 		print_message(information, debugger, write_current_goal(Goal)),
 		fail.
 
-	do_port_option('$', _, _, TGoal, _, _, _) :-
+	do_port_option('$', _, _, _, TGoal, _, _, _) :-
 		print_message(information, debugger, write_compiled_goal(TGoal)),
 		fail.
 
-	do_port_option(x, _, _, _, _, ExCtx, _) :-
+	do_port_option(x, _, _, _, _, _, ExCtx, _) :-
 		logtalk::execution_context(ExCtx, Sender, This, Self, MetaCallCtx, Stack),
 		print_message(information, debugger, execution_context(Sender,This,Self,MetaCallCtx,Stack)),
 		fail.
 
-	do_port_option('.', Port, Goal, _, _, _, _) :-
+	do_port_option('.', Port, _, Goal, _, _, _, _) :-
 		(	Port = fact(Entity,Clause,Line) ->
 			true
 		;	Port = rule(Entity,Clause,Line)
@@ -671,16 +687,16 @@
 		print_message(information, debugger, file_context(Basename,Directory,Entity,Functor/Arity,Clause,Line)),
 		fail.
 
-	do_port_option(e, _, _, _, Error, _, _) :-
+	do_port_option(e, _, _, _, _, Error, _, _) :-
 		print_message(information, debugger, write_exception_term(Error)),
 		fail.
 
-	do_port_option(h, _, _, _, _, _, _) :-
+	do_port_option(h, _, _, _, _, _, _, _) :-
 		print_message(information, debugger, help),
 		fail.
 
-	do_port_option((?), Port, Goal, TGoal, Error, ExCtx, Action) :-
-		do_port_option(h, Port, Goal, TGoal, Error, ExCtx, Action).
+	do_port_option((?), Port, N, Goal, TGoal, Error, ExCtx, Action) :-
+		do_port_option(h, Port, N, Goal, TGoal, Error, ExCtx, Action).
 
 	:- if(current_logtalk_flag(threads, supported)).
 
@@ -709,7 +725,8 @@
 
 	reset_invocation_number(0) :-
 		retractall(invocation_number_(_)),
-		asserta(invocation_number_(0)).
+		asserta(invocation_number_(0)),
+		retractall(jump_to_invocation_number_(_)).
 
 	:- if(current_logtalk_flag(prolog_dialect, cx)).
 
