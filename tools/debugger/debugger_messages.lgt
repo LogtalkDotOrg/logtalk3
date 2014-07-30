@@ -92,10 +92,10 @@
 	% at port
 
 	logtalk::message_tokens(leashing_port(Code, Port, N, Goal), debugger) -->
-		['~w'-[Code]], port_name(Port), invocation_number(Port, N), ['~q ? '-[Goal]].
+		['~w'-[Code]], port_name(Port), invocation_number(N), ['~q ? '-[Goal]].
 
 	logtalk::message_tokens(tracing_port(Code, Port, N, Goal), debugger) -->
-		['~w'-[Code]], port_name(Port), invocation_number(Port, N), ['~q'-[Goal], nl].
+		['~w'-[Code]], port_name(Port), invocation_number(N), ['~q'-[Goal], nl].
 
 	% spy points
 
@@ -258,16 +258,10 @@
 		leashed_ports(Ports).
 	leashed_ports([]) --> [].
 
-	port_name(fact(_,N,_)) -->
-		(	{N =:= 0} ->
-			[' Fact: '-[]]
-		;	[' Fact: (clause #~w) '-[N]]
-		).
-	port_name(rule(_,N,_)) -->
-		(	{N =:= 0} ->
-			[' Rule: '-[]]
-		;	[' Rule: (clause #~w) '-[N]]
-		).
+	port_name(fact(_,_,_)) -->
+		[' Fact: '-[]].
+	port_name(rule(_,_,_)) -->
+		[' Rule: '-[]].
 	port_name(call) -->
 		[' Call: '-[]].
 	port_name(exit) -->
@@ -281,11 +275,7 @@
 
 	% invocation number
 
-	invocation_number(fact(_,_,_), _) -->
-		!, [].
-	invocation_number(rule(_,_,_), _) -->
-		!, [].
-	invocation_number(_, N) -->
+	invocation_number(N) -->
 		['(~w) '-[N]].
 
 	% auxiliary grammar rules

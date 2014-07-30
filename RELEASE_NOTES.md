@@ -69,6 +69,10 @@ spy points.
 * ADDED: The `debugger` tool now supports a `.` command to print file, line
 number, entity, predicate, and clause number information.
 
+* CHANGED: The `debugger` tool now prints the invocation number at unification
+ports instead of the clause number (which can still be accessed using the new
+`.` command).
+
 * FIXED: Bug in the `debugger` tool that prevented forcing a failure at an
 unification port.
 

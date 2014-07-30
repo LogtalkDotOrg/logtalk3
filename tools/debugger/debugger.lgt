@@ -349,15 +349,17 @@
 	logtalk::debug_handler(Event, ExCtx) :-
 		debug_handler(Event, ExCtx).
 
-	debug_handler(fact(Entity, Fact, N, Line), ExCtx) :-
+	debug_handler(fact(Entity,Fact,Clause,Line), ExCtx) :-
+		invocation_number_(N),
 		(	debugging_, \+ skipping_ ->
-			port(fact(Entity, N, Line), _, Fact, _, _, ExCtx, Action),
+			port(fact(Entity,Clause,Line), N, Fact, _, _, ExCtx, Action),
 			{Action}
 		;	true
 		).
-	debug_handler(rule(Entity, Head, N, Line), ExCtx) :-
+	debug_handler(rule(Entity,Head,Clause,Line), ExCtx) :-
+		invocation_number_(N),
 		(	debugging_, \+ skipping_ ->
-			port(rule(Entity, N, Line), _, Head, _, _, ExCtx, Action),
+			port(rule(Entity,Clause,Line), N, Head, _, _, ExCtx, Action),
 			{Action}
 		;	true
 		).
