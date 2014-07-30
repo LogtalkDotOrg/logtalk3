@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/07/29,
+		date is 2014/07/30,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -69,8 +69,8 @@
 		:- thread_shared(invocation_number_/1).
 	:- endif.
 
-	% we use the structured printing mechanism in order to allow debugger
-	% messages to be intercepted for alternative interaction by e.g. GUI IDEs
+	% we use the structured printing and question asking mechanisms to allow debugger
+	% inout and output to be intercepted for alternative interaction by e.g. GUI IDEs
 	:- uses(logtalk, [
 		print_message/3,
 		ask_question/5
@@ -171,9 +171,8 @@
 		).
 
 	spy(SpyPoints) :-
-		nonvar(SpyPoints),
 		spy_aux(SpyPoints),
-		print_message(information, debugger, all_spy_points_set),
+		print_message(information, debugger, all_spy_points_added),
 		(	debugging_ ->
 			true
 		;	debug
@@ -181,10 +180,18 @@
 
 	spy_aux([]).
 	spy_aux([SpyPoint| SpyPoints]) :-
-		nonvar(SpyPoint),
-		spy_aux(SpyPoint),
-		spy_aux(SpyPoints).
+		spy_list([SpyPoint| SpyPoints]).
 	spy_aux(Entity-Line) :-
+		spy_line_number(Entity-Line).
+	spy_aux(Functor/Arity) :-
+		spy_predicate(Functor/Arity).
+
+	spy_list([]).
+	spy_list([SpyPoint| SpyPoints]) :-
+		spy_aux(SpyPoint),
+		spy_list(SpyPoints).
+
+	spy_line_number(Entity-Line) :-
 		callable(Entity),
 		integer(Line),
 		functor(Entity, Functor, Arity),
@@ -193,7 +200,8 @@
 			true
 		;	assertz(spying_line_number_(Template, Line))
 		).
-	spy_aux(Functor/Arity) :-
+
+	spy_predicate(Functor/Arity) :-
 		nonvar(Functor),
 		nonvar(Arity),
 		(	spying_predicate_(Functor, Arity) ->
@@ -205,21 +213,23 @@
 		nospy_aux(SpyPoints),
 		print_message(information, debugger, matching_spy_points_removed).
 
-	nospy_aux(SpyPoints) :-
-		(	var(SpyPoints) ->
-			retractall(spying_line_number_(_, _)),
-			retractall(spying_predicate_(_, _))
-		;	nospy_aux2(SpyPoints)
-		).
+	nospy_aux([]).
+	nospy_aux([SpyPoint| SpyPoints]) :-
+		nospy_list([SpyPoint| SpyPoints]).
+	nospy_aux(Entity-Line) :-
+		nospy_line_number(Entity-Line).
+	nospy_aux(Functor/Arity) :-
+		nospy_predicate(Functor/Arity).
 
-	nospy_aux2([]).
-	nospy_aux2([SpyPoint| SpyPoints]) :-
-		nonvar(SpyPoint),
-		nospy_aux2(SpyPoint),
-		nospy_aux2(SpyPoints).
-	nospy_aux2(Entity-Line) :-
+	nospy_list([]).
+	nospy_list([SpyPoint| SpyPoints]) :-
+		nospy_aux(SpyPoint),
+		nospy_list(SpyPoints).
+
+	nospy_line_number(Entity-Line) :-
 		retractall(spying_line_number_(Entity, Line)).
-	nospy_aux2(Functor/Arity) :-
+
+	nospy_predicate(Functor/Arity) :-
 		retractall(spying_predicate_(Functor, Arity)).
 
 	spy(Sender, This, Self, Goal) :-
@@ -293,14 +303,15 @@
 
 	leashing(Port, Goal, ExCtx, Code) :-
 		functor(Port, PortName, _),
-		leashing_(PortName) ->
-		(	tracing_ ->
-			Code = ' '
-		;	spying(Port, Goal, ExCtx, Code),
+		leashing_(PortName),
+		(	spying(Port, Goal, ExCtx, Code) ->
 			(	tracing_ ->
 				true
 			;	assertz(tracing_)
 			)
+		;	tracing_ ->
+			Code = ' '
+		;	fail
 		).
 
 	spying(fact(Entity,_,Line), _, _, '#') :-
@@ -435,11 +446,14 @@
 	port(Port, N, Goal, TGoal, Error, ExCtx, Action) :-
 		debugging_,
 		!,
-		(	leashing(Port, Goal, ExCtx, Code) ->
+		(	leashing(Port, Goal, ExCtx, _) ->
 			repeat,
+				% the do_port_option/7 call can fail but still chnage the value of Code
+				% (e.g. when adding or removing a spy point)
+				leashing(Port, Goal, ExCtx, Code),
 				print_message(information, debugger, leashing_port(Code, Port, N, Goal)),
 				catch(read_single_char(Option), _, fail),
-			valid_port_option(Option, Port, Code),
+				valid_port_option(Option, Port, Code),
 			do_port_option(Option, Port, Goal, TGoal, Error, ExCtx, Action),
 			!
 		;	(	tracing_ ->
@@ -539,30 +553,36 @@
 			functor(Predicate, Functor, Arity)
 		;	functor(Goal, Functor, Arity)
 		),
-		spy(Functor/Arity),
+		spy_predicate(Functor/Arity),
+		print_message(information, debugger, predicate_spy_point_added),
 		fail.
 
-	do_port_option((-), _, Goal, _, _, _, true) :-
+	do_port_option((-), _, Goal, _, _, _, _) :-
 		(	Goal = (_ :: Predicate) ->
-			functor(Predicate, Functor, Arity),
-			nospy(Functor/Arity)
-		;	functor(Goal, Functor, Arity),
-			nospy(Functor/Arity)
-		).
+			functor(Predicate, Functor, Arity)
+		;	functor(Goal, Functor, Arity)
+		),
+		nospy_predicate(Functor/Arity),
+		print_message(information, debugger, predicate_spy_point_removed),
+		fail.
 
-	do_port_option((#), Port, _, _, _, _, true) :-
+	do_port_option((#), Port, _, _, _, _, _) :-
 		(	Port = fact(Entity, _, Line) ->
-			spy(Entity-Line)
-		;	Port = rule(Entity, _, Line),
-			spy(Entity-Line)
-		).
+			true
+		;	Port = rule(Entity, _, Line)
+		),
+		spy_line_number(Entity-Line),
+		print_message(information, debugger, line_number_spy_point_added),
+		fail.
 
-	do_port_option(('|'), Port, _, _, _, _, true) :-
+	do_port_option(('|'), Port, _, _, _, _, _) :-
 		(	Port = fact(Entity, _, Line) ->
-			nospy(Entity-Line)
-		;	Port = rule(Entity, _, Line),
-			nospy(Entity-Line)
-		).
+			true
+		;	Port = rule(Entity, _, Line)
+		),
+		nospy_line_number(Entity-Line),
+		print_message(information, debugger, line_number_spy_point_removed),
+		fail.
 
 	do_port_option((*), _, Goal, _, _, _, _) :-
 		functor(Goal, Functor, Arity),

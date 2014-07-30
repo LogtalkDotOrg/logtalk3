@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/07/29,
+		date is 2014/07/30,
 		comment is 'Logtalk debugger default message translations.'
 	]).
 
@@ -97,33 +97,49 @@
 	logtalk::message_tokens(tracing_port(Code, Port, N, Goal), debugger) -->
 		['~w'-[Code]], port_name(Port), invocation_number(Port, N), ['~q'-[Goal], nl].
 
-	% predicate spy points
+	% spy points
 
-	logtalk::message_tokens(line_number_spy_points(SpyPoints), debugger) -->
-		['    Defined line number spy points (Entity-Line):'-[], nl],
-		spy_points(SpyPoints).
+	logtalk::message_tokens(all_spy_points_added, debugger) -->
+		['    All specified spy points added.'-[], nl].
+
+	logtalk::message_tokens(matching_spy_points_removed, debugger) -->
+		['    All matching line number and predicate spy points removed.'-[], nl].
+
+	% predicate spy points
 
 	logtalk::message_tokens(predicate_spy_points(SpyPoints), debugger) -->
 		['    Defined predicate spy points (Functor/Arity):'-[], nl],
 		spy_points(SpyPoints).
 
-	logtalk::message_tokens(matching_spy_points_removed, debugger) -->
-		['    All matching line number and predicate spy points removed.'-[], nl].
+	logtalk::message_tokens(all_predicate_spy_points_removed, debugger) -->
+		['    All predicate spy points removed.'-[], nl].
+
+	logtalk::message_tokens(no_predicate_spy_points_defined, debugger) -->
+		['    No predicate spy points are defined.'-[], nl].
+
+	logtalk::message_tokens(predicate_spy_point_added, debugger) -->
+		['    Predicate spy point added.'-[], nl].
+
+	logtalk::message_tokens(predicate_spy_point_removed, debugger) -->
+		['    Predicate spy point removed.'-[], nl].
+
+	% line number spy points
+
+	logtalk::message_tokens(line_number_spy_points(SpyPoints), debugger) -->
+		['    Defined line number spy points (Entity-Line):'-[], nl],
+		spy_points(SpyPoints).
 
 	logtalk::message_tokens(all_line_number_spy_points_removed, debugger) -->
 		['    All line number spy points removed.'-[], nl].
 
-	logtalk::message_tokens(all_predicate_spy_points_removed, debugger) -->
-		['    All predicate spy points removed.'-[], nl].
-
-	logtalk::message_tokens(all_spy_points_set, debugger) -->
-		['    All specified spy points set.'-[], nl].
-
 	logtalk::message_tokens(no_line_number_spy_points_defined, debugger) -->
 		['    No line number spy points are defined.'-[], nl].
 
-	logtalk::message_tokens(no_predicate_spy_points_defined, debugger) -->
-		['    No predicate spy points are defined.'-[], nl].
+	logtalk::message_tokens(line_number_spy_point_added, debugger) -->
+		['    Line number spy point added.'-[], nl].
+
+	logtalk::message_tokens(line_number_spy_point_removed, debugger) -->
+		['    Line number spy point removed.'-[], nl].
 
 	% context spy points
 

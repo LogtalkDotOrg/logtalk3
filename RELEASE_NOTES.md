@@ -75,6 +75,10 @@ unification port.
 * FIXED: Bug in the `debugger` tool that prevented removing a context spy
 point.
 
+* FIXED: Bug in the `debugger` tool where the character used as line prefix
+when tracing to indicate if a spy point is set would not be promptly updated
+when adding or removing a spy point for the current goal.
+
 * ADDED: Support to the `diagrams` tool to generate file, cross-reference, and
 entity diagrams for Prolog module applications when using SWI-Prolog or YAP as
 the backend compilers.
