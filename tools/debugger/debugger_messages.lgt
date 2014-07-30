@@ -172,14 +172,22 @@
 
 	% file context
 
-	logtalk::message_tokens(file_context(Basename, Directory, Entity, Predicate, Clause, Line), debugger) -->
-		{atom_concat(Directory, Basename, File)},
+	logtalk::message_tokens(file_context(Basename, Directory, Entity, Predicate, Clause0, Line0), debugger) -->
+		{atom_concat(Directory, Basename, File),
+		 (	Line0 > 0 ->
+		 	Line = Line0
+		 ;	Line = 'n/a'
+		 ),
+		 (	Clause0 =:= 0 ->
+		 	Clause = 'n/a'
+		 ;	Clause = Clause0
+		 )},
 		[
 			'    File:              ~w'-[File], nl,
 			'    Line number:       ~w'-[Line], nl,
 			'    Entity:            ~q'-[Entity], nl,
 			'    Predicate:         ~q'-[Predicate], nl,
-			'    Clause:            ~w'-[Clause], nl
+			'    Clause number:     ~w'-[Clause], nl
 		].
 
 	% goals
