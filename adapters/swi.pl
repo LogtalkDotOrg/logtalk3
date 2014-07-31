@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SWI Prolog 6.0.0 and later versions
-%  Last updated on June 29, 2014
+%  Last updated on July 31, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -986,6 +986,7 @@ user:goal_expansion('::'(Object, Message), user:Goal) :-
 
 '$lgt_swi_convert_message_kind'(comment, informational) :- !.
 '$lgt_swi_convert_message_kind'(comment(_), informational) :- !.
+'$lgt_swi_convert_message_kind'(information(_), information) :- !.
 '$lgt_swi_convert_message_kind'(Kind, Kind).
 
 
