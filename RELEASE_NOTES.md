@@ -28,6 +28,12 @@ RELEASE NOTES
 3.00.0 Beta 10 - August ??, 2014
 ================================
 
+Tools
+-----
+
+* UPDATED: The `diagrams` tool to allow using documentation URLs for Prolog
+module nodes.
+
 
 3.00.0 Beta 9 - July 31, 2014
 =============================

@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/07/26,
+		date is 2014/08/01,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parnames is ['Format']
 	]).
@@ -126,7 +126,7 @@
 		^^format_object(Format),
 		Format::graph_header(output_file, other, '(external entities)', external, [tooltip('(external entities)')| Options]),
 		retract(referenced_entity_(Entity)),
-		add_entity_documentation_url(Options, Entity, EntityOptions),
+		add_entity_documentation_url(Options, logtalk, Entity, EntityOptions),
 		(	current_object(Entity) ->
 			^^ground_entity_identifier(object, Entity, Name),
 			(	\+ instantiates_class(Entity, _),
@@ -144,7 +144,8 @@
 		fail.
 	output_externals(Options) :-
 		retract(referenced_module_(Module)),
-		^^output_node(Module, Module, [], external_module, [tooltip(module)| Options]),
+		add_entity_documentation_url(Options, module, Module, EntityOptions),
+		^^output_node(Module, Module, [], external_module, [tooltip(module)| EntityOptions]),
 		fail.
 	output_externals(Options) :-
 		^^format_object(Format),
@@ -154,7 +155,7 @@
 		memberchk(exclude_entities(ExcludedEntities), Options),
 		protocol_property(Protocol, file(Basename, Directory)),
 		\+ member(Protocol, ExcludedEntities),
-		add_entity_documentation_url(Options, Protocol, ProtocolOptions),
+		add_entity_documentation_url(Options, protocol, Protocol, ProtocolOptions),
 		output_protocol(Protocol, ProtocolOptions),
 		assertz(included_entity_(Protocol)),
 		fail.
@@ -162,7 +163,7 @@
 		memberchk(exclude_entities(ExcludedEntities), Options),
 		object_property(Object, file(Basename, Directory)),
 		\+ member(Object, ExcludedEntities),
-		add_entity_documentation_url(Options, Object, ObjectOptions),
+		add_entity_documentation_url(Options, object, Object, ObjectOptions),
 		output_object(Object, ObjectOptions),
 		assertz(included_entity_(Object)),
 		fail.
@@ -170,7 +171,7 @@
 		memberchk(exclude_entities(ExcludedEntities), Options),
 		category_property(Category, file(Basename, Directory)),
 		\+ member(Category, ExcludedEntities),
-		add_entity_documentation_url(Options, Category, CategoryOptions),
+		add_entity_documentation_url(Options, category, Category, CategoryOptions),
 		output_category(Category, CategoryOptions),
 		assertz(included_entity_(Category)),
 		fail.
@@ -179,12 +180,22 @@
 		atom_concat(Directory, Basename, Path),
 		modules_diagram_support::module_property(Module, file(Path)),
 		\+ member(Module, ExcludedEntities),
-		output_module(Module, Options),
+		add_entity_documentation_url(Options, module, Module, ModuleOptions),
+		output_module(Module, ModuleOptions),
 		assertz(included_entity_(Module)),
 		fail.
 	process(_, _, _).
 
-	add_entity_documentation_url(Options, Entity, EntityOptions) :-
+	add_entity_documentation_url(Options, module, Entity, EntityOptions) :-
+		!,
+		(	member(urls(FilePrefix, DocPrefix), Options) ->
+			atom_concat(DocPrefix, Entity, URL0),
+			memberchk(entity_url_suffix_target(Suffix, _), Options),
+			atom_concat(URL0, Suffix, URL),
+			EntityOptions = [urls(FilePrefix, URL)| Options]
+		;	EntityOptions = Options
+		).
+	add_entity_documentation_url(Options, _, Entity, EntityOptions) :-
 		(	member(urls(FilePrefix, DocPrefix), Options) ->
 			functor(Entity, Functor, Arity),
 			atom_concat(DocPrefix, Functor, URL0),
