@@ -2337,7 +2337,7 @@ current_logtalk_flag(Flag, Value) :-
 % the last argument is an atom: 'aN' for alpha versions, 'bN' for beta versions
 % (with N being a natural number), and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 0, 0, b9)).
+'$lgt_version_data'(logtalk(3, 0, 0, b10)).
 
 
 
