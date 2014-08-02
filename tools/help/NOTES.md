@@ -31,8 +31,7 @@ Linux, MacOS X, and Windows.
 On Windows, the `start` command must be available. On Linux, the `xdg-open`
 command must be available. On MacOS X, the command `open` is used.
 
-This tool relies on the `cc` example to provide a portable operating-system
-access abstraction.
+This tool relies on the library portable operating-system access abstraction.
 
 All source files are formatted using tabs (the recommended setting is a
 tab width equivalent to 4 spaces).
