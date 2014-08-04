@@ -28,6 +28,11 @@ RELEASE NOTES
 3.00.0 Beta 10 - August ??, 2014
 ================================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Bug in the compilation of dynamic predicate rules in debug mode.
+
 Tools
 -----
 

@@ -8551,7 +8551,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_compile_head'(Head, THead, Ctx),
 	(	Head = {UserHead} ->
 		DHead = '$lgt_debug'(rule(Entity, user::UserHead, N, Line), ExCtx)
-	;	DHead = '$lgt_debug'(rule(Entity, Head, N), ExCtx, Line)
+	;	DHead = '$lgt_debug'(rule(Entity, Head, N, Line), ExCtx, Line)
 	),
 	'$lgt_clause_number'(Head, Entity, Line, N).
 
