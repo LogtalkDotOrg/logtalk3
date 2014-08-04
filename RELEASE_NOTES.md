@@ -31,8 +31,10 @@ RELEASE NOTES
 Tools
 -----
 
-* UPDATED: The `diagrams` tool to allow using documentation URLs for Prolog
+* UPDATED: The `diagrams` tool now allows using documentation URLs for Prolog
 module nodes.
+
+* FIXED: Compile the `diagrams` and `lgtunit` tool files in optimized mode.
 
 
 3.00.0 Beta 9 - July 31, 2014
