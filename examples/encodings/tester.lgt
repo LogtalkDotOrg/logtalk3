@@ -19,7 +19,7 @@
 			logtalk_load(lgtunit(loader)),
 			logtalk_load(loader),
 			logtalk_load([tests_iso_8859_1, tests_utf_8, tests_utf_16], [hook(lgtunit)]),
-					tests_iso_8859_1::run,
+			tests_iso_8859_1::run,
 			tests_utf_8::run,
 			tests_utf_16::run
 		)).
@@ -32,7 +32,7 @@
 			logtalk_load(lgtunit(loader)),
 			logtalk_load(loader),
 			logtalk_load([tests_utf_8], [hook(lgtunit)]),
-					tests_utf_8::run
+			tests_utf_8::run
 		)).
 
 	:- else.
@@ -43,7 +43,7 @@
 			logtalk_load(lgtunit(loader)),
 			logtalk_load(loader),
 			logtalk_load([tests_iso_8859_1, tests_utf_8, tests_utf_16, tests_utf_32], [hook(lgtunit)]),
-					tests_iso_8859_1::run,
+			tests_iso_8859_1::run,
 			tests_utf_8::run,
 			tests_utf_16::run,
 			tests_utf_32::run
