@@ -31,6 +31,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* FIXED: Generation of category "def" clauses for declared multifile predicates
+without an initial set of clauses.
+
 * FIXED: Bug in the compilation of dynamic predicate rules in debug mode.
 
 * FIXED: Regression introduced in the Beta 9 release when compiling and

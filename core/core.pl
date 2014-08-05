@@ -13230,21 +13230,23 @@ current_logtalk_flag(Flag, Value) :-
 	fail.
 
 '$lgt_generate_def_table_clauses'(Ctx) :-
-	% categories cannot contain clauses for dynamic predicates;
-	% thus, in this case, we look only into objects
-	'$lgt_pp_entity_'(object, _, Prefix, _, _),
-	(	'$lgt_pp_dynamic_'(Head)
-	;	'$lgt_pp_multifile_'(Head, _)
+	'$lgt_pp_entity_'(Type, _, Prefix, _, _),
+	(	Type == object,
+		% categories cannot contain clauses for dynamic predicates
+		'$lgt_pp_dynamic_'(Head)
+	;	'$lgt_pp_multifile_'(Head, _),
+		\+ '$lgt_pp_dynamic_'(Head)
 	),
 	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _),
-	% dynamic or multifile predicate with no initial set of clauses
+	% dynamic and/or multifile predicate with no initial set of clauses
 	'$lgt_comp_ctx_prefix'(Ctx, Prefix),
 	functor(Head, Functor, Arity),
 	(	\+ '$lgt_pp_public_'(Functor, Arity),
 		\+ '$lgt_pp_protected_'(Functor, Arity),
 		\+ '$lgt_pp_private_'(Functor, Arity),
 		\+ '$lgt_pp_synchronized_'(Head, _),
-		\+ '$lgt_pp_coinductive_'(Head, _, _, _, _, _, _) ->
+		\+ '$lgt_pp_coinductive_'(Head, _, _, _, _, _, _),
+		\+ '$lgt_pp_multifile_'(Head, _) ->
 		'$lgt_add_ddef_clause'(Head, Functor, Arity, _, Ctx)
 	;	'$lgt_add_def_clause'(Head, Functor, Arity, _, Ctx)
 	),
