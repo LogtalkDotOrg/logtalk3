@@ -4800,7 +4800,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_report_redefined_entities',
 	(	'$lgt_pp_file_encoding_'(_, Encoding) ->
 		% use the same encoding as the original source file
-		Options = [encoding(Encoding)| Options]
+		Options = [encoding(Encoding)| DefaultOptions]
 	;	Options = DefaultOptions
 	),
 	(	catch('$lgt_load_prolog_code'(PrologFile, SourceFile, Options), _, fail) ->

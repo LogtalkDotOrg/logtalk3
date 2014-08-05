@@ -33,6 +33,9 @@ Logtalk compiler and runtime
 
 * FIXED: Bug in the compilation of dynamic predicate rules in debug mode.
 
+* FIXED: Regression introduced in the Beta 9 release when compiling and
+loading source files with an `encoding/1` directive.
+
 Tools
 -----
 
