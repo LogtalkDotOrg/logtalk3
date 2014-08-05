@@ -336,13 +336,13 @@
 % '$lgt_pp_file_entity_initialization_'(Type, Entity, Goal)
 :- dynamic('$lgt_pp_file_entity_initialization_'/3).
 
-% '$lgt_pp_entity_initialization_'(Goal)
-:- dynamic('$lgt_pp_entity_initialization_'/1).
+% '$lgt_pp_entity_initialization_'(Goal, Position)
+:- dynamic('$lgt_pp_entity_initialization_'/2).
 % '$lgt_pp_final_entity_initialization_'(Goal)
 :- dynamic('$lgt_pp_final_entity_initialization_'/1).
 
-% '$lgt_pp_entity_meta_directive_'(Directive)
-:- dynamic('$lgt_pp_entity_meta_directive_'/1).
+% '$lgt_pp_entity_meta_directive_'(Directive, Position)
+:- dynamic('$lgt_pp_entity_meta_directive_'/2).
 
 % '$lgt_pp_redefined_built_in_'(Head, ExCtx, THead)
 :- dynamic('$lgt_pp_redefined_built_in_'/3).
@@ -5665,15 +5665,16 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
+% '$lgt_compiler_error_handler'(+atom, @compound, @compound)
+% '$lgt_compiler_error_handler'(@compound, @compound)
 % '$lgt_compiler_error_handler'(@compound)
 %
 % closes the streams being used for reading and writing terms, restores
 % the operator table, and reports the compilation error found
 
-'$lgt_compiler_error_handler'(Error) :-
+'$lgt_compiler_error_handler'(Path, Lines, Error) :-
 	stream_property(Input, alias(logtalk_compiler_input)),
 	stream_property(Output, alias(logtalk_compiler_output)), !,
-	'$lgt_warning_context'(Path, Lines),
 	'$lgt_print_message'(error, core, compiler_error(Path, Lines, Error)),
 	'$lgt_restore_global_operator_table',
 	'$lgt_clean_pp_file_clauses',
@@ -5690,6 +5691,16 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	!,
 	fail.
+
+
+'$lgt_compiler_error_handler'(Lines, Error) :-
+	'$lgt_warning_context'(Path, _),
+	'$lgt_compiler_error_handler'(Path, Lines, Error).
+
+
+'$lgt_compiler_error_handler'(Error) :-
+	'$lgt_warning_context'(Path, Lines),
+	'$lgt_compiler_error_handler'(Path, Lines, Error).
 
 
 
@@ -5933,9 +5944,9 @@ current_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_pp_meta_predicate_'(_, _)),
 	retractall('$lgt_pp_predicate_alias_'(_, _, _)),
 	retractall('$lgt_pp_non_terminal_'(_, _, _)),
-	retractall('$lgt_pp_entity_initialization_'(_)),
+	retractall('$lgt_pp_entity_initialization_'(_, _)),
 	retractall('$lgt_pp_final_entity_initialization_'(_)),
-	retractall('$lgt_pp_entity_meta_directive_'(_)),
+	retractall('$lgt_pp_entity_meta_directive_'(_, _)),
 	retractall('$lgt_pp_dcl_'(_)),
 	retractall('$lgt_pp_def_'(_)),
 	retractall('$lgt_pp_ddef_'(_)),
@@ -6532,7 +6543,8 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_print_message'(warning(portability), core, compiling_proprietary_prolog_directive(Path, Lines, Type, Entity, Directive))
 	;	true
 	),
-	assertz('$lgt_pp_entity_meta_directive_'(directive(Directive, Meta))).
+	'$lgt_comp_ctx_position'(Ctx, Position),
+	assertz('$lgt_pp_entity_meta_directive_'(directive(Directive, Meta), Position)).
 
 '$lgt_compile_directive'(Directive, Ctx) :-
 	'$lgt_pp_module_'(_),
@@ -6889,11 +6901,11 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_must_be'(callable, Goal),
 	'$lgt_pp_entity_'(_, Entity, Prefix, _, _),
 	% MetaVars = [] as we're compiling a local call
-	'$lgt_comp_ctx'(Ctx, (:- initialization(Goal)), Entity, Entity, Entity, Prefix, [], _, ExCtx, _, [], _),
+	'$lgt_comp_ctx'(Ctx, (:- initialization(Goal)), Entity, Entity, Entity, Prefix, [], _, ExCtx, _, [], Position),
 	'$lgt_execution_context'(ExCtx, Entity, Entity, Entity, [], []),
 	(	'$lgt_compiler_flag'(debug, on) ->
-		assertz('$lgt_pp_entity_initialization_'(dgoal(Goal,Ctx)))
-	;	assertz('$lgt_pp_entity_initialization_'(goal(Goal,Ctx)))
+		assertz('$lgt_pp_entity_initialization_'(dgoal(Goal,Ctx), Position))
+	;	assertz('$lgt_pp_entity_initialization_'(goal(Goal,Ctx), Position))
 	).
 
 % op/3 entity directive (operators are local to entities)
@@ -8529,7 +8541,7 @@ current_logtalk_flag(Flag, Value) :-
 		functor(Head, Functor, Arity)
 	;	functor(Clause, Functor, Arity)
 	),
-	throw(error(domain_error(clause, Functor/Arity), clause(Clause))).
+	throw(error(system_error, clause(Clause))).
 
 
 
@@ -14167,11 +14179,8 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_predicate_calls'(Optimize) :-
 	retract('$lgt_pp_entity_term_'(Term, Position)),
-	(	'$lgt_compile_predicate_calls'(Term, Optimize, TTerm) ->
-		assertz('$lgt_pp_final_entity_term_'(TTerm, Position))
-	;	'$lgt_internal_term_to_goal_and_user_term'(Term, Goal, UserTerm),
-		throw(error(domain_error(goal,Goal), term(UserTerm)))
-	),
+	'$lgt_compile_predicate_calls'(Term, Position, Optimize, TTerm),
+	assertz('$lgt_pp_final_entity_term_'(TTerm, Position)),
 	fail.
 
 '$lgt_compile_predicate_calls'(_) :-
@@ -14182,60 +14191,68 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_predicate_calls'(Optimize) :-
 	retract('$lgt_pp_entity_aux_clause_'(Clause)),
-	(	'$lgt_compile_predicate_calls'(Clause, Optimize, TClause) ->
-		assertz('$lgt_pp_final_entity_aux_clause_'(TClause))
-	;	'$lgt_internal_term_to_goal_and_user_term'(Clause, Goal, UserClause),
-		throw(error(domain_error(goal,Goal), clause(UserClause)))
-	),
+	'$lgt_compile_predicate_calls'(Clause, 0-0, Optimize, TClause),
+	assertz('$lgt_pp_final_entity_aux_clause_'(TClause)),
 	fail.
 
 '$lgt_compile_predicate_calls'(Optimize) :-
-	retract('$lgt_pp_entity_initialization_'(Goal)),
-	(	'$lgt_compile_predicate_calls'(Goal, Optimize, TGoal) ->
-		assertz('$lgt_pp_final_entity_initialization_'(TGoal))
-	;	'$lgt_internal_term_to_goal_and_user_term'(Goal, UserGoal, UserDirective),
-		throw(error(domain_error(goal,UserGoal), directive(UserDirective)))
-	),
+	retract('$lgt_pp_entity_initialization_'(Goal, Position)),
+	'$lgt_compile_predicate_calls'(Goal, Position, Optimize, TGoal),
+	assertz('$lgt_pp_final_entity_initialization_'(TGoal)),
 	fail.
 
 '$lgt_compile_predicate_calls'(Optimize) :-
-	retract('$lgt_pp_entity_meta_directive_'(Directive)),
-	(	'$lgt_compile_predicate_calls'(Directive, Optimize, TDirective) ->
-		assertz('$lgt_pp_directive_'(TDirective))
-	;	'$lgt_internal_term_to_goal_and_user_term'(Directive, Goal, UserDirective),
-		throw(error(domain_error(goal,Goal), directive(UserDirective)))
-	),
+	retract('$lgt_pp_entity_meta_directive_'(Directive, Position)),
+	'$lgt_compile_predicate_calls'(Directive, Position, Optimize, TDirective),
+	assertz('$lgt_pp_directive_'(TDirective)),
 	fail.
 
 '$lgt_compile_predicate_calls'(_).
 
 
-% auxiliary predicate for error handling
 
-'$lgt_internal_term_to_goal_and_user_term'(srule(_,Body,Ctx), Body, (Head:-Body)) :-
-	'$lgt_comp_ctx_head'(Ctx, Head).
-
-'$lgt_internal_term_to_goal_and_user_term'(dsrule(_,_,Body,Ctx), Body, (Head:-Body)) :-
-	'$lgt_comp_ctx_head'(Ctx, Head).
-
-'$lgt_internal_term_to_goal_and_user_term'(drule(_,_,Body,Ctx), Body, (Head:-Body)) :-
-	'$lgt_comp_ctx_head'(Ctx, Head).
-
-'$lgt_internal_term_to_goal_and_user_term'(ddrule(_,_,_,Body,Ctx), Body, (Head:-Body)) :-
-	'$lgt_comp_ctx_head'(Ctx, Head).
-
-'$lgt_internal_term_to_goal_and_user_term'(goal(Body,_), Body, (:-initialization(Body))).
-
-'$lgt_internal_term_to_goal_and_user_term'(dgoal(Body,_), Body, (:-initialization(Body))).
-
-'$lgt_internal_term_to_goal_and_user_term'(directive(Directive,_), Directive, (:-Directive)).
-
-
-
-% '$lgt_compile_predicate_calls'(+callable, +atom, -callable)
+% '$lgt_compile_predicate_calls'(+callable, @compound, +atom, -callable)
 %
 % all predicate calls are compiled on the second stage to take advantage of
 % the information about defined predicates collected on the first stage
+
+'$lgt_compile_predicate_calls'(Term, Position, Optimize, TTerm) :-
+	(	catch(
+			'$lgt_compile_predicate_calls'(Term, Optimize, TTerm),
+			Error,
+			'$lgt_compile_predicate_calls_error_handler'(Term, Position, Error)
+		) ->
+		true
+	;	% unexpected compilation failure
+		'$lgt_compile_predicate_calls_error_handler'(Term, Position, system_error)
+	).
+
+
+'$lgt_compile_predicate_calls_error_handler'(Term, Position, Error) :-
+	'$lgt_internal_term_to_user_term'(Term, UserTerm),
+	'$lgt_compiler_error_handler'(Position, error(Error,UserTerm)).
+
+
+'$lgt_internal_term_to_user_term'({Term}, term(Term)).
+
+'$lgt_internal_term_to_user_term'(srule(_,Body,Ctx), clause((Head:-Body))) :-
+	'$lgt_comp_ctx_head'(Ctx, Head).
+
+'$lgt_internal_term_to_user_term'(dsrule(_,_,Body,Ctx), clause((Head:-Body))) :-
+	'$lgt_comp_ctx_head'(Ctx, Head).
+
+'$lgt_internal_term_to_user_term'(drule(_,_,Body,Ctx), clause((Head:-Body))) :-
+	'$lgt_comp_ctx_head'(Ctx, Head).
+
+'$lgt_internal_term_to_user_term'(ddrule(_,_,_,Body,Ctx), clause((Head:-Body))) :-
+	'$lgt_comp_ctx_head'(Ctx, Head).
+
+'$lgt_internal_term_to_user_term'(goal(Body,_), directive(initialization(Body))).
+
+'$lgt_internal_term_to_user_term'(dgoal(Body,_), directive(initialization(Body))).
+
+'$lgt_internal_term_to_user_term'(directive(Directive,_), directive(Directive)).
+
 
 % entity term is final
 '$lgt_compile_predicate_calls'({Term}, _, Term).

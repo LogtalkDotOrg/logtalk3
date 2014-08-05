@@ -31,6 +31,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: Throw a `system_error` in case of an unexpected compilation failure
+of a source file term to help identify and diagnose possible compiler bugs.
+
 * FIXED: Generation of category "def" clauses for declared multifile predicates
 without an initial set of clauses.
 
@@ -38,6 +41,9 @@ without an initial set of clauses.
 
 * FIXED: Regression introduced in the Beta 9 release when compiling and
 loading source files with an `encoding/1` directive.
+
+* FIXED: Cases where a compilation error would be reported with incorrect term
+and file position information.
 
 Tools
 -----
