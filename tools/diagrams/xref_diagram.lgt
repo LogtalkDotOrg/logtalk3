@@ -33,7 +33,9 @@
 		parnames is ['Format']
 	]).
 
-	:- uses(list, [member/2, memberchk/2]).
+	:- uses(list, [
+		member/2, memberchk/2
+	]).
 
 	:- public(entity/2).
 	:- mode(entity(+atom, +list(compound)), one).

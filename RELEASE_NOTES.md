@@ -64,8 +64,8 @@ similar command from the ECLiPSe debugger.
 * UPDATED: The `diagrams` tool now allows using documentation URLs for Prolog
 module nodes.
 
-* IMPROVED: The `diagrams` tool now outputs non-terminal nodes when applicable
-when generating entity predicate cross-referencing diagrams.
+* IMPROVED: The `diagrams` tool now shows non-terminals instead of predicates
+whenever applicable when generating entity diagrams.
 
 * FIXED: Bug in the `diagrams` tool when checking if a predicate is public or
 exported that could result in local predicates being misclassified as external

@@ -28,12 +28,14 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/08/01,
+		date is 2014/08/06,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parnames is ['Format']
 	]).
 
-	:- uses(list, [append/3, member/2, memberchk/2]).
+	:- uses(list, [
+		append/3, member/2, memberchk/2
+	]).
 
 	:- public(file/2).
 	:- mode(file(+atom, +list(compound)), one).
@@ -212,22 +214,30 @@
 	output_protocol(Protocol, Options) :-
 		^^ground_entity_identifier(protocol, Protocol, Name),
 		(	member(interface(true), Options) ->
-			protocol_property(Protocol, public(Resources))
-		;	Resources = []
+			protocol_property(Protocol, public(Resources0))
+		;	Resources0 = []
 		),
+		fix_non_terminals(Resources0, protocol, Protocol, Resources),
 		^^output_node(Name, Name, Resources, protocol, [tooltip(protocol)| Options]),
 		output_protocol_relations(Protocol, Options).
 
 	output_object(Object, Options) :-
 		^^ground_entity_identifier(object, Object, Name),
 		(	member(interface(true), Options) ->
-			object_property(Object, public(PublicPredicates)),
+			object_property(Object, public(PublicPredicates0)),
+			fix_non_terminals(PublicPredicates0, object, Object, PublicPredicates),
 			findall(
 				ToName::Predicate,
-				(	object_property(Object, provides(Predicate, To, _)),
+				(	object_property(Object, provides(Predicate0, To, _)),
 					(	current_object(To) ->
+						object_property(To, declares(Predicate0, Properties)),
 						^^ground_entity_identifier(object, To, ToName)
-					;	^^ground_entity_identifier(category, To, ToName)
+					;	category_property(To, declares(Predicate0, Properties)),
+						^^ground_entity_identifier(category, To, ToName)
+					),
+					(	member(non_terminal(NonTerminal), Properties) ->
+						Predicate = NonTerminal
+					;	Predicate = Predicate0
 					)
 				),
 				MultifilePredicates
@@ -245,13 +255,20 @@
 	output_category(Category, Options) :-
 		^^ground_entity_identifier(category, Category, Name),
 		(	member(interface(true), Options) ->
-			category_property(Category, public(PublicPredicates)),
+			category_property(Category, public(PublicPredicates0)),
+			fix_non_terminals(PublicPredicates0, category, Category, PublicPredicates),
 			findall(
 				ToName::Predicate,
-				(	category_property(Category, provides(Predicate, To, _)),
+				(	category_property(Category, provides(Predicate0, To, _)),
 					(	current_object(To) ->
+						object_property(To, declares(Predicate0, Properties)),
 						^^ground_entity_identifier(object, To, ToName)
-					;	^^ground_entity_identifier(category, To, ToName)
+					;	category_property(To, declares(Predicate0, Properties)),
+						^^ground_entity_identifier(category, To, ToName)
+					),
+					(	member(non_terminal(NonTerminal), Properties) ->
+						Predicate = NonTerminal
+					;	Predicate = Predicate0
 					)
 				),
 				MultifilePredicates
@@ -275,6 +292,26 @@
 		),
 		^^output_node(Module, Module, Resources, module, [tooltip(module)| Options]),
 		output_module_relations(Module, Options).
+
+	fix_non_terminals([], _, _, []).
+	fix_non_terminals([Resource0| Resources0], Kind, Entity, [Resource| Resources]) :-
+		fix_non_terminal(Resource0, Kind, Entity, Resource),
+		fix_non_terminals(Resources0, Kind, Entity, Resources).
+
+	fix_non_terminal(Functor/Arity, Kind, Entity, Predicate) :-
+		!,
+		(	Kind == object ->
+			object_property(Entity, declares(Functor/Arity, Properties))
+		;	Kind == category ->
+			category_property(Entity, declares(Functor/Arity, Properties))
+		;	% Kind == protocol,
+			protocol_property(Entity, declares(Functor/Arity, Properties))
+		),
+		(	member(non_terminal(NonTerminal), Properties) ->
+			Predicate = NonTerminal
+		;	Predicate = Functor/Arity
+		).
+	fix_non_terminal(Resource, _, _, Resource).
 
 	output_protocol_relations(Protocol, Options) :-
 		(	member(inheritance_relations(true), Options) ->
@@ -322,7 +359,15 @@
 	output_protocol_xref_calls(Protocol, Options) :-
 		setof(
 			Predicate,
-			Properties^(protocol_property(Protocol, calls(Other::Predicate, Properties)), nonvar(Other)),
+			Predicate0^CallsProperties^DefinesProperties^NonTerminal^(
+				protocol_property(Protocol, calls(Other::Predicate0, CallsProperties)),
+				nonvar(Other),
+				object_property(Other, defines(Predicate0, DefinesProperties)),
+				(	member(non_terminal(NonTerminal), DefinesProperties) ->
+					Predicate = NonTerminal
+				;	Predicate = Predicate0
+				)
+			),
 			Predicates
 		),
 		^^ground_entity_identifier(protocol, Protocol, ProtocolName),
@@ -442,7 +487,15 @@
 	output_object_xref_calls(Object, Options) :-
 		setof(
 			Predicate,
-			Properties^(object_property(Object, calls(Other::Predicate, Properties)), nonvar(Other)),
+			Predicate0^CallsProperties^DefinesProperties^NonTerminal^(
+				object_property(Object, calls(Other::Predicate0, CallsProperties)),
+				nonvar(Other),
+				object_property(Other, defines(Predicate0, DefinesProperties)),
+				(	member(non_terminal(NonTerminal), DefinesProperties) ->
+					Predicate = NonTerminal
+				;	Predicate = Predicate0
+				)
+			),
 			Predicates
 		),
 		^^ground_entity_identifier(object, Object, ObjectName),
@@ -546,7 +599,15 @@
 	output_category_xref_calls(Category, Options) :-
 		setof(
 			Predicate,
-			Properties^(category_property(Category, calls(Object::Predicate, Properties)), nonvar(Object)),
+			Predicate0^CallsProperties^DefinesProperties^NonTerminal^(
+				category_property(Category, calls(Other::Predicate0, CallsProperties)),
+				nonvar(Other),
+				object_property(Other, defines(Predicate0, DefinesProperties)),
+				(	member(non_terminal(NonTerminal), DefinesProperties) ->
+					Predicate = NonTerminal
+				;	Predicate = Predicate0
+				)
+			),
 			Predicates
 		),
 		^^ground_entity_identifier(category, Category, CategoryName),
