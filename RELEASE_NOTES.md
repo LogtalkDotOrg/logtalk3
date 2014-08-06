@@ -71,6 +71,10 @@ whenever applicable when generating entity diagrams.
 exported that could result in local predicates being misclassified as external
 predicates when generating entity predicate cross-referencing diagrams.
 
+* FIXED: Bug in the `diagrams` tool when generating entity predicate cross-
+referencing diagrams where documentation links would be added for predicate
+nodes without documentation.
+
 * FIXED: Compile the `diagrams` and `lgtunit` tool files in optimized mode.
 
 

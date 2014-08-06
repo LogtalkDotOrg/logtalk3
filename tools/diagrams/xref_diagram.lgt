@@ -114,7 +114,7 @@
 		;	Predicate = Predicate0
 		),
 		predicate_kind(Kind, Entity, Predicate0, PredicateKind),
-		add_predicate_documentation_url(Options, Entity, Predicate0, PredicateOptions),
+		add_predicate_documentation_url(Options, Entity, Predicate, PredicateOptions),
 		^^output_node(Predicate, Predicate, [], PredicateKind, PredicateOptions),
 		assertz(included_predicate_(Predicate)),
 		fail.
@@ -127,8 +127,7 @@
 		;	Predicate = Predicate0
 		),
 		predicate_kind(Kind, Entity, Predicate0, PredicateKind),
-		add_predicate_documentation_url(Options, Entity, Predicate0, PredicateOptions),
-		^^output_node(Predicate, Predicate, [], PredicateKind, PredicateOptions),
+		^^output_node(Predicate, Predicate, [], PredicateKind, Options),
 		assertz(included_predicate_(Predicate)),
 		fail.
 	process(Kind, Entity, Options) :-
@@ -182,7 +181,10 @@
 	add_predicate_documentation_url(Options, _, Entity::Functor/Arity, PredicateOptions) :-
 		!,
 		add_predicate_documentation_url(Options, Entity, Functor/Arity, PredicateOptions).
-	add_predicate_documentation_url(Options, Entity, Functor/Arity, PredicateOptions) :-
+	add_predicate_documentation_url(Options, _, Entity::Functor//Arity, PredicateOptions) :-
+		!,
+		add_predicate_documentation_url(Options, Entity, Functor//Arity, PredicateOptions).
+	add_predicate_documentation_url(Options, Entity, Predicate, PredicateOptions) :-
 		!,
 		(	member(url_prefixes(FilePrefix, DocPrefix), Options) ->
 			functor(Entity, EntityFunctor, EntityArity),
@@ -196,8 +198,13 @@
 				atom_concat(URL2, Suffix, URL)
 			;	atom_concat(URL2, Suffix, URL3),
 				atom_concat(URL3, Target, URL4),
-				atom_concat(URL4, Functor, URL5),
-				atom_concat(URL5, '/', URL6),
+				(	Predicate = Functor/Arity ->
+					atom_concat(URL4, Functor, URL5),
+					atom_concat(URL5, '/', URL6)
+				;	Predicate = Functor//Arity,
+					atom_concat(URL4, Functor, URL5),
+					atom_concat(URL5, '//', URL6)
+				),
 				number_codes(Arity, ArityCodes),
 				atom_codes(ArityAtom, ArityCodes),
 				atom_concat(URL6, ArityAtom, URL)
