@@ -157,14 +157,14 @@
 
 	predicate_kind(module, Entity, Predicate, PredicateKind) :-
 		!,
-		modules_diagram_support::module_property(Entity, exports(Exports)),
-		(	member(Predicate, Exports) ->
+		(	modules_diagram_support::module_property(Entity, exports(Exports)),
+			member(Predicate, Exports) ->
 			PredicateKind = public_predicate
 		;	PredicateKind = predicate
 		).
 	predicate_kind(Kind, Entity, Predicate, PredicateKind) :-
-		entity_property(Kind, Entity, declares(Predicate, Properties)),
-		(	member((public), Properties) ->
+		(	entity_property(Kind, Entity, declares(Predicate, Properties)),
+			member((public), Properties) ->
 			PredicateKind = public_predicate
 		;	PredicateKind = predicate
 		).

@@ -64,6 +64,10 @@ similar command from the ECLiPSe debugger.
 * UPDATED: The `diagrams` tool now allows using documentation URLs for Prolog
 module nodes.
 
+* FIXED: Bug in the `diagrams` tool when checking if a predicate is public or
+exported that could result in local predicates being misclassified as external
+predicates when generating entity predicate cross-referencing diagrams.
+
 * FIXED: Compile the `diagrams` and `lgtunit` tool files in optimized mode.
 
 
