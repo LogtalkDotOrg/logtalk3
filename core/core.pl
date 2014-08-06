@@ -8537,10 +8537,6 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_clause'(Clause, _) :-
 	% deal with unexpected clause translation failures
-	(	Clause = (Head :- _) ->
-		functor(Head, Functor, Arity)
-	;	functor(Clause, Functor, Arity)
-	),
 	throw(error(system_error, clause(Clause))).
 
 
