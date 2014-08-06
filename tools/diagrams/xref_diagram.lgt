@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/07/26,
+		date is 2014/08/06,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format']
 	]).
@@ -106,18 +106,26 @@
 		).
 
 	process(Kind, Entity, Options) :-
-		entity_property(Kind, Entity, declares(Predicate, _)),
-		predicate_kind(Kind, Entity, Predicate, PredicateKind),
-		add_predicate_documentation_url(Options, Entity, Predicate, PredicateOptions),
+		entity_property(Kind, Entity, declares(Predicate0, Properties)),
+		(	member(non_terminal(NonTerminal), Properties) ->
+			Predicate = NonTerminal
+		;	Predicate = Predicate0
+		),
+		predicate_kind(Kind, Entity, Predicate0, PredicateKind),
+		add_predicate_documentation_url(Options, Entity, Predicate0, PredicateOptions),
 		^^output_node(Predicate, Predicate, [], PredicateKind, PredicateOptions),
 		assertz(included_predicate_(Predicate)),
 		fail.
 	process(Kind, Entity, Options) :-
-		entity_property(Kind, Entity, defines(Predicate, Properties)),
-		\+ entity_property(Kind, Entity, declares(Predicate, _)),
+		entity_property(Kind, Entity, defines(Predicate0, Properties)),
+		\+ entity_property(Kind, Entity, declares(Predicate0, _)),
 		\+ member(auxiliary, Properties),
-		predicate_kind(Kind, Entity, Predicate, PredicateKind),
-		add_predicate_documentation_url(Options, Entity, Predicate, PredicateOptions),
+		(	member(non_terminal(NonTerminal), Properties) ->
+			Predicate = NonTerminal
+		;	Predicate = Predicate0
+		),
+		predicate_kind(Kind, Entity, Predicate0, PredicateKind),
+		add_predicate_documentation_url(Options, Entity, Predicate0, PredicateOptions),
 		^^output_node(Predicate, Predicate, [], PredicateKind, PredicateOptions),
 		assertz(included_predicate_(Predicate)),
 		fail.
@@ -204,10 +212,20 @@
 		Callee \= ':'(_, _),
 		memberchk(caller(Caller), Properties).
 	calls_local_predicate(Kind, Entity, Caller, Callee) :-
-		entity_property(Kind, Entity, calls(Callee, Properties)),
-		Callee \= _::_,
-		Callee \= ':'(_, _),
-		memberchk(caller(Caller), Properties).
+		entity_property(Kind, Entity, calls(Callee0, CallsProperties)),
+		Callee0 \= _::_,
+		Callee0 \= ':'(_, _),
+		memberchk(caller(Caller0), CallsProperties),
+		(	entity_property(Kind, Entity, defines(Callee0, CalleeDefinesProperties)),
+			member(non_terminal(CalleeNonTerminal), CalleeDefinesProperties) ->
+			Callee = CalleeNonTerminal
+		;	Callee = Callee0
+		),
+		(	entity_property(Kind, Entity, defines(Caller0, CallerDefinesProperties)),
+			member(non_terminal(CallerNonTerminal), CallerDefinesProperties) ->
+			Caller = CallerNonTerminal
+		;	Caller = Caller0
+		).
 
 	calls_external_predicate(module, Entity, Caller, Callee) :-
 		!,
