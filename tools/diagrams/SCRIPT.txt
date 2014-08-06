@@ -103,6 +103,9 @@ yes
 % opens the corresponding file, and clicking on an entity or predicate
 % node opens its documentation:
 
+| ?- xref_diagram::entity(logtalk, [title('logtalk built-in object'), url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/', 'http://logtalk.org/library/'), omit_path_prefixes(['/Users/pmoura/logtalk/', '/opt/local/share/logtalk/'])]).
+true.
+
 | ?- inheritance_diagram::rlibrary(tools, [title('Logtalk development tools'), url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/', 'http://logtalk.org/library/'), omit_path_prefixes(['/Users/pmoura/logtalk/', '/opt/local/share/logtalk/'])]).
 yes
 
