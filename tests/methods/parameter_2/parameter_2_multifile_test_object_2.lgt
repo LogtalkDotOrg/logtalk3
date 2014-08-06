@@ -17,7 +17,6 @@
 	:- multifile(parameter_2_multifile_test_object_1(_)::p/1).
 	:- dynamic(parameter_2_multifile_test_object_1(_)::p/1).
 
-	parameter_2_multifile_test_object_1(_)::p(Parameter) :-
-		parameter(1, Parameter).
+	parameter_2_multifile_test_object_1(_)::p(2).
 
 :- end_object.

@@ -31,6 +31,13 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: Calls to the `sender/1`, `this/1`, and `self/1` execution context
+built-in methods from the body of multifile predicate clauses now always return
+the entity containing the clause. This semantic change is necessary to ensure
+that any direct or indirect call (in particular, sending a message that calls
+a meta-predicate) made from the clause body will use the expected execution
+context.
+
 * CHANGED: Throw a `system_error` in case of an unexpected compilation failure
 of a source file term to help identify and diagnose possible compiler bugs.
 

@@ -8550,38 +8550,47 @@ current_logtalk_flag(Flag, Value) :-
 % compilation of clause bodies is delayed to the compiler second stage to
 % take advantage of the collected information to notably simplify handling
 % of redefined built-in predicates
+%
+% in the case of a clause rule for a multifile predicate, the clause body
+% is compiled in the context of the entity defining the clause
 
-'$lgt_compile_clause'((Head:-Body), Entity, drule(THead,'$lgt_nop'(Body),Body,Ctx), ddrule(THead,'$lgt_nop'(Body),DHead,Body,Ctx), Ctx) :-
-	'$lgt_pp_dynamic_'(Head),
+'$lgt_compile_clause'((Head:-Body), Entity, TClause, DClause, Ctx) :-
 	!,
 	'$lgt_head_meta_variables'(Head, MetaVars),
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, MetaVars, _, ExCtx, _, _, Line-_),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, Prefix, MetaVars, MetaCallCtx, ExCtx, Mode, Stack, BeginLine-EndLine),
 	'$lgt_compile_head'(Head, THead, Ctx),
 	(	Head = {UserHead} ->
-		DHead = '$lgt_debug'(rule(Entity, user::UserHead, N, Line), ExCtx)
-	;	DHead = '$lgt_debug'(rule(Entity, Head, N, Line), ExCtx, Line)
+		% clause for a multifile predicate in "user"
+		DHead = '$lgt_debug'(rule(Entity, user::UserHead, N, BeginLine), ExCtx),
+		'$lgt_comp_ctx'(BodyCtx, Head, Entity, Entity, Entity, Prefix, MetaVars, MetaCallCtx, BodyExCtx, Mode, Stack, BeginLine-EndLine),
+		'$lgt_execution_context'(BodyExCtx, Entity, Entity, Entity, MetaCallCtx, Stack)
+	;	Head = _::_ ->
+		% clause for a multifile predicate
+		DHead = '$lgt_debug'(rule(Entity, Head, N, BeginLine), ExCtx),
+		'$lgt_comp_ctx'(BodyCtx, Head, Entity, Entity, Entity, Prefix, MetaVars, MetaCallCtx, BodyExCtx, Mode, Stack, BeginLine-EndLine),
+		'$lgt_execution_context'(BodyExCtx, Entity, Entity, Entity, MetaCallCtx, Stack)
+	;	% clause for a local predicate
+		DHead = '$lgt_debug'(rule(Entity, Head, N, BeginLine), ExCtx),
+		BodyCtx = Ctx
 	),
-	'$lgt_clause_number'(Head, Entity, Line, N).
-
-'$lgt_compile_clause'((Head:-Body), Entity, srule(THead,Body,Ctx), dsrule(THead,DHead,Body,Ctx), Ctx) :-
-	!,
-	'$lgt_head_meta_variables'(Head, MetaVars),
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, MetaVars, _, ExCtx, _, _, Line-_),
-	'$lgt_compile_head'(Head, THead, Ctx),
-	(	Head = {UserHead} ->
-		DHead = '$lgt_debug'(rule(Entity, user::UserHead, N, Line), ExCtx)
-	;	DHead = '$lgt_debug'(rule(Entity, Head, N, Line), ExCtx)
+	(	'$lgt_pp_dynamic_'(Head) ->
+		TClause = drule(THead, '$lgt_nop'(Body), Body, BodyCtx),
+		DClause = ddrule(THead, '$lgt_nop'(Body), DHead, Body, BodyCtx)
+	;	TClause = srule(THead, Body, BodyCtx),
+		DClause = dsrule(THead, DHead, Body, BodyCtx)
 	),
-	'$lgt_clause_number'(Head, Entity, Line, N).
+	'$lgt_clause_number'(Head, Entity, BeginLine, N).
 
 '$lgt_compile_clause'(Fact, Entity, sfact(TFact), dfact(TFact,DHead), Ctx) :-
 	'$lgt_compile_head'(Fact, TFact, Ctx),
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, ExCtx, _, _, Line-_),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, ExCtx, _, _, BeginLine-_),
 	(	Fact = {UserFact} ->
-		DHead = '$lgt_debug'(fact(Entity, user::UserFact, N, Line), ExCtx)
-	;	DHead = '$lgt_debug'(fact(Entity, Fact, N, Line), ExCtx)
+		% fact for a multifile predicate in "user"
+		DHead = '$lgt_debug'(fact(Entity, user::UserFact, N, BeginLine), ExCtx)
+	;	% other facts
+		DHead = '$lgt_debug'(fact(Entity, Fact, N, BeginLine), ExCtx)
 	),
-	'$lgt_clause_number'(Fact, Entity, Line, N).
+	'$lgt_clause_number'(Fact, Entity, BeginLine, N).
 
 
 
@@ -9983,31 +9992,6 @@ current_logtalk_flag(Flag, Value) :-
 		TPred = (Self0 = Self),
 		DPred = TPred,
 		DSelf = Self
-	).
-
-'$lgt_compile_body'(parameter(Arg, Value), TPred, '$lgt_debug'(goal(parameter(Arg, Value), TPred), ExCtx), Ctx) :-
-	'$lgt_comp_ctx'(Ctx, Head, _, This, _, _, _, _, ExCtx, _, _, _),
-	nonvar(Head),
-	Head = Other::_,
-	% we're compiling a clause for a multifile predicate
-	!,
-	'$lgt_must_be'(integer, Arg),
-	(	compound(Other) ->
-		true
-	;	throw(type_error(parametric_entity, Other))
-	),
-	functor(Other, _, Arity),
-	(	\+ (1 =< Arg, Arg =< Arity) ->
-		throw(domain_error([1,Arity], Arg))
-	;	true
-	),
-	'$lgt_execution_context_this'(ExCtx, This),
-	% we must delay unification to runtime as Other is only used for
-	% stating to which entity the multifile predicate clause belongs
-	(	'$lgt_current_object_'(Other, _, _, _, _, _, _, _, _, _, _) ->
-		TPred = arg(Arg, This, Value)
-	;	% category
-		TPred = '$lgt_category_parameter'(This, Other, Arg, Value)
 	).
 
 '$lgt_compile_body'(parameter(Arg, _), _, _, Ctx) :-
@@ -15613,14 +15597,12 @@ current_logtalk_flag(Flag, Value) :-
 % stack of coinductive hypothesis (ancestor goals)
 '$lgt_comp_ctx_stack'(ctx(_, _, _, _, _, _, _, _, _, Stack, _), Stack).
 
-% position (lines) of the term being compiled
+% position (a pair of integers) of the term being compiled
 '$lgt_comp_ctx_position'(ctx(_, _, _, _, _, _, _, _, _, _, Position), Position).
 
 
 
-% utility predicates used to access execution context terms;
-% the actual format of the execution context terms is defined
-% in the "logtalk" built-in object
+% utility predicates used to access execution context terms
 
 '$lgt_execution_context'(c(This, r(Sender, Self, MetaCallContext, Stack)), Sender, This, Self, MetaCallContext, Stack).
 
