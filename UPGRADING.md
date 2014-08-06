@@ -146,9 +146,13 @@ in order to avoid code portability issues. The workaround is to wrap calls
 to these predicates using the `{}/1` control construct when using them as
 messages.
 
-Calls to the `sender/1`, `this/1`, and `self/1` execution context built-in
-methods from the body of multifile predicate clauses now always return the
-entity containing the clause.
+The body of multifile predicate clauses is now compiled as called within the
+context of the entity containing the clauses. This is required to ensure that
+any direct or indirect call (in particular, sending a message that calls a
+meta-predicate) made from the clause body will use the expected execution
+context. As a consequence, calls to the `sender/1`, `this/1`, and `self/1`
+execution context built-in methods from the body of a multifile predicate
+clauses now always return the entity containing the clause.
 
 
 Reflection support
