@@ -148,6 +148,9 @@
 			)
 		;	print_message(information, debugger, debugger_off)
 		),
+		debugging_details.
+
+	debugging_details :-
 		(	spying_line_number_(_, _) ->
 			findall(Entity-Line, spying_line_number_(Entity,Line), LineNumberSpyPoints),
 			print_message(information, debugger, line_number_spy_points(LineNumberSpyPoints))
@@ -581,7 +584,7 @@
 		nodebug.
 
 	do_port_option((=), _, _, _, _, _, _, _) :-
-		debugging,
+		debugging_details,
 		fail.
 
 	do_port_option((+), _, _, Goal, _, _, _, _) :-
