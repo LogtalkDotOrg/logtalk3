@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/07/31,
+		date is 2014/08/06,
 		comment is 'Logtalk debugger default message translations.'
 	]).
 
@@ -71,6 +71,9 @@
 
 	logtalk::message_tokens(enter_invocation_number, debugger) -->
 		['    Enter an invocation number to jump to'-[], nl].
+
+	logtalk::message_tokens(enter_port_name, debugger) -->
+		['    Enter a port name or a negated port name to zap to'-[], nl].
 
 	% debugger status and switching
 
@@ -228,6 +231,8 @@
 			'        l - leap (continues execution until the next spy point is found)'-[], nl,
 			'        s - skip (skips debugging for the current goal; only meaningful at call and redo ports)'-[], nl,
 			'        j - jump (reads invocation number and continues execution until a port is reached for that number)'-[], nl,
+			'        z - zap (reads port name and continues execution until that port is reached)'-[], nl,
+			'                (reads negated port name and continues execution until a port other than the negated port is reached)'-[], nl,
 			'        i - ignore (ignores goal, assumes that it succeeded; only valid at call and redo ports)'-[], nl,
 			'        f - fail (forces backtracking; may also be used to convert an exception into a failure)'-[], nl,
 			'        u - unify (reads and unifies a term with the current goal; only valid at the call port)'-[], nl,

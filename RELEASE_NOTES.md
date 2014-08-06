@@ -55,6 +55,11 @@ and file position information.
 Tools
 -----
 
+* ADDED: The `debugger` tool now supports a `z` command to read a port name
+(or a negated port name) and continue execution (i.e. zap) until a port with
+the same name (or a name other than the negated port) is reached. Based on a
+similar command from the ECLiPSe debugger.
+
 * UPDATED: The `diagrams` tool now allows using documentation URLs for Prolog
 module nodes.
 

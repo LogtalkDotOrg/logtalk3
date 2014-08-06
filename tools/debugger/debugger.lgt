@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/07/31,
+		date is 2014/08/06,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -61,6 +61,9 @@
 
 	:- private(jump_to_invocation_number_/1).
 	:- dynamic(jump_to_invocation_number_/1).
+
+	:- private(zap_to_port_/1).
+	:- dynamic(zap_to_port_/1).
 
 	:- if((current_logtalk_flag(prolog_dialect, xsb), current_logtalk_flag(threads, supported))).
 		:- thread_shared(debugging_/0).
@@ -290,6 +293,7 @@
 		valid_leash_port(Port),
 		valid_leash_ports(Ports).
 
+	:- public(valid_leash_port/1).
 	valid_leash_port(fact).
 	valid_leash_port(rule).
 	valid_leash_port(call).
@@ -307,19 +311,17 @@
 	leashing(Port, N, Goal, ExCtx, Code) :-
 		functor(Port, PortName, _),
 		leashing_(PortName),
-		(	retract(jump_to_invocation_number_(N)) ->
-			(	tracing_ ->
-				true
-			;	assertz(tracing_)
-			),
+		(	tracing_ ->
+			Code = ' '
+		;	retract(jump_to_invocation_number_(N)) ->
+			assertz(tracing_),
+			Code = ' '
+		;	retract(zap_to_port_(Port)) ->
+			retractall(zap_to_port_(_)),
+			assertz(tracing_),
 			Code = ' '
 		;	spying(Port, Goal, ExCtx, Code) ->
-			(	tracing_ ->
-				true
-			;	assertz(tracing_)
-			)
-		;	tracing_ ->
-			Code = ' '
+			assertz(tracing_)
 		;	fail
 		).
 
@@ -483,6 +485,7 @@
 	valid_port_option(l, _, _) :- !.
 	valid_port_option(s, _, _) :- !.
 	valid_port_option(j, _, _) :- !.
+	valid_port_option(z, _, _) :- !.
 	valid_port_option(i, call, _) :- !.
 	valid_port_option(i, redo, _) :- !.
 	valid_port_option(f, call, _) :- !.
@@ -539,6 +542,21 @@
 		ask_question(question, debugger, enter_invocation_number, integer, N),
 		retractall(jump_to_invocation_number_(_)),
 		assertz(jump_to_invocation_number_(N)),
+		retractall(tracing_).
+
+	do_port_option(z, _, _, _, _, _, _, true) :-
+		ask_question(question, debugger, enter_port_name, valid_zap_port, ZapPort),
+		retractall(zap_to_port_(_)),
+		(	atom(ZapPort) ->
+			assertz(zap_to_port_(ZapPort))
+		;	ZapPort = -Port,
+			(	valid_leash_port(OtherPort),
+				OtherPort \== Port,
+				assertz(zap_to_port_(OtherPort)),
+				fail
+			;	true
+			)
+		),
 		retractall(tracing_).
 
 	do_port_option(i, _, _, _, _, _, _, ignore).
@@ -697,6 +715,13 @@
 
 	do_port_option((?), Port, N, Goal, TGoal, Error, ExCtx, Action) :-
 		do_port_option(h, Port, N, Goal, TGoal, Error, ExCtx, Action).
+
+	valid_zap_port(ZapPort) :-
+		callable(ZapPort),
+		(	valid_leash_port(ZapPort)
+		;	ZapPort = -Port,
+			valid_leash_port(Port)
+		).
 
 	:- if(current_logtalk_flag(threads, supported)).
 
