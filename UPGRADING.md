@@ -51,9 +51,17 @@ MAJOR LANGUAGE CHANGES FROM LOGTALK 2.x TO LOGTALK 3.x
 Structured message printing
 ---------------------------
 
-The new structured message printing, an extended implementation of the same
-mechanism available in some Prolog systems, allows fine grained control over
-printing of informative, warning, and error messages.
+The new structured message printing mechanism, an extended implementation
+of the same mechanism available in some Prolog systems, allows fine grained
+control over printing of informative, warning, and error messages.
+
+
+Structured question asking
+--------------------------
+
+The new structured question asking mechanism complements the structured
+message printing mechanism and allows fine grained control over querying
+the user for data.
 
 
 Source file paths
@@ -126,8 +134,8 @@ The Logtalk 2.x `unknown`, `singletons`, and `tmpdir` are renamed in Logtalk
 compatibility with Logtalk 2.x is still required.
 
 
-Control constructs semantic changes
------------------------------------
+Semantic changes
+----------------
 
 The `{}/1` control construct is now opaque to cuts, thus ensuring the same
 semantics when its argument is known at compile and when it's only known at
@@ -137,6 +145,10 @@ Logtalk and Prolog built-in predicates can no longer be used as messages
 in order to avoid code portability issues. The workaround is to wrap calls
 to these predicates using the `{}/1` control construct when using them as
 messages.
+
+Calls to the `sender/1`, `this/1`, and `self/1` execution context built-in
+methods from the body of multifile predicate clauses now always return the
+entity containing the clause.
 
 
 Reflection support
