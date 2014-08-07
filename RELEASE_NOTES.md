@@ -25,8 +25,8 @@ RELEASE NOTES
 =============
 
 
-3.00.0 Beta 10 - August ??, 2014
-================================
+3.00.0 Release Candidate 1 - August ??, 2014
+============================================
 
 Logtalk compiler and runtime
 ----------------------------
@@ -42,8 +42,8 @@ clauses now always return the entity containing the clause.
 * CHANGED: Throw a `system_error` in case of an unexpected compilation failure
 of a source file term to help identify and diagnose possible compiler bugs.
 
-* FIXED: Generation of category "def" clauses for declared multifile predicates
-without an initial set of clauses.
+* FIXED: Generation of category "def" clauses for declared static multifile
+predicates without an initial set of clauses.
 
 * FIXED: Bug in the compilation of dynamic predicate rules in debug mode.
 
