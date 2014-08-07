@@ -221,7 +221,7 @@
 		::output_file_path(Project, Options, Format, OutputPath),
 		open(OutputPath, write, Stream, [alias(output_file)]),
 		Format::file_header(output_file, Project, Options),
-		atom_concat(libraries_, Project, Identifier),
+		atom_concat(directories_, Project, Identifier),
 		Format::graph_header(output_file, Identifier, Project, directories, [tooltip(Project)| Options]),
 		normalize_directory_paths(Directories, NormalizedDirectories),
 		output_directories(NormalizedDirectories, Format, Options),
