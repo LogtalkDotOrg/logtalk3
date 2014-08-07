@@ -86,6 +86,12 @@ in the exclusion list when specified without an extension.
 
 * FIXED: Compile the `diagrams` and `lgtunit` tool files in optimized mode.
 
+Tests
+-----
+
+* ADDED: Unit tests for the `multifile/1` directive when the multifile
+predicates are declared in categories.
+
 
 3.00.0 Beta 9 - July 31, 2014
 =============================

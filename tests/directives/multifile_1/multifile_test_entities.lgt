@@ -9,11 +9,30 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(multifile_test_entities),
-	logtalk_load(multifile_test_other),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+:- object(multifile_test_object).
+
+	:- public(m1/1).
+	:- multifile(m1/1).
+	m1(1).
+	m1(2).
+
+	:- public(m2/1).
+	:- multifile(m2/1).
+	:- dynamic(m2/1).
+	m2(1).
+	m2(2).
+
+:- end_object.
+
+
+:- category(multifile_test_category).
+
+	:- public(n1/1).
+	:- multifile(n1/1).
+	n1(1).
+	n1(2).
+
+	:- public(n2/1).
+	:- multifile(n2/1).
+
+:- end_category.

@@ -9,15 +9,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(multifile_test_object).
+:- object(multifile_test_other,
+	imports(multifile_test_category)).
 
-	:- public(m1/1).
-	:- multifile(m1/1).
-	m1(1). m1(2).
-
-	:- public(m2/1).
-	:- multifile(m2/1).
-	:- dynamic(m2/1).
-	m2(1). m2(2).
+	:- multifile(multifile_test_category::n1/1).
+	multifile_test_category::n1(4).
 
 :- end_object.

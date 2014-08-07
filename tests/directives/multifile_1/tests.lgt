@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/05/27,
+		date is 2014/08/07,
 		comment is 'Unit tests for the multifile/1 built-in directive.'
 	]).
 
@@ -25,8 +25,11 @@
 	:- multifile(multifile_test_object::m2/1).
 	multifile_test_object::m2(3).
 
+	:- multifile(multifile_test_category::n1/1).
+	multifile_test_category::n1(3).
+
 	test(multifile_1_1) :-
-		findall(X, multifile_test_object::m1(X), L),
+		setof(X, multifile_test_object::m1(X), L),
 		L == [1, 2, 3].
 
 	test(multifile_1_2) :-
@@ -34,11 +37,24 @@
 		multifile_test_object::predicate_property(m1(_), static).
 
 	test(multifile_1_3) :-
-		findall(X, multifile_test_object::m2(X), L),
+		setof(X, multifile_test_object::m2(X), L),
 		L == [1, 2, 3].
 
 	test(multifile_1_4) :-
 		multifile_test_object::predicate_property(m2(_), (multifile)),
 		multifile_test_object::predicate_property(m2(_), (dynamic)).
+
+	test(multifile_1_5) :-
+		setof(X, multifile_test_other::n1(X), L),
+		L == [1, 2, 3, 4].
+
+	test(multifile_1_6) :-
+		multifile_test_other::predicate_property(n1(_), (multifile)).
+
+	test(multifile_1_7) :-
+		\+ multifile_test_other::n2(_).
+
+	test(multifile_1_8) :-
+		multifile_test_other::predicate_property(n2(_), (multifile)).
 
 :- end_object.
