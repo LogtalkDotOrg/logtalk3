@@ -75,6 +75,9 @@ predicates when generating entity predicate cross-referencing diagrams.
 referencing diagrams where documentation links would be added for predicate
 nodes without documentation.
 
+* FIXED: Bug in the `diagrams` tool which would ignore Prolog files listed
+in the exclusion list when specified without an extension.
+
 * FIXED: Compile the `diagrams` and `lgtunit` tool files in optimized mode.
 
 

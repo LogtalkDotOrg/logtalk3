@@ -27,7 +27,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/07/23,
+		date is 2014/08/07,
 		comment is 'Common predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
@@ -575,14 +575,22 @@
 		\+ member(Path, [ExcludedFile| ExcludedFiles]),
 		\+ member(Basename, [ExcludedFile| ExcludedFiles]),
 		% files in the exclusion list may be given with or without extension
-		atom_concat(Source1, '.lgt', Path),
-		\+ member(Source1, [ExcludedFile| ExcludedFiles]),
-		atom_concat(Source2, '.logtalk', Path),
-		\+ member(Source2, [ExcludedFile| ExcludedFiles]),
-		atom_concat(Source3, '.lgt', Basename),
-		\+ member(Source3, [ExcludedFile| ExcludedFiles]),
-		atom_concat(Source4, '.logtalk', Basename),
-		\+ member(Source4, [ExcludedFile| ExcludedFiles]).
+		\+ (	source_file_extension(Extension),
+				atom_concat(Source, Extension, Path),
+				member(Source, [ExcludedFile| ExcludedFiles])
+		),
+		\+ (	source_file_extension(Extension),
+				atom_concat(Source, Extension, Basename),
+				member(Source, [ExcludedFile| ExcludedFiles])
+		),
+		\+ (	modules_diagram_support::source_file_extension(Extension),
+				atom_concat(Source, Extension, Path),
+				member(Source, [ExcludedFile| ExcludedFiles])
+		),
+		\+ (	modules_diagram_support::source_file_extension(Extension),
+				atom_concat(Source, Extension, Basename),
+				member(Source, [ExcludedFile| ExcludedFiles])
+		).
 
 	:- protected(diagram_name_suffix/1).
 	:- mode(diagram_name_suffix(-atom), one).
