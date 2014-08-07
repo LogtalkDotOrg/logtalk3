@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for YAP Prolog 6.3.4 and later versions
-%  Last updated on July 2, 2014
+%  Last updated on August 7, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -728,8 +728,22 @@
 		skip(In, 10)			% assume that the module declaration
 	;	true					% is the first directive on the file
 	),
-	setup_call_cleanup(true, read(In, ModuleDecl), close(In)),
-	ModuleDecl = (:- module(Module, Exports)).
+	setup_call_cleanup(true, '$lgt_yap_read_module_directive'(In, Module, Exports), close(In)),
+	(	var(Module) ->
+		file_base_name(Path, Base),
+		file_name_extension(Module, _, Base)
+	;	true
+	).
+
+'$lgt_yap_read_module_directive'(Stream, Module, Exports) :-
+	read(Stream, FirstTerm),
+	(	FirstTerm  = (:- module(Module, Exports)) ->
+		true
+	;	FirstTerm = (:- encoding(_)) ->
+		read(Stream, SecondTerm),
+		SecondTerm = (:- module(Module, Exports))
+	;	fail
+	).
 
 
 '$lgt_yap_encoding_to_logtalk_encoding'(ascii, 'US-ASCII').

@@ -53,6 +53,12 @@ loading source files with an `encoding/1` directive.
 * FIXED: Cases where a compilation error would be reported with incorrect term
 and file position information.
 
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: The SWI-Prolog and YAP adapter files to skip any `encoding/1`
+directive in a Prolog module file when looking for the `module/2` directive.
+
 Tools
 -----
 
