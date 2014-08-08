@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/08/06,
+		date is 2014/08/08,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -43,6 +43,9 @@
 
 	:- private(skipping_/0).
 	:- dynamic(skipping_/0).
+
+	:- private(quasi_skipping_/0).
+	:- dynamic(quasi_skipping_/0).
 
 	:- private(spying_line_number_/2).
 	:- dynamic(spying_line_number_/2).
@@ -69,6 +72,7 @@
 		:- thread_shared(debugging_/0).
 		:- thread_shared(tracing_/0).
 		:- thread_shared(skipping_/0).
+		:- thread_shared(quasi_skipping_/0).
 		:- thread_shared(spying_/2).
 		:- thread_shared(spying_/4).
 		:- thread_shared(leashing_/1).
@@ -366,14 +370,24 @@
 
 	debug_handler(fact(Entity,Fact,Clause,Line), ExCtx) :-
 		invocation_number_(N),
-		(	debugging_, \+ skipping_ ->
+		(	debugging_,
+			(	\+ skipping_,
+				\+ quasi_skipping_
+			;	quasi_skipping_,
+				spying_line_number_(Entity, Line)
+			) ->
 			port(fact(Entity,Clause,Line), N, Fact, _, _, ExCtx, Action),
 			{Action}
 		;	true
 		).
 	debug_handler(rule(Entity,Head,Clause,Line), ExCtx) :-
 		invocation_number_(N),
-		(	debugging_, \+ skipping_ ->
+		(	debugging_,
+			(	\+ skipping_,
+				\+ quasi_skipping_
+			;	quasi_skipping_,
+				spying_line_number_(Entity, Line)
+			) ->
 			port(rule(Entity,Clause,Line), N, Head, _, _, ExCtx, Action),
 			{Action}
 		;	true
@@ -383,7 +397,16 @@
 		debug_handler(goal(Goal, TGoal), ExCtx).
 	debug_handler(goal(Goal, TGoal), ExCtx) :-
 		inc_invocation_number(N),
-		(	debugging_, \+ skipping_ ->
+		(	debugging_,
+			(	\+ skipping_,
+				\+ quasi_skipping_
+			;	quasi_skipping_,
+				(	functor(Goal, Functor, Arity),
+					\+ \+ spying_predicate_(Functor, Arity)
+				;	logtalk::execution_context(ExCtx, Sender, This, Self, _, _),
+					\+ \+ spying_context_(Sender, This, Self, Goal)
+				)
+			) ->
 			(	port(call, N, Goal, TGoal, _, ExCtx, CAction),
 				(	(CAction == ignore; CAction == unify) ->
 					true
@@ -400,11 +423,13 @@
 						)
 					)
 				;	retractall(skipping_),
+					retractall(quasi_skipping_),
 					port(fail, N, Goal, TGoal, _, ExCtx, _),
 					fail
 				)
 			),
-			retractall(skipping_)
+			retractall(skipping_),
+			retractall(quasi_skipping_)
 		;	{TGoal}
 		).
 
@@ -488,6 +513,7 @@
 	valid_port_option(c, _, _) :- !.
 	valid_port_option(l, _, _) :- !.
 	valid_port_option(s, _, _) :- !.
+	valid_port_option(q, _, _) :- !.
 	valid_port_option(j, _, _) :- !.
 	valid_port_option(z, _, _) :- !.
 	valid_port_option(i, call, _) :- !.
@@ -541,6 +567,16 @@
 		retractall(skipping_),
 		assertz(skipping_).
 	do_port_option(s, _, _, _, _, _, _, true).
+
+	do_port_option(q, call, _, _, _, _, _, true) :-
+		!,
+		retractall(quasi_skipping_),
+		assertz(quasi_skipping_).
+	do_port_option(q, redo, _, _, _, _, _, fail) :-
+		!,
+		retractall(quasi_skipping_),
+		assertz(quasi_skipping_).
+	do_port_option(q, _, _, _, _, _, _, true).
 
 	do_port_option(j, _, _, _, _, _, _, true) :-
 		ask_question(question, debugger, enter_invocation_number, integer, N),
@@ -664,6 +700,7 @@
 
 	do_port_option(a, _, _, _, _, _, _, _) :-
 		retractall(skipping_),
+		retractall(quasi_skipping_),
 		throw(logtalk_debugger_aborted).
 
 	do_port_option('Q', _, _, _, _, _, _, _) :-

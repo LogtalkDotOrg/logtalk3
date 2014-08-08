@@ -62,10 +62,17 @@ directive in a Prolog module file when looking for the `module/2` directive.
 Tools
 -----
 
-* ADDED: The `debugger` tool now supports a `z` command to read a port name
-(or a negated port name) and continue execution (i.e. zap) until a port with
-the same name (or a name other than the negated port) is reached. Based on a
+* ADDED: The `debugger` tool now supports a zap command, `z`, to read a port
+name (or a negated port name) and continue execution until a port with the
+same name (or a name other than the negated port) is reached. Based on a
 similar command from the ECLiPSe debugger.
+
+* ADDED: The `debugger` tool now supports a quasi-skip command, `q`, that
+continues execution until returning to the same goal or reaching a spy point.
+Based on a similar command from the SICStus Prolog debugger.
+
+* FIXED: Issue in the `debugger` tool where the status code at the beginning
+of a trace line would not be updated after setting a spy point.
 
 * UPDATED: The `diagrams` tool now allows using documentation URLs for Prolog
 module nodes.
