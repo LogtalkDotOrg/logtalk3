@@ -314,7 +314,10 @@
 	leashing(Port, N, Goal, ExCtx, Code) :-
 		functor(Port, PortName, _),
 		leashing_(PortName),
-		(	tracing_ ->
+		(	spying(Port, Goal, ExCtx, Code) ->
+			retractall(tracing_),
+			assertz(tracing_)
+		;	tracing_ ->
 			Code = ' '
 		;	retract(jump_to_invocation_number_(N)) ->
 			assertz(tracing_),
@@ -323,8 +326,6 @@
 			retractall(zap_to_port_(_)),
 			assertz(tracing_),
 			Code = ' '
-		;	spying(Port, Goal, ExCtx, Code) ->
-			assertz(tracing_)
 		;	fail
 		).
 
