@@ -224,7 +224,7 @@
 
 	% help
 
-	logtalk::message_tokens(help, debugger) -->
+	logtalk::message_tokens(extended_help, debugger) -->
 		[
 			'    Available options are:'-[], nl,
 			'      c - creep (go on; you may use also the spacebar, return, or enter keys)'-[], nl,
@@ -257,8 +257,26 @@
 			'      - - remove (removes a predicate spy point for the current goal)'-[], nl,
 			'      # - add (adds a line number spy point for the current clause)'-[], nl,
 			'      | - remove (removes a line number spy point for the current clause)'-[], nl,
-			'      h - help (prints this list of options)'-[], nl,
-			'      ? - help (prints this list of options)'-[], nl
+			'      h - extended help (prints this list of options)'-[], nl,
+			'      ? - condensed help'-[], nl
+		].
+
+	logtalk::message_tokens(condensed_help, debugger) -->
+		[
+			'    Available options are:'-[], nl,
+			'      c - creep            i - ignore     * - add context spy point'-[], nl,
+			'      l - leap             f - fail       / - remove context spy point'-[], nl,
+			'      s - skip             u - unify      + - add predicate spy point'-[], nl,
+			'      q - quasi-skip       n - nodebug    - - remove predicate spy point'-[], nl,
+			'      j - jump             ! - command    # - add line number spy point'-[], nl,
+			'      z - zap              @ - command    | - remove line number spy point'-[], nl,
+			'      p - print            b - break '-[], nl,
+			'      d - display          a - abort'-[], nl,
+			'      w - write            x - execution context'-[], nl,
+			'      e - exception        = - debugging information'-[], nl,
+			'      $ - compiled goal    . - file information'-[], nl,
+			'      h - extended help    ? - condensed help'-[], nl,
+			'      Q - quit Logtalk'-[], nl
 		].
 
 	% ports

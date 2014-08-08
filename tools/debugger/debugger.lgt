@@ -751,11 +751,12 @@
 		fail.
 
 	do_port_option(h, _, _, _, _, _, _, _) :-
-		print_message(information, debugger, help),
+		print_message(information, debugger, condensed_help),
 		fail.
 
-	do_port_option((?), Port, N, Goal, TGoal, Error, ExCtx, Action) :-
-		do_port_option(h, Port, N, Goal, TGoal, Error, ExCtx, Action).
+	do_port_option((?), _, _, _, _, _, _, _) :-
+		print_message(information, debugger, extended_help),
+		fail.
 
 	valid_zap_port(ZapPort) :-
 		callable(ZapPort),

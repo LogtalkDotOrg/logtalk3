@@ -71,6 +71,9 @@ similar command from the ECLiPSe debugger.
 continues execution until returning to the same goal or reaching a spy point.
 Based on a similar command from the SICStus Prolog debugger.
 
+* IMPROVED: The `debugger` tool now provides both extended help (`?`) and
+condensed help (`h`) commands.
+
 * FIXED: Issue in the `debugger` tool where the status code at the beginning
 of a trace line would not be updated after setting a spy point.
 
