@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/08/08,
+		date is 2014/08/11,
 		comment is 'Logtalk debugger default message translations.'
 	]).
 
@@ -75,6 +75,9 @@
 	logtalk::message_tokens(enter_port_name, debugger) -->
 		['    Enter a port name or a negated port name to zap to'-[], nl].
 
+	logtalk::message_tokens(enter_write_max_depth, debugger) -->
+		['    Enter the maximum write depth for terms (0 to reset)'-[], nl].
+
 	% debugger status and switching
 
 	logtalk::message_tokens(debugger_on_spying, debugger) -->
@@ -97,8 +100,14 @@
 
 	% at port
 
+	logtalk::message_tokens(leashing_port(Code, Port, N, Goal, MaxDepth), debugger) -->
+		['~w'-[Code]], port_name(Port), invocation_number(N), [term(Goal,[quoted(true),numbervars(true),max_depth(MaxDepth)]), ' ? '-[]].
+
 	logtalk::message_tokens(leashing_port(Code, Port, N, Goal), debugger) -->
 		['~w'-[Code]], port_name(Port), invocation_number(N), ['~q ? '-[Goal]].
+
+	logtalk::message_tokens(tracing_port(Code, Port, N, Goal, MaxDepth), debugger) -->
+		['~w'-[Code]], port_name(Port), invocation_number(N), [term(Goal,[quoted(true),numbervars(true),max_depth(MaxDepth)]), nl].
 
 	logtalk::message_tokens(tracing_port(Code, Port, N, Goal), debugger) -->
 		['~w'-[Code]], port_name(Port), invocation_number(N), ['~q'-[Goal], nl].
@@ -180,14 +189,7 @@
 
 	logtalk::message_tokens(file_context(Basename, Directory, Entity, Predicate, Clause0, Line0), debugger) -->
 		{atom_concat(Directory, Basename, File),
-		 (	Line0 > 0 ->
-		 	Line = Line0
-		 ;	Line = 'n/a'
-		 ),
-		 (	Clause0 =:= 0 ->
-		 	Clause = 'n/a'
-		 ;	Clause = Clause0
-		 )},
+		 clause_and_line_numbers(Clause0, Line0, Clause, Line)},
 		[
 			'    File:              ~w'-[File], nl,
 			'    Line number:       ~w'-[Line], nl,
@@ -201,12 +203,23 @@
 	logtalk::message_tokens(print_current_goal(Goal), debugger) -->
 		['    Current goal: ~p'-[Goal], nl].
 
+	logtalk::message_tokens(display_current_goal(Goal,MaxDepth), debugger) -->
+		['    Current goal: '-[], term(Goal,[quoted(true),ignore_ops(true),max_depth(MaxDepth)]), nl].
+
 	logtalk::message_tokens(display_current_goal(Goal), debugger) -->
 		['    Current goal: ~k'-[Goal], nl].
+
+	logtalk::message_tokens(write_current_goal(Goal,MaxDepth), debugger) -->
+		{ground_term_copy(Goal, GroundGoal)},
+		['    Current goal: '-[], term(GroundGoal,[quoted(true),numbervars(true),max_depth(MaxDepth)]), nl].
 
 	logtalk::message_tokens(write_current_goal(Goal), debugger) -->
 		{ground_term_copy(Goal, GroundGoal)},
 		['    Current goal: ~q'-[GroundGoal], nl].
+
+	logtalk::message_tokens(write_compiled_goal(Goal,MaxDepth), debugger) -->
+		{ground_term_copy(Goal, GroundGoal)},
+		['    Compiled goal: '-[], term(GroundGoal,[quoted(true),numbervars(true),max_depth(MaxDepth)]), nl].
 
 	logtalk::message_tokens(write_compiled_goal(Goal), debugger) -->
 		{ground_term_copy(Goal, GroundGoal)},
@@ -214,13 +227,21 @@
 
 	% exceptions
 
+	logtalk::message_tokens(write_exception_term(Error,MaxDepth), debugger) -->
+		{ground_term_copy(Error, GroundError)},
+		['    Exception term: '-[], term(GroundError,[quoted(true),numbervars(true),max_depth(MaxDepth)]), nl].
+
 	logtalk::message_tokens(write_exception_term(Error), debugger) -->
-		['    Exception term: ~q'-[Error], nl].
+		{ground_term_copy(Error, GroundError)},
+		['    Exception term: ~q'-[GroundError], nl].
 
 	% features
 
 	logtalk::message_tokens(break_not_supported, debugger) -->
 		['    break/0 not supported by the back-end Prolog compiler.'-[], nl].
+
+	logtalk::message_tokens(max_depth_not_supported, debugger) -->
+		['    Limiting write term depth not supported by the back-end Prolog compiler.'-[], nl].
 
 	% help
 
@@ -250,6 +271,7 @@
 			'      x - context (prints execution context)'-[], nl,
 			'      . - file (prints file, entity, predicate, and line number data at an unification port)'-[], nl,
 			'      e - exception (prints exception term thrown by current goal)'-[], nl,
+			'      < - depth (sets the maximum write term depth; type 0 to reset)'-[], nl,
 			'      = - debugging (prints debugging information)'-[], nl,
 			'      * - add (adds a context spy point for the current goal)'-[], nl,
 			'      / - remove (removes a context spy point for the current goal)'-[], nl,
@@ -272,11 +294,11 @@
 			'      z - zap              @ - command    | - remove line number spy point'-[], nl,
 			'      p - print            b - break '-[], nl,
 			'      d - display          a - abort'-[], nl,
-			'      w - write            x - execution context'-[], nl,
-			'      e - exception        = - debugging information'-[], nl,
-			'      $ - compiled goal    . - file information'-[], nl,
-			'      h - extended help    ? - condensed help'-[], nl,
-			'      Q - quit Logtalk'-[], nl
+			'      w - write            Q - quit Logtalk'-[], nl,
+			'      e - exception        x - execution context'-[], nl,
+			'      $ - compiled goal    = - debugging information'-[], nl,
+			'      < - write depth      . - file information'-[], nl,
+			'      h - extended help    ? - condensed help'-[], nl
 		].
 
 	% ports
@@ -358,5 +380,15 @@
 	ground_term_copy(Term, GroundTerm) :-
 		copy_term(Term, GroundTerm),
 		numbervars(GroundTerm, 0, _).
+
+	clause_and_line_numbers(Clause0, Line0, Clause, Line) :-
+		 (	Line0 > 0 ->
+		 	Line = Line0
+		 ;	Line = 'n/a'
+		 ),
+		 (	Clause0 =:= 0 ->
+		 	Clause = 'n/a'
+		 ;	Clause = Clause0
+		 ).
 
 :- end_category.

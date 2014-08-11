@@ -76,6 +76,9 @@ similar command from the ECLiPSe debugger.
 continues execution until returning to the same goal or reaching a spy point.
 Based on a similar command from the SICStus Prolog debugger.
 
+* ADDED: The `debugger` tool now supports a term write depth command, `<`, when
+using a backend Prolog compiler other than B-Prolog, CxProlog, and Lean Prolog.
+
 * IMPROVED: The `debugger` tool now provides both extended help (`?`) and
 condensed help (`h`) commands.
 

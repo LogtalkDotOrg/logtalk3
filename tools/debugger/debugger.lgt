@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/08/08,
+		date is 2014/08/11,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -67,6 +67,9 @@
 
 	:- private(zap_to_port_/1).
 	:- dynamic(zap_to_port_/1).
+
+	:- private(write_max_depth_/1).
+	:- dynamic(write_max_depth_/1).
 
 	:- if((current_logtalk_flag(prolog_dialect, xsb), current_logtalk_flag(threads, supported))).
 		:- thread_shared(debugging_/0).
@@ -493,13 +496,21 @@
 				% the do_port_option/7 call can fail but still chnage the value of Code
 				% (e.g. when adding or removing a spy point)
 				leashing(Port, N, Goal, ExCtx, Code),
-				print_message(information, debugger, leashing_port(Code, Port, N, Goal)),
+				(	write_max_depth_(MaxDepth),
+					MaxDepth > 0 ->
+					print_message(information, debugger, leashing_port(Code, Port, N, Goal, MaxDepth))
+				;	print_message(information, debugger, leashing_port(Code, Port, N, Goal))
+				),
 				catch(read_single_char(Option), _, fail),
 				valid_port_option(Option, Port, Code),
 			do_port_option(Option, Port, N, Goal, TGoal, Error, ExCtx, Action),
 			!
 		;	(	tracing_ ->
-				print_message(information, debugger, tracing_port(' ', Port, N, Goal))
+				(	write_max_depth_(MaxDepth),
+					MaxDepth > 0 ->
+					print_message(information, debugger, tracing_port(' ', Port, N, Goal, MaxDepth))
+				;	print_message(information, debugger, tracing_port(' ', Port, N, Goal))
+				)
 			;	true
 			),
 			Action = true
@@ -549,6 +560,7 @@
 	valid_port_option((#), _, ' ') :- !.
 	valid_port_option(('|'), _, (#)) :- !.
 	valid_port_option(e, exception, _) :- !.
+	valid_port_option((<), _, _) :- !.
 
 	do_port_option('\r', _, _, _, _, _, _, true).
 	do_port_option('\n', _, _, _, _, _, _, true).
@@ -711,15 +723,43 @@
 		fail.
 
 	do_port_option(d, _, _, Goal, _, _, _, _) :-
-		print_message(information, debugger, display_current_goal(Goal)),
+		(	write_max_depth_(MaxDepth),
+			MaxDepth > 0 ->
+			print_message(information, debugger, display_current_goal(Goal,MaxDepth))
+		;	print_message(information, debugger, display_current_goal(Goal))
+		),
 		fail.
 
 	do_port_option(w, _, _, Goal, _, _, _, _) :-
-		print_message(information, debugger, write_current_goal(Goal)),
+		(	write_max_depth_(MaxDepth),
+			MaxDepth > 0 ->
+			print_message(information, debugger, write_current_goal(Goal,MaxDepth))
+		;	print_message(information, debugger, write_current_goal(Goal))
+		),
 		fail.
 
+	:- if((current_logtalk_flag(prolog_dialect,Dialect), Dialect \== b, Dialect \== cx, Dialect \== lean)).
+
+	do_port_option((<), _, _, _, _, _, _, _) :-
+		ask_question(question, debugger, enter_write_max_depth, '=<'(0), N),
+		retractall(write_max_depth_(_)),
+		assertz(write_max_depth_(N)),
+		fail.
+
+	:- else.
+
+	do_port_option((<), _, _, _, _, _, _, _) :-
+		print_message(warning, debugger, max_depth_not_supported),
+		fail.
+
+	:- endif.
+
 	do_port_option('$', _, _, _, TGoal, _, _, _) :-
-		print_message(information, debugger, write_compiled_goal(TGoal)),
+		(	write_max_depth_(MaxDepth),
+			MaxDepth > 0 ->
+			print_message(information, debugger, write_compiled_goal(TGoal,MaxDepth))
+		;	print_message(information, debugger, write_compiled_goal(TGoal))
+		),
 		fail.
 
 	do_port_option(x, _, _, _, _, _, ExCtx, _) :-
@@ -747,7 +787,11 @@
 		fail.
 
 	do_port_option(e, _, _, _, _, Error, _, _) :-
-		print_message(information, debugger, write_exception_term(Error)),
+		(	write_max_depth_(MaxDepth),
+			MaxDepth > 0 ->
+			print_message(information, debugger, write_exception_term(Error,MaxDepth))
+		;	print_message(information, debugger, write_exception_term(Error))
+		),
 		fail.
 
 	do_port_option(h, _, _, _, _, _, _, _) :-
