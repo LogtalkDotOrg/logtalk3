@@ -42,6 +42,11 @@ clauses now always return the entity containing the clause.
 * CHANGED: Throw a `system_error` in case of an unexpected compilation failure
 of a source file term to help identify and diagnose possible compiler bugs.
 
+* ADDED: Support for a `term(Term, Options)` token to the structured message
+printing mechanism. This new token allows to overcome the limitation of the
+de facto `format/3` predicate that doesn't support specifying term writing
+options.
+
 * FIXED: Generation of category "def" clauses for declared static multifile
 predicates without an initial set of clauses.
 

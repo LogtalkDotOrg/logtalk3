@@ -33,7 +33,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/07/18,
+		date is 2014/08/11,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.']).
 
 	:- built_in.
@@ -67,7 +67,7 @@
 	:- dynamic(print_message_token/4).
 	:- mode(print_message_token(@stream_or_alias, @atom, @nonvar, @list(nonvar)), zero_or_one).
 	:- info(print_message_token/4, [
-		comment is 'User-defined hook predicate for printing a message token (at_same_line, nl, flush, Format-Arguments, ansi(Attributes,Format,Arguments), begin(Kind,Variable), and end(Variable)).',
+		comment is 'User-defined hook predicate for printing a message token (at_same_line, nl, flush, Format-Arguments, term(Term,Options), ansi(Attributes,Format,Arguments), begin(Kind,Variable), and end(Variable)).',
 		argnames is ['Stream', 'Prefix', 'Token', 'Tokens']
 	]).
 
@@ -76,7 +76,7 @@
 	:- dynamic(message_tokens//2).
 	:- mode(message_tokens(+nonvar, -list(nonvar)), zero_or_one).
 	:- info(message_tokens//2, [
-		comment is 'User-defined hook grammar rule for converting a message into a list of tokens (at_same_line, nl, flush, Format-Arguments, ansi(Attributes,Format,Arguments), begin(Kind,Variable), and end(Variable)).',
+		comment is 'User-defined hook grammar rule for converting a message into a list of tokens (at_same_line, nl, flush, Format-Arguments, term(Term,Options), ansi(Attributes,Format,Arguments), begin(Kind,Variable), and end(Variable)).',
 		argnames is ['Message', 'Component']
 	]).
 
@@ -361,6 +361,8 @@
 		flush_output(Stream).
 	default_print_message_token(Format-Arguments, _, Stream, _) :-
 		{format(Stream, Format, Arguments)}.
+	default_print_message_token(term(Term, Options), _, Stream, _) :-
+		{write_term(Stream, Format, Options)}.
 	% the following tokens were first introduced by SWI-Prolog; we use default definitions
 	% for compatibility when running Logtalk with other back-end Prolog compilers
 	default_print_message_token(ansi(_, Format, Arguments), _, Stream, _) :-
