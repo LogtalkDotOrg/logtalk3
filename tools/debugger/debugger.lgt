@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/08/11,
+		date is 2014/08/12,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -779,11 +779,14 @@
 		;	current_protocol(Entity),
 			protocol_property(Entity, file(Basename,Directory))
 		),
-		(	Goal = (_ :: Predicate) ->
-			functor(Predicate, Functor, Arity)
-		;	functor(Goal, Functor, Arity)
+		(	Goal = (Other::Predicate) ->
+			% clause for a multifile predicate
+			functor(Predicate, Functor, Arity),
+			print_message(information, debugger, file_context(Basename,Directory,Entity,Other::Functor/Arity,Clause,Line))
+		;	% clause for a local predicate
+			functor(Goal, Functor, Arity),
+			print_message(information, debugger, file_context(Basename,Directory,Entity,Functor/Arity,Clause,Line))
 		),
-		print_message(information, debugger, file_context(Basename,Directory,Entity,Functor/Arity,Clause,Line)),
 		fail.
 
 	do_port_option(e, _, _, _, _, Error, _, _) :-
