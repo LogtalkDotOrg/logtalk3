@@ -110,6 +110,9 @@ Tests
 * ADDED: Unit tests for the `multifile/1` directive when the multifile
 predicates are declared in categories.
 
+* ADDED: Unit tests for the `parameter/2` built-in execution context method
+when used from parametric categories to the `parametric` example.
+
 
 3.00.0 Beta 9 - July 31, 2014
 =============================

@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2010/03/16,
+		date is 2014/08/14,
 		comment is 'Unit tests for the "parametric" example.'
 	]).
 
@@ -62,5 +62,10 @@
 	test(parametric_7) :-
 		employee(sally, 21, 1200)::give_raise(250, NewId),
 		NewId == employee(sally, 21, 1450).
+
+	test(parametric_8) :-
+		speech(winter, wedding)::advice(Clothes, Speech),
+		Clothes == [pants, sleeves, heavy],
+		Speech == [happy, jokes].
 
 :- end_object.

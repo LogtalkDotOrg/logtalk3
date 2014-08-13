@@ -428,17 +428,21 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2010/02/17,
+		date is 2014/08/14,
 		comment is 'Description',
 		parnames is ['Season', 'Event']
 	]).
 
 	:- public(advice/0).
-
 	advice :-
 		^^clothes(Clothes),
 		write('Clothes: '), write(Clothes), nl,
 		^^speech(Speech),
 		write('Speech:  '), write(Speech), nl, nl.
+
+	:- public(advice/2).
+	advice(Clothes, Speech) :-
+		^^clothes(Clothes),
+		^^speech(Speech).
 
 :- end_object.
