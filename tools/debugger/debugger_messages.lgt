@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/08/11,
+		date is 2014/08/14,
 		comment is 'Logtalk debugger default message translations.'
 	]).
 
@@ -250,7 +250,7 @@
 			'    Available options are:'-[], nl,
 			'      c - creep (go on; you may use also the spacebar, return, or enter keys)'-[], nl,
 			'      l - leap (continues execution until the next spy point is found)'-[], nl,
-			'      s - skip (skips debugging for the current goal; only meaningful at call and redo ports)'-[], nl,
+			'      s - skip (skips debugging for the current goal; only meaningful at call, redo, and unification ports)'-[], nl,
 			'      q - quasi-skip (skips debugging until returning to the current goal or reaching a spy point)'-[], nl,
 			'      j - jump (reads invocation number and jumps to the next port with that number)'-[], nl,
 			'      z - zap (reads port name and zaps to that port)'-[], nl,

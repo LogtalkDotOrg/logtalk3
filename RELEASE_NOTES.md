@@ -82,6 +82,9 @@ using a backend Prolog compiler other than B-Prolog, CxProlog, and Lean Prolog.
 * IMPROVED: The `debugger` tool now provides both extended help (`?`) and
 condensed help (`h`) commands.
 
+* IMPROVED: The `debugger` tool now allows using the skip command (`s`) at the
+rule unification port.
+
 * FIXED: Issue in the `debugger` tool where the status code at the beginning
 of a trace line would not be updated after setting a spy point.
 

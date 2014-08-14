@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/08/12,
+		date is 2014/08/14,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -570,6 +570,10 @@
 	do_port_option(l, _, _, _, _, _, _, true) :-
 		retractall(tracing_).
 
+	do_port_option(s, rule(_,_,_), _, _, _, _, _, true) :-
+		!,
+		retractall(skipping_),
+		assertz(skipping_).
 	do_port_option(s, call, _, _, _, _, _, true) :-
 		!,
 		retractall(skipping_),
