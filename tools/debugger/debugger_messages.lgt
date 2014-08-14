@@ -176,8 +176,9 @@
 
 	% execution context
 
-	logtalk::message_tokens(execution_context(Sender, This, Self, MetaCallCtx, Stack), debugger) -->
+	logtalk::message_tokens(execution_context(Entity, Sender, This, Self, MetaCallCtx, Stack), debugger) -->
 		[
+			'    Entity:            ~q'-[Entity], nl,
 			'    Sender:            ~q'-[Sender], nl,
 			'    This:              ~q'-[This], nl,
 			'    Self:              ~q'-[Self], nl,

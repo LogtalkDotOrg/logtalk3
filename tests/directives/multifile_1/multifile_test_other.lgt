@@ -9,10 +9,21 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+
 :- object(multifile_test_other,
 	imports(multifile_test_category)).
 
 	:- multifile(multifile_test_category::n1/1).
 	multifile_test_category::n1(4).
+
+:- end_object.
+
+
+
+:- object(multifile_test_object(P),
+	imports(multifile_test_category(P))).
+
+	:- multifile(multifile_test_category(_)::a/2).
+	multifile_test_category(P)::a(1, P).
 
 :- end_object.

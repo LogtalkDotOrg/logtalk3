@@ -33,7 +33,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/08/11,
+		date is 2014/08/14,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.']).
 
 	:- built_in.
@@ -154,7 +154,7 @@
 	:- multifile(debug_handler/2).
 	:- mode(debug_handler(?entity_identifier, ?atom), zero_or_more).
 	:- info(debug_handler/2, [
-		comment is 'Debug event handler. The defined events are unification events - fact(Entity,Fact,N) and rule(Entity,Head,N) - and goal events - top_goal(Goal,CompiledGoal) and goal(Goal,CompiledGoal).',
+		comment is 'Debug event handler. The defined events are unification events - fact(Fact,N) and rule(Head,N) - and goal events - top_goal(Goal,CompiledGoal) and goal(Goal,CompiledGoal).',
 		argnames is ['Event', 'ExecutionContext']
 	]).
 	% workaround the lack of support for static multifile predicates in Qu-Prolog and XSB
@@ -237,11 +237,11 @@
 		argnames is ['CompiledPredicateIndicators', 'Entity', 'Type', 'PredicateIndicators']
 	]).
 
-	:- public(execution_context/6).
-	:- mode(execution_context(?nonvar, ?object_identifier, ?object_identifier, ?object_identifier, @list(callable), @list(callable)), zero_or_one).
-	:- info(execution_context/6, [
+	:- public(execution_context/7).
+	:- mode(execution_context(?nonvar, ?entity_identifier, ?object_identifier, ?object_identifier, ?object_identifier, @list(callable), @list(callable)), zero_or_one).
+	:- info(execution_context/7, [
 		comment is 'Execution context term data. Execution context terms should be considered opaque terms subject to change without notice.',
-		argnames is ['ExecutionContext', 'Sender', 'This', 'Self', 'MetaCallContext', 'Stack']
+		argnames is ['ExecutionContext', 'Entity', 'Sender', 'This', 'Self', 'MetaCallContext', 'Stack']
 	]).
 
 	print_message(Kind, Component, Message) :-
@@ -457,8 +457,8 @@
 	decompile_predicate_heads(THeads, Entity, Type, Heads) :-
 		{'$lgt_decompile_predicate_heads'(THeads, Entity, Type, Heads)}.
 
-	execution_context(ExecutionContext, Sender, This, Self, MetaCallContext, Stack) :-
-		{'$lgt_execution_context'(ExecutionContext, Sender, This, Self, MetaCallContext, Stack)}.
+	execution_context(ExecutionContext, Entity, Sender, This, Self, MetaCallContext, Stack) :-
+		{'$lgt_execution_context'(ExecutionContext, Entity, Sender, This, Self, MetaCallContext, Stack)}.
 
 :- end_object.
 

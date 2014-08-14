@@ -31,6 +31,20 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: The predicate execution context now also includes the entity
+containing the clause. This entity argument is only equal to the *this*
+argument for object predicate clauses.
+
+* CHANGED: The `execution_context/6` predicate of the `logtalk` built-in
+object to `execution_context/7` to cope with the new execution context
+entity argument.
+
+* CHANGED: The debug events `fact/3` and `rule/3` to `fact/2` and `rule/2`
+by removing the entity argument as this information is now available from
+the execution context. This change also fixes access to runtime entity
+parameters as the previous debug events only provided access to the compile
+time entity identifier.
+
 * CHANGED: Compile the body of multifile predicate clauses as called within
 the context of the entity containing the clauses. This is required to ensure
 that any direct or indirect call (in particular, sending a message that calls
@@ -38,6 +52,12 @@ a meta-predicate) made from the clause body will use the expected execution
 context. As a consequence, calls to the `sender/1`, `this/1`, and `self/1`
 execution context built-in methods from the body of a multifile predicate
 clauses now always return the entity containing the clause.
+
+* IMPROVED: Allow access to entity parameters in multifile predicate clauses
+by simple unification at the clause heads.
+
+* IMPROVED: Allow inline compilation of calls to the `parameter/1` built-in
+context execution method from within parametric categories.
 
 * CHANGED: Throw a `system_error` in case of an unexpected compilation failure
 of a source file term to help identify and diagnose possible compiler bugs.
@@ -111,7 +131,7 @@ Tests
 -----
 
 * ADDED: Unit tests for the `multifile/1` directive when the multifile
-predicates are declared in categories.
+predicates are declared in categories and in parametric entities.
 
 * ADDED: Unit tests for the `parameter/2` built-in execution context method
 when used from parametric categories to the `parametric` example.

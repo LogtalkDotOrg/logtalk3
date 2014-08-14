@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/08/07,
+		date is 2014/08/14,
 		comment is 'Unit tests for the multifile/1 built-in directive.'
 	]).
 
@@ -56,5 +56,9 @@
 
 	test(multifile_1_8) :-
 		multifile_test_other::predicate_property(n2(_), (multifile)).
+
+	test(multifile_1_9) :-
+		multifile_test_object(2)::a(X, Y),
+		X == 1, Y == 2.
 
 :- end_object.

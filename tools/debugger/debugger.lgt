@@ -347,7 +347,7 @@
 		\+ \+ spying_predicate_(Functor, Arity),
 		!.
 	spying(_, Goal, ExCtx, '*') :-
-		logtalk::execution_context(ExCtx, Sender, This, Self, _, _),
+		logtalk::execution_context(ExCtx, _, Sender, This, Self, _, _),
 		\+ \+ spying_context_(Sender, This, Self, Goal).
 
 	:- multifile(logtalk::debug_handler_provider/1).
@@ -371,7 +371,7 @@
 	logtalk::debug_handler(Event, ExCtx) :-
 		debug_handler(Event, ExCtx).
 
-	debug_handler(fact(Entity,Fact,Clause,Line), ExCtx) :-
+	debug_handler(fact(Fact,Clause,Line), ExCtx) :-
 		invocation_number_(N),
 		(	debugging_,
 			(	\+ skipping_,
@@ -379,11 +379,12 @@
 			;	quasi_skipping_,
 				spying_line_number_(Entity, Line)
 			) ->
+			logtalk::execution_context(ExCtx, Entity, _, _, _, _, _),
 			port(fact(Entity,Clause,Line), N, Fact, _, _, ExCtx, Action),
 			{Action}
 		;	true
 		).
-	debug_handler(rule(Entity,Head,Clause,Line), ExCtx) :-
+	debug_handler(rule(Head,Clause,Line), ExCtx) :-
 		invocation_number_(N),
 		(	debugging_,
 			(	\+ skipping_,
@@ -391,6 +392,7 @@
 			;	quasi_skipping_,
 				spying_line_number_(Entity, Line)
 			) ->
+			logtalk::execution_context(ExCtx, Entity, _, _, _, _, _),
 			port(rule(Entity,Clause,Line), N, Head, _, _, ExCtx, Action),
 			{Action}
 		;	true
@@ -406,7 +408,7 @@
 			;	quasi_skipping_,
 				(	functor(Goal, Functor, Arity),
 					\+ \+ spying_predicate_(Functor, Arity)
-				;	logtalk::execution_context(ExCtx, Sender, This, Self, _, _),
+				;	logtalk::execution_context(ExCtx, _, Sender, This, Self, _, _),
 					\+ \+ spying_context_(Sender, This, Self, Goal)
 				)
 			) ->
@@ -767,14 +769,14 @@
 		fail.
 
 	do_port_option(x, _, _, _, _, _, ExCtx, _) :-
-		logtalk::execution_context(ExCtx, Sender, This, Self, MetaCallCtx, Stack),
-		print_message(information, debugger, execution_context(Sender,This,Self,MetaCallCtx,Stack)),
+		logtalk::execution_context(ExCtx, Entity, Sender, This, Self, MetaCallCtx, Stack),
+		print_message(information, debugger, execution_context(Entity,Sender,This,Self,MetaCallCtx,Stack)),
 		fail.
 
 	do_port_option('.', Port, _, Goal, _, _, _, _) :-
-		(	Port = fact(Entity,Clause,Line) ->
+		(	Port = fact(Entity, Clause, Line) ->
 			true
-		;	Port = rule(Entity,Clause,Line)
+		;	Port = rule(Entity, Clause, Line)
 		),
 		(	current_object(Entity) ->
 			object_property(Entity, file(Basename,Directory))

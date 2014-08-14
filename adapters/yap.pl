@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for YAP Prolog 6.3.4 and later versions
-%  Last updated on August 7, 2014
+%  Last updated on August 14, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -862,19 +862,19 @@ user:goal_expansion(phrase(Rule, Input, Rest), user:'$lgt_phrase'(Rule, Input, R
 	nonvar(Rule),
 	functor(Rule, '::', 2),
 	!,
-	'$lgt_execution_context'(ExCtx, user, user, user, [], []).
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []).
 user:goal_expansion(phrase(Rule, Input), user:'$lgt_phrase'(Rule, Input, ExCtx)) :-
 	nonvar(Rule),
 	functor(Rule, '::', 2),
 	!,
-	'$lgt_execution_context'(ExCtx, user, user, user, [], []).
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []).
 
 user:goal_expansion('::'(Object, Message), user:Goal) :-
 	prolog_load_context(module, Module),
 	Module \== user,
 	'$lgt_compiler_flag'(events, Events),
-	'$lgt_comp_ctx'(Ctx, _, user, user, Obj, _, [], [], ExCtx, compile(regular), [], _),
-	'$lgt_execution_context'(ExCtx, user, user, Obj, [], []),
+	'$lgt_comp_ctx'(Ctx, _, user, user, user, Obj, _, [], [], ExCtx, compile(regular), [], _),
+	'$lgt_execution_context'(ExCtx, user, user, user, Obj, [], []),
 	catch('$lgt_compile_message_to_object'(Message, Object, Goal, Events, Ctx), _, fail). 
 
 

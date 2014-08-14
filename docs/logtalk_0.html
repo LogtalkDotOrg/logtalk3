@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2014/8/11</code>
+            <code>2014/8/14</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -269,7 +269,7 @@
         <div class="section">
           <h3 id="debug_handler/2" class="code">debug_handler/2</h3>
           <blockquote>
-            <p class="comment">Debug event handler. The defined events are unification events - fact(Entity,Fact,N) and rule(Entity,Head,N) - and goal events - top_goal(Goal,CompiledGoal) and goal(Goal,CompiledGoal).</p>
+            <p class="comment">Debug event handler. The defined events are unification events - fact(Fact,N) and rule(Head,N) - and goal events - top_goal(Goal,CompiledGoal) and goal(Goal,CompiledGoal).</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -491,7 +491,7 @@
           </dl>
         </div>
         <div class="section">
-          <h3 id="execution_context/6" class="code">execution_context/6</h3>
+          <h3 id="execution_context/7" class="code">execution_context/7</h3>
           <blockquote>
             <p class="comment">Execution context term data. Execution context terms should be considered opaque terms subject to change without notice.</p>
           </blockquote>
@@ -502,11 +502,11 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>execution_context(ExecutionContext,Sender,This,Self,MetaCallContext,Stack)</code>
+              <code>execution_context(ExecutionContext,Entity,Sender,This,Self,MetaCallContext,Stack)</code>
             </dd>
             <dt class="key">mode &ndash; number of solutions:</dt>
             <dd class="value">
-              <code>execution_context(?nonvar,?object_identifier,?object_identifier,?object_identifier,@list(callable),@list(callable)) &ndash; zero_or_one</code>
+              <code>execution_context(?nonvar,?entity_identifier,?object_identifier,?object_identifier,?object_identifier,@list(callable),@list(callable)) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>

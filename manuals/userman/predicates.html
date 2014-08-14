@@ -373,8 +373,13 @@ yes
 The Logtalk compiler will print a warning if the <code>multifile/1</code> directive is missing. Multifile predicates may also be declared dynamic using the same <code>Entity::Functor/Arity</code> notation (multifile predicates are static by default).
 </p>
 <p>
-When a clause of a multifile predicate is a rule, its body is compiled within the context of the object or category containing the clause. This allows clauses for multifile predicates to call local object or category predicates. A consequence of this semantics is that calls to the <code>sender/1</code>, <code>this/1</code>, and <code>self/1</code> execution context methods from the body of a multifile predicate clause will return the entity containing the clause, not the entity for which the clause is defined. Note, however, that a call to the <code>this/1</code> or <code>parameter/2</code> execution context methods is unable to retrieve parameters of the entity containing the clause as access to the clause is made from within the entity for which the clause is defined.
+When a clause of a multifile predicate is a rule, its body is compiled within the context of the object or category containing the clause. This allows clauses for multifile predicates to call local object or category predicates. A consequence of this semantics is that calls to the <code>sender/1</code>, <code>this/1</code>, and <code>self/1</code> execution context methods from the body of a multifile predicate clause will return the entity containing the clause, not the entity for which the clause is defined. Note, however, that a call to the <code>this/1</code> or <code>parameter/2</code> execution context methods is unable to retrieve parameters of the entity containing the clause as access to the clause is made from within the entity for which the clause is defined. The simple solution is to use unification at the clause head. For example:
 </p>
+<pre>
+:- multifile(main(_)::a/1).
+main(Parameter)::a(Parameter, X) :-
+    ...
+</pre>
 
 <h3 id="predicates_coinductive">Coinductive directive</h3>
 
@@ -1012,7 +1017,7 @@ This workaround is sometimes necessary when calling module meta-predicates whose
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: August 11, 2014</span>
+		<span>Last updated on: August 14, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="categories.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="inheritance.html">next</a></span><br/>

@@ -9,6 +9,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+
 :- object(multifile_test_object).
 
 	:- public(m1/1).
@@ -25,6 +26,7 @@
 :- end_object.
 
 
+
 :- category(multifile_test_category).
 
 	:- public(n1/1).
@@ -34,5 +36,14 @@
 
 	:- public(n2/1).
 	:- multifile(n2/1).
+
+:- end_category.
+
+
+
+:- category(multifile_test_category(_)).
+
+	:- public(a/2).
+	:- multifile(a/2).
 
 :- end_category.
