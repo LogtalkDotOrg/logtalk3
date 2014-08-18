@@ -22,21 +22,21 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(graphml_graph,
-	implements(graphp)).
+:- object(graphml_graph_language,
+	implements(graph_language_protocol)).
 
 	:- info([
 		version is 0.1,
 		author is 'Paulo Moura',
-		date is 2014/04/29,
+		date is 2014/08/18,
 		comment is 'Predicates for generating graph files in the GraphML language.'
 	]).
 
-	:- multifile(diagram(_)::format_object/2).
+	:- multifile(graph_language_registry::language_object/2).
 	:- if((current_logtalk_flag(prolog_dialect, qp); current_logtalk_flag(prolog_dialect, xsb))).
-		:- dynamic(diagram(_)::format_object/2).
+		:- dynamic(graph_language_registry::language_object/2).
 	:- endif.
-	diagram(_)::format_object(graphml, graphml_graph).
+	graph_language_registry::language_object(graphml, graphml_graph_language).
 
 	output_file_name(Name, File) :-
 		atom_concat(Name, '.graphml', File).

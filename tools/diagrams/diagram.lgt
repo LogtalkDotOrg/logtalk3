@@ -369,17 +369,6 @@
 	all_files :-
 		::all_files([]).
 
-	:- public(format_object/2).
-	:- multifile(format_object/2).
-	:- if((current_logtalk_flag(prolog_dialect, qp); current_logtalk_flag(prolog_dialect, xsb))).
-		:- dynamic(format_object/2).
-	:- endif.
-	:- mode(format_object(?atom, ?object_identifier), zero_or_more).
-	:- info(format_object/2, [
-		comment is 'Table of defined graph languages and their implementation objects.',
-		argnames is ['Format', 'Object']
-	]).
-
 	:- public(format_object/1).
 	:- mode(format_object(-object_identifier), zero_or_one).
 	:- info(format_object/1, [
@@ -390,7 +379,7 @@
 	format_object(Object) :-
 		parameter(1, Format),
 		nonvar(Format),
-		format_object(Format, Object).
+		graph_language_registry::language_object(Format, Object).
 
 	:- public(default_option/1).
 	:- mode(default_option(?compound), zero_or_more).

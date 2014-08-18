@@ -22,44 +22,23 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(gxl_graph,
-	implements(graphp)).
+:- object(graph_language_registry).
 
 	:- info([
-		version is 0.1,
+		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/04/29,
-		comment is 'Predicates for generating graph files in the GXL language.'
-	]).
+		date is 2014/08/18,
+		comment is 'Registry of implemented graph languages.']).
 
-	:- multifile(diagram(_)::format_object/2).
+	:- public(language_object/2).
+	:- multifile(language_object/2).
 	:- if((current_logtalk_flag(prolog_dialect, qp); current_logtalk_flag(prolog_dialect, xsb))).
-		:- dynamic(diagram(_)::format_object/2).
+		:- dynamic(language_object/2).
 	:- endif.
-	diagram(_)::format_object(gxl, gxl_graph).
-
-	output_file_name(Name, File) :-
-		atom_concat(Name, '.gxl', File).
-
-	file_header(Stream, _Identifier, _Options) :-
-		write(Stream, '<?xml version="1.0" encoding="UTF-8"?>\n'),
-		write(Stream, '<gxl xmlns:xlink=" http://www.w3.org/1999/xlink">\n'),
-		write(Stream, '  <graph id="diagram" edgeids="true" edgemode="defaultdirected" hypergraph="false">\n').
-
-	file_footer(Stream, _Identifier, _Options) :-
-		write(Stream, '  </graph>\n'),
-		write(Stream, '</gxl>\n').
-
-	graph_header(Stream, Identifier, Label, Kind, Options) :-
-		fail.
-
-	graph_footer(Stream, _Identifier, _Label, _Kind, _Options) :-
-		fail.
-
-	node(Stream, Identifier, Label, Contents, Kind, Options) :-
-		fail.
-
-	edge(Stream, Start, End, Labels, Kind, Options) :-
-		fail.
+	:- mode(language_object(?atom, ?object_identifier), zero_or_more).
+	:- info(language_object/2, [
+		comment is 'Table of defined graph languages and their implementation objects.',
+		argnames is ['Format', 'Object']
+	]).
 
 :- end_object.

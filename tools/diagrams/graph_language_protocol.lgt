@@ -22,12 +22,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- protocol(graphp).
+:- protocol(graph_language_protocol).
 
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/14,
+		date is 2014/08/18,
 		comment is 'Predicates for generating graph files.'
 	]).
 

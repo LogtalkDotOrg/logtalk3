@@ -114,6 +114,9 @@ module nodes.
 * IMPROVED: The `diagrams` tool now shows non-terminals instead of predicates
 whenever applicable when generating entity diagrams.
 
+* IMPROVED: Updated the `diagrams` tool by moving the registry of graph
+languages and the objects implementing them to an independent object.
+
 * FIXED: Bug in the `diagrams` tool when checking if a predicate is public or
 exported that could result in local predicates being misclassified as external
 predicates when generating entity predicate cross-referencing diagrams.

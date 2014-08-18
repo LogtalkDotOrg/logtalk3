@@ -28,6 +28,11 @@
 	logtalk_load(library(pairs), [optimize(on)]),
 	logtalk_load(modules_diagram_support, [optimize(on)]),
 	logtalk_load([
+		graph_language_registry,
+		graph_language_protocol,
+		dot_graph_language
+		], [optimize(on)]),
+	logtalk_load([
 		diagram,
 		entity_diagram,
 		xref_diagram,
@@ -37,6 +42,5 @@
 		file_load_diagram,
 		file_dependency_diagram,
 		diagrams
-		], [optimize(on)]),
-	logtalk_load([graphp, dot_graph], [optimize(on)])
+		], [optimize(on)])
 )).
