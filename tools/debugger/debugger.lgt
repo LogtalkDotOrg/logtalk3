@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/08/14,
+		date is 2014/08/18,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -303,7 +303,6 @@
 		valid_leash_port(Port),
 		valid_leash_ports(Ports).
 
-	:- public(valid_leash_port/1).
 	valid_leash_port(fact).
 	valid_leash_port(rule).
 	valid_leash_port(call).
