@@ -28,12 +28,14 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/08/18,
+		date is 2014/08/19,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
 	% avoid a catch-22...
 	:- set_logtalk_flag(debug, off).
+	% temporary fix for asking a question that requires a callback to a local predicate
+	:- set_logtalk_flag( context_switching_calls, allow).
 
 	:- private(debugging_/0).
 	:- dynamic(debugging_/0).
@@ -602,7 +604,7 @@
 		retractall(tracing_).
 
 	do_port_option(z, _, _, _, _, _, _, true) :-
-		ask_question(question, debugger, enter_port_name, valid_zap_port, ZapPort),
+		ask_question(question, debugger, enter_port_name, debugger<<valid_zap_port, ZapPort),
 		retractall(zap_to_port_(_)),
 		(	atom(ZapPort) ->
 			assertz(zap_to_port_(ZapPort))
