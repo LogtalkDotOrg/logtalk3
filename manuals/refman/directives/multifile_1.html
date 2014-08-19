@@ -52,7 +52,7 @@ multifile(Entity::Functor//Arity)
 multifile((Entity1::Functor1//Arity1, Entity2::Functor2//Arity2, ...))
 multifile([Entity1::Functor1//Arity1, Entity2::Functor2//Arity2, ...])</pre>
 <p>
-Declares multifile predicates and multifile grammar rule non-terminals. The predicate (or non-terminal) must also be declared public in the entity holding its <em>primary declaration</em> (i.e. the declaration without the <code>Entity::</code> prefix).
+Declares multifile predicates and multifile grammar rule non-terminals. The predicate (or non-terminal) must also be declared public in the object holding its <em>primary declaration</em> (i.e. the declaration without the <code>Entity::</code> prefix). Both objects and categories can define clauses for multifile predicates but only objects can contain primary declarations.
 </p>
 
 <h4>Template and modes</h4>
@@ -75,7 +75,7 @@ multifile(+category_identifier::+non_terminal_indicator_term)</pre>
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: February 20, 2013</span>
+		<span>Last updated on: August 19, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="mode_2.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="op_3.html">next</a></span><br/>

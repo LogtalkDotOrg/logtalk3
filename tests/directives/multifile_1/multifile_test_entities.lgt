@@ -27,23 +27,9 @@
 
 
 
-:- category(multifile_test_category).
-
-	:- public(n1/1).
-	:- multifile(n1/1).
-	n1(1).
-	n1(2).
-
-	:- public(n2/1).
-	:- multifile(n2/1).
-
-:- end_category.
-
-
-
-:- category(multifile_test_category(_)).
+:- object(multifile_test_object(_)).
 
 	:- public(a/2).
 	:- multifile(a/2).
 
-:- end_category.
+:- end_object.

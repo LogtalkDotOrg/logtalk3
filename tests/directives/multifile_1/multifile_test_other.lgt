@@ -10,20 +10,38 @@
 
 
 
-:- object(multifile_test_other,
-	imports(multifile_test_category)).
+:- object(multifile_test_other).
 
-	:- multifile(multifile_test_category::n1/1).
-	multifile_test_category::n1(4).
+	:- multifile(multifile_test_object::m2/1).
+	multifile_test_object::m2(4).
+	multifile_test_object::m2(5).
+
+:- end_object.
+
+
+
+:- object(multifile_test_other(_)).
+
+	:- multifile(multifile_test_object(_)::a/2).
+	multifile_test_object(P)::a(1, P).
 
 :- end_object.
 
 
 
-:- object(multifile_test_object(P),
-	imports(multifile_test_category(P))).
+:- category(multifile_test_category).
 
-	:- multifile(multifile_test_category(_)::a/2).
-	multifile_test_category(P)::a(1, P).
+	:- multifile(multifile_test_object::m1/1).
+	multifile_test_object::m1(4).
+	multifile_test_object::m1(5).
 
-:- end_object.
+:- end_category.
+
+
+
+:- category(multifile_test_category(_)).
+
+	:- multifile(multifile_test_object(_)::a/2).
+	multifile_test_object(P)::a(2, P).
+
+:- end_category.

@@ -6668,7 +6668,7 @@ current_logtalk_flag(Flag, Value) :-
 	% be sure there aren't instantiation or type errors in the directive
 	'$lgt_must_be'(object_identifier, Obj),
 	'$lgt_must_be'(predicate_indicator, Pred),
-	throw(permission_error(declare, multifile_predicate, Obj::Pred)).
+	throw(permission_error(declare, multifile, Obj::Pred)).
 
 '$lgt_compile_file_directive'(include(File), Ctx) :-
 	!,
@@ -7675,19 +7675,23 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_comp_ctx_position'(Ctx, Lines),
 	functor(Head, Functor, Arity),
 	assertz('$lgt_pp_multifile_'(Head, Lines)),
-	'$lgt_pp_entity_'(_, _, Prefix, _, _),
-	'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
-	assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity))).
+	(	'$lgt_pp_entity_'(object, _, Prefix, _, _),
+		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
+		assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity)))
+	;	throw(permission_error(declare, multifile, Functor/Arity))
+	).
 
 '$lgt_compile_multifile_directive_resource'(NonTerminal, Ctx) :-
-	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, _, ExtArity),
+	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, Arity, ExtArity),
 	!,
 	'$lgt_comp_ctx_position'(Ctx, Lines),
 	functor(Head, Functor, ExtArity),
 	assertz('$lgt_pp_multifile_'(Head, Lines)),
-	'$lgt_pp_entity_'(_, _, Prefix, _, _),
-	'$lgt_compile_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
-	assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity))).
+	(	'$lgt_pp_entity_'(object, _, Prefix, _, _),
+		'$lgt_compile_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
+		assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity)))
+	;	throw(permission_error(declare, multifile, Functor//Arity))
+	).
 
 '$lgt_compile_multifile_directive_resource'(Resource, _) :-
 	ground(Resource),
@@ -8558,18 +8562,20 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_clause'((Head:-Body), Entity, TClause, DClause, Ctx) :-
 	!,
 	'$lgt_head_meta_variables'(Head, MetaVars),
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, Prefix, MetaVars, MetaCallCtx, ExCtx, Mode, Stack, BeginLine-EndLine),
+	'$lgt_comp_ctx'(Ctx, Head, _, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, Mode, Stack, BeginLine-EndLine),
 	'$lgt_compile_head'(Head, THead, Ctx),
 	(	Head = {UserHead} ->
 		% clause for a multifile predicate in "user"
 		DHead = '$lgt_debug'(rule(user::UserHead, N, BeginLine), ExCtx),
-		'$lgt_comp_ctx'(BodyCtx, Head, Entity, Entity, Entity, Entity, Prefix, MetaVars, MetaCallCtx, BodyExCtx, Mode, Stack, BeginLine-EndLine),
-		'$lgt_execution_context'(BodyExCtx, Entity, Entity, Entity, Entity, MetaCallCtx, Stack)
+		'$lgt_comp_ctx'(BodyCtx, Head, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, BodyExCtx, Mode, Stack, BeginLine-EndLine),
+		'$lgt_execution_context'(ExCtx, _, Sender, This, Self, MetaCallCtx, Stack),
+		'$lgt_execution_context'(BodyExCtx, Entity, Sender, This, Self, MetaCallCtx, Stack)
 	;	Head = _::_ ->
 		% clause for a multifile predicate
 		DHead = '$lgt_debug'(rule(Head, N, BeginLine), ExCtx),
-		'$lgt_comp_ctx'(BodyCtx, Head, Entity, Entity, Entity, Entity, Prefix, MetaVars, MetaCallCtx, BodyExCtx, Mode, Stack, BeginLine-EndLine),
-		'$lgt_execution_context'(BodyExCtx, Entity, Entity, Entity, Entity, MetaCallCtx, Stack)
+		'$lgt_comp_ctx'(BodyCtx, Head, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, BodyExCtx, Mode, Stack, BeginLine-EndLine),
+		'$lgt_execution_context'(ExCtx, _, Sender, This, Self, MetaCallCtx, Stack),
+		'$lgt_execution_context'(BodyExCtx, Entity, Sender, This, Self, MetaCallCtx, Stack)
 	;	% clause for a local predicate
 		DHead = '$lgt_debug'(rule(Head, N, BeginLine), ExCtx),
 		BodyCtx = Ctx

@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/08/04,
+		date is 2014/08/19,
 		comment is 'Unit tests for the this/1 built-in method.'
 	]).
 
@@ -25,6 +25,6 @@
 
 	test(this_2) :-
 		this_1_test_object_1::p(This),
-		This == this_1_test_object_2.
+		This == this_1_test_object_1.
 
 :- end_object.

@@ -32,8 +32,8 @@ Logtalk compiler and runtime
 ----------------------------
 
 * CHANGED: The predicate execution context now also includes the entity
-containing the clause. This entity argument is only equal to the *this*
-argument for object predicate clauses.
+containing the clause under execution. This entity argument is only equal
+to the *this* argument for object predicate clauses.
 
 * CHANGED: The `execution_context/6` predicate of the `logtalk` built-in
 object to `execution_context/7` to cope with the new execution context
@@ -45,13 +45,11 @@ the execution context. This change also fixes access to runtime entity
 parameters as the previous debug events only provided access to the compile
 time entity identifier.
 
-* CHANGED: Compile the body of multifile predicate clauses as called within
-the context of the entity containing the clauses. This is required to ensure
-that any direct or indirect call (in particular, sending a message that calls
-a meta-predicate) made from the clause body will use the expected execution
-context. As a consequence, calls to the `sender/1`, `this/1`, and `self/1`
-execution context built-in methods from the body of a multifile predicate
-clauses now always return the entity containing the clause.
+* CHANGED: Restrict *primary* multifile predicate declarations to objects,
+thus ensuring that the execution context arguments are type valid when the
+multifile predicate clauses are defined in a category. The execution context
+arguments continue to be shared (with the exception of the entity defining
+the clause) between the head and the body of multifile predicate clauses.
 
 * IMPROVED: Allow access to entity parameters in multifile predicate clauses
 by simple unification at the clause heads.
@@ -134,7 +132,7 @@ Tests
 -----
 
 * ADDED: Unit tests for the `multifile/1` directive when the multifile
-predicates are declared in categories and in parametric entities.
+predicates are used with parametric entities.
 
 * ADDED: Unit tests for the `parameter/2` built-in execution context method
 when used from parametric categories to the `parametric` example.
