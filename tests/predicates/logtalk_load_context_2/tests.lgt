@@ -70,7 +70,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/02/08,
+		date is 2014/08/20,
 		comment is 'Unit tests for the logtalk_load_context/2 built-in predicate.'
 	]).
 
@@ -84,7 +84,6 @@
 	test(logtalk_load_context_2_2) :-
 		this(This),
 		object_property(This, file(_, Directory)),
-		write(directory-Directory), nl,
 		atom_concat(Directory, 'sample.lgt', Source),
 		logtalk_load(Source, [hook(hook)]),
 		result(source, Source0), Source0 == Source,
