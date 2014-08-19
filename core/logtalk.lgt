@@ -33,7 +33,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/08/14,
+		date is 2014/08/19,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.']).
 
 	:- built_in.
@@ -154,7 +154,7 @@
 	:- multifile(debug_handler/2).
 	:- mode(debug_handler(?entity_identifier, ?atom), zero_or_more).
 	:- info(debug_handler/2, [
-		comment is 'Debug event handler. The defined events are unification events - fact(Fact,N) and rule(Head,N) - and goal events - top_goal(Goal,CompiledGoal) and goal(Goal,CompiledGoal).',
+		comment is 'Debug event handler. The defined events are unification events - fact(Fact,Clause,Line) and rule(Head,Clause,Line) - and goal events - top_goal(Goal,CompiledGoal) and goal(Goal,CompiledGoal).',
 		argnames is ['Event', 'ExecutionContext']
 	]).
 	% workaround the lack of support for static multifile predicates in Qu-Prolog and XSB

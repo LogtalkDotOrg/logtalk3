@@ -39,7 +39,7 @@ to the *this* argument for object predicate clauses.
 object to `execution_context/7` to cope with the new execution context
 entity argument.
 
-* CHANGED: The debug events `fact/3` and `rule/3` to `fact/2` and `rule/2`
+* CHANGED: The debug events `fact/4` and `rule/4` to `fact/3` and `rule/3`
 by removing the entity argument as this information is now available from
 the execution context. This change also fixes access to runtime entity
 parameters as the previous debug events only provided access to the compile
