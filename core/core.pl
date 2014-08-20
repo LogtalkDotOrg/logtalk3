@@ -1312,7 +1312,8 @@ abolish_protocol(Ptc) :-
 % auxiliary predicate used when abolishing objects and categories
 
 '$lgt_abolish_entity_predicates'(Def) :-
-	call(Def, _, _, Pred),
+	call(Def, _, _, Call),
+		'$lgt_unwrap_compiled_head'(Call, Pred),
 		functor(Pred, Functor, Arity),
 		abolish(Functor/Arity),
 	fail.
@@ -2786,8 +2787,9 @@ current_logtalk_flag(Flag, Value) :-
 		DDclClause =.. [DDcl, Pred, _],
 		call(DDclClause) ->
 		retractall(DDclClause),
-		DDefClause =.. [DDef, Pred, _, TPred],
+		DDefClause =.. [DDef, Pred, _, TPred0],
 		(	call(DDefClause) ->
+			'$lgt_unwrap_compiled_head'(TPred0, TPred),
 			functor(TPred, TFunctor, TArity),
 			abolish(TFunctor/TArity),
 			retractall(DDefClause),
@@ -2795,9 +2797,10 @@ current_logtalk_flag(Flag, Value) :-
 		;	true
 		)
 	;	% no dynamic predicate declaration found
-		DDefClause =.. [DDef, Pred, _, TPred],
+		DDefClause =.. [DDef, Pred, _, TPred0],
 		call(DDefClause) ->
 		% local dynamic predicate
+		'$lgt_unwrap_compiled_head'(TPred0, TPred),
 		functor(TPred, TFunctor, TArity),
 		abolish(TFunctor/TArity),
 		retractall(DDefClause),
@@ -2844,7 +2847,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	(Type == (dynamic); Flags /\ 2 =:= 2, Sender = SCtn) ->
 		% either a dynamic predicate or a dynamic object that is both the sender and the predicate scope container
 		(	(Scope = TestScope; Sender = SCtn) ->
-			'$lgt_assert_pred_def'(Def, DDef, Prefix, Head, ExCtx, THead, _),
+			'$lgt_assert_pred_def'(Def, DDef, Flags, Prefix, Head, ExCtx, THead, _),
 			'$lgt_goal_meta_arguments'(Meta, Head, MetaArgs),
 			'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, Prefix, MetaArgs, _, ExCtx, runtime, _, _),
 			'$lgt_compile_body'(Body, TBody, DBody, Ctx),
@@ -2881,7 +2884,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	(Type == (dynamic); Flags /\ 2 =:= 2, Sender = SCtn) ->
 		% either a dynamic predicate or a dynamic object that is both the sender and the predicate scope container
 		(	(Scope = TestScope; Sender = SCtn) ->
-			'$lgt_assert_pred_def'(Def, DDef, Prefix, Head, ExCtx, THead, Update),
+			'$lgt_assert_pred_def'(Def, DDef, Flags, Prefix, Head, ExCtx, THead, Update),
 			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
 				asserta((THead :- '$lgt_debug'(fact(Head, 0, 0), ExCtx)))
@@ -2938,7 +2941,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	(Type == (dynamic); Flags /\ 2 =:= 2, Sender = SCtn) ->
 		% either a dynamic predicate or a dynamic object that is both the sender and the predicate scope container
 		(	(Scope = TestScope; Sender = SCtn) ->
-			'$lgt_assert_pred_def'(Def, DDef, Prefix, Head, ExCtx, THead, _),
+			'$lgt_assert_pred_def'(Def, DDef, Flags, Prefix, Head, ExCtx, THead, _),
 			'$lgt_goal_meta_arguments'(Meta, Head, MetaArgs),
 			'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, Prefix, MetaArgs, _, ExCtx, runtime, _, _),
 			'$lgt_compile_body'(Body, TBody, DBody, Ctx),
@@ -2975,7 +2978,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	(Type == (dynamic); Flags /\ 2 =:= 2, Sender = SCtn) ->
 		% either a dynamic predicate or a dynamic object that is both the sender and the predicate scope container
 		(	(Scope = TestScope; Sender = SCtn) ->
-			'$lgt_assert_pred_def'(Def, DDef, Prefix, Head, ExCtx, THead, Update),
+			'$lgt_assert_pred_def'(Def, DDef, Flags, Prefix, Head, ExCtx, THead, Update),
 			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
 				assertz((THead :- '$lgt_debug'(fact(Head, 0, 0), ExCtx)))
@@ -3031,12 +3034,14 @@ current_logtalk_flag(Flag, Value) :-
 
 % gets or sets (if it doesn't exist) the compiled call for an asserted predicate
 
-'$lgt_assert_pred_def'(Def, DDef, Prefix, Head, ExCtx, THead, NeedsUpdate) :-
-	(	call(Def, Head, ExCtx, THead) ->
+'$lgt_assert_pred_def'(Def, DDef, Flags, Prefix, Head, ExCtx, THead, NeedsUpdate) :-
+	(	call(Def, Head, ExCtx, THead0) ->
 		% static definition lookup entries don't require update goals
+		'$lgt_unwrap_compiled_head'(THead0, THead),
 		NeedsUpdate = false
-	;	call(DDef, Head, ExCtx, THead) ->
+	;	call(DDef, Head, ExCtx, THead0) ->
 		% dynamic definition lookup entries always require update goals
+		'$lgt_unwrap_compiled_head'(THead0, THead),
 		NeedsUpdate = true
 	;	% no definition lookup entry exists; construct and assert a dynamic one
 		functor(Head, Functor, Arity),
@@ -3044,7 +3049,11 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		functor(THead, TFunctor, TArity),
 		'$lgt_unify_head_thead_arguments'(GHead, THead, ExCtx),
-		DDefClause =.. [DDef, GHead, ExCtx, THead],
+		(	Flags /\ 512 =:= 512 ->
+			% object compiled in debug mode
+			DDefClause =.. [DDef, GHead, ExCtx, '$lgt_debug'(goal(GHead,THead), ExCtx)]
+		;	DDefClause =.. [DDef, GHead, ExCtx, THead]
+		),
 		assertz(DDefClause),
 		'$lgt_clean_lookup_caches'(GHead),
 		NeedsUpdate = true,
@@ -3084,7 +3093,8 @@ current_logtalk_flag(Flag, Value) :-
 		(	(PredFlags /\ 2 =:= 2; ObjFlags /\ 2 =:= 2, Sender = SCtn) ->
 			% either a dynamic predicate or a dynamic object that is both the sender and the predicate scope container
 			(	(Scope = TestScope; Sender = SCtn) ->
-				(	(call(DDef, Head, _, THead); call(Def, Head, _, THead)) ->
+				(	(call(DDef, Head, _, THead0); call(Def, Head, _, THead0)) ->
+					'$lgt_unwrap_compiled_head'(THead0, THead),
 					clause(THead, TBody),
 					(	TBody = ('$lgt_nop'(Body), _) ->
 						true
@@ -3106,7 +3116,8 @@ current_logtalk_flag(Flag, Value) :-
 		)
 	;	% local dynamic predicate with no scope declaration
 		(	Obj = Sender,
-			(call(DDef, Head, _, THead); call(Def, Head, _, THead)) ->
+			(call(DDef, Head, _, THead0); call(Def, Head, _, THead0)) ->
+			'$lgt_unwrap_compiled_head'(THead0, THead),
 			clause(THead, TBody),
 			(	TBody = ('$lgt_nop'(Body), _) ->
 				true
@@ -3161,7 +3172,8 @@ current_logtalk_flag(Flag, Value) :-
 		(	(PredFlags /\ 2 =:= 2; ObjFlags /\ 2 =:= 2, Sender = SCtn) ->
 			% either a dynamic predicate or a dynamic object that is both the sender and the predicate scope container
 			(	(Scope = TestScope; Sender = SCtn) ->
-				(	call(DDef, Head, _, THead) ->
+				(	call(DDef, Head, _, THead0) ->
+					'$lgt_unwrap_compiled_head'(THead0, THead),
 					retract((THead :- TBody)),
 					(	TBody = ('$lgt_nop'(Body), _) ->
 						true
@@ -3170,7 +3182,8 @@ current_logtalk_flag(Flag, Value) :-
 					;	TBody = Body
 					),
 					'$lgt_update_ddef_table'(DDef, Head, THead)
-				;	call(Def, Head, _, THead) ->
+				;	call(Def, Head, _, THead0) ->
+					'$lgt_unwrap_compiled_head'(THead0, THead),
 					retract((THead :- TBody)),
 					(	TBody = ('$lgt_nop'(Body), _) ->
 						true
@@ -3192,7 +3205,8 @@ current_logtalk_flag(Flag, Value) :-
 		)
 	;	% local dynamic predicate with no scope declaration
 		(	Obj = Sender,
-			call(DDef, Head, _, THead) ->
+			call(DDef, Head, _, THead0) ->
+			'$lgt_unwrap_compiled_head'(THead0, THead),
 			retract((THead :- TBody)),
 			(	TBody = ('$lgt_nop'(Body), _) ->
 				true
@@ -3216,10 +3230,12 @@ current_logtalk_flag(Flag, Value) :-
 		(	(PredFlags /\ 2 =:= 2; ObjFlags /\ 2 =:= 2, Sender = SCtn) ->
 			% either a dynamic predicate or a dynamic object that is both the sender and the predicate scope container
 			(	(Scope = TestScope; Sender = SCtn) ->
-				(	call(DDef, Head, _, THead) ->
+				(	call(DDef, Head, _, THead0) ->
+					'$lgt_unwrap_compiled_head'(THead0, THead),
 					retract((THead :- ('$lgt_nop'(Body), _))),
 					'$lgt_update_ddef_table'(DDef, Head, THead)
-				;	call(Def, Head, _, THead) ->
+				;	call(Def, Head, _, THead0) ->
+					'$lgt_unwrap_compiled_head'(THead0, THead),
 					retract((THead :- ('$lgt_nop'(Body), _)))
 				)
 			;	% predicate is not within the scope of the sender
@@ -3235,7 +3251,8 @@ current_logtalk_flag(Flag, Value) :-
 		)
 	;	% local dynamic predicate with no scope declaration
 		(	Obj = Sender,
-			call(DDef, Head, _, THead) ->
+			call(DDef, Head, _, THead0) ->
+			'$lgt_unwrap_compiled_head'(THead0, THead),
 			retract((THead :- ('$lgt_nop'(Body), _)))
 		;	functor(Head, Functor, Arity),
 			throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(Obj::retract((Head:-Body)), Sender)))
@@ -3260,7 +3277,8 @@ current_logtalk_flag(Flag, Value) :-
 			% either a dynamic predicate or a dynamic object that is both the sender and the predicate scope container
 			Type = (dynamic),
 			(	(Scope = TestScope; Sender = SCtn) ->
-				(	call(DDef, Head, _, THead) ->
+				(	call(DDef, Head, _, THead0) ->
+					'$lgt_unwrap_compiled_head'(THead0, THead),
 					(	ObjFlags /\ 512 =:= 512 ->
 						% object compiled in debug mode
 						retract((THead :- '$lgt_debug'(fact(_, _, _), _)))
@@ -3268,7 +3286,8 @@ current_logtalk_flag(Flag, Value) :-
 						retract(THead)
 					),
 					'$lgt_update_ddef_table'(DDef, Head, THead)
-				;	call(Def, Head, _, THead) ->
+				;	call(Def, Head, _, THead0) ->
+					'$lgt_unwrap_compiled_head'(THead0, THead),
 					(	ObjFlags /\ 512 =:= 512 ->
 						% object compiled in debug mode
 						retract((THead :- '$lgt_debug'(fact(_, _, _), _)))
@@ -3288,7 +3307,8 @@ current_logtalk_flag(Flag, Value) :-
 			throw(error(permission_error(modify, static_predicate, Functor/Arity), logtalk(Obj::retract(Head), Sender)))
 		)
 	;	% local dynamic predicate with no scope declaration
-		(	call(DDef, Head, _, THead) ->
+		(	call(DDef, Head, _, THead0) ->
+			'$lgt_unwrap_compiled_head'(THead0, THead),
 			(	ObjFlags /\ 512 =:= 512 ->
 				% object compiled in debug mode
 				retract((THead :- '$lgt_debug'(fact(_, _, _), _)))
@@ -3341,10 +3361,12 @@ current_logtalk_flag(Flag, Value) :-
 			% either a dynamic predicate or a dynamic object that is both the sender and the predicate scope container
 			Type = (dynamic),
 			(	(Scope = TestScope; Sender = SCtn) ->
-				(	call(DDef, Head, _, THead) ->
+				(	call(DDef, Head, _, THead0) ->
+					'$lgt_unwrap_compiled_head'(THead0, THead),
 					retractall(THead),
 					'$lgt_update_ddef_table'(DDef, Head, THead)
-				;	call(Def, Head, _, THead) ->
+				;	call(Def, Head, _, THead0) ->
+					'$lgt_unwrap_compiled_head'(THead0, THead),
 					(	ObjFlags /\ 512 =:= 512 ->
 						% object compiled in debug mode
 						true
@@ -3366,7 +3388,8 @@ current_logtalk_flag(Flag, Value) :-
 		)
 	;	% local dynamic predicate with no scope declaration
 		(	Obj = Sender,
-			call(DDef, Head, _, THead) ->
+			call(DDef, Head, _, THead0) ->
+			'$lgt_unwrap_compiled_head'(THead0, THead),
 			(	ObjFlags /\ 512 =:= 512 ->
 				% object compiled in debug mode
 				true
@@ -3422,7 +3445,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	NeedsUpdate == true, Sender \= SCtn ->
 		'$lgt_term_template'(Head, UHead),
 		'$lgt_term_template'(THead, UTHead),
-		UClause =.. [DDef, UHead, _, UTHead],
+		UClause =.. [DDef, UHead, _, _],
 		(	(Scope = p(p(p)), Type == (dynamic)) ->
 			asserta('$lgt_db_lookup_cache_'(GObj, GHead, _, GTHead, update(UHead, UTHead, UClause)))
 		;	'$lgt_term_template'(Sender, GSender),
@@ -12890,14 +12913,38 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_construct_def_clause'(Def, Head, ExCtx, THead, Clause) :-
 	(	'$lgt_pp_synchronized_'(Head, Mutex) ->
 		(	'$lgt_prolog_feature'(threads, supported) ->
-			Clause =.. [Def, Head, ExCtx, with_mutex(Mutex,THead)]
+			'$lgt_wrap_compiled_head'(Head, THead, ExCtx, Call),
+			Clause =.. [Def, Head, ExCtx, with_mutex(Mutex,Call)]
 		;	% in single-threaded systems, with_mutex/2 is equivalent to once/1
-			Clause =.. [Def, Head, ExCtx, once(THead)]	
+			'$lgt_wrap_compiled_head'(Head, THead, ExCtx, Call),
+			Clause =.. [Def, Head, ExCtx, once(Call)]
 		)
 	;	'$lgt_pp_coinductive_'(Head, _, ExCtx, TCHead, _, _, _) ->
-		Clause =.. [Def, Head, ExCtx, TCHead]
-	;	Clause =.. [Def, Head, ExCtx, THead]
+		'$lgt_wrap_compiled_head'(Head, TCHead, ExCtx, Call),
+		Clause =.. [Def, Head, ExCtx, Call]
+	;	'$lgt_wrap_compiled_head'(Head, THead, ExCtx, Call),
+		Clause =.. [Def, Head, ExCtx, Call]
 	).
+
+
+
+% predicates for wrapping/unwrapping compiled predicate heads to deal with
+% compilation in debug mode
+%
+% the wrapping when in compilation mode ensures that indirect predicate calls
+% (e.g. when sending a message) can also be intercepted by debug handlers
+
+'$lgt_wrap_compiled_head'(Head, THead, ExCtx, Call) :-
+	(	'$lgt_compiler_flag'(debug, on) ->
+		Call = '$lgt_debug'(goal(Head,THead), ExCtx)
+	;	Call = THead
+	).
+
+
+'$lgt_unwrap_compiled_head'('$lgt_debug'(goal(_,THead), _), THead) :-
+	!.
+
+'$lgt_unwrap_compiled_head'(THead, THead).
 
 
 
@@ -13086,7 +13133,8 @@ current_logtalk_flag(Flag, Value) :-
 		% only local table; reject linking clauses
 		Clause \= (_ :- _),
 		arg(3, Clause, Call),
-		functor(Call, Functor, Arity),
+		'$lgt_unwrap_compiled_head'(Call, Pred),
+		functor(Pred, Functor, Arity),
 		assertz('$lgt_pp_directive_'(dynamic(Functor/Arity))),
 	fail.
 

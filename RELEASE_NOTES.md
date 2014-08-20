@@ -68,6 +68,9 @@ printing mechanism. This new token allows to overcome the limitation of the
 de facto `format/3` predicate that doesn't support specifying term writing
 options.
 
+* FIXED: When compiling in debug mode, also support a call port for predicates
+that are called indirectly.
+
 * FIXED: Generation of category "def" clauses for declared static multifile
 predicates without an initial set of clauses.
 
