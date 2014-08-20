@@ -8568,13 +8568,19 @@ current_logtalk_flag(Flag, Value) :-
 		% clause for a multifile predicate in "user"
 		DHead = '$lgt_debug'(rule(user::UserHead, N, BeginLine), ExCtx),
 		'$lgt_comp_ctx'(BodyCtx, Head, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, BodyExCtx, Mode, Stack, BeginLine-EndLine),
-		'$lgt_execution_context'(ExCtx, _, Sender, This, Self, MetaCallCtx, Stack),
+		'$lgt_execution_context'(ExCtx, user, Sender, This, Self, MetaCallCtx, Stack),
 		'$lgt_execution_context'(BodyExCtx, Entity, Sender, This, Self, MetaCallCtx, Stack)
-	;	Head = _::_ ->
-		% clause for a multifile predicate
+	;	Head = Other::_ ->
+		% clause for an object multifile predicate
 		DHead = '$lgt_debug'(rule(Head, N, BeginLine), ExCtx),
 		'$lgt_comp_ctx'(BodyCtx, Head, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, BodyExCtx, Mode, Stack, BeginLine-EndLine),
-		'$lgt_execution_context'(ExCtx, _, Sender, This, Self, MetaCallCtx, Stack),
+		'$lgt_execution_context'(ExCtx, Other, Sender, This, Self, MetaCallCtx, Stack),
+		'$lgt_execution_context'(BodyExCtx, Entity, Sender, This, Self, MetaCallCtx, Stack)
+	;	Head = ':'(Other, _) ->
+		% clause for a module multifile predicate
+		DHead = '$lgt_debug'(rule(Head, N, BeginLine), ExCtx),
+		'$lgt_comp_ctx'(BodyCtx, Head, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, BodyExCtx, Mode, Stack, BeginLine-EndLine),
+		'$lgt_execution_context'(ExCtx, Other, Sender, This, Self, MetaCallCtx, Stack),
 		'$lgt_execution_context'(BodyExCtx, Entity, Sender, This, Self, MetaCallCtx, Stack)
 	;	% clause for a local predicate
 		DHead = '$lgt_debug'(rule(Head, N, BeginLine), ExCtx),
