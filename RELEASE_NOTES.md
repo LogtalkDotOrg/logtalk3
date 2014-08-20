@@ -109,6 +109,10 @@ condensed help (`h`) commands.
 * IMPROVED: The `debugger` tool now allows using the skip command (`s`) at the
 rule unification port.
 
+* IMPROVED: The `debugger` tool now prefixes the exit port with an asterisk
+when a call succeeds leaving choice-points when using a backend Prolog compiler
+other than Lean Prolog and Quintus Prolog.
+
 * FIXED: Issue in the `debugger` tool where the status code at the beginning
 of a trace line would not be updated after setting a spy point.
 

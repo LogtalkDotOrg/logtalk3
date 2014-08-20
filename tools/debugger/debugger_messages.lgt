@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/08/14,
+		date is 2014/08/20,
 		comment is 'Logtalk debugger default message translations.'
 	]).
 
@@ -318,19 +318,27 @@
 	leashed_ports([]) --> [].
 
 	port_name(fact(_,_,_)) -->
-		[' Fact: '-[]].
+		['  Fact: '-[]].
 	port_name(rule(_,_,_)) -->
-		[' Rule: '-[]].
+		['  Rule: '-[]].
 	port_name(call) -->
-		[' Call: '-[]].
+		['  Call: '-[]].
 	port_name(exit) -->
-		[' Exit: '-[]].
+		['  Exit: '-[]].
+	% Lean Prolog and Quntus Prolog don't provide a way to find if a call is deterministic
+	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == lean; Dialect == quintus))).
+		port_name(nd_exit) -->
+			[' Exit: '-[]].
+	:- else.
+		port_name(nd_exit) -->
+			[' *Exit: '-[]].
+	:- endif.
 	port_name(redo) -->
-		[' Redo: '-[]].
+		['  Redo: '-[]].
 	port_name(fail) -->
-		[' Fail: '-[]].
+		['  Fail: '-[]].
 	port_name(exception) -->
-		[' Exception: '-[]].
+		['  Exception: '-[]].
 
 	% invocation number
 

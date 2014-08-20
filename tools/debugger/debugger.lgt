@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/08/19,
+		date is 2014/08/20,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -289,6 +289,15 @@
 	leashing_(fail).
 	leashing_(exception).
 
+	port_user_name(fact(_,_,_), fact).
+	port_user_name(rule(_,_,_), rule).
+	port_user_name(call, call).
+	port_user_name(exit, exit).
+	port_user_name(nd_exit, exit).
+	port_user_name(redo, redo).
+	port_user_name(fail, fail).
+	port_user_name(exception, exception).
+
 	valid_leash_value(Shorthand, Ports) :-
 		atom(Shorthand),
 		Shorthand \== [],
@@ -319,9 +328,8 @@
 	leash_shortand_ports(tight, [fact, rule, call, redo, fail, exception]).
 	leash_shortand_ports(full, [fact, rule, call, exit, redo, fail, exception]).
 
-	leashing(Port, N, Goal, ExCtx, Code) :-
-		functor(Port, PortName, _),
-		leashing_(PortName),
+	leashing(Port, PortUserName, N, Goal, ExCtx, Code) :-
+		leashing_(PortUserName),
 		(	spying(Port, Goal, ExCtx, Code) ->
 			retractall(tracing_),
 			assertz(tracing_)
@@ -330,7 +338,7 @@
 		;	retract(jump_to_invocation_number_(N)) ->
 			assertz(tracing_),
 			Code = ' '
-		;	retract(zap_to_port_(Port)) ->
+		;	retract(zap_to_port_(PortUserName)) ->
 			retractall(zap_to_port_(_)),
 			assertz(tracing_),
 			Code = ' '
@@ -422,7 +430,7 @@
 						!,
 						port(exit, N, Goal, TGoal, _, ExCtx, EAction),
 						{EAction}
-					;	(	port(exit, N, Goal, TGoal, _, ExCtx, EAction),
+					;	(	port(nd_exit, N, Goal, TGoal, _, ExCtx, EAction),
 							{EAction}
 						;	port(redo, N, Goal, TGoal, _, ExCtx, RAction),
 							RAction == ignore
@@ -494,18 +502,19 @@
 	port(Port, N, Goal, TGoal, Error, ExCtx, Action) :-
 		debugging_,
 		!,
-		(	leashing(Port, N, Goal, ExCtx, _) ->
+		port_user_name(Port, PortUserName),
+		(	leashing(Port, PortUserName, N, Goal, ExCtx, _) ->
 			repeat,
 				% the do_port_option/7 call can fail but still chnage the value of Code
 				% (e.g. when adding or removing a spy point)
-				leashing(Port, N, Goal, ExCtx, Code),
+				leashing(Port, PortUserName, N, Goal, ExCtx, Code),
 				(	write_max_depth_(MaxDepth),
 					MaxDepth > 0 ->
 					print_message(information, debugger, leashing_port(Code, Port, N, Goal, MaxDepth))
 				;	print_message(information, debugger, leashing_port(Code, Port, N, Goal))
 				),
 				catch(read_single_char(Option), _, fail),
-				valid_port_option(Option, Port, Code),
+				valid_port_option(Option, PortUserName, Code),
 			do_port_option(Option, Port, N, Goal, TGoal, Error, ExCtx, Action),
 			!
 		;	(	tracing_ ->
@@ -533,8 +542,8 @@
 	valid_port_option(i, call, _) :- !.
 	valid_port_option(i, redo, _) :- !.
 	valid_port_option(f, call, _) :- !.
-	valid_port_option(f, fact(_,_,_), _) :- !.
-	valid_port_option(f, rule(_,_,_), _) :- !.
+	valid_port_option(f, fact, _) :- !.
+	valid_port_option(f, rule, _) :- !.
 	valid_port_option(f, redo, _) :- !.
 	valid_port_option(u, call, _) :- !.
 	valid_port_option(n, _, _) :- !.
@@ -551,8 +560,8 @@
 	valid_port_option('$', exit, _) :- !.
 	valid_port_option('$', fail, _) :- !.
 	valid_port_option(x, _, _) :- !.
-	valid_port_option('.', fact(_,_,_), _) :- !.
-	valid_port_option('.', rule(_,_,_), _) :- !.
+	valid_port_option('.', fact, _) :- !.
+	valid_port_option('.', rule, _) :- !.
 	valid_port_option(h, _, _) :- !.
 	valid_port_option((?), _, _) :- !.
 	valid_port_option((=), _, _) :- !.
