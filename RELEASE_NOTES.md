@@ -91,6 +91,10 @@ directive in a Prolog module file when looking for the `module/2` directive.
 Tools
 -----
 
+* NEW: Port profiling tool, `ports`, based on the same predicate execution
+box model used by the debugger. It counts the number of times each port is
+traversed during the execution of queries.
+
 * ADDED: The `debugger` tool now supports a zap command, `z`, to read a port
 name (or a negated port name) and continue execution until a port with the
 same name (or a name other than the negated port) is reached. Based on a

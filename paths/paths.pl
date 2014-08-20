@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Default library paths 
-%  Last updated on June 26, 2014
+%  Last updated on August 20, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -79,11 +79,12 @@ logtalk_library_path(xml_parser, contributions('xml_parser/')).
 
 logtalk_library_path(assertions, tools('assertions/')).
 logtalk_library_path(debugger, tools('debugger/')).
-logtalk_library_path(profiler, tools('profiler/')).
 logtalk_library_path(diagrams, tools('diagrams/')).
 logtalk_library_path(help, tools('help/')).
 logtalk_library_path(lgtdoc, tools('lgtdoc/')).
 logtalk_library_path(lgtunit, tools('lgtunit/')).
+logtalk_library_path(ports, tools('ports/')).
+logtalk_library_path(profiler, tools('profiler/')).
 
 logtalk_library_path(ack, examples('ack/')).
 logtalk_library_path(adventure, examples('adventure/')).

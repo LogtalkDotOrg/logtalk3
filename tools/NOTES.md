@@ -42,6 +42,7 @@ Currently, the following tools are available, each one with its own
 - help
 - lgtdoc
 - lgtunit
+- ports
 - profiler
 
 All source files are formatted using tabs (the recommended setting is a tab
@@ -69,6 +70,7 @@ and follow these steps:
 		lgtdoc::library(help, [xmldir('$LOGTALKUSER/docs/tmp_help')]),
 		lgtdoc::library(lgtdoc, [xmldir('$LOGTALKUSER/docs/tmp_lgtdoc')]),
 		lgtdoc::library(lgtunit, [xmldir('$LOGTALKUSER/docs/tmp_lgtunit')]),
+		lgtdoc::library(ports, [xmldir('$LOGTALKUSER/docs/tmp_ports')]),
 		lgtdoc::library(profiler, [xmldir('$LOGTALKUSER/docs/tmp_profiler')]).
 
 (4) Run the command `lgt2html` on the temporary directories to generate the
@@ -80,6 +82,7 @@ and follow these steps:
 	$ cd ../tmp_help && lgt2html -i help_tool.html -t "Help tool" && mv *.html ..
 	$ cd ../tmp_lgtdoc && lgt2html -i lgtdoc_tool.html -t "Logtalk documenting tool" && mv *.html ..
 	$ cd ../tmp_lgtunit && lgt2html -i lgtunit_tool.html -t "Logtalk unit testing tool" && mv *.html ..
+	$ cd ../tmp_ports && lgt2html -i ports_tool.html -t "Port profiler tool" && mv *.html ..
 	$ cd ../tmp_profiler && lgt2html -i profiler_tool.html -t "Profiler tool" && mv *.html ..
 
 After generating the (X)HTML and/or PDF documentation, you can delete the

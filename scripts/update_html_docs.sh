@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Logtalk script for updating the HTML library and tools documentation
-##   Last updated on July 10, 2014
+##   Last updated on August 20, 2014
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -56,6 +56,7 @@ diagrams_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),log
 help_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(help(loader)),lgtdoc::library(help,[xmldir('$LOGTALKUSER/docs/tmp_help')]),halt."
 lgtdoc_goal="set_logtalk_flag(source_data,on),logtalk_load(lgtdoc(loader)),lgtdoc::library(lgtdoc,[xmldir('$LOGTALKUSER/docs/tmp_lgtdoc')]),halt."
 lgtunit_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(lgtunit(loader)),lgtdoc::library(lgtunit,[xmldir('$LOGTALKUSER/docs/tmp_lgtunit')]),halt."
+ports_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(ports(loader)),lgtdoc::library(ports,[xmldir('$LOGTALKUSER/docs/tmp_ports')]),halt."
 profiler_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(profiler(loader)),lgtdoc::library(profiler,[xmldir('$LOGTALKUSER/docs/tmp_profiler')]),halt."
 
 
@@ -148,6 +149,7 @@ $logtalk $diagrams_goal
 $logtalk $help_goal
 $logtalk $lgtdoc_goal
 $logtalk $lgtunit_goal
+$logtalk $ports_goal
 $logtalk $profiler_goal
 
 cd $LOGTALKUSER/docs/tmp_core && lgt2html -i core.html -t "Core entities documentation index" && mv *.html ..
@@ -158,6 +160,7 @@ cd ../tmp_diagrams && lgt2html -i diagrams_tool.html -t "Diagrams tool" && mv *.
 cd ../tmp_help && lgt2html -i help_tool.html -t "Help tool" && mv *.html ..
 cd ../tmp_lgtdoc && lgt2html -i lgtdoc_tool.html -t "Logtalk documenting tool" && mv *.html ..
 cd ../tmp_lgtunit && lgt2html -i lgtunit_tool.html -t "Logtalk unit testing tool" && mv *.html ..
+cd ../tmp_ports && lgt2html -i ports_tool.html -t "Port profiler tool" && mv *.html ..
 cd ../tmp_profiler && lgt2html -i profiler_tool.html -t "Profiler tool" && mv *.html ..
 
 rm -rf ../tmp_*
