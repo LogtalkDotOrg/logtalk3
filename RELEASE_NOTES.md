@@ -51,6 +51,9 @@ multifile predicate clauses are defined in a category. The execution context
 arguments continue to be shared (with the exception of the entity defining
 the clause) between the head and the body of multifile predicate clauses.
 
+* CHANGED: Don't use static binding when calling predicates defined in objects
+and categories compiled in debug mode.
+
 * IMPROVED: Allow access to entity parameters in multifile predicate clauses
 by simple unification at the clause heads.
 

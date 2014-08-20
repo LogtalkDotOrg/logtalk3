@@ -17849,6 +17849,8 @@ current_logtalk_flag(Flag, Value) :-
 	(	'$lgt_send_to_obj_static_binding_'(Obj, Pred, This, Call) ->
 		true
 	;	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, _, _, _, ObjFlags),
+		ObjFlags /\ 512 =\= 512,
+		% object is not compiled in debug mode
 		ObjFlags /\ 2 =:= 0,
 		% object is static
 		ObjFlags /\ 64 =\= 64,
@@ -17963,7 +17965,9 @@ current_logtalk_flag(Flag, Value) :-
 	% when working with parametric entities, we must connect the parameters
 	% between related entities
 	'$lgt_pp_runtime_clause_'('$lgt_imports_category_'(Obj, Ctg, _)),
-	'$lgt_current_category_'(Ctg, _, Dcl, Def, _, _),
+	'$lgt_current_category_'(Ctg, _, Dcl, Def, _, CtgFlags),
+	% check that the category is not compiled in debug mode
+	CtgFlags /\ 512 =\= 512,
 	% we may be aliasing the predicate
 	(	'$lgt_pp_predicate_alias_'(Ctg, Pred, Alias) ->
 		true
@@ -17985,7 +17989,9 @@ current_logtalk_flag(Flag, Value) :-
 	% when working with parametric entities, we must connect the parameters
 	% between related entities
 	'$lgt_pp_runtime_clause_'('$lgt_extends_object_'(Obj, Parent, RelationScope)),
-	'$lgt_current_object_'(Parent, _, Dcl, Def, _, _, _, _, _, _, _),
+	'$lgt_current_object_'(Parent, _, Dcl, Def, _, _, _, _, _, _, ParentFlags),
+	% check that the parent is not compiled in debug mode
+	ParentFlags /\ 512 =\= 512,
 	% we may be aliasing the predicate
 	(	'$lgt_pp_predicate_alias_'(Parent, Pred, Alias) ->
 		true
@@ -18020,7 +18026,9 @@ current_logtalk_flag(Flag, Value) :-
 	% when working with parametric entities, we must connect the parameters
 	% between related entities
 	'$lgt_pp_runtime_clause_'('$lgt_instantiates_class_'(Obj, Class, RelationScope)),
-	'$lgt_current_object_'(Class, _, _, _, _, IDcl, IDef, _, _, _, _),
+	'$lgt_current_object_'(Class, _, _, _, _, IDcl, IDef, _, _, _, ClassFlags),
+	% check that the class is not compiled in debug mode
+	ClassFlags /\ 512 =\= 512,
 	% we may be aliasing the predicate
 	(	'$lgt_pp_predicate_alias_'(Class, Pred, Alias) ->
 		true
@@ -18055,7 +18063,9 @@ current_logtalk_flag(Flag, Value) :-
 	% when working with parametric entities, we must connect the parameters
 	% between related entities
 	'$lgt_pp_runtime_clause_'('$lgt_specializes_class_'(Obj, Superclass, RelationScope)),
-	'$lgt_current_object_'(Superclass, _, _, _, _, IDcl, IDef, _, _, _, _),
+	'$lgt_current_object_'(Superclass, _, _, _, _, IDcl, IDef, _, _, _, SuperclassFlags),
+	% check that the superclass is not compiled in debug mode
+	SuperclassFlags /\ 512 =\= 512,
 	% we may be aliasing the predicate
 	(	'$lgt_pp_predicate_alias_'(Superclass, Pred, Alias) ->
 		true
@@ -18109,7 +18119,9 @@ current_logtalk_flag(Flag, Value) :-
 	% when working with parametric entities, we must connect the parameters
 	% between related entities
 	'$lgt_pp_runtime_clause_'('$lgt_extends_category_'(Ctg, ExtCtg, RelationScope)),
-	'$lgt_current_category_'(ExtCtg, _, Dcl, Def, _, _),
+	'$lgt_current_category_'(ExtCtg, _, Dcl, Def, _, ExtCtgFlags),
+	% check that the category is not compiled in debug mode
+	ExtCtgFlags /\ 512 =\= 512,
 	% we may be aliasing the predicate
 	(	'$lgt_pp_predicate_alias_'(ExtCtg, Pred, Alias) ->
 		true
@@ -18141,6 +18153,8 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_send_to_obj_db_msg_static_binding'(Obj, Head, THead) :-
 	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, _, _, _, ObjFlags),
+	% check that the object is not compiled in debug mode
+	ObjFlags /\ 512 =\= 512,
 	% check that the object is static
 	ObjFlags /\ 2 =:= 0,
 	call(Dcl, Head, Scope, _, PredFlags, SCtn, DCtn), !,
