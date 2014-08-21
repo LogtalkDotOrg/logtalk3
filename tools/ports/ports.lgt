@@ -273,7 +273,7 @@
 
 	table_ruler('----------------------------------------------------------------------------------------------------------------------').
 
-	table_label('Entity                        Predicate                           Fact    Rule    Call    Exit   *Exit    Fail    Redo').
+	table_label('Entity                         Predicate                          Fact    Rule    Call    Exit   *Exit    Fail    Redo').
 
 	reset :-
 		retractall(port_(_, _, _, _, _)).
