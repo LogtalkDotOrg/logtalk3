@@ -93,10 +93,7 @@ Tools
 
 * NEW: Port profiling tool, `ports`, based on the same predicate execution
 box model used by the debugger. It counts the number of times each port is
-traversed during the execution of queries. Supports only B-Prolog, Quintus
-Prolog, SICStus Prolog, SWI-Prolog, and YAP as backend compilers (as it
-requires an implementation of the `format/2` predicate capable of aligned
-output).
+traversed during the execution of queries.
 
 * ADDED: The `debugger` tool now supports a zap command, `z`, to read a port
 name (or a negated port name) and continue execution until a port with the

@@ -28,9 +28,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Paulo Moura',
-		date is 2014/08/20,
+		date is 2014/08/21,
 		comment is 'Box model port profiler.'
 	]).
 
@@ -167,16 +167,16 @@
 		).
 
 	write_data(Predicates) :-
-		format_rule_string(RuleString),
-		format_lable_string(LabelString),
-		{format(RuleString, [0'-])},
-		{format(LabelString, ['Entity', 'Predicate', 'Fact', 'Rule', 'Call', 'Exit', '*Exit', 'Fail', 'Redo'])},
-		{format(RuleString, [0'-])},
+		table_rule(Rule),
+		write(Rule), nl,
+		table_label(Label),
+		write(Label), nl,
+		write(Rule), nl,
 		(	Predicates == [] ->
-			{format('~w~n', ['(no profiling data available)'])}
+			write('(no profiling data available)'), nl
 		;	write_data_rows(Predicates)
 		),
-		{format(RuleString, [0'-])}.
+		write(Rule), nl.
 
 	write_data_rows([]).
 	write_data_rows([Entity-Functor/Arity| Predicates]) :-
@@ -187,20 +187,85 @@
 		port(nd_exit, Entity, Functor, Arity, NDExit),
 		port(fail, Entity, Functor, Arity, Fail),
 		port(redo, Entity, Functor, Arity, Redo),
-		(	atom(Entity) ->
-			Template = Entity
-		;	functor(Entity, Name, Parameters),
-			Template = Name/Parameters
-		),
-		format_data_string(DataString),
-		{format(DataString, [Template, Functor/Arity, Fact, Rule, Call, Exit, NDExit, Fail, Redo])},
+		functor(Entity, Name, Parameters),
+		Template = Name/Parameters,
+		entity_to_padded_atom(Template, TemplateAtom),
+		predicate_indicator_to_padded_atom(Functor/Arity, PredicateAtom),
+		write_list([TemplateAtom, PredicateAtom, Fact, Rule, Call, Exit, NDExit, Fail, Redo]), nl,
 		write_data_rows(Predicates).
 
-	port(Port, Entity, Functor, Arity, Count) :-
+	write_list([]).
+	write_list([Term| Terms]) :-
+		write(Term),
+		write_list(Terms).
+
+	port(Port, Entity, Functor, Arity, CountAtom) :-
 		(	port_(Port, Entity, Functor, Arity, Count) ->
 			true
 		;	Count = 0
-		).
+		),
+		integer_to_padded_atom(Count, CountAtom).
+
+	entity_to_padded_atom(Functor/Arity, Atom) :-
+		(	Arity =:= 0 ->
+			Atom1 = Functor
+		;	atom_concat(Functor, '/', Atom0),
+			number_codes(Arity, Codes),
+			atom_codes(ArityAtom, Codes),
+			atom_concat(Atom0, ArityAtom, Atom1)
+		),
+		atom_length(Atom1, Length1),
+		PadLength is 24 - Length1,
+		pad_atom(PadLength, Pad),
+		atom_concat(Atom1, Pad, Atom).
+
+	predicate_indicator_to_padded_atom(Functor/Arity, Atom) :-
+		atom_concat(Functor, '/', Atom0),
+		number_codes(Arity, Codes),
+		atom_codes(ArityAtom, Codes),
+		atom_concat(Atom0, ArityAtom, Atom1),
+		atom_length(Atom1, Length1),
+		PadLength is 24 - Length1,
+		pad_atom(PadLength, Pad),
+		atom_concat(Atom1, Pad, Atom).
+
+	integer_to_padded_atom(Integer, Atom) :-
+		number_codes(Integer, Codes),
+		atom_codes(Atom0, Codes),
+		atom_length(Atom0, Length0),
+		PadLength is 10 - Length0,
+		pad_atom(PadLength, Pad),
+		atom_concat(Pad, Atom0, Atom).
+
+	pad_atom( 0, '').
+	pad_atom( 1, ' ').
+	pad_atom( 2, '  ').
+	pad_atom( 3, '   ').
+	pad_atom( 4, '    ').
+	pad_atom( 5, '     ').
+	pad_atom( 6, '      ').
+	pad_atom( 7, '       ').
+	pad_atom( 8, '        ').
+	pad_atom( 9, '         ').
+	pad_atom( 9, '         ').
+	pad_atom(10, '          ').
+	pad_atom(11, '           ').
+	pad_atom(12, '            ').
+	pad_atom(13, '             ').
+	pad_atom(14, '              ').
+	pad_atom(15, '               ').
+	pad_atom(16, '                ').
+	pad_atom(17, '                 ').
+	pad_atom(18, '                  ').
+	pad_atom(19, '                   ').
+	pad_atom(20, '                    ').
+	pad_atom(21, '                     ').
+	pad_atom(22, '                      ').
+	pad_atom(23, '                       ').
+
+	table_rule('----------------------------------------------------------------------------------------------------------------------').
+
+	table_label('Entity                  Predicate                     Fact      Rule      Call      Exit     *Exit      Fail      Redo').
 
 	reset :-
 		retractall(port_(_, _, _, _, _)).
@@ -217,28 +282,6 @@
 
 	reset(Entity) :-
 		retractall(port_(_, Entity, _, _, _)).
-
-	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == b; Dialect == quintus; Dialect == sicstus; Dialect == swi; Dialect == yap))).
-		format_rule_string('~106c~n').
-		format_lable_string('~w~18+~t~w~18+~t~w~10+~t~w~10+~t~w~10+~t~w~10+~t~w~10+~t~w~10+~t~w~10+~n').
-		format_data_string('~w~18+~t~w~18+~t~d~10+~t~d~10+~t~d~10+~t~d~10+~t~d~10+~t~d~10+~t~d~10+~n').
-	:- elif(current_logtalk_flag(prolog_dialect, xsb)).
-		format_rule_string('~106c~n').
-		format_lable_string('~w~18|~t~w~6|~t~w~6|~t~w~6|~t~w~6|~t~w~6|~t~w~6|~t~w~5|~t~w~6|~n').
-		format_data_string('~w~18|~t~w~6|~t~d~6|~t~d~6|~t~d~6|~t~d~6|~t~d~6|~t~d~5|~t~d~6|~n').
-	:- elif(current_logtalk_flag(prolog_dialect, gnu)).
-		format_rule_string('~106c~n').
-		format_lable_string('~w~18+~t~w~18+~t~w~10+~t~w~10+~t~w~10+~t~w~10+~t~w~10+~t~w~10+~t~w~10+~n').
-		format_data_string('~w~18+~t~w~18+~t~d~10+~t~d~10+~t~d~10+~t~d~10+~t~d~10+~t~d~10+~t~d~10+~n').
-	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
-		format_rule_string('~106c~n').
-		format_lable_string('~w~18+~t~w~18+~t~w~10+~t~w~10+~t~w~10+~t~w~10+~t~w~10+~t~w~10+~t~w~10+~n').
-		format_data_string('~w~18+~t~w~18+~t~d~10+~t~d~10+~t~d~10+~t~d~10+~t~d~10+~t~d~10+~t~d~10+~n').
-	:- else.
-		format_rule_string('~106c~n').
-		format_lable_string('~w~18+~t~w~18+~t~w~10+~t~w~10+~t~w~10+~t~w~10+~t~w~10+~t~w~10+~t~w~10+~n').
-		format_data_string('~w~18+~t~w~18+~t~d~10+~t~d~10+~t~d~10+~t~d~10+~t~d~10+~t~d~10+~t~d~10+~n').
-	:- endif.
 
 	:- if((	current_logtalk_flag(prolog_dialect, Dialect),
 			(Dialect == b; Dialect == qp; Dialect == swi; Dialect == yap)
@@ -290,9 +333,3 @@
 		member(Head, Tail).
 
 :- end_object.
-
-
-:- if(current_logtalk_flag(prolog_dialect, xsb)).
-	% workaround XSB atom-based module system
-	:- import(from(/(format,2), format)).
-:- endif.

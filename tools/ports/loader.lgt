@@ -22,19 +22,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if((	current_logtalk_flag(prolog_dialect, Dialect),
-		(Dialect == b; Dialect == quintus; Dialect == sicstus; Dialect == swi; Dialect == yap)
+:- initialization((
+	logtalk_load(ports, [optimize(on)])
 )).
-
-	:- initialization((
-		logtalk_load(ports, [optimize(on)])
-	)).
-
-:- else.
-
-	:- initialization((
-		write('WARNING: tool not supported on this back-end Prolog compiler due to'),
-		write('         its limited implmentation of the format/2-3 predicates'), nl
-	)).
-
-:- endif.
