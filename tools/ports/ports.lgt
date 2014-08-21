@@ -215,7 +215,7 @@
 			atom_concat(Atom0, ArityAtom, Atom1)
 		),
 		atom_length(Atom1, Length1),
-		PadLength is 24 - Length1,
+		PadLength is max(2, 31 - Length1),
 		pad_atom(PadLength, Pad),
 		atom_concat(Atom1, Pad, Atom).
 
@@ -225,7 +225,7 @@
 		atom_codes(ArityAtom, Codes),
 		atom_concat(Atom0, ArityAtom, Atom1),
 		atom_length(Atom1, Length1),
-		PadLength is 24 - Length1,
+		PadLength is max(2, 31 - Length1),
 		pad_atom(PadLength, Pad),
 		atom_concat(Atom1, Pad, Atom).
 
@@ -233,7 +233,7 @@
 		number_codes(Integer, Codes),
 		atom_codes(Atom0, Codes),
 		atom_length(Atom0, Length0),
-		PadLength is 10 - Length0,
+		PadLength is max(2, 8 - Length0),
 		pad_atom(PadLength, Pad),
 		atom_concat(Pad, Atom0, Atom).
 
@@ -273,7 +273,7 @@
 
 	table_ruler('----------------------------------------------------------------------------------------------------------------------').
 
-	table_label('Entity                  Predicate                     Fact      Rule      Call      Exit     *Exit      Fail      Redo').
+	table_label('Entity                        Predicate                           Fact    Rule    Call    Exit   *Exit    Fail    Redo').
 
 	reset :-
 		retractall(port_(_, _, _, _, _)).
