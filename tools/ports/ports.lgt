@@ -169,14 +169,14 @@
 	write_data(Predicates) :-
 		format_rule_string(RuleString),
 		format_lable_string(LabelString),
-		{format(RuleString, [96,0'-])},
+		{format(RuleString, [0'-])},
 		{format(LabelString, ['Entity', 'Predicate', 'Fact', 'Rule', 'Call', 'Exit', '*Exit', 'Fail', 'Redo'])},
-		{format(RuleString, [96,0'-])},
+		{format(RuleString, [0'-])},
 		(	Predicates == [] ->
 			{format('~w~n', ['(no profiling data available)'])}
 		;	write_data_rows(Predicates)
 		),
-		{format(RuleString, [96,0'-])}.
+		{format(RuleString, [0'-])}.
 
 	write_data_rows([]).
 	write_data_rows([Entity-Functor/Arity| Predicates]) :-
@@ -218,14 +218,26 @@
 	reset(Entity) :-
 		retractall(port_(_, Entity, _, _, _)).
 
-	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == sicstus; Dialect == swi; Dialect == yap))).
-		format_rule_string('~*c~n').
-		format_lable_string('~w~18+~t~w~18+~t~w~10+~t~w~10+~t~w~10+~t~w~10+~t~w~10+~t~w~10+~n').
-		format_data_string('~w~18+~t~w~18+~t~d~10+~t~d~10+~t~d~10+~t~d~10+~t~d~10+~t~d~10+~n').
+	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == b; Dialect == quintus; Dialect == sicstus; Dialect == swi; Dialect == yap))).
+		format_rule_string('~106c~n').
+		format_lable_string('~w~18+~t~w~18+~t~w~10+~t~w~10+~t~w~10+~t~w~10+~t~w~10+~t~w~10+~t~w~10+~n').
+		format_data_string('~w~18+~t~w~18+~t~d~10+~t~d~10+~t~d~10+~t~d~10+~t~d~10+~t~d~10+~t~d~10+~n').
+	:- elif(current_logtalk_flag(prolog_dialect, xsb)).
+		format_rule_string('~106c~n').
+		format_lable_string('~w~18|~t~w~6|~t~w~6|~t~w~6|~t~w~6|~t~w~6|~t~w~6|~t~w~5|~t~w~6|~n').
+		format_data_string('~w~18|~t~w~6|~t~d~6|~t~d~6|~t~d~6|~t~d~6|~t~d~6|~t~d~5|~t~d~6|~n').
+	:- elif(current_logtalk_flag(prolog_dialect, gnu)).
+		format_rule_string('~106c~n').
+		format_lable_string('~w~18+~t~w~18+~t~w~10+~t~w~10+~t~w~10+~t~w~10+~t~w~10+~t~w~10+~t~w~10+~n').
+		format_data_string('~w~18+~t~w~18+~t~d~10+~t~d~10+~t~d~10+~t~d~10+~t~d~10+~t~d~10+~t~d~10+~n').
+	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
+		format_rule_string('~106c~n').
+		format_lable_string('~w~18+~t~w~18+~t~w~10+~t~w~10+~t~w~10+~t~w~10+~t~w~10+~t~w~10+~t~w~10+~n').
+		format_data_string('~w~18+~t~w~18+~t~d~10+~t~d~10+~t~d~10+~t~d~10+~t~d~10+~t~d~10+~t~d~10+~n').
 	:- else.
-		format_rule_string('~*c~n').
-		format_lable_string('~w~18+~t~w~18+~t~w~10+~t~w~10+~t~w~10+~t~w~10+~t~w~10+~t~w~10+~n').
-		format_data_string('~w~18+~t~w~18+~t~d~10+~t~d~10+~t~d~10+~t~d~10+~t~d~10+~t~d~10+~n').
+		format_rule_string('~106c~n').
+		format_lable_string('~w~18+~t~w~18+~t~w~10+~t~w~10+~t~w~10+~t~w~10+~t~w~10+~t~w~10+~t~w~10+~n').
+		format_data_string('~w~18+~t~w~18+~t~d~10+~t~d~10+~t~d~10+~t~d~10+~t~d~10+~t~d~10+~t~d~10+~n').
 	:- endif.
 
 	:- if((	current_logtalk_flag(prolog_dialect, Dialect),
