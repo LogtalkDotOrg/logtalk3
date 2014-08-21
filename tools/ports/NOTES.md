@@ -39,11 +39,6 @@ traversed during the execution of queries. It also distinguishes between
 deterministic exits and exits that leave choice-points (represented using
 `*exit` in the profiling result tables).
 
-Currently, only B-Prolog, Quintus Prolog, SICStus Prolog, SWI-Prolog, and
-YAP are supported. Other backend compilers provide a limited implementation
-of the `format/2-3` predicates that cannot be used to output nicely formatted
-tables of the profiling data.
-
 All source files are formatted using tabs (the recommended setting is a tab
 width equivalent to 4 spaces).
 

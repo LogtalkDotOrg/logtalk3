@@ -167,16 +167,16 @@
 		).
 
 	write_data(Predicates) :-
-		table_rule(Rule),
-		write(Rule), nl,
+		table_ruler(Ruler),
+		write(Ruler), nl,
 		table_label(Label),
 		write(Label), nl,
-		write(Rule), nl,
+		write(Ruler), nl,
 		(	Predicates == [] ->
 			write('(no profiling data available)'), nl
 		;	write_data_rows(Predicates)
 		),
-		write(Rule), nl.
+		write(Ruler), nl.
 
 	write_data_rows([]).
 	write_data_rows([Entity-Functor/Arity| Predicates]) :-
@@ -247,7 +247,6 @@
 	pad_atom( 7, '       ').
 	pad_atom( 8, '        ').
 	pad_atom( 9, '         ').
-	pad_atom( 9, '         ').
 	pad_atom(10, '          ').
 	pad_atom(11, '           ').
 	pad_atom(12, '            ').
@@ -262,8 +261,17 @@
 	pad_atom(21, '                     ').
 	pad_atom(22, '                      ').
 	pad_atom(23, '                       ').
+	pad_atom(24, '                        ').
+	pad_atom(25, '                         ').
+	pad_atom(26, '                          ').
+	pad_atom(27, '                           ').
+	pad_atom(28, '                            ').
+	pad_atom(29, '                             ').
+	pad_atom(30, '                              ').
+	pad_atom(31, '                               ').
+	pad_atom(32, '                                ').
 
-	table_rule('----------------------------------------------------------------------------------------------------------------------').
+	table_ruler('----------------------------------------------------------------------------------------------------------------------').
 
 	table_label('Entity                  Predicate                     Fact      Rule      Call      Exit     *Exit      Fail      Redo').
 
