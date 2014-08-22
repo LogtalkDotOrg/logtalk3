@@ -11,7 +11,7 @@
       <p class="type">object</p>
       <h1 class="code">ports</h1>
       <blockquote>
-        <p class="comment">Box model port profiler.</p>
+        <p class="comment">Predicate execution box model port profiler.</p>
       </blockquote>
     </div>
     <div class="entity">
@@ -23,7 +23,7 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>0.4</code>
+            <code>0.5</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
@@ -137,10 +137,21 @@
         <h2>Private predicates</h2>
         <div class="section">
           <h3 id="port_/5" class="code">port_/5</h3>
+          <blockquote>
+            <p class="comment">Internal table of collected port profiling data.</p>
+          </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
             <dd class="value">
               <code>dynamic</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>port_(Port,Entity,Functor,Arity,Count)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dd class="value">
+              <code>port_(?atom,?entity_identifier,?atom,?integer,?integer) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>

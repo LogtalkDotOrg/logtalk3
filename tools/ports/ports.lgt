@@ -28,10 +28,10 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 0.4,
+		version is 0.5,
 		author is 'Paulo Moura',
 		date is 2014/08/22,
-		comment is 'Box model port profiler.'
+		comment is 'Predicate execution box model port profiler.'
 	]).
 
 	:- public(data/0).
@@ -62,6 +62,11 @@
 
 	:- private(port_/5).
 	:- dynamic(port_/5).
+	:- mode(port_(?atom, ?entity_identifier, ?atom, ?integer, ?integer), zero_or_more).
+	:- info(port_/5, [
+		comment is 'Internal table of collected port profiling data.',
+		argnames is ['Port', 'Entity', 'Functor', 'Arity', 'Count']
+	]).
 
 	% there can only be one debug handler provider loaded at the same time;
 	% the Logtalk runtime uses the logtalk::debug_handler_provider/1 hook
@@ -144,6 +149,7 @@
 			object_property(Entity, defines(Predicate, Properties))
 		;	category_property(Entity, defines(Predicate, Properties))
 		),
+		% only consider user-defined predicates
 		\+ member(auxiliary, Properties).
 
 	exception(Goal, Error, Entity) :-
@@ -153,51 +159,69 @@
 	% main predicates
 
 	data :-
-		(	setof(
+		(	port_(_, _, _, _, _) ->
+			setof(
 				Entity-Functor/Arity,
 				Port^Count^port_(Port, Entity, Functor, Arity, Count),
 				Predicates
-			) ->
+			),
 			write_data(Predicates, _)
-		;	write_data([], _)
+		;	% no profling data collected so far
+			write_data([], _)
 		).
 
 	reset :-
 		retractall(port_(_, _, _, _, _)).
 
 	data(Entity) :-
-		(	setof(
-				Entity-Functor/Arity,
-				Port^Count^port_(Port, Entity, Functor, Arity, Count),
+		entity_to_template(Entity, Template),
+		(	\+ \+ port_(_, Template, _, _, _) ->
+			setof(
+				Template-Functor/Arity,
+				Port^Count^port_(Port, Template, Functor, Arity, Count),
 				Predicates
-			) ->
-			write_data(Predicates, Entity)
-		;	write_data([], _)
+			),
+			write_data(Predicates, Template)
+		;	% no profling data collected so far for this entity
+			write_data([], _)
 		).
 
 	reset(Entity) :-
-		retractall(port_(_, Entity, _, _, _)).
+		entity_to_template(Entity, Template),
+		retractall(port_(_, Template, _, _, _)).
+
+	entity_to_template(Entity, Template) :-
+		nonvar(Entity),
+		(	atom(Entity) ->
+			Template = Entity
+		;	Entity = Name/Parameters ->
+			functor(Template, Name, Parameters)
+		;	functor(Entity, Name, Parameters),
+			functor(Template, Name, Parameters)
+		).
 
 	% auxiliary predicates
 
 	write_data(Predicates, Entity) :-
 		maximum_width_entity(Predicates, MaximumWidthEntity),
 		maximum_width_predicate(Predicates, MaximumWidthPredicate),
-		maximum_width_result(Entity, MaximumWidthResult),
-		table_ruler(MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthResult, Ruler),
+		maximum_width_result(Entity, MaximumWidthCount),
+		table_ruler(MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthCount, Ruler),
 		write(Ruler), nl,
-		write_table_label(MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthResult),
+		write_table_label(MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthCount),
 		write(Ruler), nl,
 		(	Predicates == [] ->
 			write('(no profiling data available)'), nl
-		;	write_data_rows(Predicates, MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthResult)
+		;	write_data_rows(Predicates, MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthCount)
 		),
 		write(Ruler), nl.
 
 	maximum_width_entity(Predicates, MaximumWidthEntity) :-
 		maximum_width_entity(Predicates, 0, MaximumWidthEntity).
 
-	maximum_width_entity([], Max, Max).
+	maximum_width_entity([], Max0, Max) :-
+		% 6 characters in the "Entity" label
+		Max is max(Max0, 6).
 	maximum_width_entity([Entity-_| Predicates], Max0, Max) :-
 		(	atom(Entity) ->
 			atom_length(Entity, Length),
@@ -214,7 +238,9 @@
 	maximum_width_predicate(Predicates, MaximumWidthEntity) :-
 		maximum_width_predicate(Predicates, 0, MaximumWidthEntity).
 
-	maximum_width_predicate([], Max, Max).
+	maximum_width_predicate([], Max0, Max) :-
+		% 9 characters in the "Predicate" label
+		Max is max(Max0, 9).
 	maximum_width_predicate([_-Functor/Arity| Predicates], Max0, Max) :-
 		atom_length(Functor, FunctorLength),
 		number_codes(Arity, Codes),
@@ -223,7 +249,7 @@
 		Max1 is max(Max0, FunctorLength+1+ArirtLength),
 		maximum_width_predicate(Predicates, Max1, Max).
 
-	maximum_width_result(Entity, MaximumWidthResult) :-
+	maximum_width_result(Entity, MaximumWidthCount) :-
 		(	var(Entity),
 			setof(Count, count(Count), Counts) ->
 			true
@@ -235,10 +261,10 @@
 		reverse(Counts, [MaxCount| _]),
 		(	MaxCount =< 9999 ->
 			% port labels have a maximum length of 4 
-			MaximumWidthResult = 4
+			MaximumWidthCount = 4
 		;	number_codes(MaxCount, Codes),
 			atom_codes(Atom, Codes),
-			atom_length(Atom, MaximumWidthResult)
+			atom_length(Atom, MaximumWidthCount)
 		).
 
 	count(Count) :-
@@ -247,38 +273,38 @@
 	entity_count(Entity, Count) :-
 		port_(_, Entity, _, _, Count).
 
-	write_table_label(MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthResult) :-
+	write_table_label(MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthCount) :-
 		atom_to_right_padded_atom('Entity', MaximumWidthEntity, Entity),
 		atom_to_right_padded_atom('Predicate', MaximumWidthPredicate, Predicate),
-		atom_to_left_padded_atom(' Fact', MaximumWidthResult, Fact),
-		atom_to_left_padded_atom(' Rule', MaximumWidthResult, Rule),
-		atom_to_left_padded_atom(' Call', MaximumWidthResult, Call),
-		atom_to_left_padded_atom(' Exit', MaximumWidthResult, Exit),
-		atom_to_left_padded_atom('*Exit', MaximumWidthResult, NDExit),
-		atom_to_left_padded_atom(' Fail', MaximumWidthResult, Fail),
-		atom_to_left_padded_atom(' Redo', MaximumWidthResult, Redo),
+		atom_to_left_padded_atom(' Fact', MaximumWidthCount, Fact),
+		atom_to_left_padded_atom(' Rule', MaximumWidthCount, Rule),
+		atom_to_left_padded_atom(' Call', MaximumWidthCount, Call),
+		atom_to_left_padded_atom(' Exit', MaximumWidthCount, Exit),
+		atom_to_left_padded_atom('*Exit', MaximumWidthCount, NDExit),
+		atom_to_left_padded_atom(' Fail', MaximumWidthCount, Fail),
+		atom_to_left_padded_atom(' Redo', MaximumWidthCount, Redo),
 		write_list([Entity, Predicate, Fact, Rule, Call, Exit, NDExit, Fail, Redo]), nl.
 
 	write_data_rows([], _, _, _).
-	write_data_rows([Entity-Functor/Arity| Predicates], MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthResult) :-
-		port(fact, Entity, Functor, Arity, MaximumWidthResult, FactAtom),
-		port(rule, Entity, Functor, Arity, MaximumWidthResult, RuleAtom),
-		port(call, Entity, Functor, Arity, MaximumWidthResult, CallAtom),
-		port(exit, Entity, Functor, Arity, MaximumWidthResult, ExitAtom),
-		port(nd_exit, Entity, Functor, Arity, MaximumWidthResult, NDExitAtom),
-		port(fail, Entity, Functor, Arity, MaximumWidthResult, FailAtom),
-		port(redo, Entity, Functor, Arity, MaximumWidthResult, RedoAtom),
+	write_data_rows([Entity-Functor/Arity| Predicates], MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthCount) :-
+		port(fact, Entity, Functor, Arity, MaximumWidthCount, FactAtom),
+		port(rule, Entity, Functor, Arity, MaximumWidthCount, RuleAtom),
+		port(call, Entity, Functor, Arity, MaximumWidthCount, CallAtom),
+		port(exit, Entity, Functor, Arity, MaximumWidthCount, ExitAtom),
+		port(nd_exit, Entity, Functor, Arity, MaximumWidthCount, NDExitAtom),
+		port(fail, Entity, Functor, Arity, MaximumWidthCount, FailAtom),
+		port(redo, Entity, Functor, Arity, MaximumWidthCount, RedoAtom),
 		functor(Entity, Name, Parameters),
 		Template = Name/Parameters,
 		entity_to_padded_atom(Template, MaximumWidthEntity, TemplateAtom),
 		predicate_indicator_to_padded_atom(Functor/Arity, MaximumWidthPredicate, PredicateAtom),
 		write_list([TemplateAtom, PredicateAtom, FactAtom, RuleAtom, CallAtom, ExitAtom, NDExitAtom, FailAtom, RedoAtom]), nl,
-		write_data_rows(Predicates, MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthResult).
+		write_data_rows(Predicates, MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthCount).
 
 	write_list([]).
-	write_list([Term| Terms]) :-
-		write(Term),
-		write_list(Terms).
+	write_list([Atom| Atoms]) :-
+		write(Atom),
+		write_list(Atoms).
 
 	port(Port, Entity, Functor, Arity, MaximumWidth, CountAtom) :-
 		(	port_(Port, Entity, Functor, Arity, Count) ->
@@ -330,8 +356,8 @@
 		generate_atom(PadLength, ' ', Pad),
 		atom_concat(Pad, Atom0, Atom).
 
-	table_ruler(MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthResult, Ruler) :-
-		Length is MaximumWidthEntity + 2 + MaximumWidthPredicate + 2 + 7*MaximumWidthResult + 2*7,
+	table_ruler(MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthCount, Ruler) :-
+		Length is MaximumWidthEntity + 2 + MaximumWidthPredicate + 2 + 7*MaximumWidthCount + 2*7,
 		generate_atom(Length, '-', Ruler).
 
 	generate_atom(Length, Character, Atom) :-
