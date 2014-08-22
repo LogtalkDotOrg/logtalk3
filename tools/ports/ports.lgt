@@ -28,9 +28,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Paulo Moura',
-		date is 2014/08/21,
+		date is 2014/08/22,
 		comment is 'Box model port profiler.'
 	]).
 
@@ -162,51 +162,130 @@
 				Port^Count^port_(Port, Entity, Functor, Arity, Count),
 				Predicates
 			) ->
-			write_data(Predicates)
-		;	write_data([])
+			write_data(Predicates, _)
+		;	write_data([], _)
 		).
 
-	write_data(Predicates) :-
-		table_ruler(Ruler),
+	write_data(Predicates, Entity) :-
+		maximum_width_entity(Predicates, MaximumWidthEntity),
+		maximum_width_predicate(Predicates, MaximumWidthPredicate),
+		maximum_width_result(Entity, MaximumWidthResult),
+		table_ruler(MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthResult, Ruler),
 		write(Ruler), nl,
-		table_label(Label),
-		write(Label), nl,
+		write_table_label(MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthResult),
 		write(Ruler), nl,
 		(	Predicates == [] ->
 			write('(no profiling data available)'), nl
-		;	write_data_rows(Predicates)
+		;	write_data_rows(Predicates, MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthResult)
 		),
 		write(Ruler), nl.
 
-	write_data_rows([]).
-	write_data_rows([Entity-Functor/Arity| Predicates]) :-
-		port(fact, Entity, Functor, Arity, Fact),
-		port(rule, Entity, Functor, Arity, Rule),
-		port(call, Entity, Functor, Arity, Call),
-		port(exit, Entity, Functor, Arity, Exit),
-		port(nd_exit, Entity, Functor, Arity, NDExit),
-		port(fail, Entity, Functor, Arity, Fail),
-		port(redo, Entity, Functor, Arity, Redo),
+	maximum_width_entity(Predicates, MaximumWidthEntity) :-
+		maximum_width_entity(Predicates, 0, MaximumWidthEntity).
+
+	maximum_width_entity([], Max, Max).
+	maximum_width_entity([Entity-_| Predicates], Max0, Max) :-
+		(	atom(Entity) ->
+			atom_length(Entity, Length),
+			Max1 is max(Max0, Length)
+		;	functor(Entity, Name, Parameters),
+			atom_length(Name, NameLength),
+			number_codes(Parameters, Codes),
+			atom_codes(ParametersAtom, Codes),
+			atom_length(ParametersAtom, ParametersLength),
+			Max1 is max(Max0, NameLength+1+ParametersLength)
+		),
+		maximum_width_entity(Predicates, Max1, Max).
+
+	maximum_width_predicate(Predicates, MaximumWidthEntity) :-
+		maximum_width_predicate(Predicates, 0, MaximumWidthEntity).
+
+	maximum_width_predicate([], Max, Max).
+	maximum_width_predicate([_-Functor/Arity| Predicates], Max0, Max) :-
+		atom_length(Functor, FunctorLength),
+		number_codes(Arity, Codes),
+		atom_codes(ArityAtom, Codes),
+		atom_length(ArityAtom, ArirtLength),
+		Max1 is max(Max0, FunctorLength+1+ArirtLength),
+		maximum_width_predicate(Predicates, Max1, Max).
+
+	maximum_width_result(Entity, MaximumWidthResult) :-
+		(	var(Entity),
+			setof(Count, count(Count), Counts) ->
+			true
+		;	numbervars(Entity),
+			setof(Count, entity_count(Entity, Count), Counts) ->
+			true
+		;	Counts = [9999] 
+		),
+		reverse(Counts, [MaxCount| _]),
+		(	MaxCount =< 9999 ->
+			% port label have a maximum length of 4 
+			MaximumWidthResult = 4
+		;	number_codes(MaxCount, Codes),
+			atom_codes(Atom, Codes),
+			atom_length(Atom, MaximumWidthResult)
+		).
+
+	count(Count) :-
+		port_(Port, Entity, Functor, Arity, Count).
+
+	entity_count(Entity, Count) :-
+		port_(Port, Entity, Functor, Arity, Count).
+
+	write_table_label(MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthResult) :-
+		atom_to_right_padded_atom('Entity', MaximumWidthEntity, Entity),
+		atom_to_right_padded_atom('Predicate', MaximumWidthPredicate, Predicate),
+		atom_to_left_padded_atom(' Fact', MaximumWidthResult, Fact),
+		atom_to_left_padded_atom(' Rule', MaximumWidthResult, Rule),
+		atom_to_left_padded_atom(' Call', MaximumWidthResult, Call),
+		atom_to_left_padded_atom(' Exit', MaximumWidthResult, Exit),
+		atom_to_left_padded_atom('*Exit', MaximumWidthResult, NDExit),
+		atom_to_left_padded_atom(' Fail', MaximumWidthResult, Fail),
+		atom_to_left_padded_atom(' Redo', MaximumWidthResult, Redo),
+		write_list([Entity, Predicate, Fact, Rule, Call, Exit, NDExit, Fail, Redo]), nl.
+
+	write_data_rows([], _, _, _).
+	write_data_rows([Entity-Functor/Arity| Predicates], MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthResult) :-
+		port(fact, Entity, Functor, Arity, MaximumWidthResult, FactAtom),
+		port(rule, Entity, Functor, Arity, MaximumWidthResult, RuleAtom),
+		port(call, Entity, Functor, Arity, MaximumWidthResult, CallAtom),
+		port(exit, Entity, Functor, Arity, MaximumWidthResult, ExitAtom),
+		port(nd_exit, Entity, Functor, Arity, MaximumWidthResult, NDExitAtom),
+		port(fail, Entity, Functor, Arity, MaximumWidthResult, FailAtom),
+		port(redo, Entity, Functor, Arity, MaximumWidthResult, RedoAtom),
 		functor(Entity, Name, Parameters),
 		Template = Name/Parameters,
-		entity_to_padded_atom(Template, TemplateAtom),
-		predicate_indicator_to_padded_atom(Functor/Arity, PredicateAtom),
-		write_list([TemplateAtom, PredicateAtom, Fact, Rule, Call, Exit, NDExit, Fail, Redo]), nl,
-		write_data_rows(Predicates).
+		entity_to_padded_atom(Template, MaximumWidthEntity, TemplateAtom),
+		predicate_indicator_to_padded_atom(Functor/Arity, MaximumWidthPredicate, PredicateAtom),
+		write_list([TemplateAtom, PredicateAtom, FactAtom, RuleAtom, CallAtom, ExitAtom, NDExitAtom, FailAtom, RedoAtom]), nl,
+		write_data_rows(Predicates, MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthResult).
 
 	write_list([]).
 	write_list([Term| Terms]) :-
 		write(Term),
 		write_list(Terms).
 
-	port(Port, Entity, Functor, Arity, CountAtom) :-
+	port(Port, Entity, Functor, Arity, MaximumWidth, CountAtom) :-
 		(	port_(Port, Entity, Functor, Arity, Count) ->
 			true
 		;	Count = 0
 		),
-		integer_to_padded_atom(Count, CountAtom).
+		integer_to_padded_atom(Count, MaximumWidth, CountAtom).
 
-	entity_to_padded_atom(Functor/Arity, Atom) :-
+	atom_to_right_padded_atom(Atom, MaximumWidth, PaddedAtom) :-
+		atom_length(Atom, Length),
+		PadLength is MaximumWidth + 2 - Length,
+		generate_atom(PadLength, ' ', Pad),
+		atom_concat(Atom, Pad, PaddedAtom).
+
+	atom_to_left_padded_atom(Atom, MaximumWidth, PaddedAtom) :-
+		atom_length(Atom, Length),
+		PadLength is MaximumWidth + 2 - Length,
+		generate_atom(PadLength, ' ', Pad),
+		atom_concat(Pad, Atom, PaddedAtom).
+
+	entity_to_padded_atom(Functor/Arity, MaximumWidth, Atom) :-
 		(	Arity =:= 0 ->
 			Atom1 = Functor
 		;	atom_concat(Functor, '/', Atom0),
@@ -215,65 +294,41 @@
 			atom_concat(Atom0, ArityAtom, Atom1)
 		),
 		atom_length(Atom1, Length1),
-		PadLength is max(2, 31 - Length1),
-		pad_atom(PadLength, Pad),
+		PadLength is MaximumWidth + 2 - Length1,
+		generate_atom(PadLength, ' ', Pad),
 		atom_concat(Atom1, Pad, Atom).
 
-	predicate_indicator_to_padded_atom(Functor/Arity, Atom) :-
+	predicate_indicator_to_padded_atom(Functor/Arity, MaximumWidth, Atom) :-
 		atom_concat(Functor, '/', Atom0),
 		number_codes(Arity, Codes),
 		atom_codes(ArityAtom, Codes),
 		atom_concat(Atom0, ArityAtom, Atom1),
 		atom_length(Atom1, Length1),
-		PadLength is max(2, 31 - Length1),
-		pad_atom(PadLength, Pad),
+		PadLength is MaximumWidth + 2 - Length1,
+		generate_atom(PadLength, ' ', Pad),
 		atom_concat(Atom1, Pad, Atom).
 
-	integer_to_padded_atom(Integer, Atom) :-
+	integer_to_padded_atom(Integer, MaximumWidth, Atom) :-
 		number_codes(Integer, Codes),
 		atom_codes(Atom0, Codes),
 		atom_length(Atom0, Length0),
-		PadLength is max(2, 8 - Length0),
-		pad_atom(PadLength, Pad),
+		PadLength is MaximumWidth + 2 - Length0,
+		generate_atom(PadLength, ' ', Pad),
 		atom_concat(Pad, Atom0, Atom).
 
-	pad_atom( 0, '').
-	pad_atom( 1, ' ').
-	pad_atom( 2, '  ').
-	pad_atom( 3, '   ').
-	pad_atom( 4, '    ').
-	pad_atom( 5, '     ').
-	pad_atom( 6, '      ').
-	pad_atom( 7, '       ').
-	pad_atom( 8, '        ').
-	pad_atom( 9, '         ').
-	pad_atom(10, '          ').
-	pad_atom(11, '           ').
-	pad_atom(12, '            ').
-	pad_atom(13, '             ').
-	pad_atom(14, '              ').
-	pad_atom(15, '               ').
-	pad_atom(16, '                ').
-	pad_atom(17, '                 ').
-	pad_atom(18, '                  ').
-	pad_atom(19, '                   ').
-	pad_atom(20, '                    ').
-	pad_atom(21, '                     ').
-	pad_atom(22, '                      ').
-	pad_atom(23, '                       ').
-	pad_atom(24, '                        ').
-	pad_atom(25, '                         ').
-	pad_atom(26, '                          ').
-	pad_atom(27, '                           ').
-	pad_atom(28, '                            ').
-	pad_atom(29, '                             ').
-	pad_atom(30, '                              ').
-	pad_atom(31, '                               ').
-	pad_atom(32, '                                ').
+	table_ruler(MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthResult, Ruler) :-
+		Length is MaximumWidthEntity + 2 + MaximumWidthPredicate + 2 + 7*MaximumWidthResult + 2*7,
+		generate_atom(Length, '-', Ruler).
 
-	table_ruler('----------------------------------------------------------------------------------------------------------------------').
+	generate_atom(Length, Character, Atom) :-
+		generate_atom(Length, Character, '', Atom).
 
-	table_label('Entity                         Predicate                          Fact    Rule    Call    Exit   *Exit    Fail    Redo').
+	generate_atom(0, _, Atom, Atom) :-
+		!.
+	generate_atom(Length0, Character, Atom0, Atom) :-
+		atom_concat(Character, Atom0, Atom1),
+		Length1 is Length0 - 1,
+		generate_atom(Length1, Character, Atom1, Atom).
 
 	reset :-
 		retractall(port_(_, _, _, _, _)).
@@ -284,8 +339,8 @@
 				Port^Count^port_(Port, Entity, Functor, Arity, Count),
 				Predicates
 			) ->
-			write_data(Predicates)
-		;	write_data([])
+			write_data(Predicates, Entity)
+		;	write_data([], _)
 		).
 
 	reset(Entity) :-
@@ -339,5 +394,12 @@
 	member(Head, [Head| _]).
 	member(Head, [_| Tail]) :-
 		member(Head, Tail).
+
+	reverse(List, Reversed) :-
+		reverse(List, [], Reversed, Reversed).
+
+	reverse([], Reversed, Reversed, []).
+	reverse([Head| Tail], List, Reversed, [_| Bound]) :-
+		reverse(Tail, [Head| List], Reversed, Bound).
 
 :- end_object.
