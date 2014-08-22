@@ -33,11 +33,12 @@ can be loaded using the query:
 
 The Logtalk predicate execution box model is an extended version of the
 original Byrd’s four port model. Besides the `call`, `exit`, `fail`, and
-`redo` ports, Logtalk also defines two unification ports, `fact` and `redo`,
-and an `exception` port. This tool counts the number of times each port is
-traversed during the execution of queries. It also distinguishes between
-deterministic exits and exits that leave choice-points (represented using
-`*exit` in the profiling result tables).
+`redo` ports, Logtalk also defines two (post-)unification ports, `fact`
+and `rule`, and an `exception` port. This tool counts and reports the
+number of times each port is traversed during the execution of queries.
+It also distinguishes between deterministic exits (reported in the `exit`
+column in the profiling result tables) and exits that leave choice-points
+(reported in the `*exit` column).
 
 All source files are formatted using tabs (the recommended setting is a tab
 width equivalent to 4 spaces).
