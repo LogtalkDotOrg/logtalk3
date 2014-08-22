@@ -436,6 +436,9 @@ Logtalk uses a <em>Procedure Box model</em> similar to those found on most Prolo
 		<dd>failure of a predicate call</dd>
 </dl>
 <p>
+When tracing execution, the Logtalk debugger provides determinism information by prefixing the exit port with an asterisk when a call succeeds with choice-points pending.
+</p>
+<p>
 Logtalk, as found on some recent Prolog compilers, adds a port for dealing with exceptions thrown when calling a predicate:
 </p>
 <dl>
@@ -477,6 +480,9 @@ The abbreviations defined in Logtalk are similar to those defined on some Prolog
 	<dt><code>full</code></dt>
 		<dd><code>[fact, rule, call, exit, redo, fail, exception]</code></dd>
 </dl>
+<p>
+By default, the debugger pauses at every port for user interaction.
+</p>
 
 <h3>Defining spy points<a id="programming_spypoints"></a></h3>
 
@@ -745,7 +751,7 @@ When objects or categories containing grammar rules are compiled in debug mode, 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: August 11, 2014</span>
+		<span>Last updated on: August 22, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="installing.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="migration.html">next</a></span><br/>
