@@ -28,18 +28,10 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 0.3,
+		version is 0.4,
 		author is 'Paulo Moura',
 		date is 2014/08/22,
 		comment is 'Box model port profiler.'
-	]).
-
-	:- public(profile/1).
-	:- meta_predicate(profile(0)).
-	:- mode(profile(@callable), zero_or_more).
-	:- info(profile/1, [
-		comment is 'Proves a goal while collecting port profiling information.',
-		argnames is ['Goal']
 	]).
 
 	:- public(data/0).
@@ -81,7 +73,7 @@
 		:- dynamic(logtalk::debug_handler_provider/1).
 	:- endif.
 
-	logtalk::debug_handler_provider(debugger).
+	logtalk::debug_handler_provider(ports).
 
 	:- multifile(logtalk::debug_handler/2).
 	:- if((current_logtalk_flag(prolog_dialect, qp); current_logtalk_flag(prolog_dialect, xsb))).
@@ -94,35 +86,37 @@
 
 	debug_handler(fact(Goal, _, _), ExCtx) :-
 		logtalk::execution_context(ExCtx, Entity, _, _, _, _, _),
-		functor(Entity, Functor, Arity),
-		functor(Template, Functor, Arity),
-		numbervars(Template, 0, _),
-		port(Goal, fact, Template).
+		ground_entity_identifier(Entity, GroundEntity),
+		port(Goal, fact, GroundEntity).
 	debug_handler(rule(Goal, _, _), ExCtx) :-
 		logtalk::execution_context(ExCtx, Entity, _, _, _, _, _),
-		functor(Entity, Functor, Arity),
-		functor(Template, Functor, Arity),
-		numbervars(Template, 0, _),
-		port(Goal, rule, Template).
+		ground_entity_identifier(Entity, GroundEntity),
+		port(Goal, rule, GroundEntity).
 	debug_handler(top_goal(Goal, TGoal), ExCtx) :-
 		debug_handler(goal(Goal, TGoal), ExCtx).
 	debug_handler(goal(Goal, TGoal), ExCtx) :-
 		logtalk::execution_context(ExCtx, Entity, _, _, _, _, _),
-		functor(Entity, Functor, Arity),
-		functor(Template, Functor, Arity),
-		numbervars(Template, 0, _),
-		port(Goal, call, Template),
-		(	catch(call_goal(TGoal, Deterministic), Error, exception(Goal, Error, Template)),
+		ground_entity_identifier(Entity, GroundEntity),
+		port(Goal, call, GroundEntity),
+		(	catch(call_goal(TGoal, Deterministic), Error, exception(Goal, Error, GroundEntity)),
 			(	Deterministic == true ->
 				!,
-				port(Goal, exit, Template)
-			;	(	port(Goal, nd_exit, Template)
-				;	port(Goal, redo, Template),
+				port(Goal, exit, GroundEntity)
+			;	(	port(Goal, nd_exit, GroundEntity)
+				;	port(Goal, redo, GroundEntity),
 					fail
 				)
 			)
-		;	port(Goal, fail, Template),
+		;	port(Goal, fail, GroundEntity),
 			fail
+		).
+
+	ground_entity_identifier(Entity, GroundEntity) :-
+		(	atom(Entity) ->
+			GroundEntity = Entity
+		;	functor(Entity, Functor, Arity),
+			functor(GroundEntity, Functor, Arity),
+			numbervars(GroundEntity, 0, _)
 		).
 
 	% inore calls to control constructs and ...
@@ -156,6 +150,8 @@
 		port(Goal, exception, Entity),
 		throw(Error).
 
+	% main predicates
+
 	data :-
 		(	setof(
 				Entity-Functor/Arity,
@@ -165,6 +161,24 @@
 			write_data(Predicates, _)
 		;	write_data([], _)
 		).
+
+	reset :-
+		retractall(port_(_, _, _, _, _)).
+
+	data(Entity) :-
+		(	setof(
+				Entity-Functor/Arity,
+				Port^Count^port_(Port, Entity, Functor, Arity, Count),
+				Predicates
+			) ->
+			write_data(Predicates, Entity)
+		;	write_data([], _)
+		).
+
+	reset(Entity) :-
+		retractall(port_(_, Entity, _, _, _)).
+
+	% auxiliary predicates
 
 	write_data(Predicates, Entity) :-
 		maximum_width_entity(Predicates, MaximumWidthEntity),
@@ -213,14 +227,14 @@
 		(	var(Entity),
 			setof(Count, count(Count), Counts) ->
 			true
-		;	numbervars(Entity),
+		;	numbervars(Entity, 0, _),
 			setof(Count, entity_count(Entity, Count), Counts) ->
 			true
 		;	Counts = [9999] 
 		),
 		reverse(Counts, [MaxCount| _]),
 		(	MaxCount =< 9999 ->
-			% port label have a maximum length of 4 
+			% port labels have a maximum length of 4 
 			MaximumWidthResult = 4
 		;	number_codes(MaxCount, Codes),
 			atom_codes(Atom, Codes),
@@ -228,10 +242,10 @@
 		).
 
 	count(Count) :-
-		port_(Port, Entity, Functor, Arity, Count).
+		port_(_, _, _, _, Count).
 
 	entity_count(Entity, Count) :-
-		port_(Port, Entity, Functor, Arity, Count).
+		port_(_, Entity, _, _, Count).
 
 	write_table_label(MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthResult) :-
 		atom_to_right_padded_atom('Entity', MaximumWidthEntity, Entity),
@@ -330,22 +344,6 @@
 		Length1 is Length0 - 1,
 		generate_atom(Length1, Character, Atom1, Atom).
 
-	reset :-
-		retractall(port_(_, _, _, _, _)).
-
-	data(Entity) :-
-		(	setof(
-				Entity-Functor/Arity,
-				Port^Count^port_(Port, Entity, Functor, Arity, Count),
-				Predicates
-			) ->
-			write_data(Predicates, Entity)
-		;	write_data([], _)
-		).
-
-	reset(Entity) :-
-		retractall(port_(_, Entity, _, _, _)).
-
 	:- if((	current_logtalk_flag(prolog_dialect, Dialect),
 			(Dialect == b; Dialect == qp; Dialect == swi; Dialect == yap)
 	)).
@@ -388,8 +386,8 @@
 
 	:- endif.
 
-	% auxiliary predicates; we could use the Logtalk standard library but
-	% we prefer to make this object self-contained given its purpose
+	% list auxiliary predicates; we could use the Logtalk standard library
+	% but we prefer to make this object self-contained given its purpose
 
 	member(Head, [Head| _]).
 	member(Head, [_| Tail]) :-
