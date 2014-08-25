@@ -28,9 +28,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 0.6,
+		version is 0.7,
 		author is 'Paulo Moura',
-		date is 2014/08/23,
+		date is 2014/08/25,
 		comment is 'Predicate execution box model port profiler.'
 	]).
 
@@ -133,7 +133,7 @@
 	port(_<<_, _, _) :- !.
 	port(_>>_, _, _) :- !.
 	port({_}, _, _) :- !.
-	% ... consider only calls to user predicates
+	% ... consider only calls to user-defined predicates
 	port(Goal, Port, Entity) :-
 		functor(Goal, Functor, Arity),
 		(	\+ entity_defines(Entity, Functor/Arity) ->
@@ -174,32 +174,32 @@
 		retractall(port_(_, _, _, _, _)).
 
 	data(Entity) :-
-		entity_to_template(Entity, Template),
-		(	\+ \+ port_(_, Template, _, _, _) ->
+		entity_spec_to_template(Entity, EntityTemplate),
+		(	\+ \+ port_(_, EntityTemplate, _, _, _) ->
 			setof(
-				Template-Functor/Arity,
-				Port^Count^port_(Port, Template, Functor, Arity, Count),
+				EntityTemplate-Functor/Arity,
+				Port^Count^port_(Port, EntityTemplate, Functor, Arity, Count),
 				Predicates
 			),
-			write_data(Predicates, Template)
+			write_data(Predicates, EntityTemplate)
 		;	% no profling data collected so far for this entity
 			write_data([], _)
 		).
 
 	reset(Entity) :-
-		entity_to_template(Entity, Template),
-		retractall(port_(_, Template, _, _, _)).
+		entity_spec_to_template(Entity, EntityTemplate),
+		retractall(port_(_, EntityTemplate, _, _, _)).
 
 	% auxiliary predicates
 
-	entity_to_template(Entity, Template) :-
+	entity_spec_to_template(Entity, EntityTemplate) :-
 		nonvar(Entity),
 		(	atom(Entity) ->
-			Template = Entity
+			EntityTemplate = Entity
 		;	Entity = Name/Parameters ->
-			functor(Template, Name, Parameters)
+			functor(EntityTemplate, Name, Parameters)
 		;	functor(Entity, Name, Parameters),
-			functor(Template, Name, Parameters)
+			functor(EntityTemplate, Name, Parameters)
 		).
 
 	write_data(Predicates, Entity) :-
@@ -299,7 +299,7 @@
 		functor(Entity, Name, Parameters),
 		Template = Name/Parameters,
 		entity_to_padded_atom(Template, MaximumWidthEntity, TemplateAtom),
-		predicate_indicator_to_padded_atom(Functor/Arity, MaximumWidthPredicate, PredicateAtom),
+		predicate_to_padded_atom(Entity, Functor/Arity, MaximumWidthPredicate, PredicateAtom),
 		write_list([TemplateAtom, PredicateAtom, FactAtom, RuleAtom, CallAtom, ExitAtom, NDExitAtom, FailAtom, RedoAtom, ExceptionAtom]), nl,
 		write_data_rows(Predicates, MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthCount).
 
@@ -340,8 +340,18 @@
 		generate_atom(PadLength, ' ', Pad),
 		atom_concat(Atom1, Pad, Atom).
 
-	predicate_indicator_to_padded_atom(Functor/Arity, MaximumWidth, Atom) :-
-		atom_concat(Functor, '/', Atom0),
+	predicate_to_padded_atom(Entity, Functor/Arity0, MaximumWidth, Atom) :-
+		(	current_object(Entity),
+			object_property(Entity, defines(Functor/Arity0, Properties)),
+			member(non_terminal(_//Arity), Properties) ->
+			atom_concat(Functor, '//', Atom0)
+		;	current_category(Entity),
+			category_property(Entity, defines(Functor/Arity0, Properties)),
+			member(non_terminal(_//Arity), Properties) ->
+			atom_concat(Functor, '//', Atom0)
+		;	Arity = Arity0,
+			atom_concat(Functor, '/', Atom0)
+		),
 		number_codes(Arity, Codes),
 		atom_codes(ArityAtom, Codes),
 		atom_concat(Atom0, ArityAtom, Atom1),
@@ -422,10 +432,10 @@
 		member(Head, Tail).
 
 	reverse(List, Reversed) :-
-		reverse(List, [], Reversed, Reversed).
+		reverse(List, [], Reversed).
 
-	reverse([], Reversed, Reversed, []).
-	reverse([Head| Tail], List, Reversed, [_| Bound]) :-
-		reverse(Tail, [Head| List], Reversed, Bound).
+	reverse([], Reversed, Reversed).
+	reverse([Head| Tail], List, Reversed) :-
+		reverse(Tail, [Head| List], Reversed).
 
 :- end_object.

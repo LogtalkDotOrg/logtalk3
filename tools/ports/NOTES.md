@@ -25,9 +25,10 @@ ________________________________________________________________________
 Overview
 --------
 
-The `ports.lgt` source file defines a simple box model (as in the debugger)
-port profiler tool. It's inspired by the ECLiPSe `port_profiler` tool. It
-can be loaded using the query:
+The `ports.lgt` source file defines a simple predicate execution box model
+port profiler tool (inspired by the ECLiPSe `port_profiler` tool). The box
+model is the same used in the debugger tool. This tool can be loaded using
+the query:
 
 	| ?- logtalk_load(ports(loader)).
 
@@ -47,15 +48,16 @@ width equivalent to 4 spaces).
 Compiling source files for port profiling
 -----------------------------------------
 
-To compile source files for port profiling, simply compiling them in debug
-mode. For example:
+To compile source files for port profiling, simply compile them in debug mode
+and with the `source_data` flag turned on.
+For example:
 
-	| ?- logtalk_load(my_source_file, [debug(on)]).
+	| ?- logtalk_load(my_source_file, [debug(on), source_data(on)]).
 
-You can also simply turn on the `debug` flag globally before compiling your
-source files:
+You can also simply turn on the `debug` and `source_data` flags globally before
+compiling your source files:
 
-	| ?- set_logtalk_flag(debug, on).
+	| ?- set_logtalk_flag(debug, on), set_logtalk_flag(source_data, on).
 
 
 Generating profiling data
