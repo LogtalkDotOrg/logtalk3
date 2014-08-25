@@ -82,6 +82,9 @@ loading source files with an `encoding/1` directive.
 * FIXED: Cases where a compilation error would be reported with incorrect term
 and file position information.
 
+* FIXED: Bug adding source data for auxiliary predicates automatically created
+when calling a Prolog meta-predicate that takes a closure as argument.
+
 Prolog adapter and integration files
 ------------------------------------
 

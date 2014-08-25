@@ -10889,8 +10889,7 @@ current_logtalk_flag(Flag, Value) :-
 	assertz('$lgt_pp_def_'(Clause)),
 	% add, if applicable, source data information for the auxiliary clause
 	(	'$lgt_compiler_flag'(source_data, on) ->
-		assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, HelperFunctor/Arity, auxiliary))),
-		assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, HelperFunctor/Arity, number_of_clauses(1))))
+		assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, HelperFunctor/Arity, flags_clauses_line(1,1,0))))
 	;	true
 	),
 	(	'$lgt_prolog_feature'(modules, supported) ->
