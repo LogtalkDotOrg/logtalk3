@@ -11,16 +11,19 @@
 
 :- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == swi; Dialect == yap))).
 
-	:- use_module(library(jpl), []).
+	:- if((absolute_file_name(library(jpl), [file_type(prolog)], Path), exists_file(Path))).
 
-	:- initialization(
-		logtalk_load(jpl)
-	).
+		:- use_module(library(jpl), []).
+		:- initialization(logtalk_load(jpl)).
+
+	:- else.
+
+		:- initialization((write('(JPL library not available)'), nl)).
+
+	:- endif.
 
 :- else.
 
-	:- initialization((
-		write('(not applicable)'), nl
-	)).
+	:- initialization((write('(not applicable)'), nl)).
 
 :- endif.
