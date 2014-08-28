@@ -337,7 +337,7 @@ collected for Logtalk own features, all file terms are decorated with
 additional information for integration with SWI-Prolog development tools.
 
 
-XSB 3.4.1 and later versions
+XSB 3.5.0 and later versions
 --------------------------
 
 	xsb.pl
@@ -350,7 +350,7 @@ or perform the first run of the integration scripts from an admin account.
 Due to the long release cycle of XSB, you may need to use its development
 version if the recommended version is not yet available as a stable release.
 
-Know issue in XSB 3.4.1: this version doesn't support static multifile
+Know issue in XSB 3.5.0: this version doesn't support static multifile
 predicates. This limitation may be fixed in later versions.
 
 The definition of the `as` operator used in Logtalk when declaring predicate
