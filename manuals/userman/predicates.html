@@ -133,7 +133,7 @@ The meta-predicate mode arguments in this directive have the following meaning:
 	<dt><code>::</code></dt>
 		<dd>Argument that is context-aware but that will not be called as a goal.</dd>
 	<dt><code>^</code></dt>
-		<dd>Existentially quantified goal (<code>Vars^Goal</code>).</dd>
+		<dd>Goal that may be existentially quantified (<code>Vars^Goal</code>).</dd>
 	<dt><code>*</code></dt>
 		<dd>Normal argument.</dd>
 </dl>
@@ -238,9 +238,6 @@ You may use this extended version for solving conflicts between predicates decla
 <p>
 The <code>uses/2</code> directive allows simpler predicate definitions as long as there are no conflicts between the predicates declared in the directive and the predicates defined in the object (or category) containing the directive. A predicate (or its alias if defined) cannot be listed in more than one <code>uses/2</code> directive. In addition, a <code>uses/2</code> directive cannot list a predicate (or its alias if defined) which is defined in the object (or category) containing the directive. Any conflicts are reported by Logtalk as compilation errors.
 </p>
-<p>
-In the current Logtalk version, the omission of the <code>Object::</code> prefix is not supported when the predicate call occurs as an argument of a user-defined meta-predicate (Logtalk specified meta-predicates and Prolog non-standard meta-predicates declared in the adapter files pose no problem).
-</p>
 
 <h3 id="predicates_alias">Alias directive</h3>
 
@@ -263,7 +260,7 @@ A common use for the <code>alias/2</code> directive is to give an alternative na
 
 :- end_object.</pre>
 <p>
-The directive allows both <code>width/1</code> and <code>side/1</code> to be used as messages to the object <code>square</code>. Thus, using this directive, there is no need to explicitly declare and define a "new" <code>side/1</code> predicate. Note that the <code>alias/2</code> directive does not rename a predicate, only provides an alternative, additional name; the original name continues to be available.
+The directive allows both <code>width/1</code> and <code>side/1</code> to be used as messages to the object <code>square</code>. Thus, using this directive, there is no need to explicitly declare and define a "new" <code>side/1</code> predicate. Note that the <code>alias/2</code> directive does not rename a predicate, only provides an alternative, additional name; the original name continues to be available (although it may be masked due to the default inheritance conflict mechanism).
 </p>
 <p>
 Another common use for this directive is to solve conflicts when two inherited predicates have the same functor and arity. We may want to call the predicate which is masked out by the Logtalk lookup algorithm (see the <a href="inheritance.html">Inheritance</a> section) or we may need to call both predicates. This is simply accomplished by using the <code>alias/2</code> directive to give alternative names to masked out or conflicting predicates. Consider the following example:
@@ -463,7 +460,7 @@ all_true(Closure, [Arg| Args]) :-
 Note that in this case the meta-predicate directive specifies that the closure will be extended with exactly one extra argument.
 </p>
 <p>
-When calling a meta-predicate, a closure can correspond to a user-defined predicate, a built-in predicate, a lambda expression, or one of the following control constructs: <code>::/2</code>, <code>^^/2</code>, <code>&lt;&lt;/2</code>, <code>[]/1</code>, <code>{}/1</code>, or <code>:/2</code>. Use of the <code>::/1</code> control construct is not supported, however, as the value of <em>self</em> would be lost during the roundtrip to an object defining a meta-predicate when the meta-call should take place on the <em>sender</em>. The workaround is to call the <code>self/1</code> built-in method first and to pass instead to the meta-predicate a <code>Self::Closure</code> closure.
+When calling a meta-predicate, a closure can correspond to a user-defined predicate, a built-in predicate, a lambda expression, or a control construct.
 </p>
 
 <h3 id="predicates_lambdas">Lambda expressions</h3>
@@ -1017,7 +1014,7 @@ This workaround is sometimes necessary when calling module meta-predicates whose
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: August 14, 2014</span>
+		<span>Last updated on: August 29, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="categories.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="inheritance.html">next</a></span><br/>

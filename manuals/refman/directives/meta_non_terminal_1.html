@@ -51,7 +51,7 @@ meta_non_terminal([Module1:MetaNonTerminalTemplate1, Module2:MetaNonTerminalTemp
 Declares meta-non-terminals, i.e., non-terminals that have arguments that will be called as non-terminals (or grammar rule bodies). An argument may also be a <em>closure</em> instead of a goal if the non-terminal uses the <a title="Consult reference manual" href="../methods/call_1.html"><code>call//1-N</code></a> Logtalk built-in methods to construct and call the actual non-terminal from the closure and the additional arguments.
 </p>
 <p>
-Meta-arguments which are non-terminals are represented by the integer <code>0</code>. Meta-arguments which are closures are represented by a positive integer, <code>N</code>, representing the number of additional arguments that will be appended to the closure in order to construct the corresponding meta-call. Normal arguments are represented by the atom <code>*</code>. Meta-arguments are always called in the context of the <em><a class="glossary" title="Go to glossary definition" href="../../glossary.html#sender">sender</a></em>, i.e. in the meta-non-terminal calling context, not in the meta-non-terminal definition context.
+Meta-arguments which are non-terminals are represented by the integer <code>0</code>. Meta-arguments which are closures are represented by a positive integer, <code>N</code>, representing the number of additional arguments that will be appended to the closure in order to construct the corresponding meta-call. Normal arguments are represented by the atom <code>*</code>. Meta-arguments are always called in the meta-non-terminal calling context, not in the meta-non-terminal definition context.
 </p>
 <p>
 Logtalk allows the use of this directive to override the original meta-non-terminal directive. This is sometimes necessary when calling Prolog module meta-non-terminals due to the lack of standardization of the syntax of the meta-non-terminal templates.
@@ -77,7 +77,7 @@ meta_non_terminal(+module_identifier:+meta_non_terminal_template_term)</pre>
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: June 3, 2014</span>
+		<span>Last updated on: August 29, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="meta_predicate_1.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="mode_2.html">next</a></span><br/>
