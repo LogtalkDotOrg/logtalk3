@@ -6,7 +6,7 @@
 %  integration code for YAP 6.3.4 and later versions to improve
 %  usability when using the YAP profilers
 %
-%  Last updated on July 10, 2014
+%  Last updated on August 28, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -47,7 +47,7 @@ user:prolog_predicate_name(user:'$lgt_metacall'(_, _, _, _), 'call/N') :- !.
 user:prolog_predicate_name(user:'$lgt_metacall'(_, _, _), 'call/1') :- !.
 user:prolog_predicate_name(user:'$lgt_quantified_metacall'(_, _, _, _), 'call/1') :- !.
 user:prolog_predicate_name(user:'$lgt_metacall_local'(_, _, _), 'call/1') :- !.
-user:prolog_predicate_name(user:'$lgt_metacall_sender'(_, _, _, _), 'call/1') :- !.
+user:prolog_predicate_name(user:'$lgt_metacall_sender'(_, _, _, _, _), 'call/1') :- !.
 
 user:prolog_predicate_name(user:'$lgt_bagof'(_, _, _, _, _), 'bagof/3') :- !.
 user:prolog_predicate_name(user:'$lgt_setof'(_, _, _, _, _), 'setof/3') :- !.

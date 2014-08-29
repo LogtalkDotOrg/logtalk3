@@ -8,7 +8,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on July 10, 2014
+%  Last updated on August 28, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -118,7 +118,7 @@ user:prolog_predicate_name(user:'$lgt_metacall'(_, _, _, _), 'call/N') :- !.
 user:prolog_predicate_name(user:'$lgt_metacall'(_, _, _), 'call/1') :- !.
 user:prolog_predicate_name(user:'$lgt_quantified_metacall'(_, _, _, _), 'call/1') :- !.
 user:prolog_predicate_name(user:'$lgt_metacall_local'(_, _, _), 'call/1') :- !.
-user:prolog_predicate_name(user:'$lgt_metacall_sender'(_, _, _, _), 'call/1') :- !.
+user:prolog_predicate_name(user:'$lgt_metacall_sender'(_, _, _, _, _), 'call/1') :- !.
 
 user:prolog_predicate_name(user:'$lgt_bagof'(_, _, _, _, _), 'bagof/3') :- !.
 user:prolog_predicate_name(user:'$lgt_setof'(_, _, _, _, _), 'setof/3') :- !.
@@ -280,14 +280,15 @@ prolog_clause:make_varnames_hook(_, (user:THead :- _), Offsets, Names, Bindings)
 :- multifile(user:portray/1).
 :- dynamic(user:portray/1).
 
-user:portray(c(This, Rest)) :-
+user:portray(c(This, Entity, Rest)) :-
 	callable(Rest),
-	Rest = r(Sender, Self, MetaVars, CoinductionStack),
+	Rest = r(Sender, Self, MetaCallCtx, CoinductionStack),
 	write('<'),
+	writeq(Entity), write(','),
 	writeq(Sender), write(','),
 	writeq(This), write(','),
 	writeq(Self), write(','),
-	writeq(MetaVars), write(','),
+	writeq(MetaCallCtx), write(','),
 	writeq(CoinductionStack), write(','),
 	write('>').
 
@@ -365,7 +366,7 @@ user:portray(c(This, Rest)) :-
 '$lgt_swi_unify_clause_body'(Goal, _, '$lgt_metacall'(Goal, _, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(Goal, _, '$lgt_quantified_metacall'(Goal, _, _, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(Goal, _, '$lgt_metacall_local'(Goal, _, _), TermPos, TermPos) :- !.
-'$lgt_swi_unify_clause_body'(Goal, _, '$lgt_metacall_sender'(Goal, _, _, _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(Goal, _, '$lgt_metacall_sender'(Goal, _, _, _, _), TermPos, TermPos) :- !.
 
 '$lgt_swi_unify_clause_body'(bagof(Term, QGoal, List), _, '$lgt_bagof'(Term, QGoal, List, _, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(bagof(Term, Goal, List), Entity, bagof(Term, TGoal, List), TermPos0, TermPos) :- !,
@@ -594,7 +595,7 @@ user:portray(c(This, Rest)) :-
 :- '$set_predicate_attribute'('$lgt_metacall'/4, trace, 1).
 :- '$set_predicate_attribute'('$lgt_quantified_metacall'/4, trace, 1).
 :- '$set_predicate_attribute'('$lgt_metacall_local'/3, trace, 1).
-:- '$set_predicate_attribute'('$lgt_metacall_sender'/4, trace, 1).
+:- '$set_predicate_attribute'('$lgt_metacall_sender'/5, trace, 1).
 
 :- '$set_predicate_attribute'('$lgt_expand_term'/5, trace, 1).
 :- '$set_predicate_attribute'('$lgt_expand_goal'/5, trace, 1).
@@ -657,7 +658,7 @@ user:portray(c(This, Rest)) :-
 :- meta_predicate user:'$lgt_obj_super_call_nv'(*,*,*).
 :- meta_predicate user:'$lgt_category_property_declares'(*,*,*,*).
 :- meta_predicate user:'$lgt_category_property'(*,*,*,*,*).
-:- meta_predicate user:'$lgt_send_to_obj_nv_inner'(*,*,*).
+:- meta_predicate user:'$lgt_send_to_obj_nv_inner'(*,*,*,*).
 :- meta_predicate user:'$lgt_object_property_declares'(*,*,*,*,*,*).
 :- meta_predicate user:'$lgt_complemented_object'(*,*,*,*,*).
 :- meta_predicate user:'$lgt_object_property_defines'(*,*,*,*,*).
@@ -688,7 +689,7 @@ user:portray(c(This, Rest)) :-
 :- meta_predicate user:'$lgt_object_property'(*,*,*,*,*,*,*).
 :- meta_predicate user:'$lgt_object_property_resources'(*,*,*,*,*,*).
 :- meta_predicate user:'$lgt_object_property_resource'(*,*,*,*,*,*).
-:- meta_predicate user:'$lgt_assert_pred_def'(*,*,*,*,*,*,*).
+:- meta_predicate user:'$lgt_assert_pred_def'(*,*,*,*,*,*,*,*).
 :- meta_predicate user:'$lgt_send_to_self_nv'(*,*,*).
 
 :- meta_predicate user:threaded_ignore(*).
@@ -721,7 +722,7 @@ user:portray(c(This, Rest)) :-
 
 :- meta_predicate user:'$lgt_metacall'(*,*,*,*).
 :- meta_predicate user:'$lgt_quantified_metacall'(*,*,*,*).
-:- meta_predicate user:'$lgt_metacall_sender'(*,*,*,*).
+:- meta_predicate user:'$lgt_metacall_sender'(*,*,*,*,*).
 :- meta_predicate user:'$lgt_metacall_local'(*,*,*).
 
 :- meta_predicate user:'$user#0.forward#1'(*,*).

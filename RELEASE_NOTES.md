@@ -31,9 +31,19 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: Pass the current execution context when sending a message thus
+ensuring that, when calling a meta-predicate, the meta-arguments will be
+called with the caller full execution context. This allows a long standing
+issue to be fixed: it's now possible to pass to a meta-predicate a closure
+corresponding to a call to the `::/1` or `^^/1` control constructs.
+
 * CHANGED: The predicate execution context now also includes the entity
 containing the clause under execution. This entity argument is only equal
-to the *this* argument for object predicate clauses.
+to the *this* argument for object predicate clauses. This allows a long
+standing issue to be fixed: it's now possible to call a meta-predicate from
+within a category where the meta-arguments correspond to calls to local
+category predicates instead of predicates local to the object importing
+the category.
 
 * CHANGED: The `execution_context/6` predicate of the `logtalk` built-in
 object to `execution_context/7` to cope with the new execution context

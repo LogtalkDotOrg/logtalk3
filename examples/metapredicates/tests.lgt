@@ -9,15 +9,39 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+
+% entities for testing meta-predicates calling meta-predicates and passing
+% closures corresponding to control constructs
+
 :- object(library).
 
 	:- public(my_call/1).
 	:- meta_predicate(my_call(0)).
-
 	my_call(Goal) :-
 		call(Goal).
 
+	:- public(my_call/2).
+	:- meta_predicate(my_call(1, *)).
+	my_call(Closure, Arg) :-
+		call(Closure, Arg).
+
+	:- public(self_closure/1).
+	self_closure(X) :-
+		my_call(::q, X).
+
+	:- protected(q/1).
+	q(library).
+
 	a(library).
+
+:- end_object.
+
+
+
+:- object(extended_library,
+	extends(library)).
+
+	q(extended_library).
 
 :- end_object.
 
@@ -26,21 +50,69 @@
 :- object(client).
 
 	:- public(test1/1).
-
 	test1(L) :-
 		library::my_call(setof(E, a(E), L)).
 
 	:- public(test2/1).
-
 	test2(L) :-
 		library::my_call(setof(E, call(a, E), L)).
 
 	:- public(test3/1).
-
 	test3(L) :-
 		library::my_call(call(setof, E, call(a, E), L)).
 
 	a(1). a(2). a(3).
+
+:- end_object.
+
+
+
+:- object(parent).
+
+	:- public(self_closure/1).
+	self_closure(X) :-
+		library::my_call(::q, X).
+
+	:- protected(q/1).
+	q(parent).
+
+:- end_object.
+
+
+
+:- object(proto,
+	extends(parent)).
+
+	:- public(super_closure/1).
+	super_closure(X) :-
+		library::my_call(^^q, X).
+
+	q(proto).
+
+:- end_object.
+
+
+
+% entities for testing calling meta-predicates from within categories
+
+:- category(test_category).
+
+	:- public(p/1).
+	p(Out) :-
+		meta::map(double, [1,2,3], Out).
+
+	double(X, Y) :-
+		Y is 2*X.
+
+:- end_category.
+
+
+
+:- object(test_object,
+	imports(test_category)).
+
+	double(X, Y) :-
+		Y is 3*X.
 
 :- end_object.
 
@@ -203,34 +275,60 @@
 		client::test3(L),
 		L == [1, 2, 3].
 
+	% tests for calling meta-predicates with closure corresponding to control constructs
+
 	test(metapredicates_16) :-
+		proto::self_closure(X),
+		X == proto.
+
+	test(metapredicates_17) :-
+		parent::self_closure(X),
+		X == parent.
+
+	test(metapredicates_18) :-
+		library::self_closure(X),
+		X == library.
+
+	test(metapredicates_19) :-
+		extended_library::self_closure(X),
+		X == extended_library.
+
+	test(metapredicates_20) :-
+		proto::super_closure(X),
+		X == parent.
+
+	test(metapredicates_21) :-
+		test_object::p(L),
+		L == [2, 4, 6].
+
+	test(metapredicates_22) :-
 		m1::r(X, Y),
 		X == m1, Y == m2.
 
-	test(metapredicates_17) :-
+	test(metapredicates_23) :-
 		fibonacci::nth(10, Nth),
 		Nth == 55.
 
-	test(metapredicates_18) :-
+	test(metapredicates_24) :-
 		company::company(C1),
 		company::get_salary(company(C1), S1),
 		S1 == 179998.
 
-	test(metapredicates_19) :-
+	test(metapredicates_25) :-
 		company::company(C1),
 		company::cut_salary(company(C1), C2),
 		company::get_salary(C2, S2),
 		S2 == 89999.
 
-	test(metapredicates_20) :-
+	test(metapredicates_26) :-
 		meta::findall_member(N, [1, 2, 3, 4, 5], (N mod 2 =:= 0), L),
 		L == [2, 4].
 
-	test(metapredicates_21) :-
+	test(metapredicates_27) :-
 		meta::findall_member(N, [1, 2, 3, 4, 5], (N mod 2 =:= 0), L, [6, 8]),
 		L == [2, 4, 6, 8].
 
-	test(metapredicates_22) :-
+	test(metapredicates_28) :-
 		obj::op1d(L1d),
 		L1d == [1, 2, 3],
 		obj::op1s(L1s),
@@ -240,19 +338,19 @@
 		obj::op2s(L2s),
 		L2s == [1, 2, 3].
 
-	test(metapredicates_23) :-
+	test(metapredicates_29) :-
 		wrappers_client::p(L),
 		L == [1, 2, 3].
 
-	test(metapredicates_24) :-
+	test(metapredicates_30) :-
 		wrappers_client::q(L),
 		L == [1, 2, 3].
 
-	test(metapredicates_25) :-
+	test(metapredicates_31) :-
 		wrappers_client::r(L),
 		L == [2, 1, 3].
 
-	test(metapredicates_26) :-
+	test(metapredicates_32) :-
 		wrappers_client::s(L),
 		L == [2, 1, 3].
 
