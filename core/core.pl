@@ -4382,7 +4382,7 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	(	'$lgt_execution_context'(ExCtx, _, _, _, _, CallerExCtx-MetaArgs, _),
 		'$lgt_member_var'(Closure, MetaArgs) ->
-		'$lgt_metacall_sender'(Goal, Prefix, ExCtx, CallerExCtx, ExtraArgs)
+		'$lgt_metacall_sender'(Goal, ExCtx, CallerExCtx, ExtraArgs)
 	;	'$lgt_metacall_local'(Goal, Prefix, ExCtx)
 	).
 
@@ -4450,7 +4450,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_metacall'(Goal, Prefix, ExCtx) :-
 	(	'$lgt_execution_context'(ExCtx, _, _, _, _, CallerExCtx-MetaArgs, _),
 		'$lgt_member_var'(Goal, MetaArgs) ->
-		'$lgt_metacall_sender'(Goal, Prefix, ExCtx, CallerExCtx, [])
+		'$lgt_metacall_sender'(Goal, ExCtx, CallerExCtx, [])
 	;	'$lgt_metacall_local'(Goal, Prefix, ExCtx)
 	).
 
@@ -4485,7 +4485,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_quantified_metacall'(QGoal, Goal, Prefix, ExCtx) :-
 	(	'$lgt_execution_context'(ExCtx, _, _, _, _, CallerExCtx-MetaArgs, _),
 		'$lgt_member_var'(QGoal, MetaArgs) ->
-		'$lgt_metacall_sender'(Goal, Prefix, ExCtx, CallerExCtx, [])
+		'$lgt_metacall_sender'(Goal, ExCtx, CallerExCtx, [])
 	;	'$lgt_metacall_local'(Goal, Prefix, ExCtx)
 	).
 
@@ -4535,15 +4535,15 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_metacall_sender'(+callable, +atom, +execution_context, +execution_context, +list)
+% '$lgt_metacall_sender'(+callable, +execution_context, +execution_context, +list)
 %
 % performs a meta-call in "sender" at runtime
 
-'$lgt_metacall_sender'(Pred, Prefix, ExCtx, CallerExCtx, ExtraVars) :-
-	'$lgt_execution_context'(CallerExCtx, CallerEntity, _, _, _, _, _),
+'$lgt_metacall_sender'(Pred, ExCtx, CallerExCtx, ExtraVars) :-
+	'$lgt_execution_context'(CallerExCtx, CallerEntity, Sender, This, Self, _, Stack),
 	(	CallerEntity == user ->
 		catch(Pred, error(Error,_), throw(error(Error, logtalk(call(Pred), CallerEntity))))
-	;	'$lgt_current_object_'(CallerEntity, _, _, Def, _, _, _, _, DDef, _, Flags) ->
+	;	'$lgt_current_object_'(CallerEntity, CallerPrefix, _, Def, _, _, _, _, DDef, _, Flags) ->
 		(	% in the most common case we're meta-calling a user defined static predicate
 			call(Def, Pred, CallerExCtx, TPred) ->
 			call(TPred)
@@ -4551,8 +4551,12 @@ current_logtalk_flag(Flag, Value) :-
 			call(DDef, Pred, CallerExCtx, TPred) ->
 			call(TPred)
 		;	% in the worst case we have a control construct or a built-in predicate
-			'$lgt_execution_context'(ExCtx, Entity, Sender, This, _, _, Stack),
-			'$lgt_comp_ctx'(Ctx, _, Entity, This, Sender, Sender, Prefix, ExtraVars, _, _, runtime, Stack, _),
+			(	ExtraVars == [] ->
+				MetaCallCtx = []
+			;	MetaCallCtx = ExCtx-ExtraVars
+			),
+			'$lgt_execution_context'(NewCallerExCtx, CallerEntity, Sender, This, Self, MetaCallCtx, Stack),
+			'$lgt_comp_ctx'(Ctx, _, CallerEntity, Sender, This, Self, CallerPrefix, ExtraVars, MetaCallCtx, NewCallerExCtx, runtime, Stack, _),
 			catch('$lgt_compile_body'(Pred, TPred, DPred, Ctx), Error, throw(error(Error, logtalk(call(Pred), Sender)))),
 			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
@@ -4560,13 +4564,17 @@ current_logtalk_flag(Flag, Value) :-
 			;	catch(TPred, error(Error,_), throw(error(Error, logtalk(call(Pred), Sender))))
 			)
 		)
-	;	'$lgt_current_category_'(CallerEntity, _, _, Def, _, Flags),
+	;	'$lgt_current_category_'(CallerEntity, CallerPrefix, _, Def, _, Flags),
 		(	% in the most common case we're meta-calling a user defined static predicate
 			call(Def, Pred, CallerExCtx, TPred) ->
 			call(TPred)
 		;	% in the worst case we have a control construct or a built-in predicate
-			'$lgt_execution_context'(ExCtx, Entity, Sender, This, _, _, Stack),
-			'$lgt_comp_ctx'(Ctx, _, Entity, This, Sender, Sender, Prefix, ExtraVars, _, _, runtime, Stack, _),
+			(	ExtraVars == [] ->
+				MetaCallCtx = []
+			;	MetaCallCtx = ExCtx-ExtraVars
+			),
+			'$lgt_execution_context'(NewCallerExCtx, CallerEntity, Sender, This, Self, MetaCallCtx, Stack),
+			'$lgt_comp_ctx'(Ctx, _, CallerEntity, Sender, This, Self, CallerPrefix, ExtraVars, MetaCallCtx, NewCallerExCtx, runtime, Stack, _),
 			catch('$lgt_compile_body'(Pred, TPred, DPred, Ctx), Error, throw(error(Error, logtalk(call(Pred), Sender)))),
 			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
@@ -10513,21 +10521,26 @@ current_logtalk_flag(Flag, Value) :-
 	\+ callable(Pred),
 	throw(type_error(callable, Pred)).
 
-% runtime translation (covers only the common case of calling a user-defined predicate)
+% runtime compilation of a call (usually a meta-call) to a user-defined predicate
+%
+% required to deal with meta-calls instantiated at runtime
 
 '$lgt_compile_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
-	'$lgt_comp_ctx'(Ctx, _, Entity, Sender, This, Self, Prefix, MetaVars, _, ExCtx, runtime, Stack, _),
-	nonvar(This),
+	'$lgt_comp_ctx'(Ctx, _, Entity, Sender, This, Self, _, MetaVars, MetaCallCtx, ExCtx, runtime, Stack, _),
+	nonvar(Entity),
 	% in the most common case, we're meta-calling the predicate
-	'$lgt_execution_context'(ExCtx, Entity, Sender, This, Self, [], Stack),
+	'$lgt_execution_context'(ExCtx, Entity, Sender, This, Self, MetaCallCtx, Stack),
 	(	'$lgt_member_var'(Pred, MetaVars) ->
+		MetaCallCtx = CallerExCtx-_,
 		% goal is a call to a user-defined predicate in sender (i.e. a meta-argument)
-		TPred = '$lgt_metacall_sender'(Pred, Prefix, _, ExCtx, [])
-	;	% goal is a call to a user-defined predicate in this
-		'$lgt_current_object_'(This, _, _, Def, _, _, _, _, DDef, _, _),
+		TPred = '$lgt_metacall_sender'(Pred, ExCtx, CallerExCtx, [])
+	;	% goal is a local call to a user-defined predicate
+		'$lgt_current_object_'(Entity, _, _, Def, _, _, _, _, DDef, _, _) ->
 		(	call(Def, Pred, ExCtx, TPred)
 		;	call(DDef, Pred, ExCtx, TPred)
 		)
+	;	'$lgt_current_category_'(Entity, _, _, Def, _, _),
+		call(Def, Pred, ExCtx, TPred)
 	),
 	!.
 

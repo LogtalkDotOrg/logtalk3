@@ -8,7 +8,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on August 28, 2014
+%  Last updated on August 29, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -118,7 +118,7 @@ user:prolog_predicate_name(user:'$lgt_metacall'(_, _, _, _), 'call/N') :- !.
 user:prolog_predicate_name(user:'$lgt_metacall'(_, _, _), 'call/1') :- !.
 user:prolog_predicate_name(user:'$lgt_quantified_metacall'(_, _, _, _), 'call/1') :- !.
 user:prolog_predicate_name(user:'$lgt_metacall_local'(_, _, _), 'call/1') :- !.
-user:prolog_predicate_name(user:'$lgt_metacall_sender'(_, _, _, _, _), 'call/1') :- !.
+user:prolog_predicate_name(user:'$lgt_metacall_sender'(_, _, _, _), 'call/1') :- !.
 
 user:prolog_predicate_name(user:'$lgt_bagof'(_, _, _, _, _), 'bagof/3') :- !.
 user:prolog_predicate_name(user:'$lgt_setof'(_, _, _, _, _), 'setof/3') :- !.
@@ -366,7 +366,7 @@ user:portray(c(This, Entity, Rest)) :-
 '$lgt_swi_unify_clause_body'(Goal, _, '$lgt_metacall'(Goal, _, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(Goal, _, '$lgt_quantified_metacall'(Goal, _, _, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(Goal, _, '$lgt_metacall_local'(Goal, _, _), TermPos, TermPos) :- !.
-'$lgt_swi_unify_clause_body'(Goal, _, '$lgt_metacall_sender'(Goal, _, _, _, _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(Goal, _, '$lgt_metacall_sender'(Goal, _, _, _), TermPos, TermPos) :- !.
 
 '$lgt_swi_unify_clause_body'(bagof(Term, QGoal, List), _, '$lgt_bagof'(Term, QGoal, List, _, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(bagof(Term, Goal, List), Entity, bagof(Term, TGoal, List), TermPos0, TermPos) :- !,
@@ -595,7 +595,7 @@ user:portray(c(This, Entity, Rest)) :-
 :- '$set_predicate_attribute'('$lgt_metacall'/4, trace, 1).
 :- '$set_predicate_attribute'('$lgt_quantified_metacall'/4, trace, 1).
 :- '$set_predicate_attribute'('$lgt_metacall_local'/3, trace, 1).
-:- '$set_predicate_attribute'('$lgt_metacall_sender'/5, trace, 1).
+:- '$set_predicate_attribute'('$lgt_metacall_sender'/4, trace, 1).
 
 :- '$set_predicate_attribute'('$lgt_expand_term'/5, trace, 1).
 :- '$set_predicate_attribute'('$lgt_expand_goal'/5, trace, 1).
@@ -722,7 +722,7 @@ user:portray(c(This, Entity, Rest)) :-
 
 :- meta_predicate user:'$lgt_metacall'(*,*,*,*).
 :- meta_predicate user:'$lgt_quantified_metacall'(*,*,*,*).
-:- meta_predicate user:'$lgt_metacall_sender'(*,*,*,*,*).
+:- meta_predicate user:'$lgt_metacall_sender'(*,*,*,*).
 :- meta_predicate user:'$lgt_metacall_local'(*,*,*).
 
 :- meta_predicate user:'$user#0.forward#1'(*,*).
