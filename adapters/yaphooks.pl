@@ -43,10 +43,10 @@ user:prolog_predicate_name(user:'$lgt_send_to_self'(_, _, _), '::/1') :- !.
 user:prolog_predicate_name(user:'$lgt_obj_super_call'(_, _, _), '^^/2 (from obj; same pred)') :- !.
 user:prolog_predicate_name(user:'$lgt_ctg_super_call'(_, _, _), '^^/2 (from ctg; same pred)') :- !.
 
-user:prolog_predicate_name(user:'$lgt_metacall'(_, _, _, _), 'call/N') :- !.
-user:prolog_predicate_name(user:'$lgt_metacall'(_, _, _), 'call/1') :- !.
-user:prolog_predicate_name(user:'$lgt_quantified_metacall'(_, _, _, _), 'call/1') :- !.
-user:prolog_predicate_name(user:'$lgt_metacall_local'(_, _, _), 'call/1') :- !.
+user:prolog_predicate_name(user:'$lgt_metacall'(_, _, _), 'call/N') :- !.
+user:prolog_predicate_name(user:'$lgt_metacall'(_, _), 'call/1') :- !.
+user:prolog_predicate_name(user:'$lgt_quantified_metacall'(_, _, _), 'call/1') :- !.
+user:prolog_predicate_name(user:'$lgt_metacall_local'(_, _), 'call/1') :- !.
 user:prolog_predicate_name(user:'$lgt_metacall_sender'(_, _, _, _), 'call/1') :- !.
 
 user:prolog_predicate_name(user:'$lgt_bagof'(_, _, _, _, _), 'bagof/3') :- !.
