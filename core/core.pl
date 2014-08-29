@@ -4552,11 +4552,11 @@ current_logtalk_flag(Flag, Value) :-
 			),
 			'$lgt_execution_context'(NewCallerExCtx, CallerEntity, Sender, This, Self, MetaCallCtx, Stack),
 			'$lgt_comp_ctx'(Ctx, _, CallerEntity, Sender, This, Self, CallerPrefix, ExtraVars, MetaCallCtx, NewCallerExCtx, runtime, Stack, _),
-			catch('$lgt_compile_body'(Pred, TPred, DPred, Ctx), Error, throw(error(Error, logtalk(call(Pred), Sender)))),
+			catch('$lgt_compile_body'(Pred, TPred, DPred, Ctx), Error, throw(error(Error, logtalk(call(Pred), CallerEntity)))),
 			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
-				catch(DPred, error(Error,_), throw(error(Error, logtalk(call(Pred), Sender))))
-			;	catch(TPred, error(Error,_), throw(error(Error, logtalk(call(Pred), Sender))))
+				catch(DPred, error(Error,_), throw(error(Error, logtalk(call(Pred), CallerEntity))))
+			;	catch(TPred, error(Error,_), throw(error(Error, logtalk(call(Pred), CallerEntity))))
 			)
 		)
 	;	'$lgt_current_category_'(CallerEntity, CallerPrefix, _, Def, _, Flags),
@@ -4570,11 +4570,11 @@ current_logtalk_flag(Flag, Value) :-
 			),
 			'$lgt_execution_context'(NewCallerExCtx, CallerEntity, Sender, This, Self, MetaCallCtx, Stack),
 			'$lgt_comp_ctx'(Ctx, _, CallerEntity, Sender, This, Self, CallerPrefix, ExtraVars, MetaCallCtx, NewCallerExCtx, runtime, Stack, _),
-			catch('$lgt_compile_body'(Pred, TPred, DPred, Ctx), Error, throw(error(Error, logtalk(call(Pred), Sender)))),
+			catch('$lgt_compile_body'(Pred, TPred, DPred, Ctx), Error, throw(error(Error, logtalk(call(Pred), CallerEntity)))),
 			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
-				catch(DPred, error(Error,_), throw(error(Error, logtalk(call(Pred), Sender))))
-			;	catch(TPred, error(Error,_), throw(error(Error, logtalk(call(Pred), Sender))))
+				catch(DPred, error(Error,_), throw(error(Error, logtalk(call(Pred), CallerEntity))))
+			;	catch(TPred, error(Error,_), throw(error(Error, logtalk(call(Pred), CallerEntity))))
 			)
 		)
 	).
