@@ -32,8 +32,6 @@
 		diagrams(loader),
 		help(loader),
 		lgtdoc(loader),
-		lgtunit(loader),
-		ports(loader),
-		profiler(loader)
+		lgtunit(loader)
 	])
 )).

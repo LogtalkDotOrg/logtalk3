@@ -21,10 +21,16 @@ Public License 3. Consult the `LICENSE.txt` file for details.
 ________________________________________________________________________
 
 
-This folder contains some useful programming tools. To load all tools,
+This folder contains several useful programming tools. To load the main tools,
 type:
 
 	| ?- logtalk_load(tools(loader)).
+
+The `ports` tool is not loaded by default as it conflicts with the `debugger`
+tool as both provide a debug handler that must be unique in a running session.
+
+The `profiler` tool is also not loaded by default as it provides integration
+with selected backend Prolog compiler profilers that are not portable.
 
 To load a specific tool either change your Prolog working directory
 to the tool folder and then compile and load the corresponding loader 
@@ -60,7 +66,7 @@ and follow these steps:
 
 (2) Load all the tools using the query:
 
-	| ?- {tools(loader)}.
+	| ?- {tools(loader), ports(loader), profiler(loader)}.
 
 (3) Generate the XML documenting files for all loaded tools using the query:
 
