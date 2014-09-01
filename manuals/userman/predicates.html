@@ -444,7 +444,7 @@ A category may only contain clauses for static predicates. Nevertheless, as the 
 <h3 id="predicates_metadef">Meta-predicates</h3>
 
 <p>
-Meta-predicates may be defined inside objects (and categories) as any other predicate. A meta-predicate is declared using the <code>meta_predicate/1</code> directive as described earlier on this section. When defining a meta-predicate, the arguments in the clause heads corresponding to the meta-arguments must be variables. All meta-arguments are called in the context of the object calling the meta-predicate (either directly or through message sending).
+Meta-predicates may be defined inside objects (and categories) as any other predicate. A meta-predicate is declared using the <code>meta_predicate/1</code> directive as described earlier on this section. When defining a meta-predicate, the arguments in the clause heads corresponding to the meta-arguments must be variables. All meta-arguments are called in the context of the entity calling the meta-predicate.
 </p>
 <p>
 Some meta-predicates have meta-arguments which are not goals but closures. Logtalk supports the definition of meta-predicates that are called with closures instead of goals as long as the definition uses the Logtalk built-in predicate <a title="Consult reference manual" href="../refman/methods/call_N.html"><code>call/N</code></a> to call the closure with the additional arguments. For example:
@@ -1014,7 +1014,7 @@ This workaround is sometimes necessary when calling module meta-predicates whose
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: August 29, 2014</span>
+		<span>Last updated on: September 1, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="categories.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="inheritance.html">next</a></span><br/>
