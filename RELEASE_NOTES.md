@@ -101,6 +101,9 @@ Prolog adapter and integration files
 * UPDATED: The SWI-Prolog and YAP adapter files to skip any `encoding/1`
 directive in a Prolog module file when looking for the `module/2` directive.
 
+* IMPROVED: Error normalization for SWI-Prolog for specific cases where the
+caller predicate information is available.
+
 Tools
 -----
 

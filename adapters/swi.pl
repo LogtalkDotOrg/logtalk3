@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SWI Prolog 6.0.0 and later versions
-%  Last updated on August 14, 2014
+%  Last updated on September 1, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -965,10 +965,16 @@ user:goal_expansion('::'(Object, Message), user:Goal) :-
 
 % '$lgt_normalize_error_term'(@callable, -callable)
 
-'$lgt_normalize_error_term'(
-	Error,
-	Error
-).
+'$lgt_normalize_error_term'(Error, NormalizedError) :-
+	(	nonvar(Error),
+		Error = error(ErrorTerm, Context),
+		nonvar(Context),
+		Context = context(TFunctor/TArity, _),
+		'$lgt_decompile_predicate_indicators'(TFunctor/TArity, Entity, _, Functor/Arity),
+		functor(Goal, Functor, Arity) ->
+		NormalizedError = error(ErrorTerm, logtalk(Goal, Entity))
+	;	NormalizedError = Error
+	).	
 
 
 
