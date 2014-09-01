@@ -538,7 +538,11 @@ Obj<<Goal :-
 
 % '$lgt_runtime_error_handler'(@term)
 %
-% top-level runtime error handler; an ugly mess due to the lack of Prolog standardization
+% top-level runtime error handler
+%
+% it tries to decode internal predicate names and deal with the ugly mess that
+% is Prolog error handling due to the lack of standardization by calling an
+% adapter file predicate to try to normalize the error terms
 
 '$lgt_runtime_error_handler'(Variable) :-
 	var(Variable),
@@ -559,6 +563,31 @@ Obj<<Goal :-
 '$lgt_runtime_error_handler'(error(Error, logtalk(Object::Goal, user))) :-
 	Object == user,
 	throw(error(Error, Goal)).
+
+'$lgt_runtime_error_handler'(error(existence_error(goal_thread, '$lgt_send_to_obj_ne_nv'(Self, Goal, ExCtx)), _)) :-
+	'$lgt_execution_context'(ExCtx, _, _, Sender, _, _, _),
+	(	Self == user ->
+		throw(error(existence_error(goal_thread, Goal), logtalk(Goal, Sender)))
+	;	throw(error(existence_error(goal_thread, Self::Goal), logtalk(Self::Goal, Sender)))
+	).
+
+'$lgt_runtime_error_handler'(error(existence_error(goal_thread, '$lgt_send_to_obj_nv'(Self, Goal, ExCtx)), _)) :-
+	'$lgt_execution_context'(ExCtx, _, _, Sender, _, _, _),
+	(	Self == user ->
+		throw(error(existence_error(goal_thread, Goal), logtalk(Goal, Sender)))
+	;	throw(error(existence_error(goal_thread, Self::Goal), logtalk(Self::Goal, Sender)))
+	).
+
+'$lgt_runtime_error_handler'(error(existence_error(goal_thread, TGoal), logtalk(_, Sender))) :-
+	functor(TGoal, TFunctor, TArity),
+	'$lgt_decompile_predicate_indicators'(TFunctor/TArity, _, _, Functor/Arity),
+	functor(Goal, Functor, Arity),
+	'$lgt_unify_head_thead_arguments'(Goal, TGoal, ExCtx),
+	'$lgt_execution_context'(ExCtx, _, _, _, Self, _, _),
+	(	Self == user ->
+		throw(error(existence_error(goal_thread, Goal), logtalk(Goal, Sender)))
+	;	throw(error(existence_error(goal_thread, Self::Goal), logtalk(Self::Goal, Sender)))
+	).
 
 '$lgt_runtime_error_handler'(Error) :-
 	(	'$lgt_normalize_error_term'(Error, NormalizedError) ->
@@ -606,38 +635,6 @@ Obj<<Goal :-
 '$lgt_runtime_normalized_error_handler'(Error) :-
 	throw(Error).
 
-
-/*
-'$lgt_runtime_error_handler'(error(existence_error(goal_thread, '$lgt_send_to_obj_ne_nv'(Self, Goal, Sender)), _)) :-
-	(	Self == user ->
-		throw(error(existence_error(goal_thread, Goal), logtalk(Goal, Sender)))
-	;	throw(error(existence_error(goal_thread, Self::Goal), logtalk(Self::Goal, Sender)))
-	).
-
-'$lgt_runtime_error_handler'(error(existence_error(goal_thread, '$lgt_send_to_obj_nv'(Self, Goal, Sender)), _)) :-
-	(	Self == user ->
-		throw(error(existence_error(goal_thread, Goal), logtalk(Goal, Sender)))
-	;	throw(error(existence_error(goal_thread, Self::Goal), logtalk(Self::Goal, Sender)))
-	).
-
-'$lgt_runtime_error_handler'(error(existence_error(goal_thread, TGoal), _, Sender)) :-
-	functor(TGoal, TFunctor, TArity),
-	'$lgt_decompile_predicate_indicators'(TFunctor/TArity, _, _, Functor/Arity),
-	functor(Goal, Functor, Arity),
-	'$lgt_unify_head_thead_arguments'(Goal, TGoal, ExCtx),
-	'$lgt_execution_context'(ExCtx, _, _, _, Self, _, _),
-	(	Self == user ->
-		throw(error(existence_error(goal_thread, Goal), logtalk(Goal, Sender)))
-	;	throw(error(existence_error(goal_thread, Self::Goal), logtalk(Self::Goal, Sender)))
-	).
-
-'$lgt_runtime_error_handler'(error(Error, Context)) :-	% SWI-Prolog
-	nonvar(Context),
-	Context = context(TFunctor/TArity, _),
-	'$lgt_decompile_predicate_indicators'(TFunctor/TArity, Entity, _, Functor/Arity),
-	functor(Goal, Functor, Arity),
-	throw(error(Error, logtalk(Goal, Entity))).
-*/
 
 
 
