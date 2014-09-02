@@ -54,7 +54,8 @@
 	'$lgt_db_lookup_cache_'/5,
 	'$lgt_hook_term_expansion_'/2, '$lgt_hook_goal_expansion_'/2,
 	'$lgt_dynamic_entity_counter_'/3, '$lgt_threaded_tag_counter_'/1,
-	'$lgt_metacall'/2, '$lgt_metacall'/3
+	'$lgt_metacall'/2, '$lgt_metacall'/3, '$lgt_quantified_metacall'/4,
+	'$lgt_metacall_local'/3, '$lgt_metacall_sender'/4
 )).
 
 % the following index/1 directives may or may not improve performance
