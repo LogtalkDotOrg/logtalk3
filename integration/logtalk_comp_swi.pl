@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Integration file for SWI-Prolog
-%  Last updated on April 29, 2014
+%  Last updated on September 2, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -38,15 +38,15 @@
 	'$lgt_implements_protocol_'/3, '$lgt_imports_category_'/3, '$lgt_instantiates_class_'/3, 
 	'$lgt_specializes_class_'/3, '$lgt_extends_category_'/3, '$lgt_extends_object_'/3,
 	'$lgt_extends_protocol_'/3, '$lgt_complemented_object_'/5,
-	'$lgt_loaded_file_'/7, '$lgt_parent_file_'/2, '$lgt_file_loading_stack_'/1,
+	'$lgt_loaded_file_'/7, '$lgt_failed_file_'/1, '$lgt_parent_file_'/2, '$lgt_file_loading_stack_'/1,
 	'$lgt_compiler_flag'/2, '$lgt_default_flag'/2, '$lgt_current_flag_'/2, '$lgt_pp_compiler_flag_'/2,
 	'$lgt_prolog_feature'/2,
-	'$lgt_execution_context'/6, '$lgt_goal_meta_variables'/3,
-	'$lgt_send_to_obj_rt'/5,
+	'$lgt_execution_context'/7, '$lgt_goal_meta_call_context'/5,
+	'$lgt_send_to_obj_rt'/4,
 	'$lgt_send_to_self_nv'/3,
 	'$lgt_send_to_self'/3, '$lgt_send_to_self_'/3,
 	'$lgt_send_to_obj'/3, '$lgt_send_to_obj_'/3,
-	'$lgt_send_to_obj_nv'/3,
+	'$lgt_send_to_obj_nv'/3, '$lgt_send_to_obj_nv_inner'/4,
 	'$lgt_send_to_obj_ne_nv'/3,
 	'$lgt_send_to_obj_ne'/3, '$lgt_send_to_obj_ne_'/3,
 	'$lgt_obj_super_call'/3, '$lgt_obj_super_call_'/3,
@@ -54,7 +54,7 @@
 	'$lgt_db_lookup_cache_'/5,
 	'$lgt_hook_term_expansion_'/2, '$lgt_hook_goal_expansion_'/2,
 	'$lgt_dynamic_entity_counter_'/3, '$lgt_threaded_tag_counter_'/1,
-	'$lgt_metacall'/6, '$lgt_metacall'/7
+	'$lgt_metacall'/2, '$lgt_metacall'/3
 )).
 
 % the following index/1 directives may or may not improve performance
