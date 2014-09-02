@@ -109,6 +109,9 @@ with listings of Logtalk compiled code.
 * IMPROVED: Error normalization for SWI-Prolog for specific cases where the
 caller predicate information is available.
 
+* UPDATED: Removed redundant `thread_shared/1` directives from the XSB MT
+integration files.
+
 Tools
 -----
 
