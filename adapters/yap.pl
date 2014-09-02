@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for YAP Prolog 6.3.4 and later versions
-%  Last updated on August 14, 2014
+%  Last updated on September 2, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -26,6 +26,7 @@
 
 
 :- no_source.
+:- set_prolog_flag(generate_debug_info, false).
 
 
 :- initialization((
@@ -55,8 +56,11 @@
 		dynamic('$lgt_extends_category_'/3), hide_predicate('$lgt_extends_category_'/3),
 		dynamic('$lgt_complemented_object_'/4), hide_predicate('$lgt_complemented_object_'/4),
 		dynamic('$lgt_loaded_file_'/7), hide_predicate('$lgt_loaded_file_'/7),
+		dynamic('$lgt_failed_file_'/1), hide_predicate('$lgt_failed_file_'/1),
 		dynamic('$lgt_parent_file_'/2), hide_predicate('$lgt_parent_file_'/2),
 		dynamic('$lgt_file_loading_stack_'/1), hide_predicate('$lgt_file_loading_stack_'/1),
+		dynamic('$lgt_built_in_entities_loaded_'/0), hide_predicate('$lgt_built_in_entities_loaded_'/0),
+		dynamic('$lgt_dynamic_entity_counter_'/3), hide_predicate('$lgt_dynamic_entity_counter_'/3),
 		dynamic('$lgt_current_flag_'/2), hide_predicate('$lgt_current_flag_'/2),
 		dynamic('$lgt_send_to_obj_static_binding_cache_'/4), hide_predicate('$lgt_send_to_obj_static_binding_cache_'/4),
 		dynamic('$lgt_pp_warnings_top_goal_directory_'/2), hide_predicate('$lgt_pp_warnings_top_goal_directory_'/2),
@@ -154,9 +158,9 @@
 	'$lgt_predicate_property'(Pred, Prop) :-
 		current_prolog_flag(autoload, Value),
 		setup_call_cleanup(
-				set_prolog_flag(autoload, false),
-				predicate_property(Pred, Prop),
-				set_prolog_flag(autoload, Value)
+			set_prolog_flag(autoload, false),
+			predicate_property(Pred, Prop),
+			set_prolog_flag(autoload, Value)
 		).
 :- endif.
 
@@ -372,7 +376,7 @@
 '$lgt_default_flag'(debug, off).
 % Prolog compiler and loader flags:
 '$lgt_default_flag'(prolog_compiler, []).
-'$lgt_default_flag'(prolog_loader, [silent(true)]).
+'$lgt_default_flag'(prolog_loader, [silent(true), compilation_mode(compact)]).
 
 
 
