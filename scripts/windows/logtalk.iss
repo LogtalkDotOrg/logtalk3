@@ -9,7 +9,7 @@
 ; terms per section 7).        Consult the `LICENSE.txt` file for details.
 
 #define MyAppName "Logtalk"
-#define MyAppCopyright "Copyright Â© 1998-2014 Paulo Moura"
+#define MyAppCopyright "Copyright © 1998-2014 Paulo Moura"
 #define MyAppPublisher "Logtalk.org"
 #define MyAppURL "http://logtalk.org"
 #define MyAppUrlName "Logtalk Web Site.url"
