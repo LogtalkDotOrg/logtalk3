@@ -361,8 +361,6 @@ begin
 end;
 
 function QuintusExePath: String;
-var
-  SP_PATH: String;
 begin
   if FileExists(ExpandConstant('{pf}') + '\Quintus Prolog 3.5\bin\ix86\qpwin.exe') then
     Result := ExpandConstant('{pf}') + '\Quintus Prolog 3.5\bin\ix86\qpwin.exe'
