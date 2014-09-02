@@ -2,13 +2,14 @@
 ; Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 ; 
 ; Logtalk Inno Setup script for generating Windows installers
-; Last updated on August 29, 2014
+; Last updated on September 2, 2014
 ; 
 ; Logtalk is free software. You can redistribute it and/or modify it under
 ; the terms of the FSF GNU General Public License 3  (plus some additional
 ; terms per section 7).        Consult the `LICENSE.txt` file for details.
 
 #define MyAppName "Logtalk"
+#define MyAppCopyright "Copyright © 1998-2014 Paulo Moura"
 #define MyAppPublisher "Logtalk.org"
 #define MyAppURL "http://logtalk.org"
 #define MyAppUrlName "Logtalk Web Site.url"
@@ -21,6 +22,7 @@
 [Setup]
 AppName={#MyAppName}
 AppVerName={#MyAppName} {#MyAppVer}
+AppCopyright={#MyAppCopyright}
 AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
@@ -39,7 +41,6 @@ SolidCompression=yes
 PrivilegesRequired=none
 
 VersionInfoTextVersion={#MyAppVer}
-VersionInfoCopyright=© Paulo Moura, Copyright (c) 1998-2014
 
 AllowRootDirectory=yes
 UninstallFilesDir="{userdocs}\Logtalk uninstaller"
@@ -80,7 +81,7 @@ Name: shortcut; Description: "&Create a desktop shortcut to the Logtalk user fol
 Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Messages]
-BeveledLabel={#MyAppName} {#MyAppVer} © Paulo Moura, Copyright (c) 1998-2014
+BeveledLabel={#MyAppName} {#MyAppVer} {#MyAppCopyright}
 
 [Dirs]
 Name: {code:GetLgtUserDir}; Components: user; Flags: uninsneveruninstall
