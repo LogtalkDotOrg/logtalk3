@@ -26,6 +26,10 @@ be loaded by typing:
 
 	| ?- logtalk_load(debugger(loader)).
 
+Note that this tool cannot be loaded at the same time as other tools (e.g.
+the ports profiler) that also provide a debug handler, which must be unique
+in a running session.
+
 Debugging Logtalk source code (with this debugger) requires compiling
 source files using the `debug(on)` compiler option. For example:
 

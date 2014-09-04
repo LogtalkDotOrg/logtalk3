@@ -32,6 +32,10 @@ the query:
 
 	| ?- logtalk_load(ports(loader)).
 
+Note that this tool cannot be loaded at the same time as other tools (e.g.
+the debugger) that also provide a debug handler, which must be unique in a
+running session.
+
 The Logtalk predicate execution box model is an extended version of the
 original Byrd’s four port model. Besides the `call`, `exit`, `fail`, and
 `redo` ports, Logtalk also defines two (post-)unification ports, `fact`
