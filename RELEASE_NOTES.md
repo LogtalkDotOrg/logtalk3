@@ -28,7 +28,16 @@ RELEASE NOTES
 3.00.0 Release Candidate 2 - September ??, 2014
 ===============================================
 
+Logtalk compiler and runtime
+----------------------------
 
+* CHANGED: Reverted the restriction of primary multifile predicate declarations
+to objects. Parallel changes to the implicit predicate execution context make
+this restriction no longer necessary for type-correctness of the execution
+context arguments.
+
+* IMPROVED: Detect and report attempts to declare multifile predicates in
+protocols.
 
 
 3.00.0 Release Candidate 1 - September 3, 2014

@@ -7699,6 +7699,10 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_compile_multifile_directive'(+list, +compilation_context)
 %
 % auxiliary predicate for compiling multifile/1 directives
+%
+% when the multifile predicate (or non-terminal) is declared for the module
+% "user", the module prefix is removed to ensure code portability when using
+% backend Prolog compilers without a module system
 
 '$lgt_compile_multifile_directive'([Resource| Resources], Ctx) :-
 	'$lgt_compile_multifile_directive_resource'(Resource, Ctx),
@@ -7756,25 +7760,29 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_multifile_directive_resource'(Pred, Ctx) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
-	'$lgt_comp_ctx_position'(Ctx, Lines),
-	functor(Head, Functor, Arity),
-	assertz('$lgt_pp_multifile_'(Head, Lines)),
-	(	'$lgt_pp_entity_'(object, _, Prefix, _, _),
+	'$lgt_pp_entity_'(Kind, _, Prefix, _, _),
+	(	Kind == protocol ->
+		% protocols cannot contain predicate definitions
+		throw(permission_error(declare, multifile, Functor/Arity))
+	;	functor(Head, Functor, Arity),
+		'$lgt_comp_ctx_position'(Ctx, Lines),
+		assertz('$lgt_pp_multifile_'(Head, Lines)),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity)))
-	;	throw(permission_error(declare, multifile, Functor/Arity))
 	).
 
 '$lgt_compile_multifile_directive_resource'(NonTerminal, Ctx) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, Arity, ExtArity),
 	!,
-	'$lgt_comp_ctx_position'(Ctx, Lines),
-	functor(Head, Functor, ExtArity),
-	assertz('$lgt_pp_multifile_'(Head, Lines)),
-	(	'$lgt_pp_entity_'(object, _, Prefix, _, _),
+	'$lgt_pp_entity_'(Kind, _, Prefix, _, _),
+	(	Kind == protocol ->
+		% protocols cannot contain non-terminal definitions
+		throw(permission_error(declare, multifile, Functor//Arity))
+	;	functor(Head, Functor, ExtArity),
+		'$lgt_comp_ctx_position'(Ctx, Lines),
+		assertz('$lgt_pp_multifile_'(Head, Lines)),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity)))
-	;	throw(permission_error(declare, multifile, Functor//Arity))
 	).
 
 '$lgt_compile_multifile_directive_resource'(Resource, _) :-

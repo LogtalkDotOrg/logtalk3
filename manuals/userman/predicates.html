@@ -324,7 +324,7 @@ A predicate can be declared <em>multifile</em> by using the <a title="Consult re
 </p>
 <pre>:- multifile(Functor/Arity).</pre>
 <p>
-This allows clauses for a predicate to be defined in several objects or categories. This is a directive that should be used with care. Support for this directive have been added to Logtalk primarily to support migration of Prolog module code. Spreading clauses for a predicate among several Logtalk entities can be handy in some cases but can also make your code difficult to understand. Logtalk precludes using a multifile predicate for breaking object encapsulation by checking that the object declaring the predicate (using a <code>public/1</code> scope directive) defines it also as multifile. This object is said to contain the <em>primary declaration</em> for the multifile predicate. In addition, note that the <code>multifile/1</code> directive is mandatory when defining multifile predicates.
+This allows clauses for a predicate to be defined in several objects and/or categories. This is a directive that should be used with care. Support for this directive have been added to Logtalk primarily to support migration of Prolog module code. Spreading clauses for a predicate among several Logtalk entities can be handy in some cases but can also make your code difficult to understand. Logtalk precludes using a multifile predicate for breaking object encapsulation by checking that the object (or category) declaring the predicate (using a <code>public/1</code> scope directive) defines it also as multifile. This entity is said to contain the <em>primary declaration</em> for the multifile predicate. In addition, note that the <code>multifile/1</code> directive is mandatory when defining multifile predicates.
 </p>
 <p>
 Consider the following simple example:
@@ -367,16 +367,11 @@ X = 4
 yes
 </pre>
 <p>
-The Logtalk compiler will print a warning if the <code>multifile/1</code> directive is missing. Multifile predicates may also be declared dynamic using the same <code>Entity::Functor/Arity</code> notation (multifile predicates are static by default).
+Entities containing primary multifile predicate declarations must always be compiled before entities defining clauses for those multifile predicates. The Logtalk compiler will print a warning if the <code>multifile/1</code> directive is missing. Multifile predicates may also be declared dynamic using the same <code>Entity::Functor/Arity</code> notation (multifile predicates are static by default).
 </p>
 <p>
-When a clause of a multifile predicate is a rule, its body is compiled within the context of the object or category containing the clause. This allows clauses for multifile predicates to call local object or category predicates. A consequence of this semantics is that calls to the <code>sender/1</code>, <code>this/1</code>, and <code>self/1</code> execution context methods from the body of a multifile predicate clause will return the entity containing the clause, not the entity for which the clause is defined. Note, however, that a call to the <code>this/1</code> or <code>parameter/2</code> execution context methods is unable to retrieve parameters of the entity containing the clause as access to the clause is made from within the entity for which the clause is defined. The simple solution is to use unification at the clause head. For example:
+When a clause of a multifile predicate is a rule, its body is compiled within the context of the object or category containing the clause. This allows clauses for multifile predicates to call local object or category predicates. But the values of the <em>sender</em>, <em>this</em>, and <em>self</em> in the implicit execution context are passed from the clause head to the clause body. As a consequence, a call to the <code>this/1</code> or <code>parameter/2</code> execution context methods is unable to retrieve parameters of the entity defining the clause as access to the clause is made from within the entity for which the clause is defined. A workaround is to call an auxiliary predicate to access the parameters of the entity defining the clause.
 </p>
-<pre>
-:- multifile(main(_)::a/1).
-main(Parameter)::a(Parameter, X) :-
-    ...
-</pre>
 
 <h3 id="predicates_coinductive">Coinductive directive</h3>
 
@@ -1014,7 +1009,7 @@ This workaround is sometimes necessary when calling module meta-predicates whose
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: September 1, 2014</span>
+		<span>Last updated on: September 4, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="categories.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="inheritance.html">next</a></span><br/>

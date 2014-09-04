@@ -12,8 +12,10 @@
 :- initialization((
 	set_logtalk_flag(report, warnings),
 	logtalk_load(lgtunit(loader)),
-	logtalk_load(multifile_test_entities),
-	logtalk_load(multifile_test_other),
+	% entities containing primary declarations of multifile predicate must be compiled ...
+	logtalk_load(multifile_primary_entities),
+	% ... before entities defining clauses for those multifile predicates
+	logtalk_load(multifile_other_entities),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run
 )).

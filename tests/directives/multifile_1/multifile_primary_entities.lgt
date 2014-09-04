@@ -10,7 +10,7 @@
 
 
 
-:- object(multifile_test_object).
+:- object(multifile_primary_object).
 
 	:- public(m1/1).
 	:- multifile(m1/1).
@@ -27,9 +27,32 @@
 
 
 
-:- object(multifile_test_object(_)).
+:- object(multifile_primary_object(_)).
 
 	:- public(a/2).
 	:- multifile(a/2).
 
 :- end_object.
+
+
+
+:- category(multifile_primary_category).
+
+	:- public(n1/1).
+	:- multifile(n1/1).
+	n1(1).
+	n1(2).
+
+	:- public(n2/1).
+	:- multifile(n2/1).
+
+:- end_category.
+
+
+
+:- category(multifile_primary_category(_)).
+
+	:- public(b/2).
+	:- multifile(b/2).
+
+:- end_category.
