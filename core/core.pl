@@ -7718,7 +7718,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	Entity == user ->
 		assertz('$lgt_pp_directive_'(multifile(Functor/Arity)))
 	;	functor(Template, Functor, Arity),
-		'$lgt_check_for_public_multifile_declaration'(Entity, Template) ->
+		'$lgt_check_primary_multifile_declaration'(Entity, Template) ->
 		'$lgt_entity_to_prefix'(Entity, Prefix),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity)))
@@ -7732,7 +7732,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	Entity == user ->
 		assertz('$lgt_pp_directive_'(multifile(Functor/ExtArity)))
 	;	functor(Template, Functor, ExtArity),
-		'$lgt_check_for_public_multifile_declaration'(Entity, Template) ->
+		'$lgt_check_primary_multifile_declaration'(Entity, Template) ->
 		'$lgt_entity_to_prefix'(Entity, Prefix),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity)))
@@ -7793,13 +7793,12 @@ current_logtalk_flag(Flag, Value) :-
 	throw(instantiation_error).
 
 
-'$lgt_check_for_public_multifile_declaration'(Entity, Pred) :-
+'$lgt_check_primary_multifile_declaration'(Entity, Pred) :-
+	% the object or categry holding the primary declaration must be loaded
 	(	'$lgt_current_object_'(Entity, _, Dcl, _, _, _, _, _, _, _, _)
-	;	'$lgt_current_protocol_'(Entity, _, Dcl, _, _)
 	;	'$lgt_current_category_'(Entity, _, Dcl, _, _, _)
-	),
-	!,
-	% predicate must be declared public and multifile
+	), !,
+	% the predicate must be declared both public and multifile
 	(	call(Dcl, Pred, p(p(p)), _, Flags) ->
 		Flags /\ 16 =:= 16
 	;	fail
