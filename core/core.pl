@@ -7652,9 +7652,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_valid_meta_predicate_template'(Meta),
 	!,
 	'$lgt_must_be'(entity_identifier, Entity),
-	Meta =.. [Functor| Args],
-	'$lgt_compile_meta_non_terminal_directive_args'(Args, ExtendedArgs),
-	ExtendedMeta =.. [Functor| ExtendedArgs],
+	'$lgt_extend_meta_non_terminal_template'(Meta, ExtendedMeta),
 	'$lgt_term_template'(ExtendedMeta, Template),
 	assertz('$lgt_pp_meta_predicate_'(Entity::Template, Entity::ExtendedMeta)).
 
@@ -7662,18 +7660,14 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_valid_meta_predicate_template'(Meta),
 	!,
 	'$lgt_must_be'(module_identifier, Module),
-	Meta =.. [Functor| Args],
-	'$lgt_compile_meta_non_terminal_directive_args'(Args, ExtendedArgs),
-	ExtendedMeta =.. [Functor| ExtendedArgs],
+	'$lgt_extend_meta_non_terminal_template'(Meta, ExtendedMeta),
 	'$lgt_term_template'(ExtendedMeta, Template),
 	assertz('$lgt_pp_meta_predicate_'(':'(Module, Template), ':'(Module, ExtendedMeta))).
 
 '$lgt_compile_meta_non_terminal_directive_resource'(Meta) :-
 	'$lgt_valid_meta_predicate_template'(Meta),
 	!,
-	Meta =.. [Functor| Args],
-	'$lgt_compile_meta_non_terminal_directive_args'(Args, ExtendedArgs),
-	ExtendedMeta =.. [Functor| ExtendedArgs],
+	'$lgt_extend_meta_non_terminal_template'(Meta, ExtendedMeta),
 	'$lgt_term_template'(ExtendedMeta, Template),
 	assertz('$lgt_pp_meta_predicate_'(Template, ExtendedMeta)).
 
@@ -7683,6 +7677,12 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_meta_non_terminal_directive_resource'(_) :-
 	throw(instantiation_error).
+
+
+'$lgt_extend_meta_non_terminal_template'(Meta, ExtendedMeta) :-
+	Meta =.. [Functor| Args],
+	'$lgt_compile_meta_non_terminal_directive_args'(Args, ExtendedArgs),
+	ExtendedMeta =.. [Functor| ExtendedArgs].
 
 
 '$lgt_compile_meta_non_terminal_directive_args'([], [*, *]).
