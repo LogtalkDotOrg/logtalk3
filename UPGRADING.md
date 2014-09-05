@@ -149,7 +149,9 @@ messages.
 Meta-arguments are now always called with the meta-predicate caller full
 execution context. In addition, when calling a meta-predicate from within
 a category, meta-arguments are called in the context of the category instead
-of the context of the object importing the category.
+of the context of the object importing the category. This allows moving code
+that calls meta-predicates between objects and categories without requiring
+changes.
 
 
 Reflection support

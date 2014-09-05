@@ -35,10 +35,7 @@
 <h1 id="categories_categories">Categories</h1>
 
 <p>
-Categories are fine-grained units of code reuse and can be regarded as a dual concept of protocols. Categories provide a way to encapsulate a set of related predicate declarations and definitions that do not represent an object and that only make sense when composed with other predicates. Categories may also be used to break a complex object in functional units. A category can be imported by several objects (without code duplication), including objects participating in prototype or class-based hierarchies. This concept of categories shares some ideas with Smalltalk-80 functional categories <a href="../bibliography.html#Goldberg83">[Goldberg 83]</a>, Flavors mix-ins <a href="../bibliography.html#Moon86">[Moon 86]</a> (without necessarily implying multi-inheritance) and Objective-C categories <a href="../bibliography.html#Cox86">[Cox 86]</a>. Categories may also <em>complement</em> existing objects, thus providing a hot patching mechanism inspired by Objective-C categories functionality.
-</p>
-<p>
-There are no pre-defined categories in Logtalk.
+Categories are fine-grained units of code reuse and can be regarded as a dual concept of protocols. Categories provide a way to encapsulate a set of related predicate declarations and definitions that do not represent a complete object and that only make sense when composed with other predicates. Categories may also be used to break a complex object in functional units. A category can be imported by several objects (without code duplication), including objects participating in prototype or class-based hierarchies. This concept of categories shares some ideas with Smalltalk-80 functional categories <a href="../bibliography.html#Goldberg83">[Goldberg 83]</a>, Flavors mix-ins <a href="../bibliography.html#Moon86">[Moon 86]</a> (without necessarily implying multi-inheritance), and Objective-C categories <a href="../bibliography.html#Cox86">[Cox 86]</a>. Categories may also <em>complement</em> existing objects, thus providing a hot patching mechanism inspired by the Objective-C categories functionality.
 </p>
 
 <h2 id="categories_defining">Defining a new category</h2>
@@ -88,7 +85,7 @@ When using static binding for a message sent to a <em>complemented</em> object, 
 </p>
 -->
 <p>
-Categories cannot inherit from objects. In addition, categories cannot contain clauses for dynamic predicates. This restriction applies because a category can be imported by several objects and because we cannot use the database handling built-in methods with categories (messages can only be sent to objects). However, categories may contain declarations for dynamic predicates and they can contain predicates which handle dynamic predicates. For example:
+Categories cannot inherit from objects. In addition, categories cannot define clauses for dynamic predicates. This restriction applies because a category can be imported by several objects and because we cannot use the database handling built-in methods with categories (messages can only be sent to objects). However, categories may contain declarations for dynamic predicates and they can contain predicates which handle dynamic predicates. For example:
 </p>
 <pre>:- category(attributes).
 
@@ -135,12 +132,6 @@ Each object importing this category will have its own <code>attribute_/2</code> 
 :- end_category.</pre>
 <p>
 When defining a category that declares and handles dynamic predicates, working in the context of <em>this</em> ties those dynamic predicates to the object importing the category while working in the context of <em>self</em> allows each object inheriting from the object that imports the category to have its own set of clauses for those dynamic predicates.
-</p>
-
-<h2 id="categories_meta_predicates">Calling built-in meta-predicates within categories</h2>
-
-<p>
-The meta-arguments of built-in meta-predicates are called either in <em><a class="glossary" title="Go to glossary definition" href="../../glossary.html#this">this</a></em> or in <em><a class="glossary" title="Go to glossary definition" href="../../glossary.html#sender">sender</a></em>, depending on the possible specification as a meta-predicate of the predicate making the call. In the case of a category, <em>this</em> refers to the object importing the category, not to the category itself. In order to use built-in meta-predicates to call local category predicates, the meta-arguments must be instantiated at compile time, otherwise the meta-calls will be made in the context of <em>this</em>.
 </p>
 
 <h2 id="categories_finding">Finding defined categories</h2>
@@ -397,7 +388,7 @@ Note that access to category parameters is only possible using the <code>paramet
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: June 5, 2014</span>
+		<span>Last updated on: September 5, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="protocols.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="predicates.html">next</a></span><br/>
