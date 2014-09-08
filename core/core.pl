@@ -3480,10 +3480,10 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_phrase'(GRBody, Input, ExCtx) :-
 	'$lgt_execution_context'(ExCtx, Entity, Sender, This, Self, _, _),
-	'$lgt_must_be'(callable, GRBody, logtalk(This::phrase(GRBody, Input), Sender)),
+	'$lgt_must_be'(callable, GRBody, logtalk(phrase(GRBody, Input), Entity)),
 	'$lgt_current_object_'(This, Prefix, _, _, _, _, _, _, _, _, Flags),
 	'$lgt_comp_ctx'(Ctx, _, Entity, Sender, This, Self, Prefix, [], _, ExCtx, runtime, _, _),
-	'$lgt_dcg_body'(GRBody, S0, S, Pred, Ctx),
+	catch('$lgt_dcg_body'(GRBody, S0, S, Pred, Ctx), Error, throw(error(Error, logtalk(phrase(GRBody, Input), Entity)))),
 	'$lgt_compile_body'(Pred, TPred, DPred, Ctx),
 	Input = S0, [] = S,
 	(	Flags /\ 512 =:= 512 ->
@@ -3500,10 +3500,10 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_phrase'(GRBody, Input, Rest, ExCtx) :-
 	'$lgt_execution_context'(ExCtx, Entity, Sender, This, Self, _, _),
-	'$lgt_must_be'(callable, GRBody, logtalk(This::phrase(GRBody, Input, Rest), Sender)),
+	'$lgt_must_be'(callable, GRBody, logtalk(phrase(GRBody, Input, Rest), Entity)),
 	'$lgt_current_object_'(This, Prefix, _, _, _, _, _, _, _, _, Flags),
 	'$lgt_comp_ctx'(Ctx, _, Entity, Sender, This, Self, Prefix, [], _, ExCtx, runtime, _, _),
-	'$lgt_dcg_body'(GRBody, S0, S, Pred, Ctx),
+	catch('$lgt_dcg_body'(GRBody, S0, S, Pred, Ctx), Error, throw(error(Error, logtalk(phrase(GRBody, Input, Rest), Entity)))),
 	'$lgt_compile_body'(Pred, TPred, DPred, Ctx),
 	Input = S0, Rest = S,
 	(	Flags /\ 512 =:= 512 ->

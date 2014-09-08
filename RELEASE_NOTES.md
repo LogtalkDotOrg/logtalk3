@@ -42,6 +42,10 @@ context arguments.
 * IMPROVED: Detect and report attempts to declare multifile predicates in
 protocols.
 
+* FIXED: Cases where runtime calls to the `phrase/2-3` built-in methods where
+the first argument is only know at runtime could result in exceptions missing
+the `error/2` wrapper with the its context argument.
+
 Documentation
 -------------
 
