@@ -121,7 +121,7 @@
 	logtalk::message_tokens(intermediate_files_deleted, core) -->
 		['Deleted all intermediate files for the loaded Logtalk source files'-[], nl].
 
-	% Logtalk startup messages
+	% startup messages
 
 	logtalk::message_tokens(possibly_incompatible_prolog_version(Current, Compatible), core) -->
 		['Possibly incompatible backend Prolog compiler version detected!'-[], nl,

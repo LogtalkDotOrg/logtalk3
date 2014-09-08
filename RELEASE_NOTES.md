@@ -31,6 +31,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: Only type-check the list arguments of the `phrase/2-3` built-in
+methods at compile time to avoid performance penalties at runtime.
+
 * CHANGED: Reverted the restriction of primary multifile predicate declarations
 to objects. Parallel changes to the implicit predicate execution context make
 this restriction no longer necessary for type-correctness of the execution
@@ -38,6 +41,11 @@ context arguments.
 
 * IMPROVED: Detect and report attempts to declare multifile predicates in
 protocols.
+
+Documentation
+-------------
+
+* IMPROVED: Documentation of the `phrase/2-3` built-in methods.
 
 
 3.00.0 Release Candidate 1 - September 3, 2014

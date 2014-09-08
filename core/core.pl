@@ -3476,12 +3476,11 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_phrase'(+grbody, ?list, +execution_context)
 %
-% phrase/2 built-in method
+% phrase/2 built-in method implementation for calls where the first argument is only known at runtime
 
 '$lgt_phrase'(GRBody, Input, ExCtx) :-
 	'$lgt_execution_context'(ExCtx, Entity, Sender, This, Self, _, _),
 	'$lgt_must_be'(callable, GRBody, logtalk(This::phrase(GRBody, Input), Sender)),
-%	'$lgt_must_be'(list_or_partial_list, Input, logtalk(This::phrase(GRBody, Input), Sender)),
 	'$lgt_current_object_'(This, Prefix, _, _, _, _, _, _, _, _, Flags),
 	'$lgt_comp_ctx'(Ctx, _, Entity, Sender, This, Self, Prefix, [], _, ExCtx, runtime, _, _),
 	'$lgt_dcg_body'(GRBody, S0, S, Pred, Ctx),
@@ -3497,13 +3496,11 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_phrase'(+grbody, ?list, ?list, +execution_context)
 %
-% phrase/3 built-in method
+% phrase/3 built-in method implementation for calls where the first argument is only known at runtime
 
 '$lgt_phrase'(GRBody, Input, Rest, ExCtx) :-
 	'$lgt_execution_context'(ExCtx, Entity, Sender, This, Self, _, _),
 	'$lgt_must_be'(callable, GRBody, logtalk(This::phrase(GRBody, Input, Rest), Sender)),
-%	'$lgt_must_be'(list_or_partial_list, Input, logtalk(This::phrase(GRBody, Input, Rest), Sender)),
-%	'$lgt_must_be'(list_or_partial_list, Rest, logtalk(This::phrase(GRBody, Input, Rest), Sender)),
 	'$lgt_current_object_'(This, Prefix, _, _, _, _, _, _, _, _, Flags),
 	'$lgt_comp_ctx'(Ctx, _, Entity, Sender, This, Self, Prefix, [], _, ExCtx, runtime, _, _),
 	'$lgt_dcg_body'(GRBody, S0, S, Pred, Ctx),
@@ -10012,15 +10009,15 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_body'(phrase(GRBody, Input), TPred, '$lgt_debug'(goal(phrase(GRBody, Input), TPred), ExCtx), Ctx) :-
 	var(GRBody),
 	!,
-%	'$lgt_must_be'(list_or_partial_list, Input),
+	'$lgt_must_be'(list_or_partial_list, Input),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	TPred = '$lgt_phrase'(GRBody, Input, ExCtx).
 
 '$lgt_compile_body'(phrase(GRBody, Input), TPred, '$lgt_debug'(goal(phrase(GRBody, Input), DPred), ExCtx), Ctx) :-
 	!,
-	% the '$lgt_dcg_body'/5 already checks that the grammar rule body is callable
+	% the '$lgt_dcg_body'/5 predicate already checks that the grammar rule body is callable
 	'$lgt_dcg_body'(GRBody, S0, S, Pred, Ctx),
-%	'$lgt_must_be'(list_or_partial_list, Input),
+	'$lgt_must_be'(list_or_partial_list, Input),
 	TPred = (Input = S0, [] = S, TPred0),
 	DPred = (Input = S0, [] = S, DPred0),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
@@ -10029,17 +10026,17 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_body'(phrase(GRBody, Input, Rest), TPred, '$lgt_debug'(goal(phrase(GRBody, Input, Rest), TPred), ExCtx), Ctx) :-
 	var(GRBody),
 	!,
-%	'$lgt_must_be'(list_or_partial_list, Input),
-%	'$lgt_must_be'(list_or_partial_list, Rest),
+	'$lgt_must_be'(list_or_partial_list, Input),
+	'$lgt_must_be'(list_or_partial_list, Rest),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	TPred = '$lgt_phrase'(GRBody, Input, Rest, ExCtx).
 
 '$lgt_compile_body'(phrase(GRBody, Input, Rest), TPred, '$lgt_debug'(goal(phrase(GRBody, Input, Rest), DPred), ExCtx), Ctx) :-
 	!,
-	% the '$lgt_dcg_body'/5 already checks that the grammar rule body is callable
+	% the '$lgt_dcg_body'/5 predicate already checks that the grammar rule body is callable
 	'$lgt_dcg_body'(GRBody, S0, S, Pred, Ctx),
-%	'$lgt_must_be'(list_or_partial_list, Input),
-%	'$lgt_must_be'(list_or_partial_list, Rest),
+	'$lgt_must_be'(list_or_partial_list, Input),
+	'$lgt_must_be'(list_or_partial_list, Rest),
 	TPred = (Input = S0, Rest = S, TPred0),
 	DPred = (Input = S0, Rest = S, DPred0),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
