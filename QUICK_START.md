@@ -109,17 +109,20 @@ support files for popular text editors which enable syntax coloring and
 other text services when editing Logtalk source files. There's also
 support for syntax highlighters used for publishing source code.
 
-4. Create a directory with a suitable name to hold all the files of your
+4. The `tools` directory contains a comprehensive set of developer tools
+to help you test, debug, analyze, and document your applications.
+
+5. Create a directory with a suitable name to hold all the files of your
 application. 
 
-5. Copy to this directory the `settings-sample.lgt` file, rename it
+6. Copy to this directory the `settings-sample.lgt` file, rename it
 to  `settings.lgt`, and modify it to define a library alias for your
 application directory and for defining global compiler options (see
 the file `CUSTOMIZE.md` for details).
 
-6. Copy to this directory the `loader-sample.lgt` file, rename it to 
+7. Copy to this directory the `loader-sample.lgt` file, rename it to 
 `loader.lgt`, and modify it to load your application source files. You
 may also copy the `tester-sample.lgt` file, renaming it to `tester.lgt`,
 and editing it to run your application unit tests.
 
-7. Have fun!
+8. Have fun!
