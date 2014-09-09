@@ -51,6 +51,12 @@ Documentation
 
 * IMPROVED: Documentation of the `phrase/2-3` built-in methods.
 
+Tools
+-----
+
+* FIXED: The `lgtunit` tool is now able to term-expand all valid syntaxes for
+the `discontiguous/1` directive.
+
 
 3.00.0 Release Candidate 1 - September 3, 2014
 ==============================================

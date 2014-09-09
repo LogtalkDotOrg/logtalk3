@@ -30,7 +30,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/08/14,
+		date is 2014/09/09,
 		comment is 'A simple unit test framework featuring predicate clause coverage.'
 	]).
 
@@ -333,16 +333,13 @@
 
 	% the discontiguous/1 directives usually required when using some of the
 	% unit tests idioms are no longer necessary after term-expanding them 
-	term_expansion((:- discontiguous(Functor/Arity)), []) :-
-		(	Functor/Arity == (-)/1
-		;	Functor/Arity == test/2
-		;	Functor/Arity == test/1
-		;	Functor/Arity == succeeds/1
-		;	Functor/Arity == deterministic/1
-		;	Functor/Arity == fails/1
-		;	Functor/Arity == throws/2
-		),
-		!.
+	term_expansion((:- discontiguous(PI)), Expansion) :-
+		ground(PI),
+		filter_discontiguous_directive(PI, Filtered),
+		(	Filtered == [] ->
+			Expansion = []
+		;	Expansion = (:- discontiguous(Filtered))
+		).
 
 	% skipped tests
 	term_expansion((- Head :- _), []) :-
@@ -398,6 +395,29 @@
 
 	% support the deprecated unit/1 predicate which may still be in use in old code
 	term_expansion(unit(Entity), [cover(Entity)]).
+
+	filter_discontiguous_directive((PI,PIs), Filtered) :-
+		filter_discontiguous_directive(PI, FilteredHead),
+		filter_discontiguous_directive(PIs, FilteredTail),
+		append(FilteredHead, FilteredTail, Filtered).
+	filter_discontiguous_directive([], []).
+	filter_discontiguous_directive([PI| PIs], Filtered) :-
+		filter_discontiguous_directive(PI, FilteredHead),
+		filter_discontiguous_directive(PIs, FilteredTail),
+		append(FilteredHead, FilteredTail, Filtered).
+	filter_discontiguous_directive(Functor/Arity, Filtered) :-
+		(	ignorable_discontiguous_predicate(Functor/Arity) ->
+			Filtered = []
+		;	Filtered = Functor/Arity
+		).
+
+	ignorable_discontiguous_predicate((-)/1).
+	ignorable_discontiguous_predicate(test/2).
+	ignorable_discontiguous_predicate(test/1).
+	ignorable_discontiguous_predicate(succeeds/1).
+	ignorable_discontiguous_predicate(deterministic/1).
+	ignorable_discontiguous_predicate(fails/1).
+	ignorable_discontiguous_predicate(throws/2).
 
 	convert_test_outcome(true, Goal, true, Goal).
 	convert_test_outcome(true(Test), Goal, true, (Goal, Test)).
@@ -650,6 +670,10 @@
 
 	% auxiliary predicates; we could use the Logtalk standard library but we
 	% prefer to make this object self-contained given its testing purpose
+
+	append([], List, List).
+	append([Head| Tail], List, [Head| Tail2]) :-
+		append(Tail, List, Tail2).
 
 	length(List, Length) :-
 		length(List, 0, Length).
