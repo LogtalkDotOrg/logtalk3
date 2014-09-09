@@ -57,6 +57,12 @@ Tools
 * FIXED: The `lgtunit` tool is now able to term-expand all valid syntaxes for
 the `discontiguous/1` directive.
 
+Tests
+-----
+
+* FIXED: Updated the unit tests for the conditional compilation directives to
+avoid a clash with a Lean Prolog built-in predicate.
+
 
 3.00.0 Release Candidate 1 - September 3, 2014
 ==============================================

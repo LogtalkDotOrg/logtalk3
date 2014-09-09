@@ -10,147 +10,147 @@
 
 
 % tests of if/1...endif/0
-a(0).
+aa(0).
 
 :- if(true).
-	a(1).
+	aa(1).
 :- endif.
 
 :- if(fail).
-	a(2).
+	aa(2).
 :- endif.
 
 % tests of if/1...else/0...endif/0
-b(0).
+bb(0).
 
 :- if(true).
-	b(1).
+	bb(1).
 :- else.
-	b(2).
+	bb(2).
 :- endif.
 
 :- if(fail).
-	b(3).
+	bb(3).
 :- else.
-	b(4).
+	bb(4).
 :- endif.
 
 % tests of if/1...elif/1...else/0...endif/0
-c(0).
+cc(0).
 
 :- if(true).
-	c(1).
+	cc(1).
 :- elif(true).
-	c(2).
+	cc(2).
 :- else.
-	c(3).
+	cc(3).
 :- endif.
 
-c(4).
+cc(4).
 
 :- if(fail).
-	c(5).
+	cc(5).
 :- elif(true).
-	c(6).
+	cc(6).
 :- else.
-	c(7).
+	cc(7).
 :- endif.
 
-c(8).
+cc(8).
 
 :- if(fail).
-	c(9).
+	cc(9).
 :- elif(fail).
-	c(10).
+	cc(10).
 :- else.
-	c(11).
+	cc(11).
 :- endif.
 
-c(12).
+cc(12).
 
 :- if(fail).
-	c(13).
+	cc(13).
 :- elif(fail).
-	c(14).
+	cc(14).
 :- elif(true).
-	c(15).
+	cc(15).
 :- else.
-	c(16).
+	cc(16).
 :- endif.
 
 % tests of if/1...if/1...endif/0
-d(0).
+dd(0).
 
 :- if(true).
 
-	d(1).
+	dd(1).
 	:- if(true).
-		d(2).
+		dd(2).
 	:- endif.
 
-	d(3).
+	dd(3).
 	:- if(fail).
-		d(4).
+		dd(4).
 	:- endif.
 
-	d(5).
+	dd(5).
 	:- if(true).
-		d(6).
+		dd(6).
 	:- else.
-		d(7).
+		dd(7).
 	:- endif.
 
-	d(8).
+	dd(8).
 	:- if(fail).
-		d(9).
+		dd(9).
 	:- else.
-		d(10).
+		dd(10).
 	:- endif.
 
-	d(11).
+	dd(11).
 
 :- else.
 
-	d(12).
+	dd(12).
 
 :- endif.
 
 % tests of if/1...elif/1...endif/0
-e(0).
+ee(0).
 
 :- if(fail).
 
-	e(1).
+	ee(1).
 	:- if(true).
-		e(2).
+		ee(2).
 	:- endif.
 
-	e(3).
+	ee(3).
 	:- if(fail).
-		e(4).
+		ee(4).
 	:- else.
-		e(5).
+		ee(5).
 	:- endif.
 
-	e(6).
+	ee(6).
 	:- if(fail).
-		e(7).
+		ee(7).
 	:- elif(true).
-		e(8).
+		ee(8).
 	:- else.
-		e(9).
+		ee(9).
 	:- endif.
 
-	e(10).
+	ee(10).
 
 :- elif(fail).
 
-	e(11).
+	ee(11).
 
 :- else.
 
-	e(12).
+	ee(12).
 
 :- endif.
 
-z(0).
+zz(0).

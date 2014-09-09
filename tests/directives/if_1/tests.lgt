@@ -15,58 +15,58 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/05/19,
+		date is 2014/09/09,
 		comment is 'Unit tests for the if/1 and other conditional compilation built-in directives.'
 	]).
 
-	:- uses(user, [a/1, b/1, c/1, d/1, e/1, z/1]).
+	:- uses(user, [aa/1, bb/1, cc/1, dd/1, ee/1, zz/1]).
 
 	test(if_endif_0) :-
-		a(0).
+		aa(0).
 	test(if_endif_1) :-
-		a(1).
+		aa(1).
 	test(if_endif_2) :-
-		\+ a(2).
+		\+ aa(2).
 
 	test(if_else_endif_0) :-
-		b(0).
+		bb(0).
 	test(if_else_endif_1) :-
-		b(1), \+ b(2).
+		bb(1), \+ bb(2).
 	test(if_else_endif_2) :-
-		\+ b(3), b(4).
+		\+ bb(3), bb(4).
 
 	test(if_elif_else_endif_0) :-
-		c(0).
+		cc(0).
 	test(if_elif_else_endif_1) :-
-		c(1), \+ c(2), \+ c(3).
+		cc(1), \+ cc(2), \+ cc(3).
 	test(if_elif_else_endif_2) :-
-		c(4), \+ c(5), c(6), \+ c(7).
+		cc(4), \+ cc(5), cc(6), \+ cc(7).
 	test(if_elif_else_endif_3) :-
-		c(8), \+ c(9), \+ c(10), c(11).
+		cc(8), \+ cc(9), \+ cc(10), cc(11).
 	test(if_elif_else_endif_4) :-
-		c(12), \+ c(13), \+ c(14), c(15), \+ c(16).
+		cc(12), \+ cc(13), \+ cc(14), cc(15), \+ cc(16).
 
 	test(if_if_endif_0) :-
-		d(0).
+		dd(0).
 	test(if_if_endif_1) :-
-		d(1), d(2),
-		d(3), \+ d(4), 
-		d(5), d(6), \+ d(7),
-		d(8), \+ d(9), d(10),
-		d(11),
-		\+ d(12).
+		dd(1), dd(2),
+		dd(3), \+ dd(4), 
+		dd(5), dd(6), \+ dd(7),
+		dd(8), \+ dd(9), dd(10),
+		dd(11),
+		\+ dd(12).
 
 	test(if_elif_endif_0) :-
-		e(0).
+		ee(0).
 	test(if_elif_endif_1) :-
-		\+ e(1), \+ e(2),
-		\+ e(3), \+ e(4), \+ e(5),
-		\+ e(6), \+ e(7), \+ e(8), \+ e(9),
-		\+ e(10),
-		\+ e(11),
-		e(12).
+		\+ ee(1), \+ ee(2),
+		\+ ee(3), \+ ee(4), \+ ee(5),
+		\+ ee(6), \+ ee(7), \+ ee(8), \+ ee(9),
+		\+ ee(10),
+		\+ ee(11),
+		ee(12).
 
 	test(if_end_of_file_0) :-
-		z(0).
+		zz(0).
 
 :- end_object.
