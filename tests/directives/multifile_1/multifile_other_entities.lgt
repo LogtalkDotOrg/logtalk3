@@ -14,6 +14,7 @@
 	imports(multifile_primary_category)).
 
 	:- multifile(multifile_primary_object::m2/1).
+	:- dynamic(multifile_primary_object::m2/1).
 	multifile_primary_object::m2(4).
 	multifile_primary_object::m2(5).
 
