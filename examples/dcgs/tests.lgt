@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.5,
+		version is 1.6,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2013/11/23,
+		date is 2014/09/10,
 		comment is 'Unit tests for the "dcgs" example.'
 	]).
 
@@ -131,23 +131,27 @@
 		Input == [1,2,3], Rest == [2,3].
 
 	test(dcgs_25) :-
+		logtalk << phrase(call({Rest}/[_,Rest]>>true), [1,2,3], [2,3]),
+		Rest == [2,3].
+
+	test(dcgs_26) :-
 		logtalk << phrase(call({Element}/[[Element|_],_]>>true), [1,2,3], [2,3]),
 		Element == 1.
 
 	% cuts in the first argument of phrase/2-3 calls must be local and not extend outside:
 
-	test(dcgs_26) :-
+	test(dcgs_27) :-
 		findall(X, (list::member(X, [1,2,3]), logtalk << phrase(!, _)), Xs),
 		Xs == [1,2,3].
 
-	test(dcgs_27) :-
+	test(dcgs_28) :-
 		findall(X, (list::member(X, [1,2,3]), logtalk << phrase(!, _, _)), Xs),
 		Xs == [1,2,3].
 
-	test(dcgs_28) :-
+	test(dcgs_29) :-
 		client::print.
 
-	test(dcgs_29) :-
+	test(dcgs_30) :-
 		client::successors([1,2,3], Successors),
 		Successors == [2,3,4].
 
