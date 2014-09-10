@@ -20,17 +20,21 @@ and the Pygments license.
 In order to check if your Pygments installation already includes support 
 for Logtalk, use the following command:
 
-	% pygmentize -H lexer logtalk
+	$ pygmentize -H lexer Logtalk
 
-If support for Logtalk is not included or if it is outdated, compile the 
-file `logtalk.py` into a `logtalk.pyc` byte code file and copy the two 
-files into the folder:
+If support for Logtalk is not included or if it is outdated, first compile
+the file `logtalk.py` into a `logtalk.pyc` byte code file:
+
+	$ python -m py_compile logtalk.py 
+
+Second, copy the two files into the folder (its prefix depends on where
+Python is installed):
 
 	site-packages/pygments/lexers/
 
-Next, rebuild the lexer mappings by typing:
+Finally, rebuild the lexer mappings by typing:
 
-	% python _mapping.py
+	$ python _mapping.py
 
 Logtalk source files (including the library entities and the programming
 examples) are formatted using tabs (the recommended setting is a tab width
