@@ -41,12 +41,12 @@ examples) are formatted using tabs (the recommended setting is a tab width
 equivalent to 4 spaces). This can be specified by using the `whitespace`
 filter option `tabsize`:
 
-	$ pygmentize -F whitespace:tabs=True,tabsize=4 -O full,style=friendly -o source.html source.lgt
+	$ pygmentize -F whitespace:tabsize=4 -O full,style=friendly -o source.html source.lgt
 
 When your source file uses an encoding other than ASCII or ISO-Latin-1, 
 you will need to use the `encoding` option. For example:
 
-	$ pygmentize -F whitespace:tabs=True,tabsize=4 -O encoding=utf8 -o babel.html babel.lgt
+	$ pygmentize -F whitespace:tabsize=4 -O encoding=utf8 -o babel.html babel.lgt
 
 As the Pygments syntax highlighting engine itself, the `logtalk.py` file 
 is licensed under the BSD license.
