@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SWI Prolog 6.0.0 and later versions
-%  Last updated on September 1, 2014
+%  Last updated on September 11, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -857,10 +857,10 @@ user:goal_expansion('::'(Object, Message), user:Goal) :-
 	'$lgt_swi_write_hide_directive'(Stream, Dcl/4),
 	'$lgt_swi_write_hide_directive'(Stream, Dcl/6),
 	'$lgt_swi_write_hide_directive'(Stream, Def/3),
-	'$lgt_swi_write_hide_directive'(Stream, Def/4),
-	'$lgt_swi_write_hide_directive'(Stream, Super/4),
+	'$lgt_swi_write_hide_directive'(Stream, Def/5),
+	'$lgt_swi_write_hide_directive'(Stream, Super/5),
 	'$lgt_swi_write_hide_directive'(Stream, IDcl/6),
-	'$lgt_swi_write_hide_directive'(Stream, IDef/4),
+	'$lgt_swi_write_hide_directive'(Stream, IDef/5),
 	'$lgt_swi_write_hide_directive'(Stream, DDcl/2),
 	'$lgt_swi_write_hide_directive'(Stream, DDef/3),
 	'$lgt_swi_write_hide_directive'(Stream, Rnm/3),
@@ -872,6 +872,7 @@ user:goal_expansion('::'(Object, Message), user:Goal) :-
 	'$lgt_swi_write_hide_directive'(Stream, Dcl/4),
 	'$lgt_swi_write_hide_directive'(Stream, Dcl/5),
 	'$lgt_swi_write_hide_directive'(Stream, Def/3),
+	'$lgt_swi_write_hide_directive'(Stream, Def/4),
 	'$lgt_swi_write_hide_directive'(Stream, Rnm/3),
 	write_canonical(Stream, '$source_location'(File,Line):'$lgt_current_category_'(Ctg, Prefix, Dcl, Def, Rnm, Flags)),
 	write(Stream, '.\n').
@@ -917,10 +918,10 @@ user:goal_expansion('::'(Object, Message), user:Goal) :-
 	'$hide'(user:Dcl/4),
 	'$hide'(user:Dcl/6),
 	'$hide'(user:Def/3),
-	'$hide'(user:Def/4),
-	'$hide'(user:Super/4),
+	'$hide'(user:Def/5),
+	'$hide'(user:Super/5),
 	'$hide'(user:IDcl/6),
-	'$hide'(user:IDef/4),
+	'$hide'(user:IDef/5),
 	'$hide'(user:DDcl/2),
 	'$hide'(user:DDef/3),
 	'$hide'(user:Rnm/3),
@@ -931,6 +932,7 @@ user:goal_expansion('::'(Object, Message), user:Goal) :-
 	'$hide'(user:Dcl/4),
 	'$hide'(user:Dcl/5),
 	'$hide'(user:Def/3),
+	'$hide'(user:Def/4),
 	'$hide'(user:Rnm/3),
 	assertz('$lgt_current_category_'(Ctg, Prefix, Dcl, Def, Rnm, Flags)).
 
