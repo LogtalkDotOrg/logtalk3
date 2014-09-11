@@ -13,24 +13,23 @@ coloring support for Pygments (version 0.9 or later):
 
 	http://pygments.org/
 
-
 This support file is dual-licensed under the GNU General Public License 3
 and the Pygments license.
 
-In order to check if your Pygments installation already includes support 
-for Logtalk, use the following command:
+Pygments includes support for Logtalk since version 0.10 as you can check using
+the command:
 
 	$ pygmentize -H lexer Logtalk
 
-If support for Logtalk is not included or if it is outdated, first compile
-the file `logtalk.py` into a `logtalk.pyc` byte code file:
+If support for Logtalk is outdated, replace its definition in the following file
+(its prefix depends on where Python is installed):
 
-	$ python -m py_compile logtalk.py 
+	site-packages/pygments/lexers/other.py
 
-Second, copy the two files into the folder (its prefix depends on where
-Python is installed):
+with the contents of the `logtalk.py` from the Logtalk distribution and compile
+the updated file:
 
-	site-packages/pygments/lexers/
+	$ python -m py_compile other.py	
 
 Finally, rebuild the lexer mappings by typing:
 
@@ -54,4 +53,4 @@ is licensed under the BSD license.
 You may also use the Logtalk lexer with plain Prolog files by using the `-l` 
 option. For example:
 
-	$ pygmentize -l logtalk -F whitespace:tabs=True,tabsize=4 -o source.html source.pl
+	$ pygmentize -l logtalk -O full,style=friendly -o source.html source.pl
