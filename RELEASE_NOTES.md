@@ -66,7 +66,9 @@ avoid a clash with a Lean Prolog built-in predicate.
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
-* FIXED: Missing Pygments syntax coloring of the `module/2` opening directive.
+* FIXED: Missing Pygments syntax coloring of the `module/2` opening directive,
+instructions to use the Logtalk lexer with Prolog files, and instructions for
+updating outdated Logtalk lexer support in a Pygments installation.
 
 
 3.00.0 Release Candidate 1 - September 3, 2014
