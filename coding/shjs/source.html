@@ -423,5 +423,16 @@ comment
 
 
 :- end_protocol.
+
+
+:- module(module, [foo/1, bar/2]).
+
+:- use_module(library).
+:- use_module(library, [baz/3]).
+
+:- reexport(library).
+:- reexport(library, [qux/4]).
+
+:- export(quux/5).
 </pre>
 </body>
