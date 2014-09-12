@@ -8,7 +8,7 @@ terms per section 7).        Consult the `LICENSE.txt` file for details.
 ________________________________________________________________________
 
 
-This directory contains a "logtalk.el" file that provides syntax 
+This directory contains a `logtalk.el` file that provides syntax 
 highlighting for editing Logtalk source files with the Emacs text 
 editor:
 
@@ -19,5 +19,5 @@ License 3 and the Emacs license.
 
 To install follow the instructions contained in the file itself.
 
-
-THIS FONT-LOCK CONFIGURATION FILE IS UNDER DEVELOPMENT.
+Emacs regular expressions don't support look-ahead assertions, which
+result is syntax coloring errors in valid code such as the `0'"` term.
