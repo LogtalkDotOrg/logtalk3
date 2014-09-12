@@ -17,14 +17,15 @@ Sublime Text (version 1.03 or later) supports TextMate syntax files and
 TextMate snippets (version 1.2 or later). See the `../textmate` folder
 and the Sublime Text documentation for more information.
 
-For basic installation follow the steps:
+For basic installation, copy the following files to the Sublime Text Packages
+directory at `~/Library/Application Support/Sublime Text 2/Packages/Logtalk/`
+(create the `Logtalk` subdirectory if it doesn't exist):
 
-1. Copy the file `../textmate2/Logtalk.tmbundle/Syntaxes/logtalk.plist` to the
-`~/Library/Application Support/Sublime Text 2/Packages/Logtalk/` directory
-(create the `Logtalk` subdirectory if it doesn't exist).
+1. File `../textmate2/Logtalk.tmbundle/Syntaxes/logtalk.plist`
 
-2. Copy the files in the `../textmate2/Logtalk.tmbundle/Snippets` directory to
-the `~/Library/Application Support/Sublime Text 2/Packages/Logtalk/` directory.
+2. All files in the `../textmate2/Logtalk.tmbundle/Snippets` directory
+
+3. File `logtalk.sublime-completions`
 
 Logtalk source files (including the library entities and the programming
 examples) are formatted using tabs (the recommended setting is a tab width
