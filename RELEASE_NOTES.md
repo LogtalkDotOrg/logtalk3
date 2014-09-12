@@ -66,6 +66,9 @@ avoid a clash with a Lean Prolog built-in predicate.
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
+* UPDATED: Instruction to add support for syntax coloring and code snippets to
+the Sublime Text text editor.
+
 * FIXED: Missing Pygments syntax coloring of the `module/2` opening directive,
 instructions to use the Logtalk lexer with Prolog files, and instructions for
 updating outdated Logtalk lexer support in a Pygments installation.
