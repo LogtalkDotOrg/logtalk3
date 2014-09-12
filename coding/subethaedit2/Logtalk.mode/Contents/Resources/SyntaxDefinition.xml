@@ -96,7 +96,7 @@
 				<regex>\b(subsumes_term)\(</regex>
 				<regex>\b(unify_with_occurs_check)\(</regex>
 				<!-- Term testing -->
-				<regex>\b(atom(ic)?)\(</regex>
+				<regex>\b(atom(?:ic)?)\(</regex>
 				<regex>\b(integer)\(</regex>
 				<regex>\b(float)\(</regex>
 				<regex>\b(c(?:allable|ompound))\(</regex>

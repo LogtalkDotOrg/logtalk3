@@ -70,6 +70,8 @@ IDEs, text editors, and syntax highlighters support
 instructions to use the Logtalk lexer with Prolog files, and instructions for
 updating outdated Logtalk lexer support in a Pygments installation.
 
+* FIXED: SubEthaEdit 2.x syntax coloring of the standard `atomic/1` predicate.
+
 
 3.00.0 Release Candidate 1 - September 3, 2014
 ==============================================
