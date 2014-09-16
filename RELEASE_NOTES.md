@@ -72,7 +72,10 @@ code snippets.
 
 * FIXED: Missing Pygments syntax coloring of the `module/2` opening directive,
 instructions to use the Logtalk lexer with Prolog files, and instructions for
-updating outdated Logtalk lexer support in a Pygments installation.
+updating outdated Logtalk lexer support in a Pygments installation. Also
+updated the `analyze_text()` function to be less broad and for programming
+style, plus the number classifications to be more specific (after feedback
+from Georg Brandl and David Corbett, Pygments developers).
 
 * FIXED: SubEthaEdit 2.x syntax coloring of the standard `atomic/1` predicate.
 
