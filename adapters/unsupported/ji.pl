@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for JIProlog 3.1.0-1 or later versions
-%  Last updated on June 12, 2014
+%  Last updated on September 16, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -46,8 +46,15 @@ initialization(Goal) :-
 %
 % table of definition for missing ISO predicates
 
-'$lgt_iso_predicate'(_) :-			% remove this clause if you need 
-	fail.							% to define any ISO predicate
+'$lgt_iso_predicate'(sub_atom(_,_,_,_,_)).
+
+sub_atom(Atom, Before, Length, After, SubAtom) :-
+	% just an hack!
+	atom_concat(Prefix, Suffix, Atom),
+	atom_concat(BeforeAtom, SubAtom, Prefix),
+	atom_length(SubAtom, Length),
+	atom_length(BeforeAtom, Before),
+	atom_length(Suffix, After).
 
 
 
@@ -290,8 +297,7 @@ format(Format, Arguments) :-
 %
 % expands a file path to a full path
 
-'$lgt_expand_path'(_, _) :-
-	fail.
+'$lgt_expand_path'(Path, Path).
 
 
 % '$lgt_file_exists'(+atom)
@@ -374,32 +380,36 @@ format(Format, Arguments) :-
 %
 % access to operating-system environment variables
 
-'$lgt_environment_variable'(_, _) :-
-	fail.
+'$lgt_environment_variable'(Variable, Value) :-
+	invoke('java.lang.System', getenv('java.lang.String'), [Variable], Value).
 
 
 % '$lgt_startup_directory'(-atom)
 %
 % returns the Logtalk startup directory 
 
-'$lgt_startup_directory'(_) :-
-	fail.
+'$lgt_startup_directory'(Directory) :-
+	(	invoke('java.lang.System', getenv('java.lang.String'), ['LOGTALK_STARTUP_DIRECTORY'], Directory),
+		Directory \== '' ->
+		true
+	;	working_directory(Directory, Directory)
+	).
 
 
 % '$lgt_user_directory'(-atom)
 %
 % returns the Logtalk user directory; fails if unknown
 
-'$lgt_user_directory'(_) :-
-	fail.
+'$lgt_user_directory'(Directory) :-
+	invoke('java.lang.System', getenv('java.lang.String'), ['LOGTALKUSER'], Directory).
 
 
 % '$lgt_home_directory'(-atom)
 %
 % returns the Logtalk home directory; fails if unknown
 
-'$lgt_home_directory'(_) :-
-	fail.
+'$lgt_home_directory'(Directory) :-
+	invoke('java.lang.System', getenv('java.lang.String'), ['LOGTALKHOME'], Directory).
 
 
 
@@ -466,9 +476,9 @@ format(Format, Arguments) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_read_term'(@stream, -term, +list, -position)
+% '$lgt_read_term'(@stream, -term, +list, -position, -list)
 
-'$lgt_read_term'(Stream, Term, Options, '-'(-1, -1)) :-
+'$lgt_read_term'(Stream, Term, Options, '-'(-1, -1), []) :-
 	read_term(Stream, Term, Options).
 
 
