@@ -115,7 +115,7 @@ Before converting your modules to objects, you may try to compile them first as 
 <h2 id="migration_compiling">Compiling Prolog modules as objects</h2>
 
 <p>
-An alternative to convert Prolog modules into objects is to just compile the modules as objects. This has the advantage of requiring little if any code changes that don't prevent still using the code as a Prolog module. However, this is only possible for modules containing only predicates clauses and Logtalk supported directives (see below). Assuming that is the case, you may compile a Prolog module as an object by changing the source file name extension to <code>.lgt</code> and then using the <a title="Consult user manual" href="../userman/programming.html#compiling"><code>logtalk_load/1-2</code></a> and <a title="Consult user manual" href="../userman/programming.html#compiling"><code>logtalk_compile/1-2</code></a> predicates (set the Logtalk <code>portability</code> flag set to <code>warning</code> to help you catch any unnoticed cross-module predicate calls). This allows you to reuse existing module code as objects. However, there are some limitations that you should be aware. These limitations are a consequence of the lack of standardization of Prolog module systems.
+An alternative to convert Prolog modules into objects is to just compile the Prolog source files using the <a title="Consult user manual" href="../userman/programming.html#compiling"><code>logtalk_load/1-2</code></a> and <a title="Consult user manual" href="../userman/programming.html#compiling"><code>logtalk_compile/1-2</code></a> predicates (set the Logtalk <code>portability</code> flag set to <code>warning</code> to help you catch any unnoticed cross-module predicate calls). This allows you to reuse existing module code as objects. This has the advantage of requiring little if any code changes. There are, however, some limitations that you must be aware. These limitations are a consequence of the lack of standardization of Prolog module systems.
 </p>
 
 <h3 id="migration_compatibility">Supported module directives</h3>
@@ -159,15 +159,6 @@ The <code>reexport/1</code> and <code>use_module/1</code> directives are not dir
 </p>
 <p>
 Although Logtalk supports term and goal expansion mechanisms, the semantics are different from similar mechanisms found in some Prolog compilers. In particular, Logtalk does not support defining term and goal expansions clauses in a source file for expanding the source file itself. Logtalk forces a clean separation between expansions clauses and the source files that will be subject to source-to-source expansions by using <a href="../glossary.html#hook"><em>hook objects</em></a>.
-</p>
-<p>
-Changing the extension of a module source file to <code>.lgt</code> in order to be able to compile it as Logtalk source file is not always feasible. An alternative is to create symbolic links or shortcuts for the module files using <code>*.lgt</code> names. In addition, for avoiding conflicts between the Logtalk generated Prolog files and the module files, create the links on a different directory and add a library entry for the directory using the predicate <a title="Consult reference manual" href="../refman/predicates/logtalk_library_path_2.html"><code>logtalk_library_path/2</code></a>. For example, on a POSIX operating-system with <code>library/*.pl</code> module source file names, the links can be easily created by running the following bash shell commands:
-</p>
-<pre>$ mkdir lgtlib
-$ cd lgtlib
-$ for i in ../library/*.pl; do ln -sf $i `basename $i .pl`.lgt; done</pre>
-<p>
-The symbolic links or shortcuts can also be easily created on most operating-systems using the GUI tools. 
 </p>
 
 
@@ -270,7 +261,7 @@ The Logtalk compiler will print a warning if the <code>multifile/1</code> direct
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: September 8, 2014</span>
+		<span>Last updated on: September 17, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="programming.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="index.html">next</a></span><br/>

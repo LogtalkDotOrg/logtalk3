@@ -5163,6 +5163,9 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_file_extension'(logtalk, Extension) ->
 		% declared extension for this type of file is present
 		atom_concat(Name, Extension, Basename)
+	;	'$lgt_file_extension'(prolog, Extension) ->
+		% assume Prolog file reinterpreted as a Logtalk file
+		atom_concat(Name, Extension, Basename)
 	;	% declared extension for this type of file is missing
 		'$lgt_file_extension'(logtalk, TypeExtension),
 		% simply add the missing extension
@@ -5197,6 +5200,14 @@ current_logtalk_flag(Flag, Value) :-
 	(	'$lgt_file_extension'(logtalk, Extension) ->
 		% we're simply replacing the extension (e.g. 'file.lgt' -> 'file.pl')
 		atom_concat(Name, TypeExtension, Basename)
+	;	'$lgt_file_extension'(prolog, Extension) ->
+		% assume Prolog file reinterpreted as a Logtalk file; add a '.plgt' token
+		% before the type extension to ensure different names between source and
+		% target files as may be saving the target file in the same directory
+		% (we cannot simply add the type exntension as for Prolog files that might
+		% result in loading failures)
+		atom_concat(Name, '.plgt', Basename0),
+		atom_concat(Basename0, TypeExtension, Basename)
 	;	% assume that the original file name didn't contain a true extension
 		% (which we know is missing) but have one or more '.' in its name
 		atom_concat(Name, Extension, Basename0),

@@ -39,6 +39,10 @@ to objects. Parallel changes to the implicit predicate execution context make
 this restriction no longer necessary for type-correctness of the execution
 context arguments.
 
+* ADDED: Support for compiling Prolog source files as Logtalk source files
+using the `logtalk_compile/1-2` and `logtalk_load/1-2` built-in predicates.
+The files must be specified with a Prolog extension to avoid ambiguities.
+
 * IMPROVED: Detect and report attempts to declare multifile predicates in
 protocols.
 
