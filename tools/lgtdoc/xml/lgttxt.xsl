@@ -156,7 +156,7 @@
 
 
 <xsl:template match="logtalk/relations/provides" priority="1">
-	<xsl:value-of select="$tab" /><xsl:value-of select="name" /><xsl:value-of select="$nl" />
+	<xsl:value-of select="$tab" /><xsl:value-of select="to" />::<xsl:value-of select="resource" /><xsl:value-of select="$nl" />
 </xsl:template>
 
 

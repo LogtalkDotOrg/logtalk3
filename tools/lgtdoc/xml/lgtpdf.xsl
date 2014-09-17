@@ -374,7 +374,7 @@
 			font-size="9pt"
 			font-family="monospace"
 			margin-left="10mm">
-		<xsl:value-of select="name"/>
+		<xsl:value-of select="to"/>::<xsl:value-of select="resource" />
 	</fo:block>
 </xsl:template>
 

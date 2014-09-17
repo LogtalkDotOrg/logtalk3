@@ -220,6 +220,12 @@
 				<ref name="specializes"/>
 			</zeroOrMore>
 			<zeroOrMore>
+				<ref name="complements"/>
+			</zeroOrMore>
+			<zeroOrMore>
+				<ref name="provides"/>
+			</zeroOrMore>
+			<zeroOrMore>
 				<ref name="uses"/>
 			</zeroOrMore>
 			<zeroOrMore>
@@ -267,6 +273,21 @@
 		<element name="specializes">
 			<ref name="name"/>
 			<ref name="scope"/>
+			<ref name="file"/>
+		</element>
+	</define>
+
+	<define name="complements">
+		<element name="complements">
+			<ref name="name"/>
+			<ref name="file"/>
+		</element>
+	</define>
+
+	<define name="provides">
+		<element name="provides">
+			<ref name="to"/>
+			<ref name="resource"/>
 			<ref name="file"/>
 		</element>
 	</define>

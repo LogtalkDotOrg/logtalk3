@@ -177,7 +177,7 @@
 
 
 <xsl:template match="logtalk/relations/provides" priority="1">
-	<dd class ="value"><code><a href="{file}.html"><xsl:value-of select="name" /></a></code></dd>
+	<dd class ="value"><code><a href="{file}.html#{resource}"><xsl:value-of select="to" />::<xsl:value-of select="resource" /></a></code></dd>
 </xsl:template>
 
 

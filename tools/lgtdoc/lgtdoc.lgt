@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/07/07,
+		date is 2014/09/17,
 		comment is 'Documenting tool.',
 		remarks is [
 			'Compiling files for generating XML documentation' - 'All source files must be compiled with the "source_data" compiler flag turned on.',
@@ -871,63 +871,63 @@
 
 	write_xml_object_relations(Stream, Entity) :-
 		implements_protocol(Entity, Protocol, Scope),
-			write_xml_relation(Stream, Entity, Protocol, implements, Scope),
+			write_xml_entity_relation(Stream, Entity, Protocol, implements, Scope),
 		fail.
 	write_xml_object_relations(Stream, Entity) :-
 		imports_category(Entity, Category, Scope),
-			write_xml_relation(Stream, Entity, Category, imports, Scope),
+			write_xml_entity_relation(Stream, Entity, Category, imports, Scope),
 		fail.
 	write_xml_object_relations(Stream, Entity) :-
 		extends_object(Entity, Parent, Scope),
-			write_xml_relation(Stream, Entity, Parent, extends, Scope),
+			write_xml_entity_relation(Stream, Entity, Parent, extends, Scope),
 		fail.
 	write_xml_object_relations(Stream, Entity) :-
 		instantiates_class(Entity, Class, Scope),
-			write_xml_relation(Stream, Entity, Class, instantiates, Scope),
+			write_xml_entity_relation(Stream, Entity, Class, instantiates, Scope),
 		fail.
 	write_xml_object_relations(Stream, Entity) :-
 		specializes_class(Entity, Superclass, Scope),
-			write_xml_relation(Stream, Entity, Superclass, specializes, Scope),
+			write_xml_entity_relation(Stream, Entity, Superclass, specializes, Scope),
 		fail.
 	write_xml_object_relations(Stream, Entity) :-
 		entity_property(Entity, provides(Functor/Arity, To, _)),
 			entity_property(To, declares(Functor/Arity, Properties)),
 			(	member(non_terminal(Functor//Args), Properties) ->
-				write_xml_provides_relation(Stream, Entity, To, To::Functor//Args)
-			;	write_xml_provides_relation(Stream, Entity, To, To::Functor/Arity)
+				write_xml_provides_relation(Stream, Entity, To, Functor//Args)
+			;	write_xml_provides_relation(Stream, Entity, To, Functor/Arity)
 			),
 		fail.
 	write_xml_object_relations(_, _).
 
 	write_xml_protocol_relations(Stream, Entity) :-
 		extends_protocol(Entity, Protocol, Scope),
-			write_xml_relation(Stream, Entity, Protocol, extends, Scope),
+			write_xml_entity_relation(Stream, Entity, Protocol, extends, Scope),
 		fail.
 	write_xml_protocol_relations(_, _).
 
 	write_xml_category_relations(Stream, Entity) :-
 		implements_protocol(Entity, Protocol, Scope),
-			write_xml_relation(Stream, Entity, Protocol, implements, Scope),
+			write_xml_entity_relation(Stream, Entity, Protocol, implements, Scope),
 		fail.
 	write_xml_category_relations(Stream, Entity) :-
 		extends_category(Entity, Category, Scope),
-			write_xml_relation(Stream, Entity, Category, extends, Scope),
+			write_xml_entity_relation(Stream, Entity, Category, extends, Scope),
 		fail.
 	write_xml_category_relations(Stream, Entity) :-
 		complements_object(Entity, Object),
-			write_xml_relation(Stream, Entity, Object, complements),
+			write_xml_complements_relation(Stream, Entity, Object),
 		fail.
 	write_xml_category_relations(Stream, Entity) :-
 		entity_property(Entity, provides(Functor/Arity, To, _)),
 			entity_property(To, declares(Functor/Arity, Properties)),
 			(	member(non_terminal(Functor//Args), Properties) ->
-				write_xml_provides_relation(Stream, Entity, To, To::Functor//Args)
-			;	write_xml_provides_relation(Stream, Entity, To, To::Functor/Arity)
+				write_xml_provides_relation(Stream, Entity, To, Functor//Args)
+			;	write_xml_provides_relation(Stream, Entity, To, Functor/Arity)
 			),
 		fail.
 	write_xml_category_relations(_, _).
 
-	write_xml_relation(Stream, Entity, Relation, Tag, Scope) :-
+	write_xml_entity_relation(Stream, Entity, Relation, Tag, Scope) :-
 		relation_to_xml_term(Entity, Relation),
 		relation_to_xml_filename(Relation, File),
 		write_xml_open_tag(Stream, Tag, []),
@@ -936,19 +936,20 @@
 		write_xml_cdata_element(Stream, file, [], File),
 		write_xml_close_tag(Stream, Tag).
 
-	write_xml_relation(Stream, Entity, Relation, Tag) :-
+	write_xml_complements_relation(Stream, Entity, Relation) :-
 		relation_to_xml_term(Entity, Relation),
 		relation_to_xml_filename(Relation, File),
-		write_xml_open_tag(Stream, Tag, []),
+		write_xml_open_tag(Stream, complements, []),
 		write_xml_cdata_element(Stream, name, [], Relation),
 		write_xml_cdata_element(Stream, file, [], File),
-		write_xml_close_tag(Stream, Tag).
+		write_xml_close_tag(Stream, complements).
 
-	write_xml_provides_relation(Stream, Entity, To, Predicate) :-
+	write_xml_provides_relation(Stream, Entity, To, Resource) :-
 		relation_to_xml_term(Entity, To),
 		relation_to_xml_filename(To, File),
 		write_xml_open_tag(Stream, provides, []),
-		write_xml_cdata_element(Stream, name, [], Predicate),
+		write_xml_cdata_element(Stream, to, [], To),
+		write_xml_cdata_element(Stream, resource, [], Resource),
 		write_xml_cdata_element(Stream, file, [], File),
 		write_xml_close_tag(Stream, provides).
 

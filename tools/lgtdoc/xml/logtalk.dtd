@@ -64,7 +64,7 @@
 <!ELEMENT value (#PCDATA)>
 
 
-<!ELEMENT relations (implements*, imports*, extends*, instantiates*, specializes*, uses*, calls*, alias*)>
+<!ELEMENT relations (implements*, imports*, extends*, instantiates*, specializes*, complements*, provides*, uses*, calls*, alias*)>
 
 <!ELEMENT implements (name, scope, file)>
 
@@ -76,6 +76,10 @@
 
 <!ELEMENT specializes (name, scope, file)>
 
+<!ELEMENT complements (name, file)>
+
+<!ELEMENT provides (to, resource, file)>
+
 <!ELEMENT uses (name, file)>
 
 <!ELEMENT calls (name, file)>
@@ -84,6 +88,10 @@
 
 
 <!ELEMENT scope (#PCDATA)>
+
+<!ELEMENT to (#PCDATA)>
+
+<!ELEMENT resource (#PCDATA)>
 
 <!ELEMENT file (#PCDATA)>
 

@@ -145,6 +145,10 @@
 			<dt class ="key">specializes:</dt>
 				<xsl:apply-templates select="specializes" />
 			</xsl:if>
+			<xsl:if test="provides">
+			<dt class ="key">provides:</dt>
+				<xsl:apply-templates select="provides" />
+			</xsl:if>
 			<xsl:if test="uses">
 			<dt class ="key">uses:</dt>
 				<xsl:apply-templates select="uses" />
@@ -163,6 +167,11 @@
 			<p class="comment">(no dependencies on other files)</p>
 		</xsl:otherwise>
 	</xsl:choose>
+</xsl:template>
+
+
+<xsl:template match="logtalk/relations/provides" priority="1">
+	<dd class ="value"><code><a href="{file}.xml"><xsl:value-of select="to" />::<xsl:value-of select="resource" /></a></code></dd>
 </xsl:template>
 
 
