@@ -525,7 +525,7 @@
 
 	<fo:block
 			font-size="12pt" 
-			font-family="sans-serif" 
+			font-family="monospace" 
 			font-weight="bold" 
 			keep-with-next="always"
 			space-before="10pt">
@@ -730,18 +730,13 @@
 	</fo:block>
 	<xsl:choose>
 		<xsl:when test="*">
-	       	<fo:block
-					font-size="10pt"
-					font-family="serif" 
-					keep-with-next="always"
-					space-before="4pt">
-	     		local operator declarations:
-	     	</fo:block>
 			<xsl:for-each select="operator">
 				<fo:block
-						font-size="9pt"
-						font-family="monospace"
-						margin-left="10mm">
+					font-size="12pt" 
+					font-family="monospace" 
+					font-weight="bold" 
+					keep-with-next="always"
+					space-before="10pt">
 					<xsl:value-of select="term"/> (<xsl:value-of select="scope"/>)
 				</fo:block>
 			</xsl:for-each>

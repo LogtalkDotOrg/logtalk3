@@ -328,12 +328,9 @@
 	<div class="section">
 	<xsl:choose>
 		<xsl:when test="operator">
-			<dl class="properties">
-				<dt class ="key">local operator declarations:</dt>
-				<xsl:for-each select="operator">
-					<dd class="code"><xsl:value-of select="term" /> (<xsl:value-of select="scope" />)</dd>
-				</xsl:for-each>
-			</dl>
+			<xsl:for-each select="operator">
+				<h3 class="code"><xsl:value-of select="term" /> (<xsl:value-of select="scope" />)</h3>
+			</xsl:for-each>
 		</xsl:when>
 		<xsl:otherwise>
 			<h3 class="comment">(none)</h3>

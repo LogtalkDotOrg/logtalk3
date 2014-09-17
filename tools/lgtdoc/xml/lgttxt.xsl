@@ -282,7 +282,6 @@
 	<xsl:text>Operators</xsl:text><xsl:value-of select="$nl2" />
 	<xsl:choose>
 		<xsl:when test="operator">
-			<xsl:text>local operator declarations:</xsl:text><xsl:value-of select="$nl" />
 			<xsl:for-each select="operator">
 				<xsl:value-of select="$tab" /><xsl:value-of select="term" /><xsl:text> (</xsl:text><xsl:value-of select="scope" />)<xsl:value-of select="$nl" />
 			</xsl:for-each>
