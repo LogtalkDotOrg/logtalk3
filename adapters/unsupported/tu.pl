@@ -65,22 +65,65 @@ findall(Term, Goal, List, Tail) :-
 	append(List0, Tail, List).
 
 
-% forall(+callable, +callable) -- built-in ????
+% forall(+callable, +callable)
 
 forall(Generate, Test) :-
 	\+ (Generate, \+ Test).
 
 
-% format(+stream_or_alias, +character_code_list_or_atom, +list) -- built-in ????
+% format(+stream_or_alias, +character_code_list_or_atom, +list)
 
 format(Stream, Format, Arguments) :-
-	?????
+	atom_chars(Format, Chars),
+	format_(Chars, Stream, Arguments).
+
+format_([], _, []).
+format_(['~', Spec| Chars], Stream, Arguments) :-
+	!,
+	format_spec_(Spec, Stream, Arguments, RemainingArguments),
+	format_(Chars, Stream, RemainingArguments).
+format_([Char| Chars], Stream, Arguments) :-
+	char_code(Char, Code),
+	put_code(Stream, Code),
+	format_(Chars, Stream, Arguments).
+
+format_spec_('a', Stream, [Argument| Arguments], Arguments) :-
+%	atom(Argument),
+	write(Stream, Argument).
+format_spec_('c', Stream, [Argument| Arguments], Arguments) :-
+	put_code(Stream, Argument).
+format_spec_('s', Stream, [Argument| Arguments], Arguments) :-
+	atom_codes(Atom, Argument),
+	write(Stream, Atom).
+format_spec_('w', Stream, [Argument| Arguments], Arguments) :-
+	write(Stream, Argument).
+format_spec_('q', Stream, [Argument| Arguments], Arguments) :-
+	writeq(Stream, Argument).
+format_spec_('k', Stream, [Argument| Arguments], Arguments) :-
+	write_canonical(Stream, Argument).
+format_spec_('d', Stream, [Argument| Arguments], Arguments) :-
+	write(Stream, Argument).
+format_spec_('D', Stream, [Argument| Arguments], Arguments) :-
+	write(Stream, Argument).
+format_spec_('f', Stream, [Argument| Arguments], Arguments) :-
+	write(Stream, Argument).
+format_spec_('g', Stream, [Argument| Arguments], Arguments) :-
+	write(Stream, Argument).
+format_spec_('G', Stream, [Argument| Arguments], Arguments) :-
+	write(Stream, Argument).
+format_spec_('i', _, [_| Arguments], Arguments).
+format_spec_('n', Stream, Arguments, Arguments) :-
+	nl(Stream).
+format_spec_('~', Stream, Arguments, Arguments) :-
+	char_code('~', Code),
+	put_code(Stream, Code).
 
 
-% format(+character_code_list_or_atom, +list) -- built-in ????
+% format(+character_code_list_or_atom, +list)
 
 format(Format, Arguments) :-
-	?????
+	current_output(Stream),
+	format(Stream, Format, Arguments).
 
 
 % numbervars(?term, +integer, ?integer) -- built-in ????
@@ -269,7 +312,8 @@ numbervars(Term, From, Next) :-
 % expands a file path to a full path
 
 '$lgt_expand_path'(Path, ExpandedPath) :-
-	java_object('java.io.File', [Path], Object), Object <- getAbsolutePath returns ExpandedPath.
+	java_object('java.io.File', [Path], Object),
+	Object <- getAbsolutePath returns ExpandedPath.
 
 
 % '$lgt_file_exists'(+atom)
@@ -277,7 +321,9 @@ numbervars(Term, From, Next) :-
 % checks if a file exists
 
 '$lgt_file_exists'(File) :-
-	java_object('java.io.File', [File], Object), Object <- exists.
+	java_object('java.io.File', [File], Object),
+	Object <- exists,
+	Object <- isFile.
 
 
 % '$lgt_delete_file'(+atom)
@@ -285,7 +331,8 @@ numbervars(Term, From, Next) :-
 % deletes a file
 
 '$lgt_delete_file'(File) :-
-	java_object('java.io.File', [File], Object), Object <- delete.
+	java_object('java.io.File', [File], Object),
+	Object <- delete.
 
 
 % '$lgt_directory_exists'(+atom)
@@ -293,7 +340,9 @@ numbervars(Term, From, Next) :-
 % checks if a directory exists
 
 '$lgt_directory_exists'(Directory) :-
-	java_object('java.io.File', [Directory], Object), Object <- exists.
+	java_object('java.io.File', [Directory], Object),
+	Object <- exists,
+	Object <- isDirectory.
 
 
 % '$lgt_current_directory'(-atom)
@@ -317,7 +366,8 @@ numbervars(Term, From, Next) :-
 % makes a new directory; succeeds if the directory already exists
 
 '$lgt_make_directory'(Directory) :-
-	java_object('java.io.File', [Directory], Object), Object <- mkdir.
+	java_object('java.io.File', [Directory], Object),
+	Object <- mkdirs.
 
 
 % '$lgt_compile_prolog_code'(+atom, +atom, +list)
@@ -442,7 +492,7 @@ numbervars(Term, From, Next) :-
 % '$lgt_cpu_time'(-Seconds)
 
 '$lgt_cpu_time'(Seconds) :-
-	class('java.lang.System') <- currentTimeMillis returns MiliSeconds,
+	class('java.lang.System') <- currentTimeMillis returns Miliseconds,
 	Seconds is Miliseconds / 1000 .
 
 
@@ -656,7 +706,7 @@ term_hash(_, _, _, _) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-{*} :-
+{'*'} :-
 	!,
 	logtalk_make(all).
 {!} :-
