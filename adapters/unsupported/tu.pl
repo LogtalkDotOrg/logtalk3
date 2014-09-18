@@ -342,7 +342,8 @@ numbervars(Term, From, Next) :-
 % gets a file modification time, assumed to be an opaque term but comparable
 
 '$lgt_file_modification_time'(File, Time) :-
-	java_object('java.io.File', [File], Object), Object <- lastModified returns Time.
+	java_object('java.io.File', [File], Object),
+	Object <- lastModified returns Time.
 
 
 % '$lgt_environment_variable'(?atom, ?atom)
@@ -358,7 +359,11 @@ numbervars(Term, From, Next) :-
 % returns the Logtalk startup directory 
 
 '$lgt_startup_directory'(Directory) :-
-	?????
+	class('java.lang.System') <- getenv('LOGTALK_STARTUP_DIRECTORY') returns Directory,
+	(	nonvar(Directory) ->
+		true
+	;	'$lgt_current_directory'(Directory)
+	).
 
 
 % '$lgt_user_directory'(-atom)
@@ -384,7 +389,16 @@ numbervars(Term, From, Next) :-
 % the empty atom when it does not exist
 
 '$lgt_decompose_file_name'(File, Directory, Name, Extension) :-
-	?????
+	java_object('java.io.File', [File], Object),
+	Object <- getParent returns Directory,
+	Object <- getName returns Basename,
+	(	sub_atom(Basename, Before, _, After, '.') ->
+		sub_atom(Basename, 0, Before, _, Name),
+		sub_atom(Basename, _, After, 0, Extension0),
+		atom_concat('.', Extension0, Extension)
+	;	Name = Basename,
+		Extension = ''
+	).
 
 
 
