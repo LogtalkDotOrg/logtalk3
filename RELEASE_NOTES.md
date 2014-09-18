@@ -53,6 +53,9 @@ the `error/2` wrapper with its context argument.
 Prolog adapter and integration files
 ------------------------------------
 
+* ADDED: Unsupported tuProlog adapter file. Not yet functional as there are
+several required features missing from the current tuProlog release (2.9.0).
+
 * UPDATED: `adapters/template.pl` file for recent changes to the compiler and
 runtime.
 

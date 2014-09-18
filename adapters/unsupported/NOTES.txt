@@ -153,3 +153,11 @@ LPA WinProlog32 4.0x
 	file twice. Supports smart compilation of source files. Does not support 
 	the "altdirs" compiler flag. Settings files are not supported (must be 
 	manually loaded).
+
+
+tuProlog 2.9.0
+
+	Incomplete. Missing tuProlog features include de facto standard predicates
+	(such as between/3, numbervars/3, and predicate_property/2) and operating-
+	system access predicates (notably for getting and setting the current
+	directory).
