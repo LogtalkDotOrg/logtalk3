@@ -342,6 +342,14 @@ numbervars(Term, From, Next) :-
 	?????
 
 
+% '$lgt_environment_variable'(?atom, ?atom)
+%
+% access to operating-system environment variables
+
+'$lgt_environment_variable'(Variable, Value) :-
+	?????
+
+
 % '$lgt_startup_directory'(-atom)
 %
 % returns the Logtalk startup directory 
@@ -355,6 +363,14 @@ numbervars(Term, From, Next) :-
 % returns the Logtalk user directory; fails if unknown
 
 '$lgt_user_directory'(Directory) :-
+	?????
+
+
+% '$lgt_home_directory'(-atom)
+%
+% returns the Logtalk home directory; fails if unknown
+
+'$lgt_home_directory'(Directory) :-
 	?????
 
 

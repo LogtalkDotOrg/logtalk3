@@ -50,6 +50,12 @@ protocols.
 the first argument is only know at runtime could result in exceptions missing
 the `error/2` wrapper with its context argument.
 
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: `adapters/template.pl` file for recent changes to the compiler and
+runtime.
+
 Documentation
 -------------
 
