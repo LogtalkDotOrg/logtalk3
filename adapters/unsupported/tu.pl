@@ -465,17 +465,19 @@ numbervars(Term, From, Next) :-
 % '$lgt_current_date'(?integer, ?integer, ?integer)
 
 '$lgt_current_date'(Year, Month, Day) :-
-	class('java.util.Calendar').'YEAR' <- get(Year),
-	class('java.util.Calendar').'MONTH' <- get(Month),
-	class('java.util.Calendar').'DAY_OF_MONTH' <- get(Day).
+	class('java.util.Calendar') <- getInstance returns Instance,
+	Instance.'YEAR' <- get(Year),
+	Instance.'MONTH' <- get(Month),
+	Instance.'DAY_OF_MONTH' <- get(Day).
 
 
 % '$lgt_current_time'(?integer, ?integer, ?integer)
 
 '$lgt_current_time'(Hours, Minutes, Seconds) :-
-	class('java.util.Calendar').'HOUR' <- get(Hours),
-	class('java.util.Calendar').'MINUTE' <- get(Minutes),
-	class('java.util.Calendar').'SECOND' <- get(Seconds).
+	class('java.util.Calendar') <- getInstance returns Instance,
+	Instance.'HOUR' <- get(Hours),
+	Instance.'MINUTE' <- get(Minutes),
+	Instance.'SECOND' <- get(Seconds).
 
 
 
