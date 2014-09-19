@@ -146,7 +146,7 @@
 
 % table of loaded files
 
-% '$lgt_loaded_file_'(Basename, Directory, Mode, Flags, TextProperties, PrologFile, TimeStamp)
+% '$lgt_loaded_file_'(Basename, Directory, Mode, Flags, TextProperties, ObjectFile, TimeStamp)
 :- dynamic('$lgt_loaded_file_'/7).
 
 % '$lgt_failed_file_'(SourceFile)
@@ -437,7 +437,7 @@
 :- dynamic('$lgt_pp_file_encoding_'/2).
 % '$lgt_pp_file_bom_'(BOM)
 :- dynamic('$lgt_pp_file_bom_'/1).
-% '$lgt_pp_file_data_'(Basename, Directory, Path, PrologFile)
+% '$lgt_pp_file_data_'(Basename, Directory, Path, ObjectFile)
 :- dynamic('$lgt_pp_file_data_'/4).
 
 % '$lgt_pp_runtime_clause_'(Clause)
@@ -2206,8 +2206,8 @@ logtalk_make(Target) :-
 	'$lgt_print_message'(comment(make), core, modified_files_reloaded).
 
 '$lgt_logtalk_make'(clean) :-
-	'$lgt_loaded_file_'(_, _, _, _, _, PrologFile, _),
-	'$lgt_delete_intermediate_files'(PrologFile),
+	'$lgt_loaded_file_'(_, _, _, _, _, ObjectFile, _),
+	'$lgt_delete_intermediate_files'(ObjectFile),
 	fail.
 '$lgt_logtalk_make'(clean) :-
 	'$lgt_print_message'(comment(make), core, intermediate_files_deleted).
@@ -2256,8 +2256,8 @@ logtalk_load_context(basename, Basename) :-
 logtalk_load_context(directory, Directory) :-
 	'$lgt_pp_file_data_'(_, Directory, _, _).
 
-logtalk_load_context(target, PrologFile) :-
-	'$lgt_pp_file_data_'(_, _, _, PrologFile).
+logtalk_load_context(target, ObjectFile) :-
+	'$lgt_pp_file_data_'(_, _, _, ObjectFile).
 
 logtalk_load_context(entity_name, Entity) :-
 	% deprecated key
@@ -4796,8 +4796,8 @@ current_logtalk_flag(Flag, Value) :-
 		true
 	;	throw(error(existence_error(file, File), _))
 	),
-	'$lgt_file_name'(prolog, File, _, _, PrologFile),
-	assertz('$lgt_pp_file_data_'(Basename, Directory, SourceFile, PrologFile)),
+	'$lgt_file_name'(object, Basename, _, _, ObjectFile),
+	assertz('$lgt_pp_file_data_'(Basename, Directory, SourceFile, ObjectFile)),
 	% change the directory to the directory of the file being loaded as it can be
 	% a loader file loading other files in its directory using a relative path
 	'$lgt_current_directory'(Current),
@@ -4821,22 +4821,22 @@ current_logtalk_flag(Flag, Value) :-
 			'$lgt_print_message'(comment(loading), core, skipping_reloading_file(SourceFile, Flags))
 		;	% we're reloading a source file
 			'$lgt_print_message'(silent(loading), core, reloading_file(SourceFile, Flags)),
-			'$lgt_compile_and_load_file'(Directory, Basename, SourceFile, Flags, PrologFile, Current),
+			'$lgt_compile_and_load_file'(Directory, Basename, SourceFile, Flags, ObjectFile, Current),
 			'$lgt_print_message'(comment(loading), core, reloaded_file(SourceFile, Flags))
 		)
 	;	% first time loading this source file or previous attempt failed due compilation error
 		'$lgt_print_message'(silent(loading), core, loading_file(SourceFile, Flags)),
-		'$lgt_compile_and_load_file'(Directory, Basename, SourceFile, Flags, PrologFile, Current),
+		'$lgt_compile_and_load_file'(Directory, Basename, SourceFile, Flags, ObjectFile, Current),
 		'$lgt_print_message'(comment(loading), core, loaded_file(SourceFile, Flags))
 	),
 	'$lgt_change_directory'(Current).
 
 
-'$lgt_compile_and_load_file'(Directory, Basename, SourceFile, Flags, PrologFile, Current) :-
+'$lgt_compile_and_load_file'(Directory, Basename, SourceFile, Flags, ObjectFile, Current) :-
 	retractall('$lgt_failed_file_'(SourceFile)),
 	% remember the file was loaded before it is successfully compiled and loaded
 	% so that we can use the make feature to reload it in case of error
-	'$lgt_update_loaded_file'(Directory, Basename, SourceFile, Flags, PrologFile),
+	'$lgt_update_loaded_file'(Directory, Basename, SourceFile, Flags, ObjectFile),
 	% save the file loading dependency on a parent file if it exists
 	(	'$lgt_file_loading_stack_'(ParentSourceFile) ->
 		retractall('$lgt_parent_file_'(SourceFile, _)),
@@ -4845,14 +4845,14 @@ current_logtalk_flag(Flag, Value) :-
 		true
 	),
 	% compile the source file to an intermediate Prolog file on disk
-	'$lgt_compile_file'(SourceFile, PrologFile, Flags, loading, Current),
+	'$lgt_compile_file'(SourceFile, ObjectFile, Flags, loading, Current),
 	% compile and load the intermediate Prolog file
 	asserta('$lgt_file_loading_stack_'(SourceFile)),
-	'$lgt_load_compiled_file'(SourceFile, PrologFile),
+	'$lgt_load_compiled_file'(SourceFile, ObjectFile),
 	retractall('$lgt_file_loading_stack_'(SourceFile)).
 
 
-'$lgt_update_loaded_file'(Directory, Basename, Path, Flags, PrologFile) :-
+'$lgt_update_loaded_file'(Directory, Basename, Path, Flags, ObjectFile) :-
 	% compilation of the file may have failed in previous attempt;
 	% ensure that there aren't duplicate entries
 	retractall('$lgt_loaded_file_'(Basename, Directory, _, _, _, _, _)),
@@ -4870,10 +4870,10 @@ current_logtalk_flag(Flag, Value) :-
 	;	TextProperties = []
 	),
 	'$lgt_file_modification_time'(Path, TimeStamp),
-	assertz('$lgt_loaded_file_'(Basename, Directory, Mode, Flags, TextProperties, PrologFile, TimeStamp)).
+	assertz('$lgt_loaded_file_'(Basename, Directory, Mode, Flags, TextProperties, ObjectFile, TimeStamp)).
 
 
-'$lgt_load_compiled_file'(SourceFile, PrologFile) :-
+'$lgt_load_compiled_file'(SourceFile, ObjectFile) :-
 	% retrieve the backend Prolog specific file loading options
 	'$lgt_compiler_flag'(prolog_loader, DefaultOptions),
 	% loading a file can result in the redefinition of existing
@@ -4885,7 +4885,7 @@ current_logtalk_flag(Flag, Value) :-
 		Options = [encoding(Encoding)| DefaultOptions]
 	;	Options = DefaultOptions
 	),
-	(	catch('$lgt_load_prolog_code'(PrologFile, SourceFile, Options), _, fail) ->
+	(	catch('$lgt_load_prolog_code'(ObjectFile, SourceFile, Options), _, fail) ->
 		true
 	;	% sometimes there are syntax errors in the generated intermediate Prolog
 		% files that are due to write_canonical/2 and/or read_term/3 bugs
@@ -4894,20 +4894,20 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_propagate_failure_to_parent_files'(SourceFile)
 	),
 	(	'$lgt_compiler_flag'(clean, on) ->
-		'$lgt_delete_intermediate_files'(PrologFile)
+		'$lgt_delete_intermediate_files'(ObjectFile)
 	;	true
 	).
 
 
-'$lgt_delete_intermediate_files'(PrologFile) :-
-	% try to delete the intermediate Prolog (ignore failure or error)
-	catch('$lgt_delete_file'(PrologFile), _, true),
+'$lgt_delete_intermediate_files'(ObjectFile) :-
+	% try to delete the intermediate Prolog file (ignore failure or error)
+	catch('$lgt_delete_file'(ObjectFile), _, true),
 	fail.
 
-'$lgt_delete_intermediate_files'(PrologFile) :-
-	% try to delete any Prolog-specific auxiliary files (ignore failure or error)
-	'$lgt_file_extension'(prolog, PrologExtension),
-	atom_concat(Name, PrologExtension, PrologFile),
+'$lgt_delete_intermediate_files'(ObjectFile) :-
+	% try to delete any Prolog dialect specific auxiliary files (ignore failure or error)
+	'$lgt_file_extension'(object, ObjectExtension),
+	atom_concat(Name, ObjectExtension, ObjectFile),
 	'$lgt_file_extension'(tmp, TmpExtension),
 	atom_concat(Name, TmpExtension, TmpFile),
 	'$lgt_file_exists'(TmpFile),
@@ -5039,9 +5039,9 @@ current_logtalk_flag(Flag, Value) :-
 		true
 	;	throw(error(existence_error(file, File), _))
 	),
-	'$lgt_file_name'(prolog, File, _, _, PrologFile),
-	assertz('$lgt_pp_file_data_'(Basename, Directory, SourceFile, PrologFile)),
-	'$lgt_compile_file'(SourceFile, PrologFile, Flags, compiling),
+	'$lgt_file_name'(object, Basename, _, _, ObjectFile),
+	assertz('$lgt_pp_file_data_'(Basename, Directory, SourceFile, ObjectFile)),
+	'$lgt_compile_file'(SourceFile, ObjectFile, Flags, compiling),
 	'$lgt_compile_files'(Files, Flags).
 
 '$lgt_compile_files'(File, Flags) :-
@@ -5053,19 +5053,19 @@ current_logtalk_flag(Flag, Value) :-
 %
 % compiles to disk a source file
 
-'$lgt_compile_file'(SourceFile, PrologFile, Flags, Action) :-
+'$lgt_compile_file'(SourceFile, ObjectFile, Flags, Action) :-
 	(	% interpret a clean(on) setting as (also) meaning that any
 		% existing intermediate Prolog files should be disregarded 
 		'$lgt_compiler_flag'(clean, off),
-		'$lgt_file_exists'(PrologFile),
-		'$lgt_compare_file_modification_times'(Result, SourceFile, PrologFile),
+		'$lgt_file_exists'(ObjectFile),
+		'$lgt_compare_file_modification_times'(Result, SourceFile, ObjectFile),
 		Result \== (>) ->
 		'$lgt_print_message'(silent(compiling), core, up_to_date_file(SourceFile, Flags))
 	;	% the intermediate Prolog file doesn't exist or it's outdated
 		'$lgt_print_message'(silent(compiling), core, compiling_file(SourceFile, Flags)),
-		'$lgt_compile_file'(SourceFile, PrologFile),
+		'$lgt_compile_file'(SourceFile, ObjectFile),
 		'$lgt_compiler_flag'(prolog_compiler, Options),
-		'$lgt_compile_prolog_code'(PrologFile, SourceFile, Options),
+		'$lgt_compile_prolog_code'(ObjectFile, SourceFile, Options),
 		(	Action == loading ->
 			'$lgt_print_message'(silent(compiling), core, compiled_file(SourceFile, Flags))
 		;	% Action == compiling
@@ -5080,8 +5080,8 @@ current_logtalk_flag(Flag, Value) :-
 % and failure instead of an exception but we need to restore the original directory
 % before passing the failure up to the caller
 
-'$lgt_compile_file'(SourceFile, PrologFile, Flags, Action, Directory) :-
-	(	'$lgt_compile_file'(SourceFile, PrologFile, Flags, Action) ->
+'$lgt_compile_file'(SourceFile, ObjectFile, Flags, Action, Directory) :-
+	(	'$lgt_compile_file'(SourceFile, ObjectFile, Flags, Action) ->
 		retractall('$lgt_failed_file_'(SourceFile))
 	;	'$lgt_change_directory'(Directory),
 		assertz('$lgt_failed_file_'(SourceFile)),
@@ -5144,31 +5144,33 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_file_name'(+atom, +atom, -atom, -atom, -atom)
 %
-% derives from a given file type (logtalk, prolog, or tmp) and a file path
-% (which can be either absolute or relative and may or may not include a
+% derives from a given file type (logtalk, prolog, object, or tmp) and a file
+% path (which can be either absolute or relative and may or may not include a
 % file name extension) the file directory, the file basename (name plus
 % extension), and the full file path
 %
-% when the file path input argument doesn't include an extension, this
-% predicate provides a solution for each defined Logtalk source file
-% extension; callers should test if the returned full path exists and
-% commit to that solution when not simply generating possible solutions
+% when the file path input argument doesn't include a file extension, this
+% predicate provides a solution for each defined Logtalk and Prolog source
+% file extension; callers should test if the returned full path exists and
+% commit to that solution when not simply generating all possible solutions
 
 '$lgt_file_name'(logtalk, FilePath, Directory, Basename, FullPath) :-
 	!,
 	'$lgt_prolog_os_file_name'(NormalizedPath, FilePath),
 	'$lgt_decompose_file_name'(NormalizedPath, Directory0, Name, Extension),
-	(	% file extensions are defined in the Prolog adapter files (there might be
-		% multiple extensions defined for the same type of file)
+	(	% file extensions are defined in the Prolog adapter files (there
+		% might be multiple extensions defined for the same type of file)
 		'$lgt_file_extension'(logtalk, Extension) ->
 		% declared extension for this type of file is present
 		atom_concat(Name, Extension, Basename)
 	;	'$lgt_file_extension'(prolog, Extension) ->
-		% assume Prolog file reinterpreted as a Logtalk file
+		% assume Prolog file being compiled as a Logtalk file
 		atom_concat(Name, Extension, Basename)
-	;	% declared extension for this type of file is missing
-		'$lgt_file_extension'(logtalk, TypeExtension),
-		% simply add the missing extension
+	;	% no Logtalk or Prolog extension for this type of file; generate possible
+		% basenames starting with Logtalk extensions followed by Prolog extensions
+		(	'$lgt_file_extension'(logtalk, TypeExtension)
+		;	'$lgt_file_extension'(prolog, TypeExtension)
+		),
 		atom_concat(Name, Extension, Basename0),
 		atom_concat(Basename0, TypeExtension, Basename)
 	),
@@ -5178,9 +5180,9 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_file_name'(Type, FilePath, Directory, Basename, FullPath) :-
 	% we're constructing the name of a intermediate Prolog file or some Prolog
-	% dialect specific temporary file from the original Logtalk file name
+	% dialect specific temporary file from the Logtalk file basename
 	'$lgt_prolog_os_file_name'(NormalizedPath, FilePath),
-	'$lgt_decompose_file_name'(NormalizedPath, Directory0, Name, Extension),
+	'$lgt_decompose_file_name'(NormalizedPath, Directory0, Name0, Extension),
 	% temporary files are stored in the defined scratch directory
 	'$lgt_compiler_flag'(scratch_directory, ScratchDirectory0),
 	% make sure that the scratch directory path ends with a slash
@@ -5194,25 +5196,16 @@ current_logtalk_flag(Flag, Value) :-
 	;	% assume absolute directory path
 		Directory1 = ScratchDirectory
 	),
-	% file extensions are defined in the Prolog adapter files (there might be
-	% multiple extensions defined for the same type of file)
+	% append a prefix based on the original extension to the file name to avoid
+	% intermediate and temporary file name conflicts when compiling two or more
+	% source files that share the same name but use different extensions
+	sub_atom(Extension, 1, _, 0, Prefix0),
+	atom_concat('_', Prefix0, Prefix),
+	atom_concat(Name0, Prefix, Name),
+	% file extensions are defined in the Prolog adapter files (there
+	% might be multiple extensions defined for the same type of file)
 	'$lgt_file_extension'(Type, TypeExtension),
-	(	'$lgt_file_extension'(logtalk, Extension) ->
-		% we're simply replacing the extension (e.g. 'file.lgt' -> 'file.pl')
-		atom_concat(Name, TypeExtension, Basename)
-	;	'$lgt_file_extension'(prolog, Extension) ->
-		% assume Prolog file reinterpreted as a Logtalk file; add a '.plgt' token
-		% before the type extension to ensure different names between source and
-		% target files as may be saving the target file in the same directory
-		% (we cannot simply add the type exntension as for Prolog files that might
-		% result in loading failures)
-		atom_concat(Name, '.plgt', Basename0),
-		atom_concat(Basename0, TypeExtension, Basename)
-	;	% assume that the original file name didn't contain a true extension
-		% (which we know is missing) but have one or more '.' in its name
-		atom_concat(Name, Extension, Basename0),
-		atom_concat(Basename0, TypeExtension, Basename)
-	),
+	atom_concat(Name, TypeExtension, Basename),
 	atom_concat(Directory1, Basename, Path),
 	'$lgt_expand_path'(Path, FullPath),
 	atom_concat(Directory, Basename, FullPath),
@@ -5225,7 +5218,7 @@ current_logtalk_flag(Flag, Value) :-
 %
 % compiles a source file storing the resulting code in memory
 
-'$lgt_compile_file'(SourceFile, PrologFile) :-
+'$lgt_compile_file'(SourceFile, ObjectFile) :-
 	% open the Logtalk source code file for reading
 	catch(
 		'$lgt_open'(SourceFile, read, Input, [alias(logtalk_compiler_input)]),
@@ -5245,7 +5238,7 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	% open a corresponding Prolog file for writing generated code using any found encoding/1 directive
 	catch(
-		'$lgt_open'(PrologFile, write, Output, [alias(logtalk_compiler_output)| OutputOptions]),
+		'$lgt_open'(ObjectFile, write, Output, [alias(logtalk_compiler_output)| OutputOptions]),
 		OpenError,
 		'$lgt_compiler_error_handler'(OpenError)
 	),
@@ -5778,8 +5771,8 @@ current_logtalk_flag(Flag, Value) :-
 		catch('$lgt_close'(Output), _, true),
 		% try to delete the intermediate Prolog files in order to prevent
 		% problems by mistaken the broken files by good ones
-		'$lgt_file_name'(prolog, Path, _, _, PrologFile),
-		'$lgt_delete_intermediate_files'(PrologFile)
+		'$lgt_file_name'(object, Path, _, _, ObjectFile),
+		'$lgt_delete_intermediate_files'(ObjectFile)
 	;	true
 	),
 	!,

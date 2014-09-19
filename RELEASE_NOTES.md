@@ -39,9 +39,12 @@ to objects. Parallel changes to the implicit predicate execution context make
 this restriction no longer necessary for type-correctness of the execution
 context arguments.
 
+* CHANGED: Support definition of multiple Prolog file name extensions in the
+adapter files and add a new file type, `object`, for defining the extension
+to be used for the compiler generated intermediate Prolog files.
+
 * ADDED: Support for compiling Prolog source files as Logtalk source files
 using the `logtalk_compile/1-2` and `logtalk_load/1-2` built-in predicates.
-The files must be specified with a Prolog extension to avoid ambiguities.
 
 * IMPROVED: Detect and report attempts to declare multifile predicates in
 protocols.
@@ -58,6 +61,16 @@ several required features missing from the current tuProlog release (2.9.0).
 
 * UPDATED: `adapters/template.pl` file for recent changes to the compiler and
 runtime.
+
+* UPDATED: All adapter files to also recognize `.prolog` files as Prolog files.
+
+* UPDATED: The ECLiPSe adapter file to also recognize `.ecl` files as Prolog
+files.
+
+* UPDATED: The XSB adapter file to also recognize `.P` files as Prolog files.
+
+* UPDATED: The YAP adapter file to also recognize `.yap` files as Prolog
+files.
 
 Documentation
 -------------

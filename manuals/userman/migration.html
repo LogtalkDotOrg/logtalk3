@@ -109,7 +109,7 @@ Converting a Prolog module into an object is easy as long as the directives used
 	<li>Compile the resulting objects with the Logtalk <code>unknown_predicates</code>, and <code>portability</code> flags set to <code>warning</code> to help you locate possible issues and calls to proprietary Prolog built-in predicates and to predicates defined on other converted modules. In order to improve code portability, check the Logtalk library for possible alternatives to the use of proprietary Prolog built-in predicates.</li>
 </ol>
 <p>
-Before converting your modules to objects, you may try to compile them first as objects (using the <a title="Consult reference manual" href="../refman/predicates/logtalk_compile_1.html"><code>logtalk_compile/1-2</code></a> Logtalk built-in predicates). This requires only a simple change to the name extension of your source files and can be used for screening your module code for any issues that must be dealt with when doing the conversion to objects.
+Before converting your modules to objects, you may try to compile them first as objects (using the <a title="Consult reference manual" href="../refman/predicates/logtalk_compile_1.html"><code>logtalk_compile/1-2</code></a> Logtalk built-in predicates) to help identify any issues that must be dealt with when doing the conversion to objects.
 </p>
 
 <h2 id="migration_compiling">Compiling Prolog modules as objects</h2>
@@ -261,7 +261,7 @@ The Logtalk compiler will print a warning if the <code>multifile/1</code> direct
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: September 17, 2014</span>
+		<span>Last updated on: September 19, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="programming.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="index.html">next</a></span><br/>

@@ -39,7 +39,7 @@
 <pre>logtalk_compile(File, Options)
 logtalk_compile(Files, Options)</pre>
 <p>
-Compiles to disk a  <a href="../grammar.html#grammar_source_file_names">source file</a> or a list of source files using a list of compiler options. The Logtalk source file name extension (by default, <code>.lgt</code>) can be omitted. Source file paths can be absolute, relative to the current directory, or use library notation.  This predicate is also able to compile Prolog source files as Logtalk source code provided that the files are specified with a Prolog extension. Compiler option are represented as <em>flag(value)</em>. For a description of the available compiler flags, please <a href="../../userman/programming.html#programming_flags">consult</a> the User Manual.
+Compiles to disk a  <a href="../grammar.html#grammar_source_file_names">source file</a> or a list of source files using a list of compiler options. The Logtalk source file name extension (by default, <code>.lgt</code>) can be omitted. Source file paths can be absolute, relative to the current directory, or use library notation. This predicate can also be used to compile Prolog source files as Logtalk source code. When no file name extension is specified, the compiler tries first to append a Logtalk source file extension and then a Prolog source file extension. Compiler option are represented as <em>flag(value)</em>. For a description of the available compiler flags, please <a href="../../userman/programming.html#programming_flags">consult</a> the User Manual.
 </p>
 <p>
 Note that only the errors related to problems in the predicate argument are listed below. This predicate fails when errors are found during compilation of a source file.
@@ -86,7 +86,7 @@ logtalk_compile(@list(source_file_name), @list(compiler_option))</pre>
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: September 17, 2014</span>
+		<span>Last updated on: September 19, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="logtalk_compile_1.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="logtalk_load_1.html">next</a></span><br/>
