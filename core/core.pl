@@ -5196,12 +5196,19 @@ current_logtalk_flag(Flag, Value) :-
 	;	% assume absolute directory path
 		Directory1 = ScratchDirectory
 	),
-	% append a prefix based on the original extension to the file name to avoid
-	% intermediate and temporary file name conflicts when compiling two or more
-	% source files that share the same name but use different extensions
-	sub_atom(Extension, 1, _, 0, Prefix0),
-	atom_concat('_', Prefix0, Prefix),
-	atom_concat(Name0, Prefix, Name),
+	(	'$lgt_file_extension'(logtalk, Extension) ->
+		% the most common case; simply replace the Logtalk extension with
+		% the type extension
+		Name = Name0
+	;	% original source file is a Prolog file being compiled as a Logtalk file;
+		% append a prefix derived from its extension to avoid the unlikely but
+		% possible intermediate and temporary file name conflicts when compiling
+		% two or more source files that share the same name but use different
+		% extensions
+		sub_atom(Extension, 1, _, 0, Prefix0),
+		atom_concat('_', Prefix0, Prefix),
+		atom_concat(Name0, Prefix, Name)
+	),
 	% file extensions are defined in the Prolog adapter files (there
 	% might be multiple extensions defined for the same type of file)
 	'$lgt_file_extension'(Type, TypeExtension),
