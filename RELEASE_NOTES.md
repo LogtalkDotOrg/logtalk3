@@ -46,6 +46,13 @@ to be used for the compiler generated intermediate Prolog files.
 * ADDED: Support for compiling Prolog source files as Logtalk source files
 using the `logtalk_compile/1-2` and `logtalk_load/1-2` built-in predicates.
 
+* CHANGED: The name of intermediate files generated when compiling a source
+file now use a suffix derived from the file extension to prevent unlikely but
+possible name conflicts when compiling two or more files that share the same
+name but not the same extension (e.g. a `foo.lgt` file and a `foo.pl` file,
+whose intermediate Prolog files will now be named, respectively, `foo_lgt.pl`
+and `foo_pl.pl`, assuming a `.pl` extension for object files).
+
 * IMPROVED: Detect and report attempts to declare multifile predicates in
 protocols.
 
