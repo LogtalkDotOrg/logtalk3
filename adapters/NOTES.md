@@ -165,10 +165,10 @@ Edit the `$HOME/collect/core.pl` file and add the line `:- built_in.` to
 the top. Then:
 
 	$ cd $HOME/collect
-	$ gplc -o logtalk gnu.pl paths.pl expanding.pl monitoring.pl forwarding.pl user.pl logtalk.pl core_messages.pl core.pl
+	$ gplc -o logtalk gnu.pl paths.pl expanding_lgt.pl monitoring_lgt.pl forwarding_lgt.pl user_lgt.pl logtalk_lgt.pl core_messages_lgt.pl core.pl
 
-Finally, move the new executable to a directory in your system PATH.
-For example:
+Note that the order of the files when calling `gplc` is important. Finally,
+move the new executable to a directory in your system PATH. For example:
 
 	$ mv logtalk /usr/local/bin/
 
