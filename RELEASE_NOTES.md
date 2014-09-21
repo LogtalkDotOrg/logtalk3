@@ -25,7 +25,7 @@ RELEASE NOTES
 =============
 
 
-3.00.0 Release Candidate 2 - September ??, 2014
+3.00.0 Release Candidate 2 - September 22, 2014
 ===============================================
 
 Logtalk compiler and runtime
@@ -49,9 +49,10 @@ using the `logtalk_compile/1-2` and `logtalk_load/1-2` built-in predicates.
 * CHANGED: The name of intermediate files generated when compiling a source
 file now use a suffix derived from the file extension to prevent unlikely but
 possible name conflicts when compiling two or more files that share the same
-name but not the same extension (e.g. a `foo.lgt` file and a `foo.pl` file,
-whose intermediate Prolog files will now be named, respectively, `foo_lgt.pl`
-and `foo_pl.pl`, assuming a `.pl` extension for object files).
+name but not the same extension (e.g. `foo.lgt`, `foo.logtalk`, and `foo.pl`
+files, whose intermediate Prolog files are now be named, respectively,
+`foo_lgt.pl`, `foo_logtalk.pl`, and `foo_pl.pl`, assuming a `.pl` extension
+for object files).
 
 * IMPROVED: Detect and report attempts to declare multifile predicates in
 protocols.
