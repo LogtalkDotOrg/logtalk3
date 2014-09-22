@@ -202,7 +202,7 @@ format(Format, Arguments) :-
 	?????
 '$lgt_prolog_feature'(prolog_compatible_version, '@>='((Major, Minor, Path))).
 
-'$lgt_prolog_feature'(encoding_directive, unsupported).
+'$lgt_prolog_feature'(encoding_directive, source).
 '$lgt_prolog_feature'(tabling, unsupported).
 '$lgt_prolog_feature'(threads, unsupported).
 '$lgt_prolog_feature'(modules, unsupported).
@@ -515,8 +515,9 @@ format(Format, Arguments) :-
 
 % '$lgt_logtalk_prolog_encoding'(?atom, ?atom)
 
-'$lgt_logtalk_prolog_encoding'(_, _, _) :-
-	fail.
+'$lgt_logtalk_prolog_encoding'('UTF-8', 'UTF-8', _).
+'$lgt_logtalk_prolog_encoding'('UTF-16BE', 'UTF-16BE', _).		% BOM forbidden
+'$lgt_logtalk_prolog_encoding'('UTF-16LE', 'UTF-16LE', _).
 
 
 
