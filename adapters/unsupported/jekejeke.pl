@@ -444,7 +444,8 @@ format(Format, Arguments) :-
 
 % '$lgt_stream_current_line_number'(@stream, -integer)
 
-'$lgt_stream_current_line_number'(_, -1).
+'$lgt_stream_current_line_number'(Stream, Line) :-
+	stream_property(Stream, line_no(Line)).
 
 
 
@@ -479,8 +480,10 @@ format(Format, Arguments) :-
 
 % '$lgt_read_term'(@stream, -term, +list, -position, -list)
 
-'$lgt_read_term'(Stream, Term, Options, '-'(-1, -1), Variables) :-
+'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, Variables) :-
+	stream_position(Stream, LineBegin),
 	read_term(Stream, Term, [variable_names(Variables)| Options]).
+	stream_position(Stream, LineEnd).
 
 
 
