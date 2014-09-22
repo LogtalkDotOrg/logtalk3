@@ -25,6 +25,16 @@ RELEASE NOTES
 =============
 
 
+3.00.0 - September ??, 2014
+===============================================
+
+Prolog adapter and integration files
+------------------------------------
+
+* FIXED: Predicates for getting the current date and time for tuProlog with
+the help of Roberta Calegari.
+
+
 3.00.0 Release Candidate 2 - September 22, 2014
 ===============================================
 

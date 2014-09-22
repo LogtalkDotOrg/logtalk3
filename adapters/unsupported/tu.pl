@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for tuProlog 2.9.0 and later versions
-%  Last updated on September 19, 2014
+%  Last updated on September 22, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -469,18 +469,18 @@ numbervars(Term, From, Next) :-
 
 '$lgt_current_date'(Year, Month, Day) :-
 	class('java.util.Calendar') <- getInstance returns Instance,
-	Instance.'YEAR' <- get(Year),
-	Instance.'MONTH' <- get(Month),
-	Instance.'DAY_OF_MONTH' <- get(Day).
+	Instance.'YEAR' <- get(YEAR), Instance <- get(YEAR) returns Year,
+	Instance.'MONTH' <- get(MONTH), Instance <- get(MONTH) returns Month0, Month is Month0 + 1,
+	Instance.'DAY_OF_MONTH' <- get(DAY), Instance <- get(DAY) returns Day.
 
 
 % '$lgt_current_time'(?integer, ?integer, ?integer)
 
 '$lgt_current_time'(Hours, Minutes, Seconds) :-
 	class('java.util.Calendar') <- getInstance returns Instance,
-	Instance.'HOUR' <- get(Hours),
-	Instance.'MINUTE' <- get(Minutes),
-	Instance.'SECOND' <- get(Seconds).
+	Instance.'HOUR' <- get(HOUR), Instance <- get(HOUR) returns Hours,
+	Instance.'MINUTE' <- get(MINUTE), Instance <- get(MINUTE) returns Minutes,
+	Instance.'SECOND' <- get(SECOND), Instance <- get(SECOND) returns Seconds.
 
 
 
