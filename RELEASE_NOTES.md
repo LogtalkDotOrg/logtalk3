@@ -31,6 +31,10 @@ RELEASE NOTES
 Prolog adapter and integration files
 ------------------------------------
 
+* ADDED: Unsupported Jekejeke Prolog adapter file. Not yet functional as there
+are some required features missing from the current Jekejeke Prolog release
+(1.0.3).
+
 * FIXED: Predicates for getting the current date and time for tuProlog with
 the help of Roberta Calegari.
 
