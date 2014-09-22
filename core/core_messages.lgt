@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/07/01,
+		date is 2014/09/22,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -131,7 +131,7 @@
 
 	logtalk::message_tokens(banner, core) -->
 		{current_logtalk_flag(version_data, logtalk(Major, Minor, Patch, Status))},
-		(	{Status == ''} ->
+		(	{Status == stable} ->
 			[nl, 'Logtalk ~d.~d.~d'-[Major, Minor, Patch], nl, 'Copyright (c) 1998-2014 Paulo Moura'-[], nl, nl]
 		;	[nl, 'Logtalk ~d.~d.~d-~w'-[Major, Minor, Patch, Status], nl, 'Copyright (c) 1998-2014 Paulo Moura'-[], nl, nl]
 		).

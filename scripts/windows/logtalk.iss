@@ -2,7 +2,7 @@
 ; Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 ; 
 ; Logtalk Inno Setup script for generating Windows installers
-; Last updated on September 2, 2014
+; Last updated on September 22, 2014
 ; 
 ; Logtalk is free software. You can redistribute it and/or modify it under
 ; the terms of the FSF GNU General Public License 3  (plus some additional
@@ -17,7 +17,7 @@
 #define MyAppRegUrlName "Logtalk Registration.url"
 
 #define MyBaseDir "C:\lgt3git"
-#define MyAppVer FileRead(FileOpen(MyBaseDir + "\VERSION.txt"))
+#define MyAppVer StringChange(FileRead(FileOpen(MyBaseDir + "\VERSION.txt")), '-stable', '')
 
 [Setup]
 AppName={#MyAppName}

@@ -6,6 +6,7 @@
 ##   Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Release build script
+##   Last updated on September 22, 2013
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -28,7 +29,8 @@
 
 if [ -z "$1" ]; then
 	git clone git://github.com/LogtalkDotOrg/logtalk3.git lgtclone
-	version=`cat lgtclone/VERSION.txt`
+	version=`cat lgtclone/VERSION.txt | sed -e 's/-stable$//'`
+
 	mv lgtclone logtalk-$version
 else
 	version="$1"

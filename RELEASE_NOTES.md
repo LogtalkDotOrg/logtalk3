@@ -34,6 +34,12 @@ Prolog adapter and integration files
 * FIXED: Predicates for getting the current date and time for tuProlog with
 the help of Roberta Calegari.
 
+Installers and installation scripts
+-----------------------------------
+
+* CHANGED: The installers and installation scripts to delete the suffix
+`stable` from the version string.
+
 
 3.00.0 Release Candidate 2 - September 22, 2014
 ===============================================

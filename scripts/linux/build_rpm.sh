@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Logtalk RPM package build script
-##   Last updated on October 28, 2013
+##   Last updated on September 22, 2013
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@
 #############################################################################
 
 version=`cat ../../VERSION.txt`
-version_clean=`echo $version | sed -e 's/-/_/g'`
+version_clean=`echo $version | sed -e 's/-stable$//'`
 archive=logtalk-$version
 
 directory="$PWD"
