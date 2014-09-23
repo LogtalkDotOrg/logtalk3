@@ -31,6 +31,8 @@ RELEASE NOTES
 Prolog adapter and integration files
 ------------------------------------
 
+* IMPROVED: Adapter files internal documentation.
+
 * ADDED: Unsupported Jekejeke Prolog adapter file. Not yet functional as there
 are some required features missing from the current Jekejeke Prolog release
 (1.0.3).

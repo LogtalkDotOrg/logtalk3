@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Minerva 2.4
-%  Last updated on September 19, 2014
+%  Last updated on September 23, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -55,7 +55,8 @@ listing(_) :-
 %  predicate properties
 %
 %  this predicate must return at least static, dynamic, and built_in 
-%  properties for an existing predicate
+%  properties for an existing predicate (and ideally meta_predicate/1
+%  properties for built-in predicates and library predicates)
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -143,7 +144,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  file extension predicates
+%  file name extension predicates
 %
 %  these extensions are used by Logtalk load/compile predicates
 %
@@ -171,7 +172,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  back-end Prolog features
+%  back-end Prolog compiler features
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -237,7 +238,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  file predicates
+%  operating-system access predicates
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -445,7 +446,8 @@ callable(Term) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  customized version of the read_term/3 predicate for returning the term
-%  position (start and end lines; needed for improved error messages)
+%  position (start and end lines; needed for improved error messages) and
+%  the variable names (ideally using the standard variable_names/1 option)
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -493,7 +495,7 @@ callable(Term) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  experimental lambda support predicates
+%  lambda expressions support predicates
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -528,7 +530,8 @@ callable(Term) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  error term normalization
+%  error term normalization (when exception terms don't follow the ISO
+%  Prolog standard)
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -557,6 +560,8 @@ callable(Term) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  string built-in type
+%
+%  define these predicates to trivially fail if no string type is available
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -590,11 +595,11 @@ callable(Term) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Shortcuts to the Logtalk built-in predicates logtalk_load/1 and
+%  shortcuts to the Logtalk built-in predicates logtalk_load/1 and
 %  logtalk_make/1
 %
 %  defined in the adapter files to make it easier to comment them out in case
-%  of conflict with some Prolog native feature; it implies conformance with
+%  of conflict with some Prolog native feature; they require conformance with
 %  the ISO Prolog standard regarding the definition of the {}/1 syntax
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
