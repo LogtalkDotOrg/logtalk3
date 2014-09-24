@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SWI Prolog 6.0.0 and later versions
-%  Last updated on September 23, 2014
+%  Last updated on September 24, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -409,8 +409,7 @@
 '$lgt_load_prolog_code'(File, Source, Options) :-
 	% remove the Prolog file name extension in order to support generating
 	% and loading of .qlf files when using the qcompile/1 option
-	'$lgt_file_extension'(prolog, Extension),
-	atom_concat(Path, Extension, File),
+	file_name_extension(Path, _, File),
 	(	style_check('?'(singleton)) ->
 		% turn off singleton variable checking as the built-in
 		% write_canonical/2 predicate can generate code that

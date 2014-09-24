@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on September 23, 2014
+%  Last updated on September 24, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -405,7 +405,7 @@ setup_call_cleanup(_, _, _) :-
 '$lgt_load_prolog_code'(File, _, Options) :-
 	% remove the Prolog file name extension in order to support generating
 	% and loading of .eco files when using the output:eco option
-	'$lgt_file_extension'(prolog, Extension),
+	'$lgt_file_extension'(object, Extension),
 	atom_concat(Path, Extension, File),
 	compile(Path, Options).
 

@@ -40,6 +40,9 @@ are some required features missing from the current Jekejeke Prolog release
 * FIXED: Predicates for getting the current date and time for tuProlog with
 the help of Roberta Calegari.
 
+* FIXED: ECLiPSe, Lean Prolog, Qu-Prolog, and SWI-Prolog adapter files to use
+the new `object` file type when compiling/loading intermediate Prolog files.
+
 Installers and installation scripts
 -----------------------------------
 

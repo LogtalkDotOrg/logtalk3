@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Qu-Prolog 9.0 and later versions
-%  Last updated on September 23, 2014
+%  Last updated on September 24, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -422,7 +422,7 @@ format(Format, Arguments) :-
 % Logtalk source file, given a list of options
 
 '$lgt_load_prolog_code'(File, _, _) :-
-	'$lgt_file_extension'(prolog, Extension),
+	'$lgt_file_extension'(object, Extension),
 	atom_concat(Name, Extension, File),
 	load(Name).
 
