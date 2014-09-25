@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Lean Prolog 3.8.8 and later versions
-%  Last updated on September 24, 2014
+%  Last updated on September 25, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -498,9 +498,9 @@ to_engine(Interactor, Pattern, Goal) :-
 
 % '$lgt_decompose_file_name'(+atom, ?atom, ?atom, ?atom)
 %
-% decomposes a file path in its components; the directory
-% must always end with a slash and the extension must be
-% the empty atom when it does not exist
+% decomposes a file path in its components; the directory must always end
+% with a slash; the extension must start with a "." when defined and must
+% be the empty atom when it does not exist
 
 '$lgt_decompose_file_name'(File, Directory, Name, Extension) :-
 	abs2path_file(File, Directory0, Basename),

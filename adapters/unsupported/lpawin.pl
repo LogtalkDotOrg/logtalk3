@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for LPA WinProlog 5.00
-%  Last updated on September 23, 2014
+%  Last updated on September 25, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -582,6 +582,16 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 '$lgt_home_directory'(Directory) :-
 	env(Variables),
 	member(('LOGTALKHOME',Directory), Variables), !.
+
+
+% '$lgt_decompose_file_name'(+atom, ?atom, ?atom, ?atom)
+%
+% decomposes a file path in its components; the directory must always end
+% with a slash; the extension must start with a "." when defined and must
+% be the empty atom when it does not exist
+
+'$lgt_decompose_file_name'(File, Directory, Name, Extension) :-
+	?????
 
 
 

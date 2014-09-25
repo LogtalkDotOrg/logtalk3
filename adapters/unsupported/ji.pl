@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for JIProlog 3.1.0-1 or later versions
-%  Last updated on September 23, 2014
+%  Last updated on September 25, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -414,6 +414,25 @@ format(Format, Arguments) :-
 
 '$lgt_home_directory'(Directory) :-
 	invoke('java.lang.System', getenv('java.lang.String'), ['LOGTALKHOME'], Directory).
+
+
+% '$lgt_decompose_file_name'(+atom, ?atom, ?atom, ?atom)
+%
+% decomposes a file path in its components; the directory must always end
+% with a slash; the extension must start with a "." when defined and must
+% be the empty atom when it does not exist
+
+'$lgt_decompose_file_name'(File, Directory, Name, Extension) :-
+	create_object('java.io.File'('java.lang.String'), [File], Object),
+	invoke(Object, getParent, [], Directory),
+	invoke(Object, getName, [], Basename),
+	(	sub_atom(Basename, Before, _, After, '.') ->
+		sub_atom(Basename, 0, Before, _, Name),
+		sub_atom(Basename, _, After, 0, Extension0),
+		atom_concat('.', Extension0, Extension)
+	;	Name = Basename,
+		Extension = ''
+	).
 
 
 

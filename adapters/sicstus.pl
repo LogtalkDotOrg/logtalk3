@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SICStus Prolog 4.1.0 and later versions
-%  Last updated on September 23, 2014
+%  Last updated on September 25, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -449,9 +449,9 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 
 % '$lgt_decompose_file_name'(+atom, ?atom, ?atom, ?atom)
 %
-% decomposes a file path in its components; the directory
-% must always end with a slash and the extension must be
-% the empty atom when it does not exist
+% decomposes a file path in its components; the directory must always end
+% with a slash; the extension must start with a "." when defined and must
+% be the empty atom when it does not exist
 
 '$lgt_decompose_file_name'(File, Directory, Name, Extension) :-
 	atom_codes(File, FileCodes),
