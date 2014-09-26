@@ -3,8 +3,8 @@
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
-%  Adapter file for Jekejeke Prolog 1.0.
-%  Last updated on September 25, 2014
+%  Adapter file for Jekejeke Prolog 1.?.? and later versions
+%  Last updated on September 26, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -28,6 +28,7 @@
 :- use_module(library(arith)).
 :- use_module(library(lists)).
 :- use_module(library(file)).
+:- use_module(library(shell)).
 
 
 
@@ -266,8 +267,7 @@ format(Format, Arguments) :-
 %
 % converts between Prolog internal file paths and operating-system paths
 
-'$lgt_prolog_os_file_name'(PrologPath, OSPath) :-
-	?????
+'$lgt_prolog_os_file_name'(Path, Path).
 
 
 % '$lgt_expand_path'(+nonvar, -atom)
@@ -356,7 +356,7 @@ format(Format, Arguments) :-
 % access to operating-system environment variables
 
 '$lgt_environment_variable'(Variable, Value) :-
-	?????
+	getenv(Variable, Value).
 
 
 % '$lgt_startup_directory'(-atom)
@@ -364,7 +364,10 @@ format(Format, Arguments) :-
 % returns the Logtalk startup directory 
 
 '$lgt_startup_directory'(Directory) :-
-	?????
+	(	getenv('LOGTALK_STARTUP_DIRECTORY', Directory) ->
+		true
+	;	'$lgt_current_directory'(Directory)
+	).
 
 
 % '$lgt_user_directory'(-atom)
@@ -372,7 +375,7 @@ format(Format, Arguments) :-
 % returns the Logtalk user directory; fails if unknown
 
 '$lgt_user_directory'(Directory) :-
-	?????
+	getenv('LOGTALKUSER', Directory).
 
 
 % '$lgt_home_directory'(-atom)
@@ -380,7 +383,7 @@ format(Format, Arguments) :-
 % returns the Logtalk home directory; fails if unknown
 
 '$lgt_home_directory'(Directory) :-
-	?????
+	getenv('LOGTALKHOME', Directory).
 
 
 % '$lgt_decompose_file_name'(+atom, ?atom, ?atom, ?atom)
