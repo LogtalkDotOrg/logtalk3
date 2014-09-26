@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for GNU Prolog 1.4.2 (and later versions)
-%  Last updated on September 25, 2014
+%  Last updated on September 27, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -285,7 +285,8 @@ setup_call_cleanup(_, _, _) :-
 % checks if a file exists
 
 '$lgt_file_exists'(File) :-
-	file_exists(File).
+	file_exists(File),
+	file_property(File, type(regular)).
 
 
 % '$lgt_delete_file'(+atom)
@@ -301,7 +302,8 @@ setup_call_cleanup(_, _, _) :-
 % checks if a directory exists
 
 '$lgt_directory_exists'(Directory) :-
-	file_exists(Directory).
+	file_exists(Directory),
+	file_property(Directory, type(directory)).
 
 
 % '$lgt_current_directory'(-atom)
@@ -325,7 +327,8 @@ setup_call_cleanup(_, _, _) :-
 % makes a new directory; succeeds if the directory already exists
 
 '$lgt_make_directory'(Directory) :-
-	(	file_exists(Directory) ->
+	(	file_exists(Directory),
+		file_property(Directory, type(directory)) ->
 		true
 	;	make_directory(Directory)
 	).

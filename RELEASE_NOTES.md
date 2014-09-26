@@ -43,11 +43,20 @@ the help of Roberta Calegari.
 * FIXED: ECLiPSe, Lean Prolog, Qu-Prolog, and SWI-Prolog adapter files to use
 the new `object` file type when compiling/loading intermediate Prolog files.
 
+* FIXED: GNU Prolog adapter file definitions the file and directory existence
+predicates to distinguish between files and directories.
+
 Installers and installation scripts
 -----------------------------------
 
 * CHANGED: The installers and installation scripts to delete the suffix
 `stable` from the version string.
+
+Library
+-------
+
+* FIXED: The `os` object for the GNU Prolog definition of the file existence
+predicate to ensure that its a regular file instead of e.g. a directory.
 
 Contributions
 -------------

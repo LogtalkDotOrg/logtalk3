@@ -36,9 +36,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.7,
+		version is 1.71,
 		author is 'Paulo Moura',
-		date is 2014/02/24,
+		date is 2014/09/27,
 		comment is 'Simple example of using conditional compilation to implement a portable operating-system interface for selected back-end Prolog compilers.'
 	]).
 
@@ -347,7 +347,8 @@
 			 file_property(Directory, type(directory))}.
 
 		file_exists(File) :-
-			{file_exists(File)}.
+			{file_exists(File),
+			 file_property(File, type(regular))}.
 
 		file_modification_time(File, Time) :-
 			{file_property(File, last_modification(Time))}.
