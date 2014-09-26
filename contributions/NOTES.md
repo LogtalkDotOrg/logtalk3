@@ -17,7 +17,7 @@ a short description of each included contribution:
 	This folder contains an implementation of persistent object
 	flags. Includes usage examples.
 
-* `iso8601.lgt`  
+* `iso8601`  
 	Contributed by: Daniel L. Dudley
 
 	This is a partial implementation of the ISO 8601 standard, 
@@ -70,7 +70,7 @@ library entities using the queries:
 		lgtdoc::library(pddl_parser, [xmldir('$LOGTALKUSER/docs/tmp2')]),
 		lgtdoc::library(verdi_neruda, [xmldir('$LOGTALKUSER/docs/tmp3')]),
 		lgtdoc::library(xml_parser, [xmldir('$LOGTALKUSER/docs/tmp4')]),
-		lgtdoc::file(iso8601, [xmldir('$LOGTALKUSER/docs/tmp5')]).
+		lgtdoc::library(iso8601, [xmldir('$LOGTALKUSER/docs/tmp5')]).
 
 (3) Run the command `lgt2html` on the temporary directories to generate the
 (X)HTML documentation or the command `lgt2pdf` to generate PDF documentation:

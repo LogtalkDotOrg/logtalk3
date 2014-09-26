@@ -9,15 +9,17 @@
 	Author:  Daniel L. Dudley
 	Created: 2004-02-18
 
+	Modified: 2014-09-26 (to use the library "os" object to get the current date)
+
 ******************************************************************************/
 
 
 :- object(iso8601).
 
 	:- info([
-		version is 1.0,
+		version is 1.01,
 		author is 'Daniel L. Dudley',
-		date is 2005/04/11,
+		date is 2014/09/26,
 		comment is 'ISO 8601 (and European civil calendar) compliant library of date predicates.',
 		remarks is [
 			'Scope:' - 'This object currently provides a powerful, versatile and efficient set of date-handling predicates, which--thanks to Logtalk--may be used as is on a wide range of Prolog compilers. Besides taking time to familiarize oneself with each predicate, the user should take note of the following information.',
@@ -241,7 +243,7 @@
 	date(JD,Year,Month,Day) :-
 		(  var(JD), var(Year),  var(Month),  var(Day)
 			-> % GET THE SYSTEM DATE AND ITS JULIAN DAY SERIAL NUMBER:
-			{'$lgt_current_date'(Year, Month, Day)}
+			os::date_time(Year, Month, Day, _, _, _, _)
 			;  true
 		),
 		(  var(JD), nonvar(Year),  nonvar(Month),  nonvar(Day)

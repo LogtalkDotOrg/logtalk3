@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Default library paths 
-%  Last updated on August 20, 2014
+%  Last updated on September 26, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -73,6 +73,7 @@ logtalk_library_path(library, logtalk_user('library/')).
 logtalk_library_path(tools, logtalk_user('tools/')).
 
 logtalk_library_path(flags, contributions('flags/')).
+logtalk_library_path(iso8601, contributions('iso8601/')).
 logtalk_library_path(pddl_parser, contributions('pddl_parser/')).
 logtalk_library_path(verdi_neruda, contributions('verdi_neruda/')).
 logtalk_library_path(xml_parser, contributions('xml_parser/')).

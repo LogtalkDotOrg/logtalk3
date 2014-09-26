@@ -27,6 +27,6 @@
 	logtalk_load(flags(loader)),
 	logtalk_load(pddl_parser(loader)),
 	logtalk_load(xml_parser(loader)),
-	logtalk_load(iso8601),
+	logtalk_load(iso8601(loader)),
 	logtalk_load(verdi_neruda(loader))
 )).
