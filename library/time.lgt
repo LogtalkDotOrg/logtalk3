@@ -27,17 +27,17 @@
 	implements(timep)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2000/7/24,
+		date is 2014/9/27,
 		comment is 'Time predicates.'
 	]).
 
 	now(Hours, Mins, Secs) :-
-		{'$lgt_current_time'(Hours, Mins, Secs)}.
+		os::date_time(_, _, _, Hours, Mins, Secs, _).
 
 	cpu_time(Seconds) :-
-		{'$lgt_cpu_time'(Seconds)}.
+		os::cpu_time(Seconds).
 
 	valid(Hours, Mins, Secs) :-
 		integer(Hours), Hours >= 0,

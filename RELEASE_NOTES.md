@@ -55,6 +55,9 @@ Installers and installation scripts
 Library
 -------
 
+* CHANGED: The `dates` library now depends on the `os` library thus removing
+its dependencies on adapter file internal predicates.
+
 * FIXED: The `os` object for the GNU Prolog definition of the file existence
 predicate to ensure that its a regular file instead of e.g. a directory.
 

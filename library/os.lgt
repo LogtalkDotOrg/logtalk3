@@ -36,7 +36,7 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.71,
+		version is 1.8,
 		author is 'Paulo Moura',
 		date is 2014/09/27,
 		comment is 'Simple example of using conditional compilation to implement a portable operating-system interface for selected back-end Prolog compilers.'
@@ -770,8 +770,7 @@
 		time_stamp(_) :-
 			throw(not_available(time_stamp/1)).
 
-		date_time(_, _, _, _, _, _, _) :-
-			throw(not_available(date_time/7)).
+		date_time(0, 0, 0, 0, 0, 0, 0).
 
 		cpu_time(Time) :-
 			{Time is cputime}.

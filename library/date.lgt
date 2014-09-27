@@ -27,14 +27,14 @@
 	implements(datep)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2006/3/7,
+		date is 2014/9/27,
 		comment is 'Date predicates.'
 	]).
 
 	today(Year, Month, Day) :-
-		{'$lgt_current_date'(Year, Month, Day)}.
+		os::date_time(Year, Month, Day, _, _, _, _).
 
 	leap_year(Year) :-
 		(	0 =:= mod(Year, 4), 0 =\= mod(Year, 100) ->
