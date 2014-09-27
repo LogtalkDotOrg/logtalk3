@@ -36,9 +36,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.8,
+		version is 1.9,
 		author is 'Paulo Moura',
-		date is 2014/09/27,
+		date is 2014/09/28,
 		comment is 'Simple example of using conditional compilation to implement a portable operating-system interface for selected back-end Prolog compilers.'
 	]).
 
@@ -1092,6 +1092,90 @@
 
 		command_line_arguments(Arguments) :-
 			{unix(argv(Arguments))}.
+
+	:- elif(current_logtalk_flag(prolog_dialect, jekejeke)).
+
+		pid(_) :-
+			throw(not_available(pid/1)).
+
+		shell(_, _) :-
+			throw(not_available(shell/2)).
+
+		shell(Command) :-
+			throw(not_available(shell/1)).
+
+		expand_path(Path, ExpandedPath) :-
+			{absolute_file_name(Path, ExpandedPath)}.
+
+		make_directory(Directory) :-
+			expand_path(Directory, ExpandedPath),
+			(	{exists_directory(ExpandedPath)} ->
+				true
+			;	{make_directory(ExpandedPath)}
+			).
+
+		delete_directory(Directory) :-
+			expand_path(Directory, ExpandedPath),
+			{delete_directory(ExpandedPath)}.
+
+		change_directory(Directory) :-
+			expand_path(Directory, ExpandedPath),
+			set_prolog_flag(base_url, ExpandedPath).
+
+		working_directory(Directory) :-
+			current_prolog_flag(base_url, Directory).
+
+		directory_exists(Directory) :-
+			expand_path(Directory, ExpandedPath),
+			{exists_directory(ExpandedPath)}.
+
+		file_exists(File) :-
+			expand_path(File, ExpandedPath),
+			{exists_file(ExpandedPath)}.
+
+		file_modification_time(File, Time) :-
+			expand_path(File, ExpandedPath),
+			{get_time_file(ExpandedPath, Time)}.
+
+		file_size(_, _) :-
+			throw(not_available(file_size/2)).
+
+		file_permission(_, _) :-
+			throw(not_available(file_permission/2)).
+
+		rename_file(Old, New) :-
+			expand_path(Old, OldExpandedPath),
+			expand_path(New, NewExpandedPath),
+			{rename_file(OldExpandedPath, NewExpandedPath)}.
+
+		delete_file(File) :-
+			expand_path(File, ExpandedPath),
+			{delete_file(ExpandedPath)}.
+
+		environment_variable(Variable, Value) :-
+			{getenv(Variable, Value)}.
+
+		time_stamp(Time) :-
+			throw(not_available(time_stamp/1)).
+
+		date_time(0, 0, 0, 0, 0, 0, 0).
+
+		cpu_time(Time) :-
+			{statistics(time, Miliseconds)},
+			Seconds is Miliseconds / 1000 .
+
+		wall_time(Time) :-
+			{statistics(uptime, Miliseconds)},
+			Seconds is Miliseconds / 1000 .
+
+		operating_system_type(Type) :-
+			(	{getenv('COMSPEC', _)} ->
+				Type = windows
+			;	Type = unix
+			).
+
+		command_line_arguments(_) :-
+			throw(not_available(command_line_arguments/1)).
 
 	:- else.
 
