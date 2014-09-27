@@ -12,9 +12,9 @@
 :- object(benchmarks).
 
 	:- info([
-		version is 5.4,
+		version is 5.5,
 		author is 'Paulo Moura',
-		date is 2013/05/10,
+		date is 2014/09/27,
 		comment is 'Benchmark utility predicates and standard set of benchmarks.'
 	]).
 
@@ -45,6 +45,8 @@
 		argnames is ['Id', 'Goal']
 	]).
 
+	:- uses(os, [cpu_time/1]).
+
 	% run all benchmarks the default number of times:
 	run :-
 		run(100000).
@@ -66,15 +68,15 @@
 		report(Id, Goal, N, LoopTime, GoalTime, Average, Speed).
 
 	empty_loop_time(N, LoopTime) :-
-		{'$lgt_cpu_time'(Begin)},		% defined in the adapter files
+		cpu_time(Begin),
 		do_benchmark(empty_loop, N),
-		{'$lgt_cpu_time'(End)},
+		cpu_time(End),
 		LoopTime is End - Begin.
 
 	run(Id, N, LoopTime, GoalTime, Average, Speed) :-
-		{'$lgt_cpu_time'(Begin)},
+		cpu_time(Begin),
 		do_benchmark(Id, N),
-		{'$lgt_cpu_time'(End)},
+		cpu_time(End),
 		GoalTime is End - Begin,
 		Average is (GoalTime - LoopTime)/N,
 		catch(Speed is round(1.0/Average), _, Speed = 'n/a').

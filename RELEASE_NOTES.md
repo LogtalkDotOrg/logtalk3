@@ -64,6 +64,12 @@ Contributions
 * CHANGED: Moved the `iso8601.lgt` file to its own folder and update the code
 to use the operating-system access library to get the current date.
 
+Examples
+--------
+
+* IMPROVED: Removed the `benchmarks` example dependency on an internal adapter
+file predicate.
+
 Tests
 -----
 
