@@ -9,14 +9,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(lgtunit(loader)),
-	% entities containing primary declarations of multifile predicate must be compiled ...
-	logtalk_load(multifile_primary_entities),
-	% ... before entities defining clauses for those multifile predicates
-	logtalk_load(multifile_other_objects),
-	logtalk_load(multifile_other_categories),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+
+:- category(multifile_test_category).
+
+	:- multifile(multifile_primary_object::m1/1).
+	multifile_primary_object::m1(4).
+	multifile_primary_object::m1(5).
+
+:- end_category.
+
+
+
+:- category(multifile_test_category(_)).
+
+	:- multifile(multifile_primary_object(_)::a/2).
+	multifile_primary_object(P)::a(2, P).
+
+:- end_category.

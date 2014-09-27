@@ -35,22 +35,3 @@
 	multifile_primary_category(P)::b(1, P).
 
 :- end_object.
-
-
-
-:- category(multifile_test_category).
-
-	:- multifile(multifile_primary_object::m1/1).
-	multifile_primary_object::m1(4).
-	multifile_primary_object::m1(5).
-
-:- end_category.
-
-
-
-:- category(multifile_test_category(_)).
-
-	:- multifile(multifile_primary_object(_)::a/2).
-	multifile_primary_object(P)::a(2, P).
-
-:- end_category.

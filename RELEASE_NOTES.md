@@ -64,6 +64,12 @@ Contributions
 * CHANGED: Moved the `iso8601.lgt` file to its own folder and update the code
 to use the operating-system access library to get the current date.
 
+Tests
+-----
+
+* FIXED: Tests of the `multifile/1` directive to avoid discontiguous predicate
+issues with some backend Prolog compilers such as GNU Prolog.
+
 
 3.00.0 Release Candidate 2 - September 22, 2014
 ===============================================
