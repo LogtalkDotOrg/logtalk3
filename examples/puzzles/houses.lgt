@@ -33,16 +33,30 @@ Who owns the zebra and who drinks water?
 :- object(houses).
 
 	:- info([
-		version is 1.0,
-		date is 2004/5/1,
-		author is 'Paulo Moura',
+		version is 1.1,
+		date is 2014/09/27,
+		author is 'Paulo Moura and Markus Triska',
 		comment is 'Houses logical puzzle']).
 
 	:- public(houses/1).
 	:- mode(houses(-list), one).
 	:- info(houses/1, [
-		comment is 'Solution to the puzzle.',
+		comment is 'Solution to the puzzle satisfying all constraints.',
 		argnames is ['Solution']
+	]).
+
+	:- public(zebra_owner/1).
+	:- mode(zebra_owner(?atom), zero_or_one).
+	:- info(zebra_owner/1, [
+		comment is 'Zebra owner.',
+		argnames is ['Owner']
+	]).
+
+	:- public(water_drinker/1).
+	:- mode(water_drinker(?atom), zero_or_one).
+	:- info(water_drinker/1, [
+		comment is 'Water drinker.',
+		argnames is ['Drinker']
 	]).
 
 	:- public(print/1).
@@ -58,23 +72,33 @@ Who owns the zebra and who drinks water?
 		member(h(spanish, dog, _, _, _), Solution),                         %  3
 		member(h(_, _, _, coffee, green), Solution),                        %  4
 		member(h(ukrainian, _, _, tea, _), Solution),                       %  5 
-		next(h(_, _, _, _, green), h(_, _, _, _, white), Solution),         %  6
+		near(h(_, _, _, _, green), h(_, _, _, _, white), Solution),         %  6
 		member(h(_, snake, winston, _, _), Solution),                       %  7
 		member(h(_, _, kool, _, yellow), Solution),                         %  8
 		Solution = [_, _, h(_, _, _, milk, _), _, _],                       %  9
 		Solution = [h(norwegian, _, _, _, _)| _],                           % 10
-		next(h(_, fox, _, _, _), h(_, _, chesterfield, _, _), Solution),    % 11
-		next(h(_, _, kool, _, _), h(_, horse, _, _, _), Solution),          % 12
+		near(h(_, fox, _, _, _), h(_, _, chesterfield, _, _), Solution),    % 11
+		near(h(_, _, kool, _, _), h(_, horse, _, _, _), Solution),          % 12
 		member(h(_, _, lucky, juice, _), Solution),                         % 13
 		member(h(japonese, _, kent, _, _), Solution),                       % 14
-		next(h(norwegian, _, _, _, _), h(_, _, _, _, blue), Solution),      % 15
+		near(h(norwegian, _, _, _, _), h(_, _, _, _, blue), Solution),      % 15
 		member(h(_, _, _, water, _), Solution),  	% one of them drinks water
 		member(h(_, zebra, _, _, _), Solution).  	% one of them owns a zebra
+
+	zebra_owner(Owner) :-
+		houses(Solution),
+		member(h(Owner,zebra,_,_,_), Solution).
+
+	water_drinker(Drinker) :-
+		houses(Solution),
+		member(h(Drinker,_,_,water,_), Solution).
 
 	print([]).
 	print([House| Houses]) :-
 		write(House), nl,
 		print(Houses).
+
+	% auxiliary predicates
 
 	% h(Nationality, Pet, Cigarette, Drink, Color)
 	template([h(_, _, _, _, _), h(_, _, _, _, _), h(_, _, _, _, _), h(_, _, _, _, _), h(_, _, _, _, _)]).
@@ -84,6 +108,11 @@ Who owns the zebra and who drinks water?
 	member(C, [_, _, C, _, _]).
 	member(D, [_, _, _, D, _]).
 	member(E, [_, _, _, _, E]).
+
+	near(A, B, Solution) :-
+		next(A, B, Solution).
+	near(A, B, Solution) :-
+		next(B, A, Solution).
 
 	next(A, B, [A, B, _, _, _]).
 	next(B, C, [_, B, C, _, _]).

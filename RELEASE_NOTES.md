@@ -73,6 +73,10 @@ Examples
 * IMPROVED: Removed the `benchmarks` example dependency on an internal adapter
 file predicate.
 
+* FIXED: Bug in the Houses puzzle example due to a restrictive interpretation
+of some of the puzzle constraints. Thanks to Markus Triska for the bug report
+and the enhancements to the puzzle implementation.
+
 Tests
 -----
 

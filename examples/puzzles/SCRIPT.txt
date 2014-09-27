@@ -61,16 +61,30 @@ yes
 
 % Houses logical puzzle:
 
-| ?- houses::(houses(S), print(S)).
+| ?- houses::(houses(Solution), print(Solution)).
+h(norwegian,fox,kool,water,yellow)
+h(ukrainian,horse,chesterfield,tea,blue)
+h(english,snake,winston,milk,red)
+h(spanish,dog,lucky,juice,white)
+h(japonese,zebra,kent,coffee,green)
+Solution = [h(norwegian, fox, kool, water, yellow), h(ukrainian, horse, chesterfield, tea, blue), h(english, snake, winston, milk, red), h(spanish, dog, lucky, juice, white), h(japonese, zebra, kent, coffee, green)] ;
 h(norwegian,fox,kool,water,yellow)
 h(ukrainian,horse,chesterfield,tea,blue)
 h(english,snake,winston,milk,red)
 h(japonese,zebra,kent,coffee,green)
 h(spanish,dog,lucky,juice,white)
+Solution = [h(norwegian, fox, kool, water, yellow), h(ukrainian, horse, chesterfield, tea, blue), h(english, snake, winston, milk, red), h(japonese, zebra, kent, coffee, green), h(spanish, dog, lucky, juice, white)] ;
+no
 
-S = [h(norwegian,fox,kool,water,yellow),h(ukrainian,horse,chesterfield,tea,blue),h(english,snake,winston,milk,red),h(japonese,zebra,kent,coffee,green),h(spanish,dog,lucky,juice,white)] ? ;
+| ?- zebra_owner(Owner).
+Owner = japonese ;
+Owner = japonese ;
+no
 
-yes
+| ?- water_drinker(Drinker).
+Drinker = norwegian ;
+Drinker = norwegian ;
+no
 
 
 % Passing a note logical puzzle
