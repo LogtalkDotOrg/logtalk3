@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Jekejeke Prolog 1.?.? and later versions
-%  Last updated on September 26, 2014
+%  Last updated on September 27, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -77,16 +77,57 @@ forall(Generate, Test) :-
 	\+ (Generate, \+ Test).
 
 
-% format(+stream_or_alias, +character_code_list_or_atom, +list) -- built-in ????
+% format(+stream_or_alias, +character_code_list_or_atom, +list)
 
 format(Stream, Format, Arguments) :-
-	?????
+	atom_chars(Format, Chars),
+	format_(Chars, Stream, Arguments).
+
+format_([], _, []).
+format_(['~', Spec| Chars], Stream, Arguments) :-
+	!,
+	format_spec_(Spec, Stream, Arguments, RemainingArguments),
+	format_(Chars, Stream, RemainingArguments).
+format_([Char| Chars], Stream, Arguments) :-
+	put_char(Stream, Char),
+	format_(Chars, Stream, Arguments).
+
+format_spec_('a', Stream, [Argument| Arguments], Arguments) :-
+%	atom(Argument),
+	write(Stream, Argument).
+format_spec_('c', Stream, [Argument| Arguments], Arguments) :-
+	put_code(Stream, Argument).
+format_spec_('s', Stream, [Argument| Arguments], Arguments) :-
+	atom_codes(Atom, Argument),
+	write(Stream, Atom).
+format_spec_('w', Stream, [Argument| Arguments], Arguments) :-
+	write(Stream, Argument).
+format_spec_('q', Stream, [Argument| Arguments], Arguments) :-
+	writeq(Stream, Argument).
+format_spec_('k', Stream, [Argument| Arguments], Arguments) :-
+	write_canonical(Stream, Argument).
+format_spec_('d', Stream, [Argument| Arguments], Arguments) :-
+	write(Stream, Argument).
+format_spec_('D', Stream, [Argument| Arguments], Arguments) :-
+	write(Stream, Argument).
+format_spec_('f', Stream, [Argument| Arguments], Arguments) :-
+	write(Stream, Argument).
+format_spec_('g', Stream, [Argument| Arguments], Arguments) :-
+	write(Stream, Argument).
+format_spec_('G', Stream, [Argument| Arguments], Arguments) :-
+	write(Stream, Argument).
+format_spec_('i', _, [_| Arguments], Arguments).
+format_spec_('n', Stream, Arguments, Arguments) :-
+	nl(Stream).
+format_spec_('~', Stream, Arguments, Arguments) :-
+	put_char(Stream, '~').
 
 
-% format(+character_code_list_or_atom, +list) -- built-in ????
+% format(+character_code_list_or_atom, +list)
 
 format(Format, Arguments) :-
-	?????
+	current_output(Stream),
+	format(Stream, Format, Arguments).
 
 
 % numbervars(?term, +integer, ?integer) -- built-in
@@ -393,7 +434,43 @@ format(Format, Arguments) :-
 % be the empty atom when it does not exist
 
 '$lgt_decompose_file_name'(File, Directory, Name, Extension) :-
-	?????
+	atom_codes(File, FileCodes),
+	(	'$lgt_strrch'(FileCodes, 0'/, [_Slash| BasenameCodes]) ->
+		atom_codes(Basename, BasenameCodes),
+		atom_concat(Directory, Basename, File)
+	;	Directory = './',
+		atom_codes(Basename, FileCodes),
+		BasenameCodes = FileCodes
+	),
+	(	'$lgt_strrch'(BasenameCodes, 0'., ExtensionCodes) ->
+		atom_codes(Extension, ExtensionCodes),
+		atom_concat(Name, Extension, Basename)
+	;	Name = Basename,
+		Extension = ''
+	).
+
+% the following auxiliary predicate was written by Per Mildner and 
+% is used here (renamed just to avoid conflicts) with permission
+
+'$lgt_strrch'(Xs, G, Ys) :-
+	Xs = [X| Xs1],
+	(	X == G ->
+		'$lgt_strrch1'(Xs1, G, Xs, Ys)
+	;	'$lgt_strrch'(Xs1, G, Ys)
+	).
+
+'$lgt_strrch1'(Xs, _G, _Prev, _Ys) :-
+	var(Xs),
+	!,
+	fail.
+'$lgt_strrch1'([], _G, Prev, Ys) :-
+	Ys = Prev.
+'$lgt_strrch1'(Xs, G, Prev, Ys) :-
+	Xs = [X| Xs1],
+	(	X == G ->
+		'$lgt_strrch1'(Xs1, G, Xs, Ys)
+	;	'$lgt_strrch1'(Xs1, G, Prev, Ys)
+	).
 
 
 
