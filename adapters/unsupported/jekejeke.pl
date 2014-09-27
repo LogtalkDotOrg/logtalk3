@@ -241,9 +241,8 @@ format(Format, Arguments) :-
 % back-end Prolog compiler supported features (that are compatible with Logtalk)
 
 '$lgt_prolog_feature'(prolog_dialect, jekejeke).
-'$lgt_prolog_feature'(prolog_version, (Major, Minor, Path)) :-
-	?????
-'$lgt_prolog_feature'(prolog_compatible_version, '@>='((Major, Minor, Path))).
+'$lgt_prolog_feature'(prolog_version, (1, 0, 4)).
+'$lgt_prolog_feature'(prolog_compatible_version, '@>='((1, 0, 4))).
 
 '$lgt_prolog_feature'(encoding_directive, source).
 '$lgt_prolog_feature'(tabling, unsupported).
@@ -348,7 +347,7 @@ format(Format, Arguments) :-
 % gets current working directory
 
 '$lgt_current_directory'(Directory) :-
-	?????
+	current_prolog_flag(base_url, Directory).
 
 
 % '$lgt_change_directory'(+atom)
@@ -356,7 +355,7 @@ format(Format, Arguments) :-
 % changes current working directory
 
 '$lgt_change_directory'(Directory) :-
-	?????
+	set_prolog_flag(base_url, Directory).
 
 
 % '$lgt_make_directory'(+atom)
@@ -486,14 +485,12 @@ format(Format, Arguments) :-
 
 % '$lgt_current_date'(?integer, ?integer, ?integer)
 
-'$lgt_current_date'(Year, Month, Day) :-
-	?????
+'$lgt_current_date'(0, 0, 0).
 
 
 % '$lgt_current_time'(?integer, ?integer, ?integer)
 
-'$lgt_current_time'(Hours, Minutes, Seconds) :-
-	?????
+'$lgt_current_time'(0, 0, 0).
 
 
 
