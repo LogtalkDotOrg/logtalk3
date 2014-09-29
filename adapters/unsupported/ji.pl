@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for JIProlog 3.1.0-1 or later versions
-%  Last updated on September 25, 2014
+%  Last updated on September 29, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -385,7 +385,8 @@ format(Format, Arguments) :-
 % access to operating-system environment variables
 
 '$lgt_environment_variable'(Variable, Value) :-
-	invoke('java.lang.System', getenv('java.lang.String'), [Variable], Value).
+	invoke('java.lang.System', getenv('java.lang.String'), [Variable], Value),
+	Value \== [].
 
 
 % '$lgt_startup_directory'(-atom)
@@ -394,7 +395,7 @@ format(Format, Arguments) :-
 
 '$lgt_startup_directory'(Directory) :-
 	(	invoke('java.lang.System', getenv('java.lang.String'), ['LOGTALK_STARTUP_DIRECTORY'], Directory),
-		Directory \== '' ->
+		Directory \== [] ->
 		true
 	;	working_directory(Directory, Directory)
 	).
@@ -405,7 +406,8 @@ format(Format, Arguments) :-
 % returns the Logtalk user directory; fails if unknown
 
 '$lgt_user_directory'(Directory) :-
-	invoke('java.lang.System', getenv('java.lang.String'), ['LOGTALKUSER'], Directory).
+	invoke('java.lang.System', getenv('java.lang.String'), ['LOGTALKUSER'], Directory),
+	Directory \== [].
 
 
 % '$lgt_home_directory'(-atom)
@@ -413,7 +415,8 @@ format(Format, Arguments) :-
 % returns the Logtalk home directory; fails if unknown
 
 '$lgt_home_directory'(Directory) :-
-	invoke('java.lang.System', getenv('java.lang.String'), ['LOGTALKHOME'], Directory).
+	invoke('java.lang.System', getenv('java.lang.String'), ['LOGTALKHOME'], Directory),
+	Directory \== [].
 
 
 % '$lgt_decompose_file_name'(+atom, ?atom, ?atom, ?atom)
