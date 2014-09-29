@@ -297,11 +297,20 @@ format(Format, Arguments) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% '$lgt_prolog_os_file_name'(+atom, -atom)
+% '$lgt_prolog_os_file_name'(-atom, +atom)
+%
+% converts between Prolog internal file paths and operating-system paths
+
+'$lgt_prolog_os_file_name'(Path, Path).
+
+
 % '$lgt_expand_path'(+nonvar, -atom)
 %
 % expands a file path to a full path
 
-'$lgt_expand_path'(Path, Path).
+'$lgt_expand_path'(Path, ExpandedPath) :-
+	absolute_file_name(Path, ExpandedPath).
 
 
 % '$lgt_file_exists'(+atom)
