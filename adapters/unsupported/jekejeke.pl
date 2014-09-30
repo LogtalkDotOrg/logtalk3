@@ -3,8 +3,8 @@
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
-%  Adapter file for Jekejeke Prolog 1.?.? and later versions
-%  Last updated on September 27, 2014
+%  Adapter file for Jekejeke Prolog 1.0.4 and later versions
+%  Last updated on September 30, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -241,7 +241,8 @@ format(Format, Arguments) :-
 % back-end Prolog compiler supported features (that are compatible with Logtalk)
 
 '$lgt_prolog_feature'(prolog_dialect, jekejeke).
-'$lgt_prolog_feature'(prolog_version, (1, 0, 4)).
+'$lgt_prolog_feature'(prolog_version, (Major, Minor, Patch)) :-
+	current_prolog_flag(version_data, jekejeke(Major, Minor, Patch)).
 '$lgt_prolog_feature'(prolog_compatible_version, '@>='((1, 0, 4))).
 
 '$lgt_prolog_feature'(encoding_directive, source).
