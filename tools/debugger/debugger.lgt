@@ -503,7 +503,7 @@
 		port_user_name(Port, PortUserName),
 		(	leashing(Port, PortUserName, N, Goal, ExCtx, _) ->
 			repeat,
-				% the do_port_option/7 call can fail but still chnage the value of Code
+				% the do_port_option/7 call can fail but still change the value of Code
 				% (e.g. when adding or removing a spy point)
 				leashing(Port, PortUserName, N, Goal, ExCtx, Code),
 				(	write_max_depth_(MaxDepth),

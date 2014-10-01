@@ -31,6 +31,9 @@
 		comment is 'Logtalk debugger default message translations.'
 	]).
 
+	% avoid a catch-22...
+	:- set_logtalk_flag(debug, off).
+
 	% structured message printing settings;
 	% the main reason to not write directly to an output stream is to allow
 	% other tools such as IDEs to intercept and handle debugger output
