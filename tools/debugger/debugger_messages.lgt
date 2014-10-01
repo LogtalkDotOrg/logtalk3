@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/08/20,
+		date is 2014/10/01,
 		comment is 'Logtalk debugger default message translations.'
 	]).
 
@@ -176,7 +176,15 @@
 
 	% execution context
 
-	logtalk::message_tokens(execution_context(Entity, Sender, This, Self, MetaCallCtx, Stack), debugger) -->
+	logtalk::message_tokens(execution_context(Entity0, Sender0, This0, Self0, MetaCallCtx0, Stack0), debugger) -->
+		% in some cases, e.g when dealing with multifile clauses for Prolog modules,
+		% most of the execution context elements are not available
+		{var(Entity0) -> Entity = n/a; Entity = Entity0},
+		{var(Sender0) -> Sender = n/a; Sender = Sender0},
+		{var(This0) -> This = n/a; This = This0},
+		{var(Self0) -> Self = n/a; Self = Self0},
+		{var(MetaCallCtx0) -> MetaCallCtx = n/a; MetaCallCtx = MetaCallCtx0},
+		{var(Stack0) -> Stack = n/a; Stack = Stack0},
 		[
 			'    Entity:            ~q'-[Entity], nl,
 			'    Sender:            ~q'-[Sender], nl,

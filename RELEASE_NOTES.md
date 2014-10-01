@@ -64,6 +64,13 @@ access library.
 * FIXED: The `os` object for the GNU Prolog definition of the file existence
 predicate to ensure that its a regular file instead of e.g. a directory.
 
+Tools
+-----
+
+* IMPROVED: When printing execution context information, the `debugger` tool
+now prints `n/a` when an element of the execution context is not available
+instead of printing a variable.
+
 Contributions
 -------------
 
