@@ -1826,6 +1826,7 @@ threaded_notify(Message) :-
 	;	Name == version_data ->
 		'$lgt_version_data'(Value)
 	;	Name == version ->
+		% deprecated flag
 		'$lgt_version_data'(logtalk(Major,Minor,Patch,_)),
 		Value = version(Major, Minor, Patch)
 	).
@@ -5653,7 +5654,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_add_entity_predicate_properties'(@entity_identifier)
 %
-% save all entity predicate properties (at the end of entity compilation)
+% saves all entity predicate properties (at the end of entity compilation)
 % for use with the reflection built-in predicates and methods
 
 '$lgt_add_entity_predicate_properties'(Entity) :-
@@ -8649,7 +8650,11 @@ current_logtalk_flag(Flag, Value) :-
 % of redefined built-in predicates
 %
 % in the case of a clause rule for a multifile predicate, the clause body
-% is compiled in the context of the entity defining the clause
+% is compiled in the context of the entity defining the clause but with the
+% values of "sender", "this", and "self" shared with the clause head; still,
+% calls to the parameter/2 method in the clause body will access parameters
+% for the defining entity; parameters for the entity for which the clause is
+% defined can be accessed through simple unification at the clause
 
 '$lgt_compile_clause'((Head:-Body), Entity, TClause, DClause, Ctx) :-
 	!,
@@ -14513,7 +14518,7 @@ current_logtalk_flag(Flag, Value) :-
 		) ->
 		% ... with at least one clause for this particular coinductive predicate head
 		Hook = ((HeadStack = BodyStack), THead)
-	;	% no hook predicates defined or defined but with no clause for this particular coinductive predicate head
+	;	% no hook predicates defined or defined but with no clauses for this particular coinductive predicate head
 		Hook = (HeadStack = BodyStack)
 	).
 
@@ -14596,7 +14601,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% reports calls to declared, static but undefined predicates and non-terminals
+% reports calls to declared, static, but undefined predicates and non-terminals
 
 '$lgt_report_undefined_predicate_call'(runtime, _, _).
 
@@ -14656,7 +14661,8 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_write_encoding_directive'(@stream)
 %
-% writes the encoding/1 directive (if it exists); must be the first term in the file
+% writes the encoding/1 directive (if supported in generated code);
+% it must be the first term in the file
 
 '$lgt_write_encoding_directive'(Stream) :-
 	(	'$lgt_prolog_feature'(encoding_directive, full),
@@ -15805,7 +15811,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_valid_scope'(@nonvar).
 %
-% converts between user and internal scope terms
+% valid (user-level) scope
 
 '$lgt_valid_scope'(private).
 '$lgt_valid_scope'(protected).
