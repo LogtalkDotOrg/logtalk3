@@ -25,8 +25,16 @@ RELEASE NOTES
 =============
 
 
-3.00.0 - September ??, 2014
+3.00.0 - October ??, 2014
 ===============================================
+
+Logtalk compiler and runtime
+----------------------------
+
+* CHANGED: Reverted the debug events `fact/3` and `rule/3` back to `fact/4`
+and `rule/4` with the first argument being the container entity. This change
+is required to display correct source file information when tracing calls to
+multifile predicates.
 
 Prolog adapter and integration files
 ------------------------------------

@@ -380,7 +380,7 @@
 	logtalk::debug_handler(Event, ExCtx) :-
 		debug_handler(Event, ExCtx).
 
-	debug_handler(fact(Fact,Clause,Line), ExCtx) :-
+	debug_handler(fact(Entity,Fact,Clause,Line), ExCtx) :-
 		invocation_number_(N),
 		(	debugging_,
 			(	\+ skipping_,
@@ -388,12 +388,11 @@
 			;	quasi_skipping_,
 				spying_line_number_(Entity, Line)
 			) ->
-			logtalk::execution_context(ExCtx, Entity, _, _, _, _, _),
 			port(fact(Entity,Clause,Line), N, Fact, _, _, ExCtx, Action),
 			{Action}
 		;	true
 		).
-	debug_handler(rule(Head,Clause,Line), ExCtx) :-
+	debug_handler(rule(Entity,Head,Clause,Line), ExCtx) :-
 		invocation_number_(N),
 		(	debugging_,
 			(	\+ skipping_,
@@ -401,7 +400,6 @@
 			;	quasi_skipping_,
 				spying_line_number_(Entity, Line)
 			) ->
-			logtalk::execution_context(ExCtx, Entity, _, _, _, _, _),
 			port(rule(Entity,Clause,Line), N, Head, _, _, ExCtx, Action),
 			{Action}
 		;	true

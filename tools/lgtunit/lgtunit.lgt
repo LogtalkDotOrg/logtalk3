@@ -512,11 +512,9 @@
 	% the Logtalk runtime calls all defined logtalk::trace_event/2 hooks using
 	% a failure-driven loop; thus we don't have to worry about handling all
 	% events or failing after handling an event to give other hooks a chance
-	logtalk::trace_event(fact(Fact, N, _), ExCtx) :-
-		logtalk::execution_context(ExCtx, Entity, _, _, _, _, _),
+	logtalk::trace_event(fact(Entity, Fact, N, _), _) :-
 		fired(Entity, Fact, N).
-	logtalk::trace_event(rule(Head, N, _), ExCtx) :-
-		logtalk::execution_context(ExCtx, Entity, _, _, _, _, _),
+	logtalk::trace_event(rule(Entity, Head, N, _), _) :-
 		fired(Entity, Head, N).
 
 	fired(Entity, Other::Head, N) :-
