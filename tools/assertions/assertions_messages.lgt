@@ -27,9 +27,11 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/04/03,
+		date is 2014/10/01,
 		comment is 'Assertions framework default message translations.'
 	]).
+
+	:- set_logtalk_flag(debug, off).
 
 	% structured message printing predicates;
 	% the main reason to not write directly to an output stream is to allows

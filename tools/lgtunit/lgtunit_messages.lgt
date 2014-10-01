@@ -27,9 +27,11 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/07/08,
+		date is 2014/10/01,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
+
+	:- set_logtalk_flag(debug, off).
 
 	% structured message printing predicates;
 	% the main reason to not write directly to an output stream is to allows
