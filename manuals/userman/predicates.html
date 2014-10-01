@@ -637,7 +637,7 @@ Logtalk defines four built-in private methods to access an object execution cont
 To find the object that received the message under execution we may use the <a title="Consult reference manual" href="../refman/methods/self_1.html"><code>self/1</code></a> method. We may also retrieve the object that has sent the message under execution using the <a title="Consult reference manual" href="../refman/methods/sender_1.html"><code>sender/1</code></a> method.
 </p>
 <p>
-The method <a title="Consult reference manual" href="../refman/methods/this_1.html"><code>this/1</code></a> enables us to retrieve the name of the object that contains the predicate clause that is being executed instead of using the name directly. This helps to avoid breaking the code if we decide to change the object name and forget to change the name references. This method may also be used from within a category. In this case, the method returns the object importing the category on whose behalf the predicate clause is being executed.
+The method <a title="Consult reference manual" href="../refman/methods/this_1.html"><code>this/1</code></a> enables us to retrieve the name of the object for which the predicate clause whose body is being executed is defined instead of using the name directly. This helps to avoid breaking the code if we decide to change the object name and forget to change the name references. This method may also be used from within a category. In this case, the method returns the object importing the category on whose behalf the predicate clause is being executed.
 </p>
 <p>
 Here is a short example including calls to these three object execution context methods:
