@@ -71,6 +71,9 @@ Tools
 now prints `n/a` when an element of the execution context is not available
 instead of printing a variable.
 
+* FIXED: Printing of source file information for a traced head of a multifile
+clause of a Prolog module when using the `debugger` tool.
+
 Contributions
 -------------
 

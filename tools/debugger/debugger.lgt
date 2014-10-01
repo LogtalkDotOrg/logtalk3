@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/08/20,
+		date is 2014/10/01,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -792,13 +792,20 @@
 			object_property(Entity, file(Basename,Directory))
 		;	current_category(Entity) ->
 			category_property(Entity, file(Basename,Directory))
-		;	current_protocol(Entity),
+		;	current_protocol(Entity) ->
 			protocol_property(Entity, file(Basename,Directory))
+		;	% assume a Prolog module, for which there isn't a portable
+			% solution for retrieving source file information
+			fail
 		),
 		(	Goal = (Other::Predicate) ->
-			% clause for a multifile predicate
+			% clause for an entity multifile predicate
 			functor(Predicate, Functor, Arity),
 			print_message(information, debugger, file_context(Basename,Directory,Entity,Other::Functor/Arity,Clause,Line))
+		;	Goal = ':'(Other,Predicate) ->
+			% clause for a module multifile predicate
+			functor(Predicate, Functor, Arity),
+			print_message(information, debugger, file_context(Basename,Directory,Entity,':'(Other,Functor/Arity),Clause,Line))
 		;	% clause for a local predicate
 			functor(Goal, Functor, Arity),
 			print_message(information, debugger, file_context(Basename,Directory,Entity,Functor/Arity,Clause,Line))
