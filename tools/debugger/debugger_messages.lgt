@@ -288,8 +288,8 @@
 			'      - - remove (removes a predicate spy point for the current goal)'-[], nl,
 			'      # - add (adds a line number spy point for the current clause)'-[], nl,
 			'      | - remove (removes a line number spy point for the current clause)'-[], nl,
-			'      h - extended help (prints this list of options)'-[], nl,
-			'      ? - condensed help'-[], nl
+			'      h - condensed help (prints this list of options)'-[], nl,
+			'      ? - extended help'-[], nl
 		].
 
 	logtalk::message_tokens(condensed_help, debugger) -->
@@ -307,7 +307,7 @@
 			'      e - exception        x - execution context'-[], nl,
 			'      $ - compiled goal    = - debugging information'-[], nl,
 			'      < - write depth      . - file information'-[], nl,
-			'      h - extended help    ? - condensed help'-[], nl
+			'      h - condensed help    ? - extended help'-[], nl
 		].
 
 	% ports
