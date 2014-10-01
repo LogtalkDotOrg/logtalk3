@@ -82,6 +82,9 @@ instead of printing a variable.
 * FIXED: Printing of source file information for a traced head of a multifile
 clause of a Prolog module when using the `debugger` tool.
 
+* FIXED: The `lgtunit` tool misreporting of code coverage information when an
+entity defines clauses for Prolog module multifile predicates.
+
 Contributions
 -------------
 

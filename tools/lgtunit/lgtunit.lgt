@@ -30,7 +30,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/09/09,
+		date is 2014/10/01,
 		comment is 'A simple unit test framework featuring predicate clause coverage.'
 	]).
 
@@ -528,6 +528,10 @@
 			functor(Template, EntityFunctor, EntityArity),
 			assertz(fired_(Template, Other::Functor/Arity, N))
 		).
+	fired(_, ':'(_,_), _) :-
+		% clauses of Prolog module multifile predicates currently have
+		% an index of zero with no associated source data information
+		!.
 	fired(Entity, Head, N) :-
 		functor(Head, Functor, Arity),
 		(	fired_(Entity, Functor/Arity, N) ->
