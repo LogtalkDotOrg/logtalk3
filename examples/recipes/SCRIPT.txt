@@ -1,0 +1,59 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the `LICENSE.txt` file for details.
+________________________________________________________________________
+
+
+% start by loading the example:
+
+| ?- logtalk_load(recipes(loader)).
+yes
+
+
+% list all the ingredients required for the green soup recipe:
+
+| ?- green_soup::ingredients(Ingredients).
+Ingredients = [peas,cream,water,oil]
+yes
+
+
+% list all the steps required to make mashed peas:
+
+| ?- mashed_peas::steps(Steps).
+Steps = [1-'Boil the peas.',2-'Mash the peas',3-'Add salt and mix.']
+yes
+
+
+% find out what dishes you can cook with green peas:
+
+| ?- conforms_to_protocol(Recipe, recipep), Recipe::ingredient(peas).
+Recipe = green_soup ? ;
+Recipe = mashed_peas ? ;
+no
+
+
+% patch the prototypical recipe to add a level/1 descriptor to all recipes:
+
+| ?- logtalk_load(recipes(patch_1)).
+yes
+
+% you always get into trouble while making green soup:
+
+| ?- green_soup::assertz(level(hard)).
+yes
+
+
+% but most recipes are easy; add a second patch to define a default value
+% for the level/1 descriptor to all recipes that don't specify a different
+% level and check it:
+
+| ?- logtalk_load(recipes(patch_1)).
+yes
+
+| ?- mashed_peas::level(Level).
+Level = easy
+yes

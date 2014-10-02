@@ -287,6 +287,10 @@ Follows a short description of each included example (in alphabetical order):
 - `puzzles`  
 	several examples of solving logical puzzles
 
+- `recipes`  
+	example of a possible solution for representing structured data
+	and also of hot patching of running code
+
 - `reflection`  
 	example of a simple class-based reflective system
 

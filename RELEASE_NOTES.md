@@ -97,6 +97,10 @@ to use the operating-system access library to get the current date.
 Examples
 --------
 
+* ADDED: New `recipes` example, inspired by an answer to a StackOverflow
+question. It illustrates a solution for representing structured data and also
+hot patching of running code.
+
 * IMPROVED: Removed the `benchmarks` example dependency on an internal adapter
 file predicate.
 

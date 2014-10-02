@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Default library paths 
-%  Last updated on September 26, 2014
+%  Last updated on November 2, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -174,6 +174,7 @@ logtalk_library_path(profiling, examples('profiling/')).
 logtalk_library_path(prototypes, examples('prototypes/')).
 logtalk_library_path(proxies, examples('proxies/')).
 logtalk_library_path(puzzles, examples('puzzles/')).
+logtalk_library_path(recipes, examples('recipes/')).
 logtalk_library_path(reflection, examples('reflection/')).
 logtalk_library_path(relations, examples('relations/')).
 logtalk_library_path(roots, examples('roots/')).
