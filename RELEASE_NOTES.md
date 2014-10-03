@@ -36,6 +36,9 @@ and `rule/4` with the first argument being the container entity. This change
 is required to display correct source file information when tracing calls to
 multifile predicates.
 
+* FIXED: Exception term when trying to use the `threaded/0` directive within a
+protocol or category.
+
 Prolog adapter and integration files
 ------------------------------------
 

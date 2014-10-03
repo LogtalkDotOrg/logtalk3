@@ -6968,11 +6968,15 @@ current_logtalk_flag(Flag, Value) :-
 % create a message queue at object initialization
 
 '$lgt_compile_logtalk_directive'(threaded, _) :-
+	'$lgt_pp_entity_'(Kind, _, _, _, _),
 	(	'$lgt_prolog_feature'(threads, unsupported) ->
 		throw(resource_error(threads))
-	;	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _) ->
+	;	Kind == object ->
 		assertz('$lgt_pp_threaded_')
-	;	throw(domain_error(object_directive, threaded/0))
+	;	Kind == protocol ->
+		throw(domain_error(protocol_directive, threaded/0))
+	;	% Kind == category,
+		throw(domain_error(category_directive, threaded/0))
 	).
 
 % dynamic/0 entity directive
