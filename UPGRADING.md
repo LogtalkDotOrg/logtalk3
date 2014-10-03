@@ -153,6 +153,10 @@ of the context of the object importing the category. This allows moving code
 that calls meta-predicates between objects and categories without requiring
 changes.
 
+The `initialization/1` directive is only accepted as a source file directive
+or as an object directive. Usage in protocols and categories is no longer
+supported.
+
 
 Reflection support
 ------------------

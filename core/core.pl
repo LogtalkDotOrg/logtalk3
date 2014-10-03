@@ -6986,17 +6986,27 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_logtalk_directive'((dynamic), _) :-
 	assertz('$lgt_pp_dynamic_').
 
-% initialization/1 entity directive
+% initialization/1 object directive
+%
+% this directive cannot be used in categories and protocols as it's not always
+% possible to correctly compile initialization goals as there's no valid
+% compilation context values for "sender", "this", and "self"
 
 '$lgt_compile_logtalk_directive'(initialization(Goal), Ctx) :-
-	'$lgt_must_be'(callable, Goal),
-	'$lgt_pp_entity_'(_, Entity, Prefix, _, _),
-	% MetaVars = [] as we're compiling a local call
-	'$lgt_comp_ctx'(Ctx, (:- initialization(Goal)), Entity, Entity, Entity, Entity, Prefix, [], _, ExCtx, _, [], Position),
-	'$lgt_execution_context'(ExCtx, Entity, Entity, Entity, Entity, [], []),
-	(	'$lgt_compiler_flag'(debug, on) ->
-		assertz('$lgt_pp_entity_initialization_'(dgoal(Goal,Ctx), Position))
-	;	assertz('$lgt_pp_entity_initialization_'(goal(Goal,Ctx), Position))
+	'$lgt_pp_entity_'(Kind, Entity, Prefix, _, _),
+	(	Kind == object ->
+		'$lgt_must_be'(callable, Goal),
+		% MetaVars = [] as we're compiling a local call
+		'$lgt_comp_ctx'(Ctx, (:- initialization(Goal)), Entity, Entity, Entity, Entity, Prefix, [], _, ExCtx, _, [], Position),
+		'$lgt_execution_context'(ExCtx, Entity, Entity, Entity, Entity, [], []),
+		(	'$lgt_compiler_flag'(debug, on) ->
+			assertz('$lgt_pp_entity_initialization_'(dgoal(Goal,Ctx), Position))
+		;	assertz('$lgt_pp_entity_initialization_'(goal(Goal,Ctx), Position))
+		)
+	;	Kind == protocol ->
+		throw(domain_error(protocol_directive, (initialization)/1))
+	;	% Kind == category,
+		throw(domain_error(category_directive, (initialization)/1))
 	).
 
 % op/3 entity directive (operators are local to entities)

@@ -194,17 +194,7 @@ The argument must be an identifier of a defined dynamic category, otherwise an e
 <h2 id="categories_directives">Category directives</h2>
 
 <p>
-Category directives are used to set initialization goals, define category properties, to document a category dependencies on other Logtalk entities, and to load the contents of files into a category.
-</p>
-
-<h3 id="categories_initialization">Category initialization</h3>
-
-<p>
-We can define a goal to be executed as soon as a category is (compiled and) loaded to memory with the <a title="Consult reference manual" href="../refman/directives/initialization_1.html"><code>initialization/1</code></a> directive:
-</p>
-<pre>:- initialization(Goal).</pre>
-<p>
-The argument can be any valid Prolog or Logtalk goal, including a message sending call.
+Category directives are used to define category properties, to document a category dependencies on other Logtalk entities, and to load the contents of files into a category.
 </p>
 
 <h3 id="categories_dynamic">Dynamic categories</h3>
@@ -388,7 +378,7 @@ Note that access to category parameters is only possible using the <code>paramet
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: September 21, 2014</span>
+		<span>Last updated on: October 3, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="protocols.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="predicates.html">next</a></span><br/>

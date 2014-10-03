@@ -117,17 +117,7 @@ The argument must be an identifier of a defined dynamic protocol, otherwise an e
 <h2>Protocol directives<a id="protocols_directives"></a></h2>
 
 <p>
-Protocol directives are used to set initialization goals and protocol properties.
-</p>
-
-<h3 id="protocols_initialization">Protocol initialization</h3>
-
-<p>
-We can define a goal to be executed as soon as a protocol is (compiled and) loaded to memory with the <a title="Consult reference manual" href="../refman/directives/initialization_1.html"><code>initialization/1</code></a> directive:
-</p>
-<pre>:- initialization(Goal).</pre>
-<p>
-The argument can be any valid Prolog or Logtalk goal, including a message sending call.
+Protocol directives are used to define protocol properties and documentation.
 </p>
 
 <h3 id="protocols_dynamic">Dynamic protocols</h3>
@@ -259,7 +249,7 @@ Logtalk defines a built-in protocol named <code>forwarding</code> that contains 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: September 21, 2014</span>
+		<span>Last updated on: October 3, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="objects.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="categories.html">next</a></span><br/>

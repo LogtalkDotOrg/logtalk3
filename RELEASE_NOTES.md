@@ -31,6 +31,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: The `initialization/1` directive is no longer supported in protocols
+and categories as correct compilation of the initialization goal often requires
+a compile-time defined object context.
+
 * CHANGED: Reverted the debug events `fact/3` and `rule/3` back to `fact/4`
 and `rule/4` with the first argument being the container entity. This change
 is required to display correct source file information when tracing calls to
