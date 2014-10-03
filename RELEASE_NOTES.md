@@ -25,8 +25,8 @@ RELEASE NOTES
 =============
 
 
-3.00.0 - October ??, 2014
-===============================================
+3.00.0 Release Candidate 3 - October 3, 2014
+============================================
 
 Logtalk compiler and runtime
 ----------------------------
@@ -77,7 +77,7 @@ its dependencies on adapter file internal predicates.
 access library.
 
 * FIXED: The `os` object for the GNU Prolog definition of the file existence
-predicate to ensure that its a regular file instead of e.g. a directory.
+predicate to ensure that it's a regular file instead of e.g. a directory.
 
 Tools
 -----
