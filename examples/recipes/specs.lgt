@@ -31,7 +31,7 @@
 
     :- public([
         ingredient/1, ingredients/1, steps/1,
-		time/1
+		cooking_time/1
     ]).
 
     ingredient(Ingredient) :-
