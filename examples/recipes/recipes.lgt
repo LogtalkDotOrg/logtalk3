@@ -12,7 +12,9 @@
 % some recipes (warning: cooking is really not one of my skills...)
 
 
-:- object(green_soup, extends(proto_recipe)).
+:- object(green_soup,
+	implements(recipep),
+	extends(proto_recipe)).
 
     name('Green Soup').
 
@@ -30,7 +32,9 @@
 :- end_object.
 
 
-:- object(mashed_peas, extends(proto_recipe)).
+:- object(mashed_peas,
+	implements(recipep),
+	extends(proto_recipe)).
 
     name('Mashed Peas').
 

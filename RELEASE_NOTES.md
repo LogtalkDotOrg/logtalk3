@@ -28,7 +28,12 @@ RELEASE NOTES
 3.00.0 Release Candidate 4 - October ??, 2014
 =============================================
 
+Examples
+--------
 
+* IMPROVED: The `recipes` example now also illustrates a possible solution
+for dealing with a mixed data representation using both data objects and
+Prolog facts.
 
 
 3.00.0 Release Candidate 3 - October 3, 2014

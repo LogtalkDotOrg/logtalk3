@@ -23,8 +23,7 @@
 % next, we define a prototypical recipe object, which implements the recipe
 % protocol and adds some convinient predicates
 
-:- object(proto_recipe,
-	implements(recipep)).
+:- object(proto_recipe).
 
 	% allow this object to be (hot) patched
 	:- set_logtalk_flag(complements, allow).

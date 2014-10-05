@@ -10,6 +10,6 @@
 
 
 :- initialization((
-	logtalk_load(specs),
-	logtalk_load(recipes)
+	logtalk_load(library(basic_types_loader)),
+	logtalk_load([specs, recipes, parametric])
 )).
