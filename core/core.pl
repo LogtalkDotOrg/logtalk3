@@ -785,8 +785,6 @@ category_property(Ctg, Prop) :-
 	Flags /\ 512 =:= 512.
 '$lgt_category_property'(events, _, _, _, Flags) :-
 	Flags /\ 16 =:= 16.
-'$lgt_category_property'(synchronized, _, _, _, Flags) :-
-	Flags /\ 4 =:= 4.
 '$lgt_category_property'((dynamic), _, _, _, Flags) :-
 	Flags /\ 2 =:= 2.
 '$lgt_category_property'(static, _, _, _, Flags) :-
