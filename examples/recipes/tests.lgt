@@ -46,7 +46,9 @@
 
 	test(recipes_7) :-
 		{recipe(Recipe)},
-		Recipe::(ingredient(chocolate), cooking_time(CookingTime), name(Name)),
+		Recipe::ingredient(chocolate),
+		Recipe::cooking_time(CookingTime),
+		Recipe::name(Name),
 		CookingTime < 35,
 		Name == 'Berries and cream'.
 
