@@ -18024,12 +18024,13 @@ current_logtalk_flag(Flag, Value) :-
 			true
 		;	% Type == (dynamic)
 			Obj = DclCtn ->
+			% local declaration
 			true
-		;	Obj = DefCtn,
-			'$lgt_static_binding_entity'(DclCtn)
+		;	Obj = DefCtn
+			% local definition
 		),
 		% predicate definition found; use it only if it's safe
-		'$lgt_safe_static_binding_paths'(Obj, DclCtn, DefCtn),
+		'$lgt_static_binding_safe_paths'(Obj, DclCtn, DefCtn),
 		(	Meta == no ->
 			% cache only normal predicates
 			assertz('$lgt_send_to_obj_static_binding_'(GObj, GPred, GCallerExCtx, GCall)),
@@ -18137,7 +18138,7 @@ current_logtalk_flag(Flag, Value) :-
 	% lookup predicate definition
 	call(Def, Pred, CExCtx, Call, DefCtn), !,
 	% predicate definition found; use it only if it's safe
-	'$lgt_safe_static_binding_paths'(Ctg, DclCtn, DefCtn).
+	'$lgt_static_binding_safe_paths'(Ctg, DclCtn, DefCtn).
 
 
 '$lgt_obj_super_call_static_binding_prototype'(Obj, Alias, OExCtx, Call) :-
@@ -18174,7 +18175,7 @@ current_logtalk_flag(Flag, Value) :-
 	% lookup predicate definition
 	call(Def, Pred, PExCtx, Call, _, DefCtn), !,
 	% predicate definition found; use it only if it's safe
-	'$lgt_safe_static_binding_paths'(Obj, TCtn, DefCtn).
+	'$lgt_static_binding_safe_paths'(Obj, TCtn, DefCtn).
 
 
 '$lgt_obj_super_call_static_binding_instance'(Obj, Alias, OExCtx, Call) :-
@@ -18211,7 +18212,7 @@ current_logtalk_flag(Flag, Value) :-
 	% lookup predicate definition
 	call(IDef, Pred, CExCtx, Call, _, DefCtn), !,
 	% predicate definition found; use it only if it's safe
-	'$lgt_safe_static_binding_paths'(Obj, TCtn, DefCtn).
+	'$lgt_static_binding_safe_paths'(Obj, TCtn, DefCtn).
 
 
 '$lgt_obj_super_call_static_binding_class'(Obj, Alias, OExCtx, Call) :-
@@ -18248,7 +18249,7 @@ current_logtalk_flag(Flag, Value) :-
 	% lookup predicate definition
 	call(IDef, Pred, SExCtx, Call, _, DefCtn), !,
 	% predicate definition found; use it only if it's safe
-	'$lgt_safe_static_binding_paths'(Obj, TCtn, DefCtn).
+	'$lgt_static_binding_safe_paths'(Obj, TCtn, DefCtn).
 
 
 '$lgt_obj_super_call_static_binding_instance_class'(Obj, Pred, ExCtx, Call) :-
@@ -18298,7 +18299,7 @@ current_logtalk_flag(Flag, Value) :-
 	% lookup predicate definition
 	call(Def, Pred, EExCtx, Call, DefCtn), !,
 	% predicate definition found; use it only if it's safe
-	'$lgt_safe_static_binding_paths'(Ctg, DclCtn, DefCtn).
+	'$lgt_static_binding_safe_paths'(Ctg, DclCtn, DefCtn).
 
 
 
@@ -18326,24 +18327,130 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_safe_static_binding_paths'(@entity_identifier, @entity_identifier, @entity_identifier)
+% '$lgt_static_binding_safe_paths'(@entity_identifier, @entity_identifier, @entity_identifier)
 %
 % all entities in the inheritance-chain (from the entity that's the starting
 % point to both the declaration container and the definition container)
 % should be static-binding entities but currently we only check the end points
 
-'$lgt_safe_static_binding_paths'(_, DclEntity, DefEntity) :-
+'$lgt_static_binding_safe_paths'(Entity, DclEntity, DefEntity) :-
 	'$lgt_static_binding_entity'(DclEntity),
-	'$lgt_static_binding_entity'(DefEntity).
+	'$lgt_static_binding_entity'(DefEntity),
+	'$lgt_static_binding_safe_declaration_ancestors'(Entity, DclEntity),
+	'$lgt_static_binding_safe_definition_ancestors'(Entity, DefEntity).
 
 
 '$lgt_static_binding_entity'(Entity) :-
-	(	'$lgt_current_object_'(Entity, _, _, _, _, _, _, _, _, _, Flags)
-	;	'$lgt_current_protocol_'(Entity, _, _, _, Flags)
+	(	'$lgt_current_object_'(Entity, _, _, _, _, _, _, _, _, _, Flags) ->
+		Flags /\ 64 =\= 64,
+		Flags /\ 32 =\= 32
+		% support for complementing categories is disallowed
+	;	'$lgt_current_protocol_'(Entity, _, _, _, Flags) ->
+		true
 	;	'$lgt_current_category_'(Entity, _, _, _, _, Flags)
 	),
-	!,
-	Flags /\ 2 =:= 0.	% static entity property
+	Flags /\ 512 =\= 512,
+	% entity is not compiled in debug mode
+	Flags /\ 2 =:= 0.
+	% entity is static
+
+
+'$lgt_static_binding_entity'(object, Object) :-
+	'$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, Flags),
+	Flags /\ 512 =\= 512,
+	% object is not compiled in debug mode
+	Flags /\ 2 =:= 0,
+	% object is static
+	Flags /\ 64 =\= 64,
+	Flags /\ 32 =\= 32.
+	% support for complementing categories is disallowed
+
+'$lgt_static_binding_entity'(protocol, Protocol) :-
+	'$lgt_current_protocol_'(Protocol, _, _, _, Flags),
+	Flags /\ 512 =\= 512,
+	% protocol is not compiled in debug mode
+	Flags /\ 2 =:= 0.
+	% protocol is static
+
+'$lgt_static_binding_entity'(category, Category) :-
+	'$lgt_current_category_'(Category, _, _, _, _, Flags),
+	Flags /\ 512 =\= 512,
+	% category is not compiled in debug mode
+	Flags /\ 2 =:= 0.
+	% category is static
+
+
+'$lgt_static_binding_safe_declaration_ancestors'(Entity, DclEntity) :-
+	(	Entity = DclEntity ->
+		% local predicate declaration
+		true
+	;	% we add a third argument to properly handle class hierarchies if necessary
+		'$lgt_static_binding_safe_declaration_ancestors'(Entity, DclEntity, _)
+	).
+
+'$lgt_static_binding_safe_declaration_ancestors'(Entity, DclEntity, Kind) :-
+	'$lgt_entity_ancestor'(Entity, Type, Ancestor, Kind, NextKind),
+	(	'$lgt_static_binding_entity'(Type, Ancestor) ->
+		(	Ancestor = DclEntity ->
+			true
+		;	% move up, implementing the same depth-first strategy used by the predicate
+			% declaration lookup algorithm 
+			'$lgt_static_binding_safe_declaration_ancestors'(Ancestor, DclEntity, NextKind)
+		)
+	;	% ancestor can be later modified, rendering the static binding optimization invalid
+		!,
+		fail
+	).
+
+
+'$lgt_static_binding_safe_definition_ancestors'(Entity, DefEntity) :-
+	(	Entity = DefEntity ->
+		% local predicate definition
+		true
+	;	% we add a third argument to properly handle class hierarchies if necessary
+		'$lgt_static_binding_safe_definition_ancestors'(Entity, DefEntity, _)
+	).
+
+'$lgt_static_binding_safe_definition_ancestors'(Entity, DefEntity, Kind) :-
+	'$lgt_entity_ancestor'(Entity, Type, Ancestor, Kind, NextKind),
+	% protocols cannot contain predicate definitions
+	Type \== protocol,
+	(	'$lgt_static_binding_entity'(Type, Ancestor) ->
+		(	Ancestor = DefEntity ->
+			true
+		;	% move up, implementing the same depth-first strategy used by the predicate
+			% definition lookup algorithm 
+			'$lgt_static_binding_safe_definition_ancestors'(Ancestor, DefEntity, NextKind)
+		)
+	;	% ancestor can be later modified, rendering the static binding optimization invalid
+		!,
+		fail
+	).
+
+
+% entity ancestors are generated on backtracking in the same order
+% used by the predicate declaration and definition lookup algorithms
+
+'$lgt_entity_ancestor'(Entity, protocol, Protocol, Kind, Kind) :-
+	'$lgt_implements_protocol_'(Entity, Protocol, _).
+
+'$lgt_entity_ancestor'(Entity, protocol, Protocol, Kind, Kind) :-
+	'$lgt_extends_protocol_'(Entity, Protocol, _).
+
+'$lgt_entity_ancestor'(Entity, category, Category, Kind, Kind) :-
+	'$lgt_extends_category_'(Entity, Category, _).
+
+'$lgt_entity_ancestor'(Entity, category, Category, Kind, Kind) :-
+	'$lgt_imports_category_'(Entity, Category, _).
+
+'$lgt_entity_ancestor'(Entity, object, Parent, Kind, Kind) :-
+	'$lgt_extends_object_'(Entity, Parent, _).
+
+'$lgt_entity_ancestor'(Entity, object, Class, instance, superclass) :-
+	'$lgt_instantiates_class_'(Entity, Class, _).
+
+'$lgt_entity_ancestor'(Entity, object, Superclass, superclass, superclass) :-
+	'$lgt_specializes_class_'(Entity, Superclass, _).
 
 
 
