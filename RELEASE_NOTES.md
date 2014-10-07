@@ -36,6 +36,11 @@ intermediate entities in the predicate declaration and definition lookup
 chains (the entities must be static, not compiled in debug mode, and, in
 the case of objects, compiled with the `complements` flag set to `deny`).
 
+Prolog adapter and integration files
+------------------------------------
+
+* FIXED: Singleton variable warning in the YAP adapter file.
+
 Examples
 --------
 
