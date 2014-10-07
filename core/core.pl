@@ -13165,8 +13165,6 @@ current_logtalk_flag(Flag, Value) :-
 % generates code for the entity being compiled
 
 '$lgt_generate_entity_code'(protocol, _) :-
-	% protocols may contain initialization directives
-	'$lgt_compile_predicate_calls',
 	'$lgt_generate_protocol_clauses',
 	'$lgt_generate_protocol_directives',
 	'$lgt_generate_file_entity_initialization_goal'.
