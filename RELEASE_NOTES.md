@@ -47,6 +47,13 @@ Examples
 * IMPROVED: The `recipes` example now also illustrates a solution for dealing
 with a mixed data representation using both data objects and Prolog facts.
 
+Tests
+-----
+
+* ADDED: Unit tests for the `set_logtalk_flag/2` directive to check cases
+where static binding optimizations must not be applied due to setting the
+`complements` flag to value other than `deny` for intervening objects.
+
 
 3.00.0 Release Candidate 3 - October 3, 2014
 ============================================

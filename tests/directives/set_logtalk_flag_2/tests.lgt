@@ -20,7 +20,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/05/27,
+		date is 2014/10/07,
 		comment is 'Unit tests for the set_logtalk_flag/2 built-in directive.'
 	]).
 
@@ -35,5 +35,14 @@
 	test(set_logtalk_flag_2_2) :-
 		this(This),
 		\+ object_property(This, context_switching_calls).
+
+	test(set_logtalk_flag_2_3) :-
+		bottom::p(X),
+		X == top.
+
+	test(set_logtalk_flag_2_4) :-
+		logtalk_load(patch),
+		bottom::p(X),
+		X == patch.
 
 :- end_object.

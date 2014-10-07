@@ -9,10 +9,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load([top, middle, bottom], [optimize(on)]),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+:- object(middle,
+	extends(top)).
+
+	% setting the "complements" flag to a value other then
+	% "deny" prevents static binding optimizations
+	:- set_logtalk_flag(complements, allow).
+
+:- end_object.
