@@ -79,7 +79,7 @@ Bin-Prolog 8.x~10.x
 	Updated and tested with help of Arun Majumdar.
 
 
-CIAO Prolog 1.13.1
+CIAO Prolog 1.14.0
 
 	ciao.pl
 
@@ -107,24 +107,24 @@ IF/Prolog 5.3 and later versions
 	systems. Support for settings files on Windows unknown.
 
 
-Jekejeke Prolog 1.0.3
+Jekejeke Prolog 1.0.4
 
-	Incomplete. Missing Jekejeke Prolog features include operating-system
-	access predicates (notably for accessing environment variables and for
-	getting and setting the current directory).
+	Not yet tested as version 1.0.4 is still in development and some of
+	its new built-in predicates (e.g. for operating-system access) are
+	not yet stable.
 
 
-JIProlog 3.0.2-6 and later versions
+JIProlog 3.1.0-1 and later versions
 
 	ji.pl
 
 	Written with the help of the JIProlog author (but if you find any Logtalk 
-	problem please report it to me). Don't forget to use the cd/1 predicate to 
-	set the working directory before loading the library or an example. Some 
-	examples may not compile or run due to work in progress regarding ISO 
-	Prolog standard compliance. Supports smart compilation of source files.
-	Settings files are not supported (must be manually loaded after starting 
-	Logtalk).
+	problem please report it to me). Some examples may not compile or run due
+	to work in progress regarding ISO Prolog standard compliance. Supports smart
+	compilation of source files. Settings files are not supported (must be
+	manually loaded after starting Logtalk). Currently not functional due to
+	bugs in standard built-in predicates and lack of access to some required
+	operating-system information such as environment variable values. 
 
 
 LPA MacProlog32 1.25
