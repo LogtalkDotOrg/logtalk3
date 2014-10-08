@@ -66,7 +66,7 @@ Optional features support per backend Prolog compiler
 -----------------------------------------------------
 
 Some Logtalk features are optional and require compatible support for specific
-(and often not yet standard) features by the backend Prolog compilers. The
+(and sometimes not yet standard) features by the backend Prolog compilers. The
 following table summarizes the availability of these features:
 
 |  Compiler        |    Tabling    |  Coinduction  |    Unicode    |    Threads    |  
@@ -76,11 +76,16 @@ following table summarizes the availability of these features:
 |  ECLiPSe         |       no      |      yes      |       no      |       no      |  
 |  GNU Prolog      |       no      |       no      |       no      |       no      |  
 |  Lean Prolog     |       no      |       no      |      yes      |       no      |  
+|  Qu-Prolog       |       no      |       no      |       no      |       no      |  
 |  Quintus Prolog  |       no      |       no      |       no      |       no      |  
 |  SICStus Prolog  |       no      |      yes      |      yes      |       no      |  
 |  SWI-Prolog      |       no      |      yes      |      yes      |      yes      |  
 |  XSB             |      yes      |       no      |       no      |      yes      |  
 |  YAP             |      yes      |      yes      |      yes      |      yes      |  
+
+A value of "yes" means at least partial support (but some limitations may
+be present). A value of "no" just means that the backend Prolog compiler
+doesn't provide a *compatible* implementation of the required features.
 
 
 template adapter file
