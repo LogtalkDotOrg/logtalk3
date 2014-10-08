@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SWI Prolog 6.0.0 and later versions
-%  Last updated on September 25, 2014
+%  Last updated on October 8, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -615,14 +615,14 @@
 
 '$lgt_swi_directive_expansion'(include(File), Terms) :-
 	% just an hack for simple cases
-	'$lgt_pp_module_'(_),
+	logtalk_load_context(entity_type, module),
 	% auto-loading might be turned off
 	use_module(library(readutil), []),
 	readutil:read_file_to_terms(File, Terms, [extensions([pl, ''])]).
 
 '$lgt_swi_directive_expansion'(public(_), []) :-
 	% used to provide information about module predicates to the cross-referencer
-	'$lgt_pp_module_'(_).
+	logtalk_load_context(entity_type, module).
 
 '$lgt_swi_directive_expansion'(style_check(Option), []) :-
 	style_check(Option).
@@ -658,7 +658,7 @@
 	'$lgt_swi_encoding_to_logtalk_encoding'(Encoding1, Encoding2).
 
 '$lgt_swi_directive_expansion'(ensure_loaded(File), use_module(Module, Imports)) :-
-	'$lgt_pp_module_'(_),
+	logtalk_load_context(entity_type, module),
 	% ensure_loaded/1 directive used within a module (sloppy replacement for the use_module/1-2 directives)
 	'$lgt_swi_list_of_exports'(File, Module, Imports).
 
