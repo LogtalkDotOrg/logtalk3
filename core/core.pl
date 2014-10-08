@@ -18443,16 +18443,16 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_entity_ancestor'(Entity, protocol, Protocol, Kind, Kind) :-
 	'$lgt_implements_protocol_'(Entity, Protocol, _).
 
-'$lgt_entity_ancestor'(Entity, protocol, Protocol, Kind, Kind) :-
+'$lgt_entity_ancestor'(Entity, protocol, Protocol, protocol, protocol) :-
 	'$lgt_extends_protocol_'(Entity, Protocol, _).
 
-'$lgt_entity_ancestor'(Entity, category, Category, Kind, Kind) :-
+'$lgt_entity_ancestor'(Entity, category, Category, category, category) :-
 	'$lgt_extends_category_'(Entity, Category, _).
 
 '$lgt_entity_ancestor'(Entity, category, Category, Kind, Kind) :-
 	'$lgt_imports_category_'(Entity, Category, _).
 
-'$lgt_entity_ancestor'(Entity, object, Parent, Kind, Kind) :-
+'$lgt_entity_ancestor'(Entity, object, Parent, prototype, prototype) :-
 	'$lgt_extends_object_'(Entity, Parent, _).
 
 '$lgt_entity_ancestor'(Entity, object, Class, instance, superclass) :-
