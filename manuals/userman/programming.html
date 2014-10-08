@@ -326,11 +326,11 @@ Note that the scope of the <code>set_logtalk_flag/2</code> directive is local to
 
 	<dl>
 		<dt><code>prolog_compiler(Options)</code></dt>
-			<dd>Compiler options for the generated Prolog files. The usual default is the empty list. These options are passed to the back-end Prolog compiler built-in predicate that is responsible for compiling to disk a Prolog file. For Prolog compilers that don't provide separate predicates for compiling and loading a file, use instead the <code>prolog_loader/1</code> flag.</dd>
+			<dd>List of compiler options for the generated Prolog files. The valid options are specific to the used Prolog backend compiler. The usual default is the empty list. These options are passed to the backend Prolog compiler built-in predicate that is responsible for compiling to disk a Prolog file. For Prolog compilers that don't provide separate predicates for compiling and loading a file, use instead the <code>prolog_loader/1</code> flag.</dd>
 	</dl>
 	<dl>
 		<dt><code>prolog_loader(Options)</code></dt>
-			<dd>Loader options for the generated Prolog files. The usual default is the empty list. These options are passed to the back-end Prolog compiler built-in predicate that is responsible for loading a (compiled) Prolog file.</dd>
+			<dd>List of loader options for the generated Prolog files. The valid options are specific to the used Prolog backend compiler. The usual default is the empty list. These options are passed to the backend Prolog compiler built-in predicate that is responsible for loading a (compiled) Prolog file.</dd>
 	</dl>
 
 <h4>Other flags</h4>
@@ -751,7 +751,7 @@ When objects or categories containing grammar rules are compiled in debug mode, 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: September 21, 2014</span>
+		<span>Last updated on: October 8, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="installing.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="migration.html">next</a></span><br/>

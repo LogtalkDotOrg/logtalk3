@@ -25,8 +25,8 @@ ________________________________________________________________________
 
 
 This file contains some notes about the adapter files provided. The folder
-`unsupported` contains adapter files for Prolog compilers that are no longer
-officially supported.
+`unsupported` contains adapter files for Prolog compilers that are not yet
+or no longer officially supported.
 
 If you improve or correct some of these files, or write new ones for other
 Prolog compilers, please send me a copy. It is simply not feasible to 
@@ -37,7 +37,7 @@ As a general rule, always try to use the latest version of your Prolog
 compiler of choice. For Prolog compilers with long release cycles, this 
 may require use of development versions. Most Prolog compilers are moving 
 towards better de facto and official standards compatibility and, as a
-consequence, improved  Logtalk compatibility.
+consequence, improved Logtalk compatibility.
 
 For details on how to integrate Logtalk with specific Prolog compilers,
 see the files in the `integration` directory of the Logtalk distribution.
@@ -58,7 +58,8 @@ predicates such as `logtalk_load/1` and `logtalk_make/1`:
 Note, however, that these shorthands, which should only be used for
 iterative development at the top-level interpreter, are not part of
 the Logtalk language specification and can be commented out in case
-of conflict with backend Prolog compiler features.
+of conflict with backend Prolog compiler features or third-party
+libraries.
 
 
 template adapter file
@@ -345,7 +346,7 @@ XSB generates intermediate files (with a `.xwam` extension) when compiling
 Prolog source files (thus including the Logtalk core files). Thus, you
 must either install Logtalk on on a location where you have write access
 or perform the first run of the integration scripts from a user with the
-required privileges (e.g. sung `sudo` on POSIX systems or choosing `Run as
+required privileges (e.g. using `sudo` on POSIX systems or choosing `Run as
 administrator` on Windows systems).
 
 Due to the long release cycle of XSB, you may need to use its development
