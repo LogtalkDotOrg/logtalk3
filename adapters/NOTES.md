@@ -62,6 +62,38 @@ of conflict with backend Prolog compiler features or third-party
 libraries.
 
 
+Optional features support per backend Prolog compiler
+-----------------------------------------------------
+
+Some Logtalk features are optional and require compatible support for specific
+(and often not yet standard) features by the backend Prolog compilers. The
+following table summarizes the availability of these features:
+
+|------------------------------------------------------------------------|  
+| Compiler       |   Tabling   | Coinduction |   Unicode   |   Threads   |  
+|------------------------------------------------------------------------|  
+| B-Prolog       |     yes     |      no     |      no     |      no     |  
+|------------------------------------------------------------------------|  
+| CxProlog       |      no     |     yes     |     yes     |      no     |  
+|------------------------------------------------------------------------|  
+| ECLiPSe        |      no     |     yes     |      no     |      no     |  
+|------------------------------------------------------------------------|  
+| GNU Prolog     |      no     |      no     |      no     |      no     |  
+|------------------------------------------------------------------------|  
+| Lean Prolog    |      no     |      no     |     yes     |      no     |  
+|------------------------------------------------------------------------|  
+| Quintus Prolog |      no     |      no     |      no     |      no     |  
+|------------------------------------------------------------------------|  
+| SICStus Prolog |      no     |     yes     |     yes     |      no     |  
+|------------------------------------------------------------------------|  
+| SWI-Prolog     |      no     |     yes     |     yes     |     yes     |  
+|------------------------------------------------------------------------|  
+| XSB            |     yes     |      no     |      no     |     yes     |  
+|------------------------------------------------------------------------|  
+| YAP            |     yes     |     yes     |     yes     |     yes     |  
+|------------------------------------------------------------------------|  
+
+
 template adapter file
 ---------------------
 
@@ -257,7 +289,7 @@ is recommended due to improved standards compliance. No problems expected.
 Please report any problem found (with a solution if possible).
 
 
-SWI Prolog 6.0.0 and later versions
+SWI-Prolog 6.0.0 and later versions
 -----------------------------------
 
 	swi.pl
@@ -334,7 +366,7 @@ flag to `off` and add the option `qcompile(auto)` to the Logtalk flag
 Compilation of Logtalk source files with the `source_data` flag turned on
 generates large intermediate Prolog files as in addition to the information
 collected for Logtalk own features, all file terms are decorated with
-additional information for integration with SWI-Prolog development tools.
+additional information for integration with SWI-Prolog own development tools.
 
 
 XSB 3.5.0 and later versions
