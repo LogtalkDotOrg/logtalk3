@@ -36,6 +36,9 @@ intermediate entities in the predicate declaration and definition lookup
 chains (the entities must be static, not compiled in debug mode, and, in
 the case of objects, compiled with the `complements` flag set to `deny`).
 
+* FIXED: Bug in the `conforms_to_protocol/2-3` built-in predicates where
+complementing categories would be ignored.
+
 Prolog adapter and integration files
 ------------------------------------
 

@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/04/22,
+		date is 2014/10/08,
 		comment is 'Unit tests for the "complements/restrict" example.'
 	]).
 
@@ -28,9 +28,18 @@
 		Category == hacker, Object == my_vault.
 
 	test(complements_restrict_2) :-
-		my_vault::open('!"#$%&/()=').
+		conforms_to_protocol(my_vault, Protocol),
+		Protocol == monitoring.
 
 	test(complements_restrict_3) :-
+		conforms_to_protocol(my_vault, Protocol, Scope),
+		Protocol == monitoring,
+		Scope == (public).
+
+	test(complements_restrict_4) :-
+		my_vault::open('!"#$%&/()=').
+
+	test(complements_restrict_5) :-
 		\+ my_vault::open('1234567890').
 
 :- end_object.

@@ -1485,7 +1485,7 @@ conforms_to_protocol(ObjOrCtg, Protocol, Scope) :-
 	'$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _),
 	(	\+ '$lgt_instantiates_class_'(Object, _, _),
 		\+ '$lgt_specializes_class_'(Object, _, _) ->
-		'$lgt_prototye_conforms_to_protocol'(Object, Protocol, Scope)
+		'$lgt_prototype_conforms_to_protocol'(Object, Protocol, Scope)
 	;	'$lgt_instance_conforms_to_protocol'(Object, Protocol, Scope)
 	).
 
@@ -1494,7 +1494,12 @@ conforms_to_protocol(ObjOrCtg, Protocol, Scope) :-
 	'$lgt_category_conforms_to_protocol'(Category, Protocol, Scope).
 
 
-'$lgt_prototye_conforms_to_protocol'(Prototype, Protocol, Scope) :-
+
+'$lgt_prototype_conforms_to_protocol'(Prototype, Protocol, Scope) :-
+	'$lgt_complemented_object_'(Prototype, Category, _, _, _),
+	'$lgt_category_conforms_to_protocol'(Category, Protocol, Scope).
+
+'$lgt_prototype_conforms_to_protocol'(Prototype, Protocol, Scope) :-
 	'$lgt_implements_protocol_'(Prototype, Protocol0, ImplementationScope),
 	(	Protocol = Protocol0,
 		Scope = ImplementationScope
@@ -1502,14 +1507,14 @@ conforms_to_protocol(ObjOrCtg, Protocol, Scope) :-
 		'$lgt_filter_scope'(ImplementationScope, InheritedScope, Scope)
 	).
 
-'$lgt_prototye_conforms_to_protocol'(Prototype, Protocol, Scope) :-
+'$lgt_prototype_conforms_to_protocol'(Prototype, Protocol, Scope) :-
 	'$lgt_imports_category_'(Prototype, Category, ImportScope),
 	'$lgt_category_conforms_to_protocol'(Category, Protocol, InheritedScope),
 	'$lgt_filter_scope'(ImportScope, InheritedScope, Scope).
 
-'$lgt_prototye_conforms_to_protocol'(Prototype, Protocol, Scope) :-
+'$lgt_prototype_conforms_to_protocol'(Prototype, Protocol, Scope) :-
 	'$lgt_extends_object_'(Prototype, Parent, ExtensionScope),
-	'$lgt_prototye_conforms_to_protocol'(Parent, Protocol, InheritedScope),
+	'$lgt_prototype_conforms_to_protocol'(Parent, Protocol, InheritedScope),
 	'$lgt_filter_scope'(ExtensionScope, InheritedScope, Scope).
 
 
@@ -1518,6 +1523,10 @@ conforms_to_protocol(ObjOrCtg, Protocol, Scope) :-
 	'$lgt_class_conforms_to_protocol'(Class, Protocol, InheritedScope),
 	'$lgt_filter_scope'(InstantiationScope, InheritedScope, Scope).
 
+
+'$lgt_class_conforms_to_protocol'(Class, Protocol, Scope) :-
+	'$lgt_complemented_object_'(Class, Category, _, _, _),
+	'$lgt_category_conforms_to_protocol'(Category, Protocol, Scope).
 
 '$lgt_class_conforms_to_protocol'(Class, Protocol, Scope) :-
 	'$lgt_implements_protocol_'(Class, Protocol0, ImplementationScope),
