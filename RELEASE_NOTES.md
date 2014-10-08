@@ -39,6 +39,10 @@ the case of objects, compiled with the `complements` flag set to `deny`).
 * FIXED: Bug in the `conforms_to_protocol/2-3` built-in predicates where
 complementing categories would be ignored.
 
+* FIXED: Bug in the compiler code that finds the original name of an aliased
+predicate where complementing categories would not be checked in the correct
+order.
+
 Prolog adapter and integration files
 ------------------------------------
 

@@ -2457,8 +2457,8 @@ current_logtalk_flag(Flag, Value) :-
 	fail.
 
 '$lgt_predicate_property'(Obj, Pred, Prop, Sender, LookupScope) :-
-	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, _, _, Rnm, _),
-	call(Dcl, Pred, PredScope, Meta, Flags, SCtn, TCtn),
+	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, _, _, Rnm, ObjFlags),
+	call(Dcl, Pred, PredScope, Meta, PredFlags, SCtn, TCtn),
 	% predicate declaration found
 	!,
 	(	\+ \+ PredScope = LookupScope ->
@@ -2475,13 +2475,13 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	(	call(TCtnDcl, Pred, _, _, _) ->
 		% found static declaration for the predicate
-		'$lgt_predicate_property_user'(Prop, Pred, Pred, ScopeAsAtom, Meta, Flags, TCtn, Obj, Def, Rnm)
-	;	Flags /\ 2 =:= 2 ->
+		'$lgt_predicate_property_user'(Prop, Pred, Pred, ScopeAsAtom, Meta, PredFlags, TCtn, Obj, Def, Rnm)
+	;	PredFlags /\ 2 =:= 2 ->
 		% dynamically declared predicate; aliases can only be defined for staticly declared predicates
-		'$lgt_predicate_property_user'(Prop, Pred, Pred, ScopeAsAtom, Meta, Flags, TCtn, Obj, Def, Rnm)
+		'$lgt_predicate_property_user'(Prop, Pred, Pred, ScopeAsAtom, Meta, PredFlags, TCtn, Obj, Def, Rnm)
 	;	% assume that we are querying properties of a predicate alias
-		'$lgt_find_original_predicate'(Obj, Rnm, Pred, Original),
-		'$lgt_predicate_property_user'(Prop, Pred, Original, ScopeAsAtom, Meta, Flags, TCtn, Obj, Def, Rnm)
+		'$lgt_find_original_predicate'(Obj, Rnm, ObjFlags, Pred, Original),
+		'$lgt_predicate_property_user'(Prop, Pred, Original, ScopeAsAtom, Meta, PredFlags, TCtn, Obj, Def, Rnm)
 	).
 
 '$lgt_predicate_property'(Obj, Pred, Prop, Sender, LookupScope) :-
@@ -2681,57 +2681,64 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_find_original_predicate'(+object_identifier, +atom, +callable, -callable)
+% '$lgt_find_original_predicate'(+object_identifier, +atom, +integer, +callable, -callable)
 %
 % finds the predicate pointed by an alias
 
-'$lgt_find_original_predicate'(Obj, Rnm, Alias, Pred) :-
-	'$lgt_find_original_predicate'(Obj, Rnm, Alias, Pred, _).
+'$lgt_find_original_predicate'(Obj, Rnm, Flags, Alias, Pred) :-
+	% we add a fifth argument to properly handle class hierarchies if necessary
+	'$lgt_find_original_predicate'(Obj, Rnm, Flags, Alias, Pred, _).
 
 
-'$lgt_find_original_predicate'(_, Rnm, Alias, Pred, _) :-
+'$lgt_find_original_predicate'(Obj, _, Flags, Alias, Pred, _) :-
+	Flags /\ 64 =:= 64,		% "complements" flag set to "allow"
+	'$lgt_complemented_object_'(Obj, Ctg, _, _, Rnm),
+	'$lgt_find_original_predicate'(Ctg, Rnm, 0, Alias, Pred, _).
+
+'$lgt_find_original_predicate'(_, Rnm, _, Alias, Pred, _) :-
 	once(call(Rnm, _, Pred, Alias)),
 	Pred \= Alias,
 	!.
 
-'$lgt_find_original_predicate'(Obj, _, Alias, Pred, _) :-
+'$lgt_find_original_predicate'(Obj, _, Flags, Alias, Pred, _) :-
+	Flags /\ 32 =:= 32,		% "complements" flag set to "restrict"
+	'$lgt_complemented_object_'(Obj, Ctg, _, _, Rnm),
+	'$lgt_find_original_predicate'(Ctg, Rnm, 0, Alias, Pred, _).
+
+'$lgt_find_original_predicate'(Obj, _, _, Alias, Pred, _) :-
 	'$lgt_implements_protocol_'(Obj, Ptc, _),
 	'$lgt_current_protocol_'(Ptc, _, _, Rnm, _),
-	'$lgt_find_original_predicate'(Ptc, Rnm, Alias, Pred, _).
+	'$lgt_find_original_predicate'(Ptc, Rnm, 0, Alias, Pred, _).
 
-'$lgt_find_original_predicate'(Ptc, _, Alias, Pred, _) :-
+'$lgt_find_original_predicate'(Ptc, _, _, Alias, Pred, _) :-
 	'$lgt_extends_protocol_'(Ptc, ExtPtc, _),
 	'$lgt_current_protocol_'(ExtPtc, _, _, Rnm, _),
-	'$lgt_find_original_predicate'(ExtPtc, Rnm, Alias, Pred, _).
+	'$lgt_find_original_predicate'(ExtPtc, Rnm, 0, Alias, Pred, _).
 
-'$lgt_find_original_predicate'(Ctg, _, Alias, Pred, _) :-
+'$lgt_find_original_predicate'(Ctg, _, _, Alias, Pred, _) :-
 	'$lgt_extends_category_'(Ctg, ExtCtg, _),
 	'$lgt_current_category_'(ExtCtg, _, _, _, Rnm, _),
-	'$lgt_find_original_predicate'(ExtCtg, Rnm, Alias, Pred, _).
+	'$lgt_find_original_predicate'(ExtCtg, Rnm, 0, Alias, Pred, _).
 
-'$lgt_find_original_predicate'(Obj, _, Alias, Pred, _) :-
+'$lgt_find_original_predicate'(Obj, _, _, Alias, Pred, _) :-
 	'$lgt_imports_category_'(Obj, Ctg, _),
 	'$lgt_current_category_'(Ctg, _, _, _, Rnm, _),
-	'$lgt_find_original_predicate'(Ctg, Rnm, Alias, Pred, _).
+	'$lgt_find_original_predicate'(Ctg, Rnm, 0, Alias, Pred, _).
 
-'$lgt_find_original_predicate'(Obj, _, Alias, Pred, prototype) :-
+'$lgt_find_original_predicate'(Obj, _, _, Alias, Pred, prototype) :-
 	'$lgt_extends_object_'(Obj, Parent, _),
-	'$lgt_current_object_'(Parent, _, _, _, _, _, _, _, _, Rnm, _),
-	'$lgt_find_original_predicate'(Parent, Rnm, Alias, Pred, prototype).
+	'$lgt_current_object_'(Parent, _, _, _, _, _, _, _, _, Rnm, Flags),
+	'$lgt_find_original_predicate'(Parent, Rnm, Flags, Alias, Pred, prototype).
 
-'$lgt_find_original_predicate'(Instance, _, Alias, Pred, instance) :-
+'$lgt_find_original_predicate'(Instance, _, _, Alias, Pred, instance) :-
 	'$lgt_instantiates_class_'(Instance, Class, _),
-	'$lgt_current_object_'(Class, _, _, _, _, _, _, _, _, Rnm, _),
-	'$lgt_find_original_predicate'(Class, Rnm, Alias, Pred, superclass).
+	'$lgt_current_object_'(Class, _, _, _, _, _, _, _, _, Rnm, Flags),
+	'$lgt_find_original_predicate'(Class, Rnm, Flags, Alias, Pred, superclass).
 
-'$lgt_find_original_predicate'(Class, _, Alias, Pred, superclass) :-
+'$lgt_find_original_predicate'(Class, _, _, Alias, Pred, superclass) :-
 	'$lgt_specializes_class_'(Class, Superclass, _),
-	'$lgt_current_object_'(Superclass, _, _, _, _, _, _, _, _, Rnm, _),
-	'$lgt_find_original_predicate'(Superclass, Rnm, Alias, Pred, superclass).
-
-'$lgt_find_original_predicate'(Obj, _, Alias, Pred, _) :-
-	'$lgt_complemented_object_'(Obj, Ctg, _, _, Rnm),
-	'$lgt_find_original_predicate'(Ctg, Rnm, Alias, Pred, _).
+	'$lgt_current_object_'(Superclass, _, _, _, _, _, _, _, _, Rnm, Flags),
+	'$lgt_find_original_predicate'(Superclass, Rnm, Flags, Alias, Pred, superclass).
 
 
 
