@@ -37,10 +37,17 @@
 <dl>
 
 <dt id="ancestor" class="glossary"><strong>ancestor</strong></dt>
-<dd>A class or parent that contributes (via inheritance) to the definition of an object. For class-based hierarchies, the ancestors of an object are its class(es) and all the superclasses of its class(es). For prototype-based hierarchies, the ancestors of an object are its parent(s) and the ancestors of its parent(s).</dd>
+<dd>A class or parent prototype that contributes (via inheritance) to the definition of an object. For class-based hierarchies, the ancestors of an instance are its class(es) and all the superclasses of its class(es). For prototype-based hierarchies, the ancestors of an prototype are its parent(s) and the ancestors of its parent(s).</dd>
 
 <dt id="category" class="glossary"><strong>category</strong></dt>
-<dd>A set of predicates directives and clauses that can be (virtually) imported by any object. Categories support composing objects using fine-grained units of code reuse. A category should be functionally-cohesive, defining a single functionality.</dd>
+<dd>A set of predicates directives and clauses that can be (virtually) imported by any object. Categories support composing objects using fine-grained units of code reuse and also hot patching of existing objects. A category should be functionally-cohesive, defining a single functionality.</dd>
+
+<dd><dl>
+
+<dt id="complementing_category" class="glossary"><strong>complementing category</strong></dt>
+<dd>A category used for hot patching an existing object (or set of objects).</dd>
+
+</dl></dd>
 
 <dt id="class" class="glossary"><strong>class</strong></dt>
 <dd>An object that defines the common predicates of a set of objects (its instances).</dd>
@@ -62,7 +69,7 @@
 </dl></dd>
 
 <dt id="directive" class="glossary"><strong>directive</strong></dt>
-<dd>A Prolog/Logtalk term that affects the interpretation of Prolog/Logtalk code. Directives are represented using the <code>:-/1</code> prefix operator.</dd>
+<dd>A Prolog/Logtalk term that affects the interpretation of Prolog/Logtalk code. Directives are represented using the <code>(:-)/1</code> prefix operator.</dd>
 
 <dd><dl>
 
@@ -87,7 +94,7 @@
 <dd>The sending of a message to an object. An event can be expressed as an ordered tuple: <code>(Event, Object, Message, Sender)</code>. Logtalk distinguish between the sending of a message - <code>before</code> event - and the return of control to the sender - <code>after</code> event.</dd>
 
 <dt id="grammar_rule" class="glossary"><strong>grammar rule</strong></dt>
-<dd>An alternative notation for predicates used to parse or generate sentences on some language. This notation hides the arguments used to pass the lists of tokens being processed, thus simplifying the representation of grammars. Grammar rules are represented using the infix operator <code>--&gt;/2</code> instead of the operator used on predicate clauses (<code>:-/2</code>).</dd>
+<dd>An alternative notation for predicates used to parse or generate sentences on some language. This notation hides the arguments used to pass the lists of tokens being processed, thus simplifying the representation of grammars. Grammar rules are represented using the infix operator <code>(--&gt;)/2</code> instead of the operator used on predicate clauses (<code>(:-)/2</code>).</dd>
 
 <dd><dl>
 
@@ -137,6 +144,9 @@
 <dd>Set of predicate clauses used to answer a message sent to an object. Logtalk supports both static binding and dynamic binding to find which method to run to answer a message.</dd>
 
 <dd><dl>
+
+<dt id="abstract_method" class="glossary"><strong>abstract method</strong></dt>
+<dd>A method implementing an algorithm whose step corresponds to calls to methods defined in the descendants of the object (or category) containing it.</dd>
 
 <dt id="built_in_method" class="glossary"><strong>built-in method</strong></dt>
 <dd>A pre-defined method that can be called from within any object or category. Built-in methods cannot be redefined.</dd>
@@ -192,6 +202,9 @@
 <dt id="public_predicate" class="glossary"><strong>public predicate</strong></dt>
 <dd>A predicate that can be called from any object.</dd>
 
+<dt id="multifile_predicate" class="glossary"><strong>multifile predicate</strong></dt>
+<dd>A predicate whose clauses can be defined in multiple entities. There must always be an object (or category) holding the multifile predicate <em>primary declaration</em>, which consists of both a <code>public/1</code> directive and a <code>multifile/1</code> directive.</dd>
+
 <dt id="visible_predicate" class="glossary"><strong>visible predicate</strong></dt>
 <dd>A predicate that is declared for an object, a built-in method, a Logtalk built-in predicate, or a Prolog built-in predicate.</dd>
 
@@ -223,7 +236,7 @@
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: May 7, 2014</span>
+		<span>Last updated on: October 9, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span>&nbsp;</span><br/>
