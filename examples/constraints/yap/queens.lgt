@@ -22,8 +22,8 @@
 
 :- object(queens).
 
-	:- use_module(clpfd, [ins/2, labeling/2, (#=)/2, (#\=)/2, (#<==>)/2, (#>)/2]).
-	:- use_module(system, [popen/3]).
+	:- use_module(library(clpfd), [ins/2, labeling/2, (#=)/2, (#\=)/2, (#<==>)/2, (#>)/2]).
+	:- use_module(library(system), [popen/3]).
 
 	:- public([n_queens/2, show/3]).
 

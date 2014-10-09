@@ -114,11 +114,11 @@
 
 <!ELEMENT meta (#PCDATA)>
 
-<!ELEMENT mode (template, solutions)>
+<!ELEMENT mode (template, proofs)>
 
 <!ELEMENT template (#PCDATA)>
 
-<!ELEMENT solutions (#PCDATA)>
+<!ELEMENT proofs (#PCDATA)>
 
 <!ELEMENT argnames (#PCDATA)>
 

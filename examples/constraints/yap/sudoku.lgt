@@ -22,8 +22,8 @@
 
 :- object(soduku).
 
-	:- use_module(clpfd, [all_different/1, ins/2, labeling/2]).
-	:- use_module(system, [popen/3]).
+	:- use_module(library(clpfd), [all_different/1, ins/2, labeling/2]).
+	:- use_module(library(system), [popen/3]).
 
 	:- uses(list, [append/2, length/2]).
 	:- uses(meta, [succeeds/2::maplist/2]).

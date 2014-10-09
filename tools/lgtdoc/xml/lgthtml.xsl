@@ -281,7 +281,7 @@
 			<dd class ="value"><code><xsl:value-of select="coinductive" /></code></dd>
 		</xsl:if>
 		<xsl:if test="mode">
-		<dt class ="key">mode<xsl:text disable-output-escaping="yes"> &amp;ndash; </xsl:text>number of solutions:</dt>
+		<dt class ="key">mode<xsl:text disable-output-escaping="yes"> &amp;ndash; </xsl:text>number_of_proofs:</dt>
 		<xsl:for-each select="mode">
 			<dd class ="value"><code><xsl:value-of select="template" /><xsl:text disable-output-escaping="yes"> &amp;ndash; </xsl:text><xsl:value-of select="solutions" /></code></dd>
 		</xsl:for-each>

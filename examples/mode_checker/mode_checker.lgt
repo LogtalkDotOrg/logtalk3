@@ -28,7 +28,7 @@
 	term_expansion((:- end_object), [(:- end_object)]) :-
 		retractall(compiling_object_(_)).
 
-	term_expansion((:- mode(Template, NumberOfSolutions)), [(:- mode(Template, NumberOfSolutions))]) :-
+	term_expansion((:- mode(Template, NumberOfProofs)), [(:- mode(Template, NumberOfProofs))]) :-
 		Template =.. [Functor| Args],
 		generate_checks(Args, 0, Arity),
 		functor(Message, Functor, Arity),

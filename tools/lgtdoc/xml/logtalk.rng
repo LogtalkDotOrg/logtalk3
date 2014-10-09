@@ -416,7 +416,7 @@
 	<define name="mode">
 		<element name="mode">
 			<ref name="template"/>
-			<ref name="solutions"/>
+			<ref name="proofs"/>
 		</element>
 	</define>
 
@@ -426,8 +426,8 @@
 		</element>
 	</define>
 
-	<define name="solutions">
-		<element name="solutions">
+	<define name="proofs">
+		<element name="proofs">
 			<choice>
 				<value>zero</value>
 				<value>zero_or_one</value>

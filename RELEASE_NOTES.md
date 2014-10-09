@@ -48,6 +48,19 @@ Prolog adapter and integration files
 
 * FIXED: Singleton variable warning in the YAP adapter file.
 
+Documentation
+-------------
+
+* FIXED: Documentation of the `mode/2` predicate directive where the second
+argument specifies the number of *proofs*, not the number of solutions (which
+are not necessarily distinct).
+
+Tools
+-----
+
+* FIXED: The `lgtdoc` tool for the clarification of the `mode/2` predicate
+directive second argument.
+
 Examples
 --------
 

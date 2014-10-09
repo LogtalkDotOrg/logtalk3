@@ -7166,8 +7166,8 @@ current_logtalk_flag(Flag, Value) :-
 	throw(type_error(mode_term, Mode)).
 
 '$lgt_compile_logtalk_directive'(mode(_, Solutions), _) :-
-	\+ '$lgt_valid_number_of_solutions'(Solutions),
-	throw(type_error(number_of_solutions, Solutions)).
+	\+ '$lgt_valid_number_of_proofs'(Solutions),
+	throw(type_error(number_of_proofs, Solutions)).
 
 '$lgt_compile_logtalk_directive'(mode(Mode, Solutions), _) :-
 	assertz('$lgt_pp_mode_'(Mode, Solutions)).
@@ -16160,20 +16160,20 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_valid_number_of_solutions'(@nonvar)
+% '$lgt_valid_number_of_proofs'(@nonvar)
 
 % calling the predicate using the specified mode always fails
-'$lgt_valid_number_of_solutions'(zero).
+'$lgt_valid_number_of_proofs'(zero).
 % calling the predicate using the specified mode always succeeds once
-'$lgt_valid_number_of_solutions'(one).
+'$lgt_valid_number_of_proofs'(one).
 % calling the predicate using the specified mode may succeed once or fail
-'$lgt_valid_number_of_solutions'(zero_or_one).
+'$lgt_valid_number_of_proofs'(zero_or_one).
 % calling the predicate using the specified mode may fail or succeed multiple times
-'$lgt_valid_number_of_solutions'(zero_or_more).
+'$lgt_valid_number_of_proofs'(zero_or_more).
 % calling the predicate using the specified mode always succeed at least once
-'$lgt_valid_number_of_solutions'(one_or_more).
+'$lgt_valid_number_of_proofs'(one_or_more).
 % calling the predicate using the specified mode throws an error
-'$lgt_valid_number_of_solutions'(error).
+'$lgt_valid_number_of_proofs'(error).
 
 
 

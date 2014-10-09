@@ -146,7 +146,7 @@ instead of:
 </p>
 <pre>:- dynamic foo/1, bar/2.</pre>
 <p>
-Another common issue is missing <code>dynamic</code>, <code>discontiguous</code>, and <code>multifile</code> directives. Logtalk allows detection of most missing directives.
+Another common issue is missing <code>dynamic/1</code>, <code>discontiguous/1</code>, and <code>multifile/1</code> predicate directives. Logtalk allows detection of most missing directives (by setting its <code>missing_directives</code> flag to <code>warning</code>).
 </p>
 <p>
 When compiling modules as objects, you probably don't need event support turned on. You may use the compiler option <code>events(deny)</code> with the Logtalk compiling and loading built-in methods for a small performance gain for the compiled code.

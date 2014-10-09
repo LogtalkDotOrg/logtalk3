@@ -26,7 +26,7 @@ H   I   J   K   L
 
 :- object(hexagon).
 
-	:- use_module(clpfd, [all_different/1, ins/2, labeling/2, sum/3, (#=)/2]).
+	:- use_module(library(clpfd), [all_different/1, ins/2, labeling/2, sum/3, (#=)/2]).
 	:- uses(meta, [succeeds/2::maplist/2]).
 
 	:- public(mhex/1).

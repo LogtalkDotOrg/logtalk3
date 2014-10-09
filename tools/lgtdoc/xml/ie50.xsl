@@ -207,7 +207,7 @@
 			<dd><code><xsl:value-of select="meta" /></code></dd>
 		</xsl:if>
 		<xsl:if test="mode">
-		<dt>mode - number of solutions:</dt>
+		<dt>mode - number_of_proofs:</dt>
 		<xsl:for-each select="mode" xml:space="preserve">
 			<dd><code><xsl:value-of select="template" /> - <xsl:value-of select="solutions" /></code></dd>
 		</xsl:for-each>

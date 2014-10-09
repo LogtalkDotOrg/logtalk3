@@ -242,12 +242,12 @@
 <xsd:complexType name="mode">
 	<xsd:sequence>
 		<xsd:element name="template"	type="xsd:string"/>
-		<xsd:element name="solutions"	type="solutions"/>
+		<xsd:element name="proofs"		type="proofs"/>
 	</xsd:sequence>
 </xsd:complexType>
 
 
-<xsd:simpleType name="solutions">
+<xsd:simpleType name="proofs">
 	<xsd:restriction base="xsd:string">
 		<xsd:enumeration value="zero"/>
 		<xsd:enumeration value="zero_or_one"/>

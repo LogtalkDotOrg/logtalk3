@@ -248,7 +248,7 @@
 		<xsl:value-of select="$tab" /><xsl:value-of select="coinductive" /><xsl:value-of select="$nl" />
 	</xsl:if>
 	<xsl:if test="mode">
-		<xsl:text>mode - number of solutions:</xsl:text><xsl:value-of select="$nl" />
+		<xsl:text>mode - number_of_proofs:</xsl:text><xsl:value-of select="$nl" />
 		<xsl:for-each select="mode">
 			<xsl:value-of select="$tab" /><xsl:value-of select="template" /><xsl:text> - </xsl:text><xsl:value-of select="solutions" /><xsl:value-of select="$nl" />
 		</xsl:for-each>

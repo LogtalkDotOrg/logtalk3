@@ -87,7 +87,7 @@ The first argument describes a valid calling mode. The minimum information will 
 These four mode atoms are also declared as prefix operators by the Logtalk compiler. This makes it possible to include type information for each argument like in the example above. Some of the possible type values are: <code>event</code>, <code>object</code>, <code>category</code>, <code>protocol</code>, <code>callable</code>, <code>term</code>, <code>nonvar</code>, <code>var</code>, <code>atomic</code>, <code>atom</code>, <code>number</code>, <code>integer</code>, <code>float</code>, <code>compound</code>, and <code>list</code>. The first four are Logtalk specific. The remaining are common Prolog types. We can also use our own types that can be either atoms or compound terms. 
 </p>
 <p>
-The second argument documents the number of proofs (or solutions) for the specified mode. The possible values are:
+The second argument documents the number of proofs (not necessarily distinct solutions) for the specified mode. The possible values are:
 </p>
 <dl>
 	<dt><code>zero</code></dt>
@@ -97,9 +97,9 @@ The second argument documents the number of proofs (or solutions) for the specif
 	<dt><code>zero_or_one</code></dt>
 		<dd>Predicate either fails or succeeds.</dd>
 	<dt><code>zero_or_more</code></dt>
-		<dd>Predicate has zero or more solutions.</dd>
+		<dd>Predicate has zero or more proofs.</dd>
 	<dt><code>one_or_more</code></dt>
-		<dd>Predicate has one or more solutions.</dd>
+		<dd>Predicate has one or more proofs.</dd>
 	<dt><code>error</code></dt>
 		<dd>Predicate will throw an error (see below).</dd>
 </dl>
@@ -1009,7 +1009,7 @@ This workaround is sometimes necessary when calling module meta-predicates whose
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: October 1, 2014</span>
+		<span>Last updated on: October 9, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="categories.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="inheritance.html">next</a></span><br/>

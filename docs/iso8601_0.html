@@ -64,7 +64,7 @@
                 <li><code>Day</code> &ndash; <span class="comment">Normally an integer between 1 and 31 inclusive depending upon month</span></li>
               </ul>
             </dd>
-            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dt class="key">mode &ndash; number_of_proofs:</dt>
             <dd class="value">
               <code>date(?integer,?integer,?integer,?integer) &ndash; zero_or_one</code>
             </dd>
@@ -150,7 +150,7 @@
                 <li><code>DoW</code> &ndash; <span class="comment">Day of week, where Monday=1, Tuesday=2, ..., Sunday=7</span></li>
               </ul>
             </dd>
-            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dt class="key">mode &ndash; number_of_proofs:</dt>
             <dd class="value">
               <code>date(?integer,?integer,?integer,?integer,?integer) &ndash; zero_or_one</code>
             </dd>
@@ -209,7 +209,7 @@
                 <li><code>Week</code> &ndash; <span class="comment">Compound term, week(WeekNo,ActualYear), of a day</span></li>
               </ul>
             </dd>
-            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dt class="key">mode &ndash; number_of_proofs:</dt>
             <dd class="value">
               <code>date(?integer,?integer,?integer,?integer,?integer,?compound) &ndash; zero_or_one</code>
             </dd>
@@ -325,7 +325,7 @@
                 <li><code>DoY</code> &ndash; <span class="comment">Day of year (NB! calendar year, not week # year)</span></li>
               </ul>
             </dd>
-            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dt class="key">mode &ndash; number_of_proofs:</dt>
             <dd class="value">
               <code>date(?integer,?integer,?integer,?integer,?integer,?compound,?integer) &ndash; zero_or_one</code>
             </dd>
@@ -409,7 +409,7 @@
                 <li><code>String</code> &ndash; <span class="comment">ISO 8601 formatted string correspondent to Components</span></li>
               </ul>
             </dd>
-            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dt class="key">mode &ndash; number_of_proofs:</dt>
             <dd class="value">
               <code>date_string(+atom,+integer,?atom) &ndash; zero_or_one</code>
             </dd>
@@ -615,7 +615,7 @@
             <dd class="value">
               <code>valid_date(Year,Month,Day)</code>
             </dd>
-            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dt class="key">mode &ndash; number_of_proofs:</dt>
             <dd class="value">
               <code>valid_date(+integer,+integer,+integer) &ndash; zero_or_one</code>
             </dd>
@@ -669,7 +669,7 @@
                 <li><code>Year</code> &ndash; <span class="comment">The Gregorian calendar year to investigate. If free, it binds to the system year</span></li>
               </ul>
             </dd>
-            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dt class="key">mode &ndash; number_of_proofs:</dt>
             <dd class="value">
               <code>leap_year(?integer) &ndash; zero_or_one</code>
             </dd>
@@ -760,7 +760,7 @@
                 <li><code>Calendar</code> &ndash; <span class="comment">A compound term, m/3, composed of three main arguments specifying year, month, and a list of week and week day numbers (calendar body).</span></li>
               </ul>
             </dd>
-            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dt class="key">mode &ndash; number_of_proofs:</dt>
             <dd class="value">
               <code>calendar_month(?integer,?integer,-compound) &ndash; zero_or_one</code>
             </dd>
@@ -795,7 +795,7 @@
                 <li><code>Day</code> &ndash; <span class="comment">Day of month in which Easter Sunday falls for given year</span></li>
               </ul>
             </dd>
-            <dt class="key">mode &ndash; number of solutions:</dt>
+            <dt class="key">mode &ndash; number_of_proofs:</dt>
             <dd class="value">
               <code>easter_day(?integer,-integer,-integer) &ndash; zero_or_one</code>
             </dd>

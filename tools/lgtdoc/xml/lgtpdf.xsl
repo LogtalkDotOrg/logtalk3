@@ -627,7 +627,7 @@
 				font-family="serif" 
 				keep-with-next="always"
 				space-before="4pt">
-     		mode - number of solutions:
+     		mode - number_of_proofs:
      	</fo:block>
 		<xsl:for-each select="mode">
 			<fo:block
