@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/10/01,
+		date is 2014/10/09,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -907,7 +907,7 @@
 	:- else.
 
 		read_single_char(Char) :-
-			get_code(Code), char_code(Char, Code),
+			flush_output, get_code(Code), char_code(Char, Code),
 			(	Code =:= 10 ->
 				true
 			;	peek_code(10) ->	% hack to workaround the lack of built-in

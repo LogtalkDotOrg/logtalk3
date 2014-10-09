@@ -58,6 +58,10 @@ are not necessarily distinct).
 Tools
 -----
 
+* FIXED: The `debugger` tool when running with a backend Prolog compiler that
+doesn't support unbuffered character input and requires flushing the current
+output stream before inputing a character.
+
 * FIXED: The `lgtdoc` tool for the clarification of the `mode/2` predicate
 directive second argument.
 
