@@ -46,7 +46,8 @@ order.
 Prolog adapter and integration files
 ------------------------------------
 
-* FIXED: Singleton variable warning in the YAP adapter file.
+* IMPROVED: Simplified startup settings for the YAP adapter file and fixed
+a singleton variable warning.
 
 Documentation
 -------------

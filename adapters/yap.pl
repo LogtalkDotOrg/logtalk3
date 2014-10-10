@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for YAP Prolog 6.3.4 and later versions
-%  Last updated on October 7, 2014
+%  Last updated on October 10, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -28,60 +28,12 @@
 :- no_source.
 :- set_prolog_flag(generate_debug_info, false).
 
+:- use_module(library(system)).
 
-:- initialization((
-	use_module(library(system)),
-	'$lgt_hide_predicates',
-%	set_prolog_flag(language, iso),		% commented due to all the YAP libraries that don't compile in "iso" mode!
-	set_prolog_flag(update_semantics, logical),
-	set_prolog_flag(unknown, error),
-	set_prolog_flag(syntax_errors, error))).
-
-
-'$lgt_hide_predicates' :-
-	(	predicate_property(hide_predicate(_), built_in) ->
-		dynamic('$lgt_before_event_'/5), hide_predicate('$lgt_before_event_'/5),
-		dynamic('$lgt_after_event_'/5), hide_predicate('$lgt_after_event_'/5),
-		dynamic('$lgt_current_protocol_'/5), hide_predicate('$lgt_current_protocol_'/5),
-		dynamic('$lgt_current_category_'/6), hide_predicate('$lgt_current_category_'/6),
-		dynamic('$lgt_current_object_'/11), hide_predicate('$lgt_current_object_'/11),
-		dynamic('$lgt_entity_property_'/2), hide_predicate('$lgt_entity_property_'/2),
-		dynamic('$lgt_predicate_property_'/3), hide_predicate('$lgt_predicate_property_'/3),
-		dynamic('$lgt_implements_protocol_'/3), hide_predicate('$lgt_implements_protocol_'/3),
-		dynamic('$lgt_imports_category_'/3), hide_predicate('$lgt_imports_category_'/3),
-		dynamic('$lgt_instantiates_class_'/3), hide_predicate('$lgt_instantiates_class_'/3),
-		dynamic('$lgt_specializes_class_'/3), hide_predicate('$lgt_specializes_class_'/3),
-		dynamic('$lgt_extends_protocol_'/3), hide_predicate('$lgt_extends_protocol_'/3),
-		dynamic('$lgt_extends_object_'/3), hide_predicate('$lgt_extends_object_'/3),
-		dynamic('$lgt_extends_category_'/3), hide_predicate('$lgt_extends_category_'/3),
-		dynamic('$lgt_complemented_object_'/4), hide_predicate('$lgt_complemented_object_'/4),
-		dynamic('$lgt_loaded_file_'/7), hide_predicate('$lgt_loaded_file_'/7),
-		dynamic('$lgt_failed_file_'/1), hide_predicate('$lgt_failed_file_'/1),
-		dynamic('$lgt_parent_file_'/2), hide_predicate('$lgt_parent_file_'/2),
-		dynamic('$lgt_file_loading_stack_'/1), hide_predicate('$lgt_file_loading_stack_'/1),
-		dynamic('$lgt_built_in_entities_loaded_'/0), hide_predicate('$lgt_built_in_entities_loaded_'/0),
-		dynamic('$lgt_dynamic_entity_counter_'/3), hide_predicate('$lgt_dynamic_entity_counter_'/3),
-		dynamic('$lgt_current_flag_'/2), hide_predicate('$lgt_current_flag_'/2),
-		dynamic('$lgt_send_to_obj_static_binding_cache_'/4), hide_predicate('$lgt_send_to_obj_static_binding_cache_'/4),
-		dynamic('$lgt_pp_warnings_top_goal_directory_'/2), hide_predicate('$lgt_pp_warnings_top_goal_directory_'/2),
-		dynamic('$lgt_pp_compilation_warnings_counter_'/1), hide_predicate('$lgt_pp_compilation_warnings_counter_'/1),
-		dynamic('$lgt_pp_loading_warnings_counter_'/1), hide_predicate('$lgt_pp_loading_warnings_counter_'/1),
-		dynamic('$lgt_pp_aux_predicate_counter_'/1), hide_predicate('$lgt_pp_aux_predicate_counter_'/1),
-		dynamic('$lgt_hook_term_expansion_'/2), hide_predicate('$lgt_hook_term_expansion_'/2),
-		dynamic('$lgt_hook_goal_expansion_'/2), hide_predicate('$lgt_hook_goal_expansion_'/2),
-		dynamic('$lgt_threaded_tag_counter_'/1), hide_predicate('$lgt_threaded_tag_counter_'/1),
-		dynamic('$lgt_send_to_obj_'/3), hide_predicate('$lgt_send_to_obj_'/3),
-		dynamic('$lgt_send_to_obj_ne_'/3), hide_predicate('$lgt_send_to_obj_ne_'/3),
-		dynamic('$lgt_send_to_self_'/3), hide_predicate('$lgt_send_to_self_'/3),
-		dynamic('$lgt_ctg_super_call_'/3), hide_predicate('$lgt_ctg_super_call_'/3),
-		dynamic('$lgt_obj_super_call_'/3), hide_predicate('$lgt_obj_super_call_'/3),
-		dynamic('$lgt_db_lookup_cache_'/5), hide_predicate('$lgt_db_lookup_cache_'/5),
-		dynamic('$logtalk#0.message_tokens#4'/5), hide_predicate('$logtalk#0.message_tokens#4'/5),
-		dynamic('$logtalk#0.message_prefix_stream#4'/5), hide_predicate('$logtalk#0.message_prefix_stream#4'/5),
-		dynamic('$logtalk#0.print_message_token#4'/5), hide_predicate('$logtalk#0.print_message_token#4'/5),
-		dynamic('$logtalk#0.trace_event#2'/3), hide_predicate('$logtalk#0.trace_event#2'/3)
-	;	true
-	).
+:- set_prolog_flag(update_semantics, logical).
+:- set_prolog_flag(unknown, error).
+:- set_prolog_flag(syntax_errors, error).
+%:-	set_prolog_flag(language, iso),		% commented due to all the YAP libraries that don't compile in "iso" mode!
 
 
 % disable YAP discontiguous predicate clauses warning as
