@@ -38,7 +38,7 @@ the case of objects, compiled with the `complements` flag set to `deny`).
 
 * IMPROVED: The `logtalk_compile/1-2` and `logtalk_load/1-2` predicates
 now try to use file names as-is as last resort when trying to match the
-specified file with existing files on disk.
+specified files with existing files on disk.
 
 * FIXED: Bug in the `conforms_to_protocol/2-3` built-in predicates where
 complementing categories would be ignored.
@@ -66,6 +66,10 @@ are not necessarily distinct).
 
 Tools
 -----
+
+* IMPROVED: The `logtalk_tester.sh` POSIX shell script to test if the selected
+integration script is available in the system execution path. Thanks to Vítor
+Santos Costa for the bug report.
 
 * FIXED: The `debugger` tool when running with a backend Prolog compiler that
 doesn't support unbuffered character input and requires flushing the current

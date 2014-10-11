@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Unit testing automation script
-##   Last updated on July 4, 2014
+##   Last updated on October 11, 2014
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -50,7 +50,8 @@ base="$PWD"
 results="$base/tester_results"
 backend=yap
 prolog='YAP'
-logtalk="yaplgt$extension -g"
+logtalk=yaplgt$extension
+logtalk_call="$logtalk -g"
 mode='normal'
 
 versions_goal="logtalk_load(library(tester_versions)),halt"
@@ -102,53 +103,64 @@ done
 
 if [ "$p_arg" == "b" ] ; then
 	prolog='B-Prolog'
-	logtalk="bplgt$extension -g"
+	logtalk=bplgt$extension
+	logtalk_call="$logtalk -g"
 elif [ "$p_arg" == "cx" ] ; then
 	prolog='CxProlog'
-	logtalk="cxlgt$extension --goal"
+	logtalk=cxlgt$extension
+	logtalk_call="$logtalk --goal"
 elif [ "$p_arg" == "eclipse" ] ; then
 	prolog='ECLiPSe'
-	logtalk="eclipselgt$extension -e"
+	logtalk=eclipselgt$extension
+	logtalk_call="$logtalk -e"
 elif [ "$p_arg" == "gnu" ] ; then
 	prolog='GNU Prolog'
-	logtalk="gplgt$extension --query-goal"
+	logtalk=gplgt$extension
+	logtalk_call="$logtalk --query-goal"
 elif [ "$p_arg" == "lean" ] ; then
 	prolog='Lean Prolog'
-	logtalk="lplgt$extension"
+	logtalk=lplgt$extension
+	logtalk_call="$logtalk"
 elif [ "$p_arg" == "qp" ] ; then
 	prolog='Qu-Prolog'
-	logtalk="qplgt$extension -g"
+	logtalk=qplgt$extension
+	logtalk_call="$logtalk -g"
 	versions_goal=$versions_goal_dot
 	tester_optimal_goal=$tester_optimal_goal_dot
 	tester_normal_goal=$tester_normal_goal_dot
 	tester_debug_goal=$tester_debug_goal_dot
 elif [ "$p_arg" == "sicstus" ] ; then
 	prolog='SICStus Prolog'
-	logtalk="sicstuslgt$extension --goal"
+	logtalk=sicstuslgt$extension
+	logtalk_call="$logtalk --goal"
 	versions_goal=$versions_goal_dot
 	tester_optimal_goal=$tester_optimal_goal_dot
 	tester_normal_goal=$tester_normal_goal_dot
 	tester_debug_goal=$tester_debug_goal_dot
 elif [ "$p_arg" == "swi" ] ; then
 	prolog='SWI-Prolog'
-	logtalk="swilgt$extension -g"
+	logtalk=swilgt$extension
+	logtalk_call="$logtalk -g"
 elif [ "$p_arg" == "xsb" ] ; then
 	prolog='XSB'
-	logtalk="xsblgt$extension -e"
+	logtalk=xsblgt$extension
+	logtalk_call="$logtalk -e"
 	versions_goal=$versions_goal_dot
 	tester_optimal_goal=$tester_optimal_goal_dot
 	tester_normal_goal=$tester_normal_goal_dot
 	tester_debug_goal=$tester_debug_goal_dot
 elif [ "$p_arg" == "xsbmt" ] ; then
 	prolog='XSB-MT'
-	logtalk="xsbmtlgt$extension -e"
+	logtalk=xsbmtlgt$extension
+	logtalk_call="$logtalk -e"
 	versions_goal=$versions_goal_dot
 	tester_optimal_goal=$tester_optimal_goal_dot
 	tester_normal_goal=$tester_normal_goal_dot
 	tester_debug_goal=$tester_debug_goal_dot
 elif [ "$p_arg" == "yap" ] ; then
 	prolog='YAP'
-	logtalk="yaplgt$extension -g"
+	logtalk=yaplgt$extension
+	logtalk_call="$logtalk -g"
 elif [ "$p_arg" != "" ] ; then
 	echo "Error! Unsupported back-end Prolog compiler: $p_arg"
 	usage_help
@@ -156,6 +168,10 @@ elif [ "$p_arg" != "" ] ; then
 elif [ ! `command -v $backend` ] ; then
     echo "Error! Default back-end Prolog compiler not found: $prolog"
 	usage_help
+    exit 1
+elif [ ! `command -v $logtalk` ] ; then
+    echo "Error! $logtalk integration script for $prolog not found."
+	echo "       Check that its directory is in your execution path."
     exit 1
 fi
 
@@ -191,7 +207,7 @@ date=`eval date \"+%Y-%m-%d %H:%M:%S\"`
 echo '*******************************************************************************'
 echo "***** Running unit tests"
 echo "*****         Date: $date"
-$logtalk $versions_goal > "$results"/tester_versions.txt 2> /dev/null
+$logtalk_call $versions_goal > "$results"/tester_versions.txt 2> /dev/null
 grep "Logtalk version:" "$results"/tester_versions.txt
 grep "Prolog version:" "$results"/tester_versions.txt | sed "s/Prolog/$prolog/"
 for unit in *
@@ -203,21 +219,21 @@ do
 			echo "***** Testing $unit"
 			name=$(echo $unit|sed 's|/|__|g')
 			if [ $mode == 'optimal' ] || [ $mode == 'all' ] ; then
-				$logtalk $tester_optimal_goal > "$results/$name.results" 2> "$results/$name.errors"
+				$logtalk_call $tester_optimal_goal > "$results/$name.results" 2> "$results/$name.errors"
 				grep 'tests:' "$results/$name.results" | sed 's/%/***** (opt)  /'
 				grep 'tests:' "$results/$name.results" | sed 's/\(% \)\([0-9]*\)\(.*\)/\2/' >> "$results/total"
 				grep 'tests:' "$results/$name.results" | sed 's/\(% [0-9]* tests: \)\([0-9]*\)\(.*\)/\2/' >> "$results/skipped"
 				grep 'tests:' "$results/$name.results" | sed 's/\(% [0-9]* tests: [0-9]* skipped, \)\([0-9]*\)\(.*\)/\2/' >> "$results/passed"
 			fi
 			if [ $mode == 'normal' ] || [ $mode == 'all' ] ; then
-				$logtalk $tester_normal_goal > "$results/$name.results" 2> "$results/$name.errors"
+				$logtalk_call $tester_normal_goal > "$results/$name.results" 2> "$results/$name.errors"
 				grep 'tests:' "$results/$name.results" | sed 's/%/*****        /'
 				grep 'tests:' "$results/$name.results" | sed 's/\(% \)\([0-9]*\)\(.*\)/\2/' >> "$results/total"
 				grep 'tests:' "$results/$name.results" | sed 's/\(% [0-9]* tests: \)\([0-9]*\)\(.*\)/\2/' >> "$results/skipped"
 				grep 'tests:' "$results/$name.results" | sed 's/\(% [0-9]* tests: [0-9]* skipped, \)\([0-9]*\)\(.*\)/\2/' >> "$results/passed"
 			fi
 			if [ $mode == 'debug' ] || [ $mode == 'all' ] ; then
-				$logtalk $tester_debug_goal > "$results/$name.results" 2> "$results/$name.errors"
+				$logtalk_call $tester_debug_goal > "$results/$name.results" 2> "$results/$name.errors"
 				grep 'tests:' "$results/$name.results" | sed 's/%/***** (debug)/'
 				grep 'tests:' "$results/$name.results" | sed 's/\(% \)\([0-9]*\)\(.*\)/\2/' >> "$results/total"
 				grep 'tests:' "$results/$name.results" | sed 's/\(% [0-9]* tests: \)\([0-9]*\)\(.*\)/\2/' >> "$results/skipped"
@@ -236,21 +252,21 @@ do
 					echo "***** Testing $unit/$subunit"
 					subname=$(echo $unit/$subunit|sed 's|/|__|g')
 					if [ $mode == 'optimal' ] || [ $mode == 'all' ] ; then
-						$logtalk $tester_optimal_goal > "$results/$subname.results" 2> "$results/$subname.errors"
+						$logtalk_call $tester_optimal_goal > "$results/$subname.results" 2> "$results/$subname.errors"
 						grep 'tests:' "$results/$subname.results" | sed 's/%/***** (opt)  /'
 						grep 'tests:' "$results/$subname.results" | sed 's/\(% \)\([0-9]*\)\(.*\)/\2/' >> "$results/total"
 						grep 'tests:' "$results/$subname.results" | sed 's/\(% [0-9]* tests: \)\([0-9]*\)\(.*\)/\2/' >> "$results/skipped"
 						grep 'tests:' "$results/$subname.results" | sed 's/\(% [0-9]* tests: [0-9]* skipped, \)\([0-9]*\)\(.*\)/\2/' >> "$results/passed"
 					fi
 					if [ $mode == 'normal' ] || [ $mode == 'all' ] ; then
-						$logtalk $tester_normal_goal > "$results/$subname.results" 2> "$results/$subname.errors"
+						$logtalk_call $tester_normal_goal > "$results/$subname.results" 2> "$results/$subname.errors"
 						grep 'tests:' "$results/$subname.results" | sed 's/%/*****        /'
 						grep 'tests:' "$results/$subname.results" | sed 's/\(% \)\([0-9]*\)\(.*\)/\2/' >> "$results/total"
 						grep 'tests:' "$results/$subname.results" | sed 's/\(% [0-9]* tests: \)\([0-9]*\)\(.*\)/\2/' >> "$results/skipped"
 						grep 'tests:' "$results/$subname.results" | sed 's/\(% [0-9]* tests: [0-9]* skipped, \)\([0-9]*\)\(.*\)/\2/' >> "$results/passed"
 					fi
 					if [ $mode == 'debug' ] || [ $mode == 'all' ] ; then
-						$logtalk $tester_debug_goal > "$results/$subname.results" 2> "$results/$subname.errors"
+						$logtalk_call $tester_debug_goal > "$results/$subname.results" 2> "$results/$subname.errors"
 						grep 'tests:' "$results/$subname.results" | sed 's/%/***** (debug)/'
 						grep 'tests:' "$results/$subname.results" | sed 's/\(% \)\([0-9]*\)\(.*\)/\2/' >> "$results/total"
 						grep 'tests:' "$results/$subname.results" | sed 's/\(% [0-9]* tests: \)\([0-9]*\)\(.*\)/\2/' >> "$results/skipped"
