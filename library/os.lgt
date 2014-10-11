@@ -1101,7 +1101,7 @@
 		shell(_, _) :-
 			throw(not_available(shell/2)).
 
-		shell(Command) :-
+		shell(_) :-
 			throw(not_available(shell/1)).
 
 		expand_path(Path, ExpandedPath) :-
@@ -1155,16 +1155,16 @@
 		environment_variable(Variable, Value) :-
 			{getenv(Variable, Value)}.
 
-		time_stamp(Time) :-
+		time_stamp(_) :-
 			throw(not_available(time_stamp/1)).
 
 		date_time(0, 0, 0, 0, 0, 0, 0).
 
-		cpu_time(Time) :-
+		cpu_time(Seconds) :-
 			{statistics(time, Miliseconds)},
 			Seconds is Miliseconds / 1000 .
 
-		wall_time(Time) :-
+		wall_time(Seconds) :-
 			{statistics(uptime, Miliseconds)},
 			Seconds is Miliseconds / 1000 .
 
