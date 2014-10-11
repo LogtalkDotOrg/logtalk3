@@ -56,6 +56,10 @@ a singleton variable warning.
 Documentation
 -------------
 
+* IMPROVED: Documentation of the `logtalk_compile/1-2` and `logtalk_load/1-2`
+predicates by detailing the steps taken to match a file specification with a
+file on disk.
+
 * FIXED: Documentation of the `mode/2` predicate directive where the second
 argument specifies the number of *proofs*, not the number of solutions (which
 are not necessarily distinct).
