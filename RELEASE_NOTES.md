@@ -36,6 +36,10 @@ intermediate entities in the predicate declaration and definition lookup
 chains (the entities must be static, not compiled in debug mode, and, in
 the case of objects, compiled with the `complements` flag set to `deny`).
 
+* IMPROVED: The `logtalk_compile/1-2` and `logtalk_load/1-2` predicates
+now try to use file names as-is as last resort when trying to match the
+specified file with existing files on disk.
+
 * FIXED: Bug in the `conforms_to_protocol/2-3` built-in predicates where
 complementing categories would be ignored.
 

@@ -5188,6 +5188,8 @@ current_logtalk_flag(Flag, Value) :-
 		),
 		atom_concat(Name, Extension, Basename0),
 		atom_concat(Basename0, TypeExtension, Basename)
+	;	% use basename as-is
+		atom_concat(Name, Extension, Basename)
 	),
 	atom_concat(Directory0, Basename, Path),
 	'$lgt_expand_path'(Path, FullPath),
