@@ -4811,7 +4811,7 @@ current_logtalk_flag(Flag, Value) :-
 		true
 	;	throw(error(existence_error(file, File), _))
 	),
-	'$lgt_file_name'(object, Basename, _, _, ObjectFile),
+	'$lgt_file_name'(object, SourceFile, _, _, ObjectFile),
 	assertz('$lgt_pp_file_data_'(Basename, Directory, SourceFile, ObjectFile)),
 	% change the directory to the directory of the file being loaded as it can be
 	% a loader file loading other files in its directory using a relative path
@@ -5054,7 +5054,7 @@ current_logtalk_flag(Flag, Value) :-
 		true
 	;	throw(error(existence_error(file, File), _))
 	),
-	'$lgt_file_name'(object, Basename, _, _, ObjectFile),
+	'$lgt_file_name'(object, SourceFile, _, _, ObjectFile),
 	assertz('$lgt_pp_file_data_'(Basename, Directory, SourceFile, ObjectFile)),
 	'$lgt_compile_file'(SourceFile, ObjectFile, Flags, compiling),
 	'$lgt_compile_files'(Files, Flags).

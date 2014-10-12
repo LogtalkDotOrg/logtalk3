@@ -47,6 +47,9 @@ complementing categories would be ignored.
 predicate where complementing categories would not be checked in the correct
 order.
 
+* FIXED: Bug when constructing the full path for intermediate files generated
+when compiling a source file where the wrong directory could be used.
+
 Prolog adapter and integration files
 ------------------------------------
 
