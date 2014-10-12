@@ -18041,14 +18041,14 @@ current_logtalk_flag(Flag, Value) :-
 			% Type == static
 			true
 		;	% Type == (dynamic)
-			Obj = DclCtn ->
+			GObj = DclCtn ->
 			% local declaration
 			true
-		;	Obj = DefCtn
+		;	GObj = DefCtn
 			% local definition
 		),
 		% predicate definition found; use it only if it's safe
-		'$lgt_static_binding_safe_paths'(Obj, DclCtn, DefCtn),
+		'$lgt_static_binding_safe_paths'(GObj, DclCtn, DefCtn),
 		(	Meta == no ->
 			% cache only normal predicates
 			assertz('$lgt_send_to_obj_static_binding_'(GObj, GPred, GCallerExCtx, GCall)),
