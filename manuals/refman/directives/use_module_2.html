@@ -41,10 +41,13 @@
 This directive is supported only when using a back-end Prolog compiler that supports modules. It declares that all calls (made from predicates defined in the category or object containing the directive) to the specified predicates are to be interpreted as calls to explicitly-qualified module predicates. Thus, this directive may be used to simplify writing of predicate definitions by allowing the programmer to omit the <code>Module:</code> prefix when using the predicates listed in the directive (as long as the predicate calls do not occur as arguments for non-standard Prolog meta-predicates not declared on the adapter files). It is also possible to include operator declarations, <code>op(Precedence, Associativity, Operator)</code>, in the second argument.
 </p>
 <p>
-This directive is also used when compiling calls to the database and reflection built-in methods by looking into these methods predicate arguments.
+This directive is also used when compiling calls to the database and reflection built-in methods by examining these methods predicate arguments.
 </p>
 <p>
 It is possible to specify a predicate alias using the notation <code>Functor/Arity as Alias/Arity</code> or, in alternative, the notation <code>Functor/Arity:Alias/Arity</code>. Aliases may be used either for avoiding conflicts between predicates specified in <code>use_module/2</code> and <code>uses/2</code> directives or for giving more meaningful names considering the using context of the predicates.
+</p>
+<p>
+Note that this directive differs from the directive with the same name found on some Prolog implementations by requiring the first argument to be a module name (an atom) instead of a file specification. As a consequence, this directive doesn't automatically load the module. Loading the module file is dependent of the used backend Prolog compiler and should be done separately (e.g. using a source file <code>use_module/1</code> or <code>use_module/2</code> directive in the entity file or in the application loader file). Also note that the name of the module may differ from the name of the module file.
 </p>
 
 <h4>Template and modes</h4>
@@ -66,7 +69,7 @@ foo :-
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: Abril 28, 2014</span>
+		<span>Last updated on: October 12, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="../index.html#directives">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="../index.html#directives">next</a></span><br/>

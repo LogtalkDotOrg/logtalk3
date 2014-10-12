@@ -60,6 +60,8 @@ Documentation
 predicates by detailing the steps taken to match a file specification with a
 file on disk.
 
+* IMPROVED: Documentation of the `use_module/2` entity directive.
+
 * FIXED: Documentation of the `mode/2` predicate directive where the second
 argument specifies the number of *proofs*, not the number of solutions (which
 are not necessarily distinct).
