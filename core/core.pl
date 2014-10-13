@@ -18029,12 +18029,11 @@ current_logtalk_flag(Flag, Value) :-
 		ObjFlags /\ 64 =\= 64,
 		ObjFlags /\ 32 =\= 32,
 		% support for complementing categories is disallowed
-		call(Dcl, Pred, p(p(p)), Meta, PredFlags, _, DclCtn), !,
-		% construct predicate and object templates
-		'$lgt_term_template'(Obj, GObj),
 		'$lgt_term_template'(Pred, GPred),
+		call(Dcl, GPred, p(p(p)), Meta, PredFlags, _, DclCtn), !,
 		% construct list of the meta-arguments that will be called in the "sender"
 		'$lgt_goal_meta_call_context'(Meta, GPred, GCallerExCtx, GThis, GMetaCallCtx),
+		'$lgt_term_template'(Obj, GObj),
 		'$lgt_execution_context'(GExCtx, _, GThis, GObj, GObj, GMetaCallCtx, []),
 		call(Def, GPred, GExCtx, GCall, _, DefCtn), !,
 		(	PredFlags /\ 2 =:= 0 ->
