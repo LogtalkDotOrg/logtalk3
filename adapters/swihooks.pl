@@ -8,7 +8,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on August 29, 2014
+%  Last updated on October 13, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -663,6 +663,7 @@ user:portray(c(This, Entity, Rest)) :-
 :- meta_predicate user:'$lgt_complemented_object'(*,*,*,*,*).
 :- meta_predicate user:'$lgt_object_property_defines'(*,*,*,*,*).
 :- meta_predicate user:'$lgt_find_original_predicate'(*,*,*,*,*).
+:- meta_predicate user:'$lgt_find_original_predicate'(*,*,*,*,*,*).
 :- meta_predicate user:'$lgt_expand_goal_local'(*,*,*,*,*).
 :- meta_predicate user:'$lgt_assert_pred_dcl'(*,*,*,*,*,*,*,*,*,*,*,*,*).
 :- meta_predicate user:'$lgt_expand_goal_scoped'(*,*,*,*).
@@ -698,7 +699,6 @@ user:portray(c(This, Entity, Rest)) :-
 :- meta_predicate user:threaded_call(*).
 :- meta_predicate user:threaded_once(*).
 
-:- meta_predicate user:'$lgt_find_original_predicate'(*,*,*,*).
 :- meta_predicate user:'$lgt_threaded_goal'(*,*,*,*).
 :- meta_predicate user:'$lgt_threaded_call'(*,*,*).
 :- meta_predicate user:'$lgt_threaded_once'(*,*,*).
