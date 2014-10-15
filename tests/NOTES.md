@@ -40,3 +40,10 @@ compiler, open a terminal and type:
 	$ cd ../contributions
 	$ logtalk_tester -p swi
 	...
+
+To run all the provided backend Prolog compiler standards conformance tests
+with e.g. SWI-Prolog, open a terminal and type:
+
+	$ cd $LOGTALKUSER/tests/prolog
+	$ logtalk_tester -p swi
+	...
