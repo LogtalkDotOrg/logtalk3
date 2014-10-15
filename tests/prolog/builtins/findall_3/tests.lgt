@@ -27,7 +27,7 @@
 
 	succeeds(iso_findall_3_02) :-
 		{findall(X+_Y, (X=1), S)},
-		S == [1+_].
+		S = [1+_].
 
 	succeeds(iso_findall_3_03) :-
 		{findall(_X,fail,L)},
@@ -41,7 +41,7 @@
 		{findall(X, (X=2;X=1), [1,2])}.
 
 	succeeds(iso_findall_3_06) :-
-		{findall(X, (X=1;X=2), [X,Y])}.
+		{findall(X, (X=1;X=2), [X,Y])},
 		X == 1, Y == 2.
 
 	throws(iso_findall_3_07, error(instantiation_error,_)) :-
