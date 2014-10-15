@@ -97,7 +97,7 @@ where static binding optimizations must not be applied due to setting the
 `complements` flag to value other than `deny` for intervening objects.
 
 * ADDED: Unit tests for a subset of the ISO Prolog standard specified control
-constructs and arithmetic functions.
+constructs, predicates, and arithmetic functions.
 
 
 3.00.0 Release Candidate 3 - October 3, 2014
