@@ -14,6 +14,11 @@ there are also unit tests defined for most of the examples, for some of the
 developer tools, and for some of the code contributions. Some tests, specially
 for directives, are mainly parsing tests for all the supported syntaxes.
 
+There's also an additional set of unit tests in this directory for Prolog
+standard features. Most of these unit tests are taken from the official
+ISO Prolog standard. They can be used to highlight differences between
+backend Prolog compilers when porting and testing Logtalk applications.
+
 You can automate running all these tests by calling the `logtalk_tester`
 shell script from the command-line (see the `scripts/NOTES.md` file for
 details on how to use this script with POSIX and Windows operating-systems).
