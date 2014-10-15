@@ -38,10 +38,6 @@ insect(bee).
 		comment is 'Unit tests for the ISO Prolog standard clause/2 built-in predicate.'
 	]).
 
-	:- discontiguous([
-		succeeds/1, fails/1
-	]).
-
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.8.1.4
 
 	succeeds(iso_clause_2_01) :-
