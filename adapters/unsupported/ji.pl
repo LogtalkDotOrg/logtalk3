@@ -3,8 +3,8 @@
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
-%  Adapter file for JIProlog 3.1.0-1 or later versions
-%  Last updated on September 29, 2014
+%  Adapter file for JIProlog 3.2.0-7 or later versions
+%  Last updated on October 17, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -235,7 +235,7 @@ format(Format, Arguments) :-
 '$lgt_prolog_feature'(prolog_dialect, ji).
 '$lgt_prolog_feature'(prolog_version, _) :-
 	fail.
-'$lgt_prolog_feature'(prolog_compatible_version, @>=((3,1,0))).
+'$lgt_prolog_feature'(prolog_compatible_version, @>=((3,2,0))).
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
 '$lgt_prolog_feature'(tabling, unsupported).
@@ -394,8 +394,13 @@ format(Format, Arguments) :-
 % access to operating-system environment variables
 
 '$lgt_environment_variable'(Variable, Value) :-
-	invoke('java.lang.System', getenv('java.lang.String'), [Variable], Value),
-	Value \== [].
+	(	invoke('java.lang.System', getenv('java.lang.String'), [Variable], Value),
+		Value \== [] ->
+		true
+	;	% check if the environment variable value is passed as a property
+		invoke('java.lang.System', getProperty('java.lang.String'), [Variable], Value),
+		Value \== []
+	).
 
 
 % '$lgt_startup_directory'(-atom)
@@ -404,6 +409,10 @@ format(Format, Arguments) :-
 
 '$lgt_startup_directory'(Directory) :-
 	(	invoke('java.lang.System', getenv('java.lang.String'), ['LOGTALK_STARTUP_DIRECTORY'], Directory),
+		Directory \== [] ->
+		true
+	;	% check if the LOGTALK_STARTUP_DIRECTORY environment variable value is passed as a property
+		invoke('java.lang.System', getProperty('java.lang.String'), ['LOGTALK_STARTUP_DIRECTORY'], Directory),
 		Directory \== [] ->
 		true
 	;	working_directory(Directory, Directory)
@@ -415,8 +424,14 @@ format(Format, Arguments) :-
 % returns the Logtalk user directory; fails if unknown
 
 '$lgt_user_directory'(Directory) :-
-	invoke('java.lang.System', getenv('java.lang.String'), ['LOGTALKUSER'], Directory),
-	Directory \== [].
+	(	invoke('java.lang.System', getenv('java.lang.String'), ['LOGTALKUSER'], Directory),
+		Directory \== [] ->
+		true
+	;	% check if the LOGTALKUSER environment variable value is passed as a property
+		invoke('java.lang.System', getProperty('java.lang.String'), ['LOGTALKUSER'], Directory),
+		Directory \== []
+	).
+
 
 
 % '$lgt_home_directory'(-atom)
@@ -424,8 +439,13 @@ format(Format, Arguments) :-
 % returns the Logtalk home directory; fails if unknown
 
 '$lgt_home_directory'(Directory) :-
-	invoke('java.lang.System', getenv('java.lang.String'), ['LOGTALKHOME'], Directory),
-	Directory \== [].
+	(	invoke('java.lang.System', getenv('java.lang.String'), ['LOGTALKHOME'], Directory),
+		Directory \== [] ->
+		true
+	;	% check if the LOGTALKHOME environment variable value is passed as a property
+		invoke('java.lang.System', getProperty('java.lang.String'), ['LOGTALKHOME'], Directory),
+		Directory \== []
+	).
 
 
 % '$lgt_decompose_file_name'(+atom, ?atom, ?atom, ?atom)

@@ -56,6 +56,9 @@ Prolog adapter and integration files
 * IMPROVED: Simplified startup settings for the YAP adapter file and fixed
 a singleton variable warning.
 
+* UPDATED: The JIProlog adapter file to support passing environment variable
+values as Java process properties.
+
 Documentation
 -------------
 
@@ -66,8 +69,8 @@ file on disk.
 * IMPROVED: Documentation of the `use_module/2` entity directive.
 
 * FIXED: Documentation of the `mode/2` predicate directive where the second
-argument specifies the number of *proofs*, not the number of solutions (which
-are not necessarily distinct).
+argument specifies the number of *proofs*, not the number of distinct solutions
+(as there can be multiple proofs for the same solution).
 
 Tools
 -----
@@ -97,7 +100,8 @@ where static binding optimizations must not be applied due to setting the
 `complements` flag to value other than `deny` for intervening objects.
 
 * ADDED: Unit tests for a subset of the ISO Prolog standard specified control
-constructs, predicates, and arithmetic functions.
+constructs, predicates, and arithmetic functions. These tests are used to
+check backend Prolog compilers standards compliance, not Logtalk features.
 
 
 3.00.0 Release Candidate 3 - October 3, 2014
