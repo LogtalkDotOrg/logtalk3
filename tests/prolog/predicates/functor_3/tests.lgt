@@ -64,25 +64,32 @@
 	succeeds(iso_functor_3_11) :-
 		{functor([], [], 0)}.
 
+	% in the tests that follow, try to delay the expected error to runtime
+
 	throws(iso_functor_3_12, error(instantiation_error,_)) :-
-		{functor(_X, _Y, 3)}.
+		{G = functor(_X, _Y, 3), call(G)}.
 
 	throws(iso_functor_3_13, error(instantiation_error,_)) :-
-		{functor(_X, foo, _N)}.
+		{G = functor(_X, foo, _N), call(G)}.
 
 	throws(iso_functor_3_14, error(type_error(integer,a),_)) :-
-		{functor(_X, foo, a)}.
+		{G = functor(_X, foo, a), call(G)}.
 
 	throws(iso_functor_3_15, error(type_error(atom,1.5),_)) :-
-		{functor(_F, 1.5, 1)}.
+		{G = functor(_F, 1.5, 1), call(G)}.
 
 	throws(iso_functor_3_16, error(type_error(atomic,foo(a)),_)) :-
-		{functor(_F, foo(a), 1)}.
+		{G = functor(_F, foo(a), 1), call(G)}.
 
-	throws(iso_functor_3_17, error(representation_error(max_arity),_)) :-
-		{current_prolog_flag(max_arity, A), X is A+1, functor(_T, foo, X)}.
+	:- if(current_prolog_flag(max_arity, unbounded)).
+		succeeds(iso_functor_3_17) :-
+			true.
+	:- else.
+		throws(iso_functor_3_17, error(representation_error(max_arity),_)) :-
+			{current_prolog_flag(max_arity, A), X is A+1, functor(_T, foo, X)}.
+	:- endif.
 
 	throws(iso_functor_3_18, error(domain_error(not_less_than_zero,-1),_)) :-
-		{functor(_T, foo, -1)}.
+		{G = functor(_T, foo, -1), call(G)}.
 
 :- end_object.

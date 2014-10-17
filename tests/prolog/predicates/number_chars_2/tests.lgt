@@ -47,7 +47,7 @@
 		{number_chars(A, ['\n',' ','3'])},
 		A == 3.
 
-	throws(iso_number_chars_2_08, error(syntax_error,_)) :-
+	throws(iso_number_chars_2_08, error(syntax_error(_),_)) :-
 		{number_chars(_A, ['3',' '])}.
 
 	succeeds(iso_number_chars_2_09) :-

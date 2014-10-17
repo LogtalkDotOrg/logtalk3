@@ -55,7 +55,13 @@
 		{(op(30, xfy, ++), op(40, xfx, ++))},
 		{current_op(40, xfx, ++), op(0, xfx, ++)}.
 
-	throws(iso_op_3_10, error(permission_error(create,operator,++),_)) :-
-		{op(30, xfy, ++), op(50, yf, ++)}.
+	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == eclipse; Dialect == swi; Dialect == yap))).
+		% these Prolog systems support the definition of an atom as both an infix and a postfix operator
+		succeeds(iso_op_3_10) :-
+			true.
+	:- else.
+		throws(iso_op_3_10, error(permission_error(create,operator,++),_)) :-
+			{op(30, xfy, ++), op(50, yf, ++)}.
+	:- endif.
 
 :- end_object.

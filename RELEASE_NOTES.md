@@ -102,6 +102,8 @@ where static binding optimizations must not be applied due to setting the
 * ADDED: Unit tests for a subset of the ISO Prolog standard specified control
 constructs, predicates, and arithmetic functions. These tests are used to
 check backend Prolog compilers standards compliance, not Logtalk features.
+Thanks to Joachim Schimpf for helping finding typos in the initial test
+versions.
 
 
 3.00.0 Release Candidate 3 - October 3, 2014

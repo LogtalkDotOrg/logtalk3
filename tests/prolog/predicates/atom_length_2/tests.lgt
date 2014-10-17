@@ -27,7 +27,7 @@
 
 	succeeds(iso_atom_length_2_02) :-
 		{atom_length('enchanted\
-evening', N)},
+ evening', N)},
 		N == 17.
 
 	succeeds(iso_atom_length_2_03) :-

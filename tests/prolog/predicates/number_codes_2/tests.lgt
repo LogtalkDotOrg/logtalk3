@@ -47,7 +47,7 @@
 		{number_codes(A, [0'0,0'x,0'f])},
 		A == 15.
 
-	throws(iso_number_codes_2_08, error(syntax_error,_)) :-
+	succeeds(iso_number_codes_2_08) :-
 		{number_codes(A, [0'0,39,0'a])},
 		A == 0'a.
 

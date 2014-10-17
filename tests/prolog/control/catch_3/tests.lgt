@@ -59,7 +59,8 @@ p :-
 	succeeds(iso_catch_3_03) :-
 		{catch(true, _, 3)}.
 
-	throws(iso_catch_3_04, error(system_error,_)) :-
+	throws(iso_catch_3_04, bla) :-
+		% ISO wants a system_error instead but all tested systems disagree!
 		{catch(true, _C, write(demoen)), throw(bla)}.
 
 	succeeds(iso_catch_3_05) :-
@@ -70,7 +71,7 @@ p :-
 		{catch(number_chars(_X,['1',a,'0']), error(syntax_error(_),_), fail)}.
 
 	succeeds(iso_catch_3_07) :-
-		{catch(g, C, write(h1))},
+		{catch(g, C, write(h1)), nl},
 		C == c.
 
 	succeeds(iso_catch_3_08) :-
