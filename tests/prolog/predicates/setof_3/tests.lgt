@@ -141,6 +141,7 @@ setof_3_member(X, [_| L]) :-
 		{setof(X, setof_3_member(X,[V,U,f(U),f(V)]), [a,b,f(b),f(a)])}.
 
 	succeeds(iso_setof_3_20) :-
+		% example fixed in ISO/IEC 13211-1:1995/Cor.1:2007
 		{setof(X, exists(U,V)^setof_3_member(X,[V,U,f(U),f(V)]), [a,b,f(a),f(b)])}.
 
 	succeeds(iso_setof_3_21) :-

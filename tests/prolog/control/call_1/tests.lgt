@@ -48,10 +48,14 @@ a(2).
 		{call((fail, call(1)))}.
 
 	throws(iso_call_1_05, error(instantiation_error,_)) :-
-		{call(b(_))}.
+		{b(_)}.
+
+	throws(iso_call_1_06, error(type_error(callable,(write(3),3)),_)) :-
+		% example fixed in ISO/IEC 13211-1:1995/Cor.2:2012
+		{b(3)}.
 
 	succeeds(iso_call_1_07) :-
-		{(Z=!, call((Z=!, a(X), Z)))},
+		{(Z = !, call((Z=!, a(X), Z)))},
 		Z == !, X == 1.
 
 	succeeds(iso_call_1_08) :-

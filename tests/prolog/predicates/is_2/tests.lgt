@@ -98,6 +98,7 @@
 		{_X is '*'(foo, 77)}.
 
 	succeeds(iso_is_2_21) :-
+		% example fixed in ISO/IEC 13211-1:1995/Cor.1:2007
 		{X is '//'(7,35)},
 		X == 0.
 
@@ -106,10 +107,12 @@
 		X == 0.2.
 
 	succeeds(iso_is_2_23) :-
+		% example fixed in ISO/IEC 13211-1:1995/Cor.1:2007
 		{X is '//'(140,3+11)},
 		X == 10.
 
 	succeeds(iso_is_2_24) :-
+		% example fixed in ISO/IEC 13211-1:1995/Cor.1:2007
 		{X is '/'(20.164, 3.2+11)},
 		X =~= 1.42.
 
@@ -197,6 +200,7 @@
 		X == 7.3.
 
 	succeeds(iso_is_2_48) :-
+		% example fixed in ISO/IEC 13211-1:1995/Cor.1:2007
 		{X is float(5//3)},
 		X == 1.0.
 

@@ -50,6 +50,7 @@
 		X == 1.
 
 	succeeds(iso_if_then_else_3_09) :-
-		{';'('->'(','(!, fail), true), true)}.
+		% example changed in ISO/IEC 13211-1:1995/Cor.1:2007
+		{';'(('->'(!,fail), true), true)}.
 
 :- end_object.

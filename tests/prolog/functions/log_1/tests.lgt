@@ -30,6 +30,7 @@
 		X == 0.0.
 
 	succeeds(iso_log_1_02) :-
+		% example fixed in ISO/IEC 13211-1:1995/Cor.1:2007
 		{E is log(2.71828)},
 		E =~= 1.0.
 
