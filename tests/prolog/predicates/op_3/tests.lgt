@@ -64,4 +64,29 @@
 			{op(30, xfy, ++), op(50, yf, ++)}.
 	:- endif.
 
+	% tests from the ISO/IEC 13211-1:1995/Cor.2:2012(en) standard, section 8.14.3.4
+
+	throws(iso_op_3_11, error(permission_error(create,operator,{}),_)) :-
+		{op(500, xfy, {})}.
+
+	throws(iso_op_3_12, error(permission_error(create,operator,{}),_)) :-
+		{op(500, xfy, [{}])}.
+	
+	throws(iso_op_3_13, error(permission_error(create,operator,'|'),_)) :-
+		{op(1000, xfy, '|')}.
+
+	throws(iso_op_3_14, error(permission_error(create,operator,'|'),_)) :-
+		{op(1000, xfy, ['|'])}.
+	
+	throws(iso_op_3_15, error(permission_error(create,operator,'|'),_)) :-
+		{op(1150, fx, '|')}.
+
+	succeeds(iso_op_3_16) :-
+		{op(1105, xfy, '|')},
+		{current_op(Priority, Specifier, '|')}, Priority == 1105, Specifier == xfy.
+
+	succeeds(iso_op_3_17) :-
+		{op(0, xfy, '|')},
+		{\+ current_op(_, xfy, '|')}.
+
 :- end_object.
