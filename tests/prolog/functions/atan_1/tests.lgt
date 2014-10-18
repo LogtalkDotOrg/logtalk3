@@ -29,22 +29,22 @@
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 9.3.4.4
 
-	succeeds(iso_power_2_01) :-
+	succeeds(iso_atan_1_01) :-
 		{X is atan(0.0)},
 		X == 0.0.
 
-	succeeds(iso_power_2_02) :-
+	succeeds(iso_atan_1_02) :-
 		{PI is atan(1.0)*4},
 		PI =~= 3.14159.
 
-	throws(iso_power_2_03, error(instantiation_error,_)) :-
+	throws(iso_atan_1_03, error(instantiation_error,_)) :-
 		{_X is atan(_N)}.
 
-	succeeds(iso_power_2_04) :-
+	succeeds(iso_atan_1_04) :-
 		{X is atan(0)},
 		X == 0.0.
 
-	throws(iso_power_2_05, error(type_error(evaluable,foo/0),_)) :-
+	throws(iso_atan_1_05, error(type_error(evaluable,foo/0),_)) :-
 		{_X is atan(foo)}.
 
 :- end_object.
