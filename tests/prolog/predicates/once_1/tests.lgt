@@ -34,4 +34,8 @@
 	fails(iso_once_1_04) :-
 		{once(fail)}.
 
+	- succeeds(iso_once_1_05) :-
+		% STO; Undefined
+		{once((X = f(X)))}.
+
 :- end_object.

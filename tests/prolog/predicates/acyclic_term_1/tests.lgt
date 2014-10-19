@@ -24,4 +24,8 @@
 	succeeds(iso_acyclic_term_1_01) :-
 		{acyclic_term(a(1, _))}.
 
+	- fails(iso_acyclic_term_1_02) :-
+		% STO; Undefined
+		{X = f(X), acyclic_term(X)}.
+
 :- end_object.

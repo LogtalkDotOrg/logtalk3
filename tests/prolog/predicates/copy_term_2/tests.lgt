@@ -47,4 +47,8 @@
 	fails(iso_copy_term_2_08, error(instantiation_error,_)) :-
 		{copy_term(a+X, X+b)}.
 
+	- succeeds(iso_copy_term_2_09) :-
+		% STO; Undefined
+		{copy_term(demoen(X,X), demoen(Y,f(Y)))}.
+
 :- end_object.

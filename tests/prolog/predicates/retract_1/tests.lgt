@@ -63,7 +63,7 @@ foo(X) :- call(X), call(X).
 		I == ant.
 
 	- succeeds(iso_retract_1_07) :-
-		% reported as undefined in the standard!
+		% STO; Undefined
 		{retract((foo(A) :- A,call(A)))}.
 
 	succeeds(iso_retract_1_08) :-

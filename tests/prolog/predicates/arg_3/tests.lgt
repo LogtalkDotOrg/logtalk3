@@ -57,4 +57,8 @@
 	throws(iso_arg_3_11, error(type_error(compound,3),_)) :-
 		{arg(0, 3, _)}.
 
+	- succeeds(iso_arg_3_12) :-
+		% STO; Undefined
+		{arg(1, foo(X), u(X))}.
+
 :- end_object.

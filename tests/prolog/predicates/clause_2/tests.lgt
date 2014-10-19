@@ -73,4 +73,8 @@ insect(bee).
 	throws(iso_clause_2_10, error(permission_error(access,private_procedure,atom/1),_)) :-
 		{clause(atom(_), _Body)}.
 
+	- succeeds(iso_clause_2_11) :-
+		% STO; Undefined
+		{clause(legs(A,6), insect(f(A)))}.
+
 :- end_object.

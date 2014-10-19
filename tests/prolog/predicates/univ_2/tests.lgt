@@ -66,4 +66,8 @@
 	throws(iso_univ_2_14, error(type_error(list,4),_)) :-
 		{'=..'(_X, 4)}.
 
+	- succeeds(iso_univ_2_15) :-
+		% STO; Undefined
+		{'=..'(f(X), [f,u(X)])}.
+
 :- end_object.

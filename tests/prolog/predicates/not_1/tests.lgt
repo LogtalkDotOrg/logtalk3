@@ -45,4 +45,8 @@
 		% try to force runtime goal checking
 		G = '\\+'(_X), {G}.
 
+	- fails(iso_not_1_08) :-
+		% STO; Undefined
+		{'\\+'(X=f(X))}.
+
 :- end_object.
