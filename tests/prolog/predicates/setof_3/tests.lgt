@@ -45,7 +45,7 @@ setof_3_member(X, [_| L]) :-
 	]).
 
 	:- discontiguous([
-		succeeds/1, fails/1
+		succeeds/1, fails/1, throws/2
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.10.3.4
@@ -159,5 +159,22 @@ setof_3_member(X, [_| L]) :-
 	succeeds(iso_setof_3_24) :-
 		{setof(X-Xs, bagof(Y,d(X,Y),Xs), L)},
 		var(Y), L == [1-[1,2,1], 2-[2,1,2]].
+
+	- succeeds(eddbali_setof_3_25) :-
+		% STO; Undefined
+		{setof(f(X,Y),X=Y,[f(g(Z),Z)])}.
+
+	throws(eddbali_setof_3_26, error(type_error(callable,(true;4)),_)) :-
+		{setof(X, X^(true; 4), _L)}.
+
+	throws(sics_setof_3_27, error(type_error(callable,1),_)) :-
+		{setof(_X, A^A^1, _L)}.
+
+	succeeds(sics_setof_3_28) :-
+		{setof(X, X=1, [1|A])},
+		A == [].
+
+	throws(sics_setof_3_29, error(type_error(list,[A|1]),_)) :-
+		{setof(X, X=1, [A|1])}.
 
 :- end_object.

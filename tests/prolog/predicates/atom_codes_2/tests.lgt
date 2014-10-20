@@ -19,6 +19,10 @@
 		comment is 'Unit tests for the ISO Prolog standard atom_codes/2 built-in predicate.'
 	]).
 
+	:- discontiguous([
+		succeeds/1, fails/1, throws/2
+	]).
+
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.16.5.4
 
 	succeeds(iso_atom_codes_2_01) :-
@@ -50,5 +54,24 @@
 
 	throws(iso_atom_codes_2_08, error(instantiation_error,_)) :-
 		{atom_codes(_X, _Y)}.
+
+	throws(eddbali_atom_codes_2_09, error(type_error(atom,f(a)),_)) :-
+		{atom_codes(f(a), _L)}.
+
+	throws(eddbali_atom_codes_2_10, error(type_error(list,0'x),_)) :-
+		{atom_codes(_, 0'x)}.
+
+	throws(eddbali_atom_codes_2_11, error(representation_error(character_code),_)) :-
+		{atom_codes(_A, [0'i,0's,-1])}.
+
+%	the following tests result in a syntax error with several Prolog compilers
+%
+%	succeeds(sics_atom_codes_2_12) :-
+%		{atom_codes('Pécs', C)},
+%		C == [0'P,0'é,0'c,0's].
+%
+%	succeeds(sics_atom_codes_2_13) :-
+%		{atom_codes(A, [0'P,0'é,0'c,0's])},
+%		A == 'Pécs'.
 
 :- end_object.

@@ -38,4 +38,10 @@
 		% STO; Undefined
 		{once((X = f(X)))}.
 
+	throws(eddbali_once_1_06, error(type_error(callable,3),_)) :-
+		{once(3)}.
+
+	throws(eddbali_once_1_07, error(instantiation_error,_)) :-
+		{once(_X)}.
+
 :- end_object.

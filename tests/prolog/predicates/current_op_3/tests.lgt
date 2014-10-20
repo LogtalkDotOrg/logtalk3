@@ -19,6 +19,10 @@
 		comment is 'Unit tests for the ISO Prolog standard current_op/3 built-in predicate.'
 	]).
 
+	:- discontiguous([
+		succeeds/1, throws/2
+	]).
+
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.14.4.4
 
 	succeeds(iso_current_op_3_01) :-
@@ -33,7 +37,7 @@
 		{current_op(P, T, ':-')},
 		P == 1200, T == fx.
 
-	succeeds(iso_current_op_3_04) :-
+	- succeeds(iso_current_op_3_04) :-
 		{current_op(P, T, '?-')},
 		P == 1200, T == xfx.
 
@@ -176,5 +180,38 @@
 	succeeds(iso_current_op_3_39) :-
 		{current_op(P, T, '\\')},
 		P == 200, T == fy.
+
+	throws(sics_current_op_3_40, error(domain_error(operator_priority,1201),_)) :-
+		{current_op(1201, _, _)}.
+
+	throws(sics_current_op_3_41, error(domain_error(operator_specifier,yfy),_)) :-
+		{current_op(_, yfy, _)}.
+
+	throws(sics_current_op_3_42, error(domain_error(operator_specifier,0),_)) :-
+		% the original test expected a type_error(atom,0) but the standard is clear in this case
+		{current_op(_, 0, _)}.
+
+	throws(sics_current_op_3_43, error(type_error(atom,5),_)) :-
+		{current_op(_, _, 5)}.
+
+	% tests from the ISO/IEC 13211-1:1995/Cor.2:2012(en) standard, section 8.14.4.4
+
+	succeeds(iso_current_op_3_44) :-
+		(	{current_op(P, T, '|')} ->
+			P >= 1001, infix(T)
+		;	true
+		).
+
+	succeeds(iso_current_op_3_45) :-
+		{current_op(P, T, div)},
+		P == 400, T == yfx.
+
+	succeeds(iso_current_op_3_46) :-
+		{current_op(P, T, +)},
+		P == 200, T == fy.
+
+	infix(yfx).
+	infix(xfx).
+	infix(xfy).
 
 :- end_object.

@@ -24,4 +24,7 @@
 	throws(iso_halt_1_01, error(type_error(integer,a),_)) :-
 		{halt(a)}.
 
+	throws(eddbali_halt_1_02, error(instantiation_error,_)) :-
+		{halt(_)}.
+
 :- end_object.

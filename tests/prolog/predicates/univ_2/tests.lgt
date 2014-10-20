@@ -70,4 +70,25 @@
 		% STO; Undefined
 		{'=..'(f(X), [f,u(X)])}.
 
+	throws(sics_univ_2_16, error(type_error(atomic,f(a)),_)) :-
+		{'=..'(_X, [f(a)])}.
+
+	throws(sics_univ_2_17, error(domain_error(non_empty_list,[]),_)) :-
+		{'=..'(_X, [])}.
+
+	:- if(current_prolog_flag(max_arity, unbounded)).
+		succeeds(sics_univ_2_18) :-
+			true.
+	:- else.
+		list_of(0, _, []).
+		list_of(N, A, [A|L]) :-
+			N > 0, N1 is N-1,
+			list_of(N1, A, L).
+
+		throws(sics_univ_2_18, error(representation_error(max_arity),_)) :-
+			{current_prolog_flag(max_arity, Max)},
+			N is Max+1, list_of(N, 1, L),
+			{'=..'(_X, [f|L])}.
+	:- endif.
+
 :- end_object.

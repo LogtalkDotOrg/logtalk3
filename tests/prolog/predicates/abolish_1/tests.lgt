@@ -9,6 +9,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% database for tests from the ISO/IEC 13211-1:1995(E) standard, section 8.9.4.4
+
+:- dynamic(insect/1).
+insect(ant).
+insect(bee).
+
+:- dynamic(foo/1).
+foo(X) :- call(X), call(X).
+foo(X) :- call(X) -> call(X).
+
+bar(_X) :- true.
+
+
 :- object(tests,
 	extends(lgtunit)).
 
@@ -20,7 +33,7 @@
 	]).
 
 	:- discontiguous([
-		succeeds/1, fails/1
+		succeeds/1, fails/1, throws/2
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.9.4.4
@@ -39,5 +52,40 @@
 
 	throws(iso_abolish_1_05, error(permission_error(modify,static_procedure,abolish/1),_)) :-
 		{abolish(abolish/1)}.
+
+	succeeds(eddbali_abolish_1_06) :-
+		{abolish(foo/1)}.
+
+	succeeds(eddbali_abolish_1_07) :-
+		findall(X, {insect(X), abolish(insect/1)}, L),
+		L == [ant, bee].
+
+	throws(eddbali_abolish_1_08, error(instantiation_error,_)) :-
+		{abolish(foo/_)}.
+
+	throws(eddbali_abolish_1_09, error(permission_error(modify,static_procedure,bar/1),_)) :-
+		{abolish(bar/1)}.
+
+	throws(eddbali_abolish_1_10, error(type_error(integer,a),_)) :-
+		{abolish(foo/a)}.
+
+	throws(eddbali_abolish_1_11, error(domain_error(not_less_than_zero,-1),_)) :-
+		{abolish(foo/(-1))}.
+
+	:- if(current_prolog_flag(max_arity, unbounded)).
+		succeeds(eddbali_abolish_1_12) :-
+			true.
+	:- else.
+		throws(eddbali_abolish_1_12, error(representation_error(max_arity),_)) :-
+			current_prolog_flag(max_arity, MaxArity),
+			X is MaxArity + 1,
+			{abolish(foo/X)}.
+	:- endif.
+
+	throws(eddbali_abolish_1_13, error(type_error(atom,5),_)) :-
+		{abolish(5/2)}.
+
+	throws(eddbali_abolish_1_14, error(type_error(predicate_indicator,insect),_)) :-
+		{abolish(insect)}.
 
 :- end_object.

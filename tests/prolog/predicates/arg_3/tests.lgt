@@ -19,6 +19,10 @@
 		comment is 'Unit tests for the ISO Prolog standard arg/3 built-in predicate.'
 	]).
 
+	:- discontiguous([
+		succeeds/1, fails/1, throws/2
+	]).
+
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.5.2.4
 
 	succeeds(iso_arg_3_01) :-
@@ -60,5 +64,18 @@
 	- succeeds(iso_arg_3_12) :-
 		% STO; Undefined
 		{arg(1, foo(X), u(X))}.
+
+	throws(eddbali_arg_3_13, error(domain_error(not_less_than_zero,-3),_)) :-
+		{arg(-3, foo(a,b), _A)}.
+
+	throws(eddbali_arg_3_14, error(type_error(integer,a),_)) :-
+		{arg(a, foo(a,b), _X)}.
+
+	succeeds(eddbali_arg_3_15) :-
+		{arg(2, foo(a,f(X,b),c), f(a,Y))},
+		X == a, Y == b.
+
+	throws(sics_arg_3_16, error(type_error(compound,3),_)) :-
+		{arg(1, 3, _A)}.
 
 :- end_object.

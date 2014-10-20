@@ -15,9 +15,10 @@ developer tools, and for some of the code contributions. Some tests, specially
 for directives, are mainly parsing tests for all the supported syntaxes.
 
 There's also an additional set of unit tests in this directory for Prolog
-standard features. Most of these unit tests are taken from the official
-ISO Prolog standard. They can be used to highlight differences between
+standard features. They can be used to highlight differences between
 backend Prolog compilers when porting and testing Logtalk applications.
+See the `prolog/NOTES.md` file for details about the tests and how to run
+them.
 
 You can automate running all these tests by calling the `logtalk_tester`
 shell script from the command-line (see the `scripts/NOTES.md` file for
@@ -38,12 +39,5 @@ compiler, open a terminal and type:
 	$ logtalk_tester -p swi
 	...
 	$ cd ../contributions
-	$ logtalk_tester -p swi
-	...
-
-To run all the provided backend Prolog compiler standards conformance tests
-with e.g. SWI-Prolog, open a terminal and type:
-
-	$ cd $LOGTALKUSER/tests/prolog
 	$ logtalk_tester -p swi
 	...

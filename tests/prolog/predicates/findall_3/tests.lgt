@@ -50,4 +50,7 @@
 	throws(iso_findall_3_08, error(type_error(callable,4),_)) :-
 		{findall(_X, 4, _S)}.
 
+	throws(sics_findall_3_09, error(type_error(list,[A|1]),_)) :-
+		{findall(X, X=1, [A|1])}.
+
 :- end_object.

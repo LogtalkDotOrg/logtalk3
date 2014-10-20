@@ -41,4 +41,7 @@
 		% example fixed in ISO/IEC 13211-1:1995/Cor.1:2007
 		{_X is '>>'(foo, 2)}.
 
+	throws(sics_bitwise_right_shift_2_06, error(type_error(integer,1.0),_)) :-
+		{_X is '>>'(1.0, 2)}.
+
 :- end_object.

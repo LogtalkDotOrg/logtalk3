@@ -25,6 +25,10 @@
 		comment is 'Unit tests for the ISO Prolog standard asserta/1 built-in predicate.'
 	]).
 
+	:- discontiguous([
+		succeeds/1, throws/2
+	]).
+
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.9.1.4
 
 	succeeds(iso_asserta_1_01) :-
@@ -47,5 +51,9 @@
 
 	throws(iso_asserta_1_07, error(permission_error(modify,static_procedure,atom/1),_)) :-
 		{asserta((atom(_) :- true))}.
+
+	succeeds(eddbali_asserta_1_08) :-
+		findall(X-Y, {asserta(insct(bee)),insct(X),asserta(insct(ant)),insct(Y)}, L),
+		L == [bee-ant, bee-bee].
 
 :- end_object.

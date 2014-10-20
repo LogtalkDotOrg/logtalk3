@@ -19,6 +19,10 @@
 		comment is 'Unit tests for the ISO Prolog standard current_prolog_flag/2 built-in predicate.'
 	]).
 
+	:- discontiguous([
+		succeeds/1, fails/1, throws/2
+	]).
+
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.17.2.4
 
 	succeeds(iso_current_prolog_flag_2_01) :-
@@ -90,5 +94,17 @@
 
 	throws(iso_current_prolog_flag_2_11, error(type_error(atom,5),_)) :-
 		{current_prolog_flag(5, _V)}.
+
+	succeeds(eddbali_current_prolog_flag_2_12) :-
+		{set_prolog_flag(unknown, warning), current_prolog_flag(unknown, warning)}.
+
+	fails(eddbali_current_prolog_flag_2_13) :-
+		{set_prolog_flag(unknown, warning), current_prolog_flag(unknown,error)}.
+
+	throws(eddbali_current_prolog_flag_2_14, error(domain_error(prolog_flag,warning),_)) :-
+		{current_prolog_flag(warning,_)}.
+
+	throws(eddbali_current_prolog_flag_2_15, error(type_error(atom,1+2),_)) :-
+		{current_prolog_flag(1+2, flag)}.
 
 :- end_object.

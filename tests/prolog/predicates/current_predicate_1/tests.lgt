@@ -60,6 +60,12 @@ insect(bee).
 	throws(iso_current_predicate_1_06, error(type_error(predicate_indicator,4),_)) :-
 		{current_predicate(4)}.
 
+	throws(eddbali_current_predicate_1_07, error(type_error(predicate_indicator,dog),_)) :-
+		{current_predicate(dog)}.
+
+	throws(eddbali_current_predicate_1_08, error(type_error(predicate_indicator,0/dog),_)) :-
+		{current_predicate(0/dog)}.
+
 	% avoid library dependencies
 	memberchk(X, [X| _]) :-
 		!.

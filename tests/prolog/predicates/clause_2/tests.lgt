@@ -77,4 +77,7 @@ insect(bee).
 		% STO; Undefined
 		{clause(legs(A,6), insect(f(A)))}.
 
+	throws(eddbali_clause_2_12, error(type_error(callable,5),_)) :-
+		{clause(f(_), 5)}.
+
 :- end_object.

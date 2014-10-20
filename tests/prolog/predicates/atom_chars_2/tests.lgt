@@ -19,6 +19,10 @@
 		comment is 'Unit tests for the ISO Prolog standard atom_chars/2 built-in predicate.'
 	]).
 
+	:- discontiguous([
+		succeeds/1, fails/1, throws/2
+	]).
+
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.16.4.4
 
 	succeeds(iso_atom_chars_2_01) :-
@@ -50,5 +54,28 @@
 
 	throws(iso_atom_chars_2_08, error(instantiation_error,_)) :-
 		{atom_chars(_X, _Y)}.
+
+	throws(eddbali_atom_chars_2_09, error(instantiation_error,_)) :-
+		{atom_chars(_A, [a,_E,c])}.
+
+	throws(eddbali_atom_chars_2_10, error(instantiation_error,_)) :-
+		{atom_chars(_A, [a,b|_L])}.
+
+	throws(eddbali_atom_chars_2_11, error(type_error(atom,f(a)),_)) :-
+		{atom_chars(f(a), _L)}.
+
+	throws(eddbali_atom_chars_2_12, error(type_error(list,iso),_)) :-
+		{atom_chars(_A, iso)}.
+
+	throws(eddbali_atom_chars_2_13, error(type_error(character,f(b)),_)) :-
+		{atom_chars(_A, [a,f(b)])}.
+
+	succeeds(sics_atom_chars_2_14) :-
+		{atom_chars('Pécs', L)},
+		L == ['P','é','c','s'].
+
+	succeeds(sics_atom_chars_2_15) :-
+		{atom_chars(A, ['P','é','c','s'])},
+		A == 'Pécs'.
 
 :- end_object.

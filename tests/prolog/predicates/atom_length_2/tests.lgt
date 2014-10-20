@@ -19,6 +19,10 @@
 		comment is 'Unit tests for the ISO Prolog standard atom_length/2 built-in predicate.'
 	]).
 
+	:- discontiguous([
+		succeeds/1, fails/1, throws/2
+	]).
+
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.16.1.4
 
 	succeeds(iso_atom_length_2_01) :-
@@ -45,5 +49,12 @@
 
 	throws(iso_atom_length_2_07, error(type_error(integer,'4'),_)) :-
 		{atom_length(atom, '4')}.
+
+	throws(eddbali_atom_length_2_08, error(domain_error(not_less_than_zero,-4),_)) :-
+		{atom_length(atom, -4)}.
+
+	succeeds(sics_atom_length_2_09) :-
+		{atom_length('Bartók Béla', L)},
+		L == 11.
 
 :- end_object.

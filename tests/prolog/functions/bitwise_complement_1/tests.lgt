@@ -37,7 +37,7 @@
 	throws(iso_bitwise_complement_1_04, error(instantiation_error,_)) :-
 		{_X is '\\'(_N)}.
 
-	throws(iso_bitwise_complement_1_05, error(type_error(integer,2.5),_)) :-
+	throws(sics_bitwise_complement_1_05, error(type_error(integer,2.5),_)) :-
 		{_X is '\\'(2.5)}.
 
 :- end_object.

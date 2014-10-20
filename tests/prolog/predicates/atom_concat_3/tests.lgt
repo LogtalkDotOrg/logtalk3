@@ -43,4 +43,35 @@
 	throws(iso_atom_concat_3_05, error(instantiation_error,_)) :-
 		{atom_concat(small, _V2, _V4)}.
 
+	throws(eddbali_atom_concat_3_06, error(instantiation_error,_)) :-
+		{atom_concat(_A, 'iso', _C)}.
+
+	throws(eddbali_atom_concat_3_07, error(instantiation_error,_)) :-
+		{atom_concat('iso', _B, _C)}.
+
+	throws(eddbali_atom_concat_3_08, error(type_error(atom,f(a)),_)) :-
+		{atom_concat(f(a), 'iso', _C)}.
+
+	throws(eddbali_atom_concat_3_09, error(type_error(atom,f(a)),_)) :-
+		{atom_concat('iso', f(a), _C)}.
+
+	throws(eddbali_atom_concat_3_10, error(type_error(atom,f(a)),_)) :-
+		{atom_concat(_A, _B, f(a))}.
+
+	succeeds(sics_atom_concat_3_11) :-
+		{atom_concat('Bartók ', 'Béla', N)},
+		N == 'Bartók Béla'.
+
+	succeeds(sics_atom_concat_3_12) :-
+		{atom_concat(N, 'Béla', 'Bartók Béla')},
+		N == 'Bartók '.
+
+	succeeds(sics_atom_concat_3_13) :-
+		{atom_concat('Bartók ', N, 'Bartók Béla')},
+		N == 'Béla'.
+
+	succeeds(sics_atom_concat_3_14) :-
+		findall(T1-T2, {atom_concat(T1, T2, 'Pécs')}, L),
+		L == [''-'Pécs', 'P'-'écs', 'Pé'-'cs', 'Péc'-'s', 'Pécs'-''].
+
 :- end_object.
