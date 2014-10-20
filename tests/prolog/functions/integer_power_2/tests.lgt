@@ -45,7 +45,9 @@
 		{X is 3^3^3},
 		X == 7625597484987.
 
-	throws(iso_integer_power_2_06, error(evaluation_error(undefined),_)) :-
+	throws(iso_integer_power_2_06, error(type_error(float,2),_)) :-
+		% the ISO standard specifies an evaluation_error(undefined) but there seems
+		% to be consensus that the correct exception is a type_error(float,...)
 		{_X is 2^(-1)}.
 
 	succeeds(iso_integer_power_2_07) :-
