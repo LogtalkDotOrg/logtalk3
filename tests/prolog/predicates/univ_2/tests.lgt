@@ -19,6 +19,10 @@
 		comment is 'Unit tests for the ISO Prolog standard (=..)/2 built-in predicate.'
 	]).
 
+	:- discontiguous([
+		succeeds/1, fails/1, throws/2
+	]).
+
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.5.3.4
 
 	succeeds(iso_univ_2_01) :-
@@ -80,15 +84,15 @@
 		succeeds(sics_univ_2_18) :-
 			true.
 	:- else.
-		list_of(0, _, []).
-		list_of(N, A, [A|L]) :-
-			N > 0, N1 is N-1,
-			list_of(N1, A, L).
-
 		throws(sics_univ_2_18, error(representation_error(max_arity),_)) :-
 			{current_prolog_flag(max_arity, Max)},
 			N is Max+1, list_of(N, 1, L),
 			{'=..'(_X, [f|L])}.
+
+		list_of(0, _, []).
+		list_of(N, A, [A|L]) :-
+			N > 0, N1 is N-1,
+			list_of(N1, A, L).
 	:- endif.
 
 :- end_object.
