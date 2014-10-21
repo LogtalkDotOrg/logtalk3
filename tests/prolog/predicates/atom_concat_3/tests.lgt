@@ -58,19 +58,23 @@
 	throws(eddbali_atom_concat_3_10, error(type_error(atom,f(a)),_)) :-
 		{atom_concat(_A, _B, f(a))}.
 
-	succeeds(sics_atom_concat_3_11) :-
+	% the following four tests are disabled as there is no portable
+	% way to specify a supporting text encoding such as UTF-8 for
+	% all Logtalk supported backend Prolog compilers
+
+	- succeeds(sics_atom_concat_3_11) :-
 		{atom_concat('Bartók ', 'Béla', N)},
 		N == 'Bartók Béla'.
 
-	succeeds(sics_atom_concat_3_12) :-
+	- succeeds(sics_atom_concat_3_12) :-
 		{atom_concat(N, 'Béla', 'Bartók Béla')},
 		N == 'Bartók '.
 
-	succeeds(sics_atom_concat_3_13) :-
+	- succeeds(sics_atom_concat_3_13) :-
 		{atom_concat('Bartók ', N, 'Bartók Béla')},
 		N == 'Béla'.
 
-	succeeds(sics_atom_concat_3_14) :-
+	- succeeds(sics_atom_concat_3_14) :-
 		findall(T1-T2, {atom_concat(T1, T2, 'Pécs')}, L),
 		L == [''-'Pécs', 'P'-'écs', 'Pé'-'cs', 'Péc'-'s', 'Pécs'-''].
 

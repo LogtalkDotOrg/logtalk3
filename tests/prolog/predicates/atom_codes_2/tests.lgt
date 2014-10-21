@@ -64,8 +64,12 @@
 	throws(eddbali_atom_codes_2_11, error(representation_error(character_code),_)) :-
 		{atom_codes(_A, [0'i,0's,-1])}.
 
-%	the following tests result in a syntax error with several Prolog compilers
-%
+	% the following two tests are disabled as there is no portable
+	% way to specify a supporting text encoding such as UTF-8 for
+	% all Logtalk supported backend Prolog compilers
+	% 
+	% they also result in a syntax error with several Prolog compilers
+
 %	succeeds(sics_atom_codes_2_12) :-
 %		{atom_codes('Pécs', C)},
 %		C == [0'P,0'é,0'c,0's].

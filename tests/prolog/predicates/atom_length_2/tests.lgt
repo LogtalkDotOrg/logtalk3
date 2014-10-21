@@ -53,7 +53,11 @@
 	throws(eddbali_atom_length_2_08, error(domain_error(not_less_than_zero,-4),_)) :-
 		{atom_length(atom, -4)}.
 
-	succeeds(sics_atom_length_2_09) :-
+	% the following test is disabled as there is no portable
+	% way to specify a supporting text encoding such as UTF-8
+	% for all Logtalk supported backend Prolog compilers
+
+	- succeeds(sics_atom_length_2_09) :-
 		{atom_length('Bartók Béla', L)},
 		L == 11.
 

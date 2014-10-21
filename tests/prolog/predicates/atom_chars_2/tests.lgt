@@ -70,11 +70,15 @@
 	throws(eddbali_atom_chars_2_13, error(type_error(character,f(b)),_)) :-
 		{atom_chars(_A, [a,f(b)])}.
 
-	succeeds(sics_atom_chars_2_14) :-
+	% the following two tests are disabled as there is no portable
+	% way to specify a supporting text encoding such as UTF-8 for
+	% all Logtalk supported backend Prolog compilers
+
+	- succeeds(sics_atom_chars_2_14) :-
 		{atom_chars('Pécs', L)},
 		L == ['P','é','c','s'].
 
-	succeeds(sics_atom_chars_2_15) :-
+	- succeeds(sics_atom_chars_2_15) :-
 		{atom_chars(A, ['P','é','c','s'])},
 		A == 'Pécs'.
 

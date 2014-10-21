@@ -121,19 +121,23 @@
 	fails(sics_sub_atom_5_28) :-
 		{sub_atom('Banana', 0, 0, 7, _)}.
 
-	succeeds(sics_sub_atom_5_31) :-
+	% the following four tests are disabled as there is no portable
+	% way to specify a supporting text encoding such as UTF-8 for
+	% all Logtalk supported backend Prolog compilers
+
+	- succeeds(sics_sub_atom_5_31) :-
 		{sub_atom('Bartók Béla', 4, 2, A, S)},
 		A == 5, S == 'ók'.
 
-	succeeds(sics_sub_atom_5_32) :-
+	- succeeds(sics_sub_atom_5_32) :-
 		{sub_atom('Bartók Béla', 4, L, 5, S)},
 		L == 2, S == 'ók'.
 
-	succeeds(sics_sub_atom_5_33) :-
+	- succeeds(sics_sub_atom_5_33) :-
 		{sub_atom('Bartók Béla', B, 2, 5, S)},
 		B == 4, S == 'ók'.
 
-	succeeds(sics_sub_atom_5_34) :-
+	- succeeds(sics_sub_atom_5_34) :-
 		findall(B-A-S, {sub_atom('Pécs',B,2,A,S)}, L),
 		L == [0-2-'Pé', 1-1-'éc', 2-0-'cs'].
 
