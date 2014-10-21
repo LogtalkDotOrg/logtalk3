@@ -187,8 +187,9 @@
 	throws(sics_current_op_3_41, error(domain_error(operator_specifier,yfy),_)) :-
 		{current_op(_, yfy, _)}.
 
-	throws(sics_current_op_3_42, error(domain_error(operator_specifier,0),_)) :-
-		% the original test expected a type_error(atom,0) but the standard is clear in this case
+	throws(sics_current_op_3_42, error(type_error(atom,0),_)) :-
+		% the standard specifies a domain_error(operator_specifier,0) for this case
+		% but domain errors imply that the type is correct, which is not the case here
 		{current_op(_, 0, _)}.
 
 	throws(sics_current_op_3_43, error(type_error(atom,5),_)) :-
