@@ -40,6 +40,9 @@ the case of objects, compiled with the `complements` flag set to `deny`).
 now try to use file names as-is as last resort when trying to match the
 specified files with existing files on disk.
 
+* UPDATED: Compiler internal tables of ISO Prolog standard specified built-in
+predicates and built-in arithmetic functions.
+
 * FIXED: Bug in the `conforms_to_protocol/2-3` built-in predicates where
 complementing categories would be ignored.
 

@@ -17074,6 +17074,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_iso_spec_predicate'((_ = _)).
 '$lgt_iso_spec_predicate'((_ \= _)).
 '$lgt_iso_spec_predicate'(unify_with_occurs_check(_, _)).
+'$lgt_iso_spec_predicate'(subsumes_term(_, _)).
 % term testing
 '$lgt_iso_spec_predicate'(var(_)).
 '$lgt_iso_spec_predicate'(nonvar(_)).
@@ -17083,6 +17084,9 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_iso_spec_predicate'(integer(_)).
 '$lgt_iso_spec_predicate'(float(_)).
 '$lgt_iso_spec_predicate'(compound(_)).
+'$lgt_iso_spec_predicate'(acyclic_term(_)).
+'$lgt_iso_spec_predicate'(callable(_)).
+'$lgt_iso_spec_predicate'(ground(_)).
 % term comparison
 '$lgt_iso_spec_predicate'((_ @=< _)).
 '$lgt_iso_spec_predicate'((_ @< _)).
@@ -17090,11 +17094,13 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_iso_spec_predicate'((_ @> _)).
 '$lgt_iso_spec_predicate'((_ == _)).
 '$lgt_iso_spec_predicate'((_ \== _)).
+'$lgt_iso_spec_predicate'(compare(_, _, _)).
 % term creation and decomposition
 '$lgt_iso_spec_predicate'(functor(_, _, _)).
 '$lgt_iso_spec_predicate'(arg(_, _, _)).
 '$lgt_iso_spec_predicate'(_ =.. _).
 '$lgt_iso_spec_predicate'(copy_term(_, _)).
+'$lgt_iso_spec_predicate'(term_variables(_, _)).
 % arithmetic evaluation
 '$lgt_iso_spec_predicate'(_ is _).
 % arithmetic comparison
@@ -17110,6 +17116,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_iso_spec_predicate'(asserta(_)).
 '$lgt_iso_spec_predicate'(assertz(_)).
 '$lgt_iso_spec_predicate'(retract(_)).
+'$lgt_iso_spec_predicate'(retractall(_)).
 '$lgt_iso_spec_predicate'(abolish(_)).
 % all solutions
 '$lgt_iso_spec_predicate'(findall(_, _, _)).
@@ -17186,27 +17193,16 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_iso_spec_predicate'(current_prolog_flag(_, _)).
 '$lgt_iso_spec_predicate'(halt).
 '$lgt_iso_spec_predicate'(halt(_)).
-
-% the following predicates are not part of the ISO/IEC 13211-1 Prolog standard
-% but can be found either on the Core Revision standardization proposal or,
-% more important, these predicates are becoming de facto standards
-
-% database
-'$lgt_iso_spec_predicate'(retractall(_)).
 % sorting
 '$lgt_iso_spec_predicate'(keysort(_, _)).
 '$lgt_iso_spec_predicate'(sort(_, _)).
-% term testing
-'$lgt_iso_spec_predicate'(acyclic_term(_)).
-'$lgt_iso_spec_predicate'(callable(_)).
-'$lgt_iso_spec_predicate'(ground(_)).
-% term comparison
-'$lgt_iso_spec_predicate'(compare(_, _, _)).
-% term unification
-'$lgt_iso_spec_predicate'(subsumes_term(_, _)).
+
+% the following predicates are not part of the ISO/IEC 13211-1 Prolog standard
+% but can be found either on Core Revision standardization proposals or,
+% more important, these predicates are or are becoming de facto standards
+
 % term creation and decomposition
 '$lgt_iso_spec_predicate'(numbervars(_, _, _)).
-'$lgt_iso_spec_predicate'(term_variables(_, _)).
 
 
 
@@ -17223,6 +17219,9 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_iso_spec_function'(?callable)
 
+'$lgt_iso_spec_function'(pi).
+
+'$lgt_iso_spec_function'('+'(_)).
 '$lgt_iso_spec_function'('-'(_)).
 '$lgt_iso_spec_function'('+'(_, _)).
 '$lgt_iso_spec_function'('-'(_, _)).
@@ -17231,21 +17230,34 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_iso_spec_function'('//'(_, _)).
 '$lgt_iso_spec_function'(rem(_, _)).
 '$lgt_iso_spec_function'(mod(_, _)).
+'$lgt_iso_spec_function'(div(_, _)).
+
 '$lgt_iso_spec_function'('/\\'(_, _)).
 '$lgt_iso_spec_function'('\\/'(_, _)).
 '$lgt_iso_spec_function'('\\'(_)).
 '$lgt_iso_spec_function'('<<'(_, _)).
 '$lgt_iso_spec_function'('>>'(_, _)).
+'$lgt_iso_spec_function'(xor(_, _)).
+
 '$lgt_iso_spec_function'('**'(_, _)).
+'$lgt_iso_spec_function'('^'(_, _)).
 
 '$lgt_iso_spec_function'(abs(_)).
 '$lgt_iso_spec_function'(sign(_)).
+
 '$lgt_iso_spec_function'(sqrt(_)).
+
+'$lgt_iso_spec_function'(acos(_)).
+'$lgt_iso_spec_function'(asin(_)).
 '$lgt_iso_spec_function'(atan(_)).
+'$lgt_iso_spec_function'(atan2(_, _)).
 '$lgt_iso_spec_function'(cos(_)).
 '$lgt_iso_spec_function'(sin(_)).
+'$lgt_iso_spec_function'(tan(_)).
+
 '$lgt_iso_spec_function'(exp(_)).
 '$lgt_iso_spec_function'(log(_)).
+
 '$lgt_iso_spec_function'(float(_)).
 '$lgt_iso_spec_function'(ceiling(_)).
 '$lgt_iso_spec_function'(floor(_)).
@@ -17254,18 +17266,14 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_iso_spec_function'(float_fractional_part(_)).
 '$lgt_iso_spec_function'(float_integer_part(_)).
 
-% the following functions are not part of the ISO/IEC 13211-1 Prolog standard
-% but can be found either on the Core Revision standardization proposal or,
-% more important, these functions are becoming de facto standards
-
-'$lgt_iso_spec_function'(pi).
-'$lgt_iso_spec_function'(e).
-'$lgt_iso_spec_function'('+'(_)).
-'$lgt_iso_spec_function'(acos(_)).
-'$lgt_iso_spec_function'(asin(_)).
 '$lgt_iso_spec_function'(max(_, _)).
 '$lgt_iso_spec_function'(min(_, _)).
-'$lgt_iso_spec_function'('^'(_, _)).
+
+% the following functions are not part of the ISO/IEC 13211-1 Prolog standard
+% but can be found either on Core Revision standardization proposals or,
+% more important, these functions are or are becoming de facto standards
+
+'$lgt_iso_spec_function'(e).
 
 
 
