@@ -22,6 +22,19 @@ To run all the provided tests with e.g. SWI-Prolog, open a terminal and type:
 Tests for standard built-in predicates that require input/output operations
 are currently missing.
 
+Some unit tests are currently skipped. These tests are mainly split between
+two groups: tests whose result is specified as undefined in the standards
+(usually due to the potential of creating cyclic terms if unification without
+occurs check is performed) and tests that would require a portable way of
+specifying a source file text encoding plus a common extended text encoding
+such as UTF-8.
+
+Failure of unit tests doesn't necessarily mean that a backend Prolog compiler
+is faulty. Standards are not perfect and there isn't always a consensus on
+what should be the correct test results. Common causes of failure include
+module explicitly-qualified sub-terms in exception terms and corner cases in
+arithmetic operations.
+
 Writing these tests was made easier by rewriting and, when necessary, updating,
 the tests found on the Prolog ISO conformance testing framework written by
 Péter Szabó and Péter Szeredi. The framework is described in the following
