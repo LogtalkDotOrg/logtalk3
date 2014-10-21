@@ -109,7 +109,11 @@
 	throws(sics_number_chars_2_24, error(syntax_error(_),_)) :-
 		{number_chars(_X, ['0','x','g'])}.
 
-	throws(sics_number_chars_2_25, error(syntax_error(_),_)) :-
+	% the following test is disabled as there is no portable
+	% way to specify a supporting text encoding such as UTF-8
+	% for all Logtalk supported backend Prolog compilers
+
+	- throws(sics_number_chars_2_25, error(syntax_error(_),_)) :-
 		{number_chars(_X, ['á'])}.
 
 	throws(sics_number_chars_2_26, error(syntax_error(_),_)) :-
