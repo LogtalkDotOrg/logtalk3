@@ -89,31 +89,31 @@
 		{op(0, xfy, '|')},
 		{\+ current_op(_, xfy, '|')}.
 
-	throws(sics_op_3_11, error(instantiation_error,_)) :-
+	throws(sics_op_3_18, error(instantiation_error,_)) :-
 		{op(_, xfx, ++)}.
 
-	throws(sics_op_3_12, error(instantiation_error,_)) :-
+	throws(sics_op_3_19, error(instantiation_error,_)) :-
 		{op(100, xfx, _)}.
 
-	throws(sics_op_3_13, error(instantiation_error,_)) :-
+	throws(sics_op_3_20, error(instantiation_error,_)) :-
 		{op(100, xfx, [a|_])}.
 
-	throws(sics_op_3_14, error(instantiation_error,_)) :-
+	throws(sics_op_3_21, error(instantiation_error,_)) :-
 		{op(100, xfx, [a,_])}.
 
-	throws(sics_op_3_15, error(type_error(atom,200),_)) :-
+	throws(sics_op_3_22, error(type_error(atom,200),_)) :-
 		{op(100, 200, [a])}.
 
-	throws(sics_op_3_16, error(type_error(atom,f(1)),_)) :-
+	throws(sics_op_3_23, error(type_error(atom,f(1)),_)) :-
 		{op(100, f(1), [a])}.
 
-	throws(sics_op_3_17, error(type_error(atom,a+b),_)) :-
+	throws(sics_op_3_24, error(type_error(atom,a+b),_)) :-
 		{op(100, xfx, [a,a+b])}.
 
-	throws(sics_op_3_18, error(permission_error(modify,operator,(',')),_)) :-
+	throws(sics_op_3_25, error(permission_error(modify,operator,(',')),_)) :-
 		{op(100, xfx, (','))}.
 
-	throws(sics_op_3_19, error(permission_error(modify,operator,(',')),_)) :-
+	throws(sics_op_3_26, error(permission_error(modify,operator,(',')),_)) :-
 		{op(100, xfx, [a,(',')])}.
 
 :- end_object.
