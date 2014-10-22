@@ -50,32 +50,39 @@
 		{arg(3, foo(3,4), _)}.
 
 	throws(iso_arg_3_08, error(instantiation_error,_)) :-
-		{arg(_, foo(a,b), a)}.
+		% try to delay the expected error to runtime
+		{G = arg(_, foo(a,b), a), call(G)}.
 
 	throws(iso_arg_3_09, error(instantiation_error,_)) :-
-		{arg(1, _, a)}.
+		% try to delay the expected error to runtime
+		{G = arg(1, _, a), call(G)}.
 
 	throws(iso_arg_3_10, error(type_error(compound,atom),_)) :-
-		{arg(0, atom, _)}.
+		% try to delay the expected error to runtime
+		{G = arg(0, atom, _), call(G)}.
 
 	throws(iso_arg_3_11, error(type_error(compound,3),_)) :-
-		{arg(0, 3, _)}.
+		% try to delay the expected error to runtime
+		{G = arg(0, 3, _), call(G)}.
 
 	- succeeds(iso_arg_3_12) :-
 		% STO; Undefined
 		{arg(1, foo(X), u(X))}.
 
 	throws(eddbali_arg_3_13, error(domain_error(not_less_than_zero,-3),_)) :-
-		{arg(-3, foo(a,b), _A)}.
+		% try to delay the expected error to runtime
+		{G = arg(-3, foo(a,b), _A), call(G)}.
 
 	throws(eddbali_arg_3_14, error(type_error(integer,a),_)) :-
-		{arg(a, foo(a,b), _X)}.
+		% try to delay the expected error to runtime
+		{G = arg(a, foo(a,b), _X), call(G)}.
 
 	succeeds(eddbali_arg_3_15) :-
 		{arg(2, foo(a,f(X,b),c), f(a,Y))},
 		X == a, Y == b.
 
 	throws(sics_arg_3_16, error(type_error(compound,3),_)) :-
-		{arg(1, 3, _A)}.
+		% try to delay the expected error to runtime
+		{G = arg(1, 3, _A), call(G)}.
 
 :- end_object.
