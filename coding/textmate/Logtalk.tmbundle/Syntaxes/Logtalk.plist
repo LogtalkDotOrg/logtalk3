@@ -169,7 +169,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(e|pi|mod|rem)\b(?![-!(^~])</string>
+			<string>\b(e|pi|mod|rem|div)\b(?![-!(^~])</string>
 			<key>name</key>
 			<string>keyword.operator.evaluable.logtalk</string>
 		</dict>
@@ -187,7 +187,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(a(bs|cos|sin|tan)|c(eiling|os)|exp|flo(at(_(integer|fractional)_part)?|or)|log|m(ax|in|od)|r(em|ound)|s(i(n|gn)|qrt)|truncate)(?=[(])</string>
+			<string>\b(a(bs|cos|sin|tan|tan2)|c(eiling|os)|div|exp|flo(at(_(integer|fractional)_part)?|or)|log|m(ax|in|od)|r(em|ound)|s(i(n|gn)|qrt)|t(an|runcate)|xor)(?=[(])</string>
 			<key>name</key>
 			<string>support.function.evaluable.logtalk</string>
 		</dict>

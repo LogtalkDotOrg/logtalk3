@@ -12,6 +12,8 @@
  *
  * CHANGES
  * -------
+ * 2014/10/21 (1.1.16)
+ *  -  Added syntax coloring of the atan2/2, div/2, tan/2, and xor/2 arithmetic functions
  * 2014/06/10 (1.1.15)
  *  -  Added syntax coloring of the as/2 alias operator
  * 2013/09/11 (1.1.14)
@@ -213,13 +215,14 @@ $language_data = array(
         // Evaluable functors (with arguments)
         6 => array(
             'float_integer_part', 'float_fractional_part',
-            'rem', 'mod', 'abs', 'sign', 'floor', 'truncate', 'round', 'ceiling',
-            'cos', 'acos', 'asin', 'atan', 'exp', 'log', 'sin', 'sqrt',
-            'min', 'max'
+            'div', 'rem', 'mod', 'abs', 'sign', 'floor', 'truncate', 'round', 'ceiling',
+            'cos', 'acos', 'asin', 'atan', 'atan2', 'exp', 'log', 'sin', 'sqrt', 'tan',
+            'min', 'max',
+			'xor'
             ),
         // Evaluable functors (no arguments)
         7 => array(
-            'e', 'pi', 'mod', 'rem'
+            'e', 'pi', 'div', 'mod', 'rem'
             ),
         ),
     'SYMBOLS' => array(

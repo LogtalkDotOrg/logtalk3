@@ -140,20 +140,22 @@
 				<regex>\b(pi)\b</regex>
 				<regex>\b(rem)\b</regex>
 				<regex>\b(mod)\b</regex>
+				<regex>\b(div)\b</regex>
 				<regex>\b(rem)\(</regex>
+				<regex>\b(div)\(</regex>
 				<regex>\b(m(?:ax|in|od))\(</regex>
 				<regex>\b(abs)\(</regex>
 				<regex>\b(sign)\(</regex>
 				<regex>\b(float(?:_(?:integer|fractional)_part)?)\(</regex>
 				<regex>\b(floor)\(</regex>
-				<regex>\b(truncate)\(</regex>
+				<regex>\b(t(?:an|runcate))\(</regex>
 				<regex>\b(round)\(</regex>
 				<regex>\b(ceiling)\(</regex>
 				<!-- Other arithemtic functors -->
 				<regex>(\*\*)</regex>
 				<regex>\b(sin)\(</regex>
 				<regex>\b(cos)\(</regex>
-				<regex>\b(a(?:cos|sin|tan))\(</regex>
+				<regex>\b(a(?:cos|sin|tan|tan2))\(</regex>
 				<regex>\b(exp)\(</regex>
 				<regex>\b(log)\(</regex>
 				<regex>\b(sqrt)\(</regex>
@@ -163,6 +165,7 @@
 				<regex>(/\\)</regex>
 				<regex>(\\/)</regex>
 				<regex>(\\)</regex>
+				<regex>\b(xor)\(</regex>
 				<!-- Stream selection and control -->
 				<regex>\b((?:curren|se)t_(?:in|out)put)\(</regex>
 				<regex>\b(open)\(</regex>

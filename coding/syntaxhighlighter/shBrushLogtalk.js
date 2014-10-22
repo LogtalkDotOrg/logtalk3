@@ -57,11 +57,11 @@
 			// term creation and decomposition built-in predicates
 			{ regex: new RegExp("\\b(functor|arg|copy_term|numbervars|term_variables)(?=[(])", 'g'), css: 'keyword'},
 			// evaluable functors
-			{ regex: new RegExp("\\b(rem|m(ax|in|od)|abs|sign)(?=[(])", 'g'), css: 'keyword'},
+			{ regex: new RegExp("\\b(rem|m(ax|in|od)|abs|div|sign)(?=[(])", 'g'), css: 'keyword'},
 			{ regex: new RegExp("\\b(float_(integer|fractional)_part|float)(?=[(])", 'g'), css: 'keyword'},
-			{ regex: new RegExp("\\b(floor|truncate|round|ceiling)(?=[(])", 'g'), css: 'keyword'},
-			{ regex: new RegExp("\\b(cos|a(cos|sin|tan)|exp|log|s(in|qrt))(?=[(])", 'g'), css: 'keyword'},
-			{ regex: new RegExp("\\b(e|pi|is|rem|mod)\\b", 'g'), css: 'keyword'},
+			{ regex: new RegExp("\\b(floor|t(an|runcate)|round|ceiling)(?=[(])", 'g'), css: 'keyword'},
+			{ regex: new RegExp("\\b(cos|a(cos|sin|tan|tan2)|exp|log|s(in|qrt)|xor)(?=[(])", 'g'), css: 'keyword'},
+			{ regex: new RegExp("\\b(e|pi|is|rem|mod|div)\\b", 'g'), css: 'keyword'},
 			// term type built-in predicates
 			{ regex: new RegExp("\\b(var|atom(ic)?|integer|float|c(allable|ompound)|n(onvar|umber)|ground|acyclic_term)(?=[(])", 'g'), css: 'keyword'},
 			// term comparison built-in predicates

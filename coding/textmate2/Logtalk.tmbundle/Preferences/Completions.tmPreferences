@@ -188,12 +188,15 @@
 			<string>halt</string>
 			<string>keysort</string>
 			<string>sort</string>
+			<!-- arithmetic functions -->
 			<string>abs</string>
 			<string>acos</string>
 			<string>asin</string>
 			<string>atan</string>
+			<string>atan2</string>
 			<string>ceiling</string>
 			<string>cos</string>
+			<string>div</string>
 			<string>exp</string>
 			<string>float_fractional_part</string>
 			<string>float_integer_part</string>
@@ -207,7 +210,9 @@
 			<string>sign</string>
 			<string>sin</string>
 			<string>sqrt</string>
+			<string>tan</string>
 			<string>truncate</string>
+			<string>xor</string>
 			<!-- flag names -->
 			<string>unknown_entities</string>
 			<string>singleton_variables</string>

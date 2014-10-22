@@ -4,8 +4,8 @@
 
 ;; Author: Paulo Moura <pmoura@logtalk.org>
 ;; Creation date: November 15, 2003
-;; Last modification date: June 10, 2014
-;; Version: 1.27
+;; Last modification date: October 21, 2014
+;; Version: 1.28
 
 ;; Installation:
 ;;
@@ -27,7 +27,7 @@
 
 ;; setup 
 
-(defvar logtalk-mode-version "1.27"
+(defvar logtalk-mode-version "1.28"
 	"Logtalk mode version number")
 
 (defvar logtalk-mode-hook nil)
@@ -177,15 +177,15 @@
 		;;
 		;; evaluable functors:
 		;;
-		("\\<\\(abs\\|ceiling\\|flo\\(?:at\\(?:_\\(?:\\(?:fractional\\|integer\\)_part\\)\\)?\\|or\\)\\|m\\(?:ax\\|in\\|od\\)\\|r\\(?:em\\|ound\\)\\|sign\\|truncate\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
+		("\\<\\(abs\\|ceiling\\|div\\|flo\\(?:at\\(?:_\\(?:\\(?:fractional\\|integer\\)_part\\)\\)?\\|or\\)\\|m\\(?:ax\\|in\\|od\\)\\|r\\(?:em\\|ound\\)\\|sign\\|truncate\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
 		("//\\|[*/]" 0 'logtalk-built-in-predicate-face)
 		("\\([^eE]\\)\\([+]\\)" 2 'logtalk-built-in-predicate-face)
 		("\\([^:eE]\\)\\([-]\\)" 2 'logtalk-built-in-predicate-face)
-		("\\<\\(e\\|pi\\|rem\\|mod\\)\\>" 0 'logtalk-built-in-predicate-face)
+		("\\<\\(e\\|pi\\|div\\|rem\\|mod\\)\\>" 0 'logtalk-built-in-predicate-face)
 		;;
 		;; other arithemtic functors:
 		;;
-		("\\<\\(a\\(?:cos\\|sin\\|tan\\)\\|cos\\|exp\\|log\\|s\\(?:in\\|qrt\\)\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
+		("\\<\\(a\\(?:cos\\|sin\\|tan\\|tan2\\)\\|cos\\|exp\\|log\\|s\\(?:in\\|qrt\\)\\|tan\\|xor\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
 		("\\*\\*" 1 'logtalk-built-in-predicate-face)
 		;;
 		;; stream selection and control:

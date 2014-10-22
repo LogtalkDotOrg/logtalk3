@@ -1,7 +1,7 @@
 # highlighting for Logtalk source files (http://logtalk.org/)
 #
 #	written by Paulo Moura (pmoura@logtalk.org)
-#	last revised on June 10, 2014
+#	last revised on October 21, 2014
 
 comment start "%"
 comment delim "/*" "*/" multiline nested
@@ -35,10 +35,10 @@ keyword =	'\<(after|before)(?=\()',
 			'\<threaded(_(call|once|ignore|exit|peek|wait|notify))?(?=\()',
 			'\<(subsumes_term|unify_with_occurs_check)(?=\()',
 			'\<(functor|arg|copy_term|numbervars|term_variables)(?=\()',
-			'\<(rem|m(ax|in|od)|abs|sign)(?=\()',
+			'\<(rem|m(ax|in|od)|abs|div|sign)(?=\()',
 			'\<(float_(integer|fractional)_part|float)(?=\()',
-			'\<(floor|truncate|round|ceiling)(?=\()',
-			'\<(cos|a(cos|sin|tan)|exp|log|s(in|qrt))(?=\()',
+			'\<(floor|t(an|runcate)|round|ceiling)(?=\()',
+			'\<(cos|a(cos|sin|tan|tan2)|exp|log|s(in|qrt)|xor)(?=\()',
 			'\<(var|atom(ic)?|integer|float|c(allable|ompound)|n(onvar|umber)|ground|acyclic_term)(?=\()',
 			'\<compare(?=\()',
 			'\<(curren|se)t_(in|out)put(?=\()',
@@ -60,7 +60,7 @@ keyword =	'\<(after|before)(?=\()',
 			'\<(ignore|once)(?=\()',
 			'\<((key)?sort)(?=\()',
 			'\<(true|fa(il|lse)|repeat)\>',
-			'\<(e|pi|as|is|rem|mod)\>'
+			'\<(e|pi|as|is|rem|mod|div)\>'
 
 
 variable =	'\<[A-Z_][A-Za-z0-9_]*'

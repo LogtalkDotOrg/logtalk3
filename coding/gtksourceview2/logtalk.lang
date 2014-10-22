@@ -206,7 +206,9 @@
 			<!-- Evaluable functors -->
 			<keyword>e</keyword>
 			<keyword>pi</keyword>
+			<keyword>(div)(?=[(])</keyword>
 			<keyword>(rem)(?=[(])</keyword>
+			<keyword>div</keyword>
 			<keyword>rem</keyword>
 			<keyword>(m(ax|in|od))(?=[(])</keyword>
 			<keyword>mod</keyword>
@@ -220,10 +222,12 @@
 			<!-- Other arithemtic functors -->
 			<keyword>(sin)(?=[(])</keyword>
 			<keyword>(cos)(?=[(])</keyword>
-			<keyword>(a(cos|sin|tan))(?=[(])</keyword>
+			<keyword>(tan)(?=[(])</keyword>
+			<keyword>(a(cos|sin|tan|tan2))(?=[(])</keyword>
 			<keyword>(exp)(?=[(])</keyword>
 			<keyword>(log)(?=[(])</keyword>
 			<keyword>(sqrt)(?=[(])</keyword>
+			<keyword>(xor)(?=[(])</keyword>
 			<!-- Stream selection and control -->
 			<keyword>((current|set)_(in|out)put)(?=[(])</keyword>
 			<keyword>(open)(?=[(])</keyword>

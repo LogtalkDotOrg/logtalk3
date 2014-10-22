@@ -4,8 +4,8 @@
 #
 #  Author: Paulo Moura
 #    Mail: pmoura@logtalk.org
-#    Date: 2014.06.10
-# Version: 1.19
+#    Date: 2014.10.21
+# Version: 1.20
 # ------------------------------------------
 # This file is a part of highlight, a free source code converter released under the GPL.
 #
@@ -71,11 +71,11 @@ $KEYWORDS(kwc)=regex((subsumes_term|unify_with_occurs_check)(?=[(]), 1)
 # term creation and decomposition
 $KEYWORDS(kwc)=regex((functor|arg|copy_term|numbervars|term_variables)(?=[(]), 1)
 # evaluable functors
-$KEYWORDS(kwc)=regex((rem|m(ax|in|od)|abs|sign)(?=[(]), 1)
+$KEYWORDS(kwc)=regex((div|rem|m(ax|in|od)|abs|sign)(?=[(]), 1)
 $KEYWORDS(kwc)=regex((float(_(integer|fractional)_part)?)(?=[(]), 1)
 $KEYWORDS(kwc)=regex((floor|truncate|round|ceiling)(?=[(]), 1)
 # other arithmetic functors
-$KEYWORDS(kwc)=regex((cos|a(cos|sin|tan)|exp|log|s(in|qrt))(?=[(]), 1)
+$KEYWORDS(kwc)=regex((cos|a(cos|sin|tan|tan2)|exp|log|s(in|qrt)|tan|xor)(?=[(]), 1)
 # term testing
 $KEYWORDS(kwc)=regex((var|atomic|atom|integer|float|c(allable|ompound)|n(onvar|umber)|ground|acyclic_term)(?=[(]), 1)
 # term comparison
@@ -118,7 +118,7 @@ $KEYWORDS(kwd)=regex((as))
 # Prolog operators
 $KEYWORDS(kwd)=regex((\\\+|->|=\.\.|;|!|:-|\^))
 # Prolog arithmetic operators
-$KEYWORDS(kwd)=regex((e|pi|is|mod|rem|//|[+\-]|/(?!\*)|(?<=\*)/|[*][*]))
+$KEYWORDS(kwd)=regex((e|pi|is|div|mod|rem|//|[+\-]|/(?!\*)|(?<=\*)/|[*][*]))
 # Prolog arithmetic comparison operators
 $KEYWORDS(kwd)=regex((=<|<|=:=|=\\=|>=|>))
 # Prolog term comparison operators

@@ -371,10 +371,12 @@
 				<string>[[:space:]]+(pi)[[:space:]]+</string>
 				<string>[[:space:]]+(rem)[[:space:]]+</string>
 				<string>[[:space:]]+(mod)[[:space:]]+</string>
+				<string>[[:space:]]+(div)[[:space:]]+</string>
 				<string>[^A-Za-z0-9_](max)\(</string>
 				<string>[^A-Za-z0-9_](min)\(</string>
 				<string>[^A-Za-z0-9_](rem)\(</string>
 				<string>[^A-Za-z0-9_](mod)\(</string>
+				<string>[^A-Za-z0-9_](div)\(</string>
 				<string>[^A-Za-z0-9_](abs)\(</string>
 				<string>[^A-Za-z0-9_](sign)\(</string>
 				<string>[^A-Za-z0-9_](float_integer_part)\(</string>
@@ -388,9 +390,11 @@
 				<string>[[:space:]]+(\*\*)[[:space:]]+</string>
 				<string>[^A-Za-z0-9_](sin)\(</string>
 				<string>[^A-Za-z0-9_](cos)\(</string>
+				<string>[^A-Za-z0-9_](tan)\(</string>
 				<string>[^A-Za-z0-9_](acos)\(</string>
 				<string>[^A-Za-z0-9_](asin)\(</string>
 				<string>[^A-Za-z0-9_](atan)\(</string>
+				<string>[^A-Za-z0-9_](atan2)\(</string>
 				<string>[^A-Za-z0-9_](exp)\(</string>
 				<string>[^A-Za-z0-9_](log)\(</string>
 				<string>[^A-Za-z0-9_](sqrt)\(</string>
@@ -400,6 +404,7 @@
 				<string>[[:space:]]+(/\\)[[:space:]]+</string>
 				<string>[[:space:]]+(\\/)[[:space:]]+</string>
 				<string>[[:space:]]+(\\)[[:space:]]+</string>
+				<string>[^A-Za-z0-9_](xor)\(</string>
 				<!-- Stream selection and control -->
 				<string>[^A-Za-z0-9_](current_input)\(</string>
 				<string>[^A-Za-z0-9_](current_output)\(</string>

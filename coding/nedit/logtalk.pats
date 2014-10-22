@@ -2,7 +2,7 @@
 !
 ! Author: Paulo Moura (pmoura at logtalk.org)
 !
-! Last changed in: June 10, 2014
+! Last changed in: October 21, 2014
 !
 !
 ! To install this patterns file:
@@ -69,10 +69,10 @@ nedit.highlightPatterns: Logtalk:1:0{\n\
 	Implementation defined hooks:"<(set_prolog_flag|current_prolog_flag|halt)(?=[(])":::Subroutine::\n\
 	Implementation defined hooks:"<halt>":::Subroutine::\n\
 	Sorting:"<(keysort|sort)(?=[(])":::Subroutine::\n\
-	Evaluable functors:"<(max|min|rem|mod|abs|sign|float_integer_part|float_fractional_part|float|floor|truncate|round|ceiling)(?=[(])":::Subroutine::\n\
+	Evaluable functors:"<(max|min|div|rem|mod|abs|sign|float_integer_part|float_fractional_part|float|floor|truncate|round|ceiling|xor)(?=[(])":::Subroutine::\n\
 	Evaluable functors:"\\+|-|\\*|//|/":::Subroutine::\n\
-	Other arithemtic functors:"\\*\\*|<e>|<pi>|<rem>|<mod>":::Subroutine::\n\
-	Other arithemtic functors:"\\*\\*|<(sin|cos|acos|asin|atan|exp|log|sqrt)(?=[(])":::Subroutine::\n\
+	Other arithmetic functors:"\\*\\*|<e>|<pi>|<rem>|<mod>":::Subroutine::\n\
+	Other arithmetic functors:"\\*\\*|<(sin|cos|tan|acos|asin|atan|atan2|exp|log|sqrt)(?=[(])":::Subroutine::\n\
 	Bitwise functors:">>|<<|/\\\\|\\\\/|\\\\":::Subroutine::\n\
 	Atoms:"[a-z]\\w*":::Plain::\n\
 }

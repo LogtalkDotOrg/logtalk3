@@ -1,9 +1,9 @@
 ; TextPad syntax definitions for Logtalk (http://logtalk.org/)
 ; 
 ; Author: 			Paulo Moura
-; Last changed in: 	August 4, 2013
+; Last changed in: 	October 21, 2014
 ;
-; Tags used and sugested colors:
+; Tags used and suggested colors:
 ;   Keywords 1	message sending operators	blue
 ;   Keywords 2	entity enclosing directives	purple
 ;   Keywords 3	entity  directives		purple
@@ -248,10 +248,10 @@ copy_term
 numbervars
 term_variables
 
-; Arithemtic evaluation
+; Arithmetic evaluation
 is
 
-; Arithemtic comparison
+; Arithmetic comparison
 =:=
 =\=
 <
@@ -332,6 +332,7 @@ max
 min
 rem
 mod
+div
 abs
 sign
 float_integer_part
@@ -342,13 +343,15 @@ truncate
 round
 ceiling
 
-; Other arithemtic functors
+; Other arithmetic functors
 **
 sin
 cos
+tan
 acos
 asin
 atan
+atan2
 exp
 log
 sqrt
@@ -359,6 +362,7 @@ sqrt
 /\
 \/
 \
+xor
 
 ; Logtalk end-of-clause
 .

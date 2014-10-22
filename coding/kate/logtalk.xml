@@ -50,11 +50,11 @@
 				<!-- Term creation and decomposition -->
 				<RegExpr String = "\b(functor|arg|copy_term|numbervars|term_variables)(?=[(])" attribute = "Built-in" context = "#stay" />
 				<!-- Evaluable functors -->
-				<RegExpr String = "\b(rem|m(ax|in|od)|abs|sign)(?=[(])" attribute = "Built-in" context = "#stay" />
+				<RegExpr String = "\b(div|rem|m(ax|in|od)|abs|sign)(?=[(])" attribute = "Built-in" context = "#stay" />
 				<RegExpr String = "\bfloat(_(integer|fractional)_part)?(?=[(])" attribute = "Built-in" context = "#stay" />
 				<RegExpr String = "\b(floor|truncate|round|ceiling)(?=[(])" attribute = "Built-in" context = "#stay" />
 				<!-- Other arithmetic functors -->
-				<RegExpr String = "\b(cos|a(cos|sin|tan)|exp|log|s(in|qrt))(?=[(])" attribute = "Built-in" context = "#stay" />
+				<RegExpr String = "\b(cos|a(cos|sin|tan|tan2)|exp|log|s(in|qrt)|tan|xor)(?=[(])" attribute = "Built-in" context = "#stay" />
 				<!-- Term testing -->
 				<RegExpr String = "\b(var|atom(ic)?|integer|float|c(allable|ompound)|n(onvar|umber)|ground|acyclic_term)(?=[(])" attribute = "Built-in" context = "#stay" />
 				<!-- Term comparison -->
@@ -138,7 +138,7 @@
 				<!-- Evaluable functors -->
 				<Detect2Chars char = "/" char1 = "/" attribute = "Operator" context = "#stay" />
 				<AnyChar String = "+-*/" attribute = "Operator" context = "#stay" />
-				<RegExpr String = "\b(e|pi|mod|rem)\b" attribute = "Operator" context = "#stay" />
+				<RegExpr String = "\b(e|pi|div|mod|rem)\b" attribute = "Operator" context = "#stay" />
 				<!-- Other arithemtic functors -->
 				<Detect2Chars char = "*" char1 = "*" attribute = "Operator" context = "#stay" />
 				<!-- DCG rules -->

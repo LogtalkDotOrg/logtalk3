@@ -140,7 +140,7 @@ Keywords={
     Group=1
   },
   { Id=3, --evaluable functors
-    Regex=[[ (rem|mod|abs|sign)(?=[(]) ]],
+    Regex=[[ (div|rem|mod|abs|sign)(?=[(]) ]],
     Group=1
   },
   { Id=3,
@@ -152,7 +152,7 @@ Keywords={
     Group=1
   },
   { Id=3,
-    Regex=[[ (cos|a(cos|sin|tan)|exp|log|s(in|qrt))(?=[(]) ]],
+    Regex=[[ (cos|a(cos|sin|tan|tan2)|exp|log|s(in|qrt)|tan|xor)(?=[(]) ]],
     Group=1
   },
   { Id=3,
@@ -259,6 +259,9 @@ Keywords={
   },
   { Id=4, --arithmetic evaluation operator
     Regex=[[ \b(is)\b ]],
+  },
+  { Id=4, --arithmetic functions
+    Regex=[[ \b(div|mod|rem|e|pi)\b ]],
   },
   { Id=4, --operators
     Regex=[[ (\\\+|-->|->|=\.\.|;|!|:-|\^) ]],

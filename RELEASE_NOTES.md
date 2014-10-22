@@ -108,6 +108,13 @@ check backend Prolog compilers standards compliance, not Logtalk features.
 Thanks to Joachim Schimpf for helping finding typos in the initial test
 versions.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* ADDED: Support for arithmetic functions and operators introduced in the
+latest revisions of the ISO Prolog standard to all supported text editors
+and syntax highlighters.
+
 
 3.00.0 Release Candidate 3 - October 3, 2014
 ============================================

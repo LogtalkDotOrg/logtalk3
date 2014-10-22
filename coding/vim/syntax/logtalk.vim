@@ -2,7 +2,7 @@
 "
 " Language:	Logtalk
 " Maintainer:	Paulo Moura <pmoura@logtalk.org>
-" Last Change:	June 10, 2014
+" Last Change:	October 21, 2014
 
 
 " Quit when a syntax file was already loaded:
@@ -315,16 +315,18 @@ syn match	logtalkOperator		"-"
 syn match	logtalkOperator		"\*"
 syn match	logtalkOperator		"//"
 syn match	logtalkOperator		"/"
+syn match	logtalkKeyword		"\<div\ze("
 syn match	logtalkKeyword		"\<r\(ound\|em\)\ze("
 syn match	logtalkKeyword		"\<e\>"
 syn match	logtalkKeyword		"\<pi\>"
+syn match	logtalkKeyword		"\<div\>"
 syn match	logtalkKeyword		"\<rem\>"
 syn match	logtalkKeyword		"\<m\(ax\|in\|od\)\ze("
 syn match	logtalkKeyword		"\<mod\>"
 syn match	logtalkKeyword		"\<abs\ze("
 syn match	logtalkKeyword		"\<sign\ze("
 syn match	logtalkKeyword		"\<flo\(or\|at\(_\(integer\|fractional\)_part\)\?\)\ze("
-syn match	logtalkKeyword		"\<truncate\ze("
+syn match	logtalkKeyword		"\<t\(an\|runcate\)\ze("
 syn match	logtalkKeyword		"\<ceiling\ze("
 
 
@@ -333,7 +335,7 @@ syn match	logtalkKeyword		"\<ceiling\ze("
 syn match	logtalkOperator		"\*\*"
 syn match	logtalkKeyword		"\<s\(in\|qrt\)\ze("
 syn match	logtalkKeyword		"\<cos\ze("
-syn match	logtalkKeyword		"\<a\(cos\|sin\|tan\)\ze("
+syn match	logtalkKeyword		"\<a\(cos\|sin\|tan\|tan2\)\ze("
 syn match	logtalkKeyword		"\<exp\ze("
 syn match	logtalkKeyword		"\<log\ze("
 
@@ -345,6 +347,7 @@ syn match	logtalkOperator		"<<"
 syn match	logtalkOperator		"/\\"
 syn match	logtalkOperator		"\\/"
 syn match	logtalkOperator		"\\"
+syn match	logtalkKeyword		"\<xor\ze("
 
 
 " Logtalk list operator
