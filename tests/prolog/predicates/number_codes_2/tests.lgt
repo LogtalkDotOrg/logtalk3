@@ -98,7 +98,9 @@
 		N == 10.
 
 	throws(sics_number_codes_2_21, error(syntax_error(_),_)) :-
-		{number_codes(_N, "ä")}.
+		% the original test used "ä" but that rises portability issues
+		% due to the lack of a standard way to specify text encodings
+		{number_codes(_N, "a")}.
 
 	throws(sics_number_codes_2_22, error(syntax_error(_),_)) :-
 		{number_codes(_X,[0'0,0'x,0'0,0'.,0'0])}.
