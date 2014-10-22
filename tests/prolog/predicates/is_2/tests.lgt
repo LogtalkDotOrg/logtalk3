@@ -37,8 +37,11 @@
 		{X is '+'(0, 3.2+11)},
 		X == 14.2.
 
+	% in some of the throws/2 tests that follow, try to delay the expected error to runtime
+
 	throws(iso_is_2_04, error(instantiation_error,_)) :-
-		{_X is '+'(77, _N)}.
+	% try to delay the expected error to runtime
+		{G = (_X is '+'(77, _N)), call(G)}.
 
 	throws(iso_is_2_05, error(type_error(evaluable,foo/0),_)) :-
 		{_X is '+'(foo, 77)}.
@@ -56,7 +59,8 @@
 		X == 7.8.
 
 	throws(iso_is_2_09, error(instantiation_error,_)) :-
-		{_X is '-'(_N)}.
+		% try to delay the expected error to runtime
+		{G = (_X is '-'(_N)), call(G)}.
 
 	throws(iso_is_2_10, error(type_error(evaluable,foo/0),_)) :-
 		{_X is '-'(foo)}.
@@ -74,7 +78,8 @@
 		X == -14.2.
 
 	throws(iso_is_2_14, error(instantiation_error,_)) :-
-		{_X is '-'(77, _N)}.
+		% try to delay the expected error to runtime
+		{G = (_X is '-'(77, _N)), call(G)}.
 
 	throws(iso_is_2_15, error(type_error(evaluable,foo/0),_)) :-
 		{_X is '-'(foo, 77)}.
@@ -92,7 +97,8 @@
 		X =~= 21.3.
 
 	throws(iso_is_2_19, error(instantiation_error,_)) :-
-		{_X is '*'(77, _N)}.
+		% try to delay the expected error to runtime
+		{G = (_X is '*'(77, _N)), call(G)}.
 
 	throws(iso_is_2_20, error(type_error(evaluable,foo/0),_)) :-
 		{_X is '*'(foo, 77)}.
@@ -125,13 +131,15 @@
 		(X == -2; X == -3).
 
 	throws(iso_is_2_27, error(instantiation_error,_)) :-
-		{_X is '/'(77, _N)}.
+		% try to delay the expected error to runtime
+		{G = (_X is '/'(77, _N)), call(G)}.
 
 	throws(iso_is_2_28, error(type_error(evaluable,foo/0),_)) :-
 		{_X is '/'(foo, 77)}.
 
 	throws(iso_is_2_29, error(evaluation_error(zero_divisor),_)) :-
-		{_X is '/'(3, 0)}.
+		% try to delay the expected error to runtime
+		{G = (_X is '/'(3, 0)), call(G)}.
 
 	succeeds(iso_is_2_30) :-
 		{X is mod(7, 3)},
@@ -146,16 +154,19 @@
 		X == -1.
 
 	throws(iso_is_2_33, error(instantiation_error,_)) :-
-		{_X is mod(77, _N)}.
+		% try to delay the expected error to runtime
+		{G = (_X is mod(77, _N)), call(G)}.
 
 	throws(iso_is_2_34, error(type_error(evaluable,foo/0),_)) :-
 		{_X is mod(foo, 77)}.
 
 	throws(iso_is_2_35, error(type_error(integer,7.5),_)) :-
-		{_X is mod(7.5, 2)}.
+		% try to delay the expected error to runtime
+		{G = (_X is mod(7.5, 2)), call(G)}.
 
 	throws(iso_is_2_36, error(evaluation_error(zero_divisor),_)) :-
-		{_X is mod(7, 0)}.
+		% try to delay the expected error to runtime
+		{G = (_X is mod(7, 0)), call(G)}.
 
 	succeeds(iso_is_2_37) :-
 		{X is floor(7.4)},
@@ -178,7 +189,8 @@
 		X == -1.
 
 	throws(iso_is_2_42, error(instantiation_error,_)) :-
-		{_X is round(_N)}.
+		% try to delay the expected error to runtime
+		{G = (_X is round(_N)), call(G)}.
 
 	succeeds(iso_is_2_43) :-
 		{X is ceiling(-0.5)},
@@ -205,7 +217,8 @@
 		X == 1.0.
 
 	throws(iso_is_2_49, error(instantiation_error,_)) :-
-		{_X is float(_N)}.
+		% try to delay the expected error to runtime
+		{G = (_X is float(_N)), call(G)}.
 
 	throws(iso_is_2_50, error(type_error(evaluable,foo/0),_)) :-
 		{_X is float(foo)}.
@@ -223,7 +236,8 @@
 		X == 7.8.
 
 	throws(iso_is_2_54, error(instantiation_error,_)) :-
-		{_X is abs(_N)}.
+		% try to delay the expected error to runtime
+		{G = (_X is abs(_N)), call(G)}.
 
 	throws(iso_is_2_55, error(type_error(evaluable,foo/0),_)) :-
 		{_X is abs(foo)}.
