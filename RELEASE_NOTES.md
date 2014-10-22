@@ -62,6 +62,9 @@ a singleton variable warning.
 * UPDATED: The JIProlog adapter file to support passing environment variable
 values as Java process properties.
 
+* FIXED: The ECLiPSe adapter file now imports the stricter versions of the
+`compare/3` and `term_variables/2` standard built-in predicates.
+
 Documentation
 -------------
 

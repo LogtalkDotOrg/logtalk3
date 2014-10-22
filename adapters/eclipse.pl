@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on September 25, 2014
+%  Last updated on October 22, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -29,6 +29,8 @@
 :- pragma(nodebug).
 
 :- use_module(library(iso)).
+:- ensure_loaded(library(iso_strict)).
+:- import compare/3, term_variables/2 from iso_strict.
 
 :- set_event_handler(134, '$lgt_eclipse_discontiguous_predicate_handler'/2).
 
@@ -68,6 +70,7 @@
 
 % between(+integer, +integer, ?integer)
 
+:- ensure_loaded(library(util)).
 :- import between/3 from util.
 
 
