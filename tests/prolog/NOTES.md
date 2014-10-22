@@ -33,7 +33,9 @@ Failure of unit tests doesn't necessarily mean that a backend Prolog compiler
 is faulty. Standards are not perfect and there isn't always a consensus on
 what should be the correct test results. Common causes of failure include
 module explicitly-qualified sub-terms in exception terms and corner cases in
-arithmetic operations.
+arithmetic operations. Moreover, some Prolog compilers provide a strict ISO
+mode that may result in different test results. This strict mode, when made
+available, is usually only used if it's the default when starting Logtalk.
 
 Writing these tests was made easier by rewriting and, when necessary, updating,
 the tests found on the Prolog ISO conformance testing framework written by
