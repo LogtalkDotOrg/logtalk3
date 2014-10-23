@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for JIProlog 3.2.0-7 or later versions
-%  Last updated on October 17, 2014
+%  Last updated on October 23, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -233,9 +233,9 @@ format(Format, Arguments) :-
 % back-end Prolog compiler supported features (that are compatible with Logtalk)
 
 '$lgt_prolog_feature'(prolog_dialect, ji).
-'$lgt_prolog_feature'(prolog_version, _) :-
-	fail.
-'$lgt_prolog_feature'(prolog_compatible_version, @>=((3,2,0))).
+'$lgt_prolog_feature'(prolog_version, (Major, Minor, Patch)) :-
+	current_prolog_flag(version_data, jiprolog(Major, Minor, Patch, _)).
+'$lgt_prolog_feature'(prolog_compatible_version, @>=((4,0,0))).
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
 '$lgt_prolog_feature'(tabling, unsupported).
@@ -310,7 +310,32 @@ format(Format, Arguments) :-
 % expands a file path to a full path
 
 '$lgt_expand_path'(Path, ExpandedPath) :-
-	absolute_file_name(Path, ExpandedPath).
+	% first expand any environment variable
+	'$lgt_ji_expand_environment'(Path, ExpandedPath0),
+	(	(	sub_atom(ExpandedPath0, 0, 1, _, '/')
+			% assume POSIX full path 
+		;	sub_atom(ExpandedPath0, 1, 1, _, ':')
+			% assume Windows full Path starting with a drive letter followed by ":"
+		) ->
+		% assume full path
+		ExpandedPath = ExpandedPath0
+	;	% assume path relative to the current directory
+		working_directory(Current, Current),
+		atom_concat(Current, '/', Directory),
+		atom_concat(Directory, ExpandedPath0, ExpandedPath)
+	).
+
+
+'$lgt_ji_expand_environment'(Path, ExpandedPath) :-
+	(	sub_atom(Path, 0, 1, _, '$'),
+		sub_atom(Path, Before, _, _, '/') ->
+		End is Before - 1,
+		sub_atom(Path, 1, End, _, Variable),
+		sub_atom(Path, Before, _, 0, Rest),
+		'$lgt_environment_variable'(Variable, Value),
+		atom_concat(Value, Rest, ExpandedPath)
+	;	Path = ExpandedPath
+	).
 
 
 % '$lgt_file_exists'(+atom)
@@ -456,7 +481,8 @@ format(Format, Arguments) :-
 
 '$lgt_decompose_file_name'(File, Directory, Name, Extension) :-
 	create_object('java.io.File'('java.lang.String'), [File], Object),
-	invoke(Object, getParent, [], Directory),
+	invoke(Object, getParent, [], Directory0),
+	atom_concat(Directory0, '/', Directory),
 	invoke(Object, getName, [], Basename),
 	(	sub_atom(Basename, Before, _, After, '.') ->
 		sub_atom(Basename, 0, Before, _, Name),
@@ -520,6 +546,27 @@ format(Format, Arguments) :-
 
 '$lgt_stream_current_line_number'(_, _) :-
 	fail.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  abstraction of the standard open/4 and close/1 predicates for dealing
+%  with the alias/1 option in old non-standard compliant systems
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% '$lgt_open'(+atom, +atom, -stream, @list)
+
+'$lgt_open'(File, Mode, Stream, Options) :-
+	open(File, Mode, Stream, Options).
+
+
+% '$lgt_close'(@stream)
+
+'$lgt_close'(Stream) :-
+	close(Stream).
 
 
 
