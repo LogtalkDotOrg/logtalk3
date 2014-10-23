@@ -169,7 +169,7 @@ setof_3_member(X, [_| L]) :-
 		% STO; Undefined
 		{setof(f(X,Y),X=Y,[f(g(Z),Z)])}.
 
-	throws(eddbali_setof_3_26, error(type_error(callable,(true;4)),_)) :-
+	throws(eddbali_setof_3_26, [error(type_error(callable,(true;4)),_), error(type_error(callable,4),_)]) :-
 		{setof(X, X^(true; 4), _L)}.
 
 	throws(sics_setof_3_27, error(type_error(callable,1),_)) :-
