@@ -30,7 +30,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/10/01,
+		date is 2014/10/23,
 		comment is 'A simple unit test framework featuring predicate clause coverage.'
 	]).
 
@@ -223,8 +223,8 @@
 			)
 		;	passed_test(Test, File, Position)
 		).
-	run_test(throws(Test, ExpectedError, Position), File) :-
-		(	catch(::test(Test, ExpectedError), Error, check_error(Test, ExpectedError, Error, File, Position)) ->
+	run_test(throws(Test, PossibleErrors, Position), File) :-
+		(	catch(::test(Test, PossibleErrors), Error, check_error(Test, PossibleErrors, Error, File, Position)) ->
 			(	var(Error) ->
 				failed_test(Test, File, Position, success_instead_of_error)
 			;	true
@@ -232,10 +232,11 @@
 		;	failed_test(Test, File, Position, failure_instead_of_error)
 		).
 
-	check_error(Test, ExpectedError, Error, File, Position) :-
-		(	subsumes_term(ExpectedError, Error) ->
+	check_error(Test, [PossibleError| PossibleErrors], Error, File, Position) :-
+		(	member(ExpectedError, [PossibleError| PossibleErrors]),
+			subsumes_term(ExpectedError, Error) ->
 			passed_test(Test, File, Position)
-		;	failed_test(Test, File, Position, wrong_error(ExpectedError, Error))
+		;	failed_test(Test, File, Position, wrong_error(PossibleError, Error))
 		).
 
 	write_tests_header :-
@@ -359,7 +360,7 @@
 			assertz(test_(deterministic(Test, Position)))
 		;	Outcome == fail ->
 			assertz(test_(fails(Test, Position)))
-		;	% Outcome = error(Error,_); Outcome = Ball
+		;	% errors
 			assertz(test_(throws(Test, Outcome, Position)))
 		).
 
@@ -382,10 +383,14 @@
 		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
 		assertz(test_(fails(Test, Position))).
-	term_expansion((throws(Test, Error) :- Goal), [(test(Test, Error) :- Goal)]) :-
+	term_expansion((throws(Test, Balls) :- Goal), [(test(Test, Errors) :- Goal)]) :-
 		check_for_valid_test_identifier(Test),
+		(	Balls = [_| _] ->
+			Errors = Balls
+		;	Errors = [Balls]
+		),
 		logtalk_load_context(term_position, Position),
-		assertz(test_(throws(Test, Error, Position))).
+		assertz(test_(throws(Test, Errors, Position))).
 
 	% collect all unit test identifiers when reching the end_object/0 directive 
 	term_expansion((:- end_object), [skipped_(N), (run_tests :- ::run_tests(Tests, File)), (:- end_object)]) :-
@@ -424,8 +429,15 @@
 	convert_test_outcome(deterministic, Goal, deterministic, lgtunit::deterministic(Goal)).
 	convert_test_outcome(deterministic(Test), Goal, deterministic, (lgtunit::deterministic(Goal), Test)).
 	convert_test_outcome(fail, Goal, fail, Goal).
-	convert_test_outcome(error(Error), Goal, error(Error,_), Goal).
-	convert_test_outcome(ball(Ball), Goal, Ball, Goal).
+	convert_test_outcome(error(Ball), Goal, [error(Ball,_)], Goal).
+	convert_test_outcome(errors(Balls), Goal, Errors, Goal) :-
+		map_errors(Balls, Errors).
+	convert_test_outcome(ball(Ball), Goal, [Ball], Goal).
+	convert_test_outcome(balls(Balls), Goal, Balls, Goal).
+
+	map_errors([], []).
+	map_errors([Ball| Balls], [error(Ball,_)| Errors]) :-
+		map_errors(Balls, Errors).
 
 	test_idiom_head(test(Test, _), Test).
 	test_idiom_head(test(Test), Test).
@@ -684,6 +696,10 @@
 	length([_| Tail], Acc, Length) :-
 		Acc2 is Acc + 1,
 		length(Tail, Acc2, Length).
+
+	member(Element, [Element| _]).
+	member(Element, [_| List]) :-
+		member(Element, List).
 
 	memberchk(Element, [Element| _]) :-
 		!.

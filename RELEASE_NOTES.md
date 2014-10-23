@@ -81,6 +81,9 @@ argument specifies the number of *proofs*, not the number of distinct solutions
 Tools
 -----
 
+* ADDED: Support for the `lgtunit` tool to specify multiple possible exception
+terms for unit tests expected to throw an error.
+
 * IMPROVED: The `logtalk_tester.sh` POSIX shell script to test if the selected
 integration script is available in the system execution path. Thanks to Vítor
 Santos Costa for the bug report.

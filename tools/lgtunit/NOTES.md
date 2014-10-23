@@ -43,9 +43,9 @@ To compile and load this framework type:
 
 	| ?- logtalk_load(lgtunit(loader)).
 
-The unit tests framework is inspired by Java's JUnit and by the works of
-Joachim Schimpf (ECLiPSe library `test_util`) and Jan Wielemaker (SWI-Prolog
-`plunit` package).
+The unit tests framework is inspired by the xUnit frameworks architecture and
+by the works of Joachim Schimpf (ECLiPSe library `test_util`) and Jan Wielemaker
+(SWI-Prolog `plunit` package).
 
 In order to write your own unit tests, define objects extending the 
 `lgtunit` object. These objects must be compiled using the compiler
@@ -69,13 +69,15 @@ an error cannot be specified. A more versatile dialect is:
 	deterministic(Test) :- Goal.
 	fails(Test) :- Goal.
 	throws(Test, Ball) :- Goal.
+	throws(Test, Balls) :- Goal.
 
 This is a straightforward dialect. For `succeeds/1` tests, `Goal` is
 expected to succeed. For `deterministic/1` tests, `Goal` is expected to
 succeed once without leaving a choice-point. For `fails/1` tests, `Goal`
 is expected to fail. For `throws/2` tests, `Goal` is expected to throw
-the exception term `Ball`. An alternative test dialect that can be used
-with the same expressive power is:
+the exception term `Ball` or one of the exception terms in the list
+`Balls`. An alternative test dialect that can be used with the same
+expressive power is:
 
 	test(Test, Outcome) :- Goal.
 
@@ -93,8 +95,12 @@ The possible values of the outcome argument are:
 	the test is expected to fail
 - `error(Error)`  
 	the test is expected to throw the exception term `error(Error, _)`
+- `errors(Errors)`  
+	the test is expected to throw an exception term `error(Error, _)` where `Error` is an element of the list `Errors`
 - `ball(Ball)`  
 	the test is expected to throw the exception term `Ball`
+- `ball(Balls)`  
+	the test is expected to throw an exception term `Ball` where `Ball` is an element of the list `Balls`
 
 In all dialects, `Test` is an atom, uniquely identifying a test. An error
 message is printed if duplicated identifiers are found. These errors must
