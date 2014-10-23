@@ -69,8 +69,13 @@ b(2, 2).
 		S = [1, _, 2].
 
 	succeeds(iso_bagof_3_09) :-
-		{set_prolog_flag(unknown, fail), bagof(X,(Y^(X=1;Y=1);X=3),S)},
-		S == [3].
+		{(	catch(1^true, _, fail) ->
+			findall(S-Y, bagof(X,(Y^(X=1;Y=1);X=3),S), L),
+			L = [[1,3]-_,[_]-1]
+		;	set_prolog_flag(unknown, fail),
+			bagof(X,(Y^(X=1;Y=1);X=3),S),
+			S == [3]
+		)}.
 
 	succeeds(iso_bagof_3_10) :-
 		findall(S-Y, {bagof(X,(X=Y;X=Z;Y=1),S)}, LL),

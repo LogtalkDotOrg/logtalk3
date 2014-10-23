@@ -93,8 +93,13 @@ setof_3_member(X, [_| L]) :-
 		S = [_, 1, 2].
 
 	succeeds(iso_setof_3_11) :-
-		{set_prolog_flag(unknown, fail), setof(X,((Y^(X=1;Y=1));X=3),S)},
-		var(Y), S == [3].
+		{(	catch(1^true, _, fail) ->
+			findall(S-Y, setof(X,(Y^(X=1;Y=2);X=3),S), L),
+			L = [[1,3]-_,[_]-2]
+		;	set_prolog_flag(unknown, fail),
+			setof(X,(Y^(X=1;Y=2);X=3),S),
+			S == [3]
+		)}.
 
 	succeeds(iso_setof_3_12) :-
 		findall(S-Y, {setof(X,(X=Y;X=Z;Y=1),S)}, LL),
