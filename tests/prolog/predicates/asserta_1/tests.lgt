@@ -49,7 +49,8 @@
 	throws(iso_asserta_1_06, error(type_error(callable,4),_)) :-
 		{asserta((foo :- 4))}.
 
-	throws(iso_asserta_1_07, error(permission_error(modify,static_procedure,atom/1),_)) :-
+	throws(iso_asserta_1_07, [error(permission_error(modify,static_procedure,atom/1),_), error(permission_error(modify,static_procedure,':'(user,atom/1)),_)]) :-
+		% the second exception term is used in some of the Prolog compilers supporting modules
 		{asserta((atom(_) :- true))}.
 
 	succeeds(eddbali_asserta_1_08) :-

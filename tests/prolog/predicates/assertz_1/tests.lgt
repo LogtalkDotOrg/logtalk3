@@ -45,7 +45,8 @@
 	throws(iso_assertz_1_06, error(type_error(callable,4),_)) :-
 		{assertz((foo :- 4))}.
 
-	throws(iso_assertz_1_07, error(permission_error(modify,static_procedure,atom/1),_)) :-
+	throws(iso_assertz_1_07, [error(permission_error(modify,static_procedure,atom/1),_), error(permission_error(modify,static_procedure,':'(user,atom/1)),_)]) :-
+		% the second exception term is used in some of the Prolog compilers supporting modules
 		{assertz((atom(_) :- true))}.
 
 :- end_object.

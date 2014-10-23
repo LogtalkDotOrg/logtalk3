@@ -40,7 +40,8 @@ insect(bee).
 	throws(iso_retractall_1_04, error(type_error(callable,3),_)) :-
 		{retractall(3)}.
 
-	throws(iso_retractall_1_05, error(permission_error(modify,static_procedure,retractall/1),_)) :-
+	throws(iso_retractall_1_05, [error(permission_error(modify,static_procedure,retractall/1),_), error(permission_error(modify,static_procedure,':'(user,retractall/1)),_)]) :-
+		% the second exception term is used in some of the Prolog compilers supporting modules
 		{retractall(retractall(_))}.
 
 :- end_object.

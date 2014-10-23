@@ -50,8 +50,9 @@ a(2).
 	throws(iso_call_1_05, error(instantiation_error,_)) :-
 		{b(_)}.
 
-	throws(iso_call_1_06, error(type_error(callable,(write(3),3)),_)) :-
-		% example fixed in ISO/IEC 13211-1:1995/Cor.2:2012
+	throws(iso_call_1_06, [error(type_error(callable,(write(3),3)),_), error(type_error(callable,3),_)]) :-
+		% the first exception term is fixed in ISO/IEC 13211-1:1995/Cor.2:2012
+		% the second exception term is a common but not conforming alternative
 		{b(3)}.
 
 	succeeds(iso_call_1_07) :-
@@ -74,13 +75,16 @@ a(2).
 	throws(iso_call_1_12, error(type_error(callable,1),_)) :-
 		{call(1)}.
 
-	throws(iso_call_1_13, error(type_error(callable,(fail,1)),_)) :-
+	throws(iso_call_1_13, [error(type_error(callable,(fail,1)),_), error(type_error(callable,1),_)]) :-
+		% the second exception term is a common but not conforming alternative
 		{call((fail, 1))}.
 
-	throws(iso_call_1_14, error(type_error(callable,(write(3),1)),_)) :-
+	throws(iso_call_1_14, [error(type_error(callable,(write(3),1)),_), error(type_error(callable,1),_)]) :-
+		% the second exception term is a common but not conforming alternative
 		{call((write(3), 1))}.
 
-	throws(iso_call_1_15, error(type_error(callable,(1;true)),_)) :-
+	throws(iso_call_1_15, [error(type_error(callable,(1;true)),_), error(type_error(callable,1),_)]) :-
+		% the second exception term is a common but not conforming alternative
 		{call((1; true))}.
 
 :- end_object.

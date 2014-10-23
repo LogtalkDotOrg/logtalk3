@@ -50,7 +50,8 @@ bar(_X) :- true.
 	throws(iso_abolish_1_04, error(type_error(predicate_indicator,foo(X)),_)) :-
 		{abolish(foo(X))}.
 
-	throws(iso_abolish_1_05, error(permission_error(modify,static_procedure,abolish/1),_)) :-
+	throws(iso_abolish_1_05, [error(permission_error(modify,static_procedure,abolish/1),_), error(permission_error(modify,static_procedure,':'(user,abolish/1)),_)]) :-
+		% the second exception term is used in some of the Prolog compilers supporting modules
 		{abolish(abolish/1)}.
 
 	succeeds(eddbali_abolish_1_06) :-
@@ -63,7 +64,8 @@ bar(_X) :- true.
 	throws(eddbali_abolish_1_08, error(instantiation_error,_)) :-
 		{abolish(foo/_)}.
 
-	throws(eddbali_abolish_1_09, error(permission_error(modify,static_procedure,bar/1),_)) :-
+	throws(eddbali_abolish_1_09, [error(permission_error(modify,static_procedure,bar/1),_), error(permission_error(modify,static_procedure,':'(user,bar/1)),_)]) :-
+		% the second exception term is used in some of the Prolog compilers supporting modules
 		{abolish(bar/1)}.
 
 	throws(eddbali_abolish_1_10, error(type_error(integer,a),_)) :-

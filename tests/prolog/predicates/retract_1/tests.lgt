@@ -76,7 +76,8 @@ foo(X) :- call(X), call(X).
 	throws(iso_retract_1_10, error(type_error(callable,4),_)) :-
 		{retract((4 :- _X))}.
 
-	throws(iso_retract_1_11, error(permission_error(modify,static_procedure,atom/1),_)) :-
+	throws(iso_retract_1_11, [error(permission_error(modify,static_procedure,atom/1),_), error(permission_error(modify,static_procedure,':'(user,atom/1)),_)]) :-
+		% the second exception term is used in some of the Prolog compilers supporting modules
 		{retract((atom(X) :- X =='[]'))}.
 
 :- end_object.
