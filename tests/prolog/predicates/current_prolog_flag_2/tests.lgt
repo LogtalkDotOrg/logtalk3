@@ -109,4 +109,20 @@
 	throws(eddbali_current_prolog_flag_2_15, error(type_error(atom,1+2),_)) :-
 		{current_prolog_flag(1+2, flag)}.
 
+	% tests for de facto standard flags defined by the Prolog Commons initiative
+
+	succeeds(commons_current_prolog_flag_2_16) :-
+		{current_prolog_flag(dialect, Dialect)},
+		atom(Dialect).
+
+	succeeds(commons_current_prolog_flag_2_17) :-
+		{current_prolog_flag(version_data, VersionData)},
+		compound(VersionData),
+		VersionData =.. [_Dialect, Major, Minor, Patch| _Others],
+		integer(Major), integer(Minor), integer(Patch).
+
+	succeeds(commons_current_prolog_flag_2_18) :-
+		{current_prolog_flag(dialect, Dialect), current_prolog_flag(version_data, VersionData)},
+		functor(VersionData, Dialect, _).
+
 :- end_object.
