@@ -37,6 +37,8 @@
 	throws(iso_bitwise_complement_1_04, error(instantiation_error,_)) :-
 		{_X is '\\'(_N)}.
 
+	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
+
 	throws(sics_bitwise_complement_1_05, error(type_error(integer,2.5),_)) :-
 		{_X is '\\'(2.5)}.
 

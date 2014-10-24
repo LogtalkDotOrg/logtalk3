@@ -63,6 +63,8 @@
 		{number_codes(A, [0'4,0'2,0'.,0'0,0'e,0'-,0'1])},
 		A == 4.2.
 
+	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
+
 	throws(eddbali_number_codes_2_11, error(instantiation_error,_)) :-
 		{number_codes(_A, _L)}.
 

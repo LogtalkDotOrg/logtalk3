@@ -60,6 +60,8 @@ insect(bee).
 	throws(iso_current_predicate_1_06, error(type_error(predicate_indicator,4),_)) :-
 		{current_predicate(4)}.
 
+	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
+
 	throws(eddbali_current_predicate_1_07, error(type_error(predicate_indicator,dog),_)) :-
 		{current_predicate(dog)}.
 

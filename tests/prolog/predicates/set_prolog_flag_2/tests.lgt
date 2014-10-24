@@ -37,6 +37,8 @@
 	throws(iso_set_prolog_flag_2_05, error(domain_error(flag_value,debug+trace),_)) :-
 		{set_prolog_flag(debug, trace)}.
 
+	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
+
 	throws(eddbali_set_prolog_flag_2_06, error(permission_error(modify,flag,max_arity),_)) :-
 		{set_prolog_flag(max_arity, 40)}.
 

@@ -79,6 +79,8 @@ insect(bee).
 		% STO; Undefined
 		{clause(legs(A,6), insect(f(A)))}.
 
+	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
+
 	throws(eddbali_clause_2_12, error(type_error(callable,5),_)) :-
 		{clause(f(_), 5)}.
 

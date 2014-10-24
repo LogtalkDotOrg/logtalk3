@@ -95,6 +95,8 @@
 	throws(iso_current_prolog_flag_2_11, error(type_error(atom,5),_)) :-
 		{current_prolog_flag(5, _V)}.
 
+	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
+
 	succeeds(eddbali_current_prolog_flag_2_12) :-
 		{set_prolog_flag(unknown, warning), current_prolog_flag(unknown, warning)}.
 

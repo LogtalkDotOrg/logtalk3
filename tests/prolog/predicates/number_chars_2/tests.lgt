@@ -70,6 +70,8 @@
 		{number_chars(A, ['4','2','.','0','e','-','1'])},
 		A == 4.2.
 
+	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
+
 	throws(eddbali_number_chars_2_13, error(instantiation_error,_)) :-
 		{number_chars(_A, _L)}.
 

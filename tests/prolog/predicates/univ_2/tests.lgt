@@ -74,6 +74,8 @@
 		% STO; Undefined
 		{'=..'(f(X), [f,u(X)])}.
 
+	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
+
 	throws(sics_univ_2_16, error(type_error(atomic,f(a)),_)) :-
 		{'=..'(_X, [f(a)])}.
 

@@ -165,6 +165,8 @@ setof_3_member(X, [_| L]) :-
 		{setof(X-Xs, bagof(Y,d(X,Y),Xs), L)},
 		var(Y), L == [1-[1,2,1], 2-[2,1,2]].
 
+	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
+
 	- succeeds(eddbali_setof_3_25) :-
 		% STO; Undefined
 		{setof(f(X,Y),X=Y,[f(g(Z),Z)])}.

@@ -50,6 +50,8 @@
 	throws(iso_atom_length_2_07, error(type_error(integer,'4'),_)) :-
 		{atom_length(atom, '4')}.
 
+	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
+
 	throws(eddbali_atom_length_2_08, error(domain_error(not_less_than_zero,-4),_)) :-
 		{atom_length(atom, -4)}.
 

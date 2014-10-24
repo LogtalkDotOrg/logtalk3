@@ -53,6 +53,8 @@
 		findall(Start-Lenght-SubAtom, {sub_atom('ab',Start,Lenght,_,SubAtom)}, L),
 		L == [0-0-'', 0-1-'a', 0-2-'ab', 1-0-'', 1-1-'b', 2-0-''].
 
+	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
+
 	throws(eddbali_sub_atom_5_08, error(instantiation_error,_)) :-
 		{sub_atom(_Banana, 3, 2, _, _S)}.
 

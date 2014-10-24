@@ -69,6 +69,8 @@
 		% STO; Undefined
 		{arg(1, foo(X), u(X))}.
 
+	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
+
 	throws(eddbali_arg_3_13, error(domain_error(not_less_than_zero,-3),_)) :-
 		% try to delay the expected error to runtime
 		{G = arg(-3, foo(a,b), _A), call(G)}.

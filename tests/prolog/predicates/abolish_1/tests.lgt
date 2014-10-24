@@ -54,6 +54,8 @@ bar(_X) :- true.
 		% the second exception term is used in some of the Prolog compilers supporting modules
 		{abolish(abolish/1)}.
 
+	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
+
 	succeeds(eddbali_abolish_1_06) :-
 		{abolish(foo/1)}.
 

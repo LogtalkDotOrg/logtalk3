@@ -89,6 +89,8 @@
 		{op(0, xfy, '|')},
 		{\+ current_op(_, xfy, '|')}.
 
+	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
+
 	throws(sics_op_3_18, error(instantiation_error,_)) :-
 		{op(_, xfx, ++)}.
 

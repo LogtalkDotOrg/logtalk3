@@ -55,6 +55,8 @@
 	throws(iso_atom_codes_2_08, error(instantiation_error,_)) :-
 		{atom_codes(_X, _Y)}.
 
+	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
+
 	throws(eddbali_atom_codes_2_09, error(type_error(atom,f(a)),_)) :-
 		{atom_codes(f(a), _L)}.
 

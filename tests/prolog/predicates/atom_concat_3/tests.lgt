@@ -58,6 +58,8 @@
 	throws(eddbali_atom_concat_3_10, error(type_error(atom,f(a)),_)) :-
 		{atom_concat(_A, _B, f(a))}.
 
+	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
+
 	% the following four tests are disabled as there is no portable
 	% way to specify a supporting text encoding such as UTF-8 for
 	% all Logtalk supported backend Prolog compilers

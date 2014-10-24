@@ -55,6 +55,8 @@
 	throws(iso_atom_chars_2_08, error(instantiation_error,_)) :-
 		{atom_chars(_X, _Y)}.
 
+	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
+
 	throws(eddbali_atom_chars_2_09, error(instantiation_error,_)) :-
 		{atom_chars(_A, [a,_E,c])}.
 

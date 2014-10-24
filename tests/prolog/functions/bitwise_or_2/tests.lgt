@@ -45,6 +45,8 @@
 		% example fixed in ISO/IEC 13211-1:1995/Cor.1:2007
 		{_X is '\\/'(foo, 2)}.
 
+	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
+
 	throws(sics_bitwise_or_2_07, error(type_error(integer,1.0),_)) :-
 		{_X is '\\/'(1.0, 2)}.
 

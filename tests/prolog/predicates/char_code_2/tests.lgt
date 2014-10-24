@@ -46,6 +46,8 @@
 	throws(iso_char_code_2_07, error(instantiation_error,_)) :-
 		{char_code(_Char, _Code)}.
 
+	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
+
 	throws(eddbali_char_code_2_08, error(type_error(integer,x),_)) :-
 		{char_code(a, x)}.
 

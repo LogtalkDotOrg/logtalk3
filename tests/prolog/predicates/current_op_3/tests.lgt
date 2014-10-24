@@ -181,6 +181,8 @@
 		{current_op(P, T, '\\')},
 		P == 200, T == fy.
 
+	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
+
 	throws(sics_current_op_3_40, error(domain_error(operator_priority,1201),_)) :-
 		{current_op(1201, _, _)}.
 

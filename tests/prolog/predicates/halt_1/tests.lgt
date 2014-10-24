@@ -24,6 +24,8 @@
 	throws(iso_halt_1_01, error(type_error(integer,a),_)) :-
 		{halt(a)}.
 
+	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
+
 	throws(eddbali_halt_1_02, error(instantiation_error,_)) :-
 		{halt(_)}.
 

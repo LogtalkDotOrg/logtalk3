@@ -53,6 +53,8 @@
 		% the second exception term is used in some of the Prolog compilers supporting modules
 		{asserta((atom(_) :- true))}.
 
+	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
+
 	succeeds(eddbali_asserta_1_08) :-
 		findall(X-Y, {asserta(insct(bee)),insct(X),asserta(insct(ant)),insct(Y)}, L),
 		L == [bee-ant, bee-bee].
