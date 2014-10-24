@@ -30,12 +30,15 @@ source files defining built-in protocols, categories, and objects:
 - `monitoring.lgt` - event handler predicates
 - `logtalk.lgt` - message printing, debugging, and hacking predicates
 - `core_messages.lgt` - default translations for compiler messages
+- `user.lgt` - definition of the pseudo-object `user`
 
 Before loading the `core.pl` file into your favorite Prolog compiler,
 you must first load the appropriated adapter file for your Prolog
 compiler, which you will find in the `adapters` directory, and the
 `paths/paths.pl` file, which defines essential library paths for
-starting Logtalk.
+starting Logtalk. The provided Prolog integration scripts automate
+this process and should be used unless there's a strong reason to
+manually load Logtalk.
 
 The source files are formatted using tabs (the recommended setting is
 a tab width equivalent to 4 spaces).

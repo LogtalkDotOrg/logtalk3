@@ -26,8 +26,9 @@ type:
 
 	| ?- logtalk_load(tools(loader)).
 
-The `ports` tool is not loaded by default as it conflicts with the `debugger`
-tool as both provide a debug handler that must be unique in a running session.
+The `ports` tool is not loaded by default, however, as it conflicts with
+the `debugger` tool as both provide a debug handler that must be unique
+in a running session.
 
 The `profiler` tool is also not loaded by default as it provides integration
 with selected backend Prolog compiler profilers that are not portable.

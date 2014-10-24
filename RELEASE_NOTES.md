@@ -82,9 +82,9 @@ file on disk.
 
 * IMPROVED: Documentation of the `use_module/2` entity directive.
 
-* FIXED: Documentation of the `mode/2` predicate directive where the second
-argument specifies the number of *proofs*, not the number of distinct solutions
-(as there can be multiple proofs for the same solution).
+* FIXED: Clarified documentation of the `mode/2` predicate directive where the
+second argument specifies the number of *proofs*, not the number of distinct
+solutions (as there can be multiple proofs for the same solution).
 
 Tools
 -----
@@ -118,9 +118,10 @@ where static binding optimizations must not be applied due to setting the
 
 * ADDED: Unit tests for a subset of the ISO Prolog standard specified control
 constructs, predicates, and arithmetic functions. These tests are used to
-check backend Prolog compilers standards compliance, not Logtalk features.
-Thanks to Joachim Schimpf for helping finding typos in the initial test
-versions.
+check backend Prolog compilers standards conformance, not Logtalk-specific
+features. Thanks to SICS, Péter Szabó, and Péter Szeredi for permission to
+reuse their unit tests. Thanks to Joachim Schimpf for helping finding typos
+in the initial test versions.
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------

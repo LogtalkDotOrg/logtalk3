@@ -98,7 +98,6 @@
 
 % '$lgt_predicate_property'(+callable, ?predicate_property)
 
-
 '$lgt_predicate_property'(Pred, Prop) :-
 	% avoid calls to the predicate_property/2 predicate triggering library
 	% auto-loading as this could introduce unwanted dependencies
