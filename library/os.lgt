@@ -1093,6 +1093,120 @@
 		command_line_arguments(Arguments) :-
 			{unix(argv(Arguments))}.
 
+	:- elif(current_logtalk_flag(prolog_dialect, ji)).
+
+		pid(_) :-
+			throw(not_available(pid/1)).
+
+		shell(Command, Status) :-
+			{shell(Command, Status)}.
+
+		shell(Command) :-
+			{shell(Command)}.
+
+		expand_path(Path, ExpandedPath) :-
+			% first expand any environment variable
+			expand_environment(Path, ExpandedPath0),
+			(	(	sub_atom(ExpandedPath0, 0, 1, _, '/')
+					% assume POSIX full path 
+				;	sub_atom(ExpandedPath0, 1, 1, _, ':')
+					% assume Windows full Path starting with a drive letter followed by ":"
+				) ->
+				% assume full path
+				ExpandedPath = ExpandedPath0
+			;	% assume path relative to the current directory
+				working_directory(Current, Current),
+				atom_concat(Current, '/', Directory),
+				atom_concat(Directory, ExpandedPath0, ExpandedPath)
+			).
+
+		expand_environment(Path, ExpandedPath) :-
+			(	sub_atom(Path, 0, 1, _, '$'),
+				sub_atom(Path, Before, _, _, '/') ->
+				End is Before - 1,
+				sub_atom(Path, 1, End, _, Variable),
+				sub_atom(Path, Before, _, 0, Rest),
+				environment_variable(Variable, Value),
+				atom_concat(Value, Rest, ExpandedPath)
+			;	Path = ExpandedPath
+			).
+
+		make_directory(Directory) :-
+			expand_path(Directory, ExpandedPath),
+			(	{exists_directory(ExpandedPath)} ->
+				true
+			;	{make_directory(ExpandedPath)}
+			).
+
+		delete_directory(Directory) :-
+			expand_path(Directory, ExpandedPath),
+			{delete_directory(ExpandedPath)}.
+
+		change_directory(Directory) :-
+			expand_path(Directory, ExpandedPath),
+			{chdir(ExpandedPath)}.
+
+		working_directory(Directory) :-
+			{working_directory(Directory, Directory)}.
+
+		directory_exists(Directory) :-
+			expand_path(Directory, ExpandedPath),
+			{exists_directory(ExpandedPath)}.
+
+		file_exists(File) :-
+			expand_path(File, ExpandedPath),
+			{exists_file(ExpandedPath)}.
+
+		file_modification_time(File, Time) :-
+			expand_path(File, ExpandedPath),
+			{file_attributes(ExpandedPath, _, _, _, _, _, Time)}.
+
+		file_size(File, Size) :-
+			expand_path(File, ExpandedPath),
+			{file_attributes(ExpandedPath, _, _, _, _, Size, _)}.
+
+		file_permission(_, _) :-
+			throw(not_available(file_permission/2)).
+
+		rename_file(Old, New) :-
+			expand_path(Old, OldExpandedPath),
+			expand_path(New, NewExpandedPath),
+			{rename_file(OldExpandedPath, NewExpandedPath)}.
+
+		delete_file(File) :-
+			expand_path(File, ExpandedPath),
+			{delete_file(ExpandedPath)}.
+
+		environment_variable(Variable, Value) :-
+			{(	invoke('java.lang.System', getenv('java.lang.String'), [Variable], Value),
+				Value \== [] ->
+				true
+			;	% check if the environment variable value is passed as a property
+			 	invoke('java.lang.System', getProperty('java.lang.String'), [Variable], Value),
+				Value \== []
+			)}.
+
+		time_stamp(Time) :-
+			{get_time(Time)}.
+
+		date_time(Year, Month, Day, Hours, Minutes, Seconds, 0).
+			{time(Year, Month, Day, Hours, Minutes, Seconds, _)}.
+
+		cpu_time(Seconds) :-
+			{Seconds is cputime}.
+
+		wall_time(_) :-
+			throw(not_available(wall_time/1)).
+
+		operating_system_type(Type) :-
+			(	environment_variable('COMSPEC', _) ->
+				Type = windows
+			;	Type = unix
+			).
+
+		command_line_arguments(_) :-
+			throw(not_available(command_line_arguments/1)).
+
 	:- elif(current_logtalk_flag(prolog_dialect, jekejeke)).
 
 		pid(_) :-
