@@ -72,7 +72,10 @@
 
 	succeeds(iso_current_prolog_flag_2_08) :-
 		{current_prolog_flag(max_arity, MaxArity)},
-		ground(MaxArity).
+		(	MaxArity == unbounded ->
+			true
+		;	integer(MaxArity), MaxArity > 0
+		).
 
 	succeeds(iso_current_prolog_flag_2_09) :-
 		{current_prolog_flag(unknown, Unknown)},
