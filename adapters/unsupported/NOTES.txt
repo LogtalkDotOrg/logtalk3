@@ -114,17 +114,15 @@ Jekejeke Prolog 1.0.4
 	not yet stable.
 
 
-JIProlog 3.1.0-1 and later versions
+JIProlog 4.0.0-1 and later versions
 
 	ji.pl
 
 	Written with the help of the JIProlog author (but if you find any Logtalk 
 	problem please report it to me). Some examples may not compile or run due
-	to work in progress regarding ISO Prolog standard compliance. Supports smart
-	compilation of source files. Settings files are not supported (must be
-	manually loaded after starting Logtalk). Currently not functional due to
-	bugs in standard built-in predicates and lack of access to some required
-	operating-system information such as environment variable values. 
+	to work in progress regarding ISO Prolog standard compliance. Settings
+	files are not supported (must be manually loaded after starting Logtalk).
+	Currently not functional due to missing support for stream aliases. 
 
 
 LPA MacProlog32 1.25

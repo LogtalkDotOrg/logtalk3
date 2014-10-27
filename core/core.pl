@@ -5001,7 +5001,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_report_redefined_entity'(Type, Entity, OldFile, NewFile, Lines) :-
 	(	NewFile == nil ->
-		% assume we're reloading the same source file so consider entity redefinitions normal
+		% assume we're reloading the same source file and thus consider entity redefinitions normal
 		'$lgt_print_message'(comment(loading), core, redefining_entity(Type, Entity))
 	;	% we've conflicting entity definitions coming from different source files
 		'$lgt_increment_loadind_warnings_counter',
@@ -5152,7 +5152,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_write_entity_code'(SourceData, Output) :-
 	'$lgt_pp_file_data_'(_, _, Path, _),
-	% write any plain Prolog terms that precede the entity definition
+	% write any plain Prolog terms that may precede the entity definition
 	'$lgt_write_prolog_terms'(SourceData, Output, Path),
 	'$lgt_write_logtalk_directives'(Output),
 	'$lgt_write_logtalk_clauses'(SourceData, Output, Path).
@@ -5202,7 +5202,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_object_file_name'(+atom, -atom, -atom, -atom)
+% '$lgt_object_file_name'(+atom, +atom, +atom, -atom)
 %
 % converts a source file full path into an object file full path
 
@@ -6063,7 +6063,7 @@ current_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_pp_def_'(_)),
 	retractall('$lgt_pp_ddef_'(_)),
 	retractall('$lgt_pp_super_'(_)),
-	% clean plain Prolog terms appearing before an entity definition
+	% clean any plain Prolog terms appearing before an entity definition
 	retractall('$lgt_pp_prolog_term_'(_, _)),
 	retractall('$lgt_pp_entity_term_'(_, _)),
 	retractall('$lgt_pp_final_entity_term_'(_, _)),

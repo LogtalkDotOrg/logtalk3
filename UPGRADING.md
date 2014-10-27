@@ -47,14 +47,12 @@ compile and run under multiple versions.
 MAJOR LANGUAGE CHANGES FROM LOGTALK 2.x TO LOGTALK 3.x
 ======================================================
 
-
 Structured message printing
 ---------------------------
 
 The new structured message printing mechanism, an extended implementation
 of the same mechanism available in some Prolog systems, allows fine grained
 control over printing of informative, warning, and error messages.
-
 
 Structured question asking
 --------------------------
@@ -63,13 +61,13 @@ The new structured question asking mechanism complements the structured
 message printing mechanism and allows fine grained control over querying
 the user for data.
 
-
 Source file paths
 -----------------
 
 Relative and absolute source file paths are now fully supported by the
-compiling and loading built-in predicates.
-
+compiling and loading built-in predicates. In addition, the compiling
+and loading predicates also accept Prolog source files (with the Prolog
+code being compiled as Logtalk code).
 
 Removed directives
 ------------------
@@ -77,7 +75,6 @@ Removed directives
 The `synchronized/0` entity directive is no longer supported. But any usage
 of this directive can be replaced by using instead the `synchronized/1`
 predicate directive.
-
 
 Removed flags
 -------------
@@ -107,7 +104,6 @@ default value for this flag is now `changed`, i.e. a file will be reloaded
 if changed since last loaded (provided that the any explicit flags are the
 same as the first time it was loaded).
 
-
 Deprecated directives, control constructs, and flags
 ----------------------------------------------------
 
@@ -133,7 +129,6 @@ The Logtalk 2.x `unknown`, `singletons`, and `tmpdir` are renamed in Logtalk
 3.x for clarity. The old names are deprecated and should only be used when
 compatibility with Logtalk 2.x is still required.
 
-
 Semantic changes
 ----------------
 
@@ -156,7 +151,6 @@ changes.
 The `initialization/1` directive is only accepted as a source file directive
 or as an object directive. Usage in protocols and categories is no longer
 supported.
-
 
 Reflection support
 ------------------
