@@ -97,7 +97,7 @@ forall(Generate, Test) :-
 :- use_module(library(format)).
 
 
-% numbervars(?term, +integer, ?integer) -- built-in
+% numbervars(?term, +integer, ?integer)
 
 :- use_module(library(numbervars)).
 
