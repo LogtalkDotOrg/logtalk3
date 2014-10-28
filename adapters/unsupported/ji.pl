@@ -218,6 +218,7 @@ format(Format, Arguments) :-
 '$lgt_file_extension'(object, '.pl').
 '$lgt_file_extension'(prolog, '.pl').
 '$lgt_file_extension'(prolog, '.prolog').
+'$lgt_file_extension'(tmp, '.jip').
 
 
 
@@ -394,7 +395,8 @@ format(Format, Arguments) :-
 % compile to disk a Prolog file, resulting from a
 % Logtalk source file, given a list of options
 
-'$lgt_compile_prolog_code'(_, _, _).
+'$lgt_compile_prolog_code'(File, _, _) :-
+	compile(File).
 
 
 % '$lgt_load_prolog_code'(+atom, +atom, +list)
@@ -402,8 +404,12 @@ format(Format, Arguments) :-
 % compile and load a Prolog file, resulting from a
 % Logtalk source file, given a list of options
 
-'$lgt_load_prolog_code'(File, _, _) :-
-	consult(File).
+'$lgt_load_prolog_code'(PrologFile, _, _) :-
+	compile(PrologFile),
+	'$lgt_file_extension'(object, ObjectExtension),
+	atom_concat(Name, ObjectExtension, PrologFile),
+	atom_concat(Name, '.jip', JIPFile),
+	load(JIPFile).
 
 
 % '$lgt_file_modification_time'(+atom, -nonvar)
