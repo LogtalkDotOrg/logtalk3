@@ -3,7 +3,7 @@
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
-%  Adapter file for JIProlog 4.0.0-1 or later versions
+%  Adapter file for JIProlog 4.0.0-3 or later versions
 %  Last updated on October 28, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
@@ -39,7 +39,7 @@
 
 
 initialization(Goal) :-
-	Goal.
+	call(Goal).
 
 
 % '$lgt_iso_predicate'(?callable).
@@ -109,47 +109,47 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 % format(+stream_or_alias, +character_code_list_or_atom, +list)
 
 format(Stream, Format, Arguments) :-
-	atom_chars(Format, Chars),
-	format_(Chars, Stream, Arguments).
+	atom_codes(Format, Codes),
+	format_(Codes, Stream, Arguments).
 
-format_([], _, []).
-format_(['~', Spec| Chars], Stream, Arguments) :-
+format_([], _, _).
+format_([0'~, Spec| Codes], Stream, Arguments) :-
 	!,
 	format_spec_(Spec, Stream, Arguments, RemainingArguments),
-	format_(Chars, Stream, RemainingArguments).
-format_([Char| Chars], Stream, Arguments) :-
-	put_char(Stream, Char),
-	format_(Chars, Stream, Arguments).
+	format_(Codes, Stream, RemainingArguments).
+format_([Code| Codes], Stream, Arguments) :-
+	put_code(Stream, Code),
+	format_(Codes, Stream, Arguments).
 
-format_spec_('a', Stream, [Argument| Arguments], Arguments) :-
+format_spec_(0'a, Stream, [Argument| Arguments], Arguments) :-
 %	atom(Argument),
 	write(Stream, Argument).
-format_spec_('c', Stream, [Argument| Arguments], Arguments) :-
+format_spec_(0'c, Stream, [Argument| Arguments], Arguments) :-
 	put_code(Stream, Argument).
-format_spec_('s', Stream, [Argument| Arguments], Arguments) :-
+format_spec_(0's, Stream, [Argument| Arguments], Arguments) :-
 	atom_codes(Atom, Argument),
 	write(Stream, Atom).
-format_spec_('w', Stream, [Argument| Arguments], Arguments) :-
+format_spec_(0'w, Stream, [Argument| Arguments], Arguments) :-
 	write(Stream, Argument).
-format_spec_('q', Stream, [Argument| Arguments], Arguments) :-
+format_spec_(0'q, Stream, [Argument| Arguments], Arguments) :-
 	writeq(Stream, Argument).
-format_spec_('k', Stream, [Argument| Arguments], Arguments) :-
+format_spec_(0'k, Stream, [Argument| Arguments], Arguments) :-
 	write_canonical(Stream, Argument).
-format_spec_('d', Stream, [Argument| Arguments], Arguments) :-
+format_spec_(0'd, Stream, [Argument| Arguments], Arguments) :-
 	write(Stream, Argument).
-format_spec_('D', Stream, [Argument| Arguments], Arguments) :-
+format_spec_(0'D, Stream, [Argument| Arguments], Arguments) :-
 	write(Stream, Argument).
-format_spec_('f', Stream, [Argument| Arguments], Arguments) :-
+format_spec_(0'f, Stream, [Argument| Arguments], Arguments) :-
 	write(Stream, Argument).
-format_spec_('g', Stream, [Argument| Arguments], Arguments) :-
+format_spec_(0'g, Stream, [Argument| Arguments], Arguments) :-
 	write(Stream, Argument).
-format_spec_('G', Stream, [Argument| Arguments], Arguments) :-
+format_spec_(0'G, Stream, [Argument| Arguments], Arguments) :-
 	write(Stream, Argument).
-format_spec_('i', _, [_| Arguments], Arguments).
-format_spec_('n', Stream, Arguments, Arguments) :-
+format_spec_(0'i, _, [_| Arguments], Arguments).
+format_spec_(0'n, Stream, Arguments, Arguments) :-
 	nl(Stream).
-format_spec_('~', Stream, Arguments, Arguments) :-
-	put_char(Stream, '~').
+format_spec_(0'~, Stream, Arguments, Arguments) :-
+	put_code(Stream, 0'~).
 
 
 % format(+character_code_list_or_atom, +list)
@@ -279,7 +279,7 @@ format(Format, Arguments) :-
 '$lgt_default_flag'(events, deny).
 '$lgt_default_flag'(context_switching_calls, allow).
 % other compilation flags:
-'$lgt_default_flag'(scratch_directory, './lgt_tmp/').
+'$lgt_default_flag'(scratch_directory, './').
 '$lgt_default_flag'(report, on).
 '$lgt_default_flag'(clean, off).
 '$lgt_default_flag'(code_prefix, '$').
@@ -490,7 +490,11 @@ format(Format, Arguments) :-
 '$lgt_decompose_file_name'(File, Directory, Name, Extension) :-
 	create_object('java.io.File'('java.lang.String'), [File], Object),
 	invoke(Object, getParent, [], Directory0),
-	atom_concat(Directory0, '/', Directory),
+	(	Directory0 == [] ->
+		working_directory(Directory1, Directory1)
+	;	Directory1 = Directory0
+	),
+	atom_concat(Directory1, '/', Directory),
 	invoke(Object, getName, [], Basename),
 	(	sub_atom(Basename, Before, _, After, '.') ->
 		sub_atom(Basename, 0, Before, _, Name),
