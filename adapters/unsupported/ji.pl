@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for JIProlog 4.0.0-3 or later versions
-%  Last updated on October 28, 2014
+%  Last updated on October 29, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -38,13 +38,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-initialization(Goal) :-
-	call(Goal).
-
-
 % '$lgt_iso_predicate'(?callable).
-%
-% table of definition for missing ISO predicates
 
 '$lgt_iso_predicate'(sub_atom(_,_,_,_,_)).
 
