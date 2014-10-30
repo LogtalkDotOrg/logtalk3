@@ -1189,7 +1189,7 @@
 		time_stamp(Time) :-
 			{get_time(Time)}.
 
-		date_time(Year, Month, Day, Hours, Minutes, Seconds, 0).
+		date_time(Year, Month, Day, Hours, Minutes, Seconds, 0) :-
 			{time(Year, Month, Day, Hours, Minutes, Seconds, _)}.
 
 		cpu_time(Seconds) :-
