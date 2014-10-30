@@ -3,8 +3,8 @@
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
-%  Adapter file for JIProlog 4.0.0-3 or later versions
-%  Last updated on October 29, 2014
+%  Adapter file for JIProlog 4.0.0-4 or later versions
+%  Last updated on October 30, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -550,8 +550,8 @@ format(Format, Arguments) :-
 
 % '$lgt_stream_current_line_number'(@stream, -integer)
 
-'$lgt_stream_current_line_number'(_, _) :-
-	fail.
+'$lgt_stream_current_line_number'(Stream, Line) :-
+	stream_property(Stream, position(line(Line))).
 
 
 
@@ -587,8 +587,10 @@ format(Format, Arguments) :-
 
 % '$lgt_read_term'(@stream, -term, +list, -position, -list)
 
-'$lgt_read_term'(Stream, Term, Options, '-'(-1, -1), []) :-
-	read_term(Stream, Term, Options).
+'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, []) :-
+	stream_property(Stream, position(line(LineBegin))),
+	read_term(Stream, Term, Options),
+	stream_property(Stream, position(line(LineEnd))).
 
 
 
@@ -651,7 +653,7 @@ format(Format, Arguments) :-
 
 '$lgt_write_term_and_source_location'(Stream, Term, _Kind, _Location) :-
 	write_canonical(Stream, Term),
-	write(Stream, '.\n').
+	write(Stream, '.'), nl(Stream).
 
 
 % '$lgt_assertz_entity_clause'(@clause, +atom)
