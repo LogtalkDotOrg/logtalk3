@@ -3,8 +3,8 @@
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
-%  Adapter file for JIProlog 4.0.0-4 or later versions
-%  Last updated on October 30, 2014
+%  Adapter file for JIProlog 4.0.0-7 or later versions
+%  Last updated on October 31, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -51,6 +51,19 @@ sub_atom(Atom, Before, Length, After, SubAtom) :-
 	atom_length(Suffix, After).
 
 
+% call/2-5 -- built-in
+
+% call/6-7
+
+call(F, A1, A2, A3, A4, A5) :-
+	Call =.. [F, A1, A2, A3, A4, A5],
+	Call.
+
+call(F, A1, A2, A3, A4, A5, A6) :-
+	Call =.. [F, A1, A2, A3, A4, A5, A6],
+	Call.
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -73,31 +86,39 @@ sub_atom(Atom, Before, Length, After, SubAtom) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  meta-predicates
+%  de facto standard Prolog predicates that might be missing
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% setup_call_cleanup(+callable, +callable, +callable)
+% between(+integer, +integer, ?integer)
 
-setup_call_cleanup(_, _, _) :-
-	throw(not_supported(setup_call_cleanup/3)).
+between(Lower, Upper, Integer) :-
+	integer(Lower),
+	integer(Upper),
+	(	var(Integer) ->
+		Lower =< Upper,
+		'$lgt_ji_generate'(Lower, Upper, Integer)
+	;	integer(Integer),
+		Lower =< Integer,
+		Integer =< Upper
+	).
+
+'$lgt_ji_generate'(Lower, _, Lower).
+'$lgt_ji_generate'(Lower, Upper, Integer) :-
+	Lower < Upper,
+	Next is Lower + 1,
+	'$lgt_ji_generate'(Next, Upper, Integer).
+
+
+% findall(?term, +callable, ?list, +list)
+
+findall(Term, Goal, List, Tail) :-
+	findall(Term, Goal, List0),
+	append(List0, Tail, List).
 
 
 % forall(+callable, +callable) -- built-in
-
-
-% call/2-5 -- built-in
-
-% call/6-7
-
-call(F, A1, A2, A3, A4, A5) :-
-	Call =.. [F, A1, A2, A3, A4, A5],
-	Call.
-
-call(F, A1, A2, A3, A4, A5, A6) :-
-	Call =.. [F, A1, A2, A3, A4, A5, A6],
-	Call.
 
 
 % format(+stream_or_alias, +character_code_list_or_atom, +list)
@@ -154,6 +175,20 @@ format(Format, Arguments) :-
 
 
 % numbervars(?term, +integer, ?integer) -- built-in
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  meta-predicates
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% setup_call_cleanup(+callable, +callable, +callable)
+
+setup_call_cleanup(_, _, _) :-
+	throw(not_supported(setup_call_cleanup/3)).
 
 
 
