@@ -99,7 +99,7 @@ The possible values of the outcome argument are:
 	the test is expected to throw an exception term `error(Error, _)` where `Error` is an element of the list `Errors`
 - `ball(Ball)`  
 	the test is expected to throw the exception term `Ball`
-- `ball(Balls)`  
+- `balls(Balls)`  
 	the test is expected to throw an exception term `Ball` where `Ball` is an element of the list `Balls`
 
 In all dialects, `Test` is an atom, uniquely identifying a test. An error
