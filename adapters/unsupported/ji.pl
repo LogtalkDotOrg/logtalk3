@@ -622,10 +622,11 @@ setup_call_cleanup(_, _, _) :-
 
 % '$lgt_read_term'(@stream, -term, +list, -position, -list)
 
-'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, []) :-
+'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, Variables) :-
 	stream_property(Stream, position(line(LineBegin))),
 	read_term(Stream, Term, Options),
-	stream_property(Stream, position(line(LineEnd))).
+	stream_property(Stream, position(line(LineEnd))),
+	term_variables(Term, Variables).
 
 
 
