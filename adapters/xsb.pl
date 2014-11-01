@@ -661,7 +661,7 @@ setup_call_catcher_cleanup(Setup, Call, Catcher, Cleanup) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  hooks predicates for writing and assert compiled entity terms
+%  hooks predicates for writing and asserting compiled entity terms
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
