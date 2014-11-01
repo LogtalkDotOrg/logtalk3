@@ -108,10 +108,10 @@
 		set_prolog_flag(autoload, Value)
 	).
 
-% SWI-Prolog provides sleep/1 instead of the thread_sleep/1 predicates
-% specified in the ISO Prolog Threads standardization proposal; we simply
-% defined this predicate later this file and pretend that it's a built-in
-% predicate
+% SWI-Prolog provides a sleep/1 predicate instead of the thread_sleep/1
+% predicate specified in the ISO Prolog Threads standardization proposal;
+% we simply defined this predicate later this file and pretend that it's
+% a built-in predicate
 '$lgt_predicate_property'(thread_sleep(_), built_in).
 
 

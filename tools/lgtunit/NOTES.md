@@ -126,9 +126,9 @@ Most of the provided examples also include unit tests.
 
 Parameterized unit tests can be easily defined by using parametric objects.
 
-Note: when using the `(<<)/2` control construct to access and test an object
-internal predicates, make sure that the `context_switching_calls` compiler
-flag is set to `allow` for those objects.
+Note: when using the `(<<)/2` debugging control construct to access and test
+an object internal predicates, make sure that the `context_switching_calls`
+compiler flag is set to `allow` for those objects.
 
 
 Setup and cleanup goals
@@ -144,9 +144,9 @@ Debugging failed unit tests
 ---------------------------
 
 In order to debug failed unit tests, you can compile the unit test objects
-without using the `hook/1` option and use the `(<<)/2` control construct to
-call the individual tests. For example, if you have a `test(test_n)` unit
-test that is failing, you can type:
+without using the `hook/1` option and use the `(<<)/2` debugging control
+construct to call the individual tests. For example, assuming you have a
+`test(test_n)` unit test that is failing, you can type:
 
 	| ?- logtalk_load(my_tests).
 	...
