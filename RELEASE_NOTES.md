@@ -36,6 +36,8 @@ Documentation
 Tools
 -----
 
+* IMPROVED: Documentation of the `ports` tool.
+
 * FIXED: Added missing entries for the `logtalk_make/0-1` built-in predicates
 to the `help` tool.
 

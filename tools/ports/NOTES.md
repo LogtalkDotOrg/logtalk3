@@ -37,8 +37,8 @@ the debugger) that also provide a debug handler, which must be unique in a
 running session.
 
 The Logtalk predicate execution box model is an extended version of the
-original Byrd’s four port model. Besides the `call`, `exit`, `fail`, and
-`redo` ports, Logtalk also defines two (post-)unification ports, `fact`
+original Byrd's four port model. Besides the standard `call`, `exit`, `fail`,
+and `redo` ports, Logtalk also defines two (post-)unification ports, `fact`
 and `rule`, and an `exception` port. This tool counts and reports the
 number of times each port is traversed during the execution of queries.
 It also distinguishes between deterministic exits (reported in the `exit`
@@ -53,13 +53,12 @@ Compiling source files for port profiling
 -----------------------------------------
 
 To compile source files for port profiling, simply compile them in debug mode
-and with the `source_data` flag turned on.
-For example:
+and with the `source_data` flag turned on. For example:
 
 	| ?- logtalk_load(my_source_file, [debug(on), source_data(on)]).
 
-You can also simply turn on the `debug` and `source_data` flags globally before
-compiling your source files:
+Alternatively, you can also simply turn on the `debug` and `source_data` flags
+globally before compiling your source files:
 
 	| ?- set_logtalk_flag(debug, on), set_logtalk_flag(source_data, on).
 
@@ -87,7 +86,30 @@ The profiling data can be reset using the query:
 
 	| ?- ports::reset.
 
-To reset only the data about a single entity, use the query:
+To reset only the data about a specific entity, use the query:
 
 	| ?- ports::reset(Entity).
- 
+
+
+Interpreting profiling data
+---------------------------
+
+Some of the useful information that can be inferred from the profiling data
+include:
+
+- which predicates are called more often (from the `call` port)
+- unexpected failures (from the `fail` port)
+- unwanted non-determinism (from the `*exit` port)
+- performance issues due to backtracking (from the `*exit` and `redo` ports)
+- predicates acting like a generator of possible solutions (from the `*exit` and `redo` ports)
+- inefficient indexing of predicate rules (from the `rule` and `redo` ports)
+
+The profiling data should be analyzed taking into account the expected
+behavior for the profiled predicates.
+
+
+Known issues
+------------
+
+Determinism information is currently not available when using Lean Prolog
+or Quintus Prolog as backend compilers.
