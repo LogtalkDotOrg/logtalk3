@@ -112,9 +112,6 @@ together with the numbers of passed and failed tests. The conditional
 compilation directives can also be used in alternative but note that in this
 case there will be no report on the number of skipped tests.
 
-Deterministic unit tests are currently not available when using Lean Prolog
-or Quintus Prolog as backend compilers.
-
 A single unit test object my include tests for one or more entities (objects,
 protocols, and categories). The entities being tested by an unit test object
 for which code coverage information should be collected are declared using
@@ -204,3 +201,10 @@ Automating running unit tests
 
 You can use the `scripts/logtalk_tester.sh` Bash shell script for automating
 running unit tests. See the `scripts/NOTES.md` file for details.
+
+
+Known issues
+------------
+
+Deterministic unit tests are currently not available when using Lean Prolog
+or Quintus Prolog as backend compilers.
