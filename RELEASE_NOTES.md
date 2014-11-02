@@ -28,10 +28,15 @@ RELEASE NOTES
 3.00.0 Release Candidate 5 - November ??, 2014
 ==============================================
 
+Documentation
+-------------
+
+* IMPROVED: Documentation of the `logtalk_make/0-1` built-in predicates.
+
 Tools
 -----
 
-* FIXED: Add missing entries for the `logtalk_make/0-1` built-in predicates
+* FIXED: Added missing entries for the `logtalk_make/0-1` built-in predicates
 to the `help` tool.
 
 
