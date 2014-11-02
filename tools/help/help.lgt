@@ -25,9 +25,9 @@
 :- object(help).
 
 	:- info([
-		version is 0.178,
+		version is 0.2,
 		author is 'Paulo Moura',
-		date is 2014/06/12,
+		date is 2014/11/02,
 		comment is 'Command-line help for Logtalk built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
@@ -227,6 +227,8 @@
 	built_in_predicate(logtalk_compile, 2, '/manuals/refman/predicates/', 'logtalk_compile_2.html').
 	built_in_predicate(logtalk_load, 1, '/manuals/refman/predicates/', 'logtalk_load_1.html').
 	built_in_predicate(logtalk_load, 2, '/manuals/refman/predicates/', 'logtalk_load_2.html').
+	built_in_predicate(logtalk_make, 0, '/manuals/refman/predicates/', 'logtalk_make_0.html').
+	built_in_predicate(logtalk_make, 1, '/manuals/refman/predicates/', 'logtalk_make_1.html').
 	built_in_predicate(logtalk_library_path, 2, '/manuals/refman/predicates/', 'logtalk_library_path_2.html').
 	built_in_predicate(logtalk_load_context, 2, '/manuals/refman/predicates/', 'logtalk_load_context_2.html').
 
