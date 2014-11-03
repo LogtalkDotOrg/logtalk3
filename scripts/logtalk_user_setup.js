@@ -4,7 +4,7 @@
 //   Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 // 
 //   Logtalk user folder setup script
-//   Last updated on June 11, 2014
+//   Last updated on November 3, 2014
 //
 //   This program is free software: you can redistribute it and/or modify
 //   it under the terms of the GNU General Public License as published by
@@ -164,6 +164,11 @@ link.Save();
 link = WshShell.CreateShortcut(logtalk_user + "\\tools\\lgtdoc\\xml\\lgt2xml.js.lnk");
 link.Description = "Shortcut to lgt2xml script";
 link.TargetPath = logtalk_home + "\\tools\\lgtdoc\\xml\\lgt2xml.js";
+link.Save();
+
+link = WshShell.CreateShortcut(logtalk_user + "\\tools\\lgtdoc\\xml\\lgt2md.js.lnk");
+link.Description = "Shortcut to lgt2md script";
+link.TargetPath = logtalk_home + "\\tools\\lgtdoc\\xml\\lgt2md.js";
 link.Save();
 
 link = WshShell.CreateShortcut(logtalk_user + "\\tools\\lgtdoc\\xml\\lgt2txt.js.lnk");

@@ -10,6 +10,9 @@
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
+% 
+%   XSLT stylesheet for converting XML documenting files into PDF files
+%   Last updated on November 3, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -627,14 +630,14 @@
 				font-family="serif" 
 				keep-with-next="always"
 				space-before="4pt">
-     		mode - number_of_proofs:
+     		mode - number of proofs:
      	</fo:block>
 		<xsl:for-each select="mode">
 			<fo:block
 					font-size="9pt"
 					font-family="monospace"
 					margin-left="10mm">
-				<xsl:value-of select="template"/> - <xsl:value-of select="solutions"/>
+				<xsl:value-of select="template"/> - <xsl:value-of select="proofs"/>
 			</fo:block>
 		</xsl:for-each>
 	</xsl:if>

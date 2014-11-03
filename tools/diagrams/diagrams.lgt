@@ -28,11 +28,11 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/07/27,
+		date is 2014/11/03,
 		comment is 'Predicates for generating all supported diagrams for libraries and files in one step using the specified format.',
 		parnames is ['Format'],
 		remarks is [
-			'Common options:' - 'title/1, date/1, output_directory/1, relation_labels/1, node_type_captions/1, exclude_files/1, exclude_libraries/1, url_prefixes/1, omit_path_prefix/1, entity_url_suffix_target/2, and layout/1.'
+			'Common options' - 'title/1, date/1, output_directory/1, relation_labels/1, node_type_captions/1, exclude_files/1, exclude_libraries/1, url_prefixes/1, omit_path_prefix/1, entity_url_suffix_target/2, and layout/1.'
 		]
 	]).
 

@@ -1,10 +1,10 @@
-.TH lgt2txt 1 "November 3, 2014" "Logtalk 3.00.0" "Logtalk Documentation"
+.TH lgt2md 1 "November 3, 2014" "Logtalk 3.00.0" "Logtalk Documentation"
 
 .SH NAME
-lgt2txt \- Logtalk script for converting XML documenting files into text files
+lgt2md \- Logtalk script for converting XML documenting files into Markdown text files
 
 .SH SYNOPSIS
-.B lgt2txt
+.B lgt2md
 [
 .B \-d
 .I directory
@@ -14,16 +14,16 @@ lgt2txt \- Logtalk script for converting XML documenting files into text files
 .I processor
 ]
 .br
-.B lgt2txt
+.B lgt2md
 .B \-h
 
 .SH DESCRIPTION
-\f3lgt2txt\f1 is a Logtalk script for converting all Logtalk XML documenting files in the current directory into text files. Assumes UTF-8 encoding.
+\f3lgt2md\f1 is a Logtalk script for converting all Logtalk XML documenting files in the current directory into Markdown text files. Assumes UTF-8 encoding.
 
 .SH OPTIONS
 .TP
 .BI \-d\ directory
-Output directory for the text files.
+Output directory for the Markdown text files.
 .TP
 .BI \-p\ processor
 XSLT processor.
@@ -53,7 +53,7 @@ The Logtalk custom entities file.
 .BI $LOGTALKHOME/tools/lgtdoc/xml/logtalk.xsd
 The Logtalk XML Schema file.
 .TP
-.BI $LOGTALKUSER/tools/lgtdoc/xml/lgttxt.xsl
+.BI $LOGTALKUSER/tools/lgtdoc/xml/lgtmd.xsl
 The default XSLT file.
 
 .SH "SEE ALSO"
@@ -61,7 +61,7 @@ The Logtalk website at <http://logtalk.org/>
 .PP
 The Logtalk User and Reference Manuals at \f2$LOGTALKHOME/manuals/index.html\f1
 .PP
-logtalk_user_setup(1),\ lgt2html(1),\ lgt2xml(1),\ lgt2pdf(1),\ lgt2md(1)
+logtalk_user_setup(1),\ lgt2html(1),\ lgt2xml(1),\ lgt2pdf(1),\ lgt2txt(1)
 
 .SH AUTHOR
 Paulo Moura <pmoura@logtalk.org>

@@ -9,6 +9,9 @@
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
+% 
+%   XSLT stylesheet for viewing XML documenting files in a browser
+%   Last updated on November 3, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -207,9 +210,9 @@
 			<dd><code><xsl:value-of select="meta" /></code></dd>
 		</xsl:if>
 		<xsl:if test="mode">
-		<dt>mode - number_of_proofs:</dt>
+		<dt>mode - number of proofs:</dt>
 		<xsl:for-each select="mode" xml:space="preserve">
-			<dd><code><xsl:value-of select="template" /> - <xsl:value-of select="solutions" /></code></dd>
+			<dd><code><xsl:value-of select="template" /> - <xsl:value-of select="proofs" /></code></dd>
 		</xsl:for-each>
 		</xsl:if>
 		<xsl:if test="exceptions">

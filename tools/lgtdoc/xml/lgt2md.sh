@@ -5,7 +5,7 @@
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 ## 
-##   XML documenting files to XML conversion script 
+##   XML documenting files to Mardown text files conversion script 
 ##   Last updated on November 3, 2014
 ## 
 ##   This program is free software: you can redistribute it and/or modify
@@ -83,102 +83,56 @@ elif ! [ -d "$LOGTALKUSER" ]; then
 fi
 echo
 
-format=xhtml
-index_file=index.html
-index_title="Entity documentation index"
+xslt="$LOGTALKUSER/tools/lgtdoc/xml/lgtmd.xsl"
+
+processor=xsltproc
+# processor=xalan
+# processor=sabcmd
+
+directory="."
 
 usage_help()
 {
 	echo 
-	echo "This script generates an index for all the Logtalk XML files"
-	echo "documenting files in the current directory"
+	echo "This script converts all Logtalk XML documenting files in the"
+	echo "current directory to Markdown text files"
 	echo
 	echo "Usage:"
-	echo "  `basename $0` [-f format] [-i index] [-t title]"
+	echo "  `basename $0` [-d directory] [-p processor]"
 	echo "  `basename $0` -h"
 	echo
 	echo "Optional arguments:"
-	echo "  -f format of the index file (either xhtml or html; default is $format)"
-	echo "  -i name of the index file (default is $index_file)"
-	echo "  -t title to be used on the index file (default is $index_title)"
+	echo "  -d output directory for the text files (default is $directory)"
+	echo "  -p XSLT processor (xsltproc, xalan, or sabcmd; default is $processor)"
 	echo "  -h help"
 	echo
 	exit 1
 }
 
-create_index_file()
-{
-	echo "" > "$index_file"
-
-	case "$format" in
-		xhtml)
-			echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>" >> "$index_file"
-			echo "<?xml-stylesheet href=\"logtalk.css\" type=\"text/css\"?>" >> "$index_file"
-			echo "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">" >> "$index_file"
-			echo "<html lang=\"en\" xml:lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\">" >> "$index_file"
-			;;
-		html)
-			echo "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">" >> "$index_file"
-			echo "<html>" >> "$index_file"
-			;;
-	esac
-
-	echo "<head>" >> "$index_file"
-	echo "    <meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"/>" >> "$index_file"
-	echo "    <title>"$index_title"</title>" >> "$index_file"
-	echo "    <link rel=\"stylesheet\" href=\"logtalk.css\" type=\"text/css\"/>" >> "$index_file"
-	echo "</head>" >> "$index_file"
-	echo "<body>" >> "$index_file"
-	echo "<h1>"$index_title"</h1>" >> "$index_file"
-	echo "<ul>" >> "$index_file"
-
-	for file in `grep -l "<logtalk" *.xml`; do
-		name="`expr "$file" : '\(.*\)\.[^./]*$' \| "$file"`"
-		entity=${name%_*}
-		pars=${name##*_}
-		echo "  indexing $file"
-		if [ $pars -gt 0 ]
-		then
-			echo "    <li><a href=\""$file"\">"$entity"/"$pars"</a></li>" >> "$index_file"
-		else
-			echo "    <li><a href=\""$file"\">"$entity"</a></li>" >> "$index_file"
-		fi
-	done
-
-	echo "</ul>" >> "$index_file"
-
-	date="`eval date`"
-
-	echo "<p>Generated on "$date"</p>" >> "$index_file"
-	echo "</body>" >> "$index_file"
-	echo "</html>" >> "$index_file"
-}
-
-while getopts "f:i:t:h" Option
+while getopts "d:p:h" Option
 do
 	case $Option in
-		f) f_arg="$OPTARG";;
-		i) i_arg="$OPTARG";;
-		t) t_arg="$OPTARG";;
+		d) d_arg="$OPTARG";;
+		p) p_arg="$OPTARG";;
 		h) usage_help;;
 		*) usage_help;;
 	esac
 done
 
-if [ "$f_arg" != "" ] && [ "$f_arg" != "xhtml" ] && [ "$f_arg" != "html" ] ; then
-	echo "Error! Unsupported output format: $f_arg"
+if [ "$d_arg" != "" ] && [ ! -d "$d_arg" ] ; then
+	echo "Error! directory does not exists: $d_arg"
 	usage_help
 	exit 1
-elif [ "$f_arg" != "" ] ; then
-	format=$f_arg
+elif [ "$d_arg" != "" ] ; then
+	directory=$d_arg
 fi
 
-if [ "$i_arg" != "" ] ; then
-	index_file=$i_arg
-fi
-
-if [ "$t_arg" != "" ] ; then
-	index_title=$t_arg
+if [ "$p_arg" != "" ] && [ "$p_arg" != "fop" ] && [ "$p_arg" != "xep" ] && [ "$p_arg" != "xinc" ] ; then
+	echo "Error! Unsupported XSL-FO processor: $p_arg"
+	usage_help
+	exit 1
+elif [ "$p_arg" != "" ] ; then
+	processor=$p_arg
 fi
 
 if ! [ -e "./logtalk.dtd" ] ; then
@@ -193,24 +147,30 @@ if ! [ -e "./logtalk.xsd" ] ; then
 	cp "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk.xsd .
 fi
 
-if ! [ -e "./logtalk.css" ] ; then
-	cp "$LOGTALKUSER"/tools/lgtdoc/xml/logtalk.css .
-fi
-
-if ! [ -e "./lgtxml.xsl" ] ; then
-	cp "$LOGTALKUSER"/tools/lgtdoc/xml/lgtxml.xsl .
-fi
-
-if [ `(ls *.xml | wc -l) 2> /dev/null` -gt 0 ] ; then
+if [ `(grep -l "<logtalk" *.xml | wc -l) 2> /dev/null` -gt 0 ] ; then
 	echo
-	echo "generating $index_file file..."
-	create_index_file
-	echo "$index_file file generated"
+	echo "converting XML files to Markdown text files..."
+	for file in `grep -l "<logtalk" *.xml`; do
+		echo "  converting $file"
+		name="`expr "$file" : '\(.*\)\.[^./]*$' \| "$file"`"
+		case "$processor" in
+			xsltproc)	eval xsltproc -o \"$directory\"/\"$name.md\" \"$xslt\" \"$file\";;
+			xalan)		eval xalan -o \"$directory\"/\"$name.md\" \"$file\" \"$xslt\";;
+			sabcmd)		eval sabcmd \"$xslt\" \"$file\" \"$directory\"/\"$name.md\";;
+		esac
+	done
+	echo "conversion done"
 	echo
 else
 	echo
 	echo "No XML files exist in the current directory!"
 	echo
+fi
+
+if [ "$PWD" != "$LOGTALKHOME"/xml ] ; then
+	rm -f ./logtalk.dtd
+	rm -f ./logtalk.xsd
+	rm -f ./custom.ent
 fi
 
 exit 0

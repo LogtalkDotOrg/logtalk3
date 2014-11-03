@@ -7,13 +7,13 @@
 		date is 2006/1/21,
 		comment is 'Portable operating system access protocol.',
 		remarks is [
-			'File names overview:' - 'The main idea is that file names should be operating-system independent. As such, predicates are needed to convert between portable file names and operating-system specific file names. The solution chosen is to use URL syntax for portable file names.',
-			'Local and remote file names:' - 'A (portable) file name may point to either a local file or a remote file.',
-			'URL file names:' - 'These are file names which start with an access protocol (e.g. {http, https, ftp, gopher, file}://).',
-			'Absolute file names:' - 'These are file names that always point to a local file. They always start with a slash character (/).',
-			'Relative file names:' - 'These are file names that always point to a local file. A file name is a relative file name if it does not start with a slash character or a file access protocol (including the :// characters).',
+			'File names overview' - 'The main idea is that file names should be operating-system independent. As such, predicates are needed to convert between portable file names and operating-system specific file names. The solution chosen is to use URL syntax for portable file names.',
+			'Local and remote file names' - 'A (portable) file name may point to either a local file or a remote file.',
+			'URL file names' - 'These are file names which start with an access protocol (e.g. {http, https, ftp, gopher, file}://).',
+			'Absolute file names' - 'These are file names that always point to a local file. They always start with a slash character (/).',
+			'Relative file names' - 'These are file names that always point to a local file. A file name is a relative file name if it does not start with a slash character or a file access protocol (including the :// characters).',
 			'Canonical file names' - 'These are file names where any environment variables was been expanded and where the sequences for current (.) and parent (..) directories have been resolved.',
-			'Time stamps:' - 'Time stamps are used for representing current, system time and in file properties to represent creation, modification, and access times. Time stamps are system-dependent terms but that can be compared (e.g. when testing which of two given files is older).']
+			'Time stamps' - 'Time stamps are used for representing current, system time and in file properties to represent creation, modification, and access times. Time stamps are system-dependent terms but that can be compared (e.g. when testing which of two given files is older).']
 	]).
 
 	:- public(make_directory/1).

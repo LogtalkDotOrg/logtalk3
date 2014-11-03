@@ -9,6 +9,9 @@
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
+% 
+%   XSLT stylesheet for converting XML documenting files into text files
+%   Last updated on November 3, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -248,9 +251,9 @@
 		<xsl:value-of select="$tab" /><xsl:value-of select="coinductive" /><xsl:value-of select="$nl" />
 	</xsl:if>
 	<xsl:if test="mode">
-		<xsl:text>mode - number_of_proofs:</xsl:text><xsl:value-of select="$nl" />
+		<xsl:text>mode - number of proofs:</xsl:text><xsl:value-of select="$nl" />
 		<xsl:for-each select="mode">
-			<xsl:value-of select="$tab" /><xsl:value-of select="template" /><xsl:text> - </xsl:text><xsl:value-of select="solutions" /><xsl:value-of select="$nl" />
+			<xsl:value-of select="$tab" /><xsl:value-of select="template" /><xsl:text> - </xsl:text><xsl:value-of select="proofs" /><xsl:value-of select="$nl" />
 		</xsl:for-each>
 	</xsl:if>
 	<xsl:if test="exceptions">

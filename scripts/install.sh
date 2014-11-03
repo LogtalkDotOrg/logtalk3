@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Logtalk installation script
-##   Last updated on August 29, 2014
+##   Last updated on November 3, 2014
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -129,12 +129,13 @@ ln -sf ../share/logtalk/scripts/logtalk_backend_select.sh logtalk_backend_select
 ln -sf ../share/logtalk/tools/lgtdoc/xml/lgt2pdf.sh lgt2pdf
 ln -sf ../share/logtalk/tools/lgtdoc/xml/lgt2html.sh lgt2html
 ln -sf ../share/logtalk/tools/lgtdoc/xml/lgt2xml.sh lgt2xml
+ln -sf ../share/logtalk/tools/lgtdoc/xml/lgt2md.sh lgt2md
 ln -sf ../share/logtalk/tools/lgtdoc/xml/lgt2txt.sh lgt2txt
 
 echo "Links to the \"logtalk_user_setup\", \"logtalk_backend_select\","
 echo "\"logtalk_version_select\", \"logtalk_tester\", \"lgt2pdf\", \"lgt2html\","
-echo "\"lgt2xml\", and \"lgt2txt\" scripts have been created on \"$prefix/bin\";"
-echo "you may need to add this directory to your execution path."
+echo "\"lgt2xml\", \"lgt2md\", and \"lgt2txt\" scripts have been created on"
+echo " \"$prefix/bin\"; ensure that this directory is in your execution path."
 echo
 
 ln -sf ../share/logtalk/integration/bplgt.sh bplgt

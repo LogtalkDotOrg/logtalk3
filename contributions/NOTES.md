@@ -84,4 +84,4 @@ library entities using the queries:
 After generating the (X)HTML and/or PDF documentation, you can delete the
 temporary directories:
 
-	$ rm -rf $LOGTALKUSER/docs/tmp*
+	$ cd .. && rm -rf $LOGTALKUSER/docs/tmp*

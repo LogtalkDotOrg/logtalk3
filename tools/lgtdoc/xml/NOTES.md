@@ -51,7 +51,6 @@ Logtalk user folder for details.
 
 Brief description of each file in this folder:
 
-
 - `lgtxml.xsl`  
 	XSLT file for viewing XML files directly in a browser. The links 
 	in the (internally generated) HTML 4.01 files point to related XML 
@@ -71,6 +70,10 @@ Brief description of each file in this folder:
 	is assumed. Edit the file if you use a different encoding. This XSLT
 	file adds anchors to each predicate section using as name the predicate
 	indicator.
+
+- `lgtmd.xsl`  
+	XSLT file to output Markdown text files from the XML files. UTF-8 encoding 
+	is assumed. Edit the file if you use a different encoding.
 
 - `lgttxt.xsl`  
 	XSLT file to output simple text files from the XML files. UTF-8 encoding 
@@ -114,7 +117,6 @@ Brief description of each file in this folder:
 	Cascade style sheet file to render the HTML/XHTML output of the XSL 
 	files in a web browser.
 
-
 - `lgt2pdf.sh` and `lgt2pdf.js` 
 	Sample scripts to batch convert XML files to PDF files
 
@@ -147,7 +149,6 @@ Brief description of each file in this folder:
 	`lgt2html.sh -h`; depending on your Logtalk installation, you may simply 
 	need to type `lgt2html` in order to run the script).
 
-
 - `lgt2xml.sh` and `lgt2xml.js`  
 
 	Sample scripts for indexing the XML files in the current directory 
@@ -161,6 +162,15 @@ Brief description of each file in this folder:
 	of the available optional parameters (type `cscript lgt2xml.js help` or 
 	`lgt2xml.sh -h`; depending on your Logtalk installation, you may simply 
 	need to type `lgt2xml` in order to run the script).
+
+- `lgt2md.sh` and `lgt2md.js`  
+	Sample scripts to batch convert XML files to Markdown text files.
+
+	The scripts should be called from the directory containing the XML files 
+	you wish to convert. Call the scripts with the help option for a description 
+	of the available optional parameters (type `cscript lgt2md.js help` or 
+	`lgt2md.sh -h`; depending on your Logtalk installation, you may simply 
+	need to type `lgt2md` in order to run the script).
 
 - `lgt2txt.sh` and `lgt2txt.js`  
 	Sample scripts to batch convert XML files to text files.

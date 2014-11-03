@@ -27,22 +27,12 @@ be loaded by typing:
 	| ?- logtalk_load(lgtdoc(loader)).
 
 Documenting Logtalk source code (with this tool) requires compiling
-source files using the `source_data(on)` compiler option. For a single
-source file, you can type, for example:
+source files using the `source_data(on)` compiler option. For example:
 
 	| ?- logtalk_load(source_file, [source_data(on)]).
 
-For multiple source files, assuming you use a loader file, you can set
-the `source_data` flag in the loader's `initialization/1` directive:
-
-	:- initialization((
-		set_logtalk_flag(source_data, on),
-		logtalk_load(source_file_1),
-		...
-	)).
-
-In alternative, you may also turn on the `source_data` flag globally by
-typing:
+In alternative, you may also turn on the `source_data` flag globally
+by typing:
 
 	| ?- set_logtalk_flag(source_data, on).
 
@@ -53,8 +43,9 @@ files. The documenting predicates allows you to set several options
 for the XML files, including the output directory. To consult the
 documentation of the `lgtdoc` tool, open the `docs/tools.html` file
 in a web browser. The `lgtdoc/xml` directory includes several ready
-to use scripts for converting the XML documenting files to e.g. PDF
-or (X)HTML. See the `lgtdoc/xml/NOTES.md` for details.
+to use scripts for converting the XML documenting files to (X)HTML,
+PDF, Markdown, or plain text files. See the `lgtdoc/xml/NOTES.md`
+for details.
 
 All source files are formatted using tabs (the recommended setting
 is a tab width equivalent to 4 spaces).

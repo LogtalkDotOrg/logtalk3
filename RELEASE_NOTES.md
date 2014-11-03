@@ -36,6 +36,8 @@ Documentation
 Tools
 -----
 
+* ADDED: Support for exporting Markdown text files to the `lgtdoc` tool.
+
 * IMPROVED: Documentation of the `ports` tool.
 
 * FIXED: Added missing entries for the `logtalk_make/0-1` built-in predicates

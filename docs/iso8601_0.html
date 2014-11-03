@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>1.01</code>
+            <code>1.02</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2014/9/26</code>
+            <code>2014/11/3</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -64,28 +64,28 @@
                 <li><code>Day</code> &ndash; <span class="comment">Normally an integer between 1 and 31 inclusive depending upon month</span></li>
               </ul>
             </dd>
-            <dt class="key">mode &ndash; number_of_proofs:</dt>
+            <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>date(?integer,?integer,?integer,?integer) &ndash; zero_or_one</code>
             </dd>
             <dt class="key">examples:</dt>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Current date (i.e., today):</dt>
+                <dt class="comment">Current date (i.e., today)</dt>
                 <dd class="code">date(JD,Year,Month,Day)</dd>
                 <dd class="code">JD=2453471,Year=2005,Month=4,Day=10</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Convert a date to its Julian day number:</dt>
+                <dt class="comment">Convert a date to its Julian day number</dt>
                 <dd class="code">date(JD,2000,2,29)</dd>
                 <dd class="code">JD=2451604</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Convert a Julian day number to its date:</dt>
+                <dt class="comment">Convert a Julian day number to its date</dt>
                 <dd class="code">date(2451604,Year,Month,Day)</dd>
                 <dd class="code">Year=2000,Month=2,Day=29</dd>
               </dl>
@@ -150,35 +150,35 @@
                 <li><code>DoW</code> &ndash; <span class="comment">Day of week, where Monday=1, Tuesday=2, ..., Sunday=7</span></li>
               </ul>
             </dd>
-            <dt class="key">mode &ndash; number_of_proofs:</dt>
+            <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>date(?integer,?integer,?integer,?integer,?integer) &ndash; zero_or_one</code>
             </dd>
             <dt class="key">examples:</dt>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Get the Julian and the day-of-week # of a date:</dt>
+                <dt class="comment">Get the Julian and the day-of-week # of a date</dt>
                 <dd class="code">date(JD,2000,2,29,DoW)</dd>
                 <dd class="code">JD=2451604,DoW=2</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Check the validity of a given date (day-of-week is 2, not 4):</dt>
+                <dt class="comment">Check the validity of a given date (day-of-week is 2, not 4)</dt>
                 <dd class="code">date(_,2002,3,5,4)</dd>
                 <dd class="code">no</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Get the Julian day of a given date if it is a Sunday:</dt>
+                <dt class="comment">Get the Julian day of a given date if it is a Sunday</dt>
                 <dd class="code">date(JD,2004,2,29,7)</dd>
                 <dd class="code">JD=2453065</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Get the date and day-of-week # of a Julian:</dt>
+                <dt class="comment">Get the date and day-of-week # of a Julian</dt>
                 <dd class="code">date(2451545,Year,Month,Day,DoW)</dd>
                 <dd class="code">Year=2000,Month=1,Day=1,DoW=6</dd>
               </dl>
@@ -209,42 +209,42 @@
                 <li><code>Week</code> &ndash; <span class="comment">Compound term, week(WeekNo,ActualYear), of a day</span></li>
               </ul>
             </dd>
-            <dt class="key">mode &ndash; number_of_proofs:</dt>
+            <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>date(?integer,?integer,?integer,?integer,?integer,?compound) &ndash; zero_or_one</code>
             </dd>
             <dt class="key">examples:</dt>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Get the day-of-week and week number of a date:</dt>
+                <dt class="comment">Get the day-of-week and week number of a date</dt>
                 <dd class="code">date(_,2000,1,1,DoW,Week)</dd>
                 <dd class="code">DoW=6,Week=week(52,1999)</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Get the week number and year of this week:</dt>
+                <dt class="comment">Get the week number and year of this week</dt>
                 <dd class="code">date(_,_,_,_,_,Week)</dd>
                 <dd class="code">Week=week(7,2004)</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Get the Julian number and the week of a date if it is a Sunday:</dt>
+                <dt class="comment">Get the Julian number and the week of a date if it is a Sunday</dt>
                 <dd class="code">date(JD,2004,2,29,7,Week)</dd>
                 <dd class="code">JD=2453065,Week=week(9,2004)</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Get the day-of-week and week of a Julian day number:</dt>
+                <dt class="comment">Get the day-of-week and week of a Julian day number</dt>
                 <dd class="code">date(2453066,_,_,_,DoW,Week)</dd>
                 <dd class="code">DoW=1,Week=week(10,2004)</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Check that given date data matches:</dt>
+                <dt class="comment">Check that given date data matches</dt>
                 <dd class="code">date(_,2004,3,1,1,week(10,2004))</dd>
                 <dd class="code">yes</dd>
               </dl>
@@ -258,42 +258,42 @@
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Ditto for Sunday:</dt>
+                <dt class="comment">Ditto for Sunday</dt>
                 <dd class="code">date(_,Year,Month,Day,7,week(1,2005))</dd>
                 <dd class="code">Year=2005,Month=1,Day=9</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Ditto for Tuesday in following week:</dt>
+                <dt class="comment">Ditto for Tuesday in following week</dt>
                 <dd class="code">date(_,Year,Month,Day,9,week(1,2005))</dd>
                 <dd class="code">Year=2005,Month=1,Day=11</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Ditto for Thursday in the prior week:</dt>
+                <dt class="comment">Ditto for Thursday in the prior week</dt>
                 <dd class="code">date(_,Year,Month,Day,4,week(0,2005))</dd>
                 <dd class="code">Year=2004,Month=12,Day=30</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Ditto for Tuesday two weeks prior:</dt>
+                <dt class="comment">Ditto for Tuesday two weeks prior</dt>
                 <dd class="code">date(_,Year,Month,Day,2,week(-1,2005))</dd>
                 <dd class="code">Year=2004,Month=12,Day=21</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Ditto for Saturday:</dt>
+                <dt class="comment">Ditto for Saturday</dt>
                 <dd class="code">date(_,Year,Month,Day,6,week(53,2004))</dd>
                 <dd class="code">Year=2005,Month=1,Day=1</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Ditto for Monday (note automatic compensation of nonexistent week number):</dt>
+                <dt class="comment">Ditto for Monday (note automatic compensation of nonexistent week number)</dt>
                 <dd class="code">date(_,Year,Month,Day,1,week(60,2004))</dd>
                 <dd class="code">Year=2005,Month=2,Day=14</dd>
               </dl>
@@ -325,63 +325,63 @@
                 <li><code>DoY</code> &ndash; <span class="comment">Day of year (NB! calendar year, not week # year)</span></li>
               </ul>
             </dd>
-            <dt class="key">mode &ndash; number_of_proofs:</dt>
+            <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>date(?integer,?integer,?integer,?integer,?integer,?compound,?integer) &ndash; zero_or_one</code>
             </dd>
             <dt class="key">examples:</dt>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Get the date and day-of-year of a Julian number:</dt>
+                <dt class="comment">Get the date and day-of-year of a Julian number</dt>
                 <dd class="code">date(2451649,Year,Month,Day,_,_,DoY)</dd>
                 <dd class="code">Year=2000,Month=4,Day=14,DoY=105</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Get the Julian number, week number and day-of-year of a date, confirming that it is a Sunday:</dt>
+                <dt class="comment">Get the Julian number, week number and day-of-year of a date, confirming that it is a Sunday</dt>
                 <dd class="code">date(JD,2004,2,29,7,Week,DoY)</dd>
                 <dd class="code">JD=2453065,Week=week(9,2004),DoY=60</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Confirm that a date is, in fact, a specific day-of-year:</dt>
+                <dt class="comment">Confirm that a date is, in fact, a specific day-of-year</dt>
                 <dd class="code">date(_,2004,3,1,_,_,61)</dd>
                 <dd class="code">yes</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Get the Julian number, week day and day-of-year of a date:</dt>
+                <dt class="comment">Get the Julian number, week day and day-of-year of a date</dt>
                 <dd class="code">date(JD,2004,10,18,DoW,_,DoY)</dd>
                 <dd class="code">JD=2453297,DoW=1,DoY=292</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Get today's day-of-year:</dt>
+                <dt class="comment">Get today's day-of-year</dt>
                 <dd class="code">date(_,_,_,_,_,_,DoY)</dd>
                 <dd class="code">DoY=54</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Get all missing date data (excl. Julian number) for the 60th calendar day of 2004:</dt>
+                <dt class="comment">Get all missing date data (excl. Julian number) for the 60th calendar day of 2004</dt>
                 <dd class="code">date(_,2004,Month,Day,DoW,Week,60)</dd>
                 <dd class="code">Month=2,Day=29,DoW=7,Week=week(9,2004)</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Match given date data and, if true, return the missing data (excl. Julian number):</dt>
+                <dt class="comment">Match given date data and, if true, return the missing data (excl. Julian number)</dt>
                 <dd class="code">date(_,2004,3,Day,DoW,Week,61)</dd>
                 <dd class="code">Day=1,DoW=1,Week=week(10,2004)</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Ditto (the 61st day-of-year cannot be both day 1 and 2 of the month):</dt>
+                <dt class="comment">Ditto (the 61st day-of-year cannot be both day 1 and 2 of the month)</dt>
                 <dd class="code">date(_,2004,_,2,_,_,61)</dd>
                 <dd class="code">no</dd>
               </dl>
@@ -409,7 +409,7 @@
                 <li><code>String</code> &ndash; <span class="comment">ISO 8601 formatted string correspondent to Components</span></li>
               </ul>
             </dd>
-            <dt class="key">mode &ndash; number_of_proofs:</dt>
+            <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>date_string(+atom,+integer,?atom) &ndash; zero_or_one</code>
             </dd>
@@ -419,182 +419,182 @@
             <dt class="key">examples:</dt>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Date, complete, basic (section 5.2.1.1):</dt>
+                <dt class="comment">Date, complete, basic (section 5.2.1.1)</dt>
                 <dd class="code">date_string('YYYYMMDD',[2004,2,29],String)</dd>
                 <dd class="code">String='20040229'</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Date, complete, basic (section 5.2.1.1):</dt>
+                <dt class="comment">Date, complete, basic (section 5.2.1.1)</dt>
                 <dd class="code">date_string('YYYYMMDD',Components,'20040229')</dd>
                 <dd class="code">Components=[2004,2,29]</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Date, complete, extended (section 5.2.1.1):</dt>
+                <dt class="comment">Date, complete, extended (section 5.2.1.1)</dt>
                 <dd class="code">date_string('YYYY-MM-DD',[2003,12,16],String)</dd>
                 <dd class="code">String='2003-12-16'</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Date, complete, extended (section 5.2.1.1):</dt>
+                <dt class="comment">Date, complete, extended (section 5.2.1.1)</dt>
                 <dd class="code">date_string('YYYY-MM-DD',Components,'2003-12-16')</dd>
                 <dd class="code">Components=[2003,12,16]</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Date, complete, extended (section 5.2.1.1):</dt>
+                <dt class="comment">Date, complete, extended (section 5.2.1.1)</dt>
                 <dd class="code">date_string('YYYY-MM-DD',_,String)</dd>
                 <dd class="code">String='2004-02-17'</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Date, complete, extended (section 5.2.1.1):</dt>
+                <dt class="comment">Date, complete, extended (section 5.2.1.1)</dt>
                 <dd class="code">date_string('YYYY-MM-DD',Components,'2004-02-17')</dd>
                 <dd class="code">Components=[2004,2,17]</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Date, reduced, month (section 5.2.1.2 a):</dt>
+                <dt class="comment">Date, reduced, month (section 5.2.1.2 a)</dt>
                 <dd class="code">date_string('YYYY-MM',[2004,9,18],String)</dd>
                 <dd class="code">String='2004-09'</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Date, reduced, month (section 5.2.1.2 a):</dt>
+                <dt class="comment">Date, reduced, month (section 5.2.1.2 a)</dt>
                 <dd class="code">date_string('YYYY-MM',Components,'2004-09')</dd>
                 <dd class="code">Components=[2004,9]</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Date, reduced, year (section 5.2.1.2 b):</dt>
+                <dt class="comment">Date, reduced, year (section 5.2.1.2 b)</dt>
                 <dd class="code">date_string('YYYY',[1900,7,24],String)</dd>
                 <dd class="code">String='1900'</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Date, reduced, year (section 5.2.1.2 b):</dt>
+                <dt class="comment">Date, reduced, year (section 5.2.1.2 b)</dt>
                 <dd class="code">date_string('YYYY',Components,'1900')</dd>
                 <dd class="code">Components=[1900]</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Date, reduced, century (section 5.2.1.2 c):</dt>
+                <dt class="comment">Date, reduced, century (section 5.2.1.2 c)</dt>
                 <dd class="code">date_string('YY',2456557,String)</dd>
                 <dd class="code">String='20'</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Date, reduced, century (section 5.2.1.2 c):</dt>
+                <dt class="comment">Date, reduced, century (section 5.2.1.2 c)</dt>
                 <dd class="code">date_string('YY',Components,'20')</dd>
                 <dd class="code">Components=[20]</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Date, ordinal, complete (section 5.2.2.1):</dt>
+                <dt class="comment">Date, ordinal, complete (section 5.2.2.1)</dt>
                 <dd class="code">date_string('YYYYDDD',[2005,3,25],String)</dd>
                 <dd class="code">String='2005084'</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Date, ordinal, complete (section 5.2.2.1):</dt>
+                <dt class="comment">Date, ordinal, complete (section 5.2.2.1)</dt>
                 <dd class="code">date_string('YYYYDDD',Components,'2005084')</dd>
                 <dd class="code">Components=[2005,84]</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Date, ordinal, extended (section 5.2.2.1):</dt>
+                <dt class="comment">Date, ordinal, extended (section 5.2.2.1)</dt>
                 <dd class="code">date_string('YYYY-DDD',[1854,12,4],String)</dd>
                 <dd class="code">String='1854-338'</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Date, ordinal, extended (section 5.2.2.1):</dt>
+                <dt class="comment">Date, ordinal, extended (section 5.2.2.1)</dt>
                 <dd class="code">date_string('YYYY-DDD',Components,'1854-338')</dd>
                 <dd class="code">Components=[1854,338]</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Week, complete, basic (section 5.2.3.1):</dt>
+                <dt class="comment">Week, complete, basic (section 5.2.3.1)</dt>
                 <dd class="code">date_string('YYYYWwwD',[2000,1,2],String)</dd>
                 <dd class="code">String='1999W527'</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Week, complete, basic (section 5.2.3.1):</dt>
+                <dt class="comment">Week, complete, basic (section 5.2.3.1)</dt>
                 <dd class="code">date_string('YYYYWwwD',Components,'1999W527')</dd>
                 <dd class="code">Components=[1999,52,7]</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Week, complete, extended (section 5.2.3.1):</dt>
+                <dt class="comment">Week, complete, extended (section 5.2.3.1)</dt>
                 <dd class="code">date_string('YYYY-Www-D',[2003,12,29],String)</dd>
                 <dd class="code">String='2004-W01-1'</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Week, complete, extended (section 5.2.3.1):</dt>
+                <dt class="comment">Week, complete, extended (section 5.2.3.1)</dt>
                 <dd class="code">date_string('YYYY-Www-D',Components,'2004-W01-1')</dd>
                 <dd class="code">Components=[2004,1,1]</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Week, complete, extended (section 5.2.3.1):</dt>
+                <dt class="comment">Week, complete, extended (section 5.2.3.1)</dt>
                 <dd class="code">date_string('YYYY-Www-D',2453167,String)</dd>
                 <dd class="code">String='2004-W24-4'</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Week, complete, extended (section 5.2.3.1):</dt>
+                <dt class="comment">Week, complete, extended (section 5.2.3.1)</dt>
                 <dd class="code">date_string('YYYY-Www-D',Components,'2004-W24-4')</dd>
                 <dd class="code">Components=[2004,24,4]</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Week, reduced, basic (section 5.2.3.2):</dt>
+                <dt class="comment">Week, reduced, basic (section 5.2.3.2)</dt>
                 <dd class="code">date_string('YYYYWww',[2004,2,29],String)</dd>
                 <dd class="code">String='2004W09'</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Week, reduced, basic (section 5.2.3.2):</dt>
+                <dt class="comment">Week, reduced, basic (section 5.2.3.2)</dt>
                 <dd class="code">date_string('YYYYWww',Components,'2004W09')</dd>
                 <dd class="code">Components=[2004,9]</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Week, reduced, extended (section 5.2.3.2):</dt>
+                <dt class="comment">Week, reduced, extended (section 5.2.3.2)</dt>
                 <dd class="code">date_string('YYYY-Www',[2004,2,29],String)</dd>
                 <dd class="code">String='2004-W09'</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Week, reduced, extended (section 5.2.3.2):</dt>
+                <dt class="comment">Week, reduced, extended (section 5.2.3.2)</dt>
                 <dd class="code">date_string('YYYY-Www',Components,'2004-W09')</dd>
                 <dd class="code">Components=[2004,9]</dd>
               </dl>
@@ -615,35 +615,35 @@
             <dd class="value">
               <code>valid_date(Year,Month,Day)</code>
             </dd>
-            <dt class="key">mode &ndash; number_of_proofs:</dt>
+            <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>valid_date(+integer,+integer,+integer) &ndash; zero_or_one</code>
             </dd>
             <dt class="key">examples:</dt>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Yes, the recent millenium was a leap year:</dt>
+                <dt class="comment">Yes, the recent millenium was a leap year</dt>
                 <dd class="code">valid_date(2000,2,29)</dd>
                 <dd class="code">yes</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">2004 was also a leap year:</dt>
+                <dt class="comment">2004 was also a leap year</dt>
                 <dd class="code">valid_date(2004,2,29)</dd>
                 <dd class="code">yes</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Only 30 days in April:</dt>
+                <dt class="comment">Only 30 days in April</dt>
                 <dd class="code">valid_date(2004,4,31)</dd>
                 <dd class="code">no</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">1 BC was a leap year:</dt>
+                <dt class="comment">1 BC was a leap year</dt>
                 <dd class="code">valid_date(-1,2,29)</dd>
                 <dd class="code">yes</dd>
               </dl>
@@ -669,49 +669,49 @@
                 <li><code>Year</code> &ndash; <span class="comment">The Gregorian calendar year to investigate. If free, it binds to the system year</span></li>
               </ul>
             </dd>
-            <dt class="key">mode &ndash; number_of_proofs:</dt>
+            <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>leap_year(?integer) &ndash; zero_or_one</code>
             </dd>
             <dt class="key">examples:</dt>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">No, the prior centenary was not a leap year:</dt>
+                <dt class="comment">No, the prior centenary was not a leap year</dt>
                 <dd class="code">leap_year(1900)</dd>
                 <dd class="code">no</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">The recent millenium:</dt>
+                <dt class="comment">The recent millenium</dt>
                 <dd class="code">leap_year(2000)</dd>
                 <dd class="code">yes</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">This year:</dt>
+                <dt class="comment">This year</dt>
                 <dd class="code">leap_year(Year)</dd>
                 <dd class="code">Year=2004</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">This year (equivalent to prior query):</dt>
+                <dt class="comment">This year (equivalent to prior query)</dt>
                 <dd class="code">leap_year(_)</dd>
                 <dd class="code">yes</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Next centennial:</dt>
+                <dt class="comment">Next centennial</dt>
                 <dd class="code">leap_year(2100)</dd>
                 <dd class="code">no</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Year 0, equivalent to 1 BC:</dt>
+                <dt class="comment">Year 0, equivalent to 1 BC</dt>
                 <dd class="code">leap_year(0)</dd>
                 <dd class="code">yes</dd>
               </dl>
@@ -760,14 +760,14 @@
                 <li><code>Calendar</code> &ndash; <span class="comment">A compound term, m/3, composed of three main arguments specifying year, month, and a list of week and week day numbers (calendar body).</span></li>
               </ul>
             </dd>
-            <dt class="key">mode &ndash; number_of_proofs:</dt>
+            <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>calendar_month(?integer,?integer,-compound) &ndash; zero_or_one</code>
             </dd>
             <dt class="key">examples:</dt>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Compute the calendar of March, 2005:</dt>
+                <dt class="comment">Compute the calendar of March, 2005</dt>
                 <dd class="code">calendar_month(2005,3,Calendar)</dd>
                 <dd class="code">Calendar=m(2005,3,[w(9,[0,1,2,3,4,5,6]),w(10,[7,8,9,10,11,12,13]),w(11,[14,15,16,17,18,19,20]),w(12,[21,22,23,24,25,26,27]),w(13,[28,29,30,31,0,0,0]),w(0,[0,0,0,0,0,0,0])])</dd>
               </dl>
@@ -795,21 +795,21 @@
                 <li><code>Day</code> &ndash; <span class="comment">Day of month in which Easter Sunday falls for given year</span></li>
               </ul>
             </dd>
-            <dt class="key">mode &ndash; number_of_proofs:</dt>
+            <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>easter_day(?integer,-integer,-integer) &ndash; zero_or_one</code>
             </dd>
             <dt class="key">examples:</dt>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Compute Easter Sunday for a particular year:</dt>
+                <dt class="comment">Compute Easter Sunday for a particular year</dt>
                 <dd class="code">easter_day(2006,Month,Day)</dd>
                 <dd class="code">Month=4,Day=16</dd>
               </dl>
             </dd>
             <dd class="value">
               <dl class="examples">
-                <dt class="comment">Compute Easter Sunday for the current year:</dt>
+                <dt class="comment">Compute Easter Sunday for the current year</dt>
                 <dd class="code">easter_day(Year,Month,Day)</dd>
                 <dd class="code">Year=2005,Month=3,Day=27</dd>
               </dl>
@@ -840,31 +840,31 @@
       <h2>Remarks</h2>
       <div class="section">
         <dl class="remarks">
-          <dt class="comment">Scope:</dt>
+          <dt class="comment">Scope</dt>
           <dd class="text">This object currently provides a powerful, versatile and efficient set of date-handling predicates, which--thanks to Logtalk--may be used as is on a wide range of Prolog compilers. Besides taking time to familiarize oneself with each predicate, the user should take note of the following information.</dd>
         </dl>
         <dl class="remarks">
-          <dt class="comment">Validation of dates:</dt>
+          <dt class="comment">Validation of dates</dt>
           <dd class="text">Date parts are not validated--that is the caller's responsibility! However, not being quite heartless yet, we do provide a predicate for this purpose.</dd>
         </dl>
         <dl class="remarks">
-          <dt class="comment">Date arithmetic:</dt>
+          <dt class="comment">Date arithmetic</dt>
           <dd class="text">Many of the examples illustrate a simplified method of doing date arithmetic. Note, however, that we do not generally recommend this practice--it is all too easy to make mistakes. The safest way of finding the day difference between two dates is to first convert the dates to their Julian day numbers and then subtract one from the other. Similarly, the safe way to add or subtract a day offset to a particular date is to first convert the date to its Julian day number, add or subtract the day offset, and then convert the result to its corresponding date.</dd>
         </dl>
         <dl class="remarks">
-          <dt class="comment">BC years:</dt>
+          <dt class="comment">BC years</dt>
           <dd class="text">ISO 8601 specifies that the Gregorian calendar be used, yet requires that years prior to 1 AD be handled arithmetically, i.e., the year we know as 1 BC is year 0, 2 BC is year -1, 3 BC is year -2 and so on. We do not follow ISO 8601 with regard to the handling of BC years. Our date predicates will accept and interpret an input year 0 as 1 BC; however, a negative year, Year, should always be interpreted as abs(Year) =:= Year BC. We believe that the average person will find our handling of BC years more user-friendly than the ISO 8601 one, but we encourage feedback from users with a view to a possible change in future versions.</dd>
         </dl>
         <dl class="remarks">
-          <dt class="comment">Week numbers:</dt>
+          <dt class="comment">Week numbers</dt>
           <dd class="text">It is possible for a day (date) to have a week number that belongs to another year. Up to three of the first days of a calendar year may belong to the last week (number) of the prior calendar year, and up to three days of the last days of a calendar year may belong to the first week (number) of the next calendar year. It for this reason that the Week parameter in date/6-7 is a compound term, namely week(WeekNo,ActualYear).</dd>
         </dl>
         <dl class="remarks">
-          <dt class="comment">Computation of Gregorian Easter Sunday:</dt>
+          <dt class="comment">Computation of Gregorian Easter Sunday</dt>
           <dd class="text">The algorithm is based upon the "Gaussian rule". Proleptic use is limited to years &gt; 1582 AD, that is, after the introduction of the Gregorian calendar.</dd>
         </dl>
         <dl class="remarks">
-          <dt class="comment">Some Christian feast day offsets from Easter Sunday:</dt>
+          <dt class="comment">Some Christian feast day offsets from Easter Sunday</dt>
           <dd class="text">Carnival Monday: -48 days, Mardi Gras (Shrove Tuesday): -47 days, Ash Wednesday: -46 days, Palm Sunday: -7 days, Easter Friday: -2 days, Easter Saturday: -1 day, Easter Monday: +1 day, Ascension of Christ: +39 days, Whitsunday: +49 days, Whitmonday: +50 days, Feast of Corpus Christi: +60 days.</dd>
         </dl>
       </div>
