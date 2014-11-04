@@ -39,6 +39,10 @@ ISO Prolog Core Standard).
 Prolog adapter and integration files
 ------------------------------------
 
+* CHANGED: The ECLiPSe integration script and shortcut now pass the command-
+line option `-t user` (the name of the top level module) for a user experience
+more similar to other backend Prolog compilers.
+
 * UPDATED: All adapter files to define the `prolog_conformance` flag value.
 
 Documentation

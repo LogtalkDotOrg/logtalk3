@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Integration script for ECLiPSe
-##   Last updated on October 11, 2013
+##   Last updated on November 4, 2014
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -101,4 +101,4 @@ echo
 
 export LOGTALK_STARTUP_DIRECTORY=`pwd`
 
-exec eclipse -L iso -b "$LOGTALKHOME/integration/logtalk_eclipse.pl" "$@"
+exec eclipse -L iso -t user -b "$LOGTALKHOME/integration/logtalk_eclipse.pl" "$@"
