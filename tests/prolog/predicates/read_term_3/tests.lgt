@@ -41,7 +41,9 @@
 	throws(sics_read_term_3_13, error(type_error(list,bar),_)) :-
 		{read_term(user_input, _, bar)}.
 
-	throws(sics_read_term_3_14, error(domain_error(read_option,bar),_)) :-
+	% skip this test for now as some Prolog systems simply ignore non-recognized
+	% read options which make the test hang waiting for user input
+	- throws(sics_read_term_3_14, error(domain_error(read_option,bar),_)) :-
 		{read_term(user_input, _, [bar])}.
 
 	throws(sics_read_term_3_15, error(permission_error(input,stream,user_output),_)) :-
