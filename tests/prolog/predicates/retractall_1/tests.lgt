@@ -22,7 +22,7 @@ insect(bee).
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2014/11/04,
 		comment is 'Unit tests for the ISO Prolog standard retractall/1 built-in predicate.'
 	]).
 
@@ -40,8 +40,13 @@ insect(bee).
 	throws(iso_retractall_1_04, error(type_error(callable,3),_)) :-
 		{retractall(3)}.
 
-	throws(iso_retractall_1_05, [error(permission_error(modify,static_procedure,retractall/1),_), error(permission_error(modify,static_procedure,':'(user,retractall/1)),_)]) :-
-		% the second exception term is used in some of the Prolog compilers supporting modules
-		{retractall(retractall(_))}.
+	:- if(current_logtalk_flag(prolog_conformance, iso_strict)).
+		throws(iso_retractall_1_05, error(permission_error(modify,static_procedure,retractall/1),_)) :-
+			{retractall(retractall(_))}.
+	:- else.
+		throws(iso_retractall_1_05, [error(permission_error(modify,static_procedure,retractall/1),_), error(permission_error(modify,static_procedure,':'(user,retractall/1)),_)]) :-
+			% the second exception term is used in some of the Prolog compilers supporting modules
+			{retractall(retractall(_))}.
+	:- endif.
 
 :- end_object.

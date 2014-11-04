@@ -50,9 +50,14 @@ bar(_X) :- true.
 	throws(iso_abolish_1_04, error(type_error(predicate_indicator,foo(X)),_)) :-
 		{abolish(foo(X))}.
 
-	throws(iso_abolish_1_05, [error(permission_error(modify,static_procedure,abolish/1),_), error(permission_error(modify,static_procedure,':'(user,abolish/1)),_)]) :-
-		% the second exception term is used in some of the Prolog compilers supporting modules
-		{abolish(abolish/1)}.
+	:- if(current_logtalk_flag(prolog_conformance, iso_strict)).
+		throws(iso_abolish_1_05, error(permission_error(modify,static_procedure,abolish/1),_)) :-
+			{abolish(abolish/1)}.
+	:- else.
+		throws(iso_abolish_1_05, [error(permission_error(modify,static_procedure,abolish/1),_), error(permission_error(modify,static_procedure,':'(user,abolish/1)),_)]) :-
+			% the second exception term is used in some of the Prolog compilers supporting modules
+			{abolish(abolish/1)}.
+	:- endif.
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
@@ -66,9 +71,14 @@ bar(_X) :- true.
 	throws(eddbali_abolish_1_08, error(instantiation_error,_)) :-
 		{abolish(foo/_)}.
 
-	throws(eddbali_abolish_1_09, [error(permission_error(modify,static_procedure,bar/1),_), error(permission_error(modify,static_procedure,':'(user,bar/1)),_)]) :-
-		% the second exception term is used in some of the Prolog compilers supporting modules
-		{abolish(bar/1)}.
+	:- if(current_logtalk_flag(prolog_conformance, iso_strict)).
+		throws(eddbali_abolish_1_09, error(permission_error(modify,static_procedure,bar/1),_)) :-
+			{abolish(bar/1)}.
+	:- else.
+		throws(eddbali_abolish_1_09, [error(permission_error(modify,static_procedure,bar/1),_), error(permission_error(modify,static_procedure,':'(user,bar/1)),_)]) :-
+			% the second exception term is used in some of the Prolog compilers supporting modules
+			{abolish(bar/1)}.
+	:- endif.
 
 	throws(eddbali_abolish_1_10, error(type_error(integer,a),_)) :-
 		{abolish(foo/a)}.

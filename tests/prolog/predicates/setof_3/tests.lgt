@@ -40,7 +40,7 @@ setof_3_member(X, [_| L]) :-
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2014/11/04,
 		comment is 'Unit tests for the ISO Prolog standard setof/3 built-in predicate.'
 	]).
 
@@ -171,8 +171,14 @@ setof_3_member(X, [_| L]) :-
 		% STO; Undefined
 		{setof(f(X,Y),X=Y,[f(g(Z),Z)])}.
 
-	throws(eddbali_setof_3_26, [error(type_error(callable,(true;4)),_), error(type_error(callable,4),_)]) :-
-		{setof(X, X^(true; 4), _L)}.
+	:- if(current_logtalk_flag(prolog_conformance, iso_strict)).
+		throws(eddbali_setof_3_26, error(type_error(callable,(true;4)),_)) :-
+			{setof(X, X^(true; 4), _L)}.
+	:- else.
+		throws(eddbali_setof_3_26, [error(type_error(callable,(true;4)),_), error(type_error(callable,4),_)]) :-
+			% the second exception term is a common but not conforming alternative
+			{setof(X, X^(true; 4), _L)}.
+	:- endif.
 
 	throws(sics_setof_3_27, error(type_error(callable,1),_)) :-
 		{setof(_X, A^A^1, _L)}.
