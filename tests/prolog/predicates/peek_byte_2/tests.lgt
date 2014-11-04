@@ -21,4 +21,6 @@
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.13.2.4
 
+	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
+
 :- end_object.

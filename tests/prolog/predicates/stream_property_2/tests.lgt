@@ -21,6 +21,8 @@
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.11.8.4
 
+	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
+
 	throws(sics_stream_property_2_03, error(domain_error(stream,foo),_)) :-
 		{stream_property(foo, _S)}.
 

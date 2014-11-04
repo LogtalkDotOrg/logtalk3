@@ -21,6 +21,8 @@
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.11.3
 
+	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
+
 	succeeds(sics_set_input_1_1) :-
 		{current_input(S)},
 		{set_input(S)}.

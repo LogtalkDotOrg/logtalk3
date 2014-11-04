@@ -21,6 +21,8 @@
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.14.1.4
 
+	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
+
 	throws(sics_read_term_3_08, error(instantiation_error,_)) :-
 		{read(_, _)}.
 

@@ -21,6 +21,8 @@
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.11.6
 
+	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
+
 	succeeds(sics_close_1_01) :-
 		{open('foo', write, S)},
 		{close(S)}.
