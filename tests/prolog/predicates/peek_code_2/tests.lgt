@@ -30,13 +30,15 @@
 	throws(sics_peek_code_2_23, error(instantiation_error,_)) :-
 		{peek_code(_, _)}.
 
-	throws(sics_peek_code_2_24, error(type_error(integer,p),_)) :-
+	% skip the next three tests for now as some Prolog systems don't type check the output argument
+
+	- throws(sics_peek_code_2_24, error(type_error(integer,p),_)) :-
 		{peek_code(p)}.
 
-	throws(sics_peek_code_2_25, error(type_error(integer,p),_)) :-
+	- throws(sics_peek_code_2_25, error(type_error(integer,p),_)) :-
 		{peek_code(user_input,p)}.
 
-	throws(sics_peek_code_2_26, error(representation_error(in_character_code),_)) :-
+	- throws(sics_peek_code_2_26, error(representation_error(in_character_code),_)) :-
 		{peek_code(-2)}.
 
 	throws(sics_peek_code_2_27, error(domain_error(stream_or_alias,foo),_)) :-

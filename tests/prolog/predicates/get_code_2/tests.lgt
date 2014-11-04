@@ -29,13 +29,15 @@
 	throws(sics_get_code_2_23, error(instantiation_error,_)) :-
 		{get_code(_, _)}.
 
-	throws(sics_get_code_2_24, error(type_error(integer,p),_)) :-
+	% skip the next three tests for now as some Prolog systems don't type check the output argument
+
+	- throws(sics_get_code_2_24, error(type_error(integer,p),_)) :-
 		{get_code(p)}.
 
-	throws(sics_get_code_2_25, error(type_error(integer,p),_)) :-
+	- throws(sics_get_code_2_25, error(type_error(integer,p),_)) :-
 		{get_code(user_input,p)}.
 
-	throws(sics_get_code_2_26, error(representation_error(in_character_code),_)) :-
+	- throws(sics_get_code_2_26, error(representation_error(in_character_code),_)) :-
 		{get_code(-2)}.
 
 	throws(sics_get_code_2_27, error(domain_error(stream_or_alias,foo),_)) :-
