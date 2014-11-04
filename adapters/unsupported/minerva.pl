@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Minerva 2.4
-%  Last updated on September 25, 2014
+%  Last updated on November 4, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -185,6 +185,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 '$lgt_prolog_feature'(prolog_version, _) :-
 	fail.
 '$lgt_prolog_feature'(prolog_compatible_version, @>=((2,4))).
+'$lgt_prolog_feature'(prolog_conformance, iso_strict).
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
 '$lgt_prolog_feature'(tabling, unsupported).

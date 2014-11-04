@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for B-Prolog 7.8 and later versions
-%  Last updated on September 25, 2014
+%  Last updated on November 4, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -224,6 +224,7 @@ findall(Term, Goal, List, Tail) :-
 '$lgt_prolog_feature'(prolog_version, (Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, bp(Major, Minor, Patch, _)).
 '$lgt_prolog_feature'(prolog_compatible_version, @>=((7,8,0))).
+'$lgt_prolog_feature'(prolog_conformance, iso_lax).
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
 '$lgt_prolog_feature'(tabling, supported).

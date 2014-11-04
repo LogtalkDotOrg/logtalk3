@@ -255,6 +255,7 @@ setup_call_cleanup(_, _, _) :-
 '$lgt_prolog_feature'(prolog_version, (Major, Minor, Build)) :-
 	get_flag(version_as_list, [Major, Minor, Build]).
 '$lgt_prolog_feature'(prolog_compatible_version, @>=((6,1,143))).
+'$lgt_prolog_feature'(prolog_conformance, iso_lax).
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
 '$lgt_prolog_feature'(tabling, unsupported).

@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for YAP Prolog 6.3.4 and later versions
-%  Last updated on October 10, 2014
+%  Last updated on November 4, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -274,6 +274,7 @@
 '$lgt_prolog_feature'(prolog_version, (Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, yap(Major, Minor, Patch, _)).
 '$lgt_prolog_feature'(prolog_compatible_version, @>=((6,3,4))).
+'$lgt_prolog_feature'(prolog_conformance, iso_lax).
 
 '$lgt_prolog_feature'(encoding_directive, full).
 '$lgt_prolog_feature'(tabling, Tabling) :-

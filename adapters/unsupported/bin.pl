@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for BinProlog 8.x~10.x
-%  Last updated on September 25, 2014
+%  Last updated on November 4, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -267,6 +267,7 @@ setup_call_cleanup(_, _, _) :-
 '$lgt_prolog_feature'(prolog_version, _) :-
 	fail.
 '$lgt_prolog_feature'(prolog_compatible_version, @>=(8)).
+'$lgt_prolog_feature'(prolog_conformance, iso_lax).
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
 '$lgt_prolog_feature'(tabling, unsupported).

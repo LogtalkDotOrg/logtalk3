@@ -28,6 +28,19 @@ RELEASE NOTES
 3.00.0 Release Candidate 5 - November ??, 2014
 ==============================================
 
+Logtalk compiler and runtime
+----------------------------
+
+* ADDED: Read-only `prolog_conformance` flag, with possible values `iso_strict`
+(for Prolog compilers claiming strict ISO Prolog Core Standard conformance)
+and `iso_lax` (for Prolog compilers claiming only broad conformance with the
+ISO Prolog Core Standard).
+
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: All adapter files to define the `prolog_conformance` flag value.
+
 Documentation
 -------------
 

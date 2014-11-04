@@ -16356,6 +16356,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_valid_flag'(prolog_dialect).
 '$lgt_valid_flag'(prolog_version).
 '$lgt_valid_flag'(prolog_compatible_version).
+'$lgt_valid_flag'(prolog_conformance).
 '$lgt_valid_flag'(encoding_directive).
 '$lgt_valid_flag'(threads).
 '$lgt_valid_flag'(modules).
@@ -16380,10 +16381,11 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_read_only_flag'(version).		% deprecated
 % startup flags
 '$lgt_read_only_flag'(settings_file).
-% back-end Prolog features
+% back-end Prolog compiler features
 '$lgt_read_only_flag'(prolog_dialect).
 '$lgt_read_only_flag'(prolog_version).
 '$lgt_read_only_flag'(prolog_compatible_version).
+'$lgt_read_only_flag'(prolog_conformance).
 '$lgt_read_only_flag'(encoding_directive).
 '$lgt_read_only_flag'(threads).
 '$lgt_read_only_flag'(modules).
@@ -16483,6 +16485,8 @@ current_logtalk_flag(Flag, Value) :-
 	compound(Version).
 '$lgt_valid_flag_value'(prolog_compatible_version, Version) :-
 	compound(Version).
+'$lgt_valid_flag_value'(prolog_conformance, iso_strict) :- !.
+'$lgt_valid_flag_value'(prolog_conformance, iso_lax) :- !.
 
 '$lgt_valid_flag_value'(encoding_directive, full) :- !.
 '$lgt_valid_flag_value'(encoding_directive, source) :- !.

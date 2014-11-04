@@ -234,6 +234,10 @@ The adapter files specifies <em>default</em> values for most of the Logtalk comp
 		<dd>Compatible version of the back-end Prolog compiler (a compound term, usually with the format <code>@&gt;=((Major, Minor, Patch))</code>, whose arguments are integers). This flag availability depends on the Prolog compiler. Checking the value of this flag fails for any Prolog compiler that does not provide access to version data.</dd>
 </dl>
 <dl>
+	<dt><code>prolog_conformance</code></dt>
+		<dd>Level of conformance of the back-end Prolog compiler with the ISO Prolog Core standard. The possible values are  <code>iso_strict</code> for compilers claiming strict conformance and <code>iso_lax</code> for compilers claiming only broad conformance.</dd>
+</dl>
+<dl>
 	<dt><code>encoding_directive</code></dt>
 		<dd>Informs Logtalk if the back-end Prolog compiler supports the <a title="Consult reference manual" href="../refman/directives/encoding_1.html"><code>encoding/1</code></a> directive. This directive is used for declaring the text encoding of source files. Possible flag values are <code>unsupported</code>, <code>full</code> (can be used in both Logtalk source files and compiler generated Prolog files), and <code>source</code> (can be used only in Logtalk source files).</dd>
 </dl>
@@ -319,7 +323,7 @@ Logtalk source files are text files containing one or more entity definitions (o
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &ndash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: September 21, 2014</span>
+		<span>Last updated on: November 4, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="documenting.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="programming.html">next</a></span><br/>

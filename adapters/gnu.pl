@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for GNU Prolog 1.4.2 (and later versions)
-%  Last updated on September 27, 2014
+%  Last updated on November 4, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -201,6 +201,11 @@ setup_call_cleanup(_, _, _) :-
 '$lgt_prolog_feature'(prolog_version, (Major, Minor, Patch)) :-
 	catch(current_prolog_flag(version_data, gprolog(Major, Minor, Patch, _)), _, fail).
 '$lgt_prolog_feature'(prolog_compatible_version, @>=((1,4,2))).
+'$lgt_prolog_feature'(prolog_conformance, Mode) :-
+	(	current_prolog_flag(strict_iso, on) ->
+		Mode = iso_strict
+	;	Mode = iso_lax
+	).
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
 '$lgt_prolog_feature'(tabling, unsupported).
