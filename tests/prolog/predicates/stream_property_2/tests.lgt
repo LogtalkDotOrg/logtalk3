@@ -21,4 +21,13 @@
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.11.8.4
 
+	throws(sics_stream_property_2_03, error(domain_error(stream,foo),_)) :-
+		{stream_property(foo, _S)}.
+
+	throws(sics_stream_property_2_04, error(domain_error(stream_property,foo),_)) :-
+		{stream_property(_S, foo)}.
+
+	fails(sics_stream_property_2_07) :-
+		{stream_property(_S, type(binary))}.
+
 :- end_object.

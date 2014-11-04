@@ -21,4 +21,14 @@
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.11.3
 
+	succeeds(sics_set_input_1_1) :-
+		{current_input(S)},
+		{set_input(S)}.
+
+	throws(sics_set_input_1_2, error(instantiation_error,_)) :-
+		{set_input(_S)}.
+
+	throws(sics_set_input_1_3, error(domain_error(stream_or_alias,foo),_)) :-
+		{set_input(foo)}.
+
 :- end_object.

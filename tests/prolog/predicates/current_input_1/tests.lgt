@@ -21,4 +21,10 @@
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.11.1
 
+	succeeds(sics_current_input_1_1) :-
+		{current_input(_S)}.
+
+	throws(sics_current_input_1_2, error(domain_error(stream,foo),_)) :-
+		{current_input(foo)}.
+
 :- end_object.

@@ -21,4 +21,10 @@
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.11.8.4
 
+	throws(sics_at_end_of_stream_1_01, error(instantiation_error,_)) :-
+		{at_end_of_stream(_S)}.
+
+	throws(sics_at_end_of_stream_1_02, error(domain_error(stream_or_alias,foo),_)) :-
+		{at_end_of_stream(foo)}.
+
 :- end_object.

@@ -21,4 +21,10 @@
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.11.7
 
+	throws(sics_flush_output_1_02, error(domain_error(stream_or_alias,foo),_)) :-
+		{flush_output(foo)}.
+
+	throws(sics_flush_output_1_03, error(instantiation_error,_)) :-
+		{flush_output(_S)}.
+
 :- end_object.
