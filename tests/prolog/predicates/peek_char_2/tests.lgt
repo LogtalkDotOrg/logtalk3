@@ -21,6 +21,21 @@
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.12.2.4
 
+	throws(iso_peek_char_2_12, error(permission_error(input,stream,user_output),_)) :-
+		{peek_char(user_output, _)}.
+
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
+
+	throws(sics_peek_char_2_14, error(instantiation_error,_)) :-
+		{peek_char(_, _)}.
+
+	throws(sics_peek_char_2_15, error(type_error(in_character,1),_)) :-
+		{peek_char(1)}.
+
+	throws(sics_peek_char_2_16, error(type_error(in_character,1),_)) :-
+		{peek_char(user_input, 1)}.
+
+	throws(sics_peek_char_2_17, error(domain_error(stream_or_alias,foo),_)) :-
+		{peek_char(foo,_)}.
 
 :- end_object.

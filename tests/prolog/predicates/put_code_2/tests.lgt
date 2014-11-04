@@ -23,4 +23,16 @@
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
+	throws(sics_put_code_2_18, error(instantiation_error,_)) :-
+		{put_code(_, 0't)}.
+
+	throws(sics_put_code_2_19, error(instantiation_error,_)) :-
+		{put_code(_)}.
+
+	throws(sics_peek_code_2_23, error(representation_error(character_code),_)) :-
+		{put_code(-1)}.
+
+	throws(sics_peek_code_2_24, error(domain_error(stream_or_alias,foo),_)) :-
+		{put_code(foo,1)}.
+
 :- end_object.

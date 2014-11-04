@@ -21,4 +21,10 @@
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.12.3.4
 
+	throws(iso_nl_1_11, error(instantiation_error,_)) :-
+		{nl(_)}.
+
+	throws(iso_nl_1_12, error(permission_error(output,stream,user_input),_)) :-
+		{nl(user_input)}.
+
 :- end_object.

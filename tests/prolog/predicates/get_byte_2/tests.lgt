@@ -21,6 +21,12 @@
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.13.1.4
 
+	throws(iso_get_byte_2_05, error(permission_error(input,stream,user_output),_)) :-
+		{get_byte(user_output, _Byte)}.
+
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
+
+	throws(sics_get_byte_2_06, error(instantiation_error,_)) :-
+		{get_byte(_, _)}.
 
 :- end_object.

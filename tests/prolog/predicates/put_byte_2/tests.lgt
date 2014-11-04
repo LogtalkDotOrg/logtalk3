@@ -23,4 +23,13 @@
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
+	throws(sics_put_byte_2_05, error(instantiation_error,_)) :-
+		{put_byte(_S, 118)}.
+
+	throws(sics_put_byte_2_11, error(instantiation_error,_)) :-
+		{put_byte(_S, 1)}.
+
+	throws(sics_put_byte_2_12, error(domain_error(stream_or_alias, foo),_)) :-
+		{put_byte(foo, 1)}.
+
 :- end_object.

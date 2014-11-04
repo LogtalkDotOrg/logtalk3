@@ -23,4 +23,10 @@
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
+	throws(sics_put_char_2_13, error(instantiation_error,_)) :-
+		{put_char(_, t)}.
+
+	throws(sics_put_char_2_14, error(instantiation_error,_)) :-
+		{put_char(_)}.
+
 :- end_object.
