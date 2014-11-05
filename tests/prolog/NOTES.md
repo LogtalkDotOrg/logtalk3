@@ -57,3 +57,9 @@ cases in arithmetic operations. Moreover, some Prolog compilers provide a
 strict ISO mode that may result in different test results. This strict mode,
 when made available, is usually only used if it's the default when starting
 Logtalk.
+
+To find if the tests are run in strict ISO mode or in lax ISO mode, check the
+value of the read-only flag `prolog_conformance` using the query:
+
+	?- current_logtalk_flag(prolog_conformance, Mode).
+
