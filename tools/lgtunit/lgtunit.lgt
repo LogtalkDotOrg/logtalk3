@@ -95,6 +95,83 @@
 		comment is 'Cleanup environment after running the test set. Defaults to the goal true.'
 	]).
 
+	:- protected(set_text_output/2).
+	:- mode(set_text_output(+atom, +atom), one).
+	:- info(set_text_output/2, [
+		comment is 'Creates a temporary file (referenced with the given alias) with the given text contents and sets the current output stream to the file.',
+		argnames is ['Alias', 'Contents']
+	]).
+
+	:- protected(set_text_output/1).
+	:- mode(set_text_output(+atom), one).
+	:- info(set_text_output/1, [
+		comment is 'Creates a temporary file with the given text contents and sets the current output stream to the file.',
+		argnames is ['Contents']
+	]).
+
+	:- protected(check_text_output/2).
+	:- mode(check_text_output(+atom, +atom), zero_or_one).
+	:- info(check_text_output/2, [
+		comment is 'Checks that the temporary file being written have the expected text contents.',
+		argnames is ['Alias', 'Contents']
+	]).
+
+	:- protected(check_text_output/1).
+	:- mode(check_text_output(+atom), zero_or_one).
+	:- info(check_text_output/1, [
+		comment is 'Checks that the temporary file being written have the expected text contents.',
+		argnames is ['Contents']
+	]).
+
+	:- protected(set_binary_output/2).
+	:- mode(set_binary_output(+atom, +list(byte)), one).
+	:- info(set_binary_output/2, [
+		comment is 'Creates a temporary file (referenced with the given alias) with the given binary contents and sets the current output stream to the file.',
+		argnames is ['Alias', 'Bytes']
+	]).
+
+	:- protected(set_binary_output/1).
+	:- mode(set_binary_output(+list(byte)), one).
+	:- info(set_binary_output/1, [
+		comment is 'Creates a temporary file with the given binary contents and sets the current output stream to the file.',
+		argnames is ['Bytes']
+	]).
+
+	:- protected(check_binary_output/2).
+	:- mode(check_binary_output(+atom, +list(byte)), zero_or_one).
+	:- info(check_binary_output/2, [
+		comment is 'Checks that the temporary file (referenced with the given alias) have the expected binary contents.',
+		argnames is ['Alias', 'Bytes']
+	]).
+
+	:- protected(check_binary_output/1).
+	:- mode(check_binary_output(+list(byte)), zero_or_one).
+	:- info(check_binary_output/1, [
+		comment is 'Checks that the temporary file have the expected binary contents.',
+		argnames is ['Bytes']
+	]).
+
+	:- protected(closed_input_stream/2).
+	:- mode(closed_input_stream(-stream, +list(stream_option)), zero_or_one).
+	:- info(closed_input_stream/2, [
+		comment is 'Opens a temporary file with the given options for reading, closes it, and returns its stream handle.',
+		argnames is ['Stream', 'Options']
+	]).
+
+	:- protected(closed_output_stream/2).
+	:- mode(closed_output_stream(-stream, +list(stream_option)), zero_or_one).
+	:- info(closed_output_stream/2, [
+		comment is 'Opens a temporary file with the given options for writing, closes it, and returns its stream handle.',
+		argnames is ['Stream', 'Options']
+	]).
+
+	:- protected(stream_position/1).
+	:- mode(stream_position(-stream_position), one).
+	:- info(stream_position/1, [
+		comment is 'Returns a valid stream position.',
+		argnames is ['Position']
+	]).
+
 	:- private(test/2).
 	:- mode(test(?atom, ?nonvar), zero_or_more).
 	:- info(test/2, [
@@ -682,6 +759,117 @@
 		Coverage1 is Coverage0 + Covered,
 		Clauses1 is Clauses0 + Total,
 		sum_coverage(List, Coverage1, Coverage, Clauses1, Clauses).
+
+	% support for testing input/output predicates
+
+	set_text_output(Alias, Atom) :-
+		os::expand_path('test_output.text', Path),
+		open(Path, write, Stream, [alias(Alias)]),
+		write(Stream, Atom).
+
+	set_text_output(Atom) :-
+		os::expand_path('test_output.text', Path),
+		open(Path, write, Stream),
+		write(Stream, Atom),
+		set_output(Stream).
+
+	check_text_output(Alias, Atom) :-
+		close(Alias),
+		os::expand_path('test_output.text', Path),
+		open(Path, read, InputStream),
+		get_text_contents(InputStream, Contents),
+		clean_text_output,
+		Atom == Contents.
+
+	check_text_output(Atom) :-
+		current_output(OutputStream),
+		close(OutputStream),
+		os::expand_path('test_output.text', Path),
+		open(Path, read, InputStream),
+		get_text_contents(InputStream, Contents),
+		clean_text_output,
+		Atom == Contents.
+
+	clean_text_output :-
+		os::expand_path('test_output.text', Path),
+		os::delete_file(Path).
+
+	get_text_contents(Stream, Atom) :-
+		get_chars(Stream, Chars, 1000),
+		atom_chars(Atom, Chars).
+
+	get_chars(Stream, Chars, Countdown) :-
+		get_char(Stream, Char),
+		(	Char == end_of_file ->
+			Chars = [],
+			close(Stream)
+		;	Countdown =< 0 ->
+			Chars = []
+		;	Chars = [Char| Rest],
+			NextCountdown is Countdown - 1,
+			get_chars(Stream, Rest, NextCountdown)
+		).
+
+	set_binary_output(Alias, Bytes) :-
+		os::expand_path('test_output.binary', Path),
+		open(Path, write, Stream, [type(binary), alias(Alias)]),
+		put_bytes(Bytes, Stream),
+		set_output(Stream).
+
+	set_binary_output(Bytes) :-
+		os::expand_path('test_output.binary', Path),
+		open(Path, write, Stream, [type(binary)]),
+		put_bytes(Bytes, Stream),
+		set_output(Stream).
+
+	check_binary_output(Bytes) :-
+		current_output(OutputStream),
+		close(OutputStream),
+		os::expand_path('test_output.binary', Path),
+		open(Path, read, InputStream, [type(binary)]),
+		get_binary_contents(InputStream, Contents),
+		clean_binary_output,
+		Bytes == Contents.
+
+	clean_binary_output :-
+		os::expand_path('test_output.binary', Path),
+		os::delete_file(Path).
+
+	get_binary_contents(Stream, Bytes) :-
+		get_bytes(Stream, Bytes, 1000).
+
+	put_bytes([], _).
+	put_bytes([Byte| Bytes], Stream) :-
+		put_byte(Stream, Byte),
+		put_bytes(Bytes, Stream).
+
+	get_bytes(Stream, Bytes, _) :-
+		(	at_end_of_stream(Stream) ->
+			close(Stream),
+			Bytes = []
+		;	Bytes = [Byte| Rest],
+			get_byte(Stream, Byte),
+			get_bytes(Stream, Rest, _)
+		).
+
+	closed_input_stream(Stream, Options) :-
+		set_text_output(temporary_file, ''),
+		close(temporary_file),
+		os::expand_path(temporary_file, Path),
+		open(Path, read, Stream, Options),
+		close(Stream),
+		os::delete_file(Path).
+
+	closed_output_stream(Stream, Options) :-
+		os::expand_path(temporary_file, Path),
+		open(Path, write, Stream, Options),
+		close(Stream),
+		os::delete_file(Path).
+
+	stream_position(Position) :-
+		open(bar, write, Stream, [reposition(true)]),
+		stream_property(Stream, position(Position)),
+		close(Stream).
 
 	% auxiliary predicates; we could use the Logtalk standard library but we
 	% prefer to make this object self-contained given its testing purpose
