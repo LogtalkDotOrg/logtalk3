@@ -845,30 +845,28 @@
 	% support for testing input predicates
 
 	set_text_input(Alias, Atom) :-
-		clean_file('test_input.text', Path),
-		open(Path, write, Stream, [alias(Alias)]),
-		write(Stream, Atom).
+		clean_file(Alias, 'test_input.text', Path),
+		open(Path, write, WriteStream, [alias(Alias)]),
+		write(WriteStream, Atom),
+		close(WriteStream),
+		open(Path, read, _, [type(text),alias(Alias),eof_action(error)]).
 
 	set_text_input(Atom) :-
 		clean_file('test_input.text', Path),
-		open(Path, write, Stream),
-		write(Stream, Atom),
-		set_output(Stream).
+		open(Path, write, WriteStream),
+		write(WriteStream, Atom),
+		close(WriteStream),
+		open(Path, read, ReadStream),
+		set_input(ReadStream).
 
 	check_text_input(Alias, Atom) :-
-		close(Alias),
-		os::expand_path('test_input.text', Path),
-		open(Path, read, InputStream),
-		get_text_contents(InputStream, Contents),
+		get_text_contents(Alias, Contents),
 		clean_text_input,
 		Atom == Contents.
 
 	check_text_input(Atom) :-
-		current_output(OutputStream),
-		close(OutputStream),
-		os::expand_path('test_input.text', Path),
-		open(Path, read, InputStream),
-		get_text_contents(InputStream, Contents),
+		current_input(Stream),
+		get_text_contents(Stream, Contents),
 		clean_text_input,
 		Atom == Contents.
 
@@ -876,30 +874,28 @@
 		clean_file('test_input.text', _).
 
 	set_binary_input(Alias, Bytes) :-
-		clean_file('test_input.binary', Path),
-		open(Path, write, Stream, [type(binary), alias(Alias)]),
-		put_bytes(Bytes, Stream).
+		clean_file(Alias, 'test_input.binary', Path),
+		open(Path, write, WriteStream, [type(binary),alias(Alias)]),
+		put_bytes(Bytes, WriteStream),
+		close(WriteStream),
+		open(Path, read, _, [type(binary),alias(Alias),eof_action(error)]).
 
 	set_binary_input(Bytes) :-
 		clean_file('test_input.binary', Path),
-		open(Path, write, Stream, [type(binary)]),
-		put_bytes(Bytes, Stream),
-		set_output(Stream).
+		open(Path, write, WriteStream, [type(binary)]),
+		put_bytes(Bytes, WriteStream),
+		close(WriteStream),
+		open(Path, read, ReadStream, [type(binary),eof_action(error)]),
+		set_input(ReadStream).
 
 	check_binary_input(Alias, Bytes) :-
-		close(Alias),
-		os::expand_path('test_input.binary', Path),
-		open(Path, read, InputStream, [type(binary)]),
-		get_binary_contents(InputStream, Contents),
+		get_binary_contents(Alias, Contents),
 		clean_binary_input,
 		Bytes == Contents.
 
 	check_binary_input(Bytes) :-
-		current_output(OutputStream),
-		close(OutputStream),
-		os::expand_path('test_input.binary', Path),
-		open(Path, read, InputStream, [type(binary)]),
-		get_binary_contents(InputStream, Contents),
+		current_input(Stream),
+		get_binary_contents(Stream, Contents),
 		clean_binary_input,
 		Bytes == Contents.
 
@@ -972,6 +968,10 @@
 
 	% auxiliary predicates for testing input/output predicates
 
+	clean_file(Alias, File, Path) :-
+		catch(close(Alias), _, true),
+		clean_file(File, Path).
+
 	clean_file(File, Path) :-
 		os::expand_path(File, Path),
 		(	os::file_exists(Path) ->
@@ -1015,18 +1015,18 @@
 			get_bytes(Stream, Rest, NextCountdown)
 		).
 
-	closed_input_stream(Stream, Options) :-
-		set_text_output(temporary_file, ''),
-		close(temporary_file),
+	closed_input_stream(ReadStream, Options) :-
 		os::expand_path(temporary_file, Path),
-		open(Path, read, Stream, Options),
-		close(Stream),
+		open(Path, write, WriteStream),
+		close(WriteStream),
+		open(Path, read, ReadStream, Options),
+		close(ReadStream),
 		os::delete_file(Path).
 
-	closed_output_stream(Stream, Options) :-
+	closed_output_stream(WriteStream, Options) :-
 		os::expand_path(temporary_file, Path),
-		open(Path, write, Stream, Options),
-		close(Stream),
+		open(Path, write, WriteStream, Options),
+		close(WriteStream),
 		os::delete_file(Path).
 
 	stream_position(Position) :-
