@@ -30,14 +30,15 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/10/23,
+		date is 2014/11/05,
 		comment is 'A simple unit test framework featuring predicate clause coverage.'
 	]).
 
 	:- public(cover/1).
 	:- mode(cover(?entity_identifier), zero_or_more).
 	:- info(cover/1, [
-		comment is 'Declares entities being tested for which code coverage information should be collected.'
+		comment is 'Declares entities being tested for which code coverage information should be collected.',
+		argnames is ['Entity']
 	]).
 
 	:- public(run/2).
