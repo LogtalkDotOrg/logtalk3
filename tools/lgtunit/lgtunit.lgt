@@ -95,6 +95,62 @@
 		comment is 'Cleanup environment after running the test set. Defaults to the goal true.'
 	]).
 
+	:- protected(set_text_input/2).
+	:- mode(set_text_input(+atom, +atom), one).
+	:- info(set_text_input/2, [
+		comment is 'Creates a temporary file (referenced with the given alias) with the given text contents and sets the current input stream to the file.',
+		argnames is ['Alias', 'Contents']
+	]).
+
+	:- protected(set_text_input/1).
+	:- mode(set_text_input(+atom), one).
+	:- info(set_text_input/1, [
+		comment is 'Creates a temporary file with the given text contents and sets the current input stream to the file.',
+		argnames is ['Contents']
+	]).
+
+	:- protected(check_text_input/2).
+	:- mode(check_text_input(+atom, +atom), zero_or_one).
+	:- info(check_text_input/2, [
+		comment is 'Checks that the temporary file being written have the expected text contents.',
+		argnames is ['Alias', 'Contents']
+	]).
+
+	:- protected(check_text_input/1).
+	:- mode(check_text_input(+atom), zero_or_one).
+	:- info(check_text_input/1, [
+		comment is 'Checks that the temporary file being written have the expected text contents.',
+		argnames is ['Contents']
+	]).
+
+	:- protected(set_binary_input/2).
+	:- mode(set_binary_input(+atom, +list(byte)), one).
+	:- info(set_binary_input/2, [
+		comment is 'Creates a temporary file (referenced with the given alias) with the given binary contents and sets the current input stream to the file.',
+		argnames is ['Alias', 'Bytes']
+	]).
+
+	:- protected(set_binary_input/1).
+	:- mode(set_binary_input(+list(byte)), one).
+	:- info(set_binary_input/1, [
+		comment is 'Creates a temporary file with the given binary contents and sets the current input stream to the file.',
+		argnames is ['Bytes']
+	]).
+
+	:- protected(check_binary_input/2).
+	:- mode(check_binary_input(+atom, +list(byte)), zero_or_one).
+	:- info(check_binary_input/2, [
+		comment is 'Checks that the temporary file (referenced with the given alias) have the expected binary contents.',
+		argnames is ['Alias', 'Bytes']
+	]).
+
+	:- protected(check_binary_input/1).
+	:- mode(check_binary_input(+list(byte)), zero_or_one).
+	:- info(check_binary_input/1, [
+		comment is 'Checks that the temporary file have the expected binary contents.',
+		argnames is ['Bytes']
+	]).
+
 	:- protected(set_text_output/2).
 	:- mode(set_text_output(+atom, +atom), one).
 	:- info(set_text_output/2, [
@@ -282,7 +338,9 @@
 
 	run_tests([], _).
 	run_tests([Test| Tests], File) :-
+		current_input(Input), current_output(Output),
 		run_test(Test, File),
+		set_input(Input), set_output(Output),
 		run_tests(Tests, File).
 
 	% by default, no tests are defined:
@@ -775,12 +833,12 @@
 	% support for testing input predicates
 
 	set_text_input(Alias, Atom) :-
-		os::expand_path('test_input.text', Path),
+		clean_file('test_input.text', Path),
 		open(Path, write, Stream, [alias(Alias)]),
 		write(Stream, Atom).
 
 	set_text_input(Atom) :-
-		os::expand_path('test_input.text', Path),
+		clean_file('test_input.text', Path),
 		open(Path, write, Stream),
 		write(Stream, Atom),
 		set_output(Stream).
@@ -803,17 +861,15 @@
 		Atom == Contents.
 
 	clean_text_input :-
-		os::expand_path('test_input.text', Path),
-		os::delete_file(Path).
+		clean_file('test_input.text', _).
 
 	set_binary_input(Alias, Bytes) :-
-		os::expand_path('test_input.binary', Path),
+		clean_file('test_input.binary', Path),
 		open(Path, write, Stream, [type(binary), alias(Alias)]),
-		put_bytes(Bytes, Stream),
-		set_output(Stream).
+		put_bytes(Bytes, Stream).
 
 	set_binary_input(Bytes) :-
-		os::expand_path('test_input.binary', Path),
+		clean_file('test_input.binary', Path),
 		open(Path, write, Stream, [type(binary)]),
 		put_bytes(Bytes, Stream),
 		set_output(Stream).
@@ -836,18 +892,17 @@
 		Bytes == Contents.
 
 	clean_binary_input :-
-		os::expand_path('test_input.binary', Path),
-		os::delete_file(Path).
+		clean_file('test_input.binary', _).
 
 	% support for testing output predicates
 
 	set_text_output(Alias, Atom) :-
-		os::expand_path('test_output.text', Path),
+		clean_file('test_output.text', Path),
 		open(Path, write, Stream, [alias(Alias)]),
 		write(Stream, Atom).
 
 	set_text_output(Atom) :-
-		os::expand_path('test_output.text', Path),
+		clean_file('test_output.text', Path),
 		open(Path, write, Stream),
 		write(Stream, Atom),
 		set_output(Stream).
@@ -870,17 +925,15 @@
 		Atom == Contents.
 
 	clean_text_output :-
-		os::expand_path('test_output.text', Path),
-		os::delete_file(Path).
+		clean_file('test_output.text', _).
 
 	set_binary_output(Alias, Bytes) :-
-		os::expand_path('test_output.binary', Path),
+		clean_file('test_output.binary', Path),
 		open(Path, write, Stream, [type(binary), alias(Alias)]),
-		put_bytes(Bytes, Stream),
-		set_output(Stream).
+		put_bytes(Bytes, Stream).
 
 	set_binary_output(Bytes) :-
-		os::expand_path('test_output.binary', Path),
+		clean_file('test_output.binary', Path),
 		open(Path, write, Stream, [type(binary)]),
 		put_bytes(Bytes, Stream),
 		set_output(Stream).
@@ -903,10 +956,16 @@
 		Bytes == Contents.
 
 	clean_binary_output :-
-		os::expand_path('test_output.binary', Path),
-		os::delete_file(Path).
+		clean_file('test_output.binary', _).
 
 	% auxiliary predicates for testing input/output predicates
+
+	clean_file(File, Path) :-
+		os::expand_path(File, Path),
+		(	os::file_exists(Path) ->
+			os::delete_file(Path)
+		;	true
+		).
 
 	get_text_contents(Stream, Atom) :-
 		get_chars(Stream, Chars, 1000),

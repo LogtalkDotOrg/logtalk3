@@ -53,9 +53,12 @@ Documentation
 Tools
 -----
 
+* ADDED: Support for exporting Markdown text files to the `lgtdoc` tool.
+
 * ADDED: Support for testing input/output predicates to the `lgtunit` tool.
 
-* ADDED: Support for exporting Markdown text files to the `lgtdoc` tool.
+* IMPROVED: Updated the `lgtunit` tool to restore the current input and output
+streams after running each unit test.
 
 * IMPROVED: Documentation of the `ports` tool.
 
