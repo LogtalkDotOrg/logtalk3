@@ -123,6 +123,12 @@
 		argnames is ['Contents']
 	]).
 
+	:- protected(clean_text_input/0).
+	:- mode(clean_text_input, one).
+	:- info(clean_text_input/0, [
+		comment is 'Cleans the temporary file used when testing text input.'
+	]).
+
 	:- protected(set_binary_input/2).
 	:- mode(set_binary_input(+atom, +list(byte)), one).
 	:- info(set_binary_input/2, [
@@ -149,6 +155,12 @@
 	:- info(check_binary_input/1, [
 		comment is 'Checks that the temporary file have the expected binary contents.',
 		argnames is ['Bytes']
+	]).
+
+	:- protected(clean_binary_input/0).
+	:- mode(clean_binary_input, one).
+	:- info(clean_binary_input/0, [
+		comment is 'Cleans the temporary file used when testing binary input.'
 	]).
 
 	:- protected(set_text_output/2).
@@ -179,6 +191,12 @@
 		argnames is ['Contents']
 	]).
 
+	:- protected(clean_text_output/0).
+	:- mode(clean_text_output, one).
+	:- info(clean_text_output/0, [
+		comment is 'Cleans the temporary file used when testing text output.'
+	]).
+
 	:- protected(set_binary_output/2).
 	:- mode(set_binary_output(+atom, +list(byte)), one).
 	:- info(set_binary_output/2, [
@@ -205,12 +223,6 @@
 	:- info(check_binary_output/1, [
 		comment is 'Checks that the temporary file have the expected binary contents.',
 		argnames is ['Bytes']
-	]).
-
-	:- protected(clean_text_output/0).
-	:- mode(clean_text_output, one).
-	:- info(clean_text_output/0, [
-		comment is 'Cleans the temporary file used when testing binary output.'
 	]).
 
 	:- protected(clean_binary_output/0).
