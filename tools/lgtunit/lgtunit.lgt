@@ -30,7 +30,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/11/05,
+		date is 2014/11/06,
 		comment is 'A simple unit test framework featuring predicate clause coverage.'
 	]).
 
@@ -858,17 +858,17 @@
 
 	% support for testing input predicates
 
-	set_text_input(Alias, Atom) :-
+	set_text_input(Alias, Contents) :-
 		clean_file(Alias, 'test_input.text', Path),
 		open(Path, write, WriteStream, [alias(Alias)]),
-		write(WriteStream, Atom),
+		write_text_contents(WriteStream, Contents),
 		close(WriteStream),
 		open(Path, read, _, [type(text),alias(Alias),eof_action(error)]).
 
-	set_text_input(Atom) :-
+	set_text_input(Contents) :-
 		clean_file('test_input.text', Path),
 		open(Path, write, WriteStream),
-		write(WriteStream, Atom),
+		write_text_contents(WriteStream, Contents),
 		close(WriteStream),
 		open(Path, read, ReadStream),
 		set_input(ReadStream).
@@ -890,14 +890,14 @@
 	set_binary_input(Alias, Bytes) :-
 		clean_file(Alias, 'test_input.binary', Path),
 		open(Path, write, WriteStream, [type(binary),alias(Alias)]),
-		put_bytes(Bytes, WriteStream),
+		write_binary_contents(Bytes, WriteStream),
 		close(WriteStream),
 		open(Path, read, _, [type(binary),alias(Alias),eof_action(error)]).
 
 	set_binary_input(Bytes) :-
 		clean_file('test_input.binary', Path),
 		open(Path, write, WriteStream, [type(binary)]),
-		put_bytes(Bytes, WriteStream),
+		write_binary_contents(Bytes, WriteStream),
 		close(WriteStream),
 		open(Path, read, ReadStream, [type(binary),eof_action(error)]),
 		set_input(ReadStream).
@@ -918,15 +918,15 @@
 
 	% support for testing output predicates
 
-	set_text_output(Alias, Atom) :-
+	set_text_output(Alias, Contents) :-
 		clean_file('test_output.text', Path),
 		open(Path, write, Stream, [alias(Alias)]),
-		write(Stream, Atom).
+		write_text_contents(Stream, Contents).
 
-	set_text_output(Atom) :-
+	set_text_output(Contents) :-
 		clean_file('test_output.text', Path),
 		open(Path, write, Stream),
-		write(Stream, Atom),
+		write_text_contents(Stream, Contents),
 		set_output(Stream).
 
 	check_text_output(Alias, Atom) :-
@@ -952,12 +952,12 @@
 	set_binary_output(Alias, Bytes) :-
 		clean_file('test_output.binary', Path),
 		open(Path, write, Stream, [type(binary), alias(Alias)]),
-		put_bytes(Bytes, Stream).
+		write_binary_contents(Bytes, Stream).
 
 	set_binary_output(Bytes) :-
 		clean_file('test_output.binary', Path),
 		open(Path, write, Stream, [type(binary)]),
-		put_bytes(Bytes, Stream),
+		write_binary_contents(Bytes, Stream),
 		set_output(Stream).
 
 	check_binary_output(Alias, Bytes) :-
@@ -982,16 +982,16 @@
 
 	% other predicates for testing input/output predicates
 
-	create_text_file(File, Atom) :-
+	create_text_file(File, Contents) :-
 		os::expand_path(File, Path),
 		open(Path, write, Stream),
-		write(Stream, Atom),
+		write_text_contents(Stream, Contents),
 		close(Stream).
 
 	create_binary_file(File, Bytes) :-
 		os::expand_path(File, Path),
 		open(Path, write, Stream, [type(binary)]),
-		put_bytes(Bytes, Stream),
+		write_binary_contents(Bytes, Stream),
 		close(Stream).
 
 	% auxiliary predicates for testing input/output predicates
@@ -1006,6 +1006,17 @@
 			os::delete_file(Path)
 		;	true
 		).
+
+	write_text_contents(Stream, Contents) :-
+		(	atom(Contents) ->
+			write(Stream, Contents)
+		;	write_text_contents_list(Contents, Stream)
+		).
+
+	write_text_contents_list([], _).
+	write_text_contents_list([Atom| Atoms], Stream) :-
+		write(Stream, Atom),
+		write_text_contents_list(Atoms, Stream).
 
 	get_text_contents(Stream, Atom) :-
 		get_chars(Stream, Chars, 1000),
@@ -1023,13 +1034,13 @@
 			get_chars(Stream, Rest, NextCountdown)
 		).
 
+	write_binary_contents([], _).
+	write_binary_contents([Byte| Bytes], Stream) :-
+		put_byte(Stream, Byte),
+		write_binary_contents(Bytes, Stream).
+
 	get_binary_contents(Stream, Bytes) :-
 		get_bytes(Stream, Bytes, 1000).
-
-	put_bytes([], _).
-	put_bytes([Byte| Bytes], Stream) :-
-		put_byte(Stream, Byte),
-		put_bytes(Bytes, Stream).
 
 	get_bytes(Stream, Bytes, Countdown) :-
 		get_byte(Stream, Byte),
