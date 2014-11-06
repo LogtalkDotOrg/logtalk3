@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/11/03,
+		date is 2014/11/05,
 		comment is 'Unit tests for the ISO Prolog standard close/1-2 built-in predicates.'
 	]).
 
@@ -24,7 +24,8 @@
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
 	succeeds(sics_close_1_01) :-
-		{open('foo', write, S)},
+		os::expand_path(foo, Path),
+		open(Path, write, S),
 		{close(S)}.
 
 	throws(sics_close_1_02, error(instantiation_error,_)) :-
@@ -52,5 +53,8 @@
 
 	throws(sics_close_1_08, error(domain_error(stream_or_alias,foo),_)) :-
 		{close(foo)}.
+
+	cleanup :-
+		os::delete_file(foo).
 
 :- end_object.
