@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/11/03,
+		date is 2014/11/06,
 		comment is 'Unit tests for the ISO Prolog standard set_input/1 built-in predicate.'
 	]).
 
@@ -24,13 +24,21 @@
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
 	succeeds(sics_set_input_1_1) :-
-		{current_input(S)},
-		{set_input(S)}.
+		{current_input(S),
+		 set_input(S)}.
 
 	throws(sics_set_input_1_2, error(instantiation_error,_)) :-
 		{set_input(_S)}.
 
 	throws(sics_set_input_1_3, error(domain_error(stream_or_alias,foo),_)) :-
 		{set_input(foo)}.
+
+	throws(sics_set_input_1_4, error(existence_error(stream,S),_)) :-
+		^^closed_input_stream(S, []),
+		{set_input(S)}.
+
+	throws(sics_set_input_1_5, error(permission_error(input,stream,S),_)) :-
+		{current_output(S),
+		 set_input(S)}.		
 
 :- end_object.

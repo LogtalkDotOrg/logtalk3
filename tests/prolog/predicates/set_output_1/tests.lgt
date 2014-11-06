@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/11/03,
+		date is 2014/11/06,
 		comment is 'Unit tests for the ISO Prolog standard set_output/1 built-in predicate.'
 	]).
 
@@ -24,13 +24,21 @@
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
 	succeeds(sics_set_output_1_1) :-
-		{current_output(S)},
-		{set_output(S)}.
+		{current_output(S),
+		 set_output(S)}.
 
 	throws(sics_set_output_1_2, error(instantiation_error,_)) :-
 		{set_output(_S)}.
 
 	throws(sics_set_output_1_3, error(domain_error(stream_or_alias,foo),_)) :-
 		{set_output(foo)}.
+
+	throws(sics_set_output_1_4, error(existence_error(stream,S),_)) :-
+		^^closed_output_stream(S, []),
+		{set_output(S)}.
+
+	throws(sics_set_output_1_5, error(permission_error(output,stream,S),_)) :-
+		{current_input(S),
+		 set_output(S)}.
 
 :- end_object.
