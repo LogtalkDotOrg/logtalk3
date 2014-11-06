@@ -134,6 +134,10 @@
 		{read(X)},
 		X == Integer.
 
+	cleanup :-
+		^^clean_text_input,
+		^^clean_binary_input.
+
 	max_min_integer_as_atom(Flag, Value, Atom) :-
 		(	current_prolog_flag(bounded, true) ->
 			current_prolog_flag(Flag, Value),
