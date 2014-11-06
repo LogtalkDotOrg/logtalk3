@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/11/05,
+		date is 2014/11/06,
 		comment is 'Unit tests for the ISO Prolog standard peek_char/1-2 built-in predicates.'
 	]).
 
@@ -53,9 +53,11 @@
 		Char == end_of_file,
 		^^check_text_input(st_i, '').
 
-	throws(iso_peek_char_2_06, error(permission_error(input,past_end_of_stream,_),_)) :-
+	succeeds(iso_peek_char_2_06) :-
 		^^set_text_input(s, ''),
-		{get_char(s, _), peek_char(s, _Char)}.
+		catch({get_char(s, _), peek_char(s, _Char)}, error(permission_error(input,past_end_of_stream,_),_), true),
+		stream_property(S, alias(s)),
+		stream_property(S, end_of_stream(past)).
 
 	throws(iso_peek_char_2_07, error(permission_error(input,stream,user_output),_)) :-
 		{peek_char(user_output, _)}.

@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/11/05,
+		date is 2014/11/06,
 		comment is 'Unit tests for the ISO Prolog standard peek_code/1-2 built-in predicates.'
 	]).
 
@@ -88,10 +88,11 @@
 		current_input(S),
 		{peek_code(S, _)}.
 
-	throws(sics_peek_code_2_15, error(permission_error(input,past_end_of_stream,S),_)) :-
+	succeeds(sics_peek_code_2_15) :-
 		^^set_text_input(''),
 		current_input(S),
-		{get_code(_), peek_code(_)}.
+		catch({get_code(_), peek_code(_)}, error(permission_error(input,past_end_of_stream,S),_), true),
+		stream_property(S, end_of_stream(past)).
 
 	succeeds(sics_peek_code_2_16) :-
 		^^set_text_input(''),
