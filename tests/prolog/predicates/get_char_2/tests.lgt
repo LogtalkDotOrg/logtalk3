@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/11/05,
+		date is 2014/11/06,
 		comment is 'Unit tests for the ISO Prolog standard get_char/1-2 built-in predicates.'
 	]).
 
@@ -71,8 +71,14 @@
 	- throws(sics_get_char_2_09, error(type_error(in_character,1),_)) :-
 		{get_char(user_input, 1)}.
 
-	throws(sics_get_char_2_10, error(domain_error(stream_or_alias,foo),_)) :-
-		{get_char(foo,_)}.
+	:- if(current_logtalk_flag(prolog_conformance, iso_strict)).
+		throws(sics_get_char_2_10, error(domain_error(stream_or_alias,foo),_)) :-
+			{get_char(foo,_)}.
+	:- else.
+		throws(sics_get_char_2_10, [error(domain_error(stream_or_alias,foo),_), error(existence_error(stream,foo),_)]) :-
+			% the second exception term is a common but not conforming alternative
+			{get_char(foo,_)}.
+	:- endif.
 
 	throws(sics_get_char_2_11, error(existence_error(stream,S),_)) :-
 		^^closed_output_stream(S, []),

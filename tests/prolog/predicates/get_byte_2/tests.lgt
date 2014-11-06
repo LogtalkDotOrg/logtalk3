@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/11/05,
+		date is 2014/11/06,
 		comment is 'Unit tests for the ISO Prolog standard get_byte/1-2 built-in predicates.'
 	]).
 
@@ -63,9 +63,16 @@
 		^^set_binary_input([]),
 		{get_byte(-2)}.
 
-	throws(sics_get_byte_2_09, error(domain_error(stream_or_alias,foo),_)) :-
-		^^set_binary_input([]),
-		{get_byte(foo,_)}.
+	:- if(current_logtalk_flag(prolog_conformance, iso_strict)).
+		throws(sics_get_byte_2_09, error(domain_error(stream_or_alias,foo),_)) :-
+			^^set_binary_input([]),
+			{get_byte(foo,_)}.
+	:- else.
+		throws(sics_get_byte_2_09, [error(domain_error(stream_or_alias,foo),_), error(existence_error(stream,foo),_)]) :-
+			% the second exception term is a common but not conforming alternative
+			^^set_binary_input([]),
+			{get_byte(foo,_)}.
+	:- endif.
 
 	throws(sics_get_byte_2_10, error(existence_error(stream,S),_)) :-
 		^^closed_input_stream(S, [type(binary)]),

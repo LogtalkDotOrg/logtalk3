@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/11/05,
+		date is 2014/11/06,
 		comment is 'Unit tests for the ISO Prolog standard set_stream_position/2 built-in predicate.'
 	]).
 
@@ -31,9 +31,16 @@
 		{current_input(S)},
 		{set_stream_position(S, _Pos)}.
 
-	throws(sics_set_stream_position_2_03, error(domain_error(stream_or_alias,foo),_)) :-
-		^^stream_position(Pos),
-		{set_stream_position(foo,Pos)}.
+	:- if(current_logtalk_flag(prolog_conformance, iso_strict)).
+		throws(sics_set_stream_position_2_03, error(domain_error(stream_or_alias,foo),_)) :-
+			^^stream_position(Pos),
+			{set_stream_position(foo,Pos)}.
+	:- else.
+		throws(sics_set_stream_position_2_03, [error(domain_error(stream_or_alias,foo),_), error(existence_error(stream,foo),_)]) :-
+			% the second exception term is a common but not conforming alternative
+			^^stream_position(Pos),
+			{set_stream_position(foo,Pos)}.
+	:- endif.
 
 	throws(sics_set_stream_position_2_04, error(existence_error(stream,S),_)) :-
 		^^stream_position(Pos),

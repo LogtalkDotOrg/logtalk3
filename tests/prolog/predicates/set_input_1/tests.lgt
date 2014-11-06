@@ -30,8 +30,14 @@
 	throws(sics_set_input_1_2, error(instantiation_error,_)) :-
 		{set_input(_S)}.
 
-	throws(sics_set_input_1_3, error(domain_error(stream_or_alias,foo),_)) :-
-		{set_input(foo)}.
+	:- if(current_logtalk_flag(prolog_conformance, iso_strict)).
+		throws(sics_set_input_1_3, error(domain_error(stream_or_alias,foo),_)) :-
+			{set_input(foo)}.
+	:- else.
+		throws(sics_set_input_1_3, [error(domain_error(stream_or_alias,foo),_), error(existence_error(stream,foo),_)]) :-
+			% the second exception term is a common but not conforming alternative
+			{set_input(foo)}.
+	:- endif.
 
 	throws(sics_set_input_1_4, error(existence_error(stream,S),_)) :-
 		^^closed_input_stream(S, []),

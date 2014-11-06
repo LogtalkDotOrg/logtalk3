@@ -75,8 +75,14 @@
 	- throws(sics_peek_char_2_10, error(type_error(in_character,1),_)) :-
 		{peek_char(user_input, 1)}.
 
-	throws(sics_peek_char_2_11, error(domain_error(stream_or_alias,foo),_)) :-
-		{peek_char(foo,_)}.
+	:- if(current_logtalk_flag(prolog_conformance, iso_strict)).
+		throws(sics_peek_char_2_11, error(domain_error(stream_or_alias,foo),_)) :-
+			{peek_char(foo,_)}.
+	:- else.
+		throws(sics_peek_char_2_11, [error(domain_error(stream_or_alias,foo),_), error(existence_error(stream,foo),_)]) :-
+			% the second exception term is a common but not conforming alternative
+			{peek_char(foo,_)}.
+	:- endif.
 
 	throws(sics_peek_char_2_12, error(existence_error(stream,S),_)) :-
 		^^closed_input_stream(S, []),

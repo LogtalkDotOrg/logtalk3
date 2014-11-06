@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/11/05,
+		date is 2014/11/06,
 		comment is 'Unit tests for the ISO Prolog standard write_term/3, write_term/2, write/2, write/1, writeq/2, writeq/1, write_canonical/2, and write_canonical/1 built-in predicates.'
 	]).
 
@@ -92,8 +92,14 @@
 	throws(sics_write_term_3_16, error(type_error(list,[quoted(true)|foo]),_)) :-
 		{write_term(1, [quoted(true)|foo])}.
 
-	throws(sics_write_term_3_17, error(domain_error(stream_or_alias,foo),_)) :-
-		{write(foo, 1)}.
+	:- if(current_logtalk_flag(prolog_conformance, iso_strict)).
+		throws(sics_write_term_3_17, error(domain_error(stream_or_alias,foo),_)) :-
+			{write(foo, 1)}.
+	:- else.
+		throws(sics_write_term_3_17, [error(domain_error(stream_or_alias,foo),_), error(existence_error(stream,foo),_)]) :-
+			% the second exception term is a common but not conforming alternative
+			{write(foo, 1)}.
+	:- endif.
 
 	throws(sics_write_term_3_18, error(domain_error(write_option,foo),_)) :-
 		{write_term(1, [quoted(true),foo])}.

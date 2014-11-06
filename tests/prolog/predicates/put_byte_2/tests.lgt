@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/11/03,
+		date is 2014/11/06,
 		comment is 'Unit tests for the ISO Prolog standard put_byte/1-2 built-in predicates.'
 	]).
 
@@ -68,8 +68,14 @@
 	throws(sics_put_byte_2_11, error(instantiation_error,_)) :-
 		{put_byte(_S, 1)}.
 
-	throws(sics_put_byte_2_12, error(domain_error(stream_or_alias, foo),_)) :-
-		{put_byte(foo, 1)}.
+	:- if(current_logtalk_flag(prolog_conformance, iso_strict)).
+		throws(sics_put_byte_2_12, error(domain_error(stream_or_alias, foo),_)) :-
+			{put_byte(foo, 1)}.
+	:- else.
+		throws(sics_put_byte_2_12, [error(domain_error(stream_or_alias,foo),_), error(existence_error(stream,foo),_)]) :-
+			% the second exception term is a common but not conforming alternative
+			{put_byte(foo, 1)}.
+	:- endif.
 
 	cleanup :-
 		^^clean_binary_input,

@@ -26,8 +26,14 @@
 	throws(sics_at_end_of_stream_1_01, error(instantiation_error,_)) :-
 		{at_end_of_stream(_S)}.
 
-	throws(sics_at_end_of_stream_1_02, error(domain_error(stream_or_alias,foo),_)) :-
-		{at_end_of_stream(foo)}.
+	:- if(current_logtalk_flag(prolog_conformance, iso_strict)).
+		throws(sics_at_end_of_stream_1_02, error(domain_error(stream_or_alias,foo),_)) :-
+			{at_end_of_stream(foo)}.
+	:- else.
+		throws(sics_at_end_of_stream_1_02, [error(domain_error(stream_or_alias,foo),_), error(existence_error(stream,foo),_)]) :-
+			% the second exception term is a common but not conforming alternative
+			{at_end_of_stream(foo)}.
+	:- endif.
 
 	throws(sics_at_end_of_stream_1_03, error(existence_error(stream,S),_)) :-
 		^^closed_output_stream(S, []),
@@ -52,5 +58,8 @@
 		^^set_binary_input(st_i, [0]),
 		\+ {at_end_of_stream(st_i)},
 		^^set_binary_input(st_i, [0]).
+
+	cleanup :-
+		^^clean_binary_input.
 
 :- end_object.
