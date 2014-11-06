@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2014/11/5</code>
+            <code>2014/11/6</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -225,6 +225,198 @@
           </dl>
         </div>
         <div class="section">
+          <h3 id="set_text_input/2" class="code">set_text_input/2</h3>
+          <blockquote>
+            <p class="comment">Creates a temporary file (referenced with the given alias) with the given text contents and sets the current input stream to the file.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>set_text_input(Alias,Contents)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>set_text_input(+atom,+atom) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="set_text_input/1" class="code">set_text_input/1</h3>
+          <blockquote>
+            <p class="comment">Creates a temporary file with the given text contents and sets the current input stream to the file.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>set_text_input(Contents)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>set_text_input(+atom) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="check_text_input/2" class="code">check_text_input/2</h3>
+          <blockquote>
+            <p class="comment">Checks that the temporary file being written have the expected text contents.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>check_text_input(Alias,Contents)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>check_text_input(+atom,+atom) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="check_text_input/1" class="code">check_text_input/1</h3>
+          <blockquote>
+            <p class="comment">Checks that the temporary file being written have the expected text contents.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>check_text_input(Contents)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>check_text_input(+atom) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="clean_text_input/0" class="code">clean_text_input/0</h3>
+          <blockquote>
+            <p class="comment">Cleans the temporary file used when testing text input.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>clean_text_input &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="set_binary_input/2" class="code">set_binary_input/2</h3>
+          <blockquote>
+            <p class="comment">Creates a temporary file (referenced with the given alias) with the given binary contents and sets the current input stream to the file.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>set_binary_input(Alias,Bytes)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>set_binary_input(+atom,+list(byte)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="set_binary_input/1" class="code">set_binary_input/1</h3>
+          <blockquote>
+            <p class="comment">Creates a temporary file with the given binary contents and sets the current input stream to the file.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>set_binary_input(Bytes)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>set_binary_input(+list(byte)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="check_binary_input/2" class="code">check_binary_input/2</h3>
+          <blockquote>
+            <p class="comment">Checks that the temporary file (referenced with the given alias) have the expected binary contents.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>check_binary_input(Alias,Bytes)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>check_binary_input(+atom,+list(byte)) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="check_binary_input/1" class="code">check_binary_input/1</h3>
+          <blockquote>
+            <p class="comment">Checks that the temporary file have the expected binary contents.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>check_binary_input(Bytes)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>check_binary_input(+list(byte)) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="clean_binary_input/0" class="code">clean_binary_input/0</h3>
+          <blockquote>
+            <p class="comment">Cleans the temporary file used when testing binary input.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>clean_binary_input &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
           <h3 id="set_text_output/2" class="code">set_text_output/2</h3>
           <blockquote>
             <p class="comment">Creates a temporary file (referenced with the given alias) with the given text contents and sets the current output stream to the file.</p>
@@ -301,6 +493,22 @@
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>check_text_output(+atom) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="clean_text_output/0" class="code">clean_text_output/0</h3>
+          <blockquote>
+            <p class="comment">Cleans the temporary file used when testing text output.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>clean_text_output &ndash; one</code>
             </dd>
           </dl>
         </div>
@@ -385,6 +593,102 @@
           </dl>
         </div>
         <div class="section">
+          <h3 id="clean_binary_output/0" class="code">clean_binary_output/0</h3>
+          <blockquote>
+            <p class="comment">Cleans the temporary file used when testing binary output.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>clean_binary_output &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="create_text_file/2" class="code">create_text_file/2</h3>
+          <blockquote>
+            <p class="comment">Creates a text file with the given contents.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>create_text_file(File,Contents)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>create_text_file(+atom,+atom) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="create_binary_file/2" class="code">create_binary_file/2</h3>
+          <blockquote>
+            <p class="comment">Creates a binary file with the given contents.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>create_binary_file(File,Bytes)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>create_binary_file(+atom,+list(byte)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="check_text_file/2" class="code">check_text_file/2</h3>
+          <blockquote>
+            <p class="comment">Checks the contents of a text file.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>check_text_file(File,Contents)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>check_text_file(+atom,+atom) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="checks_binary_file/2" class="code">checks_binary_file/2</h3>
+          <blockquote>
+            <p class="comment">Checks the contents of a binary file.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>checks_binary_file(File,Bytes)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>checks_binary_file(+atom,+list(byte)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
           <h3 id="closed_input_stream/2" class="code">closed_input_stream/2</h3>
           <blockquote>
             <p class="comment">Opens a temporary file with the given options for reading, closes it, and returns its stream handle.</p>
@@ -400,7 +704,7 @@
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
-              <code>closed_input_stream(-stream,+list(stream_option)) &ndash; zero_or_one</code>
+              <code>closed_input_stream(-stream,+list(stream_option)) &ndash; one</code>
             </dd>
           </dl>
         </div>

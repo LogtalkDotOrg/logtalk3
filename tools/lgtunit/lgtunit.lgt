@@ -242,7 +242,21 @@
 	:- mode(create_binary_file(+atom, +list(byte)), one).
 	:- info(create_binary_file/2, [
 		comment is 'Creates a binary file with the given contents.',
-		argnames is ['Stream', 'Bytes']
+		argnames is ['File', 'Bytes']
+	]).
+
+	:- protected(check_text_file/2).
+	:- mode(check_text_file(+atom, +atom), one).
+	:- info(check_text_file/2, [
+		comment is 'Checks the contents of a text file.',
+		argnames is ['File', 'Contents']
+	]).
+
+	:- protected(checks_binary_file/2).
+	:- mode(checks_binary_file(+atom, +list(byte)), one).
+	:- info(checks_binary_file/2, [
+		comment is 'Checks the contents of a binary file.',
+		argnames is ['File', 'Bytes']
 	]).
 
 	:- protected(closed_input_stream/2).
@@ -993,6 +1007,18 @@
 		open(Path, write, Stream, [type(binary)]),
 		write_binary_contents(Bytes, Stream),
 		close(Stream).
+
+	check_text_file(File, ExpectedContents) :-
+		os::expand_path(File, Path),
+		open(Path, read, Stream),
+		get_text_contents(Stream, ActualContents),
+		ExpectedContents == ActualContents.
+
+	check_binary_file(File, ExpectedContents) :-
+		os::expand_path(File, Path),
+		open(Path, read, Stream, [type(binary)]),
+		get_binary_contents(Stream, ActualContents),
+		ExpectedContents == ActualContents.
 
 	% auxiliary predicates for testing input/output predicates
 
