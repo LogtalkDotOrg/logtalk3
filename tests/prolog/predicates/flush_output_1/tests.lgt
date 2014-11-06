@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/11/03,
+		date is 2014/11/06,
 		comment is 'Unit tests for the ISO Prolog standard flush_output/0-1 built-in predicates.'
 	]).
 
@@ -23,10 +23,40 @@
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
-	throws(sics_flush_output_1_02, error(domain_error(stream_or_alias,foo),_)) :-
-		{flush_output(foo)}.
+	succeeds(sics_flush_output_1_01) :-
+		os::expand_path(foo, Path),
+		open(Path, write, S), write(S, foo),
+		{flush_output(S)},
+		^^check_text_file(Path, 'foo').
+
+	:- if(current_logtalk_flag(prolog_conformance, iso_strict)).
+		throws(sics_flush_output_1_02, error(domain_error(stream_or_alias,foo),_)) :-
+			{flush_output(foo)}.
+	:- else.
+		throws(sics_flush_output_1_02, [error(domain_error(stream_or_alias,foo),_), error(existence_error(stream,foo),_)]) :-
+			% the second exception term is a common but not conforming alternative
+			{flush_output(foo)}.
+	:- endif.
 
 	throws(sics_flush_output_1_03, error(instantiation_error,_)) :-
 		{flush_output(_S)}.
+
+	throws(sics_flush_output_1_04, error(existence_error(stream,S),_)) :-
+		^^closed_output_stream(S, []),
+		{flush_output(S)}.
+
+	throws(sics_flush_output_1_05, error(permission_error(output,stream,S),_)) :-
+		os::expand_path(foo, Path),
+		^^create_text_file(Path, ''),
+		open(Path, read, S),
+		{flush_output(S)}.
+
+	succeeds(sics_flush_output_1_06) :-
+		^^set_text_output(st_o, ''),
+		{flush_output(st_o)},
+		^^check_text_output(st_o, '').
+
+	cleanup :-
+		os::delete_file(foo).
 
 :- end_object.
