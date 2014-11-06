@@ -128,6 +128,15 @@ an object internal predicates, make sure that the `context_switching_calls`
 compiler flag is set to `allow` for those objects.
 
 
+Testing input/output predicates
+-------------------------------
+
+Extensive support for testing input/output predicates is provided, based on
+similar support found on the Prolog conformance testing framework written by
+Péter Szabó and Péter Szeredi. For practical examples, check the included
+tests for Prolog conformance of standard input/output predicates.
+
+
 Setup and cleanup goals
 -----------------------
 

@@ -40,8 +40,12 @@ To run all the provided tests with e.g. SWI-Prolog, open a terminal and type:
 	$ logtalk_tester -p swi
 	...
 
-Tests for standard built-in predicates that require input/output operations
-are currently missing.
+By convention, tests for standard built-in predicates encapsulate the main
+test goal using the `{}/1` control construct. In most cases, this precaution
+is not necessary as the calls would be compiled as-is. An exception is the
+read and write predicates that are affected by operator declarations, which
+otherwise would be compiled to ensure the locality of operators to conform
+to Logtalk semantics.
 
 Some unit tests are currently skipped. These tests are mainly split between
 two groups: tests whose result is specified as undefined in the standards
@@ -58,8 +62,12 @@ strict ISO mode that may result in different test results. This strict mode,
 when made available, is usually only used if it's the default when starting
 Logtalk.
 
-To find if the tests are run in strict ISO mode or in lax ISO mode, check the
-value of the read-only flag `prolog_conformance` using the query:
+To find if the tests are run in strict ISO mode (`iso_strict`) or in lax ISO
+mode (`iso_lax`), check the value of the read-only flag `prolog_conformance`
+using the query:
 
 	?- current_logtalk_flag(prolog_conformance, Mode).
 
+This flag is used mainly in testing error conditions. For some of those tests,
+when running in lax mode, exception terms may be accepted as valid if they are
+reasonable although non-compliant.
