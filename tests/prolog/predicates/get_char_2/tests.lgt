@@ -15,29 +15,101 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/11/03,
+		date is 2014/11/05,
 		comment is 'Unit tests for the ISO Prolog standard get_char/1-2 built-in predicates.'
+	]).
+
+	:- discontiguous([
+		succeeds/1, throws/2
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.12.1.4
 
-	throws(iso_get_char_2_11, error(permission_error(input,stream,user_output),_)) :-
+	succeeds(iso_get_char_2_01) :-
+		^^set_text_input('qwerty'),
+		{get_char(Char)},
+		Char == 'q',
+		^^check_text_input('werty').
+
+	succeeds(iso_get_char_2_02) :-
+		^^set_text_input(st_i, 'qwerty'),
+		{get_char(st_i, Char)},
+		Char == 'q',
+		^^check_text_input(st_i, 'werty').
+
+	succeeds(iso_get_char_2_03) :-
+		^^set_text_input(st_i, '\'qwerty\''),
+		{get_char(st_i, Char)},
+		Char == '\'',
+		^^check_text_input(st_i, 'qwerty\'').
+
+	succeeds(iso_get_char_2_04) :-
+		^^set_text_input(st_i, 'qwerty'),
+		\+ {get_char(st_i, p)},
+		^^check_text_input(st_i, 'werty').
+
+	succeeds(iso_get_char_2_05) :-
+		^^set_text_input(st_i, ''),
+		{get_char(st_i, Char)},
+		Char == end_of_file,
+		stream_property(Stream, alias(st_i)),
+		stream_property(Stream, end_of_stream(past)).
+
+	throws(iso_get_char_2_06, error(permission_error(input,stream,user_output),_)) :-
 		{get_char(user_output, _)}.
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
-	throws(sics_get_char_2_13, error(instantiation_error,_)) :-
+	throws(sics_get_char_2_07, error(instantiation_error,_)) :-
 		{get_char(_, _)}.
 
 	% skip the next two tests for now as some Prolog systems don't type check the output argument
 
-	- throws(sics_get_char_2_14, error(type_error(in_character,1),_)) :-
+	- throws(sics_get_char_2_08, error(type_error(in_character,1),_)) :-
 		{get_char(1)}.
 
-	- throws(sics_get_char_2_15, error(type_error(in_character,1),_)) :-
+	- throws(sics_get_char_2_09, error(type_error(in_character,1),_)) :-
 		{get_char(user_input, 1)}.
 
-	throws(sics_get_char_2_16, error(domain_error(stream_or_alias,foo),_)) :-
+	throws(sics_get_char_2_10, error(domain_error(stream_or_alias,foo),_)) :-
 		{get_char(foo,_)}.
+
+	throws(sics_get_char_2_11, error(existence_error(stream,S),_)) :-
+		^^closed_output_stream(S, []),
+		{get_char(S,_)}.
+
+	throws(sics_get_char_2_12, error(permission_error(input,stream,S),_)) :-
+		current_output(S),
+		{get_char(S,_)}.
+
+	throws(sics_get_char_2_13, error(permission_error(input,binary_stream,S),_)) :-
+		^^set_binary_input([]),
+		current_input(S),
+		{get_char(_)}.
+
+	succeeds(sics_get_char_2_14) :-
+		^^set_text_input(''),
+		current_input(S),
+		catch({get_char(_), get_char(_)}, error(permission_error(input,past_end_of_stream,S),_), true),
+		stream_property(S, end_of_stream(past)).
+
+	succeeds(sics_get_char_2_15) :-
+		os::expand_path(t, Path),
+		^^create_text_file(Path, ''),
+		open(Path, read, S, [eof_action(eof_code)]),
+		{get_char(S, C1), get_char(S, C2)},
+		C1 == end_of_file, C2 == end_of_file,
+		stream_property(S, end_of_stream(past)).
+
+	throws(sics_get_char_2_16, error(representation_error(character),_)) :-
+		os::expand_path(t, Path),
+		^^create_binary_file(Path, [0]),
+		open(Path, read, S),
+		{get_char(S, _)}.
+
+	cleanup :-
+		os::delete_file(t),
+		^^clean_text_input,
+		^^clean_binary_input.
 
 :- end_object.
