@@ -231,8 +231,22 @@
 		comment is 'Cleans the temporary file used when testing binary output.'
 	]).
 
+	:- protected(create_text_file/2).
+	:- mode(create_text_file(+atom, +atom), one).
+	:- info(create_text_file/2, [
+		comment is 'Creates a text file with the given contents.',
+		argnames is ['File', 'Contents']
+	]).
+
+	:- protected(create_binary_file/2).
+	:- mode(create_binary_file(+atom, +list(byte)), one).
+	:- info(create_binary_file/2, [
+		comment is 'Creates a binary file with the given contents.',
+		argnames is ['Stream', 'Bytes']
+	]).
+
 	:- protected(closed_input_stream/2).
-	:- mode(closed_input_stream(-stream, +list(stream_option)), zero_or_one).
+	:- mode(closed_input_stream(-stream, +list(stream_option)), one).
 	:- info(closed_input_stream/2, [
 		comment is 'Opens a temporary file with the given options for reading, closes it, and returns its stream handle.',
 		argnames is ['Stream', 'Options']
@@ -965,6 +979,20 @@
 
 	clean_binary_output :-
 		clean_file('test_output.binary', _).
+
+	% other predicates for testing input/output predicates
+
+	create_text_file(File, Atom) :-
+		os::expand_path(File, Path),
+		open(Path, write, Stream),
+		write(Stream, Atom),
+		close(Stream).
+
+	create_binary_file(File, Bytes) :-
+		os::expand_path(File, Path),
+		open(Path, write, Stream, [type(binary)]),
+		put_bytes(Bytes, Stream),
+		close(Stream).
 
 	% auxiliary predicates for testing input/output predicates
 

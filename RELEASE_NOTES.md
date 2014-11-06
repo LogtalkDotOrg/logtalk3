@@ -56,6 +56,8 @@ Tools
 * ADDED: Support for exporting Markdown text files to the `lgtdoc` tool.
 
 * ADDED: Support for testing input/output predicates to the `lgtunit` tool.
+Based on similar support found on the Prolog conformance testing framework
+written by Péter Szabó and Péter Szeredi.
 
 * IMPROVED: Updated the `lgtunit` tool to restore the current input and output
 streams after running each unit test.
