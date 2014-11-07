@@ -87,10 +87,12 @@
 	throws(sics_read_term_3_13, error(type_error(list,bar),_)) :-
 		{read_term(user_input, _, bar)}.
 
-	% skip this test for now as some Prolog systems simply ignore non-recognized
-	% read options which make the test hang waiting for user input
-	- throws(sics_read_term_3_14, error(domain_error(read_option,bar),_)) :-
-		{read_term(user_input, _, [bar])}.
+	throws(sics_read_term_3_14, error(domain_error(read_option,bar),_)) :-
+		% some Prolog systems simply ignore non-recognized read options: provide a term
+		% to be read in that case so that the unit test doesn't hang waiting for input
+		^^set_text_input('a. '),
+		current_input(S),
+		{read_term(S, _, [bar])}.
 
 	throws(sics_read_term_3_15, error(permission_error(input,stream,user_output),_)) :-
 		{read_term(user_output, _, [])}.
