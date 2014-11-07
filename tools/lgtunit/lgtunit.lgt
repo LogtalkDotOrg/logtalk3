@@ -31,7 +31,7 @@
 		version is 2.0,
 		author is 'Paulo Moura',
 		date is 2014/11/06,
-		comment is 'A simple unit test framework featuring predicate clause coverage.'
+		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, and multiple test dialects.'
 	]).
 
 	:- public(cover/1).
@@ -98,14 +98,14 @@
 	:- protected(set_text_input/2).
 	:- mode(set_text_input(+atom, +atom), one).
 	:- info(set_text_input/2, [
-		comment is 'Creates a temporary file (referenced with the given alias) with the given text contents and sets the current input stream to the file.',
+		comment is 'Creates a temporary file with the given text contents and opens it for reading referenced by the given alias.',
 		argnames is ['Alias', 'Contents']
 	]).
 
 	:- protected(set_text_input/1).
 	:- mode(set_text_input(+atom), one).
 	:- info(set_text_input/1, [
-		comment is 'Creates a temporary file with the given text contents and sets the current input stream to the file.',
+		comment is 'Creates a temporary file with the given text contents, opens it for reading, and sets the current input stream to the file.',
 		argnames is ['Contents']
 	]).
 
@@ -132,14 +132,14 @@
 	:- protected(set_binary_input/2).
 	:- mode(set_binary_input(+atom, +list(byte)), one).
 	:- info(set_binary_input/2, [
-		comment is 'Creates a temporary file (referenced with the given alias) with the given binary contents and sets the current input stream to the file.',
+		comment is 'Creates a temporary file with the given binary contents and opens it for reading referenced with the given alias.',
 		argnames is ['Alias', 'Bytes']
 	]).
 
 	:- protected(set_binary_input/1).
 	:- mode(set_binary_input(+list(byte)), one).
 	:- info(set_binary_input/1, [
-		comment is 'Creates a temporary file with the given binary contents and sets the current input stream to the file.',
+		comment is 'Creates a temporary file with the given binary contents, opens it for reading, and sets the current input stream to the file.',
 		argnames is ['Bytes']
 	]).
 
@@ -166,7 +166,7 @@
 	:- protected(set_text_output/2).
 	:- mode(set_text_output(+atom, +atom), one).
 	:- info(set_text_output/2, [
-		comment is 'Creates a temporary file (referenced with the given alias) with the given text contents and sets the current output stream to the file.',
+		comment is 'Creates a temporary file with the given text contents and referenced with the given alias.',
 		argnames is ['Alias', 'Contents']
 	]).
 
@@ -200,7 +200,7 @@
 	:- protected(set_binary_output/2).
 	:- mode(set_binary_output(+atom, +list(byte)), one).
 	:- info(set_binary_output/2, [
-		comment is 'Creates a temporary file (referenced with the given alias) with the given binary contents and sets the current output stream to the file.',
+		comment is 'Creates a temporary file with the given binary contents and referenced with the given alias.',
 		argnames is ['Alias', 'Bytes']
 	]).
 
@@ -246,16 +246,16 @@
 	]).
 
 	:- protected(check_text_file/2).
-	:- mode(check_text_file(+atom, +atom), one).
+	:- mode(check_text_file(+atom, +atom), zero_or_one).
 	:- info(check_text_file/2, [
-		comment is 'Checks the contents of a text file.',
+		comment is 'Checks that the contents of a text file match the expected contents.',
 		argnames is ['File', 'Contents']
 	]).
 
 	:- protected(checks_binary_file/2).
-	:- mode(checks_binary_file(+atom, +list(byte)), one).
+	:- mode(checks_binary_file(+atom, +list(byte)), zero_or_one).
 	:- info(checks_binary_file/2, [
-		comment is 'Checks the contents of a binary file.',
+		comment is 'Checks the contents of a binary file match the expected contents.',
 		argnames is ['File', 'Bytes']
 	]).
 
@@ -276,7 +276,7 @@
 	:- protected(stream_position/1).
 	:- mode(stream_position(-stream_position), one).
 	:- info(stream_position/1, [
-		comment is 'Returns a valid stream position.',
+		comment is 'Returns a syntactically valid stream position.',
 		argnames is ['Position']
 	]).
 
@@ -874,17 +874,17 @@
 
 	set_text_input(Alias, Contents) :-
 		clean_file(Alias, 'test_input.text', Path),
-		open(Path, write, WriteStream, [alias(Alias)]),
+		open(Path, write, WriteStream, [type(text)]),
 		write_text_contents(WriteStream, Contents),
 		close(WriteStream),
 		open(Path, read, _, [type(text),alias(Alias),eof_action(error)]).
 
 	set_text_input(Contents) :-
 		clean_file('test_input.text', Path),
-		open(Path, write, WriteStream),
+		open(Path, write, WriteStream, [type(text)]),
 		write_text_contents(WriteStream, Contents),
 		close(WriteStream),
-		open(Path, read, ReadStream),
+		open(Path, read, ReadStream, [type(text),eof_action(error)]),
 		set_input(ReadStream).
 
 	check_text_input(Alias, Atom) :-
@@ -903,7 +903,7 @@
 
 	set_binary_input(Alias, Bytes) :-
 		clean_file(Alias, 'test_input.binary', Path),
-		open(Path, write, WriteStream, [type(binary),alias(Alias)]),
+		open(Path, write, WriteStream, [type(binary)]),
 		write_binary_contents(Bytes, WriteStream),
 		close(WriteStream),
 		open(Path, read, _, [type(binary),alias(Alias),eof_action(error)]).
@@ -934,12 +934,12 @@
 
 	set_text_output(Alias, Contents) :-
 		clean_file('test_output.text', Path),
-		open(Path, write, Stream, [alias(Alias)]),
+		open(Path, write, Stream, [type(text),alias(Alias)]),
 		write_text_contents(Stream, Contents).
 
 	set_text_output(Contents) :-
 		clean_file('test_output.text', Path),
-		open(Path, write, Stream),
+		open(Path, write, Stream, [type(text)]),
 		write_text_contents(Stream, Contents),
 		set_output(Stream).
 
@@ -1102,7 +1102,7 @@
 		os::delete_file(Path).
 
 	% auxiliary predicates; we could use the Logtalk standard library but we
-	% prefer to make this object self-contained given its testing purpose
+	% prefer to minimize this object dependencies given its testing purpose
 
 	append([], List, List).
 	append([Head| Tail], List, [Head| Tail2]) :-

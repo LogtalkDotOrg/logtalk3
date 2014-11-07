@@ -11,7 +11,7 @@
       <p class="type">object</p>
       <h1 class="code">lgtunit</h1>
       <blockquote>
-        <p class="comment">A simple unit test framework featuring predicate clause coverage.</p>
+        <p class="comment">A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, and multiple test dialects.</p>
       </blockquote>
     </div>
     <div class="entity">
@@ -227,7 +227,7 @@
         <div class="section">
           <h3 id="set_text_input/2" class="code">set_text_input/2</h3>
           <blockquote>
-            <p class="comment">Creates a temporary file (referenced with the given alias) with the given text contents and sets the current input stream to the file.</p>
+            <p class="comment">Creates a temporary file with the given text contents and opens it for reading referenced by the given alias.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -247,7 +247,7 @@
         <div class="section">
           <h3 id="set_text_input/1" class="code">set_text_input/1</h3>
           <blockquote>
-            <p class="comment">Creates a temporary file with the given text contents and sets the current input stream to the file.</p>
+            <p class="comment">Creates a temporary file with the given text contents, opens it for reading, and sets the current input stream to the file.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -323,7 +323,7 @@
         <div class="section">
           <h3 id="set_binary_input/2" class="code">set_binary_input/2</h3>
           <blockquote>
-            <p class="comment">Creates a temporary file (referenced with the given alias) with the given binary contents and sets the current input stream to the file.</p>
+            <p class="comment">Creates a temporary file with the given binary contents and opens it for reading referenced with the given alias.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -343,7 +343,7 @@
         <div class="section">
           <h3 id="set_binary_input/1" class="code">set_binary_input/1</h3>
           <blockquote>
-            <p class="comment">Creates a temporary file with the given binary contents and sets the current input stream to the file.</p>
+            <p class="comment">Creates a temporary file with the given binary contents, opens it for reading, and sets the current input stream to the file.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -419,7 +419,7 @@
         <div class="section">
           <h3 id="set_text_output/2" class="code">set_text_output/2</h3>
           <blockquote>
-            <p class="comment">Creates a temporary file (referenced with the given alias) with the given text contents and sets the current output stream to the file.</p>
+            <p class="comment">Creates a temporary file with the given text contents and referenced with the given alias.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -515,7 +515,7 @@
         <div class="section">
           <h3 id="set_binary_output/2" class="code">set_binary_output/2</h3>
           <blockquote>
-            <p class="comment">Creates a temporary file (referenced with the given alias) with the given binary contents and sets the current output stream to the file.</p>
+            <p class="comment">Creates a temporary file with the given binary contents and referenced with the given alias.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -651,7 +651,7 @@
         <div class="section">
           <h3 id="check_text_file/2" class="code">check_text_file/2</h3>
           <blockquote>
-            <p class="comment">Checks the contents of a text file.</p>
+            <p class="comment">Checks that the contents of a text file match the expected contents.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -664,14 +664,14 @@
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
-              <code>check_text_file(+atom,+atom) &ndash; one</code>
+              <code>check_text_file(+atom,+atom) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
           <h3 id="checks_binary_file/2" class="code">checks_binary_file/2</h3>
           <blockquote>
-            <p class="comment">Checks the contents of a binary file.</p>
+            <p class="comment">Checks the contents of a binary file match the expected contents.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -684,7 +684,7 @@
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
-              <code>checks_binary_file(+atom,+list(byte)) &ndash; one</code>
+              <code>checks_binary_file(+atom,+list(byte)) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
@@ -731,7 +731,7 @@
         <div class="section">
           <h3 id="stream_position/1" class="code">stream_position/1</h3>
           <blockquote>
-            <p class="comment">Returns a valid stream position.</p>
+            <p class="comment">Returns a syntactically valid stream position.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
