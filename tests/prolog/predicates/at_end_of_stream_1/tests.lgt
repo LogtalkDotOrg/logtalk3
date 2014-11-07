@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/11/06,
+		date is 2014/11/07,
 		comment is 'Unit tests for the ISO Prolog standard at_end_of_stream/0-1 built-in predicates.'
 	]).
 
@@ -60,6 +60,7 @@
 		^^set_binary_input(st_i, [0]).
 
 	cleanup :-
+		^^clean_text_input,
 		^^clean_binary_input.
 
 :- end_object.

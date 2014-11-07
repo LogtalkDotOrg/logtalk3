@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/11/06,
+		date is 2014/11/07,
 		comment is 'Unit tests for the ISO Prolog standard read_term/3, read_term/2, read/2, and read/1 built-in predicates.'
 	]).
 
@@ -59,7 +59,7 @@
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
 	succeeds(iso_read_term_3_07) :-
-		^^set_text_input('foo( bar).'),
+		^^set_text_input('foo( bar). '),
 		{read_term(T, [singletons(S)])},
 		T == foo(bar), S == [].
 
@@ -130,13 +130,13 @@
 
 	succeeds(sics_read_term_3_22) :-
 		max_min_integer_as_atom(max_integer, Integer, Atom),
-		^^set_text_input([Atom, '.']),
+		^^set_text_input([Atom, '. ']),
 		{read(X)},
 		X == Integer.
 		
 	succeeds(sics_read_term_3_23) :-
 		max_min_integer_as_atom(min_integer, Integer, Atom),
-		^^set_text_input([Atom, '.']),
+		^^set_text_input([Atom, '. ']),
 		{read(X)},
 		X == Integer.
 
