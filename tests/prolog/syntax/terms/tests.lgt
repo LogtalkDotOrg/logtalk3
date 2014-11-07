@@ -26,35 +26,35 @@
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 6.3.3.1
 
 	succeeds(iso_term_01) :-
-		^^set_text_input('f(x,y).'),
+		^^set_text_input('f(x,y). '),
 		{read(_)}.
 
 	succeeds(iso_term_02) :-
-		^^set_text_input('f(:-, ;, [:-, :-|:-]).'),
+		^^set_text_input('f(:-, ;, [:-, :-|:-]). '),
 		{read(_)}.
 
 	throws(iso_term_03, error(syntax_error(_),_)) :-
-		^^set_text_input('f(,,a).'),
+		^^set_text_input('f(,,a). '),
 		{read(_)}.
 
 	throws(iso_term_04, error(syntax_error(_),_)) :-
-		^^set_text_input('[a,,|v].'),
+		^^set_text_input('[a,,|v]. '),
 		{read(_)}.
 
 	throws(iso_term_05, error(syntax_error(_),_)) :-
-		^^set_text_input('[a,b|,].'),
+		^^set_text_input('[a,b|,]. '),
 		{read(_)}.
 
 	succeeds(iso_term_06) :-
-		^^set_text_input('f(\',\',a).'),
+		^^set_text_input('f(\',\',a). '),
 		{read(_)}.
 
 	succeeds(iso_term_07) :-
-		^^set_text_input('[a,\',\'|v].'),
+		^^set_text_input('[a,\',\'|v]. '),
 		{read(_)}.
 
 	succeeds(iso_term_08) :-
-		^^set_text_input('[a,b|\',\'].'),
+		^^set_text_input('[a,b|\',\']. '),
 		{read(_)}.
 
 	cleanup :-

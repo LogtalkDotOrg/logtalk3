@@ -22,12 +22,12 @@
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 6.3.6.1
 
 	succeeds(iso_curly_bracketed_term_01) :-
-		^^set_text_input('{a}.'),
+		^^set_text_input('{a}. '),
 		{read(T)},
 		T == '{}'(a).
 
 	succeeds(iso_curly_bracketed_term_02) :-
-		^^set_text_input('{a,b}.'),
+		^^set_text_input('{a,b}. '),
 		{read(T)},
 		T == '{}'(','(a,b)).
 

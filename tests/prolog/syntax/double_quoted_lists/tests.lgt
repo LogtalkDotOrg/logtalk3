@@ -58,37 +58,37 @@
 		{read(Goal), call(Goal)}.
 
 	succeeds(iso_double_quoted_list_07) :-
-		^^set_text_input('"jim".'),
+		^^set_text_input('"jim". '),
 		set_prolog_flag(double_quotes, chars),
 		{read(T)},
 		atom_chars('jim', T).
 
 	succeeds(iso_double_quoted_list_08) :-
-		^^set_text_input('"jim".'),
+		^^set_text_input('"jim". '),
 		set_prolog_flag(double_quotes, codes),
 		{read(T)},
 		atom_codes('jim', T).
 
 	succeeds(iso_double_quoted_list_09) :-
-		^^set_text_input('"jim".'),
+		^^set_text_input('"jim". '),
 		set_prolog_flag(double_quotes, atom),
 		{read(T)},
 		T == 'jim'.
 
 	succeeds(iso_double_quoted_list_10) :-
-		^^set_text_input('"".'),
+		^^set_text_input('"". '),
 		set_prolog_flag(double_quotes, chars),
 		{read(T)},
 		T == [].
 
 	succeeds(iso_double_quoted_list_11) :-
-		^^set_text_input('"".'),
+		^^set_text_input('"". '),
 		set_prolog_flag(double_quotes, codes),
 		{read(T)},
 		T == [].
 
 	succeeds(iso_double_quoted_list_12) :-
-		^^set_text_input('"".'),
+		^^set_text_input('"". '),
 		set_prolog_flag(double_quotes, atom),
 		{read(T)},
 		T == ''.
@@ -100,14 +100,14 @@
 		'(      current_prolog_flag(double_quotes, chars), atom_chars(\'jim\', "jim")',
 		';      current_prolog_flag(double_quotes, codes), atom_codes(\'jim\', "jim")',
 		';      current_prolog_flag(double_quotes, atom), \'jim\' == "jim"',
-		').'
+		'). '
 	]).
 
 	double_quotes_example_2([
 		'(      current_prolog_flag(double_quotes, chars), [] == ""',
 		';      current_prolog_flag(double_quotes, codes), [] == ""',
 		';      current_prolog_flag(double_quotes, atom), \'\' == ""',
-		').'
+		'). '
 	]).
 
 :- end_object.

@@ -22,17 +22,17 @@
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 6.3.5.1
 
 	succeeds(iso_list_01) :-
-		^^set_text_input('[a].'),
+		^^set_text_input('[a]. '),
 		{read(T)},
 		T == .(a, []).
 
 	succeeds(iso_list_02) :-
-		^^set_text_input('[a,b].'),
+		^^set_text_input('[a,b]. '),
 		{read(T)},
 		T == .(a, .(b, [])).
 
 	succeeds(iso_list_03) :-
-		^^set_text_input('[a|b].'),
+		^^set_text_input('[a|b]. '),
 		{read(T)},
 		T == .(a, b).
 
