@@ -19,6 +19,10 @@
 		comment is 'Unit tests for the ISO Prolog term syntax.'
 	]).
 
+	:- discontiguous([
+		succeeds/1, throws/2
+	]).
+
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 6.3.3.1
 
 	succeeds(iso_term_01) :-
