@@ -62,8 +62,8 @@ written by Péter Szabó and Péter Szeredi.
 * IMPROVED: Updated the `lgtunit` tool to restore the current input and output
 streams after running each unit test and to print the name of skipped tests.
 
-* IMPROVED: The `logtalk_tester.sh` POSIX shell script to also prints a list
-of skipped tests.
+* IMPROVED: Updated the `logtalk_tester.sh` POSIX shell script to print a list
+of skipped tests and a simplified list of failed tests.
 
 * IMPROVED: Documentation of the `ports` tool.
 

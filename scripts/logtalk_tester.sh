@@ -301,11 +301,11 @@ grep -A2 '*     ' *.results | sed 's/.results//' | tee -a errors.all
 echo "*******************************************************************************"
 echo "***** Skipped tests"
 echo "*******************************************************************************"
-grep ': skipped' *.results | sed 's/: skipped/ skipped/' | sed 's/.results/:/' | sed 's|__|/|g' | tee -a errors.all
+grep ': skipped' *.results |  sed 's/: skipped//' | sed 's/.results:% / - /' | sed 's|__|/|g' | tee -a errors.all
 echo "*******************************************************************************"
 echo "***** Failed tests"
 echo "*******************************************************************************"
-grep ': failure' *.results | sed 's/: failure/ failed/' | sed 's/.results/:/' | sed 's|__|/|g' | tee -a errors.all
+grep ': failure' *.results | sed 's/: failure//' | sed 's/.results:!     / - /' | sed 's|__|/|g' | tee -a errors.all
 echo "*******************************************************************************"
 echo "***** $total tests: $skipped skipped, $passed passed, $failed failed"
 echo "*******************************************************************************"
