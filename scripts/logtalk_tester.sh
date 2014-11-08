@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Unit testing automation script
-##   Last updated on October 11, 2014
+##   Last updated on November 8, 2014
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -298,6 +298,10 @@ grep -A2 '!     ' *.errors | sed 's/.errors//' | tee -a errors.all
 grep -A2 '!     ' *.results | sed 's/.results//' | tee -a errors.all
 grep -A2 '*     ' *.errors | sed 's/.errors//' | tee -a errors.all
 grep -A2 '*     ' *.results | sed 's/.results//' | tee -a errors.all
+echo "*******************************************************************************"
+echo "***** Skipped tests"
+echo "*******************************************************************************"
+grep ': skipped' *.results | sed 's/: skipped/ skipped/' | sed 's/.results/:/' | sed 's|__|/|g' | tee -a errors.all
 echo "*******************************************************************************"
 echo "***** Failed tests"
 echo "*******************************************************************************"

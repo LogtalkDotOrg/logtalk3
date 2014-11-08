@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/10/01,
+		date is 2014/11/08,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -77,6 +77,9 @@
 		['~w: failure '-[Test], nl],
 		failure_reason(Reason),
 		['  in file ~w between lines ~w'-[File, Position], nl].
+
+	logtalk::message_tokens(skipped_test(Test, _File, _Position), lgtunit) -->
+		['~w: skipped'-[Test], nl].
 
 	logtalk::message_tokens(broken_step(Step, Object, Error), lgtunit) -->
 		['broken ~w for object ~q: ~q'-[Step, Object, Error], nl].

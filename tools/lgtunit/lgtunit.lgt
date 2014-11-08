@@ -30,7 +30,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/11/06,
+		date is 2014/11/08,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, and multiple test dialects.'
 	]).
 
@@ -419,6 +419,8 @@
 			)
 		;	failed_test(Test, File, Position, failure_instead_of_error)
 		).
+	run_test(skipped(Test, Position), File) :-
+		skipped_test(Test, File, Position).
 
 	check_error(Test, [PossibleError| PossibleErrors], Error, File, Position) :-
 		(	member(ExpectedError, [PossibleError| PossibleErrors]),
@@ -460,6 +462,10 @@
 		increment_failed_tests_counter,
 		print_message(error, lgtunit, failed_test(Test, File, Position, Reason)).
 
+	skipped_test(Test, File, Position) :-
+		increment_skipped_tests_counter,
+		print_message(information, lgtunit, skipped_test(Test, File, Position)).
+
 	broken_step(Step, Error) :-
 		self(Self),
 		print_message(error, lgtunit, broken_step(Step, Self, Error)).
@@ -469,20 +475,20 @@
 		print_message(error, lgtunit, failed_step(Step, Self)).
 
 	reset_compilation_counters :-
-		retractall(test_(_)),
-		retractall(skipped_(_)),
-		asserta(skipped_(0)).
+		retractall(test_(_)).
 
 	increment_skipped_tests_counter :-
-		retract(skipped_(Old)) ->
+		::retract(skipped_(Old)),
 		New is Old + 1,
-		asserta(skipped_(New)).
+		::asserta(skipped_(New)).
 
 	reset_test_counters :-
 		::retractall(passed_(_)),
 		::asserta(passed_(0)),
 		::retractall(failed_(_)),
-		::asserta(failed_(0)).
+		::asserta(failed_(0)),
+		::retractall(skipped_(_)),
+		::asserta(skipped_(0)).
 
 	increment_passed_tests_counter :-
 		::retract(passed_(Old)),
@@ -534,7 +540,8 @@
 	term_expansion((- Head :- _), []) :-
 		test_idiom_head(Head, Test),
 		check_for_valid_test_identifier(Test),
-		increment_skipped_tests_counter.
+		logtalk_load_context(term_position, Position),
+		assertz(test_(skipped(Test, Position))).
 
 	% unit test idiom test/2
 	term_expansion((test(Test, Outcome0) :- Goal0), [(test(Test, Outcome) :- Goal)]) :-
@@ -581,8 +588,7 @@
 		assertz(test_(throws(Test, Errors, Position))).
 
 	% collect all unit test identifiers when reching the end_object/0 directive 
-	term_expansion((:- end_object), [skipped_(N), (run_tests :- ::run_tests(Tests, File)), (:- end_object)]) :-
-		retract(skipped_(N)),
+	term_expansion((:- end_object), [(run_tests :- ::run_tests(Tests, File)), (:- end_object)]) :-
 		findall(Test, retract(test_(Test)), Tests),
 		logtalk_load_context(source, File).
 
@@ -641,6 +647,7 @@
 			;	test_(deterministic(Test, _))
 			;	test_(fails(Test, _))
 			;	test_(throws(Test, _, _))
+			;	test_(skipped(Test, _))
 			) ->
 			print_message(error, lgtunit, repeated_test_identifier(Test))
 		;	true
