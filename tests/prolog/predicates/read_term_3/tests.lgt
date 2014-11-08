@@ -70,7 +70,11 @@
 		{read_term(user_input, _, _)}.
 
 	throws(sics_read_term_3_10, error(instantiation_error,_)) :-
-		{read_term(user_input,_,[variables(_)|_])}.
+		% some Prolog systems simply ignore non-recognized read options: provide a term
+		% to be read in that case so that the unit test doesn't hang waiting for input
+		^^set_text_input('a. '),
+		current_input(S),
+		{read_term(S, _, [variables(_)|_])}.
 
 	throws(sics_read_term_3_11, error(instantiation_error,_)) :-
 		{read_term(user_input,_,[variables(_),_])}.
