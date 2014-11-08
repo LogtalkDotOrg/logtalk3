@@ -47,6 +47,12 @@ user experience more similar to other backend Prolog compilers.
 
 * UPDATED: The JIProlog adapter file for the changes in the latest betas.
 
+Library
+-------
+
+* FIXED: The `os::date_time/7` predicate for Lean Prolog (previous definition
+used a built-in predicate that apparently is not longer available).
+
 Documentation
 -------------
 

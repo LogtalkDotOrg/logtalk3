@@ -36,9 +36,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.9,
+		version is 1.10,
 		author is 'Paulo Moura',
-		date is 2014/09/28,
+		date is 2014/11/08,
 		comment is 'Simple example of using conditional compilation to implement a portable operating-system interface for selected back-end Prolog compilers.'
 	]).
 
@@ -113,9 +113,9 @@
 		time_stamp(Time) :-
 			{get_time(Time)}.
 
-		date_time(Year, Month, Day, Hours, Mins, Secs, Milisecs) :-
+		date_time(Year, Month, Day, Hours, Minutes, Seconds, Milisecs) :-
 			{get_time(Time),
-			 convert_time(Time, Year, Month, Day, Hours, Mins, Secs, Milisecs)}.
+			 convert_time(Time, Year, Month, Day, Hours, Minutes, Seconds, Milisecs)}.
 
 		cpu_time(Time) :-
 			{statistics(cputime, Time)}.
@@ -208,8 +208,8 @@
 		time_stamp(Time) :-
 			{datime(Time)}.
 
-		date_time(Year, Month, Day, Hours, Mins, Secs, 0) :-
-			{datime(datime(Year, Month, Day, Hours, Mins, Secs))}.
+		date_time(Year, Month, Day, Hours, Minutes, Seconds, 0) :-
+			{datime(datime(Year, Month, Day, Hours, Minutes, Seconds))}.
 
 		cpu_time(Time) :-
 			{statistics(runtime, [Miliseconds| _]), Time is Miliseconds/1000}.
@@ -295,8 +295,8 @@
 		time_stamp(Time) :-
 			{standard:datime(Time)}.
 
-		date_time(Year, Month, Day, Hours, Mins, Secs, 0) :-
-			{standard:datime(datime(Year, Month, Day, Hours, Mins, Secs))}.
+		date_time(Year, Month, Day, Hours, Minutes, Seconds, 0) :-
+			{standard:datime(datime(Year, Month, Day, Hours, Minutes, Seconds))}.
 
 		cpu_time(Time) :-
 			{cputime(Time)}.
@@ -371,8 +371,8 @@
 		time_stamp(Time) :-
 			{date_time(Time)}.
 
-		date_time(Year, Month, Day, Hours, Mins, Secs, 0) :-
-			{date_time(dt(Year, Month, Day, Hours, Mins, Secs))}.
+		date_time(Year, Month, Day, Hours, Minutes, Seconds, 0) :-
+			{date_time(dt(Year, Month, Day, Hours, Minutes, Seconds))}.
 
 		cpu_time(Time) :-
 			{cpu_time(Miliseconds), Time is Miliseconds/1000}.
@@ -456,11 +456,11 @@
 		environment_variable(Variable, Value) :-
 			{environ(Variable, Value)}.
 
-		time_stamp(ts(Year, Month, Day, Hours, Mins, Secs)) :-
-			{date(Year, Month, Day), time(Hours, Mins, Secs)}.
+		time_stamp(ts(Year, Month, Day, Hours, Minutes, Seconds)) :-
+			{date(Year, Month, Day), time(Hours, Minutes, Seconds)}.
 
-		date_time(Year, Month, Day, Hours, Mins, Secs, 0) :-
-			{date(Year, Month, Day), time(Hours, Mins, Secs)}.
+		date_time(Year, Month, Day, Hours, Minutes, Seconds, 0) :-
+			{date(Year, Month, Day), time(Hours, Minutes, Seconds)}.
 
 		cpu_time(Time) :-
 			{cputime(Miliseconds), Time is Miliseconds/1000}.
@@ -544,8 +544,8 @@
 		time_stamp(Time) :-
 			{datime(Time)}.
 
-		date_time(Year, Month, Day, Hours, Mins, Secs, 0) :-
-			{datime(datime(Year, Month, Day, Hours, Mins, Secs))}.
+		date_time(Year, Month, Day, Hours, Minutes, Seconds, 0) :-
+			{datime(datime(Year, Month, Day, Hours, Minutes, Seconds))}.
 
 		cpu_time(Time) :-
 			{statistics(runtime, [Miliseconds| _]), Time is Miliseconds/1000}.
@@ -620,9 +620,9 @@
 		time_stamp(Time) :-
 			{get_flag(unix_time, Time)}.
 
-		date_time(Year, Month, Day, Hours, Mins, Secs, 0) :-
+		date_time(Year, Month, Day, Hours, Minutes, Seconds, 0) :-
 			{get_flag(unix_time, Time),
-			 local_time(Year, Month, Day, Hours, Mins, Secs, _, Time)}.
+			 local_time(Year, Month, Day, Hours, Minutes, Seconds, _, Time)}.
 
 		cpu_time(Time) :-
 			{cputime(Time)}.
@@ -696,8 +696,8 @@
 		time_stamp(Time) :-
 			{time(Time)}.
 
-		date_time(Year, Month, Day, Hours, Mins, Secs, 0) :-
-			{datime(_, Year, Month, Day, Hours, Mins, Secs, _, _)}.
+		date_time(Year, Month, Day, Hours, Minutes, Seconds, 0) :-
+			{datime(_, Year, Month, Day, Hours, Minutes, Seconds, _, _)}.
 
 		cpu_time(Time) :-
 			{statistics(runtime, [Miliseconds| _]), Time is Miliseconds / 1000}.
@@ -868,9 +868,9 @@
 		time_stamp(Time) :-
 			{realtime(Time)}.
 
-		date_time(Year, Month, Day, Hours, Mins, Secs, 0) :-
+		date_time(Year, Month, Day, Hours, Minutes, Seconds, 0) :-
 			{realtime(Time)},
-			{localtime(Time, time(Year2, Month2, Day, Hours, Mins, Secs, _))},
+			{localtime(Time, time(Year2, Month2, Day, Hours, Minutes, Seconds, _))},
 			Year is 1900 + Year2,
 			Month is Month2 + 1.
 
@@ -963,10 +963,14 @@
 		time_stamp(Time) :-
 			{get_time(Time)}.
 
-		date_time(Year, Month, Day, Hours, Mins, Secs, 0) :-
-			{get_date_time(Time),
-			 split_string(Time, '/: ', [YearAtom, MonthAtom, DayAtom, HoursAtom, MinsAtom, SecsAtom]),
-			 maplist(to_number, [YearAtom, MonthAtom, DayAtom, HoursAtom, MinsAtom, SecsAtom], [Year, Month, Day, Hours, Mins, Secs])}.
+		date_time(Year, Month, Day, Hours, Minutes, Seconds, 0) :-
+			{new_java_object('java.util.GregorianCalendar', Calendar),
+			 get_java_field(Calendar,'YEAR', Field1), invoke_java_method(Calendar, get(Field1), Year),
+			 get_java_field(Calendar,'MONTH', Field2), invoke_java_method(Calendar, get(Field2), Month),
+			 get_java_field(Calendar,'DAY_OF_MONTH', Field3), invoke_java_method(Calendar, get(Field3), Day),
+			 get_java_field(Calendar,'HOUR_OF_DAY', Field4), invoke_java_method(Calendar, get(Field4), Hours),
+			 get_java_field(Calendar,'MINUTE', Field5), invoke_java_method(Calendar, get(Field5), Minutes),
+			 get_java_field(Calendar,'SECOND', Field6), invoke_java_method(Calendar, get(Field6), Seconds)}.
 
 		cpu_time(Time) :-
 			{cputime(Time)}.
