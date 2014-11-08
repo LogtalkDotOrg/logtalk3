@@ -63,7 +63,8 @@ written by Péter Szabó and Péter Szeredi.
 streams after running each unit test and to print the name of skipped tests.
 
 * IMPROVED: Updated the `logtalk_tester.sh` POSIX shell script to print a list
-of skipped tests and a simplified list of failed tests.
+of skipped tests and simplified lists of compilation warnings, errors, and
+failed tests.
 
 * IMPROVED: Documentation of the `ports` tool.
 

@@ -224,15 +224,13 @@ do
 				grep 'tests:' "$results/$name.results" | sed 's/\(% \)\([0-9]*\)\(.*\)/\2/' >> "$results/total"
 				grep 'tests:' "$results/$name.results" | sed 's/\(% [0-9]* tests: \)\([0-9]*\)\(.*\)/\2/' >> "$results/skipped"
 				grep 'tests:' "$results/$name.results" | sed 's/\(% [0-9]* tests: [0-9]* skipped, \)\([0-9]*\)\(.*\)/\2/' >> "$results/passed"
-			fi
-			if [ $mode == 'normal' ] || [ $mode == 'all' ] ; then
+			elif [ $mode == 'normal' ] || [ $mode == 'all' ] ; then
 				$logtalk_call $tester_normal_goal > "$results/$name.results" 2> "$results/$name.errors"
 				grep 'tests:' "$results/$name.results" | sed 's/%/*****        /'
 				grep 'tests:' "$results/$name.results" | sed 's/\(% \)\([0-9]*\)\(.*\)/\2/' >> "$results/total"
 				grep 'tests:' "$results/$name.results" | sed 's/\(% [0-9]* tests: \)\([0-9]*\)\(.*\)/\2/' >> "$results/skipped"
 				grep 'tests:' "$results/$name.results" | sed 's/\(% [0-9]* tests: [0-9]* skipped, \)\([0-9]*\)\(.*\)/\2/' >> "$results/passed"
-			fi
-			if [ $mode == 'debug' ] || [ $mode == 'all' ] ; then
+			elif [ $mode == 'debug' ] || [ $mode == 'all' ] ; then
 				$logtalk_call $tester_debug_goal > "$results/$name.results" 2> "$results/$name.errors"
 				grep 'tests:' "$results/$name.results" | sed 's/%/***** (debug)/'
 				grep 'tests:' "$results/$name.results" | sed 's/\(% \)\([0-9]*\)\(.*\)/\2/' >> "$results/total"
@@ -257,15 +255,13 @@ do
 						grep 'tests:' "$results/$subname.results" | sed 's/\(% \)\([0-9]*\)\(.*\)/\2/' >> "$results/total"
 						grep 'tests:' "$results/$subname.results" | sed 's/\(% [0-9]* tests: \)\([0-9]*\)\(.*\)/\2/' >> "$results/skipped"
 						grep 'tests:' "$results/$subname.results" | sed 's/\(% [0-9]* tests: [0-9]* skipped, \)\([0-9]*\)\(.*\)/\2/' >> "$results/passed"
-					fi
-					if [ $mode == 'normal' ] || [ $mode == 'all' ] ; then
+					elif [ $mode == 'normal' ] || [ $mode == 'all' ] ; then
 						$logtalk_call $tester_normal_goal > "$results/$subname.results" 2> "$results/$subname.errors"
 						grep 'tests:' "$results/$subname.results" | sed 's/%/*****        /'
 						grep 'tests:' "$results/$subname.results" | sed 's/\(% \)\([0-9]*\)\(.*\)/\2/' >> "$results/total"
 						grep 'tests:' "$results/$subname.results" | sed 's/\(% [0-9]* tests: \)\([0-9]*\)\(.*\)/\2/' >> "$results/skipped"
 						grep 'tests:' "$results/$subname.results" | sed 's/\(% [0-9]* tests: [0-9]* skipped, \)\([0-9]*\)\(.*\)/\2/' >> "$results/passed"
-					fi
-					if [ $mode == 'debug' ] || [ $mode == 'all' ] ; then
+					elif [ $mode == 'debug' ] || [ $mode == 'all' ] ; then
 						$logtalk_call $tester_debug_goal > "$results/$subname.results" 2> "$results/$subname.errors"
 						grep 'tests:' "$results/$subname.results" | sed 's/%/***** (debug)/'
 						grep 'tests:' "$results/$subname.results" | sed 's/\(% \)\([0-9]*\)\(.*\)/\2/' >> "$results/total"
@@ -294,10 +290,10 @@ echo "**************************************************************************
 cd "$results"
 grep -A2 'syntax_error' *.results | sed 's/.results//' | tee errors.all
 grep -A2 'syntax_error' *.errors | sed 's/.errors//' | tee -a errors.all
-grep -A2 '!     ' *.errors | sed 's/.errors//' | tee -a errors.all
-grep -A2 '!     ' *.results | sed 's/.results//' | tee -a errors.all
-grep -A2 '*     ' *.errors | sed 's/.errors//' | tee -a errors.all
-grep -A2 '*     ' *.results | sed 's/.results//' | tee -a errors.all
+grep -h '!     ' *.errors | sed 's/.errors//' | tee -a errors.all
+grep -h '!     ' *.results | sed 's/.results//' | tee -a errors.all
+grep -h '*     ' *.errors | sed 's/.errors//' | tee -a errors.all
+grep -h '*     ' *.results | sed 's/.results//' | tee -a errors.all
 echo "*******************************************************************************"
 echo "***** Skipped tests"
 echo "*******************************************************************************"
