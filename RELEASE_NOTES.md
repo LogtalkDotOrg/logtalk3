@@ -70,7 +70,8 @@ to the `help` tool.
 Tests
 -----
 
-* ADDED: Unit tests for ISO Prolog standard specified input/output predicates. 
+* ADDED: Unit tests for ISO Prolog standard specified syntax and input/output
+predicates. 
 
 
 3.00.0 Release Candidate 4 - October 28, 2014
