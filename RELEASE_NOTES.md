@@ -45,6 +45,8 @@ user experience more similar to other backend Prolog compilers.
 
 * UPDATED: All adapter files to define the `prolog_conformance` flag value.
 
+* UPDATED: The JIProlog adapter file for the changes in the latest betas.
+
 Documentation
 -------------
 
