@@ -51,7 +51,7 @@ Library
 -------
 
 * FIXED: The `os::date_time/7` predicate for Lean Prolog (previous definition
-used a built-in predicate that apparently is not longer available).
+used a built-in predicate that apparently is no longer available).
 
 Documentation
 -------------
@@ -83,7 +83,11 @@ Tests
 -----
 
 * ADDED: Unit tests for ISO Prolog standard specified syntax and input/output
-predicates. 
+predicates.
+
+* IMPROVED: Prolog conformance unit tests that are classified as STO/Undefined
+in the ISO Prolog standard are no longer skipped when using backend Prolog
+compilers that support cyclic terms.
 
 
 3.00.0 Release Candidate 4 - October 28, 2014
