@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2014/11/09,
 		comment is 'Unit tests for the ISO Prolog standard term_variables/2 built-in predicate.'
 	]).
 
@@ -48,8 +48,13 @@
 		{term_variables(A+B+B, [B|Vars])},
 		A == B, Vars == [B].
 
-	- succeeds(iso_term_variables_2_07) :-
-		% STO; Undefined.
-		{term_variables(_X+Vars, Vars), Vars = [_, _]}.
+	:- if(current_logtalk_flag(coinduction, supported)).
+		succeeds(iso_term_variables_2_07) :-
+			{term_variables(_X+Vars, Vars), Vars = [_, _]}.
+	:- else.
+		- succeeds(iso_term_variables_2_07) :-
+			% STO; Undefined.
+			{term_variables(_X+Vars, Vars), Vars = [_, _]}.
+	:- endif.
 
 :- end_object.

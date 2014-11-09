@@ -34,7 +34,7 @@ insect(bee).
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/11/04,
+		date is 2014/11/09,
 		comment is 'Unit tests for the ISO Prolog standard clause/2 built-in predicate.'
 	]).
 
@@ -83,9 +83,14 @@ insect(bee).
 			{clause(atom(_), _Body)}.
 	:- endif.
 
-	- succeeds(iso_clause_2_11) :-
-		% STO; Undefined
-		{clause(legs(A,6), insect(f(A)))}.
+	:- if(current_logtalk_flag(coinduction, supported)).
+		succeeds(iso_clause_2_11) :-
+			{clause(legs(A,6), insect(f(A)))}.
+	:- else.
+		- succeeds(iso_clause_2_11) :-
+			% STO; Undefined
+			{clause(legs(A,6), insect(f(A)))}.
+	:- endif.
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 

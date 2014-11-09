@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2014/11/09,
 		comment is 'Unit tests for the ISO Prolog standard sort/2 built-in predicate.'
 	]).
 
@@ -36,9 +36,14 @@
 	fails(iso_sort_2_03) :-
 		{sort([1, 1], [1, 1])}.
 
-	- succeeds(iso_sort_2_04) :-
-		% STO; Undefined.
-		{sort([V], V)}.
+	:- if(current_logtalk_flag(coinduction, supported)).
+		succeeds(iso_sort_2_04) :-
+			{sort([V], V)}.
+	:- else.
+		- succeeds(iso_sort_2_04) :-
+			% STO; Undefined.
+			{sort([V], V)}.
+	:- endif.
 
 	succeeds(iso_sort_2_05) :-
 		{sort([f(U),U,U,f(V),f(U),V],L)},

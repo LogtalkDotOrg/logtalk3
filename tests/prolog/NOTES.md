@@ -57,9 +57,9 @@ local to the entities as required by Logtalk semantics).
 Some unit tests are currently skipped. These tests are mainly split between
 two groups: tests whose result is specified as undefined in the standards
 (usually due to the potential of creating cyclic terms if unification without
-occurs check is performed) and tests that would require a portable way of
-specifying a source file text encoding plus a common extended text encoding
-such as UTF-8.
+occurs check is performed when using Prolog compilers that don't support
+cyclic terms) and tests that would require a portable way of specifying a
+source file text encoding plus a common extended text encoding such as UTF-8.
 
 Failure of unit tests doesn't necessarily mean that a backend Prolog compiler
 is faulty. Standards are not perfect and there isn't always a community

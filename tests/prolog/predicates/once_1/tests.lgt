@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2014/11/09,
 		comment is 'Unit tests for the ISO Prolog standard once/1 built-in predicate.'
 	]).
 
@@ -34,9 +34,14 @@
 	fails(iso_once_1_04) :-
 		{once(fail)}.
 
-	- succeeds(iso_once_1_05) :-
-		% STO; Undefined
-		{once((X = f(X)))}.
+	:- if(current_logtalk_flag(coinduction, supported)).
+		succeeds(iso_once_1_05) :-
+			{once((X = f(X)))}.
+	:- else.
+		- succeeds(iso_once_1_05) :-
+			% STO; Undefined
+			{once((X = f(X)))}.
+	:- endif.
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 

@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2014/11/09,
 		comment is 'Unit tests for the ISO Prolog standard arg/3 built-in predicate.'
 	]).
 
@@ -65,9 +65,13 @@
 		% try to delay the expected error to runtime
 		{G = arg(0, 3, _), call(G)}.
 
-	- succeeds(iso_arg_3_12) :-
-		% STO; Undefined
-		{arg(1, foo(X), u(X))}.
+	:- if(current_logtalk_flag(coinduction, supported)).
+		succeeds(iso_arg_3_12) :-
+			{arg(1, foo(X), u(X))}.
+	:- else.
+		- succeeds(iso_arg_3_12) :-
+			{arg(1, foo(X), u(X))}.
+	:- endif.
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 

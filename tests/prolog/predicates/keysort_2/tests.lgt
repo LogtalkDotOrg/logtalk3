@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2014/11/09,
 		comment is 'Unit tests for the ISO Prolog standard keysort/2 built-in predicate.'
 	]).
 
@@ -37,8 +37,13 @@
 		% STO; Undefined.
 		{Pairs = [1-2|Pairs], keysort(Pairs, _Sorted)}.
 
-	- succeeds(iso_keysort_2_05) :-
-		% STO; Undefined.
-		{keysort([V-V], V)}.
+	:- if(current_logtalk_flag(coinduction, supported)).
+		succeeds(iso_keysort_2_05) :-
+			{keysort([V-V], V)}.
+	:- else.
+		- succeeds(iso_keysort_2_05) :-
+			% STO; Undefined.
+			{keysort([V-V], V)}.
+	:- endif.
 
 :- end_object.

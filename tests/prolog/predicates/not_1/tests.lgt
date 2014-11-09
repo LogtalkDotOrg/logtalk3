@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2014/11/09,
 		comment is 'Unit tests for the ISO Prolog standard (\\+)/1 built-in predicate.'
 	]).
 
@@ -45,8 +45,13 @@
 		% try to force runtime goal checking
 		G = '\\+'(_X), {G}.
 
-	- fails(iso_not_1_08) :-
-		% STO; Undefined
-		{'\\+'(X=f(X))}.
+	:- if(current_logtalk_flag(coinduction, supported)).
+		fails(iso_not_1_08) :-
+			{'\\+'(X=f(X))}.
+	:- else.
+		- fails(iso_not_1_08) :-
+			% STO; Undefined
+			{'\\+'(X=f(X))}.
+	:- endif.
 
 :- end_object.

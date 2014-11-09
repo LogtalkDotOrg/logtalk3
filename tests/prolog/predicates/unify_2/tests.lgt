@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2014/11/09,
 		comment is 'Unit tests for the ISO Prolog standard (=)/2 built-in predicate.'
 	]).
 
@@ -58,24 +58,41 @@
 	fails(iso_unify_2_11) :-
 		{'='(f(X,Y,X), f(a(X),a(Y),Y,2))}.
 
-	- succeeds(iso_unify_2_12) :-
-		% STO; Undefined
-		{'='(X,a(X))}.
+	:- if(current_logtalk_flag(coinduction, supported)).
+		succeeds(iso_unify_2_12) :-
+			{'='(X,a(X))}.
 
-	- fails(iso_unify_2_13) :-
-		% STO; Undefined
-		{'='(f(X,1), f(a(X),2))}.
+		fails(iso_unify_2_13) :-
+			{'='(f(X,1), f(a(X),2))}.
 
-	- fails(iso_unify_2_14) :-
-		% STO; Undefined
-		{'='(f(1,X,1), f(2,a(X),2))}.
+		fails(iso_unify_2_14) :-
+			{'='(f(1,X,1), f(2,a(X),2))}.
 
-	- fails(iso_unify_2_15) :-
-		% STO; Undefined
-		{'='(f(1,X), f(2,a(X)))}.
+		fails(iso_unify_2_15) :-
+			{'='(f(1,X), f(2,a(X)))}.
 
-	- fails(iso_unify_2_16) :-
-		% STO; Undefined
-		{'='(f(X,Y,X,1), f(a(X),a(Y),Y,2))}.
+		fails(iso_unify_2_16) :-
+			{'='(f(X,Y,X,1), f(a(X),a(Y),Y,2))}.
+	:- else.
+		- succeeds(iso_unify_2_12) :-
+			% STO; Undefined
+			{'='(X,a(X))}.
+
+		- fails(iso_unify_2_13) :-
+			% STO; Undefined
+			{'='(f(X,1), f(a(X),2))}.
+
+		- fails(iso_unify_2_14) :-
+			% STO; Undefined
+			{'='(f(1,X,1), f(2,a(X),2))}.
+
+		- fails(iso_unify_2_15) :-
+			% STO; Undefined
+			{'='(f(1,X), f(2,a(X)))}.
+
+		- fails(iso_unify_2_16) :-
+			% STO; Undefined
+			{'='(f(X,Y,X,1), f(a(X),a(Y),Y,2))}.
+	:- endif.
 
 :- end_object.

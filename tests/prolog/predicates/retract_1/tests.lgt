@@ -31,7 +31,7 @@ foo(X) :- call(X), call(X).
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/11/04,
+		date is 2014/11/09,
 		comment is 'Unit tests for the ISO Prolog standard retract/1 built-in predicate.'
 	]).
 
@@ -62,9 +62,14 @@ foo(X) :- call(X), call(X).
 		{retract(insect(I)), write(I), nl, retract(insect(bee))},
 		I == ant.
 
-	- succeeds(iso_retract_1_07) :-
-		% STO; Undefined
-		{retract((foo(A) :- A,call(A)))}.
+	:- if(current_logtalk_flag(coinduction, supported)).
+		succeeds(iso_retract_1_07) :-
+			{retract((foo(A) :- A,call(A)))}.
+	:- else.
+		- succeeds(iso_retract_1_07) :-
+			% STO; Undefined
+			{retract((foo(A) :- A,call(A)))}.
+	:- endif.
 
 	succeeds(iso_retract_1_08) :-
 		{retract((foo(C) :- A -> B))},

@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2014/11/09,
 		comment is 'Unit tests for the ISO Prolog standard (=..)/2 built-in predicate.'
 	]).
 
@@ -70,9 +70,14 @@
 	throws(iso_univ_2_14, error(type_error(list,4),_)) :-
 		{'=..'(_X, 4)}.
 
-	- succeeds(iso_univ_2_15) :-
-		% STO; Undefined
-		{'=..'(f(X), [f,u(X)])}.
+	:- if(current_logtalk_flag(coinduction, supported)).
+		succeeds(iso_univ_2_15) :-
+			{'=..'(f(X), [f,u(X)])}.
+	:- else.
+		- succeeds(iso_univ_2_15) :-
+			% STO; Undefined
+			{'=..'(f(X), [f,u(X)])}.
+	:- endif.
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 

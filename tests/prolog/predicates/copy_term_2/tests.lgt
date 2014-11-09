@@ -15,8 +15,12 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2014/11/09,
 		comment is 'Unit tests for the ISO Prolog standard copy_term/2 built-in predicate.'
+	]).
+
+	:- discontiguous([
+		succeeds/1, fails/1
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.5.4.4
@@ -44,11 +48,16 @@
 	fails(iso_copy_term_2_07) :-
 		{copy_term(a, b)}.
 
-	fails(iso_copy_term_2_08, error(instantiation_error,_)) :-
-		{copy_term(a+X, X+b)}.
+	fails(iso_copy_term_2_08) :-
+		{copy_term(a+X,X+b), copy_term(a+X,X+b)}.
 
-	- succeeds(iso_copy_term_2_09) :-
-		% STO; Undefined
-		{copy_term(demoen(X,X), demoen(Y,f(Y)))}.
+	:- if(current_logtalk_flag(coinduction, supported)).
+		succeeds(iso_copy_term_2_09) :-
+			{copy_term(demoen(X,X), demoen(Y,f(Y)))}.
+	:- else.
+		- succeeds(iso_copy_term_2_09) :-
+			% STO; Undefined
+			{copy_term(demoen(X,X), demoen(Y,f(Y)))}.
+	:- endif.
 
 :- end_object.

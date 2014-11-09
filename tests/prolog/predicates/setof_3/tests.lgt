@@ -40,7 +40,7 @@ setof_3_member(X, [_| L]) :-
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/11/04,
+		date is 2014/11/09,
 		comment is 'Unit tests for the ISO Prolog standard setof/3 built-in predicate.'
 	]).
 
@@ -167,9 +167,14 @@ setof_3_member(X, [_| L]) :-
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
-	- succeeds(eddbali_setof_3_25) :-
-		% STO; Undefined
-		{setof(f(X,Y),X=Y,[f(g(Z),Z)])}.
+	:- if(current_logtalk_flag(coinduction, supported)).
+		succeeds(eddbali_setof_3_25) :-
+			{setof(f(X,Y),X=Y,[f(g(Z),Z)])}.
+	:- else.
+		- succeeds(eddbali_setof_3_25) :-
+			% STO; Undefined
+			{setof(f(X,Y),X=Y,[f(g(Z),Z)])}.
+	:- endif.
 
 	:- if(current_logtalk_flag(prolog_conformance, iso_strict)).
 		throws(eddbali_setof_3_26, error(type_error(callable,(true;4)),_)) :-
