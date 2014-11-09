@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2014/11/09,
 		comment is 'Unit tests for the ISO Prolog standard integer/1 built-in predicate.'
 	]).
 
@@ -146,5 +146,8 @@
 	succeeds(sics_sub_atom_5_35) :-
 		findall(B-L-A, {sub_atom(abracadabra,B,L,A,abra)}, L),
 		L == [0-4-7, 7-4-0].
+
+	succeeds(lgt_sub_atom_5_36) :-
+		forall({sub_atom('123', _, _, _, SA)}, {atom(SA)}).
 
 :- end_object.
