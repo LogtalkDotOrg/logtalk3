@@ -18,21 +18,28 @@ updating, the tests found on the Prolog ISO conformance testing framework
 written by Péter Szabó and Péter Szeredi, who gracefully allowed me to reuse
 their hard work. The framework is described in the following paper:
 
-@incollection{
-	year={2006},
-	isbn={978-3-540-36635-5},
-	booktitle={Logic Programming},
-	volume={4079},
-	series={Lecture Notes in Computer Science},
-	editor={Etalle, Sandro and Truszczyński, Mirosław},
-	doi={10.1007/11799573_20},
-	title={Improving the ISO Prolog Standard by Analyzing Compliance Test Results},
-	url={http://dx.doi.org/10.1007/11799573_20},
-	publisher={Springer Berlin Heidelberg},
-	author={Szabó, Péter and Szeredi, Péter},
-	pages={257-269},
-	language={English}
-}
+	@incollection{
+		year={2006},
+		isbn={978-3-540-36635-5},
+		booktitle={Logic Programming},
+		volume={4079},
+		series={Lecture Notes in Computer Science},
+		editor={Etalle, Sandro and Truszczyński, Mirosław},
+		doi={10.1007/11799573_20},
+		title={Improving the ISO Prolog Standard by Analyzing Compliance Test Results},
+		url={http://dx.doi.org/10.1007/11799573_20},
+		publisher={Springer Berlin Heidelberg},
+		author={Szabó, Péter and Szeredi, Péter},
+		pages={257-269},
+		language={English}
+	}
+
+The test identifier prefixes indicate their origin:
+
+- `iso_` - tests from the ISO Prolog standards
+- `sics_` - tests contributed by SICS
+- `eddbali_` - tests from A Ed-Dbali's test suite
+- `lgt_` - tests originating from work on Logtalk
 
 To run all the provided tests with e.g. SWI-Prolog, open a terminal and type:
 
@@ -43,9 +50,9 @@ To run all the provided tests with e.g. SWI-Prolog, open a terminal and type:
 By convention, tests for standard built-in predicates encapsulate the main
 test goal using the `{}/1` control construct. In most cases, this precaution
 is not necessary as the calls would be compiled as-is. An exception is the
-read and write predicates that are affected by operator declarations, which
-otherwise would be compiled to ensure the locality of operators to conform
-to Logtalk semantics.
+input/output predicates that are affected by operator declarations (which
+otherwise would be compiled to ensure that entity declared operators are
+local to the entities as required by Logtalk semantics).
 
 Some unit tests are currently skipped. These tests are mainly split between
 two groups: tests whose result is specified as undefined in the standards
@@ -55,12 +62,13 @@ specifying a source file text encoding plus a common extended text encoding
 such as UTF-8.
 
 Failure of unit tests doesn't necessarily mean that a backend Prolog compiler
-is faulty. Standards are not perfect and there isn't always a consensus on
-what should be the correct test results. Common causes of failure are corner
-cases in arithmetic operations. Moreover, some Prolog compilers provide a
-strict ISO mode that may result in different test results. This strict mode,
-when made available, is usually only used if it's the default when starting
-Logtalk.
+is faulty. Standards are not perfect and there isn't always a community
+consensus on what should be the correct test results. Common causes of failure
+are corner cases in arithmetic operations where several compilers provide
+non-conforming but otherwise valid results. Moreover, some Prolog compilers
+provide a strict ISO mode that may result in different test results. This
+strict mode, when made available, is usually only used if it's the default
+when starting Logtalk.
 
 To find if the tests are run in strict ISO mode (`iso_strict`) or in lax ISO
 mode (`iso_lax`), check the value of the read-only flag `prolog_conformance`
