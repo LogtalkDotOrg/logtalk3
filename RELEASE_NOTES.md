@@ -86,6 +86,9 @@ to the `help` tool.
 * FIXED: Bug in the `diagrams` tool when accessing Prolog module properties
 using SICStus Prolog as the backend compiler.
 
+* FIXED: The `diagrams` tool now checks (and, if necessary, fixes) the paths
+passed using the option `omit_path_prefixes/1` for an ending slash.
+
 Tests
 -----
 

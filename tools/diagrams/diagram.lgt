@@ -27,7 +27,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/08/07,
+		date is 2014/11/10,
 		comment is 'Common predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
@@ -758,7 +758,12 @@
 	add_link_options(Path, Options, LinkingOptions) :-
 		memberchk(omit_path_prefixes(Prefixes), Options),
 		memberchk(url_prefixes(FilePrefix, DocPrefix), Options),
-		(	member(Prefix, Prefixes),
+		(	member(Prefix0, Prefixes),
+			os::expand_path(Prefix0, Prefix1),
+			(	sub_atom(Prefix1, _, _, 0, '/') ->
+				Prefix = Prefix1
+			;	atom_concat(Prefix1, '/', Prefix)
+			),
 			atom_concat(Prefix, Suffix, Path) ->
 			atom_concat(FilePrefix, Suffix, FileURL)
 		;	FileURL = FilePrefix

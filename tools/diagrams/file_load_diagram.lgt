@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/07/26,
+		date is 2014/11/10,
 		comment is 'Predicates for generating file loading dependency diagrams.',
 		parnames is ['Format']
 	]).
@@ -40,7 +40,12 @@
 		^^add_link_options(Path, Options, LinkingOptions),
 		(	memberchk(directory_paths(true), Options) ->
 			memberchk(omit_path_prefixes(Prefixes), Options),
-			(	member(Prefix, Prefixes),
+			(	member(Prefix0, Prefixes),
+				os::expand_path(Prefix0, Prefix1),
+				(	sub_atom(Prefix1, _, _, 0, '/') ->
+					Prefix = Prefix1
+				;	atom_concat(Prefix1, '/', Prefix)
+				),
 				atom_concat(Prefix, Relative, Directory) ->
 				^^output_node(Path, Basename, [Relative], file, LinkingOptions)
 			;	^^output_node(Path, Basename, [Directory], file, LinkingOptions)

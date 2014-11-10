@@ -5,7 +5,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/04/02,
+		date is 2014/11/10,
 		comment is 'Common predicates for generating file diagrams.',
 		parnames is ['Format']
 	]).
@@ -62,7 +62,12 @@
 		logtalk::loaded_file_property(Path, basename(Basename)),
 		memberchk(omit_path_prefixes(Prefixes), Options),
 		^^add_link_options(Path, Options, LinkingOptions),
-		(	member(Prefix, Prefixes),
+		(	member(Prefix0, Prefixes),
+			os::expand_path(Prefix0, Prefix1),
+			(	sub_atom(Prefix1, _, _, 0, '/') ->
+				Prefix = Prefix1
+			;	atom_concat(Prefix1, '/', Prefix)
+			),
 			atom_concat(Prefix, Relative, Directory) ->
 			^^output_node(Path, Basename, [Relative], external_file, LinkingOptions)
 		;	^^output_node(Path, Basename, [Directory], external_file, LinkingOptions)
@@ -74,7 +79,12 @@
 		modules_diagram_support::loaded_file_property(Path, basename(Basename)),
 		memberchk(omit_path_prefixes(Prefixes), Options),
 		^^add_link_options(Path, Options, LinkingOptions),
-		(	member(Prefix, Prefixes),
+		(	member(Prefix0, Prefixes),
+			os::expand_path(Prefix0, Prefix1),
+			(	sub_atom(Prefix1, _, _, 0, '/') ->
+				Prefix = Prefix1
+			;	atom_concat(Prefix1, '/', Prefix)
+			),
 			atom_concat(Prefix, Relative, Directory) ->
 			^^output_node(Path, Basename, [Relative], external_file, LinkingOptions)
 		;	^^output_node(Path, Basename, [Directory], external_file, LinkingOptions)
