@@ -27,29 +27,51 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2012/10/11,
-		comment is 'Documenting tool protocol.'
+		date is 2014/11/10,
+		comment is 'Documenting tool protocol.',
+		remarks is [
+			'Compiling files for generating XML documentation' - 'All source files must be compiled with the "source_data" compiler flag turned on.',
+			'xmlspec(Specification) option' - 'XML documenting files specification format. Possible option values are "dtd" (for the DTD specification; default) and "xsd" (for the XML Schema specification).',
+			'xmlsref(Reference) option' - 'Reference to the XML specification file in XML documenting files. Possible values are "local" (default; DTD/XSD file in the same folder as the XML files), "web" (logtalk.org website DTD/XSD file), and "standalone" (no reference to specification files).',
+			'xslfile(File) option' - 'XSLT file to use with the generated XML documenting files. The default value is "lgtxml.xsl", which allows the XML files to be viewed by simply opening them with a browser supporting XSLT transformations (after running the "lgt2xml.sh" on the directory containing the XML files).',
+			'xmldir(Directory) option' - 'Directory where the XML documenting files will be generated. The default value is "./xml_docs", a sub-directory of the source files directory.',
+			'bom(Boolean) option' - 'Defines if a BOM should be added to the generated XML documenting files.',
+			'encoding(Encoding) option' - 'Encoding to be used for the generated XML documenting files.',
+			'exclude_files(List) option' - 'List of files to exclude when generating the XML documenting files.',
+			'exclude_paths(List) option' - 'List of (relative) library paths to exclude when generating the XML documenting files.',
+			'exclude_entities(List) option' - 'List of entities to exclude when generating the XML documenting files.',
+			'Known issues' - 'The most appropriated options may depends on the XSL processor you intend to use. Most XSL processors support DTDs but only some of them support XML Schemas. Some processors are buggy an may not work with the default option values.'
+		]
 	]).
 
 	:- public(rlibrary/2).
 	:- mode(rlibrary(+atom, +list), one).
 	:- info(rlibrary/2, [
 		comment is 'Creates XML documenting files for all entities in a library and its sub-libraries using the specified options.',
-		argnames is ['Library', 'Options']
+		argnames is ['Library', 'Options'],
+		examples is [
+			'Generate XML documenting files for all tool entities for later conversion to Markdown files' - rlibrary(tools,[xslfile('lgtmd.xsl')]) - {yes}
+		]
 	]).
 
 	:- public(rlibrary/1).
 	:- mode(rlibrary(+atom), one).
 	:- info(rlibrary/1, [
 		comment is 'Creates XML documenting files for all entities in a library and its sub-libraries using default options.',
-		argnames is ['Library']
+		argnames is ['Library'],
+		examples is [
+			'Generate XML documenting files for all tool entities for direct viewing in a browser (after indexing using the "lgt2xml" script)' - rlibrary(tools) - {yes}
+		]
 	]).
 
 	:- public(library/2).
 	:- mode(library(+atom, +list), one).
 	:- info(library/2, [
 		comment is 'Creates XML documenting files for all entities in a library using the specified options.',
-		argnames is ['Library', 'Options']
+		argnames is ['Library', 'Options'],
+		examples is [
+			'Generate XML documenting files for all library entities for later conversion to PDF A4 files' - library(library,[xslfile('lgtpdfa4.xsl')]) - {yes}
+		]
 	]).
 
 	:- public(library/1).

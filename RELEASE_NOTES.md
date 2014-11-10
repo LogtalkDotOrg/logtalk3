@@ -74,7 +74,7 @@ streams after running each unit test and to print the name of skipped tests.
 of skipped tests and simplified lists of compilation warnings, errors, and
 failed tests.
 
-* IMPROVED: Documentation of the `ports` tool.
+* IMPROVED: Documentation of the `lgtdoc` and `ports` tools.
 
 * FIXED: Added missing entries for the `logtalk_make/0-1` built-in predicates
 to the `help` tool.

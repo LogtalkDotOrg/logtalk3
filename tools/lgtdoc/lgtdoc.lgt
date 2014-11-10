@@ -28,20 +28,8 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/11/03,
-		comment is 'Documenting tool.',
-		remarks is [
-			'Compiling files for generating XML documentation' - 'All source files must be compiled with the "source_data" compiler flag turned on.',
-			'xmlspec(Specification) option' - 'XML documenting files specification format. Possible option values are "dtd" (for the DTD specification; the usual default) and "xsd" (for the XML Schema specification). Most XSL processors support DTDs but only some of them support XML Schemas.',
-			'xmlsref(Reference) option' - 'Reference to the XML specification file in the generated XML documenting files. The default value is "local", i.e. the reference points to a local DTD or XSD file (respectively, "logtalk.dtd" or "logtalk.xsd"), residing in the same directory as the XML file. Other possible values are "web" (the reference points to an web location, either "http://logtalk.org/xml/3.0/logtalk.dtd" or "http://logtalk.org/xml/3.0/logtalk.xsd"), and "standalone" (no reference to specification files in the XML documenting files). The most appropriated option value depends on the XSL processor you intend to use. Some of them are buggy an may not work with the default option value.',
-			'xslfile(File) option' - 'XSLT file to use with the generated XML documenting files. The default value is "lgtxml.xsl", which allows the XML files to be viewed by simply opening them with a browser supporting XSLT transformations (after copying the "lgtxml.xsl" and of the "logtalk.css" files to the directory containing the XML files).',
-			'xmldir(Directory) option' - 'Directory where the XML documenting files will be generated. The default value is "xml_docs", a sub-directory of the source files directory.',
-			'bom(Boolean) option' - 'Defines if a BOM should be added to the generated XML documenting files.',
-			'encoding(Encoding) option' - 'Encoding to be used for the generated XML documenting files.',
-			'exclude_files(List) option' - 'List of files to exclude when generating the XML documenting files.',
-			'exclude_paths(List) option' - 'List of (relative) library paths to exclude when generating the XML documenting files.',
-			'exclude_entities(List) option' - 'List of entities to exclude when generating the XML documenting files.'
-		]
+		date is 2014/11/10,
+		comment is 'Documenting tool.'
 	]).
 
 	:- private(option_/2).
