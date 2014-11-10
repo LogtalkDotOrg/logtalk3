@@ -56,6 +56,11 @@ used a built-in predicate that apparently is no longer available).
 Documentation
 -------------
 
+* ADDED: Example queries for generating diagrams for Prolog module applications
+using the `diagrams` tool.
+
+* IMPROVED: Documentation of the `lgtdoc` and `ports` tools.
+
 * IMPROVED: Documentation of the `logtalk_make/0-1` built-in predicates.
 
 Tools
@@ -77,8 +82,6 @@ streams after running each unit test and to print the name of skipped tests.
 * IMPROVED: Updated the `logtalk_tester.sh` POSIX shell script to print a list
 of skipped tests and simplified lists of compilation warnings, errors, and
 failed tests.
-
-* IMPROVED: Documentation of the `lgtdoc` and `ports` tools.
 
 * FIXED: Added missing entries for the `logtalk_make/0-1` built-in predicates
 to the `help` tool.
