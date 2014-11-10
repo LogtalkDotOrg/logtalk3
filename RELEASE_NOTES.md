@@ -79,6 +79,9 @@ failed tests.
 * FIXED: Added missing entries for the `logtalk_make/0-1` built-in predicates
 to the `help` tool.
 
+* FIXED: Bug in the `diagrams` tool when accessing Prolog module properties
+using SICStus Prolog as the backend compiler.
+
 Tests
 -----
 

@@ -2,9 +2,9 @@
 :- object(modules_diagram_support).
 
 	:- info([
-		version is 0.9,
+		version is 0.10,
 		author is 'Paulo Moura',
-		date is 2014/07/25,
+		date is 2014/11/10,
 		comment is 'Utility predicates for supporting Prolog modules in diagrams.'
 	]).
 
@@ -268,10 +268,9 @@
 		property_module(file(File), Module) :-
 			{current_module(Module, File)}.
 		property_module(file(Basename, Directory), Module) :-
-			{current_module(Module, File),
-			 decompose_file_name(File, Directory, Name, Extension),
-			 atom_concat(Name, Extension, Basename)
-			}.
+			{current_module(Module, File)},
+			decompose_file_name(File, Directory, Name, Extension),
+			atom_concat(Name, Extension, Basename).
 
 		loaded_file_property(File, Property) :-
 			property_source_file(Property, File).
