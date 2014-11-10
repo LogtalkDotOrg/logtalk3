@@ -11,7 +11,7 @@
 	:- public(module_property/2).
 	:- mode(module_property(?atom, ?callable), zero_or_more).
 	:- info(module_property/2, [
-		comment is 'Access to module properties, at least exports/1, file/1, and file/2 but also defines/2, calls/2, and provides/3 when possible.',
+		comment is 'Access to module properties, at least exports/1, file/1, and file/2 but also declares/2, defines/2, calls/2, and provides/3 when possible.',
 		argnames is ['Module', 'Property']
 	]).
 
@@ -209,6 +209,11 @@
 		property_module(exports(Exports), Module) :-
 			{get_module_info(Module, raw_interface, Interface)},
 			filter_interface(Interface, Exports).
+		property_module(declares(Functor/Arity, []), Module) :-
+			property_module(exports(Exports), Module),
+			list::member(Functor/Arity, Exports).
+		property_module(defines(Functor/Arity, []), Module) :-
+			{'@'(current_module_predicate(defined,Functor/Arity), Module)}.
 		property_module(file(File), Module) :-
 			{current_compiled_file(File, _, Module)}.
 		property_module(file(Basename, Directory), Module) :-
@@ -265,6 +270,12 @@
 				(predicate_property(Module:Goal, exported), functor(Goal, Functor, Arity)),
 				Exports
 			)}.
+		property_module(declares(Functor/Arity, []), Module) :-
+			property_module(exports(Exports), Module),
+			list::member(Functor/Arity, Exports).
+		property_module(defines(Functor/Arity, []), Module) :-
+			{current_predicate(_, ':'(Module,Predicate))},
+			functor(Predicate, Functor, Arity).
 		property_module(file(File), Module) :-
 			{current_module(Module, File)}.
 		property_module(file(Basename, Directory), Module) :-

@@ -67,6 +67,10 @@ Tools
 Based on similar support found on the Prolog conformance testing framework
 written by Péter Szabó and Péter Szeredi.
 
+* ADDED: Support for retrieving `declares/2` and `defines/2` module properties
+to the `diagrams` tool when using ECLiPSe and SICStus Prolog as the backend
+Prolog compilers.
+
 * IMPROVED: Updated the `lgtunit` tool to restore the current input and output
 streams after running each unit test and to print the name of skipped tests.
 
