@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for YAP Prolog 6.3.4 and later versions
-%  Last updated on November 4, 2014
+%  Last updated on November 11, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -228,6 +228,9 @@
 '$lgt_prolog_database_predicate'(asserta(_, _)).
 '$lgt_prolog_database_predicate'(assertz(_, _)).
 '$lgt_prolog_database_predicate'(clause(_, _, _)).
+'$lgt_prolog_database_predicate'(assert_static(_)).
+'$lgt_prolog_database_predicate'(asserta_static(_)).
+'$lgt_prolog_database_predicate'(assertz_static(_)).
 
 
 
