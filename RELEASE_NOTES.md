@@ -48,7 +48,8 @@ user experience more similar to other backend Prolog compilers.
 * UPDATED: The JIProlog adapter file for the changes in the latest betas.
 
 * UPDATED: The YAP adapter file with declarations for the proprietary database
-predicates `assert_static/1`, `asserta_static/1`, and `assertz_static/1`.
+predicates `assert_static/1`, `asserta_static/1`, `assertz_static/1`, and
+`nth_clause/3`.
 
 Library
 -------

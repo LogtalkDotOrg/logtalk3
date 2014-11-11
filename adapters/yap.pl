@@ -228,6 +228,7 @@
 '$lgt_prolog_database_predicate'(asserta(_, _)).
 '$lgt_prolog_database_predicate'(assertz(_, _)).
 '$lgt_prolog_database_predicate'(clause(_, _, _)).
+'$lgt_prolog_database_predicate'(nth_clause(_, _, _)).
 '$lgt_prolog_database_predicate'(assert_static(_)).
 '$lgt_prolog_database_predicate'(asserta_static(_)).
 '$lgt_prolog_database_predicate'(assertz_static(_)).
