@@ -137,6 +137,18 @@ Péter Szabó and Péter Szeredi. For practical examples, check the included
 tests for Prolog conformance of standard input/output predicates.
 
 
+Unit tests with timeout limits
+------------------------------
+
+There's no portable way to call a goal with a timeout limit. However, some
+backend Prolog compilers provide this functionality:
+
+- ECLiPSe: `timeout/3` and `timeout/7` library predicates
+- SICStus Prolog: `time_out/3` library predicate
+- SWI-Prolog: `call_with_time_limit/2` library predicate
+- YAP: `time_out/3` library predicate
+
+
 Setup and cleanup goals
 -----------------------
 

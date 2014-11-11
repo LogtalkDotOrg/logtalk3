@@ -63,7 +63,7 @@ Documentation
 * ADDED: Example queries for generating diagrams for Prolog module applications
 using the `diagrams` tool.
 
-* IMPROVED: Documentation of the `lgtdoc` and `ports` tools.
+* IMPROVED: Documentation of the `lgtdoc`, `lgtunit`, and `ports` tools.
 
 * IMPROVED: Documentation of the `logtalk_make/0-1` built-in predicates.
 
