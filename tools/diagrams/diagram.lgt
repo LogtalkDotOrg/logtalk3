@@ -27,7 +27,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/11/10,
+		date is 2014/11/11,
 		comment is 'Common predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
@@ -233,9 +233,10 @@
 
 	normalize_directory_paths([], []).
 	normalize_directory_paths([Directory| Directories], [NormalizedDirectory| NormalizedDirectories]) :-
-		(	sub_atom(Directory, _, _, 0, '/') ->
-			NormalizedDirectory = Directory
-		;	atom_concat(Directory, '/', NormalizedDirectory)
+		os::expand_path(Directory, NormalizedDirectory0),
+		(	sub_atom(NormalizedDirectory0, _, _, 0, '/') ->
+			NormalizedDirectory = NormalizedDirectory0
+		;	atom_concat(NormalizedDirectory0, '/', NormalizedDirectory)
 		),
 		normalize_directory_paths(Directories, NormalizedDirectories).
 
@@ -401,7 +402,7 @@
 	:- protected(merge_options/2).
 	:- mode(merge_options(+list(compound), -list(compound)), one).
 	:- info(merge_options/2, [
-		comment is 'Merges the user options with the default options, returning the list of options used when generating a diagram.',
+		comment is 'Merges the user options with the default options, returning the list of options used when generating a diagram. Path arguments in options are expanded to full paths. Also ensures that all directory paths end with a slash.',
 		argnames is ['UserOptions', 'Options']
 	]).
 
@@ -415,7 +416,21 @@
 			),
 			DefaultOptions
 		),
-		append(UserOptions, DefaultOptions, Options).
+		append(UserOptions, DefaultOptions, Options0),
+		fix_options(Options0, Options).
+
+	fix_options([], []).
+	fix_options([Option| Options], [FixedOption| FixedOptions]) :-
+		(	fix_option(Option, FixedOption) ->
+			true
+		;	FixedOption = Option
+		),
+		fix_options(Options, FixedOptions).
+
+	fix_option(omit_path_prefixes(Prefixes), omit_path_prefixes(NormalizedPrefixes)) :-
+		normalize_directory_paths(Prefixes, NormalizedPrefixes).
+	fix_option(output_directory(Directory), output_directory(NormalizedDirectory)) :-
+		normalize_directory_paths([Directory], [NormalizedDirectory]).
 
 	:- protected(output_rlibrary/3).
 	:- mode(output_rlibrary(+atom, +atom, +list(compound)), one).
@@ -602,11 +617,7 @@
 		::diagram_name_suffix(Suffix),
 		atom_concat(Name0, Suffix, Name),
 		Format::output_file_name(Name, Basename),
-		memberchk(output_directory(Directory0), Options),
-		(	sub_atom(Directory0, _, _, 0, '/') ->
-			Directory = Directory0
-		;	atom_concat(Directory0, '/', Directory)
-		),
+		memberchk(output_directory(Directory), Options),
 		os::make_directory(Directory),
 		atom_concat(Directory, Basename, Path).
 
@@ -650,13 +661,15 @@
 		),
 		!.
 	% Logtalk file given using a full path
-	locate_file(Source, Basename, Extension, Directory, Path) :-
+	locate_file(Source0, Basename, Extension, Directory, Path) :-
+		os::expand_path(Source0, Source),
 		add_extension(logtalk, Source, Path, Extension),
 		logtalk::loaded_file_property(Path, basename(Basename)),
 		logtalk::loaded_file_property(Path, directory(Directory)),
 		!.
 	% Prolog file given using a full path
-	locate_file(Source, Basename, Extension, Directory, Path) :-
+	locate_file(Source0, Basename, Extension, Directory, Path) :-
+		os::expand_path(Source0, Source),
 		add_extension(prolog, Source, Path, Extension),
 		modules_diagram_support::loaded_file_property(Source, basename(Basename)),
 		modules_diagram_support::loaded_file_property(Source, directory(Directory)),
@@ -758,12 +771,7 @@
 	add_link_options(Path, Options, LinkingOptions) :-
 		memberchk(omit_path_prefixes(Prefixes), Options),
 		memberchk(url_prefixes(FilePrefix, DocPrefix), Options),
-		(	member(Prefix0, Prefixes),
-			os::expand_path(Prefix0, Prefix1),
-			(	sub_atom(Prefix1, _, _, 0, '/') ->
-				Prefix = Prefix1
-			;	atom_concat(Prefix1, '/', Prefix)
-			),
+		(	member(Prefix, Prefixes),
 			atom_concat(Prefix, Suffix, Path) ->
 			atom_concat(FilePrefix, Suffix, FileURL)
 		;	FileURL = FilePrefix
