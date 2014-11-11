@@ -8,16 +8,17 @@ terms per section 7).        Consult the `LICENSE.txt` file for details.
 ________________________________________________________________________
 
 
-This directory contains Logtalk unit tests for built-in entities, predicates,
-control constructs, directives, and methods. Besides this set of unit tests,
-there are also unit tests defined for most of the examples, for some of the
-developer tools, and for some of the code contributions. Some tests, specially
-for directives, are mainly parsing tests for all the supported syntaxes.
+This directory contains two test suites. The Logtalk test suite includes unit
+tests for built-in entities, predicates, control constructs, directives, and
+methods. Besides this set of unit tests, there are also unit tests defined for
+most of the examples, for some of the developer tools, and for some of the code
+contributions. Some tests, specially for directives, are mainly parsing tests
+for all the supported syntaxes.
 
-There's also an additional set of unit tests in this directory for Prolog
-standard features. They can be used to highlight differences between
-backend Prolog compilers when porting and testing Logtalk applications.
-See the `prolog/NOTES.md` file for details about the tests and how to run
+The Prolog test suite includes conformance tests for both official and de
+facto standards. It can be used to highlight differences between backend
+Prolog compilers when porting and testing Logtalk applications. See the
+`prolog/NOTES.md` file for details about the these tests and how to run
 them.
 
 You can automate running all these tests by calling the `logtalk_tester`
@@ -29,15 +30,18 @@ how to select the back-end Prolog compiler.
 To run all the provided unit tests with e.g. SWI-Prolog as the back-end
 compiler, open a terminal and type:
 
-	$ cd $LOGTALKUSER/tests
+	$ cd $LOGTALKUSER/tests/logtalk
 	$ logtalk_tester -p swi
 	...
-	$ cd ../tools
+	$ cd $LOGTALKUSER/tests/prolog
 	$ logtalk_tester -p swi
 	...
-	$ cd ../examples
+	$ cd $LOGTALKUSER/tools
 	$ logtalk_tester -p swi
 	...
-	$ cd ../contributions
+	$ cd $LOGTALKUSER/examples
+	$ logtalk_tester -p swi
+	...
+	$ cd $LOGTALKUSER/contributions
 	$ logtalk_tester -p swi
 	...

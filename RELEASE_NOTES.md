@@ -93,11 +93,14 @@ to the `help` tool.
 * FIXED: Bug in the `diagrams` tool when accessing Prolog module properties
 using SICStus Prolog as the backend compiler.
 
-* FIXED: The `diagrams` tool now checks (and, if necessary, fixes) the paths
-passed using the option `omit_path_prefixes/1` for an ending slash.
+* FIXED: The `diagrams` tool now checks (and fixes if necessary ) the paths
+passed using the options `omit_path_prefixes/1` and `output_directory/1` for
+an ending slash.
 
 Tests
 -----
+
+* CHANGED: Move the Logtalk test suites into their own directory.
 
 * ADDED: Unit tests for ISO Prolog standard specified syntax and input/output
 predicates.
