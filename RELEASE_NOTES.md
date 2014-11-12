@@ -40,6 +40,9 @@ ISO Prolog Core Standard).
 an error found while compiling a Prolog module as a Logtalk object resulting
 in a second spurious error.
 
+* FIXED: Compiler performance bug where, in case of a compilation error of a
+source file term, the remaining source file terms would still be read.
+
 Prolog adapter and integration files
 ------------------------------------
 
