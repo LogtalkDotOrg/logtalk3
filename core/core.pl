@@ -5778,11 +5778,20 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_compiler_error_handler'(+atom, +atom, @compound, @compound)
 % '$lgt_compiler_error_handler'(@compound)
 %
 % closes the streams being used for reading and writing terms, restores
-% the operator table, and reports the compilation error found
+% the operator table, reports the compilation error found, and, finally,
+% fails in order to abort the compilation process
+
+'$lgt_compiler_error_handler'(logtalk_compiler_error(SourceFile, ObjectFile, Lines, Error)) :-
+	!,
+	'$lgt_compiler_error_handler'(SourceFile, ObjectFile, Lines, Error).
+
+'$lgt_compiler_error_handler'(Error) :-
+	'$lgt_warning_context'(SourceFile, ObjectFile, Lines),
+	'$lgt_compiler_error_handler'(SourceFile, ObjectFile, Lines, Error).
+
 
 '$lgt_compiler_error_handler'(SourceFile, ObjectFile, Lines, Error) :-
 	stream_property(Input, alias(logtalk_compiler_input)),
@@ -5804,20 +5813,12 @@ current_logtalk_flag(Flag, Value) :-
 	fail.
 
 
-'$lgt_compiler_error_handler'(logtalk_compiler_error(SourceFile, ObjectFile, Lines, Error)) :-
-	!,
-	'$lgt_compiler_error_handler'(SourceFile, ObjectFile, Lines, Error).
-
-'$lgt_compiler_error_handler'(Error) :-
-	'$lgt_warning_context'(SourceFile, ObjectFile, Lines),
-	'$lgt_compiler_error_handler'(SourceFile, ObjectFile, Lines, Error).
-
-
 
 % '$lgt_compiler_stream_io_error_handler'(@stream, @compound)
 %
 % closes the stream being used for reading or writing terms, restores
-% the operator table, and reports the compilation error found
+% the operator table, reports the compilation error found, and, finally,
+% fails in order to abort the compilation process
 
 '$lgt_compiler_stream_io_error_handler'(Stream, Error) :-
 	'$lgt_print_message'(error, core, compiler_stream_error(Error)),
@@ -5833,7 +5834,8 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_compiler_open_stream_error_handler'(@compound)
 %
-% restores the operator table and reports the compilation error found
+% restores the operator table, reports the compilation error found, and,
+% finally, fails in order to abort the compilation process
 
 '$lgt_compiler_open_stream_error_handler'(Error) :-
 	'$lgt_print_message'(error, core, compiler_stream_error(Error)),
