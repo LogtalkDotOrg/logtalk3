@@ -5358,14 +5358,14 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_file_term'(end_of_file, _, Position, _) :-
 	'$lgt_pp_module_'(Module),
+	!,
 	% module definitions start with an opening module/1-2 directive and are assumed
 	% to end at the end of a source file; there is no module closing directive;
 	% set the initial compilation context and the position for compiling the end_of_file term
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(regular), _, Position),
 	'$lgt_compile_file_term'(end_of_file, Ctx),
 	'$lgt_compile_entity'(object, Module, Ctx),
-	'$lgt_print_message'(silent(compiling), core, compiled_entity(module, Module)),
-	!.
+	'$lgt_print_message'(silent(compiling), core, compiled_entity(module, Module)).
 
 '$lgt_compile_file_term'(end_of_file, _, _, _) :-
 	'$lgt_pp_entity_'(Type, _, _, _, _),
@@ -5384,11 +5384,11 @@ current_logtalk_flag(Flag, Value) :-
 	throw(error(existence_error(directive, endif/0), term(end_of_file))).
 
 '$lgt_compile_file_term'(end_of_file, _, Position, _) :-
+	!,
 	% set the initial compilation context and the position for compiling the end_of_file term
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(regular), _, Position),
 	% allow for term-expansion of the end_of_file term
-	'$lgt_compile_file_term'(end_of_file, Ctx),
-	!.
+	'$lgt_compile_file_term'(end_of_file, Ctx).
 
 '$lgt_compile_file_term'(Term, _, _, Input) :-
 	'$lgt_pp_cc_skipping_',

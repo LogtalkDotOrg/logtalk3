@@ -36,6 +36,10 @@ Logtalk compiler and runtime
 and `iso_lax` (for Prolog compilers claiming only broad conformance with the
 ISO Prolog Core Standard).
 
+* FIXED: The compiler would try to read past the end-of-file after reporting
+an error found while compiling a Prolog module as a Logtalk object resulting
+in a second spurious error.
+
 Prolog adapter and integration files
 ------------------------------------
 
