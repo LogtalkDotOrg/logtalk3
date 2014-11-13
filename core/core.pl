@@ -5784,20 +5784,12 @@ current_logtalk_flag(Flag, Value) :-
 % the operator table, reports the compilation error found, and, finally,
 % fails in order to abort the compilation process
 
-'$lgt_compiler_error_handler'(error(logtalk_compiler_error(SourceFile, ObjectFile, Lines, Error), _)) :-
+'$lgt_compiler_error_handler'(error(error(Error,Context), _)) :-
 	!,
-	'$lgt_compiler_error_handler'(SourceFile, ObjectFile, Lines, Error).
-
-'$lgt_compiler_error_handler'(logtalk_compiler_error(SourceFile, ObjectFile, Lines, Error)) :-
-	!,
-	'$lgt_compiler_error_handler'(SourceFile, ObjectFile, Lines, Error).
+	'$lgt_compiler_error_handler'(error(Error,Context)).
 
 '$lgt_compiler_error_handler'(Error) :-
 	'$lgt_warning_context'(SourceFile, ObjectFile, Lines),
-	'$lgt_compiler_error_handler'(SourceFile, ObjectFile, Lines, Error).
-
-
-'$lgt_compiler_error_handler'(SourceFile, ObjectFile, Lines, Error) :-
 	stream_property(Input, alias(logtalk_compiler_input)),
 	stream_property(Output, alias(logtalk_compiler_output)), !,
 	'$lgt_print_message'(error, core, compiler_error(SourceFile, Lines, Error)),
@@ -14419,12 +14411,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_predicate_calls_error_handler'(Term, Position, Error) :-
 	'$lgt_internal_term_to_user_term'(Term, UserTerm),
-	(	'$lgt_warning_context'(SourceFile, ObjectFile, _) ->
-		% source file compilation
-		throw(logtalk_compiler_error(SourceFile, ObjectFile, Position, error(Error,UserTerm)))
-	;	% runtime compilation
-		throw(error(Error,UserTerm))
-	).
+	throw(error(Error,UserTerm)).
 
 
 '$lgt_internal_term_to_user_term'({Term}, term(Term)).
