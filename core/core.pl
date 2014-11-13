@@ -333,13 +333,13 @@
 
 % '$lgt_pp_file_initialization_'(Goal)
 :- dynamic('$lgt_pp_file_initialization_'/1).
-% '$lgt_pp_file_entity_initialization_'(Type, Entity, Goal)
-:- dynamic('$lgt_pp_file_entity_initialization_'/3).
+% '$lgt_pp_file_object_initialization_'(Object, Goal)
+:- dynamic('$lgt_pp_file_object_initialization_'/2).
 
-% '$lgt_pp_entity_initialization_'(Goal, Position)
-:- dynamic('$lgt_pp_entity_initialization_'/2).
-% '$lgt_pp_final_entity_initialization_'(Goal)
-:- dynamic('$lgt_pp_final_entity_initialization_'/1).
+% '$lgt_pp_object_initialization_'(Goal, Position)
+:- dynamic('$lgt_pp_object_initialization_'/2).
+% '$lgt_pp_final_object_initialization_'(Goal)
+:- dynamic('$lgt_pp_final_object_initialization_'/1).
 
 % '$lgt_pp_entity_meta_directive_'(Directive, Position)
 :- dynamic('$lgt_pp_entity_meta_directive_'/2).
@@ -5871,6 +5871,8 @@ current_logtalk_flag(Flag, Value) :-
 
 
 % '$lgt_compile_entity'(+atom, @entity_identifier, +compilation_context)
+%
+% compiler second stage
 
 '$lgt_compile_entity'(Type, Entity, Ctx) :-
 	'$lgt_generate_entity_code'(Type, Ctx),
@@ -5986,7 +5988,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_clean_pp_file_clauses' :-
 	retractall('$lgt_pp_file_initialization_'(_)),
-	retractall('$lgt_pp_file_entity_initialization_'(_, _, _)),
+	retractall('$lgt_pp_file_object_initialization_'(_, _)),
 	retractall('$lgt_pp_file_encoding_'(_, _)),
 	retractall('$lgt_pp_file_bom_'(_)),
 	retractall('$lgt_pp_file_data_'(_, _, _, _)),
@@ -6060,8 +6062,8 @@ current_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_pp_meta_predicate_'(_, _)),
 	retractall('$lgt_pp_predicate_alias_'(_, _, _)),
 	retractall('$lgt_pp_non_terminal_'(_, _, _)),
-	retractall('$lgt_pp_entity_initialization_'(_, _)),
-	retractall('$lgt_pp_final_entity_initialization_'(_)),
+	retractall('$lgt_pp_object_initialization_'(_, _)),
+	retractall('$lgt_pp_final_object_initialization_'(_)),
 	retractall('$lgt_pp_entity_meta_directive_'(_, _)),
 	retractall('$lgt_pp_dcl_'(_)),
 	retractall('$lgt_pp_def_'(_)),
@@ -7029,8 +7031,8 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_comp_ctx'(Ctx, (:- initialization(Goal)), Entity, Entity, Entity, Entity, Prefix, [], _, ExCtx, _, [], Position),
 		'$lgt_execution_context'(ExCtx, Entity, Entity, Entity, Entity, [], []),
 		(	'$lgt_compiler_flag'(debug, on) ->
-			assertz('$lgt_pp_entity_initialization_'(dgoal(Goal,Ctx), Position))
-		;	assertz('$lgt_pp_entity_initialization_'(goal(Goal,Ctx), Position))
+			assertz('$lgt_pp_object_initialization_'(dgoal(Goal,Ctx), Position))
+		;	assertz('$lgt_pp_object_initialization_'(goal(Goal,Ctx), Position))
 		)
 	;	Kind == protocol ->
 		throw(domain_error(protocol_directive, (initialization)/1))
@@ -13197,22 +13199,20 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_generate_entity_code'(protocol, _) :-
 	'$lgt_generate_protocol_clauses',
-	'$lgt_generate_protocol_directives',
-	'$lgt_generate_file_entity_initialization_goal'.
+	'$lgt_generate_protocol_directives'.
 
 '$lgt_generate_entity_code'(object, Ctx) :-
 	'$lgt_generate_def_table_clauses'(Ctx),
 	'$lgt_compile_predicate_calls',
 	'$lgt_generate_object_clauses',
 	'$lgt_generate_object_directives',
-	'$lgt_generate_file_entity_initialization_goal'.
+	'$lgt_generate_file_object_initialization_goal'.
 
 '$lgt_generate_entity_code'(category, Ctx) :-
 	'$lgt_generate_def_table_clauses'(Ctx),
 	'$lgt_compile_predicate_calls',
 	'$lgt_generate_category_clauses',
-	'$lgt_generate_category_directives',
-	'$lgt_generate_file_entity_initialization_goal'.
+	'$lgt_generate_category_directives'.
 
 
 
@@ -14356,9 +14356,11 @@ current_logtalk_flag(Flag, Value) :-
 %
 % compiles predicate calls in entity clause rules and in initialization goals
 %
-% this compiler second stage is mainly required for dealing with redefined
-% built-in predicates which may be textually defined in an entity after their
-% calls as predicate definition order is irrelevant
+% all predicate calls are compiled on this compiler second stage to take advantage
+% of the information about declared and defined predicates collected on the first
+% stage, thus making predicate declaration and definition order irrelevant; this
+% allows us to deal with e.g. meta-predicate directives and redefined built-in
+% predicates which may be textually defined in an entity after their calls
 
 '$lgt_compile_predicate_calls' :-
 	% avoid querying the optimize flag for each compiled term
@@ -14367,30 +14369,35 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_compile_predicate_calls'(Optimize) :-
+	% user-defined terms
 	retract('$lgt_pp_entity_term_'(Term, Position)),
 	'$lgt_compile_predicate_calls'(Term, Position, Optimize, TTerm),
 	assertz('$lgt_pp_final_entity_term_'(TTerm, Position)),
 	fail.
 
 '$lgt_compile_predicate_calls'(_) :-
+	% coinductive auxiliary clauses
 	'$lgt_pp_coinductive_'(Head, TestHead, HeadExCtx, TCHead, BodyExCtx, THead, DHead),
 	'$lgt_pp_defines_predicate_'(Head, _, _, _),
 		'$lgt_add_coinductive_predicate_aux_clause'(Head, TestHead, HeadExCtx, TCHead, BodyExCtx, THead, DHead),
 	fail.
 
 '$lgt_compile_predicate_calls'(Optimize) :-
+	% other auxiliary clauses
 	retract('$lgt_pp_entity_aux_clause_'(Clause)),
 	'$lgt_compile_predicate_calls'(Clause, 0-0, Optimize, TClause),
 	assertz('$lgt_pp_final_entity_aux_clause_'(TClause)),
 	fail.
 
 '$lgt_compile_predicate_calls'(Optimize) :-
-	retract('$lgt_pp_entity_initialization_'(Goal, Position)),
+	% initialization/1 goals
+	retract('$lgt_pp_object_initialization_'(Goal, Position)),
 	'$lgt_compile_predicate_calls'(Goal, Position, Optimize, TGoal),
-	assertz('$lgt_pp_final_entity_initialization_'(TGoal)),
+	assertz('$lgt_pp_final_object_initialization_'(TGoal)),
 	fail.
 
 '$lgt_compile_predicate_calls'(Optimize) :-
+	% other initialization goals found on proprietary Prolog directives
 	retract('$lgt_pp_entity_meta_directive_'(Directive, Position)),
 	'$lgt_compile_predicate_calls'(Directive, Position, Optimize, TDirective),
 	assertz('$lgt_pp_directive_'(TDirective)),
@@ -14401,9 +14408,6 @@ current_logtalk_flag(Flag, Value) :-
 
 
 % '$lgt_compile_predicate_calls'(+callable, @compound, +atom, -callable)
-%
-% all predicate calls are compiled on the second stage to take advantage of the
-% information about declared and defined predicates collected on the first stage
 
 '$lgt_compile_predicate_calls'(Term, Position, Optimize, TTerm) :-
 	(	catch(
@@ -14928,13 +14932,13 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_initialization_goal'(-callable)
 %
-% source file initialization goal constructed from each entity initialization
+% source file initialization goal constructed from each object initialization
 % goals and from the source file initialization/1 directive if present
 
 '$lgt_initialization_goal'(Goal) :-
-	findall(EntityGoal, '$lgt_pp_file_entity_initialization_'(_, _, EntityGoal), EntityGoals),
+	findall(ObjectGoal, '$lgt_pp_file_object_initialization_'(_, ObjectGoal), ObjectGoals),
 	findall(FileGoal, '$lgt_pp_file_initialization_'(FileGoal), FileGoals),
-	'$lgt_append'(EntityGoals, FileGoals, Goals),
+	'$lgt_append'(ObjectGoals, FileGoals, Goals),
 	'$lgt_list_to_conjunction'(Goals, GoalConjunction),
 	'$lgt_remove_redundant_calls'(GoalConjunction, Goal).
 
@@ -14966,10 +14970,10 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% generates and asserts the initialization goal for the entity being compiled
+% generates and asserts the initialization goal for the object being compiled
 
-'$lgt_generate_file_entity_initialization_goal' :-
-	'$lgt_pp_entity_'(Type, Entity, Prefix, _, _),
+'$lgt_generate_file_object_initialization_goal' :-
+	'$lgt_pp_entity_'(_, Object, Prefix, _, _),
 	(	'$lgt_prolog_feature'(threads, supported),
 		setof(Mutex, Head^'$lgt_pp_synchronized_'(Head, Mutex), Mutexes) ->
 		Goal1 = '$lgt_create_mutexes'(Mutexes)
@@ -14979,14 +14983,14 @@ current_logtalk_flag(Flag, Value) :-
 		Goal2 = '$lgt_init_object_message_queue'(Prefix)
 	;	Goal2 = true
 	),
-	(	bagof(EntityInitGoal, '$lgt_pp_final_entity_initialization_'(EntityInitGoal), EntityInitGoals) ->
-		'$lgt_list_to_conjunction'(EntityInitGoals, Goal3),
+	(	bagof(ObjectInitGoal, '$lgt_pp_final_object_initialization_'(ObjectInitGoal), ObjectInitGoals) ->
+		'$lgt_list_to_conjunction'(ObjectInitGoals, Goal3),
 		'$lgt_remove_redundant_calls'((Goal1, Goal2, Goal3), Goal)
 	;	'$lgt_remove_redundant_calls'((Goal1, Goal2), Goal)
 	),
 	(	Goal == true ->
 		true
-	;	assertz('$lgt_pp_file_entity_initialization_'(Type, Entity, Goal))
+	;	assertz('$lgt_pp_file_object_initialization_'(Object, Goal))
 	).
 
 
@@ -15102,7 +15106,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_assert_initialization_goal'
 %
-% calls any defined initialization goal for a dynamically created entity
+% calls any defined initialization goals for a dynamically created entity
 
 '$lgt_assert_initialization_goal' :-
 	(	setof(Mutex, Head^'$lgt_pp_synchronized_'(Head, Mutex), Mutexes) ->
@@ -15114,7 +15118,7 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_init_object_message_queue'(Prefix)
 	;	true
 	),
-	(	bagof(Goal, '$lgt_pp_final_entity_initialization_'(Goal), GoalList) ->
+	(	bagof(Goal, '$lgt_pp_final_object_initialization_'(Goal), GoalList) ->
 		'$lgt_list_to_conjunction'(GoalList, Goals),
 		once(Goals)
 	;	true
