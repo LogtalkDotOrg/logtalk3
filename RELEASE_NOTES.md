@@ -31,8 +31,8 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* FIXED: Regression in previous release in the reporting of some source
-file compilation errors.
+* FIXED: Regression in previous release in the reporting of compilation
+errors.
 
 Tests
 -----

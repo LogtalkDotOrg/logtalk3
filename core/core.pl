@@ -14419,8 +14419,12 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_predicate_calls_error_handler'(Term, Position, Error) :-
 	'$lgt_internal_term_to_user_term'(Term, UserTerm),
-	'$lgt_warning_context'(SourceFile, ObjectFile, _),
-	throw(logtalk_compiler_error(SourceFile, ObjectFile, Position, error(Error,UserTerm))).
+	(	'$lgt_warning_context'(SourceFile, ObjectFile, _) ->
+		% source file compilation
+		throw(logtalk_compiler_error(SourceFile, ObjectFile, Position, error(Error,UserTerm)))
+	;	% runtime compilation
+		throw(error(Error,UserTerm))
+	).
 
 
 '$lgt_internal_term_to_user_term'({Term}, term(Term)).
