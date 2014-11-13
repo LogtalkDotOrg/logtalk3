@@ -5156,8 +5156,8 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_pp_file_data_'(_, _, Path, _),
 	% write any plain Prolog terms that may precede the entity definition
 	'$lgt_write_prolog_terms'(SourceData, Output, Path),
-	'$lgt_write_logtalk_directives'(Output),
-	'$lgt_write_logtalk_clauses'(SourceData, Output, Path).
+	'$lgt_write_entity_directives'(Output),
+	'$lgt_write_entity_clauses'(SourceData, Output, Path).
 
 
 
@@ -14739,16 +14739,16 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_write_logtalk_directives'(@stream)
+% '$lgt_write_entity_directives'(@stream)
 %
 % writes the compiled entity directives
 
-'$lgt_write_logtalk_directives'(Stream) :-
+'$lgt_write_entity_directives'(Stream) :-
 	'$lgt_pp_directive_'(Directive),
 		write_canonical(Stream, (:- Directive)), write(Stream, '.'), nl(Stream),
 	fail.
 
-'$lgt_write_logtalk_directives'(_).
+'$lgt_write_entity_directives'(_).
 
 
 
@@ -14770,19 +14770,19 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_write_logtalk_clauses'(+atom, @stream, +atom)
+% '$lgt_write_entity_clauses'(+atom, @stream, +atom)
 %
 % writes Logtalk entity clauses
 
-'$lgt_write_logtalk_clauses'(SourceData, Stream, Path) :-
+'$lgt_write_entity_clauses'(SourceData, Stream, Path) :-
 	'$lgt_write_dcl_clauses'(SourceData, Stream, Path),
 	'$lgt_write_def_clauses'(SourceData, Stream, Path),
 	'$lgt_write_ddef_clauses'(SourceData, Stream, Path),
 	'$lgt_write_super_clauses'(SourceData, Stream, Path),
 	'$lgt_pp_entity_'(_, _, _, _, Rnm),
 	'$lgt_write_alias_clauses'(SourceData, Stream, Path, Rnm),
-	'$lgt_write_entity_clauses'(SourceData, Stream, Path),
-	'$lgt_write_entity_aux_clauses'(SourceData, Stream, Path).
+	'$lgt_write_predicate_clauses'(SourceData, Stream, Path),
+	'$lgt_write_aux_clauses'(SourceData, Stream, Path).
 
 
 '$lgt_write_dcl_clauses'(on, Stream, Path) :-
@@ -14857,30 +14857,30 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 
-'$lgt_write_entity_clauses'(on, Stream, Path) :-
+'$lgt_write_predicate_clauses'(on, Stream, Path) :-
 	'$lgt_pp_final_entity_term_'(Clause, Line-_),
 		'$lgt_write_term_and_source_location'(Stream, Clause, user, Path+Line),
 	fail.
 
-'$lgt_write_entity_clauses'(off, Stream, _) :-
+'$lgt_write_predicate_clauses'(off, Stream, _) :-
 	'$lgt_pp_final_entity_term_'(Clause, _),
 		write_canonical(Stream, Clause), write(Stream, '.'), nl(Stream),
 	fail.
 
-'$lgt_write_entity_clauses'(_, _, _).
+'$lgt_write_predicate_clauses'(_, _, _).
 
 
-'$lgt_write_entity_aux_clauses'(on, Stream, Path) :-
+'$lgt_write_aux_clauses'(on, Stream, Path) :-
 	'$lgt_pp_final_entity_aux_clause_'(Clause),
 		'$lgt_write_term_and_source_location'(Stream, Clause, aux, Path+1),
 	fail.
 
-'$lgt_write_entity_aux_clauses'(off, Stream, _) :-
+'$lgt_write_aux_clauses'(off, Stream, _) :-
 	'$lgt_pp_final_entity_aux_clause_'(Clause),
 		write_canonical(Stream, Clause), write(Stream, '.'), nl(Stream),
 	fail.
 
-'$lgt_write_entity_aux_clauses'(_, _, _).
+'$lgt_write_aux_clauses'(_, _, _).
 
 
 
@@ -14929,10 +14929,8 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_write_initialization_call'(@stream)
 %
-% writes the initialization goal for the compiled source file, a conjunction
-% of the initialization goals of the defined entities; for Prolog compilers
-% that don't support the multifile/1 predicate directive, the initialization
-% goal also asserts the relation clauses for all defined entities
+% writes the initialization goal for the compiled source file, a
+% conjunction of the initialization goals of the defined entities
 
 '$lgt_write_initialization_call'(Stream) :-
 	'$lgt_initialization_goal'(Goal),
@@ -15019,8 +15017,8 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_assert_ddef_clauses',
 	'$lgt_assert_super_clauses',
 	'$lgt_assert_alias_clauses',
-	'$lgt_assert_entity_clauses',
-	'$lgt_assert_entity_aux_clauses',
+	'$lgt_assert_predicate_clauses',
+	'$lgt_assert_aux_clauses',
 	'$lgt_assert_runtime_clauses'(Kind),
 	'$lgt_assert_initialization_goal'.
 
@@ -15088,20 +15086,20 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_assertz_entity_clause'(Catchall, aux).
 
 
-'$lgt_assert_entity_clauses' :-
+'$lgt_assert_predicate_clauses' :-
 	'$lgt_pp_final_entity_term_'(Clause, _),
 		'$lgt_assertz_entity_clause'(Clause, user),
 	fail.
 
-'$lgt_assert_entity_clauses'.
+'$lgt_assert_predicate_clauses'.
 
 
-'$lgt_assert_entity_aux_clauses' :-
+'$lgt_assert_aux_clauses' :-
 	'$lgt_pp_final_entity_aux_clause_'(Clause),
 		'$lgt_assertz_entity_clause'(Clause, aux),
 	fail.
 
-'$lgt_assert_entity_aux_clauses'.
+'$lgt_assert_aux_clauses'.
 
 
 '$lgt_assert_runtime_clauses'(Type) :-
