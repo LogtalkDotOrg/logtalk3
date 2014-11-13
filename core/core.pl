@@ -15030,11 +15030,6 @@ current_logtalk_flag(Flag, Value) :-
 		retract(Pred),
 	fail.
 
-'$lgt_assert_directives' :-
-	'$lgt_pp_directive_'(op(Priority, Specifier, Operators)),
-		op(Priority, Specifier, Operators),
-	fail.
-
 '$lgt_assert_directives'.
 
 

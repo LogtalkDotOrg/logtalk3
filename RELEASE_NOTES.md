@@ -34,6 +34,9 @@ Logtalk compiler and runtime
 * IMPROVED: Compiler code refactoring for a clean separation between first
 stage and second stage error handling.
 
+* FIXED: Operator declarations found in arguments of the dynamic entity
+creation built-in predicates would not be local to the dynamic entities.
+
 * FIXED: Regression in previous release in the reporting of compilation
 errors.
 
