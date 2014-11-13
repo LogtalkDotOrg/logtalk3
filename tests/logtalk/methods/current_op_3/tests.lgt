@@ -9,54 +9,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(current_op_3_test_object_1).
-
-	:- set_logtalk_flag(context_switching_calls, allow).
-
-	% scoped operarors; seen by the reflection built-in methods
-	:- public(op(501, xfx, abc)).
-	:- protected(op(501, xfx, def)).
-	:- private(op(501, xfx, ghi)).
-
-	% local operator; invisible to the reflection built-in methods
-	:- op(501, xfx, jkl).
-
-	% test operator overriding
-	:- public(op(600, xfx, (:))).
-
-	% test for call in "self"
-	:- public(operators/1).
-	operators(Operators) :-
-		setof(Operator, ::current_op(501, xfx, Operator), Operators).
-
-	% tests for invalid object identifiers
-	:- public(ie/1).
-	ie(Object) :-
-		Object::current_op(_, _, _).
-
-	:- public(te/0).
-	te :-
-		Object = 1,
-		Object::current_op(_, _, _).
-
-:- end_object.
-
-
-
-:- object(current_op_3_test_object_2,
-	extends(current_op_3_test_object_1)).
-
-	:- public(op(501, xfx, opq)).
-	:- protected(op(501, xfx, rst)).
-	:- private(op(501, xfx, uvw)).
-
-	% local operator; invisible to the reflection built-in methods
-	:- op(501, xfx, xyz).
-
-:- end_object.
-
-
-
 :- object(tests,
 	extends(lgtunit)).
 
@@ -87,33 +39,33 @@
 		this(This),
 		{This::current_op(_, _, 1)}.
 
-	throws(current_op_3_6, error(instantiation_error, logtalk(_::current_op(_,_,_),current_op_3_test_object_1))) :-
-		{current_op_3_test_object_1::ie(_)}.
+	throws(current_op_3_6, error(instantiation_error, logtalk(_::current_op(_,_,_),test_object_1))) :-
+		{test_object_1::ie(_)}.
 
-	throws(current_op_3_7, error(type_error(object_identifier, 1), logtalk(1::current_op(_,_,_),current_op_3_test_object_1))) :-
-		{current_op_3_test_object_1::te}.
+	throws(current_op_3_7, error(type_error(object_identifier, 1), logtalk(1::current_op(_,_,_),test_object_1))) :-
+		{test_object_1::te}.
 
 	succeeds(current_op_3_8) :-
-		setof(Operator, current_op_3_test_object_1<<current_op(501, xfx, Operator), Operators),
+		setof(Operator, test_object_1<<current_op(501, xfx, Operator), Operators),
 		Operators == [abc, def, ghi].
 
 	succeeds(current_op_3_9) :-
-		setof(Operator, current_op_3_test_object_1::current_op(501, xfx, Operator), Operators),
+		setof(Operator, test_object_1::current_op(501, xfx, Operator), Operators),
 		Operators == [abc].
 
 	succeeds(current_op_3_10) :-
-		current_op_3_test_object_1::current_op(600, xfx, (:)),
-		\+ current_op_3_test_object_1::current_op(600, xfy, (:)).
+		test_object_1::current_op(600, xfx, (:)),
+		\+ test_object_1::current_op(600, xfy, (:)).
 
 	succeeds(current_op_3_11) :-
-		\+ current_op_3_test_object_2::current_op(600, xfx, (:)).
+		\+ test_object_2::current_op(600, xfx, (:)).
 
 	succeeds(current_op_3_12) :-
-		current_op_3_test_object_1::operators(Operators),
+		test_object_1::operators(Operators),
 		Operators == [abc, def, ghi].
 
 	succeeds(current_op_3_13) :-
-		current_op_3_test_object_2::operators(Operators),
+		test_object_2::operators(Operators),
 		Operators == [opq, rst].
 
 :- end_object.

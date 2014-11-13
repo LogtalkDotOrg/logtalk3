@@ -9,22 +9,24 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(tests,
-	extends(lgtunit)).
+:- object(test_object).
 
-	:- info([
-		version is 1.0,
-		author is 'Paulo Moura',
-		date is 2013/02/01,
-		comment is 'Unit tests for the forward/1 built-in method.'
-	]).
+	% for supporting testing instantiation errors
+	:- public(ie/1).
+	ie(Object) :-
+		Object::predicate_property(foo, _).
 
-	test(forward_1_1) :-
-		{test_object_2::p(X)},
-		X == 1.
+	% for supporting testing type errors
+	:- public(te/0).
+	te :-
+		Object = 1,
+		Object::predicate_property(foo, _).
 
-	test(forward_1_2) :-
-		{test_object_3::q(X)},
-		X == 2.
+	% for supporting testing meta-predicate properties
+	:- public(meta/2).
+	:- meta_predicate(meta(0, *)).
+
+	% for supporting testing non-terminal properties
+	:- public(nt//0).
 
 :- end_object.

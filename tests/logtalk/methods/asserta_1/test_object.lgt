@@ -9,10 +9,28 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(test_protocol),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+:- object(test_object).
+
+	:- set_logtalk_flag(dynamic_declarations, deny).
+
+	:- public(p/1).
+	:- dynamic(p/1).
+
+	:- protected(q/2).
+	:- dynamic(q/2).
+
+	:- private(r/3).
+	:- dynamic(r/3).
+
+	:- public(s/4).
+
+	:- public(ie/1).
+	ie(Object) :-
+		Object::asserta(foo).
+
+	:- public(te/0).
+	te :-
+		Object = 1,
+		Object::asserta(foo).
+
+:- end_object.

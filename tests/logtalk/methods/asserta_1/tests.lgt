@@ -9,34 +9,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(asserta_1_test_object).
-
-	:- set_logtalk_flag(dynamic_declarations, deny).
-
-	:- public(p/1).
-	:- dynamic(p/1).
-
-	:- protected(q/2).
-	:- dynamic(q/2).
-
-	:- private(r/3).
-	:- dynamic(r/3).
-
-	:- public(s/4).
-
-	:- public(ie/1).
-	ie(Object) :-
-		Object::asserta(foo).
-
-	:- public(te/0).
-	te :-
-		Object = 1,
-		Object::asserta(foo).
-
-:- end_object.
-
-
-
 :- object(tests,
 	extends(lgtunit)).
 
@@ -47,47 +19,47 @@
 		comment is 'Unit tests for the asserta/1 built-in method.'
 	]).
 
-	throws(asserta_1_1, error(instantiation_error, logtalk(asserta_1_test_object::asserta(_),user))) :-
-		{asserta_1_test_object::asserta(_)}.
+	throws(asserta_1_1, error(instantiation_error, logtalk(test_object::asserta(_),user))) :-
+		{test_object::asserta(_)}.
 
-	throws(asserta_1_2, error(instantiation_error, logtalk(asserta_1_test_object::asserta((_:-_)),user))) :-
-		{asserta_1_test_object::asserta((_ :- _))}.
+	throws(asserta_1_2, error(instantiation_error, logtalk(test_object::asserta((_:-_)),user))) :-
+		{test_object::asserta((_ :- _))}.
 
-	throws(asserta_1_3, error(type_error(callable, 1), logtalk(asserta_1_test_object::asserta(1),user))) :-
-		{asserta_1_test_object::asserta(1)}.
+	throws(asserta_1_3, error(type_error(callable, 1), logtalk(test_object::asserta(1),user))) :-
+		{test_object::asserta(1)}.
 
-	throws(asserta_1_4, error(type_error(callable, 1), logtalk(asserta_1_test_object::asserta((1:-_)),user))) :-
-		{asserta_1_test_object::asserta((1 :- _))}.
+	throws(asserta_1_4, error(type_error(callable, 1), logtalk(test_object::asserta((1:-_)),user))) :-
+		{test_object::asserta((1 :- _))}.
 
-	throws(asserta_1_5, error(type_error(callable, 1), logtalk(asserta_1_test_object::asserta((p:-1)),user))) :-
-		{asserta_1_test_object::asserta((p :- 1))}.
+	throws(asserta_1_5, error(type_error(callable, 1), logtalk(test_object::asserta((p:-1)),user))) :-
+		{test_object::asserta((p :- 1))}.
 
-	throws(asserta_1_6, error(permission_error(modify, protected_predicate, q/2), logtalk(asserta_1_test_object::asserta(q(_,_)),user))) :-
-		{asserta_1_test_object::asserta(q(_,_))}.
+	throws(asserta_1_6, error(permission_error(modify, protected_predicate, q/2), logtalk(test_object::asserta(q(_,_)),user))) :-
+		{test_object::asserta(q(_,_))}.
 
-	throws(asserta_1_7, error(permission_error(modify, protected_predicate, q/2), logtalk(asserta_1_test_object::asserta((q(_,_) :-nl)),user))) :-
-		{asserta_1_test_object::asserta((q(_,_) :- nl))}.
+	throws(asserta_1_7, error(permission_error(modify, protected_predicate, q/2), logtalk(test_object::asserta((q(_,_) :-nl)),user))) :-
+		{test_object::asserta((q(_,_) :- nl))}.
 
-	throws(asserta_1_8, error(permission_error(modify, private_predicate, r/3), logtalk(asserta_1_test_object::asserta(r(_,_,_)),user))) :-
-		{asserta_1_test_object::asserta(r(_,_,_))}.
+	throws(asserta_1_8, error(permission_error(modify, private_predicate, r/3), logtalk(test_object::asserta(r(_,_,_)),user))) :-
+		{test_object::asserta(r(_,_,_))}.
 
-	throws(asserta_1_9, error(permission_error(modify, private_predicate, r/3), logtalk(asserta_1_test_object::asserta((r(_,_,_) :-nl)),user))) :-
-		{asserta_1_test_object::asserta((r(_,_,_) :- nl))}.
+	throws(asserta_1_9, error(permission_error(modify, private_predicate, r/3), logtalk(test_object::asserta((r(_,_,_) :-nl)),user))) :-
+		{test_object::asserta((r(_,_,_) :- nl))}.
 
-	throws(asserta_1_10, error(permission_error(modify, static_predicate, s/4), logtalk(asserta_1_test_object::asserta(s(_,_,_,_)),user))) :-
-		{asserta_1_test_object::asserta(s(_,_,_,_))}.
+	throws(asserta_1_10, error(permission_error(modify, static_predicate, s/4), logtalk(test_object::asserta(s(_,_,_,_)),user))) :-
+		{test_object::asserta(s(_,_,_,_))}.
 
-	throws(asserta_1_11, error(permission_error(modify, static_predicate, s/4), logtalk(asserta_1_test_object::asserta((s(_,_,_,_) :-nl)),user))) :-
-		{asserta_1_test_object::asserta((s(_,_,_,_) :- nl))}.
+	throws(asserta_1_11, error(permission_error(modify, static_predicate, s/4), logtalk(test_object::asserta((s(_,_,_,_) :-nl)),user))) :-
+		{test_object::asserta((s(_,_,_,_) :- nl))}.
 
-	throws(asserta_1_12, error(permission_error(create, predicate_declaration, new/0), logtalk(asserta_1_test_object::asserta(new),user))) :-
-		{asserta_1_test_object::asserta(new)}.
+	throws(asserta_1_12, error(permission_error(create, predicate_declaration, new/0), logtalk(test_object::asserta(new),user))) :-
+		{test_object::asserta(new)}.
 
-	throws(asserta_1_13, error(instantiation_error, logtalk(_::asserta(foo),asserta_1_test_object))) :-
-		{asserta_1_test_object::ie(_)}.
+	throws(asserta_1_13, error(instantiation_error, logtalk(_::asserta(foo),test_object))) :-
+		{test_object::ie(_)}.
 
-	throws(asserta_1_14, error(type_error(object_identifier, 1), logtalk(1::asserta(foo),asserta_1_test_object))) :-
-		{asserta_1_test_object::te}.
+	throws(asserta_1_14, error(type_error(object_identifier, 1), logtalk(1::asserta(foo),test_object))) :-
+		{test_object::te}.
 
 	succeeds(asserta_1_15) :-
 		create_object(Object, [], [public(a/1), public(p/1)], []),

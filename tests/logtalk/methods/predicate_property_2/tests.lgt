@@ -9,29 +9,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(predicate_property_2_test_object).
-
-	% for supporting testing instantiation errors
-	:- public(ie/1).
-	ie(Object) :-
-		Object::predicate_property(foo, _).
-
-	% for supporting testing type errors
-	:- public(te/0).
-	te :-
-		Object = 1,
-		Object::predicate_property(foo, _).
-
-	% for supporting testing meta-predicate properties
-	:- public(meta/2).
-	:- meta_predicate(meta(0, *)).
-
-	% for supporting testing non-terminal properties
-	:- public(nt//0).
-
-:- end_object.
-
-
 :- object(tests,
 	extends(lgtunit)).
 
@@ -58,11 +35,11 @@
 		this(This),
 		{This::predicate_property(foo, bar)}.
 
-	throws(predicate_property_2_04, error(instantiation_error, logtalk(_::predicate_property(foo,_),predicate_property_2_test_object))) :-
-		{predicate_property_2_test_object::ie(_)}.
+	throws(predicate_property_2_04, error(instantiation_error, logtalk(_::predicate_property(foo,_),test_object))) :-
+		{test_object::ie(_)}.
 
-	throws(predicate_property_2_05, error(type_error(object_identifier, 1), logtalk(1::predicate_property(foo,_),predicate_property_2_test_object))) :-
-		{predicate_property_2_test_object::te}.
+	throws(predicate_property_2_05, error(type_error(object_identifier, 1), logtalk(1::predicate_property(foo,_),test_object))) :-
+		{test_object::te}.
 
 	% Prolog built-in predicates are interpreted as private predicates
 
@@ -82,46 +59,46 @@
 	% test properties of a user-defined predicate
 
 	succeeds(predicate_property_2_09) :-
-		predicate_property_2_test_object::predicate_property(ie(_), scope(Scope)),
+		test_object::predicate_property(ie(_), scope(Scope)),
 		Scope == (public).
 
 	succeeds(predicate_property_2_10) :-
-		predicate_property_2_test_object::predicate_property(ie(_), static).
+		test_object::predicate_property(ie(_), static).
 
 	succeeds(predicate_property_2_11) :-
-		predicate_property_2_test_object::predicate_property(ie(_), logtalk).
+		test_object::predicate_property(ie(_), logtalk).
 
 	fails(predicate_property_2_12) :-
-		predicate_property_2_test_object::predicate_property(ie(_), prolog).
+		test_object::predicate_property(ie(_), prolog).
 
 	fails(predicate_property_2_13) :-
-		predicate_property_2_test_object::predicate_property(ie(_), (dynamic)).
+		test_object::predicate_property(ie(_), (dynamic)).
 
 	fails(predicate_property_2_14) :-
-		predicate_property_2_test_object::predicate_property(ie(_), meta_predicate(_)).
+		test_object::predicate_property(ie(_), meta_predicate(_)).
 
 	fails(predicate_property_2_15) :-
-		predicate_property_2_test_object::predicate_property(ie(_), non_terminal(_)).
+		test_object::predicate_property(ie(_), non_terminal(_)).
 
 	fails(predicate_property_2_16) :-
-		predicate_property_2_test_object::predicate_property(ie(_), (multifile)).
+		test_object::predicate_property(ie(_), (multifile)).
 
 	fails(predicate_property_2_17) :-
-		predicate_property_2_test_object::predicate_property(ie(_), built_in).
+		test_object::predicate_property(ie(_), built_in).
 
 	fails(predicate_property_2_18) :-
-		predicate_property_2_test_object::predicate_property(ie(_), synchronized).
+		test_object::predicate_property(ie(_), synchronized).
 
 	% test properties of a user-defined meta-predicate
 
 	succeeds(predicate_property_2_19) :-
-		predicate_property_2_test_object::predicate_property(meta(_,_), meta_predicate(Template)),
+		test_object::predicate_property(meta(_,_), meta_predicate(Template)),
 		Template == meta(0, *).
 
 	% test properties of a user-defined non-terminal
 
 	succeeds(predicate_property_2_20) :-
-		predicate_property_2_test_object::predicate_property(nt(_,_), non_terminal(NonTerminal)),
+		test_object::predicate_property(nt(_,_), non_terminal(NonTerminal)),
 		NonTerminal == nt//0.
 
 :- end_object.

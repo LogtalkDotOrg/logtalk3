@@ -28,6 +28,15 @@ RELEASE NOTES
 3.00.0 Release Candidate 6 - November ??, 2014
 ==============================================
 
+Tests
+-----
+
+* IMPROVED: Refactoring of several unit tests so that the sources files
+defining the test objects do not contain definitions for other entities.
+This avoids potential issues when expanding test files that contain other
+objects besides the test objects. In some rare cases, the expansion of
+these non-test objects can interfere with the test results.
+
 
 3.00.0 Release Candidate 5 - November 12, 2014
 ==============================================

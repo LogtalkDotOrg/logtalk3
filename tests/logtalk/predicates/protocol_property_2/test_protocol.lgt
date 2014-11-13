@@ -9,22 +9,28 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(tests,
-	extends(lgtunit)).
+:- set_logtalk_flag(source_data, on).
+
+
+:- protocol(test_protocol).
 
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/02/01,
-		comment is 'Unit tests for the forward/1 built-in method.'
-	]).
+		date is 2014/02/08,
+		comment is 'Sample protocol for testing with the `source_data` flag turned on.']).
 
-	test(forward_1_1) :-
-		{test_object_2::p(X)},
-		X == 1.
+	:- public(a/1).
+	:- if(current_logtalk_flag(coinduction, supported)).
+		:- coinductive(a/1).
+	:- endif.
 
-	test(forward_1_2) :-
-		{test_object_3::q(X)},
-		X == 2.
+	:- protected(b/2).
+	:- if(current_logtalk_flag(threads, supported)).
+		:- synchronized(b/2).
+	:- endif.
 
-:- end_object.
+	:- private(c/3).
+	:- dynamic(c/3).
+
+:- end_protocol.

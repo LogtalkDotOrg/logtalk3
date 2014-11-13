@@ -9,20 +9,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(current_predicate_1_test_object).
-
-	:- public(ie/1).
-	ie(Object) :-
-		Object::current_predicate(foo/1).
-
-	:- public(te/0).
-	te :-
-		Object = 1,
-		Object::current_predicate(foo/1).
-
-:- end_object.
-
-
 :- object(tests,
 	extends(lgtunit)).
 
@@ -49,23 +35,23 @@
 		this(This),
 		{This::current_predicate(a/(-1))}.
 
-	throws(current_predicate_1_05, error(instantiation_error, logtalk(_::current_predicate(foo/1),current_predicate_1_test_object))) :-
-		{current_predicate_1_test_object::ie(_)}.
+	throws(current_predicate_1_05, error(instantiation_error, logtalk(_::current_predicate(foo/1),test_object))) :-
+		{test_object::ie(_)}.
 
-	throws(current_predicate_1_06, error(type_error(object_identifier, 1), logtalk(1::current_predicate(foo/1),current_predicate_1_test_object))) :-
-		{current_predicate_1_test_object::te}.
+	throws(current_predicate_1_06, error(type_error(object_identifier, 1), logtalk(1::current_predicate(foo/1),test_object))) :-
+		{test_object::te}.
 
 	succeeds(current_predicate_1_07) :-
-		current_predicate_1_test_object::current_predicate(ie/1).
+		test_object::current_predicate(ie/1).
 
 	succeeds(current_predicate_1_08) :-
-		current_predicate_1_test_object::current_predicate(te/0).
+		test_object::current_predicate(te/0).
 
 	succeeds(current_predicate_1_09) :-
-		setof(Predicate, current_predicate_1_test_object::current_predicate(Predicate), Predicates),
+		setof(Predicate, test_object::current_predicate(Predicate), Predicates),
 		Predicates == [ie/1, te/0].
 
 	fails(current_predicate_1_10) :-
-		current_predicate_1_test_object::current_predicate(foo/2).
+		test_object::current_predicate(foo/2).
 
 :- end_object.

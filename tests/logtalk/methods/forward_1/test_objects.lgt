@@ -9,10 +9,31 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(test_protocol),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+:- object(test_object_1).
+
+	:- public(p/1).
+	p(1).
+
+	:- public(q/2).
+	q(1, foo).
+	q(2, bar).
+
+:- end_object.
+
+
+:- object(test_object_2,
+	implements(forwarding)).
+
+	forward(Message) :-
+		[test_object_1::Message].
+
+:- end_object.
+
+
+:- object(test_object_3,
+	implements(forwarding)).
+
+	forward(Message) :-
+		call([test_object_1::Message], bar).
+
+:- end_object.

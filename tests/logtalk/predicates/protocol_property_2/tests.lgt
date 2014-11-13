@@ -9,33 +9,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- set_logtalk_flag(source_data, on).
-
-
-:- protocol(test_protocol).
-
-	:- info([
-		version is 1.0,
-		author is 'Paulo Moura',
-		date is 2014/02/08,
-		comment is 'Sample protocol for testing with the `source_data` flag turned on.']).
-
-	:- public(a/1).
-	:- if(current_logtalk_flag(coinduction, supported)).
-		:- coinductive(a/1).
-	:- endif.
-
-	:- protected(b/2).
-	:- if(current_logtalk_flag(threads, supported)).
-		:- synchronized(b/2).
-	:- endif.
-
-	:- private(c/3).
-	:- dynamic(c/3).
-
-:- end_protocol.
-
-
 :- object(tests,
 	extends(lgtunit)).
 

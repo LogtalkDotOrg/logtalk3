@@ -9,39 +9,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(retract_1_test_object).
-
-	:- public(p/1).
-	:- dynamic(p/1).
-
-	:- protected(q/2).
-	:- dynamic(q/2).
-
-	:- private(r/3).
-	:- dynamic(r/3).
-
-	:- public(s/4).
-
-	:- public(t/1).
-	:- dynamic(t/1).
-	t(1).
-	t(2) :- t(1).
-	t(3) :- t(1), t(2).
-
-	:- public(ie/1).
-
-	ie(Object) :-
-		Object::retract(foo).
-
-	:- public(te/0).
-	te :-
-		Object = 1,
-		Object::retract(foo).
-
-:- end_object.
-
-
-
 :- object(tests,
 	extends(lgtunit)).
 
@@ -52,42 +19,42 @@
 		comment is 'Unit tests for the retract/1 built-in method.'
 	]).
 
-	throws(retract_1_1, error(instantiation_error, logtalk(retract_1_test_object::retract(_),user))) :-
-		{retract_1_test_object::retract(_)}.
+	throws(retract_1_1, error(instantiation_error, logtalk(test_object::retract(_),user))) :-
+		{test_object::retract(_)}.
 
-	throws(retract_1_2, error(instantiation_error, logtalk(retract_1_test_object::retract((_:-_)),user))) :-
-		{retract_1_test_object::retract((_ :- _))}.
+	throws(retract_1_2, error(instantiation_error, logtalk(test_object::retract((_:-_)),user))) :-
+		{test_object::retract((_ :- _))}.
 
-	throws(retract_1_3, error(type_error(callable, 1), logtalk(retract_1_test_object::retract(1),user))) :-
-		{retract_1_test_object::retract(1)}.
+	throws(retract_1_3, error(type_error(callable, 1), logtalk(test_object::retract(1),user))) :-
+		{test_object::retract(1)}.
 
-	throws(retract_1_4, error(type_error(callable, 1), logtalk(retract_1_test_object::retract((1:-_)),user))) :-
-		{retract_1_test_object::retract((1 :- _))}.
+	throws(retract_1_4, error(type_error(callable, 1), logtalk(test_object::retract((1:-_)),user))) :-
+		{test_object::retract((1 :- _))}.
 
-	throws(retract_1_5, error(permission_error(modify, protected_predicate, q/2), logtalk(retract_1_test_object::retract(q(_,_)),user))) :-
-		{retract_1_test_object::retract(q(_,_))}.
+	throws(retract_1_5, error(permission_error(modify, protected_predicate, q/2), logtalk(test_object::retract(q(_,_)),user))) :-
+		{test_object::retract(q(_,_))}.
 
-	throws(retract_1_6, error(permission_error(modify, private_predicate, r/3), logtalk(retract_1_test_object::retract(r(_,_,_)),user))) :-
-		{retract_1_test_object::retract(r(_,_,_))}.
+	throws(retract_1_6, error(permission_error(modify, private_predicate, r/3), logtalk(test_object::retract(r(_,_,_)),user))) :-
+		{test_object::retract(r(_,_,_))}.
 
-	throws(retract_1_7, error(permission_error(modify, static_predicate, s/4), logtalk(retract_1_test_object::retract(s(_,_,_,_)),user))) :-
-		{retract_1_test_object::retract(s(_,_,_,_))}.
+	throws(retract_1_7, error(permission_error(modify, static_predicate, s/4), logtalk(test_object::retract(s(_,_,_,_)),user))) :-
+		{test_object::retract(s(_,_,_,_))}.
 
-	throws(retract_1_8, error(existence_error(predicate_declaration, unknown/1), logtalk(retract_1_test_object::retract(unknown(_)),user))) :-
-		{retract_1_test_object::retract(unknown(_))}.
+	throws(retract_1_8, error(existence_error(predicate_declaration, unknown/1), logtalk(test_object::retract(unknown(_)),user))) :-
+		{test_object::retract(unknown(_))}.
 
-	throws(retract_1_9, error(instantiation_error, logtalk(_::retract(foo),retract_1_test_object))) :-
-		{retract_1_test_object::ie(_)}.
+	throws(retract_1_9, error(instantiation_error, logtalk(_::retract(foo),test_object))) :-
+		{test_object::ie(_)}.
 
-	throws(retract_1_10, error(type_error(object_identifier, 1), logtalk(1::retract(foo),retract_1_test_object))) :-
-		{retract_1_test_object::te}.
+	throws(retract_1_10, error(type_error(object_identifier, 1), logtalk(1::retract(foo),test_object))) :-
+		{test_object::te}.
 
 	succeeds(retract_1_11) :-
-		retract_1_test_object::retract((t(X) :-true)),
+		test_object::retract((t(X) :-true)),
 		X == 1,
-		retract_1_test_object::retract((t(2) :-Body1)),
+		test_object::retract((t(2) :-Body1)),
 		Body1 == t(1),
-		retract_1_test_object::retract((t(3) :-Body2)),
+		test_object::retract((t(3) :-Body2)),
 		Body2 == (t(1), t(2)).
 
 	succeeds(retract_1_12) :-

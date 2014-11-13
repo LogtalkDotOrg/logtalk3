@@ -9,10 +9,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(test_protocol),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+:- object(test_object).
+
+	:- public(ie/1).
+	ie(Object) :-
+		Object::current_predicate(foo/1).
+
+	:- public(te/0).
+	te :-
+		Object = 1,
+		Object::current_predicate(foo/1).
+
+:- end_object.
