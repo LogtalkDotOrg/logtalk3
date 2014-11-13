@@ -31,6 +31,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: Compiler code refactoring for a clean separation between first
+stage and second stage error handling.
+
 * FIXED: Regression in previous release in the reporting of compilation
 errors.
 

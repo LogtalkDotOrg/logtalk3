@@ -1205,9 +1205,11 @@ create_protocol(Ptc, Relations, Directives) :-
 
 % '$lgt_create_entity_error_handler'(@nonvar, @callable)
 %
-% error handler for the dynamic entity creation built-in predicates
+% error handler for the dynamic entity creation built-in predicates;
+% handles both compiler first stage and second stage errors
 
-'$lgt_create_entity_error_handler'(error(Error,_), Goal) :-
+'$lgt_create_entity_error_handler'(error(Error,_,_), Goal) :-
+	% compiler second stage error
 	'$lgt_create_entity_error_handler'(Error, Goal).
 
 '$lgt_create_entity_error_handler'(Error, Goal) :-
@@ -5267,18 +5269,18 @@ current_logtalk_flag(Flag, Value) :-
 	catch(
 		'$lgt_open'(ObjectFile, write, Output, [alias(logtalk_compiler_output)| OutputOptions]),
 		OpenError,
-		'$lgt_compiler_error_handler'(OpenError)
+		'$lgt_first_stage_error_handler'(OpenError)
 	),
 	catch(
 		'$lgt_write_encoding_directive'(Output),
 		WriteError,
-		'$lgt_compiler_error_handler'(WriteError)
+		'$lgt_first_stage_error_handler'(WriteError)
 	),
 	% read and compile the remaining terms in the Logtalk source file
 	catch(
 		'$lgt_compile_file_term'(Term, Singletons, Position, NewInput),
 		Error,
-		'$lgt_compiler_error_handler'(Error)
+		'$lgt_first_stage_error_handler'(Error)
 	),
 	'$lgt_close'(NewInput),
 	% finish writing the generated Prolog file
@@ -5364,7 +5366,7 @@ current_logtalk_flag(Flag, Value) :-
 	% set the initial compilation context and the position for compiling the end_of_file term
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(regular), _, Position),
 	'$lgt_compile_file_term'(end_of_file, Ctx),
-	'$lgt_compile_entity'(object, Module, Ctx),
+	'$lgt_second_stage'(object, Module, Ctx),
 	'$lgt_print_message'(silent(compiling), core, compiled_entity(module, Module)).
 
 '$lgt_compile_file_term'(end_of_file, _, _, _) :-
@@ -5778,24 +5780,21 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_compiler_error_handler'(@compound)
+% '$lgt_first_stage_error_handler'(@compound)
+%
+% error handler for the compiler first stage
+
+'$lgt_first_stage_error_handler'(Error) :-
+	'$lgt_warning_context'(SourceFile, ObjectFile, Lines),
+	'$lgt_compiler_error_handler'(SourceFile, ObjectFile, Lines, Error).
+
+
+
+% '$lgt_compiler_error_handler'(+atom, +atom, @compound, @compound)
 %
 % closes the streams being used for reading and writing terms, restores
 % the operator table, reports the compilation error found, and, finally,
 % fails in order to abort the compilation process
-
-'$lgt_compiler_error_handler'(error(logtalk_compiler_error(SourceFile, ObjectFile, Lines, Error), _)) :-
-	!,
-	'$lgt_compiler_error_handler'(SourceFile, ObjectFile, Lines, Error).
-
-'$lgt_compiler_error_handler'(logtalk_compiler_error(SourceFile, ObjectFile, Lines, Error)) :-
-	!,
-	'$lgt_compiler_error_handler'(SourceFile, ObjectFile, Lines, Error).
-
-'$lgt_compiler_error_handler'(Error) :-
-	'$lgt_warning_context'(SourceFile, ObjectFile, Lines),
-	'$lgt_compiler_error_handler'(SourceFile, ObjectFile, Lines, Error).
-
 
 '$lgt_compiler_error_handler'(SourceFile, ObjectFile, Lines, Error) :-
 	stream_property(Input, alias(logtalk_compiler_input)),
@@ -5870,9 +5869,17 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_compile_entity'(+atom, @entity_identifier, +compilation_context)
+% '$lgt_second_stage'(+atom, @entity_identifier, +compilation_context)
 %
 % compiler second stage
+
+'$lgt_second_stage'(Type, Entity, Ctx) :-
+	catch(
+		'$lgt_compile_entity'(Type, Entity, Ctx),
+		Error,
+		'$lgt_second_stage_error_handler'(Error)
+	).
+
 
 '$lgt_compile_entity'(Type, Entity, Ctx) :-
 	'$lgt_generate_entity_code'(Type, Ctx),
@@ -5882,6 +5889,17 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_save_entity_runtime_clause'(Type),
 	'$lgt_restore_file_operator_table',
 	'$lgt_clean_pp_entity_clauses'.
+
+
+'$lgt_second_stage_error_handler'(error(Error,Position,Context)) :-
+	!,
+	'$lgt_warning_context'(SourceFile, ObjectFile, _),
+	'$lgt_compiler_error_handler'(SourceFile, ObjectFile, Position, error(Error,Context)).
+
+'$lgt_second_stage_error_handler'(Error) :-
+	% we should never get here but some backend Prolog compilers have broken or
+	% non-standard error handling; pass the error to the first stage handler
+	throw(Error).
 
 
 
@@ -6519,7 +6537,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	Value == skip_all ->
 		asserta('$lgt_pp_cc_mode_'(ignore))
 	;	% Value == skip_else ->
-		(	catch(Goal, Error, '$lgt_compiler_error_handler'(Error)) ->
+		(	catch(Goal, Error, '$lgt_first_stage_error_handler'(Error)) ->
 			asserta('$lgt_pp_cc_mode_'(skip_else))
 		;	asserta('$lgt_pp_cc_mode_'(seek_else)),
 			retractall('$lgt_pp_cc_skipping_'),
@@ -6573,7 +6591,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	% Mode == seek_else ->
 		% the corresponding if is false
 		retract('$lgt_pp_cc_mode_'(_)),
-		(	catch(Goal, Error, '$lgt_compiler_error_handler'(Error)) ->
+		(	catch(Goal, Error, '$lgt_first_stage_error_handler'(Error)) ->
 			retractall('$lgt_pp_cc_skipping_'),
 			asserta('$lgt_pp_cc_mode_'(skip_else))
 		;	asserta('$lgt_pp_cc_mode_'(seek_else))
@@ -6875,7 +6893,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_logtalk_directive'(end_object, Ctx) :-
 	(	'$lgt_pp_object_'(Obj, _, _, _, _, _, _, _, _, _, _) ->
-		'$lgt_compile_entity'(object, Obj, Ctx),
+		'$lgt_second_stage'(object, Obj, Ctx),
 		'$lgt_print_message'(silent(compiling), core, compiled_entity(object, Obj))
 	;	% entity ending directive mismatch 
 		throw(existence_error(directive, object/1))
@@ -6916,7 +6934,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_logtalk_directive'(end_protocol, Ctx) :-
 	(	'$lgt_pp_protocol_'(Ptc, _, _, _, _) ->
-		'$lgt_compile_entity'(protocol, Ptc, Ctx),
+		'$lgt_second_stage'(protocol, Ptc, Ctx),
 		'$lgt_print_message'(silent(compiling), core, compiled_entity(protocol, Ptc))
 	;	% entity ending directive mismatch 
 		throw(existence_error(directive, protocol/1))
@@ -6960,7 +6978,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_logtalk_directive'(end_category, Ctx) :-
 	(	'$lgt_pp_category_'(Ctg, _, _, _, _, _) ->
-		'$lgt_compile_entity'(category, Ctg, Ctx),
+		'$lgt_second_stage'(category, Ctg, Ctx),
 		'$lgt_print_message'(silent(compiling), core, compiled_entity(category, Ctg))
 	;	% entity ending directive mismatch 
 		throw(existence_error(directive, category/1))
@@ -14423,12 +14441,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_predicate_calls_error_handler'(Term, Position, Error) :-
 	'$lgt_internal_term_to_user_term'(Term, UserTerm),
-	(	'$lgt_warning_context'(SourceFile, ObjectFile, _) ->
-		% source file compilation
-		throw(logtalk_compiler_error(SourceFile, ObjectFile, Position, error(Error,UserTerm)))
-	;	% runtime compilation
-		throw(error(Error,UserTerm))
-	).
+	throw(error(Error,Position,UserTerm)).
 
 
 '$lgt_internal_term_to_user_term'({Term}, term(Term)).
@@ -18609,7 +18622,7 @@ current_logtalk_flag(Flag, Value) :-
 	catch(
 		'$lgt_read_stream_to_terms'(Stream, Terms),
 		TermError,
-		('$lgt_close'(Stream), '$lgt_compiler_error_handler'(TermError))
+		('$lgt_close'(Stream), '$lgt_first_stage_error_handler'(TermError))
 	),
 	'$lgt_close'(Stream).
 
