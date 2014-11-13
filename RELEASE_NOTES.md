@@ -34,6 +34,10 @@ Logtalk compiler and runtime
 * FIXED: Regression in previous release in the reporting of compilation
 errors.
 
+Documentation
+
+* IMPROVED: Documentation of the `lgtunit` tool.
+
 Tests
 -----
 
