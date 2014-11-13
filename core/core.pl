@@ -5784,6 +5784,10 @@ current_logtalk_flag(Flag, Value) :-
 % the operator table, reports the compilation error found, and, finally,
 % fails in order to abort the compilation process
 
+'$lgt_compiler_error_handler'(error(logtalk_compiler_error(SourceFile, ObjectFile, Lines, Error), _)) :-
+	!,
+	'$lgt_compiler_error_handler'(SourceFile, ObjectFile, Lines, Error).
+
 '$lgt_compiler_error_handler'(logtalk_compiler_error(SourceFile, ObjectFile, Lines, Error)) :-
 	!,
 	'$lgt_compiler_error_handler'(SourceFile, ObjectFile, Lines, Error).

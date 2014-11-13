@@ -28,6 +28,12 @@ RELEASE NOTES
 3.00.0 Release Candidate 6 - November ??, 2014
 ==============================================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Regression in previous release in the reporting of some source
+file compilation errors.
+
 Tests
 -----
 
