@@ -436,7 +436,7 @@ format(Format, Arguments) :-
 
 '$lgt_decompose_file_name'(File, Directory, Name, Extension) :-
 	atom_codes(File, FileCodes),
-	(	'$lgt_strrch'(FileCodes, 0'/, [_Slash| BasenameCodes]) ->
+	(	'$lgt_strrch'(FileCodes, 0'/, [_| BasenameCodes]) ->
 		atom_codes(Basename, BasenameCodes),
 		atom_concat(Directory, Basename, File)
 	;	Directory = './',
@@ -460,11 +460,11 @@ format(Format, Arguments) :-
 	;	'$lgt_strrch'(Xs1, G, Ys)
 	).
 
-'$lgt_strrch1'(Xs, _G, _Prev, _Ys) :-
+'$lgt_strrch1'(Xs, _, _, _) :-
 	var(Xs),
 	!,
 	fail.
-'$lgt_strrch1'([], _G, Prev, Ys) :-
+'$lgt_strrch1'([], _, Prev, Ys) :-
 	Ys = Prev.
 '$lgt_strrch1'(Xs, G, Prev, Ys) :-
 	Xs = [X| Xs1],
@@ -563,7 +563,7 @@ format(Format, Arguments) :-
 
 '$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, Variables) :-
 	stream_position(Stream, LineBegin),
-	read_term(Stream, Term, [variable_names(Variables)| Options]).
+	read_term(Stream, Term, [variable_names(Variables)| Options]),
 	stream_position(Stream, LineEnd).
 
 
@@ -628,14 +628,14 @@ format(Format, Arguments) :-
 
 % '$lgt_write_term_and_source_location'(@stream, @callable, +atom, @callable)
 
-'$lgt_write_term_and_source_location'(Stream, Term, _Kind, _Location) :-
+'$lgt_write_term_and_source_location'(Stream, Term, _, _) :-
 	write_canonical(Stream, Term),
 	write(Stream, '.\n').
 
 
 % '$lgt_assertz_entity_clause'(@clause, +atom)
 
-'$lgt_assertz_entity_clause'(Clause, _Kind) :-
+'$lgt_assertz_entity_clause'(Clause, _) :-
 	assertz(Clause).
 
 

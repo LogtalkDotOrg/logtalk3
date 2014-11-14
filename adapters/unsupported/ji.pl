@@ -3,8 +3,8 @@
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
-%  Adapter file for JIProlog 4.0.0-9 or later versions
-%  Last updated on November 8, 2014
+%  Adapter file for JIProlog 4.0.0-13 or later versions
+%  Last updated on November 14, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -40,7 +40,13 @@
 
 % '$lgt_iso_predicate'(?callable).
 
+'$lgt_iso_predicate'(acyclic_term(_)).
 '$lgt_iso_predicate'(sub_atom(_,_,_,_,_)).
+'$lgt_iso_predicate'(subsumes_term(_, _)).
+
+
+acyclic_term(_).
+
 
 sub_atom(Atom, Before, Length, After, SubAtom) :-
 	% just an hack!
@@ -49,6 +55,40 @@ sub_atom(Atom, Before, Length, After, SubAtom) :-
 	atom_length(SubAtom, Length),
 	atom_length(BeforeAtom, Before),
 	atom_length(Suffix, After).
+
+
+subsumes_term(General, Specific) :-
+	term_variables(Specific, Vars),
+	'$lgt_ji_subsumes_term'(General, Specific, Vars).
+
+'$lgt_ji_subsumes_term'(General, Specific, Vars) :-
+	var(General),
+	!,
+	(	'$lgt_ji_var_member_chk'(General, Vars) ->
+		General == Specific
+	;	\+ General \= Specific
+	).
+
+'$lgt_ji_subsumes_term'(General, Specific, Vars) :-
+	nonvar(Specific),
+	functor(General, Functor, Arity),
+	functor(Specific, Functor, Arity),
+	'$lgt_ji_subsumes_term'(Arity, General, Specific, Vars).
+
+'$lgt_ji_subsumes_term'(0, _, _, _) :-
+	!.
+'$lgt_ji_subsumes_term'(N, General, Specific, Vars) :-
+	arg(N, General,  GenArg),
+	arg(N, Specific, SpeArg),
+	'$lgt_ji_subsumes_term'(GenArg, SpeArg, Vars),
+	M is N-1, !,
+	'$lgt_ji_subsumes_term'(M, General, Specific, Vars).
+
+'$lgt_ji_var_member_chk'(Var, [Head| Tail]) :-
+	(	Var == Head ->
+		true
+	;	'$lgt_ji_var_member_chk'(Var, Tail)
+	).
 
 
 % call/2-5 -- built-in
@@ -627,6 +667,7 @@ setup_call_cleanup(_, _, _) :-
 	stream_property(Stream, position(line(LineBegin))),
 	read_term(Stream, Term, Options),
 	stream_property(Stream, position(line(LineEnd))),
+	writeq(LineBegin-LineEnd), nl,
 	term_variables(Term, Variables).
 
 
