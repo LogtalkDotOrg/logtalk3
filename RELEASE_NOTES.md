@@ -37,6 +37,10 @@ stage and second stage error handling.
 * FIXED: Operator declarations found in arguments of the dynamic entity
 creation built-in predicates would not be local to the dynamic entities.
 
+* FIXED: When creating a dynamic object at runtime declaring `synchronized/1`
+predicates, only create the implied mutexes if the backend Prolog compiler
+does support a compatible multi-threading implementation.
+
 * FIXED: Regression in previous release in the reporting of compilation
 errors.
 

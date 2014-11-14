@@ -15115,7 +15115,8 @@ current_logtalk_flag(Flag, Value) :-
 % calls any defined initialization goals for a dynamically created entity
 
 '$lgt_assert_initialization_goal' :-
-	(	setof(Mutex, Head^'$lgt_pp_synchronized_'(Head, Mutex), Mutexes) ->
+	(	'$lgt_prolog_feature'(threads, supported),
+		setof(Mutex, Head^'$lgt_pp_synchronized_'(Head, Mutex), Mutexes) ->
 		'$lgt_create_mutexes'(Mutexes)
 	;	true
 	),
