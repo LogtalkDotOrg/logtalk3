@@ -13,15 +13,11 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2012/11/19,
+		date is 2014/11/14,
 		comment is 'Unit tests for the create_protocol/3 built-in predicate.'
 	]).
-
-	:- discontiguous(succeeds/1).
-	:- discontiguous(fails/1).
-	:- discontiguous(throws/2).
 
 	throws(create_protocol_1_1, error(instantiation_error, logtalk(create_protocol(_, _, _), _))) :-
 		create_protocol(_, _, _).
@@ -40,5 +36,11 @@
 
 	throws(create_protocol_1_6, error(type_error(list, atom), logtalk(create_protocol(_, [], atom), _))) :-
 		create_protocol(_, [], atom).
+
+	throws(create_category_1_7, error(_, logtalk(create_protocol(_, [], [dynamic(foo/1), synchronized(foo/1)]), _))) :-
+		create_protocol(_, [], [dynamic(foo/1), synchronized(foo/1)]).
+
+	throws(create_category_1_8, error(_, logtalk(create_protocol(_, [], [synchronized(foo/1), dynamic(foo/1)]), _))) :-
+		create_protocol(_, [], [synchronized(foo/1), dynamic(foo/1)]).
 
 :- end_object.

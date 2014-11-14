@@ -55,6 +55,9 @@ Documentation
 Tests
 -----
 
+* ADDED: Some more unit tests for the `create_object/4`, `create_category/4`,
+and `create_protocol/3` built-in predicates.
+
 * IMPROVED: Refactoring of several unit tests so that the sources files
 defining the test objects do not contain definitions for other entities.
 This avoids potential issues when expanding test files that contain other
