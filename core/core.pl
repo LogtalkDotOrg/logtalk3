@@ -7360,7 +7360,7 @@ current_logtalk_flag(Flag, Value) :-
 	functor(Head, Functor, Arity),
 	(	'$lgt_pp_dynamic_'(Head) ->
 		throw(permission_error(modify, dynamic_predicate, Functor/Arity))
-	;	'$lgt_pp_calls_predicate_'(Functor/Arity, _, _, _) ->
+	;	'$lgt_pp_defines_predicate_'(Head, _, _, _) ->
 		throw(permission_error(modify, predicate_interpretation, Functor/Arity))
 	;	assertz('$lgt_pp_synchronized_'(Head, Mutex))
 	).
@@ -7371,9 +7371,9 @@ current_logtalk_flag(Flag, Value) :-
 	functor(Head, Functor, ExtArity),
 	(	'$lgt_pp_dynamic_'(Head) ->
 		throw(permission_error(modify, dynamic_non_terminal, Functor//Arity))
-	;	'$lgt_pp_calls_non_terminal_'(Functor, Arity, _) ->
+	;	'$lgt_pp_defines_non_terminal_'(Functor, Arity) ->
 		throw(permission_error(modify, non_terminal_interpretation, Functor//Arity))
-	;	'$lgt_pp_calls_predicate_'(Functor/ExtArity, _, _, _) ->
+	;	'$lgt_pp_defines_predicate_'(Head, _, _, _) ->
 		throw(permission_error(modify, non_terminal_interpretation, Functor//Arity))
 	;	assertz('$lgt_pp_synchronized_'(Head, Mutex))
 	).
@@ -7885,6 +7885,10 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_coinductive_directive_resource'(Pred) :-
 	'$lgt_valid_coinductive_template'(Pred, Functor, Arity, Head, TestHead, Template),
 	!,
+	(	'$lgt_pp_defines_predicate_'(Head, _, _, _) ->
+		throw(permission_error(modify, predicate_interpretation, Functor/Arity))
+	;	true
+	),
 	% construct functor for the auxiliary predicate
 	atom_concat(Functor, '__coinductive', CFunctor),
 	% construct functor for debugging calls to the auxiliary predicate

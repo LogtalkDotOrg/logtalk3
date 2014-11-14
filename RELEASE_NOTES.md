@@ -41,6 +41,10 @@ creation built-in predicates would not be local to the dynamic entities.
 predicates, only create the implied mutexes if the backend Prolog compiler
 does support a compatible multi-threading implementation.
 
+* FIXED: Detect the unlikely but possible error case where a `synchronized/1`
+or `coinductive/1` directive appear textually on a source file after clauses
+for the declared predicates.
+
 * FIXED: Regression in previous release in the reporting of compilation
 errors.
 
