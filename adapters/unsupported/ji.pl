@@ -667,7 +667,6 @@ setup_call_cleanup(_, _, _) :-
 	stream_property(Stream, position(line(LineBegin))),
 	read_term(Stream, Term, Options),
 	stream_property(Stream, position(line(LineEnd))),
-	writeq(LineBegin-LineEnd), nl,
 	term_variables(Term, Variables).
 
 
