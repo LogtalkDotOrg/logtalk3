@@ -44,13 +44,24 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+initialization(Goal) :-
+	call(Goal).
+
+
 % '$lgt_iso_predicate'(?callable).
 %
 % table of missing ISO predicates which are defined in this file
 
 % remove the following clause if you need to define any ISO predicate
-'$lgt_iso_predicate'(_) :-
+'$lgt_iso_predicate'(retractall(_)).
+
+retractall(Head) :-
+	retract(Head),
 	fail.
+retractall(Head) :-
+	retract((Head:-_)),
+	fail.
+retractall(_).
 
 
 
