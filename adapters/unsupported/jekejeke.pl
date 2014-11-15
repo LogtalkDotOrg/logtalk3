@@ -318,7 +318,30 @@ format(Format, Arguments) :-
 % expands a file path to a full path
 
 '$lgt_expand_path'(Path, ExpandedPath) :-
-	absolute_file_name(Path, ExpandedPath).
+	% first expand any environment variable
+	'$lgt_jekejeke_expand_environment'(Path, ExpandedPath0),
+	(	(	sub_atom(ExpandedPath0, 0, 1, _, '/')
+			% assume POSIX full path 
+		;	sub_atom(ExpandedPath0, 1, 1, _, ':')
+			% assume Windows full Path starting with a drive letter followed by ":"
+		) ->
+		% assume full path
+		ExpandedPath = ExpandedPath0
+	;	% assume path relative to the current directory
+		current_prolog_flag(base_url, Directory),
+		atom_concat(Directory, ExpandedPath0, ExpandedPath)
+	).
+
+'$lgt_jekejeke_expand_environment'(Path, ExpandedPath) :-
+	(	sub_atom(Path, 0, 1, _, '$'),
+		sub_atom(Path, Before, _, _, '/') ->
+		End is Before - 1,
+		sub_atom(Path, 1, End, _, Variable),
+		sub_atom(Path, Before, _, 0, Rest),
+		getenv(Variable, Value),
+		atom_concat(Value, Rest, ExpandedPath)
+	;	Path = ExpandedPath
+	).
 
 
 % '$lgt_file_exists'(+atom)
@@ -436,42 +459,12 @@ format(Format, Arguments) :-
 % be the empty atom when it does not exist
 
 '$lgt_decompose_file_name'(File, Directory, Name, Extension) :-
-	atom_codes(File, FileCodes),
-	(	'$lgt_strrch'(FileCodes, 0'/, [_| BasenameCodes]) ->
-		atom_codes(Basename, BasenameCodes),
-		atom_concat(Directory, Basename, File)
-	;	Directory = './',
-		atom_codes(Basename, FileCodes),
-		BasenameCodes = FileCodes
-	),
-	(	'$lgt_strrch'(BasenameCodes, 0'., ExtensionCodes) ->
-		atom_codes(Extension, ExtensionCodes),
-		atom_concat(Name, Extension, Basename)
-	;	Name = Basename,
-		Extension = ''
-	).
-
-% the following auxiliary predicate was written by Per Mildner and 
-% is used here (renamed just to avoid conflicts) with permission
-
-'$lgt_strrch'(Xs, G, Ys) :-
-	Xs = [X| Xs1],
-	(	X == G ->
-		'$lgt_strrch1'(Xs1, G, Xs, Ys)
-	;	'$lgt_strrch'(Xs1, G, Ys)
-	).
-
-'$lgt_strrch1'(Xs, _, _, _) :-
-	var(Xs),
-	!,
-	fail.
-'$lgt_strrch1'([], _, Prev, Ys) :-
-	Ys = Prev.
-'$lgt_strrch1'(Xs, G, Prev, Ys) :-
-	Xs = [X| Xs1],
-	(	X == G ->
-		'$lgt_strrch1'(Xs1, G, Xs, Ys)
-	;	'$lgt_strrch1'(Xs1, G, Prev, Ys)
+	make_path(Directory0, Basename, File),
+	make_name(Name, Extension0, Basename),
+	atom_concat(Directory0, '/', Directory),
+	(	Extension0 == '' ->
+		true
+	;	atom_concat('.', Extension0, Extension)
 	).
 
 
