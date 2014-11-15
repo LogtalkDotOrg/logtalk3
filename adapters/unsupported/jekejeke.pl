@@ -52,8 +52,12 @@ initialization(Goal) :-
 %
 % table of missing ISO predicates which are defined in this file
 
-% remove the following clause if you need to define any ISO predicate
+'$lgt_iso_predicate'(acyclic_term(_)).
 '$lgt_iso_predicate'(retractall(_)).
+
+
+acyclic_term(_).
+
 
 retractall(Head) :-
 	retract(Head),
@@ -288,7 +292,7 @@ format(Format, Arguments) :-
 '$lgt_default_flag'(undefined_predicates, warning).
 '$lgt_default_flag'(singleton_variables, warning).
 '$lgt_default_flag'(portability, silent).
-'$lgt_default_flag'(underscore_variables, singletons).
+'$lgt_default_flag'(underscore_variables, dont_care).
 % optional features compilation flags:
 '$lgt_default_flag'(complements, deny).
 '$lgt_default_flag'(dynamic_declarations, deny).
