@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Jekejeke Prolog 1.0.4 and later versions
-%  Last updated on November 4, 2014
+%  Last updated on November 15, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -25,10 +25,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- use_module(library(arith)).
-:- use_module(library(lists)).
-:- use_module(library(file)).
-:- use_module(library(shell)).
+:- use_module(library(advanced/arith)).
+:- use_module(library(basic/lists)).
+:- use_module(library(system/file)).
+:- use_module(library(system/shell)).
 
 
 
@@ -148,7 +148,8 @@ format(Format, Arguments) :-
 % '$lgt_predicate_property'(+callable, ?predicate_property)
 
 '$lgt_predicate_property'(Pred, Prop) :-
-	predicate_property(Pred, Prop).
+	functor(Pred, Functor, Arity),
+	predicate_property(Functor/Arity, Prop).
 
 
 
