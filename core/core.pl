@@ -1576,7 +1576,7 @@ conforms_to_protocol(ObjOrCtg, Protocol, Scope) :-
 '$lgt_filter_scope'((public), Scope, Scope).
 % protected relatiosn change public predicates to protected predicates
 '$lgt_filter_scope'(protected, Scope, protected) :-
-	Scope \= private.
+	Scope \= (private).
 
 
 
@@ -3024,7 +3024,7 @@ current_logtalk_flag(Flag, Value) :-
 		% predicate declaration found; get predicate type
 		(	PredFlags /\ 2 =:= 2 ->
 			Type = (dynamic)
-		;	Type = static
+		;	Type = (static)
 		)
 	;	% no predicate declaration; check for a local dynamic predicate if we're asserting locally
 		(DclScope == p, call(DDef, Pred, _, _)) ->
