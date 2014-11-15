@@ -400,7 +400,10 @@ format(Format, Arguments) :-
 % makes a new directory; succeeds if the directory already exists
 
 '$lgt_make_directory'(Directory) :-
-	make_directory(Directory).
+	(	exists_directory(Directory) ->
+		true
+	;	make_directory(Directory)
+	).
 
 
 % '$lgt_compile_prolog_code'(+atom, +atom, +list)
@@ -474,7 +477,7 @@ format(Format, Arguments) :-
 	make_name(Name, Extension0, Basename),
 	atom_concat(Directory0, '/', Directory),
 	(	Extension0 == '' ->
-		true
+		Extension = Extension0
 	;	atom_concat('.', Extension0, Extension)
 	).
 
@@ -567,9 +570,9 @@ format(Format, Arguments) :-
 % '$lgt_read_term'(@stream, -term, +list, -position, -list)
 
 '$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, Variables) :-
-	stream_position(Stream, LineBegin),
+	stream_property(Stream, line_no(LineBegin)),
 	read_term(Stream, Term, [variable_names(Variables)| Options]),
-	stream_position(Stream, LineEnd).
+	stream_property(Stream, line_no(LineEnd)).
 
 
 
