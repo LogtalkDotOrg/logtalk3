@@ -574,8 +574,7 @@ format(Format, Arguments) :-
 % '$lgt_read_term'(@stream, -term, +list, -position, -list)
 
 '$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, Variables) :-
-	stream_property(Stream, line_no(LineBegin)),
-	read_term(Stream, Term, [variable_names(Variables)| Options]),
+	read_term(Stream, Term, [line_no(LineBegin), variable_names(Variables)| Options]),
 	stream_property(Stream, line_no(LineEnd)).
 
 
