@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/05/07,
+		date is 2014/11/16,
 		comment is 'Unit tests for the discontiguous/1 built-in directive.'
 	]).
 
@@ -29,6 +29,11 @@
 
 	:- private([d/3, e/4]).
 	:- discontiguous([d/3, e/4]).
+
+	% calls to predicates declared discontiguous but not defined
+	% must fail instead of throwing an existence error
+
+	:- discontiguous(f/5).
 
 	a(1).
 	b(1).
@@ -52,5 +57,8 @@
 	test(discontiguous_1_3) :-
 		findall(X, c(X), L),
 		L = [1, 2].
+
+	test(discontiguous_1_4) :-
+		\+ f(_, _, _, _, _).
 
 :- end_object.

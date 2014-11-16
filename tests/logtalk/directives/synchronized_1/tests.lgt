@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/06/23,
+		date is 2014/11/16,
 		comment is 'Unit tests for the synchronized/1 built-in directive.'
 	]).
 
@@ -44,6 +44,11 @@
 	t(X) :-
 		s(X).
 
+	% calls to predicates declared synchronized but not defined
+	% must fail instead of throwing an existence error
+
+	:- synchronized(r/2).
+
 	test(synchronized_1_1) :-
 		predicate_property(a, private),
 		predicate_property(a, synchronized).
@@ -70,5 +75,8 @@
 	test(synchronized_1_5) :-
 		findall(X, t(X), L),
 		L == [1].
+
+	test(synchronized_1_6) :-
+		\+ r(_, _).
 
 :- end_object.

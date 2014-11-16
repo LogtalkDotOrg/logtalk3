@@ -10693,6 +10693,9 @@ current_logtalk_flag(Flag, Value) :-
 	(	'$lgt_pp_public_'(Functor, Arity)
 	;	'$lgt_pp_protected_'(Functor, Arity)
 	;	'$lgt_pp_private_'(Functor, Arity)
+	;	'$lgt_pp_synchronized_'(Pred, _)
+	;	'$lgt_pp_coinductive_'(Pred, _, _, _, _, _, _)
+	;	'$lgt_pp_discontiguous_'(Functor, Arity)
 	),
 	!,
 	% closed-world assumption: calls to static, non-multifile, declared

@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/11/18,
+		date is 2014/11/16,
 		comment is 'Unit tests for the coinductive/1 built-in directive.'
 	]).
 
@@ -34,5 +34,13 @@
 	test(coinductive_1_2) :-
 		predicate_property(b(_, _), coinductive(Template)),
 		Template == b(+, -).
+
+	% calls to predicates declared coinductive but not defined
+	% must fail instead of throwing an existence error
+
+	:- coinductive(c/3).
+
+	test(coinductive_1_3) :-
+		\+ c(_, _, _).
 
 :- end_object.

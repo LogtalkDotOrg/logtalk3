@@ -48,6 +48,9 @@ for the declared predicates.
 * FIXED: Calling a local static predicate declared discontiguous but with no
 clauses must fail instead of throwing an existence error.
 
+* FIXED: Report the correct warning when calling undefined static predicates
+that are locally declared discontiguous, synchronized, or coinductive.
+
 * FIXED: Regression in previous release in the reporting of compilation
 errors.
 
@@ -57,6 +60,9 @@ Documentation
 
 Tests
 -----
+
+* ADDED: Some more unit tests for the `discontiguous/1`, `synchronized/1`,
+and `coinductive/1` directives.
 
 * ADDED: Some more unit tests for the `create_object/4`, `create_category/4`,
 and `create_protocol/3` built-in predicates.
