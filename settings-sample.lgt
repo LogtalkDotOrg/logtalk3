@@ -104,12 +104,12 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 
 
 %  To define a common directory for Logtalk compiler generated temporary
-%  Prolog files, edit and uncomment the following lines (the library
-%  paths must end with a slash character):
+%  Prolog files, edit and uncomment the following lines (the directory
+%  path must end with a slash character):
 
 /*
 :- initialization((
-	set_logtalk_flag(scratch_directory, '$HOME/logtalk/.lgt_tmp/')
+	set_logtalk_flag(scratch_directory, '$LOGTALKUSER/logtalk/scratch/')
 )).
 */
 
@@ -236,7 +236,8 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 
 
 %  To automatically delete temporary files generated during the compilation
-%  of source files, uncomment the following lines:
+%  of source files (strongly advised when alternating between backend Prolog
+%  compilers), uncomment the following lines:
 
 /*
 :- initialization((
@@ -245,8 +246,8 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 */
 
 
-%  To avoid recompilation of stable source files, uncomment the following
-%  lines:
+%  To avoid recompilation of stable source files (assuming a single backend
+%  Prolog compiler is being used), uncomment the following lines:
 
 /*
 :- initialization((
@@ -263,6 +264,7 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 
 /*
 :- initialization((
+	set_logtalk_flag(unknown_predicates, warning),
 	set_logtalk_flag(portability, warning),
 	set_logtalk_flag(missing_directives, warning)
 )).
@@ -286,8 +288,8 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 */
 
 
-%  To prevent using the <</2 context-switching control construct to bypass
-%  object encapsulation rules uncomment the following lines:
+%  To prevent using the <</2 debugging context-switching control construct
+%  to bypass object encapsulation rules uncomment the following lines:
 
 /*
 :- initialization((
