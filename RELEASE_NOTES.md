@@ -45,6 +45,9 @@ does support a compatible multi-threading implementation.
 or `coinductive/1` directive appear textually on a source file after clauses
 for the declared predicates.
 
+* FIXED: Calling a local static predicate declared discontiguous but with no
+clauses must fail instead of throwing an existence error.
+
 * FIXED: Regression in previous release in the reporting of compilation
 errors.
 
