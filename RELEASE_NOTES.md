@@ -73,6 +73,12 @@ This avoids potential issues when expanding test files that contain other
 objects besides the test objects. In some rare cases, the expansion of
 these non-test objects can interfere with the test results.
 
+Examples
+--------
+
+* UPDATED: Outdated results for some of the sample queries for the
+`coinduction` example.
+
 
 3.00.0 Release Candidate 5 - November 12, 2014
 ==============================================

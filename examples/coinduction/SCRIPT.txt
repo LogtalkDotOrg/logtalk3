@@ -89,35 +89,27 @@ false.
 % list membership example:
 
 | ?- X = [1, 2, 3| X], lists::comember(2, X).
-?- X = [1, 2, 3| X], lists::comember(2, X).
 X = [1, 2, 3|X] ;
-X = [1, 2, 3|X] ;
-X = [1, 2, 3|X] ;
-...
+false.
 
 | ?- X = [1, 2, 3, 1, 2, 3], lists::comember(2, X).
 false.
-
-% lack of Prolog support for tabling of rational terms prevents getting
-% the three recurring list members (1, 2, and 3) in the following query:
 
 | ?- X = [1, 2, 3| X], lists::comember(Y, X).
 X = [1, 2, 3|X],
 Y = 1 ;
 X = [1, 2, 3|X],
-Y = 1 ;
+Y = 2 ;
 X = [1, 2, 3|X],
-Y = 1 ;
-...
+Y = 3 ;
+false.
 
 | ?- X = [0, s(0), s(s(0))], lists::comember(s(0), X).
 false.
 
 | ?- X = [0, s(0), s(s(0))| X], lists::comember(s(0), X).
 X = [0, s(0), s(s(0))|X] ;
-X = [0, s(0), s(s(0))|X] ;
-X = [0, s(0), s(s(0))|X] ;
-...
+false.
 
 % list append example:
 
