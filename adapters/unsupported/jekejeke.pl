@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Jekejeke Prolog 1.0.4 and later versions
-%  Last updated on November 15, 2014
+%  Last updated on November 17, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -195,8 +195,7 @@ format(Format, Arguments) :-
 % the third argument, which must be either "predicate" or "control_construct",
 % is used to guide the compilation of these meta-predicates in debug mode
 
-'$lgt_prolog_meta_predicate'(_, _, _) :-
-	fail.
+'$lgt_prolog_meta_predicate'(*->(_, _), *->(0, 0), control_construct).
 
 
 % '$lgt_prolog_meta_directive'(@callable, -callable)

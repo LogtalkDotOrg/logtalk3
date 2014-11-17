@@ -54,6 +54,12 @@ that are locally declared discontiguous, synchronized, or coinductive.
 * FIXED: Regression in previous release in the reporting of compilation
 errors.
 
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: The (still unsupported ) Jekejeke adapter file for changes in
+release 1.0.4. 
+
 Documentation
 
 * IMPROVED: Documentation of the `lgtunit` tool.
