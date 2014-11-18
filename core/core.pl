@@ -4907,6 +4907,7 @@ current_logtalk_flag(Flag, Value) :-
 		true
 	;	% sometimes there are syntax errors in the generated intermediate Prolog
 		% files that are due to write_canonical/2 and/or read_term/3 bugs
+		'$lgt_print_message'(error, core, loading_error(SourceFile)),
 		retractall('$lgt_file_loading_stack_'(SourceFile)),
 		assertz('$lgt_failed_file_'(SourceFile)),
 		'$lgt_propagate_failure_to_parent_files'(SourceFile)
@@ -10705,7 +10706,7 @@ current_logtalk_flag(Flag, Value) :-
  	'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head, Lines),
 	'$lgt_report_undefined_predicate_call'(Mode, Functor/Arity, Lines).
 
-% call to a Prolog built-in meta-predicate
+% call to a Prolog built-in predicate
 
 '$lgt_compile_body'(Pred, TPred, DPred, Ctx) :-
 	'$lgt_prolog_built_in_predicate'(Pred),

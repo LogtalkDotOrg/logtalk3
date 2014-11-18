@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/09/22,
+		date is 2014/11/18,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -215,6 +215,12 @@
 		message_context(File, Lines, Type, Entity).
 
 	% compiler error and warning messages
+
+	logtalk::message_tokens(loading_error(File), core) -->
+		['Unexpected error while loading the code generated for the file:'-[], nl,
+		 '  ~w'-[File], nl,
+		 'Possible bug in the backend Prolog compiler. Please file a bug report.'-[], nl
+		].
 
 	logtalk::message_tokens(compiler_error(File, Lines, Error), core) -->
 		error_term_tokens(Error),
