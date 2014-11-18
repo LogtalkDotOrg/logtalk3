@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2014/11/18,
 		comment is 'Unit tests for the ISO Prolog standard sqrt/1 built-in function.'
 	]).
 
@@ -38,12 +38,20 @@
 		X =~= 1.1.
 
 	throws(iso_sqrt_1_04, error(instantiation_error,_)) :-
-		{_X is sqrt(_N)}.
+		% try to delay the error to runtime
+		variable(N),
+		{_X is sqrt(N)}.
 
 	throws(iso_sqrt_1_05, error(evaluation_error(undefined),_)) :-
 		{_X is sqrt(-1.0)}.
 
 	throws(iso_sqrt_1_06, error(type_error(evaluable,foo/0),_)) :-
-		{_X is sqrt(foo)}.
+		% try to delay the error to runtime
+		foo(Foo),
+		{_X is sqrt(Foo)}.
+
+	variable(_).
+
+	foo(foo).
 
 :- end_object.

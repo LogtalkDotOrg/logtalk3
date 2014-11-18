@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2014/11/18,
 		comment is 'Unit tests for the ISO Prolog standard exp/1 built-in function.'
 	]).
 
@@ -38,13 +38,21 @@
 		E =~= 2.71828.
 
 	throws(iso_exp_1_03, error(instantiation_error,_)) :-
-		{_X is exp(_N)}.
+		% try to delay the error to runtime
+		variable(N),
+		{_X is exp(N)}.
 
 	succeeds(iso_exp_1_04) :-
 		{X is exp(0)},
 		X == 1.0.
 
 	throws(iso_exp_1_05, error(type_error(evaluable,foo/0),_)) :-
-		{_X is exp(foo)}.
+		% try to delay the error to runtime
+		foo(Foo),
+		{_X is exp(Foo)}.
+
+	variable(_).
+
+	foo(foo).
 
 :- end_object.

@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2014/11/18,
 		comment is 'Unit tests for the ISO Prolog standard log/1 built-in function.'
 	]).
 
@@ -35,15 +35,23 @@
 		E =~= 1.0.
 
 	throws(iso_log_1_03, error(instantiation_error,_)) :-
-		{_X is log(_N)}.
+		% try to delay the error to runtime
+		variable(N),
+		{_X is log(N)}.
 
 	throws(iso_log_1_04, error(evaluation_error(undefined),_)) :-
 		{_X is log(0)}.
 
 	throws(iso_log_1_05, error(type_error(evaluable,foo/0),_)) :-
-		{_X is log(foo)}.
+		% try to delay the error to runtime
+		foo(Foo),
+		{_X is log(Foo)}.
 
 	throws(iso_log_1_06, error(evaluation_error(undefined),_)) :-
 		{_X is log(0.0)}.
+
+	variable(_).
+
+	foo(foo).
 
 :- end_object.

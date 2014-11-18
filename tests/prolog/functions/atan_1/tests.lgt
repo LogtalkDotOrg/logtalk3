@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2014/11/18,
 		comment is 'Unit tests for the ISO Prolog standard atan/1 built-in function.'
 	]).
 
@@ -38,13 +38,21 @@
 		PI =~= 3.14159.
 
 	throws(iso_atan_1_03, error(instantiation_error,_)) :-
-		{_X is atan(_N)}.
+		% try to delay the error to runtime
+		variable(N),
+		{_X is atan(N)}.
 
 	succeeds(iso_atan_1_04) :-
 		{X is atan(0)},
 		X == 0.0.
 
 	throws(iso_atan_1_05, error(type_error(evaluable,foo/0),_)) :-
-		{_X is atan(foo)}.
+		% try to delay the error to runtime
+		foo(Foo),
+		{_X is atan(Foo)}.
+
+	variable(_).
+
+	foo(foo).
 
 :- end_object.

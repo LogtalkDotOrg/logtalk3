@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2014/11/18,
 		comment is 'Unit tests for the ISO Prolog standard (\\)/1 built-in function.'
 	]).
 
@@ -35,11 +35,15 @@
 		X == -11.
 
 	throws(iso_bitwise_complement_1_04, error(instantiation_error,_)) :-
-		{_X is '\\'(_N)}.
+		% try to delay the error to runtime
+		variable(N),
+		{_X is '\\'(N)}.
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
 	throws(sics_bitwise_complement_1_05, error(type_error(integer,2.5),_)) :-
 		{_X is '\\'(2.5)}.
+
+	variable(_).
 
 :- end_object.

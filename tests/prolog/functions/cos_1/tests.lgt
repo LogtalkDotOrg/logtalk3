@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2014/11/18,
 		comment is 'Unit tests for the ISO Prolog standard cos/1 built-in function.'
 	]).
 
@@ -34,17 +34,25 @@
 		X == 1.0.
 
 	throws(iso_cos_1_02, error(instantiation_error,_)) :-
-		{_X is cos(_N)}.
+		% try to delay the error to runtime
+		variable(N),
+		{_X is cos(N)}.
 
 	succeeds(iso_cos_1_03) :-
 		{X is cos(0)},
 		X == 1.0.
 
 	throws(iso_cos_1_04, error(type_error(evaluable,foo/0),_)) :-
-		{_X is cos(foo)}.
+		% try to delay the error to runtime
+		foo(Foo),
+		{_X is cos(Foo)}.
 
 	succeeds(iso_cos_1_05) :-
 		{PI is atan(1.0)*4, X is cos(PI/2.0)},
 		X =~= 0, PI =~= 3.14159.
+
+	variable(_).
+
+	foo(foo).
 
 :- end_object.

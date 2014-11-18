@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2014/11/18,
 		comment is 'Unit tests for the ISO Prolog standard (**)/2 built-in function.'
 	]).
 
@@ -42,10 +42,14 @@
 		X =~= 0.2.
 
 	throws(iso_power_2_04, error(instantiation_error,_)) :-
-		{_X is '**'(77,_N)}.
+		% try to delay the error to runtime
+		variable(N),
+		{_X is '**'(77,N)}.
 
 	throws(iso_power_2_05, error(type_error(evaluable,foo/0),_)) :-
-		{_X is '**'(foo,2)}.
+		% try to delay the error to runtime
+		foo(Foo),
+		{_X is '**'(Foo,2)}.
 
 	succeeds(iso_power_2_06) :-
 		{X is '**'(5,3.0)},
@@ -54,5 +58,9 @@
 	succeeds(iso_power_2_07) :-
 		{X is '**'(0,0.0)},
 		X =~= 1.0.
+
+	variable(_).
+
+	foo(foo).
 
 :- end_object.

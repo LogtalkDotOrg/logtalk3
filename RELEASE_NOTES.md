@@ -79,6 +79,9 @@ This avoids potential issues when expanding test files that contain other
 objects besides the test objects. In some rare cases, the expansion of
 these non-test objects can interfere with the test results.
 
+* UPDATED: Prolog conformance tests for built-in arithmetic functions to try
+to delay errors in expressions to runtime to properly test exception terms.
+
 Examples
 --------
 

@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2014/11/18,
 		comment is 'Unit tests for the ISO Prolog standard (/\\)/1 built-in function.'
 	]).
 
@@ -39,14 +39,22 @@
 		X == 4.
 
 	throws(iso_bitwise_and_2_05, error(instantiation_error,_)) :-
-		{_X is '/\\'(77, _N)}.
+		% try to delay the error to runtime
+		variable(N),
+		{_X is '/\\'(77, N)}.
 
 	throws(iso_bitwise_and_2_06, error(type_error(evaluable,foo/0),_)) :-
-		{_X is '/\\'(foo, 2)}.
+		% try to delay the error to runtime
+		foo(Foo),
+		{_X is '/\\'(Foo, 2)}.
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
 	throws(sics_bitwise_and_2_07, error(type_error(integer,1.0),_)) :-
 		{_X is '/\\'(1.0, 2)}.
+
+	variable(_).
+
+	foo(foo).
 
 :- end_object.

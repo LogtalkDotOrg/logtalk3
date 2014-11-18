@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2014/11/18,
 		comment is 'Unit tests for the ISO Prolog standard (<<)/1 built-in function.'
 	]).
 
@@ -35,13 +35,21 @@
 		X == -64.
 
 	throws(iso_bitwise_left_shift_1_04, error(instantiation_error,_)) :-
-		{_X is '<<'(77, _N)}.
+		% try to delay the error to runtime
+		variable(N),
+		{_X is '<<'(77, N)}.
 
 	throws(iso_bitwise_left_shift_2_05, error(type_error(evaluable,foo/0),_)) :-
 		% example fixed in ISO/IEC 13211-1:1995/Cor.1:2007
-		{_X is '<<'(foo, 2)}.
+		% try to delay the error to runtime
+		foo(Foo),
+		{_X is '<<'(Foo, 2)}.
 
 	throws(iso_bitwise_left_shift_2_06, error(type_error(integer,1.0),_)) :-
 		{_X is '<<'(1.0, 2)}.
+
+	variable(_).
+
+	foo(foo).
 
 :- end_object.

@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2014/11/18,
 		comment is 'Unit tests for the ISO Prolog standard sin/1 built-in function.'
 	]).
 
@@ -34,17 +34,25 @@
 		X == 0.0.
 
 	throws(iso_sin_1_02, error(instantiation_error,_)) :-
-		{_X is sin(_N)}.
+		% try to delay the error to runtime
+		variable(N),
+		{_X is sin(N)}.
 
 	succeeds(iso_sin_1_03) :-
 		{X is sin(0)},
 		X == 0.0.
 
 	throws(iso_sin_1_04, error(type_error(evaluable,foo/0),_)) :-
-		{_X is sin(foo)}.
+		% try to delay the error to runtime
+		foo(Foo),
+		{_X is sin(Foo)}.
 
 	succeeds(iso_sin_1_05) :-
 		{PI is atan(1.0)*4, X is sin(PI/2.0)},
 		X =~= 1, PI =~= 3.14159.
+
+	variable(_).
+
+	foo(foo).
 
 :- end_object.
