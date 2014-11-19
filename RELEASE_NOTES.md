@@ -25,7 +25,7 @@ RELEASE NOTES
 =============
 
 
-3.00.0 Release Candidate 6 - November ??, 2014
+3.00.0 Release Candidate 6 - November 19, 2014
 ==============================================
 
 Logtalk compiler and runtime
@@ -65,6 +65,7 @@ Prolog adapter and integration files
 release 1.0.4. 
 
 Documentation
+-------------
 
 * IMPROVED: Documentation of the `lgtunit` tool.
 
