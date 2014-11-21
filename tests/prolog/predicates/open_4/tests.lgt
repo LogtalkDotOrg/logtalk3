@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/11/06,
+		date is 2014/11/21,
 		comment is 'Unit tests for the ISO Prolog standard open/3-4 built-in predicates.'
 	]).
 
@@ -84,9 +84,9 @@
 		 open(bar, write, _, [alias(a)])}.
 
 	cleanup :-
-		os::delete_file(roger_data),
-		os::delete_file(scowen),
-		os::delete_file(dave),
-		os::delete_file(foo).
+		^^clean_file(roger_data),
+		^^clean_file(scowen),
+		^^clean_file(dave),
+		^^clean_file(foo).
 
 :- end_object.

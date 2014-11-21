@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/11/06,
+		date is 2014/11/21,
 		comment is 'Unit tests for the ISO Prolog standard get_code/1-2 built-in predicates.'
 	]).
 
@@ -117,7 +117,7 @@
 		{get_code(S, _)}.
 
 	cleanup :-
-		os::delete_file(t),
+		^^clean_file(t),
 		^^clean_text_input,
 		^^clean_binary_input.
 

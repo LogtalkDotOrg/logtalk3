@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/11/06,
+		date is 2014/11/21,
 		comment is 'Unit tests for the ISO Prolog standard set_stream_position/2 built-in predicate.'
 	]).
 
@@ -57,7 +57,6 @@
 		{set_stream_position(S, Pos)}.
 
 	cleanup :-
-		os::expand_path(foo, Path),
-		os::delete_file(Path).
+		^^clean_file(foo).
 
 :- end_object.

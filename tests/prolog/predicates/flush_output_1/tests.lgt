@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/11/06,
+		date is 2014/11/21,
 		comment is 'Unit tests for the ISO Prolog standard flush_output/0-1 built-in predicates.'
 	]).
 
@@ -57,6 +57,6 @@
 		^^check_text_output(st_o, '').
 
 	cleanup :-
-		os::delete_file(foo).
+		^^clean_file(foo).
 
 :- end_object.

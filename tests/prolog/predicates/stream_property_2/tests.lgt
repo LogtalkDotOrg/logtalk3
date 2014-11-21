@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/11/07,
+		date is 2014/11/21,
 		comment is 'Unit tests for the ISO Prolog standard stream_property/2 built-in predicate.'
 	]).
 
@@ -81,8 +81,8 @@
 		{stream_property(_S, type(binary))}.
 
 	cleanup :-
-		os::delete_file(foo),
-		os::delete_file(bar).
+		^^clean_file(foo),
+		^^clean_file(bar).
 
 	memberchk(Element, [Head| _]) :-
 		Element == Head,

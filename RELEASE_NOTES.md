@@ -41,6 +41,12 @@ could result in an error.
 * FIXED: Typo in the `lgtunit` tool in the declaration of the protected
 predicate `check_binary_file/2`.
 
+Tests
+-----
+
+* FIXED: Prolog conformance tests that use a cleanup goal that deleted files
+to use the new `lgtunit` tool `clean_file/1` predicate.
+
 
 3.00.0 Release Candidate 6 - November 19, 2014
 ==============================================
