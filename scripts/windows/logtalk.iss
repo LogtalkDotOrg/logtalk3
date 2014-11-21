@@ -2,7 +2,7 @@
 ; Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 ; 
 ; Logtalk Inno Setup script for generating Windows installers
-; Last updated on November 4, 2014
+; Last updated on November 21, 2014
 ; 
 ; Logtalk is free software. You can redistribute it and/or modify it under
 ; the terms of the FSF GNU General Public License 3  (plus some additional
@@ -225,7 +225,7 @@ end;
 
 procedure CurStepChanged(CurStep: TSetupStep);
 var
-  NewFolder: String;
+  NewFolder, BackupFolder: String;
 begin
   NewFolder := LgtUserDirPage.Values[0];
   if (CurStep = ssInstall) and DirExists(NewFolder) and (pos('backup', WizardSelectedComponents(False)) > 0) then begin
