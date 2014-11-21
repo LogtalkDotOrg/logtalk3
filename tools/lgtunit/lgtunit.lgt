@@ -262,7 +262,7 @@
 	:- protected(clean_file/1).
 	:- mode(clean_file(+atom), one).
 	:- info(clean_file/1, [
-		comment is 'Closes any existing stream assotiated with the file and deletes the file if it exists.',
+		comment is 'Closes any existing stream associated with the file and deletes the file if it exists.',
 		argnames is ['File']
 	]).
 
@@ -1041,10 +1041,12 @@
 
 	clean_file(File, Path) :-
 		os::expand_path(File, Path),
-		(	stream_property(Stream, file_name(Path)) ->
+		% a file can be associated with more than one stream
+		forall(
+			stream_property(Stream, file_name(Path)),
 			close(Stream)
-		;	true
 		),
+		% a file may exist only if some unit test failed
 		(	os::file_exists(Path) ->
 			os::delete_file(Path)
 		;	true
