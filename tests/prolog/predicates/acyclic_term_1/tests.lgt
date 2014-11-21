@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/11/09,
+		date is 2014/11/21,
 		comment is 'Unit tests for the ISO Prolog standard acyclic_term/1 built-in predicate.'
 	]).
 
@@ -24,7 +24,11 @@
 	succeeds(iso_acyclic_term_1_01) :-
 		{acyclic_term(a(1, _))}.
 
-	:- if(current_logtalk_flag(coinduction, supported)).
+	:- if((
+		current_logtalk_flag(coinduction, supported),
+		\+ current_logtalk_flag(prolog_dialect, cx),
+		\+ current_logtalk_flag(prolog_dialect, eclipse)
+	)).
 		fails(iso_acyclic_term_1_02) :-
 			{X = f(X), acyclic_term(X)}.
 	:- else.

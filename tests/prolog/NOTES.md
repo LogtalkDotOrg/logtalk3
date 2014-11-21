@@ -54,12 +54,15 @@ input/output predicates that are affected by operator declarations (which
 otherwise would be compiled to ensure that entity declared operators are
 local to the entities as required by Logtalk semantics).
 
-Some unit tests are currently skipped. These tests are mainly split between
-two groups: tests whose result is specified as undefined in the standards
-(usually due to the potential of creating cyclic terms if unification without
-occurs check is performed when using Prolog compilers that don't support
-cyclic terms) and tests that would require a portable way of specifying a
-source file text encoding plus a common extended text encoding such as UTF-8.
+Tests that would require a portable way of specifying a source file text
+encoding plus a common extended text encoding (e.g. UTF-8) are currently
+skipped.
+
+Tests that are specified as undefined in the standards due to the potential
+of creating cyclic terms are skipped when using a backend Prolog compiler
+that either doesn't support cyclic terms or whose support for cyclic terms
+is limited. Currently, these tests are only run when using SICStus Prolog,
+SWI-Prolog, or YAP as the backend Prolog compiler.
 
 Failure of unit tests doesn't necessarily mean that a backend Prolog compiler
 is faulty. Standards are not perfect and there isn't always a community

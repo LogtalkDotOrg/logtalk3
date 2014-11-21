@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/11/09,
+		date is 2014/11/21,
 		comment is 'Unit tests for the ISO Prolog standard arg/3 built-in predicate.'
 	]).
 
@@ -65,7 +65,11 @@
 		% try to delay the expected error to runtime
 		{G = arg(0, 3, _), call(G)}.
 
-	:- if(current_logtalk_flag(coinduction, supported)).
+	:- if((
+		current_logtalk_flag(coinduction, supported),
+		\+ current_logtalk_flag(prolog_dialect, cx),
+		\+ current_logtalk_flag(prolog_dialect, eclipse)
+	)).
 		succeeds(iso_arg_3_12) :-
 			{arg(1, foo(X), u(X))}.
 	:- else.

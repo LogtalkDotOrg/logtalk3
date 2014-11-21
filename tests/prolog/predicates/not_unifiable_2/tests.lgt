@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/11/09,
+		date is 2014/11/21,
 		comment is 'Unit tests for the ISO Prolog standard (\\=)/2 built-in predicate.'
 	]).
 
@@ -51,7 +51,11 @@
 	succeeds(iso_not_unifiable_2_10) :-
 		{'\\='(f(X,Y,X), f(a(X),a(Y),Y,2))}.
 
-	:- if(current_logtalk_flag(coinduction, supported)).
+	:- if((
+		current_logtalk_flag(coinduction, supported),
+		\+ current_logtalk_flag(prolog_dialect, cx),
+		\+ current_logtalk_flag(prolog_dialect, eclipse)
+	)).
 		fails(iso_not_unifiable_2_11) :-
 			{\=(X, a(X))}.
 

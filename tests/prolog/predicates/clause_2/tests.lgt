@@ -34,7 +34,7 @@ insect(bee).
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/11/09,
+		date is 2014/11/21,
 		comment is 'Unit tests for the ISO Prolog standard clause/2 built-in predicate.'
 	]).
 
@@ -83,7 +83,11 @@ insect(bee).
 			{clause(atom(_), _Body)}.
 	:- endif.
 
-	:- if(current_logtalk_flag(coinduction, supported)).
+	:- if((
+		current_logtalk_flag(coinduction, supported),
+		\+ current_logtalk_flag(prolog_dialect, cx),
+		\+ current_logtalk_flag(prolog_dialect, eclipse)
+	)).
 		succeeds(iso_clause_2_11) :-
 			{clause(legs(A,6), insect(f(A)))}.
 	:- else.

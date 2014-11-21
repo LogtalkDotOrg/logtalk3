@@ -47,6 +47,10 @@ Tests
 * FIXED: Prolog conformance tests that use a cleanup goal that deleted files
 to use the new `lgtunit` tool `clean_file/1` predicate.
 
+* FIXED: Prolog conformance tests that are marked as STO are now skipped when
+using CxProlog or ECLiPSe due to limited support for cyclic terms in these two
+backend Prolog compilers.
+
 
 3.00.0 Release Candidate 6 - November 19, 2014
 ==============================================

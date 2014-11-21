@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/11/09,
+		date is 2014/11/21,
 		comment is 'Unit tests for the ISO Prolog standard copy_term/2 built-in predicate.'
 	]).
 
@@ -51,7 +51,11 @@
 	fails(iso_copy_term_2_08) :-
 		{copy_term(a+X,X+b), copy_term(a+X,X+b)}.
 
-	:- if(current_logtalk_flag(coinduction, supported)).
+	:- if((
+		current_logtalk_flag(coinduction, supported),
+		\+ current_logtalk_flag(prolog_dialect, cx),
+		\+ current_logtalk_flag(prolog_dialect, eclipse)
+	)).
 		succeeds(iso_copy_term_2_09) :-
 			{copy_term(demoen(X,X), demoen(Y,f(Y)))}.
 	:- else.
