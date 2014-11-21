@@ -887,7 +887,7 @@
 	% support for testing input predicates
 
 	set_text_input(Alias, Contents) :-
-		clean_file('test_input.text', Path),
+		clean_file(Alias, 'test_input.text', Path),
 		open(Path, write, WriteStream, [type(text)]),
 		write_text_contents(WriteStream, Contents),
 		close(WriteStream),
@@ -916,7 +916,7 @@
 		clean_file('test_input.text', _).
 
 	set_binary_input(Alias, Bytes) :-
-		clean_file('test_input.binary', Path),
+		clean_file(Alias, 'test_input.binary', Path),
 		open(Path, write, WriteStream, [type(binary)]),
 		write_binary_contents(Bytes, WriteStream),
 		close(WriteStream),
@@ -947,7 +947,7 @@
 	% support for testing output predicates
 
 	set_text_output(Alias, Contents) :-
-		clean_file('test_output.text', Path),
+		clean_file(Alias, 'test_output.text', Path),
 		open(Path, write, Stream, [type(text),alias(Alias)]),
 		write_text_contents(Stream, Contents).
 
@@ -978,7 +978,7 @@
 		clean_file('test_output.text', _).
 
 	set_binary_output(Alias, Bytes) :-
-		clean_file('test_output.binary', Path),
+		clean_file(Alias, 'test_output.binary', Path),
 		open(Path, write, Stream, [type(binary), alias(Alias)]),
 		write_binary_contents(Bytes, Stream).
 
@@ -1041,16 +1041,24 @@
 
 	clean_file(File, Path) :-
 		os::expand_path(File, Path),
-		% a file can be associated with more than one stream
+		% the file can be associated with more than one stream
 		forall(
 			stream_property(Stream, file_name(Path)),
 			close(Stream)
 		),
-		% a file may exist only if some unit test failed
+		% the file may exist only if some unit test failed
 		(	os::file_exists(Path) ->
 			os::delete_file(Path)
 		;	true
 		).
+
+	clean_file(Alias, File, Path) :-
+		% the alias may be associated with a stream opened for a different file
+		(	stream_property(Stream, alias(Alias)) ->
+			close(Stream)
+		;	true
+		),
+		clean_file(File, Path).
 
 	write_text_contents(Stream, Contents) :-
 		(	atom(Contents) ->
