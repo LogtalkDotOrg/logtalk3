@@ -31,6 +31,13 @@ RELEASE NOTES
 Tools
 -----
 
+* ADDED: A `clean_file/1` protected predicate to the `lgtunit` tool for
+safely deleting a file.
+
+* FIXED: A bug when running the `lgtunit` tool on Windows operating-systems
+where deleting a temporary file used for testing input/output predicates
+could result in an error.
+
 * FIXED: Typo in the `lgtunit` tool in the declaration of the protected
 predicate `check_binary_file/2`.
 

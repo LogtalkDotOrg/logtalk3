@@ -30,7 +30,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/11/08,
+		date is 2014/11/21,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, and multiple test dialects.'
 	]).
 
@@ -257,6 +257,13 @@
 	:- info(check_binary_file/2, [
 		comment is 'Checks the contents of a binary file match the expected contents.',
 		argnames is ['File', 'Bytes']
+	]).
+
+	:- protected(clean_file/1).
+	:- mode(clean_file(+atom), one).
+	:- info(clean_file/1, [
+		comment is 'Closes any existing stream assotiated with the file and deletes the file if it exists.',
+		argnames is ['File']
 	]).
 
 	:- protected(closed_input_stream/2).
@@ -880,7 +887,7 @@
 	% support for testing input predicates
 
 	set_text_input(Alias, Contents) :-
-		clean_file(Alias, 'test_input.text', Path),
+		clean_file('test_input.text', Path),
 		open(Path, write, WriteStream, [type(text)]),
 		write_text_contents(WriteStream, Contents),
 		close(WriteStream),
@@ -909,7 +916,7 @@
 		clean_file('test_input.text', _).
 
 	set_binary_input(Alias, Bytes) :-
-		clean_file(Alias, 'test_input.binary', Path),
+		clean_file('test_input.binary', Path),
 		open(Path, write, WriteStream, [type(binary)]),
 		write_binary_contents(Bytes, WriteStream),
 		close(WriteStream),
@@ -1029,12 +1036,15 @@
 
 	% auxiliary predicates for testing input/output predicates
 
-	clean_file(Alias, File, Path) :-
-		catch(close(Alias), _, true),
-		clean_file(File, Path).
+	clean_file(File) :-
+		clean_file(File, _).
 
 	clean_file(File, Path) :-
 		os::expand_path(File, Path),
+		(	stream_property(Stream, file_name(Path)) ->
+			close(Stream)
+		;	true
+		),
 		(	os::file_exists(Path) ->
 			os::delete_file(Path)
 		;	true

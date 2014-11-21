@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2014/11/8</code>
+            <code>2014/11/21</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -669,7 +669,7 @@
           </dl>
         </div>
         <div class="section">
-          <h3 id="checks_binary_file/2" class="code">checks_binary_file/2</h3>
+          <h3 id="check_binary_file/2" class="code">check_binary_file/2</h3>
           <blockquote>
             <p class="comment">Checks the contents of a binary file match the expected contents.</p>
           </blockquote>
@@ -680,11 +680,31 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>checks_binary_file(File,Bytes)</code>
+              <code>check_binary_file(File,Bytes)</code>
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
-              <code>checks_binary_file(+atom,+list(byte)) &ndash; zero_or_one</code>
+              <code>check_binary_file(+atom,+list(byte)) &ndash; zero_or_one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="clean_file/1" class="code">clean_file/1</h3>
+          <blockquote>
+            <p class="comment">Closes any existing stream assotiated with the file and deletes the file if it exists.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>clean_file(File)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>clean_file(+atom) &ndash; one</code>
             </dd>
           </dl>
         </div>
