@@ -252,9 +252,9 @@
 		argnames is ['File', 'Contents']
 	]).
 
-	:- protected(checks_binary_file/2).
-	:- mode(checks_binary_file(+atom, +list(byte)), zero_or_one).
-	:- info(checks_binary_file/2, [
+	:- protected(check_binary_file/2).
+	:- mode(check_binary_file(+atom, +list(byte)), zero_or_one).
+	:- info(check_binary_file/2, [
 		comment is 'Checks the contents of a binary file match the expected contents.',
 		argnames is ['File', 'Bytes']
 	]).

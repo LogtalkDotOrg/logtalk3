@@ -28,7 +28,11 @@ RELEASE NOTES
 3.00.0 Release Candidate 7 - November ??, 2014
 ==============================================
 
+Tools
+-----
 
+* FIXED: Typo in the `lgtunit` tool in the declaration of the protected
+predicate `check_binary_file/2`.
 
 
 3.00.0 Release Candidate 6 - November 19, 2014
