@@ -22,7 +22,7 @@ ________________________________________________________________________
 
 
 This directory contains files used when building Windows 2000/XP/7 GUI 
-installers using Inno Setup 5.1.11 (or a later version):
+installers using Inno Setup 5.3.0 Unicode (or a later version):
 
 	http://www.jrsoftware.org/isinfo.php
 

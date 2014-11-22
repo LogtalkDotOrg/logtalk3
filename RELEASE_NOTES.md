@@ -34,7 +34,9 @@ Installers and installation scripts
 
 * IMPROVED: The Windows installer will warn the user when a backup of the
 current Logtalk user folder cannot be created, giving the user the option
-to cancel the installation.
+to cancel the installation. Also converted the `logtalk.iss` installer
+script to UTF-8 (thus, the Inno Setup Unicode version is now required to
+compile it).
 
 Tools
 -----
