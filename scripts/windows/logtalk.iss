@@ -9,7 +9,7 @@
 ; terms per section 7).        Consult the `LICENSE.txt` file for details.
 
 #define MyAppName "Logtalk"
-#define MyAppCopyright "Copyright © 1998-2014 Paulo Moura"
+#define MyAppCopyright "Copyright Â© 1998-2014 Paulo Moura"
 #define MyAppPublisher "Logtalk.org"
 #define MyAppURL "http://logtalk.org"
 #define MyAppUrlName "Logtalk Web Site.url"
@@ -212,6 +212,7 @@ var
   LgtUserDirPage: TInputDirWizardPage;
   WarningPage, ErrorPage: TOutputMsgWizardPage;
   Explanation, Warning, Error, BackupFolder: String;
+  CancelWithoutPrompt: boolean;
 
 function GetLgtUserDir(Param: String): String;
 begin
@@ -230,7 +231,15 @@ begin
   NewFolder := LgtUserDirPage.Values[0];
   if (CurStep = ssInstall) and DirExists(NewFolder) and (pos('backup', WizardSelectedComponents(False)) > 0) then begin
     BackupFolder := NewFolder + '-backup-' + GetDateTimeString('yyyy-mm-dd-hhnnss', '-', ':');
-    RenameFile(NewFolder, BackupFolder)
+    if not RenameFile(NewFolder, BackupFolder) then begin
+      Error := 'Could not create a backup of the Logtalk user folder!'
+               + Chr(13) + Chr(13)
+               + 'Make sure that no directory or file from the Logtalk user folder is open and retry. '
+               + 'If the error persists, move the Logtalk user folder to another location and run the installer again.';
+      MsgBox(Error, mbError, MB_OK);
+      CancelWithoutPrompt := true;
+      WizardForm.Close
+    end
   end
   else if (CurStep = ssPostInstall) then begin
     if FileExists(BackupFolder + '\settings.lgt') then
@@ -640,6 +649,7 @@ var
   Version, InstalledVersion: String;
   LOGTALKHOME, LOGTALKUSER: String;
 begin
+  CancelWithoutPrompt := false;
   if IsAdminLoggedOn then
     if RegQueryStringValue(HKLM, 'SYSTEM\CurrentControlSet\Control\Session Manager\Environment', 'LOGTALKHOME', LOGTALKHOME) then
       WizardForm.DirEdit.Text := LOGTALKHOME
@@ -704,4 +714,10 @@ begin
              + 'You must rerun the Logtalk installer after installing a compatible Prolog compiler.';
     ErrorPage := CreateOutputMsgPage(wpSelectDir, 'Warning', 'No compatible Prolog compiler found!', Error)
   end
+end;
+
+procedure CancelButtonClick(CurPageID: Integer; var Cancel, Confirm: Boolean);
+begin
+  if CurPageID=wpInstalling then
+    Confirm := not CancelWithoutPrompt;
 end;

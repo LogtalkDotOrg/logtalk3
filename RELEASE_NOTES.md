@@ -28,6 +28,14 @@ RELEASE NOTES
 3.00.0 Release Candidate 7 - November ??, 2014
 ==============================================
 
+
+Installers and installation scripts
+-----------------------------------
+
+* IMPROVED: The Windows installer will warn the user when a backup of the
+current Logtalk user folder cannot be created, giving the user the option
+to cancel the installation.
+
 Tools
 -----
 
