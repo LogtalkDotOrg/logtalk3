@@ -55,6 +55,10 @@ could result in an error.
 * FIXED: Typo in the `lgtunit` tool in the declaration of the protected
 predicate `check_binary_file/2`.
 
+* FIXED: A bug in the `logtalk_tester.sh` POSIX shell script where the reported
+test numbers would not be accurate due to text encoding issues resulting from
+the current locale and the logging of failed test results.
+
 Tests
 -----
 
