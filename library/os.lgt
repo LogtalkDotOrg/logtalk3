@@ -36,9 +36,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.10,
+		version is 1.11,
 		author is 'Paulo Moura',
-		date is 2014/11/08,
+		date is 2014/11/23,
 		comment is 'Simple example of using conditional compilation to implement a portable operating-system interface for selected back-end Prolog compilers.'
 	]).
 
@@ -240,7 +240,8 @@
 			{shell(Command)}.
 
 		expand_path(Path, ExpandedPath) :-
-			{expand_atom(Path, ExpandedPath)}.
+			{expand_atom(Path, EnvVarExpandedPath),
+			 path_sysop(expand, EnvVarExpandedPath, ExpandedPath)}.
 
 		make_directory(Directory) :-
 			{expand_atom(Directory, Expanded),

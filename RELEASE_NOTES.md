@@ -28,15 +28,19 @@ RELEASE NOTES
 3.00.0 Release Candidate 7 - November ??, 2014
 ==============================================
 
+Library
+-------
+
+* FIXED: Bug in the implementation of the predicate `os::expand_path/2`
+for XSB.
 
 Installers and installation scripts
 -----------------------------------
 
-* IMPROVED: The Windows installer will warn the user when a backup of the
-current Logtalk user folder cannot be created, giving the user the option
-to cancel the installation. Also converted the `logtalk.iss` installer
-script to UTF-8 (thus, the Inno Setup Unicode version is now required to
-compile it).
+* IMPROVED: The Windows installer will now warn the user and cancel the
+installation when a backup of the current Logtalk user folder cannot be
+created. Also converted the `logtalk.iss` installer script to UTF-8 (thus,
+the Inno Setup Unicode version is now required to compile it).
 
 Tools
 -----
