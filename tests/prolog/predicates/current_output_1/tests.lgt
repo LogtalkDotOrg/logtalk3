@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/11/06,
+		date is 2014/11/23,
 		comment is 'Unit tests for the ISO Prolog standard current_output/1 built-in predicate.'
 	]).
 
@@ -27,21 +27,21 @@
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
-	succeeds(sics_current_input_1_1) :-
+	succeeds(sics_current_output_1_1) :-
 		{current_output(_S)}.
 
-	throws(sics_current_input_1_2, error(domain_error(stream,foo),_)) :-
+	throws(sics_current_output_1_2, error(domain_error(stream,foo),_)) :-
 		{current_output(foo)}.
 
-	fails(sics_current_input_1_3) :-
+	fails(sics_current_output_1_3) :-
 		{current_input(S),
 		 current_output(S)}.
 
-	throws(sics_current_input_1_4, error(domain_error(stream,S),_)) :-
+	throws(sics_current_output_1_4, error(domain_error(stream,S),_)) :-
 		^^closed_output_stream(S, []),
 		{current_output(S)}.
 
-	succeeds(sics_current_input_1_5) :-
+	succeeds(sics_current_output_1_5) :-
 		{current_output(S),
 		 current_output(S)}.
 

@@ -69,6 +69,9 @@ to use the new `lgtunit` tool `clean_file/1` predicate.
 using CxProlog or ECLiPSe due to limited support for cyclic terms in these two
 backend Prolog compilers.
 
+* FIXED: Identifiers of the Prolog conformance tests for the `current_output/1`
+standard predicate.
+
 
 3.00.0 Release Candidate 6 - November 19, 2014
 ==============================================
