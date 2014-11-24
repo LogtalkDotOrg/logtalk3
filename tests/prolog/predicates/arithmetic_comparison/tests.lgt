@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2014/11/24,
 		comment is 'Unit tests for the ISO Prolog standard arithmetic comparison built-in predicates.'
 	]).
 
@@ -80,21 +80,35 @@
 		{'=<'(3*2, 7-1)}.
 
 	throws(iso_arithmetic_comparison_19, error(instantiation_error,_)) :-
-		{'=:='(_X, 5)}.
+		% try to delay the error to runtime
+		variable(X),
+		{'=:='(X, 5)}.
 
 	throws(iso_arithmetic_comparison_20, error(instantiation_error,_)) :-
-		{=\=(_X, 5)}.
+		% try to delay the error to runtime
+		variable(X),
+		{=\=(X, 5)}.
 
 	throws(iso_arithmetic_comparison_21, error(instantiation_error,_)) :-
-		{'<'(_X, 5)}.
+		% try to delay the error to runtime
+		variable(X),
+		{'<'(X, 5)}.
 
 	throws(iso_arithmetic_comparison_22, error(instantiation_error,_)) :-
-		{'>'(_X, 5)}.
+		% try to delay the error to runtime
+		variable(X),
+		{'>'(X, 5)}.
 
 	throws(iso_arithmetic_comparison_23, error(instantiation_error,_)) :-
-		{'>='(_X, 5)}.
+		% try to delay the error to runtime
+		variable(X),
+		{'>='(X, 5)}.
 
 	throws(iso_arithmetic_comparison_24, error(instantiation_error,_)) :-
-		{'=<'(_X, 5)}.
+		% try to delay the error to runtime
+		variable(X),
+		{'=<'(X, 5)}.
+
+	variable(_).
 
 :- end_object.
