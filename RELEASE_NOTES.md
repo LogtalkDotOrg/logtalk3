@@ -62,9 +62,9 @@ the current locale and the logging of failed test results.
 Tests
 -----
 
-* UPDATED: Prolog conformance tests for built-in arithmetic comparison
-predicates to try to delay errors in expressions to runtime to properly
-test exception terms.
+* UPDATED: Prolog conformance tests for the built-in arithmetic comparison
+predicates and the `is/2` predicate to try to delay errors in expressions to
+runtime to properly test the expected exception terms.
 
 * FIXED: Prolog conformance tests that use a cleanup goal that deleted files
 to use the new `lgtunit` tool `clean_file/1` predicate.

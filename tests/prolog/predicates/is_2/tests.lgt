@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2014/11/24,
 		comment is 'Unit tests for the ISO Prolog standard is/2 built-in predicate.'
 	]).
 
@@ -40,11 +40,14 @@
 	% in some of the throws/2 tests that follow, try to delay the expected error to runtime
 
 	throws(iso_is_2_04, error(instantiation_error,_)) :-
-	% try to delay the expected error to runtime
-		{G = (_X is '+'(77, _N)), call(G)}.
+		% try to delay the error to runtime
+		variable(N),
+		{_X is '+'(77, N)}.
 
 	throws(iso_is_2_05, error(type_error(evaluable,foo/0),_)) :-
-		{_X is '+'(foo, 77)}.
+		% try to delay the error to runtime
+		foo(Foo),
+		{_X is '+'(Foo, 77)}.
 
 	succeeds(iso_is_2_06) :-
 		{X is '-'(7)},
@@ -59,11 +62,14 @@
 		X == 7.8.
 
 	throws(iso_is_2_09, error(instantiation_error,_)) :-
-		% try to delay the expected error to runtime
-		{G = (_X is '-'(_N)), call(G)}.
+		% try to delay the error to runtime
+		variable(N),
+		{_X is '-'(N)}.
 
 	throws(iso_is_2_10, error(type_error(evaluable,foo/0),_)) :-
-		{_X is '-'(foo)}.
+		% try to delay the error to runtime
+		foo(Foo),
+		{_X is '-'(Foo)}.
 
 	succeeds(iso_is_2_11) :-
 		{X is '-'(7, 35)},
@@ -78,11 +84,14 @@
 		X == -14.2.
 
 	throws(iso_is_2_14, error(instantiation_error,_)) :-
-		% try to delay the expected error to runtime
-		{G = (_X is '-'(77, _N)), call(G)}.
+		% try to delay the error to runtime
+		variable(N),
+		{_X is '-'(77, N)}.
 
 	throws(iso_is_2_15, error(type_error(evaluable,foo/0),_)) :-
-		{_X is '-'(foo, 77)}.
+		% try to delay the error to runtime
+		foo(Foo),
+		{_X is '-'(Foo, 77)}.
 
 	succeeds(iso_is_2_16) :-
 		{X is '*'(7,35)},
@@ -97,11 +106,14 @@
 		X =~= 21.3.
 
 	throws(iso_is_2_19, error(instantiation_error,_)) :-
-		% try to delay the expected error to runtime
-		{G = (_X is '*'(77, _N)), call(G)}.
+		% try to delay the error to runtime
+		variable(N),
+		{_X is '*'(77, N)}.
 
 	throws(iso_is_2_20, error(type_error(evaluable,foo/0),_)) :-
-		{_X is '*'(foo, 77)}.
+		% try to delay the error to runtime
+		foo(Foo),
+		{_X is '*'(Foo, 77)}.
 
 	succeeds(iso_is_2_21) :-
 		% example fixed in ISO/IEC 13211-1:1995/Cor.1:2007
@@ -131,11 +143,14 @@
 		(X == -2; X == -3).
 
 	throws(iso_is_2_27, error(instantiation_error,_)) :-
-		% try to delay the expected error to runtime
-		{G = (_X is '/'(77, _N)), call(G)}.
+		% try to delay the error to runtime
+		variable(N),
+		{_X is '/'(77, N)}.
 
 	throws(iso_is_2_28, error(type_error(evaluable,foo/0),_)) :-
-		{_X is '/'(foo, 77)}.
+		% try to delay the error to runtime
+		foo(Foo),
+		{_X is '/'(Foo, 77)}.
 
 	throws(iso_is_2_29, error(evaluation_error(zero_divisor),_)) :-
 		% try to delay the expected error to runtime
@@ -154,11 +169,14 @@
 		X == -1.
 
 	throws(iso_is_2_33, error(instantiation_error,_)) :-
-		% try to delay the expected error to runtime
-		{G = (_X is mod(77, _N)), call(G)}.
+		% try to delay the error to runtime
+		variable(N),
+		{_X is mod(77, N)}.
 
 	throws(iso_is_2_34, error(type_error(evaluable,foo/0),_)) :-
-		{_X is mod(foo, 77)}.
+		% try to delay the error to runtime
+		foo(Foo),
+		{_X is mod(Foo, 77)}.
 
 	throws(iso_is_2_35, error(type_error(integer,7.5),_)) :-
 		% try to delay the expected error to runtime
@@ -189,8 +207,9 @@
 		X == -1.
 
 	throws(iso_is_2_42, error(instantiation_error,_)) :-
-		% try to delay the expected error to runtime
-		{G = (_X is round(_N)), call(G)}.
+		% try to delay the error to runtime
+		variable(N),
+		{_X is round(N)}.
 
 	succeeds(iso_is_2_43) :-
 		{X is ceiling(-0.5)},
@@ -201,7 +220,9 @@
 		X == 0.
 
 	throws(iso_is_2_45, error(type_error(evaluable,foo/0),_)) :-
-		{_X is truncate(foo)}.
+		% try to delay the error to runtime
+		foo(Foo),
+		{_X is truncate(Foo)}.
 
 	succeeds(iso_is_2_46) :-
 		{X is float(7)},
@@ -217,11 +238,14 @@
 		X == 1.0.
 
 	throws(iso_is_2_49, error(instantiation_error,_)) :-
-		% try to delay the expected error to runtime
-		{G = (_X is float(_N)), call(G)}.
+		% try to delay the error to runtime
+		variable(N),
+		{_X is float(N)}.
 
 	throws(iso_is_2_50, error(type_error(evaluable,foo/0),_)) :-
-		{_X is float(foo)}.
+		% try to delay the error to runtime
+		foo(Foo),
+		{_X is float(Foo)}.
 
 	succeeds(iso_is_2_51) :-
 		{X is abs(7)},
@@ -236,11 +260,14 @@
 		X == 7.8.
 
 	throws(iso_is_2_54, error(instantiation_error,_)) :-
-		% try to delay the expected error to runtime
-		{G = (_X is abs(_N)), call(G)}.
+		% try to delay the error to runtime
+		variable(N),
+		{_X is abs(N)}.
 
 	throws(iso_is_2_55, error(type_error(evaluable,foo/0),_)) :-
-		{_X is abs(foo)}.
+		% try to delay the error to runtime
+		foo(Foo),
+		{_X is abs(Foo)}.
 
 	:- if(current_prolog_flag(bounded, true)).
 
@@ -261,5 +288,9 @@
 		{current_prolog_flag(max_integer, MI), R is float(MI)*2, _X is floor(R)}.
 
 	:- endif.
+
+	variable(_).
+
+	foo(foo).
 
 :- end_object.
