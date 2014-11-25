@@ -3,8 +3,8 @@
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
-%  Adapter file for JIProlog 4.0.0-13 or later versions
-%  Last updated on November 14, 2014
+%  Adapter file for JIProlog 4.0.1-1 or later versions
+%  Last updated on November 25, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -41,20 +41,10 @@
 % '$lgt_iso_predicate'(?callable).
 
 '$lgt_iso_predicate'(acyclic_term(_)).
-'$lgt_iso_predicate'(sub_atom(_,_,_,_,_)).
 '$lgt_iso_predicate'(subsumes_term(_, _)).
 
 
 acyclic_term(_).
-
-
-sub_atom(Atom, Before, Length, After, SubAtom) :-
-	% just an hack!
-	atom_concat(Prefix, Suffix, Atom),
-	atom_concat(BeforeAtom, SubAtom, Prefix),
-	atom_length(SubAtom, Length),
-	atom_length(BeforeAtom, Before),
-	atom_length(Suffix, After).
 
 
 subsumes_term(General, Specific) :-
@@ -91,19 +81,6 @@ subsumes_term(General, Specific) :-
 	).
 
 
-% call/2-5 -- built-in
-
-% call/6-7
-
-call(F, A1, A2, A3, A4, A5) :-
-	Call =.. [F, A1, A2, A3, A4, A5],
-	Call.
-
-call(F, A1, A2, A3, A4, A5, A6) :-
-	Call =.. [F, A1, A2, A3, A4, A5, A6],
-	Call.
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -119,8 +96,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 % '$lgt_predicate_property'(+callable, ?predicate_property)
 
 '$lgt_predicate_property'(Pred, Prop) :-
-	functor(Pred, Functor, Arity),
-	predicate_property(Functor/Arity, Prop).
+	predicate_property(Pred, Prop).
 
 
 
@@ -131,31 +107,10 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% between(+integer, +integer, ?integer)
-
-between(Lower, Upper, Integer) :-
-	integer(Lower),
-	integer(Upper),
-	(	var(Integer) ->
-		Lower =< Upper,
-		'$lgt_ji_generate'(Lower, Upper, Integer)
-	;	integer(Integer),
-		Lower =< Integer,
-		Integer =< Upper
-	).
-
-'$lgt_ji_generate'(Lower, _, Lower).
-'$lgt_ji_generate'(Lower, Upper, Integer) :-
-	Lower < Upper,
-	Next is Lower + 1,
-	'$lgt_ji_generate'(Next, Upper, Integer).
+% between(+integer, +integer, ?integer) -- built-in
 
 
-% findall(?term, +callable, ?list, +list)
-
-findall(Term, Goal, List, Tail) :-
-	findall(Term, Goal, List0),
-	append(List0, Tail, List).
+% findall(?term, +callable, ?list, +list) -- built-in
 
 
 % forall(+callable, +callable) -- built-in
@@ -225,10 +180,7 @@ format(Format, Arguments) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% setup_call_cleanup(+callable, +callable, +callable)
-
-setup_call_cleanup(_, _, _) :-
-	throw(not_supported(setup_call_cleanup/3)).
+% setup_call_cleanup(+callable, +callable, +callable) -- built-in
 
 
 
@@ -307,7 +259,7 @@ setup_call_cleanup(_, _, _) :-
 '$lgt_prolog_feature'(prolog_dialect, ji).
 '$lgt_prolog_feature'(prolog_version, (Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, jiprolog(Major, Minor, Patch, _)).
-'$lgt_prolog_feature'(prolog_compatible_version, @>=((4,0,0))).
+'$lgt_prolog_feature'(prolog_compatible_version, @>=((4,0,1))).
 '$lgt_prolog_feature'(prolog_conformance, iso_lax).
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).

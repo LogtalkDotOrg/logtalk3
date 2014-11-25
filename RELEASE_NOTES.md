@@ -51,6 +51,8 @@ predicate to also generate `.xwam` files when using the `logtalk_compile/1-2`
 built-in predicates. Also added note that XSB implements the de facto standard
 `findall/4` predicate.
 
+* UPDATED: The JIProlog adapter file for the changes in the latest betas.
+
 Library
 -------
 
