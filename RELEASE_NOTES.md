@@ -28,6 +28,12 @@ RELEASE NOTES
 3.00.0 Release Candidate 7 - November ??, 2014
 ==============================================
 
+Logtalk compiler and runtime
+----------------------------
+
+* IMPROVED: The compiler now generates more informative exception terms when
+an invalid `encoding/1` directive is found.
+
 Prolog adapter and integration files
 ------------------------------------
 

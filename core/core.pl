@@ -5331,6 +5331,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	% the conversion between Logtalk and Prolog encodings is defined in the adapter files
 		'$lgt_logtalk_prolog_encoding'(LogtalkEncoding, PrologEncoding, Input) ->
 		assertz('$lgt_pp_file_encoding_'(LogtalkEncoding, PrologEncoding)),
+		% close and reopen the source file using the specified encoding
 		'$lgt_close'(Input),
 		'$lgt_open'(Source, read, NewInput, [alias(logtalk_compiler_input), encoding(PrologEncoding)]),
 		(	catch(stream_property(NewInput, bom(Boolean)), _, fail) ->
@@ -5342,10 +5343,12 @@ current_logtalk_flag(Flag, Value) :-
 			BOM = [encoding_signature(Boolean)]
 		;	BOM = []
 		),
-		% throw away encoding/1 directive
+		% throw away the already processed encoding/1 directive
 		'$lgt_read_term'(NewInput, _, [singletons(_)], _)
 	;	% encoding not recognized
-		throw(error(domain_error(directive, encoding/1), directive(encoding(LogtalkEncoding))))
+		atom(LogtalkEncoding) ->
+		throw(error(domain_error(text_encoding, LogtalkEncoding), directive(encoding(LogtalkEncoding))))
+	;	throw(error(type_error(atom, LogtalkEncoding), directive(encoding(LogtalkEncoding))))
 	).
 
 % assume no encoding/1 directive present on the source file
