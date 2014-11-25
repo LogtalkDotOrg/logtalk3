@@ -37,6 +37,9 @@ an invalid `encoding/1` directive is found.
 * IMPROVED: The compiler now generates a warning when finding and ignoring an
 `encoding/1` directive that is not the first term in a source file.
 
+* IMPROVED: The compiler nows performs basic error checking of file-level
+`dynamic/1` and `discontiguous/1` directives.
+
 Prolog adapter and integration files
 ------------------------------------
 

@@ -6758,6 +6758,11 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_comp_ctx_position'(Ctx, Position),
 	assertz('$lgt_pp_prolog_term_'((:- use_module(File, Imports)), Position)).
 
+'$lgt_compile_file_directive'(include(File), Ctx) :-
+	!,
+	'$lgt_read_file_to_terms'(File, Terms),
+	'$lgt_compile_file_terms'(Terms, Ctx).
+
 '$lgt_compile_file_directive'(initialization(Goal), Ctx) :-
 	'$lgt_must_be'(callable, Goal),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
@@ -6812,10 +6817,33 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_must_be'(predicate_indicator, Pred),
 	throw(permission_error(declare, multifile, Obj::Pred)).
 
-'$lgt_compile_file_directive'(include(File), Ctx) :-
-	!,
-	'$lgt_read_file_to_terms'(File, Terms),
-	'$lgt_compile_file_terms'(Terms, Ctx).
+'$lgt_compile_file_directive'(dynamic(Preds), _) :-
+	% perform basic error checking
+	'$lgt_flatten_to_list'(Preds, PredsFlatted),
+	(	'$lgt_member'(Obj::Pred, PredsFlatted) ->
+		% Logtalk entity dynamic predicates must be defined within an entity but
+		% be sure there aren't instantiation or type errors in the directive
+		'$lgt_must_be'(object_identifier, Obj),
+		'$lgt_must_be'(predicate_indicator, Pred),
+		throw(permission_error(declare, (dynamic), Obj::Pred))
+	;	'$lgt_member'(Pred, PredsFlatted),
+		\+ '$lgt_valid_predicate_or_non_terminal_indicator'(Pred, _, _),
+		throw(type_error(predicate_indicator, Pred))
+	).
+
+'$lgt_compile_file_directive'(discontiguous(Preds), _) :-
+	% perform basic error checking
+	'$lgt_flatten_to_list'(Preds, PredsFlatted),
+	(	'$lgt_member'(Obj::Pred, PredsFlatted) ->
+		% Logtalk entity discontiguous predicates must be defined within an entity but
+		% be sure there aren't instantiation or type errors in the directive
+		'$lgt_must_be'(object_identifier, Obj),
+		'$lgt_must_be'(predicate_indicator, Pred),
+		throw(permission_error(declare, (discontiguous), Obj::Pred))
+	;	'$lgt_member'(Pred, PredsFlatted),
+		\+ '$lgt_valid_predicate_or_non_terminal_indicator'(Pred, _, _),
+		throw(type_error(predicate_indicator, Pred))
+	).
 
 '$lgt_compile_file_directive'(Directive, Ctx) :-
 	'$lgt_comp_ctx_position'(Ctx, Position),
