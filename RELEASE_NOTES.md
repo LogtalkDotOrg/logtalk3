@@ -34,6 +34,9 @@ Logtalk compiler and runtime
 * IMPROVED: The compiler now generates more informative exception terms when
 an invalid `encoding/1` directive is found.
 
+* IMPROVED: The compiler now generates a warning when finding and ignoring an
+`encoding/1` directive that is not the first term in a source file.
+
 Prolog adapter and integration files
 ------------------------------------
 

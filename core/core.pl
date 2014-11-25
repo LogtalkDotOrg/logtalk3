@@ -6724,8 +6724,10 @@ current_logtalk_flag(Flag, Value) :-
 % entity error-checking is delegated in most cases to the back-end Prolog compiler
 
 '$lgt_compile_file_directive'(encoding(_), _) :-
-	% the encoding/1 directive is already processed
-	!.
+	!,
+	% out-of-place encoding/1 directive, which must be the first term in a source file
+	'$lgt_warning_context'(SourceFile, _, Lines),
+	'$lgt_print_message'(warning(general), core, ignored_directive(SourceFile, Lines, encoding/1)).
 
 '$lgt_compile_file_directive'(ensure_loaded(File), Ctx) :-
 	!,
