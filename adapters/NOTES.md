@@ -4,7 +4,7 @@ This file is part of Logtalk <http://logtalk.org/>
 Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 
 Notes on supported backend Prolog compilers
-Last updated on May 26, 2014
+Last updated on November 25, 2014
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -375,11 +375,12 @@ or perform the first run of the integration scripts from a user with the
 required privileges (e.g. using `sudo` on POSIX systems or choosing `Run as
 administrator` on Windows systems).
 
-Due to the long release cycle of XSB, you may need to use its development
-version if the recommended version is not yet available as a stable release.
+Due to the relative long release cycle of XSB, you may need to use its
+development version if the recommended version is not yet available as
+a stable release.
 
-Know issue in XSB 3.5.0: this version doesn't support static multifile
-predicates. This limitation may be fixed in later versions.
+A know issue in XSB 3.5.0 is that this version doesn't support static
+multifile predicates. This limitation may be fixed in later versions.
 
 The definition of the `as` operator used in Logtalk when declaring predicate
 (or non-terminal) aliases conflicts with the definition of this operator in
@@ -389,6 +390,11 @@ a conflict when, in the same `table/1` directive, more than one predicate is
 declared as tabled and/or when more than one tabling option is specified.
 This cases are not common, however. The workaround is to use parenthesis
 around the predicates and/or the tabling options.
+
+To generate `.xwam` files from Logtalk source files, set the `prolog_compiler`
+flag to the list of options that will be passed to the XSB `compile/2` built-in
+predicate and use either the built-in predicates `logtalk_compile/1-2` or the
+built-in predicates `logtalk_load/1-2` with the `clean` flag turned off.
 
 
 YAP 6.3.4 and later versions

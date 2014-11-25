@@ -40,7 +40,7 @@ command). The default path for the Logtalk user folder is:
 1. DEFINING A DEFAULT PROLOG BACK-END COMPILER
 ----------------------------------------------
 
-Users of POSIX systems may use the `logtalk_backend_select` shell command
+Users of POSIX systems may use the `logtalk_backend_select` shell script
 to define an alias, `logtalk`, for one of the provided back-end Prolog
 compiler integration scripts.
 
@@ -55,9 +55,8 @@ instead of the full library paths.
 
 Inside your Logtalk user folder, you will find a `paths` folder containing 
 a sample file which, when loaded, defines the library paths for the Logtalk 
-standard library and for all the supplied examples. This file may need to be 
-edited to match both your Logtalk installation and your Prolog compiler and 
-operating-system requirements. For details, see the `paths/NOTES.md` file.
+standard library and for all the supplied examples. For details, see the
+`paths/NOTES.md` file.
 
 Library paths for your own source files directories are preferably defined in
 your settings file, described next.
@@ -75,7 +74,7 @@ the User Manual).
 
 The default compiler flag settings are appropriated for the *development* (but
 likely not for the *deployment*) of applications. Check the example settings on
-the `settings-sample.lgt` for suggestions.
+the `settings-sample.lgt` for configuration suggestions.
 
 You may customize the Logtalk compiler flags and add your own library paths
 by copy or renaming the `settings-sample.lgt` file in your Logtalk user folder
@@ -88,7 +87,7 @@ to change include:
 
 * `scratch_directory`  
     to move compiler generated temporary files out of the way or to
-    collect them for embedding Logtalk applications
+    collect them in a single place for embedding Logtalk applications
 
 * `portability` and `underscore_variables`  
     essential if you're writing portable Logtalk applications
@@ -107,10 +106,10 @@ containing a set of shell scripts, CSS and XSLT style-sheets, and DTD and
 XML Schema files for processing the XML documenting files that are generated 
 from the source data collected when compiling source files. You may want to
 customize the CSS and XSLT files to modify the layout or style of the resulting
-PDF/(X)HTML files or to write new scripts and transformations to generate other
-formats. You may also edit the file `custom.ent` in order to specify XML entities
-for your personal data that can be used on Logtalk documenting directives. For
-details, see the `tools/lgtdoc/NOTES.md` file.
+Markdown/XML/PDF/(X)HTML files or to write new scripts and transformations to
+generate other formats. You may also edit the file `custom.ent` in order to
+specify XML entities for your personal data that can be used with the Logtalk
+documenting directives. For details, see the `tools/lgtdoc/NOTES.md` file.
 
 
 5. ADDING LOGTALK SUPPORT TO TEXT EDITORS
@@ -119,5 +118,6 @@ details, see the `tools/lgtdoc/NOTES.md` file.
 Inside your Logtalk user folder, you will find a `coding` folder, containing 
 support files for several text editors, which add support for syntax 
 highlighting and other text editing services for Logtalk source files.
-Support for several syntax highlighters (used e.g. by wikis and issue
-trackers) is also included. For details, see the `coding/NOTES.md` file.
+Support for several syntax highlighters (used e.g. in web pages and in wikis
+and issue trackers) is also included. For details, see the `coding/NOTES.md`
+file.

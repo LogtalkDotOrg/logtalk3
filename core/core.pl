@@ -67,7 +67,7 @@
 :- op(400, yfx, >>).
 
 
-% predicate alias operator (alternative to use the operators ::/2 or :/2 depending on the context)
+% predicate alias operator (alternative to the ::/2 or :/2 operators depending on the context)
 :- op(700, xfx, as).
 
 
@@ -5114,7 +5114,8 @@ current_logtalk_flag(Flag, Value) :-
 % another loader file; propagating a file loading failure to its parent files
 % provides better top-level usability allowing realoding of fixed files by
 % simply relaoding the loader files, which also ensures loading of any files
-% loaded after the broken file that were not loaded in the previous attempt
+% to be loaded after the broken file that were not loaded in the previous
+% attempt
 
 '$lgt_propagate_failure_to_parent_files'(File) :-
 	(	'$lgt_parent_file_'(File, Parent) ->
