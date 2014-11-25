@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for XSB 3.5.0 or later versions
-%  Last updated on November 4, 2014
+%  Last updated on November 25, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -59,6 +59,9 @@
 % between(+integer, +integer, ?integer)
 
 :- import between/3 from basics.
+
+
+% findall(?term, +callable, ?list, +list) -- built-in
 
 
 % forall(+callable, +callable) -- built-in
@@ -361,7 +364,8 @@ setup_call_catcher_cleanup(Setup, Call, Catcher, Cleanup) :-
 % compile to disk a Prolog file, resulting from a
 % Logtalk source file, given a list of options
 
-'$lgt_compile_prolog_code'(_, _, _).
+'$lgt_compile_prolog_code'(File, _, Options) :-
+	compile(File, Options).
 
 
 % '$lgt_load_prolog_code'(+atom, +atom, +list)
