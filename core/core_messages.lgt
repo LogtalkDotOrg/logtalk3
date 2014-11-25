@@ -301,6 +301,10 @@
 		['Use of non-standard Prolog flag: ~q:~q'-[Flag, Value], nl],
 		message_context(File, Lines).
 
+	logtalk::message_tokens(non_standard_file_directive(File, Lines, Directive), core) -->
+		['Use of non-standard file directive: ~q'-[Directive], nl],
+		message_context(File, Lines).
+
 	logtalk::message_tokens(unclassified_variables_in_lambda_expression(File, Lines, Type, Entity, UnqualifiedVars, LambdaExpression), core) -->
 		{ground_term_copy(UnqualifiedVars-LambdaExpression, UnqualifiedVarsCopy-LambdaExpressionCopy)},
 		(	{UnqualifiedVarsCopy = [UnqualifiedVarCopy]} ->

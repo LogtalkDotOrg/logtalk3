@@ -6773,6 +6773,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_file_directive'(initialization(Goal), _) :-
 	!,
+	% perform basic error checking
 	'$lgt_must_be'(callable, Goal),
 	% initialization directives are collected and moved to the end of file
 	% to minimize compatibility issues with backend Prolog compilers
@@ -6846,9 +6847,17 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 '$lgt_compile_file_directive'(Directive, Ctx) :-
-	'$lgt_comp_ctx_position'(Ctx, Position),
 	% directive will be copied to the generated Prolog file
-	assertz('$lgt_pp_prolog_term_'((:- Directive), Position)).
+	'$lgt_comp_ctx_position'(Ctx, Position),
+	assertz('$lgt_pp_prolog_term_'((:- Directive), Position)),
+	% report a possible portability issue if warranted
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+		'$lgt_compiler_flag'(portability, warning),
+		\+ '$lgt_file_directive'(Directive),
+		'$lgt_warning_context'(SourceFile, _, Lines),
+		'$lgt_print_message'(warning(portability), core, non_standard_file_directive(SourceFile, Lines, Directive))
+	;	true
+	).
 
 
 
@@ -15828,6 +15837,25 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_is_conditional_compilation_directive'((:- Directive)) :-
 	nonvar(Directive),
 	'$lgt_conditional_compilation_directive'(Directive).
+
+
+
+% '$lgt_file_directive'(@callable)
+%
+% standard file-level directives (used for portability checking)
+
+'$lgt_file_directive'(discontiguous(_)).
+'$lgt_file_directive'(dynamic(_)).
+'$lgt_file_directive'(multifile(_)).
+'$lgt_file_directive'(encoding(_)).
+'$lgt_file_directive'(include(_)).
+'$lgt_file_directive'(use_module(_)).
+'$lgt_file_directive'(use_module(_, _)).
+'$lgt_file_directive'(ensure_loaded(_)).
+'$lgt_file_directive'(set_prolog_flag(_, _)).
+'$lgt_file_directive'(set_logtalk_flag(_, _)).
+'$lgt_file_directive'(initialization(_)).
+'$lgt_file_directive'(op(_, _, _)).
 
 
 

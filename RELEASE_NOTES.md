@@ -40,6 +40,9 @@ an invalid `encoding/1` directive is found.
 * IMPROVED: The compiler nows performs basic error checking of file-level
 `dynamic/1` and `discontiguous/1` directives.
 
+* IMPROVED: When the `portability` flag is set to `warning`, the compiler now
+reports the use of non-standard file-level directives.
+
 Prolog adapter and integration files
 ------------------------------------
 
