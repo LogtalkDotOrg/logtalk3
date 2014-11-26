@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Default library paths 
-%  Last updated on November 2, 2014
+%  Last updated on November 26, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -33,13 +33,9 @@ logtalk_library_path(home, HOME) :-
 		% likely a POSIX system but Windows users
 		% may also define this environment variable
 		HOME = '$HOME/'
-	;	'$lgt_environment_variable'('COMSPEC', _) ->
+	;	'$lgt_environment_variable'('USERPROFILE', _) ->
 		% Windows systems define this environment variable
-		'$lgt_environment_variable'('HOMEDRIVE', _),
-		'$lgt_environment_variable'('HOMEPATH', _),
-		% this definition only works for some back-end
-		% Prolog compilers such as SWI-Prolog
-		HOME = '$HOMEDRIVE/$HOMEPATH/'
+		HOME = '$USERPROFILE/'
 	;	fail
 	).
 

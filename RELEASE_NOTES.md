@@ -43,6 +43,11 @@ an invalid `encoding/1` directive is found.
 * IMPROVED: When the `portability` flag is set to `warning`, the compiler now
 reports the use of non-standard file-level directives.
 
+* FIXED: Updated the `paths/paths.pl` file to define the library `home` using
+the `USERPROFILE` environment variable when running on Windows instead of the
+concatenation of the `HOMEDRIVE` and `HOMEPATH` variables, which only worked
+with some backend Prolog compilers.
+
 Prolog adapter and integration files
 ------------------------------------
 
