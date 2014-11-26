@@ -211,7 +211,7 @@ Type: filesandordirs; Name: "{group}"; Components: base
 var
   LgtUserDirPage: TInputDirWizardPage;
   WarningPage, ErrorPage: TOutputMsgWizardPage;
-  Explanation, Warning, Error, BackupFolder: String;
+  Explanation, Warning, Error: String;
   CancelWithoutPrompt: boolean;
 
 function GetLgtUserDir(Param: String): String;
