@@ -43,6 +43,9 @@ an invalid `encoding/1` directive is found.
 * IMPROVED: When the `portability` flag is set to `warning`, the compiler now
 reports the use of non-standard file-level directives.
 
+* CHANGED: Also use the `bom/1` source file property when using SICStus Prolog
+as the backend compiler.
+
 * FIXED: Compiler bug where `encoding/1` and `bom/1` source file properties
 would not be saved together with all the other information about loaded files.
 
@@ -53,6 +56,9 @@ with some backend Prolog compilers.
 
 Prolog adapter and integration files
 ------------------------------------
+
+* UPDATED: The SICStus Prolog adapter file now converts any `bom/1` option
+passed to the `open/4` predicate into an `encoding_signature/1` option.
 
 * UPDATED: The adapter file for XSB now uses this system `compile/2` built-in
 predicate to also generate `.xwam` files when using the `logtalk_compile/1-2`

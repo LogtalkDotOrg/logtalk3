@@ -5350,13 +5350,13 @@ current_logtalk_flag(Flag, Value) :-
 		% close and reopen the source file using the specified encoding
 		'$lgt_close'(Input),
 		'$lgt_open'(Source, read, NewInput, [alias(logtalk_compiler_input), encoding(PrologEncoding)]),
-		(	catch(stream_property(NewInput, bom(Boolean)), _, fail) ->
-			% SWI-Prolog and YAP
+		(	(	catch(stream_property(NewInput, bom(Boolean)), _, fail)
+				% SWI-Prolog and YAP
+			;	catch(stream_property(NewInput, encoding_signature(Boolean)), _, fail)
+				% SICStus Prolog
+			) ->
 			BOM = [bom(Boolean)],
 			assertz('$lgt_pp_file_bom_'(bom(Boolean)))
-		;	catch(stream_property(NewInput, encoding_signature(Boolean)), _, fail) ->
-			% SICStus Prolog
-			BOM = [encoding_signature(Boolean)]
 		;	BOM = []
 		),
 		% throw away the already processed encoding/1 directive

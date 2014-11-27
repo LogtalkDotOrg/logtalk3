@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SICStus Prolog 4.1.0 and later versions
-%  Last updated on November 4, 2014
+%  Last updated on November 27, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -29,6 +29,7 @@
 :- use_module(library(file_systems)).
 :- use_module(library(system)).
 :- use_module(library(system3), [pid/1, shell/1, shell/2]).
+:- use_module(library(lists), [select/3]).
 
 % disable SICStus Prolog discontiguous predicate clauses warning
 % as the Logtalk compiler does its own detection and there's no
@@ -564,7 +565,10 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 % '$lgt_open'(+atom, +atom, -stream, @list)
 
 '$lgt_open'(File, Mode, Stream, Options) :-
-	open(File, Mode, Stream, Options).
+	(	select(bom(Boolean), Options, OtherOptions) ->
+		open(File, Mode, Stream, [encoding_signature(Boolean)| OtherOptions])
+	;	open(File, Mode, Stream, Options)
+	).
 
 
 % '$lgt_close'(@stream)
