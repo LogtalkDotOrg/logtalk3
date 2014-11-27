@@ -4854,7 +4854,7 @@ current_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_failed_file_'(SourceFile)),
 	% remember the file was loaded before it is successfully compiled and loaded
 	% so that we can use the make feature to reload it in case of error
-	'$lgt_update_loaded_file'(Directory, Basename, SourceFile, Flags, ObjectFile),
+	'$lgt_pre_register_loaded_file'(Directory, Basename, SourceFile, Flags, ObjectFile),
 	% save the file loading dependency on a parent file if it exists
 	(	'$lgt_file_loading_stack_'(ParentSourceFile) ->
 		retractall('$lgt_parent_file_'(SourceFile, _)),
@@ -4867,10 +4867,25 @@ current_logtalk_flag(Flag, Value) :-
 	% compile and load the intermediate Prolog file
 	asserta('$lgt_file_loading_stack_'(SourceFile)),
 	'$lgt_load_compiled_file'(SourceFile, ObjectFile),
+	'$lgt_register_loaded_file'(Directory, Basename, SourceFile, Flags, ObjectFile),
 	retractall('$lgt_file_loading_stack_'(SourceFile)).
 
 
-'$lgt_update_loaded_file'(Directory, Basename, Path, Flags, ObjectFile) :-
+'$lgt_pre_register_loaded_file'(Directory, Basename, Path, Flags, ObjectFile) :-
+	% compilation of the file may have failed in previous attempt;
+	% ensure that there aren't duplicate entries
+	retractall('$lgt_loaded_file_'(Basename, Directory, _, _, _, _, _)),
+	(	'$lgt_compiler_flag'(debug, on) ->
+		Mode = debug
+	;	'$lgt_compiler_flag'(optimize, on) ->
+		Mode = optimal
+	;	Mode = normal
+	),
+	'$lgt_file_modification_time'(Path, TimeStamp),
+	assertz('$lgt_loaded_file_'(Basename, Directory, Mode, Flags, [], ObjectFile, TimeStamp)).
+
+
+'$lgt_register_loaded_file'(Directory, Basename, Path, Flags, ObjectFile) :-
 	% compilation of the file may have failed in previous attempt;
 	% ensure that there aren't duplicate entries
 	retractall('$lgt_loaded_file_'(Basename, Directory, _, _, _, _, _)),
