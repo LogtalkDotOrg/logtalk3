@@ -92,6 +92,8 @@ the current locale and the logging of failed test results.
 Tests
 -----
 
+* ADDED: Unit tests for the `encoding/1` Logtalk directive.
+
 * UPDATED: Prolog conformance tests for the built-in arithmetic comparison
 predicates and the `is/2` predicate to try to delay errors in expressions to
 runtime to properly test the expected exception terms.
