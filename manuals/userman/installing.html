@@ -56,10 +56,12 @@ Logtalk is compatible with almost any computer/operating-system with a modern Pr
 <h3 id="installing_compiler">Prolog compiler</h3>
 
 <p>
-In writing Logtalk I have tried to follow the current ISO Prolog Part 1 standard whenever possible. Capabilities needed by Logtalk that are not defined in the ISO standard are:
+Logtalk requires a backend Prolog compiler supporting official and de facto standards. Capabilities needed by Logtalk that are not defined in the official ISO Prolog Core standard include:
 </p>
 <ul>
-	<li>access to predicate properties (<code>dynamic</code>, <code>static</code>, <code>built_in</code>)</li>
+	<li>access to predicate properties</li>
+	<li>operating-system access predicates</li>
+	<li>de facto standard predicates not (yet) specified in the official standard</li>
 </ul>
 <p>
 Logtalk needs access to the predicate property <code>built_in</code> to properly compile objects and categories that contain Prolog built-in predicates calls. In addition, some Logtalk built-ins need to know the dynamic/static status of predicates to ensure correct application. The ISO standard for Prolog modules defines a <code>predicate_property/2</code> predicate that is already implemented by most Prolog compilers. Note that if these capabilities are not built-in the user cannot easily define them.</p>
@@ -73,7 +75,7 @@ Since most Prolog compilers are moving closer to the ISO Prolog standard <a href
 <h2 id="installing_installers">Logtalk installers</h2>
 
 <p>
-Logtalk installers are available for MacOS X, Linux, and Microsoft Windows 2000/XP/2003. Depending on the chosen installer, some tasks (e.g. setting environment variables or integrating Logtalk with some Prolog compilers) may need to be performed manually. 
+Logtalk installers are available for MacOS X, Linux, and Microsoft Windows. Depending on the chosen installer, some tasks (e.g. setting environment variables or integrating Logtalk with some Prolog compilers) may need to be performed manually. 
 </p>
 
 <h2 id="installing_sources">Source distribution</h2>
@@ -83,7 +85,7 @@ Logtalk sources are available in a <code>tar</code> archive compressed with <cod
 </p>
 <pre>% tar -jxvf lgt3xxx.tar.bz2</pre>
 <p>
-This will create a sub-directory named <code>lgt3xxx</code> in your current directory. Almost all files in the Logtalk distribution are text files. Different operating-systems use different end-of-line codes for text files. Ensure that your decompressing utility convert the end-of-lines of all text files to match your operating system.
+This will create a sub-directory named <code>lgt3xxx</code> in your current directory. Almost all files in the Logtalk distribution are text files. Different operating-systems use different end-of-line codes for text files. Ensure that your decompressing utility converts the end-of-lines of all text files to match your operating system.
 </p>
 
 <h2 id="installing_organization">Directories and files organization</h2>
@@ -323,7 +325,7 @@ Logtalk source files are text files containing one or more entity definitions (o
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &ndash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: November 4, 2014</span>
+		<span>Last updated on: November 27, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="documenting.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="programming.html">next</a></span><br/>
