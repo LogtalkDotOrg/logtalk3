@@ -58,7 +58,8 @@ Prolog adapter and integration files
 ------------------------------------
 
 * UPDATED: The SICStus Prolog adapter file now converts any `bom/1` option
-passed to the `open/4` predicate into an `encoding_signature/1` option.
+passed to the internal `'$lgt_open'/4` predicate into the expected
+`encoding_signature/1` option.
 
 * UPDATED: The adapter file for XSB now uses this system `compile/2` built-in
 predicate to also generate `.xwam` files when using the `logtalk_compile/1-2`
