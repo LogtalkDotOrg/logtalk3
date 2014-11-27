@@ -4816,8 +4816,8 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_object_file_name'(Directory, Name, Extension, ObjectFile),
 	atom_concat(Name, Extension, Basename),
 	assertz('$lgt_pp_file_data_'(Basename, Directory, SourceFile, ObjectFile)),
-	% change the directory to the directory of the file being loaded as it can be
-	% a loader file loading other files in its directory using a relative path
+	% change the current directory to the directory of the file being loaded as it can
+	% be a loader file loading other files in its directory using a relative path
 	'$lgt_current_directory'(Current),
 	'$lgt_change_directory'(Directory),
 	(	'$lgt_loaded_file_'(Basename, Directory, PreviousMode, PreviousFlags, _, _, LoadingTimeStamp),
@@ -5244,8 +5244,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	% SourceExtension = ''
 		ObjectName = SourceName
 	),
-	% file extensions are defined in the Prolog adapter files (there
-	% might be multiple extensions defined for the same type of file)
+	% there must be a single object file extension defined in the Prolog adapter files
 	'$lgt_file_extension'(object, ObjectExtension),
 	atom_concat(ObjectName, ObjectExtension, ObjectBasename),
 	atom_concat(ObjectDirectory0, ObjectBasename, ObjectFile0),
@@ -6456,6 +6455,7 @@ current_logtalk_flag(Flag, Value) :-
 	throw(error(type_error(callable, ExpandedTerm), term_expansion(Term, ExpandedTerm))).
 
 '$lgt_compile_expanded_term'(ExpandedTerm, _, Ctx) :-
+	% fact
 	'$lgt_compile_clause'(ExpandedTerm, Ctx).
 
 
@@ -6509,6 +6509,7 @@ current_logtalk_flag(Flag, Value) :-
 	throw(error(type_error(callable, Term), term(Term))).
 
 '$lgt_compile_runtime_term'(Term, Ctx) :-
+	% fact
 	'$lgt_compile_clause'(Term, Ctx).
 
 
@@ -13488,7 +13489,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_generate_def_table_clauses'(Ctx) :-
 	\+ '$lgt_pp_dynamic_',
 	% static entities only otherwise abolishing the dynamic entity would result
-	% in an attempt to retract all clauses the fail/0 built-in control construct
+	% in an attempt to retract a clause for the fail/0 built-in control construct
 	(	'$lgt_pp_public_'(Functor, Arity)
 	;	'$lgt_pp_protected_'(Functor, Arity)
 	;	'$lgt_pp_private_'(Functor, Arity)
@@ -13586,6 +13587,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_generate_protocol_catchall_clauses'(Dcl) :-
 	(	'$lgt_pp_dcl_'(_) ->
+		% local or inherited predicate declarations
 		true
 	;	% empty, standalone protocol
 		'$lgt_pp_dynamic_' ->
@@ -13682,6 +13684,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_generate_category_catchall_dcl_clauses'(Dcl) :-
 	(	'$lgt_pp_dcl_'(_) ->
+		% local or inherited predicate declarations
 		true
 	;	% standalone category with no local or inherited predicate declarations
 		'$lgt_pp_dynamic_' ->
