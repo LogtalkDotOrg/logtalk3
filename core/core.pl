@@ -4867,7 +4867,7 @@ current_logtalk_flag(Flag, Value) :-
 	% compile and load the intermediate Prolog file
 	asserta('$lgt_file_loading_stack_'(SourceFile)),
 	'$lgt_load_compiled_file'(SourceFile, ObjectFile),
-	'$lgt_register_loaded_file'(Directory, Basename, SourceFile, Flags, ObjectFile),
+	'$lgt_register_loaded_file'(Directory, Basename),
 	retractall('$lgt_file_loading_stack_'(SourceFile)).
 
 
@@ -4875,26 +4875,22 @@ current_logtalk_flag(Flag, Value) :-
 	% compilation of the file may have failed in previous attempt;
 	% ensure that there aren't duplicate entries
 	retractall('$lgt_loaded_file_'(Basename, Directory, _, _, _, _, _)),
+	% the make predicate will reload a file if the compilation mode changed ...
 	(	'$lgt_compiler_flag'(debug, on) ->
 		Mode = debug
 	;	'$lgt_compiler_flag'(optimize, on) ->
 		Mode = optimal
 	;	Mode = normal
 	),
+	% ... or if the file modification date changed (e.g. to fix compilation errors)
 	'$lgt_file_modification_time'(Path, TimeStamp),
 	assertz('$lgt_loaded_file_'(Basename, Directory, Mode, Flags, [], ObjectFile, TimeStamp)).
 
 
-'$lgt_register_loaded_file'(Directory, Basename, Path, Flags, ObjectFile) :-
-	% compilation of the file may have failed in previous attempt;
-	% ensure that there aren't duplicate entries
-	retractall('$lgt_loaded_file_'(Basename, Directory, _, _, _, _, _)),
-	(	'$lgt_compiler_flag'(debug, on) ->
-		Mode = debug
-	;	'$lgt_compiler_flag'(optimize, on) ->
-		Mode = optimal
-	;	Mode = normal
-	),
+'$lgt_register_loaded_file'(Directory, Basename) :-
+	% retract prelimirary regist
+	retract('$lgt_loaded_file_'(Basename, Directory, Mode, Flags, _, ObjectFile, TimeStamp)), !,
+	% compute text properties, which are only available after successful file compilation
 	(	'$lgt_pp_file_encoding_'(Encoding, _) ->
 		(	'$lgt_pp_file_bom_'(BOM) ->
 			TextProperties = [encoding(Encoding), BOM]
@@ -4902,7 +4898,7 @@ current_logtalk_flag(Flag, Value) :-
 		)
 	;	TextProperties = []
 	),
-	'$lgt_file_modification_time'(Path, TimeStamp),
+	% assert definitive regist
 	assertz('$lgt_loaded_file_'(Basename, Directory, Mode, Flags, TextProperties, ObjectFile, TimeStamp)).
 
 
