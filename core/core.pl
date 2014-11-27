@@ -6724,11 +6724,16 @@ current_logtalk_flag(Flag, Value) :-
 % compiles file-level directives, i.e. directives that are not encapsulated in a Logtalk
 % entity error-checking is delegated in most cases to the back-end Prolog compiler
 
-'$lgt_compile_file_directive'(encoding(_), _) :-
+'$lgt_compile_file_directive'(encoding(Encoding), Ctx) :-
 	!,
-	% out-of-place encoding/1 directive, which must be the first term in a source file
-	'$lgt_warning_context'(SourceFile, _, Lines),
-	'$lgt_print_message'(warning(general), core, ignored_directive(SourceFile, Lines, encoding/1)).
+	(	'$lgt_pp_file_encoding_'(Encoding, _),
+		'$lgt_comp_ctx_position'(Ctx, 1-_) ->
+		% encoding/1 directive already processed
+		true
+	;	% out-of-place encoding/1 directive, which must be the first term in a source file
+		'$lgt_warning_context'(SourceFile, _, Lines),
+		'$lgt_print_message'(warning(general), core, ignored_directive(SourceFile, Lines, encoding/1))
+	).
 
 '$lgt_compile_file_directive'(ensure_loaded(File), Ctx) :-
 	!,
