@@ -7635,8 +7635,6 @@ current_logtalk_flag(Flag, Value) :-
 	functor(Head, Functor, ExtArity),
 	(	'$lgt_pp_synchronized_'(Head, _) ->
 		throw(permission_error(modify, synchronized_non_terminal, Functor//Arity))
-	;	'$lgt_pp_calls_non_terminal_'(Functor, Arity, _) ->
-		throw(permission_error(modify, predicate_interpretation, Functor//Arity))
 	;	assertz('$lgt_pp_dynamic_'(Head))
 	).
 
