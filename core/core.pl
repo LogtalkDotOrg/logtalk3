@@ -6928,14 +6928,19 @@ current_logtalk_flag(Flag, Value) :-
 	;	\+ callable(Obj) ->
 		throw(type_error(object_identifier, Obj))
 	;	'$lgt_pp_runtime_clause_'('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, _)) ->
+		% an object with the same identifier was defined earlier in the same source file
 		throw(permission_error(modify, object, Obj))
 	;	'$lgt_pp_runtime_clause_'('$lgt_current_protocol_'(Obj, _, _, _, _)) ->
+		% a protocol with the same identifier was defined earlier in the same source file
 		throw(permission_error(modify, protocol, Obj))
 	;	'$lgt_pp_runtime_clause_'('$lgt_current_category_'(Obj, _, _, _, _, _)) ->
+		% a category with the same identifier was defined earlier in the same source file
 		throw(permission_error(modify, category, Obj))
 	;	functor(Obj, '{}', 1) ->
+		% reserved syntax for object proxies
 		throw(permission_error(create, object, Obj))
 	;	'$lgt_pp_entity_'(Type, _, _, _, _) ->
+		% opening object directive found while still compiling the previous entity
 		(	Type == object ->
 			throw(existence_error(directive, end_object/0))
 		;	Type == protocol ->
@@ -6950,6 +6955,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_logtalk_directive'(end_object, Ctx) :-
 	(	'$lgt_pp_object_'(Obj, _, _, _, _, _, _, _, _, _, _) ->
+		% we're indeed compiling an object
 		'$lgt_second_stage'(object, Obj, Ctx),
 		'$lgt_print_message'(silent(compiling), core, compiled_entity(object, Obj))
 	;	% entity ending directive mismatch 
@@ -6971,12 +6977,16 @@ current_logtalk_flag(Flag, Value) :-
 	;	\+ atom(Ptc) ->
 		throw(type_error(protocol_identifier, Ptc))
 	;	'$lgt_pp_runtime_clause_'('$lgt_current_object_'(Ptc, _, _, _, _, _, _, _, _, _, _)) ->
+		% an object with the same identifier was defined earlier in the same source file
 		throw(permission_error(modify, object, Ptc))
 	;	'$lgt_pp_runtime_clause_'('$lgt_current_protocol_'(Ptc, _, _, _, _)) ->
+		% a protocol with the same identifier was defined earlier in the same source file
 		throw(permission_error(modify, protocol, Ptc))
 	;	'$lgt_pp_runtime_clause_'('$lgt_current_category_'(Ptc, _, _, _, _, _)) ->
+		% a category with the same identifier was defined earlier in the same source file
 		throw(permission_error(modify, category, Ptc))
 	;	'$lgt_pp_entity_'(Type, _, _, _, _) ->
+		% opening protocol directive found while still compiling the previous entity
 		(	Type == object ->
 			throw(existence_error(directive, end_object/0))
 		;	Type == protocol ->
@@ -6991,6 +7001,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_logtalk_directive'(end_protocol, Ctx) :-
 	(	'$lgt_pp_protocol_'(Ptc, _, _, _, _) ->
+		% we're indeed compiling a protocol
 		'$lgt_second_stage'(protocol, Ptc, Ctx),
 		'$lgt_print_message'(silent(compiling), core, compiled_entity(protocol, Ptc))
 	;	% entity ending directive mismatch 
@@ -7015,12 +7026,16 @@ current_logtalk_flag(Flag, Value) :-
 	;	\+ callable(Ctg) ->
 		throw(type_error(category_identifier, Ctg))
 	;	'$lgt_pp_runtime_clause_'('$lgt_current_object_'(Ctg, _, _, _, _, _, _, _, _, _, _)) ->
+		% an object with the same identifier was defined earlier in the same source file
 		throw(permission_error(modify, object, Ctg))
 	;	'$lgt_pp_runtime_clause_'('$lgt_current_protocol_'(Ctg, _, _, _, _)) ->
+		% a protocol with the same identifier was defined earlier in the same source file
 		throw(permission_error(modify, protocol, Ctg))
 	;	'$lgt_pp_runtime_clause_'('$lgt_current_category_'(Ctg, _, _, _, _, _)) ->
+		% a category with the same identifier was defined earlier in the same source file
 		throw(permission_error(modify, category, Ctg))
 	;	'$lgt_pp_entity_'(Type, _, _, _, _) ->
+		% opening protocol directive found while still compiling the previous entity
 		(	Type == object ->
 			throw(existence_error(directive, end_object/0))
 		;	Type == protocol ->
@@ -7035,6 +7050,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_logtalk_directive'(end_category, Ctx) :-
 	(	'$lgt_pp_category_'(Ctg, _, _, _, _, _) ->
+		% we're indeed compiling a category
 		'$lgt_second_stage'(category, Ctg, Ctx),
 		'$lgt_print_message'(silent(compiling), core, compiled_entity(category, Ctg))
 	;	% entity ending directive mismatch 
@@ -7054,7 +7070,7 @@ current_logtalk_flag(Flag, Value) :-
 	assertz('$lgt_pp_module_'(Module)),
 	'$lgt_print_message'(silent(compiling), core, compiling_entity(module, Module)),
 	'$lgt_compile_object_identifier'(Module, Ctx),
-	% make the export list public predicates
+	% make the export list the public resources list
 	'$lgt_compile_logtalk_directive'(public(Exports), Ctx).
 
 % set_logtalk_flag/2 entity directive
@@ -7074,14 +7090,14 @@ current_logtalk_flag(Flag, Value) :-
 % create a message queue at object initialization
 
 '$lgt_compile_logtalk_directive'(threaded, _) :-
-	'$lgt_pp_entity_'(Kind, _, _, _, _),
+	'$lgt_pp_entity_'(Type, _, _, _, _),
 	(	'$lgt_prolog_feature'(threads, unsupported) ->
 		throw(resource_error(threads))
-	;	Kind == object ->
+	;	Type == object ->
 		assertz('$lgt_pp_threaded_')
-	;	Kind == protocol ->
+	;	Type == protocol ->
 		throw(domain_error(protocol_directive, threaded/0))
-	;	% Kind == category,
+	;	% Type == category,
 		throw(domain_error(category_directive, threaded/0))
 	).
 
@@ -7099,8 +7115,8 @@ current_logtalk_flag(Flag, Value) :-
 % compilation context values for "sender", "this", and "self"
 
 '$lgt_compile_logtalk_directive'(initialization(Goal), Ctx) :-
-	'$lgt_pp_entity_'(Kind, Entity, Prefix, _, _),
-	(	Kind == object ->
+	'$lgt_pp_entity_'(Type, Entity, Prefix, _, _),
+	(	Type == object ->
 		'$lgt_must_be'(callable, Goal),
 		% MetaVars = [] as we're compiling a local call
 		'$lgt_comp_ctx'(Ctx, (:- initialization(Goal)), Entity, Entity, Entity, Entity, Prefix, [], _, ExCtx, _, [], Position),
@@ -7109,9 +7125,9 @@ current_logtalk_flag(Flag, Value) :-
 			assertz('$lgt_pp_object_initialization_'(dgoal(Goal,Ctx), Position))
 		;	assertz('$lgt_pp_object_initialization_'(goal(Goal,Ctx), Position))
 		)
-	;	Kind == protocol ->
+	;	Type == protocol ->
 		throw(domain_error(protocol_directive, (initialization)/1))
-	;	% Kind == category,
+	;	% Type == category,
 		throw(domain_error(category_directive, (initialization)/1))
 	).
 
@@ -7141,6 +7157,10 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 % use_module/2 module directive
+%
+% the first argument must be a module identifier; when a file specification
+% is used, as it's usual in Prolog, it must be expanded at the adapter file
+% level into a module identifier
 
 '$lgt_compile_logtalk_directive'(use_module(Module, Imports), Ctx) :-
 	'$lgt_must_be'(module_identifier, Module),
@@ -7153,6 +7173,10 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 % reexport/2 module directive
+%
+% the first argument must be a module identifier; when a file specification
+% is used, as it's usual in Prolog, it must be expanded at the adapter file
+% level into a module identifier
 
 '$lgt_compile_logtalk_directive'(reexport(Module, Exports), Ctx) :-
 	% we must be compiling a module as an object
@@ -7213,7 +7237,7 @@ current_logtalk_flag(Flag, Value) :-
 
 % export/1 module directive
 %
-% module exported predicates are compiled as object public predicates
+% module exported directives are compiled as object public directives
 
 '$lgt_compile_logtalk_directive'(export(Exports), Ctx) :-
 	% we must be compiling a module as an object
@@ -7416,8 +7440,10 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	functor(Head, Functor, Arity),
 	(	'$lgt_pp_dynamic_'(Head) ->
+		% synchronized predicates must be static
 		throw(permission_error(modify, dynamic_predicate, Functor/Arity))
 	;	'$lgt_pp_defines_predicate_'(Head, _, _, _) ->
+		% synchronized/1 directives must precede the definitions for the declared predicates
 		throw(permission_error(modify, predicate_interpretation, Functor/Arity))
 	;	assertz('$lgt_pp_synchronized_'(Head, Mutex))
 	).
@@ -7625,6 +7651,7 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	functor(Head, Functor, Arity),
 	(	'$lgt_pp_synchronized_'(Head, _) ->
+		% synchronized predicates must be static
 		throw(permission_error(modify, synchronized_predicate, Functor/Arity))
 	;	assertz('$lgt_pp_dynamic_'(Head))
 	).
@@ -7634,6 +7661,7 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	functor(Head, Functor, ExtArity),
 	(	'$lgt_pp_synchronized_'(Head, _) ->
+		% synchronized non-terminals must be static
 		throw(permission_error(modify, synchronized_non_terminal, Functor//Arity))
 	;	assertz('$lgt_pp_dynamic_'(Head))
 	).
@@ -7880,8 +7908,8 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_multifile_directive_resource'(Pred, Ctx) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
-	'$lgt_pp_entity_'(Kind, _, Prefix, _, _),
-	(	Kind == protocol ->
+	'$lgt_pp_entity_'(Type, _, Prefix, _, _),
+	(	Type == protocol ->
 		% protocols cannot contain predicate definitions
 		throw(permission_error(declare, multifile, Functor/Arity))
 	;	functor(Head, Functor, Arity),
@@ -7894,8 +7922,8 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_multifile_directive_resource'(NonTerminal, Ctx) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, Arity, ExtArity),
 	!,
-	'$lgt_pp_entity_'(Kind, _, Prefix, _, _),
-	(	Kind == protocol ->
+	'$lgt_pp_entity_'(Type, _, Prefix, _, _),
+	(	Type == protocol ->
 		% protocols cannot contain non-terminal definitions
 		throw(permission_error(declare, multifile, Functor//Arity))
 	;	functor(Head, Functor, ExtArity),
@@ -7941,6 +7969,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_valid_coinductive_template'(Pred, Functor, Arity, Head, TestHead, Template),
 	!,
 	(	'$lgt_pp_defines_predicate_'(Head, _, _, _) ->
+		% coinductive/1 directives must precede the definitions for the declared predicates
 		throw(permission_error(modify, predicate_interpretation, Functor/Arity))
 	;	true
 	),
