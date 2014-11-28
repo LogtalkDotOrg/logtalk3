@@ -1052,12 +1052,12 @@ create_object(Obj, Relations, Directives, Clauses) :-
 	;	true
 	),
 	% set the initial compilation context for compiling the object directives and clauses
-	'$lgt_comp_ctx_mode'(Ctx, runtime),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, runtime, _, '-'(-1, -1)),
 	% we need to compile the object relations first as we need to know if we are compiling
 	% a prototype or an instance/class when compiling the object identifier as the generated
 	% internal functors are different for each case
-	'$lgt_compile_object_relations'(Relations, Obj),
-	'$lgt_compile_object_identifier'(Obj),
+	'$lgt_compile_object_relations'(Relations, Obj, Ctx),
+	'$lgt_compile_object_identifier'(Obj, Ctx),
 	'$lgt_compile_logtalk_directives'([(dynamic)| Directives], Ctx),
 	% the list of clauses may also include grammar rules
 	'$lgt_compile_runtime_terms'(Clauses),
@@ -1104,8 +1104,8 @@ create_category(Ctg, Relations, Directives, Clauses) :-
 	;	true
 	),
 	% set the initial compilation context for compiling the category directives and clauses
-	'$lgt_comp_ctx_mode'(Ctx, runtime),
-	'$lgt_compile_category_identifier'(Ctg),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, runtime, _, '-'(-1, -1)),
+	'$lgt_compile_category_identifier'(Ctg, Ctx),
 	'$lgt_compile_category_relations'(Relations, Ctg, Ctx),
 	'$lgt_compile_logtalk_directives'([(dynamic)| Directives], Ctx),
 	% the list of clauses may also include grammar rules
@@ -1158,9 +1158,9 @@ create_protocol(Ptc, Relations, Directives) :-
 	;	true
 	),
 	% set the initial compilation context for compiling the protocol directives
-	'$lgt_comp_ctx_mode'(Ctx, runtime),
-	'$lgt_compile_protocol_identifier'(Ptc),
-	'$lgt_compile_protocol_relations'(Relations, Ptc),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, runtime, _, '-'(-1, -1)),
+	'$lgt_compile_protocol_identifier'(Ptc, Ctx),
+	'$lgt_compile_protocol_relations'(Relations, Ptc, Ctx),
 	'$lgt_compile_logtalk_directives'([(dynamic)| Directives], Ctx),
 	'$lgt_generate_protocol_clauses',
 	'$lgt_generate_protocol_directives',
@@ -5426,12 +5426,12 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_add_referenced_object'(@object_identifier)
+% '$lgt_add_referenced_object'(@object_identifier, @compilation_context)
 %
 % adds referenced object for later checking of references to unknown objects;
 % we also save the line numbers for the first reference to the object
 
-'$lgt_add_referenced_object'(Obj) :-
+'$lgt_add_referenced_object'(Obj, Ctx) :-
 	(	\+ '$lgt_pp_file_data_'(_, _, _, _) ->
 		% not compiling a source file
 		true
@@ -5439,23 +5439,23 @@ current_logtalk_flag(Flag, Value) :-
 		% not the first reference to the object
 		true
 	;	% first reference to this object
-		'$lgt_current_line_numbers'(Lines),
+		'$lgt_comp_ctx_position'(Ctx, Position),
 		(	atom(Obj) ->
-			assertz('$lgt_pp_referenced_object_'(Obj, Lines))
+			assertz('$lgt_pp_referenced_object_'(Obj, Position))
 		;	% parametric object
 			'$lgt_term_template'(Obj, Template),
-			assertz('$lgt_pp_referenced_object_'(Template, Lines))
+			assertz('$lgt_pp_referenced_object_'(Template, Position))
 		)
 	).
 
 
 
-% '$lgt_add_referenced_protocol'(@protocol_identifier)
+% '$lgt_add_referenced_protocol'(@protocol_identifier, @compilation_context)
 %
 % adds referenced protocol for later checking of references to unknown protocols
 % we also save the line numbers for the first reference to the protocol
 
-'$lgt_add_referenced_protocol'(Ptc) :-
+'$lgt_add_referenced_protocol'(Ptc, Ctx) :-
 	(	\+ '$lgt_pp_file_data_'(_, _, _, _) ->
 		% not compiling a source file
 		true
@@ -5463,18 +5463,18 @@ current_logtalk_flag(Flag, Value) :-
 		% not the first reference to the protocol
 		true
 	;	% first reference to this protocol
-		'$lgt_current_line_numbers'(Lines),
-		assertz('$lgt_pp_referenced_protocol_'(Ptc, Lines))
+		'$lgt_comp_ctx_position'(Ctx, Position),
+		assertz('$lgt_pp_referenced_protocol_'(Ptc, Position))
 	).
 
 
 
-% '$lgt_add_referenced_category'(@category_identifier)
+% '$lgt_add_referenced_category'(@category_identifier, @compilation_context)
 %
 % adds referenced category for later checking of references to unknown categories
 % we also save the line numbers for the first reference to the category
 
-'$lgt_add_referenced_category'(Ctg) :-
+'$lgt_add_referenced_category'(Ctg, Ctx) :-
 	(	\+ '$lgt_pp_file_data_'(_, _, _, _) ->
 		% not compiling a source file
 		true
@@ -5482,23 +5482,23 @@ current_logtalk_flag(Flag, Value) :-
 		% not the first reference to the category
 		true
 	;	% first reference to this category
-		'$lgt_current_line_numbers'(Lines),
+		'$lgt_comp_ctx_position'(Ctx, Position),
 		(	atom(Ctg) ->
-			assertz('$lgt_pp_referenced_category_'(Ctg, Lines))
+			assertz('$lgt_pp_referenced_category_'(Ctg, Position))
 		;	% parametric category
 			'$lgt_term_template'(Ctg, Template),
-			assertz('$lgt_pp_referenced_category_'(Template, Lines))
+			assertz('$lgt_pp_referenced_category_'(Template, Position))
 		)
 	).
 
 
 
-% '$lgt_add_referenced_module'(@protocol_identifier)
+% '$lgt_add_referenced_module'(@protocol_identifier, @compilation_context)
 %
 % adds referenced module for later checking of references to unknown modules
 % we also save the line numbers for the first reference to the module
 
-'$lgt_add_referenced_module'(Module) :-
+'$lgt_add_referenced_module'(Module, Ctx) :-
 	(	\+ '$lgt_pp_file_data_'(_, _, _, _) ->
 		% not compiling a source file
 		true
@@ -5506,19 +5506,19 @@ current_logtalk_flag(Flag, Value) :-
 		% not the first reference to the module
 		true
 	;	% first reference to this module
-		'$lgt_current_line_numbers'(Lines),
-		assertz('$lgt_pp_referenced_module_'(Module, Lines))
+		'$lgt_comp_ctx_position'(Ctx, Position),
+		assertz('$lgt_pp_referenced_module_'(Module, Position))
 	).
 
 
 
-% '$lgt_add_referenced_object_message'(@term, @callable, @term)
-% '$lgt_add_referenced_object_message'(@term, @callable, @callable, @term)
+% '$lgt_add_referenced_object_message'(@term, @callable, @term, @pair)
+% '$lgt_add_referenced_object_message'(@term, @callable, @callable, @term, @pair)
 %
 % adds referenced object and message for supporting using reflection to
 % retrieve cross-reference information
 
-'$lgt_add_referenced_object_message'(Obj, Pred, Head) :-
+'$lgt_add_referenced_object_message'(Obj, Pred, Head, Position) :-
 	functor(Pred, PredFunctor, PredArity),
 	(	var(Head) ->
 		% not compiling a clause
@@ -5531,18 +5531,17 @@ current_logtalk_flag(Flag, Value) :-
 		true
 	;	% add reference if first but be careful to not instantiate the object argument which may only be known at runtime
 		functor(Head, HeadFunctor, HeadArity),
-		'$lgt_current_line_numbers'(Lines),
-		(	\+ \+ '$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, _, HeadFunctor/HeadArity, Lines) ->
+		(	\+ \+ '$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, _, HeadFunctor/HeadArity, Position) ->
 			true
 		;	compound(Obj) ->
 			% parametric object
 			'$lgt_term_template'(Obj, Template),
-			assertz('$lgt_pp_referenced_object_message_'(Template, PredFunctor/PredArity, PredFunctor/PredArity, HeadFunctor/HeadArity, Lines))
-		;	assertz('$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, PredFunctor/PredArity, HeadFunctor/HeadArity, Lines))
+			assertz('$lgt_pp_referenced_object_message_'(Template, PredFunctor/PredArity, PredFunctor/PredArity, HeadFunctor/HeadArity, Position))
+		;	assertz('$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, PredFunctor/PredArity, HeadFunctor/HeadArity, Position))
 		)
 	).
 
-'$lgt_add_referenced_object_message'(Obj, Pred, Alias, Head) :-
+'$lgt_add_referenced_object_message'(Obj, Pred, Alias, Head, Position) :-
 	(	var(Head) ->
 		% not compiling a clause
 		true
@@ -5552,28 +5551,27 @@ current_logtalk_flag(Flag, Value) :-
 	;	% add reference if first but be careful to not instantiate the object argument which may only be known at runtime
 		functor(Pred, PredFunctor, PredArity),
 		functor(Head, HeadFunctor, HeadArity),
-		'$lgt_current_line_numbers'(Lines),
-		(	\+ \+ '$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, _, HeadFunctor/HeadArity, Lines) ->
+		(	\+ \+ '$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, _, HeadFunctor/HeadArity, Position) ->
 			true
 		;	functor(Alias, AliasFunctor, AliasArity),
 			(	compound(Obj) ->
 				% parametric object
 				'$lgt_term_template'(Obj, Template),
-				assertz('$lgt_pp_referenced_object_message_'(Template, PredFunctor/PredArity, AliasFunctor/AliasArity, HeadFunctor/HeadArity, Lines))
-			;	assertz('$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, AliasFunctor/AliasArity, HeadFunctor/HeadArity, Lines))
+				assertz('$lgt_pp_referenced_object_message_'(Template, PredFunctor/PredArity, AliasFunctor/AliasArity, HeadFunctor/HeadArity, Position))
+			;	assertz('$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, AliasFunctor/AliasArity, HeadFunctor/HeadArity, Position))
 			)
 		)
 	).
 
 
 
-% '$lgt_add_referenced_module_predicate'(@object_identifier, @callable, @term)
-% '$lgt_add_referenced_module_predicate'(@object_identifier, @callable, @callable, @term)
+% '$lgt_add_referenced_module_predicate'(@object_identifier, @callable, @term, @pair)
+% '$lgt_add_referenced_module_predicate'(@object_identifier, @callable, @callable, @term, @pair)
 %
 % adds referenced module for later checking of references to unknown modules
 % we also save the line numbers for the first reference to the module
 
-'$lgt_add_referenced_module_predicate'(Module, Pred, Head) :-
+'$lgt_add_referenced_module_predicate'(Module, Pred, Head, Position) :-
 	functor(Pred, PredFunctor, PredArity),
 	(	var(Head) ->
 		% not compiling a clause
@@ -5585,14 +5583,13 @@ current_logtalk_flag(Flag, Value) :-
 		% not the first reference
 		true
 	;	functor(Head, HeadFunctor, HeadArity),
-		'$lgt_current_line_numbers'(Lines),
-		(	'$lgt_pp_referenced_module_predicate_'(Module, PredFunctor/PredArity, _, HeadFunctor/HeadArity, Lines) ->
+		(	'$lgt_pp_referenced_module_predicate_'(Module, PredFunctor/PredArity, _, HeadFunctor/HeadArity, Position) ->
 			true
-		;	assertz('$lgt_pp_referenced_module_predicate_'(Module, PredFunctor/PredArity, PredFunctor/PredArity, HeadFunctor/HeadArity, Lines))
+		;	assertz('$lgt_pp_referenced_module_predicate_'(Module, PredFunctor/PredArity, PredFunctor/PredArity, HeadFunctor/HeadArity, Position))
 		)
 	).
 
-'$lgt_add_referenced_module_predicate'(Module, Pred, Alias, Head) :-
+'$lgt_add_referenced_module_predicate'(Module, Pred, Alias, Head, Position) :-
 	(	var(Head) ->
 		% not compiling a clause
 		true
@@ -5602,10 +5599,9 @@ current_logtalk_flag(Flag, Value) :-
 	;	functor(Pred, PredFunctor, PredArity),
 		functor(Alias, AliasFunctor, AliasArity),
 		functor(Head, HeadFunctor, HeadArity),
-		'$lgt_current_line_numbers'(Lines),
-		(	'$lgt_pp_referenced_module_predicate_'(Module, PredFunctor/PredArity, _, HeadFunctor/HeadArity, Lines) ->
+		(	'$lgt_pp_referenced_module_predicate_'(Module, PredFunctor/PredArity, _, HeadFunctor/HeadArity, Position) ->
 			true
-		;	assertz('$lgt_pp_referenced_module_predicate_'(Module, PredFunctor/PredArity, AliasFunctor/AliasArity, HeadFunctor/HeadArity, Lines))
+		;	assertz('$lgt_pp_referenced_module_predicate_'(Module, PredFunctor/PredArity, AliasFunctor/AliasArity, HeadFunctor/HeadArity, Position))
 		)
 	).
 
@@ -6926,7 +6922,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_compile_logtalk_directive'(object_(Obj, [Relation1, Relation2, Relation3, Relation4]), Ctx).
 
 % auxiliary predicate to compile all variants to the object opening directive
-'$lgt_compile_logtalk_directive'(object_(Obj, Relations), _) :-
+'$lgt_compile_logtalk_directive'(object_(Obj, Relations), Ctx) :-
 	(	var(Obj) ->
 		throw(instantiation_error)
 	;	\+ callable(Obj) ->
@@ -6948,8 +6944,8 @@ current_logtalk_flag(Flag, Value) :-
 			throw(existence_error(directive, end_category/0))
 		)
 	;	'$lgt_print_message'(silent(compiling), core, compiling_entity(object, Obj)),
-		'$lgt_compile_object_relations'(Relations, Obj),
-		'$lgt_compile_object_identifier'(Obj)
+		'$lgt_compile_object_relations'(Relations, Obj, Ctx),
+		'$lgt_compile_object_identifier'(Obj, Ctx)
 	).
 
 '$lgt_compile_logtalk_directive'(end_object, Ctx) :-
@@ -6969,7 +6965,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_compile_logtalk_directive'(protocol_(Ptc, [Relation]), Ctx).
 
 % auxiliary predicate to compile all variants to the protocol opening directive
-'$lgt_compile_logtalk_directive'(protocol_(Ptc, Relations), _) :-
+'$lgt_compile_logtalk_directive'(protocol_(Ptc, Relations), Ctx) :-
 	(	var(Ptc) ->
 		throw(instantiation_error)
 	;	\+ atom(Ptc) ->
@@ -6989,8 +6985,8 @@ current_logtalk_flag(Flag, Value) :-
 			throw(existence_error(directive, end_category/0))
 		)
 	;	'$lgt_print_message'(silent(compiling), core, compiling_entity(protocol, Ptc)),
-		'$lgt_compile_protocol_identifier'(Ptc),
-		'$lgt_compile_protocol_relations'(Relations, Ptc)
+		'$lgt_compile_protocol_identifier'(Ptc, Ctx),
+		'$lgt_compile_protocol_relations'(Relations, Ptc, Ctx)
 	).
 
 '$lgt_compile_logtalk_directive'(end_protocol, Ctx) :-
@@ -7033,7 +7029,7 @@ current_logtalk_flag(Flag, Value) :-
 			throw(existence_error(directive, end_category/0))
 		)
 	;	'$lgt_print_message'(silent(compiling), core, compiling_entity(category, Ctg)),
-		'$lgt_compile_category_identifier'(Ctg),
+		'$lgt_compile_category_identifier'(Ctg, Ctx),
 		'$lgt_compile_category_relations'(Relations, Ctg, Ctx)
 	).
 
@@ -7057,7 +7053,7 @@ current_logtalk_flag(Flag, Value) :-
 	% remember we are compiling a module
 	assertz('$lgt_pp_module_'(Module)),
 	'$lgt_print_message'(silent(compiling), core, compiling_entity(module, Module)),
-	'$lgt_compile_object_identifier'(Module),
+	'$lgt_compile_object_identifier'(Module, Ctx),
 	% make the export list public predicates
 	'$lgt_compile_logtalk_directive'(public(Exports), Ctx).
 
@@ -7129,14 +7125,14 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_logtalk_directive'(uses(Obj, Resources), Ctx) :-
 	'$lgt_must_be'(object_identifier, Obj),
-	'$lgt_add_referenced_object'(Obj),
+	'$lgt_add_referenced_object'(Obj, Ctx),
 	'$lgt_compile_uses_directive'(Resources, Resources, Obj, Ctx).
 
 % uses/1 entity directive (deprecated)
 
 '$lgt_compile_logtalk_directive'(uses(Obj), Ctx) :-
 	'$lgt_must_be'(object_identifier, Obj),
-	'$lgt_add_referenced_object'(Obj),
+	'$lgt_add_referenced_object'(Obj, Ctx),
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_warning_context'(SourceFile, _, Lines, Type, Entity),
@@ -7152,7 +7148,7 @@ current_logtalk_flag(Flag, Value) :-
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
 		'$lgt_compile_logtalk_directive'(uses(Module, Imports), Ctx)
 	;	% we're calling module predicates within an object or a category
-		'$lgt_add_referenced_module'(Module),
+		'$lgt_add_referenced_module'(Module, Ctx),
 		'$lgt_compile_use_module_directive'(Imports, Imports, Module, Ctx)
 	).
 
@@ -7170,7 +7166,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_logtalk_directive'(calls(Ptcs), Ctx) :-
 	'$lgt_flatten_to_list'(Ptcs, PtcsFlatted),
-	'$lgt_compile_calls_directive'(PtcsFlatted),
+	'$lgt_compile_calls_directive'(PtcsFlatted, Ctx),
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_warning_context'(SourceFile, _, Lines, Type, Entity),
@@ -7375,16 +7371,16 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_compile_calls_directive'(+list)
+% '$lgt_compile_calls_directive'(+list, @compilation_context)
 %
 % auxiliary predicate for compiling calls/1 directives
 
-'$lgt_compile_calls_directive'([Ptc| Ptcs]) :-
+'$lgt_compile_calls_directive'([Ptc| Ptcs], Ctx) :-
 	'$lgt_must_be'(protocol_identifier, Ptc),
-	'$lgt_add_referenced_protocol'(Ptc),
-	'$lgt_compile_calls_directive'(Ptcs).
+	'$lgt_add_referenced_protocol'(Ptc, Ctx),
+	'$lgt_compile_calls_directive'(Ptcs, Ctx).
 
-'$lgt_compile_calls_directive'([]).
+'$lgt_compile_calls_directive'([], _).
 
 
 
@@ -8350,77 +8346,77 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_compile_object_relations'(+list, @object_identifier)
+% '$lgt_compile_object_relations'(+list, @object_identifier, @compilation_context)
 %
 % compiles the relations of an object with other entities
 
-'$lgt_compile_object_relations'([Relation| Relations], Obj) :-
+'$lgt_compile_object_relations'([Relation| Relations], Obj, Ctx) :-
 	(	var(Relation) ->
 		throw(instantiation_error)
 	;	Relation =.. [Functor| Args],
 		'$lgt_flatten_to_list'(Args, FlattenedArgs),
-		'$lgt_compile_object_relation'(Functor, FlattenedArgs, Obj) ->
+		'$lgt_compile_object_relation'(Functor, FlattenedArgs, Obj, Ctx) ->
 		true
 	;	callable(Relation) ->
 		functor(Relation, Functor, Arity),
 		throw(domain_error(object_relation, Functor/Arity))
 	;	throw(type_error(callable, Relation))
 	),
-	'$lgt_compile_object_relations'(Relations, Obj).
+	'$lgt_compile_object_relations'(Relations, Obj, Ctx).
 
-'$lgt_compile_object_relations'([], _).
+'$lgt_compile_object_relations'([], _, _).
 
 
 
-% '$lgt_compile_object_relation'(+atom, +list, list, @object_identifier)
+% '$lgt_compile_object_relation'(+atom, +list, @object_identifier, @compilation_context)
 %
 % compiles a relation between an object (the last argument) with other entities
 
-'$lgt_compile_object_relation'(implements, Ptcs, Obj) :-
-	'$lgt_compile_implements_protocol_relation'(Ptcs, Obj).
+'$lgt_compile_object_relation'(implements, Ptcs, Obj, Ctx) :-
+	'$lgt_compile_implements_protocol_relation'(Ptcs, Obj, Ctx).
 
-'$lgt_compile_object_relation'(imports, Ctgs, Obj) :-
-	'$lgt_compile_imports_category_relation'(Ctgs, Obj).
+'$lgt_compile_object_relation'(imports, Ctgs, Obj, Ctx) :-
+	'$lgt_compile_imports_category_relation'(Ctgs, Obj, Ctx).
 
-'$lgt_compile_object_relation'(instantiates, Classes, Instance) :-
-	'$lgt_compile_instantiates_class_relation'(Classes, Instance).
+'$lgt_compile_object_relation'(instantiates, Classes, Instance, Ctx) :-
+	'$lgt_compile_instantiates_class_relation'(Classes, Instance, Ctx).
 
-'$lgt_compile_object_relation'(specializes, Superclasses, Class) :-
-	'$lgt_compile_specializes_class_relation'(Superclasses, Class).
+'$lgt_compile_object_relation'(specializes, Superclasses, Class, Ctx) :-
+	'$lgt_compile_specializes_class_relation'(Superclasses, Class, Ctx).
 
-'$lgt_compile_object_relation'(extends, Parents, Prototype) :-
-	'$lgt_compile_extends_object_relation'(Parents, Prototype).
+'$lgt_compile_object_relation'(extends, Parents, Prototype, Ctx) :-
+	'$lgt_compile_extends_object_relation'(Parents, Prototype, Ctx).
 
 
 
-% '$lgt_compile_protocol_relations'(+list, list, @protocol_identifier)
+% '$lgt_compile_protocol_relations'(+list, @protocol_identifier, @compilation_context)
 %
 % compiles the relations of a protocol with other entities
 
-'$lgt_compile_protocol_relations'([Relation| Relations], Ptc) :-
+'$lgt_compile_protocol_relations'([Relation| Relations], Ptc, Ctx) :-
 	(	var(Relation) ->
 		throw(instantiation_error)
 	;	Relation =.. [Functor| Args],
 		'$lgt_flatten_to_list'(Args, FlattenedArgs),
-		'$lgt_compile_protocol_relation'(Functor, FlattenedArgs, Ptc) ->
+		'$lgt_compile_protocol_relation'(Functor, FlattenedArgs, Ptc, Ctx) ->
 		true
 	;	callable(Relation) ->
 		functor(Relation, Functor, Arity),
 		throw(domain_error(protocol_relation, Functor/Arity))
 	;	throw(type_error(callable, Relation))
 	),
-	'$lgt_compile_protocol_relations'(Relations, Ptc).
+	'$lgt_compile_protocol_relations'(Relations, Ptc, Ctx).
 
-'$lgt_compile_protocol_relations'([], _).
+'$lgt_compile_protocol_relations'([], _, _).
 
 
 
-% '$lgt_compile_protocol_relation'(+atom, +list, @protocol_identifier)
+% '$lgt_compile_protocol_relation'(+atom, +list, @protocol_identifier, @compilation_context)
 %
 % compiles a relation between a protocol (the last argument) with other entities
 
-'$lgt_compile_protocol_relation'(extends, Ptcs, Ptc) :-
-	'$lgt_compile_extends_protocol_relation'(Ptcs, Ptc).
+'$lgt_compile_protocol_relation'(extends, Ptcs, Ptc, Ctx) :-
+	'$lgt_compile_extends_protocol_relation'(Ptcs, Ptc, Ctx).
 
 
 
@@ -8450,11 +8446,11 @@ current_logtalk_flag(Flag, Value) :-
 %
 % compiles a relation between a category (the last argument) with other entities
 
-'$lgt_compile_category_relation'(implements, Ptcs, Ctg, _) :-
-	'$lgt_compile_implements_protocol_relation'(Ptcs, Ctg).
+'$lgt_compile_category_relation'(implements, Ptcs, Ctg, Ctx) :-
+	'$lgt_compile_implements_protocol_relation'(Ptcs, Ctg, Ctx).
 
-'$lgt_compile_category_relation'(extends, Ctgs, Ctg, _) :-
-	'$lgt_compile_extends_category_relation'(Ctgs, Ctg).
+'$lgt_compile_category_relation'(extends, Ctgs, Ctg, Ctx) :-
+	'$lgt_compile_extends_category_relation'(Ctgs, Ctg, Ctx).
 
 '$lgt_compile_category_relation'(complements, Objs, Ctg, Ctx) :-
 	'$lgt_compile_complements_object_relation'(Objs, Ctg, Ctx).
@@ -9670,7 +9666,7 @@ current_logtalk_flag(Flag, Value) :-
 		TPred = ':'(Module, Pred),
 		DPred = '$lgt_debug'(goal(':'(Module, Pred), TPred), ExCtx)
 	;	var(Pred) ->
-		'$lgt_add_referenced_module'(Module),
+		'$lgt_add_referenced_module'(Module, Ctx),
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		TPred = ':'(Module, Pred),
 		DPred = '$lgt_debug'(goal(':'(Module, Pred), TPred), ExCtx)
@@ -9685,9 +9681,9 @@ current_logtalk_flag(Flag, Value) :-
 		;	catch('$lgt_predicate_property'(':'(Module, Pred), meta_predicate(Meta)), _, fail)
 		) ->
 		% we're compiling a call to a module meta-predicate
-		'$lgt_add_referenced_module'(Module),
-		'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, _, _, _),
-		'$lgt_add_referenced_module_predicate'(Module, Pred, Head),
+		'$lgt_add_referenced_module'(Module, Ctx),
+		'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, _, _, Position),
+		'$lgt_add_referenced_module_predicate'(Module, Pred, Head, Position),
 		Pred =.. [Functor| Args],
 		Meta =.. [Functor| MArgs],
 		'$lgt_prolog_to_logtalk_meta_argument_specifiers'(MArgs, CMArgs),
@@ -9701,9 +9697,9 @@ current_logtalk_flag(Flag, Value) :-
 			DPred = '$lgt_debug'(goal(':'(Module, Pred), DPred0), ExCtx)
 		)
 	;	% we're compiling a call to a module predicate
-		'$lgt_add_referenced_module'(Module),
-		'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, _, _, _),
-		'$lgt_add_referenced_module_predicate'(Module, Pred, Head),
+		'$lgt_add_referenced_module'(Module, Ctx),
+		'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, _, _, Position),
+		'$lgt_add_referenced_module_predicate'(Module, Pred, Head, Position),
 		TPred = ':'(Module, Pred),
 		DPred = '$lgt_debug'(goal(':'(Module, Pred), TPred), ExCtx)
 	).
@@ -9728,7 +9724,7 @@ current_logtalk_flag(Flag, Value) :-
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
 		'$lgt_compile_body'(Module::current_predicate(Pred), TPred, DPred, Ctx)
 	;	% we're using modules together with objects
-		'$lgt_add_referenced_module'(Module),
+		'$lgt_add_referenced_module'(Module, Ctx),
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		TPred = {current_predicate(':'(Module, Pred))},
 		DPred = '$lgt_debug'(goal(current_predicate(':'(Module, Pred)), TPred), ExCtx)
@@ -9765,7 +9761,7 @@ current_logtalk_flag(Flag, Value) :-
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
 		'$lgt_compile_body'(Module::predicate_property(Head, Prop), TPred, DPred, Ctx)
 	;	% we're using modules together with objects
-		'$lgt_add_referenced_module'(Module),
+		'$lgt_add_referenced_module'(Module, Ctx),
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		TPred = {predicate_property(':'(Module, Head), Prop)},
 		DPred = '$lgt_debug'(goal(predicate_property(':'(Module,Head), Prop), TPred), ExCtx)
@@ -9802,7 +9798,7 @@ current_logtalk_flag(Flag, Value) :-
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
 		'$lgt_compile_body'(Module::abolish(Pred), TCond, DCond, Ctx)
 	;	% we're using modules together with objects
-		'$lgt_add_referenced_module'(Module),
+		'$lgt_add_referenced_module'(Module, Ctx),
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		TCond = {abolish(':'(Module, Pred))},
 		DCond = '$lgt_debug'(goal(abolish(':'(Module, Pred)), TCond), ExCtx)
@@ -9857,7 +9853,7 @@ current_logtalk_flag(Flag, Value) :-
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
 		'$lgt_compile_body'(Module::asserta(Clause), TCond, DCond, Ctx)
 	;	% we're using modules together with objects
-		'$lgt_add_referenced_module'(Module),
+		'$lgt_add_referenced_module'(Module, Ctx),
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		TCond = {asserta(QClause)},
 		DCond = '$lgt_debug'(goal(asserta(QClause), TCond), ExCtx)
@@ -9924,7 +9920,7 @@ current_logtalk_flag(Flag, Value) :-
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
 		'$lgt_compile_body'(Module::assertz(Clause), TCond, DCond, Ctx)
 	;	% we're using modules together with objects
-		'$lgt_add_referenced_module'(Module),
+		'$lgt_add_referenced_module'(Module, Ctx),
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		TCond = {assertz(QClause)},
 		DCond = '$lgt_debug'(goal(assertz(QClause), TCond), ExCtx)
@@ -9985,7 +9981,7 @@ current_logtalk_flag(Flag, Value) :-
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
 		'$lgt_compile_body'(Module::clause(Head, Body), TCond, DCond, Ctx)
 	;	% we're using modules together with objects
-		'$lgt_add_referenced_module'(Module),
+		'$lgt_add_referenced_module'(Module, Ctx),
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		TCond = {clause(QHead, Body)},
 		DCond = '$lgt_debug'(goal(clause(QHead, Body), TCond), ExCtx)
@@ -10033,7 +10029,7 @@ current_logtalk_flag(Flag, Value) :-
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
 		'$lgt_compile_body'(Module::retract(Clause), TCond, DCond, Ctx)
 	;	% we're using modules together with objects
-		'$lgt_add_referenced_module'(Module),
+		'$lgt_add_referenced_module'(Module, Ctx),
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		TCond = {retract(QClause)},
 		DCond = '$lgt_debug'(goal(retract(QClause), TCond), ExCtx)
@@ -10096,7 +10092,7 @@ current_logtalk_flag(Flag, Value) :-
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
 		'$lgt_compile_body'(Module::retractall(Head), TCond, DCond, Ctx)
 	;	% we're using modules together with objects
-		'$lgt_add_referenced_module'(Module),
+		'$lgt_add_referenced_module'(Module, Ctx),
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		TCond = {retractall(QHead)},
 		DCond = '$lgt_debug'(goal(retractall(QHead), TCond), ExCtx)
@@ -10596,8 +10592,8 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_body'(Alias, TPred, '$lgt_debug'(goal(Alias, TPred), ExCtx), Ctx) :-
 	'$lgt_pp_use_module_predicate_'(Module, Pred, Alias),
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, _, _, _),
-	'$lgt_add_referenced_module_predicate'(Module, Pred, Alias, Head),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, _, _, Position),
+	'$lgt_add_referenced_module_predicate'(Module, Pred, Alias, Head, Position),
 	'$lgt_compile_body'(':'(Module,Pred), TPred, _, Ctx).
 
 % predicates specified in uses/2 directives
@@ -10636,8 +10632,8 @@ current_logtalk_flag(Flag, Value) :-
 			'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx)
 		)
 	;	% objects other than the pseudo-object "user"
-		'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, _, _, _),
-		'$lgt_add_referenced_object_message'(Obj, Pred, Alias, Head),
+		'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, _, _, Position),
+		'$lgt_add_referenced_object_message'(Obj, Pred, Alias, Head, Position),
 		'$lgt_compile_body'(Obj::Pred, TPred, _, Ctx),
 		DPred = '$lgt_debug'(goal(Alias, TPred), ExCtx)
 	).
@@ -11465,9 +11461,9 @@ current_logtalk_flag(Flag, Value) :-
 
 % remember the object receiving the message
 
-'$lgt_compile_message_to_object'(_, Obj, _, _, _) :-
+'$lgt_compile_message_to_object'(_, Obj, _, _, Ctx) :-
 	nonvar(Obj),
-	'$lgt_add_referenced_object'(Obj),
+	'$lgt_add_referenced_object'(Obj, Ctx),
 	fail.
 
 % translation performed at runtime
@@ -11679,16 +11675,16 @@ current_logtalk_flag(Flag, Value) :-
 	var(Obj),
 	% translation performed at runtime
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, _, _, _),
-	'$lgt_add_referenced_object_message'(Obj, Pred, Head),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, _, _, Position),
+	'$lgt_add_referenced_object_message'(Obj, Pred, Head, Position),
 	(	Events == allow ->
 		TPred = '$lgt_send_to_obj'(Obj, Pred, ExCtx)
 	;	TPred = '$lgt_send_to_obj_ne'(Obj, Pred, ExCtx)
 	).
 
 '$lgt_compile_message_to_object'(Pred, Obj, TPred, Events, Ctx) :-
-	'$lgt_comp_ctx'(Ctx, Head, _, _, This, _, _, _, _, ExCtx, _, _, _),
-	'$lgt_add_referenced_object_message'(Obj, Pred, Head),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, This, _, _, _, _, ExCtx, _, _, Position),
+	'$lgt_add_referenced_object_message'(Obj, Pred, Head, Position),
 	(	Events == allow ->
 		(	'$lgt_compiler_flag'(optimize, on),
 			'$lgt_send_to_obj_static_binding'(Obj, Pred, Call, Ctx) ->
@@ -12531,18 +12527,18 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_compile_object_identifier'(@object_identifier)
+% '$lgt_compile_object_identifier'(@object_identifier, @compilation_context)
 %
 % from the object identifier construct the set of
 % functor prefixes used in the compiled code clauses
 
-'$lgt_compile_object_identifier'(Obj) :-
+'$lgt_compile_object_identifier'(Obj, Ctx) :-
 	(	atom(Obj) ->
 		GObj = Obj
 	;	% parametric object
 		'$lgt_term_template'(Obj, GObj)
 	),
-	'$lgt_add_referenced_object'(GObj),
+	'$lgt_add_referenced_object'(GObj, Ctx),
 	(	'$lgt_pp_instantiated_class_'(_, _, _, _, _, _, _, _, _, _, _) ->
 		'$lgt_construct_ic_functors'(GObj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm)
 	;	'$lgt_pp_specialized_class_'(_, _, _, _, _, _, _, _, _, _, _) ->
@@ -12558,18 +12554,18 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_compile_category_identifier'(@category_identifier)
+% '$lgt_compile_category_identifier'(@category_identifier, @compilation_context)
 %
 % from the category identifier construct the set of
 % functor prefixes used in the compiled code clauses
 
-'$lgt_compile_category_identifier'(Ctg) :-
+'$lgt_compile_category_identifier'(Ctg, Ctx) :-
 	(	atom(Ctg) ->
 		GCtg = Ctg
 	;	% parametric category
 		'$lgt_term_template'(Ctg, GCtg)
 	),
-	'$lgt_add_referenced_category'(GCtg),
+	'$lgt_add_referenced_category'(GCtg, Ctx),
 	'$lgt_construct_category_functors'(GCtg, Prefix, Dcl, Def, Rnm),
 	% the category flags are only computed at the end of the entity compilation
 	assertz('$lgt_pp_category_'(GCtg, Prefix, Dcl, Def, Rnm, _)),
@@ -12580,13 +12576,13 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_compile_protocol_identifier'(@protocol_identifier)
+% '$lgt_compile_protocol_identifier'(@protocol_identifier, @compilation_context)
 %
 % from the protocol identifier construct the set of
 % functor prefixes used in the compiled code clauses
 
-'$lgt_compile_protocol_identifier'(Ptc) :-
-	'$lgt_add_referenced_protocol'(Ptc),
+'$lgt_compile_protocol_identifier'(Ptc, Ctx) :-
+	'$lgt_add_referenced_protocol'(Ptc, Ctx),
 	'$lgt_construct_protocol_functors'(Ptc, Prefix, Dcl, Rnm),
 	% the protocol flags are only computed at the end of the entity compilation
 	assertz('$lgt_pp_protocol_'(Ptc, Prefix, Dcl, Rnm, _)),
@@ -12603,9 +12599,9 @@ current_logtalk_flag(Flag, Value) :-
 %
 % compiles an "implements" relation between a category or an object and a list of protocols
 
-'$lgt_compile_implements_protocol_relation'([], _).
+'$lgt_compile_implements_protocol_relation'([], _, _).
 
-'$lgt_compile_implements_protocol_relation'([Ref| Refs], ObjOrCtg) :-
+'$lgt_compile_implements_protocol_relation'([Ref| Refs], ObjOrCtg, Ctx) :-
 	'$lgt_check_entity_reference'(protocol, Ref, Scope, Ptc),
 	(	ObjOrCtg == Ptc ->
 		throw(permission_error(implement, self, ObjOrCtg))
@@ -12613,22 +12609,22 @@ current_logtalk_flag(Flag, Value) :-
 		throw(type_error(protocol, Ptc))
 	;	'$lgt_is_category'(Ptc) ->
 		throw(type_error(protocol, Ptc))
-	;	'$lgt_add_referenced_protocol'(Ptc),
+	;	'$lgt_add_referenced_protocol'(Ptc, Ctx),
 		assertz('$lgt_pp_runtime_clause_'('$lgt_implements_protocol_'(ObjOrCtg, Ptc, Scope))),
 		'$lgt_construct_protocol_functors'(Ptc, Prefix, Dcl, _),
 		assertz('$lgt_pp_implemented_protocol_'(Ptc, ObjOrCtg, Prefix, Dcl, Scope)),
-		'$lgt_compile_implements_protocol_relation'(Refs, ObjOrCtg)
+		'$lgt_compile_implements_protocol_relation'(Refs, ObjOrCtg, Ctx)
 	).
 
 
 
-% '$lgt_compile_imports_category_relation'(+list, @object_identifier)
+% '$lgt_compile_imports_category_relation'(+list, @object_identifier, @compilation_context)
 %
 % compiles an "imports" relation between an object and a list of categories
 
-'$lgt_compile_imports_category_relation'([], _).
+'$lgt_compile_imports_category_relation'([], _, _).
 
-'$lgt_compile_imports_category_relation'([Ref| Refs], Obj) :-
+'$lgt_compile_imports_category_relation'([Ref| Refs], Obj, Ctx) :-
 	'$lgt_check_entity_reference'(category, Ref, Scope, Ctg),
 	(	'$lgt_term_template'(Obj, Ctg) ->
 		throw(permission_error(import, self, Obj))
@@ -12636,22 +12632,22 @@ current_logtalk_flag(Flag, Value) :-
 		throw(type_error(category, Ctg))
 	;	'$lgt_is_protocol'(Ctg) ->
 		throw(type_error(category, Ctg))
-	;	'$lgt_add_referenced_category'(Ctg),
+	;	'$lgt_add_referenced_category'(Ctg, Ctx),
 		assertz('$lgt_pp_runtime_clause_'('$lgt_imports_category_'(Obj, Ctg, Scope))),
 		'$lgt_construct_category_functors'(Ctg, Prefix, Dcl, Def, _),
 		assertz('$lgt_pp_imported_category_'(Ctg, Obj, Prefix, Dcl, Def, Scope)),
-		'$lgt_compile_imports_category_relation'(Refs, Obj)
+		'$lgt_compile_imports_category_relation'(Refs, Obj, Ctx)
 	).
 
 
 
-% '$lgt_compile_instantiates_class_relation'(+list, @object_identifier)
+% '$lgt_compile_instantiates_class_relation'(+list, @object_identifier, @compilation_context)
 %
 % compiles an "instantiates" relation between an instance and a list of classes
 
-'$lgt_compile_instantiates_class_relation'([], _).
+'$lgt_compile_instantiates_class_relation'([], _, _).
 
-'$lgt_compile_instantiates_class_relation'([Ref| Refs], Obj) :-
+'$lgt_compile_instantiates_class_relation'([Ref| Refs], Obj, Ctx) :-
 	'$lgt_check_entity_reference'(object, Ref, Scope, Class),
 	(	'$lgt_is_protocol'(Class) ->
 		throw(type_error(object, Class))
@@ -12661,22 +12657,22 @@ current_logtalk_flag(Flag, Value) :-
 		throw(domain_error(class, Class))
 	;	'$lgt_pp_extended_object_'(_, _, _, _, _, _, _, _, _, _, _) ->
 		throw(permission_error(instantiate, class, Class))
-	;	'$lgt_add_referenced_object'(Class),
+	;	'$lgt_add_referenced_object'(Class, Ctx),
 		assertz('$lgt_pp_runtime_clause_'('$lgt_instantiates_class_'(Obj, Class, Scope))),
 		'$lgt_construct_ic_functors'(Class, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, _),
 		assertz('$lgt_pp_instantiated_class_'(Class, Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Scope)),
-		'$lgt_compile_instantiates_class_relation'(Refs, Obj)
+		'$lgt_compile_instantiates_class_relation'(Refs, Obj, Ctx)
 	).
 
 
 
-% '$lgt_compile_specializes_class_relation'(+list, @object_identifier)
+% '$lgt_compile_specializes_class_relation'(+list, @object_identifier, @compilation_context)
 %
 % compiles a "specializes" relation between a class and a list of superclasses
 
-'$lgt_compile_specializes_class_relation'([], _).
+'$lgt_compile_specializes_class_relation'([], _, _).
 
-'$lgt_compile_specializes_class_relation'([Ref| Refs], Class) :-
+'$lgt_compile_specializes_class_relation'([Ref| Refs], Class, Ctx) :-
 	'$lgt_check_entity_reference'(object, Ref, Scope, Superclass),
 	(	'$lgt_term_template'(Class, Superclass) ->
 		throw(permission_error(specialize, self, Class))
@@ -12688,22 +12684,22 @@ current_logtalk_flag(Flag, Value) :-
 		throw(domain_error(class, Class))
 	;	'$lgt_pp_extended_object_'(_, _, _, _, _, _, _, _, _, _, _) ->
 		throw(permission_error(specialize, class, Class))
-	;	'$lgt_add_referenced_object'(Superclass),
+	;	'$lgt_add_referenced_object'(Superclass, Ctx),
 		assertz('$lgt_pp_runtime_clause_'('$lgt_specializes_class_'(Class, Superclass, Scope))),
 		'$lgt_construct_ic_functors'(Superclass, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, _),
 		assertz('$lgt_pp_specialized_class_'(Superclass, Class, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Scope)),
-		'$lgt_compile_specializes_class_relation'(Refs, Class)
+		'$lgt_compile_specializes_class_relation'(Refs, Class, Ctx)
 	).
 
 
 
-% '$lgt_compile_extends_object_relation'(+list, @object_identifier)
+% '$lgt_compile_extends_object_relation'(+list, @object_identifier, @compilation_context)
 %
 % compiles an "extends" relation between a prototype and a list of parents
 
-'$lgt_compile_extends_object_relation'([], _).
+'$lgt_compile_extends_object_relation'([], _, _).
 
-'$lgt_compile_extends_object_relation'([Ref| Refs], Obj) :-
+'$lgt_compile_extends_object_relation'([Ref| Refs], Obj, Ctx) :-
 	'$lgt_check_entity_reference'(object, Ref, Scope, Parent),
 	(	'$lgt_term_template'(Obj, Parent) ->
 		throw(permission_error(extend, self, Obj))
@@ -12717,22 +12713,22 @@ current_logtalk_flag(Flag, Value) :-
 		throw(permission_error(extend, prototype, Parent))
 	;	'$lgt_pp_specialized_class_'(_, _, _, _, _, _, _, _, _, _, _) ->
 		throw(permission_error(extend, prototype, Parent))
-	;	'$lgt_add_referenced_object'(Parent),
+	;	'$lgt_add_referenced_object'(Parent, Ctx),
 		assertz('$lgt_pp_runtime_clause_'('$lgt_extends_object_'(Obj, Parent, Scope))),
 		'$lgt_construct_prototype_functors'(Parent, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, _),
 		assertz('$lgt_pp_extended_object_'(Parent, Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Scope)),
-		'$lgt_compile_extends_object_relation'(Refs, Obj)
+		'$lgt_compile_extends_object_relation'(Refs, Obj, Ctx)
 	).
 
 
 
-% '$lgt_compile_extends_protocol_relation'(+list, @protocol_identifier)
+% '$lgt_compile_extends_protocol_relation'(+list, @protocol_identifier, @compilation_context)
 %
 % compiles an "extends" relation between a protocol and a list of protocols
 
-'$lgt_compile_extends_protocol_relation'([], _).
+'$lgt_compile_extends_protocol_relation'([], _, _).
 
-'$lgt_compile_extends_protocol_relation'([Ref| Refs], Ptc) :-
+'$lgt_compile_extends_protocol_relation'([Ref| Refs], Ptc, Ctx) :-
 	'$lgt_check_entity_reference'(protocol, Ref, Scope, ExtPtc),
 	(	Ptc == ExtPtc ->
 		throw(permission_error(extend, self, Ptc))
@@ -12740,22 +12736,22 @@ current_logtalk_flag(Flag, Value) :-
 		throw(type_error(protocol, ExtPtc))
 	;	'$lgt_is_category'(ExtPtc) ->
 		throw(type_error(protocol, ExtPtc))
-	;	'$lgt_add_referenced_protocol'(ExtPtc),
+	;	'$lgt_add_referenced_protocol'(ExtPtc, Ctx),
 		assertz('$lgt_pp_runtime_clause_'('$lgt_extends_protocol_'(Ptc, ExtPtc, Scope))),
 		'$lgt_construct_protocol_functors'(ExtPtc, Prefix, Dcl, _),
 		assertz('$lgt_pp_extended_protocol_'(ExtPtc, Ptc, Prefix, Dcl, Scope)),
-		'$lgt_compile_extends_protocol_relation'(Refs, Ptc)
+		'$lgt_compile_extends_protocol_relation'(Refs, Ptc, Ctx)
 	).
 
 
 
-% '$lgt_compile_extends_category_relation'(+list, @category_identifier)
+% '$lgt_compile_extends_category_relation'(+list, @category_identifier, @compilation_context)
 %
 % compiles an "extends" relation between a category and a list of categories
 
-'$lgt_compile_extends_category_relation'([], _).
+'$lgt_compile_extends_category_relation'([], _, _).
 
-'$lgt_compile_extends_category_relation'([Ref| Refs], Ctg) :-
+'$lgt_compile_extends_category_relation'([Ref| Refs], Ctg, Ctx) :-
 	'$lgt_check_entity_reference'(category, Ref, Scope, ExtCtg),
 	(	'$lgt_term_template'(Ctg, ExtCtg) ->
 		throw(permission_error(extend, self, Ctg))
@@ -12763,11 +12759,11 @@ current_logtalk_flag(Flag, Value) :-
 		throw(type_error(category, ExtCtg))
 	;	'$lgt_is_protocol'(ExtCtg) ->
 		throw(type_error(category, ExtCtg))
-	;	'$lgt_add_referenced_category'(ExtCtg),
+	;	'$lgt_add_referenced_category'(ExtCtg, Ctx),
 		assertz('$lgt_pp_runtime_clause_'('$lgt_extends_category_'(Ctg, ExtCtg, Scope))),
 		'$lgt_construct_category_functors'(ExtCtg, Prefix, Dcl, Def, _),
 		assertz('$lgt_pp_extended_category_'(ExtCtg, Ctg, Prefix, Dcl, Def, Scope)),
-		'$lgt_compile_extends_category_relation'(Refs, Ctg)
+		'$lgt_compile_extends_category_relation'(Refs, Ctg, Ctx)
 	).
 
 
@@ -12812,7 +12808,7 @@ current_logtalk_flag(Flag, Value) :-
 	fail.
 
 '$lgt_compile_complements_object_relation'([Obj| Objs], Ctg, Dcl, Def, Rnm, Ctx) :-
-	'$lgt_add_referenced_object'(Obj),
+	'$lgt_add_referenced_object'(Obj, Ctx),
 	assertz('$lgt_pp_runtime_clause_'('$lgt_complemented_object_'(Obj, Ctg, Dcl, Def, Rnm))),
 	assertz('$lgt_pp_complemented_object_'(Obj, Ctg, Dcl, Def, Rnm)),
 	'$lgt_compile_complements_object_relation'(Objs, Ctg, Dcl, Def, Rnm, Ctx).
