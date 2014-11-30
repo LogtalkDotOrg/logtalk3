@@ -49,6 +49,8 @@ as the backend compiler.
 * FIXED: Compiler bug where `encoding/1` and `bom/1` source file properties
 would not be saved together with all the other information about loaded files.
 
+* FIXED: Also accept a `end_of_file` term when compiling runtime terms.
+
 * FIXED: Updated the `paths/paths.pl` file to define the library `home` using
 the `USERPROFILE` environment variable when running on Windows instead of the
 concatenation of the `HOMEDRIVE` and `HOMEPATH` variables, which only worked

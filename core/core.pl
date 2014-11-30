@@ -6477,6 +6477,9 @@ current_logtalk_flag(Flag, Value) :-
 	% catch variables
 	throw(error(instantiantion_error, term(_))).
 
+'$lgt_compile_runtime_term'(end_of_file, _) :-
+	!.
+
 '$lgt_compile_runtime_term'({Term}, Ctx) :-
 	% bypass control construct; term is final
 	!,
