@@ -336,12 +336,12 @@
 % '$lgt_pp_file_object_initialization_'(Object, Goal)
 :- dynamic('$lgt_pp_file_object_initialization_'/2).
 
-% '$lgt_pp_object_initialization_'(Goal, Position)
+% '$lgt_pp_object_initialization_'(Goal, Lines)
 :- dynamic('$lgt_pp_object_initialization_'/2).
 % '$lgt_pp_final_object_initialization_'(Goal)
 :- dynamic('$lgt_pp_final_object_initialization_'/1).
 
-% '$lgt_pp_entity_meta_directive_'(Directive, Position)
+% '$lgt_pp_entity_meta_directive_'(Directive, Lines)
 :- dynamic('$lgt_pp_entity_meta_directive_'/2).
 
 % '$lgt_pp_redefined_built_in_'(Head, ExCtx, THead)
@@ -349,11 +349,11 @@
 
 % '$lgt_pp_directive_'(Directive)
 :- dynamic('$lgt_pp_directive_'/1).
-% '$lgt_pp_prolog_term_'(Term, Position)
+% '$lgt_pp_prolog_term_'(Term, Lines)
 :- dynamic('$lgt_pp_prolog_term_'/2).
-% '$lgt_pp_entity_term_'(Term, Position)
+% '$lgt_pp_entity_term_'(Term, Lines)
 :- dynamic('$lgt_pp_entity_term_'/2).
-% '$lgt_pp_final_entity_term_'(Term, Position)
+% '$lgt_pp_final_entity_term_'(Term, Lines)
 :- dynamic('$lgt_pp_final_entity_term_'/2).
 % '$lgt_pp_entity_aux_clause_'(Clause)
 :- dynamic('$lgt_pp_entity_aux_clause_'/1).
@@ -450,8 +450,8 @@
 % '$lgt_pp_cc_mode_'(Action)
 :- dynamic('$lgt_pp_cc_mode_'/1).
 
-% '$lgt_pp_term_position_variables_'(Position, Variables)
-:- dynamic('$lgt_pp_term_position_variables_'/2).
+% '$lgt_pp_term_lines_variables_'(Lines, Variables)
+:- dynamic('$lgt_pp_term_lines_variables_'/2).
 
 % '$lgt_pp_aux_predicate_counter_'(Counter)
 :- dynamic('$lgt_pp_aux_predicate_counter_'/1).
@@ -2285,11 +2285,11 @@ logtalk_load_context(entity_type, Type) :-
 	;	'$lgt_pp_entity_'(Type, _, _, _, _)
 	).
 
-logtalk_load_context(term_position, Position) :-
-	'$lgt_pp_term_position_variables_'(Position, _).
+logtalk_load_context(term_position, Lines) :-
+	'$lgt_pp_term_lines_variables_'(Lines, _).
 
 logtalk_load_context(variable_names, Variables) :-
-	'$lgt_pp_term_position_variables_'(_, Variables).
+	'$lgt_pp_term_lines_variables_'(_, Variables).
 
 logtalk_load_context(stream, Stream) :-
 	% avoid a spurious choice-point with some back-end Prolog compilers
@@ -4992,7 +4992,7 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_entity_property_'(Entity, file_lines(OldBasename, OldDirectory, _, _)),
 		'$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, file_lines(NewBasename, NewDirectory, Start, End))) ->
 		atom_concat(OldDirectory, OldBasename, OldFile0),
-		atom_concat(NewDirectory, NewBasename, NewFile0), 
+		atom_concat(NewDirectory, NewBasename, NewFile0),
 		Lines = Start-End,
 		(	OldFile0 \== NewFile0 ->
 			OldFile = OldFile0,
@@ -5004,7 +5004,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	% no file_lines/4 entity property
 		OldFile = nil,
 		NewFile = nil,
-		Lines = 1
+		Lines = '-'(-1, -1)
 	).
 
 
@@ -5268,7 +5268,7 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	% look for an encoding/1 directive that, when present, must be the first term on a source file
 	catch(
-		'$lgt_read_term'(Input, Term, [singletons(Singletons)], Position),
+		'$lgt_read_term'(Input, Term, [singletons(Singletons)], Lines),
 		InputError,
 		'$lgt_compiler_stream_io_error_handler'(Input, InputError)
 	),
@@ -5290,7 +5290,7 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	% read and compile the remaining terms in the Logtalk source file
 	catch(
-		'$lgt_compile_file_term'(Term, Singletons, Position, NewInput),
+		'$lgt_compile_file_term'(Term, Singletons, Lines, NewInput),
 		Error,
 		'$lgt_first_stage_error_handler'(Error)
 	),
@@ -5373,13 +5373,13 @@ current_logtalk_flag(Flag, Value) :-
 	% catch variables
 	throw(error(instantiation_error, term(_))).
 
-'$lgt_compile_file_term'(end_of_file, _, Position, _) :-
+'$lgt_compile_file_term'(end_of_file, _, Lines, _) :-
 	'$lgt_pp_module_'(Module),
 	!,
 	% module definitions start with an opening module/1-2 directive and are assumed
 	% to end at the end of a source file; there is no module closing directive;
 	% set the initial compilation context and the position for compiling the end_of_file term
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(regular), _, Position),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(regular), _, Lines),
 	'$lgt_compile_file_term'(end_of_file, Ctx),
 	'$lgt_second_stage'(object, Module, Ctx),
 	'$lgt_print_message'(silent(compiling), core, compiled_entity(module, Module)).
@@ -5400,10 +5400,10 @@ current_logtalk_flag(Flag, Value) :-
 	% unexpected end-of-file while compiling a conditional compilation block
 	throw(error(existence_error(directive, endif/0), term(end_of_file))).
 
-'$lgt_compile_file_term'(end_of_file, _, Position, _) :-
+'$lgt_compile_file_term'(end_of_file, _, Lines, _) :-
 	!,
 	% set the initial compilation context and the position for compiling the end_of_file term
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(regular), _, Position),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(regular), _, Lines),
 	% allow for term-expansion of the end_of_file term
 	'$lgt_compile_file_term'(end_of_file, Ctx).
 
@@ -5413,16 +5413,16 @@ current_logtalk_flag(Flag, Value) :-
 	\+ '$lgt_is_conditional_compilation_directive'(Term),
 	% ... except for conditional compilation directives itself
 	!,
-	'$lgt_read_term'(Input, Next, [singletons(NextSingletons)], NextPosition),
-	'$lgt_compile_file_term'(Next, NextSingletons, NextPosition, Input).
+	'$lgt_read_term'(Input, Next, [singletons(NextSingletons)], NextLines),
+	'$lgt_compile_file_term'(Next, NextSingletons, NextLines, Input).
 
-'$lgt_compile_file_term'(Term, Singletons, Position, Input) :-
+'$lgt_compile_file_term'(Term, Singletons, Lines, Input) :-
 	'$lgt_report_singleton_variables'(Singletons, Term),
 	% set the initial compilation context and the position for compiling the term
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(regular), _, Position),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(regular), _, Lines),
 	'$lgt_compile_file_term'(Term, Ctx),
-	'$lgt_read_term'(Input, Next, [singletons(NextSingletons)], NextPosition),
-	'$lgt_compile_file_term'(Next, NextSingletons, NextPosition, Input).
+	'$lgt_read_term'(Input, Next, [singletons(NextSingletons)], NextLines),
+	'$lgt_compile_file_term'(Next, NextSingletons, NextLines, Input).
 
 
 
@@ -5439,12 +5439,12 @@ current_logtalk_flag(Flag, Value) :-
 		% not the first reference to the object
 		true
 	;	% first reference to this object
-		'$lgt_comp_ctx_position'(Ctx, Position),
+		'$lgt_comp_ctx_lines'(Ctx, Lines),
 		(	atom(Obj) ->
-			assertz('$lgt_pp_referenced_object_'(Obj, Position))
+			assertz('$lgt_pp_referenced_object_'(Obj, Lines))
 		;	% parametric object
 			'$lgt_term_template'(Obj, Template),
-			assertz('$lgt_pp_referenced_object_'(Template, Position))
+			assertz('$lgt_pp_referenced_object_'(Template, Lines))
 		)
 	).
 
@@ -5463,8 +5463,8 @@ current_logtalk_flag(Flag, Value) :-
 		% not the first reference to the protocol
 		true
 	;	% first reference to this protocol
-		'$lgt_comp_ctx_position'(Ctx, Position),
-		assertz('$lgt_pp_referenced_protocol_'(Ptc, Position))
+		'$lgt_comp_ctx_lines'(Ctx, Lines),
+		assertz('$lgt_pp_referenced_protocol_'(Ptc, Lines))
 	).
 
 
@@ -5482,12 +5482,12 @@ current_logtalk_flag(Flag, Value) :-
 		% not the first reference to the category
 		true
 	;	% first reference to this category
-		'$lgt_comp_ctx_position'(Ctx, Position),
+		'$lgt_comp_ctx_lines'(Ctx, Lines),
 		(	atom(Ctg) ->
-			assertz('$lgt_pp_referenced_category_'(Ctg, Position))
+			assertz('$lgt_pp_referenced_category_'(Ctg, Lines))
 		;	% parametric category
 			'$lgt_term_template'(Ctg, Template),
-			assertz('$lgt_pp_referenced_category_'(Template, Position))
+			assertz('$lgt_pp_referenced_category_'(Template, Lines))
 		)
 	).
 
@@ -5506,8 +5506,8 @@ current_logtalk_flag(Flag, Value) :-
 		% not the first reference to the module
 		true
 	;	% first reference to this module
-		'$lgt_comp_ctx_position'(Ctx, Position),
-		assertz('$lgt_pp_referenced_module_'(Module, Position))
+		'$lgt_comp_ctx_lines'(Ctx, Lines),
+		assertz('$lgt_pp_referenced_module_'(Module, Lines))
 	).
 
 
@@ -5518,7 +5518,7 @@ current_logtalk_flag(Flag, Value) :-
 % adds referenced object and message for supporting using reflection to
 % retrieve cross-reference information
 
-'$lgt_add_referenced_object_message'(Obj, Pred, Head, Position) :-
+'$lgt_add_referenced_object_message'(Obj, Pred, Head, Lines) :-
 	functor(Pred, PredFunctor, PredArity),
 	(	var(Head) ->
 		% not compiling a clause
@@ -5531,17 +5531,17 @@ current_logtalk_flag(Flag, Value) :-
 		true
 	;	% add reference if first but be careful to not instantiate the object argument which may only be known at runtime
 		functor(Head, HeadFunctor, HeadArity),
-		(	\+ \+ '$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, _, HeadFunctor/HeadArity, Position) ->
+		(	\+ \+ '$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, _, HeadFunctor/HeadArity, Lines) ->
 			true
 		;	compound(Obj) ->
 			% parametric object
 			'$lgt_term_template'(Obj, Template),
-			assertz('$lgt_pp_referenced_object_message_'(Template, PredFunctor/PredArity, PredFunctor/PredArity, HeadFunctor/HeadArity, Position))
-		;	assertz('$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, PredFunctor/PredArity, HeadFunctor/HeadArity, Position))
+			assertz('$lgt_pp_referenced_object_message_'(Template, PredFunctor/PredArity, PredFunctor/PredArity, HeadFunctor/HeadArity, Lines))
+		;	assertz('$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, PredFunctor/PredArity, HeadFunctor/HeadArity, Lines))
 		)
 	).
 
-'$lgt_add_referenced_object_message'(Obj, Pred, Alias, Head, Position) :-
+'$lgt_add_referenced_object_message'(Obj, Pred, Alias, Head, Lines) :-
 	(	var(Head) ->
 		% not compiling a clause
 		true
@@ -5551,14 +5551,14 @@ current_logtalk_flag(Flag, Value) :-
 	;	% add reference if first but be careful to not instantiate the object argument which may only be known at runtime
 		functor(Pred, PredFunctor, PredArity),
 		functor(Head, HeadFunctor, HeadArity),
-		(	\+ \+ '$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, _, HeadFunctor/HeadArity, Position) ->
+		(	\+ \+ '$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, _, HeadFunctor/HeadArity, Lines) ->
 			true
 		;	functor(Alias, AliasFunctor, AliasArity),
 			(	compound(Obj) ->
 				% parametric object
 				'$lgt_term_template'(Obj, Template),
-				assertz('$lgt_pp_referenced_object_message_'(Template, PredFunctor/PredArity, AliasFunctor/AliasArity, HeadFunctor/HeadArity, Position))
-			;	assertz('$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, AliasFunctor/AliasArity, HeadFunctor/HeadArity, Position))
+				assertz('$lgt_pp_referenced_object_message_'(Template, PredFunctor/PredArity, AliasFunctor/AliasArity, HeadFunctor/HeadArity, Lines))
+			;	assertz('$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, AliasFunctor/AliasArity, HeadFunctor/HeadArity, Lines))
 			)
 		)
 	).
@@ -5571,7 +5571,7 @@ current_logtalk_flag(Flag, Value) :-
 % adds referenced module for later checking of references to unknown modules
 % we also save the line numbers for the first reference to the module
 
-'$lgt_add_referenced_module_predicate'(Module, Pred, Head, Position) :-
+'$lgt_add_referenced_module_predicate'(Module, Pred, Head, Lines) :-
 	functor(Pred, PredFunctor, PredArity),
 	(	var(Head) ->
 		% not compiling a clause
@@ -5583,13 +5583,13 @@ current_logtalk_flag(Flag, Value) :-
 		% not the first reference
 		true
 	;	functor(Head, HeadFunctor, HeadArity),
-		(	'$lgt_pp_referenced_module_predicate_'(Module, PredFunctor/PredArity, _, HeadFunctor/HeadArity, Position) ->
+		(	'$lgt_pp_referenced_module_predicate_'(Module, PredFunctor/PredArity, _, HeadFunctor/HeadArity, Lines) ->
 			true
-		;	assertz('$lgt_pp_referenced_module_predicate_'(Module, PredFunctor/PredArity, PredFunctor/PredArity, HeadFunctor/HeadArity, Position))
+		;	assertz('$lgt_pp_referenced_module_predicate_'(Module, PredFunctor/PredArity, PredFunctor/PredArity, HeadFunctor/HeadArity, Lines))
 		)
 	).
 
-'$lgt_add_referenced_module_predicate'(Module, Pred, Alias, Head, Position) :-
+'$lgt_add_referenced_module_predicate'(Module, Pred, Alias, Head, Lines) :-
 	(	var(Head) ->
 		% not compiling a clause
 		true
@@ -5599,9 +5599,9 @@ current_logtalk_flag(Flag, Value) :-
 	;	functor(Pred, PredFunctor, PredArity),
 		functor(Alias, AliasFunctor, AliasArity),
 		functor(Head, HeadFunctor, HeadArity),
-		(	'$lgt_pp_referenced_module_predicate_'(Module, PredFunctor/PredArity, _, HeadFunctor/HeadArity, Position) ->
+		(	'$lgt_pp_referenced_module_predicate_'(Module, PredFunctor/PredArity, _, HeadFunctor/HeadArity, Lines) ->
 			true
-		;	assertz('$lgt_pp_referenced_module_predicate_'(Module, PredFunctor/PredArity, AliasFunctor/AliasArity, HeadFunctor/HeadArity, Position))
+		;	assertz('$lgt_pp_referenced_module_predicate_'(Module, PredFunctor/PredArity, AliasFunctor/AliasArity, HeadFunctor/HeadArity, Lines))
 		)
 	).
 
@@ -5633,7 +5633,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	% Kind == category,
 		'$lgt_pp_referenced_category_'(Entity, Start-_)	
 	),
-	'$lgt_pp_term_position_variables_'(_-End, _),
+	'$lgt_pp_term_lines_variables_'(_-End, _),
 	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, file_lines(Basename, Directory, Start, End)))),
 	fail.
 
@@ -5868,15 +5868,15 @@ current_logtalk_flag(Flag, Value) :-
 % logtalk_load_context/2 predicate and more informative compiler warning
 % and error messages
 
-'$lgt_read_term'(Stream, Term, Options, Position) :-
+'$lgt_read_term'(Stream, Term, Options, Lines) :-
 	% we retract first the position and variable names for the previous
 	% read term as we may get a syntax error while reading the next term;
 	% this will allow us to use the stream position if necessary to find
 	% the approximated position of the error
-	retractall('$lgt_pp_term_position_variables_'(_, _)),
+	retractall('$lgt_pp_term_lines_variables_'(_, _)),
 	% the actual read term predicate is defined in the adapter files
-	'$lgt_read_term'(Stream, Term, Options, Position, Variables),
-	assertz('$lgt_pp_term_position_variables_'(Position, Variables)).
+	'$lgt_read_term'(Stream, Term, Options, Lines, Variables),
+	assertz('$lgt_pp_term_lines_variables_'(Lines, Variables)).
 
 
 
@@ -5902,10 +5902,10 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_clean_pp_entity_clauses'.
 
 
-'$lgt_second_stage_error_handler'(error(Error,Position,Context)) :-
+'$lgt_second_stage_error_handler'(error(Error,Lines,Context)) :-
 	!,
 	'$lgt_warning_context'(SourceFile, ObjectFile, _),
-	'$lgt_compiler_error_handler'(SourceFile, ObjectFile, Position, error(Error,Context)).
+	'$lgt_compiler_error_handler'(SourceFile, ObjectFile, Lines, error(Error,Context)).
 
 '$lgt_second_stage_error_handler'(Error) :-
 	% we should never get here but some backend Prolog compilers have broken or
@@ -6022,7 +6022,7 @@ current_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_pp_file_bom_'(_)),
 	retractall('$lgt_pp_file_data_'(_, _, _, _)),
 	retractall('$lgt_pp_file_compiler_flag_'(_, _)),
-	retractall('$lgt_pp_term_position_variables_'(_, _)),
+	retractall('$lgt_pp_term_lines_variables_'(_, _)),
 	% a Logtalk source file may contain only plain Prolog terms
 	% instead of plain Prolog terms intermixed between entities
 	% definitions; there might also be plain Prolog terms after
@@ -6331,8 +6331,8 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_file_terms'([Term| Terms], Ctx) :-
 	'$lgt_must_be'(nonvar, Term, term(Term)),
 	% only the compilation context mode and position should be shared between different terms
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, Mode, _, Position),
-	'$lgt_comp_ctx'(NewCtx, _, _, _, _, _, _, _, _, _, Mode, _, Position),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, Mode, _, Lines),
+	'$lgt_comp_ctx'(NewCtx, _, _, _, _, _, _, _, _, _, Mode, _, Lines),
 	'$lgt_compile_file_term'(Term, NewCtx),
 	'$lgt_compile_file_terms'(Terms, Ctx).
 
@@ -6422,12 +6422,12 @@ current_logtalk_flag(Flag, Value) :-
 	% bypass control construct; expanded term is final
 	!,
 	(	callable(ExpandedTerm) ->
-		'$lgt_comp_ctx_position'(Ctx, Position),
+		'$lgt_comp_ctx_lines'(Ctx, Lines),
 		(	'$lgt_pp_entity_'(_, _, _, _, _) ->
 			% ensure that the relative order of the entity terms is kept
-			assertz('$lgt_pp_entity_term_'({ExpandedTerm}, Position))
+			assertz('$lgt_pp_entity_term_'({ExpandedTerm}, Lines))
 		;	% non-entity terms
-			assertz('$lgt_pp_prolog_term_'(ExpandedTerm, Position))
+			assertz('$lgt_pp_prolog_term_'(ExpandedTerm, Lines))
 		)
 	;	var(ExpandedTerm) ->
 		throw(error(instantiantion_error, term_expansion(Term, {ExpandedTerm})))
@@ -6484,8 +6484,8 @@ current_logtalk_flag(Flag, Value) :-
 	% bypass control construct; term is final
 	!,
 	(	callable(Term) ->
-		'$lgt_comp_ctx_position'(Ctx, Position),
-		assertz('$lgt_pp_entity_term_'({Term}, Position))
+		'$lgt_comp_ctx_lines'(Ctx, Lines),
+		assertz('$lgt_pp_entity_term_'({Term}, Lines))
 	;	var(Term) ->
 		throw(error(instantiantion_error, term({Term})))
 	;	throw(error(type_error(callable, Term), term({Term})))
@@ -6541,7 +6541,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_directive'(if(Goal), _) :-
 	'$lgt_pp_cc_mode_'(Value),
-	% not top-level if
+	% not top-level if/1 directive
 	!,
 	asserta('$lgt_pp_cc_if_found_'(Goal)),
 	(	Value == ignore ->
@@ -6552,7 +6552,7 @@ current_logtalk_flag(Flag, Value) :-
 		asserta('$lgt_pp_cc_mode_'(ignore))
 	;	Value == skip_all ->
 		asserta('$lgt_pp_cc_mode_'(ignore))
-	;	% Value == skip_else ->
+	;	% Value == skip_else,
 		(	catch(Goal, Error, '$lgt_first_stage_error_handler'(Error)) ->
 			asserta('$lgt_pp_cc_mode_'(skip_else))
 		;	asserta('$lgt_pp_cc_mode_'(seek_else)),
@@ -6604,7 +6604,7 @@ current_logtalk_flag(Flag, Value) :-
 		asserta('$lgt_pp_cc_mode_'(skip_all))
 	;	Mode == skip_all ->
 		true
-	;	% Mode == seek_else ->
+	;	% Mode == seek_else,
 		% the corresponding if is false
 		retract('$lgt_pp_cc_mode_'(_)),
 		(	catch(Goal, Error, '$lgt_first_stage_error_handler'(Error)) ->
@@ -6686,7 +6686,8 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 '$lgt_compile_directive'(Directive, Ctx) :-
-	'$lgt_prolog_meta_directive'(Directive, Meta),	% defined in the Prolog adapter files
+	'$lgt_prolog_meta_directive'(Directive, Meta),
+	% as defined in the Prolog adapter files
 	!,
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 		'$lgt_compiler_flag'(portability, warning) ->
@@ -6695,8 +6696,8 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_print_message'(warning(portability), core, compiling_proprietary_prolog_directive(SourceFile, Lines, Type, Entity, Directive))
 	;	true
 	),
-	'$lgt_comp_ctx_position'(Ctx, Position),
-	assertz('$lgt_pp_entity_meta_directive_'(directive(Directive, Meta), Position)).
+	'$lgt_comp_ctx_lines'(Ctx, Lines),
+	assertz('$lgt_pp_entity_meta_directive_'(directive(Directive, Meta), Lines)).
 
 '$lgt_compile_directive'(Directive, Ctx) :-
 	'$lgt_pp_module_'(_),
@@ -6738,7 +6739,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_file_directive'(encoding(Encoding), Ctx) :-
 	!,
 	(	'$lgt_pp_file_encoding_'(Encoding, _),
-		'$lgt_comp_ctx_position'(Ctx, 1-_) ->
+		'$lgt_comp_ctx_lines'(Ctx, 1-_) ->
 		% encoding/1 directive already processed
 		true
 	;	% out-of-place encoding/1 directive, which must be the first term in a source file
@@ -6752,8 +6753,8 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_must_be'(ground, File),
 	% assume that ensure_loaded/1 is also a built-in predicate
 	ensure_loaded(File),
-	'$lgt_comp_ctx_position'(Ctx, Position),
-	assertz('$lgt_pp_prolog_term_'((:- ensure_loaded(File)), Position)).
+	'$lgt_comp_ctx_lines'(Ctx, Lines),
+	assertz('$lgt_pp_prolog_term_'((:- ensure_loaded(File)), Lines)).
 
 '$lgt_compile_file_directive'(use_module(File), Ctx) :-
 	!,
@@ -6761,8 +6762,8 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_must_be'(ground, File),
 	% assume that use_module/1 is also a built-in predicate
 	use_module(File),
-	'$lgt_comp_ctx_position'(Ctx, Position),
-	assertz('$lgt_pp_prolog_term_'((:- use_module(File)), Position)).
+	'$lgt_comp_ctx_lines'(Ctx, Lines),
+	assertz('$lgt_pp_prolog_term_'((:- use_module(File)), Lines)).
 
 '$lgt_compile_file_directive'(use_module(File, Imports), Ctx) :-
 	!,
@@ -6771,8 +6772,8 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_must_be'(ground, Imports),
 	% assume that use_module/2 is also a built-in predicate
 	use_module(File, Imports),
-	'$lgt_comp_ctx_position'(Ctx, Position),
-	assertz('$lgt_pp_prolog_term_'((:- use_module(File, Imports)), Position)).
+	'$lgt_comp_ctx_lines'(Ctx, Lines),
+	assertz('$lgt_pp_prolog_term_'((:- use_module(File, Imports)), Lines)).
 
 '$lgt_compile_file_directive'(include(File), Ctx) :-
 	!,
@@ -6799,8 +6800,8 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_must_be'(operator_specification, op(Priority, Specifier, Operators)),
 	'$lgt_activate_file_operators'(Priority, Specifier, Operators),
-	'$lgt_comp_ctx_position'(Ctx, Position),
-	assertz('$lgt_pp_prolog_term_'((:- op(Priority, Specifier, Operators)), Position)).
+	'$lgt_comp_ctx_lines'(Ctx, Lines),
+	assertz('$lgt_pp_prolog_term_'((:- op(Priority, Specifier, Operators)), Lines)).
 
 '$lgt_compile_file_directive'(set_logtalk_flag(Name, Value), Ctx) :-
 	!,
@@ -6821,8 +6822,8 @@ current_logtalk_flag(Flag, Value) :-
 	% depending on the flag and on the back-end Prolog compiler
 	set_prolog_flag(Flag, Value),
 	% we also copy the directive to the generated intermediate Prolog file
-	'$lgt_comp_ctx_position'(Ctx, Position),
-	assertz('$lgt_pp_prolog_term_'((:- set_prolog_flag(Flag, Value)), Position)).
+	'$lgt_comp_ctx_lines'(Ctx, Lines),
+	assertz('$lgt_pp_prolog_term_'((:- set_prolog_flag(Flag, Value)), Lines)).
 
 '$lgt_compile_file_directive'(multifile(Preds), _) :-
 	% perform basic error checking
@@ -6864,8 +6865,8 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_file_directive'(Directive, Ctx) :-
 	% directive will be copied to the generated Prolog file
-	'$lgt_comp_ctx_position'(Ctx, Position),
-	assertz('$lgt_pp_prolog_term_'((:- Directive), Position)),
+	'$lgt_comp_ctx_lines'(Ctx, Lines),
+	assertz('$lgt_pp_prolog_term_'((:- Directive), Lines)),
 	% report a possible portability issue if warranted
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 		'$lgt_compiler_flag'(portability, warning),
@@ -7122,11 +7123,11 @@ current_logtalk_flag(Flag, Value) :-
 	(	Type == object ->
 		'$lgt_must_be'(callable, Goal),
 		% MetaVars = [] as we're compiling a local call
-		'$lgt_comp_ctx'(Ctx, (:- initialization(Goal)), Entity, Entity, Entity, Entity, Prefix, [], _, ExCtx, _, [], Position),
+		'$lgt_comp_ctx'(Ctx, (:- initialization(Goal)), Entity, Entity, Entity, Entity, Prefix, [], _, ExCtx, _, [], Lines),
 		'$lgt_execution_context'(ExCtx, Entity, Entity, Entity, Entity, [], []),
 		(	'$lgt_compiler_flag'(debug, on) ->
-			assertz('$lgt_pp_object_initialization_'(dgoal(Goal,Ctx), Position))
-		;	assertz('$lgt_pp_object_initialization_'(goal(Goal,Ctx), Position))
+			assertz('$lgt_pp_object_initialization_'(dgoal(Goal,Ctx), Lines))
+		;	assertz('$lgt_pp_object_initialization_'(goal(Goal,Ctx), Lines))
 		)
 	;	Type == protocol ->
 		throw(domain_error(protocol_directive, (initialization)/1))
@@ -7456,10 +7457,12 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	functor(Head, Functor, ExtArity),
 	(	'$lgt_pp_dynamic_'(Head) ->
+		% synchronized non-terminals must be static
 		throw(permission_error(modify, dynamic_non_terminal, Functor//Arity))
 	;	'$lgt_pp_defines_non_terminal_'(Functor, Arity) ->
 		throw(permission_error(modify, non_terminal_interpretation, Functor//Arity))
 	;	'$lgt_pp_defines_predicate_'(Head, _, _, _) ->
+		% synchronized/1 directives must precede the definitions for the declared non-terminals
 		throw(permission_error(modify, non_terminal_interpretation, Functor//Arity))
 	;	assertz('$lgt_pp_synchronized_'(Head, Mutex))
 	).
@@ -7590,7 +7593,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_add_predicate_scope_line_property'(PredicateIndicator) :-
 	(	'$lgt_compiler_flag'(source_data, on),
-		'$lgt_pp_term_position_variables_'(Line-_, _) ->
+		'$lgt_pp_term_lines_variables_'(Line-_, _) ->
 		'$lgt_pp_entity_'(_, Entity, _, _, _),
 		assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, PredicateIndicator, declaration_line(Line))))
 	;	true
@@ -7916,7 +7919,7 @@ current_logtalk_flag(Flag, Value) :-
 		% protocols cannot contain predicate definitions
 		throw(permission_error(declare, multifile, Functor/Arity))
 	;	functor(Head, Functor, Arity),
-		'$lgt_comp_ctx_position'(Ctx, Lines),
+		'$lgt_comp_ctx_lines'(Ctx, Lines),
 		assertz('$lgt_pp_multifile_'(Head, Lines)),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity)))
@@ -7930,7 +7933,7 @@ current_logtalk_flag(Flag, Value) :-
 		% protocols cannot contain non-terminal definitions
 		throw(permission_error(declare, multifile, Functor//Arity))
 	;	functor(Head, Functor, ExtArity),
-		'$lgt_comp_ctx_position'(Ctx, Lines),
+		'$lgt_comp_ctx_lines'(Ctx, Lines),
 		assertz('$lgt_pp_multifile_'(Head, Lines)),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity)))
@@ -8756,8 +8759,8 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	% ensure that only the compilation context mode and the entity prefix are
 	% shared between different clauses but keep the current clause position
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, Prefix, _, _, _, Mode, _, Position),
-	'$lgt_comp_ctx'(NewCtx, _, _, _, _, _, Prefix, _, _, _, Mode, _, Position),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, Prefix, _, _, _, Mode, _, Lines),
+	'$lgt_comp_ctx'(NewCtx, _, _, _, _, _, Prefix, _, _, _, Mode, _, Lines),
 	% we're compiling an entity clause
 	catch(
 		'$lgt_compile_clause'(Clause, Entity, TClause, DClause, NewCtx),
@@ -8769,11 +8772,11 @@ current_logtalk_flag(Flag, Value) :-
 	(	'$lgt_compiler_flag'(debug, on) ->
 		(	Mode == compile(aux) ->
 			assertz('$lgt_pp_entity_aux_clause_'(DClause))
-		;	assertz('$lgt_pp_entity_term_'(DClause, Position))
+		;	assertz('$lgt_pp_entity_term_'(DClause, Lines))
 		)
 	;	(	Mode == compile(aux) ->
 			assertz('$lgt_pp_entity_aux_clause_'(TClause))
-		;	assertz('$lgt_pp_entity_term_'(TClause, Position))
+		;	assertz('$lgt_pp_entity_term_'(TClause, Lines))
 		)
 	),
 	!.
@@ -8783,9 +8786,9 @@ current_logtalk_flag(Flag, Value) :-
 	% clause occurs before an opening entity directive
 	!,
 	'$lgt_must_be'(clause, Clause, clause(Clause)),
-	'$lgt_comp_ctx_position'(Ctx, Position),
+	'$lgt_comp_ctx_lines'(Ctx, Lines),
 	% copy it unchanged to the generated Prolog file
-	assertz('$lgt_pp_prolog_term_'(Clause, Position)).
+	assertz('$lgt_pp_prolog_term_'(Clause, Lines)).
 
 '$lgt_compile_clause'(Clause, _) :-
 	% deal with unexpected clause translation failures
@@ -9147,9 +9150,9 @@ current_logtalk_flag(Flag, Value) :-
 	% as delegation keeps the original sender, we cannot use a recursive call
 	% to the '$lgt_compile_body'/4 predicate to compile the ::/2 goal as that
 	% would reset the sender to "this"
-	'$lgt_comp_ctx'(Ctx, Head, _, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, Mode, Stack, Position),
+	'$lgt_comp_ctx'(Ctx, Head, _, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, Mode, Stack, Lines),
 	'$lgt_execution_context'(ExCtx, _, Sender, This, _, _, _),
-	'$lgt_comp_ctx'(NewCtx, Head, _, Sender, Sender, Self, Prefix, MetaVars, MetaCallCtx, NewExCtx, Mode, Stack, Position),
+	'$lgt_comp_ctx'(NewCtx, Head, _, Sender, Sender, Self, Prefix, MetaVars, MetaCallCtx, NewExCtx, Mode, Stack, Lines),
 	'$lgt_execution_context_this_entity'(NewExCtx, Sender, _),
 	'$lgt_compiler_flag'(events, Events),
 	'$lgt_compile_message_to_object'(Pred, Obj, TPred0, Events, NewCtx),
@@ -9712,8 +9715,8 @@ current_logtalk_flag(Flag, Value) :-
 		) ->
 		% we're compiling a call to a module meta-predicate
 		'$lgt_add_referenced_module'(Module, Ctx),
-		'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, _, _, Position),
-		'$lgt_add_referenced_module_predicate'(Module, Pred, Head, Position),
+		'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, _, _, Lines),
+		'$lgt_add_referenced_module_predicate'(Module, Pred, Head, Lines),
 		Pred =.. [Functor| Args],
 		Meta =.. [Functor| MArgs],
 		'$lgt_prolog_to_logtalk_meta_argument_specifiers'(MArgs, CMArgs),
@@ -9728,8 +9731,8 @@ current_logtalk_flag(Flag, Value) :-
 		)
 	;	% we're compiling a call to a module predicate
 		'$lgt_add_referenced_module'(Module, Ctx),
-		'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, _, _, Position),
-		'$lgt_add_referenced_module_predicate'(Module, Pred, Head, Position),
+		'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, _, _, Lines),
+		'$lgt_add_referenced_module_predicate'(Module, Pred, Head, Lines),
 		TPred = ':'(Module, Pred),
 		DPred = '$lgt_debug'(goal(':'(Module, Pred), TPred), ExCtx)
 	).
@@ -10622,8 +10625,8 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_body'(Alias, TPred, '$lgt_debug'(goal(Alias, TPred), ExCtx), Ctx) :-
 	'$lgt_pp_use_module_predicate_'(Module, Pred, Alias),
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, _, _, Position),
-	'$lgt_add_referenced_module_predicate'(Module, Pred, Alias, Head, Position),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, _, _, Lines),
+	'$lgt_add_referenced_module_predicate'(Module, Pred, Alias, Head, Lines),
 	'$lgt_compile_body'(':'(Module,Pred), TPred, _, Ctx).
 
 % predicates specified in uses/2 directives
@@ -10662,8 +10665,8 @@ current_logtalk_flag(Flag, Value) :-
 			'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx)
 		)
 	;	% objects other than the pseudo-object "user"
-		'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, _, _, Position),
-		'$lgt_add_referenced_object_message'(Obj, Pred, Alias, Head, Position),
+		'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, _, _, Lines),
+		'$lgt_add_referenced_object_message'(Obj, Pred, Alias, Head, Lines),
 		'$lgt_compile_body'(Obj::Pred, TPred, _, Ctx),
 		DPred = '$lgt_debug'(goal(Alias, TPred), ExCtx)
 	).
@@ -10798,8 +10801,12 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_prolog_built_in_predicate'(Pred),
 	!,
 	(	(	'$lgt_prolog_meta_predicate'(Pred, Meta, Type) ->
+			% built-in Prolog meta-predicate declared in the adapter file in use
 			true
-		;	catch('$lgt_predicate_property'(Pred, meta_predicate(Meta)), _, fail)
+		;	% lack of standardization of the predicate_property/2 predicate
+			% means that the next call may fail to recognize the predicate as
+			% a meta-predicate and retrieve a usable meta-predicate template
+			catch('$lgt_predicate_property'(Pred, meta_predicate(Meta)), _, fail)
 		) ->
 		% meta-predicate
 		Pred =.. [Functor| Args],
@@ -11214,7 +11221,8 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_extend_closure_basic'(Closure, ExtArgs, Msg).
 
-'$lgt_extend_closure'(:Closure, ExtArgs, :Msg) :-	% deprecated control construct
+'$lgt_extend_closure'(:Closure, ExtArgs, :Msg) :-
+	% deprecated control construct
 	!,
 	'$lgt_extend_closure_basic'(Closure, ExtArgs, Msg).
 
@@ -11317,7 +11325,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_check_dynamic_directive'(+atom, @term, @term)
+% '$lgt_check_dynamic_directive'(@term, @term, @compilation_context)
 %
 % checks for a dynamic/1 directive for a predicate that is an argument to the
 % database built-in methods; the predicate may be non-instantiated or only
@@ -11358,7 +11366,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_check_discontiguous_directive'(@predicate_indicator, @term)
+% '$lgt_check_discontiguous_directive'(@callable, @compilation_context)
 %
 % checks for a discontiguous/1 directive for a predicate
 
@@ -11435,7 +11443,8 @@ current_logtalk_flag(Flag, Value) :-
 % checks an arithmetic expression for calls to non-standard Prolog functions
 
 '$lgt_check_non_portable_functions'(Expression, Lines) :-
-	compound(Expression),	% function
+	compound(Expression),
+	% assume function
 	!,
 	(	'$lgt_iso_spec_function'(Expression) ->
 		% portable call (we assume...!)
@@ -11501,8 +11510,8 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_message_to_object'(Pred, Obj, '$lgt_send_to_obj_rt'(Obj, Pred, Events, NewCtx), Events, Ctx) :-
 	var(Pred),
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, _, Stack, Position),
-	'$lgt_comp_ctx'(NewCtx, Head, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, runtime, Stack, Position).
+	'$lgt_comp_ctx'(Ctx, Head, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, _, Stack, Lines),
+	'$lgt_comp_ctx'(NewCtx, Head, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, runtime, Stack, Lines).
 
 % broadcasting control constructs
 
@@ -11705,16 +11714,16 @@ current_logtalk_flag(Flag, Value) :-
 	var(Obj),
 	% translation performed at runtime
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, _, _, Position),
-	'$lgt_add_referenced_object_message'(Obj, Pred, Head, Position),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, _, _, Lines),
+	'$lgt_add_referenced_object_message'(Obj, Pred, Head, Lines),
 	(	Events == allow ->
 		TPred = '$lgt_send_to_obj'(Obj, Pred, ExCtx)
 	;	TPred = '$lgt_send_to_obj_ne'(Obj, Pred, ExCtx)
 	).
 
 '$lgt_compile_message_to_object'(Pred, Obj, TPred, Events, Ctx) :-
-	'$lgt_comp_ctx'(Ctx, Head, _, _, This, _, _, _, _, ExCtx, _, _, Position),
-	'$lgt_add_referenced_object_message'(Obj, Pred, Head, Position),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, This, _, _, _, _, ExCtx, _, _, Lines),
+	'$lgt_add_referenced_object_message'(Obj, Pred, Head, Lines),
 	(	Events == allow ->
 		(	'$lgt_compiler_flag'(optimize, on),
 			'$lgt_send_to_obj_static_binding'(Obj, Pred, Call, Ctx) ->
@@ -11751,8 +11760,8 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_message_to_self'(Pred, '$lgt_send_to_self'(Pred, This, NewCtx), Ctx) :-
 	var(Pred),
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, _, Stack, Position),
-	'$lgt_comp_ctx'(NewCtx, Head, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, runtime, Stack, Position).
+	'$lgt_comp_ctx'(Ctx, Head, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, _, Stack, Lines),
+	'$lgt_comp_ctx'(NewCtx, Head, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, runtime, Stack, Lines).
 
 % broadcasting control constructs
 
@@ -12985,7 +12994,7 @@ current_logtalk_flag(Flag, Value) :-
 % returns the current term line numbers, represented as a pair StartLine-EndLine
 
 '$lgt_current_line_numbers'(Lines) :-
-	(	'$lgt_pp_term_position_variables_'(Lines, _) ->
+	(	'$lgt_pp_term_lines_variables_'(Lines, _) ->
 		true
 	;	stream_property(Input, alias(logtalk_compiler_input)),
 		'$lgt_stream_current_line_number'(Input, Line) ->
@@ -14485,9 +14494,9 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_predicate_calls'(Optimize) :-
 	% user-defined terms
-	retract('$lgt_pp_entity_term_'(Term, Position)),
-	'$lgt_compile_predicate_calls'(Term, Position, Optimize, TTerm),
-	assertz('$lgt_pp_final_entity_term_'(TTerm, Position)),
+	retract('$lgt_pp_entity_term_'(Term, Lines)),
+	'$lgt_compile_predicate_calls'(Term, Lines, Optimize, TTerm),
+	assertz('$lgt_pp_final_entity_term_'(TTerm, Lines)),
 	fail.
 
 '$lgt_compile_predicate_calls'(_) :-
@@ -14506,15 +14515,15 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_predicate_calls'(Optimize) :-
 	% initialization/1 goals
-	retract('$lgt_pp_object_initialization_'(Goal, Position)),
-	'$lgt_compile_predicate_calls'(Goal, Position, Optimize, TGoal),
+	retract('$lgt_pp_object_initialization_'(Goal, Lines)),
+	'$lgt_compile_predicate_calls'(Goal, Lines, Optimize, TGoal),
 	assertz('$lgt_pp_final_object_initialization_'(TGoal)),
 	fail.
 
 '$lgt_compile_predicate_calls'(Optimize) :-
 	% other initialization goals found on proprietary Prolog directives
-	retract('$lgt_pp_entity_meta_directive_'(Directive, Position)),
-	'$lgt_compile_predicate_calls'(Directive, Position, Optimize, TDirective),
+	retract('$lgt_pp_entity_meta_directive_'(Directive, Lines)),
+	'$lgt_compile_predicate_calls'(Directive, Lines, Optimize, TDirective),
 	assertz('$lgt_pp_directive_'(TDirective)),
 	fail.
 
@@ -14524,21 +14533,21 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_compile_predicate_calls'(+callable, @compound, +atom, -callable)
 
-'$lgt_compile_predicate_calls'(Term, Position, Optimize, TTerm) :-
+'$lgt_compile_predicate_calls'(Term, Lines, Optimize, TTerm) :-
 	(	catch(
 			'$lgt_compile_predicate_calls'(Term, Optimize, TTerm),
 			Error,
-			'$lgt_compile_predicate_calls_error_handler'(Term, Position, Error)
+			'$lgt_compile_predicate_calls_error_handler'(Term, Lines, Error)
 		) ->
 		true
 	;	% unexpected compilation failure
-		'$lgt_compile_predicate_calls_error_handler'(Term, Position, system_error)
+		'$lgt_compile_predicate_calls_error_handler'(Term, Lines, system_error)
 	).
 
 
-'$lgt_compile_predicate_calls_error_handler'(Term, Position, Error) :-
+'$lgt_compile_predicate_calls_error_handler'(Term, Lines, Error) :-
 	'$lgt_internal_term_to_user_term'(Term, UserTerm),
-	throw(error(Error,Position,UserTerm)).
+	throw(error(Error,Lines,UserTerm)).
 
 
 '$lgt_internal_term_to_user_term'({Term}, term(Term)).
@@ -15236,7 +15245,8 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_construct_prototype_functors'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm) :-
 	(	'$lgt_current_object_'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, Flags),
-		Flags /\ 1 =:= 1 ->		% built-in object
+		Flags /\ 1 =:= 1 ->
+		% loaded, built-in object
 		true
 	;	'$lgt_construct_entity_prefix'(Obj, Prefix),
 		atom_concat(Prefix, '_dcl', Dcl),
@@ -15257,7 +15267,8 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_construct_ic_functors'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm) :-
 	(	'$lgt_current_object_'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, Flags),
-		Flags /\ 1 =:= 1 ->		% built-in object
+		Flags /\ 1 =:= 1 ->
+		% loaded, built-in object
 		true
 	;	'$lgt_construct_entity_prefix'(Obj, Prefix),
 		atom_concat(Prefix, '_dcl', Dcl),
@@ -15278,7 +15289,8 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_construct_protocol_functors'(Ptc, Prefix, Dcl, Rnm) :-
 	(	'$lgt_current_protocol_'(Ptc, Prefix, Dcl, Rnm, Flags),
-		Flags /\ 1 =:= 1 ->		% built-in protocol
+		Flags /\ 1 =:= 1 ->
+		% loaded, built-in protocol
 		true
 	;	'$lgt_construct_entity_prefix'(Ptc, Prefix),
 		atom_concat(Prefix, '_dcl', Dcl),
@@ -15293,7 +15305,8 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_construct_category_functors'(Ctg, Prefix, Dcl, Def, Rnm) :-
 	(	'$lgt_current_category_'(Ctg, Prefix, Dcl, Def, Rnm, Flags),
-		Flags /\ 1 =:= 1 ->		% built-in category
+		Flags /\ 1 =:= 1 ->
+		% loaded, built-in category
 		true
 	;	'$lgt_construct_entity_prefix'(Ctg, Prefix),
 		atom_concat(Prefix, '_dcl', Dcl),
@@ -15343,6 +15356,9 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_construct_entity_prefix'(Entity, Prefix) :-
 	'$lgt_compiler_flag'(code_prefix, CodePrefix),
+	% the functor code prefix can be used to hide internal predicates (by
+	% defining it as '$' when using most backend Prolog compilers) and to
+	% avoid conflicts with other predicates
 	functor(Entity, Functor, Arity),
 	atom_concat(CodePrefix, Functor, Prefix0),
 	number_codes(Arity, ArityCodes),
@@ -15364,8 +15380,8 @@ current_logtalk_flag(Flag, Value) :-
 	atom_concat(Entity1, '.', Entity0),
 	% locate the rightmost #
 	sub_atom(Entity1, Before, 1, After, '#'),
-	Position is Before + 1,
-	sub_atom(Entity1, Position, _, 0, Rest),
+	Lines is Before + 1,
+	sub_atom(Entity1, Lines, _, 0, Rest),
 	\+ sub_atom(Rest, _, 1, _, '#'), !,
 	sub_atom(Entity1, 0, Before, _, Functor),
 	sub_atom(Entity1, _, After, 0, ArityAtom),
@@ -15565,8 +15581,8 @@ current_logtalk_flag(Flag, Value) :-
 	atom_concat(Prefix, Predicate, TFunctor),
 	% locate the rightmost #
 	sub_atom(Predicate, Before, 1, _, '#'),
-	Position is Before + 1,
-	sub_atom(Predicate, Position, _, 0, Rest),
+	Lines is Before + 1,
+	sub_atom(Predicate, Lines, _, 0, Rest),
 	\+ sub_atom(Rest, _, 1, _, '#'),
 	sub_atom(Predicate, 0, Before, _, Functor),	
 	% subtract execution context argument
@@ -15666,7 +15682,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_prolog_built_in_predicate'(Pred) :-
 	'$lgt_predicate_property'(Pred, built_in),
-	% Logtalk built-ins may also have the property built_in
+	% Logtalk built-in predicates may also have the property "built_in"
 	\+ '$lgt_logtalk_built_in_predicate'(Pred, _),
 	!.
 
@@ -15910,8 +15926,8 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_comp_ctx'(ctx(_, _, _, _, _, _, _, _, _, _, _, _)).
 
 '$lgt_comp_ctx'(
-	ctx(Head, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, Mode, Stack, Position),
-	Head, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, Mode, Stack, Position
+	ctx(Head, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, Mode, Stack, Lines),
+	Head, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, Mode, Stack, Lines
 ).
 
 % head of the clause being compiled
@@ -15941,8 +15957,8 @@ current_logtalk_flag(Flag, Value) :-
 % stack of coinductive hypothesis (ancestor goals)
 '$lgt_comp_ctx_stack'(ctx(_, _, _, _, _, _, _, _, _, _, Stack, _), Stack).
 
-% position (a pair of integers) of the term being compiled
-'$lgt_comp_ctx_position'(ctx(_, _, _, _, _, _, _, _, _, _, _, Position), Position).
+% begin line and end line (a pair of integers) of the term being compiled
+'$lgt_comp_ctx_lines'(ctx(_, _, _, _, _, _, _, _, _, _, _, Lines), Lines).
 
 
 
