@@ -5801,7 +5801,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_compiler_error_handler'(+atom, +atom, @compound, @compound)
+% '$lgt_compiler_error_handler'(+atom, +atom, @pair, @compound)
 %
 % closes the streams being used for reading and writing terms, restores
 % the operator table, reports the compilation error found, and, finally,
@@ -5862,7 +5862,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_read_term'(@stream, -term, @list, @nonvar)
+% '$lgt_read_term'(@stream, -term, @list, -pair)
 %
 % remember term position and variable names in order to support the
 % logtalk_load_context/2 predicate and more informative compiler warning
@@ -8490,7 +8490,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_compile_entity_info_directive'(@list, -list)
+% '$lgt_compile_entity_info_directive'(@list(term), -list(pair))
 %
 % compiles the entity info/1 directive key-value pairs
 
@@ -8604,7 +8604,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_compile_predicate_info_directive'(@list, +atom, +integer, -list)
+% '$lgt_compile_predicate_info_directive'(@list(term), +atom, +integer, -list(pair))
 %
 % compiles the predicate info/2 directive key-value pairs
 
@@ -12968,7 +12968,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_warning_context'(-atom, -atom, -nonvar, -atom, -entity_identifier)
+% '$lgt_warning_context'(-atom, -atom, -pair, -atom, -entity_identifier)
 %
 % returns file and entity warning context
 
@@ -12979,7 +12979,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_warning_context'(-atom, -nonvar)
+% '$lgt_warning_context'(-atom, -atom, -pair)
 %
 % returns file warning context
 
@@ -12989,7 +12989,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_current_line_numbers'(@stream)
+% '$lgt_current_line_numbers'(-pair)
 %
 % returns the current term line numbers, represented as a pair StartLine-EndLine
 
@@ -14531,7 +14531,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_compile_predicate_calls'(+callable, @compound, +atom, -callable)
+% '$lgt_compile_predicate_calls'(+callable, @pair, +atom, -callable)
 
 '$lgt_compile_predicate_calls'(Term, Lines, Optimize, TTerm) :-
 	(	catch(
