@@ -309,10 +309,10 @@
 :- dynamic('$lgt_pp_use_module_predicate_'/3).
 % '$lgt_pp_use_module_non_terminal_'(Module, NonTerminal, Alias)
 :- dynamic('$lgt_pp_use_module_non_terminal_'/3).
-% '$lgt_pp_info_'(List)
-:- dynamic('$lgt_pp_info_'/1).
-% '$lgt_pp_info_'(Functor/Arity, List) or '$lgt_pp_info_'(Functor//Args, List)
-:- dynamic('$lgt_pp_info_'/2).
+% '$lgt_pp_entity_info_'(List)
+:- dynamic('$lgt_pp_entity_info_'/1).
+% '$lgt_pp_predicate_info_'(Functor/Arity, List) or '$lgt_pp_predicate_info_'(Functor//Args, List)
+:- dynamic('$lgt_pp_predicate_info_'/2).
 
 % '$lgt_pp_implemented_protocol_'(Ptc, ObjOrCtg, Prefix, Dcl, Scope)
 :- dynamic('$lgt_pp_implemented_protocol_'/5).
@@ -437,8 +437,8 @@
 :- dynamic('$lgt_pp_file_encoding_'/2).
 % '$lgt_pp_file_bom_'(BOM)
 :- dynamic('$lgt_pp_file_bom_'/1).
-% '$lgt_pp_file_data_'(Basename, Directory, SourceFile, ObjectFile)
-:- dynamic('$lgt_pp_file_data_'/4).
+% '$lgt_pp_file_paths_'(Basename, Directory, SourceFile, ObjectFile)
+:- dynamic('$lgt_pp_file_paths_'/4).
 
 % '$lgt_pp_runtime_clause_'(Clause)
 :- dynamic('$lgt_pp_runtime_clause_'/1).
@@ -2250,24 +2250,24 @@ logtalk_make(Target) :-
 % predicate found on some compilers such as Quintus Prolog, SICStus
 % Prolog, SWI-Prolog, and YAP
 %
-% keys that use information from the '$lgt_pp_file_data_'/4 predicate can be
+% keys that use information from the '$lgt_pp_file_paths_'/4 predicate can be
 % used in calls wrapped by initialization/1 directives as this predicate is
 % only reinitialized after loading the generated intermediate Prolog file
 
 logtalk_load_context(source, SourceFile) :-
-	'$lgt_pp_file_data_'(_, _, SourceFile, _).
+	'$lgt_pp_file_paths_'(_, _, SourceFile, _).
 
 logtalk_load_context(file, SourceFile) :-
-	'$lgt_pp_file_data_'(_, _, SourceFile, _).
+	'$lgt_pp_file_paths_'(_, _, SourceFile, _).
 
 logtalk_load_context(directory, Directory) :-
-	'$lgt_pp_file_data_'(_, Directory, _, _).
+	'$lgt_pp_file_paths_'(_, Directory, _, _).
 
 logtalk_load_context(basename, Basename) :-
-	'$lgt_pp_file_data_'(Basename, _, _, _).
+	'$lgt_pp_file_paths_'(Basename, _, _, _).
 
 logtalk_load_context(target, ObjectFile) :-
-	'$lgt_pp_file_data_'(_, _, _, ObjectFile).
+	'$lgt_pp_file_paths_'(_, _, _, ObjectFile).
 
 logtalk_load_context(entity_name, Entity) :-
 	% deprecated key
@@ -4815,7 +4815,7 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	'$lgt_object_file_name'(Directory, Name, Extension, ObjectFile),
 	atom_concat(Name, Extension, Basename),
-	assertz('$lgt_pp_file_data_'(Basename, Directory, SourceFile, ObjectFile)),
+	assertz('$lgt_pp_file_paths_'(Basename, Directory, SourceFile, ObjectFile)),
 	% change the current directory to the directory of the file being loaded as it can
 	% be a loader file loading other files in its directory using a relative path
 	'$lgt_current_directory'(Current),
@@ -5071,7 +5071,7 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	'$lgt_object_file_name'(Directory, Name, Extension, ObjectFile),
 	atom_concat(Name, Extension, Basename),
-	assertz('$lgt_pp_file_data_'(Basename ,Directory, SourceFile, ObjectFile)),
+	assertz('$lgt_pp_file_paths_'(Basename ,Directory, SourceFile, ObjectFile)),
 	'$lgt_compile_file'(SourceFile, ObjectFile, Flags, compiling),
 	'$lgt_compile_files'(Files, Flags).
 
@@ -5166,7 +5166,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_write_entity_code'(SourceData, Output) :-
-	'$lgt_pp_file_data_'(_, _, Path, _),
+	'$lgt_pp_file_paths_'(_, _, Path, _),
 	% write any plain Prolog terms that may precede the entity definition
 	'$lgt_write_prolog_terms'(SourceData, Output, Path),
 	'$lgt_write_entity_directives'(Output),
@@ -5308,7 +5308,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_write_runtime_tables'(Output) :-
 	% the reflective information to be written depends on the source_data flag
 	'$lgt_compiler_flag'(source_data, SourceData),
-	'$lgt_pp_file_data_'(_, _, Path, _),
+	'$lgt_pp_file_paths_'(_, _, Path, _),
 	% write out any Prolog code occurring after the last source file entity
 	'$lgt_write_prolog_terms'(SourceData, Output, Path),
 	% write entity runtime directives and clauses
@@ -5432,7 +5432,7 @@ current_logtalk_flag(Flag, Value) :-
 % we also save the line numbers for the first reference to the object
 
 '$lgt_add_referenced_object'(Obj, Ctx) :-
-	(	\+ '$lgt_pp_file_data_'(_, _, _, _) ->
+	(	\+ '$lgt_pp_file_paths_'(_, _, _, _) ->
 		% not compiling a source file
 		true
 	;	'$lgt_pp_referenced_object_'(Obj, _) ->
@@ -5456,7 +5456,7 @@ current_logtalk_flag(Flag, Value) :-
 % we also save the line numbers for the first reference to the protocol
 
 '$lgt_add_referenced_protocol'(Ptc, Ctx) :-
-	(	\+ '$lgt_pp_file_data_'(_, _, _, _) ->
+	(	\+ '$lgt_pp_file_paths_'(_, _, _, _) ->
 		% not compiling a source file
 		true
 	;	'$lgt_pp_referenced_protocol_'(Ptc, _) ->
@@ -5475,7 +5475,7 @@ current_logtalk_flag(Flag, Value) :-
 % we also save the line numbers for the first reference to the category
 
 '$lgt_add_referenced_category'(Ctg, Ctx) :-
-	(	\+ '$lgt_pp_file_data_'(_, _, _, _) ->
+	(	\+ '$lgt_pp_file_paths_'(_, _, _, _) ->
 		% not compiling a source file
 		true
 	;	'$lgt_pp_referenced_category_'(Ctg, _) ->
@@ -5499,7 +5499,7 @@ current_logtalk_flag(Flag, Value) :-
 % we also save the line numbers for the first reference to the module
 
 '$lgt_add_referenced_module'(Module, Ctx) :-
-	(	\+ '$lgt_pp_file_data_'(_, _, _, _) ->
+	(	\+ '$lgt_pp_file_paths_'(_, _, _, _) ->
 		% not compiling a source file
 		true
 	;	'$lgt_pp_referenced_module_'(Module, _) ->
@@ -5625,7 +5625,7 @@ current_logtalk_flag(Flag, Value) :-
 % adds entity properties related to the entity source file
 
 '$lgt_add_entity_properties'(Kind, Entity) :-
-	'$lgt_pp_file_data_'(Basename, Directory, _, _),
+	'$lgt_pp_file_paths_'(Basename, Directory, _, _),
 	(	Kind == object ->
 		'$lgt_pp_referenced_object_'(Entity, Start-_)
 	;	Kind == protocol ->
@@ -5671,7 +5671,7 @@ current_logtalk_flag(Flag, Value) :-
 	fail.
 
 '$lgt_add_entity_properties'(_, Entity) :-
-	'$lgt_pp_info_'(Info),
+	'$lgt_pp_entity_info_'(Info),
 	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, info(Info)))),
 	fail.
 
@@ -5727,12 +5727,12 @@ current_logtalk_flag(Flag, Value) :-
 	fail.
 
 '$lgt_add_entity_predicate_properties'(Entity) :-
-	'$lgt_pp_info_'(Functor/Arity, Info),
+	'$lgt_pp_predicate_info_'(Functor/Arity, Info),
 		assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/Arity, info(Info)))),
 	fail.
 
 '$lgt_add_entity_predicate_properties'(Entity) :-
-	'$lgt_pp_info_'(Functor//Arity, Info),
+	'$lgt_pp_predicate_info_'(Functor//Arity, Info),
 		ExtArity is Arity + 2,
 		assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/ExtArity, info(Info)))),
 	fail.
@@ -6020,7 +6020,7 @@ current_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_pp_file_object_initialization_'(_, _)),
 	retractall('$lgt_pp_file_encoding_'(_, _)),
 	retractall('$lgt_pp_file_bom_'(_)),
-	retractall('$lgt_pp_file_data_'(_, _, _, _)),
+	retractall('$lgt_pp_file_paths_'(_, _, _, _)),
 	retractall('$lgt_pp_file_compiler_flag_'(_, _)),
 	retractall('$lgt_pp_term_lines_variables_'(_, _)),
 	% a Logtalk source file may contain only plain Prolog terms
@@ -6075,8 +6075,8 @@ current_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_pp_uses_non_terminal_'(_, _, _)),
 	retractall('$lgt_pp_use_module_predicate_'(_, _, _)),
 	retractall('$lgt_pp_use_module_non_terminal_'(_, _, _)),
-	retractall('$lgt_pp_info_'(_)),
-	retractall('$lgt_pp_info_'(_, _)),
+	retractall('$lgt_pp_entity_info_'(_)),
+	retractall('$lgt_pp_predicate_info_'(_, _)),
 	retractall('$lgt_pp_directive_'(_)),
 	retractall('$lgt_pp_synchronized_'(_, _)),
 	retractall('$lgt_pp_predicate_mutex_counter_'(_)),
@@ -7206,14 +7206,14 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_logtalk_directive'(info(Pairs), _) :-
 	'$lgt_compile_entity_info_directive'(Pairs, TPairs),
-	assertz('$lgt_pp_info_'(TPairs)).
+	assertz('$lgt_pp_entity_info_'(TPairs)).
 
 % info/2 predicate directive
 
 '$lgt_compile_logtalk_directive'(info(Pred, Pairs), _) :-
 	(	'$lgt_valid_predicate_or_non_terminal_indicator'(Pred, Functor, Arity) ->
 		'$lgt_compile_predicate_info_directive'(Pairs, Functor, Arity, TPairs),
-		assertz('$lgt_pp_info_'(Pred, TPairs))
+		assertz('$lgt_pp_predicate_info_'(Pred, TPairs))
 	;	var(Pred) ->
 		throw(instantiation_error)
 	;	throw(type_error(predicate_indicator, Pred))
@@ -12973,7 +12973,7 @@ current_logtalk_flag(Flag, Value) :-
 % returns file and entity warning context
 
 '$lgt_warning_context'(SourceFile, ObjectFile, Lines, Type, Entity) :-
-	'$lgt_pp_file_data_'(_, _, SourceFile, ObjectFile),
+	'$lgt_pp_file_paths_'(_, _, SourceFile, ObjectFile),
 	'$lgt_current_line_numbers'(Lines),
 	'$lgt_pp_entity_'(Type, Entity, _, _, _).
 
@@ -12984,7 +12984,7 @@ current_logtalk_flag(Flag, Value) :-
 % returns file warning context
 
 '$lgt_warning_context'(SourceFile, ObjectFile, Lines) :-
-	'$lgt_pp_file_data_'(_, _, SourceFile, ObjectFile),
+	'$lgt_pp_file_paths_'(_, _, SourceFile, ObjectFile),
 	'$lgt_current_line_numbers'(Lines).
 
 
@@ -13010,7 +13010,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_report_unknown_entities'(Type, Entity) :-
 	(	'$lgt_compiler_flag'(unknown_entities, warning) ->
-		'$lgt_pp_file_data_'(_, _, Path, _),
+		'$lgt_pp_file_paths_'(_, _, Path, _),
 		'$lgt_report_unknown_objects'(Type, Entity, Path),
 		'$lgt_report_unknown_protocols'(Type, Entity, Path),
 		'$lgt_report_unknown_categories'(Type, Entity, Path),
@@ -14700,7 +14700,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_report_missing_directives'(Type, Entity) :-
 	(	'$lgt_compiler_flag'(missing_directives, warning) ->
-		'$lgt_pp_file_data_'(_, _, Path, _),
+		'$lgt_pp_file_paths_'(_, _, Path, _),
 		'$lgt_report_missing_directives'(Type, Entity, Path)
 	;	true
 	).
@@ -14762,7 +14762,7 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 '$lgt_report_unknown_predicate_call_aux'(warning, Functor/Arity, Lines) :-
-	'$lgt_pp_file_data_'(_, _, Path, _),
+	'$lgt_pp_file_paths_'(_, _, Path, _),
 	'$lgt_pp_entity_'(Type, Entity, _, _, _),
 	Arity2 is Arity - 2,
 	'$lgt_increment_compile_warnings_counter',
@@ -14792,7 +14792,7 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 '$lgt_report_undefined_predicate_call_aux'(warning, Functor/Arity, Lines) :-
-	'$lgt_pp_file_data_'(_, _, Path, _),
+	'$lgt_pp_file_paths_'(_, _, Path, _),
 	'$lgt_pp_entity_'(Type, Entity, _, _, _),
 	Arity2 is Arity - 2,
 	'$lgt_increment_compile_warnings_counter',
@@ -14807,7 +14807,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_report_non_portable_calls'(Type, Entity) :-
 	(	'$lgt_compiler_flag'(portability, warning) ->
-		'$lgt_pp_file_data_'(_, _, Path, _),
+		'$lgt_pp_file_paths_'(_, _, Path, _),
 		'$lgt_report_non_portable_calls'(Type, Entity, Path)
 	;	true
 	).
