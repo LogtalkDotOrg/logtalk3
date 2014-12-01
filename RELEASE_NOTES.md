@@ -25,8 +25,8 @@ RELEASE NOTES
 =============
 
 
-3.00.0 Release Candidate 7 - November ??, 2014
-==============================================
+3.00.0 Release Candidate 7 - December 1, 2014
+=============================================
 
 Logtalk compiler and runtime
 ----------------------------
