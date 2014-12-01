@@ -479,7 +479,11 @@ Obj::Pred :-
 	'$lgt_compiler_flag'(events, Events),
 	'$lgt_comp_ctx'(Ctx, _, user, user, user, Obj, _, [], [], ExCtx, runtime, [], _),
 	'$lgt_execution_context'(ExCtx, user, user, user, Obj, [], []),
-	catch('$lgt_compile_message_to_object'(Pred, {Obj}, Call, Events, Ctx), Error, '$lgt_runtime_error_handler'(error(Error, logtalk({Obj}::Pred, user)))),
+	catch(
+		'$lgt_compile_message_to_object'(Pred, {Obj}, Call, Events, Ctx),
+		Error,
+		'$lgt_runtime_error_handler'(error(Error, logtalk({Obj}::Pred, user)))
+	),
 	(	nonvar(Obj),
 		'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags),
 		Flags /\ 512 =:= 512 ->
@@ -493,7 +497,11 @@ Obj::Pred :-
 	'$lgt_compiler_flag'(events, Events),
 	'$lgt_comp_ctx'(Ctx, _, user, user, user, Obj, _, [], [], ExCtx, runtime, [], _),
 	'$lgt_execution_context'(ExCtx, user, user, user, Obj, [], []),
-	catch('$lgt_compile_message_to_object'(Pred, Obj, Call, Events, Ctx), Error, '$lgt_runtime_error_handler'(error(Error, logtalk(Obj::Pred, user)))),
+	catch(
+		'$lgt_compile_message_to_object'(Pred, Obj, Call, Events, Ctx),
+		Error,
+		'$lgt_runtime_error_handler'(error(Error, logtalk(Obj::Pred, user)))
+	),
 	(	'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags),
 		Flags /\ 512 =:= 512 ->
 		% object compiled in debug mode
@@ -512,7 +520,11 @@ Obj<<Goal :-
 
 {Obj}<<Goal :-
 	!,
-	catch('$lgt_compile_context_switch_call'({Obj}, Goal, Call, user), Error, '$lgt_runtime_error_handler'(error(Error, logtalk({Obj}<<Goal, user)))),
+	catch(
+		'$lgt_compile_context_switch_call'({Obj}, Goal, Call, user),
+		Error,
+		'$lgt_runtime_error_handler'(error(Error, logtalk({Obj}<<Goal, user)))
+	),
 	(	nonvar(Obj),
 		'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags),
 		Flags /\ 512 =:= 512 ->
@@ -524,7 +536,11 @@ Obj<<Goal :-
 	).
 
 Obj<<Goal :-
-	catch('$lgt_compile_context_switch_call'(Obj, Goal, Call, user), Error, '$lgt_runtime_error_handler'(error(Error, logtalk(Obj<<Goal, user)))),
+	catch(
+		'$lgt_compile_context_switch_call'(Obj, Goal, Call, user),
+		Error,
+		'$lgt_runtime_error_handler'(error(Error, logtalk(Obj<<Goal, user)))
+	),
 	(	'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags),
 		Flags /\ 512 =:= 512 ->
 		% object compiled in debug mode
@@ -13775,12 +13791,12 @@ current_logtalk_flag(Flag, Value) :-
 
 % the database built-in methods need to check if a local declaration or a local definition
 % exists for a predicate; in order to avoid predicate existence errors, we need to generate
-% catchall clauses for static objects when there are no local predicate declarations or no
+% a catchall clause for static objects when there are no local predicate declarations or no
 % local predicate definitions
 
-'$lgt_generate_object_catchall_dcl_clauses'(true, _).
+'$lgt_generate_object_catchall_local_dcl_clause'(true, _).
 
-'$lgt_generate_object_catchall_dcl_clauses'(false, Dcl) :-
+'$lgt_generate_object_catchall_local_dcl_clause'(false, Dcl) :-
 	(	'$lgt_pp_dynamic_' ->
 		% dynamic object
 		true
@@ -13823,19 +13839,19 @@ current_logtalk_flag(Flag, Value) :-
 	(	Complements == allow ->
 		% complementing categories are allowed to override local predicate declarations
 		'$lgt_generate_prototype_complements_dcl_clauses'(Obj, Dcl),
-		'$lgt_generate_prototype_local_dcl_clauses'(Local, Obj, Dcl, DDcl)
+		'$lgt_generate_prototype_local_dcl_clauses'(Local, Complements, Obj, Dcl, DDcl)
 	;	Complements == restrict ->
 		% complementing categories can add to but not override local predicate declarations
-		'$lgt_generate_prototype_local_dcl_clauses'(Local, Obj, Dcl, DDcl),
+		'$lgt_generate_prototype_local_dcl_clauses'(Local, Complements, Obj, Dcl, DDcl),
 		'$lgt_generate_prototype_complements_dcl_clauses'(Obj, Dcl)
 	;	% Complements == deny ->
-		'$lgt_generate_prototype_local_dcl_clauses'(Local, Obj, Dcl, DDcl)
+		'$lgt_generate_prototype_local_dcl_clauses'(Local, Complements, Obj, Dcl, DDcl)
 	),
 	'$lgt_generate_prototype_implements_dcl_clauses'(Dcl, Rnm),
 	'$lgt_generate_prototype_imports_dcl_clauses'(Dcl, Rnm),
 	'$lgt_generate_prototype_extends_dcl_clauses'(Dcl, Rnm),
 	% third, add a catchall clause if necessary
-	'$lgt_generate_object_catchall_dcl_clauses'(Local, Dcl).
+	'$lgt_generate_object_catchall_local_dcl_clause'(Local, Dcl).
 
 
 
@@ -13846,26 +13862,34 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-'$lgt_generate_prototype_local_dcl_clauses'(true, Obj, Dcl, DDcl) :-
+'$lgt_generate_prototype_local_dcl_clauses'(true, _, Obj, Dcl, DDcl) :-
+	% there are local (compile-time) predicate declarations
 	HeadDcl =.. [Dcl, Pred, Scope, Meta, Flags, Obj, Obj],
 	BodyDcl =.. [Dcl, Pred, Scope, Meta, Flags],
+	% lookup access to local, static, predicate declarations
 	assertz('$lgt_pp_dcl_'((HeadDcl:-BodyDcl))),
 	(	'$lgt_compiler_flag'(dynamic_declarations, allow) ->
 		HeadDDcl =.. [Dcl, Pred, Scope, no, 2, Obj, Obj],
 		BodyDDcl =.. [DDcl, Pred, Scope],
+		% lookup access to local, dynamic, (runtime) predicate declarations
 		assertz('$lgt_pp_dcl_'((HeadDDcl:-BodyDDcl)))
 	;	true
 	).
 
-'$lgt_generate_prototype_local_dcl_clauses'(false, Obj, Dcl, DDcl) :-
+'$lgt_generate_prototype_local_dcl_clauses'(false, Complements, Obj, Dcl, DDcl) :-
+	% no local (compile-time) predicate declarations
 	(	'$lgt_compiler_flag'(dynamic_declarations, allow) ->
 		HeadDDcl =.. [Dcl, Pred, Scope, no, 2, Obj, Obj],
 		BodyDDcl =.. [DDcl, Pred, Scope],
+		% lookup access to local, dynamic, (runtime) predicate declarations
 		assertz('$lgt_pp_dcl_'((HeadDDcl:-BodyDDcl)))
-	;	\+ '$lgt_pp_implemented_protocol_'(_, _, _, _, _),
+	;	Complements == deny,
+		\+ '$lgt_pp_implemented_protocol_'(_, _, _, _, _),
 		\+ '$lgt_pp_imported_category_'(_, _, _, _, _, _),
 		\+ '$lgt_pp_extended_object_'(_, _, _, _, _, _, _, _, _, _, _) ->
+		% standalone prototype with no access to predicate declarations
 		functor(HeadDDcl, Dcl, 6),
+		% catchall clause to avoid lookup errors
 		assertz('$lgt_pp_dcl_'((HeadDDcl:-fail)))
 	;	true
 	).
@@ -13975,17 +13999,22 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_generate_prototype_local_def_clauses'(true, Obj, Def, DDef) :-
+	% there are local (compile-time) predicate definitions
 	'$lgt_execution_context_this_entity'(ExCtx, Obj, Obj),
 	Head =.. [Def, Pred, ExCtx, Call, Obj, Obj],
 	BodyDef =.. [Def, Pred, ExCtx, Call],
+	% lookup access to local, static, predicate definitions
 	assertz('$lgt_pp_def_'((Head:-BodyDef))),
 	BodyDDef =.. [DDef, Pred, ExCtx, Call],
+	% lookup access to local, dynamic, (runtime) predicate definitions
 	assertz('$lgt_pp_def_'((Head:-BodyDDef))).
 
 '$lgt_generate_prototype_local_def_clauses'(false, Obj, Def, DDef) :-
+	% no local (compile-time) predicate definitions
 	'$lgt_execution_context_this_entity'(ExCtx, Obj, Obj),
 	Head =.. [Def, Pred, ExCtx, Call, Obj, Obj],
 	BodyDDef =.. [DDef, Pred, ExCtx, Call],
+	% lookup access to local, dynamic, (runtime) predicate definitions
 	assertz('$lgt_pp_def_'((Head:-BodyDDef))).
 
 
@@ -14083,7 +14112,7 @@ current_logtalk_flag(Flag, Value) :-
 	% declaration always start at its classes)
 	'$lgt_generate_ic_instantiates_dcl_clauses'(Dcl, Rnm),
 	% third, add a catchall clause if necessary
-	'$lgt_generate_object_catchall_dcl_clauses'(Local, Dcl),
+	'$lgt_generate_object_catchall_local_dcl_clause'(Local, Dcl),
 	% finaly, generate linking clauses for accessing declarations
 	% when we reach the class being compiled during a lookup
 	% from a descendant instance
@@ -14132,13 +14161,13 @@ current_logtalk_flag(Flag, Value) :-
 	(	Complements == allow ->
 		% complementing categories are allowed to override local predicate declarations
 		'$lgt_generate_ic_complements_idcl_clauses'(Obj, IDcl),
-		'$lgt_generate_ic_local_idcl_clauses'(Local, Obj, Dcl, IDcl, DDcl)
+		'$lgt_generate_ic_local_idcl_clauses'(Local, Complements, Obj, Dcl, IDcl, DDcl)
 	;	Complements == restrict ->
 		% complementing categories can add to but not override local predicate declarations
-		'$lgt_generate_ic_local_idcl_clauses'(Local, Obj, Dcl, IDcl, DDcl),
+		'$lgt_generate_ic_local_idcl_clauses'(Local, Complements, Obj, Dcl, IDcl, DDcl),
 		'$lgt_generate_ic_complements_idcl_clauses'(Obj, IDcl)
 	;	% Complements == deny ->
-		'$lgt_generate_ic_local_idcl_clauses'(Local, Obj, Dcl, IDcl, DDcl)
+		'$lgt_generate_ic_local_idcl_clauses'(Local, Complements, Obj, Dcl, IDcl, DDcl)
 	),
 	'$lgt_generate_ic_implements_idcl_clauses'(IDcl, Rnm),
 	'$lgt_generate_ic_imports_idcl_clauses'(IDcl, Rnm),
@@ -14153,26 +14182,34 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-'$lgt_generate_ic_local_idcl_clauses'(true, Obj, Dcl, IDcl, DDcl) :-
+'$lgt_generate_ic_local_idcl_clauses'(true, _, Obj, Dcl, IDcl, DDcl) :-
+	% there are local (compile-time) predicate declarations
 	HeadDcl =.. [IDcl, Pred, Scope, Meta, Flags, Obj, Obj],
 	BodyDcl =.. [Dcl, Pred, Scope, Meta, Flags],
+	% lookup access to local, static, predicate declarations
 	assertz('$lgt_pp_dcl_'((HeadDcl:-BodyDcl))),
 	(	'$lgt_compiler_flag'(dynamic_declarations, allow) ->
 		HeadDDcl =.. [IDcl, Pred, Scope, no, 2, Obj, Obj],
 		BodyDDcl =.. [DDcl, Pred, Scope],
+		% lookup access to local, dynamic, (runtime) predicate declarations
 		assertz('$lgt_pp_dcl_'((HeadDDcl:-BodyDDcl)))
 	;	true
 	).
 
-'$lgt_generate_ic_local_idcl_clauses'(false, Obj, _, IDcl, DDcl) :-
+'$lgt_generate_ic_local_idcl_clauses'(false, Complements, Obj, _, IDcl, DDcl) :-
+	% no local (compile-time) predicate declarations
 	(	'$lgt_compiler_flag'(dynamic_declarations, allow) ->
 		HeadDDcl =.. [IDcl, Pred, Scope, no, 2, Obj, Obj],
 		BodyDDcl =.. [DDcl, Pred, Scope],
+		% lookup access to local, dynamic, (runtime) predicate declarations
 		assertz('$lgt_pp_dcl_'((HeadDDcl:-BodyDDcl)))
-	;	\+ '$lgt_pp_implemented_protocol_'(_, _, _, _, _),
+	;	Complements == deny,
+		\+ '$lgt_pp_implemented_protocol_'(_, _, _, _, _),
 		\+ '$lgt_pp_imported_category_'(_, _, _, _, _, _),
 		\+ '$lgt_pp_specialized_class_'(_, _, _, _, _, _, _, _, _, _, _) ->
+		% standalone class with no access to predicate declarations
 		functor(HeadDDcl, IDcl, 6),
+		% catchall clause to avoid lookup errors
 		assertz('$lgt_pp_dcl_'((HeadDDcl:-fail)))
 	;	true
 	).
@@ -14289,17 +14326,22 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_generate_ic_local_def_clauses'(true, Obj, Def, DDef) :-
+	% there are local (compile-time) predicate definitions
 	'$lgt_execution_context_this_entity'(ExCtx, Obj, Obj),
 	Head =.. [Def, Pred, ExCtx, Call, Obj, Obj],
 	BodyDef =.. [Def, Pred, ExCtx, Call],
+	% lookup access to local, static, predicate definitions
 	assertz('$lgt_pp_def_'((Head:-BodyDef))),
 	BodyDDef =.. [DDef, Pred, ExCtx, Call],
+	% lookup access to local, dynamic, (runtime) predicate definitions
 	assertz('$lgt_pp_def_'((Head:-BodyDDef))).
 
 '$lgt_generate_ic_local_def_clauses'(false, Obj, Def, DDef) :-
+	% no local (compile-time) predicate definitions
 	'$lgt_execution_context_this_entity'(ExCtx, Obj, Obj),
 	Head =.. [Def, Pred, ExCtx, Call, Obj, Obj],
 	BodyDDef =.. [DDef, Pred, ExCtx, Call],
+	% lookup access to local, dynamic, (runtime) predicate definitions
 	assertz('$lgt_pp_def_'((Head:-BodyDDef))).
 
 
@@ -14370,17 +14412,22 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_generate_ic_local_idef_clauses'(true, Obj, Def, IDef, DDef) :-
+	% there are local (compile-time) predicate definitions
 	'$lgt_execution_context_this_entity'(ExCtx, Obj, Obj),
 	Head =.. [IDef, Pred, ExCtx, Call, Obj, Obj],
 	BodyDef =.. [Def, Pred, ExCtx, Call],
+	% lookup access to local, static, predicate definitions
 	assertz('$lgt_pp_def_'((Head:-BodyDef))),
 	BodyDDef =.. [DDef, Pred, ExCtx, Call],
+	% lookup access to local, dynamic, (runtime) predicate definitions
 	assertz('$lgt_pp_def_'((Head:-BodyDDef))).
 
 '$lgt_generate_ic_local_idef_clauses'(false, Obj, _, IDef, DDef) :-
+	% no local (compile-time) predicate definitions
 	'$lgt_execution_context_this_entity'(ExCtx, Obj, Obj),
 	Head =.. [IDef, Pred, ExCtx, Call, Obj, Obj],
 	BodyDDef =.. [DDef, Pred, ExCtx, Call],
+	% lookup access to local, dynamic, (runtime) predicate definitions
 	assertz('$lgt_pp_def_'((Head:-BodyDDef))).
 
 
@@ -16315,16 +16362,16 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_valid_mode_template_arg'(@nonvar)
 
-% unspecified, can be input, output or both input and output
+% unspecified argument, can be input, output, or both input and output
 '$lgt_valid_mode_template_arg'((?)).
 '$lgt_valid_mode_template_arg'('?'(_)).
-% instantiated on predicate call, can be further instantiated by the predicate call
+% instantiated argument on predicate call, can be further instantiated by the predicate call
 '$lgt_valid_mode_template_arg'((+)).
 '$lgt_valid_mode_template_arg'('+'(_)).
-% non-instantiated (i.e. a variable) on predicate call
+% non-instantiated argument (i.e. a variable) on predicate call
 '$lgt_valid_mode_template_arg'((-)).
 '$lgt_valid_mode_template_arg'('-'(_)).
-% not modified (i.e. not further instantiated) by the predicate call
+% not modified argument (i.e. not further instantiated) by the predicate call
 '$lgt_valid_mode_template_arg'((@)).
 '$lgt_valid_mode_template_arg'('@'(_)).
 
@@ -16796,6 +16843,10 @@ current_logtalk_flag(Flag, Value) :-
 % Logtalk built-in predicates
 %
 % '$lgt_logtalk_built_in_predicate'(?callable, ?callable)
+%
+% the second argument is either a meta-predicate template
+% (when aplicable) or the atom "no"
+
 
 % message sending and context switching control constructs
 '$lgt_logtalk_built_in_predicate'(_ :: _, no).
