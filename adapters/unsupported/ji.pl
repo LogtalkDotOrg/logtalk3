@@ -345,8 +345,7 @@ format(Format, Arguments) :-
 		% assume full path
 		ExpandedPath = ExpandedPath0
 	;	% assume path relative to the current directory
-		working_directory(Current, Current),
-		atom_concat(Current, '/', Directory),
+		'$lgt_current_directory'(Directory),
 		atom_concat(Directory, ExpandedPath0, ExpandedPath)
 	).
 
@@ -392,7 +391,11 @@ format(Format, Arguments) :-
 % gets current working directory
 
 '$lgt_current_directory'(Directory) :-
-	working_directory(Directory, Directory).
+	working_directory(Directory0, Directory0),
+	(	sub_atom(Directory0, _, 1, 0, '/') ->
+		Directory = Directory0
+	;	atom_concat(Directory0, '/', Directory)
+	).
 
 
 % '$lgt_change_directory'(+atom)
@@ -470,7 +473,7 @@ format(Format, Arguments) :-
 		invoke('java.lang.System', getProperty('java.lang.String'), ['LOGTALK_STARTUP_DIRECTORY'], Directory),
 		Directory \== [] ->
 		true
-	;	working_directory(Directory, Directory)
+	;	'$lgt_current_directory'(Directory)
 	).
 
 
@@ -513,10 +516,9 @@ format(Format, Arguments) :-
 	create_object('java.io.File'('java.lang.String'), [File], Object),
 	invoke(Object, getParent, [], Directory0),
 	(	Directory0 == [] ->
-		working_directory(Directory1, Directory1)
-	;	Directory1 = Directory0
+		'$lgt_current_directory'(Directory)
+	;	atom_concat(Directory0, '/', Directory)
 	),
-	atom_concat(Directory1, '/', Directory),
 	invoke(Object, getName, [], Basename),
 	(	sub_atom(Basename, Before, _, After, '.') ->
 		sub_atom(Basename, 0, Before, _, Name),
