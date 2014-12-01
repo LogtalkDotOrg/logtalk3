@@ -564,30 +564,9 @@ Obj<<Goal :-
 	Object == user,
 	throw(error(Error, Goal)).
 
-'$lgt_runtime_error_handler'(error(existence_error(goal_thread, '$lgt_send_to_obj_ne_nv'(Self, Goal, ExCtx)), _)) :-
-	'$lgt_execution_context'(ExCtx, _, _, Sender, _, _, _),
-	(	Self == user ->
-		throw(error(existence_error(goal_thread, Goal), logtalk(Goal, Sender)))
-	;	throw(error(existence_error(goal_thread, Self::Goal), logtalk(Self::Goal, Sender)))
-	).
-
-'$lgt_runtime_error_handler'(error(existence_error(goal_thread, '$lgt_send_to_obj_nv'(Self, Goal, ExCtx)), _)) :-
-	'$lgt_execution_context'(ExCtx, _, _, Sender, _, _, _),
-	(	Self == user ->
-		throw(error(existence_error(goal_thread, Goal), logtalk(Goal, Sender)))
-	;	throw(error(existence_error(goal_thread, Self::Goal), logtalk(Self::Goal, Sender)))
-	).
-
-'$lgt_runtime_error_handler'(error(existence_error(goal_thread, TGoal), logtalk(_, Sender))) :-
-	functor(TGoal, TFunctor, TArity),
-	'$lgt_decompile_predicate_indicators'(TFunctor/TArity, _, _, Functor/Arity),
-	functor(Goal, Functor, Arity),
-	'$lgt_unify_head_thead_arguments'(Goal, TGoal, ExCtx),
-	'$lgt_execution_context'(ExCtx, _, _, _, Self, _, _),
-	(	Self == user ->
-		throw(error(existence_error(goal_thread, Goal), logtalk(Goal, Sender)))
-	;	throw(error(existence_error(goal_thread, Self::Goal), logtalk(Self::Goal, Sender)))
-	).
+'$lgt_runtime_error_handler'(error(existence_error(thread,Queue), TContext)) :-
+	'$lgt_runtime_thread_error_handler_helper'(TContext, Context),
+	throw(error(existence_error(thread,Queue), Context)).
 
 '$lgt_runtime_error_handler'(Error) :-
 	(	'$lgt_normalize_error_term'(Error, NormalizedError) ->
@@ -634,6 +613,34 @@ Obj<<Goal :-
 
 '$lgt_runtime_normalized_error_handler'(Error) :-
 	throw(Error).
+
+
+'$lgt_runtime_thread_error_handler_helper'(logtalk(This::threaded_exit(TGoal),Sender), logtalk(This::threaded_exit(Goal),Sender)) :-
+	'$lgt_runtime_thread_error_tgoal_goal'(TGoal, Goal).
+
+'$lgt_runtime_thread_error_handler_helper'(logtalk(This::threaded_exit(TGoal,Tag),Sender), logtalk(This::threaded_exit(Goal,Tag),Sender)) :-
+	'$lgt_runtime_thread_error_tgoal_goal'(TGoal, Goal).
+
+'$lgt_runtime_thread_error_handler_helper'(Context, Context).
+
+
+'$lgt_runtime_thread_error_tgoal_goal'('$lgt_send_to_obj_ne_nv'(Self,Goal0,_), Goal) :-
+	(	Self == user ->
+		Goal = Goal0
+	;	Goal = Self::Goal0
+	).
+
+'$lgt_runtime_thread_error_tgoal_goal'('$lgt_send_to_obj_nv'(Self,Goal0,_), Goal) :-
+	(	Self == user ->
+		Goal = Goal0
+	;	Goal = Self::Goal0
+	).
+
+'$lgt_runtime_thread_error_tgoal_goal'(TGoal, Goal) :-
+	functor(TGoal, TFunctor, TArity),
+	'$lgt_decompile_predicate_indicators'(TFunctor/TArity, _, _, Functor/Arity),
+	functor(Goal, Functor, Arity),
+	'$lgt_unify_head_thead_arguments'(Goal, TGoal, _).
 
 
 
@@ -17798,7 +17805,7 @@ current_logtalk_flag(Flag, Value) :-
 			)
 		)
 	;	% answering thread don't exist; generate an exception (failing is not an option as it could simply mean goal failure)
-		throw(error(existence_error(goal_thread, Goal), logtalk(This::threaded_exit(Goal), Sender)))
+		throw(error(existence_error(thread, This), logtalk(This::threaded_exit(Goal), Sender)))
 	).
 
 
@@ -17846,7 +17853,7 @@ current_logtalk_flag(Flag, Value) :-
 			)
 		)
 	;	% answering thread don't exist; generate an exception (failing is not an option as it could simply mean goal failure)
-		throw(error(existence_error(goal_thread, Goal), logtalk(This::threaded_exit(Goal, Tag), Sender)))
+		throw(error(existence_error(thread, This), logtalk(This::threaded_exit(Goal, Tag), Sender)))
 	).
 
 

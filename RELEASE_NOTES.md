@@ -43,6 +43,10 @@ an invalid `encoding/1` directive is found.
 * IMPROVED: When the `portability` flag is set to `warning`, the compiler now
 reports the use of non-standard file-level directives.
 
+* CHANGED: Thread goal existence error term have been changed for clarity from
+`existence_error(goal_thread, Goal)` to `existence_error(thread, Queue)` with
+the goal information still available in the context argument.
+
 * CHANGED: Also use the `bom/1` source file property when using SICStus Prolog
 as the backend compiler.
 
