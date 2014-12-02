@@ -36,6 +36,12 @@ some backend Prolog compilers in the `os` library. For consistent behavior,
 all paths are now expanded before calling the native backend Prolog compiler
 operating-system access predicates.
 
+Tools
+-----
+
+* FIXED: Loading failure of the `lgtdoc` tool when using B-Prolog as the
+backend compiler due to this compiler atom size limit.
+
 
 3.00.0 Release Candidate 7 - December 1, 2014
 =============================================
