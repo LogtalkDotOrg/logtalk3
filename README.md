@@ -163,8 +163,8 @@ and the 2003 PhD thesis on Logtalk are good choices).
 -----------------
 
 Contributions, constructive criticism, patches, bug reports, and suggestions
-are always welcome. However, major code contributions to core files, such as
-the compiler, runtime, adapter files, library files, or tools can only be
+are always welcome. However, major code contributions to **core** files, such
+as the compiler, runtime, adapter files, library files, or tools can only be
 accepted with a transfer of copyright or if the submitted code is explicitly
 declared as public domain code. This simplifies the selling of commercial
 licenses, which provide a revenue source for the sustained development of
