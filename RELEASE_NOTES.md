@@ -28,6 +28,14 @@ RELEASE NOTES
 3.00.0 Release Candidate 8 - December ??, 2014
 ==============================================
 
+Library
+-------
+
+* FIXED: Issues with relative paths and paths with environment variables with
+some backend Prolog compilers in the `os` library. For consistent behavior,
+all paths are now expanded before calling the native backend Prolog compiler
+operating-system access predicates.
+
 
 3.00.0 Release Candidate 7 - December 1, 2014
 =============================================
