@@ -36,6 +36,9 @@ some backend Prolog compilers in the `os` library. For consistent behavior,
 all paths are now expanded before calling the native backend Prolog compiler
 operating-system access predicates.
 
+* FIXED: Added missing definitions for the predicate `os::file_permission/2`
+for the CxProlog, ECLiPSe, Lean Prolog, and Qu-Prolog compilers.
+
 Tools
 -----
 

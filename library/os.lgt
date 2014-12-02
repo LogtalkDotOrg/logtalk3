@@ -659,6 +659,18 @@
 			{canonical_path_name(File, ExpandedPath),
 			 get_file_info(ExpandedPath, size, Size)}.
 
+		file_permission(File, read) :-
+			{canonical_path_name(File, ExpandedPath),
+			 get_file_info(ExpandedPath, readable, on)}.
+
+		file_permission(File, write) :-
+			{canonical_path_name(File, ExpandedPath),
+			 get_file_info(ExpandedPath, writable, on)}.
+
+		file_permission(File, execute) :-
+			{canonical_path_name(File, ExpandedPath),
+			 get_file_info(ExpandedPath, executable, on)}.
+
 		delete_file(File) :-
 			{canonical_path_name(File, ExpandedPath),
 			 delete(ExpandedPath)}.
@@ -745,6 +757,18 @@
 			{absolute_file_name(File, ExpandedPath),
 			 file_property(ExpandedPath, size(Size))}.
 
+		file_permission(File, read) :-
+			{absolute_file_name(File, ExpandedPath),
+			 file_exists(ExpandedPath, 4)}.
+
+		file_permission(File, write) :-
+			{absolute_file_name(File, ExpandedPath),
+			 file_exists(ExpandedPath, 2)}.
+
+		file_permission(File, execute) :-
+			{absolute_file_name(File, ExpandedPath),
+			 file_exists(ExpandedPath, 1)}.
+
 		delete_file(File) :-
 			{absolute_file_name(File, ExpandedPath),
 			 delete_file(ExpandedPath)}.
@@ -828,6 +852,14 @@
 		file_size(File, Size) :-
 			{absolute_file_name(File, ExpandedPath),
 			 fs_property(ExpandedPath, size, Size)}.
+
+		file_permission(File, read) :-
+			{absolute_file_name(File, ExpandedPath),
+			 fs_property(ExpandedPath, readable, true)}.
+
+		file_permission(File, write) :-
+			{absolute_file_name(File, ExpandedPath),
+			 fs_property(ExpandedPath, writable, true)}.
 
 		delete_file(File) :-
 			{absolute_file_name(File, ExpandedPath),
@@ -922,6 +954,18 @@
 		file_size(File, Size) :-
 			{absolute_file_name(File, ExpandedPath),
 			 stat(ExpandedPath, stat(_, Size))}.
+
+		file_permission(File, read) :-
+			{absolute_file_name(File, ExpandedPath),
+			 access(ExpandedPath, 4, 0)}.
+
+		file_permission(File, write) :-
+			{absolute_file_name(File, ExpandedPath),
+			 access(ExpandedPath, 2, 0)}.
+
+		file_permission(File, execute) :-
+			{absolute_file_name(File, ExpandedPath),
+			 access(ExpandedPath, 1, 0)}.
 
 		delete_file(File) :-
 			{absolute_file_name(File, ExpandedPath),
@@ -1030,6 +1074,24 @@
 			 invoke_java_method(Object, length, Size0)},
 			atom_codes(Size0, Codes),
 			number_codes(Size, Codes).
+
+		file_permission(File, read) :-
+			expand_path(File, ExpandedPath),
+			{new_java_object('java.io.File'(ExpandedPath), Object),
+			 invoke_java_method(Object, canRead, Result)},
+			is_true(Result).
+
+		file_permission(File, write) :-
+			expand_path(File, ExpandedPath),
+			{new_java_object('java.io.File'(ExpandedPath), Object),
+			 invoke_java_method(Object, canWrite, Result)},
+			is_true(Result).
+
+		file_permission(File, execute) :-
+			expand_path(File, ExpandedPath),
+			{new_java_object('java.io.File'(ExpandedPath), Object),
+			 invoke_java_method(Object, canExecute, Result)},
+			is_true(Result).
 
 		delete_file(File) :-
 			expand_path(File, ExpandedPath),

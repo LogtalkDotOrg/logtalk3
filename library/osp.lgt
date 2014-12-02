@@ -26,23 +26,23 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1.9,
+		version is 1.10,
 		author is 'Paulo Moura',
-		date is 2012/10/19,
+		date is 2012/12/02,
 		comment is 'Portable operating-system access protocol.'
 	]).
 
 	:- public(pid/1).
 	:- mode(pid(-integer), one).
 	:- info(pid/1, [
-		comment is 'Returns the process identitifer of the running process.',
+		comment is 'Returns the process identifier of the running process.',
 		argnames is ['PID']
 	]).
 
 	:- public(shell/2).
 	:- mode(shell(+atom, -integer), one).
 	:- info(shell/2, [
-		comment is 'Runs an operating-system shell command, returning in Status the exit status of Command.',
+		comment is 'Runs an operating-system shell command and returns its exit status.',
 		argnames is ['Command', 'Status']
 	]).
 
@@ -119,7 +119,7 @@
 	:- public(file_permission/2).
 	:- mode(file_permission(+atom, ?atom), zero_or_one).
 	:- info(file_permission/2, [
-		comment is 'True if the specified file has the specified permission.',
+		comment is 'True if the specified file has the specified permission (read, write, or execute).',
 		argnames is ['File', 'Permission']
 	]).
 
