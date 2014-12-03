@@ -29,7 +29,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "`basename $0` 0.14"
+	echo "`basename $0` 0.15"
 	exit 0
 }
 
