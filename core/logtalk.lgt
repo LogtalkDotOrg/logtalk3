@@ -33,15 +33,15 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/10/01,
+		date is 2014/12/03,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.']).
 
 	:- built_in.
 
 	:- set_logtalk_flag(context_switching_calls, allow).
-	:- set_logtalk_flag(dynamic_declarations, allow).
-	:- set_logtalk_flag(complements, allow).
-	:- set_logtalk_flag(events, allow).
+	:- set_logtalk_flag(dynamic_declarations, deny).
+	:- set_logtalk_flag(complements, deny).
+	:- set_logtalk_flag(events, deny).
 	:- if(current_logtalk_flag(threads, supported)).
 		:- threaded.
 	:- endif.

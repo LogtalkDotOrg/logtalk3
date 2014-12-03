@@ -28,6 +28,17 @@ RELEASE NOTES
 3.00.0 Release Candidate 8 - December ??, 2014
 ==============================================
 
+Logtalk compiler and runtime
+----------------------------
+
+* CHANGED: Set the `dynamic_declarations`, `complements`, and `events` flags
+to `deny` for the `logtalk` built-in object. The `events` flag change is of
+no consequence as this object doesn't send messages to other objects. The
+change to the `complements` flag enables the use of static binding when
+sending messages to this object. The change to the `dynamic_declarations`
+flag aims to prevent conflicts with user added predicates when this object
+is eventually updated.
+
 Library
 -------
 
