@@ -40,6 +40,7 @@ The test identifier prefixes indicate their origin:
 - `sics_` - tests contributed by SICS
 - `eddbali_` - tests from A Ed-Dbali's test suite
 - `lgt_` - tests originating from work on Logtalk
+- `commons_` - tests for de facto standard Prolog features
 
 To run all the provided tests with e.g. SWI-Prolog, open a terminal and type:
 
