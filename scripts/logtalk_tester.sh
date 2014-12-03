@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Unit testing automation script
-##   Last updated on November 23, 2014
+##   Last updated on December 3, 2014
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -205,8 +205,8 @@ echo '**************************************************************************
 echo "***** Running unit tests"
 echo "*****         Date: $date"
 $logtalk_call $versions_goal > "$results"/tester_versions.txt 2> /dev/null
-grep "Logtalk version:" "$results"/tester_versions.txt
-grep "Prolog version:" "$results"/tester_versions.txt | sed "s/Prolog/$prolog/"
+grep -a "Logtalk version:" "$results"/tester_versions.txt
+grep -a "Prolog version:" "$results"/tester_versions.txt | sed "s/Prolog/$prolog/"
 for unit in *
 do
 	if [ -d $unit ] ; then
@@ -217,17 +217,17 @@ do
 			name=$(echo $unit|sed 's|/|__|g')
 			if [ $mode == 'optimal' ] || [ $mode == 'all' ] ; then
 				$logtalk_call $tester_optimal_goal > "$results/$name.results" 2> "$results/$name.errors"
-				grep 'tests:' "$results/$name.results" | LC_ALL=C sed 's/%/***** (opt)  /'
+				grep -a 'tests:' "$results/$name.results" | LC_ALL=C sed 's/%/***** (opt)  /'
 			elif [ $mode == 'normal' ] || [ $mode == 'all' ] ; then
 				$logtalk_call $tester_normal_goal > "$results/$name.results" 2> "$results/$name.errors"
-				grep 'tests:' "$results/$name.results" | LC_ALL=C sed 's/%/*****        /'
+				grep -a 'tests:' "$results/$name.results" | LC_ALL=C sed 's/%/*****        /'
 			elif [ $mode == 'debug' ] || [ $mode == 'all' ] ; then
 				$logtalk_call $tester_debug_goal > "$results/$name.results" 2> "$results/$name.errors"
-				grep 'tests:' "$results/$name.results" | LC_ALL=C sed 's/%/***** (debug)/'
+				grep -a 'tests:' "$results/$name.results" | LC_ALL=C sed 's/%/***** (debug)/'
 			fi
-			grep 'out of' "$results/$name.results" | LC_ALL=C sed 's/%/*****        /'
-			grep 'no code coverage information collected' "$results/$name.results" | LC_ALL=C sed 's/%/*****        /'
-			grep '(not applicable)' "$results/$name.results" | LC_ALL=C sed 's/(/*****         (/'
+			grep -a 'out of' "$results/$name.results" | LC_ALL=C sed 's/%/*****        /'
+			grep -a 'no code coverage information collected' "$results/$name.results" | LC_ALL=C sed 's/%/*****        /'
+			grep -a '(not applicable)' "$results/$name.results" | LC_ALL=C sed 's/(/*****         (/'
 		fi
 		for subunit in *
 		do
@@ -239,17 +239,17 @@ do
 					subname=$(echo $unit/$subunit|sed 's|/|__|g')
 					if [ $mode == 'optimal' ] || [ $mode == 'all' ] ; then
 						$logtalk_call $tester_optimal_goal > "$results/$subname.results" 2> "$results/$subname.errors"
-						grep 'tests:' "$results/$subname.results" | LC_ALL=C sed 's/%/***** (opt)  /'
+						grep -a 'tests:' "$results/$subname.results" | LC_ALL=C sed 's/%/***** (opt)  /'
 					elif [ $mode == 'normal' ] || [ $mode == 'all' ] ; then
 						$logtalk_call $tester_normal_goal > "$results/$subname.results" 2> "$results/$subname.errors"
-						grep 'tests:' "$results/$subname.results" | LC_ALL=C sed 's/%/*****        /'
+						grep -a 'tests:' "$results/$subname.results" | LC_ALL=C sed 's/%/*****        /'
 					elif [ $mode == 'debug' ] || [ $mode == 'all' ] ; then
 						$logtalk_call $tester_debug_goal > "$results/$subname.results" 2> "$results/$subname.errors"
-						grep 'tests:' "$results/$subname.results" | LC_ALL=C sed 's/%/***** (debug)/'
+						grep -a 'tests:' "$results/$subname.results" | LC_ALL=C sed 's/%/***** (debug)/'
 					fi
-					grep 'out of' "$results/$subname.results" | LC_ALL=C sed 's/%/*****        /'
-					grep 'no code coverage information collected' "$results/$subname.results" | LC_ALL=C sed 's/%/*****        /'
-					grep '(not applicable)' "$results/$subname.results" | LC_ALL=C sed 's/(/*****         (/'
+					grep -a 'out of' "$results/$subname.results" | LC_ALL=C sed 's/%/*****        /'
+					grep -a 'no code coverage information collected' "$results/$subname.results" | LC_ALL=C sed 's/%/*****        /'
+					grep -a '(not applicable)' "$results/$subname.results" | LC_ALL=C sed 's/(/*****         (/'
 				fi
 				cd ..
 			fi
@@ -260,28 +260,28 @@ done
 
 cd "$results"
 
-skipped=`grep ': skipped' *.results | wc -l`
-passed=`grep ': success' *.results | wc -l`
-failed=`grep ': failure' *.results | wc -l`
+skipped=`grep -a ': skipped' *.results | wc -l`
+passed=`grep -a ': success' *.results | wc -l`
+failed=`grep -a ': failure' *.results | wc -l`
 total=$(($skipped+$passed+$failed))
 
 echo "*******************************************************************************"
 echo "***** Compilation errors and warnings (might be expected depending on the test)"
 echo "*******************************************************************************"
-grep -A2 'syntax_error' *.results | LC_ALL=C sed 's/.results//' | tee errors.all
-grep -A2 'syntax_error' *.errors | LC_ALL=C sed 's/.errors//' | tee -a errors.all
-grep -h '!     ' *.errors | LC_ALL=C sed 's/.errors//' | tee -a errors.all
-grep -h '!     ' *.results | LC_ALL=C sed 's/.results//' | tee -a errors.all
-grep -h '*     ' *.errors | LC_ALL=C sed 's/.errors//' | tee -a errors.all
-grep -h '*     ' *.results | LC_ALL=C sed 's/.results//' | tee -a errors.all
+grep -a -A2 'syntax_error' *.results | LC_ALL=C sed 's/.results//' | tee errors.all
+grep -a -A2 'syntax_error' *.errors | LC_ALL=C sed 's/.errors//' | tee -a errors.all
+grep -a -h '!     ' *.errors | LC_ALL=C sed 's/.errors//' | tee -a errors.all
+grep -a -h '!     ' *.results | LC_ALL=C sed 's/.results//' | tee -a errors.all
+grep -a -h '*     ' *.errors | LC_ALL=C sed 's/.errors//' | tee -a errors.all
+grep -a -h '*     ' *.results | LC_ALL=C sed 's/.results//' | tee -a errors.all
 echo "*******************************************************************************"
 echo "***** Skipped tests"
 echo "*******************************************************************************"
-grep ': skipped' *.results | LC_ALL=C sed 's/: skipped//' | LC_ALL=C sed 's/.results:% / - /' | LC_ALL=C sed 's|__|/|g'
+grep -a ': skipped' *.results | LC_ALL=C sed 's/: skipped//' | LC_ALL=C sed 's/.results:% / - /' | LC_ALL=C sed 's|__|/|g'
 echo "*******************************************************************************"
 echo "***** Failed tests"
 echo "*******************************************************************************"
-grep ': failure' *.results | LC_ALL=C sed 's/: failure//' | LC_ALL=C sed 's/.results:!     / - /' | LC_ALL=C sed 's|__|/|g'
+grep -a ': failure' *.results | LC_ALL=C sed 's/: failure//' | LC_ALL=C sed 's/.results:!     / - /' | LC_ALL=C sed 's|__|/|g'
 echo "*******************************************************************************"
 echo "***** $total tests: $skipped skipped, $passed passed, $failed failed"
 echo "*******************************************************************************"

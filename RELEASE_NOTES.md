@@ -45,6 +45,9 @@ Tools
 * FIXED: Loading failure of the `lgtdoc` tool when using B-Prolog as the
 backend compiler due to this compiler atom size limit.
 
+* FIXED: An issue in the `logtalk_tester.sh` POSIX shell script when grepping
+results in files that are guessed as binary files.
+
 
 3.00.0 Release Candidate 7 - December 1, 2014
 =============================================
