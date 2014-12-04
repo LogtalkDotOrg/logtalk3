@@ -47,6 +47,10 @@ this object cannot make use of complementing categories.
 this object definition which sets the `events` flag to `allow`. Also note that
 the per-entity value of this flag is read-only and fixed at compile time.
 
+* FIXED: Case where a type error would be generated instead of the expected
+instantiation error when passing a non-ground file argument to the compilation
+and loading predicates.
+
 Library
 -------
 

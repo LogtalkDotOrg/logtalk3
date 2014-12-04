@@ -2000,17 +2000,18 @@ logtalk_compile(Files, Flags) :-
 
 
 '$lgt_check_source_file'(File, Path) :-
-	(	var(File) ->
-		throw(error(instantiation_error, _))
-	;	atom(File) ->
+	(	atom(File) ->
 		Path = File
-	;	File =.. [Library, Basename],
+	;	compound(File),
+		File =.. [Library, Basename],
 		atom(Basename) ->
 		(	'$lgt_expand_library_path'(Library, Directory) ->
 			atom_concat(Directory, Basename, Path)
 		;	throw(error(existence_error(library, Library), _))
 		)
-	;	throw(error(type_error(source_file_name, File), _))
+	;	ground(File) ->
+		throw(error(type_error(source_file_name, File), _))
+	;	throw(error(instantiation_error, _))
 	).
 
 
