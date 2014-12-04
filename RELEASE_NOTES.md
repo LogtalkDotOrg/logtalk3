@@ -39,6 +39,9 @@ sending messages to this object. The change to the `dynamic_declarations`
 flag aims to prevent conflicts with user added predicates when this object
 is eventually updated.
 
+* FIXED: Set the `complements` flag to deny for the `user` pseudo-object as
+this object cannot make use of complementing categories.
+
 Library
 -------
 

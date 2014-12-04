@@ -28,13 +28,14 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/10/04,
+		date is 2014/12/04,
 		comment is 'Pseudo-object "user" representing the plain Prolog database.']).
 
 	:- built_in.
 
 	:- set_logtalk_flag(context_switching_calls, allow).
 	:- set_logtalk_flag(dynamic_declarations, allow).
+	:- set_logtalk_flag(complements, deny).
 	:- set_logtalk_flag(events, allow).
 	:- if(current_logtalk_flag(threads, supported)).
 		:- threaded.
