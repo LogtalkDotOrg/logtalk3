@@ -42,6 +42,11 @@ is eventually updated.
 * FIXED: Set the `complements` flag to deny for the `user` pseudo-object as
 this object cannot make use of complementing categories.
 
+* FIXED: Always generate events for messages sent by the `user` pseudo-object
+(including messages sent at the top-level interpreter) for consistency with
+this object definition which sets the `events` flag to `allow`. Also note that
+the per-entity value of this flag is read-only and fixed at compile time.
+
 Library
 -------
 

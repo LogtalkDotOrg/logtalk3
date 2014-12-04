@@ -476,11 +476,10 @@ Obj::Pred :-
 
 {Obj}::Pred :-
 	!,
-	'$lgt_compiler_flag'(events, Events),
 	'$lgt_comp_ctx'(Ctx, _, user, user, user, Obj, _, [], [], ExCtx, runtime, [], _),
 	'$lgt_execution_context'(ExCtx, user, user, user, Obj, [], []),
 	catch(
-		'$lgt_compile_message_to_object'(Pred, {Obj}, Call, Events, Ctx),
+		'$lgt_compile_message_to_object'(Pred, {Obj}, Call, allow, Ctx),
 		Error,
 		'$lgt_runtime_error_handler'(error(Error, logtalk({Obj}::Pred, user)))
 	),
@@ -494,11 +493,10 @@ Obj::Pred :-
 	).
 
 Obj::Pred :-
-	'$lgt_compiler_flag'(events, Events),
 	'$lgt_comp_ctx'(Ctx, _, user, user, user, Obj, _, [], [], ExCtx, runtime, [], _),
 	'$lgt_execution_context'(ExCtx, user, user, user, Obj, [], []),
 	catch(
-		'$lgt_compile_message_to_object'(Pred, Obj, Call, Events, Ctx),
+		'$lgt_compile_message_to_object'(Pred, Obj, Call, allow, Ctx),
 		Error,
 		'$lgt_runtime_error_handler'(error(Error, logtalk(Obj::Pred, user)))
 	),
