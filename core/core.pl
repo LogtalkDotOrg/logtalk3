@@ -2022,9 +2022,10 @@ logtalk_compile(Files, Flags) :-
 
 '$lgt_expand_library_path'(Library, Path) :-
 	'$lgt_expand_library_path'(Library, Path0, 16),
+	% expand the library path into an absolute path
 	'$lgt_expand_path'(Path0, Path1),
 	% make sure that the library path ends with a slash
-	(	sub_atom(Path1, _, _, 0, '/') ->
+	(	sub_atom(Path1, _, 1, 0, '/') ->
 		Path = Path1
 	;	atom_concat(Path1, '/', Path)
 	).
@@ -2032,12 +2033,7 @@ logtalk_compile(Files, Flags) :-
 
 '$lgt_expand_library_path'(Library, Path, Depth) :-
 	logtalk_library_path(Library, Location), !,
-	(	\+ ground(Location) ->
-		throw(error(instantiation_error, _))
-	;	atom(Location) ->
-		% assume the final component of the library path
-		Path = Location
-	;	compound(Location),
+	(	compound(Location),
 		Location =.. [Prefix, Directory],
 		atom(Directory) ->
 		% assume library notation (a compound term)
@@ -2045,12 +2041,17 @@ logtalk_compile(Files, Flags) :-
 		NewDepth is Depth - 1,
 		'$lgt_expand_library_path'(Prefix, PrefixPath0, NewDepth),
 		% make sure that the prefix path ends with a slash
-		(	sub_atom(PrefixPath0, _, _, 0, '/') ->
+		(	sub_atom(PrefixPath0, _, 1, 0, '/') ->
 			atom_concat(PrefixPath0, Directory, Path)
 		;	atom_concat(PrefixPath0, '/', PrefixPath1),
 			atom_concat(PrefixPath1, Directory, Path)
 		)
-	;	throw(error(type_error(library_path, Location), _))
+	;	atom(Location) ->
+		% assume the final component of the library path
+		Path = Location
+	;	ground(Location) ->
+		throw(error(type_error(library_path, Location), _))
+	;	throw(error(instantiation_error, _))
 	).
 
 
