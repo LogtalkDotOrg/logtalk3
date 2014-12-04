@@ -80,6 +80,8 @@
 		comment is 'Stack of bricks as a constrained binary relation.'
 	]).
 
+	:- 	set_logtalk_flag(events, deny).
+
 	descriptor_([top, bottom]).
 
 	domain_(top, brick).
@@ -96,7 +98,10 @@
 	add_tuple([A, B]) :-
 		B::position(Xb, Yb),
 		Ya2 is Yb + 1,
-		{A::move(Xb, Ya2)},		% this message must be compiled with event support
+		% send the next message from the "user" pseudo-object in order to generate
+		% the necessary event to allow the "stack_monitor" to visualize stack
+		% changes and the constrained relation "brick_stack" to perform its magic
+		{A::move(Xb, Ya2)},
 		^^add_tuple([A, B]).
 
 	activ_points_(top, before, []).
@@ -116,7 +121,10 @@
 	propagate(after, move(X, Y), Bottom, bottom, [Top, Bottom]) :-
 		!,
 		Y2 is Y + 1,
-		{Top::move(X, Y2)}.		% this message must be compiled with event support
+		% send the next message from the "user" pseudo-object in order to generate
+		% the necessary event to allow the "stack_monitor" to visualize stack
+		% changes and the constrained relation "brick_stack" to perform its magic
+		{Top::move(X, Y2)}.
 
 :- end_object.
 
