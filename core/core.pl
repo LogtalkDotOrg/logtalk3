@@ -269,8 +269,8 @@
 :- dynamic('$lgt_pp_predicate_mutex_counter_'/1).
 % '$lgt_pp_dynamic_'(Head)
 :- dynamic('$lgt_pp_dynamic_'/1).
-% '$lgt_pp_discontiguous_'(Functor, Arity)
-:- dynamic('$lgt_pp_discontiguous_'/2).
+% '$lgt_pp_discontiguous_'(Head)
+:- dynamic('$lgt_pp_discontiguous_'/1).
 % '$lgt_pp_mode_'(Mode, Determinism)
 :- dynamic('$lgt_pp_mode_'/2).
 % '$lgt_pp_public_'(Functor, Arity)
@@ -383,8 +383,8 @@
 :- dynamic('$lgt_pp_non_portable_function_'/2).
 % '$lgt_pp_missing_dynamic_directive_'(Head, Lines)
 :- dynamic('$lgt_pp_missing_dynamic_directive_'/2).
-% '$lgt_pp_missing_discontiguous_directive_'(Functor, Arity, Lines)
-:- dynamic('$lgt_pp_missing_discontiguous_directive_'/3).
+% '$lgt_pp_missing_discontiguous_directive_'(Head, Lines)
+:- dynamic('$lgt_pp_missing_discontiguous_directive_'/2).
 % '$lgt_pp_previous_predicate_'(Head)
 :- dynamic('$lgt_pp_previous_predicate_'/1).
 
@@ -6117,7 +6117,7 @@ current_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_pp_protected_'(_, _)),
 	retractall('$lgt_pp_private_'(_, _)),
 	retractall('$lgt_pp_dynamic_'(_)),
-	retractall('$lgt_pp_discontiguous_'(_, _)),
+	retractall('$lgt_pp_discontiguous_'(_)),
 	retractall('$lgt_pp_multifile_'(_, _)),
 	retractall('$lgt_pp_coinductive_'(_, _, _, _, _, _, _)),
 	retractall('$lgt_pp_mode_'(_, _)),
@@ -6148,7 +6148,7 @@ current_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_pp_non_portable_predicate_'(_, _)),
 	retractall('$lgt_pp_non_portable_function_'(_, _)),
 	retractall('$lgt_pp_missing_dynamic_directive_'(_, _)),
-	retractall('$lgt_pp_missing_discontiguous_directive_'(_, _, _)),
+	retractall('$lgt_pp_missing_discontiguous_directive_'(_, _)),
 	retractall('$lgt_pp_previous_predicate_'(_)),
 	retractall('$lgt_pp_defines_non_terminal_'(_, _)),
 	retractall('$lgt_pp_calls_non_terminal_'(_, _, _)),
@@ -7768,12 +7768,14 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_discontiguous_directive_resource'(Pred) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
-	assertz('$lgt_pp_discontiguous_'(Functor, Arity)).
+	functor(Head, Functor, Arity),
+	assertz('$lgt_pp_discontiguous_'(Head)).
 
 '$lgt_compile_discontiguous_directive_resource'(NonTerminal) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, _, ExtArity),
 	!,
-	assertz('$lgt_pp_discontiguous_'(Functor, ExtArity)).
+	functor(Head, Functor, ExtArity),
+	assertz('$lgt_pp_discontiguous_'(Head)).
 
 '$lgt_compile_discontiguous_directive_resource'(Resource) :-
 	ground(Resource),
@@ -10818,7 +10820,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	'$lgt_pp_private_'(Functor, Arity)
 	;	'$lgt_pp_synchronized_'(Pred, _)
 	;	'$lgt_pp_coinductive_'(Pred, _, _, _, _, _, _)
-	;	'$lgt_pp_discontiguous_'(Functor, Arity)
+	;	'$lgt_pp_discontiguous_'(Pred)
 	),
 	!,
 	% closed-world assumption: calls to static, non-multifile, declared
@@ -11403,16 +11405,16 @@ current_logtalk_flag(Flag, Value) :-
 % checks for a discontiguous/1 directive for a predicate
 
 '$lgt_check_discontiguous_directive'(Head, Ctx) :-
-	functor(Head, Functor, Arity),
-	(	'$lgt_pp_discontiguous_'(Functor, Arity) ->
+	(	'$lgt_pp_discontiguous_'(Head) ->
 		% discontiguous directive present
 		true
-	;	'$lgt_pp_missing_discontiguous_directive_'(Functor, Arity, _) ->
+	;	'$lgt_pp_missing_discontiguous_directive_'(Head, _) ->
 		% discontiguous directive missing already recorded
 		true
 	;	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(_), _, Lines) ->
 		% compiling a source file; record missing discontiguous directive
-		assertz('$lgt_pp_missing_discontiguous_directive_'(Functor, Arity, Lines))
+		'$lgt_term_template'(Head, Template),
+		assertz('$lgt_pp_missing_discontiguous_directive_'(Template, Lines))
 	;	% runtime compilation
 		true
 	).
@@ -13451,7 +13453,8 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_generate_object_discontiguous_directives' :-
 	'$lgt_pp_object_'(_, Prefix, _, _, _, _, _, _, _, _, _),
-	'$lgt_pp_discontiguous_'(Functor, Arity),
+	'$lgt_pp_discontiguous_'(Head),
+		functor(Head, Functor, Arity),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(discontiguous(TFunctor/TArity))),
 	fail.
@@ -13475,7 +13478,8 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_generate_category_discontiguous_directives' :-
 	'$lgt_pp_category_'(_, Prefix, _, _, _, _),
-	'$lgt_pp_discontiguous_'(Functor, Arity),
+	'$lgt_pp_discontiguous_'(Head),
+		functor(Head, Functor, Arity),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(discontiguous(TFunctor/TArity))),
 	fail.
@@ -13562,7 +13566,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	'$lgt_pp_private_'(Functor, Arity)
 	;	'$lgt_pp_synchronized_'(Head, _)
 	;	'$lgt_pp_coinductive_'(Head, _, _, _, _, _, _)
-	;	'$lgt_pp_discontiguous_'(Functor, Arity)
+	;	'$lgt_pp_discontiguous_'(Head)
 	),
 	functor(Head, Functor, Arity),
 	\+ '$lgt_pp_multifile_'(Head, _),
@@ -14795,9 +14799,10 @@ current_logtalk_flag(Flag, Value) :-
 % reports missing discontiguous/1 directives
 
 '$lgt_report_missing_directives'(Type, Entity, Path) :-
-	'$lgt_pp_missing_discontiguous_directive_'(Functor, Arity, Lines),
+	'$lgt_pp_missing_discontiguous_directive_'(Head, Lines),
 	% detected discontiguous predicate but check for out-of-place discontiguous/1 directive
-	\+ '$lgt_pp_discontiguous_'(Functor, Arity),
+	\+ '$lgt_pp_discontiguous_'(Head),
+	functor(Head, Functor, Arity),
 	'$lgt_increment_compile_warnings_counter',
 	'$lgt_print_message'(warning(missing), core, missing_predicate_directive(Path, Lines, Type, Entity, (discontiguous), Functor/Arity)),
 	fail.
