@@ -5104,7 +5104,7 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	'$lgt_object_file_name'(Directory, Name, Extension, ObjectFile),
 	atom_concat(Name, Extension, Basename),
-	assertz('$lgt_pp_file_paths_'(Basename ,Directory, SourceFile, ObjectFile)),
+	assertz('$lgt_pp_file_paths_'(Basename, Directory, SourceFile, ObjectFile)),
 	'$lgt_compile_file'(SourceFile, ObjectFile, Flags, compiling),
 	'$lgt_compile_files'(Files, Flags).
 
@@ -5444,7 +5444,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_pp_cc_skipping_',
 	% we're performing conditional compilation and skipping terms ...
 	\+ '$lgt_is_conditional_compilation_directive'(Term),
-	% ... except for conditional compilation directives itself
+	% ... except for conditional compilation directives directives
 	!,
 	'$lgt_read_term'(Input, Next, [singletons(NextSingletons)], NextLines),
 	'$lgt_compile_file_term'(Next, NextSingletons, NextLines, Input).
@@ -5545,8 +5545,8 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_add_referenced_object_message'(@term, @callable, @term, @pair)
-% '$lgt_add_referenced_object_message'(@term, @callable, @callable, @term, @pair)
+% '$lgt_add_referenced_object_message'(@term, @callable, @term, +pair(integer))
+% '$lgt_add_referenced_object_message'(@term, @callable, @callable, @term, +pair(integer))
 %
 % adds referenced object and message for supporting using reflection to
 % retrieve cross-reference information
@@ -5586,20 +5586,20 @@ current_logtalk_flag(Flag, Value) :-
 		functor(Head, HeadFunctor, HeadArity),
 		(	\+ \+ '$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, _, HeadFunctor/HeadArity, Lines) ->
 			true
-		;	functor(Alias, AliasFunctor, AliasArity),
+		;	functor(Alias, AliasFunctor, PredArity),
 			(	compound(Obj) ->
 				% parametric object
 				'$lgt_term_template'(Obj, Template),
-				assertz('$lgt_pp_referenced_object_message_'(Template, PredFunctor/PredArity, AliasFunctor/AliasArity, HeadFunctor/HeadArity, Lines))
-			;	assertz('$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, AliasFunctor/AliasArity, HeadFunctor/HeadArity, Lines))
+				assertz('$lgt_pp_referenced_object_message_'(Template, PredFunctor/PredArity, AliasFunctor/PredArity, HeadFunctor/HeadArity, Lines))
+			;	assertz('$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, AliasFunctor/PredArity, HeadFunctor/HeadArity, Lines))
 			)
 		)
 	).
 
 
 
-% '$lgt_add_referenced_module_predicate'(@object_identifier, @callable, @term, @pair)
-% '$lgt_add_referenced_module_predicate'(@object_identifier, @callable, @callable, @term, @pair)
+% '$lgt_add_referenced_module_predicate'(@object_identifier, @callable, @term, +pair(integer))
+% '$lgt_add_referenced_module_predicate'(@object_identifier, @callable, @callable, @term, +pair(integer))
 %
 % adds referenced module for later checking of references to unknown modules
 % we also save the line numbers for the first reference to the module
@@ -5630,11 +5630,11 @@ current_logtalk_flag(Flag, Value) :-
 		% not compiling a source file user clause
 		true
 	;	functor(Pred, PredFunctor, PredArity),
-		functor(Alias, AliasFunctor, AliasArity),
+		functor(Alias, AliasFunctor, PredArity),
 		functor(Head, HeadFunctor, HeadArity),
 		(	'$lgt_pp_referenced_module_predicate_'(Module, PredFunctor/PredArity, _, HeadFunctor/HeadArity, Lines) ->
 			true
-		;	assertz('$lgt_pp_referenced_module_predicate_'(Module, PredFunctor/PredArity, AliasFunctor/AliasArity, HeadFunctor/HeadArity, Lines))
+		;	assertz('$lgt_pp_referenced_module_predicate_'(Module, PredFunctor/PredArity, AliasFunctor/PredArity, HeadFunctor/HeadArity, Lines))
 		)
 	).
 
@@ -5671,21 +5671,21 @@ current_logtalk_flag(Flag, Value) :-
 	fail.
 
 '$lgt_add_entity_properties'(_, Entity) :-
-	'$lgt_pp_referenced_object_message_'(Object, Functor/Arity, AliasFunctor/AliasArity, Caller, Line-_),
-	(	Functor == AliasFunctor ->
+	'$lgt_pp_referenced_object_message_'(Object, PredFunctor/Arity, AliasFunctor/Arity, Caller, Line-_),
+	(	PredFunctor == AliasFunctor ->
 		Properties = [caller(Caller), line_count(Line)]
-	;	Properties = [caller(Caller), line_count(Line), as(AliasFunctor/AliasArity)]
+	;	Properties = [caller(Caller), line_count(Line), as(AliasFunctor/Arity)]
 	),
-	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, calls(Object::Functor/Arity, Properties)))),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, calls(Object::PredFunctor/Arity, Properties)))),
 	fail.
 
 '$lgt_add_entity_properties'(_, Entity) :-
-	'$lgt_pp_referenced_module_predicate_'(Module, Functor/Arity, AliasFunctor/AliasArity, Caller, Line-_),
-	(	Functor == AliasFunctor ->
+	'$lgt_pp_referenced_module_predicate_'(Module, PredFunctor/Arity, AliasFunctor/Arity, Caller, Line-_),
+	(	PredFunctor == AliasFunctor ->
 		Properties = [caller(Caller), line_count(Line)]
-	;	Properties = [caller(Caller), line_count(Line), as(AliasFunctor/AliasArity)]
+	;	Properties = [caller(Caller), line_count(Line), as(AliasFunctor/Arity)]
 	),
-	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, calls(':'(Module,Functor/Arity), Properties)))),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, calls(':'(Module,PredFunctor/Arity), Properties)))),
 	fail.
 
 '$lgt_add_entity_properties'(_, Entity) :-
@@ -5834,7 +5834,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_compiler_error_handler'(+atom, +atom, @pair, @compound)
+% '$lgt_compiler_error_handler'(+atom, +atom, +pair(integer), @compound)
 %
 % closes the streams being used for reading and writing terms, restores
 % the operator table, reports the compilation error found, and, finally,
@@ -5895,7 +5895,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_read_term'(@stream, -term, @list, -pair)
+% '$lgt_read_term'(@stream, -term, @list, -pair(integer))
 %
 % remember term position and variable names in order to support the
 % logtalk_load_context/2 predicate and more informative compiler warning
@@ -13002,7 +13002,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_warning_context'(-atom, -atom, -pair, -atom, -entity_identifier)
+% '$lgt_warning_context'(-atom, -atom, -pair(integer), -atom, -entity_identifier)
 %
 % returns file and entity warning context
 
@@ -13013,7 +13013,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_warning_context'(-atom, -atom, -pair)
+% '$lgt_warning_context'(-atom, -atom, -pair(integer))
 %
 % returns file warning context
 
@@ -13023,7 +13023,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_current_line_numbers'(-pair)
+% '$lgt_current_line_numbers'(-pair(integer))
 %
 % returns the current term line numbers, represented as a pair StartLine-EndLine
 
@@ -14598,7 +14598,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_compile_predicate_calls'(+callable, @pair, +atom, -callable)
+% '$lgt_compile_predicate_calls'(+callable, +pair(integer), +atom, -callable)
 
 '$lgt_compile_predicate_calls'(Term, Lines, Optimize, TTerm) :-
 	(	catch(
