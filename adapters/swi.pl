@@ -3,8 +3,8 @@
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
-%  Adapter file for SWI Prolog 6.0.0 and later versions
-%  Last updated on November 4, 2014
+%  Adapter file for SWI Prolog 6.6.0 and later versions
+%  Last updated on December 5, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -247,7 +247,7 @@
 '$lgt_prolog_feature'(prolog_dialect, swi).
 '$lgt_prolog_feature'(prolog_version, (Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, swi(Major, Minor, Patch, _)).
-'$lgt_prolog_feature'(prolog_compatible_version, @>=((6,0,0))).
+'$lgt_prolog_feature'(prolog_compatible_version, @>=((6,6,0))).
 '$lgt_prolog_feature'(prolog_conformance, iso_lax).
 
 '$lgt_prolog_feature'(encoding_directive, full).

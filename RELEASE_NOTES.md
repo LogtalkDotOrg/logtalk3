@@ -54,6 +54,13 @@ and loading predicates.
 * FIXED: Case where duplicated warnings for missing `dynamic/1` directive for
 the same predicate could be printed.
 
+Prolog adapter and integration files
+------------------------------------
+
+* CHANGED: SWI-Prolog version 6.6.0 or later is now required when using this
+backend compiler (notably, to cope with changes in operating-system access
+predicates that are used by the library).
+
 Library
 -------
 

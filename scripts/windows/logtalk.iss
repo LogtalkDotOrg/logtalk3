@@ -2,7 +2,7 @@
 ; Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 ; 
 ; Logtalk Inno Setup script for generating Windows installers
-; Last updated on November 21, 2014
+; Last updated on December 5, 2014
 ; 
 ; Logtalk is free software. You can redistribute it and/or modify it under
 ; the terms of the FSF GNU General Public License 3  (plus some additional
@@ -66,8 +66,8 @@ Name: "prolog\gprolog"; Description: "GNU Prolog integration (version 1.4.2 or l
 Name: "prolog\lean"; Description: "Lean Prolog (experimental) integration (version 3.8.8 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\quintus"; Description: "Quintus Prolog (experimental) integration (version 3.3 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\sicstus"; Description: "SICStus Prolog integration (version 4.1.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
-Name: "prolog\swicon"; Description: "SWI-Prolog (console) integration (version 6.0.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
-Name: "prolog\swiwin"; Description: "SWI-Prolog (window) integration (version 6.0.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
+Name: "prolog\swicon"; Description: "SWI-Prolog (console) integration (version 6.6.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
+Name: "prolog\swiwin"; Description: "SWI-Prolog (window) integration (version 6.6.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\xsb"; Description: "XSB integration (version 3.5.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\xsbmt"; Description: "XSB-MT integration (version 3.5.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\yap"; Description: "YAP (console) integration (version 6.3.4 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning

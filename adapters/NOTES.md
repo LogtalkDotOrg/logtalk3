@@ -283,7 +283,7 @@ is recommended due to improved standards compliance. No problems expected.
 Please report any problem found (with a solution if possible).
 
 
-SWI-Prolog 6.0.0 and later versions
+SWI-Prolog 6.6.0 and later versions
 -----------------------------------
 
 	swi.pl
