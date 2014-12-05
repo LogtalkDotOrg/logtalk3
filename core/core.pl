@@ -4985,7 +4985,7 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	'$lgt_redefined_entity'(Entity, Type, OldFile, NewFile, Lines),
 	'$lgt_report_redefined_entity'(Type, Entity, OldFile, NewFile, Lines),
-	'$lgt_retract_old_runtime_clauses'(Entity),
+	'$lgt_retract_old_runtime_clauses'(Type, Entity),
 	fail.
 
 '$lgt_report_redefined_entities'.
@@ -5048,25 +5048,34 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_retract_old_runtime_clauses'(@entity_identifier)
+% '$lgt_retract_old_runtime_clauses'(+atom, @entity_identifier)
 %
-% cleans all references to an entity that is about to be redefined from the
-% runtime tables
+% cleans all references to an entity that is about to be redefined
+% from the runtime tables
 
-'$lgt_retract_old_runtime_clauses'(Entity) :-
+'$lgt_retract_old_runtime_clauses'(object, Entity) :-
 	retractall('$lgt_before_event_'(_, _, _, Entity, _)),
 	retractall('$lgt_after_event_'(_, _, _, Entity, _)),
 	retractall('$lgt_current_object_'(Entity, _, _, _, _, _, _, _, _, _, _)),
-	retractall('$lgt_current_protocol_'(Entity, _, _, _, _)),
-	retractall('$lgt_current_category_'(Entity, _, _, _, _, _)),
 	retractall('$lgt_entity_property_'(Entity, _)),
 	retractall('$lgt_predicate_property_'(Entity, _, _)),
 	retractall('$lgt_implements_protocol_'(Entity, _, _)),
 	retractall('$lgt_imports_category_'(Entity, _, _)),
 	retractall('$lgt_instantiates_class_'(Entity, _, _)),
 	retractall('$lgt_specializes_class_'(Entity, _, _)),
-	retractall('$lgt_extends_protocol_'(Entity, _, _)),
-	retractall('$lgt_extends_object_'(Entity, _, _)),
+	retractall('$lgt_extends_object_'(Entity, _, _)).
+
+'$lgt_retract_old_runtime_clauses'(protocol, Entity) :-
+	retractall('$lgt_current_protocol_'(Entity, _, _, _, _)),
+	retractall('$lgt_entity_property_'(Entity, _)),
+	retractall('$lgt_predicate_property_'(Entity, _, _)),
+	retractall('$lgt_extends_protocol_'(Entity, _, _)).
+
+'$lgt_retract_old_runtime_clauses'(category, Entity) :-
+	retractall('$lgt_current_category_'(Entity, _, _, _, _, _)),
+	retractall('$lgt_entity_property_'(Entity, _)),
+	retractall('$lgt_predicate_property_'(Entity, _, _)),
+	retractall('$lgt_implements_protocol_'(Entity, _, _)),
 	retractall('$lgt_extends_category_'(Entity, _, _)),
 	retractall('$lgt_complemented_object_'(_, Entity, _, _, _)).
 
