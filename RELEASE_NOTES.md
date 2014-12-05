@@ -76,7 +76,7 @@ for the CxProlog, ECLiPSe, Lean Prolog, and Qu-Prolog compilers.
 loading the `os_loader.lgt` file.
 
 * FIXED: Definition of the `os::command_line_arguments/1` predicate for
-Quintus Prolog and SWI-Prolog.
+B-Prolog, Quintus Prolog, and SWI-Prolog.
 
 Tools
 -----
