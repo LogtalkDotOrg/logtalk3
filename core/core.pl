@@ -4933,7 +4933,8 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_clean_lookup_caches',
 	'$lgt_report_redefined_entities',
 	(	'$lgt_pp_file_encoding_'(_, Encoding) ->
-		% use the same encoding as the original source file
+		% use the same encoding as the original source file but do not use the inferred
+		% bom/1 option as it would only work with some backend Prolog compilers
 		Options = [encoding(Encoding)| DefaultOptions]
 	;	Options = DefaultOptions
 	),
