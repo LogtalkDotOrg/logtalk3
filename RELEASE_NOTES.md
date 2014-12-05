@@ -75,6 +75,9 @@ for the CxProlog, ECLiPSe, Lean Prolog, and Qu-Prolog compilers.
 * FIXED: Loader file `dates_loader.lgt`, which used the wrong location for
 loading the `os_loader.lgt` file.
 
+* FIXED: Definition of the `os::command_line_arguments/1` predicate for
+SWI-Prolog.
+
 Tools
 -----
 
