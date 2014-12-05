@@ -11376,12 +11376,10 @@ current_logtalk_flag(Flag, Value) :-
 	!.
 
 '$lgt_check_dynamic_directive'((Head :- _), Lines) :-
-	% clause rule
 	!,
 	'$lgt_check_dynamic_directive'(Head, Lines).
 
 '$lgt_check_dynamic_directive'(Functor/Arity, Lines) :-
-	% predicate indicator
 	!,
 	(	ground(Functor/Arity) ->
 		functor(Head, Functor, Arity),
@@ -11390,11 +11388,12 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 '$lgt_check_dynamic_directive'(Head, Lines) :-
-	% clause fact
-	(	\+ '$lgt_pp_dynamic_'(Head),
-		\+ '$lgt_pp_missing_dynamic_directive_'(Head, _) ->
-		assertz('$lgt_pp_missing_dynamic_directive_'(Head, Lines))
-	;	true
+	(	'$lgt_pp_dynamic_'(Head) ->
+		true
+	;	'$lgt_pp_missing_dynamic_directive_'(Head, _) ->
+		true
+	;	'$lgt_term_template'(Head, Template),
+		assertz('$lgt_pp_missing_dynamic_directive_'(Template, Lines))
 	).
 
 

@@ -51,6 +51,8 @@ the per-entity value of this flag is read-only and fixed at compile time.
 instantiation error when passing a non-ground file argument to the compilation
 and loading predicates.
 
+* FIXED: Case where a missing `dynamic/1` directive would not be detected.
+
 Library
 -------
 
