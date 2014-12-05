@@ -62,6 +62,9 @@ operating-system access predicates.
 * FIXED: Added missing definitions for the predicate `os::file_permission/2`
 for the CxProlog, ECLiPSe, Lean Prolog, and Qu-Prolog compilers.
 
+* FIXED: Loader file `dates_loader.lgt`, which used the wrong location for
+loading the `os_loader.lgt` file.
+
 Tools
 -----
 

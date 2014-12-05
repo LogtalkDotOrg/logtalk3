@@ -23,6 +23,6 @@
 
 
 :- initialization((
-	logtalk_load(library(os_loader), [optimize(on)]),
+	logtalk_load(os_loader, [optimize(on)]),
 	logtalk_load([datep, date, timep, time], [optimize(on)])
 )).
