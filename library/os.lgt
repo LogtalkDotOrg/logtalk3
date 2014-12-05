@@ -1231,7 +1231,14 @@
 			).
 
 		command_line_arguments(Arguments) :-
-			{unix(argv(Arguments))}.
+			{unix(argv(Arguments0))},
+			find_arguments(Arguments0, Arguments).
+
+		find_arguments([], []).
+		find_arguments(['--'| Arguments], Arguments) :-
+			!.
+		find_arguments([_| Arguments0], Arguments) :-
+			find_arguments(Arguments0, Arguments).
 
 	:- elif(current_logtalk_flag(prolog_dialect, ji)).
 
