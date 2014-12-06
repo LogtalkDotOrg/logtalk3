@@ -54,11 +54,11 @@ and loading predicates.
 * FIXED: Case where duplicated warnings for missing `dynamic/1` directive for
 the same predicate could be printed.
 
-* FIXED: Compiler optimization bug when removing redundant calls to `true/0`
-in a `(Goal, true)` conjunction as we must ensure that we don't have an
-if-then-else control construct in disguise. Thanks to David S. Warren for an
-enlightening discussion regarding this issue in XSB that helped uncover this
-bug also in Logtalk.
+* FIXED: Compiler optimization bug when removing redundant calls to `true/0`.
+In the special case of simplifying a `(((If->Then),true);Goal)` goal, removing
+the call to `true/0` would wrongly convert it into an if-then-else goal. Thanks
+to David S. Warren for an enlightening discussion regarding this issue in XSB
+that helped uncover this bug also in Logtalk.
 
 Prolog adapter and integration files
 ------------------------------------
