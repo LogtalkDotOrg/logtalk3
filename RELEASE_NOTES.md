@@ -93,6 +93,14 @@ backend compiler due to this compiler atom size limit.
 * FIXED: An issue in the `logtalk_tester.sh` POSIX shell script when grepping
 results in files that are guessed as binary files.
 
+Tests
+-----
+
+* ADDED: Prolog conformance unit test for the if-then-else control construct
+for checking for correct semantics when a cut is found in the condition part.
+Added after discussion with David S. Warren about a likely typo in a similar
+standard example.
+
 Examples
 --------
 

@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2014/12/06,
 		comment is 'Unit tests for the ISO Prolog standard (;)/2 control construct.'
 	]).
 
@@ -50,7 +50,16 @@
 		X == 1.
 
 	succeeds(iso_if_then_else_3_09) :-
-		% example changed in ISO/IEC 13211-1:1995/Cor.1:2007
+		% the original example in the ISO/IEC 13211-1:1995(E) standard suffers from
+		% a syntax error and was "fixed" in the ISO/IEC 13211-1:1995/Cor.1:2007;
+		% however, with this fix (also used here) it's no longer a test for the
+		% if-then-else control construct!
 		{';'(('->'(!,fail), true), true)}.
+
+	succeeds(lgt_if_then_else_3_10) :-
+		% correct test goal for the botched TC1 fix in the previous test?
+		% it makes sense to test for correct semantics when a cut is found
+		% in the condition of an if-then-else
+		{';'('->'((!, fail), true), true)}.
 
 :- end_object.
