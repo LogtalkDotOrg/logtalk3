@@ -13,6 +13,7 @@
 	extends(lgtunit)).
 
 	:- set_logtalk_flag(unknown_entities, silent).
+	:- set_logtalk_flag(events, allow).
 
 	:- info([
 		version is 1.0,

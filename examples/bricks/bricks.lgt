@@ -74,13 +74,13 @@
 	instantiates(constrained_relation)).
 
 	:- info([
-		version is 1.0,
-		date is 1998/3/23,
+		version is 1.1,
+		date is 2014/12/04,
 		author is 'Paulo Moura',
 		comment is 'Stack of bricks as a constrained binary relation.'
 	]).
 
-	:- 	set_logtalk_flag(events, deny).
+	:- set_logtalk_flag(events, deny).
 
 	descriptor_([top, bottom]).
 
