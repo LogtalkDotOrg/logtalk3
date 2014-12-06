@@ -12584,6 +12584,9 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_remove_redundant_calls'(Goal, SGoal).
 
 '$lgt_remove_redundant_calls'((Goal, true), SGoal) :-
+	% make sure that we don't have an if-then-else in disguise
+	callable(Goal),
+	Goal \= (_ -> _),
 	!,
 	'$lgt_remove_redundant_calls'(Goal, SGoal).
 

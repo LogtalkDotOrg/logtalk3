@@ -20,7 +20,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/10/07,
+		date is 2014/12/06,
 		comment is 'Unit tests for the set_logtalk_flag/2 built-in directive.'
 	]).
 
@@ -44,5 +44,16 @@
 		logtalk_load(patch),
 		bottom::p(X),
 		X == patch.
+
+	% tests for the "optimize" flag
+
+	test(set_logtalk_flag_2_5) :-
+		optimize_off::p.
+
+	test(set_logtalk_flag_2_6) :-
+		optimize_on_1::p.
+
+	test(set_logtalk_flag_2_7) :-
+		optimize_on_2::p.
 
 :- end_object.
