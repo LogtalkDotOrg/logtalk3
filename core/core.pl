@@ -12584,8 +12584,8 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_remove_redundant_calls'(Goal, SGoal).
 
 '$lgt_remove_redundant_calls'((Goal, true), SGoal) :-
-	% make sure that we don't arrive here while simplifying a (((If->Then),true);Goal) goal
-	% as removing the call to true/0 would wrongly convert it into an if-then-else goal
+	% make sure that we don't arrive here while simplifying a (((If->Then),true);Goal) goal as
+	% removing the call to true/0 would wrongly convert the disjunction into an if-then-else goal
 	Goal \= (_ -> _),
 	!,
 	'$lgt_remove_redundant_calls'(Goal, SGoal).
@@ -13838,20 +13838,20 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_generate_prototype_clauses' :-
 	'$lgt_pp_object_'(Obj, _, Dcl, Def, Super, _, _, DDcl, DDef, Rnm, _),
-	'$lgt_generate_prototype_dcl_clauses'(Obj, Dcl, DDcl, Rnm),
-	'$lgt_generate_prototype_def_clauses'(Obj, Def, DDef, Rnm),
+	'$lgt_compiler_flag'(complements, Complements),
+	'$lgt_generate_prototype_dcl_clauses'(Obj, Dcl, DDcl, Rnm, Complements),
+	'$lgt_generate_prototype_def_clauses'(Obj, Def, DDef, Rnm, Complements),
 	'$lgt_generate_prototype_super_clauses'(Super, Rnm).
 
 
 
-'$lgt_generate_prototype_dcl_clauses'(Obj, Dcl, DDcl, Rnm) :-
+'$lgt_generate_prototype_dcl_clauses'(Obj, Dcl, DDcl, Rnm, Complements) :-
 	% first, generate the local table of predicate declarations: 
 	'$lgt_generate_dcl_table_clauses'(Local),
 	% second, generate linking clauses for accessing both local
 	% declarations and declarations in related entities (some
 	% linking clauses depend on the existence of local predicate
 	% declarations
-	'$lgt_compiler_flag'(complements, Complements),
 	(	Complements == allow ->
 		% complementing categories are allowed to override local predicate declarations
 		'$lgt_generate_prototype_complements_dcl_clauses'(Obj, Dcl),
@@ -13982,13 +13982,12 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-'$lgt_generate_prototype_def_clauses'(Obj, Def, DDef, Rnm) :-
+'$lgt_generate_prototype_def_clauses'(Obj, Def, DDef, Rnm, Complements) :-
 	% some linking clauses depend on the existence of local predicate definitions
 	(	'$lgt_pp_def_'(_) ->
 		Local = true
 	;	Local = false
 	),
-	'$lgt_compiler_flag'(complements, Complements),
 	(	Complements == allow ->
 		% complementing categories are allowed to override local predicate definitions
 		'$lgt_generate_prototype_complements_def_clauses'(Obj, Def),
@@ -14114,13 +14113,14 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_generate_ic_clauses' :-
 	'$lgt_pp_object_'(Obj, _, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, _),
-	'$lgt_generate_ic_dcl_clauses'(Obj, Dcl, IDcl, DDcl, Rnm),
-	'$lgt_generate_ic_def_clauses'(Obj, Def, IDef, DDef, Rnm),
+	'$lgt_compiler_flag'(complements, Complements),
+	'$lgt_generate_ic_dcl_clauses'(Obj, Dcl, IDcl, DDcl, Rnm, Complements),
+	'$lgt_generate_ic_def_clauses'(Obj, Def, IDef, DDef, Rnm, Complements),
 	'$lgt_generate_ic_super_clauses'(Obj, Super, Rnm).
 
 
 
-'$lgt_generate_ic_dcl_clauses'(Obj, Dcl, IDcl, DDcl, Rnm) :-
+'$lgt_generate_ic_dcl_clauses'(Obj, Dcl, IDcl, DDcl, Rnm, Complements) :-
 	% first, generate the local table of predicate declarations: 
 	'$lgt_generate_dcl_table_clauses'(Local),
 	% second, generate linking clauses for accessing declarations
@@ -14132,7 +14132,7 @@ current_logtalk_flag(Flag, Value) :-
 	% finaly, generate linking clauses for accessing declarations
 	% when we reach the class being compiled during a lookup
 	% from a descendant instance
-	'$lgt_generate_ic_idcl_clauses'(Local, Obj, Dcl, IDcl, DDcl, Rnm).
+	'$lgt_generate_ic_idcl_clauses'(Local, Obj, Dcl, IDcl, DDcl, Rnm, Complements).
 
 
 
@@ -14171,9 +14171,8 @@ current_logtalk_flag(Flag, Value) :-
 % when traversing specialization links in order to lookup
 % a predicate declaration for a descendant instance
 
-'$lgt_generate_ic_idcl_clauses'(Local, Obj, Dcl, IDcl, DDcl, Rnm) :-
+'$lgt_generate_ic_idcl_clauses'(Local, Obj, Dcl, IDcl, DDcl, Rnm, Complements) :-
 	% generate linking clauses for accessing declarations in related entities
-	'$lgt_compiler_flag'(complements, Complements),
 	(	Complements == allow ->
 		% complementing categories are allowed to override local predicate declarations
 		'$lgt_generate_ic_complements_idcl_clauses'(Obj, IDcl),
@@ -14305,13 +14304,12 @@ current_logtalk_flag(Flag, Value) :-
 % lookup of predicate definitions start at the instance itself
 % (not at its classes as it's the case for predicate declarations)
 
-'$lgt_generate_ic_def_clauses'(Obj, Def, IDef, DDef, Rnm) :-
+'$lgt_generate_ic_def_clauses'(Obj, Def, IDef, DDef, Rnm, Complements) :-
 	% some linking clauses depend on the existence of local predicate definitions
 	(	'$lgt_pp_def_'(_) ->
 		Local = true
 	;	Local = false
 	),
-	'$lgt_compiler_flag'(complements, Complements),
 	(	Complements == allow ->
 		% complementing categories are allowed to override local predicate definitions
 		'$lgt_generate_ic_complements_def_clauses'(Obj, Def),
@@ -14330,7 +14328,7 @@ current_logtalk_flag(Flag, Value) :-
 	% generate linking clauses for accessing definitions when
 	% we reach the class being compiled during a lookup from
 	% a descendant instance
-	'$lgt_generate_ic_idef_clauses'(Local, Obj, Def, IDef, DDef, Rnm).
+	'$lgt_generate_ic_idef_clauses'(Local, Obj, Def, IDef, DDef, Rnm, Complements).
 
 
 
@@ -14400,8 +14398,7 @@ current_logtalk_flag(Flag, Value) :-
 % when traversing specialization links in order to lookup
 % a predicate definition for a descendant instance
 
-'$lgt_generate_ic_idef_clauses'(Local, Obj, Def, IDef, DDef, Rnm) :-
-	'$lgt_compiler_flag'(complements, Complements),
+'$lgt_generate_ic_idef_clauses'(Local, Obj, Def, IDef, DDef, Rnm, Complements) :-
 	(	Complements == allow ->
 		% complementing categories are allowed to override local predicate definitions
 		'$lgt_generate_ic_complements_idef_clauses'(Obj, IDef),
@@ -19400,16 +19397,16 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_load_built_in_entities'(ScratchDirectory) :-
 	'$lgt_expand_library_path'(logtalk_user, LogtalkUserDirectory),
 	atom_concat(LogtalkUserDirectory, 'scratch/', ScratchDirectory),
-	'$lgt_load_built_in_entities'(expanding, protocol, 'expanding', ScratchDirectory),
-	'$lgt_load_built_in_entities'(monitoring, protocol, 'monitoring', ScratchDirectory),
-	'$lgt_load_built_in_entities'(forwarding, protocol, 'forwarding', ScratchDirectory),
-	'$lgt_load_built_in_entities'(user, object, 'user', ScratchDirectory),
-	'$lgt_load_built_in_entities'(logtalk, object, 'logtalk', ScratchDirectory),
-	'$lgt_load_built_in_entities'(core_messages, category, 'core_messages', ScratchDirectory),
+	'$lgt_load_built_in_entity'(expanding, protocol, 'expanding', ScratchDirectory),
+	'$lgt_load_built_in_entity'(monitoring, protocol, 'monitoring', ScratchDirectory),
+	'$lgt_load_built_in_entity'(forwarding, protocol, 'forwarding', ScratchDirectory),
+	'$lgt_load_built_in_entity'(user, object, 'user', ScratchDirectory),
+	'$lgt_load_built_in_entity'(logtalk, object, 'logtalk', ScratchDirectory),
+	'$lgt_load_built_in_entity'(core_messages, category, 'core_messages', ScratchDirectory),
 	assertz('$lgt_built_in_entities_loaded_').
 
 
-'$lgt_load_built_in_entities'(Entity, Type, File, ScratchDirectory) :-
+'$lgt_load_built_in_entity'(Entity, Type, File, ScratchDirectory) :-
 	(	Type == protocol,
 		current_protocol(Entity) ->
 		true
@@ -19445,10 +19442,6 @@ current_logtalk_flag(Flag, Value) :-
 % and loaded silently, ignoring any errors;  the intermediate Prolog files
 % are deleted using the clean/1 compiler flag in order to prevent problems
 % when switching between back-end Prolog compilers
-%
-% there can be more than one extension defined for source files in the
-% adapter files; these extensions will be tried in sequence when the test
-% for the settings file existence fails
 
 '$lgt_load_settings_file'(ScratchDirectory, Result) :-
 	'$lgt_default_flag'(settings_file, Value),
