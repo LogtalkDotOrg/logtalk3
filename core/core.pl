@@ -5465,20 +5465,18 @@ current_logtalk_flag(Flag, Value) :-
 % we also save the line numbers for the first reference to the object
 
 '$lgt_add_referenced_object'(Obj, Ctx) :-
-	(	\+ '$lgt_pp_file_paths_'(_, _, _, _) ->
+	(	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(regular), _, Lines),
 		% not compiling a source file
-		true
-	;	'$lgt_pp_referenced_object_'(Obj, _) ->
-		% not the first reference to the object
-		true
-	;	% first reference to this object
-		'$lgt_comp_ctx_lines'(Ctx, Lines),
+		\+ '$lgt_pp_referenced_object_'(Obj, _) ->
+		% first reference to this object
 		(	atom(Obj) ->
 			assertz('$lgt_pp_referenced_object_'(Obj, Lines))
 		;	% parametric object
 			'$lgt_term_template'(Obj, Template),
 			assertz('$lgt_pp_referenced_object_'(Template, Lines))
 		)
+	;	% not the first reference to the object
+		true
 	).
 
 
@@ -5489,15 +5487,13 @@ current_logtalk_flag(Flag, Value) :-
 % we also save the line numbers for the first reference to the protocol
 
 '$lgt_add_referenced_protocol'(Ptc, Ctx) :-
-	(	\+ '$lgt_pp_file_paths_'(_, _, _, _) ->
+	(	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(regular), _, Lines),
 		% not compiling a source file
-		true
-	;	'$lgt_pp_referenced_protocol_'(Ptc, _) ->
-		% not the first reference to the protocol
-		true
-	;	% first reference to this protocol
-		'$lgt_comp_ctx_lines'(Ctx, Lines),
+		\+ '$lgt_pp_referenced_protocol_'(Ptc, _) ->
+		% first reference to this protocol
 		assertz('$lgt_pp_referenced_protocol_'(Ptc, Lines))
+	;	% not the first reference to the protocol
+		true
 	).
 
 
@@ -5508,20 +5504,18 @@ current_logtalk_flag(Flag, Value) :-
 % we also save the line numbers for the first reference to the category
 
 '$lgt_add_referenced_category'(Ctg, Ctx) :-
-	(	\+ '$lgt_pp_file_paths_'(_, _, _, _) ->
+	(	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(regular), _, Lines),
 		% not compiling a source file
-		true
-	;	'$lgt_pp_referenced_category_'(Ctg, _) ->
-		% not the first reference to the category
-		true
-	;	% first reference to this category
-		'$lgt_comp_ctx_lines'(Ctx, Lines),
+		\+ '$lgt_pp_referenced_category_'(Ctg, _) ->
+		% first reference to this category
 		(	atom(Ctg) ->
 			assertz('$lgt_pp_referenced_category_'(Ctg, Lines))
 		;	% parametric category
 			'$lgt_term_template'(Ctg, Template),
 			assertz('$lgt_pp_referenced_category_'(Template, Lines))
 		)
+	;	% not the first reference to the category
+		true
 	).
 
 
@@ -5532,15 +5526,13 @@ current_logtalk_flag(Flag, Value) :-
 % we also save the line numbers for the first reference to the module
 
 '$lgt_add_referenced_module'(Module, Ctx) :-
-	(	\+ '$lgt_pp_file_paths_'(_, _, _, _) ->
+	(	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(regular), _, Lines),
 		% not compiling a source file
-		true
-	;	'$lgt_pp_referenced_module_'(Module, _) ->
-		% not the first reference to the module
-		true
-	;	% first reference to this module
-		'$lgt_comp_ctx_lines'(Ctx, Lines),
+		\+ '$lgt_pp_referenced_module_'(Module, _) ->
+		% first reference to this module
 		assertz('$lgt_pp_referenced_module_'(Module, Lines))
+	;	% not the first reference to the module
+		true
 	).
 
 
