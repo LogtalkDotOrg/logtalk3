@@ -33,7 +33,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/12/03,
+		date is 2014/12/06,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.']).
 
 	:- built_in.
@@ -250,11 +250,7 @@
 			message_hook(Message, Kind, Component, Tokens) ->
 			% message intercepted; assume that the message is printed
 			true
-		;	% add begin/2 and end/1 tokens to, respectively, the start and the end of the list of tokens
-			% but pass them using discrete arguments instead of doing an expensive list append operation;
-			% these two tokens can be intercepted by the user for supporting e.g. message coloring
-			functor(Kind, Functor, _),
-			default_print_message(Kind, Component, begin(Functor,Ctx), Tokens, end(Ctx))
+		;	default_print_message(Kind, Component, Tokens)
 		).
 
 	% message_term_to_tokens(@term, @term, @term, -list)
@@ -271,26 +267,26 @@
 	% default_print_message(+atom_or_compound, +atom, +compound, +list, +compound)
 	%
 	% print a message that was not intercepted by the user
-	default_print_message(silent, _, _, _, _) :-
+	default_print_message(silent, _, _) :-
 		!.
-	default_print_message(silent(_), _, _, _, _) :-
+	default_print_message(silent(_), _, _) :-
 		!.
-	default_print_message(banner, _, _, _, _) :-
+	default_print_message(banner, _, _) :-
 		\+ current_logtalk_flag(report, on),
 		!.
-	default_print_message(comment, _, _, _, _) :-
+	default_print_message(comment, _, _) :-
 		\+ current_logtalk_flag(report, on),
 		!.
-	default_print_message(comment(_), _, _, _, _) :-
+	default_print_message(comment(_), _, _) :-
 		\+ current_logtalk_flag(report, on),
 		!.
-	default_print_message(warning, _, _, _, _) :-
+	default_print_message(warning, _, _) :-
 		current_logtalk_flag(report, off),
 		!.
-	default_print_message(warning(_), _, _, _, _) :-
+	default_print_message(warning(_), _, _) :-
 		current_logtalk_flag(report, off),
 		!.
-	default_print_message(Kind, Component, BeginToken, Tokens, EndToken) :-
+	default_print_message(Kind, Component, Tokens) :-
 		(	message_prefix_stream(Kind, Component, Prefix, Stream) ->
 			true
 		;	% no user-defined prefix and stream; use default definition
@@ -299,8 +295,12 @@
 		;	% no such kind of message; use "information" instead
 			default_message_prefix_stream(information, Prefix, Stream)
 		),
-		print_message_tokens(Stream, Prefix, [BeginToken| Tokens]),
-		print_message_tokens(Stream, Prefix, [at_same_line, EndToken]).
+		% add begin/2 and end/1 tokens to, respectively, the start and the end of the list of tokens
+		% but pass them using discrete arguments instead of doing an expensive list append operation;
+		% these two tokens can be intercepted by the user for supporting e.g. message coloring
+		functor(Kind, Functor, _),
+		print_message_tokens_([begin(Functor,Ctx), Prefix-[]| Tokens], Stream, Prefix),
+		print_message_tokens_([end(Ctx)], Stream, Prefix).
 
 	% default_message_prefix_stream(?atom_or_compound, ?atom, ?stream_or_alias)
 	%
