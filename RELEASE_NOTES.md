@@ -99,6 +99,8 @@ results in files that are guessed as binary files.
 Tests
 -----
 
+* ADDED: Unit tests for syntax variants of entity opening directives.
+
 * ADDED: Prolog conformance unit test for the if-then-else control construct
 for checking for correct semantics when a cut is found in the condition part.
 Added after discussion with David S. Warren about a likely typo in a similar
