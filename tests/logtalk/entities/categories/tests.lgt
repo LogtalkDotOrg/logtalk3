@@ -21,6 +21,9 @@
 
 	% test all possible syntaxes for category relations
 
+	test(category_0) :-
+		logtalk_load(categories, [unknown_entities(silent)]).
+
 	test(category_1) :-
 		implements_protocol(category_1, protocol1),
 		implements_protocol(category_1, protocol2),

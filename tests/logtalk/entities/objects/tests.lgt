@@ -21,6 +21,9 @@
 
 	% test all possible syntaxes for object relations
 
+	test(object_0) :-
+		logtalk_load(objects, [unknown_entities(silent)]).
+
 	test(prototype_1) :-
 		implements_protocol(prototype_1, protocol1),
 		implements_protocol(prototype_1, protocol2),

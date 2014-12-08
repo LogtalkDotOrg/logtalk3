@@ -21,6 +21,9 @@
 
 	% test all possible syntaxes for protocol relations
 
+	test(protocol_0) :-
+		logtalk_load(protocols, [unknown_entities(silent)]).
+
 	test(protocol_1) :-
 		extends_protocol(protocol_1, parent1),
 		extends_protocol(protocol_1, parent2).
