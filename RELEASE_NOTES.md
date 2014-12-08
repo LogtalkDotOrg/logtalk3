@@ -60,6 +60,9 @@ the call to `true/0` would wrongly convert it into an if-then-else goal. Thanks
 to David S. Warren for an enlightening discussion regarding this issue in XSB
 that helped uncover this bug also in Logtalk.
 
+* FIXED: Restored support for using a list or a sequence of entity identifiers 
+as argument to entity relations in entity opening directives.
+
 Prolog adapter and integration files
 ------------------------------------
 

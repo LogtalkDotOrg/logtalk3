@@ -16047,13 +16047,23 @@ current_logtalk_flag(Flag, Value) :-
 %
 % flattens an item, a list of items, or a conjunction of items into a list
 
-'$lgt_flatten_to_list'([A|B], [A|B]) :-
+'$lgt_flatten_to_list'([[A| B]], [A| B]) :-
+	!.
+
+'$lgt_flatten_to_list'([[]], []) :-
+	!.
+
+'$lgt_flatten_to_list'([(A, B)], [A| BB]) :-
+	!,
+	'$lgt_flatten_to_list'(B, BB).
+
+'$lgt_flatten_to_list'([A| B], [A| B]) :-
 	!.
 
 '$lgt_flatten_to_list'([], []) :-
 	!.
 
-'$lgt_flatten_to_list'((A, B), [A|BB]) :-
+'$lgt_flatten_to_list'((A, B), [A| BB]) :-
 	!,
 	'$lgt_flatten_to_list'(B, BB).
 
