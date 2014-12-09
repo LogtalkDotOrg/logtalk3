@@ -10,7 +10,7 @@
 
 
 :- object(database,
-	imports(solver, proof_tree, tracer)).
+	imports((solver, proof_tree, tracer))).
 
 	:- public(p/1).
 	:- private([q/2, r/1, s/1, t/2]).

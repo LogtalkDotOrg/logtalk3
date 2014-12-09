@@ -36,8 +36,8 @@
 
 
 :- object(proto,
-	implements(protop, monitoring),
-	imports(initialization, proto_hierarchy)).
+	implements((protop, monitoring)),
+	imports(((initialization), proto_hierarchy))).
 
 	:- info([
 		version is 1.2,

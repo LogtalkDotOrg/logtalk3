@@ -30,7 +30,7 @@ interface/0, for listing the object interface.
 
 
 :- object(parent,
-	imports(predicates, interface)).
+	imports((predicates, interface))).
 
 :- end_object.
 

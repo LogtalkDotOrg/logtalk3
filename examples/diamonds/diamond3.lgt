@@ -64,7 +64,7 @@ alias/2 predicate directive.
 % using the alias/2 directive:
 
 :- object(d3,
-	extends(b3, c3)).
+	extends((b3, c3))).
 
 	:- alias(b3, [m/0 as b3_m/0]).
 	:- alias(c3, [m/0 as c3_m/0]).

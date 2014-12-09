@@ -111,6 +111,9 @@ Examples
 
 * IMPROVED: Minor code cleanup of the `bricks` example.
 
+* FIXED: Updated examples to use only sanctioned syntax for entity opening
+directives.
+
 
 3.00.0 Release Candidate 7 - December 1, 2014
 =============================================

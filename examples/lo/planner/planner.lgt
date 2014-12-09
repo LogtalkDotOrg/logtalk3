@@ -215,7 +215,7 @@
 
 
 :- object(ringway,
-	extends(manchester, airport)).
+	extends((manchester, airport))).
 
 	fly(lhr).
 	fly(renfrew).

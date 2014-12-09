@@ -58,7 +58,7 @@
 
 
 :- object(xyzt,
-	extends(xyz, t)). 
+	extends((xyz, t))). 
 
 	:- public(xyzt/4).
 	:- mode(xyzt(?integer, ?integer, ?integer, ?integer), zero_or_one).
@@ -98,6 +98,6 @@
 
 
 :- object(xyzt(X, Y, Z, T),
-	extends(xyz(X, Y, Z), t(T))). 
+	extends((xyz(X, Y, Z), t(T)))). 
 
 :- end_object.

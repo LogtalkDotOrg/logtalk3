@@ -423,7 +423,7 @@
 
 
 :- object(speech(Season, Event),
-	imports(dress(Season), speech(Event))).
+	imports((dress(Season), speech(Event)))).
 
 	:- info([
 		version is 1.0,

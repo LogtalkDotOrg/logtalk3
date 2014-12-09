@@ -65,7 +65,7 @@ directive.
 % predicate m/0 to call the renamed definition:
 
 :- object(d2,
-	extends(b2, c2)).
+	extends((b2, c2))).
 
 	:- alias(c2, [m/0 as c2_m/0]).
 

@@ -85,7 +85,7 @@
 % class:
 
 :- category(patch,
-	complements(broken, broken_class)).
+	complements((broken, broken_class))).
 
 	% define a correct implementation of the is_proper_list/1 predicate:
 	is_proper_list((-)) :-

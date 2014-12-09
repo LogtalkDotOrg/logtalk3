@@ -250,7 +250,7 @@
 
 
 :- object(relation,
-	implements(relationp, monitoring),
+	implements((relationp, monitoring)),
 	instantiates(class),
 	specializes(object)).
 

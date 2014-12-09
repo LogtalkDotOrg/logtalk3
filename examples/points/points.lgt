@@ -249,7 +249,7 @@
 
 
 :- object(bounded_history_point,
-	imports(bounded_coordinate, point_history),
+	imports((bounded_coordinate, point_history)),
 	instantiates(class),
 	specializes(point)).
 

@@ -268,8 +268,8 @@
 
 
 :- object(object,
-	implements(objectp, monitoring),
-	imports(initialization, class_hierarchy),
+	implements((objectp, monitoring)),
+	imports(((initialization), class_hierarchy)),
 	instantiates(class)).
 
 	:- info([

@@ -62,7 +62,7 @@ bottom object is determined by the Logtalk predicate lookup algorithm.
 % two definitions for the predicate m/0:
 
 :- object(d1,
-	extends(b1, c1)).
+	extends((b1, c1))).
 
 
 :- end_object.

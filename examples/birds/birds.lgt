@@ -10,7 +10,7 @@
 
 
 :- object(order,
-	imports(descriptors, proto_hierarchy)).
+	imports((descriptors, proto_hierarchy))).
 
 :- end_object.
 

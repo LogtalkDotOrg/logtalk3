@@ -45,7 +45,7 @@
 
 :- object(sentence,
 	implements(parsep),
-	imports(determiners, nouns, verbs)).
+	imports((determiners, nouns, verbs))).
 
 	parse(List, true) :-
 		phrase(sentence, List).
