@@ -31,6 +31,11 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: Sanctioned syntax for directives is now enforced. In particular,
+predicate scope directives and entity relations specified in entity opening
+directives are restricted to a single argument (which can be, as always, a
+single item, a list of items, or a comma-separated sequence of items).
+
 * CHANGED: Set the `dynamic_declarations`, `complements`, and `events` flags
 to `deny` for the `logtalk` built-in object. The `events` flag change is of
 no consequence as this object doesn't send messages to other objects. The

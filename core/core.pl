@@ -8413,9 +8413,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_object_relations'([Relation| Relations], Obj, Ctx) :-
 	(	var(Relation) ->
 		throw(instantiation_error)
-	;	Relation =.. [Functor| Args],
-		'$lgt_flatten_to_list'(Args, FlattenedArgs),
-		'$lgt_compile_object_relation'(Functor, FlattenedArgs, Obj, Ctx) ->
+	;	'$lgt_compile_object_relation'(Relation, Obj, Ctx) ->
 		true
 	;	callable(Relation) ->
 		functor(Relation, Functor, Arity),
@@ -8432,20 +8430,25 @@ current_logtalk_flag(Flag, Value) :-
 %
 % compiles a relation between an object (the last argument) with other entities
 
-'$lgt_compile_object_relation'(implements, Ptcs, Obj, Ctx) :-
-	'$lgt_compile_implements_protocol_relation'(Ptcs, Obj, Ctx).
+'$lgt_compile_object_relation'(implements(Ptcs), Obj, Ctx) :-
+	'$lgt_flatten_to_list'(Ptcs, FlattenedPtcs),
+	'$lgt_compile_implements_protocol_relation'(FlattenedPtcs, Obj, Ctx).
 
-'$lgt_compile_object_relation'(imports, Ctgs, Obj, Ctx) :-
-	'$lgt_compile_imports_category_relation'(Ctgs, Obj, Ctx).
+'$lgt_compile_object_relation'(imports(Ctgs), Obj, Ctx) :-
+	'$lgt_flatten_to_list'(Ctgs, FlattenedCtgs),
+	'$lgt_compile_imports_category_relation'(FlattenedCtgs, Obj, Ctx).
 
-'$lgt_compile_object_relation'(instantiates, Classes, Instance, Ctx) :-
-	'$lgt_compile_instantiates_class_relation'(Classes, Instance, Ctx).
+'$lgt_compile_object_relation'(instantiates(Classes), Instance, Ctx) :-
+	'$lgt_flatten_to_list'(Classes, FlattenedClasses),
+	'$lgt_compile_instantiates_class_relation'(FlattenedClasses, Instance, Ctx).
 
-'$lgt_compile_object_relation'(specializes, Superclasses, Class, Ctx) :-
-	'$lgt_compile_specializes_class_relation'(Superclasses, Class, Ctx).
+'$lgt_compile_object_relation'(specializes(Superclasses), Class, Ctx) :-
+	'$lgt_flatten_to_list'(Superclasses, FlattenedSuperclasses),
+	'$lgt_compile_specializes_class_relation'(FlattenedSuperclasses, Class, Ctx).
 
-'$lgt_compile_object_relation'(extends, Parents, Prototype, Ctx) :-
-	'$lgt_compile_extends_object_relation'(Parents, Prototype, Ctx).
+'$lgt_compile_object_relation'(extends(Parents), Prototype, Ctx) :-
+	'$lgt_flatten_to_list'(Parents, FlattenedParents),
+	'$lgt_compile_extends_object_relation'(FlattenedParents, Prototype, Ctx).
 
 
 
@@ -8456,9 +8459,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_protocol_relations'([Relation| Relations], Ptc, Ctx) :-
 	(	var(Relation) ->
 		throw(instantiation_error)
-	;	Relation =.. [Functor| Args],
-		'$lgt_flatten_to_list'(Args, FlattenedArgs),
-		'$lgt_compile_protocol_relation'(Functor, FlattenedArgs, Ptc, Ctx) ->
+	;	'$lgt_compile_protocol_relation'(Relation, Ptc, Ctx) ->
 		true
 	;	callable(Relation) ->
 		functor(Relation, Functor, Arity),
@@ -8475,8 +8476,9 @@ current_logtalk_flag(Flag, Value) :-
 %
 % compiles a relation between a protocol (the last argument) with other entities
 
-'$lgt_compile_protocol_relation'(extends, Ptcs, Ptc, Ctx) :-
-	'$lgt_compile_extends_protocol_relation'(Ptcs, Ptc, Ctx).
+'$lgt_compile_protocol_relation'(extends(Ptcs), Ptc, Ctx) :-
+	'$lgt_flatten_to_list'(Ptcs, FlattenedPtcs),
+	'$lgt_compile_extends_protocol_relation'(FlattenedPtcs, Ptc, Ctx).
 
 
 
@@ -8487,9 +8489,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_category_relations'([Relation| Relations], Ctg, Ctx) :-
 	(	var(Relation) ->
 		throw(instantiation_error)
-	;	Relation =.. [Functor| Args],
-		'$lgt_flatten_to_list'(Args, FlattenedArgs),
-		'$lgt_compile_category_relation'(Functor, FlattenedArgs, Ctg, Ctx) ->
+	;	'$lgt_compile_category_relation'(Relation, Ctg, Ctx) ->
 		true
 	;	callable(Relation) ->
 		functor(Relation, Functor, Arity),
@@ -8506,14 +8506,17 @@ current_logtalk_flag(Flag, Value) :-
 %
 % compiles a relation between a category (the last argument) with other entities
 
-'$lgt_compile_category_relation'(implements, Ptcs, Ctg, Ctx) :-
-	'$lgt_compile_implements_protocol_relation'(Ptcs, Ctg, Ctx).
+'$lgt_compile_category_relation'(implements(Ptcs), Ctg, Ctx) :-
+	'$lgt_flatten_to_list'(Ptcs, FlattenedPtcs),
+	'$lgt_compile_implements_protocol_relation'(FlattenedPtcs, Ctg, Ctx).
 
-'$lgt_compile_category_relation'(extends, Ctgs, Ctg, Ctx) :-
-	'$lgt_compile_extends_category_relation'(Ctgs, Ctg, Ctx).
+'$lgt_compile_category_relation'(extends(Ctgs), Ctg, Ctx) :-
+	'$lgt_flatten_to_list'(Ctgs, FlattenedCtgs),
+	'$lgt_compile_extends_category_relation'(FlattenedCtgs, Ctg, Ctx).
 
-'$lgt_compile_category_relation'(complements, Objs, Ctg, Ctx) :-
-	'$lgt_compile_complements_object_relation'(Objs, Ctg, Ctx).
+'$lgt_compile_category_relation'(complements(Objs), Ctg, Ctx) :-
+	'$lgt_flatten_to_list'(Objs, FlattenedObjs),
+	'$lgt_compile_complements_object_relation'(FlattenedObjs, Ctg, Ctx).
 
 
 
@@ -16046,16 +16049,6 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_flatten_to_list'(+term, -list)
 %
 % flattens an item, a list of items, or a conjunction of items into a list
-
-'$lgt_flatten_to_list'([[A| B]], [A| B]) :-
-	!.
-
-'$lgt_flatten_to_list'([[]], []) :-
-	!.
-
-'$lgt_flatten_to_list'([(A, B)], [A| BB]) :-
-	!,
-	'$lgt_flatten_to_list'(B, BB).
 
 '$lgt_flatten_to_list'([A| B], [A| B]) :-
 	!.

@@ -32,7 +32,7 @@
 
 
 :- object(parameter_test_object_12(X, Y),
-	extends(parameter_test_object_1(X), parameter_test_object_2(Y))).
+	extends((parameter_test_object_1(X), parameter_test_object_2(Y)))).
 
 	:- public(r/2).
 	r(X, Y) :-

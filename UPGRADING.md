@@ -129,6 +129,14 @@ The Logtalk 2.x `unknown`, `singletons`, and `tmpdir` are renamed in Logtalk
 3.x for clarity. The old names are deprecated and should only be used when
 compatibility with Logtalk 2.x is still required.
 
+Stricter syntax
+---------------
+
+Logtalk 3.x enforces sanctioned syntax for directives. Notably, predicate
+scope directives and entity relations specified in entity opening directives
+are restricted to a single argument (which can be, as always, a single item,
+a list of items, or a comma-separated sequence of items).
+
 Semantic changes
 ----------------
 
