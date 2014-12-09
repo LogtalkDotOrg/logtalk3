@@ -25,8 +25,7 @@
 		logtalk_load(protocols, [unknown_entities(silent)]).
 
 	test(protocol_1) :-
-		extends_protocol(protocol_1, parent1),
-		extends_protocol(protocol_1, parent2).
+		extends_protocol(protocol_1, parent1).
 
 	test(protocol_2) :-
 		extends_protocol(protocol_2, parent1),

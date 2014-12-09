@@ -26,9 +26,7 @@
 
 	test(category_1) :-
 		implements_protocol(category_1, protocol1),
-		implements_protocol(category_1, protocol2),
-		extends_category(category_1, parent1),
-		extends_category(category_1, parent2).
+		extends_category(category_1, parent1).
 
 	test(category_2) :-
 		implements_protocol(category_2, protocol1),

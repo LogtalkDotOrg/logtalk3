@@ -10,8 +10,8 @@
 
 
 :- category(category_1,
-	implements([protocol1, protocol2]),
-	extends([parent1, parent2])).
+	implements(protocol1),
+	extends(parent1)).
 
 :- end_category.
 
@@ -24,7 +24,7 @@
 
 
 :- category(category_3,
-	implements(protocol1, protocol2),
-	extends(parent1, parent2)).
+	implements([protocol1, protocol2]),
+	extends([parent1, parent2])).
 
 :- end_category.

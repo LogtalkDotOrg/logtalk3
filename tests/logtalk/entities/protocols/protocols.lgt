@@ -10,7 +10,7 @@
 
 
 :- protocol(protocol_1,
-	extends([parent1, parent2])).
+	extends(parent1)).
 
 :- end_protocol.
 
@@ -22,6 +22,6 @@
 
 
 :- protocol(protocol_3,
-	extends(parent1, parent2)).
+	extends([parent1, parent2])).
 
 :- end_protocol.

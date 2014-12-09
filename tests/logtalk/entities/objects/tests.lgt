@@ -26,11 +26,8 @@
 
 	test(prototype_1) :-
 		implements_protocol(prototype_1, protocol1),
-		implements_protocol(prototype_1, protocol2),
 		imports_category(prototype_1, cateogry1),
-		imports_category(prototype_1, category2),
-		extends_object(prototype_1, parent1),
-		extends_object(prototype_1, parent2).
+		extends_object(prototype_1, parent1).
 
 	test(prototype_2) :-
 		implements_protocol(prototype_2, protocol1),
@@ -43,25 +40,21 @@
 	test(prototype_3) :-
 		implements_protocol(prototype_3, protocol1),
 		implements_protocol(prototype_3, protocol2),
-		imports_category(prototype_3, cateogry1),
+		imports_category(prototype_3, category1),
 		imports_category(prototype_3, category2),
 		extends_object(prototype_3, parent1),
 		extends_object(prototype_3, parent2).
 
 	test(class_1) :-
 		implements_protocol(class_1, protocol1),
-		implements_protocol(class_1, protocol2),
-		imports_category(class_1, cateogry1),
-		imports_category(class_1, category2),
+		imports_category(class_1, category1),
 		instantiates_class(class_1, instance1),
-		instantiates_class(class_1, instance2),
-		specializes_class(class_1, superclass1),
-		specializes_class(class_1, superclass2).
+		specializes_class(class_1, superclass1).
 
 	test(class_2) :-
 		implements_protocol(class_2, protocol1),
 		implements_protocol(class_2, protocol2),
-		imports_category(class_2, cateogry1),
+		imports_category(class_2, category1),
 		imports_category(class_2, category2),
 		instantiates_class(class_2, instance1),
 		instantiates_class(class_2, instance2),
@@ -71,7 +64,7 @@
 	test(class_3) :-
 		implements_protocol(class_3, protocol1),
 		implements_protocol(class_3, protocol2),
-		imports_category(class_3, cateogry1),
+		imports_category(class_3, category1),
 		imports_category(class_3, category2),
 		instantiates_class(class_3, instance1),
 		instantiates_class(class_3, instance2),
