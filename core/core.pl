@@ -2536,7 +2536,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_predicate_property_user'(scope(Scope), _, _, Scope, _, _, _, _, _, _).
 '$lgt_predicate_property_user'((public), _, _, (public), _, _, _, _, _, _).
 '$lgt_predicate_property_user'(protected, _, _, protected, _, _, _, _, _, _).
-'$lgt_predicate_property_user'(private, _, _, private, _, _, _, _, _, _).
+'$lgt_predicate_property_user'((private), _, _, (private), _, _, _, _, _, _).
 '$lgt_predicate_property_user'((dynamic), _, _, _, _, Flags, _, _, _, _) :-
 	Flags /\ 2 =:= 2.
 '$lgt_predicate_property_user'(static, _, _, _, _, Flags, _, _, _, _) :-
@@ -2622,7 +2622,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_predicate_property_built_in_method'(scope(Scope), _, Scope, _, _).
 '$lgt_predicate_property_built_in_method'((public), _, (public), _, _).
 '$lgt_predicate_property_built_in_method'(protected, _, protected, _, _).
-'$lgt_predicate_property_built_in_method'(private, _, private, _, _).
+'$lgt_predicate_property_built_in_method'((private), _, (private), _, _).
 '$lgt_predicate_property_built_in_method'(built_in, _, _, _, _).	%Flags /\ 1 =:= 1.
 '$lgt_predicate_property_built_in_method'((dynamic), _, _, _, Flags) :-
 	Flags /\ 2 =:= 2.
@@ -2653,7 +2653,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_predicate_property_prolog_built_in'(prolog, Pred) :-
 	\+ catch('$lgt_predicate_property'(Pred, foreign), _, fail).
 '$lgt_predicate_property_prolog_built_in'(scope(private), _).
-'$lgt_predicate_property_prolog_built_in'(private, _).
+'$lgt_predicate_property_prolog_built_in'((private), _).
 '$lgt_predicate_property_prolog_built_in'(meta_predicate(Meta), Pred) :-
 	'$lgt_prolog_meta_predicate'(Pred, Meta0, _),
 	Meta0 =.. [_| MetaArgs0],
@@ -2675,7 +2675,7 @@ current_logtalk_flag(Flag, Value) :-
 % this representation was chosen as it allows testing if a scope is either
 % public or protected by a single unification step with the p(_) term
 
-'$lgt_scope'(private, p).
+'$lgt_scope'((private), p).
 '$lgt_scope'(protected, p(p)).
 '$lgt_scope'((public), p(p(p))).
 
@@ -7254,15 +7254,15 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_logtalk_directive'(public(Resources), _) :-
 	'$lgt_flatten_to_list'(Resources, ResourcesFlatted),
-	'$lgt_compile_public_directive'(ResourcesFlatted).
+	'$lgt_compile_scope_directive'(ResourcesFlatted, (public)).
 
 '$lgt_compile_logtalk_directive'(protected(Resources), _) :-
 	'$lgt_flatten_to_list'(Resources, ResourcesFlatted),
-	'$lgt_compile_protected_directive'(ResourcesFlatted).
+	'$lgt_compile_scope_directive'(ResourcesFlatted, protected).
 
 '$lgt_compile_logtalk_directive'(private(Resources), _) :-
 	'$lgt_flatten_to_list'(Resources, ResourcesFlatted),
-	'$lgt_compile_private_directive'(ResourcesFlatted).
+	'$lgt_compile_scope_directive'(ResourcesFlatted, (private)).
 
 % export/1 module directive
 %
@@ -7501,45 +7501,21 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_compile_public_directive'(+list)
+% '$lgt_compile_scope_directive'(+list, +atom)
 %
-% auxiliary predicate for compiling public/1 directives
+% auxiliary predicate for compiling scope directives
 
-'$lgt_compile_public_directive'([Resource| Resources]) :-
-	'$lgt_compile_scope_directive_resource'(Resource, (public)),
-	'$lgt_compile_public_directive'(Resources).
+'$lgt_compile_scope_directive'([Resource| Resources], Scope) :-
+	'$lgt_compile_scope_directive_resource'(Resource, Scope),
+	'$lgt_compile_scope_directive'(Resources, Scope).
 
-'$lgt_compile_public_directive'([]).
-
-
-
-% '$lgt_compile_protected_directive'(+list)
-%
-% auxiliary predicate for compiling protected/1 directives
-
-'$lgt_compile_protected_directive'([Resource| Resources]) :-
-	'$lgt_compile_scope_directive_resource'(Resource, protected),
-	'$lgt_compile_protected_directive'(Resources).
-
-'$lgt_compile_protected_directive'([]).
-
-
-
-% '$lgt_compile_private_directive'(+list)
-%
-% auxiliary predicate for compiling private/1 directives
-
-'$lgt_compile_private_directive'([Resource| Resources]) :-
-	'$lgt_compile_scope_directive_resource'(Resource, private),
-	'$lgt_compile_private_directive'(Resources).
-
-'$lgt_compile_private_directive'([]).
+'$lgt_compile_scope_directive'([], _).
 
 
 
 % '$lgt_compile_scope_directive_resource'(@term, @scope)
 %
-% auxiliary predicate for compiling scope directives
+% auxiliary predicate for compiling scope directive resources
 
 '$lgt_compile_scope_directive_resource'(op(Priority, Specifier, Operators), Scope) :-
 	'$lgt_must_be'(operator_specification, op(Priority, Specifier, Operators)),
@@ -7577,7 +7553,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_add_predicate_scope_directive'(protected, Functor, Arity) :-
 	assertz('$lgt_pp_protected_'(Functor, Arity)).
 
-'$lgt_add_predicate_scope_directive'(private, Functor, Arity) :-
+'$lgt_add_predicate_scope_directive'((private), Functor, Arity) :-
 	assertz('$lgt_pp_private_'(Functor, Arity)).
 
 
@@ -16068,7 +16044,7 @@ current_logtalk_flag(Flag, Value) :-
 %
 % valid (user-level) scope
 
-'$lgt_valid_scope'(private).
+'$lgt_valid_scope'((private)).
 '$lgt_valid_scope'(protected).
 '$lgt_valid_scope'((public)).
 
@@ -16412,7 +16388,7 @@ current_logtalk_flag(Flag, Value) :-
 % protected predicate
 '$lgt_valid_predicate_property'(protected).
 % private predicate
-'$lgt_valid_predicate_property'(private).
+'$lgt_valid_predicate_property'((private)).
 % dynamic predicate
 '$lgt_valid_predicate_property'((dynamic)).
 % static predicate
