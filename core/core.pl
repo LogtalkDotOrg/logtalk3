@@ -8884,8 +8884,7 @@ current_logtalk_flag(Flag, Value) :-
 % entity) for use with the reflection built-in predicates and methods
 
 '$lgt_clause_number'(Other::Functor/Arity, Entity, Line, N) :-
-	% clause for object or category multifile predicate
-	!,
+	% object or category multifile predicate
 	(	retract('$lgt_pp_number_of_clauses_'(Other, Functor, Arity, N0)) ->
 		N is N0 + 1
 	;	% first clause found for this predicate
@@ -8894,13 +8893,11 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	assertz('$lgt_pp_number_of_clauses_'(Other, Functor, Arity, N)).
 
-'$lgt_clause_number'(':'(_, _), _, _, 0) :-
-	% clause for module multifile predicate
-	!.
+% module multifile predicate
+'$lgt_clause_number'(':'(_, _), _, _, 0).
 
 '$lgt_clause_number'({Head}, Entity, Line, N) :-
 	% pre-compiled predicate clause head
-	!,
 	'$lgt_clause_number'(user::Head, Entity, Line, N).
 
 '$lgt_clause_number'(Functor/Arity, _, Line, N) :-
