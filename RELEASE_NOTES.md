@@ -33,6 +33,9 @@ Logtalk compiler and runtime
 
 * IMPROVED: Small compiler performance improvements.
 
+* FIXED: Only save multifile predicate definition source data when the flag
+`source_data` is turned on.
+
 
 3.00.0 Release Candidate 8 - December 9, 2014
 =============================================
