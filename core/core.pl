@@ -8912,7 +8912,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_compile_head'(+callable, -callable, +compilation_context)
+% '$lgt_compile_head'(+callable, -callable, -callable, +compilation_context)
 %
 % compiles an entity clause head
 

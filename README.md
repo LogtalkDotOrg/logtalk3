@@ -175,10 +175,10 @@ Logtalk.
 ---------
 
 Logtalk is copyrighted by Paulo Moura. The Logtalk use and distribution
-license can be found in the [LICENSE.txt](LICENSE.txt) file. Logtalk follows
-the GNU General Public License 3, plus some additional terms as per Section 7.
-The copyright notice and license applies to all files in this release unless
-otherwise explicitly stated.
+license can be found in the [LICENSE.txt](LICENSE.txt) file. Logtalk is
+available under the GNU General Public License 3 with a linking exception.
+The copyright notice and license applies to all files in this release
+unless otherwise explicitly stated.
 
 Some files that are part of the Logtalk distribution are distributed using
 a different license and/or are copyrighted by a Logtalk contributor.
