@@ -867,6 +867,11 @@ user:goal_expansion('::'(Object, Message), user:Goal) :-
 
 % '$lgt_write_compiled_term'(@stream, @callable, +atom, +atom, +integer)
 
+'$lgt_write_compiled_term'(Stream, Term, user, _, _) :-
+	!,
+	write_canonical(Stream, Term),
+	write(Stream, '.\n').
+
 '$lgt_write_compiled_term'(Stream, Term, _, _, _) :-
 	current_prolog_flag(logtalk_source_location_data, false),
 	!,
