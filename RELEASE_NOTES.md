@@ -31,6 +31,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: The compiler now uses a new internal predicate, defined in the
+Prolog adapter files, to output compiled source file terms. This predicate
+allows passing source file location information for the compiled terms.
+
 * IMPROVED: Small compiler performance improvements.
 
 * FIXED: Only save multifile predicate definition source data when the flag

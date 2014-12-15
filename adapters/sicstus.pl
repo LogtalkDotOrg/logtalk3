@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SICStus Prolog 4.1.0 and later versions
-%  Last updated on November 27, 2014
+%  Last updated on December 15, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -739,9 +739,9 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_write_term_and_source_location'(@stream, @callable, +atom, @callable)
+% '$lgt_write_compiled_term'(@stream, @callable, +atom, +atom, +integer)
 
-'$lgt_write_term_and_source_location'(Stream, Term, _Kind, _Location) :-
+'$lgt_write_compiled_term'(Stream, Term, _Kind, _Path, _Line) :-
 	write_canonical(Stream, Term),
 	write(Stream, '.\n').
 

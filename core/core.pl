@@ -5191,20 +5191,19 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_write_entity_code' :-
 	% avoid a spurious choice-point with some back-end Prolog compilers
 	stream_property(Output, alias(logtalk_compiler_output)), !,
-	'$lgt_compiler_flag'(source_data, SourceData),
 	catch(
-		'$lgt_write_entity_code'(SourceData, Output),
+		'$lgt_write_entity_code'(Output),
 		Error,
 		'$lgt_compiler_stream_io_error_handler'(Output, Error)
 	).
 
 
-'$lgt_write_entity_code'(SourceData, Output) :-
+'$lgt_write_entity_code'(Output) :-
 	'$lgt_pp_file_paths_'(_, _, Path, _),
 	% write any plain Prolog terms that may precede the entity definition
-	'$lgt_write_prolog_terms'(SourceData, Output, Path),
+	'$lgt_write_prolog_terms'(Output, Path),
 	'$lgt_write_entity_directives'(Output),
-	'$lgt_write_entity_clauses'(SourceData, Output, Path).
+	'$lgt_write_entity_clauses'(Output, Path).
 
 
 
@@ -5341,12 +5340,11 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_write_runtime_tables'(Output) :-
 	% the reflective information to be written depends on the source_data flag
-	'$lgt_compiler_flag'(source_data, SourceData),
 	'$lgt_pp_file_paths_'(_, _, Path, _),
 	% write out any Prolog code occurring after the last source file entity
-	'$lgt_write_prolog_terms'(SourceData, Output, Path),
+	'$lgt_write_prolog_terms'(Output, Path),
 	% write entity runtime directives and clauses
-	'$lgt_write_runtime_clauses'(SourceData, Output, Path),
+	'$lgt_write_runtime_clauses'(Output, Path),
 	% write initialization/1 directive at the end of the file to improve
 	% compatibility with non-ISO compliant Prolog compilers
 	'$lgt_write_initialization_call'(Output).
@@ -14894,176 +14892,125 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_write_prolog_terms'(+atom, @stream, atom)
+% '$lgt_write_prolog_terms'(@stream, atom)
 %
 % writes any Prolog clauses that appear before an entity opening directive
 
-'$lgt_write_prolog_terms'(on, Stream, Path) :-
+'$lgt_write_prolog_terms'(Stream, Path) :-
 	'$lgt_pp_prolog_term_'(Term, Line-_),
-		'$lgt_write_term_and_source_location'(Stream, Term, user, Path+Line),
+		'$lgt_write_compiled_term'(Stream, Term, user, Path, Line),
 	fail.
 
-'$lgt_write_prolog_terms'(off, Stream, _) :-
-	'$lgt_pp_prolog_term_'(Term, _),
-		write_canonical(Stream, Term), write(Stream, '.'), nl(Stream),
-	fail.
-
-'$lgt_write_prolog_terms'(_, _, _).
+'$lgt_write_prolog_terms'(_, _).
 
 
 
-% '$lgt_write_entity_clauses'(+atom, @stream, +atom)
+% '$lgt_write_entity_clauses'(@stream, +atom)
 %
 % writes Logtalk entity clauses
 
-'$lgt_write_entity_clauses'(SourceData, Stream, Path) :-
-	'$lgt_write_dcl_clauses'(SourceData, Stream, Path),
-	'$lgt_write_def_clauses'(SourceData, Stream, Path),
-	'$lgt_write_ddef_clauses'(SourceData, Stream, Path),
-	'$lgt_write_super_clauses'(SourceData, Stream, Path),
+'$lgt_write_entity_clauses'(Stream, Path) :-
+	'$lgt_write_dcl_clauses'(Stream, Path),
+	'$lgt_write_def_clauses'(Stream, Path),
+	'$lgt_write_ddef_clauses'(Stream, Path),
+	'$lgt_write_super_clauses'(Stream, Path),
 	'$lgt_pp_entity_'(_, _, _, _, Rnm),
-	'$lgt_write_alias_clauses'(SourceData, Stream, Path, Rnm),
-	'$lgt_write_predicate_clauses'(SourceData, Stream, Path),
-	'$lgt_write_aux_clauses'(SourceData, Stream, Path).
+	'$lgt_write_alias_clauses'(Stream, Path, Rnm),
+	'$lgt_write_predicate_clauses'(Stream, Path),
+	'$lgt_write_aux_clauses'(Stream, Path).
 
 
-'$lgt_write_dcl_clauses'(on, Stream, Path) :-
+'$lgt_write_dcl_clauses'(Stream, Path) :-
 	'$lgt_pp_dcl_'(Clause),
-		'$lgt_write_term_and_source_location'(Stream, Clause, aux, Path+1),
+		'$lgt_write_compiled_term'(Stream, Clause, aux, Path, 1),
 	fail.
 
-'$lgt_write_dcl_clauses'(off, Stream, _) :-
-	'$lgt_pp_dcl_'(Clause),
-		write_canonical(Stream, Clause), write(Stream, '.'), nl(Stream),
-	fail.
-
-'$lgt_write_dcl_clauses'(_, _, _).
+'$lgt_write_dcl_clauses'(_, _).
 
 
-'$lgt_write_def_clauses'(on, Stream, Path) :-
+'$lgt_write_def_clauses'(Stream, Path) :-
 	'$lgt_pp_def_'(Clause),
-		'$lgt_write_term_and_source_location'(Stream, Clause, aux, Path+1),
+		'$lgt_write_compiled_term'(Stream, Clause, aux, Path, 1),
 	fail.
 
-'$lgt_write_def_clauses'(off, Stream, _) :-
-	'$lgt_pp_def_'(Clause),
-		write_canonical(Stream, Clause), write(Stream, '.'), nl(Stream),
-	fail.
-
-'$lgt_write_def_clauses'(_, _, _).
+'$lgt_write_def_clauses'(_, _).
 
 
-'$lgt_write_ddef_clauses'(on, Stream, Path) :-
+'$lgt_write_ddef_clauses'(Stream, Path) :-
 	'$lgt_pp_ddef_'(Clause),
-		'$lgt_write_term_and_source_location'(Stream, Clause, aux, Path+1),
+		'$lgt_write_compiled_term'(Stream, Clause, aux, Path, 1),
 	fail.
 
-'$lgt_write_ddef_clauses'(off, Stream, _) :-
-	'$lgt_pp_ddef_'(Clause),
-		write_canonical(Stream, Clause), write(Stream, '.'), nl(Stream),
-	fail.
-
-'$lgt_write_ddef_clauses'(_, _, _).
+'$lgt_write_ddef_clauses'(_, _).
 
 
-'$lgt_write_super_clauses'(on, Stream, Path) :-
+'$lgt_write_super_clauses'(Stream, Path) :-
 	'$lgt_pp_super_'(Clause),
-		'$lgt_write_term_and_source_location'(Stream, Clause, aux, Path+1),
+		'$lgt_write_compiled_term'(Stream, Clause, aux, Path, 1),
 	fail.
 
-'$lgt_write_super_clauses'(off, Stream, _) :-
-	'$lgt_pp_super_'(Clause),
-		write_canonical(Stream, Clause), write(Stream, '.'), nl(Stream),
-	fail.
-
-'$lgt_write_super_clauses'(_, _, _).
+'$lgt_write_super_clauses'(_, _).
 
 
-'$lgt_write_alias_clauses'(on, Stream, Path, Rnm) :-
+'$lgt_write_alias_clauses'(Stream, Path, Rnm) :-
 	'$lgt_pp_predicate_alias_'(Entity, Pred, Alias),
 		Clause =.. [Rnm, Entity, Pred, Alias],
-		'$lgt_write_term_and_source_location'(Stream, Clause, aux, Path+1),
+		'$lgt_write_compiled_term'(Stream, Clause, aux, Path, 1),
 	fail.
 
-'$lgt_write_alias_clauses'(off, Stream, _, Rnm) :-
-	'$lgt_pp_predicate_alias_'(Entity, Pred, Alias),
-		Clause =.. [Rnm, Entity, Pred, Alias],
-		write_canonical(Stream, Clause), write(Stream, '.'), nl(Stream),
-	fail.
-
-'$lgt_write_alias_clauses'(SourceData, Stream, Path, Rnm) :-
+'$lgt_write_alias_clauses'(Stream, Path, Rnm) :-
 	Catchall =.. [Rnm, _, Pred, Pred],
-	(	SourceData == on ->
-		'$lgt_write_term_and_source_location'(Stream, Catchall, aux, Path+1)
-	;	write_canonical(Stream, Catchall), write(Stream, '.'), nl(Stream)
-	).
+	'$lgt_write_compiled_term'(Stream, Catchall, aux, Path, 1).
 
 
-'$lgt_write_predicate_clauses'(on, Stream, Path) :-
+'$lgt_write_predicate_clauses'(Stream, Path) :-
 	'$lgt_pp_final_entity_term_'(Clause, Line-_),
-		'$lgt_write_term_and_source_location'(Stream, Clause, user, Path+Line),
+		'$lgt_write_compiled_term'(Stream, Clause, user, Path, Line),
 	fail.
 
-'$lgt_write_predicate_clauses'(off, Stream, _) :-
-	'$lgt_pp_final_entity_term_'(Clause, _),
-		write_canonical(Stream, Clause), write(Stream, '.'), nl(Stream),
-	fail.
-
-'$lgt_write_predicate_clauses'(_, _, _).
+'$lgt_write_predicate_clauses'(_, _).
 
 
-'$lgt_write_aux_clauses'(on, Stream, Path) :-
+'$lgt_write_aux_clauses'(Stream, Path) :-
 	'$lgt_pp_final_entity_aux_clause_'(Clause),
-		'$lgt_write_term_and_source_location'(Stream, Clause, aux, Path+1),
+		'$lgt_write_compiled_term'(Stream, Clause, aux, Path, 1),
 	fail.
 
-'$lgt_write_aux_clauses'(off, Stream, _) :-
-	'$lgt_pp_final_entity_aux_clause_'(Clause),
-		write_canonical(Stream, Clause), write(Stream, '.'), nl(Stream),
-	fail.
-
-'$lgt_write_aux_clauses'(_, _, _).
+'$lgt_write_aux_clauses'(_, _).
 
 
 
-% '$lgt_write_runtime_clauses'(+atom, @stream, +atom)
+% '$lgt_write_runtime_clauses'(@stream, +atom)
 %
 % writes the entity runtime multifile and dynamic directives and the entity
 % runtime clauses for all defined entities
 
-'$lgt_write_runtime_clauses'(SourceData, Stream, Path) :-
-	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_current_protocol_'/5),
-	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_current_category_'/6),
-	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_current_object_'/11),
-	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_entity_property_'/2),
-	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_predicate_property_'/3),
-	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_implements_protocol_'/3),
-	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_imports_category_'/3),
-	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_instantiates_class_'/3),
-	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_specializes_class_'/3),
-	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_extends_category_'/3),
-	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_extends_object_'/3),
-	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_extends_protocol_'/3),
-	'$lgt_write_runtime_clauses'(SourceData, Stream, Path, '$lgt_complemented_object_'/5).
+'$lgt_write_runtime_clauses'(Stream, Path) :-
+	'$lgt_write_runtime_clauses'(Stream, Path, '$lgt_current_protocol_'/5),
+	'$lgt_write_runtime_clauses'(Stream, Path, '$lgt_current_category_'/6),
+	'$lgt_write_runtime_clauses'(Stream, Path, '$lgt_current_object_'/11),
+	'$lgt_write_runtime_clauses'(Stream, Path, '$lgt_entity_property_'/2),
+	'$lgt_write_runtime_clauses'(Stream, Path, '$lgt_predicate_property_'/3),
+	'$lgt_write_runtime_clauses'(Stream, Path, '$lgt_implements_protocol_'/3),
+	'$lgt_write_runtime_clauses'(Stream, Path, '$lgt_imports_category_'/3),
+	'$lgt_write_runtime_clauses'(Stream, Path, '$lgt_instantiates_class_'/3),
+	'$lgt_write_runtime_clauses'(Stream, Path, '$lgt_specializes_class_'/3),
+	'$lgt_write_runtime_clauses'(Stream, Path, '$lgt_extends_category_'/3),
+	'$lgt_write_runtime_clauses'(Stream, Path, '$lgt_extends_object_'/3),
+	'$lgt_write_runtime_clauses'(Stream, Path, '$lgt_extends_protocol_'/3),
+	'$lgt_write_runtime_clauses'(Stream, Path, '$lgt_complemented_object_'/5).
 
 
-'$lgt_write_runtime_clauses'(SourceData, Stream, Path, Functor/Arity) :-
+'$lgt_write_runtime_clauses'(Stream, Path, Functor/Arity) :-
 	functor(Clause, Functor, Arity),
 	(	\+ '$lgt_pp_runtime_clause_'(Clause) ->
 		true
 	;	write_canonical(Stream, (:- multifile(Functor/Arity))), write(Stream, '.'), nl(Stream),
 		write_canonical(Stream, (:- dynamic(Functor/Arity))), write(Stream, '.'), nl(Stream),
-		(	SourceData == on ->
-			(	'$lgt_pp_runtime_clause_'(Clause),
-				'$lgt_write_term_and_source_location'(Stream, Clause, aux, Path+1),
-				fail
-			;	true
-			)
-		;	(	'$lgt_pp_runtime_clause_'(Clause),
-				write_canonical(Stream, Clause), write(Stream, '.'), nl(Stream),
-				fail
-			;	true
-			)
+		(	'$lgt_pp_runtime_clause_'(Clause),
+			'$lgt_write_compiled_term'(Stream, Clause, aux, Path, 1),
+			fail
+		;	true
 		)
 	).
 
@@ -16047,7 +15994,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_valid_predicate_indicator'(?nonvar, -atom, -integer)
+% '$lgt_valid_predicate_indicator'(@term, -atom, -integer)
 %
 % valid predicate indicator
 
@@ -16058,7 +16005,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_valid_non_terminal_indicator'(?nonvar, -atom, -integer, -integer)
+% '$lgt_valid_non_terminal_indicator'(@term, -atom, -integer, -integer)
 %
 % valid grammar rule non-terminal indicator; the last argument is the
 % arity of the corresponding predicate
@@ -16071,7 +16018,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_valid_predicate_or_non_terminal_indicator'(?nonvar, -atom, -integer)
+% '$lgt_valid_predicate_or_non_terminal_indicator'(@term, -atom, -integer)
 %
 % valid predicate indicator or grammar rule indicator
 
@@ -16087,7 +16034,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_valid_info_key_value_pair'(?nonvar, -atom, -integer)
+% '$lgt_valid_info_key_value_pair'(@term, -atom, -integer)
 %
 % valid info/1-2 key-value pair
 

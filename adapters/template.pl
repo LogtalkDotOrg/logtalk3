@@ -541,9 +541,9 @@ numbervars(Term, From, Next) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_write_term_and_source_location'(@stream, @callable, +atom, @callable)
+% '$lgt_write_compiled_term'(@stream, @callable, +atom, +atom, +integer)
 
-'$lgt_write_term_and_source_location'(Stream, Term, _Kind, _Location) :-
+'$lgt_write_compiled_term'(Stream, Term, _Kind, _Path, _Line) :-
 	write_canonical(Stream, Term),
 	write(Stream, '.\n').
 

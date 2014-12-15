@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  sample settings file
-%  Last updated on May 15, 2014
+%  Last updated on December 15, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -197,7 +197,8 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 		set_logtalk_flag(code_prefix, '.'),
 		set_logtalk_flag(optimize, off),
 		set_logtalk_flag(source_data, on),
-		set_prolog_flag(optimise, off)
+		set_prolog_flag(optimise, off),
+		set_prolog_flag(logtalk_source_location_data, true)
 	)).
 
 :- endif.
