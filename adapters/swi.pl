@@ -869,52 +869,50 @@ user:goal_expansion('::'(Object, Message), user:Goal) :-
 
 '$lgt_write_compiled_term'(Stream, Term, user, _, _) :-
 	!,
-	write_canonical(Stream, Term),
-	write(Stream, '.\n').
+	write_canonical(Stream, Term), write(Stream, '.\n').
 
 '$lgt_write_compiled_term'(Stream, Term, _, _, _) :-
 	current_prolog_flag(logtalk_source_location_data, false),
 	!,
-	write_canonical(Stream, Term),
+	write_canonical(Stream, Term), write(Stream, '.\n').
+
+'$lgt_write_compiled_term'(Stream, '$lgt_current_object_'(Obj,Prefix,Dcl,Def,Super,IDcl,IDef,DDcl,DDef,Rnm,Flags), _, File, Line) :-
+	!,
+	write_canonical(Stream, (:- '$hide'(user:Dcl/4))),   write(Stream, '.\n'),
+	write_canonical(Stream, (:- '$hide'(user:Dcl/6))),   write(Stream, '.\n'),
+	write_canonical(Stream, (:- '$hide'(user:Def/3))),   write(Stream, '.\n'),
+	write_canonical(Stream, (:- '$hide'(user:Def/5))),   write(Stream, '.\n'),
+	write_canonical(Stream, (:- '$hide'(user:Super/5))), write(Stream, '.\n'),
+	write_canonical(Stream, (:- '$hide'(user:IDcl/6))),  write(Stream, '.\n'),
+	write_canonical(Stream, (:- '$hide'(user:IDef/5))),  write(Stream, '.\n'),
+	write_canonical(Stream, (:- '$hide'(user:DDcl/2))),  write(Stream, '.\n'),
+	write_canonical(Stream, (:- '$hide'(user:DDef/3))),  write(Stream, '.\n'),
+	write_canonical(Stream, (:- '$hide'(user:Rnm/3))),   write(Stream, '.\n'),
+	write_canonical(Stream, '$source_location'(File,Line):'$lgt_current_object_'(Obj,Prefix,Dcl,Def,Super,IDcl,IDef,DDcl,DDef,Rnm,Flags)),
 	write(Stream, '.\n').
 
-'$lgt_write_compiled_term'(Stream, '$lgt_current_object_'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, Flags), _, File, Line) :-
+'$lgt_write_compiled_term'(Stream, '$lgt_current_category_'(Ctg,Prefix,Dcl,Def,Rnm,Flags), _, File, Line) :-
 	!,
-	'$lgt_swi_write_hide_directive'(Stream, Dcl/4),
-	'$lgt_swi_write_hide_directive'(Stream, Dcl/6),
-	'$lgt_swi_write_hide_directive'(Stream, Def/3),
-	'$lgt_swi_write_hide_directive'(Stream, Def/5),
-	'$lgt_swi_write_hide_directive'(Stream, Super/5),
-	'$lgt_swi_write_hide_directive'(Stream, IDcl/6),
-	'$lgt_swi_write_hide_directive'(Stream, IDef/5),
-	'$lgt_swi_write_hide_directive'(Stream, DDcl/2),
-	'$lgt_swi_write_hide_directive'(Stream, DDef/3),
-	'$lgt_swi_write_hide_directive'(Stream, Rnm/3),
-	write_canonical(Stream, '$source_location'(File,Line):'$lgt_current_object_'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, Flags)),
+	write_canonical(Stream, (:- '$hide'(user:Dcl/4))), write(Stream, '.\n'),
+	write_canonical(Stream, (:- '$hide'(user:Dcl/5))), write(Stream, '.\n'),
+	write_canonical(Stream, (:- '$hide'(user:Def/3))), write(Stream, '.\n'),
+	write_canonical(Stream, (:- '$hide'(user:Def/4))), write(Stream, '.\n'),
+	write_canonical(Stream, (:- '$hide'(user:Rnm/3))), write(Stream, '.\n'),
+	write_canonical(Stream, '$source_location'(File,Line):'$lgt_current_category_'(Ctg,Prefix,Dcl,Def,Rnm,Flags)),
 	write(Stream, '.\n').
 
-'$lgt_write_compiled_term'(Stream, '$lgt_current_category_'(Ctg, Prefix, Dcl, Def, Rnm, Flags), _, File, Line) :-
+'$lgt_write_compiled_term'(Stream, '$lgt_current_protocol_'(Ptc,Prefix,Dcl,Rnm,Flags), _, File, Line) :-
 	!,
-	'$lgt_swi_write_hide_directive'(Stream, Dcl/4),
-	'$lgt_swi_write_hide_directive'(Stream, Dcl/5),
-	'$lgt_swi_write_hide_directive'(Stream, Def/3),
-	'$lgt_swi_write_hide_directive'(Stream, Def/4),
-	'$lgt_swi_write_hide_directive'(Stream, Rnm/3),
-	write_canonical(Stream, '$source_location'(File,Line):'$lgt_current_category_'(Ctg, Prefix, Dcl, Def, Rnm, Flags)),
+	write_canonical(Stream, (:- '$hide'(user:Dcl/4))), write(Stream, '.\n'),
+	write_canonical(Stream, (:- '$hide'(user:Dcl/5))), write(Stream, '.\n'),
+	write_canonical(Stream, (:- '$hide'(user:Rnm/3))), write(Stream, '.\n'),
+	write_canonical(Stream, '$source_location'(File,Line):'$lgt_current_protocol_'(Ptc,Prefix,Dcl,Rnm,Flags)),
 	write(Stream, '.\n').
 
-'$lgt_write_compiled_term'(Stream, '$lgt_current_protocol_'(Ptc, Prefix, Dcl, Rnm, Flags), _, File, Line) :-
+'$lgt_write_compiled_term'(Stream, (:- Directive), _, _, _) :-
+	% to cope with {(:- Directive)} entity terms
 	!,
-	'$lgt_swi_write_hide_directive'(Stream, Dcl/4),
-	'$lgt_swi_write_hide_directive'(Stream, Dcl/5),
-	'$lgt_swi_write_hide_directive'(Stream, Rnm/3),
-	write_canonical(Stream, '$source_location'(File,Line):'$lgt_current_protocol_'(Ptc, Prefix, Dcl, Rnm, Flags)),
-	write(Stream, '.\n').
-
-'$lgt_write_compiled_term'(Stream, (:- Directive), _, _, _) :-	% to cope with {(:- Directive)} entity terms
-	!,
-	write_canonical(Stream, (:- Directive)),
-	write(Stream, '.\n').
+	write_canonical(Stream, (:- Directive)), write(Stream, '.\n').
 
 '$lgt_write_compiled_term'(Stream, Term, aux, File, Line) :-
 	!,
@@ -923,23 +921,16 @@ user:goal_expansion('::'(Object, Message), user:Goal) :-
 	;	Term = Head
 	),
 	functor(Head, Functor, Arity),
-	'$lgt_swi_write_hide_directive'(Stream, Functor/Arity),
-	write_canonical(Stream, '$source_location'(File,Line):Term),
-	write(Stream, '.\n').
+	write_canonical(Stream, (:- '$hide'(user:Functor/Arity))), write(Stream, '.\n'),
+	write_canonical(Stream, '$source_location'(File,Line):Term), write(Stream, '.\n').
 
 '$lgt_write_compiled_term'(Stream, Term, _, File, Line) :-
-	write_canonical(Stream, '$source_location'(File,Line):Term),
-	write(Stream, '.\n').
-
-
-'$lgt_swi_write_hide_directive'(Stream, Functor/Arity) :-
-	write_canonical(Stream, (:- '$hide'(user:Functor/Arity))),
-	write(Stream, '.\n').
+	write_canonical(Stream, '$source_location'(File,Line):Term), write(Stream, '.\n').
 
 
 % '$lgt_assertz_entity_clause'(@clause, +atom)
 
-'$lgt_assertz_entity_clause'('$lgt_current_object_'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, Flags), _) :-
+'$lgt_assertz_entity_clause'('$lgt_current_object_'(Obj,Prefix,Dcl,Def,Super,IDcl,IDef,DDcl,DDef,Rnm,Flags), _) :-
 	!,
 	'$hide'(user:Dcl/4),
 	'$hide'(user:Dcl/6),
@@ -951,23 +942,23 @@ user:goal_expansion('::'(Object, Message), user:Goal) :-
 	'$hide'(user:DDcl/2),
 	'$hide'(user:DDef/3),
 	'$hide'(user:Rnm/3),
-	assertz('$lgt_current_object_'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, Flags)).
+	assertz('$lgt_current_object_'(Obj,Prefix,Dcl,Def,Super,IDcl,IDef,DDcl,DDef,Rnm,Flags)).
 
-'$lgt_assertz_entity_clause'('$lgt_current_category_'(Ctg, Prefix, Dcl, Def, Rnm, Flags), _) :-
+'$lgt_assertz_entity_clause'('$lgt_current_category_'(Ctg,Prefix,Dcl,Def,Rnm,Flags), _) :-
 	!,
 	'$hide'(user:Dcl/4),
 	'$hide'(user:Dcl/5),
 	'$hide'(user:Def/3),
 	'$hide'(user:Def/4),
 	'$hide'(user:Rnm/3),
-	assertz('$lgt_current_category_'(Ctg, Prefix, Dcl, Def, Rnm, Flags)).
+	assertz('$lgt_current_category_'(Ctg,Prefix,Dcl,Def,Rnm,Flags)).
 
-'$lgt_assertz_entity_clause'('$lgt_current_protocol_'(Ptc, Prefix, Dcl, Rnm, Flags), _) :-
+'$lgt_assertz_entity_clause'('$lgt_current_protocol_'(Ptc,Prefix,Dcl,Rnm,Flags), _) :-
 	!,
 	'$hide'(user:Dcl/4),
 	'$hide'(user:Dcl/5),
 	'$hide'(user:Rnm/3),
-	assertz('$lgt_current_protocol_'(Ptc, Prefix, Dcl, Rnm, Flags)).
+	assertz('$lgt_current_protocol_'(Ptc,Prefix,Dcl,Rnm,Flags)).
 
 '$lgt_assertz_entity_clause'(Term, aux) :-
 	!,
