@@ -357,10 +357,12 @@ built-in predicates for separate compilation and loading. To generate
 flag to `off` and add the option `qcompile(auto)` to the Logtalk flag
 `prolog_loader`.
 
-Compilation of Logtalk source files with the `source_data` flag turned on
-generates large intermediate Prolog files as in addition to the information
-collected for Logtalk own features, all file terms are decorated with
-additional information for integration with SWI-Prolog own development tools.
+To use the SWI-Prolog graphical tracer for debugging Logtalk source code,
+see the `settings-sample.lgt` file for the necessary settings. Note that
+those settings result in large intermediate Prolog files as in addition
+to the information collected for Logtalk own features, all file terms are
+decorated with additional source file location information for integration
+with the SWI-Prolog own development tools.
 
 
 XSB 3.5.0 and later versions
