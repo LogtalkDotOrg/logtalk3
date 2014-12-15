@@ -5202,7 +5202,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_pp_file_paths_'(_, _, Path, _),
 	% write any plain Prolog terms that may precede the entity definition
 	'$lgt_write_prolog_terms'(Output, Path),
-	'$lgt_write_entity_directives'(Output),
+	'$lgt_write_entity_directives'(Output, Path),
 	'$lgt_write_entity_clauses'(Output, Path).
 
 
@@ -5317,7 +5317,7 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_first_stage_error_handler'(OpenError)
 	),
 	catch(
-		'$lgt_write_encoding_directive'(Output),
+		'$lgt_write_encoding_directive'(Output, SourceFile),
 		WriteError,
 		'$lgt_first_stage_error_handler'(WriteError)
 	),
@@ -5347,7 +5347,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_write_runtime_clauses'(Output, Path),
 	% write initialization/1 directive at the end of the file to improve
 	% compatibility with non-ISO compliant Prolog compilers
-	'$lgt_write_initialization_call'(Output).
+	'$lgt_write_initialization_call'(Output, Path).
 
 
 
@@ -14865,30 +14865,30 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_write_encoding_directive'(@stream)
+% '$lgt_write_encoding_directive'(@stream, +atom)
 %
 % writes the encoding/1 directive (if supported in generated code);
 % it must be the first term in the file
 
-'$lgt_write_encoding_directive'(Stream) :-
+'$lgt_write_encoding_directive'(Stream, Path) :-
 	(	'$lgt_prolog_feature'(encoding_directive, full),
 		'$lgt_pp_file_encoding_'(_, Encoding) ->
-		write_canonical(Stream, (:- encoding(Encoding))), write(Stream, '.'), nl(Stream)
+		'$lgt_write_compiled_term'(Stream, (:- encoding(Encoding)), user, Path, 1)
 	;	true
 	).
 
 
 
-% '$lgt_write_entity_directives'(@stream)
+% '$lgt_write_entity_directives'(@stream, +atom)
 %
 % writes the compiled entity directives
 
-'$lgt_write_entity_directives'(Stream) :-
+'$lgt_write_entity_directives'(Stream, Path) :-
 	'$lgt_pp_directive_'(Directive),
-		write_canonical(Stream, (:- Directive)), write(Stream, '.'), nl(Stream),
+		'$lgt_write_compiled_term'(Stream, (:- Directive), user, Path, 1),
 	fail.
 
-'$lgt_write_entity_directives'(_).
+'$lgt_write_entity_directives'(_, _).
 
 
 
@@ -15005,8 +15005,8 @@ current_logtalk_flag(Flag, Value) :-
 	functor(Clause, Functor, Arity),
 	(	\+ '$lgt_pp_runtime_clause_'(Clause) ->
 		true
-	;	write_canonical(Stream, (:- multifile(Functor/Arity))), write(Stream, '.'), nl(Stream),
-		write_canonical(Stream, (:- dynamic(Functor/Arity))), write(Stream, '.'), nl(Stream),
+	;	'$lgt_write_compiled_term'(Stream, (:- multifile(Functor/Arity)), user, Path, 1),
+		'$lgt_write_compiled_term'(Stream, (:- dynamic(Functor/Arity)), user, Path, 1),
 		(	'$lgt_pp_runtime_clause_'(Clause),
 			'$lgt_write_compiled_term'(Stream, Clause, aux, Path, 1),
 			fail
@@ -15016,16 +15016,16 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_write_initialization_call'(@stream)
+% '$lgt_write_initialization_call'(@stream, +atom)
 %
 % writes the initialization goal for the compiled source file, a
 % conjunction of the initialization goals of the defined entities
 
-'$lgt_write_initialization_call'(Stream) :-
+'$lgt_write_initialization_call'(Stream, Path) :-
 	'$lgt_initialization_goal'(Goal),
 	(	Goal == true ->
 		true
-	;	write_canonical(Stream, (:- initialization(Goal))), write(Stream, '.'), nl(Stream)
+	;	'$lgt_write_compiled_term'(Stream, (:- initialization(Goal)), user, Path, 1)
 	).
 
 
