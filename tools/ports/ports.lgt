@@ -439,3 +439,9 @@
 		reverse(Tail, [Head| List], Reversed).
 
 :- end_object.
+
+
+:- if(current_logtalk_flag(prolog_dialect, swi)).
+	% add dummy meta_predicate/1 directive to avoid cluttering the make/0 analysis report
+	:- meta_predicate(':'(user,'$ports#0.call_goal#2'(*,*,*))).
+:- endif.
