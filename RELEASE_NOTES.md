@@ -35,10 +35,13 @@ Logtalk compiler and runtime
 Prolog adapter files, to output all compiled source file terms. This predicate
 allows passing source file location information for the compiled terms.
 
-* FIXED: Use `warning(missing_directives)` message kind when printing warning
-messages for missing directives.
+* ADDED: Entity `file/1` property for accessing the absolute path of the source
+file defining the entity (if applicable).
 
 * IMPROVED: Small compiler performance improvements.
+
+* FIXED: Use `warning(missing_directives)` message kind when printing warning
+messages for missing directives.
 
 * FIXED: Only save multifile predicate definition source data when the flag
 `source_data` is turned on.

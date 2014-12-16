@@ -557,8 +557,8 @@ Obj<<Goal :-
 %
 % top-level runtime error handler
 %
-% it tries to decode internal predicate names and deal with the ugly mess that
-% is Prolog error handling due to the lack of standardization by calling an
+% it tries to decode internal predicate names and deal with variations of
+% Prolog error handling due to the lack of standardization by calling an
 % adapter file predicate to try to normalize the error terms
 
 '$lgt_runtime_error_handler'(Variable) :-
@@ -733,6 +733,11 @@ object_property(Obj, Prop) :-
 	Flags /\ 2 =:= 0.
 '$lgt_object_property'(built_in, _, _, _, _, _, Flags) :-
 	Flags /\ 1 =:= 1.
+'$lgt_object_property'(file(Path), Obj, _, _, _, _, _) :-
+	(	'$lgt_entity_property_'(Obj, file_lines(Basename, Directory, _, _)) ->
+		atom_concat(Directory, Basename, Path)
+	;	fail
+	).
 '$lgt_object_property'(file(Basename, Directory), Obj, _, _, _, _, _) :-
 	(	'$lgt_entity_property_'(Obj, file_lines(Basename, Directory, _, _)) ->
 		true
@@ -815,6 +820,11 @@ category_property(Ctg, Prop) :-
 	Flags /\ 2 =:= 0.
 '$lgt_category_property'(built_in, _, _, _, Flags) :-
 	Flags /\ 1 =:= 1.
+'$lgt_category_property'(file(Path), Ctg, _, _, _) :-
+	(	'$lgt_entity_property_'(Ctg, file_lines(Basename, Directory, _, _)) ->
+		atom_concat(Directory, Basename, Path)
+	;	fail
+	).
 '$lgt_category_property'(file(Basename, Directory), Ctg, _, _, _) :-
 	(	'$lgt_entity_property_'(Ctg, file_lines(Basename, Directory, _, _)) ->
 		true
@@ -885,6 +895,11 @@ protocol_property(Ptc, Prop) :-
 	Flags /\ 2 =:= 0.
 '$lgt_protocol_property'(built_in, _, _, Flags) :-
 	Flags /\ 1 =:= 1.
+'$lgt_protocol_property'(file(Path), Ptc, _, _) :-
+	(	'$lgt_entity_property_'(Ptc, file_lines(Basename, Directory, _, _)) ->
+		atom_concat(Directory, Basename, Path)
+	;	fail
+	).
 '$lgt_protocol_property'(file(Basename, Directory), Ptc, _, _) :-
 	(	'$lgt_entity_property_'(Ptc, file_lines(Basename, Directory, _, _)) ->
 		true
@@ -16404,6 +16419,8 @@ current_logtalk_flag(Flag, Value) :-
 
 % list of pairs with user-defined protocol documentation
 '$lgt_valid_protocol_property'(info(_)).
+% source file absolute path
+'$lgt_valid_protocol_property'(file(_)).
 % source file basename and directory
 '$lgt_valid_protocol_property'(file(_, _)).
 % start and end lines in a source file
