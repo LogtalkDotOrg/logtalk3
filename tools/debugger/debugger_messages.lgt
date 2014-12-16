@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/10/01,
+		date is 2014/12/16,
 		comment is 'Logtalk debugger default message translations.'
 	]).
 
@@ -310,7 +310,7 @@
 			'      e - exception        x - execution context'-[], nl,
 			'      $ - compiled goal    = - debugging information'-[], nl,
 			'      < - write depth      . - file information'-[], nl,
-			'      h - condensed help    ? - extended help'-[], nl
+			'      h - condensed help   ? - extended help'-[], nl
 		].
 
 	% ports
@@ -336,7 +336,7 @@
 		['  Call: '-[]].
 	port_name(exit) -->
 		['  Exit: '-[]].
-	% Lean Prolog and Quntus Prolog don't provide a way to find if a call is deterministic
+	% Lean Prolog and Quintus Prolog don't provide a way to find if a call is deterministic
 	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == lean; Dialect == quintus))).
 		port_name(nd_exit) -->
 			[' Exit: '-[]].
