@@ -2092,11 +2092,10 @@ logtalk_compile(Files, Flags) :-
 	(	'$lgt_pp_file_compiler_flag_'(hook, HookEntity) ->
 		% pre-compile hooks in order to speed up entity compilation
 		(	current_object(HookEntity) ->
-			'$lgt_compiler_flag'(events, Events),
 			'$lgt_comp_ctx'(Ctx, _, user, user, user, HookEntity, _, [], [], ExCtx, runtime, [], _),
 			'$lgt_execution_context'(ExCtx, user, user, user, HookEntity, [], []),
-			'$lgt_compile_message_to_object'(term_expansion(Term, Terms), HookEntity, TermExpansionGoal, Events, Ctx),
-			'$lgt_compile_message_to_object'(goal_expansion(Goal, ExpandedGoal), HookEntity, GoalExpansionGoal, Events, Ctx)
+			'$lgt_compile_message_to_object'(term_expansion(Term, Terms), HookEntity, TermExpansionGoal, allow, Ctx),
+			'$lgt_compile_message_to_object'(goal_expansion(Goal, ExpandedGoal), HookEntity, GoalExpansionGoal, allow, Ctx)
 		;	atom(HookEntity),
 			'$lgt_prolog_feature'(modules, supported),
 			current_module(HookEntity) ->
@@ -15619,11 +15618,10 @@ current_logtalk_flag(Flag, Value) :-
 % (replacing any previously defined hooks)
 
 '$lgt_compile_hooks'(HookEntity) :-
-	'$lgt_compiler_flag'(events, Events),
 	'$lgt_comp_ctx'(Ctx, _, user, user, user, HookEntity, _, [], [], ExCtx, runtime, [], _),
 	'$lgt_execution_context'(ExCtx, user, user, user, HookEntity, [], []),
-	'$lgt_compile_message_to_object'(term_expansion(Term, ExpandedTerm), HookEntity, TermExpansionGoal, Events, Ctx),
-	'$lgt_compile_message_to_object'(goal_expansion(Term, ExpandedTerm), HookEntity, GoalExpansionGoal, Events, Ctx),
+	'$lgt_compile_message_to_object'(term_expansion(Term, ExpandedTerm), HookEntity, TermExpansionGoal, allow, Ctx),
+	'$lgt_compile_message_to_object'(goal_expansion(Term, ExpandedTerm), HookEntity, GoalExpansionGoal, allow, Ctx),
 	retractall('$lgt_hook_term_expansion_'(_, _)),
 	assertz((
 		'$lgt_hook_term_expansion_'(Term, ExpandedTerm) :-
