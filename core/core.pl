@@ -935,12 +935,6 @@ protocol_property(Ptc, Prop) :-
 	).
 '$lgt_protocol_property'(declares(Predicate, Properties), Ptc, Dcl, _) :-
 	'$lgt_protocol_property_declares'(Ptc, Dcl, Predicate, Properties).
-'$lgt_protocol_property'(calls(Predicate, Properties), Ptc, _, _) :-
-	'$lgt_entity_property_calls'(Ptc, Predicate, Properties).
-'$lgt_protocol_property'(number_of_clauses(Total), Ptc, _, _) :-
-	'$lgt_entity_property_'(Ptc, number_of_clauses(Total, _)).
-'$lgt_protocol_property'(number_of_user_clauses(TotalUser), Ptc, _, _) :-
-	'$lgt_entity_property_'(Ptc, number_of_clauses(_, TotalUser)).
 
 
 '$lgt_object_property_declares'(Obj, Dcl, DDcl, EntityFlags, Functor/Arity, Properties) :-
@@ -16412,8 +16406,6 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_valid_protocol_property'(private(_)).
 % list of declaration properties for a predicate declared in the entity
 '$lgt_valid_protocol_property'(declares(_, _)).
-% list of calling properties for a predicate called in the entity (e.g. in an initialization goal)
-'$lgt_valid_protocol_property'(calls(_, _)).
 
 % the remaining properties are available only when the entities are compiled with the "source_data" flag turned on
 
@@ -16425,10 +16417,6 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_valid_protocol_property'(file(_, _)).
 % start and end lines in a source file
 '$lgt_valid_protocol_property'(lines(_, _)).
-% number of predicate clauses (including both user-defined and auxiliary clauses)
-'$lgt_valid_protocol_property'(number_of_clauses(_)).
-% number of user-defined predicate clauses
-'$lgt_valid_protocol_property'(number_of_user_clauses(_)).
 
 
 
@@ -16445,6 +16433,12 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_valid_category_property'(includes(_, _, _)).
 % list of definition properties for a multifile predicate defined for other entities
 '$lgt_valid_category_property'(provides(_, _, _)).
+% list of calling properties for a predicate called in the entity
+'$lgt_valid_category_property'(calls(_, _)).
+% number of predicate clauses (including both user-defined and auxiliary clauses)
+'$lgt_valid_category_property'(number_of_clauses(_)).
+% number of user-defined predicate clauses
+'$lgt_valid_category_property'(number_of_user_clauses(_)).
 
 
 

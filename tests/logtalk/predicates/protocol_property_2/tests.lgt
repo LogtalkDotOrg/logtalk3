@@ -15,13 +15,13 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/12/03,
+		date is 2014/12/16,
 		comment is 'Unit tests for the protocol_property/2 built-in predicate.'
 	]).
 
-	:- discontiguous(succeeds/1).
-	:- discontiguous(fails/1).
-	:- discontiguous(throws/2).
+	:- discontiguous([
+		succeeds/1, fails/1, throws/2
+	]).
 
 	throws(protocol_property_2_1, error(type_error(protocol_identifier, 1), logtalk(protocol_property(1, static), _))) :-
 		protocol_property(1, static).
@@ -46,8 +46,6 @@
 		protocol_property(test_protocol, static),
 		protocol_property(test_protocol, file(Basename, Directory)), ground(Basename), ground(Directory),
 		protocol_property(test_protocol, lines(Start, End)), integer(Start), integer(End),
-		protocol_property(test_protocol, number_of_clauses(N)), N == 0,
-		protocol_property(test_protocol, number_of_user_clauses(NUC)), NUC == 0,
 		protocol_property(test_protocol, info(Info)),
 		member(version(_), Info),
 		member(author(_), Info),

@@ -46,6 +46,10 @@ messages for missing directives.
 * FIXED: Only save multifile predicate definition source data when the flag
 `source_data` is turned on.
 
+* FIXED: Valid protocol properties no longer include `number_of_clauses/1`,
+`number_of_user_clauses/1`, and `calls/2` properties as protocols no longer
+support `initialization/1` directives that would justify those properties.
+
 
 Prolog adapter and integration files
 ------------------------------------
