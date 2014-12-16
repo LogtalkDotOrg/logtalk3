@@ -180,6 +180,34 @@ We can find the properties of defined protocols by calling the <a title="Consult
 <p>
 A protocol may have the property <code>static</code>, <code>dynamic</code>, or <code>built_in</code>. Dynamic protocols can be abolished in runtime by calling the <a title="Consult reference manual" href="../refman/predicates/abolish_protocol_1.html"><code>abolish_protocol/1</code></a> built-in predicate. Depending on the back-end Prolog compiler, a protocol may have additional properties related to the source file where it is defined.
 </p>
+<p>
+The following protocol properties are supported:
+</p>
+<dl>
+	<dt><code>static</code></dt>
+		<dd>The protocol is static</dd>
+	<dt><code>dynamic</code></dt>
+		<dd>The protocol is dynamic (and thus can be abolished in runtime by calling the <a title="Consult reference manual" href="../refman/predicates/abolish_category_1.html"><code>abolish_category/1</code></a> built-in predicate)</dd>
+	<dt><code>built_in</code></dt>
+		<dd>The protocol is a built-in protocol (and thus always available)</dd>
+	<dt><code>file(Path)</code></dt>
+		<dd>Absolute path of the source file defining the protocol (if applicable)</dd>
+	<dt><code>file(Basename, directory)</code></dt>
+		<dd>Basename and directory of the source file defining the protocol (if applicable)</dd>
+	<dt><code>lines(BeginLine, EndLine)</code></dt>
+		<dd>Source file begin and end lines of the protocol definition (if applicable)</dd>
+	<dt><code>public(Predicates)</code></dt>
+		<dd>List of public predicates declared by the protocol</dd>
+	<dt><code>protected(Predicates)</code></dt>
+		<dd>List of protected predicates declared by the protocol</dd>
+	<dt><code>private(Predicates)</code></dt>
+		<dd>List of private predicates declared by the protocol</dd>
+	<dt><code>declares(Predicate, Properties)</code></dt>
+		<dd>List of properties for a predicate declared by the protocol</dd>
+</dl>
+<p>
+Some of the properties are only available when the protocol is defined in a source file compiled with the <code>source_data</code> flag turned on.
+</p>
 
 <h2 id="protocols_implementing">Implementing protocols</h2>
 
@@ -249,7 +277,7 @@ Logtalk defines a built-in protocol named <code>forwarding</code> that contains 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: October 9, 2014</span>
+		<span>Last updated on: December 16, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="objects.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="categories.html">next</a></span><br/>
