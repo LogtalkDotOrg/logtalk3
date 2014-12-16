@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/07/02,
+		date is 2014/12/16,
 		comment is 'Simple solution for redirecting a debugger trace to a file.'
 	]).
 
@@ -49,6 +49,11 @@
 		open(File, write, _, [alias(debugger_redirected_trace)]),
 		logtalk::assertz((
 			message_hook(tracing_port(_,_,_,_), Kind, debugger, Tokens) :-
+				message_prefix_stream(Kind, debugger, Prefix, _),
+				print_message_tokens(debugger_redirected_trace, Prefix, Tokens)
+		)),
+		logtalk::assertz((
+			message_hook(tracing_port(_,_,_,_,_), Kind, debugger, Tokens) :-
 				message_prefix_stream(Kind, debugger, Prefix, _),
 				print_message_tokens(debugger_redirected_trace, Prefix, Tokens)
 		)),
