@@ -9038,7 +9038,7 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_compiler_flag'(missing_directives, warning) ->
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_warning_context'(SourceFile, _, Lines, Type, Entity),
-		'$lgt_print_message'(warning(missing), core, missing_predicate_directive(SourceFile, Lines, Type, Entity, (multifile), user::Functor/Arity))
+		'$lgt_print_message'(warning(missing_directives), core, missing_predicate_directive(SourceFile, Lines, Type, Entity, (multifile), user::Functor/Arity))
 	;	true
 	),
 	'$lgt_comp_ctx_head'(Ctx, user::Head).
@@ -9083,7 +9083,7 @@ current_logtalk_flag(Flag, Value) :-
 		'$lgt_compiler_flag'(missing_directives, warning) ->
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_warning_context'(SourceFile, _, Lines, Type, Entity),
-		'$lgt_print_message'(warning(missing), core, missing_predicate_directive(SourceFile, Lines, Type, Entity, (multifile), ':'(Module,Functor/Arity)))
+		'$lgt_print_message'(warning(missing_directives), core, missing_predicate_directive(SourceFile, Lines, Type, Entity, (multifile), ':'(Module,Functor/Arity)))
 	;	true
 	),
 	'$lgt_comp_ctx_head'(Ctx, ':'(Module, Head)).
@@ -14748,7 +14748,7 @@ current_logtalk_flag(Flag, Value) :-
 	\+ '$lgt_pp_public_'(Functor, Arity),
 	% but missing corresponding public /1 directive
 	'$lgt_increment_compile_warnings_counter',
-	'$lgt_print_message'(warning(missing), core, missing_predicate_directive(Path, Lines, Type, Entity, (public), Functor/Arity)),
+	'$lgt_print_message'(warning(missing_directives), core, missing_predicate_directive(Path, Lines, Type, Entity, (public), Functor/Arity)),
 	fail.
 
 % reports missing dynamic/1 directives
@@ -14759,7 +14759,7 @@ current_logtalk_flag(Flag, Value) :-
 	\+ '$lgt_pp_dynamic_'(Head),
 	functor(Head, Functor, Arity),
 	'$lgt_increment_compile_warnings_counter',
-	'$lgt_print_message'(warning(missing), core, missing_predicate_directive(Path, Lines, Type, Entity, (dynamic), Functor/Arity)),
+	'$lgt_print_message'(warning(missing_directives), core, missing_predicate_directive(Path, Lines, Type, Entity, (dynamic), Functor/Arity)),
 	fail.
 
 % reports missing discontiguous/1 directives
@@ -14770,7 +14770,7 @@ current_logtalk_flag(Flag, Value) :-
 	\+ '$lgt_pp_discontiguous_'(Head),
 	functor(Head, Functor, Arity),
 	'$lgt_increment_compile_warnings_counter',
-	'$lgt_print_message'(warning(missing), core, missing_predicate_directive(Path, Lines, Type, Entity, (discontiguous), Functor/Arity)),
+	'$lgt_print_message'(warning(missing_directives), core, missing_predicate_directive(Path, Lines, Type, Entity, (discontiguous), Functor/Arity)),
 	fail.
 
 '$lgt_report_missing_directives'(_, _, _).
