@@ -311,7 +311,7 @@
 :- dynamic('$lgt_pp_use_module_non_terminal_'/3).
 % '$lgt_pp_entity_info_'(List)
 :- dynamic('$lgt_pp_entity_info_'/1).
-% '$lgt_pp_predicate_info_'(Functor/Arity, List) or '$lgt_pp_predicate_info_'(Functor//Args, List)
+% '$lgt_pp_predicate_info_'(Predicate, List)
 :- dynamic('$lgt_pp_predicate_info_'/2).
 
 % '$lgt_pp_implemented_protocol_'(Ptc, ObjOrCtg, Prefix, Dcl, Scope)
@@ -5751,14 +5751,8 @@ current_logtalk_flag(Flag, Value) :-
 	fail.
 
 '$lgt_add_entity_predicate_properties'(Entity) :-
-	'$lgt_pp_predicate_info_'(Functor/Arity, Info),
-		assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/Arity, info(Info)))),
-	fail.
-
-'$lgt_add_entity_predicate_properties'(Entity) :-
-	'$lgt_pp_predicate_info_'(Functor//Arity, Info),
-		ExtArity is Arity + 2,
-		assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/ExtArity, info(Info)))),
+	'$lgt_pp_predicate_info_'(Predicate, Info),
+		assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, Predicate, info(Info)))),
 	fail.
 
 '$lgt_add_entity_predicate_properties'(_).
@@ -7236,9 +7230,12 @@ current_logtalk_flag(Flag, Value) :-
 % info/2 predicate directive
 
 '$lgt_compile_logtalk_directive'(info(Pred, Pairs), _) :-
-	(	'$lgt_valid_predicate_or_non_terminal_indicator'(Pred, Functor, Arity) ->
+	(	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity) ->
 		'$lgt_compile_predicate_info_directive'(Pairs, Functor, Arity, TPairs),
-		assertz('$lgt_pp_predicate_info_'(Pred, TPairs))
+		assertz('$lgt_pp_predicate_info_'(Functor/Arity, TPairs))
+	;	'$lgt_valid_non_terminal_indicator'(Pred, Functor, Arity, ExtArity),
+		'$lgt_compile_predicate_info_directive'(Pairs, Functor, Arity, TPairs),
+		assertz('$lgt_pp_predicate_info_'(Functor/ExtArity, TPairs))
 	;	var(Pred) ->
 		throw(instantiation_error)
 	;	throw(type_error(predicate_indicator, Pred))
