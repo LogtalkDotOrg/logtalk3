@@ -918,8 +918,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 
 '$lgt_write_compiled_term'(Stream, Term, _Kind, _Path, _Line) :-
 	write_canonical(Stream, Term),
-	write(Stream, '.'),
-	nl(Stream).
+	write(Stream, '.\n').
 
 
 % '$lgt_assertz_entity_clause'(@clause, +atom)
