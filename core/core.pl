@@ -2622,10 +2622,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_predicate_property_user'(number_of_clauses(N), Alias, Original, _, _, _, _, _, Def, _) :-
 	call(Def, Alias, _, _, _, DCtn),
 	functor(Original, Functor, Arity),
-	(	'$lgt_predicate_property_'(DCtn, Functor/Arity, flags_clauses_line(_, N0, _)) ->
-		true
-	;	N0 is 0
-	),
+	'$lgt_predicate_property_'(DCtn, Functor/Arity, flags_clauses_line(_, N0, _)),
 	findall(N1, '$lgt_predicate_property_'(DCtn, Functor/Arity, clauses_line_from(N1, _, _)), N1s),
 	'$lgt_sum_list'([N0| N1s], N).
 

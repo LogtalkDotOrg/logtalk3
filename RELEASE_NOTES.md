@@ -53,6 +53,9 @@ support `initialization/1` directives that would justify those properties.
 * FIXED: Bug where the `defines/2` property would never be returned for
 dynamically created entities.
 
+* FIXED: Bug where the `number_of_clauses/1` property would also be returned
+for dynamically created entities.
+
 Prolog adapter and integration files
 ------------------------------------
 
