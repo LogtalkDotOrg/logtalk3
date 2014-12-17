@@ -50,6 +50,9 @@ messages for missing directives.
 `number_of_user_clauses/1`, and `calls/2` properties as protocols no longer
 support `initialization/1` directives that would justify those properties.
 
+* FIXED: Bug where the `defines/2` property would never be returned for
+dynamically created entities.
+
 Prolog adapter and integration files
 ------------------------------------
 

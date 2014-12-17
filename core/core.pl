@@ -1020,6 +1020,7 @@ protocol_property(Ptc, Prop) :-
 
 '$lgt_entity_property_defines'(Entity, Functor/Arity, Properties) :-
 	'$lgt_predicate_property_'(Entity, Functor/Arity, flags_clauses_line(Flags, N, Line)),
+	!,
 	(	Line =:= 0 ->
 		Properties0 = [number_of_clauses(N)]
 	;	Properties0 = [line_count(Line), number_of_clauses(N)]
@@ -1033,6 +1034,8 @@ protocol_property(Ptc, Prop) :-
 		Properties = [auxiliary| Properties1]
 	;	Properties = Properties1
 	).
+
+'$lgt_entity_property_defines'(_, _, []).
 
 
 '$lgt_entity_property_includes'(Entity, Functor/Arity, From, Properties) :-
