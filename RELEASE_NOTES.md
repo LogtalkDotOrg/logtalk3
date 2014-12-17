@@ -56,6 +56,9 @@ dynamically created entities.
 * FIXED: Bug where the `number_of_clauses/1` property would also be returned
 for dynamically created entities.
 
+* FIXED: Bug where a `number_of_clauses(0)` property would not be returned for
+declared predicates with no clauses.
+
 Prolog adapter and integration files
 ------------------------------------
 

@@ -17,7 +17,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/02/08,
+		date is 2014/17/12,
 		comment is 'Sample object for testing with the `source_data` flag turned on.']).
 
 	:- set_logtalk_flag(complements, allow).
@@ -48,5 +48,7 @@
 	d(2, 3, 4, 1).
 	d(3, 4, 1, 2).
 	d(4, 1, 2, 3).
+
+	:- private(e/5).
 
 :- end_object.

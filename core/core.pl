@@ -365,6 +365,8 @@
 % '$lgt_pp_number_of_clauses_'(Other, Functor, Arity, Number)
 :- dynamic('$lgt_pp_number_of_clauses_'/4).
 
+% '$lgt_pp_predicate_declaration_line_'(Functor, Arity, Line)
+:- dynamic('$lgt_pp_predicate_declaration_line_'/3).
 % '$lgt_pp_predicate_definition_line_'(Functor, Arity, Line)
 :- dynamic('$lgt_pp_predicate_definition_line_'/3).
 % '$lgt_pp_defines_predicate_'(Head, Functor/Arity, ExCtx, THead, Mode)
@@ -2619,10 +2621,16 @@ current_logtalk_flag(Flag, Value) :-
 	functor(Alias, AliasFunctor, _),
 	Mode0 =.. [_| ModeArgs],
 	Mode =.. [AliasFunctor| ModeArgs].
-'$lgt_predicate_property_user'(number_of_clauses(N), Alias, Original, _, _, _, _, _, Def, _) :-
+'$lgt_predicate_property_user'(number_of_clauses(N), Alias, Original, _, _, _, _, Obj, Def, _) :-
+	'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags),
+	Flags /\ 2 =:= 0,
+	% static object
 	call(Def, Alias, _, _, _, DCtn),
 	functor(Original, Functor, Arity),
-	'$lgt_predicate_property_'(DCtn, Functor/Arity, flags_clauses_line(_, N0, _)),
+	(	'$lgt_predicate_property_'(DCtn, Functor/Arity, flags_clauses_line(_, N0, _)) ->
+		true
+	;	N0 is 0
+	),
 	findall(N1, '$lgt_predicate_property_'(DCtn, Functor/Arity, clauses_line_from(N1, _, _)), N1s),
 	'$lgt_sum_list'([N0| N1s], N).
 
@@ -5735,6 +5743,13 @@ current_logtalk_flag(Flag, Value) :-
 	fail.
 
 '$lgt_add_entity_predicate_properties'(Entity) :-
+	'$lgt_pp_predicate_declaration_line_'(Functor, Arity, Line),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/Arity, declaration_line(Line)))),
+	\+ '$lgt_pp_defines_predicate_'(_, Functor/Arity, _, _, _),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/Arity, flags_clauses_line(0, 0, 0)))),
+	fail.
+
+'$lgt_add_entity_predicate_properties'(Entity) :-
 	'$lgt_pp_defines_predicate_'(_, Functor/Arity, _, _, Mode),
 	(	Arity2 is Arity - 2,
 		Arity2 >= 0,
@@ -6132,6 +6147,7 @@ current_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_pp_final_entity_aux_clause_'(_)),
 	retractall('$lgt_pp_number_of_clauses_'(_, _, _)),
 	retractall('$lgt_pp_number_of_clauses_'(_, _, _, _)),
+	retractall('$lgt_pp_predicate_declaration_line_'(_, _, _)),
 	retractall('$lgt_pp_predicate_definition_line_'(_, _, _)),
 	retractall('$lgt_pp_predicate_definition_line_'(_, _, _, _)),
 	retractall('$lgt_pp_redefined_built_in_'(_, _, _)),
@@ -7534,7 +7550,7 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_check_for_duplicated_scope_directives'(Functor/Arity),
 	'$lgt_add_predicate_scope_directive'(Scope, Functor, Arity),
-	'$lgt_add_predicate_scope_line_property'(Functor/Arity).
+	'$lgt_add_predicate_scope_line_property'(Functor, Arity).
 
 '$lgt_compile_scope_directive_resource'(Functor//Arity, Scope) :-
 	'$lgt_valid_non_terminal_indicator'(Functor//Arity, Functor, Arity, ExtArity),
@@ -7542,7 +7558,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_check_for_duplicated_scope_directives'(Functor//Arity+ExtArity),
 	assertz('$lgt_pp_non_terminal_'(Functor, Arity, ExtArity)),
 	'$lgt_add_predicate_scope_directive'(Scope, Functor, ExtArity),
-	'$lgt_add_predicate_scope_line_property'(Functor/ExtArity).
+	'$lgt_add_predicate_scope_line_property'(Functor, ExtArity).
 
 '$lgt_compile_scope_directive_resource'(Resource, _) :-
 	ground(Resource),
@@ -7597,11 +7613,9 @@ current_logtalk_flag(Flag, Value) :-
 	).
 
 
-'$lgt_add_predicate_scope_line_property'(PredicateIndicator) :-
-	(	'$lgt_compiler_flag'(source_data, on),
-		'$lgt_pp_term_lines_variables_'(Line-_, _) ->
-		'$lgt_pp_entity_'(_, Entity, _, _, _),
-		assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, PredicateIndicator, declaration_line(Line))))
+'$lgt_add_predicate_scope_line_property'(Functor, Arity) :-
+	(	'$lgt_pp_term_lines_variables_'(Line-_, _) ->
+		assertz('$lgt_pp_predicate_declaration_line_'(Functor, Arity, Line))
 	;	true
 	).
 

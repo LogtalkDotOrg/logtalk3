@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/12/03,
+		date is 2014/17/12,
 		comment is 'Unit tests for the object_property/2 built-in predicate.'
 	]).
 
@@ -62,7 +62,7 @@
 	succeeds(object_property_2_8) :-
 		object_property(test_object, public(Public)), Public == [a/1],
 		object_property(test_object, protected(Protected)), Protected == [b/2],
-		object_property(test_object, private(Private)), Private == [c/3].
+		object_property(test_object, private(Private)), Private == [c/3, e/5].
 
 	% interface predicate declaration properties
 	succeeds(object_property_2_9) :-
@@ -89,7 +89,12 @@
 		member(scope(Scope3), Properties3), Scope3 == private,
 		member((dynamic), Properties3),
 		member(line_count(LC3), Properties3), integer(LC3),
-		\+ object_property(test_object, declares(d/4, _)).
+		\+ object_property(test_object, declares(d/4, _Properties4)),
+		object_property(test_object, declares(e/5, Properties5)),
+		member(private, Properties5),
+		member(scope(Scope3), Properties5), Scope3 == private,
+		member(static, Properties5),
+		member(line_count(LC5), Properties5), integer(LC5).
 
 	% interface predicate definition properties
 	succeeds(object_property_2_10) :-
@@ -104,7 +109,10 @@
 		member(number_of_clauses(NC3), Properties3), NC3 == 3,
 		object_property(test_object, defines(d/4, Properties4)),
 		member(line_count(LC4), Properties4), integer(LC4),
-		member(number_of_clauses(NC4), Properties4), NC4 == 4.
+		member(number_of_clauses(NC4), Properties4), NC4 == 4,
+		object_property(test_object, defines(e/5, Properties5)),
+		\+ member(line_count(_LC5), Properties5),
+		member(number_of_clauses(NC5), Properties5), NC5 == 0.		
 
 	member(H, [H| _]) :-
 		!.
