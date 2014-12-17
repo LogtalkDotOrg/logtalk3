@@ -7273,17 +7273,20 @@ current_logtalk_flag(Flag, Value) :-
 
 % scope directives
 
-'$lgt_compile_logtalk_directive'(public(Resources), _) :-
+'$lgt_compile_logtalk_directive'(public(Resources), Ctx) :-
 	'$lgt_flatten_to_list'(Resources, ResourcesFlatted),
-	'$lgt_compile_scope_directive'(ResourcesFlatted, (public)).
+	'$lgt_comp_ctx_lines'(Ctx, Line-_),
+	'$lgt_compile_scope_directive'(ResourcesFlatted, (public), Line).
 
-'$lgt_compile_logtalk_directive'(protected(Resources), _) :-
+'$lgt_compile_logtalk_directive'(protected(Resources), Ctx) :-
 	'$lgt_flatten_to_list'(Resources, ResourcesFlatted),
-	'$lgt_compile_scope_directive'(ResourcesFlatted, protected).
+	'$lgt_comp_ctx_lines'(Ctx, Line-_),
+	'$lgt_compile_scope_directive'(ResourcesFlatted, protected, Line).
 
-'$lgt_compile_logtalk_directive'(private(Resources), _) :-
+'$lgt_compile_logtalk_directive'(private(Resources), Ctx) :-
 	'$lgt_flatten_to_list'(Resources, ResourcesFlatted),
-	'$lgt_compile_scope_directive'(ResourcesFlatted, (private)).
+	'$lgt_comp_ctx_lines'(Ctx, Line-_),
+	'$lgt_compile_scope_directive'(ResourcesFlatted, (private), Line).
 
 % export/1 module directive
 %
@@ -7522,49 +7525,49 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_compile_scope_directive'(+list, +atom)
+% '$lgt_compile_scope_directive'(+list, @scope, +integer)
 %
 % auxiliary predicate for compiling scope directives
 
-'$lgt_compile_scope_directive'([Resource| Resources], Scope) :-
-	'$lgt_compile_scope_directive_resource'(Resource, Scope),
-	'$lgt_compile_scope_directive'(Resources, Scope).
+'$lgt_compile_scope_directive'([Resource| Resources], Scope, Line) :-
+	'$lgt_compile_scope_directive_resource'(Resource, Scope, Line),
+	'$lgt_compile_scope_directive'(Resources, Scope, Line).
 
-'$lgt_compile_scope_directive'([], _).
+'$lgt_compile_scope_directive'([], _, _).
 
 
 
-% '$lgt_compile_scope_directive_resource'(@term, @scope)
+% '$lgt_compile_scope_directive_resource'(@term, @scope, +integer)
 %
 % auxiliary predicate for compiling scope directive resources
 
-'$lgt_compile_scope_directive_resource'(op(Priority, Specifier, Operators), Scope) :-
+'$lgt_compile_scope_directive_resource'(op(Priority, Specifier, Operators), Scope, _) :-
 	'$lgt_must_be'(operator_specification, op(Priority, Specifier, Operators)),
 	!,
 	'$lgt_check_for_duplicated_scope_directives'(op(Priority, Specifier, Operators)),
 	'$lgt_scope'(Scope, InternalScope),
 	'$lgt_activate_entity_operators'(Priority, Specifier, Operators, InternalScope).
 
-'$lgt_compile_scope_directive_resource'(Functor/Arity, Scope) :-
+'$lgt_compile_scope_directive_resource'(Functor/Arity, Scope, Line) :-
 	'$lgt_valid_predicate_indicator'(Functor/Arity, Functor, Arity),
 	!,
 	'$lgt_check_for_duplicated_scope_directives'(Functor/Arity),
 	'$lgt_add_predicate_scope_directive'(Scope, Functor, Arity),
-	'$lgt_add_predicate_scope_line_property'(Functor, Arity).
+	assertz('$lgt_pp_predicate_declaration_line_'(Functor, Arity, Line)).
 
-'$lgt_compile_scope_directive_resource'(Functor//Arity, Scope) :-
+'$lgt_compile_scope_directive_resource'(Functor//Arity, Scope, Line) :-
 	'$lgt_valid_non_terminal_indicator'(Functor//Arity, Functor, Arity, ExtArity),
 	!,
 	'$lgt_check_for_duplicated_scope_directives'(Functor//Arity+ExtArity),
 	assertz('$lgt_pp_non_terminal_'(Functor, Arity, ExtArity)),
 	'$lgt_add_predicate_scope_directive'(Scope, Functor, ExtArity),
-	'$lgt_add_predicate_scope_line_property'(Functor, ExtArity).
+	assertz('$lgt_pp_predicate_declaration_line_'(Functor, ExtArity, Line)).
 
-'$lgt_compile_scope_directive_resource'(Resource, _) :-
+'$lgt_compile_scope_directive_resource'(Resource, _, _) :-
 	ground(Resource),
 	throw(type_error(predicate_indicator, Resource)).
 
-'$lgt_compile_scope_directive_resource'(_, _) :-
+'$lgt_compile_scope_directive_resource'(_, _, _) :-
 	throw(instantiation_error).
 
 
@@ -7609,13 +7612,6 @@ current_logtalk_flag(Flag, Value) :-
 		;	'$lgt_pp_private_'(Functor, ExtArity)
 		) ->
 		throw(permission_error(modify, non_terminal_scope, Functor//Arity))
-	;	true
-	).
-
-
-'$lgt_add_predicate_scope_line_property'(Functor, Arity) :-
-	(	'$lgt_pp_term_lines_variables_'(Line-_, _) ->
-		assertz('$lgt_pp_predicate_declaration_line_'(Functor, Arity, Line))
 	;	true
 	).
 

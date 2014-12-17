@@ -38,7 +38,8 @@ allows passing source file location information for the compiled terms.
 * ADDED: Entity `file/1` property for accessing the absolute path of the source
 file defining the entity (if applicable).
 
-* IMPROVED: Small compiler performance improvements.
+* IMPROVED: Compiler performance improvements. Notably, when compiling source
+files with the `source_data` flag turned on.
 
 * FIXED: Use `warning(missing_directives)` message kind when printing warning
 messages for missing directives.
