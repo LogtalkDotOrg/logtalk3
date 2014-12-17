@@ -17,7 +17,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/02/08,
+		date is 2014/12/17,
 		comment is 'Sample category for testing with the `source_data` flag turned on.']).
 
 	:- public(a/1).
@@ -40,5 +40,7 @@
 	d(2, 3, 4, 1).
 	d(3, 4, 1, 2).
 	d(4, 1, 2, 3).
+
+	:- private(e/5).
 
 :- end_category.

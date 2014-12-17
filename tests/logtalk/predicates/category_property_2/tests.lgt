@@ -58,7 +58,7 @@
 	succeeds(category_property_2_8) :-
 		category_property(test_category, public(Public)), Public == [a/1],
 		category_property(test_category, protected(Protected)), Protected == [b/2],
-		category_property(test_category, private(Private)), Private == [c/3].
+		category_property(test_category, private(Private)), Private == [c/3, e/5].
 
 	% interface predicate declaration properties
 	succeeds(category_property_2_9) :-
@@ -85,7 +85,12 @@
 		member(scope(Scope3), Properties3), Scope3 == private,
 		member((dynamic), Properties3),
 		member(line_count(LC3), Properties3), integer(LC3),
-		\+ category_property(test_category, declares(d/4, _)).
+		\+ category_property(test_category, declares(d/4, _Properties4)),
+		category_property(test_category, declares(e/5, Properties5)),
+		member(private, Properties5),
+		member(scope(Scope3), Properties5), Scope3 == private,
+		member(static, Properties5),
+		member(line_count(LC5), Properties5), integer(LC5).
 
 	% interface predicate definition properties
 	succeeds(category_property_2_10) :-
@@ -98,7 +103,10 @@
 		\+ category_property(test_category, defines(c/3, _)),
 		category_property(test_category, defines(d/4, Properties4)),
 		member(line_count(LC4), Properties4), integer(LC4),
-		member(number_of_clauses(NC4), Properties4), NC4 == 4.
+		member(number_of_clauses(NC4), Properties4), NC4 == 4,
+		category_property(test_category, defines(e/5, Properties5)),
+		\+ member(line_count(_LC5), Properties5),
+		member(number_of_clauses(NC5), Properties5), NC5 == 0.		
 
 	member(H, [H| _]) :-
 		!.
