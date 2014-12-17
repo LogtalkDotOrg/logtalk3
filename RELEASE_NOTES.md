@@ -66,6 +66,9 @@ Documentation
 * ADDED: Detailed description of supported object, protocol, and category
 properties to the User Manual.
 
+* IMPROVED: Description of the supported entity predicate properties in the
+User Manual.
+
 Tools
 -----
 
