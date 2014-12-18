@@ -5481,7 +5481,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_add_referenced_object'(Obj, Ctx) :-
 	(	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(regular), _, Lines),
-		% not compiling a source file
+		% compiling a reference in a source file
 		\+ '$lgt_pp_referenced_object_'(Obj, _) ->
 		% first reference to this object
 		(	atom(Obj) ->
@@ -5490,7 +5490,7 @@ current_logtalk_flag(Flag, Value) :-
 			'$lgt_term_template'(Obj, Template),
 			assertz('$lgt_pp_referenced_object_'(Template, Lines))
 		)
-	;	% not the first reference to the object
+	;	% not a source file reference or not the first reference to the object
 		true
 	).
 
@@ -5503,11 +5503,11 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_add_referenced_protocol'(Ptc, Ctx) :-
 	(	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(regular), _, Lines),
-		% not compiling a source file
+		% compiling a reference in a source file
 		\+ '$lgt_pp_referenced_protocol_'(Ptc, _) ->
 		% first reference to this protocol
 		assertz('$lgt_pp_referenced_protocol_'(Ptc, Lines))
-	;	% not the first reference to the protocol
+	;	% not a source file reference or not the first reference to the protocol
 		true
 	).
 
@@ -5520,7 +5520,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_add_referenced_category'(Ctg, Ctx) :-
 	(	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(regular), _, Lines),
-		% not compiling a source file
+		% compiling a reference in a source file
 		\+ '$lgt_pp_referenced_category_'(Ctg, _) ->
 		% first reference to this category
 		(	atom(Ctg) ->
@@ -5529,7 +5529,7 @@ current_logtalk_flag(Flag, Value) :-
 			'$lgt_term_template'(Ctg, Template),
 			assertz('$lgt_pp_referenced_category_'(Template, Lines))
 		)
-	;	% not the first reference to the category
+	;	% not a source file reference or not the first reference to the category
 		true
 	).
 
@@ -5542,11 +5542,11 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_add_referenced_module'(Module, Ctx) :-
 	(	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(regular), _, Lines),
-		% not compiling a source file
+		% compiling a reference in a source file
 		\+ '$lgt_pp_referenced_module_'(Module, _) ->
 		% first reference to this module
 		assertz('$lgt_pp_referenced_module_'(Module, Lines))
-	;	% not the first reference to the module
+	;	% not a source file reference or not the first reference to the module
 		true
 	).
 
