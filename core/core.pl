@@ -5546,6 +5546,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_add_referenced_module'(Module, Ctx) :-
 	(	'$lgt_pp_referenced_module_'(Module, _) ->
 		% not the first reference to this module
+		true
 	;	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(regular), _, Lines) ->
 		% compiling a reference in a source file
 		assertz('$lgt_pp_referenced_module_'(Module, Lines))
