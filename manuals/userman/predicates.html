@@ -902,7 +902,7 @@ Some properties are only available when the entities are defined in source files
 	<dt><code>info(ListOfPairs)</code></dt>
 		<dd>Documentation key-value pairs as specified in the user-defined <code>info/2</code> directive</dd>
 	<dt><code>number_of_clauses(N)</code></dt>
-		<dd>The number of initial clauses for the predicate (at the time of the container entity compilation or creation)</dd>
+		<dd>The number of clauses for the predicate existing at compilation time (note that this property is not updated at runtime when asserting and retracting clauses for dynamic predicates)</dd>
 	<dt><code>declared_in(Entity, Line)</code></dt>
 		<dd>The predicate is declared (using a scope directive) in the specified entity in a source file at the specified line (if applicable)</dd>
 	<dt><code>defined_in(Entity, Line)</code></dt>
@@ -1014,7 +1014,7 @@ This workaround is sometimes necessary when calling module meta-predicates whose
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: December 16, 2014</span>
+		<span>Last updated on: December 18, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="categories.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="inheritance.html">next</a></span><br/>
