@@ -5653,8 +5653,8 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_add_entity_source_data'(Kind, Entity) :-
 	(	'$lgt_compiler_flag'(source_data, on) ->
-		'$lgt_add_entity_predicate_properties'(Entity),
-		'$lgt_add_entity_properties'(Kind, Entity)
+		'$lgt_add_entity_properties'(Kind, Entity),
+		'$lgt_add_entity_predicate_properties'(Entity)
 	;	true
 	).
 
@@ -5716,11 +5716,11 @@ current_logtalk_flag(Flag, Value) :-
 	fail.
 
 '$lgt_add_entity_properties'(_, Entity) :-
-	findall(Define, '$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, _, flags_clauses_line(_, Define, _))), Defines),
+	findall(Define, '$lgt_pp_number_of_clauses_'(_, _, Define), Defines),
 	'$lgt_sum_list'(Defines, TotalDefines),
-	findall(AuxDefine, ('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, _, flags_clauses_line(Flags, AuxDefine, _))), Flags /\ 1 =:= 1), AuxDefines),
+	findall(AuxDefine, ('$lgt_pp_defines_predicate_'(_, Functor/Arity, _, _, compile(aux)), '$lgt_pp_number_of_clauses_'(Functor, Arity, AuxDefine)), AuxDefines),
 	'$lgt_sum_list'(AuxDefines, TotalAuxDefines),
-	findall(Provide, '$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(_, _, clauses_line_from(Provide, _, Entity))), Provides),
+	findall(Provide, '$lgt_pp_number_of_clauses_'(_, _, _, Provide), Provides),
 	'$lgt_sum_list'(Provides, TotalProvides),
 	Total is TotalDefines + TotalProvides,
 	TotalUser is Total - TotalAuxDefines,
