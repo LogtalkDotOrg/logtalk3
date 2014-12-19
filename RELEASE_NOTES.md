@@ -25,7 +25,7 @@ RELEASE NOTES
 =============
 
 
-3.00.0 Release Candidate 9 - December ??, 2014
+3.00.0 Release Candidate 9 - December 19, 2014
 ==============================================
 
 Logtalk compiler and runtime
@@ -33,13 +33,16 @@ Logtalk compiler and runtime
 
 * CHANGED: The compiler now uses a new internal predicate, defined in the
 Prolog adapter files, to output all compiled source file terms. This predicate
-allows passing source file location information for the compiled terms.
+allows passing source file location data for the compiled terms (currently,
+only SWI-Prolog takes advantage of this data, which is used for adding support
+for debugging Logtalk source code using its graphical tracer).
 
 * ADDED: Entity `file/1` property for accessing the absolute path of the source
 file defining the entity (if applicable).
 
 * IMPROVED: Compiler performance improvements. Notably, when compiling source
-files with the `source_data` flag turned on.
+files with the `source_data` flag turned on (e.g. compilation of the standard
+library now requires less 31% of inferences).
 
 * FIXED: Use `warning(missing_directives)` message kind when printing warning
 messages for missing directives.
