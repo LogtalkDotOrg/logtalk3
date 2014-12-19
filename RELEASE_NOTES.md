@@ -60,6 +60,9 @@ for dynamically created entities.
 * FIXED: Bug where a `number_of_clauses(0)` property would not be returned for
 declared predicates with no clauses.
 
+* FIXED: Compiler bug when saving cross-referencing information for calls to
+module predicates when the module is only known at runtime.
+
 Prolog adapter and integration files
 ------------------------------------
 

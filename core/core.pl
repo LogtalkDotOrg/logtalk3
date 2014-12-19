@@ -5581,7 +5581,8 @@ current_logtalk_flag(Flag, Value) :-
 			% parametric object
 			'$lgt_term_template'(Obj, Template),
 			assertz('$lgt_pp_referenced_object_message_'(Template, PredFunctor/PredArity, PredFunctor/PredArity, HeadFunctor/HeadArity, Lines))
-		;	assertz('$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, PredFunctor/PredArity, HeadFunctor/HeadArity, Lines))
+		;	% runtime instantiated object or non-parametric object
+			assertz('$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, PredFunctor/PredArity, HeadFunctor/HeadArity, Lines))
 		)
 	).
 
@@ -5602,7 +5603,8 @@ current_logtalk_flag(Flag, Value) :-
 				% parametric object
 				'$lgt_term_template'(Obj, Template),
 				assertz('$lgt_pp_referenced_object_message_'(Template, PredFunctor/PredArity, AliasFunctor/PredArity, HeadFunctor/HeadArity, Lines))
-			;	assertz('$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, AliasFunctor/PredArity, HeadFunctor/HeadArity, Lines))
+			;	% runtime instantiated object or non-parametric object
+				assertz('$lgt_pp_referenced_object_message_'(Obj, PredFunctor/PredArity, AliasFunctor/PredArity, HeadFunctor/HeadArity, Lines))
 			)
 		)
 	).
@@ -5626,8 +5628,9 @@ current_logtalk_flag(Flag, Value) :-
 	;	'$lgt_pp_use_module_predicate_'(Module, PredFunctor/PredArity, _) ->
 		% not the first reference
 		true
-	;	functor(Head, HeadFunctor, HeadArity),
-		(	'$lgt_pp_referenced_module_predicate_'(Module, PredFunctor/PredArity, _, HeadFunctor/HeadArity, Lines) ->
+	;	% add reference if first but be careful to not instantiate the module argument which may only be known at runtime
+		functor(Head, HeadFunctor, HeadArity),
+		(	\+ \+ '$lgt_pp_referenced_module_predicate_'(Module, PredFunctor/PredArity, _, HeadFunctor/HeadArity, Lines) ->
 			true
 		;	assertz('$lgt_pp_referenced_module_predicate_'(Module, PredFunctor/PredArity, PredFunctor/PredArity, HeadFunctor/HeadArity, Lines))
 		)
@@ -5640,10 +5643,11 @@ current_logtalk_flag(Flag, Value) :-
 	;	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _, compile(regular)) ->
 		% not compiling a source file user clause
 		true
-	;	functor(Pred, PredFunctor, PredArity),
+	;	% add reference if first but be careful to not instantiate the object argument which may only be known at runtime
+		functor(Pred, PredFunctor, PredArity),
 		functor(Alias, AliasFunctor, PredArity),
 		functor(Head, HeadFunctor, HeadArity),
-		(	'$lgt_pp_referenced_module_predicate_'(Module, PredFunctor/PredArity, _, HeadFunctor/HeadArity, Lines) ->
+		(	\+ \+ '$lgt_pp_referenced_module_predicate_'(Module, PredFunctor/PredArity, _, HeadFunctor/HeadArity, Lines) ->
 			true
 		;	assertz('$lgt_pp_referenced_module_predicate_'(Module, PredFunctor/PredArity, AliasFunctor/PredArity, HeadFunctor/HeadArity, Lines))
 		)
