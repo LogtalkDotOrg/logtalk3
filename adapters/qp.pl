@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Qu-Prolog 9.0 and later versions
-%  Last updated on December 15, 2014
+%  Last updated on December 20, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -682,6 +682,10 @@ format(Format, Arguments) :-
 
 
 % '$lgt_write_compiled_term'(@stream, @callable, +atom, +atom, +integer)
+%
+% the third argument is the term type: runtime (internal runtime clause),
+% user (compiled user-defined term), or aux (auxiliary clause resulting
+% e.g. from term-expansion)
 
 '$lgt_write_compiled_term'(Stream, Term, _Kind, _Path, _Line) :-
 	write_canonical(Stream, Term),

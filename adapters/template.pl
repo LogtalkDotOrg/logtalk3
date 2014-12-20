@@ -542,6 +542,10 @@ numbervars(Term, From, Next) :-
 
 
 % '$lgt_write_compiled_term'(@stream, @callable, +atom, +atom, +integer)
+%
+% the third argument is the term type: runtime (internal runtime clause),
+% user (compiled user-defined term), or aux (auxiliary clause resulting
+% e.g. from term-expansion)
 
 '$lgt_write_compiled_term'(Stream, Term, _Kind, _Path, _Line) :-
 	write_canonical(Stream, Term),
