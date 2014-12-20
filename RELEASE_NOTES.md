@@ -35,6 +35,12 @@ Logtalk compiler and runtime
 minimize the size of the generated intermediate Prolog files that use those
 tags to decide when to decorate compiled terms with source location data.
 
+Prolog adapter and integration files
+------------------------------------
+
+* FIXED: Using the SWI-Prolog graphical tracer for debugging Logtalk source
+code.
+
 
 3.00.0 Release Candidate 9 - December 19, 2014
 ==============================================

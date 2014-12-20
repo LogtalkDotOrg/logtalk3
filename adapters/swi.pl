@@ -867,16 +867,12 @@ user:goal_expansion('::'(Object, Message), user:Goal) :-
 
 % '$lgt_write_compiled_term'(@stream, @callable, +atom, +atom, +integer)
 
-'$lgt_write_compiled_term'(Stream, Term, user, _, _) :-
-	!,
-	write_canonical(Stream, Term), write(Stream, '.\n').
-
 '$lgt_write_compiled_term'(Stream, Term, _, _, _) :-
 	current_prolog_flag(logtalk_source_location_data, false),
 	!,
 	write_canonical(Stream, Term), write(Stream, '.\n').
 
-'$lgt_write_compiled_term'(Stream, '$lgt_current_object_'(Obj,Prefix,Dcl,Def,Super,IDcl,IDef,DDcl,DDef,Rnm,Flags), _, File, Line) :-
+'$lgt_write_compiled_term'(Stream, '$lgt_current_object_'(Obj,Prefix,Dcl,Def,Super,IDcl,IDef,DDcl,DDef,Rnm,Flags), _, _, _) :-
 	!,
 	write_canonical(Stream, (:- '$hide'(user:Dcl/4))),   write(Stream, '.\n'),
 	write_canonical(Stream, (:- '$hide'(user:Dcl/6))),   write(Stream, '.\n'),
@@ -888,33 +884,40 @@ user:goal_expansion('::'(Object, Message), user:Goal) :-
 	write_canonical(Stream, (:- '$hide'(user:DDcl/2))),  write(Stream, '.\n'),
 	write_canonical(Stream, (:- '$hide'(user:DDef/3))),  write(Stream, '.\n'),
 	write_canonical(Stream, (:- '$hide'(user:Rnm/3))),   write(Stream, '.\n'),
-	write_canonical(Stream, '$source_location'(File,Line):'$lgt_current_object_'(Obj,Prefix,Dcl,Def,Super,IDcl,IDef,DDcl,DDef,Rnm,Flags)),
+	write_canonical(Stream, '$lgt_current_object_'(Obj,Prefix,Dcl,Def,Super,IDcl,IDef,DDcl,DDef,Rnm,Flags)),
 	write(Stream, '.\n').
 
-'$lgt_write_compiled_term'(Stream, '$lgt_current_category_'(Ctg,Prefix,Dcl,Def,Rnm,Flags), _, File, Line) :-
+'$lgt_write_compiled_term'(Stream, '$lgt_current_category_'(Ctg,Prefix,Dcl,Def,Rnm,Flags), _, _, _) :-
 	!,
 	write_canonical(Stream, (:- '$hide'(user:Dcl/4))), write(Stream, '.\n'),
 	write_canonical(Stream, (:- '$hide'(user:Dcl/5))), write(Stream, '.\n'),
 	write_canonical(Stream, (:- '$hide'(user:Def/3))), write(Stream, '.\n'),
 	write_canonical(Stream, (:- '$hide'(user:Def/4))), write(Stream, '.\n'),
 	write_canonical(Stream, (:- '$hide'(user:Rnm/3))), write(Stream, '.\n'),
-	write_canonical(Stream, '$source_location'(File,Line):'$lgt_current_category_'(Ctg,Prefix,Dcl,Def,Rnm,Flags)),
+	write_canonical(Stream, '$lgt_current_category_'(Ctg,Prefix,Dcl,Def,Rnm,Flags)),
 	write(Stream, '.\n').
 
-'$lgt_write_compiled_term'(Stream, '$lgt_current_protocol_'(Ptc,Prefix,Dcl,Rnm,Flags), _, File, Line) :-
+'$lgt_write_compiled_term'(Stream, '$lgt_current_protocol_'(Ptc,Prefix,Dcl,Rnm,Flags), _, _, _) :-
 	!,
 	write_canonical(Stream, (:- '$hide'(user:Dcl/4))), write(Stream, '.\n'),
 	write_canonical(Stream, (:- '$hide'(user:Dcl/5))), write(Stream, '.\n'),
 	write_canonical(Stream, (:- '$hide'(user:Rnm/3))), write(Stream, '.\n'),
-	write_canonical(Stream, '$source_location'(File,Line):'$lgt_current_protocol_'(Ptc,Prefix,Dcl,Rnm,Flags)),
+	write_canonical(Stream, '$lgt_current_protocol_'(Ptc,Prefix,Dcl,Rnm,Flags)),
 	write(Stream, '.\n').
+
+'$lgt_write_compiled_term'(Stream, Term, runtime, _, _) :-
+	!,
+	write_canonical(Stream, Term), write(Stream, '.\n').
+
+'$lgt_write_compiled_term'(Stream, Term, user, File, Line) :-
+	write_canonical(Stream, '$source_location'(File,Line):Term), write(Stream, '.\n').
 
 '$lgt_write_compiled_term'(Stream, (:- Directive), _, _, _) :-
 	% to cope with {(:- Directive)} entity terms
 	!,
 	write_canonical(Stream, (:- Directive)), write(Stream, '.\n').
 
-'$lgt_write_compiled_term'(Stream, Term, aux, File, Line) :-
+'$lgt_write_compiled_term'(Stream, Term, aux, _, _) :-
 	!,
 	(	Term = (Head :- _) ->
 		true
@@ -922,7 +925,7 @@ user:goal_expansion('::'(Object, Message), user:Goal) :-
 	),
 	functor(Head, Functor, Arity),
 	write_canonical(Stream, (:- '$hide'(user:Functor/Arity))), write(Stream, '.\n'),
-	write_canonical(Stream, '$source_location'(File,Line):Term), write(Stream, '.\n').
+	write_canonical(Stream, Term), write(Stream, '.\n').
 
 '$lgt_write_compiled_term'(Stream, Term, _, File, Line) :-
 	write_canonical(Stream, '$source_location'(File,Line):Term), write(Stream, '.\n').
