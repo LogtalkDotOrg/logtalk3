@@ -14896,7 +14896,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_write_encoding_directive'(Stream, Path) :-
 	(	'$lgt_prolog_feature'(encoding_directive, full),
 		'$lgt_pp_file_encoding_'(_, Encoding) ->
-		'$lgt_write_compiled_term'(Stream, (:- encoding(Encoding)), user, Path, 1)
+		'$lgt_write_compiled_term'(Stream, (:- encoding(Encoding)), runtime, Path, 1)
 	;	true
 	).
 
@@ -14908,7 +14908,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_write_entity_directives'(Stream, Path) :-
 	'$lgt_pp_directive_'(Directive),
-		'$lgt_write_compiled_term'(Stream, (:- Directive), user, Path, 1),
+		'$lgt_write_compiled_term'(Stream, (:- Directive), runtime, Path, 1),
 	fail.
 
 '$lgt_write_entity_directives'(_, _).
@@ -14945,7 +14945,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_write_dcl_clauses'(Stream, Path) :-
 	'$lgt_pp_dcl_'(Clause),
-		'$lgt_write_compiled_term'(Stream, Clause, aux, Path, 1),
+		'$lgt_write_compiled_term'(Stream, Clause, runtime, Path, 1),
 	fail.
 
 '$lgt_write_dcl_clauses'(_, _).
@@ -14953,7 +14953,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_write_def_clauses'(Stream, Path) :-
 	'$lgt_pp_def_'(Clause),
-		'$lgt_write_compiled_term'(Stream, Clause, aux, Path, 1),
+		'$lgt_write_compiled_term'(Stream, Clause, runtime, Path, 1),
 	fail.
 
 '$lgt_write_def_clauses'(_, _).
@@ -14961,7 +14961,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_write_ddef_clauses'(Stream, Path) :-
 	'$lgt_pp_ddef_'(Clause),
-		'$lgt_write_compiled_term'(Stream, Clause, aux, Path, 1),
+		'$lgt_write_compiled_term'(Stream, Clause, runtime, Path, 1),
 	fail.
 
 '$lgt_write_ddef_clauses'(_, _).
@@ -14969,7 +14969,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_write_super_clauses'(Stream, Path) :-
 	'$lgt_pp_super_'(Clause),
-		'$lgt_write_compiled_term'(Stream, Clause, aux, Path, 1),
+		'$lgt_write_compiled_term'(Stream, Clause, runtime, Path, 1),
 	fail.
 
 '$lgt_write_super_clauses'(_, _).
@@ -14978,12 +14978,12 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_write_alias_clauses'(Stream, Path, Rnm) :-
 	'$lgt_pp_predicate_alias_'(Entity, Pred, Alias),
 		Clause =.. [Rnm, Entity, Pred, Alias],
-		'$lgt_write_compiled_term'(Stream, Clause, aux, Path, 1),
+		'$lgt_write_compiled_term'(Stream, Clause, runtime, Path, 1),
 	fail.
 
 '$lgt_write_alias_clauses'(Stream, Path, Rnm) :-
 	Catchall =.. [Rnm, _, Pred, Pred],
-	'$lgt_write_compiled_term'(Stream, Catchall, aux, Path, 1).
+	'$lgt_write_compiled_term'(Stream, Catchall, runtime, Path, 1).
 
 
 '$lgt_write_predicate_clauses'(Stream, Path) :-
@@ -15028,10 +15028,10 @@ current_logtalk_flag(Flag, Value) :-
 	functor(Clause, Functor, Arity),
 	(	\+ '$lgt_pp_runtime_clause_'(Clause) ->
 		true
-	;	'$lgt_write_compiled_term'(Stream, (:- multifile(Functor/Arity)), user, Path, 1),
-		'$lgt_write_compiled_term'(Stream, (:- dynamic(Functor/Arity)), user, Path, 1),
+	;	'$lgt_write_compiled_term'(Stream, (:- multifile(Functor/Arity)), runtime, Path, 1),
+		'$lgt_write_compiled_term'(Stream, (:- dynamic(Functor/Arity)), runtime, Path, 1),
 		(	'$lgt_pp_runtime_clause_'(Clause),
-			'$lgt_write_compiled_term'(Stream, Clause, aux, Path, 1),
+			'$lgt_write_compiled_term'(Stream, Clause, runtime, Path, 1),
 			fail
 		;	true
 		)
@@ -15048,7 +15048,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_initialization_goal'(Goal),
 	(	Goal == true ->
 		true
-	;	'$lgt_write_compiled_term'(Stream, (:- initialization(Goal)), user, Path, 1)
+	;	'$lgt_write_compiled_term'(Stream, (:- initialization(Goal)), runtime, Path, 1)
 	).
 
 

@@ -28,6 +28,13 @@ RELEASE NOTES
 3.00.0 - December ??, 2014
 ==========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* IMPROVED: Changes to the term tags used when writing compiled code to help
+minimize the size of the generated intermediate Prolog files that use those
+tags to decide when to decorate compiled terms with source location data.
+
 
 3.00.0 Release Candidate 9 - December 19, 2014
 ==============================================
