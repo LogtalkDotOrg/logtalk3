@@ -166,3 +166,15 @@ Reflection support
 Logtalk 3.x includes major improvements to reflection support. In particular,
 it adds entity properties such as `calls/2` but also removes some subsumed
 Logtalk 2.x properties such as `uses/3` and `use_module/3`.
+
+Debugging support
+-----------------
+
+The debugging support have been moved to a Logtalk application, `debugger`,
+available in the `tools` directory.
+
+Documenting support
+-------------------
+
+The documenting support have been moved to a Logtalk application, `lgtdoc`,
+available in the `tools` directory.
