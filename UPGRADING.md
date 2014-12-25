@@ -40,7 +40,7 @@ that all files will be recompiled disregarding any existing intermediate
 files.
 
 * In the case of incompatible changes between major Logtalk versions, you
-may be able to use conditional compilation directives to allow you code to
+may be able to use conditional compilation directives to allow your code to
 compile and run under multiple versions.
 
 
@@ -52,14 +52,16 @@ Structured message printing
 
 The new structured message printing mechanism, an extended implementation
 of the same mechanism available in some Prolog systems, allows fine grained
-control over printing of informative, warning, and error messages.
+control over printing of informative, warning, and error messages. This
+mechanism is fully customizable using user-defined hook predicates.
 
 Structured question asking
 --------------------------
 
 The new structured question asking mechanism complements the structured
 message printing mechanism and allows fine grained control over querying
-the user for data.
+the user for data. This mechanism is fully customizable using user-defined
+hook predicates.
 
 Source file paths
 -----------------
@@ -164,7 +166,7 @@ Reflection support
 ------------------
 
 Logtalk 3.x includes major improvements to reflection support. In particular,
-it adds entity properties such as `calls/2`(for retrieving predicate cross-
+it adds entity properties such as `calls/2` (for retrieving predicate cross-
 referencing information) but also removes some subsumed Logtalk 2.x properties
 such as `uses/3` and `use_module/3`.
 
