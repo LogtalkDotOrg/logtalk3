@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  sample tester file
-%  Last updated on June 11, 2014
+%  Last updated on December 25, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -27,6 +27,9 @@
 
 %  This is a sample tester file. Tester files are simply Logtalk source files
 %  whose main purpose is to load and run your application unit tests.
+%
+%  The provided testing automation shell script, "logtalk_tester", looks for
+%  files named "tester.lgt" in directories and sub-directories when run.
 
 
 :- initialization((
@@ -39,7 +42,7 @@
 	% load your application files (e.g. "source.lgt") enabling supporting for
 	% code coverage, which requires compilation in debug mode and collecting
 	% source data information; if code coverage is not wanted, simply remove
-	% the second argument
+	% the second argument for faster execution
 	logtalk_load(source, [source_data(on), debug(on)]),
 	% compile the unit tests file expanding it using the "lgtunit" object
 	% to preprocess the tests
