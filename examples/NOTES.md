@@ -25,9 +25,9 @@ This folder contains several examples of Logtalk programs. A brief
 description of each example is included below.
 
 Each example folder contains a `NOTES.md` file and a loader helper file 
-(usually `loader.lgt`) that may be used to load all the example entities. 
-Most examples also contain a `SCRIPT.txt` file with instructions on how 
-to load the example and sample queries for you to try.
+(usually named `loader.lgt`) that can be used to compile and load the
+example source code. Most examples also contain a `SCRIPT.txt` file with
+instructions on how to load the example and sample queries for you to try.
 
 Most of these examples require objects, protocols, and categories that 
 are defined in the Logtalk standard library or in other examples. See 
@@ -42,15 +42,15 @@ or from known Prolog text books and are copyrighted by the respective
 authors.
 
 These are programming examples, meaning that you should study the source 
-files to fully understand them. However, note that some examples purpose 
-is to illustrate general principles rather than being adequate, efficient 
-solutions for deployment code.
+files to fully understand them. However, note that some examples main
+purpose is to illustrate general principles rather than being adequate,
+efficient solutions for deployment code.
 
 All examples are formatted using tabs (the recommended setting is a tab
 width equivalent to 4 spaces).
 
-The example folders may contain two files, `tests.lgt` and `tester.lgt`.
-The file `tests.lgt` contains unit tests for the example. These unit tests
+Most example folders contain two files, `tests.lgt` and `tester.lgt`. The
+file `tests.lgt` contains unit tests for the example. These unit tests
 are based on the sample queries found on the example `SCRIPT.txt` file.
 The file `tester.lgt` is a loader file that, when loaded, will automatically
 run all the example unit tests. You can automate running all these tests by
@@ -86,14 +86,15 @@ Follows a short description of each included example (in alphabetical order):
 	(requires Logtalk to be run with B-Prolog, SWI-Prolog, XSB, or YAP)
 
 - `benchmarks`  
-	simple benchmarks for helping measuring performance of Logtalk 
-	message sending between Prolog compilers and for comparing 
-	performance of message sending calls with predicate calls in 
-	plain Prolog
+	simple benchmarks for helping comparing the performance of Logtalk 
+	message sending when using different backend Prolog compilers and
+	for comparing performance of message sending calls with predicate
+	calls in plain Prolog and explicitly-qualified Prolog module calls
+	(when applicable)
 
 - `birds`  
 	bird identification expert system
-	(example adapted from the Adventure in Prolog Amzi! book)
+	(example adapted from the "Adventure in Prolog" Amzi! book)
 
 - `bottles`  
 	99 bottles of beer on the wall! Sing along!
@@ -121,7 +122,7 @@ Follows a short description of each included example (in alphabetical order):
 
 - `complements`  
 	example of using a category to explicitly complement an existing 
-	object
+	object, either for hot patching or for adding new functionality
 
 - `constraints`  
 	several examples of using constraints within objects and categories
@@ -315,14 +316,14 @@ Follows a short description of each included example (in alphabetical order):
 
 - `shapes`  
 	simple geometric shapes implemented as both a prototype hierarchy 
-	and a class hierarchy
+	and a class hierarchy for comparing both approaches
 
 - `sicstus`  
 	examples adapted from SICStus Objects documentation
 
 - `symbiosis`
-	examples of using Prolog built-in meta-predicates and module
-	meta-predicates that take closures as arguments
+	examples of using Prolog non-standard built-in meta-predicates
+	and module meta-predicates that take closures as arguments
 
 - `symdiff`  
 	example of using parametric objects to implement symbolic 
