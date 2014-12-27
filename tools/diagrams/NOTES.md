@@ -21,14 +21,17 @@ Public License 3. Consult the `LICENSE.txt` file for details.
 ________________________________________________________________________
 
 
-To load this tool and for sample queries, please see the `SCRIPT.txt`
-file.
-
 This tool generates entity diagrams and file diagrams for source files
 and for libraries of source files using the Logtalk reflection features
 to collect the relevant information and a graph language for representing
 the diagrams. Limited support is also available for generating diagrams
 for Prolog module applications.
+
+This tool can be loaded using the query:
+
+	| ?- logtalk_load(diagrams(loader)).
+
+For sample queries, please see the `SCRIPT.txt` file.
 
 Currently only the DOT graph language is supported (tested with version
 2.36.0; visit the <http://www.graphviz.org/> website for more information).

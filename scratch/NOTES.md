@@ -25,6 +25,6 @@ This folder is used as a scratch folder for the temporary files generated
 by the Logtalk compiler at startup. If you delete this folder by accident,
 it will be recreated the next time you run Logtalk.
 
-You may set the value of the `scratch_directory` to this folder if you
-want to collect in the same location the Prolog temporary files that are
-generated when compiling Logtalk source files.
+You may set the value of the `scratch_directory` flag to this folder if
+you want to collect in the same location the Prolog temporary files that
+are generated when compiling Logtalk source files.

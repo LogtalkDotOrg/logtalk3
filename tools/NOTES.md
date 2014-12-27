@@ -33,7 +33,7 @@ in a running session.
 The `profiler` tool is also not loaded by default as it provides integration
 with selected backend Prolog compiler profilers that are not portable.
 
-To load a specific tool either change your Prolog working directory
+To load a specific tool, either change your Prolog working directory
 to the tool folder and then compile and load the corresponding loader 
 utility file or simply use library notation as argument for the 
 compiling and loading predicates. For example:
@@ -57,7 +57,7 @@ width equivalent to 4 spaces).
 
 Specific notes about each tool can be found in the corresponding `NOTES.md`
 files. Basic XHTML documentation about each tool can be found on the `docs`
-directory (open the `tools.html` file in your web browser). To regenerate
+directory (open the `docs/tools.html` file with your web browser). To regenerate
 this documentation, start Logtalk with your favorite back-end Prolog compiler
 and follow these steps:
 
@@ -72,13 +72,13 @@ and follow these steps:
 (3) Generate the XML documenting files for all loaded tools using the query:
 
 	| ?- lgtdoc::library(assertions, [xmldir('$LOGTALKUSER/docs/tmp_assertions')]),
-		lgtdoc::library(debugger, [xmldir('$LOGTALKUSER/docs/tmp_debugger')]),
-		lgtdoc::library(diagrams, [xmldir('$LOGTALKUSER/docs/tmp_diagrams')]),
-		lgtdoc::library(help, [xmldir('$LOGTALKUSER/docs/tmp_help')]),
-		lgtdoc::library(lgtdoc, [xmldir('$LOGTALKUSER/docs/tmp_lgtdoc')]),
-		lgtdoc::library(lgtunit, [xmldir('$LOGTALKUSER/docs/tmp_lgtunit')]),
-		lgtdoc::library(ports, [xmldir('$LOGTALKUSER/docs/tmp_ports')]),
-		lgtdoc::library(profiler, [xmldir('$LOGTALKUSER/docs/tmp_profiler')]).
+		 lgtdoc::library(debugger, [xmldir('$LOGTALKUSER/docs/tmp_debugger')]),
+		 lgtdoc::library(diagrams, [xmldir('$LOGTALKUSER/docs/tmp_diagrams')]),
+		 lgtdoc::library(help, [xmldir('$LOGTALKUSER/docs/tmp_help')]),
+		 lgtdoc::library(lgtdoc, [xmldir('$LOGTALKUSER/docs/tmp_lgtdoc')]),
+		 lgtdoc::library(lgtunit, [xmldir('$LOGTALKUSER/docs/tmp_lgtunit')]),
+		 lgtdoc::library(ports, [xmldir('$LOGTALKUSER/docs/tmp_ports')]),
+		 lgtdoc::library(profiler, [xmldir('$LOGTALKUSER/docs/tmp_profiler')]).
 
 (4) Run the command `lgt2html` on the temporary directories to generate the
 (X)HTML documentation or the command `lgt2pdf` to generate PDF documentation:
