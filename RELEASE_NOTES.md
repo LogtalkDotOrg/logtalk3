@@ -41,6 +41,11 @@ Prolog adapter and integration files
 * FIXED: Using the SWI-Prolog graphical tracer for debugging Logtalk source
 code.
 
+* FIXED: Bug in the term-expansion of message-sending calls made from within
+Prolog modules when using SWI-Prolog or YAP as the backend compiler where a
+broken warning message could be printed when the object receiving the message
+was not yet loaded. Thanks to Andrew Becker for the bug report.
+
 
 3.00.0 Release Candidate 9 - December 19, 2014
 ==============================================

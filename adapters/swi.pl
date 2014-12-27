@@ -852,7 +852,9 @@ user:goal_expansion('::'(Object, Message), user:Goal) :-
 	prolog_load_context(module, Module),
 	Module \== user,
 	'$lgt_compiler_flag'(events, Events),
-	'$lgt_comp_ctx'(Ctx, _, user, user, user, Obj, _, [], [], ExCtx, compile(regular), [], _),
+	prolog_load_context(term_position, Position),
+	stream_position_data(line_count, Position, Line),
+	'$lgt_comp_ctx'(Ctx, _, user, user, user, Obj, _, [], [], ExCtx, compile(aux), [], Line-Line),
 	'$lgt_execution_context'(ExCtx, user, user, user, Obj, [], []),
 	catch('$lgt_compile_message_to_object'(Message, Object, Goal, Events, Ctx), _, fail). 
 
