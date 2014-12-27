@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on December 20, 2014
+%  Last updated on December 27, 2014
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -914,6 +914,7 @@ user:goal_expansion('::'(Object, Message), user:Goal) :-
 	write_canonical(Stream, Term), write(Stream, '.\n').
 
 '$lgt_write_compiled_term'(Stream, Term, user, File, Line) :-
+	!,
 	write_canonical(Stream, '$source_location'(File,Line):Term), write(Stream, '.\n').
 
 '$lgt_write_compiled_term'(Stream, (:- Directive), _, _, _) :-
