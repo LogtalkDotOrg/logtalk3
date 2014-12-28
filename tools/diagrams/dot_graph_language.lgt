@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/08/18,
+		date is 2014/12/28,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -179,14 +179,18 @@
 
 	% entities belonging to the file or library being documented
 	node_caption_shape_style_color(prototype, prototype, box, filled, beige).
-	node_caption_shape_style_color(instance_or_class, 'instance/class', box, filled, yellow).
+	node_caption_shape_style_color(class, class, box, filled, yellow).
+	node_caption_shape_style_color(instance, instance, box, filled, yellow).
+	node_caption_shape_style_color(instance_and_class, 'instance/class', box, filled, yellow).
 	node_caption_shape_style_color(protocol, protocol, note, filled, aquamarine).
 	node_caption_shape_style_color(category, category, component, filled, lightcyan).
 	node_caption_shape_style_color(module, module, tab, filled, gainsboro).
 	node_caption_shape_style_color(file, file, box, filled, paleturquoise).
 	% external entities to the file or library being documented
 	node_caption_shape_style_color(external_prototype, prototype, box, 'filled,dashed', beige).
-	node_caption_shape_style_color(external_instance_or_class, 'instance/class', box, 'filled,dashed', yellow).
+	node_caption_shape_style_color(external_class, class, box, 'filled,dashed', yellow).
+	node_caption_shape_style_color(external_instance, instance, box, 'filled,dashed', yellow).
+	node_caption_shape_style_color(external_instance_and_class, 'instance/class', box, 'filled,dashed', yellow).
 	node_caption_shape_style_color(external_protocol, protocol, note, 'filled,dashed', aquamarine).
 	node_caption_shape_style_color(external_category, category, component, 'filled,dashed', lightcyan).
 	node_caption_shape_style_color(external_module, module, tab, 'filled,dashed', gainsboro).

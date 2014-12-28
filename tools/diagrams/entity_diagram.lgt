@@ -131,10 +131,13 @@
 		add_entity_documentation_url(Options, logtalk, Entity, EntityOptions),
 		(	current_object(Entity) ->
 			^^ground_entity_identifier(object, Entity, Name),
-			(	\+ instantiates_class(Entity, _),
-				\+ specializes_class(Entity, _) ->
-				^^output_node(Name, Name, [], external_prototype, [tooltip(prototype)| EntityOptions])
-			;	^^output_node(Name, Name, [], external_instance_or_class, [tooltip('instance/class')| EntityOptions])
+			(	specializes_class(Entity, _), instantiates_class(Entity, _) ->
+				^^output_node(Name, Name, [], external_instance_and_class, [tooltip('instance/class')| EntityOptions])
+			;	specializes_class(Entity, _) ->
+				^^output_node(Name, Name, [], external_class, [tooltip(class)| EntityOptions])
+			;	instantiates_class(Entity, _) ->
+				^^output_node(Name, Name, [], external_instance, [tooltip(instance)| EntityOptions])
+			;	^^output_node(Name, Name, [], external_prototype, [tooltip(prototype)| EntityOptions])
 			)
 		;	current_category(Entity) ->
 			^^ground_entity_identifier(category, Entity, Name),
@@ -245,10 +248,13 @@
 			append(PublicPredicates, MultifilePredicates, Resources)
 		;	Resources = []
 		),
-		(	\+ instantiates_class(Object, _),
-			\+ specializes_class(Object, _) ->
-			^^output_node(Name, Name, Resources, prototype, [tooltip(prototype)| Options])
-		;	^^output_node(Name, Name, Resources, instance_or_class, [tooltip('instance/class')| Options])
+		(	specializes_class(Object, _), instantiates_class(Object, _) ->
+			^^output_node(Name, Name, Resources, instance_and_class, [tooltip('instance/class')| Options])
+		;	specializes_class(Object, _) ->
+			^^output_node(Name, Name, Resources, class, [tooltip(class)| Options])
+		;	instantiates_class(Object, _) ->
+			^^output_node(Name, Name, Resources, instance, [tooltip(instance)| Options])
+		;	^^output_node(Name, Name, Resources, prototype, [tooltip(prototype)| Options])
 		),
 		output_object_relations(Object, Options).
 

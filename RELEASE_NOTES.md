@@ -46,6 +46,17 @@ Prolog modules when using SWI-Prolog or YAP as the backend compiler where a
 broken warning message could be printed when the object receiving the message
 was not yet loaded. Thanks to Andrew Becker for the bug report.
 
+Tools
+-----
+
+* IMPROVED: When printing object node captions, the `diagrams` tool now
+distinguishes between objects that have only either instantiation or
+specialization relations and objects that have both instantiation and
+specialization relations.
+
+* FIXED: Cleanup `diagrams` tool code for recent changes to supported entity
+directives and properties.
+
 
 3.00.0 Release Candidate 9 - December 19, 2014
 ==============================================
