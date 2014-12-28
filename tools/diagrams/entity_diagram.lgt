@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/08/06,
+		date is 2014/12/28,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parnames is ['Format']
 	]).
@@ -317,12 +317,6 @@
 		(	member(inheritance_relations(true), Options) ->
 			output_protocol_inheritance_relations(Protocol, Options)
 		;	true
-		),
-		(	member(xref_relations(true), Options) ->
-			output_protocol_xref_relations(Protocol, Options)
-		;	member(xref_calls(true), Options) ->
-			output_protocol_xref_calls(Protocol, Options)
-		;	true
 		).
 
 	output_protocol_inheritance_relations(Protocol, Options) :-
@@ -334,58 +328,6 @@
 		remember_referenced_entity(ExtendedProtocol),
 		fail.
 	output_protocol_inheritance_relations(_, _).
-
-	output_protocol_xref_relations(Protocol, Options) :-
-		protocol_property(Protocol, calls(Other::_, _)),
-		nonvar(Other),
-		\+ referenced_entity_(Other),
-		^^ground_entity_identifier(protocol, Protocol, ProtocolName),
-		^^ground_entity_identifier(object, Other, OtherName),
-		\+ ^^edge(ProtocolName, OtherName, [uses], calls_predicate, _),
-		^^save_edge(ProtocolName, OtherName, [uses], calls_predicate, [tooltip(uses)| Options]),
-		remember_referenced_entity(Other),
-		fail.
-	output_protocol_xref_relations(Protocol, Options) :-
-		protocol_property(Protocol, calls(':'(Module,_), _)),
-		nonvar(Module),
-		\+ referenced_module_(Module),
-		^^ground_entity_identifier(protocol, Protocol, ProtocolName),
-		\+ ^^edge(ProtocolName, Module, [use_module], calls_predicate, _),
-		^^save_edge(ProtocolName, Module, [use_module], calls_predicate, [tooltip(use_module)| Options]),
-		remember_referenced_module(Module),
-		fail.
-	output_protocol_xref_relations(_, _).
-
-	output_protocol_xref_calls(Protocol, Options) :-
-		setof(
-			Predicate,
-			Predicate0^CallsProperties^DefinesProperties^NonTerminal^(
-				protocol_property(Protocol, calls(Other::Predicate0, CallsProperties)),
-				nonvar(Other),
-				object_property(Other, defines(Predicate0, DefinesProperties)),
-				(	member(non_terminal(NonTerminal), DefinesProperties) ->
-					Predicate = NonTerminal
-				;	Predicate = Predicate0
-				)
-			),
-			Predicates
-		),
-		^^ground_entity_identifier(protocol, Protocol, ProtocolName),
-		^^ground_entity_identifier(object, Other, OtherName),
-		^^save_edge(ProtocolName, OtherName, Predicates, calls_predicate, [tooltip(calls)| Options]),
-		remember_referenced_entity(Other),
-		fail.
-	output_protocol_xref_calls(Protocol, Options) :-
-		setof(
-			Predicate,
-			Properties^(protocol_property(Protocol, calls(':'(Module,Predicate), Properties)), nonvar(Module)),
-			Predicates
-		),
-		^^ground_entity_identifier(protocol, Protocol, ProtocolName),
-		^^save_edge(ProtocolName, Module, Predicates, calls_predicate, [tooltip(calls)| Options]),
-		remember_referenced_module(Module),
-		fail.
-	output_protocol_xref_calls(_, _).
 
 	output_object_relations(Object, Options) :-
 		(	member(inheritance_relations(true), Options) ->

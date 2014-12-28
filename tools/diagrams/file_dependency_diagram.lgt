@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/11/11,
+		date is 2014/12/28,
 		comment is 'Predicates for generating file contents dependency diagrams. A dependency exists when an entity in one file makes a reference to an entity in another file.',
 		parnames is ['Format']
 	]).
@@ -99,10 +99,6 @@
 	depends_object(Object, category, Other) :-
 		complements_object(Other, Object).
 
-	depends_protocol(Protocol, object, Other) :-
-		protocol_property(Protocol, calls(Other::_,_)), nonvar(Other).
-	depends_protocol(Protocol, module, Other) :-
-		protocol_property(Protocol, calls(':'(Other,_),_)), nonvar(Other).
 	depends_protocol(Protocol, object, Other) :-
 		extends_protocol(Protocol, Other).
 
