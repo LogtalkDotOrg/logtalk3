@@ -94,7 +94,7 @@ yes
 % when generating a diagram for public publishing, it's often possible
 % to shorten file paths in order to remove a user-dependent prefix:
 
-| ?- file_dependency_diagram::library(searching, [omit_path_prefixes(['/Users/pmoura/logtalk/]')]).
+| ?- file_dependency_diagram::library(searching, [omit_path_prefixes(['/Users/pmoura/logtalk/'])]).
 yes
 
 % some final output formats such as SVG support tooltips and URL links;
