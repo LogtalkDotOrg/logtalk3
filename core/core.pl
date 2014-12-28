@@ -4869,14 +4869,18 @@ current_logtalk_flag(Flag, Value) :-
 		),
 		(	Reload == skip ->
 			% skip reloading already loaded files
-			'$lgt_print_message'(comment(loading), core, skipping_reloading_file(SourceFile, Flags))
+			'$lgt_print_message'(comment(loading), core, skipping_reloading_file(SourceFile, Flags)),
+			% but save the file loading dependency on a parent file if it exists
+			'$lgt_save_file_loading_dependency'(SourceFile)
 		;	Reload == changed,
 			PreviousFlags == Flags,
 			\+ '$lgt_changed_compilation_mode'(PreviousMode, PreviousFlags),
 			'$lgt_file_modification_time'(SourceFile, CurrentTimeStamp),
 			CurrentTimeStamp @=< LoadingTimeStamp ->
 			% file was not modified since loaded and same explicit flags and compilation mode as before
-			'$lgt_print_message'(comment(loading), core, skipping_reloading_file(SourceFile, Flags))
+			'$lgt_print_message'(comment(loading), core, skipping_reloading_file(SourceFile, Flags)),
+			% but save the file loading dependency on a parent file if it exists
+			'$lgt_save_file_loading_dependency'(SourceFile)
 		;	% we're reloading a source file
 			'$lgt_print_message'(silent(loading), core, reloading_file(SourceFile, Flags)),
 			'$lgt_compile_and_load_file'(Directory, Basename, SourceFile, Flags, ObjectFile, Current),
@@ -4896,12 +4900,7 @@ current_logtalk_flag(Flag, Value) :-
 	% so that we can use the make feature to reload it in case of error
 	'$lgt_pre_register_loaded_file'(Directory, Basename, SourceFile, Flags, ObjectFile),
 	% save the file loading dependency on a parent file if it exists
-	(	'$lgt_file_loading_stack_'(ParentSourceFile) ->
-		retractall('$lgt_parent_file_'(SourceFile, _)),
-		asserta('$lgt_parent_file_'(SourceFile, ParentSourceFile))
-	;	% no parent file
-		true
-	),
+	'$lgt_save_file_loading_dependency'(SourceFile),
 	% compile the source file to an intermediate Prolog file on disk
 	'$lgt_compile_file'(SourceFile, ObjectFile, Flags, loading, Current),
 	% compile and load the intermediate Prolog file
@@ -4909,6 +4908,15 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_load_compiled_file'(SourceFile, ObjectFile),
 	'$lgt_register_loaded_file'(Directory, Basename),
 	retractall('$lgt_file_loading_stack_'(SourceFile)).
+
+
+'$lgt_save_file_loading_dependency'(SourceFile) :-
+	(	'$lgt_file_loading_stack_'(ParentSourceFile) ->
+		retractall('$lgt_parent_file_'(SourceFile, ParentSourceFile)),
+		asserta('$lgt_parent_file_'(SourceFile, ParentSourceFile))
+	;	% no parent file
+		true
+	).
 
 
 '$lgt_pre_register_loaded_file'(Directory, Basename, Path, Flags, ObjectFile) :-

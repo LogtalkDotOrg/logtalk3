@@ -35,6 +35,8 @@ Logtalk compiler and runtime
 minimize the size of the generated intermediate Prolog files that use those
 tags to decide when to decorate compiled terms with source location data.
 
+* FIXED: A file can have more than one parent file.
+
 Prolog adapter and integration files
 ------------------------------------
 
