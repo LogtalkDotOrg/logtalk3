@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/08/06,
+		date is 2014/12/29,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format']
 	]).
@@ -119,6 +119,7 @@
 		assertz(included_predicate_(Predicate)),
 		fail.
 	process(Kind, Entity, Options) :-
+		Kind \== protocol,
 		entity_property(Kind, Entity, defines(Predicate0, Properties)),
 		\+ entity_property(Kind, Entity, declares(Predicate0, _)),
 		\+ member(auxiliary, Properties),
@@ -131,6 +132,7 @@
 		assertz(included_predicate_(Predicate)),
 		fail.
 	process(Kind, Entity, Options) :-
+		Kind \== protocol,
 		entity_property(Kind, Entity, provides(Predicate, To, Properties)),
 		\+ member(auxiliary, Properties),
 		(	Kind == module ->
@@ -173,10 +175,14 @@
 		).
 	predicate_kind(Kind, Entity, Predicate, PredicateKind) :-
 		(	entity_property(Kind, Entity, declares(Predicate, Properties)),
-			member((public), Properties) ->
-			PredicateKind = public_predicate
+			member(scope(Scope), Properties) ->
+			scope_predicate_kind(Scope, PredicateKind)
 		;	PredicateKind = predicate
 		).
+
+	scope_predicate_kind(public, public_predicate).
+	scope_predicate_kind(protected, protected_predicate).
+	scope_predicate_kind(private, private_predicate).
 
 	add_predicate_documentation_url(Options, _, Entity::Functor/Arity, PredicateOptions) :-
 		!,
@@ -221,6 +227,7 @@
 		Callee \= ':'(_, _),
 		memberchk(caller(Caller), Properties).
 	calls_local_predicate(Kind, Entity, Caller, Callee) :-
+		Kind \== protocol,
 		entity_property(Kind, Entity, calls(Callee0, CallsProperties)),
 		Callee0 \= _::_,
 		Callee0 \= ':'(_, _),
@@ -244,10 +251,12 @@
 		),
 		memberchk(caller(Caller), Properties).
 	calls_external_predicate(Kind, Entity, Caller, Object::Callee) :-
+		Kind \== protocol,
 		entity_property(Kind, Entity, calls(Object::Callee, Properties)),
 		nonvar(Object),
 		memberchk(caller(Caller), Properties).
 	calls_external_predicate(Kind, Entity, Caller, ':'(Module,Callee)) :-
+		Kind \== protocol,
 		entity_property(Kind, Entity, calls(':'(Module,Callee), Properties)),
 		nonvar(Module),
 		memberchk(caller(Caller), Properties).
