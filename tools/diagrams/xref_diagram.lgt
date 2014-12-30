@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/12/29,
+		date is 2014/12/30,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format']
 	]).
@@ -113,7 +113,7 @@
 			Predicate = NonTerminal
 		;	Predicate = Predicate0
 		),
-		predicate_kind(Kind, Entity, Predicate0, PredicateKind),
+		predicate_kind(Kind, Properties, PredicateKind),
 		add_predicate_documentation_url(Options, Entity, Predicate, PredicateOptions),
 		^^output_node(Predicate, Predicate, [], PredicateKind, PredicateOptions),
 		assertz(included_predicate_(Predicate)),
@@ -127,8 +127,7 @@
 			Predicate = NonTerminal
 		;	Predicate = Predicate0
 		),
-		predicate_kind(Kind, Entity, Predicate0, PredicateKind),
-		^^output_node(Predicate, Predicate, [], PredicateKind, Options),
+		^^output_node(Predicate, Predicate, [], predicate, Options),
 		assertz(included_predicate_(Predicate)),
 		fail.
 	process(Kind, Entity, Options) :-
@@ -136,7 +135,7 @@
 		entity_property(Kind, Entity, provides(Predicate, To, Properties)),
 		\+ member(auxiliary, Properties),
 		(	Kind == module ->
-			^^output_node(':'(To,Predicate), ':'(To,Predicate), [], multifile_predicate, Options),
+			^^output_node(':'(To,Predicate), ':'(To,Predicate), [], module_multifile_predicate, Options),
 			assertz(included_predicate_(':'(To,Predicate)))
 		;	add_predicate_documentation_url(Options, Entity, To::Predicate, PredicateOptions),
 			^^output_node(To::Predicate, To::Predicate, [], multifile_predicate, PredicateOptions),
@@ -166,18 +165,17 @@
 		fail.
 	process(_, _, _).		
 
-	predicate_kind(module, Entity, Predicate, PredicateKind) :-
+	predicate_kind(module, Properties, PredicateKind) :-
 		!,
-		(	modules_diagram_support::module_property(Entity, exports(Exports)),
-			member(Predicate, Exports) ->
-			PredicateKind = public_predicate
-		;	PredicateKind = predicate
+		(	member((multifile), Properties) ->
+			PredicateKind = module_multifile_predicate
+		;	PredicateKind = exported_predicate
 		).
-	predicate_kind(Kind, Entity, Predicate, PredicateKind) :-
-		(	entity_property(Kind, Entity, declares(Predicate, Properties)),
-			member(scope(Scope), Properties) ->
+	predicate_kind(_, Properties, PredicateKind) :-
+		(	member((multifile), Properties), member((public), Properties) ->
+			PredicateKind = module_multifile_predicate
+		;	memberchk(scope(Scope), Properties),
 			scope_predicate_kind(Scope, PredicateKind)
-		;	PredicateKind = predicate
 		).
 
 	scope_predicate_kind(public, public_predicate).

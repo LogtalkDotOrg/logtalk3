@@ -72,8 +72,18 @@ predicates, and files) and arrows (entity, predicate, and file relations):
 - modules  
 	`tab` (grey rectangle with small tab at top)
 
-- predicates  
-	`ellipse` (gold ellipse)
+- public predicates  
+	`ellipse` (green)
+- public, multifile, predicates  
+	`ellipse` (blue)
+- protected predicates  
+	`ellipse` (yellow)
+- private predicates  
+	`ellipse` (red)
+- predicates not locally declared  
+	`ellipse` (beige)
+- exported module predicates  
+	`ellipse` (green)
 
 - files  
 	`box` (pale turquoise rectangle)

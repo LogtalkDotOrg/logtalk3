@@ -4,7 +4,7 @@
 	:- info([
 		version is 0.10,
 		author is 'Paulo Moura',
-		date is 2014/11/10,
+		date is 2014/12/30,
 		comment is 'Utility predicates for supporting Prolog modules in diagrams.'
 	]).
 
@@ -39,10 +39,11 @@
 
 		property_module(exports(Exports), Module) :-
 			{module_property(Module, exports(Exports))}.
-		property_module(declares(Functor/Arity, []), Module) :-
+		property_module(declares(Functor/Arity, Properties), Module) :-
 			{module_property(Module, exports(Exports)),
 			 member(Functor/Arity, Exports)
-			}.
+			},
+			module_predicate_properties(Module, Functor/Arity, Properties).
 		property_module(defines(Functor/Arity, []), Module) :-
 			{module_property(Module, file(File)),
 			 xref_source(File),
@@ -93,6 +94,17 @@
 			 )
 			}.
 
+		module_predicate_properties(Module, Functor/Arity, Properties) :-
+			functor(Predicate, Functor, Arity),
+			(	{predicate_property(':'(Module,Predicate), static)} ->
+				Properties = [static| Properties0]
+			;	Properties = [(dynamic)| Properties0]
+			),
+			(	{predicate_property(':'(Module,Predicate), (multifile))} ->
+				Properties0 = [(multifile)]
+			;	Properties0 = []
+			).
+
 		loaded_file_property(File, Property) :-
 			property_source_file(Property, File),
 			\+ sub_atom(File, _, 4, 0, '.lgt'),
@@ -125,10 +137,11 @@
 
 		property_module(exports(Exports), Module) :-
 			{module_property(Module, exports(Exports))}.
-		property_module(declares(Functor/Arity, []), Module) :-
+		property_module(declares(Functor/Arity, Properties), Module) :-
 			{module_property(Module, exports(Exports)),
 			 member(Functor/Arity, Exports)
-			}.
+			},
+			module_predicate_properties(Module, Functor/Arity, Properties).
 		property_module(defines(Functor/Arity, []), Module) :-
 			{module_property(Module, file(File)),
 			 xref_source(File),
@@ -178,6 +191,17 @@
 			 )
 			}.
 
+		module_predicate_properties(Module, Functor/Arity, Properties) :-
+			functor(Predicate, Functor, Arity),
+			(	{predicate_property(':'(Module,Predicate), (dynamic))} ->
+				Properties = [(dynamic)| Properties0]
+			;	Properties = [static| Properties0]
+			),
+			(	{predicate_property(':'(Module,Predicate), (multifile))} ->
+				Properties0 = [(multifile)]
+			;	Properties0 = []
+			).
+
 		loaded_file_property(File, Property) :-
 			property_source_file(Property, File),
 			\+ sub_atom(File, _, 4, 0, '.lgt'),
@@ -209,9 +233,10 @@
 		property_module(exports(Exports), Module) :-
 			{get_module_info(Module, raw_interface, Interface)},
 			filter_interface(Interface, Exports).
-		property_module(declares(Functor/Arity, []), Module) :-
+		property_module(declares(Functor/Arity, Properties), Module) :-
 			property_module(exports(Exports), Module),
-			list::member(Functor/Arity, Exports).
+			list::member(Functor/Arity, Exports),
+			module_predicate_properties(Module, Functor/Arity, Properties).
 		property_module(defines(Functor/Arity, []), Module) :-
 			{'@'(current_module_predicate(defined,Functor/Arity), Module)}.
 		property_module(file(File), Module) :-
@@ -240,6 +265,14 @@
 			filter_interface(Interface, Exports).
 		filter_interface([_| Interface], Exports) :-
 			filter_interface(Interface, Exports).
+
+		module_predicate_properties(Module, Functor/Arity, Properties) :-
+			(	{'@'(get_flag(Functor/Arity, stability, (dynamic)), Module)} ->
+				Properties = [(dynamic)]
+			;	{'@'(get_flag(Functor/Arity, stability, static), Module)} ->
+				Properties = [static]
+			;	Properties = []
+			).
 
 		loaded_file_property(File, Property) :-
 			property_source_file(Property, File).
@@ -270,9 +303,10 @@
 				(predicate_property(Module:Goal, exported), functor(Goal, Functor, Arity)),
 				Exports
 			)}.
-		property_module(declares(Functor/Arity, []), Module) :-
+		property_module(declares(Functor/Arity, Properties), Module) :-
 			property_module(exports(Exports), Module),
-			list::member(Functor/Arity, Exports).
+			list::member(Functor/Arity, Exports),
+			module_predicate_properties(Module, Functor/Arity, Properties).
 		property_module(defines(Functor/Arity, []), Module) :-
 			{current_predicate(_, ':'(Module,Predicate))},
 			functor(Predicate, Functor, Arity).
@@ -282,6 +316,17 @@
 			{current_module(Module, File)},
 			decompose_file_name(File, Directory, Name, Extension),
 			atom_concat(Name, Extension, Basename).
+
+		module_predicate_properties(Module, Functor/Arity, Properties) :-
+			functor(Predicate, Functor, Arity),
+			(	{predicate_property(':'(Module,Predicate), (dynamic))} ->
+				Properties = [(dynamic)| Properties0]
+			;	Properties = [static| Properties0]
+			),
+			(	{predicate_property(':'(Module,Predicate), (multifile))} ->
+				Properties0 = [(multifile)]
+			;	Properties0 = []
+			).
 
 		loaded_file_property(File, Property) :-
 			property_source_file(Property, File).

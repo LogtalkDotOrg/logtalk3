@@ -51,6 +51,10 @@ was not yet loaded. Thanks to Andrew Becker for the bug report.
 Tools
 -----
 
+* IMPROVED: When generating predicate call cross-referencing diagrams, the
+`diagrams` tool now uses different node colors for public, protected, private,
+multifile, and exported predicates.
+
 * IMPROVED: When printing object node captions, the `diagrams` tool now
 distinguishes between objects that have only either instantiation or
 specialization relations and objects that have both instantiation and

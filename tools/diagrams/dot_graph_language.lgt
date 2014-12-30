@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/12/28,
+		date is 2014/12/30,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -196,10 +196,15 @@
 	node_caption_shape_style_color(external_module, module, tab, 'filled,dashed', gainsboro).
 	node_caption_shape_style_color(external_file, file, box, 'filled,dashed', paleturquoise).
 	% predicates
-	node_caption_shape_style_color(predicate, predicate, ellipse, filled, gold).
-	node_caption_shape_style_color(public_predicate, predicate, ellipse, 'filled,bold', gold).
-	node_caption_shape_style_color(multifile_predicate, predicate, ellipse, filled, yellow).
-	node_caption_shape_style_color(external_predicate, predicate, ellipse, 'filled,dashed', lightgrey).
+	node_caption_shape_style_color(predicate, ' ', ellipse, filled, beige).
+	node_caption_shape_style_color(public_predicate, (public), ellipse, filled, springgreen).
+	node_caption_shape_style_color(protected_predicate, protected, ellipse, filled, yellow).
+	node_caption_shape_style_color(private_predicate, (private), ellipse, filled, indianred1).
+	node_caption_shape_style_color(local_predicate, (local), ellipse, filled, grey).
+	node_caption_shape_style_color(multifile_predicate, 'public, multifile', ellipse, filled, skyblue).
+	node_caption_shape_style_color(module_multifile_predicate, (multifile), ellipse, filled, skyblue).
+	node_caption_shape_style_color(external_predicate, external, ellipse, 'filled,dashed', lightgrey).
+	node_caption_shape_style_color(exported_predicate, exported, ellipse, filled, springgreen).
 
 	edge(Stream, Start, End, Labels, Kind, Options) :-
 		edge_arrow(Kind, ArrowHead),
