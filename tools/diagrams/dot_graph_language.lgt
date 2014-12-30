@@ -164,7 +164,8 @@
 		write(Stream, 'label=<<FONT POINT-SIZE="11"><![CDATA['),
 		write(Stream, Label),
 		write(Stream, ']]></FONT>'),
-		(	member(node_type_captions(true), Options) ->
+		(	member(node_type_captions(true), Options),
+			Caption \== '' ->
 			write(Stream, '<BR /><FONT POINT-SIZE="7"><![CDATA['),
 			write(Stream, Caption),
 			write(Stream, ']]></FONT>')
@@ -196,7 +197,7 @@
 	node_caption_shape_style_color(external_module, module, tab, 'filled,dashed', gainsboro).
 	node_caption_shape_style_color(external_file, file, box, 'filled,dashed', paleturquoise).
 	% predicates
-	node_caption_shape_style_color(predicate, ' ', ellipse, filled, beige).
+	node_caption_shape_style_color(predicate, '', ellipse, filled, beige).
 	node_caption_shape_style_color(public_predicate, (public), ellipse, filled, springgreen).
 	node_caption_shape_style_color(protected_predicate, protected, ellipse, filled, yellow).
 	node_caption_shape_style_color(private_predicate, (private), ellipse, filled, indianred1).
