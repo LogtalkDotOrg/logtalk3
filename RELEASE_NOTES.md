@@ -55,10 +55,15 @@ Tools
 `diagrams` tool now uses different colors for public, protected, private,
 multifile, and exported predicate nodes.
 
+* IMPROVED: When generating predicate call cross-referencing diagrams, the
+`diagrams` tool can now print scope, `multifile`, `dynamic` and `synchronized`
+properties in predicate node captions.
+
 * IMPROVED: When printing object node captions, the `diagrams` tool now
 distinguishes between objects that have only either instantiation or
 specialization relations and objects that have both instantiation and
-specialization relations.
+specialization relations. Also, the tool can now print `built_in` and
+`dynamic` properties in entity node captions.
 
 * FIXED: Cleanup `diagrams` tool code for recent changes to supported entity
 directives and properties.

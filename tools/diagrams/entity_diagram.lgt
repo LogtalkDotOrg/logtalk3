@@ -129,23 +129,8 @@
 		Format::graph_header(output_file, other, '(external entities)', external, [tooltip('(external entities)')| Options]),
 		retract(referenced_entity_(Entity)),
 		add_entity_documentation_url(Options, logtalk, Entity, EntityOptions),
-		(	current_object(Entity) ->
-			^^ground_entity_identifier(object, Entity, Name),
-			(	specializes_class(Entity, _), instantiates_class(Entity, _) ->
-				^^output_node(Name, Name, 'instance/class', [], external_instance_and_class, [tooltip('instance/class')| EntityOptions])
-			;	specializes_class(Entity, _) ->
-				^^output_node(Name, Name, class, [], external_class, [tooltip(class)| EntityOptions])
-			;	instantiates_class(Entity, _) ->
-				^^output_node(Name, Name, instance, [], external_instance, [tooltip(instance)| EntityOptions])
-			;	^^output_node(Name, Name, prototype, [], external_prototype, [tooltip(prototype)| EntityOptions])
-			)
-		;	current_category(Entity) ->
-			^^ground_entity_identifier(category, Entity, Name),
-			^^output_node(Name, Name, category, [], external_category, [tooltip(category)| EntityOptions])
-		;	% current_protocol(Entity),
-			^^ground_entity_identifier(protocol, Entity, Name),
-			^^output_node(Name, Name, protocol, [], external_protocol, [tooltip(protocol)| EntityOptions])
-		),
+		entity_name_kind_caption(external, Entity, Name, Kind, Caption),
+		^^output_node(Name, Name, Caption, [], Kind, [tooltip(Caption)| EntityOptions]),
 		fail.
 	output_externals(Options) :-
 		retract(referenced_module_(Module)),
@@ -221,7 +206,8 @@
 		;	Resources0 = []
 		),
 		fix_non_terminals(Resources0, protocol, Protocol, Resources),
-		^^output_node(Name, Name, protocol, Resources, protocol, [tooltip(protocol)| Options]),
+		protocol_name_kind_caption(Protocol, Name, Kind, Caption),
+		^^output_node(Name, Name, Caption, Resources, Kind, [tooltip(Caption)| Options]),
 		output_protocol_relations(Protocol, Options).
 
 	output_object(Object, Options) :-
@@ -248,14 +234,8 @@
 			append(PublicPredicates, MultifilePredicates, Resources)
 		;	Resources = []
 		),
-		(	specializes_class(Object, _), instantiates_class(Object, _) ->
-			^^output_node(Name, Name, 'instance/class', Resources, instance_and_class, [tooltip('instance/class')| Options])
-		;	specializes_class(Object, _) ->
-			^^output_node(Name, Name, class, Resources, class, [tooltip(class)| Options])
-		;	instantiates_class(Object, _) ->
-			^^output_node(Name, Name, instance, Resources, instance, [tooltip(instance)| Options])
-		;	^^output_node(Name, Name, prototype, Resources, prototype, [tooltip(prototype)| Options])
-		),
+		object_name_kind_caption(Object, Name, Kind, Caption),
+		^^output_node(Name, Name, Caption, Resources, Kind, [tooltip(Caption)| Options]),
 		output_object_relations(Object, Options).
 
 	output_category(Category, Options) :-
@@ -282,7 +262,8 @@
 			append(PublicPredicates, MultifilePredicates, Resources)
 		;	Resources = []
 		),
-		^^output_node(Name, Name, category, Resources, category, [tooltip(category)| Options]),
+		category_name_kind_caption(Category, Name, Kind, Caption),
+		^^output_node(Name, Name, Caption, Resources, Kind, [tooltip(Caption)| Options]),
 		output_category_relations(Category, Options).
 
 	output_module(Module, Options) :-
@@ -643,6 +624,58 @@
 		atom_concat(Relation, ' (protected)', Label).
 	scope_relation_label(private, Relation, Label) :-
 		atom_concat(Relation, ' (private)', Label).
+
+	entity_name_kind_caption(Location, Entity, Name, Kind, Caption) :-
+		(	current_object(Entity) ->
+			object_name_kind_caption(Entity, Name, Kind0, Caption)
+		;	current_category(Entity) ->
+			category_name_kind_caption(Entity, Name, Kind0, Caption)
+		;	% current_protocol(Entity),
+			protocol_name_kind_caption(Entity, Name, Kind0, Caption)
+		),
+		(	Location == external ->
+			atom_concat(external_, Kind0, Kind)
+		;	Kind = Kind0
+		).
+
+	object_name_kind_caption(Entity, Name, Kind, Caption) :-
+		^^ground_entity_identifier(object, Entity, Name),
+		(	specializes_class(Entity, _), instantiates_class(Entity, _) ->
+			Kind = instance_and_class,
+			Caption0 = 'instance/class'
+		;	specializes_class(Entity, _) ->
+			Kind = class,
+			Caption0 = class
+		;	instantiates_class(Entity, _) ->
+			Kind = instance,
+			Caption0 = instance
+		;	Kind = prototype,
+			Caption0 = prototype
+		),
+		(	object_property(Entity, built_in) ->
+			atom_concat('built-in ', Caption0, Caption)
+		;	object_property(Entity, (dynamic)) ->
+			atom_concat('dynamic ', Caption0, Caption)
+		;	Caption = Caption0
+		).
+
+	category_name_kind_caption(Entity, Name, category, Caption) :-
+		^^ground_entity_identifier(category, Entity, Name),
+		(	category_property(Entity, built_in) ->
+			Caption = 'built-in category'
+		;	category_property(Entity, (dynamic)) ->
+			Caption = 'dynamic category'
+		;	Caption = category
+		).
+
+	protocol_name_kind_caption(Entity, Name, protocol, Caption) :-
+		^^ground_entity_identifier(protocol, Entity, Name),
+		(	protocol_property(Entity, built_in) ->
+			Caption = 'built-in protocol'
+		;	protocol_property(Entity, (dynamic)) ->
+			Caption = 'dynamic protocol'
+		;	Caption = protocol
+		).
 
 	% by default, diagram layout is bottom to top:
 	default_option(layout(bottom_to_top)).
