@@ -173,7 +173,7 @@
 		).
 	predicate_kind(_, Properties, PredicateKind) :-
 		(	member((multifile), Properties), member((public), Properties) ->
-			PredicateKind = module_multifile_predicate
+			PredicateKind = multifile_predicate
 		;	memberchk(scope(Scope), Properties),
 			scope_predicate_kind(Scope, PredicateKind)
 		).
