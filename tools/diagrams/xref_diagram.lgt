@@ -135,10 +135,10 @@
 		entity_property(Kind, Entity, provides(Predicate, To, Properties)),
 		\+ member(auxiliary, Properties),
 		(	Kind == module ->
-			^^output_node(':'(To,Predicate), ':'(To,Predicate), (multifile), [], module_multifile_predicate, Options),
+			^^output_node(':'(To,Predicate), ':'(To,Predicate), (multifile), [], multifile_predicate, Options),
 			assertz(included_predicate_(':'(To,Predicate)))
 		;	add_predicate_documentation_url(Options, Entity, To::Predicate, PredicateOptions),
-			^^output_node(To::Predicate, To::Predicate, 'public, multifile', [], multifile_predicate, PredicateOptions),
+			^^output_node(To::Predicate, To::Predicate, (multifile), [], multifile_predicate, PredicateOptions),
 			assertz(included_predicate_(To::Predicate))
 		),
 		fail.
@@ -168,18 +168,27 @@
 	predicate_kind_caption(module, Properties, PredicateKind, Caption) :-
 		!,
 		(	member((multifile), Properties) ->
-			PredicateKind = module_multifile_predicate,
-			Caption = (multifile)
+			PredicateKind = multifile_predicate,
+			(	member((dynamic), Properties) ->
+				Caption = 'exported, multifile, dynamic'
+			;	Caption = 'exported, multifile'
+			)
 		;	PredicateKind = exported_predicate,
 			Caption = exported
 		).
 	predicate_kind_caption(_, Properties, PredicateKind, Caption) :-
 		(	member((multifile), Properties), member((public), Properties) ->
 			PredicateKind = multifile_predicate,
-			Caption = 'public, multifile'
+			(	member((dynamic), Properties) ->
+				Caption = 'public, multifile, dynamic'
+			;	Caption = 'public, multifile'
+			)
 		;	memberchk(scope(Scope), Properties),
 			scope_predicate_kind(Scope, PredicateKind),
-			Caption = Scope
+			(	member((dynamic), Properties) ->
+				atom_concat(Scope, ', dynamic', Caption)
+			;	Caption = Scope
+			)
 		).
 
 	scope_predicate_kind(public, public_predicate).

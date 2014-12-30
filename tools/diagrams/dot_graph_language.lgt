@@ -203,7 +203,6 @@
 	node_shape_style_color(private_predicate, ellipse, filled, indianred1).
 	node_shape_style_color(local_predicate, ellipse, filled, grey).
 	node_shape_style_color(multifile_predicate, ellipse, filled, skyblue).
-	node_shape_style_color(module_multifile_predicate, ellipse, filled, skyblue).
 	node_shape_style_color(external_predicate, ellipse, 'filled,dashed', lightgrey).
 	node_shape_style_color(exported_predicate, ellipse, filled, springgreen).
 
