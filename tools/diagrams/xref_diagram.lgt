@@ -181,12 +181,16 @@
 			PredicateKind = multifile_predicate,
 			(	member((dynamic), Properties) ->
 				Caption = 'public, multifile, dynamic'
+			;	member(synchronized, Properties) ->
+				Caption = 'public, multifile, synchronized'
 			;	Caption = 'public, multifile'
 			)
 		;	memberchk(scope(Scope), Properties),
 			scope_predicate_kind(Scope, PredicateKind),
 			(	member((dynamic), Properties) ->
 				atom_concat(Scope, ', dynamic', Caption)
+			;	member(synchronized, Properties) ->
+				atom_concat(Scope, ', synchronized', Caption)
 			;	Caption = Scope
 			)
 		).
