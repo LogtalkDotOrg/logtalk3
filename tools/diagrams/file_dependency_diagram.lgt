@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/12/28,
+		date is 2014/12/30,
 		comment is 'Predicates for generating file contents dependency diagrams. A dependency exists when an entity in one file makes a reference to an entity in another file.',
 		parnames is ['Format']
 	]).
@@ -44,10 +44,10 @@
 			memberchk(omit_path_prefixes(Prefixes), Options),
 			(	member(Prefix, Prefixes),
 				atom_concat(Prefix, Relative, Directory) ->
-				^^output_node(Path, Basename, [Relative], file, LinkingOptions)
-			;	^^output_node(Path, Basename, [Directory], file, LinkingOptions)
+				^^output_node(Path, Basename, file, [Relative], file, LinkingOptions)
+			;	^^output_node(Path, Basename, file, [Directory], file, LinkingOptions)
 			)
-		;	^^output_node(Path, Basename, [], file, LinkingOptions)
+		;	^^output_node(Path, Basename, file, [], file, LinkingOptions)
 		),
 		^^remember_included_file(Path),
 		fail.

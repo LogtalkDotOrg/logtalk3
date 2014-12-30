@@ -5,7 +5,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/11/11,
+		date is 2014/12/30,
 		comment is 'Common predicates for generating file diagrams.',
 		parnames is ['Format']
 	]).
@@ -64,8 +64,8 @@
 		^^add_link_options(Path, Options, LinkingOptions),
 		(	member(Prefix, Prefixes),
 			atom_concat(Prefix, Relative, Directory) ->
-			^^output_node(Path, Basename, [Relative], external_file, LinkingOptions)
-		;	^^output_node(Path, Basename, [Directory], external_file, LinkingOptions)
+			^^output_node(Path, Basename, file, [Relative], external_file, LinkingOptions)
+		;	^^output_node(Path, Basename, file, [Directory], external_file, LinkingOptions)
 		),
 		fail.
 	output_externals(Options) :-
@@ -76,8 +76,8 @@
 		^^add_link_options(Path, Options, LinkingOptions),
 		(	member(Prefix, Prefixes),
 			atom_concat(Prefix, Relative, Directory) ->
-			^^output_node(Path, Basename, [Relative], external_file, LinkingOptions)
-		;	^^output_node(Path, Basename, [Directory], external_file, LinkingOptions)
+			^^output_node(Path, Basename, file, [Relative], external_file, LinkingOptions)
+		;	^^output_node(Path, Basename, file, [Directory], external_file, LinkingOptions)
 		),
 		fail.
 	output_externals(Options) :-

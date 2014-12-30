@@ -113,9 +113,9 @@
 			Predicate = NonTerminal
 		;	Predicate = Predicate0
 		),
-		predicate_kind(Kind, Properties, PredicateKind),
+		predicate_kind_caption(Kind, Properties, PredicateKind, Caption),
 		add_predicate_documentation_url(Options, Entity, Predicate, PredicateOptions),
-		^^output_node(Predicate, Predicate, [], PredicateKind, PredicateOptions),
+		^^output_node(Predicate, Predicate, Caption, [], PredicateKind, PredicateOptions),
 		assertz(included_predicate_(Predicate)),
 		fail.
 	process(Kind, Entity, Options) :-
@@ -127,7 +127,7 @@
 			Predicate = NonTerminal
 		;	Predicate = Predicate0
 		),
-		^^output_node(Predicate, Predicate, [], predicate, Options),
+		^^output_node(Predicate, Predicate, '', [], predicate, Options),
 		assertz(included_predicate_(Predicate)),
 		fail.
 	process(Kind, Entity, Options) :-
@@ -135,10 +135,10 @@
 		entity_property(Kind, Entity, provides(Predicate, To, Properties)),
 		\+ member(auxiliary, Properties),
 		(	Kind == module ->
-			^^output_node(':'(To,Predicate), ':'(To,Predicate), [], module_multifile_predicate, Options),
+			^^output_node(':'(To,Predicate), ':'(To,Predicate), (multifile), [], module_multifile_predicate, Options),
 			assertz(included_predicate_(':'(To,Predicate)))
 		;	add_predicate_documentation_url(Options, Entity, To::Predicate, PredicateOptions),
-			^^output_node(To::Predicate, To::Predicate, [], multifile_predicate, PredicateOptions),
+			^^output_node(To::Predicate, To::Predicate, 'public, multifile', [], multifile_predicate, PredicateOptions),
 			assertz(included_predicate_(To::Predicate))
 		),
 		fail.
@@ -161,21 +161,25 @@
 		fail.
 	process(_, _, Options) :-
 		retract(referenced_predicate_(Functor/Arity)),
-		^^output_node(Functor/Arity, Functor/Arity, [], predicate, Options),
+		^^output_node(Functor/Arity, Functor/Arity, '', [], predicate, Options),
 		fail.
-	process(_, _, _).		
+	process(_, _, _).
 
-	predicate_kind(module, Properties, PredicateKind) :-
+	predicate_kind_caption(module, Properties, PredicateKind, Caption) :-
 		!,
 		(	member((multifile), Properties) ->
-			PredicateKind = module_multifile_predicate
-		;	PredicateKind = exported_predicate
+			PredicateKind = module_multifile_predicate,
+			Caption = (multifile)
+		;	PredicateKind = exported_predicate,
+			Caption = exported
 		).
-	predicate_kind(_, Properties, PredicateKind) :-
+	predicate_kind_caption(_, Properties, PredicateKind, Caption) :-
 		(	member((multifile), Properties), member((public), Properties) ->
-			PredicateKind = multifile_predicate
+			PredicateKind = multifile_predicate,
+			Caption = 'public, multifile'
 		;	memberchk(scope(Scope), Properties),
-			scope_predicate_kind(Scope, PredicateKind)
+			scope_predicate_kind(Scope, PredicateKind),
+			Caption = Scope
 		).
 
 	scope_predicate_kind(public, public_predicate).
@@ -290,15 +294,15 @@
 		Format::graph_header(output_file, other, '(external predicates)', external, [tooltip('(external predicates)')| Options]),
 		retract(external_predicate_(Object::Predicate)),
 		^^ground_entity_identifier(object, Object, Name),
-		^^output_node(Name::Predicate, Name::Predicate, [], external_predicate, Options),
+		^^output_node(Name::Predicate, Name::Predicate, external, [], external_predicate, Options),
 		fail.
 	output_external_predicates(Options) :-
 		retract(external_predicate_(':'(Module,Predicate))),
-		^^output_node(':'(Module,Predicate), ':'(Module,Predicate), [], external_predicate, Options),
+		^^output_node(':'(Module,Predicate), ':'(Module,Predicate), external, [], external_predicate, Options),
 		fail.
 	output_external_predicates(Options) :-
 		retract(referenced_predicate_(Predicate)),
-		^^output_node(Predicate, Predicate, [], external_predicate, Options),
+		^^output_node(Predicate, Predicate, external, [], external_predicate, Options),
 		fail.
 	output_external_predicates(Options) :-
 		^^format_object(Format),

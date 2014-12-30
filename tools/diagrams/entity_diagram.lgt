@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/12/28,
+		date is 2014/12/30,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parnames is ['Format']
 	]).
@@ -132,25 +132,25 @@
 		(	current_object(Entity) ->
 			^^ground_entity_identifier(object, Entity, Name),
 			(	specializes_class(Entity, _), instantiates_class(Entity, _) ->
-				^^output_node(Name, Name, [], external_instance_and_class, [tooltip('instance/class')| EntityOptions])
+				^^output_node(Name, Name, 'instance/class', [], external_instance_and_class, [tooltip('instance/class')| EntityOptions])
 			;	specializes_class(Entity, _) ->
-				^^output_node(Name, Name, [], external_class, [tooltip(class)| EntityOptions])
+				^^output_node(Name, Name, class, [], external_class, [tooltip(class)| EntityOptions])
 			;	instantiates_class(Entity, _) ->
-				^^output_node(Name, Name, [], external_instance, [tooltip(instance)| EntityOptions])
-			;	^^output_node(Name, Name, [], external_prototype, [tooltip(prototype)| EntityOptions])
+				^^output_node(Name, Name, instance, [], external_instance, [tooltip(instance)| EntityOptions])
+			;	^^output_node(Name, Name, prototype, [], external_prototype, [tooltip(prototype)| EntityOptions])
 			)
 		;	current_category(Entity) ->
 			^^ground_entity_identifier(category, Entity, Name),
-			^^output_node(Name, Name, [], external_category, [tooltip(category)| EntityOptions])
+			^^output_node(Name, Name, category, [], external_category, [tooltip(category)| EntityOptions])
 		;	% current_protocol(Entity),
 			^^ground_entity_identifier(protocol, Entity, Name),
-			^^output_node(Name, Name, [], external_protocol, [tooltip(protocol)| EntityOptions])
+			^^output_node(Name, Name, protocol, [], external_protocol, [tooltip(protocol)| EntityOptions])
 		),
 		fail.
 	output_externals(Options) :-
 		retract(referenced_module_(Module)),
 		add_entity_documentation_url(Options, module, Module, EntityOptions),
-		^^output_node(Module, Module, [], external_module, [tooltip(module)| EntityOptions]),
+		^^output_node(Module, Module, module, [], external_module, [tooltip(module)| EntityOptions]),
 		fail.
 	output_externals(Options) :-
 		^^format_object(Format),
@@ -221,7 +221,7 @@
 		;	Resources0 = []
 		),
 		fix_non_terminals(Resources0, protocol, Protocol, Resources),
-		^^output_node(Name, Name, Resources, protocol, [tooltip(protocol)| Options]),
+		^^output_node(Name, Name, protocol, Resources, protocol, [tooltip(protocol)| Options]),
 		output_protocol_relations(Protocol, Options).
 
 	output_object(Object, Options) :-
@@ -249,12 +249,12 @@
 		;	Resources = []
 		),
 		(	specializes_class(Object, _), instantiates_class(Object, _) ->
-			^^output_node(Name, Name, Resources, instance_and_class, [tooltip('instance/class')| Options])
+			^^output_node(Name, Name, 'instance/class', Resources, instance_and_class, [tooltip('instance/class')| Options])
 		;	specializes_class(Object, _) ->
-			^^output_node(Name, Name, Resources, class, [tooltip(class)| Options])
+			^^output_node(Name, Name, class, Resources, class, [tooltip(class)| Options])
 		;	instantiates_class(Object, _) ->
-			^^output_node(Name, Name, Resources, instance, [tooltip(instance)| Options])
-		;	^^output_node(Name, Name, Resources, prototype, [tooltip(prototype)| Options])
+			^^output_node(Name, Name, instance, Resources, instance, [tooltip(instance)| Options])
+		;	^^output_node(Name, Name, prototype, Resources, prototype, [tooltip(prototype)| Options])
 		),
 		output_object_relations(Object, Options).
 
@@ -282,7 +282,7 @@
 			append(PublicPredicates, MultifilePredicates, Resources)
 		;	Resources = []
 		),
-		^^output_node(Name, Name, Resources, category, [tooltip(category)| Options]),
+		^^output_node(Name, Name, category, Resources, category, [tooltip(category)| Options]),
 		output_category_relations(Category, Options).
 
 	output_module(Module, Options) :-
@@ -296,7 +296,7 @@
 			append(ExportedPredicates, MultifilePredicates, Resources)
 		;	Resources = []
 		),
-		^^output_node(Module, Module, Resources, module, [tooltip(module)| Options]),
+		^^output_node(Module, Module, module, Resources, module, [tooltip(module)| Options]),
 		output_module_relations(Module, Options).
 
 	fix_non_terminals([], _, _, []).

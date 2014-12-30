@@ -27,7 +27,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/11/11,
+		date is 2014/12/30,
 		comment is 'Common predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
@@ -510,16 +510,16 @@
 	reset :-
 		::retractall(edge_(_, _, _, _, _)).
 
-	:- protected(output_node/5).
-	:- mode(output_node(+nonvar, +nonvar, +list(nonvar), +atom, +list(compound)), one).
-	:- info(output_node/5, [
+	:- protected(output_node/6).
+	:- mode(output_node(+nonvar, +nonvar, +nonvar, +list(nonvar), +atom, +list(compound)), one).
+	:- info(output_node/6, [
 		comment is 'Outputs a graph node.',
-		argnames is ['Identifier', 'Label', 'Contents', 'Kind', 'Options']
+		argnames is ['Identifier', 'Label', 'Caption', 'Contents', 'Kind', 'Options']
 	]).
 
-	output_node(Identifier, Label, Lines, Kind, Options) :-
+	output_node(Identifier, Label, Caption, Lines, Kind, Options) :-
 		format_object(Format),
-		Format::node(output_file, Identifier, Label, Lines, Kind, Options).
+		Format::node(output_file, Identifier, Label, Caption, Lines, Kind, Options).
 
 	:- protected(edge/5).
 	:- mode(edge(?nonvar, ?nonvar, ?list(nonvar), ?atom, ?list(compound)), zero_or_more).

@@ -27,7 +27,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/08/18,
+		date is 2014/12/30,
 		comment is 'Predicates for generating graph files.'
 	]).
 
@@ -66,11 +66,11 @@
 		argnames is ['Stream', 'Identifier', 'Label', 'Kind', 'Options']
 	]).
 
-	:- public(node/6).
-	:- mode(node(+stream_or_alias, +nonvar, +nonvar, +list(nonvar), +atom, +list(compound)), one).
-	:- info(node/6, [
+	:- public(node/7).
+	:- mode(node(+stream_or_alias, +nonvar, +nonvar, +nonvar, +list(nonvar), +atom, +list(compound)), one).
+	:- info(node/7, [
 		comment is 'Writes a node using the specified options.',
-		argnames is ['Stream', 'Identifier', 'Label', 'Lines', 'Kind', 'Options']
+		argnames is ['Stream', 'Identifier', 'Label', 'Caption', 'Lines', 'Kind', 'Options']
 	]).
 
 	:- public(edge/6).
