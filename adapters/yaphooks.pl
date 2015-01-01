@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
-%  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
+%  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  integration code for YAP 6.3.4 and later versions to improve
 %  usability when using the YAP profilers

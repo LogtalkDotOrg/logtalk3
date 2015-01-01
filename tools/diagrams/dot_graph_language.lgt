@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
-%  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
+%  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -196,15 +196,16 @@
 	node_shape_style_color(external_category, component, 'filled,dashed', lightcyan).
 	node_shape_style_color(external_module, tab, 'filled,dashed', gainsboro).
 	node_shape_style_color(external_file, box, 'filled,dashed', paleturquoise).
-	% predicates
+	% predicates of the entities being documented
 	node_shape_style_color(predicate, ellipse, filled, beige).
 	node_shape_style_color(public_predicate, ellipse, filled, springgreen).
 	node_shape_style_color(protected_predicate, ellipse, filled, yellow).
 	node_shape_style_color(private_predicate, ellipse, filled, indianred1).
 	node_shape_style_color(local_predicate, ellipse, filled, grey).
 	node_shape_style_color(multifile_predicate, ellipse, filled, skyblue).
-	node_shape_style_color(external_predicate, ellipse, 'filled,dashed', lightgrey).
 	node_shape_style_color(exported_predicate, ellipse, filled, springgreen).
+	% external predicates to the entities being documented
+	node_shape_style_color(external_predicate, ellipse, 'filled,dashed', lightgrey).
 
 	edge(Stream, Start, End, Labels, Kind, Options) :-
 		edge_arrow(Kind, ArrowHead),

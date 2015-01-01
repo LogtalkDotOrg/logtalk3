@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
-##   Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
+##   Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Integration script for YAP
 ##   Last updated on October 11, 2013

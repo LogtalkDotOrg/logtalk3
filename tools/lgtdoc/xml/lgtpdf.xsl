@@ -9,7 +9,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
-%  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
+%  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 % 
 %   XSLT stylesheet for converting XML documenting files into PDF files
 %   Last updated on November 3, 2014

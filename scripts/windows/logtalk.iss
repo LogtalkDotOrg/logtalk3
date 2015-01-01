@@ -1,5 +1,5 @@
 ; This file is part of Logtalk <http://logtalk.org/>  
-; Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
+; Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 ; 
 ; Logtalk Inno Setup script for generating Windows installers
 ; Last updated on December 5, 2014

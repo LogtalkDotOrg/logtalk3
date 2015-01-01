@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
-%  Copyright (c) 1998-2014 Paulo Moura <pmoura@logtalk.org>
+%  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  Integration file for SWI-Prolog
 %  Last updated on July 10, 2014
