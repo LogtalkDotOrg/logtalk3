@@ -162,7 +162,7 @@ generated diagrams. For entity diagrams the options are:
 - `title(Title)`  
 	diagram title (an atom; default is `''`)
 - `date(Boolean)`  
-	print/omit current date (`true` or `false`; default is `true`)
+	print/omit current date and time (`true` or `false`; default is `true`)
 - `interface(Boolean)`  
 	print/omit public predicates (default depends on the specific diagram)
 - `file_labels(Boolean)`  
@@ -201,7 +201,7 @@ For file diagrams the options are:
 - `title(Title)`  
 	diagram title (an atom; default is `''`)
 - `date(Boolean)`  
-	print/omit current date (`true` or `false`; default is `true`)
+	print/omit current date and time (`true` or `false`; default is `true`)
 - `directory_paths(Boolean)`  
 	print/omit file directory paths (`true` or `false`; default is `true`)
 - `omit_path_prefixes(Prefixes)`  
