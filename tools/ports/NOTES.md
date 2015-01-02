@@ -102,7 +102,7 @@ include:
 - unwanted non-determinism (from the `*exit` port)
 - performance issues due to backtracking (from the `*exit` and `redo` ports)
 - predicates acting like a generator of possible solutions (from the `*exit` and `redo` ports)
-- inefficient indexing of predicate rules (from the `rule` and `redo` ports)
+- inefficient indexing of predicate rules (from the `rule` and `call` ports)
 
 The profiling data should be analyzed taking into account the expected
 behavior for the profiled predicates.
