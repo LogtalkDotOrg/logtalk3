@@ -28,7 +28,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/12/30,
+		date is 2015/01/02,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format']
 	]).
@@ -38,14 +38,14 @@
 	]).
 
 	:- public(entity/2).
-	:- mode(entity(+atom, +list(compound)), one).
+	:- mode(entity(+entity_identifier, +list(compound)), one).
 	:- info(entity/2, [
 		comment is 'Creates a diagram for a single entity using the specified options.',
 		argnames is ['Entity', 'Options']
 	]).
 
 	:- public(entity/1).
-	:- mode(entity(+atom), one).
+	:- mode(entity(+entity_identifier), one).
 	:- info(entity/1, [
 		comment is 'Creates a diagram for a single entity using default options.',
 		argnames is ['Entity']
