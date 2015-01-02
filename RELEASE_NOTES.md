@@ -48,6 +48,12 @@ Prolog modules when using SWI-Prolog or YAP as the backend compiler where a
 broken warning message could be printed when the object receiving the message
 was not yet loaded. Thanks to Andrew Becker for the bug report.
 
+Library
+-------
+
+* REMOVED: The deprecated `event_handlersp` protocol, replaced by the built-in
+`monitoring` protocol.
+
 Tools
 -----
 
