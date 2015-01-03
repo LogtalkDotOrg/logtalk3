@@ -48,6 +48,12 @@ Prolog modules when using SWI-Prolog or YAP as the backend compiler where a
 broken warning message could be printed when the object receiving the message
 was not yet loaded. Thanks to Andrew Becker for the bug report.
 
+Documentation
+-------------
+
+* UPDATED: The POSIX integration script man pages with details on the Prolog
+executable name requirements.
+
 Library
 -------
 
