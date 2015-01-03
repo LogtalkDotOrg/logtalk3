@@ -47,17 +47,17 @@ the corresponding `man` page (e.g. `man yaplgt`).
 
 On Windows systems, the Logtalk installer makes the Prolog integration 
 shortcuts available from the `Start Menu/Programs/Logtalk` menu. But
-the POSIX shell scripts above can also be used by installing a shell
+the POSIX shell scripts above can also be used by installing a bash
 shell implementation for Windows. The easiest way is to install Git for
 Windows from:
 
 	http://msysgit.github.io/
 
-After installation, you can start the bash shell by selecting Git Bash from
-the context menu. You will also need to add the `$LOGTALKHOME/scripts` and
-`$LOGTALKHOME/integration` directories plus the backend Prolog compiler
+After installation, you can start the bash shell by selecting `Git Bash`
+from the context menu. You will also need to add the `$LOGTALKHOME/scripts`
+and `$LOGTALKHOME/integration` directories plus the backend Prolog compiler
 executable directories to the system path environment variable. This can be
-accomplished by e.g. defining a `~/.profile` file with the necessary export
+accomplished by defining e.g. a `~/.profile` file with the necessary export
 commands. The integration scripts will need to be called, however, without
 omitting the `.sh` extension.
 
@@ -70,10 +70,11 @@ and select the "Run as administrator" option).
 The GNU Prolog integration script provides adequate performance for 
 development. For production environments, improved performance can be 
 achieved by generating a new GNU-Prolog top-level that includes Logtalk.
+See the `adapters/NOTES.md` file for details.
 
 The environment variables `LOGTALKHOME` and `LOGTALKUSER` should be defined 
 in order to run the integration scripts (see the `INSTALL.md` file for 
-details on setting the variables). When the scripts detect an outdated 
+details on setting these variables). When the scripts detect an outdated 
 Logtalk user directory, they create a new one by running the script
 `logtalk_user_setup.sh` (a backup is automatically made of the old
 directory).
@@ -81,17 +82,18 @@ directory).
 Note that the integration scripts and shortcuts may fail if you use non-
 standard locations for your Prolog compilers.
 
-Depending on the size and complexity of your Logtalk applications, you 
-may need to change the integration scripts in order to allocate more 
-memory to the back-end Prolog compilers. Please consult the documentation 
-on the Prolog compilers you intend to use for details.
+Depending on the size and complexity of your Logtalk applications and the
+used Prolog backend compiler, you may need to change the integration scripts
+in order to allocate more memory to the backend Prolog compilers. Please
+consult the documentation on the backend Prolog compilers you intend to use
+for details.
 
 All the scripts accept command-line options, which are passed straight to 
-the back-end Prolog compiler. For example (on a POSIX operating-system, 
-using SWI-Prolog as the back-end compiler):
+the backend Prolog compiler. For example (on a POSIX operating-system, and
+using SWI-Prolog as the backend compiler):
 
 	% swilgt -g "write('Hello world!'), nl"
 
-However, keep in mind that the integration scripts already use the back-end 
-Prolog command-line option that allows a initialization file to be loaded 
-in order to bootstrap Logtalk. See the scripts files for details.
+Keep in mind, however, that the integration scripts already use the backend 
+Prolog command-line option that allows a initialization file to be loaded in
+order to bootstrap Logtalk. See the scripts files for details.
