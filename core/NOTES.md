@@ -25,20 +25,26 @@ This folder contains a single Prolog file, `core.pl`, which implements
 the Logtalk compiler and the Logtalk runtime. There are also some Logtalk
 source files defining built-in protocols, categories, and objects:
 
-- `expanding.lgt` - term- and goal-expansion predicates
-- `forwarding.lgt` - message forwarding predicate
-- `monitoring.lgt` - event handler predicates
-- `logtalk.lgt` - message printing, debugging, and hacking predicates
-- `core_messages.lgt` - default translations for compiler messages
-- `user.lgt` - definition of the pseudo-object `user`
+- `expanding.lgt`  
+	built-in `expanding` protocol specifying term- and goal-expansion predicates
+- `forwarding.lgt`  
+	built-in `forwarding` protocol specifying the message forwarding predicate
+- `monitoring.lgt`  
+	built-in `monitoring` protocol specifying the event handler predicates
+- `logtalk.lgt`  
+	built-in `logtalk` object defining message printing, debugging, and hacking predicates
+- `core_messages.lgt`  
+	built-in `core_messages` category defining the default translations for compiler messages
+- `user.lgt`  
+	definition of the built-in pseudo-object `user`
 
 Before loading the `core.pl` file into your favorite Prolog compiler,
 you must first load the appropriated adapter file for your Prolog
 compiler, which you will find in the `adapters` directory, and the
 `paths/paths.pl` file, which defines essential library paths for
-starting Logtalk. The provided Prolog integration scripts automate
-this process and should be used unless there's a strong reason to
-manually load Logtalk.
+starting Logtalk. The provided Prolog POSIX integration scripts and
+Windows shortcuts automate this process and should be used unless
+there's a strong reason to manually load Logtalk.
 
 The source files are formatted using tabs (the recommended setting is
 a tab width equivalent to 4 spaces).
@@ -48,7 +54,7 @@ entities documentation. To regenerate the documentation of these libraries,
 start Logtalk with your favorite back-end Prolog compiler and follow these
 steps:
 
-(1) If the `source_data` flag is not `on` by default, type the query:
+(1) If the `source_data` flag is not turned `on` by default, type the query:
 
 	| ?- set_logtalk_flag(source_data, on).
 
