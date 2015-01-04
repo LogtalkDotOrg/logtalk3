@@ -33,7 +33,8 @@ Logtalk compiler and runtime
 
 * IMPROVED: Changes to the term tags used when writing compiled code to help
 minimize the size of the generated intermediate Prolog files that use those
-tags to decide when to decorate compiled terms with source location data.
+tags to decide when to decorate compiled terms with source location data
+(currently, only SWI-Prolog takes advantage of the location data).
 
 * FIXED: A file can have more than one parent file.
 
