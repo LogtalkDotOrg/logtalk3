@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2013/09/28,
+		date is 2015/01/05,
 		comment is 'Unit tests for the "logtalk" built-in object.'
 	]).
 
@@ -48,5 +48,40 @@
 		Entity == logtalk,
 		Type == object,
 		Decompiled == bar/1.
+
+	test(logtalk_6) :-
+		logtalk::loaded_file_property(SourceFile, basename('tests.lgt')), !,
+		logtalk::loaded_file_property(SourceFile, directory(Directory)), atom(Directory),
+		logtalk::loaded_file_property(SourceFile, mode(Mode)), atom(Mode), mode(Mode),
+		logtalk::loaded_file_property(SourceFile, flags(Flags)), ground(Flags), flags(Flags),
+		logtalk::loaded_file_property(SourceFile, text_properties(Properties)), ground(Properties), text_properties(Properties),
+		logtalk::loaded_file_property(SourceFile, target(ObjectFile)), atom(ObjectFile),
+		logtalk::loaded_file_property(SourceFile, modified(TimeStamp)),	ground(TimeStamp),
+		logtalk::loaded_file_property(SourceFile, parent(ParentFile)), atom_concat(_, 'tester.lgt', ParentFile),
+		\+ logtalk::loaded_file_property(SourceFile, library(_)),
+		logtalk::loaded_file_property(SourceFile, object(Object)), Object == tests.
+
+	mode(debug).
+	mode(normal).
+	mode(optimal).
+
+	flags([]).
+	flags([Flag| Flags]) :-
+		flag(Flag),
+		flags(Flags).
+
+	flag(Flag) :-
+		functor(Flag, Functor, 1),
+		atom(Functor).
+
+	text_properties([]).
+	text_properties([Property| Properties]) :-
+		text_property(Property),
+		text_properties(Properties).
+
+	text_property(bom(BOM)) :-
+		(BOM == true -> true; BOM == false).
+	text_property(encoding(Encoding)) :-
+		atom(Encoding).
 
 :- end_object.
