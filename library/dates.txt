@@ -26,10 +26,10 @@ file:
 
 	| ?- logtalk_load(library(dates_loader)).
 
-The object date implements some useful calendar date predicates.
+The `date` object implements some useful calendar date predicates.
 
-The object time implements some useful time predicates.
+The `time` object implements some useful time predicates.
 
 Please note that some of the functionality of these objects depends 
 on the chosen Prolog support for accessing operating system time and 
-date values.
+date data.

@@ -26,9 +26,9 @@ utility file:
 
 	| ?- logtalk_load(library(random_loader)).
 
-The object random implements a basic random number generators.
+The `random` object implements a basic random number generators.
 
 If you need more than one random number generator, just define or 
-create new objects as extensions of the object random. Be sure to 
+create new objects as extensions of the `random` object. Be sure to 
 initialize the seeds of the new random generator objects by using
-the message reset_seed/0.
+the `reset_seed/0` message.

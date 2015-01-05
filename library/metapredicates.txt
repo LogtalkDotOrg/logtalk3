@@ -26,8 +26,8 @@ utility file:
 
 	| ?- logtalk_load(library(metapredicates_loader)).
 
-The object loop implements several kinds of loops typical of imperative 
+The `loop` object implements several kinds of loops typical of imperative 
 languages.
 
-The object meta implements common Prolog meta-predicates like `apply/2`
-and `map/3`.
+The `meta`object implements common Prolog meta-predicates like `map/3` and
+`fold_left/4`.
