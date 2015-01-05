@@ -28,7 +28,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 03/02/09,
+		date is 2003/02/09,
 		comment is 'Smalltalk dependent protocol.'
 	]).
 
@@ -39,6 +39,6 @@
 		argnames is ['Change']
 	]).
 
-	update(_).
+	update(_).	% by default, do nothing
 
 :- end_category.

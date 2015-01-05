@@ -26,5 +26,7 @@ utility file:
 
 	| ?- logtalk_load(library(dependents_loader)).
 
-The categories "observer" and "subject" implement the Smalltalk 
-dependent handling mechanism.
+The `observer` and `subject` categories implement the Smalltalk 
+dependents handling mechanism. This mechanism can be used as an
+alternative to Logtalk's system-wide support for event-driven
+programming.

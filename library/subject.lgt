@@ -28,7 +28,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 03/02/09,
+		date is 2003/02/09,
 		comment is 'Smalltalk dependent handling predicates.'
 	]).
 
@@ -56,7 +56,7 @@
 	:- dynamic(dependent_/1).
 	:- mode(dependent_(?object), zero_or_more).
 	:- info(dependent_/1, [
-		comment is 'Dependent object table.',
+		comment is 'Table of dependent objects.',
 		argnames is ['Dependent']
 	]).
 
