@@ -29,19 +29,24 @@ installation and working environment. Customization is usually done on
 a per-user basis by editing a settings file on the Logtalk user folder 
 (whose path is stored on the `LOGTALKUSER` environment variable; this
 folder can be (re)created by running the `logtalk_user_setup` shell
-command). The default path for the Logtalk user folder is:
+script; on Windows systems, you can use the installer and choose the
+corresponding install option). The default path for the Logtalk user
+folder is:
 
 * POSIX systems  
     `$HOME/logtalk`
 * Windows  
     `My Documents\Logtalk`
 
+The Logtalk user folder is updated when you update Logtalk. Therefore, it
+shouldn't be used to store your Logtalk application's source code.
 
-1. DEFINING A DEFAULT PROLOG BACK-END COMPILER
-----------------------------------------------
+
+1. DEFINING A DEFAULT PROLOG BACKEND COMPILER
+---------------------------------------------
 
 Users of POSIX systems may use the `logtalk_backend_select` shell script
-to define an alias, `logtalk`, for one of the provided back-end Prolog
+to define an alias, `logtalk`, for one of the provided backend Prolog
 compiler integration scripts.
 
 
@@ -49,14 +54,15 @@ compiler integration scripts.
 ------------------------
 
 In Logtalk, a library is simply a directory containing source files. Library 
-paths can be declared using a dynamic, multifile predicate. This allows 
-compiling and loading of libraries and library files using the library names
-instead of the full library paths.
+paths can be declared using the `logtalk_library_path/2` dynamic and multifile
+predicate. This allows compiling and loading of libraries and library files
+using the library names instead of the full library paths. It also makes it
+easy to relocate libraries.
 
 Inside your Logtalk user folder, you will find a `paths` folder containing 
-a sample file which, when loaded, defines the library paths for the Logtalk 
-standard library and for all the supplied examples. For details, see the
-`paths/NOTES.md` file.
+a sample file which, when loaded, defines the library paths for the standard
+library, developer tools, contributions, and supplied examples. For details,
+see the `paths/NOTES.md` file.
 
 Library paths for your own source files directories are preferably defined in
 your settings file, described next.
@@ -65,22 +71,22 @@ your settings file, described next.
 3. CUSTOMIZING LOGTALK SETTINGS
 -------------------------------
 
-Logtalk interfaces with a specific Prolog compiler using a adapter file that
-can be found on the `adapters` folder in the Logtalk installation folder.
-These adapter files define default values of the flags that are used by
-Logtalk when compiling source files (for a full description of these flags, 
+Logtalk interfaces with a specific backend Prolog compiler using a adapter
+file that can be found on the `adapters` folder in the Logtalk installation
+folder. These adapter files define default values of the flags that are used
+by Logtalk when compiling source files (for a full description of these flags, 
 consult the `Writing, Running, and Debugging Logtalk Programs` section of
 the User Manual). 
 
-The default compiler flag settings are appropriated for the *development* (but
-likely not for the *deployment*) of applications. Check the example settings on
-the `settings-sample.lgt` for configuration suggestions.
+The default compiler flag settings are appropriated for the *development*
+(but not necessarily for the *deployment*) of applications. Check the example
+settings on the `settings-sample.lgt` for configuration suggestions.
 
 You may customize the Logtalk compiler flags and add your own library paths
-by copy or renaming the `settings-sample.lgt` file in your Logtalk user folder
-to `settings.lgt` and editing it. Settings in this file override the default 
-values in the adapter files. Some of the default flag values that you may want
-to change include:
+by coping or renaming the `settings-sample.lgt` file in your Logtalk user
+folder to `settings.lgt` and editing it. Settings in this file override the
+default values in the adapter files. Some of the default flag values that
+you may want to change include:
 
 * `report`  
     for less verbose startup and compilation reports
@@ -93,8 +99,8 @@ to change include:
     essential if you're writing portable Logtalk applications
 
 Check the `adapters/NOTES.md` file for Prolog specific compatibility notes.
-Some back-end Prolog compilers don't support all the possible compilation
-flags values. In addition, some back-end Prolog compilers provide limited
+Some backend Prolog compilers don't support all the possible compilation
+flags values. In addition, some backend Prolog compilers provide limited
 support for settings files in some operating-systems.
 
 
