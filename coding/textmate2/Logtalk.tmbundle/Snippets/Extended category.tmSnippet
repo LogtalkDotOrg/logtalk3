@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>
+:- category(${1:ExtendedCategory},
+	extends(${2:MinimalCategory})).
+
+	:- info([
+		version is 1.0,
+		author is '$TM_FULLNAME',
+		date is `date +%Y/%m/%d`,
+		comment is '${3:Description}'
+	]).
+
+$0
+
+:- end_category.
+</string>
+	<key>name</key>
+	<string>    Extended category</string>
+	<key>scope</key>
+	<string>source.logtalk</string>
+	<key>tabTrigger</key>
+	<string>category</string>
+	<key>uuid</key>
+	<string>92977F8E-9515-11E4-B67E-F7565FAC8F1D</string>
+</dict>
+</plist>

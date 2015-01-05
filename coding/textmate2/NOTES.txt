@@ -8,14 +8,14 @@ terms per section 7).        Consult the `LICENSE.txt` file for details.
 ________________________________________________________________________
 
 
-This directory contains the Logtalk.tmbundle bundle, which provides code 
+This directory contains the `Logtalk.tmbundle` bundle, which provides code 
 folding, code completion, syntax coloring, entity index, auto-indentation, 
 and snippets of code for editing Logtalk source files with the TextMate 2.x 
 text editor: 
 
 	http://macromates.com/
 
-To install copy the bundle "Logtalk.tmbundle" to one of the following 
+To install, copy the bundle `Logtalk.tmbundle` to one of the following 
 folders:
 
 	~/Library/Application Support/TextMate/Bundles/
@@ -23,7 +23,7 @@ folders:
 
 (create the chosen folder if it does not exist).
 
-The Logtalk.tmbundle itself is distributed under the default license for
+The `Logtalk.tmbundle` itself is distributed under the default license for
 TextMate language bundles; the Logtalk distribution license doesn't apply.
 
 In order to use the Logtalk bundle commands to compile and automatically 
@@ -33,18 +33,23 @@ the TextMate Preferences window, select the "Advanced" tab, click on the
 
 LOGTALK_COMMAND
 	set to the name of the shell script you use to launch Logtalk 
-	followed by the option to run a goal at startup (e.g. "yaplgt -g")
+	followed by the option to run a goal at startup (e.g. `yaplgt -g`)
 LOGTALK_HTML_COMMAND
 	set to the name of the shell script you use to generate the (X)HTML 
-	documentation (e.g. lgt2html)
+	documentation (e.g. `lgt2html`)
 LOGTALK_PDF_COMMAND
 	set to the name of the shell script you use to generate the PDF 
-	documentation (e.g. lgt2pdf)
+	documentation (e.g. `lgt2pdf`)
 LOGTALK_TXT_COMMAND
 	set to the name of the shell script you use to generate the TXT 
-	documentation (e.g. lgt2txt)
+	documentation (e.g. `lgt2txt`)
 
 Logtalk source files (including the library entities and the programming
 examples) are formatted using tabs (the recommended setting is a tab width
 equivalent to 4 spaces); you may set the tab width on the editor preference
 panel.
+
+Snippets are provided for entities and entity predicates. In the case of
+entities, the defined triggers are: object, class, instance, protocol, and
+category. In the case of predicates, the defined triggers are: public,
+protected, and private.

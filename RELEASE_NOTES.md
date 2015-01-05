@@ -81,6 +81,11 @@ specialization relations. Also, the tool can now print `built_in` and
 * FIXED: Cleanup `diagrams` tool code for recent changes to supported entity
 directives and properties.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* ADDED: Snippet for extended categories to the TextMate 2 text editor.
+
 
 3.00.0 Release Candidate 9 - December 19, 2014
 ==============================================
