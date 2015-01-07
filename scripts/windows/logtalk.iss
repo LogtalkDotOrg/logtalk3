@@ -2,14 +2,14 @@
 ; Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 ; 
 ; Logtalk Inno Setup script for generating Windows installers
-; Last updated on December 5, 2014
+; Last updated on January 7, 2015
 ; 
 ; Logtalk is free software. You can redistribute it and/or modify it under
 ; the terms of the FSF GNU General Public License 3  (plus some additional
 ; terms per section 7).        Consult the `LICENSE.txt` file for details.
 
 #define MyAppName "Logtalk"
-#define MyAppCopyright "Copyright © 1998-2014 Paulo Moura"
+#define MyAppCopyright "Copyright © 1998-2015 Paulo Moura"
 #define MyAppPublisher "Logtalk.org"
 #define MyAppURL "http://logtalk.org"
 #define MyAppUrlName "Logtalk Web Site.url"
