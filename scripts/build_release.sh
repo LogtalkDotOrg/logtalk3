@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Release build script
-##   Last updated on September 22, 2013
+##   Last updated on January 8, 2015
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -90,7 +90,6 @@ sudo port clean logtalk
 sudo port destroot logtalk
 sudo port pkg logtalk
 cp -R work/logtalk-$version.pkg $directory
-zip -r $directory/logtalk-$version.pkg.zip $directory/logtalk-$version.pkg
 sudo port clean logtalk
 
 cd $directory

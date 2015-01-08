@@ -34,6 +34,11 @@ Installers and installation scripts
 * FIXED: Bug in the MacPorts portfile in the post-activate step while updating
 the freedesktop.org shared MIME-info database.
 
+* FIXED: Updated the `build_release.sh` to not compress the Mac OS X Installer
+package using the `zip` command-line command as it results in a ZIP archive
+that creates a hierarchy of directories when uncompressed to hold the package
+instead of simply writing it out to the current directory.
+
 
 3.00.0 - January 7, 2015
 ========================
