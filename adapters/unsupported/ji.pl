@@ -3,8 +3,8 @@
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
-%  Adapter file for JIProlog 4.0.1-1 or later versions
-%  Last updated on December 20, 2014
+%  Adapter file for JIProlog 4.0.1-4 or later versions
+%  Last updated on January 8, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -40,11 +40,7 @@
 
 % '$lgt_iso_predicate'(?callable).
 
-'$lgt_iso_predicate'(acyclic_term(_)).
 '$lgt_iso_predicate'(subsumes_term(_, _)).
-
-
-acyclic_term(_).
 
 
 subsumes_term(General, Specific) :-

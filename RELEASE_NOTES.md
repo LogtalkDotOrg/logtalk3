@@ -28,6 +28,11 @@ RELEASE NOTES
 3.00.1 - January ??, 2015
 =========================
 
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: JIProlog adapter file for changes in version 4.0.1-4.
+
 Installers and installation scripts
 -----------------------------------
 
