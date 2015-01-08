@@ -28,6 +28,11 @@ RELEASE NOTES
 3.00.1 - January ??, 2015
 =========================
 
+Installers and installation scripts
+-----------------------------------
+
+* FIXED: Bug in the MacPorts portfile in the post-activate step while updating
+the freedesktop.org shared MIME-info database.
 
 
 3.00.0 - January 7, 2015
