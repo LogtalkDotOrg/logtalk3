@@ -44,6 +44,11 @@ package using the `zip` command-line command as it results in a ZIP archive
 that creates a hierarchy of directories when uncompressed to hold the package
 instead of simply writing it out to the current directory.
 
+Documentation
+-------------
+
+* ADDED: User Manual section on reserved predicates names.
+
 
 3.00.0 - January 7, 2015
 ========================

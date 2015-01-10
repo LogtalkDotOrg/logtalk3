@@ -38,6 +38,12 @@
 Predicate directives and clauses can be encapsulated inside objects and categories. Protocols can only contain predicate directives. From the point-of-view of an object-oriented language, predicates allows both object state and object behavior to be represented. Mutable object state can be represented using dynamic object predicates.
 </p>
 
+<h2 id="predicates_reserved">Reserved predicate names</h2>
+
+<p>
+For performance reasons, a few predicates have a fixed interpretation. These predicates are declared in the built-protocols. They are: <code>goal_expansion/2</code> and <code>term_expansion/2</code>, declared in the <code>expanding</code> protocol; <code>before/3</code> and <code>after/3</code>, declared in the <code>monitoring</code> protocol; and <code>forward/1</code>, declared in the <code>forwarding</code> protocol. By default, the compiler prints a warning when a definition for one of these predicates are found but the reference to the corresponding built-in protocol is missing.
+</p>
+
 <h2 id="predicates_declaring">Declaring predicates</h2>
 
 <p>
@@ -1014,7 +1020,7 @@ This workaround is sometimes necessary when calling module meta-predicates whose
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: December 18, 2014</span>
+		<span>Last updated on: January 10, 2015</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="categories.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="inheritance.html">next</a></span><br/>
