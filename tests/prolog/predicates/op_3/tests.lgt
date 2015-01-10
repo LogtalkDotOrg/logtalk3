@@ -71,13 +71,13 @@
 
 	throws(iso_op_3_12, error(permission_error(create,operator,{}),_)) :-
 		{op(500, xfy, [{}])}.
-	
+
 	throws(iso_op_3_13, error(permission_error(create,operator,'|'),_)) :-
 		{op(1000, xfy, '|')}.
 
 	throws(iso_op_3_14, error(permission_error(create,operator,'|'),_)) :-
 		{op(1000, xfy, ['|'])}.
-	
+
 	throws(iso_op_3_15, error(permission_error(create,operator,'|'),_)) :-
 		{op(1150, fx, '|')}.
 

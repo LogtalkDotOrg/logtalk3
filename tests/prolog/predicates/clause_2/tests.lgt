@@ -70,14 +70,14 @@ insect(bee).
 	:- if(current_logtalk_flag(prolog_conformance, iso_strict)).
 		throws(iso_clause_2_09, error(permission_error(access,private_procedure,elk/1),_)) :-
 			{clause(elk(_N), _Body)}.
-	
+
 		throws(iso_clause_2_10, error(permission_error(access,private_procedure,atom/1),_)) :-
 			{clause(atom(_), _Body)}.
 	:- else.
 		throws(iso_clause_2_09, [error(permission_error(access,private_procedure,elk/1),_), error(permission_error(access,private_procedure,':'(user,elk/1)),_)]) :-
 			% the second exception term is used in some of the Prolog compilers supporting modules
 			{clause(elk(_N), _Body)}.
-	
+
 		throws(iso_clause_2_10, [error(permission_error(access,private_procedure,atom/1),_), error(permission_error(access,private_procedure,':'(user,atom/1)),_)]) :-
 			% the second exception term is used in some of the Prolog compilers supporting modules
 			{clause(atom(_), _Body)}.

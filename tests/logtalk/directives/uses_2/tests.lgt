@@ -80,7 +80,7 @@
 		current_logtalk_flag(prolog_dialect, Dialect),
 		(Dialect == eclipse; Dialect == sicstus; Dialect = swi; Dialect = yap)
 	)).
-	
+
 	test(uses_2_4) :-
 		uses_2_test_object_2::mp(X),
 		X == 2.

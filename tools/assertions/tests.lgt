@@ -67,7 +67,7 @@
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).
-	
+
 	logtalk::message_hook(Message, Kind, assertions, _) :-
 		!,
 		ground(Message),
