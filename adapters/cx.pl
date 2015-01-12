@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for CxProlog 0.97.7 or a later version
-%  Last updated on December 20, 2014
+%  Last updated on January 12, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -51,37 +51,13 @@
 '$lgt_iso_predicate'(subsumes_term(_, _)).
 
 subsumes_term(General, Specific) :-
-	term_variables(Specific, Vars),
-	'$lgt_cx_subsumes_term'(General, Specific, Vars).
+	\+ \+ '$lgt_cx_subsumes'(General, Specific).
 
-'$lgt_cx_subsumes_term'(General, Specific, Vars) :-
-	var(General),
-	!,
-	(	'$lgt_cx_var_member_chk'(General, Vars) ->
-		General == Specific
-	;	\+ General \= Specific
-	).
-
-'$lgt_cx_subsumes_term'(General, Specific, Vars) :-
-	nonvar(Specific),
-	functor(General, Functor, Arity),
-	functor(Specific, Functor, Arity),
-	'$lgt_cx_subsumes_term'(Arity, General, Specific, Vars).
-
-'$lgt_cx_subsumes_term'(0, _, _, _) :-
-	!.
-'$lgt_cx_subsumes_term'(N, General, Specific, Vars) :-
-	arg(N, General,  GenArg),
-	arg(N, Specific, SpeArg),
-	'$lgt_cx_subsumes_term'(GenArg, SpeArg, Vars),
-	M is N-1, !,
-	'$lgt_cx_subsumes_term'(M, General, Specific, Vars).
-
-'$lgt_cx_var_member_chk'(Var, [Head| Tail]) :-
-	(	Var == Head ->
-		true
-	;	'$lgt_cx_var_member_chk'(Var, Tail)
-	).
+'$lgt_cx_subsumes'(General, Specific) :-
+	term_variables(Specific, Vars1),
+	unify_with_occurs_check(General, Specific),
+	term_variables(Vars1, Vars2),
+	Vars1 == Vars2.
 
 
 

@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Qu-Prolog 9.0 and later versions
-%  Last updated on December 20, 2014
+%  Last updated on December 12, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -54,37 +54,13 @@ sub_atom(Atom, Before, Length, After, SubAtom) :-
 	string_to_atom(SubString, SubAtom).
 
 subsumes_term(General, Specific) :-
-	collect_vars(Specific, Vars),
-	'$lgt_qp_subsumes_term'(General, Specific, Vars).
+	\+ \+ '$lgt_qp_subsumes'(General, Specific).
 
-'$lgt_qp_subsumes_term'(General, Specific, Vars) :-
-	var(General),
-	!,
-	(	'$lgt_qp_var_member_chk'(General, Vars) ->
-		General == Specific
-	;	\+ General \= Specific
-	).
-
-'$lgt_qp_subsumes_term'(General, Specific, Vars) :-
-	nonvar(Specific),
-	functor(General, Functor, Arity),
-	functor(Specific, Functor, Arity),
-	'$lgt_qp_subsumes_term'(Arity, General, Specific, Vars).
-
-'$lgt_qp_subsumes_term'(0, _, _, _) :-
-	!.
-'$lgt_qp_subsumes_term'(N, General, Specific, Vars) :-
-	arg(N, General,  GenArg),
-	arg(N, Specific, SpeArg),
-	'$lgt_qp_subsumes_term'(GenArg, SpeArg, Vars),
-	M is N-1, !,
-	'$lgt_qp_subsumes_term'(M, General, Specific, Vars).
-
-'$lgt_qp_var_member_chk'(Var, [Head| Tail]) :-
-	(	Var == Head ->
-		true
-	;	'$lgt_qp_var_member_chk'(Var, Tail)
-	).
+'$lgt_qp_subsumes'(General, Specific) :-
+	collect_vars(Specific, Vars1),
+	unify_with_occurs_check(General, Specific),
+	collect_vars(Vars1, Vars2),
+	Vars1 == Vars2.
 
 term_variables(Term, Variables) :-
 	collect_vars(Term, Variables).

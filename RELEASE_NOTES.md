@@ -31,7 +31,10 @@ RELEASE NOTES
 Prolog adapter and integration files
 ------------------------------------
 
-* UPDATED: JIProlog adapter file for changes in version 4.0.1-4.
+* UPDATED: JIProlog adapter file for changes in version 4.0.2-2.
+
+* FIXED: Hacked definition for missing `subsumes_term/2` standard predicate
+in the adapter files for CxProlog, JIProlog, and Qu-prolog for conformance.
 
 Installers and installation scripts
 -----------------------------------

@@ -3,8 +3,8 @@
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
-%  Adapter file for JIProlog 4.0.1-4 or later versions
-%  Last updated on January 8, 2015
+%  Adapter file for JIProlog 4.0.2-2 or later versions
+%  Last updated on January 10, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -44,37 +44,16 @@
 
 
 subsumes_term(General, Specific) :-
-	term_variables(Specific, Vars),
-	'$lgt_ji_subsumes_term'(General, Specific, Vars).
+	\+ \+ '$lgt_ji_subsumes'(General, Specific).
 
-'$lgt_ji_subsumes_term'(General, Specific, Vars) :-
-	var(General),
-	!,
-	(	'$lgt_ji_var_member_chk'(General, Vars) ->
-		General == Specific
-	;	\+ General \= Specific
-	).
-
-'$lgt_ji_subsumes_term'(General, Specific, Vars) :-
-	nonvar(Specific),
-	functor(General, Functor, Arity),
-	functor(Specific, Functor, Arity),
-	'$lgt_ji_subsumes_term'(Arity, General, Specific, Vars).
-
-'$lgt_ji_subsumes_term'(0, _, _, _) :-
-	!.
-'$lgt_ji_subsumes_term'(N, General, Specific, Vars) :-
-	arg(N, General,  GenArg),
-	arg(N, Specific, SpeArg),
-	'$lgt_ji_subsumes_term'(GenArg, SpeArg, Vars),
-	M is N-1, !,
-	'$lgt_ji_subsumes_term'(M, General, Specific, Vars).
-
-'$lgt_ji_var_member_chk'(Var, [Head| Tail]) :-
-	(	Var == Head ->
-		true
-	;	'$lgt_ji_var_member_chk'(Var, Tail)
-	).
+'$lgt_ji_subsumes'(General, Specific) :-
+	term_variables(Specific, Vars1),
+	writeq(term_variables(Specific, Vars1)), nl,
+	General = Specific,
+	writeq(General = Specific), nl,
+	term_variables(Vars1, Vars2),
+	writeq(term_variables(Vars1, Vars2)), nl,
+	Vars1 == Vars2.
 
 
 
@@ -255,7 +234,7 @@ format(Format, Arguments) :-
 '$lgt_prolog_feature'(prolog_dialect, ji).
 '$lgt_prolog_feature'(prolog_version, (Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, jiprolog(Major, Minor, Patch, _)).
-'$lgt_prolog_feature'(prolog_compatible_version, @>=((4,0,1))).
+'$lgt_prolog_feature'(prolog_compatible_version, @>=((4,0,2))).
 '$lgt_prolog_feature'(prolog_conformance, iso_lax).
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
