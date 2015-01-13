@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for JIProlog 4.0.2-2 or later versions
-%  Last updated on January 10, 2015
+%  Last updated on January 12, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -48,11 +48,8 @@ subsumes_term(General, Specific) :-
 
 '$lgt_ji_subsumes'(General, Specific) :-
 	term_variables(Specific, Vars1),
-	writeq(term_variables(Specific, Vars1)), nl,
 	General = Specific,
-	writeq(General = Specific), nl,
 	term_variables(Vars1, Vars2),
-	writeq(term_variables(Vars1, Vars2)), nl,
 	Vars1 == Vars2.
 
 
