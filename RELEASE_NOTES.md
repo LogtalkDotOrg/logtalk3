@@ -52,6 +52,9 @@ Documentation
 
 * ADDED: User Manual section on reserved predicates names.
 
+* IMPROVED: Reference Manual sections on the `uses/2` and `use_module/2`
+directives.
+
 
 3.00.0 - January 7, 2015
 ========================
