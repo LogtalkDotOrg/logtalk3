@@ -340,20 +340,25 @@ to the library predicates.
 
 MacOS X users of the `SWI-Prolog.app` application, must add the definitions
 for the `LOGTALKHOME` and `LOGTALKUSER` environment variables to their
-`~/.plrc` init file (as Mac OS X GUI applications *don't* inherit environment
-variable values):
+`~/.plrc` init file (as Mac OS X GUI applications *don't* inherit shell
+environment variable values):
 
 	:- setenv('LOGTALKHOME', ...).
 	:- setenv('LOGTALKUSER', ...).
 
-To load Logtalk when using the `SWI-Prolog.app` application, you can use
-the goal:
+To load Logtalk *on-demand* when using the `SWI-Prolog.app` application, you
+can use the goal:
 
 	?- ['$LOGTALKHOME/integration/logtalk_swi.pl'].
 
-In alternative, if you want to be able to use Logtalk using both the shell
-integration script and the GUI application, you can also add to the `.plrc`
-init file the lines:
+In alternative, you can copy the `scripts/pack/logtalk/prolog/logtalk.pl`
+file to the SWI-Prolog library directory and then use the query:
+
+	?- use_module(library(logtalk)).
+
+If you want to load automatically Logtalk at startup and be able to use it
+with both the shell integration script and the Mac OS X GUI application, you
+can add to the `.plrc` init file the lines:
 
 	:- if((current_prolog_flag(home,HOME), sub_atom(HOME,_,_,0,'SWI-Prolog.app/Contents/swipl'))).
 		:- ['$LOGTALKHOME/integration/logtalk_swi.pl'].
