@@ -147,8 +147,16 @@ Testing input/output predicates
 
 Extensive support for testing input/output predicates is provided, based on
 similar support found on the Prolog conformance testing framework written by
-Péter Szabó and Péter Szeredi. For practical examples, check the included
-tests for Prolog conformance of standard input/output predicates.
+Péter Szabó and Péter Szeredi.
+
+Two sets of predicates are provided, one for testing text input/output and
+one for testing binary input/output. In both cases, temporary files (possibly
+referenced by a user-defined alias) are used. The predicates allow setting,
+checking, and cleaning text/binary input/output. There is also a small set of
+helper predicates for dealing with stream handles and stream positions.
+
+For practical examples, check the included tests for Prolog conformance of
+standard input/output predicates.
 
 
 Unit tests with timeout limits
