@@ -48,6 +48,7 @@ cp -R logtalk-$version/scripts/pack pack-$version
 cp -R logtalk-$version pack-$version/logtalk
 cd pack-$version
 tar zcvf logtalk-$version.tgz logtalk
+mv logtalk-$version.tgz ..
 cd ..
 
 cp -R logtalk-$version/manuals logtalk-manuals-$version
