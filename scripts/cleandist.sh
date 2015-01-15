@@ -6,6 +6,7 @@
 ##   Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Distribution clean script for packaging
+##   Last updated on January 15, 2015
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -34,6 +35,7 @@ find . -name '.#*' -print0 | xargs -0 rm -f
 find . -name .DS_Store -print0 | xargs -0 rm -f
 find . -name '.gdb*' -print0 | xargs -0 rm -f
 find . -name .pl-history -print0 | xargs -0 rm -f
+find . -name .lgt_tmp -print0 | xargs -0 rm -rf
 
 find . -type f -print0 | xargs -0 chmod 644
 find . -type d -print0 | xargs -0 chmod 755

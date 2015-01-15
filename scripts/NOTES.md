@@ -38,7 +38,8 @@ using the `apropos logtalk` command.
 	(e.g. 3.00.0-a8)
 
 - `cleandist.sh`  
-	script for cleaning a Logtalk distribution in preparation for packaging
+	script for cleaning a Logtalk distribution in preparation for packaging;
+	expects to be called from the parent directory of the `scripts` directory
 
 - `install.sh`  
 	shell script for installing Logtalk in POSIX operating systems. When
