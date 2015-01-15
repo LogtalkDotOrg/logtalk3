@@ -39,6 +39,8 @@ in the adapter files for CxProlog, JIProlog, and Qu-prolog for conformance.
 Installers and installation scripts
 -----------------------------------
 
+* ADDED: Support files for creating a `logtalk` SWI-Prolog pack.
+
 * FIXED: Bug in the MacPorts portfile in the post-activate step while updating
 the freedesktop.org shared MIME-info database.
 

@@ -100,6 +100,9 @@ using the `apropos logtalk` command.
 	directory containing files used when building MacOS X installer 
 	packages
 
+- `pack`  
+	support files for creating a `logtalk` SWI-Prolog pack
+
 - `windows`  
 	directory containing files used when building Windows GUI installers
 

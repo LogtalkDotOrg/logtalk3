@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Release build script
-##   Last updated on January 8, 2015
+##   Last updated on January 15, 2015
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -42,8 +42,14 @@ directory=`PWD`
 cd logtalk-$version
 chmod a+x scripts/cleandist.sh
 scripts/cleandist.sh
-
 cd ..
+
+cp -R logtalk-$version/scripts/pack pack-$version
+cp -R logtalk-$version pack-$version/logtalk
+cd pack-$version
+tar zcvf logtalk-$version.tgz logtalk
+cd ..
+
 cp -R logtalk-$version/manuals logtalk-manuals-$version
 tar -czf logtalk-manuals-$version.tgz logtalk-manuals-$version
 tar -cjf logtalk-$version.tar.bz2 logtalk-$version
