@@ -22,11 +22,11 @@ ________________________________________________________________________
 
 
 This is a SWI-Prolog pack specific README file. The actual Logtalk
-README file can be found at `../logtalk-3.00.0-stable/README.md`.
-Follows some notes on this pack version of Logtalk.
+README file can be found at `../logtalk-3.00.1/README.md`. Follows
+some notes on this pack version of Logtalk.
 
-Installing this pack simplifies loading Logtalk on-demand by using the
-directive (or the corresponding query):
+Installing this pack simplifies loading Logtalk on-demand by simply
+using the directive (or the corresponding query):
 
 	:- use_module(library(logtalk)).
 
@@ -35,18 +35,19 @@ Note, however, that Logtalk is not packaged as a module and that the
 that loads Logtalk in exactly the same way as when Logtalk is installed
 using on of its prebuilt installers.
 
-When using the directive above, the LOGTALKHOME and LOGTALKUSER shell
-environment variables are set just for the running SWI-Prolog process
-to the `../logtalk-3.00.0-stable` directory.
+When using the directive above, the `LOGTALKHOME` and `LOGTALKUSER`
+shell environment variables are set, just for the duration of the
+SWI-Prolog process, to the full path of the `../logtalk-3.00.1`
+directory.
 
-For easy access the contents of the Logtalk installation folder (e.g.
-documentation or examples) you can create a symbolic link to the
-`../logtalk-3.00.0-stable` directory (in e.g. your home directory).
-Its full path can be easily found by using the query:
+For easy access to the contents of the Logtalk installation folder
+(e.g. documentation or examples) you can create a symbolic link to the
+`../logtalk-3.00.01` directory (in e.g. your home directory). Its full
+path can be easily found by using the query:
 
 	?- pack_info(logtalk).
 
-The `../logtalk-3.00.0-stable` directory contains a `settings.lgt` file
-that makes loading of Logtalk silent. If you make other changes to this
-file, or to other contents of the `../logtalk-3.00.0-stable` directory,
-be sure to make a backup before upgrading Logtalk or removing its pack.
+The `../logtalk-3.00.1` directory contains a `settings.lgt` file that
+makes loading of Logtalk silent. If you make other changes to this file,
+or to other contents of the `../logtalk-3.00.1` directory, be sure to
+make a backup before upgrading or removing this pack.
