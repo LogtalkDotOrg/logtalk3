@@ -31,8 +31,8 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* FIXED: Bug where the `debugging` would always be false for categories and
-protocols.
+* FIXED: Bug where the `debugging` entity property would always be false for
+categories and protocols.
 
 Prolog adapter and integration files
 ------------------------------------
