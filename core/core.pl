@@ -812,7 +812,7 @@ category_property(Ctg, Prop) :-
 	'$lgt_category_property'(Prop, Ctg, Dcl, Def, Flags).
 
 
-'$lgt_category_property'(debugging, _, _, _, _, _, Flags) :-
+'$lgt_category_property'(debugging, _, _, _, Flags) :-
 	Flags /\ 512 =:= 512.
 '$lgt_category_property'(events, _, _, _, Flags) :-
 	Flags /\ 16 =:= 16.
@@ -889,7 +889,7 @@ protocol_property(Ptc, Prop) :-
 	'$lgt_protocol_property'(Prop, Ptc, Dcl, Flags).
 
 
-'$lgt_protocol_property'(debugging, _, _, _, _, _, Flags) :-
+'$lgt_protocol_property'(debugging, _, _, Flags) :-
 	Flags /\ 512 =:= 512.
 '$lgt_protocol_property'((dynamic), _, _, Flags) :-
 	Flags /\ 2 =:= 2.

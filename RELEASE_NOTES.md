@@ -28,13 +28,19 @@ RELEASE NOTES
 3.00.1 - January ??, 2015
 =========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Bug where the `debugging` would always be false for categories and
+protocols.
+
 Prolog adapter and integration files
 ------------------------------------
 
 * UPDATED: JIProlog adapter file for changes in version 4.0.2-2.
 
 * FIXED: Hacked definition for missing `subsumes_term/2` standard predicate
-in the adapter files for CxProlog, JIProlog, and Qu-prolog for conformance.
+in the adapter files for CxProlog, JIProlog, and Qu-Prolog for conformance.
 
 Installers and installation scripts
 -----------------------------------
