@@ -894,6 +894,8 @@ The following predicate properties are supported:
 		<dd>The predicate resulted from the compilation of the specified grammar rule non-terminal</dd>
 	<dt><code>alias_of(Predicate)</code></dt>
 		<dd>The predicate (name) is an alias for the specified predicate</dd>
+	<dt><code>alias_declared_in(Entity)</code></dt>
+		<dd>The predicate alias is declared in the specified entity</dd>
 	<dt><code>synchronized</code></dt>
 		<dd>The predicate is declared as synchronized (i.e. it's a deterministic predicate synchronized using a mutex when using a backend Prolog compiler supporting a compatible multi-threading implementation)</dd>
 </dl>
@@ -915,6 +917,8 @@ Some properties are only available when the entities are defined in source files
 		<dd>The predicate is defined in the specified entity in a source file at the specified line (if applicable)</dd>
 	<dt><code>redefined_from(Entity, Line)</code></dt>
 		<dd>The predicate is a redefinition of a predicate definition inherited from the specified entity, which is defined in a source file at the specified line (if applicable)</dd>
+	<dt><code>alias_declared_in(Entity, Line)</code></dt>
+		<dd>The predicate alias is declared in the specified entity in a source file at the specified line (if applicable)</dd>
 </dl>
 <p>
 The properties <code>declared_in/1-2</code>, <code>defined_in/1-2</code>, and <code>redefined_from/1-2</code> do not apply to built-in methods and Logtalk or Prolog built-in predicates. Note that if a predicate is declared in a category imported by the object, it will be the category name &mdash; not the object name &mdash; that will be returned by the property <code>declared_in/1</code>. The same is true for protocol declared predicates.
@@ -1020,7 +1024,7 @@ This workaround is sometimes necessary when calling module meta-predicates whose
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: January 10, 2015</span>
+		<span>Last updated on: January 20, 2015</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="categories.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="inheritance.html">next</a></span><br/>
