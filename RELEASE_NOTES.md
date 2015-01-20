@@ -43,9 +43,10 @@ similar to the `declared_in/1` and `declared_in/2` properties but for predicate
 aliases, when defined. The second property is only available when compiling
 with the `source_data` flag turned on.
 
-* IMPROVED: The compiler now also generates `calls/2` entity properties for
-`uses/2` directives as their compilation generates auxiliary linking clauses
-calling the referenced predicates to cope with runtime constructed goals.
+* IMPROVED: The compiler now also generates `calls/2` entity properties
+for `uses/2` and `use_module/2` directives as their compilation generates
+auxiliary linking clauses calling the referenced predicates to cope with
+runtime constructed goals.
 
 * FIXED: Bug where the `debugging` entity property would always be false for
 categories and protocols.
