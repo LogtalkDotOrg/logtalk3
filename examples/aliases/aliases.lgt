@@ -48,6 +48,14 @@ defining alternative names for inherited predicates.
 :- end_object.
 
 
+% we can also define a 1x1 square:
+
+:- object(square1,
+	extends(square(1))).
+
+:- end_object.
+
+
 % a similar example can be defined using ellipses and circles:
 
 :- object(ellipse(_RX, _RY)).

@@ -31,6 +31,22 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Entity property `alias/2`. The first argument is the predicate alias
+and the second argument is a list of properties. The valid properties are:
+`for/1` (the original predicate), `from/1` (the entity referenced in the
+`alias/3` directive), and `line_count/1` (the start line for the `alias/3`
+directive; only available when compiling with the `source_data` flag turned
+on).
+
+* ADDED: Predicate properties `alias_declared_in/1` and `alias_declared_in/2`,
+similar to the `declared_in/1` and `declared_in/2` properties but for predicate
+aliases, when defined. The second property is only available when compiling
+with the `source_data` flag turned on.
+
+* IMPROVED: The compiler now also generates `calls/2` entity properties for
+`uses/2` directives as their compilation generates auxiliary linking clauses
+calling the referenced predicates to cope with runtime constructed goals.
+
 * FIXED: Bug where the `debugging` entity property would always be false for
 categories and protocols.
 
