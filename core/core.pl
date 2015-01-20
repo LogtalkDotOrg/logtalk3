@@ -1055,12 +1055,14 @@ protocol_property(Ptc, Prop) :-
 	Properties = [line_count(Line), number_of_clauses(N)].
 
 
-'$lgt_entity_property_alias'(Entity, Rnm, Alias, Properties) :-
-	(	'$lgt_entity_property_'(Entity, alias(From, Pred, Alias, Line)) ->
-		Properties = [for(Pred), from(From), line_count(Line)]
-	;	call(Rnm, From, Pred, Alias),
+'$lgt_entity_property_alias'(Entity, Rnm, AFunctor/AArity, Properties) :-
+	(	'$lgt_entity_property_'(Entity, alias(From, OFunctor/OArity, AFunctor/AArity, Line)) ->
+		Properties = [for(OFunctor/OArity), from(From), line_count(Line)]
+	;	call(Rnm, From, Original, Alias),
 		nonvar(From),
-		Properties = [for(Pred), from(From)]
+		functor(Original, OFunctor/OArity),
+		functor(Alias, AFunctor, AArity),
+		Properties = [for(OFunctor/OArity), from(From)]
 	).
 
 
@@ -2564,7 +2566,9 @@ current_logtalk_flag(Flag, Value) :-
 	Alias \= Original.
 '$lgt_predicate_property_user'(alias_declared_in(Entity, Line), Alias, Original, Entity, _, _, _, _, _, _, _) :-
 	Alias \= Original,
-	'$lgt_entity_property_'(Entity, alias(_, Original, Alias, Line)).
+	functor(Original, OFunctor, OArity),
+	functor(Alias, AFunctor, AArity),
+	'$lgt_entity_property_'(Entity, alias(_, OFunctor/OArity, AFunctor/AArity, Line)).
 '$lgt_predicate_property_user'(logtalk, _, _, _, _, _, _, _, _, _, _).
 '$lgt_predicate_property_user'(scope(Scope), _, _, _, Scope, _, _, _, _, _, _).
 '$lgt_predicate_property_user'((public), _, _, _, (public), _, _, _, _, _, _).
@@ -5768,7 +5772,9 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_add_entity_properties'(_, Entity) :-
 	'$lgt_pp_predicate_alias_'(For, Pred, Alias, Line-_),
-	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, alias(For, Pred, Alias, Line)))),
+	functor(Pred, OFunctor, OArity),
+	functor(Alias, AFunctor, AArity),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, alias(For, OFunctor/OArity, AFunctor/AArity, Line)))),
 	fail.
 
 '$lgt_add_entity_properties'(_, _).

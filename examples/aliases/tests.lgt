@@ -67,15 +67,15 @@
 		list::subsequence(AllPropertiesSorted, PropertiesSorted, _).
 
 	test(aliases_09) :-
-		object_property(square(_), alias(side(_), AllProperties)),
+		object_property(square(_), alias(side/1, AllProperties)),
 		list::msort(AllProperties, AllPropertiesSorted),
-		list::msort([for(width(_)), from(rectangle(_,_)), line_count(_)], PropertiesSorted),
+		list::msort([for(width/1), from(rectangle(_,_)), line_count(_)], PropertiesSorted),
 		list::subsequence(AllPropertiesSorted, PropertiesSorted, _).
 
 	test(aliases_10) :-
-		object_property(circle(_), alias(r(_), AllProperties)),
+		object_property(circle(_), alias(r/1, AllProperties)),
 		list::msort(AllProperties, AllPropertiesSorted),
-		list::msort([for(rx(_)), from(ellipse(_,_)), line_count(_)], PropertiesSorted),
+		list::msort([for(rx/1), from(ellipse(_,_)), line_count(_)], PropertiesSorted),
 		list::subsequence(AllPropertiesSorted, PropertiesSorted, _).
 
 :- end_object.
