@@ -16,8 +16,8 @@ with SWI-Prolog and YAP. This abstraction makes use of Logtalk parametric
 objects and allows creating Java object, accessing Java class fields, and
 calling Java class and object methods using a more Logtalk-like syntax.
 
-For demonstration, adaptations of the JColorChooser dialog example and the
-JTable example from the JPL distribution are included.
+For demonstration, adaptations of the JColorChooser and JOptionPane dialog
+examples and the JTable example from the JPL distribution are included.
 
 When running the GUI examples on the Mac OS X Terminal application, you may
 get a Java error saying that the AWT cannot be started. In alternative, try

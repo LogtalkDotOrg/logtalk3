@@ -14,31 +14,29 @@
 % the original code was converted to use the minimal abstraction of the JPL
 % API for calling Java from Logtalk using familiar message sending syntax
 
-:- object(color_chooser).
+:- object(text_entry).
 
 	:- info([
 		version is 1.0,
 		author is 'Paul Singleton; adapted to Logtalk by Paulo Moura.',
 		date is 2015/01/21,
-		comment is 'JColorChooser dialog example from the JPL distribution.'
+		comment is 'JOptionPane dialog example from the JPL distribution.'
 	]).
 
-	:- public(get_color/1).
-	:- mode(get_color(-javaref), zero_or_one).
-	:- info(get_color/1, [
-		comment is 'Shows a JColorChooser dialog, on top of a (necessary) JFrame, and awaits OK/Cancel click.'
+	:- public(text/1).
+	:- mode(text(-atom), zero_or_one).
+	:- info(text/1, [
+		comment is 'Shows a JOptionPane dialog, on top of a (necessary) new JFrame, and awaits text entry and OK/Cancel button click.'
 	]).
 
-	get_color(Color) :-
+	text(Text) :-
 		java('javax.swing.JFrame')::new(['frame with dialog'], Frame),
 		java(Frame)::setLocation(400,300),
 		java(Frame)::setSize(400,300),
 		java(Frame)::setVisible(@(true)),
 		java(Frame)::toFront,
-		java(Frame, ContentPane)::getContentPane,
-		java('java.awt.Color')::get_field(pink, Pink),
-		java('javax.swing.JColorChooser', Color)::showDialog(ContentPane,'pick a colo(u)r',Pink),
+		java('javax.swing.JOptionPane', Text)::showInputDialog(Frame, 'type your name'),
 		java(Frame)::dispose,
-		Color \== @(null).
+		Text \== @(null).
 
 :- end_object.
