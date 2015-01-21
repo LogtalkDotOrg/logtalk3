@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for GNU Prolog 1.4.2 (and later versions)
-%  Last updated on December 20, 2014
+%  Last updated on January 21, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -210,7 +210,11 @@ setup_call_cleanup(_, _, _) :-
 '$lgt_prolog_feature'(encoding_directive, unsupported).
 '$lgt_prolog_feature'(tabling, unsupported).
 '$lgt_prolog_feature'(threads, unsupported).
-'$lgt_prolog_feature'(modules, unsupported).
+:- if(predicate_property(current_module(_), built_in)).
+	'$lgt_prolog_feature'(modules, supported).
+:- else.
+	'$lgt_prolog_feature'(modules, unsupported).
+:- endif.
 '$lgt_prolog_feature'(coinduction, unsupported).
 
 
@@ -729,7 +733,11 @@ with_mutex(_, _) :- fail.
 
 % '$lgt_user_module_qualification'(@callable, -callable)
 
-'$lgt_user_module_qualification'(Goal, Goal).
+:- if(predicate_property(current_module(_), built_in)).
+	'$lgt_user_module_qualification'(Goal, ':'(user,Goal)).
+:- else.
+	'$lgt_user_module_qualification'(Goal, Goal).
+:- endif.
 
 
 
