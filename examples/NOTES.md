@@ -190,6 +190,7 @@ Follows a short description of each included example (in alphabetical order):
 - `jpl`  
 	example of defining a minimal abstraction of the JPL API for
 	calling Java from Logtalk using familiar message sending syntax
+	(requires Logtalk to be run with SWI-Prolog or YAP)
 
 - `lambdas`  
 	example of using lambda expressions
@@ -233,7 +234,7 @@ Follows a short description of each included example (in alphabetical order):
 	unsorted examples
 
 - `modules`  
-	simple example of compiling Prolog module files as objects
+	simple example of compiling Prolog modules as objects
 
 - `msglog`  
 	example of using events and monitors for recording, replaying, 
@@ -244,7 +245,7 @@ Follows a short description of each included example (in alphabetical order):
 	Logtalk objects and categories
 
 - `named_databases`
-    example of an implementation of Lean Prolog API for named
+    example of an implementation of the Lean Prolog API for named
     databases for Prolog compilers with a module system
 
 - `operators`  
