@@ -15,3 +15,12 @@ This folder contains a minimal abstraction of the JPL library distributed
 with SWI-Prolog and YAP. This abstraction makes use of Logtalk parametric
 objects and allows creating Java object, accessing Java class fields, and
 calling Java class and object methods using a more Logtalk-like syntax.
+
+As a demonstration, an adaptation of the JColorChooser dialog example from
+the JPL distribution is included.
+
+When running the GUI example on Mac OS X Terminal application, you may get
+a Java error saying that the AWT cannot be started. In alternative, try to
+run the example from within the SWI-Prolog Mac OS X application instead of
+using the shell integration script. This issue is due to a Mac OS X Java
+issue that's orthogonal to both SWI-Prolog/YAP and Logtalk.

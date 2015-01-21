@@ -34,3 +34,14 @@ yes
 
 | ?- java('java.util.ArrayList')::new(ArrayList), java(ArrayList)::(add('Paulo'), add('Carlos'), add('Helena')).
 yes
+
+
+% a GUI example, presenting a JColorChooser dialog
+
+| ?- logtalk_load(jpl(color_chooser)).
+...
+
+| ?- color_chooser::get_color(Color).
+
+Color = @'J#00000140727398998200'
+yes

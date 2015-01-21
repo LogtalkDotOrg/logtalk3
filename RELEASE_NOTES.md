@@ -83,6 +83,12 @@ Documentation
 * IMPROVED: Reference Manual sections on the `uses/2` and `use_module/2`
 directives.
 
+Examples
+--------
+
+* ADDED: The `jpl` example now includes also a GUI example adapted from an
+example found in the JPL distribution.
+
 
 3.00.0 - January 7, 2015
 ========================
