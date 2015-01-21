@@ -24,6 +24,11 @@
 	]).
 
 	:- public(get_color/1).
+	:- mode(get_color(-javaref), zero_or_one).
+	:- info(get_color/1, [
+		comment is 'Shows a JColorChooser dialog, on top of a (necessary) JFrame, and awaits OK/Cancel click'
+	]).
+
 	get_color(Color) :-
 		java('javax.swing.JFrame')::new(['frame with dialog'], Frame),
 		java(Frame)::setLocation(400,300),

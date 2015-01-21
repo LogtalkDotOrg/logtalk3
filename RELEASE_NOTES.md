@@ -86,8 +86,8 @@ directives.
 Examples
 --------
 
-* ADDED: The `jpl` example now includes also a GUI example adapted from an
-example found in the JPL distribution.
+* ADDED: The `jpl` example now includes also two GUI examples adapted from
+examples found in the JPL distribution.
 
 
 3.00.0 - January 7, 2015
