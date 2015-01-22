@@ -59,8 +59,8 @@ presence of a native module system.
 
 * UPDATED: JIProlog adapter file for changes in version 4.0.2-2.
 
-* FIXED: Hacked definition for missing `subsumes_term/2` standard predicate
-in the adapter files for CxProlog, JIProlog, and Qu-Prolog for conformance.
+* FIXED: Definition for the missing `subsumes_term/2` standard predicate in
+the adapter files for CxProlog, JIProlog, and Qu-Prolog for conformance.
 
 Installers and installation scripts
 -----------------------------------
@@ -81,12 +81,12 @@ Documentation
 * ADDED: User Manual section on reserved predicates names.
 
 * IMPROVED: Reference Manual sections on the `uses/2` and `use_module/2`
-directives.
+directives and on the `{}/1` compiler bypass control construct.
 
 Examples
 --------
 
-* ADDED: The `jpl` example now includes also two GUI examples adapted from
+* ADDED: The `jpl` example now includes some GUI examples adapted from
 examples found in the JPL distribution.
 
 

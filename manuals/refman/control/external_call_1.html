@@ -39,10 +39,10 @@
 <pre>{Term}
 {Goal}</pre>
 <p>
-This control construct allows the programmer to bypass the Logtalk compiler. It can be used to wrap a source file term or a goal. It can also be used as a message to any object. In the case of a goal, it is opaque to cuts and the argument is called within the context of the pseudo-object <a class="glossary" title="Go to glossary definition" href="../../userman/objects.html#objects_user">user</a>. It is also possible to use <code>{Closure}</code> as the first argument of <code>call/2-N</code> calls. In this case, <code>Closure</code> will be extended with the remaining arguments of the <code>call/2-N</code> call in order to construct a goal that will be called within the context of <code>user</code>.
+This control construct allows the programmer to bypass the Logtalk compiler. It can be used to wrap a source file term (either a clause or a directive) to bypass the term-expansion mechanism. Similarly, it can be used to wrap a goal to bypass the goal-expansion mechanism. When used to wrap a goal, it is opaque to cuts and the argument is called within the context of the pseudo-object <a class="glossary" title="Go to glossary definition" href="../../userman/objects.html#objects_user">user</a>. It is also possible to use <code>{Closure}</code> as the first argument of <code>call/2-N</code> calls. In this case, <code>Closure</code> will be extended with the remaining arguments of the <code>call/2-N</code> call in order to construct a goal that will be called within the context of <code>user</code>. It can also be used as a message to any object. This is useful when the message is e.g. a conjunction of messages, some of which being calls to Prolog built-in predicates.
 </p>
 <p>
-This control construct may also be used in place of an object identifier when sending a message. In this case, the result of proving its argument as a goal (within the context of the pseudo-object <code>user</code>) is used as an object identifier in the message sending call.
+This control construct may also be used in place of an object identifier when sending a message. In this case, the result of proving its argument as a goal (within the context of the pseudo-object <code>user</code>) is used as an object identifier in the message sending call. This feature is mainly used with parametric objects when the their identifiers correspond to predicates defined in <code>user</code>.
 </p>
 
 <h4>Template and modes</h4>
@@ -79,7 +79,7 @@ yes
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: March 28, 2014</span>
+		<span>Last updated on: January 22, 2015</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="../index.html#constructs">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="../index.html#constructs">next</a></span><br/>
