@@ -1060,7 +1060,7 @@ protocol_property(Ptc, Prop) :-
 		Properties = [for(OFunctor/OArity), from(From), line_count(Line)]
 	;	call(Rnm, From, Original, Alias),
 		nonvar(From),
-		functor(Original, OFunctor/OArity),
+		functor(Original, OFunctor, OArity),
 		functor(Alias, AFunctor, AArity),
 		Properties = [for(OFunctor/OArity), from(From)]
 	).
