@@ -1055,15 +1055,21 @@ protocol_property(Ptc, Prop) :-
 	Properties = [line_count(Line), number_of_clauses(N)].
 
 
+'$lgt_entity_property_alias'(Entity, _, AFunctor/AArity, Properties) :-
+	'$lgt_entity_property_'(Entity, alias(From, OFunctor/OArity, AFunctor/AArity, Line)),
+	% entity compiled with the source_data flag turned on
+	Properties = [for(OFunctor/OArity), from(From), line_count(Line)].
+
 '$lgt_entity_property_alias'(Entity, Rnm, AFunctor/AArity, Properties) :-
-	(	'$lgt_entity_property_'(Entity, alias(From, OFunctor/OArity, AFunctor/AArity, Line)) ->
-		Properties = [for(OFunctor/OArity), from(From), line_count(Line)]
-	;	call(Rnm, From, Original, Alias),
-		nonvar(From),
-		functor(Original, OFunctor, OArity),
-		functor(Alias, AFunctor, AArity),
-		Properties = [for(OFunctor/OArity), from(From)]
-	).
+	\+ '$lgt_entity_property_'(Entity, alias(_, _, _, _)),
+	% either entity compiled with the source_data flag turned off
+	% or no alias declared in the entity; in any case we need to
+	% avoid duplicate answers
+	call(Rnm, From, Original, Alias),
+	nonvar(From),
+	functor(Original, OFunctor, OArity),
+	functor(Alias, AFunctor, AArity),
+	Properties = [for(OFunctor/OArity), from(From)].
 
 
 '$lgt_entity_property_calls'(Entity, Predicate, Properties) :-

@@ -92,13 +92,18 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2015/01/20,
+		date is 2015/01/23,
 		comment is 'Unit tests for the alias/2 built-in directive.'
 	]).
 
-	% test all possible syntaxes for the directive
+	% test all possible syntaxes for the directive and the definition
+	% of one or more than one alias per directive
+
 	:- alias(lgtunit, [run/0 as run_alias1/0]).
 	:- alias(lgtunit, [run/0 :: run_alias2/0]).
+	:- alias(lgtunit, [
+		run/0 as run_alias3/0, run/0 as run_alias4/0
+	]).
 
 	% tests for predicate aliases defined in prototypes
 
@@ -116,16 +121,30 @@
 		predicate_property(run_alias2, declared_in(lgtunit)),
 		predicate_property(run_alias2, defined_in(lgtunit)).
 
+	test(alias_2_3) :-
+		predicate_property(run_alias3, alias_of(run)),
+		predicate_property(run_alias3, alias_declared_in(tests)),
+		predicate_property(run_alias3, alias_declared_in(tests,_)),
+		predicate_property(run_alias3, declared_in(lgtunit)),
+		predicate_property(run_alias3, defined_in(lgtunit)).
+
+	test(alias_2_4) :-
+		predicate_property(run_alias4, alias_of(run)),
+		predicate_property(run_alias4, alias_declared_in(tests)),
+		predicate_property(run_alias4, alias_declared_in(tests,_)),
+		predicate_property(run_alias4, declared_in(lgtunit)),
+		predicate_property(run_alias4, defined_in(lgtunit)).
+
 	% tests for predicate aliases defined in protocols and categories
 
-	test(alias_2_3) :-
+	test(alias_2_5) :-
 		alias_2_test_prototype::predicate_property(c(_), alias_of(b(_))),
 		alias_2_test_prototype::predicate_property(c(_), alias_declared_in(alias_2_test_category)),
 		alias_2_test_prototype::predicate_property(c(_), alias_declared_in(alias_2_test_category, _)),
 		alias_2_test_prototype::predicate_property(c(_), declared_in(alias_2_test_protocol_1)),
 		alias_2_test_prototype::predicate_property(c(_), defined_in(alias_2_test_category)).
 
-	test(alias_2_4) :-
+	test(alias_2_6) :-
 		alias_2_test_prototype::predicate_property(b(_), alias_of(a(_))),
 		alias_2_test_prototype::predicate_property(b(_), alias_declared_in(alias_2_test_protocol_2)),
 		alias_2_test_prototype::predicate_property(b(_), alias_declared_in(alias_2_test_protocol_2,_)),
@@ -133,14 +152,14 @@
 
 	% tests for predicate aliases defined in instances and classes
 
-	test(alias_2_5) :-
+	test(alias_2_7) :-
 		alias_2_test_instance::predicate_property(q(_), alias_of(p(_))),
 		alias_2_test_instance::predicate_property(q(_), alias_declared_in(alias_2_test_subclass)),
 		alias_2_test_instance::predicate_property(q(_), alias_declared_in(alias_2_test_subclass,_)),
 		alias_2_test_instance::predicate_property(q(_), declared_in(alias_2_test_class)),
 		alias_2_test_instance::predicate_property(q(_), defined_in(alias_2_test_class)).
 
-	test(alias_2_6) :-
+	test(alias_2_8) :-
 		alias_2_test_instance::predicate_property(r(_), alias_of(p(_))),
 		alias_2_test_instance::predicate_property(r(_), alias_declared_in(alias_2_test_instance)),
 		alias_2_test_instance::predicate_property(r(_), alias_declared_in(alias_2_test_instance,_)),
