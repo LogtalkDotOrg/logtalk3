@@ -36,12 +36,34 @@ yes
 yes
 
 
-% a GUI example, presenting a JColorChooser dialog
+% some GUI examples, adapted from the JPL distribution examples
 
 | ?- logtalk_load(jpl(color_chooser)).
 ...
 
-| ?- color_chooser::get_color(Color).
+| ?- color_chooser::color(Color).
 
 Color = @'J#00000140727398998200'
+yes
+
+
+| ?- logtalk_load(jpl(flags_table)).
+...
+
+| ?- flags_table::display.
+yes
+
+
+| ?- logtalk_load(jpl(jlist)).
+...
+
+| ?- jlist::display.
+yes
+
+
+| ?- logtalk_load(jpl(text_entry)).
+...
+
+| ?- text_entry::text(Text).
+Text = ...
 yes

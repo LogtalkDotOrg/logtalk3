@@ -23,21 +23,21 @@
 		comment is 'JColorChooser dialog example from the JPL distribution.'
 	]).
 
-	:- public(get_color/1).
-	:- mode(get_color(-javaref), zero_or_one).
-	:- info(get_color/1, [
+	:- public(color/1).
+	:- mode(color(-javaref), zero_or_one).
+	:- info(color/1, [
 		comment is 'Shows a JColorChooser dialog, on top of a (necessary) JFrame, and awaits OK/Cancel click.'
 	]).
 
-	get_color(Color) :-
+	color(Color) :-
 		java('javax.swing.JFrame')::new(['frame with dialog'], Frame),
-		java(Frame)::setLocation(400,300),
-		java(Frame)::setSize(400,300),
+		java(Frame)::setLocation(400, 300),
+		java(Frame)::setSize(400, 300),
 		java(Frame)::setVisible(@(true)),
 		java(Frame)::toFront,
 		java(Frame, ContentPane)::getContentPane,
 		java('java.awt.Color')::get_field(pink, Pink),
-		java('javax.swing.JColorChooser', Color)::showDialog(ContentPane,'pick a colo(u)r',Pink),
+		java('javax.swing.JColorChooser', Color)::showDialog(ContentPane, 'pick a colo(u)r', Pink),
 		java(Frame)::dispose,
 		Color \== @(null).
 

@@ -14,29 +14,35 @@
 % the original code was converted to use the minimal abstraction of the JPL
 % API for calling Java from Logtalk using familiar message sending syntax
 
-:- object(text_entry).
+:- object(jlist).
 
 	:- info([
 		version is 1.0,
 		author is 'Paul Singleton; adapted to Logtalk by Paulo Moura.',
-		date is 2015/01/21,
-		comment is 'JOptionPane dialog example from the JPL distribution.'
+		date is 2015/01/23,
+		comment is 'JList dialog example from the JPL distribution.'
 	]).
 
-	:- public(text/1).
-	:- mode(text(-atom), zero_or_one).
-	:- info(text/1, [
-		comment is 'Shows a JOptionPane dialog, on top of a (necessary) new JFrame, and awaits text entry and OK/Cancel button click.'
+	:- public(display/0).
+	:- mode(display, one).
+	:- info(display/0, [
+		comment is 'Displays the names of all current loaded protocols in a JList.'
 	]).
 
-	text(Text) :-
-		java('javax.swing.JFrame')::new(['frame with dialog'], Frame),
-		java(Frame)::setLocation(400, 300),
-		java(Frame)::setSize(400, 300),
-		java(Frame)::setVisible(@(true)),
-		java(Frame)::toFront,
-		java('javax.swing.JOptionPane', Text)::showInputDialog(Frame, 'type your name'),
-		java(Frame)::dispose,
-		Text \== @(null).
+	display :-
+		java('javax.swing.JFrame')::new(['protocols'], Frame),
+		java('javax.swing.DefaultListModel')::new(DefaultListModel),
+		java('javax.swing.JList')::new([DefaultListModel], List),
+		java(Frame, ContentPane)::getContentPane,
+		java(ContentPane)::add(List),
+		(	current_protocol(Protocol),
+			java(DefaultListModel)::addElement(Protocol),
+			fail
+		;	true
+		),
+		java(Frame)::pack,
+		java(Frame, Height)::getHeight,
+		java(Frame)::setSize(150, Height),
+		java(Frame)::setVisible(@(true)).
 
 :- end_object.
