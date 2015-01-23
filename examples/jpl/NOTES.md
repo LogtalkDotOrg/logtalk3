@@ -19,6 +19,10 @@ calling Java class and object methods using a more Logtalk-like syntax.
 For demonstration, adaptations of the JColorChooser and JOptionPane dialog
 examples and the JTable example from the JPL distribution are included.
 
+There are two loader files in this example, The `loader.lgt` file loads
+only the JPL library and the Logtalk abstraction of the JPL API. The
+`examples.lgt` file loads base files and the examples.
+
 When running the GUI examples on the Mac OS X Terminal application, you may
 get a Java error saying that the AWT cannot be started. In alternative, try
 to run the example from within the SWI-Prolog Mac OS X application instead

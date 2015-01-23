@@ -46,6 +46,6 @@
 		java('javax.swing.JScrollPane')::new([Table], ScrollPane),
 		java(ContentPane)::add(ScrollPane, 'Center'),
 		java(Frame)::setSize(600, 400),
-		java(Frame)::setVisible(@(true)).
+		java(Frame)::setVisible(@true).
 
 :- end_object.

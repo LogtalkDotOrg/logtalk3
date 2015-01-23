@@ -33,12 +33,12 @@
 		java('javax.swing.JFrame')::new(['frame with dialog'], Frame),
 		java(Frame)::setLocation(400, 300),
 		java(Frame)::setSize(400, 300),
-		java(Frame)::setVisible(@(true)),
+		java(Frame)::setVisible(@true),
 		java(Frame)::toFront,
 		java(Frame, ContentPane)::getContentPane,
 		java('java.awt.Color')::get_field(pink, Pink),
 		java('javax.swing.JColorChooser', Color)::showDialog(ContentPane, 'pick a colo(u)r', Pink),
 		java(Frame)::dispose,
-		Color \== @(null).
+		Color \== @null.
 
 :- end_object.

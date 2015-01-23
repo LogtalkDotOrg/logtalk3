@@ -43,6 +43,6 @@
 		java(Frame)::pack,
 		java(Frame, Height)::getHeight,
 		java(Frame)::setSize(150, Height),
-		java(Frame)::setVisible(@(true)).
+		java(Frame)::setVisible(@true).
 
 :- end_object.

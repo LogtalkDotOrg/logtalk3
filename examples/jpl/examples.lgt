@@ -14,7 +14,10 @@
 	:- if((absolute_file_name(library(jpl), [file_type(prolog)], Path), exists_file(Path))).
 
 		:- use_module(library(jpl), []).
-		:- initialization(logtalk_load(jpl), [optimize(on)]).
+		:- initialization((
+			logtalk_load(jpl, [optimize(on)]),
+			logtalk_load([color_chooser, flags_table, jlist, text_entry], [optimize(on)])
+		)).
 
 	:- else.
 

@@ -8,9 +8,9 @@ terms per section 7).        Consult the `LICENSE.txt` file for details.
 ________________________________________________________________________
 
 
-% start by loading the example:
+% start by loading the examples:
 
-| ?- logtalk_load(jpl(loader)).
+| ?- logtalk_load(jpl(examples)).
 ...
 
 
@@ -38,31 +38,16 @@ yes
 
 % some GUI examples, adapted from the JPL distribution examples
 
-| ?- logtalk_load(jpl(color_chooser)).
-...
-
 | ?- color_chooser::color(Color).
 
 Color = @'J#00000140727398998200'
 yes
 
-
-| ?- logtalk_load(jpl(flags_table)).
-...
-
 | ?- flags_table::display.
 yes
 
-
-| ?- logtalk_load(jpl(jlist)).
-...
-
 | ?- jlist::display.
 yes
-
-
-| ?- logtalk_load(jpl(text_entry)).
-...
 
 | ?- text_entry::text(Text).
 Text = ...

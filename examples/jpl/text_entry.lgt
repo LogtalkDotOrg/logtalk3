@@ -33,10 +33,10 @@
 		java('javax.swing.JFrame')::new(['frame with dialog'], Frame),
 		java(Frame)::setLocation(400, 300),
 		java(Frame)::setSize(400, 300),
-		java(Frame)::setVisible(@(true)),
+		java(Frame)::setVisible(@true),
 		java(Frame)::toFront,
 		java('javax.swing.JOptionPane', Text)::showInputDialog(Frame, 'type your name'),
 		java(Frame)::dispose,
-		Text \== @(null).
+		Text \== @null.
 
 :- end_object.

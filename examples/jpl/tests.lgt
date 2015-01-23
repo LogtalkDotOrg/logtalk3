@@ -51,7 +51,7 @@
 			Name, 
 			(	repeat,
 				java(Iterator, HasNext)::hasNext,
-				(	HasNext == @(true) ->
+				(	HasNext == @true ->
 					java(Iterator, Name)::next
 				;	!,
 					fail
