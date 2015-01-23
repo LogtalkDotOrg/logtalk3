@@ -31,9 +31,8 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* ADDED: Entity property `source_data`. True when source data is available
-for the entity (i.e. when the entity was compiled with the `source_data`
-flag turned on).
+* ADDED: Entity property `source_data`. True when the entity was compiled
+with the `source_data` flag turned on.
 
 * ADDED: Entity property `alias/2`. The first argument is the predicate alias
 and the second argument is a list of properties. The valid properties are:
@@ -64,7 +63,7 @@ presence of a native module system.
 * UPDATED: JIProlog adapter file for changes in version 4.0.3-1.
 
 * FIXED: Definition for the missing `subsumes_term/2` standard predicate in
-the adapter files for CxProlog, JIProlog, and Qu-Prolog for conformance.
+the adapter files for CxProlog and Qu-Prolog for conformance.
 
 Installers and installation scripts
 -----------------------------------
