@@ -727,6 +727,8 @@ object_property(Obj, Prop) :-
 	).
 '$lgt_object_property'(events, _, _, _, _, _, _, Flags) :-
 	Flags /\ 16 =:= 16.
+'$lgt_object_property'(source_data, _, _, _, _, _, _, Flags) :-
+	Flags /\ 8 =:= 8.
 '$lgt_object_property'(threaded, _, _, _, _, _, _, Flags) :-
 	Flags /\ 4 =:= 4.
 '$lgt_object_property'((dynamic), _, _, _, _, _, _, Flags) :-
@@ -817,6 +819,8 @@ category_property(Ctg, Prop) :-
 	Flags /\ 512 =:= 512.
 '$lgt_category_property'(events, _, _, _, _, Flags) :-
 	Flags /\ 16 =:= 16.
+'$lgt_category_property'(source_data, _, _, _, _, Flags) :-
+	Flags /\ 8 =:= 8.
 '$lgt_category_property'((dynamic), _, _, _, _, Flags) :-
 	Flags /\ 2 =:= 2.
 '$lgt_category_property'(static, _, _, _, _, Flags) :-
@@ -894,6 +898,8 @@ protocol_property(Ptc, Prop) :-
 
 '$lgt_protocol_property'(debugging, _, _, _, Flags) :-
 	Flags /\ 512 =:= 512.
+'$lgt_protocol_property'(source_data, _, _, _, Flags) :-
+	Flags /\ 8 =:= 8.
 '$lgt_protocol_property'((dynamic), _, _, _, Flags) :-
 	Flags /\ 2 =:= 2.
 '$lgt_protocol_property'(static, _, _, _, Flags) :-
@@ -6023,6 +6029,10 @@ current_logtalk_flag(Flag, Value) :-
 		Debug = 512
 	;	Debug = 0
 	),
+	(	'$lgt_compiler_flag'(source_data, on) ->
+		SourceData = 8
+	;	SourceData = 0
+	),
 	(	'$lgt_pp_dynamic_' ->
 		Dynamic = 2
 	;	Dynamic = 0
@@ -6031,7 +6041,7 @@ current_logtalk_flag(Flag, Value) :-
 		BuiltIn = 1
 	;	BuiltIn = 0
 	),
-	Flags is Debug + Dynamic + BuiltIn.
+	Flags is Debug + SourceData + Dynamic + BuiltIn.
 
 '$lgt_compile_entity_flags'(category, Flags) :-
 	(	'$lgt_compiler_flag'(debug, on) ->
@@ -6042,6 +6052,10 @@ current_logtalk_flag(Flag, Value) :-
 		Events = 16
 	;	Events = 0
 	),
+	(	'$lgt_compiler_flag'(source_data, on) ->
+		SourceData = 8
+	;	SourceData = 0
+	),
 	(	'$lgt_pp_dynamic_' ->
 		Dynamic = 2
 	;	Dynamic = 0
@@ -6050,7 +6064,7 @@ current_logtalk_flag(Flag, Value) :-
 		BuiltIn = 1
 	;	BuiltIn = 0
 	),
-	Flags is Debug + Events + Dynamic + BuiltIn.
+	Flags is Debug + Events + SourceData + Dynamic + BuiltIn.
 
 '$lgt_compile_entity_flags'(object, Flags) :-
 	(	'$lgt_compiler_flag'(debug, on) ->
@@ -6075,6 +6089,10 @@ current_logtalk_flag(Flag, Value) :-
 		Events = 16
 	;	Events = 0
 	),
+	(	'$lgt_compiler_flag'(source_data, on) ->
+		SourceData = 8
+	;	SourceData = 0
+	),
 	(	'$lgt_pp_threaded_' ->
 		Threaded = 4
 	;	Threaded = 0
@@ -6087,7 +6105,7 @@ current_logtalk_flag(Flag, Value) :-
 		BuiltIn = 1
 	;	BuiltIn = 0
 	),
-	Flags is Debug + ContextSwitchingCalls + DynamicDeclarations + Complements + Events + Threaded + Dynamic + BuiltIn.
+	Flags is Debug + ContextSwitchingCalls + DynamicDeclarations + Complements + Events + SourceData + Threaded + Dynamic + BuiltIn.
 
 
 
@@ -16482,6 +16500,8 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_valid_protocol_property'(private(_)).
 % list of declaration properties for a predicate declared in the entity
 '$lgt_valid_protocol_property'(declares(_, _)).
+% source data available for the entity
+'$lgt_valid_protocol_property'(source_data).
 
 % the remaining properties are available only when the entities are compiled with the "source_data" flag turned on
 

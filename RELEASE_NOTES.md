@@ -31,6 +31,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Entity property `source_data`. True when source data is available
+for the entity (i.e. when the entity was compiled with the `source_data`
+flag turned on).
+
 * ADDED: Entity property `alias/2`. The first argument is the predicate alias
 and the second argument is a list of properties. The valid properties are:
 `for/1` (the original predicate), `from/1` (the entity referenced in the

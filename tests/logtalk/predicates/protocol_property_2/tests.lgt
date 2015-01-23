@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/12/16,
+		date is 2015/01/23,
 		comment is 'Unit tests for the protocol_property/2 built-in predicate.'
 	]).
 
@@ -44,6 +44,7 @@
 	% entity info
 	succeeds(protocol_property_2_7) :-
 		protocol_property(test_protocol, static),
+		protocol_property(test_protocol, source_data),
 		protocol_property(test_protocol, file(Basename, Directory)), ground(Basename), ground(Directory),
 		protocol_property(test_protocol, lines(Start, End)), integer(Start), integer(End),
 		protocol_property(test_protocol, info(Info)),

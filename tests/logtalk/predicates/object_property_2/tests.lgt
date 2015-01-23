@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/17/12,
+		date is 2015/01/23,
 		comment is 'Unit tests for the object_property/2 built-in predicate.'
 	]).
 
@@ -48,6 +48,7 @@
 		object_property(test_object, complements(allow)),
 		object_property(test_object, complements),
 		object_property(test_object, events),
+		object_property(test_object, source_data),
 		object_property(test_object, file(Basename, Directory)), ground(Basename), ground(Directory),
 		object_property(test_object, lines(Start, End)), integer(Start), integer(End),
 		object_property(test_object, number_of_clauses(N)), N == 10,
