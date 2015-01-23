@@ -771,8 +771,8 @@ object_property(Obj, Prop) :-
 	'$lgt_entity_property_includes'(Obj, Predicate, From, Properties).
 '$lgt_object_property'(provides(Predicate, To, Properties), Obj, _, _, _, _, _, _) :-
 	'$lgt_entity_property_provides'(Obj, Predicate, To, Properties).
-'$lgt_object_property'(alias(Alias, Properties), Obj, _, _, _, _, Rnm, _) :-
-	'$lgt_entity_property_alias'(Obj, Rnm, Alias, Properties).
+'$lgt_object_property'(alias(Alias, Properties), Obj, _, _, _, _, Rnm, Flags) :-
+	'$lgt_entity_property_alias'(Obj, Rnm, Flags, Alias, Properties).
 '$lgt_object_property'(calls(Predicate, Properties), Obj, _, _, _, _, _, _) :-
 	'$lgt_entity_property_calls'(Obj, Predicate, Properties).
 '$lgt_object_property'(number_of_clauses(Total), Obj, _, _, _, _, _, _) :-
@@ -875,8 +875,8 @@ category_property(Ctg, Prop) :-
 	'$lgt_entity_property_provides'(Ctg, Predicate, To, Properties).
 '$lgt_category_property'(calls(Predicate, Properties), Ctg, _, _, _, _) :-
 	'$lgt_entity_property_calls'(Ctg, Predicate, Properties).
-'$lgt_category_property'(alias(Alias, Properties), Ctg, _, _, Rnm, _) :-
-	'$lgt_entity_property_alias'(Ctg, Rnm, Alias, Properties).
+'$lgt_category_property'(alias(Alias, Properties), Ctg, _, _, Rnm, Flags) :-
+	'$lgt_entity_property_alias'(Ctg, Rnm, Flags, Alias, Properties).
 '$lgt_category_property'(number_of_clauses(Total), Ctg, _, _, _, _) :-
 	'$lgt_entity_property_'(Ctg, number_of_clauses(Total, _)).
 '$lgt_category_property'(number_of_user_clauses(TotalUser), Ctg, _, _, _, _) :-
@@ -946,8 +946,8 @@ protocol_property(Ptc, Prop) :-
 	).
 '$lgt_protocol_property'(declares(Predicate, Properties), Ptc, Dcl, _, _) :-
 	'$lgt_protocol_property_declares'(Ptc, Dcl, Predicate, Properties).
-'$lgt_protocol_property'(alias(Alias, Properties), Ptc, _, Rnm, _) :-
-	'$lgt_entity_property_alias'(Ptc, Rnm, Alias, Properties).
+'$lgt_protocol_property'(alias(Alias, Properties), Ptc, _, Rnm, Flags) :-
+	'$lgt_entity_property_alias'(Ptc, Rnm, Flags, Alias, Properties).
 
 
 '$lgt_object_property_declares'(Obj, Dcl, DDcl, EntityFlags, Functor/Arity, Properties) :-
@@ -1061,21 +1061,18 @@ protocol_property(Ptc, Prop) :-
 	Properties = [line_count(Line), number_of_clauses(N)].
 
 
-'$lgt_entity_property_alias'(Entity, _, AFunctor/AArity, Properties) :-
-	'$lgt_entity_property_'(Entity, alias(From, OFunctor/OArity, AFunctor/AArity, Line)),
-	% entity compiled with the source_data flag turned on
-	Properties = [for(OFunctor/OArity), from(From), line_count(Line)].
-
-'$lgt_entity_property_alias'(Entity, Rnm, AFunctor/AArity, Properties) :-
-	\+ '$lgt_entity_property_'(Entity, alias(_, _, _, _)),
-	% either entity compiled with the source_data flag turned off
-	% or no alias declared in the entity; in any case we need to
-	% avoid duplicate answers
-	call(Rnm, From, Original, Alias),
-	nonvar(From),
-	functor(Original, OFunctor, OArity),
-	functor(Alias, AFunctor, AArity),
-	Properties = [for(OFunctor/OArity), from(From)].
+'$lgt_entity_property_alias'(Entity, Rnm, Flags, AFunctor/AArity, Properties) :-
+	(	Flags /\ 8 =:= 8 ->
+		% entity compiled with the source_data flag turned on
+		'$lgt_entity_property_'(Entity, alias(From, OFunctor/OArity, AFunctor/AArity, Line)),
+		Properties = [for(OFunctor/OArity), from(From), line_count(Line)]
+	;	% entity compiled with the source_data flag turned off
+		call(Rnm, From, Original, Alias),
+		nonvar(From),
+		functor(Original, OFunctor, OArity),
+		functor(Alias, AFunctor, AArity),
+		Properties = [for(OFunctor/OArity), from(From)]
+	).
 
 
 '$lgt_entity_property_calls'(Entity, Predicate, Properties) :-
