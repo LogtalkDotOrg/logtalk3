@@ -37,7 +37,7 @@ with the `source_data` flag turned on.
 * ADDED: Entity property `alias/2`. The first argument is the predicate alias
 and the second argument is a list of properties. The valid properties are:
 `for/1` (the original predicate), `from/1` (the entity referenced in the
-`alias/3` directive), and `line_count/1` (the start line for the `alias/3`
+`alias/2` directive), and `line_count/1` (the start line for the `alias/2`
 directive; only available when compiling with the `source_data` flag turned
 on).
 
