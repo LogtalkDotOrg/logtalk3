@@ -261,7 +261,7 @@ Note that the scope of the <code>set_logtalk_flag/2</code> directive is local to
 
 	<dl>
 		<dt><code>version_data(Value)</code></dt>
-			<dd>Read-only flag whose value is the compound term <code>logtalk(Major,Minor,Patch,Status)</code>. The first three arguments are integers and the last argument is an atom, possibly empty, representing alpha or beta version status. The <code>version_data</code> flag is also a de facto standard for Prolog compilers.</dd>
+			<dd>Read-only flag whose value is the compound term <code>logtalk(Major,Minor,Patch,Status)</code>. The first three arguments are integers and the last argument is an atom, possibly empty, representing version status: <code>aN</code> for alpha versions, <code>bN</code> for beta versions, <code>rcN</code> for release candidates (with <code>N</code> being a natural number), and <code>stable</code> for stable versions. The <code>version_data</code> flag is also a de facto standard for Prolog compilers.</dd>
 	</dl>
 	<dl>
 		<dt><code>version(Value)</code></dt>
@@ -751,7 +751,7 @@ When objects or categories containing grammar rules are compiled in debug mode, 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: November 16, 2014</span>
+		<span>Last updated on: January 28, 2015</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="installing.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="migration.html">next</a></span><br/>
