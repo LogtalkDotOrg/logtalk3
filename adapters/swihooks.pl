@@ -664,7 +664,7 @@ user:portray(c(This, Entity, Rest)) :-
 :- meta_predicate user:'$lgt_object_property_defines'(*,*,*,*,*).
 :- meta_predicate user:'$lgt_find_original_predicate'(*,*,*,*,*,*).
 :- meta_predicate user:'$lgt_find_original_predicate'(*,*,*,*,*,*,*).
-:- meta_predicate user:'$lgt_entity_property_alias'(*,*,*,*).
+:- meta_predicate user:'$lgt_entity_property_alias'(*,*,*,*,*).
 :- meta_predicate user:'$lgt_expand_goal_local'(*,*,*,*,*).
 :- meta_predicate user:'$lgt_assert_pred_dcl'(*,*,*,*,*,*,*,*,*,*,*,*,*).
 :- meta_predicate user:'$lgt_expand_goal_scoped'(*,*,*,*).

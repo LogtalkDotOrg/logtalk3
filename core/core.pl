@@ -2581,7 +2581,7 @@ current_logtalk_flag(Flag, Value) :-
 	Alias \= Original,
 	functor(Original, OFunctor, OArity),
 	functor(Alias, AFunctor, AArity),
-	'$lgt_entity_property_'(Entity, alias(_, OFunctor/OArity, AFunctor/AArity, Line)).
+	'$lgt_entity_property_'(Entity, alias(_, OFunctor/OArity, AFunctor/AArity, _, Line)).
 '$lgt_predicate_property_user'(logtalk, _, _, _, _, _, _, _, _, _, _).
 '$lgt_predicate_property_user'(scope(Scope), _, _, _, Scope, _, _, _, _, _, _).
 '$lgt_predicate_property_user'((public), _, _, _, (public), _, _, _, _, _, _).
