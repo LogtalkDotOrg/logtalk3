@@ -453,7 +453,7 @@ The following object properties are supported:
 	<dt><code>provides(Predicate, Entity, Properties)</code></dt>
 		<dd>List of properties for other entity multifile predicate that are defined in the object (the properties include <code>number_of_clauses(Number)</code> and <code>line_count(Line)</code> with <code>Line</code> being the begin line of the multifile predicate clause)</dd>
 	<dt><code>alias(Predicate, Properties)</code></dt>
-		<dd>List of properties for a predicate alias declared by the object</dd>
+		<dd>List of properties for a predicate alias declared by the object (the properties include <code>for(Original)</code>, <code>from(Entity)</code>, <code>non_terminal(NonTerminal)</code>, and <code>line_count(Line)</code> with <code>Line</code> being the begin line of the alias directive)</dd>
 	<dt><code>calls(Call, Properties)</code></dt>
 		<dd>List of properties for predicate calls made by the object (<code>Call</code> is either a predicate indicator or a control construct such as <code>^^/1</code> with a predicate indicator as argument; note that <code>Call</code> may not be ground when the control construct is <code>::/2</code> and the object argument is only know at runtime; the properties include <code>caller(Caller)</code> and <code>line_count(Line)</code> with <code>Caller</code> being a predicate indicator and <code>Line</code> being the begin line of the predicate clause or directive making the call)</dd>
 	<dt><code>number_of_clauses(Number)</code></dt>
@@ -462,7 +462,7 @@ The following object properties are supported:
 		<dd>Total number of user-defined predicate clauses defined in the object at compilation time</dd>
 </dl>
 <p>
-Some of the properties are only available when the object is defined in a source file compiled with the <code>source_data</code> flag turned on.
+Some of the properties such as line numbers are only available when the object is defined in a source file compiled with the <code>source_data</code> flag turned on.
 </p>
 
 <h2 id="objects_built_in">Built-in objects</h2>
@@ -545,7 +545,7 @@ To use these predicates, simply send the corresponding message to the <code>logt
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: January 26, 2015</span>
+		<span>Last updated on: January 28, 2015</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="messages.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="protocols.html">next</a></span><br/>

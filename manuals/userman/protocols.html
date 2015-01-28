@@ -207,10 +207,10 @@ The following protocol properties are supported:
 	<dt><code>declares(Predicate, Properties)</code></dt>
 		<dd>List of properties for a predicate declared by the protocol</dd>
 	<dt><code>alias(Predicate, Properties)</code></dt>
-		<dd>List of properties for a predicate alias declared by the protocol</dd>
+		<dd>List of properties for a predicate alias declared by the protocol (the properties include <code>for(Original)</code>, <code>from(Entity)</code>, <code>non_terminal(NonTerminal)</code>, and <code>line_count(Line)</code> with <code>Line</code> being the begin line of the alias directive)</dd>
 </dl>
 <p>
-Some of the properties are only available when the protocol is defined in a source file compiled with the <code>source_data</code> flag turned on.
+Some of the properties such as line numbers are only available when the protocol is defined in a source file compiled with the <code>source_data</code> flag turned on.
 </p>
 
 <h2 id="protocols_implementing">Implementing protocols</h2>
@@ -281,7 +281,7 @@ Logtalk defines a built-in protocol named <code>forwarding</code> that contains 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: January 26, 2015</span>
+		<span>Last updated on: January 28, 2015</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="objects.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="categories.html">next</a></span><br/>

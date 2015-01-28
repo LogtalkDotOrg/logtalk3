@@ -281,8 +281,8 @@
 :- dynamic('$lgt_pp_private_'/2).
 % '$lgt_pp_meta_predicate_'(PredTemplate, MetaTemplate)
 :- dynamic('$lgt_pp_meta_predicate_'/2).
-% '$lgt_pp_predicate_alias_'(Entity, Pred, Alias, Lines)
-:- dynamic('$lgt_pp_predicate_alias_'/4).
+% '$lgt_pp_predicate_alias_'(Entity, Pred, Alias, NonTerminalFlag, Lines)
+:- dynamic('$lgt_pp_predicate_alias_'/5).
 % '$lgt_pp_non_terminal_'(Functor, Arity, ExtArity)
 :- dynamic('$lgt_pp_non_terminal_'/3).
 % '$lgt_pp_multifile_'(Head, Lines)
@@ -1064,8 +1064,12 @@ protocol_property(Ptc, Prop) :-
 '$lgt_entity_property_alias'(Entity, Rnm, Flags, AFunctor/AArity, Properties) :-
 	(	Flags /\ 8 =:= 8 ->
 		% entity compiled with the source_data flag turned on
-		'$lgt_entity_property_'(Entity, alias(From, OFunctor/OArity, AFunctor/AArity, Line)),
-		Properties = [for(OFunctor/OArity), from(From), line_count(Line)]
+		'$lgt_entity_property_'(Entity, alias(From, OFunctor/OArity, AFunctor/AArity, NonTerminalFlag, Line)),
+		(	NonTerminalFlag =:= 1 ->
+			ANTArity is AArity - 2,
+			Properties = [non_terminal(AFunctor//ANTArity), for(OFunctor/OArity), from(From), line_count(Line)]
+		;	Properties = [for(OFunctor/OArity), from(From), line_count(Line)]
+		)
 	;	% entity compiled with the source_data flag turned off
 		call(Rnm, From, Original, Alias),
 		nonvar(From),
@@ -5780,10 +5784,10 @@ current_logtalk_flag(Flag, Value) :-
 	fail.
 
 '$lgt_add_entity_properties'(_, Entity) :-
-	'$lgt_pp_predicate_alias_'(For, Pred, Alias, Line-_),
+	'$lgt_pp_predicate_alias_'(For, Pred, Alias, NonTerminalFlag, Line-_),
 	functor(Pred, OFunctor, OArity),
 	functor(Alias, AFunctor, AArity),
-	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, alias(For, OFunctor/OArity, AFunctor/AArity, Line)))),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, alias(For, OFunctor/OArity, AFunctor/AArity, NonTerminalFlag, Line)))),
 	fail.
 
 '$lgt_add_entity_properties'(_, _).
@@ -6201,7 +6205,7 @@ current_logtalk_flag(Flag, Value) :-
 	retractall('$lgt_pp_coinductive_'(_, _, _, _, _, _, _)),
 	retractall('$lgt_pp_mode_'(_, _)),
 	retractall('$lgt_pp_meta_predicate_'(_, _)),
-	retractall('$lgt_pp_predicate_alias_'(_, _, _, _)),
+	retractall('$lgt_pp_predicate_alias_'(_, _, _, _, _)),
 	retractall('$lgt_pp_non_terminal_'(_, _, _)),
 	retractall('$lgt_pp_object_initialization_'(_, _)),
 	retractall('$lgt_pp_final_object_initialization_'(_)),
@@ -7436,7 +7440,7 @@ current_logtalk_flag(Flag, Value) :-
 % alias/3 predicate directive (deprecated)
 
 '$lgt_compile_logtalk_directive'(alias(Entity, Original, Alias), Ctx) :-
-	(	\+ '$lgt_pp_predicate_alias_'(_, _, _, _),
+	(	\+ '$lgt_pp_predicate_alias_'(_, _, _, _, _),
 		% not already reported (we assume that there's no mix of alias/2 and alias/3 directives!)
 		'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
 		'$lgt_increment_compile_warnings_counter',
@@ -7496,7 +7500,7 @@ current_logtalk_flag(Flag, Value) :-
 	Pred =.. [Functor1| Args],
 	Alias =.. [Functor2| Args],
 	'$lgt_comp_ctx_lines'(Ctx, Lines),
-	assertz('$lgt_pp_predicate_alias_'(Entity, Pred, Alias, Lines)).
+	assertz('$lgt_pp_predicate_alias_'(Entity, Pred, Alias, 0, Lines)).
 
 '$lgt_compile_alias_directive_resource'(Functor1//Arity, Functor2//Arity, Entity, Ctx) :-
 	!,
@@ -7505,7 +7509,7 @@ current_logtalk_flag(Flag, Value) :-
 	Pred =.. [Functor1| Args],
 	Alias =.. [Functor2| Args],
 	'$lgt_comp_ctx_lines'(Ctx, Lines),
-	assertz('$lgt_pp_predicate_alias_'(Entity, Pred, Alias, Lines)).
+	assertz('$lgt_pp_predicate_alias_'(Entity, Pred, Alias, 1, Lines)).
 
 '$lgt_compile_alias_directive_resource'(_//Arity1, _//Arity2, _, _) :-
 	throw(domain_error({Arity1}, Arity2)).
@@ -13699,7 +13703,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	Scope = p,
 		Lookup =.. [ExtDcl, Pred, _, Meta, Flags, Ctn]
 	),
-	(	'$lgt_pp_predicate_alias_'(ExtPtc, _, _, _) ->
+	(	'$lgt_pp_predicate_alias_'(ExtPtc, _, _, _, _) ->
 		Head =.. [Dcl, Alias, Scope, Meta, Flags, Ctn],
 		Rename =.. [Rnm, ExtPtc, Pred, Alias],
 		assertz('$lgt_pp_dcl_'((Head :- Rename, Lookup)))
@@ -13773,7 +13777,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	Scope = p,
 		Lookup =.. [PDcl, Pred, _, Meta, Flags, Ctn]
 	),
-	(	'$lgt_pp_predicate_alias_'(Ptc, _, _, _) ->
+	(	'$lgt_pp_predicate_alias_'(Ptc, _, _, _, _) ->
 		Head =.. [CDcl, Alias, Scope, Meta, Flags, Ctn],
 		Rename =.. [Rnm, Ptc, Pred, Alias],
 		assertz('$lgt_pp_dcl_'((Head :- Rename, Lookup)))
@@ -13796,7 +13800,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	Scope = p,
 		Lookup =.. [ECDcl, Pred, _, Meta, Flags, Ctn]
 	),
-	(	'$lgt_pp_predicate_alias_'(Ctg, _, _, _) ->
+	(	'$lgt_pp_predicate_alias_'(Ctg, _, _, _, _) ->
 		Head =.. [CDcl, Alias, Scope, Meta, Flags, Ctn],
 		Rename =.. [Rnm, Ctg, Pred, Alias],
 		assertz('$lgt_pp_dcl_'((Head :- Rename, Lookup)))
@@ -13850,7 +13854,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_pp_extended_category_'(ExtCtg, Ctg, _, _, ExtDef, _),
 	'$lgt_execution_context_update_this_entity'(CExCtx, This, Ctg, EExCtx, This, ExtCtg),
 	Lookup =.. [ExtDef, Pred, EExCtx, Call, Ctn],
-	(	'$lgt_pp_predicate_alias_'(ExtCtg, _, _, _) ->
+	(	'$lgt_pp_predicate_alias_'(ExtCtg, _, _, _, _) ->
 		Head =.. [Def, Alias, CExCtx, Call, Ctn],
 		Rename =.. [Rnm, ExtCtg, Pred, Alias],
 		assertz('$lgt_pp_def_'((Head :- Rename, Lookup)))
@@ -13980,7 +13984,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	Scope = p,
 		Lookup =.. [PDcl, Pred, _, Meta, Flags, Ctn]
 	),
-	(	'$lgt_pp_predicate_alias_'(Ptc, _, _, _) ->
+	(	'$lgt_pp_predicate_alias_'(Ptc, _, _, _, _) ->
 		Head =.. [ODcl, Alias, Scope, Meta, Flags, Obj, Ctn],
 		Rename =.. [Rnm, Ptc, Pred, Alias],
 		assertz('$lgt_pp_dcl_'((Head :- Rename, Lookup)))
@@ -14003,7 +14007,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	Scope = p,
 		Lookup =.. [CDcl, Pred, _, Meta, Flags, Ctn]
 	),
-	(	'$lgt_pp_predicate_alias_'(Ctg, _, _, _) ->
+	(	'$lgt_pp_predicate_alias_'(Ctg, _, _, _, _) ->
 		Head =.. [ODcl, Alias, Scope, Meta, Flags, Obj, Ctn],
 		Rename =.. [Rnm, Ctg, Pred, Alias],
 		assertz('$lgt_pp_dcl_'((Head :- Rename, Lookup)))
@@ -14027,7 +14031,7 @@ current_logtalk_flag(Flag, Value) :-
 		Call =.. [PDcl, Pred, Scope2, Meta, Flags, SCtn2, TCtn],
 		Lookup = (Call, '$lgt_filter_scope_container'(Scope2, SCtn2, Obj, SCtn))
 	),
-	(	'$lgt_pp_predicate_alias_'(Parent, _, _, _) ->
+	(	'$lgt_pp_predicate_alias_'(Parent, _, _, _, _) ->
 		Head =.. [ODcl, Alias, Scope, Meta, Flags, SCtn, TCtn],
 		Rename =.. [Rnm, Parent, Pred, Alias],
 		assertz('$lgt_pp_dcl_'((Head :- Rename, Lookup)))
@@ -14096,7 +14100,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_pp_imported_category_'(Ctg, Obj, _, _, CDef, _),
 	'$lgt_execution_context_update_this_entity'(OExCtx, Obj, Obj, CExCtx, Obj, Ctg),
 	Lookup =.. [CDef, Pred, CExCtx, Call, Ctn],
-	(	'$lgt_pp_predicate_alias_'(Ctg, _, _, _) ->
+	(	'$lgt_pp_predicate_alias_'(Ctg, _, _, _, _) ->
 		Head =.. [ODef, Alias, OExCtx, Call, Obj, Ctn],
 		Rename =.. [Rnm, Ctg, Pred, Alias],
 		assertz('$lgt_pp_def_'((Head :- Rename, Lookup)))
@@ -14113,7 +14117,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_pp_extended_object_'(Parent, Obj, _, _, PDef, _, _, _, _, _, _),
 	'$lgt_execution_context_update_this_entity'(OExCtx, Obj, Obj, PExCtx, Parent, Parent),
 	Lookup =.. [PDef, Pred, PExCtx, Call, SCtn, TCtn],
-	(	'$lgt_pp_predicate_alias_'(Parent, _, _, _) ->
+	(	'$lgt_pp_predicate_alias_'(Parent, _, _, _, _) ->
 		Head =.. [ODef, Alias, OExCtx, Call, SCtn, TCtn],
 		Rename =.. [Rnm, Parent, Pred, Alias],
 		assertz('$lgt_pp_def_'((Head :- Rename, Lookup)))
@@ -14141,7 +14145,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_pp_imported_category_'(Ctg, Obj, _, _, CDef, _),
 	'$lgt_execution_context_update_this_entity'(OExCtx, Obj, Obj, CExCtx, Obj, Ctg),
 	Lookup =.. [CDef, Pred, CExCtx, Call, TCtn],
-	(	'$lgt_pp_predicate_alias_'(Ctg, _, _, _) ->
+	(	'$lgt_pp_predicate_alias_'(Ctg, _, _, _, _) ->
 		Head =.. [Super, Alias, OExCtx, Call, Obj, TCtn],
 		Rename =.. [Rnm, Ctg, Pred, Alias],
 		assertz('$lgt_pp_super_'((Head :- Rename, Lookup)))
@@ -14156,7 +14160,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_pp_extended_object_'(Parent, Obj, _, _, PDef, _, _, _, _, _, _),
 	'$lgt_execution_context_update_this_entity'(OExCtx, Obj, Obj, PExCtx, Parent, Parent),
 	Lookup =.. [PDef, Pred, PExCtx, Call, SCtn, TCtn],
-	(	'$lgt_pp_predicate_alias_'(Parent, _, _, _) ->
+	(	'$lgt_pp_predicate_alias_'(Parent, _, _, _, _) ->
 		Head =.. [Super, Alias, OExCtx, Call, SCtn, TCtn],
 		Rename =.. [Rnm, Parent, Pred, Alias],
 		assertz('$lgt_pp_super_'((Head :- Rename, Lookup)))
@@ -14212,7 +14216,7 @@ current_logtalk_flag(Flag, Value) :-
 		Call =.. [CIDcl, Pred, Scope2, Meta, Flags, SCtn2, TCtn],
 		Lookup = (Call, '$lgt_filter_scope_container'(Scope2, SCtn2, Obj, SCtn))
 	),
-	(	'$lgt_pp_predicate_alias_'(Class, _, _, _) ->
+	(	'$lgt_pp_predicate_alias_'(Class, _, _, _, _) ->
 		Head =.. [ODcl, Alias, Scope, Meta, Flags, SCtn, TCtn],
 		Rename =.. [Rnm, Class, Pred, Alias],
 		assertz('$lgt_pp_dcl_'((Head :- Rename, Lookup)))
@@ -14299,7 +14303,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	Scope = p,
 		Lookup =.. [PDcl, Pred, _, Meta, Flags, Ctn]
 	),
-	(	'$lgt_pp_predicate_alias_'(Ptc, _, _, _) ->
+	(	'$lgt_pp_predicate_alias_'(Ptc, _, _, _, _) ->
 		Head =.. [OIDcl, Alias, Scope, Meta, Flags, Obj, Ctn],
 		Rename =.. [Rnm, Ptc, Pred, Alias],
 		assertz('$lgt_pp_dcl_'((Head :- Rename, Lookup)))
@@ -14322,7 +14326,7 @@ current_logtalk_flag(Flag, Value) :-
 	;	Scope = p,
 		Lookup =.. [CDcl, Pred, _, Meta, Flags, Ctn]
 	),
-	(	'$lgt_pp_predicate_alias_'(Ctg, _, _, _) ->
+	(	'$lgt_pp_predicate_alias_'(Ctg, _, _, _, _) ->
 		Head =.. [OIDcl, Alias, Scope, Meta, Flags, Obj, Ctn],
 		Rename =.. [Rnm, Ctg, Pred, Alias],
 		assertz('$lgt_pp_dcl_'((Head :- Rename, Lookup)))
@@ -14346,7 +14350,7 @@ current_logtalk_flag(Flag, Value) :-
 		Call =.. [SIDcl, Pred, Scope2, Meta, Flags, SCtn2, TCtn],
 		Lookup = (Call, '$lgt_filter_scope_container'(Scope2, SCtn2, Obj, SCtn))
 	),
-	(	'$lgt_pp_predicate_alias_'(Super, _, _, _) ->
+	(	'$lgt_pp_predicate_alias_'(Super, _, _, _, _) ->
 		Head =.. [CIDcl, Alias, Scope, Meta, Flags, SCtn, TCtn],
 		Rename =.. [Rnm, Super, Pred, Alias],
 		assertz('$lgt_pp_dcl_'((Head :- Rename, Lookup)))
@@ -14422,7 +14426,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_pp_imported_category_'(Ctg, Obj, _, _, CDef, _),
 	'$lgt_execution_context_update_this_entity'(OExCtx, Obj, Obj, CExCtx, Obj, Ctg),
 	Lookup =.. [CDef, Pred, CExCtx, Call, Ctn],
-	(	'$lgt_pp_predicate_alias_'(Ctg, _, _, _) ->
+	(	'$lgt_pp_predicate_alias_'(Ctg, _, _, _, _) ->
 		Head =.. [ODef, Alias, OExCtx, Call, Obj, Ctn],
 		Rename =.. [Rnm, Ctg, Pred, Alias],
 		assertz('$lgt_pp_def_'((Head :- Rename, Lookup)))
@@ -14439,7 +14443,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_pp_instantiated_class_'(Class, Obj, _, _, _, _, _, CIDef, _, _, _),
 	'$lgt_execution_context_update_this_entity'(OExCtx, Obj, Obj, CExCtx, Class, Class),
 	Lookup =.. [CIDef, Pred, CExCtx, Call, SCtn, TCtn],
-	(	'$lgt_pp_predicate_alias_'(Class, _, _, _) ->
+	(	'$lgt_pp_predicate_alias_'(Class, _, _, _, _) ->
 		Head =.. [ODef, Alias, OExCtx, Call, SCtn, TCtn],
 		Rename =.. [Rnm, Class, Pred, Alias],
 		assertz('$lgt_pp_def_'((Head :- Rename, Lookup)))
@@ -14507,7 +14511,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_pp_imported_category_'(Ctg, Obj, _, _, CDef, _),
 	'$lgt_execution_context_update_this_entity'(OExCtx, Obj, Obj, CExCtx, Obj, Ctg),
 	Lookup =.. [CDef, Pred, CExCtx, Call, Ctn],
-	(	'$lgt_pp_predicate_alias_'(Ctg, _, _, _) ->
+	(	'$lgt_pp_predicate_alias_'(Ctg, _, _, _, _) ->
 		Head =.. [OIDef, Alias, OExCtx, Call, Obj, Ctn],
 		Rename =.. [Rnm, Ctg, Pred, Alias],
 		assertz('$lgt_pp_def_'((Head :- Rename, Lookup)))
@@ -14524,7 +14528,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_pp_specialized_class_'(Super, Class, _, _, _, _, _, SIDef, _, _, _),
 	'$lgt_execution_context_update_this_entity'(CExCtx, Class, Class, SExCtx, Super, Super),
 	Lookup =.. [SIDef, Pred, SExCtx, Call, SCtn, TCtn],
-	(	'$lgt_pp_predicate_alias_'(Super, _, _, _) ->
+	(	'$lgt_pp_predicate_alias_'(Super, _, _, _, _) ->
 		Head =.. [CIDef, Alias, CExCtx, Call, SCtn, TCtn],
 		Rename =.. [Rnm, Super, Pred, Alias],
 		assertz('$lgt_pp_def_'((Head :- Rename, Lookup)))
@@ -14553,7 +14557,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_pp_imported_category_'(Ctg, Obj, _, _, CDef, _),
 	'$lgt_execution_context_update_this_entity'(OExCtx, Obj, Obj, CExCtx, Obj, Ctg),
 	Lookup =.. [CDef, Pred, CExCtx, Call, TCtn],
-	(	'$lgt_pp_predicate_alias_'(Ctg, _, _, _) ->
+	(	'$lgt_pp_predicate_alias_'(Ctg, _, _, _, _) ->
 		Head =.. [Super, Alias, OExCtx, Call, Obj, TCtn],
 		Rename =.. [Rnm, Ctg, Pred, Alias],
 		assertz('$lgt_pp_super_'((Head :- Rename, Lookup)))
@@ -14573,7 +14577,7 @@ current_logtalk_flag(Flag, Value) :-
 	% the following restriction allows us to distinguish the two "super" clauses that
 	% are generated when an object both instantiates and specializes other objects
 	'$lgt_execution_context'(OExCtx, _, _, Obj, Obj, _, _),
-	(	'$lgt_pp_predicate_alias_'(Class, _, _, _) ->
+	(	'$lgt_pp_predicate_alias_'(Class, _, _, _, _) ->
 		Head =.. [Super, Alias, OExCtx, Call, SCtn, TCtn],
 		Rename =.. [Rnm, Class, Pred, Alias],
 		assertz('$lgt_pp_super_'((Head :- Rename, Lookup)))
@@ -14588,7 +14592,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_pp_specialized_class_'(Superclass, Class, _, _, _, _, _, SIDef, _, _, _),
 	'$lgt_execution_context_update_this_entity'(CExCtx, Class, Class, SExCtx, Superclass, Superclass),
 	Lookup =.. [SIDef, Pred, SExCtx, Call, SCtn, TCtn],
-	(	'$lgt_pp_predicate_alias_'(Superclass, _, _, _) ->
+	(	'$lgt_pp_predicate_alias_'(Superclass, _, _, _, _) ->
 		Head =.. [Super, Alias, CExCtx, Call, SCtn, TCtn],
 		Rename =.. [Rnm, Superclass, Pred, Alias],
 		assertz('$lgt_pp_super_'((Head :- Rename, Lookup)))
@@ -15045,7 +15049,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_write_alias_clauses'(Stream, Path, Rnm) :-
-	'$lgt_pp_predicate_alias_'(Entity, Pred, Alias, _),
+	'$lgt_pp_predicate_alias_'(Entity, Pred, Alias, _, _),
 		Clause =.. [Rnm, Entity, Pred, Alias],
 		'$lgt_write_compiled_term'(Stream, Clause, runtime, Path, 1),
 	fail.
@@ -15252,7 +15256,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_assert_alias_clauses'(Rnm) :-
-	'$lgt_pp_predicate_alias_'(Entity, Pred, Alias, _),
+	'$lgt_pp_predicate_alias_'(Entity, Pred, Alias, _, _),
 		Clause =.. [Rnm, Entity, Pred, Alias],
 		'$lgt_assertz_entity_clause'(Clause, aux),
 	fail.
@@ -18403,7 +18407,7 @@ current_logtalk_flag(Flag, Value) :-
 	% check that the category is not compiled in debug mode
 	CtgFlags /\ 512 =\= 512,
 	% we may be aliasing the predicate
-	(	'$lgt_pp_predicate_alias_'(Ctg, Pred, Alias, _) ->
+	(	'$lgt_pp_predicate_alias_'(Ctg, Pred, Alias, _, _) ->
 		true
 	;	Pred = Alias
 	),
@@ -18427,7 +18431,7 @@ current_logtalk_flag(Flag, Value) :-
 	% check that the parent is not compiled in debug mode
 	ParentFlags /\ 512 =\= 512,
 	% we may be aliasing the predicate
-	(	'$lgt_pp_predicate_alias_'(Parent, Pred, Alias, _) ->
+	(	'$lgt_pp_predicate_alias_'(Parent, Pred, Alias, _, _) ->
 		true
 	;	Pred = Alias
 	),
@@ -18464,7 +18468,7 @@ current_logtalk_flag(Flag, Value) :-
 	% check that the class is not compiled in debug mode
 	ClassFlags /\ 512 =\= 512,
 	% we may be aliasing the predicate
-	(	'$lgt_pp_predicate_alias_'(Class, Pred, Alias, _) ->
+	(	'$lgt_pp_predicate_alias_'(Class, Pred, Alias, _, _) ->
 		true
 	;	Pred = Alias
 	),
@@ -18501,7 +18505,7 @@ current_logtalk_flag(Flag, Value) :-
 	% check that the superclass is not compiled in debug mode
 	SuperclassFlags /\ 512 =\= 512,
 	% we may be aliasing the predicate
-	(	'$lgt_pp_predicate_alias_'(Superclass, Pred, Alias, _) ->
+	(	'$lgt_pp_predicate_alias_'(Superclass, Pred, Alias, _, _) ->
 		true
 	;	Pred = Alias
 	),
@@ -18557,7 +18561,7 @@ current_logtalk_flag(Flag, Value) :-
 	% check that the category is not compiled in debug mode
 	ExtCtgFlags /\ 512 =\= 512,
 	% we may be aliasing the predicate
-	(	'$lgt_pp_predicate_alias_'(ExtCtg, Pred, Alias, _) ->
+	(	'$lgt_pp_predicate_alias_'(ExtCtg, Pred, Alias, _, _) ->
 		true
 	;	Pred = Alias
 	),
