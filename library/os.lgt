@@ -1270,7 +1270,10 @@
 				ExpandedPath = ExpandedPath0
 			;	% assume path relative to the current directory
 				working_directory(Current),
-				atom_concat(Current, '/', Directory),
+				(	sub_atom(Current, _, 1, 0, '/') ->
+					Directory = Current
+				;	atom_concat(Current, '/', Directory)
+				),
 				atom_concat(Directory, ExpandedPath0, ExpandedPath)
 			).
 
@@ -1317,11 +1320,7 @@
 
 		working_directory(Directory) :-
 			{working_directory(Directory0, Directory0)},
-			convert_file_path(Directory0, Directory1),
-			(	sub_atom(Directory1, _, 1, 0, '/') ->
-				Directory = Directory1
-			;	atom_concat(Directory1, '/', Directory)
-			).
+			convert_file_path(Directory0, Directory).
 
 		directory_exists(Directory) :-
 			expand_path(Directory, ExpandedPath),
