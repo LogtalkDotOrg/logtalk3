@@ -1292,16 +1292,18 @@
 
 		convert_file_path(File, Converted) :-
 			atom_codes(File, FileCodes),
-			reverse_slashes(FileCodes, ConvertedCodes),
+			char_code('\\', Backslash),
+			char_code('/', Slah),
+			reverse_slashes(FileCodes, Backslash, Slah, ConvertedCodes),
 			atom_codes(Converted, ConvertedCodes).
 
-		reverse_slashes([], []).
-		reverse_slashes([Code| Codes], [ConvertedCode| ConvertedCodes]) :-
-			(	char_code('\\', Code) ->
-				char_code('/', ConvertedCode)
+		reverse_slashes([], _, _, []).
+		reverse_slashes([Code| Codes], Backslash, Slah, [ConvertedCode| ConvertedCodes]) :-
+			(	Code =:= Backslash ->
+				ConvertedCode = Slah
 			;	ConvertedCode = Code
 			),
-			reverse_slashes(Codes, ConvertedCodes).
+			reverse_slashes(Codes, Backslash, Slah, ConvertedCodes).
 
 		make_directory(Directory) :-
 			expand_path(Directory, ExpandedPath),
