@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for tuProlog 2.9.0 and later versions
-%  Last updated on December 20, 2014
+%  Last updated on January 29, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -284,7 +284,7 @@ numbervars(Term, From, Next) :-
 % other compilation flags:
 '$lgt_default_flag'(scratch_directory, './lgt_tmp/').
 '$lgt_default_flag'(report, on).
-'$lgt_default_flag'(clean, off).
+'$lgt_default_flag'(clean, on).
 '$lgt_default_flag'(code_prefix, '$').
 '$lgt_default_flag'(optimize, off).
 '$lgt_default_flag'(source_data, on).

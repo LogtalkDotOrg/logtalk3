@@ -266,7 +266,7 @@ format(Format, Arguments) :-
 % other compilation flags:
 '$lgt_default_flag'(scratch_directory, './').
 '$lgt_default_flag'(report, on).
-'$lgt_default_flag'(clean, off).
+'$lgt_default_flag'(clean, on).
 '$lgt_default_flag'(code_prefix, '$').
 '$lgt_default_flag'(optimize, off).
 '$lgt_default_flag'(source_data, on).
@@ -348,7 +348,9 @@ format(Format, Arguments) :-
 % deletes a file
 
 '$lgt_delete_file'(File) :-
-	delete_file(File).
+	writeq(delete_file(File)), nl,
+	delete_file(File),
+	writeq(delete_file(File)), nl.
 
 
 % '$lgt_current_directory'(-atom)
@@ -671,7 +673,8 @@ format(Format, Arguments) :-
 
 '$lgt_write_compiled_term'(Stream, Term, _Kind, _Path, _Line) :-
 	write_canonical(Stream, Term),
-	write(Stream, '.\n').
+	write(Stream, '.\n'),
+	write(Stream, '% '), writeq(Stream, Term), write(Stream, '.\n').
 
 
 % '$lgt_assertz_entity_clause'(@clause, +atom)
