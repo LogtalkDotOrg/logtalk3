@@ -348,9 +348,7 @@ format(Format, Arguments) :-
 % deletes a file
 
 '$lgt_delete_file'(File) :-
-	writeq(delete_file(File)), nl,
-	delete_file(File),
-	writeq(delete_file(File)), nl.
+	delete_file(File).
 
 
 % '$lgt_current_directory'(-atom)
@@ -368,16 +366,18 @@ format(Format, Arguments) :-
 
 '$lgt_ji_convert_file_path'(File, Converted) :-
 	atom_codes(File, FileCodes),
-	'$lgt_ji_reverse_slashes'(FileCodes, ConvertedCodes),
+	char_code('\\', Backslash),
+	char_code('/', Slah),
+	'$lgt_ji_reverse_slashes'(FileCodes, Backslash, Slah, ConvertedCodes),
 	atom_codes(Converted, ConvertedCodes).
 
-'$lgt_ji_reverse_slashes'([], []).
-'$lgt_ji_reverse_slashes'([Code| Codes], [ConvertedCode| ConvertedCodes]) :-
-	(	char_code('\\', Code) ->
-		char_code('/', ConvertedCode)
+'$lgt_ji_reverse_slashes'([], _, _, []).
+'$lgt_ji_reverse_slashes'([Code| Codes], Backslash, Slah, [ConvertedCode| ConvertedCodes]) :-
+	(	Code =:= Backslash ->
+		ConvertedCode = Slah
 	;	ConvertedCode = Code
 	),
-	'$lgt_ji_reverse_slashes'(Codes, ConvertedCodes).
+	'$lgt_ji_reverse_slashes'(Codes, Backslash, Slah, ConvertedCodes).
 
 
 % '$lgt_change_directory'(+atom)
