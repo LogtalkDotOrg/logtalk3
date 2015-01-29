@@ -36,9 +36,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.13,
+		version is 1.14,
 		author is 'Paulo Moura',
-		date is 2014/12/05,
+		date is 2015/01/29,
 		comment is 'Simple example of using conditional compilation to implement a portable operating-system interface for selected back-end Prolog compilers.'
 	]).
 
@@ -1269,21 +1269,36 @@
 				% assume full path
 				ExpandedPath = ExpandedPath0
 			;	% assume path relative to the current directory
-				working_directory(Current, Current),
+				working_directory(Current),
 				atom_concat(Current, '/', Directory),
 				atom_concat(Directory, ExpandedPath0, ExpandedPath)
 			).
 
 		expand_environment(Path, ExpandedPath) :-
-			(	sub_atom(Path, 0, 1, _, '$'),
-				sub_atom(Path, Before, _, _, '/') ->
+			convert_file_path(Path, Path1),
+			(	sub_atom(Path1, 0, 1, _, '$'),
+				sub_atom(Path1, Before, _, _, '/') ->
 				End is Before - 1,
-				sub_atom(Path, 1, End, _, Variable),
-				sub_atom(Path, Before, _, 0, Rest),
-				environment_variable(Variable, Value),
+				sub_atom(Path1, 1, End, _, Variable),
+				sub_atom(Path1, Before, _, 0, Rest),
+				environment_variable(Variable, Value0),
+				convert_file_path(Value0, Value),
 				atom_concat(Value, Rest, ExpandedPath)
-			;	Path = ExpandedPath
+			;	Path1 = ExpandedPath
 			).
+
+		convert_file_path(File, Converted) :-
+			atom_codes(File, FileCodes),
+			reverse_slashes(FileCodes, ConvertedCodes),
+			atom_codes(Converted, ConvertedCodes).
+
+		reverse_slashes([], []).
+		reverse_slashes([Code| Codes], [ConvertedCode| ConvertedCodes]) :-
+			(	char_code('\\', Code) ->
+				char_code('/', ConvertedCode)
+			;	ConvertedCode = Code
+			),
+			reverse_slashes(Codes, ConvertedCodes).
 
 		make_directory(Directory) :-
 			expand_path(Directory, ExpandedPath),
@@ -1301,7 +1316,12 @@
 			{chdir(ExpandedPath)}.
 
 		working_directory(Directory) :-
-			{working_directory(Directory, Directory)}.
+			{working_directory(Directory0, Directory0)},
+			convert_file_path(Directory0, Directory1),
+			(	sub_atom(Directory1, _, 1, 0, '/') ->
+				Directory = Directory1
+			;	atom_concat(Directory1, '/', Directory)
+			).
 
 		directory_exists(Directory) :-
 			expand_path(Directory, ExpandedPath),

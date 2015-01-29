@@ -3,8 +3,8 @@
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
-%  Adapter file for JIProlog 4.0.3-1 or later versions
-%  Last updated on January 22, 2015
+%  Adapter file for JIProlog 4.0.4-3 or later versions
+%  Last updated on January 29, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -222,7 +222,7 @@ format(Format, Arguments) :-
 '$lgt_prolog_feature'(prolog_dialect, ji).
 '$lgt_prolog_feature'(prolog_version, (Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, jiprolog(Major, Minor, Patch, _)).
-'$lgt_prolog_feature'(prolog_compatible_version, @>=((4,0,3))).
+'$lgt_prolog_feature'(prolog_compatible_version, @>=((4,0,4))).
 '$lgt_prolog_feature'(prolog_conformance, iso_lax).
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
@@ -314,14 +314,16 @@ format(Format, Arguments) :-
 
 
 '$lgt_ji_expand_environment'(Path, ExpandedPath) :-
-	(	sub_atom(Path, 0, 1, _, '$'),
-		sub_atom(Path, Before, _, _, '/') ->
+	'$lgt_ji_convert_file_path'(Path, Path1),
+	(	sub_atom(Path1, 0, 1, _, '$'),
+		sub_atom(Path1, Before, _, _, '/') ->
 		End is Before - 1,
-		sub_atom(Path, 1, End, _, Variable),
-		sub_atom(Path, Before, _, 0, Rest),
-		'$lgt_environment_variable'(Variable, Value),
+		sub_atom(Path1, 1, End, _, Variable),
+		sub_atom(Path1, Before, _, 0, Rest),
+		'$lgt_environment_variable'(Variable, Value0),
+		'$lgt_ji_convert_file_path'(Value0, Value),
 		atom_concat(Value, Rest, ExpandedPath)
-	;	Path = ExpandedPath
+	;	Path1 = ExpandedPath
 	).
 
 
@@ -355,10 +357,25 @@ format(Format, Arguments) :-
 
 '$lgt_current_directory'(Directory) :-
 	working_directory(Directory0, Directory0),
-	(	sub_atom(Directory0, _, 1, 0, '/') ->
-		Directory = Directory0
-	;	atom_concat(Directory0, '/', Directory)
+	'$lgt_ji_convert_file_path'(Directory0, Directory1),
+	(	sub_atom(Directory1, _, 1, 0, '/') ->
+		Directory = Directory1
+	;	atom_concat(Directory1, '/', Directory)
 	).
+
+
+'$lgt_ji_convert_file_path'(File, Converted) :-
+	atom_codes(File, FileCodes),
+	'$lgt_ji_reverse_slashes'(FileCodes, ConvertedCodes),
+	atom_codes(Converted, ConvertedCodes).
+
+'$lgt_ji_reverse_slashes'([], []).
+'$lgt_ji_reverse_slashes'([Code| Codes], [ConvertedCode| ConvertedCodes]) :-
+	(	char_code('\\', Code) ->
+		char_code('/', ConvertedCode)
+	;	ConvertedCode = Code
+	),
+	'$lgt_ji_reverse_slashes'(Codes, ConvertedCodes).
 
 
 % '$lgt_change_directory'(+atom)
@@ -429,15 +446,16 @@ format(Format, Arguments) :-
 % returns the Logtalk startup directory 
 
 '$lgt_startup_directory'(Directory) :-
-	(	invoke('java.lang.System', getenv('java.lang.String'), ['LOGTALK_STARTUP_DIRECTORY'], Directory),
-		Directory \== [] ->
+	(	invoke('java.lang.System', getenv('java.lang.String'), ['LOGTALK_STARTUP_DIRECTORY'], Directory0),
+		Directory0 \== [] ->
 		true
 	;	% check if the LOGTALK_STARTUP_DIRECTORY environment variable value is passed as a property
-		invoke('java.lang.System', getProperty('java.lang.String'), ['LOGTALK_STARTUP_DIRECTORY'], Directory),
-		Directory \== [] ->
+		invoke('java.lang.System', getProperty('java.lang.String'), ['LOGTALK_STARTUP_DIRECTORY'], Directory0),
+		Directory0 \== [] ->
 		true
-	;	'$lgt_current_directory'(Directory)
-	).
+	;	'$lgt_current_directory'(Directory0)
+	),
+	'$lgt_ji_convert_file_path'(Directory0, Directory).
 
 
 % '$lgt_user_directory'(-atom)
@@ -445,13 +463,14 @@ format(Format, Arguments) :-
 % returns the Logtalk user directory; fails if unknown
 
 '$lgt_user_directory'(Directory) :-
-	(	invoke('java.lang.System', getenv('java.lang.String'), ['LOGTALKUSER'], Directory),
-		Directory \== [] ->
+	(	invoke('java.lang.System', getenv('java.lang.String'), ['LOGTALKUSER'], Directory0),
+		Directory0 \== [] ->
 		true
 	;	% check if the LOGTALKUSER environment variable value is passed as a property
-		invoke('java.lang.System', getProperty('java.lang.String'), ['LOGTALKUSER'], Directory),
-		Directory \== []
-	).
+		invoke('java.lang.System', getProperty('java.lang.String'), ['LOGTALKUSER'], Directory0),
+		Directory0 \== []
+	),
+	'$lgt_ji_convert_file_path'(Directory0, Directory).
 
 
 
@@ -460,13 +479,14 @@ format(Format, Arguments) :-
 % returns the Logtalk home directory; fails if unknown
 
 '$lgt_home_directory'(Directory) :-
-	(	invoke('java.lang.System', getenv('java.lang.String'), ['LOGTALKHOME'], Directory),
-		Directory \== [] ->
+	(	invoke('java.lang.System', getenv('java.lang.String'), ['LOGTALKHOME'], Directory0),
+		Directory0 \== [] ->
 		true
 	;	% check if the LOGTALKHOME environment variable value is passed as a property
-		invoke('java.lang.System', getProperty('java.lang.String'), ['LOGTALKHOME'], Directory),
-		Directory \== []
-	).
+		invoke('java.lang.System', getProperty('java.lang.String'), ['LOGTALKHOME'], Directory0),
+		Directory0 \== []
+	),
+	'$lgt_ji_convert_file_path'(Directory0, Directory).
 
 
 % '$lgt_decompose_file_name'(+atom, ?atom, ?atom, ?atom)
