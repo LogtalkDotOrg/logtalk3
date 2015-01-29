@@ -25,9 +25,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/11/25,
+		date is 2015/01/29,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -216,10 +216,19 @@
 
 	% compiler error and warning messages
 
-	logtalk::message_tokens(loading_error(File), core) -->
+	logtalk::message_tokens(loading_failure(File), core) -->
+		['Unexpected failure while loading the code generated for the file:'-[], nl,
+		 '  ~w'-[File], nl,
+		 'Likely bug in the backend Prolog compiler. Please file a bug report.'-[], nl
+		].
+
+	logtalk::message_tokens(loading_error(File, Error), core) -->
 		['Unexpected error while loading the code generated for the file:'-[], nl,
 		 '  ~w'-[File], nl,
-		 'Possible bug in the backend Prolog compiler. Please file a bug report.'-[], nl
+		 '  '-[]
+		],
+		error_term_tokens(Error),
+		['Likely bug in the backend Prolog compiler. Please file a bug report.'-[], nl
 		].
 
 	logtalk::message_tokens(compiler_error(File, Lines, Error), core) -->

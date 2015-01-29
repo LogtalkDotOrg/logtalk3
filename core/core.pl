@@ -4999,15 +4999,24 @@ current_logtalk_flag(Flag, Value) :-
 		Options = [encoding(Encoding)| DefaultOptions]
 	;	Options = DefaultOptions
 	),
-	(	catch('$lgt_load_prolog_code'(ObjectFile, SourceFile, Options), _, fail) ->
+	% load the generated intermediate Prolog file but cope with unexpected error or failure
+	(	(	catch('$lgt_load_prolog_code'(ObjectFile, SourceFile, Options), Error, true) ->
+			(	var(Error) ->
+				true
+			;	% an error while loading the generated intermediate Prolog files
+				% are usually due to write_canonical/2 and/or read_term/3 bugs
+				'$lgt_print_message'(error, core, loading_error(SourceFile, Error)),
+				fail
+			)
+		;	'$lgt_print_message'(error, core, loading_failure(SourceFile)),
+			fail
+		) ->
 		true
-	;	% sometimes there are syntax errors in the generated intermediate Prolog
-		% files that are due to write_canonical/2 and/or read_term/3 bugs
-		'$lgt_print_message'(error, core, loading_error(SourceFile)),
-		retractall('$lgt_file_loading_stack_'(SourceFile)),
+	;	retractall('$lgt_file_loading_stack_'(SourceFile)),
 		assertz('$lgt_failed_file_'(SourceFile)),
 		'$lgt_propagate_failure_to_parent_files'(SourceFile)
 	),
+	% cleanup intermdiate files if necessary
 	(	'$lgt_compiler_flag'(clean, on) ->
 		'$lgt_delete_intermediate_files'(ObjectFile)
 	;	true
