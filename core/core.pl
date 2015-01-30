@@ -6588,7 +6588,7 @@ current_logtalk_flag(Flag, Value) :-
 % compiles a list of runtime terms (clauses, directives, or grammar rules)
 
 '$lgt_compile_runtime_terms'([Term| Terms]) :-
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, runtime, _, 0-0),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, runtime, _, '-'(0,0)),
 	'$lgt_compile_runtime_term'(Term, Ctx),
 	'$lgt_compile_runtime_terms'(Terms).
 
@@ -14647,7 +14647,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_predicate_calls'(Optimize) :-
 	% other auxiliary clauses
 	retract('$lgt_pp_entity_aux_clause_'(Clause)),
-	'$lgt_compile_predicate_calls'(Clause, 0-0, Optimize, TClause),
+	'$lgt_compile_predicate_calls'(Clause, '-'(0,0), Optimize, TClause),
 	assertz('$lgt_pp_final_entity_aux_clause_'(TClause)),
 	fail.
 
@@ -15488,7 +15488,7 @@ current_logtalk_flag(Flag, Value) :-
 	% avoid making a predicate discontiguous by accident by using a
 	% compilation mode that ensures that the auxiliary clauses will
 	% be written after the user clauses
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(aux), _, 0-0),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(aux), _, '-'(0,0)),
 	'$lgt_compile_clause'(Clause, Ctx),
 	'$lgt_compile_aux_clauses'(Clauses).
 
