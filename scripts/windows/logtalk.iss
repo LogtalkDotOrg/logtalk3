@@ -356,7 +356,9 @@ function JIPExePath: String;
 var
   JIP_HOME: String;
 begin
-  if RegQueryStringValue(HKLM, 'SYSTEM\CurrentControlSet\Control\Session Manager\Environment\', 'JIP_HOME', JIP_HOME) and
+  if ( RegQueryStringValue(HKLM, 'SYSTEM\CurrentControlSet\Control\Session Manager\Environment\', 'JIP_HOME', JIP_HOME) or
+       RegQueryStringValue(HKCU, 'Environment', 'JIP_HOME', JIP_HOME)
+	 ) and
      FileExists(JIP_HOME + '\jipconsole.jar')
   then
     Result := JIP_HOME + '\jipconsole.jar'
