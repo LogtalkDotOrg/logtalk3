@@ -136,7 +136,7 @@ Name: "{group}\Logtalk - ECLiPSe"; Filename: "{code:GetEclipseExePath}"; Paramet
 
 Name: "{group}\Logtalk - GNU Prolog"; Filename: "{code:GetGPExePath}"; Parameters: "--init-goal ""['$LOGTALKHOME/integration/logtalk_gp.pl']"""; Comment: "Runs Logtalk with GNU Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\gprolog; Flags: createonlyiffileexists
 
-Name: "{group}\Logtalk - JIProlog"; Filename: "{code:GetJIPExePath}"; Parameters: """['$LOGTALKHOME/integration/logtalk_ji.pl']"""; Comment: "Runs Logtalk with JIProlog"; WorkingDir: "%CD%"; Components: prolog\lean; Flags: createonlyiffileexists
+Name: "{group}\Logtalk - JIProlog"; Filename: "java -jar {code:GetJIPExePath}"; Parameters: "-c ""'{code:GetJIPIntegrationFilePath}'"""; Comment: "Runs Logtalk with JIProlog"; WorkingDir: "%CD%"; Components: prolog\lean; Flags: createonlyiffileexists
 
 Name: "{group}\Logtalk - Lean Prolog"; Filename: "{code:GetLeanPrologExePath}"; Parameters: """['$LOGTALKHOME/integration/logtalk_lean']"""; Comment: "Runs Logtalk with Lean Prolog"; WorkingDir: "%CD%"; Components: prolog\lean; Flags: createonlyiffileexists
 
@@ -352,14 +352,6 @@ begin
   end
 end;
 
-function LeanPrologExePath: String;
-begin
-  if FileExists(ExpandConstant('{pf}') + '\LeanProlog\lprolog.bat') then
-    Result := ExpandConstant('{pf}') + '\LeanProlog\lprolog.bat'
-  else
-    Result := 'prolog_compiler_not_installed'
-end;
-
 function JIPExePath: String;
 var
   JIP_HOME: String;
@@ -382,6 +374,19 @@ begin
     Warning := 'Failed to detect JIProlog installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
     MsgBox(Warning, mbError, MB_OK);
   end
+end;
+
+function GetJIPIntegrationFilePath(Param: String): String;
+begin
+  Result := GetShortName(ExpandConstant('{app}') + '\integration\logtalk_ji.pl')
+end;
+
+function LeanPrologExePath: String;
+begin
+  if FileExists(ExpandConstant('{pf}') + '\LeanProlog\lprolog.bat') then
+    Result := ExpandConstant('{pf}') + '\LeanProlog\lprolog.bat'
+  else
+    Result := 'prolog_compiler_not_installed'
 end;
 
 function GetLeanPrologExePath(Param: String): String;
