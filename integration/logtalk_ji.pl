@@ -26,10 +26,6 @@
 
 
 % load Logtalk core files
-:- invoke('java.lang.System', getProperty('java.lang.String'), ['LOGTALKHOME'], LOGTALKHOME),
-   atom_concat(LOGTALKHOME, '/adapters/unsupported/ji.pl', Adapter),
-   consult(Adapter),
-   atom_concat(LOGTALKHOME, '/paths/paths.pl', Paths),
-   consult(Paths),
-   atom_concat(LOGTALKHOME, '/core/core.pl', Core),
-   consult(Core).
+:- consult('../adapters/ji.pl').
+:- consult('../paths/paths.pl').
+:- consult('../core/core.pl').
