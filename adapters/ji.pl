@@ -3,7 +3,7 @@
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
-%  Adapter file for JIProlog 4.0.5-1 or later versions
+%  Adapter file for JIProlog 4.0.5.3 or later versions
 %  Last updated on January 30, 2015
 %
 %  This program is free software: you can redistribute it and/or modify

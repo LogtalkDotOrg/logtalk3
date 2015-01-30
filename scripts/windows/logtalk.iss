@@ -2,7 +2,7 @@
 ; Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 ; 
 ; Logtalk Inno Setup script for generating Windows installers
-; Last updated on January 7, 2015
+; Last updated on January 30, 2015
 ; 
 ; Logtalk is free software. You can redistribute it and/or modify it under
 ; the terms of the FSF GNU General Public License 3  (plus some additional
@@ -63,6 +63,7 @@ Name: "prolog\bp"; Description: "B-Prolog integration (version 7.8 or later)"; T
 Name: "prolog\cxprolog"; Description: "CxProlog integration (version 0.97.7 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\eclipse"; Description: "ECLiPSe integration (version 6.1#143 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\gprolog"; Description: "GNU Prolog integration (version 1.4.2 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
+Name: "prolog\ji"; Description: "JIProlog integration (version 4.0.5.3 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\lean"; Description: "Lean Prolog (experimental) integration (version 3.8.8 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\quintus"; Description: "Quintus Prolog (experimental) integration (version 3.3 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\sicstus"; Description: "SICStus Prolog integration (version 4.1.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
@@ -134,6 +135,8 @@ Name: "{group}\Logtalk - CxProlog"; Filename: "{code:GetCxExePath}"; Parameters:
 Name: "{group}\Logtalk - ECLiPSe"; Filename: "{code:GetEclipseExePath}"; Parameters: "-L iso -t user -b ""$LOGTALKHOME/integration/logtalk_eclipse.pl"""; Comment: "Runs Logtalk with ECLiPSe"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\eclipse; Flags: createonlyiffileexists
 
 Name: "{group}\Logtalk - GNU Prolog"; Filename: "{code:GetGPExePath}"; Parameters: "--init-goal ""['$LOGTALKHOME/integration/logtalk_gp.pl']"""; Comment: "Runs Logtalk with GNU Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\gprolog; Flags: createonlyiffileexists
+
+Name: "{group}\Logtalk - JIProlog"; Filename: "{code:GetJIPExePath}"; Parameters: """['$LOGTALKHOME/integration/logtalk_ji.pl']"""; Comment: "Runs Logtalk with JIProlog"; WorkingDir: "%CD%"; Components: prolog\lean; Flags: createonlyiffileexists
 
 Name: "{group}\Logtalk - Lean Prolog"; Filename: "{code:GetLeanPrologExePath}"; Parameters: """['$LOGTALKHOME/integration/logtalk_lean']"""; Comment: "Runs Logtalk with Lean Prolog"; WorkingDir: "%CD%"; Components: prolog\lean; Flags: createonlyiffileexists
 
@@ -355,6 +358,30 @@ begin
     Result := ExpandConstant('{pf}') + '\LeanProlog\lprolog.bat'
   else
     Result := 'prolog_compiler_not_installed'
+end;
+
+function JIPExePath: String;
+var
+  JIP_HOME: String;
+begin
+  if RegQueryStringValue(HKLM, 'SYSTEM\CurrentControlSet\Control\Session Manager\Environment\', 'JIP_HOME', JIP_HOME) and
+     FileExists(JIP_HOME + '\jipconsole.jar')
+  then
+    Result := JIP_HOME + '\jipconsole.jar'
+  else
+    Result := 'prolog_compiler_not_installed'
+end;
+
+function GetJIPExePath(Param: String): String;
+var
+  Warning: String;
+begin
+  Result := JIPExePath;
+  if Result = 'prolog_compiler_not_installed' then
+  begin
+    Warning := 'Failed to detect JIProlog installation.' + Chr(13) + 'Logtalk integration shortcut not created.';
+    MsgBox(Warning, mbError, MB_OK);
+  end
 end;
 
 function GetLeanPrologExePath(Param: String): String;
@@ -633,6 +660,7 @@ begin
       (CxExePath = 'prolog_compiler_not_installed') and
       (EclipseExePath = 'prolog_compiler_not_installed') and
       (GPExePath = 'prolog_compiler_not_installed') and
+      (JIPExePath = 'prolog_compiler_not_installed') and
       (LeanPrologExePath = 'prolog_compiler_not_installed') and
       (QuintusExePath = 'prolog_compiler_not_installed') and
       (SICStusExePath = 'prolog_compiler_not_installed') and

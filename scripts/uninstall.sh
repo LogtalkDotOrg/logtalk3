@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Logtalk uninstall script
-##   Last updated on November 3, 2014
+##   Last updated on January 30, 2015
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -70,6 +70,7 @@ rm -f bplgt
 rm -f cxlgt
 rm -f eclipselgt
 rm -f gplgt
+rm -f jiplgt
 rm -f lgt2html
 rm -f lgt2pdf
 rm -f lgt2xml
@@ -91,6 +92,8 @@ cd ../share/man/man1
 rm -f bplgt.1.gz
 rm -f cxlgt.1.gz
 rm -f eclipselgt.1.gz
+rm -f gplgt.1.gz
+rm -f jiplgt.1.gz
 rm -f lgt2html.1.gz
 rm -f lgt2pdf.1.gz
 rm -f lgt2xml.1.gz

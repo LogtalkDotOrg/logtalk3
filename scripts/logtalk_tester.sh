@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Unit testing automation script
-##   Last updated on December 3, 2014
+##   Last updated on January 30, 2015
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "`basename $0` 0.15"
+	echo "`basename $0` 0.16"
 	exit 0
 }
 
@@ -80,7 +80,7 @@ usage_help()
 	echo "Optional arguments:"
 	echo "  -v print version of `basename $0`"
 	echo "  -p back-end Prolog compiler (default is $backend)"
-	echo "     (possible values are b, cx, eclipse, gnu, lean, qp, sicstus, swi, xsb, xsbmt, and yap)"
+	echo "     (possible values are b, cx, eclipse, gnu, ji, lean, qp, sicstus, swi, xsb, xsbmt, and yap)"
 	echo "  -m compilation mode (default is $mode)"
 	echo "     (possible values are optimal, normal, debug, and all)"
 	echo "  -d directory to store the test results (default is ./tester_results)"
@@ -117,6 +117,10 @@ elif [ "$p_arg" == "gnu" ] ; then
 	prolog='GNU Prolog'
 	logtalk=gplgt$extension
 	logtalk_call="$logtalk --query-goal"
+elif [ "$p_arg" == "ji" ] ; then
+	prolog='JIProlog'
+	logtalk=jiplgt$extension
+	logtalk_call="$logtalk -g"
 elif [ "$p_arg" == "lean" ] ; then
 	prolog='Lean Prolog'
 	logtalk=lplgt$extension

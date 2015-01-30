@@ -213,6 +213,17 @@ to type:
 	$ logtalk
 
 
+JIProlog 4.0.5.3 and later versions
+
+	ji.pl
+
+Written with the help of Ugo Chirico, JIProlog author (but if you find any
+Logtalk problem please report it to me). Some examples may not compile or
+run due to work in progress regarding ISO Prolog standard compliance.
+Settings files are not supported (must be manually loaded after starting
+Logtalk).
+
+
 Lean Prolog 3.8.8 and later versions
 ------------------------------------
 
