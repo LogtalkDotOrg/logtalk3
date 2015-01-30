@@ -38,7 +38,7 @@
 	:- info([
 		version is 1.14,
 		author is 'Paulo Moura',
-		date is 2015/01/29,
+		date is 2015/01/30,
 		comment is 'Simple example of using conditional compilation to implement a portable operating-system interface for selected back-end Prolog compilers.'
 	]).
 
@@ -1249,8 +1249,8 @@
 
 	:- elif(current_logtalk_flag(prolog_dialect, ji)).
 
-		pid(_) :-
-			throw(not_available(pid/1)).
+		pid(PID) :-
+			{pid(PID)}.
 
 		shell(Command, Status) :-
 			{shell(Command, Status)}.
