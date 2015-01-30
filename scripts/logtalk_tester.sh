@@ -120,7 +120,7 @@ elif [ "$p_arg" == "gnu" ] ; then
 elif [ "$p_arg" == "ji" ] ; then
 	prolog='JIProlog'
 	logtalk=jiplgt$extension
-	logtalk_call="$logtalk -g"
+	logtalk_call="$logtalk -n -g"
 elif [ "$p_arg" == "lean" ] ; then
 	prolog='Lean Prolog'
 	logtalk=lplgt$extension
