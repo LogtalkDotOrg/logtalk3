@@ -82,6 +82,7 @@ following table summarizes the availability of these features:
 |  B-Prolog        |      yes      |       no      |       no      |       no      |  
 |  CxProlog        |       no      |      yes      |      yes      |       no      |  
 |  ECLiPSe         |       no      |      yes      |       no      |       no      |  
+|  JIProlog        |       no      |       no      |       no      |       no      |  
 |  GNU Prolog      |       no      |       no      |       no      |       no      |  
 |  Lean Prolog     |       no      |       no      |      yes      |       no      |  
 |  Qu-Prolog       |       no      |       no      |       no      |       no      |  

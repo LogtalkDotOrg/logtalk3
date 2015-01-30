@@ -63,10 +63,13 @@ categories and protocols.
 Prolog adapter and integration files
 ------------------------------------
 
+* ADDED: POSIX integration shell script and Windows integration shortcut for
+JIProlog.
+
 * UPDATED: GNU Prolog adapter file to set the `modules` flag depending on the
 presence of a native module system.
 
-* UPDATED: JIProlog adapter file for changes in version 4.0.5-1.
+* UPDATED: JIProlog adapter file for changes in version 4.0.5.3.
 
 * FIXED: Definition for the missing `subsumes_term/2` standard predicate in
 the adapter files for CxProlog and Qu-Prolog for conformance.

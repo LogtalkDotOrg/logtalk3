@@ -40,7 +40,7 @@ scripts!):
 * CxProlog:       `cxlgt`
 * ECLiPSe:        `eclipselgt`
 * GNU Prolog:     `gplgt`
-* JIProlog:       `jiplgt`
+* JIProlog:       `jiplgt`     (first run may require `sudo`)
 * Lean Prolog:    `lplgt`      (experimental)
 * Qu-Prolog:      `qplgt`
 * Quintus Prolog: `quintuslgt` (experimental)
