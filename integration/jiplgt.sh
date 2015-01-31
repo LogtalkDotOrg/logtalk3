@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Integration script for JIProlog
-##   Last updated on January 30, 2015
+##   Last updated on January 31, 2015
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -101,8 +101,4 @@ echo
 
 export LOGTALK_STARTUP_DIRECTORY=`pwd`
 
-if [ "$JIP_HOME" ]; then
-	exec java -jar -DLOGTALKHOME="$LOGTALKHOME" -DLOGTALKUSER="$LOGTALKUSER" -DHOME="$HOME" "$JIP_HOME/jipconsole.jar" -c "$LOGTALKHOME/integration/logtalk_ji.pl" "$@"
-else
-	exec java -jar -DLOGTALKHOME="$LOGTALKHOME" -DLOGTALKUSER="$LOGTALKUSER" -DHOME="$HOME" jipconsole.jar -c "$LOGTALKHOME/integration/logtalk_ji.pl" "$@"
-fi
+exec java -jar -DLOGTALKHOME="$LOGTALKHOME" -DLOGTALKUSER="$LOGTALKUSER" -DHOME="$HOME" "$JIP_HOME/jipconsole.jar" -c "$LOGTALKHOME/integration/logtalk_ji.pl" "$@"
