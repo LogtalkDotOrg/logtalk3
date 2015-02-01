@@ -11,7 +11,7 @@
 
 :- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == swi; Dialect == yap))).
 
-	:- if((absolute_file_name(library(jpl), [file_type(prolog)], Path), exists_file(Path))).
+	:- if(exists_source(library(jpl))).
 
 		:- use_module(library(jpl), []).
 		:- initialization((
