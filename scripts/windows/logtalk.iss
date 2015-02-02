@@ -2,7 +2,7 @@
 ; Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 ; 
 ; Logtalk Inno Setup script for generating Windows installers
-; Last updated on January 30, 2015
+; Last updated on February 2, 2015
 ; 
 ; Logtalk is free software. You can redistribute it and/or modify it under
 ; the terms of the FSF GNU General Public License 3  (plus some additional
@@ -136,9 +136,9 @@ Name: "{group}\Logtalk - ECLiPSe"; Filename: "{code:GetEclipseExePath}"; Paramet
 
 Name: "{group}\Logtalk - GNU Prolog"; Filename: "{code:GetGPExePath}"; Parameters: "--init-goal ""['$LOGTALKHOME/integration/logtalk_gp.pl']"""; Comment: "Runs Logtalk with GNU Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\gprolog; Flags: createonlyiffileexists
 
-Name: "{group}\Logtalk - JIProlog"; Filename: "{code:GetJIPExePath}"; Parameters: "-c ""{code:GetJIPIntegrationFilePath}"""; Comment: "Runs Logtalk with JIProlog (first time may require running as administrator)"; WorkingDir: "%CD%"; Components: prolog\ji; Flags: createonlyiffileexists
+Name: "{group}\Logtalk - JIProlog"; Filename: "{code:GetJIPExePath}"; Parameters: "-c ""{code:GetJIPIntegrationFilePath}"""; Comment: "Runs Logtalk with JIProlog (first time may require running as administrator)"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\ji; Flags: createonlyiffileexists
 
-Name: "{group}\Logtalk - Lean Prolog"; Filename: "{code:GetLeanPrologExePath}"; Parameters: """['$LOGTALKHOME/integration/logtalk_lean']"""; Comment: "Runs Logtalk with Lean Prolog"; WorkingDir: "%CD%"; Components: prolog\lean; Flags: createonlyiffileexists
+Name: "{group}\Logtalk - Lean Prolog"; Filename: "{code:GetLeanPrologExePath}"; Parameters: """['$LOGTALKHOME/integration/logtalk_lean']"""; Comment: "Runs Logtalk with Lean Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\lean; Flags: createonlyiffileexists
 
 Name: "{group}\Logtalk - Quintus Prolog"; Filename: "{code:GetQuintusExePath}"; Parameters: "+l ""{code:GetQuintusIntegrationFilePath}"" +z ""%LOGTALKHOME%"""; Comment: "Runs Logtalk with Quintus Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\quintus; Flags: createonlyiffileexists
 
