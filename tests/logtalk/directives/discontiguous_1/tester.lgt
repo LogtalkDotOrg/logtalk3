@@ -9,20 +9,21 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if((current_logtalk_flag(prolog_dialect, b); current_logtalk_flag(prolog_dialect, xsb))).
-
-	% B-Prolog 7.8#5 and XSB 3.4 and earlier version don't support discontiguous predicates
-	:- initialization((
-		write('(not applicable)'), nl
-	)).
-
-:- else.
+:- if((current_logtalk_flag(prolog_dialect, Dialect), Dialect \== b, Dialect \== ji, Dialect \== xsb)).
 
 	:- initialization((
 		set_logtalk_flag(report, warnings),
 		logtalk_load(lgtunit(loader)),
 		logtalk_load(tests, [hook(lgtunit)]),
 		tests::run
+	)).
+
+:- else.
+
+	% B-Prolog 7.8#5, JIProlog 4.0, and XSB 3.5 and earlier
+	% versions don't support discontiguous predicates
+	:- initialization((
+		write('(not applicable)'), nl
 	)).
 
 :- endif.
