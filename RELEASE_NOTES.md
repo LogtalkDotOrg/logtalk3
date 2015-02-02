@@ -95,6 +95,11 @@ Documentation
 * IMPROVED: Reference Manual sections on the `uses/2` and `use_module/2`
 directives and on the `{}/1` compiler bypass control construct.
 
+Tools
+-----
+
+* UPDATED: The `debugger` tool for compatibility with JIProlog.
+
 Examples
 --------
 

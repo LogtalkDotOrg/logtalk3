@@ -26,9 +26,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 2.0,
+		version is 2.01,
 		author is 'Paulo Moura',
-		date is 2014/10/09,
+		date is 2015/02/02,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -445,16 +445,12 @@
 		;	{TGoal}
 		).
 
-	:- if((	current_logtalk_flag(prolog_dialect, Dialect),
-			(Dialect == b; Dialect == qp; Dialect == swi; Dialect == yap)
-	)).
+	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == b; Dialect == qp; Dialect == swi; Dialect == yap))).
 
 		call_goal(TGoal, Deterministic) :-
 			{setup_call_cleanup(true, TGoal, Deterministic = true)}.
 
-	:- elif((	current_logtalk_flag(prolog_dialect, Dialect),
-			(Dialect == cx; Dialect == sicstus; Dialect == xsb)
-	)).
+	:- elif((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == cx; Dialect == sicstus; Dialect == xsb))).
 
 		call_goal(TGoal, Deterministic) :-
 			{call_cleanup(TGoal, Deterministic = true)}.
@@ -752,7 +748,7 @@
 		),
 		fail.
 
-	:- if((current_logtalk_flag(prolog_dialect,Dialect), Dialect \== b, Dialect \== cx, Dialect \== lean)).
+	:- if((current_logtalk_flag(prolog_dialect,Dialect), Dialect \== b, Dialect \== cx, Dialect \== ji, Dialect \== lean)).
 
 	do_port_option((<), _, _, _, _, _, _, _) :-
 		ask_question(question, debugger, enter_write_max_depth, '=<'(0), N),
@@ -881,6 +877,11 @@
 
 		read_single_char(Char) :-
 			get_key(Code), char_code(Char, Code), nl.
+
+	:- elif(current_logtalk_flag(prolog_dialect, ji)).
+
+		read_single_char(Char) :-
+			get_code(Code), put_code(Code), char_code(Char, Code), nl.
 
 	:- elif(current_logtalk_flag(prolog_dialect, lean)).
 
