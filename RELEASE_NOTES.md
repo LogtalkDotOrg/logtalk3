@@ -90,6 +90,8 @@ instead of simply writing it out to the current directory.
 Documentation
 -------------
 
+* ADDED: POSIX man page for the new `jiplgt` integration script.
+
 * ADDED: User Manual section on reserved predicates names.
 
 * IMPROVED: Reference Manual sections on the `uses/2` and `use_module/2`
