@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  sample settings file
-%  Last updated on December 15, 2014
+%  Last updated on January 3, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -342,7 +342,7 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 %  lines:
 
 /*
-:- category(my_logtalk_startup_settings).
+:- category(my_logtalk_message_settings).
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).
