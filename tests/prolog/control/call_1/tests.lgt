@@ -23,9 +23,9 @@ a(2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.01,
 		author is 'Paulo Moura',
-		date is 2014/11/04,
+		date is 2015/02/04,
 		comment is 'Unit tests for the ISO Prolog standard call/1 built-in predicate.'
 	]).
 
@@ -65,7 +65,7 @@ a(2).
 
 	succeeds(iso_call_1_08) :-
 		findall(Z-X, {call((Z=!, a(X), Z))}, L),
-		L == [!-1, !-2].
+		L == [ !-1, !-2 ].
 
 	throws(iso_call_1_09, error(instantiation_error,_)) :-
 		{call((write(3), _X))}.
