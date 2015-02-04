@@ -38,7 +38,7 @@
 	:- info([
 		version is 1.14,
 		author is 'Paulo Moura',
-		date is 2015/01/30,
+		date is 2015/02/04,
 		comment is 'Simple example of using conditional compilation to implement a portable operating-system interface for selected back-end Prolog compilers.'
 	]).
 
@@ -1353,13 +1353,13 @@
 			{delete_file(ExpandedPath)}.
 
 		environment_variable(Variable, Value) :-
-			{(	invoke('java.lang.System', getenv('java.lang.String'), [Variable], Value),
+			(	{invoke('java.lang.System', getenv('java.lang.String'), [Variable], Value)},
 				Value \== [] ->
 				true
 			;	% check if the environment variable value is passed as a property
-			 	invoke('java.lang.System', getProperty('java.lang.String'), [Variable], Value),
+			 	{invoke('java.lang.System', getProperty('java.lang.String'), [Variable], Value)},
 				Value \== []
-			)}.
+			).
 
 		time_stamp(Time) :-
 			{get_time(Time)}.
@@ -1374,7 +1374,8 @@
 			throw(not_available(wall_time/1)).
 
 		operating_system_type(Type) :-
-			(	environment_variable('COMSPEC', _) ->
+			{invoke('java.lang.System', getProperty('java.lang.String'), ['os.name'], Name)},
+			(	sub_atom(Name, 0, _, _, 'Windows') ->
 				Type = windows
 			;	Type = unix
 			).
