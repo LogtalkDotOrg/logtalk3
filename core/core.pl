@@ -89,16 +89,14 @@
 :- dynamic('$lgt_after_event_'/5).
 
 
-% tables of loaded entities, entity properties, entity relations, and entity predicate properties
+% tables of loaded entities, entity and predicate properties, plus entity relations
 
 % '$lgt_current_protocol_'(Ptc, Prefix, Dcl, Rnm, Flags)
 :- multifile('$lgt_current_protocol_'/5).
 :- dynamic('$lgt_current_protocol_'/5).
-
 % '$lgt_current_category_'(Ctg, Prefix, Dcl, Def, Rnm, Flags)
 :- multifile('$lgt_current_category_'/6).
 :- dynamic('$lgt_current_category_'/6).
-
 % '$lgt_current_object_'(Obj, Prefix, Dcl, Def, Super, IDcl, IDef, DDcl, DDef, Rnm, Flags)
 :- multifile('$lgt_current_object_'/11).
 :- dynamic('$lgt_current_object_'/11).
@@ -106,7 +104,6 @@
 % '$lgt_entity_property_'(Entity, Property)
 :- multifile('$lgt_entity_property_'/2).
 :- dynamic('$lgt_entity_property_'/2).
-
 % '$lgt_predicate_property_'(Entity, Functor/Arity, Property)
 :- multifile('$lgt_predicate_property_'/3).
 :- dynamic('$lgt_predicate_property_'/3).
@@ -114,31 +111,24 @@
 % '$lgt_implements_protocol_'(ObjOrCtg, Ptc, Scope)
 :- multifile('$lgt_implements_protocol_'/3).
 :- dynamic('$lgt_implements_protocol_'/3).
-
 % '$lgt_imports_category_'(Obj, Ctg, Scope)
 :- multifile('$lgt_imports_category_'/3).
 :- dynamic('$lgt_imports_category_'/3).
-
 % '$lgt_instantiates_class_'(Instance, Class, Scope)
 :- multifile('$lgt_instantiates_class_'/3).
 :- dynamic('$lgt_instantiates_class_'/3).
-
 % '$lgt_specializes_class_'(Class, Superclass, Scope)
 :- multifile('$lgt_specializes_class_'/3).
 :- dynamic('$lgt_specializes_class_'/3).
-
 % '$lgt_extends_category_'(Ctg, ExtCtg, Scope)
 :- multifile('$lgt_extends_category_'/3).
 :- dynamic('$lgt_extends_category_'/3).
-
 % '$lgt_extends_object_'(Prototype, Parent, Scope)
 :- multifile('$lgt_extends_object_'/3).
 :- dynamic('$lgt_extends_object_'/3).
-
 % '$lgt_extends_protocol_'(Ptc, ExtPtc, Scope)
 :- multifile('$lgt_extends_protocol_'/3).
 :- dynamic('$lgt_extends_protocol_'/3).
-
 % '$lgt_complemented_object_'(Obj, Ctg, Dcl, Def, Rnm)
 :- multifile('$lgt_complemented_object_'/5).
 :- dynamic('$lgt_complemented_object_'/5).
@@ -148,13 +138,10 @@
 
 % '$lgt_loaded_file_'(Basename, Directory, Mode, Flags, TextProperties, ObjectFile, TimeStamp)
 :- dynamic('$lgt_loaded_file_'/7).
-
 % '$lgt_failed_file_'(SourceFile)
 :- dynamic('$lgt_failed_file_'/1).
-
 % '$lgt_parent_file_'(SourceFile, ParentSourceFile)
 :- dynamic('$lgt_parent_file_'/2).
-
 % '$lgt_file_loading_stack_'(SourceFile)
 :- dynamic('$lgt_file_loading_stack_'/1).
 
@@ -175,16 +162,12 @@
 
 % '$lgt_send_to_obj_'(Obj, Pred, ExCtx)
 :- dynamic('$lgt_send_to_obj_'/3).
-
 % '$lgt_send_to_obj_ne_'(Obj, Pred, ExCtx)
 :- dynamic('$lgt_send_to_obj_ne_'/3).
-
 % '$lgt_send_to_self_'(Obj, Pred, ExCtx)
 :- dynamic('$lgt_send_to_self_'/3).
-
 % '$lgt_obj_super_call_'(Super, Pred, ExCtx)
 :- dynamic('$lgt_obj_super_call_'/3).
-
 % '$lgt_ctg_super_call_'(Ctg, Pred, ExCtx)
 :- dynamic('$lgt_ctg_super_call_'/3).
 
@@ -206,7 +189,6 @@
 
 % '$lgt_hook_term_expansion_'(Term, ExpandedTerms)
 :- dynamic('$lgt_hook_term_expansion_'/2).
-
 % '$lgt_hook_goal_expansion_'(Goal, ExpandedGoal)
 :- dynamic('$lgt_hook_goal_expansion_'/2).
 
@@ -215,7 +197,6 @@
 
 % '$lgt_dynamic_entity_counter_'(Kind, Base, Count)
 :- dynamic('$lgt_dynamic_entity_counter_'/3).
-
 % '$lgt_threaded_tag_counter_'(Tag)
 :- dynamic('$lgt_threaded_tag_counter_'/1).
 
@@ -3771,7 +3752,7 @@ current_logtalk_flag(Flag, Value) :-
 				% lookup predicate definition
 				'$lgt_execution_context'(ExCtx, _, GSender, GObj, GObj, GMetaCallCtx, []),
 				call(Def, GPred, ExCtx, GCall, _, _) ->
-				% cache lookup result
+				% cache lookup result (the cut prevents backtracking into the catchall clause)
 				asserta(('$lgt_send_to_self_'(GObj, GPred, GSenderExCtx) :- !, GCall)),
 				% unify message arguments and call method
 				GObj = Obj, GPred = Pred, GSender = Sender, GSenderExCtx = SenderExCtx,
@@ -3800,13 +3781,14 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_send_to_obj_rt'(+object_identifier, +callable, +atom, +compilation_context)
 %
-% runtime processing of a message sending call when the message and possibly the receiver
-% object are not known at compile time
+% runtime processing of a message sending call when the message and possibly the
+% receiver object are not known at compile time
 
 '$lgt_send_to_obj_rt'(Obj, Pred, Events, Ctx) :-
 	% we must ensure that the message is valid before compiling the
 	% message sending goal otherwise an endless loop would result
 	'$lgt_comp_ctx_this'(Ctx, Sender),
+	% avoid an endless loop if the message is not a callable term
 	'$lgt_must_be'(callable, Pred, logtalk(Obj::Pred, Sender)),
 	catch('$lgt_compile_message_to_object'(Pred, Obj, TPred, Events, Ctx), Error, throw(error(Error, logtalk(Obj::Pred, Sender)))),
 	call(TPred).
@@ -3866,7 +3848,7 @@ current_logtalk_flag(Flag, Value) :-
 				'$lgt_execution_context'(ExCtx, _, GSender, GObj, GObj, GMetaCallCtx, []),
 				call(Def, GPred, ExCtx, GCall, _, _) ->
 				GGCall = '$lgt_guarded_method_call'(GObj, GPred, GSender, GCall),
-				% cache lookup result
+				% cache lookup result (the cut prevents backtracking into the catchall clause)
 				asserta(('$lgt_send_to_obj_'(GObj, GPred, GSenderExCtx) :- !, GGCall)),
 				% unify message arguments and call method
 				GObj = Obj, GPred = Pred, GSender = Sender, GSenderExCtx = SenderExCtx,
@@ -3884,7 +3866,7 @@ current_logtalk_flag(Flag, Value) :-
 				% lookup predicate definition
 				call(Def, GPred, ExCtx, GCall, _, _) ->
 				GGCall = '$lgt_guarded_method_call'(GObj, GPred, GSender, GCall),
-				% cache lookup result
+				% cache lookup result (the cut prevents backtracking into the catchall clause)
 				asserta(('$lgt_send_to_obj_'(GObj, GPred, GSenderExCtx) :- !, GGCall)),
 				% unify message arguments and call method
 				GObj = Obj, GPred = Pred, GSender = Sender, GSenderExCtx = SenderExCtx,
@@ -3990,7 +3972,7 @@ current_logtalk_flag(Flag, Value) :-
 				% lookup predicate definition
 				'$lgt_execution_context'(ExCtx, _, GSender, GObj, GObj, GMetaCallCtx, []),
 				call(Def, GPred, ExCtx, GCall, _, _) ->
-				% cache lookup result
+				% cache lookup result (the cut prevents backtracking into the catchall clause)
 				asserta(('$lgt_send_to_obj_ne_'(GObj, GPred, GSenderExCtx) :- !, GCall)),
 				% unify message arguments and call method
 				GObj = Obj, GPred = Pred, GSender = Sender, GSenderExCtx = SenderExCtx,
@@ -4007,7 +3989,7 @@ current_logtalk_flag(Flag, Value) :-
 				% lookup predicate definition
 				'$lgt_execution_context'(ExCtx, _, GSender, GObj, GObj, _, []),
 				call(Def, GPred, ExCtx, GCall, _, _) ->
-				% cache lookup result
+				% cache lookup result (the cut prevents backtracking into the catchall clause)
 				asserta(('$lgt_send_to_obj_ne_'(GObj, GPred, GSenderExCtx) :- !, GCall)),
 				% unify message arguments and call method
 				GObj = Obj, GPred = Pred, GSender = Sender, GSenderExCtx = SenderExCtx,
@@ -4107,7 +4089,7 @@ current_logtalk_flag(Flag, Value) :-
 				% lookup predicate definition (the predicate must not be
 				% defined in the same entity making the "super" call)
 				call(Super, GPred, GExCtx, GCall, _, DefCtn), DefCtn \= GThis ->
-				% cache lookup result
+				% cache lookup result (the cut prevents backtracking into the catchall clause)
 				asserta(('$lgt_obj_super_call_'(Super, GPred, GExCtx) :- !, GCall)),
 				% unify message arguments and call inherited definition
 				GPred = Pred, GExCtx = ExCtx,
@@ -4169,7 +4151,7 @@ current_logtalk_flag(Flag, Value) :-
 				% lookup predicate definition (the predicate must not be
 				% defined in the same entity making the "super" call)
 				call(Def, GPred, GExCtx, GCall, DefCtn), DefCtn \= Ctg ->
-				% cache lookup result
+				% cache lookup result (the cut prevents backtracking into the catchall clause)
 				asserta(('$lgt_ctg_super_call_'(GCtg, GPred, GExCtx) :- !, GCall)),
 				% unify message arguments and call inherited definition
 				GCtg = Ctg, GPred = Pred, GExCtx = ExCtx,
@@ -11596,19 +11578,17 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_comp_ctx_this'(Ctx, This),
 	'$lgt_compile_message_to_object'(Pred, Proxy, TPred, Events, Ctx).
 
-% invalid object identifier
-
-'$lgt_compile_message_to_object'(_, Obj, _, _, _) :-
-	nonvar(Obj),
-	\+ callable(Obj),
-	throw(type_error(object_identifier, Obj)).
-
-% remember the object receiving the message
+% type and lint checks
 
 '$lgt_compile_message_to_object'(_, Obj, _, _, Ctx) :-
-	nonvar(Obj),
-	'$lgt_add_referenced_object'(Obj, Ctx),
-	fail.
+	(	callable(Obj) ->
+		% remember the object receiving the message
+		'$lgt_add_referenced_object'(Obj, Ctx),
+		fail
+	;	nonvar(Obj),
+		% invalid object identifier
+		throw(type_error(object_identifier, Obj))
+	).
 
 % translation performed at runtime
 
