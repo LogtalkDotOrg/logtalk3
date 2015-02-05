@@ -30,11 +30,11 @@
 		parameter(3, Color).
 
 	area(Area) :-
-		::radius(Radius),
+		parameter(2, Radius),
 		Area is 3.14159265358979*Radius*Radius.
 
 	perimeter(Perimeter) :-
-		::radius(Radius),
+		parameter(2, Radius),
 		Perimeter is 2*3.14159265358979*Radius.
 
 	print :-
