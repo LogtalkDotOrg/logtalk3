@@ -11799,16 +11799,22 @@ current_logtalk_flag(Flag, Value) :-
 	var(Obj),
 	% translation performed at runtime
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, _, _, Lines),
-	'$lgt_add_referenced_object_message'(Obj, Pred, Head, Lines),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
+	(	Mode == runtime ->
+		true
+	;	'$lgt_add_referenced_object_message'(Obj, Pred, Head, Lines)
+	),
 	(	Events == allow ->
 		TPred = '$lgt_send_to_obj'(Obj, Pred, ExCtx)
 	;	TPred = '$lgt_send_to_obj_ne'(Obj, Pred, ExCtx)
 	).
 
 '$lgt_compile_message_to_object'(Pred, Obj, TPred, Events, Ctx) :-
-	'$lgt_comp_ctx'(Ctx, Head, _, _, This, _, _, _, _, ExCtx, _, _, Lines),
-	'$lgt_add_referenced_object_message'(Obj, Pred, Head, Lines),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
+	(	Mode == runtime ->
+		true
+	;	'$lgt_add_referenced_object_message'(Obj, Pred, Head, Lines)
+	),
 	(	Events == allow ->
 		(	'$lgt_compiler_flag'(optimize, on),
 			'$lgt_send_to_obj_static_binding'(Obj, Pred, Call, Ctx) ->
