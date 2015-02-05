@@ -4745,9 +4745,9 @@ current_logtalk_flag(Flag, Value) :-
 
 % lookup predicate definitions in any category that complements the given object
 
-'$lgt_complemented_object'(ThisDef, Alias, OExCtx, Call, Ctn) :-
-	'$lgt_execution_context_update_this_entity'(OExCtx, This, This, CExCtx, This, Ctg),
+'$lgt_complemented_object'(This, ThisDef, Alias, OExCtx, Call, Ctn) :-
 	'$lgt_complemented_object_'(This, Ctg, _, Def, Rnm),
+	'$lgt_execution_context_update_this_entity'(OExCtx, This, This, CExCtx, This, Ctg),
 	(	call(Def, Alias, CExCtx, Call, Ctn)
 	;	% categories may also define aliases for complemented object predicates
 		call(Rnm, This, Pred, Alias),
@@ -14065,7 +14065,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_generate_prototype_complements_def_clauses'(Obj, Def) :-
 	Head =.. [Def, Pred, ExCtx, Call, Obj, Ctn],
-	Lookup = '$lgt_complemented_object'(Def, Pred, ExCtx, Call, Ctn),
+	Lookup = '$lgt_complemented_object'(Obj, Def, Pred, ExCtx, Call, Ctn),
 	assertz('$lgt_pp_def_'((Head:-Lookup))).
 
 
@@ -14391,7 +14391,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_generate_ic_complements_def_clauses'(Obj, Def) :-
 	Head =.. [Def, Pred, ExCtx, Call, Obj, Ctn],
-	Lookup = '$lgt_complemented_object'(Def, Pred, ExCtx, Call, Ctn),
+	Lookup = '$lgt_complemented_object'(Obj, Def, Pred, ExCtx, Call, Ctn),
 	assertz('$lgt_pp_def_'((Head:-Lookup))).
 
 
@@ -14476,7 +14476,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_generate_ic_complements_idef_clauses'(Obj, IDef) :-
 	Head =.. [IDef, Pred, ExCtx, Call, Obj, Ctn],
-	Lookup = '$lgt_complemented_object'(IDef, Pred, ExCtx, Call, Ctn),
+	Lookup = '$lgt_complemented_object'(Obj, IDef, Pred, ExCtx, Call, Ctn),
 	assertz('$lgt_pp_def_'((Head:-Lookup))).
 
 

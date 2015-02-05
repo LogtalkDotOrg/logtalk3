@@ -60,6 +60,9 @@ compiler).
 * FIXED: Bug where the `debugging` entity property would always be false for
 categories and protocols.
 
+* FIXED: Potential bug in the rare case where a category complements two or
+more objects.
+
 Prolog adapter and integration files
 ------------------------------------
 
