@@ -8,7 +8,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on January 19, 2015
+%  Last updated on February 6, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -660,7 +660,6 @@ user:portray(c(This, Entity, Rest)) :-
 :- meta_predicate user:'$lgt_category_property'(*,*,*,*,*,*).
 :- meta_predicate user:'$lgt_send_to_obj_nv_inner'(*,*,*,*).
 :- meta_predicate user:'$lgt_object_property_declares'(*,*,*,*,*,*).
-:- meta_predicate user:'$lgt_complemented_object'(*,*,*,*,*).
 :- meta_predicate user:'$lgt_object_property_defines'(*,*,*,*,*).
 :- meta_predicate user:'$lgt_find_original_predicate'(*,*,*,*,*,*).
 :- meta_predicate user:'$lgt_find_original_predicate'(*,*,*,*,*,*,*).
@@ -688,6 +687,7 @@ user:portray(c(This, Entity, Rest)) :-
 :- meta_predicate user:'$lgt_threaded_ignore'(*).
 :- meta_predicate user:'$lgt_send_to_obj_nv'(*,*,*).
 :- meta_predicate user:'$lgt_complemented_object'(*,*,*,*,*,*,*,*).
+:- meta_predicate user:'$lgt_complemented_object'(*,*,*,*,*,*).
 :- meta_predicate user:'$lgt_object_property'(*,*,*,*,*,*,*,*).
 :- meta_predicate user:'$lgt_object_property_resources'(*,*,*,*,*,*).
 :- meta_predicate user:'$lgt_object_property_resource'(*,*,*,*,*,*).
