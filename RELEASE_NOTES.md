@@ -85,6 +85,9 @@ Library
 * FIXED: Definition of the predicate `os::wall_time/1` for Quintus Prolog,
 SICStus Prolog, SWI-Prolog, and YAP.
 
+* FIXED: Definitions of the predicates `os::date_time/7` and `os::cpu_time/1`
+for JIProlog.
+
 Installers and installation scripts
 -----------------------------------
 

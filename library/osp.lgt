@@ -26,9 +26,9 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1.10,
+		version is 1.11,
 		author is 'Paulo Moura',
-		date is 2012/12/02,
+		date is 2015/02/06,
 		comment is 'Portable operating-system access protocol.'
 	]).
 
@@ -155,21 +155,21 @@
 	:- mode(date_time(-integer, -integer, -integer, -integer, -integer, -integer, -integer), one).
 	:- info(date_time/7, [
 		comment is 'Returns the current date and time.',
-		argnames is ['Year', 'Month', 'Day', 'Hours', 'Mins', 'Secs', 'Milisecs']
+		argnames is ['Year', 'Month', 'Day', 'Hours', 'Mins', 'Seconds', 'Miliseconds']
 	]).
 
 	:- public(cpu_time/1).
 	:- mode(cpu_time(-number), one).
 	:- info(cpu_time/1, [
 		comment is 'System cpu time in seconds.',
-		argnames is ['Time']
+		argnames is ['Seconds']
 	]).
 
 	:- public(wall_time/1).
 	:- mode(wall_time(-number), one).
 	:- info(wall_time/1, [
 		comment is 'Wall time in seconds.',
-		argnames is ['Time']
+		argnames is ['Seconds']
 	]).
 
 	:- public(operating_system_type/1).

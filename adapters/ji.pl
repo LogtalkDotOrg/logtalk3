@@ -3,8 +3,8 @@
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
-%  Adapter file for JIProlog 4.0.5.3 or later versions
-%  Last updated on January 31, 2015
+%  Adapter file for JIProlog 4.0.5.12 or later versions
+%  Last updated on February 6, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -530,7 +530,8 @@ format(Format, Arguments) :-
 % '$lgt_cpu_time'(-Seconds)
 
 '$lgt_cpu_time'(Seconds) :-
-	Seconds is cputime.
+	Miliseconds is cputime,
+	Seconds is Miliseconds / 1000.
 
 
 

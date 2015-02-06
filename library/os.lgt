@@ -36,7 +36,7 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.15,
+		version is 1.16,
 		author is 'Paulo Moura',
 		date is 2015/02/06,
 		comment is 'Simple example of using conditional compilation to implement a portable operating-system interface for selected back-end Prolog compilers.'
@@ -113,9 +113,9 @@
 		time_stamp(Time) :-
 			{get_time(Time)}.
 
-		date_time(Year, Month, Day, Hours, Minutes, Seconds, Milisecs) :-
+		date_time(Year, Month, Day, Hours, Minutes, Seconds, Miliseconds) :-
 			{get_time(Time),
-			 convert_time(Time, Year, Month, Day, Hours, Minutes, Seconds, Milisecs)}.
+			 convert_time(Time, Year, Month, Day, Hours, Minutes, Seconds, Miliseconds)}.
 
 		cpu_time(Seconds) :-
 			{statistics(cputime, Seconds)}.
@@ -1377,11 +1377,12 @@
 		time_stamp(Time) :-
 			{get_time(Time)}.
 
-		date_time(Year, Month, Day, Hours, Minutes, Seconds, 0) :-
-			{time(Year, Month, Day, Hours, Minutes, Seconds, _)}.
+		date_time(Year, Month, Day, Hours, Minutes, Seconds, Miliseconds) :-
+			{time(Year, Month, Day, Hours, Minutes, Seconds, Miliseconds)}.
 
 		cpu_time(Seconds) :-
-			{Seconds is cputime}.
+			{Miliseconds is cputime},
+			Seconds is Miliseconds / 1000.
 
 		wall_time(_) :-
 			throw(not_available(wall_time/1)).
