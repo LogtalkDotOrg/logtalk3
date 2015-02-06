@@ -79,6 +79,12 @@ presence of a native module system.
 * FIXED: Definition for the missing `subsumes_term/2` standard predicate in
 the adapter files for CxProlog and Qu-Prolog for conformance.
 
+Library
+-------
+
+* FIXED: Definition of the predicate `os::wall_time/1` for Quintus Prolog,
+SICStus Prolog, SWI-Prolog, and YAP.
+
 Installers and installation scripts
 -----------------------------------
 
