@@ -5513,22 +5513,25 @@ current_logtalk_flag(Flag, Value) :-
 %
 % adds referenced object for later checking of references to unknown objects;
 % we also save the line numbers for the first reference to the object
+%
+% the definition is optimized to minimize the number of inferences for
+% runtime resolved ::/2 calls
 
 '$lgt_add_referenced_object'(Obj, Ctx) :-
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(regular), _, Lines),
+	% compiling a reference in a source file
+	!,
 	(	'$lgt_pp_referenced_object_'(Obj, _) ->
 		% not the first reference to this object
 		true
-	;	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(regular), _, Lines) ->
-		% compiling a reference in a source file
-		(	atom(Obj) ->
-			assertz('$lgt_pp_referenced_object_'(Obj, Lines))
-		;	% parametric object
-			'$lgt_term_template'(Obj, Template),
-			assertz('$lgt_pp_referenced_object_'(Template, Lines))
-		)
-	;	% not a source file reference
-		true
+	;	atom(Obj) ->
+		assertz('$lgt_pp_referenced_object_'(Obj, Lines))
+	;	% parametric object
+		'$lgt_term_template'(Obj, Template),
+		assertz('$lgt_pp_referenced_object_'(Template, Lines))
 	).
+
+'$lgt_add_referenced_object'(_, _).
 
 
 
