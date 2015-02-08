@@ -6592,12 +6592,11 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_runtime_term'(end_of_file, _) :-
 	!.
 
-'$lgt_compile_runtime_term'({Term}, Ctx) :-
+'$lgt_compile_runtime_term'({Term}, _) :-
 	% bypass control construct; term is final
 	!,
 	(	callable(Term) ->
-		'$lgt_comp_ctx_lines'(Ctx, Lines),
-		assertz('$lgt_pp_entity_term_'({Term}, Lines))
+		assertz('$lgt_pp_entity_term_'({Term}, '-'(0,0)))
 	;	var(Term) ->
 		throw(error(instantiantion_error, term({Term})))
 	;	throw(error(type_error(callable, Term), term({Term})))
