@@ -3750,8 +3750,8 @@ current_logtalk_flag(Flag, Value) :-
 				% construct list of the meta-arguments that will be called in the "sender"
 				'$lgt_goal_meta_call_context'(Meta, GPred, GSenderExCtx, GSender, GMetaCallCtx),
 				% lookup predicate definition
-				'$lgt_execution_context'(ExCtx, _, GSender, GObj, GObj, GMetaCallCtx, []),
-				call(Def, GPred, ExCtx, GCall, _, _) ->
+				'$lgt_execution_context'(GExCtx, _, GSender, GObj, GObj, GMetaCallCtx, []),
+				call(Def, GPred, GExCtx, GCall, _, _) ->
 				% cache lookup result (the cut prevents backtracking into the catchall clause)
 				asserta(('$lgt_send_to_self_'(GObj, GPred, GSenderExCtx) :- !, GCall)),
 				% unify message arguments and call method
@@ -3845,8 +3845,8 @@ current_logtalk_flag(Flag, Value) :-
 				% construct list of the meta-arguments that will be called in the "sender"
 				'$lgt_goal_meta_call_context'(Meta, GPred, GSenderExCtx, GSender, GMetaCallCtx),
 				% lookup predicate definition
-				'$lgt_execution_context'(ExCtx, _, GSender, GObj, GObj, GMetaCallCtx, []),
-				call(Def, GPred, ExCtx, GCall, _, _) ->
+				'$lgt_execution_context'(GExCtx, _, GSender, GObj, GObj, GMetaCallCtx, []),
+				call(Def, GPred, GExCtx, GCall, _, _) ->
 				GGCall = '$lgt_guarded_method_call'(GObj, GPred, GSender, GCall),
 				% cache lookup result (the cut prevents backtracking into the catchall clause)
 				asserta(('$lgt_send_to_obj_'(GObj, GPred, GSenderExCtx) :- !, GGCall)),
@@ -3862,9 +3862,9 @@ current_logtalk_flag(Flag, Value) :-
 				'$lgt_term_template'(Pred, GPred),
 				'$lgt_term_template'(Obj, GObj),
 				'$lgt_term_template'(Sender, GSender),
-				'$lgt_execution_context'(ExCtx, _, GSender, GObj, GObj, _, []),
+				'$lgt_execution_context'(GExCtx, _, GSender, GObj, GObj, _, []),
 				% lookup predicate definition
-				call(Def, GPred, ExCtx, GCall, _, _) ->
+				call(Def, GPred, GExCtx, GCall, _, _) ->
 				GGCall = '$lgt_guarded_method_call'(GObj, GPred, GSender, GCall),
 				% cache lookup result (the cut prevents backtracking into the catchall clause)
 				asserta(('$lgt_send_to_obj_'(GObj, GPred, GSenderExCtx) :- !, GGCall)),
@@ -3970,8 +3970,8 @@ current_logtalk_flag(Flag, Value) :-
 				% construct list of the meta-arguments that will be called in the "sender"
 				'$lgt_goal_meta_call_context'(Meta, GPred, GSenderExCtx, GSender, GMetaCallCtx),
 				% lookup predicate definition
-				'$lgt_execution_context'(ExCtx, _, GSender, GObj, GObj, GMetaCallCtx, []),
-				call(Def, GPred, ExCtx, GCall, _, _) ->
+				'$lgt_execution_context'(GExCtx, _, GSender, GObj, GObj, GMetaCallCtx, []),
+				call(Def, GPred, GExCtx, GCall, _, _) ->
 				% cache lookup result (the cut prevents backtracking into the catchall clause)
 				asserta(('$lgt_send_to_obj_ne_'(GObj, GPred, GSenderExCtx) :- !, GCall)),
 				% unify message arguments and call method
@@ -3987,8 +3987,8 @@ current_logtalk_flag(Flag, Value) :-
 				'$lgt_term_template'(Obj, GObj),
 				'$lgt_term_template'(Sender, GSender),
 				% lookup predicate definition
-				'$lgt_execution_context'(ExCtx, _, GSender, GObj, GObj, _, []),
-				call(Def, GPred, ExCtx, GCall, _, _) ->
+				'$lgt_execution_context'(GExCtx, _, GSender, GObj, GObj, _, []),
+				call(Def, GPred, GExCtx, GCall, _, _) ->
 				% cache lookup result (the cut prevents backtracking into the catchall clause)
 				asserta(('$lgt_send_to_obj_ne_'(GObj, GPred, GSenderExCtx) :- !, GCall)),
 				% unify message arguments and call method
