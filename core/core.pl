@@ -4217,7 +4217,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	atom(Closure) ->
 		Goal =.. [Closure| ExtraArgs],
 		call(Goal)
-	;	callable(Closure) ->
+	;	compound(Closure) ->
 		Closure =.. [Functor| Args],
 		'$lgt_append'(Args, ExtraArgs, FullArgs),
 		Goal =.. [Functor| FullArgs],
@@ -4244,7 +4244,7 @@ current_logtalk_flag(Flag, Value) :-
 	(	atom(Closure) ->
 		Goal =.. [Closure| ExtraArgs],
 		'$lgt_send_to_self_'(Self, Goal, SelfExCtx)
-	;	callable(Closure) ->
+	;	compound(Closure) ->
 		Closure =.. [Functor| Args],
 		'$lgt_append'(Args, ExtraArgs, FullArgs),
 		Goal =.. [Functor| FullArgs],
@@ -4268,7 +4268,7 @@ current_logtalk_flag(Flag, Value) :-
 	),
 	(	atom(Closure) ->
 		Goal =.. [Closure| ExtraArgs]
-	;	callable(Closure) ->
+	;	compound(Closure) ->
 		Closure =.. [Functor| Args],
 		'$lgt_append'(Args, ExtraArgs, FullArgs),
 		Goal =.. [Functor| FullArgs]
@@ -4441,7 +4441,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_metacall'(Closure, ExtraArgs, ExCtx) :-
 	(	atom(Closure) ->
 		Goal =.. [Closure| ExtraArgs]
-	;	callable(Closure) ->
+	;	compound(Closure) ->
 		Closure =.. [Functor| Args],
 		'$lgt_append'(Args, ExtraArgs, FullArgs),
 		Goal =.. [Functor| FullArgs]
