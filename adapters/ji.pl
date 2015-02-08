@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for JIProlog 4.0.5.12 or later versions
-%  Last updated on February 6, 2015
+%  Last updated on February 8, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -477,20 +477,14 @@ format(Format, Arguments) :-
 % be the empty atom when it does not exist
 
 '$lgt_decompose_file_name'(File, Directory, Name, Extension) :-
-	create_object('java.io.File'('java.lang.String'), [File], Object),
-	invoke(Object, getParent, [], Directory0),
-	(	Directory0 == [] ->
-		'$lgt_current_directory'(Directory)
-	;	atom_concat(Directory0, '/', Directory)
-	),
-	invoke(Object, getName, [], Basename),
-	(	sub_atom(Basename, Before, _, After, '.') ->
-		sub_atom(Basename, 0, Before, _, Name),
-		sub_atom(Basename, _, After, 0, Extension0),
-		atom_concat('.', Extension0, Extension)
-	;	Name = Basename,
+	file_base_name(File, Name),
+	file_name_extension(File, Extension0),
+	(	Extension0 == [] ->
 		Extension = ''
-	).
+	;	atom_concat('.', Extension0, Extension)
+	),
+	atom_concat(Name, Extension, Basename),
+	atom_concat(Directory, Basename, File).
 
 
 

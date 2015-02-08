@@ -25,8 +25,8 @@ RELEASE NOTES
 =============
 
 
-3.00.1 - January ??, 2015
-=========================
+3.00.1 - February ??, 2015
+==========================
 
 Logtalk compiler and runtime
 ----------------------------
@@ -74,7 +74,9 @@ JIProlog.
 * UPDATED: GNU Prolog adapter file to set the `modules` flag depending on the
 presence of a native module system.
 
-* UPDATED: JIProlog adapter file for changes in version 4.0.5.3.
+* UPDATED: JIProlog adapter file for changes in version 4.0.5.3. Fixed a bug
+in the internal predicate for decomposing paths when the a file basename
+contains two or more dots.
 
 * FIXED: Definition for the missing `subsumes_term/2` standard predicate in
 the adapter files for CxProlog and Qu-Prolog for conformance.
