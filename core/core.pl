@@ -5322,12 +5322,12 @@ current_logtalk_flag(Flag, Value) :-
 	% add a suffix based on the original extension to the file name to avoid
 	% intermediate and temporary file name conflicts when compiling two or
 	% more source files that share the same name but use different extensions
-	(	sub_atom(SourceExtension, 1, _, 0, Suffix0) ->
-		atom_concat('_', Suffix0, Suffix),
-		atom_concat(SourceName, Suffix, ObjectName)
-	;	% SourceExtension = ''
-		ObjectName = SourceName
+	(	'$lgt_source_extension_suffix'(SourceExtension, Suffix) ->
+		true
+	;	sub_atom(SourceExtension, 1, _, 0, Suffix0) ->
+		atom_concat('_', Suffix0, Suffix)
 	),
+	atom_concat(SourceName, Suffix, ObjectName),
 	% there must be a single object file extension defined in the Prolog adapter files
 	'$lgt_file_extension'(object, ObjectExtension),
 	atom_concat(ObjectName, ObjectExtension, ObjectBasename),
@@ -5336,6 +5336,14 @@ current_logtalk_flag(Flag, Value) :-
 	atom_concat(ObjectDirectory, ObjectBasename, ObjectFile),
 	% make sure the scratch directory exists
 	'$lgt_make_directory'(ObjectDirectory).
+
+
+% common source extensions and corresponding suffixes
+'$lgt_source_extension_suffix'('.lgt', '_lgt').
+'$lgt_source_extension_suffix'('.logtalk', '_logtalk').
+'$lgt_source_extension_suffix'('.pl', '_pl').
+'$lgt_source_extension_suffix'('.prolog', '_prolog').
+'$lgt_source_extension_suffix'('', '').
 
 
 
