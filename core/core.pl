@@ -419,8 +419,8 @@
 % '$lgt_pp_threaded_'
 :- dynamic('$lgt_pp_threaded_'/0).
 
-% '$lgt_pp_file_encoding_'(LogtalkEncoding, PrologEncoding)
-:- dynamic('$lgt_pp_file_encoding_'/2).
+% '$lgt_pp_file_encoding_'(LogtalkEncoding, PrologEncoding, Line)
+:- dynamic('$lgt_pp_file_encoding_'/3).
 % '$lgt_pp_file_bom_'(BOM)
 :- dynamic('$lgt_pp_file_bom_'/1).
 % '$lgt_pp_file_paths_'(Basename, Directory, SourceFile, ObjectFile)
@@ -4957,7 +4957,7 @@ current_logtalk_flag(Flag, Value) :-
 	% retract prelimirary regist
 	retract('$lgt_loaded_file_'(Basename, Directory, Mode, Flags, _, ObjectFile, TimeStamp)), !,
 	% compute text properties, which are only available after successful file compilation
-	(	'$lgt_pp_file_encoding_'(Encoding, _) ->
+	(	'$lgt_pp_file_encoding_'(Encoding, _, _) ->
 		(	'$lgt_pp_file_bom_'(BOM) ->
 			TextProperties = [encoding(Encoding), BOM]
 		;	TextProperties = [encoding(Encoding)]
@@ -4975,7 +4975,7 @@ current_logtalk_flag(Flag, Value) :-
 	% entities thus potentially invalidating cache entries 
 	'$lgt_clean_lookup_caches',
 	'$lgt_report_redefined_entities',
-	(	'$lgt_pp_file_encoding_'(_, Encoding) ->
+	(	'$lgt_pp_file_encoding_'(_, Encoding, _) ->
 		% use the same encoding as the original source file but do not use the inferred
 		% bom/1 option as it would only work with some backend Prolog compilers
 		Options = [encoding(Encoding)| DefaultOptions]
@@ -5432,7 +5432,13 @@ current_logtalk_flag(Flag, Value) :-
 		throw(error(resource_error(text_encoding_support), directive(encoding(LogtalkEncoding))))
 	;	% the conversion between Logtalk and Prolog encodings is defined in the adapter files
 		'$lgt_logtalk_prolog_encoding'(LogtalkEncoding, PrologEncoding, Input) ->
-		assertz('$lgt_pp_file_encoding_'(LogtalkEncoding, PrologEncoding)),
+		'$lgt_warning_context'(SourceFile, _, BeginLine-EndLine),
+		assertz('$lgt_pp_file_encoding_'(LogtalkEncoding, PrologEncoding, BeginLine)),
+		% check that the encoding/1 directive is found in the first line
+		(	BeginLine =:= 1 ->
+			true
+		;	'$lgt_print_message'(warning(general), core, misplaced_encoding_directive(SourceFile, BeginLine-EndLine))
+		),
 		% close and reopen the source file using the specified encoding
 		'$lgt_close'(Input),
 		'$lgt_open'(Source, read, NewInput, [alias(logtalk_compiler_input), encoding(PrologEncoding)]),
@@ -6136,7 +6142,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_clean_pp_file_clauses' :-
 	retractall('$lgt_pp_file_initialization_'(_)),
 	retractall('$lgt_pp_file_object_initialization_'(_, _)),
-	retractall('$lgt_pp_file_encoding_'(_, _)),
+	retractall('$lgt_pp_file_encoding_'(_, _, _)),
 	retractall('$lgt_pp_file_bom_'(_)),
 	retractall('$lgt_pp_file_paths_'(_, _, _, _)),
 	retractall('$lgt_pp_file_compiler_flag_'(_, _)),
@@ -6774,6 +6780,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_directive'(Directive, Ctx) :-
 	\+ '$lgt_pp_entity_'(_, _, _, _, _),
+	% not compiling an entity
 	\+ '$lgt_logtalk_opening_directive'(Directive),
 	% directive occurs before opening entity directive
 	!,
@@ -6857,8 +6864,8 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_file_directive'(encoding(Encoding), Ctx) :-
 	!,
-	(	'$lgt_pp_file_encoding_'(Encoding, _),
-		'$lgt_comp_ctx_lines'(Ctx, 1-_) ->
+	(	'$lgt_pp_file_encoding_'(Encoding, _, Line),
+		'$lgt_comp_ctx_lines'(Ctx, Line-_) ->
 		% encoding/1 directive already processed
 		true
 	;	% out-of-place encoding/1 directive, which must be the first term in a source file
@@ -14973,7 +14980,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_write_encoding_directive'(Stream, Path) :-
 	(	'$lgt_prolog_feature'(encoding_directive, full),
-		'$lgt_pp_file_encoding_'(_, Encoding) ->
+		'$lgt_pp_file_encoding_'(_, Encoding, _) ->
 		'$lgt_write_compiled_term'(Stream, (:- encoding(Encoding)), runtime, Path, 1)
 	;	true
 	).

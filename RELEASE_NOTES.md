@@ -47,6 +47,9 @@ similar to the `declared_in/1` and `declared_in/2` properties but for predicate
 aliases, when defined. The second property is only available when compiling
 with the `source_data` flag turned on.
 
+* IMPROVED: Print a warning when an `encoding/1` directive is the first term
+as required but not located in the first source file line.
+
 * IMPROVED: The compiler now also generates `calls/2` entity properties
 for `uses/2` and `use_module/2` directives as their compilation generates
 auxiliary linking clauses calling the referenced predicates to cope with

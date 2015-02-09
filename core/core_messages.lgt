@@ -25,9 +25,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/01/29,
+		date is 2015/02/09,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -427,6 +427,10 @@
 
 	logtalk::message_tokens(ignored_directive(File, Lines, Directive), core) -->
 		['The ~w directive is ignored'-[Directive], nl],
+		message_context(File, Lines).
+
+	logtalk::message_tokens(misplaced_encoding_directive(File, Lines), core) -->
+		['The encoding/1 directive is misplaced'-[], nl],
 		message_context(File, Lines).
 
 	% auxiliary grammar rules
