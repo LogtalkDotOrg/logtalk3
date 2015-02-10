@@ -114,7 +114,8 @@ Documentation
 * ADDED: User Manual section on reserved predicates names.
 
 * IMPROVED: Reference Manual sections on the `uses/2` and `use_module/2`
-directives and on the `{}/1` compiler bypass control construct.
+directives, on the `{}/1` compiler bypass control construct, and on the
+`logtalk_make/0-1` built-in predicates.
 
 Tools
 -----
