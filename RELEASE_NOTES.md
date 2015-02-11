@@ -62,6 +62,9 @@ compiler).
 
 * IMPROVED: Minor performance optimization to the compilation of `::/2` goals.
 
+* IMPROVED: Minor compiler performance optimization thanks to caching of
+default and read-only flags at startup.
+
 * FIXED: Bug where the `debugging` entity property would always be false for
 categories and protocols.
 

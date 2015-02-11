@@ -19546,6 +19546,28 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
+% cache default and read-only compiler flags to improve the performance
+% of the compiler by reducing the potential number of flag levels that
+% need to be checked for finding the value of a flag in a given context
+
+'$lgt_cache_compiler_flags' :-
+	'$lgt_default_flag'(Name, Value),
+	\+ '$lgt_current_flag_'(Name, _),
+	assertz('$lgt_current_flag_'(Name, Value)),
+	fail.
+
+'$lgt_cache_compiler_flags' :-
+	'$lgt_prolog_feature'(Name, Value),
+	assertz('$lgt_current_flag_'(Name, Value)),
+	fail.
+
+'$lgt_cache_compiler_flags' :-
+	'$lgt_version_data'(logtalk(Major, Minor, Patch, Status)),
+	assertz('$lgt_current_flag_'(version_data, logtalk(Major, Minor, Patch, Status))),
+	assertz('$lgt_current_flag_'(version, version(Major, Minor, Patch))).
+
+
+
 % '$lgt_compile_default_hooks'
 %
 % compiles the default hooks specified on the backend Prolog compiler
@@ -19604,6 +19626,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_initialize_dynamic_entity_counters',
 	'$lgt_load_built_in_entities'(ScratchDirectory),
 	'$lgt_load_settings_file'(ScratchDirectory, Result),
+	'$lgt_cache_compiler_flags',
 	'$lgt_print_message'(banner, core, banner),
 	'$lgt_print_message'(comment(settings), core, default_flags),
 	'$lgt_compile_default_hooks',
