@@ -6088,11 +6088,13 @@ current_logtalk_flag(Flag, Value) :-
 		DynamicDeclarations = 128
 	;	DynamicDeclarations = 0
 	),
-	(	'$lgt_compiler_flag'(complements, allow) ->
+	'$lgt_compiler_flag'(complements, ComplementsFlag),
+	(	ComplementsFlag == deny ->
+		Complements = 0
+	;	ComplementsFlag == allow ->
 		Complements = 64
-	;	'$lgt_compiler_flag'(complements, restrict) ->
+	;	% ComplementsFlag == restrict,
 		Complements = 32
-	;	Complements = 0
 	),
 	(	'$lgt_compiler_flag'(events, allow) ->
 		Events = 16
