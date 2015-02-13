@@ -10694,7 +10694,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_body'(Pred, _, _, Ctx) :-
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, [_| _], _, _, compile(_), _, _),
-	% we're compiling a clause for a meta-predicate as the list of meta-variables is non empty
+	% we're compiling a clause for a meta-predicate as the list of meta-variables is not empty
 	(	'$lgt_pp_meta_predicate_'(Pred, Meta) ->
 		% user-defined meta-predicate
 		true
@@ -13712,8 +13712,8 @@ current_logtalk_flag(Flag, Value) :-
 	(	RelationScope == (public) ->
 		Lookup =.. [ExtDcl, Pred, Scope, Meta, Flags, Ctn]
 	;	RelationScope == protected ->
-		Call =.. [ExtDcl, Pred, Scope2, Meta, Flags, Ctn],
-		Lookup = (Call, '$lgt_filter_scope'(Scope2, Scope))
+		Lookup0 =.. [ExtDcl, Pred, Scope2, Meta, Flags, Ctn],
+		Lookup = (Lookup0, '$lgt_filter_scope'(Scope2, Scope))
 	;	Scope = p,
 		Lookup =.. [ExtDcl, Pred, _, Meta, Flags, Ctn]
 	),
@@ -13786,8 +13786,8 @@ current_logtalk_flag(Flag, Value) :-
 	(	RelationScope == (public) ->
 		Lookup =.. [PDcl, Pred, Scope, Meta, Flags, Ctn]
 	;	RelationScope == protected ->
-		Call =.. [PDcl, Pred, Scope2, Meta, Flags, Ctn],
-		Lookup = (Call, '$lgt_filter_scope'(Scope2, Scope))
+		Lookup0 =.. [PDcl, Pred, Scope2, Meta, Flags, Ctn],
+		Lookup = (Lookup0, '$lgt_filter_scope'(Scope2, Scope))
 	;	Scope = p,
 		Lookup =.. [PDcl, Pred, _, Meta, Flags, Ctn]
 	),
@@ -13809,8 +13809,8 @@ current_logtalk_flag(Flag, Value) :-
 	(	RelationScope == (public) ->
 		Lookup =.. [ECDcl, Pred, Scope, Meta, Flags, Ctn]
 	;	RelationScope == protected ->
-		Call =.. [ECDcl, Pred, Scope2, Meta, Flags, Ctn],
-		Lookup = (Call, '$lgt_filter_scope'(Scope2, Scope))
+		Lookup0 =.. [ECDcl, Pred, Scope2, Meta, Flags, Ctn],
+		Lookup = (Lookup0, '$lgt_filter_scope'(Scope2, Scope))
 	;	Scope = p,
 		Lookup =.. [ECDcl, Pred, _, Meta, Flags, Ctn]
 	),
@@ -13991,18 +13991,18 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_generate_prototype_implements_dcl_clauses'(ODcl, Rnm) :-
 	'$lgt_pp_implemented_protocol_'(Ptc, Obj, _, PDcl, RelationScope),
 	(	RelationScope == (public) ->
-		Lookup =.. [PDcl, Pred, Scope, Meta, Flags, Ctn]
+		Lookup =.. [PDcl, Pred, Scope, Meta, Flags, TCtn]
 	;	RelationScope == protected ->
-		Call =.. [PDcl, Pred, Scope2, Meta, Flags, Ctn],
-		Lookup = (Call, '$lgt_filter_scope'(Scope2, Scope))
+		Lookup0 =.. [PDcl, Pred, Scope2, Meta, Flags, TCtn],
+		Lookup = (Lookup0, '$lgt_filter_scope'(Scope2, Scope))
 	;	Scope = p,
-		Lookup =.. [PDcl, Pred, _, Meta, Flags, Ctn]
+		Lookup =.. [PDcl, Pred, _, Meta, Flags, TCtn]
 	),
 	(	'$lgt_pp_predicate_alias_'(Ptc, _, _, _, _) ->
-		Head =.. [ODcl, Alias, Scope, Meta, Flags, Obj, Ctn],
+		Head =.. [ODcl, Alias, Scope, Meta, Flags, Obj, TCtn],
 		Rename =.. [Rnm, Ptc, Pred, Alias],
 		assertz('$lgt_pp_dcl_'((Head :- Rename, Lookup)))
-	;	Head =.. [ODcl, Pred, Scope, Meta, Flags, Obj, Ctn],
+	;	Head =.. [ODcl, Pred, Scope, Meta, Flags, Obj, TCtn],
 		assertz('$lgt_pp_dcl_'((Head:-Lookup)))
 	),
 	fail.
@@ -14014,18 +14014,18 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_generate_prototype_imports_dcl_clauses'(ODcl, Rnm) :-
 	'$lgt_pp_imported_category_'(Ctg, Obj, _, CDcl, _, RelationScope),
 	(	RelationScope == (public) ->
-		Lookup =.. [CDcl, Pred, Scope, Meta, Flags, Ctn]
+		Lookup =.. [CDcl, Pred, Scope, Meta, Flags, TCtn]
 	;	RelationScope == protected ->
-		Call =.. [CDcl, Pred, Scope2, Meta, Flags, Ctn],
-		Lookup = (Call, '$lgt_filter_scope'(Scope2, Scope))
+		Lookup0 =.. [CDcl, Pred, Scope2, Meta, Flags, TCtn],
+		Lookup = (Lookup0, '$lgt_filter_scope'(Scope2, Scope))
 	;	Scope = p,
-		Lookup =.. [CDcl, Pred, _, Meta, Flags, Ctn]
+		Lookup =.. [CDcl, Pred, _, Meta, Flags, TCtn]
 	),
 	(	'$lgt_pp_predicate_alias_'(Ctg, _, _, _, _) ->
-		Head =.. [ODcl, Alias, Scope, Meta, Flags, Obj, Ctn],
+		Head =.. [ODcl, Alias, Scope, Meta, Flags, Obj, TCtn],
 		Rename =.. [Rnm, Ctg, Pred, Alias],
 		assertz('$lgt_pp_dcl_'((Head :- Rename, Lookup)))
-	;	Head =.. [ODcl, Pred, Scope, Meta, Flags, Obj, Ctn],
+	;	Head =.. [ODcl, Pred, Scope, Meta, Flags, Obj, TCtn],
 		assertz('$lgt_pp_dcl_'((Head:-Lookup)))
 	),
 	fail.
@@ -14039,11 +14039,11 @@ current_logtalk_flag(Flag, Value) :-
 	(	RelationScope == (public) ->
 		Lookup =.. [PDcl, Pred, Scope, Meta, Flags, SCtn, TCtn]
 	;	RelationScope == protected ->
-		Call =.. [PDcl, Pred, Scope2, Meta, Flags, SCtn, TCtn],
-		Lookup = (Call, '$lgt_filter_scope'(Scope2, Scope))
+		Lookup0 =.. [PDcl, Pred, Scope2, Meta, Flags, SCtn, TCtn],
+		Lookup = (Lookup0, '$lgt_filter_scope'(Scope2, Scope))
 	;	Scope = p,
-		Call =.. [PDcl, Pred, Scope2, Meta, Flags, SCtn2, TCtn],
-		Lookup = (Call, '$lgt_filter_scope_container'(Scope2, SCtn2, Obj, SCtn))
+		Lookup0 =.. [PDcl, Pred, Scope2, Meta, Flags, SCtn2, TCtn],
+		Lookup = (Lookup0, '$lgt_filter_scope_container'(Scope2, SCtn2, Obj, SCtn))
 	),
 	(	'$lgt_pp_predicate_alias_'(Parent, _, _, _, _) ->
 		Head =.. [ODcl, Alias, Scope, Meta, Flags, SCtn, TCtn],
@@ -14083,8 +14083,8 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_generate_prototype_complements_def_clauses'(Obj, Def) :-
-	Head =.. [Def, Pred, ExCtx, Call, Obj, Ctn],
-	Lookup = '$lgt_complemented_object'(Obj, Def, Pred, ExCtx, Call, Ctn),
+	Head =.. [Def, Pred, ExCtx, Call, Obj, TCtn],
+	Lookup = '$lgt_complemented_object'(Obj, Def, Pred, ExCtx, Call, TCtn),
 	assertz('$lgt_pp_def_'((Head:-Lookup))).
 
 
@@ -14113,12 +14113,12 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_generate_prototype_imports_def_clauses'(ODef, Rnm) :-
 	'$lgt_pp_imported_category_'(Ctg, Obj, _, _, CDef, _),
 	'$lgt_execution_context_update_this_entity'(OExCtx, Obj, Obj, CExCtx, Obj, Ctg),
-	Lookup =.. [CDef, Pred, CExCtx, Call, Ctn],
+	Lookup =.. [CDef, Pred, CExCtx, Call, TCtn],
 	(	'$lgt_pp_predicate_alias_'(Ctg, _, _, _, _) ->
-		Head =.. [ODef, Alias, OExCtx, Call, Obj, Ctn],
+		Head =.. [ODef, Alias, OExCtx, Call, Obj, TCtn],
 		Rename =.. [Rnm, Ctg, Pred, Alias],
 		assertz('$lgt_pp_def_'((Head :- Rename, Lookup)))
-	;	Head =.. [ODef, Pred, OExCtx, Call, Obj, Ctn],
+	;	Head =.. [ODef, Pred, OExCtx, Call, Obj, TCtn],
 		assertz('$lgt_pp_def_'((Head:-Lookup)))
 	),
 	fail.
@@ -14224,11 +14224,11 @@ current_logtalk_flag(Flag, Value) :-
 	(	RelationScope == (public) ->
 		Lookup =.. [CIDcl, Pred, Scope, Meta, Flags, SCtn, TCtn]
 	;	RelationScope == protected ->
-		Call =.. [CIDcl, Pred, Scope2, Meta, Flags, SCtn, TCtn],
-		Lookup = (Call, '$lgt_filter_scope'(Scope2, Scope))
+		Lookup0 =.. [CIDcl, Pred, Scope2, Meta, Flags, SCtn, TCtn],
+		Lookup = (Lookup0, '$lgt_filter_scope'(Scope2, Scope))
 	;	Scope = p,
-		Call =.. [CIDcl, Pred, Scope2, Meta, Flags, SCtn2, TCtn],
-		Lookup = (Call, '$lgt_filter_scope_container'(Scope2, SCtn2, Obj, SCtn))
+		Lookup0 =.. [CIDcl, Pred, Scope2, Meta, Flags, SCtn2, TCtn],
+		Lookup = (Lookup0, '$lgt_filter_scope_container'(Scope2, SCtn2, Obj, SCtn))
 	),
 	(	'$lgt_pp_predicate_alias_'(Class, _, _, _, _) ->
 		Head =.. [ODcl, Alias, Scope, Meta, Flags, SCtn, TCtn],
@@ -14310,18 +14310,18 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_generate_ic_implements_idcl_clauses'(OIDcl, Rnm) :-
 	'$lgt_pp_implemented_protocol_'(Ptc, Obj, _, PDcl, RelationScope),
 	(	RelationScope == (public) ->
-		Lookup =.. [PDcl, Pred, Scope, Meta, Flags, Ctn]
+		Lookup =.. [PDcl, Pred, Scope, Meta, Flags, TCtn]
 	;	RelationScope == protected ->
-		Call =.. [PDcl, Pred, Scope2, Meta, Flags, Ctn],
-		Lookup = (Call, '$lgt_filter_scope'(Scope2, Scope))
+		Lookup0 =.. [PDcl, Pred, Scope2, Meta, Flags, TCtn],
+		Lookup = (Lookup0, '$lgt_filter_scope'(Scope2, Scope))
 	;	Scope = p,
-		Lookup =.. [PDcl, Pred, _, Meta, Flags, Ctn]
+		Lookup =.. [PDcl, Pred, _, Meta, Flags, TCtn]
 	),
 	(	'$lgt_pp_predicate_alias_'(Ptc, _, _, _, _) ->
-		Head =.. [OIDcl, Alias, Scope, Meta, Flags, Obj, Ctn],
+		Head =.. [OIDcl, Alias, Scope, Meta, Flags, Obj, TCtn],
 		Rename =.. [Rnm, Ptc, Pred, Alias],
 		assertz('$lgt_pp_dcl_'((Head :- Rename, Lookup)))
-	;	Head =.. [OIDcl, Pred, Scope, Meta, Flags, Obj, Ctn],
+	;	Head =.. [OIDcl, Pred, Scope, Meta, Flags, Obj, TCtn],
 		assertz('$lgt_pp_dcl_'((Head:-Lookup)))
 	),
 	fail.
@@ -14333,18 +14333,18 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_generate_ic_imports_idcl_clauses'(OIDcl, Rnm) :-
 	'$lgt_pp_imported_category_'(Ctg, Obj, _, CDcl, _, RelationScope),
 	(	RelationScope == (public) ->
-		Lookup =.. [CDcl, Pred, Scope, Meta, Flags, Ctn]
+		Lookup =.. [CDcl, Pred, Scope, Meta, Flags, TCtn]
 	;	RelationScope == protected ->
-		Call =.. [CDcl, Pred, Scope2, Meta, Flags, Ctn],
-		Lookup = (Call, '$lgt_filter_scope'(Scope2, Scope))
+		Lookup0 =.. [CDcl, Pred, Scope2, Meta, Flags, TCtn],
+		Lookup = (Lookup0, '$lgt_filter_scope'(Scope2, Scope))
 	;	Scope = p,
-		Lookup =.. [CDcl, Pred, _, Meta, Flags, Ctn]
+		Lookup =.. [CDcl, Pred, _, Meta, Flags, TCtn]
 	),
 	(	'$lgt_pp_predicate_alias_'(Ctg, _, _, _, _) ->
-		Head =.. [OIDcl, Alias, Scope, Meta, Flags, Obj, Ctn],
+		Head =.. [OIDcl, Alias, Scope, Meta, Flags, Obj, TCtn],
 		Rename =.. [Rnm, Ctg, Pred, Alias],
 		assertz('$lgt_pp_dcl_'((Head :- Rename, Lookup)))
-	;	Head =.. [OIDcl, Pred, Scope, Meta, Flags, Obj, Ctn],
+	;	Head =.. [OIDcl, Pred, Scope, Meta, Flags, Obj, TCtn],
 		assertz('$lgt_pp_dcl_'((Head:-Lookup)))
 	),
 	fail.
@@ -14358,11 +14358,11 @@ current_logtalk_flag(Flag, Value) :-
 	(	RelationScope == (public) ->
 		Lookup =.. [SIDcl, Pred, Scope, Meta, Flags, SCtn, TCtn]
 	;	RelationScope == protected ->
-		Call =.. [SIDcl, Pred, Scope2, Meta, Flags, SCtn, TCtn],
-		Lookup = (Call, '$lgt_filter_scope'(Scope2, Scope))
+		Lookup0 =.. [SIDcl, Pred, Scope2, Meta, Flags, SCtn, TCtn],
+		Lookup = (Lookup0, '$lgt_filter_scope'(Scope2, Scope))
 	;	Scope = p,
-		Call =.. [SIDcl, Pred, Scope2, Meta, Flags, SCtn2, TCtn],
-		Lookup = (Call, '$lgt_filter_scope_container'(Scope2, SCtn2, Obj, SCtn))
+		Lookup0 =.. [SIDcl, Pred, Scope2, Meta, Flags, SCtn2, TCtn],
+		Lookup = (Lookup0, '$lgt_filter_scope_container'(Scope2, SCtn2, Obj, SCtn))
 	),
 	(	'$lgt_pp_predicate_alias_'(Super, _, _, _, _) ->
 		Head =.. [CIDcl, Alias, Scope, Meta, Flags, SCtn, TCtn],
@@ -14409,8 +14409,8 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_generate_ic_complements_def_clauses'(Obj, Def) :-
-	Head =.. [Def, Pred, ExCtx, Call, Obj, Ctn],
-	Lookup = '$lgt_complemented_object'(Obj, Def, Pred, ExCtx, Call, Ctn),
+	Head =.. [Def, Pred, ExCtx, Call, Obj, TCtn],
+	Lookup = '$lgt_complemented_object'(Obj, Def, Pred, ExCtx, Call, TCtn),
 	assertz('$lgt_pp_def_'((Head:-Lookup))).
 
 
@@ -14439,12 +14439,12 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_generate_ic_imports_def_clauses'(ODef, Rnm) :-
 	'$lgt_pp_imported_category_'(Ctg, Obj, _, _, CDef, _),
 	'$lgt_execution_context_update_this_entity'(OExCtx, Obj, Obj, CExCtx, Obj, Ctg),
-	Lookup =.. [CDef, Pred, CExCtx, Call, Ctn],
+	Lookup =.. [CDef, Pred, CExCtx, Call, TCtn],
 	(	'$lgt_pp_predicate_alias_'(Ctg, _, _, _, _) ->
-		Head =.. [ODef, Alias, OExCtx, Call, Obj, Ctn],
+		Head =.. [ODef, Alias, OExCtx, Call, Obj, TCtn],
 		Rename =.. [Rnm, Ctg, Pred, Alias],
 		assertz('$lgt_pp_def_'((Head :- Rename, Lookup)))
-	;	Head =.. [ODef, Pred, OExCtx, Call, Obj, Ctn],
+	;	Head =.. [ODef, Pred, OExCtx, Call, Obj, TCtn],
 		assertz('$lgt_pp_def_'((Head:-Lookup)))
 	),
 	fail.
@@ -14494,8 +14494,8 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_generate_ic_complements_idef_clauses'(Obj, IDef) :-
-	Head =.. [IDef, Pred, ExCtx, Call, Obj, Ctn],
-	Lookup = '$lgt_complemented_object'(Obj, IDef, Pred, ExCtx, Call, Ctn),
+	Head =.. [IDef, Pred, ExCtx, Call, Obj, TCtn],
+	Lookup = '$lgt_complemented_object'(Obj, IDef, Pred, ExCtx, Call, TCtn),
 	assertz('$lgt_pp_def_'((Head:-Lookup))).
 
 
@@ -14524,12 +14524,12 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_generate_ic_imports_idef_clauses'(OIDef, Rnm) :-
 	'$lgt_pp_imported_category_'(Ctg, Obj, _, _, CDef, _),
 	'$lgt_execution_context_update_this_entity'(OExCtx, Obj, Obj, CExCtx, Obj, Ctg),
-	Lookup =.. [CDef, Pred, CExCtx, Call, Ctn],
+	Lookup =.. [CDef, Pred, CExCtx, Call, TCtn],
 	(	'$lgt_pp_predicate_alias_'(Ctg, _, _, _, _) ->
-		Head =.. [OIDef, Alias, OExCtx, Call, Obj, Ctn],
+		Head =.. [OIDef, Alias, OExCtx, Call, Obj, TCtn],
 		Rename =.. [Rnm, Ctg, Pred, Alias],
 		assertz('$lgt_pp_def_'((Head :- Rename, Lookup)))
-	;	Head =.. [OIDef, Pred, OExCtx, Call, Obj, Ctn],
+	;	Head =.. [OIDef, Pred, OExCtx, Call, Obj, TCtn],
 		assertz('$lgt_pp_def_'((Head:-Lookup)))
 	),
 	fail.
@@ -15775,6 +15775,7 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_prolog_built_in_predicate'(Pred) :-
 	'$lgt_predicate_property'(Pred, built_in),
 	% Logtalk built-in predicates may also have the property "built_in"
+	% depending on the used backend Prolog compiler
 	\+ '$lgt_logtalk_built_in_predicate'(Pred, _),
 	!.
 
