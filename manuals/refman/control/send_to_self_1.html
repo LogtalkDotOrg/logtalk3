@@ -38,7 +38,7 @@
 
 <pre>::Message</pre>
 <p>
-Send a message to <a class="glossary" title="Go to glossary definition" href="../../glossary.html#self"><em>self</em></a>. Only used in the body of a predicate definition. The argument should match a public or protected predicate of <em>self</em>. It may also match a private predicate if the predicate is within the scope of the object where the method making the call is defined, if imported from a category, if used from inside a category, or when using private inheritance. When the predicate is declared but not defined, the message simply fails (as per the closed-world assumption).
+Send a message to <a class="glossary" title="Go to glossary definition" href="../../glossary.html#self"><em>self</em></a>. Only used in the body of a predicate definition. The argument should match a public or protected predicate of <em>self</em>. It may also match a private predicate if the predicate is within the scope of the object where the method making the call is defined, if imported from a category, if used from within a category, or when using private inheritance. When the predicate is declared but not defined, the message simply fails (as per the closed-world assumption).
 </p>
 <p>
 The lookups for the message declaration and the corresponding method are performed using a depth-first strategy. A message to <em>self</em> necessarily requires the use of dynamic binding but a caching mechanism is used to improve performance in subsequent messages.
@@ -71,7 +71,7 @@ The lookups for the message declaration and the corresponding method are perform
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: April 23, 2014</span>
+		<span>Last updated on: February 12, 2015</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="send_to_object_2.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="super_1.html">next</a></span><br/>
