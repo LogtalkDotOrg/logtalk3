@@ -217,7 +217,7 @@ Adapter files provide the glue code between the Logtalk compiler/runtime and a P
 Logtalk already includes ready to use adapter files for most academic and commercial Prolog compilers. If a adapter file is not available for the compiler that you intend to use, then you need to build a new one, starting from the included <code>template.pl</code> file. Start by making a copy of the template file. Carefully check (or complete if needed) each listed definition. If your Prolog compiler conforms to the ISO standard, this task should only take you a few minutes. In most cases, you can borrow code from some of the predefined adapter files. If you are unsure that your Prolog compiler provides all the ISO predicates needed by Logtalk, try to run the system by setting the unknown predicate error handler to report as an error any call to a missing predicate. Better yet, switch to a modern, ISO compliant, Prolog compiler. If you send me your adapter file, with a reference to the target Prolog compiler, maybe I can include it in the next release of Logtalk.
 </p>
 <p>
-The adapter files specifies <em>default</em> values for most of the Logtalk compiler flags. Most of these compiler flags are described in the <a href="programming.html#options">next</a> section. A few of these flags have read-only values and cannot be changed at runtime. These are:
+The adapter files specifies <em>default</em> values for most of the Logtalk compiler flags. Most of these compiler flags are described in the <a href="programming.html#programming_flags">next</a> section. A few of these flags have read-only values and cannot be changed at runtime. These are:
 </p>
 <dl>
 	<dt><code>settings_file</code></dt>
@@ -325,7 +325,7 @@ Logtalk source files are text files containing one or more entity definitions (o
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &ndash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: November 27, 2014</span>
+		<span>Last updated on: February 14, 2015</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="documenting.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="programming.html">next</a></span><br/>

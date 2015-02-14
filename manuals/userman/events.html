@@ -221,7 +221,7 @@ Assume that we also have the following object:
 
 :- end_object.</pre>
 <p>
-After compiling and loading both objects (note that the object <code>any</code> must be compiled with the option <code>events(allow)</code>), we can start tracing every message sent to any object by calling the <code>define_events/5</code> built-in predicate:
+After compiling and loading both objects (note that the object <code>any</code> must be compiled with the flag <code>events(allow)</code>), we can start tracing every message sent to any object by calling the <code>define_events/5</code> built-in predicate:
 </p>
 <pre>| ?- define_events(_, _, _, _, tracer).
 
@@ -249,7 +249,7 @@ The <code>monitoring</code> protocol declares the event handlers as public predi
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: February 13, 2015</span>
+		<span>Last updated on: February 14, 2015</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="inheritance.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="threads.html">next</a></span><br/>

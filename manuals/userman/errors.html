@@ -49,10 +49,10 @@ Note, however, that <code>Goal</code> and <code>Entity</code> can be variables w
 <h2>Compiler warnings and errors<a id="errors_compiler"></a></h2>
 
 <p>
-The current Logtalk compiler uses the <code>read_term/3</code> ISO Prolog defined built-in predicate to read and process a Logtalk source file. One consequence of this is that invalid Prolog terms or syntax errors may abort the compilation process with limited information given to the user (due to the inherent limitations of the <code>read_term/3</code> predicate). 
+The current Logtalk compiler uses the <code>read_term/3</code> ISO Prolog defined built-in predicate to read and compile a Logtalk source file. One consequence of this is that invalid Prolog terms or syntax errors may abort the compilation process with limited information given to the user (due to the inherent limitations of the <code>read_term/3</code> predicate). 
 </p>
 <p>
-If all the terms in a source file are valid, then there is a set of errors or potential errors, described below, that the compiler will try to detect and report, depending on the used compiler flags (see the <a href="installing.html#options">Installing and running Logtalk</a> section of this manual for details).
+If all the terms in a source file are valid, then there is a set of errors or potential errors, described below, that the compiler will try to detect and report, depending on the used compiler flags (see the <a href="programming.html#programming_flags">Writing, running, and debugging programs</a> section of this manual for details).
 </p>
 
 <h3 id="errors_unknown">Unknown entities</h3>
@@ -140,7 +140,7 @@ More sophisticated definitions are, of course, possible.
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: May 21, 2014</span>
+		<span>Last updated on: February 14, 2015</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="threads.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="documenting.html">next</a></span><br/>
