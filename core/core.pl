@@ -15454,11 +15454,25 @@ current_logtalk_flag(Flag, Value) :-
 	% avoid conflicts with other predicates
 	functor(Entity, Functor, Arity),
 	atom_concat(CodePrefix, Functor, Prefix0),
+	'$lgt_arity_#atom.'(Arity, ArityAtom),
+	atom_concat(Prefix0, ArityAtom, Prefix).
+
+
+'$lgt_arity_#atom.'(0, '#0.') :- !.
+'$lgt_arity_#atom.'(1, '#1.') :- !.
+'$lgt_arity_#atom.'(2, '#2.') :- !.
+'$lgt_arity_#atom.'(3, '#3.') :- !.
+'$lgt_arity_#atom.'(4, '#4.') :- !.
+'$lgt_arity_#atom.'(5, '#5.') :- !.
+'$lgt_arity_#atom.'(6, '#6.') :- !.
+'$lgt_arity_#atom.'(7, '#7.') :- !.
+'$lgt_arity_#atom.'(8, '#8.') :- !.
+'$lgt_arity_#atom.'(9, '#9.') :- !.
+'$lgt_arity_#atom.'(Arity, ArityAtom) :-
 	number_codes(Arity, ArityCodes),
-	atom_codes(ArityAtom, ArityCodes),
-	atom_concat(Prefix0, '#', Prefix1),
-	atom_concat(Prefix1, ArityAtom, Prefix2),
-	atom_concat(Prefix2, '.', Prefix).
+	atom_codes(ArityAtom0, ArityCodes),
+	atom_concat('#', ArityAtom0, ArityAtom1),
+	atom_concat(ArityAtom1, '.', ArityAtom).
 
 
 
@@ -15657,12 +15671,26 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity) :-
 	atom_concat(Prefix, Functor, TFunctor0),
-	atom_concat(TFunctor0, '#', TFunctor1),
-	number_codes(Arity, ArityCodes),
-	atom_codes(ArityAtom, ArityCodes),
-	atom_concat(TFunctor1, ArityAtom, TFunctor),
+	'$lgt_arity_#atom'(Arity, ArityAtom),
+	atom_concat(TFunctor0, ArityAtom, TFunctor),
 	% add execution context argument
 	TArity is Arity + 1.
+
+
+'$lgt_arity_#atom'(0, '#0') :- !.
+'$lgt_arity_#atom'(1, '#1') :- !.
+'$lgt_arity_#atom'(2, '#2') :- !.
+'$lgt_arity_#atom'(3, '#3') :- !.
+'$lgt_arity_#atom'(4, '#4') :- !.
+'$lgt_arity_#atom'(5, '#5') :- !.
+'$lgt_arity_#atom'(6, '#6') :- !.
+'$lgt_arity_#atom'(7, '#7') :- !.
+'$lgt_arity_#atom'(8, '#8') :- !.
+'$lgt_arity_#atom'(9, '#9') :- !.
+'$lgt_arity_#atom'(Arity, ArityAtom) :-
+	number_codes(Arity, ArityCodes),
+	atom_codes(ArityAtom0, ArityCodes),
+	atom_concat('#', ArityAtom0, ArityAtom).
 
 
 

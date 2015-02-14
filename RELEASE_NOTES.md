@@ -69,6 +69,9 @@ compiler).
 * IMPROVED: Minor compiler performance optimization thanks to caching of
 default and read-only flags at startup.
 
+* IMPROVED: Compiler performance when generating entity prefixes and internal
+predicate functors.
+
 * FIXED: Bug where the `debugging` entity property would always be false for
 categories and protocols.
 
