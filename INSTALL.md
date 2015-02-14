@@ -164,7 +164,7 @@ The local copies made by the `logtalk_user_setup` scripts have both read and
 write permissions for the user running the script. When used with one of the 
 back-end Prolog compilers for which an integration script is provided on 
 the `integration` directory, this setup as the advantage of allowing each 
-end-user to independently customize default compilation options, library 
+end-user to independently customize default compilation flags, library 
 paths, and modify and experiment with the provided libraries and examples.
 
 Windows (admin and non-admin) users may also use the Logtalk GUI installer

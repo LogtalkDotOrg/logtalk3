@@ -77,7 +77,7 @@ A category may explicitly complement one or more existing objects, thus providin
     ...
 :- end_category.</pre>
 <p>
-This allows us to patch existing functionality or add new functionality to existing objects without requiring access or modifications to their source code. Common uses are adding logging or debugging predicates to a set of objects. Complementing categories may also be used to define aliases for complemented object predicates. Complemented objects need to be compiled with the <code>complements</code> compiler option set <code>allow</code> (to allow both patching and adding new functionality) or <code>restrict</code> (to allow only adding new functionality).
+This allows us to patch existing functionality or add new functionality to existing objects without requiring access or modifications to their source code. Common uses are adding logging or debugging predicates to a set of objects. Complementing categories may also be used to define aliases for complemented object predicates. Complemented objects need to be compiled with the <code>complements</code> compiler flag set <code>allow</code> (to allow both patching and adding new functionality) or <code>restrict</code> (to allow only adding new functionality).
 </p>
 An unfortunate consequence of allowing an object to be patched using a complementing category is that it disables the use of static binding optimizations for messages sent to the object as it can always be later patched, thus rendering the static binding optimizations invalid.
 <p>
@@ -416,7 +416,7 @@ Note that access to category parameters is only possible using the <code>paramet
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: January 28, 2015</span>
+		<span>Last updated on: February 13, 2015</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="protocols.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="predicates.html">next</a></span><br/>

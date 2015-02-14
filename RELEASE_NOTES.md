@@ -31,6 +31,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: The `logtalk_compile/2` and `logtalk_load/2` built-in predicates
+now throw a `compiler_flag` domain error instead of a `compiler_option` for
+consistency.
+
 * ADDED: Entity property `source_data`. True when the entity was compiled
 with the `source_data` flag turned on.
 
@@ -112,13 +116,16 @@ instead of simply writing it out to the current directory.
 Documentation
 -------------
 
+* CHANGED: All references to "compiler option" to "compiler flag" for
+consistency.
+
 * ADDED: POSIX man page for the new `jiplgt` integration script.
 
 * ADDED: User Manual section on reserved predicates names.
 
 * IMPROVED: Manual sections on the `uses/2` and `use_module/2` directives, on
 the control constructs, on the `logtalk_make/0-1` built-in predicates, and on
-the `hook/1` compiler option.
+the `hook/1` compiler flag.
 
 Tools
 -----

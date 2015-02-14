@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Quintus Prolog 3.3~3.5
-%  Last updated on December 20, 2014
+%  Last updated on February 13, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -566,7 +566,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 % '$lgt_compile_prolog_code'(+atom, +atom, +list)
 %
 % compile to disk a Prolog file, resulting from a
-% Logtalk source file, given a list of options
+% Logtalk source file, given a list of flags
 
 '$lgt_compile_prolog_code'(_, _, _).
 
@@ -574,7 +574,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 % '$lgt_load_prolog_code'(+atom, +atom, +list)
 %
 % compile and load a Prolog file, resulting from a
-% Logtalk source file, given a list of options
+% Logtalk source file, given a list of flags
 
 '$lgt_load_prolog_code'(File, _, _) :-
 	compile(File).

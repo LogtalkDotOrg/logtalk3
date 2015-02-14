@@ -119,7 +119,7 @@ all the files of your application.
 
 6. Copy or rename the `settings-sample.lgt` file to `settings.lgt`, and
 modify it to define a library alias for your application directory and
-for defining default compiler options (see the file `CUSTOMIZE.md` for
+for defining default compiler flags (see the file `CUSTOMIZE.md` for
 details).
 
 7. Copy to your application directory the `loader-sample.lgt` file, rename

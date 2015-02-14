@@ -1865,7 +1865,7 @@ threaded_notify(Message) :-
 		% flag value as defined within the entity being compiled
 		Value = CurrentValue
 	;	'$lgt_pp_file_compiler_flag_'(Name, CurrentValue) ->
-		% flag value as defined in the options argument of the
+		% flag value as defined in the flags argument of the
 		% compiling/loading predicates or in the source file
 		Value = CurrentValue
 	;	'$lgt_current_flag_'(Name, CurrentValue) ->
@@ -1891,7 +1891,7 @@ threaded_notify(Message) :-
 % logtalk_compile(@source_file_name)
 % logtalk_compile(@list(source_file_name))
 %
-% compiles to disk a source file or list of source files using default options
+% compiles to disk a source file or list of source files using default flags
 
 logtalk_compile(Files) :-
 	catch(
@@ -1902,10 +1902,10 @@ logtalk_compile(Files) :-
 
 
 
-% logtalk_compile(@source_file_name, @list(compiler_option))
-% logtalk_compile(@list(source_file_name), @list(compiler_option))
+% logtalk_compile(@source_file_name, @list(compiler_flag))
+% logtalk_compile(@list(source_file_name), @list(compiler_flag))
 %
-% compiles to disk a source file or a list of source files using a list of flag options
+% compiles to disk a source file or a list of source files using a list of flags
 %
 % note that we can only clean the compiler flags after reporting warning numbers as the
 % report/1 flag might be included in the list of flags but we cannot test for it as its
@@ -2094,7 +2094,7 @@ logtalk_compile(Files, Flags) :-
 		'$lgt_must_be'(read_write_flag, Name, _),
 		'$lgt_must_be'(flag_value, Name+Value, _)
 	;	compound(Flag) ->
-		throw(error(domain_error(compiler_option, Flag), _))
+		throw(error(domain_error(compiler_flag, Flag), _))
 	;	throw(error(type_error(compound, Flag), _))
 	),
 	'$lgt_check_compiler_flags'(Flags).
@@ -2109,7 +2109,7 @@ logtalk_compile(Files, Flags) :-
 
 % '$lgt_set_compiler_flags'(@list)
 %
-% sets the compiler flag options
+% sets the compiler flags
 
 '$lgt_set_compiler_flags'(Flags) :-
 	'$lgt_assert_compiler_flags'(Flags),
@@ -2176,7 +2176,7 @@ logtalk_compile(Files, Flags) :-
 % logtalk_load(@list(source_file_name))
 %
 % compiles to disk and then loads to memory a source file
-% or a list of source files using default compiler options
+% or a list of source files using default compiler flags
 
 logtalk_load(Files) :-
 	catch(
@@ -2187,11 +2187,11 @@ logtalk_load(Files) :-
 
 
 
-% logtalk_load(@source_file_name, @list(compiler_option))
-% logtalk_load(@list(source_file_name), @list(compiler_option))
+% logtalk_load(@source_file_name, @list(compiler_flag))
+% logtalk_load(@list(source_file_name), @list(compiler_flag))
 %
 % compiles to disk and then loads to memory a source file or a list of source
-% files using a list of compiler options
+% files using a list of compiler flags
 %
 % note that we can only clean the compiler flags after reporting warning
 % numbers as the report/1 flag might be being in the list of flags but we
@@ -4837,8 +4837,8 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_load_files'(@source_file_name, @list(compiler_option))
-% '$lgt_load_files'(@list(source_file_name), @list(compiler_option))
+% '$lgt_load_files'(@source_file_name, @list(compiler_flag))
+% '$lgt_load_files'(@list(source_file_name), @list(compiler_flag))
 %
 % compiles to disk and then loads to memory a source file or a list of source files
 %
@@ -4954,7 +4954,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_register_loaded_file'(Directory, Basename) :-
-	% retract prelimirary regist
+	% retract prelimirary entry
 	retract('$lgt_loaded_file_'(Basename, Directory, Mode, Flags, _, ObjectFile, TimeStamp)), !,
 	% compute text properties, which are only available after successful file compilation
 	(	'$lgt_pp_file_encoding_'(Encoding, _, _) ->
@@ -4964,7 +4964,7 @@ current_logtalk_flag(Flag, Value) :-
 		)
 	;	TextProperties = []
 	),
-	% assert definitive regist
+	% assert definitive entry
 	assertz('$lgt_loaded_file_'(Basename, Directory, Mode, Flags, TextProperties, ObjectFile, TimeStamp)).
 
 
@@ -5133,8 +5133,8 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_compile_files'(@source_file_name, @list(compiler_option))
-% '$lgt_compile_files'(@list(source_file_name), @list(compiler_option))
+% '$lgt_compile_files'(@source_file_name, @list(compiler_flag))
+% '$lgt_compile_files'(@list(source_file_name), @list(compiler_flag))
 %
 % compiles to disk a source file or a list of source files
 %

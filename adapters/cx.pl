@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for CxProlog 0.97.7 or a later version
-%  Last updated on January 12, 2015
+%  Last updated on February 13, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -347,7 +347,7 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 % '$lgt_compile_prolog_code'(+atom, +atom, +list)
 %
 % compile to disk a Prolog file, resulting from a
-% Logtalk source file, given a list of options
+% Logtalk source file, given a list of flags
 
 '$lgt_compile_prolog_code'(_, _, _).
 
@@ -355,7 +355,7 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 % '$lgt_load_prolog_code'(+atom, +atom, +list)
 %
 % compile and load a Prolog file, resulting from a
-% Logtalk source file, given a list of options
+% Logtalk source file, given a list of flags
 
 '$lgt_load_prolog_code'(File, _, [encoding(Encoding)]) :-
 	!,

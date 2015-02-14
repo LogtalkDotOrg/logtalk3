@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for JIProlog 4.0.5.12 or later versions
-%  Last updated on February 8, 2015
+%  Last updated on February 13, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -402,7 +402,7 @@ format(Format, Arguments) :-
 % '$lgt_compile_prolog_code'(+atom, +atom, +list)
 %
 % compile to disk a Prolog file, resulting from a
-% Logtalk source file, given a list of options
+% Logtalk source file, given a list of flags
 
 '$lgt_compile_prolog_code'(File, _, _) :-
 	compile(File).
@@ -411,7 +411,7 @@ format(Format, Arguments) :-
 % '$lgt_load_prolog_code'(+atom, +atom, +list)
 %
 % compile and load a Prolog file, resulting from a
-% Logtalk source file, given a list of options
+% Logtalk source file, given a list of flags
 
 '$lgt_load_prolog_code'(PrologFile, _, _) :-
 	consult(PrologFile).

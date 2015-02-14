@@ -31,7 +31,7 @@ the ports profiler) that also provide a debug handler, which must be unique
 in a running session.
 
 Debugging Logtalk source code (with this debugger) requires compiling
-source files using the `debug(on)` compiler option. For example:
+source files using the `debug(on)` compiler flag. For example:
 
 	| ?- logtalk_load(my_buggy_code, [debug(on)]).
 

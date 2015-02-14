@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.01,
 		author is 'Paulo Moura',
-		date is 2013/03/14,
+		date is 2015/02/13,
 		comment is 'Unit tests for the logtalk_load/1-2 built-in predicates.'
 	]).
 
@@ -95,7 +95,7 @@
 	throws(logtalk_load_2_14, error(type_error(compound,1), logtalk(logtalk_load([],[1]), _))) :-
 		logtalk_load([], [1]).
 
-	throws(logtalk_load_2_15, error(domain_error(compiler_option,a(1,2)), logtalk(logtalk_load([],[a(1,2)]), _))) :-
+	throws(logtalk_load_2_15, error(domain_error(compiler_flag,a(1,2)), logtalk(logtalk_load([],[a(1,2)]), _))) :-
 		logtalk_load([], [a(1,2)]).
 
 	throws(logtalk_load_2_16, error(domain_error(flag_value,portability+invalid_value), logtalk(logtalk_load([],[portability(invalid_value)]), _))) :-

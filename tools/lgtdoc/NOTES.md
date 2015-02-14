@@ -27,7 +27,7 @@ be loaded by typing:
 	| ?- logtalk_load(lgtdoc(loader)).
 
 Documenting Logtalk source code (with this tool) requires compiling
-source files using the `source_data(on)` compiler option. For example:
+source files using the `source_data(on)` compiler flag. For example:
 
 	| ?- logtalk_load(source_file, [source_data(on)]).
 

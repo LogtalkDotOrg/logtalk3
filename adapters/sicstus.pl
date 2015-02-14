@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SICStus Prolog 4.1.0 and later versions
-%  Last updated on December 20, 2014
+%  Last updated on February 13, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -392,7 +392,7 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 % '$lgt_compile_prolog_code'(+atom, +atom, +list)
 %
 % compile to disk a Prolog file, resulting from a
-% Logtalk source file, given a list of options
+% Logtalk source file, given a list of flags
 
 '$lgt_compile_prolog_code'(_, _, _).
 
@@ -400,7 +400,7 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 % '$lgt_load_prolog_code'(+atom, +atom, +list)
 %
 % compile and load a Prolog file, resulting from a
-% Logtalk source file, given a list of options
+% Logtalk source file, given a list of flags
 
 '$lgt_load_prolog_code'(File, _, Options) :-
 	load_files(File, Options).

@@ -38,7 +38,7 @@
 
 <pre>logtalk_library_path(Library, Path)</pre>
 <p>
-Dynamic and multifile user-defined predicate, allowing the declaration of aliases to library paths. Library aliases may also be used on the second argument (using the notation <em>alias(path)</em>). Paths must always end with the path directory separator character (<em>"/"</em>).
+Dynamic and multifile user-defined predicate, allowing the declaration of aliases to library paths. Library aliases may also be used on the second argument (using the notation <em>alias(path)</em>). Paths must always end with the path directory separator character ('/').
 </p>
 <p>
 Relative paths (e.g. <code>'../'</code> or <code>'./'</code>) should only be used within the <em>alias(path)</em>) notation so that library paths can always be expanded to absolute paths independently of the (usually unpredictable) current directory at the time the <code>logtalk_library_path/2</code> predicate is called.
@@ -67,14 +67,20 @@ yes
 
 | ?- logtalk_library_path(Library, Path).
 
-Library = lgtuser
+Library = home,
+Path = '$HOME/' ;
+
+Library = logtalk_home,
+Path = '$LOGTALKHOME/' ;
+
+Library = logtalk_user
 Path = '$LOGTALKUSER/' ;
 
-Library = library
-Path = lgtuser('library/') ;
-
 Library = examples
-Path = lgtuser('examples/') ;
+Path = logtalk_user('examples/') ;
+
+Library = library
+Path = logtalk_user('library/') ;
 
 Library = viewpoints
 Path = examples('viewpoints/')
@@ -83,7 +89,7 @@ yes</pre>
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: March 7, 2014</span>
+		<span>Last updated on: February 13, 2015</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="logtalk_make_0.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="logtalk_load_context_2.html">next</a></span><br/>

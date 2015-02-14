@@ -323,7 +323,7 @@ numbervars(Term, From, Next) :-
 % '$lgt_compile_prolog_code'(+atom, +atom, +list)
 %
 % compile to disk a Prolog file, resulting from a
-% Logtalk source file, given a list of options
+% Logtalk source file, given a list of flags
 
 '$lgt_compile_prolog_code'(File, Source, Options) :-
 	?????.
@@ -332,7 +332,7 @@ numbervars(Term, From, Next) :-
 % '$lgt_load_prolog_code'(+atom, +atom, +list)
 %
 % compile and load a Prolog file, resulting from a
-% Logtalk source file, given a list of options
+% Logtalk source file, given a list of flags
 
 '$lgt_load_prolog_code'(File, Source, Options) :-
 	?????

@@ -8,7 +8,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on February 6, 2015
+%  Last updated on February 13, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -33,9 +33,9 @@
 :- multifile(user:prolog_load_file/2).
 :- dynamic(user:prolog_load_file/2).
 
-user:prolog_load_file(_:Spec, Options) :-
-	\+ '$lgt_member'(must_be_module(true), Options),	% exclude calls to use_module/1-2
-	\+ '$lgt_member'(if(not_loaded), Options),			% exclude calls to ensure_loaded/1
+user:prolog_load_file(_:Spec, Flags) :-
+	\+ '$lgt_member'(must_be_module(true), Flags),	% exclude calls to use_module/1-2
+	\+ '$lgt_member'(if(not_loaded), Flags),			% exclude calls to ensure_loaded/1
 	\+ absolute_file_name(Spec, [extensions([pl]), access(read), file_errors(fail)], _),
 	(	atom(Spec) ->
 		expand_file_name(Spec, [SpecExp]),
@@ -51,20 +51,20 @@ user:prolog_load_file(_:Spec, Options) :-
 	file_base_name(Path, BaseName),
 	file_name_extension(Entity, _, BaseName),
 	working_directory(Old, Dir),
-	'$lgt_swi_filter_compiler_options'(Options, Options2),
-	setup_call_cleanup(true, logtalk_load(Entity, Options2), working_directory(_, Old)).
+	'$lgt_swi_filter_compiler_flags'(Flags, Flags2),
+	setup_call_cleanup(true, logtalk_load(Entity, Flags2), working_directory(_, Old)).
 
 
-'$lgt_swi_filter_compiler_options'([], []).
+'$lgt_swi_filter_compiler_flags'([], []).
 
-'$lgt_swi_filter_compiler_options'([Option| Options], [Option| Options2]) :-
-	functor(Option, Functor, 1),
+'$lgt_swi_filter_compiler_flags'([Flag| Flags], [Flag| Flags2]) :-
+	functor(Flag, Functor, 1),
 	'$lgt_valid_flag'(Functor),
 	!,
-	'$lgt_swi_filter_compiler_options'(Options, Options2).
+	'$lgt_swi_filter_compiler_flags'(Flags, Flags2).
 
-'$lgt_swi_filter_compiler_options'([_| Options], Options2) :-
-	'$lgt_swi_filter_compiler_options'(Options, Options2).
+'$lgt_swi_filter_compiler_flags'([_| Flags], Flags2) :-
+	'$lgt_swi_filter_compiler_flags'(Flags, Flags2).
 
 
 :- multifile(prolog_edit:locate/3).

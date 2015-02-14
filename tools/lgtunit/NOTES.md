@@ -215,7 +215,7 @@ Code coverage
 
 If you want entity predicate clause coverage information to be collected
 and printed, you will need to compile the entities that you're testing
-using the options `debug(on)` and `source_data(on)`. Be aware, however,
+using the flags `debug(on)` and `source_data(on)`. Be aware, however,
 that compiling in debug mode results in a performance penalty. Your unit
 test objects must also define facts for the predicate `cover/1`, whose
 argument is the identifier of an entity being tested for which you want
