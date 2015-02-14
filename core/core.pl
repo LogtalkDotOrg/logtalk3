@@ -8898,7 +8898,6 @@ current_logtalk_flag(Flag, Value) :-
 	\+ '$lgt_pp_entity_'(_, _, _, _, _),
 	% clause occurs before an opening entity directive
 	!,
-	'$lgt_must_be'(clause, Clause, clause(Clause)),
 	'$lgt_comp_ctx_lines'(Ctx, Lines),
 	% copy it unchanged to the generated Prolog file
 	assertz('$lgt_pp_prolog_term_'(Clause, Lines)).

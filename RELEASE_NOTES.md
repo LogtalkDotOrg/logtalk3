@@ -75,6 +75,9 @@ categories and protocols.
 * FIXED: Potential bug in the rare case where a category complements two or
 more objects.
 
+* FIXED: Compiler performance bug where plain Prolog clauses in source files
+would be type-checked twice.
+
 Prolog adapter and integration files
 ------------------------------------
 
