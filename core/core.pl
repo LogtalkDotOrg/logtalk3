@@ -4998,7 +4998,7 @@ current_logtalk_flag(Flag, Value) :-
 		assertz('$lgt_failed_file_'(SourceFile)),
 		'$lgt_propagate_failure_to_parent_files'(SourceFile)
 	),
-	% cleanup intermdiate files if necessary
+	% cleanup intermediate files if necessary
 	(	'$lgt_compiler_flag'(clean, on) ->
 		'$lgt_delete_intermediate_files'(ObjectFile)
 	;	true
@@ -5007,6 +5007,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_delete_intermediate_files'(ObjectFile) :-
 	% try to delete the intermediate Prolog file (ignore failure or error)
+	'$lgt_file_exists'(ObjectFile),
 	catch('$lgt_delete_file'(ObjectFile), _, true),
 	fail.
 
