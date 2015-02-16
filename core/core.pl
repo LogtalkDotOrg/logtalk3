@@ -1233,7 +1233,7 @@ create_protocol(Ptc, Relations, Directives) :-
 		number_codes(New, Codes),
 		atom_codes(Identifier, [Code| Codes]),
 	% objects, protocols, and categories share a single namespace and there's
-	% no guarantee that a user named entity will not clash with the genearated
+	% no guarantee that a user named entity will not clash with the generated
 	% identifier despite the use of a per entity type base character
 	\+ '$lgt_current_protocol_'(Identifier, _, _, _, _),
 	\+ '$lgt_current_object_'(Identifier, _, _, _, _, _, _, _, _, _, _),
@@ -1921,7 +1921,7 @@ logtalk_compile(Files, Flags) :-
 
 '$lgt_logtalk_compile'(Files, Flags) :-
 	'$lgt_init_warnings_counter'(logtalk_compile(Files, Flags)),
-	'$lgt_check_source_files'(Files, ExpandedFiles),
+	'$lgt_check_and_expand_source_files'(Files, ExpandedFiles),
 	'$lgt_check_compiler_flags'(Flags),
 	'$lgt_compile_files'(ExpandedFiles, Flags),
 	'$lgt_report_warning_numbers'(logtalk_compile(Files, Flags), Flags).
@@ -2006,25 +2006,25 @@ logtalk_compile(Files, Flags) :-
 
 
 
-% '$lgt_check_source_files'(@nonvar, -nonvar)
-% '$lgt_check_source_files'(@list, -list)
+% '$lgt_check_and_expand_source_files'(@nonvar, -nonvar)
+% '$lgt_check_and_expand_source_files'(@list, -list)
 %
 % check if the source file names are valid (but not if the file exists)
 % and return their paths
 
-'$lgt_check_source_files'([File| Files], [Path| Paths]) :-
+'$lgt_check_and_expand_source_files'([File| Files], [Path| Paths]) :-
 	!,
-	'$lgt_check_source_file'(File, Path),
-	'$lgt_check_source_files'(Files, Paths).
+	'$lgt_check_and_expand_source_file'(File, Path),
+	'$lgt_check_and_expand_source_files'(Files, Paths).
 
-'$lgt_check_source_files'([], []) :-
+'$lgt_check_and_expand_source_files'([], []) :-
 	!.
 
-'$lgt_check_source_files'(File, Path) :-
-	'$lgt_check_source_file'(File, Path).
+'$lgt_check_and_expand_source_files'(File, Path) :-
+	'$lgt_check_and_expand_source_file'(File, Path).
 
 
-'$lgt_check_source_file'(File, Path) :-
+'$lgt_check_and_expand_source_file'(File, Path) :-
 	(	atom(File) ->
 		Path = File
 	;	compound(File),
@@ -2208,7 +2208,7 @@ logtalk_load(Files, Flags) :-
 
 '$lgt_logtalk_load'(Files, Flags) :-
 	'$lgt_init_warnings_counter'(logtalk_load(Files, Flags)),
-	'$lgt_check_source_files'(Files, ExpandedFiles),
+	'$lgt_check_and_expand_source_files'(Files, ExpandedFiles),
 	'$lgt_check_compiler_flags'(Flags),
 	'$lgt_load_files'(ExpandedFiles, Flags),
 	'$lgt_report_warning_numbers'(logtalk_load(Files, Flags), Flags).
@@ -5399,7 +5399,6 @@ current_logtalk_flag(Flag, Value) :-
 
 
 '$lgt_write_runtime_tables'(Output) :-
-	% the reflective information to be written depends on the source_data flag
 	'$lgt_pp_file_paths_'(_, _, Path, _),
 	% write out any Prolog code occurring after the last source file entity
 	'$lgt_write_prolog_terms'(Output, Path),
@@ -6575,13 +6574,12 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$lgt_compile_grammar_rule'((Head --> Body), Ctx).
 
-'$lgt_compile_expanded_term'(ExpandedTerm, Term, _) :-
-	\+ callable(ExpandedTerm),
-	throw(error(type_error(callable, ExpandedTerm), term_expansion(Term, ExpandedTerm))).
-
-'$lgt_compile_expanded_term'(ExpandedTerm, _, Ctx) :-
-	% fact
-	'$lgt_compile_clause'(ExpandedTerm, Ctx).
+'$lgt_compile_expanded_term'(ExpandedTerm, Term, Ctx) :-
+	(	callable(ExpandedTerm) ->
+		% fact
+		'$lgt_compile_clause'(ExpandedTerm, Ctx)
+	;	throw(error(type_error(callable, ExpandedTerm), term_expansion(Term, ExpandedTerm)))
+	).
 
 
 
@@ -18867,7 +18865,7 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_read_file_to_terms'(File, Terms) :-
 	catch(
-		'$lgt_check_source_file'(File, ExpandedFile),
+		'$lgt_check_and_expand_source_file'(File, ExpandedFile),
 		error(FileError, _),
 		'$lgt_compiler_open_stream_error_handler'(FileError)
 	),
