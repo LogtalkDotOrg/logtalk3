@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.01,
 		author is 'Paulo Moura',
-		date is 2015/01/05,
+		date is 2015/02/16,
 		comment is 'Unit tests for the "logtalk" built-in object.'
 	]).
 
@@ -58,7 +58,10 @@
 		logtalk::loaded_file_property(SourceFile, target(ObjectFile)), atom(ObjectFile),
 		logtalk::loaded_file_property(SourceFile, modified(TimeStamp)),	ground(TimeStamp),
 		logtalk::loaded_file_property(SourceFile, parent(ParentFile)), atom_concat(_, 'tester.lgt', ParentFile),
-		\+ logtalk::loaded_file_property(SourceFile, library(_)),
+		(	logtalk::loaded_file_property(SourceFile, library(Library)) ->
+			Library == startup
+		;	true
+		),
 		logtalk::loaded_file_property(SourceFile, object(Object)), Object == tests.
 
 	mode(debug).
