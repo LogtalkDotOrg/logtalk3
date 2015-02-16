@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  sample settings file
-%  Last updated on January 3, 2015
+%  Last updated on February 16, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -53,7 +53,10 @@
 %  shortcut to the project directory and to and edit its `Target` field to
 %  prefix its content with:
 %
-%	C:\Windows\System32\cmd.exe /c set LOGTALK_STARTUP_DIRECTORY=%CD% &&
+%  C:\Windows\System32\cmd.exe /c set LOGTALK_STARTUP_DIRECTORY=%CD% &&
+%
+%  When the `LOGTALK_STARTUP_DIRECTORY` variable is not available, Logtalk
+%  uses the current directory as returned by the backend Prolog compiler.
 %
 %  To use settings files, copy this file to your Logtalk user directory or to
 %  the directory containing your project files, rename it to `settings.lgt`,
