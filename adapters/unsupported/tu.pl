@@ -411,7 +411,7 @@ numbervars(Term, From, Next) :-
 
 % '$lgt_startup_directory'(-atom)
 %
-% returns the Logtalk startup directory 
+% returns the Logtalk startup directory
 
 '$lgt_startup_directory'(Directory) :-
 	class('java.lang.System') <- getenv('LOGTALK_STARTUP_DIRECTORY') returns Directory,

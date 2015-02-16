@@ -87,6 +87,10 @@ would be type-checked twice.
 Prolog adapter and integration files
 ------------------------------------
 
+* REMOVED: Definitions for internal current date, current time, and CPU time
+from all supported adapter files as access to this information is currently
+handled by the portable operating-system library.
+
 * ADDED: POSIX integration shell script and Windows integration shortcut for
 JIProlog.
 

@@ -557,7 +557,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 
 % '$lgt_startup_directory'(-atom)
 %
-% returns the Logtalk startup directory 
+% returns the Logtalk startup directory
 
 '$lgt_startup_directory'(Directory) :-
 	(	env(Variables),

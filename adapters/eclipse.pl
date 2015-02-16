@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on February 13, 2015
+%  Last updated on February 16, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -433,7 +433,7 @@ setup_call_cleanup(_, _, _) :-
 
 % '$lgt_startup_directory'(-atom)
 %
-% returns the Logtalk startup directory 
+% returns the Logtalk startup directory
 
 '$lgt_startup_directory'(Directory) :-
 	(	getenv('LOGTALK_STARTUP_DIRECTORY', DirectoryString) ->
@@ -476,52 +476,6 @@ setup_call_cleanup(_, _, _) :-
 	),
 	atom_string(Name, NameString),
 	atom_string(Extension, ExtensionString).
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  time and date predicates
-%
-%  if your Prolog compiler does not provide access to the operating system 
-%  time and date just write dummy definitions
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-:- use_module(library(calendar)).
-
-
-% '$lgt_current_date'(?integer, ?integer, ?integer)
-
-'$lgt_current_date'(Year, Month, Day) :-
-	mjd_now(MJD),
-	mjd_to_date(MJD, Day/Month/Year).
-
-
-% '$lgt_current_time'(?integer, ?integer, ?integer)
-
-'$lgt_current_time'(Hours, Minutes, Seconds) :-
-	mjd_now(MJD),
-	mjd_to_time(MJD, Hours:Minutes:FloatSeconds),
-	Seconds is integer(floor(FloatSeconds)).
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  timing predicate
-%
-%  if your Prolog compiler does not provide access to a timing predicate 
-%  just write a dummy definition
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-% '$lgt_cpu_time'(-Seconds)
-
-'$lgt_cpu_time'(Seconds) :-
-	cputime(Seconds).
 
 
 

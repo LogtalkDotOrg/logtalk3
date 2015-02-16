@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Lean Prolog 3.8.8 and later versions
-%  Last updated on February 13, 2015
+%  Last updated on February 16, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -472,7 +472,7 @@ to_engine(Interactor, Pattern, Goal) :-
 
 % '$lgt_startup_directory'(-atom)
 %
-% returns the Logtalk startup directory 
+% returns the Logtalk startup directory
 
 '$lgt_startup_directory'(Directory) :-
 	(	getenv('LOGTALK_STARTUP_DIRECTORY', Directory) ->
@@ -518,52 +518,6 @@ to_engine(Interactor, Pattern, Goal) :-
 	;	Name = Basename,
 		Extension = ''
 	).
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  time and date predicates
-%
-%  if your Prolog compiler does not provide access to the operating system 
-%  time and date just write dummy definitions
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-% '$lgt_current_date'(?integer, ?integer, ?integer)
-
-'$lgt_current_date'(Year, Month, Day) :-
-	new_java_object('java.util.GregorianCalendar', Calendar),
-	get_java_field(Calendar,'YEAR', Field1), invoke_java_method(Calendar, get(Field1), Year),
-	get_java_field(Calendar,'MONTH', Field2), invoke_java_method(Calendar, get(Field2), Month),
-	get_java_field(Calendar,'DAY_OF_MONTH', Field3), invoke_java_method(Calendar, get(Field3), Day).
-
-
-% '$lgt_current_time'(?integer, ?integer, ?integer)
-
-'$lgt_current_time'(Hours, Minutes, Seconds) :-
-	new_java_object('java.util.GregorianCalendar', Calendar),
-	get_java_field(Calendar,'HOUR_OF_DAY', Field4), invoke_java_method(Calendar, get(Field4), Hours),
-	get_java_field(Calendar,'MINUTE', Field5), invoke_java_method(Calendar, get(Field5), Minutes),
-	get_java_field(Calendar,'SECOND', Field6), invoke_java_method(Calendar, get(Field6), Seconds).
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  timing predicate
-%
-%  if your Prolog compiler does not provide access to a timing predicate 
-%  just write a dummy definition
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-% '$lgt_cpu_time'(-Seconds)
-
-'$lgt_cpu_time'(Seconds) :-
-	cputime(Seconds).
 
 
 

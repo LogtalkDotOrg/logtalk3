@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for B-Prolog 7.8 and later versions
-%  Last updated on February 13, 2015
+%  Last updated on February 16, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -409,7 +409,7 @@ findall(Term, Goal, List, Tail) :-
 
 % '$lgt_startup_directory'(-atom)
 %
-% returns the Logtalk startup directory 
+% returns the Logtalk startup directory
 
 '$lgt_startup_directory'(Directory) :-
 	(	environ('LOGTALK_STARTUP_DIRECTORY', Directory) ->
@@ -451,47 +451,6 @@ findall(Term, Goal, List, Tail) :-
 	;	Name = Basename,
 		Extension = ''
 	).
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  time and date predicates
-%
-%  if your Prolog compiler does not provide access to the operating system 
-%  time and date just write dummy definitions
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-% '$lgt_current_date'(?integer, ?integer, ?integer)
-
-'$lgt_current_date'(Year, Month, Day) :-
-	date(Year, Month, Day).
-
-
-% '$lgt_current_time'(?integer, ?integer, ?integer)
-
-'$lgt_current_time'(Hours, Minutes, Seconds) :-
-	time(Hours, Minutes, Seconds).
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  timing predicate
-%
-%  if your Prolog compiler does not provide access to a timing predicate 
-%  just write a dummy definition
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-% '$lgt_cpu_time'(-Seconds)
-
-'$lgt_cpu_time'(Seconds) :-
-	cputime(Miliseconds),
-	Seconds is Miliseconds / 1000 .
 
 
 

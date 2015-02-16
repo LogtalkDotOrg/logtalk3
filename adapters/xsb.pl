@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for XSB 3.5.0 or later versions
-%  Last updated on February 13, 2015
+%  Last updated on February 16, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -397,7 +397,7 @@ setup_call_catcher_cleanup(Setup, Call, Catcher, Cleanup) :-
 
 % '$lgt_startup_directory'(-atom)
 %
-% returns the Logtalk startup directory 
+% returns the Logtalk startup directory
 
 '$lgt_startup_directory'(Directory) :-
 	(	expand_atom('$LOGTALK_STARTUP_DIRECTORY', Directory) ->
@@ -442,46 +442,6 @@ setup_call_catcher_cleanup(Setup, Call, Catcher, Cleanup) :-
 		Extension = Extension0
 	;	atom_concat('.', Extension0, Extension)
 	).
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  time and date predicates
-%
-%  if your Prolog compiler does not provide access to the operating system 
-%  time and date just write dummy definitions
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-% '$lgt_current_date'(?integer, ?integer, ?integer)
-
-'$lgt_current_date'(Year, Month, Day) :-
-	datime(datime(Year, Month, Day, _, _, _)).
-
-
-% '$lgt_current_time'(?integer, ?integer, ?integer)
-
-'$lgt_current_time'(Hours, Minutes, Seconds) :-
-	datime(datime(_, _, _, Hours, Minutes, Seconds)).
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  timing predicate
-%
-%  if your Prolog compiler does not provide access to a timing predicate 
-%  just write a dummy definition
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-% '$lgt_cpu_time'(-Seconds)
-
-'$lgt_cpu_time'(Seconds) :-
-	cputime(Seconds).
 
 
 

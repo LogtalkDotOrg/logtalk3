@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Quintus Prolog 3.3~3.5
-%  Last updated on February 13, 2015
+%  Last updated on February 16, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 :- [library(foreach)].
 :- [library(files)].
 :- [library(directory)].
-:- [library(date)].
 :- [library(strings)].
 :- [library(environ)].
 :- [library(subsumes)].
@@ -598,7 +597,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 
 % '$lgt_startup_directory'(-atom)
 %
-% returns the Logtalk startup directory 
+% returns the Logtalk startup directory
 
 '$lgt_startup_directory'(Directory) :-
 	environ('LOGTALK_STARTUP_DIRECTORY', Directory0),
@@ -666,49 +665,6 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 		'$lgt_strrch1'(Xs1, G, Xs, Ys)
 	;	'$lgt_strrch1'(Xs1, G, Prev, Ys)
 	).
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  time and date predicates
-%
-%  if your Prolog compiler does not provide access to the operating system 
-%  time and date just write dummy definitions
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-% '$lgt_current_date'(?integer, ?integer, ?integer)
-
-'$lgt_current_date'(Year, Month, Day) :-
-	date(date(Year0, Month0, Day)),
-	Year is 1900 + Year0,
-	Month is Month0 + 1.
-
-
-% '$lgt_current_time'(?integer, ?integer, ?integer)
-
-'$lgt_current_time'(Hours, Minutes, Seconds) :-
-	time(time(Hours, Minutes, Seconds)).
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  timing predicate
-%
-%  if your Prolog compiler does not provide access to a timing predicate 
-%  just write a dummy definition
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-% '$lgt_cpu_time'(-Seconds)
-
-'$lgt_cpu_time'(Seconds) :-
-	statistics(runtime, [Miliseconds| _]),
-	Seconds is Miliseconds / 1000.
 
 
 
