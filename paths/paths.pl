@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  Default library paths 
-%  Last updated on November 26, 2014
+%  Last updated on February 16, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -28,6 +28,7 @@
 :- multifile(logtalk_library_path/2).	% logtalk_library_path(Library, Path)
 :- dynamic(logtalk_library_path/2).		% paths must always end with a "/"
 
+% user home directory
 logtalk_library_path(home, HOME) :-
 	(	'$lgt_environment_variable'('HOME', _) ->
 		% likely a POSIX system but Windows users
@@ -39,9 +40,15 @@ logtalk_library_path(home, HOME) :-
 	;	fail
 	).
 
+% Logtalk startup directory
+logtalk_library_path(startup, Startup) :-
+	'$lgt_startup_directory'(Startup).
+
 % when the LOGTALKHOME or the LOGTALKUSER environment variables are not
 % defined (we may be e.g. embedding Logtalk in a compiled application),
 % assume the current directory as their value
+
+% Logtalk installation directory
 logtalk_library_path(logtalk_home, LOGTALKHOME) :-
 	(	'$lgt_environment_variable'('LOGTALKHOME', _) ->
 		LOGTALKHOME = '$LOGTALKHOME/'
@@ -51,6 +58,8 @@ logtalk_library_path(logtalk_home, LOGTALKHOME) :-
 		;	atom_concat(LOGTALKHOME0, '/', LOGTALKHOME)
 		)
 	).
+
+% Logtalk user directory
 logtalk_library_path(logtalk_user, LOGTALKUSER) :-
 	(	'$lgt_environment_variable'('LOGTALKUSER', _) ->
 		LOGTALKUSER = '$LOGTALKUSER/'

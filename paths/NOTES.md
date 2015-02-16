@@ -27,6 +27,19 @@ essential library paths for starting Logtalk and library paths for the
 Logtalk standard library and for the supplied examples and contributions.
 Note that in Logtalk a library is simply a directory containing source files.
 
+Basic library aliases defined in the `paths.pl` file include:
+
+- `home`  
+	user home directory
+- `startup`  
+	Logtalk startup directory
+- `logtalk_home`  
+	Logtalk installation directory
+- `logtalk_user`  
+	Logtalk user directory
+- `library`  
+	Logtalk standard library directory (a sub-directory of the Logtalk user directory)
+
 You might need to edit the `paths.pl` file in order to adapt it to 
 reflect your Logtalk installation, Prolog compiler, and operating-system 
 requirements. However, as defined, the provided `paths.pl` file is already

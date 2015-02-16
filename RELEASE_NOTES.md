@@ -51,6 +51,9 @@ similar to the `declared_in/1` and `declared_in/2` properties but for predicate
 aliases, when defined. The second property is only available when compiling
 with the `source_data` flag turned on.
 
+* ADDED: Definition for the `startup` library alias, corresponding to the
+Logtalk startup directory, to the `paths/paths.pl` file.
+
 * IMPROVED: Print a warning when an `encoding/1` directive is the first term
 as required but not located in the first source file line.
 
