@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2015/02/16,
 		comment is 'Unit tests for the ISO Prolog standard term comparison built-in predicates.'
 	]).
 
@@ -93,5 +93,29 @@
 			true
 		;	true
 		).
+
+	succeeds(lgt_term_comparison_20) :-
+		{'@>='((4,1,0), (4,0,1))}.
+
+	fails(lgt_term_comparison_21) :-
+		{'@>='((4,0,1), (4,1,0))}.
+
+	fails(lgt_term_comparison_22) :-
+		{'@=<'((4,1,0), (4,0,1))}.
+
+	succeeds(lgt_term_comparison_23) :-
+		{'@=<'((4,0,1), (4,1,0))}.
+
+	succeeds(lgt_term_comparison_24) :-
+		{'@>'((4,1,0), (4,0,1))}.
+
+	fails(lgt_term_comparison_25) :-
+		{'@>'((4,0,1), (4,1,0))}.
+
+	fails(lgt_term_comparison_26) :-
+		{'@<'((4,1,0), (4,0,1))}.
+
+	succeeds(lgt_term_comparison_27) :-
+		{'@<'((4,0,1), (4,1,0))}.
 
 :- end_object.

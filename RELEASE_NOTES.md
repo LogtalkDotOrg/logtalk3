@@ -138,6 +138,12 @@ Tools
 
 * UPDATED: The `debugger` tool for compatibility with JIProlog.
 
+Tests
+-----
+
+* ADDED: Eight more unit tests for the ISO Prolog standard term comparison
+built-in predicates.
+
 Examples
 --------
 
