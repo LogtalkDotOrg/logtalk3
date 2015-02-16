@@ -5509,7 +5509,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_pp_cc_skipping_',
 	% we're performing conditional compilation and skipping terms ...
 	\+ '$lgt_is_conditional_compilation_directive'(Term),
-	% ... except for conditional compilation directives directives
+	% ... except for conditional compilation directives
 	!,
 	'$lgt_read_term'(Input, Next, [singletons(NextSingletons)], NextLines),
 	'$lgt_compile_file_term'(Next, NextSingletons, NextLines, Input).
@@ -18641,7 +18641,7 @@ current_logtalk_flag(Flag, Value) :-
 	call(Dcl, Head, Scope, _, PredFlags, SCtn, DCtn), !,
 	% check that the call is within scope
 	Scope = p(p(_)),
-	% check that the the predicate is dynamic
+	% check that the predicate is dynamic
 	PredFlags /\ 2 =:= 2,
 	% check that we're acting on the same entity that declares the predicate dynamic
 	SCtn = Obj,

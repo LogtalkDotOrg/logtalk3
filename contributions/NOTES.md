@@ -38,7 +38,7 @@ a short description of each included contribution:
 * `verdi_neruda`  
 	Contributed by: Victor Lagerkvist
 
-	This folder contains a a meta-interpreter collection that
+	This folder contains a meta-interpreter collection that
 	includes both top-down and bottom-up search strategies.
 	See the `verdi_neruda/README.md` file for details.
 

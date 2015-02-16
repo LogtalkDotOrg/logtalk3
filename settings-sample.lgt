@@ -46,7 +46,7 @@
 %  Logtalk uses the value of the `LOGTALK_STARTUP_DIRECTORY` environment
 %  variable for the startup directory and the value of the `LOGTALKUSER`
 %  environment variable for the Logtalk user directory. The POSIX integration
-%  scripts automatically set the the `LOGTALK_STARTUP_DIRECTORY` variable.
+%  scripts automatically set the `LOGTALK_STARTUP_DIRECTORY` variable.
 %  On Windows systems, the integration shortcuts `Start in` field is set by
 %  default to `%LOGTALKUSER%` as the `%CD%` alternative only works on some
 %  versions. A workaround to use per-project settings files is to copy the

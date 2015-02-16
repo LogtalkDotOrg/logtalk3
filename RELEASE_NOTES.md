@@ -39,12 +39,12 @@ consistency.
 with the `source_data` flag turned on.
 
 * ADDED: Entity property `alias/2`. The first argument is the predicate alias
-and the second argument is a list of properties. The valid properties are:
-`for/1` (the original predicate), `from/1` (the entity referenced in the
-`alias/2` directive), `non_terminal/1` (the alias is specified as a non-
-terminal), and `line_count/1` (the start line number of the `alias/2`
-directive). The non-terminal and line number information are only available
-when compiling with the `source_data` flag turned on).
+and the second argument is a list of alias properties. The valid properties
+are: `for/1` (the original predicate), `from/1` (the entity referenced in the
+`alias/2` directive), `line_count/1` (the start line number of the `alias/2`
+directive), and `non_terminal/1` (the alias is specified as a non-terminal).
+The non-terminal and line number information are only available when compiling
+with the `source_data` flag turned on).
 
 * ADDED: Predicate properties `alias_declared_in/1` and `alias_declared_in/2`,
 similar to the `declared_in/1` and `declared_in/2` properties but for predicate

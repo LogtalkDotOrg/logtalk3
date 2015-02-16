@@ -10,7 +10,7 @@ ________________________________________________________________________
 
 This directory contains a set of unit tests for Prolog official and de facto
 standard features. Most of these unit tests are taken from the official ISO
-Prolog standard (updated up to the the ISO/IEC 13211-1:1995/Cor.2:2012(en)
+Prolog standard (updated up to the ISO/IEC 13211-1:1995/Cor.2:2012(en)
 standard). Several tests originate from SICS and are used here with permission.
 
 Writing these tests was made easier by rewriting and, whenever necessary,
