@@ -141,7 +141,7 @@ Tools
 Tests
 -----
 
-* ADDED: Eight more unit tests for the ISO Prolog standard term comparison
+* ADDED: Sixteen more unit tests for the ISO Prolog standard term comparison
 built-in predicates.
 
 Examples
