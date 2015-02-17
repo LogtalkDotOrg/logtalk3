@@ -222,6 +222,10 @@ Written with the help of Ugo Chirico, JIProlog author (but if you find any
 Logtalk problem please report it to me). Some examples may not compile or
 run due to work in progress regarding ISO Prolog standard compliance.
 
+To generate `.jip` files from Logtalk source files, use the built-in
+`logtalk_compile/1-2` or the `logtalk_load/1-2` predicates with the
+`clean` flag turned off.
+
 
 Lean Prolog 3.8.8 and later versions
 ------------------------------------
