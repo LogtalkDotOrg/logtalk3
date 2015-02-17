@@ -123,8 +123,8 @@
 	test(dcgs_23) :-
 		logtalk << phrase(call([Input, Rest]>>(set::subtract(Input, Rest, [1]))), [1,2,3], [2,3]).
 
-	% two nasty examples of getting a grammar rule difference list arguments as
-	% they require using variables as both lambda free and lambda parameters
+	% three nasty examples of getting a grammar rule difference list arguments
+	% as they require using variables as both lambda free and lambda parameters
 
 	test(dcgs_24) :-
 		logtalk << phrase(call({Input,Rest}/[Input,Rest]>>true), [1,2,3], [2,3]),
