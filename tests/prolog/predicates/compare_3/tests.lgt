@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/02/16,
+		date is 2015/02/17,
 		comment is 'Unit tests for the ISO Prolog standard compare/3 built-in predicate.'
 	]).
 
@@ -42,28 +42,28 @@
 	throws(iso_compare_3_06, error(domain_error(order,>=),_)) :-
 		{compare(>=, 3, 3.0)}.
 
-	succeeds(lgt_term_comparison_07) :-
+	succeeds(lgt_compare_3_07) :-
 		{compare(>, (4,1,0), (4,0,1))}.
 
-	fails(lgt_term_comparison_08) :-
+	fails(lgt_compare_3_08) :-
 		{compare(>, (4,0,1), (4,1,0))}.
 
-	fails(lgt_term_comparison_09) :-
+	fails(lgt_compare_3_09) :-
 		{compare(<, (4,1,0), (4,0,1))}.
 
-	succeeds(lgt_term_comparison_10) :-
+	succeeds(lgt_compare_3_10) :-
 		{compare(<, (4,0,1), (4,1,0))}.
 
-	succeeds(lgt_term_comparison_11) :-
+	succeeds(lgt_compare_3_11) :-
 		{compare(>, (4,1,0), (4,0,1))}.
 
-	fails(lgt_term_comparison_12) :-
+	fails(lgt_compare_3_12) :-
 		{compare(>, (4,0,1), (4,1,0))}.
 
-	fails(lgt_term_comparison_13) :-
+	fails(lgt_compare_3_13) :-
 		{compare(<, (4,1,0), (4,0,1))}.
 
-	succeeds(lgt_term_comparison_14) :-
+	succeeds(lgt_compare_3_14) :-
 		{compare(<, (4,0,1), (4,1,0))}.
 
 :- end_object.
