@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2015/02/16,
+		date is 2015/02/18,
 		comment is 'Unit tests for the ISO Prolog standard term comparison built-in predicates.'
 	]).
 
@@ -94,28 +94,56 @@
 		;	true
 		).
 
+	% standard order tests
+
 	succeeds(lgt_term_comparison_20) :-
-		{'@>='((4,1,0), (4,0,1))}.
+		{'@<'(_X, 1.1)}.
 
-	fails(lgt_term_comparison_21) :-
-		{'@>='((4,0,1), (4,1,0))}.
+	succeeds(lgt_term_comparison_21) :-
+		{'@<'(1.1, 1)}.
 
-	fails(lgt_term_comparison_22) :-
-		{'@=<'((4,1,0), (4,0,1))}.
+	succeeds(lgt_term_comparison_22) :-
+		{'@<'(1, a)}.
 
 	succeeds(lgt_term_comparison_23) :-
-		{'@=<'((4,0,1), (4,1,0))}.
+		{'@<'(a, a(_))}.
 
 	succeeds(lgt_term_comparison_24) :-
-		{'@>'((4,1,0), (4,0,1))}.
+		{'@<'(a(_), a(_,_))}.
 
-	fails(lgt_term_comparison_25) :-
-		{'@>'((4,0,1), (4,1,0))}.
+	succeeds(lgt_term_comparison_25) :-
+		{'@<'(b(_), a(_,_))}.
 
-	fails(lgt_term_comparison_26) :-
-		{'@<'((4,1,0), (4,0,1))}.
+	succeeds(lgt_term_comparison_26) :-
+		{'@<'(a(1,2), a(1,3))}.
 
 	succeeds(lgt_term_comparison_27) :-
+		{'@<'(a(1,2), b(1,2))}.
+
+	% other tests
+
+	succeeds(lgt_term_comparison_28) :-
+		{'@>='((4,1,0), (4,0,1))}.
+
+	fails(lgt_term_comparison_29) :-
+		{'@>='((4,0,1), (4,1,0))}.
+
+	fails(lgt_term_comparison_30) :-
+		{'@=<'((4,1,0), (4,0,1))}.
+
+	succeeds(lgt_term_comparison_31) :-
+		{'@=<'((4,0,1), (4,1,0))}.
+
+	succeeds(lgt_term_comparison_32) :-
+		{'@>'((4,1,0), (4,0,1))}.
+
+	fails(lgt_term_comparison_33) :-
+		{'@>'((4,0,1), (4,1,0))}.
+
+	fails(lgt_term_comparison_34) :-
+		{'@<'((4,1,0), (4,0,1))}.
+
+	succeeds(lgt_term_comparison_35) :-
 		{'@<'((4,0,1), (4,1,0))}.
 
 :- end_object.

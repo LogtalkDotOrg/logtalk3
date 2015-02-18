@@ -148,8 +148,8 @@ Tools
 Tests
 -----
 
-* ADDED: Sixteen more unit tests for the ISO Prolog standard term comparison
-built-in predicates.
+* ADDED: More unit tests for the ISO Prolog standard term comparison
+built-in predicates, in particular to test standard term order.
 
 Examples
 --------

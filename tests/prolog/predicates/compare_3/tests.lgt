@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/02/17,
+		date is 2015/02/18,
 		comment is 'Unit tests for the ISO Prolog standard compare/3 built-in predicate.'
 	]).
 
@@ -42,28 +42,56 @@
 	throws(iso_compare_3_06, error(domain_error(order,>=),_)) :-
 		{compare(>=, 3, 3.0)}.
 
+	% standard order tests
+
 	succeeds(lgt_compare_3_07) :-
-		{compare(>, (4,1,0), (4,0,1))}.
+		{compare(<, _X, 1.1)}.
 
-	fails(lgt_compare_3_08) :-
-		{compare(>, (4,0,1), (4,1,0))}.
+	succeeds(lgt_compare_3_08) :-
+		{compare(<, 1.1, 1)}.
 
-	fails(lgt_compare_3_09) :-
-		{compare(<, (4,1,0), (4,0,1))}.
+	succeeds(lgt_compare_3_09) :-
+		{compare(<, 1, a)}.
 
 	succeeds(lgt_compare_3_10) :-
-		{compare(<, (4,0,1), (4,1,0))}.
+		{compare(<, a, a(_))}.
 
 	succeeds(lgt_compare_3_11) :-
-		{compare(>, (4,1,0), (4,0,1))}.
+		{compare(<, a(_), a(_,_))}.
 
-	fails(lgt_compare_3_12) :-
-		{compare(>, (4,0,1), (4,1,0))}.
+	succeeds(lgt_compare_3_12) :-
+		{compare(<, b(_), a(_,_))}.
 
-	fails(lgt_compare_3_13) :-
-		{compare(<, (4,1,0), (4,0,1))}.
+	succeeds(lgt_compare_3_13) :-
+		{compare(<, a(1,2), a(1,3))}.
 
 	succeeds(lgt_compare_3_14) :-
+		{compare(<, a(1,2), b(1,2))}.
+
+	% other tests
+
+	succeeds(lgt_compare_3_15) :-
+		{compare(>, (4,1,0), (4,0,1))}.
+
+	fails(lgt_compare_3_16) :-
+		{compare(>, (4,0,1), (4,1,0))}.
+
+	fails(lgt_compare_3_17) :-
+		{compare(<, (4,1,0), (4,0,1))}.
+
+	succeeds(lgt_compare_3_18) :-
+		{compare(<, (4,0,1), (4,1,0))}.
+
+	succeeds(lgt_compare_3_19) :-
+		{compare(>, (4,1,0), (4,0,1))}.
+
+	fails(lgt_compare_3_20) :-
+		{compare(>, (4,0,1), (4,1,0))}.
+
+	fails(lgt_compare_3_21) :-
+		{compare(<, (4,1,0), (4,0,1))}.
+
+	succeeds(lgt_compare_3_22) :-
 		{compare(<, (4,0,1), (4,1,0))}.
 
 :- end_object.
