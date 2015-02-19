@@ -25,13 +25,13 @@
 :- object(help).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Paulo Moura',
-		date is 2014/11/02,
+		date is 2015/02/19,
 		comment is 'Command-line help for Logtalk built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
-	:- initialization((nl, write('For help on Logtalk, type help::help.'), nl)).
+	:- initialization((nl, write('For help on Logtalk, type help::help.'), nl, nl)).
 
 	:- public(help/0).
 	:- mode(help, one).
@@ -374,18 +374,21 @@
 			write('Unsupported operating-system.'), nl
 		).
 
-	convert_file_path(File, Converted) :-
-		atom_chars(File, FileChars),
-		reverse_slashes(FileChars, ConvertedChars),
-		atom_chars(Converted, ConvertedChars).
+	convert_file_path(Path, ConvertedPath) :-
+		% we cannot use atom_chars/2 as Quintus definition returns codes
+		atom_codes(Path, PathCodes),
+		char_code('/', SlashCode),
+		char_code('\\', BackslashCode),
+		reverse_slashes(PathCodes, SlashCode, BackslashCode, ConvertedPathCodes),
+		atom_codes(ConvertedPath, ConvertedPathCodes).
 
-	reverse_slashes([], []).
-	reverse_slashes([Char| Chars], [ConvertedChar| ConvertedChars]) :-
-		(	Char == ('/') ->
-			ConvertedChar = ('\\')
-		;	ConvertedChar = Char
+	reverse_slashes([], _, _, []).
+	reverse_slashes([Code| Codes], SlashCode, BackslashCode, ConvertedCodes) :-
+		(	Code =:= SlashCode ->
+			ConvertedCodes = [BackslashCode, BackslashCode| ConvertedCodesTail]
+		;	ConvertedCodes = [Code| ConvertedCodesTail]
 		),
-		reverse_slashes(Chars, ConvertedChars).
+		reverse_slashes(Codes, SlashCode, BackslashCode, ConvertedCodesTail).
 
 	% we use a simplified version of the integer::between/3
 	% predicate in order to minimize this tool dependencies

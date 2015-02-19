@@ -145,6 +145,8 @@ Tools
 
 * UPDATED: The `debugger` tool for compatibility with JIProlog.
 
+* UPDATED: The `help` tool for compatibility with Quintus Prolog.
+
 Tests
 -----
 
