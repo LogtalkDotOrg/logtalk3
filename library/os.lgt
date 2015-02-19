@@ -1035,12 +1035,29 @@
 			throw(not_available(pid/1)).
 
 		shell(Command, Status) :-
-			{split_string(Command, ' ', List),
-			 system('.', List, _, Status)}.
+			split_command(Command, List),
+			{system('.', List, _, Status)}.
 
 		shell(Command) :-
-			{split_string(Command, ' ', List),
-			 system(List, _)}.
+			split_command(Command, List),
+			{system(List, _)}.
+
+		split_command(Command, List) :-
+			atom_chars(Command, Chars),
+			split_command_(Chars, Lists),
+			lists_to_atoms(Lists, List).
+
+		split_command_([], [[]]).
+		split_command_([' '| Chars], [[]| List]) :-
+			!,			
+			split_command_(Chars, List).
+		split_command_([Char| Chars], [[Char|Tail]| List]) :-
+			split_command_(Chars, [Tail| List]).
+
+		lists_to_atoms([], []).
+		lists_to_atoms([List| Lists], [Atom| Atoms]) :-
+			atom_chars(Atom, List),
+			lists_to_atoms(Lists, Atoms).
 
 		expand_path(Path, ExpandedPath) :-
 			(	\+ atom_concat('/', _, Path),
