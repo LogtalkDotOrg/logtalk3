@@ -1036,11 +1036,14 @@
 
 		shell(Command, Status) :-
 			split_command(Command, List),
-			{system('.', List, _, Status)}.
+			(	{getenv('COMSPEC', _)} ->
+				{system('.', List, _, Status)}
+			;	{getenv('SHELL', Shell)},
+				{system('.', [Shell, '-c'| List], _, Status)}
+			).
 
 		shell(Command) :-
-			split_command(Command, List),
-			{system(List, _)}.
+			shell(Command, 0).
 
 		split_command(Command, List) :-
 			atom_chars(Command, Chars),
