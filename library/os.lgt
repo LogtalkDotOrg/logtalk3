@@ -40,10 +40,10 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.16,
+		version is 1.17,
 		author is 'Paulo Moura',
-		date is 2015/02/06,
-		comment is 'Simple example of using conditional compilation to implement a portable operating-system interface for selected back-end Prolog compilers.'
+		date is 2015/02/19,
+		comment is 'Portable operating-system access predicates.'
 	]).
 
 	:- if(current_logtalk_flag(prolog_dialect, swi)).
