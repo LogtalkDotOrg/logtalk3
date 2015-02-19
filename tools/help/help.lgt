@@ -385,7 +385,7 @@
 	reverse_slashes([], _, _, []).
 	reverse_slashes([Code| Codes], SlashCode, BackslashCode, ConvertedCodes) :-
 		(	Code =:= SlashCode ->
-			ConvertedCodes = [BackslashCode, BackslashCode| ConvertedCodesTail]
+			ConvertedCodes = [BackslashCode| ConvertedCodesTail]
 		;	ConvertedCodes = [Code| ConvertedCodesTail]
 		),
 		reverse_slashes(Codes, SlashCode, BackslashCode, ConvertedCodesTail).
