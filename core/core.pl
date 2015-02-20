@@ -7717,10 +7717,10 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_dynamic_directive_resource'(Entity::Pred) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
-	'$lgt_must_be'(entity_identifier, Entity),
 	(	Entity == user ->
 		assertz('$lgt_pp_directive_'(dynamic(Functor/Arity)))
-	;	'$lgt_entity_to_prefix'(Entity, Prefix),
+	;	'$lgt_must_be'(entity_identifier, Entity),
+		'$lgt_entity_to_prefix'(Entity, Prefix),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(dynamic(TFunctor/TArity)))
 	).
@@ -7728,10 +7728,10 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_dynamic_directive_resource'(Entity::Pred) :-
 	'$lgt_valid_non_terminal_indicator'(Pred, Functor, _, ExtArity),
 	!,
-	'$lgt_must_be'(entity_identifier, Entity),
 	(	Entity == user ->
 		assertz('$lgt_pp_directive_'(dynamic(Functor/ExtArity)))
-	;	'$lgt_entity_to_prefix'(Entity, Prefix),
+	;	'$lgt_must_be'(entity_identifier, Entity),
+		'$lgt_entity_to_prefix'(Entity, Prefix),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(dynamic(TFunctor/TArity)))
 	).
@@ -7739,19 +7739,19 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_dynamic_directive_resource'(':'(Module, Pred)) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
-	'$lgt_must_be'(module_identifier, Module),
 	(	Module == user ->
 		assertz('$lgt_pp_directive_'(dynamic(Functor/Arity)))
-	;	assertz('$lgt_pp_directive_'(dynamic(':'(Module, Functor/Arity))))
+	;	'$lgt_must_be'(module_identifier, Module),
+		assertz('$lgt_pp_directive_'(dynamic(':'(Module, Functor/Arity))))
 	).
 
 '$lgt_compile_dynamic_directive_resource'(':'(Module, NonTerminal)) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, _, ExtArity),
 	!,
-	'$lgt_must_be'(module_identifier, Module),
 	(	Module == user ->
 		assertz('$lgt_pp_directive_'(dynamic(Functor/ExtArity)))
-	;	assertz('$lgt_pp_directive_'(dynamic(':'(Module, Functor/ExtArity))))
+	;	'$lgt_must_be'(module_identifier, Module),
+		assertz('$lgt_pp_directive_'(dynamic(':'(Module, Functor/ExtArity))))
 	).
 
 '$lgt_compile_dynamic_directive_resource'(Pred) :-
@@ -7797,10 +7797,10 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_discontiguous_directive_resource'(Entity::Pred) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
-	'$lgt_must_be'(entity_identifier, Entity),
 	(	Entity == user ->
 		assertz('$lgt_pp_directive_'(discontiguous(Functor/Arity)))
-	;	'$lgt_entity_to_prefix'(Entity, Prefix),
+	;	'$lgt_must_be'(entity_identifier, Entity),
+		'$lgt_entity_to_prefix'(Entity, Prefix),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(discontiguous(TFunctor/TArity)))
 	).
@@ -7808,10 +7808,10 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_discontiguous_directive_resource'(Entity::NonTerminal) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, _, ExtArity),
 	!,
-	'$lgt_must_be'(entity_identifier, Entity),
 	(	Entity == user ->
 		assertz('$lgt_pp_directive_'(discontiguous(Functor/ExtArity)))
-	;	'$lgt_entity_to_prefix'(Entity, Prefix),
+	;	'$lgt_must_be'(entity_identifier, Entity),
+		'$lgt_entity_to_prefix'(Entity, Prefix),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(discontiguous(TFunctor/TArity)))
 	).
@@ -7819,19 +7819,19 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_discontiguous_directive_resource'(':'(Module, Pred)) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
-	'$lgt_must_be'(module_identifier, Module),
 	(	Module == user ->
 		assertz('$lgt_pp_directive_'(discontiguous(Functor/Arity)))
-	;	assertz('$lgt_pp_directive_'(discontiguous(':'(Module, Functor/Arity))))
+	;	'$lgt_must_be'(module_identifier, Module),
+		assertz('$lgt_pp_directive_'(discontiguous(':'(Module, Functor/Arity))))
 	).
 
 '$lgt_compile_discontiguous_directive_resource'(':'(Module, NonTerminal)) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, _, ExtArity),
 	!,
-	'$lgt_must_be'(module_identifier, Module),
 	(	Module == user ->
 		assertz('$lgt_pp_directive_'(discontiguous(Functor/ExtArity)))
-	;	assertz('$lgt_pp_directive_'(discontiguous(':'(Module, Functor/ExtArity))))
+	;	'$lgt_must_be'(module_identifier, Module),
+		assertz('$lgt_pp_directive_'(discontiguous(':'(Module, Functor/ExtArity))))
 	).
 
 '$lgt_compile_discontiguous_directive_resource'(Pred) :-
@@ -7972,10 +7972,10 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_multifile_directive_resource'(Entity::Pred, _) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
-	'$lgt_must_be'(entity_identifier, Entity),
 	(	Entity == user ->
 		assertz('$lgt_pp_directive_'(multifile(Functor/Arity)))
-	;	functor(Template, Functor, Arity),
+	;	'$lgt_must_be'(entity_identifier, Entity),
+		functor(Template, Functor, Arity),
 		'$lgt_check_primary_multifile_declaration'(Entity, Template) ->
 		'$lgt_entity_to_prefix'(Entity, Prefix),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
@@ -7986,10 +7986,10 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_multifile_directive_resource'(Entity::NonTerminal, _) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, _, ExtArity),
 	!,
-	'$lgt_must_be'(entity_identifier, Entity),
 	(	Entity == user ->
 		assertz('$lgt_pp_directive_'(multifile(Functor/ExtArity)))
-	;	functor(Template, Functor, ExtArity),
+	;	'$lgt_must_be'(entity_identifier, Entity),
+		functor(Template, Functor, ExtArity),
 		'$lgt_check_primary_multifile_declaration'(Entity, Template) ->
 		'$lgt_entity_to_prefix'(Entity, Prefix),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
@@ -8000,19 +8000,19 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_multifile_directive_resource'(':'(Module, Pred), _) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
-	'$lgt_must_be'(module_identifier, Module),
 	(	Module == user ->
 		assertz('$lgt_pp_directive_'(multifile(Functor/Arity)))
-	;	assertz('$lgt_pp_directive_'(multifile(':'(Module, Functor/Arity))))
+	;	'$lgt_must_be'(module_identifier, Module),
+		assertz('$lgt_pp_directive_'(multifile(':'(Module, Functor/Arity))))
 	).
 
 '$lgt_compile_multifile_directive_resource'(':'(Module, NonTerminal), _) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, _, ExtArity),
 	!,
-	'$lgt_must_be'(module_identifier, Module),
 	(	Module == user ->
 		assertz('$lgt_pp_directive_'(multifile(Functor/ExtArity)))
-	;	assertz('$lgt_pp_directive_'(multifile(':'(Module, Functor/ExtArity))))
+	;	'$lgt_must_be'(module_identifier, Module),
+		assertz('$lgt_pp_directive_'(multifile(':'(Module, Functor/ExtArity))))
 	).
 
 '$lgt_compile_multifile_directive_resource'(Pred, Ctx) :-
@@ -9172,12 +9172,12 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_head'(':'(Module, Head), ':'(Module, Functor/Arity), THead, Ctx) :-
 	!,
-	'$lgt_must_be'(module_identifier, Module),
 	'$lgt_must_be'(callable, Head),
 	functor(Head, Functor, Arity),
 	(	Module == user ->
 		THead = Head
-	;	THead = ':'(Module, Head)
+	;	'$lgt_must_be'(module_identifier, Module),
+		THead = ':'(Module, Head)
 	),
 	(	Module == user, '$lgt_pp_directive_'(multifile(Functor/Arity)) ->
 		true
@@ -16372,7 +16372,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_valid_meta_predicate_template'(+nonvar)
+% '$lgt_valid_meta_predicate_template'(@term)
 
 '$lgt_valid_meta_predicate_template'(Pred) :-
 	callable(Pred),
