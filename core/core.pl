@@ -4768,9 +4768,9 @@ current_logtalk_flag(Flag, Value) :-
 
 % '$lgt_debug'(+compound, @execution_context)
 %
-% calls all defined trace event handlers and either use a loaded
-% provider for the debug event handler or simply call the debugging
-% goals to prevent execution of code compiled in debug mode to simply fail
+% calls all defined trace event handlers and either use a loaded provider
+% for the debug event handler or simply call the debugging goals to
+% prevent execution of code compiled in debug mode to simply fail
 %
 % we can have multiple trace event handlers but only one debug handler
 
@@ -4783,14 +4783,18 @@ current_logtalk_flag(Flag, Value) :-
 	!,
 	'$logtalk#0.debug_handler#2'(Event, ExCtx, _).
 
+% top_goal(Goal, TGoal)
 '$lgt_debug'(top_goal(_, TGoal), _) :-
 	call(TGoal).
 
+% goal(Goal, TGoal)
 '$lgt_debug'(goal(_, TGoal), _) :-
 	call(TGoal).
 
+% fact(Entity, Fact, ClauseNumber, BeginLine)
 '$lgt_debug'(fact(_, _, _, _), _).
 
+% rule(Entity, Head, ClauseNumber, BeginLine)
 '$lgt_debug'(rule(_, _, _, _), _).
 
 
