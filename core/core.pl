@@ -6426,6 +6426,9 @@ current_logtalk_flag(Flag, Value) :-
 %
 % the callers of this predicate must ensure that a goal
 % is repeatedly expanded until a fixed-point is reached
+%
+% the callers must take care of the case where the goal
+% is wrapped with the {}/1 control construct
 
 '$lgt_expand_file_goal'(Goal, ExpandedGoal) :-
 	(	% source-file specific compiler hook
@@ -6440,6 +6443,8 @@ current_logtalk_flag(Flag, Value) :-
 	;	% no compiler hook defined
 		fail
 	),
+	% the following check means that an expanded goal is checked twice but that
+	% allows us to distinguish between user errors and goal-expansion errors
 	'$lgt_must_be'(callable, ExpandedGoal, goal_expansion(Goal, ExpandedGoal)).
 
 
@@ -6513,24 +6518,23 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_compile_expanded_terms'(@term, @term, +compilation_context)
 % '$lgt_compile_expanded_terms'(@list(term), @term, +compilation_context)
+% '$lgt_compile_expanded_terms'(@term, @term, +compilation_context)
 %
 % compiles the expanded terms (which can be a list of terms);
 % the second argument is the original term and is used for more
 % informative exception terms in case of error
-
-'$lgt_compile_expanded_terms'((-), Term, _) :-
-	% catch variables
-	throw(error(instantiantion_error, term_expansion(Term, _))).
-
-'$lgt_compile_expanded_terms'([], _, _) :-
-	!.
+%
+% note that the clause order ensure that instantiation errors will be
+% caught by the call to the '$lgt_compile_expanded_term'/3 predicate
 
 '$lgt_compile_expanded_terms'([ExpandedTerm| ExpandedTerms], Term, Ctx) :-
 	!,
 	'$lgt_compile_expanded_term'(ExpandedTerm, Term, Ctx),
 	'$lgt_compile_expanded_terms'(ExpandedTerms, Term, Ctx).
+
+'$lgt_compile_expanded_terms'([], _, _) :-
+	!.
 
 '$lgt_compile_expanded_terms'(ExpandedTerm, Term, Ctx) :-
 	'$lgt_compile_expanded_term'(ExpandedTerm, Term, Ctx).
@@ -7571,6 +7575,9 @@ current_logtalk_flag(Flag, Value) :-
 	atom_concat(Aux, Atom, Mutex).
 
 
+% note that the clause order ensure that instantiation errors will be caught by
+% the call to the '$lgt_compile_synchronized_directive_resource'/1 predicate
+
 '$lgt_compile_synchronized_directive'([Resource| Resources], Mutex) :-
 	'$lgt_compile_synchronized_directive_resource'(Resource, Mutex),
 	'$lgt_compile_synchronized_directive'(Resources, Mutex).
@@ -7618,6 +7625,9 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_compile_scope_directive'(+list, @scope, +integer)
 %
 % auxiliary predicate for compiling scope directives
+%
+% note that the clause order ensure that instantiation errors will be caught
+% by the call to the '$lgt_compile_scope_directive_resource'/1 predicate
 
 '$lgt_compile_scope_directive'([Resource| Resources], Scope, Line) :-
 	'$lgt_compile_scope_directive_resource'(Resource, Scope, Line),
@@ -7710,6 +7720,9 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_compile_dynamic_directive'(+list)
 %
 % auxiliary predicate for compiling dynamic/1 directives
+%
+% note that the clause order ensure that instantiation errors will be caught
+% by the call to the '$lgt_compile_dynamic_directive_resource'/1 predicate
 
 '$lgt_compile_dynamic_directive'([Resource| Resources]) :-
 	'$lgt_compile_dynamic_directive_resource'(Resource),
@@ -7790,6 +7803,9 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_compile_discontiguous_directive'(+list)
 %
 % auxiliary predicate for compiling discontiguous/1 directives
+%
+% note that the clause order ensure that instantiation errors will be caught by
+% the call to the '$lgt_compile_discontiguous_directive_resource'/1 predicate
 
 '$lgt_compile_discontiguous_directive'([Resource| Resources]) :-
 	'$lgt_compile_discontiguous_directive_resource'(Resource),
@@ -7862,6 +7878,9 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_compile_meta_predicate_directive'(+list)
 %
 % auxiliary predicate for compiling meta_predicate/1 directives
+%
+% note that the clause order ensure that instantiation errors will be caught by
+% the call to the '$lgt_compile_meta_predicate_directive_resource'/1 predicate
 
 '$lgt_compile_meta_predicate_directive'([Meta| Metas]) :-
 	'$lgt_compile_meta_predicate_directive_resource'(Meta),
@@ -7902,6 +7921,9 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_compile_meta_non_terminal_directive'(+list)
 %
 % auxiliary predicate for compiling meta_non_terminal/1 directives
+%
+% note that the clause order ensure that instantiation errors will be caught by the
+% call to the '$lgt_compile_meta_non_terminal_directive_resource'/1 predicate
 
 '$lgt_compile_meta_non_terminal_directive'([Meta| Metas]) :-
 	'$lgt_compile_meta_non_terminal_directive_resource'(Meta),
@@ -7965,6 +7987,9 @@ current_logtalk_flag(Flag, Value) :-
 % when the multifile predicate (or non-terminal) is declared for the module
 % "user", the module prefix is removed to ensure code portability when using
 % backend Prolog compilers without a module system
+%
+% note that the clause order ensure that instantiation errors will be caught
+% by the call to the '$lgt_compile_multifile_directive_resource'/1 predicate
 
 '$lgt_compile_multifile_directive'([Resource| Resources], Ctx) :-
 	'$lgt_compile_multifile_directive_resource'(Resource, Ctx),
@@ -8071,6 +8096,9 @@ current_logtalk_flag(Flag, Value) :-
 % '$lgt_compile_coinductive_directive'(+list)
 %
 % auxiliary predicate for compiling coinductive/1 directives
+%
+% note that the clause order ensure that instantiation errors will be caught by
+% the call to the '$lgt_compile_coinductive_directive_resource'/1 predicate
 
 '$lgt_compile_coinductive_directive'([Pred| Preds]) :-
 	'$lgt_compile_coinductive_directive_resource'(Pred),
