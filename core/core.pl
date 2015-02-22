@@ -7258,7 +7258,6 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_logtalk_directive'(initialization(Goal), Ctx) :-
 	'$lgt_pp_entity_'(Type, Entity, Prefix, _, _),
 	(	Type == object ->
-		'$lgt_must_be'(callable, Goal),
 		% MetaVars = [] as we're compiling a local call
 		'$lgt_comp_ctx'(Ctx, (:- initialization(Goal)), Entity, Entity, Entity, Entity, Prefix, [], _, ExCtx, _, [], Lines),
 		'$lgt_execution_context'(ExCtx, Entity, Entity, Entity, Entity, [], []),
