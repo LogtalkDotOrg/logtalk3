@@ -8520,7 +8520,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_compile_object_relations'(+list, @object_identifier, @compilation_context)
+% '$lgt_compile_object_relations'(@list(term), @object_identifier, @compilation_context)
 %
 % compiles the relations of an object with other entities
 
@@ -8540,7 +8540,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_compile_object_relation'(+atom, +list, @object_identifier, @compilation_context)
+% '$lgt_compile_object_relation'(@nonvar, @object_identifier, @compilation_context)
 %
 % compiles a relation between an object (the last argument) with other entities
 
@@ -8566,7 +8566,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_compile_protocol_relations'(+list, @protocol_identifier, @compilation_context)
+% '$lgt_compile_protocol_relations'(@list(term), @protocol_identifier, @compilation_context)
 %
 % compiles the relations of a protocol with other entities
 
@@ -8586,7 +8586,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_compile_protocol_relation'(+atom, +list, @protocol_identifier, @compilation_context)
+% '$lgt_compile_protocol_relation'(@nonvar, @protocol_identifier, @compilation_context)
 %
 % compiles a relation between a protocol (the last argument) with other entities
 
@@ -8596,7 +8596,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_compile_category_relations'(+list, @category_identifier, @compilation_context)
+% '$lgt_compile_category_relations'(@list(term), @category_identifier, @compilation_context)
 %
 % compiles the relations of a category with other entities
 
@@ -8616,7 +8616,7 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_compile_category_relation'(+atom, +list, @category_identifier, @compilation_context)
+% '$lgt_compile_category_relation'(@nonvar, @category_identifier, @compilation_context)
 %
 % compiles a relation between a category (the last argument) with other entities
 
