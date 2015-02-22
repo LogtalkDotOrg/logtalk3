@@ -6916,6 +6916,7 @@ current_logtalk_flag(Flag, Value) :-
 	'$lgt_compile_file_terms'(Terms, Ctx).
 
 '$lgt_compile_file_directive'(initialization(Goal), Ctx) :-
+	% perform basic error checking
 	'$lgt_must_be'(callable, Goal),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 	% only expand goals when compiling a source file
@@ -6925,8 +6926,6 @@ current_logtalk_flag(Flag, Value) :-
 
 '$lgt_compile_file_directive'(initialization(Goal), _) :-
 	!,
-	% perform basic error checking
-	'$lgt_must_be'(callable, Goal),
 	% initialization directives are collected and moved to the end of file
 	% to minimize compatibility issues with backend Prolog compilers
 	assertz('$lgt_pp_file_initialization_'(Goal)).
@@ -7013,9 +7012,12 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_compile_logtalk_directives'(+list, +compilation_context)
+% '$lgt_compile_logtalk_directives'(+list(term), +compilation_context)
 %
 % compiles a list of directives
+%
+% note that the clause order ensure that instantiation errors will be caught
+% by the call to the '$lgt_compile_logtalk_directive'/2 predicate
 
 '$lgt_compile_logtalk_directives'([Directive| Directives], Ctx) :-
 	% only the compilation context mode should be shared between different directives
@@ -7028,12 +7030,12 @@ current_logtalk_flag(Flag, Value) :-
 
 
 
-% '$lgt_compile_logtalk_directive'(+atom, +list, +compilation_context)
+% '$lgt_compile_logtalk_directive'(@term, +compilation_context)
 %
 % compiles a Logtalk directive and its (possibly empty) list of arguments
 
 '$lgt_compile_logtalk_directive'((-), _) :-
-	% catch variables and lists with unbound tails
+	% catch variables
 	throw(instantiation_error).
 
 '$lgt_compile_logtalk_directive'(include(File), Ctx) :-
