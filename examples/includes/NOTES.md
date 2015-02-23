@@ -12,4 +12,6 @@ To load this example and for sample queries, please see the `SCRIPT.txt`
 file.
 
 This example illustrates using the `include/1` directive as both a file
-directive and an entity directive.
+directive and an entity directive. It also illustrates how to use this
+directive to implement a simple persistency solution for an object
+database.

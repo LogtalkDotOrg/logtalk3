@@ -36,3 +36,26 @@ yes
 
 Solutions = [[france, polony], [germany, spain], [portugal]]
 yes
+
+
+% show the initial counter values, which may depend on previous runs:
+
+| ?- counters::counter(Counter, Value).
+
+Counter = a,
+Value = ... ;
+Counter = b,
+Value = ... ;
+Counter = c,
+Value = ...
+yes
+
+% increment one of the counters and save the counters database:
+
+| ?- counters::inc_counter(b).
+
+yes
+
+| ?- counters::save_counters.
+
+yes

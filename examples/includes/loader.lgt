@@ -10,5 +10,5 @@
 
 
 :- initialization(
-	logtalk_load(includes)
+	logtalk_load([includes, counters])
 ). 

@@ -164,6 +164,9 @@ built-in predicates, in particular to test standard term order.
 Examples
 --------
 
+* ADDED: Expanded the `includes` example with a simple implementation of
+a persistent object database using the `includes/1` directive.
+
 * ADDED: The `jpl` example now includes some GUI examples adapted from
 examples found in the JPL distribution.
 
