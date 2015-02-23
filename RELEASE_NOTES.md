@@ -75,6 +75,10 @@ default and read-only flags at startup.
 * IMPROVED: Compiler performance when generating entity prefixes and internal
 predicate functors.
 
+* FIXED: Long standing bug where the values of the `startup`, `logtalk_home`,
+and `logtalk_user` library aliases would change depending on the current
+working directory when the corresponding environment variables are not defined.
+
 * FIXED: Bug where the `debugging` entity property would always be false for
 categories and protocols.
 

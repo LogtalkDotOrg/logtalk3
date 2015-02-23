@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  Default library paths 
-%  Last updated on February 16, 2015
+%  Last updated on February 23, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -41,15 +41,24 @@ logtalk_library_path(home, HOME) :-
 	).
 
 % Logtalk startup directory
-logtalk_library_path(startup, Startup) :-
-	'$lgt_startup_directory'(Startup).
+:- initialization((
+	(	'$lgt_environment_variable'('LOGTALK_STARTUP_DIRECTORY', _) ->
+		LOGTALK_STARTUP_DIRECTORY = '$LOGTALK_STARTUP_DIRECTORY/'
+	;	'$lgt_current_directory'(LOGTALK_STARTUP_DIRECTORY0),
+		(	sub_atom(LOGTALK_STARTUP_DIRECTORY0, _, _, 0, '/') ->
+			LOGTALK_STARTUP_DIRECTORY = LOGTALK_STARTUP_DIRECTORY0
+		;	atom_concat(LOGTALK_STARTUP_DIRECTORY0, '/', LOGTALK_STARTUP_DIRECTORY)
+		)
+	),
+	assertz(logtalk_library_path(startup, LOGTALK_STARTUP_DIRECTORY))
+)).
 
 % when the LOGTALKHOME or the LOGTALKUSER environment variables are not
 % defined (we may be e.g. embedding Logtalk in a compiled application),
 % assume the current directory as their value
 
 % Logtalk installation directory
-logtalk_library_path(logtalk_home, LOGTALKHOME) :-
+:- initialization((
 	(	'$lgt_environment_variable'('LOGTALKHOME', _) ->
 		LOGTALKHOME = '$LOGTALKHOME/'
 	;	'$lgt_current_directory'(LOGTALKHOME0),
@@ -57,10 +66,12 @@ logtalk_library_path(logtalk_home, LOGTALKHOME) :-
 			LOGTALKHOME = LOGTALKHOME0
 		;	atom_concat(LOGTALKHOME0, '/', LOGTALKHOME)
 		)
-	).
+	),
+	assertz(logtalk_library_path(logtalk_home, LOGTALKHOME))
+)).
 
 % Logtalk user directory
-logtalk_library_path(logtalk_user, LOGTALKUSER) :-
+:- initialization((
 	(	'$lgt_environment_variable'('LOGTALKUSER', _) ->
 		LOGTALKUSER = '$LOGTALKUSER/'
 	;	'$lgt_current_directory'(LOGTALKUSER0),
@@ -68,7 +79,9 @@ logtalk_library_path(logtalk_user, LOGTALKUSER) :-
 			LOGTALKUSER = LOGTALKUSER0
 		;	atom_concat(LOGTALKUSER0, '/', LOGTALKUSER)
 		)
-	).
+	),
+	assertz(logtalk_library_path(logtalk_user, LOGTALKUSER))
+)).
 
 logtalk_library_path(core, logtalk_home('core/')).
 
