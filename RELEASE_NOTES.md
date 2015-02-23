@@ -79,6 +79,10 @@ predicate functors.
 and `logtalk_user` library aliases would change depending on the current
 working directory when the corresponding environment variables are not defined.
 
+* FIXED: Compiling a `use_module/2` directive listing a meta-predicate with a
+non-supported meta-argument specifier could result in a stack overflow error
+instead of the expected domain error.
+
 * FIXED: Bug where the `debugging` entity property would always be false for
 categories and protocols.
 
