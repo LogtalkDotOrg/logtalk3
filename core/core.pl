@@ -11234,16 +11234,15 @@ current_logtalk_flag(Flag, Value) :-
 '$lgt_compile_prolog_meta_arguments'([], [], _, [], []).
 
 '$lgt_compile_prolog_meta_arguments'([Arg| Args], [MArg| MArgs], Ctx, [TArg| TArgs], [DArg| DArgs]) :-
-	(	integer(MArg) ->
-		'$lgt_compile_prolog_meta_argument'(integer(MArg), Arg, Ctx, TArg, DArg)
+	(	integer(MArg), MArg > 0 ->
+		'$lgt_compile_prolog_meta_argument'(closure(MArg), Arg, Ctx, TArg, DArg)
 	;	'$lgt_compile_prolog_meta_argument'(MArg, Arg, Ctx, TArg, DArg)
 	),
 	'$lgt_compile_prolog_meta_arguments'(Args, MArgs, Ctx, TArgs, DArgs).
 
 
-'$lgt_compile_prolog_meta_argument'(integer(N), Arg, Ctx, TArg, DArg) :-
+'$lgt_compile_prolog_meta_argument'(closure(N), Arg, Ctx, TArg, DArg) :-
 	% closure
-	N > 0,
 	'$lgt_must_be'(var_or_callable, Arg),
 	'$lgt_length'(ExtArgs, 0, N),
 	(	var(Arg) ->
