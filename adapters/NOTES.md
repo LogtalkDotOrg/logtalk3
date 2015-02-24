@@ -4,7 +4,7 @@ This file is part of Logtalk <http://logtalk.org/>
 Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 
 Notes on supported backend Prolog compilers  
-Last updated on January 4, 2015
+Last updated on February 24, 2015
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -214,7 +214,7 @@ to type:
 	$ logtalk
 
 
-JIProlog 4.0.5.3 and later versions
+JIProlog 4.0.6 and later versions
 
 	ji.pl
 
