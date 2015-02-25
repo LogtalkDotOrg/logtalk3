@@ -33,7 +33,7 @@ using the directive (or the corresponding query):
 Note, however, that Logtalk is not packaged as a module and that the
 `logtalk` module provided contains just an initialization directive
 that loads Logtalk in exactly the same way as when Logtalk is installed
-using on of its prebuilt installers.
+using one of its prebuilt installers.
 
 When using the directive above, the `LOGTALKHOME` and `LOGTALKUSER`
 shell environment variables are set, just for the duration of the
