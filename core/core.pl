@@ -2393,7 +2393,7 @@ current_logtalk_flag(Flag, Value) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 0, 1, stable)).
+'$lgt_version_data'(logtalk(3, 0, 2, rc1)).
 
 
 
