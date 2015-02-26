@@ -28,6 +28,11 @@ RELEASE NOTES
 3.00.2 - March ??, 2015
 =======================
 
+Tests
+-----
+
+* ADDED: Unit tests for the de facto Prolog standard findall/4 built-in
+predicate.
 
 
 3.00.1 - February 25, 2015
