@@ -32,7 +32,7 @@ Tests
 -----
 
 * ADDED: Unit tests for the de facto Prolog standard `between/3`, `findall/4`,
-and `forall/2` built-in predicates.
+`forall/2`, and `numbervars/3` built-in predicates.
 
 
 3.00.1 - February 25, 2015
