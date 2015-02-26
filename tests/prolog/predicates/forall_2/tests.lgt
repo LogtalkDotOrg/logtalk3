@@ -51,9 +51,11 @@ a(3).
 		{forall(true, _)}.
 
 	throws(commons_forall_2_09, error(type_error(callable,1),_)) :-
-		{forall(1, true)}.
+		Goal = 1,
+		{forall(Goal, true)}.
 
 	throws(commons_forall_2_10, error(type_error(callable,1),_)) :-
-		{forall(true, 1)}.
+		Goal = 1,
+		{forall(true, Goal)}.
 
 :- end_object.
