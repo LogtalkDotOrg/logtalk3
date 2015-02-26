@@ -31,8 +31,8 @@ RELEASE NOTES
 Tests
 -----
 
-* ADDED: Unit tests for the de facto Prolog standard findall/4 built-in
-predicate.
+* ADDED: Unit tests for the de facto Prolog standard `findall/4` and `forall/2`
+built-in predicates.
 
 
 3.00.1 - February 25, 2015
