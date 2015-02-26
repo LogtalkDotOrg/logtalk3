@@ -25,7 +25,7 @@
 
 	succeeds(commons_findall_4_02) :-
 		{findall(X+_Y, (X=1), S, _)},
-		S = [1+_,2+_| _].
+		S = [H| _], callable(H), functor(H, (+), 2), arg(1, H, N), N == 1, arg(2, H, V), var(V).
 
 	succeeds(commons_findall_4_03) :-
 		{findall(_X, fail, L, [0])},
