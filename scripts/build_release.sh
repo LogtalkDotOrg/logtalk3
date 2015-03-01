@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Release build script
-##   Last updated on January 15, 2015
+##   Last updated on March 1, 2015
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -46,6 +46,7 @@ cd ..
 
 cp -R logtalk-$version/scripts/pack pack-$version
 cp -R logtalk-$version pack-$version/logtalk
+mv pack-$version/settings.lgt pack-$version/logtalk/logtalk-$version
 cd pack-$version
 tar zcvf logtalk-$version.tgz logtalk
 mv logtalk-$version.tgz ..

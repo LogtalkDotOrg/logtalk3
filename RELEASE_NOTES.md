@@ -34,6 +34,11 @@ Tests
 * ADDED: Unit tests for the de facto Prolog standard `between/3`, `findall/4`,
 `forall/2`, and `numbervars/3` built-in predicates.
 
+Installers and installation scripts
+-----------------------------------
+
+* FIXED: Missing `settings.lgt` file in the SWI-Prolog logtalk pack.
+
 
 3.00.1 - February 25, 2015
 ==========================

@@ -42,7 +42,7 @@ directory.
 
 For easy access to the contents of the Logtalk installation folder
 (e.g. documentation or examples) you can create a symbolic link to the
-`../logtalk-3.00.01` directory (in e.g. your home directory). Its full
+`../logtalk-3.00.2` directory (in e.g. your home directory). Its full
 path can be easily found by using the query:
 
 	?- pack_info(logtalk).
