@@ -14,9 +14,14 @@ ________________________________________________________________________
 ...
 
 
-% change the default term writing depth:
+% change the default term writing depth (SWI-Prolog 7.1.10 or earlier):
 
 | ?- set_prolog_flag(toplevel_print_options, [quoted(true), portray(true), max_depth(50), priority(699)]).
+true.
+
+% change the default term writing depth (SWI-Prolog 7.1.11 or later):
+
+| ?- set_prolog_flag(answer_write_options, [quoted(true), portray(true), max_depth(50), priority(699)]).
 true.
 
 
