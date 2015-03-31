@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2015/02/18,
+		date is 2015/03/31,
 		comment is 'Unit tests for the ISO Prolog standard compare/3 built-in predicate.'
 	]).
 
@@ -51,47 +51,66 @@
 		{compare(<, 1.1, 1)}.
 
 	succeeds(lgt_compare_3_09) :-
-		{compare(<, 1, a)}.
+		{compare(>, 1, 1.1)}.
 
 	succeeds(lgt_compare_3_10) :-
-		{compare(<, a, a(_))}.
+		{compare(Order, 1.1, 1)},
+		Order == (<).
 
 	succeeds(lgt_compare_3_11) :-
-		{compare(<, a(_), a(_,_))}.
+		{compare(Order, 1, 1.1)},
+		Order == (>).
 
 	succeeds(lgt_compare_3_12) :-
-		{compare(<, b(_), a(_,_))}.
+		{compare(Order, 1.0, 1)},
+		Order == (<).
 
 	succeeds(lgt_compare_3_13) :-
-		{compare(<, a(1,2), a(1,3))}.
+		{compare(Order, 1, 1.0)},
+		Order == (>).
 
 	succeeds(lgt_compare_3_14) :-
+		{compare(<, 1, a)}.
+
+	succeeds(lgt_compare_3_15) :-
+		{compare(<, a, a(_))}.
+
+	succeeds(lgt_compare_3_16) :-
+		{compare(<, a(_), a(_,_))}.
+
+	succeeds(lgt_compare_3_17) :-
+		{compare(<, b(_), a(_,_))}.
+
+	succeeds(lgt_compare_3_18) :-
+		{compare(<, a(1,2), a(1,3))}.
+
+	succeeds(lgt_compare_3_19) :-
 		{compare(<, a(1,2), b(1,2))}.
 
 	% other tests
 
-	succeeds(lgt_compare_3_15) :-
+	succeeds(lgt_compare_3_20) :-
 		{compare(>, (4,1,0), (4,0,1))}.
-
-	fails(lgt_compare_3_16) :-
-		{compare(>, (4,0,1), (4,1,0))}.
-
-	fails(lgt_compare_3_17) :-
-		{compare(<, (4,1,0), (4,0,1))}.
-
-	succeeds(lgt_compare_3_18) :-
-		{compare(<, (4,0,1), (4,1,0))}.
-
-	succeeds(lgt_compare_3_19) :-
-		{compare(>, (4,1,0), (4,0,1))}.
-
-	fails(lgt_compare_3_20) :-
-		{compare(>, (4,0,1), (4,1,0))}.
 
 	fails(lgt_compare_3_21) :-
+		{compare(>, (4,0,1), (4,1,0))}.
+
+	fails(lgt_compare_3_22) :-
 		{compare(<, (4,1,0), (4,0,1))}.
 
-	succeeds(lgt_compare_3_22) :-
+	succeeds(lgt_compare_3_23) :-
+		{compare(<, (4,0,1), (4,1,0))}.
+
+	succeeds(lgt_compare_3_24) :-
+		{compare(>, (4,1,0), (4,0,1))}.
+
+	fails(lgt_compare_3_25) :-
+		{compare(>, (4,0,1), (4,1,0))}.
+
+	fails(lgt_compare_3_26) :-
+		{compare(<, (4,1,0), (4,0,1))}.
+
+	succeeds(lgt_compare_3_27) :-
 		{compare(<, (4,0,1), (4,1,0))}.
 
 :- end_object.

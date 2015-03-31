@@ -25,7 +25,7 @@ RELEASE NOTES
 =============
 
 
-3.00.2 - March ??, 2015
+3.00.2 - April ??, 2015
 =======================
 
 Tests
@@ -33,6 +33,9 @@ Tests
 
 * ADDED: Unit tests for the de facto Prolog standard `between/3`, `findall/4`,
 `forall/2`, and `numbervars/3` built-in predicates.
+
+* ADDED: Tests for the Prolog standard `compare/3` built-in predicate for
+helping detect number casting bugs.
 
 Installers and installation scripts
 -----------------------------------
