@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2015/03/31,
+		date is 2015/04/01,
 		comment is 'Unit tests for the ISO Prolog standard compare/3 built-in predicate.'
 	]).
 
@@ -112,5 +112,13 @@
 
 	succeeds(lgt_compare_3_27) :-
 		{compare(<, (4,0,1), (4,1,0))}.
+
+	succeeds(lgt_compare_3_28) :-
+		{compare(Order, 1, 1+2)},
+		Order == (<).
+
+	succeeds(lgt_compare_3_29) :-
+		{compare(Order, 1+2, 1)},
+		Order == (>).
 
 :- end_object.

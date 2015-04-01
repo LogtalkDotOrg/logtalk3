@@ -35,7 +35,7 @@ Tests
 `forall/2`, and `numbervars/3` built-in predicates.
 
 * ADDED: Tests for the Prolog standard `compare/3` built-in predicate for
-helping detect number casting bugs.
+helping detect number casting and standard order bugs.
 
 Installers and installation scripts
 -----------------------------------
