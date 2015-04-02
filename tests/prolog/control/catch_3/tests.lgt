@@ -36,9 +36,9 @@ p :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2015/04/02,
 		comment is 'Unit tests for the ISO Prolog standard catch/3 built-in predicate.'
 	]).
 
@@ -76,6 +76,10 @@ p :-
 
 	succeeds(iso_catch_3_08) :-
 		{catch(coo(_X), Y, true)},
+		Y = error(instantiation_error,_).
+
+	succeeds(lgt_catch_3_09) :-
+		{catch(_, Y, true)},
 		Y = error(instantiation_error,_).
 
 :- end_object.

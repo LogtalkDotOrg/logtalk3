@@ -37,6 +37,10 @@ Tests
 * ADDED: Tests for the Prolog standard `compare/3` built-in predicate for
 helping detect number casting and standard order bugs.
 
+* ADDED: Additional test for the Prolog standard `catch/3` control construct
+to check that a non-instantiated goal argument doesn't escape the `catch/3`
+call.
+
 Installers and installation scripts
 -----------------------------------
 
