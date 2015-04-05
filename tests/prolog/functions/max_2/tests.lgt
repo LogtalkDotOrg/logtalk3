@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2015/04/05,
 		comment is 'Unit tests for the ISO Prolog standard max/2 built-in function.'
 	]).
 
@@ -28,5 +28,51 @@
 	succeeds(iso_max_2_02) :-
 		{X is max(2.0, 3.0)},
 		X == 3.0.
+
+	throws(lgt_max_2_03, error(instantiation_error,_)) :-
+		% try to delay the error to runtime
+		variable(N),
+		{_X is max(2, N)}.
+
+	throws(lgt_max_2_04, error(instantiation_error,_)) :-
+		% try to delay the error to runtime
+		variable(N),
+		{_X is max(N, 3)}.
+
+	throws(lgt_max_2_05, error(type_error(evaluable,foo/0),_)) :-
+		% try to delay the error to runtime
+		foo(0, Foo),
+		{_X is max(2, Foo)}.
+
+	throws(lgt_max_2_06, error(type_error(evaluable,foo/0),_)) :-
+		% try to delay the error to runtime
+		foo(0, Foo),
+		{_X is max(Foo, 3)}.
+
+	throws(lgt_max_2_07, error(type_error(evaluable,foo/1),_)) :-
+		% try to delay the error to runtime
+		foo(1, Foo),
+		{_X is max(2, Foo)}.
+
+	throws(lgt_max_2_08, error(type_error(evaluable,foo/1),_)) :-
+		% try to delay the error to runtime
+		foo(1, Foo),
+		{_X is max(Foo, 3)}.
+
+	throws(lgt_max_2_09, error(type_error(evaluable,foo/2),_)) :-
+		% try to delay the error to runtime
+		foo(2, Foo),
+		{_X is max(2, Foo)}.
+
+	throws(lgt_max_2_10, error(type_error(evaluable,foo/2),_)) :-
+		% try to delay the error to runtime
+		foo(2, Foo),
+		{_X is max(Foo, 3)}.
+
+	variable(_).
+
+	foo(0, foo).
+	foo(1, foo(_)).
+	foo(2, foo(_,_)).
 
 :- end_object.

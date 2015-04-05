@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/11/18,
+		date is 2015/04/05,
 		comment is 'Unit tests for the ISO Prolog standard sin/1 built-in function.'
 	]).
 
@@ -44,15 +44,27 @@
 
 	throws(iso_sin_1_04, error(type_error(evaluable,foo/0),_)) :-
 		% try to delay the error to runtime
-		foo(Foo),
+		foo(0, Foo),
 		{_X is sin(Foo)}.
 
 	succeeds(iso_sin_1_05) :-
 		{PI is atan(1.0)*4, X is sin(PI/2.0)},
 		X =~= 1, PI =~= 3.14159.
 
+	throws(lgt_sin_1_06, error(type_error(evaluable,foo/1),_)) :-
+		% try to delay the error to runtime
+		foo(1, Foo),
+		{_X is sin(Foo)}.
+
+	throws(lgt_sin_1_07, error(type_error(evaluable,foo/2),_)) :-
+		% try to delay the error to runtime
+		foo(2, Foo),
+		{_X is sin(Foo)}.
+
 	variable(_).
 
-	foo(foo).
+	foo(0, foo).
+	foo(1, foo(_)).
+	foo(2, foo(_,_)).
 
 :- end_object.

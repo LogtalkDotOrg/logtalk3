@@ -44,6 +44,8 @@ call.
 * ADDED: Missing unit test for the de facto Prolog standard `between/3`
 built-in predicate.
 
+* ADDED: Several missing unit tests for arithmetic functions.
+
 Installers and installation scripts
 -----------------------------------
 

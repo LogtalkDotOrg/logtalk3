@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/11/18,
+		date is 2015/04/05,
 		comment is 'Unit tests for the ISO Prolog standard (<<)/1 built-in function.'
 	]).
 
@@ -42,14 +42,51 @@
 	throws(iso_bitwise_left_shift_2_05, error(type_error(evaluable,foo/0),_)) :-
 		% example fixed in ISO/IEC 13211-1:1995/Cor.1:2007
 		% try to delay the error to runtime
-		foo(Foo),
+		foo(0, Foo),
 		{_X is '<<'(Foo, 2)}.
 
 	throws(iso_bitwise_left_shift_2_06, error(type_error(integer,1.0),_)) :-
 		{_X is '<<'(1.0, 2)}.
 
+	% tests from the Logtalk portability work
+
+	throws(lgt_bitwise_left_shift_2_07, error(type_error(integer,2.0),_)) :-
+		{_X is '<<'(1, 2.0)}.
+
+	throws(lgt_bitwise_left_shift_1_08, error(instantiation_error,_)) :-
+		% try to delay the error to runtime
+		variable(N),
+		{_X is '<<'(N, 77)}.
+
+	throws(lgt_bitwise_left_shift_2_09, error(type_error(evaluable,foo/0),_)) :-
+		% try to delay the error to runtime
+		foo(0, Foo),
+		{_X is '<<'(2, Foo)}.
+
+	throws(lgt_bitwise_left_shift_2_10, error(type_error(evaluable,foo/1),_)) :-
+		% try to delay the error to runtime
+		foo(1, Foo),
+		{_X is '<<'(Foo, 2)}.
+
+	throws(lgt_bitwise_left_shift_2_11, error(type_error(evaluable,foo/1),_)) :-
+		% try to delay the error to runtime
+		foo(1, Foo),
+		{_X is '<<'(2, Foo)}.
+
+	throws(lgt_bitwise_left_shift_2_12, error(type_error(evaluable,foo/2),_)) :-
+		% try to delay the error to runtime
+		foo(2, Foo),
+		{_X is '<<'(Foo, 2)}.
+
+	throws(lgt_bitwise_left_shift_2_13, error(type_error(evaluable,foo/2),_)) :-
+		% try to delay the error to runtime
+		foo(2, Foo),
+		{_X is '<<'(2, Foo)}.
+
 	variable(_).
 
-	foo(foo).
+	foo(0, foo).
+	foo(1, foo(_)).
+	foo(2, foo(_,_)).
 
 :- end_object.

@@ -46,7 +46,7 @@
 
 	throws(iso_is_2_05, error(type_error(evaluable,foo/0),_)) :-
 		% try to delay the error to runtime
-		foo(Foo),
+		foo(0, Foo),
 		{_X is '+'(Foo, 77)}.
 
 	succeeds(iso_is_2_06) :-
@@ -68,7 +68,7 @@
 
 	throws(iso_is_2_10, error(type_error(evaluable,foo/0),_)) :-
 		% try to delay the error to runtime
-		foo(Foo),
+		foo(0, Foo),
 		{_X is '-'(Foo)}.
 
 	succeeds(iso_is_2_11) :-
@@ -90,7 +90,7 @@
 
 	throws(iso_is_2_15, error(type_error(evaluable,foo/0),_)) :-
 		% try to delay the error to runtime
-		foo(Foo),
+		foo(0, Foo),
 		{_X is '-'(Foo, 77)}.
 
 	succeeds(iso_is_2_16) :-
@@ -112,7 +112,7 @@
 
 	throws(iso_is_2_20, error(type_error(evaluable,foo/0),_)) :-
 		% try to delay the error to runtime
-		foo(Foo),
+		foo(0, Foo),
 		{_X is '*'(Foo, 77)}.
 
 	succeeds(iso_is_2_21) :-
@@ -149,7 +149,7 @@
 
 	throws(iso_is_2_28, error(type_error(evaluable,foo/0),_)) :-
 		% try to delay the error to runtime
-		foo(Foo),
+		foo(0, Foo),
 		{_X is '/'(Foo, 77)}.
 
 	throws(iso_is_2_29, error(evaluation_error(zero_divisor),_)) :-
@@ -175,7 +175,7 @@
 
 	throws(iso_is_2_34, error(type_error(evaluable,foo/0),_)) :-
 		% try to delay the error to runtime
-		foo(Foo),
+		foo(0, Foo),
 		{_X is mod(Foo, 77)}.
 
 	throws(iso_is_2_35, error(type_error(integer,7.5),_)) :-
@@ -221,7 +221,7 @@
 
 	throws(iso_is_2_45, error(type_error(evaluable,foo/0),_)) :-
 		% try to delay the error to runtime
-		foo(Foo),
+		foo(0, Foo),
 		{_X is truncate(Foo)}.
 
 	succeeds(iso_is_2_46) :-
@@ -244,7 +244,7 @@
 
 	throws(iso_is_2_50, error(type_error(evaluable,foo/0),_)) :-
 		% try to delay the error to runtime
-		foo(Foo),
+		foo(0, Foo),
 		{_X is float(Foo)}.
 
 	succeeds(iso_is_2_51) :-
@@ -266,7 +266,7 @@
 
 	throws(iso_is_2_55, error(type_error(evaluable,foo/0),_)) :-
 		% try to delay the error to runtime
-		foo(Foo),
+		foo(0, Foo),
 		{_X is abs(Foo)}.
 
 	:- if(current_prolog_flag(bounded, true)).
@@ -291,6 +291,8 @@
 
 	variable(_).
 
-	foo(foo).
+	foo(0, foo).
+	foo(1, foo(_)).
+	foo(2, foo(_,_)).
 
 :- end_object.

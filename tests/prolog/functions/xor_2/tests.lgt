@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2015/04/05,
 		comment is 'Unit tests for the ISO Prolog standard xor/2 built-in function.'
 	]).
 
@@ -32,5 +32,51 @@
 	succeeds(iso_xor_2_03) :-
 		% implementation defined value
 		{_X is xor(-10, 12)}.
+
+	throws(lgt_xor_2_04, error(instantiation_error,_)) :-
+		% try to delay the error to runtime
+		variable(N),
+		{_X is xor(10, N)}.
+
+	throws(lgt_xor_2_05, error(instantiation_error,_)) :-
+		% try to delay the error to runtime
+		variable(N),
+		{_X is xor(N, 12)}.
+
+	throws(lgt_xor_2_06, error(type_error(evaluable,foo/0),_)) :-
+		% try to delay the error to runtime
+		foo(0, Foo),
+		{_X is xor(10, Foo)}.
+
+	throws(lgt_xor_2_07, error(type_error(evaluable,foo/0),_)) :-
+		% try to delay the error to runtime
+		foo(0, Foo),
+		{_X is xor(Foo, 12)}.
+
+	throws(lgt_xor_2_08, error(type_error(evaluable,foo/1),_)) :-
+		% try to delay the error to runtime
+		foo(1, Foo),
+		{_X is xor(10, Foo)}.
+
+	throws(lgt_xor_2_09, error(type_error(evaluable,foo/1),_)) :-
+		% try to delay the error to runtime
+		foo(1, Foo),
+		{_X is xor(Foo, 12)}.
+
+	throws(lgt_xor_2_10, error(type_error(evaluable,foo/2),_)) :-
+		% try to delay the error to runtime
+		foo(2, Foo),
+		{_X is xor(2, Foo)}.
+
+	throws(lgt_xor_2_11, error(type_error(evaluable,foo/2),_)) :-
+		% try to delay the error to runtime
+		foo(2, Foo),
+		{_X is xor(Foo, 3)}.
+
+	variable(_).
+
+	foo(0, foo).
+	foo(1, foo(_)).
+	foo(2, foo(_,_)).
 
 :- end_object.
