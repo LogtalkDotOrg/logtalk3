@@ -41,6 +41,9 @@ helping detect number casting and standard order bugs.
 to check that a non-instantiated goal argument doesn't escape the `catch/3`
 call.
 
+* ADDED: Missing unit test for the de facto Prolog standard `between/3`
+built-in predicate.
+
 Installers and installation scripts
 -----------------------------------
 

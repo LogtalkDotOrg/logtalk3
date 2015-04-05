@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2015/02/26,
+		date is 2015/04/05,
 		comment is 'Unit tests for the de facto Prolog standard between/3 built-in predicate.'
 	]).
 
@@ -41,5 +41,8 @@
 
 	throws(commons_between_3_07, error(type_error(integer,a),_)) :-
 		{between(1, a, _)}.
+
+	throws(commons_between_3_08, error(type_error(integer,a),_)) :-
+		{between(1, 3, a)}.
 
 :- end_object.
