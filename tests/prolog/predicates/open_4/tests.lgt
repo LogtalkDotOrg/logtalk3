@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/11/21,
+		date is 2015/04/07,
 		comment is 'Unit tests for the ISO Prolog standard open/3-4 built-in predicates.'
 	]).
 
@@ -82,6 +82,24 @@
 		os::expand_path(foo, Path),
 		{open(Path, write, _, [alias(a)]),
 		 open(bar, write, _, [alias(a)])}.
+
+	throws(lgt_open_4_17, error(instantiation_error,_)) :-
+		{open(foo, write, _, [_|_])}.
+
+	throws(lgt_open_4_18, error(domain_error(stream_option,1),_)) :-
+		{open(foo, write, _, [1])}.
+
+	throws(lgt_open_4_19, error(domain_error(stream_option,alias(1)),_)) :-
+		{open(foo, write, _, [alias(1)])}.
+
+	throws(lgt_open_4_20, error(domain_error(stream_option,eof_action(1)),_)) :-
+		{open(foo, write, _, [eof_action(1)])}.
+
+	throws(lgt_open_4_21, error(domain_error(stream_option,reposition(1)),_)) :-
+		{open(foo, write, _, [reposition(1)])}.
+
+	throws(lgt_open_4_22, error(domain_error(stream_option,type(1)),_)) :-
+		{open(foo, write, _, [type(1)])}.
 
 	cleanup :-
 		^^clean_file(roger_data),

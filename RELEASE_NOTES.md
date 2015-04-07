@@ -55,6 +55,9 @@ built-in predicate.
 
 * ADDED: Several missing unit tests for arithmetic functions.
 
+* ADDED: Missing tests for the expected exception when an option of an
+`open/4` call list of options is not valid.
+
 Installers and installation scripts
 -----------------------------------
 
