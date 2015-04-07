@@ -28,6 +28,15 @@ RELEASE NOTES
 3.00.2 - April ??, 2015
 =======================
 
+Tools
+-----
+
+* ADDED: Two new predicates, `set_text_input/3` and `set_binary_input/3`, to
+the `lgtunit` tool to allow passing extra options to the implicit calls to
+the `open/4` built-in predicate.
+
+* IMPROVED: API documentation of the `lgtunit` tool.
+
 Tests
 -----
 
