@@ -287,12 +287,30 @@
 	throws(iso_is_2_60, error(evaluation_error(int_overflow),_)) :-
 		{current_prolog_flag(max_integer, MI), R is float(MI)*2, _X is floor(R)}.
 
+	:- else.
+
+	succeeds(iso_is_2_56).
+
+	succeeds(iso_is_2_57).
+
+	succeeds(iso_is_2_58).
+
+	succeeds(iso_is_2_59).
+
+	succeeds(iso_is_2_60).
+
 	:- endif.
+
+	throws(lgt_is_2_61, error(type_error(evaluable,foo/3),_)) :-
+		% try to delay the error to runtime
+		foo(3, Foo),
+		{_X is abs(Foo)}.
 
 	variable(_).
 
 	foo(0, foo).
 	foo(1, foo(_)).
 	foo(2, foo(_,_)).
+	foo(3, foo(_,_,_)).
 
 :- end_object.
