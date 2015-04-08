@@ -37,6 +37,11 @@ the `open/4` built-in predicate.
 
 * IMPROVED: API documentation of the `lgtunit` tool.
 
+* FIXED: The `lgtunit` tool now interprets `test/2` and `succeeds/1` facts as
+defining tests whose test goal is `true/0`. These tests, which always succeed,
+usually occur when using conditional compilation directives to select which
+versions of the tests to run.
+
 Tests
 -----
 

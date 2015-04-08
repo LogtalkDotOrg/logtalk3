@@ -28,9 +28,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 2.1,
+		version is 2.2,
 		author is 'Paulo Moura',
-		date is 2015/04/07,
+		date is 2015/04/08,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, and multiple test dialects.'
 	]).
 
@@ -581,12 +581,20 @@
 		).
 
 	% unit test idiom test/1
+	term_expansion((test(Test)), [test(Test, true)]) :-
+		check_for_valid_test_identifier(Test),
+		logtalk_load_context(term_position, Position),
+		assertz(test_(succeeds(Test, Position))).
 	term_expansion((test(Test) :- Goal), [(test(Test, true) :- Goal)]) :-
 		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
 		assertz(test_(succeeds(Test, Position))).
 
 	% unit test idiom succeeds/1 + deterministic/1 + fails/1 + throws/2
+	term_expansion((succeeds(Test)), [test(Test, true)]) :-
+		check_for_valid_test_identifier(Test),
+		logtalk_load_context(term_position, Position),
+		assertz(test_(succeeds(Test, Position))).
 	term_expansion((succeeds(Test) :- Goal), [(test(Test, true) :- Goal)]) :-
 		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
