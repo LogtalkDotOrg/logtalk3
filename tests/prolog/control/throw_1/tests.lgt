@@ -15,10 +15,14 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2015/04/10,
 		comment is 'Unit tests for the ISO Prolog standard throw/1 control construct.'
 	]).
 
-	% tests from the ISO/IEC 13211-1:1995(E) standard, section 7.8.10
+	throws(lgt_throw_1_1, error(instantiation_error,_)) :-
+		{throw(_)}.
+
+	throws(lgt_throw_1_2, my_error) :-
+		{throw(my_error)}.
 
 :- end_object.

@@ -45,6 +45,8 @@ versions of the tests to run.
 Tests
 -----
 
+* ADDED: Missing unit tests for the Prolog standard throw/1 control construct.
+
 * ADDED: Unit tests for the de facto Prolog standard `between/3`, `findall/4`,
 `forall/2`, and `numbervars/3` built-in predicates.
 
