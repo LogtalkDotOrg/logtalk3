@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/11/07,
+		date is 2015/04/12,
 		comment is 'Unit tests for the ISO Prolog standard read_term/3, read_term/2, read/2, and read/1 built-in predicates.'
 	]).
 
@@ -123,10 +123,10 @@
 		{read(_)}.
 
 	succeeds(sics_read_term_3_20) :-
-		^^set_text_input(''),
-		current_input(S),
-		get_code(_),
-		catch({read_term(S, _, [])}, error(permission_error(input,past_end_of_stream,S),_), true),
+		^^set_text_input(st_o, '', [eof_action(error)]),
+		get_code(st_o, _),
+		catch({read_term(st_o, _, [])}, error(permission_error(input,past_end_of_stream,_),_), true),
+		stream_property(S, alias(st_o)),
 		stream_property(S, end_of_stream(past)).
 
 	succeeds(sics_read_term_3_21) :-
@@ -145,6 +145,12 @@
 		^^set_text_input([Atom, '. ']),
 		{read(X)},
 		X == Integer.
+
+	succeeds(lgt_read_term_3_24) :-
+		^^set_text_input(st_o, '', [eof_action(eof_code)]),
+		get_code(st_o, _),
+		{read_term(st_o, Term, [])},
+		Term == end_of_file.
 
 	cleanup :-
 		^^clean_text_input,

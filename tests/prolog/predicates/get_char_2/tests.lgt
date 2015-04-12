@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/11/21,
+		date is 2015/04/12,
 		comment is 'Unit tests for the ISO Prolog standard get_char/1-2 built-in predicates.'
 	]).
 
@@ -94,9 +94,9 @@
 		{get_char(_)}.
 
 	succeeds(sics_get_char_2_14) :-
-		^^set_text_input(''),
-		current_input(S),
-		catch({get_char(_), get_char(_)}, error(permission_error(input,past_end_of_stream,S),_), true),
+		^^set_text_input(st_i, '', [eof_action(error)]),
+		catch({get_char(st_i,_), get_char(st_i,_)}, error(permission_error(input,past_end_of_stream,_),_), true),
+		stream_property(S, alias(st_i)),
 		stream_property(S, end_of_stream(past)).
 
 	succeeds(sics_get_char_2_15) :-
@@ -112,6 +112,11 @@
 		^^create_binary_file(Path, [0]),
 		open(Path, read, S),
 		{get_char(S, _)}.
+
+	succeeds(lgt_get_char_2_17) :-
+		^^set_text_input(st_i, '', [eof_action(eof_code)]),
+		{get_char(st_i,_), get_char(st_i,Byte)},
+		Byte == end_of_file.
 
 	cleanup :-
 		^^clean_file(t),

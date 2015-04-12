@@ -45,6 +45,17 @@ versions of the tests to run.
 Tests
 -----
 
+* CHANGED: Tests for the `get_byte/2`, `get_char/2`, `get_code/2`,
+`peek_byte/2`, `peek_char/2`, `peek_code/2`, and `read_term/3` that check
+for the correct exception term when reading past the end of a stream to
+use the `eof_action(error)` stream option explicitly as not all Prolog
+implementations default to this option.
+
+* ADDED: Tests for the `get_byte/2`, `get_char/2`, `get_code/2`, `peek_byte/2`,
+`peek_char/2`, `peek_code/2`, and `read_term/3` that check behavior when
+reading past the end of a stream created using the `eof_action(eof_code)`
+stream option.
+
 * ADDED: Missing unit tests for the Prolog standard throw/1 control construct.
 
 * ADDED: Unit tests for the de facto Prolog standard `between/3`, `findall/4`,

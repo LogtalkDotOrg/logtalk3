@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/11/21,
+		date is 2015/04/12,
 		comment is 'Unit tests for the ISO Prolog standard peek_code/1-2 built-in predicates.'
 	]).
 
@@ -95,9 +95,9 @@
 		{peek_code(S, _)}.
 
 	succeeds(sics_peek_code_2_15) :-
-		^^set_text_input(''),
-		current_input(S),
-		catch({get_code(_), peek_code(_)}, error(permission_error(input,past_end_of_stream,S),_), true),
+		^^set_text_input(st_i, '', [eof_action(error)]),
+		catch({get_code(st_i,_), peek_code(st_i,_)}, error(permission_error(input,past_end_of_stream,_),_), true),
+		stream_property(S, alias(st_i)),
 		stream_property(S, end_of_stream(past)).
 
 	succeeds(sics_peek_code_2_16) :-
@@ -110,6 +110,11 @@
 		^^create_binary_file(Path, [0]),
 		open(Path, read, Stream),
 		{peek_code(Stream, _)}.
+
+	succeeds(lgt_peek_code_2_18) :-
+		^^set_text_input(st_i, '', [eof_action(eof_code)]),
+		{get_code(st_i,_), peek_code(st_i,Code)},
+		Code == -1.
 
 	cleanup :-
 		^^clean_file(t),

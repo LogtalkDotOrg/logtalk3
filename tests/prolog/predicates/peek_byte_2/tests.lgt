@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/11/06,
+		date is 2015/04/12,
 		comment is 'Unit tests for the ISO Prolog standard peek_byte/1-2 built-in predicates.'
 	]).
 
@@ -85,10 +85,14 @@
 		current_input(S),
 		{peek_byte(_)}.
 
-	throws(sics_peek_byte_2_13, error(permission_error(input,past_end_of_stream,S),_)) :-
-		^^set_binary_input([]),
-		current_input(S),
-		{get_byte(_), peek_byte(_)}.
+	throws(sics_peek_byte_2_13, error(permission_error(input,past_end_of_stream,_),_)) :-
+		^^set_binary_input(st_i, [], [eof_action(error)]),
+		{get_byte(st_i,_), peek_byte(st_i,_)}.
+
+	succeeds(lgt_peek_byte_2_14) :-
+		^^set_binary_input(st_i, [], [eof_action(eof_code)]),
+		{get_byte(st_i,_), peek_byte(st_i,Byte)},
+		Byte == -1 .
 
 	cleanup :-
 		^^clean_text_input,

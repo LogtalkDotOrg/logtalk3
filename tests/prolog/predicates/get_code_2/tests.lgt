@@ -97,9 +97,9 @@
 		{get_code(_)}.
 
 	succeeds(sics_get_code_2_15) :-
-		^^set_text_input(''),
-		current_input(S),
-		catch({get_code(_), get_code(_)}, error(permission_error(input,past_end_of_stream,S),_), true),
+		^^set_text_input(st_i, '', [eof_action(error)]),
+		catch({get_code(st_i,_), get_code(st_i,_)}, error(permission_error(input,past_end_of_stream,_),_), true),
+		stream_property(S, alias(st_i)),
 		stream_property(S, end_of_stream(past)).
 
 	succeeds(sics_get_code_2_16) :-
@@ -115,6 +115,11 @@
 		^^create_binary_file(Path, [0]),
 		open(Path, read, S),
 		{get_code(S, _)}.
+
+	succeeds(lgt_get_code_2_18) :-
+		^^set_text_input(st_i, '', [eof_action(eof_code)]),
+		{get_code(st_i,_), get_code(st_i,Code)},
+		Code == -1.
 
 	cleanup :-
 		^^clean_file(t),

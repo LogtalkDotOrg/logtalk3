@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/11/06,
+		date is 2015/04/12,
 		comment is 'Unit tests for the ISO Prolog standard get_byte/1-2 built-in predicates.'
 	]).
 
@@ -88,10 +88,15 @@
 		{get_byte(_)}.
 
 	succeeds(sics_get_byte_2_13) :-
-		^^set_binary_input([]),
-		current_input(S),
-		catch({get_byte(_), get_byte(_)}, error(permission_error(input,past_end_of_stream,S),_), true),
+		^^set_binary_input(st_i, [], [eof_action(error)]),
+		catch({get_byte(st_i,_), get_byte(st_i,_)}, error(permission_error(input,past_end_of_stream,_),_), true),
+		stream_property(S, alias(st_i)),
 		stream_property(S, end_of_stream(past)).
+
+	succeeds(lgt_get_byte_2_14) :-
+		^^set_binary_input(st_i, [], [eof_action(eof_code)]),
+		{get_byte(st_i,_), get_byte(st_i,Byte)},
+		Byte = -1.
 
 	cleanup :-
 		^^clean_text_input,
