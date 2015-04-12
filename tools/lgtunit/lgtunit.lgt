@@ -96,7 +96,7 @@
 	]).
 
 	:- protected(set_text_input/3).
-	:- mode(set_text_input(+atom, +atom, +list), one).
+	:- mode(set_text_input(+atom, +atom, +list(stream_option)), one).
 	:- info(set_text_input/3, [
 		comment is 'Creates a temporary file with the given text contents and opens it for reading referenced by the given alias and using the additional options. If not eof_action/1 option is specified, its value will be the default used by the backend compiler.',
 		argnames is ['Alias', 'Contents', 'Options']
@@ -105,14 +105,14 @@
 	:- protected(set_text_input/2).
 	:- mode(set_text_input(+atom, +atom), one).
 	:- info(set_text_input/2, [
-		comment is 'Creates a temporary file with the given text contents and opens it for reading referenced by the given alias and using the eof_action(error) option.',
+		comment is 'Creates a temporary file with the given text contents and opens it for reading referenced by the given alias and using the default end-of-file action for the used backend compiler.',
 		argnames is ['Alias', 'Contents']
 	]).
 
 	:- protected(set_text_input/1).
 	:- mode(set_text_input(+atom), one).
 	:- info(set_text_input/1, [
-		comment is 'Creates a temporary file with the given text contents, opens it for reading using the eof_action(error) option, and sets the current input stream to the file.',
+		comment is 'Creates a temporary file with the given text contents, opens it for reading using the default end-of-file action for the used backend compiler, and sets the current input stream to the file.',
 		argnames is ['Contents']
 	]).
 
@@ -137,23 +137,23 @@
 	]).
 
 	:- protected(set_binary_input/3).
-	:- mode(set_binary_input(+atom, +list(byte), +list), one).
+	:- mode(set_binary_input(+atom, +list(byte), +list(stream_option)), one).
 	:- info(set_binary_input/3, [
-		comment is 'Creates a temporary file with the given binary contents and opens it for reading referenced with the given alias and using the eof_action(error) option.',
+		comment is 'Creates a temporary file with the given binary contents and opens it for reading referenced by the given alias and using the additional options. If not eof_action/1 option is specified, its value will be the default used by the backend compiler.',
 		argnames is ['Alias', 'Bytes', 'Options']
 	]).
 
 	:- protected(set_binary_input/2).
 	:- mode(set_binary_input(+atom, +list(byte)), one).
 	:- info(set_binary_input/2, [
-		comment is 'Creates a temporary file with the given binary contents and opens it for reading referenced with the given alias and using the additional options. If not eof_action/1 option is specified, its value will be the default used by the backend compiler.',
+		comment is 'Creates a temporary file with the given binary contents and opens it for reading referenced by the given alias and using the default end-of-file action for the used backend compiler.',
 		argnames is ['Alias', 'Bytes']
 	]).
 
 	:- protected(set_binary_input/1).
 	:- mode(set_binary_input(+list(byte)), one).
 	:- info(set_binary_input/1, [
-		comment is 'Creates a temporary file with the given binary contents, opens it for reading using the eof_action(error) option, and sets the current input stream to the file.',
+		comment is 'Creates a temporary file with the given binary contents, opens it for reading using the default end-of-file action for the used backend compiler, and sets the current input stream to the file.',
 		argnames is ['Bytes']
 	]).
 
@@ -913,17 +913,17 @@
 		open(Path, write, WriteStream, [type(text)]),
 		write_text_contents(WriteStream, Contents),
 		close(WriteStream),
-		open(Path, read, _, [type(text), alias(Alias)| Options]).
+		open(Path, read, _, [type(text),alias(Alias)| Options]).
 
 	set_text_input(Alias, Contents) :-
-		set_text_input(Alias, Contents, [eof_action(error)]).
+		set_text_input(Alias, Contents, []).
 
 	set_text_input(Contents) :-
 		clean_file('test_input.text', Path),
 		open(Path, write, WriteStream, [type(text)]),
 		write_text_contents(WriteStream, Contents),
 		close(WriteStream),
-		open(Path, read, ReadStream, [type(text),eof_action(error)]),
+		open(Path, read, ReadStream, [type(text)]),
 		set_input(ReadStream).
 
 	check_text_input(Alias, Atom) :-
@@ -945,17 +945,17 @@
 		open(Path, write, WriteStream, [type(binary)]),
 		write_binary_contents(Bytes, WriteStream),
 		close(WriteStream),
-		open(Path, read, _, [type(binary), alias(Alias)| Options]).
+		open(Path, read, _, [type(binary),alias(Alias)| Options]).
 
 	set_binary_input(Alias, Bytes) :-
-		set_binary_input(Alias, Bytes, [eof_action(error)]).
+		set_binary_input(Alias, Bytes, []).
 
 	set_binary_input(Bytes) :-
 		clean_file('test_input.binary', Path),
 		open(Path, write, WriteStream, [type(binary)]),
 		write_binary_contents(Bytes, WriteStream),
 		close(WriteStream),
-		open(Path, read, ReadStream, [type(binary),eof_action(error)]),
+		open(Path, read, ReadStream, [type(binary)]),
 		set_input(ReadStream).
 
 	check_binary_input(Alias, Bytes) :-
