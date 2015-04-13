@@ -62,45 +62,75 @@ call_n_maplist(Cont, [E|Es]) :-
 		Xs == [].
 
 	throws(lgt_call_N_09, error(instantiation_error,_)) :-
-		{call(_, _)}.
+		% try to dealy the error to runtime
+		variable(X),
+		{call(X, _)}.
 
 	throws(lgt_call_N_10, error(type_error(callable,1),_)) :-
-		{call(1, _)}.
+		% try to dealy the error to runtime
+		Goal = 1,
+		{call(Goal, _)}.
 
 	throws(lgt_call_N_11, error(instantiation_error,_)) :-
-		{call(_, _, _)}.
+		% try to dealy the error to runtime
+		variable(X),
+		{call(X, _, _)}.
 
 	throws(lgt_call_N_12, error(type_error(callable,1),_)) :-
-		{call(1, _, _)}.
+		% try to dealy the error to runtime
+		Goal = 1,
+		{call(Goal, _, _)}.
 
 	throws(lgt_call_N_13, error(instantiation_error,_)) :-
-		{call(_, _, _, _)}.
+		% try to dealy the error to runtime
+		variable(X),
+		{call(X, _, _, _)}.
 
 	throws(lgt_call_N_14, error(type_error(callable,1),_)) :-
-		{call(1, _, _, _)}.
+		% try to dealy the error to runtime
+		Goal = 1,
+		{call(Goal, _, _, _)}.
 
 	throws(lgt_call_N_15, error(instantiation_error,_)) :-
-		{call(_, _, _, _, _)}.
+		% try to dealy the error to runtime
+		variable(X),
+		{call(X, _, _, _, _)}.
 
 	throws(lgt_call_N_16, error(type_error(callable,1),_)) :-
-		{call(1, _, _, _, _)}.
+		% try to dealy the error to runtime
+		Goal = 1,
+		{call(Goal, _, _, _, _)}.
 
 	throws(lgt_call_N_17, error(instantiation_error,_)) :-
-		{call(_, _, _, _, _, _)}.
+		% try to dealy the error to runtime
+		variable(X),
+		{call(X, _, _, _, _, _)}.
 
 	throws(lgt_call_N_18, error(type_error(callable,1),_)) :-
-		{call(1, _, _, _, _, _)}.
+		% try to dealy the error to runtime
+		Goal = 1,
+		{call(Goal, _, _, _, _, _)}.
 
 	throws(lgt_call_N_19, error(instantiation_error,_)) :-
-		{call(_, _, _, _, _, _, _)}.
+		% try to dealy the error to runtime
+		variable(X),
+		{call(X, _, _, _, _, _, _)}.
 
 	throws(lgt_call_N_20, error(type_error(callable,1),_)) :-
-		{call(1, _, _, _, _, _, _)}.
+		% try to dealy the error to runtime
+		Goal = 1,
+		{call(Goal, _, _, _, _, _, _)}.
 
 	throws(lgt_call_N_21, error(instantiation_error,_)) :-
-		{call(_, _, _, _, _, _, _, _)}.
+		% try to dealy the error to runtime
+		variable(X),
+		{call(X, _, _, _, _, _, _, _)}.
 
 	throws(lgt_call_N_22, error(type_error(callable,1),_)) :-
-		{call(1, _, _, _, _, _, _, _)}.
+		% try to dealy the error to runtime
+		Goal = 1,
+		{call(Goal, _, _, _, _, _, _, _)}.
+
+	variable(_).
 
 :- end_object.
