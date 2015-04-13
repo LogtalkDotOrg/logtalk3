@@ -21,9 +21,9 @@ call_n_maplist(Cont, [E|Es]) :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2015/04/13,
 		comment is 'Unit tests for the ISO Prolog standard call/N built-in predicates.'
 	]).
 
@@ -60,5 +60,47 @@ call_n_maplist(Cont, [E|Es]) :-
 	succeeds(iso_call_N_08) :-
 		{call_n_maplist(=(_X), Xs)}, !,
 		Xs == [].
+
+	throws(lgt_call_N_09, error(instantiation_error,_)) :-
+		{call(_, _)}.
+
+	throws(lgt_call_N_10, error(type_error(callable,1),_)) :-
+		{call(1, _)}.
+
+	throws(lgt_call_N_11, error(instantiation_error,_)) :-
+		{call(_, _, _)}.
+
+	throws(lgt_call_N_12, error(type_error(callable,1),_)) :-
+		{call(1, _, _)}.
+
+	throws(lgt_call_N_13, error(instantiation_error,_)) :-
+		{call(_, _, _, _)}.
+
+	throws(lgt_call_N_14, error(type_error(callable,1),_)) :-
+		{call(1, _, _, _)}.
+
+	throws(lgt_call_N_15, error(instantiation_error,_)) :-
+		{call(_, _, _, _, _)}.
+
+	throws(lgt_call_N_16, error(type_error(callable,1),_)) :-
+		{call(1, _, _, _, _)}.
+
+	throws(lgt_call_N_17, error(instantiation_error,_)) :-
+		{call(_, _, _, _, _, _)}.
+
+	throws(lgt_call_N_18, error(type_error(callable,1),_)) :-
+		{call(1, _, _, _, _, _)}.
+
+	throws(lgt_call_N_19, error(instantiation_error,_)) :-
+		{call(_, _, _, _, _, _, _)}.
+
+	throws(lgt_call_N_20, error(type_error(callable,1),_)) :-
+		{call(1, _, _, _, _, _, _)}.
+
+	throws(lgt_call_N_21, error(instantiation_error,_)) :-
+		{call(_, _, _, _, _, _, _, _)}.
+
+	throws(lgt_call_N_22, error(type_error(callable,1),_)) :-
+		{call(1, _, _, _, _, _, _, _)}.
 
 :- end_object.

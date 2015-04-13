@@ -76,6 +76,8 @@ built-in predicate.
 * ADDED: Missing tests for the expected exception when an option of an
 `open/4` call list of options is not valid.
 
+* ADDED: Missing tests for error conditions for the `call/2-8` predicates.
+
 Installers and installation scripts
 -----------------------------------
 
