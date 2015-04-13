@@ -50,7 +50,7 @@
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
 	throws(eddbali_once_1_06, error(type_error(callable,3),_)) :-
-		% try to dealy the error to runtime
+		% try to delay the error to runtime
 		G = 3, {once(G)}.
 
 	throws(eddbali_once_1_07, error(instantiation_error,_)) :-

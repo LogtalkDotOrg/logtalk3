@@ -92,7 +92,7 @@
 	succeeds(lgt_peek_byte_2_14) :-
 		^^set_binary_input(st_i, [], [eof_action(eof_code)]),
 		{get_byte(st_i,_), peek_byte(st_i,Byte)},
-		Byte == -1 .
+		Byte == -1.
 
 	cleanup :-
 		^^clean_text_input,
