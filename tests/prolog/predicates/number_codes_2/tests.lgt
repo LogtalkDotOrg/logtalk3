@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2015/04/14,
 		comment is 'Unit tests for the ISO Prolog standard number_codes/2 built-in predicate.'
 	]).
 
@@ -106,5 +106,8 @@
 
 	throws(sics_number_codes_2_22, error(syntax_error(_),_)) :-
 		{number_codes(_X,[0'0,0'x,0'0,0'.,0'0])}.
+
+	throws(lgt_number_codes_2_23, error(type_error(integer,a),_)) :-
+		{number_codes(_A, [0'4,a])}.
 
 :- end_object.

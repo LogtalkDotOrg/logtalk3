@@ -73,10 +73,12 @@ built-in predicate.
 
 * ADDED: Several missing unit tests for arithmetic functions.
 
-* ADDED: Missing tests for the expected exception when an option of an
-`open/4` call list of options is not valid.
+* ADDED: Missing tests for the expected exception when an option of an `open/4`
+call list of options is not valid.
 
 * ADDED: Missing tests for error conditions for the `call/2-8` predicates.
+
+* ADDED: Missing test for error condition for the `number_codes/2` predicate.
 
 Installers and installation scripts
 -----------------------------------
