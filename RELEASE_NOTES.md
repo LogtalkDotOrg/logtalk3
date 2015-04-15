@@ -80,6 +80,8 @@ call list of options is not valid.
 
 * ADDED: Missing test for error condition for the `number_codes/2` predicate.
 
+* FIXED: Tests for the de facto standard `between/3` predicate for XSB.
+
 Installers and installation scripts
 -----------------------------------
 

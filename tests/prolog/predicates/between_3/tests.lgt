@@ -9,6 +9,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+:- if(current_logtalk_flag(prolog_dialect, xsb)).
+	:- import(from(/(between,3), basics)).
+:- endif.
+
+
 :- object(tests,
 	extends(lgtunit)).
 
