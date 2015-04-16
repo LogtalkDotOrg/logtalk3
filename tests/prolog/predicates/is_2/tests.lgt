@@ -309,8 +309,8 @@
 	variable(_).
 
 	foo(0, foo).
-	foo(1, foo(_)).
-	foo(2, foo(_,_)).
-	foo(3, foo(_,_,_)).
+	foo(1, foo(1)).
+	foo(2, foo(1,2)).
+	foo(3, foo(1,2,3)).
 
 :- end_object.

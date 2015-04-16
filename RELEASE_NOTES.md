@@ -82,6 +82,12 @@ call list of options is not valid.
 
 * FIXED: Tests for the de facto standard `between/3` predicate for XSB.
 
+* FIXED: Changed the auxiliary predicates used in testing standard arithmetic
+functions to avoid getting instantiation errors instead of the expected type
+errors when using back-end Prolog compilers that apply a bottom-up evaluation
+to function arguments before checking that the functions themselves are valid.
+Thanks to Jan Wielemaker for the bug report.
+
 Installers and installation scripts
 -----------------------------------
 
