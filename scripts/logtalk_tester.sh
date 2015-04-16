@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Unit testing automation script
-##   Last updated on January 30, 2015
+##   Last updated on April 16, 2015
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "`basename $0` 0.16"
+	echo "`basename $0` 0.17"
 	exit 0
 }
 
@@ -270,7 +270,8 @@ failed=`grep -a ': failure' *.results | wc -l`
 total=$(($skipped+$passed+$failed))
 
 echo "*******************************************************************************"
-echo "***** Compilation errors and warnings (might be expected depending on the test)"
+echo "***** Compilation errors/warnings and failed unit tests"
+echo "***** (compilation errors/warnings might be expected depending on the test)"
 echo "*******************************************************************************"
 grep -a -A2 'syntax_error' *.results | LC_ALL=C sed 's/.results//' | tee errors.all
 grep -a -A2 'syntax_error' *.errors | LC_ALL=C sed 's/.errors//' | tee -a errors.all
