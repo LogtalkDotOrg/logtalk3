@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/04/12,
+		date is 2015/04/17,
 		comment is 'Unit tests for the ISO Prolog standard peek_char/1-2 built-in predicates.'
 	]).
 
@@ -111,8 +111,7 @@
 
 	succeeds(lgt_peek_char_2_17) :-
 		^^set_text_input(s, '', [eof_action(eof_code)]),
-		{get_char(s, _), peek_char(s, Char)},
-		Char == end_of_file.
+		{get_char(s, end_of_file), peek_char(s, end_of_file)}.
 
 	cleanup :-
 		^^clean_file(t),
