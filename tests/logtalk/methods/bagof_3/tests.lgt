@@ -55,7 +55,7 @@
 		findall(Y-L, bagof(1, (Y=1; Y=2), L), LL),
 		(	LL == [1-[1], 2-[1]] ->
 			true
-		; LL == [2-[1], 1-[1]]
+		;	LL == [2-[1], 1-[1]]
 		).
 
 	succeeds(bagof_3_09) :-
