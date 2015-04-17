@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/04/14,
+		date is 2015/04/17,
 		comment is 'Unit tests for the ISO Prolog standard number_codes/2 built-in predicate.'
 	]).
 
@@ -107,7 +107,11 @@
 	throws(sics_number_codes_2_22, error(syntax_error(_),_)) :-
 		{number_codes(_X,[0'0,0'x,0'0,0'.,0'0])}.
 
-	throws(lgt_number_codes_2_23, error(type_error(integer,a),_)) :-
+	% the ISO standard specifies a representation_error(character_code)
+	% but there seens to be some agreement between Prolog implementers
+	% that the correct exception in this case is a type_error(integer,a)
+	% until a consensus if found, we accept both exception terms
+	throws(lgt_number_codes_2_23, [error(representation_error(character_code),_), error(type_error(integer,a),_)]) :-
 		{number_codes(_A, [0'4,a])}.
 
 :- end_object.
