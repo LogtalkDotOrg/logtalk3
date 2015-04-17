@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/04/12,
+		date is 2015/04/17,
 		comment is 'Unit tests for the ISO Prolog standard get_char/1-2 built-in predicates.'
 	]).
 
@@ -115,8 +115,9 @@
 
 	succeeds(lgt_get_char_2_17) :-
 		^^set_text_input(st_i, '', [eof_action(eof_code)]),
-		{get_char(st_i,_), get_char(st_i,Byte)},
-		Byte == end_of_file.
+		{get_char(st_i,end_of_file), get_char(st_i,end_of_file)},
+		stream_property(S, alias(st_i)),
+		stream_property(S, end_of_stream(past)).
 
 	cleanup :-
 		^^clean_file(t),
