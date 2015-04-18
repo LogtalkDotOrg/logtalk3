@@ -87,4 +87,15 @@
 	throws(lgt_atom_chars_2_16, error(type_error(character,1),_)) :-
 		{atom_chars(abc, [1,2,3])}.
 
+	succeeds(lgt_atom_codes_2_17) :-
+		{atom_chars('', Chars)},
+		Chars == [].
+
+	succeeds(lgt_atom_codes_2_18) :-
+		{atom_chars(Atom, [])},
+		Atom == ''.
+
+	succeeds(lgt_atom_codes_2_19) :-
+		{atom_chars('', [])}.
+
 :- end_object.

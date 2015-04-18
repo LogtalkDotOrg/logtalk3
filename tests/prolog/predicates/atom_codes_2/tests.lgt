@@ -69,6 +69,17 @@
 	throws(lgt_atom_codes_2_12, error(type_error(integer,a),_)) :-
 		{atom_codes(abc, [a,b,c])}.
 
+	succeeds(lgt_atom_codes_2_13) :-
+		{atom_codes('', Codes)},
+		Codes == [].
+
+	succeeds(lgt_atom_codes_2_14) :-
+		{atom_codes(Atom, [])},
+		Atom == ''.
+
+	succeeds(lgt_atom_codes_2_15) :-
+		{atom_codes('', [])}.
+
 	% the following two tests are disabled as there is no portable
 	% way to specify a supporting text encoding such as UTF-8 for
 	% all Logtalk supported backend Prolog compilers
