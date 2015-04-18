@@ -28,6 +28,12 @@ RELEASE NOTES
 3.00.2 - April ??, 2015
 =======================
 
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: The JIProlog adapter file now sets the `unknown` flag to `error`.
+JIProlog 4.0.13 or a later version is now required.
+
 Tools
 -----
 
