@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2015/04/18,
 		comment is 'Unit tests for the ISO Prolog standard atom_codes/2 built-in predicate.'
 	]).
 
@@ -65,6 +65,9 @@
 
 	throws(eddbali_atom_codes_2_11, error(representation_error(character_code),_)) :-
 		{atom_codes(_A, [0'i,0's,-1])}.
+
+	throws(lgt_atom_codes_2_12, error(type_error(integer,a),_)) :-
+		{atom_codes(abc, [a,b,c])}.
 
 	% the following two tests are disabled as there is no portable
 	% way to specify a supporting text encoding such as UTF-8 for

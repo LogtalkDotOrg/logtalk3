@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2015/04/18,
 		comment is 'Unit tests for the ISO Prolog standard atom_chars/2 built-in predicate.'
 	]).
 
@@ -83,5 +83,8 @@
 	- succeeds(sics_atom_chars_2_15) :-
 		{atom_chars(A, ['P','é','c','s'])},
 		A == 'Pécs'.
+
+	throws(lgt_atom_chars_2_16, error(type_error(character,1),_)) :-
+		{atom_chars(abc, [1,2,3])}.
 
 :- end_object.

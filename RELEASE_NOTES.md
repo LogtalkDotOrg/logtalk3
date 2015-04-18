@@ -62,7 +62,8 @@ implementations default to this option.
 reading past the end of a stream created using the `eof_action(eof_code)`
 stream option.
 
-* ADDED: Missing unit tests for the Prolog standard throw/1 control construct.
+* ADDED: Missing unit tests for the Prolog standard `throw/1` control
+construct.
 
 * ADDED: Unit tests for the de facto Prolog standard `between/3`, `findall/4`,
 `forall/2`, and `numbervars/3` built-in predicates.
@@ -74,17 +75,10 @@ helping detect number casting and standard order bugs.
 to check that a non-instantiated goal argument doesn't escape the `catch/3`
 call.
 
-* ADDED: Missing unit test for the de facto Prolog standard `between/3`
-built-in predicate.
-
 * ADDED: Several missing unit tests for arithmetic functions.
 
-* ADDED: Missing tests for the expected exception when an option of an `open/4`
-call list of options is not valid.
-
-* ADDED: Missing tests for error conditions for the `call/2-8` predicates.
-
-* ADDED: Missing test for error condition for the `number_codes/2` predicate.
+* ADDED: Missing tests for error conditions of the `call/2-8`, `atom_chars/2`,
+`atom_codes/2`, `number_codes/2`, and `open/4` predicates.
 
 * FIXED: Tests for the de facto standard `between/3` predicate for XSB.
 
