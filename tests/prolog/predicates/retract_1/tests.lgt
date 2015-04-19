@@ -29,9 +29,9 @@ foo(X) :- call(X), call(X).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/11/21,
+		date is 2015/04/19,
 		comment is 'Unit tests for the ISO Prolog standard retract/1 built-in predicate.'
 	]).
 
@@ -59,7 +59,10 @@ foo(X) :- call(X), call(X).
 		{retract((legs(_X,_Y) :- _Z))}.
 
 	succeeds(iso_retract_1_06) :-
-		{retract(insect(I)), write(I), nl, retract(insect(bee))},
+		{	retract(insect(I)),
+		%	write(I), nl,
+			retract(insect(bee))
+		},
 		I == ant.
 
 	:- if((
@@ -93,5 +96,8 @@ foo(X) :- call(X), call(X).
 			% the second exception term is used in some of the Prolog compilers supporting modules
 			{retract((atom(X) :- X =='[]'))}.
 	:- endif.
+
+	throws(lgt_retract_1_12, error(instantiation_error,_)) :-
+		{retract(_)}.
 
 :- end_object.

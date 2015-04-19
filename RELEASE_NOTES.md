@@ -77,8 +77,9 @@ call.
 
 * ADDED: Several missing unit tests for arithmetic functions.
 
-* ADDED: Missing tests for error conditions of the `call/2-8`, `atom_chars/2`,
-`atom_codes/2`, `number_codes/2`, and `open/4` predicates.
+* ADDED: Missing tests for error conditions of the `asserta/1`, `assertz/1`,
+`clause/2`, `retract/1`, `retractall/1`, `call/2-8`, `open/4`, `atom_chars/2`,
+`atom_codes/2`, and `number_codes/2`, predicates.
 
 * FIXED: Tests for the de facto standard `between/3` predicate for XSB.
 

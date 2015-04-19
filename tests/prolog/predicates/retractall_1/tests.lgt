@@ -20,9 +20,9 @@ insect(bee).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/11/04,
+		date is 2015/04/19,
 		comment is 'Unit tests for the ISO Prolog standard retractall/1 built-in predicate.'
 	]).
 
@@ -48,5 +48,8 @@ insect(bee).
 			% the second exception term is used in some of the Prolog compilers supporting modules
 			{retractall(retractall(_))}.
 	:- endif.
+
+	throws(lgt_retractall_1_06, error(instantiation_error,_)) :-
+		{retractall(_)}.
 
 :- end_object.

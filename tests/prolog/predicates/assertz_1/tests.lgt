@@ -19,9 +19,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/11/04,
+		date is 2015/04/19,
 		comment is 'Unit tests for the ISO Prolog standard assertz/1 built-in predicate.'
 	]).
 
@@ -53,5 +53,14 @@
 			% the second exception term is used in some of the Prolog compilers supporting modules
 			{assertz((atom(_) :- true))}.
 	:- endif.
+
+	throws(lgt_assertz_1_08, error(instantiation_error,_)) :-
+		{assertz((_ :- foo))}.
+
+	throws(lgt_assertz_1_09, error(instantiation_error,_)) :-
+		{assertz((_ :- _))}.
+
+	throws(lgt_assertz_1_10, error(type_error(callable,4),_)) :-
+		{assertz((4 :- foo))}.
 
 :- end_object.
