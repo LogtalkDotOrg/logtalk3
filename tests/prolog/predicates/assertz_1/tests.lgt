@@ -19,9 +19,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/04/19,
+		date is 2015/04/20,
 		comment is 'Unit tests for the ISO Prolog standard assertz/1 built-in predicate.'
 	]).
 
@@ -54,6 +54,8 @@
 			{assertz((atom(_) :- true))}.
 	:- endif.
 
+	% tests from the Logtalk portability work
+
 	throws(lgt_assertz_1_08, error(instantiation_error,_)) :-
 		{assertz((_ :- foo))}.
 
@@ -62,5 +64,8 @@
 
 	throws(lgt_assertz_1_10, error(type_error(callable,4),_)) :-
 		{assertz((4 :- foo))}.
+
+	throws(lgt_assertz_1_11, error(type_error(callable,(fail,4)),_)) :-
+		{assertz((foo :- fail,4))}.
 
 :- end_object.

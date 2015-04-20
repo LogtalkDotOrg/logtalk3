@@ -19,9 +19,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/04/19,
+		date is 2015/04/20,
 		comment is 'Unit tests for the ISO Prolog standard asserta/1 built-in predicate.'
 	]).
 
@@ -64,6 +64,8 @@
 		findall(X-Y, {asserta(insct(bee)),insct(X),asserta(insct(ant)),insct(Y)}, L),
 		L == [bee-ant, bee-bee].
 
+	% tests from the Logtalk portability work
+
 	throws(lgt_asserta_1_09, error(instantiation_error,_)) :-
 		{asserta((_ :- foo))}.
 
@@ -72,5 +74,8 @@
 
 	throws(lgt_asserta_1_11, error(type_error(callable,4),_)) :-
 		{asserta((4 :- foo))}.
+
+	throws(lgt_asserta_1_12, error(type_error(callable,(fail,4)),_)) :-
+		{asserta((foo :- fail,4))}.
 
 :- end_object.
