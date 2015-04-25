@@ -2403,8 +2403,9 @@ current_logtalk_flag(Flag, Value) :-
 % built-in predicate of SWI-Prolog
 
 create_logtalk_flag(Flag, Value, Options) :-
-	'$lgt_must_be'(ground, create_logtalk_flag(Flag, Value, Options), logtalk(create_logtalk_flag(Flag, Value, Options), _)),
 	'$lgt_must_be'(atom, Flag, logtalk(create_logtalk_flag(Flag, Value, Options), _)),
+	'$lgt_must_be'(ground, Value, logtalk(create_logtalk_flag(Flag, Value, Options), _)),
+	'$lgt_must_be'(ground, Options, logtalk(create_logtalk_flag(Flag, Value, Options), _)),
 	'$lgt_must_be'(list, Options, logtalk(create_logtalk_flag(Flag, Value, Options), _)),
 	fail.
 

@@ -30,44 +30,41 @@
 		{create_logtalk_flag(a, b, [c|_])}.
 
 	throws(create_logtalk_flag_3_03, error(instantiation_error, logtalk(create_logtalk_flag(_,_,_),_))) :-
-		{create_logtalk_flag(a(_), b, [c])}.
-
-	throws(create_logtalk_flag_3_04, error(instantiation_error, logtalk(create_logtalk_flag(_,_,_),_))) :-
 		{create_logtalk_flag(a, b(_), [c])}.
 
-	throws(create_logtalk_flag_3_05, error(instantiation_error, logtalk(create_logtalk_flag(_,_,_),_))) :-
+	throws(create_logtalk_flag_3_04, error(instantiation_error, logtalk(create_logtalk_flag(_,_,_),_))) :-
 		{create_logtalk_flag(a, b, [c(_)])}.
 
-	throws(create_logtalk_flag_3_06, error(type_error(atom,1), logtalk(create_logtalk_flag(1,a,[]),_))) :-
+	throws(create_logtalk_flag_3_05, error(type_error(atom,1), logtalk(create_logtalk_flag(1,a,[]),_))) :-
 		{create_logtalk_flag(1, a, [])}.
 
-	throws(create_logtalk_flag_3_07, error(type_error(list,b), logtalk(create_logtalk_flag(a,1,b),_))) :-
+	throws(create_logtalk_flag_3_06, error(type_error(list,b), logtalk(create_logtalk_flag(a,1,b),_))) :-
 		{create_logtalk_flag(a, 1, b)}.
 
-	throws(create_logtalk_flag_3_08, error(domain_error(flag_option,b), logtalk(create_logtalk_flag(a,false,[b]),_))) :-
+	throws(create_logtalk_flag_3_07, error(domain_error(flag_option,b), logtalk(create_logtalk_flag(a,false,[b]),_))) :-
 		{create_logtalk_flag(a, false, [b])}.
 
-	throws(create_logtalk_flag_3_09, error(domain_error(flag_option,access(b)), logtalk(create_logtalk_flag(a,false,[access(b)]),_))) :-
+	throws(create_logtalk_flag_3_08, error(domain_error(flag_option,access(b)), logtalk(create_logtalk_flag(a,false,[access(b)]),_))) :-
 		{create_logtalk_flag(a, false, [access(b)])}.
 
-	throws(create_logtalk_flag_3_10, error(domain_error(flag_option,keep(b)), logtalk(create_logtalk_flag(a,false,[keep(b)]),_))) :-
+	throws(create_logtalk_flag_3_09, error(domain_error(flag_option,keep(b)), logtalk(create_logtalk_flag(a,false,[keep(b)]),_))) :-
 		{create_logtalk_flag(a, false, [keep(b)])}.
 
-	throws(create_logtalk_flag_3_11, error(domain_error(flag_option,type(b)), logtalk(create_logtalk_flag(a,false,[type(b)]),_))) :-
+	throws(create_logtalk_flag_3_10, error(domain_error(flag_option,type(b)), logtalk(create_logtalk_flag(a,false,[type(b)]),_))) :-
 		{create_logtalk_flag(a, false, [type(b)])}.
 
-	throws(create_logtalk_flag_3_12, error(permission_error(modify,flag,debug), logtalk(create_logtalk_flag(debug,false,[]),_))) :-
+	throws(create_logtalk_flag_3_11, error(permission_error(modify,flag,debug), logtalk(create_logtalk_flag(debug,false,[]),_))) :-
 		{create_logtalk_flag(debug, false, [])}.
 
-	throws(create_logtalk_flag_3_13, error(type_error(atom,1), logtalk(create_logtalk_flag(a,1,[type(atom)]),_))) :-
+	throws(create_logtalk_flag_3_12, error(type_error(atom,1), logtalk(create_logtalk_flag(a,1,[type(atom)]),_))) :-
 		{create_logtalk_flag(a, 1, [type(atom)])}.
 
-	throws(create_logtalk_flag_3_14, error(permission_error(modify,flag,ro), logtalk(set_logtalk_flag(ro,false),_))) :-
+	throws(create_logtalk_flag_3_13, error(permission_error(modify,flag,ro), logtalk(set_logtalk_flag(ro,false),_))) :-
 		{	create_logtalk_flag(ro, true, [access(read_only)]),
 			set_logtalk_flag(ro, false)
 		}.
 
-	succeeds(create_logtalk_flag_3_15) :-
+	succeeds(create_logtalk_flag_3_14) :-
 		{	create_logtalk_flag(raining, true, []),
 			current_logtalk_flag(raining, Value1),
 			Value1 == true,
@@ -76,7 +73,7 @@
 			Value2 == false
 		}.
 
-	succeeds(create_logtalk_flag_3_16) :-
+	succeeds(create_logtalk_flag_3_15) :-
 		{	create_logtalk_flag(raining, true, []),
 			current_logtalk_flag(raining, Value1),
 			Value1 == true,
@@ -85,7 +82,7 @@
 			Value2 == true
 		}.
 
-	succeeds(create_logtalk_flag_3_17) :-
+	succeeds(create_logtalk_flag_3_16) :-
 		{	create_logtalk_flag(foo, bar, [type(term)]),
 			current_logtalk_flag(foo, Value1),
 			Value1 == bar,
@@ -94,7 +91,7 @@
 			Value2 == baz
 		}.
 
-	succeeds(create_logtalk_flag_3_18) :-
+	succeeds(create_logtalk_flag_3_17) :-
 		{	create_logtalk_flag(bar, baz, [access(read_only)]),
 			current_logtalk_flag(bar, Value1),
 			Value1 == baz
