@@ -4,8 +4,8 @@
 #
 #  Author: Paulo Moura
 #    Mail: pmoura@logtalk.org
-#    Date: 2014.10.21
-# Version: 1.20
+#    Date: 2015.04.24
+# Version: 1.21
 # ------------------------------------------
 # This file is a part of highlight, a free source code converter released under the GPL.
 #
@@ -52,7 +52,7 @@ $KEYWORDS(kwc)=regex(((instantiat|specializ)es_class)(?=[(]), 1)
 # events
 $KEYWORDS(kwc)=regex((current_event|(abolish|define)_events)(?=[(]), 1)
 # flags
-$KEYWORDS(kwc)=regex(((current|set)_logtalk_flag)(?=[(]), 1)
+$KEYWORDS(kwc)=regex(((create|current|set)_logtalk_flag)(?=[(]), 1)
 # compiling, loading, and library paths
 $KEYWORDS(kwc)=regex((logtalk_(compile|l(ibrary_path|oad|oad_context)|make))(?=[(]), 1)
 $KEYWORDS(kwc)=regex((logtalk_make), 1)

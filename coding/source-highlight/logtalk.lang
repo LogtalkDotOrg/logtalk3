@@ -1,7 +1,7 @@
 # highlighting for Logtalk source files (http://logtalk.org/)
 #
 #	written by Paulo Moura (pmoura@logtalk.org)
-#	last revised on October 21, 2014
+#	last revised on April 24, 2015
 
 comment start "%"
 comment delim "/*" "*/" multiline nested
@@ -19,7 +19,7 @@ keyword =	'\<(abolish|c(urrent|reate))_(object|protocol|category)(?=\()',
 			'\<imp(lements_protocol|orts_category)(?=\()',
 			'\<(instantiat|specializ)es_class(?=\()',
 			'\<(current_event|(abolish|define)_events)(?=\()',
-			'\<(current|set)_logtalk_flag(?=\()',
+			'\<(create|current|set)_logtalk_flag(?=\()',
 			'\<logtalk_(compile|l(oad|oad_context|ibrary_path)|make)(?=\()',
 			'\<(logtalk_make)\>'
 

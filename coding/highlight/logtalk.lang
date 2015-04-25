@@ -92,7 +92,7 @@ Keywords={
     Group=1
   },
   { Id=3, --flags
-    Regex=[[ ((current|set)_logtalk_flag)(?=[\(]) ]],
+    Regex=[[ ((create|current|set)_logtalk_flag)(?=[\(]) ]],
     Group=1
   },
   { Id=3, --compiling, loading, and library paths

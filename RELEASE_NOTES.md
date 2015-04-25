@@ -28,6 +28,13 @@ RELEASE NOTES
 3.00.2 - April ??, 2015
 =======================
 
+Logtalk compiler and runtime
+----------------------------
+
+* ADDED: A `create_logtalk_flag/3` built-in predicate for creating new flags.
+Based on the specification of the `create_prolog_flag/3` built-in predicate of
+SWI-Prolog.
+
 Prolog adapter and integration files
 ------------------------------------
 

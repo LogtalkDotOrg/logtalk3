@@ -30,7 +30,7 @@
 			// event built-in predicates
 			{ regex: new RegExp("\\b(current_event|(abolish|define)_events)(?=[(])", 'g'), css: 'keyword'},
 			// flag built-in predicates
-			{ regex: new RegExp("\\b(current|set)_logtalk_flag(?=[(])", 'g'), css: 'keyword'},
+			{ regex: new RegExp("\\b(create|current|set)_logtalk_flag(?=[(])", 'g'), css: 'keyword'},
 			{ regex: new RegExp("\\b(set|current)_prolog_flag(?=[(])", 'g'), css: 'keyword'},
 			// compiling and loading built-in predicates
 			{ regex: new RegExp("\\blogtalk_(compile|l(oad|oad_context|ibrary_path)|make)(?=[(])", 'g'), css: 'keyword'},

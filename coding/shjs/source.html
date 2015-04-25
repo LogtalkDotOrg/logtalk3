@@ -43,9 +43,9 @@ comment
 	extends(parent)).
 
 	:- info([
-		version is 1.30,
+		version is 1.31,
 		author is &#x27;Paulo Moura&#x27;,
-		date is 2014/10/21,
+		date is 2015/04/24,
 		comment is &#x27;Sample prototype for testing syntax coloring.&#x27;]).
 
 	:- built_in.
@@ -158,7 +158,8 @@ comment
 
 	flags :-
 		current_logtalk_flag(Flag, Value),
-		set_logtalk_flag(Flag, Value).
+		set_logtalk_flag(Flag, Value),
+		create_logtalk_flag(Flag, Value, Options).
 
 	execution_context_methods :-
 		parameter(N, Parameter),

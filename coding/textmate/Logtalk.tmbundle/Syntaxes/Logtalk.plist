@@ -289,7 +289,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b((curren|se)t_logtalk_flag|halt)(?=[(])</string>
+			<string>\b((create|current|set)_logtalk_flag|halt)(?=[(])</string>
 			<key>name</key>
 			<string>support.function.implementation-defined-hooks.logtalk</string>
 		</dict>

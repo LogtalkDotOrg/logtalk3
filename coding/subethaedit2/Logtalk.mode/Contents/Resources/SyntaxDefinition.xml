@@ -81,7 +81,7 @@
 				<regex>\b(imp(?:lements_protocol|orts_category))\(</regex>
 				<regex>\b((?:instantiat|specializ)es_class)\(</regex>
 				<regex>\b(define_events)\(</regex>
-				<regex>\b((?:se|curren)t_logtalk_flag)\(</regex>
+				<regex>\b((?:set|create|current)_logtalk_flag)\(</regex>
 				<regex>\b(logtalk_(?:compile|l(?:ibrary_path|oad|oad_context)|make))\(</regex>
 				<regex>\b(logtalk_make)\b</regex>
 				<regex>\b(forall)\(</regex>

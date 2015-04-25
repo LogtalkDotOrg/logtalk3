@@ -7,7 +7,7 @@
 	written by		Paulo Moura
 	version			1.400
 	created on		May 5, 2002
-	last revised	October 21, 2014
+	last revised	April 24, 2015
 
 	To install, copy this file to the "modes" subdirectory in jEdit 
 	directory installation.   Next, check the "catalog" file in the 
@@ -76,7 +76,7 @@
 		<!-- Events -->
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD2">\b(current_event|(abolish|define)_events)(?=[(])</SEQ_REGEXP>
 		<!-- Flags -->
-		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD2">\b(current|set)_logtalk_flag(?=[(])</SEQ_REGEXP>
+		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD2">\b(create|current|set)_logtalk_flag(?=[(])</SEQ_REGEXP>
 		<!-- Compiling, loading, and library paths -->
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD2">\blogtalk_(compile|l(ibrary_path|oad|oad_context)|make)(?=[(])</SEQ_REGEXP>
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD2">\blogtalk_make\b</SEQ_REGEXP>
@@ -280,6 +280,7 @@
 			<NULL>create_category</NULL>
 			<NULL>create_object</NULL>
 			<NULL>create_protocol</NULL>
+			<NULL>create_logtalk_flag</NULL>
 			<NULL>current_category</NULL>
 			<NULL>current_char_conversion</NULL>
 			<NULL>current_event</NULL>

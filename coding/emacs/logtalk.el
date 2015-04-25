@@ -4,8 +4,8 @@
 
 ;; Author: Paulo Moura <pmoura@logtalk.org>
 ;; Creation date: November 15, 2003
-;; Last modification date: October 21, 2014
-;; Version: 1.28
+;; Last modification date: April 24, 2015
+;; Version: 1.29
 
 ;; Installation:
 ;;
@@ -27,7 +27,7 @@
 
 ;; setup 
 
-(defvar logtalk-mode-version "1.28"
+(defvar logtalk-mode-version "1.29"
 	"Logtalk mode version number")
 
 (defvar logtalk-mode-hook nil)
@@ -208,7 +208,7 @@
 		;;
 		;; implementation defined hooks functions:
 		;;
-		("\\<\\(\\(?:curren\\|se\\)t_prolog_flag\\|halt\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
+		("\\<\\(\\(?:create\\|current\\|set\\)_prolog_flag\\|halt\\)\\([(]\\)" 1 'logtalk-built-in-predicate-face)
 		("\\<halt\\>" 0 'logtalk-built-in-predicate-face)
 		;;
 		;; atomic term processing:

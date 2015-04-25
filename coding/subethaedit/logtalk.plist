@@ -294,6 +294,7 @@
 				<string>[^A-Za-z0-9_](define_events)\(</string>
 				<string>[^A-Za-z0-9_](current_logtalk_flag)\(</string>
 				<string>[^A-Za-z0-9_](set_logtalk_flag)\(</string>
+				<string>[^A-Za-z0-9_](create_logtalk_flag)\(</string>
 				<string>[^A-Za-z0-9_](logtalk_compile)\(</string>
 				<string>[^A-Za-z0-9_](logtalk_load)\(</string>
 				<string>[^A-Za-z0-9_](logtalk_library_path)\(</string>

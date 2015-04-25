@@ -31,7 +31,7 @@
 				<!-- Events -->
 				<RegExpr String = "\b(current_event|(abolish|define)_events)(?=[(])" attribute = "Built-in" context = "#stay" />
 				<!-- Flags -->
-				<RegExpr String = "\b(current|set)_logtalk_flag(?=[(])" attribute = "Built-in" context = "#stay" />
+				<RegExpr String = "\b(create|current|set)_logtalk_flag(?=[(])" attribute = "Built-in" context = "#stay" />
 				<!-- Compiling, loading, and library paths -->
 				<RegExpr String = "\blogtalk_(compile|l(ibrary_path|oad|oad_context)|make)(?=[(])" attribute = "Built-in" context = "#stay" />
 				<RegExpr String = "\blogtalk_make\b" attribute = "Built-in" context = "#stay" />

@@ -152,7 +152,7 @@ var LogtalkHighlightRules = function() {
            token: 'support.function.event-handling.logtalk',
            regex: '\\b(?:(?:abolish|define)_events|current_event)(?=[(])' },
          { token: 'support.function.implementation-defined-hooks.logtalk',
-           regex: '\\b(?:(?:curren|se)t_logtalk_flag|halt)(?=[(])' },
+           regex: '\\b(?:(?:create|current|set)_logtalk_flag|halt)(?=[(])' },
          { token: 'support.function.implementation-defined-hooks.logtalk',
            regex: '\\b(halt)\\b' },
          { token: 'support.function.sorting.logtalk',

@@ -216,6 +216,12 @@
 :- dynamic('$lgt_built_in_entities_loaded_'/0).
 
 
+% user-defined flags
+
+% '$lgt_user_defined_flag_'(Flag, Access, Type)
+:- dynamic('$lgt_user_defined_flag_'/3).
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2353,16 +2359,16 @@ logtalk_load_context(stream, Stream) :-
 % the file containing it) or by passing a list of flag values in the calls to
 % the logtalk_compile/2 and logtalk_load/2 predicates
 
-set_logtalk_flag(Name, Value) :-
-	'$lgt_must_be'(read_write_flag, Name, logtalk(set_logtalk_flag(Name, Value), _)),
-	'$lgt_must_be'(flag_value, Name + Value, logtalk(set_logtalk_flag(Name, Value), _)),
-	'$lgt_set_compiler_flag'(Name, Value).
+set_logtalk_flag(Flag, Value) :-
+	'$lgt_must_be'(read_write_flag, Flag, logtalk(set_logtalk_flag(Flag, Value), _)),
+	'$lgt_must_be'(flag_value, Flag + Value, logtalk(set_logtalk_flag(Flag, Value), _)),
+	'$lgt_set_compiler_flag'(Flag, Value).
 
 
-'$lgt_set_compiler_flag'(Name, Value) :-
-	retractall('$lgt_current_flag_'(Name, _)),
-	assertz('$lgt_current_flag_'(Name, Value)),
-	(	Name == hook ->
+'$lgt_set_compiler_flag'(Flag, Value) :-
+	retractall('$lgt_current_flag_'(Flag, _)),
+	assertz('$lgt_current_flag_'(Flag, Value)),
+	(	Flag == hook ->
 		% pre-compile hook calls for better performance when compiling files
 		'$lgt_compile_hooks'(Value)
 	;	true
@@ -2376,12 +2382,101 @@ set_logtalk_flag(Name, Value) :-
 
 current_logtalk_flag(Flag, Value) :-
 	(	var(Flag) ->
-		'$lgt_valid_flag'(Flag),
+		(	'$lgt_valid_flag'(Flag)
+		;	'$lgt_user_defined_flag_'(Flag, _, _)
+		),
 		'$lgt_compiler_flag'(Flag, Value)
 	;	'$lgt_valid_flag'(Flag) ->
 		'$lgt_compiler_flag'(Flag, Value)
+	;	'$lgt_user_defined_flag_'(Flag, _, _) ->
+		'$lgt_compiler_flag'(Flag, Value)
 	;	'$lgt_must_be'(flag, Flag, logtalk(current_logtalk_flag(Flag, Value), _))
 	).
+
+
+
+% create_logtalk_flag(+atom, +ground, +list)
+%
+% creates a new flag
+%
+% based on the specification of the create_prolog_flag/3
+% built-in predicate of SWI-Prolog
+
+create_logtalk_flag(Flag, Value, Options) :-
+	'$lgt_must_be'(ground, create_logtalk_flag(Flag, Value, Options), logtalk(create_logtalk_flag(Flag, Value, Options), _)),
+	'$lgt_must_be'(atom, Flag, logtalk(create_logtalk_flag(Flag, Value, Options), _)),
+	'$lgt_must_be'(list, Options, logtalk(create_logtalk_flag(Flag, Value, Options), _)),
+	fail.
+
+create_logtalk_flag(Flag, Value, Options) :-
+	'$lgt_valid_flag'(Flag),
+	throw(error(permission_error(modify,flag,Flag), logtalk(create_logtalk_flag(Flag, Value, Options), _))).
+
+create_logtalk_flag(Flag, Value, Options) :-
+	'$lgt_member'(Option, Options),
+	Option \= access(_),
+	Option \= keep(_),
+	Option \= type(_),
+	throw(error(domain_error(flag_option,Option), logtalk(create_logtalk_flag(Flag, Value, Options), _))).
+
+create_logtalk_flag(Flag, Value, Options) :-
+	'$lgt_member'(access(Access), Options),
+	Access \== read_write,
+	Access \== read_only,
+	throw(error(domain_error(flag_option,access(Access)), logtalk(create_logtalk_flag(Flag, Value, Options), _))).
+
+create_logtalk_flag(Flag, Value, Options) :-
+	'$lgt_member'(keep(Keep), Options),
+	Keep \== true,
+	Keep \== false,
+	throw(error(domain_error(flag_option,keep(Keep)), logtalk(create_logtalk_flag(Flag, Value, Options), _))).
+
+create_logtalk_flag(Flag, Value, Options) :-
+	'$lgt_member'(type(Type0), Options),
+	(	'$lgt_map_user_defined_flag_type'(Type0, Type) ->
+		(	call(Type, Value) ->
+			fail
+		;	throw(error(type_error(Type0,Value), logtalk(create_logtalk_flag(Flag, Value, Options), _)))
+		)
+	;	throw(error(domain_error(flag_option,type(Type0)), logtalk(create_logtalk_flag(Flag, Value, Options), _)))
+	).
+
+create_logtalk_flag(Flag, _, Options) :-
+	'$lgt_user_defined_flag_'(Flag, _, _),
+	'$lgt_member'(keep(true), Options),
+	!.
+
+create_logtalk_flag(Flag, Value, Options) :-
+	(	'$lgt_member'(access(Access), Options) ->
+		true
+	;	Access = read_write
+	),
+	(	'$lgt_member'(type(Type0), Options) ->
+		'$lgt_map_user_defined_flag_type'(Type0, Type)
+	;	Value == true ->
+		Type = '$lgt_is_boolean'
+	;	Value == false ->
+		Type = '$lgt_is_boolean'
+	;	atom(Value) ->
+		Type = atom
+	;	integer(Value) ->
+		Type = integer
+	;	float(Value) ->
+		Type = float
+	;	% catchall
+		Type = ground
+	),
+	retractall('$lgt_user_defined_flag_'(Flag, _, _)),
+	assertz('$lgt_user_defined_flag_'(Flag, Access, Type)),
+	retractall('$lgt_current_flag_'(Flag, _)),
+	assertz('$lgt_current_flag_'(Flag, Value)).
+
+
+'$lgt_map_user_defined_flag_type'(boolean, '$lgt_is_boolean').
+'$lgt_map_user_defined_flag_type'(atom, atom).
+'$lgt_map_user_defined_flag_type'(integer, integer).
+'$lgt_map_user_defined_flag_type'(float, float).
+'$lgt_map_user_defined_flag_type'(term, ground).
 
 
 
@@ -2393,7 +2488,7 @@ current_logtalk_flag(Flag, Value) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 0, 2, rc1)).
+'$lgt_version_data'(logtalk(3, 0, 2, rc2)).
 
 
 
@@ -17018,6 +17113,7 @@ current_logtalk_flag(Flag, Value) :-
 % flags
 '$lgt_logtalk_built_in_predicate'(current_logtalk_flag(_, _), no).
 '$lgt_logtalk_built_in_predicate'(set_logtalk_flag(_, _), no).
+'$lgt_logtalk_built_in_predicate'(create_logtalk_flag(_, _, _), no).
 % multi-threading predicates
 '$lgt_logtalk_built_in_predicate'(threaded(_), threaded(0)).
 '$lgt_logtalk_built_in_predicate'(threaded_call(_, _), threaded_call(0, *)).
@@ -18876,6 +18972,13 @@ current_logtalk_flag(Flag, Value) :-
     '$lgt_is_list'(Tail).
 
 
+'$lgt_is_boolean'(-) :-
+	!,
+	fail.
+'$lgt_is_boolean'(true).
+'$lgt_is_boolean'(false).
+
+
 '$lgt_intersection'(_, [], []) :- !.
 '$lgt_intersection'([], _, []) :- !.
 '$lgt_intersection'([Head1| Tail1], List2, Intersection) :-
@@ -18976,6 +19079,28 @@ current_logtalk_flag(Flag, Value) :-
 	;	atom(Term) ->
 		true
 	;	throw(error(type_error(atom, Term), Context))
+	).
+
+'$lgt_must_be'(boolean, Term, Context) :-
+	(	Term == true ->
+		true
+	;	Term == false ->
+		true
+	;	var(Term) ->
+		throw(error(instantiation_error, Context))
+	;	atom(Term) ->
+		throw(error(domain_error(boolean, Term), Context))
+	;	throw(error(type_error(atom, Term), Context))
+	).
+
+'$lgt_must_be'(var_or_boolean, Term, Context) :-
+	(	var(Term) ->
+		true
+	;	\+ atom(Term) ->
+		throw(error(type_error(atom, Term), Context))
+	;	Term \== true,
+		Term \== false,
+		throw(error(domain_error(boolean, Term), Context))
 	).
 
 '$lgt_must_be'(atom_or_string, Term, Context) :-
@@ -19382,6 +19507,8 @@ current_logtalk_flag(Flag, Value) :-
 		throw(error(instantiation_error, Context))
 	;	'$lgt_valid_flag'(Term) ->
 		true
+	;	'$lgt_user_defined_flag_'(Term, _, _) ->
+		true
 	;	atom(Term) ->
 		throw(error(domain_error(flag, Term), Context))
 	;	throw(error(type_error(atom, Term), Context))
@@ -19391,6 +19518,8 @@ current_logtalk_flag(Flag, Value) :-
 	(	var(Term) ->
 		true
 	;	'$lgt_valid_flag'(Term) ->
+		true
+	;	'$lgt_user_defined_flag_'(Term, _, _) ->
 		true
 	;	atom(Term) ->
 		throw(error(domain_error(flag, Term), Context))
@@ -19402,9 +19531,12 @@ current_logtalk_flag(Flag, Value) :-
 		throw(error(instantiation_error, Context))
 	;	\+ atom(Term) ->
 		throw(error(type_error(atom, Term), Context))
-	;	\+ '$lgt_valid_flag'(Term) ->
+	;	\+ '$lgt_valid_flag'(Term),
+		\+ '$lgt_user_defined_flag_'(Term, _, _) ->
 		throw(error(domain_error(flag, Term), Context))
 	;	'$lgt_read_only_flag'(Term) ->
+		throw(error(permission_error(modify, flag, Term), Context))
+	;	'$lgt_user_defined_flag_'(Term, read_only, _) ->
 		throw(error(permission_error(modify, flag, Term), Context))
 	;	true
 	).
@@ -19414,9 +19546,12 @@ current_logtalk_flag(Flag, Value) :-
 		true
 	;	\+ atom(Term) ->
 		throw(error(type_error(atom, Term), Context))
-	;	\+ '$lgt_valid_flag'(Term) ->
+	;	\+ '$lgt_valid_flag'(Term),
+		\+ '$lgt_user_defined_flag_'(Term, _, _) ->
 		throw(error(domain_error(flag, Term), Context))
 	;	'$lgt_read_only_flag'(Term) ->
+		throw(error(permission_error(modify, flag, Term), Context))
+	;	'$lgt_user_defined_flag_'(Term, read_only, _) ->
 		throw(error(permission_error(modify, flag, Term), Context))
 	;	true
 	).
@@ -19426,6 +19561,9 @@ current_logtalk_flag(Flag, Value) :-
 		throw(error(instantiation_error, Context))
 	;	'$lgt_valid_flag_value'(Term1, Term2) ->
 		true
+	;	'$lgt_user_defined_flag_'(Term1, _, Type),
+		call(Type, Term2) ->
+		true
 	;	throw(error(domain_error(flag_value, Term1 + Term2), Context))
 	).
 
@@ -19433,6 +19571,9 @@ current_logtalk_flag(Flag, Value) :-
 	(	var(Term2) ->
 		true
 	;	'$lgt_valid_flag_value'(Term1, Term2) ->
+		true
+	;	'$lgt_user_defined_flag_'(Term1, _, Type),
+		call(Type, Term2) ->
 		true
 	;	throw(error(domain_error(flag_value, Term1 + Term2), Context))
 	).

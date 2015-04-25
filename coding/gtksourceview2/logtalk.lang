@@ -172,7 +172,7 @@
 			<keyword>(current_event)(?=[(])</keyword>
 			<keyword>((abolish|define)_events)(?=[(])</keyword>
 			<!-- Flags -->
-			<keyword>((se|curren)t_logtalk_flag)(?=[(])</keyword>
+			<keyword>((set|create|current)_logtalk_flag)(?=[(])</keyword>
 			<!-- Compiling, loading, and library paths -->
 			<keyword>(logtalk_(compile|l(ibrary_path|oad|oad_context)|make))(?=[(])</keyword>
 			<keyword>logtalk_make</keyword>

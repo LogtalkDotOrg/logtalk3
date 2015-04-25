@@ -63,7 +63,7 @@ class LogtalkLexer(RegexLexer):
             # Events
             (r'(current_event|(abolish|define)_events)(?=[(])', Keyword),
             # Flags
-            (r'(current|set)_logtalk_flag(?=[(])', Keyword),
+            (r'(create|current|set)_logtalk_flag(?=[(])', Keyword),
             # Compiling, loading, and library paths
             (r'logtalk_(compile|l(ibrary_path|oad|oad_context)|make)(?=[(])', Keyword),
             (r'\blogtalk_make\b', Keyword),

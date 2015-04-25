@@ -12,6 +12,8 @@
  *
  * CHANGES
  * -------
+ * 2015/04/24 (1.1.17)
+ *  -  Added syntax coloring of the create_logtalk_flag/3 predicate
  * 2014/10/21 (1.1.16)
  *  -  Added syntax coloring of the atan2/2, div/2, tan/2, and xor/2 arithmetic functions
  * 2014/06/10 (1.1.15)
@@ -154,7 +156,7 @@ $language_data = array(
             // events
             'abolish_events', 'current_event', 'define_events',
             // flags
-            'current_logtalk_flag', 'set_logtalk_flag',
+            'current_logtalk_flag', 'set_logtalk_flag', 'create_logtalk_flag',
             'current_prolog_flag', 'set_prolog_flag',
             // compiling, loading, and library path
             'logtalk_compile', 'logtalk_library_path', 'logtalk_load', 'logtalk_load_context', 'logtalk_make',
