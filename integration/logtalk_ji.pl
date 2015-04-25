@@ -26,8 +26,6 @@
 
 
 % load Logtalk core files
-:- set_prolog_flag(enable_clause_check, false).
 :- consult('../adapters/ji.pl').
 :- consult('../paths/paths.pl').
 :- consult('../core/core.pl').
-:- set_prolog_flag(enable_clause_check, true).
