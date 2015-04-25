@@ -29,10 +29,10 @@ CxProlog support UTF-32 encodings. Attempting to compile the `mythology.lgt`
 source file with either YAP or SWI-Prolog results in a misleading syntax 
 error.
 
-Lean Prolog default encoding is UTF-8. Thus, only the `babel.lgt` file
-can be used with this compiler.
+JIProlog and Lean Prolog default encoding is UTF-8. Therefore, only the
+`babel.lgt` file can be used with these systems.
 
-K-Prolog 6.0.x supports ASCII, UTF-8, EUC-JP, and Shift_JIS encodings. 
+K-Prolog 6.0.x supports US-ASCII, UTF-8, EUC-JP, and Shift_JIS encodings. 
 Thus, only the `babel.lgt` file can be used with this compiler.
 
 Be sure to use a text editor that supports these encodings when opening 

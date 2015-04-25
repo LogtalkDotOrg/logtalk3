@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Lean Prolog 3.8.8 and later versions
-%  Last updated on February 16, 2015
+%  Last updated on April 25, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -697,6 +697,7 @@ mutex_property(_, _) :-
 % '$lgt_logtalk_prolog_encoding'(?atom, ?atom, +stream)
 
 '$lgt_logtalk_prolog_encoding'('UTF-8', 'UTF-8', _).
+'$lgt_logtalk_prolog_encoding'('US-ASCII', 'US-ASCII', _).
 
 
 

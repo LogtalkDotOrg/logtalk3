@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for JIProlog 4.0.13 or later versions
-%  Last updated on April 18, 2015
+%  Last updated on April 25, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -228,7 +228,7 @@ format(Format, Arguments) :-
 '$lgt_prolog_feature'(prolog_compatible_version, @>=((4,0,13))).
 '$lgt_prolog_feature'(prolog_conformance, iso_lax).
 
-'$lgt_prolog_feature'(encoding_directive, unsupported).
+'$lgt_prolog_feature'(encoding_directive, source).
 '$lgt_prolog_feature'(tabling, unsupported).
 '$lgt_prolog_feature'(threads, unsupported).
 '$lgt_prolog_feature'(modules, unsupported).
@@ -575,8 +575,8 @@ format(Format, Arguments) :-
 
 % '$lgt_logtalk_prolog_encoding'(?atom, ?atom, +stream)
 
-'$lgt_logtalk_prolog_encoding'(_, _, _) :-
-	fail.
+'$lgt_logtalk_prolog_encoding'('UTF-8', 'UTF-8', _).
+'$lgt_logtalk_prolog_encoding'('US-ASCII', 'US-ASCII', _).
 
 
 

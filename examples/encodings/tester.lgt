@@ -24,9 +24,9 @@
 			tests_utf_16::run
 		)).
 
-	:- elif((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == lean; Dialect == k))).
+	:- elif((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == ji; Dialect == lean; Dialect == k))).
 
-		% Lean Prolog and K-Prolog only supported Unicode encoding is UTF-8
+		% JIProlog, Lean Prolog, and K-Prolog only supported Unicode encoding is UTF-8
 		:- initialization((
 			set_logtalk_flag(report, warnings),
 			logtalk_load(lgtunit(loader)),

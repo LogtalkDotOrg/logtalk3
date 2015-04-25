@@ -41,6 +41,9 @@ Prolog adapter and integration files
 * UPDATED: The JIProlog adapter file now sets the `unknown` flag to `error`.
 JIProlog 4.0.13 or a later version is now required.
 
+* UPDATED: The JIProlog and Lean Prolog to also accept the 'US-ASCII' text
+encoding in addition to 'UTF-8'.
+
 Tools
 -----
 
