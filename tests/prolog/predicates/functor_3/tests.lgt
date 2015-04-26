@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2015/04/26,
 		comment is 'Unit tests for the ISO Prolog standard functor/3 built-in predicate.'
 	]).
 
@@ -91,5 +91,9 @@
 
 	throws(iso_functor_3_18, error(domain_error(not_less_than_zero,-1),_)) :-
 		{G = functor(_T, foo, -1), call(G)}.
+
+	succeeds(lgt_functor_3_19) :-
+		{functor(T, [], 0)},
+		T == [].
 
 :- end_object.

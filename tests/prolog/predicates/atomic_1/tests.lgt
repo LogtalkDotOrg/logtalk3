@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2015/04/26,
 		comment is 'Unit tests for the ISO Prolog standard atomic/1 built-in predicate.'
 	]).
 
@@ -39,5 +39,8 @@
 
 	succeeds(iso_atomic_1_05) :-
 		{atomic(3.3)}.
+
+	succeeds(lgt_atomic_1_06) :-
+		{atomic([])}.
 
 :- end_object.
