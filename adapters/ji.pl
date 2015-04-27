@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for JIProlog 4.0.13 or later versions
-%  Last updated on April 25, 2015
+%  Last updated on April 27, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -388,7 +388,8 @@ format(Format, Arguments) :-
 % changes current working directory
 
 '$lgt_change_directory'(Directory) :-
-	chdir(Directory).
+	'$lgt_expand_path'(Directory, Expanded),
+	chdir(Expanded).
 
 
 % '$lgt_make_directory'(+atom)
@@ -396,9 +397,10 @@ format(Format, Arguments) :-
 % makes a new directory; succeeds if the directory already exists
 
 '$lgt_make_directory'(Directory) :-
-	(	exists_directory(Directory) ->
+	'$lgt_expand_path'(Directory, Expanded),
+	(	exists_directory(Expanded) ->
 		true
-	;	make_directory(Directory)
+	;	make_directory(Expanded)
 	).
 
 
