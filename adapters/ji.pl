@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for JIProlog 4.0.13 or later versions
-%  Last updated on April 27, 2015
+%  Last updated on May 1, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -542,9 +542,8 @@ format(Format, Arguments) :-
 
 '$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, Variables) :-
 	stream_property(Stream, position(line(LineBegin))),
-	read_term(Stream, Term, Options),
-	stream_property(Stream, position(line(LineEnd))),
-	term_variables(Term, Variables).
+	read_term(Stream, Term, [variable_names(Variables)| Options]),
+	stream_property(Stream, position(line(LineEnd))).
 
 
 
