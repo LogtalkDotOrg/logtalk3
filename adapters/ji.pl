@@ -541,8 +541,7 @@ format(Format, Arguments) :-
 % '$lgt_read_term'(@stream, -term, +list, -position, -list)
 
 '$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, Variables) :-
-	read_term(Stream, Term, [line_counts(LineBegin,LineEnd), variable_names(Variables)| Options]),
-	nl, writeln(line_counts(LineBegin,LineEnd)).
+	read_term(Stream, Term, [line_counts(LineBegin,LineEnd), variable_names(Variables)| Options]).
 
 
 
