@@ -4,7 +4,7 @@ This file is part of Logtalk <http://logtalk.org/>
 Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 
 Notes on supported backend Prolog compilers  
-Last updated on February 24, 2015
+Last updated on May 2, 2015
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -182,6 +182,8 @@ GNU Prolog supports the ISO Prolog standard. No problems expected.
 You can generate a new Prolog top level that embeds Logtalk by following
 the steps (exemplified for POSIX systems):
 
+	$ makdir -p $HOME/collect
+	$ cd $HOME/collect
 	$ gplgt
 	...
 	| ?- logtalk_compile([
@@ -214,17 +216,62 @@ to type:
 	$ logtalk
 
 
-JIProlog 4.0.6 and later versions
+JIProlog 4.0.13 and later versions
 
 	ji.pl
 
 Written with the help of Ugo Chirico, JIProlog author (but if you find any
-Logtalk problem please report it to me). Some examples may not compile or
-run due to work in progress regarding ISO Prolog standard compliance.
+Logtalk problem please report it to me).
 
 To generate `.jip` files from Logtalk source files, use the built-in
 `logtalk_compile/1-2` or the `logtalk_load/1-2` predicates with the
 `clean` flag turned off.
+
+Logtalk can be embedded in JIProlog by creating a `logtalk.jar` by following
+these steps:
+
+	$ makdir -p $HOME/collect
+	$ cd $HOME/collect
+	$ jiplgt
+	...
+	| ?- logtalk_compile([
+			core(expanding),
+			core(monitoring),
+			core(forwarding),
+			core(user),
+			core(logtalk),
+			core(core_messages)],
+			[scratch_directory('$HOME/collect')]).
+	...
+
+	$ cp $LOGTALKHOME/adapters/ji.pl $HOME/collect/ji.pl
+	$ cp $LOGTALKHOME/paths/paths.pl $HOME/collect/paths.pl
+	$ cp $LOGTALKHOME/core/core.pl $HOME/collect/core.pl
+
+	| ?- compile('ji.pl'), compile('paths.pl'), compile('core.pl').
+	...
+
+Next, create a `$HOME/collect/init.pl` with the contents:
+
+	:- load('ji.jip').
+	:- load('paths.jip').
+	:- load('expanding_lgt.jip').
+	:- load('monitoring_lgt.jip').
+	:- load('forwarding_lgt.jip').
+	:- load('user_lgt.jip').
+	:- load('logtalk_lgt.jip').
+	:- load('core_messages_lgt.jip').
+	:- load('core.jip').
+
+We now have all the necessary files to create the `logtalk.jar` file:
+
+	$ jar cf logtalk.jar init.pl *.jip
+
+The `logtalk.jar` file can be distributed with the other JIProlog `.jar`
+files. Logtalk can also be loaded on demand from the `logtalk.jar` file
+by using the `load_library/1` JIProlog built-in predicate:
+
+	| ?- load_library('logtalk.jar').
 
 
 Lean Prolog 3.8.8 and later versions
