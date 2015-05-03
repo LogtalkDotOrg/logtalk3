@@ -15,7 +15,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2015/02/26,
+		date is 2015/05/03,
 		comment is 'Unit tests for the de facto Prolog standard numbervars/3 built-in predicate.'
 	]).
 
@@ -41,5 +41,10 @@
 		T = a(_X, 1, b(_Y, c(_X), 2), 3, _W),
 		{numbervars(T, 3, N)},
 		ground(T), N == 6.
+
+	succeeds(commons_numbervars_3_06) :-
+		T = a(X,Y,Z),
+		{numbervars(T, 0, _)},
+		X == '$VAR'(0), Y == '$VAR'(1), Z == '$VAR'(2).
 
 :- end_object.
