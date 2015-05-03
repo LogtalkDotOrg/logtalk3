@@ -35,6 +35,9 @@ Logtalk compiler and runtime
 Based on the specification of the `create_prolog_flag/3` built-in predicate of
 SWI-Prolog.
 
+* IMPROVED: When printing warning and error line numbers, write "at or above"
+instead of "above" when the culprit term begin and end lines are the same. 
+
 Prolog adapter and integration files
 ------------------------------------
 
