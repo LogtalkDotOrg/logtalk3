@@ -504,7 +504,8 @@ format(Format, Arguments) :-
 % '$lgt_stream_current_line_number'(@stream, -integer)
 
 '$lgt_stream_current_line_number'(Stream, Line) :-
-	stream_property(Stream, position(_,Line,_))).
+	stream_property(Stream, position(Position)),
+	stream_position_data(line_count, Position, Line).
 
 
 
