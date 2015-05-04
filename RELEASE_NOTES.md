@@ -74,6 +74,9 @@ for the correct exception term when reading past the end of a stream to
 use the `eof_action(error)` stream option explicitly as not all Prolog
 implementations default to this option.
 
+* ADDED: Tests for byte, character, code, and term input and output predicates
+for checking error terms when using stream aliases.
+
 * ADDED: Tests for the `get_byte/2`, `get_char/2`, `get_code/2`, `peek_byte/2`,
 `peek_char/2`, `peek_code/2`, and `read_term/3` that check behavior when
 reading past the end of a stream created using the `eof_action(eof_code)`
