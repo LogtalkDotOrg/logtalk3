@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/11/06,
+		date is 2015/05/04,
 		comment is 'Unit tests for the ISO Prolog standard put_byte/1-2 built-in predicates.'
 	]).
 
@@ -77,8 +77,17 @@
 			{put_byte(foo, 1)}.
 	:- endif.
 
+	throws(lgt_put_byte_2_13, error(permission_error(output,stream,s),_)) :-
+		^^set_binary_input(s, []),
+		{put_byte(s, 99)}.
+
+	throws(lgt_put_byte_2_14, error(permission_error(output,text_stream,s),_)) :-
+		^^set_text_output(s, ''),
+		{put_byte(s, 99)}.
+
 	cleanup :-
 		^^clean_binary_input,
-		^^clean_binary_output.
+		^^clean_binary_output,
+		^^clean_text_output.
 
 :- end_object.

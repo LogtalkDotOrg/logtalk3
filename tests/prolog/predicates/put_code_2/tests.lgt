@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/11/21,
+		date is 2015/05/04,
 		comment is 'Unit tests for the ISO Prolog standard put_code/1-2 built-in predicates.'
 	]).
 
@@ -74,8 +74,17 @@
 			{put_code(foo,1)}.
 	:- endif.
 
+	throws(lgt_put_code_2_12, error(permission_error(output,stream,s),_)) :-
+		^^set_text_input(s, ''),
+		{put_code(s, 1)}.
+
+	throws(lgt_put_code_2_13, error(permission_error(output,binary_stream,s),_)) :-
+		^^set_binary_output(s, []),
+		{put_code(s, 1)}.
+
 	cleanup :-
 		^^clean_file(t),
-		^^clean_text_output.
+		^^clean_text_output,
+		^^clean_text_input.
 
 :- end_object.

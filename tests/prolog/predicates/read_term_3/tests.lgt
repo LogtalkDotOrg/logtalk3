@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/04/12,
+		date is 2015/05/04,
 		comment is 'Unit tests for the ISO Prolog standard read_term/3, read_term/2, read/2, and read/1 built-in predicates.'
 	]).
 
@@ -152,9 +152,18 @@
 		{read_term(st_o, Term, [])},
 		Term == end_of_file.
 
+	throws(lgt_read_term_3_25, error(permission_error(input,stream,s),_)) :-
+		^^set_text_output(s, ''),
+		{read(s, _)}.
+
+	throws(lgt_read_term_3_26, error(permission_error(input,binary_stream,s),_)) :-
+		^^set_binary_input(s, []),
+		{read(s, _)}.
+
 	cleanup :-
 		^^clean_text_input,
-		^^clean_binary_input.
+		^^clean_binary_input,
+		^^clean_text_output.
 
 	max_min_integer_as_atom(Flag, Value, Atom) :-
 		(	current_prolog_flag(bounded, true) ->

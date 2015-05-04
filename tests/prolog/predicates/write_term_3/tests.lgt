@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/11/06,
+		date is 2015/05/04,
 		comment is 'Unit tests for the ISO Prolog standard write_term/3, write_term/2, write/2, write/1, writeq/2, writeq/1, write_canonical/2, and write_canonical/1 built-in predicates.'
 	]).
 
@@ -117,7 +117,16 @@
 		current_output(S),
 		{write(a)}.
 
+	throws(lgt_write_term_3_22, error(permission_error(output,stream,s),_)) :-
+		^^set_text_input(s, ''),
+		{write(s, a)}.
+
+	throws(lgt_write_term_3_23, error(permission_error(output,binary_stream,s),_)) :-
+		^^set_binary_output(s, []),
+		{write(s, a)}.
+
 	cleanup :-
-		^^clean_binary_output.
+		^^clean_binary_output,
+		^^clean_text_input.
 
 :- end_object.

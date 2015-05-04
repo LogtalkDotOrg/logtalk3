@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/11/05,
+		date is 2015/05/04,
 		comment is 'Unit tests for the ISO Prolog standard put_char/1-2 built-in predicates.'
 	]).
 
@@ -70,8 +70,17 @@
 		current_output(S),
 		{put_char(a)}.
 
+	throws(lgt_put_char_2_12, error(permission_error(output,stream,s),_)) :-
+		^^set_text_input(s, ''),
+		{put_char(s, a)}.
+
+	throws(lgt_put_char_2_13, error(permission_error(output,binary_stream,s),_)) :-
+		^^set_binary_output(s, []),
+		{put_char(s, a)}.
+
 	cleanup :-
 		^^clean_text_output,
-		^^clean_binary_output.
+		^^clean_binary_output,
+		^^clean_text_input.
 
 :- end_object.
