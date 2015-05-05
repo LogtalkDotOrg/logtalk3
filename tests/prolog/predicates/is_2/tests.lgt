@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/11/24,
+		date is 2015/05/05,
 		comment is 'Unit tests for the ISO Prolog standard is/2 built-in predicate.'
 	]).
 
@@ -301,10 +301,60 @@
 
 	:- endif.
 
+	% tests from the Logtalk portability work
+
 	throws(lgt_is_2_61, error(type_error(evaluable,foo/3),_)) :-
 		% try to delay the error to runtime
 		foo(3, Foo),
 		{_X is abs(Foo)}.
+
+	% tests from the ECLiPSe test suite
+
+	succeeds(eclipse_is_2_62) :-
+		{X is floor(3.5)},
+		X == 3.
+
+	succeeds(eclipse_is_2_63) :-
+		{X is ceiling(3.5)},
+		X == 4.
+
+	succeeds(eclipse_is_2_64) :-
+		{X is truncate(3.5)},
+		X == 3.
+
+	succeeds(eclipse_is_2_65) :-
+		{X is round(3.5)},
+		X == 4.
+
+	succeeds(eclipse_is_2_66) :-
+		{X is round(4.5)},
+		X == 5.
+
+	succeeds(eclipse_is_2_67) :-
+		{X is floor(-3.5)},
+		X == -4.
+
+	succeeds(eclipse_is_2_68) :-
+		{X is ceiling(-3.5)},
+		X == -3.
+
+	succeeds(eclipse_is_2_69) :-
+		{X is truncate(-3.5)},
+		X == -3.
+
+	succeeds(eclipse_is_2_70) :-
+		{X is round(-3.5)},
+		X == -3.
+
+	succeeds(eclipse_is_2_71) :-
+		{X is round(-4.5)},
+		X == -4.
+
+	succeeds(eclipse_is_2_72) :-
+		{X = log(9.9), X > 0}.
+
+	succeeds(eclipse_is_2_73) :-
+		{X = log(9.9), _ is X + 1}.
 
 	variable(_).
 

@@ -13,14 +13,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/11/21,
+		date is 2015/05/05,
 		comment is 'Unit tests for the ISO Prolog standard sort/2 built-in predicate.'
 	]).
 
 	:- discontiguous([
-		succeeds/1, fails/1
+		succeeds/1, fails/1, throws/2
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995/Cor.2:2012(en) standard, section 8.4.3.4
@@ -55,5 +55,25 @@
 			true
 		;	L = [V,U,f(V),f(U)]
 		).
+
+	% tests from the ECLiPSe test suite
+
+	throws(eclipse_sort_2_06, error(instantiation_error,_)) :-
+		{sort(_, _)}.
+
+	throws(eclipse_sort_2_07, error(instantiation_error,_)) :-
+		{sort([a|_],_)}.
+
+	throws(eclipse_sort_2_08, error(type_error(list,3),_)) :-
+		{sort(3, _)}.
+
+	throws(eclipse_sort_2_09, error(type_error(list,[a|b]),_)) :-
+		{sort([a|b],_)}.
+
+	throws(eclipse_sort_2_10, error(type_error(list,3),_)) :-
+		{sort([], 3)}.
+
+	throws(eclipse_sort_2_11, error(type_error(list,[a|b]),_)) :-
+		{sort([], [a|b])}.
 
 :- end_object.

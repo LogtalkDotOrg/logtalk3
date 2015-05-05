@@ -11,7 +11,8 @@ ________________________________________________________________________
 This directory contains a set of unit tests for Prolog official and de facto
 standard features. Most of these unit tests are taken from the official ISO
 Prolog standard (updated up to the ISO/IEC 13211-1:1995/Cor.2:2012(en)
-standard). Several tests originate from SICS and are used here with permission.
+standard). Several tests originate from SICS and ECLiPSe and are used here
+with permission.
 
 Writing these tests was made easier by rewriting and, whenever necessary,
 updating, the tests found on the Prolog ISO conformance testing framework
@@ -38,6 +39,7 @@ The test identifier prefixes indicate their origin:
 
 - `iso_` - tests from the ISO Prolog standards
 - `sics_` - tests contributed by SICS
+- `eclipse_` - tests contributed by ECLiPSe developers
 - `eddbali_` - tests from A Ed-Dbali's test suite
 - `lgt_` - tests originating from work on Logtalk
 - `commons_` - tests for de facto standard Prolog features

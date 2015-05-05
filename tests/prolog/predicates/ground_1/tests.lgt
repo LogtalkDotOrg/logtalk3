@@ -13,10 +13,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2015/05/05,
 		comment is 'Unit tests for the ISO Prolog standard ground/1 built-in predicate.'
+	]).
+
+	:- discontiguous([
+		succeeds/1, fails/1
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995/Cor.2:2012(en) standard, section 8.3.10.4
@@ -26,5 +30,19 @@
 
 	fails(iso_ground_1_02) :-
 		{ground(a(1, _))}.
+
+	% tests from the ECLiPSe test suite
+
+	succeeds(eclipse_ground_1_03) :-
+		{ground(a)}.
+
+	succeeds(eclipse_ground_1_04) :-
+		{ground(f(3))}.
+
+	fails(eclipse_ground_1_05) :-
+		{ground(_)}.
+
+	fails(eclipse_ground_1_06) :-
+		{ground(f(_))}.
 
 :- end_object.

@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/11/21,
+		date is 2015/05/05,
 		comment is 'Unit tests for the ISO Prolog standard keysort/2 built-in predicate.'
 	]).
 
@@ -49,5 +49,34 @@
 			% STO; Undefined.
 			{keysort([V-V], V)}.
 	:- endif.
+
+	% tests from the ECLiPSe test suite
+
+	throws(eclipse_keysort_2_06, error(instantiation_error,_)) :-
+		{keysort(_, _)}.
+
+	throws(eclipse_keysort_2_07, error(instantiation_error,_)) :-
+		{keysort([1-a|_], _)}.
+
+	throws(eclipse_keysort_2_08, error(type_error(list,3),_)) :-
+		{keysort(3, _)}.
+
+	throws(eclipse_keysort_2_09, error(type_error(list,[1-a|b]),_)) :-
+		{keysort([1-a|b], _)}.
+
+	throws(eclipse_keysort_2_10, error(type_error(list,3),_)) :-
+		{keysort([], 3)}.
+
+	throws(eclipse_keysort_2_11, error(type_error(list,[1-a|b]),_)) :-
+		{keysort([], [1-a|b])}.
+
+	throws(eclipse_keysort_2_12, error(instantiation_error,_)) :-
+		{keysort([_], _)}.
+
+	throws(eclipse_keysort_2_13, error(type_error(pair,1/a),_)) :-
+		{keysort([1/a], _)}.
+
+	throws(eclipse_keysort_2_14, error(type_error(pair,1/a),_)) :-
+		{keysort([], [1/a])}.
 
 :- end_object.

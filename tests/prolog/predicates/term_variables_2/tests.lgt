@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/11/21,
+		date is 2015/05/05,
 		comment is 'Unit tests for the ISO Prolog standard term_variables/2 built-in predicate.'
 	]).
 
@@ -60,5 +60,17 @@
 			% STO; Undefined.
 			{term_variables(_X+Vars, Vars), Vars = [_, _]}.
 	:- endif.
+
+	% tests from the ECLiPSe test suite
+
+	throws(eclipse_term_variables_2_08, error(type_error(list,3),_)) :-
+		{term_variables(foo, 3)}.
+
+	throws(eclipse_term_variables_2_09, error(type_error(list,[a|b]),_)) :-
+		{term_variables(foo, [a|b])}.
+
+	succeeds(eclipse_term_variables_2_10) :-
+		{term_variables(foo(X,Y,X,Z), Vs)},
+		Vs == [X,Y,Z].
 
 :- end_object.
