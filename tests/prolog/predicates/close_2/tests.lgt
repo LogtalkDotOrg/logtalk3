@@ -76,6 +76,15 @@
 	succeeds(lgt_close_1_12) :-
 		{close(user_error)}.
 
+	succeeds(lgt_close_1_13) :-
+		^^set_text_output(''),
+		current_output(S),
+		{close(S, [force(true)])}.
+
+	succeeds(lgt_close_1_14) :-
+		^^set_text_output(s, ''),
+		{close(s, [force(true)])}.
+
 	cleanup :-
 		^^clean_file(foo).
 
