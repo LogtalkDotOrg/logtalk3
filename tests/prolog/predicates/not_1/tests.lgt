@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/11/21,
+		date is 2015/05/05,
 		comment is 'Unit tests for the ISO Prolog standard (\\+)/1 built-in predicate.'
 	]).
 
@@ -57,5 +57,9 @@
 			% STO; Undefined
 			{'\\+'(X=f(X))}.
 	:- endif.
+
+	succeeds(lgt_not_1_09) :-
+		{'\\+'('\\+'(X=1))},
+		var(X).
 
 :- end_object.
