@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/04/07,
+		date is 2015/05/05,
 		comment is 'Unit tests for the ISO Prolog standard open/3-4 built-in predicates.'
 	]).
 
@@ -105,6 +105,8 @@
 		^^clean_file(roger_data),
 		^^clean_file(scowen),
 		^^clean_file(dave),
-		^^clean_file(foo).
+		^^clean_file(foo),
+		^^clean_file(bar),
+		^^clean_file(f).
 
 :- end_object.
