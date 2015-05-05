@@ -26,9 +26,9 @@ bar(_X) :- true.
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2015/05/05,
 		comment is 'Unit tests for the ISO Prolog standard abolish/1 built-in predicate.'
 	]).
 
@@ -50,14 +50,9 @@ bar(_X) :- true.
 	throws(iso_abolish_1_04, error(type_error(predicate_indicator,foo(X)),_)) :-
 		{abolish(foo(X))}.
 
-	:- if(current_logtalk_flag(prolog_conformance, iso_strict)).
-		throws(iso_abolish_1_05, error(permission_error(modify,static_procedure,abolish/1),_)) :-
-			{abolish(abolish/1)}.
-	:- else.
-		throws(iso_abolish_1_05, [error(permission_error(modify,static_procedure,abolish/1),_), error(permission_error(modify,static_procedure,':'(user,abolish/1)),_)]) :-
-			% the second exception term is used in some of the Prolog compilers supporting modules
-			{abolish(abolish/1)}.
-	:- endif.
+	throws(iso_abolish_1_05, [error(permission_error(modify,static_procedure,abolish/1),_), error(permission_error(modify,static_procedure,':'(user,abolish/1)),_)]) :-
+		% the second exception term is used in some of the Prolog compilers supporting modules
+		{abolish(abolish/1)}.
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
@@ -71,14 +66,9 @@ bar(_X) :- true.
 	throws(eddbali_abolish_1_08, error(instantiation_error,_)) :-
 		{abolish(foo/_)}.
 
-	:- if(current_logtalk_flag(prolog_conformance, iso_strict)).
-		throws(eddbali_abolish_1_09, error(permission_error(modify,static_procedure,bar/1),_)) :-
-			{abolish(bar/1)}.
-	:- else.
-		throws(eddbali_abolish_1_09, [error(permission_error(modify,static_procedure,bar/1),_), error(permission_error(modify,static_procedure,':'(user,bar/1)),_)]) :-
-			% the second exception term is used in some of the Prolog compilers supporting modules
-			{abolish(bar/1)}.
-	:- endif.
+	throws(eddbali_abolish_1_09, [error(permission_error(modify,static_procedure,bar/1),_), error(permission_error(modify,static_procedure,':'(user,bar/1)),_)]) :-
+		% the second exception term is used in some of the Prolog compilers supporting modules
+		{abolish(bar/1)}.
 
 	throws(eddbali_abolish_1_10, error(type_error(integer,a),_)) :-
 		{abolish(foo/a)}.
@@ -101,5 +91,16 @@ bar(_X) :- true.
 
 	throws(eddbali_abolish_1_14, error(type_error(predicate_indicator,insect),_)) :-
 		{abolish(insect)}.
+
+	% tests from the ECLiPSe test suite
+
+	throws(eclipse_abolish_1_15, error(instantiation_error,_)) :-
+		{abolish(_)}.
+
+	throws(eclipse_abolish_1_16, error(instantiation_error,_)) :-
+		{abolish(_/2)}.
+
+	succeeds(eclipse_abolish_1_17) :-
+		{abolish(foo/2)}.
 
 :- end_object.

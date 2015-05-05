@@ -19,9 +19,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2015/04/20,
+		date is 2015/05/05,
 		comment is 'Unit tests for the ISO Prolog standard assertz/1 built-in predicate.'
 	]).
 
@@ -45,14 +45,9 @@
 	throws(iso_assertz_1_06, error(type_error(callable,4),_)) :-
 		{assertz((foo :- 4))}.
 
-	:- if(current_logtalk_flag(prolog_conformance, iso_strict)).
-		throws(iso_assertz_1_07, error(permission_error(modify,static_procedure,atom/1),_)) :-
-			{assertz((atom(_) :- true))}.
-	:- else.
-		throws(iso_assertz_1_07, [error(permission_error(modify,static_procedure,atom/1),_), error(permission_error(modify,static_procedure,':'(user,atom/1)),_)]) :-
-			% the second exception term is used in some of the Prolog compilers supporting modules
-			{assertz((atom(_) :- true))}.
-	:- endif.
+	throws(iso_assertz_1_07, [error(permission_error(modify,static_procedure,atom/1),_), error(permission_error(modify,static_procedure,':'(user,atom/1)),_)]) :-
+		% the second exception term is used in some of the Prolog compilers supporting modules
+		{assertz((atom(_) :- true))}.
 
 	% tests from the Logtalk portability work
 
