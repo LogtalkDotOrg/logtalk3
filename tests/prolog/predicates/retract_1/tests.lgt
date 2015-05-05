@@ -9,6 +9,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% databse for tests from the ISO/IEC 13211-1:1995/Cor.2:2012(en) standard, section 8.9.5.4
+
+elk(X) :- moose(X).
+
 :- dynamic(legs/2).
 legs(A, 4) :- animal(A).
 legs(octopus, 8).
@@ -92,7 +96,18 @@ foo(X) :- call(X), call(X).
 		% the second exception term is used in some of the Prolog compilers supporting modules
 		{retract((atom(X) :- X =='[]'))}.
 
+	% tests from the Logtalk portability work
+
 	throws(lgt_retract_1_12, error(instantiation_error,_)) :-
 		{retract(_)}.
+
+	throws(lgt_retract_1_13, [error(permission_error(modify,static_procedure,elk/1),_), error(permission_error(modify,static_procedure,':'(user,elk/1)),_)]) :-
+		% the second exception term is used in some of the Prolog compilers supporting modules
+		{retract((elk(_) :- _))}.
+
+	% tests from the ECLiPSe test suite
+
+	fails(eclipse_retract_1_14) :-
+		{retract(mammal(_))}.
 
 :- end_object.

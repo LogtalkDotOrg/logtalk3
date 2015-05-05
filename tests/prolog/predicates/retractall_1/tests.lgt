@@ -11,6 +11,8 @@
 
 % databse for tests from the ISO/IEC 13211-1:1995/Cor.2:2012(en) standard, section 8.9.5.4
 
+elk(X) :- moose(X).
+
 :- dynamic(insect/1).
 insect(ant).
 insect(bee).
@@ -46,5 +48,24 @@ insect(bee).
 
 	throws(lgt_retractall_1_06, error(instantiation_error,_)) :-
 		{retractall(_)}.
+
+	% tests from the ECLiPSe test suite
+
+	succeeds(eclipse_retractall_1_07) :-
+		{	assertz(insect(fly(house))),
+			assertz(insect(beetle(stag))),
+			assertz(insect(fly(fruit))),
+			retractall(insect(fly(_))),
+			\+ insect(fly(_)),
+			insect(I)
+		},
+		I == beetle(stag).
+
+	succeeds(eclipse_retractall_1_08) :-
+		{retractall(mammal(_))}.
+
+	throws(eclipse_retractall_1_09, [error(permission_error(modify,static_procedure,elk/1),_), error(permission_error(modify,static_procedure,':'(user,elk/1)),_)]) :-
+		% the second exception term is used in some of the Prolog compilers supporting modules
+		{retractall(elk(_))}.
 
 :- end_object.
