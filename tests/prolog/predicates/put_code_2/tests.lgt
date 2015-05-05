@@ -85,6 +85,7 @@
 	cleanup :-
 		^^clean_file(t),
 		^^clean_text_output,
-		^^clean_text_input.
+		^^clean_text_input,
+		^^clean_binary_output.
 
 :- end_object.
