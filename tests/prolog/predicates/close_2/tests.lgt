@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/11/21,
+		date is 2015/05/05,
 		comment is 'Unit tests for the ISO Prolog standard close/1-2 built-in predicates.'
 	]).
 
@@ -64,6 +64,17 @@
 	throws(sics_close_1_09, error(existence_error(stream,S),_)) :-
 		^^closed_output_stream(S, []),
 		{close(S)}.
+
+	% tests from the Logtalk portability work
+
+	succeeds(lgt_close_1_10) :-
+		{close(user_input)}.
+
+	succeeds(lgt_close_1_11) :-
+		{close(user_output)}.
+
+	succeeds(lgt_close_1_12) :-
+		{close(user_error)}.
 
 	cleanup :-
 		^^clean_file(foo).
