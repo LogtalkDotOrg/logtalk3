@@ -85,6 +85,10 @@
 		^^set_text_output(s, ''),
 		{close(s, [force(true)])}.
 
+	throws(lgt_close_1_15, error(existence_error(stream,S),_)) :-
+		^^closed_output_stream(S, []),
+		{close(S, [force(true)])}.
+
 	cleanup :-
 		^^clean_file(foo).
 
