@@ -49,7 +49,7 @@
 	succeeds(lgt_atom_1_08) :-
 		{atom(!)}.
 
-	succeeds(lgt_atom_1_08) :-
+	succeeds(lgt_atom_1_09) :-
 		{atom({})}.
 
 :- end_object.
