@@ -90,6 +90,7 @@
 		{close(S, [force(true)])}.
 
 	cleanup :-
-		^^clean_file(foo).
+		^^clean_file(foo),
+		^^clean_text_output.
 
 :- end_object.
