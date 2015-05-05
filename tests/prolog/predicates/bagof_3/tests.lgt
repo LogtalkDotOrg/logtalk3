@@ -26,9 +26,9 @@ b(2, 2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2015/05/05,
 		comment is 'Unit tests for the ISO Prolog standard bagof/3 built-in predicate.'
 	]).
 
@@ -94,5 +94,13 @@ b(2, 2).
 
 	throws(iso_bagof_3_14, error(type_error(callable,1),_)) :-
 		{bagof(_X, 1, _L)}.
+
+	% tests from the ECLiPSe test suite
+
+	throws(eclipse_bagof_3_15, error(type_error(list,12),_)) :-
+		{bagof(X, (X=2; X=1), 12)}.
+
+	throws(eclipse_bagof_3_16, error(type_error(list,[1|2]),_)) :-
+		{bagof(X, (X=2; X=1), [1|2])}.
 
 :- end_object.

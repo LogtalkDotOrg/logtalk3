@@ -38,9 +38,9 @@ setof_3_member(X, [_| L]) :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/11/21,
+		date is 2015/05/05,
 		comment is 'Unit tests for the ISO Prolog standard setof/3 built-in predicate.'
 	]).
 
@@ -198,5 +198,18 @@ setof_3_member(X, [_| L]) :-
 
 	throws(sics_setof_3_29, error(type_error(list,[A|1]),_)) :-
 		{setof(X, X=1, [A|1])}.
+
+	% tests from the Logtalk portability work
+
+	throws(lgt_setof_3_30, error(instantiation_error,_)) :-
+		{setof(_X, _Y^_Z, _L)}.
+
+	% tests from the ECLiPSe test suite
+
+	throws(eclipse_setof_3_31, error(type_error(list,12),_)) :-
+		{setof(X, (X=2; X=1), 12)}.
+
+	throws(eclipse_setof_3_32, error(type_error(list,[1|2]),_)) :-
+		{bagof(X, (X=2; X=1), [1|2])}.
 
 :- end_object.

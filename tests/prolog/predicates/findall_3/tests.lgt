@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2015/05/05,
 		comment is 'Unit tests for the ISO Prolog standard findall/3 built-in predicate.'
 	]).
 
@@ -30,11 +30,11 @@
 		S = [1+_].
 
 	succeeds(iso_findall_3_03) :-
-		{findall(_X,fail,L)},
+		{findall(_X, fail, L)},
 		L == [].
 
 	succeeds(iso_findall_3_04) :-
-		{findall(X,(X=1;X=1),S)},
+		{findall(X, (X=1;X=1), S)},
 		S == [1,1].
 
 	fails(iso_findall_3_05) :-
@@ -54,5 +54,10 @@
 
 	throws(sics_findall_3_09, error(type_error(list,[A|1]),_)) :-
 		{findall(X, X=1, [A|1])}.
+
+	% tests from the ECLiPSe test suite
+
+	throws(eclipse_findall_3_10, error(type_error(list,12),_)) :-
+		{findall(X, (X=2; X=1), 12)}.
 
 :- end_object.
