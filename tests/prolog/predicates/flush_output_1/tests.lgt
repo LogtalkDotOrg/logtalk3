@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/11/21,
+		date is 2015/05/05,
 		comment is 'Unit tests for the ISO Prolog standard flush_output/0-1 built-in predicates.'
 	]).
 
@@ -55,6 +55,14 @@
 		^^set_text_output(st_o, ''),
 		{flush_output(st_o)},
 		^^check_text_output(st_o, '').
+
+	% tests from the ECLiPSe test suite
+
+	throws(eclipse_flush_output_1_07, error(permission_error(output,stream,user_input),_)) :-
+		{flush_output(user_input)}.
+
+	succeeds(eclipse_flush_output_1_08) :-
+		{flush_output(user_output)}.
 
 	cleanup :-
 		^^clean_file(foo).
