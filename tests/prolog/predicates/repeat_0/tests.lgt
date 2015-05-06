@@ -13,15 +13,20 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2015/05/05,
 		comment is 'Unit tests for the ISO Prolog standard repeat/0 built-in predicate.'
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.15.3.4
 
-	fails(iso_repeat_1_01) :-
+	fails(iso_repeat_0_01) :-
 		{repeat, !, fail}.
+
+	% tests from the ECLiPSe test suite
+
+	succeeds(eclipse_repeat_0_02) :-
+		{repeat}.
 
 :- end_object.

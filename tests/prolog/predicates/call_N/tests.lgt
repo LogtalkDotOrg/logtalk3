@@ -21,14 +21,14 @@ call_n_maplist(Cont, [E|Es]) :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/04/13,
+		date is 2015/05/06,
 		comment is 'Unit tests for the ISO Prolog standard call/N built-in predicates.'
 	]).
 
 	:- discontiguous([
-		succeeds/1, fails/1
+		succeeds/1, fails/1, throws/2
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995/Cor.2:2012(en) standard, section 8.15.4.4
@@ -130,6 +130,36 @@ call_n_maplist(Cont, [E|Es]) :-
 		% try to delay the error to runtime
 		Goal = 1,
 		{call(Goal, _, _, _, _, _, _, _)}.
+
+	% tests from the ECLiPSe test suite
+
+	throws(eclipse_call_N_23, error(type_error(callable,(fail,3)),_)) :-
+		{call(',', fail, 3)}.
+
+	throws(eclipse_call_N_24, error(type_error(callable,(!;3)),_)) :-
+		{call(';', !, 3)}.
+
+	throws(eclipse_call_N_25, error(type_error(callable,(fail->3)),_)) :-
+		{call('->', fail, 3)}.
+
+	succeeds(eclipse_call_N_26) :-
+		findall(X, {call(',', C=!, (X=1,C;X=2))}, L),
+		L == [1, 2].
+
+	throws(eclipse_call_N_27, error(type_error(callable,(fail,3)),_)) :-
+		{call(','(fail), 3)}.
+
+	throws(eclipse_call_N_28, error(type_error(callable,(!;3)),_)) :-
+		{call(';'(!), 3)}.
+
+	throws(eclipse_call_N_29, error(type_error(callable,(fail->3)),_)) :-
+		{call('->'(fail), 3)}.
+
+	succeeds(eclipse_call_N_30) :-
+		findall(X, {call(','(C=!), (X=1,C;X=2))}, L),
+		L == [1, 2].
+
+	% auxiliary predicates
 
 	variable(_).
 
