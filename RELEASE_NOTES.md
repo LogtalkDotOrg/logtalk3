@@ -104,6 +104,10 @@ call.
 `clause/2`, `retract/1`, `retractall/1`, `call/2-8`, `open/4`, `atom_chars/2`,
 `atom_codes/2`, and `number_codes/2`, predicates.
 
+* ADDED: Tests for the soft-cut control construct, `(*->)/2`, which is slowly
+becoming a de facto standard. The tests are only run when using Prolog systems
+that provide this control construct.
+
 * FIXED: Tests for the de facto standard `between/3` predicate for XSB.
 
 * FIXED: Changed the auxiliary predicates used in testing standard arithmetic
