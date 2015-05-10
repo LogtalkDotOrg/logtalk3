@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Jekejeke Prolog 1.0.4 and later versions
-%  Last updated on February 16, 2015
+%  Last updated on May 10, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -259,7 +259,7 @@ format(Format, Arguments) :-
 '$lgt_prolog_feature'(prolog_version, (Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, jekejeke(Major, Minor, Patch)).
 '$lgt_prolog_feature'(prolog_compatible_version, '@>='((1, 0, 4))).
-'$lgt_prolog_feature'(prolog_conformance, iso_lax).
+'$lgt_prolog_feature'(prolog_conformance, lax).
 
 '$lgt_prolog_feature'(encoding_directive, source).
 '$lgt_prolog_feature'(tabling, unsupported).

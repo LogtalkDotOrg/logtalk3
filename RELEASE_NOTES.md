@@ -31,6 +31,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: Read-only `prolog_conformance` flag possible values to `strict`
+(for Prolog compilers claiming strict standards conformance) and `lax` (for
+Prolog compilers claiming only broad standards conformance).
+
 * ADDED: A `create_logtalk_flag/3` built-in predicate for creating new flags.
 Based on the specification of the `create_prolog_flag/3` built-in predicate of
 SWI-Prolog.

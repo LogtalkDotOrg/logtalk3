@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SICStus Prolog 4.1.0 and later versions
-%  Last updated on February 16, 2015
+%  Last updated on May 10, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -247,7 +247,7 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 '$lgt_prolog_feature'(prolog_version, (Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, sicstus(Major, Minor, Patch, _, _)).
 '$lgt_prolog_feature'(prolog_compatible_version, @>=((4,1,0))).
-'$lgt_prolog_feature'(prolog_conformance, iso_strict).
+'$lgt_prolog_feature'(prolog_conformance, strict).
 
 '$lgt_prolog_feature'(encoding_directive, source).
 '$lgt_prolog_feature'(tabling, unsupported).

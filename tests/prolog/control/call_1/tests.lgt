@@ -50,7 +50,7 @@ a(2).
 	throws(iso_call_1_05, error(instantiation_error,_)) :-
 		{b(_)}.
 
-	:- if(current_logtalk_flag(prolog_conformance, iso_strict)).
+	:- if(current_logtalk_flag(prolog_conformance, strict)).
 		throws(iso_call_1_06, error(type_error(callable,(write(3),3)),_)) :-
 			{b(3)}.
 	:- else.
@@ -79,7 +79,7 @@ a(2).
 	throws(iso_call_1_12, error(type_error(callable,1),_)) :-
 		{call(1)}.
 
-	:- if(current_logtalk_flag(prolog_conformance, iso_strict)).
+	:- if(current_logtalk_flag(prolog_conformance, strict)).
 		throws(iso_call_1_13, error(type_error(callable,(fail,1)),_)) :-
 			{call((fail, 1))}.
 

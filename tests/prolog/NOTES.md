@@ -76,9 +76,18 @@ provide a strict ISO mode that may result in different test results. This
 strict mode, when made available, is usually only used if it's the default
 when starting Logtalk.
 
-To find if the tests are run in strict ISO mode (`iso_strict`) or in lax ISO
-mode (`iso_lax`), check the value of the read-only flag `prolog_conformance`
-using the query:
+The ISO standard seems to allow two interpretations for the exception
+that should be generated when using an atom where a stream identifier
+or a stream alias is expected. A stream alias should only exist as long
+as the corresponding stream is open. Therefore, an atom that is not a
+stream alias can be interpreted as either a domain error (the atom is
+not a member of the current set of aliases) or a (stream) existence
+error (as there's not stream with such an alias). Currently, we accept
+both exception terms.
+
+To find if the tests are run in strict mode (`strict`) or in lax mode
+(`lax`), check the value of the read-only flag `prolog_conformance`using
+the query:
 
 	?- current_logtalk_flag(prolog_conformance, Mode).
 

@@ -180,7 +180,7 @@ setof_3_member(X, [_| L]) :-
 			{setof(f(X,Y),X=Y,[f(g(Z),Z)])}.
 	:- endif.
 
-	:- if(current_logtalk_flag(prolog_conformance, iso_strict)).
+	:- if(current_logtalk_flag(prolog_conformance, strict)).
 		throws(eddbali_setof_3_26, error(type_error(callable,(true;4)),_)) :-
 			{setof(X, X^(true; 4), _L)}.
 	:- else.

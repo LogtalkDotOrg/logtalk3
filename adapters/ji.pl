@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for JIProlog 4.0.14 or later versions
-%  Last updated on May 3, 2015
+%  Last updated on May 10, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -226,7 +226,7 @@ format(Format, Arguments) :-
 '$lgt_prolog_feature'(prolog_version, (Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, jiprolog(Major, Minor, Patch, _)).
 '$lgt_prolog_feature'(prolog_compatible_version, @>=((4,0,14))).
-'$lgt_prolog_feature'(prolog_conformance, iso_lax).
+'$lgt_prolog_feature'(prolog_conformance, lax).
 
 '$lgt_prolog_feature'(encoding_directive, source).
 '$lgt_prolog_feature'(tabling, unsupported).

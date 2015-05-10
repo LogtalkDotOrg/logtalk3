@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on February 16, 2015
+%  Last updated on May 10, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -255,7 +255,7 @@ setup_call_cleanup(_, _, _) :-
 '$lgt_prolog_feature'(prolog_version, (Major, Minor, Build)) :-
 	get_flag(version_as_list, [Major, Minor, Build]).
 '$lgt_prolog_feature'(prolog_compatible_version, @>=((6,1,143))).
-'$lgt_prolog_feature'(prolog_conformance, iso_lax).
+'$lgt_prolog_feature'(prolog_conformance, lax).
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
 '$lgt_prolog_feature'(tabling, unsupported).
