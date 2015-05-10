@@ -28,9 +28,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 2.2,
+		version is 2.3,
 		author is 'Paulo Moura',
-		date is 2015/04/08,
+		date is 2015/05/10,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, and multiple test dialects.'
 	]).
 
@@ -693,7 +693,7 @@
 				fail
 			).
 	:- elif((	current_logtalk_flag(prolog_dialect, Dialect),
-				(Dialect == cx; Dialect == sicstus; Dialect == xsb)
+				(Dialect == cx; Dialect == ji; Dialect == sicstus; Dialect == xsb)
 	)).
 		deterministic(Goal) :-
 			call_cleanup(Goal, Deterministic = true),

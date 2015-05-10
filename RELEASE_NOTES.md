@@ -64,6 +64,9 @@ the `open/4` built-in predicate.
 
 * IMPROVED: API documentation of the `lgtunit` tool.
 
+* UPDATED: The `debugger`, `lgtunit`, and `ports` tools now also support
+checking for deterministic calls when using JIProlog as the back-end compiler.
+
 * FIXED: The `lgtunit` tool now interprets `test/2` and `succeeds/1` facts as
 defining tests whose test goal is `true/0`. These tests, which always succeed,
 usually occur when using conditional compilation directives to select which

@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>2.2</code>
+            <code>2.3</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2015/4/8</code>
+            <code>2015/5/10</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -240,14 +240,14 @@
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
-              <code>set_text_input(+atom,+atom,+list) &ndash; one</code>
+              <code>set_text_input(+atom,+atom,+list(stream_option)) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
           <h3 id="set_text_input/2" class="code">set_text_input/2</h3>
           <blockquote>
-            <p class="comment">Creates a temporary file with the given text contents and opens it for reading referenced by the given alias and using the eof_action(error) option.</p>
+            <p class="comment">Creates a temporary file with the given text contents and opens it for reading referenced by the given alias and using the default end-of-file action for the used backend compiler.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -267,7 +267,7 @@
         <div class="section">
           <h3 id="set_text_input/1" class="code">set_text_input/1</h3>
           <blockquote>
-            <p class="comment">Creates a temporary file with the given text contents, opens it for reading using the eof_action(error) option, and sets the current input stream to the file.</p>
+            <p class="comment">Creates a temporary file with the given text contents, opens it for reading using the default end-of-file action for the used backend compiler, and sets the current input stream to the file.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -343,7 +343,7 @@
         <div class="section">
           <h3 id="set_binary_input/3" class="code">set_binary_input/3</h3>
           <blockquote>
-            <p class="comment">Creates a temporary file with the given binary contents and opens it for reading referenced with the given alias and using the eof_action(error) option.</p>
+            <p class="comment">Creates a temporary file with the given binary contents and opens it for reading referenced by the given alias and using the additional options. If not eof_action/1 option is specified, its value will be the default used by the backend compiler.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -356,14 +356,14 @@
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
-              <code>set_binary_input(+atom,+list(byte),+list) &ndash; one</code>
+              <code>set_binary_input(+atom,+list(byte),+list(stream_option)) &ndash; one</code>
             </dd>
           </dl>
         </div>
         <div class="section">
           <h3 id="set_binary_input/2" class="code">set_binary_input/2</h3>
           <blockquote>
-            <p class="comment">Creates a temporary file with the given binary contents and opens it for reading referenced with the given alias and using the additional options. If not eof_action/1 option is specified, its value will be the default used by the backend compiler.</p>
+            <p class="comment">Creates a temporary file with the given binary contents and opens it for reading referenced by the given alias and using the default end-of-file action for the used backend compiler.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -383,7 +383,7 @@
         <div class="section">
           <h3 id="set_binary_input/1" class="code">set_binary_input/1</h3>
           <blockquote>
-            <p class="comment">Creates a temporary file with the given binary contents, opens it for reading using the eof_action(error) option, and sets the current input stream to the file.</p>
+            <p class="comment">Creates a temporary file with the given binary contents, opens it for reading using the default end-of-file action for the used backend compiler, and sets the current input stream to the file.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
