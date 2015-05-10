@@ -20,9 +20,9 @@ a(3).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2015/02/26,
+		date is 2015/05/10,
 		comment is 'Unit tests for the de facto Prolog standard forall/2 built-in predicate.'
 	]).
 
@@ -50,7 +50,8 @@ a(3).
 	throws(commons_forall_2_08, error(instantiation_error,_)) :-
 		{forall(true, _)}.
 
-	throws(commons_forall_2_09, error(type_error(callable,1),_)) :-
+	throws(commons_forall_2_09, [error(type_error(callable,1),_), error(type_error(callable,':'(user,1)),_)]) :-
+		% the second exception term is used in some of the Prolog compilers supporting modules
 		Goal = 1,
 		{forall(Goal, true)}.
 
