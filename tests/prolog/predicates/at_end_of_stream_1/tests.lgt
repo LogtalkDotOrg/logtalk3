@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/11/07,
+		date is 2015/05/10,
 		comment is 'Unit tests for the ISO Prolog standard at_end_of_stream/0-1 built-in predicates.'
 	]).
 
@@ -26,14 +26,9 @@
 	throws(sics_at_end_of_stream_1_01, error(instantiation_error,_)) :-
 		{at_end_of_stream(_S)}.
 
-	:- if(current_logtalk_flag(prolog_conformance, iso_strict)).
-		throws(sics_at_end_of_stream_1_02, error(domain_error(stream_or_alias,foo),_)) :-
-			{at_end_of_stream(foo)}.
-	:- else.
-		throws(sics_at_end_of_stream_1_02, [error(domain_error(stream_or_alias,foo),_), error(existence_error(stream,foo),_)]) :-
-			% the second exception term is a common but not conforming alternative
-			{at_end_of_stream(foo)}.
-	:- endif.
+	throws(sics_at_end_of_stream_1_02, [error(domain_error(stream_or_alias,foo),_), error(existence_error(stream,foo),_)]) :-
+		% both exception terms seem to be acceptable in the ISO spec
+		{at_end_of_stream(foo)}.
 
 	throws(sics_at_end_of_stream_1_03, error(existence_error(stream,S),_)) :-
 		^^closed_output_stream(S, []),

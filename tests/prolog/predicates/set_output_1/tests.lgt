@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/11/06,
+		date is 2015/05/10,
 		comment is 'Unit tests for the ISO Prolog standard set_output/1 built-in predicate.'
 	]).
 
@@ -30,14 +30,9 @@
 	throws(sics_set_output_1_2, error(instantiation_error,_)) :-
 		{set_output(_S)}.
 
-	:- if(current_logtalk_flag(prolog_conformance, iso_strict)).
-		throws(sics_set_output_1_3, error(domain_error(stream_or_alias,foo),_)) :-
-			{set_output(foo)}.
-	:- else.
-		throws(sics_set_output_1_3, [error(domain_error(stream_or_alias,foo),_), error(existence_error(stream,foo),_)]) :-
-			% the second exception term is a common but not conforming alternative
-			{set_output(foo)}.
-	:- endif.
+	throws(sics_set_output_1_3, [error(domain_error(stream_or_alias,foo),_), error(existence_error(stream,foo),_)]) :-
+		% both exception terms seem to be acceptable in the ISO spec
+		{set_output(foo)}.
 
 	throws(sics_set_output_1_4, error(existence_error(stream,S),_)) :-
 		^^closed_output_stream(S, []),

@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2015/05/04,
+		date is 2015/05/10,
 		comment is 'Unit tests for the ISO Prolog standard peek_byte/1-2 built-in predicates.'
 	]).
 
@@ -63,14 +63,9 @@
 		^^set_binary_input([]),
 		{peek_byte(-2)}.
 
-	:- if(current_logtalk_flag(prolog_conformance, iso_strict)).
-		throws(sics_peek_byte_2_09, error(domain_error(stream_or_alias,foo),_)) :-
-			{peek_byte(foo,_)}.
-	:- else.
-		throws(sics_peek_byte_2_09, [error(domain_error(stream_or_alias,foo),_), error(existence_error(stream,foo),_)]) :-
-			% the second exception term is a common but not conforming alternative
-			{peek_byte(foo,_)}.
-	:- endif.
+	throws(sics_peek_byte_2_09, [error(domain_error(stream_or_alias,foo),_), error(existence_error(stream,foo),_)]) :-
+		% both exception terms seem to be acceptable in the ISO spec
+		{peek_byte(foo,_)}.
 
 	throws(sics_peek_byte_2_10, error(existence_error(stream,S),_)) :-
 		^^closed_input_stream(S, [type(binary)]),

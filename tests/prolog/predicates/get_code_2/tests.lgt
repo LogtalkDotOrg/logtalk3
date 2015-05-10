@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/05/04,
+		date is 2015/05/10,
 		comment is 'Unit tests for the ISO Prolog standard get_code/1-2 built-in predicates.'
 	]).
 
@@ -74,14 +74,9 @@
 	- throws(sics_get_code_2_10, error(representation_error(in_character_code),_)) :-
 		{get_code(-2)}.
 
-	:- if(current_logtalk_flag(prolog_conformance, iso_strict)).
-		throws(sics_get_code_2_11, error(domain_error(stream_or_alias,foo),_)) :-
-			{get_code(foo,_)}.
-	:- else.
-		throws(sics_get_code_2_11, [error(domain_error(stream_or_alias,foo),_), error(existence_error(stream,foo),_)]) :-
-			% the second exception term is a common but not conforming alternative
-			{get_code(foo,_)}.
-	:- endif.
+	throws(sics_get_code_2_11, [error(domain_error(stream_or_alias,foo),_), error(existence_error(stream,foo),_)]) :-
+		% both exception terms seem to be acceptable in the ISO spec
+		{get_code(foo,_)}.
 
 	throws(sics_get_code_2_12, error(existence_error(stream,S),_)) :-
 		^^closed_input_stream(S, []),

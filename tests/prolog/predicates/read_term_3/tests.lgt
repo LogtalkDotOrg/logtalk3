@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2015/05/04,
+		date is 2015/05/10,
 		comment is 'Unit tests for the ISO Prolog standard read_term/3, read_term/2, read/2, and read/1 built-in predicates.'
 	]).
 
@@ -79,14 +79,9 @@
 	throws(sics_read_term_3_11, error(instantiation_error,_)) :-
 		{read_term(user_input,_,[variables(_),_])}.
 
-	:- if(current_logtalk_flag(prolog_conformance, iso_strict)).
-		throws(sics_read_term_3_12, error(domain_error(stream_or_alias,foo),_)) :-
-			{read(foo, _)}.
-	:- else.
-		throws(sics_read_term_3_12, [error(domain_error(stream_or_alias,foo),_), error(existence_error(stream,foo),_)]) :-
-			% the second exception term is a common but not conforming alternative
-			{read(foo, _)}.
-	:- endif.
+	throws(sics_read_term_3_12, [error(domain_error(stream_or_alias,foo),_), error(existence_error(stream,foo),_)]) :-
+		% both exception terms seem to be acceptable in the ISO spec
+		{read(foo, _)}.
 
 	throws(sics_read_term_3_13, error(type_error(list,bar),_)) :-
 		{read_term(user_input, _, bar)}.

@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/05/05,
+		date is 2015/05/10,
 		comment is 'Unit tests for the ISO Prolog standard flush_output/0-1 built-in predicates.'
 	]).
 
@@ -29,14 +29,9 @@
 		{flush_output(S)},
 		^^check_text_file(Path, 'foo').
 
-	:- if(current_logtalk_flag(prolog_conformance, iso_strict)).
-		throws(sics_flush_output_1_02, error(domain_error(stream_or_alias,foo),_)) :-
-			{flush_output(foo)}.
-	:- else.
-		throws(sics_flush_output_1_02, [error(domain_error(stream_or_alias,foo),_), error(existence_error(stream,foo),_)]) :-
-			% the second exception term is a common but not conforming alternative
-			{flush_output(foo)}.
-	:- endif.
+	throws(sics_flush_output_1_02, [error(domain_error(stream_or_alias,foo),_), error(existence_error(stream,foo),_)]) :-
+		% both exception terms seem to be acceptable in the ISO spec
+		{flush_output(foo)}.
 
 	throws(sics_flush_output_1_03, error(instantiation_error,_)) :-
 		{flush_output(_S)}.

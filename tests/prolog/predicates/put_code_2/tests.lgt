@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/05/04,
+		date is 2015/05/10,
 		comment is 'Unit tests for the ISO Prolog standard put_code/1-2 built-in predicates.'
 	]).
 
@@ -65,14 +65,9 @@
 	throws(sics_put_code_2_10, error(representation_error(character_code),_)) :-
 		{put_code(-1)}.
 
-	:- if(current_logtalk_flag(prolog_conformance, iso_strict)).
-		throws(sics_put_code_2_11, error(domain_error(stream_or_alias,foo),_)) :-
-			{put_code(foo,1)}.
-	:- else.
-		throws(sics_put_code_2_11, [error(domain_error(stream_or_alias,foo),_), error(existence_error(stream,foo),_)]) :-
-			% the second exception term is a common but not conforming alternative
-			{put_code(foo,1)}.
-	:- endif.
+	throws(sics_put_code_2_11, [error(domain_error(stream_or_alias,foo),_), error(existence_error(stream,foo),_)]) :-
+		% both exception terms seem to be acceptable in the ISO spec
+		{put_code(foo, 1)}.
 
 	throws(lgt_put_code_2_12, error(permission_error(output,stream,s),_)) :-
 		^^set_text_input(s, ''),
