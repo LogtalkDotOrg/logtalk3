@@ -159,10 +159,10 @@ format(Format, Arguments) :-
 
 % '$lgt_prolog_meta_predicate'(@callable, ?callable, ?atom)
 
-'$lgt_prolog_meta_predicate'(checklist(_,_), checklist(1,*), predicate).
-'$lgt_prolog_meta_predicate'(maplist(_,_,_), maplist(2,*,*), predicate).
-'$lgt_prolog_meta_predicate'(not(_), not(0), predicate).
-'$lgt_prolog_meta_predicate'(one(_), one(0), predicate).
+'$lgt_prolog_meta_predicate'(Callable, Template, predicate) :-
+	predicate_property(Callable, meta_predicate(Template)),
+	predicate_property(Callable, built_in),
+	!.
 
 
 % '$lgt_prolog_meta_directive'(@callable, -callable)
