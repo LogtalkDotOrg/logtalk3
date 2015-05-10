@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/11/21,
+		date is 2015/05/10,
 		comment is 'Unit tests for the ISO Prolog standard stream_property/2 built-in predicate.'
 	]).
 
@@ -45,14 +45,8 @@
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
-	:- if(current_logtalk_flag(prolog_conformance, iso_strict)).
-		throws(sics_stream_property_2_03, error(domain_error(stream,foo),_)) :-
-			{stream_property(foo, _S)}.
-	:- else.
-		throws(sics_stream_property_2_03, [error(domain_error(stream,foo),_), error(existence_error(stream,foo),_)]) :-
-			% the second exception term is a common but not conforming alternative
-			{stream_property(foo, _S)}.
-	:- endif.
+	throws(sics_stream_property_2_03, error(domain_error(stream,foo),_)) :-
+		{stream_property(foo, _S)}.
 
 	throws(sics_stream_property_2_04, error(domain_error(stream_property,foo),_)) :-
 		{stream_property(_S, foo)}.
