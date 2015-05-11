@@ -14,6 +14,11 @@ Prolog standard (updated up to the ISO/IEC 13211-1:1995/Cor.2:2012(en)
 standard). Several tests originate from SICS and ECLiPSe and are used here
 with permission.
 
+This conformance suite also includes unit tests for Prolog features that are
+slowly becoming de facto standards (e.g. the `(*->)/2` control construct).
+These tests are skipped, however, when running on a system that doesn't provide
+such features.
+
 Writing these tests was made easier by rewriting and, whenever necessary,
 updating, the tests found on the Prolog ISO conformance testing framework
 written by Péter Szabó and Péter Szeredi, who gracefully allowed me to reuse
