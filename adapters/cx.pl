@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for CxProlog 0.97.7 or a later version
-%  Last updated on May 10, 2015
+%  Last updated on May 12, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -119,8 +119,8 @@ findall(Term, Goal, List, Tail) :-
 % setup_call_cleanup(+callable, +callable, +callable)
 
 setup_call_cleanup(Setup, Call, Cleanup) :-
-	call(Setup),
-	call_cleanup(Call, Cleanup).
+	once(Setup),
+	call_cleanup(Call, catch(Cleanup,_,true)).
 
 
 

@@ -55,6 +55,13 @@ conformance fixes. JIProlog 4.0.14 or a later version is now required.
 * UPDATED: The JIProlog and Lean Prolog to also accept the `US-ASCII` text
 encoding in addition to `UTF-8`.
 
+* UPDATED: The SICStus Prolog adapter file to only define the predicate
+`setup_call_cleanup/3` if not already defined. Also changed the definition
+to make make the setup goal call deterministic.
+
+* UPDATED: The CxProlog, XSB, and SICStus Prolog adapter files with a more
+compliant `setup_call_cleanup/3` implementation.
+
 Tools
 -----
 

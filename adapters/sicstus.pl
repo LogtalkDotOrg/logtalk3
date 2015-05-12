@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for SICStus Prolog 4.1.0 and later versions
-%  Last updated on May 10, 2015
+%  Last updated on May 12, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -138,9 +138,13 @@ forall(Generate, Test) :-
 
 % setup_call_cleanup(+callable, +callable, +callable)
 
-setup_call_cleanup(Setup, Call, Cleanup) :-
-	call(Setup),
-	call_cleanup(Call, Cleanup).
+:- if(\+ predicate_property(setup_call_cleanup(_,_,_), _)).
+
+	setup_call_cleanup(Setup, Call, Cleanup) :-
+		once(Setup),
+		call_cleanup(Call, catch(Cleanup,_,true)).
+
+:- endif.
 
 
 

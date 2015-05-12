@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for XSB 3.5.0 or later versions
-%  Last updated on May 10, 2015
+%  Last updated on May 12, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -105,15 +105,15 @@
 % setup_call_cleanup(+callable, +callable, +callable)
 
 setup_call_cleanup(Setup, Call, Cleanup) :-
-	call(Setup),
-	call_cleanup(Call, Cleanup).
+	once(Setup),
+	call_cleanup(Call, catch(Cleanup,_,true)).
 
 
 % setup_call_catcher_cleanup(+callable, +callable, ?term, +callable)
 
 setup_call_catcher_cleanup(Setup, Call, Catcher, Cleanup) :-
-	call(Setup),
-	catch(Call, Catcher, Cleanup).
+	once(Setup),
+	catch(Call, Catcher, catch(Cleanup,_,true)).
 
 
 
