@@ -52,8 +52,8 @@ in JIProlog.
 and includes other updates for recent changes, notably related to standards
 conformance fixes. JIProlog 4.0.14 or a later version is now required.
 
-* UPDATED: The JIProlog and Lean Prolog to also accept the 'US-ASCII' text
-encoding in addition to 'UTF-8'.
+* UPDATED: The JIProlog and Lean Prolog to also accept the `US-ASCII` text
+encoding in addition to `UTF-8`.
 
 Tools
 -----

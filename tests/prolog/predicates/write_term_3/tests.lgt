@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2015/05/10,
+		date is 2015/05/12,
 		comment is 'Unit tests for the ISO Prolog standard write_term/3, write_term/2, write/2, write/1, writeq/2, writeq/1, write_canonical/2, and write_canonical/1 built-in predicates.'
 	]).
 
@@ -90,7 +90,11 @@
 		{write_term(user_output, 1, 2)}.
 
 	throws(sics_write_term_3_16, error(type_error(list,[quoted(true)|foo]),_)) :-
-		{write_term(1, [quoted(true)|foo])}.
+		% originally the SICS contributed test wrote 1 but...
+		% {write_term(1, [quoted(true)|foo])}.
+		% ... Jan Wielemaker proposed we write instead '' to avoid messing
+		% with the consistency of the files that cache the test results 
+		{write_term('', [quoted(true)|foo])}.
 
 	throws(sics_write_term_3_17, [error(domain_error(stream_or_alias,foo),_), error(existence_error(stream,foo),_)]) :-
 		% both exception terms seem to be acceptable in the ISO spec
