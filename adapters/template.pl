@@ -110,8 +110,7 @@ numbervars(Term, From, Next) :-
 %
 %  the setup_call_cleanup/3 meta-predicate is only strictly required if
 %  the backend Prolog compiler supports a compatible multi-threading
-%  implementation but the unit test framework and the port profiler tool
-%  can also take advantage of it
+%  implementation but the developer tools can also take advantage of it
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
