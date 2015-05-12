@@ -15,9 +15,9 @@ standard). Several tests originate from SICS and ECLiPSe and are used here
 with permission.
 
 This conformance suite also includes unit tests for Prolog features that are
-slowly becoming de facto standards (e.g. the `(*->)/2` control construct).
-These tests are skipped, however, when running on a system that doesn't provide
-such features.
+slowly becoming de facto standards (e.g. the `(*->)/2` control construct or
+the `setup_call_cleanup/3` built-in predicate). These tests are skipped,
+however, when running on a system that doesn't provide such features.
 
 Writing these tests was made easier by rewriting and, whenever necessary,
 updating, the tests found on the Prolog ISO conformance testing framework
@@ -45,6 +45,7 @@ The test identifier prefixes indicate their origin:
 - `iso_` - tests from the ISO Prolog standards
 - `sics_` - tests contributed by SICS
 - `eclipse_` - tests contributed by ECLiPSe developers
+- `swi_` - tests contributed by SWI-Prolog developers
 - `eddbali_` - tests from A Ed-Dbali's test suite
 - `lgt_` - tests originating from work on Logtalk
 - `commons_` - tests for de facto standard Prolog features

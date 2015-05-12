@@ -115,6 +115,10 @@ call.
 becoming a de facto standard. The tests are only run when using Prolog systems
 that provide this control construct.
 
+* ADDED: Tests for the `setup_call_cleanup/3` predicate, contributed by
+SWI-Prolog. The tests are only run when using Prolog systems that provide
+this predicate.
+
 * FIXED: Tests for the de facto standard `between/3` predicate for XSB.
 
 * FIXED: Changed the auxiliary predicates used in testing standard arithmetic
