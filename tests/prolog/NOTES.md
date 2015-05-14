@@ -91,12 +91,10 @@ not a member of the current set of aliases) or a (stream) existence
 error (as there's not stream with such an alias). Currently, we accept
 both exception terms.
 
-To find if the tests are run in strict mode (`strict`) or in lax mode
-(`lax`), check the value of the read-only flag `prolog_conformance`using
-the query:
-
-	?- current_logtalk_flag(prolog_conformance, Mode).
-
-This flag is used mainly in testing error conditions. For some of those tests,
-when running in lax mode, exception terms may be accepted as valid if they are
-reasonable although non-compliant.
+In some test that check that an error condition generates the expected
+exception term, alternative exception terms are accepted iff the correct
+exception type is generated and the terms only differ on the culprit
+argument. For example, accepting `type_error(callable,1)` where the term
+`type_error(callable,(fail,1))` is expected. Another example is when the
+exception term contains a module-qualified culprit. For example, the
+system generation instead `type_error(callable,user:1)`.

@@ -23,9 +23,9 @@ a(2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.01,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2015/02/04,
+		date is 2015/05/14,
 		comment is 'Unit tests for the ISO Prolog standard call/1 built-in predicate.'
 	]).
 
@@ -50,14 +50,9 @@ a(2).
 	throws(iso_call_1_05, error(instantiation_error,_)) :-
 		{b(_)}.
 
-	:- if(current_logtalk_flag(prolog_conformance, strict)).
-		throws(iso_call_1_06, error(type_error(callable,(write(3),3)),_)) :-
-			{b(3)}.
-	:- else.
-		throws(iso_call_1_06, [error(type_error(callable,(write(3),3)),_), error(type_error(callable,3),_)]) :-
-			% the second exception term is a common but not conforming alternative
-			{b(3)}.
-	:- endif.
+	throws(iso_call_1_06, [error(type_error(callable,(write(3),3)),_), error(type_error(callable,3),_)]) :-
+		% the second exception term is a common but not strictly conforming alternative
+		{b(3)}.
 
 	succeeds(iso_call_1_07) :-
 		{(Z = !, call((Z=!, a(X), Z)))},
@@ -79,27 +74,16 @@ a(2).
 	throws(iso_call_1_12, error(type_error(callable,1),_)) :-
 		{call(1)}.
 
-	:- if(current_logtalk_flag(prolog_conformance, strict)).
-		throws(iso_call_1_13, error(type_error(callable,(fail,1)),_)) :-
-			{call((fail, 1))}.
+	throws(iso_call_1_13, [error(type_error(callable,(fail,1)),_), error(type_error(callable,1),_)]) :-
+		% the second exception term is a common but not strictly conforming alternative
+		{call((fail, 1))}.
 
-		throws(iso_call_1_14, error(type_error(callable,(write(3),1)),_)) :-
-			{call((write(3), 1))}.
+	throws(iso_call_1_14, [error(type_error(callable,(write(3),1)),_), error(type_error(callable,1),_)]) :-
+		% the second exception term is a common but not strictly conforming alternative
+		{call((write(3), 1))}.
 
-		throws(iso_call_1_15, error(type_error(callable,(1;true)),_)) :-
-			{call((1; true))}.
-	:- else.
-		throws(iso_call_1_13, [error(type_error(callable,(fail,1)),_), error(type_error(callable,1),_)]) :-
-			% the second exception term is a common but not conforming alternative
-			{call((fail, 1))}.
-
-		throws(iso_call_1_14, [error(type_error(callable,(write(3),1)),_), error(type_error(callable,1),_)]) :-
-			% the second exception term is a common but not conforming alternative
-			{call((write(3), 1))}.
-
-		throws(iso_call_1_15, [error(type_error(callable,(1;true)),_), error(type_error(callable,1),_)]) :-
-			% the second exception term is a common but not conforming alternative
-			{call((1; true))}.
-	:- endif.
+	throws(iso_call_1_15, [error(type_error(callable,(1;true)),_), error(type_error(callable,1),_)]) :-
+		% the second exception term is a common but not strictly conforming alternative
+		{call((1; true))}.
 
 :- end_object.

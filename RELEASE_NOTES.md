@@ -82,6 +82,10 @@ versions of the tests to run.
 Tests
 -----
 
+* CHANGED: The Prolog conformance tests no longer use the `prolog_conformance`
+flag. Instead, alternative test results are accepted if reasonable although
+not strictly compliant.
+
 * CHANGED: Tests for the `get_byte/2`, `get_char/2`, `get_code/2`,
 `peek_byte/2`, `peek_char/2`, `peek_code/2`, and `read_term/3` that check
 for the correct exception term when reading past the end of a stream to
