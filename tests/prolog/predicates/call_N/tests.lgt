@@ -21,9 +21,9 @@ call_n_maplist(Cont, [E|Es]) :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2015/05/14,
+		date is 2015/05/19,
 		comment is 'Unit tests for the ISO Prolog standard call/N built-in predicates.'
 	]).
 
@@ -133,15 +133,24 @@ call_n_maplist(Cont, [E|Es]) :-
 
 	% tests from the ECLiPSe test suite
 
-	throws(eclipse_call_N_23, [error(type_error(callable,(fail,3)),_), error(type_error(callable,3),_)]) :-
+	throws(eclipse_call_N_23, [
+			error(type_error(callable,(fail,3)),_), error(type_error(callable,3),_),
+			error(type_error(callable,('user':(fail),'user':(3))),_), error(type_error(callable,'user':(3)),_)
+			]) :-
 		% the second exception term is a common but not strictly conforming alternative
 		{call(',', fail, 3)}.
 
-	throws(eclipse_call_N_24, [error(type_error(callable,(!;3)),_), error(type_error(callable,3),_)]) :-
+	throws(eclipse_call_N_24, [
+			error(type_error(callable,(!;3)),_), error(type_error(callable,3),_),
+			error(type_error(callable,('user':(!);'user':(3))),_), error(type_error(callable,'user':(3)),_)
+			]) :-
 		% the second exception term is a common but not strictly conforming alternative
 		{call(';', !, 3)}.
 
-	throws(eclipse_call_N_25, [error(type_error(callable,(fail->3)),_), error(type_error(callable,3),_)]) :-
+	throws(eclipse_call_N_25, [
+			error(type_error(callable,(fail->3)),_), error(type_error(callable,3),_),
+			error(type_error(callable,('user':(fail)->'user':(3))),_), error(type_error(callable,'user':(3)),_)
+			]) :-
 		% the second exception term is a common but not strictly conforming alternative
 		{call('->', fail, 3)}.
 
@@ -149,15 +158,24 @@ call_n_maplist(Cont, [E|Es]) :-
 		findall(X, {call(',', C=!, (X=1,C;X=2))}, L),
 		L == [1, 2].
 
-	throws(eclipse_call_N_27, [error(type_error(callable,(fail,3)),_), error(type_error(callable,3),_)]) :-
+	throws(eclipse_call_N_27, [
+			error(type_error(callable,(fail,3)),_), error(type_error(callable,3),_),
+			error(type_error(callable,('user':(fail),'user':(3))),_), error(type_error(callable,'user':(3)),_)
+			]) :-
 		% the second exception term is a common but not strictly conforming alternative
 		{call(','(fail), 3)}.
 
-	throws(eclipse_call_N_28, [error(type_error(callable,(!;3)),_), error(type_error(callable,3),_)]) :-
+	throws(eclipse_call_N_28, [
+			error(type_error(callable,(!;3)),_), error(type_error(callable,3),_),
+			error(type_error(callable,('user':(!);'user':(3))),_), error(type_error(callable,'user':(3)),_)
+			]) :-
 		% the second exception term is a common but not strictly conforming alternative
 		{call(';'(!), 3)}.
 
-	throws(eclipse_call_N_29, [error(type_error(callable,(fail->3)),_), error(type_error(callable,3),_)]) :-
+	throws(eclipse_call_N_29, [
+			error(type_error(callable,(fail->3)),_), error(type_error(callable,3),_),
+			error(type_error(callable,('user':(fail)->'user':(3))),_), error(type_error(callable,'user':(3)),_)
+			]) :-
 		% the second exception term is a common but not strictly conforming alternative
 		{call('->'(fail), 3)}.
 
