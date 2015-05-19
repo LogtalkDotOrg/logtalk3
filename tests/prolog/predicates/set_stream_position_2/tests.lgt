@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/05/10,
+		date is 2015/05/19,
 		comment is 'Unit tests for the ISO Prolog standard set_stream_position/2 built-in predicate.'
 	]).
 
@@ -28,8 +28,11 @@
 		{set_stream_position(_S, Pos)}.
 
 	throws(sics_set_stream_position_2_02, error(instantiation_error,_)) :-
-		{current_input(S)},
-		{set_stream_position(S, _Pos)}.
+		% the original test used the current input stream but this results in a test that
+		% can trigger two different errors depending on the order of argument checking
+		% {current_input(S)},
+		^^set_text_input(st_i, '', [reposition(true)]),
+		{set_stream_position(st_i, _Pos)}.
 
 	throws(sics_set_stream_position_2_03, [error(domain_error(stream_or_alias,foo),_), error(existence_error(stream,foo),_)]) :-
 		% both exception terms seem to be acceptable in the ISO spec
@@ -42,8 +45,11 @@
 		{set_stream_position(S, Pos)}.
 
 	throws(sics_set_stream_position_2_05, error(domain_error(stream_position,foo),_)) :-
-		{current_input(S)},
-		{set_stream_position(S,foo)}.
+		% the original test used the current input stream but this results in a test that
+		% can trigger two different errors depending on the order of argument checking
+		% {current_input(S)},
+		^^set_text_input(st_i, '', [reposition(true)]),
+		{set_stream_position(st_i, foo)}.
 
 	throws(sics_set_stream_position_2_06, error(permission_error(reposition,stream,S),_)) :-
 		os::expand_path(foo, Path),
