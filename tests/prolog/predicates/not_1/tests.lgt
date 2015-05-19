@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/05/05,
+		date is 2015/05/19,
 		comment is 'Unit tests for the ISO Prolog standard (\\+)/1 built-in predicate.'
 	]).
 
@@ -37,7 +37,8 @@
 	succeeds(iso_not_1_05) :-
 		{'\\+'(4 = 5)}.
 
-	throws(iso_not_1_06, error(type_error(callable,3),_)) :-
+	throws(iso_not_1_06, [error(type_error(callable,3),_), error(type_error(callable,'\\+'(3)),_)]) :-
+		% the second exception term is a common but not strictly conforming alternative
 		% try to force runtime goal checking
 		G = '\\+'(3), {G}.
 

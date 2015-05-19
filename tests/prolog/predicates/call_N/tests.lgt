@@ -137,21 +137,21 @@ call_n_maplist(Cont, [E|Es]) :-
 			error(type_error(callable,(fail,3)),_), error(type_error(callable,3),_),
 			error(type_error(callable,('user':(fail),'user':(3))),_), error(type_error(callable,'user':(3)),_)
 			]) :-
-		% the second exception term is a common but not strictly conforming alternative
+		% the first exception term is the strictly conforming one
 		{call(',', fail, 3)}.
 
 	throws(eclipse_call_N_24, [
 			error(type_error(callable,(!;3)),_), error(type_error(callable,3),_),
 			error(type_error(callable,('user':(!);'user':(3))),_), error(type_error(callable,'user':(3)),_)
 			]) :-
-		% the second exception term is a common but not strictly conforming alternative
+		% the first exception term is the strictly conforming one
 		{call(';', !, 3)}.
 
 	throws(eclipse_call_N_25, [
 			error(type_error(callable,(fail->3)),_), error(type_error(callable,3),_),
 			error(type_error(callable,('user':(fail)->'user':(3))),_), error(type_error(callable,'user':(3)),_)
 			]) :-
-		% the second exception term is a common but not strictly conforming alternative
+		% the first exception term is the strictly conforming one
 		{call('->', fail, 3)}.
 
 	succeeds(eclipse_call_N_26) :-
@@ -162,21 +162,21 @@ call_n_maplist(Cont, [E|Es]) :-
 			error(type_error(callable,(fail,3)),_), error(type_error(callable,3),_),
 			error(type_error(callable,('user':(fail),'user':(3))),_), error(type_error(callable,'user':(3)),_)
 			]) :-
-		% the second exception term is a common but not strictly conforming alternative
+		% the first exception term is the strictly conforming one
 		{call(','(fail), 3)}.
 
 	throws(eclipse_call_N_28, [
 			error(type_error(callable,(!;3)),_), error(type_error(callable,3),_),
 			error(type_error(callable,('user':(!);'user':(3))),_), error(type_error(callable,'user':(3)),_)
 			]) :-
-		% the second exception term is a common but not strictly conforming alternative
+		% the first exception term is the strictly conforming one
 		{call(';'(!), 3)}.
 
 	throws(eclipse_call_N_29, [
 			error(type_error(callable,(fail->3)),_), error(type_error(callable,3),_),
 			error(type_error(callable,('user':(fail)->'user':(3))),_), error(type_error(callable,'user':(3)),_)
 			]) :-
-		% the second exception term is a common but not strictly conforming alternative
+		% the first exception term is the strictly conforming one
 		{call('->'(fail), 3)}.
 
 	succeeds(eclipse_call_N_30) :-
