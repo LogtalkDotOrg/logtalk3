@@ -82,7 +82,7 @@ following table summarizes the availability of these features:
 |  B-Prolog        |      yes      |       no      |       no      |       no      |  
 |  CxProlog        |       no      |      yes      |      yes      |       no      |  
 |  ECLiPSe         |       no      |      yes      |       no      |       no      |  
-|  JIProlog        |       no      |       no      |       no      |       no      |  
+|  JIProlog        |       no      |       no      |      yes      |       no      |  
 |  GNU Prolog      |       no      |       no      |       no      |       no      |  
 |  Lean Prolog     |       no      |       no      |      yes      |       no      |  
 |  Qu-Prolog       |       no      |       no      |       no      |       no      |  
@@ -182,7 +182,7 @@ GNU Prolog supports the ISO Prolog standard. No problems expected.
 You can generate a new Prolog top level that embeds Logtalk by following
 the steps (exemplified for POSIX systems):
 
-	$ makdir -p $HOME/collect
+	$ mkdir -p $HOME/collect
 	$ cd $HOME/collect
 	$ gplgt
 	...
@@ -217,6 +217,7 @@ to type:
 
 
 JIProlog 4.0.14 and later versions
+----------------------------------
 
 	ji.pl
 
@@ -230,7 +231,7 @@ To generate `.jip` files from Logtalk source files, use the built-in
 Logtalk can be embedded in JIProlog by creating a `logtalk.jar` by following
 these steps:
 
-	$ makdir -p $HOME/collect
+	$ mkdir -p $HOME/collect
 	$ cd $HOME/collect
 	$ jiplgt
 	...
@@ -401,8 +402,8 @@ to the library predicates.
 
 MacOS X users of the `SWI-Prolog.app` application, must add the definitions
 for the `LOGTALKHOME` and `LOGTALKUSER` environment variables to their
-`~/.plrc` init file (as Mac OS X GUI applications *don't* inherit shell
-environment variable values):
+`~/.plrc` or `~/.swiplrc` init file (as Mac OS X GUI applications *don't*
+inherit shell environment variable values):
 
 	:- setenv('LOGTALKHOME', ...).
 	:- setenv('LOGTALKUSER', ...).
@@ -419,7 +420,7 @@ file to the SWI-Prolog library directory and then use the query:
 
 If you want to load automatically Logtalk at startup and be able to use it
 with both the shell integration script and the Mac OS X GUI application, you
-can add to the `.plrc` init file the lines:
+can add to the `~/.plrc` or `~/.swiplrc` init file the lines:
 
 	:- if((current_prolog_flag(home,HOME), sub_atom(HOME,_,_,0,'SWI-Prolog.app/Contents/swipl'))).
 		:- ['$LOGTALKHOME/integration/logtalk_swi.pl'].
@@ -440,7 +441,7 @@ integration with the SWI-Prolog own development tools.
 
 
 XSB 3.5.0 and later versions
---------------------------
+----------------------------
 
 	xsb.pl
 
