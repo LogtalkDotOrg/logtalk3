@@ -76,11 +76,19 @@ SWI-Prolog, or YAP as the backend Prolog compiler.
 Failure of unit tests doesn't necessarily mean that a backend Prolog compiler
 is faulty. Standards are not perfect and there isn't always a community
 consensus on what should be the correct test results. Common causes of failure
-are corner cases in arithmetic operations where several compilers provide
-non-conforming but otherwise valid results. Moreover, some Prolog compilers
-provide a strict ISO mode that may result in different test results. This
-strict mode, when made available, is usually only used if it's the default
-when starting Logtalk.
+include:
+
+- corner cases in arithmetic operations where several systems provide
+non-conforming but otherwise valid results
+- several systems can also represent the character zero but the ISO standard
+specifies a domain error for predicates that peek or get the character zero
+(or its code)
+- type checking of output arguments of standard predicates, which is
+problematic from both semantics and performance perspectives
+
+Some Prolog compilers provide a strict ISO mode that may result in different
+test results. This strict mode, when made available, is usually only used if
+it's the default when starting Logtalk.
 
 The ISO standard seems to allow two interpretations for the exception
 that should be generated when using an atom where a stream identifier
