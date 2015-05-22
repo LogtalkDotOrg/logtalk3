@@ -120,7 +120,7 @@
 		^^set_text_output(s, ''),
 		{get_code(s, _)}.
 
-	throws(lgt_get_code_2_220, error(permission_error(input,binary_stream,s),_)) :-
+	throws(lgt_get_code_2_20, error(permission_error(input,binary_stream,s),_)) :-
 		^^set_binary_input(s, []),
 		{get_code(s, _)}.
 
