@@ -62,6 +62,9 @@ to make make the setup goal call deterministic.
 * UPDATED: The CxProlog, XSB, and SICStus Prolog adapter files with a more
 compliant `setup_call_cleanup/3` implementation.
 
+* UPDATED: The Qu-Prolog adapter file with workarounds for the missing
+`get_byte/1-2` and `put_byte/1-2` standard predicates.
+
 Tools
 -----
 
