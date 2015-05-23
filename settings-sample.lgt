@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  sample settings file
-%  Last updated on February 16, 2015
+%  Last updated on May 23, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -182,8 +182,7 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 
 
 %  To compile all your source files for debugging using the SWI-Prolog
-%  graphical tracer (stable version 6.2.0 or later; development version
-%  6.1.11 or later), uncomment the following lines:
+%  graphical tracer, uncomment the following lines:
 
 /*
 :- if(current_logtalk_flag(prolog_dialect, swi)).
@@ -209,8 +208,7 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 
 
 %  To compile all your source files for profiling using the SWI-Prolog
-%  graphical profiler (stable version 6.2.0 or later; development version
-%  6.1.11 or later), uncomment the following lines:
+%  graphical profiler, uncomment the following lines:
 
 /*
 :- if(current_logtalk_flag(prolog_dialect, swi)).

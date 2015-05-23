@@ -11,8 +11,8 @@ ________________________________________________________________________
 This directory contains a set of unit tests for Prolog official and de facto
 standard features. Most of these unit tests are taken from the official ISO
 Prolog standard (updated up to the ISO/IEC 13211-1:1995/Cor.2:2012(en)
-standard). Several tests originate from SICS and ECLiPSe and are used here
-with permission.
+standard). Several tests originate from SICS, ECLiPSe, and SWI-Prolog and are
+used here with permission.
 
 This conformance suite also includes unit tests for Prolog features that are
 slowly becoming de facto standards (e.g. the `(*->)/2` control construct or
@@ -20,7 +20,7 @@ the `setup_call_cleanup/3` built-in predicate). These tests are skipped,
 however, when running on a system that doesn't provide such features.
 
 Writing these tests was made easier by rewriting and, whenever necessary,
-updating, the tests found on the Prolog ISO conformance testing framework
+updating, the tests found on the ISO Prolog conformance testing framework
 written by Péter Szabó and Péter Szeredi, who gracefully allowed me to reuse
 their hard work. The framework is described in the following paper:
 
@@ -90,19 +90,18 @@ Some Prolog compilers provide a strict ISO mode that may result in different
 test results. This strict mode, when made available, is usually only used if
 it's the default when starting Logtalk.
 
-The ISO standard seems to allow two interpretations for the exception
-that should be generated when using an atom where a stream identifier
-or a stream alias is expected. A stream alias should only exist as long
-as the corresponding stream is open. Therefore, an atom that is not a
-stream alias can be interpreted as either a domain error (the atom is
-not a member of the current set of aliases) or a (stream) existence
-error (as there's not stream with such an alias). Currently, we accept
-both exception terms.
+The ISO Prolog standard seems to allow two interpretations for the exception
+that should be generated when using an atom where a stream identifier or a
+stream alias is expected. A stream alias should only exist as long as the
+corresponding stream is open. Therefore, an atom that is not a stream alias
+can be interpreted as either a domain error (the atom is not a member of the
+current set of aliases) or a (stream) existence error (as there's no stream
+with such an alias). Currently, we accept both exception terms.
 
-In some test that check that an error condition generates the expected
+In some tests that check that an error condition generates the expected
 exception term, alternative exception terms are accepted iff the correct
 exception type is generated and the terms only differ on the culprit
 argument. For example, accepting `type_error(callable,1)` where the term
 `type_error(callable,(fail,1))` is expected. Another example is when the
 exception term contains a module-qualified culprit. For example, the
-system generation instead `type_error(callable,user:1)`.
+system generating instead a `type_error(callable,user:1)` exception.

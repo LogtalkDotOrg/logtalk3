@@ -21,10 +21,9 @@ either SICStus Prolog 4 or YAP. The example includes two files:
 	simple wrapper for the SICStus Prolog 4 profiler
 
 Logtalk also supports the YAP tick profiler (using the latest YAP devel
-version) and the SWI-Prolog XPCE profiler (using SWI-Prolog devel 5.11.8
-or stable 5.10.2 or later versions). When using the XPCE profiler, you
-can avoid profiling the Logtalk compiler (which is invoked e.g. when you
-use the `(::)/2` message-sending operator at the top-level) by typing:
+version) and the SWI-Prolog XPCE profiler. When using the XPCE profiler,
+you can avoid profiling the Logtalk compiler (which is invoked e.g. when
+you use the `(::)/2` message-sending operator at the top-level) by typing:
 
 	| ?- logtalk << (prolog_statistics:profile(... :: ...)).
 
