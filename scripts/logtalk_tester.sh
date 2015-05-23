@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Unit testing automation script
-##   Last updated on April 16, 2015
+##   Last updated on May 23, 2015
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "`basename $0` 0.17"
+	echo "`basename $0` 0.18"
 	exit 0
 }
 
@@ -206,8 +206,7 @@ rm -f "$results"/tester_versions.txt
 date=`eval date \"+%Y-%m-%d %H:%M:%S\"`
 
 echo '*******************************************************************************'
-echo "***** Running unit tests"
-echo "*****         Date: $date"
+echo "***** Batch testing started @ $date"
 $logtalk_call $versions_goal > "$results"/tester_versions.txt 2> /dev/null
 grep -a "Logtalk version:" "$results"/tester_versions.txt
 grep -a "Prolog version:" "$results"/tester_versions.txt | sed "s/Prolog/$prolog/"
@@ -290,6 +289,11 @@ grep -a ': failure' *.results | LC_ALL=C sed 's/: failure//' | LC_ALL=C sed 's/.
 echo "*******************************************************************************"
 echo "***** $total tests: $skipped skipped, $passed passed, $failed failed"
 echo "*******************************************************************************"
+
+date=`eval date \"+%Y-%m-%d %H:%M:%S\"`
+
+echo "***** Batch testing ended @ $date"
+echo '*******************************************************************************'
 
 if [ $failed -eq 0 ] ; then
 	exit 0

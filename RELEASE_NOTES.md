@@ -82,6 +82,9 @@ versions of the tests to run.
 Tests
 -----
 
+* IMPROVED: The `logtalk_tester.sh` POSIX shell script now also prints the
+batch testing ending date and time.
+
 * CHANGED: The Prolog conformance tests no longer use the `prolog_conformance`
 flag. Instead, alternative test results are accepted if reasonable although
 not strictly compliant.
