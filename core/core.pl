@@ -19718,15 +19718,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_load_settings_file_from_directory'(Directory, Options, Result) :-
+	(	sub_atom(Directory, _, _, 0, '/') ->
+		DirectorySlash = Directory
+	;	atom_concat(Directory, '/', DirectorySlash)
+	),
 	(	'$lgt_file_extension'(logtalk, Extension),
 		% more than one possible extension may be listed in the used adapter file
 		atom_concat(settings, Extension, SettingsFile),
 		% construct full path to the possible settings file
-		(	sub_atom(Directory, _, _, 0, '/') ->
-			atom_concat(Directory, SettingsFile, SettingsPath)
-		;	atom_concat(Directory, '/', DirectorySlash),
-			atom_concat(DirectorySlash, SettingsFile, SettingsPath)
-		),
+		atom_concat(DirectorySlash, SettingsFile, SettingsPath),
 		'$lgt_file_exists'(SettingsPath) ->
 		% settings file found; try to load it
 		catch(
