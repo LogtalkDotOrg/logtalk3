@@ -49,7 +49,7 @@ Prolog adapter and integration files
 in JIProlog.
 
 * UPDATED: The JIProlog adapter file now sets the `unknown` flag to `error`
-and includes other updates for recent changes, notably related to standards
+and includes other updates for recent changes, notably related to standard
 conformance fixes. JIProlog 4.0.14 or a later version is now required.
 
 * UPDATED: The JIProlog and Lean Prolog to also accept the `US-ASCII` text
@@ -68,9 +68,9 @@ compliant `setup_call_cleanup/3` implementation.
 Tools
 -----
 
-* ADDED: Two new predicates, `set_text_input/3` and `set_binary_input/3`, to
-the `lgtunit` tool to allow passing extra options to the implicit calls to
-the `open/4` built-in predicate.
+* ADDED: Two predicates, `set_text_input/3` and `set_binary_input/3`, to the
+`lgtunit` tool to allow passing extra options to the implicit calls to the
+`open/4` built-in predicate.
 
 * IMPROVED: API documentation of the `lgtunit` tool.
 
