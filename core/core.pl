@@ -16700,7 +16700,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % category properties include all protocol properties
 '$lgt_valid_category_property'(Property) :-
 	'$lgt_valid_protocol_property'(Property), !.
-% messages sent from the object using the ::/2 control construct generate events
+% messages sent from the entity using the ::/2 control construct generate events
 '$lgt_valid_category_property'(events).
 % list of definition properties for a predicate defined in the category
 '$lgt_valid_category_property'(defines(_, _)).
@@ -16733,7 +16733,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 % object can be complemented by categories (old Logtalk 2.x property)
 '$lgt_valid_object_property'(complements).
 % object can be complemented by categories
-'$lgt_valid_object_property'(complements(_)).
+'$lgt_valid_object_property'(complements(Mode)) :-
+	(	Mode == allow
+	;	Mode == restrict
+	),
+	!.
 
 
 

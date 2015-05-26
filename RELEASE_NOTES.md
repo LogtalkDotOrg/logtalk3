@@ -42,6 +42,9 @@ SWI-Prolog.
 * IMPROVED: When printing warning and error line numbers, write "at or above"
 instead of "above" when the culprit term begin and end lines are the same. 
 
+* FIXED: Compiler test for valid `complements/1` object property where the
+argument was not checked.
+
 Prolog adapter and integration files
 ------------------------------------
 
