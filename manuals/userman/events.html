@@ -144,7 +144,7 @@ Note that this is the most general choice. If we wish a transparent presence of 
 <h2 id="events_order">Activation order of monitors</h2>
 
 <p>
-Ideally, whenever there are several monitors defined for the same event, the calling order should not interfere with the result. However, this is not always possible. In the case of an event of type <code>before</code>, the failure of a monitor prevents a message from being sent and prevents the execution of the remaining monitors. In case of an event of type <code>after</code>, a monitor failure will force backtracking over message execution. Different orders of monitor activation can therefore lead to different results if the monitor actions imply object modifications unrecoverable in case of backtracking. Therefore, the order for monitor activation must be always taken as arbitrary. In effect, to assume or to try to impose a specific sequence requires a global knowledge of an application dynamics, which is not always possible. Furthermore, that knowledge can reveal itself as incorrect if there is any changing in the execution conditions. Note that, given the independence between monitors, it does not make sense that a failure forces backtracking over the actions previously executed.
+Ideally, whenever there are several monitors defined for the same event, the calling order should not interfere with the result. However, this is not always possible. In the case of an event of type <code>before</code>, the failure of a monitor prevents a message from being sent and prevents the execution of the remaining monitors. In case of an event of type <code>after</code>, a monitor failure will force backtracking over message execution. Different orders of monitor activation can therefore lead to different results if the monitor actions imply object modifications unrecoverable in case of backtracking. Therefore, the order for monitor activation should be assumed as arbitrary. In effect, to assume or to try to impose a specific sequence requires a global knowledge of an application dynamics, which is not always possible. Furthermore, that knowledge can reveal itself as incorrect if there is any changing in the execution conditions. Note that, given the independence between monitors, it does not make sense that a failure forces backtracking over the actions previously executed.
 </p>
 
 <h2 id="events_handling">Event handling</h2>
@@ -249,7 +249,7 @@ The <code>monitoring</code> protocol declares the event handlers as public predi
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: February 14, 2015</span>
+		<span>Last updated on: May 26, 2015</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="inheritance.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="threads.html">next</a></span><br/>

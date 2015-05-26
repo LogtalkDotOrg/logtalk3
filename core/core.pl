@@ -15328,6 +15328,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		Goal2 = '$lgt_init_object_message_queue'(Prefix)
 	;	Goal2 = true
 	),
+	% an object may contain multiple initialization/1 directives
 	(	bagof(ObjectInitGoal, '$lgt_pp_final_object_initialization_'(ObjectInitGoal), ObjectInitGoals) ->
 		'$lgt_list_to_conjunction'(ObjectInitGoals, Goal3),
 		'$lgt_remove_redundant_calls'((Goal1, Goal2, Goal3), Goal)
@@ -15459,6 +15460,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_init_object_message_queue'(Prefix)
 	;	true
 	),
+	% an object may contain multiple initialization/1 directives
 	(	bagof(Goal, '$lgt_pp_final_object_initialization_'(Goal), GoalList) ->
 		'$lgt_list_to_conjunction'(GoalList, Goals),
 		once(Goals)
