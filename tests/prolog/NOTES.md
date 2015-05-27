@@ -81,8 +81,8 @@ include:
 - corner cases in arithmetic operations where several systems provide
 non-conforming but otherwise valid results
 - several systems can also represent the character zero but the ISO standard
-specifies a domain error for predicates that peek or get the character zero
-(or its code)
+specifies a representation error for predicates that peek or get the character
+zero (or its code)
 - type checking of output arguments of standard predicates, which is
 problematic from both semantics and performance perspectives
 
