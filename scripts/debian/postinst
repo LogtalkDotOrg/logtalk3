@@ -6,7 +6,7 @@
 ##   Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Logtalk Debian package auxiliary script
-##   Last updated on May 2, 2015
+##   Last updated on May 29, 2015
 ## 
 ##   This program is free software: you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
@@ -61,7 +61,7 @@ echo "* B-Prolog (version 7.8 or later):         bplgt"
 echo "* CxProlog (version 0.97.7 or later):      cxlgt"
 echo "* ECLiPSe (version 6.1#143 or later):      eclipselgt"
 echo "* GNU Prolog (version 1.4.2 or later):     gplgt"
-echo "* JIProlog (version 4.0.14 or later):      jiplgt      (first run may require sudo)"
+echo "* JIProlog (version 4.0.18 or later):      jiplgt      (first run may require sudo)"
 echo "* Lean Prolog (version 3.8.8 or later):    lplgt       (experimental)"
 echo "* Qu-Prolog (version 9.0 or later):        qplgt"
 echo "* Quintus Prolog (version 3.3 or later):   quintuslgt  (experimental)"

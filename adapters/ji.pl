@@ -3,8 +3,8 @@
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
-%  Adapter file for JIProlog 4.0.14 or later versions
-%  Last updated on May 10, 2015
+%  Adapter file for JIProlog 4.0.18 or later versions
+%  Last updated on May 29, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -225,7 +225,7 @@ format(Format, Arguments) :-
 '$lgt_prolog_feature'(prolog_dialect, ji).
 '$lgt_prolog_feature'(prolog_version, (Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, jiprolog(Major, Minor, Patch, _)).
-'$lgt_prolog_feature'(prolog_compatible_version, @>=((4,0,14))).
+'$lgt_prolog_feature'(prolog_compatible_version, @>=((4,0,18))).
 '$lgt_prolog_feature'(prolog_conformance, lax).
 
 '$lgt_prolog_feature'(encoding_directive, source).

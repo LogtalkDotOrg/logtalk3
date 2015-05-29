@@ -9,7 +9,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if((current_logtalk_flag(prolog_dialect, Dialect), Dialect \== b, Dialect \== ji, Dialect \== xsb)).
+:- if((current_logtalk_flag(prolog_dialect, Dialect), Dialect \== b, Dialect \== xsb)).
 
 	:- initialization((
 		set_logtalk_flag(report, warnings),
@@ -20,7 +20,7 @@
 
 :- else.
 
-	% B-Prolog 7.8#5, JIProlog 4.0, and XSB 3.5 and earlier
+	% B-Prolog 7.8#5 and XSB 3.5 and earlier
 	% versions don't support discontiguous predicates
 	:- initialization((
 		write('(not applicable)'), nl

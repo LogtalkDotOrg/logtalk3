@@ -27,6 +27,12 @@ RELEASE NOTES
 3.00.3 - June ??, 2015
 ======================
 
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: JIProlog 4.0.18 or a later version is now required as this version
+introduces support for the standard `discontiguous/1` directive.
+
 
 3.00.2 - May 27, 2015
 =====================
