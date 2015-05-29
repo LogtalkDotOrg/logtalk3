@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  Support for load-on-demand using SWI Prolog 6.6.0 and later versions
-%  Last updated on February 26, 2015
+%  Last updated on May 29, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@
 :- module(logtalk, []).
 
 :-	prolog_load_context(directory, Directory),
-	atom_concat(Directory, '/../logtalk-3.00.2/', Location),
+	atom_concat(Directory, '/../logtalk-3.00.3/', Location),
 	setenv('LOGTALKHOME', Location),
 	setenv('LOGTALKUSER', Location),
-	user:load_files('../logtalk-3.00.2/integration/logtalk_swi.pl').
+	user:load_files('../logtalk-3.00.3/integration/logtalk_swi.pl').
