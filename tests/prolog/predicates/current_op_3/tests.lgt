@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2014/06/01,
 		comment is 'Unit tests for the ISO Prolog standard current_op/3 built-in predicate.'
 	]).
 
@@ -37,9 +37,9 @@
 		{current_op(P, T, ':-')},
 		P == 1200, T == fx.
 
-	- succeeds(iso_current_op_3_04) :-
+	succeeds(iso_current_op_3_04) :-
 		{current_op(P, T, '?-')},
-		P == 1200, T == xfx.
+		P == 1200, T == fx.
 
 	succeeds(iso_current_op_3_05) :-
 		{current_op(P, T, ';')},

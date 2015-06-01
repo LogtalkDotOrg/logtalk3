@@ -40,6 +40,8 @@ Tests
 and `peek_code/2` predicate related to checking of the output argument are
 no longer skipped.
 
+* CHANGED: The test for the standard `(?-)/1` operator is no longer skipped.
+
 * FIXED: Tests for the standard `char_code/2`, `get_char/2`, `get_code/2`,
 `peek_char/2`, and `peek_code/2` predicates that check if a Prolog system
 can either represent the character zero or generates the expected exception
