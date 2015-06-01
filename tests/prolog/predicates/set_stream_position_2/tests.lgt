@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2015/05/19,
+		date is 2015/06/01,
 		comment is 'Unit tests for the ISO Prolog standard set_stream_position/2 built-in predicate.'
 	]).
 
@@ -57,6 +57,7 @@
 		{set_stream_position(S, Pos)}.
 
 	cleanup :-
+		^^clean_text_input,
 		^^clean_file(foo).
 
 :- end_object.
