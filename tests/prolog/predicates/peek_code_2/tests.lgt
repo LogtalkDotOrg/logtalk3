@@ -106,6 +106,8 @@
 		open(Path, read, Stream),
 		catch({peek_code(Stream, _)}, Error, Error = error(representation_error(character),_)).
 
+	% tests from the Logtalk portability work
+
 	succeeds(lgt_peek_code_2_18) :-
 		^^set_text_input(st_i, '', [eof_action(eof_code)]),
 		{get_code(st_i,_), peek_code(st_i,Code)},

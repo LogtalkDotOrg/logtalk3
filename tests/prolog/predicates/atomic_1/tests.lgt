@@ -40,6 +40,8 @@
 	succeeds(iso_atomic_1_05) :-
 		{atomic(3.3)}.
 
+	% tests from the Logtalk portability work
+
 	succeeds(lgt_atomic_1_06) :-
 		{atomic([])}.
 

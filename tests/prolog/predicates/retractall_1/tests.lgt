@@ -46,6 +46,8 @@ insect(bee).
 		% the second exception term is used in some of the Prolog compilers supporting modules
 		{retractall(retractall(_))}.
 
+	% tests from the Logtalk portability work
+
 	throws(lgt_retractall_1_06, error(instantiation_error,_)) :-
 		{retractall(_)}.
 

@@ -51,6 +51,8 @@
 		{PI is atan(1.0)*4, X is cos(PI/2.0)},
 		X =~= 0, PI =~= 3.14159.
 
+	% tests from the Logtalk portability work
+
 	throws(lgt_cos_1_06, error(type_error(evaluable,foo/1),_)) :-
 		% try to delay the error to runtime
 		foo(1, Foo),

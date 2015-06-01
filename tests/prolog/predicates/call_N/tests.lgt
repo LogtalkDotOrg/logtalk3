@@ -61,6 +61,8 @@ call_n_maplist(Cont, [E|Es]) :-
 		{call_n_maplist(=(_X), Xs)}, !,
 		Xs == [].
 
+	% tests from the Logtalk portability work
+
 	throws(lgt_call_N_09, error(instantiation_error,_)) :-
 		% try to delay the error to runtime
 		variable(X),

@@ -92,6 +92,8 @@
 	throws(iso_functor_3_18, error(domain_error(not_less_than_zero,-1),_)) :-
 		{G = functor(_T, foo, -1), call(G)}.
 
+	% tests from the Logtalk portability work
+
 	succeeds(lgt_functor_3_19) :-
 		{functor(T, [], 0)},
 		T == [].

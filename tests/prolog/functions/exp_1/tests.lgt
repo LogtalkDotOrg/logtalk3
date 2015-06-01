@@ -51,6 +51,8 @@
 		foo(0, Foo),
 		{_X is exp(Foo)}.
 
+	% tests from the Logtalk portability work
+
 	throws(lgt_exp_1_06, error(type_error(evaluable,foo/1),_)) :-
 		% try to delay the error to runtime
 		foo(1, Foo),

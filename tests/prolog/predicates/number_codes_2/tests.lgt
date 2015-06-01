@@ -107,6 +107,8 @@
 	throws(sics_number_codes_2_22, error(syntax_error(_),_)) :-
 		{number_codes(_X,[0'0,0'x,0'0,0'.,0'0])}.
 
+	% tests from the Logtalk portability work
+
 	% the ISO standard specifies a representation_error(character_code)
 	% but there seens to be some agreement between Prolog implementers
 	% that the correct exception in this case is a type_error(integer,a)

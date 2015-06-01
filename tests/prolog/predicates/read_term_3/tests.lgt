@@ -141,6 +141,8 @@
 		{read(X)},
 		X == Integer.
 
+	% tests from the Logtalk portability work
+
 	succeeds(lgt_read_term_3_24) :-
 		^^set_text_input(st_o, '', [eof_action(eof_code)]),
 		get_code(st_o, _),

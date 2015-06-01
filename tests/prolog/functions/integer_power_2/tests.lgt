@@ -62,6 +62,8 @@
 		{X is 2^ -1.5},
 		X =~= 0.353553.
 
+	% tests from the Logtalk portability work
+
 	throws(lgt_integer_power_2_10, error(instantiation_error,_)) :-
 		% try to delay the error to runtime
 		variable(N),

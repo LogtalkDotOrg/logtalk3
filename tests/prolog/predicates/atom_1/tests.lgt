@@ -46,6 +46,8 @@
 	fails(iso_atom_1_07) :-
 		{atom(3.3)}.
 
+	% tests from the Logtalk portability work
+
 	succeeds(lgt_atom_1_08) :-
 		{atom(!)}.
 

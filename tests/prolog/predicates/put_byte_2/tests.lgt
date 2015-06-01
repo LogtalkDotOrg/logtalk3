@@ -72,6 +72,8 @@
 		% both exception terms seem to be acceptable in the ISO spec
 		{put_byte(foo, 1)}.
 
+	% tests from the Logtalk portability work
+
 	throws(lgt_put_byte_2_13, error(permission_error(output,stream,s),_)) :-
 		^^set_binary_input(s, []),
 		{put_byte(s, 99)}.

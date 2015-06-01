@@ -83,6 +83,8 @@
 		{open(Path, write, _, [alias(a)]),
 		 open(bar, write, _, [alias(a)])}.
 
+	% tests from the Logtalk portability work
+
 	throws(lgt_open_4_17, error(instantiation_error,_)) :-
 		{open(foo, write, _, [_|_])}.
 

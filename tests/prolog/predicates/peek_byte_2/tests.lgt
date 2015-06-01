@@ -84,6 +84,8 @@
 		^^set_binary_input(st_i, [], [eof_action(error)]),
 		{get_byte(st_i,_), peek_byte(st_i,_)}.
 
+	% tests from the Logtalk portability work
+
 	succeeds(lgt_peek_byte_2_14) :-
 		^^set_binary_input(st_i, [], [eof_action(eof_code)]),
 		{get_byte(st_i,_), peek_byte(st_i,Byte)},

@@ -69,6 +69,8 @@
 		% both exception terms seem to be acceptable in the ISO spec
 		{put_code(foo, 1)}.
 
+	% tests from the Logtalk portability work
+
 	throws(lgt_put_code_2_12, error(permission_error(output,stream,s),_)) :-
 		^^set_text_input(s, ''),
 		{put_code(s, 1)}.

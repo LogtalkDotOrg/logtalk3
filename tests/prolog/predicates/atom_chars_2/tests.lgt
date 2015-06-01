@@ -84,6 +84,8 @@
 		{atom_chars(A, ['P','é','c','s'])},
 		A == 'Pécs'.
 
+	% tests from the Logtalk portability work
+
 	throws(lgt_atom_chars_2_16, error(type_error(character,1),_)) :-
 		{atom_chars(abc, [1,2,3])}.
 

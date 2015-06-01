@@ -50,6 +50,8 @@
 	throws(iso_log_1_06, error(evaluation_error(undefined),_)) :-
 		{_X is log(0.0)}.
 
+	% tests from the Logtalk portability work
+
 	throws(lgt_log_1_07, error(type_error(evaluable,foo/1),_)) :-
 		% try to delay the error to runtime
 		foo(1, Foo),

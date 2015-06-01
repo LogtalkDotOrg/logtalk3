@@ -36,6 +36,8 @@
 	throws(iso_asin_1_03, error(evaluation_error(undefined),_)) :-
 		{_X is asin(2)}.
 
+	% tests from the Logtalk portability work
+
 	throws(lgt_asin_1_04, error(instantiation_error,_)) :-
 		% try to delay the error to runtime
 		variable(X),

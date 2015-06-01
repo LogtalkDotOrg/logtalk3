@@ -94,7 +94,7 @@
 		;	true
 		).
 
-	% standard order tests
+	% standard order tests from the Logtalk portability work
 
 	succeeds(lgt_term_comparison_20) :-
 		{'@<'(_X, 1.1)}.

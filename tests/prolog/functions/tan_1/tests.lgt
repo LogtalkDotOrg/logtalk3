@@ -29,6 +29,8 @@
 		{X is tan(0.5)},
 		X =~= 0.5463.
 
+	% tests from the Logtalk portability work
+
 	throws(lgt_tan_1_02, error(instantiation_error,_)) :-
 		% try to delay the error to runtime
 		variable(X),

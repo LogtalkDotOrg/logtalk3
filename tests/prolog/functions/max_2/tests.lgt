@@ -29,6 +29,8 @@
 		{X is max(2.0, 3.0)},
 		X == 3.0.
 
+	% tests from the Logtalk portability work
+
 	throws(lgt_max_2_03, error(instantiation_error,_)) :-
 		% try to delay the error to runtime
 		variable(N),

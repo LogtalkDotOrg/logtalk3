@@ -33,6 +33,8 @@
 		% implementation defined value
 		{_X is xor(-10, 12)}.
 
+	% tests from the Logtalk portability work
+
 	throws(lgt_xor_2_04, error(instantiation_error,_)) :-
 		% try to delay the error to runtime
 		variable(N),

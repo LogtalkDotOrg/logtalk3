@@ -104,6 +104,8 @@
 		open(Path, read, Stream),
 		catch({peek_char(Stream, _)}, Error, Error = error(representation_error(character),_)).
 
+	% tests from the Logtalk portability work
+
 	succeeds(lgt_peek_char_2_17) :-
 		^^set_text_input(s, '', [eof_action(eof_code)]),
 		{get_char(s, end_of_file), peek_char(s, end_of_file)}.

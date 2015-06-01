@@ -50,6 +50,8 @@
 		foo(0, Foo),
 		{_X is sqrt(Foo)}.
 
+	% tests from the Logtalk portability work
+
 	throws(lgt_sqrt_1_07, error(type_error(evaluable,foo/1),_)) :-
 		% try to delay the error to runtime
 		foo(1, Foo),

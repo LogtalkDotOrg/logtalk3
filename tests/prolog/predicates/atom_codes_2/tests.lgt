@@ -66,6 +66,8 @@
 	throws(eddbali_atom_codes_2_11, error(representation_error(character_code),_)) :-
 		{atom_codes(_A, [0'i,0's,-1])}.
 
+	% tests from the Logtalk portability work
+
 	throws(lgt_atom_codes_2_12, error(type_error(integer,a),_)) :-
 		{atom_codes(abc, [a,b,c])}.
 

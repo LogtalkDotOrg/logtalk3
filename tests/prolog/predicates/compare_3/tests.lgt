@@ -42,7 +42,7 @@
 	throws(iso_compare_3_06, error(domain_error(order,>=),_)) :-
 		{compare(>=, 3, 3.0)}.
 
-	% standard order tests
+	% standard order tests from the Logtalk portability work
 
 	succeeds(lgt_compare_3_07) :-
 		{compare(<, _X, 1.1)}.

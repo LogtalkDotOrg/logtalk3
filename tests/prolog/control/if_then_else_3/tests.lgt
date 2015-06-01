@@ -56,6 +56,8 @@
 		% if-then-else control construct!
 		{';'(('->'(!,fail), true), true)}.
 
+	% tests from the Logtalk portability work
+
 	succeeds(lgt_if_then_else_3_10) :-
 		% correct test goal for the botched TC1 fix in the previous test?
 		% it makes sense to test for correct semantics when a cut is found

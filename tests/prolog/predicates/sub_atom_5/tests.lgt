@@ -147,6 +147,8 @@
 		findall(B-L-A, {sub_atom(abracadabra,B,L,A,abra)}, L),
 		L == [0-4-7, 7-4-0].
 
+	% tests from the Logtalk portability work
+
 	succeeds(lgt_sub_atom_5_36) :-
 		forall({sub_atom('123', _, _, _, SA)}, {atom(SA)}).
 

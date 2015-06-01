@@ -29,6 +29,8 @@
 		{X is min(2.0, 3.0)},
 		X == 2.0.
 
+	% tests from the Logtalk portability work
+
 	throws(lgt_min_2_03, error(instantiation_error,_)) :-
 		% try to delay the error to runtime
 		variable(N),

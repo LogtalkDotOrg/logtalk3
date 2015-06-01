@@ -70,6 +70,8 @@
 		current_output(S),
 		{put_char(a)}.
 
+	% tests from the Logtalk portability work
+
 	throws(lgt_put_char_2_12, error(permission_error(output,stream,s),_)) :-
 		^^set_text_input(s, ''),
 		{put_char(s, a)}.

@@ -117,6 +117,8 @@
 		current_output(S),
 		{write(a)}.
 
+	% tests from the Logtalk portability work
+
 	throws(lgt_write_term_3_22, error(permission_error(output,stream,s),_)) :-
 		^^set_text_input(s, ''),
 		{write(s, a)}.

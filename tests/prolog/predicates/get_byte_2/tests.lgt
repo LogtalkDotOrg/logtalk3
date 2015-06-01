@@ -87,6 +87,8 @@
 		stream_property(S, alias(st_i)),
 		stream_property(S, end_of_stream(past)).
 
+	% tests from the Logtalk portability work
+
 	succeeds(lgt_get_byte_2_14) :-
 		^^set_binary_input(st_i, [], [eof_action(eof_code)]),
 		{get_byte(st_i,_), get_byte(st_i,Byte)},

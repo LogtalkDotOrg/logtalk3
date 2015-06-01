@@ -59,6 +59,8 @@
 			{'\\+'(X=f(X))}.
 	:- endif.
 
+	% tests from the Logtalk portability work
+
 	succeeds(lgt_not_1_09) :-
 		{'\\+'('\\+'(X=1))},
 		var(X).

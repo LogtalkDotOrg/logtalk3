@@ -78,6 +78,8 @@ p :-
 		{catch(coo(_X), Y, true)},
 		Y = error(instantiation_error,_).
 
+	% tests from the Logtalk portability work
+
 	succeeds(lgt_catch_3_09) :-
 		{catch(_, Y, true)},
 		Y = error(instantiation_error,_).
