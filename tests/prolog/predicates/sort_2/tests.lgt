@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/05/05,
+		date is 2015/06/01,
 		comment is 'Unit tests for the ISO Prolog standard sort/2 built-in predicate.'
 	]).
 
@@ -31,7 +31,7 @@
 
 	succeeds(iso_sort_2_02) :-
 		{sort([1+Y, z, a, V, 1, 2, V, 1, 7.0, 8.0, 1+Y, 1+2, 8.0, -a, -X, a], Sorted)},
-		Sorted = [V, 7.0, 8.0, 1, 2, a, z, -X, -a, 1+Y, 1+2].
+		Sorted == [V, 7.0, 8.0, 1, 2, a, z, -X, -a, 1+Y, 1+2].
 
 	fails(iso_sort_2_03) :-
 		{sort([1, 1], [1, 1])}.
@@ -51,9 +51,9 @@
 
 	succeeds(iso_sort_2_05) :-
 		{sort([f(U),U,U,f(V),f(U),V],L)},
-		(	L = [U,V,f(U),f(V)] ->
+		(	L == [U,V,f(U),f(V)] ->
 			true
-		;	L = [V,U,f(V),f(U)]
+		;	L == [V,U,f(V),f(U)]
 		).
 
 	% tests from the ECLiPSe test suite

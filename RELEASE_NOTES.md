@@ -41,6 +41,10 @@ Tests
 can either represent the character zero or generates the expected exception
 otherwise. Thanks to Ulrich Neumerkel for the bug report.
 
+* FIXED: Tests for the standard `sort/2` predicate where term equality was
+not being used to check test results. Thanks to Ulrich Neumerkel for the
+bug report.
+
 
 3.00.2 - May 27, 2015
 =====================
