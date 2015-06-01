@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/10/14,
+		date is 2015/06/01,
 		comment is 'Unit tests for the ISO Prolog standard char_code/2 built-in predicate.'
 	]).
 
@@ -53,5 +53,10 @@
 
 	throws(eddbali_char_code_2_09, error(representation_error(character_code),_)) :-
 		{char_code(_Char, -2)}.
+
+	% tests from the Logtalk portability work
+
+	succeeds(lgt_char_code_2_10) :-
+		catch({char_code(_, 0)}, Error, Error = error(representation_error(character_code),_)).
 
 :- end_object.

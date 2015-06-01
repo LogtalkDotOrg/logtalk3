@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2015/05/10,
+		date is 2015/06/01,
 		comment is 'Unit tests for the ISO Prolog standard peek_char/1-2 built-in predicates.'
 	]).
 
@@ -98,11 +98,11 @@
 		{peek_char(Stream, C1), peek_char(Stream, C1), peek_char(Stream, C2)},
 		C1 == end_of_file, C2 == end_of_file.
 
-	throws(sics_peek_char_2_16, error(representation_error(character),_)) :-
+	succeeds(sics_peek_char_2_16) :-
 		os::expand_path(t, Path),
 		^^create_binary_file(Path, [0]),
 		open(Path, read, Stream),
-		{peek_char(Stream, _)}.
+		catch({peek_char(Stream, _)}, Error, Error = error(representation_error(character),_)).
 
 	succeeds(lgt_peek_char_2_17) :-
 		^^set_text_input(s, '', [eof_action(eof_code)]),

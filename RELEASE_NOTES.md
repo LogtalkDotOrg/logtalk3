@@ -33,6 +33,14 @@ Prolog adapter and integration files
 * UPDATED: JIProlog 4.0.18 or a later version is now required as this version
 introduces support for the standard `discontiguous/1` directive.
 
+Tests
+-----
+
+* FIXED: Tests for the standard `char_code/2`, `get_char/2`, `get_code/2`,
+`peek_char/2`, and `peek_code/2` predicates that check if a Prolog system
+can either represent the character zero or generates the expected exception
+otherwise. Thanks to Ulrich Neumerkel for the bug report.
+
 
 3.00.2 - May 27, 2015
 =====================

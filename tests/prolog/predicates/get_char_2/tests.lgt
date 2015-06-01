@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2015/05/10,
+		date is 2015/06/01,
 		comment is 'Unit tests for the ISO Prolog standard get_char/1-2 built-in predicates.'
 	]).
 
@@ -102,11 +102,13 @@
 		C1 == end_of_file, C2 == end_of_file,
 		stream_property(S, end_of_stream(past)).
 
-	throws(sics_get_char_2_16, error(representation_error(character),_)) :-
+	succeeds(sics_get_char_2_16) :-
 		os::expand_path(t, Path),
 		^^create_binary_file(Path, [0]),
 		open(Path, read, S),
-		{get_char(S, _)}.
+		catch({get_char(S, _)}, Error, Error = error(representation_error(character),_)).
+
+	% tests from the Logtalk portability work
 
 	succeeds(lgt_get_char_2_17) :-
 		^^set_text_input(st_i, '', [eof_action(eof_code)]),
