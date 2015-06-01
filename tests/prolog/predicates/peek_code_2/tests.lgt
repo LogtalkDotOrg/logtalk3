@@ -13,7 +13,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.5,
+		version is 1.6,
 		author is 'Paulo Moura',
 		date is 2015/06/01,
 		comment is 'Unit tests for the ISO Prolog standard peek_code/1-2 built-in predicates.'
@@ -62,12 +62,15 @@
 		{peek_code(_, _)}.
 
 	throws(sics_peek_code_2_08, error(type_error(integer,p),_)) :-
+		^^set_text_input('foo'),
 		{peek_code(p)}.
 
 	throws(sics_peek_code_2_09, error(type_error(integer,p),_)) :-
-		{peek_code(user_input,p)}.
+		^^set_text_input(st_i, 'foo'),
+		{peek_code(st_i, p)}.
 
 	throws(sics_peek_code_2_10, error(representation_error(in_character_code),_)) :-
+		^^set_text_input('foo'),
 		{peek_code(-2)}.
 
 	throws(sics_peek_code_2_11, [error(domain_error(stream_or_alias,foo),_), error(existence_error(stream,foo),_)]) :-

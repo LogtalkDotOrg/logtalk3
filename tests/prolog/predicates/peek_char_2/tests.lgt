@@ -13,7 +13,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.6,
+		version is 1.7,
 		author is 'Paulo Moura',
 		date is 2015/06/01,
 		comment is 'Unit tests for the ISO Prolog standard peek_char/1-2 built-in predicates.'
@@ -68,10 +68,12 @@
 		{peek_char(_, _)}.
 
 	throws(sics_peek_char_2_09, error(type_error(in_character,1),_)) :-
+		^^set_text_input('foo'),
 		{peek_char(1)}.
 
 	throws(sics_peek_char_2_10, error(type_error(in_character,1),_)) :-
-		{peek_char(user_input, 1)}.
+		^^set_text_input(st_i, 'foo'),
+		{peek_char(st_i, 1)}.
 
 	throws(sics_peek_char_2_11, [error(domain_error(stream_or_alias,foo),_), error(existence_error(stream,foo),_)]) :-
 		% both exception terms seem to be acceptable in the ISO spec
