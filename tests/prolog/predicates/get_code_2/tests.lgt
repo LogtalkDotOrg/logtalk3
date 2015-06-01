@@ -13,7 +13,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
 		date is 2015/06/01,
 		comment is 'Unit tests for the ISO Prolog standard get_code/1-2 built-in predicates.'
@@ -63,15 +63,13 @@
 	throws(sics_get_code_2_07, error(instantiation_error,_)) :-
 		{get_code(_, _)}.
 
-	% skip the next three tests for now as some Prolog systems don't type check the output argument
-
-	- throws(sics_get_code_2_08, error(type_error(integer,p),_)) :-
+	throws(sics_get_code_2_08, error(type_error(integer,p),_)) :-
 		{get_code(p)}.
 
-	- throws(sics_get_code_2_09, error(type_error(integer,p),_)) :-
+	throws(sics_get_code_2_09, error(type_error(integer,p),_)) :-
 		{get_code(user_input,p)}.
 
-	- throws(sics_get_code_2_10, error(representation_error(in_character_code),_)) :-
+	throws(sics_get_code_2_10, error(representation_error(in_character_code),_)) :-
 		{get_code(-2)}.
 
 	throws(sics_get_code_2_11, [error(domain_error(stream_or_alias,foo),_), error(existence_error(stream,foo),_)]) :-

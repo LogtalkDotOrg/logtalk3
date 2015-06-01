@@ -13,7 +13,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.5,
+		version is 1.6,
 		author is 'Paulo Moura',
 		date is 2015/06/01,
 		comment is 'Unit tests for the ISO Prolog standard peek_char/1-2 built-in predicates.'
@@ -67,12 +67,10 @@
 	throws(sics_peek_char_2_08, error(instantiation_error,_)) :-
 		{peek_char(_, _)}.
 
-	% skip the next two tests for now as some Prolog systems don't type check the output argument
-
-	- throws(sics_peek_char_2_09, error(type_error(in_character,1),_)) :-
+	throws(sics_peek_char_2_09, error(type_error(in_character,1),_)) :-
 		{peek_char(1)}.
 
-	- throws(sics_peek_char_2_10, error(type_error(in_character,1),_)) :-
+	throws(sics_peek_char_2_10, error(type_error(in_character,1),_)) :-
 		{peek_char(user_input, 1)}.
 
 	throws(sics_peek_char_2_11, [error(domain_error(stream_or_alias,foo),_), error(existence_error(stream,foo),_)]) :-
