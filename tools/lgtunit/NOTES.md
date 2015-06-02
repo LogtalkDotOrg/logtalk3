@@ -76,8 +76,7 @@ Unit tests can be written using any of the following dialects:
 	test(Test) :- Goal.
 
 This is the most simple dialect, allowing the specification of tests
-that are expected to succeed. However, tests that are expected to throw
-an error cannot be specified. A more versatile dialect is:
+that are expected to succeed. A more versatile dialect is:
 
 	succeeds(Test) :- Goal.
 	deterministic(Test) :- Goal.
@@ -90,8 +89,11 @@ expected to succeed. For `deterministic/1` tests, `Goal` is expected to
 succeed once without leaving a choice-point. For `fails/1` tests, `Goal`
 is expected to fail. For `throws/2` tests, `Goal` is expected to throw
 the exception term `Ball` or one of the exception terms in the list
-`Balls`. An alternative test dialect that can be used with the same
-expressive power is:
+`Balls`. The specified exception must subsume the generated exception
+for the test to succeed.
+
+An alternative test dialect that can be used with the same expressive
+power is:
 
 	test(Test, Outcome) :- Goal.
 
