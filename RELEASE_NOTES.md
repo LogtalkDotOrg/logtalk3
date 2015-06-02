@@ -51,6 +51,9 @@ otherwise. Thanks to Ulrich Neumerkel for the bug report.
 not being used to check test results. Thanks to Ulrich Neumerkel for the
 bug report.
 
+* FIXED: Test for the standard `clause/2` predicate that assumed that static
+predicates cannot be inspected.
+
 
 3.00.2 - May 27, 2015
 =====================
