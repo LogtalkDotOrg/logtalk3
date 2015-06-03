@@ -52,7 +52,10 @@ object:
 
 	:- object(tests,
 		extends(lgtunit)).
-	...
+
+		...
+
+	:- end_object.
 
 The source files defining the test objects must be compiled using the option
 `hook(lgtunit)`. For example:
@@ -135,7 +138,8 @@ the `cover/1` predicate.
 
 For examples of how to write unit tests, check the `tests` folder or the
 `testing` example in the `examples` folder in the Logtalk distribution.
-Most of the provided examples also include unit tests.
+Most of the provided examples also include unit tests, some of them with
+code coverage.
 
 Parameterized unit tests can be easily defined by using parametric objects.
 
