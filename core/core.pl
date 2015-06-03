@@ -3803,7 +3803,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_send_to_self'(+object_identifier, ?term, +object_identifier)
+% '$lgt_send_to_self'(?term, +object_identifier, +compilation_context)
 %
 % runtime processing of a message sending call when the arguments are not
 % known at compile time
