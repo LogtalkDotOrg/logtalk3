@@ -33,6 +33,11 @@ Prolog adapter and integration files
 * UPDATED: JIProlog 4.0.18 or a later version is now required as this version
 introduces support for the standard `discontiguous/1` directive.
 
+Tools
+-----
+
+* IMPROVED: Minor performance optimization for the compilation of test files.
+
 Tests
 -----
 

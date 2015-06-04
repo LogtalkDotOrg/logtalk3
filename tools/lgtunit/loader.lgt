@@ -23,7 +23,7 @@
 
 
 :- initialization((
-	logtalk_load(library(dates_loader)),
 	logtalk_load(library(os_loader)),
+	logtalk_load(library(dates_loader)),
 	logtalk_load([lgtunit, lgtunit_messages], [optimize(on)])
 )).

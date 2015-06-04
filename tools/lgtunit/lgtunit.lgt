@@ -28,9 +28,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 2.3,
+		version is 2.4,
 		author is 'Paulo Moura',
-		date is 2015/05/10,
+		date is 2015/06/04,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, and multiple test dialects.'
 	]).
 
@@ -399,8 +399,10 @@
 
 	run_tests([], _).
 	run_tests([Test| Tests], File) :-
+		% save the current input and output streams
 		current_input(Input), current_output(Output),
 		run_test(Test, File),
+		% restore the current input and output streams
 		set_input(Input), set_output(Output),
 		run_tests(Tests, File).
 
@@ -523,39 +525,10 @@
 
 	% different unit test idioms are supported using the term-expansion mechanism;
 	% the unit test objects must be loaded using this object as an hook object
-	%
-	% we make sure that context-switching calls are enabled to help the user in
-	% debugging failed unit tests
-	term_expansion(
-			(:- object(Test, Relation)),
-			[(:- object(Test, Relation)), (:- set_logtalk_flag(context_switching_calls,allow))]) :-
-		reset_compilation_counters.
-	term_expansion(
-			(:- object(Test, Relation1, Relation2)),
-			[(:- object(Test, Relation1, Relation2)), (:- set_logtalk_flag(context_switching_calls,allow))]) :-
-		reset_compilation_counters.
-	term_expansion(
-			(:- object(Test, Relation1, Relation2, Relation3)),
-			[(:- object(Test, Relation1, Relation2, Relation3)), (:- set_logtalk_flag(context_switching_calls,allow))]) :-
-		reset_compilation_counters.
-	term_expansion(
-			(:- object(Test, Relation1, Relation2, Relation3, Relation4)),
-			[(:- object(Test, Relation1, Relation2, Relation3, Relation4)), (:- set_logtalk_flag(context_switching_calls,allow))]) :-
-		reset_compilation_counters.
-	term_expansion(
-			(:- object(Test, Relation1, Relation2, Relation3, Relation4, Relation5)),
-			[(:- object(Test, Relation1, Relation2, Relation3, Relation4, Relation5)), (:- set_logtalk_flag(context_switching_calls,allow))]) :-
-		reset_compilation_counters.
 
-	% the discontiguous/1 directives usually required when using some of the
-	% unit tests idioms are no longer necessary after term-expanding them 
-	term_expansion((:- discontiguous(PI)), Expansion) :-
-		ground(PI),
-		filter_discontiguous_directive(PI, Filtered),
-		(	Filtered == [] ->
-			Expansion = []
-		;	Expansion = (:- discontiguous(Filtered))
-		).
+	term_expansion((:- Directive), Terms) :-
+		% delegate to another predicate to take advantage of first-argument indexing
+		directive_expansion(Directive, Terms).
 
 	% skipped tests
 	term_expansion((- Head :- _), []) :-
@@ -616,13 +589,46 @@
 		logtalk_load_context(term_position, Position),
 		assertz(test_(throws(Test, Errors, Position))).
 
-	% collect all unit test identifiers when reching the end_object/0 directive 
-	term_expansion((:- end_object), [(run_tests :- ::run_tests(Tests, File)), (:- end_object)]) :-
-		findall(Test, retract(test_(Test)), Tests),
-		logtalk_load_context(source, File).
-
 	% support the deprecated unit/1 predicate which may still be in use in old code
 	term_expansion(unit(Entity), [cover(Entity)]).
+
+	% we make sure that context-switching calls are enabled to help the user in
+	% debugging failed unit tests
+	directive_expansion(
+			object(Test, Relation),
+			[(:- object(Test, Relation)), (:- set_logtalk_flag(context_switching_calls,allow))]) :-
+		reset_compilation_counters.
+	directive_expansion(
+			object(Test, Relation1, Relation2),
+			[(:- object(Test, Relation1, Relation2)), (:- set_logtalk_flag(context_switching_calls,allow))]) :-
+		reset_compilation_counters.
+	directive_expansion(
+			object(Test, Relation1, Relation2, Relation3),
+			[(:- object(Test, Relation1, Relation2, Relation3)), (:- set_logtalk_flag(context_switching_calls,allow))]) :-
+		reset_compilation_counters.
+	directive_expansion(
+			object(Test, Relation1, Relation2, Relation3, Relation4),
+			[(:- object(Test, Relation1, Relation2, Relation3, Relation4)), (:- set_logtalk_flag(context_switching_calls,allow))]) :-
+		reset_compilation_counters.
+	directive_expansion(
+			object(Test, Relation1, Relation2, Relation3, Relation4, Relation5),
+			[(:- object(Test, Relation1, Relation2, Relation3, Relation4, Relation5)), (:- set_logtalk_flag(context_switching_calls,allow))]) :-
+		reset_compilation_counters.
+
+	% the discontiguous/1 directives usually required when using some of the
+	% unit tests idioms are no longer necessary after term-expanding them 
+	directive_expansion(discontiguous(PI), Expansion) :-
+		ground(PI),
+		filter_discontiguous_directive(PI, Filtered),
+		(	Filtered == [] ->
+			Expansion = []
+		;	Expansion = (:- discontiguous(Filtered))
+		).
+
+	% collect all unit test identifiers when reching the end_object/0 directive 
+	directive_expansion(end_object, [(run_tests :- ::run_tests(Tests, File)), (:- end_object)]) :-
+		findall(Test, retract(test_(Test)), Tests),
+		logtalk_load_context(source, File).
 
 	filter_discontiguous_directive((PI,PIs), Filtered) :-
 		filter_discontiguous_directive(PI, FilteredHead),
