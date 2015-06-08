@@ -121,6 +121,20 @@ The possible values of the outcome argument are:
 - `balls(Balls)`  
 	the test is expected to throw an exception term `Ball` where `Ball` is an element of the list `Balls`
 
+Some tests may require individual setup and/or cleanup goals. in this case,
+the following alternative test dialect can be used:
+
+	test(Test, Outcome, Options) :- Goal.
+
+The currently supported options are (non-recognized options are ignored):
+
+- `condition(Goal)`  
+	condition for deciding if the test should be run or skipped (default goal is `true`)
+- `setup(Goal)`  
+	setup goal for the test (default goal is `true`)
+- `cleanup(Goal)`  
+	cleanup goal for the test (default goal is `true`)
+
 In all dialects, `Test` is an atom, uniquely identifying a test. An error
 message is printed if duplicated identifiers are found. These errors must
 be corrected otherwise the test results can be misleading.
@@ -146,6 +160,15 @@ Parameterized unit tests can be easily defined by using parametric objects.
 Note: when using the `(<<)/2` debugging control construct to access and test
 an object internal predicates, make sure that the `context_switching_calls`
 compiler flag is set to `allow` for those objects.
+
+
+Testing non-deterministic predicates
+------------------------------------
+
+For testing non-deterministic predicates, you use wrap the test goal using the
+standard `findall/3` predicate to collect all solutions and check against the
+list of expected solutions. When the expected solutions are a set, use in
+alternative the standard `setof/3` predicate.
 
 
 Testing input/output predicates

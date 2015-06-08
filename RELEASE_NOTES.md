@@ -36,7 +36,10 @@ introduces support for the standard `discontiguous/1` directive.
 Tools
 -----
 
-* IMPROVED: Minor performance optimization for the compilation of test files.
+* ADDED: Support for a `test/3` unit test dialect to the `lgtunit` tool to
+allow specification of per test condition, setup, and cleanup goals.
+
+* IMPROVED: Minor performance optimizations for the compilation of test files.
 
 Tests
 -----

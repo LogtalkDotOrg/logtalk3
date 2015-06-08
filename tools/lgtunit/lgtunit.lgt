@@ -28,9 +28,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 2.4,
+		version is 2.5,
 		author is 'Paulo Moura',
-		date is 2015/06/04,
+		date is 2015/06/08,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, and multiple test dialects.'
 	]).
 
@@ -308,12 +308,12 @@
 		argnames is ['Identifier', 'Outcome']
 	]).
 
-	:- private(test_/1).
-	:- dynamic(test_/1).
-	:- mode(test_(?compound), zero_or_more).
-	:- info(test_/1, [
+	:- private(test_/2).
+	:- dynamic(test_/2).
+	:- mode(test_(?atom, ?compound), zero_or_more).
+	:- info(test_/2, [
 		comment is 'Table of defined tests.',
-		argnames is ['Test']
+		argnames is ['Identifier', 'Test']
 	]).
 
 	:- private(skipped_/1).
@@ -410,6 +410,68 @@
 	run_tests :-
 		run_tests([], _).
 
+	% test/3 dialect
+	run_test(succeeds(Test, Position, Condition, Setup, Cleanup), File) :-
+		(	run_test_condition(Test, Condition) ->
+			(	run_test_setup(Test, Setup) ->
+				(	catch(::test(Test, true), Error, failed_test(Test, File, Position, error_instead_of_success(Error))) ->
+					(	var(Error) ->
+						passed_test(Test, File, Position)
+					;	true
+					)
+				;	failed_test(Test, File, Position, failure_instead_of_success)
+				),
+				run_test_cleanup(Test, Cleanup)
+			;	true
+			)
+		;	skipped_test(Test, File, Position)
+		).
+	run_test(deterministic(Test, Position, Condition, Setup, Cleanup), File) :-
+		(	run_test_condition(Test, Condition) ->
+			(	run_test_setup(Test, Setup) ->
+				(	catch(::test(Test, deterministic), Error, failed_test(Test, File, Position, error_instead_of_success(Error))) ->
+					(	var(Error) ->
+						passed_test(Test, File, Position)
+					;	true
+					)
+				;	failed_test(Test, File, Position, failure_instead_of_success)
+				),
+				run_test_cleanup(Test, Cleanup)
+			;	true
+			)
+		;	skipped_test(Test, File, Position)
+		).
+	run_test(fails(Test, Position, Condition, Setup, Cleanup), File) :-
+		(	run_test_condition(Test, Condition) ->
+			(	run_test_setup(Test, Setup) ->
+				(	catch(::test(Test, fail), Error, failed_test(Test, File, Position, error_instead_of_failure(Error))) ->
+					(	var(Error) ->
+						failed_test(Test, File, Position, success_instead_of_failure)
+					;	true
+					)
+				;	passed_test(Test, File, Position)
+				),
+				run_test_cleanup(Test, Cleanup)
+			;	true
+			)
+		;	skipped_test(Test, File, Position)
+		).
+	run_test(throws(Test, PossibleErrors, Position, Condition, Setup, Cleanup), File) :-
+		(	run_test_condition(Test, Condition) ->
+			(	run_test_setup(Test, Setup) ->
+				(	catch(::test(Test, PossibleErrors), Error, check_error(Test, PossibleErrors, Error, File, Position)) ->
+					(	var(Error) ->
+						failed_test(Test, File, Position, success_instead_of_error)
+					;	true
+					)
+				;	failed_test(Test, File, Position, failure_instead_of_error)
+				),
+				run_test_cleanup(Test, Cleanup)
+			;	true
+			)
+		;	skipped_test(Test, File, Position)
+		).
+	% other dialects
 	run_test(succeeds(Test, Position), File) :-
 		(	catch(::test(Test, true), Error, failed_test(Test, File, Position, error_instead_of_success(Error))) ->
 			(	var(Error) ->
@@ -442,6 +504,7 @@
 			)
 		;	failed_test(Test, File, Position, failure_instead_of_error)
 		).
+
 	run_test(skipped(Test, Position), File) :-
 		skipped_test(Test, File, Position).
 
@@ -489,6 +552,29 @@
 		increment_skipped_tests_counter,
 		print_message(information, lgtunit, skipped_test(Test, File, Position)).
 
+	run_test_condition(Test, Goal) :-
+		(	Goal == true ->
+			true
+		;	catch({Goal}, Error, (broken_step(Test,condition,Error), fail))
+		).
+
+	run_test_setup(Test, Goal) :-
+		(	Goal == true ->
+			true
+		;	catch({Goal}, Error, (broken_step(Test,setup,Error), fail)) ->
+			true
+		;	failed_step(Test, setup),
+			fail
+		).
+
+	run_test_cleanup(Test, Goal) :-
+		(	Goal == true ->
+			true
+		;	catch({Goal}, Error, broken_step(Test,cleanup,Error)) ->
+			true
+		;	failed_step(Test, cleanup)
+		).
+
 	broken_step(Step, Error) :-
 		self(Self),
 		print_message(error, lgtunit, broken_step(Step, Self, Error)).
@@ -497,8 +583,16 @@
 		self(Self),
 		print_message(error, lgtunit, failed_step(Step, Self)).
 
+	broken_step(Test, Step, Error) :-
+		self(Self),
+		print_message(error, lgtunit, broken_step(Test, Step, Self, Error)).
+
+	failed_step(Test, Step) :-
+		self(Self),
+		print_message(error, lgtunit, failed_step(Test, Step, Self)).
+
 	reset_compilation_counters :-
-		retractall(test_(_)).
+		retractall(test_(_, _)).
 
 	increment_skipped_tests_counter :-
 		::retract(skipped_(Old)),
@@ -535,7 +629,24 @@
 		test_idiom_head(Head, Test),
 		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
-		assertz(test_(skipped(Test, Position))).
+		assertz(test_(Test, skipped(Test, Position))).
+
+	% unit test idiom test/3
+	term_expansion((test(Test, Outcome0, Options) :- Goal0), [(test(Test, Outcome) :- Goal)]) :-
+		callable(Outcome0),
+		convert_test_outcome(Outcome0, Goal0, Outcome, Goal),
+		check_for_valid_test_identifier(Test),
+		logtalk_load_context(term_position, Position),
+		parse_test_options(Options, Test, Condition, Setup, Cleanup),
+		(	Outcome == true ->
+			assertz(test_(Test, succeeds(Test, Position, Condition, Setup, Cleanup)))
+		;	Outcome == deterministic ->
+			assertz(test_(Test, deterministic(Test, Position, Condition, Setup, Cleanup)))
+		;	Outcome == fail ->
+			assertz(test_(Test, fails(Test, Position, Condition, Setup, Cleanup)))
+		;	% errors
+			assertz(test_(Test, throws(Test, Outcome, Position, Condition, Setup, Cleanup)))
+		).
 
 	% unit test idiom test/2
 	term_expansion((test(Test, Outcome0) :- Goal0), [(test(Test, Outcome) :- Goal)]) :-
@@ -544,42 +655,42 @@
 		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
 		(	Outcome == true ->
-			assertz(test_(succeeds(Test, Position)))
+			assertz(test_(Test, succeeds(Test, Position)))
 		;	Outcome == deterministic ->
-			assertz(test_(deterministic(Test, Position)))
+			assertz(test_(Test, deterministic(Test, Position)))
 		;	Outcome == fail ->
-			assertz(test_(fails(Test, Position)))
+			assertz(test_(Test, fails(Test, Position)))
 		;	% errors
-			assertz(test_(throws(Test, Outcome, Position)))
+			assertz(test_(Test, throws(Test, Outcome, Position)))
 		).
 
 	% unit test idiom test/1
 	term_expansion((test(Test)), [test(Test, true)]) :-
 		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
-		assertz(test_(succeeds(Test, Position))).
+		assertz(test_(Test, succeeds(Test, Position))).
 	term_expansion((test(Test) :- Goal), [(test(Test, true) :- Goal)]) :-
 		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
-		assertz(test_(succeeds(Test, Position))).
+		assertz(test_(Test, succeeds(Test, Position))).
 
 	% unit test idiom succeeds/1 + deterministic/1 + fails/1 + throws/2
 	term_expansion((succeeds(Test)), [test(Test, true)]) :-
 		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
-		assertz(test_(succeeds(Test, Position))).
+		assertz(test_(Test, succeeds(Test, Position))).
 	term_expansion((succeeds(Test) :- Goal), [(test(Test, true) :- Goal)]) :-
 		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
-		assertz(test_(succeeds(Test, Position))).
+		assertz(test_(Test, succeeds(Test, Position))).
 	term_expansion((deterministic(Test) :- Goal), [(test(Test, deterministic) :- lgtunit::deterministic(Goal))]) :-
 		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
-		assertz(test_(deterministic(Test, Position))).
+		assertz(test_(Test, deterministic(Test, Position))).
 	term_expansion((fails(Test) :- Goal), [(test(Test, fail) :- Goal)]) :-
 		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
-		assertz(test_(fails(Test, Position))).
+		assertz(test_(Test, fails(Test, Position))).
 	term_expansion((throws(Test, Balls) :- Goal), [(test(Test, Errors) :- Goal)]) :-
 		check_for_valid_test_identifier(Test),
 		(	Balls = [_| _] ->
@@ -587,7 +698,7 @@
 		;	Errors = [Balls]
 		),
 		logtalk_load_context(term_position, Position),
-		assertz(test_(throws(Test, Errors, Position))).
+		assertz(test_(Test, throws(Test, Errors, Position))).
 
 	% support the deprecated unit/1 predicate which may still be in use in old code
 	term_expansion(unit(Entity), [cover(Entity)]).
@@ -627,7 +738,7 @@
 
 	% collect all unit test identifiers when reching the end_object/0 directive 
 	directive_expansion(end_object, [(run_tests :- ::run_tests(Tests, File)), (:- end_object)]) :-
-		findall(Test, retract(test_(Test)), Tests),
+		findall(Test, retract(test_(_, Test)), Tests),
 		logtalk_load_context(source, File).
 
 	filter_discontiguous_directive((PI,PIs), Filtered) :-
@@ -678,15 +789,31 @@
 	check_for_valid_test_identifier(Test) :-
 		(	var(Test) ->
 			print_message(error, lgtunit, non_instantiated_test_identifier)
-		;	(	test_(succeeds(Test, _))
-			;	test_(deterministic(Test, _))
-			;	test_(fails(Test, _))
-			;	test_(throws(Test, _, _))
-			;	test_(skipped(Test, _))
-			) ->
+		;	test_(Test, _) ->
 			print_message(error, lgtunit, repeated_test_identifier(Test))
 		;	true
 		).
+
+	parse_test_options([], _, Condition, Setup, Cleanup) :-
+		(	var(Condition) -> Condition = true;	true),
+		(	var(Setup) -> Setup = true;	true),
+		(	var(Cleanup) -> Cleanup = true;	true).
+	parse_test_options([Option| Options], Test, Condition, Setup, Cleanup) :-
+		(	Option = condition(Goal) ->
+			compile_test_step_aux_predicate(Test, '_condition', Goal, Condition)
+		;	Option = setup(Goal) ->
+			compile_test_step_aux_predicate(Test, '_setup', Goal, Setup)
+		;	Option = cleanup(Goal) ->
+			compile_test_step_aux_predicate(Test, '_cleanup', Goal, Cleanup)
+		;	true
+		),
+		parse_test_options(Options, Test, Condition, Setup, Cleanup).
+
+	compile_test_step_aux_predicate(Test, Step, Goal, CompiledHead) :-
+		atom_concat(Test, Step, Head),
+		logtalk_load_context(entity_name, Entity),
+		logtalk::compile_predicate_heads(Head, Entity, CompiledHead, _),
+		logtalk::compile_aux_clauses([(Head :- Goal)]).
 
 	:- if((	current_logtalk_flag(prolog_dialect, Dialect),
 			(Dialect == b; Dialect == qp; Dialect == swi; Dialect == yap)
