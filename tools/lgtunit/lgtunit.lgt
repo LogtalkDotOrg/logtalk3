@@ -83,6 +83,12 @@
 		argnames is ['Tests', 'File']
 	]).
 
+	:- protected(condition/0).
+	:- mode(condition, zero_or_one).
+	:- info(condition/0, [
+		comment is 'Verifies conditions for running the tests. Defaults to the goal true.'
+	]).
+
 	:- protected(setup/0).
 	:- mode(setup, zero_or_one).
 	:- info(setup/0, [
@@ -378,7 +384,9 @@
 		reset_test_counters,
 		reset_coverage_results,
 		write_tests_header,
-		(	catch(::setup, Error, (broken_step(setup, Error), fail)) ->
+		(	\+ ::condition ->
+			tests_skipped
+		;	catch(::setup, Error, (broken_step(setup, Error), fail)) ->
 			::run_tests,
 			(	catch(::cleanup, Error, (broken_step(cleanup, Error), fail)) ->
 				true
@@ -390,6 +398,9 @@
 		),
 		write_tests_footer,
 		set_output(Output).
+
+	% by default, run the unit tests
+	condition.
 
 	% by default, no test setup is needed:
 	setup.
@@ -551,6 +562,10 @@
 	skipped_test(Test, File, Position) :-
 		increment_skipped_tests_counter,
 		print_message(information, lgtunit, skipped_test(Test, File, Position)).
+
+	tests_skipped :-
+		self(Object),
+		print_message(information, lgtunit, tests_skipped(Object)).
 
 	run_test_condition(Test, Goal) :-
 		(	Goal == true ->

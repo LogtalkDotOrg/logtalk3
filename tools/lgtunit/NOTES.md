@@ -139,17 +139,6 @@ In all dialects, `Test` is an atom, uniquely identifying a test. An error
 message is printed if duplicated identifiers are found. These errors must
 be corrected otherwise the test results can be misleading.
 
-Tests that for some reason should be skipped can have the test clause head
-prefixed with the `(-)/1` operator. The number of skipped tests is reported
-together with the numbers of passed and failed tests. The conditional
-compilation directives can also be used in alternative but note that in this
-case there will be no report on the number of skipped tests.
-
-A single unit test object my include tests for one or more entities (objects,
-protocols, and categories). The entities being tested by an unit test object
-for which code coverage information should be collected are declared using
-the `cover/1` predicate.
-
 For examples of how to write unit tests, check the `tests` folder or the
 `testing` example in the `examples` folder in the Logtalk distribution.
 Most of the provided examples also include unit tests, some of them with
@@ -160,6 +149,21 @@ Parameterized unit tests can be easily defined by using parametric objects.
 Note: when using the `(<<)/2` debugging control construct to access and test
 an object internal predicates, make sure that the `context_switching_calls`
 compiler flag is set to `allow` for those objects.
+
+
+Skipping unit tests
+-------------------
+
+A unit test object can define the `condition/0` predicate (which defaults to
+`true`) to test if some necessary condition for running the tests holds.
+
+Individual tests that for some reason should be unconditionally skipped can
+have the test clause head prefixed with the `(-)/1` operator. The number of
+skipped tests is reported together with the numbers of passed and failed tests.
+To skip a test depending on some condition, use the `test/3` dialect and the
+`condition/1` option. The conditional compilation directives can also be used
+in alternative but note that in this case there will be no report on the number
+of skipped tests.
 
 
 Testing non-deterministic predicates
@@ -208,6 +212,9 @@ predicate is called, when defined, before running the object unit tests. The
 `cleanup/0` predicate is called, when defined, after running all the object
 unit tests.
 
+Per test setup and cleanup goals can be defined using the `test/3` dialect and
+the `setup/1` and `cleanup/1` options. 
+
 
 Debugging failed unit tests
 ---------------------------
@@ -245,10 +252,12 @@ Code coverage
 If you want entity predicate clause coverage information to be collected
 and printed, you will need to compile the entities that you're testing
 using the flags `debug(on)` and `source_data(on)`. Be aware, however,
-that compiling in debug mode results in a performance penalty. Your unit
-test objects must also define facts for the predicate `cover/1`, whose
-argument is the identifier of an entity being tested for which you want
-to collect coverage information.
+that compiling in debug mode results in a performance penalty.
+
+A single unit test object my include tests for one or more entities (objects,
+protocols, and categories). The entities being tested by an unit test object
+for which code coverage information should be collected must be declared using
+the `cover/1` predicate.
 
 In the printed predicate clause coverage information, you may get a total
 number of clauses smaller than the covered clauses. This results from the

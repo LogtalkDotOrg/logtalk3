@@ -25,9 +25,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/11/08,
+		date is 2015/06/08,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -64,6 +64,9 @@
 
 	logtalk::message_tokens(completed_tests_from_object(Object), lgtunit) -->
 		['completed tests from object ~q'-[Object], nl].
+
+	logtalk::message_tokens(tests_skipped(_Object), lgtunit) -->
+		['tests skipped'-[], nl].
 
 	% messages for test results
 
