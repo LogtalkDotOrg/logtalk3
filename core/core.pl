@@ -5355,7 +5355,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% write any plain Prolog terms that may precede the entity definition
 	'$lgt_write_prolog_terms'(Output, Path),
 	'$lgt_write_entity_directives'(Output, Path),
-	'$lgt_write_entity_clauses'(Output, Path).
+	'$lgt_pp_entity_'(_, _, _, _, Rnm),
+	'$lgt_write_entity_clauses'(Output, Path, Rnm).
 
 
 
@@ -15150,78 +15151,52 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_write_entity_clauses'(@stream, +atom)
+% '$lgt_write_entity_clauses'(@stream, +atom, +atom)
 %
 % writes Logtalk entity clauses
 
-'$lgt_write_entity_clauses'(Stream, Path) :-
-	'$lgt_write_dcl_clauses'(Stream, Path),
-	'$lgt_write_def_clauses'(Stream, Path),
-	'$lgt_write_ddef_clauses'(Stream, Path),
-	'$lgt_write_super_clauses'(Stream, Path),
-	'$lgt_pp_entity_'(_, _, _, _, Rnm),
-	'$lgt_write_alias_clauses'(Stream, Path, Rnm),
-	'$lgt_write_predicate_clauses'(Stream, Path),
-	'$lgt_write_aux_clauses'(Stream, Path).
-
-
-'$lgt_write_dcl_clauses'(Stream, Path) :-
+'$lgt_write_entity_clauses'(Stream, Path, _) :-
 	'$lgt_pp_dcl_'(Clause),
 		'$lgt_write_compiled_term'(Stream, Clause, runtime, Path, 1),
 	fail.
 
-'$lgt_write_dcl_clauses'(_, _).
-
-
-'$lgt_write_def_clauses'(Stream, Path) :-
+'$lgt_write_entity_clauses'(Stream, Path, _) :-
 	'$lgt_pp_def_'(Clause),
 		'$lgt_write_compiled_term'(Stream, Clause, runtime, Path, 1),
 	fail.
 
-'$lgt_write_def_clauses'(_, _).
-
-
-'$lgt_write_ddef_clauses'(Stream, Path) :-
+'$lgt_write_entity_clauses'(Stream, Path, _) :-
 	'$lgt_pp_ddef_'(Clause),
 		'$lgt_write_compiled_term'(Stream, Clause, runtime, Path, 1),
 	fail.
 
-'$lgt_write_ddef_clauses'(_, _).
-
-
-'$lgt_write_super_clauses'(Stream, Path) :-
+'$lgt_write_entity_clauses'(Stream, Path, _) :-
 	'$lgt_pp_super_'(Clause),
 		'$lgt_write_compiled_term'(Stream, Clause, runtime, Path, 1),
 	fail.
 
-'$lgt_write_super_clauses'(_, _).
-
-
-'$lgt_write_alias_clauses'(Stream, Path, Rnm) :-
+'$lgt_write_entity_clauses'(Stream, Path, Rnm) :-
 	'$lgt_pp_predicate_alias_'(Entity, Pred, Alias, _, _),
 		Clause =.. [Rnm, Entity, Pred, Alias],
 		'$lgt_write_compiled_term'(Stream, Clause, runtime, Path, 1),
 	fail.
 
-'$lgt_write_alias_clauses'(Stream, Path, Rnm) :-
+'$lgt_write_entity_clauses'(Stream, Path, Rnm) :-
 	Catchall =.. [Rnm, _, Pred, Pred],
-	'$lgt_write_compiled_term'(Stream, Catchall, runtime, Path, 1).
+	'$lgt_write_compiled_term'(Stream, Catchall, runtime, Path, 1),
+	fail.
 
-
-'$lgt_write_predicate_clauses'(Stream, Path) :-
+'$lgt_write_entity_clauses'(Stream, Path, _) :-
 	'$lgt_pp_final_entity_term_'(Clause, Line-_),
 		'$lgt_write_compiled_term'(Stream, Clause, user, Path, Line),
 	fail.
 
-'$lgt_write_predicate_clauses'(_, _).
-
-
-'$lgt_write_aux_clauses'(Stream, Path) :-
+'$lgt_write_entity_clauses'(Stream, Path, _) :-
 	'$lgt_pp_final_entity_aux_clause_'(Clause),
 		'$lgt_write_compiled_term'(Stream, Clause, aux, Path, 1),
 	fail.
 
-'$lgt_write_aux_clauses'(_, _).
+'$lgt_write_entity_clauses'(_, _, _).
 
 
 
