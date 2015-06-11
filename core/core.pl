@@ -15566,25 +15566,27 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% avoid conflicts with other predicates
 	functor(Entity, Functor, Arity),
 	atom_concat(CodePrefix, Functor, Prefix0),
-	'$lgt_arity_#atom.'(Arity, ArityAtom),
+	(	'$lgt_arity_#atom.'(Arity, ArityAtom) ->
+		true
+	;	number_codes(Arity, ArityCodes),
+		atom_codes(ArityAtom0, ArityCodes),
+		atom_concat('#', ArityAtom0, ArityAtom1),
+		atom_concat(ArityAtom1, '.', ArityAtom)
+	),
 	atom_concat(Prefix0, ArityAtom, Prefix).
 
 
-'$lgt_arity_#atom.'(0, '#0.') :- !.
-'$lgt_arity_#atom.'(1, '#1.') :- !.
-'$lgt_arity_#atom.'(2, '#2.') :- !.
-'$lgt_arity_#atom.'(3, '#3.') :- !.
-'$lgt_arity_#atom.'(4, '#4.') :- !.
-'$lgt_arity_#atom.'(5, '#5.') :- !.
-'$lgt_arity_#atom.'(6, '#6.') :- !.
-'$lgt_arity_#atom.'(7, '#7.') :- !.
-'$lgt_arity_#atom.'(8, '#8.') :- !.
-'$lgt_arity_#atom.'(9, '#9.') :- !.
-'$lgt_arity_#atom.'(Arity, ArityAtom) :-
-	number_codes(Arity, ArityCodes),
-	atom_codes(ArityAtom0, ArityCodes),
-	atom_concat('#', ArityAtom0, ArityAtom1),
-	atom_concat(ArityAtom1, '.', ArityAtom).
+% avoid costly atom computations for the most common cases
+'$lgt_arity_#atom.'(0, '#0.').
+'$lgt_arity_#atom.'(1, '#1.').
+'$lgt_arity_#atom.'(2, '#2.').
+'$lgt_arity_#atom.'(3, '#3.').
+'$lgt_arity_#atom.'(4, '#4.').
+'$lgt_arity_#atom.'(5, '#5.').
+'$lgt_arity_#atom.'(6, '#6.').
+'$lgt_arity_#atom.'(7, '#7.').
+'$lgt_arity_#atom.'(8, '#8.').
+'$lgt_arity_#atom.'(9, '#9.').
 
 
 
