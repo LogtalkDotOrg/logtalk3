@@ -15637,12 +15637,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_entity_prefix'(Entity, Prefix) :-
 	(	var(Entity), var(Prefix) ->
 		'$lgt_pp_entity_'(_, Entity, Prefix, _, _)
-	;	'$lgt_current_object_'(Entity, Prefix, _, _, _, _, _, _, _, _, _) ->
-		true
-	;	'$lgt_current_category_'(Entity, Prefix, _, _, _, _) ->
-		true
-	;	'$lgt_current_protocol_'(Entity, Prefix, _, _, _) ->
-		true
 	;	callable(Entity) ->
 		'$lgt_entity_to_prefix'(Entity, Prefix)
 	;	atom(Prefix),
