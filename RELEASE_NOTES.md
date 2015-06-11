@@ -27,6 +27,11 @@ RELEASE NOTES
 3.00.3 - June ??, 2015
 ======================
 
+Logtalk compiler and runtime
+----------------------------
+
+* Minor compiler optimizations.
+
 Prolog adapter and integration files
 ------------------------------------
 
