@@ -15321,110 +15321,77 @@ create_logtalk_flag(Flag, Value, Options) :-
 % adds a dynamically created entity to memory
 
 '$lgt_assert_dynamic_entity'(Kind) :-
-	'$lgt_assert_directives',
-	'$lgt_assert_dcl_clauses',
-	'$lgt_assert_def_clauses',
-	'$lgt_assert_ddef_clauses',
-	'$lgt_assert_super_clauses',
-	'$lgt_assert_alias_clauses',
-	'$lgt_assert_predicate_clauses',
-	'$lgt_assert_aux_clauses',
-	'$lgt_assert_runtime_clauses'(Kind),
-	'$lgt_assert_initialization_goal'.
+	'$lgt_pp_entity_'(_, _, _, _, Rnm),
+	'$lgt_assert_dynamic_entity'(Kind, Rnm),
+	'$lgt_call_initialization_goal'.
 
 
-'$lgt_assert_directives' :-
+'$lgt_assert_dynamic_entity'(_, _) :-
 	'$lgt_pp_directive_'(dynamic(Functor/Arity)),
 		functor(Pred, Functor, Arity),
 		asserta(Pred),
 		retract(Pred),
 	fail.
 
-'$lgt_assert_directives'.
-
-
-'$lgt_assert_dcl_clauses' :-
+'$lgt_assert_dynamic_entity'(_, _) :-
 	'$lgt_pp_dcl_'(Clause),
 		'$lgt_assertz_entity_clause'(Clause, aux),
 	fail.
 
-'$lgt_assert_dcl_clauses'.
-
-
-'$lgt_assert_def_clauses' :-
+'$lgt_assert_dynamic_entity'(_, _) :-
 	'$lgt_pp_def_'(Clause),
 		'$lgt_assertz_entity_clause'(Clause, aux),
 	fail.
 
-'$lgt_assert_def_clauses'.
-
-
-'$lgt_assert_ddef_clauses' :-
+'$lgt_assert_dynamic_entity'(_, _) :-
 	'$lgt_pp_ddef_'(Clause),
 		'$lgt_assertz_entity_clause'(Clause, aux),
 	fail.
 
-'$lgt_assert_ddef_clauses'.
-
-
-'$lgt_assert_super_clauses' :-
+'$lgt_assert_dynamic_entity'(_, _) :-
 	'$lgt_pp_super_'(Clause),
 		'$lgt_assertz_entity_clause'(Clause, aux),
 	fail.
 
-'$lgt_assert_super_clauses'.
-
-
-'$lgt_assert_alias_clauses' :-
-	'$lgt_pp_entity_'(_, _, _, _, Rnm),
-	'$lgt_assert_alias_clauses'(Rnm).
-
-
-'$lgt_assert_alias_clauses'(Rnm) :-
+'$lgt_assert_dynamic_entity'(_, Rnm) :-
 	'$lgt_pp_predicate_alias_'(Entity, Pred, Alias, _, _),
 		Clause =.. [Rnm, Entity, Pred, Alias],
 		'$lgt_assertz_entity_clause'(Clause, aux),
 	fail.
 
-'$lgt_assert_alias_clauses'(Rnm) :-
+'$lgt_assert_dynamic_entity'(_, Rnm) :-
 	Catchall =.. [Rnm, _, Pred, Pred],
-	'$lgt_assertz_entity_clause'(Catchall, aux).
+	'$lgt_assertz_entity_clause'(Catchall, aux),
+	fail.
 
-
-'$lgt_assert_predicate_clauses' :-
+'$lgt_assert_dynamic_entity'(_, _) :-
 	'$lgt_pp_final_entity_term_'(Clause, _),
 		'$lgt_assertz_entity_clause'(Clause, user),
 	fail.
 
-'$lgt_assert_predicate_clauses'.
-
-
-'$lgt_assert_aux_clauses' :-
+'$lgt_assert_dynamic_entity'(_, _) :-
 	'$lgt_pp_final_entity_aux_clause_'(Clause),
 		'$lgt_assertz_entity_clause'(Clause, aux),
 	fail.
 
-'$lgt_assert_aux_clauses'.
-
-
-'$lgt_assert_runtime_clauses'(Type) :-
+'$lgt_assert_dynamic_entity'(Type, _) :-
 	'$lgt_save_entity_runtime_clause'(Type),
 	fail.
 
-'$lgt_assert_runtime_clauses'(_) :-
+'$lgt_assert_dynamic_entity'(_, _) :-
 	'$lgt_pp_runtime_clause_'(Clause),
 		'$lgt_assertz_entity_clause'(Clause, aux),
 	fail.
 
-'$lgt_assert_runtime_clauses'(_).
+'$lgt_assert_dynamic_entity'(_, _).
 
 
 
-% '$lgt_assert_initialization_goal'
+% '$lgt_call_initialization_goal'
 %
 % calls any defined initialization goals for a dynamically created entity
 
-'$lgt_assert_initialization_goal' :-
+'$lgt_call_initialization_goal' :-
 	(	'$lgt_prolog_feature'(threads, supported),
 		setof(Mutex, Head^'$lgt_pp_synchronized_'(Head, Mutex), Mutexes) ->
 		'$lgt_create_mutexes'(Mutexes)
