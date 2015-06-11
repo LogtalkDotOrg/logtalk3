@@ -15255,24 +15255,28 @@ create_logtalk_flag(Flag, Value, Options) :-
 % source file initialization goal constructed from each object initialization
 % goals and from the source file initialization/1 directive if present
 
-'$lgt_initialization_goal'(Goal) :-
-	findall(ObjectGoal, '$lgt_pp_file_object_initialization_'(_, ObjectGoal), ObjectGoals),
-	findall(FileGoal, '$lgt_pp_file_initialization_'(FileGoal), FileGoals),
-	'$lgt_append'(ObjectGoals, FileGoals, Goals),
-	'$lgt_list_to_conjunction'(Goals, GoalConjunction),
-	'$lgt_remove_redundant_calls'(GoalConjunction, Goal).
+'$lgt_initialization_goal'(InitializationGoal) :-
+	findall(
+		Goal,
+		('$lgt_pp_file_object_initialization_'(_, Goal); '$lgt_pp_file_initialization_'(Goal)),
+		Goals
+	),
+	'$lgt_list_to_conjunction'(Goals, InitializationGoal).
 
 
 
 % converts a list of goals into a conjunction of goals
-%
-% the conjunction always ends with true/0 but that's not
-% an issue as usually the result is later simplified
 
 '$lgt_list_to_conjunction'([], true).
 
-'$lgt_list_to_conjunction'([Goal| Goals], (Goal, Conjunction)) :-
-	'$lgt_list_to_conjunction'(Goals, Conjunction).
+'$lgt_list_to_conjunction'([Goal| Goals], Conjunction) :-
+	'$lgt_list_to_conjunction'(Goals, Goal, Conjunction).
+
+
+'$lgt_list_to_conjunction'([], Conjunction, Conjunction).
+
+'$lgt_list_to_conjunction'([Goal| Goals], Conjunction0, Conjunction) :-
+	'$lgt_list_to_conjunction'(Goals, (Conjunction0, Goal), Conjunction).
 
 
 
