@@ -30,7 +30,7 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* Minor compiler optimizations.
+* IMPROVED: Minor compiler optimizations and documentation fixes.
 
 Prolog adapter and integration files
 ------------------------------------

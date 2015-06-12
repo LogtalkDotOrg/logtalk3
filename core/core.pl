@@ -9147,12 +9147,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_compile_head'(+callable, -callable, -callable, +compilation_context)
+% '$lgt_compile_head'(+callable, -predicate_indicator, -callable, +compilation_context)
 %
 % compiles an entity clause head
 
 
-% pre-compiled clause head (we only check for some basic errors)
+% pre-compiled clause head (we only check for basic instantiation and type errors)
 
 '$lgt_compile_head'({Head}, {Functor/Arity}, Head, _) :-
 	!,
@@ -9171,7 +9171,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_check_discontiguous_directive'(Head, Ctx)
 	).
 
-% definition of dynamic predicates inside categories
+% definition of dynamic predicates inside categories is not allowed
 
 '$lgt_compile_head'(Head, _, _, _) :-
 	'$lgt_pp_category_'(_, _, _, _, _, _),
@@ -9179,7 +9179,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	functor(Head, Functor, Arity),
 	throw(permission_error(define, dynamic_predicate, Functor/Arity)).
 
-% redefinition of Logtalk built-in methods
+% redefinition of Logtalk built-in methods is not allowed
 
 '$lgt_compile_head'(Head, _, _, _) :-
 	'$lgt_built_in_method'(Head, _, _, Flags),
@@ -11159,10 +11159,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		functor(Predicate, HeadFunctor, HeadArity),
 		assertz('$lgt_pp_calls_self_predicate_'(Functor/Arity, ':'(Module,HeadFunctor/HeadArity), Lines))
 	;	% call from the body of a local entity clause
-		functor(Head, HeadFunctor, HeadArity) ->
+		functor(Head, HeadFunctor, HeadArity),
 		assertz('$lgt_pp_calls_self_predicate_'(Functor/Arity, HeadFunctor/HeadArity, Lines))
-	;	% recursive call
-		true
 	).
 
 
@@ -11190,10 +11188,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		functor(Predicate, HeadFunctor, HeadArity),
 		assertz('$lgt_pp_calls_super_predicate_'(Functor/Arity, ':'(Module,HeadFunctor/HeadArity), Lines))
 	;	% call from the body of a local entity clause
-		functor(Head, HeadFunctor, HeadArity) ->
+		functor(Head, HeadFunctor, HeadArity),
 		assertz('$lgt_pp_calls_super_predicate_'(Functor/Arity, HeadFunctor/HeadArity, Lines))
-	;	% recursive call
-		true
 	).
 
 
@@ -13477,18 +13473,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_check_for_redefined_built_in'(@callable, @execution_context, @callable, @compound)
+% '$lgt_check_for_redefined_built_in'(@callable, @execution_context, @callable, @nonvar)
 %
 % this predicate is called when adding a def/ddef clause after finding the first clause
 % for a predicate or when no clauses are defined for a declared predicate
 
-'$lgt_check_for_redefined_built_in'(Head, ExCtx, THead, Mode) :-
+'$lgt_check_for_redefined_built_in'(Head, ExCtx, THead, compile(_)) :-
 	'$lgt_logtalk_built_in_predicate'(Head, _),
 	!,
 	assertz('$lgt_pp_redefined_built_in_'(Head, ExCtx, THead)),
 	retractall('$lgt_pp_non_portable_predicate_'(Head, _)),
-	(	Mode = compile(_),
-		'$lgt_compiler_flag'(redefined_built_ins, warning) ->
+	(	'$lgt_compiler_flag'(redefined_built_ins, warning) ->
 		functor(Head, Functor, Arity),
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_warning_context'(SourceFile, _, Lines, Type, Entity),
@@ -13496,13 +13491,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	true
 	).
 
-'$lgt_check_for_redefined_built_in'(Head, ExCtx, THead, Mode) :-
+'$lgt_check_for_redefined_built_in'(Head, ExCtx, THead, compile(_)) :-
 	'$lgt_prolog_built_in_predicate'(Head),
 	!,
 	assertz('$lgt_pp_redefined_built_in_'(Head, ExCtx, THead)),
 	retractall('$lgt_pp_non_portable_predicate_'(Head, _)),
-	(	Mode = compile(_),
-		'$lgt_compiler_flag'(redefined_built_ins, warning) ->
+	(	'$lgt_compiler_flag'(redefined_built_ins, warning) ->
 		functor(Head, Functor, Arity),
 		'$lgt_increment_compile_warnings_counter',
 		'$lgt_warning_context'(SourceFile, _, Lines, Type, Entity),
@@ -13514,7 +13508,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_remember_defined_predicate'(@callable, +predicate_indicator, +execution_context, @callable, +compound)
+% '$lgt_remember_defined_predicate'(@callable, +predicate_indicator, +execution_context, @callable, @nonvar)
 %
 % it's necessary to remember which predicates are defined in order to deal with
 % redefinition of built-in predicates, detect missing predicate directives, and
