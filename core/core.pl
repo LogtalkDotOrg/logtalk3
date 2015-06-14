@@ -6622,7 +6622,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % the second argument is the original term and is used for more
 % informative exception terms in case of error
 %
-% note that the clause order ensure that instantiation errors will be
+% note that the clause order ensures that instantiation errors will be
 % caught by the call to the '$lgt_compile_expanded_term'/3 predicate
 
 '$lgt_compile_expanded_terms'([ExpandedTerm| ExpandedTerms], Term, Ctx) :-
@@ -7113,7 +7113,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % compiles a list of directives
 %
-% note that the clause order ensure that instantiation errors will be caught
+% note that the clause order ensures that instantiation errors will be caught
 % by the call to the '$lgt_compile_logtalk_directive'/2 predicate
 
 '$lgt_compile_logtalk_directives'([Directive| Directives], Ctx) :-
@@ -7673,7 +7673,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	atom_concat(Aux, Atom, Mutex).
 
 
-% note that the clause order ensure that instantiation errors will be caught by
+% note that the clause order ensures that instantiation errors will be caught by
 % the call to the '$lgt_compile_synchronized_directive_resource'/1 predicate
 
 '$lgt_compile_synchronized_directive'([Resource| Resources], Mutex) :-
@@ -7724,7 +7724,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % auxiliary predicate for compiling scope directives
 %
-% note that the clause order ensure that instantiation errors will be caught
+% note that the clause order ensures that instantiation errors will be caught
 % by the call to the '$lgt_compile_scope_directive_resource'/1 predicate
 
 '$lgt_compile_scope_directive'([Resource| Resources], Scope, Line) :-
@@ -7819,7 +7819,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % auxiliary predicate for compiling dynamic/1 directives
 %
-% note that the clause order ensure that instantiation errors will be caught
+% note that the clause order ensures that instantiation errors will be caught
 % by the call to the '$lgt_compile_dynamic_directive_resource'/1 predicate
 
 '$lgt_compile_dynamic_directive'([Resource| Resources]) :-
@@ -7902,7 +7902,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % auxiliary predicate for compiling discontiguous/1 directives
 %
-% note that the clause order ensure that instantiation errors will be caught by
+% note that the clause order ensures that instantiation errors will be caught by
 % the call to the '$lgt_compile_discontiguous_directive_resource'/1 predicate
 
 '$lgt_compile_discontiguous_directive'([Resource| Resources]) :-
@@ -7977,7 +7977,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % auxiliary predicate for compiling meta_predicate/1 directives
 %
-% note that the clause order ensure that instantiation errors will be caught by
+% note that the clause order ensures that instantiation errors will be caught by
 % the call to the '$lgt_compile_meta_predicate_directive_resource'/1 predicate
 
 '$lgt_compile_meta_predicate_directive'([Meta| Metas]) :-
@@ -8020,7 +8020,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % auxiliary predicate for compiling meta_non_terminal/1 directives
 %
-% note that the clause order ensure that instantiation errors will be caught by the
+% note that the clause order ensures that instantiation errors will be caught by the
 % call to the '$lgt_compile_meta_non_terminal_directive_resource'/1 predicate
 
 '$lgt_compile_meta_non_terminal_directive'([Meta| Metas]) :-
@@ -8086,7 +8086,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % "user", the module prefix is removed to ensure code portability when using
 % backend Prolog compilers without a module system
 %
-% note that the clause order ensure that instantiation errors will be caught
+% note that the clause order ensures that instantiation errors will be caught
 % by the call to the '$lgt_compile_multifile_directive_resource'/1 predicate
 
 '$lgt_compile_multifile_directive'([Resource| Resources], Ctx) :-
@@ -8195,7 +8195,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % auxiliary predicate for compiling coinductive/1 directives
 %
-% note that the clause order ensure that instantiation errors will be caught by
+% note that the clause order ensures that instantiation errors will be caught by
 % the call to the '$lgt_compile_coinductive_directive_resource'/1 predicate
 
 '$lgt_compile_coinductive_directive'([Pred| Preds]) :-
@@ -19606,6 +19606,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 				% must be called directly
 				code_prefix('$'),
 				% delete the generated intermediate files as they may be non-portable
+				% between backend Prolog compilers
 				clean(on),
 				% use a scratch directory where we expect to have writing permission
 				scratch_directory(ScratchDirectory),
@@ -19620,7 +19621,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_load_settings_file'(+atom, -compound)
+% '$lgt_load_settings_file'(+atom, -nonvar)
 %
 % loads any settings file defined by the user; settings files are compiled
 % and loaded silently, ignoring any errors;  the intermediate Prolog files
@@ -19680,7 +19681,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_report_settings_file'(+compound, +atom)
+% '$lgt_report_settings_file'(@nonvar)
 %
 % reports result of the attempt to load a settings file defined by the user
 
