@@ -3634,13 +3634,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_unify_head_thead_arguments'(Head, THead, ExCtx) :-
 	Head =.. [_| Args],
 	THead =.. [_| TArgs],
-	'$lgt_unify_arguments'(Args, TArgs, ExCtx).
-
-
-'$lgt_unify_arguments'([], [ExCtx], ExCtx).
-
-'$lgt_unify_arguments'([Arg| Args], [Arg| TArgs], ExCtx) :-
-	'$lgt_unify_arguments'(Args, TArgs, ExCtx).
+	'$lgt_append'(Args, [ExCtx], TArgs).
 
 
 
