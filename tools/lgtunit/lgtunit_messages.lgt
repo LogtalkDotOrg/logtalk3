@@ -27,7 +27,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2015/06/08,
+		date is 2015/06/15,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -88,7 +88,13 @@
 		['broken ~w for object ~q: ~q'-[Step, Object, Error], nl].
 
 	logtalk::message_tokens(failed_step(Step, Object), lgtunit) -->
-		['failed ~w  for object ~q'-[Step, Object], nl].
+		['failed ~w for object ~q'-[Step, Object], nl].
+
+	logtalk::message_tokens(broken_step(Test, Step, Object, Error), lgtunit) -->
+		['broken ~w for test ~w in object ~q: ~q'-[Step, Test, Object, Error], nl].
+
+	logtalk::message_tokens(failed_step(Test, Step, Object), lgtunit) -->
+		['failed ~w for test ~w in object ~q'-[Step, Test, Object], nl].
 
 	% messages for test's clause coverage
 
