@@ -30,7 +30,7 @@
 	:- info([
 		version is 2.5,
 		author is 'Paulo Moura',
-		date is 2015/06/08,
+		date is 2015/06/15,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, and multiple test dialects.'
 	]).
 
@@ -794,6 +794,7 @@
 	map_errors([Ball| Balls], [error(Ball,_)| Errors]) :-
 		map_errors(Balls, Errors).
 
+	test_idiom_head(test(Test, _, _), Test).
 	test_idiom_head(test(Test, _), Test).
 	test_idiom_head(test(Test), Test).
 	test_idiom_head(succeeds(Test), Test).
