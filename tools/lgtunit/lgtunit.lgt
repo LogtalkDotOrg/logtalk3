@@ -598,8 +598,11 @@
 	run_test_setup(Test, Goal) :-
 		(	Goal == true ->
 			true
-		;	catch({Goal}, Error, (broken_step(Test,setup,Error), fail)) ->
-			true
+		;	catch({Goal}, Error, broken_step(Test,setup,Error)) ->
+			(	var(Error) ->
+				true
+			;	fail
+			)
 		;	failed_step(Test, setup),
 			fail
 		).
