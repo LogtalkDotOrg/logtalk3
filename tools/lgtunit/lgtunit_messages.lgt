@@ -65,24 +65,39 @@
 	logtalk::message_tokens(completed_tests_from_object(Object), lgtunit) -->
 		['completed tests from object ~q'-[Object], nl].
 
-	logtalk::message_tokens(tests_skipped(_Object), lgtunit) -->
-		['tests skipped'-[], nl].
+	logtalk::message_tokens(tests_skipped(_Object, Note), lgtunit) -->
+		(	{Note == ''} ->
+			['tests skipped'-[], nl]
+		;	['tests skipped (~w)'-[Note], nl]
+		).
 
 	% messages for test results
 
-	logtalk::message_tokens(tests_results_summary(Total, Skipped, Passed, Failed), lgtunit) -->
-		['~d tests: ~d skipped, ~d passed, ~d failed'-[Total, Skipped, Passed, Failed], nl].
+	logtalk::message_tokens(tests_results_summary(Total, Skipped, Passed, Failed, Note), lgtunit) -->
+		(	{Note == ''} ->
+			['~d tests: ~d skipped, ~d passed, ~d failed'-[Total, Skipped, Passed, Failed], nl]
+		;	['~d tests: ~d skipped, ~d passed, ~d failed (~w)'-[Total, Skipped, Passed, Failed, Note], nl]
+		).
 
-	logtalk::message_tokens(passed_test(Test, _File, _Position), lgtunit) -->
-		['~w: success'-[Test], nl].
+	logtalk::message_tokens(passed_test(Test, _File, _Position, Note), lgtunit) -->
+		(	{Note == ''} ->
+			['~w: success'-[Test], nl]
+		;	['~w: success (~w)'-[Test, Note], nl]
+		).
 
-	logtalk::message_tokens(failed_test(Test, File, Position, Reason), lgtunit) -->
-		['~w: failure '-[Test], nl],
+	logtalk::message_tokens(failed_test(Test, File, Position, Reason, Note), lgtunit) -->
+		(	{Note == ''} ->
+			['~w: failure '-[Test], nl]
+		;	['~w: failure (~w)'-[Test, Note], nl]
+		),
 		failure_reason(Reason),
 		['  in file ~w between lines ~w'-[File, Position], nl].
 
-	logtalk::message_tokens(skipped_test(Test, _File, _Position), lgtunit) -->
-		['~w: skipped'-[Test], nl].
+	logtalk::message_tokens(skipped_test(Test, _File, _Position, Note), lgtunit) -->
+		(	{Note == ''} ->
+			['~w: skipped'-[Test], nl]
+		;	['~w: skipped (~w)'-[Test, Note], nl]
+		).
 
 	logtalk::message_tokens(broken_step(Step, Object, Error), lgtunit) -->
 		['broken ~w for object ~q: ~q'-[Step, Object, Error], nl].

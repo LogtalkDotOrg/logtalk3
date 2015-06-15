@@ -41,11 +41,17 @@ introduces support for the standard `discontiguous/1` directive.
 Tools
 -----
 
+* CHANGED: Some of the messages used by the `lgtunit` tool have an additional
+argument to pass a user-defined per unit or per test annotation.
+
 * ADDED: Support for a `condition/0` predicate to the `lgtunit` tool to test
 if some necessary condition for running a test unit holds.
 
+* ADDED: Support for a `note/1` predicate to the `lgtunit` tool to define a
+note to be printed after test results.
+
 * ADDED: Support for a `test/3` unit test dialect to the `lgtunit` tool to
-allow specification of per test condition, setup, and cleanup goals.
+allow specification of per test notes and condition, setup, and cleanup goals.
 
 * IMPROVED: Minor performance optimizations for the compilation of test files.
 

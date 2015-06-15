@@ -101,6 +101,12 @@
 		comment is 'Cleanup environment after running the test set. Defaults to the goal true.'
 	]).
 
+	:- protected(note/1).
+	:- mode(note(?atom), zero_or_one).
+	:- info(note/1, [
+		comment is 'Note to be printed after the test results. Defaults to the empty atom.'
+	]).
+
 	:- protected(set_text_input/3).
 	:- mode(set_text_input(+atom, +atom, +list(stream_option)), one).
 	:- info(set_text_input/3, [
@@ -384,15 +390,16 @@
 		reset_test_counters,
 		reset_coverage_results,
 		write_tests_header,
+		::note(Note),
 		(	\+ ::condition ->
-			tests_skipped
+			tests_skipped(Note)
 		;	catch(::setup, Error, (broken_step(setup, Error), fail)) ->
 			::run_tests,
 			(	catch(::cleanup, Error, (broken_step(cleanup, Error), fail)) ->
 				true
 			;	failed_step(cleanup)
 			),
-			write_tests_results,
+			write_tests_results(Note),
 			write_coverage_results
 		;	failed_step(setup)
 		),
@@ -402,11 +409,14 @@
 	% by default, run the unit tests
 	condition.
 
-	% by default, no test setup is needed:
+	% by default, no test setup is needed
 	setup.
 
-	% by default, no test cleanup is needed:
+	% by default, no test cleanup is needed
 	cleanup.
+
+	% by default, no note to be printed after test results
+	note('').
 
 	run_tests([], _).
 	run_tests([Test| Tests], File) :-
@@ -422,65 +432,65 @@
 		run_tests([], _).
 
 	% test/3 dialect
-	run_test(succeeds(Test, Position, Condition, Setup, Cleanup), File) :-
+	run_test(succeeds(Test, Position, Condition, Setup, Cleanup, Note), File) :-
 		(	run_test_condition(Test, Condition) ->
 			(	run_test_setup(Test, Setup) ->
-				(	catch(::test(Test, true), Error, failed_test(Test, File, Position, error_instead_of_success(Error))) ->
+				(	catch(::test(Test, true), Error, failed_test(Test, File, Position, error_instead_of_success(Error), Note)) ->
 					(	var(Error) ->
-						passed_test(Test, File, Position)
+						passed_test(Test, File, Position, Note)
 					;	true
 					)
-				;	failed_test(Test, File, Position, failure_instead_of_success)
+				;	failed_test(Test, File, Position, failure_instead_of_success, Note)
 				),
 				run_test_cleanup(Test, Cleanup)
 			;	true
 			)
-		;	skipped_test(Test, File, Position)
+		;	skipped_test(Test, File, Position, Note)
 		).
-	run_test(deterministic(Test, Position, Condition, Setup, Cleanup), File) :-
+	run_test(deterministic(Test, Position, Condition, Setup, Cleanup, Note), File) :-
 		(	run_test_condition(Test, Condition) ->
 			(	run_test_setup(Test, Setup) ->
-				(	catch(::test(Test, deterministic), Error, failed_test(Test, File, Position, error_instead_of_success(Error))) ->
+				(	catch(::test(Test, deterministic), Error, failed_test(Test, File, Position, error_instead_of_success(Error), Note)) ->
 					(	var(Error) ->
-						passed_test(Test, File, Position)
+						passed_test(Test, File, Position, Note)
 					;	true
 					)
-				;	failed_test(Test, File, Position, failure_instead_of_success)
+				;	failed_test(Test, File, Position, failure_instead_of_success, Note)
 				),
 				run_test_cleanup(Test, Cleanup)
 			;	true
 			)
-		;	skipped_test(Test, File, Position)
+		;	skipped_test(Test, File, Position, Note)
 		).
-	run_test(fails(Test, Position, Condition, Setup, Cleanup), File) :-
+	run_test(fails(Test, Position, Condition, Setup, Cleanup, Note), File) :-
 		(	run_test_condition(Test, Condition) ->
 			(	run_test_setup(Test, Setup) ->
-				(	catch(::test(Test, fail), Error, failed_test(Test, File, Position, error_instead_of_failure(Error))) ->
+				(	catch(::test(Test, fail), Error, failed_test(Test, File, Position, error_instead_of_failure(Error), Note)) ->
 					(	var(Error) ->
-						failed_test(Test, File, Position, success_instead_of_failure)
+						failed_test(Test, File, Position, success_instead_of_failure, Note)
 					;	true
 					)
-				;	passed_test(Test, File, Position)
+				;	passed_test(Test, File, Position, Note)
 				),
 				run_test_cleanup(Test, Cleanup)
 			;	true
 			)
-		;	skipped_test(Test, File, Position)
+		;	skipped_test(Test, File, Position, Note)
 		).
-	run_test(throws(Test, PossibleErrors, Position, Condition, Setup, Cleanup), File) :-
+	run_test(throws(Test, PossibleErrors, Position, Condition, Setup, Cleanup, Note), File) :-
 		(	run_test_condition(Test, Condition) ->
 			(	run_test_setup(Test, Setup) ->
 				(	catch(::test(Test, PossibleErrors), Error, check_error(Test, PossibleErrors, Error, File, Position)) ->
 					(	var(Error) ->
-						failed_test(Test, File, Position, success_instead_of_error)
+						failed_test(Test, File, Position, success_instead_of_error, Note)
 					;	true
 					)
-				;	failed_test(Test, File, Position, failure_instead_of_error)
+				;	failed_test(Test, File, Position, failure_instead_of_error, Note)
 				),
 				run_test_cleanup(Test, Cleanup)
 			;	true
 			)
-		;	skipped_test(Test, File, Position)
+		;	skipped_test(Test, File, Position, Note)
 		).
 	% other dialects
 	run_test(succeeds(Test, Position), File) :-
@@ -516,6 +526,9 @@
 		;	failed_test(Test, File, Position, failure_instead_of_error)
 		).
 
+	run_test(skipped(Test, Position, Note), File) :-
+		skipped_test(Test, File, Position, Note).
+
 	run_test(skipped(Test, Position), File) :-
 		skipped_test(Test, File, Position).
 
@@ -537,13 +550,13 @@
 		;	print_message(information, lgtunit, running_tests_from_object(Self))
 		).
 
-	write_tests_results :-
+	write_tests_results(Note) :-
 		self(Self),
 		::skipped_(Skipped),
 		::passed_(Passed),
 		::failed_(Failed),
 		Total is Skipped + Passed + Failed,
-		print_message(information, lgtunit, tests_results_summary(Total, Skipped, Passed, Failed)),
+		print_message(information, lgtunit, tests_results_summary(Total, Skipped, Passed, Failed, Note)),
 		print_message(information, lgtunit, completed_tests_from_object(Self)).
 
 	write_tests_footer :-
@@ -551,21 +564,30 @@
 		time::now(Hours, Minutes, Seconds),
 		print_message(information, lgtunit, tests_end_date_time(Year, Month, Day, Hours, Minutes, Seconds)).
 
-	passed_test(Test, File, Position) :-
+	passed_test(Test, File, Position, Note) :-
 		increment_passed_tests_counter,
-		print_message(information, lgtunit, passed_test(Test, File, Position)).
+		print_message(information, lgtunit, passed_test(Test, File, Position, Note)).
+
+	passed_test(Test, File, Position) :-
+		passed_test(Test, File, Position, '').
+
+	failed_test(Test, File, Position, Reason, Note) :-
+		increment_failed_tests_counter,
+		print_message(error, lgtunit, failed_test(Test, File, Position, Reason, Note)).
 
 	failed_test(Test, File, Position, Reason) :-
-		increment_failed_tests_counter,
-		print_message(error, lgtunit, failed_test(Test, File, Position, Reason)).
+		failed_test(Test, File, Position, Reason, '').
+
+	skipped_test(Test, File, Position, Note) :-
+		increment_skipped_tests_counter,
+		print_message(information, lgtunit, skipped_test(Test, File, Position, Note)).
 
 	skipped_test(Test, File, Position) :-
-		increment_skipped_tests_counter,
-		print_message(information, lgtunit, skipped_test(Test, File, Position)).
+		skipped_test(Test, File, Position, '').
 
-	tests_skipped :-
+	tests_skipped(Note) :-
 		self(Object),
-		print_message(information, lgtunit, tests_skipped(Object)).
+		print_message(information, lgtunit, tests_skipped(Object, Note)).
 
 	run_test_condition(Test, Goal) :-
 		(	Goal == true ->
@@ -644,7 +666,11 @@
 		test_idiom_head(Head, Test),
 		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
-		assertz(test_(Test, skipped(Test, Position))).
+		(	Head = test(Test, _, Options) ->
+			parse_test_options(Options, Test, _, _, _, Note),
+			assertz(test_(Test, skipped(Test, Position, Note)))
+		;	assertz(test_(Test, skipped(Test, Position)))
+		).
 
 	% unit test idiom test/3
 	term_expansion((test(Test, Outcome0, Options) :- Goal0), [(test(Test, Outcome) :- Goal)]) :-
@@ -652,15 +678,15 @@
 		convert_test_outcome(Outcome0, Goal0, Outcome, Goal),
 		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
-		parse_test_options(Options, Test, Condition, Setup, Cleanup),
+		parse_test_options(Options, Test, Condition, Setup, Cleanup, Note),
 		(	Outcome == true ->
-			assertz(test_(Test, succeeds(Test, Position, Condition, Setup, Cleanup)))
+			assertz(test_(Test, succeeds(Test, Position, Condition, Setup, Cleanup, Note)))
 		;	Outcome == deterministic ->
-			assertz(test_(Test, deterministic(Test, Position, Condition, Setup, Cleanup)))
+			assertz(test_(Test, deterministic(Test, Position, Condition, Setup, Cleanup, Note)))
 		;	Outcome == fail ->
-			assertz(test_(Test, fails(Test, Position, Condition, Setup, Cleanup)))
+			assertz(test_(Test, fails(Test, Position, Condition, Setup, Cleanup, Note)))
 		;	% errors
-			assertz(test_(Test, throws(Test, Outcome, Position, Condition, Setup, Cleanup)))
+			assertz(test_(Test, throws(Test, Outcome, Position, Condition, Setup, Cleanup, Note)))
 		).
 
 	% unit test idiom test/2
@@ -810,20 +836,24 @@
 		;	true
 		).
 
-	parse_test_options([], _, Condition, Setup, Cleanup) :-
-		(	var(Condition) -> Condition = true;	true),
-		(	var(Setup) -> Setup = true;	true),
-		(	var(Cleanup) -> Cleanup = true;	true).
-	parse_test_options([Option| Options], Test, Condition, Setup, Cleanup) :-
+	parse_test_options([], _, Condition, Setup, Cleanup, Note) :-
+		(var(Condition) -> Condition = true; true),
+		(var(Setup) -> Setup = true; true),
+		(var(Cleanup) -> Cleanup = true; true),
+		(var(Note) -> Note = ''; true).
+	parse_test_options([Option| Options], Test, Condition, Setup, Cleanup, Note) :-
 		(	Option = condition(Goal) ->
 			compile_test_step_aux_predicate(Test, '_condition', Goal, Condition)
 		;	Option = setup(Goal) ->
 			compile_test_step_aux_predicate(Test, '_setup', Goal, Setup)
 		;	Option = cleanup(Goal) ->
 			compile_test_step_aux_predicate(Test, '_cleanup', Goal, Cleanup)
-		;	true
+		;	Option = note(Note) ->
+			true
+		;	% ignore non-recognized options
+			true
 		),
-		parse_test_options(Options, Test, Condition, Setup, Cleanup).
+		parse_test_options(Options, Test, Condition, Setup, Cleanup, Note).
 
 	compile_test_step_aux_predicate(Test, Step, Goal, CompiledHead) :-
 		atom_concat(Test, Step, Head),

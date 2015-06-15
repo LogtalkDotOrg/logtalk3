@@ -134,6 +134,8 @@ The currently supported options are (non-recognized options are ignored):
 	setup goal for the test (default goal is `true`)
 - `cleanup(Goal)`  
 	cleanup goal for the test (default goal is `true`)
+- `note(Atom)`  
+	text note to print (between parenthesis) after the test result (default is `''`)
 
 In all dialects, `Test` is an atom, uniquely identifying a test. An error
 message is printed if duplicated identifiers are found. These errors must
@@ -213,7 +215,25 @@ predicate is called, when defined, before running the object unit tests. The
 unit tests.
 
 Per test setup and cleanup goals can be defined using the `test/3` dialect and
-the `setup/1` and `cleanup/1` options. 
+the `setup/1` and `cleanup/1` options.
+
+
+Test annotations
+----------------
+
+It's possible to define per unit and per test annotations to be printed after
+the test results or when tests are skipped. This is particularly useful when
+some units or some unit tests may be run while still being developed.
+Annotations can be used to pass additional information to a user reviewing
+test results. By intercepting the unit test framework message printing calls
+(using the `message_hook/4` hook predicate), test automation scripts and
+integrating tools can also access these annotations.
+
+Units can define a global annotation using the predicate `note/1`. To define
+per test annotations, use the `test/3` dialect and the `note/1` option.
+
+Annotations are written, by default, between parenthesis after and in the
+same line as the test results.
 
 
 Debugging failed unit tests
