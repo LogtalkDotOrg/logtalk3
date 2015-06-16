@@ -104,10 +104,10 @@
 		['  in file ~w between lines ~w'-[File, Position], nl].
 
 	logtalk::message_tokens(broken_step(Step, Object, Error), lgtunit) -->
-		['broken ~w for object ~q: ~q'-[Step, Object, Error], nl].
+		['broken ~w goal for test object ~q: ~q'-[Step, Object, Error], nl].
 
 	logtalk::message_tokens(failed_step(Step, Object), lgtunit) -->
-		['failed ~w for object ~q'-[Step, Object], nl].
+		['failed ~w goal for test object ~q'-[Step, Object], nl].
 
 	% messages for test's clause coverage
 

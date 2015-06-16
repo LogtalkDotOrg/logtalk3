@@ -157,7 +157,8 @@ Skipping unit tests
 -------------------
 
 A unit test object can define the `condition/0` predicate (which defaults to
-`true`) to test if some necessary condition for running the tests holds.
+`true`) to test if some necessary condition for running the tests holds. The
+tests are skipped if the call to this predicate fails or generates an error.
 
 Individual tests that for some reason should be unconditionally skipped can
 have the test clause head prefixed with the `(-)/1` operator. The number of
@@ -212,10 +213,12 @@ Setup and cleanup goals
 A unit test object can define `setup/0` and `cleanup/0`. goals. The `setup/0`
 predicate is called, when defined, before running the object unit tests. The
 `cleanup/0` predicate is called, when defined, after running all the object
-unit tests.
+unit tests. The tests are skipped when the setup goal fails or throws an error.
 
 Per test setup and cleanup goals can be defined using the `test/3` dialect and
-the `setup/1` and `cleanup/1` options.
+the `setup/1` and `cleanup/1` options. The test is skipped when the setup goal
+fails or throws an error. Note that a broken test cleanup goal doesn't affect
+the test but may adversely affect any following tests.
 
 
 Test annotations

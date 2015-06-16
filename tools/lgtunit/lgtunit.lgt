@@ -402,25 +402,26 @@
 		reset_test_counters,
 		reset_coverage_results,
 		write_tests_header,
-		::note(Note),
 		(	run_condition ->
 			(	run_setup ->
 				::run_tests,
 				run_cleanup,
-				write_tests_results(Note),
+				write_tests_results,
 				write_coverage_results
-			;	tests_skipped(Note)
+			;	tests_skipped
 			)
-		;	tests_skipped(Note)
+		;	tests_skipped
 		),
 		write_tests_footer,
 		set_output(Output).
 
 	run_condition :-
+		% expected either success or failure; error means user error 
 		catch(::condition, Error, (broken_step(condition,Error), fail)),
 		!.
 
 	run_setup :-
+		% expected success; failure or error means user error 
 		(	catch(::setup, Error, broken_step(setup,Error)) ->
 			(	var(Error) ->
 				true
@@ -431,6 +432,7 @@
 		).
 
 	run_cleanup :-
+		% expected success; failure or error means user error 
 		(	catch(::cleanup, Error, broken_step(cleanup,Error)) ->
 			true
 		;	failed_step(cleanup)
@@ -568,12 +570,13 @@
 		;	print_message(information, lgtunit, running_tests_from_object(Self))
 		).
 
-	write_tests_results(Note) :-
+	write_tests_results :-
 		self(Self),
 		::skipped_(Skipped),
 		::passed_(Passed),
 		::failed_(Failed),
 		Total is Skipped + Passed + Failed,
+		::note(Note),
 		print_message(information, lgtunit, tests_results_summary(Total, Skipped, Passed, Failed, Note)),
 		print_message(information, lgtunit, completed_tests_from_object(Self)).
 
@@ -603,17 +606,20 @@
 	skipped_test(Test, File, Position) :-
 		skipped_test(Test, File, Position, '').
 
-	tests_skipped(Note) :-
+	tests_skipped :-
 		self(Object),
+		::note(Note),
 		print_message(information, lgtunit, tests_skipped(Object, Note)).
 
 	run_test_condition(Test, Goal, File, Position, Note) :-
+		% expected either success or failure; error means user error 
 		(	Goal == true ->
 			true
 		;	catch({Goal}, Error, (failed_test(Test,File,Position,step_error(condition,Error),Note), fail))
 		).
 
 	run_test_setup(Test, Goal, File, Position, Note) :-
+		% expected success; failure or error means user error 
 		(	Goal == true ->
 			true
 		;	catch({Goal}, Error, failed_test(Test,File,Position,step_error(setup,Error),Note)) ->
@@ -626,6 +632,7 @@
 		).
 
 	run_test_cleanup(Test, Goal, File, Position) :-
+		% expected success; failure or error means user error 
 		(	Goal == true ->
 			true
 		;	catch({Goal}, Error, failed_cleanup(Test,File,Position,error(Error))) ->
