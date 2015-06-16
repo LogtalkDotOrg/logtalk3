@@ -374,6 +374,18 @@
 		print_message/3
 	]).
 
+	% by default, run the unit tests
+	condition.
+
+	% by default, no test setup is needed
+	setup.
+
+	% by default, no test cleanup is needed
+	cleanup.
+
+	% by default, no note to be printed after test results
+	note('').
+
 	run(File, Mode) :-
 		open(File, Mode, Stream, [alias(lgtunit_redirected_output)]),
 		logtalk::assertz((
@@ -391,32 +403,38 @@
 		reset_coverage_results,
 		write_tests_header,
 		::note(Note),
-		(	\+ ::condition ->
-			tests_skipped(Note)
-		;	catch(::setup, Error, (broken_step(setup, Error), fail)) ->
-			::run_tests,
-			(	catch(::cleanup, Error, (broken_step(cleanup, Error), fail)) ->
-				true
-			;	failed_step(cleanup)
-			),
-			write_tests_results(Note),
-			write_coverage_results
-		;	failed_step(setup)
+		(	run_condition ->
+			(	run_setup ->
+				::run_tests,
+				run_cleanup,
+				write_tests_results(Note),
+				write_coverage_results
+			;	tests_skipped(Note)
+			)
+		;	tests_skipped(Note)
 		),
 		write_tests_footer,
 		set_output(Output).
 
-	% by default, run the unit tests
-	condition.
+	run_condition :-
+		catch(::condition, Error, (broken_step(condition,Error), fail)),
+		!.
 
-	% by default, no test setup is needed
-	setup.
+	run_setup :-
+		(	catch(::setup, Error, broken_step(setup,Error)) ->
+			(	var(Error) ->
+				true
+			;	fail
+			)
+		;	failed_step(setup),
+			fail
+		).
 
-	% by default, no test cleanup is needed
-	cleanup.
-
-	% by default, no note to be printed after test results
-	note('').
+	run_cleanup :-
+		(	catch(::cleanup, Error, broken_step(cleanup,Error)) ->
+			true
+		;	failed_step(cleanup)
+		).
 
 	run_tests([], _).
 	run_tests([Test| Tests], File) :-
@@ -433,8 +451,8 @@
 
 	% test/3 dialect
 	run_test(succeeds(Test, Position, Condition, Setup, Cleanup, Note), File) :-
-		(	run_test_condition(Test, Condition) ->
-			(	run_test_setup(Test, Setup) ->
+		(	run_test_condition(Test, Condition, File, Position, Note) ->
+			(	run_test_setup(Test, Setup, File, Position, Note) ->
 				(	catch(::test(Test, true), Error, failed_test(Test, File, Position, error_instead_of_success(Error), Note)) ->
 					(	var(Error) ->
 						passed_test(Test, File, Position, Note)
@@ -442,14 +460,14 @@
 					)
 				;	failed_test(Test, File, Position, failure_instead_of_success, Note)
 				),
-				run_test_cleanup(Test, Cleanup)
+				run_test_cleanup(Test, Cleanup, File, Position)
 			;	true
 			)
 		;	skipped_test(Test, File, Position, Note)
 		).
 	run_test(deterministic(Test, Position, Condition, Setup, Cleanup, Note), File) :-
-		(	run_test_condition(Test, Condition) ->
-			(	run_test_setup(Test, Setup) ->
+		(	run_test_condition(Test, Condition, File, Position, Note) ->
+			(	run_test_setup(Test, Setup, File, Position, Note) ->
 				(	catch(::test(Test, deterministic), Error, failed_test(Test, File, Position, error_instead_of_success(Error), Note)) ->
 					(	var(Error) ->
 						passed_test(Test, File, Position, Note)
@@ -457,14 +475,14 @@
 					)
 				;	failed_test(Test, File, Position, failure_instead_of_success, Note)
 				),
-				run_test_cleanup(Test, Cleanup)
+				run_test_cleanup(Test, Cleanup, File, Position)
 			;	true
 			)
 		;	skipped_test(Test, File, Position, Note)
 		).
 	run_test(fails(Test, Position, Condition, Setup, Cleanup, Note), File) :-
-		(	run_test_condition(Test, Condition) ->
-			(	run_test_setup(Test, Setup) ->
+		(	run_test_condition(Test, Condition, File, Position, Note) ->
+			(	run_test_setup(Test, Setup, File, Position, Note) ->
 				(	catch(::test(Test, fail), Error, failed_test(Test, File, Position, error_instead_of_failure(Error), Note)) ->
 					(	var(Error) ->
 						failed_test(Test, File, Position, success_instead_of_failure, Note)
@@ -472,14 +490,14 @@
 					)
 				;	passed_test(Test, File, Position, Note)
 				),
-				run_test_cleanup(Test, Cleanup)
+				run_test_cleanup(Test, Cleanup, File, Position)
 			;	true
 			)
 		;	skipped_test(Test, File, Position, Note)
 		).
 	run_test(throws(Test, PossibleErrors, Position, Condition, Setup, Cleanup, Note), File) :-
-		(	run_test_condition(Test, Condition) ->
-			(	run_test_setup(Test, Setup) ->
+		(	run_test_condition(Test, Condition, File, Position, Note) ->
+			(	run_test_setup(Test, Setup, File, Position, Note) ->
 				(	catch(::test(Test, PossibleErrors), Error, check_error(Test, PossibleErrors, Error, File, Position)) ->
 					(	var(Error) ->
 						failed_test(Test, File, Position, success_instead_of_error, Note)
@@ -487,7 +505,7 @@
 					)
 				;	failed_test(Test, File, Position, failure_instead_of_error, Note)
 				),
-				run_test_cleanup(Test, Cleanup)
+				run_test_cleanup(Test, Cleanup, File, Position)
 			;	true
 			)
 		;	skipped_test(Test, File, Position, Note)
@@ -589,30 +607,30 @@
 		self(Object),
 		print_message(information, lgtunit, tests_skipped(Object, Note)).
 
-	run_test_condition(Test, Goal) :-
+	run_test_condition(Test, Goal, File, Position, Note) :-
 		(	Goal == true ->
 			true
-		;	catch({Goal}, Error, (broken_step(Test,condition,Error), fail))
+		;	catch({Goal}, Error, (failed_test(Test,File,Position,step_error(condition,Error),Note), fail))
 		).
 
-	run_test_setup(Test, Goal) :-
+	run_test_setup(Test, Goal, File, Position, Note) :-
 		(	Goal == true ->
 			true
-		;	catch({Goal}, Error, broken_step(Test,setup,Error)) ->
+		;	catch({Goal}, Error, failed_test(Test,File,Position,step_error(setup,Error),Note)) ->
 			(	var(Error) ->
 				true
 			;	fail
 			)
-		;	failed_step(Test, setup),
+		;	failed_test(Test, File, Position, step_failure(setup), Note),
 			fail
 		).
 
-	run_test_cleanup(Test, Goal) :-
+	run_test_cleanup(Test, Goal, File, Position) :-
 		(	Goal == true ->
 			true
-		;	catch({Goal}, Error, broken_step(Test,cleanup,Error)) ->
+		;	catch({Goal}, Error, failed_cleanup(Test,File,Position,error(Error))) ->
 			true
-		;	failed_step(Test, cleanup)
+		;	failed_cleanup(Test, File, Position, failure)
 		).
 
 	broken_step(Step, Error) :-
@@ -623,13 +641,8 @@
 		self(Self),
 		print_message(error, lgtunit, failed_step(Step, Self)).
 
-	broken_step(Test, Step, Error) :-
-		self(Self),
-		print_message(error, lgtunit, broken_step(Test, Step, Self, Error)).
-
-	failed_step(Test, Step) :-
-		self(Self),
-		print_message(error, lgtunit, failed_step(Test, Step, Self)).
+	failed_cleanup(Test, File, Position, Reason) :-
+		print_message(error, lgtunit, failed_cleanup(Test, File, Position, Reason)).
 
 	reset_compilation_counters :-
 		retractall(test_(_, _)).

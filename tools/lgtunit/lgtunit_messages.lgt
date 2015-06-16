@@ -90,7 +90,7 @@
 			['~w: failure '-[Test], nl]
 		;	['~w: failure (~w)'-[Test, Note], nl]
 		),
-		failure_reason(Reason),
+		failed_test_reason(Reason),
 		['  in file ~w between lines ~w'-[File, Position], nl].
 
 	logtalk::message_tokens(skipped_test(Test, _File, _Position, Note), lgtunit) -->
@@ -99,17 +99,15 @@
 		;	['~w: skipped (~w)'-[Test, Note], nl]
 		).
 
+	logtalk::message_tokens(failed_cleanup(Test, File, Position, Reason), lgtunit) -->
+		failed_cleanup_reason(Reason, Test),
+		['  in file ~w between lines ~w'-[File, Position], nl].
+
 	logtalk::message_tokens(broken_step(Step, Object, Error), lgtunit) -->
 		['broken ~w for object ~q: ~q'-[Step, Object, Error], nl].
 
 	logtalk::message_tokens(failed_step(Step, Object), lgtunit) -->
 		['failed ~w for object ~q'-[Step, Object], nl].
-
-	logtalk::message_tokens(broken_step(Test, Step, Object, Error), lgtunit) -->
-		['broken ~w for test ~w in object ~q: ~q'-[Step, Test, Object, Error], nl].
-
-	logtalk::message_tokens(failed_step(Test, Step, Object), lgtunit) -->
-		['failed ~w for test ~w in object ~q'-[Step, Test, Object], nl].
 
 	% messages for test's clause coverage
 
@@ -147,20 +145,29 @@
 
 	% auxiliary grammar rules
 
-	failure_reason(success_instead_of_failure) -->
+	failed_test_reason(success_instead_of_failure) -->
 		['  test goal succeeded but should have failed'-[], nl].
-	failure_reason(success_instead_of_error) -->
+	failed_test_reason(success_instead_of_error) -->
 		['  test goal succeeded but should have throw an error'-[], nl].
-	failure_reason(failure_instead_of_success) -->
+	failed_test_reason(failure_instead_of_success) -->
 		['  test goal failed but should have succeeded'-[], nl].
-	failure_reason(failure_instead_of_error) -->
+	failed_test_reason(failure_instead_of_error) -->
 		['  test goal failed but should have throw an error'-[], nl].
-	failure_reason(error_instead_of_failure(Error)) -->
+	failed_test_reason(error_instead_of_failure(Error)) -->
 		['  test goal throws an error but should have failed: ~q'-[Error], nl].
-	failure_reason(error_instead_of_success(Error)) -->
+	failed_test_reason(error_instead_of_success(Error)) -->
 		['  test goal throws an error but should have succeeded: ~q'-[Error], nl].
-	failure_reason(wrong_error(ExpectedError, Error)) -->
+	failed_test_reason(wrong_error(ExpectedError, Error)) -->
 		['  test goal throws the wrong error: expected ~q but got ~q'-[ExpectedError, Error], nl].
+	failed_test_reason(step_error(Step, Error)) -->
+		['  ~w goal throws an error but should have succeeded: ~q'-[Step, Error], nl].
+	failed_test_reason(step_failure(Step)) -->
+		['  ~w goal failed but should have succeeded: ~q'-[Step], nl].
+
+	failed_cleanup_reason(error(Error), Test) -->
+		['  test ~w cleanup goal throws an error but should have succeeded: ~q'-[Test, Error], nl].
+	failed_cleanup_reason(failure, Test) -->
+		['  test ~w cleanup goal failed but should have succeeded'-[Test], nl].
 
 	entity_tokens(Entities) -->
 		(	{Entities =:= 1} ->
