@@ -76,6 +76,12 @@ bug report.
 * FIXED: Test for the standard `clause/2` predicate that assumed that static
 predicates cannot be inspected. Thanks to Jan Wielemaker for the bug report.
 
+Examples
+--------
+
+* FIXED: The `jpl` example solution for detecting the presence of the JPL
+library when using recent SWI-Prolog releases.
+
 
 3.00.2 - May 27, 2015
 =====================

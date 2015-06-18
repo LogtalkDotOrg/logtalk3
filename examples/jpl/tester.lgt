@@ -10,7 +10,7 @@
 
 
 :- if((	current_logtalk_flag(prolog_dialect, Dialect), (Dialect == swi; Dialect == yap),
-		absolute_file_name(library(jpl), [file_type(prolog)], Path), exists_file(Path)
+		absolute_file_name(library(jpl), [file_type(prolog), access(read)], _)
 )).
 
 	:- use_module(library(jpl), []).
