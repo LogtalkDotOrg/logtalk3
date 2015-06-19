@@ -30,8 +30,11 @@
 %
 %  During development, loader files can be reloaded repeatedly. Therefore,
 %  generic settings shared by all source files, such as library paths and
-%  global flag values should be done preferably using a settings file in
-%  the main application directory.
+%  global flag values, are best defined in a settings file saved in the
+%  application directory and by starting Logtalk from that directory.
+%
+%  Note that the logtalk_load/1-2 predicates can compile and load both
+%  Logtalk and Prolog files
 
 
 %  Load your application files:

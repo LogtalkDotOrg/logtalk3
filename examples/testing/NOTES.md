@@ -9,5 +9,5 @@ ________________________________________________________________________
 
 
 This folder contains an example of defining and running unit tests
-in Logtalk. These unit tests make use of the Logtalk library object
-`lgtunit`.
+in Logtalk. These unit tests make use of the Logtalk `lgtunit` tool.
+See the tool documentation for other supported test dialects.

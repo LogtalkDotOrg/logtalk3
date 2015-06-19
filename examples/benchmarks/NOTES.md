@@ -52,16 +52,16 @@ This example is made of four loader files and five source files:
 You may have noticed above that the benchmark predicates and the predicates 
 for plain Prolog testing are both encapsulated in Logtalk source files. The 
 Logtalk compiler just copies the plain Prolog code to the generated Prolog 
-files. The reason for using the `.lgt` extension for these files is simply to 
-make it possible to load the example code using calls to the predicates 
+files. The reason for using the `.lgt` extension for these files is simply
+to  make it possible to load the example code using calls to the predicates 
 `logtalk_load/1-2`.
 
-By default, the benchmark tests on the `SCRIPT.txt` file use a list of 30 elements 
-as an argument to the list length and list reverse predicates. When dynamic
-binding is used, increasing the list length results in decreasing performance
-differences between plain Prolog and Logtalk as the length and reverse
-computation times far outweigh the overhead of the message sending mechanism.
-Likewise, decreasing the list length leads to increasing performance
+By default, the benchmark tests on the `SCRIPT.txt` file use a list of 30
+elements as an argument to the list length and list reverse predicates. When
+dynamic binding is used, increasing the list length results in decreasing
+performance differences between plain Prolog and Logtalk as the length and
+reverse computation times far outweigh the overhead of the message sending
+mechanism. Likewise, decreasing the list length leads to increasing performance
 differences between plain Prolog and Logtalk (up to the point you will be
 measuring the Logtalk message sending mechanism overhead compared to plain
 Prolog predicate calls). In real-life applications, only testing can give

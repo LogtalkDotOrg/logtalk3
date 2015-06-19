@@ -9143,9 +9143,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_compile_head'(+callable, -predicate_indicator, -callable, +compilation_context)
+% '$lgt_compile_head'(+callable, -callable, -callable, +compilation_context)
 %
-% compiles an entity clause head
+% compiles an entity clause head; also returns a term constructed from the
+% head predicate indicator to be used as key to compute the clause number
 
 
 % pre-compiled clause head (we only check for basic instantiation and type errors)
