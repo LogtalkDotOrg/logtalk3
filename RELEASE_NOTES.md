@@ -32,6 +32,10 @@ Logtalk compiler and runtime
 
 * IMPROVED: Minor compiler optimizations and documentation fixes.
 
+* FIXED: Accept source file level `multifile/1`, `discontiguous/1`, and
+`dynamic/1` directives whose argument includes explicit module-qualified
+predicate indicators.
+
 Prolog adapter and integration files
 ------------------------------------
 

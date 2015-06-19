@@ -7053,40 +7053,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_file_directive'(multifile(Preds), _) :-
 	% perform basic error checking
 	'$lgt_flatten_to_list'(Preds, PredsFlatted),
-	'$lgt_member'(Obj::Pred, PredsFlatted),
-	% Logtalk multifile predicates must be defined within an entity but
-	% be sure there aren't instantiation or type errors in the directive
-	'$lgt_must_be'(object_identifier, Obj),
-	'$lgt_must_be'(predicate_indicator, Pred),
-	throw(permission_error(declare, multifile, Obj::Pred)).
+	'$lgt_check_file_predicate_directive_arguments'(PredsFlatted, (multifile)).
 
 '$lgt_compile_file_directive'(dynamic(Preds), _) :-
 	% perform basic error checking
 	'$lgt_flatten_to_list'(Preds, PredsFlatted),
-	(	'$lgt_member'(Obj::Pred, PredsFlatted) ->
-		% Logtalk entity dynamic predicates must be defined within an entity but
-		% be sure there aren't instantiation or type errors in the directive
-		'$lgt_must_be'(object_identifier, Obj),
-		'$lgt_must_be'(predicate_indicator, Pred),
-		throw(permission_error(declare, (dynamic), Obj::Pred))
-	;	'$lgt_member'(Pred, PredsFlatted),
-		\+ '$lgt_valid_predicate_or_non_terminal_indicator'(Pred, _, _),
-		throw(type_error(predicate_indicator, Pred))
-	).
+	'$lgt_check_file_predicate_directive_arguments'(PredsFlatted, (dynamic)).
 
 '$lgt_compile_file_directive'(discontiguous(Preds), _) :-
 	% perform basic error checking
 	'$lgt_flatten_to_list'(Preds, PredsFlatted),
-	(	'$lgt_member'(Obj::Pred, PredsFlatted) ->
-		% Logtalk entity discontiguous predicates must be defined within an entity but
-		% be sure there aren't instantiation or type errors in the directive
-		'$lgt_must_be'(object_identifier, Obj),
-		'$lgt_must_be'(predicate_indicator, Pred),
-		throw(permission_error(declare, (discontiguous), Obj::Pred))
-	;	'$lgt_member'(Pred, PredsFlatted),
-		\+ '$lgt_valid_predicate_or_non_terminal_indicator'(Pred, _, _),
-		throw(type_error(predicate_indicator, Pred))
-	).
+	'$lgt_check_file_predicate_directive_arguments'(PredsFlatted, (discontiguous)).
 
 '$lgt_compile_file_directive'(Directive, Ctx) :-
 	% directive will be copied to the generated Prolog file
@@ -7100,6 +7077,31 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_print_message'(warning(portability), core, non_standard_file_directive(SourceFile, Lines, Directive))
 	;	true
 	).
+
+
+'$lgt_check_file_predicate_directive_arguments'([Pred| Preds], Property) :-
+	!,
+	'$lgt_check_file_predicate_directive_argument'(Pred, Property),
+	'$lgt_check_file_predicate_directive_arguments'(Preds, Property).
+
+'$lgt_check_file_predicate_directive_arguments'([], _).
+
+
+'$lgt_check_file_predicate_directive_argument'(Obj::Pred, Property) :-
+	% Logtalk entity predicates must be defined within an entity but be
+	% sure there aren't instantiation or type errors in the directive
+	!,
+	'$lgt_must_be'(object_identifier, Obj),
+	'$lgt_must_be'(predicate_or_non_terminal_indicator, Pred),
+	throw(permission_error(declare, Property, Obj::Pred)).
+
+'$lgt_check_file_predicate_directive_argument'(':'(Module,Pred), _) :-
+	!,
+	'$lgt_must_be'(module_identifier, Module),
+	'$lgt_must_be'(predicate_or_non_terminal_indicator, Pred).
+
+'$lgt_check_file_predicate_directive_argument'(Pred, _) :-
+	'$lgt_must_be'(predicate_or_non_terminal_indicator, Pred).
 
 
 
