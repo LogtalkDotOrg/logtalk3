@@ -36,6 +36,9 @@ Logtalk compiler and runtime
 `dynamic/1` directives whose argument includes explicit module-qualified
 predicate indicators.
 
+* FIXED: Don't try to expand goals wrapped using the `{}/1` control construct
+when compiling `initialization/1`, `if/1`, and `elif/1` directives.
+
 Prolog adapter and integration files
 ------------------------------------
 

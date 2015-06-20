@@ -6518,8 +6518,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 % the callers of this predicate must ensure that a goal
 % is repeatedly expanded until a fixed-point is reached
 %
-% the callers must take care of the case where the goal
-% is wrapped with the {}/1 control construct
+% the callers must also take care of the case where the
+% goal is wrapped with the {}/1 control construct
 
 '$lgt_expand_file_goal'(Goal, ExpandedGoal) :-
 	(	% source-file specific compiler hook
@@ -6749,12 +6749,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 % conditional compilation directives
 
 '$lgt_compile_directive'(if(Goal), Ctx) :-
-	'$lgt_must_be'(callable, Goal, directive(if(Goal))),
-	% only expand goals when compiling a source file
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-	'$lgt_expand_file_goal'(Goal, ExpandedGoal),
-	!,
-	'$lgt_compile_directive'(if(ExpandedGoal), Ctx).
+	(	Goal = {UserGoal} ->
+		% final goal
+		'$lgt_must_be'(callable, UserGoal, directive(if(Goal))),
+		fail
+	;	'$lgt_must_be'(callable, Goal, directive(if(Goal))),
+		% only expand goals when compiling a source file
+		'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+		'$lgt_expand_file_goal'(Goal, ExpandedGoal),
+		!,
+		'$lgt_compile_directive'(if(ExpandedGoal), Ctx)
+	).
 
 '$lgt_compile_directive'(if(predicate_property(Pred, Prop)), Ctx) :-
 	!,	% workaround lack of standardization of the predicate_property/2 predicate
@@ -6802,12 +6807,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 	throw(error(existence_error(directive, if/1), directive(elif(Goal)))).
 
 '$lgt_compile_directive'(elif(Goal), Ctx) :-
-	'$lgt_must_be'(callable, Goal, directive(elif(Goal))),
-	% only expand goals when compiling a source file
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-	'$lgt_expand_file_goal'(Goal, ExpandedGoal),
-	!,
-	'$lgt_compile_directive'(elif(ExpandedGoal), Ctx).
+	(	Goal = {UserGoal} ->
+		% final goal
+		'$lgt_must_be'(callable, UserGoal, directive(elif(Goal))),
+		fail
+	;	'$lgt_must_be'(callable, Goal, directive(elif(Goal))),
+		% only expand goals when compiling a source file
+		'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+		'$lgt_expand_file_goal'(Goal, ExpandedGoal),
+		!,
+		'$lgt_compile_directive'(elif(ExpandedGoal), Ctx)
+	).
 
 '$lgt_compile_directive'(elif(predicate_property(Pred, Prop)), Ctx) :-
 	!,	% workaround lack of standardization of the predicate_property/2 predicate
@@ -7007,13 +7017,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compile_file_terms'(Terms, Ctx).
 
 '$lgt_compile_file_directive'(initialization(Goal), Ctx) :-
-	% perform basic error checking
-	'$lgt_must_be'(callable, Goal),
-	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-	% only expand goals when compiling a source file
-	'$lgt_expand_file_goal'(Goal, ExpandedGoal),
-	!,
-	'$lgt_compile_file_directive'(initialization(ExpandedGoal), Ctx).
+	% perform basic error checking and expand goal if applicable
+	(	Goal = {UserGoal} ->
+		% final goal
+		'$lgt_must_be'(callable, UserGoal),
+		fail
+	;	'$lgt_must_be'(callable, Goal),
+		'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+		% only expand goals when compiling a source file
+		'$lgt_expand_file_goal'(Goal, ExpandedGoal),
+		!,
+		'$lgt_compile_file_directive'(initialization(ExpandedGoal), Ctx)
+	).
 
 '$lgt_compile_file_directive'(initialization(Goal), _) :-
 	!,
