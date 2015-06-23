@@ -2489,7 +2489,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 0, 4, rc1)).
+'$lgt_version_data'(logtalk(3, 0, 4, stable)).
 
 
 
@@ -7068,17 +7068,20 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_file_directive'(multifile(Preds), _) :-
 	% perform basic error checking
 	'$lgt_flatten_to_list'(Preds, PredsFlatted),
-	'$lgt_check_file_predicate_directive_arguments'(PredsFlatted, (multifile)).
+	'$lgt_check_file_predicate_directive_arguments'(PredsFlatted, (multifile)),
+	fail.
 
 '$lgt_compile_file_directive'(dynamic(Preds), _) :-
 	% perform basic error checking
 	'$lgt_flatten_to_list'(Preds, PredsFlatted),
-	'$lgt_check_file_predicate_directive_arguments'(PredsFlatted, (dynamic)).
+	'$lgt_check_file_predicate_directive_arguments'(PredsFlatted, (dynamic)),
+	fail.
 
 '$lgt_compile_file_directive'(discontiguous(Preds), _) :-
 	% perform basic error checking
 	'$lgt_flatten_to_list'(Preds, PredsFlatted),
-	'$lgt_check_file_predicate_directive_arguments'(PredsFlatted, (discontiguous)).
+	'$lgt_check_file_predicate_directive_arguments'(PredsFlatted, (discontiguous)),
+	fail.
 
 '$lgt_compile_file_directive'(Directive, Ctx) :-
 	% directive will be copied to the generated Prolog file

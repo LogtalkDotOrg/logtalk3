@@ -24,10 +24,14 @@ ________________________________________________________________________
 RELEASE NOTES
 =============
 
-3.00.4 - July ??, 2015
+3.00.4 - June 23, 2015
 ======================
 
+Logtalk compiler and runtime
+----------------------------
 
+* FIXED: Regression in the compilation of source file level `multifile/1`,
+`discontiguous/1`, and `dynamic/1` directives.
 
 
 3.00.3 - June 22, 2015
