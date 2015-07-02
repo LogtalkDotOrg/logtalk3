@@ -2537,8 +2537,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 		\+ \+ (OpScope = Scope; Obj = Sender)
 	;	% also return global operators that aren't overridden by entity operators
 		current_op(Priority, Specifier, Operator),
-		\+ (	'$lgt_entity_property_'(Obj, op(_, OtherSpecifier, Operator, _)),
-				'$lgt_same_operator_class'(Specifier, OtherSpecifier)
+		\+ (
+			'$lgt_entity_property_'(Obj, op(_, OtherSpecifier, Operator, _)),
+			'$lgt_same_operator_class'(Specifier, OtherSpecifier)
 		)
 	).
 
@@ -10502,7 +10503,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	nonvar(This0),
 		nonvar(This),
 		functor(This0, Functor, Arity),
-		\+ functor(This,  Functor, Arity) ->
+		\+ functor(This, Functor, Arity) ->
 		% mismatch between the argument of this/1 and the parametric object identifier
 		throw(domain_error(object_identifier, This))
 	;	true
@@ -10885,7 +10886,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % in the case of predicates defined in the pseudo-object "user", the uses/2
 % directive is typically used to help document dependencies on Prolog-defined
-% predicates (usually, but not necessarily, built-in predicates)  
+% predicates (usually, but not necessarily, built-in predicates)
 
 '$lgt_compile_body'(Alias, TPred, DPred, Ctx) :-
 	'$lgt_pp_uses_predicate_'(Obj, Pred, Alias),
@@ -18011,8 +18012,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 			setup_call_cleanup(
 				true,
 				'$lgt_mt_det_reply'(Queue, Goal, This, Self, [], Id),
-				thread_join(Id, _))
-		;   setup_call_cleanup(
+				thread_join(Id, _)
+			)
+		;	setup_call_cleanup(
 				true,
 				'$lgt_mt_non_det_reply'(Queue, Goal, This, Self, [], Id),
 				((	thread_property(Id, status(running)) ->
@@ -18060,7 +18062,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 				true,
 				'$lgt_mt_det_reply'(Queue, Goal, This, Self, Tag, Id),
 				thread_join(Id, _))
-		;   setup_call_cleanup(
+		;	setup_call_cleanup(
 				true,
 				'$lgt_mt_non_det_reply'(Queue, Goal, This, Self, Tag, Id),
 				((	thread_property(Id, status(running)) ->
@@ -18913,11 +18915,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_is_list_or_partial_list'(Var) :-
-    var(Var),
+	var(Var),
 	!.
 '$lgt_is_list_or_partial_list'([]).
 '$lgt_is_list_or_partial_list'([_| Tail]) :-
-    '$lgt_is_list_or_partial_list'(Tail).
+	'$lgt_is_list_or_partial_list'(Tail).
 
 
 '$lgt_is_list'((-)) :-
@@ -18925,7 +18927,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 '$lgt_is_list'([]).
 '$lgt_is_list'([_| Tail]) :-
-    '$lgt_is_list'(Tail).
+	'$lgt_is_list'(Tail).
 
 
 '$lgt_is_boolean'(-) :-
