@@ -18930,7 +18930,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_is_list'(Tail).
 
 
-'$lgt_is_boolean'(-) :-
+'$lgt_is_boolean'((-)) :-
 	!,
 	fail.
 '$lgt_is_boolean'(true).

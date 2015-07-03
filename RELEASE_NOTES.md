@@ -27,6 +27,13 @@ RELEASE NOTES
 3.00.5 - July ??, 2015
 ======================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Workaround a Lean Prolog parser bug that resulted in a syntax error
+when loading the Logtalk compiler/runtime.
+
+
 Prolog adapter and integration files
 ------------------------------------
 
