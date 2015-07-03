@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for B-Prolog 7.8 and later versions
-%  Last updated on May 10, 2015
+%  Last updated on July 3, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -501,7 +501,8 @@ findall(Term, Goal, List, Tail) :-
 % '$lgt_read_term'(@stream, -term, +list, -position, -list)
 
 '$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, Variables) :-
-	read_term(Stream, Term, [line_counts(LineBegin, LineEnd), variable_names(Variables)| Options]).
+	% B-Prolog bug workarund: up to version 8.1, the lines are returned end line first!
+	read_term(Stream, Term, [line_counts(LineEnd, LineBegin), variable_names(Variables)| Options]).
 
 
 

@@ -27,7 +27,11 @@ RELEASE NOTES
 3.00.5 - July ??, 2015
 ======================
 
+Prolog adapter and integration files
+------------------------------------
 
+* FIXED: Workaround a B-Prolog bug where the `read_term/3` predicate returns a
+`line_counts/2` term property where the lines are returned end line first.
 
 
 3.00.4 - June 23, 2015
