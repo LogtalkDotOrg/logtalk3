@@ -40,6 +40,9 @@ Prolog adapter and integration files
 * FIXED: Workaround a B-Prolog bug where the `read_term/3` predicate returns a
 `line_counts/2` term property where the lines are returned end line first.
 
+* FIXED: Workaround a Lean Prolog `read_term/6` predicate issue where the
+returned term begin line is offset by one.
+
 
 3.00.4 - June 23, 2015
 ======================

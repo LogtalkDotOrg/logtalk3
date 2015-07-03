@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Lean Prolog 3.8.8 and later versions
-%  Last updated on May 13, 2015
+%  Last updated on July 3, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -566,7 +566,8 @@ to_engine(Interactor, Pattern, Goal) :-
 % '$lgt_read_term'(@stream, -term, +list, -position, -list)
 
 '$lgt_read_term'(Stream, Term, [singletons([])], LineBegin-LineEnd, Variables) :-
-	read_term(Stream, yes, Term, Variables, LineBegin, LineEnd).
+	read_term(Stream, yes, Term, Variables, LineBegin0, LineEnd),
+	LineBegin is LineBegin0 + 1.
 
 
 
