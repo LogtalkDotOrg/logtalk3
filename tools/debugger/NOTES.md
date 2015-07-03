@@ -53,3 +53,24 @@ a goal trace to a file.
 
 All source files are formatted using tabs (the recommended setting is
 a tab width equivalent to 4 spaces).
+
+
+Known issues
+------------
+
+Line number spy points require a Prolog backend compiler that supports
+accessing read term starting line but only some systems (B-Prolog, JIProlog,
+Lean Prolog, SWI-Prolog, and YAP) provide accurate line numbers.
+
+As a workaround, you can check the start line number for an entity predicate
+definition using a query such as:
+
+	| ?- object_property(Entity, defines(Functor/Arity, Properties)).
+
+and checking the returned `line_count/1` property to find if there's any
+offset to the source file number of the predicate clause that you want to
+trace. This issue, if present, usually only affects the first predicate
+clause.
+
+Line number spy points are currently not available when using XSB as the
+Prolog backend compiler.

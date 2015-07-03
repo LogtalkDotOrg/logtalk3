@@ -43,6 +43,12 @@ Prolog adapter and integration files
 * FIXED: Workaround a Lean Prolog `read_term/6` predicate issue where the
 returned term begin line is offset by one.
 
+Documentation
+-------------
+
+* IMPROVED: Document know issues in the `debugger` tool when trying to use
+line number spy points with some backend Prolog compilers.
+
 
 3.00.4 - June 23, 2015
 ======================
