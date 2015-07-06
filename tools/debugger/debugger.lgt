@@ -26,16 +26,14 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 2.1,
+		version is 2.2,
 		author is 'Paulo Moura',
-		date is 2015/05/10,
+		date is 2015/07/06,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
 	% avoid a catch-22...
 	:- set_logtalk_flag(debug, off).
-	% temporary fix for asking a question that requires a callback to a local predicate
-	:- set_logtalk_flag( context_switching_calls, allow).
 
 	:- private(debugging_/0).
 	:- dynamic(debugging_/0).
@@ -85,7 +83,7 @@
 	:- endif.
 
 	% we use the structured printing and question asking mechanisms to allow debugger
-	% inout and output to be intercepted for alternative interaction by e.g. GUI IDEs
+	% input and output to be intercepted for alternative interaction by e.g. GUI IDEs
 	:- uses(logtalk, [
 		print_message/3,
 		ask_question/5
@@ -607,7 +605,7 @@
 		retractall(tracing_).
 
 	do_port_option(z, _, _, _, _, _, _, true) :-
-		ask_question(question, debugger, enter_port_name, debugger<<valid_zap_port, ZapPort),
+		ask_question(question, debugger, enter_port_name, valid_zap_port, ZapPort),
 		retractall(zap_to_port_(_)),
 		(	atom(ZapPort) ->
 			assertz(zap_to_port_(ZapPort))
@@ -907,12 +905,13 @@
 
 	:- else.
 
+		% hack to workaround the lack of built-in support for unbuffered character input
 		read_single_char(Char) :-
 			flush_output, get_code(Code), char_code(Char, Code),
 			(	Code =:= 10 ->
 				true
-			;	peek_code(10) ->	% hack to workaround the lack of built-in
-				get_code(_)			% support for unbuffered character input
+			;	peek_code(10) ->
+				get_code(_)
 			;	true
 			).
 
