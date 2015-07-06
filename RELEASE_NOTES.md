@@ -49,6 +49,12 @@ Documentation
 * IMPROVED: Document know issues in the `debugger` tool when trying to use
 line number spy points with some backend Prolog compilers.
 
+Installers and installation scripts
+-----------------------------------
+
+* UPDATED: The Windows installer to also detect ECLiPSe 6.2 (the current
+development version).
+
 
 3.00.4 - June 23, 2015
 ======================

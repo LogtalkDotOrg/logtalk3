@@ -2,7 +2,7 @@
 ; Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 ; 
 ; Logtalk Inno Setup script for generating Windows installers
-; Last updated on May 29, 2015
+; Last updated on July 6, 2015
 ; 
 ; Logtalk is free software. You can redistribute it and/or modify it under
 ; the terms of the FSF GNU General Public License 3  (plus some additional
@@ -306,13 +306,19 @@ var
   ECLIPSEDIR: String;
 begin
   if IsWin64 then
-    if RegQueryStringValue(HKLM64, 'Software\IC-Parc\Eclipse\6.1\', 'ECLIPSEDIR', ECLIPSEDIR) then
+    if RegQueryStringValue(HKLM64, 'Software\IC-Parc\Eclipse\6.2\', 'ECLIPSEDIR', ECLIPSEDIR) then
+        Result := ECLIPSEDIR + '\lib\x86_64_nt\eclipse.exe'
+    else if RegQueryStringValue(HKLM32, 'Software\IC-Parc\Eclipse\6.2\', 'ECLIPSEDIR', ECLIPSEDIR) then
+        Result := ECLIPSEDIR + '\lib\i386_nt\eclipse.exe'
+    else if RegQueryStringValue(HKLM64, 'Software\IC-Parc\Eclipse\6.1\', 'ECLIPSEDIR', ECLIPSEDIR) then
         Result := ECLIPSEDIR + '\lib\x86_64_nt\eclipse.exe'
     else if RegQueryStringValue(HKLM32, 'Software\IC-Parc\Eclipse\6.1\', 'ECLIPSEDIR', ECLIPSEDIR) then
         Result := ECLIPSEDIR + '\lib\i386_nt\eclipse.exe'
     else
       Result := 'prolog_compiler_not_installed'
-  else if RegQueryStringValue(HKLM, 'Software\IC-Parc\Eclipse\6.1\', 'ECLIPSEDIR', ECLIPSEDIR) then
+  else if RegQueryStringValue(HKLM, 'Software\IC-Parc\Eclipse\6.2\', 'ECLIPSEDIR', ECLIPSEDIR) then
+         Result := ECLIPSEDIR + '\lib\i386_nt\eclipse.exe'
+       else if RegQueryStringValue(HKLM, 'Software\IC-Parc\Eclipse\6.1\', 'ECLIPSEDIR', ECLIPSEDIR) then
          Result := ECLIPSEDIR + '\lib\i386_nt\eclipse.exe'
        else
          Result := 'prolog_compiler_not_installed'
