@@ -58,6 +58,9 @@ development version).
 Tools
 -----
 
+* CHANGED: The `debugger` predicate `debugging/1` can now also enumerate,
+by backtracking, all entities compiled in debug mode.
+
 * FIXED: Workaround a `debugger` issue when using JIProlog as the backend
 Prolog compiler with the `get_code/1` predicate returning EOF when called
 from the console.

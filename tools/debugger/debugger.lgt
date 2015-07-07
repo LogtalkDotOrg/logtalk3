@@ -26,7 +26,7 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 2.3,
+		version is 2.4,
 		author is 'Paulo Moura',
 		date is 2015/07/07,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
@@ -177,6 +177,8 @@
 		print_message(information, debugger, leashed_ports(Ports)).
 
 	debugging(Entity) :-
+		nonvar(Entity),
+		!,
 		(	current_object(Entity) ->
 			object_property(Entity, debugging)
 		;	current_protocol(Entity) ->
@@ -185,6 +187,15 @@
 			category_property(Entity, debugging)
 		;	fail
 		).
+	debugging(Entity) :-
+		current_object(Entity),
+		object_property(Entity, debugging).
+	debugging(Entity) :-
+		current_protocol(Entity),
+		protocol_property(Entity, debugging).
+	debugging(Entity) :-
+		current_category(Entity),
+		category_property(Entity, debugging).
 
 	spy(SpyPoints) :-
 		spy_aux(SpyPoints),

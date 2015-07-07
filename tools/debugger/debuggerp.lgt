@@ -25,9 +25,9 @@
 :- protocol(debuggerp).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/07/27,
+		date is 2015/07/07,
 		comment is 'Debugger protocol.'
 	]).
 
@@ -37,7 +37,7 @@
 	:- public(reset/0).
 	:- mode(reset, one).
 	:- info(reset/0, [
-		comment is 'Resets all debugging settings, including spy points.'
+		comment is 'Resets all debugging settings, including spy points and leashed ports.'
 	]).
 
 	:- public(debug/0).
@@ -59,9 +59,9 @@
 	]).
 
 	:- public(debugging/1).
-	:- mode(debugging(+entity_identifier), zero_or_one).
+	:- mode(debugging(?entity_identifier), zero_or_more).
 	:- info(debugging/1, [
-		comment is 'True if the entity is being debugged.',
+		comment is 'Enumerates, by backtracking, all entities compiled in debug mode.',
 		argnames is ['Entity']
 	]).
 
@@ -74,7 +74,7 @@
 	:- public(notrace/0).
 	:- mode(notrace, one).
 	:- info(notrace/0, [
-		comment is 'Stops tracing of call compiled in debug mode.'
+		comment is 'Stops tracing of calls compiled in debug mode.'
 	]).
 
 	:- public((spy)/1).
