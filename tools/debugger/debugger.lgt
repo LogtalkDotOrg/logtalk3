@@ -26,9 +26,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 2.2,
+		version is 2.3,
 		author is 'Paulo Moura',
-		date is 2015/07/06,
+		date is 2015/07/07,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -879,7 +879,11 @@
 	:- elif(current_logtalk_flag(prolog_dialect, ji)).
 
 		read_single_char(Char) :-
-			get_code(Code), put_code(Code), char_code(Char, Code), nl.
+			get_code(Code),
+			(	Code =:= -1 ->
+				put_code(10), Char = '\n'
+			;	put_code(Code), char_code(Char, Code), nl
+			).
 
 	:- elif(current_logtalk_flag(prolog_dialect, lean)).
 

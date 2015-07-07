@@ -55,6 +55,13 @@ Installers and installation scripts
 * UPDATED: The Windows installer to also detect ECLiPSe 6.2 (the current
 development version).
 
+Tools
+-----
+
+* FIXED: Workaround a `debugger` issue when using JIProlog as the backend
+Prolog compiler with the `get_code/1` predicate returning EOF when called
+from the console.
+
 
 3.00.4 - June 23, 2015
 ======================
