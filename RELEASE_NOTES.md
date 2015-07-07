@@ -49,6 +49,8 @@ Documentation
 * IMPROVED: Document know issues in the `debugger` tool when trying to use
 line number spy points with some backend Prolog compilers.
 
+* IMPROVED: User Manual section on debugging.
+
 Installers and installation scripts
 -----------------------------------
 

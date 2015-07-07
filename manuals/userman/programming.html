@@ -138,7 +138,7 @@ To compile to disk and also load into memory the source files we can use the Log
 </p>
 <pre>| ?- logtalk_load([source_file1, source_file2, ...]).</pre>
 <p>
-This predicate works in the same way of the predicate <code>logtalk_compile/1</code> but also loads the compiled files to memory. 
+This predicate works in the same way of the predicate <code>logtalk_compile/1</code> but also loads the compiled files into memory. 
 </p>
 <p>
 Both predicates expect a source file name or a list of source file names as an argument. The Logtalk source file name extension, as defined in the adapter file (by default, <code>.lgt</code>), can be omitted.
@@ -219,7 +219,7 @@ This allows us to load a library source file without the need to first change th
 </p>
 <pre>| ?- logtalk_load(viewpoints(loader)). </pre>
 <p>
-The best way to take advantage of this feature is to load at startup a source file containing an <code>initialization/1</code> directive which asserts all the <code>logtalk_library_path/2</code> clauses needed for all available libraries. This allows us to load library source files or entire libraries without worrying about libraries paths, improving code portability. The directory paths on the second argument should always end with the path directory separator character. Most back-end Prolog compilers allows the use of environment variables in the second argument of the <code>logtalk_library_path/2</code> predicate. Use of POSIX relative paths (e.g. <code>'../'</code> or <code>'./'</code>) for top-level library directories (e.g. <code>lgtuser</code> in the example above) is not advised as different back-end Prolog compilers may start with different initial working directories, which may result in portability problems of your loader files.
+The best way to take advantage of this feature is to load at startup a source file containing clauses for the <code>logtalk_library_path/2</code> predicate needed for all available libraries. This allows us to load library source files or entire libraries without worrying about libraries paths, improving code portability. The directory paths on the second argument should always end with the path directory separator character. Most back-end Prolog compilers allows the use of environment variables in the second argument of the <code>logtalk_library_path/2</code> predicate. Use of POSIX relative paths (e.g. <code>'../'</code> or <code>'./'</code>) for top-level library directories (e.g. <code>lgtuser</code> in the example above) is not advised as different back-end Prolog compilers may start with different initial working directories, which may result in portability problems of your loader files.
 </p>
 <p>
 The library notation provides functionality inspired by the <code>file_search_path/2</code> mechanism introduced by Quintus Prolog and later adopted by some other Prolog compilers.
@@ -354,7 +354,7 @@ Note that the scope of the <code>set_logtalk_flag/2</code> directive is local to
 
 	<dl>
 		<dt><code>report(Option)</code></dt>
-			<dd>Controls the default printing of messages. Possible option values are <code>on</code> (by usual default, print all messages that are not intercepted by the user), <code>warnings</code> (only print warning messages that are not intercepted by the user), and <code>off</code> (do not print any messages that are not intercepted by the user).</dd>
+			<dd>Controls the default printing of messages. Possible option values are <code>on</code> (by usual default, print all messages that are not intercepted by the user), <code>warnings</code> (only print warning and error messages that are not intercepted by the user), and <code>off</code> (do not print any messages that are not intercepted by the user).</dd>
 	</dl>
 	<dl>
 		<dt><code>code_prefix(Character)</code></dt>
@@ -366,7 +366,7 @@ Note that the scope of the <code>set_logtalk_flag/2</code> directive is local to
 	</dl>
 	<dl>
 		<dt><code>source_data(Option)</code></dt>
-			<dd>Defines how much information is retained when compiling a source file. Possible option values are <code>on</code> (the usual default) and <code>off</code>. With this flag set to <code>on</code>, Logtalk will keep the information represented using documenting directives plus source location data (including source file names and line numbers). This information can be retrieved using reflection and is useful both for debugging and for integration with development tools. This flag can be turned off in order to generate more compact code.</dd>
+			<dd>Defines how much information is retained when compiling a source file. Possible option values are <code>on</code> (the usual default for development) and <code>off</code>. With this flag set to <code>on</code>, Logtalk will keep the information represented using documenting directives plus source location data (including source file names and line numbers). This information can be retrieved using reflection and is useful for documenting, debugging, and integration with third-party development tools. This flag can be turned off in order to generate more compact code.</dd>
 	</dl>
 	<dl>
 		<dt><code>debug(Option)</code></dt>
@@ -413,21 +413,21 @@ If you use Logtalk for batch processing, you probably want to turn off the optio
 <h2 id="programming_debugging">Debugging Logtalk programs</h2>
 
 <p>
-The Logtalk distribution includes in its <code>tools</code> directory a command-line debugger, implemented as an object (named <code>debugger</code>). It can be loaded by typing:
+The Logtalk distribution includes in its <code>tools</code> directory a command-line debugger, implemented as a Logtalk application. It can be loaded by typing:
 </p>
 <pre>| ?- logtalk_load(debugger(loader)).</pre>
 <p>
-This tool implements debugging features similar to those found on most Prolog compilers. However, there are some differences between the usual implementation of Prolog debuggers and the current implementation of the Logtalk debugger that you should be aware. First, unlike some Prolog debuggers, the Logtalk debugger is not implemented as a meta-interpreter. This translates to a different, although similar, set of debugging features with some limitations when compared with some Prolog debuggers. Second, debugging is only possible for entities compiled in debug mode. When compiling an entity in debug mode, Logtalk keeps each clause goal in both source form and compiled form in order to allow tracing of the goal execution. Third, implementation of spy points allows the user to specify the execution context for entering the debugger. This feature is a consequence of the encapsulation of predicates inside objects.
+This tool implements debugging features similar to those found on most Prolog systems. There are some differences, however, between the usual implementation of Prolog debuggers and the current implementation of the Logtalk debugger that you should be aware. First, unlike some Prolog debuggers, the Logtalk debugger is not implemented as a meta-interpreter. This translates to a different, although similar, set of debugging features with some limitations when compared with some of the more sophisticated Prolog debuggers. Second, debugging is only possible for entities compiled in debug mode. When compiling an entity in debug mode, Logtalk decorates clauses with source information to allow tracing of the goal execution. Third, implementation of spy points allows the user to specify the execution context for entering the debugger. This feature is a consequence of the encapsulation of predicates inside objects.
 </p>
 
-<h3 id="programming_debugmode">Compiling entities in debug mode</h3>
+<h3 id="programming_debugmode">Compiling source files and entities in debug mode</h3>
 
 <p>
 Compilation of source files in debug mode is controlled by the compiler flag <code>debug</code>. The default value for this flag, usually <code>off</code>, is defined in the adapter files. Its value may be changed at runtime by writing:
 </p>
 <pre>| ?- set_logtalk_flag(debug, on).</pre>
 <p>
-In alternative, if we want to compile only some entities in debug mode, we may instead write:
+In alternative, if we want to compile only some source files in debug mode, we may instead write:
 </p>
 <pre>| ?- logtalk_load([file1, file2, ...], [debug(on)]).</pre>
 <p>
@@ -436,6 +436,9 @@ The compiler flag <code>clean</code> is automatically turned on whenever the deb
 <p>After loading the debugger, we may check or enumerate, by backtracking, all loaded entities compiled in debug mode as follows:
 </p>
 <pre>| ?- debugger::debugging(Entity).</pre>
+<p>
+To compile only a specific entity in debug mode, use the <a title="Consult reference manual" href="../refman/directives/set_logtalk_flag_2.html"><code>set_logtalk_flag/2</code></a> directive inside the entity.
+</p>
 
 <h3 id="programming_boxmodel">Logtalk Procedure Box model</h3>
 
@@ -453,9 +456,6 @@ Logtalk uses a <em>Procedure Box model</em> similar to those found on most Prolo
 		<dd>failure of a predicate call</dd>
 </dl>
 <p>
-When tracing execution, the Logtalk debugger provides determinism information by prefixing the exit port with an asterisk when a call succeeds with choice-points pending.
-</p>
-<p>
 Logtalk, as found on some recent Prolog compilers, adds a port for dealing with exceptions thrown when calling a predicate:
 </p>
 <dl>
@@ -471,9 +471,6 @@ In addition to the ports described above, Logtalk adds two more ports, <em>fact<
 	<dt><code>rule</code></dt>
 		<dd>unification success between a goal and a rule head</dd>
 </dl>
-<p>
-For static predicates, the debugger prints the clause number at the unification ports: <code>Fact #N</code> or <code>Rule #N</code> indicates that clause <code>N</code> is being used for proving a goal.
-</p>
 <p>
 The user may define for which ports the debugger should pause for user interaction by specifying a list of leashed ports. For example:
 </p>
@@ -586,7 +583,7 @@ Logtalk allows tracing of execution for all objects compiled in debug mode. To s
 
 yes</pre>
 <p>
-Note that, when tracing, spy points will be ignored. While tracing, the debugger will pause for user input at each leashed port, printing an informative message with the port name and the current goal. After the port name, the debugger prints the goal invocation number (except for the unification ports). This invocation number is unique and can be used to correlate the port trace messages.
+Note that, when tracing, spy points will be ignored. While tracing, the debugger will pause for user input at each leashed port, printing an informative message with the port name and the current goal. Before the port number, when a spy point is set for the current clause or goal, the debugger will print a <code>#</code> character for line number spy points, a <code>+</code> character for predicate spy points, and a <code>*</code> character for context spy points. The debugger also provides determinism information by prefixing the <code>exit</code> port with a <code>*</code> character when a call succeeds with choice-points pending. After the port name, the debugger prints the goal invocation number. This invocation number is unique and can be used to correlate the port trace messages.
 </p>
 <p>
 To stop tracing and turning off the debugger, write:
@@ -768,7 +765,7 @@ When objects or categories containing grammar rules are compiled in debug mode, 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: April 25, 2015</span>
+		<span>Last updated on: July 7, 2015</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="installing.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="migration.html">next</a></span><br/>
