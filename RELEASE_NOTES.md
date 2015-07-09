@@ -33,7 +33,6 @@ Logtalk compiler and runtime
 * FIXED: Workaround a Lean Prolog parser bug that resulted in a syntax error
 when loading the Logtalk compiler/runtime.
 
-
 Prolog adapter and integration files
 ------------------------------------
 
@@ -49,7 +48,8 @@ Documentation
 * IMPROVED: Document know issues in the `debugger` tool when trying to use
 line number spy points with some backend Prolog compilers.
 
-* IMPROVED: User Manual section on debugging.
+* IMPROVED: User Manual sections on debugging and on calling non-standard
+Prolog built-in meta-predicates.
 
 Installers and installation scripts
 -----------------------------------
