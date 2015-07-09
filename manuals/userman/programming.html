@@ -756,16 +756,10 @@ When not debugging, we can use a second hook object to discard the <code>debug/1
 The Logtalk compiler automatically removes any redundant calls to the built-in predicate <code>true/0</code> when compiling object predicates.
 </p>
 
-<h3 id="programming_dcgs">Debugging grammar rules</h3>
-
-<p>
-When objects or categories containing grammar rules are compiled in debug mode, calls to non-terminals in grammar rules are printed by the debugger as call to the predicate <code>phrase/3</code>. This makes it possible to distinguish between calls to predicates resulting from the compilation of grammar rules from calls to other predicates. In addition, in debug mode, Logtalk tries to print any exception, in particular, existence errors, in terms of non-terminals instead of in terms of the predicates that would resulted from the compilation of grammar rules.
-</p>
-
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: July 7, 2015</span>
+		<span>Last updated on: July 9, 2015</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="installing.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="migration.html">next</a></span><br/>
