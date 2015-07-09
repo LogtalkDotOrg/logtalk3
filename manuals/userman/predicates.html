@@ -687,7 +687,7 @@ Note that the goals <code>self(Self)</code>, <code>sender(Sender)</code>, and <c
 is compiled with the goal <code>atom(Arg)</code> as the first condition on the clause body. As such, the use of these context execution methods do not interfere with the optimizations that some Prolog compilers perform when the first clause body condition is a call to a built-in type-test predicate or a comparison operator. 
 </p>
 <p>
-For parametric objects and categories, the method <a title="Consult reference manual" href="../refman/methods/parameter_2.html"><code>parameter/2</code></a> enables us to retrieve current parameter values (see the section on <a href="objects.html#parametric">parametric objects</a> for a detailed description). For example:
+For parametric objects and categories, the method <a title="Consult reference manual" href="../refman/methods/parameter_2.html"><code>parameter/2</code></a> enables us to retrieve current parameter values (see the section on <a href="objects.html#objects_parametric">parametric objects</a> for a detailed description). For example:
 </p>
 <pre>:- object(block(_Color)).
 
@@ -974,7 +974,7 @@ The third argument can be either the atom <code>predicate</code> or the atom <co
 <h2 id="predicates_prolog_user">Calling Prolog user-defined predicates</h2>
 
 <p>
-Prolog user-defined predicates can be called from within objects or categories by either using the <a title="Consult reference manual" href="../control/external_call_1.html"><code>{}/1</code></a> compiler bypass control construct. For example:
+Prolog user-defined predicates can be called from within objects or categories by either using the <a title="Consult reference manual" href="../refman/control/external_call_1.html"><code>{}/1</code></a> compiler bypass control construct. For example:
 </p>
 <pre>foo :-
     ...,
@@ -1017,7 +1017,7 @@ foo :-
 Note that the first argument of the <code>use_module/2</code>, when used within an object or a category, should be a module name, not a file name. The actual module code should be loaded prior to compilation of Logtalk that uses it. In particular, programmers should not expect that the module be auto-loaded (when using back-end Prolog compilers supporting an autoloading mechanism).
 </p>
 <p>
-When the module predicate is a meta-predicate but for some reason you don't want its calls to be compiled as such, you can use the <a title="Consult reference manual" href="../control/external_call_1.html"><code>{}/1</code></a> compiler bypass control construct as before:
+When the module predicate is a meta-predicate but for some reason you don't want its calls to be compiled as such, you can use the <a title="Consult reference manual" href="../refman/control/external_call_1.html"><code>{}/1</code></a> compiler bypass control construct as before:
 </p>
 <pre>foo :-
     ...,
