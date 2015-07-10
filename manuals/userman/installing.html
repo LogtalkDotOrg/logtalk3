@@ -36,21 +36,21 @@
 <h1 id="installing_installing">Installing Logtalk</h1>
 
 <p>
-This page provides an overview of Logtalk installation requirements and instructions and a description of the files contained on the Logtalk distribution. For detailed, up-to-date installation and configuration instructions, please see the <code>README.md</code>, <code>INSTALL.md</code>, and <code>CUSTOMIZE.md</code> files distributed with Logtalk. The broad compatibility of Logtalk, both with Prolog compilers and operating-systems, together with all the possible user scenarios, means that installation can vary from very simple by running an installer or a couple of scripts to the need of patching both Logtalk and Prolog compilers to workaround the lack of strong Prolog standards.
+This page provides an overview of Logtalk installation requirements and instructions and a description of the files contained on the Logtalk distribution. For detailed, up-to-date installation and configuration instructions, please see the <code>README.md</code>, <code>INSTALL.md</code>, and <code>CUSTOMIZE.md</code> files distributed with Logtalk. The broad compatibility of Logtalk, both with Prolog compilers and operating-systems, together with all the possible user scenarios, means that installation can vary from very simple by running an installer or a couple of scripts to the need of patching both Logtalk and Prolog compilers to workaround the lack of strong Prolog standards or to cope with the requirements of less common operating-systems.
 </p>
 <p>
-The preferred installation scenario is to have Logtalk installed in a system-wide location, thus available for all users, and a local copy of user-modifiable files on each user home directory (even when you are the single user of your computer). This scenario allows each user to independently customize Logtalk and to freely modify the provided programming examples. Logtalk installers, installation shell scripts, and Prolog integration scripts favor this installation scenario, although alternative installation scenarios are always possible. The installers set two environment variables, <code>LOGTALKHOME</code> and <code>LOGTALKUSER</code>, pointing, respectively, to the Logtalk installation folder and to the Logtalk user folder.
+The preferred installation scenario is to have Logtalk installed in a system-wide location, thus available for all users, and a local copy of user-modifiable files on each user home directory (even when you are the single user of your computer). This scenario allows each user to independently customize Logtalk and to freely modify the provided libraries and programming examples. Logtalk installers, installation shell scripts, and Prolog integration scripts favor this installation scenario, although alternative installation scenarios are always possible. The installers set two environment variables, <code>LOGTALKHOME</code> and <code>LOGTALKUSER</code>, pointing, respectively, to the Logtalk installation folder and to the Logtalk user folder.
 </p>
 <p>
 User applications should preferable be kept outside of the Logtalk user folder created by the installation process, however, as updating Logtalk often results in updating the contents of this folder. If your applications depend on customizations to the distribution files, backup those changes before updating Logtalk.
 </p>
 
-<h2 id="installing_requirements">Hardware &amp; software requirements</h2>
+<h2 id="installing_requirements">Hardware and software requirements</h2>
 
 <h3 id="installing_computer">Computer and operating system</h3>
 
 <p>
-Logtalk is compatible with almost any computer/operating-system with a modern Prolog compiler available. Currently, the main development environment is an Apple MacBook Pro running MacOS X. Being written in Prolog and distributed in source form, the only issue regarding operating system compatibility are the end-of-line codes in the source text files!
+Logtalk is compatible with almost any computer/operating-system with a modern, standars compliant, Prolog compiler available.
 </p>
 
 <h3 id="installing_compiler">Prolog compiler</h3>
@@ -325,7 +325,7 @@ Logtalk source files are text files containing one or more entity definitions (o
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &ndash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: February 14, 2015</span>
+		<span>Last updated on: July 9, 2015</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="documenting.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="programming.html">next</a></span><br/>

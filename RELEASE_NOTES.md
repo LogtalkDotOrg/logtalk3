@@ -48,8 +48,8 @@ Documentation
 * IMPROVED: Document know issues in the `debugger` tool when trying to use
 line number spy points with some backend Prolog compilers.
 
-* IMPROVED: User Manual sections on debugging and on calling non-standard
-Prolog built-in meta-predicates.
+* IMPROVED: User Manual sections on documenting, debugging, migration, and on
+calling non-standard Prolog built-in meta-predicates.
 
 Installers and installation scripts
 -----------------------------------
