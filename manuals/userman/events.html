@@ -153,16 +153,6 @@ Ideally, whenever there are several monitors defined for the same event, the cal
 Logtalk provides three built-in predicates for event handling. These predicates enable you to find what events are defined, to define new events and to abolish events when they are no longer needed. If you plan to use events extensively in your application, then you should probably define a set of objects that use the built-in predicates described below to implement more sophisticated and high-level behavior.
 </p>
 
-<h3 id="events_finding">Finding defined events</h3>
-
-<p>
-The events that are currently defined can be retrieved using the Logtalk built-in predicate <a title="Consult reference manual" href="../refman/predicates/current_event_5.html"><code>current_event/5</code></a>:
-</p>
-<pre>| ?- current_event(Event, Object, Message, Sender, Monitor).</pre>
-<p>
-Note that this predicate will return a <strong>set</strong> of matching events if some of the returned arguments are free variables or contain free variables.
-</p>
-
 <h3 id="events_defining">Defining new events</h3>
 
 <p>
@@ -170,7 +160,7 @@ New events can be defined using the Logtalk built-in predicate <a title="Consult
 </p>
 <pre>| ?- define_events(Event, Object, Message, Sender, Monitor).</pre>
 <p>
-Note that if any of the <code>Event</code>, <code>Object</code>, <code>Message</code>, and <code>Sender</code> arguments is a free variable or contains free variables, this call will define the <strong>set</strong> of matching events.
+Note that if any of the <code>Event</code>, <code>Object</code>, <code>Message</code>, and <code>Sender</code> arguments is a free variable or contains free variables, this call will define a <strong>set</strong> of matching events.
 </p>
 
 <h3 id="events_abolishing">Abolishing defined events</h3>
@@ -181,6 +171,16 @@ Events that are no longer needed may be abolished using the <a title="Consult re
 <pre>| ?- abolish_events(Event, Object, Message, Sender, Monitor).</pre>
 <p>
 If called with free variables, this goal will remove all matching events.
+</p>
+
+<h3 id="events_finding">Finding defined events</h3>
+
+<p>
+The events that are currently defined can be retrieved using the Logtalk built-in predicate <a title="Consult reference manual" href="../refman/predicates/current_event_5.html"><code>current_event/5</code></a>:
+</p>
+<pre>| ?- current_event(Event, Object, Message, Sender, Monitor).</pre>
+<p>
+Note that this predicate will return <strong>sets</strong> of matching events if some of the returned arguments are free variables or contain free variables.
 </p>
 
 <h3 id="events_handlers">Defining event handlers</h3>
@@ -194,7 +194,7 @@ The <code>monitoring</code> built-in protocol declares two public predicates, <a
 after(Object, Message, Sender) :-
     ... .</pre>
 <p>
-The arguments in both methods are instantiated by the message sending mechanisms when a spied event occurs. For example, assume that we want to define a monitor called <code>tracer</code> that will track any message sent to an object by printing a describing text to the standard output. Its definition could be something like:</p>
+The arguments in both methods are instantiated by the message sending mechanisms when a monitored event occurs. For example, assume that we want to define a monitor called <code>tracer</code> that will track any message sent to an object by printing a describing text to the standard output. Its definition could be something like:</p>
 <pre>:- object(tracer,
     implements(monitoring)).    % built-in protocol for event handler methods
 
@@ -249,7 +249,7 @@ The <code>monitoring</code> protocol declares the event handlers as public predi
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: May 26, 2015</span>
+		<span>Last updated on: July 9, 2015</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="inheritance.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="threads.html">next</a></span><br/>

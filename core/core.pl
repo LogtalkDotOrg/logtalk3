@@ -1632,7 +1632,7 @@ conforms_to_protocol(ObjOrCtg, Protocol, Scope) :-
 
 
 
-% current_event(?event, ?object_identifier, ?callable, ?object_identifier, ?object_identifier)
+% current_event(?term, ?term, ?term, ?term, ?object_identifier)
 
 current_event(Event, Obj, Msg, Sender, Monitor) :-
 	'$lgt_must_be'(var_or_event, Event, logtalk(current_event(Event, Obj, Msg, Sender, Monitor), _)),
@@ -1652,7 +1652,7 @@ current_event(Event, Obj, Msg, Sender, Monitor) :-
 
 
 
-%define_events(@event, @object_identifier, @callable, @object_identifier, +object_identifier)
+% define_events(@term, @term, @term, @term, +object_identifier)
 
 define_events(Event, Obj, Msg, Sender, Monitor) :-
 	'$lgt_must_be'(var_or_event, Event, logtalk(define_events(Event, Obj, Msg, Sender, Monitor), _)),
@@ -1690,7 +1690,7 @@ define_events(Event, Obj, Msg, Sender, Monitor) :-
 
 
 
-% abolish_events(@event, @object_identifier, @callable, @object_identifier, @object_identifier)
+% abolish_events(@term, @term, @term, @term, @term)
 
 abolish_events(Event, Obj, Msg, Sender, Monitor) :-
 	'$lgt_must_be'(var_or_event, Event, logtalk(abolish_events(Event, Obj, Msg, Sender, Monitor), _)),

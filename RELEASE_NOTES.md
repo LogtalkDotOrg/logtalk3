@@ -51,6 +51,8 @@ line number spy points with some backend Prolog compilers.
 * IMPROVED: User Manual sections on documenting, debugging, migration, and on
 calling non-standard Prolog built-in meta-predicates.
 
+* FIXED: Typos in the templates of the event handling built-in predicates.
+
 Installers and installation scripts
 -----------------------------------
 
