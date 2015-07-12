@@ -53,6 +53,9 @@ calling non-standard Prolog built-in meta-predicates.
 
 * FIXED: Typos in the templates of the event handling built-in predicates.
 
+* FIXED: Description of the conditions where the `self/1`, `sender/1`, and
+`this/1` built-in methods are compiled inline.
+
 Installers and installation scripts
 -----------------------------------
 
