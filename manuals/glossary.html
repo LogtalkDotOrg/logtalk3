@@ -157,10 +157,10 @@
 </dl></dd>
 
 <dt id="monitor" class="glossary"><strong>monitor</strong></dt>
-<dd>Any object that is notified when a spied event occurs. The spied events can be set by the monitor itself or by any other object.</dd>
+<dd>Any object, implementing the <code>monitoring</code> built-in protocol, that is notified by the runtime when a spied event occurs. The spied events can be set by the monitor itself or by any other object.</dd>
 
 <dt id="object" class="glossary"><strong>object</strong></dt>
-<dd>An entity characterized by an identity and a set of predicate directives and clauses. Logtalk objects can be either static or dynamic. Logtalk objects can play the role of classes, instances, or prototypes.</dd>
+<dd>An entity characterized by an identity and a set of predicate directives and clauses. Logtalk objects can be either static or dynamic. Logtalk objects can play the role of classes, instances, or prototypes. The role or roles an object plays depends on its relations with other objects.</dd>
 
 <dd><dl>
 
@@ -187,6 +187,9 @@
 <dt id="built_in_predicate" class="glossary"><strong>built-in predicate</strong></dt>
 <dd>A pre-defined predicate that can be called from anywhere. Built-in predicates can be redefined within objects and categories.</dd>
 
+<dt id="coinductive_predicate" class="glossary"><strong>coinductive predicate</strong></dt>
+<dd>A predicate whose calls are proved using greatest fixed point semantics. Coinductive predicates allows reasoning about about infinite rational entities such as cyclic terms and ω-automata.</dd>
+
 <dt id="local_predicate" class="glossary"><strong>local predicate</strong></dt>
 <dd>A predicate that is defined in an object (or in a category) but that is not listed in a scope directive. These predicates behave like private predicates but are invisible to the reflection built-in methods. Local predicates are usually auxiliary predicates, only relevant to the entity where they are defined.</dd>
 
@@ -207,6 +210,9 @@
 
 <dt id="multifile_predicate" class="glossary"><strong>multifile predicate</strong></dt>
 <dd>A predicate whose clauses can be defined in multiple entities. There must always be an object (or category) holding the multifile predicate <em>primary declaration</em>, which consists of both a <code>public/1</code> directive and a <code>multifile/1</code> directive.</dd>
+
+<dt id="synchronized_predicate" class="glossary"><strong>synchronized predicate</strong></dt>
+<dd>A synchronized predicate is protected by a mutex ensuring that, in a multi-threaded application, it can only be called by a single thread at a time.</dd>
 
 <dt id="visible_predicate" class="glossary"><strong>visible predicate</strong></dt>
 <dd>A predicate that is declared for an object, a built-in method, a Logtalk built-in predicate, or a Prolog built-in predicate.</dd>
@@ -239,7 +245,7 @@
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: February 20, 2015</span>
+		<span>Last updated on: July 9, 2015</span>
 	</div>
 	<div class="navbottom">
 		<span>&nbsp;</span><br/>
