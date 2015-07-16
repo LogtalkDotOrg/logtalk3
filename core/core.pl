@@ -9201,7 +9201,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_built_in_method'(Head, _, _, Flags),
 	Head \= _::_,
 	Head \= ':'(_, _),
-	% not a clause head for a multifile predicate
+	% not a clause for a multifile predicate
 	Flags /\ 2 =\= 2,
 	% not a (user defined) dynamic built-in predicate
 	functor(Head, Functor, Arity),
@@ -9369,7 +9369,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	TPred = '$lgt_metacall'(Pred, ExCtx).
 
-% compiler bypass (call of external code)
+% compiler bypass control construct (opaque to cuts)
 
 '$lgt_compile_body'({Pred}, TPred, '$lgt_debug'(goal({Pred}, TPred), ExCtx), Ctx) :-
 	!,
@@ -15930,10 +15930,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	% check if call/2-N
 		functor(Method, call, Arity),
 		Arity > 1,
+		Scope = p,
 		functor(Meta, call, Arity),
 		Closure is Arity - 1,
 		arg(1, Meta, Closure),
-		'$lgt_built_in_method_call_n_args'(Arity, Meta)
+		'$lgt_built_in_method_call_n_args'(Arity, Meta),
+		Flags = 1
 	).
 
 

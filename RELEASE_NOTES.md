@@ -30,6 +30,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* FIXED: Instantiation error instead of the expected error when the user tries
+to redefine the `call/2-N` built-in methods.
+
 * FIXED: Workaround a Lean Prolog parser bug that resulted in a syntax error
 when loading the Logtalk compiler/runtime.
 
