@@ -48,13 +48,13 @@ Documentation
 * IMPROVED: Document know issues in the `debugger` tool when trying to use
 line number spy points with some backend Prolog compilers.
 
-* IMPROVED: User Manual sections on documenting, debugging, migration, and on
-calling non-standard Prolog built-in meta-predicates.
+* IMPROVED: Several User Manual sections including documenting, debugging,
+migration, and on calling non-standard Prolog built-in meta-predicates.
 
 * FIXED: Typos in the templates of the event handling built-in predicates.
 
-* FIXED: Description of the conditions where the `self/1`, `sender/1`, and
-`this/1` built-in methods are compiled inline.
+* FIXED: Reference Manual description of the conditions where the `self/1`,
+`sender/1`, and `this/1` built-in methods are compiled inline.
 
 Installers and installation scripts
 -----------------------------------

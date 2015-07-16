@@ -37,7 +37,7 @@
 <dl>
 
 <dt id="ancestor" class="glossary"><strong>ancestor</strong></dt>
-<dd>A class or parent prototype that contributes (via inheritance) to the definition of an object. For class-based hierarchies, the ancestors of an instance are its class(es) and all the superclasses of its class(es). For prototype-based hierarchies, the ancestors of an prototype are its parent(s) and the ancestors of its parent(s).</dd>
+<dd>A class or a parent prototype that contributes (via inheritance) to the definition of an object. For class-based hierarchies, the ancestors of an instance are its class(es) and all the superclasses of its class(es). For prototype-based hierarchies, the ancestors of an prototype are its parent(s) and the ancestors of its parent(s).</dd>
 
 <dt id="category" class="glossary"><strong>category</strong></dt>
 <dd>A set of predicates directives and clauses that can be (virtually) imported by any object. Categories support composing objects using fine-grained units of code reuse and also hot patching of existing objects. A category should be functionally-cohesive, defining a single functionality.</dd>
@@ -50,7 +50,7 @@
 </dl></dd>
 
 <dt id="class" class="glossary"><strong>class</strong></dt>
-<dd>An object that defines the common predicates of a set of objects (its instances).</dd>
+<dd>An object that specializes another object, interpreted as its superclass. Classes define the common predicates of a set of objects (its instances). An object can also be interpreted as a class when it instantiates itself.</dd>
 
 <dd><dl>
 
@@ -58,7 +58,7 @@
 <dd>A class that cannot be instantiated. Usually used to store common predicates that are inherited by other classes.</dd>
 
 <dt id="metaclass" class="glossary"><strong>metaclass</strong></dt>
-<dd>The class of a class, when we see it as an object. Metaclass instances are themselves classes. In a reflexive system any metaclass is also an object.</dd>
+<dd>The class of a class, when interpreted as an instance. Metaclass instances are themselves classes.</dd>
 
 <dt id="subclass" class="glossary"><strong>subclass</strong></dt>
 <dd>A class that is a specialization, direct or indirectly, of another class.</dd>
@@ -69,7 +69,7 @@
 </dl></dd>
 
 <dt id="directive" class="glossary"><strong>directive</strong></dt>
-<dd>A Prolog/Logtalk term that affects the interpretation of Prolog/Logtalk code. Directives are represented using the <code>(:-)/1</code> prefix operator.</dd>
+<dd>A source file term that affects the interpretation of source code. Directives use the <code>(:-)/1</code> prefix operator as functor.</dd>
 
 <dd><dl>
 
@@ -85,7 +85,7 @@
 </dl></dd>
 
 <dt id="encapsulation" class="glossary"><strong>encapsulation</strong></dt>
-<dd>The hiding of an object implementation. This promotes software reuse by isolating users from implementation details.</dd>
+<dd>The hiding of an object implementation. This promotes software reuse by isolating users from implementation details.  Encapsulation is enforced in Logtalk by using predicate scope directives.</dd>
 
 <dt id="entity" class="glossary"><strong>entity</strong></dt>
 <dd>Generic name for Logtalk compilation units: objects, categories, and protocols.</dd>
@@ -94,12 +94,12 @@
 <dd>The sending of a message to an object. An event can be expressed as an ordered tuple: <code>(Event, Object, Message, Sender)</code>. Logtalk distinguish between the sending of a message - <code>before</code> event - and the return of control to the sender - <code>after</code> event.</dd>
 
 <dt id="grammar_rule" class="glossary"><strong>grammar rule</strong></dt>
-<dd>An alternative notation for predicates used to parse or generate sentences on some language. This notation hides the arguments used to pass the lists of tokens being processed, thus simplifying the representation of grammars. Grammar rules are represented using the infix operator <code>(--&gt;)/2</code> instead of the operator used on predicate clauses (<code>(:-)/2</code>).</dd>
+<dd>An alternative notation for predicates used to parse or generate sentences on some language. This notation hides the arguments used to pass the sequences of tokens being processed, thus simplifying the representation of grammars. Grammar rules are represented using as functor the infix operator <code>(--&gt;)/2</code> instead of the <code>(:-)/2</code> operator used with predicate clauses.</dd>
 
 <dd><dl>
 
 <dt id="non_terminal" class="glossary"><strong>grammar rule non-terminal</strong></dt>
-<dd>A syntactic category of words of phrases. A non-terminal is identified by its <em>non-terminal indicator</em>, i.e. by its name and number of arguments using the notation <code>Functor//Arity</code>.</dd>
+<dd>A syntactic category of words or phrases. A non-terminal is identified by its <em>non-terminal indicator</em>, i.e. by its name and number of arguments using the notation <code>Functor//Arity</code>.</dd>
 
 <dt id="terminal" class="glossary"><strong>grammar rule terminal</strong></dt>
 <dd>A word or a basic symbol of a language.</dd>
@@ -110,7 +110,7 @@
 <dd>Property of an entity that distinguishes it from every other entity. Object and category identifiers can be an atoms or compound terms. Protocol identities must be atoms. All Logtalk entities (objects, protocols, and categories) share the same name space.</dd>
 
 <dt id="inheritance" class="glossary"><strong>inheritance</strong></dt>
-<dd>An object inherits predicate directives and clauses from other objects that it extends or specializes. If an object extends other object then we have a prototype-based inheritance. If an object specializes or instantiates another object we have a class-based inheritance.</dd>
+<dd>An object inherits predicate directives and clauses from related entities. If an object extends other object then we have a prototype-based inheritance. If an object specializes or instantiates another object we have a class-based inheritance.</dd>
 
 <dd><dl>
 
@@ -126,7 +126,7 @@
 </dl></dd>
 
 <dt id="instance" class="glossary"><strong>instance</strong></dt>
-<dd>The same as object. This term is used when we want to emphasize that an object characteristics are defined by another object (its class).</dd>
+<dd>An object that instantiates another object, interpreted as its class.</dd>
 
 <dt id="instantiation" class="glossary"><strong>instantiation</strong></dt>
 <dd>The process of creating a new class instance. In Logtalk, this does not necessarily implies dynamic creation of an object at runtime; an instance may also be defined as a static object in a source file.</dd>
@@ -135,7 +135,7 @@
 <dd>A directory containing source files. The directory name is used as the library name.</dd>
 
 <dt id="message" class="glossary"><strong>message</strong></dt>
-<dd>A request for a service, sent to an object. In logical terms, a message can be seen as a request for proof construction using an object's predicates.</dd>
+<dd>A query sent to an object. In logical terms, a message can be seen as a request for proof construction using an object's database and the databases of related entities.</dd>
 
 <dt id="meta-interpreter" class="glossary"><strong>meta-interpreter</strong></dt>
 <dd>A program capable of running other programs written in the same language.</dd>
@@ -223,10 +223,10 @@
 <dd>A program that collects data about other program performance.</dd>
 
 <dt id="protocol" class="glossary"><strong>protocol</strong></dt>
-<dd>An entity that can contain specifications (declarations) for predicates. A predicate is specified by a scope directive together, optionally, by other predicate directives. Protocols support the separation between interface and implementation, can be implemented by both objects and categories, and can be extended by other protocols. A protocol should be functionally-cohesive, specifying a single functionality.</dd>
+<dd>An entity that contains predicate declarations. A predicate is declared using a scope directive together, optionally, by other predicate directives. Protocols support the separation between interface and implementation, can be implemented by both objects and categories, and can be extended by other protocols. A protocol should be functionally-cohesive, specifying a single functionality.</dd>
 
 <dt id="prototype" class="glossary"><strong>prototype</strong></dt>
-<dd>A self-describing object that may extend or be extended by other objects.</dd>
+<dd>A self-describing object that may extend or be extended by other objects. An object with no declared relations with other objects is always interpreted as a prototype.</dd>
 
 <dt id="self" class="glossary"><strong>self</strong></dt>
 <dd>The original object that received the message under processing.</dd>
