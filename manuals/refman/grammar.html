@@ -515,7 +515,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 		</dl>
 		<dl>
 			<dt>object_directive ::=</dt>
-				<dd><em>initialization_directive</em> |</dd>
+				<dd>"<code>:- initialization(</code>" <em>callable</em> "<code>).</code>" |</dd>
 				<dd>"<code>:- built_in.</code>" |</dd>
 				<dd>"<code>:- threaded.</code>" |</dd>
 				<dd>"<code>:- dynamic.</code>" |</dd>
@@ -535,7 +535,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 		</dl>
 		<dl>
 			<dt>category_directive ::=</dt>
-				<dd><em>initialization_directive</em> |</dd>
+				<dd>"<code>:- initialization(</code>" <em>callable</em> "<code>).</code>" |</dd>
 				<dd>"<code>:- built_in.</code>" |</dd>
 				<dd>"<code>:- dynamic.</code>" |</dd>
 				<dd>"<code>:- uses(</code>" object_identifier "<code>).</code>" |</dd>
@@ -554,7 +554,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 		</dl>
 		<dl>
 			<dt>protocol_directive ::=</dt>
-				<dd><em>initialization_directive</em> |</dd>
+				<dd>"<code>:- initialization(</code>" <em>callable</em> "<code>).</code>" |</dd>
 				<dd>"<code>:- built_in.</code>" |</dd>
 				<dd>"<code>:- dynamic.</code>" |</dd>
 				<dd>"<code>:- info(</code>" entity_info_list "<code>).</code>" |</dd>
@@ -591,8 +591,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 		</dl>
 		<dl>
 			<dt>synchronized_directive ::=</dt>
-				<dd>"<code>:- synchronized(</code>" predicate_indicator "<code>).</code>" |</dd>
-				<dd>"<code>:- synchronized(</code>" non_terminal_indicator "<code>).</code>"</dd>
+				<dd>"<code>:- synchronized(</code>" predicate_indicator_term | non_terminal_indicator_term "<code>).</code>"</dd>
 		</dl>
 		<dl>
 			<dt>uses_directive ::=</dt>
@@ -854,6 +853,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 	<dl>
 		<dt>clause ::=</dt>
 			<dd>object_identifier "<code>::</code>" <em>head</em> "<code>:-</code>" <em>body</em> |</dd>
+			<dd>module_identifier "<code>:</code>" <em>head</em> "<code>:-</code>" <em>body</em> |</dd>
 			<dd><em>head</em> :- <em>body</em> |</dd>
 			<dd><em>fact</em></dd>
 	</dl>
@@ -1128,7 +1128,7 @@ The Logtalk grammar is here described using Backus-Naur Form syntax. Non-termina
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: February 13, 2015</span>
+		<span>Last updated on: July 17, 2015</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="index.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="index.html">next</a></span><br/>
