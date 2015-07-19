@@ -38,10 +38,10 @@
 
 <pre>include(File)</pre>
 <p>
-Includes a file contents, which must be valid terms, at the place of occurrence of the directive. The file can be specified as a relative path, an absolute path, or using library notation. If the file name have an extension, it must not be omitted.
+Includes a file contents, which must be valid terms, at the place of occurrence of the directive. The file can be specified as a relative path, an absolute path, or using library notation. If the file name have an extension, it must not be omitted. When using the reflection API, all file terms share the same line number as the directive. 
 </p>
 <p>
-This directive can be used as either a file directive or an entity directive. As an entity directive, it can be used both in entities defined in source files and with the entity creation built-in predicates.
+This directive can be used as either a source file directive or an entity directive. As an entity directive, it can be used both in entities defined in source files and with the entity creation built-in predicates.
 </p>
 
 <h4>Template and modes</h4>
@@ -62,7 +62,7 @@ This directive can be used as either a file directive or an entity directive. As
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: May 21, 2014</span>
+		<span>Last updated on: July 17, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="end_protocol_0.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="info_1.html">next</a></span><br/>
