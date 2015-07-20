@@ -30,6 +30,11 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: Super calls from predicates defined in complementing categories now
+lookup inherited definitions as if the calls were made from the complemented
+object instead of the category ancestors, thus allowing more comprehensive
+object patching.
+
 * FIXED: Instantiation error instead of the expected error when the user tries
 to redefine the `call/2-N` built-in methods.
 

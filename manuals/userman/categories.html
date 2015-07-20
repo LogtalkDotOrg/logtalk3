@@ -70,7 +70,7 @@ A category may be defined as a composition of other categories by writing:
 This feature should only be used when extending a category without breaking its functional cohesion (for example, when a modified version of a category is needed for importing on several unrelated objects). The preferred way of composing several categories is by importing them into an object. When a category overrides a predicate defined in an extended category, the overridden definition can still be used by using the <a title="Consult reference manual" href="../refman/directives/alias_2.html"><code>alias/2</code></a> predicate directive.
 </p>
 <p>
-A category may explicitly complement one or more existing objects, thus providing hot patching functionality similar to Objective-C categories:
+A category may explicitly complement one or more existing objects, thus providing hot patching functionality inspired by Objective-C categories:
 </p>
 <pre>:- category(Category,
     complements(Object1, Object2, ....)).
@@ -79,7 +79,7 @@ A category may explicitly complement one or more existing objects, thus providin
 <p>
 This allows us to patch existing functionality or add new functionality to existing objects without requiring access or modifications to their source code. Common uses are adding logging or debugging predicates to a set of objects. Complementing categories may also be used to define aliases for complemented object predicates. Complemented objects need to be compiled with the <code>complements</code> compiler flag set <code>allow</code> (to allow both patching and adding new functionality) or <code>restrict</code> (to allow only adding new functionality).
 </p>
-An unfortunate consequence of allowing an object to be patched using a complementing category is that it disables the use of static binding optimizations for messages sent to the object as it can always be later patched, thus rendering the static binding optimizations invalid.
+An unfortunate consequence of allowing an object to be patched at runtime using a complementing category is that it disables the use of static binding optimizations for messages sent to the complemented object as it can always be later patched, thus rendering the static binding optimizations invalid.
 <p>
 Categories cannot inherit from objects. In addition, categories cannot define clauses for dynamic predicates. This restriction applies because a category can be imported by several objects and because we cannot use the database handling built-in methods with categories (messages can only be sent to objects). However, categories may contain declarations for dynamic predicates and they can contain predicates which handle dynamic predicates. For example:
 </p>
@@ -416,7 +416,7 @@ Note that access to category parameters is only possible using the <code>paramet
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: February 13, 2015</span>
+		<span>Last updated on: July 20, 2015</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="protocols.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="predicates.html">next</a></span><br/>

@@ -12237,6 +12237,25 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 '$lgt_compile_super_call'(Pred, TPred, Ctx) :-
+	'$lgt_pp_complemented_object_'(Obj, _, _, _, _),
+	% super calls from predicates defined in complementing categories
+	% lookup inherited definitions in the complemented object ancestors
+	!,
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	(	var(Pred) ->
+		TPred = (
+			'$lgt_current_object_'(Obj, _, _, _, Super, _, _, _, _, _, _),
+			'$lgt_obj_super_call'(Super, Pred, ExCtx)
+		)
+	;	callable(Pred) ->
+		TPred = (
+			'$lgt_current_object_'(Obj, _, _, _, Super, _, _, _, _, _, _),
+			'$lgt_obj_super_call_'(Super, Pred, ExCtx)
+		)
+	;	throw(type_error(callable, Pred))
+	).
+
+'$lgt_compile_super_call'(Pred, TPred, Ctx) :-
 	'$lgt_pp_category_'(Ctg, _, _, _, _, _),
 	(	\+ '$lgt_pp_extended_category_'(_, _, _, _, _, _) ->
 		% invalid goal (not an extended category)
@@ -14303,7 +14322,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_generate_prototype_super_clauses'(Super, Rnm) :-
 	'$lgt_pp_imported_category_'(Ctg, Obj, _, _, CDef, _),
-	'$lgt_execution_context_update_this_entity'(OExCtx, Obj, Obj, CExCtx, Obj, Ctg),
+	% the entity in the object execution context is usually the object itself
+	% but it can also be a complementing category; thus, the argument must be
+	% left uninstantiated but it will be bound by the runtime
+	'$lgt_execution_context_update_this_entity'(OExCtx, Obj, _, CExCtx, Obj, Ctg),
 	Lookup =.. [CDef, Pred, CExCtx, Call, TCtn],
 	(	'$lgt_pp_predicate_alias_'(Ctg, _, _, _, _) ->
 		Head =.. [Super, Alias, OExCtx, Call, Obj, TCtn],
@@ -14318,7 +14340,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_generate_prototype_super_clauses'(Super, Rnm) :-
 	'$lgt_pp_extended_object_'(Parent, Obj, _, _, PDef, _, _, _, _, _, _),
-	'$lgt_execution_context_update_this_entity'(OExCtx, Obj, Obj, PExCtx, Parent, Parent),
+	% the entity in the object execution context is usually the object itself
+	% but it can also be a complementing category; thus, the argument must be
+	% left uninstantiated but it will be bound by the runtime
+	'$lgt_execution_context_update_this_entity'(OExCtx, Obj, _, PExCtx, Parent, Parent),
 	Lookup =.. [PDef, Pred, PExCtx, Call, SCtn, TCtn],
 	(	'$lgt_pp_predicate_alias_'(Parent, _, _, _, _) ->
 		Head =.. [Super, Alias, OExCtx, Call, SCtn, TCtn],
@@ -14715,7 +14740,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_generate_ic_super_clauses'(Obj, Super, Rnm) :-
 	'$lgt_pp_imported_category_'(Ctg, Obj, _, _, CDef, _),
-	'$lgt_execution_context_update_this_entity'(OExCtx, Obj, Obj, CExCtx, Obj, Ctg),
+	% the entity in the object execution context is usually the object itself
+	% but it can also be a complementing category; thus, the argument must be
+	% left uninstantiated but it will be bound by the runtime
+	'$lgt_execution_context_update_this_entity'(OExCtx, _, Obj, CExCtx, Obj, Ctg),
 	Lookup =.. [CDef, Pred, CExCtx, Call, TCtn],
 	(	'$lgt_pp_predicate_alias_'(Ctg, _, _, _, _) ->
 		Head =.. [Super, Alias, OExCtx, Call, Obj, TCtn],
@@ -14732,7 +14760,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_instantiated_class_'(Class, Obj, _, _, _, _, _, CIDef, _, _, _),
 	% we can ignore class self-instantiation, which is often used in reflective designs
 	Class \= Obj,
-	'$lgt_execution_context_update_this_entity'(OExCtx, Obj, Obj, CExCtx, Class, Class),
+	% the entity in the object execution context is usually the object itself
+	% but it can also be a complementing category; thus, the argument must be
+	% left uninstantiated but it will be bound by the runtime
+	'$lgt_execution_context_update_this_entity'(OExCtx, _, Obj, CExCtx, Class, Class),
 	Lookup =.. [CIDef, Pred, CExCtx, Call, SCtn, TCtn],
 	% the following restriction allows us to distinguish the two "super" clauses that
 	% are generated when an object both instantiates and specializes other objects
@@ -14750,7 +14781,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_generate_ic_super_clauses'(Class, Super, Rnm) :-
 	'$lgt_pp_specialized_class_'(Superclass, Class, _, _, _, _, _, SIDef, _, _, _),
-	'$lgt_execution_context_update_this_entity'(CExCtx, Class, Class, SExCtx, Superclass, Superclass),
+	% the entity in the object execution context is usually the class itself
+	% but it can also be a complementing category; thus, the argument must be
+	% left uninstantiated but it will be bound by the runtime
+	'$lgt_execution_context_update_this_entity'(CExCtx, _, Class, SExCtx, Superclass, Superclass),
 	Lookup =.. [SIDef, Pred, SExCtx, Call, SCtn, TCtn],
 	(	'$lgt_pp_predicate_alias_'(Superclass, _, _, _, _) ->
 		Head =.. [Super, Alias, CExCtx, Call, SCtn, TCtn],
