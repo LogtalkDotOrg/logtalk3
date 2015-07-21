@@ -44,13 +44,21 @@ dynamic(Entity::Functor/Arity)
 dynamic((Entity1::Functor1/Arity1, Entity2::Functor2/Arity2, ...))
 dynamic([Entity1::Functor1/Arity1, Entity2::Functor2/Arity2, ...])
 
+dynamic(Module:Functor/Arity)
+dynamic((Module1:Functor1/Arity1, Module2:Functor2/Arity2, ...))
+dynamic([Module1:Functor1/Arity1, Module2:Functor2/Arity2, ...])
+
 dynamic(Functor//Arity)
 dynamic((Functor1//Arity1, Functor2//Arity2, ...))
 dynamic([Functor1//Arity1, Functor2//Arity2, ...])
 
 dynamic(Entity::Functor//Arity)
 dynamic((Entity1::Functor1//Arity1, Entity2::Functor2//Arity2, ...))
-dynamic([Entity1::Functor1//Arity1, Entity2::Functor2//Arity2, ...])</pre>
+dynamic([Entity1::Functor1//Arity1, Entity2::Functor2//Arity2, ...])
+
+dynamic(Module:Functor//Arity)
+dynamic((Module1:Functor1//Arity1, Module2:Functor2//Arity2, ...))
+dynamic([Module1:Functor1//Arity1, Module2:Functor2//Arity2, ...])</pre>
 <p>
 Declares dynamic predicates and dynamic grammar rule non-terminals. Note that an object can be static and have both static and dynamic predicates/non-terminals. Dynamic predicates cannot be declared as synchronized. When the dynamic predicates are local to an object, declaring them also as private predicates allows the Logtalk compiler to generated optimized code for asserting and retracting predicate clauses. Categories can also contain dynamic predicate directives but cannot contain clauses for dynamic predicates.
 </p>
@@ -67,8 +75,10 @@ dynamic(+object_identifier::+predicate_indicator_term)
 dynamic(+object_identifier::+non_terminal_indicator_term)
 
 dynamic(+category_identifier::+predicate_indicator_term)
-dynamic(+category_identifier::+non_terminal_indicator_term)</pre>
+dynamic(+category_identifier::+non_terminal_indicator_term)
 
+dynamic(+module_identifier:+predicate_indicator_term)
+dynamic(+module_identifier:+non_terminal_indicator_term)</pre>
 
 <h4>Examples</h4>
 
@@ -81,7 +91,7 @@ dynamic(+category_identifier::+non_terminal_indicator_term)</pre>
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: October 21, 2009</span>
+		<span>Last updated on: July 21, 2015</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="discontiguous_1.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="info_2.html">next</a></span><br/>

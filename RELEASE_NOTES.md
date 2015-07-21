@@ -64,6 +64,9 @@ migration, and on calling non-standard Prolog built-in meta-predicates.
 * FIXED: Reference Manual description of the conditions where the `self/1`,
 `sender/1`, and `this/1` built-in methods are compiled inline.
 
+* FIXED: Completed the descriptions of several directives in the Reference
+Manual that can also take module explicit-qualified arguments.
+
 Installers and installation scripts
 -----------------------------------
 

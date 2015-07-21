@@ -49,6 +49,18 @@ category(Category,
 
 category(Category,
     implements(Protocols),
+    extends(Categories))
+
+category(Category,
+    implements(Protocols),
+    complements(Objects))
+
+category(Category,
+    extends(Categories),
+    complements(Objects))
+
+category(Category,
+    implements(Protocols),
     extends(Categories),
     complements(Objects))
 </pre>
@@ -71,9 +83,20 @@ category(+category_identifier,
 
 category(+category_identifier,
     implements(+implemented_protocols),
+    extends(+extended_categories))
+
+category(+category_identifier,
+    implements(+implemented_protocols),
+    complements(+complemented_objects))
+
+category(+category_identifier,
+    extends(+extended_categories),
+    complements(+complemented_objects))
+
+category(+category_identifier,
+    implements(+implemented_protocols),
     extends(+extended_categories),
     complements(+complemented_objects))</pre>
-
 
 <h4>Examples</h4>
 
@@ -95,7 +118,7 @@ category(+category_identifier,
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: May 23, 2008</span>
+		<span>Last updated on: July 21, 2015</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="built_in_0.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="dynamic_0.html">next</a></span><br/>
