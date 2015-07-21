@@ -251,9 +251,13 @@ Follows a short description of each included example (in alphabetical order):
 - `operators`  
 	example of using operators local to objects and categories
 
-- `patching`  
+- `patches`  
 	example of using complementing categories to patch broken
 	object code
+
+- `patching`  
+	another example of using complementing categories to patch
+	broken object code
 
 - `parametric`  
 	simple example of parametric objects

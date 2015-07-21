@@ -1,0 +1,35 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the `LICENSE.txt` file for details.
+________________________________________________________________________
+
+
+% start by loading the example:
+
+| ?- logtalk_load(patches(loader)).
+...
+
+
+% find categories that complement objects:
+
+| ?- ?- complements_object(Category, Object).
+Category = patch,
+Object = proto
+yes 
+
+
+% verify the patch in the "patch" category for the predicate init/0
+% defined in the object "proto":
+
+| ?- proto::init.
+parent init
+proto init
+yes 
+
+?- proto::pet(Pet).
+Pet = cat
+yes 

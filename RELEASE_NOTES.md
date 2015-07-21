@@ -80,6 +80,12 @@ by backtracking, all entities compiled in debug mode.
 Prolog compiler with the `get_code/1` predicate returning EOF when called
 from the console.
 
+Examples
+--------
+
+* ADDED: Another hot patching example, `patches`, illustrating the changes
+in this release for the compilation of super calls in complementing categories.
+
 
 3.00.4 - June 23, 2015
 ======================

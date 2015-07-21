@@ -1,0 +1,24 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the `LICENSE.txt` file for details.
+________________________________________________________________________
+
+
+To load this example and for sample queries, please see the `SCRIPT.txt`
+file.
+
+This folder contains an example that shows how to use a complementing
+category to patch broken object predicate declarations and definitions 
+(without modifying its source code), thus providing functionality similar
+to Objective-C categories.
+
+The complemented objects must be compiled with the flag `complements` set
+to `allow` (its default value is usually `deny`). This solution was adapted
+to improve performance of applications that don't make use complementing
+categories and to provide a solution for preventing the use of categories
+to break object encapsulation. Note that the `complements` flag can be set
+on a per-object basis by using the `set_logtalk_flag/2` directive.
