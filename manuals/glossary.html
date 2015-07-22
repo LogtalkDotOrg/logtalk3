@@ -50,7 +50,7 @@
 </dl></dd>
 
 <dt id="class" class="glossary"><strong>class</strong></dt>
-<dd>An object that specializes another object, interpreted as its superclass. Classes define the common predicates of a set of objects (its instances). An object can also be interpreted as a class when it instantiates itself.</dd>
+<dd>An object that specializes another object, interpreted as its superclass. Classes define the common predicates of a set of objects (its instances). An object can also be interpreted as a class when it instantiates itself or when it is specialized by another object.</dd>
 
 <dd><dl>
 
@@ -67,6 +67,9 @@
 <dd>A class from which another class is a specialization (directly or indirectly via another class).</dd>
 
 </dl></dd>
+
+<dt id="cwa" class="glossary"><strong>closed-world assumption</strong></dt>
+<dd>The assumption that what cannot be proved true is false. Therefore, sending a message corresponding to a declared but not defined predicate, or calling a declared predicate with no clauses, fails. But messages or calls to undeclared predicates generate an error.</dd>
 
 <dt id="directive" class="glossary"><strong>directive</strong></dt>
 <dd>A source file term that affects the interpretation of source code. Directives use the <code>(:-)/1</code> prefix operator as functor.</dd>
@@ -209,7 +212,7 @@
 <dd>A predicate that can be called from any object.</dd>
 
 <dt id="multifile_predicate" class="glossary"><strong>multifile predicate</strong></dt>
-<dd>A predicate whose clauses can be defined in multiple entities. There must always be an object (or category) holding the multifile predicate <em>primary declaration</em>, which consists of both a <code>public/1</code> directive and a <code>multifile/1</code> directive.</dd>
+<dd>A predicate whose clauses can be defined in multiple entities. The object or category holding the directive without an entity prefix qualifying the predicate holds the multifile predicate <em>primary declaration</em>, which consists of both a <code>public/1</code> directive and a <code>multifile/1</code> directive for the predicate.</dd>
 
 <dt id="synchronized_predicate" class="glossary"><strong>synchronized predicate</strong></dt>
 <dd>A synchronized predicate is protected by a mutex ensuring that, in a multi-threaded application, it can only be called by a single thread at a time.</dd>
@@ -245,7 +248,7 @@
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: July 9, 2015</span>
+		<span>Last updated on: July 22, 2015</span>
 	</div>
 	<div class="navbottom">
 		<span>&nbsp;</span><br/>
