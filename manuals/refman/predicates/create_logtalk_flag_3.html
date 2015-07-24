@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<!--
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  
+%  This file is part of Logtalk <http://logtalk.org/>    
+%  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
+%  
+%  Logtalk is free software. You can redistribute it and/or modify it under
+%  the terms of the FSF GNU General Public License 3  (plus some additional
+%  terms per section 7).        Consult the `LICENSE.txt` file for details.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="application/xml+xhtml; charset=utf-8" />
+	<title>Logtalk built-in predicate: create_logtalk_flag/3</title>
+	<link rel="stylesheet" href="../../screen.css" type="text/css" media="screen"/>
+	<link rel="stylesheet" href="../../print.css" type="text/css" media="print"/>
+</head>
+
+<body>
+
+<div class="top-left">Logtalk reference manual</div>
+<div class="top-right">Built-in predicate: create_logtalk_flag/3</div>
+<div class="bottom-left"><span class="page"/></div>
+<div class="bottom-right"><span class="page"/></div>
+<div class="navtop"><a href="../../index.html">Contents</a> &gt; <a href="../index.html">Reference Manual</a> &gt; <a href="../index.html#predicates">Built-in Predicates</a> &gt; create_logtalk_flag/3</div>
+
+<h2 id="predicates_create_logtalk_flag_3" class="codenp">create_logtalk_flag/3</h2>
+
+<h4>Description</h4>
+
+<pre>create_logtalk_flag(Flag, Value, Options)</pre>
+<p>
+Creates a new Logtalk flag and sets its default value. User-defined flags can be queried and set in the same way as pre-defined flags by using, respectively, the <a title="Consult reference manual" href="current_logtalk_flag_2.html"><code>current_logtalk_flag/2</code></a> and <a title="Consult reference manual" href="set_logtalk_flag_2.html"><code>set_logtalk_flag/2</code></a> built-in predicates.
+</p>
+<p>
+This predicate is based on the specification of the SWI-Prolog <code>create_prolog_flag/3</code> built-in predicate and supports the same options: <code>access(Access)</code>, where <code>Access</code> can be either <code>read_write</code> (the default) or <code>read_only</code>; <code>keep(Keep)</code>, where <code>Keep</code> can be either <code>false</code> (the default) or <code>true</code>, for deciding if an existing definition of the flag should be kept or replaced by the new one; and <code>type(Type)</code> for specifying the type of the flag, which can be <code>boolean</code>, <code>atom</code>, <code>integer</code>, <code>float</code>, or <code>term</code> (which only restricts the flag value to ground terms). When the <code>type/1</code> option is not specified, the type of the flag is inferred from its initial value.
+</p>
+
+<h4>Template and modes</h4>
+
+<pre>create_logtalk_flag(+atom, +ground, +list(ground))</pre>
+
+<h4>Errors</h4>
+
+<dl>
+	<dt>Flag is a variable:</dt>
+		<dd><code>instantiation_error</code></dd>
+	<dt>Value is not a ground term:</dt>
+		<dd><code>instantiation_error</code></dd>
+	<dt>Options is not a ground term:</dt>
+		<dd><code>instantiation_error</code></dd>
+	<dt>Flag is neither a variable nor an atom:</dt>
+		<dd><code>type_error(atom, Flag)</code></dd>
+	<dt>Options is neither a variable nor a list:</dt>
+		<dd><code>type_error(atom, Flag)</code></dd>
+	<dt>Value is not a valid value for flag Flag:</dt>
+		<dd><code>domain_error(flag_value, Flag + Value)</code></dd>
+	<dt>Flag is a system-defined flag:</dt>
+		<dd><code>permission_error(modify, flag, Flag)</code></dd>
+	<dt>An element Option of the list Options is not a valid option</dt>
+		<dd>domain_error(flag_option,Option)</dd>
+	<dt>The list Options contains a type(Type) option and Value is not a Type term</dt>
+		<dd>type_error(Type, Value)</dd>
+</dl>
+
+<h4>Examples</h4>
+
+<pre>| ?- create_logtalk_flag(pretty_print_blobs, false, []).</pre>
+
+<div class="footer">
+	<div class="copyright">
+		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
+		<span>Last updated on: April 25, 2015</span>
+	</div>
+	<div class="navbottom">
+		<span><a href="set_logtalk_flag_2.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="../index.html#predicates">next</a></span><br/>
+		<span><a href="http://validator.w3.org/check/referer">XHTML</a> + <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a></span>
+	</div>
+</div>
+
+</body>
+
+</html>
