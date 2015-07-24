@@ -62,6 +62,8 @@ migration, and on calling non-standard Prolog built-in meta-predicates.
 * IMPROVED: Added some missing glossary entries and improved some of the
 existing ones.
 
+* IMPROVED: Added "see also" sections to several Reference Manual pages.
+
 * FIXED: Typos in the templates of the event handling built-in predicates.
 
 * FIXED: Reference Manual description of the conditions where the `self/1`,
@@ -69,6 +71,9 @@ existing ones.
 
 * FIXED: Completed the descriptions of several directives in the Reference
 Manual that can also take module explicit-qualified arguments.
+
+* FIXED: Missing Reference Manual page for the `create_logtalk_flag/3`
+built-in predicate.
 
 Installers and installation scripts
 -----------------------------------
