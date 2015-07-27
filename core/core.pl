@@ -1272,7 +1272,7 @@ create_protocol(Ptc, Relations, Directives) :-
 
 
 
-% abolish_object(@object_identifier)
+% abolish_object(+object_identifier)
 
 abolish_object(Obj) :-
 	'$lgt_must_be'(object_identifier, Obj, logtalk(abolish_object(Obj), _)),
@@ -1307,7 +1307,7 @@ abolish_object(Obj) :-
 
 
 
-% abolish_category(@category_identifier)
+% abolish_category(+category_identifier)
 
 abolish_category(Ctg) :-
 	'$lgt_must_be'(category_identifier, Ctg, logtalk(abolish_category(Ctg), _)),

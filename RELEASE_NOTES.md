@@ -64,7 +64,8 @@ existing ones.
 
 * IMPROVED: Added "see also" sections to several Reference Manual pages.
 
-* FIXED: Typos in the templates of the event handling built-in predicates.
+* FIXED: Typos in the templates of the abolish object/category and event
+handling built-in predicates.
 
 * FIXED: Reference Manual description of the conditions where the `self/1`,
 `sender/1`, and `this/1` built-in methods are compiled inline.
