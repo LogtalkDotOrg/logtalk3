@@ -56,8 +56,8 @@ Documentation
 * IMPROVED: Document know issues in the `debugger` tool when trying to use
 line number spy points with some backend Prolog compilers.
 
-* IMPROVED: Several User Manual sections including documenting, debugging,
-migration, and on calling non-standard Prolog built-in meta-predicates.
+* IMPROVED: Several User Manual sections including categories, documenting,
+debugging, migration, and on calling non-standard Prolog meta-predicates.
 
 * IMPROVED: Added some missing glossary entries and improved some of the
 existing ones.
