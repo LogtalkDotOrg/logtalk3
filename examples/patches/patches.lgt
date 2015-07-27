@@ -19,7 +19,9 @@
 
 
 :- category(patch,
+	% add a new imported category to the "proto" object
 	extends(pets),
+	% patch the "proto" object
 	complements(proto)).
 
 	% patch the broken definition of init/0

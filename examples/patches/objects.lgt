@@ -9,7 +9,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% ensure that the objects allow complementing categories
+% ensure that the objects allow complementing categories;
+% this directive is local to the source file
 :- set_logtalk_flag(complements, allow).
 
 

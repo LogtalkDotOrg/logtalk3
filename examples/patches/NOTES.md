@@ -12,9 +12,9 @@ To load this example and for sample queries, please see the `SCRIPT.txt`
 file.
 
 This folder contains an example that shows how to use a complementing
-category to patch broken object predicate declarations and definitions 
-(without modifying its source code), thus providing functionality similar
-to Objective-C categories.
+category to replace a broken predicate definition and to add a new imported
+category to an existing object (without modifying its source code), thus
+providing hot patching functionality similar to Objective-C categories.
 
 The complemented objects must be compiled with the flag `complements` set
 to `allow` (its default value is usually `deny`). This solution was adapted
