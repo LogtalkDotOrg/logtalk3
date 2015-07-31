@@ -27,7 +27,15 @@ RELEASE NOTES
 3.00.6 - August ??, 2015
 ========================
 
+Library
+-------
 
+* IMPROVED: Small performance optimization of the `assignvars` category.
+
+Examples
+--------
+
+* IMPROVED: Performance of the `assignvars` example.
 
 
 3.00.5 - July 27, 2015

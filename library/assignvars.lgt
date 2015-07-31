@@ -16,9 +16,9 @@ version 2.1 (http://opensource.org/licenses/osl-2.1.php).
 :- category(assignvars).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Nobukuni Kino and Paulo Moura',
-		date is 2014/05/22,
+		date is 2015/07/31,
 		comment is 'Assignable variables (supporting logical, backtracable assignement of non-variable terms).'
 	]).
 
@@ -92,8 +92,11 @@ version 2.1 (http://opensource.org/licenses/osl-2.1.php).
 		throw(error(instantiation_error, logtalk(Self::Assig <= Value, Sender))).
 
 	[_| Tail] <= Value :-
+		put_assign([_| Tail], Value).
+
+	put_assign([_| Tail], Value) :-
 		(	nonvar(Tail) ->
-			Tail <= Value
+			put_assign(Tail, Value)
 		;	Tail = [Value| _]
 		).
 
