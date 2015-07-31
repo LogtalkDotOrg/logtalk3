@@ -13,9 +13,9 @@
 	imports(private::assignvars)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2005/1/8,
+		date is 2015/07/31,
 		comment is 'A simple implementation of a geometric rectangle using assignable variables and parametric objects.',
 		parnames is ['Width', 'Height', 'Position']
 	]).
@@ -49,7 +49,7 @@
 
 	init :-
 		parameter(3, Position),
-		::assignable(Position, (0, 0)).
+		^^assignable(Position, (0, 0)).
 
 	area(Area) :-
 		parameter(1, Width),
@@ -58,10 +58,10 @@
 
 	move(X, Y) :-
 		parameter(3, Position),
-		::Position <= (X, Y).
+		^^Position <= (X, Y).
 
 	position(X, Y) :-
 		parameter(3, Position),
-		::Position => (X, Y).
+		^^Position => (X, Y).
 
 :- end_object.
