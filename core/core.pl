@@ -6872,7 +6872,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% and any enclose if ... endif
 		retractall('$lgt_pp_cc_skipping_'),
 		assertz('$lgt_pp_cc_skipping_'),
-		asserta('$lgt_pp_cc_mode_'(ignore))
+		retract('$lgt_pp_cc_mode_'(_)),
+		asserta('$lgt_pp_cc_mode_'(skip_all))
 	;	Mode == skip_all ->
 		true
 	;	% Mode == seek_else ->
@@ -6891,7 +6892,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	Mode \== ignore ->
 		retractall('$lgt_pp_cc_skipping_')
 	;	\+ '$lgt_pp_cc_if_found_'(_) ->
-		retractall('$lgt_pp_cc_skipping_')
+		retractall('$lgt_pp_cc_skipping_'),
+		retractall('$lgt_pp_cc_mode_'(_))
 	;	true
 	),
 	!.
