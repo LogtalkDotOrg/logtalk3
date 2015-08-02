@@ -6869,8 +6869,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		true
 	;	Mode == skip_else ->
 		% the corresponding if is true so we must skip this else
+		% and any enclose if ... endif
 		retractall('$lgt_pp_cc_skipping_'),
-		assertz('$lgt_pp_cc_skipping_')
+		assertz('$lgt_pp_cc_skipping_'),
+		asserta('$lgt_pp_cc_mode_'(ignore))
 	;	Mode == skip_all ->
 		true
 	;	% Mode == seek_else ->

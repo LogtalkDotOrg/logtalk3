@@ -33,6 +33,9 @@ Logtalk compiler and runtime
 * FIXED: Protocol and category operators declared using a scope directive
 would not be listed as entity properties.
 
+* FIXED: Bug in the processing of conditional compilation directives when
+using embedded `if/1` directives.
+
 Library
 -------
 
