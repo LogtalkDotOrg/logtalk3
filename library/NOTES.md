@@ -31,12 +31,12 @@ and loading predicates. For example:
 
 	| ?- logtalk_load(library(random_loader)).
 
-Currently, there are ten groups of entities defined, each one with its 
-own loader and notes files:
+Currently, there are eleven groups of entities defined, each one with
+its own loader and notes files:
 
-* dates  
-	`dates_loader.lgt`
-	`dates.txt`
+* assignvars  
+	`assignvars_loader.lgt`
+	`assignvars.txt`
 
 * dependents  
 	`dependents_loader.lgt`

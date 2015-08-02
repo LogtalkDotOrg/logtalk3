@@ -1,3 +1,13 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  
+%  This file is part of Logtalk <http://logtalk.org/>
+%  
+%  Logtalk is free software. You can redistribute it and/or modify it under
+%  the terms of the FSF GNU General Public License 3  (plus some additional
+%  terms per section 7).        Consult the `LICENSE.txt` file for details.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 /*
 This file contains an adaptation to Logtalk of code for logical assignment 
@@ -13,83 +23,40 @@ version 2.1 (http://opensource.org/licenses/osl-2.1.php).
 :- op(100, xfx, '=>').
 
 
-:- category(assignvars).
+:- object(assignvars,
+	implements(assignvarsp)).
 
 	:- info([
 		version is 1.3,
 		author is 'Nobukuni Kino and Paulo Moura',
 		date is 2015/07/31,
-		comment is 'Assignable variables (supporting logical, backtracable assignement of non-variable terms).'
+		comment is 'Assignable variables (supporting backtracable assignement of non-variable terms).'
 	]).
 
-	:- public(assignable/1).
-	:- mode(assignable(-assignvar), one).
-	:- info(assignable/1, [
-		comment is 'Makes Variable an assignable variable. Initial state will be empty.',
-		argnames is ['Variable'],
-		exceptions is [
-			'Variable is not a variable' - type_error(variable, 'Variable')
-		]
-	]).
-
-	:- public(assignable/2).
-	:- mode(assignable(-assignvar, @nonvar), one).
-	:- info(assignable/2, [
-		comment is 'Makes Variable an assignable variable and sets its initial state to Value.',
-		argnames is ['Variable', 'Value'],
-		exceptions is [
-			'Variable is not a variable' - type_error(variable, 'Variable'),
-			'Value is not instantiated' - instantiation_error
-		]
-	]).
-
-	:- public((<=)/2).
-	:- mode(<=(?assignvar, @nonvar), one).
-	:- info((<=)/2, [
-		comment is 'Sets the state of the assignable variable Variable to Value (initializing the variable if needed).',
-		argnames is ['Variable', 'Value'],
-		exceptions is [
-			'Value is not instantiated' - instantiation_error
-		]
-	]).
-
-	:- public((=>)/2).
-	:- mode(=>(+assignvar, ?nonvar), zero_or_one).
-	:- info((=>)/2, [
-		comment is 'Unifies Value with the current state of the assignable variable Variable.',
-		argnames is ['Variable', 'Value'],
-		exceptions is [
-			'Variable is not instantiated' - instantiation_error
-		]
-	]).
-
-	:- op(100, xfx, <=).
-	:- op(100, xfx, =>).
-
-	assignable(Assig) :-
-		nonvar(Assig),
+	assignable(Assignable) :-
+		nonvar(Assignable),
 		self(Self),
 		sender(Sender),
-		throw(error(type_error(variable, Assig), logtalk(Self::assignable(Assig), Sender))).
+		throw(error(type_error(variable, Assignable), logtalk(Self::assignable(Assignable), Sender))).
 	assignable([_| _]).
 
-	assignable(Assig, Init) :-
-		nonvar(Assig),
+	assignable(Assignable, Init) :-
+		nonvar(Assignable),
 		self(Self),
 		sender(Sender),
-		throw(error(type_error(variable, Assig), logtalk(Self::assignable(Assig, Init), Sender))).
-	assignable(Assig, Init) :-
+		throw(error(type_error(variable, Assignable), logtalk(Self::assignable(Assignable, Init), Sender))).
+	assignable(Assignable, Init) :-
 		var(Init),
 		self(Self),
 		sender(Sender),
-		throw(error(instantiation_error, logtalk(Self::assignable(Assig, Init), Sender))).
+		throw(error(instantiation_error, logtalk(Self::assignable(Assignable, Init), Sender))).
 	assignable([_, Init| _], Init).
 
-	Assig <= Value :-
+	Assignable <= Value :-
 		var(Value),
 		self(Self),
 		sender(Sender),
-		throw(error(instantiation_error, logtalk(Self::Assig <= Value, Sender))).
+		throw(error(instantiation_error, logtalk(Self::Assignable <= Value, Sender))).
 
 	[_| Tail] <= Value :-
 		put_assign([_| Tail], Value).
@@ -100,11 +67,11 @@ version 2.1 (http://opensource.org/licenses/osl-2.1.php).
 		;	Tail = [Value| _]
 		).
 
-	Assig => Value :-
-		var(Assig),
+	Assignable => Value :-
+		var(Assignable),
 		self(Self),
 		sender(Sender),
-		throw(error(instantiation_error, logtalk(Self::Assig => Value, Sender))).
+		throw(error(instantiation_error, logtalk(Self::Assignable => Value, Sender))).
 
 	[_| Tail] => Value :-
 		nonvar(Tail),
@@ -116,4 +83,4 @@ version 2.1 (http://opensource.org/licenses/osl-2.1.php).
 		;	Current = Value
 		).
 
-:- end_category.
+:- end_object.

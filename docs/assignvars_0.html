@@ -8,10 +8,10 @@
   </head>
   <body>
     <div class="header">
-      <p class="type">category</p>
+      <p class="type">object</p>
       <h1 class="code">assignvars</h1>
       <blockquote>
-        <p class="comment">Assignable variables (supporting logical, backtracable assignement of non-variable terms).</p>
+        <p class="comment">Assignable variables (supporting backtracable assignement of non-variable terms).</p>
       </blockquote>
     </div>
     <div class="entity">
@@ -33,115 +33,34 @@
         <dl class="properties">
           <dt class="key">compilation flags:</dt>
           <dd class="value">
-            <code>static</code>
+            <code>static, context_switching_calls</code>
           </dd>
         </dl>
-        <p class="comment">(no dependencies on other files)</p>
+        <dl class="relations">
+          <dt class="key">implements:</dt>
+          <dd class="value">
+            <code>public <a href="assignvarsp_0.html">assignvarsp</a></code>
+          </dd>
+        </dl>
       </div>
     </div>
     <div class="predicates">
       <div class="public">
         <h2>Public interface</h2>
         <div class="section">
-          <h3 id="assignable/1" class="code">assignable/1</h3>
-          <blockquote>
-            <p class="comment">Makes Variable an assignable variable. Initial state will be empty.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>assignable(Variable)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>assignable(-assignvar) &ndash; one</code>
-            </dd>
-            <dt class="key">exceptions:</dt>
-            <dd class="value">Variable is not a variable: <code>type_error(variable,Variable)</code></dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="assignable/2" class="code">assignable/2</h3>
-          <blockquote>
-            <p class="comment">Makes Variable an assignable variable and sets its initial state to Value.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>assignable(Variable,Value)</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>assignable(-assignvar,@nonvar) &ndash; one</code>
-            </dd>
-            <dt class="key">exceptions:</dt>
-            <dd class="value">Variable is not a variable: <code>type_error(variable,Variable)</code></dd>
-            <dd class="value">Value is not instantiated: <code>instantiation_error</code></dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="(&lt;=)/2" class="code">(&lt;=)/2</h3>
-          <blockquote>
-            <p class="comment">Sets the state of the assignable variable Variable to Value (initializing the variable if needed).</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>Variable&lt;=Value</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>(?assignvar)&lt;= (@nonvar) &ndash; one</code>
-            </dd>
-            <dt class="key">exceptions:</dt>
-            <dd class="value">Value is not instantiated: <code>instantiation_error</code></dd>
-          </dl>
-        </div>
-        <div class="section">
-          <h3 id="(=&gt;)/2" class="code">(=&gt;)/2</h3>
-          <blockquote>
-            <p class="comment">Unifies Value with the current state of the assignable variable Variable.</p>
-          </blockquote>
-          <dl class="properties">
-            <dt class="key">compilation flags:</dt>
-            <dd class="value">
-              <code>static</code>
-            </dd>
-            <dt class="key">template:</dt>
-            <dd class="value">
-              <code>Variable=&gt;Value</code>
-            </dd>
-            <dt class="key">mode &ndash; number of proofs:</dt>
-            <dd class="value">
-              <code>(+assignvar)=&gt; (?nonvar) &ndash; zero_or_one</code>
-            </dd>
-            <dt class="key">exceptions:</dt>
-            <dd class="value">Variable is not instantiated: <code>instantiation_error</code></dd>
-          </dl>
+          <p class="comment">(see related entities)</p>
         </div>
       </div>
       <div class="protected">
         <h2>Protected interface</h2>
         <div class="section">
-          <p class="comment">(none)</p>
+          <p class="comment">(see related entities)</p>
         </div>
       </div>
       <div class="private">
         <h2>Private predicates</h2>
         <div class="section">
-          <p class="comment">(none)</p>
+          <p class="comment">(see related entities)</p>
         </div>
       </div>
     </div>

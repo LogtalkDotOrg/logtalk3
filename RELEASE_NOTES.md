@@ -36,7 +36,11 @@ would not be listed as entity properties.
 Library
 -------
 
-* IMPROVED: Small performance optimization of the `assignvars` category.
+* CHANGED: Added an `assignvarsp` protocol. Converted the `assignvars` category
+into an object implementing this protocol. Added an alternative `assignvars`
+object providing a faster implementation for most backend Prolog compilers.
+Added an `assignvars_loader` loader file that selects the version of the
+`assignvars` object to load depending on the backend Prolog compiler.
 
 Examples
 --------
