@@ -834,24 +834,12 @@ category_property(Ctg, Prop) :-
 		true
 	;	fail
 	).
-'$lgt_category_property'(public(Predicates), Ctg, Dcl, _, _, _) :-
-	findall(
-		Functor/Arity,
-		(call(Dcl, Predicate, p(p(p)), _, _, Ctg), functor(Predicate, Functor, Arity)),
-		Predicates
-	).
-'$lgt_category_property'(protected(Predicates), Ctg, Dcl, _, _, _) :-
-	findall(
-		Functor/Arity,
-		(call(Dcl, Predicate, p(p), _, _, Ctg), functor(Predicate, Functor, Arity)),
-		Predicates
-	).
-'$lgt_category_property'(private(Predicates), Ctg, Dcl, _, _, _) :-
-	findall(
-		Functor/Arity,
-		(call(Dcl, Predicate, p, _, _, Ctg), functor(Predicate, Functor, Arity)),
-		Predicates
-	).
+'$lgt_category_property'(public(Resources), Ctg, Dcl, _, _, Flags) :-
+	'$lgt_category_property_resources'(Ctg, Dcl, Flags, p(p(p)), Resources).
+'$lgt_category_property'(protected(Resources), Ctg, Dcl, _, _, Flags) :-
+	'$lgt_category_property_resources'(Ctg, Dcl, Flags, p(p), Resources).
+'$lgt_category_property'(private(Resources), Ctg, Dcl, _, _, Flags) :-
+	'$lgt_category_property_resources'(Ctg, Dcl, Flags, p, Resources).
 '$lgt_category_property'(declares(Predicate, Properties), Ctg, Dcl, _, _, _) :-
 	'$lgt_category_property_declares'(Ctg, Dcl, Predicate, Properties).
 '$lgt_category_property'(defines(Predicate, Properties), Ctg, _, Def, _, _) :-
@@ -869,6 +857,21 @@ category_property(Ctg, Prop) :-
 '$lgt_category_property'(number_of_user_clauses(TotalUser), Ctg, _, _, _, _) :-
 	'$lgt_entity_property_'(Ctg, number_of_clauses(_, TotalUser)).
 
+
+'$lgt_category_property_resources'(Ctg, Dcl, Flags, Scope, Resources) :-
+	findall(
+		Resource,
+		'$lgt_category_property_resource'(Ctg, Dcl, Flags, Scope, Resource),
+		Resources
+	).
+
+
+'$lgt_category_property_resource'(Ctg, Dcl, _, Scope, Functor/Arity) :-
+	call(Dcl, Predicate, Scope, _, _, Ctg),
+	functor(Predicate, Functor, Arity).
+
+'$lgt_category_property_resource'(Ctg, _, _, Scope, op(Priority, Specifier, Operator)) :-
+	'$lgt_entity_property_'(Ctg, op(Priority, Specifier, Operator, Scope)).
 
 
 % protocol_property(?protocol_identifier, ?protocol_property)
@@ -913,28 +916,32 @@ protocol_property(Ptc, Prop) :-
 		true
 	;	fail
 	).
-'$lgt_protocol_property'(public(Predicates), Ptc, Dcl, _, _) :-
-	findall(
-		Functor/Arity,
-		(call(Dcl, Predicate, p(p(p)), _, _, Ptc), functor(Predicate, Functor, Arity)),
-		Predicates
-	).
-'$lgt_protocol_property'(protected(Predicates), Ptc, Dcl, _, _) :-
-	findall(
-		Functor/Arity,
-		(call(Dcl, Predicate, p(p), _, _, Ptc), functor(Predicate, Functor, Arity)),
-		Predicates
-	).
-'$lgt_protocol_property'(private(Predicates), Ptc, Dcl, _, _) :-
-	findall(
-		Functor/Arity,
-		(call(Dcl, Predicate, p, _, _, Ptc), functor(Predicate, Functor, Arity)),
-		Predicates
-	).
+'$lgt_protocol_property'(public(Resources), Ptc, Dcl, _, Flags) :-
+	'$lgt_category_property_resources'(Ptc, Dcl, Flags, p(p(p)), Resources).
+'$lgt_protocol_property'(protected(Resources), Ptc, Dcl, _, Flags) :-
+	'$lgt_category_property_resources'(Ptc, Dcl, Flags, p(p), Resources).
+'$lgt_protocol_property'(private(Resources), Ptc, Dcl, _, Flags) :-
+	'$lgt_category_property_resources'(Ptc, Dcl, Flags, p, Resources).
 '$lgt_protocol_property'(declares(Predicate, Properties), Ptc, Dcl, _, _) :-
 	'$lgt_protocol_property_declares'(Ptc, Dcl, Predicate, Properties).
 '$lgt_protocol_property'(alias(Alias, Properties), Ptc, _, Rnm, Flags) :-
 	'$lgt_entity_property_alias'(Ptc, Rnm, Flags, Alias, Properties).
+
+
+'$lgt_protocol_property_resources'(Ptc, Dcl, Flags, Scope, Resources) :-
+	findall(
+		Resource,
+		'$lgt_protocol_property_resource'(Ptc, Dcl, Flags, Scope, Resource),
+		Resources
+	).
+
+
+'$lgt_protocol_property_resource'(Ptc, Dcl, _, Scope, Functor/Arity) :-
+	call(Dcl, Predicate, Scope, _, _, Ptc),
+	functor(Predicate, Functor, Arity).
+
+'$lgt_protocol_property_resource'(Ctg, _, _, Scope, op(Priority, Specifier, Operator)) :-
+	'$lgt_entity_property_'(Ctg, op(Priority, Specifier, Operator, Scope)).
 
 
 '$lgt_object_property_declares'(Obj, Dcl, DDcl, EntityFlags, Functor/Arity, Properties) :-

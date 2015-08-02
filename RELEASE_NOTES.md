@@ -27,6 +27,12 @@ RELEASE NOTES
 3.00.6 - August ??, 2015
 ========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Protocol and category operators declared using a scope directive
+would not be listed as entity properties.
+
 Library
 -------
 
