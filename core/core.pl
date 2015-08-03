@@ -7473,7 +7473,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity) ->
 		'$lgt_compile_predicate_info_directive'(Pairs, Functor, Arity, TPairs),
 		assertz('$lgt_pp_predicate_info_'(Functor/Arity, TPairs))
-	;	'$lgt_valid_non_terminal_indicator'(Pred, Functor, Arity, ExtArity),
+	;	'$lgt_valid_non_terminal_indicator'(Pred, Functor, Arity, ExtArity) ->
 		'$lgt_compile_predicate_info_directive'(Pairs, Functor, Arity, TPairs),
 		assertz('$lgt_pp_predicate_info_'(Functor/ExtArity, TPairs))
 	;	var(Pred) ->

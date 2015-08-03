@@ -36,11 +36,13 @@ would not be listed as entity properties.
 * FIXED: Bug in the processing of conditional compilation directives when
 using embedded `if/1` directives.
 
+* FIXED: Compiler spurious choice-point when compiling an `info/2` directive. 
+
 Prolog adapter and integration files
 ------------------------------------
 
-* FIXED: Updated the Lean Prolog adapter file with hacks for missing standard
-input/output predicates.
+* FIXED: Updated the Lean Prolog adapter file with hacks for some missing
+standard input/output predicates.
 
 Library
 -------
@@ -60,6 +62,9 @@ Tests
 -----
 
 * ADDED: Several more tests for the conditional compilation directives.
+
+* FIXED: A `current_op/3` test to avoid syntax errors with some backend
+Prolog compilers.
 
 
 3.00.5 - July 27, 2015
