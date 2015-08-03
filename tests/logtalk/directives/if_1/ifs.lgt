@@ -78,78 +78,173 @@ cc(12).
 	cc(16).
 :- endif.
 
+
+:- if(true).
+	dd(1).
+:- elif(fail).
+	dd(2).
+:- elif(fail).
+	dd(3).
+:- else.
+	dd(4).
+:- endif.
+
+
+:- if(fail).
+	ee(5).
+:- elif(fail).
+	ee(6).
+:- elif(fail).
+	ee(7).
+:- else.
+	ee(8).
+:- endif.
+
+
+% tests for embedded ifs
+:- if(true).
+	ff(1).
+:- elif(fail).
+	ff(2).
+	:- if(true).
+		ff(3).
+	:- elif(true).
+		ff(4).
+	:- else.
+		ff(5).
+	:- endif.
+:- elif(fail).
+	ff(6).
+:- else.
+	ff(7).
+:- endif.
+
+
+:- if(true).
+	gg(1).
+	:- if(true).
+		gg(2).
+	:- elif(true).
+		gg(3).
+	:- else.
+		gg(4).
+	:- endif.
+:- elif(fail).
+	gg(5).
+:- elif(fail).
+	gg(6).
+:- else.
+	gg(7).
+:- endif.
+
+
+:- if(fail).
+	hh(1).
+:- elif(fail).
+	hh(2).
+	:- if(true).
+		hh(3).
+	:- elif(true).
+		hh(4).
+	:- else.
+		hh(5).
+	:- endif.
+:- elif(fail).
+	hh(6).
+:- else.
+	hh(7).
+:- endif.
+
+
+:- if(fail).
+	ii(1).
+:- elif(true).
+	ii(2).
+:- else.
+	ii(3).
+	:- if(fail).
+		ii(4).
+	:- elif(fail).
+		ii(5).
+	:- elif(fail).
+		ii(6).
+	:- endif.
+	ii(7).
+:- endif.
+
+
 % tests of if/1...if/1...endif/0
-dd(0).
+jj(0).
 
 :- if(true).
 
-	dd(1).
+	jj(1).
 	:- if(true).
-		dd(2).
+		jj(2).
 	:- endif.
 
-	dd(3).
+	jj(3).
 	:- if(fail).
-		dd(4).
+		jj(4).
 	:- endif.
 
-	dd(5).
+	jj(5).
 	:- if(true).
-		dd(6).
+		jj(6).
 	:- else.
-		dd(7).
+		jj(7).
 	:- endif.
 
-	dd(8).
+	jj(8).
 	:- if(fail).
-		dd(9).
+		jj(9).
 	:- else.
-		dd(10).
+		jj(10).
 	:- endif.
 
-	dd(11).
+	jj(11).
 
 :- else.
 
-	dd(12).
+	jj(12).
 
 :- endif.
 
 % tests of if/1...elif/1...endif/0
-ee(0).
+ll(0).
 
 :- if(fail).
 
-	ee(1).
+	ll(1).
 	:- if(true).
-		ee(2).
+		ll(2).
 	:- endif.
 
-	ee(3).
+	ll(3).
 	:- if(fail).
-		ee(4).
+		ll(4).
 	:- else.
-		ee(5).
+		ll(5).
 	:- endif.
 
-	ee(6).
+	ll(6).
 	:- if(fail).
-		ee(7).
+		ll(7).
 	:- elif(true).
-		ee(8).
+		ll(8).
 	:- else.
-		ee(9).
+		ll(9).
 	:- endif.
 
-	ee(10).
+	ll(10).
 
 :- elif(fail).
 
-	ee(11).
+	ll(11).
 
 :- else.
 
-	ee(12).
+	ll(12).
 
 :- endif.
 

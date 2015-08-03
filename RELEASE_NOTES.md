@@ -50,6 +50,11 @@ Examples
 
 * IMPROVED: Performance of the `assignvars` example.
 
+Tests
+-----
+
+* ADDED: Several more tests for the conditional compilation directives.
+
 
 3.00.5 - July 27, 2015
 ======================
