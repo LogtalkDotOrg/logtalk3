@@ -44,6 +44,10 @@ Prolog adapter and integration files
 * FIXED: Updated the Lean Prolog adapter file with hacks for some missing
 standard input/output predicates.
 
+* FIXED: Restored the dummy definitions of the `setup_call_cleanup/3`
+predicate in the adapter files of GNU Prolog and Lean Prolog to avoid
+issues when embedding Logtalk.
+
 Library
 -------
 
