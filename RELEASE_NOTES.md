@@ -48,6 +48,9 @@ standard input/output predicates.
 predicate in the adapter files of GNU Prolog and Lean Prolog to avoid
 issues when embedding Logtalk.
 
+* FIXED: Workaround an apparent GNU Prolog `gplc` command bug that prevented
+creating an executable that embeds Logtalk.
+
 Library
 -------
 
@@ -70,8 +73,8 @@ Tests
 
 * ADDED: Several more tests for the conditional compilation directives.
 
-* FIXED: A `current_op/3` test to avoid syntax errors with some backend
-Prolog compilers.
+* FIXED: A `current_op/3` predicate test to avoid syntax errors with some
+backend Prolog compilers.
 
 
 3.00.5 - July 27, 2015

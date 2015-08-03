@@ -25,8 +25,49 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- multifile(logtalk_library_path/2).	% logtalk_library_path(Library, Path)
-:- dynamic(logtalk_library_path/2).		% paths must always end with a "/"
+% logtalk_library_path(Library, Path)
+%
+% paths must always end with a "/"
+
+:- multifile(logtalk_library_path/2).
+:- dynamic(logtalk_library_path/2).
+
+% when the LOGTALKHOME or the LOGTALKUSER environment variables are not
+% defined (we may be e.g. embedding Logtalk in a compiled application),
+% assume the current directory as their value
+
+:- initialization((
+	% Logtalk startup directory
+	(	'$lgt_environment_variable'('LOGTALK_STARTUP_DIRECTORY', _) ->
+		LOGTALK_STARTUP_DIRECTORY = '$LOGTALK_STARTUP_DIRECTORY/'
+	;	'$lgt_current_directory'(LOGTALK_STARTUP_DIRECTORY0),
+		(	sub_atom(LOGTALK_STARTUP_DIRECTORY0, _, _, 0, '/') ->
+			LOGTALK_STARTUP_DIRECTORY = LOGTALK_STARTUP_DIRECTORY0
+		;	atom_concat(LOGTALK_STARTUP_DIRECTORY0, '/', LOGTALK_STARTUP_DIRECTORY)
+		)
+	),
+	assertz(logtalk_library_path(startup, LOGTALK_STARTUP_DIRECTORY)),
+	% Logtalk installation directory
+	(	'$lgt_environment_variable'('LOGTALKHOME', _) ->
+		LOGTALKHOME = '$LOGTALKHOME/'
+	;	'$lgt_current_directory'(LOGTALKHOME0),
+		(	sub_atom(LOGTALKHOME0, _, _, 0, '/') ->
+			LOGTALKHOME = LOGTALKHOME0
+		;	atom_concat(LOGTALKHOME0, '/', LOGTALKHOME)
+		)
+	),
+	assertz(logtalk_library_path(logtalk_home, LOGTALKHOME)),
+	% Logtalk user directory
+	(	'$lgt_environment_variable'('LOGTALKUSER', _) ->
+		LOGTALKUSER = '$LOGTALKUSER/'
+	;	'$lgt_current_directory'(LOGTALKUSER0),
+		(	sub_atom(LOGTALKUSER0, _, _, 0, '/') ->
+			LOGTALKUSER = LOGTALKUSER0
+		;	atom_concat(LOGTALKUSER0, '/', LOGTALKUSER)
+		)
+	),
+	assertz(logtalk_library_path(logtalk_user, LOGTALKUSER))
+)).
 
 % user home directory
 logtalk_library_path(home, HOME) :-
@@ -39,49 +80,6 @@ logtalk_library_path(home, HOME) :-
 		HOME = '$USERPROFILE/'
 	;	fail
 	).
-
-% Logtalk startup directory
-:- initialization((
-	(	'$lgt_environment_variable'('LOGTALK_STARTUP_DIRECTORY', _) ->
-		LOGTALK_STARTUP_DIRECTORY = '$LOGTALK_STARTUP_DIRECTORY/'
-	;	'$lgt_current_directory'(LOGTALK_STARTUP_DIRECTORY0),
-		(	sub_atom(LOGTALK_STARTUP_DIRECTORY0, _, _, 0, '/') ->
-			LOGTALK_STARTUP_DIRECTORY = LOGTALK_STARTUP_DIRECTORY0
-		;	atom_concat(LOGTALK_STARTUP_DIRECTORY0, '/', LOGTALK_STARTUP_DIRECTORY)
-		)
-	),
-	assertz(logtalk_library_path(startup, LOGTALK_STARTUP_DIRECTORY))
-)).
-
-% when the LOGTALKHOME or the LOGTALKUSER environment variables are not
-% defined (we may be e.g. embedding Logtalk in a compiled application),
-% assume the current directory as their value
-
-% Logtalk installation directory
-:- initialization((
-	(	'$lgt_environment_variable'('LOGTALKHOME', _) ->
-		LOGTALKHOME = '$LOGTALKHOME/'
-	;	'$lgt_current_directory'(LOGTALKHOME0),
-		(	sub_atom(LOGTALKHOME0, _, _, 0, '/') ->
-			LOGTALKHOME = LOGTALKHOME0
-		;	atom_concat(LOGTALKHOME0, '/', LOGTALKHOME)
-		)
-	),
-	assertz(logtalk_library_path(logtalk_home, LOGTALKHOME))
-)).
-
-% Logtalk user directory
-:- initialization((
-	(	'$lgt_environment_variable'('LOGTALKUSER', _) ->
-		LOGTALKUSER = '$LOGTALKUSER/'
-	;	'$lgt_current_directory'(LOGTALKUSER0),
-		(	sub_atom(LOGTALKUSER0, _, _, 0, '/') ->
-			LOGTALKUSER = LOGTALKUSER0
-		;	atom_concat(LOGTALKUSER0, '/', LOGTALKUSER)
-		)
-	),
-	assertz(logtalk_library_path(logtalk_user, LOGTALKUSER))
-)).
 
 logtalk_library_path(core, logtalk_home('core/')).
 
