@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  Default library paths 
-%  Last updated on February 23, 2015
+%  Last updated on August 3, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -179,6 +179,7 @@ logtalk_library_path(multifile, examples('multifile/')).
 logtalk_library_path(named_databases, examples('named_databases/')).
 logtalk_library_path(nondet, threads('nondet/')).
 logtalk_library_path(operators, examples('operators/')).
+logtalk_library_path(patches, examples('patches/')).
 logtalk_library_path(patching, examples('patching/')).
 logtalk_library_path(parametric, examples('parametric/')).
 logtalk_library_path(pardicts, examples('pardicts/')).

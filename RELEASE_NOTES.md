@@ -58,6 +58,9 @@ Examples
 
 * IMPROVED: Performance of the `assignvars` example.
 
+* FIXED: Added missing `logtalk_library_path/2` predicate entry for the new
+`patches` example.
+
 Tests
 -----
 
