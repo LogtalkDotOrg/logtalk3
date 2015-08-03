@@ -183,9 +183,6 @@ format(Format, Arguments) :-
 
 % setup_call_cleanup(+callable, +callable, +callable) -- not supported
 
-setup_call_cleanup(_, _, _) :-
-	throw(not_supported(setup_call_cleanup/3)).
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
