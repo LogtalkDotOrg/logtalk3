@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Lean Prolog 3.8.8 and later versions
-%  Last updated on July 4, 2015
+%  Last updated on August 3, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -47,8 +47,33 @@
 % table of missing ISO predicates which are defined in this file
 
 '$lgt_iso_predicate'(acyclic_term(_)).
+'$lgt_iso_predicate'(close(_, _)).
+'$lgt_iso_predicate'(get_byte(_, _)).
+'$lgt_iso_predicate'(get_byte(_)).
+'$lgt_iso_predicate'(get_char(_)).
+'$lgt_iso_predicate'(put_byte(_, _)).
+'$lgt_iso_predicate'(put_byte(_)).
 
 acyclic_term(_).
+
+close(Stream, _) :-
+	catch(close(Stream), _, true).
+
+get_byte(Stream, Byte) :-
+	get_code(Stream, Byte).
+
+get_byte(Byte) :-
+	get_code(Byte).
+
+get_char(Char) :-
+	get_code(Code),
+	char_code(Char, Code).
+
+put_byte(Stream, Byte) :-
+	put_code(Stream, Byte).
+
+put_byte(Byte) :-
+	put_code(Byte).
 
 
 

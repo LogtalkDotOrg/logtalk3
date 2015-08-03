@@ -36,6 +36,12 @@ would not be listed as entity properties.
 * FIXED: Bug in the processing of conditional compilation directives when
 using embedded `if/1` directives.
 
+Prolog adapter and integration files
+------------------------------------
+
+* FIXED: Updated the Lean Prolog adapter file with hacks for missing standard
+input/output predicates.
+
 Library
 -------
 
