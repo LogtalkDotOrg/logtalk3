@@ -27,6 +27,11 @@ RELEASE NOTES
 3.00.7 - September ??, 2015
 ===========================
 
+Documentation
+-------------
+
+* IMPROVED: Section on contributions on the `README.md` file.
+
 Library
 -------
 

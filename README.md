@@ -163,12 +163,15 @@ and the 2003 PhD thesis on Logtalk are good choices).
 -----------------
 
 Contributions, constructive criticism, patches, bug reports, and suggestions
-are always welcome. However, major code contributions to **core** files, such
-as the compiler, runtime, adapter files, library files, or tools can only be
-accepted with a transfer of copyright or if the submitted code is explicitly
+are always welcome. Major code contributions to **core** files, such as the
+compiler, runtime, adapter files, library files, or developer tools can only
+be accepted with a transfer of copyright or if the submitted code is explicitly
 declared as public domain code. This simplifies the selling of commercial
 licenses, which provide a revenue source for the sustained development of
-Logtalk.
+Logtalk. Contributions that retain the copyright of their authors may also
+be distributed with Logtalk with the understanding that the terms of their
+commercial use depends solely on the authors chosen licensing terms and may
+require a separate, independent, agreement between users and authors.
 
 
 12. LEGAL
