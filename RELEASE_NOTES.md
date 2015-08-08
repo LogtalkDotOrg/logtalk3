@@ -24,6 +24,16 @@ ________________________________________________________________________
 RELEASE NOTES
 =============
 
+3.00.7 - September ??, 2015
+===========================
+
+Library
+-------
+
+* FIXED: Added three library files missing in the previous stable release:
+`assignvars.txt`, `assignvarsp.lgt`, and `assignvars_loader.lgt`.
+
+
 3.00.6 - August 3, 2015
 ========================
 
