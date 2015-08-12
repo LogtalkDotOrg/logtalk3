@@ -2,9 +2,9 @@
 :- object(modules_diagram_support).
 
 	:- info([
-		version is 0.10,
+		version is 0.11,
 		author is 'Paulo Moura',
-		date is 2014/12/30,
+		date is 2015/08/12,
 		comment is 'Utility predicates for supporting Prolog modules in diagrams.'
 	]).
 
@@ -334,8 +334,10 @@
 		property_source_file(parent(_Parent), _File) :-
 			fail.
 		property_source_file(directory(Directory), File) :-
+			{source_file(File)},
 			decompose_file_name(File, Directory, _, _).
 		property_source_file(basename(Basename), File) :-
+			{source_file(File)},
 			decompose_file_name(File, _, Name, Extension),
 			atom_concat(Name, Extension, Basename).
 

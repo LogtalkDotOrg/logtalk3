@@ -38,6 +38,12 @@ Library
 * FIXED: Added three library files missing in the previous stable release:
 `assignvars.txt`, `assignvarsp.lgt`, and `assignvars_loader.lgt`.
 
+Tools
+-----
+
+* FIXED: Bug in the `diagrams` tool when using SICStus Prolog as the backend
+compiler that would result in an unexpected error.
+
 
 3.00.6 - August 3, 2015
 ========================
