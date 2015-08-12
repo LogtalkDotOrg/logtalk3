@@ -9456,6 +9456,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_compile_body'(Pred, TPred, DPred, Ctx).
 
+% when processing the debug event, the compiled goal is meta-called but
+% this would make the cut local, changing the semantics of the user code;
+% the solution is to use a conjunction for the debug goal of the debug
+% event with a cut
 '$lgt_compile_body'(!, !, ('$lgt_debug'(goal(!, true), ExCtx), !), Ctx) :-
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
