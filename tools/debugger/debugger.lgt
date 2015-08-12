@@ -26,9 +26,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 2.5,
+		version is 2.6,
 		author is 'Paulo Moura',
-		date is 2015/07/23,
+		date is 2015/08/12,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -773,7 +773,14 @@
 
 	:- endif.
 
-	do_port_option('$', _, _, _, TGoal, _, _, _) :-
+	do_port_option('$', _, _, Goal, TGoal0, _, _, _) :-
+		(	Goal == ! ->
+			% when the user goal is !/0, the compiled form in the debug
+			% event is true/0 to avoid calling two cuts in a row; see
+			% the compiler internal documentation for further details
+			TGoal = !
+		;	TGoal = TGoal0
+		),
 		(	write_max_depth_(MaxDepth),
 			MaxDepth > 0 ->
 			print_message(information, debugger, write_compiled_goal(TGoal,MaxDepth))

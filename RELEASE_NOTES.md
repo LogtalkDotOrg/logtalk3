@@ -44,6 +44,9 @@ Tools
 * FIXED: Bug in the `diagrams` tool when using SICStus Prolog as the backend
 compiler that would result in an unexpected error.
 
+* FIXED: Minor bug in the `debugger` tool where asking for the compiled form
+of a cut will print `true` instead of a cut.
+
 
 3.00.6 - August 3, 2015
 ========================
