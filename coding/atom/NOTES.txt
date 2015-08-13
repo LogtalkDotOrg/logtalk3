@@ -1,0 +1,29 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the `LICENSE.txt` file for details.
+________________________________________________________________________
+
+
+Atom is a multiple platform text editor available from:
+
+	https://atom.io
+
+Atom supports converting TextMate language bundles into language support
+packages. The conversion process is described at:
+
+	https://atom.io/docs/latest/converting-a-text-mate-bundle
+
+The following shell command can be used:
+
+	$ apm init -p ~/.atom/packages/language-logtalk --template $LOGTALKHOME/coding/textmate2/Logtalk.tmbundle
+
+Logtalk source files (including the library entities and the programming
+examples) are formatted using tabs (the recommended setting is a tab width
+equivalent to 4 spaces); you may set the tab width on the editor preference
+panel.
+
+

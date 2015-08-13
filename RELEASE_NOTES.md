@@ -47,6 +47,12 @@ compiler that would result in an unexpected error.
 * FIXED: Minor bug in the `debugger` tool where asking for the compiled form
 of a cut will print `true` instead of a cut.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* ADDED: Notes on using the Atom multiple platform text editor for Logtalk
+coding.
+
 
 3.00.6 - August 3, 2015
 ========================
