@@ -27,6 +27,16 @@ RELEASE NOTES
 3.00.7 - September ??, 2015
 ===========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* CHANGED: Renamed the `logtalk::question_hook/5` user-defined predicate to
+`logtalk::question_hook/6` by adding a tokens argument to simplify usage.
+
+* CHANGED: The `logtalk::ask_question/5` predicate no longer requires also
+defining the `logtalk::message_hook/4` predicate for the question text itself
+when intercepting questions.
+
 Documentation
 -------------
 

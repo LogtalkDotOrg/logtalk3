@@ -41,7 +41,7 @@
 Built-in method for asking a question represented by a term, <code>Question</code>, which is converted to the question text using the <a href="message_tokens_2.html"><code>logtalk::message_tokens(Question, Component)</code></a> hook predicate. This method is declared in the <code>logtalk</code> built-in object as a public predicate. The default question prompt and the input stream used for each <code>Kind-Component</code> pair can be found using the <a href="question_prompt_stream_4.html"><code>logtalk::question_prompt_stream(Kind, Component, Prompt, Stream)</code></a> hook predicate. The <code>Check</code> argument is a closure that is converted into a checking goal by extending it with the user supplied answer. This predicate implements a read-loop that terminates when the checking predicate succeeds.
 </p>
 <p>
-This predicate starts by calling the <a href="question_hook_5.html"><code>logtalk::question_hook(Question, Kind, Component, Check, Answer)</code></a> hook predicate. If this predicate succeeds, the <code>ask_question/5</code> predicate assumes that the question have been successfully asked and replied.
+This predicate starts by calling the <a href="question_hook_6.html"><code>logtalk::question_hook(Question, Kind, Component, Check, Answer)</code></a> hook predicate. If this predicate succeeds, the <code>ask_question/5</code> predicate assumes that the question have been successfully asked and replied.
 </p>
 
 <h4>Template and modes</h4>
@@ -65,7 +65,7 @@ This predicate starts by calling the <a href="question_hook_5.html"><code>logtal
 <h4>See also</h4>
 
 <p>
-<code><a href="question_hook_5.html">question_hook/5</a></code>, <code><a href="question_prompt_stream_4.html">question_prompt_stream/4</a></code>
+<code><a href="question_hook_6.html">question_hook/6</a></code>, <code><a href="question_prompt_stream_4.html">question_prompt_stream/4</a></code>
 <br/>
 <code><a href="message_hook_4.html">message_hook/4</a></code>, <code><a href="message_prefix_stream_4.html">message_prefix_stream/4</a></code>, <code><a href="message_tokens_2.html">message_tokens//2</a></code>, <code><a href="print_message_3.html">print_message/3</a></code>, <code><a href="print_message_tokens_3.html">print_message_tokens/3</a></code>, <code><a href="print_message_token_4.html">print_message_token/4</a></code>
 </p>
@@ -73,10 +73,10 @@ This predicate starts by calling the <a href="question_hook_5.html"><code>logtal
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: July 23, 2015</span>
+		<span>Last updated on: August 19, 2015</span>
 	</div>
 	<div class="navbottom">
-		<span><a href="../index.html#methods">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="question_hook_5.html">next</a></span><br/>
+		<span><a href="../index.html#methods">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="question_hook_6.html">next</a></span><br/>
 		<span><a href="http://validator.w3.org/check/referer">XHTML</a> + <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a></span>
 	</div>
 </div>

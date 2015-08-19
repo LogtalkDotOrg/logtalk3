@@ -31,9 +31,9 @@
 :- object(logtalk).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/12/06,
+		date is 2015/08/19,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.']).
 
 	:- built_in.
@@ -108,14 +108,14 @@
 		argnames is ['Kind', 'Component', 'Question', 'Check', 'Answer']
 	]).
 
-	:- public(question_hook/5).
-	:- multifile(question_hook/5).
-	:- dynamic(question_hook/5).
-	:- meta_predicate(question_hook(*, *, *, 1, *)).
-	:- mode(question_hook(+nonvar, +nonvar, +atom, +callable, -term), zero_or_one).
-	:- info(question_hook/5, [
+	:- public(question_hook/6).
+	:- multifile(question_hook/6).
+	:- dynamic(question_hook/6).
+	:- meta_predicate(question_hook(*, *, *, *, 1, *)).
+	:- mode(question_hook(+nonvar, +nonvar, +atom, +list(nonvar), +callable, -term), zero_or_one).
+	:- info(question_hook/6, [
 		comment is 'User-defined hook predicate for intercepting question asking calls.',
-		argnames is ['Question', 'Kind', 'Component', 'Check', 'Answer']
+		argnames is ['Question', 'Kind', 'Component', 'Tokens', 'Check', 'Answer']
 	]).
 
 	:- public(question_prompt_stream/4).
@@ -371,11 +371,12 @@
 	default_print_message_token(end(_), _, _, _).
 
 	ask_question(Kind, Component, Question, Check, Answer) :-
-		(	question_hook(Question, Kind, Component, Check, Answer) ->
+		message_term_to_tokens(Question, Kind, Component, Tokens),
+		(	question_hook(Question, Kind, Component, Tokens, Check, Answer) ->
 			% question asking intercepted; assume that the question was answered
 			true
 		;	% print the question text
-			print_message(Kind, Component, Question),
+			default_print_message(Kind, Component, Tokens),
 			% find the output stream for printing the question prompt
 			(	message_prefix_stream(Kind, Component, _, OutputStream) ->
 				true

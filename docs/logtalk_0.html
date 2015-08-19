@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>1.0</code>
+            <code>1.1</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2014/12/6</code>
+            <code>2015/8/19</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -183,7 +183,7 @@
           </dl>
         </div>
         <div class="section">
-          <h3 id="question_hook/5" class="code">question_hook/5</h3>
+          <h3 id="question_hook/6" class="code">question_hook/6</h3>
           <blockquote>
             <p class="comment">User-defined hook predicate for intercepting question asking calls.</p>
           </blockquote>
@@ -194,15 +194,15 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>question_hook(Question,Kind,Component,Check,Answer)</code>
+              <code>question_hook(Question,Kind,Component,Tokens,Check,Answer)</code>
             </dd>
             <dt class="key">meta-predicate template:</dt>
             <dd class="value">
-              <code>question_hook(*,*,*,1,*)</code>
+              <code>question_hook(*,*,*,*,1,*)</code>
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
-              <code>question_hook(+nonvar,+nonvar,+atom,+callable,-term) &ndash; zero_or_one</code>
+              <code>question_hook(+nonvar,+nonvar,+atom,+list(nonvar),+callable,-term) &ndash; zero_or_one</code>
             </dd>
           </dl>
         </div>
