@@ -30,6 +30,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: Allow component names to be any non-variable terms when using the
+message printing and question asking mechanisms (documentation-only change).
+
 * CHANGED: Renamed the `logtalk::question_hook/5` user-defined predicate to
 `logtalk::question_hook/6` by adding a tokens argument to simplify usage.
 

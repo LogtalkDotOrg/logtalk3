@@ -33,7 +33,7 @@
 	:- info([
 		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2015/08/19,
+		date is 2015/08/21,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.']).
 
 	:- built_in.
@@ -49,7 +49,7 @@
 	% message printing predicates
 
 	:- public(print_message/3).
-	:- mode(print_message(+nonvar, +atom, +nonvar), one).
+	:- mode(print_message(+nonvar, +nonvar, +nonvar), one).
 	:- info(print_message/3, [
 		comment is 'Prints a message of the given kind for the specified component.',
 		argnames is ['Kind', 'Component', 'Message']
@@ -74,7 +74,7 @@
 	:- public(message_tokens//2).
 	:- multifile(message_tokens//2).
 	:- dynamic(message_tokens//2).
-	:- mode(message_tokens(+nonvar, -list(nonvar)), zero_or_one).
+	:- mode(message_tokens(+nonvar, +nonvar), zero_or_one).
 	:- info(message_tokens//2, [
 		comment is 'User-defined hook grammar rule for converting a message into a list of tokens (at_same_line, nl, flush, Format-Arguments, term(Term,Options), ansi(Attributes,Format,Arguments), begin(Kind,Variable), and end(Variable)).',
 		argnames is ['Message', 'Component']
@@ -83,7 +83,7 @@
 	:- public(message_prefix_stream/4).
 	:- multifile(message_prefix_stream/4).
 	:- dynamic(message_prefix_stream/4).
-	:- mode(message_prefix_stream(?nonvar, ?atom, ?atom, ?stream_or_alias), zero_or_more).
+	:- mode(message_prefix_stream(?nonvar, ?nonvar, ?atom, ?stream_or_alias), zero_or_more).
 	:- info(message_prefix_stream/4, [
 		comment is 'Message line prefix and output stream to be used when printing a message given its kind and component.',
 		argnames is ['Kind', 'Component', 'Prefix', 'Stream']
@@ -92,7 +92,7 @@
 	:- public(message_hook/4).
 	:- multifile(message_hook/4).
 	:- dynamic(message_hook/4).
-	:- mode(message_hook(+nonvar, +nonvar, +atom, +list(nonvar)), zero_or_one).
+	:- mode(message_hook(+nonvar, +nonvar, +nonvar, +list(nonvar)), zero_or_one).
 	:- info(message_hook/4, [
 		comment is 'User-defined hook predicate for intercepting message printing calls.',
 		argnames is ['Message', 'Kind', 'Component', 'Tokens']
@@ -102,7 +102,7 @@
 
 	:- public(ask_question/5).
 	:- meta_predicate(ask_question(*, *, *, 1, *)).
-	:- mode(ask_question(+nonvar, +atom, +nonvar, +callable, -term), one).
+	:- mode(ask_question(+nonvar, +nonvar, +nonvar, +callable, -term), one).
 	:- info(ask_question/5, [
 		comment is 'Asks a question and reads the answer until the check predicate is true.',
 		argnames is ['Kind', 'Component', 'Question', 'Check', 'Answer']
@@ -112,7 +112,7 @@
 	:- multifile(question_hook/6).
 	:- dynamic(question_hook/6).
 	:- meta_predicate(question_hook(*, *, *, *, 1, *)).
-	:- mode(question_hook(+nonvar, +nonvar, +atom, +list(nonvar), +callable, -term), zero_or_one).
+	:- mode(question_hook(+nonvar, +nonvar, +nonvar, +list(nonvar), +callable, -term), zero_or_one).
 	:- info(question_hook/6, [
 		comment is 'User-defined hook predicate for intercepting question asking calls.',
 		argnames is ['Question', 'Kind', 'Component', 'Tokens', 'Check', 'Answer']
@@ -121,7 +121,7 @@
 	:- public(question_prompt_stream/4).
 	:- multifile(question_prompt_stream/4).
 	:- dynamic(question_prompt_stream/4).
-	:- mode(question_prompt_stream(?nonvar, ?atom, ?atom, ?stream_or_alias), zero_or_more).
+	:- mode(question_prompt_stream(?nonvar, ?nonvar, ?atom, ?stream_or_alias), zero_or_more).
 	:- info(question_prompt_stream/4, [
 		comment is 'Prompt and input stream to be used when asking a question given its kind and component.',
 		argnames is ['Kind', 'Component', 'Prompt', 'Stream']
