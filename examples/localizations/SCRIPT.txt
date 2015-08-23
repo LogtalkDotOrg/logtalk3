@@ -1,0 +1,33 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the `LICENSE.txt` file for details.
+________________________________________________________________________
+
+
+% load the example:
+
+| ?- logtalk_load(localizations(loader)).
+...
+
+
+% print the application language in several languages:
+
+| ?- my_game(de)::banner.
+>>> Willkommen Sie bei Mein tolles Spiel!
+yes
+
+| ?- my_game(en)::banner.
+>>> Welcome to my great game!
+yes
+
+| ?- my_game(fr)::banner.
+>>> Bienvenue sur mon grand jeu!
+yes
+
+| ?- my_game(pt)::banner.
+>>> Bem vindo ao meu grande jogo!
+yes

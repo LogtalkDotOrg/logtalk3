@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  Default library paths 
-%  Last updated on August 3, 2015
+%  Last updated on August 21, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -159,6 +159,7 @@ logtalk_library_path(lambdas, examples('lambdas/')).
 logtalk_library_path(lambdas_compiled, examples('lambdas_compiled/')).
 logtalk_library_path(lo_planner, examples('lo/planner/')).
 logtalk_library_path(lo_travellers, examples('lo/travellers/')).
+logtalk_library_path(localizations, examples('localizations/')).
 logtalk_library_path(logging, examples('logging/')).
 logtalk_library_path(logic, examples('logic/')).
 logtalk_library_path(lpa_faults, examples('lpa/faults/')).

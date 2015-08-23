@@ -60,6 +60,12 @@ compiler that would result in an unexpected error.
 * FIXED: Minor bug in the `debugger` tool where asking for the compiled form
 of a cut will print `true` instead of a cut.
 
+Examples
+--------
+
+* ADDED: Simple example of supporting application localization in multiple
+natural languages.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

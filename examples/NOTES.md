@@ -202,6 +202,10 @@ Follows a short description of each included example (in alphabetical order):
 - `lo`  
 	examples adapted from the Francis G. McCabe L&O system
 
+- `localizations`  
+	simple example of supporting application localization in multiple
+	languages
+
 - `logging`  
 	example of using a category to define a simple logging support for 
 	objects
