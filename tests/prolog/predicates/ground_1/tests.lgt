@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/05/05,
+		date is 2015/08/23,
 		comment is 'Unit tests for the ISO Prolog standard ground/1 built-in predicate.'
 	]).
 
@@ -44,5 +44,10 @@
 
 	fails(eclipse_ground_1_06) :-
 		{ground(f(_))}.
+
+	% tests from the Logtalk portability work
+
+	succeeds(lgt_ground_1_07) :-
+		{ground('$VAR'(0))}.
 
 :- end_object.

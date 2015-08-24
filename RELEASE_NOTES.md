@@ -60,6 +60,11 @@ compiler that would result in an unexpected error.
 * FIXED: Minor bug in the `debugger` tool where asking for the compiled form
 of a cut will print `true` instead of a cut.
 
+Tests
+-----
+
+* ADDED: Another unit test for the `ground/1` standard predicate.
+
 Examples
 --------
 
