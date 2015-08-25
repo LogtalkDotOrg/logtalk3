@@ -13,9 +13,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2015/05/03,
+		date is 2015/08/25,
 		comment is 'Unit tests for the de facto Prolog standard numbervars/3 built-in predicate.'
 	]).
 
@@ -46,5 +46,10 @@
 		T = a(X,Y,Z),
 		{numbervars(T, 0, _)},
 		X == '$VAR'(0), Y == '$VAR'(1), Z == '$VAR'(2).
+
+	succeeds(commons_numbervars_3_07) :-
+		T = a(X,Y,Z),
+		{numbervars(T, -7, N)},
+		X == '$VAR'(-7), Y == '$VAR'(-6), Z == '$VAR'(-5), N == -4.
 
 :- end_object.
