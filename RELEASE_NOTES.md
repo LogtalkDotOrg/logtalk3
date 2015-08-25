@@ -60,6 +60,10 @@ compiler that would result in an unexpected error.
 * FIXED: Minor bug in the `debugger` tool where asking for the compiled form
 of a cut will print `true` instead of a cut.
 
+* FIXED: Minor layout bug (missing space) in the `debugger` tool when printing
+exit ports while using backend Prolog systems not providing a solution to find
+if a call is deterministic.
+
 Tests
 -----
 
