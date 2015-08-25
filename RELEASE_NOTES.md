@@ -63,6 +63,9 @@ of a cut will print `true` instead of a cut.
 Tests
 -----
 
+* ADDED: Unit tests for the `bagof/3` and `setof/3` standard predicates for
+testing the use of multiple existential variables.
+
 * ADDED: Another unit test for the `ground/1` standard predicate.
 
 Examples

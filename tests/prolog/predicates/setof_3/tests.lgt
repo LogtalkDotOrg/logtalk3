@@ -28,6 +28,12 @@ d(2, 2).
 d(2, 1).
 d(2, 2).
 
+% database for tests from the Logtalk portability work
+
+c(2, b, 'B').
+c(1, a, 'A').
+c(3, c, 'C').
+
 % avoid conflicts with a possible member/2 built-in predicate
 setof_3_member(X, [X| _]).
 setof_3_member(X, [_| L]) :-
@@ -38,9 +44,9 @@ setof_3_member(X, [_| L]) :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2015/05/14,
+		date is 2015/08/25,
 		comment is 'Unit tests for the ISO Prolog standard setof/3 built-in predicate.'
 	]).
 
@@ -196,15 +202,25 @@ setof_3_member(X, [_| L]) :-
 
 	% tests from the Logtalk portability work
 
-	throws(lgt_setof_3_30, error(instantiation_error,_)) :-
+	% tests from the Logtalk portability work
+
+	succeeds(lgt_bagof_3_30) :-
+		{setof(Z, X^Y^c(X,Y,Z), L)},
+		L == ['A', 'B', 'C'].
+
+	succeeds(lgt_bagof_3_31) :-
+		{setof(Z, t(X,Y)^c(X,Y,Z), L)},
+		L == ['A', 'B', 'C'].
+
+	throws(lgt_setof_3_32, error(instantiation_error,_)) :-
 		{setof(_X, _Y^_Z, _L)}.
 
 	% tests from the ECLiPSe test suite
 
-	throws(eclipse_setof_3_31, error(type_error(list,12),_)) :-
+	throws(eclipse_setof_3_33, error(type_error(list,12),_)) :-
 		{setof(X, (X=2; X=1), 12)}.
 
-	throws(eclipse_setof_3_32, error(type_error(list,[1|2]),_)) :-
+	throws(eclipse_setof_3_34, error(type_error(list,[1|2]),_)) :-
 		{bagof(X, (X=2; X=1), [1|2])}.
 
 :- end_object.

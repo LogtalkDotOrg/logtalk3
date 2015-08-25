@@ -21,14 +21,20 @@ b(2, 1).
 b(2, 2).
 b(2, 2).
 
+% database for tests from the Logtalk portability work
+
+c(2, b, 'B').
+c(1, a, 'A').
+c(3, c, 'C').
+
 
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/05/05,
+		date is 2015/08/25,
 		comment is 'Unit tests for the ISO Prolog standard bagof/3 built-in predicate.'
 	]).
 
@@ -102,5 +108,15 @@ b(2, 2).
 
 	throws(eclipse_bagof_3_16, error(type_error(list,[1|2]),_)) :-
 		{bagof(X, (X=2; X=1), [1|2])}.
+
+	% tests from the Logtalk portability work
+
+	succeeds(lgt_bagof_3_17) :-
+		{bagof(Z, X^Y^c(X,Y,Z), L)},
+		L == ['B', 'A', 'C'].
+
+	succeeds(lgt_bagof_3_18) :-
+		{bagof(Z, t(X,Y)^c(X,Y,Z), L)},
+		L == ['B', 'A', 'C'].
 
 :- end_object.
