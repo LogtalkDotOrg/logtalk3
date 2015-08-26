@@ -40,6 +40,12 @@ message printing and question asking mechanisms (documentation-only change).
 defining the `logtalk::message_hook/4` predicate for the question text itself
 when intercepting questions.
 
+Prolog adapter and integration files
+------------------------------------
+
+* ADDED: Updated the Lean Prolog adapter file wit support for using `index/1`
+directives in objects and categories.
+
 Documentation
 -------------
 

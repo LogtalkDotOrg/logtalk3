@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  Adapter file for Lean Prolog 3.8.8 and later versions
-%  Last updated on August 22, 2015
+%  Last updated on August 25, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -609,8 +609,9 @@ to_engine(Interactor, Pattern, Goal) :-
 
 % '$lgt_prolog_term_expansion'(@callable, -callable)
 
-'$lgt_prolog_term_expansion'(_, _) :-
-	fail.
+'$lgt_prolog_term_expansion'((:- index(Head)), {:- index(THead)}) :-
+	logtalk_load_context(entity_type, _),
+	'$lgt_compile_predicate_heads'(Head, _, THead, 0).
 
 
 % '$lgt_prolog_goal_expansion'(@callable, -callable)
@@ -843,9 +844,11 @@ use_module(_, _) :- fail.
 
 % nasty workaround for the lack of support for stream aliases in Lean Prolog
 '$logtalk#0.print_message_token#4'(user_output, Prefix, Token, Tokens, _) :-
+	!,
 	current_output(Stream),
 	'$lgt_lean_print_message_token'(Token, Tokens, Prefix, Stream).
 '$logtalk#0.print_message_token#4'(user_error, Prefix, Token, Tokens, _) :-
+	!,
 	current_output(Stream),
 	'$lgt_lean_print_message_token'(Token, Tokens, Prefix, Stream).
 '$logtalk#0.print_message_token#4'(Alias, Prefix, Token, Tokens, _) :-
