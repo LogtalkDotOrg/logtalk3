@@ -26,9 +26,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 2.6,
+		version is 2.7,
 		author is 'Paulo Moura',
-		date is 2015/08/12,
+		date is 2015/08/25,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -467,11 +467,7 @@
 	:- elif(current_logtalk_flag(prolog_dialect, gnu)).
 
 		call_goal(TGoal, Deterministic) :-
-			{call_det(TGoal, Deterministic0)},
-			(	Deterministic0 == true ->
-				Deterministic = Deterministic0
-			;	true
-			).
+			{call_det(TGoal, Deterministic)}.
 
 	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
 
