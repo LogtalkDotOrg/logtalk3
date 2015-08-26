@@ -31,9 +31,9 @@
 :- object(logtalk).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/08/21,
+		date is 2015/08/26,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.']).
 
 	:- built_in.
@@ -389,7 +389,10 @@
 			% find the prompt and the input stream
 			(	question_prompt_stream(Kind, Component, Prompt, InputStream) ->
 				true
-			;	default_question_prompt_stream(Kind, Component, Prompt, InputStream)
+			;	default_question_prompt_stream(Kind, _, Prompt, InputStream) ->
+				true
+			;	% no such kind of question; use "question" instead
+				default_question_prompt_stream(question, _, Prompt, InputStream)
 			),
 			repeat,
 				write(OutputStream, Prompt),

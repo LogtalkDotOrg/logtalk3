@@ -40,6 +40,10 @@ message printing and question asking mechanisms (documentation-only change).
 defining the `logtalk::message_hook/4` predicate for the question text itself
 when intercepting questions.
 
+* IMPROVED: When using the question asking mechanism, default to the `question`
+kind when there isn't neither a user or a default prompt and stream defined
+for the question kind. 
+
 Prolog adapter and integration files
 ------------------------------------
 
