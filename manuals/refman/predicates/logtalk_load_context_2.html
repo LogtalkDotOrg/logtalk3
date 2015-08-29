@@ -44,6 +44,9 @@ Provides access to the Logtalk compilation/loading context. The following keys a
 The <code>source</code>, <code>file</code>, <code>basename</code>, <code>directory</code>, and <code>target</code> keys can also be used in calls to the <code>logtalk_load_context/2</code> predicate wrapped in <a title="Consult reference manual" href="../directives/initialization_1.html"><code>initialization/1</code></a> directives.
 </p>
 <p>
+The <code>term_position</code> and <code>variable_names</code> are only meaningful when the <code>logtalk_load_context/2</code> predicate is called from the <code><a href="../methods/term_expansion_2.html">term_expansion/2</a></code> predicate. Due to the goal-expansion phase occurring at a later compiler stage, the information provided by these two keys is no longer available at that time.
+</p>
+<p>
 Using the <code>variable_names</code> key requires calling the standard built-in predicate <code>term_variables/2</code> on the term read and unifying the term variables with the variables in the names list. This, however, rises portability issues with those Prolog compilers that don't return the variables in the same order for the <code>term_variables/2</code> predicate and the option <code>variable_names/1</code> of the <code>read_term/3</code> built-in predicate, which is used by the Logtalk compiler to read source files.
 </p>
 
@@ -86,7 +89,7 @@ yes</pre>
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: July 23, 2015</span>
+		<span>Last updated on: August 29, 2015</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="logtalk_library_path_2.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="../index.html#predicates">next</a></span><br/>

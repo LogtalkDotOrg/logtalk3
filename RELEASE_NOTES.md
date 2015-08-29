@@ -55,6 +55,9 @@ Documentation
 
 * IMPROVED: Section on contributions on the `README.md` file.
 
+* FIXED: Document a limitation on using some of the `logtalk_load_context/2`
+keys when performing goal-expansion.
+
 Library
 -------
 
