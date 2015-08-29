@@ -61,8 +61,9 @@ keys when performing goal-expansion.
 Library
 -------
 
-* FIXED: Added three library files missing in the previous stable release:
-`assignvars.txt`, `assignvarsp.lgt`, and `assignvars_loader.lgt`.
+* FIXED: Added library files missing in the previous stable release:
+`assignvars.txt`, `assignvarsp.lgt`, `nd_assignvars.lgt`, and
+`assignvars_loader.lgt`.
 
 Tools
 -----
