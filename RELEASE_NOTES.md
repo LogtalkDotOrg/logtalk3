@@ -78,6 +78,9 @@ of a cut will print `true` instead of a cut.
 exit ports while using backend Prolog systems not providing a solution to find
 if a call is deterministic.
 
+* FIXED: Added missing entries to the `help` tool for the message printing and
+question asking mechanisms predicates and for the coinduction hook predicates.
+
 Tests
 -----
 

@@ -25,9 +25,9 @@
 :- object(help).
 
 	:- info([
-		version is 0.4,
+		version is 0.5,
 		author is 'Paulo Moura',
-		date is 2015/04/24,
+		date is 2015/08/29,
 		comment is 'Command-line help for Logtalk built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
@@ -286,6 +286,18 @@
 	built_in_method(expand_goal, 2, '/manuals/refman/methods/', 'expand_goal_2.html').
 	built_in_method(goal_expansion, 2, '/manuals/refman/methods/', 'goal_expansion_2.html').
 
+	built_in_method(coinductive_success_hook, N, '/manuals/refman/methods/', 'coinductive_success_hook_1_2.html') :-
+		between(1, 2, N).
+
+	built_in_method(ask_question, 5, '/manuals/refman/methods/', 'ask_question_5.html').
+	built_in_method(message_hook, 4, '/manuals/refman/methods/', 'message_hook_4.html').
+	built_in_method(message_prefix_stream, 4, '/manuals/refman/methods/', 'message_prefix_stream_4.html').
+	built_in_method(print_message, 3, '/manuals/refman/methods/', 'print_message_3.html').
+	built_in_method(print_message_tokens, 3, '/manuals/refman/methods/', 'print_message_tokens_3.html').
+	built_in_method(print_message_token, 4, '/manuals/refman/methods/', 'print_message_token_4.html').
+	built_in_method(question_hook, 6, '/manuals/refman/methods/', 'question_hook_6.html').
+	built_in_method(question_prompt_stream, 4, '/manuals/refman/methods/', 'question_prompt_stream_4.html').
+
 	:- public(control/4).
 	:- mode(control(?atom, ?integer, -atom, -atom), zero_or_more).
 	:- info(control/4, [
@@ -310,6 +322,8 @@
 	built_in_non_terminal(call, N, '/manuals/refman/methods/', 'call_1.html') :-
 		between(1, 6, N).
 	built_in_non_terminal(phrase, 1, '/manuals/refman/methods/', 'phrase_1.html').
+
+	built_in_non_terminal(message_tokens, 2, '/manuals/refman/methods/', 'message_tokens_2.html').
 
 	:- public(library/0).
 	:- mode(library, one).
