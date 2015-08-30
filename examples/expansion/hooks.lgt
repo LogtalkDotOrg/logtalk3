@@ -58,7 +58,7 @@
 
 	% the term-expansion mechanism tries term_expansion/2 clauses until
 	% it finds one that succeeds (or until all term_expansion/2 clauses
-	% are tried); thus more specifc clauses should be listed before more
+	% are tried); thus more specific clauses should be listed before more
 	% general ones
 
 	term_expansion((:- object(raw)), (:- object(cooked))).

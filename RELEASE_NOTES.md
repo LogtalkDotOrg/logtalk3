@@ -47,7 +47,7 @@ for the question kind.
 Prolog adapter and integration files
 ------------------------------------
 
-* ADDED: Updated the Lean Prolog adapter file wit support for using `index/1`
+* ADDED: Updated the Lean Prolog adapter file with support for using `index/1`
 directives in objects and categories.
 
 Documentation
