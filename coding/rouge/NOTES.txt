@@ -1,0 +1,46 @@
+________________________________________________________________________
+
+This file is part of Logtalk <http://logtalk.org/>  
+
+Logtalk is free software. You can redistribute it and/or modify it under
+the terms of the FSF GNU General Public License 3  (plus some additional
+terms per section 7).        Consult the `LICENSE.txt` file for details.
+________________________________________________________________________
+
+
+This directory contains the `logtalk.rb` file that provides syntax 
+coloring support for Rouge (version 1.9.1 or later):
+
+	http://rouge.jneen.net/
+
+This support file is dual-licensed under the GNU General Public License 3
+and the Rouge license.
+
+Rouge may already include support for Logtalk. You can check it by running
+the command:
+
+	$ rougify list
+
+If support for Logtalk is outdated, replace its definition in the following
+file (its prefix depends on where Rouge is installed):
+
+	rouge/lib/lexers/rouge/logtalk.rb
+
+with the contents of the `logtalk.rb` from the Logtalk distribution.
+
+Logtalk source files (including the library entities and the programming
+examples) are formatted using tabs (the recommended setting is a tab width
+equivalent to 4 spaces). This can be specified by using the `whitespace`
+filter option `tabsize`:
+
+	$ rougify highlight source.lgt > source.html
+
+When your source file uses an encoding other than ASCII or ISO-Latin-1, 
+you will need to use the `encoding` option. For example:
+
+	$ rougify highlight babel.lgt > babel.html
+
+You may also use the Logtalk lexer with plain Prolog files by using the `-l` 
+option. For example:
+
+	$ rougify highlight -l logtalk source.pl > source.html

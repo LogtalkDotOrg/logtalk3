@@ -104,7 +104,7 @@ IDEs, text editors, and syntax highlighters support
 * ADDED: Notes on using the Atom multiple platform text editor for Logtalk
 coding.
 
-* ADDED: Suport for the Rouge syntax highlighter (used by e.g. GitLab).
+* ADDED: Support for the Rouge syntax highlighter (used by e.g. GitLab).
 
 * ADDED: Syntax highlighting test for using a backslash in a quoted atom.
 
