@@ -104,6 +104,8 @@ IDEs, text editors, and syntax highlighters support
 * ADDED: Notes on using the Atom multiple platform text editor for Logtalk
 coding.
 
+* ADDED: Syntax highlighting test for using a backslash in a quoted atom.
+
 
 3.00.6 - August 3, 2015
 ========================

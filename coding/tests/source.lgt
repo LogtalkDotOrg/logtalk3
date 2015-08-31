@@ -30,9 +30,9 @@ comment
 	extends(parent)).
 
 	:- info([
-		version is 1.31,
+		version is 1.32,
 		author is 'Paulo Moura',
-		date is 2015/04/24,
+		date is 2015/08/31,
 		comment is 'Sample prototype for testing syntax coloring.'
 	]).
 
@@ -370,9 +370,10 @@ comment
 
 	escape_sequences :-
 		write('Quoted atom with a quote ('') inside.'),
+		write('Quoted atom with a backslash (\\) inside.'),
 		write('Quoted atom with control escape sequences: \a \b \r \f \t \n \v'),
 		write('Quoted atom with an octal escape sequence: \123\.'),
-		write('Quoted atom with an hexa-decimal escape sequence: \x123f\.').
+		write('Quoted atom with an hexadecimal escape sequence: \x123f\.').
 
 :- end_object.
 
