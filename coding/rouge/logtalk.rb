@@ -6,6 +6,7 @@ module Rouge
       title "Logtalk"
       desc "The Logtalk programming language (http://logtalk.org/)"
       tag 'logtalk'
+      aliases 'logtalk'
       filenames '*.lgt', '*.logtalk'
       mimetypes 'text/x-logtalk'
 
@@ -17,10 +18,11 @@ module Rouge
       end
 
       state :basic do
-          # Whitespace
-          rule /\s+/, Text
           # Directives
-          rule /^\s*:-\s/, Punctuation, :directives
+          rule /^\s*:-\s/, Keyword, :directives
+          # Whitespace
+          rule /\n/, Text
+          rule /\s+/, Text
           # Comments
           rule /%.*?\n/, Comment::Single
           rule /\/\*/, Comment::Multiline, :nested_comment
@@ -149,18 +151,19 @@ module Rouge
           rule /[a-z][a-zA-Z0-9_]*/, Text
           rule /[']/, Str, :quoted_atoms
           # Strings
-#          rule %r("[^\\'\n]+"), Str::Symbol
+ #         rule %r("[^\\'\n]+"), Str::Symbol
       end
 
       state :directives do
           # Whitespace
+          rule /\n/, Text
           rule /\s+/, Text
           # Conditional compilation directives
           rule /(el)?if(?=[(])/, Keyword, :pop!
           rule /(e(lse|ndif))[.]/, Keyword, :pop!
           # Entity directives
           rule /(category|object|protocol)(?=[(])/, Keyword, :entity_relations
-          rule /(end_(category|object|protocol))[.]/, Keyword, :pop!
+          rule /(end_(category|object|protocol))(?=[.])/, Keyword, :pop!
           # Predicate scope directives
           rule /(public|protected|private)(?=[(])/, Keyword, :pop!
           # Other directives
@@ -172,11 +175,11 @@ module Rouge
           rule /(c(alls|oinductive)|module|reexport|use(s|_module))(?=[(])/, Keyword, :pop!
           rule /[a-z][a-zA-Z0-9_]*(?=[(])/, Text, :pop!
           rule /[a-z][a-zA-Z0-9_]*[.]/, Text, :pop!
+          # End of entity-opening directive
+          rule /[)][.]/, Punctuation, :pop!
       end
 
       state :entity_relations do
-          # Whitespace
-          rule /\s+/, Text
           rule /(complements|extends|i(nstantiates|mp(lements|orts))|specializes)(?=[(])/, Keyword
           # Numbers
           rule /0'./, Num
@@ -192,28 +195,31 @@ module Rouge
           # Strings
           rule /"(\\\\|\\"|[^"])*"/, Str
           # End of entity-opening directive
-          rule /([)]\.)/, Text, :pop!
+          rule /(?=[)][.])/, Punctuation, :pop!
           # Scope operator
           rule /(::)/, Operator
           # Punctuation
           rule /[()\[\],.|]/, Punctuation
+          # Whitespace
+          rule /\s+/, Text
           # Comments
           rule /%.*?\n/, Comment::Single
           rule /\/\*/, Comment::Multiline, :nested_comment
         end
-
-      state :quoted_atoms do
-          rule /['][']/, Str::Symbol
-          rule /[']/, Str, :pop!
-          rule %r(\\([\\abfnrtv"\']|(x[a-fA-F0-9]+|[0-7]+)\\)), Str::Escape
-          rule %r(\\), Str::Symbol
-      end
 
       state :nested_comment do
         rule %r([^/\*]+), Comment::Multiline
         rule %r(/\*), Comment::Multiline, :nested_comment
         rule %r(\*/), Comment::Multiline, :pop!
         rule %r([*/]), Comment::Multiline
+      end
+
+      state :quoted_atoms do
+          rule /['][']/, Str::Symbol
+          rule /[']/, Str, :pop!
+        rule %r(\\([\\abfnrtv"\']|(x[a-fA-F0-9]+|[0-7]+)\\)), Str::Escape
+        rule %r(\\), Str::Symbol
+        rule /[^']*/, Str
       end
 
       state :root do
