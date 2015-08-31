@@ -210,9 +210,10 @@ module Rouge
       end
 
       state :nested_comment do
-        rule %r(\/\*), Comment::Multiline, :push
-        rule %r(\s*\*[^*\/]+), Comment::Multiline
-        rule %r(\*\/), Comment::Multiline, :pop!
+        rule %r([^/\*]+), Comment::Multiline
+        rule %r(/\*), Comment::Multiline, :nested_comment
+        rule %r(\*/), Comment::Multiline, :pop!
+        rule %r([*/]), Comment::Multiline
       end
 
       state :root do
