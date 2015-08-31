@@ -153,7 +153,7 @@ class LogtalkLexer(RegexLexer):
             (r'\^', Operator),
             # Strings
             (r'"(\\\\|\\"|[^"])*"', String),
-            # Ponctuation
+            # Punctuation
             (r'[()\[\],.|]', Text),
             # Atoms
             (r"[a-z][a-zA-Z0-9_]*", Text),
@@ -207,7 +207,7 @@ class LogtalkLexer(RegexLexer):
             (r'([)]\.)', Text, 'root'),
             # Scope operator
             (r'(::)', Operator),
-            # Ponctuation
+            # Punctuation
             (r'[()\[\],.|]', Text),
             # Comments
             (r'%.*?\n', Comment),
