@@ -160,7 +160,7 @@ module Rouge
           rule /\s+/, Text
           # Conditional compilation directives
           rule /(el)?if(?=[(])/, Keyword, :pop!
-          rule /(e(lse|ndif))[.]/, Keyword, :pop!
+          rule /(e(lse|ndif))(?=[.])/, Keyword, :pop!
           # Entity directives
           rule /(category|object|protocol)(?=[(])/, Keyword, :entity_relations
           rule /(end_(category|object|protocol))(?=[.])/, Keyword, :pop!
@@ -169,12 +169,12 @@ module Rouge
           # Other directives
           rule /e(n(coding|sure_loaded)|xport)(?=[(])/, Keyword, :pop!
           rule /in(clude|itialization|fo)(?=[(])/, Keyword, :pop!
-          rule /(built_in|dynamic|synchronized|threaded)[.]/, Keyword, :pop!
+          rule /(built_in|dynamic|synchronized|threaded)(?=[.])/, Keyword, :pop!
           rule /(alias|d(ynamic|iscontiguous)|m(eta_(non_terminal|predicate)|ode|ultifile)|s(et_(logtalk|prolog)_flag|ynchronized))(?=[(])/, Keyword, :pop!
           rule /op(?=[(])/, Keyword, :pop!
           rule /(c(alls|oinductive)|module|reexport|use(s|_module))(?=[(])/, Keyword, :pop!
           rule /[a-z][a-zA-Z0-9_]*(?=[(])/, Text, :pop!
-          rule /[a-z][a-zA-Z0-9_]*[.]/, Text, :pop!
+          rule /[a-z][a-zA-Z0-9_]*(?=[.])/, Text, :pop!
           # End of entity-opening directive
           rule /[)][.]/, Punctuation, :pop!
       end
