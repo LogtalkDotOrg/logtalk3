@@ -44,6 +44,10 @@ when intercepting questions.
 kind when there isn't neither a user or a default prompt and stream defined
 for the question kind. 
 
+* FIXED: Passing an invalid directive to the built-in `create_object/4`,
+`create_protocol/3`, and `create_category/4` predicates would fail instead of
+throwing an error as expected.
+
 Prolog adapter and integration files
 ------------------------------------
 

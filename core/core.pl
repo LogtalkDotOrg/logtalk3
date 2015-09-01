@@ -7146,8 +7146,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% only the compilation context mode should be shared between different directives
 	'$lgt_comp_ctx_mode'(Ctx, Mode),
 	'$lgt_comp_ctx_mode'(NewCtx, Mode),
-	'$lgt_compile_logtalk_directive'(Directive, NewCtx),
-	'$lgt_compile_logtalk_directives'(Directives, Ctx).
+	(	'$lgt_compile_logtalk_directive'(Directive, NewCtx) ->
+		'$lgt_compile_logtalk_directives'(Directives, Ctx)
+	;	functor(Directive, Functor, Arity),
+		throw(domain_error(directive, Functor/Arity))
+	).
 
 '$lgt_compile_logtalk_directives'([], _).
 
