@@ -28,17 +28,17 @@ file (its prefix depends on where Rouge is installed):
 
 with the contents of the `logtalk.rb` from the Logtalk distribution.
 
-Logtalk source files (including the library entities and the programming
-examples) are formatted using tabs (the recommended setting is a tab width
-equivalent to 4 spaces). This can be specified by using the `whitespace`
-filter option `tabsize`:
+An example of generating HTML code (wrapped with a `pre` tag) would be:
 
-	$ rougify highlight source.lgt > source.html
+	$ rougify highlight -f html source.lgt > source.html
 
-When your source file uses an encoding other than ASCII or ISO-Latin-1, 
-you will need to use the `encoding` option. For example:
+To get the CSS file used for the generated HTML code use the command:
 
-	$ rougify highlight babel.lgt > babel.html
+	$ rougify style > source.css
+
+An useful formatter option is line numbers:
+
+	$ rougify highlight -f html -F line_numbers=true source.lgt > source.html
 
 You may also use the Logtalk lexer with plain Prolog files by using the `-l` 
 option. For example:
