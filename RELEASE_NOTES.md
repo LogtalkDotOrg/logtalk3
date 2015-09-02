@@ -48,6 +48,8 @@ for the question kind.
 `create_protocol/3`, and `create_category/4` predicates would fail instead of
 throwing an error as expected.
 
+* FIXED: Propagation of syntax errors in included files.
+
 Prolog adapter and integration files
 ------------------------------------
 

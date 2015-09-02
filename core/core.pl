@@ -7146,7 +7146,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% only the compilation context mode should be shared between different directives
 	'$lgt_comp_ctx_mode'(Ctx, Mode),
 	'$lgt_comp_ctx_mode'(NewCtx, Mode),
-	(	'$lgt_compile_logtalk_directive'(Directive, NewCtx) ->
+	(	'$lgt_logtalk_directive'(Directive) ->
+		'$lgt_compile_logtalk_directive'(Directive, NewCtx),
 		'$lgt_compile_logtalk_directives'(Directives, Ctx)
 	;	functor(Directive, Functor, Arity),
 		throw(domain_error(directive, Functor/Arity))
@@ -19023,7 +19024,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	catch(
 		'$lgt_check_and_expand_source_file'(File, ExpandedFile),
 		error(FileError, _),
-		'$lgt_compiler_open_stream_error_handler'(FileError)
+		throw(FileError)
 	),
 	(	'$lgt_file_exists'(ExpandedFile) ->
 		true
@@ -19031,13 +19032,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	catch(
 		'$lgt_open'(ExpandedFile, read, Stream, []),
-		OpenError,
-		'$lgt_compiler_open_stream_error_handler'(OpenError)
+		error(OpenError, _),
+		throw(OpenError)
 	),
 	catch(
 		'$lgt_read_stream_to_terms'(Stream, Terms),
-		TermError,
-		('$lgt_close'(Stream), '$lgt_first_stage_error_handler'(TermError))
+		error(TermError, _),
+		('$lgt_close'(Stream), throw(TermError))
 	),
 	'$lgt_close'(Stream).
 
