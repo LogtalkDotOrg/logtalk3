@@ -50,6 +50,9 @@ throwing an error as expected.
 
 * FIXED: Propagation of syntax errors in included files.
 
+* FIXED: Singleton variables in included file terms would result in failed
+compilation when dynamically creating an entity.
+
 Prolog adapter and integration files
 ------------------------------------
 

@@ -7025,7 +7025,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_file_directive'(include(File), Ctx) :-
 	!,
-	'$lgt_read_file_to_terms'(File, Terms),
+	'$lgt_comp_ctx_mode'(Ctx, Mode),
+	'$lgt_read_file_to_terms'(Mode, File, Terms),
 	'$lgt_compile_file_terms'(Terms, Ctx).
 
 '$lgt_compile_file_directive'(initialization(Goal), Ctx) :-
@@ -7166,10 +7167,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	throw(instantiation_error).
 
 '$lgt_compile_logtalk_directive'(include(File), Ctx) :-
-	'$lgt_read_file_to_terms'(File, Terms),
-	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
-		'$lgt_compile_file_terms'(Terms, Ctx)
-	;	'$lgt_compile_runtime_terms'(Terms)
+	'$lgt_comp_ctx_mode'(Ctx, Mode),
+	'$lgt_read_file_to_terms'(Mode, File, Terms),
+	(	Mode == runtime ->
+		'$lgt_compile_runtime_terms'(Terms)
+	;	'$lgt_compile_file_terms'(Terms, Ctx)
 	).
 
 % object opening and closing directives
@@ -19020,7 +19022,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_sum_list'(Values, Sum1, Sum).
 
 
-'$lgt_read_file_to_terms'(File, Terms) :-
+'$lgt_read_file_to_terms'(Mode, File, Terms) :-
 	catch(
 		'$lgt_check_and_expand_source_file'(File, ExpandedFile),
 		error(FileError, _),
@@ -19036,23 +19038,40 @@ create_logtalk_flag(Flag, Value, Options) :-
 		throw(OpenError)
 	),
 	catch(
-		'$lgt_read_stream_to_terms'(Stream, Terms),
+		'$lgt_read_stream_to_terms'(Mode, Stream, Terms),
 		error(TermError, _),
 		('$lgt_close'(Stream), throw(TermError))
 	),
 	'$lgt_close'(Stream).
 
-'$lgt_read_stream_to_terms'(Stream, Terms) :-
-	'$lgt_read_term'(Stream, Term, [singletons(Singletons)], _),
-	'$lgt_read_stream_to_terms'(Term, Singletons, Stream, Terms).
+
+'$lgt_read_stream_to_terms'(runtime, Stream, Terms) :-
+	'$lgt_read_stream_to_terms_runtime'(Stream, Terms).
+'$lgt_read_stream_to_terms'(compile(_), Stream, Terms) :-
+	'$lgt_read_stream_to_terms_compile'(Stream, Terms).
 
 
-'$lgt_read_stream_to_terms'(end_of_file, _, _, []) :-
+'$lgt_read_stream_to_terms_runtime'(Stream, Terms) :-
+	'$lgt_read_term'(Stream, Term, [], _),
+	'$lgt_read_stream_to_terms_runtime'(Term, Stream, Terms).
+
+'$lgt_read_stream_to_terms_runtime'(end_of_file, _, []) :-
 	!.
-'$lgt_read_stream_to_terms'(Term, Singletons, Stream, [Term| Terms]) :-
+'$lgt_read_stream_to_terms_runtime'(Term, Stream, [Term| Terms]) :-
+	'$lgt_read_term'(Stream, NextTerm, [], _),
+	'$lgt_read_stream_to_terms_runtime'(NextTerm, Stream, Terms).
+
+
+'$lgt_read_stream_to_terms_compile'(Stream, Terms) :-
+	'$lgt_read_term'(Stream, Term, [singletons(Singletons)], _),
+	'$lgt_read_stream_to_terms_compile'(Term, Singletons, Stream, Terms).
+
+'$lgt_read_stream_to_terms_compile'(end_of_file, _, _, []) :-
+	!.
+'$lgt_read_stream_to_terms_compile'(Term, Singletons, Stream, [Term| Terms]) :-
 	'$lgt_report_singleton_variables'(Singletons, Term),
 	'$lgt_read_term'(Stream, NextTerm, [singletons(NextSingletons)], _),
-	'$lgt_read_stream_to_terms'(NextTerm, NextSingletons, Stream, Terms).
+	'$lgt_read_stream_to_terms_compile'(NextTerm, NextSingletons, Stream, Terms).
 
 
 
