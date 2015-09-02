@@ -4,7 +4,7 @@
 %  Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
 %  Default library paths 
-%  Last updated on August 21, 2015
+%  Last updated on September 2, 2015
 %
 %  This program is free software: you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -211,4 +211,5 @@ logtalk_library_path(team, threads('team/')).
 logtalk_library_path(testing, examples('testing/')).
 logtalk_library_path(threads, examples('threads/')).
 logtalk_library_path(viewpoints, examples('viewpoints/')).
+logtalk_library_path(wrappers, examples('wrappers/')).
 logtalk_library_path(xpce, examples('xpce/')).

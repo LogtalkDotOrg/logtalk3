@@ -109,6 +109,9 @@ testing the use of a negative integer for the start index.
 Examples
 --------
 
+* ADDED: Example of using the new `begin_of_file` term generated when compiling
+a source file to define object wrappers for plain Prolog code.
+
 * ADDED: Simple example of supporting application localization in multiple
 natural languages.
 

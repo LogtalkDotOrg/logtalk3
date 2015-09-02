@@ -356,3 +356,7 @@ Follows a short description of each included example (in alphabetical order):
 
 - `xpce`  
 	SWI-Prolog only example of using XPCE from Logtalk
+
+- `wrappers`  
+	example of using the new `begin_of_file` term generated when compiling
+	a source file to define object wrappers for plain Prolog code
