@@ -30,6 +30,11 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* NEW: Generate a `begin_of_file` term when compiling a source file. This term
+can be used by the term-expansion mechanism for adding a wrapper for the file
+code. When the first term of a source file is an `encoding/1` directive, the
+`begin_of_file` term will be generated after processing this directive.
+
 * CHANGED: Allow component names to be any non-variable terms when using the
 message printing and question asking mechanisms (documentation-only change).
 

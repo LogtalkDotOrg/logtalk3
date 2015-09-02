@@ -5484,6 +5484,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 		WriteError,
 		'$lgt_first_stage_error_handler'(WriteError)
 	),
+	% generate a begin_of_file term for term-expansion
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(regular), _, 0-0),
+	'$lgt_compile_file_term'(begin_of_file, Ctx),
 	% read and compile the remaining terms in the Logtalk source file
 	catch(
 		'$lgt_compile_file_term'(Term, Singletons, Lines, NewInput),
@@ -5572,33 +5575,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_file_term'((-), _, _, _) :-
 	% catch variables
 	throw(error(instantiation_error, term(_))).
-
-'$lgt_compile_file_term'(end_of_file, _, Lines, _) :-
-	'$lgt_pp_module_'(Module),
-	!,
-	% module definitions start with an opening module/1-2 directive and are assumed
-	% to end at the end of a source file; there is no module closing directive;
-	% set the initial compilation context and the position for compiling the end_of_file term
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(regular), _, Lines),
-	'$lgt_compile_file_term'(end_of_file, Ctx),
-	'$lgt_second_stage'(object, Module, Ctx),
-	'$lgt_print_message'(silent(compiling), core, compiled_entity(module, Module)).
-
-'$lgt_compile_file_term'(end_of_file, _, _, _) :-
-	'$lgt_pp_entity_'(Type, _, _, _, _),
-	% unexpected end-of-file while compiling an entity
-	(	Type == object ->
-		throw(error(existence_error(directive, end_object/0), term(end_of_file)))
-	;	Type == protocol ->
-		throw(error(existence_error(directive, end_protocol/0), term(end_of_file)))
-	;	% Type == category,
-		throw(error(existence_error(directive, end_category/0), term(end_of_file)))
-	).
-
-'$lgt_compile_file_term'(end_of_file, _, _, _) :-
-	'$lgt_pp_cc_if_found_'(_),
-	% unexpected end-of-file while compiling a conditional compilation block
-	throw(error(existence_error(directive, endif/0), term(end_of_file))).
 
 '$lgt_compile_file_term'(end_of_file, _, Lines, _) :-
 	!,
@@ -6650,6 +6626,34 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% catch variables
 	throw(error(instantiantion_error, term_expansion(Term, _))).
 
+'$lgt_compile_expanded_term'(begin_of_file, _, _) :-
+	!.
+
+'$lgt_compile_expanded_term'(end_of_file, _, Ctx) :-
+	'$lgt_pp_module_'(Module),
+	!,
+	% module definitions start with an opening module/1-2 directive and are assumed
+	% to end at the end of a source file; there is no module closing directive;
+	% set the initial compilation context and the position for compiling the end_of_file term
+	'$lgt_second_stage'(object, Module, Ctx),
+	'$lgt_print_message'(silent(compiling), core, compiled_entity(module, Module)).
+
+'$lgt_compile_expanded_term'(end_of_file, _, _) :-
+	'$lgt_pp_entity_'(Type, _, _, _, _),
+	% unexpected end-of-file while compiling an entity
+	(	Type == object ->
+		throw(error(existence_error(directive, end_object/0), term(end_of_file)))
+	;	Type == protocol ->
+		throw(error(existence_error(directive, end_protocol/0), term(end_of_file)))
+	;	% Type == category,
+		throw(error(existence_error(directive, end_category/0), term(end_of_file)))
+	).
+
+'$lgt_compile_expanded_term'(end_of_file, _, _) :-
+	'$lgt_pp_cc_if_found_'(_),
+	% unexpected end-of-file while compiling a conditional compilation block
+	throw(error(existence_error(directive, endif/0), term(end_of_file))).
+
 '$lgt_compile_expanded_term'(end_of_file, _, _) :-
 	!.
 
@@ -6710,6 +6714,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_runtime_term'((-), _) :-
 	% catch variables
 	throw(error(instantiantion_error, term(_))).
+
+'$lgt_compile_runtime_term'(begin_of_file, _) :-
+	!.
 
 '$lgt_compile_runtime_term'(end_of_file, _) :-
 	!.
