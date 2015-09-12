@@ -2,11 +2,16 @@ Document: logtalk-docs
 Title: Logtalk
 Author: Paulo Moura
 Abstract: Logtalk documentation.
- Logtalk is an object-oriented logic programming language that can use
- most Prolog implementations as a back-end compiler. As a multi-paradigm
- language, it includes support for both prototypes and classes, protocols
- (interfaces), component-based programming through category-based composition,
- event-driven programming, and high-level multi-threading programming.
+ Logtalk is an object-oriented logic programming language that extends
+ and leverages the Prolog language with a feature set suitable for
+ programming in the large. As a multi-paradigm language, it includes
+ support for both prototypes and classes, protocols (interfaces),
+ component-based programming through category-based composition,
+ event-driven programming, coinduction, and high-level multi-threading
+ programming. Logtalk uses standard Prolog syntax with the addition of
+ some operators and directives and can be used with any Prolog
+ implementation compliant with official and de facto standards as the
+ back-end compiler.
 Section: Apps/Programming
 
 Format: HTML
@@ -14,4 +19,4 @@ Index: /usr/share/logtalk/manuals/index.html
 Files: /usr/share/logtalk/manuals/*
 
 Format: text
-Files: /usr/share/logtalk/ACKNOWLEDGMENTS.md /usr/share/logtalk/BIBLIOGRAPHY.bib /usr/share/logtalk/CUSTOMIZE.md /usr/share/logtalk/INSTALL.md /usr/share/logtalk/LICENSE.txt /usr/share/logtalk/QUICK_START.md /usr/share/logtalk/README.md /usr/share/logtalk/RELEASE_NOTES.md /usr/share/logtalk/UPGRADING.md
+Files: /usr/share/logtalk/ACKNOWLEDGMENTS.md /usr/share/logtalk/BIBLIOGRAPHY.bib /usr/share/logtalk/CUSTOMIZE.md /usr/share/logtalk/INSTALL.md /usr/share/logtalk/LICENSE.txt /usr/share/logtalk/NOTICE.txt /usr/share/logtalk/QUICK_START.md /usr/share/logtalk/README.md /usr/share/logtalk/RELEASE_NOTES.md /usr/share/logtalk/UPGRADING.md

@@ -1,23 +1,19 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <http://logtalk.org/>  
-Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
+Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+    http://www.apache.org/licenses/LICENSE-2.0
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-Additional licensing terms apply per Section 7 of the GNU General
-Public License 3. Consult the `LICENSE.txt` file for details.
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 ________________________________________________________________________
 
 
@@ -163,25 +159,23 @@ and the 2003 PhD thesis on Logtalk are good choices).
 -----------------
 
 Contributions, constructive criticism, patches, bug reports, and suggestions
-are always welcome. Major code contributions to **core** files, such as the
-compiler, runtime, adapter files, library files, or developer tools can only
-be accepted with a transfer of copyright or if the submitted code is explicitly
-declared as public domain code. This simplifies the selling of commercial
-licenses, which provide a revenue source for the sustained development of
-Logtalk. Contributions that retain the copyright of their authors may also
-be distributed with Logtalk with the understanding that the terms of their
-commercial use depends solely on the authors chosen licensing terms and may
-require a separate, independent, agreement between users and authors.
+are always welcome. Major code and documentation contributions require the
+contributor to sign and submit a contributor license agreement and should
+be made available under the Logtalk license without any additional terms or
+conditions. Contributions using other licensing terms may also be distributed
+with Logtalk with the understanding that the terms of their use depends solely
+on the authors chosen licensing terms and may require a separate, independent,
+agreement between users and authors.
 
 
 12. LEGAL
 ---------
 
-Logtalk is copyrighted by Paulo Moura. The Logtalk use and distribution
-license can be found in the [LICENSE.txt](LICENSE.txt) file. Logtalk is
-available under the GNU General Public License 3 with a linking exception.
-The copyright notice and license applies to all files in this release
-unless otherwise explicitly stated.
+Logtalk is copyrighted by Paulo Moura and made available under the Apache
+License 2.0. See the [LICENSE.txt](LICENSE.txt) file for the license terms.
+The copyright notice and license applies to all files in this release unless
+otherwise explicitly stated. See the [NOTICE.txt](NOTICE.txt) for detailed
+copyright information.
 
 Some files that are part of the Logtalk distribution are distributed using
 a different license and/or are copyrighted by a Logtalk contributor.

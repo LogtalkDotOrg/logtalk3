@@ -14,7 +14,7 @@
  * the database and document communities".
  * <http://www.w3.org/TR/2002/WD-xmlquery-use-cases-20021115/#xmp>
  *
- * QueryId is one of q1…q12 selecting which of the 12 use cases is executed.
+ * QueryId is one of q1â€¦q12 selecting which of the 12 use cases is executed.
  * The XML output is written to the file [QueryId].xml in the current directory.
  *
  * xml::pp/1 is used to display the resulting "document value model"

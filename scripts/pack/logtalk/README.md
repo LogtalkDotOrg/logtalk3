@@ -1,28 +1,24 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <http://logtalk.org/>  
-Copyright (c) 1998-2015 Paulo Moura <pmoura@logtalk.org>
+Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+    http://www.apache.org/licenses/LICENSE-2.0
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-Additional licensing terms apply per Section 7 of the GNU General
-Public License 3. Consult the `LICENSE.txt` file for details.
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 ________________________________________________________________________
 
 
 This is a SWI-Prolog pack specific README file. The actual Logtalk
-README file can be found at `../logtalk-3.00.7/README.md`. Follows
+README file can be found at `../logtalk-3.01.0/README.md`. Follows
 some notes on this pack version of Logtalk.
 
 Installing this pack simplifies loading Logtalk on-demand by simply
@@ -37,28 +33,28 @@ using one of its prebuilt installers.
 
 When using the directive above, the `LOGTALKHOME` and `LOGTALKUSER`
 shell environment variables are set, just for the duration of the
-SWI-Prolog process, to the full path of the `../logtalk-3.00.7`
+SWI-Prolog process, to the full path of the `../logtalk-3.01.0`
 directory.
 
 For easy access to the contents of the Logtalk installation folder
 (e.g. documentation or examples) you can create a symbolic link to the
-`../logtalk-3.00.7` directory (in e.g. your home directory). Its full
+`../logtalk-3.01.0` directory (in e.g. your home directory). Its full
 path can be easily found by using the query:
 
 	?- pack_info(logtalk).
 
-The `../logtalk-3.00.7` directory contains a `settings.lgt` file that
+The `../logtalk-3.01.0` directory contains a `settings.lgt` file that
 makes loading of Logtalk silent. If you make other changes to this file,
-or to other contents of the `../logtalk-3.00.7` directory, be sure to
+or to other contents of the `../logtalk-3.01.0` directory, be sure to
 make a backup before upgrading or removing this pack.
 
-The `../logtalk-3.00.7` directory contains several handy scripts but due
+The `../logtalk-3.01.0` directory contains several handy scripts but due
 to a current limitation of the `archive` library used for extracting the
 pack files, the executable permission of the script files is not being
 preserved. This can be manually fixed after installing the pack using
-the following steps (adjust the `logtalk-3.00.7` directory full path if
+the following steps (adjust the `logtalk-3.01.0` directory full path if
 necessary for your installation):
 
-	$ cd $HOME/lib/swipl/pack/logtalk/logtalk-3.00.7
+	$ cd $HOME/lib/swipl/pack/logtalk/logtalk-3.01.0
 	$ chmod a+x scripts/cleandist.sh
 	$ ./scripts/cleandist.sh
