@@ -27,6 +27,8 @@ RELEASE NOTES
 Tools
 -----
 
+* NEW: Simple experimental tool for helping porting plain Prolog code.
+
 * ADDED: Missing `retry` trace option for the `debugger` tool.
 
 IDEs, text editors, and syntax highlighters support
