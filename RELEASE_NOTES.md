@@ -21,6 +21,16 @@ RELEASE NOTES
 =============
 
 
+3.01.1 - September ??, 2015
+===========================
+
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* FIXED: Added demo and spec files for completing the Rouge syntax highlighter
+support.
+
+
 3.01.0 - September 12, 2015
 ===========================
 

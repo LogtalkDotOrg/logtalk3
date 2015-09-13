@@ -30,12 +30,21 @@ the command:
 
 	$ rougify list
 
-If support for Logtalk is outdated, replace its definition in the following
-file (its prefix depends on where Rouge is installed):
+Recent versions of Rouge may already contain support for Logtalk. However, 
+this directory may contain updated support files. If that is the case,
+install the Logtalk support files by performing the following steps:
 
-	rouge/lib/lexers/rouge/logtalk.rb
+1. Copy the file `lib/rouge/lexers/logtalk.rb` to the same directory in 
+your Rouge installation directory (replacing any existing older file).
 
-with the contents of the `logtalk.rb` from the Logtalk distribution.
+2. Copy the file `lib/rouge/demos/logtalk` to the same directory in 
+your Rouge installation directory (replacing any existing older file).
+
+3. Copy the file `spec/lexers/logtalk_spec.rb` to the same directory in 
+your Rouge installation directory (replacing any existing older file).
+
+4. Copy the file `spec/visual/samples/logtalk` to the same directory in 
+your Rouge installation directory (replacing any existing older file).
 
 An example of generating HTML code (wrapped with a `pre` tag) would be:
 
