@@ -24,6 +24,11 @@ RELEASE NOTES
 3.01.1 - September ??, 2015
 ===========================
 
+Tools
+-----
+
+* ADDED: Missing `retry` trace option for the `debugger` tool.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

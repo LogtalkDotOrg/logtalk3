@@ -22,9 +22,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 2.7,
+		version is 2.8,
 		author is 'Paulo Moura',
-		date is 2015/08/25,
+		date is 2015/09/12,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -424,31 +424,33 @@
 					\+ \+ spying_context_(Sender, This, Self, Goal)
 				)
 			) ->
-			(	port(call, N, Goal, TGoal, _, ExCtx, CAction),
-				(	(CAction == ignore; CAction == unify) ->
-					true
-				;	{CAction},
-					catch(call_goal(TGoal, Deterministic), Error, exception(N, Goal, TGoal, Error, ExCtx)),
-					(	Deterministic == true ->
-						!,
-						port(exit, N, Goal, TGoal, _, ExCtx, EAction),
-						{EAction}
-					;	(	port(nd_exit, N, Goal, TGoal, _, ExCtx, EAction),
-							{EAction}
-						;	port(redo, N, Goal, TGoal, _, ExCtx, RAction),
-							RAction == ignore
-						)
-					)
-				;	retractall(skipping_),
-					retractall(quasi_skipping_),
-					port(fail, N, Goal, TGoal, _, ExCtx, _),
-					fail
-				)
-			),
-			retractall(skipping_),
-			retractall(quasi_skipping_)
+			catch(box(N, Goal, TGoal, ExCtx), logtalk_debugger_retry, box(N, Goal, TGoal, ExCtx))
 		;	{TGoal}
 		).
+
+	box(N, Goal, TGoal, ExCtx) :-
+		port(call, N, Goal, TGoal, _, ExCtx, CAction),
+		(	(CAction == ignore; CAction == unify) ->
+			true
+		;	{CAction},
+			catch(call_goal(TGoal, Deterministic), Error, exception(N, Goal, TGoal, Error, ExCtx)),
+			(	Deterministic == true ->
+				!,
+				port(exit, N, Goal, TGoal, _, ExCtx, EAction),
+				{EAction}
+			;	(	port(nd_exit, N, Goal, TGoal, _, ExCtx, EAction),
+					{EAction}
+				;	port(redo, N, Goal, TGoal, _, ExCtx, RAction),
+					RAction == ignore
+				)
+			)
+		;	retractall(skipping_),
+			retractall(quasi_skipping_),
+			port(fail, N, Goal, TGoal, _, ExCtx, _),
+			fail
+		),			
+		retractall(skipping_),
+		retractall(quasi_skipping_).
 
 	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == b; Dialect == qp; Dialect == swi; Dialect == yap))).
 
@@ -486,7 +488,6 @@
 
 	exception(_, _, _, logtalk_debugger_aborted, _) :-
 		throw(logtalk_debugger_aborted).
-
 	exception(N, Goal, TGoal, Error, ExCtx) :-
 		port(exception, N, Goal, TGoal, Error, ExCtx, TAction),
 		(	TAction == fail ->
@@ -540,6 +541,7 @@
 	valid_port_option(f, fact, _) :- !.
 	valid_port_option(f, rule, _) :- !.
 	valid_port_option(f, redo, _) :- !.
+	valid_port_option(r, fail, _) :- !.
 	valid_port_option(u, call, _) :- !.
 	valid_port_option(n, _, _) :- !.
 	valid_port_option(!, _, _) :- !.
@@ -625,6 +627,9 @@
 	do_port_option(i, _, _, _, _, _, _, ignore).
 
 	do_port_option(f, _, _, _, _, _, _, fail).
+
+	do_port_option(r, _, _, _, _, _, _, _) :-
+		throw(logtalk_debugger_retry).
 
 	do_port_option(u, _, _, Goal, _, _, _, Result) :-
 		ask_question(question, debugger, enter_goal, callable, Term),

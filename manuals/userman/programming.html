@@ -633,16 +633,18 @@ The debugger pauses at leashed posts when tracing or when finding a spy point fo
 	<dt><code>l</code> &mdash; leap</dt>
 		<dd>continues execution until the next spy point is found</dd>
 	<dt><code>s</code> &mdash; skip</dt>
-		<dd>skips debugging for the current goal; only meaningful at call and redo ports</dd>
+		<dd>skips debugging for the current goal; valid at call, redo, and unification ports</dd>
 	<dt><code>q</code> &mdash; quasi-skip</dt>
-		<dd>skips debugging until returning to the current goal or reaching a spy point; only meaningful at call and redo ports</dd>
+		<dd>skips debugging until returning to the current goal or reaching a spy point; valid at call and redo ports</dd>
+	<dt><code>r</code> &mdash; retry</dt>
+		<dd>retries the current goal but side-effects are not undone; valid at the fail port</dd>
 	<dt><code>j</code> &mdash; jump</dt>
 		<dd>reads invocation number and continues execution until a port is reached for that number</dd>
 	<dt><code>z</code> &mdash; zap</dt>
 		<dd>reads port name and continues execution until that port is reached</dd>
 		<dd>reads negated port name and continues execution until a port other than the negated port is reached</dd>
 	<dt><code>i</code> &mdash; ignore</dt>
-		<dd>ignores goal, assumes that it succeeded; only valid at call and redo ports</dd>
+		<dd>ignores goal, assumes that it succeeded; valid at call and redo ports</dd>
 	<dt><code>f</code> &mdash; fail</dt>
 		<dd>forces backtracking; may also be used to convert an exception into a failure</dd>
 	<dt><code>n</code> &mdash; nodebug</dt>
@@ -767,7 +769,7 @@ The Logtalk compiler automatically removes any redundant calls to the built-in p
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: July 9, 2015</span>
+		<span>Last updated on: September 12, 2015</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="installing.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="migration.html">next</a></span><br/>
