@@ -2571,7 +2571,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	setof(
 		Functor/Arity,
 		(Pred, LookupScope)^('$lgt_visible_predicate'(Obj, Pred, Sender, LookupScope), functor(Pred, Functor, Arity)),
-		Preds),
+		Preds
+	),
 	'$lgt_member'(Functor/Arity, Preds).
 
 
@@ -2692,14 +2693,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 		Template =.. [AliasFunctor| ModeArgs]
 	;	fail
 	).
-'$lgt_predicate_property_user'((multifile), _, _, _, _, _, Flags, _, _, _, _) :-
-	Flags /\ 16 =:= 16.
-'$lgt_predicate_property_user'(non_terminal(Functor//Arity), Alias, _, _, _, _, Flags, _, _, _, _) :-
-	Flags /\ 8 =:= 8,
+'$lgt_predicate_property_user'((multifile), _, _, _, _, _, PredFlags, _, _, _, _) :-
+	PredFlags /\ 16 =:= 16.
+'$lgt_predicate_property_user'(non_terminal(Functor//Arity), Alias, _, _, _, _, PredFlags, _, _, _, _) :-
+	PredFlags /\ 8 =:= 8,
 	functor(Alias, Functor, ExtArity),
 	Arity is ExtArity - 2.
-'$lgt_predicate_property_user'(synchronized, _, _, _, _, _, Flags, _, _, _, _) :-
-	Flags /\ 4 =:= 4.
+'$lgt_predicate_property_user'(synchronized, _, _, _, _, _, PredFlags, _, _, _, _) :-
+	PredFlags /\ 4 =:= 4.
 '$lgt_predicate_property_user'(defined_in(DCtn), Alias, _, _, _, _, _, _, _, Def, _) :-
 	(	call(Def, Alias, _, _, _, DCtn) ->
 		true
@@ -2738,18 +2739,22 @@ create_logtalk_flag(Flag, Value, Options) :-
 	functor(Alias, AliasFunctor, _),
 	Mode0 =.. [_| ModeArgs],
 	Mode =.. [AliasFunctor| ModeArgs].
-'$lgt_predicate_property_user'(number_of_clauses(N), Alias, Original, _, _, _, _, _, Obj, Def, _) :-
+'$lgt_predicate_property_user'(number_of_clauses(N), Alias, Original, _, _, _, PredFlags, _, Obj, Def, _) :-
 	'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags),
 	Flags /\ 2 =:= 0,
 	% static object
-	call(Def, Alias, _, _, _, DCtn),
+	once(call(Def, Alias, _, _, _, DCtn)),
 	functor(Original, Functor, Arity),
 	(	'$lgt_predicate_property_'(DCtn, Functor/Arity, flags_clauses_line(_, N0, _)) ->
 		true
 	;	N0 is 0
 	),
-	findall(N1, '$lgt_predicate_property_'(DCtn, Functor/Arity, clauses_line_from(N1, _, _)), N1s),
-	'$lgt_sum_list'([N0| N1s], N).
+	(	PredFlags /\ 16 =:= 16 ->
+		% multifile predicate
+		findall(N1, '$lgt_predicate_property_'(DCtn, Functor/Arity, clauses_line_from(N1, _, _)), N1s),
+		'$lgt_sum_list'([N0| N1s], N)
+	;	N is N0
+	).
 
 
 '$lgt_predicate_property_built_in_method'(logtalk, _, _, _, _).

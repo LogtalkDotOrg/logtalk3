@@ -24,6 +24,13 @@ RELEASE NOTES
 3.01.1 - September ??, 2015
 ===========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Bug in the `predicate_property/2` reflection predicate where a second
+`number_of_clauses/1` property could be returned when an object predicate is
+replaced using a complementing category.
+
 Tools
 -----
 
