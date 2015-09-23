@@ -41,6 +41,8 @@ Tools
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
+* ADDED: Complementing category snippet to the TextMate 2.x text editor.
+
 * FIXED: Added demo and spec files for completing the Rouge syntax highlighter
 support.
 

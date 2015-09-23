@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>
+:- category(${1:Category},
+	complements(${2:Object})).
+
+	:- info([
+		version is 1.0,
+		author is '$TM_FULLNAME',
+		date is `date +%Y/%m/%d`,
+		comment is '${3:Description}'
+	]).
+
+$0
+
+:- end_category.
+</string>
+	<key>name</key>
+	<string>    Complementing category</string>
+	<key>scope</key>
+	<string>source.logtalk</string>
+	<key>tabTrigger</key>
+	<string>category</string>
+	<key>uuid</key>
+	<string>7A926537-A8B6-47B3-B4A9-B0DBA30119B6</string>
+</dict>
+</plist>
