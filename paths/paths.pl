@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths 
-%  Last updated on September 2, 2015
+%  Last updated on September 23, 2015
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -137,6 +137,7 @@ logtalk_library_path(encodings, examples('encodings/')).
 logtalk_library_path(engines, examples('engines/')).
 logtalk_library_path(errors, examples('errors/')).
 logtalk_library_path(expansion, examples('expansion/')).
+logtalk_library_path(family, examples('family/')).
 logtalk_library_path(fft, threads('fft/')).
 logtalk_library_path(fibonacci, threads('fibonacci/')).
 logtalk_library_path(functions, threads('functions/')).

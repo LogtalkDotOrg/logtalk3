@@ -158,6 +158,9 @@ Follows a short description of each included example (in alphabetical order):
 - `expansion`  
 	example illustrating the term and goal expansion mechanisms
 
+- `family`  
+	classical family relations example
+
 - `hailstone`  
 	example of computing Hailstone sequences
 

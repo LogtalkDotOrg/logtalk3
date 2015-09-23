@@ -44,6 +44,11 @@ IDEs, text editors, and syntax highlighters support
 * FIXED: Added demo and spec files for completing the Rouge syntax highlighter
 support.
 
+Examples
+--------
+
+* ADDED: Version of the classical family relations example.
+
 
 3.01.0 - September 12, 2015
 ===========================
