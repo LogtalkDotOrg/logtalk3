@@ -333,6 +333,25 @@ $0
     <tag>categorye</tag>
     <description>Extended category</description>
   </snippet>
+  <snippet id="Complementing category">
+    <text><![CDATA[
+:- category(${1:Category},
+	complements(${2:Object})).
+
+	:- info([
+		version is 1.0,
+		author is '$(whoami)',
+		date is $(date +%Y/%m/%d),
+		comment is '${3:Description}'
+	]).
+
+$0
+
+:- end_category.
+]]></text>
+    <tag>categoryc</tag>
+    <description>Complementing category</description>
+  </snippet>
   <snippet id="Protocol">
     <text><![CDATA[
 :- protocol(${1:Protocol}).
