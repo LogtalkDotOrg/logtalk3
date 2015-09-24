@@ -30,9 +30,12 @@ The following shell command can be used:
 
 	$ apm init -p ~/.atom/packages/language-logtalk --template $LOGTALKHOME/coding/textmate2/Logtalk.tmbundle
 
+In alternative, a third-party maintained converted bundle is readily available
+from:
+
+	https://atom.io/packages/language-logtalk
+
 Logtalk source files (including the library entities and the programming
 examples) are formatted using tabs (the recommended setting is a tab width
 equivalent to 4 spaces); you may set the tab width on the editor preference
 panel.
-
-
