@@ -126,7 +126,6 @@
 :- multifile('$lgt_extends_protocol_'/3).
 :- dynamic('$lgt_extends_protocol_'/3).
 % '$lgt_complemented_object_'(Obj, Ctg, Dcl, Def, Rnm)
-:- multifile('$lgt_complemented_object_'/5).
 :- dynamic('$lgt_complemented_object_'/5).
 
 
@@ -13166,7 +13165,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_complements_object_relation'([Obj| Objs], Ctg, Dcl, Def, Rnm, Ctx) :-
 	'$lgt_add_referenced_object'(Obj, Ctx),
-	assertz('$lgt_pp_runtime_clause_'('$lgt_complemented_object_'(Obj, Ctg, Dcl, Def, Rnm))),
+	% ensure that a new complementing category can override a previously
+	% loaded complementing category for the same object
+	asserta('$lgt_pp_file_initialization_'(asserta('$lgt_complemented_object_'(Obj, Ctg, Dcl, Def, Rnm)))),
 	assertz('$lgt_pp_complemented_object_'(Obj, Ctg, Dcl, Def, Rnm)),
 	'$lgt_compile_complements_object_relation'(Objs, Ctg, Dcl, Def, Rnm, Ctx).
 
@@ -15299,8 +15300,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_write_runtime_clauses'(Stream, Path, '$lgt_specializes_class_'/3),
 	'$lgt_write_runtime_clauses'(Stream, Path, '$lgt_extends_category_'/3),
 	'$lgt_write_runtime_clauses'(Stream, Path, '$lgt_extends_object_'/3),
-	'$lgt_write_runtime_clauses'(Stream, Path, '$lgt_extends_protocol_'/3),
-	'$lgt_write_runtime_clauses'(Stream, Path, '$lgt_complemented_object_'/5).
+	'$lgt_write_runtime_clauses'(Stream, Path, '$lgt_extends_protocol_'/3).
 
 
 '$lgt_write_runtime_clauses'(Stream, Path, Functor/Arity) :-

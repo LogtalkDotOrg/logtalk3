@@ -27,6 +27,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: Allow a complementing category to override a previously loaded
+complementing category for the same object (requires recompilation of all
+complementing categories).
+
 * FIXED: Missing support for the compilation categories declaring implementing,
 extending, and complementing relations.
 
