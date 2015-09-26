@@ -7303,6 +7303,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_logtalk_directive'(category(Ctg, Relation1, Relation2), Ctx) :-
 	'$lgt_compile_logtalk_directive'(category_(Ctg, [Relation1, Relation2]), Ctx).
 
+'$lgt_compile_logtalk_directive'(category(Ctg, Relation1, Relation2, Relation3), Ctx) :-
+	'$lgt_compile_logtalk_directive'(category_(Ctg, [Relation1, Relation2, Relation3]), Ctx).
+
 % auxiliary predicate to compile all variants to the category opening directive
 '$lgt_compile_logtalk_directive'(category_(Ctg, Relations), Ctx) :-
 	(	var(Ctg) ->
@@ -16121,6 +16124,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_logtalk_opening_directive'(category(_)).
 '$lgt_logtalk_opening_directive'(category(_, _)).
 '$lgt_logtalk_opening_directive'(category(_, _, _)).
+'$lgt_logtalk_opening_directive'(category(_, _, _, _)).
 % protocols
 '$lgt_logtalk_opening_directive'(protocol(_)).
 '$lgt_logtalk_opening_directive'(protocol(_, _)).

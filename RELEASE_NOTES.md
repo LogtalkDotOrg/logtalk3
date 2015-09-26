@@ -27,6 +27,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* FIXED: Missing support for the compilation categories declaring implementing,
+extending, and complementing relations.
+
 * FIXED: Bug in the `predicate_property/2` reflection predicate where a second
 `number_of_clauses/1` property could be returned when an object predicate is
 replaced using a complementing category.
