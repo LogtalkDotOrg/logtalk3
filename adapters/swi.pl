@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on May 10, 2015
+%  Last updated on September 27, 2015
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -26,8 +26,11 @@
 % Logtalk source files
 :- create_prolog_flag(logtalk_source_location_data, false, []).
 
-%:- set_prolog_flag(iso, true).	% commented due to all the SWI-Prolog libraries that don't compile/work in "iso" mode!
+
 :- set_prolog_flag(generate_debug_info, false).
+% the following directive is commented due to all the SWI-Prolog
+% libraries that don't compile/work in "iso" mode
+%:- set_prolog_flag(iso, true).
 
 
 % disable SWI-Prolog discontiguous predicate clauses warning
@@ -37,6 +40,17 @@
 %:- multifile(message_hook/3).
 %:- dynamic(message_hook/3).
 %message_hook(discontiguous(_), _, _).
+
+
+:- if(\+ license:license(asl2, _, _)).
+	:- multifile(license:license/3).
+	license:license(asl2, lgpl, [
+		comment('Apache License 2.0'),
+		url('http://www.apache.org/licenses/LICENSE-2.0')
+	]).
+:- endif.
+
+:- license(asl2, 'Logtalk').
 
 
 

@@ -38,6 +38,13 @@ extending, and complementing relations.
 `number_of_clauses/1` property could be returned when an object predicate is
 replaced using a complementing category.
 
+Prolog adapter and integration files
+------------------------------------
+
+* IMPROVED: The SWI-Prolog adapter file now includes a `license/2` directive
+to allow this system `eval_license/0` predicate to take into account Logtalk
+when loaded.
+
 Tools
 -----
 
