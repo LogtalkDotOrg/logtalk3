@@ -54,6 +54,11 @@ editors.
 * FIXED: Added demo and spec files for completing the Rouge syntax highlighter
 support.
 
+Tests
+-----
+
+* UPDATED: Tests for categories opening directive syntax.
+
 Examples
 --------
 

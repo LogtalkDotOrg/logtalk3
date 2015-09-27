@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/12/08,
+		date is 2015/09/27,
 		comment is 'Unit tests for the category/3 opening directive.'
 	]).
 
@@ -35,18 +35,23 @@
 
 	test(category_1) :-
 		implements_protocol(category_1, protocol1),
-		extends_category(category_1, parent1).
+		extends_category(category_1, parent1),
+		complements_object(category_1, object1).
 
 	test(category_2) :-
 		implements_protocol(category_2, protocol1),
 		implements_protocol(category_2, protocol2),
 		extends_category(category_2, parent1),
-		extends_category(category_2, parent2).
+		extends_category(category_2, parent2),
+		complements_object(category_2, object1),
+		complements_object(category_2, object2).
 
 	test(category_3) :-
 		implements_protocol(category_3, protocol1),
 		implements_protocol(category_3, protocol2),
 		extends_category(category_3, parent1),
-		extends_category(category_3, parent2).
+		extends_category(category_3, parent2),
+		complements_object(category_3, object1),
+		complements_object(category_3, object2).
 
 :- end_object.
