@@ -4827,7 +4827,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  support for categories that complement objects
+%  support for categories that complement objects (hot patching)
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -4872,11 +4872,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_debug'(+compound, @execution_context)
 %
-% calls all defined trace event handlers and either use a loaded provider
-% for the debug event handler or simply call the debugging goals to
-% prevent execution of code compiled in debug mode to simply fail
+% calls all defined trace event handlers and either use a loaded debug
+% handler provider for the debug event or simply call the debugging goals
+% to prevent execution of code compiled in debug mode to simply fail
 %
 % we can have multiple trace event handlers but only one debug handler
+% (the compiler prints a warning when attempting to load a second handler)
 
 '$lgt_debug'(Event, ExCtx) :-
 	'$logtalk#0.trace_event#2'(Event, ExCtx, _),
@@ -5038,6 +5039,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_save_file_loading_dependency'(SourceFile) :-
 	(	'$lgt_file_loading_stack_'(ParentSourceFile) ->
+		% as a file can have multiple parents, we only
+		% ensure that there aren't duplicated entries 
 		retractall('$lgt_parent_file_'(SourceFile, ParentSourceFile)),
 		asserta('$lgt_parent_file_'(SourceFile, ParentSourceFile))
 	;	% no parent file
@@ -5102,7 +5105,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 			fail
 		) ->
 		true
-	;	retractall('$lgt_file_loading_stack_'(SourceFile)),
+	;	% loading of the intermediate Prolog file failed
+		retractall('$lgt_file_loading_stack_'(SourceFile)),
 		assertz('$lgt_failed_file_'(SourceFile)),
 		'$lgt_propagate_failure_to_parent_files'(SourceFile)
 	),
@@ -5158,7 +5162,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % true if an entity of the same name is already loaded; returns entity type
 
 '$lgt_redefined_entity'(Entity, Type, OldFile, NewFile, Lines) :-
-	% check that an entity of the same name is already loaded
+	% check that an entity with the same identifier is already loaded
 	(	'$lgt_current_object_'(Entity, _, _, _, _, _, _, _, _, _, Flags) ->
 		Type = object
 	;	'$lgt_current_protocol_'(Entity, _, _, _, Flags) ->
@@ -5448,7 +5452,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_make_directory'(ObjectDirectory).
 
 
-% common source extensions and corresponding suffixes
+% common source extensions and corresponding precomputed suffixes
 '$lgt_source_extension_suffix'('.lgt', '_lgt').
 '$lgt_source_extension_suffix'('.logtalk', '_logtalk').
 '$lgt_source_extension_suffix'('.pl', '_pl').
@@ -7038,6 +7042,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_file_directive'(include(File), Ctx) :-
 	!,
+	% handling of this Prolog directive is necessary to
+	% support the Logtalk term-expansion mechanism
 	'$lgt_comp_ctx_mode'(Ctx, Mode),
 	'$lgt_read_file_to_terms'(Mode, File, Terms),
 	'$lgt_compile_file_terms'(Terms, Ctx).
@@ -13165,8 +13171,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_complements_object_relation'([Obj| Objs], Ctg, Dcl, Def, Rnm, Ctx) :-
 	'$lgt_add_referenced_object'(Obj, Ctx),
-	% ensure that a new complementing category can override a previously
-	% loaded complementing category for the same object
+	% ensure that a new complementing category will take preference over
+	% a previously loaded complementing category for the same object
 	asserta('$lgt_pp_file_initialization_'(asserta('$lgt_complemented_object_'(Obj, Ctg, Dcl, Def, Rnm)))),
 	assertz('$lgt_pp_complemented_object_'(Obj, Ctg, Dcl, Def, Rnm)),
 	'$lgt_compile_complements_object_relation'(Objs, Ctg, Dcl, Def, Rnm, Ctx).
