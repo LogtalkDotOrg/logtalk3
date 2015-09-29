@@ -45,10 +45,10 @@ Prolog. Logtalk is implemented in highly portable code and can use most
 modern and standards compliant Prolog implementations as a back-end compiler.
 
 As a multi-paradigm language, Logtalk includes support for both prototypes
-and classes, protocols (interfaces), categories (mixins and hot-patching),
-event-driven programming, coinduction, and high-level multi-threading
-programming. Logtalk uses standard Prolog syntax with the addition of some
-operators and directives for a smooth learning path.
+and classes, protocols (interfaces), categories (components and hot-patching),
+event-driven programming, coinduction, lambda expressions, and high-level
+multi-threading programming. Logtalk uses standard Prolog syntax with the
+addition of some operators and directives for a smooth learning path.
 
 
 2. LOGTALK WEB SITE
