@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Qu-Prolog 9.0 and later versions
-%  Last updated on May 23, 2015
+%  Last updated on September 30, 2015
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -478,9 +478,9 @@ format(Format, Arguments) :-
 		Extension = ''
 	).
 
-% the following auxiliary predicate was written by Per Mildner and 
-% is used here (renamed just to avoid conflicts) with permission
 
+% the following auxiliary predicate is simplified version of code
+% written by Per Mildner and is used here with permission
 '$lgt_strrch'(Xs, G, Ys) :-
 	Xs = [X| Xs1],
 	(	X == G ->
@@ -488,16 +488,10 @@ format(Format, Arguments) :-
 	;	'$lgt_strrch'(Xs1, G, Ys)
 	).
 
-'$lgt_strrch1'(Xs, _G, _Prev, _Ys) :-
-	var(Xs),
-	!,
-	fail.
-'$lgt_strrch1'([], _G, Prev, Ys) :-
-	Ys = Prev.
-'$lgt_strrch1'(Xs, G, Prev, Ys) :-
-	Xs = [X| Xs1],
+'$lgt_strrch1'([], _G, Ys, Ys).
+'$lgt_strrch1'([X| Xs1], G, Prev, Ys) :-
 	(	X == G ->
-		'$lgt_strrch1'(Xs1, G, Xs, Ys)
+		'$lgt_strrch1'(Xs1, G, [X| Xs1], Ys)
 	;	'$lgt_strrch1'(Xs1, G, Prev, Ys)
 	).
 
