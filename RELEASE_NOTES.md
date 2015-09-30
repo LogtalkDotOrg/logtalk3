@@ -21,7 +21,7 @@ RELEASE NOTES
 =============
 
 
-3.01.1 - September ??, 2015
+3.01.1 - September 30, 2015
 ===========================
 
 Logtalk compiler and runtime
@@ -46,6 +46,9 @@ Prolog adapter and integration files
 to allow this system `eval_license/0` predicate to take into account Logtalk
 when loaded.
 
+* IMPROVED: Faster internal predicate for decomposing file paths for the Ciao,
+CxProlog, Qu-Prolog, Quintus Prolog, and SICStus Prolog backend compilers.
+
 Library
 -------
 
@@ -64,11 +67,13 @@ IDEs, text editors, and syntax highlighters support
 * ADDED: Complementing category snippet to the Gedit and TextMate 2.x text
 editors.
 
-* FIXED: Added demo and spec files for completing the Rouge syntax highlighter
+* ADDED: Demo and spec files for completing the Rouge syntax highlighter
 support.
 
 Tests
 -----
+
+* ADDED: Tests for the new `os::decompose_file_name/4` library predicate.
 
 * UPDATED: Tests for categories opening directive syntax.
 
