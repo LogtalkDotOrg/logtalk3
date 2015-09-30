@@ -46,6 +46,11 @@ Prolog adapter and integration files
 to allow this system `eval_license/0` predicate to take into account Logtalk
 when loaded.
 
+Library
+-------
+
+* ADDED: Predicate `decompose_file_name/4` to the `os` library.
+
 Tools
 -----
 

@@ -36,9 +36,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.17,
+		version is 1.18,
 		author is 'Paulo Moura',
-		date is 2015/02/19,
+		date is 2015/09/29,
 		comment is 'Portable operating-system access predicates.'
 	]).
 
@@ -1506,5 +1506,39 @@
 		:- initialization((write('WARNING: back-end Prolog compiler not supported!'), nl)).
 
 	:- endif.
+
+	decompose_file_name(File, Directory, Name, Extension) :-
+		atom_codes(File, FileCodes),
+		char_code('/', SlashCode),
+		(	strrch(FileCodes, SlashCode, [_Slash| BasenameCodes]) ->
+			atom_codes(Basename, BasenameCodes),
+			atom_concat(Directory, Basename, File)
+		;	Directory = './',
+			atom_codes(Basename, FileCodes),
+			BasenameCodes = FileCodes
+		),
+		char_code('.', DotCode),
+		(	strrch(BasenameCodes, DotCode, ExtensionCodes) ->
+			atom_codes(Extension, ExtensionCodes),
+			atom_concat(Name, Extension, Basename)
+		;	Name = Basename,
+			Extension = ''
+		).
+
+	% the following auxiliary predicate is simplified version of code
+	% written by Per Mildner and is used here with permission
+	strrch(Xs, G, Ys) :-
+		Xs = [X| Xs1],
+		(	X == G ->
+			strrch1(Xs1, G, Xs, Ys)
+		;	strrch(Xs1, G, Ys)
+		).
+
+	strrch1([], _G, Ys, Ys).
+	strrch1([X| Xs1], G, Prev, Ys) :-
+		(	X == G ->
+			strrch1(Xs1, G, [X| Xs1], Ys)
+		;	strrch1(Xs1, G, Prev, Ys)
+		).
 
 :- end_object.

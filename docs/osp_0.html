@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>1.11</code>
+            <code>1.12</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2015/2/6</code>
+            <code>2015/9/29</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -119,6 +119,26 @@
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>expand_path(+atom,-atom) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="decompose_file_name/4" class="code">decompose_file_name/4</h3>
+          <blockquote>
+            <p class="comment">Decomposes a file path into its directory (which always ends with a slash), name (that can be the empty atom), and extension (which starts with a "." when defined; the empty atom otherwise).</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>decompose_file_name(Path,Directory,Name,Extension)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>decompose_file_name(+atom,?atom,?atom,?atom) &ndash; one</code>
             </dd>
           </dl>
         </div>

@@ -22,9 +22,9 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1.11,
+		version is 1.12,
 		author is 'Paulo Moura',
-		date is 2015/02/06,
+		date is 2015/09/29,
 		comment is 'Portable operating-system access protocol.'
 	]).
 
@@ -54,6 +54,13 @@
 	:- info(expand_path/2, [
 		comment is 'Expands a file path to an absolute file path.',
 		argnames is ['Path', 'ExpandedPath']
+	]).
+
+	:- public(decompose_file_name/4).
+	:- mode(decompose_file_name(+atom, ?atom, ?atom, ?atom), one).
+	:- info(decompose_file_name/4, [
+		comment is 'Decomposes a file path into its directory (which always ends with a slash), name (that can be the empty atom), and extension (which starts with a "." when defined; the empty atom otherwise).',
+		argnames is ['Path', 'Directory', 'Name', 'Extension']
 	]).
 
 	:- public(make_directory/1).
