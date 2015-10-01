@@ -141,7 +141,13 @@ This allows us to add missing directives (e.g. to define aliases for complemente
 loaded complementing category for the same object thus allowing patching a previous patch if necessary.
 </p>
 <p>
+Note that super calls from predicates defined in complementing categories lookup inherited definitions as if the calls were made from the complemented object instead of the category ancestors. This allows more comprehensive object patching. But it also means that, if you want to patch an object so that it imports a category that extends another category and uses super calls to access the extended category predicates, you will need to define a (possibly empty) complementing category that extends the category that you want to add.
+</p>
+<p>
 An unfortunate consequence of allowing an object to be patched at runtime using a complementing category is that it disables the use of static binding optimizations for messages sent to the complemented object as it can always be later patched, thus rendering the static binding optimizations invalid.
+</p>
+<p>
+Another important caveat is that, while a complementing category can replace a predicate definition, local callers of the replaced predicate will still call the unpatched version of the predicate. This is a consequence of the lack of a portable solution at the backend Prolog compiler level for destructively replacing static predicates.
 </p>
 
 <h2 id="categories_finding">Finding defined categories</h2>
