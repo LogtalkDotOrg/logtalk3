@@ -1523,7 +1523,14 @@ complements_object(Category, Object) :-
 conforms_to_protocol(ObjOrCtg, Protocol) :-
 	'$lgt_must_be'(var_or_object_identifier, ObjOrCtg, logtalk(conforms_to_protocol(ObjOrCtg, Protocol), _)),
 	'$lgt_must_be'(var_or_protocol_identifier, Protocol, logtalk(conforms_to_protocol(ObjOrCtg, Protocol), _)),
-	'$lgt_conforms_to_protocol'(ObjOrCtg, Protocol, _).
+	(	var(ObjOrCtg) ->
+		'$lgt_conforms_to_protocol'(ObjOrCtg, Protocol, _)
+	;	var(Protocol) ->
+		'$lgt_conforms_to_protocol'(ObjOrCtg, Protocol, _)
+	;	% deterministic query
+		'$lgt_conforms_to_protocol'(ObjOrCtg, Protocol, _),
+		!
+	).
 
 
 
@@ -1534,7 +1541,14 @@ conforms_to_protocol(ObjOrCtg, Protocol, Scope) :-
 	'$lgt_must_be'(var_or_object_identifier, ObjOrCtg, logtalk(conforms_to_protocol(ObjOrCtg, Protocol, Scope), _)),
 	'$lgt_must_be'(var_or_protocol_identifier, Protocol, logtalk(conforms_to_protocol(ObjOrCtg, Protocol, Scope), _)),
 	'$lgt_must_be'(var_or_scope, Scope, logtalk(conforms_to_protocol(ObjOrCtg, Protocol, Scope), _)),
-	'$lgt_conforms_to_protocol'(ObjOrCtg, Protocol, Scope).
+	(	var(ObjOrCtg) ->
+		'$lgt_conforms_to_protocol'(ObjOrCtg, Protocol, Scope)
+	;	var(Protocol) ->
+		'$lgt_conforms_to_protocol'(ObjOrCtg, Protocol, Scope)
+	;	% deterministic query
+		'$lgt_conforms_to_protocol'(ObjOrCtg, Protocol, Scope),
+		!
+	).
 
 
 '$lgt_conforms_to_protocol'(Object, Protocol, Scope) :-
