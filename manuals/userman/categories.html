@@ -137,7 +137,8 @@ A category may explicitly complement one or more existing objects, thus providin
     ...
 :- end_category.</pre>
 <p>
-This allows us to add missing directives (e.g. to define aliases for complemented object predicates), replace broken predicate definitions, add new predicates, and add protocols and categories to existing objects without requiring access or modifications to their source code. Common scenarios are adding logging or debugging predicates to a set of objects. Complemented objects need to be compiled with the <code>complements</code> compiler flag set <code>allow</code> (to allow both patching and adding functionality) or <code>restrict</code> (to allow only adding new functionality).
+This allows us to add missing directives (e.g. to define aliases for complemented object predicates), replace broken predicate definitions, add new predicates, and add protocols and categories to existing objects without requiring access or modifications to their source code. Common scenarios are adding logging or debugging predicates to a set of objects. Complemented objects need to be compiled with the <code>complements</code> compiler flag set <code>allow</code> (to allow both patching and adding functionality) or <code>restrict</code> (to allow only adding new functionality). A complementing category takes preference over a previously
+loaded complementing category for the same object thus allowing patching a previous patch if necessary.
 </p>
 <p>
 An unfortunate consequence of allowing an object to be patched at runtime using a complementing category is that it disables the use of static binding optimizations for messages sent to the complemented object as it can always be later patched, thus rendering the static binding optimizations invalid.
@@ -429,7 +430,7 @@ Note that access to category parameters is only possible using the <code>paramet
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: July 27, 2015</span>
+		<span>Last updated on: October 1, 2015</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="protocols.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="predicates.html">next</a></span><br/>
