@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths 
-%  Last updated on September 23, 2015
+%  Last updated on October 3, 2015
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -77,19 +77,23 @@ logtalk_library_path(home, HOME) :-
 	;	fail
 	).
 
+% core library, required for Logtalk startup
 logtalk_library_path(core, logtalk_home('core/')).
 
+% main directories in the Logtalk distribution
 logtalk_library_path(contributions, logtalk_user('contributions/')).
 logtalk_library_path(examples, logtalk_user('examples/')).
 logtalk_library_path(library, logtalk_user('library/')).
 logtalk_library_path(tools, logtalk_user('tools/')).
 
+% third-party contributions
 logtalk_library_path(flags, contributions('flags/')).
 logtalk_library_path(iso8601, contributions('iso8601/')).
 logtalk_library_path(pddl_parser, contributions('pddl_parser/')).
 logtalk_library_path(verdi_neruda, contributions('verdi_neruda/')).
 logtalk_library_path(xml_parser, contributions('xml_parser/')).
 
+% developer tools
 logtalk_library_path(assertions, tools('assertions/')).
 logtalk_library_path(debugger, tools('debugger/')).
 logtalk_library_path(diagrams, tools('diagrams/')).
@@ -99,6 +103,7 @@ logtalk_library_path(lgtunit, tools('lgtunit/')).
 logtalk_library_path(ports, tools('ports/')).
 logtalk_library_path(profiler, tools('profiler/')).
 
+% programming examples
 logtalk_library_path(ack, examples('ack/')).
 logtalk_library_path(adventure, examples('adventure/')).
 logtalk_library_path(aliases, examples('aliases/')).

@@ -1,10 +1,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
+%  Sample tester file
+%  Last updated on October 3, 2014
+%
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
 %
-%  sample tester file
-%  Last updated on December 25, 2014
 %  Licensed under the Apache License, Version 2.0 (the "License");
 %  you may not use this file except in compliance with the License.
 %  You may obtain a copy of the License at
@@ -21,7 +22,9 @@
 
 
 %  This is a sample tester file. Tester files are simply Logtalk source files
-%  whose main purpose is to load and run your application unit tests.
+%  whose main purpose is to load and run your application unit tests. Usually
+%  they contain just a Prolog initialization/1 directive wrapping Logtalk goals
+%  as exemplified below.
 %
 %  The provided testing automation shell script, "logtalk_tester", looks for
 %  files named "tester.lgt" in directories and sub-directories when run.
@@ -39,8 +42,8 @@
 	% source data information; if code coverage is not wanted, simply remove
 	% the second argument for faster execution
 	logtalk_load(source, [source_data(on), debug(on)]),
-	% compile the unit tests file expanding it using the "lgtunit" object
-	% to preprocess the tests
+	% compile the unit tests file expanding it using "lgtunit" as the hook
+	% object to preprocess the tests
 	logtalk_load(tests, [hook(lgtunit)]),
 	% run all the unit tests
 	tests::run
