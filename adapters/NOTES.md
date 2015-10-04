@@ -43,6 +43,9 @@ Prolog standard built-in predicates. These definitions aim only to fulfill
 the requirements of the Logtalk compiler and runtime and are not intended
 as a full replacement for missing functionality.
 
+Top-level interpreter shorthands
+--------------------------------
+
 The adapter files define shorthands to often used Logtalk built-in
 predicates such as `logtalk_load/1` and `logtalk_make/1`:
 
