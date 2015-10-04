@@ -2,11 +2,11 @@
 
 #############################################################################
 ## 
-##   This file is part of Logtalk <http://logtalk.org/>  
-##   Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
-## 
 ##   Integration script for XSB-MT
 ##   Last updated on October 11, 2013
+## 
+##   This file is part of Logtalk <http://logtalk.org/>  
+##   Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
 ##   you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@
 ##   limitations under the License.
 ## 
 #############################################################################
+
 
 ## As silly as it seems, there is no reliable solution to put the following
 ## checks in their own file that would be source'd within each individual  
