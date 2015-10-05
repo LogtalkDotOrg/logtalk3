@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 Notes on supported backend Prolog compilers  
-Last updated on May 2, 2015
+Last updated on October 6, 2015
 
 This file is part of Logtalk <http://logtalk.org/>  
 Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -33,7 +33,9 @@ As a general rule, always try to use the latest version of your Prolog
 compiler of choice. For Prolog compilers with long release cycles, this 
 may require use of development versions. Most Prolog compilers are moving 
 towards better compatibility with de facto and official standards and thus
-improved Logtalk compatibility.
+improved Logtalk compatibility. Also, visit the issue tracker on the Logtalk
+development website and check for any know Prolog compiler bugs that break
+Logtalk functionality.
 
 For details on how to integrate Logtalk with specific Prolog compilers,
 see the files in the `integration` directory of the Logtalk distribution.
