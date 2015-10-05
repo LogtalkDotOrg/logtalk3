@@ -85,4 +85,13 @@
 	test(expansion_15) :-
 		cooked << p.
 
+	test(expansion_16) :-
+		piped<<a(key-value).
+
+	test(expansion_17) :-
+		piped<<b(key-value).
+
+	test(expansion_18) :-
+		piped<<c(key-value).
+
 :- end_object.

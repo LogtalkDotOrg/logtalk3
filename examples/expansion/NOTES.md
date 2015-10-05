@@ -26,4 +26,7 @@ goal-expansion predicates affects the results of the expansion mechanisms.
 The `hooks.lgt` and `raw.lgt` source files illustrate how to define and
 combine hook objects.
 
+The `pipeline.lgt` source file illustrates how to define a hook object
+that applies a pipeline of hook objects.
+
 For more details, please see the comments in the source files.

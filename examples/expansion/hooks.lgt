@@ -70,7 +70,8 @@
 	% are tried); thus more specific clauses should be listed before more
 	% general ones
 
-	term_expansion((:- object(raw)), (:- object(cooked))).
+	% rename the object and set the context_switching_calls to ensure that the unit tests work
+	term_expansion((:- object(raw)), [(:- object(cooked)), (:- set_logtalk_flag(context_switching_calls,allow))]).
 
 	% the next term_expansion/2 clause returns the result of all hook
 	% expansions, assumed to be independent of each other, as the final

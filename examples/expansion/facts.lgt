@@ -18,16 +18,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% some backend Prolog compilers such as SWI-Prolog define a 'public'
-% operator, which can cause syntax errors when loading this example
-:- if(current_op(_, fx, (public))).
-	:- op(0, fx, (public)).
-:- endif.
+% sample object for testing the hook objects
 
+:- object(facts).
 
-:- initialization((
-	logtalk_load(library(basic_types_loader)),
-	logtalk_load([expansion, hooks, pipeline]),
-	logtalk_load(raw, [hook(hh)]),
-	logtalk_load(facts, [hook(pipeline([add1, add2, pair12]))])
-)).
+	a.
+	b.
+	c.
+
+:- end_object.

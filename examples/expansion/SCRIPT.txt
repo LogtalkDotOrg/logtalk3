@@ -115,3 +115,12 @@ yes
 
 | ?- cooked << p.
 yes
+
+| ?- piped<<a(key-value).
+yes
+
+| ?- piped<<b(key-value).
+yes
+
+| ?- piped<<c(key-value).
+yes

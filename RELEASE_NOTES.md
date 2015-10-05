@@ -36,6 +36,12 @@ Documentation
 
 * IMPROVED: Documentation on hot patching using complementing categories.
 
+Examples
+--------
+
+* UPDATED: Expanded the `expansion` example to illustrate how to define a
+pipeline of hook objects.
+
 
 3.01.1 - September 30, 2015
 ===========================
