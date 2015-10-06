@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura and Sergio Castro',
-		date is 2014/03/27,
+		date is 2015/10/06,
 		comment is 'Unit tests for the "jpl" example.'
 	]).
 
@@ -46,7 +46,7 @@
 		java('java.lang.Math')::get_field('PI', Pi),
 		float(Pi).
 
-	test(jpl_5) :-
+	- test(jpl_5) :-
 		java('java.awt.Rectangle')::new([100, 20], Rectangle),
 		java(Rectangle)::set_field(width, 300),
 		java(Rectangle)::get_field(width, Value),

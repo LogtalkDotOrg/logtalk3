@@ -39,6 +39,11 @@ Documentation
 Examples
 --------
 
+* CHANGED: Skip the `jpl` example unit test that requires Java AWT as running
+this test on Mac OS X on the command-line can result in the test hanging due
+to a Java limitation on this operating-system where the AWT cannot be started
+when the Apple AWT Java VM was loaded on the first thread.
+
 * UPDATED: Expanded the `expansion` example to illustrate how to define a
 pipeline of hook objects.
 
