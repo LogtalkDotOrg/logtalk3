@@ -15513,6 +15513,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_list_to_conjunction'(GoalList, Goals),
 		once(Goals)
 	;	true
+	),
+	% complementing categories add a file initialization goal
+	(	'$lgt_pp_file_initialization_'(InitializationGoal) ->
+		once(InitializationGoal)
+	;	true
 	).
 
 

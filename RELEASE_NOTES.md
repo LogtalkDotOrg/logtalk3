@@ -31,6 +31,9 @@ Logtalk compiler and runtime
 * IMPROVED: The `conforms_to_protocol/2-3` built-in predicates are now
 deterministic when called with the first two arguments bound.
 
+* FIXED: Regression in the previous release when dynamically creating a
+complementing category at runtime.
+
 Documentation
 -------------
 
