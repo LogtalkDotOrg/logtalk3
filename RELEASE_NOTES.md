@@ -50,6 +50,9 @@ when the Apple AWT Java VM was loaded on the first thread.
 * UPDATED: Expanded the `expansion` example to illustrate how to define a
 pipeline of hook objects.
 
+* UPDATED: Expanded the `complements` example to illustrate using a dynamically
+created complementing category to patch an object.
+
 
 3.01.1 - September 30, 2015
 ===========================

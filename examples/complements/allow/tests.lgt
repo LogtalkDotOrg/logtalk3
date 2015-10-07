@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2014/10/08,
+		date is 2015/10/07,
 		comment is 'Unit tests for the "complements/allow" example.'
 	]).
 
@@ -62,7 +62,11 @@
 	test(complements_allow_7) :-
 		findall(Property, employee::predicate_property(income(_), Property), AllProperties),
 		list::msort(AllProperties, AllPropertiesSorted),
-		list::msort([logtalk, public, static, alias_of(salary(_)), declared_in(employee), defined_in(employee), scope(public)], PropertiesSorted),
+		list::msort([logtalk, public, static, alias_of(salary(_)), declared_in(employee), defined_in(dynamic_patch), scope(public)], PropertiesSorted),
 		list::subsequence(AllPropertiesSorted, PropertiesSorted, _).
+
+	test(complements_allow_8) :-
+		employee::salary(Salary),
+		Salary == 42000.
 
 :- end_object.

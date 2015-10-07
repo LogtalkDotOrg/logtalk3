@@ -20,7 +20,7 @@ ________________________________________________________________________
 To load this example and for sample queries, please see the `SCRIPT.txt`
 file.
 
-This folder contains an example that show how to use a category to 
-explicitly complement an existing object compiled with the `complements`
-flag set to `allow`. With this setting, a category can both redefine and
-add new functionality to the complemented object.
+This folder contains an example that show how to use both static and dynamic
+categories to explicitly complement an existing object compiled with the
+`complements` flag set to `allow`. With this setting, a category can both
+redefine and add new functionality to the complemented object.

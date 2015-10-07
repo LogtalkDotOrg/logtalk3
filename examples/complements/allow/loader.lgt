@@ -20,5 +20,6 @@
 
 :- initialization((
 	logtalk_load(employee),
-	logtalk_load(add_on)
+	logtalk_load(add_on),
+	logtalk_load(dynamic)
 )).

@@ -45,11 +45,20 @@ yes
 ...
 
 
+% load the "dynamic.lgt" source file that creates a dynamic complementing
+% category, also patching the "employee" object:
+
+| ?- logtalk_load(complements_allow(dynamic)).
+...
+
+
 % find categories that complement objects:
 
 | ?- complements_object(Category, Object).
+Category = dynamic_patch,
+Object = employee ;
 Category = add_on,
-Object = employee.
+Object = employee
 yes 
 
 
@@ -59,6 +68,14 @@ yes
 Received message name(_16) from user
 
 Name = john
+yes
+
+
+% check the consequences of the runtime patch of the salary/1 predicate:
+
+| ?- employee::salary(Salary).
+Received message salary(_G192) from user
+Salary = 42000
 yes
 
 
@@ -91,6 +108,6 @@ Property = (public) ;
 Property = static ;
 Property = declared_in(employee) ;
 Property = alias_of(salary(_G3724)) ;
-Property = defined_in(employee) ;
+Property = defined_in(dynamic_patch) ;
 Property = number_of_clauses(0)
 yes
