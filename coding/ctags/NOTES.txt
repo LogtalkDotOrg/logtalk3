@@ -38,4 +38,4 @@ order to enable a source code browser for Logtalk (and other) source files:
 
 After installing the plugin, add the following line to your `.vimrc` file:
 
-	let tlist_logtalk_settings = 'logtalk;o:Objects;p:Protocols;c:Categories;u:Public predicates;r:Protected predicates;v:Private predicates'
+	let tlist_logtalk_settings = 'logtalk;o:Objects;p:Protocols;c:Categories;m:Modules;u:Public predicates;r:Protected predicates;v:Private predicates'

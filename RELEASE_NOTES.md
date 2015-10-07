@@ -53,6 +53,11 @@ pipeline of hook objects.
 * UPDATED: Expanded the `complements` example to illustrate using a dynamically
 created complementing category to patch an object.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* UPDATED: The `ctags` support to also recognize module opening directives.
+
 
 3.01.1 - September 30, 2015
 ===========================
