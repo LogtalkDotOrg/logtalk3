@@ -43,11 +43,15 @@ and XPCE graphical debugger.
 Documentation
 -------------
 
-* CHANGED: The shell script that generates the HTML documentation now saves the
-generated files in the `docs` directory parallel to the `scripts` directory.
+* CHANGED: The shell script that generates the HTML documentation for the
+core, library, and tool entities now saves the generated files in the `docs`
+directory parallel to the `scripts` directory.
 
 * ADDED: Shell script to generate SVG inheritance diagrams for the core
 entities, the library, and the development tools.
+
+* ADDED: The `docs` directory now includes SVG inheritance diagrams for the
+core entities, the library, and the development tools.
 
 * IMPROVED: Documentation on hot patching using complementing categories.
 

@@ -24,3 +24,10 @@ browser.
 All pages conform to the XHTML 1.1 W3C Standard. You may change 
 the appearance of the pages by changing the included `logtalk.css` 
 CSS file.
+
+This directory also includes SVG inheritance diagrams for the core
+entities,the library, and the development tools:
+
+- `core_inheritance_diagram.svg`
+- `library_inheritance_diagram.svg`
+- `tools_inheritance_diagram.svg`
