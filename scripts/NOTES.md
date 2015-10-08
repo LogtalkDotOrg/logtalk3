@@ -116,3 +116,7 @@ using the `apropos logtalk` command.
 
 - `update_html_docs.sh`  
 	shell script for updating the library and tools HTML documentation
+
+- `update_svg_diagrams.sh`  
+	shell script for updating the core entities, library, and development
+	tools SVG diagrams

@@ -43,6 +43,9 @@ and XPCE graphical debugger.
 Documentation
 -------------
 
+* ADDED: Shell script to generate SVG inheritance diagrams for the core
+entities, the library, and the development tools.
+
 * IMPROVED: Documentation on hot patching using complementing categories.
 
 Examples
