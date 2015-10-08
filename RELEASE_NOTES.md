@@ -65,7 +65,8 @@ complementing category to patch an object.
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
-* UPDATED: The `ctags` support to also recognize module opening directives.
+* UPDATED: The `ctags` support to also recognize module opening directives plus
+dynamic, meta-predicate, and multifile predicate directives.
 
 
 3.01.1 - September 30, 2015
