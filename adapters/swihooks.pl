@@ -3,8 +3,9 @@
 %  Integration code for SWI Prolog 6.6.0 and later versions to compile and
 %  load Logtalk files using SWI Prolog consult/1, to support edit/1 and
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
-%  graphical debugger.
-%  Last updated on August 2, 2015
+%  graphical debugger
+%
+%  Last updated on October 8, 2015
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -111,8 +112,8 @@ user:prolog_predicate_name(user:'$lgt_ctg_super_call'(_, _, _), '^^/2 (from ctg;
 
 user:prolog_predicate_name(user:'$lgt_metacall'(_, _, _), 'call/N') :- !.
 user:prolog_predicate_name(user:'$lgt_metacall'(_, _), 'call/1') :- !.
-user:prolog_predicate_name(user:'$lgt_quantified_metacall'(_, _, _, _), 'call/1') :- !.
-user:prolog_predicate_name(user:'$lgt_metacall_local'(_, _, _), 'call/1') :- !.
+user:prolog_predicate_name(user:'$lgt_quantified_metacall'(_, _, _), 'call/1') :- !.
+user:prolog_predicate_name(user:'$lgt_metacall_local'(_, _), 'call/1') :- !.
 user:prolog_predicate_name(user:'$lgt_metacall_sender'(_, _, _, _), 'call/1') :- !.
 
 user:prolog_predicate_name(user:'$lgt_bagof'(_, _, _, _, _), 'bagof/3') :- !.

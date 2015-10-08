@@ -24,7 +24,6 @@ RELEASE NOTES
 3.01.2 - October ??, 2015
 =========================
 
-
 Logtalk compiler and runtime
 ----------------------------
 
@@ -33,6 +32,13 @@ deterministic when called with the first two arguments bound.
 
 * FIXED: Regression in the previous release when dynamically creating a
 complementing category at runtime.
+
+Prolog adapter and integration files
+------------------------------------
+
+* FIXED: Some typos in the SWI-Prolog integration files in declarations for
+internal Logtalk predicates that should be hidden when using the XPCE profiler
+and XPCE graphical debugger.
 
 Documentation
 -------------
@@ -47,11 +53,11 @@ this test on Mac OS X on the command-line can result in the test hanging due
 to a Java limitation on this operating-system where the AWT cannot be started
 when the Apple AWT Java VM was loaded on the first thread.
 
-* UPDATED: Expanded the `expansion` example to illustrate how to define a
-pipeline of hook objects.
+* UPDATED: The `expansion` example to illustrate how to define a pipeline of
+hook objects.
 
-* UPDATED: Expanded the `complements` example to illustrate using a dynamically
-created complementing category to patch an object.
+* UPDATED: The `complements` example to illustrate using a dynamically created
+complementing category to patch an object.
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
