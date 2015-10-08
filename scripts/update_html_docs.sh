@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk script for updating the HTML library and tools documentation
-##   Last updated on August 20, 2014
+##   Last updated on October 8, 2015
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -42,22 +42,23 @@ backend=swipl
 prolog='SWI-Prolog'
 logtalk="swilgt$extension -g"
 
+cwd=`pwd`
 
 # documentation goals
-core_goal="logtalk_load(lgtdoc(loader)),lgtdoc::library(core,[xmldir('$LOGTALKUSER/docs/tmp_core')]),halt."
-library_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(library(all_loader)),lgtdoc::rlibrary(library,[xmldir('$LOGTALKUSER/docs/tmp_library')]),halt."
-assertions_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(assertions(loader)),lgtdoc::library(assertions,[xmldir('$LOGTALKUSER/docs/tmp_assertions')]),halt."
-debugger_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(debugger(loader)),lgtdoc::library(debugger,[xmldir('$LOGTALKUSER/docs/tmp_debugger')]),halt."
-diagrams_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(diagrams(loader)),lgtdoc::library(diagrams,[xmldir('$LOGTALKUSER/docs/tmp_diagrams')]),halt."
-help_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(help(loader)),lgtdoc::library(help,[xmldir('$LOGTALKUSER/docs/tmp_help')]),halt."
-lgtdoc_goal="set_logtalk_flag(source_data,on),logtalk_load(lgtdoc(loader)),lgtdoc::library(lgtdoc,[xmldir('$LOGTALKUSER/docs/tmp_lgtdoc')]),halt."
-lgtunit_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(lgtunit(loader)),lgtdoc::library(lgtunit,[xmldir('$LOGTALKUSER/docs/tmp_lgtunit')]),halt."
-ports_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(ports(loader)),lgtdoc::library(ports,[xmldir('$LOGTALKUSER/docs/tmp_ports')]),halt."
-profiler_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(profiler(loader)),lgtdoc::library(profiler,[xmldir('$LOGTALKUSER/docs/tmp_profiler')]),halt."
+core_goal="logtalk_load(lgtdoc(loader)),lgtdoc::library(core,[xmldir('$cwd/../docs/tmp_core')]),halt."
+library_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(library(all_loader)),lgtdoc::rlibrary(library,[xmldir('$cwd/../docs/tmp_library')]),halt."
+assertions_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(assertions(loader)),lgtdoc::library(assertions,[xmldir('$cwd/../docs/tmp_assertions')]),halt."
+debugger_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(debugger(loader)),lgtdoc::library(debugger,[xmldir('$cwd/../docs/tmp_debugger')]),halt."
+diagrams_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(diagrams(loader)),lgtdoc::library(diagrams,[xmldir('$cwd/../docs/tmp_diagrams')]),halt."
+help_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(help(loader)),lgtdoc::library(help,[xmldir('$cwd/../docs/tmp_help')]),halt."
+lgtdoc_goal="set_logtalk_flag(source_data,on),logtalk_load(lgtdoc(loader)),lgtdoc::library(lgtdoc,[xmldir('$cwd/../docs/tmp_lgtdoc')]),halt."
+lgtunit_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(lgtunit(loader)),lgtdoc::library(lgtunit,[xmldir('$cwd/../docs/tmp_lgtunit')]),halt."
+ports_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(ports(loader)),lgtdoc::library(ports,[xmldir('$cwd/../docs/tmp_ports')]),halt."
+profiler_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(profiler(loader)),lgtdoc::library(profiler,[xmldir('$cwd/../docs/tmp_profiler')]),halt."
 
 
 print_version() {
-	echo "`basename $0` 0.2"
+	echo "`basename $0` 0.3"
 	exit 0
 }
 
@@ -136,19 +137,20 @@ elif [ ! `command -v $backend` ] ; then
     exit 1
 fi
 
+cd "$cwd/../docs"
 
-$logtalk $core_goal
-$logtalk $library_goal
-$logtalk $assertions_goal
-$logtalk $debugger_goal
-$logtalk $diagrams_goal
-$logtalk $help_goal
-$logtalk $lgtdoc_goal
-$logtalk $lgtunit_goal
-$logtalk $ports_goal
-$logtalk $profiler_goal
+$logtalk "$core_goal"
+$logtalk "$library_goal"
+$logtalk "$assertions_goal"
+$logtalk "$debugger_goal"
+$logtalk "$diagrams_goal"
+$logtalk "$help_goal"
+$logtalk "$lgtdoc_goal"
+$logtalk "$lgtunit_goal"
+$logtalk "$ports_goal"
+$logtalk "$profiler_goal"
 
-cd $LOGTALKUSER/docs/tmp_core && lgt2html -i core.html -t "Core entities documentation index" && mv *.html ..
+cd ./tmp_core && lgt2html -i core.html -t "Core entities documentation index" && mv *.html ..
 cd ../tmp_library && lgt2html -i library.html -t "Library documentation index" && mv *.html ..
 cd ../tmp_assertions && lgt2html -i assertions_tool.html -t "Assertions tool" && mv *.html ..
 cd ../tmp_debugger && lgt2html -i debugger_tool.html -t "Debugger tool" && mv *.html ..
