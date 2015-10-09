@@ -55,6 +55,8 @@ core entities, the library, and the development tools.
 
 * IMPROVED: Documentation on hot patching using complementing categories.
 
+* IMPROVED: Documentation of the term- and goal-expansion built-in methods.
+
 Examples
 --------
 
