@@ -351,8 +351,8 @@
 :- dynamic('$lgt_pp_predicate_declaration_line_'/3).
 % '$lgt_pp_predicate_definition_line_'(Functor, Arity, Line)
 :- dynamic('$lgt_pp_predicate_definition_line_'/3).
-% '$lgt_pp_defines_predicate_'(Head, Functor/Arity, ExCtx, THead, Mode)
-:- dynamic('$lgt_pp_defines_predicate_'/5).
+% '$lgt_pp_defines_predicate_'(Head, Functor/Arity, ExCtx, THead, Mode, Origin)
+:- dynamic('$lgt_pp_defines_predicate_'/6).
 
 % '$lgt_pp_predicate_definition_line_'(Other, Functor, Arity, Line)
 :- dynamic('$lgt_pp_predicate_definition_line_'/4).
@@ -5722,7 +5722,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	var(Head) ->
 		% not compiling a clause
 		true
-	;	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _, compile(regular)) ->
+	;	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _, compile(regular), _) ->
 		% not compiling a source file user clause
 		true
 	;	nonvar(Obj), '$lgt_pp_uses_predicate_'(Obj, PredFunctor/PredArity, _) ->
@@ -5747,7 +5747,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		true
 	;	Alias \= Head,
 		% not a linking clause for runtime use
-		\+ '$lgt_pp_defines_predicate_'(Head, _, _, _, compile(regular)) ->
+		\+ '$lgt_pp_defines_predicate_'(Head, _, _, _, compile(regular), _) ->
 		% not compiling a source file user clause
 		true
 	;	% add reference if first but be careful to not instantiate the object argument which may only be known at runtime
@@ -5779,7 +5779,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	var(Head) ->
 		% not compiling a clause
 		true
-	;	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _, compile(regular)) ->
+	;	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _, compile(regular), _) ->
 		% not compiling a source file user clause
 		true
 	;	'$lgt_pp_use_module_predicate_'(Module, PredFunctor/PredArity, _) ->
@@ -5799,7 +5799,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		true
 	;	Alias \= Head,
 		% not a linking clause for runtime use
-		\+ '$lgt_pp_defines_predicate_'(Head, _, _, _, compile(regular)) ->
+		\+ '$lgt_pp_defines_predicate_'(Head, _, _, _, compile(regular), _) ->
 		% not compiling a source file user clause
 		true
 	;	% add reference if first but be careful to not instantiate the object argument which may only be known at runtime
@@ -5885,7 +5885,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_add_entity_properties'(_, Entity) :-
 	findall(Define, '$lgt_pp_number_of_clauses_'(_, _, Define), Defines),
 	'$lgt_sum_list'(Defines, TotalDefines),
-	findall(AuxDefine, ('$lgt_pp_defines_predicate_'(_, Functor/Arity, _, _, compile(aux)), '$lgt_pp_number_of_clauses_'(Functor, Arity, AuxDefine)), AuxDefines),
+	findall(AuxDefine, ('$lgt_pp_defines_predicate_'(_, Functor/Arity, _, _, compile(aux), _), '$lgt_pp_number_of_clauses_'(Functor, Arity, AuxDefine)), AuxDefines),
 	'$lgt_sum_list'(AuxDefines, TotalAuxDefines),
 	findall(Provide, '$lgt_pp_number_of_clauses_'(_, _, _, Provide), Provides),
 	'$lgt_sum_list'(Provides, TotalProvides),
@@ -5919,12 +5919,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_add_entity_predicate_properties'(Entity) :-
 	'$lgt_pp_predicate_declaration_line_'(Functor, Arity, Line),
 	assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/Arity, declaration_line(Line)))),
-	\+ '$lgt_pp_defines_predicate_'(_, Functor/Arity, _, _, _),
+	\+ '$lgt_pp_defines_predicate_'(_, Functor/Arity, _, _, _, _),
 	assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/Arity, flags_clauses_line(0, 0, 0)))),
 	fail.
 
 '$lgt_add_entity_predicate_properties'(Entity) :-
-	'$lgt_pp_defines_predicate_'(_, Functor/Arity, _, _, Mode),
+	'$lgt_pp_defines_predicate_'(_, Functor/Arity, _, _, Mode, _),
 	(	Arity2 is Arity - 2,
 		Arity2 >= 0,
 		'$lgt_pp_defines_non_terminal_'(Functor, Arity2) ->
@@ -6339,7 +6339,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_predicate_definition_line_'(_, _, _)),
 	retractall('$lgt_pp_predicate_definition_line_'(_, _, _, _)),
 	retractall('$lgt_pp_redefined_built_in_'(_, _, _)),
-	retractall('$lgt_pp_defines_predicate_'(_, _, _, _, _)),
+	retractall('$lgt_pp_defines_predicate_'(_, _, _, _, _, _)),
 	retractall('$lgt_pp_calls_predicate_'(_, _, _, _)),
 	retractall('$lgt_pp_calls_self_predicate_'(_, _, _)),
 	retractall('$lgt_pp_calls_super_predicate_'(_, _, _)),
@@ -6984,7 +6984,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_directive'(Directive, Ctx) :-
 	'$lgt_pp_module_'(_),
 	% we're compiling a module as an object
-	(	'$lgt_pp_defines_predicate_'(Directive, _, _, _, _)
+	(	'$lgt_pp_defines_predicate_'(Directive, _, _, _, _, _)
 	;	'$lgt_pp_uses_predicate_'(_, _, Directive)
 		% directive is a query for a locally defined predicate
 	;	'$lgt_pp_use_module_predicate_'(_, _, Directive)
@@ -7761,7 +7761,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_pp_dynamic_'(Head) ->
 		% synchronized predicates must be static
 		throw(permission_error(modify, dynamic_predicate, Functor/Arity))
-	;	'$lgt_pp_defines_predicate_'(Head, _, _, _, _) ->
+	;	'$lgt_pp_defines_predicate_'(Head, _, _, _, _, _) ->
 		% synchronized/1 directives must precede the definitions for the declared predicates
 		throw(permission_error(modify, predicate_interpretation, Functor/Arity))
 	;	assertz('$lgt_pp_synchronized_'(Head, Mutex))
@@ -7776,7 +7776,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		throw(permission_error(modify, dynamic_non_terminal, Functor//Arity))
 	;	'$lgt_pp_defines_non_terminal_'(Functor, Arity) ->
 		throw(permission_error(modify, non_terminal_interpretation, Functor//Arity))
-	;	'$lgt_pp_defines_predicate_'(Head, _, _, _, _) ->
+	;	'$lgt_pp_defines_predicate_'(Head, _, _, _, _, _) ->
 		% synchronized/1 directives must precede the definitions for the declared non-terminals
 		throw(permission_error(modify, non_terminal_interpretation, Functor//Arity))
 	;	assertz('$lgt_pp_synchronized_'(Head, Mutex))
@@ -8279,7 +8279,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_coinductive_directive_resource'(Pred) :-
 	'$lgt_valid_coinductive_template'(Pred, Functor, Arity, Head, TestHead, Template),
 	!,
-	(	'$lgt_pp_defines_predicate_'(Head, _, _, _, _) ->
+	(	'$lgt_pp_defines_predicate_'(Head, _, _, _, _, _) ->
 		% coinductive/1 directives must precede the definitions for the declared predicates
 		throw(permission_error(modify, predicate_interpretation, Functor/Arity))
 	;	true
@@ -9244,7 +9244,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % not the first clause for this predicate
 
 '$lgt_compile_head'(Head, Functor/Arity, THead, Ctx) :-
-	'$lgt_pp_defines_predicate_'(Head, Functor/Arity, ExCtx, THead, _),
+	'$lgt_pp_defines_predicate_'(Head, Functor/Arity, ExCtx, THead, _, user),
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	(	'$lgt_pp_previous_predicate_'(Head) ->
@@ -10828,7 +10828,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(bb_put(Key, Term), TPred, DPred, Ctx) :-
 	'$lgt_prolog_built_in_predicate'(bb_put(_, _)),
-	\+ '$lgt_pp_defines_predicate_'(bb_put(_, _), _, _, _, _),
+	\+ '$lgt_pp_defines_predicate_'(bb_put(_, _), _, _, _, _, _),
 	!,
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, Prefix, _, _, ExCtx, _, _, _),
 	(	atomic(Key) ->
@@ -10844,7 +10844,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(bb_get(Key, Term), TPred, DPred, Ctx) :-
 	'$lgt_prolog_built_in_predicate'(bb_get(_, _)),
-	\+ '$lgt_pp_defines_predicate_'(bb_get(_, _), _, _, _, _),
+	\+ '$lgt_pp_defines_predicate_'(bb_get(_, _), _, _, _, _, _),
 	!,
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, Prefix, _, _, ExCtx, _, _, _),
 	(	atomic(Key) ->
@@ -10860,7 +10860,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(bb_delete(Key, Term), TPred, DPred, Ctx) :-
 	'$lgt_prolog_built_in_predicate'(bb_delete(_, _)),
-	\+ '$lgt_pp_defines_predicate_'(bb_delete(_, _), _, _, _, _),
+	\+ '$lgt_pp_defines_predicate_'(bb_delete(_, _), _, _, _, _, _),
 	!,
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, Prefix, _, _, ExCtx, _, _, _),
 	(	atomic(Key) ->
@@ -10876,7 +10876,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(bb_update(Key, Term, New), TPred, DPred, Ctx) :-
 	'$lgt_prolog_built_in_predicate'(bb_update(_, _, _)),
-	\+ '$lgt_pp_defines_predicate_'(bb_update(_, _, _), _, _, _, _),
+	\+ '$lgt_pp_defines_predicate_'(bb_update(_, _, _), _, _, _, _, _),
 	!,
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, Prefix, _, _, ExCtx, _, _, _),
 	(	atomic(Key) ->
@@ -11038,7 +11038,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_coinductive_'(Pred, _, ExCtx, TCPred, _, _, DCPred),
 	!,
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, Prefix, _, _, ExCtx, Mode, _, Lines),
-	(	'$lgt_pp_defines_predicate_'(Pred, Functor/Arity, _, _, _) ->
+	(	'$lgt_pp_defines_predicate_'(Pred, Functor/Arity, _, _, _, _) ->
 		% convert the call to the original coinductive predicate into a call to the auxiliary
 		% predicate whose compiled normal and debug forms are already computed
 		functor(TCPred, TCFunctor, TCArity),
@@ -11063,7 +11063,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	\+ (nonvar(Head), functor(Head, Functor, Arity)),
 	% not a recursive call
 	!,
-	(	'$lgt_pp_defines_predicate_'(Pred, _, ExCtx, TPred0, _) ->
+	(	'$lgt_pp_defines_predicate_'(Pred, _, ExCtx, TPred0, _, _) ->
 		(	'$lgt_prolog_feature'(threads, supported) ->
 			TPred = with_mutex(Mutex, TPred0)
 		;	% in single-threaded systems, with_mutex/2 is equivalent to once/1
@@ -11080,7 +11080,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head, Lines).
 
 '$lgt_compile_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
-	'$lgt_pp_defines_predicate_'(Pred, Functor/Arity, ExCtx, TPred, _),
+	'$lgt_pp_defines_predicate_'(Pred, Functor/Arity, ExCtx, TPred, _, _),
 	!,
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, ExCtx, Mode, _, Lines),
 	functor(TPred, TFunctor, TArity),
@@ -13643,7 +13643,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 % speed up compilation of other clauses for the same predicates
 
 '$lgt_remember_defined_predicate'(Head, PI, ExCtx, THead, Mode) :-
-	assertz('$lgt_pp_defines_predicate_'(Head, PI, ExCtx, THead, Mode)),
+	(	Mode == compile(aux) ->
+		assertz('$lgt_pp_defines_predicate_'(Head, PI, ExCtx, THead, Mode, aux))
+	;	assertz('$lgt_pp_defines_predicate_'(Head, PI, ExCtx, THead, Mode, user))
+	),
 	retractall('$lgt_pp_previous_predicate_'(_)),
 	assertz('$lgt_pp_previous_predicate_'(Head)).
 
@@ -13908,7 +13911,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	functor(Head, Functor, Arity),
 	\+ '$lgt_pp_multifile_'(Head, _),
 	\+ '$lgt_pp_dynamic_'(Head),
-	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _, _),
+	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _, _, _),
 	% declared, static, but undefined predicate;
 	% local calls must fail (as per closed-world assumption)
 	'$lgt_add_def_fail_clause'(Head, Ctx),
@@ -13922,7 +13925,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	'$lgt_pp_multifile_'(Head, _),
 		\+ '$lgt_pp_dynamic_'(Head)
 	),
-	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _, _),
+	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _, _, _),
 	% dynamic and/or multifile predicate with no initial set of clauses
 	'$lgt_comp_ctx_prefix'(Ctx, Prefix),
 	functor(Head, Functor, Arity),
@@ -14918,7 +14921,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_predicate_calls'(_) :-
 	% coinductive auxiliary clauses
 	'$lgt_pp_coinductive_'(Head, TestHead, HeadExCtx, TCHead, BodyExCtx, THead, DHead),
-	'$lgt_pp_defines_predicate_'(Head, _, _, _, _),
+	'$lgt_pp_defines_predicate_'(Head, _, _, _, _, _),
 		'$lgt_add_coinductive_predicate_aux_clause'(Head, TestHead, HeadExCtx, TCHead, BodyExCtx, THead, DHead),
 	fail.
 
@@ -15091,7 +15094,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_coinductive_success_hook'(Head, Hypothesis, ExCtx, HeadStack, BodyStack, Hook) :-
 	% ensure zero performance penalties when defining coinductive predicates without a definition
 	% for the coinductive success hook predicates
-	(	'$lgt_pp_defines_predicate_'(coinductive_success_hook(Head,Hypothesis), _, ExCtx, THead, _),
+	(	'$lgt_pp_defines_predicate_'(coinductive_success_hook(Head,Hypothesis), _, ExCtx, THead, _, _),
 		\+ \+ (
 			'$lgt_pp_final_entity_term_'(THead, _)
 		;	'$lgt_pp_final_entity_term_'((THead :- _), _)
@@ -15099,7 +15102,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% ... with at least one clause for this particular coinductive predicate head
 		Hook = ((HeadStack = BodyStack), THead)
 	;	% we only consider coinductive_success_hook/1 clauses if no coinductive_success_hook/2 clause applies
-		'$lgt_pp_defines_predicate_'(coinductive_success_hook(Head), _, ExCtx, THead, _),
+		'$lgt_pp_defines_predicate_'(coinductive_success_hook(Head), _, ExCtx, THead, _, _),
 		\+ \+ (
 			'$lgt_pp_final_entity_term_'(THead, _)
 		;	'$lgt_pp_final_entity_term_'((THead :- _), _)

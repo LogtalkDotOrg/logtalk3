@@ -36,6 +36,10 @@ complementing category at runtime.
 * FIXED: Cases where compiler warnings would be printed with incorrect line
 numbers.
 
+* FIXED: Bug where a conflict between a predicate specified in a `uses/2` or a
+`use_module/2` directive and a local defined predicate would not be reported
+by the compiler.
+
 Prolog adapter and integration files
 ------------------------------------
 
