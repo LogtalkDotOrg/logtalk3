@@ -33,6 +33,9 @@ deterministic when called with the first two arguments bound.
 * FIXED: Regression in the previous release when dynamically creating a
 complementing category at runtime.
 
+* FIXED: Cases where compiler warnings would be printed with incorrect line
+numbers.
+
 Prolog adapter and integration files
 ------------------------------------
 

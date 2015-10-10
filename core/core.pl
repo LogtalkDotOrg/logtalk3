@@ -9994,7 +9994,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
 		'$lgt_increment_compile_warnings_counter',
-		'$lgt_warning_context'(SourceFile, _, Lines, Type, Entity),
+		'$lgt_warning_context'(Ctx, SourceFile, _, Lines, Type, Entity),
 		'$lgt_print_message'(warning(general), core, deprecated_control_construct(SourceFile, Lines, Type, Entity, (:)/1))
 	;	true
 	),
@@ -10729,7 +10729,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compiler_flag'(portability, warning),
 	\+ '$lgt_iso_spec_flag'(Flag),
 	'$lgt_increment_compile_warnings_counter',
-	'$lgt_warning_context'(SourceFile, _, Lines),
+	'$lgt_warning_context'(Ctx, SourceFile, _, Lines),
 	(	'$lgt_pp_entity_'(Type, Entity, _, _, _) ->
 		'$lgt_print_message'(warning(portability), core, non_standard_prolog_flag(SourceFile, Lines, Type, Entity, Flag))
 	;	'$lgt_print_message'(warning(portability), core, non_standard_prolog_flag(SourceFile, Lines, Flag))
@@ -10744,7 +10744,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_iso_spec_flag'(Flag),
 	\+ '$lgt_iso_spec_flag_value'(Flag, Value),
 	'$lgt_increment_compile_warnings_counter',
-	'$lgt_warning_context'(SourceFile, _, Lines),
+	'$lgt_warning_context'(Ctx, SourceFile, _, Lines),
 	(	'$lgt_pp_entity_'(Type, Entity, _, _, _) ->
 		'$lgt_print_message'(warning(portability), core, non_standard_prolog_flag_value(SourceFile, Lines, Type, Entity, Flag, Value))
 	;	'$lgt_print_message'(warning(portability), core, non_standard_prolog_flag_value(SourceFile, Lines, Flag, Value))
@@ -10758,7 +10758,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compiler_flag'(portability, warning),
 	\+ '$lgt_iso_spec_flag'(Flag),
 	'$lgt_increment_compile_warnings_counter',
-	'$lgt_warning_context'(SourceFile, _, Lines),
+	'$lgt_warning_context'(Ctx, SourceFile, _, Lines),
 	(	'$lgt_pp_entity_'(Type, Entity, _, _, _) ->
 		'$lgt_print_message'(warning(portability), core, non_standard_prolog_flag(SourceFile, Lines, Type, Entity, Flag))
 	;	'$lgt_print_message'(warning(portability), core, non_standard_prolog_flag(SourceFile, Lines, Flag))
@@ -10773,7 +10773,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_iso_spec_flag'(Flag),
 	\+ '$lgt_iso_spec_flag_value'(Flag, Value),
 	'$lgt_increment_compile_warnings_counter',
-	'$lgt_warning_context'(SourceFile, _, Lines),
+	'$lgt_warning_context'(Ctx, SourceFile, _, Lines),
 	(	'$lgt_pp_entity_'(Type, Entity, _, _, _) ->
 		'$lgt_print_message'(warning(portability), core, non_standard_prolog_flag_value(SourceFile, Lines, Type, Entity, Flag, Value))
 	;	'$lgt_print_message'(warning(portability), core, non_standard_prolog_flag_value(SourceFile, Lines, Flag, Value))
@@ -13320,6 +13320,27 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
+% '$lgt_warning_context'(+compilation_context, -atom, -atom, -pair(integer), -atom, -entity_identifier)
+%
+% returns file and entity warning context but take the lines from the compilation context
+
+'$lgt_warning_context'(Ctx, SourceFile, ObjectFile, Lines, Type, Entity) :-
+	'$lgt_pp_file_paths_'(_, _, SourceFile, ObjectFile),
+	'$lgt_comp_ctx_lines'(Ctx, Lines),
+	'$lgt_pp_entity_'(Type, Entity, _, _, _).
+
+
+
+% '$lgt_warning_context'(+compilation_context, -atom, -atom, -pair(integer))
+%
+% returns file warning context but take the lines from the compilation context
+
+'$lgt_warning_context'(Ctx, SourceFile, ObjectFile, Lines) :-
+	'$lgt_pp_file_paths_'(_, _, SourceFile, ObjectFile),
+	'$lgt_comp_ctx_lines'(Ctx, Lines).
+
+
+
 % '$lgt_warning_context'(-atom, -atom, -pair(integer), -atom, -entity_identifier)
 %
 % returns file and entity warning context
@@ -13475,7 +13496,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_add_def_clause'(Head, Functor, Arity, THead, Ctx) :-
 	functor(HeadTemplate, Functor, Arity),
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, Prefix, _, _, ExCtx, Mode, _, _),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, Prefix, _, _, ExCtx, Mode, _, Lines),
 	'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	functor(THeadTemplate, TFunctor, TArity),
 	'$lgt_unify_head_thead_arguments'(HeadTemplate, THeadTemplate, ExCtxTemplate),
@@ -13486,7 +13507,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_construct_def_clause'(Def, HeadTemplate, ExCtxTemplate, THeadTemplate, Clause),
 	assertz('$lgt_pp_def_'(Clause)),
 	% the following two calls have side effects, thus ...
-	'$lgt_check_for_redefined_built_in'(HeadTemplate, ExCtxTemplate, THeadTemplate, Mode),
+	'$lgt_check_for_redefined_built_in'(HeadTemplate, ExCtxTemplate, THeadTemplate, Mode, Lines),
 	'$lgt_remember_defined_predicate'(HeadTemplate, Functor/Arity, ExCtxTemplate, THeadTemplate, Mode),
 	% ... we need to delay output unifications to after they succeed
 	Head = HeadTemplate,
@@ -13502,7 +13523,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_add_ddef_clause'(Head, Functor, Arity, THead, Ctx) :-
 	functor(HeadTemplate, Functor, Arity),
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, Prefix, _, _, ExCtx, Mode, _, _),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, Prefix, _, _, ExCtx, Mode, _, Lines),
 	'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	functor(THeadTemplate, TFunctor, TArity),
 	'$lgt_unify_head_thead_arguments'(HeadTemplate, THeadTemplate, ExCtxTemplate),
@@ -13511,7 +13532,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_construct_def_clause'(DDef, HeadTemplate, ExCtxTemplate, THeadTemplate, Clause),
 	assertz('$lgt_pp_ddef_'(Clause)),
 	% the following two calls have side effects, thus ...
-	'$lgt_check_for_redefined_built_in'(HeadTemplate, ExCtxTemplate, THeadTemplate, Mode),
+	'$lgt_check_for_redefined_built_in'(HeadTemplate, ExCtxTemplate, THeadTemplate, Mode, Lines),
 	'$lgt_remember_defined_predicate'(HeadTemplate, Functor/Arity, ExCtxTemplate, THeadTemplate, Mode),
 	% ... we need to delay output unifications to after they succeed
 	Head = HeadTemplate,
@@ -13575,17 +13596,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	Clause =.. [Def, Head, _, fail],
 	assertz('$lgt_pp_def_'(Clause)),
-	'$lgt_comp_ctx_mode'(Ctx, Mode),
-	'$lgt_check_for_redefined_built_in'(Head, _, fail, Mode).
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, Mode, _, Lines),
+	'$lgt_check_for_redefined_built_in'(Head, _, fail, Mode, Lines).
 
 
 
-% '$lgt_check_for_redefined_built_in'(@callable, @execution_context, @callable, @nonvar)
+% '$lgt_check_for_redefined_built_in'(@callable, @execution_context, @callable, @nonvar, )
 %
 % this predicate is called when adding a def/ddef clause after finding the first clause
 % for a predicate or when no clauses are defined for a declared predicate
 
-'$lgt_check_for_redefined_built_in'(Head, ExCtx, THead, compile(_)) :-
+'$lgt_check_for_redefined_built_in'(Head, ExCtx, THead, compile(_), Lines) :-
 	'$lgt_logtalk_built_in_predicate'(Head, _),
 	!,
 	assertz('$lgt_pp_redefined_built_in_'(Head, ExCtx, THead)),
@@ -13593,12 +13614,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_compiler_flag'(redefined_built_ins, warning) ->
 		functor(Head, Functor, Arity),
 		'$lgt_increment_compile_warnings_counter',
-		'$lgt_warning_context'(SourceFile, _, Lines, Type, Entity),
+		'$lgt_warning_context'(SourceFile, _, _, Type, Entity),
 		'$lgt_print_message'(warning(redefined_built_ins), core, redefined_logtalk_built_in_predicate(SourceFile, Lines, Type, Entity, Functor/Arity))
 	;	true
 	).
 
-'$lgt_check_for_redefined_built_in'(Head, ExCtx, THead, compile(_)) :-
+'$lgt_check_for_redefined_built_in'(Head, ExCtx, THead, compile(_), Lines) :-
 	'$lgt_prolog_built_in_predicate'(Head),
 	!,
 	assertz('$lgt_pp_redefined_built_in_'(Head, ExCtx, THead)),
@@ -13606,12 +13627,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_compiler_flag'(redefined_built_ins, warning) ->
 		functor(Head, Functor, Arity),
 		'$lgt_increment_compile_warnings_counter',
-		'$lgt_warning_context'(SourceFile, _, Lines, Type, Entity),
+		'$lgt_warning_context'(SourceFile, _, _, Type, Entity),
 		'$lgt_print_message'(warning(redefined_built_ins), core, redefined_prolog_built_in_predicate(SourceFile, Lines, Type, Entity, Functor/Arity))
 	;	true
 	).
 
-'$lgt_check_for_redefined_built_in'(_, _, _, _).
+'$lgt_check_for_redefined_built_in'(_, _, _, _, _).
 
 
 
@@ -16483,8 +16504,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		nonvar(Free),
 		nonvar(Parameters),
 		nonvar(Goal) ->
-		'$lgt_check_lambda_expression_unclassified_variables'(Free/Parameters>>Goal),
-		'$lgt_check_lambda_expression_mixed_up_variables'(Free/Parameters>>Goal)
+		'$lgt_check_lambda_expression_unclassified_variables'(Free/Parameters>>Goal, Ctx),
+		'$lgt_check_lambda_expression_mixed_up_variables'(Free/Parameters>>Goal, Ctx)
 	;	true
 	).
 
@@ -16500,7 +16521,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 		nonvar(Parameters),
 		nonvar(Goal) ->
-		'$lgt_check_lambda_expression_unclassified_variables'(Parameters>>Goal)
+		'$lgt_check_lambda_expression_unclassified_variables'(Parameters>>Goal, Ctx)
 	;	true
 	).
 
@@ -16508,38 +16529,38 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % each lambda goal variable should be either a lambda free variable or a lambda parameter
 
-'$lgt_check_lambda_expression_unclassified_variables'(Parameters>>Goal) :-
-	'$lgt_check_lambda_expression_unclassified_variables'(Goal, GoalVars),
+'$lgt_check_lambda_expression_unclassified_variables'(Parameters>>Goal, Ctx) :-
+	'$lgt_check_lambda_expression_goal_variables'(Goal, GoalVars),
 	term_variables(Parameters, ParameterVars),
 	'$lgt_var_subtract'(GoalVars, ParameterVars, UnqualifiedVars),
 	(	UnqualifiedVars \== [] ->
 		'$lgt_increment_compile_warnings_counter',
-		'$lgt_warning_context'(SourceFile, _, Lines, Type, Entity),
+		'$lgt_warning_context'(Ctx, SourceFile, _, Lines, Type, Entity),
 		'$lgt_print_message'(warning(general), core, unclassified_variables_in_lambda_expression(SourceFile, Lines, Type, Entity, UnqualifiedVars, Parameters>>Goal))
 	;	true
 	).
 
 
-'$lgt_check_lambda_expression_unclassified_variables'(Parameters>>Goal, UnqualifiedVars) :-
+'$lgt_check_lambda_expression_goal_variables'(Parameters>>Goal, UnqualifiedVars) :-
 	!,
-	'$lgt_check_lambda_expression_unclassified_variables'(Goal, GoalVars),
+	'$lgt_check_lambda_expression_goal_variables'(Goal, GoalVars),
 	term_variables(Parameters, ParameterVars),
 	'$lgt_var_subtract'(GoalVars, ParameterVars, UnqualifiedVars).
 
-'$lgt_check_lambda_expression_unclassified_variables'(Goal, UnqualifiedVars) :-
+'$lgt_check_lambda_expression_goal_variables'(Goal, UnqualifiedVars) :-
 	term_variables(Goal, UnqualifiedVars).
 
 
 
 % no lambda goal variable should be both a lambda free variable and a lambda parameter
 
-'$lgt_check_lambda_expression_mixed_up_variables'(Free/Parameters>>Goal) :-
+'$lgt_check_lambda_expression_mixed_up_variables'(Free/Parameters>>Goal, Ctx) :-
 	term_variables(Free, FreeVars),
 	term_variables(Parameters, ParameterVars),
 	'$lgt_intersection'(FreeVars, ParameterVars, MixedUpVars),
 	(	MixedUpVars \== [] ->
 		'$lgt_increment_compile_warnings_counter',
-		'$lgt_warning_context'(SourceFile, _, Lines, Type, Entity),
+		'$lgt_warning_context'(Ctx, SourceFile, _, Lines, Type, Entity),
 		'$lgt_print_message'(warning(general), core, variables_with_dual_role_in_lambda_expression(SourceFile, Lines, Type, Entity, MixedUpVars, Free/Parameters>>Goal))
 	;	true
 	).
@@ -17017,7 +17038,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_renamed_compiler_flag'(Flag, NewFlag),
 		'$lgt_comp_ctx_mode'(Ctx, compile(_)) ->
 		'$lgt_increment_compile_warnings_counter',
-		'$lgt_warning_context'(SourceFile, _, Lines),
+		'$lgt_warning_context'(Ctx, SourceFile, _, Lines),
 		(	'$lgt_pp_entity_'(Type, Entity, _, _, _) ->
 			'$lgt_print_message'(warning(general), core, renamed_compiler_flag(SourceFile, Lines, Type, Entity, Flag, NewFlag))
 		;	'$lgt_print_message'(warning(general), core, renamed_compiler_flag(SourceFile, Lines, Flag, NewFlag))
