@@ -57,6 +57,12 @@ core entities, the library, and the development tools.
 
 * IMPROVED: Documentation of the term- and goal-expansion built-in methods.
 
+Tools
+-----
+
+* IMPROVED: When printing code coverage results by the `lgtunit` tool, a list
+of covered clauses is only printed when there are uncovered predicate clauses.
+
 Examples
 --------
 

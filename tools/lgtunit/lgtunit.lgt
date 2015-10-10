@@ -24,9 +24,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 2.5,
+		version is 2.6,
 		author is 'Paulo Moura',
-		date is 2015/06/15,
+		date is 2015/10/10,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, and multiple test dialects.'
 	]).
 
@@ -982,6 +982,7 @@
 
 	write_coverage_results :-
 		(	setof(TestedEntity, fired_entity(TestedEntity), TestedEntities) ->
+			print_message(information, lgtunit, code_coverage_header),
 			write_coverage_results(TestedEntities),
 			setof(DeclaredEntity, ::cover(DeclaredEntity), DeclaredEntities),
 			write_coverage_results_summary(DeclaredEntities, TestedEntities)
