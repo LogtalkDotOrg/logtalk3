@@ -6721,6 +6721,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_compile_runtime_terms'(+list(term))
 %
 % compiles a list of runtime terms (clauses, directives, or grammar rules)
+%
+% note that the clause order ensures that instantiation errors will be caught
+% by the call to the '$lgt_compile_runtime_term'/2 predicate
 
 '$lgt_compile_runtime_terms'([Term| Terms]) :-
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, runtime, _, '-'(0,0)),
@@ -8419,13 +8422,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 		\+ '$lgt_pp_use_module_non_terminal_'(_, _, TNonTerminal)
 	;	true
 	),
+	% no clash with an earlier uses/2 or a use_module/2 directive non-terminal
 	\+ '$lgt_pp_uses_predicate_'(_, _, TAlias),
 	\+ '$lgt_pp_use_module_predicate_'(_, _, TAlias),
+	% no clash with an earlier uses/2 or a use_module/2 directive predicate
 	!,
 	% unify args of TOriginal and TAlias
 	TOriginal =.. [_| Args],
 	TAlias =.. [_| Args],
-	% allow for runtime use
+	% allow for runtime use by adding a local definition that calls the remote definition
 	(	'$lgt_compiler_flag'(optimize, on),
 		'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
 		'$lgt_execution_context_this_entity'(ExCtx, This, _),
@@ -8445,19 +8450,22 @@ create_logtalk_flag(Flag, Value, Options) :-
 	functor(TOriginal, OFunctor, Arity),
 	functor(TAlias, AFunctor, Arity),
 	functor(TPred, AFunctor, ExtArity),
-	(	\+ '$lgt_pp_uses_non_terminal_'(_, _, TOriginal),
-		\+ '$lgt_pp_use_module_non_terminal_'(_, _, TOriginal),
-		\+ '$lgt_pp_uses_predicate_'(_, _, TPred),
-		\+ '$lgt_pp_use_module_predicate_'(_, _, TPred) ->
-		% unify args of TOriginal and TAlias
-		TOriginal =.. [_| Args],
-		TAlias =.. [_| Args],
-		% allow for runtime use
-		'$lgt_comp_ctx_mode'(NewCtx, compile(aux)),
-		'$lgt_compile_grammar_rule'((TAlias --> Obj::TOriginal), NewCtx),
-		assertz('$lgt_pp_uses_non_terminal_'(Obj, TOriginal, TAlias))
-	;	throw(permission_error(modify, uses_object_non_terminal, AFunctor//Arity))
-	).
+	\+ '$lgt_pp_uses_non_terminal_'(_, _, TOriginal),
+	\+ '$lgt_pp_use_module_non_terminal_'(_, _, TOriginal),
+	\+ '$lgt_pp_uses_predicate_'(_, _, TPred),
+	\+ '$lgt_pp_use_module_predicate_'(_, _, TPred),
+	% no clash with an earlier uses/2 or a use_module/2 directive non-terminal or predicate
+	!,
+	% unify args of TOriginal and TAlias
+	TOriginal =.. [_| Args],
+	TAlias =.. [_| Args],
+	% allow for runtime use by adding a local definition that calls the remote definition
+	'$lgt_comp_ctx_mode'(NewCtx, compile(aux)),
+	'$lgt_compile_grammar_rule'((TAlias --> Obj::TOriginal), NewCtx),
+	assertz('$lgt_pp_uses_non_terminal_'(Obj, TOriginal, TAlias)).
+
+'$lgt_compile_uses_directive_non_terminal_resource'(_, AFunctor, Arity, _, _, _) :-
+	throw(permission_error(modify, uses_object_non_terminal, AFunctor//Arity)).
 
 
 
@@ -8529,13 +8537,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 		\+ '$lgt_pp_use_module_non_terminal_'(_, _, TNonTerminal)
 	;	true
 	),
+	% no clash with an earlier uses/2 or a use_module/2 directive non-terminal
 	\+ '$lgt_pp_uses_predicate_'(_, _, TAlias),
 	\+ '$lgt_pp_use_module_predicate_'(_, _, TAlias),
+	% no clash with an earlier uses/2 or a use_module/2 directive predicate
 	!,
 	% unify args of TOriginal and TAlias
 	TOriginal =.. [_| Args],
 	TAlias =.. [_| Args],
-	% allow for runtime use
+	% allow for runtime use by adding a local definition that calls the remote definition
 	'$lgt_compile_aux_clauses'([(TAlias :- ':'(Module, TOriginal))]),
 	'$lgt_comp_ctx_lines'(Ctx, Lines),
 	'$lgt_add_referenced_module_predicate'(Module, TOriginal, TAlias, TAlias, Lines),
@@ -8549,19 +8559,22 @@ create_logtalk_flag(Flag, Value, Options) :-
 	functor(TOriginal, OFunctor, Arity),
 	functor(TAlias, AFunctor, Arity),
 	functor(TPred, AFunctor, ExtArity),
-	(	\+ '$lgt_pp_uses_non_terminal_'(_, _, TOriginal),
-		\+ '$lgt_pp_use_module_non_terminal_'(_, _, TOriginal),
-		\+ '$lgt_pp_uses_predicate_'(_, _, TPred),
-		\+ '$lgt_pp_use_module_predicate_'(_, _, TPred) ->
-		% unify args of TOriginal and TAlias
-		TOriginal =.. [_| Args],
-		TAlias =.. [_| Args],
-		% allow for runtime use
-		'$lgt_comp_ctx_mode'(NewCtx, compile(aux)),
-		'$lgt_compile_grammar_rule'((TAlias --> ':'(Module, TOriginal)), NewCtx),
-		assertz('$lgt_pp_use_module_non_terminal_'(Module, TOriginal, TAlias))
-	;	throw(permission_error(modify, uses_module_non_terminal, AFunctor//Arity))
-	).
+	\+ '$lgt_pp_uses_non_terminal_'(_, _, TOriginal),
+	\+ '$lgt_pp_use_module_non_terminal_'(_, _, TOriginal),
+	\+ '$lgt_pp_uses_predicate_'(_, _, TPred),
+	\+ '$lgt_pp_use_module_predicate_'(_, _, TPred),
+	% no clash with an earlier uses/2 or a use_module/2 directive non-terminal or predicate
+	!,
+	% unify args of TOriginal and TAlias
+	TOriginal =.. [_| Args],
+	TAlias =.. [_| Args],
+	% allow for runtime use by adding a local definition that calls the remote definition
+	'$lgt_comp_ctx_mode'(NewCtx, compile(aux)),
+	'$lgt_compile_grammar_rule'((TAlias --> ':'(Module, TOriginal)), NewCtx),
+	assertz('$lgt_pp_use_module_non_terminal_'(Module, TOriginal, TAlias)).
+
+'$lgt_compile_use_module_directive_non_terminal_resource'(_, AFunctor, Arity, _, _, _) :-
+	throw(permission_error(modify, uses_module_non_terminal, AFunctor//Arity)).
 
 
 

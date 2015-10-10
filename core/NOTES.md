@@ -28,7 +28,7 @@ source files defining built-in protocols, categories, and objects:
 - `monitoring.lgt`  
 	built-in `monitoring` protocol specifying the event handler predicates
 - `logtalk.lgt`  
-	built-in `logtalk` object defining message printing, debugging, and hacking predicates
+	built-in `logtalk` object defining message printing, question asking, debugging, and hacking predicates
 - `core_messages.lgt`  
 	built-in `core_messages` category defining the default translations for compiler messages
 - `user.lgt`  
