@@ -114,53 +114,56 @@
 	test(dcgs_19) :-
 		findall(Components, url::parse("http://logtalk.org/files/update", Components), Solutions),
 		Solutions == [[protocol(http), address([logtalk, org]), path([files,update]), file('')]].
-	:- endif.
 
 	test(dcgs_20) :-
+		iban::valid("GB82 WEST 1234 5698 7654 32").		
+	:- endif.
+
+	test(dcgs_21) :-
 		logtalk << phrase(bypass::foo, _, _).
 
 	% test access to the grammar rule implicit list of tokens using the call//1 built-in
 	% non-terminal and lambda expressions:
 
-	test(dcgs_21) :-
+	test(dcgs_22) :-
 		logtalk << phrase(call([[], []]>>true), [], []).
 
-	test(dcgs_22) :-
+	test(dcgs_23) :-
 		logtalk << phrase(call([[], []]>>true), Input, Rest),
 		Input == [], Rest == [].
 
-	test(dcgs_23) :-
+	test(dcgs_24) :-
 		logtalk << phrase(call([Input, Rest]>>(set::subtract(Input, Rest, [1]))), [1,2,3], [2,3]).
 
 	% three nasty examples of getting a grammar rule difference list arguments
 	% as they require using variables as both lambda free and lambda parameters
 
-	test(dcgs_24) :-
+	test(dcgs_25) :-
 		logtalk << phrase(call({Input,Rest}/[Input,Rest]>>true), [1,2,3], [2,3]),
 		Input == [1,2,3], Rest == [2,3].
 
-	test(dcgs_25) :-
+	test(dcgs_26) :-
 		logtalk << phrase(call({Rest}/[_,Rest]>>true), [1,2,3], [2,3]),
 		Rest == [2,3].
 
-	test(dcgs_26) :-
+	test(dcgs_27) :-
 		logtalk << phrase(call({Element}/[[Element|_],_]>>true), [1,2,3], [2,3]),
 		Element == 1.
 
 	% cuts in the first argument of phrase/2-3 calls must be local and not extend outside:
 
-	test(dcgs_27) :-
+	test(dcgs_28) :-
 		findall(X, (list::member(X, [1,2,3]), logtalk << phrase(!, _)), Xs),
 		Xs == [1,2,3].
 
-	test(dcgs_28) :-
+	test(dcgs_29) :-
 		findall(X, (list::member(X, [1,2,3]), logtalk << phrase(!, _, _)), Xs),
 		Xs == [1,2,3].
 
-	test(dcgs_29) :-
+	test(dcgs_30) :-
 		client::print.
 
-	test(dcgs_30) :-
+	test(dcgs_31) :-
 		client::successors([1,2,3], Successors),
 		Successors == [2,3,4].
 

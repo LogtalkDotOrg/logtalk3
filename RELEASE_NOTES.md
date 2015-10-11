@@ -78,6 +78,9 @@ this test on Mac OS X on the command-line can result in the test hanging due
 to a Java limitation on this operating-system where the AWT cannot be started
 when the Apple AWT Java VM was loaded on the first thread.
 
+* ADDED: IBAN validation example, from a contribution to the Rosetta Code
+website, to the `dcgs` example.
+
 * UPDATED: The `expansion` example to illustrate how to define a pipeline of
 hook objects.
 

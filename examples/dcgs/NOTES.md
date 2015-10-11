@@ -20,8 +20,8 @@ ________________________________________________________________________
 To load this example and for sample queries, please see the `SCRIPT.txt`
 file.
 
-This folder contains the following examples of using DCGs inside 
-objects and categories:
+This folder contains the following examples of using DCGs in objects and
+categories:
 
 - `calculator`  
 	canonical DCG example of parsing arithmetic expressions
@@ -54,6 +54,8 @@ objects and categories:
 - `morse`  
 	decoder for Morse code messages; illustrate how to use scope 
 	directives to declare grammar rule non-terminals
+- `iban`  
+	IBAN validation
 
 This folder includes an example, `tokenizer`, adapted with permission from 
 a Michael A. Covington example:

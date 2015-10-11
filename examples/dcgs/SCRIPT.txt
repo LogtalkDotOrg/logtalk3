@@ -176,6 +176,12 @@ enter command> exit
 yes
 
 
+% IBAN validation:
+
+| ?- iban::valid("GB82 WEST 1234 5698 7654 32").
+yes
+
+
 % double bypass using the {}/1 control constructs of grammar rules and Logtalk
 % (as phrase/2-3 are private methods, we use the "logtalk" built-in object and the
 % <</2 control construct to invoke the foo//0 public grammar rule non-terminal):

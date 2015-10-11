@@ -47,6 +47,7 @@
 	:- initialization(
 		logtalk_load([
 			calculator,
+			iban,
 			macaddr,
 			url,
 			xml
