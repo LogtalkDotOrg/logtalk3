@@ -46,7 +46,7 @@
 
 	bban(BBAN) -->
 		bban_codes(Digits),
-		{digits_to_integer(Digits, BBAN)}.
+		{digits_to_integer(Digits, BBAN, Count), Count =< 30}.
 
 	bban_codes(Ds) -->
 		" ", bban_codes(Ds).
@@ -72,13 +72,14 @@
 			D0 is D mod 10
 		}.
 
-	digits_to_integer(Digits, BBAN) :-
-		digits_to_integer(Digits, 0, BBAN).
+	digits_to_integer(Digits, BBAN, Count) :-
+		digits_to_integer(Digits, 0, BBAN, 0, Count).
 
-	digits_to_integer([], BBAN, BBAN).
-	digits_to_integer([Digit| Digits], BBAN0, BBAN) :-
+	digits_to_integer([], BBAN, BBAN, Count, Count).
+	digits_to_integer([Digit| Digits], BBAN0, BBAN, Count0, Count) :-
 		BBAN1 is BBAN0 * 10 + Digit,
-		digits_to_integer(Digits, BBAN1, BBAN).
+		Count1 is Count0 + 1,
+		digits_to_integer(Digits, BBAN1, BBAN, Count1, Count).
 
 	country_code("AL").
 	country_code("AD").
