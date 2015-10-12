@@ -9132,7 +9132,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % values of "sender", "this", and "self" shared with the clause head; still,
 % calls to the parameter/2 method in the clause body will access parameters
 % for the defining entity; parameters for the entity for which the clause is
-% defined can be accessed through simple unification at the clause
+% defined can be accessed through simple unification at the clause head
 
 '$lgt_compile_clause'((Head:-Body), Entity, TClause, DClause, Ctx) :-
 	!,
