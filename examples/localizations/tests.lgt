@@ -22,46 +22,33 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2015/08/23,
+		date is 2015/10/12,
 		comment is 'Unit tests for the "localizations" example.'
 	]).
 
-	% we use a message hook and a private/dynamic predicate to
-	% save the tokens generated when printing a message in order
-	% to check their correctness using the unit tests
-
-	:- private(message/2).
-	:- dynamic(message/2).
-
-	:- multifile(logtalk::message_hook/4).
-	:- dynamic(logtalk::message_hook/4).
-
-	logtalk::message_hook(banner, comment, my_game(CountryCode), Tokens) :-
-		assertz(message(CountryCode, Tokens)).
-
 	test(localizations_1) :-
+		^^set_text_output(''),
 		my_game(de)::banner,
-		message(de, Tokens),
-		Tokens == ['Willkommen Sie bei Mein tolles Spiel!'-[], nl].
+		^^check_text_output('>>> Willkommen Sie bei Mein tolles Spiel!\n').
 
 	test(localizations_2) :-
+		^^set_text_output(''),
 		my_game(en)::banner,
-		message(en, Tokens),
-		Tokens == ['Welcome to my great game!'-[], nl].
+		^^check_text_output('>>> Welcome to my great game!\n').
 
 	test(localizations_3) :-
+		^^set_text_output(''),
 		my_game(fr)::banner,
-		message(fr, Tokens),
-		Tokens == ['Bienvenue sur mon grand jeu!'-[], nl].
+		^^check_text_output('>>> Bienvenue sur mon grand jeu!\n').
 
 	test(localizations_4) :-
+		^^set_text_output(''),
 		my_game(pt)::banner,
-		message(pt, Tokens),
-		Tokens == ['Bem vindo ao meu grande jogo!'-[], nl].
+		^^check_text_output('>>> Bem vindo ao meu grande jogo!\n').
 
 	cleanup :-
-		retractall(message(_, _)).
+		^^clean_text_output.
 
 :- end_object.

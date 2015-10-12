@@ -82,6 +82,10 @@ this test on Mac OS X on the command-line can result in the test hanging due
 to a Java limitation on this operating-system where the AWT cannot be started
 when the Apple AWT Java VM was loaded on the first thread.
 
+* CHANGED: The unit tests of the `localizations` example to check instead the
+final text output. This allows the tests to also succeed in debug mode by
+working around a limitation on the definition of multifile predicate clauses.
+
 * ADDED: IBAN validation example, from a contribution to the Rosetta Code
 website, to the `dcgs` example.
 

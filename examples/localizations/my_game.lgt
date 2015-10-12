@@ -21,9 +21,9 @@
 :- object(my_game(_)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2015/08/23,
+		date is 2015/10/12,
 		comment is 'A simple example of supporting application localization in multiple languages.',
 		parnames is ['CountryCode']
 	]).
@@ -39,6 +39,7 @@
 
 	:- multifile(logtalk::message_prefix_stream/4).
 	:- dynamic(logtalk::message_prefix_stream/4).
-	logtalk::message_prefix_stream(comment, my_game(_), '>>> ', user_output).
+	logtalk::message_prefix_stream(comment, my_game(_), '>>> ', Stream) :-
+		current_output(Stream).
 
 :- end_object.
