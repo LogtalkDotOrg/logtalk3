@@ -2505,7 +2505,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 1, 2, rc1)).
+'$lgt_version_data'(logtalk(3, 1, 2, rc2)).
 
 
 
@@ -9964,8 +9964,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(Obj::Pred, TPred, '$lgt_debug'(goal(Obj::Pred, TPred), ExCtx), Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
-	'$lgt_execution_context_this_entity'(ExCtx, This, _),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_compiler_flag'(events, Events),
 	'$lgt_compile_message_to_object'(Pred, Obj, TPred, Events, Ctx).
 
@@ -11812,7 +11811,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	nonvar(Obj),
 	Obj = {Proxy},
 	!,
-	'$lgt_comp_ctx_this'(Ctx, This),
+	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
+	'$lgt_execution_context_this_entity'(ExCtx, This, _),
 	'$lgt_compile_message_to_object'(Pred, Proxy, TPred, Events, Ctx).
 
 % type and lint checks
@@ -11862,23 +11862,28 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_message_to_object'(!, Obj, ('$lgt_object_exists'(Obj, !, This), !), _, Ctx) :-
 	!,
-	'$lgt_comp_ctx_this'(Ctx, This).
+	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
+	'$lgt_execution_context_this_entity'(ExCtx, This, _).
 
 '$lgt_compile_message_to_object'(true, Obj, ('$lgt_object_exists'(Obj, true, This), true), _, Ctx) :-
 	!,
-	'$lgt_comp_ctx_this'(Ctx, This).
+	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
+	'$lgt_execution_context_this_entity'(ExCtx, This, _).
 
 '$lgt_compile_message_to_object'(fail, Obj, ('$lgt_object_exists'(Obj, fail, This), fail), _, Ctx) :-
 	!,
-	'$lgt_comp_ctx_this'(Ctx, This).
+	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
+	'$lgt_execution_context_this_entity'(ExCtx, This, _).
 
 '$lgt_compile_message_to_object'(false, Obj, ('$lgt_object_exists'(Obj, false, This), false), _, Ctx) :-
 	!,
-	'$lgt_comp_ctx_this'(Ctx, This).
+	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
+	'$lgt_execution_context_this_entity'(ExCtx, This, _).
 
 '$lgt_compile_message_to_object'(repeat, Obj, ('$lgt_object_exists'(Obj, repeat, This), repeat), _, Ctx) :-
 	!,
-	'$lgt_comp_ctx_this'(Ctx, This).
+	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
+	'$lgt_execution_context_this_entity'(ExCtx, This, _).
 
 % reflection built-in predicates
 
@@ -11887,25 +11892,29 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_must_be'(var_or_operator_priority, Priority),
 	'$lgt_must_be'(var_or_operator_specifier, Specifier),
 	'$lgt_must_be'(var_or_atom, Operator),
-	'$lgt_comp_ctx_this'(Ctx, This).
+	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
+	'$lgt_execution_context_this_entity'(ExCtx, This, _).
 
 '$lgt_compile_message_to_object'(current_predicate(Pred), Obj, '$lgt_current_predicate'(Obj, Pred, This, p(p(p))), _, Ctx) :-
 	!,
 	'$lgt_must_be'(var_or_predicate_indicator, Pred),
-	'$lgt_comp_ctx_this'(Ctx, This).
+	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
+	'$lgt_execution_context_this_entity'(ExCtx, This, _).
 
 '$lgt_compile_message_to_object'(predicate_property(Pred, Prop), Obj, '$lgt_predicate_property'(Obj, Pred, Prop, This, p(p(p))), _, Ctx) :-
 	!,
 	'$lgt_must_be'(var_or_callable, Pred),
 	'$lgt_must_be'(var_or_predicate_property, Prop),
-	'$lgt_comp_ctx_this'(Ctx, This).
+	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
+	'$lgt_execution_context_this_entity'(ExCtx, This, _).
 
 % database handling built-in predicates
 
 '$lgt_compile_message_to_object'(abolish(Pred), Obj, TPred, _, Ctx) :-
 	!,
 	'$lgt_must_be'(var_or_predicate_indicator, Pred),
-	'$lgt_comp_ctx_this'(Ctx, This),
+	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
+	'$lgt_execution_context_this_entity'(ExCtx, This, _),
 	(	var(Obj) ->
 		TPred = '$lgt_abolish'(Obj, Pred, This, p(p(p)))
 	;	ground(Pred) ->
@@ -11935,7 +11944,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		;	TPred = '$lgt_asserta_rule_checked'(Obj, Clause, This, p(p(_)), p(p(p)))
 		)
 	),
-	'$lgt_comp_ctx_this'(Ctx, This).
+	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
+	'$lgt_execution_context_this_entity'(ExCtx, This, _).
 
 '$lgt_compile_message_to_object'(assertz(Clause), Obj, TPred, _, Ctx) :-
 	!,
@@ -11954,7 +11964,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		;	TPred = '$lgt_assertz_rule_checked'(Obj, Clause, This, p(p(_)), p(p(p)))
 		)
 	),
-	'$lgt_comp_ctx_this'(Ctx, This).
+	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
+	'$lgt_execution_context_this_entity'(ExCtx, This, _).
 
 '$lgt_compile_message_to_object'(clause(Head, Body), Obj, TPred, _, Ctx) :-
 	!,
@@ -11966,7 +11977,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		;	TPred = '$lgt_clause_checked'(Obj, Head, Body, This, p(p(p)))
 		)
 	),
-	'$lgt_comp_ctx_this'(Ctx, This).
+	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
+	'$lgt_execution_context_this_entity'(ExCtx, This, _).
 
 '$lgt_compile_message_to_object'(retract(Clause), Obj, TPred, _, Ctx) :-
 	!,
@@ -11990,7 +12002,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		;	TPred = '$lgt_retract_fact_checked'(Obj, Clause, This, p(p(p)))
 		)
 	),
-	'$lgt_comp_ctx_this'(Ctx, This).
+	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
+	'$lgt_execution_context_this_entity'(ExCtx, This, _).
 
 '$lgt_compile_message_to_object'(retractall(Head), Obj, TPred, _, Ctx) :-
 	!,
@@ -12006,17 +12019,20 @@ create_logtalk_flag(Flag, Value, Options) :-
 		;	TPred = '$lgt_retractall_checked'(Obj, Head, This, p(p(p)))
 		)
 	),
-	'$lgt_comp_ctx_this'(Ctx, This).
+	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
+	'$lgt_execution_context_this_entity'(ExCtx, This, _).
 
 % term and goal expansion predicates
 
 '$lgt_compile_message_to_object'(expand_term(Term, Expansion), Obj, '$lgt_expand_term'(Obj, Term, Expansion, This, p(p(p))), _, Ctx) :-
 	!,
-	'$lgt_comp_ctx_this'(Ctx, This).
+	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
+	'$lgt_execution_context_this_entity'(ExCtx, This, _).
 
 '$lgt_compile_message_to_object'(expand_goal(Goal, ExpandedGoal), Obj, '$lgt_expand_goal'(Obj, Goal, ExpandedGoal, This, p(p(p))), _, Ctx) :-
 	!,
-	'$lgt_comp_ctx_this'(Ctx, This).
+	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
+	'$lgt_execution_context_this_entity'(ExCtx, This, _).
 
 % compiler bypass control construct
 
@@ -12055,6 +12071,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	Events == allow ->
 		(	'$lgt_compiler_flag'(optimize, on),
 			'$lgt_send_to_obj_static_binding'(Obj, Pred, Call, Ctx) ->
+			'$lgt_execution_context_this_entity'(ExCtx, This, _),
 			TPred = '$lgt_guarded_method_call'(Obj, Pred, This, Call)
 		;	TPred = '$lgt_send_to_obj_'(Obj, Pred, ExCtx)
 		)

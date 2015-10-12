@@ -40,6 +40,10 @@ numbers.
 `use_module/2` directive and a local defined predicate would not be reported
 by the compiler.
 
+* FIXED: Minor performance bug when compiling `::/2` calls in the general case
+where access to the execution context is not required by the predicate making
+the call.
+
 Prolog adapter and integration files
 ------------------------------------
 
