@@ -36,9 +36,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.18,
+		version is 1.19,
 		author is 'Paulo Moura',
-		date is 2015/09/29,
+		date is 2015/10/15,
 		comment is 'Portable operating-system access predicates.'
 	]).
 
@@ -114,8 +114,10 @@
 			{get_time(Time)}.
 
 		date_time(Year, Month, Day, Hours, Minutes, Seconds, Miliseconds) :-
-			{get_time(Time),
-			 convert_time(Time, Year, Month, Day, Hours, Minutes, Seconds, Miliseconds)}.
+			{get_time(TimeStamp),
+			 stamp_date_time(TimeStamp, date(Year,Month,Day,Hours,Minutes,Seconds0,_,_,_), local),
+			 Seconds is truncate(float_integer_part(Seconds0)),
+			 Miliseconds is round(float_fractional_part(Seconds0)*1000)}.
 
 		cpu_time(Seconds) :-
 			{statistics(cputime, Seconds)}.

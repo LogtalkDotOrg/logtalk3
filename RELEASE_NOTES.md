@@ -68,6 +68,13 @@ core entities, the library, and the development tools.
 
 * IMPROVED: Documentation of the term- and goal-expansion built-in methods.
 
+Library
+-------
+
+* CHANGED: The `os` library object support for SWI-Prolog now uses the
+`stamp_date_time/3` predicate instead of the deprecated `convert_time/8`
+predicate in the implementation of the portable `date_time/7` predicate.
+
 Tools
 -----
 
