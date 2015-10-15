@@ -22,9 +22,9 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Paulo Moura',
-		date is 2015/09/05,
+		date is 2015/10/15,
 		comment is 'Simple tool for helping porting plain Prolog code.'
 	]).
 
@@ -263,7 +263,11 @@
 		logtalk_load_context(basename, Basename),
 		atom_concat(Object, '.pl', Basename),
 		logtalk_load_context(term_position, Line-_),
-		assertz(dynamic_directive_(Object, Line, Predicates)),
+		flatten_to_list(Predicates, List),
+		forall(
+			member(Predicate, List),
+			assertz(dynamic_directive_(Object, Line, Predicate))
+		),
 		fail.
 
 	% save the position of multifile/1 directives
@@ -271,7 +275,11 @@
 		logtalk_load_context(basename, Basename),
 		atom_concat(Object, '.pl', Basename),
 		logtalk_load_context(term_position, Line-_),
-		assertz(multifile_directive_(Object, Line, Predicates)),
+		flatten_to_list(Predicates, List),
+		forall(
+			member(Predicate, List),
+			assertz(multifile_directive_(Object, Line, Predicate))
+		),
 		fail.
 
 	% discard include/1 directives for files already being processed
@@ -348,6 +356,18 @@
 	directives_tokens([Directive| Directives]) -->
 		[':- ~q'-[Directive], nl],
 		directives_tokens(Directives).
+
+	% auxiliary predicates
+
+	% flattens an item, a list of items, or a conjunction of items into a list
+	flatten_to_list([A| B], [A| B]) :-
+		!.
+	flatten_to_list([], []) :-
+		!.
+	flatten_to_list((A, B), [A| BB]) :-
+		!,
+		flatten_to_list(B, BB).
+	flatten_to_list(A, [A]).
 
 	% we want to minimize any dependencies on other entities, including library objects
 
