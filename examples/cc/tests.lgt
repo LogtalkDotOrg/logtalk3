@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.3,
+		version is 0.4,
 		author is 'Paulo Moura',
-		date is 2015/09/29,
+		date is 2015/10/16,
 		comment is 'Unit tests for the "cc" example.'
 	]).
 
@@ -98,5 +98,21 @@
 	test(cc_15) :-
 		os::decompose_file_name('/', Directory, Name, Extension),
 		Directory == ('/'), Name == '', Extension == ''.
+
+	test(cc_16) :-
+		os::expand_path('$LOGTALKUSER/examples/cc/', Path),
+		os::directory_files(Path, Files),
+		memberchk('.', Files),
+		memberchk('..', Files),
+		memberchk('tester.lgt', Files),
+		memberchk('tests.lgt', Files).
+
+	% auxiliary predicates; we could use the Logtalk standard library but we
+	% prefer to minimize this object dependencies given its testing purpose
+
+	memberchk(Element, [Element| _]) :-
+		!.
+	memberchk(Element, [_| List]) :-
+		memberchk(Element, List).
 
 :- end_object.

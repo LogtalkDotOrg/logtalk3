@@ -29,6 +29,7 @@
 	:- import(from(/(expand_atom,2), standard)).
 	:- import(from(/(xsb_configuration,2), xsb_configuration)).
 	:- import(from(/(sys_pid,1), shell)).
+	:- import(from(/(list_directory,2), shell)).
 :- endif.
 
 
@@ -36,9 +37,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.19,
+		version is 1.20,
 		author is 'Paulo Moura',
-		date is 2015/10/15,
+		date is 2015/10/16,
 		comment is 'Portable operating-system access predicates.'
 	]).
 
@@ -77,6 +78,9 @@
 
 		working_directory(Directory) :-
 			{working_directory(Directory, Directory)}.
+
+		directory_files(Directory, Files) :-
+			{directory_files(Directory, Files)}.
 
 		directory_exists(Directory) :-
 			expand_path(Directory, ExpandedPath),
@@ -179,6 +183,9 @@
 		working_directory(Directory) :-
 			{getcwd(Directory)}.
 
+		directory_files(Directory, Files) :-
+			{directory_files(Directory, Files)}.
+
 		directory_exists(Directory) :-
 			expand_path(Directory, ExpandedPath),
 			{file_exists(ExpandedPath),
@@ -269,6 +276,9 @@
 
 		working_directory(Directory) :-
 			{path_sysop(cwd, Directory)}.
+
+		directory_files(Directory, Files) :-
+			{findall(File, list_directory(Directory, File), Files)}.
 
 		directory_exists(Directory) :-
 			expand_path(Directory, ExpandedPath),
@@ -365,6 +375,9 @@
 
 		working_directory(Directory) :-
 			{working_directory(Directory)}.
+
+		directory_files(Directory, Files) :-
+			{directory_files(Directory, Files)}.
 
 		directory_exists(Directory) :-
 			{absolute_file_name(Directory, ExpandedPath),
@@ -468,6 +481,9 @@
 		working_directory(Directory) :-
 			{working_directory(Directory)}.
 
+		directory_files(Directory, Files) :-
+			{directory_files(Directory, Files)}.
+
 		directory_exists(Directory) :-
 			expand_path(Directory, ExpandedPath),
 			{file_exists(ExpandedPath),
@@ -562,6 +578,11 @@
 		working_directory(Directory) :-
 			{current_directory(Directory, Directory)}.
 
+		directory_files(Directory, Files) :-
+			{findall(File1, file_member_of_directory(Directory, File1, _), Files1),
+			 findall(Directory1, directory_member_of_directory(Directory, Directory1, _), Directories1),
+			 append(['.', '..'| Directories1], Files1, Files)}.
+
 		directory_exists(Directory) :-
 			expand_path(Directory, Path),
 			{directory_exists(Path)}.
@@ -652,6 +673,12 @@
 		working_directory(Directory) :-
 			{getcwd(DirectoryString),
 			 atom_string(Directory, DirectoryString)}.
+
+		directory_files(Directory, Files) :-
+			{read_directory(Directory, '*', Directories0, Files0),
+			 findall(File1, (member(File0, Files0), atom_string(File1, File0)), Files1),
+			 findall(Directory1, (member(Directory0, Directories0), atom_string(Directory1, Directory0)), Directories1),
+			 append(['.', '..'| Directories1], Files1, Files)}.
 
 		directory_exists(Directory) :-
 			{canonical_path_name(Directory, ExpandedPath),
@@ -749,6 +776,9 @@
 
 		working_directory(Directory) :-
 			{working_directory(Directory, Directory)}.
+
+		directory_files(Directory, Files) :-
+			{directory_files(Directory, Files)}.
 
 		directory_exists(Directory) :-
 			{absolute_file_name(Directory, ExpandedPath),
@@ -848,6 +878,12 @@
 
 		working_directory(Directory) :-
 			{fs_cwd(Directory)}.
+
+		directory_files(Directory, Files) :-
+			{absolute_file_name(Directory, ExpandedPath),
+			 fs_cwd(CurrentDirectory, ExpandedPath),
+			 fs_files(Files),
+			 fs_cwd(_, CurrentDirectory)}.
 
 		directory_exists(Directory) :-
 			{absolute_file_name(Directory, ExpandedPath),
@@ -950,6 +986,9 @@
 
 		working_directory(Directory) :-
 			{getcwd(Directory)}.
+
+		directory_files(_, _) :-
+			throw(not_available(directory_files/2)).
 
 		directory_exists(Directory) :-
 			{absolute_file_name(Directory, ExpandedPath),
@@ -1088,6 +1127,14 @@
 		working_directory(Directory) :-
 			{working_directory(Directory, Directory)}.
 
+		directory_files(Directory, Files) :-
+			expand_path(Directory, ExpandedPath),
+			{working_directory(CurrentDirectory, ExpandedPath),
+			 dirs(Directories0),
+			 files(Files0),
+			 append(['.', '..'| Directories0], Files0, Files),
+			 working_directory(_, CurrentDirectory)}.
+
 		directory_exists(Directory) :-
 			expand_path(Directory, ExpandedPath),
 			{exists_dir(ExpandedPath)}.
@@ -1216,6 +1263,11 @@
 
 		working_directory(Directory) :-
 			{absolute_file_name('.', Directory)}.
+
+		directory_files(Directory, Files) :-
+			{findall(File1, file_member_of_directory(Directory, File1, _), Files1),
+			 findall(Directory1, directory_member_of_directory(Directory, Directory1, _), Directories1),
+			 append(['.', '..'| Directories1], Files1, Files)}.
 
 		directory_exists(Directory) :-
 			expand_path(Directory, ExpandedPath),
@@ -1358,6 +1410,9 @@
 		working_directory(Directory) :-
 			{working_directory(Directory0, Directory0)},
 			convert_file_path(Directory0, Directory).
+
+		directory_files(Directory, Files) :-
+			{directory_files(Directory, Files)}.
 
 		directory_exists(Directory) :-
 			expand_path(Directory, ExpandedPath),

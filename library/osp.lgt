@@ -22,9 +22,9 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1.12,
+		version is 1.13,
 		author is 'Paulo Moura',
-		date is 2015/09/29,
+		date is 2015/10/16,
 		comment is 'Portable operating-system access protocol.'
 	]).
 
@@ -89,6 +89,13 @@
 	:- info(working_directory/1, [
 		comment is 'Current working directory.',
 		argnames is ['Directory']
+	]).
+
+	:- public(directory_files/2).
+	:- mode(directory_files(+atom, -list(atom)), one).
+	:- info(directory_files/2, [
+		comment is 'Returns a list of all the files (including directories and regular files) in the given directory.',
+		argnames is ['Directory', 'Files']
 	]).
 
 	:- public(directory_exists/1).

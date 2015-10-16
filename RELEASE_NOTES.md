@@ -75,6 +75,10 @@ Library
 `stamp_date_time/3` predicate instead of the deprecated `convert_time/8`
 predicate in the implementation of the portable `date_time/7` predicate.
 
+* ADDED: Predicate `directory_files/2` to the portable `os` library. This
+predicate is available for all supported backend Prolog compilers with the
+exception of Qu-Prolog.
+
 Tools
 -----
 
