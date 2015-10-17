@@ -151,6 +151,7 @@
 		retractall(non_standard_predicate_call_(_, _)),
 		retractall(dynamic_directive_(_,_,_)),
 		retractall(multifile_directive_(_,_,_)),
+		retractall(file_being_advised_(_)),
 		retractall(wrapper_object_(_, _)),
 		retractall(add_directive_(_, _)),
 		retractall(add_directive_(_, _, _)).
