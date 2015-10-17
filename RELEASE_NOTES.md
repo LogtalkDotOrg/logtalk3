@@ -91,6 +91,9 @@ files in a given directory.
 * FIXED: The `wrapper` prototype tool to properly handle `multifile/1` and
 `dynamic/1` directives specifying more than one predicate.
 
+* FIXED: Bug in the `lgtunit` tool where variable sharing between the options
+argument of the `test/3` dialect and the test goal would not be preserved.
+
 Examples
 --------
 

@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>2.6</code>
+            <code>2.7</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2015/10/10</code>
+            <code>2015/10/17</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -844,7 +844,7 @@
       <div class="private">
         <h2>Private predicates</h2>
         <div class="section">
-          <h3 id="test/2" class="code">test/2</h3>
+          <h3 id="test/3" class="code">test/3</h3>
           <blockquote>
             <p class="comment">Specifies a unit test.</p>
           </blockquote>
@@ -855,11 +855,11 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>test(Identifier,Outcome)</code>
+              <code>test(Identifier,Variables,Outcome)</code>
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
-              <code>test(?atom,?nonvar) &ndash; zero_or_more</code>
+              <code>test(?atom,?list(variable),?nonvar) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
