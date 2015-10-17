@@ -58,6 +58,22 @@
 		argnames is ['Goal']
 	]).
 
+	:- public(benchmark/2).
+	:- meta_predicate(benchmark(0, *)).
+	:- mode(benchmark(+callable, -float), zero_or_one).
+	:- info(benchmark/2, [
+		comment is 'Benchmarks a goal and returns the total execution time in seconds.',
+		argnames is ['Goal', 'Time']
+	]).
+
+	:- public(benchmark/3).
+	:- meta_predicate(benchmark(0, *, *)).
+	:- mode(benchmark(+callable, +integer, -float), zero_or_one).
+	:- info(benchmark/3, [
+		comment is 'Benchmarks a goal by repeating it the specified number of times and returning the total execution time in seconds.',
+		argnames is ['Goal', 'Repetitions', 'Time']
+	]).
+
 	:- public(op(700, xfx, ('=~='))).
 	:- public(('=~=')/2).
 	:- mode('=~='(+float, +float), zero_or_one).
@@ -937,6 +953,38 @@
 	:- else.
 		epsilon(0.000000000001).
 	:- endif.
+
+	benchmark(Goal, Time) :-
+		os::cpu_time(Time0),
+		once(Goal),
+		os::cpu_time(Time1),
+		Time is Time1 - Time0.
+
+	benchmark(Goal, Repetitons, Time) :-
+		os::cpu_time(Time0),
+		empty_loop(Repetitons),
+		os::cpu_time(Time1),
+		goal_loop(Goal, Repetitons),
+		os::cpu_time(Time2),
+		Time is Time2 - 2*Time1 + Time0.
+
+	empty_loop(Repetitons) :-
+		repeat(Repetitons),
+		once(true),
+		fail.
+	empty_loop(_).
+
+	goal_loop(Goal, Repetitons) :-
+		repeat(Repetitons),
+		once(Goal),
+		fail.
+	goal_loop(_, _).
+
+	repeat(_).
+	repeat(N) :-
+		N > 1,
+		M is N - 1,
+		repeat(M).
 
 	% predicate clause coverage support;
 	% it requires entities compiled in debug mode

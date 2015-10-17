@@ -85,6 +85,8 @@ Tools
 * IMPROVED: When printing code coverage results by the `lgtunit` tool, a list
 of covered clauses is only printed when there are uncovered predicate clauses.
 
+* ADDED: Two benchmark predicates, `benchmark/2-3`, to the `lgtunit` tool.
+
 * ADDED: Predicates to the `wrapper` prototype tool to provide advise for
 files in a given directory.
 

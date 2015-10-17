@@ -288,13 +288,13 @@ The list of indexes of the covered predicate clauses can be quite long.
 Some backend Prolog compilers provide a flag or a predicate to control
 the depth of printed terms that can be useful:
 
-* CxProlog: `write_depth/2` predicate
-* ECLiPSe: `print_depth` flag
-* SICStus Prolog: `toplevel_print_options` flag
-* SWI-Prolog 7.1.10 or earlier: `toplevel_print_options` flag
-* SWI-Prolog 7.1.11 or later: `answer_write_options` flag
-* XSB: `set_file_write_depth/1` predicate
-* YAP: `write_depth/2-3` predicates
+- CxProlog: `write_depth/2` predicate
+- ECLiPSe: `print_depth` flag
+- SICStus Prolog: `toplevel_print_options` flag
+- SWI-Prolog 7.1.10 or earlier: `toplevel_print_options` flag
+- SWI-Prolog 7.1.11 or later: `answer_write_options` flag
+- XSB: `set_file_write_depth/1` predicate
+- YAP: `write_depth/2-3` predicates
 
 
 Automating running unit tests
@@ -303,6 +303,19 @@ Automating running unit tests
 You can use the `scripts/logtalk_tester.sh` Bash shell script for automating
 running unit tests. See the `scripts/NOTES.md` file for details.
 
+
+Utility predicates
+------------------
+
+The `lgtunit` tool provides the following utility predicates to simplify
+writing unit tests that require float comparison or goal benchmarking:
+
+- `Float1 =~= Float2`
+- `benchmark(Goal, Time)`
+- `benchmark(Goal, Repetitions, Time)`
+
+Consult the `lgtunit` object documentation (`docs/tools.html`) for details
+on these predicates.
 
 Known issues
 ------------
