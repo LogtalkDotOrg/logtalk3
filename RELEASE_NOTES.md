@@ -85,6 +85,9 @@ Tools
 * IMPROVED: When printing code coverage results by the `lgtunit` tool, a list
 of covered clauses is only printed when there are uncovered predicate clauses.
 
+* ADDED: Predicates to the `wrapper` prototype tool to provide advise for
+files in a given directory.
+
 * FIXED: The `wrapper` prototype tool to properly handle `multifile/1` and
 `dynamic/1` directives specifying more than one predicate.
 

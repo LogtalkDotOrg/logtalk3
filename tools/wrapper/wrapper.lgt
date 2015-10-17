@@ -24,15 +24,29 @@
 	:- info([
 		version is 0.2,
 		author is 'Paulo Moura',
-		date is 2015/10/15,
+		date is 2015/10/17,
 		comment is 'Simple tool for helping porting plain Prolog code.'
 	]).
 
-	:- public(advise/1).
-	:- mode(advise(+list(atom)), one).
-	:- info(advise/1, [
+	:- public(advise_for_files/1).
+	:- mode(advise_for_files(+list(atom)), one).
+	:- info(advise_for_files/1, [
 		comment is 'Advise the user on missing directives for converting a list of plain Prolog files in Logtalk objects.',
 		argnames is ['Files']
+	]).
+
+	:- public(advise_for_directory/2).
+	:- mode(advise_for_directory(+atom, +list(atom)), one).
+	:- info(advise_for_directory/2, [
+		comment is 'Advise the user on missing directives for converting a directory of files, using any of the given extensions, in Logtalk objects.',
+		argnames is ['Directory', 'Extensions']
+	]).
+
+	:- public(advise_for_directory/1).
+	:- mode(advise_for_directory(+atom), one).
+	:- info(advise_for_directory/1, [
+		comment is 'Advise the user on missing directives for converting a directory of Prolog files (using either the .pl or .prolog extensions) in Logtalk objects.',
+		argnames is ['Directory']
 	]).
 
 	:- private(unknown_predicate_called_but_not_defined_/2).
@@ -99,13 +113,37 @@
 		argnames is ['Object', 'Directive', 'NewDirective']
 	]).
 
+	:- private(file_being_advised_/1).
+	:- dynamic(file_being_advised_/1).
+	:- mode(file_being_advised_(+atom), zero_or_more).
+	:- info(file_being_advised_/1, [
+		comment is 'Table of files being advised.',
+		argnames is ['File']
+	]).
+
 	% load the plain Prolog files and advise on changes
 
-	advise(Files) :-
+	advise_for_files(Files) :-
 		clean_issues_databases,
+		forall(
+			member(File, Files),
+			assertz(file_being_advised_(File))
+		),
 		load_and_wrap_files(Files),
 		generate_advise,
 		print_advise.
+
+	advise_for_directory(Directory, Extensions) :-
+		os::directory_files(Directory, Files),
+		findall(
+			File,
+			(member(File,Files), member(Extension,Extensions), sub_atom(File,_,_,0,Extension)),
+			FilteredFiles
+		),
+		advise_for_files(FilteredFiles).
+
+	advise_for_directory(Directory) :-
+		advise_for_directory(Directory, ['.pl', '.prolog']).
 
 	clean_issues_databases :-
 		retractall(unknown_predicate_called_but_not_defined_(_, _)),
@@ -282,7 +320,11 @@
 		),
 		fail.
 
-	% discard include/1 directives for files already being processed
+	% discard include/1 directives for files being processed
+	term_expansion((:- include(Path)), []) :-
+		file_being_advised_(File),
+		% file extension might be missing
+		atom_concat(Path, _, File).
 	term_expansion((:- include(Path)), []) :-
 		os::expand_path(Path, ExpandedPath),
 		wrapper_object_(_, File),
