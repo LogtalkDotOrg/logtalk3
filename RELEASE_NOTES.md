@@ -33,6 +33,12 @@ reaching a fixed point as documented.
 * FIXED: Cases where the `expand_goal/2` built-in method would not stop when
 reaching a fixed point as documented.
 
+Examples
+--------
+
+* IMPROVED: The `expansion` example with a better definition for a term-
+expansion pipeline and with a definition for a goal-expansion pipeline.
+
 
 3.01.2 - October 18, 2015
 =========================
