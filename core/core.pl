@@ -3793,7 +3793,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	var(Goal) ->
 		ExpandedGoal = Goal
 	;	call(Def, goal_expansion(Goal, ExpandedGoal0), ExCtx, Call, _, _) ->
-		(	call(Call) ->
+		(	call(Call),
+			Goal \== ExpandedGoal0 ->
 			'$lgt_expand_goal_scoped'(ExpandedGoal0, ExpandedGoal, Def, ExCtx)
 		;	ExpandedGoal = Goal
 		)
@@ -3807,7 +3808,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	(	call(Def, goal_expansion(Goal, ExpandedGoal0), ExCtx, Call)
 		;	call(DDef, goal_expansion(Goal, ExpandedGoal0), ExCtx, Call)
 		) ->
-		(	call(Call) ->
+		(	call(Call),
+			Goal \== ExpandedGoal0 ->
 			'$lgt_expand_goal_local'(ExpandedGoal0, ExpandedGoal, Def, DDef, ExCtx)
 		;	ExpandedGoal = Goal
 		)
@@ -9453,6 +9455,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(Pred, TPred, DPred, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 	'$lgt_expand_file_goal'(Pred, ExpandedPred),
+	Pred \== ExpandedPred,
 	!,
 	'$lgt_compile_body'(ExpandedPred, TPred, DPred, Ctx).
 

@@ -21,6 +21,19 @@ RELEASE NOTES
 =============
 
 
+3.01.3 - October ??, 2015
+=========================
+
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Cases where the compile-time goal expansion would not stop when
+reaching a fixed point as documented.
+
+* FIXED: Cases where the `expand_goal/2` built-in method would not stop when
+reaching a fixed point as documented.
+
+
 3.01.2 - October 18, 2015
 =========================
 
