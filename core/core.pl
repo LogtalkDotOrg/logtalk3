@@ -6801,6 +6801,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% only expand goals when compiling a source file
 		'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 		'$lgt_expand_file_goal'(Goal, ExpandedGoal),
+		Goal \== ExpandedGoal,
 		!,
 		'$lgt_compile_directive'(if(ExpandedGoal), Ctx)
 	).
@@ -6859,6 +6860,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% only expand goals when compiling a source file
 		'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 		'$lgt_expand_file_goal'(Goal, ExpandedGoal),
+		Goal \== ExpandedGoal,
 		!,
 		'$lgt_compile_directive'(elif(ExpandedGoal), Ctx)
 	).
@@ -7077,6 +7079,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_comp_ctx_mode'(Ctx, compile(_)),
 		% only expand goals when compiling a source file
 		'$lgt_expand_file_goal'(Goal, ExpandedGoal),
+		Goal \== ExpandedGoal,
 		!,
 		'$lgt_compile_file_directive'(initialization(ExpandedGoal), Ctx)
 	).
