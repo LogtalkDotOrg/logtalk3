@@ -27,11 +27,20 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: Better coding style for the core multifile message predicate and
+non-terminal definitions.
+
 * FIXED: Cases where the compile-time goal expansion would not stop when
 reaching a fixed point as documented.
 
 * FIXED: Cases where the `expand_goal/2` built-in method would not stop when
 reaching a fixed point as documented.
+
+Tools
+-----
+
+* IMPROVED: Better coding style for the tools multifile message predicate and
+non-terminal definitions.
 
 Examples
 --------

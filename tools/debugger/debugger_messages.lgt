@@ -21,9 +21,9 @@
 :- category(debugger_messages).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2015/09/12,
+		date is 2015/10/22,
 		comment is 'Logtalk debugger default message translations.'
 	]).
 
@@ -37,12 +37,15 @@
 	:- multifile(logtalk::message_prefix_stream/4).
 	:- dynamic(logtalk::message_prefix_stream/4).
 
+	logtalk::message_prefix_stream(Kind, debugger, Prefix, Stream) :-
+		message_prefix_stream(Kind, Prefix, Stream).
+
 	% Quintus Prolog based prefixes (also used in SICStus Prolog):
-	logtalk::message_prefix_stream(question,    debugger, '', user_output).
-	logtalk::message_prefix_stream(comment,     debugger, '', user_output).
-	logtalk::message_prefix_stream(information, debugger, '', user_output).
-	logtalk::message_prefix_stream(warning,     debugger, '', user_output).
-	logtalk::message_prefix_stream(error,       debugger, '', user_output).
+	message_prefix_stream(question,    '', user_output).
+	message_prefix_stream(comment,     '', user_output).
+	message_prefix_stream(information, '', user_output).
+	message_prefix_stream(warning,     '', user_output).
+	message_prefix_stream(error,       '', user_output).
 
 	% structured question asking settings;
 	% the main reason to not read directly from an input stream is to allow
@@ -56,126 +59,129 @@
 	:- multifile(logtalk::message_tokens//2).
 	:- dynamic(logtalk::message_tokens//2).
 
+	logtalk::message_tokens(Message, debugger) -->
+		message_tokens(Message).
+
 	% questions
 
-	logtalk::message_tokens(enter_query, debugger) -->
+	message_tokens(enter_query) -->
 		['    Enter a query to be executed deterministically'-[], nl].
 
-	logtalk::message_tokens(enter_goal, debugger) -->
+	message_tokens(enter_goal) -->
 		['    Enter a goal to unify with the current goal'-[], nl].
 
-	logtalk::message_tokens(enter_context_spy_point(GoalTemplate), debugger) -->
+	message_tokens(enter_context_spy_point(GoalTemplate)) -->
 		{ground_term_copy(GoalTemplate, GroundGoalTemplate)},
 		['    Enter a context spy point term formatted as (Sender, This, Self, ~q)'-[GroundGoalTemplate], nl].
 
-	logtalk::message_tokens(enter_invocation_number, debugger) -->
+	message_tokens(enter_invocation_number) -->
 		['    Enter an invocation number to jump to'-[], nl].
 
-	logtalk::message_tokens(enter_port_name, debugger) -->
+	message_tokens(enter_port_name) -->
 		['    Enter a port name or a negated port name to zap to'-[], nl].
 
-	logtalk::message_tokens(enter_write_max_depth, debugger) -->
+	message_tokens(enter_write_max_depth) -->
 		['    Enter the maximum write depth for terms (0 to reset)'-[], nl].
 
 	% debugger status and switching
 
-	logtalk::message_tokens(debugger_on_spying, debugger) -->
+	message_tokens(debugger_on_spying) -->
 		['Debugger is on: showing spy points for all objects compiled in debug mode.'-[], nl].
 
-	logtalk::message_tokens(debugger_switched_on_spying, debugger) -->
+	message_tokens(debugger_switched_on_spying) -->
 		['Debugger switched on: showing spy points for all objects compiled in debug mode.'-[], nl].
 
-	logtalk::message_tokens(debugger_on_tracing, debugger) -->
+	message_tokens(debugger_on_tracing) -->
 		['Debugger is on: tracing everything for all objects compiled in debug mode.'-[], nl].
 
-	logtalk::message_tokens(debugger_switched_on_tracing, debugger) -->
+	message_tokens(debugger_switched_on_tracing) -->
 		['Debugger switched on: tracing everything for all objects compiled in debug mode.'-[], nl].
 
-	logtalk::message_tokens(debugger_off, debugger) -->
+	message_tokens(debugger_off) -->
 		['Debugger is off.'-[], nl].
 
-	logtalk::message_tokens(debugger_switched_off, debugger) -->
+	message_tokens(debugger_switched_off) -->
 		['Debugger switched off.'-[], nl].
 
 	% at port
 
-	logtalk::message_tokens(leashing_port(Code, Port, N, Goal, MaxDepth), debugger) -->
+	message_tokens(leashing_port(Code, Port, N, Goal, MaxDepth)) -->
 		['~w'-[Code]], port_name(Port), invocation_number(N), [term(Goal,[quoted(true),numbervars(true),max_depth(MaxDepth)]), ' ? '-[]].
 
-	logtalk::message_tokens(leashing_port(Code, Port, N, Goal), debugger) -->
+	message_tokens(leashing_port(Code, Port, N, Goal)) -->
 		['~w'-[Code]], port_name(Port), invocation_number(N), ['~q ? '-[Goal]].
 
-	logtalk::message_tokens(tracing_port(Code, Port, N, Goal, MaxDepth), debugger) -->
+	message_tokens(tracing_port(Code, Port, N, Goal, MaxDepth)) -->
 		['~w'-[Code]], port_name(Port), invocation_number(N), [term(Goal,[quoted(true),numbervars(true),max_depth(MaxDepth)]), nl].
 
-	logtalk::message_tokens(tracing_port(Code, Port, N, Goal), debugger) -->
+	message_tokens(tracing_port(Code, Port, N, Goal)) -->
 		['~w'-[Code]], port_name(Port), invocation_number(N), ['~q'-[Goal], nl].
 
 	% spy points
 
-	logtalk::message_tokens(all_spy_points_added, debugger) -->
+	message_tokens(all_spy_points_added) -->
 		['    All specified spy points added.'-[], nl].
 
-	logtalk::message_tokens(matching_spy_points_removed, debugger) -->
+	message_tokens(matching_spy_points_removed) -->
 		['    All matching line number and predicate spy points removed.'-[], nl].
 
 	% predicate spy points
 
-	logtalk::message_tokens(predicate_spy_points(SpyPoints), debugger) -->
+	message_tokens(predicate_spy_points(SpyPoints)) -->
 		['    Defined predicate spy points (Functor/Arity):'-[], nl],
 		spy_points(SpyPoints).
 
-	logtalk::message_tokens(all_predicate_spy_points_removed, debugger) -->
+	message_tokens(all_predicate_spy_points_removed) -->
 		['    All predicate spy points removed.'-[], nl].
 
-	logtalk::message_tokens(no_predicate_spy_points_defined, debugger) -->
+	message_tokens(no_predicate_spy_points_defined) -->
 		['    No predicate spy points are defined.'-[], nl].
 
-	logtalk::message_tokens(predicate_spy_point_added, debugger) -->
+	message_tokens(predicate_spy_point_added) -->
 		['    Predicate spy point added.'-[], nl].
 
-	logtalk::message_tokens(predicate_spy_point_removed, debugger) -->
+	message_tokens(predicate_spy_point_removed) -->
 		['    Predicate spy point removed.'-[], nl].
 
 	% line number spy points
 
-	logtalk::message_tokens(line_number_spy_points(SpyPoints), debugger) -->
+	message_tokens(line_number_spy_points(SpyPoints)) -->
 		['    Defined line number spy points (Entity-Line):'-[], nl],
 		spy_points(SpyPoints).
 
-	logtalk::message_tokens(all_line_number_spy_points_removed, debugger) -->
+	message_tokens(all_line_number_spy_points_removed) -->
 		['    All line number spy points removed.'-[], nl].
 
-	logtalk::message_tokens(no_line_number_spy_points_defined, debugger) -->
+	message_tokens(no_line_number_spy_points_defined) -->
 		['    No line number spy points are defined.'-[], nl].
 
-	logtalk::message_tokens(line_number_spy_point_added, debugger) -->
+	message_tokens(line_number_spy_point_added) -->
 		['    Line number spy point added.'-[], nl].
 
-	logtalk::message_tokens(line_number_spy_point_removed, debugger) -->
+	message_tokens(line_number_spy_point_removed) -->
 		['    Line number spy point removed.'-[], nl].
 
 	% context spy points
 
-	logtalk::message_tokens(context_spy_points(SpyPoints), debugger) -->
+	message_tokens(context_spy_points(SpyPoints)) -->
 		['    Defined context spy points (Sender, This, Self, Goal):'-[], nl],
 		context_spy_points(SpyPoints).
 
-	logtalk::message_tokens(matching_context_spy_points_removed, debugger) -->
+	message_tokens(matching_context_spy_points_removed) -->
 		['    All matching context spy points removed.'-[], nl].
 
-	logtalk::message_tokens(all_context_spy_points_removed, debugger) -->
+	message_tokens(all_context_spy_points_removed) -->
 		['    All context spy points removed.'-[], nl].
 
-	logtalk::message_tokens(context_spy_point_set, debugger) -->
+	message_tokens(context_spy_point_set) -->
 		['    Context spy point set.'-[], nl].
 
-	logtalk::message_tokens(no_context_spy_points_defined, debugger) -->
+	message_tokens(no_context_spy_points_defined) -->
 		['    No context spy points are defined.'-[], nl].
 
 	% execution context
 
-	logtalk::message_tokens(execution_context(Entity0, Sender0, This0, Self0, MetaCallCtx0, Stack0), debugger) -->
+	message_tokens(execution_context(Entity0, Sender0, This0, Self0, MetaCallCtx0, Stack0)) -->
 		% in some cases, e.g when dealing with multifile clauses for Prolog modules,
 		% most of the execution context elements are not available
 		{var(Entity0) -> Entity = n/a; Entity = Entity0},
@@ -195,7 +201,7 @@
 
 	% file context
 
-	logtalk::message_tokens(file_context(Basename, Directory, Entity, Predicate, Clause0, Line0), debugger) -->
+	message_tokens(file_context(Basename, Directory, Entity, Predicate, Clause0, Line0)) -->
 		{atom_concat(Directory, Basename, File),
 		 clause_and_line_numbers(Clause0, Line0, Clause, Line)},
 		[
@@ -208,52 +214,52 @@
 
 	% goals
 
-	logtalk::message_tokens(print_current_goal(Goal), debugger) -->
+	message_tokens(print_current_goal(Goal)) -->
 		['    Current goal: ~p'-[Goal], nl].
 
-	logtalk::message_tokens(display_current_goal(Goal,MaxDepth), debugger) -->
+	message_tokens(display_current_goal(Goal,MaxDepth)) -->
 		['    Current goal: '-[], term(Goal,[quoted(true),ignore_ops(true),max_depth(MaxDepth)]), nl].
 
-	logtalk::message_tokens(display_current_goal(Goal), debugger) -->
+	message_tokens(display_current_goal(Goal)) -->
 		['    Current goal: ~k'-[Goal], nl].
 
-	logtalk::message_tokens(write_current_goal(Goal,MaxDepth), debugger) -->
+	message_tokens(write_current_goal(Goal,MaxDepth)) -->
 		{ground_term_copy(Goal, GroundGoal)},
 		['    Current goal: '-[], term(GroundGoal,[quoted(true),numbervars(true),max_depth(MaxDepth)]), nl].
 
-	logtalk::message_tokens(write_current_goal(Goal), debugger) -->
+	message_tokens(write_current_goal(Goal)) -->
 		{ground_term_copy(Goal, GroundGoal)},
 		['    Current goal: ~q'-[GroundGoal], nl].
 
-	logtalk::message_tokens(write_compiled_goal(Goal,MaxDepth), debugger) -->
+	message_tokens(write_compiled_goal(Goal,MaxDepth)) -->
 		{ground_term_copy(Goal, GroundGoal)},
 		['    Compiled goal: '-[], term(GroundGoal,[quoted(true),numbervars(true),max_depth(MaxDepth)]), nl].
 
-	logtalk::message_tokens(write_compiled_goal(Goal), debugger) -->
+	message_tokens(write_compiled_goal(Goal)) -->
 		{ground_term_copy(Goal, GroundGoal)},
 		['    Compiled goal: ~q'-[GroundGoal], nl].
 
 	% exceptions
 
-	logtalk::message_tokens(write_exception_term(Error,MaxDepth), debugger) -->
+	message_tokens(write_exception_term(Error,MaxDepth)) -->
 		{ground_term_copy(Error, GroundError)},
 		['    Exception term: '-[], term(GroundError,[quoted(true),numbervars(true),max_depth(MaxDepth)]), nl].
 
-	logtalk::message_tokens(write_exception_term(Error), debugger) -->
+	message_tokens(write_exception_term(Error)) -->
 		{ground_term_copy(Error, GroundError)},
 		['    Exception term: ~q'-[GroundError], nl].
 
 	% features
 
-	logtalk::message_tokens(break_not_supported, debugger) -->
+	message_tokens(break_not_supported) -->
 		['    break/0 not supported by the back-end Prolog compiler.'-[], nl].
 
-	logtalk::message_tokens(max_depth_not_supported, debugger) -->
+	message_tokens(max_depth_not_supported) -->
 		['    Limiting write term depth not supported by the back-end Prolog compiler.'-[], nl].
 
 	% help
 
-	logtalk::message_tokens(extended_help, debugger) -->
+	message_tokens(extended_help) -->
 		[
 			'     Available options are:'-[], nl,
 			'       c - creep (go on; you may use also the spacebar, return, or enter keys)'-[], nl,
@@ -292,7 +298,7 @@
 			'       ? - extended help'-[], nl
 		].
 
-	logtalk::message_tokens(condensed_help, debugger) -->
+	message_tokens(condensed_help) -->
 		[
 			'     Available options are:'-[], nl,
 			'       c - creep            i - ignore     * - add context spy point'-[], nl,
@@ -313,7 +319,7 @@
 
 	% ports
 
-	logtalk::message_tokens(leashed_ports(Ports), debugger) -->
+	message_tokens(leashed_ports(Ports)) -->
 		['    Leashed ports:'-[]],
 		(	{Ports == []} ->
 			[' (none)'-[]]

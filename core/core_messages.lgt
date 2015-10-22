@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Paulo Moura',
-		date is 2015/05/03,
+		date is 2015/10/22,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -32,39 +32,45 @@
 	:- multifile(logtalk::message_prefix_stream/4).
 	:- dynamic(logtalk::message_prefix_stream/4).
 
+	logtalk::message_prefix_stream(Kind, core, Prefix, Stream) :-
+		message_prefix_stream(Kind, Prefix, Stream).
+
 	% Quintus Prolog based prefixes (also used in SICStus Prolog):
-	logtalk::message_prefix_stream(banner, core, '', user_output).
-	logtalk::message_prefix_stream(help, _, '', user_output).
-	logtalk::message_prefix_stream(information, core, '', user_output).
-	logtalk::message_prefix_stream(information(_), core, '', user_output).
-	logtalk::message_prefix_stream(comment, core, '% ', user_output).
-	logtalk::message_prefix_stream(comment(_), core, '% ', user_output).
-	logtalk::message_prefix_stream(warning, core, '*     ', user_error).
-	logtalk::message_prefix_stream(warning(_), core, '*     ', user_error).
-	logtalk::message_prefix_stream(error, core, '!     ', user_error).
-	logtalk::message_prefix_stream(error(_), core, '!     ', user_error).
+	message_prefix_stream(banner,         '',       user_output).
+	message_prefix_stream(help,           '',       user_output).
+	message_prefix_stream(information,    '',       user_output).
+	message_prefix_stream(information(_), '',       user_output).
+	message_prefix_stream(comment,        '% ',     user_output).
+	message_prefix_stream(comment(_),     '% ',     user_output).
+	message_prefix_stream(warning,        '*     ', user_error).
+	message_prefix_stream(warning(_),     '*     ', user_error).
+	message_prefix_stream(error,          '!     ', user_error).
+	message_prefix_stream(error(_),       '!     ', user_error).
 
 	:- multifile(logtalk::message_tokens//2).
 	:- dynamic(logtalk::message_tokens//2).
 
+	logtalk::message_tokens(Message, core) -->
+		message_tokens(Message).
+
 	% file compilation and loading messages
 
-	logtalk::message_tokens(loading_file(File, _Flags), core) -->
+	message_tokens(loading_file(File, _Flags)) -->
 		['[ loading ~w ...  ]'-[File], nl].
 
-	logtalk::message_tokens(loaded_file(File, _Flags), core) -->
+	message_tokens(loaded_file(File, _Flags)) -->
 		['[ ~w loaded ]'-[File], nl].
 
-	logtalk::message_tokens(skipping_reloading_file(File, _Flags), core) -->
+	message_tokens(skipping_reloading_file(File, _Flags)) -->
 		['[ ~w already loaded; skipping ]'-[File], nl].
 
-	logtalk::message_tokens(reloading_file(File, _Flags), core) -->
+	message_tokens(reloading_file(File, _Flags)) -->
 		['[ reloading ~w ... ]'-[File], nl].
 
-	logtalk::message_tokens(reloaded_file(File, _Flags), core) -->
+	message_tokens(reloaded_file(File, _Flags)) -->
 		['[ ~w reloaded ]'-[File], nl].
 
-	logtalk::message_tokens(compiling_file(File, _Flags), core) -->
+	message_tokens(compiling_file(File, _Flags)) -->
 		['[ compiling ~w'-[File]],
 		(	{current_logtalk_flag(debug, on)} ->
 			(	{current_logtalk_flag(hook, Hook)} ->
@@ -77,62 +83,62 @@
 			)
 		).
 
-	logtalk::message_tokens(compiled_file(File, _Flags), core) -->
+	message_tokens(compiled_file(File, _Flags)) -->
 		['[ ~w compiled ]'-[File], nl].
 
-	logtalk::message_tokens(up_to_date_file(File, _Flags), core) -->
+	message_tokens(up_to_date_file(File, _Flags)) -->
 		['[ compiling ~w ... up-to-date ]'-[File], nl].
 
 	% entity compilation messages
 
-	logtalk::message_tokens(compiling_entity(Type, Entity), core) -->
+	message_tokens(compiling_entity(Type, Entity)) -->
 		{ground_term_copy(Entity, GroundEntity)},
 		(	{current_logtalk_flag(debug, on)} ->
 			['- compiling ~w ~q in debug mode ... '-[Type, GroundEntity], nl]
 		;	['- compiling ~w ~q ... '-[Type, GroundEntity], nl]
 		).
-	logtalk::message_tokens(compiled_entity(_Type, _Entity), core) -->
+	message_tokens(compiled_entity(_Type, _Entity)) -->
 		['compiled'-[], nl].
 
-	logtalk::message_tokens(redefining_entity(Type, Entity), core) -->
+	message_tokens(redefining_entity(Type, Entity)) -->
 		{ground_term_copy(Entity, GroundEntity)},
 		['Redefining ~w ~q'-[Type, GroundEntity], nl].
 
-	logtalk::message_tokens(redefining_entity_from_file(File, Lines, Type, Entity, OldFile), core) -->
+	message_tokens(redefining_entity_from_file(File, Lines, Type, Entity, OldFile)) -->
 		{ground_term_copy(Entity, GroundEntity)},
 		['Redefining ~w ~q (loaded from file ~w)'-[Type, GroundEntity, OldFile], nl],
 		message_context(File, Lines).
 
 	% make messages
 
-	logtalk::message_tokens(no_make_target_specified, core) -->
+	message_tokens(no_make_target_specified) -->
 		['No make target specified'-[], nl].
 
-	logtalk::message_tokens(invalid_make_target(Target), core) -->
+	message_tokens(invalid_make_target(Target)) -->
 		['Invalid make target: ~w'-[Target], nl].
 
-	logtalk::message_tokens(modified_files_reloaded, core) -->
+	message_tokens(modified_files_reloaded) -->
 		['Reloaded all modified Logtalk source files'-[], nl].
 
-	logtalk::message_tokens(intermediate_files_deleted, core) -->
+	message_tokens(intermediate_files_deleted) -->
 		['Deleted all intermediate files for the loaded Logtalk source files'-[], nl].
 
 	% startup messages
 
-	logtalk::message_tokens(possibly_incompatible_prolog_version(Current, Compatible), core) -->
+	message_tokens(possibly_incompatible_prolog_version(Current, Compatible)) -->
 		['Possibly incompatible backend Prolog compiler version detected!'-[], nl,
 		 'Running Prolog compiler version: ~w'-[Current], nl,
 		 'Advised Prolog compiler version: ~w'-[Compatible], nl
 		].
 
-	logtalk::message_tokens(banner, core) -->
+	message_tokens(banner) -->
 		{current_logtalk_flag(version_data, logtalk(Major, Minor, Patch, Status))},
 		(	{Status == stable} ->
 			[nl, 'Logtalk ~d.~d.~d'-[Major, Minor, Patch], nl, 'Copyright (c) 1998-2015 Paulo Moura'-[], nl, nl]
 		;	[nl, 'Logtalk ~d.~d.~d-~w'-[Major, Minor, Patch, Status], nl, 'Copyright (c) 1998-2015 Paulo Moura'-[], nl, nl]
 		).
 
-	logtalk::message_tokens(default_flags, core) -->
+	message_tokens(default_flags) -->
 		{current_logtalk_flag(unknown_entities, UnknownEntities),
 		 current_logtalk_flag(unknown_predicates, UnknownPredicates),
 		 current_logtalk_flag(undefined_predicates, UndefinedPredicates),
@@ -186,39 +192,39 @@
 
 	% settings files messages
 
-	logtalk::message_tokens(loaded_settings_file(Path), core) -->
+	message_tokens(loaded_settings_file(Path)) -->
 		['Loaded settings file found on directory ~w'-[Path], nl, nl].
-	logtalk::message_tokens(settings_file_disabled, core) -->
+	message_tokens(settings_file_disabled) -->
 		['Loading of settings file disabled in the backend Prolog compiler adapter file.'-[], nl, nl].
-	logtalk::message_tokens(error_loading_settings_file(Path, Error), core) -->
+	message_tokens(error_loading_settings_file(Path, Error)) -->
 		['Errors found while loading settings file from directory ~w: ~w'-[Path, Error], nl, nl].
-	logtalk::message_tokens(no_settings_file_found(allow), core) -->
+	message_tokens(no_settings_file_found(allow)) -->
 		['No settings file found in the startup or Logtalk user directories.'-[], nl,
 		 'Using default flag values set in the backend Prolog compiler adapter file.'-[], nl, nl
 		].
-	logtalk::message_tokens(no_settings_file_found(restrict), core) -->
+	message_tokens(no_settings_file_found(restrict)) -->
 		['No settings file found in the Logtalk user directory.'-[], nl,
 		 'Using default flag values set in the backend Prolog compiler adapter file.'-[], nl, nl
 		].
 
 	% debugging messages
 
-	logtalk::message_tokens(logtalk_debugger_aborted, core) -->
+	message_tokens(logtalk_debugger_aborted) -->
 		['Debugging session aborted by user. Debugger still on.'-[], nl].
 
-	logtalk::message_tokens(debug_handler_provider_already_exists(File, Lines, Type, Entity, Provider), core) -->
+	message_tokens(debug_handler_provider_already_exists(File, Lines, Type, Entity, Provider)) -->
 		['A definition for the debug handler predicate already exists in: ~q'-[Provider], nl],
 		message_context(File, Lines, Type, Entity).
 
 	% compiler error and warning messages
 
-	logtalk::message_tokens(loading_failure(File), core) -->
+	message_tokens(loading_failure(File)) -->
 		['Unexpected failure while loading the code generated for the file:'-[], nl,
 		 '  ~w'-[File], nl,
 		 'Likely bug in the backend Prolog compiler. Please file a bug report.'-[], nl
 		].
 
-	logtalk::message_tokens(loading_error(File, Error), core) -->
+	message_tokens(loading_error(File, Error)) -->
 		['Unexpected error while loading the code generated for the file:'-[], nl,
 		 '  ~w'-[File], nl,
 		 '  '-[]
@@ -227,90 +233,90 @@
 		['Likely bug in the backend Prolog compiler. Please file a bug report.'-[], nl
 		].
 
-	logtalk::message_tokens(compiler_error(File, Lines, Error), core) -->
+	message_tokens(compiler_error(File, Lines, Error)) -->
 		error_term_tokens(Error),
 		message_context(File, Lines).
 
-	logtalk::message_tokens(compiler_stream_error(Error), core) -->
+	message_tokens(compiler_stream_error(Error)) -->
 		error_term_tokens(Error).
 
-	logtalk::message_tokens(term_expansion_error(File, Lines, Type, Entity, HookEntity, Term, Error), core) -->
+	message_tokens(term_expansion_error(File, Lines, Type, Entity, HookEntity, Term, Error)) -->
 		['Error found when term-expanding ~w using hook entity ~w: '-[Term, HookEntity]],
 		error_term_tokens(Error),
 		message_context(File, Lines, Type, Entity).
 
-	logtalk::message_tokens(term_expansion_error(File, Lines, HookEntity, Term, Error), core) -->
+	message_tokens(term_expansion_error(File, Lines, HookEntity, Term, Error)) -->
 		['Error found when term-expanding ~w using hook entity ~w: '-[Term, HookEntity]],
 		error_term_tokens(Error),
 		message_context(File, Lines).
 
-	logtalk::message_tokens(goal_expansion_error(File, Lines, Type, Entity, HookEntity, Goal, Error), core) -->
+	message_tokens(goal_expansion_error(File, Lines, Type, Entity, HookEntity, Goal, Error)) -->
 		['Error found when goal-expanding ~w using hook entity ~w: '-[Goal, HookEntity]],
 		error_term_tokens(Error),
 		message_context(File, Lines, Type, Entity).
 
-	logtalk::message_tokens(goal_expansion_error(File, Lines, HookEntity, Goal, Error), core) -->
+	message_tokens(goal_expansion_error(File, Lines, HookEntity, Goal, Error)) -->
 		['Error found when goal-expanding ~w using hook entity ~w: '-[Goal, HookEntity]],
 		error_term_tokens(Error),
 		message_context(File, Lines).
 
-	logtalk::message_tokens(redefined_logtalk_built_in_predicate(File, Lines, Type, Entity, Predicate), core) -->
+	message_tokens(redefined_logtalk_built_in_predicate(File, Lines, Type, Entity, Predicate)) -->
 		['Redefining a Logtalk built-in predicate: ~q'-[Predicate], nl],
 		message_context(File, Lines, Type, Entity).
 
-	logtalk::message_tokens(redefined_prolog_built_in_predicate(File, Lines, Type, Entity, Predicate), core) -->
+	message_tokens(redefined_prolog_built_in_predicate(File, Lines, Type, Entity, Predicate)) -->
 		['Redefining a Prolog built-in predicate: ~q'-[Predicate], nl],
 		message_context(File, Lines, Type, Entity).
 
-	logtalk::message_tokens(reference_to_unknown_object(File, Lines, Type, Entity, Object), core) -->
+	message_tokens(reference_to_unknown_object(File, Lines, Type, Entity, Object)) -->
 		['Reference to unknown object: ~q'-[Object], nl],
 		message_context(File, Lines, Type, Entity).
 
-	logtalk::message_tokens(reference_to_unknown_protocol(File, Lines, Type, Entity, Protocol), core) -->
+	message_tokens(reference_to_unknown_protocol(File, Lines, Type, Entity, Protocol)) -->
 		['Reference to unknown protocol: ~q'-[Protocol], nl],
 		message_context(File, Lines, Type, Entity).
 
-	logtalk::message_tokens(reference_to_unknown_category(File, Lines, Type, Entity, Category), core) -->
+	message_tokens(reference_to_unknown_category(File, Lines, Type, Entity, Category)) -->
 		['Reference to unknown category: ~q'-[Category], nl],
 		message_context(File, Lines, Type, Entity).
 
-	logtalk::message_tokens(reference_to_unknown_module(File, Lines, Type, Entity, Module), core) -->
+	message_tokens(reference_to_unknown_module(File, Lines, Type, Entity, Module)) -->
 		['Reference to unknown module: ~q'-[Module], nl],
 		message_context(File, Lines, Type, Entity).
 
-	logtalk::message_tokens(missing_predicate_directive(File, Lines, Type, Entity, Directive, Predicate), core) -->
+	message_tokens(missing_predicate_directive(File, Lines, Type, Entity, Directive, Predicate)) -->
 		['Missing ~w directive for the predicate: ~q'-[Directive, Predicate], nl],
 		message_context(File, Lines, Type, Entity).
 
-	logtalk::message_tokens(non_standard_predicate_call(File, Lines, Type, Entity, Predicate), core) -->
+	message_tokens(non_standard_predicate_call(File, Lines, Type, Entity, Predicate)) -->
 		['Call to non-standard Prolog built-in predicate: ~q'-[Predicate], nl],
 		message_context(File, Lines, Type, Entity).
 
-	logtalk::message_tokens(non_standard_arithmetic_function_call(File, Lines, Type, Entity, Function), core) -->
+	message_tokens(non_standard_arithmetic_function_call(File, Lines, Type, Entity, Function)) -->
 		['Call to non-standard Prolog built-in arithmetic function: ~q'-[Function], nl],
 		message_context(File, Lines, Type, Entity).
 
-	logtalk::message_tokens(non_standard_prolog_flag(File, Lines, Type, Entity, Flag), core) -->
+	message_tokens(non_standard_prolog_flag(File, Lines, Type, Entity, Flag)) -->
 		['Use of non-standard Prolog flag: ~q'-[Flag], nl],
 		message_context(File, Lines, Type, Entity).
 
-	logtalk::message_tokens(non_standard_prolog_flag(File, Lines, Flag), core) -->
+	message_tokens(non_standard_prolog_flag(File, Lines, Flag)) -->
 		['Use of non-standard Prolog flag: ~q'-[Flag], nl],
 		message_context(File, Lines).
 
-	logtalk::message_tokens(non_standard_prolog_flag_value(File, Lines, Type, Entity, Flag, Value), core) -->
+	message_tokens(non_standard_prolog_flag_value(File, Lines, Type, Entity, Flag, Value)) -->
 		['Use of non-standard Prolog flag value: ~q:~q'-[Flag, Value], nl],
 		message_context(File, Lines, Type, Entity).
 
-	logtalk::message_tokens(non_standard_prolog_flag_value(File, Lines, Flag, Value), core) -->
+	message_tokens(non_standard_prolog_flag_value(File, Lines, Flag, Value)) -->
 		['Use of non-standard Prolog flag: ~q:~q'-[Flag, Value], nl],
 		message_context(File, Lines).
 
-	logtalk::message_tokens(non_standard_file_directive(File, Lines, Directive), core) -->
+	message_tokens(non_standard_file_directive(File, Lines, Directive)) -->
 		['Use of non-standard file directive: ~q'-[Directive], nl],
 		message_context(File, Lines).
 
-	logtalk::message_tokens(unclassified_variables_in_lambda_expression(File, Lines, Type, Entity, UnqualifiedVars, LambdaExpression), core) -->
+	message_tokens(unclassified_variables_in_lambda_expression(File, Lines, Type, Entity, UnqualifiedVars, LambdaExpression)) -->
 		{ground_term_copy(UnqualifiedVars-LambdaExpression, UnqualifiedVarsCopy-LambdaExpressionCopy)},
 		(	{UnqualifiedVarsCopy = [UnqualifiedVarCopy]} ->
 			['Unclassified variable ~q in lambda expression: ~q'-[UnqualifiedVarCopy, LambdaExpressionCopy], nl]
@@ -318,7 +324,7 @@
 		),
 		message_context(File, Lines, Type, Entity).
 
-	logtalk::message_tokens(variables_with_dual_role_in_lambda_expression(File, Lines, Type, Entity, MixedUpVars, LambdaExpression), core) -->
+	message_tokens(variables_with_dual_role_in_lambda_expression(File, Lines, Type, Entity, MixedUpVars, LambdaExpression)) -->
 		{ground_term_copy(MixedUpVars-LambdaExpression, MixedUpVarsCopy-LambdaExpressionCopy)},
 		(	{MixedUpVarsCopy = [MixedUpVarCopy]} ->
 			['Variable ~q have dual role in lambda expression: ~q'-[MixedUpVarCopy, LambdaExpressionCopy], nl]
@@ -326,56 +332,56 @@
 		),
 		message_context(File, Lines, Type, Entity).
 
-	logtalk::message_tokens(complementing_category_ignored(File, Lines, Category, Object), core) -->
+	message_tokens(complementing_category_ignored(File, Lines, Category, Object)) -->
 		['Complementing category will be ignored: ~q'-[Category], nl,
 		 'Complemented object, ~q, compiled with complementing categories support turned off'-[Object], nl],
 		message_context(File, Lines).
 
-	logtalk::message_tokens(prolog_dialect_goal_expansion(File, Lines, Type, Entity, Goal, ExpandedGoal), core) -->
+	message_tokens(prolog_dialect_goal_expansion(File, Lines, Type, Entity, Goal, ExpandedGoal)) -->
 		['Prolog dialect rewrite of goal ~q as ~q'-[Goal, ExpandedGoal], nl],
 		message_context(File, Lines, Type, Entity).
 
-	logtalk::message_tokens(prolog_dialect_goal_expansion(File, Lines, Goal, ExpandedGoal), core) -->
+	message_tokens(prolog_dialect_goal_expansion(File, Lines, Goal, ExpandedGoal)) -->
 		['Prolog dialect rewrite of goal ~q as ~q'-[Goal, ExpandedGoal], nl],
 		message_context(File, Lines).
 
-	logtalk::message_tokens(prolog_dialect_term_expansion(File, Lines, Type, Entity, Term, ExpandedTerms), core) -->
+	message_tokens(prolog_dialect_term_expansion(File, Lines, Type, Entity, Term, ExpandedTerms)) -->
 		['Prolog dialect rewrite of term ~q as ~q'-[Term, ExpandedTerms], nl],
 		message_context(File, Lines, Type, Entity).
 
-	logtalk::message_tokens(prolog_dialect_term_expansion(File, Lines, Term, ExpandedTerms), core) -->
+	message_tokens(prolog_dialect_term_expansion(File, Lines, Term, ExpandedTerms)) -->
 		['Prolog dialect rewrite of term ~q as ~q'-[Term, ExpandedTerms], nl],
 		message_context(File, Lines).
 
-	logtalk::message_tokens(declared_static_predicate_called_but_not_defined(File, Lines, Type, Entity, Predicate), core) -->
+	message_tokens(declared_static_predicate_called_but_not_defined(File, Lines, Type, Entity, Predicate)) -->
 		['Declared static predicate called but not defined: ~q'-[Predicate], nl],
 		message_context(File, Lines, Type, Entity).
 
-	logtalk::message_tokens(declared_static_non_terminal_called_but_not_defined(File, Lines, Type, Entity, NonTerminal), core) -->
+	message_tokens(declared_static_non_terminal_called_but_not_defined(File, Lines, Type, Entity, NonTerminal)) -->
 		['Declared static non terminal called but not defined: ~q'-[NonTerminal], nl],
 		message_context(File, Lines, Type, Entity).
 
-	logtalk::message_tokens(unknown_predicate_called_but_not_defined(File, Lines, Type, Entity, Predicate), core) -->
+	message_tokens(unknown_predicate_called_but_not_defined(File, Lines, Type, Entity, Predicate)) -->
 		['Unknown predicate called but not defined: ~q'-[Predicate], nl],
 		message_context(File, Lines, Type, Entity).
 
-	logtalk::message_tokens(unknown_non_terminal_called_but_not_defined(File, Lines, Type, Entity, NonTerminal), core) -->
+	message_tokens(unknown_non_terminal_called_but_not_defined(File, Lines, Type, Entity, NonTerminal)) -->
 		['Unknown non-terminal called but not defined: ~q'-[NonTerminal], nl],
 		message_context(File, Lines, Type, Entity).
 
-	logtalk::message_tokens(missing_reference_to_built_in_protocol(File, Type, Entity, Protocol), core) -->
+	message_tokens(missing_reference_to_built_in_protocol(File, Type, Entity, Protocol)) -->
 		['Missing reference to the built-in protocol: ~q'-[Protocol], nl],
 		message_context(File, Type, Entity).
 
-	logtalk::message_tokens(compiling_proprietary_prolog_directive(File, Lines, Type, Entity, Directive), core) -->
+	message_tokens(compiling_proprietary_prolog_directive(File, Lines, Type, Entity, Directive)) -->
 		['Compiling proprietary Prolog directive: ~q'-[Directive], nl],
 		message_context(File, Lines, Type, Entity).
 
-	logtalk::message_tokens(compiling_query_as_initialization_goal(File, Lines, Type, Entity, Directive), core) -->
+	message_tokens(compiling_query_as_initialization_goal(File, Lines, Type, Entity, Directive)) -->
 		['Compiling query as an initialization goal: ~q'-[Directive], nl],
 		message_context(File, Lines, Type, Entity).
 
-	logtalk::message_tokens(singleton_variables(File, Lines, Type, Entity, Names, Term), core) -->
+	message_tokens(singleton_variables(File, Lines, Type, Entity, Names, Term)) -->
 		(	{Names = [Name]} ->
 			['Singleton variable: ~w'-[Name], nl]
 		;	['Singleton variables: ~w'-[Names], nl]
@@ -383,7 +389,7 @@
 		term_type_tokens(Term),
 		message_context(File, Lines, Type, Entity).
 
-	logtalk::message_tokens(singleton_variables(File, Lines, Names, Term), core) -->
+	message_tokens(singleton_variables(File, Lines, Names, Term)) -->
 		(	{Names = [Name]} ->
 			['Singleton variable: ~w'-[Name], nl]
 		;	['Singleton variables: ~w'-[Names], nl]
@@ -391,7 +397,7 @@
 		term_type_tokens(Term),
 		message_context(File, Lines).
 
-	logtalk::message_tokens(compilation_and_loading_warnings(CCounter, LCounter), core) -->
+	message_tokens(compilation_and_loading_warnings(CCounter, LCounter)) -->
 		(	{CCounter + LCounter =:= 0} ->
 			% no warnings
 			['(0 warnings)'-[], nl]
@@ -405,27 +411,27 @@
 			loading_warnings(LCounter), [' and '-[]], compilation_warnings(CCounter), [nl]
 		).
 
-	logtalk::message_tokens(renamed_compiler_flag(File, Lines, Type, Entity, Flag, NewFlag), core) -->
+	message_tokens(renamed_compiler_flag(File, Lines, Type, Entity, Flag, NewFlag)) -->
 		['The compiler flag ~w have been renamed to ~w'-[Flag, NewFlag], nl],
 		message_context(File, Lines, Type, Entity).
 
-	logtalk::message_tokens(renamed_compiler_flag(File, Lines, Flag, NewFlag), core) -->
+	message_tokens(renamed_compiler_flag(File, Lines, Flag, NewFlag)) -->
 		['The compiler flag ~w have been renamed to ~w'-[Flag, NewFlag], nl],
 		message_context(File, Lines).
 
-	logtalk::message_tokens(deprecated_control_construct(File, Lines, Type, Entity, Term), core) -->
+	message_tokens(deprecated_control_construct(File, Lines, Type, Entity, Term)) -->
 		['The ~w control construct is deprecated'-[Term], nl],
 		message_context(File, Lines, Type, Entity).
 
-	logtalk::message_tokens(deprecated_directive(File, Lines, Type, Entity, Directive), core) -->
+	message_tokens(deprecated_directive(File, Lines, Type, Entity, Directive)) -->
 		['The ~w directive is deprecated'-[Directive], nl],
 		message_context(File, Lines, Type, Entity).
 
-	logtalk::message_tokens(ignored_directive(File, Lines, Directive), core) -->
+	message_tokens(ignored_directive(File, Lines, Directive)) -->
 		['The ~w directive is ignored'-[Directive], nl],
 		message_context(File, Lines).
 
-	logtalk::message_tokens(misplaced_encoding_directive(File, Lines), core) -->
+	message_tokens(misplaced_encoding_directive(File, Lines)) -->
 		['The encoding/1 directive is misplaced'-[], nl],
 		message_context(File, Lines).
 

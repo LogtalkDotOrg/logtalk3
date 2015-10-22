@@ -21,9 +21,9 @@
 :- category(assertions_messages).
 
 	:- info([
-		version is 2.0,
+		version is 2.1,
 		author is 'Paulo Moura',
-		date is 2014/10/01,
+		date is 2014/10/22,
 		comment is 'Assertions framework default message translations.'
 	]).
 
@@ -36,28 +36,34 @@
 	:- multifile(logtalk::message_prefix_stream/4).
 	:- dynamic(logtalk::message_prefix_stream/4).
 
+	logtalk::message_prefix_stream(Kind, assertions, Prefix, Stream) :-
+		message_prefix_stream(Kind, Prefix, Stream).
+
 	% Quintus Prolog based prefixes (also used in e.g. SICStus Prolog):
-	logtalk::message_prefix_stream(information, assertions, '% ', user_output).
-	logtalk::message_prefix_stream(warning, assertions, '*     ', user_output).
-	logtalk::message_prefix_stream(error, assertions,   '!     ', user_output).
+	message_prefix_stream(information, '% ',     user_output).
+	message_prefix_stream(warning,     '*     ', user_output).
+	message_prefix_stream(error,       '!     ', user_output).
 
 	:- multifile(logtalk::message_tokens//2).
 	:- dynamic(logtalk::message_tokens//2).
 
+	logtalk::message_tokens(Message, assertions) -->
+		message_tokens(Message).
+
 	% assertion/1 messages
-	logtalk::message_tokens(assertion_success(Goal), assertions) -->
+	message_tokens(assertion_success(Goal)) -->
 		['assertion goal success: ~w'-[Goal], nl].
-	logtalk::message_tokens(assertion_failure(Goal), assertions) -->
+	message_tokens(assertion_failure(Goal)) -->
 		['assertion goal failure: ~w'-[Goal], nl].
-	logtalk::message_tokens(assertion_error(Goal, Error), assertions) -->
+	message_tokens(assertion_error(Goal, Error)) -->
 		['assertion goal error: ~w - ~w'-[Goal, Error], nl].
 
 	% assertion/2 messages
-	logtalk::message_tokens(assertion_success(Context, Goal), assertions) -->
+	message_tokens(assertion_success(Context, Goal)) -->
 		['assertion goal success: ~w in context '-[Goal, Context], nl].
-	logtalk::message_tokens(assertion_failure(Context, Goal), assertions) -->
+	message_tokens(assertion_failure(Context, Goal)) -->
 		['assertion goal failure: ~w in context ~w'-[Goal, Context], nl].
-	logtalk::message_tokens(assertion_error(Context, Goal, Error), assertions) -->
+	message_tokens(assertion_error(Context, Goal, Error)) -->
 		['assertion goal error: ~w - ~w in context ~w'-[Goal, Error, Context], nl].
 
 :- end_category.

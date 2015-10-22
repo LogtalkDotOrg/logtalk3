@@ -22,9 +22,9 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Paulo Moura',
-		date is 2015/10/17,
+		date is 2015/10/22,
 		comment is 'Simple tool for helping porting plain Prolog code.'
 	]).
 
@@ -356,34 +356,40 @@
 	:- multifile(logtalk::message_prefix_stream/4).
 	:- dynamic(logtalk::message_prefix_stream/4).
 
-	logtalk::message_prefix_stream(information, wrapper, '% ', user_output).
-	logtalk::message_prefix_stream(information(code), wrapper, '', user_output).
-	logtalk::message_prefix_stream(warning, wrapper, '*     ', user_error).
+	logtalk::message_prefix_stream(Kind, wrapper, Prefix, Stream) :-
+		message_prefix_stream(Kind, Prefix, Stream).
+
+	message_prefix_stream(information,       '% ',     user_output).
+	message_prefix_stream(information(code), '',       user_output).
+	message_prefix_stream(warning,           '*     ', user_error).
 
 	% wraper messages
 
 	:- multifile(logtalk::message_tokens//2).
 	:- dynamic(logtalk::message_tokens//2).
 
-	logtalk::message_tokens(file_not_found(File), wrapper) -->
+	logtalk::message_tokens(Message, wrapper) -->
+		message_tokens(Message).
+
+	message_tokens(file_not_found(File)) -->
 		['File not found: ~w'-[File], nl].
 
-	logtalk::message_tokens(advise_for_file(File), wrapper) -->
+	message_tokens(advise_for_file(File)) -->
 		[nl, 'Advise for file: ~w'-[File], nl, nl].
 
-	logtalk::message_tokens(public_directive(Predicates), wrapper) -->
+	message_tokens(public_directive(Predicates)) -->
 		[':- public(~q).'-[Predicates], nl, nl].
 
-	logtalk::message_tokens(add_directives, wrapper) -->
+	message_tokens(add_directives) -->
 		['% Add the following directives:'-[], nl, nl].
 
-	logtalk::message_tokens(replace_directives, wrapper) -->
+	message_tokens(replace_directives) -->
 		['% Replace the following directives:'-[], nl, nl].
 
-	logtalk::message_tokens(add_directive(Directive), wrapper) -->
+	message_tokens(add_directive(Directive)) -->
 		[':- ~q.'-[Directive], nl, nl].
 
-	logtalk::message_tokens(add_directive(Directive, NewDirective), wrapper) -->
+	message_tokens(add_directive(Directive, NewDirective)) -->
 		[	
 			'% before the directive:'-[], nl,
 			'% :- ~q'-[Directive], nl,
@@ -391,7 +397,7 @@
 			':- ~q.'-[NewDirective], nl, nl
 		].
 
-	logtalk::message_tokens(uses_directive(Object, Predicates), wrapper) -->
+	message_tokens(uses_directive(Object, Predicates)) -->
 		[':- uses(~q, ~q).'-[Object, Predicates], nl, nl].
 
 	directives_tokens([]) -->

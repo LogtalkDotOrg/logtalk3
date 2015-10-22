@@ -21,9 +21,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2015/10/10,
+		date is 2015/10/22,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -36,32 +36,38 @@
 	:- multifile(logtalk::message_prefix_stream/4).
 	:- dynamic(logtalk::message_prefix_stream/4).
 
+	logtalk::message_prefix_stream(Kind, lgtunit, Prefix, Stream) :-
+		message_prefix_stream(Kind, Prefix, Stream).
+
 	% Quintus Prolog based prefixes (also used in SICStus Prolog):
-	logtalk::message_prefix_stream(information, lgtunit, '% ', user_output).
-	logtalk::message_prefix_stream(warning, lgtunit, '*     ', user_output).
-	logtalk::message_prefix_stream(error, lgtunit,   '!     ', user_output).
+	message_prefix_stream(information, '% ',     user_output).
+	message_prefix_stream(warning,     '*     ', user_output).
+	message_prefix_stream(error,       '!     ', user_output).
 
 	:- multifile(logtalk::message_tokens//2).
 	:- dynamic(logtalk::message_tokens//2).
 
+	logtalk::message_tokens(Message, lgtunit) -->
+		message_tokens(Message).
+
 	% messages for tests handling
 
-	logtalk::message_tokens(tests_start_date_time(Year, Month, Day, Hours, Minutes, Seconds), lgtunit) -->
+	message_tokens(tests_start_date_time(Year, Month, Day, Hours, Minutes, Seconds)) -->
 		[nl, 'tests started at ~w/~w/~w, ~w:~w:~w'-[Year, Month, Day, Hours, Minutes, Seconds], nl].
 
-	logtalk::message_tokens(tests_end_date_time(Year, Month, Day, Hours, Minutes, Seconds), lgtunit) -->
+	message_tokens(tests_end_date_time(Year, Month, Day, Hours, Minutes, Seconds)) -->
 		['tests ended at ~w/~w/~w, ~w:~w:~w'-[Year, Month, Day, Hours, Minutes, Seconds], nl, nl].
 
-	logtalk::message_tokens(running_tests_from_object_file(Object, File), lgtunit) -->
+	message_tokens(running_tests_from_object_file(Object, File)) -->
 		['running tests from object ~q'-[Object], nl, 'file: ~w'-[File], nl].
 
-	logtalk::message_tokens(running_tests_from_object(Object), lgtunit) -->
+	message_tokens(running_tests_from_object(Object)) -->
 		['running tests from object ~q'-[Object], nl].
 
-	logtalk::message_tokens(completed_tests_from_object(Object), lgtunit) -->
+	message_tokens(completed_tests_from_object(Object)) -->
 		['completed tests from object ~q'-[Object], nl].
 
-	logtalk::message_tokens(tests_skipped(_Object, Note), lgtunit) -->
+	message_tokens(tests_skipped(_Object, Note)) -->
 		(	{Note == ''} ->
 			['tests skipped'-[], nl]
 		;	['tests skipped (~w)'-[Note], nl]
@@ -69,19 +75,19 @@
 
 	% messages for test results
 
-	logtalk::message_tokens(tests_results_summary(Total, Skipped, Passed, Failed, Note), lgtunit) -->
+	message_tokens(tests_results_summary(Total, Skipped, Passed, Failed, Note)) -->
 		(	{Note == ''} ->
 			['~d tests: ~d skipped, ~d passed, ~d failed'-[Total, Skipped, Passed, Failed], nl]
 		;	['~d tests: ~d skipped, ~d passed, ~d failed (~w)'-[Total, Skipped, Passed, Failed, Note], nl]
 		).
 
-	logtalk::message_tokens(passed_test(Test, _File, _Position, Note), lgtunit) -->
+	message_tokens(passed_test(Test, _File, _Position, Note)) -->
 		(	{Note == ''} ->
 			['~w: success'-[Test], nl]
 		;	['~w: success (~w)'-[Test, Note], nl]
 		).
 
-	logtalk::message_tokens(failed_test(Test, File, Position, Reason, Note), lgtunit) -->
+	message_tokens(failed_test(Test, File, Position, Reason, Note)) -->
 		(	{Note == ''} ->
 			['~w: failure '-[Test], nl]
 		;	['~w: failure (~w)'-[Test, Note], nl]
@@ -89,45 +95,45 @@
 		failed_test_reason(Reason),
 		['  in file ~w between lines ~w'-[File, Position], nl].
 
-	logtalk::message_tokens(skipped_test(Test, _File, _Position, Note), lgtunit) -->
+	message_tokens(skipped_test(Test, _File, _Position, Note)) -->
 		(	{Note == ''} ->
 			['~w: skipped'-[Test], nl]
 		;	['~w: skipped (~w)'-[Test, Note], nl]
 		).
 
-	logtalk::message_tokens(failed_cleanup(Test, File, Position, Reason), lgtunit) -->
+	message_tokens(failed_cleanup(Test, File, Position, Reason)) -->
 		failed_cleanup_reason(Reason, Test),
 		['  in file ~w between lines ~w'-[File, Position], nl].
 
-	logtalk::message_tokens(broken_step(Step, Object, Error), lgtunit) -->
+	message_tokens(broken_step(Step, Object, Error)) -->
 		['broken ~w goal for test object ~q: ~q'-[Step, Object, Error], nl].
 
-	logtalk::message_tokens(failed_step(Step, Object), lgtunit) -->
+	message_tokens(failed_step(Step, Object)) -->
 		['failed ~w goal for test object ~q'-[Step, Object], nl].
 
 	% messages for test's clause coverage
 
-	logtalk::message_tokens(declared_entities_and_clause_numbers(Entities, Clauses), lgtunit) -->
+	message_tokens(declared_entities_and_clause_numbers(Entities, Clauses)) -->
 		entity_tokens(Entities),
 		[' declared as covered containing '-[]],
 		clause_tokens(Clauses),
 		[nl].
 
-	logtalk::message_tokens(covered_entities_and_clause_numbers(Entities, Clauses), lgtunit) -->
+	message_tokens(covered_entities_and_clause_numbers(Entities, Clauses)) -->
 		entity_tokens(Entities),
 		[' covered containing '-[]],
 		clause_tokens(Clauses),
 		[nl].
 
-	logtalk::message_tokens(covered_clause_numbers(Covered, Total, Percentage), lgtunit) -->
+	message_tokens(covered_clause_numbers(Covered, Total, Percentage)) -->
 		['~d out of '-[Covered]],
 		clause_tokens(Total),
 		[' covered, ~f% coverage'-[Percentage], nl].
 
-	logtalk::message_tokens(code_coverage_header, lgtunit) -->
+	message_tokens(code_coverage_header) -->
 		['clause coverage ratio and covered clauses per entity predicate'-[], nl].
 
-	logtalk::message_tokens(entity_clause_coverage(Entity, Predicate, Ratio, Covered), lgtunit) -->
+	message_tokens(entity_clause_coverage(Entity, Predicate, Ratio, Covered)) -->
 		{numbervars(Entity, 0, _)},
 		(	{Ratio = N/N} ->	
 			['~q: ~q - ~w - ~w'-[Entity, Predicate, Ratio, '(all)'], nl]
@@ -135,15 +141,15 @@
 		;	['~q: ~q - ~w - ~w'-[Entity, Predicate, Ratio, Covered], nl]
 		).
 
-	logtalk::message_tokens(no_code_coverage_information_collected, lgtunit) -->
+	message_tokens(no_code_coverage_information_collected) -->
 		['no code coverage information collected'-[], nl].
 
 	% messages for test identifier errors
 
-	logtalk::message_tokens(non_instantiated_test_identifier, lgtunit) -->
+	message_tokens(non_instantiated_test_identifier) -->
 		['non-instantiated test identifier found'-[], nl].
 
-	logtalk::message_tokens(repeated_test_identifier(Test), lgtunit) -->
+	message_tokens(repeated_test_identifier(Test)) -->
 		['repeated test identifier found: ~w'-[Test], nl].
 
 	% auxiliary grammar rules
