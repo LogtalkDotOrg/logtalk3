@@ -10183,10 +10183,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(abolish(Pred), TCond, DCond, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
+	'$lgt_comp_ctx'(Ctx, CHead, _, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
 	'$lgt_execution_context_this_entity'(ExCtx, This, _),
 	'$lgt_must_be'(var_or_predicate_indicator, Pred),
-	'$lgt_check_dynamic_directive'(Mode, Pred, Lines),
+	'$lgt_check_dynamic_directive'(Mode, Pred, CHead, Lines),
 	(	ground(Pred) ->
 		TCond = '$lgt_abolish_checked'(This, Pred, This, p(_))
 	;	% partially instantiated predicate indicator; runtime check required
@@ -10248,8 +10248,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(asserta(Clause), TCond, DCond, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
-	(	'$lgt_optimizable_local_db_call'(Clause, TClause) ->
+	'$lgt_comp_ctx'(Ctx, CHead, _, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
+	(	'$lgt_optimizable_local_db_call'(CHead, Clause, TClause) ->
 		TCond = asserta(TClause)
 	;	'$lgt_execution_context_this_entity'(ExCtx, This, _),
 		(	'$lgt_runtime_checked_db_clause'(Clause) ->
@@ -10263,7 +10263,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 			;	TCond = '$lgt_asserta_fact_checked'(This, Clause, This, p(_), p)
 			)
 		),
-		'$lgt_check_dynamic_directive'(Mode, Clause, Lines)
+		'$lgt_check_dynamic_directive'(Mode, Clause, CHead, Lines)
 	),
 	DCond = '$lgt_debug'(goal(asserta(Clause), TCond), ExCtx).
 
@@ -10315,8 +10315,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(assertz(Clause), TCond, DCond, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
-	(	'$lgt_optimizable_local_db_call'(Clause, TClause) ->
+	'$lgt_comp_ctx'(Ctx, CHead, _, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
+	(	'$lgt_optimizable_local_db_call'(CHead, Clause, TClause) ->
 		TCond = assertz(TClause)
 	;	'$lgt_execution_context_this_entity'(ExCtx, This, _),
 		(	'$lgt_runtime_checked_db_clause'(Clause) ->
@@ -10330,7 +10330,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 			;	TCond = '$lgt_assertz_fact_checked'(This, Clause, This, p(_), p)
 			)
 		),
-		'$lgt_check_dynamic_directive'(Mode, Clause, Lines)
+		'$lgt_check_dynamic_directive'(Mode, Clause, CHead, Lines)
 	),
 	DCond = '$lgt_debug'(goal(assertz(Clause), TCond), ExCtx).
 
@@ -10362,8 +10362,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(clause(Head, Body), TCond, DCond, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
-	(	'$lgt_optimizable_local_db_call'(Head, THead) ->
+	'$lgt_comp_ctx'(Ctx, CHead, _, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
+	(	'$lgt_optimizable_local_db_call'(CHead, Head, THead) ->
 		'$lgt_must_be'(var_or_callable, Body),
 		TCond = (clause(THead, TBody), (TBody = ('$lgt_nop'(Body), _) -> true; TBody = Body))
 	;	'$lgt_execution_context_this_entity'(ExCtx, This, _),
@@ -10372,7 +10372,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		;	'$lgt_must_be'(clause_or_partial_clause, (Head :- Body)),
 			TCond = '$lgt_clause_checked'(This, Head, Body, This, p(_))
 		),
-		'$lgt_check_dynamic_directive'(Mode, Head, Lines)
+		'$lgt_check_dynamic_directive'(Mode, Head, CHead, Lines)
 	),
 	DCond = '$lgt_debug'(goal(clause(Head, Body), TCond), ExCtx).
 
@@ -10424,8 +10424,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(retract(Clause), TCond, DCond, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
-	(	'$lgt_optimizable_local_db_call'(Clause, TClause) ->
+	'$lgt_comp_ctx'(Ctx, CHead, _, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
+	(	'$lgt_optimizable_local_db_call'(CHead, Clause, TClause) ->
 		TCond = retract(TClause)
 	;	'$lgt_execution_context_this_entity'(ExCtx, This, _),
 		(	'$lgt_runtime_checked_db_clause'(Clause) ->
@@ -10441,7 +10441,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 			;	TCond = '$lgt_retract_fact_checked'(This, Clause, This, p(_))
 			)
 		),
-		'$lgt_check_dynamic_directive'(Mode, Clause, Lines)
+		'$lgt_check_dynamic_directive'(Mode, Clause, CHead, Lines)
 	),
 	DCond = '$lgt_debug'(goal(retract(Clause), TCond), ExCtx).
 
@@ -10474,8 +10474,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(retractall(Head), TCond, DCond, Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
-	(	'$lgt_optimizable_local_db_call'(Head, THead) ->
+	'$lgt_comp_ctx'(Ctx, CHead, _, _, This, _, _, _, _, ExCtx, Mode, _, Lines),
+	(	'$lgt_optimizable_local_db_call'(CHead, Head, THead) ->
 		TCond = retractall(THead)
 	;	'$lgt_execution_context_this_entity'(ExCtx, This, _),
 		(	var(Head) ->
@@ -10483,7 +10483,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		;	'$lgt_must_be'(callable, Head),
 			TCond = '$lgt_retractall_checked'(This, Head, This, p(_))
 		),
-		'$lgt_check_dynamic_directive'(Mode, Head, Lines)
+		'$lgt_check_dynamic_directive'(Mode, Head, CHead, Lines)
 	),
 	DCond = '$lgt_debug'(goal(retractall(Head), TCond), ExCtx).
 
@@ -11655,16 +11655,21 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_check_dynamic_directive'(@term, @term, @compilation_context)
+% '$lgt_check_dynamic_directive'(@nonvar, @term, @callable, @pair(integer))
 %
 % checks for a dynamic/1 directive for a predicate that is an argument to the
 % database built-in methods; the predicate may be non-instantiated or only
 % partially instantiated but must be valid
 
-'$lgt_check_dynamic_directive'(runtime, _, _).
+'$lgt_check_dynamic_directive'(runtime, _, _, _).
 
-'$lgt_check_dynamic_directive'(compile(_), Term, Lines) :-
-	'$lgt_check_dynamic_directive'(Term, Lines).
+'$lgt_check_dynamic_directive'(compile(_), Term, Head, Lines) :-
+	(	Head = _::_ ->
+		true
+	;	Head = ':'(_, _) ->
+		true
+	;	'$lgt_check_dynamic_directive'(Term, Lines)
+	).
 
 
 '$lgt_check_dynamic_directive'(Term, _) :-
@@ -11716,12 +11721,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_optimizable_local_db_call'(@term, -callable)
+% '$lgt_optimizable_local_db_call'(@callable, @term, -callable)
 %
 % checks if a call to a database built-in method can be optimized by direct
 % translation to a call to the corresponding Prolog built-in predicate
+%
+% database calls made from multifile clauses act on the entity holding the
+% primary multifile declaration
 
-'$lgt_optimizable_local_db_call'(Pred, TPred) :-
+'$lgt_optimizable_local_db_call'(CHead, Pred, TPred) :-
+	% only for non-multifile clauses
+	CHead \= _::_,
+	CHead \= ':'(_, _),
 	nonvar(Pred),
 	% only for objects
 	'$lgt_pp_entity_'(object, _, Prefix, _, _),

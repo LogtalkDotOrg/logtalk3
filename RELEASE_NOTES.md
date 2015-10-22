@@ -36,6 +36,9 @@ reaching a fixed point as documented.
 * FIXED: Cases where the `expand_goal/2` built-in method would not stop when
 reaching a fixed point as documented.
 
+* FIXED: Misleading warnings about missing `dynamic/1` directives when calling
+database methods from clauses for multifile predicates.
+
 Tools
 -----
 
