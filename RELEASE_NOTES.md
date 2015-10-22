@@ -39,6 +39,11 @@ reaching a fixed point as documented.
 * FIXED: Misleading warnings about missing `dynamic/1` directives when calling
 database methods from clauses for multifile predicates.
 
+Documentation
+-------------
+
+ADDED: Documentation on multifile predicate definition caveats.
+
 Tools
 -----
 
