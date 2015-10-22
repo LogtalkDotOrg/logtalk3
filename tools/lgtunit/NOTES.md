@@ -314,8 +314,13 @@ writing unit tests that require float comparison or goal benchmarking:
 - `benchmark(Goal, Time)`
 - `benchmark(Goal, Repetitions, Time)`
 
-Consult the `lgtunit` object documentation (`docs/tools.html`) for details
-on these predicates.
+As the `benchmark/2-3` predicates are meta-predicates, turning on the
+`optimize` compiler flag is advised to avoid runtime compilation of the
+meta-argument, which would add an overhead to the timing results.
+
+Consult the `lgtunit` object documentation (`docs/tools.html`) for further
+details on these predicates.
+
 
 Known issues
 ------------
