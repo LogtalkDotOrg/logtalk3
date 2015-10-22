@@ -960,22 +960,22 @@
 		os::cpu_time(Time1),
 		Time is Time1 - Time0.
 
-	benchmark(Goal, Repetitons, Time) :-
+	benchmark(Goal, Repetitions, Time) :-
 		os::cpu_time(Time0),
-		empty_loop(Repetitons),
+		empty_loop(Repetitions),
 		os::cpu_time(Time1),
-		goal_loop(Goal, Repetitons),
+		goal_loop(Goal, Repetitions),
 		os::cpu_time(Time2),
 		Time is Time2 - 2*Time1 + Time0.
 
-	empty_loop(Repetitons) :-
-		repeat(Repetitons),
+	empty_loop(Repetitions) :-
+		repeat(Repetitions),
 		once(true),
 		fail.
 	empty_loop(_).
 
-	goal_loop(Goal, Repetitons) :-
-		repeat(Repetitons),
+	goal_loop(Goal, Repetitions) :-
+		repeat(Repetitions),
 		once(Goal),
 		fail.
 	goal_loop(_, _).

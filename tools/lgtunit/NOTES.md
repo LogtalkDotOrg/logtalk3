@@ -130,8 +130,8 @@ The currently supported options are (non-recognized options are ignored):
 	setup goal for the test (default goal is `true`)
 - `cleanup(Goal)`  
 	cleanup goal for the test (default goal is `true`)
-- `note(Atom)`  
-	text note to print (between parenthesis) after the test result (default is `''`)
+- `note(Term)`  
+	annotation to print (between parenthesis by default) after the test result (default is `''`); the annotation term can share variables with the test goal, which can be used to pass additional information about the test result
 
 In all dialects, `Test` is an atom, uniquely identifying a test. An error
 message is printed if duplicated identifiers are found. These errors must
