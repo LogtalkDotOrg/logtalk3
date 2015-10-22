@@ -12625,7 +12625,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % wraps write/1 call with the necessary operator settings
 
-'$lgt_iso_write'(Term, Operators):-
+'$lgt_iso_write'(Term, Operators) :-
 	catch(
 		('$lgt_save_operators'(Operators, Saved),
 		 '$lgt_add_operators'(Operators),
