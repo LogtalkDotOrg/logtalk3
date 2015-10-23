@@ -10072,9 +10072,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_must_be'(var_or_operator_priority, Priority),
 	'$lgt_must_be'(var_or_operator_specifier, Specifier),
 	'$lgt_must_be'(var_or_atom, Operator),
-	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
-	'$lgt_execution_context_this_entity'(ExCtx, This, _),
-	TPred = '$lgt_current_op'(This, Priority, Specifier, Operator, This, p(_)),
+	'$lgt_comp_ctx'(Ctx, _, Entity, _, This, _, _, _, _, ExCtx, _, _, _),
+	'$lgt_db_call_database_execution_context'(Entity, This, Database, ExCtx),
+	TPred = '$lgt_current_op'(Database, Priority, Specifier, Operator, Database, p(_)),
 	DPred = '$lgt_debug'(goal(current_op(Priority, Specifier, Operator), TPred), ExCtx).
 
 '$lgt_compile_body'(current_predicate(Term), TPred, DPred, Ctx) :-
@@ -10109,9 +10109,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(current_predicate(Pred), TPred, DPred, Ctx) :-
 	!,
 	'$lgt_must_be'(var_or_predicate_indicator, Pred),
-	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
-	'$lgt_execution_context_this_entity'(ExCtx, This, _),
-	TPred = '$lgt_current_predicate'(This, Pred, This, p(_)),
+	'$lgt_comp_ctx'(Ctx, _, Entity, _, This, _, _, _, _, ExCtx, _, _, _),
+	'$lgt_db_call_database_execution_context'(Entity, This, Database, ExCtx),
+	TPred = '$lgt_current_predicate'(Database, Pred, Database, p(_)),
 	DPred = '$lgt_debug'(goal(current_predicate(Pred), TPred), ExCtx).
 
 '$lgt_compile_body'(predicate_property(Term, Prop), TPred, DPred, Ctx) :-
@@ -10144,9 +10144,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_must_be'(var_or_callable, Pred),
 	'$lgt_must_be'(var_or_predicate_property, Prop),
-	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
-	'$lgt_execution_context_this_entity'(ExCtx, This, _),
-	TPred = '$lgt_predicate_property'(This, Pred, Prop, This, p(_)),
+	'$lgt_comp_ctx'(Ctx, _, Entity, _, This, _, _, _, _, ExCtx, _, _, _),
+	'$lgt_db_call_database_execution_context'(Entity, This, Database, ExCtx),
+	TPred = '$lgt_predicate_property'(Database, Pred, Prop, Database, p(_)),
 	DPred = '$lgt_debug'(goal(predicate_property(Pred, Prop), TPred), ExCtx).
 
 % database handling built-in predicates

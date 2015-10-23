@@ -33,11 +33,17 @@ database of the entity holding the multifile predicate primary declaration.
 This change matches user expectations and also simplifies porting of modules
 and compilation of modules with multifile predicate clauses making these calls.
 
-* CHANGED: Local call to the `expand_term/2` and `expand_goal/2` methods from
-from multifile predicate clauses defined in an object now look for clauses of
-the `term_expansion/2` and `goal_expansion/2` hook predicates in the object own
+* CHANGED: Local calls to the `expand_term/2` and `expand_goal/2` methods from
+multifile predicate clauses defined in an object now look for clauses of the
+`term_expansion/2` and `goal_expansion/2` hook predicates in the object own
 database instead of the database of the entity holding the multifile predicate
 primary declaration.
+
+* CHANGED: Local calls to the `current_predicate/1`, `predicate_property/2`,
+and `current_op/3` methods from multifile predicate clauses defined in an
+object now lookup predicates and their properties in the object own database
+instead of the database of the entity holding the multifile predicate primary
+declaration.
 
 * IMPROVED: Better coding style for the core multifile message predicate and
 non-terminal definitions.
