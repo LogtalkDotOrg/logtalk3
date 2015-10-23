@@ -46,7 +46,7 @@
 
 <pre>retractall(Head)</pre>
 <p>
-Retracts all matching predicates from an object.
+Retracts all predicate clauses with a matching head from an object.
 </p>
 <p>
 This method may be used to retract clauses for predicates that are not declared dynamic for dynamic objects provided that the predicates are declared in <em>this</em>.
@@ -76,11 +76,11 @@ This method may be used to retract clauses for predicates that are not declared 
 <h4>Examples</h4>
 
 <dl>
-	<dt>To retract all matching predicate definitions in <em><a class="glossary" title="Go to glossary definition" href="../../glossary.html#this">this</a></em>:</dt>
+	<dt>To retract all local predicate clauses or all predicate clauses in <em><a class="glossary" title="Go to glossary definition" href="../../glossary.html#this">this</a></em> with a matching head:</dt>
 		<dd><code>retractall(Head)</code></dd>
-	<dt>To retract all matching public or protected predicate definitions in <em><a class="glossary" title="Go to glossary definition" href="../../glossary.html#self">self</a></em>:</dt>
+	<dt>To retract all public or protected predicate clauses with a matching head in <em><a class="glossary" title="Go to glossary definition" href="../../glossary.html#self">self</a></em>:</dt>
 		<dd><code>::retractall(Head)</code></dd>
-	<dt>To retract all matching public predicate definitions in an explicit object:</dt>
+	<dt>To retract all public predicate clauses with a matching head in an explicit object:</dt>
 		<dd><code>Object::retractall(Head)</code></dd>
 </dl>
 
@@ -95,7 +95,7 @@ This method may be used to retract clauses for predicates that are not declared 
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: July 23, 2015</span>
+		<span>Last updated on: October 23, 2015</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="retract_1.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="../index.html#methods">next</a></span><br/>

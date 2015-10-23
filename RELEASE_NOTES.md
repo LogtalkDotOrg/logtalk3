@@ -21,11 +21,23 @@ RELEASE NOTES
 =============
 
 
-3.01.3 - October ??, 2015
+3.02.0 - October ??, 2015
 =========================
 
 Logtalk compiler and runtime
 ----------------------------
+
+* CHANGED: Local calls to the database methods from multifile predicate clauses
+defined in an object now take place in the object own database instead of the
+database of the entity holding the multifile predicate primary declaration.
+This change matches user expectations and also simplifies porting of modules
+and compilation of modules with multifile predicate clauses making these calls.
+
+* CHANGED: Local call to the `expand_term/2` and `expand_goal/2` methods from
+from multifile predicate clauses defined in an object now look for clauses of
+the `term_expansion/2` and `goal_expansion/2` hook predicates in the object own
+database instead of the database of the entity holding the multifile predicate
+primary declaration.
 
 * IMPROVED: Better coding style for the core multifile message predicate and
 non-terminal definitions.
@@ -35,9 +47,6 @@ reaching a fixed point as documented.
 
 * FIXED: Cases where the `expand_goal/2` built-in method would not stop when
 reaching a fixed point as documented.
-
-* FIXED: Misleading warnings about missing `dynamic/1` directives when calling
-database methods from multifile predicate clauses.
 
 Documentation
 -------------

@@ -387,7 +387,7 @@ Entities containing primary multifile predicate declarations must always be comp
 Multifile predicates may also be declared dynamic using the same <code>Entity::Functor/Arity</code> notation (multifile predicates are static by default).
 </p>
 <p>
-When a clause of a multifile predicate is a rule, its body is compiled within the context of the object or category defining the clause. This allows clauses for multifile predicates to call local object or category predicates. But the values of the <em>sender</em>, <em>this</em>, and <em>self</em> in the implicit execution context are passed from the clause head to the clause body. This is necessary to ensure that these values are always valid and to allow multifile predicate clauses to be defined in categories. A call to the <code>parameter/2</code> execution context methods, however, retrieves parameters of the entity defining the clause, not from the entity for which the clause is defined. The parameters of the entity for which the clause is defined can be accessed by simple unification at the clause head. A consequence of the value of <em>this</em> being passed to the body is that any calls to the database methods will not affect the database of the entity textually containing the multifile clause but instead work in the database of <em>this</em>. Thus, calling the database methods from multifile predicate clauses is usually an error and should be avoided.
+When a clause of a multifile predicate is a rule, its body is compiled within the context of the object or category defining the clause. This allows clauses for multifile predicates to call local object or category predicates. But the values of the <em>sender</em>, <em>this</em>, and <em>self</em> in the implicit execution context are passed from the clause head to the clause body. This is necessary to ensure that these values are always valid and to allow multifile predicate clauses to be defined in categories. A call to the <code>parameter/2</code> execution context methods, however, retrieves parameters of the entity defining the clause, not from the entity for which the clause is defined. The parameters of the entity for which the clause is defined can be accessed by simple unification at the clause head.
 </p>
 
 <h3 id="predicates_coinductive">Coinductive directive</h3>
@@ -1041,7 +1041,7 @@ This workaround is sometimes necessary when calling module meta-predicates whose
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: October 22, 2015</span>
+		<span>Last updated on: October 23, 2015</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="categories.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="inheritance.html">next</a></span><br/>
