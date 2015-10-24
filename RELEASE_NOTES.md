@@ -54,6 +54,13 @@ reaching a fixed point as documented.
 * FIXED: Cases where the `expand_goal/2` built-in method would not stop when
 reaching a fixed point as documented.
 
+Prolog adapter and integration files
+------------------------------------
+
+* CHANGED: JIProlog 4.1.2.8 or later version is now required as this version
+introduces support for the `directory_files/2` predicate and fixes a critical
+bug in the `atom_codes/2` predicate for the portable `os` library.
+
 Documentation
 -------------
 
@@ -64,6 +71,13 @@ Tools
 
 * IMPROVED: Better coding style for the tools multifile message predicate and
 non-terminal definitions.
+
+Tests
+-----
+
+* ADDED: Some more tests for the `multifile/1` directive to check semantics of
+local calls to the database methods from multifile predicate clauses defined in
+objects.
 
 Examples
 --------

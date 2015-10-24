@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/09/04,
+		date is 2015/10/24,
 		comment is 'Unit tests for the multifile/1 built-in directive.'
 	]).
 
@@ -47,7 +47,7 @@
 
 	test(multifile_1_03) :-
 		setof(X, multifile_primary_object::m2(X), L),
-		L == [1, 2, 3, 4, 5].
+		L == [1, 2, 3, 4, 5, 6].
 
 	test(multifile_1_04) :-
 		multifile_primary_object::predicate_property(m2(_), (multifile)),
@@ -59,7 +59,7 @@
 
 	test(multifile_1_06) :-
 		setof(X, multifile_other_object::n1(X), L),
-		L == [1, 2, 3, 4].
+		L == [1, 2, 3, 4, 5].
 
 	test(multifile_1_07) :-
 		multifile_primary_object(1)::a(1, Y),
@@ -86,22 +86,42 @@
 		X == Y.
 
 	test(multifile_1_13) :-
+		multifile_primary_object(3)::a(3, Y),
+		Y == 3.
+
+	test(multifile_1_14) :-
+		multifile_primary_object(Y)::a(3, 3),
+		Y == 3.
+
+	test(multifile_1_15) :-
+		multifile_primary_object(X)::a(3, Y),
+		X == Y.
+
+	test(multifile_1_16) :-
+		findall(X-Y, multifile_other_object::db(X,Y), L),
+		L == [m2-6, n2-5].
+
+	test(multifile_1_16) :-
+		findall(X-Y-Z, multifile_other_object(0)::dbp(X,Y,Z), L),
+		L == [a-2-0, b-2-0].
+
+	test(multifile_1_17) :-
 		multifile_primary_object(_)::predicate_property(a(_, _), (multifile)),
 		multifile_primary_object(_)::predicate_property(a(_, _), static).
 
-	test(multifile_1_14) :-
+	test(multifile_1_18) :-
 		multifile_other_object(1)::b(1, Y),
 		Y == 1.
 
-	test(multifile_1_15) :-
+	test(multifile_1_19) :-
 		multifile_other_object(Y)::b(1, 1),
 		Y == 1.
 
-	test(multifile_1_16) :-
+	test(multifile_1_20) :-
 		multifile_other_object(X)::b(1, Y),
 		X == Y.
 
-	test(multifile_1_17) :-
+	test(multifile_1_21) :-
 		multifile_other_object(_)::predicate_property(b(_, _), (multifile)),
 		multifile_other_object(_)::predicate_property(b(_, _), static).
 

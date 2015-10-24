@@ -32,6 +32,6 @@
 :- category(multifile_test_category(_)).
 
 	:- multifile(multifile_primary_object(_)::a/2).
-	multifile_primary_object(P)::a(2, P).
+	multifile_primary_object(P)::a(3, P).
 
 :- end_category.

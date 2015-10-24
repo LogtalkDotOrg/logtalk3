@@ -22,13 +22,20 @@
 :- object(multifile_other_object,
 	imports(multifile_primary_category)).
 
+	:- public(db/2).
+	:- dynamic(db/2).
+
 	:- multifile(multifile_primary_object::m2/1).
 	:- dynamic(multifile_primary_object::m2/1).
 	multifile_primary_object::m2(4).
 	multifile_primary_object::m2(5).
+	multifile_primary_object::m2(6) :-
+		assertz(db(m2, 6)).
 
 	:- multifile(multifile_primary_category::n1/1).
 	multifile_primary_category::n1(4).
+	multifile_primary_category::n1(5) :-
+		assertz(db(n2, 5)).
 
 :- end_object.
 
@@ -37,10 +44,17 @@
 :- object(multifile_other_object(P),
 	imports(multifile_primary_category(P))).
 
+	:- public(dbp/3).
+	:- dynamic(dbp/3).
+
 	:- multifile(multifile_primary_object(_)::a/2).
 	multifile_primary_object(P)::a(1, P).
+	multifile_primary_object(P)::a(2, P) :-
+		assertz(dbp(a, 2, P)).
 
 	:- multifile(multifile_primary_category(_)::b/2).
 	multifile_primary_category(P)::b(1, P).
+	multifile_primary_category(P)::b(2, P) :-
+		assertz(dbp(b, 2, P)).
 
 :- end_object.
