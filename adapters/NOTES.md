@@ -217,8 +217,8 @@ to type:
 	$ logtalk
 
 
-JIProlog 4.0.18 and later versions
-----------------------------------
+JIProlog 4.1.2.8 and later versions
+-----------------------------------
 
 	ji.pl
 

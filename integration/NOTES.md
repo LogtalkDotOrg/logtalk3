@@ -29,7 +29,7 @@ system path):
 * CxProlog (version 0.97.7 or later):      `cxlgt`
 * ECLiPSe (version 6.1#143 or later):      `eclipselgt`
 * GNU Prolog (version 1.4.2 or later):     `gplgt`
-* JIProlog (version 4.0.18 or later):      `jiplgt`     (first run may require `sudo`)
+* JIProlog (version 4.1.2.8 or later):     `jiplgt`     (first run may require `sudo`)
 * Lean Prolog (version 3.8.8 or later):    `lplgt`
 * Qu-Prolog (version 9.0 or later):        `qplgt`
 * Quintus Prolog (version 3.3 or later):   `quintuslgt`
