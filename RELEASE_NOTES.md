@@ -75,9 +75,9 @@ non-terminal definitions.
 Tests
 -----
 
-* ADDED: Some more tests for the `multifile/1` directive to check semantics of
-local calls to the database methods from multifile predicate clauses defined in
-objects.
+* UPDATED: Tests for the `multifile/1` directive, removing some redundant tests
+and adding tests for checking semantics of local calls to the database methods
+from multifile predicate clauses defined in objects.
 
 Examples
 --------
