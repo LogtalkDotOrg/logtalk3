@@ -54,6 +54,9 @@ reaching a fixed point as documented.
 * FIXED: Cases where the `expand_goal/2` built-in method would not stop when
 reaching a fixed point as documented.
 
+* FIXED: Passing execution context to calls to the `term_expansion/2` and
+`goal_expansion/2` hook predicates.
+
 Prolog adapter and integration files
 ------------------------------------
 
