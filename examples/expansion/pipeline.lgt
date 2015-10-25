@@ -76,12 +76,21 @@
 		parameter(1, Pipeline),
 		term_expansion_pipeline(Pipeline, Term, Expansion).
 
-	% implement the term expansion pipeline; in this simple example we assume
-	% that a single term is always returned
+	% implement the term expansion pipeline
 	term_expansion_pipeline([], Expansion, Expansion).
 	term_expansion_pipeline([Hook| Hooks], Expansion0, Expansion) :-
-		Hook::expand_term(Expansion0, Expansion1),
-		term_expansion_pipeline(Hooks, Expansion1, Expansion).
+		term_expansion_pipeline_all(Expansion0, Hook, Expansion1),
+		list::flatten(Expansion1, Expansion2),
+		term_expansion_pipeline(Hooks, Expansion2, Expansion).
+
+	term_expansion_pipeline_all([], _, []) :-
+		!.
+	term_expansion_pipeline_all([Term| Terms], Hook, [TermExpansion| TermsExpansion]) :-
+		!,
+		Hook::expand_term(Term, TermExpansion),
+		term_expansion_pipeline_all(Terms, Hook, TermsExpansion).
+	term_expansion_pipeline_all(Term, Hook, Expansion) :-
+		Hook::expand_term(Term, Expansion).
 
 	% implement the goal expansion pipeline
 	goal_expansion(Goal, ExpandedGoal) :-
