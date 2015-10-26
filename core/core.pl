@@ -3986,7 +3986,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 			;	% no definition found; fail as per closed-world assumption
 				fail
 			)
-		;	% check scope container
+		;	% protected or private scope: check if sender and scope container are the same
 			Sender = SCtn ->
 			(	% construct predicate, object, and "sender" templates
 				'$lgt_term_template'(Pred, GPred),
@@ -4110,7 +4110,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 			;	% no definition found; fail as per closed-world assumption
 				fail
 			)
-		;	% check scope container
+		;	% protected or private scope: check if sender and scope container are the same
 			Sender = SCtn ->
 			(	% construct predicate, object, and "sender" templates
 				'$lgt_term_template'(Pred, GPred),
