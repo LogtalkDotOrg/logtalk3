@@ -12297,7 +12297,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx'(Ctx, _, _, _, This, Self, _, _, _, ExCtx, _, _, _),
 	'$lgt_execution_context'(ExCtx, _, _, This, Self, _, _).
 
-'$lgt_compile_message_to_self'(expand_goal(Goal, ExpandedGoal), '$lgt_expand_goal'(Self, Goal, ExpandedGoal, ExCtx, p(_)), Ctx) :-
+'$lgt_compile_message_to_self'(expand_goal(Goal, ExpandedGoal), '$lgt_expand_goal'(Self, Goal, ExpandedGoal, This, ExCtx, p(_)), Ctx) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, _, _, _, This, Self, _, _, _, ExCtx, _, _, _),
 	'$lgt_execution_context'(ExCtx, _, _, This, Self, _, _).
