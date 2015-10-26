@@ -11762,6 +11762,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % returns the database where a database method call should take place and sets the
 % execution context accordingly
+%
+% this auxiliary predicate ensures that, when calling database methods in the body
+% of a multifile predicate clause defined in an object, the object database will be
+% used instead of the database of the entity hoding the multifile predicate primary
+% declaration (which could be a category, making the calls invalid)
 
 '$lgt_db_call_database_execution_context'(Entity, This, Database, ExCtx) :-
 	(	'$lgt_pp_entity_'(object, _, _, _, _) ->
