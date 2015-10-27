@@ -24,8 +24,88 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/11/19,
+		date is 2015/10/27,
 		comment is 'Unit tests for the expand_term/2 built-in method.'
 	]).
+
+	test(expand_term_ol_01) :-
+		obj_ol_01::p(Term),
+		Term == term.
+
+	test(expand_term_ol_02) :-
+		obj_ol_02::p(Term1), obj_ol_02::q(Term2),
+		Term1 == 'TERM', Term2 == foo.
+
+	test(expand_term_ol_03) :-
+		obj_ol_03::p(Term1), obj_ol_03::q(Term2),
+		Term1 == 'TERM', Term2 == foo.
+
+	test(expand_term_ol_04) :-
+		obj_ol_04::p(Term1), obj_ol_04::q(Term2),
+		Term1 == 'TERM', Term2 == foo.
+
+	test(expand_term_ol_05) :-
+		obj_ol_05::p(Term1), obj_ol_05::q(Term2),
+		Term1 == 'TERM', Term2 == foo.
+
+	test(expand_term_ol_06) :-
+		obj_ol_06::p(Term1), obj_ol_06::q(Term2),
+		Term1 == 'TERM', Term2 == foo.
+
+	test(expand_term_ol_07) :-
+		obj_ol_07::p(Term1), obj_ol_07::q(Term2),
+		Term1 == 'TERM', Term2 == foo.
+
+	test(expand_term_ol_08) :-
+		obj_ol_08::p(Term1), obj_ol_08::q(Term2),
+		Term1 == 'TERM', Term2 == foo.
+
+	test(expand_term_ol_09) :-
+		obj_ol_09::p(Term1), obj_ol_09::q(Term2),
+		Term1 == term, Term2 == foo.
+
+	test(expand_term_ol_10) :-
+		obj_ol_10::p(Term1), obj_ol_10::q(Term2),
+		Term1 == term, Term2 == 'FOO'.
+
+	test(expand_term_cl_01) :-
+		obj_cl_01::p(Term),
+		Term == term.
+
+	test(expand_term_cl_02) :-
+		obj_cl_02::p(Term1), obj_cl_02::q(Term2),
+		Term1 == 'TERM', Term2 == foo.
+
+	test(expand_term_cl_03) :-
+		obj_cl_03::p(Term1), obj_cl_03::q(Term2),
+		Term1 == 'TERM', Term2 == foo.
+
+	test(expand_term_cl_04) :-
+		obj_cl_04::p(Term1), obj_cl_04::q(Term2),
+		Term1 == 'TERM', Term2 == foo.
+
+	test(expand_term_cl_05) :-
+		obj_cl_05::p(Term1), obj_cl_05::q(Term2),
+		Term1 == 'TERM', Term2 == foo.
+
+	test(expand_term_cl_06) :-
+		obj_cl_06::p(Term1), obj_cl_06::q(Term2),
+		Term1 == 'TERM', Term2 == foo.
+
+	test(expand_term_cl_07) :-
+		obj_cl_07::p(Term1), obj_cl_07::q(Term2),
+		Term1 == 'TERM', Term2 == foo.
+
+	test(expand_term_cl_08) :-
+		obj_cl_08::p(Term1), obj_cl_08::q(Term2),
+		Term1 == 'TERM', Term2 == foo.
+
+	test(expand_term_cl_09) :-
+		obj_cl_09::p(Term1), obj_cl_09::q(Term2),
+		Term1 == term, Term2 == foo.
+
+	test(expand_term_cl_10) :-
+		obj_cl_10::p(Term1), obj_cl_10::q(Term2),
+		Term1 == term, Term2 == 'FOO'.
 
 :- end_object.
