@@ -283,3 +283,56 @@
 	imports(ctg_cl_10)).
 
 :- end_object.
+
+
+% the goal_expansion/2 hook predicate is recursively
+% called until a fixed-point is reached
+:- category(ctg_cl_11).
+
+	:- public(p/1).
+	p(Goal) :-
+		expand_goal(goal0, Goal).
+
+	goal_expansion(goal0, goal1).
+	goal_expansion(goal1, goal2).
+	goal_expansion(goal2, goal3).
+	goal_expansion(goal3, goal4).
+	goal_expansion(goal4, goal).
+
+:- end_category.
+
+
+:- object(obj_cl_11,
+	imports(ctg_cl_11)).
+
+:- end_object.
+
+
+% the goal_expansion/2 hook predicate is recursively
+% called until a fixed-point is reached
+:- category(ctg_cl_12_root,
+	implements(expanding)).
+
+	goal_expansion(goal0, goal1).
+	goal_expansion(goal1, goal2).
+	goal_expansion(goal2, goal3).
+	goal_expansion(goal3, goal4).
+	goal_expansion(goal4, goal).
+
+:- end_category.
+
+
+:- category(ctg_cl_12,
+	extends(ctg_cl_12_root)).
+
+	:- public(p/1).
+	p(Goal) :-
+		expand_goal(goal0, Goal).
+
+:- end_category.
+
+
+:- object(obj_cl_12,
+	imports(ctg_cl_12)).
+
+:- end_object.

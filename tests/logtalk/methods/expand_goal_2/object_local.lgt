@@ -223,3 +223,44 @@
 	goal_expansion(foo, 'FOO').
 
 :- end_object.
+
+
+% the goal_expansion/2 hook predicate is recursively
+% called until a fixed-point is reached
+:- object(obj_ol_11).
+
+	:- public(p/1).
+	p(Goal) :-
+		expand_goal(goal0, Goal).
+
+	goal_expansion(goal0, goal1).
+	goal_expansion(goal1, goal2).
+	goal_expansion(goal2, goal3).
+	goal_expansion(goal3, goal4).
+	goal_expansion(goal4, goal).
+
+:- end_object.
+
+
+% the goal_expansion/2 hook predicate is recursively
+% called until a fixed-point is reached
+:- object(obj_ol_12_root,
+	implements(expanding)).
+
+	goal_expansion(goal0, goal1).
+	goal_expansion(goal1, goal2).
+	goal_expansion(goal2, goal3).
+	goal_expansion(goal3, goal4).
+	goal_expansion(goal4, goal).
+
+:- end_object.
+
+
+:- object(obj_ol_12,
+	extends(obj_ol_12_root)).
+
+	:- public(p/1).
+	p(Goal) :-
+		expand_goal(goal0, Goal).
+
+:- end_object.

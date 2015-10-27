@@ -68,6 +68,14 @@
 		obj_ol_10::p(Goal1), obj_ol_10::q(Goal2),
 		Goal1 == goal, Goal2 == 'FOO'.
 
+	test(expand_goal_ol_11) :-
+		obj_ol_11::p(Goal),
+		Goal == goal.
+
+	test(expand_goal_0l_12) :-
+		obj_ol_12::p(Goal),
+		Goal == goal.
+
 	test(expand_goal_cl_01) :-
 		obj_cl_01::p(Goal),
 		Goal == goal.
@@ -107,5 +115,13 @@
 	test(expand_goal_cl_10) :-
 		obj_cl_10::p(Goal1), obj_cl_10::q(Goal2),
 		Goal1 == goal, Goal2 == 'FOO'.
+
+	test(expand_goal_cl_11) :-
+		obj_cl_11::p(Goal),
+		Goal == goal.
+
+	test(expand_goal_cl_12) :-
+		obj_cl_12::p(Goal),
+		Goal == goal.
 
 :- end_object.
