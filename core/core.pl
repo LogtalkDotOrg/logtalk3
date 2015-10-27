@@ -2505,7 +2505,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 2, 0, rc2)).
+'$lgt_version_data'(logtalk(3, 2, 0, rc3)).
 
 
 
@@ -3706,18 +3706,94 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_expand_term'(+object_identifier, ?term, ?term, +object_identifier, @execution_context, @scope)
+% '$lgt_expand_term_local'(+object_identifier,   ?term, ?term, @execution_context)
+% '$lgt_expand_term_local'(+category_identifier, ?term, ?term, @execution_context)
 %
-% expand_term/2 built-in method
+% expand_term/2 local calls
+%
+% calls the term_expansion/2 user-defined hook predicate if defined and within scope
 
-'$lgt_expand_term'(Obj, Term, Expansion, Sender, ExCtx, Scope) :-
+'$lgt_expand_term_local'(Entity, Term, Expansion, ExCtx) :-
 	(	var(Term) ->
 		Expansion = Term
-	;	'$lgt_term_expansion'(Obj, Term, Expand, Sender, ExCtx, Scope) ->
+	;	'$lgt_term_expansion_local'(Entity, Term, Expand, ExCtx) ->
 		Expansion = Expand
 	;	Term = (_ --> _) ->
 		% default grammar rule expansion
-		'$lgt_comp_ctx'(Ctx, _, _, Sender, Obj, Obj, _, [], _, _, runtime, _, _),
+		'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, [], _, _, runtime, _, _),
+		catch(
+			'$lgt_dcg_rule'(Term, Clause, Ctx),
+			Error,
+			throw(error(Error, logtalk(expand_term(Term,_), Entity)))
+		),
+		(	Clause = (Head :- Body),
+			'$lgt_compiler_flag'(optimize, on) ->
+			'$lgt_simplify_goal'(Body, SBody),
+			(	SBody == true ->
+				Expansion = Head
+			;	Expansion = (Head :- SBody)
+			)
+		;	% fact and/or optimization disabled
+			Expansion = Clause
+		)
+	;	Expansion = Term
+	).
+
+
+% '$lgt_term_expansion_local'(+object_identifier, ?term, ?term, +execution_context)
+
+'$lgt_term_expansion_local'(Obj, Term, Expansion, ExCtx) :-
+	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, _, DDef, _, _),
+	!,
+	(	call(Dcl, term_expansion(_, _), Scope, _, _, SCtn, _) ->
+		(	(Scope = p(_); Obj = SCtn) ->
+			call(Def, term_expansion(Term, Expansion), ExCtx, Call, _, _)
+		;	% declaration is out of scope but we can still try a local definition
+			call(Def, term_expansion(Term, Expansion), ExCtx, Call) ->
+			true
+		;	call(DDef, term_expansion(Term, Expansion), ExCtx, Call)
+		)
+	;	% no declaration for the term_expansion/2 hook predicate found;
+		% check for a local definition
+		call(Def, term_expansion(Term, Expansion), ExCtx, Call) ->
+		true
+	;	call(DDef, term_expansion(Term, Expansion), ExCtx, Call)
+	),
+	!,
+	once(Call).
+
+'$lgt_term_expansion_local'(Ctg, Term, Expansion, ExCtx) :-
+	'$lgt_current_category_'(Ctg, _, Dcl, Def, _, _),
+	(	call(Dcl, term_expansion(_, _), Scope, _, _, DclCtn) ->
+		(	(Scope = p(_); Ctg = DclCtn) ->
+			call(Def, term_expansion(Term, Expansion), ExCtx, Call, _)
+		;	% declaration is out of scope but we can still try a local definition
+			call(Def, term_expansion(Term, Expansion), ExCtx, Call)
+		)
+	;	% no declaration for the term_expansion/2 hook predicate found;
+		% check for a local definition
+		call(Def, term_expansion(Term, Expansion), ExCtx, Call)
+	),
+	!,
+	once(Call).
+
+
+
+% '$lgt_expand_term_message'(+object_identifier,   ?term, ?term, +object_identifier, @scope)
+% '$lgt_expand_term_message'(+category_identifier, ?term, ?term, +object_identifier, @scope)
+%
+% expand_term/2 messages
+%
+% calls the term_expansion/2 user-defined hook predicate if defined and within scope
+
+'$lgt_expand_term_message'(Entity, Term, Expansion, Sender, Scope) :-
+	(	var(Term) ->
+		Expansion = Term
+	;	'$lgt_term_expansion_message'(Entity, Term, Expand, Sender, Scope) ->
+		Expansion = Expand
+	;	Term = (_ --> _) ->
+		% default grammar rule expansion
+		'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, [], _, _, runtime, _, _),
 		catch(
 			'$lgt_dcg_rule'(Term, Clause, Ctx),
 			Error,
@@ -3737,79 +3813,82 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 
+% '$lgt_term_expansion_message'(+object_identifier, ?term, ?term, +object_identifier, @scope)
 
-% '$lgt_term_expansion'(+object_identifier, ?term, ?term, +object_identifier, @execution_context, @scope)
-%
-% calls the term_expansion/2 user-defined predicate
-%
-% if there is a scope directive, then the call fails if the sender is not within scope;
-% when there is no scope directive, then we call any local definition when the sender
-% and the target object are the same
-
-'$lgt_term_expansion'(Obj, Term, Expansion, Sender, ParentExCtx, LookupScope) :-
-	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, _, DDef, _, _),
+'$lgt_term_expansion_message'(Obj, Term, Expansion, Sender, LookupScope) :-
+	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, _, _, _, _),
+	!,
 	(	call(Dcl, term_expansion(_, _), PredScope, _, _, SCtn, _) ->
 		(	(PredScope = LookupScope; Sender = SCtn) ->
 			'$lgt_execution_context'(ExCtx, Obj, Sender, Obj, Obj, [], []),
 			call(Def, term_expansion(Term, Expansion), ExCtx, Call, _, _)
-		;	fail
+		;	% message is out of scope
+			fail
 		)
 	;	% no declaration for the term_expansion/2 hook predicate found
-		Obj = Sender,
-		% local call
-		(	call(Def, term_expansion(Term, Expansion), ParentExCtx, Call) ->
-			true
-		;	call(DDef, term_expansion(Term, Expansion), ParentExCtx, Call)
-		)
+		fail
 	),
 	!,
 	once(Call).
 
 
 
-% '$lgt_expand_goal'(+object_identifier, ?term, ?term, +object_identifier, @execution_context, @scope)
+% '$lgt_expand_goal_local'(+object_identifier,   ?term, ?term, @execution_context)
+% '$lgt_expand_goal_local'(+category_identifier, ?term, ?term, @execution_context)
 %
-% expand_goal/2 built-in method
+% expand_goal/2 local calls
 %
-% it calls the goal_expansion/2 user-defined method if the sender is within scope;
-% when there is no scope directive but the sender and the target objects are the
-% same, it calls any local definition of the goal_expansion/2 user-defined method
+% calls the goal_expansion/2 user-defined hook predicate if defined and within scope
 
-'$lgt_expand_goal'(Obj, Goal, ExpandedGoal, Sender, ParentExCtx, LookupScope) :-
+'$lgt_expand_goal_local'(Obj, Goal, ExpandedGoal, ExCtx) :-
 	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, _, DDef, _, _),
-	(	% lookup visible goal_expansion/2 hook predicate declaration
-		call(Dcl, goal_expansion(_, _), PredScope, _, _, SCtn, _) ->
-		(	(PredScope = LookupScope; Sender = SCtn) ->
-			'$lgt_execution_context'(ExCtx, Obj, Sender, Obj, Obj, [], []),
-			'$lgt_expand_goal_scoped'(Goal, ExpandedGoal, Def, ExCtx)
-		;	ExpandedGoal = Goal
+	!,
+	(	call(Dcl, goal_expansion(_, _), Scope, _, _, SCtn, _) ->
+		(	(Scope = p(_); Obj = SCtn) ->
+			'$lgt_expand_goal_object_scoped'(Goal, ExpandedGoal, Def, ExCtx)
+		;	% declaration is out of scope but we can still try a local definition
+			'$lgt_expand_goal_object_local'(Goal, ExpandedGoal, Def, DDef, ExCtx)
 		)
-	;	% no declaration for the goal_expansion/2 hook predicate found
-		Obj = Sender ->
-		% local call
-		'$lgt_expand_goal_local'(Goal, ExpandedGoal, Def, DDef, ParentExCtx)
-	;	% no goal_expansion/2 hook predicate definition within scope
-		ExpandedGoal = Goal
+	;	% no declaration for the goal_expansion/2 hook predicate found;
+		% try to use a local definition if it exists
+		'$lgt_expand_goal_object_local'(Goal, ExpandedGoal, Def, DDef, ExCtx)
+	).
+
+'$lgt_expand_goal_local'(Ctg, Goal, ExpandedGoal, ExCtx) :-
+	'$lgt_current_category_'(Ctg, _, Dcl, Def, _, _),
+	(	call(Dcl, goal_expansion(_, _), Scope, _, _, DclCtn) ->
+		(	(Scope = p(_); Ctg = DclCtn) ->
+			'$lgt_expand_goal_category_scoped'(Goal, ExpandedGoal, Def, ExCtx)
+		;	% declaration is out of scope but we can still try a local definition
+			'$lgt_expand_goal_category_local'(Goal, ExpandedGoal, Def, ExCtx)
+		)
+	;	% no declaration for the goal_expansion/2 hook predicate found;
+		% try to use a local definition if it exists
+		'$lgt_expand_goal_category_local'(Goal, ExpandedGoal, Def, ExCtx)
 	).
 
 
-'$lgt_expand_goal_scoped'(Goal, ExpandedGoal, Def, ExCtx) :-
+% '$lgt_expand_goal_object_scoped'(?term, ?term, +atom, +execution_context)
+
+'$lgt_expand_goal_object_scoped'(Goal, ExpandedGoal, Def, ExCtx) :-
 	(	var(Goal) ->
 		ExpandedGoal = Goal
-	;	% lookup visible goal_expansion/2 hook predicate definition
+	;	% lookup local goal_expansion/2 hook predicate definition
 		call(Def, goal_expansion(Goal, ExpandedGoal0), ExCtx, Call, _, _) ->
 		(	call(Call),
 			Goal \== ExpandedGoal0 ->
-			'$lgt_expand_goal_scoped'(ExpandedGoal0, ExpandedGoal, Def, ExCtx)
+			'$lgt_expand_goal_object_scoped'(ExpandedGoal0, ExpandedGoal, Def, ExCtx)
 		;	% fixed-point found
 			ExpandedGoal = Goal
 		)
-	;	% no visible goal_expansion/2 hook predicate definition found
+	;	% no local goal_expansion/2 hook predicate definition found
 		ExpandedGoal = Goal
 	).
 
 
-'$lgt_expand_goal_local'(Goal, ExpandedGoal, Def, DDef, ExCtx) :-
+% '$lgt_expand_goal_object_local'(?term, ?term, +atom, +atom, +execution_context)
+
+'$lgt_expand_goal_object_local'(Goal, ExpandedGoal, Def, DDef, ExCtx) :-
 	(	var(Goal) ->
 		ExpandedGoal = Goal
 	;	% lookup local goal_expansion/2 hook predicate definition
@@ -3818,11 +3897,87 @@ create_logtalk_flag(Flag, Value, Options) :-
 		) ->
 		(	call(Call),
 			Goal \== ExpandedGoal0 ->
-			'$lgt_expand_goal_local'(ExpandedGoal0, ExpandedGoal, Def, DDef, ExCtx)
+			'$lgt_expand_goal_object_local'(ExpandedGoal0, ExpandedGoal, Def, DDef, ExCtx)
 		;	% fixed-point found
 			ExpandedGoal = Goal
 		)
 	;	% no local goal_expansion/2 hook predicate definition found
+		ExpandedGoal = Goal
+	).
+
+
+% '$lgt_expand_goal_category_scoped'(?term, ?term, +atom, +execution_context)
+
+'$lgt_expand_goal_category_scoped'(Goal, ExpandedGoal, Def, ExCtx) :-
+	(	var(Goal) ->
+		ExpandedGoal = Goal
+	;	% lookup local goal_expansion/2 hook predicate definition
+		call(Def, goal_expansion(Goal, ExpandedGoal0), ExCtx, Call, _) ->
+		(	call(Call),
+			Goal \== ExpandedGoal0 ->
+			'$lgt_expand_goal_category_scoped'(ExpandedGoal0, ExpandedGoal, Def, ExCtx)
+		;	% fixed-point found
+			ExpandedGoal = Goal
+		)
+	;	% no local goal_expansion/2 hook predicate definition found
+		ExpandedGoal = Goal
+	).
+
+
+% '$lgt_expand_goal_object_local'(?term, ?term, +atom, +execution_context)
+
+'$lgt_expand_goal_category_local'(Goal, ExpandedGoal, Def, ExCtx) :-
+	(	var(Goal) ->
+		ExpandedGoal = Goal
+	;	% lookup local goal_expansion/2 hook predicate definition
+		call(Def, goal_expansion(Goal, ExpandedGoal0), ExCtx, Call) ->
+		(	call(Call),
+			Goal \== ExpandedGoal0 ->
+			'$lgt_expand_goal_category_local'(ExpandedGoal0, ExpandedGoal, Def, ExCtx)
+		;	% fixed-point found
+			ExpandedGoal = Goal
+		)
+	;	% no local goal_expansion/2 hook predicate definition found
+		ExpandedGoal = Goal
+	).
+
+
+
+% '$lgt_expand_goal_message'(+object_identifier, ?term, ?term, +object_identifier, @scope)
+%
+% expand_goal/2 messages
+%
+% calls the goal_expansion/2 user-defined hook predicate if defined and within scope
+
+'$lgt_expand_goal_message'(Obj, Goal, ExpandedGoal, Sender, LookupScope) :-
+	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, _, _, _, _),
+	(	% lookup visible goal_expansion/2 hook predicate declaration
+		call(Dcl, goal_expansion(_, _), PredScope, _, _, SCtn, _) ->
+		(	(PredScope = LookupScope; Sender = SCtn) ->
+			'$lgt_execution_context'(ExCtx, Obj, Sender, Obj, Obj, [], []),
+			'$lgt_expand_goal_message'(Goal, ExpandedGoal, Def, ExCtx)
+		;	% message is out of scope
+			ExpandedGoal = Goal
+		)
+	;	% no declaration for the goal_expansion/2 hook predicate found
+		ExpandedGoal = Goal
+	).
+
+
+% '$lgt_expand_goal_message'(?term, ?term, +atom, +execution_context)
+
+'$lgt_expand_goal_message'(Goal, ExpandedGoal, Def, ExCtx) :-
+	(	var(Goal) ->
+		ExpandedGoal = Goal
+	;	% lookup visible goal_expansion/2 hook predicate definition
+		call(Def, goal_expansion(Goal, ExpandedGoal0), ExCtx, Call, _, _) ->
+		(	call(Call),
+			Goal \== ExpandedGoal0 ->
+			'$lgt_expand_goal_message'(ExpandedGoal0, ExpandedGoal, Def, ExCtx)
+		;	% fixed-point found
+			ExpandedGoal = Goal
+		)
+	;	% no visible goal_expansion/2 hook predicate definition found
 		ExpandedGoal = Goal
 	).
 
@@ -10501,15 +10656,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(expand_term(Term, Expansion), TPred, '$lgt_debug'(goal(expand_term(Term, Expansion), TPred), ExCtx), Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, Entity, _, This, _, _, _, _, ExCtx, _, _, _),
-	'$lgt_db_call_database_execution_context'(Entity, This, Database, ExCtx),
-	TPred = '$lgt_expand_term'(Database, Term, Expansion, Database, ExCtx, p(_)).
+	'$lgt_comp_ctx'(Ctx, _, Entity, _, _, _, _, _, _, ExCtx, _, _, _),
+	'$lgt_execution_context_this_entity'(ExCtx, _, Entity),
+	TPred = '$lgt_expand_term_local'(Entity, Term, Expansion, ExCtx).
 
 '$lgt_compile_body'(expand_goal(Goal, ExpandedGoal), TPred, '$lgt_debug'(goal(expand_goal(Goal, ExpandedGoal), TPred), ExCtx), Ctx) :-
 	!,
-	'$lgt_comp_ctx'(Ctx, _, Entity, _, This, _, _, _, _, ExCtx, _, _, _),
-	'$lgt_db_call_database_execution_context'(Entity, This, Database, ExCtx),
-	TPred = '$lgt_expand_goal'(Database, Goal, ExpandedGoal, Database, ExCtx, p(_)).
+	'$lgt_comp_ctx'(Ctx, _, Entity, _, _, _, _, _, _, ExCtx, _, _, _),
+	'$lgt_execution_context_this_entity'(ExCtx, _, Entity),
+	TPred = '$lgt_expand_goal_local'(Entity, Goal, ExpandedGoal, ExCtx).
+
 
 % DCG predicates
 
@@ -12061,12 +12217,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % term and goal expansion predicates
 
-'$lgt_compile_message_to_object'(expand_term(Term, Expansion), Obj, '$lgt_expand_term'(Obj, Term, Expansion, This, ExCtx, p(p(p))), _, Ctx) :-
+'$lgt_compile_message_to_object'(expand_term(Term, Expansion), Obj, '$lgt_expand_term_message'(Obj, Term, Expansion, This, p(p(p))), _, Ctx) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
 	'$lgt_execution_context_this_entity'(ExCtx, This, _).
 
-'$lgt_compile_message_to_object'(expand_goal(Goal, ExpandedGoal), Obj, '$lgt_expand_goal'(Obj, Goal, ExpandedGoal, This, ExCtx, p(p(p))), _, Ctx) :-
+'$lgt_compile_message_to_object'(expand_goal(Goal, ExpandedGoal), Obj, '$lgt_expand_goal_message'(Obj, Goal, ExpandedGoal, This, p(p(p))), _, Ctx) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, _, _, _, This, _, _, _, _, ExCtx, _, _, _),
 	'$lgt_execution_context_this_entity'(ExCtx, This, _).
@@ -12297,12 +12453,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % term and goal expansion predicates
 
-'$lgt_compile_message_to_self'(expand_term(Term, Expansion), '$lgt_expand_term'(Self, Term, Expansion, This, ExCtx, p(_)), Ctx) :-
+'$lgt_compile_message_to_self'(expand_term(Term, Expansion), '$lgt_expand_term_message'(Self, Term, Expansion, This, p(_)), Ctx) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, _, _, _, This, Self, _, _, _, ExCtx, _, _, _),
 	'$lgt_execution_context'(ExCtx, _, _, This, Self, _, _).
 
-'$lgt_compile_message_to_self'(expand_goal(Goal, ExpandedGoal), '$lgt_expand_goal'(Self, Goal, ExpandedGoal, This, ExCtx, p(_)), Ctx) :-
+'$lgt_compile_message_to_self'(expand_goal(Goal, ExpandedGoal), '$lgt_expand_goal_message'(Self, Goal, ExpandedGoal, This, p(_)), Ctx) :-
 	!,
 	'$lgt_comp_ctx'(Ctx, _, _, _, This, Self, _, _, _, ExCtx, _, _, _),
 	'$lgt_execution_context'(ExCtx, _, _, This, Self, _, _).

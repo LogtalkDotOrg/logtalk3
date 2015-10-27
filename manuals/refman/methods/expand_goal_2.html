@@ -49,7 +49,7 @@
 Expands a goal.
 </p>
 <p>
-The expansion works as follows: if the first argument is a variable, then it is unified with the second argument; if the first argument is not a variable and the <code>goal_expansion/2</code> hook predicate is within scope, then this predicate is recursively called until a fixed-point is reached to provide an expansion that is then unified with the second argument; if the <code>goal_expansion/2</code> predicate is not within scope, the two arguments are unified.
+The expansion works as follows: if the first argument is a variable, then it is unified with the second argument; if the first argument is not a variable and there are local or inherited clauses for the <code>goal_expansion/2</code> hook predicate within scope, then this predicate is recursively called until a fixed-point is reached to provide an expansion that is then unified with the second argument; if the <code>goal_expansion/2</code> predicate is not within scope, the two arguments are unified.
 </p>
 <p>
 Automatic goal expansion is only performed at compile time (to expand the body of clauses and meta-directives read from a source file) when using <a href="../../glossary.html#hook"><em>hook objects</em></a>. This predicate can be used by the user to manually perform goal expansion at runtime (for example, before asserting a clause).
@@ -80,7 +80,7 @@ Automatic goal expansion is only performed at compile time (to expand the body o
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: October 25, 2015</span>
+		<span>Last updated on: October 27, 2015</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="term_expansion_2.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="goal_expansion_2.html">next</a></span><br/>

@@ -5,7 +5,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on October 8, 2015
+%  Last updated on October 27, 2015
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -119,8 +119,10 @@ user:prolog_predicate_name(user:'$lgt_metacall_sender'(_, _, _, _), 'call/1') :-
 user:prolog_predicate_name(user:'$lgt_bagof'(_, _, _, _, _), 'bagof/3') :- !.
 user:prolog_predicate_name(user:'$lgt_setof'(_, _, _, _, _), 'setof/3') :- !.
 
-user:prolog_predicate_name(user:'$lgt_expand_term'(_, _, _, _, _), 'expand_term/2') :- !.
-user:prolog_predicate_name(user:'$lgt_expand_goal'(_, _, _, _, _), 'expand_goal/2') :- !.
+user:prolog_predicate_name(user:'$lgt_expand_term_local'(_, _, _, _), 'expand_term/2') :- !.
+user:prolog_predicate_name(user:'$lgt_expand_term_message'(_, _, _, _, _), 'expand_term/2') :- !.
+user:prolog_predicate_name(user:'$lgt_expand_goal_local'(_, _, _, _), 'expand_goal/2') :- !.
+user:prolog_predicate_name(user:'$lgt_expand_goal_message'(_, _, _, _, _), 'expand_goal/2') :- !.
 
 user:prolog_predicate_name(user:'$lgt_phrase'(_, _, _), 'phrase/2') :- !.
 user:prolog_predicate_name(user:'$lgt_phrase'(_, _, _, _), 'phrase/3') :- !.
@@ -382,13 +384,13 @@ user:portray(c(This, Entity, Rest)) :-
 '$lgt_swi_unify_clause_body'(retract(Clause), Entity, retract(TClause), TermPos, TermPos) :-
 	'$lgt_decompile_predicate_heads'(TClause, Entity, _, Clause), !.
 
-'$lgt_swi_unify_clause_body'(Obj::expand_term(Term, Clause), _, '$lgt_expand_term'(Obj, Term, Clause, _, p(p(p))), TermPos, TermPos) :- !.
-'$lgt_swi_unify_clause_body'(expand_term(Term, Clause), _, '$lgt_expand_term'(This, Term, Clause, This, p(_)), TermPos, TermPos) :- !.
-'$lgt_swi_unify_clause_body'(::expand_term(Term, Clause), _, '$lgt_expand_term'(_, Term, Clause, _, p(_)), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(expand_term(Term, Expansion), _, '$lgt_expand_term_local'(_, Term, Expansion, _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(::expand_term(Term, Expansion), _, '$lgt_expand_term_message'(_, Term, Expansion, _, p(_)), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(Obj::expand_term(Term, Expansion), _, '$lgt_expand_term_message'(Obj, Term, Expansion, _, p(p(p))), TermPos, TermPos) :- !.
 
-'$lgt_swi_unify_clause_body'(Obj::expand_goal(Goal, EGoal), _, '$lgt_expand_goal'(Obj, Goal, EGoal, _, p(p(p))), TermPos, TermPos) :- !.
-'$lgt_swi_unify_clause_body'(expand_goal(Goal, EGoal), _, '$lgt_expand_goal'(This, Goal, EGoal, This, p(_)), TermPos, TermPos) :- !.
-'$lgt_swi_unify_clause_body'(::expand_goal(Goal, EGoal), _, '$lgt_expand_goal'(_, Goal, EGoal, _, p(_)), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(expand_goal(Goal, EGoal), _, '$lgt_expand_goal_local'(Goal, EGoal, _, _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(::expand_goal(Goal, EGoal), _, '$lgt_expand_goal_message'(_, Goal, EGoal, _, p(_)), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(Obj::expand_goal(Goal, EGoal), _, '$lgt_expand_goal_message'(Obj, Goal, EGoal, _, p(p(p))), TermPos, TermPos) :- !.
 
 '$lgt_swi_unify_clause_body'(phrase(GRBody, Input), _, '$lgt_phrase'(GRBody, Input, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(phrase(GRBody, Input, Rest), _, '$lgt_phrase'(GRBody, Input, Rest, _), TermPos, TermPos) :- !.
@@ -593,8 +595,11 @@ user:portray(c(This, Entity, Rest)) :-
 :- '$set_predicate_attribute'('$lgt_metacall_local'/2, trace, 1).
 :- '$set_predicate_attribute'('$lgt_metacall_sender'/4, trace, 1).
 
-:- '$set_predicate_attribute'('$lgt_expand_term'/5, trace, 1).
-:- '$set_predicate_attribute'('$lgt_expand_goal'/5, trace, 1).
+:- '$set_predicate_attribute'('$lgt_expand_term_local'/4, trace, 1).
+:- '$set_predicate_attribute'('$lgt_expand_term_message'/5, trace, 1).
+:- '$set_predicate_attribute'('$lgt_expand_goal_local'/4, trace, 1).
+:- '$set_predicate_attribute'('$lgt_expand_goal_message'/5, trace, 1).
+
 :- '$set_predicate_attribute'('$lgt_phrase'/3, trace, 1).
 :- '$set_predicate_attribute'('$lgt_phrase'/4, trace, 1).
 
@@ -660,9 +665,12 @@ user:portray(c(This, Entity, Rest)) :-
 :- meta_predicate user:'$lgt_find_original_predicate'(*,*,*,*,*,*).
 :- meta_predicate user:'$lgt_find_original_predicate'(*,*,*,*,*,*,*).
 :- meta_predicate user:'$lgt_entity_property_alias'(*,*,*,*,*).
-:- meta_predicate user:'$lgt_expand_goal_local'(*,*,*,*,*).
+:- meta_predicate user:'$lgt_expand_goal_category_scoped'(*,*,*,*).
+:- meta_predicate user:'$lgt_expand_goal_category_local'(*,*,*,*).
+:- meta_predicate user:'$lgt_expand_goal_object_scoped'(*,*,*,*).
+:- meta_predicate user:'$lgt_expand_goal_object_local'(*,*,*,*,*).
+:- meta_predicate user:'$lgt_expand_goal_message'(*,*,*,*).
 :- meta_predicate user:'$lgt_assert_pred_dcl'(*,*,*,*,*,*,*,*,*,*,*,*,*).
-:- meta_predicate user:'$lgt_expand_goal_scoped'(*,*,*,*).
 :- meta_predicate user:'$lgt_define_events'(*,*,*,*,*,*,*).
 :- meta_predicate user:'$lgt_threaded_or'(*,*,*).
 :- meta_predicate user:'$lgt_mt_non_det_goal'(*,*,*,*,*).

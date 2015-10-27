@@ -43,13 +43,13 @@
 	:- public(test_term_expansion/2).
 
 	test_term_expansion(Term, Expansion) :-
-		expand_term(Term, Expansion).	% called in the context of "this"
+		::expand_term(Term, Expansion).
 
 	:- public(test_goal_expansion/2).
 
 	test_goal_expansion(Goal, EGoal) :-
-		expand_goal(Goal, EGoal).		% i.e. from within the object
-										% importing the category
+		::expand_goal(Goal, EGoal).
+
 :- end_category.
 
 
