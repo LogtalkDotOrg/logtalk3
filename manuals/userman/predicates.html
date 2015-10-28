@@ -192,7 +192,7 @@ An object predicate can be static or dynamic. By default, all object predicates 
 This directive may also be used to declare dynamic grammar rule non-terminals. As each Logtalk entity is compiled independently from other entities, this directive must be included in every object that contains a definition for the described predicate (even if the predicate declaration is inherited from other object or imported from a category). If we omit the dynamic declaration then the predicate definition will be compiled static. In the case of dynamic objects, static predicates cannot be redefined using the database built-in methods (despite being internally compiled to dynamic code).
 </p>
 <p>
-Note that static objects may declare and define dynamic predicates.
+Dynamic predicates can be used to represent persistant mutable object state. Note that static objects may declare and define dynamic predicates.
 </p>
 
 <h3 id="predicates_op">Operator directive</h3>
@@ -388,6 +388,9 @@ Multifile predicates may also be declared dynamic using the same <code>Entity::F
 </p>
 <p>
 When a clause of a multifile predicate is a rule, its body is compiled within the context of the object or category defining the clause. This allows clauses for multifile predicates to call local object or category predicates. But the values of the <em>sender</em>, <em>this</em>, and <em>self</em> in the implicit execution context are passed from the clause head to the clause body. This is necessary to ensure that these values are always valid and to allow multifile predicate clauses to be defined in categories. A call to the <code>parameter/2</code> execution context methods, however, retrieves parameters of the entity defining the clause, not from the entity for which the clause is defined. The parameters of the entity for which the clause is defined can be accessed by simple unification at the clause head.
+</p>
+<p>
+Local calls to the database methods from multifile predicate clauses defined in an object take place in the object own database instead of the database of the entity holding the multifile predicate primary declaration. Similarly, local calls to the <code>expand_term/2</code> and <code>expand_goal/2</code> methods from a multifile predicate clause look for clauses of the <code>term_expansion/2</code> and <code>goal_expansion/2</code> hook predicates starting from the entity defining the clause instead of the entity holding the multifile predicate primary declaration. Local calls to the <code>current_predicate/1</code>, <code>predicate_property/2</code>, and <code>current_op/3</code> methods from multifile predicate clauses defined in an object also lookup predicates and their properties in the object own database instead of the database of the entity holding the multifile predicate primary declaration.
 </p>
 
 <h3 id="predicates_coinductive">Coinductive directive</h3>
@@ -762,10 +765,10 @@ Logtalk also supports <a title="Consult reference manual" href="../refman/method
 <h3 id="predicates_expanding">Term and goal expansion methods</h3>
 
 <p>
-Logtalk supports a <a title="Consult reference manual" href="../refman/methods/expand_term_2.html"><code>expand_term/2</code></a> built-in method for expanding a term into a list of terms. This method is mainly used to translate grammar rules into Prolog clauses. It can be customized, e.g. for bypassing the default Logtalk grammar rule translator, by defining clauses for the predicate <a title="Consult reference manual" href="../refman/methods/term_expansion_2.html"><code>term_expansion/2</code></a>.
+Logtalk supports a <a title="Consult reference manual" href="../refman/methods/expand_term_2.html"><code>expand_term/2</code></a> built-in method for expanding a term into another term or a list of terms. This method is mainly used to translate grammar rules into Prolog clauses. It can be customized, e.g. for bypassing the default Logtalk grammar rule translator, by defining clauses for the <a title="Consult reference manual" href="../refman/methods/term_expansion_2.html"><code>term_expansion/2</code></a> hook predicate.
 </p>
 <p>
-Logtalk also supports a <a title="Consult reference manual" href="../refman/methods/expand_goal_2.html"><code>expand_goal/2</code></a> built-in method for expanding a goal. This method can be customized by defining clauses for the predicate <a title="Consult reference manual" href="../refman/methods/goal_expansion_2.html"><code>goal_expansion/2</code></a>.
+Logtalk also supports a <a title="Consult reference manual" href="../refman/methods/expand_goal_2.html"><code>expand_goal/2</code></a> built-in method for expanding a goal. This method can also be customized by defining clauses for the <a title="Consult reference manual" href="../refman/methods/goal_expansion_2.html"><code>goal_expansion/2</code></a> hook predicate.
 </p>
 <p>
 Term and goal expansion may be performed either by calling the <code>expand_term/2</code> and <code>expand_goal/2</code> built-in methods explicitly or by using <em><a class="glossary" title="Go to glossary definition" href="../glossary.html#hook">hook objects</a></em>. To compile a source file using a hook object for expanding its terms, you can use the <a title="Consult reference manual" href="programming.html#programming_flags"><code>hook/1</code></a> compiler flag in the second argument of the <a title="Consult reference manual" href="../refman/predicates/logtalk_compile_2.html"><code>logtalk_compile/2</code></a> or <a title="Consult reference manual" href="../refman/predicates/logtalk_load_2.html"><code>logtalk_load/2</code></a> built-in predicates. You can also use the <a title="Consult reference manual" href="../refman/directives/set_logtalk_flag_2.html"><code>set_logtalk_flag/2</code></a> directive in the source file itself. Clauses for the <code>term_expansion/2</code> and <code>goal_expansion/2</code> predicates defined within an object or a category are never used in the compilation of the object or the category itself, however. In order to use clauses for the <code>term_expansion/2</code> and <code>goal_expansion/2</code> predicates defined in plain Prolog, you will need to explicitly specify the pseudo-object <code>user</code> as the hook object when compiling source files. When using backend Prolog compilers that support a module system, it can also be specified a module containing clauses for the expanding predicates as long as the module name doesn't coincide with an object name. 
@@ -1041,7 +1044,7 @@ This workaround is sometimes necessary when calling module meta-predicates whose
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: October 23, 2015</span>
+		<span>Last updated on: October 28, 2015</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="categories.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="inheritance.html">next</a></span><br/>
