@@ -24,8 +24,11 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2012/11/19,
-		comment is 'Unit tests for the term_expansion/2 built-in method.'
+		date is 2015/10/28,
+		comment is 'Unit tests for the term_expansion/2 user-defined hook predicate.'
 	]).
+
+	% see the tests for the expand_term/2 predicate, which also
+	% test the term_expansion/2 user-defined hook predicate
 
 :- end_object.
