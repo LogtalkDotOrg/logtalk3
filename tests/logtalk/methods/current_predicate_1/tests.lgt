@@ -22,10 +22,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/05/05,
+		date is 2015/10/28,
 		comment is 'Unit tests for the current_predicate/1 built-in method.'
+	]).
+
+	:- discontiguous([
+		succeeds/1, fails/1, throws/2
 	]).
 
 	throws(current_predicate_1_01, error(type_error(predicate_indicator, 1), logtalk(This::current_predicate(1),user))) :-
@@ -62,5 +66,11 @@
 
 	fails(current_predicate_1_10) :-
 		test_object::current_predicate(foo/2).
+
+	% test semantics for local calls from multifile predicate clauses
+
+	succeeds(current_predicate_1_11) :-
+		setof(Predicate, primary::p(Predicate), Predicates),
+		Predicates == [a/1, b/2, c/3].
 
 :- end_object.

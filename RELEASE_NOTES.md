@@ -91,9 +91,12 @@ methods.
 * ADDED: Unit tests for the `goal_expansion/2` and `term_expansion/2`
 hook predicates.
 
-* UPDATED: Tests for the `multifile/1` directive, removing some redundant tests
-and adding tests for checking semantics of local calls to the database methods
-from multifile predicate clauses defined in objects.
+* UPDATED: Unit tests for the `multifile/1` directive, removing some redundant
+tests and adding tests for checking semantics of local calls to the database
+methods from multifile predicate clauses defined in objects.
+
+* UPDATED: Unit tests for the `current_predicate/1` and `predicate_property/2`
+reflection methods to also test local calls from multifile predicate clauses.
 
 Examples
 --------

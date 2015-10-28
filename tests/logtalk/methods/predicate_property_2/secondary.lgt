@@ -18,10 +18,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load([test_object, primary, secondary]),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+:- object(secondary).
+
+	:- multifile(primary::p/2).
+	primary::p(Predicate, Property) :-
+		% the next call must use the "secondary" object
+		% database, not the "primary" object database 
+		predicate_property(Predicate, Property).
+
+	:- private(a/1).
+	a(a).
+
+	:- protected(b/2).
+	b(a, b).
+
+:- end_object.

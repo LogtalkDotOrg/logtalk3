@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/05/05,
+		date is 2015/10/28,
 		comment is 'Unit tests for the predicate_property/2 built-in method.'
 	]).
 
@@ -109,5 +109,19 @@
 	succeeds(predicate_property_2_20) :-
 		test_object::predicate_property(nt(_,_), non_terminal(NonTerminal)),
 		NonTerminal == nt//0.
+
+	% test semantics for local calls from multifile predicate clauses
+
+	succeeds(predicate_property_2_21) :-
+		primary::p(a(_), scope(Scope)),
+		primary::p(a(_), declared_in(Object)),
+		primary::p(a(_), defined_in(Object)),
+		Scope == (private), Object == secondary.
+
+	succeeds(predicate_property_2_22) :-
+		primary::p(b(_,_), scope(Scope)),
+		primary::p(b(_,_), declared_in(Object)),
+		primary::p(b(_,_), defined_in(Object)),
+		Scope == protected, Object == secondary.
 
 :- end_object.

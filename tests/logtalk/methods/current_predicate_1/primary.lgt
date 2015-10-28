@@ -18,10 +18,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load([test_object, primary, secondary]),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+:- object(primary).
+
+	:- public(p/1).
+	:- multifile(p/1).
+
+	:- public(a/1).
+	a(1).
+
+	:- protected(b/2).
+	b(1, 2).
+
+	:- private(c/3).
+	c(1, 2, 3).
+
+	l(1, 2, 3, 4).
+
+:- end_object.
