@@ -22,14 +22,26 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2013/09/28,
+		date is 2015/10/28,
 		comment is 'Unit tests for the "forwarding" built-in protocol.'
 	]).
 
 	test(forwarding_1) :-
 		current_protocol(forwarding),
 		protocol_property(forwarding, built_in).
+
+	test(monitoring_2) :-
+		protocol_property(forwarding, public(Predicates)),
+		ground(Predicates),
+		memberchk(forward/1, Predicates).
+
+	% we want to minimize any dependencies on other entities, including library objects
+
+	memberchk(Element, [Element| _]) :-
+		!.
+	memberchk(Element, [_| List]) :-
+		memberchk(Element, List).
 
 :- end_object.

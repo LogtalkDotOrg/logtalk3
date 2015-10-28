@@ -22,14 +22,27 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2013/09/28,
+		date is 2015/10/28,
 		comment is 'Unit tests for the "expanding" built-in protocol.'
 	]).
 
 	test(expanding_1) :-
 		current_protocol(expanding),
 		protocol_property(expanding, built_in).
+
+	test(expanding_2) :-
+		protocol_property(expanding, public(Predicates)),
+		ground(Predicates),
+		memberchk(goal_expansion/2, Predicates),
+		memberchk(term_expansion/2, Predicates).
+
+	% we want to minimize any dependencies on other entities, including library objects
+
+	memberchk(Element, [Element| _]) :-
+		!.
+	memberchk(Element, [_| List]) :-
+		memberchk(Element, List).
 
 :- end_object.
