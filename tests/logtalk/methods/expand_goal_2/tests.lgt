@@ -124,4 +124,46 @@
 		obj_cl_12::p(Goal),
 		Goal == goal.
 
+	% expand_goal/2 messages
+
+	test(expand_goal_om_01) :-
+		obj_om_01::expand_goal(goal, Goal),
+		Goal == goal.
+
+	test(expand_goal_om_02) :-
+		obj_om_02::expand_goal(goal, Goal),
+		Goal == goal.
+
+	test(expand_goal_om_03) :-
+		obj_om_03::expand_goal(goal, Goal),
+		Goal == 'GOAL'.
+
+	test(expand_goal_om_04) :-
+		obj_om_04::expand_goal(goal, Goal),
+		Goal == goal.
+
+	test(expand_goal_om_05) :-
+		obj_om_05::expand_goal(goal, Goal),
+		Goal == goal.
+
+	test(expand_goal_om_06) :-
+		obj_om_06::expand_goal(goal, Goal),
+		Goal == 'GOAL'.
+
+	test(expand_goal_om_07) :-
+		obj_om_07::expand_goal(goal, Goal),
+		Goal == goal.
+
+	test(expand_goal_om_08) :-
+		obj_om_08::expand_goal(goal, Goal),
+		Goal == goal.
+
+	test(expand_goal_om_09) :-
+		obj_om_09::expand_goal(goal0, Goal),
+		Goal == goal.
+
+	test(expand_goal_om_10) :-
+		obj_om_10::expand_goal(goal0, Goal),
+		Goal == goal.
+
 :- end_object.

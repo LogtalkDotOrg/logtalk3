@@ -18,3 +18,88 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% no term_expansion/2 hook predicate defined
+:- object(obj_om_01).
+
+:- end_object.
+
+
+% missing implements(expanding) but with a
+% term_expansion/2 hook predicate definition
+:- object(obj_om_02).
+
+	term_expansion(term, 'TERM').
+
+:- end_object.
+
+
+% public scope for the term_expansion/2 hook predicate
+:- object(obj_om_03,
+	implements(expanding)).
+
+	term_expansion(term, 'TERM').
+
+:- end_object.
+
+
+% protected scope for the term_expansion/2 hook predicate
+:- object(obj_om_04,
+	implements(protected::expanding)).
+
+	term_expansion(term, 'TERM').
+
+:- end_object.
+
+
+% private scope for the term_expansion/2 hook predicate
+:- object(obj_om_05,
+	implements(private::expanding)).
+
+	term_expansion(term, 'TERM').
+
+:- end_object.
+
+
+% public scope for the inherited term_expansion/2 hook predicate
+:- object(obj_om_06_root,
+	implements(expanding)).
+
+	term_expansion(term, 'TERM').
+
+:- end_object.
+
+
+:- object(obj_om_06,
+	extends(obj_om_06_root)).
+
+:- end_object.
+
+
+% protected scope for the inherited term_expansion/2 hook predicate
+:- object(obj_om_07_root,
+	implements(protected::expanding)).
+
+	term_expansion(term, 'TERM').
+
+:- end_object.
+
+
+:- object(obj_om_07,
+	extends(obj_om_07_root)).
+
+:- end_object.
+
+
+% private scope for the inherited term_expansion/2 hook predicate
+:- object(obj_om_08_root,
+	implements(private::expanding)).
+
+	term_expansion(term, 'TERM').
+
+:- end_object.
+
+
+:- object(obj_om_08,
+	extends(obj_om_08_root)).
+
+:- end_object.

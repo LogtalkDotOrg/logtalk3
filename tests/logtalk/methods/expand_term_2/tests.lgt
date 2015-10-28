@@ -28,6 +28,8 @@
 		comment is 'Unit tests for the expand_term/2 built-in method.'
 	]).
 
+	% local calls to expand_term/2 in objects
+
 	test(expand_term_ol_01) :-
 		obj_ol_01::p(Term),
 		Term == term.
@@ -68,6 +70,8 @@
 		obj_ol_10::p(Term1), obj_ol_10::q(Term2),
 		Term1 == term, Term2 == 'FOO'.
 
+	% local calls to expand_term/2 in categories
+
 	test(expand_term_cl_01) :-
 		obj_cl_01::p(Term),
 		Term == term.
@@ -107,5 +111,39 @@
 	test(expand_term_cl_10) :-
 		obj_cl_10::p(Term1), obj_cl_10::q(Term2),
 		Term1 == term, Term2 == 'FOO'.
+
+	% expand_term/2 messages
+
+	test(expand_term_om_01) :-
+		obj_om_01::expand_term(term, Term),
+		Term == term.
+
+	test(expand_term_om_02) :-
+		obj_om_02::expand_term(term, Term),
+		Term == term.
+
+	test(expand_term_om_03) :-
+		obj_om_03::expand_term(term, Term),
+		Term == 'TERM'.
+
+	test(expand_term_om_04) :-
+		obj_om_04::expand_term(term, Term),
+		Term == term.
+
+	test(expand_term_om_05) :-
+		obj_om_05::expand_term(term, Term),
+		Term == term.
+
+	test(expand_term_om_06) :-
+		obj_om_06::expand_term(term, Term),
+		Term == 'TERM'.
+
+	test(expand_term_om_07) :-
+		obj_om_07::expand_term(term, Term),
+		Term == term.
+
+	test(expand_term_om_08) :-
+		obj_om_08::expand_term(term, Term),
+		Term == term.
 
 :- end_object.
