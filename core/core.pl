@@ -3817,7 +3817,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_term_expansion_message'(Obj, Term, Expansion, Sender, LookupScope) :-
 	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, _, _, _, _),
-	!,
 	(	call(Dcl, term_expansion(_, _), PredScope, _, _, SCtn, _) ->
 		(	(PredScope = LookupScope; Sender = SCtn) ->
 			'$lgt_execution_context'(ExCtx, Obj, Sender, Obj, Obj, [], []),
