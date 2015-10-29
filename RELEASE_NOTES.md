@@ -98,6 +98,9 @@ methods from multifile predicate clauses defined in objects.
 * UPDATED: Unit tests for the `current_predicate/1` and `predicate_property/2`
 reflection methods to also test local calls from multifile predicate clauses.
 
+* UPDATED: Unit tests for the `expand_term/2` and `expand_goal/2` methods to
+also test local calls from multifile predicate clauses.
+
 Examples
 --------
 

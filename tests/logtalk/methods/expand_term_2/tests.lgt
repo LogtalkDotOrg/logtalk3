@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2015/10/27,
+		date is 2015/10/28,
 		comment is 'Unit tests for the expand_term/2 built-in method.'
 	]).
 
@@ -114,36 +114,42 @@
 
 	% expand_term/2 messages
 
-	test(expand_term_om_01) :-
+	test(expand_term_m_01) :-
 		obj_om_01::expand_term(term, Term),
 		Term == term.
 
-	test(expand_term_om_02) :-
+	test(expand_term_m_02) :-
 		obj_om_02::expand_term(term, Term),
 		Term == term.
 
-	test(expand_term_om_03) :-
+	test(expand_term_m_03) :-
 		obj_om_03::expand_term(term, Term),
 		Term == 'TERM'.
 
-	test(expand_term_om_04) :-
+	test(expand_term_m_04) :-
 		obj_om_04::expand_term(term, Term),
 		Term == term.
 
-	test(expand_term_om_05) :-
+	test(expand_term_m_05) :-
 		obj_om_05::expand_term(term, Term),
 		Term == term.
 
-	test(expand_term_om_06) :-
+	test(expand_term_m_06) :-
 		obj_om_06::expand_term(term, Term),
 		Term == 'TERM'.
 
-	test(expand_term_om_07) :-
+	test(expand_term_m_07) :-
 		obj_om_07::expand_term(term, Term),
 		Term == term.
 
-	test(expand_term_om_08) :-
+	test(expand_term_m_08) :-
 		obj_om_08::expand_term(term, Term),
 		Term == term.
+
+	% test semantics for local calls from multifile predicate clauses
+
+	test(expand_term_multifile_01) :-
+		primary::expand(term, Expansion),
+		Expansion == secondary.
 
 :- end_object.

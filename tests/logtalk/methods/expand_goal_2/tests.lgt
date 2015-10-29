@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2015/10/27,
+		date is 2015/10/28,
 		comment is 'Unit tests for the expand_goal/2 built-in method.'
 	]).
 
@@ -126,44 +126,50 @@
 
 	% expand_goal/2 messages
 
-	test(expand_goal_om_01) :-
+	test(expand_goal_m_01) :-
 		obj_om_01::expand_goal(goal, Goal),
 		Goal == goal.
 
-	test(expand_goal_om_02) :-
+	test(expand_goal_m_02) :-
 		obj_om_02::expand_goal(goal, Goal),
 		Goal == goal.
 
-	test(expand_goal_om_03) :-
+	test(expand_goal_m_03) :-
 		obj_om_03::expand_goal(goal, Goal),
 		Goal == 'GOAL'.
 
-	test(expand_goal_om_04) :-
+	test(expand_goal_m_04) :-
 		obj_om_04::expand_goal(goal, Goal),
 		Goal == goal.
 
-	test(expand_goal_om_05) :-
+	test(expand_goal_m_05) :-
 		obj_om_05::expand_goal(goal, Goal),
 		Goal == goal.
 
-	test(expand_goal_om_06) :-
+	test(expand_goal_m_06) :-
 		obj_om_06::expand_goal(goal, Goal),
 		Goal == 'GOAL'.
 
-	test(expand_goal_om_07) :-
+	test(expand_goal_m_07) :-
 		obj_om_07::expand_goal(goal, Goal),
 		Goal == goal.
 
-	test(expand_goal_om_08) :-
+	test(expand_goal_m_08) :-
 		obj_om_08::expand_goal(goal, Goal),
 		Goal == goal.
 
-	test(expand_goal_om_09) :-
+	test(expand_goal_m_09) :-
 		obj_om_09::expand_goal(goal0, Goal),
 		Goal == goal.
 
-	test(expand_goal_om_10) :-
+	test(expand_goal_m_10) :-
 		obj_om_10::expand_goal(goal0, Goal),
 		Goal == goal.
+
+	% test semantics for local calls from multifile predicate clauses
+
+	test(expand_goal_multifile_01) :-
+		primary::expand(goal, Expansion),
+		Expansion == secondary.
 
 :- end_object.

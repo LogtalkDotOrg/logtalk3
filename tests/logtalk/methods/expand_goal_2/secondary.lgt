@@ -18,11 +18,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load([object_local, category_local, message], [report(off)]),
-	logtalk_load([primary, secondary]),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+:- object(secondary,
+	implements(expanding)).
+
+	:- multifile(primary::expand/2).
+	primary::expand(Term, Expanded) :-
+		% the next call must use the "secondary" object
+		% database, not the "primary" object database 
+		expand_goal(Term, Expanded),
+		this(This), writeq(this-This), nl.
+
+	goal_expansion(goal, secondary).
+
+:- end_object.
