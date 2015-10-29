@@ -18,10 +18,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load([test_objects, primary, secondary]),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+:- object(primary).
+
+	:- public(p/3).
+	:- multifile(p/3).
+
+	% scoped operarors; seen by the reflection built-in methods
+	:- public(op(777, yfx, op_public)).
+	:- protected(op(777, yfx, op_protected)).
+	:- private(op(777, yfx, op_private)).
+
+	% local operator; invisible to the reflection built-in methods
+	:- op(777, yfx, op_local).
+
+:- end_object.

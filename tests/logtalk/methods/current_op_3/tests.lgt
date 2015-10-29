@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/04/18,
+		date is 2015/10/29,
 		comment is 'Unit tests for the current_op/3 built-in directive.'
 	]).
 
@@ -76,5 +76,22 @@
 	succeeds(current_op_3_13) :-
 		test_object_2::operators(Operators),
 		Operators == [opq, rst].
+
+	% test semantics for local calls from multifile predicate clauses
+
+	succeeds(current_op_1_14) :-
+		primary::p(Priority, Associativity, op_public),
+		Priority == 601, Associativity == xfx.
+
+	succeeds(current_op_1_15) :-
+		primary::p(Priority, Associativity, op_protected),
+		Priority == 601, Associativity == xfx.
+
+	succeeds(current_op_1_16) :-
+		primary::p(Priority, Associativity, op_private),
+		Priority == 601, Associativity == xfx.
+
+	succeeds(current_op_1_17) :-
+		\+ primary::p(_, _, op_local).
 
 :- end_object.

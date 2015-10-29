@@ -18,10 +18,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load([test_objects, primary, secondary]),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+:- object(secondary).
+
+	:- multifile(primary::p/3).
+	primary::p(Priority, Associativity, Operator) :-
+		% the next call must use the "secondary" object
+		% database, not the "primary" object database 
+		current_op(Priority, Associativity, Operator).
+
+	% scoped operarors; seen by the reflection built-in methods
+	:- public(op(601, xfx, op_public)).
+	:- protected(op(601, xfx, op_protected)).
+	:- private(op(601, xfx, op_private)).
+
+	% local operator; invisible to the reflection built-in methods
+	:- op(601, xfx, op_local).
+
+:- end_object.
