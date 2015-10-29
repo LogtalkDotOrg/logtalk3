@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Quintus Prolog 3.3~3.5
-%  Last updated on September 30, 2015
+%  Last updated on October 29, 2015
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -107,14 +107,14 @@ atom_concat(Atom1, Atom2, Atom3) :-
 	!,
 	atom_chars(Atom1, Codes1),
 	atom_chars(Atom2, Codes2),
-	'$lgt_append'(Codes1, Codes2, Codes3),
+	append(Codes1, Codes2, Codes3),
 	atom_chars(Atom3, Codes3).
 
 atom_concat(Atom1, Atom2, Atom3) :-
 	nonvar(Atom3),
 	!,
 	atom_chars(Atom3, Codes3),
-	'$lgt_append'(Codes1, Codes2, Codes3),
+	append(Codes1, Codes2, Codes3),
 	atom_chars(Atom1, Codes1),
 	atom_chars(Atom2, Codes2).
 
@@ -255,7 +255,7 @@ unify_with_occurs_check(Term1, Term2) :-
 
 findall(Term, Goal, List, Tail) :-
 	findall(Term, Goal, List0),
-	'$lgt_append'(List0, Tail, List).
+	append(List0, Tail, List).
 
 
 % forall(+callable, +callable) -- library predicate
