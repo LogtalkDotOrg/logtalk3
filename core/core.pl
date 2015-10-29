@@ -5567,31 +5567,28 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_source_file_name'(FilePath, Directory, Name, Extension, SourceFile) :-
 	'$lgt_prolog_os_file_name'(NormalizedPath, FilePath),
-	'$lgt_decompose_file_name'(NormalizedPath, Directory0, Name0, Extension0),
+	'$lgt_expand_path'(NormalizedPath, SourceFile0),
+	'$lgt_decompose_file_name'(SourceFile0, Directory, Name, Extension0),
 	(	% file extensions are defined in the Prolog adapter files (there
 		% might be multiple extensions defined for the same type of file)
 		'$lgt_file_extension'(logtalk, Extension0) ->
 		% declared extension for this type of file is present
-		Name = Name0,
+		SourceFile = SourceFile0,
 		Extension = Extension0
 	;	'$lgt_file_extension'(prolog, Extension0) ->
 		% assume Prolog file being compiled as a Logtalk file
-		Name = Name0,
+		SourceFile = SourceFile0,
 		Extension = Extension0
 	;	% no Logtalk or Prolog extension for this type of file; generate possible
 		% basenames starting with Logtalk extensions followed by Prolog extensions
 		(	'$lgt_file_extension'(logtalk, Extension)
 		;	'$lgt_file_extension'(prolog, Extension)
 		),
-		atom_concat(Name0, Extension0, Name)
+		atom_concat(SourceFile0, Extension, SourceFile)
 	;	% use basename as-is
-		atom_concat(Name0, Extension0, Name),
+		SourceFile = SourceFile0,
 		Extension = ''
-	),
-	atom_concat(Name, Extension, Basename),
-	atom_concat(Directory0, Basename, Path),
-	'$lgt_expand_path'(Path, SourceFile),
-	atom_concat(Directory, Basename, SourceFile).
+	).
 
 
 

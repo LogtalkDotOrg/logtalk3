@@ -64,6 +64,11 @@ reaching a fixed point as documented.
 * FIXED: Passing execution context to calls to the `term_expansion/2` and
 `goal_expansion/2` hook predicates.
 
+* FIXED: Loading source files in mixed case when using backend Prolog
+compilers such as SWI-Prolog when running on Windows that down-case file
+names when expanding file paths into absolute file paths. Thanks to
+Damien Roch for the bug report.
+
 Prolog adapter and integration files
 ------------------------------------
 
