@@ -3741,13 +3741,28 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 % '$lgt_term_expansion_local'(+object_identifier, ?term, ?term, +execution_context)
+%
+% to avoid failures when the call is made from a multifile predicate clause,
+% first the term_expansion/2 definition container is located and then the
+% call is reduced to a local call
 
 '$lgt_term_expansion_local'(Obj, Term, Expansion, ExCtx) :-
 	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, _, DDef, _, _),
 	!,
 	(	call(Dcl, term_expansion(_, _), Scope, _, _, SCtn, _) ->
 		(	(Scope = p(_); Obj = SCtn) ->
-			call(Def, term_expansion(Term, Expansion), ExCtx, Call, _, _)
+			(	call(Def, term_expansion(_, _), _, _, _, DCtn) ->
+				(	'$lgt_current_object_'(DCtn, _, _, DCtnDef, _, _, _, _, DCtnDDef, _, _) ->
+					(	call(DCtnDef, term_expansion(Term, Expansion), ExCtx, Call) ->
+						true
+					;	call(DCtnDDef, term_expansion(Term, Expansion), ExCtx, Call)
+					)
+				;	'$lgt_current_category_'(DCtn, _, _, DCtnDef, _, _),
+					call(DCtnDef, term_expansion(Term, Expansion), ExCtx, Call)
+				)
+			;	% no definition found
+				fail
+			)
 		;	% declaration is out of scope but we can still try a local definition
 			call(Def, term_expansion(Term, Expansion), ExCtx, Call) ->
 			true
@@ -3766,7 +3781,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_current_category_'(Ctg, _, Dcl, Def, _, _),
 	(	call(Dcl, term_expansion(_, _), Scope, _, _, DclCtn) ->
 		(	(Scope = p(_); Ctg = DclCtn) ->
-			call(Def, term_expansion(Term, Expansion), ExCtx, Call, _)
+			(	call(Def, term_expansion(_, _), _, _, DCtn) ->
+				'$lgt_current_category_'(DCtn, _, _, DCtnDef, _, _),
+				call(DCtnDef, term_expansion(Term, Expansion), ExCtx, Call)
+			;	% no definition found
+				fail
+			)
 		;	% declaration is out of scope but we can still try a local definition
 			call(Def, term_expansion(Term, Expansion), ExCtx, Call)
 		)
