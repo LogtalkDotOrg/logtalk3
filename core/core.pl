@@ -3868,19 +3868,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 % '$lgt_expand_goal_object_scoped'(?term, ?term, +atom, +execution_context)
+%
+% to avoid failures when the call is made from a multifile predicate clause,
+% first the goal_expansion/2 definition container is located and then the
+% call is reduced to a local call
 
 '$lgt_expand_goal_object_scoped'(Goal, ExpandedGoal, Def, ExCtx) :-
-	(	var(Goal) ->
-		ExpandedGoal = Goal
-	;	% lookup local goal_expansion/2 hook predicate definition
-		call(Def, goal_expansion(Goal, ExpandedGoal0), ExCtx, Call, _, _) ->
-		(	call(Call),
-			Goal \== ExpandedGoal0 ->
-			'$lgt_expand_goal_object_scoped'(ExpandedGoal0, ExpandedGoal, Def, ExCtx)
-		;	% fixed-point found
-			ExpandedGoal = Goal
+	(	call(Def, goal_expansion(_, _), _, _, _, DCtn) ->
+		(	'$lgt_current_object_'(DCtn, _, _, DCtnDef, _, _, _, _, DCtnDDef, _, _) ->
+			'$lgt_expand_goal_object_local'(Goal, ExpandedGoal, DCtnDef, DCtnDDef, ExCtx)
+		;	'$lgt_current_category_'(DCtn, _, _, DCtnDef, _, _),
+			'$lgt_expand_goal_category_local'(Goal, ExpandedGoal, DCtnDef, ExCtx)
 		)
-	;	% no local goal_expansion/2 hook predicate definition found
+	;	% no goal_expansion/2 hook predicate definition found
 		ExpandedGoal = Goal
 	).
 
@@ -3906,18 +3906,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 % '$lgt_expand_goal_category_scoped'(?term, ?term, +atom, +execution_context)
+%
+% to avoid failures when the call is made from a multifile predicate clause,
+% first the goal_expansion/2 definition container is located and then the
+% call is reduced to a local call
 
 '$lgt_expand_goal_category_scoped'(Goal, ExpandedGoal, Def, ExCtx) :-
-	(	var(Goal) ->
-		ExpandedGoal = Goal
-	;	% lookup local goal_expansion/2 hook predicate definition
-		call(Def, goal_expansion(Goal, ExpandedGoal0), ExCtx, Call, _) ->
-		(	call(Call),
-			Goal \== ExpandedGoal0 ->
-			'$lgt_expand_goal_category_scoped'(ExpandedGoal0, ExpandedGoal, Def, ExCtx)
-		;	% fixed-point found
-			ExpandedGoal = Goal
-		)
+	(	call(Def, goal_expansion(_, _), _, _, DCtn) ->
+		'$lgt_current_category_'(DCtn, _, _, DCtnDef, _, _),
+		'$lgt_expand_goal_category_local'(Goal, ExpandedGoal, DCtnDef, ExCtx)
 	;	% no local goal_expansion/2 hook predicate definition found
 		ExpandedGoal = Goal
 	).
