@@ -657,7 +657,7 @@
 
 		make_directory(Directory) :-
 			{canonical_path_name(Directory, ExpandedPath)},
-			(	{exists(ExpandedPath)} ->
+			(	{exists(ExpandedPath), get_file_info(ExpandedPath, type, directory)} ->
 				true
 			;	{mkdir(ExpandedPath)}
 			).
@@ -682,11 +682,13 @@
 
 		directory_exists(Directory) :-
 			{canonical_path_name(Directory, ExpandedPath),
-			 exists(ExpandedPath)}.
+			 exists(ExpandedPath),
+			 get_file_info(ExpandedPath, type, directory)}.
 
 		file_exists(File) :-
 			{canonical_path_name(File, ExpandedPath),
-			 exists(ExpandedPath)}.
+			 exists(ExpandedPath),
+			 get_file_info(ExpandedPath, type, file)}.
 
 		file_modification_time(File, Time) :-
 			{canonical_path_name(File, ExpandedPath),

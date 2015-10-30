@@ -86,6 +86,13 @@ Documentation
 
 ADDED: Documentation on multifile predicate definition caveats.
 
+Library
+-------
+
+* FIXED: The ECLiPSe definitions used in the portable operating-system library
+for the internal predicates that create directories and check for file and
+directory existence to test the given path for the correct type.
+
 Tools
 -----
 
