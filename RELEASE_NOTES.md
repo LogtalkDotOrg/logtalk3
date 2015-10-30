@@ -115,6 +115,10 @@ Examples
 * IMPROVED: The `expansion` example with a better definition for a term-
 expansion pipeline and with a definition for a goal-expansion pipeline.
 
+* FIXED: Changed the name of a sub-directory used by the `cc` example unit
+tests to workaround an issue with the ECLiPSe built-in predicate used for
+expanding file paths.
+
 
 3.01.2 - October 18, 2015
 =========================

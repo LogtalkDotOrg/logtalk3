@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0.4,
+		version is 0.5,
 		author is 'Paulo Moura',
-		date is 2015/10/16,
+		date is 2015/10/30,
 		comment is 'Unit tests for the "cc" example.'
 	]).
 
@@ -43,22 +43,22 @@
 	test(cc_04) :-
 		os::expand_path('$LOGTALKUSER/examples/cc/', Path),
 		os::change_directory(Path),
-		os::directory_exists(tests),
-		os::file_exists('tests/bar.txt').
+		os::directory_exists(files),
+		os::file_exists('files/bar.txt').
 
 	test(cc_05) :-
 		os::expand_path('$LOGTALKUSER/examples/cc/', Path),
 		os::change_directory(Path),
-		os::change_directory(tests),
+		os::change_directory(files),
 		os::file_exists('bar.txt'),
 		os::file_size('bar.txt', 0).
 
 	test(cc_06) :-
 		os::expand_path('$LOGTALKUSER/examples/cc/', Path),
 		os::change_directory(Path),
-		os::rename_file('tests/bar.txt', 'tests/foo.txt'),
-		os::file_exists('tests/foo.txt'),
-		os::rename_file('tests/foo.txt', 'tests/bar.txt').
+		os::rename_file('files/bar.txt', 'files/foo.txt'),
+		os::file_exists('files/foo.txt'),
+		os::rename_file('files/foo.txt', 'files/bar.txt').
 
 	test(cc_07) :-
 		os::expand_path('$LOGTALKUSER/examples/cc/', Path),
@@ -104,6 +104,7 @@
 		os::directory_files(Path, Files),
 		memberchk('.', Files),
 		memberchk('..', Files),
+		memberchk('files', Files),
 		memberchk('tester.lgt', Files),
 		memberchk('tests.lgt', Files).
 
