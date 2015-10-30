@@ -29,25 +29,25 @@
 	]).
 
 	test(wrappers_1) :-
-		zipper<<(zipper(3, [1,2,3,4,5], Zip, X), next(Zip, Next)),
+		zipper << (zipper(3, [1,2,3,4,5], Zip, X), next(Zip, Next)),
 		Zip == zip([2, 1], 3, [4, 5]),
 		X == 3,
 		Next == zip([3, 2, 1], 4, [5]).
 
 	test(wrappers_2) :-
-		zipper<<(zipper(3, [1,2,3,4,5], Zip, X), next(Zip, Next), previous(Next, Zip)),
+		zipper << (zipper(3, [1,2,3,4,5], Zip, X), next(Zip, Next), previous(Next, Zip)),
 		Zip == zip([2, 1], 3, [4, 5]),
 		X == 3,
 		Next == zip([3, 2, 1], 4, [5]).
 
 	test(wrappers_3) :-
-		zipper<<(zipper(3, [1,2,3,4,5], Zip, X), previous(Zip, Previous)),
+		zipper << (zipper(3, [1,2,3,4,5], Zip, X), previous(Zip, Previous)),
 		Zip == zip([2, 1], 3, [4, 5]),
 		X == 3,
 		Previous == zip([1], 2, [3, 4, 5]).
 
 	test(wrappers_4) :-
-		zipper<<(zipper(3, [1,2,3,4,5], Three, X), next(Three, Four), next(Four, Five), previous(Five, Four), previous(Four, Three), previous(Three, Two), previous(Two, One)),
+		zipper << (zipper(3, [1,2,3,4,5], Three, X), next(Three, Four), next(Four, Five), previous(Five, Four), previous(Four, Three), previous(Three, Two), previous(Two, One)),
 		Three == zip([2, 1], 3, [4, 5]),
 		X == 3,
 		Four == zip([3, 2, 1], 4, [5]),
