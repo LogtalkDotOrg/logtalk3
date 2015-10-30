@@ -69,6 +69,11 @@ compilers such as SWI-Prolog when running on Windows that down-case file
 names when expanding file paths into absolute file paths. Thanks to
 Damien Roch for the bug report.
 
+* FIXED: Static binding bug when using backend Prolog systems where Logtalk
+compiler/runtime predicates are marked as built-in predicates (e.g. ECLiPSe
+and GNU Prolog). This bug notably caused lambdas examples and unit tests to
+fail when running with the `optimize` flat turned on.
+
 Prolog adapter and integration files
 ------------------------------------
 

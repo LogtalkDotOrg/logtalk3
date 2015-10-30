@@ -2505,7 +2505,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 2, 0, rc4)).
+'$lgt_version_data'(logtalk(3, 2, 0, rc5)).
 
 
 
@@ -18843,14 +18843,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% compiling the meta-argument allows predicate cross-referencing information
 	% to be collected even if the compilation result cannot be used
 	'$lgt_compile_body'(Goal, TGoal, _, Ctx),
+	functor(TGoal, TFunctor, _),
 	(	'$lgt_comp_ctx_entity'(Ctx, Entity),
 		Entity == user ->
 		TClosure = {Closure}
+	;	sub_atom(TFunctor, 0, 5, _, '$lgt_') ->
+		% in some backend Prolog systems, internal Logtalk compiler/runtime
+		% predicates may be marked as built-in predicates
+		fail
 	;	'$lgt_built_in_predicate'(TGoal) ->
 		TClosure = {Closure}
-	;	functor(TGoal, TFunctor, _),
-		\+ sub_atom(TFunctor, 0, 5, _, '$lgt_') ->
-		'$lgt_goal_to_closure'(N, TGoal, TFunctor, TArgs, ExCtx),
+	;	'$lgt_goal_to_closure'(N, TGoal, TFunctor, TArgs, ExCtx),
 		TClosure = '$lgt_closure'(TFunctor, TArgs, ExCtx)
 	;	% runtime resolved meta-call
 		fail
