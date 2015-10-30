@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on May 13, 2015
+%  Last updated on October 30, 2015
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -335,7 +335,8 @@ forall(Generate, Test) :-
 % checks if a directory exists
 
 '$lgt_file_exists'(File) :-
-	exists(File).
+	exists(File),
+	get_file_info(File, type, file).
 
 
 % '$lgt_delete_file'(+atom)
@@ -355,7 +356,8 @@ forall(Generate, Test) :-
 
 '$lgt_directory_exists'(Directory) :-
 	canonical_path_name(Directory, Path),
-	exists(Path).
+	exists(Path),
+	get_file_info(Path, type, directory).
 
 
 % '$lgt_current_directory'(-atom)

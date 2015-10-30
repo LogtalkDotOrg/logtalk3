@@ -76,6 +76,9 @@ Prolog adapter and integration files
 introduces support for the `directory_files/2` predicate and fixes a critical
 bug in the `atom_codes/2` predicate for the portable `os` library.
 
+* FIXED: The ECLiPSe definitions of the internal predicates that check for
+file and directory existence to test the given path for the correct type.
+
 * FIXED: Quintus Prolog adapter file.
 
 Documentation
