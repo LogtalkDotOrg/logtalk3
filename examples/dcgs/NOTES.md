@@ -55,7 +55,8 @@ categories:
 	decoder for Morse code messages; illustrate how to use scope 
 	directives to declare grammar rule non-terminals
 - `iban`  
-	IBAN validation
+	IBAN validation; this example can generate very large integers during
+	validation and thus may not work with all backend Prolog compilers
 
 This folder includes an example, `tokenizer`, adapted with permission from 
 a Michael A. Covington example:
