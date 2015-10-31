@@ -35,7 +35,7 @@
 		write('Go to the store and buy some more, 99 bottles of beer on the wall.'), nl, nl.
 	sing(N) :-
 		N > 0,
-		N2 is N -1,
+		N2 is N - 1,
 		beers(N), write(' of beer on the wall, '), beers(N), write(' of beer.'), nl,
 		write('Take one down and pass it around, '), beers(N2), write(' of beer on the wall.'), nl, nl,
 		sing(N2).
