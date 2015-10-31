@@ -133,6 +133,6 @@
 
 	% ... it's possible, if necessary, to define a dynamic
 	% instance in a source file by writing:
-	:- dynamic.
+	:- (dynamic).
 
 :- end_object.

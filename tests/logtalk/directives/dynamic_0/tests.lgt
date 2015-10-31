@@ -28,7 +28,7 @@
 		comment is 'Unit tests for the dynamic/0 built-in directive.'
 	]).
 
-	:- dynamic.
+	:- (dynamic).
 
 	test(dynamic_0_1) :-
 		this(This),
