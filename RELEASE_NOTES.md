@@ -134,6 +134,9 @@ expansion pipeline and with a definition for a goal-expansion pipeline.
 tests to workaround an issue with the ECLiPSe built-in predicate used for
 expanding file paths.
 
+* FIXED: Workaround a syntax error when using XSB as the backend Prolog
+compiler with the `wrappers` example.
+
 
 3.01.2 - October 18, 2015
 =========================
