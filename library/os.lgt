@@ -1120,7 +1120,7 @@
 
 		delete_directory(Directory) :-
 			expand_path(Directory, ExpandedPath),
-			{delete_file(ExpandedPath)}.
+			{delete_directory(ExpandedPath)}.
 
 		change_directory(Directory) :-
 			expand_path(Directory, ExpandedPath),

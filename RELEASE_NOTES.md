@@ -101,6 +101,9 @@ directory existence to test the given path for the correct type.
 * FIXED: A spurious choice-point in the Lean Prolog `expand_path/2` predicate
 definition used in the portable operating-system library.
 
+* FIXED: Broken definition of the `delete_directory/1` predicate for Lean
+Prolog used in the portable operating-system library.
+
 Tools
 -----
 
