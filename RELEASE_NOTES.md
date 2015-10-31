@@ -84,6 +84,9 @@ bug in the `atom_codes/2` predicate for the portable `os` library.
 * FIXED: The ECLiPSe definitions of the internal predicates that check for
 file and directory existence to test the given path for the correct type.
 
+* FIXED: Lean Prolog adapter file internal predicate used by the compiler to
+read file terms to also accept an empty list of options.
+
 * FIXED: Quintus Prolog adapter file.
 
 Documentation
