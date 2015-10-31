@@ -37,9 +37,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.20,
+		version is 1.21,
 		author is 'Paulo Moura',
-		date is 2015/10/16,
+		date is 2015/10/31,
 		comment is 'Portable operating-system access predicates.'
 	]).
 
@@ -1103,7 +1103,7 @@
 
 		expand_path(Path, ExpandedPath) :-
 			(	\+ atom_concat('/', _, Path),
-				\+ atom_concat('$', _, Path),
+				\+ atom_concat('$', _, Path) ->
 				{working_directory(Current, Current)},
 				atom_concat(Current, '/', ExpandedPath0),
 				atom_concat(ExpandedPath0, Path, ExpandedPath1),
