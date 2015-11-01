@@ -21,8 +21,8 @@ RELEASE NOTES
 =============
 
 
-3.02.0 - November ??, 2015
-==========================
+3.02.0 - November 2, 2015
+=========================
 
 Logtalk compiler and runtime
 ----------------------------
@@ -81,7 +81,7 @@ Prolog adapter and integration files
 introduces support for the `directory_files/2` predicate and fixes a critical
 bug in the `atom_codes/2` predicate for the portable `os` library.
 
-* FIXED: Instruction on embedding Logtak in a GNU Prolog generated executable.
+* FIXED: Instruction on embedding Logtalk in a GNU Prolog generated executable.
 
 * FIXED: The ECLiPSe definitions of the internal predicates that check for
 file and directory existence to test the given path for the correct type.
