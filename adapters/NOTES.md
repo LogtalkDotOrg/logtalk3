@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 Notes on supported backend Prolog compilers  
-Last updated on October 6, 2015
+Last updated on November 1, 2015
 
 This file is part of Logtalk <http://logtalk.org/>  
 Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -204,10 +204,12 @@ Edit the `$HOME/collect/core.pl` file and add the line `:- built_in.` to
 the top. Then:
 
 	$ cd $HOME/collect
-	$ gplc -o logtalk gnu.pl paths.pl expanding_lgt.pl monitoring_lgt.pl forwarding_lgt.pl user_lgt.pl logtalk_lgt.pl core_messages_lgt.pl core.pl
+	$ gplc -o logtalk gnu.pl expanding_lgt.pl monitoring_lgt.pl forwarding_lgt.pl user_lgt.pl logtalk_lgt.pl core_messages_lgt.pl core.pl paths.pl
 
-Note that the order of the files when calling `gplc` is important. Finally,
-move the new executable to a directory in your system PATH. For example:
+You can ignore any suspicious predicate warnings about the `{}/1` predicate
+that might be printed when running the `gplc` command. Note that the order of
+the files when calling `gplc` is important. Finally, move the new executable
+to a directory in your system PATH. For example:
 
 	$ mv logtalk /usr/local/bin/
 
