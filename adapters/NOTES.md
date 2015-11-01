@@ -284,7 +284,7 @@ Lean Prolog 3.8.8 and later versions
 Experimental. Lean Prolog lacks compliance with both official and de facto
 standards. Notably, it lacks support for stream aliases, for the `0'Char`
 notation, for escape sequences in atoms, and its limited parser often
-requires atoms to be quoted and/or write between ()'s. Moreover, due to
+requires atoms to be quoted and written between ()'s. Moreover, due to
 Lean Prolog limitation of compiling more than one file per session, the
 compilation of Logtalk source files generates intermediate Prolog files
 that are consulted (i.e. interpreted) instead of being compiled, severely
@@ -311,6 +311,9 @@ for POSIX systems):
 
 	$ cd $HOME/collect
 	$ cat $(ls -t *.pl) > logtalk_core.pl
+
+Starting Lean Prolog with a Java allocation of at least 2GB is recommended
+(by passing a `-Xmx2G` to Java).
 
 
 Qu-Prolog 9.0 and later versions
