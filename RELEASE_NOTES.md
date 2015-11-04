@@ -21,6 +21,16 @@ RELEASE NOTES
 =============
 
 
+3.02.1 - November ??, 2015
+==========================
+
+Documentation
+-------------
+
+ADDED: Small section on optimizing applications to the user manual section on
+Logtalk programming.
+
+
 3.02.0 - November 2, 2015
 =========================
 

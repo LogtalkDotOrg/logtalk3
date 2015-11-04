@@ -27,7 +27,7 @@
 
 <head>
 	<meta http-equiv="content-type" content="application/xml+xhtml; charset=utf-8" />
-	<title>Logtalk user manual: writing, running, and debugging programs</title>
+	<title>Logtalk user manual: writing, running, and debugging applications</title>
 	<link rel="stylesheet" href="../screen.css" type="text/css" media="screen"/>
 	<link rel="stylesheet" href="../print.css" type="text/css" media="print"/>
 </head>
@@ -35,21 +35,21 @@
 <body>
 
 <div class="top-left">Logtalk user manual</div>
-<div class="top-right">Writing, running, and debugging programs</div>
+<div class="top-right">Writing, running, and debugging applications</div>
 <div class="bottom-left"><span class="page"/></div>
 <div class="bottom-right"><span class="page"/></div>
 <div class="navtop"><a href="../index.html">Contents</a> &gt; <a href="index.html">User Manual</a> &gt; Programming</div>
 
-<h1 id="programming_programming">Writing, running, and debugging programs</h1>
+<h1 id="programming_programming">Writing, running, and debugging applications</h1>
 
 
-<h2 id="programming_writing">Writing programs</h2>
+<h2 id="programming_writing">Writing applications</h2>
 
 <p>
 For a successful programming in Logtalk, you need a good working knowledge of Prolog and an understanding of the principles of object-oriented programming. Most guidelines for writing good Prolog code apply as well to Logtalk programming. To those guidelines, you should add the basics of good object-oriented design.
 </p>
 <p>
-One of the advantages of a system like Logtalk is that it enable us to use the currently available object-oriented methodologies, tools, and metrics <a href="../bibliography.html#Champaux92">[Champaux 92]</a> in Prolog programming. That said, writing programs in Logtalk is similar to writing programs in Prolog: we define new predicates describing what is true about our domain objects, about our problem solution. We encapsulate our predicate directives and definitions inside new objects, categories and protocols that we create by hand with a text editor or by using the Logtalk built-in predicates. Some of the information collected during the analysis and design phases can be integrated in the objects, categories and protocols that we define by using the available entity and predicate documenting directives.
+One of the advantages of a system like Logtalk is that it enable us to use the currently available object-oriented methodologies, tools, and metrics <a href="../bibliography.html#Champaux92">[Champaux 92]</a> in Prolog programming. That said, writing applications in Logtalk is similar to writing applications in Prolog: we define new predicates describing what is true about our domain objects, about our problem solution. We encapsulate our predicate directives and definitions inside new objects, categories and protocols that we create by hand with a text editor or by using the Logtalk built-in predicates. Some of the information collected during the analysis and design phases can be integrated in the objects, categories and protocols that we define by using the available entity and predicate documenting directives.
 </p>
 
 <h3 id="programming_source_files">Source files</h3>
@@ -67,10 +67,10 @@ The text encoding used in a source file may be declared using the <a title="Cons
 Logtalk source files can include the text of other files by using the <a title="Consult reference manual" href="../refman/directives/include_1.html"><code>include/1</code></a> directive. Although there's also a standard Prolog <code>include/1</code> directive, any occurrences of this directive in a Logtalk source file is handled by the Logtalk compiler, not by the backend Prolog compiler.
 </p>
 
-<h3 id="programming_portability">Portable programs</h3>
+<h3 id="programming_portability">Portable applications</h3>
 
 <p>
-Logtalk is compatible with almost all modern Prolog compilers. However, this does not necessarily imply that your Logtalk programs will have the same level of portability. If possible, you should only use in your programs Logtalk built-in predicates and ISO Prolog specified built-in predicates and arithmetic functions. If you need to use built-in predicates (or built-in arithmetic functions) that may not be available in other Prolog compilers, you should try to encapsulate the non-portable code in a small number of objects and provide a portable <strong>interface</strong> for that code through the use of Logtalk protocols. An example will be code that access operating-system specific features. The Logtalk compiler can warn you of the use of non-ISO specified built-in predicates and arithmetic functions by using the <code>portability/1</code> compiler flag.
+Logtalk is compatible with almost all modern Prolog compilers. However, this does not necessarily imply that your Logtalk applications will have the same level of portability. If possible, you should only use in your applications Logtalk built-in predicates and ISO Prolog specified built-in predicates and arithmetic functions. If you need to use built-in predicates (or built-in arithmetic functions) that may not be available in other Prolog compilers, you should try to encapsulate the non-portable code in a small number of objects and provide a portable <strong>interface</strong> for that code through the use of Logtalk protocols. An example will be code that access operating-system specific features. The Logtalk compiler can warn you of the use of non-ISO specified built-in predicates and arithmetic functions by using the <code>portability/1</code> compiler flag.
 </p>
 
 <h3 id="programming_cc">Conditional compilation</h3>
@@ -110,7 +110,7 @@ It is suggested that all code between an entity opening and closing directives b
 <h2 id="programming_session">Running a Logtalk session</h2>
 
 <p>
-We run Logtalk inside a normal Prolog session, after loading the necessary files. Logtalk extends but does not modify your Prolog compiler. We can freely mix Prolog queries with the sending of messages and our programs can be made of both normal Prolog clauses and object definitions.
+We run Logtalk inside a normal Prolog session, after loading the necessary files. Logtalk extends but does not modify your Prolog compiler. We can freely mix Prolog queries with the sending of messages and our applications can be made of both normal Prolog clauses and object definitions.
 </p>
 
 <h3 id="programming_starting">Starting Logtalk</h3>
@@ -131,10 +131,10 @@ Note that the adapter files, compiler/runtime files, and library paths file are 
 Most Prolog compilers support automatic loading of an initialization file, which can include the necessary directives to load both the Prolog adapter file and the Logtalk compiler. This feature, when available, allows automatic loading of Logtalk when you start your Prolog compiler.
 </p>
 
-<h3 id="programming_compiling">Compiling and loading your programs</h3>
+<h3 id="programming_compiling">Compiling and loading your applications</h3>
 
 <p>
-Your programs will be made of source files containing your objects, protocols, and categories. The source files can be compiled to disk by calling the Logtalk built-in predicate  
+Your applications will be made of source files containing your objects, protocols, and categories. The source files can be compiled to disk by calling the Logtalk built-in predicate  
 <a title="Consult reference manual" href="../refman/predicates/logtalk_compile_1.html"><code>logtalk_compile/1</code></a>:
 </p>
 <pre>| ?- logtalk_compile([source_file1, source_file2, ...]).</pre>
@@ -427,8 +427,13 @@ Some caveats that you should be aware. First, some warnings that might be produc
 If you use Logtalk for batch processing, you probably want to turn off the option <code>report</code> to suppress all messages of type <code>banner</code>, <code>comment</code>, <code>comment(_)</code>, <code>warning</code>, and <code>warning(_)</code> that are normally printed. Note that error messages and messages providing information requested by the user will still be printed.
 </p>
 
+<h2 id="programming_performance">Optimizing performance</h2>
 
-<h2 id="programming_debugging">Debugging Logtalk programs</h2>
+<p>
+The default compiler flag settings are appropriated for the <strong>development</strong> but not necessarily for the <strong>deployment</strong> of applications. To minimize the generated code size, turn the <code>source_data</code> flag off. To optimize runtime performance, turn on the <code>optimize</code> flag. Pay special attention to file compilation/loading order. Whenever possible, compile/load file taking into account file dependencies to enable static binding optimizations. Minimize the use of dynamic predicates. Parametric objects can often be used in alternative. When dynamic predicates cannot be avoided, try to make them private. Declaring a dynamic predicate also as a private predicate allows the compiler to optimize local calls to the database methods (e.g. <code>assertz/1</code> and <code>retract/1</code>) that handle the predicate. Sending a message to <em>self</em> implies dynamic binding but there are often cases where <code>::/1</code> is misused to call an imported or inherited predicate that is never going to be redefined in a descendant. In these cases, a <em>super</em> call, <code>^^/1</code>, can be used instead with the benefit of enabling static binding.
+</p>
+
+<h2 id="programming_debugging">Debugging Logtalk applications</h2>
 
 <p>
 The Logtalk distribution includes in its <code>tools</code> directory a command-line debugger, implemented as a Logtalk application. It can be loaded by typing:
@@ -779,7 +784,7 @@ The Logtalk compiler automatically removes any redundant calls to the built-in p
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: September 27, 2015</span>
+		<span>Last updated on: November 4, 2015</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="installing.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="migration.html">next</a></span><br/>
