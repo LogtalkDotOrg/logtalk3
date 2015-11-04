@@ -91,7 +91,7 @@ The XML related flags were removed as generating documenting files is now the
 responsibility of the `lgtdoc` tool. The debugger is also no longer a built-in
 object but a separate tool, `debugger`. Logtalk 3.x greatly improves support
 for source file paths, removing the need for the `altdirs` flag. The flag
-`startup_message` is removed due to the introduction on structured message
+`startup_message` is removed due to the introduction of structured message
 printing in Logtalk 3.x (see also the provided sample settings file). The
 `smart_compilation` flag is no longer necessary and the old behavior can now
 be controlled using the `clean` flag.
@@ -99,8 +99,8 @@ be controlled using the `clean` flag.
 The `reload` flag, is no longer considered or required for static binding
 optimizations, which now depend on the `optimize` flag. In addition, the
 default value for this flag is now `changed`, i.e. a file will be reloaded
-if changed since last loaded (provided that the any explicit flags are the
-same as the first time it was loaded).
+only if changed since last loaded (provided that the any explicit flags are
+the same as the first time it was loaded).
 
 Deprecated directives, control constructs, and flags
 ----------------------------------------------------
