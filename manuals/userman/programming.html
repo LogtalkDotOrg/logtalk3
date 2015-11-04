@@ -430,7 +430,16 @@ If you use Logtalk for batch processing, you probably want to turn off the optio
 <h2 id="programming_performance">Optimizing performance</h2>
 
 <p>
-The default compiler flag settings are appropriated for the <strong>development</strong> but not necessarily for the <strong>deployment</strong> of applications. To minimize the generated code size, turn the <code>source_data</code> flag off. To optimize runtime performance, turn on the <code>optimize</code> flag. Pay special attention to file compilation/loading order. Whenever possible, compile/load file taking into account file dependencies to enable static binding optimizations. Minimize the use of dynamic predicates. Parametric objects can often be used in alternative. When dynamic predicates cannot be avoided, try to make them private. Declaring a dynamic predicate also as a private predicate allows the compiler to optimize local calls to the database methods (e.g. <code>assertz/1</code> and <code>retract/1</code>) that handle the predicate. Sending a message to <em>self</em> implies dynamic binding but there are often cases where <code>::/1</code> is misused to call an imported or inherited predicate that is never going to be redefined in a descendant. In these cases, a <em>super</em> call, <code>^^/1</code>, can be used instead with the benefit of enabling static binding.
+The default compiler flag settings are appropriated for the <strong>development</strong> but not necessarily for the <strong>deployment</strong> of applications. To minimize the generated code size, turn the <code>source_data</code> flag off. To optimize runtime performance, turn on the <code>optimize</code> flag.
+</p>
+<p>
+Pay special attention to file compilation/loading order. Whenever possible, compile/load your files taking into account file dependencies to enable static binding optimizations. The easiest way to find the dependencies and thus the best compilation/loading order is to use the <code>diagrams</code> tool to generate a file dependency diagram for your application.
+</p>
+<p>
+Minimize the use of dynamic predicates. Parametric objects can often be used in alternative. When dynamic predicates cannot be avoided, try to make them private. Declaring a dynamic predicate also as a private predicate allows the compiler to optimize local calls to the database methods (e.g. <code>assertz/1</code> and <code>retract/1</code>) that handle the predicate.
+</p>
+<p>
+Sending a message to <em>self</em> implies dynamic binding but there are often cases where <code>::/1</code> is misused to call an imported or inherited predicate that is never going to be redefined in a descendant. In these cases, a <em>super</em> call, <code>^^/1</code>, can be used instead with the benefit of enabling static binding. Most of the guidelines for writing efficient Prolog code also apply to Logtalk code. In particular, define your predicates to take advantage of first-argument indexing. In the case of recursive predicates, define them as tail-recursive predicates whenever possible.
 </p>
 
 <h2 id="programming_debugging">Debugging Logtalk applications</h2>
