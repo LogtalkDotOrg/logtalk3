@@ -24,6 +24,12 @@
 :- set_logtalk_flag(code_prefix, '$').
 
 
+:- if(current_logtalk_flag(prolog_dialect, lean)).
+	% avoid a warning when embedding Logtalk in Lean Prolog
+	:- dynamic('$lgt_parent_file_'/2).
+:- endif.
+
+
 :- object(logtalk).
 
 	:- info([
