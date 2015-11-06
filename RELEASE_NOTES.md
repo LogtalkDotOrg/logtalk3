@@ -24,11 +24,22 @@ RELEASE NOTES
 3.02.1 - November ??, 2015
 ==========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Warning when embedding Logtalk in Lean Prolog.
+
 Documentation
 -------------
 
 ADDED: Small section on optimizing applications to the user manual section on
 Logtalk programming.
+
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: Lean Prolog 4.5.4 or a later version is now required when using
+this backend compiler.
 
 
 3.02.0 - November 2, 2015

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Adapter file for Lean Prolog 3.8.8 and later versions
-%  Last updated on October 31, 2015
+%  Adapter file for Lean Prolog 4.5.4 and later versions
+%  Last updated on November 6, 2015
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -302,7 +302,7 @@ to_engine(Interactor, Pattern, Goal) :-
 '$lgt_prolog_feature'(prolog_dialect, lean).
 '$lgt_prolog_feature'(prolog_version, (Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, lprolog(Major, Minor, Patch, _)).
-'$lgt_prolog_feature'(prolog_compatible_version, '@>='((3, 8, 8))).
+'$lgt_prolog_feature'(prolog_compatible_version, '@>='((4, 5, 4))).
 '$lgt_prolog_feature'(prolog_conformance, lax).
 
 '$lgt_prolog_feature'(encoding_directive, source).

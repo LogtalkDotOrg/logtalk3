@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk installation script
-##   Last updated on October 24, 2015
+##   Last updated on November 6, 2015
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -163,7 +163,7 @@ echo "* CxProlog (version 0.97.7 or later):      cxlgt"
 echo "* ECLiPSe (version 6.1#143 or later):      eclipselgt"
 echo "* GNU Prolog (version 1.4.2 or later):     gplgt"
 echo "* JIProlog (version 4.1.2.8 or later):     jiplgt      (first run may require sudo)"
-echo "* Lean Prolog (version 3.8.8 or later):    lplgt       (experimental)"
+echo "* Lean Prolog (version 4.5.4 or later):    lplgt       (experimental)"
 echo "* Qu-Prolog (version 9.0 or later):        qplgt"
 echo "* Quintus Prolog (version 3.3 or later):   quintuslgt  (experimental)"
 echo "* SICStus Prolog (version 4.1.0 or later): sicstuslgt"

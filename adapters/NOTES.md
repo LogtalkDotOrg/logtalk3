@@ -278,7 +278,7 @@ by using the `load_library/1` JIProlog built-in predicate:
 	| ?- load_library('logtalk.jar').
 
 
-Lean Prolog 3.8.8 and later versions
+Lean Prolog 4.5.4 and later versions
 ------------------------------------
 
 	lean.pl
@@ -312,10 +312,10 @@ for POSIX systems):
 	$ cp $LOGTALKHOME/core/core.pl $HOME/collect/core.pl
 
 	$ cd $HOME/collect
-	$ cat $(ls -t *.pl) > logtalk_core.pl
+	$ cat lean.pl paths.pl expanding_lgt.pl monitoring_lgt.pl forwarding_lgt.pl user_lgt.pl logtalk_lgt.pl core_messages_lgt.pl core.pl > logtalk_core.pl
 
 Starting Lean Prolog with a Java allocation of at least 2GB is recommended
-(by passing a `-Xmx2G` to Java).
+(by passing a `-Xmx2G` option to Java).
 
 
 Qu-Prolog 9.0 and later versions
