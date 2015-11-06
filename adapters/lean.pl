@@ -46,7 +46,6 @@
 '$lgt_iso_predicate'(close(_, _)).
 '$lgt_iso_predicate'(get_byte(_, _)).
 '$lgt_iso_predicate'(get_byte(_)).
-'$lgt_iso_predicate'(get_char(_)).
 '$lgt_iso_predicate'(put_byte(_, _)).
 '$lgt_iso_predicate'(put_byte(_)).
 
@@ -60,10 +59,6 @@ get_byte(Stream, Byte) :-
 
 get_byte(Byte) :-
 	get_code(Byte).
-
-get_char(Char) :-
-	get_code(Code),
-	char_code(Char, Code).
 
 put_byte(Stream, Byte) :-
 	put_code(Stream, Byte).
