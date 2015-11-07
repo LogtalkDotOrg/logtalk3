@@ -32,7 +32,7 @@
 		op(700, xfx, '=~='), '=~='/2
 	]).
 
-	% tests from the ISO/IEC 13211-1:1995(E) standard, section 9.3.10.4
+	% tests from the ISO/IEC 13211-1 Technical Corrigendum 2:2012-02, section 9.3.10.4
 
 	succeeds(iso_integer_power_2_01) :-
 		{X is ^(0,0)},
@@ -57,6 +57,7 @@
 	throws(iso_integer_power_2_06, error(type_error(float,2),_)) :-
 		% the ISO standard specifies an evaluation_error(undefined) but there seems
 		% to be consensus that the correct exception is a type_error(float,...)
+		% see also http://eclipseclp.org/wiki/Prolog/IsoErrata
 		{_X is 2^(-1)}.
 
 	succeeds(iso_integer_power_2_07) :-
