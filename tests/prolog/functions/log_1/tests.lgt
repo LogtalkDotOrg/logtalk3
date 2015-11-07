@@ -48,6 +48,9 @@
 		variable(X),
 		{_X is log(X)}.
 
+        % there is a certain dispute whether for a zero argument a different error should be thrown
+        % see also http://eclipseclp.org/wiki/Prolog/IsoErrata
+        % many Prolog systems even don't throw en error but return negative infinity
 	throws(iso_log_1_04, error(evaluation_error(undefined),_)) :-
 		{_X is log(0)}.
 
@@ -56,9 +59,17 @@
 		foo(0, Foo),
 		{_X is log(Foo)}.
 
+        % there is a certain dispute whether for a zero argument a different error should be thrown
+        % see also http://eclipseclp.org/wiki/Prolog/IsoErrata
+        % many Prolog systems even don't throw en error but return negative infinity
 	throws(iso_log_1_06, error(evaluation_error(undefined),_)) :-
 		{_X is log(0.0)}.
-
+        
+        % it is undisputed that the evaluable function log/1 should throw undefined for negative numbers
+        % many Prolog systems even don't throw en error but return NaN
+        throws(eclipse_log_1_01, error(evaluation_error(undefined),_)) :-
+                {_X is log(-1)}.
+                
 	% tests from the Logtalk portability work
 
 	throws(lgt_log_1_07, error(type_error(evaluable,foo/1),_)) :-
