@@ -29,14 +29,25 @@
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995/Cor.2:2012(en) standard, section 9.3.9.4
-
+        % the evaluable function min/2 is allowed to return one of its arguments unconverted,
+        % as if it were defined by min(X,Y,Z) :- X<Y -> Z=X; Z=Y. Prolog systems with bignums
+        % such as SWI-Prolog typically work along these lines
+        
 	succeeds(iso_min_2_01) :-
 		{X is min(2, 3)},
 		X == 2.
 
 	succeeds(iso_min_2_02) :-
-		{X is min(2.0, 3.0)},
+		{X is min(2, 3.0)},
+		(X == 2; X == 2.0).
+		
+	succeeds(iso_min_2_03) :-
+		{X is min(2.0, 3)},
 		X == 2.0.
+		
+	succeeds(iso_min_2_04) :-
+		{X is min(0, 0.0)},
+		(X == 0; X == 0.0).
 
 	% tests from the Logtalk portability work
 
