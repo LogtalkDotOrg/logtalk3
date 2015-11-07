@@ -29,15 +29,26 @@
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995/Cor.2:2012(en) standard, section 9.3.8.4
+        % the evaluable function max/2 is allowed to return one of its arguments unconverted,
+        % as if it were defined by max(X,Y,Z) :- X>Y -> Z=X; Z=Y. Prolog systems with bignums
+        % such as SWI-Prolog typically work along these lines
 
 	succeeds(iso_max_2_01) :-
 		{X is max(2, 3)},
 		X == 3.
 
 	succeeds(iso_max_2_02) :-
-		{X is max(2.0, 3.0)},
+		{X is max(2.0, 3)},
+		(X == 3; X == 3.0).
+		
+	succeeds(iso_max_2_03) :-
+		{X is max(2, 3.0)},
 		X == 3.0.
 
+	succeeds(iso_max_2_04) :-
+		{X is max(0, 0.0)},
+		(X == 0; X == 0.0).
+		
 	% tests from the Logtalk portability work
 
 	throws(lgt_max_2_03, error(instantiation_error,_)) :-
