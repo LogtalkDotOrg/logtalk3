@@ -27,6 +27,12 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: The make predicates now also reload the parent files of files with
+compilation or loading errors. This ensures that, when a faulty file aborts the
+compilation of all files in a loader file, the files listed after the faulty
+file will be compiled when the faulty file is fixed and the make predicates are
+called. 
+
 * FIXED: Warning when embedding Logtalk in Lean Prolog.
 
 Documentation

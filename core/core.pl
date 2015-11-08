@@ -2274,7 +2274,9 @@ logtalk_make(Target) :-
 '$lgt_logtalk_make'(all) :-
 	'$lgt_loaded_file_'(Basename, Directory, Mode, Flags, _, _, LoadingTimeStamp),
 	atom_concat(Directory, Basename, Path),
-	(	'$lgt_changed_compilation_mode'(Mode, Flags) ->
+	(	'$lgt_failed_file_'(Path) ->
+		true
+	;	'$lgt_changed_compilation_mode'(Mode, Flags) ->
 		true
 	;	'$lgt_file_modification_time'(Path, CurrentTimeStamp),
 		LoadingTimeStamp @< CurrentTimeStamp
