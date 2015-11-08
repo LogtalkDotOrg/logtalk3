@@ -27,6 +27,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: The runtime table entries for loaded files are now added to the
+generated intermediate Prolog files using a multifile predicate for a better
+embedding experience.
+
 * IMPROVED: The make predicates now also reload the parent files of files with
 compilation or loading errors. This ensures that, when a faulty file aborts the
 compilation of all files in a loader file, the files listed after the faulty

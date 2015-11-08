@@ -132,6 +132,7 @@
 % table of loaded files
 
 % '$lgt_loaded_file_'(Basename, Directory, Mode, Flags, TextProperties, ObjectFile, TimeStamp)
+:- multifile('$lgt_loaded_file_'/7).
 :- dynamic('$lgt_loaded_file_'/7).
 % '$lgt_failed_file_'(SourceFile)
 :- dynamic('$lgt_failed_file_'/1).
@@ -424,8 +425,8 @@
 :- dynamic('$lgt_pp_file_encoding_'/3).
 % '$lgt_pp_file_bom_'(BOM)
 :- dynamic('$lgt_pp_file_bom_'/1).
-% '$lgt_pp_file_paths_'(Basename, Directory, SourceFile, ObjectFile)
-:- dynamic('$lgt_pp_file_paths_'/4).
+% '$lgt_pp_file_paths_flags_'(Basename, Directory, SourceFile, ObjectFile, Flags)
+:- dynamic('$lgt_pp_file_paths_flags_'/5).
 
 % '$lgt_pp_runtime_clause_'(Clause)
 :- dynamic('$lgt_pp_runtime_clause_'/1).
@@ -2271,6 +2272,13 @@ logtalk_make(Target) :-
 '$lgt_valid_logtalk_make_target'(clean).
 
 
+% single file compilation failure
+'$lgt_logtalk_make'(all) :-
+	'$lgt_failed_file_'(Path),
+	'$lgt_pp_file_paths_flags_'(_, _, Path, _, Flags),
+	logtalk_load(Path, Flags),
+	fail.
+% chain of loaded files lead to a compilation failure
 '$lgt_logtalk_make'(all) :-
 	'$lgt_loaded_file_'(Basename, Directory, Mode, Flags, _, _, LoadingTimeStamp),
 	atom_concat(Directory, Basename, Path),
@@ -2321,24 +2329,24 @@ logtalk_make(Target) :-
 % predicate found on some compilers such as Quintus Prolog, SICStus
 % Prolog, SWI-Prolog, and YAP
 %
-% keys that use information from the '$lgt_pp_file_paths_'/4 predicate can be
+% keys that use information from the '$lgt_pp_file_paths_flags_'/5 predicate can be
 % used in calls wrapped by initialization/1 directives as this predicate is
 % only reinitialized after loading the generated intermediate Prolog file
 
 logtalk_load_context(source, SourceFile) :-
-	'$lgt_pp_file_paths_'(_, _, SourceFile, _).
+	'$lgt_pp_file_paths_flags_'(_, _, SourceFile, _, _).
 
 logtalk_load_context(file, SourceFile) :-
-	'$lgt_pp_file_paths_'(_, _, SourceFile, _).
+	'$lgt_pp_file_paths_flags_'(_, _, SourceFile, _, _).
 
 logtalk_load_context(directory, Directory) :-
-	'$lgt_pp_file_paths_'(_, Directory, _, _).
+	'$lgt_pp_file_paths_flags_'(_, Directory, _, _, _).
 
 logtalk_load_context(basename, Basename) :-
-	'$lgt_pp_file_paths_'(Basename, _, _, _).
+	'$lgt_pp_file_paths_flags_'(Basename, _, _, _, _).
 
 logtalk_load_context(target, ObjectFile) :-
-	'$lgt_pp_file_paths_'(_, _, _, ObjectFile).
+	'$lgt_pp_file_paths_flags_'(_, _, _, ObjectFile, _).
 
 logtalk_load_context(entity_name, Entity) :-
 	% deprecated key
@@ -5181,7 +5189,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	'$lgt_object_file_name'(Directory, Name, Extension, ObjectFile),
 	atom_concat(Name, Extension, Basename),
-	assertz('$lgt_pp_file_paths_'(Basename, Directory, SourceFile, ObjectFile)),
+	retractall('$lgt_pp_file_paths_flags_'(_, _, _, _, _)),
+	assertz('$lgt_pp_file_paths_flags_'(Basename, Directory, SourceFile, ObjectFile, Flags)),
 	% change the current directory to the directory of the file being loaded as it can
 	% be a loader file loading other files in its directory using a relative path
 	'$lgt_current_directory'(Current),
@@ -5209,22 +5218,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 			'$lgt_save_file_loading_dependency'(SourceFile)
 		;	% we're reloading a source file
 			'$lgt_print_message'(silent(loading), core, reloading_file(SourceFile, Flags)),
-			'$lgt_compile_and_load_file'(Directory, Basename, SourceFile, Flags, ObjectFile, Current),
+			'$lgt_compile_and_load_file'(SourceFile, Flags, ObjectFile, Current),
 			'$lgt_print_message'(comment(loading), core, reloaded_file(SourceFile, Flags))
 		)
 	;	% first time loading this source file or previous attempt failed due compilation error
 		'$lgt_print_message'(silent(loading), core, loading_file(SourceFile, Flags)),
-		'$lgt_compile_and_load_file'(Directory, Basename, SourceFile, Flags, ObjectFile, Current),
+		'$lgt_compile_and_load_file'(SourceFile, Flags, ObjectFile, Current),
 		'$lgt_print_message'(comment(loading), core, loaded_file(SourceFile, Flags))
 	),
 	'$lgt_change_directory'(Current).
 
 
-'$lgt_compile_and_load_file'(Directory, Basename, SourceFile, Flags, ObjectFile, Current) :-
+'$lgt_compile_and_load_file'(SourceFile, Flags, ObjectFile, Current) :-
 	retractall('$lgt_failed_file_'(SourceFile)),
-	% remember the file was loaded before it is successfully compiled and loaded
-	% so that we can use the make feature to reload it in case of error
-	'$lgt_pre_register_loaded_file'(Directory, Basename, SourceFile, Flags, ObjectFile),
 	% save the file loading dependency on a parent file if it exists
 	'$lgt_save_file_loading_dependency'(SourceFile),
 	% compile the source file to an intermediate Prolog file on disk
@@ -5232,8 +5238,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% compile and load the intermediate Prolog file
 	asserta('$lgt_file_loading_stack_'(SourceFile)),
 	'$lgt_load_compiled_file'(SourceFile, ObjectFile),
-	'$lgt_register_loaded_file'(Directory, Basename),
-	retractall('$lgt_file_loading_stack_'(SourceFile)).
+	retractall('$lgt_file_loading_stack_'(SourceFile)),
+	retractall('$lgt_pp_file_paths_flags_'(_, _, _, _, _)).
 
 
 '$lgt_save_file_loading_dependency'(SourceFile) :-
@@ -5245,37 +5251,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	% no parent file
 		true
 	).
-
-
-'$lgt_pre_register_loaded_file'(Directory, Basename, Path, Flags, ObjectFile) :-
-	% compilation of the file may have failed in previous attempt;
-	% ensure that there aren't duplicate entries
-	retractall('$lgt_loaded_file_'(Basename, Directory, _, _, _, _, _)),
-	% the make predicate will reload a file if the compilation mode changed ...
-	(	'$lgt_compiler_flag'(debug, on) ->
-		Mode = debug
-	;	'$lgt_compiler_flag'(optimize, on) ->
-		Mode = optimal
-	;	Mode = normal
-	),
-	% ... or if the file modification date changed (e.g. to fix compilation errors)
-	'$lgt_file_modification_time'(Path, TimeStamp),
-	assertz('$lgt_loaded_file_'(Basename, Directory, Mode, Flags, [], ObjectFile, TimeStamp)).
-
-
-'$lgt_register_loaded_file'(Directory, Basename) :-
-	% retract prelimirary entry
-	retract('$lgt_loaded_file_'(Basename, Directory, Mode, Flags, _, ObjectFile, TimeStamp)), !,
-	% compute text properties, which are only available after successful file compilation
-	(	'$lgt_pp_file_encoding_'(Encoding, _, _) ->
-		(	'$lgt_pp_file_bom_'(BOM) ->
-			TextProperties = [encoding(Encoding), BOM]
-		;	TextProperties = [encoding(Encoding)]
-		)
-	;	TextProperties = []
-	),
-	% assert definitive entry
-	assertz('$lgt_loaded_file_'(Basename, Directory, Mode, Flags, TextProperties, ObjectFile, TimeStamp)).
 
 
 '$lgt_load_compiled_file'(SourceFile, ObjectFile) :-
@@ -5468,7 +5443,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	'$lgt_object_file_name'(Directory, Name, Extension, ObjectFile),
 	atom_concat(Name, Extension, Basename),
-	assertz('$lgt_pp_file_paths_'(Basename, Directory, SourceFile, ObjectFile)),
+	retractall('$lgt_pp_file_paths_flags_'(_, _, _, _, _)),
+	assertz('$lgt_pp_file_paths_flags_'(Basename, Directory, SourceFile, ObjectFile, Flags)),
 	'$lgt_compile_file'(SourceFile, ObjectFile, Flags, compiling),
 	'$lgt_compile_files'(Files, Flags).
 
@@ -5562,7 +5538,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_write_entity_code'(Output) :-
-	'$lgt_pp_file_paths_'(_, _, Path, _),
+	'$lgt_pp_file_paths_flags_'(_, _, Path, _, _),
 	% write any plain Prolog terms that may precede the entity definition
 	'$lgt_write_prolog_terms'(Output, Path),
 	'$lgt_write_entity_directives'(Output, Path),
@@ -5711,14 +5687,36 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_write_runtime_tables'(Output) :-
-	'$lgt_pp_file_paths_'(_, _, Path, _),
+	'$lgt_generate_loaded_file_table_entry'(SourceFile),
 	% write out any Prolog code occurring after the last source file entity
-	'$lgt_write_prolog_terms'(Output, Path),
+	'$lgt_write_prolog_terms'(Output, SourceFile),
 	% write entity runtime directives and clauses
-	'$lgt_write_runtime_clauses'(Output, Path),
+	'$lgt_write_runtime_clauses'(Output, SourceFile),
 	% write initialization/1 directive at the end of the file to improve
 	% compatibility with non-ISO compliant Prolog compilers
-	'$lgt_write_initialization_call'(Output, Path).
+	'$lgt_write_initialization_call'(Output, SourceFile).
+
+
+'$lgt_generate_loaded_file_table_entry'(SourceFile) :-
+	'$lgt_pp_file_paths_flags_'(Basename, Directory, SourceFile, ObjectFile, Flags),
+	% the make predicate will reload a file if the compilation mode changed ...
+	(	'$lgt_compiler_flag'(debug, on) ->
+		Mode = debug
+	;	'$lgt_compiler_flag'(optimize, on) ->
+		Mode = optimal
+	;	Mode = normal
+	),
+	% ... or if the file modification date changed (e.g. to fix compilation errors)
+	'$lgt_file_modification_time'(SourceFile, TimeStamp),
+	% compute text properties, which are only available after successful file compilation
+	(	'$lgt_pp_file_encoding_'(Encoding, _, _) ->
+		(	'$lgt_pp_file_bom_'(BOM) ->
+			TextProperties = [encoding(Encoding), BOM]
+		;	TextProperties = [encoding(Encoding)]
+		)
+	;	TextProperties = []
+	),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_loaded_file_'(Basename, Directory, Mode, Flags, TextProperties, ObjectFile, TimeStamp))).
 
 
 
@@ -6014,7 +6012,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % adds entity properties related to the entity source file
 
 '$lgt_add_entity_properties'(Kind, Entity) :-
-	'$lgt_pp_file_paths_'(Basename, Directory, _, _),
+	'$lgt_pp_file_paths_flags_'(Basename, Directory, _, _, _),
 	(	Kind == object ->
 		'$lgt_pp_referenced_object_'(Entity, Start-_)
 	;	Kind == protocol ->
@@ -6431,7 +6429,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_file_object_initialization_'(_, _)),
 	retractall('$lgt_pp_file_encoding_'(_, _, _)),
 	retractall('$lgt_pp_file_bom_'(_)),
-	retractall('$lgt_pp_file_paths_'(_, _, _, _)),
 	retractall('$lgt_pp_file_compiler_flag_'(_, _)),
 	retractall('$lgt_pp_term_lines_variable_names_'(_, _)),
 	% a Logtalk source file may contain only plain Prolog terms
@@ -13550,7 +13547,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % returns file and entity warning context but take the lines from the compilation context
 
 '$lgt_warning_context'(Ctx, SourceFile, ObjectFile, Lines, Type, Entity) :-
-	'$lgt_pp_file_paths_'(_, _, SourceFile, ObjectFile),
+	'$lgt_pp_file_paths_flags_'(_, _, SourceFile, ObjectFile, _),
 	'$lgt_comp_ctx_lines'(Ctx, Lines),
 	'$lgt_pp_entity_'(Type, Entity, _, _, _).
 
@@ -13561,7 +13558,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % returns file warning context but take the lines from the compilation context
 
 '$lgt_warning_context'(Ctx, SourceFile, ObjectFile, Lines) :-
-	'$lgt_pp_file_paths_'(_, _, SourceFile, ObjectFile),
+	'$lgt_pp_file_paths_flags_'(_, _, SourceFile, ObjectFile, _),
 	'$lgt_comp_ctx_lines'(Ctx, Lines).
 
 
@@ -13571,7 +13568,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % returns file and entity warning context
 
 '$lgt_warning_context'(SourceFile, ObjectFile, Lines, Type, Entity) :-
-	'$lgt_pp_file_paths_'(_, _, SourceFile, ObjectFile),
+	'$lgt_pp_file_paths_flags_'(_, _, SourceFile, ObjectFile, _),
 	'$lgt_current_line_numbers'(Lines),
 	'$lgt_pp_entity_'(Type, Entity, _, _, _).
 
@@ -13582,7 +13579,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % returns file warning context
 
 '$lgt_warning_context'(SourceFile, ObjectFile, Lines) :-
-	'$lgt_pp_file_paths_'(_, _, SourceFile, ObjectFile),
+	'$lgt_pp_file_paths_flags_'(_, _, SourceFile, ObjectFile, _),
 	'$lgt_current_line_numbers'(Lines).
 
 
@@ -13608,7 +13605,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_report_unknown_entities'(Type, Entity) :-
 	(	'$lgt_compiler_flag'(unknown_entities, warning) ->
-		'$lgt_pp_file_paths_'(_, _, Path, _),
+		'$lgt_pp_file_paths_flags_'(_, _, Path, _, _),
 		'$lgt_report_unknown_objects'(Type, Entity, Path),
 		'$lgt_report_unknown_protocols'(Type, Entity, Path),
 		'$lgt_report_unknown_categories'(Type, Entity, Path),
@@ -15344,7 +15341,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_report_missing_directives'(Type, Entity) :-
 	(	'$lgt_compiler_flag'(missing_directives, warning) ->
-		'$lgt_pp_file_paths_'(_, _, Path, _),
+		'$lgt_pp_file_paths_flags_'(_, _, Path, _, _),
 		'$lgt_report_missing_directives'(Type, Entity, Path)
 	;	true
 	).
@@ -15407,7 +15404,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 '$lgt_report_unknown_predicate_call_aux'(warning, Functor/Arity, Lines) :-
-	'$lgt_pp_file_paths_'(_, _, Path, _),
+	'$lgt_pp_file_paths_flags_'(_, _, Path, _, _),
 	'$lgt_pp_entity_'(Type, Entity, _, _, _),
 	Arity2 is Arity - 2,
 	'$lgt_increment_compile_warnings_counter',
@@ -15437,7 +15434,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 '$lgt_report_undefined_predicate_call_aux'(warning, Functor/Arity, Lines) :-
-	'$lgt_pp_file_paths_'(_, _, Path, _),
+	'$lgt_pp_file_paths_flags_'(_, _, Path, _, _),
 	'$lgt_pp_entity_'(Type, Entity, _, _, _),
 	Arity2 is Arity - 2,
 	'$lgt_increment_compile_warnings_counter',
@@ -15452,7 +15449,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_report_non_portable_calls'(Type, Entity) :-
 	(	'$lgt_compiler_flag'(portability, warning) ->
-		'$lgt_pp_file_paths_'(_, _, Path, _),
+		'$lgt_pp_file_paths_flags_'(_, _, Path, _, _),
 		'$lgt_report_non_portable_calls'(Type, Entity, Path)
 	;	true
 	).
@@ -15582,7 +15579,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_write_runtime_clauses'(Stream, Path, '$lgt_specializes_class_'/3),
 	'$lgt_write_runtime_clauses'(Stream, Path, '$lgt_extends_category_'/3),
 	'$lgt_write_runtime_clauses'(Stream, Path, '$lgt_extends_object_'/3),
-	'$lgt_write_runtime_clauses'(Stream, Path, '$lgt_extends_protocol_'/3).
+	'$lgt_write_runtime_clauses'(Stream, Path, '$lgt_extends_protocol_'/3),
+	'$lgt_write_runtime_clauses'(Stream, Path, '$lgt_loaded_file_'/7).
 
 
 '$lgt_write_runtime_clauses'(Stream, Path, Functor/Arity) :-
