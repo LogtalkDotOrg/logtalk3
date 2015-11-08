@@ -2348,6 +2348,9 @@ logtalk_load_context(basename, Basename) :-
 logtalk_load_context(target, ObjectFile) :-
 	'$lgt_pp_file_paths_flags_'(_, _, _, ObjectFile, _).
 
+logtalk_load_context(flags, Flags) :-
+	'$lgt_pp_file_paths_flags_'(_, _, _, _, Flags).
+
 logtalk_load_context(entity_name, Entity) :-
 	% deprecated key
 	'$lgt_pp_entity_'(_, Entity, _, _, _).
