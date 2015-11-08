@@ -40,6 +40,10 @@ called.
 * ADDED: A `flags` key to the `logtalk_load_context/2` built-in predicate to
 access the list of explicit flags used in the compilation of a source file.
 
+* FIXED: Be careful to not simplify a `(((If*->Then),true);Goal)` goal by
+removing the call to `true/0` as it would convert the disjunction into a
+soft-cut call with an else part.
+
 * FIXED: Warning when embedding Logtalk in Lean Prolog.
 
 Documentation

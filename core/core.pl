@@ -13122,9 +13122,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_remove_redundant_calls'(Goal, SGoal).
 
 '$lgt_remove_redundant_calls'((Goal, true), SGoal) :-
-	% make sure that we don't arrive here while simplifying a (((If->Then),true);Goal) goal as
-	% removing the call to true/0 would wrongly convert the disjunction into an if-then-else goal
+	% make sure that we don't arrive here while simplifying a (((If->Then),true);Goal) goal (or a
+	% as (((If*->Then),true);Goal) goal) as removing the call to true/0 would wrongly convert the
+	% disjunction into an if-then-else goal (or a soft-cut goal with an else part)
 	Goal \= (_ -> _),
+	(	'$lgt_predicate_property'('*->'(_, _), built_in) ->
+		Goal \= '*->'(_, _)
+	;	true
+	),
 	!,
 	'$lgt_remove_redundant_calls'(Goal, SGoal).
 
