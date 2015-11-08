@@ -51,6 +51,12 @@ Prolog adapter and integration files
 * UPDATED: Lean Prolog 4.5.4 or a later version is now required when using
 this backend compiler.
 
+Tests
+-----
+
+* IMPROVED: Notes on the unit tests for the ISO Prolog standard `^/2` and
+`log/1` built-in functions. Thanks to Jan Burse for this contribution.
+
 
 3.02.0 - November 2, 2015
 =========================
