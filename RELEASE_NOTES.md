@@ -57,6 +57,9 @@ Tests
 * IMPROVED: Notes on the unit tests for the ISO Prolog standard `^/2` and
 `log/1` built-in functions. Thanks to Jan Burse for this contribution.
 
+* FIXED: Tests for the ISO Prolog standard `max/2` and `min/2` built-in
+functions. Thanks to Jan Burse for the bug report.
+
 
 3.02.0 - November 2, 2015
 =========================

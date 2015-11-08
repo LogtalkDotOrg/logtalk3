@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/04/05,
+		date is 2015/11/08,
 		comment is 'Unit tests for the ISO Prolog standard min/2 built-in function.'
 	]).
 
@@ -35,47 +35,68 @@
 		X == 2.
 
 	succeeds(iso_min_2_02) :-
-		{X is min(2.0, 3.0)},
-		X == 2.0.
+		catch(
+			({X is min(2, 3.0), (X == 2; X == 2.0)}),
+			Error,
+			Error = error(evaluation_error(undefined), _)
+		).
+
+	succeeds(iso_min_2_03) :-
+		catch(
+			({X is min(2.0, 3), X == 2.0}),
+			Error,
+			Error = error(evaluation_error(undefined), _)
+		).
+
+	succeeds(iso_min_2_04) :-
+		catch(
+			({X is min(0, 0.0), (X == 0; X == 0.0)}),
+			Error,
+			Error = error(evaluation_error(undefined), _)
+		).
 
 	% tests from the Logtalk portability work
 
-	throws(lgt_min_2_03, error(instantiation_error,_)) :-
+	succeeds(lgt_min_2_05) :-
+		{X is min(2.0, 3.0)},
+		X == 2.0.
+
+	throws(lgt_min_2_06, error(instantiation_error,_)) :-
 		% try to delay the error to runtime
 		variable(N),
 		{_X is min(2, N)}.
 
-	throws(lgt_min_2_04, error(instantiation_error,_)) :-
+	throws(lgt_min_2_07, error(instantiation_error,_)) :-
 		% try to delay the error to runtime
 		variable(N),
 		{_X is min(N, 3)}.
 
-	throws(lgt_min_2_05, error(type_error(evaluable,foo/0),_)) :-
+	throws(lgt_min_2_08, error(type_error(evaluable,foo/0),_)) :-
 		% try to delay the error to runtime
 		foo(0, Foo),
 		{_X is min(2, Foo)}.
 
-	throws(lgt_min_2_06, error(type_error(evaluable,foo/0),_)) :-
+	throws(lgt_min_2_09, error(type_error(evaluable,foo/0),_)) :-
 		% try to delay the error to runtime
 		foo(0, Foo),
 		{_X is min(Foo, 3)}.
 
-	throws(lgt_min_2_07, error(type_error(evaluable,foo/1),_)) :-
+	throws(lgt_min_2_10, error(type_error(evaluable,foo/1),_)) :-
 		% try to delay the error to runtime
 		foo(1, Foo),
 		{_X is min(2, Foo)}.
 
-	throws(lgt_min_2_08, error(type_error(evaluable,foo/1),_)) :-
+	throws(lgt_min_2_11, error(type_error(evaluable,foo/1),_)) :-
 		% try to delay the error to runtime
 		foo(1, Foo),
 		{_X is min(Foo, 3)}.
 
-	throws(lgt_min_2_09, error(type_error(evaluable,foo/2),_)) :-
+	throws(lgt_min_2_12, error(type_error(evaluable,foo/2),_)) :-
 		% try to delay the error to runtime
 		foo(2, Foo),
 		{_X is min(2, Foo)}.
 
-	throws(lgt_min_2_10, error(type_error(evaluable,foo/2),_)) :-
+	throws(lgt_min_2_13, error(type_error(evaluable,foo/2),_)) :-
 		% try to delay the error to runtime
 		foo(2, Foo),
 		{_X is min(Foo, 3)}.
