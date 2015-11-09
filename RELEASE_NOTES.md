@@ -40,6 +40,12 @@ called.
 * ADDED: A `flags` key to the `logtalk_load_context/2` built-in predicate to
 access the list of explicit flags used in the compilation of a source file.
 
+* FIXED: Compilation of entity clauses and grammar rules using the soft-cut or
+if-then-else control constructs when the user defines goal-expansion clauses
+that add or remove `*->/2` or `->/2` goals. Thanks to Abramo Bagnara for the
+bug report and suggested patches. Thanks also to Jan Wielemaker for the
+discussion on this subject.
+
 * FIXED: Be careful to not simplify a `(((If*->Then),true);Goal)` goal by
 removing the call to `true/0` as it would convert the disjunction into a
 soft-cut call with an else part.

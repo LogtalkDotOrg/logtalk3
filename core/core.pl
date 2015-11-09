@@ -2518,7 +2518,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 2, 1, rc1)).
+'$lgt_version_data'(logtalk(3, 2, 1, rc2)).
 
 
 
@@ -9676,9 +9676,34 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compile_body'(Pred1, TPred1, DPred1, Ctx),
 	'$lgt_compile_body'(Pred2, TPred2, DPred2, Ctx).
 
+'$lgt_compile_body'((IfThen; Else), (TIf -> TThen; TElse), (DIf -> DThen; DElse), Ctx) :-
+	nonvar(IfThen),
+	IfThen = (If -> Then),
+	!,
+	'$lgt_compile_body'(If, TIf, DIf, Ctx),
+	'$lgt_compile_body'(Then, TThen, DThen, Ctx),
+	'$lgt_compile_body'(Else, TElse, DElse, Ctx).
+
+'$lgt_compile_body'((IfThen; Else), ('*->'(TIf, TThen); TElse), ('*->'(DIf, DThen); DElse), Ctx) :-
+	nonvar(IfThen),
+	IfThen = '*->'(If, Then),
+	'$lgt_predicate_property'('*->'(_, _), built_in),
+	!,
+	'$lgt_compile_body'(If, TIf, DIf, Ctx),
+	'$lgt_compile_body'(Then, TThen, DThen, Ctx),
+	'$lgt_compile_body'(Else, TElse, DElse, Ctx).
+
 '$lgt_compile_body'((Pred1; Pred2), (TPred1; TPred2), (DPred1; DPred2), Ctx) :-
 	!,
-	'$lgt_compile_body'(Pred1, TPred1, DPred1, Ctx),
+	'$lgt_compile_body'(Pred1, TPred10, DPred10, Ctx),
+	(	TPred10 = (_ -> _) ->
+		TPred1 = (TPred10, true)
+	;	TPred1 = TPred10
+	),
+	(	DPred10 = (_ -> _) ->
+		DPred1 = (DPred10, true)
+	;	DPred1 = DPred10
+	),
 	'$lgt_compile_body'(Pred2, TPred2, DPred2, Ctx).
 
 '$lgt_compile_body'('*->'(Pred1, Pred2), '*->'(TPred1, TPred2), '*->'(DPred1, DPred2), Ctx) :-
@@ -13088,9 +13113,30 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_remove_redundant_calls'(Goal1, SGoal1),
 	'$lgt_remove_redundant_calls'(Goal2, SGoal2).
 
+'$lgt_remove_redundant_calls'((IfThen; Else), (SIf -> SThen; SElse)) :-
+	nonvar(IfThen),
+	IfThen = (If -> Then),
+	!,
+	'$lgt_remove_redundant_calls'(If, SIf),
+	'$lgt_remove_redundant_calls'(Then, SThen),
+	'$lgt_remove_redundant_calls'(Else, SElse).
+
+'$lgt_remove_redundant_calls'((IfThen; Else), ('*->'(SIf, SThen); SElse)) :-
+	nonvar(IfThen),
+	IfThen = '*->'(If, Then),
+	'$lgt_predicate_property'('*->'(_, _), built_in),
+	!,
+	'$lgt_remove_redundant_calls'(If, SIf),
+	'$lgt_remove_redundant_calls'(Then, SThen),
+	'$lgt_remove_redundant_calls'(Else, SElse).
+
 '$lgt_remove_redundant_calls'((Goal1; Goal2), (SGoal1; SGoal2)) :-
 	!,
-	'$lgt_remove_redundant_calls'(Goal1, SGoal1),
+	'$lgt_remove_redundant_calls'(Goal1, SGoal10),
+	(	SGoal10 = (_ -> _) ->
+		SGoal1 = (SGoal10, true)
+	;	SGoal1 = SGoal10
+	),
 	'$lgt_remove_redundant_calls'(Goal2, SGoal2).
 
 '$lgt_remove_redundant_calls'((Goal1 -> Goal2), (SGoal1 -> SGoal2)) :-
@@ -17708,6 +17754,32 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	CGoal = call(':'(Module,RGoal), S0, S)
 	).
 
+'$lgt_dcg_body'((GRIfThen; GRElse), S0, S, (If -> Then; Else), Ctx) :-
+	nonvar(GRIfThen),
+	GRIfThen = (GRIf -> GRThen),
+	!,
+	'$lgt_dcg_body'(GRIf, S0, S1, If, Ctx),
+	'$lgt_dcg_body'(GRThen, S1, S, Then, Ctx),
+	'$lgt_dcg_body'(GRElse, S0, S, Else, Ctx).
+
+'$lgt_dcg_body'((GRIfThen; GRElse), S0, S, ('*->'(If, Then); Else), Ctx) :-
+	nonvar(GRIfThen),
+	GRIfThen = '*->'(GRIf, GRThen),
+	'$lgt_predicate_property'('*->'(_, _), built_in),
+	!,
+	'$lgt_dcg_body'(GRIf, S0, S1, If, Ctx),
+	'$lgt_dcg_body'(GRThen, S1, S, Then, Ctx),
+	'$lgt_dcg_body'(GRElse, S0, S, Else, Ctx).
+
+'$lgt_dcg_body'((GREither; GROr), S0, S, (Either; Or), Ctx) :-
+	!,
+	'$lgt_dcg_body'(GREither, S0, S, Either0, Ctx),
+	(	Either0 = (_ -> _) ->
+		Either = (Either0, true)
+	;	Either = Either0
+	),
+	'$lgt_dcg_body'(GROr, S0, S, Or, Ctx).
+
 '$lgt_dcg_body'('*->'(GRIf, GRThen), S0, S, '*->'(If, Then), Ctx) :-
 	'$lgt_predicate_property'('*->'(_, _), built_in),
 	!,
@@ -17718,11 +17790,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_dcg_body'(GRIf, S0, S1, If, Ctx),
 	'$lgt_dcg_body'(GRThen, S1, S, Then, Ctx).
-
-'$lgt_dcg_body'((GREither; GROr), S0, S, (Either; Or), Ctx) :-
-	!,
-	'$lgt_dcg_body'(GREither, S0, S, Either, Ctx),
-	'$lgt_dcg_body'(GROr, S0, S, Or, Ctx).
 
 '$lgt_dcg_body'((GRFirst, GRSecond), S0, S, (First, Second), Ctx) :-
 	!,
