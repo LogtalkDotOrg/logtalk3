@@ -18,25 +18,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(tests,
-	extends(lgtunit)).
+:- object(hook,
+	implements(expanding)).
 
-	:- info([
-		version is 1.0,
-		author is 'Paulo Moura',
-		date is 2015/11/09,
-		comment is 'Unit tests for the goal_expansion/2 user-defined hook predicate.'
-	]).
-
-	% see also the tests for the expand_goal/2 predicate, which further
-	% test the goal_expansion/2 user-defined hook predicate
-
-	test(goal_expansion_2_1) :-
-		findall(X, object::a(X), L),
-		L == [1, a, b, c].
-
-	test(goal_expansion_2_2) :-
-		findall(X, object::b(X), L),
-		L == [1, 2, 3].
+	% tests cases where conditionals are added or removed
+	goal_expansion(one(G), (G -> true)).
+	goal_expansion((true -> G), G).
 
 :- end_object.

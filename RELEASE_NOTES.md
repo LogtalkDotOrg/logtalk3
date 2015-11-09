@@ -61,6 +61,10 @@ this backend compiler.
 Tests
 -----
 
+* ADDED: Tests for the `goal_expansion/2` user-defined hook predicate when
+`->/2` goals are added or removed. Thanks to Abramo Bagnara for the test
+cases.
+
 * IMPROVED: Notes on the unit tests for the ISO Prolog standard `^/2` and
 `log/1` built-in functions. Thanks to Jan Burse for this contribution.
 
