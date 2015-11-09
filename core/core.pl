@@ -9696,15 +9696,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'((Pred1; Pred2), (TPred1; TPred2), (DPred1; DPred2), Ctx) :-
 	!,
 	'$lgt_compile_body'(Pred1, TPred10, DPred10, Ctx),
-	(	TPred10 = (_ -> _) ->
-		TPred1 = (TPred10, true)
-	;	TPred1 = TPred10
-	),
-	(	DPred10 = '$lgt_debug'(goal(Goal, DGoal10), ExCtx),
-		DGoal10 = (_ -> _) ->
-		DPred1 = '$lgt_debug'(goal(Goal, (DGoal10, true)), ExCtx)
-	;	DPred1 = DPred10
-	),
+	'$lgt_fix_disjunction_left_side'(TPred10, TPred1),
+	'$lgt_fix_disjunction_left_side'(DPred10, DPred1),
 	'$lgt_compile_body'(Pred2, TPred2, DPred2, Ctx).
 
 '$lgt_compile_body'('*->'(Pred1, Pred2), '*->'(TPred1, TPred2), '*->'(DPred1, DPred2), Ctx) :-
@@ -11383,6 +11376,23 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_unify_head_thead_arguments'(Pred, TPred, ExCtx),
  	'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head, Lines),
 	'$lgt_report_unknown_predicate_call'(Mode, Functor/Arity, Lines).
+
+
+
+% '$lgt_fix_disjunction_left_side'(@callable, -callable)
+%
+% check if the compilation of the disjunction left-side produced an if-then or
+% a soft-cut (e.g. due to goal-expansion) and fix it if necessary to avoid
+% converting the disjunction into an if-then-else or a soft-cut with an else part
+
+'$lgt_fix_disjunction_left_side'(Goal0, Goal) :-
+	(	Goal0 = (_ -> _) ->
+		Goal = (Goal0, true)
+	;	Goal0 = '*->'(_, _),
+		'$lgt_predicate_property'('*->'(_, _), built_in) ->
+		Goal = (Goal0, true)
+	;	Goal = Goal0
+	).
 
 
 
@@ -13134,10 +13144,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_remove_redundant_calls'((Goal1; Goal2), (SGoal1; SGoal2)) :-
 	!,
 	'$lgt_remove_redundant_calls'(Goal1, SGoal10),
-	(	SGoal10 = (_ -> _) ->
-		SGoal1 = (SGoal10, true)
-	;	SGoal1 = SGoal10
-	),
+	'$lgt_fix_disjunction_left_side'(SGoal10, SGoal1),
 	'$lgt_remove_redundant_calls'(Goal2, SGoal2).
 
 '$lgt_remove_redundant_calls'((Goal1 -> Goal2), (SGoal1 -> SGoal2)) :-
@@ -17775,10 +17782,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_dcg_body'((GREither; GROr), S0, S, (Either; Or), Ctx) :-
 	!,
 	'$lgt_dcg_body'(GREither, S0, S, Either0, Ctx),
-	(	Either0 = (_ -> _) ->
-		Either = (Either0, true)
-	;	Either = Either0
-	),
+	'$lgt_fix_disjunction_left_side'(Either0, Either),
 	'$lgt_dcg_body'(GROr, S0, S, Or, Ctx).
 
 '$lgt_dcg_body'('*->'(GRIf, GRThen), S0, S, '*->'(If, Then), Ctx) :-
