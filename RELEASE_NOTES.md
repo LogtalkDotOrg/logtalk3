@@ -37,6 +37,10 @@ compilation of all files in a loader file, the files listed after the faulty
 file will be compiled when the faulty file is fixed and the make predicates are
 called. 
 
+* IMPROVED: Transformation of `once/1` goals to avoid adding a disjunction and
+resulting choice-point. Thanks to Jan Wielemaker and Abramo Bagnara for the
+discussion on this subject.
+
 * ADDED: A `flags` key to the `logtalk_load_context/2` built-in predicate to
 access the list of explicit flags used in the compilation of a source file.
 

@@ -9791,7 +9791,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	CallN =.. [call, Closure| ExtraArgs],
 	DPred = '$lgt_debug'(goal(CallN, TPred), ExCtx).
 
-'$lgt_compile_body'(once(Goal), (TGoal -> true; fail), '$lgt_debug'(goal(once(Goal), (DGoal -> true; fail)), ExCtx), Ctx) :-
+'$lgt_compile_body'(once(Goal), (TGoal -> true), '$lgt_debug'(goal(once(Goal), (DGoal -> true)), ExCtx), Ctx) :-
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_compile_body'(Goal, TGoal, DGoal, Ctx).
