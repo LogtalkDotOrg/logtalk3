@@ -9700,8 +9700,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 		TPred1 = (TPred10, true)
 	;	TPred1 = TPred10
 	),
-	(	DPred10 = (_ -> _) ->
-		DPred1 = (DPred10, true)
+	(	DPred10 = '$lgt_debug'(goal(Goal, DGoal10), ExCtx),
+		DGoal10 = (_ -> _) ->
+		DPred1 = '$lgt_debug'(goal(Goal, (DGoal10, true)), ExCtx)
 	;	DPred1 = DPred10
 	),
 	'$lgt_compile_body'(Pred2, TPred2, DPred2, Ctx).
