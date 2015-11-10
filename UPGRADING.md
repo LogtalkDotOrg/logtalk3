@@ -124,8 +124,9 @@ The `version` flag is deprecated. New code that doesn't require compatibility
 with Logtalk 2.x should use instead the new `version_data` flag.
 
 The Logtalk 2.x `unknown`, `singletons`, and `tmpdir` are renamed in Logtalk
-3.x for clarity. The old names are deprecated and should only be used when
-compatibility with Logtalk 2.x is still required.
+3.x for clarity to, respectively, `unknown_entities`, `singleton_variables`,
+and `scratch_directory`. The old names are deprecated and should only be used
+when compatibility with Logtalk 2.x is still required.
 
 Stricter syntax
 ---------------
@@ -156,7 +157,8 @@ changes.
 
 The `initialization/1` directive is only accepted as a source file directive
 or as an object directive. Usage in protocols and categories is no longer
-supported.
+supported as no valid execution context can be defined for the initialization
+goal.
 
 Reflection support
 ------------------
