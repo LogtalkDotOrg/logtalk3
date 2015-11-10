@@ -65,7 +65,7 @@ Logtalk programming.
 Prolog adapter and integration files
 ------------------------------------
 
-* UPDATED: Lean Prolog 4.5.4 or a later version is now required when using
+* UPDATED: Lean Prolog 4.5.7 or a later version is now required when using
 this backend compiler.
 
 Tests

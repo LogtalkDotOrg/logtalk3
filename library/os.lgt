@@ -37,9 +37,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1.21,
+		version is 1.22,
 		author is 'Paulo Moura',
-		date is 2015/10/31,
+		date is 2015/10/10,
 		comment is 'Portable operating-system access predicates.'
 	]).
 
@@ -1075,11 +1075,7 @@
 
 		shell(Command, Status) :-
 			split_command(Command, List),
-			(	{getenv('COMSPEC', _)} ->
-				{system('.', List, _, Status)}
-			;	{getenv('SHELL', Shell)},
-				{system('.', [Shell, '-c'| List], _, Status)}
-			).
+			{system(List, Status)}.
 
 		shell(Command) :-
 			shell(Command, 0).
