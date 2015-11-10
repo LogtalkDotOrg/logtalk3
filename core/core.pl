@@ -2559,7 +2559,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_must_be'(var_or_operator_priority, Priority, logtalk(Obj::current_op(Priority, Specifier, Operator), Sender)),
 	'$lgt_must_be'(var_or_operator_specifier, Specifier, logtalk(Obj::current_op(Priority, Specifier, Operator), Sender)),
 	'$lgt_must_be'(var_or_atom, Operator, logtalk(Obj::current_op(Priority, Specifier, Operator), Sender)),
-	(	'$lgt_entity_property_'(Obj, op(Priority, Specifier, Operator, OpScope)),
+	(	Obj == user ->
+		current_op(Priority, Specifier, Operator)
+	;	'$lgt_entity_property_'(Obj, op(Priority, Specifier, Operator, OpScope)),
 		% don't return local operator declarations
 		OpScope \== l,
 		% check that the operator declaration is within the scope of the caller
@@ -2584,6 +2586,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_must_be'(var_or_predicate_indicator, Pred, logtalk(Obj::current_predicate(Pred), Sender)),
 	'$lgt_must_be'(object, Obj, logtalk(Obj::current_predicate(Pred), Sender)),
 	fail.
+
+'$lgt_current_predicate'(user, Pred, _, _) :-
+	!,
+	current_predicate(Pred).
 
 '$lgt_current_predicate'(Obj, Functor/Arity, Sender, LookupScope) :-
 	nonvar(Functor),
@@ -2631,6 +2637,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_must_be'(var_or_predicate_property, Prop, logtalk(Obj::predicate_property(Pred, Prop), Sender)),
 	'$lgt_must_be'(object, Obj, logtalk(Obj::predicate_property(Pred, Prop), Sender)),
 	fail.
+
+'$lgt_predicate_property'(user, Pred, Prop, _, _) :-
+	!,
+	'$lgt_predicate_property'(Pred, Prop).
 
 '$lgt_predicate_property'(Obj, Pred, Prop, Sender, LookupScope) :-
 	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, _, _, Rnm, ObjFlags),
