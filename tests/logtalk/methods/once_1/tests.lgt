@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2012/12/06,
+		date is 2015/11/10,
 		comment is 'Unit tests for the once/1 built-in method.'
 	]).
 
@@ -50,7 +50,11 @@
 		findall(X, once(a(X)), Xs),
 		Xs == [1].
 
-	fails(once_1_5) :-
+	succeeds(once_1_5) :-
+		findall(X, (once(a(X)); X = 0), Xs),
+		Xs == [1, 0].
+
+	fails(once_1_6) :-
 		once(a(4)).
 
 	a(1).
