@@ -30,32 +30,46 @@
 
 	% once/1 calls are expanded and thus the error term is for call/1
 
-	throws(once_1_1, error(instantiation_error,logtalk(call(_),This))) :-
+	throws(once_1_01, error(instantiation_error,logtalk(call(_),This))) :-
 		this(This),
 		once(_).
 
-	throws(once_1_2, error(type_error(callable,1),logtalk(call(1),This))) :-
+	throws(once_1_02, error(type_error(callable,1),logtalk(call(1),This))) :-
 		this(This),
 		Goal = 1,
 		once(Goal).
 
 	% it's not always possible to decompile the actual call
 
-	throws(once_1_3, error(existence_error(procedure,_),logtalk(call(p(_)),This))) :-
+	throws(once_1_03, error(existence_error(procedure,_),logtalk(call(p(_)),This))) :-
 		this(This),
 		Goal = p(_),
 		once(Goal).
 
-	succeeds(once_1_4) :-
+	succeeds(once_1_04) :-
+		once(!).
+
+	succeeds(once_1_05) :-
 		findall(X, once(a(X)), Xs),
 		Xs == [1].
 
-	succeeds(once_1_5) :-
+	succeeds(once_1_06) :-
 		findall(X, (once(a(X)); X = 0), Xs),
 		Xs == [1, 0].
 
-	fails(once_1_6) :-
+	succeeds(once_1_07) :-
+		findall(X, (once(!); a(X)), Xs),
+		Xs = [H| T], var(H), T == [1, 2, 3].
+
+	succeeds(once_1_08) :-
+		findall(X, (once((!, fail)); a(X)), Xs),
+		Xs == [1, 2, 3].
+
+	fails(once_1_09) :-
 		once(a(4)).
+
+	fails(once_1_10) :-
+		once(fail).
 
 	a(1).
 	a(2).
