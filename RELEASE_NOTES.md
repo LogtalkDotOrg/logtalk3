@@ -79,6 +79,9 @@ Tests
 `->/2` goals are added or removed. Thanks to Abramo Bagnara for the test
 cases.
 
+* ADDED: Tests for the reflection built-in methods when the messages are
+sent to the pseudo-object `user`.
+
 * IMPROVED: Notes on the unit tests for the ISO Prolog standard `^/2` and
 `log/1` built-in functions. Thanks to Jan Burse for this contribution.
 

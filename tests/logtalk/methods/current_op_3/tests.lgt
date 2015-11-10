@@ -18,13 +18,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% plain Prolog database for testing calls in the "user" pseudo-object
+
+:- op(777, yfx, my_test_op).
+
+
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/10/29,
+		date is 2015/11/10,
 		comment is 'Unit tests for the current_op/3 built-in directive.'
 	]).
 
@@ -77,21 +82,47 @@
 		test_object_2::operators(Operators),
 		Operators == [opq, rst].
 
+	% tests for the "user" pseudo-object
+
+	succeeds(current_op_3_14) :-
+		user::current_op(Priority, Associativity, my_test_op),
+		Priority == 777, Associativity == yfx.
+
+	succeeds(current_op_3_15) :-
+		user::current_op(Priority, Associativity, Operator),
+		Priority == 777, Associativity == yfx, Operator == my_test_op.
+
+	succeeds(current_op_3_16) :-
+		% ensure that the unification is not optimized away
+		user_object(Object),
+		Object::current_op(Priority, Associativity, my_test_op),
+		Priority == 777, Associativity == yfx.
+
+	succeeds(current_op_3_17) :-
+		% ensure that the unification is not optimized away
+		user_object(Object),
+		Object::current_op(Priority, Associativity, Operator),
+		Priority == 777, Associativity == yfx, Operator == my_test_op.
+
 	% test semantics for local calls from multifile predicate clauses
 
-	succeeds(current_op_1_14) :-
+	succeeds(current_op_3_18) :-
 		primary::p(Priority, Associativity, op_public),
 		Priority == 601, Associativity == xfx.
 
-	succeeds(current_op_1_15) :-
+	succeeds(current_op_3_19) :-
 		primary::p(Priority, Associativity, op_protected),
 		Priority == 601, Associativity == xfx.
 
-	succeeds(current_op_1_16) :-
+	succeeds(current_op_3_20) :-
 		primary::p(Priority, Associativity, op_private),
 		Priority == 601, Associativity == xfx.
 
-	succeeds(current_op_1_17) :-
+	succeeds(current_op_3_21) :-
 		\+ primary::p(_, _, op_local).
+
+	% auxiliary predicates
+
+	user_object(user).
 
 :- end_object.

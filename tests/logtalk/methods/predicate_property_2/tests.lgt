@@ -18,13 +18,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% plain Prolog database for testing calls in the "user" pseudo-object
+
+a(1).
+
+b(1, 2).
+
+
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/10/28,
+		date is 2015/11/10,
 		comment is 'Unit tests for the predicate_property/2 built-in method.'
 	]).
 
@@ -110,18 +117,42 @@
 		test_object::predicate_property(nt(_,_), non_terminal(NonTerminal)),
 		NonTerminal == nt//0.
 
-	% test semantics for local calls from multifile predicate clauses
+	% tests for the "user" pseudo-object
 
 	succeeds(predicate_property_2_21) :-
+		user::predicate_property(a(_), static).
+
+	succeeds(predicate_property_2_22) :-
+		user::predicate_property(b(_,_), Property),
+		Property == static.
+
+	succeeds(predicate_property_2_23) :-
+		% ensure that the unification is not optimized away
+		user_object(Object),
+		Object::predicate_property(a(_), static).
+
+	succeeds(predicate_property_2_24) :-
+		% ensure that the unification is not optimized away
+		user_object(Object),
+		Object::predicate_property(b(_,_), Property),
+		Property == static.
+
+	% test semantics for local calls from multifile predicate clauses
+
+	succeeds(predicate_property_2_25) :-
 		primary::p(a(_), scope(Scope)),
 		primary::p(a(_), declared_in(Object)),
 		primary::p(a(_), defined_in(Object)),
 		Scope == (private), Object == secondary.
 
-	succeeds(predicate_property_2_22) :-
+	succeeds(predicate_property_2_26) :-
 		primary::p(b(_,_), scope(Scope)),
 		primary::p(b(_,_), declared_in(Object)),
 		primary::p(b(_,_), defined_in(Object)),
 		Scope == protected, Object == secondary.
+
+	% auxiliary predicates
+
+	user_object(user).
 
 :- end_object.

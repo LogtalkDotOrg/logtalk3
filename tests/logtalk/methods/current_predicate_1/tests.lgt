@@ -18,13 +18,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% plain Prolog database for testing calls in the "user" pseudo-object
+
+a(1).
+
+b(1, 2).
+
+
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.1,
+		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/10/28,
+		date is 2015/11/10,
 		comment is 'Unit tests for the current_predicate/1 built-in method.'
 	]).
 
@@ -67,10 +74,34 @@
 	fails(current_predicate_1_10) :-
 		test_object::current_predicate(foo/2).
 
-	% test semantics for local calls from multifile predicate clauses
+	% tests for the "user" pseudo-object
 
 	succeeds(current_predicate_1_11) :-
+		user::current_predicate(a/1).
+
+	succeeds(current_predicate_1_12) :-
+		user::current_predicate(b/Arity),
+		Arity == 2.
+
+	succeeds(current_predicate_1_13) :-
+		% ensure that the unification is not optimized away
+		user_object(Object),
+		Object::current_predicate(a/1).
+
+	succeeds(current_predicate_1_14) :-
+		% ensure that the unification is not optimized away
+		user_object(Object),
+		Object::current_predicate(b/Arity),
+		Arity == 2.
+
+	% test semantics for local calls from multifile predicate clauses
+
+	succeeds(current_predicate_1_15) :-
 		setof(Predicate, primary::p(Predicate), Predicates),
 		Predicates == [a/1, b/2, c/3].
+
+	% auxiliary predicates
+
+	user_object(user).
 
 :- end_object.
