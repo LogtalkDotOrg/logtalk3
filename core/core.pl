@@ -2518,7 +2518,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 2, 1, rc3)).
+'$lgt_version_data'(logtalk(3, 2, 1, rc4)).
 
 
 
@@ -6602,7 +6602,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	assertz(('$lgt_send_to_obj_ne_'(Obj, Pred, ExCtx) :- '$lgt_send_to_obj_ne_nv'(Obj, Pred, ExCtx))),
 	assertz(('$lgt_send_to_self_'(Obj, Pred, ExCtx) :- '$lgt_send_to_self_nv'(Obj, Pred, ExCtx))),
 	assertz(('$lgt_obj_super_call_'(Super, Pred, ExCtx) :- '$lgt_obj_super_call_nv'(Super, Pred, ExCtx))),
-	assertz(('$lgt_ctg_super_call_'(Ctg, Pred, ExCtx) :- '$lgt_ctg_super_call_nv'(Ctg, Pred, ExCtx))).
+	assertz(('$lgt_ctg_super_call_'(Ctg, Pred, ExCtx) :- '$lgt_ctg_super_call_nv'(Ctg, Pred, ExCtx))),
+	% support runtime resolved database messages to the "user" pseudo-object
+	assertz('$lgt_db_lookup_cache_'(user, Clause, _, Clause, true)).
 
 
 

@@ -54,9 +54,9 @@ discussion on this subject.
 call to `true/0` as it would convert the disjunction into a soft-cut call
 with an else part.
 
-* FIXED: Bug in the `current_predicate/1, `predicate_property/2`, and
-`curent_op/3` reflection methods when the messages are resolved at runtime
-to the pseudo-object `user`. Thanks to John Stewart for the bug report.
+* FIXED: Bug in the database and reflection built-in methods when the messages
+are resolved at runtime to the pseudo-object `user`. Thanks to John Stewart
+for the bug report.
 
 * FIXED: Warning when embedding Logtalk in Lean Prolog.
 
