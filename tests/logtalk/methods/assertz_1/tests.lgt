@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/04/16,
+		date is 2015/11/11,
 		comment is 'Unit tests for the assertz/1 built-in method.'
 	]).
 
@@ -73,7 +73,8 @@
 	succeeds(assertz_1_15) :-
 		create_object(Object, [], [public(a/1), public(p/1)], []),
 		Object::assertz(a(1)),
-		Object::assertz(a(2)),
+		a2_clause(A2),
+		Object::assertz(A2),
 		Object::assertz(a(3)),
 		Object::assertz((p(X) :- a(X))),
 		findall(X, Object::a(X), Xs),
@@ -85,7 +86,8 @@
 	succeeds(assertz_1_16) :-
 		create_object(Object, [], [set_logtalk_flag(dynamic_declarations, allow)], []),
 		Object::assertz(a(1)),
-		Object::assertz(a(2)),
+		a2_clause(A2),
+		Object::assertz(A2),
 		Object::assertz(a(3)),
 		Object::assertz((p(X) :- a(X))),
 		findall(X, Object::a(X), Xs),
@@ -93,5 +95,42 @@
 		findall(Y, Object::p(Y), Ys),
 		Ys == [1,2,3],
 		abolish_object(Object).
+
+	% tests for the "user" pseudo-object
+
+	succeeds(assertz_1_17) :-
+		user::assertz(bar),
+		{bar}.
+
+	succeeds(assertz_1_18) :-
+		baz_clause(Baz),
+		user::assertz(Baz),
+		{Baz}.
+
+	succeeds(assertz_1_19) :-
+		% ensure that the unification is not optimized away
+		user_object(Object),
+		Object::assertz(foobar),
+		{foobar}.
+
+	succeeds(assertz_1_20) :-
+		% ensure that the unification is not optimized away
+		user_object(Object),
+		foobaz_clause(FooBaz),
+		Object::assertz(FooBaz),
+		{FooBaz}.
+
+	cleanup :-
+		{abolish(bar/0), abolish(baz/0), abolish(foobar/0), abolish(foobaz/0)}.
+
+	% auxiliary predicates
+
+	a2_clause(a(2)).
+
+	baz_clause(baz).
+
+	foobaz_clause(foobaz).
+
+	user_object(user).
 
 :- end_object.

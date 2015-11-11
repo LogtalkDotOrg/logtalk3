@@ -18,13 +18,22 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% plain Prolog database for testing calls in the "user" pseudo-object
+
+:- dynamic(bar/1).
+bar(1). bar(2).
+
+:- dynamic(baz/1).
+baz(1). baz(2).
+
+
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/04/16,
+		date is 2015/11/11,
 		comment is 'Unit tests for the retractall/1 built-in method.'
 	]).
 
@@ -55,7 +64,8 @@
 	succeeds(retractall_1_9) :-
 		test_object::retractall(t(3)),
 		test_object::t(1),
-		test_object::t(2),
+		t2_head(T2),
+		test_object::T2,
 		\+ test_object::t(3),
 		test_object::retractall(t(_)),
 		\+ test_object::t(_).
@@ -64,10 +74,45 @@
 		create_object(Object, [], [public(t/1), dynamic(t/1)], [t(1), (t(2) :-t(1)), (t(3) :-t(1),t(2))]),
 		Object::retractall(t(3)),
 		Object::t(1),
-		Object::t(2),
+		t2_head(T2),
+		Object::T2,
 		\+ Object::t(3),
 		Object::retractall(t(_)),
 		\+ Object::t(_),
 		abolish_object(Object).
+
+	% tests for the "user" pseudo-object
+
+	succeeds(retractall_1_11) :-
+		user::retractall(bar(1)),
+		{bar(2)}.
+
+	succeeds(retractall_1_12) :-
+		bar_clause(Baz),
+		user::retractall(Baz),
+		\+ {bar(_)}.
+
+	succeeds(retractall_1_13) :-
+		% ensure that the unification is not optimized away
+		user_object(Object),
+		Object::retractall(baz(1)),
+		{baz(2)}.
+
+	succeeds(retractall_1_14) :-
+		% ensure that the unification is not optimized away
+		user_object(Object),
+		baz_clause(Baz),
+		Object::retractall(Baz),
+		\+ {baz(_)}.
+
+	% auxiliary predicates
+
+	t2_head(t(2)).
+
+	bar_clause(bar(2)).
+
+	baz_clause(baz(2)).
+
+	user_object(user).
 
 :- end_object.

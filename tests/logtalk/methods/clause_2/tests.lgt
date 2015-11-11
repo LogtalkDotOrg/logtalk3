@@ -18,13 +18,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% plain Prolog database for testing calls in the "user" pseudo-object
+
+bar. baz.
+foobar. foobaz.
+
+
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/04/16,
+		date is 2015/11/11,
 		comment is 'Unit tests for the clause/2 built-in method.'
 	]).
 
@@ -58,19 +64,55 @@
 	succeeds(clause_2_10) :-
 		test_object::clause(t(X), true),
 		X == 1,
-		test_object::clause(t(2), Body1),
+		t2_head(T2),
+		test_object::clause(T2, Body1),
 		Body1 == t(1),
 		test_object::clause(t(3), Body2),
 		Body2 == (t(1), t(2)).
 
 	succeeds(clause_2_11) :-
-		create_object(Object, [], [public(t/1), dynamic(t/1)], [t(1), (t(2) :-t(1)), (t(3) :-t(1),t(2))]),
+		create_object(Object, [], [public(t/1), dynamic(t/1)], [t(1), (t(2) :- t(1)), (t(3) :- t(1),t(2))]),
 		Object::clause(t(X), true),
 		X == 1,
-		Object::clause(t(2), Body1),
+		t2_head(T2),
+		Object::clause(T2, Body1),
 		Body1 == t(1),
 		Object::clause(t(3), Body2),
 		Body2 == (t(1), t(2)),
 		abolish_object(Object).
+
+	% tests for the "user" pseudo-object
+
+	succeeds(clause_2_12) :-
+		user::clause(bar, Body),
+		Body == true.
+
+	succeeds(clause_2_13) :-
+		baz_clause(Baz),
+		user::clause(Baz, Body),
+		Body == true.
+
+	succeeds(clause_2_14) :-
+		% ensure that the unification is not optimized away
+		user_object(Object),
+		Object::clause(foobar, Body),
+		Body == true.
+
+	succeeds(clause_2_15) :-
+		% ensure that the unification is not optimized away
+		user_object(Object),
+		foobaz_clause(FooBaz),
+		Object::clause(FooBaz, Body),
+		Body == true.
+
+	% auxiliary predicates
+
+	t2_head(t(2)).
+
+	baz_clause(baz).
+
+	foobaz_clause(foobaz).
+
+	user_object(user).
 
 :- end_object.

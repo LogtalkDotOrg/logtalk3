@@ -18,13 +18,22 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% plain Prolog database for testing calls in the "user" pseudo-object
+
+:- dynamic(bar/1).
+bar(1). bar(2).
+
+:- dynamic(baz/1).
+baz(1). baz(2).
+
+
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/04/16,
+		date is 2015/11/11,
 		comment is 'Unit tests for the retract/1 built-in method.'
 	]).
 
@@ -61,7 +70,8 @@
 	succeeds(retract_1_11) :-
 		test_object::retract((t(X) :-true)),
 		X == 1,
-		test_object::retract((t(2) :-Body1)),
+		t2_head(T2),
+		test_object::retract((T2 :-Body1)),
 		Body1 == t(1),
 		test_object::retract((t(3) :-Body2)),
 		Body2 == (t(1), t(2)).
@@ -70,10 +80,43 @@
 		create_object(Object, [], [public(t/1), dynamic(t/1)], [t(1), (t(2) :-t(1)), (t(3) :-t(1),t(2))]),
 		Object::retract((t(X) :-true)),
 		X == 1,
-		Object::retract((t(2) :-Body1)),
+		t2_head(T2),
+		Object::retract((T2 :-Body1)),
 		Body1 == t(1),
 		Object::retract((t(3) :-Body2)),
 		Body2 == (t(1), t(2)),
 		abolish_object(Object).
+
+	% tests for the "user" pseudo-object
+
+	succeeds(retract_1_13) :-
+		user::retract(bar(X)),
+		X == 1.
+
+	succeeds(retract_1_14) :-
+		bar_clause(Baz),
+		user::retract(Baz).
+
+	succeeds(retract_1_15) :-
+		% ensure that the unification is not optimized away
+		user_object(Object),
+		Object::retract(baz(X)),
+		X == 1.
+
+	succeeds(retract_1_16) :-
+		% ensure that the unification is not optimized away
+		user_object(Object),
+		baz_clause(Baz),
+		Object::retract(Baz).
+
+	% auxiliary predicates
+
+	t2_head(t(2)).
+
+	bar_clause(bar(2)).
+
+	baz_clause(baz(2)).
+
+	user_object(user).
 
 :- end_object.

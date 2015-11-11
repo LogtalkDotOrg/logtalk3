@@ -18,13 +18,28 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% plain Prolog database for testing calls in the "user" pseudo-object
+
+:- dynamic(bar/1).
+bar(1). bar(2).
+
+:- dynamic(baz/1).
+baz(1). baz(2).
+
+:- dynamic(foobar/1).
+foobar(1).
+
+:- dynamic(foobaz/1).
+foobaz(1).
+
+
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2014/04/16,
+		date is 2015/11/11,
 		comment is 'Unit tests for the abolish/1 built-in method.'
 	]).
 
@@ -76,10 +91,45 @@
 		Object::current_predicate(a/1),
 		Object::assertz((p(X) :- a(X))),
 		Object::current_predicate(p/1),
-		Object::abolish(a/1),
+		a_predicate_indicator(A),
+		Object::abolish(A),
 		\+ Object::current_predicate(a/1),
 		Object::abolish(p/1),
 		\+ Object::current_predicate(p/1),
 		abolish_object(Object).
+
+	% tests for the "user" pseudo-object
+
+	succeeds(abolish_1_16) :-
+		user::abolish(bar/1),
+		\+ {current_predicate(bar/1)}.
+
+	succeeds(abolish_1_17) :-
+		baz_predicate_indicator(Baz),
+		user::abolish(Baz),
+		\+ {current_predicate(baz/1)}.
+
+	succeeds(abolish_1_18) :-
+		% ensure that the unification is not optimized away
+		user_object(Object),
+		Object::abolish(foobar/1),
+		\+ {current_predicate(foobar/1)}.
+
+	succeeds(abolish_1_19) :-
+		% ensure that the unification is not optimized away
+		user_object(Object),
+		foobaz_predicate_indicator(FooBaz),
+		Object::abolish(FooBaz),
+		\+ {current_predicate(foobaz/1)}.
+
+	% auxiliary predicates
+
+	a_predicate_indicator(a/1).
+
+	baz_predicate_indicator(baz/1).
+
+	foobaz_predicate_indicator(foobaz/1).
+
+	user_object(user).
 
 :- end_object.
