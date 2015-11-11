@@ -2978,6 +2978,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_must_be'(predicate_indicator, Pred, logtalk(Obj::abolish(Pred), Sender)),
 	'$lgt_abolish_checked'(Obj, Pred, Sender, TestScope).
 
+'$lgt_abolish_checked'(user, Functor/Arity, _, _) :-
+	!,
+	abolish(Functor/Arity).
 
 '$lgt_abolish_checked'(Obj, Functor/Arity, Sender, TestScope) :-
 	'$lgt_current_object_'(Obj, _, Dcl, _, _, _, _, DDcl, DDef, _, ObjFlags),
