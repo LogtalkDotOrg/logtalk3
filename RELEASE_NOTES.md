@@ -21,7 +21,7 @@ RELEASE NOTES
 =============
 
 
-3.02.1 - November ??, 2015
+3.02.1 - November 12, 2015
 ==========================
 
 Logtalk compiler and runtime
@@ -29,13 +29,13 @@ Logtalk compiler and runtime
 
 * IMPROVED: The runtime table entries for loaded files are now added to the
 generated intermediate Prolog files using a multifile predicate for a better
-embedding experience.
+embedding experience. Notably, it makes it easier to do incremental embedding.
 
 * IMPROVED: The make predicates now also reload the parent files of files with
 compilation or loading errors. This ensures that, when a faulty file aborts the
 compilation of all files in a loader file, the files listed after the faulty
 file will be compiled when the faulty file is fixed and the make predicates are
-called. 
+called.
 
 * IMPROVED: Transformation of `once/1` goals to avoid adding a disjunction and
 resulting choice-point. Thanks to Jan Wielemaker and Abramo Bagnara for the
