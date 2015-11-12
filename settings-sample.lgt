@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample settings file
-%  Last updated on May 23, 2015
+%  Last updated on November 12, 2015
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -286,6 +286,26 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 */
 
 
+%  To fully support hot-patching of compiled code at runtime uncomment the
+%  following lines:
+
+/*
+:- initialization((
+	set_logtalk_flag(complements, allow)
+)).
+*/
+
+
+%  To support adding new features to compiled code at runtime uncomment the
+%  following lines:
+
+/*
+:- initialization((
+	set_logtalk_flag(complements, restrict)
+)).
+*/
+
+
 %  To prevent using the <</2 debugging context-switching control construct
 %  to bypass object encapsulation rules uncomment the following lines:
 
@@ -314,7 +334,7 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 %  source file compilation and loading reports)
 
 /*
-:- category(my_logtalk_startup_settings).
+:- category(my_terse_logtalk_startup_settings).
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).
@@ -339,7 +359,7 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 %  lines:
 
 /*
-:- category(my_logtalk_message_settings).
+:- category(my_verbose_logtalk_message_settings).
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).

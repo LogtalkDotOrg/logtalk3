@@ -66,6 +66,8 @@ Documentation
 ADDED: Small section on optimizing applications to the user manual section on
 Logtalk programming.
 
+UPDATED: Settings examples.
+
 Prolog adapter and integration files
 ------------------------------------
 
