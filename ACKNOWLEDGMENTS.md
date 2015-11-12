@@ -26,6 +26,7 @@ AUTHORS
 CONTRIBUTORS
 ============
 
+* Abramo Bagnara (efficient expansion of once/1 goals and bug reports in corner cases when compiling disjunctions)
 * Andreas Becker (PDT support for Logtalk, bug reports)
 * Artur Miguel Dias (testing, lambda expression examples)
 * Clara Dimene (GeSHi syntax highlighter)
