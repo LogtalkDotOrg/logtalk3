@@ -22,8 +22,6 @@
 
 a(1).
 
-b(1, 2).
-
 
 :- object(tests,
 	extends(lgtunit)).
@@ -31,7 +29,7 @@ b(1, 2).
 	:- info([
 		version is 1.2,
 		author is 'Paulo Moura',
-		date is 2015/11/10,
+		date is 2015/11/12,
 		comment is 'Unit tests for the predicate_property/2 built-in method.'
 	]).
 
@@ -120,32 +118,22 @@ b(1, 2).
 	% tests for the "user" pseudo-object
 
 	succeeds(predicate_property_2_21) :-
-		user::predicate_property(a(_), static).
+		user::predicate_property(a(_), _).
 
 	succeeds(predicate_property_2_22) :-
-		user::predicate_property(b(_,_), Property),
-		Property == static.
-
-	succeeds(predicate_property_2_23) :-
 		% ensure that the unification is not optimized away
 		user_object(Object),
-		Object::predicate_property(a(_), static).
-
-	succeeds(predicate_property_2_24) :-
-		% ensure that the unification is not optimized away
-		user_object(Object),
-		Object::predicate_property(b(_,_), Property),
-		Property == static.
+		Object::predicate_property(a(_), _).
 
 	% test semantics for local calls from multifile predicate clauses
 
-	succeeds(predicate_property_2_25) :-
+	succeeds(predicate_property_2_23) :-
 		primary::p(a(_), scope(Scope)),
 		primary::p(a(_), declared_in(Object)),
 		primary::p(a(_), defined_in(Object)),
 		Scope == (private), Object == secondary.
 
-	succeeds(predicate_property_2_26) :-
+	succeeds(predicate_property_2_24) :-
 		primary::p(b(_,_), scope(Scope)),
 		primary::p(b(_,_), declared_in(Object)),
 		primary::p(b(_,_), defined_in(Object)),
