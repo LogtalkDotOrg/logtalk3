@@ -20,8 +20,17 @@
 
 % plain Prolog database for testing calls in the "user" pseudo-object
 
-bar. baz.
-foobar. foobaz.
+:- dynamic(bar/0).
+bar.
+
+:- dynamic(baz/0).
+baz.
+
+:- dynamic(foobar/0).
+foobar.
+
+:- dynamic(foobaz/0).
+foobaz.
 
 
 :- object(tests,
