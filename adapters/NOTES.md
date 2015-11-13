@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 Notes on supported backend Prolog compilers  
-Last updated on November 1, 2015
+Last updated on November 13, 2015
 
 This file is part of Logtalk <http://logtalk.org/>  
 Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -194,7 +194,7 @@ the steps (exemplified for POSIX systems):
 			core(user),
 			core(logtalk),
 			core(core_messages)],
-			[scratch_directory('$HOME/collect')]).
+			[optimize(on), scratch_directory('$HOME/collect')]).
 
 	$ cp $LOGTALKHOME/adapters/gnu.pl $HOME/collect/gnu.pl
 	$ cp $LOGTALKHOME/paths/paths.pl $HOME/collect/paths.pl
@@ -245,7 +245,7 @@ these steps:
 			core(user),
 			core(logtalk),
 			core(core_messages)],
-			[scratch_directory('$HOME/collect')]).
+			[optimize(on), scratch_directory('$HOME/collect')]).
 	...
 
 	$ cp $LOGTALKHOME/adapters/ji.pl $HOME/collect/ji.pl
@@ -305,7 +305,7 @@ for POSIX systems):
 			core(user),
 			core(logtalk),
 			core(core_messages)],
-			[scratch_directory('$HOME/collect')]).
+			[optimize(on), scratch_directory('$HOME/collect')]).
 
 	$ cp $LOGTALKHOME/adapters/lean.pl $HOME/collect/lean.pl
 	$ cp $LOGTALKHOME/paths/paths.pl $HOME/collect/paths.pl
