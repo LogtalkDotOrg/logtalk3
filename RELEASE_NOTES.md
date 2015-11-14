@@ -24,6 +24,11 @@ RELEASE NOTES
 3.02.2 - December ??, 2015
 ==========================
 
+Tools
+-----
+
+* IMPROVED: Startup message when loading the `help` tool now also includes
+basic information on compiling and loading source files and debugging code.
 
 
 3.02.1 - November 12, 2015

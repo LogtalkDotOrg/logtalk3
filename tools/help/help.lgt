@@ -21,9 +21,9 @@
 :- object(help).
 
 	:- info([
-		version is 0.5,
+		version is 0.6,
 		author is 'Paulo Moura',
-		date is 2015/08/29,
+		date is 2015/11/14,
 		comment is 'Command-line help for Logtalk built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
@@ -32,21 +32,30 @@
 	:- public(help/0).
 	:- mode(help, one).
 	:- info(help/0, [
-		comment is 'Prints instructions on how to use help.'
+		comment is 'Prints instructions on how to use the help tool.'
 	]).
 
 	help :-
-		write('On-line help is available for Logtalk built-in control constructs,'), nl,
-		write('built-in directives, built-in predicates, built-in non-terminals,'), nl,
-		write('built-in methods, and the standard library:'), nl, nl,
-		write('  Type help::Functor/Arity.'), nl,
-		write('  Or   help::Functor//Arity. '), nl,
-		write('  Or   help::library.'), nl,
-		write('  Or   help::library(Entity).'), nl, nl,
-		write('The manual web page for the selected built-in feature will open in'), nl,
-		write('your default web browser. To consult the Logtalk User and Reference'), nl,
-		write('manuals:'), nl, nl,
-		write('  Type help::manuals.'), nl, nl.
+		nl,
+		write('On-line help is available for Logtalk built-in control constructs, built-in'), nl,
+		write('directives, built-in predicates, built-in non-terminals, built-in methods,'), nl,
+		write('and the standard library:'), nl, nl,
+		write('    help::Functor/Arity.'), nl,
+		write('    help::Functor//Arity. '), nl,
+		write('    help::library.'), nl,
+		write('    help::library(Entity).'), nl, nl,
+		write('The manual page for the selected built-in feature will open in your default'), nl,
+		write('web browser. To consult the Logtalk User and Reference manuals:'), nl, nl,
+		write('    help::manuals.'), nl, nl,
+		write('To compile and load source files the following shortcut can be used:'), nl, nl,
+		write('    {File1, File2, ...}'), nl, nl,
+		write('To recompile and reload all source files that have been changed since they'), nl,
+		write('were loaded the following shortcut can be used:'), nl, nl,
+		write('    {*}'), nl, nl,
+		write('To debug your code, first load the debugger tool and turn on the debug flag:'), nl, nl,
+		write('    {debugger(loader)}, set_logtalk_flag(debug, on).'), nl, nl,
+		write('Second, load the source files you want to debug and start the debugger tracer:'), nl, nl,
+		write('    debugger::trace.'), nl, nl.
 
 	:- public(('/')/2).
 	:- mode('/'(+atom, +integer), zero_or_one).
