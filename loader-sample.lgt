@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample loader file
-%  Last updated on May 25, 2014
+%  Last updated on November 14, 2014
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -25,9 +25,10 @@
 %  files whose main purpose is to load your application files.
 %
 %  During development, loader files can be reloaded repeatedly. Therefore,
-%  generic settings shared by all source files, such as library paths and
-%  global flag values, are best defined in a settings file saved in the
-%  application directory and by starting Logtalk from that directory.
+%  any generic settings shared by all source files, such as library paths,
+%  global flag values, and initialization goals with side-effects, are
+%  best defined in a settings file saved in the application directory and
+%  by starting Logtalk from that directory.
 %
 %  Note that the logtalk_load/1-2 predicates can compile and load both
 %  Logtalk and Prolog files
