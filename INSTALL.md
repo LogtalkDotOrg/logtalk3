@@ -21,8 +21,10 @@ MANUAL INSTALLATION INSTRUCTIONS
 ================================
 
 The recommended way of installing Logtalk is to use, whenever possible, one 
-of the provided installers. This file contains detailed instructions for 
-*manual* installation and configuration of Logtalk. You should also consult 
+of the provided installers that are available from the Logtalk web site.
+
+This file contains detailed instructions for  *manual* installation and
+configuration of Logtalk. You should also consult 
 the [scripts/NOTES.md](scripts/NOTES.md) and
 [integration/NOTES.md](integration/NOTES.md) files for a description of a
 set of shell scripts that might be used for Logtalk installation on some
@@ -36,7 +38,7 @@ The POSIX shell scripts assume that `/bin/bash` is available.
 -----------------------------
 
 Manual installation of Logtalk can be accomplished by decompressing the
-downloaded archive (or by cloning the development git server), running an
+sources archive (or by cloning the development git server), running an
 installation script, and defining a couple of environment variables. You can
 install Logtalk in any user accessible location. Whenever possible, it is
 recommended that Logtalk be installed by a user with administrative rights,
@@ -160,8 +162,8 @@ The local copies made by the `logtalk_user_setup` scripts have both read and
 write permissions for the user running the script. When used with one of the 
 back-end Prolog compilers for which an integration script is provided on 
 the `integration` directory, this setup as the advantage of allowing each 
-end-user to independently customize default compilation flags, library 
-paths, and modify and experiment with the provided libraries and examples.
+end-user to independently customize default compilation flags, library paths,
+and modify and experiment with the provided libraries and examples.
 
 Windows (admin and non-admin) users may also use the Logtalk GUI installer
 to setup their Logtalk user folder and the `LOGTALKUSER` environment variable.
@@ -181,11 +183,10 @@ Most Prolog compilers allows the user to define an initialization file that
 is automatically consulted at startup. These initialization files may contain
 directives for loading other files, such as the Logtalk adapter file and the
 Logtalk compiler/runtime. The `$LOGTALKHOME/integration` sub-directory 
-contains several pre-made scripts (named `*lgt.*`) for running Logtalk with 
-selected back-end Prolog compilers. You can use these scripts as examples 
-when creating initialization files for other Prolog compilers. Be sure to 
-read the `adapters/NOTES.md` file notes on the Prolog compilers that you 
-intend to use.
+contains shell scripts for running Logtalk with all supported back-end Prolog
+compilers. You can use these scripts as examples when creating initialization
+files for other Prolog compilers. Be sure to read the `adapters/NOTES.md` file
+notes on the Prolog compilers that you intend to use.
 
 
 5. CUSTOMIZING LOGTALK

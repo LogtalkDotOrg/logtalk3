@@ -20,8 +20,9 @@ ________________________________________________________________________
 This folder contains a Prolog file, `paths.pl` file, that is automatically
 loaded by the Prolog integration scripts and shortcuts. This file defines
 essential library paths for starting Logtalk and library paths for the
-Logtalk standard library and for the supplied examples and contributions.
-Note that in Logtalk a library is simply a directory containing source files.
+standard library, developer tools, and also for the supplied examples
+and contributions. Note that, in Logtalk, a library is simply a directory
+containing source files.
 
 Basic library aliases defined in the `paths.pl` file include:
 

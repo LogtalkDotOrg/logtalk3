@@ -78,7 +78,7 @@ with the following information:
 
 email address, first and last name, organization, organization type 
 (education, commercial, government, ...), Prolog compilers you use 
-(optional), platforms (mac, pc, unix,...) (optional), projects where 
+(optional), platforms (mac, pc, unix, ...) (optional), projects where 
 you intend to use Logtalk (optional)
 
 
@@ -116,8 +116,8 @@ customizing the Logtalk installation and working environment.
 ----------
 
 The [QUICK_START.md](QUICK_START.md) file provides quick instructions for
-those of you in a hurry to run Logtalk, provided that your favorite
-Prolog compiler is supported and installed.
+those of you in a hurry to run Logtalk, provided that your favorite Prolog
+compiler is supported and installed.
 
 
 8. DOCUMENTATION

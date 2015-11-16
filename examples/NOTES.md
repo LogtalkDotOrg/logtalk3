@@ -33,12 +33,11 @@ and `SCRIPT.txt` files inside each example folder.
 Some examples may redefine objects already loaded from other examples.
 It might be necessary to restart Logtalk after playing with some examples.
 
-Some of the examples have been adapted from public available Prolog code 
-or from known Prolog text books and are copyrighted by the respective 
-authors.
+Some of the examples have been adapted from public Prolog code or from
+Prolog text books and are copyrighted by the respective authors.
 
 These are programming examples, meaning that you should study the source 
-files to fully understand them. However, note that some examples main
+files to fully understand them. Note, however, that some examples main
 purpose is to illustrate general principles rather than being adequate,
 efficient solutions for deployment code.
 

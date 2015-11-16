@@ -46,7 +46,7 @@ CONTRIBUTORS
 * Markus Triska (help in porting CLP(FD) examples)
 * Mats Carlsson (bug reports)
 * Michael Covington (DCGs tokenizer example)
-* Michael Igler (testing, bug reports)
+* Michael Igler (testing, bug reports, examples documentation improvements)
 * Michael Sheets (text editor support)
 * Neda Saeedloei (coinduction examples)
 * Neng-Fa Zhou (bug reports)

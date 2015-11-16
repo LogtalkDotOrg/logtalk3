@@ -22,6 +22,6 @@ utility file:
 
 	| ?- logtalk_load(library(hook_flows_loader)).
 
-The `hook_pipeline` and `hook_set` objects in this group implement common
-scenarios of combining multiple hook objects in the expansion of a source
-file.
+The `hook_pipeline` and `hook_set` parametric objects in this group implement
+common scenarios of combining multiple hook objects for the expansion of source
+files.

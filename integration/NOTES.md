@@ -58,11 +58,11 @@ accomplished by defining e.g. a `~/.profile` file with the necessary export
 commands. The integration scripts will need to be called, however, without
 omitting the `.sh` extension.
 
-The first run of the XSB integration scripts must be made by an user with
-administrative rights. On POSIX systems, run them once as root or using
-`sudo`. In Windows systems, the first run of the XSB integration shortcuts
-must be made from an administrative account (right-click on the shortcut
-and select the "Run as administrator" option).
+The first run of the XSB (and possibly of the JIProlog) integration scripts
+must be made by an user with administrative rights. On POSIX systems, run
+them once as root or using `sudo`. In Windows systems, the first run of the
+XSB integration shortcuts must be made from an administrative account
+(right-click on the shortcut and select the "Run as administrator" option).
 
 The GNU Prolog integration script provides adequate performance for 
 development. For production environments, improved performance can be 
@@ -77,7 +77,8 @@ Logtalk user directory, they create a new one by running the script
 directory).
 
 Note that the integration scripts and shortcuts may fail if you use non-
-standard locations for your Prolog compilers.
+standard locations for your Prolog compilers. Edit the scripts if that's
+the case.
 
 Depending on the size and complexity of your Logtalk applications and the
 used Prolog backend compiler, you may need to change the integration scripts

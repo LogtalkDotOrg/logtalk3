@@ -40,10 +40,10 @@ Logtalk functionality.
 For details on how to integrate Logtalk with specific Prolog compilers,
 see the files in the `integration` directory of the Logtalk distribution.
 
-The adapter files may include hacked definitions for official and de-facto
-Prolog standard built-in predicates. These definitions aim only to fulfill
-the requirements of the Logtalk compiler and runtime and are not intended
-as a full replacement for missing functionality.
+The adapter files may include hacks for missing official and de-facto
+Prolog standard built-in predicates. These hacks aim only to fulfill
+the minimal requirements of the Logtalk compiler and runtime and are
+not intended as a full replacement for missing functionality.
 
 Top-level interpreter shorthands
 --------------------------------

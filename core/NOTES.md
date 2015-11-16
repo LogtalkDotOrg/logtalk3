@@ -17,9 +17,9 @@ limitations under the License.
 ________________________________________________________________________
 
 
-This folder contains a single Prolog file, `core.pl`, which implements
-the Logtalk compiler and the Logtalk runtime. There are also some Logtalk
-source files defining built-in protocols, categories, and objects:
+This folder contains a single Prolog file, `core.pl`, which implements the
+Logtalk compiler and runtime. There are also several Logtalk source files
+defining built-in protocols, categories, and objects:
 
 - `expanding.lgt`  
 	built-in `expanding` protocol specifying term- and goal-expansion predicates
