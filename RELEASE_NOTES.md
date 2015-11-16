@@ -24,6 +24,12 @@ RELEASE NOTES
 3.02.2 - December ??, 2015
 ==========================
 
+Library
+-------
+
+* ADDED: Library objects `hook_pipeline/1` and `hook_set/1` to simplify using
+pipelines or sets of hook objects.
+
 Tools
 -----
 

@@ -19,22 +19,5 @@
 
 
 :- initialization(
-	logtalk_load([
-		types_loader,
-		os_loader,
-		dates_loader,
-		events_loader,
-		dependents_loader,
-		hierarchies_loader,
-		metapredicates_loader,
-		random_loader,
-		statistics_loader,
-		intervals_loader,
-		logging_loader,
-		meta_compiler_loader,
-		assignvars_loader,
-		hook_flows_loader,
-		counters,
-		streamvars
-	], [optimize(on)])
+	logtalk_load([hook_pipeline, hook_set], [optimize(on)])
 ).
