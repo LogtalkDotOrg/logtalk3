@@ -66,40 +66,14 @@
 % define a parametric object that takes a list of hook objects
 % interpreted as specifying a pipeline of expansions
 
-:- object(pipeline(_Pipeline),
-	implements(expanding)).
+:- object(pipeline(Pipeline),
+	implements(expanding),
+	extends(hook_pipeline(Pipeline))).
 
 	% rename the object and set the context_switching_calls to ensure that the unit tests work
 	term_expansion((:- object(facts)), [(:- object(piped)), (:- set_logtalk_flag(context_switching_calls,allow))]) :-
 		!.
 	term_expansion(Term, Expansion) :-
-		parameter(1, Pipeline),
-		term_expansion_pipeline(Pipeline, Term, Expansion).
-
-	% implement the term expansion pipeline
-	term_expansion_pipeline([], Expansion, Expansion).
-	term_expansion_pipeline([Hook| Hooks], Expansion0, Expansion) :-
-		term_expansion_pipeline_all(Expansion0, Hook, Expansion1),
-		list::flatten(Expansion1, Expansion2),
-		term_expansion_pipeline(Hooks, Expansion2, Expansion).
-
-	term_expansion_pipeline_all([], _, []) :-
-		!.
-	term_expansion_pipeline_all([Term| Terms], Hook, [TermExpansion| TermsExpansion]) :-
-		!,
-		Hook::expand_term(Term, TermExpansion),
-		term_expansion_pipeline_all(Terms, Hook, TermsExpansion).
-	term_expansion_pipeline_all(Term, Hook, Expansion) :-
-		Hook::expand_term(Term, Expansion).
-
-	% implement the goal expansion pipeline
-	goal_expansion(Goal, ExpandedGoal) :-
-		parameter(1, Pipeline),
-		goal_expansion_pipeline(Pipeline, Goal, ExpandedGoal).
-
-	goal_expansion_pipeline([], ExpandedGoal, ExpandedGoal).
-	goal_expansion_pipeline([Hook| Hooks], ExpandedGoal0, ExpandedGoal) :-
-		Hook::expand_goal(ExpandedGoal0, ExpandedGoal1),
-		goal_expansion_pipeline(Hooks, ExpandedGoal1, ExpandedGoal).
+		^^term_expansion(Term, Expansion).
 
 :- end_object.
