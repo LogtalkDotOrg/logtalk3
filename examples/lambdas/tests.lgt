@@ -57,7 +57,7 @@
 		Zs == [a-1, b-2, c-3].
 
 	succeeds(lambdas_07) :-
-		meta::map([A-B]>>([B-A]>>true), [1-a,2-b,3-c], Zs) ->
+		meta::map([A-B]>>([B-A]>>true), [1-a,2-b,3-c], Zs),
 		Zs == [a-1, b-2, c-3].
 
 	succeeds(lambdas_08) :-
