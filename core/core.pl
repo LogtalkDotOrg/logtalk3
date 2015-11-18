@@ -5683,7 +5683,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_first_stage_error_handler'(WriteError)
 	),
 	% generate a begin_of_file term for term-expansion
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(regular), _, 0-0),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(user), _, 0-0),
 	'$lgt_compile_file_term'(begin_of_file, Ctx),
 	% read and compile the remaining terms in the Logtalk source file
 	catch(
@@ -5799,7 +5799,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_file_term'(end_of_file, _, Lines, _) :-
 	!,
 	% set the initial compilation context and the position for compiling the end_of_file term
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(regular), _, Lines),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(user), _, Lines),
 	% allow for term-expansion of the end_of_file term
 	'$lgt_compile_file_term'(end_of_file, Ctx).
 
@@ -5815,7 +5815,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_file_term'(Term, Singletons, Lines, Input) :-
 	'$lgt_report_singleton_variables'(Singletons, Term),
 	% set the initial compilation context and the position for compiling the term
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(regular), _, Lines),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(user), _, Lines),
 	'$lgt_compile_file_term'(Term, Ctx),
 	'$lgt_read_term'(Input, Next, [singletons(NextSingletons)], NextLines),
 	'$lgt_compile_file_term'(Next, NextSingletons, NextLines, Input).
@@ -5831,7 +5831,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % runtime resolved ::/2 calls
 
 '$lgt_add_referenced_object'(Obj, Ctx) :-
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(regular), _, Lines),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(user), _, Lines),
 	% compiling a reference in a source file
 	!,
 	(	'$lgt_pp_referenced_object_'(Obj, _) ->
@@ -5857,7 +5857,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_pp_referenced_protocol_'(Ptc, _) ->
 		% not the first reference to this protocol
 		true
-	;	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(regular), _, Lines) ->
+	;	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(user), _, Lines) ->
 		% compiling a reference in a source file
 		assertz('$lgt_pp_referenced_protocol_'(Ptc, Lines))
 	;	% not a source file reference
@@ -5875,7 +5875,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_pp_referenced_category_'(Ctg, _) ->
 		% not the first reference to this category
 		true
-	;	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(regular), _, Lines) ->
+	;	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(user), _, Lines) ->
 		% compiling a reference in a source file
 		(	atom(Ctg) ->
 			assertz('$lgt_pp_referenced_category_'(Ctg, Lines))
@@ -5898,7 +5898,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_pp_referenced_module_'(Module, _) ->
 		% not the first reference to this module
 		true
-	;	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(regular), _, Lines) ->
+	;	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(user), _, Lines) ->
 		% compiling a reference in a source file
 		assertz('$lgt_pp_referenced_module_'(Module, Lines))
 	;	% not a source file reference
@@ -5918,7 +5918,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	var(Head) ->
 		% not compiling a clause
 		true
-	;	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _, compile(regular), _) ->
+	;	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _, compile(user), _) ->
 		% not compiling a source file user clause
 		true
 	;	nonvar(Obj), '$lgt_pp_uses_predicate_'(Obj, PredFunctor/PredArity, _) ->
@@ -5943,7 +5943,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		true
 	;	Alias \= Head,
 		% not a linking clause for runtime use
-		\+ '$lgt_pp_defines_predicate_'(Head, _, _, _, compile(regular), _) ->
+		\+ '$lgt_pp_defines_predicate_'(Head, _, _, _, compile(user), _) ->
 		% not compiling a source file user clause
 		true
 	;	% add reference if first but be careful to not instantiate the object argument which may only be known at runtime
@@ -5975,7 +5975,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	var(Head) ->
 		% not compiling a clause
 		true
-	;	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _, compile(regular), _) ->
+	;	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _, compile(user), _) ->
 		% not compiling a source file user clause
 		true
 	;	'$lgt_pp_use_module_predicate_'(Module, PredFunctor/PredArity, _) ->
@@ -5995,7 +5995,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		true
 	;	Alias \= Head,
 		% not a linking clause for runtime use
-		\+ '$lgt_pp_defines_predicate_'(Head, _, _, _, compile(regular), _) ->
+		\+ '$lgt_pp_defines_predicate_'(Head, _, _, _, compile(user), _) ->
 		% not compiling a source file user clause
 		true
 	;	% add reference if first but be careful to not instantiate the object argument which may only be known at runtime
@@ -7265,25 +7265,22 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compile_file_terms'(Terms, Ctx).
 
 '$lgt_compile_file_directive'(initialization(Goal), Ctx) :-
-	% perform basic error checking and expand goal if applicable
+	!,
+	% perform basic error checking
+	'$lgt_must_be'(callable, Goal),
+	% initialization directives are collected and moved to the end of file
+	% to minimize compatibility issues with backend Prolog compilers
 	(	Goal = {UserGoal} ->
 		% final goal
 		'$lgt_must_be'(callable, UserGoal),
-		fail
-	;	'$lgt_must_be'(callable, Goal),
-		'$lgt_comp_ctx_mode'(Ctx, compile(_)),
-		% only expand goals when compiling a source file
+		assertz('$lgt_pp_file_initialization_'(Goal))
+	;	'$lgt_comp_ctx_mode'(Ctx, compile(_)),
+		% goals are only expanded when compiling a source file
 		'$lgt_expand_file_goal'(Goal, ExpandedGoal),
-		Goal \== ExpandedGoal,
-		!,
+		Goal \== ExpandedGoal ->
 		'$lgt_compile_file_directive'(initialization(ExpandedGoal), Ctx)
+	;	assertz('$lgt_pp_file_initialization_'(Goal))
 	).
-
-'$lgt_compile_file_directive'(initialization(Goal), _) :-
-	!,
-	% initialization directives are collected and moved to the end of file
-	% to minimize compatibility issues with backend Prolog compilers
-	assertz('$lgt_pp_file_initialization_'(Goal)).
 
 '$lgt_compile_file_directive'(op(Priority, Specifier, Operators), Ctx) :-
 	!,
@@ -9441,7 +9438,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_must_be'(callable, Head),
 	functor(Head, Functor, Arity).
 
-% not the first clause for this predicate
+% not the first clause for this predicate; reuse the compiled head template
 
 '$lgt_compile_head'(Head, Functor/Arity, THead, Ctx) :-
 	'$lgt_pp_defines_predicate_'(Head, Functor/Arity, ExCtx, THead, _, user),
@@ -11214,7 +11211,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		DPred = '$lgt_debug'(goal(Alias, TPred), ExCtx)
 	).
 
-% goal is a call to a dynamic predicate within a category
+% goal is a call to a dynamic predicate within a category; the predicate is called
+% instead in the object importing the category (implicit dynamic binding)
 
 '$lgt_compile_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
 	'$lgt_pp_category_'(_, _, _, _, _, _),
@@ -11374,7 +11372,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_check_non_portable_prolog_built_in_call'(Mode, Pred, Lines)
 	).
 
-% call to a Logtalk built-in predicate (not already handled)
+% call to a Logtalk built-in predicate (that is not already handled)
 
 '$lgt_compile_body'(Pred, Pred, '$lgt_debug'(goal(Pred, Pred), ExCtx), Ctx) :-
 	'$lgt_logtalk_built_in_predicate'(Pred, _),
@@ -11436,7 +11434,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_remember_called_predicate'(compile(aux), _, _, _, _) :-
 	!.
 
-'$lgt_remember_called_predicate'(compile(regular), Functor/Arity, TFunctor/TArity, Head, Lines) :-
+'$lgt_remember_called_predicate'(compile(user), Functor/Arity, TFunctor/TArity, Head, Lines) :-
 	% currently, the returned line numbers are for the start and end lines of the clause containing the call
 	(	'$lgt_pp_calls_predicate_'(Functor/Arity, _, _, Lines) ->
 		% already recorded for the current clause being compiled
@@ -11468,7 +11466,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_remember_called_self_predicate'(compile(aux), _, _, _) :-
 	!.
 
-'$lgt_remember_called_self_predicate'(compile(regular), Functor/Arity, Head, Lines) :-
+'$lgt_remember_called_self_predicate'(compile(user), Functor/Arity, Head, Lines) :-
 	% currently, the returned line numbers are for the start and end lines of the clause containing the call
 	(	'$lgt_pp_calls_self_predicate_'(Functor/Arity, _, Lines) ->
 		% already recorded for the current clause being compiled (however unlikely!)
@@ -11497,7 +11495,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_remember_called_super_predicate'(compile(aux), _, _, _) :-
 	!.
 
-'$lgt_remember_called_super_predicate'(compile(regular), Functor/Arity, Head, Lines) :-
+'$lgt_remember_called_super_predicate'(compile(user), Functor/Arity, Head, Lines) :-
 	% currently, the returned line numbers are for the start and end lines of the clause containing the call
 	(	'$lgt_pp_calls_super_predicate_'(Functor/Arity, _, Lines) ->
 		% already recorded for the current clause being compiled (however unlikely!)
@@ -16600,7 +16598,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_comp_ctx_exec_ctx'(ctx(_, _, _, _, _, _, _, _, ExCtx, _, _, _), ExCtx).
 
-% compilation mode; possible values are "compile(regular)", "compile(aux)", and "runtime"
+% compilation mode; possible values are "compile(user)", "compile(aux)", and "runtime"
 '$lgt_comp_ctx_mode'(ctx(_, _, _, _, _, _, _, _, _, Mode, _, _), Mode).
 
 % stack of coinductive hypothesis (ancestor goals)
@@ -20092,17 +20090,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	Type == object,
 		current_object(Entity) ->
 		true
-	;	logtalk_load(
+	;	% not an embedded entity; compile and load it
+		logtalk_load(
 			core(File),
-			[	% we need a fixed code prefix as some of the "logtalk" object predicates
-				% must be called directly
+			[	% we need a fixed code prefix as some of the entity predicates may need
+				% to be called directly by the compiler/runtime
 				code_prefix('$'),
 				% delete the generated intermediate files as they may be non-portable
 				% between backend Prolog compilers
 				clean(on),
 				% use a scratch directory where we expect to have writing permission
 				scratch_directory(ScratchDirectory),
-				% optimize entity code, allow static binding to these entity resources,
+				% optimize entity code, allow static binding to this entity resources,
 				% and prevent their redefinition
 				optimize(on), reload(skip),
 				% don't print any messages on the compilation and loading of these entities
@@ -20137,7 +20136,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 '$lgt_load_settings_file'(allow, Options, Result) :-
-	(	% first lookup for a settings file in the startup directory if allowed
+	(	% first lookup for a settings file in the startup directory
 		'$lgt_startup_directory'(Startup),
 		'$lgt_load_settings_file_from_directory'(Startup, Options, Result) ->
 		true
