@@ -28,7 +28,7 @@ packages. The conversion process is described at:
 
 The following shell command can be used:
 
-	$ apm init -p ~/.atom/packages/language-logtalk --template $LOGTALKHOME/coding/textmate2/Logtalk.tmbundle
+	$ apm init --package ~/.atom/packages/language-logtalk --convert $LOGTALKHOME/coding/textmate2/Logtalk.tmbundle
 
 In alternative, a third-party maintained converted bundle is readily available
 from:
