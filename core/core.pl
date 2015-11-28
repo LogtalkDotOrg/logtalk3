@@ -757,7 +757,7 @@ object_property(Obj, Prop) :-
 '$lgt_object_property'(alias(Alias, Properties), Obj, _, _, _, _, Rnm, Flags) :-
 	'$lgt_entity_property_alias'(Obj, Rnm, Flags, Alias, Properties).
 '$lgt_object_property'(calls(Predicate, Properties), Obj, _, _, _, _, _, _) :-
-	'$lgt_entity_property_calls'(Obj, Predicate, Properties).
+	'$lgt_entity_property_'(Obj, calls(Predicate, Properties)).
 '$lgt_object_property'(number_of_clauses(Total), Obj, _, _, _, _, _, _) :-
 	'$lgt_entity_property_'(Obj, number_of_clauses(Total, _)).
 '$lgt_object_property'(number_of_user_clauses(TotalUser), Obj, _, _, _, _, _, _) :-
@@ -777,7 +777,7 @@ object_property(Obj, Prop) :-
 
 '$lgt_object_property_resource'(_, _, DDcl, Flags, Scope, Functor/Arity) :-
 	Flags /\ 128 =:= 128,
-	% dynamic declarations are allowed
+	% dynamic predicate declarations are allowed
 	call(DDcl, Predicate, Scope),
 	functor(Predicate, Functor, Arity).
 
@@ -845,7 +845,7 @@ category_property(Ctg, Prop) :-
 '$lgt_category_property'(provides(Predicate, To, Properties), Ctg, _, _, _, _) :-
 	'$lgt_entity_property_provides'(Ctg, Predicate, To, Properties).
 '$lgt_category_property'(calls(Predicate, Properties), Ctg, _, _, _, _) :-
-	'$lgt_entity_property_calls'(Ctg, Predicate, Properties).
+	'$lgt_entity_property_'(Ctg, calls(Predicate, Properties)).
 '$lgt_category_property'(alias(Alias, Properties), Ctg, _, _, Rnm, Flags) :-
 	'$lgt_entity_property_alias'(Ctg, Rnm, Flags, Alias, Properties).
 '$lgt_category_property'(number_of_clauses(Total), Ctg, _, _, _, _) :-
@@ -943,7 +943,7 @@ protocol_property(Ptc, Prop) :-
 '$lgt_object_property_declares'(Obj, Dcl, DDcl, EntityFlags, Functor/Arity, Properties) :-
 	(	call(Dcl, Predicate, Scope, Meta, Flags)
 	;	EntityFlags /\ 128 =:= 128,
-		% dynamic predicate declarations enabled
+		% dynamic predicate declarations are allowed
 		call(DDcl, Predicate, Scope),
 		Meta = no,
 		Flags = 2
@@ -1067,10 +1067,6 @@ protocol_property(Ptc, Prop) :-
 		functor(Alias, AFunctor, AArity),
 		Properties = [for(OFunctor/OArity), from(From)]
 	).
-
-
-'$lgt_entity_property_calls'(Entity, Predicate, Properties) :-
-	'$lgt_entity_property_'(Entity, calls(Predicate, Properties)).
 
 
 
