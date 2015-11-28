@@ -31,6 +31,12 @@ Logtalk compiler and runtime
 message) when called with a non-instantiated or a invalid argument instead of
 failing.
 
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: B-Prolog adapter file to recognize the built-in `time/1`
+meta-predicate.
+
 Library
 -------
 

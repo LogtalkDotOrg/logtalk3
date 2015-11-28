@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for B-Prolog 7.8 and later versions
-%  Last updated on July 3, 2015
+%  Last updated on November 28, 2015
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -149,6 +149,8 @@ findall(Term, Goal, List, Tail) :-
 '$lgt_prolog_meta_predicate'(table_find_all(_, _), table_find_all(0, *), predicate).
 '$lgt_prolog_meta_predicate'(table_find_one(_), table_find_one(0), predicate).
 '$lgt_prolog_meta_predicate'(table_remove(_), table_remove(0), predicate).
+'$lgt_prolog_meta_predicate'(time(_), time(0), predicate) :-
+	predicate_property(time(_), built_in).
 '$lgt_prolog_meta_predicate'(time_out(_, _, _), time_out(0, *, *), predicate).
 
 
