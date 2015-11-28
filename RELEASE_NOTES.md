@@ -27,6 +27,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* FIXED: Error checking bug in lambda expressions using `true/0` as the lambda
+goal. Thanks to Boris Vassilev for the bug report.
+
 * FIXED: The `logtalk_make/1` predicate would succeed (after printing a warning
 message) when called with a non-instantiated or a invalid argument instead of
 failing.

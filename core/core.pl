@@ -2516,7 +2516,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 2, 2, rc1)).
+'$lgt_version_data'(logtalk(3, 2, 2, rc2)).
 
 
 
@@ -4741,27 +4741,21 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_metacall'(Free/Parameters>>Lambda, ExtraArgs, ExCtx) :-
 	!,
 	'$lgt_must_be'(curly_bracketed_term, Free, logtalk(Free/Parameters>>Lambda, This)),
-	(	'$lgt_execution_context'(ExCtx, Entity, Sender, This, Self, LambdaMetaCallCtx, Stack),
-		'$lgt_reduce_lambda_metacall_ctx'(LambdaMetaCallCtx, Free/Parameters>>Lambda, MetaCallCtx),
-		'$lgt_copy_term_without_constraints'(Free/Parameters>>Lambda+MetaCallCtx, Free/ParametersCopy>>LambdaCopy+MetaCallCtxCopy),
-		'$lgt_unify_lambda_parameters'(ParametersCopy, ExtraArgs, Rest, Free/Parameters>>Lambda, This) ->
-		'$lgt_execution_context'(NewExCtx, Entity, Sender, This, Self, MetaCallCtxCopy, Stack),
-		'$lgt_metacall'(LambdaCopy, Rest, NewExCtx)
-	;	'$lgt_execution_context_this_entity'(ExCtx, This, _),
-		throw(error(representation_error(lambda_parameters), logtalk(Free/Parameters>>Lambda, This)))
-	).
+	'$lgt_execution_context'(ExCtx, Entity, Sender, This, Self, LambdaMetaCallCtx, Stack),
+	'$lgt_reduce_lambda_metacall_ctx'(LambdaMetaCallCtx, Free/Parameters>>Lambda, MetaCallCtx),
+	'$lgt_copy_term_without_constraints'(Free/Parameters>>Lambda+MetaCallCtx, Free/ParametersCopy>>LambdaCopy+MetaCallCtxCopy),
+	'$lgt_unify_lambda_parameters'(ParametersCopy, ExtraArgs, Rest, Free/Parameters>>Lambda, This),
+	'$lgt_execution_context'(NewExCtx, Entity, Sender, This, Self, MetaCallCtxCopy, Stack),
+	'$lgt_metacall'(LambdaCopy, Rest, NewExCtx).
 
 '$lgt_metacall'(Parameters>>Lambda, ExtraArgs, ExCtx) :-
 	!,
-	(	'$lgt_execution_context'(ExCtx, Entity, Sender, This, Self, LambdaMetaCallCtx, Stack),
-		'$lgt_reduce_lambda_metacall_ctx'(LambdaMetaCallCtx, Parameters>>Lambda, MetaCallCtx),
-		'$lgt_copy_term_without_constraints'(Parameters>>Lambda+MetaCallCtx, ParametersCopy>>LambdaCopy+MetaCallCtxCopy),
-		'$lgt_unify_lambda_parameters'(ParametersCopy, ExtraArgs, Rest, Parameters>>Lambda, This) ->
-		'$lgt_execution_context'(NewExCtx, Entity, Sender, This, Self, MetaCallCtxCopy, Stack),
-		'$lgt_metacall'(LambdaCopy, Rest, NewExCtx)
-	;	'$lgt_execution_context_this_entity'(ExCtx, This, _),
-		throw(error(representation_error(lambda_parameters), logtalk(Parameters>>Lambda, This)))
-	).
+	'$lgt_execution_context'(ExCtx, Entity, Sender, This, Self, LambdaMetaCallCtx, Stack),
+	'$lgt_reduce_lambda_metacall_ctx'(LambdaMetaCallCtx, Parameters>>Lambda, MetaCallCtx),
+	'$lgt_copy_term_without_constraints'(Parameters>>Lambda+MetaCallCtx, ParametersCopy>>LambdaCopy+MetaCallCtxCopy),
+	'$lgt_unify_lambda_parameters'(ParametersCopy, ExtraArgs, Rest, Parameters>>Lambda, This),
+	'$lgt_execution_context'(NewExCtx, Entity, Sender, This, Self, MetaCallCtxCopy, Stack),
+	'$lgt_metacall'(LambdaCopy, Rest, NewExCtx).
 
 '$lgt_metacall'(Closure, ExtraArgs, ExCtx) :-
 	(	atom(Closure) ->
@@ -4788,10 +4782,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	throw(error(type_error(list, Parameters), logtalk(Lambda, This))).
 
-'$lgt_unify_lambda_parameters'([], Vars, Vars, _, _).
+'$lgt_unify_lambda_parameters'([], ExtraArguments, ExtraArguments, _, _) :-
+	!.
 
-'$lgt_unify_lambda_parameters'([Parameter| Parameters], [Parameter| Vars], Rest, Lambda, This) :-
-	'$lgt_unify_lambda_parameters'(Parameters, Vars, Rest, Lambda, This).
+'$lgt_unify_lambda_parameters'([Parameter| Parameters], [Argument| Arguments], ExtraArguments, Lambda, This) :-
+	!,
+	Parameter = Argument,
+	'$lgt_unify_lambda_parameters'(Parameters, Arguments, ExtraArguments, Lambda, This).
+
+'$lgt_unify_lambda_parameters'(_, _, _, Lambda, This) :-
+	throw(error(representation_error(lambda_parameters), logtalk(Lambda, This))).
 
 
 % when using currying, the "inner" lambda expressions must be executed in the same context as the "outer"

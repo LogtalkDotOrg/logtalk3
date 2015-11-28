@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.3,
+		version is 1.4,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2011/05/04,
+		date is 2015/11/28,
 		comment is 'Unit tests for the "lambdas" example.'
 	]).
 
@@ -120,7 +120,7 @@
 	throws(lambdas_21, error(representation_error(lambda_parameters), logtalk(_,_))) :-
 		logtalk << ({X}/[X]>>true).
 
-	throws(lambdas_22, error(representation_error(lambda_parameters), logtalk(_,_))) :-
+	fails(lambdas_22) :-
 		meta::map({X}/[X]>>char_code(X), [a,b,c], _).
 
 	throws(lambdas_23, error(representation_error(lambda_parameters), logtalk(_,_))) :-
@@ -154,5 +154,15 @@
 	succeeds(lambdas_30) :-
 		meta::fold_left([N1-[F1,F2],_,N2-[F2,F3]]>>(F3 is F1+F2, N2 is N1+1), 0-[0,1], _, 10-[F, _]),
 		F == 55.
+
+	% the following two tests were contributed by Boris Vassilev
+
+	succeeds(lambdas_31) :-
+		meta::include([X]>>(X=a(_)), [a(1), b(2)], R),
+		R == [a(1)].
+
+	succeeds(lambdas_32) :-
+		meta::include([a(_)]>>true, [a(1), b(2)], R),
+		R == [a(1)].
 
 :- end_object.
