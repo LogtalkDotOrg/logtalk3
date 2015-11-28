@@ -165,4 +165,12 @@
 		meta::include([a(_)]>>true, [a(1), b(2)], R),
 		R == [a(1)].
 
+	succeeds(lambdas_33) :-
+		meta::include([a(_)]>>true, [b(2), a(1)], R),
+		R == [a(1)].
+
+	succeeds(lambdas_34) :-
+		meta::include([a(_)]>>true, [b(2), b(1)], R),
+		R == [].
+
 :- end_object.
