@@ -49,6 +49,12 @@ Tools
 * IMPROVED: Startup message when loading the `help` tool now also includes
 basic information on compiling and loading source files and debugging code.
 
+Examples
+--------
+
+* UPDATED: The `lambdas` example to also support running the benchmarks when
+using B-Prolog as the backend compiler.
+
 
 3.02.1 - November 12, 2015
 ==========================

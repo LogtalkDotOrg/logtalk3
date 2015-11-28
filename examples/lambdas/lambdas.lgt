@@ -133,12 +133,17 @@
 
 
 
-:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == swi; Dialect == xsb; Dialect == yap))).
+:- if((
+	current_logtalk_flag(prolog_dialect, Dialect),
+	(Dialect == b; Dialect == swi; Dialect == xsb; Dialect == yap)
+)).
 
 	:- object(lambda_benchmarks).
 
 		:- public([bench1/0, bench2/0]).
 
+		% the time/1 predicate is a library predicate in SWI-Prolog
+		% and a built-in predicate in B-Prolog, XSB and YAP
 		:- if(current_logtalk_flag(prolog_dialect, swi)).
 			:- use_module(prolog_statistics, [time/1]).
 		:- endif.
