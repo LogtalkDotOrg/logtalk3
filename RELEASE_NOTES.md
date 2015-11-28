@@ -24,6 +24,12 @@ RELEASE NOTES
 3.02.2 - December ??, 2015
 ==========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: The `logtalk_make/1` predicate would succeed (after printing a warning
+message) when called with a non-instantiated argument instead of failing.
+
 Library
 -------
 
