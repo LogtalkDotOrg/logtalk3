@@ -2265,7 +2265,8 @@ logtalk_make(Target) :-
 		fail
 	;	'$lgt_valid_logtalk_make_target'(Target) ->
 		'$lgt_logtalk_make'(Target)
-	;	'$lgt_print_message'(warning(make), core, invalid_make_target(Target))
+	;	'$lgt_print_message'(warning(make), core, invalid_make_target(Target)),
+		fail
 	).
 
 
