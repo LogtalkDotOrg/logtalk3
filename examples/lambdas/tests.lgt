@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.4,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2015/11/28,
+		date is 2015/11/29,
 		comment is 'Unit tests for the "lambdas" example.'
 	]).
 
@@ -172,5 +172,36 @@
 	succeeds(lambdas_34) :-
 		meta::include([a(_)]>>true, [b(2), b(1)], R),
 		R == [].
+
+	succeeds(lambdas_35) :-
+		findall(A-B, meta::map([X]>>(X=1;X=2), [A,B]), L),
+		L == [1-1,1-2,2-1,2-2].
+
+	succeeds(lambdas_36) :-
+		call(f, X, Y),
+		call([X]>>f(X), X, Y),
+		call([X,Y]>>f(X,Y), X, Y),
+		call([X]>>({X}/[Y]>>f(X,Y)), X, Y),
+		call(call(f, X), Y),
+		call(f(X), Y),
+		f(X, Y).
+
+	succeeds(lambdas_37) :-
+		call([X,Y,Z]>>plus(X,Y,Z), 1, 2, 3),
+		call([X,Y]>>plus(X,Y), 1, 2, 3),
+		call([X]>>plus(X), 1, 2, 3),
+		call([]>>plus, 1, 2, 3),
+		call(plus, 1, 2, 3).
+
+	succeeds(lambdas_38) :-
+		findall(X, {X}/p(X,_), L),
+		L == [1,2].
+
+	% auxiliary predicates
+
+	f(x, y).
+
+	p(1,a).
+	p(2,b).
 
 :- end_object.

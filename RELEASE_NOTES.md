@@ -56,7 +56,7 @@ Examples
 --------
 
 * UPDATED: The `lambdas` example to also support running the benchmarks when
-using B-Prolog as the backend compiler. Added four more unit tests.
+using B-Prolog as the backend compiler. Added more unit tests.
 
 
 3.02.1 - November 12, 2015
