@@ -449,7 +449,7 @@ The Logtalk distribution includes in its <code>tools</code> directory a command-
 </p>
 <pre>| ?- logtalk_load(debugger(loader)).</pre>
 <p>
-This tool implements debugging features similar to those found on most Prolog systems. There are some differences, however, between the usual implementation of Prolog debuggers and the current implementation of the Logtalk debugger that you should be aware. First, unlike some Prolog debuggers, the Logtalk debugger is not implemented as a meta-interpreter. This translates to a different, although similar, set of debugging features with some limitations when compared with some of the more sophisticated Prolog debuggers. Second, debugging is only possible for entities compiled in debug mode. When compiling an entity in debug mode, Logtalk decorates clauses with source information to allow tracing of the goal execution. Third, implementation of spy points allows the user to specify the execution context for entering the debugger. This feature is a consequence of the encapsulation of predicates inside objects.
+This tool implements debugging features similar to those found on most Prolog systems. There are some differences, however, between the usual implementation of Prolog debuggers and the current implementation of the Logtalk debugger that you should be aware. First, unlike some Prolog debuggers, the Logtalk debugger is not implemented as a meta-interpreter. This translates to a different, although similar, set of debugging features when compared with some of the more sophisticated Prolog debuggers. Second, debugging is only possible for entities compiled in debug mode. When compiling an entity in debug mode, Logtalk decorates clauses with source information to allow tracing of the goal execution. Third, implementation of spy points allows the user to specify the execution context for entering the debugger. This feature is a consequence of the encapsulation of predicates inside objects.
 </p>
 
 <h3 id="programming_debugmode">Compiling source files and entities in debug mode</h3>
@@ -463,7 +463,7 @@ In alternative, if we want to compile only some source files in debug mode, we m
 </p>
 <pre>| ?- logtalk_load([file1, file2, ...], [debug(on)]).</pre>
 <p>
-The compiler flag <code>clean</code> is automatically turned on whenever the debug flag is turned on at runtime. This is necessary because debug code would not be generated for files previously compiled in normal mode if there are no changes to the source files.
+The compiler flag <code>clean</code> should be turned on whenever the debug flag is turned on at runtime. This is necessary because debug code would not be generated for files previously compiled in normal mode if there are no changes to the source files.
 </p>
 <p>After loading the debugger, we may check or enumerate, by backtracking, all loaded entities compiled in debug mode as follows:
 </p>
@@ -793,7 +793,7 @@ The Logtalk compiler automatically removes any redundant calls to the built-in p
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: November 4, 2015</span>
+		<span>Last updated on: November 29, 2015</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="installing.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="migration.html">next</a></span><br/>
