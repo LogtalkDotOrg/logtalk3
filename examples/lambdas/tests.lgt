@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.4,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2015/11/29,
+		date is 2015/12/01,
 		comment is 'Unit tests for the "lambdas" example.'
 	]).
 
@@ -152,32 +152,40 @@
 		R == 330.
 
 	succeeds(lambdas_30) :-
+		meta::fold_left([X,Y,Z]>>(Z is X+Y*Y), 0, [1,2,3], R),
+		R == 14.
+
+	succeeds(lambdas_31) :-
 		meta::fold_left([N1-[F1,F2],_,N2-[F2,F3]]>>(F3 is F1+F2, N2 is N1+1), 0-[0,1], _, 10-[F, _]),
 		F == 55.
 
+	succeeds(lambdas_32) :-
+		meta::scan_left([X,Y,Z]>>(Z is X*Y), 1, [1,2,3,4,5,6], R),
+		R == [1, 1, 2, 6, 24, 120, 720].
+
 	% the following two tests were contributed by Boris Vassilev
 
-	succeeds(lambdas_31) :-
+	succeeds(lambdas_33) :-
 		meta::include([X]>>(X=a(_)), [a(1), b(2)], R),
 		R == [a(1)].
 
-	succeeds(lambdas_32) :-
+	succeeds(lambdas_34) :-
 		meta::include([a(_)]>>true, [a(1), b(2)], R),
 		R == [a(1)].
 
-	succeeds(lambdas_33) :-
+	succeeds(lambdas_35) :-
 		meta::include([a(_)]>>true, [b(2), a(1)], R),
 		R == [a(1)].
 
-	succeeds(lambdas_34) :-
+	succeeds(lambdas_36) :-
 		meta::include([a(_)]>>true, [b(2), b(1)], R),
 		R == [].
 
-	succeeds(lambdas_35) :-
+	succeeds(lambdas_37) :-
 		findall(A-B, meta::map([X]>>(X=1;X=2), [A,B]), L),
 		L == [1-1,1-2,2-1,2-2].
 
-	succeeds(lambdas_36) :-
+	succeeds(lambdas_38) :-
 		call(f, X, Y),
 		call([X]>>f(X), X, Y),
 		call([X,Y]>>f(X,Y), X, Y),
@@ -186,14 +194,14 @@
 		call(f(X), Y),
 		f(X, Y).
 
-	succeeds(lambdas_37) :-
+	succeeds(lambdas_39) :-
 		call([X,Y,Z]>>plus(X,Y,Z), 1, 2, 3),
 		call([X,Y]>>plus(X,Y), 1, 2, 3),
 		call([X]>>plus(X), 1, 2, 3),
 		call([]>>plus, 1, 2, 3),
 		call(plus, 1, 2, 3).
 
-	succeeds(lambdas_38) :-
+	succeeds(lambdas_40) :-
 		findall(X, {X}/p(X,_), L),
 		L == [1,2].
 

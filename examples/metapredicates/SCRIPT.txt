@@ -165,6 +165,14 @@ Result = [15, 14, 12, 9, 5]
 yes
 
 
+% compute a sequence of factorial numbers using a scan of natural numbers
+% using multiplication:
+
+| ?- meta::scan_left([X,Y,Z]>>(Z is X*Y), 1, [1,2,3,4,5,6], Result).
+Result = [1, 1, 2, 6, 24, 120, 720]
+yes
+
+
 % use the map/2-3 meta-predicates with some Prolog built-in predicates:
 
 | ?- meta::map(integer, [1,2,3,4,5]).
