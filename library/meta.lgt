@@ -23,14 +23,21 @@
 	implements(metap)).
 
 	:- info([
-		version is 4.0,
-		date is 2011/01/18,
+		version is 4.1,
+		date is 2015/12/01,
 		author is 'Paulo Moura',
 		comment is 'Some useful meta-predicates.'
 	]).
 
 	:- alias(metap, [
 		map/2 as succeeds/2,
+		map/2 as maplist/2,
+		map/3 as maplist/3,
+		map/4 as maplist/4,
+		map/5 as maplist/5,
+		map/6 as maplist/6,
+		map/7 as maplist/7,
+		map/8 as maplist/8,		
 		include/3 as filter/3,
 		fold_left/4 as foldl/4,
 		fold_right/4 as foldr/4,
@@ -196,6 +203,10 @@
 	succeeds(Closure, List) :-
 		map_(List, Closure).
 
+	:- meta_predicate(maplist(1, *)).
+	maplist(Closure, List) :-
+		map_(List, Closure).
+
 	:- meta_predicate(map_(*, 2, *)).
 	map_([], _, []).
 	map_([A| As], Closure, [B| Bs]) :-
@@ -204,6 +215,10 @@
 
 	:- meta_predicate(map(2, *, *)).
 	map(Closure, As, Bs) :-
+		map_(As, Closure, Bs).
+
+	:- meta_predicate(maplist(2, *, *)).
+	maplist(Closure, As, Bs) :-
 		map_(As, Closure, Bs).
 
 	:- meta_predicate(map_(*, 3, *, *)).
@@ -216,6 +231,10 @@
 	map(Closure, As, Bs, Cs) :-
 		map_(As, Closure, Bs, Cs).
 
+	:- meta_predicate(maplist(3, *, *, *)).
+	maplist(Closure, As, Bs, Cs) :-
+		map_(As, Closure, Bs, Cs).
+
 	:- meta_predicate(map_(*, 4, *, *, *)).
 	map_([], _, [], [], []).
 	map_([A| As], Closure, [B| Bs], [C| Cs], [D| Ds]) :-
@@ -224,6 +243,10 @@
 
 	:- meta_predicate(map(4, *, *, *, *)).
 	map(Closure, As, Bs, Cs, Ds) :-
+		map_(As, Closure, Bs, Cs, Ds).
+
+	:- meta_predicate(maplist(4, *, *, *, *)).
+	maplist(Closure, As, Bs, Cs, Ds) :-
 		map_(As, Closure, Bs, Cs, Ds).
 
 	:- meta_predicate(map_(*, 5, *, *, *, *)).
@@ -236,6 +259,10 @@
 	map(Closure, As, Bs, Cs, Ds, Es) :-
 		map_(As, Closure, Bs, Cs, Ds, Es).
 
+	:- meta_predicate(maplist(5, *, *, *, *, *)).
+	maplist(Closure, As, Bs, Cs, Ds, Es) :-
+		map_(As, Closure, Bs, Cs, Ds, Es).
+
 	:- meta_predicate(map_(*, 6, *, *, *, *, *)).
 	map_([], _, [], [], [], [], []).
 	map_([A| As], Closure, [B| Bs], [C| Cs], [D| Ds], [E| Es], [F| Fs]) :-
@@ -246,6 +273,10 @@
 	map(Closure, As, Bs, Cs, Ds, Es, Fs) :-
 		map_(As, Closure, Bs, Cs, Ds, Es, Fs).
 
+	:- meta_predicate(maplist(6, *, *, *, *, *, *)).
+	maplist(Closure, As, Bs, Cs, Ds, Es, Fs) :-
+		map_(As, Closure, Bs, Cs, Ds, Es, Fs).
+
 	:- meta_predicate(map_(*, 7, *, *, *, *, *, *)).
 	map_([], _, [], [], [], [], [], []).
 	map_([A| As], Closure, [B| Bs], [C| Cs], [D| Ds], [E| Es], [F| Fs], [G| Gs]) :-
@@ -254,6 +285,10 @@
 
 	:- meta_predicate(map(7, *, *, *, *, *, *, *)).
 	map(Closure, As, Bs, Cs, Ds, Es, Fs, Gs) :-
+		map_(As, Closure, Bs, Cs, Ds, Es, Fs, Gs).
+
+	:- meta_predicate(maplist(7, *, *, *, *, *, *, *)).
+	maplist(Closure, As, Bs, Cs, Ds, Es, Fs, Gs) :-
 		map_(As, Closure, Bs, Cs, Ds, Es, Fs, Gs).
 
 	:- meta_predicate(map_reduce_(*, 2, 3, *, *)).

@@ -31,7 +31,7 @@ Logtalk compiler and runtime
 goal. Thanks to Boris Vassilev for the bug report.
 
 * FIXED: The `logtalk_make/1` predicate would succeed (after printing a warning
-message) when called with a non-instantiated or a invalid argument instead of
+message) when called with a non-instantiated or an invalid argument instead of
 failing.
 
 Prolog adapter and integration files
@@ -43,8 +43,11 @@ meta-predicate.
 Library
 -------
 
-* ADDED: Library objects `hook_pipeline/1` and `hook_set/1` to simplify using
-pipelines or sets of hook objects.
+* ADDED: Objects `hook_pipeline/1` and `hook_set/1` to simplify using pipelines
+or sets of hook objects.
+
+* ADDED: The `metap` and `meta` entities now recognize `maplist/2-8` as aliases
+to the `map/2-8` meta-predicates.
 
 Tools
 -----
