@@ -22,8 +22,8 @@
 :- protocol(metap).
 
 	:- info([
-		version is 5.0,
-		date is 2011/01/18,
+		version is 5.1,
+		date is 2015/12/01,
 		author is 'Paulo Moura',
 		comment is 'Useful meta-predicates protocol.'
 	]).
@@ -80,7 +80,7 @@
 	:- meta_predicate(fold_left(3, *, *, *)).
 	:- mode(fold_left(+callable, ?term, +list, ?term), zero_or_more).
 	:- info(fold_left/4, [
-		comment is 'List folding (left associative).',
+		comment is 'List folding (left associative). Closure is extended with three arguments in the following order: accumulator, list element, and the next accumulator term.',
 		argnames is ['Closure', 'Accumulator', 'List', 'Result']
 	]).
 
@@ -88,7 +88,7 @@
 	:- meta_predicate(scan_left(3, *, *, *)).
 	:- mode(scan_left(+callable, ?term, +list, ?list), zero_or_more).
 	:- info(scan_left/4, [
-		comment is 'List scanning; similar to folding but returns the intermediate and final results (left associative).',
+		comment is 'List scanning; similar to folding but returns the intermediate and final results (left associative). Closure is extended with three arguments in the following order: accumulator, list element, and the next accumulator term.',
 		argnames is ['Closure', 'Accumulator', 'List', 'Results']
 	]).
 
@@ -96,7 +96,7 @@
 	:- meta_predicate(fold_right(3, *, *, *)).
 	:- mode(fold_right(+callable, ?term, +list, ?term), zero_or_more).
 	:- info(fold_right/4, [
-		comment is 'List folding (right associative).',
+		comment is 'List folding (right associative). Closure is extended with three arguments in the following order: accumulator, list element, and the next accumulator term.',
 		argnames is ['Closure', 'Accumulator', 'List', 'Result']
 	]).
 
@@ -104,7 +104,7 @@
 	:- meta_predicate(scan_right(3, *, *, *)).
 	:- mode(scan_right(+callable, ?term, +list, ?list), zero_or_more).
 	:- info(scan_right/4, [
-		comment is 'List scanning; similar to folding but returns the intermediate and final results (right associative).',
+		comment is 'List scanning; similar to folding but returns the intermediate and final results (right associative). Closure is extended with three arguments in the following order: accumulator, list element, and the next accumulator term.',
 		argnames is ['Closure', 'Accumulator', 'List', 'Results']
 	]).
 
