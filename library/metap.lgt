@@ -96,7 +96,7 @@
 	:- meta_predicate(fold_right(3, *, *, *)).
 	:- mode(fold_right(+callable, ?term, +list, ?term), zero_or_more).
 	:- info(fold_right/4, [
-		comment is 'List folding (right associative). Closure is extended with three arguments in the following order: accumulator, list element, and the next accumulator term.',
+		comment is 'List folding (right associative). Closure is extended with three arguments in the following order: list element, accumulator, and the next accumulator term.',
 		argnames is ['Closure', 'Accumulator', 'List', 'Result']
 	]).
 
@@ -104,7 +104,7 @@
 	:- meta_predicate(scan_right(3, *, *, *)).
 	:- mode(scan_right(+callable, ?term, +list, ?list), zero_or_more).
 	:- info(scan_right/4, [
-		comment is 'List scanning; similar to folding but returns the intermediate and final results (right associative). Closure is extended with three arguments in the following order: accumulator, list element, and the next accumulator term.',
+		comment is 'List scanning; similar to folding but returns the intermediate and final results (right associative). Closure is extended with three arguments in the following order: list element, accumulator, and the next accumulator term.',
 		argnames is ['Closure', 'Accumulator', 'List', 'Results']
 	]).
 
