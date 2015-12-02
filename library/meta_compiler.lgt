@@ -337,6 +337,12 @@
 	goal_expansion(meta::foldl(Closure, Acc, List, Result), ExpandedGoal) :-
 		goal_expansion(meta::fold_left(Closure, Acc, List, Result), ExpandedGoal).
 
+	goal_expansion(meta::fold_left_1(Closure, [Head| Tail], Result), ExpandedGoal) :-
+		goal_expansion(meta::fold_left(Closure, Head, Tail, Result), ExpandedGoal).
+
+	goal_expansion(meta::foldl1(Closure, [Head| Tail], Result), ExpandedGoal) :-
+		goal_expansion(meta::fold_left(Closure, Head, Tail, Result), ExpandedGoal).
+
 	goal_expansion(meta::fold_right(Closure, Acc, List, Result), ExpandedGoal) :-
 		decompose_closure(Closure, 3, Functor, Arity, Args, GArgs),
 		aux_predicate_functor(fold_right, 4, Functor, Arity, AuxFunctor),
@@ -356,15 +362,15 @@
 	goal_expansion(meta::foldr(Closure, Acc, List, Result), ExpandedGoal) :-
 		goal_expansion(meta::fold_right(Closure, Acc, List, Result), ExpandedGoal).
 
-	goal_expansion(meta::scan_left(Closure, Acc, List, Results), ExpandedGoal) :-
+	goal_expansion(meta::scan_left(Closure, Acc, List, [Acc| Results]), ExpandedGoal) :-
 		decompose_closure(Closure, 3, Functor, Arity, Args, GArgs),
 		aux_predicate_functor(scan_left, 4, Functor, Arity, AuxFunctor),
 		(	generated_predicate(AuxFunctor/4) ->
 			replace_functor([scan_left_(List, Args, Acc, Results)], scan_left_, AuxFunctor, [ExpandedGoal])
 		;	extend_closure(Functor, GArgs, [GAcc, GHead, GAcc2], GGoal),
 			Clauses0 = [
-					scan_left_([], _, GResult, [GResult]),
-					(scan_left_([GHead| GTail], GArgs, GAcc, [GAcc| GResults]) :-
+					scan_left_([], _, _, []),
+					(scan_left_([GHead| GTail], GArgs, GAcc, [GAcc2| GResults]) :-
 						GGoal, scan_left_(GTail, GArgs, GAcc2, GResults))
 				],
 			replace_functor([scan_left_(List, Args, Acc, Results)| Clauses0], scan_left_, AuxFunctor, [ExpandedGoal| Clauses]),
@@ -374,6 +380,12 @@
 
 	goal_expansion(meta::scanl(Closure, Acc, List, Results), ExpandedGoal) :-
 		goal_expansion(meta::scan_left(Closure, Acc, List, Results), ExpandedGoal).
+
+	goal_expansion(meta::scan_left_1(Closure, [Head| Tail], Results), ExpandedGoal) :-
+		goal_expansion(meta::scan_left(Closure, Head, Tail, Results), ExpandedGoal).
+
+	goal_expansion(meta::scanl1(Closure, [Head| Tail], Results), ExpandedGoal) :-
+		goal_expansion(meta::scan_left(Closure, Head, Tail, Results), ExpandedGoal).
 
 	goal_expansion(meta::scan_right(Closure, Acc, List, Results), ExpandedGoal) :-
 		decompose_closure(Closure, 3, Functor, Arity, Args, GArgs),
