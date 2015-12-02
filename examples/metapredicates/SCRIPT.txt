@@ -153,6 +153,21 @@ Result = (10, 10)
 yes
 
 
+% alternatives to fold_left/4 and fold_right/4 when there isn't an initial value:
+
+| ?- meta::fold_left_1([X,Y,Z]>>(Z is X+Y), [1,2,3,4,5], R).
+R = 15
+yes
+
+| ?- meta::fold_right_1([X,Y,Z]>>(Z is X-Y), [1,2,3,4,5], R).
+R = 3
+yes
+
+| ?- meta::fold_right_1([X,Y,Z]>>(Z is X*Y), [1,2,3,4,5], R).
+R = 120
+yes
+
+
 % use the scan_left/4 and scan_right/4 meta-predicates with predicates
 % defined in the object "predicates":
 

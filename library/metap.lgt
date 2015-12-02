@@ -22,8 +22,8 @@
 :- protocol(metap).
 
 	:- info([
-		version is 5.1,
-		date is 2015/12/01,
+		version is 6.0,
+		date is 2015/12/02,
 		author is 'Paulo Moura',
 		comment is 'Useful meta-predicates protocol.'
 	]).
@@ -84,6 +84,14 @@
 		argnames is ['Closure', 'Accumulator', 'List', 'Result']
 	]).
 
+	:- public(fold_left_1/3).
+	:- meta_predicate(fold_left_1(3, *, *)).
+	:- mode(fold_left_1(+callable, +list, ?term), zero_or_more).
+	:- info(fold_left_1/3, [
+		comment is 'List folding (left associative). Closure is extended with three arguments in the following order: accumulator, list element, and the next accumulator term. The initial value of the accumulator is the list first element. Fails for empty lists.',
+		argnames is ['Closure', 'List', 'Result']
+	]).
+
 	:- public(scan_left/4).
 	:- meta_predicate(scan_left(3, *, *, *)).
 	:- mode(scan_left(+callable, ?term, +list, ?list), zero_or_more).
@@ -98,6 +106,14 @@
 	:- info(fold_right/4, [
 		comment is 'List folding (right associative). Closure is extended with three arguments in the following order: list element, accumulator, and the next accumulator term.',
 		argnames is ['Closure', 'Accumulator', 'List', 'Result']
+	]).
+
+	:- public(fold_right_1/3).
+	:- meta_predicate(fold_right_1(3, *, *)).
+	:- mode(fold_right_1(+callable, +list, ?term), zero_or_more).
+	:- info(fold_right_1/3, [
+		comment is 'List folding (right associative). Closure is extended with three arguments in the following order: list element, accumulator, and the next accumulator term. The initial value of the accumulator is the list first element. Fails for empty lists.',
+		argnames is ['Closure', 'List', 'Result']
 	]).
 
 	:- public(scan_right/4).

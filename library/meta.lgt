@@ -23,8 +23,8 @@
 	implements(metap)).
 
 	:- info([
-		version is 4.1,
-		date is 2015/12/01,
+		version is 5.0,
+		date is 2015/12/02,
 		author is 'Paulo Moura',
 		comment is 'Some useful meta-predicates.'
 	]).
@@ -40,7 +40,9 @@
 		map/8 as maplist/8,		
 		include/3 as filter/3,
 		fold_left/4 as foldl/4,
+		fold_left_1/3 as foldl1/3,
 		fold_right/4 as foldr/4,
+		fold_right_1/3 as foldr1/3,
 		scan_left/4 as scanl/4,
 		scan_right/4 as scanr/4
 	]).
@@ -147,6 +149,14 @@
 	foldl(Closure, Acc, List, Result) :-
 		fold_left_(List, Closure, Acc, Result).
 
+	:- meta_predicate(fold_left_1(3, *, *)).
+	fold_left_1(Closure, [Head| Tail], Result) :-
+		fold_left_(Tail, Closure, Head, Result).
+
+	:- meta_predicate(foldl1(3, *, *)).
+	foldl1(Closure, [Head| Tail], Result) :-
+		fold_left_(Tail, Closure, Head, Result).
+
 	:- meta_predicate(scan_left_(*, 3, *, *)).
 	scan_left_([], _, Result, [Result]).
 	scan_left_([Arg| Args], Closure, Acc, [Acc| Results]) :-
@@ -174,6 +184,20 @@
 	:- meta_predicate(foldr(3, *, *, *)).
 	foldr(Closure, Acc, List, Result) :-
 		fold_right_(List, Closure, Acc, Result).
+
+	:- meta_predicate(fold_right_1_(*, *, 3, *, *)).
+	fold_right_1_([], Result, _, Result, Result).
+	fold_right_1_([Arg2| Args], Arg1, Closure, Acc, Result) :-
+		fold_right_1_(Args, Arg2, Closure, Acc, Acc2),
+		call(Closure, Arg1, Acc2, Result).
+
+	:- meta_predicate(fold_right_1(3, *, *)).
+	fold_right_1(Closure, [Head| Tail], Result) :-
+		fold_right_1_(Tail, Head, Closure, _, Result).
+
+	:- meta_predicate(foldr1(3, *, *)).
+	foldr1(Closure, [Head| Tail], Result) :-
+		fold_right_1_(Tail, Head, Closure, _, Result).
 
 	:- meta_predicate(scan_right_(*, 3, *, *)).
 	scan_right_([], _, Result, [Result]).

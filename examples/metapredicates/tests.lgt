@@ -203,7 +203,7 @@
 	:- info([
 		version is 1.6,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2015/12/01,
+		date is 2015/12/02,
 		comment is 'Unit tests for the "metapredicates" example.'
 	]).
 
@@ -248,80 +248,92 @@
 		Result == [15, 14, 12, 9, 5].
 
 	test(metapredicates_11) :-
-		meta::map(integer, [1,2,3,4,5]).
+		meta::fold_left_1([X,Y,Z]>>(Z is X+Y), [1,2,3,4,5], R),
+		R == 15.
 
 	test(metapredicates_12) :-
+		meta::fold_right_1([X,Y,Z]>>(Z is X-Y), [1,2,3,4,5], R),
+		R == 3.
+
+	test(metapredicates_13) :-
+		meta::fold_right_1([X,Y,Z]>>(Z is X*Y), [1,2,3,4,5], R),
+		R == 120.
+
+	test(metapredicates_14) :-
+		meta::map(integer, [1,2,3,4,5]).
+
+	test(metapredicates_15) :-
 		meta::map(char_code, [a,b,c,d,e], Codes),
 		Codes == [97, 98, 99, 100, 101].
 
 	% tests for calling meta-predicates with other meta-predicates as meta-arguments
 
-	test(metapredicates_13) :-
+	test(metapredicates_16) :-
 		client::test1(L),
 		L == [1, 2, 3].
 
-	test(metapredicates_14) :-
+	test(metapredicates_17) :-
 		client::test2(L),
 		L == [1, 2, 3].
 
-	test(metapredicates_15) :-
+	test(metapredicates_18) :-
 		client::test3(L),
 		L == [1, 2, 3].
 
 	% tests for calling meta-predicates with closure corresponding to control constructs
 
-	test(metapredicates_16) :-
+	test(metapredicates_19) :-
 		proto::self_closure(X),
 		X == proto.
 
-	test(metapredicates_17) :-
+	test(metapredicates_20) :-
 		parent::self_closure(X),
 		X == parent.
 
-	test(metapredicates_18) :-
+	test(metapredicates_21) :-
 		library::self_closure(X),
 		X == library.
 
-	test(metapredicates_19) :-
+	test(metapredicates_22) :-
 		extended_library::self_closure(X),
 		X == extended_library.
 
-	test(metapredicates_20) :-
+	test(metapredicates_23) :-
 		proto::super_closure(X),
 		X == parent.
 
-	test(metapredicates_21) :-
+	test(metapredicates_24) :-
 		test_object::p(L),
 		L == [2, 4, 6].
 
-	test(metapredicates_22) :-
+	test(metapredicates_25) :-
 		m1::r(X, Y),
 		X == m1, Y == m2.
 
-	test(metapredicates_23) :-
+	test(metapredicates_26) :-
 		fibonacci::nth(10, Nth),
 		Nth == 55.
 
-	test(metapredicates_24) :-
+	test(metapredicates_27) :-
 		company::company(C1),
 		company::get_salary(company(C1), S1),
 		S1 == 179998.
 
-	test(metapredicates_25) :-
+	test(metapredicates_28) :-
 		company::company(C1),
 		company::cut_salary(company(C1), C2),
 		company::get_salary(C2, S2),
 		S2 == 89999.
 
-	test(metapredicates_26) :-
+	test(metapredicates_29) :-
 		meta::findall_member(N, [1, 2, 3, 4, 5], (N mod 2 =:= 0), L),
 		L == [2, 4].
 
-	test(metapredicates_27) :-
+	test(metapredicates_30) :-
 		meta::findall_member(N, [1, 2, 3, 4, 5], (N mod 2 =:= 0), L, [6, 8]),
 		L == [2, 4, 6, 8].
 
-	test(metapredicates_28) :-
+	test(metapredicates_31) :-
 		obj::op1d(L1d),
 		L1d == [1, 2, 3],
 		obj::op1s(L1s),
@@ -331,19 +343,19 @@
 		obj::op2s(L2s),
 		L2s == [1, 2, 3].
 
-	test(metapredicates_29) :-
+	test(metapredicates_32) :-
 		wrappers_client::p(L),
 		L == [1, 2, 3].
 
-	test(metapredicates_30) :-
+	test(metapredicates_33) :-
 		wrappers_client::q(L),
 		L == [1, 2, 3].
 
-	test(metapredicates_31) :-
+	test(metapredicates_34) :-
 		wrappers_client::r(L),
 		L == [2, 1, 3].
 
-	test(metapredicates_32) :-
+	test(metapredicates_35) :-
 		wrappers_client::s(L),
 		L == [2, 1, 3].
 

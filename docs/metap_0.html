@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>5.1</code>
+            <code>6.0</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2015/12/1</code>
+            <code>2015/12/2</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -211,6 +211,30 @@
           </dl>
         </div>
         <div class="section">
+          <h3 id="fold_left_1/3" class="code">fold_left_1/3</h3>
+          <blockquote>
+            <p class="comment">List folding (left associative). Closure is extended with three arguments in the following order: accumulator, list element, and the next accumulator term. The initial value of the accumulator is the list first element. Fails for empty lists.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>fold_left_1(Closure,List,Result)</code>
+            </dd>
+            <dt class="key">meta-predicate template:</dt>
+            <dd class="value">
+              <code>fold_left_1(3,*,*)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>fold_left_1(+callable,+list,?term) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
           <h3 id="scan_left/4" class="code">scan_left/4</h3>
           <blockquote>
             <p class="comment">List scanning; similar to folding but returns the intermediate and final results (left associative). Closure is extended with three arguments in the following order: accumulator, list element, and the next accumulator term.</p>
@@ -255,6 +279,30 @@
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>fold_right(+callable,?term,+list,?term) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="fold_right_1/3" class="code">fold_right_1/3</h3>
+          <blockquote>
+            <p class="comment">List folding (right associative). Closure is extended with three arguments in the following order: list element, accumulator, and the next accumulator term. The initial value of the accumulator is the list first element. Fails for empty lists.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>fold_right_1(Closure,List,Result)</code>
+            </dd>
+            <dt class="key">meta-predicate template:</dt>
+            <dd class="value">
+              <code>fold_right_1(3,*,*)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>fold_right_1(+callable,+list,?term) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
