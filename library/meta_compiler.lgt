@@ -362,6 +362,25 @@
 	goal_expansion(meta::foldr(Closure, Acc, List, Result), ExpandedGoal) :-
 		goal_expansion(meta::fold_right(Closure, Acc, List, Result), ExpandedGoal).
 
+	goal_expansion(meta::fold_right_1(Closure, [Head| Tail], Result), ExpandedGoal) :-
+		decompose_closure(Closure, 3, Functor, Arity, Args, GArgs),
+		aux_predicate_functor(fold_right_1, 4, Functor, Arity, AuxFunctor),
+		(	generated_predicate(AuxFunctor/4) ->
+			replace_functor([fold_right_1_(Tail, Head, Args, _, Result)], fold_right_1_, AuxFunctor, [ExpandedGoal])
+		;	extend_closure(Functor, GArgs, [GHead1, GAcc2, GResult], GGoal),
+			Clauses0 = [
+					fold_right_1_([], GResult, _, GResult, GResult),
+					(fold_right_1_([GHead2| GTail], GHead1, GArgs, GAcc, GResult) :-
+						fold_right_1_(GTail, GHead2, GArgs, GAcc, GAcc2), GGoal)
+				],
+			replace_functor([fold_right_1_(Tail, Head, Args, _, Result)| Clauses0], fold_right_1_, AuxFunctor, [ExpandedGoal| Clauses]),
+			logtalk::compile_aux_clauses(Clauses),
+			assertz(generated_predicate(AuxFunctor/4))
+		).
+
+	goal_expansion(meta::foldr1(Closure, List, Result), ExpandedGoal) :-
+		goal_expansion(meta::fold_right_1(Closure, List, Result), ExpandedGoal).
+
 	goal_expansion(meta::scan_left(Closure, Acc, List, [Acc| Results]), ExpandedGoal) :-
 		decompose_closure(Closure, 3, Functor, Arity, Args, GArgs),
 		aux_predicate_functor(scan_left, 4, Functor, Arity, AuxFunctor),
@@ -405,6 +424,25 @@
 
 	goal_expansion(meta::scanr(Closure, Acc, List, Results), ExpandedGoal) :-
 		goal_expansion(meta::scan_right(Closure, Acc, List, Results), ExpandedGoal).
+
+	goal_expansion(meta::scan_right_1(Closure, [Head| Tail], Results), ExpandedGoal) :-
+		decompose_closure(Closure, 3, Functor, Arity, Args, GArgs),
+		aux_predicate_functor(scan_right_1, 4, Functor, Arity, AuxFunctor),
+		(	generated_predicate(AuxFunctor/4) ->
+			replace_functor([scan_right_1_(Tail, Head, Args, _, Results)], scan_right_1_, AuxFunctor, [ExpandedGoal])
+		;	extend_closure(Functor, GArgs, [GHead1, GAcc2, GResult], GGoal),
+			Clauses0 = [
+					scan_right_1_([], GResult, _, GResult, [GResult]),
+					(scan_right_1_([GHead2| GTail], GHead1, GArgs, GAcc, [GResult, GAcc2| GResults]) :-
+						scan_right_1_(GTail, GHead2, GArgs, GAcc, [GAcc2| GResults]), GGoal)
+				],
+			replace_functor([scan_right_1_(Tail, Head, Args, _, Results)| Clauses0], scan_right_1_, AuxFunctor, [ExpandedGoal| Clauses]),
+			logtalk::compile_aux_clauses(Clauses),
+			assertz(generated_predicate(AuxFunctor/4))
+		).
+
+	goal_expansion(meta::scanr1(Closure, List, Results), ExpandedGoal) :-
+		goal_expansion(meta::scan_right_1(Closure, List, Results), ExpandedGoal).
 
 	goal_expansion(meta::map_reduce(Map, Reduce, Acc, List, Result), ExpandedGoal) :-
 		decompose_closure(Map, 2, MapFunctor, _, MapArgs, GMapArgs),
