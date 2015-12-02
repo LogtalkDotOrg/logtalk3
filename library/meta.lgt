@@ -44,7 +44,9 @@
 		fold_right/4 as foldr/4,
 		fold_right_1/3 as foldr1/3,
 		scan_left/4 as scanl/4,
-		scan_right/4 as scanr/4
+		scan_left_1/4 as scanl1/4,
+		scan_right/4 as scanr/4,
+		scan_right_1/4 as scanr1/4
 	]).
 
 	:- meta_predicate(include_(*, 1, *)).
@@ -158,18 +160,26 @@
 		fold_left_(Tail, Closure, Head, Result).
 
 	:- meta_predicate(scan_left_(*, 3, *, *)).
-	scan_left_([], _, Result, [Result]).
-	scan_left_([Arg| Args], Closure, Acc, [Acc| Results]) :-
+	scan_left_([], _, _, []).
+	scan_left_([Arg| Args], Closure, Acc, [Acc2| Results]) :-
 		call(Closure, Acc, Arg, Acc2),
 		scan_left_(Args, Closure, Acc2, Results).
 
 	:- meta_predicate(scan_left(3, *, *, *)).
-	scan_left(Closure, Acc, List, Results) :-
+	scan_left(Closure, Acc, List, [Acc| Results]) :-
 		scan_left_(List, Closure, Acc, Results).
 
 	:- meta_predicate(scanl(3, *, *, *)).
-	scanl(Closure, Acc, List, Results) :-
+	scanl(Closure, Acc, List, [Acc| Results]) :-
 		scan_left_(List, Closure, Acc, Results).
+
+	:- meta_predicate(scan_left_1(3, *, *)).
+	scan_left_1(Closure, [Head| Tail], [Head| Results]) :-
+		scan_left_(Tail, Closure, Head, Results).
+
+	:- meta_predicate(scanl1(3, *, *)).
+	scanl1(Closure, [Head| Tail], [Head| Results]) :-
+		scan_left_(Tail, Closure, Head, Results).
 
 	:- meta_predicate(fold_right_(*, 3, *, *)).
 	fold_right_([], _, Result, Result).
@@ -212,6 +222,20 @@
 	:- meta_predicate(scanr(3, *, *, *)).
 	scanr(Closure, Acc, List, Results) :-
 		scan_right_(List, Closure, Acc, Results).
+
+	:- meta_predicate(scan_right_1_(*, *, 3, *, *)).
+	scan_right_1_([], Result, _, Result, [Result]).
+	scan_right_1_([Arg2| Args], Arg1, Closure, Acc, [Result, Acc2| Results]) :-
+		scan_right_1_(Args, Arg2, Closure, Acc, [Acc2| Results]),
+		call(Closure, Arg1, Acc2, Result).
+
+	:- meta_predicate(scan_right_1(3, *, *)).
+	scan_right_1(Closure, [Head| Tail], Result) :-
+		scan_right_1_(Tail, Head, Closure, _, Result).
+
+	:- meta_predicate(scanr1(3, *, *)).
+	scanr1(Closure, [Head| Tail], Result) :-
+		scan_right_1_(Tail, Head, Closure, _, Result).
 
 	:- meta_predicate(map_(*, 1)).
 	map_([], _).

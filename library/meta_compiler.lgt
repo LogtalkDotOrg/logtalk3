@@ -23,8 +23,8 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0.73,
-		date is 2011/01/21,
+		version is 0.8,
+		date is 2015/12/02,
 		author is 'Paulo Moura',
 		comment is 'Compiler for the "meta" object meta-predicates. Generates auxiliary predicates in order to avoid meta-call overheads.'
 	]).
@@ -201,6 +201,9 @@
 	goal_expansion(meta::succeeds(Closure, List), ExpandedGoal) :-
 		goal_expansion(meta::map(Closure, List), ExpandedGoal).
 
+	goal_expansion(meta::maplist(Closure, List), ExpandedGoal) :-
+		goal_expansion(meta::map(Closure, List), ExpandedGoal).
+
 	goal_expansion(meta::map(Closure, List1, List2), ExpandedGoal) :-
 		decompose_closure(Closure, 2, Functor, Arity, Args, GArgs),
 		aux_predicate_functor(map, 3, Functor, Arity, AuxFunctor),
@@ -216,6 +219,9 @@
 			logtalk::compile_aux_clauses(Clauses),
 			assertz(generated_predicate(AuxFunctor/3))
 		).
+
+	goal_expansion(meta::maplist(Closure, List1, List2), ExpandedGoal) :-
+		goal_expansion(meta::map(Closure, List1, List2), ExpandedGoal).
 
 	goal_expansion(meta::map(Closure, List1, List2, List3), ExpandedGoal) :-
 		decompose_closure(Closure, 3, Functor, Arity, Args, GArgs),
@@ -233,6 +239,9 @@
 			assertz(generated_predicate(AuxFunctor/4))
 		).
 
+	goal_expansion(meta::maplist(Closure, List1, List2, List3), ExpandedGoal) :-
+		goal_expansion(meta::map(Closure, List1, List2, List3), ExpandedGoal).
+
 	goal_expansion(meta::map(Closure, List1, List2, List3, List4), ExpandedGoal) :-
 		decompose_closure(Closure, 4, Functor, Arity, Args, GArgs),
 		aux_predicate_functor(map, 5, Functor, Arity, AuxFunctor),
@@ -248,6 +257,9 @@
 			logtalk::compile_aux_clauses(Clauses),
 			assertz(generated_predicate(AuxFunctor/5))
 		).
+
+	goal_expansion(meta::maplist(Closure, List1, List2, List3, List4), ExpandedGoal) :-
+		goal_expansion(meta::map(Closure, List1, List2, List3, List4), ExpandedGoal).
 
 	goal_expansion(meta::map(Closure, List1, List2, List3, List4, List5), ExpandedGoal) :-
 		decompose_closure(Closure, 5, Functor, Arity, Args, GArgs),
@@ -265,6 +277,9 @@
 			assertz(generated_predicate(AuxFunctor/6))
 		).
 
+	goal_expansion(meta::maplist(Closure, List1, List2, List3, List4, List5), ExpandedGoal) :-
+		goal_expansion(meta::map(Closure, List1, List2, List3, List4, List5), ExpandedGoal).
+
 	goal_expansion(meta::map(Closure, List1, List2, List3, List4, List5, List6), ExpandedGoal) :-
 		decompose_closure(Closure, 6, Functor, Arity, Args, GArgs),
 		aux_predicate_functor(map, 7, Functor, Arity, AuxFunctor),
@@ -281,6 +296,9 @@
 			assertz(generated_predicate(AuxFunctor/7))
 		).
 
+	goal_expansion(meta::maplist(Closure, List1, List2, List3, List4, List5, List6), ExpandedGoal) :-
+		goal_expansion(meta::map(Closure, List1, List2, List3, List4, List5, List6), ExpandedGoal).
+
 	goal_expansion(meta::map(Closure, List1, List2, List3, List4, List5, List6, List7), ExpandedGoal) :-
 		decompose_closure(Closure, 7, Functor, Arity, Args, GArgs),
 		aux_predicate_functor(map, 8, Functor, Arity, AuxFunctor),
@@ -296,6 +314,9 @@
 			logtalk::compile_aux_clauses(Clauses),
 			assertz(generated_predicate(AuxFunctor/8))
 		).
+
+	goal_expansion(meta::maplist(Closure, List1, List2, List3, List4, List5, List6, List7), ExpandedGoal) :-
+		goal_expansion(meta::map(Closure, List1, List2, List3, List4, List5, List6, List7), ExpandedGoal).
 
 	goal_expansion(meta::fold_left(Closure, Acc, List, Result), ExpandedGoal) :-
 		decompose_closure(Closure, 3, Functor, Arity, Args, GArgs),

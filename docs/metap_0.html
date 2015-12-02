@@ -189,7 +189,7 @@
         <div class="section">
           <h3 id="fold_left/4" class="code">fold_left/4</h3>
           <blockquote>
-            <p class="comment">List folding (left associative). Closure is extended with three arguments in the following order: accumulator, list element, and the next accumulator term.</p>
+            <p class="comment">List folding (left associative). Closure is extended with three arguments: accumulator, list element, and updated accumulator.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -213,7 +213,7 @@
         <div class="section">
           <h3 id="fold_left_1/3" class="code">fold_left_1/3</h3>
           <blockquote>
-            <p class="comment">List folding (left associative). Closure is extended with three arguments in the following order: accumulator, list element, and the next accumulator term. The initial value of the accumulator is the list first element. Fails for empty lists.</p>
+            <p class="comment">List folding (left associative). Closure is extended with three arguments: accumulator, list element, and updated accumulator. The initial value of the accumulator is the list first element. Fails for empty lists.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -237,7 +237,7 @@
         <div class="section">
           <h3 id="scan_left/4" class="code">scan_left/4</h3>
           <blockquote>
-            <p class="comment">List scanning; similar to folding but returns the intermediate and final results (left associative). Closure is extended with three arguments in the following order: accumulator, list element, and the next accumulator term.</p>
+            <p class="comment">List scanning (left associative). Closure is extended with three arguments: accumulator, list element, and updated accumulator.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -259,9 +259,33 @@
           </dl>
         </div>
         <div class="section">
+          <h3 id="scan_left_1/3" class="code">scan_left_1/3</h3>
+          <blockquote>
+            <p class="comment">List scanning (left associative). Closure is extended with three arguments: accumulator, list element, and updated accumulator. The accumulator is initialized with the list first element. Fails for empty lists.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>scan_left_1(Closure,List,Results)</code>
+            </dd>
+            <dt class="key">meta-predicate template:</dt>
+            <dd class="value">
+              <code>scan_left_1(3,*,*)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>scan_left_1(+callable,+list,?list) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
           <h3 id="fold_right/4" class="code">fold_right/4</h3>
           <blockquote>
-            <p class="comment">List folding (right associative). Closure is extended with three arguments in the following order: list element, accumulator, and the next accumulator term.</p>
+            <p class="comment">List folding (right associative). Closure is extended with three arguments: list element, accumulator, and updated accumulator.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -285,7 +309,7 @@
         <div class="section">
           <h3 id="fold_right_1/3" class="code">fold_right_1/3</h3>
           <blockquote>
-            <p class="comment">List folding (right associative). Closure is extended with three arguments in the following order: list element, accumulator, and the next accumulator term. The initial value of the accumulator is the list first element. Fails for empty lists.</p>
+            <p class="comment">List folding (right associative). Closure is extended with three arguments: list element, accumulator, and updated accumulator. The initial value of the accumulator is the list first element. Fails for empty lists.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -309,7 +333,7 @@
         <div class="section">
           <h3 id="scan_right/4" class="code">scan_right/4</h3>
           <blockquote>
-            <p class="comment">List scanning; similar to folding but returns the intermediate and final results (right associative). Closure is extended with three arguments in the following order: list element, accumulator, and the next accumulator term.</p>
+            <p class="comment">List scanning (right associative). Closure is extended with three arguments: list element, accumulator, and updated accumulator.</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -327,6 +351,30 @@
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>scan_right(+callable,?term,+list,?list) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="scan_right_1/3" class="code">scan_right_1/3</h3>
+          <blockquote>
+            <p class="comment">List scanning (right associative). Closure is extended with three arguments: list element, accumulator, and updated accumulator. The accumulator is initialized with the list first element. Fails for empty lists.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>scan_right_1(Closure,List,Results)</code>
+            </dd>
+            <dt class="key">meta-predicate template:</dt>
+            <dd class="value">
+              <code>scan_right_1(3,*,*)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>scan_right_1(+callable,+list,?list) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>

@@ -46,9 +46,9 @@ Library
 * ADDED: Objects `hook_pipeline/1` and `hook_set/1` to simplify using pipelines
 or sets of hook objects.
 
-* ADDED: Meta-predicates `fold_left_1/3` and `fold_right_1/3` to the `metap`
-and `meta` entities. Also available using the `foldl1/3` and `foldr1/3`
-aliases.
+* ADDED: Meta-predicates `fold_left_1/3`, `fold_right_1/3`, `scan_left_1/3`,
+and `scan_right_1/3` to the `metap` and `meta` entities. Also available using
+the `foldl1/3`, `foldr1/3`, `scanl1/3`, and `scanr1/3` aliases.
 
 * ADDED: The `metap` and `meta` entities now recognize `maplist/2-8` as aliases
 to the `map/2-8` meta-predicates.

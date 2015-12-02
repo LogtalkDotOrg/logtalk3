@@ -80,7 +80,7 @@
 	:- meta_predicate(fold_left(3, *, *, *)).
 	:- mode(fold_left(+callable, ?term, +list, ?term), zero_or_more).
 	:- info(fold_left/4, [
-		comment is 'List folding (left associative). Closure is extended with three arguments in the following order: accumulator, list element, and the next accumulator term.',
+		comment is 'List folding (left associative). Closure is extended with three arguments: accumulator, list element, and updated accumulator.',
 		argnames is ['Closure', 'Accumulator', 'List', 'Result']
 	]).
 
@@ -88,7 +88,7 @@
 	:- meta_predicate(fold_left_1(3, *, *)).
 	:- mode(fold_left_1(+callable, +list, ?term), zero_or_more).
 	:- info(fold_left_1/3, [
-		comment is 'List folding (left associative). Closure is extended with three arguments in the following order: accumulator, list element, and the next accumulator term. The initial value of the accumulator is the list first element. Fails for empty lists.',
+		comment is 'List folding (left associative). Closure is extended with three arguments: accumulator, list element, and updated accumulator. The initial value of the accumulator is the list first element. Fails for empty lists.',
 		argnames is ['Closure', 'List', 'Result']
 	]).
 
@@ -96,15 +96,23 @@
 	:- meta_predicate(scan_left(3, *, *, *)).
 	:- mode(scan_left(+callable, ?term, +list, ?list), zero_or_more).
 	:- info(scan_left/4, [
-		comment is 'List scanning; similar to folding but returns the intermediate and final results (left associative). Closure is extended with three arguments in the following order: accumulator, list element, and the next accumulator term.',
+		comment is 'List scanning (left associative). Closure is extended with three arguments: accumulator, list element, and updated accumulator.',
 		argnames is ['Closure', 'Accumulator', 'List', 'Results']
+	]).
+
+	:- public(scan_left_1/3).
+	:- meta_predicate(scan_left_1(3, *, *)).
+	:- mode(scan_left_1(+callable, +list, ?list), zero_or_more).
+	:- info(scan_left_1/3, [
+		comment is 'List scanning (left associative). Closure is extended with three arguments: accumulator, list element, and updated accumulator. The accumulator is initialized with the list first element. Fails for empty lists.',
+		argnames is ['Closure', 'List', 'Results']
 	]).
 
 	:- public(fold_right/4).
 	:- meta_predicate(fold_right(3, *, *, *)).
 	:- mode(fold_right(+callable, ?term, +list, ?term), zero_or_more).
 	:- info(fold_right/4, [
-		comment is 'List folding (right associative). Closure is extended with three arguments in the following order: list element, accumulator, and the next accumulator term.',
+		comment is 'List folding (right associative). Closure is extended with three arguments: list element, accumulator, and updated accumulator.',
 		argnames is ['Closure', 'Accumulator', 'List', 'Result']
 	]).
 
@@ -112,7 +120,7 @@
 	:- meta_predicate(fold_right_1(3, *, *)).
 	:- mode(fold_right_1(+callable, +list, ?term), zero_or_more).
 	:- info(fold_right_1/3, [
-		comment is 'List folding (right associative). Closure is extended with three arguments in the following order: list element, accumulator, and the next accumulator term. The initial value of the accumulator is the list first element. Fails for empty lists.',
+		comment is 'List folding (right associative). Closure is extended with three arguments: list element, accumulator, and updated accumulator. The initial value of the accumulator is the list first element. Fails for empty lists.',
 		argnames is ['Closure', 'List', 'Result']
 	]).
 
@@ -120,8 +128,16 @@
 	:- meta_predicate(scan_right(3, *, *, *)).
 	:- mode(scan_right(+callable, ?term, +list, ?list), zero_or_more).
 	:- info(scan_right/4, [
-		comment is 'List scanning; similar to folding but returns the intermediate and final results (right associative). Closure is extended with three arguments in the following order: list element, accumulator, and the next accumulator term.',
+		comment is 'List scanning (right associative). Closure is extended with three arguments: list element, accumulator, and updated accumulator.',
 		argnames is ['Closure', 'Accumulator', 'List', 'Results']
+	]).
+
+	:- public(scan_right_1/3).
+	:- meta_predicate(scan_right_1(3, *, *)).
+	:- mode(scan_right_1(+callable, +list, ?list), zero_or_more).
+	:- info(scan_right_1/3, [
+		comment is 'List scanning (right associative). Closure is extended with three arguments: list element, accumulator, and updated accumulator. The accumulator is initialized with the list first element. Fails for empty lists.',
+		argnames is ['Closure', 'List', 'Results']
 	]).
 
 	:- public(map/2).
