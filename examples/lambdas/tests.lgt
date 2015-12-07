@@ -24,7 +24,7 @@
 	:- info([
 		version is 1.4,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2015/12/01,
+		date is 2015/12/07,
 		comment is 'Unit tests for the "lambdas" example.'
 	]).
 
@@ -211,5 +211,16 @@
 
 	p(1,a).
 	p(2,b).
+
+	:- if(\+ predicate_property(plus(_,_,_), built_in)).
+
+		plus(X, Y, Z) :-
+			(	integer(X), integer(Y) -> Z is X + Y
+			;	integer(X), integer(Z) -> Y is Z - X
+			;	integer(Y), integer(Z) -> X is Z - Y
+			;	fail
+			).
+
+	:- endif.
 
 :- end_object.
