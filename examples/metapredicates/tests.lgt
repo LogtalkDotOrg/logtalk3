@@ -256,16 +256,16 @@
 		Result == [10, 9, 7, 4].
 
 	test(metapredicates_13) :-
-		meta::fold_left_1([X,Y,Z]>>(Z is X+Y), [1,2,3,4,5], R),
-		R == 15.
+		meta::fold_left_1([X,Y,Z]>>(Z is X+Y), [1,2,3,4,5], Result),
+		Result == 15.
 
 	test(metapredicates_14) :-
-		meta::fold_right_1([X,Y,Z]>>(Z is X-Y), [1,2,3,4,5], R),
-		R == 3.
+		meta::fold_right_1([X,Y,Z]>>(Z is X-Y), [1,2,3,4,5], Result),
+		Result == 3.
 
 	test(metapredicates_15) :-
-		meta::fold_right_1([X,Y,Z]>>(Z is X*Y), [1,2,3,4,5], R),
-		R == 120.
+		meta::fold_right_1([X,Y,Z]>>(Z is X*Y), [1,2,3,4,5], Result),
+		Result == 120.
 
 	test(metapredicates_16) :-
 		meta::map(integer, [1,2,3,4,5]).
