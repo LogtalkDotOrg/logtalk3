@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Adapter file for CxProlog 0.97.7 or a later version
-%  Last updated on September 30, 2015
+%  Adapter file for CxProlog 0.98.0 or a later version
+%  Last updated on December 28, 2015
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -206,7 +206,7 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 '$lgt_prolog_feature'(prolog_dialect, cx).
 '$lgt_prolog_feature'(prolog_version, (Major, Minor, Patch)) :-
 	catch(current_prolog_flag(version_data, cxprolog(Major, Minor, Patch, _)), _, fail).
-'$lgt_prolog_feature'(prolog_compatible_version, @>=((0,97,7))).
+'$lgt_prolog_feature'(prolog_compatible_version, @>=((0,98,0))).
 '$lgt_prolog_feature'(prolog_conformance, lax).
 
 '$lgt_prolog_feature'(encoding_directive, source).

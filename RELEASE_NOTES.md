@@ -24,7 +24,10 @@ RELEASE NOTES
 3.02.3 - January ??, 2016
 =========================
 
+Prolog adapter and integration files
+------------------------------------
 
+* UPDATED: CxProlog adapter file to require version 0.98.0 or later.
 
 
 3.02.2 - December 22, 2015

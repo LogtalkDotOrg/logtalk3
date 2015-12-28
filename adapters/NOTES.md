@@ -133,7 +133,7 @@ On Windows, the environment variable `BPDIR` must be defined and pointing
 to the B-Prolog installation directory for the installer to detect it.
 
 
-CxProlog 0.97.7 or later versions
+CxProlog 0.98.0 or later versions
 ---------------------------------
 
 	cx.pl

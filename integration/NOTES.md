@@ -26,7 +26,7 @@ scripts available from the command-line (you may need to adjust your
 system path):
 
 * B-Prolog (version 7.8 or later):         `bplgt`
-* CxProlog (version 0.97.7 or later):      `cxlgt`
+* CxProlog (version 0.98.0 or later):      `cxlgt`
 * ECLiPSe (version 6.1#143 or later):      `eclipselgt`
 * GNU Prolog (version 1.4.2 or later):     `gplgt`
 * JIProlog (version 4.1.2.8 or later):     `jiplgt`     (first run may require `sudo`)
