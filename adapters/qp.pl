@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Adapter file for Qu-Prolog 9.0 and later versions
-%  Last updated on September 30, 2015
+%  Adapter file for Qu-Prolog 9.7 and later versions
+%  Last updated on December 28, 2015
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -69,13 +69,14 @@ subsumes_term(General, Specific) :-
 	\+ \+ '$lgt_qp_subsumes'(General, Specific).
 
 '$lgt_qp_subsumes'(General, Specific) :-
-	collect_vars(Specific, Vars1),
+	term_variables(Specific, Vars1),
 	unify_with_occurs_check(General, Specific),
-	collect_vars(Vars1, Vars2),
+	term_variables(Vars1, Vars2),
 	Vars1 == Vars2.
 
 term_variables(Term, Variables) :-
-	collect_vars(Term, Variables).
+	collect_vars(Term, Variables0),
+	reverse(Variables0, Variables).
 
 
 
@@ -264,7 +265,7 @@ format(Format, Arguments) :-
 '$lgt_prolog_feature'(prolog_dialect, qp).
 '$lgt_prolog_feature'(prolog_version, (Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, qp(Major, Minor, Patch, _)).
-'$lgt_prolog_feature'(prolog_compatible_version, @>=((9,0,0))).
+'$lgt_prolog_feature'(prolog_compatible_version, @>=((9,7,0))).
 '$lgt_prolog_feature'(prolog_conformance, lax).
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).

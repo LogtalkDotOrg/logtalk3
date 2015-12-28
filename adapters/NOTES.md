@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 Notes on supported backend Prolog compilers  
-Last updated on November 13, 2015
+Last updated on December 28, 2015
 
 This file is part of Logtalk <http://logtalk.org/>  
 Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -318,12 +318,12 @@ Starting Lean Prolog with a Java allocation of at least 2GB is recommended
 (by passing a `-Xmx2G` option to Java).
 
 
-Qu-Prolog 9.0 and later versions
+Qu-Prolog 9.7 and later versions
 --------------------------------
 
 	qp.pl
 
-Know issues in Qu-Prolog 9.0: (1) this version doesn't support static
+Know issues in Qu-Prolog 9.7: (1) this version doesn't support static
 multifile predicates. This limitation may be fixed in later versions;
 (2) a bug in the Windows version of Qu-Prolog in the expansion of file
 paths containing environment variables prevents using it with Logtalk

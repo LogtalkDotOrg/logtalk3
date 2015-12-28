@@ -29,6 +29,10 @@ Prolog adapter and integration files
 
 * UPDATED: CxProlog adapter file to require version 0.98.0 or later.
 
+* FIXED: Bug in the Qu-Prolog adapter file definition for the missing standard
+`term_variables/2` built-in predicate. Qu-Prolog version 9.7 or later is now
+required when using this backend compiler.
+
 
 3.02.2 - December 22, 2015
 ==========================
