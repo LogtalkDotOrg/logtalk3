@@ -45,11 +45,12 @@
 <h4>Description</h4>
 
 <pre>uses(Object, Predicates)
-uses(Object, PredicatesAndAliases)</pre>
-<pre>uses(Object, NonTerminals)
+uses(Object, PredicatesAndAliases)
+
+uses(Object, NonTerminals)
 uses(Object, NonTerminalsAndAliases)</pre>
 <p>
-Declares that all calls (made from predicates defined in the category or object containing the directive) to the specified predicates are to be interpreted as messages to the specified object. Thus, this directive may be used to simplify writing of predicate definitions by allowing the programmer to omit the <code>Object::</code> prefix when using the predicates listed in the directive (as long as the predicate calls do not occur as arguments for non-standard Prolog meta-predicates not declared on the adapter files). It is also possible to include operator declarations, <code>op(Precedence, Associativity, Operator)</code>, in the second argument.
+Declares that all calls made from predicates (or non-terminals) defined in the category or object containing the directive to the specified predicates (or non-terminals) are to be interpreted as messages to the specified object. Thus, this directive may be used to simplify writing of predicate definitions by allowing the programmer to omit the <code>Object::</code> prefix when using the predicates listed in the directive (as long as the  calls do not occur as arguments for non-standard Prolog meta-predicates not declared on the adapter files). It is also possible to include operator declarations, <code>op(Precedence, Associativity, Operator)</code>, in the second argument.
 </p>
 <p>
 This directive is also used when compiling calls to the database and reflection built-in methods by looking into these methods predicate arguments.
@@ -102,7 +103,7 @@ btree_to_queue :-
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: July 23, 2015</span>
+		<span>Last updated on: February 3, 2015</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="synchronized_1.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="../index.html#directives">next</a></span><br/>
