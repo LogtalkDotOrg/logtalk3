@@ -20262,9 +20262,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% Logtalk runtime initialization goal
+% Logtalk runtime initialization
 
-:- initialization((
+'$lgt_runtime_initialization' :-
 	'$lgt_initialize_dynamic_entity_counters',
 	'$lgt_load_built_in_entities'(ScratchDirectory),
 	'$lgt_load_settings_file'(ScratchDirectory, Result),
@@ -20274,8 +20274,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compile_default_hooks',
 	'$lgt_start_runtime_threading',
 	'$lgt_report_settings_file'(Result),
-	'$lgt_check_prolog_version'
-)).
+	'$lgt_check_prolog_version'.
+
+
+:- initialization('$lgt_runtime_initialization').
 
 
 
