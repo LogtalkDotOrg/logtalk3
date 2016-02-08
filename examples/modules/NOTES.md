@@ -21,10 +21,8 @@ To load this example and for sample queries, please see the `SCRIPT.txt`
 file.
 
 This example illustrates compilation of Prolog module files as objects.
-This compilation is triggered by using the Logtalk source file extension
-for the Prolog module files.
 
 Due to the lack of standardization of Prolog module systems, the module 
-files must use only a common subset of Prolog module directives. Consult 
-the "Prolog Integration and Migration Guide" in the Logtalk documentation 
+files can only a common subset of Prolog module directives. Consult the
+"Prolog Integration and Migration Guide" in the Logtalk documentation 
 for details.
