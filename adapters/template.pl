@@ -582,7 +582,8 @@ term_hash(Term, Depth, Range, Hash) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  default user module
+%  module qualification to be used when calling Prolog meta-predicates
+%  with meta-arguments that are calls to object or category predicates
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
