@@ -21,8 +21,8 @@ RELEASE NOTES
 =============
 
 
-3.02.3 - January ??, 2016
-=========================
+3.02.3 - February ??, 2016
+==========================
 
 Prolog adapter and integration files
 ------------------------------------
@@ -32,6 +32,15 @@ Prolog adapter and integration files
 * FIXED: Bug in the Qu-Prolog adapter file definition for the missing standard
 `term_variables/2` built-in predicate. Qu-Prolog version 9.7 or later is now
 required when using this backend compiler.
+
+* FIXED: Module qualification of meta-arguments in calls to Prolog meta-
+predicates from objects or categories when using SICStus Prolog with Logtalk
+loaded into a module other than `user`.
+
+Documentation
+-------------
+
+* FIXED: Several typos in the User and Reference manuals.
 
 
 3.02.2 - December 22, 2015

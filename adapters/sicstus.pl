@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SICStus Prolog 4.1.0 and later versions
-%  Last updated on September 30, 2015
+%  Last updated on February 8, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -784,7 +784,10 @@ forall(Generate, Test) :-
 
 % '$lgt_user_module_qualification'(@callable, -callable)
 
-'$lgt_user_module_qualification'(Goal, user:Goal).
+:- initialization((
+	prolog_load_context(module, Module),
+	assertz('$lgt_user_module_qualification'(Goal, Module:Goal))
+)).
 
 
 
