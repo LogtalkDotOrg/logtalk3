@@ -807,26 +807,32 @@ thread_sleep(Time) :-
 :- dynamic(user:goal_expansion/2).
 :- multifile(user:goal_expansion/2).
 
-user:goal_expansion(phrase(Rule, Input, Rest), user:'$lgt_phrase'(Rule, Input, Rest, ExCtx)) :-
+% support calls to phrase/2 that call object non-terminals
+user:goal_expansion(phrase(Rule, Input, Rest), ExpandedGoal) :-
 	nonvar(Rule),
 	functor(Rule, '::', 2),
 	!,
-	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []).
-user:goal_expansion(phrase(Rule, Input), user:'$lgt_phrase'(Rule, Input, ExCtx)) :-
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_user_module_qualification'('$lgt_phrase'(Rule, Input, Rest, ExCtx), ExpandedGoal).
+% support calls to phrase/3 that call object non-terminals
+user:goal_expansion(phrase(Rule, Input), ExpandedGoal) :-
 	nonvar(Rule),
 	functor(Rule, '::', 2),
 	!,
-	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []).
-
-user:goal_expansion('::'(Object, Message), user:Goal) :-
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_user_module_qualification'('$lgt_phrase'(Rule, Input, ExCtx), ExpandedGoal).
+% optimize messages sent from within modules
+user:goal_expansion('::'(Object, Message), ExpandedGoal) :-
 	prolog_load_context(module, Module),
+	% not top-level query
 	Module \== user,
 	'$lgt_compiler_flag'(events, Events),
 	prolog_load_context(term_position, Position),
 	stream_position_data(line_count, Position, Line),
 	'$lgt_comp_ctx'(Ctx, _, user, user, user, Obj, _, [], [], ExCtx, compile(aux), [], Line-Line),
 	'$lgt_execution_context'(ExCtx, user, user, user, Obj, [], []),
-	catch('$lgt_compile_message_to_object'(Message, Object, Goal, Events, Ctx), _, fail). 
+	catch('$lgt_compile_message_to_object'(Message, Object, Goal, Events, Ctx), _, fail),
+	'$lgt_user_module_qualification'(Goal, ExpandedGoal).
 
 
 
@@ -1050,7 +1056,12 @@ user:goal_expansion('::'(Object, Message), user:Goal) :-
 
 % '$lgt_user_module_qualification'(@callable, -callable)
 
-'$lgt_user_module_qualification'(Goal, user:Goal).
+term_expansion(
+		'$lgt_user_module_qualification'(_, _),
+		'$lgt_user_module_qualification'(Goal, Module:Goal)) :-
+	prolog_load_context(module, Module).
+
+'$lgt_user_module_qualification'(_, _).
 
 
 

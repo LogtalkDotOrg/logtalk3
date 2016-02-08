@@ -33,9 +33,8 @@ Prolog adapter and integration files
 `term_variables/2` built-in predicate. Qu-Prolog version 9.7 or later is now
 required when using this backend compiler.
 
-* FIXED: Module qualification of meta-arguments in calls to Prolog meta-
-predicates from objects or categories when using SICStus Prolog with Logtalk
-loaded into a module other than `user`.
+* FIXED: When using SICStus Prolog, SWI-Prolog, or YAP as backend compilers,
+don't assume that Logtalk is loaded into the `user` pseudo-module.
 
 Documentation
 -------------
