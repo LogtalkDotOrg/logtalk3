@@ -5,7 +5,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on February 7, 2016
+%  Last updated on February 10, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -43,12 +43,8 @@ user:prolog_load_file(_:Spec, Flags) :-
 		expand_file_name(Spec2, [SpecExp]),
 		absolute_file_name(SpecExp, [extensions([lgt,logtalk]), access(read), file_errors(fail)], Path)
 	),
-	file_directory_name(Path, Dir),
-	file_base_name(Path, BaseName),
-	file_name_extension(Entity, _, BaseName),
-	working_directory(Old, Dir),
 	'$lgt_swi_filter_compiler_flags'(Flags, Flags2),
-	setup_call_cleanup(true, logtalk_load(Entity, Flags2), working_directory(_, Old)).
+	logtalk_load(Path, Flags2).
 
 
 '$lgt_swi_filter_compiler_flags'([], []).
