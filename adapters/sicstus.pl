@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SICStus Prolog 4.1.0 and later versions
-%  Last updated on February 8, 2016
+%  Last updated on February 10, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -26,6 +26,7 @@
 :- use_module(library(system)).
 :- use_module(library(system3), [pid/1, shell/1, shell/2]).
 :- use_module(library(lists), [select/3]).
+:- use_module(library(terms), [term_hash/2, term_hash/4]).
 
 % disable SICStus Prolog discontiguous predicate clauses warning
 % as the Logtalk compiler does its own detection and there's no
@@ -389,6 +390,16 @@ forall(Generate, Test) :-
 	).
 
 
+% '$lgt_directory_hash_as_atom'(+atom, -atom)
+%
+% returns the directory hash as an atom
+
+'$lgt_directory_hash_as_atom'(Directory, Hash) :-
+	term_hash(Directory, Hash0),
+	number_codes(Hash0, Codes),
+	atom_codes(Hash, Codes).
+
+
 % '$lgt_compile_prolog_code'(+atom, +atom, +list)
 %
 % compile to disk a Prolog file, resulting from a
@@ -746,9 +757,7 @@ forall(Generate, Test) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% term_hash(@callable, +integer, +integer, -integer)
-
-:- use_module(library(terms), [term_hash/4]).
+% term_hash(@callable, +integer, +integer, -integer) -- library
 
 
 

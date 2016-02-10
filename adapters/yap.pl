@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for YAP Prolog 6.3.4 and later versions
-%  Last updated on February 8, 2016
+%  Last updated on February 10, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -25,6 +25,7 @@
 :- set_prolog_flag(generate_debug_info, false).
 
 :- use_module(library(system)).
+:- use_module(library(terms), [term_hash/4]).
 
 :- set_prolog_flag(update_semantics, logical).
 :- set_prolog_flag(unknown, error).
@@ -428,6 +429,16 @@
 		true
 	;	make_directory(Directory)
 	).
+
+
+% '$lgt_directory_hash_as_atom'(+atom, -atom)
+%
+% returns the directory hash as an atom
+
+'$lgt_directory_hash_as_atom'(Directory, Hash) :-
+	term_hash(Directory, 1, 2147483647, Hash0),
+	number_codes(Hash0, Codes),
+	atom_codes(Hash, Codes).
 
 
 % '$lgt_compile_prolog_code'(+atom, +atom, +list)
@@ -870,9 +881,7 @@ user:goal_expansion('::'(Object, Message), ExpandedGoal) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% term_hash(@callable, +integer, +integer, -integer)
-
-:- use_module(library(terms), [term_hash/4]).
+% term_hash(@callable, +integer, +integer, -integer) -- library
 
 
 

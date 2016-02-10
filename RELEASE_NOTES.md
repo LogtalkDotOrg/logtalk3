@@ -24,6 +24,14 @@ RELEASE NOTES
 3.02.3 - February ??, 2016
 ==========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Append a directory hash value to the intermediate Prolog file names
+to help avoiding file name collisions when collecting all the intermediate
+files in the same directory for embedding. Currently requires ECLiPSe, GNU
+Prolog, SICStus Prolog, SWI-Prolog, XSB, or YAP as the backend compiler.
+
 Prolog adapter and integration files
 ------------------------------------
 

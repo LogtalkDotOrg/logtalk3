@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for XSB 3.5.0 or later versions
-%  Last updated on February 8, 2016
+%  Last updated on February 10, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -23,6 +23,7 @@
 
 :- import datime/1 from standard.
 :- import expand_atom/2 from standard.
+:- import term_hash/3 from machine.
 
 
 
@@ -353,6 +354,16 @@ setup_call_catcher_cleanup(Setup, Call, Catcher, Cleanup) :-
 		true
 	;	path_sysop(mkdir, Expanded)
 	).
+
+
+% '$lgt_directory_hash_as_atom'(+atom, -atom)
+%
+% returns the directory hash as an atom
+
+'$lgt_directory_hash_as_atom'(Directory, Hash) :-
+	term_hash(Directory, 2147483647, Hash0),
+	number_codes(Hash0, Codes),
+	atom_codes(Hash, Codes).
 
 
 % '$lgt_compile_prolog_code'(+atom, +atom, +list)
