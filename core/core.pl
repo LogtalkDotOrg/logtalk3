@@ -2339,54 +2339,73 @@ logtalk_make(Target) :-
 '$lgt_missing_protocol'(Protocol-Reference) :-
 	'$lgt_implements_protocol_'(Entity, Protocol, _),
 	\+ '$lgt_current_protocol_'(Protocol, _, _, _, _),
-	'$lgt_missing_reference'(Entity, Reference).
+	'$lgt_missing_reference'(Entity, _, Reference).
 '$lgt_missing_protocol'(Protocol-Reference) :-
 	'$lgt_extends_protocol_'(Entity, Protocol, _),
 	\+ '$lgt_current_protocol_'(Protocol, _, _, _, _),
-	'$lgt_missing_reference'(Entity, Reference).
+	'$lgt_missing_reference'(Entity, _, Reference).
 
 '$lgt_missing_category'(Category-Reference) :-
 	'$lgt_imports_category_'(Entity, Category, _),
 	\+ '$lgt_current_category_'(Category, _, _, _, _, _),
-	'$lgt_missing_reference'(Entity, Reference).
+	'$lgt_missing_reference'(Entity, _, Reference).
 '$lgt_missing_category'(Category-Reference) :-
 	'$lgt_extends_category_'(Entity, Category, _),
 	\+ '$lgt_current_category_'(Category, _, _, _, _, _),
-	'$lgt_missing_reference'(Entity, Reference).
+	'$lgt_missing_reference'(Entity, _, Reference).
 
 '$lgt_missing_object'(Object-Reference) :-
 	'$lgt_extends_object_'(Entity, Object, _),
 	\+ '$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _),
-	'$lgt_missing_reference'(Entity, Reference).
+	'$lgt_missing_reference'(Entity, _, Reference).
 '$lgt_missing_object'(Object-Reference) :-
 	'$lgt_instantiates_class_'(Entity, Object, _),
 	\+ '$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _),
-	'$lgt_missing_reference'(Entity, Reference).
+	'$lgt_missing_reference'(Entity, _, Reference).
 '$lgt_missing_object'(Object-Reference) :-
 	'$lgt_specializes_class_'(Entity, Object, _),
 	\+ '$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _),
-	'$lgt_missing_reference'(Entity, Reference).
+	'$lgt_missing_reference'(Entity, _, Reference).
 '$lgt_missing_object'(Object-Reference) :-
 	'$lgt_complemented_object_'(Object, Entity, _, _, _),
 	\+ '$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _),
-	'$lgt_missing_reference'(Entity, Reference).
+	'$lgt_missing_reference'(Entity, _, Reference).
 '$lgt_missing_object'(Object-Reference) :-
-	'$lgt_entity_property_'(Entity, calls(Object::_, _)),
+	'$lgt_entity_property_'(Entity, calls(Object::_, Properties)),
 	\+ '$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _),
-	'$lgt_missing_reference'(Entity, Reference).
+	(	'$lgt_member'(line_count(Line), Properties) ->
+		true
+	;	true
+	),
+	'$lgt_missing_reference'(Entity, Line, Reference).
 
 '$lgt_missing_module'(Module-Reference) :-
-	'$lgt_entity_property_'(Entity, calls(':'(Module,_), _)),
+	'$lgt_entity_property_'(Entity, calls(':'(Module,_), Properties)),
 	\+ current_module(Module),
-	'$lgt_missing_reference'(Entity, Reference).
+	(	'$lgt_member'(line_count(Line), Properties) ->
+		true
+	;	true
+	),
+	'$lgt_missing_reference'(Entity, Line, Reference).
 
-'$lgt_missing_reference'(Entity, reference(Kind,Entity)) :-
+'$lgt_missing_reference'(Entity, Line, reference(Kind,Entity,Path,StartLine)) :-
 	(	'$lgt_current_protocol_'(Entity, _, _, _, _) ->
 		Kind = protocol
 	;	'$lgt_current_category_'(Entity, _, _, _, _, _) ->
 		Kind = category
-	;	% '$lgt_current_object_'(Entity, _, _, _, _, _, _, _, _, _, _),
+	;	'$lgt_current_object_'(Entity, _, _, _, _, _, _, _, _, _, _) ->
 		Kind = object
+	;	Kind = module
+	),
+	(	'$lgt_entity_property_'(Entity, file_lines(File,Directory,EntityLine,_)) ->
+		atom_concat(Directory, File, Path)
+	;	Path = ''
+	),
+	(	Path == '' ->
+		StartLine = -1
+	;	var(Line) ->
+		StartLine = EntityLine
+	;	StartLine = Line
 	).
 
 

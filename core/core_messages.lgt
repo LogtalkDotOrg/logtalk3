@@ -589,11 +589,19 @@
 
 	missing_entities([]) -->
 		[].
-	missing_entities([Entity-reference(Kind,From)| Entities]) -->
+	missing_entities([Entity-reference(Kind,From,File,Line)| Entities]) -->
 		{ground_term_copy(Entity, GroundEntity),
 		 ground_term_copy(From, GroundFrom)},
 		['  ~q'-[GroundEntity], nl],
-		['    referenced in ~w ~q'-[Kind,GroundFrom], nl],
+		['    referenced from ~w ~q'-[Kind,GroundFrom], nl],
+		(	{File == ''} ->
+			[]
+		;	['    in file ~w'-[File], nl]
+		),
+		(	{Line =:= -1} ->
+			[]
+		;	['    at line ~w'-[Line], nl]
+		),
 		missing_entities(Entities).
 
 	ground_term_copy(Term, GroundTerm) :-
