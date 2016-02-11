@@ -2313,7 +2313,9 @@ logtalk_make(Target) :-
 		'$lgt_print_message'(warning(make), core, missing_modules(Modules))
 	;	true
 	),
-	'$lgt_print_message'(comment(make), core, missing_entities_listed).
+	findall(Predicate, '$lgt_missing_predicate'(Predicate), Predicates),
+	'$lgt_print_message'(warning(make), core, missing_predicates(Predicates)),
+	'$lgt_print_message'(comment(make), core, missing_entities_predicates_listed).
 
 
 % deal with changes to the default compilation mode
@@ -2340,36 +2342,44 @@ logtalk_make(Target) :-
 	'$lgt_implements_protocol_'(Entity, Protocol, _),
 	\+ '$lgt_current_protocol_'(Protocol, _, _, _, _),
 	'$lgt_missing_reference'(Entity, _, Reference).
+
 '$lgt_missing_protocol'(Protocol-Reference) :-
 	'$lgt_extends_protocol_'(Entity, Protocol, _),
 	\+ '$lgt_current_protocol_'(Protocol, _, _, _, _),
 	'$lgt_missing_reference'(Entity, _, Reference).
 
+
 '$lgt_missing_category'(Category-Reference) :-
 	'$lgt_imports_category_'(Entity, Category, _),
 	\+ '$lgt_current_category_'(Category, _, _, _, _, _),
 	'$lgt_missing_reference'(Entity, _, Reference).
+
 '$lgt_missing_category'(Category-Reference) :-
 	'$lgt_extends_category_'(Entity, Category, _),
 	\+ '$lgt_current_category_'(Category, _, _, _, _, _),
 	'$lgt_missing_reference'(Entity, _, Reference).
 
+
 '$lgt_missing_object'(Object-Reference) :-
 	'$lgt_extends_object_'(Entity, Object, _),
 	\+ '$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _),
 	'$lgt_missing_reference'(Entity, _, Reference).
+
 '$lgt_missing_object'(Object-Reference) :-
 	'$lgt_instantiates_class_'(Entity, Object, _),
 	\+ '$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _),
 	'$lgt_missing_reference'(Entity, _, Reference).
+
 '$lgt_missing_object'(Object-Reference) :-
 	'$lgt_specializes_class_'(Entity, Object, _),
 	\+ '$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _),
 	'$lgt_missing_reference'(Entity, _, Reference).
+
 '$lgt_missing_object'(Object-Reference) :-
 	'$lgt_complemented_object_'(Object, Entity, _, _, _),
 	\+ '$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _),
 	'$lgt_missing_reference'(Entity, _, Reference).
+
 '$lgt_missing_object'(Object-Reference) :-
 	'$lgt_entity_property_'(Entity, calls(Object::_, Properties)),
 	\+ '$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _),
@@ -2379,6 +2389,7 @@ logtalk_make(Target) :-
 	),
 	'$lgt_missing_reference'(Entity, Line, Reference).
 
+
 '$lgt_missing_module'(Module-Reference) :-
 	'$lgt_entity_property_'(Entity, calls(':'(Module,_), Properties)),
 	\+ current_module(Module),
@@ -2387,6 +2398,7 @@ logtalk_make(Target) :-
 	;	true
 	),
 	'$lgt_missing_reference'(Entity, Line, Reference).
+
 
 '$lgt_missing_reference'(Entity, Line, reference(Kind,Entity,Path,StartLine)) :-
 	(	'$lgt_current_protocol_'(Entity, _, _, _, _) ->
@@ -2407,6 +2419,36 @@ logtalk_make(Target) :-
 		StartLine = EntityLine
 	;	StartLine = Line
 	).
+
+
+% find missing predicates for logtalk_make/1
+
+'$lgt_missing_predicate'((Object::Predicate)-Reference) :-
+	'$lgt_entity_property_'(Entity, calls(Object::Predicate, Properties)),
+	% the object may only be known at runtime; reject those cases
+	nonvar(Object),
+	% require loaded objects as the missing objects are already listed
+	'$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _),
+	\+ '$lgt_current_predicate'(Object, Predicate, Entity, p(p(p))),
+	(	'$lgt_member'(line_count(Line), Properties) ->
+		true
+	;	Line = -1
+	),
+	'$lgt_missing_reference'(Entity, Line, Reference).
+
+'$lgt_missing_predicate'((':'(Module,Predicate))-Reference) :-
+	'$lgt_prolog_feature'(modules, supported),
+	'$lgt_entity_property_'(Entity, calls(':'(Module,Predicate), Properties)),
+	% the module may only be known at runtime; reject those cases
+	nonvar(Module),
+	% require loaded modules as the missing modules are already listed
+	current_module(Module),
+	\+ current_predicate(':'(Module,Predicate)),
+	(	'$lgt_member'(line_count(Line), Properties) ->
+		true
+	;	Line = -1
+	),
+	'$lgt_missing_reference'(Entity, Line, Reference).
 
 
 

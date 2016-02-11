@@ -123,32 +123,42 @@
 	message_tokens(intermediate_files_deleted) -->
 		['Deleted all intermediate files for the loaded Logtalk source files'-[], nl].
 
-	message_tokens(missing_entities_listed) -->
-		['Finishing listing all missing entities'-[], nl].
+	message_tokens(missing_entities_predicates_listed) -->
+		['Finishing listing all missing entities and predicates'-[], nl].
 
 	message_tokens(missing_protocols(Protocols)) -->
 		['Missing protocols:'-[], nl],
 		(	{Protocols == []} ->
 			['  (none)'-[], nl, nl]
-		;	missing_entities(Objects), [nl]
+		;	missing_entities(Protocols), [nl]
 		).
+
 	message_tokens(missing_categories(Categories)) -->
 		['Missing categories:'-[], nl],
 		(	{Categories == []} ->
 			['  (none)'-[], nl, nl]
-		;	missing_entities(Objects), [nl]
+		;	missing_entities(Categories), [nl]
 		).
+
 	message_tokens(missing_objects(Objects)) -->
 		['Missing objects:'-[], nl],
 		(	{Objects == []} ->
 			['  (none)'-[], nl, nl]
 		;	missing_entities(Objects), [nl]
 		).
+
 	message_tokens(missing_modules(Modules)) -->
 		['Missing modules:'-[], nl],
 		(	{Modules == []} ->
 			['  (none)'-[], nl, nl]
 		;	missing_entities(Modules), [nl]
+		).
+
+	message_tokens(missing_predicates(Predicates)) -->
+		['Missing public predicates:'-[], nl],
+		(	{Predicates == []} ->
+			['  (none)'-[], nl, nl]
+		;	missing_predicates(Predicates), [nl]
 		).
 
 	% startup messages
@@ -603,6 +613,23 @@
 		;	['    at line ~w'-[Line], nl]
 		),
 		missing_entities(Entities).
+
+	missing_predicates([]) -->
+		[].
+	missing_predicates([Predicate-reference(Kind,From,File,Line)| Predicates]) -->
+		{ground_term_copy(Predicate, GroundPredicate),
+		 ground_term_copy(From, GroundFrom)},
+		['  ~q'-[GroundPredicate], nl],
+		['    referenced from ~w ~q'-[Kind,GroundFrom], nl],
+		(	{File == ''} ->
+			[]
+		;	['    in file ~w'-[File], nl]
+		),
+		(	{Line =:= -1} ->
+			[]
+		;	['    at line ~w'-[Line], nl]
+		),
+		missing_predicates(Predicates).
 
 	ground_term_copy(Term, GroundTerm) :-
 		copy_term(Term, GroundTerm),

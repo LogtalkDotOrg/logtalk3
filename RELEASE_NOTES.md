@@ -28,7 +28,8 @@ Logtalk compiler and runtime
 ----------------------------
 
 * ADDED: Support for a new `logtalk_make/1` target, `missing`, to list all
-missing entities. Also available using the `{?}` shortcut.
+missing entities and public predicates. Also available using the `{?}`
+shortcut.
 
 * FIXED: Append a directory hash value to the intermediate Prolog file names
 to help avoiding file name collisions when collecting all the intermediate
