@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for BinProlog 8.x~10.x
-%  Last updated on February 10, 2016
+%  Last updated on February 11, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -700,6 +700,9 @@ write_term(Stream, Term, _) :-
 {!} :-
 	!,
 	logtalk_make(clean).
+{?} :-
+	!,
+	logtalk_make(missing).
 
 
 {File, Files} :-

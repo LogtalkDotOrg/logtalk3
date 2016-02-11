@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for GNU Prolog 1.4.2 (and later versions)
-%  Last updated on February 10, 2016
+%  Last updated on February 11, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -724,6 +724,9 @@ with_mutex(_, _) :- fail.
 {!} :-
 	!,
 	logtalk_make(clean).
+{?} :-
+	!,
+	logtalk_make(missing).
 
 
 {File, Files} :-

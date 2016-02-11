@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for JIProlog 4.1.2.8 or later versions
-%  Last updated on February 10, 2016
+%  Last updated on February 11, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -720,6 +720,9 @@ term_hash(_, _, _, _) :-
 {!} :-
 	!,
 	logtalk_make(clean).
+{?} :-
+	!,
+	logtalk_make(missing).
 
 
 {File, Files} :-

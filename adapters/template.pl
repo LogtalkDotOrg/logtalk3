@@ -619,6 +619,9 @@ term_hash(Term, Depth, Range, Hash) :-
 {!} :-
 	!,
 	logtalk_make(clean).
+{?} :-
+	!,
+	logtalk_make(missing).
 
 
 {File, Files} :-

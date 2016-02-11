@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.4,
+		version is 1.5,
 		author is 'Paulo Moura',
-		date is 2015/10/22,
+		date is 2016/02/11,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -122,6 +122,34 @@
 
 	message_tokens(intermediate_files_deleted) -->
 		['Deleted all intermediate files for the loaded Logtalk source files'-[], nl].
+
+	message_tokens(missing_entities_listed) -->
+		['Finishing listing all missing entities'-[], nl].
+
+	message_tokens(missing_protocols(Protocols)) -->
+		['Missing protocols:'-[], nl],
+		(	{Protocols == []} ->
+			['  (none)'-[], nl, nl]
+		;	missing_entities(Objects), [nl]
+		).
+	message_tokens(missing_categories(Categories)) -->
+		['Missing categories:'-[], nl],
+		(	{Categories == []} ->
+			['  (none)'-[], nl, nl]
+		;	missing_entities(Objects), [nl]
+		).
+	message_tokens(missing_objects(Objects)) -->
+		['Missing objects:'-[], nl],
+		(	{Objects == []} ->
+			['  (none)'-[], nl, nl]
+		;	missing_entities(Objects), [nl]
+		).
+	message_tokens(missing_modules(Modules)) -->
+		['Missing modules:'-[], nl],
+		(	{Modules == []} ->
+			['  (none)'-[], nl, nl]
+		;	missing_entities(Modules), [nl]
+		).
 
 	% startup messages
 
@@ -558,6 +586,15 @@
 
 	message_context(File) -->
 		['  in file ~w'-[File], nl].
+
+	missing_entities([]) -->
+		[].
+	missing_entities([Entity-reference(Kind,From)| Entities]) -->
+		{ground_term_copy(Entity, GroundEntity),
+		 ground_term_copy(From, GroundFrom)},
+		['  ~q'-[GroundEntity], nl],
+		['    referenced in ~w ~q'-[Kind,GroundFrom], nl],
+		missing_entities(Entities).
 
 	ground_term_copy(Term, GroundTerm) :-
 		copy_term(Term, GroundTerm),

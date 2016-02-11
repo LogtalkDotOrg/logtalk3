@@ -2253,7 +2253,8 @@ logtalk_make :-
 
 % logtalk_make(+atom)
 %
-% reloads changed Logtalk source files or cleans all intermediate Prolog files
+% reloads changed Logtalk source files, cleans all intermediate Prolog files,
+% and lists all missing entities
 
 logtalk_make(Target) :-
 	(	var(Target) ->
@@ -2268,6 +2269,7 @@ logtalk_make(Target) :-
 
 '$lgt_valid_logtalk_make_target'(all).
 '$lgt_valid_logtalk_make_target'(clean).
+'$lgt_valid_logtalk_make_target'(missing).
 
 
 % single file compilation failure
@@ -2299,6 +2301,20 @@ logtalk_make(Target) :-
 '$lgt_logtalk_make'(clean) :-
 	'$lgt_print_message'(comment(make), core, intermediate_files_deleted).
 
+'$lgt_logtalk_make'(missing) :-
+	findall(Protocol, '$lgt_missing_protocol'(Protocol), Protocols),
+	'$lgt_print_message'(warning(make), core, missing_protocols(Protocols)),
+	findall(Category, '$lgt_missing_category'(Category), Categories),
+	'$lgt_print_message'(warning(make), core, missing_categories(Categories)),
+	findall(Object, '$lgt_missing_object'(Object), Objects),
+	'$lgt_print_message'(warning(make), core, missing_objects(Objects)),
+	(	'$lgt_prolog_feature'(modules, supported) ->
+		findall(Module, '$lgt_missing_module'(Module), Modules),
+		'$lgt_print_message'(warning(make), core, missing_modules(Modules))
+	;	true
+	),
+	'$lgt_print_message'(comment(make), core, missing_entities_listed).
+
 
 % deal with changes to the default compilation mode
 % when no explicit compilation mode as specified
@@ -2315,6 +2331,62 @@ logtalk_make(Target) :-
 	(	'$lgt_compiler_flag'(debug, on) ->
 		true
 	;	'$lgt_compiler_flag'(optimize, on)
+	).
+
+
+% find missing entities for logtalk_make/1
+
+'$lgt_missing_protocol'(Protocol-Reference) :-
+	'$lgt_implements_protocol_'(Entity, Protocol, _),
+	\+ '$lgt_current_protocol_'(Protocol, _, _, _, _),
+	'$lgt_missing_reference'(Entity, Reference).
+'$lgt_missing_protocol'(Protocol-Reference) :-
+	'$lgt_extends_protocol_'(Entity, Protocol, _),
+	\+ '$lgt_current_protocol_'(Protocol, _, _, _, _),
+	'$lgt_missing_reference'(Entity, Reference).
+
+'$lgt_missing_category'(Category-Reference) :-
+	'$lgt_imports_category_'(Entity, Category, _),
+	\+ '$lgt_current_category_'(Category, _, _, _, _, _),
+	'$lgt_missing_reference'(Entity, Reference).
+'$lgt_missing_category'(Category-Reference) :-
+	'$lgt_extends_category_'(Entity, Category, _),
+	\+ '$lgt_current_category_'(Category, _, _, _, _, _),
+	'$lgt_missing_reference'(Entity, Reference).
+
+'$lgt_missing_object'(Object-Reference) :-
+	'$lgt_extends_object_'(Entity, Object, _),
+	\+ '$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _),
+	'$lgt_missing_reference'(Entity, Reference).
+'$lgt_missing_object'(Object-Reference) :-
+	'$lgt_instantiates_class_'(Entity, Object, _),
+	\+ '$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _),
+	'$lgt_missing_reference'(Entity, Reference).
+'$lgt_missing_object'(Object-Reference) :-
+	'$lgt_specializes_class_'(Entity, Object, _),
+	\+ '$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _),
+	'$lgt_missing_reference'(Entity, Reference).
+'$lgt_missing_object'(Object-Reference) :-
+	'$lgt_complemented_object_'(Object, Entity, _, _, _),
+	\+ '$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _),
+	'$lgt_missing_reference'(Entity, Reference).
+'$lgt_missing_object'(Object-Reference) :-
+	'$lgt_entity_property_'(Entity, calls(Object::_, _)),
+	\+ '$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _),
+	'$lgt_missing_reference'(Entity, Reference).
+
+'$lgt_missing_module'(Module-Reference) :-
+	'$lgt_entity_property_'(Entity, calls(':'(Module,_), _)),
+	\+ current_module(Module),
+	'$lgt_missing_reference'(Entity, Reference).
+
+'$lgt_missing_reference'(Entity, reference(Kind,Entity)) :-
+	(	'$lgt_current_protocol_'(Entity, _, _, _, _) ->
+		Kind = protocol
+	;	'$lgt_current_category_'(Entity, _, _, _, _, _) ->
+		Kind = category
+	;	% '$lgt_current_object_'(Entity, _, _, _, _, _, _, _, _, _, _),
+		Kind = object
 	).
 
 
@@ -2516,7 +2588,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 2, 3, rc2)).
+'$lgt_version_data'(logtalk(3, 2, 3, rc3)).
 
 
 

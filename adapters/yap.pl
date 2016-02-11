@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for YAP Prolog 6.3.4 and later versions
-%  Last updated on February 10, 2016
+%  Last updated on February 11, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -945,6 +945,9 @@ term_expansion(
 {!} :-
 	!,
 	logtalk_make(clean).
+{?} :-
+	!,
+	logtalk_make(missing).
 
 
 {File, Files} :-
