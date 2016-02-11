@@ -51,6 +51,9 @@ Allows reloading all Logtalk source files that have been modified since last loa
 <p>
 When using the <code>all</code> target, only source files loaded using the <code>logtalk_load/1-2</code> predicates are reloaded. Non-modified files will also be reloaded when there is a change to the compilation mode (i.e. when the files were loaded without explicit <code>debug/1</code> or <code>optimize/1</code> flags and the default values of these flags changed after loading; no check is made, however, for other implicit compiler flags that may have changed since loading).
 </p>
+<p>
+Depending on the back-end Prolog compiler, the shortcuts <code>{*}</code> and <code>{!}</code> may be used in alternative to, respectively, <code>logtalk_make(all)</code> and <code>logtalk_make(clean)</code> (check the adapter files for their availability).
+</p>
 
 <h4>Template and modes</h4>
 
@@ -75,7 +78,7 @@ When using the <code>all</code> target, only source files loaded using the <code
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: July 23, 2015</span>
+		<span>Last updated on: February 11, 2016</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="logtalk_make_0.html">previous</a> | <a href="../../glossary.html">glossary</a> | <a href="logtalk_library_path_2.html">next</a></span><br/>
