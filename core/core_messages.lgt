@@ -74,11 +74,13 @@
 		['[ compiling ~w'-[File]],
 		(	{current_logtalk_flag(debug, on)} ->
 			(	{current_logtalk_flag(hook, Hook)} ->
-				[' in debug mode using the hook object ~q ... ]'-[Hook], nl]
+				{ground_term_copy(Hook, GroundHook)},
+				[' in debug mode using the hook object ~q ... ]'-[GroundHook], nl]
 			;	[' in debug mode ... ]'-[], nl]
 			)
 		;	(	{current_logtalk_flag(hook, Hook)} ->
-				[' using the hook object ~q ... ]'-[Hook], nl]
+				{ground_term_copy(Hook, GroundHook)},
+				[' using the hook object ~q ... ]'-[GroundHook], nl]
 			;	[' ... ]'-[], nl]
 			)
 		).
@@ -205,7 +207,8 @@
 		 current_logtalk_flag(threads, Threads),
 		 current_logtalk_flag(encoding_directive, Encodings),
 		 current_logtalk_flag(tabling, Tabling),
-		 current_logtalk_flag(coinduction, Coinduction)},
+		 current_logtalk_flag(coinduction, Coinduction),
+		 ground_term_copy(Hook, GroundHook)},
 		[
 			'Default lint compilation flags: '-[], nl,
 			'  unknown_predicates: ~w, undefined_predicates: ~w'-[UnknownPredicates, UndefinedPredicates], nl,
@@ -217,7 +220,7 @@
 			'  context_switching_calls: ~w, events: ~w'-[ContextCalls, Events], nl,
 			'Other default compilation flags:'-[], nl,
 			'  report: ~w, scratch_directory: ~w'-[Report, ScratchDirectory], nl,
-			'  code_prefix: ~q, hook: ~w'-[Code, Hook], nl,
+			'  code_prefix: ~q, hook: ~w'-[Code, GroundHook], nl,
 			'  optimize: ~w, source_data: ~w, clean: ~w'-[Optimize, SourceData, Clean], nl,
 			'  debug: ~w, reload: ~w'-[Debug, Reload], nl,
 			'Backend Prolog compiler flags:'-[], nl,
@@ -251,7 +254,8 @@
 		['Debugging session aborted by user. Debugger still on.'-[], nl].
 
 	message_tokens(debug_handler_provider_already_exists(File, Lines, Type, Entity, Provider)) -->
-		['A definition for the debug handler predicate already exists in: ~q'-[Provider], nl],
+		{ground_term_copy(Provider, GroundProvider)},
+		['A definition for the debug handler predicate already exists in: ~q'-[GroundProvider], nl],
 		message_context(File, Lines, Type, Entity).
 
 	% compiler error and warning messages
@@ -279,22 +283,26 @@
 		error_term_tokens(Error).
 
 	message_tokens(term_expansion_error(File, Lines, Type, Entity, HookEntity, Term, Error)) -->
-		['Error found when term-expanding ~w using hook entity ~w: '-[Term, HookEntity]],
+		{ground_term_copy(HookEntity, GroundHookEntity)},
+		['Error found when term-expanding ~w using hook entity ~w: '-[Term, GroundHookEntity]],
 		error_term_tokens(Error),
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(term_expansion_error(File, Lines, HookEntity, Term, Error)) -->
-		['Error found when term-expanding ~w using hook entity ~w: '-[Term, HookEntity]],
+		{ground_term_copy(HookEntity, GroundHookEntity)},
+		['Error found when term-expanding ~w using hook entity ~w: '-[Term, GroundHookEntity]],
 		error_term_tokens(Error),
 		message_context(File, Lines).
 
 	message_tokens(goal_expansion_error(File, Lines, Type, Entity, HookEntity, Goal, Error)) -->
-		['Error found when goal-expanding ~w using hook entity ~w: '-[Goal, HookEntity]],
+		{ground_term_copy(HookEntity, GroundHookEntity)},
+		['Error found when goal-expanding ~w using hook entity ~w: '-[Goal, GroundHookEntity]],
 		error_term_tokens(Error),
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(goal_expansion_error(File, Lines, HookEntity, Goal, Error)) -->
-		['Error found when goal-expanding ~w using hook entity ~w: '-[Goal, HookEntity]],
+		{ground_term_copy(HookEntity, GroundHookEntity)},
+		['Error found when goal-expanding ~w using hook entity ~w: '-[Goal, GroundHookEntity]],
 		error_term_tokens(Error),
 		message_context(File, Lines).
 
@@ -307,7 +315,8 @@
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(reference_to_unknown_object(File, Lines, Type, Entity, Object)) -->
-		['Reference to unknown object: ~q'-[Object], nl],
+		{ground_term_copy(Object, GroundObject)},
+		['Reference to unknown object: ~q'-[GroundObject], nl],
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(reference_to_unknown_protocol(File, Lines, Type, Entity, Protocol)) -->
@@ -315,7 +324,8 @@
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(reference_to_unknown_category(File, Lines, Type, Entity, Category)) -->
-		['Reference to unknown category: ~q'-[Category], nl],
+		{ground_term_copy(Category, GroundCategory)},
+		['Reference to unknown category: ~q'-[GroundCategory], nl],
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(reference_to_unknown_module(File, Lines, Type, Entity, Module)) -->
@@ -371,8 +381,10 @@
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(complementing_category_ignored(File, Lines, Category, Object)) -->
-		['Complementing category will be ignored: ~q'-[Category], nl,
-		 'Complemented object, ~q, compiled with complementing categories support turned off'-[Object], nl],
+		{ground_term_copy(Category, GroundCategory),
+		 ground_term_copy(Object, GroundObject)},
+		['Complementing category will be ignored: ~q'-[GroundCategory], nl,
+		 'Complemented object, ~q, compiled with complementing categories support turned off'-[GroundObject], nl],
 		message_context(File, Lines).
 
 	message_tokens(prolog_dialect_goal_expansion(File, Lines, Type, Entity, Goal, ExpandedGoal)) -->
