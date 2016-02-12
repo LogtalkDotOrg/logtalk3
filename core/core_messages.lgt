@@ -124,7 +124,7 @@
 		['Deleted all intermediate files for the loaded Logtalk source files'-[], nl].
 
 	message_tokens(missing_entities_predicates_listed) -->
-		['Finishing listing all missing entities and predicates'-[], nl].
+		['Completed listing of missing entities and predicates'-[], nl].
 
 	message_tokens(missing_protocols(Protocols)) -->
 		['Missing protocols:'-[], nl],
