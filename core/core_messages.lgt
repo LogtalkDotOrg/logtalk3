@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1.5,
+		version is 1.6,
 		author is 'Paulo Moura',
-		date is 2016/02/11,
+		date is 2016/02/12,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -128,6 +128,9 @@
 	message_tokens(missing_entities_predicates_listed) -->
 		['Completed listing of missing entities and predicates'-[], nl].
 
+	message_tokens(circular_references_listed) -->
+		['Completed listing of circular references'-[], nl].
+
 	message_tokens(missing_protocols(Protocols)) -->
 		['Missing protocols:'-[], nl],
 		(	{Protocols == []} ->
@@ -161,6 +164,13 @@
 		(	{Predicates == []} ->
 			['  (none)'-[], nl, nl]
 		;	missing_predicates(Predicates), [nl]
+		).
+
+	message_tokens(circular_references(CircularReferences)) -->
+		['Circular references:'-[], nl],
+		(	{CircularReferences == []} ->
+			['  (none)'-[], nl, nl]
+		;	circular_references(CircularReferences), [nl]
 		).
 
 	% startup messages
@@ -642,6 +652,27 @@
 		;	['    at line ~w'-[Line], nl]
 		),
 		missing_predicates(Predicates).
+
+	circular_references([]) -->
+		[].
+	circular_references([CircularReference-references(FileLines)| CircularReferences]) -->
+		{ground_term_copy(CircularReference, GroundCircularReference)},
+		['  ~q'-[GroundCircularReference], nl],
+		circular_reference_file_lines(FileLines),
+		circular_references(CircularReferences).
+
+	circular_reference_file_lines([]) -->
+		[].
+	circular_reference_file_lines([File-Line| FileLines]) -->
+		(	{File == ''} ->
+			[]
+		;	['    file ~w'-[File], nl]
+		),
+		(	{Line =:= -1} ->
+			[]
+		;	['    at line ~w'-[Line], nl]
+		),
+		circular_reference_file_lines(FileLines).
 
 	ground_term_copy(Term, GroundTerm) :-
 		copy_term(Term, GroundTerm),

@@ -622,6 +622,9 @@ term_hash(Term, Depth, Range, Hash) :-
 {?} :-
 	!,
 	logtalk_make(missing).
+{@} :-
+	!,
+	logtalk_make(circular).
 
 
 {File, Files} :-

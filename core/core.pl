@@ -2270,6 +2270,7 @@ logtalk_make(Target) :-
 '$lgt_valid_logtalk_make_target'(all).
 '$lgt_valid_logtalk_make_target'(clean).
 '$lgt_valid_logtalk_make_target'(missing).
+'$lgt_valid_logtalk_make_target'(circular).
 
 
 % single file compilation failure
@@ -2316,6 +2317,11 @@ logtalk_make(Target) :-
 	findall(Predicate, '$lgt_missing_predicate'(Predicate), Predicates),
 	'$lgt_print_message'(warning(make), core, missing_predicates(Predicates)),
 	'$lgt_print_message'(comment(make), core, missing_entities_predicates_listed).
+
+'$lgt_logtalk_make'(circular) :-
+	findall(CircularReference, '$lgt_circular_reference'(CircularReference), CircularReferences),
+	'$lgt_print_message'(warning(make), core, circular_references(CircularReferences)),
+	'$lgt_print_message'(comment(make), core, circular_references_listed).
 
 
 % deal with changes to the default compilation mode
@@ -2400,27 +2406,6 @@ logtalk_make(Target) :-
 	'$lgt_missing_reference'(Entity, Line, Reference).
 
 
-'$lgt_missing_reference'(Entity, Line, reference(Kind,Entity,Path,StartLine)) :-
-	(	'$lgt_current_protocol_'(Entity, _, _, _, _) ->
-		Kind = protocol
-	;	'$lgt_current_category_'(Entity, _, _, _, _, _) ->
-		Kind = category
-	;	'$lgt_current_object_'(Entity, _, _, _, _, _, _, _, _, _, _) ->
-		Kind = object
-	;	Kind = module
-	),
-	(	'$lgt_entity_property_'(Entity, file_lines(File,Directory,EntityLine,_)) ->
-		atom_concat(Directory, File, Path)
-	;	Path = ''
-	),
-	(	Path == '' ->
-		StartLine = -1
-	;	var(Line) ->
-		StartLine = EntityLine
-	;	StartLine = Line
-	).
-
-
 % find missing predicates for logtalk_make/1
 
 '$lgt_missing_predicate'((Object::Predicate)-Reference) :-
@@ -2488,6 +2473,94 @@ logtalk_make(Target) :-
 	;	Line = -1
 	),
 	'$lgt_missing_reference'(Entity, Line, Reference).
+
+
+% construct reference term for missing entities and predicates
+
+'$lgt_missing_reference'(Entity, Line, reference(Kind,Entity,Path,StartLine)) :-
+	(	'$lgt_current_protocol_'(Entity, _, _, _, _) ->
+		Kind = protocol
+	;	'$lgt_current_category_'(Entity, _, _, _, _, _) ->
+		Kind = category
+	;	'$lgt_current_object_'(Entity, _, _, _, _, _, _, _, _, _, _) ->
+		Kind = object
+	;	Kind = module
+	),
+	(	'$lgt_entity_property_'(Entity, file_lines(File,Directory,EntityLine,_)) ->
+		atom_concat(Directory, File, Path)
+	;	Path = ''
+	),
+	(	Path == '' ->
+		StartLine = -1
+	;	var(Line) ->
+		StartLine = EntityLine
+	;	StartLine = Line
+	).
+
+
+% find circular references for logtalk_make/1
+
+'$lgt_circular_reference'((Object1-Object2)-references([Path1-Line1,Path2-Line2])) :-
+	'$lgt_current_object_'(Object1, _, _, _, _, _, _, _, _, _, _),
+	'$lgt_current_object_'(Object2, _, _, _, _, _, _, _, _, _, _),
+	Object1 \== Object2,
+	functor(Object1, Functor1, Arity1),
+	functor(Object2, Functor2, Arity2),
+	Functor1-Arity1 @< Functor2-Arity2,
+	(	'$lgt_entity_property_'(Object1, calls(Entity2::_, _)),
+		nonvar(Entity2), Entity2 = Object2,
+		'$lgt_entity_property_'(Object2, calls(Entity1::_, _)),
+		nonvar(Entity1), Entity1 = Object1 ->
+		true
+	;	fail
+	),
+	(	'$lgt_entity_property_'(Object1, file_lines(File1,Directory1,Line1,_)) ->
+		atom_concat(Directory1, File1, Path1)
+	;	Path1 = '',
+		Line1 = -1
+	),
+	(	'$lgt_entity_property_'(Object2, file_lines(File2,Directory2,Line2,_)) ->
+		atom_concat(Directory2, File2, Path2)
+	;	Path2 = '',
+		Line2 = -1
+	).
+
+'$lgt_circular_reference'((Object1-Object2-Object3)-references([Path1-Line1,Path2-Line2,Path3-Line3])) :-
+	'$lgt_current_object_'(Object1, _, _, _, _, _, _, _, _, _, _),
+	'$lgt_current_object_'(Object2, _, _, _, _, _, _, _, _, _, _),
+	Object1 \== Object2,
+	'$lgt_current_object_'(Object3, _, _, _, _, _, _, _, _, _, _),
+	Object1 \== Object3,
+	Object2 \== Object3,
+	functor(Object1, Functor1, Arity1),
+	functor(Object2, Functor2, Arity2),
+	Functor1-Arity1 @< Functor2-Arity2,
+	functor(Object3, Functor3, Arity3),
+	Functor2-Arity2 @< Functor3-Arity3,
+	(	'$lgt_entity_property_'(Object1, calls(Entity2::_, _)),
+		nonvar(Entity2), Entity2 = Object2,
+		'$lgt_entity_property_'(Object2, calls(Entity3::_, _)),
+		nonvar(Entity3), Entity3 = Object3,
+		'$lgt_entity_property_'(Object3, calls(Entity1::_, _)),
+		nonvar(Entity1), Entity1 = Object1 ->
+		true
+	;	fail
+	),
+	(	'$lgt_entity_property_'(Object1, file_lines(File1,Directory1,Line1,_)) ->
+		atom_concat(Directory1, File1, Path1)
+	;	Path1 = '',
+		Line1 = -1
+	),
+	(	'$lgt_entity_property_'(Object2, file_lines(File2,Directory2,Line2,_)) ->
+		atom_concat(Directory2, File2, Path2)
+	;	Path2 = '',
+		Line2 = -1
+	),
+	(	'$lgt_entity_property_'(Object3, file_lines(File3,Directory3,Line3,_)) ->
+		atom_concat(Directory3, File3, Path3)
+	;	Path3 = '',
+		Line3 = -1
+	).
 
 
 
@@ -2688,7 +2761,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 2, 3, rc3)).
+'$lgt_version_data'(logtalk(3, 2, 3, rc4)).
 
 
 

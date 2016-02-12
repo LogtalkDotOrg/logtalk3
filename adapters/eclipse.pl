@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on February 11, 2016
+%  Last updated on February 12, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -813,6 +813,9 @@ forall(Generate, Test) :-
 {?} :-
 	!,
 	logtalk_make(missing).
+{@} :-
+	!,
+	logtalk_make(circular).
 
 
 {File, Files} :-
