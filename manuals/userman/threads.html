@@ -219,7 +219,7 @@ will most likely result in a mixed up output. By declaring the <code>odd_numbers
 <p>
 one goal will only start after the other one finished:
 </p>
-<pre>| ?- threaded_ignore(obj::odd_numbers(1,100)), threaded_ignore(obj::even_numbers(1,100)).
+<pre>| ?- threaded_ignore(obj::odd_numbers(1,99)), threaded_ignore(obj::even_numbers(1,99)).
 
 1 3 5 7 9 11 ...
 ...
@@ -236,8 +236,7 @@ As each Logtalk entity is independently compiled, this directive must be include
 <p>
 Synchronized predicates may be used as wrappers to messages sent to objects that are not multi-threading aware. For example, assume a <code>random</code> object defining a <code>random/1</code> predicate that generates random numbers, using side-effects on its implementation (e.g. for storing the generator seed). We can specify and define e.g. a <code>sync_random/1</code> predicate as follows:
 </p>
-<pre>
-:- synchronized(sync_random/1).
+<pre>:- synchronized(sync_random/1).
 
 sync_random(Random) :-
     random::random(Random).
@@ -268,7 +267,7 @@ The performance of multi-threading applications is highly dependent on the back-
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: October 9, 2014</span>
+		<span>Last updated on: Octobers 9, 2014</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="events.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="errors.html">next</a></span><br/>
