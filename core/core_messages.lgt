@@ -155,7 +155,7 @@
 		).
 
 	message_tokens(missing_predicates(Predicates)) -->
-		['Missing public predicates:'-[], nl],
+		['Missing predicates:'-[], nl],
 		(	{Predicates == []} ->
 			['  (none)'-[], nl, nl]
 		;	missing_predicates(Predicates), [nl]

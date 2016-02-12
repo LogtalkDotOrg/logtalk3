@@ -2436,6 +2436,21 @@ logtalk_make(Target) :-
 	),
 	'$lgt_missing_reference'(Entity, Line, Reference).
 
+'$lgt_missing_predicate'((Functor/Arity)-Reference) :-
+	'$lgt_entity_property_'(Entity, calls(Functor/Arity, Properties)),
+	(	'$lgt_current_object_'(Entity, _, Dcl, Def, _, _, _, DDcl, DDef, _, Flags) ->
+		\+ '$lgt_object_property_declares'(Entity, Dcl, DDcl, Flags, Functor/Arity, _),
+		\+ '$lgt_object_property_defines'(Entity, Def, DDef, Functor/Arity, _)
+	;	'$lgt_current_category_'(Entity, _, Dcl, Def, _, _),
+		\+ '$lgt_category_property_declares'(Entity, Dcl, Functor/Arity, _),
+		\+ '$lgt_category_property_defines'(Entity, Def, Functor/Arity, _)
+	),
+	(	'$lgt_member'(line_count(Line), Properties) ->
+		true
+	;	Line = -1
+	),
+	'$lgt_missing_reference'(Entity, Line, Reference).
+
 '$lgt_missing_predicate'((':'(Module,Predicate))-Reference) :-
 	'$lgt_prolog_feature'(modules, supported),
 	'$lgt_entity_property_'(Entity, calls(':'(Module,Predicate), Properties)),
