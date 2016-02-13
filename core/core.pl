@@ -2507,23 +2507,15 @@ logtalk_make(Target) :-
 	functor(Object1, Functor1, Arity1),
 	functor(Object2, Functor2, Arity2),
 	Functor1-Arity1 @< Functor2-Arity2,
-	(	'$lgt_entity_property_'(Object1, calls(Entity2::_, _)),
+	(	'$lgt_entity_property_'(Object1, calls(Entity2::_, Properties1)),
 		nonvar(Entity2), Entity2 = Object2,
-		'$lgt_entity_property_'(Object2, calls(Entity1::_, _)),
+		'$lgt_entity_property_'(Object2, calls(Entity1::_, Properties2)),
 		nonvar(Entity1), Entity1 = Object1 ->
 		true
 	;	fail
 	),
-	(	'$lgt_entity_property_'(Object1, file_lines(File1,Directory1,Line1,_)) ->
-		atom_concat(Directory1, File1, Path1)
-	;	Path1 = '',
-		Line1 = -1
-	),
-	(	'$lgt_entity_property_'(Object2, file_lines(File2,Directory2,Line2,_)) ->
-		atom_concat(Directory2, File2, Path2)
-	;	Path2 = '',
-		Line2 = -1
-	).
+	'$lgt_circular_reference_context'(Object1, Properties1, Path1, Line1),
+	'$lgt_circular_reference_context'(Object2, Properties2, Path2, Line2).
 
 '$lgt_circular_reference'((Object1-Object2-Object3)-references([Path1-Line1,Path2-Line2,Path3-Line3])) :-
 	'$lgt_current_object_'(Object1, _, _, _, _, _, _, _, _, _, _),
@@ -2537,29 +2529,28 @@ logtalk_make(Target) :-
 	Functor1-Arity1 @< Functor2-Arity2,
 	functor(Object3, Functor3, Arity3),
 	Functor2-Arity2 @< Functor3-Arity3,
-	(	'$lgt_entity_property_'(Object1, calls(Entity2::_, _)),
+	(	'$lgt_entity_property_'(Object1, calls(Entity2::_, Properties1)),
 		nonvar(Entity2), Entity2 = Object2,
-		'$lgt_entity_property_'(Object2, calls(Entity3::_, _)),
+		'$lgt_entity_property_'(Object2, calls(Entity3::_, Properties2)),
 		nonvar(Entity3), Entity3 = Object3,
-		'$lgt_entity_property_'(Object3, calls(Entity1::_, _)),
+		'$lgt_entity_property_'(Object3, calls(Entity1::_, Properties3)),
 		nonvar(Entity1), Entity1 = Object1 ->
 		true
 	;	fail
 	),
-	(	'$lgt_entity_property_'(Object1, file_lines(File1,Directory1,Line1,_)) ->
-		atom_concat(Directory1, File1, Path1)
-	;	Path1 = '',
-		Line1 = -1
+	'$lgt_circular_reference_context'(Object1, Properties1, Path1, Line1),
+	'$lgt_circular_reference_context'(Object2, Properties2, Path2, Line2),
+	'$lgt_circular_reference_context'(Object3, Properties3, Path3, Line3).
+
+
+'$lgt_circular_reference_context'(Entity, Properties, Path, Line) :-
+	(	'$lgt_entity_property_'(Entity, file_lines(File,Directory,_,_)) ->
+		atom_concat(Directory, File, Path)
+	;	Path = ''
 	),
-	(	'$lgt_entity_property_'(Object2, file_lines(File2,Directory2,Line2,_)) ->
-		atom_concat(Directory2, File2, Path2)
-	;	Path2 = '',
-		Line2 = -1
-	),
-	(	'$lgt_entity_property_'(Object3, file_lines(File3,Directory3,Line3,_)) ->
-		atom_concat(Directory3, File3, Path3)
-	;	Path3 = '',
-		Line3 = -1
+	(	'$lgt_member'(line_count(Line), Properties) ->
+		true
+	;	Line = -1
 	).
 
 

@@ -626,14 +626,7 @@
 		 ground_term_copy(From, GroundFrom)},
 		['  ~q'-[GroundEntity], nl],
 		['    referenced from ~w ~q'-[Kind,GroundFrom], nl],
-		(	{File == ''} ->
-			[]
-		;	['    in file ~w'-[File], nl]
-		),
-		(	{Line =:= -1} ->
-			[]
-		;	['    at line ~w'-[Line], nl]
-		),
+		make_warning_context(File, Line),
 		missing_entities(Entities).
 
 	missing_predicates([]) -->
@@ -643,14 +636,7 @@
 		 ground_term_copy(From, GroundFrom)},
 		['  ~q'-[GroundPredicate], nl],
 		['    referenced from ~w ~q'-[Kind,GroundFrom], nl],
-		(	{File == ''} ->
-			[]
-		;	['    in file ~w'-[File], nl]
-		),
-		(	{Line =:= -1} ->
-			[]
-		;	['    at line ~w'-[Line], nl]
-		),
+		make_warning_context(File, Line),
 		missing_predicates(Predicates).
 
 	circular_references([]) -->
@@ -664,15 +650,14 @@
 	circular_reference_file_lines([]) -->
 		[].
 	circular_reference_file_lines([File-Line| FileLines]) -->
+		make_warning_context(File, Line),
+		circular_reference_file_lines(FileLines).
+
+	make_warning_context(File, Line) -->
 		(	{File == ''} ->
 			[]
-		;	['    file ~w'-[File], nl]
-		),
-		(	{Line =:= -1} ->
-			[]
-		;	['    at line ~w'-[Line], nl]
-		),
-		circular_reference_file_lines(FileLines).
+		;	['    in file ~w at line ~w'-[File,Line], nl]
+		).
 
 	ground_term_copy(Term, GroundTerm) :-
 		copy_term(Term, GroundTerm),
