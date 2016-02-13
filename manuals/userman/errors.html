@@ -49,7 +49,7 @@ All error handling is done in Logtalk by using the ISO defined <code>catch/3</co
 <p>
 In this exception term, <code>Goal</code> is the goal that triggered the error <code>Error</code> and <code>Entity</code> is the entity in whose context <code>Goal</code> is called. For example:
 </p>
-<pre>error(permission_error(modify,private_predicate,p(_)), logtalk(foo::abolish(p/1),user))</pre>
+<pre>error(permission_error(modify,private_predicate,p), logtalk(foo::abolish(p/0),user))</pre>
 <p>
 Note, however, that <code>Goal</code> and <code>Entity</code> can be variables when the corresponding information is not available (usually due to compiler optimizations that throw away the necessary error context information).
 </p>

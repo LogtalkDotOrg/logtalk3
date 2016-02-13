@@ -343,14 +343,14 @@ The <a title="Consult reference manual" href="../refman/directives/include_1.htm
 
 	:- public(city/4).
 
-	:- include(includes(databases('cities.pl'))).
+	:- include(dbs('cities.pl')).
 
 :- end_object.
 </pre>
 <p>
 The <code>include/1</code> directive can also be used when creating an object dynamically. For example:
 </p>
-<pre>| ?- create_object(cities, [], [public(city/4), include(databases('cities.pl'))], []).</pre>
+<pre>| ?- create_object(cities, [], [public(city/4), include(dbs('cities.pl'))], []).</pre>
 
 <h2 id="objects_relationships">Object relationships</h2>
 

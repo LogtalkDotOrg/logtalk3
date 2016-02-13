@@ -668,7 +668,7 @@ Here is a short example including calls to these three object execution context 
 
     test :-
         this(This), 
-        write('Executing  a predicate definition contained in '), writeq(This), nl,
+        write('Calling a predicate definition contained in '), writeq(This), nl,
         self(Self),
         write('to answer a message received by '), writeq(Self), nl,
         sender(Sender),
@@ -686,7 +686,7 @@ After compiling and loading these two objects, we can try the following goal:
 </p>
 <pre>| ?- descendant::test.
 
-Executing  a predicate definition contained in test
+Calling a predicate definition contained in test
 to answer a message received by descendant
 that was sent by user
 yes</pre>
@@ -709,7 +709,7 @@ For parametric objects and categories, the method <a title="Consult reference ma
 
     test :-
         parameter(1, Color), 
-        write('Color parameter value  is '), writeq(Color), nl.
+        write('Color parameter value is '), writeq(Color), nl.
 
 :- end_object.</pre>
 <p>
