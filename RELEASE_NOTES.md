@@ -57,6 +57,13 @@ required when using this backend compiler.
 * FIXED: When using SICStus Prolog, SWI-Prolog, or YAP as backend compilers,
 don't assume that Logtalk is loaded into the `user` pseudo-module.
 
+* ADDED: Support for library notation when using the SWI-Prolog hook predicate
+`prolog_edit:locate/3`.
+
+* IMPROVED: Compute the set of defined Logtalk and Prolog extensions when using
+the SWI-Prolog hook predicate `user:prolog_load_file/2` instead of relying in
+fixed sets with just the default extensions.
+
 Documentation
 -------------
 

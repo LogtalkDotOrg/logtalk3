@@ -5,7 +5,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on February 12, 2016
+%  Last updated on February 14, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -25,23 +25,33 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- multifile(user:prolog_load_file/2).
 :- dynamic(user:prolog_load_file/2).
 
 user:prolog_load_file(_:Spec, Flags) :-
-	\+ '$lgt_member'(must_be_module(true), Flags),	% exclude calls to use_module/1-2
-	\+ '$lgt_member'(if(not_loaded), Flags),			% exclude calls to ensure_loaded/1
-	\+ absolute_file_name(Spec, [extensions([pl]), access(read), file_errors(fail)], _),
+	% exclude calls to use_module/1-2
+	\+ '$lgt_member'(must_be_module(true), Flags),
+	% exclude calls to ensure_loaded/1
+	\+ '$lgt_member'(if(not_loaded), Flags),
+	findall(PrologExtension, user:prolog_file_type(PrologExtension,prolog), PrologExtensions),
+	\+ absolute_file_name(Spec, [extensions(PrologExtensions), access(read), file_errors(fail)], _),
+	findall(
+		LogtalkExtension,
+		(	'$lgt_file_extension'(logtalk, DotLogtalkExtension),
+			atom_concat('.', LogtalkExtension, DotLogtalkExtension)
+		),
+		LogtalkExtensions
+	),
 	(	atom(Spec) ->
 		expand_file_name(Spec, [SpecExp]),
-		absolute_file_name(SpecExp, [extensions([lgt,logtalk]), access(read), file_errors(fail)], Path)
+		absolute_file_name(SpecExp, [extensions(LogtalkExtensions), access(read), file_errors(fail)], Path)
 	;	Spec =.. [Library, File],
-		atom(File),										% no paths instead of a file name for Logtalk
+		% no paths instead of a file name for Logtalk
+		atom(File),
 		'$lgt_expand_library_path'(Library, LibPath),
 		atom_concat(LibPath, File, Spec2),
 		expand_file_name(Spec2, [SpecExp]),
-		absolute_file_name(SpecExp, [extensions([lgt,logtalk]), access(read), file_errors(fail)], Path)
+		absolute_file_name(SpecExp, [extensions(LogtalkExtensions), access(read), file_errors(fail)], Path)
 	),
 	'$lgt_swi_filter_compiler_flags'(Flags, Flags2),
 	logtalk_load(Path, Flags2).
@@ -61,36 +71,25 @@ user:prolog_load_file(_:Spec, Flags) :-
 
 :- multifile(prolog_edit:locate/3).
 
-prolog_edit:locate(Name, source_file(Source), [file(Source)]) :-
-	atom(Name),
-	file_name_extension(Name, 'pl', PrologFile),
-	source_file(Path),
-	file_base_name(Path, PrologFile),
-	source_file_property(Path, derived_from(Source,_)),
-	file_base_name(Source, LogtalkFile),
-	(	file_name_extension(Name, 'lgt', LogtalkFile)
-	;	file_name_extension(Name, 'logtalk', LogtalkFile)
-	),
-	!.
-
 prolog_edit:locate(Spec, source_file(Source), [file(Source)]) :-
 	compound(Spec),
 	Spec =.. [Library, Name],
 	atom(Name),
-	file_name_extension(Name, 'pl', PrologFile),
-	source_file(Path),
-	file_base_name(Path, PrologFile),
-	source_file_property(Path, derived_from(Source,_)),
-	file_base_name(Source, LogtalkFile),
-	(	file_name_extension(Name, 'lgt', LogtalkFile)
-	;	file_name_extension(Name, 'logtalk', LogtalkFile)
-	),
 	'$lgt_expand_library_path'(Library, LibraryPath),
-	atom_concat(LibraryPath, LogtalkFile, Source),
+	atom_concat(LibraryPath, Name, LogtalkPath),
+	(	file_name_extension(_, Extension, LogtalkPath),
+		atom_concat('.', Extension, DotExtension),
+		'$lgt_file_extension'(logtalk, DotExtension) ->
+		Source = LogtalkPath
+	;	'$lgt_file_extension'(logtalk, DotExtension),
+		atom_concat(LogtalkPath, DotExtension, Source)
+	),
+	source_file_property(_, derived_from(Source,_)),
 	!.
 
 
-:- multifile(user:prolog_predicate_name/2).	% for e.g. the call stack in the SWI-Prolog graphical tracer
+% for e.g. the call stack in the SWI-Prolog graphical tracer
+:- multifile(user:prolog_predicate_name/2).
 
 user:prolog_predicate_name(user:'$lgt_send_to_obj_'(_, _, _), '::/2 (event-aware)') :- !.
 user:prolog_predicate_name(user:'$lgt_send_to_obj_ne_'(_, _, _), '::/2 (event transparent)') :- !.
@@ -355,7 +354,7 @@ user:portray(c(This, Entity, Rest)) :-
 	!,
 	length(ExtraArgs, N),
 	Arity is N + 1,
-	catch(arg(1, CallN, Closure), Error, (writeln('ERROR 2'-Error), throw(Error))),
+	arg(1, CallN, Closure),
 	'$lgt_swi_call_n_args'(ExtraArgs, 2, CallN).
 '$lgt_swi_unify_clause_body'(Goal, _, '$lgt_metacall'(Goal, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(Goal, _, '$lgt_quantified_metacall'(Goal, _, _), TermPos, TermPos) :- !.
@@ -561,7 +560,7 @@ user:portray(c(This, Entity, Rest)) :-
 
 '$lgt_swi_call_n_args'([], _, _).
 '$lgt_swi_call_n_args'([Arg| Args], N, CallN) :-
-	catch(arg(N, CallN, Arg), Error, (writeln('ERROR 1'-Error), throw(Error))),
+	arg(N, CallN, Arg),
 	N2 is N + 1,
 	'$lgt_swi_call_n_args'(Args, N2, CallN).
 
