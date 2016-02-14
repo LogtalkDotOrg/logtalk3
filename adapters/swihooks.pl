@@ -91,98 +91,15 @@ prolog_edit:locate(Spec, source_file(Source), [file(Source)]) :-
 % for e.g. the call stack in the SWI-Prolog graphical tracer
 :- multifile(user:prolog_predicate_name/2).
 
-user:prolog_predicate_name(user:'$lgt_send_to_obj_'(_, _, _), '::/2 (event-aware)') :- !.
-user:prolog_predicate_name(user:'$lgt_send_to_obj_ne_'(_, _, _), '::/2 (event transparent)') :- !.
-user:prolog_predicate_name(user:'$lgt_send_to_self_'(_, _, _), '::/1') :- !.
-user:prolog_predicate_name(user:'$lgt_obj_super_call_'(_, _, _), '^^/2 (from obj; same pred)') :- !.
-user:prolog_predicate_name(user:'$lgt_ctg_super_call_'(_, _, _), '^^/2 (from ctg; same pred)') :- !.
-user:prolog_predicate_name(user:'$lgt_call_in_this'(_, _), 'call/1') :- !.
-
-user:prolog_predicate_name(user:'$lgt_send_to_obj_rt'(_, _, _, _), '::/2 (runtime)') :- !.
-user:prolog_predicate_name(user:'$lgt_send_to_obj'(_, _, _), '::/2 (event transparent)') :- !.
-user:prolog_predicate_name(user:'$lgt_send_to_obj_ne'(_, _, _), '::/2 (event transparent)') :- !.
-user:prolog_predicate_name(user:'$lgt_send_to_self'(_, _, _), '::/1') :- !.
-user:prolog_predicate_name(user:'$lgt_obj_super_call'(_, _, _), '^^/2 (from obj; same pred)') :- !.
-user:prolog_predicate_name(user:'$lgt_ctg_super_call'(_, _, _), '^^/2 (from ctg; same pred)') :- !.
-
-user:prolog_predicate_name(user:'$lgt_metacall'(_, _, _), 'call/N') :- !.
-user:prolog_predicate_name(user:'$lgt_metacall'(_, _), 'call/1') :- !.
-user:prolog_predicate_name(user:'$lgt_quantified_metacall'(_, _, _), 'call/1') :- !.
-user:prolog_predicate_name(user:'$lgt_metacall_local'(_, _), 'call/1') :- !.
-user:prolog_predicate_name(user:'$lgt_metacall_sender'(_, _, _, _), 'call/1') :- !.
-
-user:prolog_predicate_name(user:'$lgt_bagof'(_, _, _, _, _), 'bagof/3') :- !.
-user:prolog_predicate_name(user:'$lgt_setof'(_, _, _, _, _), 'setof/3') :- !.
-
-user:prolog_predicate_name(user:'$lgt_expand_term_local'(_, _, _, _), 'expand_term/2') :- !.
-user:prolog_predicate_name(user:'$lgt_expand_term_message'(_, _, _, _, _), 'expand_term/2') :- !.
-user:prolog_predicate_name(user:'$lgt_expand_goal_local'(_, _, _, _), 'expand_goal/2') :- !.
-user:prolog_predicate_name(user:'$lgt_expand_goal_message'(_, _, _, _, _), 'expand_goal/2') :- !.
-
-user:prolog_predicate_name(user:'$lgt_phrase'(_, _, _), 'phrase/2') :- !.
-user:prolog_predicate_name(user:'$lgt_phrase'(_, _, _, _), 'phrase/3') :- !.
-
-user:prolog_predicate_name(user:'$lgt_compiler_flag'(_, _), 'current_logtalk_flag/2') :- !.
-user:prolog_predicate_name(user:'$lgt_set_compiler_flag'(_, _), 'set_logtalk_flag/2') :- !.
-
-user:prolog_predicate_name(user:'$lgt_current_op'(_, _, _, _, _, _), 'current_op/3') :- !.
-user:prolog_predicate_name(user:'$lgt_current_predicate'(_, _, _, _), 'current_predicate/1') :- !.
-user:prolog_predicate_name(user:'$lgt_predicate_property'(_, _, _, _, _), 'predicate_property/2') :- !.
-
-user:prolog_predicate_name(user:'$lgt_abolish_checked'(_, _, _, _), 'abolish/1') :- !.
-user:prolog_predicate_name(user:'$lgt_asserta_fact_checked'(_, _, _, _, _), 'asserta/1') :- !.
-user:prolog_predicate_name(user:'$lgt_asserta_rule_checked'(_, _, _, _, _), 'asserta/1') :- !.
-user:prolog_predicate_name(user:'$lgt_assertz_fact_checked'(_, _, _, _, _), 'assertz/1') :- !.
-user:prolog_predicate_name(user:'$lgt_assertz_rule_checked'(_, _, _, _, _), 'assertz/1') :- !.
-user:prolog_predicate_name(user:'$lgt_clause_checked'(_, _, _, _, _), 'clause/2') :- !.
-user:prolog_predicate_name(user:'$lgt_retract_fact_checked'(_, _, _, _), 'retract/1') :- !.
-user:prolog_predicate_name(user:'$lgt_retract_rule_checked'(_, _, _, _), 'retract/1') :- !.
-user:prolog_predicate_name(user:'$lgt_retractall_checked'(_, _, _, _), 'retractall/1') :- !.
-
-user:prolog_predicate_name(user:'$lgt_iso_read_term'(_, _, _, _), 'read_term/3') :- !.
-user:prolog_predicate_name(user:'$lgt_iso_read_term'(_, _, _), 'read_term/2') :- !.
-user:prolog_predicate_name(user:'$lgt_iso_read'(_, _, _), 'read/2') :- !.
-user:prolog_predicate_name(user:'$lgt_iso_read'(_, _), 'read/1') :- !.
-
-user:prolog_predicate_name(user:'$lgt_iso_write_term'(_, _, _, _), 'write_term/3') :- !.
-user:prolog_predicate_name(user:'$lgt_iso_write_term'(_, _, _), 'write_term/2') :- !.
-user:prolog_predicate_name(user:'$lgt_iso_write'(_, _, _), 'write/2') :- !.
-user:prolog_predicate_name(user:'$lgt_iso_write'(_, _), 'write/1') :- !.
-user:prolog_predicate_name(user:'$lgt_iso_writeq'(_, _, _), 'writeq/2') :- !.
-user:prolog_predicate_name(user:'$lgt_iso_writeq'(_, _), 'writeq/1') :- !.
-
-user:prolog_predicate_name(user:'$lgt_category_parameter'(_, _, _, _), 'parameter/2') :- !.
-
-user:prolog_predicate_name(user:'$lgt_threaded_or'(_, _, _), 'threaded/1') :- !.
-user:prolog_predicate_name(user:'$lgt_threaded_and'(_, _, _), 'threaded/1') :- !.
-user:prolog_predicate_name(user:'$lgt_threaded_ignore'(_), 'threaded_ignore/1') :- !.
-user:prolog_predicate_name(user:'$lgt_threaded_call'(_, _, _), 'threaded_call/1') :- !.
-user:prolog_predicate_name(user:'$lgt_threaded_call'(_, _, _, _), 'threaded_call/1') :- !.
-user:prolog_predicate_name(user:'$lgt_threaded_once'(_, _, _), 'threaded_once/1') :- !.
-user:prolog_predicate_name(user:'$lgt_threaded_once'(_, _, _, _), 'threaded_once/1') :- !.
-user:prolog_predicate_name(user:'$lgt_threaded_call_tagged'(_, _, _, _), 'threaded_call/2') :- !.
-user:prolog_predicate_name(user:'$lgt_threaded_call_tagged'(_, _, _, _, _), 'threaded_call/2') :- !.
-user:prolog_predicate_name(user:'$lgt_threaded_once_tagged'(_, _, _, _), 'threaded_once/2') :- !.
-user:prolog_predicate_name(user:'$lgt_threaded_once_tagged'(_, _, _, _, _), 'threaded_once/2') :- !.
-user:prolog_predicate_name(user:'$lgt_threaded_peek'(_, _, _, _), 'threaded_peek/1') :- !.
-user:prolog_predicate_name(user:'$lgt_threaded_peek'(_, _, _, _, _), 'threaded_peek/1') :- !.
-user:prolog_predicate_name(user:'$lgt_threaded_peek_tagged'(_, _, _, _, _), 'threaded_peek/2') :- !.
-user:prolog_predicate_name(user:'$lgt_threaded_peek_tagged'(_, _, _, _, _, _), 'threaded_peek/2') :- !.
-user:prolog_predicate_name(user:'$lgt_threaded_exit'(_, _, _, _), 'threaded_exit/1') :- !.
-user:prolog_predicate_name(user:'$lgt_threaded_exit'(_, _, _, _, _), 'threaded_exit/1') :- !.
-user:prolog_predicate_name(user:'$lgt_threaded_exit_tagged'(_, _, _, _, _), 'threaded_exit/2') :- !.
-user:prolog_predicate_name(user:'$lgt_threaded_exit_tagged'(_, _, _, _, _, _), 'threaded_exit/2') :- !.
-user:prolog_predicate_name(user:'$lgt_threaded_wait_synch_ctg'(_, _, _), 'threaded_wait/1') :- !.
-user:prolog_predicate_name(user:'$lgt_threaded_wait_synch'(_, _, _), 'threaded_wait/1') :- !.
-user:prolog_predicate_name(user:'$lgt_threaded_wait_ctg'(_, _), 'threaded_wait/1') :- !.
-user:prolog_predicate_name(user:'$lgt_threaded_wait'(_, _), 'threaded_wait/1') :- !.
-user:prolog_predicate_name(user:'$lgt_threaded_notify_ctg'(_, _), 'threaded_notify/1') :- !.
-user:prolog_predicate_name(user:'$lgt_threaded_notify'(_, _), 'threaded_notify/1') :- !.
+user:prolog_predicate_name(QualifiedInternalName, UserName) :-
+	'$lgt_user_module_qualification'(InternalName, QualifiedInternalName),
+	'$lgt_swi_prolog_predicate_name'(InternalName, UserName).
 
 user:prolog_predicate_name(Goal, Label) :-
 	Goal \= _::_,
+	'$lgt_user_module_qualification'(_, Module:_),
 	(	Goal = Module:THead ->
-		Module == user
+		true
 	;	Goal = THead
 	),
 	functor(THead, TFunctor, TArity),
@@ -193,16 +110,105 @@ user:prolog_predicate_name(Goal, Label) :-
 		atomic_list_concat([EFunctor, '/', EArity, '::', Functor, '/', Arity], Label)
 	).
 
+'$lgt_swi_prolog_predicate_name'('$lgt_send_to_obj_'(_, _, _), '::/2 (event-aware)') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_send_to_obj_ne_'(_, _, _), '::/2 (event transparent)') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_send_to_self_'(_, _, _), '::/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_obj_super_call_'(_, _, _), '^^/2 (from obj; same pred)') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_ctg_super_call_'(_, _, _), '^^/2 (from ctg; same pred)') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_call_in_this'(_, _), 'call/1') :- !.
+
+'$lgt_swi_prolog_predicate_name'('$lgt_send_to_obj_rt'(_, _, _, _), '::/2 (runtime)') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_send_to_obj'(_, _, _), '::/2 (event transparent)') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_send_to_obj_ne'(_, _, _), '::/2 (event transparent)') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_send_to_self'(_, _, _), '::/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_obj_super_call'(_, _, _), '^^/2 (from obj; same pred)') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_ctg_super_call'(_, _, _), '^^/2 (from ctg; same pred)') :- !.
+
+'$lgt_swi_prolog_predicate_name'('$lgt_metacall'(_, _, _), 'call/N') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_metacall'(_, _), 'call/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_quantified_metacall'(_, _, _), 'call/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_metacall_local'(_, _), 'call/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_metacall_sender'(_, _, _, _), 'call/1') :- !.
+
+'$lgt_swi_prolog_predicate_name'('$lgt_bagof'(_, _, _, _, _), 'bagof/3') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_setof'(_, _, _, _, _), 'setof/3') :- !.
+
+'$lgt_swi_prolog_predicate_name'('$lgt_expand_term_local'(_, _, _, _), 'expand_term/2') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_expand_term_message'(_, _, _, _, _), 'expand_term/2') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_expand_goal_local'(_, _, _, _), 'expand_goal/2') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_expand_goal_message'(_, _, _, _, _), 'expand_goal/2') :- !.
+
+'$lgt_swi_prolog_predicate_name'('$lgt_phrase'(_, _, _), 'phrase/2') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_phrase'(_, _, _, _), 'phrase/3') :- !.
+
+'$lgt_swi_prolog_predicate_name'('$lgt_compiler_flag'(_, _), 'current_logtalk_flag/2') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_set_compiler_flag'(_, _), 'set_logtalk_flag/2') :- !.
+
+'$lgt_swi_prolog_predicate_name'('$lgt_current_op'(_, _, _, _, _, _), 'current_op/3') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_current_predicate'(_, _, _, _), 'current_predicate/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_predicate_property'(_, _, _, _, _), 'predicate_property/2') :- !.
+
+'$lgt_swi_prolog_predicate_name'('$lgt_abolish_checked'(_, _, _, _), 'abolish/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_asserta_fact_checked'(_, _, _, _, _), 'asserta/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_asserta_rule_checked'(_, _, _, _, _), 'asserta/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_assertz_fact_checked'(_, _, _, _, _), 'assertz/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_assertz_rule_checked'(_, _, _, _, _), 'assertz/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_clause_checked'(_, _, _, _, _), 'clause/2') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_retract_fact_checked'(_, _, _, _), 'retract/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_retract_rule_checked'(_, _, _, _), 'retract/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_retractall_checked'(_, _, _, _), 'retractall/1') :- !.
+
+'$lgt_swi_prolog_predicate_name'('$lgt_iso_read_term'(_, _, _, _), 'read_term/3') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_iso_read_term'(_, _, _), 'read_term/2') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_iso_read'(_, _, _), 'read/2') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_iso_read'(_, _), 'read/1') :- !.
+
+'$lgt_swi_prolog_predicate_name'('$lgt_iso_write_term'(_, _, _, _), 'write_term/3') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_iso_write_term'(_, _, _), 'write_term/2') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_iso_write'(_, _, _), 'write/2') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_iso_write'(_, _), 'write/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_iso_writeq'(_, _, _), 'writeq/2') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_iso_writeq'(_, _), 'writeq/1') :- !.
+
+'$lgt_swi_prolog_predicate_name'('$lgt_category_parameter'(_, _, _, _), 'parameter/2') :- !.
+
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_or'(_, _, _), 'threaded/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_and'(_, _, _), 'threaded/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_ignore'(_), 'threaded_ignore/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_call'(_, _, _), 'threaded_call/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_call'(_, _, _, _), 'threaded_call/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_once'(_, _, _), 'threaded_once/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_once'(_, _, _, _), 'threaded_once/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_call_tagged'(_, _, _, _), 'threaded_call/2') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_call_tagged'(_, _, _, _, _), 'threaded_call/2') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_once_tagged'(_, _, _, _), 'threaded_once/2') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_once_tagged'(_, _, _, _, _), 'threaded_once/2') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_peek'(_, _, _, _), 'threaded_peek/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_peek'(_, _, _, _, _), 'threaded_peek/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_peek_tagged'(_, _, _, _, _), 'threaded_peek/2') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_peek_tagged'(_, _, _, _, _, _), 'threaded_peek/2') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_exit'(_, _, _, _), 'threaded_exit/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_exit'(_, _, _, _, _), 'threaded_exit/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_exit_tagged'(_, _, _, _, _), 'threaded_exit/2') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_exit_tagged'(_, _, _, _, _, _), 'threaded_exit/2') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_wait_synch_ctg'(_, _, _), 'threaded_wait/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_wait_synch'(_, _, _), 'threaded_wait/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_wait_ctg'(_, _), 'threaded_wait/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_wait'(_, _), 'threaded_wait/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_notify_ctg'(_, _), 'threaded_notify/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_threaded_notify'(_, _), 'threaded_notify/1') :- !.
+
 
 :- multifile(prolog:term_compiled/2).
 
 prolog:term_compiled(Entity::Head, QHead) :-
+	'$lgt_user_module_qualification'(_, Module:_),
 	(	callable(Entity), callable(Head) ->
 		'$lgt_compile_predicate_heads'(Head, Entity, THead, _),
-		QHead = user:THead
+		QHead = Module:THead
 	;	callable(QHead) ->
 		(	QHead = Module:THead ->
-			Module == user
+			true
 		;	QHead = THead
 		),
 		'$lgt_decompile_predicate_heads'(THead, Entity, _, Head)
@@ -213,13 +219,12 @@ prolog:term_compiled(Entity::Head, QHead) :-
 :- multifile(prolog_clause:unify_clause_hook/5).
 
 prolog_clause:unify_clause_hook(Clause, QClause, Module, TermPos0, TermPos) :-
-	(	QClause = (M:THead :- TBody) ->
-		M == user,
+	'$lgt_user_module_qualification'(_, Module:_),
+	(	QClause = (Module:THead :- TBody) ->
 		TClause = (THead :- TBody)
 	;	QClause = (THead :- _) ->
 		TClause = QClause
-	;	QClause = M:THead ->
-		M == user,
+	;	QClause = Module:THead ->
 		TClause = THead
 	;	QClause = THead ->
 		TClause = QClause
@@ -245,13 +250,14 @@ prolog_clause:unify_clause_hook(Clause, QClause, Module, TermPos0, TermPos) :-
 
 :- multifile(prolog_clause:make_varnames_hook/5).
 
-prolog_clause:make_varnames_hook((Head --> _), (user:THead :- _), Offsets, Names, Bindings) :-
+prolog_clause:make_varnames_hook((Head --> _), (Module:THead :- _), Offsets, Names, Bindings) :-
+	'$lgt_user_module_qualification'(_, Module:_),
 	functor(THead, TFunctor, THeadArity),
 	'$lgt_current_flag_'(code_prefix, CodePrefix),
 	atom_concat(CodePrefix, _, TFunctor),
 	N is THeadArity - 1,
 	memberchk(N=EVar, Offsets),
-	Names1 = ['<Sender, This, Self, MetaVars, CoinductionStack>'=EVar| Names],
+	Names1 = ['<Entity, Sender, This, Self, MetaVars, CoinductionStack>'=EVar| Names],
 	functor(Head, _, HeadArity),
 	In is HeadArity,
 	memberchk(In=IVar, Offsets),
@@ -260,13 +266,14 @@ prolog_clause:make_varnames_hook((Head --> _), (user:THead :- _), Offsets, Names
 	memberchk(Out=OVar, Offsets),
 	Names3 = ['<DCG_tail>'=OVar|Names2],
 	prolog_clause:make_varnames(xx, xx, Offsets, Names3, Bindings).
-prolog_clause:make_varnames_hook(_, (user:THead :- _), Offsets, Names, Bindings) :-
+prolog_clause:make_varnames_hook(_, (Module:THead :- _), Offsets, Names, Bindings) :-
+	'$lgt_user_module_qualification'(_, Module:_),
 	functor(THead, TFunctor, Arity),
 	'$lgt_current_flag_'(code_prefix, CodePrefix),
 	atom_concat(CodePrefix, _, TFunctor),
 	N is Arity - 1,
 	memberchk(N=IVar, Offsets),
-	Names1 = ['<Sender, This, Self, MetaVars, CoinductionStack>'=IVar| Names],
+	Names1 = ['<Entity, Sender, This, Self, MetaVars, CoinductionStack>'=IVar| Names],
 	prolog_clause:make_varnames(xx, xx, Offsets, Names1, Bindings).
 
 

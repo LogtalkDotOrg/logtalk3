@@ -64,6 +64,10 @@ don't assume that Logtalk is loaded into the `user` pseudo-module.
 the SWI-Prolog hook predicate `user:prolog_load_file/2` instead of relying in
 fixed sets with just the default extensions.
 
+* FIXED: Support for the SWI-Prolog graphical tracer no longer assumes that
+Logtalk is loaded into the `user` pseudo-module. Also fixed display of the
+execution context for Logtalk goals.
+
 Documentation
 -------------
 
