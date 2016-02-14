@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 Notes on supported backend Prolog compilers  
-Last updated on December 28, 2015
+Last updated on February 14, 2016
 
 This file is part of Logtalk <http://logtalk.org/>  
 Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -204,7 +204,11 @@ Edit the `$HOME/collect/core.pl` file and add the line `:- built_in.` to
 the top. Then:
 
 	$ cd $HOME/collect
-	$ gplc -o logtalk gnu.pl expanding_lgt.pl monitoring_lgt.pl forwarding_lgt.pl user_lgt.pl logtalk_lgt.pl core_messages_lgt.pl core.pl paths.pl
+	$ gplc -o logtalk gnu.pl expanding*_lgt.pl monitoring*_lgt.pl forwarding*_lgt.pl user*_lgt.pl logtalk*_lgt.pl core_messages*_lgt.pl  core.pl paths.pl
+
+Note that we use regular expressions for the files that contain the
+pre-compiled built-in entities as their names may include a directory
+hash, which is used to avoid file names conflicts.
 
 You can ignore any suspicious predicate warnings about the `{}/1` predicate
 that might be printed when running the `gplc` command. Note that the order of
@@ -312,7 +316,7 @@ for POSIX systems):
 	$ cp $LOGTALKHOME/core/core.pl $HOME/collect/core.pl
 
 	$ cd $HOME/collect
-	$ cat lean.pl paths.pl expanding_lgt.pl monitoring_lgt.pl forwarding_lgt.pl user_lgt.pl logtalk_lgt.pl core_messages_lgt.pl core.pl > logtalk_core.pl
+	$ cat lean.pl paths.pl expanding*_lgt.pl monitoring*_lgt.pl forwarding*_lgt.pl user*_lgt.pl logtalk*_lgt.pl core_messages*_lgt.pl core.pl > logtalk_core.pl
 
 Starting Lean Prolog with a Java allocation of at least 2GB is recommended
 (by passing a `-Xmx2G` option to Java).
