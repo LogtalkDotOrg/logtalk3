@@ -484,6 +484,9 @@ Logtalk defines some built-in objects that are always available for any applicat
 <p>
 Logtalk defines a built-in, pseudo-object named <code>user</code> that virtually contains all user predicate definitions not encapsulated in a Logtalk entity. These predicates are assumed to be implicitly declared public. Messages sent from this pseudo-object, which includes messages sent from the top-level interpreter, always generate events. Defining complementing categories for this pseudo-object is not supported.
 </p>
+<p>
+With some of the backend Prolog compilers that support a module system, it is possible to load (the) Logtalk (compiler/runtime) into a module other than the pseudo-module <em>user</em>. In this case, the Logtalk pseudo-object <em>user</em> virtually contains all user predicate definitions defined in the module where Logtalk was loaded.
+</p>
 
 <h3 id="objects_logtalk">The built-in object <em>logtalk</em></h3>
 
