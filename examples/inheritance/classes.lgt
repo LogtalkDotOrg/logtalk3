@@ -50,7 +50,7 @@ interface/0, for listing the object interface.
 % root predicates will be inherited without scope changes
 :- object(subclass1,
 	imports(interface),
-	specializes(public::root)).
+	specializes((public)::root)).
 
 :- end_object.
 

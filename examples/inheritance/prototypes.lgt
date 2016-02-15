@@ -48,7 +48,7 @@ interface/0, for listing the object interface.
 % parent predicates will be inherited without scope changes
 :- object(prototype1,
 	imports(interface),
-	extends(public::parent)).
+	extends((public)::parent)).
 
 :- end_object.
 

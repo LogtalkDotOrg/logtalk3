@@ -26,7 +26,7 @@ this example.
 
 :- category(predicates).
 
-	:- public(public/0).
+	:- public((public)/0).
 	:- mode(public, one).
 
 	:- protected(protected/0).
@@ -35,7 +35,7 @@ this example.
 	:- private(private/0).
 	:- mode(private, one).
 
-	public :-
+	(public) :-
 		write('Public predicate declared and defined in category "predicates".'), nl.
 
 	protected :-
