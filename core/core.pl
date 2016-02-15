@@ -576,6 +576,9 @@ Obj<<Goal :-
 	;	'$lgt_runtime_normalized_error_handler'(Error)
 	).
 
+'$lgt_runtime_normalized_error_handler'(error(existence_error(procedure, QPI), Context)) :-
+	'$lgt_user_module_qualification'(PI, QPI),
+	'$lgt_runtime_normalized_error_handler'(error(existence_error(procedure, PI), Context)).
 
 '$lgt_runtime_normalized_error_handler'(error(existence_error(procedure, TFunctor/6), _)) :-
 	(	atom_concat(Prefix, '_idcl', TFunctor) ->
