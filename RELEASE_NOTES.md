@@ -68,6 +68,13 @@ fixed sets with just the default extensions.
 Logtalk is loaded into the `user` pseudo-module. Also fixed display of the
 execution context for Logtalk goals.
 
+Installers and installation scripts
+-----------------------------------
+
+* UPDATED: The `logtalk` SWI-Prolog pack now loads Logtalk into a `logtalk`
+module that exports all Logtalk built-in predicates and the shortcuts for
+loading and make features.
+
 Documentation
 -------------
 
