@@ -12012,6 +12012,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % this predicate fails if the closure can only be extended at runtime
 
+'$lgt_extend_closure'(Obj::Closure, ExtArgs, Goal) :-
+	Obj == user,
+	!,
+	'$lgt_extend_closure'({Closure}, ExtArgs, Goal).
+
 '$lgt_extend_closure'(Obj::Closure, ExtArgs, Obj::Msg) :-
 	!,
 	'$lgt_extend_closure_basic'(Closure, ExtArgs, Msg).
@@ -19171,6 +19176,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compile_static_binding_meta_arguments'(Args, MArgs, Ctx, TArgs).
 
 
+'$lgt_compile_static_binding_meta_argument'(_, Closure, _, TClosure) :-
+	nonvar(Closure),
+	(	Closure = {_} ->
+		% pre-compiled closure
+		TClosure = Closure
+	;	Closure = Obj::UserClosure, Obj == user ->
+		% closure called in the "user" pseudo-object
+		TClosure = {UserClosure}
+	;	fail
+	),
+	!.
+
 '$lgt_compile_static_binding_meta_argument'(N, Closure, Ctx, TClosure) :-
 	integer(N), N > 0,
 	% closure
@@ -19184,7 +19201,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% to be collected even if the compilation result cannot be used
 	'$lgt_compile_body'(Goal, TGoal, _, Ctx),
 	functor(TGoal, TFunctor, _),
-	(	'$lgt_comp_ctx_entity'(Ctx, Entity),
+	(	TGoal == Goal ->
+		TClosure = Closure
+	;	{TGoal} == Goal ->
+		TClosure = {Closure}
+	;	'$lgt_comp_ctx_entity'(Ctx, Entity),
 		Entity == user ->
 		TClosure = {Closure}
 	;	sub_atom(TFunctor, 0, 5, _, '$lgt_') ->
@@ -19210,6 +19231,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	functor(TGoal, TFunctor, TArity),
 	TGoal =.. [TFunctor| TAllArgs],
 	Arity is TArity - N - 1,
+	Arity >= 0,
 	'$lgt_length'(TArgs, 0, Arity),
 	'$lgt_append'(TArgs, _, TAllArgs),
 	arg(TArity, TGoal, ExCtx),
