@@ -21,8 +21,8 @@
 :- object(translator).
 
 	:- info([
-		version is 1.1,
-		date is 2007/10/13,
+		version is 1.2,
+		date is 2016/02/15,
 		author is 'Paulo Moura',
 		comment is 'Translator of logic propositions to clauses in conjunctive normal form.',
 		source is 'Code partially based on an example found on the Clocksin and Mellish Prolog book.'
@@ -42,15 +42,14 @@
 		argnames is ['Propostion', 'Clauses']
 	]).
 
+	:- public(op(10,  fy, '~' )).	% negation
+	:- public(op(20, yfx, '&' )).	% conjunction
+	:- public(op(30, yfx, 'v' )).	% disjunction
+	:- public(op(40, xfx, '=>')).	% implication
+	:- public(op(40, xfx, '<=>')).	% equivalence
+
 	:- private(gensym_counter_/1).
 	:- dynamic(gensym_counter_/1).
-
-
-	:- op(10,  fy, '~' ).	% negation
-	:- op(20, yfx, '&' ).	% conjunction
-	:- op(30, yfx, 'v' ).	% disjunction
-	:- op(40, xfx, '=>').	% implication
-	:- op(40, xfx, '<=>').	% equivalence
 
 
 	translate(P, Cs) :-

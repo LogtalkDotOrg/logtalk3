@@ -81,6 +81,15 @@ Documentation
 
 * FIXED: Several typos in the User and Reference manuals.
 
+Examples
+--------
+
+* FIXED: The `inheritance` example to workaround a conflict with SWI-Prolog
+`public` operator when using this backend compiler.
+
+* FIXED: The `logic` example to declare the used operators public and to use
+these declarations to ensure correcting parsing of the example unit tests.
+
 
 3.02.2 - December 22, 2015
 ==========================

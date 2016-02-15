@@ -22,10 +22,15 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2010/03/16,
+		date is 2016/02/15,
 		comment is 'Unit tests for the "logic" example.'
+	]).
+
+	:- uses(translator, [
+		op(10, fy, '~' ), op(20, yfx, '&' ), op(30, yfx, 'v' ),
+		op(40, xfx, '=>'), op(40, xfx, '<=>')
 	]).
 
 	test(logic_1) :-
