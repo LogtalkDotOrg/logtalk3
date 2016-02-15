@@ -26,8 +26,10 @@ using the directive (or the corresponding query):
 
 	:- use_module(library(logtalk)).
 
-This pack provides a `logtalk` module that exports all Logtalk built-in
-predicates and the shortcuts for loading and make features.
+Note, however, that Logtalk is not packaged as a module and that the
+`logtalk` module provided contains just an initialization directive
+that loads Logtalk in exactly the same way as when Logtalk is installed
+using one of its prebuilt installers.
 
 When using the directive above, the `LOGTALKHOME` and `LOGTALKUSER`
 shell environment variables are set, just for the duration of the
