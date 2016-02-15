@@ -630,9 +630,6 @@
 	% ensure_loaded/1 directive used within a module (sloppy replacement for the use_module/1-2 directives)
 	'$lgt_yap_list_of_exports'(File, Module, Imports).
 
-'$lgt_yap_directive_expansion'(op(Priority, Specifier, ':'(Module,Operators)), {op(Priority, Specifier, Operators)}) :-
-	Module == user.
-
 '$lgt_yap_directive_expansion'(reexport(File), reexport(Module, Exports)) :-
 	'$lgt_yap_list_of_exports'(File, Module, Exports).
 
