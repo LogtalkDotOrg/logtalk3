@@ -576,8 +576,10 @@ Obj<<Goal :-
 	;	'$lgt_runtime_normalized_error_handler'(Error)
 	).
 
-'$lgt_runtime_normalized_error_handler'(error(existence_error(procedure, QPI), Context)) :-
-	'$lgt_user_module_qualification'(PI, QPI),
+'$lgt_runtime_normalized_error_handler'(error(existence_error(procedure, ':'(Module,PI)), Context)) :-
+	% assuming we're running with a backend compiler supporting modules,
+	% check that the error is the context of the module where Logtalk is loaded
+	'$lgt_user_module_qualification'(_, ':'(Module,_)),
 	'$lgt_runtime_normalized_error_handler'(error(existence_error(procedure, PI), Context)).
 
 '$lgt_runtime_normalized_error_handler'(error(existence_error(procedure, TFunctor/6), _)) :-
