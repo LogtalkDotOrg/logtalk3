@@ -559,7 +559,10 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 %
 % returns the directory hash as an atom
 
-'$lgt_directory_hash_as_atom'(_, '').
+'$lgt_directory_hash_as_atom'(Directory, Hash) :-
+	hash_term(Directory, Hash0),
+	number_chars(Hash0, Codes),
+	atom_chars(Hash, Codes).
 
 
 % '$lgt_compile_prolog_code'(+atom, +atom, +list)
