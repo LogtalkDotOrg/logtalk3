@@ -21,16 +21,16 @@ RELEASE NOTES
 =============
 
 
-3.02.3 - February ??, 2016
+3.03.0 - February 15, 2016
 ==========================
 
 Logtalk compiler and runtime
 ----------------------------
 
-* ADDED: Support for a new `logtalk_make/1` target, `missing`, to list all
+* ADDED: Support for a new `logtalk_make/1` target, `missing`, to list
 missing entities and predicates. Also available using the `{?}` shortcut.
 
-* ADDED: Support for a new `logtalk_make/1` target, `circular`, to list all
+* ADDED: Support for a new `logtalk_make/1` target, `circular`, to list
 circular references (considering message sending goals) between pairs and
 trios of objects. Also available using the `{@}` shortcut.
 
@@ -47,9 +47,6 @@ Prolog adapter and integration files
 
 * UPDATED: CxProlog adapter file to require version 0.98.0 or later.
 
-* IMPROVED: Simplified definition of the `user:prolog_load_file/2` SWI-Prolog
-hook predicate.
-
 * FIXED: Bug in the Qu-Prolog adapter file definition for the missing standard
 `term_variables/2` built-in predicate. Qu-Prolog version 9.7 or later is now
 required when using this backend compiler.
@@ -59,6 +56,9 @@ don't assume that Logtalk is loaded into the `user` pseudo-module.
 
 * ADDED: Support for library notation when using the SWI-Prolog hook predicate
 `prolog_edit:locate/3`.
+
+* IMPROVED: Simplified definition of the `user:prolog_load_file/2` SWI-Prolog
+hook predicate.
 
 * IMPROVED: Compute the set of defined Logtalk and Prolog extensions when using
 the SWI-Prolog hook predicate `user:prolog_load_file/2` instead of relying in
