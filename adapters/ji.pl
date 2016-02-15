@@ -404,7 +404,10 @@ format(Format, Arguments) :-
 %
 % returns the directory hash as an atom
 
-'$lgt_directory_hash_as_atom'(_, '').
+'$lgt_directory_hash_as_atom'(Directory, Hash) :-
+	term_hash(Directory, Hash0),
+	number_codes(Hash0, Codes),
+	atom_codes(Hash, Codes).
 
 
 % '$lgt_compile_prolog_code'(+atom, +atom, +list)
