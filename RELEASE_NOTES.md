@@ -42,7 +42,8 @@ as the backend compiler.
 
 * FIXED: Meta-predicate call optimization bug when a meta-argument is either
 a pre-compiled closure or a closure for a goal called in the context of the
-`user` pseudo-object.
+`user` pseudo-object. Also apply more strict error checking to closure
+meta-arguments.
 
 * FIXED: Pretty-printing of parametric object and parametric category
 identifiers in error and warning messages.
