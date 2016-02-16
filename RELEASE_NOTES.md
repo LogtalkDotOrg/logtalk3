@@ -86,6 +86,12 @@ Documentation
 
 * FIXED: Several typos in the User and Reference manuals.
 
+Tests
+-----
+
+* FIXED: Workaround an issue with operator parsing when testing the Logtalk 
+`current_op/3` method using GNU Prolog as the backend compiler.
+
 Examples
 --------
 

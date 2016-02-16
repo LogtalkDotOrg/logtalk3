@@ -27,9 +27,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.2,
+		version is 1.3,
 		author is 'Paulo Moura',
-		date is 2015/11/10,
+		date is 2016/02/16,
 		comment is 'Unit tests for the current_op/3 built-in directive.'
 	]).
 
@@ -90,7 +90,7 @@
 
 	succeeds(current_op_3_15) :-
 		user::current_op(Priority, Associativity, Operator),
-		Priority == 777, Associativity == yfx, Operator == my_test_op.
+		Priority == 777, Associativity == yfx, Operator == (my_test_op).
 
 	succeeds(current_op_3_16) :-
 		% ensure that the unification is not optimized away
@@ -102,7 +102,7 @@
 		% ensure that the unification is not optimized away
 		user_object(Object),
 		Object::current_op(Priority, Associativity, Operator),
-		Priority == 777, Associativity == yfx, Operator == my_test_op.
+		Priority == 777, Associativity == yfx, Operator == (my_test_op).
 
 	% test semantics for local calls from multifile predicate clauses
 
