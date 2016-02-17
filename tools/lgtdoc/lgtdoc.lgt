@@ -92,7 +92,7 @@
 		rdirectory(Directory, []).
 
 	output_rdirectory(Directory, Options) :-
-		member(exclude_paths(ExcludedPaths), Options), !,
+		once(member(exclude_paths(ExcludedPaths), Options)),
 		forall(
 			sub_directory(Directory, ExcludedPaths, SubDirectory),
 			output_directory_files(SubDirectory, Options)
@@ -107,7 +107,7 @@
 	directory(Directory, UserOptions) :-
 		merge_options(UserOptions, Options),
 		os::expand_path(Directory, Path),
-		member(xmldir(XMLDirectory), Options), !,
+		once(member(xmldir(XMLDirectory), Options)),
 		os::working_directory(Current),
 		os::change_directory(Path),
 		os::make_directory(XMLDirectory),
@@ -134,7 +134,7 @@
 			\+ member(Source2, ExcludedFiles)
 		;	true
 		),
-		process(File, Directory, Options, StreamOptions),
+		process(File, DirectorySlash, Options, StreamOptions),
 		fail.
 	output_directory_files(_, _).
 
@@ -294,7 +294,7 @@
 		;	Encoding = 'UTF-8'
 		),
 		member(xmlspec(XMLSpec), Options),
-		member(xslfile(XSL), Options), !,
+		once(member(xslfile(XSL), Options)),
 		write_xml_header(XMLSRef, Encoding, XMLSpec, XSL, Stream).
 
 	write_xml_header(local, Encoding, XMLSpec, XSL, Stream) :-
