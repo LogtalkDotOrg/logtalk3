@@ -21,9 +21,9 @@
 :- protocol(lgtdocp).
 
 	:- info([
-		version is 2.0,
+		version is 2.1,
 		author is 'Paulo Moura',
-		date is 2014/12/02,
+		date is 2016/02/17,
 		comment is 'Documenting tool protocol.',
 		remarks is [
 			'Compiling files for generating XML documentation' - 'All source files must be compiled with the "source_data" compiler flag turned on.',
@@ -75,6 +75,43 @@
 	:- info(library/1, [
 		comment is 'Creates XML documenting files for all entities in a library using default options.',
 		argnames is ['Library']
+	]).
+
+	:- public(rdirectory/2).
+	:- mode(rdirectory(+atom, +list), one).
+	:- info(rdirectory/2, [
+		comment is 'Creates XML documenting files for all entities in a directory and its sub-directories using the specified options.',
+		argnames is ['Directory', 'Options'],
+		examples is [
+			'Generate XML documenting files for all entities in the tools directory for later conversion to Markdown files' - rdirectory('./tools',[xslfile('lgtmd.xsl')]) - {yes}
+		]
+	]).
+
+	:- public(rdirectory/1).
+	:- mode(rdirectory(+atom), one).
+	:- info(rdirectory/1, [
+		comment is 'Creates XML documenting files for all entities in a directory and its sub-directories using default options.',
+		argnames is ['Directory'],
+		examples is [
+			'Generate XML documenting files for all entities in the tools directory for direct viewing in a browser (after indexing using the "lgt2xml" script)' - rdirectory('./tools') - {yes}
+		]
+	]).
+
+	:- public(directory/2).
+	:- mode(directory(+atom, +list), one).
+	:- info(directory/2, [
+		comment is 'Creates XML documenting files for all entities in a directory using the specified options.',
+		argnames is ['Directory', 'Options'],
+		examples is [
+			'Generate XML documenting files for all the entities in the current directory for later conversion to PDF A4 files' - directory('.',[xslfile('lgtpdfa4.xsl')]) - {yes}
+		]
+	]).
+
+	:- public(directory/1).
+	:- mode(directory(+atom), one).
+	:- info(directory/1, [
+		comment is 'Creates XML documenting files for all entities in a directory using default options.',
+		argnames is ['Directory']
 	]).
 
 	:- public(file/2).

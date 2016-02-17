@@ -21,6 +21,17 @@ RELEASE NOTES
 =============
 
 
+3.03.1 - February ??, 2016
+==========================
+
+Tools
+-----
+
+* ADDED: Predicates `directory/1-2` and `rdirectory/1-2` to the `lgtdoc` tool
+for generating documentation for a directory or for a directory and all its
+sub-directories.
+
+
 3.03.0 - February 16, 2016
 ==========================
 

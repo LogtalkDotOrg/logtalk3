@@ -22,9 +22,9 @@
 	implements(lgtdocp)).
 
 	:- info([
-		version is 2.0,
+		version is 2.1,
 		author is 'Paulo Moura',
-		date is 2014/11/10,
+		date is 2016/02/17,
 		comment is 'Documenting tool.'
 	]).
 
@@ -39,7 +39,7 @@
 	rlibrary(Library, UserOptions) :-
 		merge_options(UserOptions, Options),
 		logtalk::expand_library_path(Library, TopPath),
-		member(xmldir(XMLDirectory), Options), !,
+		once(member(xmldir(XMLDirectory), Options)),
 		os::working_directory(Current),
 		os::change_directory(TopPath),
 		os::make_directory(XMLDirectory),
@@ -51,10 +51,10 @@
 		rlibrary(Library, []).
 
 	output_rlibrary(TopPath, Options) :-
-		member(exclude_paths(ExcludedPaths), Options), !,
+		once(member(exclude_paths(ExcludedPaths), Options)),
 		forall(
 			sub_library(TopPath, ExcludedPaths, LibraryPath),
-			output_library_files(LibraryPath, Options)
+			output_directory_files(LibraryPath, Options)
 		).
 
 	sub_library(TopPath, ExcludedPaths, LibraryPath) :-
@@ -66,20 +66,65 @@
 	library(Library, UserOptions) :-
 		merge_options(UserOptions, Options),
 		logtalk::expand_library_path(Library, Path),
-		member(xmldir(XMLDirectory), Options), !,
+		once(member(xmldir(XMLDirectory), Options)),
 		os::working_directory(Current),
 		os::change_directory(Path),
 		os::make_directory(XMLDirectory),
 		os::change_directory(XMLDirectory),
-		output_library_files(Path, Options),
+		output_directory_files(Path, Options),
 		os::change_directory(Current).
 
 	library(Library) :-
 		library(Library, []).
 
-	output_library_files(Directory, Options) :-
+	rdirectory(Directory, UserOptions) :-
+		merge_options(UserOptions, Options),
+		os::expand_path(Directory, Path),
+		once(member(xmldir(XMLDirectory), Options)),
+		os::working_directory(Current),
+		os::change_directory(Path),
+		os::make_directory(XMLDirectory),
+		os::change_directory(XMLDirectory),
+		output_rdirectory(Path, Options),
+		os::change_directory(Current).
+
+	rdirectory(Directory) :-
+		rdirectory(Directory, []).
+
+	output_rdirectory(Directory, Options) :-
+		member(exclude_paths(ExcludedPaths), Options), !,
+		forall(
+			sub_directory(Directory, ExcludedPaths, SubDirectory),
+			output_directory_files(SubDirectory, Options)
+		).
+
+	sub_directory(Directory, ExcludedPaths, SubDirectory) :-
+		logtalk::loaded_file(Path),
+		os::decompose_file_name(Path, SubDirectory, _, _),
+		atom_concat(Directory, RelativePath, SubDirectory),
+		\+ member(RelativePath, ExcludedPaths).
+
+	directory(Directory, UserOptions) :-
+		merge_options(UserOptions, Options),
+		os::expand_path(Directory, Path),
+		member(xmldir(XMLDirectory), Options), !,
+		os::working_directory(Current),
+		os::change_directory(Path),
+		os::make_directory(XMLDirectory),
+		os::change_directory(XMLDirectory),
+		output_directory_files(Path, Options),
+		os::change_directory(Current).
+
+	directory(Directory) :-
+		directory(Directory, []).
+
+	output_directory_files(Directory, Options) :-
+		(	sub_atom(Directory, _, 1, 0, '/') ->
+			DirectorySlash = Directory
+		;	atom_concat(Directory, '/', DirectorySlash)
+		),
 		once(member(exclude_files(ExcludedFiles), Options)),
-		logtalk::loaded_file_property(Path, directory(Directory)),
+		logtalk::loaded_file_property(Path, directory(DirectorySlash)),
 		logtalk::loaded_file_property(Path, basename(File)),
 		logtalk::loaded_file_property(Path, text_properties(StreamOptions)),
 		\+ member(File, ExcludedFiles),
@@ -91,12 +136,12 @@
 		),
 		process(File, Directory, Options, StreamOptions),
 		fail.
-	output_library_files(_, _).
+	output_directory_files(_, _).
 
 	file(Source, UserOptions) :-
 		locate_file(Source, Basename, Directory, StreamOptions),
 		merge_options(UserOptions, Options),
-		member(xmldir(XMLDirectory), Options), !,
+		once(member(xmldir(XMLDirectory), Options)),
 		os::working_directory(Current),
 		os::change_directory(Directory),
 		os::make_directory(XMLDirectory),
@@ -109,7 +154,7 @@
 
 	all(UserOptions) :-
 		merge_options(UserOptions, Options),
-		member(xmldir(XMLDirectory), Options), !,
+		once(member(xmldir(XMLDirectory), Options)),
 		os::working_directory(Current),
 		os::make_directory(XMLDirectory),
 		os::change_directory(XMLDirectory),

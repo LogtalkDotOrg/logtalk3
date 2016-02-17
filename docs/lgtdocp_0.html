@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>2.0</code>
+            <code>2.1</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2014/12/2</code>
+            <code>2016/2/17</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -143,6 +143,110 @@
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>library(+atom) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="rdirectory/2" class="code">rdirectory/2</h3>
+          <blockquote>
+            <p class="comment">Creates XML documenting files for all entities in a directory and its sub-directories using the specified options.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>rdirectory(Directory,Options)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>rdirectory(+atom,+list) &ndash; one</code>
+            </dd>
+            <dt class="key">examples:</dt>
+            <dd class="value">
+              <dl class="examples">
+                <dt class="comment">Generate XML documenting files for all entities in the tools directory for later conversion to Markdown files</dt>
+                <dd class="code">rdirectory('./tools',[xslfile('lgtmd.xsl')])</dd>
+                <dd class="code">yes</dd>
+              </dl>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="rdirectory/1" class="code">rdirectory/1</h3>
+          <blockquote>
+            <p class="comment">Creates XML documenting files for all entities in a directory and its sub-directories using default options.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>rdirectory(Directory)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>rdirectory(+atom) &ndash; one</code>
+            </dd>
+            <dt class="key">examples:</dt>
+            <dd class="value">
+              <dl class="examples">
+                <dt class="comment">Generate XML documenting files for all entities in the tools directory for direct viewing in a browser (after indexing using the "lgt2xml" script)</dt>
+                <dd class="code">rdirectory('./tools')</dd>
+                <dd class="code">yes</dd>
+              </dl>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="directory/2" class="code">directory/2</h3>
+          <blockquote>
+            <p class="comment">Creates XML documenting files for all entities in a directory using the specified options.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>directory(Directory,Options)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>directory(+atom,+list) &ndash; one</code>
+            </dd>
+            <dt class="key">examples:</dt>
+            <dd class="value">
+              <dl class="examples">
+                <dt class="comment">Generate XML documenting files for all the entities in the current directory for later conversion to PDF A4 files</dt>
+                <dd class="code">directory('.',[xslfile('lgtpdfa4.xsl')])</dd>
+                <dd class="code">yes</dd>
+              </dl>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="directory/1" class="code">directory/1</h3>
+          <blockquote>
+            <p class="comment">Creates XML documenting files for all entities in a directory using default options.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>directory(Directory)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>directory(+atom) &ndash; one</code>
             </dd>
           </dl>
         </div>
