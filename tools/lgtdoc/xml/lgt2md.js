@@ -66,8 +66,8 @@ else {
 	WScript.Quit(1);
 }
 
-var entity_xslt = logtalk_user + "\\xml\\logtalk_entity_to_md.xsl";
-var index_xslt = logtalk_user + "\\xml\\logtalk_index_to_md.xsl";
+var entity_xslt = logtalk_user + "\\tools\\lgtdoc\\xml\\logtalk_entity_to_md.xsl";
+var index_xslt = logtalk_user + "\\tools\\lgtdoc\\xml\\logtalk_index_to_md.xsl";
 
 var d_arg = "";
 var p_arg = "";
@@ -95,27 +95,27 @@ if (p_arg != "" && p_arg != "msxsl" && p_arg != "xsltproc" && p_arg != "xalan" &
 	processor = p_arg;
 
 if (!FSObject.FileExists(WshShell.CurrentDirectory + "\\logtalk_entity.dtd")) {
-	FSObject.CopyFile(logtalk_home + "\\xml\\logtalk_entity.dtd", WshShell.CurrentDirectory + "\\logtalk_entity.dtd");
+	FSObject.CopyFile(logtalk_home + "\\tools\\lgtdoc\\xml\\logtalk_entity.dtd", WshShell.CurrentDirectory + "\\logtalk_entity.dtd");
 }
 
 if (!FSObject.FileExists(WshShell.CurrentDirectory + "\\logtalk_index.dtd")) {
-	FSObject.CopyFile(logtalk_home + "\\xml\\logtalk_index.dtd", WshShell.CurrentDirectory + "\\logtalk_index.dtd");
+	FSObject.CopyFile(logtalk_home + "\\tools\\lgtdoc\\xml\\logtalk_index.dtd", WshShell.CurrentDirectory + "\\logtalk_index.dtd");
 }
 
 if (!FSObject.FileExists(WshShell.CurrentDirectory + "\\custom.ent")) {
-	FSObject.CopyFile(logtalk_home + "\\xml\\custom.ent", WshShell.CurrentDirectory + "\\custom.ent");
+	FSObject.CopyFile(logtalk_home + "\\tools\\lgtdoc\\xml\\custom.ent", WshShell.CurrentDirectory + "\\custom.ent");
 }
 
 if (!FSObject.FileExists(WshShell.CurrentDirectory + "\\logtalk_entity.xsd")) {
-	FSObject.CopyFile(logtalk_home + "\\xml\\logtalk_entity.xsd", WshShell.CurrentDirectory + "\\logtalk_entity.xsd");
+	FSObject.CopyFile(logtalk_home + "\\tools\\lgtdoc\\xml\\logtalk_entity.xsd", WshShell.CurrentDirectory + "\\logtalk_entity.xsd");
 }
 
 if (!FSObject.FileExists(WshShell.CurrentDirectory + "\\logtalk_index.xsd")) {
-	FSObject.CopyFile(logtalk_home + "\\xml\\logtalk_index.xsd", WshShell.CurrentDirectory + "\\logtalk_index.xsd");
+	FSObject.CopyFile(logtalk_home + "\\tools\\lgtdoc\\xml\\logtalk_index.xsd", WshShell.CurrentDirectory + "\\logtalk_index.xsd");
 }
 
 if (!FSObject.FileExists(directory + "\\logtalk.css")) {
-	FSObject.CopyFile(logtalk_user + "\\xml\\logtalk.css", directory + "\\logtalk.css");
+	FSObject.CopyFile(logtalk_user + "\\tools\\lgtdoc\\xml\\logtalk.css", directory + "\\logtalk.css");
 }
 
 WScript.Echo("");

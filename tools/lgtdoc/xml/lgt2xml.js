@@ -96,23 +96,35 @@ if (t_arg != "")
 	index_title=t_arg;
 
 if (!FSObject.FileExists(directory + "\\logtalk_entity.dtd")) {
-	FSObject.CopyFile(logtalk_home + "\\xml\\logtalk_entity.dtd", directory + "\\logtalk_entity.dtd");
+	FSObject.CopyFile(logtalk_home + "\\tools\\lgtdoc\\xml\\logtalk_entity.dtd", directory + "\\logtalk_entity.dtd");
+}
+
+if (!FSObject.FileExists(directory + "\\logtalk_index.dtd")) {
+	FSObject.CopyFile(logtalk_home + "\\tools\\lgtdoc\\xml\\logtalk_index.dtd", directory + "\\logtalk_index.dtd");
 }
 
 if (!FSObject.FileExists(directory + "\\custom.ent")) {
-	FSObject.CopyFile(logtalk_home + "\\xml\\custom.ent", directory + "\\custom.ent");
+	FSObject.CopyFile(logtalk_home + "\\tools\\lgtdoc\\xml\\custom.ent", directory + "\\custom.ent");
 }
 
 if (!FSObject.FileExists(directory + "\\logtalk_entity.xsd")) {
-	FSObject.CopyFile(logtalk_home + "\\xml\\logtalk_entity.xsd", directory + "\\logtalk_entity.xsd");
+	FSObject.CopyFile(logtalk_home + "\\tools\\lgtdoc\\xml\\logtalk_entity.xsd", directory + "\\logtalk_entity.xsd");
+}
+
+if (!FSObject.FileExists(directory + "\\logtalk_index.xsd")) {
+	FSObject.CopyFile(logtalk_home + "\\tools\\lgtdoc\\xml\\logtalk_index.xsd", directory + "\\logtalk_index.xsd");
 }
 
 if (!FSObject.FileExists(directory + "\\logtalk.css")) {
-	FSObject.CopyFile(logtalk_user + "\\xml\\logtalk.css", directory + "\\logtalk.css");
+	FSObject.CopyFile(logtalk_user + "\\tools\\lgtdoc\\xml\\logtalk.css", directory + "\\logtalk.css");
 }
 
 if (!FSObject.FileExists(directory + "\\logtalk_entity_to_xml.xsl")) {
-	FSObject.CopyFile(logtalk_user + "\\xml\\logtalk_entity_to_xml.xsl", directory + "\\logtalk_entity_to_xml.xsl");
+	FSObject.CopyFile(logtalk_user + "\\tools\\lgtdoc\\xml\\logtalk_entity_to_xml.xsl", directory + "\\logtalk_entity_to_xml.xsl");
+}
+
+if (!FSObject.FileExists(directory + "\\logtalk_index_to_xml.xsl")) {
+	FSObject.CopyFile(logtalk_user + "\\tools\\lgtdoc\\xml\\logtalk_index_to_xml.xsl", directory + "\\logtalk_index_to_xml.xsl");
 }
 
 WScript.Echo("");

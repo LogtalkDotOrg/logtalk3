@@ -68,8 +68,8 @@ else {
 	WScript.Quit(1);
 }
 
-var a4_xsl = logtalk_user + "\\xml\\logtalk_entity_to_pdf_a4.xsl";
-var us_xsl = logtalk_user + "\\xml\\logtalk_entity_to_pdf_us.xsl";
+var a4_xsl = logtalk_user + "\\tools\\lgtdoc\\xml\\logtalk_entity_to_pdf_a4.xsl";
+var us_xsl = logtalk_user + "\\tools\\lgtdoc\\xml\\logtalk_entity_to_pdf_us.xsl";
 var xsl;
 
 var f_arg = "";
@@ -114,15 +114,15 @@ else
 	xsl = us_xsl;
 
 if (!FSObject.FileExists(WshShell.CurrentDirectory + "\\logtalk_entity.dtd")) {
-	FSObject.CopyFile(logtalk_home + "\\xml\\logtalk_entity.dtd", WshShell.CurrentDirectory + "\\logtalk_entity.dtd");
+	FSObject.CopyFile(logtalk_home + "\\tools\\lgtdoc\\xml\\logtalk_entity.dtd", WshShell.CurrentDirectory + "\\logtalk_entity.dtd");
 }
 
 if (!FSObject.FileExists(WshShell.CurrentDirectory + "\\custom.ent")) {
-	FSObject.CopyFile(logtalk_home + "\\xml\\custom.ent", WshShell.CurrentDirectory + "\\custom.ent");
+	FSObject.CopyFile(logtalk_home + "\\tools\\lgtdoc\\xml\\custom.ent", WshShell.CurrentDirectory + "\\custom.ent");
 }
 
 if (!FSObject.FileExists(WshShell.CurrentDirectory + "\\logtalk_entity.xsd")) {
-	FSObject.CopyFile(logtalk_home + "\\xml\\logtalk_entity.xsd", WshShell.CurrentDirectory + "\\logtalk_entity.xsd");
+	FSObject.CopyFile(logtalk_home + "\\tools\\lgtdoc\\xml\\logtalk_entity.xsd", WshShell.CurrentDirectory + "\\logtalk_entity.xsd");
 }
 
 WScript.Echo("");
