@@ -381,7 +381,7 @@
 		atom_concat(Aux5, '"?', Text).
 
 	write_entity_xml_footer(Stream) :-
-		write_xml_close_tag(Stream, logtalk).
+		write_xml_close_tag(Stream, logtalk_entity).
 
 	write_entity_xml_entity(Stream, Entity) :-
 		entity_type(Entity, Type),
@@ -1189,16 +1189,16 @@
 		write_xml_open_tag(Stream, entries, []),
 		write_index_keys(Keys, Functor, Stream),
 		write_xml_close_tag(Stream, entries),
-		write_xml_close_tag(Stream, index),
+		write_xml_close_tag(Stream, logtalk_index),
 		close(Stream).
 
-	kind_ref_doctype_xsd(logtalk, local, logtalk-'logtalk_entity.dtd', 'logtalk_entity.xsd').
-	kind_ref_doctype_xsd(logtalk, web, logtalk-'http://logtalk.org/xml/4.0/logtalk_entity.dtd', 'http://logtalk.org/xml/4.0/logtalk_entity.xsd').
-	kind_ref_doctype_xsd(logtalk, standalone, logtalk-none, none).
+	kind_ref_doctype_xsd(logtalk, local, logtalk_entity-'logtalk_entity.dtd', 'logtalk_entity.xsd').
+	kind_ref_doctype_xsd(logtalk, web, logtalk_entity-'http://logtalk.org/xml/4.0/logtalk_entity.dtd', 'http://logtalk.org/xml/4.0/logtalk_entity.xsd').
+	kind_ref_doctype_xsd(logtalk, standalone, logtalk_entity-none, none).
 
-	kind_ref_doctype_xsd(index, local, index-'logtalk_index.dtd', 'logtalk_index.xsd').
-	kind_ref_doctype_xsd(index, web, index-'http://logtalk.org/xml/4.0/logtalk_index.dtd', 'http://logtalk.org/xml/4.0/logtalk_index.xsd').
-	kind_ref_doctype_xsd(index, standalone, index-none, none).
+	kind_ref_doctype_xsd(index, local, logtalk_index-'logtalk_index.dtd', 'logtalk_index.xsd').
+	kind_ref_doctype_xsd(index, web, logtalk_index-'http://logtalk.org/xml/4.0/logtalk_index.dtd', 'http://logtalk.org/xml/4.0/logtalk_index.xsd').
+	kind_ref_doctype_xsd(index, standalone, logtalk_index-none, none).
 
 	write_index_keys([], _, _).
 	write_index_keys([Key| Keys], Functor, Stream) :-
