@@ -6,7 +6,7 @@
 ##   Last updated on November 3, 2014
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
-##   Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
+##   Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
 ##   you may not use this file except in compliance with the License.

@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
-##   Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
+##   Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
 ## 
 ##   Reference Manual XHTML to PDF conversion script
 ##   Last updated on August 19, 2014
