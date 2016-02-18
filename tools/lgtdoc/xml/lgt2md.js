@@ -129,10 +129,11 @@ for (files.moveFirst(); !files.atEnd(); files.moveNext()) {
 	if (FSObject.GetExtensionName(file) == "xml") {
 		WScript.Echo("  converting " + file);
 		var md_file = directory + "\\" + FSObject.GetBaseName(file) + ".md";
-		if (file == "directory_index.xml" || file == "entity_index.xml" || file == "predicate_index.xml") then
+		if (file == "directory_index.xml" || file == "entity_index.xml" || file == "predicate_index.xml") {
 			xslt = index_xslt;
-		else
+		} else {
 			xslt = entity_xslt;
+		}
 		switch (processor) {
 			case "msxsl" :
 				WshShell.Run("msxsl -o \"" + md_file + "\" \"" + file + "\" \"" + xslt + "\"", true);
