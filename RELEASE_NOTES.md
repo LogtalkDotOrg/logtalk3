@@ -40,6 +40,9 @@ the `lgtdoc` tool.
 for generating documentation for a directory or for a directory and all its
 sub-directories.
 
+* FIXED: Paths used in the Windows batch files for the `lgtdoc` tool to call
+the documentation conversion scripts.
+
 
 3.03.0 - February 16, 2016
 ==========================
