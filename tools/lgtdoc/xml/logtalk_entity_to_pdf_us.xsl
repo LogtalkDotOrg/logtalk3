@@ -25,7 +25,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 -->
 
-<xsl:import href="lgtpdf.xsl"/>
+<xsl:import href="logtalk_entity_to_pdf.xsl"/>
 
 
 <xsl:param name="format" select="'us'"/>

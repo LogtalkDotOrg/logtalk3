@@ -64,7 +64,7 @@
 		reset,
 		merge_options(UserOptions, Options),
 		logtalk::expand_library_path(Library, TopPath),
-		memberchk(xmldir(XMLDirectory), Options),
+		memberchk(xml_docs_directory(XMLDirectory), Options),
 		os::working_directory(Current),
 		os::change_directory(TopPath),
 		os::make_directory(XMLDirectory),
@@ -93,7 +93,7 @@
 		reset,
 		merge_options(UserOptions, Options),
 		logtalk::expand_library_path(Library, Path),
-		memberchk(xmldir(XMLDirectory), Options),
+		memberchk(xml_docs_directory(XMLDirectory), Options),
 		os::working_directory(Current),
 		os::change_directory(Path),
 		os::make_directory(XMLDirectory),
@@ -109,7 +109,7 @@
 		reset,
 		merge_options(UserOptions, Options),
 		os::expand_path(Directory, Path),
-		memberchk(xmldir(XMLDirectory), Options),
+		memberchk(xml_docs_directory(XMLDirectory), Options),
 		os::working_directory(Current),
 		os::change_directory(Path),
 		os::make_directory(XMLDirectory),
@@ -143,7 +143,7 @@
 		reset,
 		merge_options(UserOptions, Options),
 		os::expand_path(Directory, Path),
-		memberchk(xmldir(XMLDirectory), Options),
+		memberchk(xml_docs_directory(XMLDirectory), Options),
 		os::working_directory(Current),
 		os::change_directory(Path),
 		os::make_directory(XMLDirectory),
@@ -179,7 +179,7 @@
 		reset,
 		locate_file(Source, Basename, Directory, StreamOptions),
 		merge_options(UserOptions, Options),
-		memberchk(xmldir(XMLDirectory), Options),
+		memberchk(xml_docs_directory(XMLDirectory), Options),
 		os::working_directory(Current),
 		os::change_directory(Directory),
 		os::make_directory(XMLDirectory),
@@ -193,7 +193,7 @@
 	all(UserOptions) :-
 		reset,
 		merge_options(UserOptions, Options),
-		memberchk(xmldir(XMLDirectory), Options),
+		memberchk(xml_docs_directory(XMLDirectory), Options),
 		os::working_directory(Current),
 		os::make_directory(XMLDirectory),
 		os::change_directory(XMLDirectory),
@@ -1191,12 +1191,12 @@
 		write_xml_close_tag(Stream, index),
 		close(Stream).
 
-	kind_ref_doctype_xsd(logtalk, local, logtalk-'logtalk.dtd', 'logtalk.xsd').
-	kind_ref_doctype_xsd(logtalk, web, logtalk-'http://logtalk.org/xml/4.0/logtalk.dtd', 'http://logtalk.org/xml/4.0/logtalk.xsd').
+	kind_ref_doctype_xsd(logtalk, local, logtalk-'logtalk_entity.dtd', 'logtalk_entity.xsd').
+	kind_ref_doctype_xsd(logtalk, web, logtalk-'http://logtalk.org/xml/4.0/logtalk_entity.dtd', 'http://logtalk.org/xml/4.0/logtalk_entity.xsd').
 	kind_ref_doctype_xsd(logtalk, standalone, logtalk-none, none).
 
-	kind_ref_doctype_xsd(index, local, index-'index.dtd', 'index.xsd').
-	kind_ref_doctype_xsd(index, web, index-'http://logtalk.org/xml/4.0/index.dtd', 'http://logtalk.org/xml/4.0/index.xsd').
+	kind_ref_doctype_xsd(index, local, index-'logtalk_index.dtd', 'logtalk_index.xsd').
+	kind_ref_doctype_xsd(index, web, index-'http://logtalk.org/xml/4.0/logtalk_index.dtd', 'http://logtalk.org/xml/4.0/logtalk_index.xsd').
 	kind_ref_doctype_xsd(index, standalone, index-none, none).
 
 	write_index_keys([], _, _).
@@ -1223,11 +1223,11 @@
 		write_xml_close_tag(Stream, entity),
 		write_index_key_entities(Entities, Stream).	
 
-	default_option(xslfile, 'lgtxml.xsl').
-	default_option(ixslfile, 'idxxml.xsl').
+	default_option(entity_xsl_file, 'logtalk_entity_to_xml.xsl').
+	default_option(index_xsl_file, 'logtalk_index_to_xml.xsl').
 	default_option(xmlspec, dtd).
 	default_option(xmlsref, local).
-	default_option(xmldir, './xml_docs/').
+	default_option(xml_docs_directory, './xml_docs/').
 	default_option(bom, true).
 	default_option(encoding, 'UTF-8').
 	default_option(omit_path_prefixes, []).
@@ -1235,11 +1235,11 @@
 	default_option(exclude_paths, []).
 	default_option(exclude_entities, []).
 
-	valid_option(xslfile).
-	valid_option(ixslfile).
+	valid_option(entity_xsl_file).
+	valid_option(index_xsl_file).
 	valid_option(xmlsref).
 	valid_option(xmlspec).
-	valid_option(xmldir).
+	valid_option(xml_docs_directory).
 	valid_option(bom).
 	valid_option(encoding).
 	valid_option(omit_path_prefixes).
@@ -1256,7 +1256,7 @@
 	valid_option(xmlsref, web) :- !.
 	valid_option(xmlspec, dtd) :- !.
 	valid_option(xmlspec, xsd) :- !.
-	valid_option(xmldir, Directory) :-
+	valid_option(xml_docs_directory, Directory) :-
 		atom(Directory).
 	valid_option(bom, true) :- !.
 	valid_option(bom, false) :- !.
@@ -1285,7 +1285,7 @@
 		assertz(option_(Option, Value)).
 
 	merge_options(UserOptions, Options) :-
-		(member(xmldir(Directory), UserOptions) -> true; option(xmldir, Directory)),
+		(member(xml_docs_directory(Directory), UserOptions) -> true; option(xml_docs_directory, Directory)),
 		(member(xmlsref(XMLSRef), UserOptions) -> true; option(xmlsref, XMLSRef)),
 		(member(xmlspec(XMLSpec), UserOptions) -> true; option(xmlspec, XMLSpec)),
 		(member(xslfile(XSL), UserOptions) -> true; option(xslfile, XSL)),
@@ -1301,7 +1301,7 @@
 		% by default, don't exclude any entities:
 		(member(exclude_entities(ExcludedEntities), UserOptions) -> true; option(exclude_entities, ExcludedEntities)),
 		Options = [
-			xmldir(Directory), xmlsref(XMLSRef), xmlspec(XMLSpec), xslfile(XSL), ixslfile(IXSL),
+			xml_docs_directory(Directory), xmlsref(XMLSRef), xmlspec(XMLSpec), xslfile(XSL), ixslfile(IXSL),
 			encoding(Encoding), bom(BOM),
 			omit_path_prefixes(Prefixes),
 			exclude_files(ExcludedFiles), exclude_paths(ExcludedPaths), exclude_entities(ExcludedEntities)

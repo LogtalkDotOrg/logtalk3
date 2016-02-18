@@ -66,7 +66,7 @@
 		comment is 'Creates XML documenting files for all entities in a library using the specified options.',
 		argnames is ['Library', 'Options'],
 		examples is [
-			'Generate XML documenting files for all library entities for later conversion to PDF A4 files' - library(library,[xslfile('lgtpdfa4.xsl')]) - {yes}
+			'Generate XML documenting files for all library entities for later conversion to PDF A4 files' - library(library,[xslfile('logtalk_entity_to_pdf_a4.xsl')]) - {yes}
 		]
 	]).
 
@@ -103,7 +103,7 @@
 		comment is 'Creates XML documenting files for all entities in a directory using the specified options.',
 		argnames is ['Directory', 'Options'],
 		examples is [
-			'Generate XML documenting files for all the entities in the current directory for later conversion to PDF A4 files' - directory('.',[xslfile('lgtpdfa4.xsl')]) - {yes}
+			'Generate XML documenting files for all the entities in the current directory for later conversion to PDF A4 files' - directory('.',[xslfile('logtalk_entity_to_pdf_a4.xsl')]) - {yes}
 		]
 	]).
 

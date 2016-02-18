@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to PDF conversion script 
-##   Last updated on November 3, 2014
+##   Last updated on February 17, 2016
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -79,8 +79,8 @@ elif ! [ -d "$LOGTALKUSER" ]; then
 fi
 echo
 
-a4_xsl="$LOGTALKUSER/tools/lgtdoc/xml/lgtpdfa4.xsl"
-us_xsl="$LOGTALKUSER/tools/lgtdoc/xml/lgtpdfus.xsl"
+a4_xsl="$LOGTALKUSER/tools/lgtdoc/xml/logtalk_entity_to_pdf_a4.xsl"
+us_xsl="$LOGTALKUSER/tools/lgtdoc/xml/logtalk_entity_to_pdf_us.xsl"
 
 format=a4
 # format=us
@@ -152,22 +152,22 @@ else
 	xsl=$us_xsl
 fi
 
-if ! [ -e "./logtalk.dtd" ] ; then
-	cp "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk.dtd .
+if ! [ -e "./logtalk_entity.dtd" ] ; then
+	cp "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk_entity.dtd .
 fi
 
 if ! [ -e "./custom.ent" ] ; then
 	cp "$LOGTALKUSER"/tools/lgtdoc/xml/custom.ent .
 fi
 
-if ! [ -e "./logtalk.xsd" ] ; then
-	cp "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk.xsd .
+if ! [ -e "./logtalk_entity.xsd" ] ; then
+	cp "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk_entity.xsd .
 fi
 
 if [ `(grep -l "<logtalk" *.xml | wc -l) 2> /dev/null` -gt 0 ] ; then
 	echo
 	echo "converting XML files to PDF..."
-	for file in `grep -l "<logtalk" *.xml`; do
+	for file in `grep -l "<logtalk_entity" *.xml`; do
 		echo "  converting $file"
 		name="`expr "$file" : '\(.*\)\.[^./]*$' \| "$file"`"
 		case $processor in
@@ -184,8 +184,8 @@ else
 fi
 
 if [ "$PWD" != "$LOGTALKHOME"/xml ] ; then
-	rm -f ./logtalk.dtd
-	rm -f ./logtalk.xsd
+	rm -f ./logtalk_entity.dtd
+	rm -f ./logtalk_entity.xsd
 	rm -f ./custom.ent
 fi
 

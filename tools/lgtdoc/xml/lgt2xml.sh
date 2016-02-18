@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to XML conversion script 
-##   Last updated on November 3, 2014
+##   Last updated on February 17, 2016
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -133,7 +133,7 @@ create_index_file()
 		echo "    <li><a href=\"entity_index.xml\">Entity index</a></li>" >> "$index_file"
 		echo "    <li><a href=\"predicate_index.xml\">Predicate index</a></li>" >> "$index_file"
 	else
-		for file in `grep -l "<logtalk" *.xml`; do
+		for file in `grep -l "<logtalk_entity" *.xml`; do
 			name="`expr "$file" : '\(.*\)\.[^./]*$' \| "$file"`"
 			entity=${name%_*}
 			pars=${name##*_}
@@ -183,36 +183,36 @@ if [ "$t_arg" != "" ] ; then
 	index_title=$t_arg
 fi
 
-if ! [ -e "./logtalk.dtd" ] ; then
-	cp "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk.dtd .
+if ! [ -e "./logtalk_entity.dtd" ] ; then
+	cp "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk_entity.dtd .
 fi
 
-if ! [ -e "./index.dtd" ] ; then
-	cp "$LOGTALKHOME"/tools/lgtdoc/xml/index.dtd .
+if ! [ -e "./logtalk_index.dtd" ] ; then
+	cp "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk_index.dtd .
 fi
 
 if ! [ -e "./custom.ent" ] ; then
 	cp "$LOGTALKUSER"/tools/lgtdoc/xml/custom.ent .
 fi
 
-if ! [ -e "./logtalk.xsd" ] ; then
-	cp "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk.xsd .
+if ! [ -e "./logtalk_entity.xsd" ] ; then
+	cp "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk_entity.xsd .
 fi
 
-if ! [ -e "./index.xsd" ] ; then
-	cp "$LOGTALKHOME"/tools/lgtdoc/xml/index.xsd .
+if ! [ -e "./logtalk_index.xsd" ] ; then
+	cp "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk_index.xsd .
 fi
 
 if ! [ -e "./logtalk.css" ] ; then
 	cp "$LOGTALKUSER"/tools/lgtdoc/xml/logtalk.css .
 fi
 
-if ! [ -e "./lgtxml.xsl" ] ; then
-	cp "$LOGTALKUSER"/tools/lgtdoc/xml/lgtxml.xsl .
+if ! [ -e "./logtalk_entity_to_xml.xsl" ] ; then
+	cp "$LOGTALKUSER"/tools/lgtdoc/xml/logtalk_entity_to_xml.xsl .
 fi
 
-if ! [ -e "./idxxml.xsl" ] ; then
-	cp "$LOGTALKUSER"/tools/lgtdoc/xml/idxxml.xsl .
+if ! [ -e "./logtalk_index_to_xml.xsl" ] ; then
+	cp "$LOGTALKUSER"/tools/lgtdoc/xml/logtalk_index_to_xml.xsl .
 fi
 
 if [ `(ls *.xml | wc -l) 2> /dev/null` -gt 0 ] ; then

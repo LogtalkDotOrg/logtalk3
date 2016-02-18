@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////////////////////
 //
 //   XML documenting files to XML conversion script 
-//   Last updated on November 3, 2014
+//   Last updated on February 17, 2016
 //
 //   This file is part of Logtalk <http://logtalk.org/>  
 //   Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -95,24 +95,24 @@ if (i_arg != "")
 if (t_arg != "")
 	index_title=t_arg;
 
-if (!FSObject.FileExists(directory + "\\logtalk.dtd")) {
-	FSObject.CopyFile(logtalk_home + "\\xml\\logtalk.dtd", directory + "\\logtalk.dtd");
+if (!FSObject.FileExists(directory + "\\logtalk_entity.dtd")) {
+	FSObject.CopyFile(logtalk_home + "\\xml\\logtalk_entity.dtd", directory + "\\logtalk_entity.dtd");
 }
 
 if (!FSObject.FileExists(directory + "\\custom.ent")) {
 	FSObject.CopyFile(logtalk_home + "\\xml\\custom.ent", directory + "\\custom.ent");
 }
 
-if (!FSObject.FileExists(directory + "\\logtalk.xsd")) {
-	FSObject.CopyFile(logtalk_home + "\\xml\\logtalk.xsd", directory + "\\logtalk.xsd");
+if (!FSObject.FileExists(directory + "\\logtalk_entity.xsd")) {
+	FSObject.CopyFile(logtalk_home + "\\xml\\logtalk_entity.xsd", directory + "\\logtalk_entity.xsd");
 }
 
 if (!FSObject.FileExists(directory + "\\logtalk.css")) {
 	FSObject.CopyFile(logtalk_user + "\\xml\\logtalk.css", directory + "\\logtalk.css");
 }
 
-if (!FSObject.FileExists(directory + "\\lgtxml.xsl")) {
-	FSObject.CopyFile(logtalk_user + "\\xml\\lgtxml.xsl", directory + "\\lgtxml.xsl");
+if (!FSObject.FileExists(directory + "\\logtalk_entity_to_xml.xsl")) {
+	FSObject.CopyFile(logtalk_user + "\\xml\\logtalk_entity_to_xml.xsl", directory + "\\logtalk_entity_to_xml.xsl");
 }
 
 WScript.Echo("");
@@ -170,18 +170,24 @@ function create_index_file() {
 
 	var files = new Enumerator(FSObject.GetFolder(directory).Files);
 
-	for (files.moveFirst(); !files.atEnd(); files.moveNext()) {
-		var file = files.item().name;
-		if (FSObject.GetExtensionName(file) == "xml") {
-			WScript.Echo("  indexing " + file);
-			var index = FSObject.GetBaseName(file).lastIndexOf("_");
-			var pars = FSObject.GetBaseName(file).slice(index+1);
-			var entity = FSObject.GetBaseName(file).slice(0, index);
-			if (pars == 0)
-				f.WriteLine("    <li><a href=\"" + file + "\">" + entity + "</a></li>");
-			else
-				f.WriteLine("    <li><a href=\"" + file + "\">" + entity + "/" + pars + "</a></li>");
-
+	if (WScript.Arguments.Named.Exists("./directory_index.xml")) then {
+		f.WriteLine("    <li><a href=\"directory_index.xml\">Directory index</a></li>");
+		f.WriteLine("    <li><a href=\"entity_index.xml\">Entity index</a></li>");
+		f.WriteLine("    <li><a href=\"predicate_index.xml\">Predicate index</a></li>");
+	} else {
+		for (files.moveFirst(); !files.atEnd(); files.moveNext()) {
+			var file = files.item().name;
+			if (FSObject.GetExtensionName(file) == "xml") {
+				WScript.Echo("  indexing " + file);
+				var index = FSObject.GetBaseName(file).lastIndexOf("_");
+				var pars = FSObject.GetBaseName(file).slice(index+1);
+				var entity = FSObject.GetBaseName(file).slice(0, index);
+				if (pars == 0)
+					f.WriteLine("    <li><a href=\"" + file + "\">" + entity + "</a></li>");
+				else
+					f.WriteLine("    <li><a href=\"" + file + "\">" + entity + "/" + pars + "</a></li>");
+        	
+			}
 		}
 	}
 

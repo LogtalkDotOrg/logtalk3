@@ -72,10 +72,14 @@ else {
 	WScript.Quit(1);
 }
 
-var html_xslt = logtalk_user + "\\xml\\lgthtml.xsl";
-var xhtml_xslt = logtalk_user + "\\xml\\lgtxhtml.xsl";
+var html_entity_xslt = logtalk_user + "\\xml\\logtalk_entity_to_html.xsl";
+var xhtml_entity_xslt = logtalk_user + "\\xml\\logtalk_entity_to_xhtml.xsl";
 
-var xslt;
+var html_index_xslt = logtalk_user + "\\xml\\logtalk_index_to_html.xsl"
+var xhtml_index_xslt = logtalk_user + "\\xml\\logtalk_index_to_xhtml.xsl"
+
+var entity_xslt;
+var index_xslt;
 
 var f_arg = "";
 var d_arg = "";
@@ -127,21 +131,32 @@ if (p_arg != "" && p_arg != "msxsl" && p_arg != "xsltproc" && p_arg != "xalan" &
 } else if (p_arg != "")
 	processor = p_arg;
 
-if (format == "xhtml")
-	xslt = xhtml_xslt;
-else
-	xslt = html_xslt;
+if (format == "xhtml") {
+	entity_xslt = xhtml_entity_xslt;
+	index_xslt = xhtml_index_xslt;
+} else {
+	entity_xslt = html_entity_xslt;
+	index_xslt = html_entity_xslt;
+}
 
-if (!FSObject.FileExists(WshShell.CurrentDirectory + "\\logtalk.dtd")) {
-	FSObject.CopyFile(logtalk_home + "\\xml\\logtalk.dtd", WshShell.CurrentDirectory + "\\logtalk.dtd");
+if (!FSObject.FileExists(WshShell.CurrentDirectory + "\\logtalk_entity.dtd")) {
+	FSObject.CopyFile(logtalk_home + "\\xml\\logtalk_entity.dtd", WshShell.CurrentDirectory + "\\logtalk_entity.dtd");
+}
+
+if (!FSObject.FileExists(WshShell.CurrentDirectory + "\\logtalk_index.dtd")) {
+	FSObject.CopyFile(logtalk_home + "\\xml\\logtalk_index.dtd", WshShell.CurrentDirectory + "\\logtalk_index.dtd");
 }
 
 if (!FSObject.FileExists(WshShell.CurrentDirectory + "\\custom.ent")) {
 	FSObject.CopyFile(logtalk_home + "\\xml\\custom.ent", WshShell.CurrentDirectory + "\\custom.ent");
 }
 
-if (!FSObject.FileExists(WshShell.CurrentDirectory + "\\logtalk.xsd")) {
-	FSObject.CopyFile(logtalk_home + "\\xml\\logtalk.xsd", WshShell.CurrentDirectory + "\\logtalk.xsd");
+if (!FSObject.FileExists(WshShell.CurrentDirectory + "\\logtalk_entity.xsd")) {
+	FSObject.CopyFile(logtalk_home + "\\xml\\logtalk_entity.xsd", WshShell.CurrentDirectory + "\\logtalk_entity.xsd");
+}
+
+if (!FSObject.FileExists(WshShell.CurrentDirectory + "\\logtalk_index.xsd")) {
+	FSObject.CopyFile(logtalk_home + "\\xml\\logtalk_index.xsd", WshShell.CurrentDirectory + "\\logtalk_index.xsd");
 }
 
 if (!FSObject.FileExists(directory + "\\logtalk.css")) {
@@ -155,9 +170,14 @@ var files = new Enumerator(FSObject.GetFolder(WshShell.CurrentDirectory).Files);
 
 for (files.moveFirst(); !files.atEnd(); files.moveNext()) {
 	var file = files.item().name;
+	var xslt;
 	if (FSObject.GetExtensionName(file) == "xml") {
 		WScript.Echo("  converting " + file);
 		var html_file = directory + "\\" + FSObject.GetBaseName(file) + ".html";
+		if (file == "directory_index.xml" || file == "entity_index.xml" || file == "predicate_index.xml") then
+			xslt = index_xslt;
+		else
+			xslt = entity_xslt;
 		switch (processor) {
 			case "msxsl" :
 				WshShell.Run("msxsl -o \"" + html_file + "\" \"" + file + "\" \"" + xslt + "\"", true);

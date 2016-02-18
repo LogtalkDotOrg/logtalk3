@@ -79,11 +79,11 @@ elif ! [ -d "$LOGTALKUSER" ]; then
 fi
 echo
 
-html_lgt_xslt="$LOGTALKUSER/tools/lgtdoc/xml/lgthtml.xsl"
-xhtml_lgt_xslt="$LOGTALKUSER/tools/lgtdoc/xml/lgtxhtml.xsl"
+html_entity_xslt="$LOGTALKUSER/tools/lgtdoc/xml/logtalk_entity_to_html.xsl"
+xhtml_entity_xslt="$LOGTALKUSER/tools/lgtdoc/xml/logtalk_entity_to_xhtml.xsl"
 
-html_idx_xslt="$LOGTALKUSER/tools/lgtdoc/xml/idxhtml.xsl"
-xhtml_idx_xslt="$LOGTALKUSER/tools/lgtdoc/xml/idxxhtml.xsl"
+html_index_xslt="$LOGTALKUSER/tools/lgtdoc/xml/logtalk_index_to_html.xsl"
+xhtml_index_xslt="$LOGTALKUSER/tools/lgtdoc/xml/logtalk_index_to_xhtml.xsl"
 
 format=xhtml
 
@@ -148,7 +148,7 @@ create_index_file()
 		echo "    <li><a href=\"entity_index.html\">Entity index</a></li>" >> "$index_file"
 		echo "    <li><a href=\"predicate_index.html\">Predicate index</a></li>" >> "$index_file"
 	else
-		for file in `grep -l "<logtalk" *.xml`; do
+		for file in `grep -l "<logtalk_entity" *.xml`; do
 			name="`expr "$file" : '\(.*\)\.[^./]*$' \| "$file"`"
 			entity=${name%_*}
 			pars=${name##*_}
@@ -217,31 +217,31 @@ elif [ "$p_arg" != "" ] ; then
 fi
 
 if [ "$format" = "xhtml" ] ; then
-	xslt=$xhtml_lgt_xslt
-	ixslt=$xhtml_idx_xslt
+	entity_xslt=$xhtml_entity_xslt
+	index_xslt=$xhtml_index_xslt
 else
-	xslt=$html_lgt_xslt
-	ixslt=$html_idx_xslt
+	entity_xslt=$html_entity_xslt
+	index_xslt=$html_index_xslt
 fi
 
-if ! [ -e "./logtalk.dtd" ] ; then
-	cp "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk.dtd .
+if ! [ -e "./logtalk_entity.dtd" ] ; then
+	cp "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk_entity.dtd .
 fi
 
-if ! [ -e "./insdex.dtd" ] ; then
-	cp "$LOGTALKHOME"/tools/lgtdoc/xml/index.dtd .
+if ! [ -e "./logtalk_index.dtd" ] ; then
+	cp "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk_index.dtd .
 fi
 
 if ! [ -e "./custom.ent" ] ; then
 	cp "$LOGTALKUSER"/tools/lgtdoc/xml/custom.ent .
 fi
 
-if ! [ -e "./logtalk.xsd" ] ; then
-	cp "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk.xsd .
+if ! [ -e "./logtalk_entity.xsd" ] ; then
+	cp "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk_entity.xsd .
 fi
 
-if ! [ -e "./index.xsd" ] ; then
-	cp "$LOGTALKHOME"/tools/lgtdoc/xml/index.xsd .
+if ! [ -e "./logtalk_index.xsd" ] ; then
+	cp "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk_index.xsd .
 fi
 
 if ! [ -e "$directory/logtalk.css" ] ; then
@@ -251,22 +251,22 @@ fi
 if [ `(grep -l "<logtalk" *.xml | wc -l) 2> /dev/null` -gt 0 ] ; then
 	echo
 	echo "converting XML files..."
-	for file in `grep -l "<logtalk" *.xml`; do
+	for file in `grep -l "<logtalk_entity" *.xml`; do
 		echo "  converting $file"
 		name="`expr "$file" : '\(.*\)\.[^./]*$' \| "$file"`"
 		case "$processor" in
-			xsltproc)	eval xsltproc -o \"$directory\"/\"$name.html\" \"$xslt\" \"$file\";;
-			xalan)		eval xalan -o \"$directory\"/\"$name.html\" \"$file\" \"$xslt\";;
-			sabcmd)		eval sabcmd \"$xslt\" \"$file\" \"$directory\"/\"$name.html\";;
+			xsltproc)	eval xsltproc -o \"$directory\"/\"$name.html\" \"$entity_xslt\" \"$file\";;
+			xalan)		eval xalan -o \"$directory\"/\"$name.html\" \"$file\" \"$entity_xslt\";;
+			sabcmd)		eval sabcmd \"$entity_xslt\" \"$file\" \"$directory\"/\"$name.html\";;
 		esac
 	done
-	for file in `grep -l "<index" *.xml`; do
+	for file in `grep -l "<logtalk_index" *.xml`; do
 		echo "  converting $file"
 		name="`expr "$file" : '\(.*\)\.[^./]*$' \| "$file"`"
 		case "$processor" in
-			xsltproc)	eval xsltproc -o \"$directory\"/\"$name.html\" \"$ixslt\" \"$file\";;
-			xalan)		eval xalan -o \"$directory\"/\"$name.html\" \"$file\" \"$ixslt\";;
-			sabcmd)		eval sabcmd \"$ixslt\" \"$file\" \"$directory\"/\"$name.html\";;
+			xsltproc)	eval xsltproc -o \"$directory\"/\"$name.html\" \"$index_xslt\" \"$file\";;
+			xalan)		eval xalan -o \"$directory\"/\"$name.html\" \"$file\" \"$index_xslt\";;
+			sabcmd)		eval sabcmd \"$index_xslt\" \"$file\" \"$directory\"/\"$name.html\";;
 		esac
 	done
 	echo "conversion done"
