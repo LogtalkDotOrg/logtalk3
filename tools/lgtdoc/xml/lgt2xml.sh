@@ -81,7 +81,7 @@ echo
 
 format=xhtml
 index_file=index.html
-index_title="Entity documentation index"
+index_title="Documentation index"
 
 usage_help()
 {
@@ -96,7 +96,7 @@ usage_help()
 	echo "Optional arguments:"
 	echo "  -f format of the index file (either xhtml or html; default is $format)"
 	echo "  -i name of the index file (default is $index_file)"
-	echo "  -t title to be used on the index file (default is $index_title)"
+	echo "  -t title to be used in the index file (default is $index_title)"
 	echo "  -h help"
 	echo
 	exit 1
@@ -128,18 +128,24 @@ create_index_file()
 	echo "<h1>"$index_title"</h1>" >> "$index_file"
 	echo "<ul>" >> "$index_file"
 
-	for file in `grep -l "<logtalk" *.xml`; do
-		name="`expr "$file" : '\(.*\)\.[^./]*$' \| "$file"`"
-		entity=${name%_*}
-		pars=${name##*_}
-		echo "  indexing $file"
-		if [ $pars -gt 0 ]
-		then
-			echo "    <li><a href=\""$file"\">"$entity"/"$pars"</a></li>" >> "$index_file"
-		else
-			echo "    <li><a href=\""$file"\">"$entity"</a></li>" >> "$index_file"
-		fi
-	done
+	if [ -e "./directory_index.xml" ] ; then
+		echo "    <li><a href=\"directory_index.xml\">Directory index</a></li>" >> "$index_file"
+		echo "    <li><a href=\"entity_index.xml\">Entity index</a></li>" >> "$index_file"
+		echo "    <li><a href=\"predicate_index.xml\">Predicate index</a></li>" >> "$index_file"
+	else
+		for file in `grep -l "<logtalk" *.xml`; do
+			name="`expr "$file" : '\(.*\)\.[^./]*$' \| "$file"`"
+			entity=${name%_*}
+			pars=${name##*_}
+			echo "  indexing $file"
+			if [ $pars -gt 0 ]
+			then
+				echo "    <li><a href=\""$file"\">"$entity"/"$pars"</a></li>" >> "$index_file"
+			else
+				echo "    <li><a href=\""$file"\">"$entity"</a></li>" >> "$index_file"
+			fi
+		done
+	fi
 
 	echo "</ul>" >> "$index_file"
 
@@ -181,6 +187,10 @@ if ! [ -e "./logtalk.dtd" ] ; then
 	cp "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk.dtd .
 fi
 
+if ! [ -e "./index.dtd" ] ; then
+	cp "$LOGTALKHOME"/tools/lgtdoc/xml/index.dtd .
+fi
+
 if ! [ -e "./custom.ent" ] ; then
 	cp "$LOGTALKUSER"/tools/lgtdoc/xml/custom.ent .
 fi
@@ -189,12 +199,20 @@ if ! [ -e "./logtalk.xsd" ] ; then
 	cp "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk.xsd .
 fi
 
+if ! [ -e "./index.xsd" ] ; then
+	cp "$LOGTALKHOME"/tools/lgtdoc/xml/index.xsd .
+fi
+
 if ! [ -e "./logtalk.css" ] ; then
 	cp "$LOGTALKUSER"/tools/lgtdoc/xml/logtalk.css .
 fi
 
 if ! [ -e "./lgtxml.xsl" ] ; then
 	cp "$LOGTALKUSER"/tools/lgtdoc/xml/lgtxml.xsl .
+fi
+
+if ! [ -e "./idxxml.xsl" ] ; then
+	cp "$LOGTALKUSER"/tools/lgtdoc/xml/idxxml.xsl .
 fi
 
 if [ `(ls *.xml | wc -l) 2> /dev/null` -gt 0 ] ; then

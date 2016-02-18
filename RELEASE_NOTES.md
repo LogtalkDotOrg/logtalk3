@@ -27,6 +27,9 @@ RELEASE NOTES
 Tools
 -----
 
+* ADDED: Support for generating directory, entity, and predicate indexes to
+the `lgtdoc` tool.
+
 * ADDED: Predicates `directory/1-2` and `rdirectory/1-2` to the `lgtdoc` tool
 for generating documentation for a directory or for a directory and all its
 sub-directories.

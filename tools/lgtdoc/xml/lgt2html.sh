@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to (X)HTML conversion script 
-##   Last updated on November 3, 2014
+##   Last updated on February 17, 2016
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -79,15 +79,18 @@ elif ! [ -d "$LOGTALKUSER" ]; then
 fi
 echo
 
-html_xslt="$LOGTALKUSER/tools/lgtdoc/xml/lgthtml.xsl"
-xhtml_xslt="$LOGTALKUSER/tools/lgtdoc/xml/lgtxhtml.xsl"
+html_lgt_xslt="$LOGTALKUSER/tools/lgtdoc/xml/lgthtml.xsl"
+xhtml_lgt_xslt="$LOGTALKUSER/tools/lgtdoc/xml/lgtxhtml.xsl"
+
+html_idx_xslt="$LOGTALKUSER/tools/lgtdoc/xml/idxhtml.xsl"
+xhtml_idx_xslt="$LOGTALKUSER/tools/lgtdoc/xml/idxxhtml.xsl"
 
 format=xhtml
 
 directory="."
 
 index_file=index.html
-index_title="Entity documentation index"
+index_title="Documentation index"
 
 processor=xsltproc
 # processor=xalan
@@ -107,7 +110,7 @@ usage_help()
 	echo "  -f output file format (either xhtml or html; default is $format)"
 	echo "  -d output directory for the generated files (default is $directory)"
 	echo "  -i name of the index file (default is $index_file)"
-	echo "  -t title to be used on the index file (default is $index_title)"
+	echo "  -t title to be used in the index file (default is $index_title)"
 	echo "  -p XSLT processor (xsltproc, xalan, or sabcmd; default is $processor)"
 	echo "  -h help"
 	echo
@@ -140,18 +143,24 @@ create_index_file()
 	echo "<h1>"$index_title"</h1>" >> "$index_file"
 	echo "<ul>" >> "$index_file"
 
-	for file in `grep -l "<logtalk" *.xml`; do
-		name="`expr "$file" : '\(.*\)\.[^./]*$' \| "$file"`"
-		entity=${name%_*}
-		pars=${name##*_}
-		echo "  indexing $name.html"
-		if [ $pars -gt 0 ]
-		then
-			echo "    <li><a href=\""$name".html\">"$entity"/"$pars"</a></li>" >> "$index_file"
-		else
-			echo "    <li><a href=\""$name".html\">"$entity"</a></li>" >> "$index_file"
-		fi
-	done
+	if [ -e "./directory_index.xml" ] ; then
+		echo "    <li><a href=\"directory_index.html\">Directory index</a></li>" >> "$index_file"
+		echo "    <li><a href=\"entity_index.html\">Entity index</a></li>" >> "$index_file"
+		echo "    <li><a href=\"predicate_index.html\">Predicate index</a></li>" >> "$index_file"
+	else
+		for file in `grep -l "<logtalk" *.xml`; do
+			name="`expr "$file" : '\(.*\)\.[^./]*$' \| "$file"`"
+			entity=${name%_*}
+			pars=${name##*_}
+			echo "  indexing $name.html"
+			if [ $pars -gt 0 ]
+			then
+				echo "    <li><a href=\""$name".html\">"$entity"/"$pars"</a></li>" >> "$index_file"
+			else
+				echo "    <li><a href=\""$name".html\">"$entity"</a></li>" >> "$index_file"
+			fi
+		done
+	fi
 
 	echo "</ul>" >> "$index_file"
 
@@ -208,13 +217,19 @@ elif [ "$p_arg" != "" ] ; then
 fi
 
 if [ "$format" = "xhtml" ] ; then
-	xslt=$xhtml_xslt
+	xslt=$xhtml_lgt_xslt
+	ixslt=$xhtml_idx_xslt
 else
-	xslt=$html_xslt
+	xslt=$html_lgt_xslt
+	ixslt=$html_idx_xslt
 fi
 
 if ! [ -e "./logtalk.dtd" ] ; then
 	cp "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk.dtd .
+fi
+
+if ! [ -e "./insdex.dtd" ] ; then
+	cp "$LOGTALKHOME"/tools/lgtdoc/xml/index.dtd .
 fi
 
 if ! [ -e "./custom.ent" ] ; then
@@ -223,6 +238,10 @@ fi
 
 if ! [ -e "./logtalk.xsd" ] ; then
 	cp "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk.xsd .
+fi
+
+if ! [ -e "./index.xsd" ] ; then
+	cp "$LOGTALKHOME"/tools/lgtdoc/xml/index.xsd .
 fi
 
 if ! [ -e "$directory/logtalk.css" ] ; then
@@ -239,6 +258,15 @@ if [ `(grep -l "<logtalk" *.xml | wc -l) 2> /dev/null` -gt 0 ] ; then
 			xsltproc)	eval xsltproc -o \"$directory\"/\"$name.html\" \"$xslt\" \"$file\";;
 			xalan)		eval xalan -o \"$directory\"/\"$name.html\" \"$file\" \"$xslt\";;
 			sabcmd)		eval sabcmd \"$xslt\" \"$file\" \"$directory\"/\"$name.html\";;
+		esac
+	done
+	for file in `grep -l "<index" *.xml`; do
+		echo "  converting $file"
+		name="`expr "$file" : '\(.*\)\.[^./]*$' \| "$file"`"
+		case "$processor" in
+			xsltproc)	eval xsltproc -o \"$directory\"/\"$name.html\" \"$ixslt\" \"$file\";;
+			xalan)		eval xalan -o \"$directory\"/\"$name.html\" \"$file\" \"$ixslt\";;
+			sabcmd)		eval sabcmd \"$ixslt\" \"$file\" \"$directory\"/\"$name.html\";;
 		esac
 	done
 	echo "conversion done"

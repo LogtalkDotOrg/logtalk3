@@ -34,7 +34,7 @@ var format = "xhtml";
 var directory = WshShell.CurrentDirectory;
 
 var index_file = "index.html";
-var index_title = "Entity documentation index";
+var index_title = "Documentation index";
 
 if (WScript.Arguments.Unnamed.Length > 0) {
 	usage_help();
@@ -137,7 +137,7 @@ function usage_help() {
 	WScript.Echo("Optional arguments:");
 	WScript.Echo("  f - format of the index file (either xhtml or html; default is " + format + ")");
 	WScript.Echo("  i - name of the index file (default is " + index_file + ")");
-	WScript.Echo("  t - title to be used on the index file (default is " + index_title + ")");
+	WScript.Echo("  t - title to be used in the index file (default is " + index_title + ")");
 	WScript.Echo("");
 	WScript.Quit(1);
 }

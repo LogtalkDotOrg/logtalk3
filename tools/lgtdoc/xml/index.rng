@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  
+%  This file is part of Logtalk <http://logtalk.org/>
+%  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
+%  
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
+%  
+%      http://www.apache.org/licenses/LICENSE-2.0
+%  
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+-->
+
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+
+	<define name="index">
+		<element name="index">
+			<ref name="type"/>
+			<ref name="entries"/>
+		</element>
+	</define>
+
+	<define name="entries">
+		<element name="entries">
+			<ref name="entry"/>
+		</element>
+	</define>
+
+	<define name="entry">
+		<element name="entry">
+			<ref name="key"/>
+			<ref name="entities"/>
+		</element>
+	</define>
+
+	<define name="entities">
+		<element name="entities">
+			<ref name="entity"/>
+		</element>
+	</define>
+
+	<define name="entity">
+		<element name="entity">
+			<ref name="file"/>
+			<ref name="name"/>
+		</element>
+	</define>
+
+	<define name="key">
+		<element name="key">
+			<text/>
+		</element>
+	</define>
+
+	<define name="file">
+		<element name="file">
+			<text/>
+		</element>
+	</define>
+
+	<define name="name">
+		<element name="name">
+			<text/>
+		</element>
+	</define>
+
+	<start>
+		<choice>
+			<ref name="index"/>
+		</choice>
+	</start>
+
+</grammar>

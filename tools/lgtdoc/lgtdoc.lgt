@@ -36,10 +36,35 @@
 		argnames is ['Option', 'Value']
 	]).
 
+	:- private(directory_entity_/2).
+	:- dynamic(directory_entity_/2).
+	:- mode(directory_entity_(?atom, ?atom), zero_or_more).
+	:- info(directory_entity_/2, [
+		comment is 'Table of documented entities per directory.',
+		argnames is ['Directory', 'Entity']
+	]).
+
+	:- private(type_entity_/2).
+	:- dynamic(type_entity_/2).
+	:- mode(type_entity_(?atom, ?atom), zero_or_more).
+	:- info(type_entity_/2, [
+		comment is 'Table of documented entities per type.',
+		argnames is ['Type', 'Entity']
+	]).
+
+	:- private(predicate_entity_/2).
+	:- dynamic(predicate_entity_/2).
+	:- mode(predicate_entity_(?predicate_indicator, ?entity_identifier), zero_or_more).
+	:- info(predicate_entity_/2, [
+		comment is 'Table of public predicates for all documented entities.',
+		argnames is ['Predicate', 'Entity']
+	]).
+
 	rlibrary(Library, UserOptions) :-
+		reset,
 		merge_options(UserOptions, Options),
 		logtalk::expand_library_path(Library, TopPath),
-		once(member(xmldir(XMLDirectory), Options)),
+		memberchk(xmldir(XMLDirectory), Options),
 		os::working_directory(Current),
 		os::change_directory(TopPath),
 		os::make_directory(XMLDirectory),
@@ -51,11 +76,12 @@
 		rlibrary(Library, []).
 
 	output_rlibrary(TopPath, Options) :-
-		once(member(exclude_paths(ExcludedPaths), Options)),
+		memberchk(exclude_paths(ExcludedPaths), Options),
 		forall(
 			sub_library(TopPath, ExcludedPaths, LibraryPath),
 			output_directory_files(LibraryPath, Options)
-		).
+		),
+		write_indexes(Options).
 
 	sub_library(TopPath, ExcludedPaths, LibraryPath) :-
 		logtalk_library_path(Library, _),
@@ -64,23 +90,26 @@
 		\+ member(RelativePath, ExcludedPaths).
 
 	library(Library, UserOptions) :-
+		reset,
 		merge_options(UserOptions, Options),
 		logtalk::expand_library_path(Library, Path),
-		once(member(xmldir(XMLDirectory), Options)),
+		memberchk(xmldir(XMLDirectory), Options),
 		os::working_directory(Current),
 		os::change_directory(Path),
 		os::make_directory(XMLDirectory),
 		os::change_directory(XMLDirectory),
 		output_directory_files(Path, Options),
+		write_indexes(Options),
 		os::change_directory(Current).
 
 	library(Library) :-
 		library(Library, []).
 
 	rdirectory(Directory, UserOptions) :-
+		reset,
 		merge_options(UserOptions, Options),
 		os::expand_path(Directory, Path),
-		once(member(xmldir(XMLDirectory), Options)),
+		memberchk(xmldir(XMLDirectory), Options),
 		os::working_directory(Current),
 		os::change_directory(Path),
 		os::make_directory(XMLDirectory),
@@ -101,7 +130,8 @@
 		forall(
 			member(SubDirectory, SubDirectories),
 			output_directory_files(SubDirectory, Options)
-		).
+		),
+		write_indexes(Options).
 
 	sub_directory(Directory, ExcludedPaths, SubDirectory) :-
 		logtalk::loaded_file(Path),
@@ -110,14 +140,16 @@
 		\+ member(RelativePath, ExcludedPaths).
 
 	directory(Directory, UserOptions) :-
+		reset,
 		merge_options(UserOptions, Options),
 		os::expand_path(Directory, Path),
-		once(member(xmldir(XMLDirectory), Options)),
+		memberchk(xmldir(XMLDirectory), Options),
 		os::working_directory(Current),
 		os::change_directory(Path),
 		os::make_directory(XMLDirectory),
 		os::change_directory(XMLDirectory),
 		output_directory_files(Path, Options),
+		write_indexes(Options),
 		os::change_directory(Current).
 
 	directory(Directory) :-
@@ -128,7 +160,7 @@
 			DirectorySlash = Directory
 		;	atom_concat(Directory, '/', DirectorySlash)
 		),
-		once(member(exclude_files(ExcludedFiles), Options)),
+		memberchk(exclude_files(ExcludedFiles), Options),
 		logtalk::loaded_file_property(Path, directory(DirectorySlash)),
 		logtalk::loaded_file_property(Path, basename(File)),
 		logtalk::loaded_file_property(Path, text_properties(StreamOptions)),
@@ -144,9 +176,10 @@
 	output_directory_files(_, _).
 
 	file(Source, UserOptions) :-
+		reset,
 		locate_file(Source, Basename, Directory, StreamOptions),
 		merge_options(UserOptions, Options),
-		once(member(xmldir(XMLDirectory), Options)),
+		memberchk(xmldir(XMLDirectory), Options),
 		os::working_directory(Current),
 		os::change_directory(Directory),
 		os::make_directory(XMLDirectory),
@@ -158,8 +191,9 @@
 		file(Source, []).
 
 	all(UserOptions) :-
+		reset,
 		merge_options(UserOptions, Options),
-		once(member(xmldir(XMLDirectory), Options)),
+		memberchk(xmldir(XMLDirectory), Options),
 		os::working_directory(Current),
 		os::make_directory(XMLDirectory),
 		os::change_directory(XMLDirectory),
@@ -216,9 +250,17 @@
 		).
 
 	process(File, Path, Options, StreamOptions) :-
-		once(member(exclude_entities(ExcludedEntities), Options)),
+		memberchk(exclude_entities(ExcludedEntities), Options),
+		memberchk(omit_path_prefixes(Prefixes), Options),
 		entity_property(Entity, file(File, Path)),
 		\+ member(Entity, ExcludedEntities),
+		(	member(Prefix, Prefixes),
+			atom_concat(Prefix, Relative, Path) ->
+			assertz(directory_entity_(Relative, Entity))
+		;	assertz(directory_entity_(Path, Entity))
+		),
+		entity_type(Entity, Type),
+		assertz(type_entity_(Type, Entity)),
 		write_entity_doc(Entity, Options, StreamOptions),
 		fail.
 	process(_, _, _, _).
@@ -231,7 +273,7 @@
 		entity_doc_file_name(Entity, File),
 		convert_stream_options(StreamOptions, ConvertedStreamOptions),
 		open(File, write, Stream, ConvertedStreamOptions),
-		write_xml_file(Stream, Entity, Options, StreamOptions),
+		write_entity_xml_file(Stream, Entity, Options, StreamOptions),
 		close(Stream).
 
 	% entity_doc_file_name(@nonvar, -atom)
@@ -279,70 +321,55 @@
 		convert_stream_option(StreamOption, StreamOption).
 	:- endif.
 
-	% write_xml_file(@stream)
+	% write_entity_xml_file(@stream)
 	%
-	% writes a XML file containing the documentation of a compiled entity
+	% writes an entity XML file containing the documentation of a compiled entity
 
-	write_xml_file(Stream, Entity, Options, StreamOptions) :-
-		write_xml_header(Stream, Options, StreamOptions),
-		write_xml_entity(Stream, Entity),
-		write_xml_relations(Stream, Entity),
-		write_xml_predicates(Stream, Entity),
-		write_xml_operators(Stream, Entity),
-		write_xml_remarks(Stream, Entity),
-		write_xml_footer(Stream).
+	write_entity_xml_file(Stream, Entity, Options, StreamOptions) :-
+		write_entity_xml_header(Stream, Options, StreamOptions),
+		write_entity_xml_entity(Stream, Entity),
+		write_entity_xml_relations(Stream, Entity),
+		write_entity_xml_predicates(Stream, Entity),
+		write_entity_xml_operators(Stream, Entity),
+		write_entity_xml_remarks(Stream, Entity),
+		write_entity_xml_footer(Stream).
 
-	write_xml_header(Stream, Options, StreamOptions) :-
-		member(xmlsref(XMLSRef), Options),
+	write_entity_xml_header(Stream, Options, StreamOptions) :-
+		memberchk(xmlsref(XMLSRef), Options),
 		(	member(encoding(Encoding), StreamOptions) ->
 			true
 		;	Encoding = 'UTF-8'
 		),
-		member(xmlspec(XMLSpec), Options),
-		once(member(xslfile(XSL), Options)),
-		write_xml_header(XMLSRef, Encoding, XMLSpec, XSL, Stream).
+		memberchk(xmlspec(XMLSpec), Options),
+		memberchk(xslfile(XSL), Options),
+		once(kind_ref_doctype_xsd(logtalk, XMLSRef, DocTypeURL, XSDURL)),
+		write_xml_header(XMLSRef, Encoding, XMLSpec, DocTypeURL, XSL, XSDURL, Stream).
 
-	write_xml_header(local, Encoding, XMLSpec, XSL, Stream) :-
-		xml_header_text('1.0', Encoding, no, Text),
-		write_xml_open_tag(Stream, Text, []),
-		(	XMLSpec == dtd ->
-			write(Stream, '<!DOCTYPE logtalk SYSTEM "logtalk.dtd">'), nl(Stream)
-		;	true
-		),
-		write(Stream, '<?xml-stylesheet type="text/xsl" href="'),
-		write(Stream, XSL),
-		write(Stream, '"?>'), nl(Stream),
-		(	XMLSpec == dtd ->
-			write_xml_open_tag(Stream, logtalk, [])
-		;	write_xml_open_tag(Stream, logtalk,
-				['xmlns:xsi'-'http://www.w3.org/2001/XMLSchema-instance',
-				 'xsi:noNamespaceSchemaLocation'-'logtalk.xsd'])
-		).
-
-	write_xml_header(web, Encoding, XMLSpec, XSL, Stream) :-
-		xml_header_text('1.0', Encoding, no, Text),
-		write_xml_open_tag(Stream, Text, []),
-		(	XMLSpec == dtd ->
-			write(Stream, '<!DOCTYPE logtalk SYSTEM "http://logtalk.org/xml/3.0/logtalk.dtd">'), nl(Stream)
-		;	true
-		),
-		write(Stream, '<?xml-stylesheet type="text/xsl" href="'),
-		write(Stream, XSL),
-		write(Stream, '"?>'), nl(Stream),
-		(	XMLSpec == dtd ->
-			write_xml_open_tag(Stream, logtalk, [])
-		;	write_xml_open_tag(Stream, logtalk,
-				['xmlns:xsi'-'http://www.w3.org/2001/XMLSchema-instance',
-				 'xsi:noNamespaceSchemaLocation'-'http://logtalk.org/xml/3.0/logtalk.xsd'])
-		).
-
-	write_xml_header(standalone, Encoding, _, XSL, Stream) :-
+	write_xml_header(standalone, Encoding, _, DocType-_, XSL, _, Stream) :-
+		!,
 		xml_header_text('1.0', Encoding, yes, Text),
 		write_xml_open_tag(Stream, Text, []),
 		write(Stream, '<?xml-stylesheet type="text/xsl" href="'),
+		write(Stream, XSL), write(Stream, '"?>'), nl(Stream),
+		write_xml_open_tag(Stream, DocType, []).
+
+	write_xml_header(_, Encoding, XMLSpec, DocType-DocTypeURL, XSL, XSDURL, Stream) :-
+		xml_header_text('1.0', Encoding, no, Text),
+		write_xml_open_tag(Stream, Text, []),
+		(	XMLSpec == dtd ->
+			write(Stream, '<!DOCTYPE '), write(Stream, DocType), write(Stream, ' SYSTEM "'),
+			write(Stream, DocTypeURL), write(Stream, '">'), nl(Stream)
+		;	true
+		),
+		write(Stream, '<?xml-stylesheet type="text/xsl" href="'),
 		write(Stream, XSL),
 		write(Stream, '"?>'), nl(Stream),
-		write_xml_open_tag(Stream, logtalk, []).
+		(	XMLSpec == dtd ->
+			write_xml_open_tag(Stream, DocType, [])
+		;	write_xml_open_tag(Stream, DocType,
+				['xmlns:xsi'-'http://www.w3.org/2001/XMLSchema-instance',
+				 'xsi:noNamespaceSchemaLocation'-XSDURL])
+		).
 
 	xml_header_text(Version, Encoding, Standalone, Text) :-
 		atom_concat('?xml version="', Version, Aux1),
@@ -352,10 +379,10 @@
 		atom_concat(Aux4, Standalone, Aux5),
 		atom_concat(Aux5, '"?', Text).
 
-	write_xml_footer(Stream) :-
+	write_entity_xml_footer(Stream) :-
 		write_xml_close_tag(Stream, logtalk).
 
-	write_xml_entity(Stream, Entity) :-
+	write_entity_xml_entity(Stream, Entity) :-
 		entity_type(Entity, Type),
 		write_xml_open_tag(Stream, entity, []),
 		entity_to_xml_term(Entity),
@@ -673,7 +700,7 @@
 
 	% relation_to_xml_filename(+entity, -atom)
 	%
-	% required to build filenames in links to parametric objects
+	% required to build filenames in links to parametric objects/categories
 
 	relation_to_xml_filename(Relation, File) :-
 		functor(Relation, Functor, Arity),
@@ -682,11 +709,11 @@
 		atom_concat(Functor, '_', Aux),
 		atom_concat(Aux, Atom, File).
 
-	% write_xml_predicates(@stream)
+	% write_entity_xml_predicates(@stream)
 	%
 	% writes the predicate documentation
 
-	write_xml_predicates(Stream, Entity) :-
+	write_entity_xml_predicates(Stream, Entity) :-
 		write_xml_open_tag(Stream, predicates, []),
 		write_xml_public_predicates(Stream, Entity),
 		write_xml_protected_predicates(Stream, Entity),
@@ -701,6 +728,7 @@
 		write_xml_open_tag(Stream, (public), []),
 		entity_property(Entity, public(Predicates)),
 		member(Functor/Arity, Predicates),
+		assertz(predicate_entity_(Functor/Arity, Entity)),
 		entity_property(Entity, declares(Functor/Arity, Properties)),
 		(	member(non_terminal(Functor//Args), Properties) ->
 			write_xml_predicate(Stream, Entity, Functor//Args, Functor, Arity, (public))
@@ -878,7 +906,7 @@
 		;	true
 		).
 
-	write_xml_relations(Stream, Entity) :-
+	write_entity_xml_relations(Stream, Entity) :-
 		write_xml_open_tag(Stream, relations, []),
 		(	current_object(Entity) ->
 			write_xml_object_relations(Stream, Entity)
@@ -889,7 +917,7 @@
 		;	fail
 		),
 		fail.
-	write_xml_relations(Stream, Entity) :-
+	write_entity_xml_relations(Stream, Entity) :-
 		entity_property(Entity, declares(AFunctor/AArity, Properties)),
 		member(alias_of(PFunctor/PArity), Properties),
 			Entity =.. [_| Args],				% take care of parametric entities
@@ -900,7 +928,7 @@
 			write_xml_cdata_element(Stream, alternative, [], AFunctor/AArity),
 			write_xml_close_tag(Stream, alias),
 		fail.
-	write_xml_relations(Stream, _) :-
+	write_entity_xml_relations(Stream, _) :-
 		write_xml_close_tag(Stream, relations).
 
 	write_xml_object_relations(Stream, Entity) :-
@@ -987,7 +1015,7 @@
 		write_xml_cdata_element(Stream, file, [], File),
 		write_xml_close_tag(Stream, provides).
 
-	write_xml_operators(Stream, Entity) :-
+	write_entity_xml_operators(Stream, Entity) :-
 		write_xml_open_tag(Stream, operators, []),
 		entity_property(Entity, public(PublicResources)),
 		forall(
@@ -1012,7 +1040,7 @@
 			 write_xml_close_tag(Stream, operator))),
 		write_xml_close_tag(Stream, operators).
 
-	write_xml_remarks(Stream, Entity) :-
+	write_entity_xml_remarks(Stream, Entity) :-
 		write_xml_open_tag(Stream, remarks, []),
 		(	entity_property(Entity, info(Info)), member(remarks(Remarks), Info) ->
 			forall(
@@ -1130,27 +1158,98 @@
 		current_category(Entity),
 		category_property(Entity, Property).
 
+	write_indexes(Options) :-
+		write_directory_index(Options),
+		write_entity_index(Options),
+		write_predicate_index(Options).
+
+	write_directory_index(Options) :-
+		write_index(directory, directory_entity_, 'directory_index.xml', Options).
+
+	write_entity_index(Options) :-
+		write_index(entity, type_entity_, 'entity_index.xml', Options).
+
+	write_predicate_index(Options) :-
+		write_index(predicate, predicate_entity_, 'predicate_index.xml', Options).
+
+	write_index(Type, Functor, File, Options) :-
+		open(File, write, Stream),
+		memberchk(xmlsref(XMLSRef), Options),
+		(	member(encoding(Encoding), Options) ->
+			true
+		;	Encoding = 'UTF-8'
+		),
+		memberchk(xmlspec(XMLSpec), Options),
+		memberchk(ixslfile(XSL), Options),
+		once(kind_ref_doctype_xsd(index, XMLSRef, DocTypeURL, XSDURL)),
+		write_xml_header(XMLSRef, Encoding, XMLSpec, DocTypeURL, XSL, XSDURL, Stream),
+		write_xml_element(Stream, type, [], Type),
+		setof(Key, Entity^call(Functor, Key, Entity), Keys),
+		write_xml_open_tag(Stream, entries, []),
+		write_index_keys(Keys, Functor, Stream),
+		write_xml_close_tag(Stream, entries),
+		write_xml_close_tag(Stream, index),
+		close(Stream).
+
+	kind_ref_doctype_xsd(logtalk, local, logtalk-'logtalk.dtd', 'logtalk.xsd').
+	kind_ref_doctype_xsd(logtalk, web, logtalk-'http://logtalk.org/xml/4.0/logtalk.dtd', 'http://logtalk.org/xml/4.0/logtalk.xsd').
+	kind_ref_doctype_xsd(logtalk, standalone, logtalk-none, none).
+
+	kind_ref_doctype_xsd(index, local, index-'index.dtd', 'index.xsd').
+	kind_ref_doctype_xsd(index, web, index-'http://logtalk.org/xml/4.0/index.dtd', 'http://logtalk.org/xml/4.0/index.xsd').
+	kind_ref_doctype_xsd(index, standalone, index-none, none).
+
+	write_index_keys([], _, _).
+	write_index_keys([Key| Keys], Functor, Stream) :-
+		write_index_key(Key, Functor, Stream),
+		write_index_keys(Keys, Functor, Stream).
+
+	write_index_key(Key, Functor, Stream) :-
+		setof(Entity, call(Functor, Key, Entity), Entities),
+		write_xml_open_tag(Stream, entry, []),
+		write_xml_cdata_element(Stream, key, [], Key),
+		write_xml_open_tag(Stream, entities, []),
+		write_index_key_entities(Entities, Stream),
+		write_xml_close_tag(Stream, entities),
+		write_xml_close_tag(Stream, entry).
+
+	write_index_key_entities([], _).
+	write_index_key_entities([Entity| Entities], Stream) :-
+		relation_to_xml_filename(Entity, File),
+		entity_to_xml_term(Entity),
+		write_xml_open_tag(Stream, entity, []),
+		write_xml_cdata_element(Stream, file, [], File),
+		write_xml_cdata_element(Stream, name, [], Entity),
+		write_xml_close_tag(Stream, entity),
+		write_index_key_entities(Entities, Stream).	
+
 	default_option(xslfile, 'lgtxml.xsl').
+	default_option(ixslfile, 'idxxml.xsl').
 	default_option(xmlspec, dtd).
 	default_option(xmlsref, local).
 	default_option(xmldir, './xml_docs/').
 	default_option(bom, true).
 	default_option(encoding, 'UTF-8').
+	default_option(omit_path_prefixes, []).
 	default_option(exclude_files, []).
 	default_option(exclude_paths, []).
 	default_option(exclude_entities, []).
 
 	valid_option(xslfile).
+	valid_option(ixslfile).
 	valid_option(xmlsref).
 	valid_option(xmlspec).
 	valid_option(xmldir).
 	valid_option(bom).
 	valid_option(encoding).
+	valid_option(omit_path_prefixes).
 	valid_option(exclude_files).
 	valid_option(exclude_paths).
 	valid_option(exclude_entities).
 
 	valid_option(xslfile, File) :-
+		atom(File).
+	valid_option(ixslfile, File) :-
 		atom(File).
 	valid_option(xmlsref, standalone) :- !.
 	valid_option(xmlsref, (local)) :- !.
@@ -1177,6 +1276,7 @@
 		;	default_option(Option, Value2) ->
 			Value = Value2
 		).
+
 	set_option(Option, Value) :-
 		atom(Option),
 		ground(Value),
@@ -1189,8 +1289,11 @@
 		(member(xmlsref(XMLSRef), UserOptions) -> true; option(xmlsref, XMLSRef)),
 		(member(xmlspec(XMLSpec), UserOptions) -> true; option(xmlspec, XMLSpec)),
 		(member(xslfile(XSL), UserOptions) -> true; option(xslfile, XSL)),
+		(member(ixslfile(XSL), UserOptions) -> true; option(ixslfile, IXSL)),
 		(member(encoding(Encoding), UserOptions) -> true; option(encoding, Encoding)),
 		(member(bom(BOM), UserOptions) -> true; option(bom, BOM)),
+		% by default, don't omit any path prefixes:
+		(member(omit_path_prefixes(Prefixes), UserOptions) -> true; option(omit_path_prefixes, Prefixes)),
 		% by default, don't exclude any source files:
 		(member(exclude_files(ExcludedFiles), UserOptions) -> true; option(exclude_files, ExcludedFiles)),
 		% by default, don't exclude any library sub-directories:
@@ -1198,10 +1301,17 @@
 		% by default, don't exclude any entities:
 		(member(exclude_entities(ExcludedEntities), UserOptions) -> true; option(exclude_entities, ExcludedEntities)),
 		Options = [
-			xmldir(Directory), xmlsref(XMLSRef), xmlspec(XMLSpec), xslfile(XSL),
+			xmldir(Directory), xmlsref(XMLSRef), xmlspec(XMLSpec), xslfile(XSL), ixslfile(IXSL),
 			encoding(Encoding), bom(BOM),
+			omit_path_prefixes(Prefixes),
 			exclude_files(ExcludedFiles), exclude_paths(ExcludedPaths), exclude_entities(ExcludedEntities)
 		].
+
+	reset :-
+		retractall(option_(_, _)),
+		retractall(directory_entity_(_, _)),
+		retractall(type_entity_(_, _)),
+		retractall(predicate_entity_(_, _)).
 
 	% we want to minimize any dependencies on other entities, including library objects
 

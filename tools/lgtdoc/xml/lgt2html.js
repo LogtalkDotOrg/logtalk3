@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////////////////////
 //
 //   XML documenting files to (X)HTML conversion script 
-//   Last updated on November 3, 2014
+//   Last updated on February 17, 2016
 //
 //   This file is part of Logtalk <http://logtalk.org/>  
 //   Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -34,7 +34,7 @@ var format = "xhtml";
 var directory = WshShell.CurrentDirectory;
 
 var index_file = "index.html";
-var index_title = "Entity documentation index";
+var index_title = "Documentation index";
 
 var processor = "msxsl";
 // var processor = "xsltproc";
@@ -200,7 +200,7 @@ function usage_help() {
 	WScript.Echo("  f - output file format (either xhtml or html; default is " + format + ")");
 	WScript.Echo("  d - output directory for the generated files (default is " + directory + ")");
 	WScript.Echo("  i - name of the index file (default is " + index_file + ")");
-	WScript.Echo("  t - title to be used on the index file (default is " + index_title + ")");
+	WScript.Echo("  t - title to be used in the index file (default is " + index_title + ")");
 	WScript.Echo("  p - XSLT processor (msxsl, xsltproc, xalan, or sabcmd; default is " + processor + ")");
 	WScript.Echo("");
 	WScript.Quit(1);
@@ -234,18 +234,24 @@ function create_index_file() {
 
 	var files = new Enumerator(FSObject.GetFolder(WshShell.CurrentDirectory).Files);
 
-	for (files.moveFirst(); !files.atEnd(); files.moveNext()) {
-		var file = files.item().name;
-		if (FSObject.GetExtensionName(file) == "xml") {
-			var html_file = FSObject.GetBaseName(file) + ".html";
-			WScript.Echo("  indexing " + html_file);
-			var index = FSObject.GetBaseName(file).lastIndexOf("_");
-			var pars = FSObject.GetBaseName(file).slice(index+1);
-			var entity = FSObject.GetBaseName(file).slice(0, index);
-			if (pars == 0)
-				f.WriteLine("    <li><a href=\"" + html_file + "\">" + entity + "</a></li>");
-			else
-				f.WriteLine("    <li><a href=\"" + html_file + "\">" + entity + "/" + pars + "</a></li>");
+	if (WScript.Arguments.Named.Exists("./directory_index.xml")) then {
+		f.WriteLine("    <li><a href=\"directory_index.html\">Directory index</a></li>");
+		f.WriteLine("    <li><a href=\"entity_index.html\">Entity index</a></li>");
+		f.WriteLine("    <li><a href=\"predicate_index.html\">Predicate index</a></li>");
+	} else {
+		for (files.moveFirst(); !files.atEnd(); files.moveNext()) {
+			var file = files.item().name;
+			if (FSObject.GetExtensionName(file) == "xml") {
+				var html_file = FSObject.GetBaseName(file) + ".html";
+				WScript.Echo("  indexing " + html_file);
+				var index = FSObject.GetBaseName(file).lastIndexOf("_");
+				var pars = FSObject.GetBaseName(file).slice(index+1);
+				var entity = FSObject.GetBaseName(file).slice(0, index);
+				if (pars == 0)
+					f.WriteLine("    <li><a href=\"" + html_file + "\">" + entity + "</a></li>");
+				else
+					f.WriteLine("    <li><a href=\"" + html_file + "\">" + entity + "/" + pars + "</a></li>");
+			}
 		}
 	}
 

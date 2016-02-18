@@ -79,7 +79,8 @@ elif ! [ -d "$LOGTALKUSER" ]; then
 fi
 echo
 
-xslt="$LOGTALKUSER/tools/lgtdoc/xml/lgtmd.xsl"
+lgt_xslt="$LOGTALKUSER/tools/lgtdoc/xml/lgtmd.xsl"
+idx_xslt="$LOGTALKUSER/tools/lgtdoc/xml/idxmd.xsl"
 
 processor=xsltproc
 # processor=xalan
@@ -135,12 +136,20 @@ if ! [ -e "./logtalk.dtd" ] ; then
 	cp "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk.dtd .
 fi
 
+if ! [ -e "./index.dtd" ] ; then
+	cp "$LOGTALKHOME"/tools/lgtdoc/xml/index.dtd .
+fi
+
 if ! [ -e "./custom.ent" ] ; then
 	cp "$LOGTALKUSER"/tools/lgtdoc/xml/custom.ent .
 fi
 
 if ! [ -e "./logtalk.xsd" ] ; then
 	cp "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk.xsd .
+fi
+
+if ! [ -e "./index.xsd" ] ; then
+	cp "$LOGTALKHOME"/tools/lgtdoc/xml/index.xsd .
 fi
 
 if [ `(grep -l "<logtalk" *.xml | wc -l) 2> /dev/null` -gt 0 ] ; then
@@ -150,9 +159,18 @@ if [ `(grep -l "<logtalk" *.xml | wc -l) 2> /dev/null` -gt 0 ] ; then
 		echo "  converting $file"
 		name="`expr "$file" : '\(.*\)\.[^./]*$' \| "$file"`"
 		case "$processor" in
-			xsltproc)	eval xsltproc -o \"$directory\"/\"$name.md\" \"$xslt\" \"$file\";;
-			xalan)		eval xalan -o \"$directory\"/\"$name.md\" \"$file\" \"$xslt\";;
-			sabcmd)		eval sabcmd \"$xslt\" \"$file\" \"$directory\"/\"$name.md\";;
+			xsltproc)	eval xsltproc -o \"$directory\"/\"$name.md\" \"$lgt_xslt\" \"$file\";;
+			xalan)		eval xalan -o \"$directory\"/\"$name.md\" \"$file\" \"$lgt_xslt\";;
+			sabcmd)		eval sabcmd \"$lgt_xslt\" \"$file\" \"$directory\"/\"$name.md\";;
+		esac
+	done
+	for file in `grep -l "<index" *.xml`; do
+		echo "  converting $file"
+		name="`expr "$file" : '\(.*\)\.[^./]*$' \| "$file"`"
+		case "$processor" in
+			xsltproc)	eval xsltproc -o \"$directory\"/\"$name.md\" \"$idx_xslt\" \"$file\";;
+			xalan)		eval xalan -o \"$directory\"/\"$name.md\" \"$file\" \"$idx_xslt\";;
+			sabcmd)		eval sabcmd \"$idx_xslt\" \"$file\" \"$directory\"/\"$name.md\";;
 		esac
 	done
 	echo "conversion done"
@@ -165,7 +183,9 @@ fi
 
 if [ "$PWD" != "$LOGTALKHOME"/xml ] ; then
 	rm -f ./logtalk.dtd
+	rm -f ./index.dtd
 	rm -f ./logtalk.xsd
+	rm -f ./index.xsd
 	rm -f ./custom.ent
 fi
 
