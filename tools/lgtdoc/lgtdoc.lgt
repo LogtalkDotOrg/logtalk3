@@ -203,7 +203,8 @@
 			process(File, Directory, Options, StreamOptions),
 			fail
 		;	os::change_directory(Current)
-		).
+		),
+		write_indexes(Options).
 
 	all :-
 		all([]).
