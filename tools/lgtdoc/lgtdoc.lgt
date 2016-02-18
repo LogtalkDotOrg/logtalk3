@@ -22,9 +22,9 @@
 	implements(lgtdocp)).
 
 	:- info([
-		version is 2.1,
+		version is 3.0,
 		author is 'Paulo Moura',
-		date is 2016/02/17,
+		date is 2016/02/18,
 		comment is 'Documenting tool.'
 	]).
 
@@ -341,7 +341,7 @@
 		;	Encoding = 'UTF-8'
 		),
 		memberchk(xmlspec(XMLSpec), Options),
-		memberchk(xslfile(XSL), Options),
+		memberchk(entity_xsl_file(XSL), Options),
 		once(kind_ref_doctype_xsd(logtalk, XMLSRef, DocTypeURL, XSDURL)),
 		write_xml_header(XMLSRef, Encoding, XMLSpec, DocTypeURL, XSL, XSDURL, Stream).
 
@@ -1180,7 +1180,7 @@
 		;	Encoding = 'UTF-8'
 		),
 		memberchk(xmlspec(XMLSpec), Options),
-		memberchk(ixslfile(XSL), Options),
+		memberchk(index_xsl_file(XSL), Options),
 		once(kind_ref_doctype_xsd(index, XMLSRef, DocTypeURL, XSDURL)),
 		write_xml_header(XMLSRef, Encoding, XMLSpec, DocTypeURL, XSL, XSDURL, Stream),
 		write_xml_element(Stream, type, [], Type),
@@ -1247,9 +1247,9 @@
 	valid_option(exclude_paths).
 	valid_option(exclude_entities).
 
-	valid_option(xslfile, File) :-
+	valid_option(entity_xsl_file, File) :-
 		atom(File).
-	valid_option(ixslfile, File) :-
+	valid_option(index_xsl_file, File) :-
 		atom(File).
 	valid_option(xmlsref, standalone) :- !.
 	valid_option(xmlsref, (local)) :- !.
@@ -1288,8 +1288,8 @@
 		(member(xml_docs_directory(Directory), UserOptions) -> true; option(xml_docs_directory, Directory)),
 		(member(xmlsref(XMLSRef), UserOptions) -> true; option(xmlsref, XMLSRef)),
 		(member(xmlspec(XMLSpec), UserOptions) -> true; option(xmlspec, XMLSpec)),
-		(member(xslfile(XSL), UserOptions) -> true; option(xslfile, XSL)),
-		(member(ixslfile(XSL), UserOptions) -> true; option(ixslfile, IXSL)),
+		(member(entity_xsl_file(XSL), UserOptions) -> true; option(entity_xsl_file, XSL)),
+		(member(index_xsl_file(XSL), UserOptions) -> true; option(index_xsl_file, IXSL)),
 		(member(encoding(Encoding), UserOptions) -> true; option(encoding, Encoding)),
 		(member(bom(BOM), UserOptions) -> true; option(bom, BOM)),
 		% by default, don't omit any path prefixes:
@@ -1301,7 +1301,7 @@
 		% by default, don't exclude any entities:
 		(member(exclude_entities(ExcludedEntities), UserOptions) -> true; option(exclude_entities, ExcludedEntities)),
 		Options = [
-			xml_docs_directory(Directory), xmlsref(XMLSRef), xmlspec(XMLSpec), xslfile(XSL), ixslfile(IXSL),
+			xml_docs_directory(Directory), xmlsref(XMLSRef), xmlspec(XMLSpec), entity_xsl_file(XSL), index_xsl_file(IXSL),
 			encoding(Encoding), bom(BOM),
 			omit_path_prefixes(Prefixes),
 			exclude_files(ExcludedFiles), exclude_paths(ExcludedPaths), exclude_entities(ExcludedEntities)

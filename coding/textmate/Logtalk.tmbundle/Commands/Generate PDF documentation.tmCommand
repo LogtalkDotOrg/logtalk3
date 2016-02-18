@@ -7,7 +7,7 @@
 	<key>command</key>
 	<string>cd "$TM_DIRECTORY"
 FILE=`basename "$TM_FILENAME" .lgt`
-$LOGTALK_COMMAND "set_logtalk_flag(altdirs, on), set_logtalk_flag(xmldir, 'xml_docs/'), logtalk_compile($FILE), halt."
+$LOGTALK_COMMAND "set_logtalk_flag(xml_docs_directory, 'xml_docs/'), logtalk_compile($FILE), halt."
 cd "$TM_DIRECTORY/xml_docs"
 $LOGTALK_PDF_COMMAND
 open *.pdf

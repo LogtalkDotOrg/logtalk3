@@ -21,18 +21,20 @@
 :- protocol(lgtdocp).
 
 	:- info([
-		version is 2.1,
+		version is 3.0,
 		author is 'Paulo Moura',
-		date is 2016/02/17,
+		date is 2016/02/18,
 		comment is 'Documenting tool protocol.',
 		remarks is [
 			'Compiling files for generating XML documentation' - 'All source files must be compiled with the "source_data" compiler flag turned on.',
 			'xmlspec(Specification) option' - 'XML documenting files specification format. Possible option values are "dtd" (for the DTD specification; default) and "xsd" (for the XML Schema specification).',
 			'xmlsref(Reference) option' - 'Reference to the XML specification file in XML documenting files. Possible values are "local" (default; DTD/XSD file in the same folder as the XML files), "web" (logtalk.org website DTD/XSD file), and "standalone" (no reference to specification files).',
-			'xslfile(File) option' - 'XSLT file to use with the generated XML documenting files. The default value is "lgtxml.xsl", allowing the XML files to be viewed by simply opening them with a browser supporting XSLT (after running the "lgt2xml.sh" script on the XML files directory).',
-			'xmldir(Directory) option' - 'Directory where the XML documenting files will be generated. The default value is "./xml_docs", a sub-directory of the source files directory.',
+			'entity_xsl_file(File) option' - 'XSLT file to use with the generated XML documenting files. The default value is "lgtxml.xsl", allowing the XML files to be viewed by simply opening them with a browser supporting XSLT (after running the "lgt2xml.sh" script on the XML files directory).',
+			'index_xsl_file(File) option' - 'XSLT file to use with the generated XML documenting files. The default value is "lgtxml.xsl", allowing the XML files to be viewed by simply opening them with a browser supporting XSLT (after running the "lgt2xml.sh" script on the XML files directory).',
+			'xml_docs_directory(Directory) option' - 'Directory where the XML documenting files will be generated. The default value is "./xml_docs", a sub-directory of the source files directory.',
 			'bom(Boolean) option' - 'Defines if a BOM should be added to the generated XML documenting files.',
 			'encoding(Encoding) option' - 'Encoding to be used for the generated XML documenting files.',
+			'omit_path_prefixes(Prefixes) option' - 'List of path prefixes (atoms) to omit when outputting directories.',
 			'exclude_files(List) option' - 'List of files to exclude when generating the XML documenting files.',
 			'exclude_paths(List) option' - 'List of (relative) library paths to exclude when generating the XML documenting files.',
 			'exclude_entities(List) option' - 'List of entities to exclude when generating the XML documenting files.',

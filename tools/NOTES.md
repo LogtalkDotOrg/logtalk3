@@ -67,14 +67,14 @@ and follow these steps:
 
 (3) Generate the XML documenting files for all loaded tools using the query:
 
-	| ?- lgtdoc::library(assertions, [xmldir('$LOGTALKUSER/docs/tmp_assertions')]),
-		 lgtdoc::library(debugger, [xmldir('$LOGTALKUSER/docs/tmp_debugger')]),
-		 lgtdoc::library(diagrams, [xmldir('$LOGTALKUSER/docs/tmp_diagrams')]),
-		 lgtdoc::library(help, [xmldir('$LOGTALKUSER/docs/tmp_help')]),
-		 lgtdoc::library(lgtdoc, [xmldir('$LOGTALKUSER/docs/tmp_lgtdoc')]),
-		 lgtdoc::library(lgtunit, [xmldir('$LOGTALKUSER/docs/tmp_lgtunit')]),
-		 lgtdoc::library(ports, [xmldir('$LOGTALKUSER/docs/tmp_ports')]),
-		 lgtdoc::library(profiler, [xmldir('$LOGTALKUSER/docs/tmp_profiler')]).
+	| ?- lgtdoc::library(assertions, [xml_docs_directory('$LOGTALKUSER/docs/tmp_assertions')]),
+		 lgtdoc::library(debugger, [xml_docs_directory('$LOGTALKUSER/docs/tmp_debugger')]),
+		 lgtdoc::library(diagrams, [xml_docs_directory('$LOGTALKUSER/docs/tmp_diagrams')]),
+		 lgtdoc::library(help, [xml_docs_directory('$LOGTALKUSER/docs/tmp_help')]),
+		 lgtdoc::library(lgtdoc, [xml_docs_directory('$LOGTALKUSER/docs/tmp_lgtdoc')]),
+		 lgtdoc::library(lgtunit, [xml_docs_directory('$LOGTALKUSER/docs/tmp_lgtunit')]),
+		 lgtdoc::library(ports, [xml_docs_directory('$LOGTALKUSER/docs/tmp_ports')]),
+		 lgtdoc::library(profiler, [xml_docs_directory('$LOGTALKUSER/docs/tmp_profiler')]).
 
 (4) Run the command `lgt2html` on the temporary directories to generate the
 (X)HTML documentation or the command `lgt2pdf` to generate PDF documentation:

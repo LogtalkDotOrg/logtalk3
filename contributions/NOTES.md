@@ -75,11 +75,11 @@ library entities using the queries:
 	| ?- {lgtdoc(loader)}.
 	...
 
-	| ?- lgtdoc::library(flags, [xmldir('$LOGTALKUSER/docs/tmp1')]),
-		lgtdoc::library(pddl_parser, [xmldir('$LOGTALKUSER/docs/tmp2')]),
-		lgtdoc::library(verdi_neruda, [xmldir('$LOGTALKUSER/docs/tmp3')]),
-		lgtdoc::library(xml_parser, [xmldir('$LOGTALKUSER/docs/tmp4')]),
-		lgtdoc::library(iso8601, [xmldir('$LOGTALKUSER/docs/tmp5')]).
+	| ?- lgtdoc::library(flags, [xml_docs_directory('$LOGTALKUSER/docs/tmp1')]),
+		lgtdoc::library(pddl_parser, [xml_docs_directory('$LOGTALKUSER/docs/tmp2')]),
+		lgtdoc::library(verdi_neruda, [xml_docs_directory('$LOGTALKUSER/docs/tmp3')]),
+		lgtdoc::library(xml_parser, [xml_docs_directory('$LOGTALKUSER/docs/tmp4')]),
+		lgtdoc::library(iso8601, [xml_docs_directory('$LOGTALKUSER/docs/tmp5')]).
 
 (3) Run the command `lgt2html` on the temporary directories to generate the
 (X)HTML documentation or the command `lgt2pdf` to generate PDF documentation:

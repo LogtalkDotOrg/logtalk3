@@ -45,16 +45,16 @@ logtalk="swilgt$extension -g"
 cwd=`pwd`
 
 # documentation goals
-core_goal="logtalk_load(lgtdoc(loader)),lgtdoc::library(core,[xmldir('$cwd/../docs/tmp_core')]),halt."
-library_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(library(all_loader)),lgtdoc::rlibrary(library,[xmldir('$cwd/../docs/tmp_library')]),halt."
-assertions_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(assertions(loader)),lgtdoc::library(assertions,[xmldir('$cwd/../docs/tmp_assertions')]),halt."
-debugger_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(debugger(loader)),lgtdoc::library(debugger,[xmldir('$cwd/../docs/tmp_debugger')]),halt."
-diagrams_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(diagrams(loader)),lgtdoc::library(diagrams,[xmldir('$cwd/../docs/tmp_diagrams')]),halt."
-help_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(help(loader)),lgtdoc::library(help,[xmldir('$cwd/../docs/tmp_help')]),halt."
-lgtdoc_goal="set_logtalk_flag(source_data,on),logtalk_load(lgtdoc(loader)),lgtdoc::library(lgtdoc,[xmldir('$cwd/../docs/tmp_lgtdoc')]),halt."
-lgtunit_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(lgtunit(loader)),lgtdoc::library(lgtunit,[xmldir('$cwd/../docs/tmp_lgtunit')]),halt."
-ports_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(ports(loader)),lgtdoc::library(ports,[xmldir('$cwd/../docs/tmp_ports')]),halt."
-profiler_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(profiler(loader)),lgtdoc::library(profiler,[xmldir('$cwd/../docs/tmp_profiler')]),halt."
+core_goal="logtalk_load(lgtdoc(loader)),lgtdoc::library(core,[xml_docs_directory('$cwd/../docs/tmp_core')]),halt."
+library_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(library(all_loader)),lgtdoc::rlibrary(library,[xml_docs_directory('$cwd/../docs/tmp_library')]),halt."
+assertions_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(assertions(loader)),lgtdoc::library(assertions,[xml_docs_directory('$cwd/../docs/tmp_assertions')]),halt."
+debugger_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(debugger(loader)),lgtdoc::library(debugger,[xml_docs_directory('$cwd/../docs/tmp_debugger')]),halt."
+diagrams_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(diagrams(loader)),lgtdoc::library(diagrams,[xml_docs_directory('$cwd/../docs/tmp_diagrams')]),halt."
+help_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(help(loader)),lgtdoc::library(help,[xml_docs_directory('$cwd/../docs/tmp_help')]),halt."
+lgtdoc_goal="set_logtalk_flag(source_data,on),logtalk_load(lgtdoc(loader)),lgtdoc::library(lgtdoc,[xml_docs_directory('$cwd/../docs/tmp_lgtdoc')]),halt."
+lgtunit_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(lgtunit(loader)),lgtdoc::library(lgtunit,[xml_docs_directory('$cwd/../docs/tmp_lgtunit')]),halt."
+ports_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(ports(loader)),lgtdoc::library(ports,[xml_docs_directory('$cwd/../docs/tmp_ports')]),halt."
+profiler_goal="logtalk_load(lgtdoc(loader)),set_logtalk_flag(source_data,on),logtalk_load(profiler(loader)),lgtdoc::library(profiler,[xml_docs_directory('$cwd/../docs/tmp_profiler')]),halt."
 
 
 print_version() {

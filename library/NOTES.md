@@ -108,7 +108,7 @@ library entities using the queries:
 
 	| ?- {lgtdoc(loader)}.
 	...
-	| ?- lgtdoc::rlibrary(library, [xmldir('$LOGTALKUSER/docs/tmp')]).
+	| ?- lgtdoc::rlibrary(library, [xml_docs_directory('$LOGTALKUSER/docs/tmp')]).
 
 (4) Run the command `lgt2html` on the `$LOGTALKUSER/docs/tmp` directory
 to generate (X)HTML documentation or the command `lgt2pdf` to generate PDF
