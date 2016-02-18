@@ -24,6 +24,12 @@ RELEASE NOTES
 3.03.1 - February ??, 2016
 ==========================
 
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: YAP adapter file for the new text encodings supported in its
+current git version.
+
 Tools
 -----
 

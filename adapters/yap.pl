@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for YAP Prolog 6.3.4 and later versions
-%  Last updated on February 12, 2016
+%  Last updated on February 18, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -679,8 +679,10 @@
 '$lgt_yap_encoding_to_logtalk_encoding'(ascii, 'US-ASCII').
 '$lgt_yap_encoding_to_logtalk_encoding'(iso_latin_1, 'ISO-8859-1').
 '$lgt_yap_encoding_to_logtalk_encoding'(utf8, 'UTF-8').
-'$lgt_yap_encoding_to_logtalk_encoding'(unicode_be, 'UCS-2BE').
-'$lgt_yap_encoding_to_logtalk_encoding'(unicode_le, 'UCS-2LE').
+'$lgt_yap_encoding_to_logtalk_encoding'(utf16_be, 'UTF-16BE').
+'$lgt_yap_encoding_to_logtalk_encoding'(utf16_le, 'UTF-16LE').
+'$lgt_yap_encoding_to_logtalk_encoding'(utf32_be, 'UTF-32BE').
+'$lgt_yap_encoding_to_logtalk_encoding'(utf32_le, 'UTF-32LE').
 
 
 % '$lgt_prolog_goal_expansion'(@callable, -callable)
@@ -742,23 +744,23 @@
 
 '$lgt_logtalk_prolog_encoding'('US-ASCII', ascii, _).
 '$lgt_logtalk_prolog_encoding'('ISO-8859-1', iso_latin_1, _).
-'$lgt_logtalk_prolog_encoding'('UTF-8', utf8, _).
-'$lgt_logtalk_prolog_encoding'('UCS-2', Encoding, Stream) :-	% BOM mandatory
-	(	stream_property(Stream, encoding(unicode_be)) ->
-		Encoding = unicode_be
-	;	stream_property(Stream, encoding(unicode_le)) ->
-		Encoding = unicode_le
-	).
-'$lgt_logtalk_prolog_encoding'('UCS-2BE', unicode_be, _).		% BOM forbidden
-'$lgt_logtalk_prolog_encoding'('UCS-2LE', unicode_le, _).
+'$lgt_logtalk_prolog_encoding'('UTF-8', utf8, _).				% BOM optional
 '$lgt_logtalk_prolog_encoding'('UTF-16', Encoding, Stream) :-	% BOM optional but strongly recommended
-	(	stream_property(Stream, encoding(unicode_be)) ->		% not true of course but usually we can get away with it
-		Encoding = unicode_be
-	;	stream_property(Stream, encoding(unicode_le)) ->
-		Encoding = unicode_le
+	(	stream_property(Stream, encoding(utf16_be)) ->
+		Encoding = utf16_be
+	;	stream_property(Stream, encoding(utf16_le)) ->
+		Encoding = utf16_le
 	).
-'$lgt_logtalk_prolog_encoding'('UTF-16BE', unicode_be, _).		% BOM forbidden
-'$lgt_logtalk_prolog_encoding'('UTF-16LE', unicode_le, _).
+'$lgt_logtalk_prolog_encoding'('UTF-16BE', utf16_be, _).		% BOM forbidden
+'$lgt_logtalk_prolog_encoding'('UTF-16LE', utf16_le, _).		% BOM forbidden
+'$lgt_logtalk_prolog_encoding'('UTF-32', Encoding, Stream) :-	% BOM optional but strongly recommended
+	(	stream_property(Stream, encoding(utf32_be)) ->
+		Encoding = utf32_be
+	;	stream_property(Stream, encoding(utf32_le)) ->
+		Encoding = utf32_le
+	).
+'$lgt_logtalk_prolog_encoding'('UTF-32BE', utf32_be, _).		% BOM forbidden
+'$lgt_logtalk_prolog_encoding'('UTF-32LE', utf32_le, _).		% BOM forbidden
 
 
 
