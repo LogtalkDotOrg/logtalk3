@@ -17,7 +17,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for viewing XML documenting files in a browser
-%  Last updated on February 17, 2016
+%  Last updated on February 18, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -42,22 +42,22 @@
 	<html>
 	<head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<title><xsl:apply-templates select="index/type" /></title>
+		<title><xsl:apply-templates select="logtalk_index/type" /></title>
 		<link rel="stylesheet" href="logtalk.css" type="text/css" />
 	</head>
 	<body>
 		<div class="header">
-			<h1 class="code"><xsl:apply-templates select="index/type" /></h1>
+			<h1 class="code"><xsl:apply-templates select="logtalk_index/type" /></h1>
 		</div>
 		<div class="predicates">
-			<xsl:apply-templates select="index/entries" />
+			<xsl:apply-templates select="logtalk_index/entries" />
 		</div>
 	</body>
 	</html>
 </xsl:template>
 
 
-<xsl:template match="index/type">
+<xsl:template match="logtalk_index/type">
 	<xsl:if test=".='directory'">
 		Directory index
 	</xsl:if>
@@ -70,7 +70,7 @@
 </xsl:template>
 
 
-<xsl:template match="index/entries">
+<xsl:template match="logtalk_index/entries">
 	<xsl:apply-templates select="entry" />
 </xsl:template>
 

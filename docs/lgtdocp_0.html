@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>2.1</code>
+            <code>3.0</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2016/2/17</code>
+            <code>2016/2/18</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -120,7 +120,7 @@
             <dd class="value">
               <dl class="examples">
                 <dt class="comment">Generate XML documenting files for all library entities for later conversion to PDF A4 files</dt>
-                <dd class="code">library(library,[xslfile('lgtpdfa4.xsl')])</dd>
+                <dd class="code">library(library,[xslfile('logtalk_entity_to_pdf_a4.xsl')])</dd>
                 <dd class="code">yes</dd>
               </dl>
             </dd>
@@ -224,7 +224,7 @@
             <dd class="value">
               <dl class="examples">
                 <dt class="comment">Generate XML documenting files for all the entities in the current directory for later conversion to PDF A4 files</dt>
-                <dd class="code">directory('.',[xslfile('lgtpdfa4.xsl')])</dd>
+                <dd class="code">directory('.',[xslfile('logtalk_entity_to_pdf_a4.xsl')])</dd>
                 <dd class="code">yes</dd>
               </dl>
             </dd>
@@ -402,11 +402,15 @@
           <dd class="text">Reference to the XML specification file in XML documenting files. Possible values are "local" (default; DTD/XSD file in the same folder as the XML files), "web" (logtalk.org website DTD/XSD file), and "standalone" (no reference to specification files).</dd>
         </dl>
         <dl class="remarks">
-          <dt class="comment">xslfile(File) option</dt>
+          <dt class="comment">entity_xsl_file(File) option</dt>
           <dd class="text">XSLT file to use with the generated XML documenting files. The default value is "lgtxml.xsl", allowing the XML files to be viewed by simply opening them with a browser supporting XSLT (after running the "lgt2xml.sh" script on the XML files directory).</dd>
         </dl>
         <dl class="remarks">
-          <dt class="comment">xmldir(Directory) option</dt>
+          <dt class="comment">index_xsl_file(File) option</dt>
+          <dd class="text">XSLT file to use with the generated XML documenting files. The default value is "lgtxml.xsl", allowing the XML files to be viewed by simply opening them with a browser supporting XSLT (after running the "lgt2xml.sh" script on the XML files directory).</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">xml_docs_directory(Directory) option</dt>
           <dd class="text">Directory where the XML documenting files will be generated. The default value is "./xml_docs", a sub-directory of the source files directory.</dd>
         </dl>
         <dl class="remarks">
@@ -416,6 +420,10 @@
         <dl class="remarks">
           <dt class="comment">encoding(Encoding) option</dt>
           <dd class="text">Encoding to be used for the generated XML documenting files.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">omit_path_prefixes(Prefixes) option</dt>
+          <dd class="text">List of path prefixes (atoms) to omit when outputting directories.</dd>
         </dl>
         <dl class="remarks">
           <dt class="comment">exclude_files(List) option</dt>

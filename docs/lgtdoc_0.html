@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>2.1</code>
+            <code>3.0</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2016/2/17</code>
+            <code>2016/2/18</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -76,6 +76,66 @@
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>option_(?atom,?nonvar) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="directory_entity_/2" class="code">directory_entity_/2</h3>
+          <blockquote>
+            <p class="comment">Table of documented entities per directory.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>dynamic</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>directory_entity_(Directory,Entity)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>directory_entity_(?atom,?atom) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="type_entity_/2" class="code">type_entity_/2</h3>
+          <blockquote>
+            <p class="comment">Table of documented entities per type.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>dynamic</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>type_entity_(Type,Entity)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>type_entity_(?atom,?atom) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="predicate_entity_/2" class="code">predicate_entity_/2</h3>
+          <blockquote>
+            <p class="comment">Table of public predicates for all documented entities.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>dynamic</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>predicate_entity_(Predicate,Entity)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>predicate_entity_(?predicate_indicator,?entity_identifier) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>

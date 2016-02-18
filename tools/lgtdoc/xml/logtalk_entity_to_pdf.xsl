@@ -9,7 +9,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for converting XML documenting files into PDF files
-%  Last updated on November 3, 2014
+%  Last updated on February 18, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -85,7 +85,7 @@
 						font-size="9pt" 
 						font-family="sans-serif"
 						font-weight="bold">
-					<xsl:value-of select="logtalk/entity/type"/>: <xsl:value-of select="logtalk/entity/name"/>
+					<xsl:value-of select="logtalk_entity/entity/type"/>: <xsl:value-of select="logtalk_entity/entity/name"/>
 				</fo:block>
 			</fo:static-content> 
 
@@ -108,13 +108,13 @@
     	        	    font-family="sans-serif" 
     	        	    font-weight="bold"
     	        	    space-after="8pt">
-    	    		<xsl:value-of select="logtalk/entity/name"/>
+    	    		<xsl:value-of select="logtalk_entity/entity/name"/>
     	    	</fo:block>
- 				<xsl:apply-templates select="logtalk/entity"/>
-				<xsl:apply-templates select="logtalk/relations"/>
-				<xsl:apply-templates select="logtalk/predicates"/>
-				<xsl:apply-templates select="logtalk/operators"/>
-				<xsl:apply-templates select="logtalk/remarks"/>
+ 				<xsl:apply-templates select="logtalk_entity/entity"/>
+				<xsl:apply-templates select="logtalk_entity/relations"/>
+				<xsl:apply-templates select="logtalk_entity/predicates"/>
+				<xsl:apply-templates select="logtalk_entity/operators"/>
+				<xsl:apply-templates select="logtalk_entity/remarks"/>
 				<fo:block id="end"/>
 			</fo:flow>
 
@@ -125,7 +125,7 @@
 </xsl:template>
 
 
-<xsl:template match="logtalk/entity">
+<xsl:template match="logtalk_entity/entity">
 
 	<xsl:if test="comment">
 		<fo:block
@@ -265,7 +265,7 @@
 </xsl:template>
 
 
-<xsl:template match="logtalk/relations">
+<xsl:template match="logtalk_entity/relations">
 	<fo:block
 			font-size="10pt"
 			font-family="serif"
@@ -368,7 +368,7 @@
 </xsl:template>
 
 
-<xsl:template match="logtalk/relations/provides" priority="1">
+<xsl:template match="logtalk_entity/relations/provides" priority="1">
 	<fo:block
 			font-size="9pt"
 			font-family="monospace"
@@ -378,7 +378,7 @@
 </xsl:template>
 
 
-<xsl:template match="logtalk/relations/uses" priority="1">
+<xsl:template match="logtalk_entity/relations/uses" priority="1">
 	<fo:block
 			font-size="9pt"
 			font-family="monospace"
@@ -388,7 +388,7 @@
 </xsl:template>
 
 
-<xsl:template match="logtalk/relations/calls" priority="1">
+<xsl:template match="logtalk_entity/relations/calls" priority="1">
 	<fo:block
 			font-size="9pt"
 			font-family="monospace"
@@ -398,7 +398,7 @@
 </xsl:template>
 
 
-<xsl:template match="logtalk/relations/alias" priority="1">
+<xsl:template match="logtalk_entity/relations/alias" priority="1">
 	<fo:block
 			font-size="9pt"
 			margin-left="10mm">
@@ -409,7 +409,7 @@
 </xsl:template>
 
 
-<xsl:template match="logtalk/relations/*" priority="0">
+<xsl:template match="logtalk_entity/relations/*" priority="0">
 	<fo:block
 			font-size="9pt"
 			font-family="monospace"
@@ -419,7 +419,7 @@
 </xsl:template>
 
 
-<xsl:template match="logtalk/predicates">
+<xsl:template match="logtalk_entity/predicates">
 
 	<fo:block
 			font-size="14pt" 
@@ -433,7 +433,7 @@
 		<xsl:when test="public/predicate">
 			<xsl:apply-templates select="public/predicate"/>
 		</xsl:when>
-		<xsl:when test="/logtalk/relations/*">
+		<xsl:when test="/logtalk_entity/relations/*">
 			<fo:block
 					font-size="10pt" 
 					font-family="serif" 
@@ -465,7 +465,7 @@
 		<xsl:when test="protected/predicate">
 			<xsl:apply-templates select="protected/predicate"/>
 		</xsl:when>
-		<xsl:when test="/logtalk/relations/*">
+		<xsl:when test="/logtalk_entity/relations/*">
 			<fo:block
 					font-size="10pt" 
 					font-family="serif" 
@@ -497,7 +497,7 @@
 		<xsl:when test="private/predicate">
 			<xsl:apply-templates select="private/predicate"/>
 		</xsl:when>
-		<xsl:when test="/logtalk/relations/*">
+		<xsl:when test="/logtalk_entity/relations/*">
 			<fo:block
 					font-size="10pt" 
 					font-family="serif" 
@@ -717,7 +717,7 @@
 </xsl:template>
 
 
-<xsl:template match="logtalk/operators">
+<xsl:template match="logtalk_entity/operators">
 
 	<fo:block
 			font-size="14pt" 
@@ -754,7 +754,7 @@
 </xsl:template>
 
 
-<xsl:template match="logtalk/remarks">
+<xsl:template match="logtalk_entity/remarks">
 
 	<fo:block
 			font-size="14pt" 

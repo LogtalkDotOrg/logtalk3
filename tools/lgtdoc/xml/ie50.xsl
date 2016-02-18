@@ -32,25 +32,25 @@
 <xsl:template match="/">
 	<html>
 	<head>
-		<title><xsl:value-of select="logtalk/entity/name" /></title>
+		<title><xsl:value-of select="logtalk_entity/entity/name" /></title>
 		<link rel="stylesheet" href="logtalk.css" type="text/css" />
 	</head>
 	<body>
 		<hr />
-		<h4 class="type"><xsl:value-of select="logtalk/entity/type" /></h4>
-		<h1 class="code"><xsl:value-of select="logtalk/entity/name" /></h1>
-		<xsl:apply-templates select="logtalk/entity" />
+		<h4 class="type"><xsl:value-of select="logtalk_entity/entity/type" /></h4>
+		<h1 class="code"><xsl:value-of select="logtalk_entity/entity/name" /></h1>
+		<xsl:apply-templates select="logtalk_entity/entity" />
 		<hr />
-		<xsl:apply-templates select="logtalk/relations" />
+		<xsl:apply-templates select="logtalk_entity/relations" />
 		<hr />
-		<xsl:apply-templates select="logtalk/predicates" />
+		<xsl:apply-templates select="logtalk_entity/predicates" />
 		<hr />
 	</body>
 	</html>
 </xsl:template>
 
 
-<xsl:template match="logtalk/entity">
+<xsl:template match="logtalk_entity/entity">
 	<xsl:if test="comment">
 		<blockquote><xsl:value-of select="comment" /></blockquote>
 	</xsl:if>
@@ -81,7 +81,7 @@
 </xsl:template>
 
 
-<xsl:template match="logtalk/relations">
+<xsl:template match="logtalk_entity/relations">
 	<xsl:choose>
 		<xsl:when test="*">
 			<xsl:if test="implements">
@@ -134,28 +134,28 @@
 </xsl:template>
 
 
-<xsl:template match="logtalk/relations/uses">
+<xsl:template match="logtalk_entity/relations/uses">
 	<dd><code><a><xsl:attribute name="href"><xsl:value-of select="file" />.xml</xsl:attribute><xsl:value-of select="name" /></a></code></dd>
 </xsl:template>
 
 
-<xsl:template match="logtalk/relations/calls">
+<xsl:template match="logtalk_entity/relations/calls">
 	<dd><code><a><xsl:attribute name="href"><xsl:value-of select="file" />.xml</xsl:attribute><xsl:value-of select="name" /></a></code></dd>
 </xsl:template>
 
 
-<xsl:template match="logtalk/relations/*" xml:space="preserve">
+<xsl:template match="logtalk_entity/relations/*" xml:space="preserve">
 	<dd><code><xsl:value-of select="scope" /> <a><xsl:attribute name="href"><xsl:value-of select="file" />.xml</xsl:attribute><xsl:value-of select="name" /></a></code></dd>
 </xsl:template>
 
 
-<xsl:template match="logtalk/predicates">
+<xsl:template match="logtalk_entity/predicates">
 	<h1>Public interface</h1>
 	<xsl:choose>
 		<xsl:when test="public/predicate">
 			<xsl:apply-templates select="public/predicate" />
 		</xsl:when>
-		<xsl:when test="/logtalk/relations/*">
+		<xsl:when test="/logtalk_entity/relations/*">
 			<h4 class="code">(see related entities)</h4>
 		</xsl:when>
 		<xsl:otherwise>
@@ -167,7 +167,7 @@
 		<xsl:when test="protected/predicate">
 			<xsl:apply-templates select="protected/predicate" />
 		</xsl:when>
-		<xsl:when test="/logtalk/relations/*">
+		<xsl:when test="/logtalk_entity/relations/*">
 			<h4 class="code">(see related entities)</h4>
 		</xsl:when>
 		<xsl:otherwise>
@@ -179,7 +179,7 @@
 		<xsl:when test="private/predicate">
 			<xsl:apply-templates select="private/predicate" />
 		</xsl:when>
-		<xsl:when test="/logtalk/relations/*">
+		<xsl:when test="/logtalk_entity/relations/*">
 			<h4 class="code">(see related entities)</h4>
 		</xsl:when>
 		<xsl:otherwise>

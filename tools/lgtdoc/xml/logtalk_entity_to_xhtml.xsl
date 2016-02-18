@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for converting XML documenting files into XHTML files
-%  Last updated on November 3, 2014
+%  Last updated on February 18, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -44,21 +44,21 @@
 	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 	<head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<title><xsl:value-of select="logtalk/entity/name" /></title>
+		<title><xsl:value-of select="logtalk_entity/entity/name" /></title>
 		<link rel="stylesheet" href="logtalk.css" type="text/css" />
 	</head>
 	<body>
 		<div class="header">
-			<p class="type"><xsl:value-of select="logtalk/entity/type" /></p>
-			<h1 class="code"><xsl:value-of select="logtalk/entity/name" /></h1>
-			<xsl:if test="logtalk/entity/comment or logtalk/entity/parameters">
+			<p class="type"><xsl:value-of select="logtalk_entity/entity/type" /></p>
+			<h1 class="code"><xsl:value-of select="logtalk_entity/entity/name" /></h1>
+			<xsl:if test="logtalk_entity/entity/comment or logtalk_entity/entity/parameters">
 			<blockquote>
-			<xsl:if test="logtalk/entity/comment">
-				<p class="comment"><xsl:value-of select="logtalk/entity/comment" /></p>
+			<xsl:if test="logtalk_entity/entity/comment">
+				<p class="comment"><xsl:value-of select="logtalk_entity/entity/comment" /></p>
 			</xsl:if>
-			<xsl:if test="logtalk/entity/parameters">
+			<xsl:if test="logtalk_entity/entity/parameters">
 				<ul class="parameters">
-				<xsl:for-each select="logtalk/entity/parameters/parameter">
+				<xsl:for-each select="logtalk_entity/entity/parameters/parameter">
 					<li><code><xsl:value-of select="name" /></code><xsl:text disable-output-escaping="yes"> &amp;ndash; </xsl:text><span class="comment"><xsl:value-of select="description" /></span></li>
 				</xsl:for-each>
 				</ul>
@@ -68,25 +68,25 @@
 		</div>
 		<div class="entity">
 			<div class="section">
-				<xsl:apply-templates select="logtalk/entity" />
-				<xsl:apply-templates select="logtalk/relations" />
+				<xsl:apply-templates select="logtalk_entity/entity" />
+				<xsl:apply-templates select="logtalk_entity/relations" />
 			</div>
 		</div>
 		<div class="predicates">
-			<xsl:apply-templates select="logtalk/predicates" />
+			<xsl:apply-templates select="logtalk_entity/predicates" />
 		</div>
 		<div class="operators">
-			<xsl:apply-templates select="logtalk/operators" />
+			<xsl:apply-templates select="logtalk_entity/operators" />
 		</div>
 		<div class="remarks">
-			<xsl:apply-templates select="logtalk/remarks" />
+			<xsl:apply-templates select="logtalk_entity/remarks" />
 		</div>
 	</body>
 	</html>
 </xsl:template>
 
 
-<xsl:template match="logtalk/entity">
+<xsl:template match="logtalk_entity/entity">
 	<xsl:if test="author or version or date">
 	<dl class="properties">
 	<xsl:if test="author">
@@ -126,7 +126,7 @@
 </xsl:template>
 
 
-<xsl:template match="logtalk/relations">
+<xsl:template match="logtalk_entity/relations">
 	<xsl:choose>
 		<xsl:when test="*">
 		<dl class="relations">
@@ -175,39 +175,39 @@
 </xsl:template>
 
 
-<xsl:template match="logtalk/relations/provides" priority="1">
+<xsl:template match="logtalk_entity/relations/provides" priority="1">
 	<dd class ="value"><code><a href="{file}.html#{resource}"><xsl:value-of select="to" />::<xsl:value-of select="resource" /></a></code></dd>
 </xsl:template>
 
 
-<xsl:template match="logtalk/relations/uses" priority="1">
+<xsl:template match="logtalk_entity/relations/uses" priority="1">
 	<dd class ="value"><code><a href="{file}.html"><xsl:value-of select="name" /></a></code></dd>
 </xsl:template>
 
 
-<xsl:template match="logtalk/relations/calls" priority="1">
+<xsl:template match="logtalk_entity/relations/calls" priority="1">
 	<dd class ="value"><code><a href="{file}.html"><xsl:value-of select="name" /></a></code></dd>
 </xsl:template>
 
 
-<xsl:template match="logtalk/relations/alias" priority="1">
+<xsl:template match="logtalk_entity/relations/alias" priority="1">
 	<dd class ="value"><code><xsl:value-of select="name" /><xsl:text> </xsl:text><xsl:value-of select="original" /></code><em> aka </em><code><xsl:value-of select="alternative" /></code></dd>
 </xsl:template>
 
 
-<xsl:template match="logtalk/relations/*" priority="0">
+<xsl:template match="logtalk_entity/relations/*" priority="0">
 	<dd class ="value"><code><xsl:value-of select="scope" /><xsl:text> </xsl:text><a href="{file}.html"><xsl:value-of select="name" /></a></code></dd>
 </xsl:template>
 
 
-<xsl:template match="logtalk/predicates">
+<xsl:template match="logtalk_entity/predicates">
 	<div class="public">
 	<h2>Public interface</h2>
 	<xsl:choose>
 		<xsl:when test="public/predicate">
 			<xsl:apply-templates select="public/predicate" />
 		</xsl:when>
-		<xsl:when test="/logtalk/relations/*">
+		<xsl:when test="/logtalk_entity/relations/*">
 			<div class="section">
 				<p class="comment">(see related entities)</p>
 			</div>
@@ -225,7 +225,7 @@
 		<xsl:when test="protected/predicate">
 			<xsl:apply-templates select="protected/predicate" />
 		</xsl:when>
-		<xsl:when test="/logtalk/relations/*">
+		<xsl:when test="/logtalk_entity/relations/*">
 			<div class="section">
 				<p class="comment">(see related entities)</p>
 			</div>
@@ -243,7 +243,7 @@
 		<xsl:when test="private/predicate">
 			<xsl:apply-templates select="private/predicate" />
 		</xsl:when>
-		<xsl:when test="/logtalk/relations/*">
+		<xsl:when test="/logtalk_entity/relations/*">
 			<div class="section">
 				<p class="comment">(see related entities)</p>
 			</div>
@@ -322,7 +322,7 @@
 </xsl:template>
 
 
-<xsl:template match="logtalk/operators">
+<xsl:template match="logtalk_entity/operators">
 	<h2>Operators</h2>
 	<div class="section">
 	<xsl:choose>
@@ -339,7 +339,7 @@
 </xsl:template>
 
 
-<xsl:template match="logtalk/remarks">
+<xsl:template match="logtalk_entity/remarks">
 	<h2>Remarks</h2>
 	<div class="section">
 	<xsl:choose>
@@ -353,7 +353,7 @@
 	</div>
 </xsl:template>
 
-<xsl:template match="logtalk/remarks/remark">
+<xsl:template match="logtalk_entity/remarks/remark">
 	<dl class="remarks">
 		<dt class="comment"><xsl:value-of select="topic" /></dt>
 			<dd class="text"><xsl:value-of select="text" /></dd>

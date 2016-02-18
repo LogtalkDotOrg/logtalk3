@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for converting XML documenting files into text files
-%  Last updated on February 17, 2016
+%  Last updated on February 18, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2015 Paulo Moura <pmoura@logtalk.org>
@@ -62,15 +62,15 @@
 
 <xsl:template match="/">
 	<xsl:value-of select="$hr1" />
-	<xsl:apply-templates select="index/type" />
+	<xsl:apply-templates select="logtalk_index/type" />
 	<xsl:value-of select="$hr2" />
 	<xsl:value-of select="$nl" />
-	<xsl:apply-templates select="index/entries" />
+	<xsl:apply-templates select="logtalk_index/entries" />
 	<xsl:value-of select="$hr1" />
 </xsl:template>
 
 
-<xsl:template match="index/type">
+<xsl:template match="logtalk_index/type">
 	<xsl:if test=".='directory'">
 		<xsl:text>Directory index</xsl:text>
 	</xsl:if>
@@ -83,7 +83,7 @@
 </xsl:template>
 
 
-<xsl:template match="index/entries">
+<xsl:template match="logtalk_index/entries">
 	<xsl:apply-templates select="entry" />
 </xsl:template>
 
