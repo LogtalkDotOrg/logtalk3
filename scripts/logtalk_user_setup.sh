@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk user folder setup script
-##   Last updated on November 3, 2014
+##   Last updated on February 18, 2016
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -148,9 +148,12 @@ ln -sf "$LOGTALKHOME"/tools/lgtdoc/xml/lgt2pdf.sh "$LOGTALKUSER"/tools/lgtdoc/xm
 ln -sf "$LOGTALKHOME"/tools/lgtdoc/xml/lgt2xml.sh "$LOGTALKUSER"/tools/lgtdoc/xml/lgt2xml
 ln -sf "$LOGTALKHOME"/tools/lgtdoc/xml/lgt2md.sh "$LOGTALKUSER"/tools/lgtdoc/xml/lgt2md
 ln -sf "$LOGTALKHOME"/tools/lgtdoc/xml/lgt2txt.sh "$LOGTALKUSER"/tools/lgtdoc/xml/lgt2txt
-ln -sf "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk.dtd "$LOGTALKUSER"/tools/lgtdoc/xml/logtalk.dtd
-ln -sf "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk.rng "$LOGTALKUSER"/tools/lgtdoc/xml/logtalk.rng
-ln -sf "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk.xsd "$LOGTALKUSER"/tools/lgtdoc/xml/logtalk.xsd
+ln -sf "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk_entity.dtd "$LOGTALKUSER"/tools/lgtdoc/xml/logtalk_entity.dtd
+ln -sf "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk_entity.rng "$LOGTALKUSER"/tools/lgtdoc/xml/logtalk_entity.rng
+ln -sf "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk_entity.xsd "$LOGTALKUSER"/tools/lgtdoc/xml/logtalk_entity.xsd
+ln -sf "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk_index.dtd "$LOGTALKUSER"/tools/lgtdoc/xml/logtalk_index.dtd
+ln -sf "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk_index.rng "$LOGTALKUSER"/tools/lgtdoc/xml/logtalk_index.rng
+ln -sf "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk_index.xsd "$LOGTALKUSER"/tools/lgtdoc/xml/logtalk_index.xsd
 echo "Finished copying Logtalk files and directories."
 echo
 echo "You may want to customize the default Logtalk compiler flags by renaming"

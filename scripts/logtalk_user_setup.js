@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////////////////////
 //
 //   Logtalk user folder setup script
-//   Last updated on November 3, 2014
+//   Last updated on February 18, 2016
 //
 //   This file is part of Logtalk <http://logtalk.org/>  
 //   Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -124,8 +124,12 @@ FSObject.CopyFile(logtalk_home + "\\tester-sample.lgt", logtalk_user + "\\tester
 FSObject.CopyFile(logtalk_home + "\\VERSION.txt", logtalk_user + "\\VERSION.txt");
 
 FSObject.DeleteFile(logtalk_user + "\\tools\\lgtdoc\\xml\\lgt2*.*");
-FSObject.DeleteFile(logtalk_user + "\\tools\\lgtdoc\\xml\\logtalk.dtd");
-FSObject.DeleteFile(logtalk_user + "\\tools\\lgtdoc\\xml\\logtalk.xsd");
+FSObject.DeleteFile(logtalk_user + "\\tools\\lgtdoc\\xml\\logtalk_entity.dtd");
+FSObject.DeleteFile(logtalk_user + "\\tools\\lgtdoc\\xml\\logtalk_entity.xsd");
+FSObject.DeleteFile(logtalk_user + "\\tools\\lgtdoc\\xml\\logtalk_entity.rng");
+FSObject.DeleteFile(logtalk_user + "\\tools\\lgtdoc\\xml\\logtalk_index.dtd");
+FSObject.DeleteFile(logtalk_user + "\\tools\\lgtdoc\\xml\\logtalk_index.xsd");
+FSObject.DeleteFile(logtalk_user + "\\tools\\lgtdoc\\xml\\logtalk_index.rng");
 
 var link = WshShell.CreateShortcut(logtalk_user + "\\adapters.lnk");
 link.Description = "Shortcut to Logtalk adapter files";
@@ -172,19 +176,34 @@ link.Description = "Shortcut to lgt2txt script";
 link.TargetPath = logtalk_home + "\\tools\\lgtdoc\\xml\\lgt2txt.js";
 link.Save();
 
-link = WshShell.CreateShortcut(logtalk_user + "\\tools\\lgtdoc\\xml\\logtalk.dtd.lnk");
-link.Description = "Shortcut to Logtalk DTD";
-link.TargetPath = logtalk_home + "\\tools\\lgtdoc\\xml\\logtalk.dtd";
+link = WshShell.CreateShortcut(logtalk_user + "\\tools\\lgtdoc\\xml\\logtalk_entity.dtd.lnk");
+link.Description = "Shortcut to Logtalk entity DTD";
+link.TargetPath = logtalk_home + "\\tools\\lgtdoc\\xml\\logtalk_entity.dtd";
 link.Save();
 
-link = WshShell.CreateShortcut(logtalk_user + "\\tools\\lgtdoc\\xml\\logtalk.rng.lnk");
-link.Description = "Shortcut to Logtalk RELAX NG Schema";
-link.TargetPath = logtalk_home + "\\tools\\lgtdoc\\xml\\logtalk.rng";
+link = WshShell.CreateShortcut(logtalk_user + "\\tools\\lgtdoc\\xml\\logtalk_entity.rng.lnk");
+link.Description = "Shortcut to Logtalk entity RELAX NG Schema";
+link.TargetPath = logtalk_home + "\\tools\\lgtdoc\\xml\\logtalk_entity.rng";
 link.Save();
 
-link = WshShell.CreateShortcut(logtalk_user + "\\tools\\lgtdoc\\xml\\logtalk.xsd.lnk");
-link.Description = "Shortcut to Logtalk XML Schema";
-link.TargetPath = logtalk_home + "\\tools\\lgtdoc\\xml\\logtalk.xsd";
+link = WshShell.CreateShortcut(logtalk_user + "\\tools\\lgtdoc\\xml\\logtalk_entity.xsd.lnk");
+link.Description = "Shortcut to Logtalk entity XML Schema";
+link.TargetPath = logtalk_home + "\\tools\\lgtdoc\\xml\\logtalk_entity.xsd";
+link.Save();
+
+link = WshShell.CreateShortcut(logtalk_user + "\\tools\\lgtdoc\\xml\\logtalk_index.dtd.lnk");
+link.Description = "Shortcut to Logtalk index DTD";
+link.TargetPath = logtalk_home + "\\tools\\lgtdoc\\xml\\logtalk_index.dtd";
+link.Save();
+
+link = WshShell.CreateShortcut(logtalk_user + "\\tools\\lgtdoc\\xml\\logtalk_index.rng.lnk");
+link.Description = "Shortcut to Logtalk index RELAX NG Schema";
+link.TargetPath = logtalk_home + "\\tools\\lgtdoc\\xml\\logtalk_index.rng";
+link.Save();
+
+link = WshShell.CreateShortcut(logtalk_user + "\\tools\\lgtdoc\\xml\\logtalk_index.xsd.lnk");
+link.Description = "Shortcut to Logtalk index XML Schema";
+link.TargetPath = logtalk_home + "\\tools\\lgtdoc\\xml\\logtalk_index.xsd";
 link.Save();
 
 WScript.Echo("Finished copying Logtalk files and directories.");
