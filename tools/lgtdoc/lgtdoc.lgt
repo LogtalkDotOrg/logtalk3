@@ -92,9 +92,14 @@
 		rdirectory(Directory, []).
 
 	output_rdirectory(Directory, Options) :-
-		once(member(exclude_paths(ExcludedPaths), Options)),
-		forall(
+		memberchk(exclude_paths(ExcludedPaths), Options),
+		setof(
+			SubDirectory,
 			sub_directory(Directory, ExcludedPaths, SubDirectory),
+			SubDirectories
+		),
+		forall(
+			member(SubDirectory, SubDirectories),
 			output_directory_files(SubDirectory, Options)
 		).
 
@@ -1203,6 +1208,11 @@
 	member(Element, [Element| _]).
 	member(Element, [_| List]) :-
 		member(Element, List).
+
+	memberchk(Element, [Element| _]) :-
+		!.
+	memberchk(Element, [_| List]) :-
+		memberchk(Element, List).
 
 	member_var(V, [H| _]) :-
 		V == H.
