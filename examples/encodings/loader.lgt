@@ -18,12 +18,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == swi; Dialect == yap))).
+:- if(current_logtalk_flag(prolog_dialect, swi)).
 
-	% SWI-Prolog and YAP don't support UTF-32
+	% SWI-Prolog doesn't support UTF-32
 	:- initialization(logtalk_load([asian, babel, latin])). 
 
-:- elif((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == cx; Dialect == sicstus))).
+:- elif((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == cx; Dialect == sicstus; Dialect == yap))).
 
 	:- initialization(logtalk_load([asian, babel, latin, mythology])). 
 

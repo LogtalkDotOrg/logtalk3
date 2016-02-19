@@ -59,6 +59,12 @@ Tests
 
 * ADDED: Tests for the validity of explicit property queries to entities.
 
+Examples
+--------
+
+* UPDATED: The `encodings` example to also load and test UTF-32 files when
+using YAP as the backend compiler.
+
 
 3.03.0 - February 16, 2016
 ==========================

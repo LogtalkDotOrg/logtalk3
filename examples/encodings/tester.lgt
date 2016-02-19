@@ -20,7 +20,7 @@
 
 :- if(\+ current_logtalk_flag(encoding_directive, unsupported)).
 
-	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == swi; Dialect == yap))).
+	:- if(current_logtalk_flag(prolog_dialect, swi)).
 
 		% SWI-Prolog and YAP don't support UTF-32
 		:- initialization((
