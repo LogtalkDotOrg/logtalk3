@@ -203,6 +203,7 @@ function create_index_file() {
 	var f = FSObject.CreateTextFile(index_file, true);
 
 	f.WriteLine("# " + index_title);
+	f.WriteLine("");
 
 	var files = new Enumerator(FSObject.GetFolder(WshShell.CurrentDirectory).Files);
 
@@ -226,6 +227,7 @@ function create_index_file() {
 			}
 		}
 	}
+	f.WriteLine("");
 
 	var today = new Date();
 	var year  = today.getFullYear();
