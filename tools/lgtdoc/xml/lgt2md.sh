@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to Mardown text files conversion script 
-##   Last updated on February 17, 2016
+##   Last updated on February 19, 2016
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -88,6 +88,9 @@ processor=xsltproc
 
 directory="."
 
+index_file=index.md
+index_title="Documentation index"
+
 usage_help()
 {
 	echo 
@@ -95,21 +98,56 @@ usage_help()
 	echo "current directory to Markdown text files"
 	echo
 	echo "Usage:"
-	echo "  `basename $0` [-d directory] [-p processor]"
+	echo "  `basename $0` [-d directory] [-i index] [-t title] [-p processor]"
 	echo "  `basename $0` -h"
 	echo
 	echo "Optional arguments:"
 	echo "  -d output directory for the text files (default is $directory)"
+	echo "  -i name of the index file (default is $index_file)"
+	echo "  -t title to be used in the index file (default is $index_title)"
 	echo "  -p XSLT processor (xsltproc, xalan, or sabcmd; default is $processor)"
 	echo "  -h help"
 	echo
 	exit 1
 }
 
-while getopts "d:p:h" Option
+create_index_file()
+{
+	echo "" > "$index_file"
+
+	echo "# "$index_title >> "$index_file"
+	echo "" >> "$index_file"
+
+	if [ -e "./directory_index.xml" ] ; then
+		echo "* [Directory index](directory_index.md)" >> "$index_file"
+		echo "* [Entity index](entity_index.md)" >> "$index_file"
+		echo "* [Predicate index](predicate_index.md)" >> "$index_file"
+	else
+		for file in `grep -l "<logtalk_entity" *.xml`; do
+			name="`expr "$file" : '\(.*\)\.[^./]*$' \| "$file"`"
+			entity=${name%_*}
+			pars=${name##*_}
+			echo "  indexing $name.html"
+			if [ $pars -gt 0 ]
+			then
+				echo "* ["$entity"/"$pars"]("$name".md)" >> "$index_file"
+			else
+				echo "* ["$entity"]("$name".md)" >> "$index_file"
+			fi
+		done
+	fi
+
+	date="`eval date`"
+	echo "" >> "$index_file"
+	echo "Generated on "$date >> "$index_file"
+}
+
+while getopts "d:i:t:p:h" Option
 do
 	case $Option in
 		d) d_arg="$OPTARG";;
+		i) i_arg="$OPTARG";;
+		t) t_arg="$OPTARG";;
 		p) p_arg="$OPTARG";;
 		h) usage_help;;
 		*) usage_help;;
@@ -122,6 +160,14 @@ if [ "$d_arg" != "" ] && [ ! -d "$d_arg" ] ; then
 	exit 1
 elif [ "$d_arg" != "" ] ; then
 	directory=$d_arg
+fi
+
+if [ "$i_arg" != "" ] ; then
+	index_file=$i_arg
+fi
+
+if [ "$t_arg" != "" ] ; then
+	index_title=$t_arg
 fi
 
 if [ "$p_arg" != "" ] && [ "$p_arg" != "fop" ] && [ "$p_arg" != "xep" ] && [ "$p_arg" != "xinc" ] ; then
@@ -174,6 +220,11 @@ if [ `(grep -l "<logtalk" *.xml | wc -l) 2> /dev/null` -gt 0 ] ; then
 		esac
 	done
 	echo "conversion done"
+	echo
+	index_file="$directory/$index_file"
+	echo "generating $index_file file..."
+	create_index_file
+	echo "index $index_file generated"
 	echo
 else
 	echo

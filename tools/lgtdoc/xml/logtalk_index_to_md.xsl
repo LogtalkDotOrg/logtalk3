@@ -51,7 +51,7 @@
 <xsl:template match="/">
 	<xsl:value-of select="$hr" />
 	<xsl:text># </xsl:text><xsl:apply-templates select="logtalk_index/type" />
-	<xsl:value-of select="$nl" />
+	<xsl:value-of select="$nl2" />
 	<xsl:apply-templates select="logtalk_index/entries" />
 	<xsl:value-of select="$hr" />
 </xsl:template>
@@ -76,7 +76,7 @@
 
 
 <xsl:template match="*/entry">
-	<xsl:text>## </xsl:text><xsl:apply-templates select="key" />
+	<xsl:text>## `</xsl:text><xsl:apply-templates select="key" /><xsl:text>`</xsl:text>
 	<xsl:value-of select="$nl2" />
 	<xsl:choose>
 	    <xsl:when test="/index/type='predicate'">

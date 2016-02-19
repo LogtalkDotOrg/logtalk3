@@ -45,6 +45,10 @@ sub-directories.
 
 * FIXED: Documenting of predicate aliases by the `lgtdoc` tool.
 
+* FIXED: Added missing Windows `lgt2md.bat` file to the `lgtdoc` tool.
+
+* FIXED: The `lgt2md.*` scripts to also generate an index file.
+
 
 3.03.0 - February 16, 2016
 ==========================
