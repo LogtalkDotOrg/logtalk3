@@ -182,7 +182,7 @@ function create_index_file() {
 
 	var files = new Enumerator(FSObject.GetFolder(directory).Files);
 
-	if (WScript.Arguments.Named.Exists("./directory_index.xml")) {
+	if (FSObject.FileExists(WshShell.CurrentDirectory + "\\directory_index.xml")) {
 		f.WriteLine("    <li><a href=\"directory_index.xml\">Directory index</a></li>");
 		f.WriteLine("    <li><a href=\"entity_index.xml\">Entity index</a></li>");
 		f.WriteLine("    <li><a href=\"predicate_index.xml\">Predicate index</a></li>");
