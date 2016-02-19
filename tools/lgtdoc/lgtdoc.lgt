@@ -202,9 +202,9 @@
 			logtalk::loaded_file_property(Path, text_properties(StreamOptions)),
 			process(File, Directory, Options, StreamOptions),
 			fail
-		;	os::change_directory(Current)
-		),
-		write_indexes(Options).
+		;	write_indexes(Options),
+			os::change_directory(Current)
+		).
 
 	all :-
 		all([]).
