@@ -54,6 +54,11 @@ sub-directories.
 
 * FIXED: The `lgt2md.*` scripts to also generate an index file.
 
+Tests
+-----
+
+* ADDED: Tests for the validity of explicit property queries to entities.
+
 
 3.03.0 - February 16, 2016
 ==========================

@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2015/01/23,
+		date is 2016/02/19,
 		comment is 'Unit tests for the protocol_property/2 built-in predicate.'
 	]).
 
@@ -93,6 +93,25 @@
 		member(scope(Scope3), Properties3), Scope3 == private,
 		member((dynamic), Properties3),
 		member(line_count(LC3), Properties3), integer(LC3).
+
+	fails(protocol_property_2_10) :-
+		(	protocol_property(empty_protocol, built_in)
+		;	protocol_property(empty_protocol, (dynamic))
+		;	protocol_property(empty_protocol, static)
+		;	protocol_property(empty_protocol, debugging)
+		;	protocol_property(empty_protocol, public(_))
+		;	protocol_property(empty_protocol, protected(_))
+		;	protocol_property(empty_protocol, private(_))
+		;	protocol_property(empty_protocol, declares(_, _))
+		;	protocol_property(empty_protocol, alias(_, _))
+		;	protocol_property(empty_protocol, source_data)
+		;	protocol_property(empty_protocol, info(_))
+		;	protocol_property(empty_protocol, file(_))
+		;	protocol_property(empty_protocol, file(_, _))
+		;	protocol_property(empty_protocol, lines(_, _))
+		),
+		% force backtracking into all property queries
+		fail.
 
 	member(H, [H| _]) :-
 		!.

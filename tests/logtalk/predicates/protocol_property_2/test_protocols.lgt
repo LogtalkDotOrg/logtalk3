@@ -43,3 +43,14 @@
 	:- dynamic(c/3).
 
 :- end_protocol.
+
+
+:- protocol(empty_protocol).
+
+	:- info([
+		version is 1.0,
+		author is 'Paulo Moura',
+		date is 2016/02/19,
+		comment is 'Empty protocol for testing validity of protocol properties.']).
+
+:- end_protocol.

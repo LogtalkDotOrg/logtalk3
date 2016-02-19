@@ -21,18 +21,13 @@
 :- set_logtalk_flag(source_data, on).
 
 
-:- object(test_object).
+:- category(test_category).
 
 	:- info([
 		version is 1.0,
 		author is 'Paulo Moura',
-		date is 2014/17/12,
-		comment is 'Sample object for testing with the `source_data` flag turned on.']).
-
-	:- set_logtalk_flag(complements, allow).
-	:- set_logtalk_flag(dynamic_declarations, allow).
-	:- set_logtalk_flag(context_switching_calls, deny).
-	:- set_logtalk_flag(events, allow).
+		date is 2014/12/17,
+		comment is 'Sample category for testing with the `source_data` flag turned on.']).
 
 	:- public(a/1).
 	:- if(current_logtalk_flag(coinduction, supported)).
@@ -49,9 +44,6 @@
 
 	:- private(c/3).
 	:- dynamic(c/3).
-	c(1, 2, 3).
-	c(2, 3, 1).
-	c(3, 1, 2).
 
 	d(1, 2, 3, 4).
 	d(2, 3, 4, 1).
@@ -60,4 +52,16 @@
 
 	:- private(e/5).
 
-:- end_object.
+:- end_category.
+
+
+:- category(empty_category).
+
+	:- info([
+		version is 1.0,
+		author is 'Paulo Moura',
+		date is 2016/02/19,
+		comment is 'Empty category for testing validity of category properties.'
+	]).
+
+:- end_category.

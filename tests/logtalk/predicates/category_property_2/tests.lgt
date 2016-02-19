@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2015/01/23,
+		date is 2016/02/19,
 		comment is 'Unit tests for the category_property/2 built-in predicate.'
 	]).
 
@@ -117,6 +117,32 @@
 		category_property(test_category, defines(e/5, Properties5)),
 		\+ member(line_count(_LC5), Properties5),
 		member(number_of_clauses(NC5), Properties5), NC5 == 0.		
+
+	fails(category_property_2_11) :-
+		(	category_property(empty_category, built_in)
+		;	category_property(empty_category, (dynamic))
+		;	category_property(empty_category, static)
+		;	category_property(empty_category, debugging)
+		;	category_property(empty_category, public(_))
+		;	category_property(empty_category, protected(_))
+		;	category_property(empty_category, private(_))
+		;	category_property(empty_category, declares(_, _))
+		;	category_property(empty_category, alias(_, _))
+		;	category_property(empty_category, source_data)
+		;	category_property(empty_category, info(_))
+		;	category_property(empty_category, file(_))
+		;	category_property(empty_category, file(_, _))
+		;	category_property(empty_category, lines(_, _))
+		;	category_property(empty_category, events)
+		;	category_property(empty_category, defines(_, _))
+		;	category_property(empty_category, includes(_, _, _))
+		;	category_property(empty_category, provides(_, _, _))
+		;	category_property(empty_category, calls(_, _))
+		;	category_property(empty_category, number_of_clauses(_))
+		;	category_property(empty_category, number_of_user_clauses(_))
+		),
+		% force backtracking into all property queries
+		fail.
 
 	member(H, [H| _]) :-
 		!.

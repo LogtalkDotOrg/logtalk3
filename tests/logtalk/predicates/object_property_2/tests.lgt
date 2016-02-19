@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2015/01/23,
+		date is 2016/02/19,
 		comment is 'Unit tests for the object_property/2 built-in predicate.'
 	]).
 
@@ -123,6 +123,37 @@
 		object_property(test_object, defines(e/5, Properties5)),
 		\+ member(line_count(_LC5), Properties5),
 		member(number_of_clauses(NC5), Properties5), NC5 == 0.		
+
+	fails(object_property_2_11) :-
+		(	object_property(empty_object, built_in)
+		;	object_property(empty_object, (dynamic))
+		;	object_property(empty_object, static)
+		;	object_property(empty_object, debugging)
+		;	object_property(empty_object, public(_))
+		;	object_property(empty_object, protected(_))
+		;	object_property(empty_object, private(_))
+		;	object_property(empty_object, declares(_, _))
+		;	object_property(empty_object, alias(_, _))
+		;	object_property(empty_object, source_data)
+		;	object_property(empty_object, info(_))
+		;	object_property(empty_object, file(_))
+		;	object_property(empty_object, file(_, _))
+		;	object_property(empty_object, lines(_, _))
+		;	object_property(empty_object, events)
+		;	object_property(empty_object, defines(_, _))
+		;	object_property(empty_object, includes(_, _, _))
+		;	object_property(empty_object, provides(_, _, _))
+		;	object_property(empty_object, calls(_, _))
+		;	object_property(empty_object, number_of_clauses(_))
+		;	object_property(empty_object, number_of_user_clauses(_))
+		;	object_property(empty_object, threaded)
+		;	object_property(empty_object, context_switching_calls)
+		;	object_property(empty_object, dynamic_declarations)
+		;	object_property(empty_object, complements)
+		;	object_property(empty_object, complements(_))
+		),
+		% force backtracking into all property queries
+		fail.
 
 	member(H, [H| _]) :-
 		!.
