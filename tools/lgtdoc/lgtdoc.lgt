@@ -24,7 +24,7 @@
 	:- info([
 		version is 3.0,
 		author is 'Paulo Moura',
-		date is 2016/02/18,
+		date is 2016/02/19,
 		comment is 'Documenting tool.'
 	]).
 
@@ -336,12 +336,12 @@
 		write_entity_xml_footer(Stream).
 
 	write_entity_xml_header(Stream, Options, StreamOptions) :-
-		memberchk(xmlsref(XMLSRef), Options),
+		memberchk(xml_spec_reference(XMLSRef), Options),
 		(	member(encoding(Encoding), StreamOptions) ->
 			true
 		;	Encoding = 'UTF-8'
 		),
-		memberchk(xmlspec(XMLSpec), Options),
+		memberchk(xml_spec(XMLSpec), Options),
 		memberchk(entity_xsl_file(XSL), Options),
 		once(kind_ref_doctype_xsd(logtalk, XMLSRef, DocTypeURL, XSDURL)),
 		write_xml_header(XMLSRef, Encoding, XMLSpec, DocTypeURL, XSL, XSDURL, Stream).
@@ -1176,12 +1176,12 @@
 
 	write_index(Type, Functor, File, Options) :-
 		open(File, write, Stream),
-		memberchk(xmlsref(XMLSRef), Options),
+		memberchk(xml_spec_reference(XMLSRef), Options),
 		(	member(encoding(Encoding), Options) ->
 			true
 		;	Encoding = 'UTF-8'
 		),
-		memberchk(xmlspec(XMLSpec), Options),
+		memberchk(xml_spec(XMLSpec), Options),
 		memberchk(index_xsl_file(XSL), Options),
 		once(kind_ref_doctype_xsd(index, XMLSRef, DocTypeURL, XSDURL)),
 		write_xml_header(XMLSRef, Encoding, XMLSpec, DocTypeURL, XSL, XSDURL, Stream),
@@ -1227,8 +1227,8 @@
 
 	default_option(entity_xsl_file, 'logtalk_entity_to_xml.xsl').
 	default_option(index_xsl_file, 'logtalk_index_to_xml.xsl').
-	default_option(xmlspec, dtd).
-	default_option(xmlsref, local).
+	default_option(xml_spec, dtd).
+	default_option(xml_spec_reference, local).
 	default_option(xml_docs_directory, './xml_docs/').
 	default_option(bom, true).
 	default_option(encoding, 'UTF-8').
@@ -1239,8 +1239,8 @@
 
 	valid_option(entity_xsl_file).
 	valid_option(index_xsl_file).
-	valid_option(xmlsref).
-	valid_option(xmlspec).
+	valid_option(xml_spec_reference).
+	valid_option(xml_spec).
 	valid_option(xml_docs_directory).
 	valid_option(bom).
 	valid_option(encoding).
@@ -1253,11 +1253,11 @@
 		atom(File).
 	valid_option(index_xsl_file, File) :-
 		atom(File).
-	valid_option(xmlsref, standalone) :- !.
-	valid_option(xmlsref, (local)) :- !.
-	valid_option(xmlsref, web) :- !.
-	valid_option(xmlspec, dtd) :- !.
-	valid_option(xmlspec, xsd) :- !.
+	valid_option(xml_spec_reference, standalone) :- !.
+	valid_option(xml_spec_reference, (local)) :- !.
+	valid_option(xml_spec_reference, web) :- !.
+	valid_option(xml_spec, dtd) :- !.
+	valid_option(xml_spec, xsd) :- !.
 	valid_option(xml_docs_directory, Directory) :-
 		atom(Directory).
 	valid_option(bom, true) :- !.
@@ -1288,8 +1288,8 @@
 
 	merge_options(UserOptions, Options) :-
 		(member(xml_docs_directory(Directory), UserOptions) -> true; option(xml_docs_directory, Directory)),
-		(member(xmlsref(XMLSRef), UserOptions) -> true; option(xmlsref, XMLSRef)),
-		(member(xmlspec(XMLSpec), UserOptions) -> true; option(xmlspec, XMLSpec)),
+		(member(xml_spec_reference(XMLSRef), UserOptions) -> true; option(xml_spec_reference, XMLSRef)),
+		(member(xml_spec(XMLSpec), UserOptions) -> true; option(xml_spec, XMLSpec)),
 		(member(entity_xsl_file(XSL), UserOptions) -> true; option(entity_xsl_file, XSL)),
 		(member(index_xsl_file(XSL), UserOptions) -> true; option(index_xsl_file, IXSL)),
 		(member(encoding(Encoding), UserOptions) -> true; option(encoding, Encoding)),
@@ -1303,7 +1303,8 @@
 		% by default, don't exclude any entities:
 		(member(exclude_entities(ExcludedEntities), UserOptions) -> true; option(exclude_entities, ExcludedEntities)),
 		Options = [
-			xml_docs_directory(Directory), xmlsref(XMLSRef), xmlspec(XMLSpec), entity_xsl_file(XSL), index_xsl_file(IXSL),
+			xml_docs_directory(Directory), xml_spec_reference(XMLSRef), xml_spec(XMLSpec),
+			entity_xsl_file(XSL), index_xsl_file(IXSL),
 			encoding(Encoding), bom(BOM),
 			omit_path_prefixes(Prefixes),
 			exclude_files(ExcludedFiles), exclude_paths(ExcludedPaths), exclude_entities(ExcludedEntities)

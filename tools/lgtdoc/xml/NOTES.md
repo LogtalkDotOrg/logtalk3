@@ -38,18 +38,20 @@ Regarding conversion to (X)HTML, the links to the XSL files on the XML
 files and the links to the CSS files in the generated HTML files assume 
 that all files reside in the same directory.
 
-The default XSL file to use (`logtalk_entity_to_xml.xsl`, described below) is set in the
-`lgtdoc` tool. You may choose a different default XSL file by using the
-`xslfile` option.
+The default XSL files to use (`logtalk_entity_to_xml.xsl` and
+`logtalk_index_to_xml.xsl`, described below) are set in the `lgtdoc` tool.
+You may choose a different default XSL files by using the `entity_xsl_file/1`
+and `index_xsl_file/1` options.
 
 The documenting files can be generated either as standalone XML files or
-containing a reference to either the Logtalk DTD file, `logtalk_entity.dtd`, or
-to the Logtalk XML Schema file, `logtalk_entity.xsd`. The reference to the XML
-specification file can be either a local reference or a URI reference.
-By default, all XML documenting files contain a local reference but that
-can be changed by using the `xmlsref` option. Choose the option value
-that works best with your XSLT tools. To choose between the DTD or XSD
-specifications use the `xmlspec` or `xmlsref` options.
+containing a reference to either the Logtalk DTD files, `logtalk_entity.dtd`
+and `logtalk_index.dtd`, or to the Logtalk XML Schema files, `logtalk_entity.xsd`
+and `logtalk_index.xsd`. The reference to the XML specification files can be
+either a local reference or a URI reference. By default, all XML documenting
+files contain a local reference but that can be changed by using the
+`xml_spec_reference/1` option. Choose the option value that works best with your
+XSLT tools. To choose between the DTD or XSD specifications use the `xml_spec/1`
+option.
 
 As Logtalk uses a single namespace for all objects, categories, and protocols,
 you may want to define an alternate, global compilation directory to store all 
@@ -172,9 +174,9 @@ Brief description of each file in this folder:
 
 	Sample scripts for indexing the XML files in the current directory 
 	by generating an `index.html` file which contains links to all the 
-	files. In addition, these scripts also copies of the `logtalk_entity_to_xml.xsl` 
-	and `logtalk.css` files to the current directory, allowing direct 
-	visualization of the XML files on a supported web browser.
+	files. In addition, these scripts also copies of the used XML specs, XSL,
+	and CSS files to the current directory, allowing direct visualization
+	of the XML files on a supported web browser.
 
 	The scripts should be called from the directory containing the XML files 
 	you wish to index. Call the scripts with the help option for a description 
