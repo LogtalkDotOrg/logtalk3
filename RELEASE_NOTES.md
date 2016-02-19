@@ -43,6 +43,8 @@ sub-directories.
 * FIXED: Paths used in the Windows documenting batch files and scripts of the
 `lgtdoc` tool.
 
+* FIXED: Documenting of predicate aliases by the `lgtdoc` tool.
+
 
 3.03.0 - February 16, 2016
 ==========================

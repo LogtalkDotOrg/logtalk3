@@ -919,12 +919,13 @@
 		),
 		fail.
 	write_entity_xml_relations(Stream, Entity) :-
-		entity_property(Entity, declares(AFunctor/AArity, Properties)),
-		member(alias_of(PFunctor/PArity), Properties),
+		entity_property(Entity, alias(AFunctor/AArity, Properties)),
+		memberchk(from(From), Properties),
+		memberchk(for(PFunctor/PArity), Properties),
 			Entity =.. [_| Args],				% take care of parametric entities
 			vars_to_underscore(Args),
 			write_xml_open_tag(Stream, alias, []),
-			write_xml_cdata_element(Stream, name, [], Entity),
+			write_xml_cdata_element(Stream, name, [], From),
 			write_xml_cdata_element(Stream, original, [], PFunctor/PArity),
 			write_xml_cdata_element(Stream, alternative, [], AFunctor/AArity),
 			write_xml_close_tag(Stream, alias),
