@@ -17322,6 +17322,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_protocol_property'(private(_)).
 % list of declaration properties for a predicate declared in the entity
 '$lgt_valid_protocol_property'(declares(_, _)).
+% list of properties for a predicate alias declared in the entity
+'$lgt_valid_protocol_property'(alias(_, _)).
 % source data available for the entity
 '$lgt_valid_protocol_property'(source_data).
 
@@ -17351,8 +17353,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_category_property'(includes(_, _, _)).
 % list of definition properties for a multifile predicate defined for other entities
 '$lgt_valid_category_property'(provides(_, _, _)).
-% list of properties for a predicate alias declared in the entity
-'$lgt_valid_category_property'(alias(_, _)).
 % list of calling properties for a predicate called in the entity
 '$lgt_valid_category_property'(calls(_, _)).
 % number of predicate clauses (including both user-defined and auxiliary clauses)

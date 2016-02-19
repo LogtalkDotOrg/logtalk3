@@ -24,6 +24,11 @@ RELEASE NOTES
 3.03.1 - February ??, 2016
 ==========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Property `alias/2` is also valid for protocols.
+
 Prolog adapter and integration files
 ------------------------------------
 
