@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for converting XML documenting files into Markdown files
-%  Last updated on February 18, 2016
+%  Last updated on February 19, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -102,18 +102,10 @@
 
 <xsl:template match="*/key">
 	<xsl:choose>
-	    <xsl:when test=".='object'">
-			Objects
-		</xsl:when>
-	    <xsl:when test=".='protocol'">
-			Protocols
-		</xsl:when>
-	    <xsl:when test=".='category'">
-			Categories
-		</xsl:when>
-		<xsl:otherwise>
-			<xsl:value-of select="." />
-		</xsl:otherwise>
+	    <xsl:when test=".='object'">Objects</xsl:when>
+	    <xsl:when test=".='protocol'">Protocols</xsl:when>
+	    <xsl:when test=".='category'">Categories</xsl:when>
+		<xsl:otherwise><xsl:value-of select="." /></xsl:otherwise>
 	</xsl:choose>
 </xsl:template>
 
