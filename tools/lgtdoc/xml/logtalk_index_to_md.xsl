@@ -96,7 +96,7 @@
 			</xsl:for-each>
 		</xsl:otherwise>
 	</xsl:choose>
-	<xsl:value-of select="$nl2" />
+	<xsl:value-of select="$nl" />
 </xsl:template>
 
 

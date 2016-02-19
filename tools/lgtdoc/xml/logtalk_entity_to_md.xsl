@@ -51,9 +51,8 @@
 <xsl:template match="/">
 	<xsl:value-of select="$hr" />
 	<xsl:text># </xsl:text><xsl:value-of select="logtalk_entity/entity/type" /><xsl:text>: `</xsl:text><xsl:value-of select="logtalk_entity/entity/name" /><xsl:text>`</xsl:text>
-	<xsl:value-of select="$nl" />
+	<xsl:value-of select="$nl2" />
 	<xsl:if test="logtalk_entity/entity/comment">
-		<xsl:value-of select="$nl" />
 		<xsl:value-of select="logtalk_entity/entity/comment" />
 		<xsl:value-of select="$nl2" />
 	</xsl:if>
@@ -61,6 +60,7 @@
 		<xsl:for-each select="logtalk_entity/entity/parameters/parameter">
 			<xsl:text>* </xsl:text><xsl:value-of select="name" /><xsl:text> - </xsl:text><xsl:value-of select="description" />
 		</xsl:for-each>
+		<xsl:value-of select="$nl2" />
 	</xsl:if>
 	<xsl:apply-templates select="logtalk_entity/entity" />
 	<xsl:apply-templates select="logtalk_entity/relations" />
@@ -145,7 +145,7 @@
 			</xsl:if>
 		</xsl:when>
 		<xsl:otherwise>
-			<xsl:text>(no dependencies on other files)</xsl:text><xsl:value-of select="$nl" />
+			<xsl:text>(no dependencies on other files)</xsl:text><xsl:value-of select="$nl2" />
 		</xsl:otherwise>
 	</xsl:choose>
 	<xsl:value-of select="$nl" />
@@ -172,6 +172,7 @@
 
 <xsl:template match="logtalk_entity/relations/alias" priority="1">
 	<xsl:text>  * `</xsl:text><xsl:value-of select="name" /><xsl:text>` `</xsl:text><xsl:value-of select="original" /><xsl:text>` aka `</xsl:text><xsl:value-of select="alternative" /><xsl:text>`</xsl:text>
+	<xsl:value-of select="$nl" />
 </xsl:template>
 
 
