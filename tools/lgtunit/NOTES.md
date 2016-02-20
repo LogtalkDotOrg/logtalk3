@@ -322,6 +322,13 @@ Consult the `lgtunit` object documentation (`docs/tools.html`) for further
 details on these predicates.
 
 
+Exporting unit test results in xUnit XML format
+-----------------------------------------------
+
+To export unit test results in xUnit XML format, simply load the
+`xunit_xml_report.lgt` file before running the tests.
+
+
 Known issues
 ------------
 

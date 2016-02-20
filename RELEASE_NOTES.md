@@ -38,6 +38,9 @@ current git version.
 Tools
 -----
 
+* ADDED: Support to the `lgtunit` tool to export unit test results in the
+xUnit XML format.
+
 * ADDED: Support for generating directory, entity, and predicate indexes to
 the `lgtdoc` tool.
 
