@@ -23,15 +23,15 @@
 	:- info([
 		version is 0.1,
 		author is 'Paulo Moura',
-		date is 2016/02/20,
-		comment is 'Intercepts unit test execution messages and generates a report.xml file using the XUnit XML format.'
+		date is 2016/02/21,
+		comment is 'Intercepts unit test execution messages and generates a report.xml file using the xUnit XML format.'
 	]).
 
 	:- private(message_cache_/1).
 	:- dynamic(message_cache_/1).
 	:- mode(message_cache_(?callable), zero_or_more).
 	:- info(message_cache_/1, [
-		comment is 'Table of messages emitted by the lgtunit tool.',
+		comment is 'Table of messages emitted by the lgtunit tool when running tests.',
 		argnames is ['Message']
 	]).
 
@@ -86,7 +86,12 @@
 		testsuite_package(Package),
 		testsuite_time(Time),
 		testsuite_timestamp(TimeStamp),
-		write_xml_open_tag(Stream, testsuite, [package-Package,name-Name,tests-Tests,errors-Errors,failures-Failures,skipped-Skipped,time-Time,timestamp-TimeStamp,id-0]),
+		write_xml_open_tag(Stream, testsuite,
+			[package-Package, name-Name,
+			 tests-Tests, errors-Errors, failures-Failures, skipped-Skipped,
+			 time-Time, timestamp-TimeStamp, id-0
+			]
+		),
 		write_test_elements(Stream),
 		write_xml_close_tag(Stream, testsuite).
 
@@ -112,16 +117,20 @@
 		write_xml_open_tag(Stream, testcase, [classname-ClassName,name-Name,time-Time]),
 		write_xml_empty_tag(Stream, skipped, []).
 
-	% testsuites tag attributes
+	% "testsuites" tag attributes
 
 	testsuites_duration(Duration) :-
 		message_cache_(tests_start_date_time(Year0, Month0, Day0, Hours0, Minutes0, Seconds0)),
 		message_cache_(tests_end_date_time(Year, Month, Day, Hours, Minutes, Seconds)),
 		julian_day(Year0, Month0, Day0, JulianDay0),
 		julian_day(Year, Month, Day, JulianDay),
-		Duration is (JulianDay - JulianDay0) * 86400 + (Hours - Hours0) * 3600 + (Minutes - Minutes0) * 60 + Seconds - Seconds0.
+		Duration is
+			(JulianDay - JulianDay0) * 86400 + 
+			(Hours - Hours0) * 3600 +
+			(Minutes - Minutes0) * 60 +
+			Seconds - Seconds0.
 
-	% testsuite tag attributes
+	% "testsuite" tag attributes
 
 	testsuite_stats(Tests, 0, Failures, Skipped) :-
 		message_cache_(tests_results_summary(Tests, Skipped, _, Failures, _)).
@@ -138,14 +147,14 @@
 		).
 
 	testsuite_time(Time) :-
-		% there's a songle testsuite
+		% there's a single testsuite
 		testsuites_duration(Time).
 
 	testsuite_timestamp(TimeStamp) :-
 		message_cache_(tests_start_date_time(Year, Month, Day, Hours, Minutes, Seconds)),
 		date_time_to_timestamp(Year, Month, Day, Hours, Minutes, Seconds, TimeStamp).
 
-	% testcase tag attributes
+	% "testcase" tag attributes
 
 	testcase_classname(_Test, ClassName) :-
 		message_cache_(running_tests_from_object_file(ClassName, _)).
@@ -156,7 +165,7 @@
 
 	testcase_time(_, 0.0).
 
-	% testcase tag predicates
+	% "testcase" tag predicates
 
 	test(passed_test(Test, File, Position, Note)) :-
 		message_cache_(passed_test(Test, File, Position, Note)).
@@ -262,11 +271,13 @@
 	pretty_print_vars(Stream, Term) :-
 		\+ \+ (
 			numbervars(Term, 0, _),
-			write_term(Stream, Term, [numbervars(true)])).
+			write_term(Stream, Term, [numbervars(true)])
+		).
 
 	pretty_print_vars_quoted(Stream, Term) :-
 		\+ \+ (
 			numbervars(Term, 0, _),
-			write_term(Stream, Term, [numbervars(true), quoted(true)])).
+			write_term(Stream, Term, [numbervars(true), quoted(true)])
+		).
 
 :- end_object.
