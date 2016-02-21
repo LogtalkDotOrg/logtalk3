@@ -38,6 +38,9 @@ current git version.
 Tools
 -----
 
+* ADDED: Support to the `lgtunit` tool to write unit test results in the TAP
+(Test Anything Protocol) output.
+
 * ADDED: Support to the `lgtunit` tool to export unit test results in the
 xUnit XML format.
 

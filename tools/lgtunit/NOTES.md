@@ -331,6 +331,15 @@ To export unit test results in xUnit XML format, simply load the
 the tests.
 
 
+Writing unit test results in the TAP output format
+--------------------------------------------------
+
+To write test results in the TAP (Test Anything Protocol) output format,
+simply load the `tap_output.lgt` file before running the tests. This file
+defines an object, `tap_output`, that intercepts unit test execution messages
+and converts them to TAP output format.
+
+
 Known issues
 ------------
 
