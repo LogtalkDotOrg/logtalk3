@@ -42,7 +42,7 @@
 	message_hook(tests_results_summary(Total, _, _, _, _)) :-
 		number_codes(Total, Codes),
 		atom_codes(TotalAtom, Codes),
-		write('1..'), write(TotalAtom), nl, nl.
+		write('1..'), write(TotalAtom), nl.
 	% broken step
 	message_hook(broken_step(condition, _, Error)) :-
 		write('Bail out! Test suite condition unexpected error: '), pretty_print_term(Error), nl.
@@ -84,6 +84,15 @@
 		;	write(' ('), write(Note), write(')')
 		),
 		nl.
+	% code coverage results
+	message_hook(covered_clause_numbers(_, _, Percentage)) :-
+		write(' ---'), nl,
+		write(' coverage: '), write(Percentage), write('%'), nl,
+		write(' ...'), nl, nl.
+	message_hook(no_code_coverage_information_collected) :-
+		write(' ---'), nl,
+		write(' coverage: n/a'), nl,
+		write(' ...'), nl, nl.
 
 	write_failed_reason_message(Reason) :-
 		write(' ---'), nl,
