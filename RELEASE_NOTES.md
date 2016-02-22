@@ -60,6 +60,9 @@ sub-directories.
 
 * FIXED: The `lgt2md.*` scripts to also generate an index file.
 
+* FIXED: Bug in the `diagrams::all_files/1` predicate that resulted in a
+predicate declaration existence error.
+
 Tests
 -----
 

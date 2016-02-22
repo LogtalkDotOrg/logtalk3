@@ -22,9 +22,9 @@
 :- object(diagrams(_Format)).
 
 	:- info([
-		version is 2.0,
+		version is 2.1,
 		author is 'Paulo Moura',
-		date is 2014/11/03,
+		date is 2016/02/22,
 		comment is 'Predicates for generating all supported diagrams for libraries and files in one step using the specified format.',
 		parnames is ['Format'],
 		remarks is [
@@ -210,7 +210,7 @@
 		parameter(1, Format),
 		forall(
 			supported_diagram(Format, Diagram),
-			Diagram::files(Options)
+			Diagram::all_files(Options)
 		).
 
 	:- public(all_files/0).
