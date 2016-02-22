@@ -2505,7 +2505,7 @@ logtalk_make(Target) :-
 	).
 
 
-% find circular references for logtalk_make/1
+% find circular dependencies for logtalk_make/1
 
 '$lgt_circular_reference'((Object1-Object2)-references([Path1-Line1,Path2-Line2])) :-
 	'$lgt_current_object_'(Object1, _, _, _, _, _, _, _, _, _, _),

@@ -129,7 +129,7 @@
 		['Completed listing of missing entities and predicates'-[], nl].
 
 	message_tokens(circular_references_listed) -->
-		['Completed listing of circular references'-[], nl].
+		['Completed listing of circular dependencies'-[], nl].
 
 	message_tokens(missing_protocols(Protocols)) -->
 		['Missing protocols:'-[], nl],
