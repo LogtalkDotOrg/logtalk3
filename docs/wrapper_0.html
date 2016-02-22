@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<?xml-stylesheet href="logtalk.css" type="text/css"?><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>wrapper</title>
+    <link rel="stylesheet" href="logtalk.css" type="text/css"/>
+  </head>
+  <body>
+    <div class="header">
+      <p class="type">object</p>
+      <h1 class="code">wrapper</h1>
+      <blockquote>
+        <p class="comment">Simple tool for helping porting plain Prolog code.</p>
+      </blockquote>
+    </div>
+    <div class="entity">
+      <div class="section">
+        <dl class="properties">
+          <dt class="key">author:</dt>
+          <dd class="value">
+            <code>Paulo Moura</code>
+          </dd>
+          <dt class="key">version:</dt>
+          <dd class="value">
+            <code>0.3</code>
+          </dd>
+          <dt class="key">date:</dt>
+          <dd class="value">
+            <code>2015/10/22</code>
+          </dd>
+        </dl>
+        <dl class="properties">
+          <dt class="key">compilation flags:</dt>
+          <dd class="value">
+            <code>static, context_switching_calls</code>
+          </dd>
+        </dl>
+        <dl class="relations">
+          <dt class="key">implements:</dt>
+          <dd class="value">
+            <code>public <a href="expanding_0.html">expanding</a></code>
+          </dd>
+          <dt class="key">provides:</dt>
+          <dd class="value">
+            <code>
+              <a href="logtalk_0.html#message_hook/4">logtalk::message_hook/4</a>
+            </code>
+          </dd>
+          <dd class="value">
+            <code>
+              <a href="logtalk_0.html#message_prefix_stream/4">logtalk::message_prefix_stream/4</a>
+            </code>
+          </dd>
+          <dd class="value">
+            <code>
+              <a href="logtalk_0.html#message_tokens//2">logtalk::message_tokens//2</a>
+            </code>
+          </dd>
+        </dl>
+      </div>
+    </div>
+    <div class="predicates">
+      <div class="public">
+        <h2>Public interface</h2>
+        <div class="section">
+          <h3 id="advise_for_files/1" class="code">advise_for_files/1</h3>
+          <blockquote>
+            <p class="comment">Advise the user on missing directives for converting a list of plain Prolog files in Logtalk objects.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>advise_for_files(Files)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>advise_for_files(+list(atom)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="advise_for_directory/2" class="code">advise_for_directory/2</h3>
+          <blockquote>
+            <p class="comment">Advise the user on missing directives for converting a directory of files, using any of the given extensions, in Logtalk objects.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>advise_for_directory(Directory,Extensions)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>advise_for_directory(+atom,+list(atom)) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="advise_for_directory/1" class="code">advise_for_directory/1</h3>
+          <blockquote>
+            <p class="comment">Advise the user on missing directives for converting a directory of Prolog files (using either the .pl or .prolog extensions) in Logtalk objects.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>advise_for_directory(Directory)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>advise_for_directory(+atom) &ndash; one</code>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="protected">
+        <h2>Protected interface</h2>
+        <div class="section">
+          <p class="comment">(see related entities)</p>
+        </div>
+      </div>
+      <div class="private">
+        <h2>Private predicates</h2>
+        <div class="section">
+          <h3 id="unknown_predicate_called_but_not_defined_/2" class="code">unknown_predicate_called_but_not_defined_/2</h3>
+          <blockquote>
+            <p class="comment">Table of predicates called but not defined.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>dynamic</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>unknown_predicate_called_but_not_defined_(Object,Predicate)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>unknown_predicate_called_but_not_defined_(?atom,?predicate_indicator) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="missing_predicate_directive_/3" class="code">missing_predicate_directive_/3</h3>
+          <blockquote>
+            <p class="comment">Table of missing predicate directives.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>dynamic</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>missing_predicate_directive_(Object,Directive,Predicate)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>missing_predicate_directive_(?atom,?predicate_indicator,?predicate_indicator) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="non_standard_predicate_call_/2" class="code">non_standard_predicate_call_/2</h3>
+          <blockquote>
+            <p class="comment">Table of called non-standard predicates.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>dynamic</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>non_standard_predicate_call_(Object,Predicate)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>non_standard_predicate_call_(?atom,?predicate_indicator) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="wrapper_object_/2" class="code">wrapper_object_/2</h3>
+          <blockquote>
+            <p class="comment">Table of converted files and corresponding objects.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>dynamic</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>wrapper_object_(Object,File)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>wrapper_object_(?atom,?atom) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="dynamic_directive_/3" class="code">dynamic_directive_/3</h3>
+          <blockquote>
+            <p class="comment">Table of declared dynamic predicates.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>dynamic</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>dynamic_directive_(Object,Line,Predicate)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>dynamic_directive_(?atom,?integer,?predicate_indicator) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="multifile_directive_/3" class="code">multifile_directive_/3</h3>
+          <blockquote>
+            <p class="comment">Table of declared multifile predicates.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>dynamic</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>multifile_directive_(Object,Line,Predicate)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>multifile_directive_(?atom,?integer,?predicate_indicator) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="add_directive_/2" class="code">add_directive_/2</h3>
+          <blockquote>
+            <p class="comment">Table of directives to be added.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>dynamic</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>add_directive_(Object,Directive)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>add_directive_(?atom,?predicate_indicator) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="add_directive_/3" class="code">add_directive_/3</h3>
+          <blockquote>
+            <p class="comment">Table of directives to be added to complement existing directives.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>dynamic</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>add_directive_(Object,Directive,NewDirective)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>add_directive_(?atom,?predicate_indicator,?predicate_indicator) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="file_being_advised_/1" class="code">file_being_advised_/1</h3>
+          <blockquote>
+            <p class="comment">Table of files being advised.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>dynamic</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>file_being_advised_(File)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>file_being_advised_(+atom) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+    <div class="operators">
+      <h2>Operators</h2>
+      <div class="section">
+        <h3 class="comment">(none)</h3>
+      </div>
+    </div>
+    <div class="remarks">
+      <h2>Remarks</h2>
+      <div class="section">
+        <h3 class="comment">(none)</h3>
+      </div>
+    </div>
+  </body>
+</html>

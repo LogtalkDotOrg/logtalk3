@@ -29,6 +29,8 @@ in a running session.
 The `profiler` tool is also not loaded by default as it provides integration
 with selected backend Prolog compiler profilers that are not portable.
 
+The `wrapper` tool is also not loaded by default given its beta status.
+
 To load a specific tool, either change your Prolog working directory
 to the tool folder and then compile and load the corresponding loader 
 utility file or simply use library notation as argument for the 

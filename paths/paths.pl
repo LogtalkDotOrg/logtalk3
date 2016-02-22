@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths 
-%  Last updated on October 3, 2015
+%  Last updated on February 21, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -102,6 +102,7 @@ logtalk_library_path(lgtdoc, tools('lgtdoc/')).
 logtalk_library_path(lgtunit, tools('lgtunit/')).
 logtalk_library_path(ports, tools('ports/')).
 logtalk_library_path(profiler, tools('profiler/')).
+logtalk_library_path(wrapper, tools('wrapper/')).
 
 % programming examples
 logtalk_library_path(ack, examples('ack/')).
