@@ -23,8 +23,8 @@
 	:- info([
 		version is 0.1,
 		author is 'Paulo Moura',
-		date is 2016/02/21,
-		comment is 'Intercepts unit test execution messages and converts them to TAP output format.'
+		date is 2016/02/23,
+		comment is 'Intercepts and replaces unit test execution messages, converting them to the TAP output format.'
 	]).
 
 	% intercept all messages from the "lgtunit" object while running tests

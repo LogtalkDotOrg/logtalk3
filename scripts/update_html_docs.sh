@@ -45,7 +45,7 @@ logtalk="swilgt$extension -g"
 cwd=`pwd`
 
 # documentation goal
-goal="set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),tools(loader),ports(loader),wrapper(loader)]),lgtdoc::all([xml_docs_directory('$cwd/../docs'),omit_path_prefixes(['/Users/pmoura/logtalk/','/opt/local/share/logtalk/'])]),halt."
+goal="set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),tools(loader),ports(loader),wrapper(loader),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_xml_report)]),lgtdoc::all([xml_docs_directory('$cwd/../docs'),omit_path_prefixes(['/Users/pmoura/logtalk/','/opt/local/share/logtalk/'])]),halt."
 
 
 print_version() {

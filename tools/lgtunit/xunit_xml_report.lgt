@@ -23,8 +23,8 @@
 	:- info([
 		version is 0.1,
 		author is 'Paulo Moura',
-		date is 2016/02/21,
-		comment is 'Intercepts unit test execution messages and generates a report.xml file using the xUnit XML format.'
+		date is 2016/02/23,
+		comment is 'Intercepts unit test execution messages and generates a xunit_report.xml file using the xUnit XML format.'
 	]).
 
 	:- private(message_cache_/1).
