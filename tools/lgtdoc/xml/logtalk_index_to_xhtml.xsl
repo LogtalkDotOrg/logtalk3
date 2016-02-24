@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for converting XML documenting files into XHTML files
-%  Last updated on February 18, 2016
+%  Last updated on February 24, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -81,7 +81,7 @@
 	<dl>
 	<dt><code><xsl:apply-templates select="key" /></code></dt>
 		<xsl:choose>
-		    <xsl:when test="/index/type='predicate'">
+		    <xsl:when test="/logtalk_index/type='predicate'">
 				<xsl:for-each select="entities/entity">
 					<dd class ="code"><code><a href="{file}.html#{../../key}"><xsl:value-of select="name" /></a></code></dd>
 				</xsl:for-each>
