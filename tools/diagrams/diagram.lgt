@@ -21,9 +21,9 @@
 :- category(diagram(_Format)).
 
 	:- info([
-		version is 2.0,
+		version is 2.1,
 		author is 'Paulo Moura',
-		date is 2014/12/30,
+		date is 2016/02/24,
 		comment is 'Common predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
@@ -770,7 +770,8 @@
 		(	member(Prefix, Prefixes),
 			atom_concat(Prefix, Suffix, Path) ->
 			atom_concat(FilePrefix, Suffix, FileURL)
-		;	FileURL = FilePrefix
+		;	Suffix = Path,
+			FileURL = FilePrefix
 		),
 		LinkingOptions = [urls(FileURL,DocPrefix), tooltip(Suffix)| Options].
 

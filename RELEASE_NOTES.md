@@ -69,6 +69,9 @@ sub-directories.
 * FIXED: Bug in the `diagrams::all_files/1` predicate that resulted in a
 predicate declaration existence error.
 
+* FIXED: Bug in the `diagrams` tool predicate that adds link options to nodes
+that could result in non-instantiated node tooltips.
+
 Tests
 -----
 
