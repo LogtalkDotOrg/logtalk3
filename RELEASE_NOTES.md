@@ -57,6 +57,9 @@ the `lgtdoc` tool.
 for generating documentation for a directory or for a directory and all its
 sub-directories.
 
+* ADDED: Definitions for library nodes and library relations to the `diagrams`
+tool support for the DOT language.
+
 * FIXED: Paths used in the Windows documenting batch files and scripts of the
 `lgtdoc` tool.
 
