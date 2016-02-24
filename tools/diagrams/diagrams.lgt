@@ -229,6 +229,7 @@
 	supported_diagram(Format, xref_diagram(Format)).
 	supported_diagram(Format, file_dependency_diagram(Format)).
 	supported_diagram(Format, file_load_diagram(Format)).
+	supported_diagram(Format, library_dependency_diagram(Format)).
 
 :- end_object.
 
