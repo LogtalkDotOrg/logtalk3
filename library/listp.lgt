@@ -22,9 +22,9 @@
 :- protocol(listp).
 
 	:- info([
-		version is 1.9,
+		version is 1.10,
 		author is 'Paulo Moura',
-		date is 2012/04/25,
+		date is 2016/02/24,
 		comment is 'List protocol.'
 	]).
 
@@ -172,7 +172,7 @@
 	:- public(nth1/4).
 	:- mode(nth1(?integer, ?list, ?term, ?list), zero_or_more).
 	:- info(nth1/4, [
-		comment is 'Nth element of a list (counting from zero).',
+		comment is 'Nth element of a list (counting from one).',
 		argnames is ['Nth', 'List', 'Element', 'Residue']
 	]).
 
@@ -195,6 +195,14 @@
 	:- info(prefix/2, [
 		comment is 'Prefix is a prefix of List.',
 		argnames is ['Prefix', 'List']
+	]).
+
+	:- public(prefix/3).
+	:- mode(prefix(?list, +integer, +list), zero_or_one).
+	:- mode(prefix(?list, -integer, +list), zero_or_more).
+	:- info(prefix/3, [
+		comment is 'Prefix is a prefix of length Length of List.',
+		argnames is ['Prefix', 'Length', 'List']
 	]).
 
 	:- public(proper_prefix/2).
@@ -321,6 +329,14 @@
 	:- info(suffix/2, [
 		comment is 'Suffix is a suffix of List.',
 		argnames is ['Suffix', 'List']
+	]).
+
+	:- public(suffix/3).
+	:- mode(suffix(?list, +integer, +list), zero_or_one).
+	:- mode(suffix(?list, -integer, +list), zero_or_more).
+	:- info(suffix/3, [
+		comment is 'Suffix is a suffix of length Length of List.',
+		argnames is ['Suffix', 'Length', 'List']
 	]).
 
 	:- public(proper_suffix/2).

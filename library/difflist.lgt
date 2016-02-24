@@ -24,9 +24,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 1.7,
+		version is 1.8,
 		author is 'Paulo Moura',
-		date is 2012/04/25,
+		date is 2016/02/24,
 		comment is 'Difference list predicates.'
 	]).
 
@@ -262,6 +262,23 @@
 		List2 = [Head| Tail2],
 		prefix(Tail-Back, Tail2-Back2).
 
+	prefix(Prefix, Length, List) :-
+		(	var(Length) ->	
+			prefix(Prefix, 0, Length, List)
+		;	prefix(Prefix, 0, Length, List),
+			!
+		).
+
+	prefix(List, Length, Length, _) :-
+		unify_with_occurs_check(List, Back-Back).
+	prefix(List-Back, Length0, Length, List2-Back2) :-
+		List \== Back,
+		List = [Head| Tail],
+		List2 \== Back2,
+		List2 = [Head| Tail2],
+		Length1 is Length0 + 1,
+		prefix(Tail-Back, Length1, Length, Tail2-Back2).
+
 	proper_prefix(Prefix, [_| _]-_) :-
 		unify_with_occurs_check(Prefix, Back1-Back1).
 	proper_prefix([Head| PrefixTail]-Back1, [Head| ListTail]-Back2) :-
@@ -424,6 +441,22 @@
 		List \== Back,
 		List = [_| Tail],
 		suffix(Suffix-Back, Tail-Back).
+
+	suffix(Suffix, Length, List) :-
+		length(List, ListLength),
+		(	var(Length) ->
+			suffix(Suffix, Length, ListLength, List)
+		;	suffix(Suffix, Length, ListLength, List),
+			!
+		).
+
+	suffix(Suffix, Length, Length, List) :-
+		unify_with_occurs_check(Suffix, List).
+	suffix(Suffix-Back, Length, ListLength, List-Back) :-
+		List \== Back,
+		List = [_| Tail],
+		TailLength is ListLength - 1,
+		suffix(Suffix-Back, Length, TailLength, Tail-Back).
 
 	proper_suffix(Suffix, [_| Tail]-Back) :-
 		suffix(Suffix, Tail-Back).

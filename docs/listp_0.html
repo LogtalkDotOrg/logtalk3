@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>1.9</code>
+            <code>1.1</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2012/4/25</code>
+            <code>2016/2/24</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -449,7 +449,7 @@
         <div class="section">
           <h3 id="nth1/4" class="code">nth1/4</h3>
           <blockquote>
-            <p class="comment">Nth element of a list (counting from zero).</p>
+            <p class="comment">Nth element of a list (counting from one).</p>
           </blockquote>
           <dl class="properties">
             <dt class="key">compilation flags:</dt>
@@ -523,6 +523,29 @@
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>prefix(?list,+list) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="prefix/3" class="code">prefix/3</h3>
+          <blockquote>
+            <p class="comment">Prefix is a prefix of length Length of List.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>prefix(Prefix,Length,List)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>prefix(?list,+integer,+list) &ndash; zero_or_one</code>
+            </dd>
+            <dd class="value">
+              <code>prefix(?list,-integer,+list) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
@@ -885,6 +908,29 @@
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
               <code>suffix(?list,+list) &ndash; zero_or_more</code>
+            </dd>
+          </dl>
+        </div>
+        <div class="section">
+          <h3 id="suffix/3" class="code">suffix/3</h3>
+          <blockquote>
+            <p class="comment">Suffix is a suffix of length Length of List.</p>
+          </blockquote>
+          <dl class="properties">
+            <dt class="key">compilation flags:</dt>
+            <dd class="value">
+              <code>static</code>
+            </dd>
+            <dt class="key">template:</dt>
+            <dd class="value">
+              <code>suffix(Suffix,Length,List)</code>
+            </dd>
+            <dt class="key">mode &ndash; number of proofs:</dt>
+            <dd class="value">
+              <code>suffix(?list,+integer,+list) &ndash; zero_or_one</code>
+            </dd>
+            <dd class="value">
+              <code>suffix(?list,-integer,+list) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>

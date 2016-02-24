@@ -35,6 +35,12 @@ Prolog adapter and integration files
 * UPDATED: YAP adapter file for the new text encodings supported in its
 current git version.
 
+Library
+-------
+
+* ADDED: Predicates `prefix/3` and `suffix/3` to the `listp` protocol and to
+the `difflist` and `list` objects.
+
 Tools
 -----
 

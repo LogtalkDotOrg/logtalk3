@@ -24,9 +24,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 2.5,
+		version is 2.6,
 		author is 'Paulo Moura',
-		date is 2013/04/07,
+		date is 2016/02/24,
 		comment is 'List predicates.'
 	]).
 
@@ -269,6 +269,18 @@
 	prefix([Element| Tail], [Element| Tail2]) :-
 		prefix(Tail, Tail2).
 
+	prefix(Prefix, Length, List) :-
+		(	var(Length) ->	
+			prefix(Prefix, 0, Length, List)
+		;	prefix(Prefix, 0, Length, List),
+			!
+		).
+
+	prefix([], Length, Length, _).
+	prefix([Element| Tail], Length0, Length, [Element| Tail2]) :-
+		Length1 is Length0 + 1,
+		prefix(Tail, Length1, Length, Tail2).
+
 	proper_prefix([], [_| _]).
 	proper_prefix([Head| PrefixTail], [Head| ListTail]) :-
 		proper_prefix(PrefixTail, ListTail).
@@ -423,6 +435,19 @@
 	suffix(List, List).
 	suffix(List, [_| Tail]) :-
 		suffix(List, Tail).
+
+	suffix(Suffix, Length, List) :-
+		length(List, ListLength),
+		(	var(Length) ->
+			suffix(Suffix, Length, ListLength, List)
+		;	suffix(Suffix, Length, ListLength, List),
+			!
+		).
+
+	suffix(Suffix, Length, Length, Suffix).
+	suffix(Suffix, Length, ListLength, [_| Tail]) :-
+		TailLength is ListLength - 1,
+		suffix(Suffix, Length, TailLength, Tail).
 
 	proper_suffix(Suffix, [_| Tail]) :-
 		suffix(Suffix, Tail).
