@@ -22,9 +22,9 @@
 	imports(file_diagram(Format))).
 
 	:- info([
-		version is 2.0,
+		version is 2.1,
 		author is 'Paulo Moura',
-		date is 2014/12/30,
+		date is 2016/02/25,
 		comment is 'Predicates for generating file loading dependency diagrams.',
 		parnames is ['Format']
 	]).
@@ -53,8 +53,12 @@
 		fail.
 	output_file(Path, _, _, Options) :-
 		modules_diagram_support::loaded_file_property(Other, parent(Path)),
-			^^remember_referenced_prolog_file(Other),
-			^^save_edge(Path, Other, [loads], loads_file, [tooltip(loads)| Options]),
+			(	logtalk::loaded_file_property(Original, target(Other)) ->
+				^^remember_referenced_logtalk_file(Original)
+			;	Original = Other,
+				^^remember_referenced_prolog_file(Original)
+			),
+			^^save_edge(Path, Original, [loads], loads_file, [tooltip(loads)| Options]),
 		fail.
 	output_file(_, _, _, _).
 
