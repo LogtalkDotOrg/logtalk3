@@ -44,6 +44,9 @@ the `difflist` and `list` objects.
 Tools
 -----
 
+* CHANGED: The `lgtdoc` option names and the tag names used in the XML
+documenting files for readability and for accommodating the new features.
+
 * ADDED: Support to the `lgtunit` tool to write or export unit test results
 in the TAP (Test Anything Protocol) output.
 
