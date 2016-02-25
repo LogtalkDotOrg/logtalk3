@@ -458,7 +458,8 @@
 		Library \== TopLibrary,
 		\+ memberchk(Library, ExcludedLibraries),
 		logtalk::expand_library_path(Library, Path),
-		atom_concat(TopPath, _RelativePath, Path).
+		atom_concat(TopPath, RelativePath, Path),
+		RelativePath \== ''.
 
 	:- protected(output_library/3).
 	:- mode(output_library(+atom, +atom, +list(compound)), one).

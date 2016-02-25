@@ -75,6 +75,9 @@ predicate declaration existence error.
 * FIXED: Bug in the `diagrams` tool predicate that adds link options to nodes
 that could result in non-instantiated node tooltips.
 
+* FIXED: Bug in the `diagrams` tool `rlibrary/1-2` predicates when checking
+for proper sub-libraries.
+
 Tests
 -----
 
