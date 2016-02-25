@@ -44,8 +44,8 @@ the `difflist` and `list` objects.
 Tools
 -----
 
-* ADDED: Support to the `lgtunit` tool to write unit test results in the TAP
-(Test Anything Protocol) output.
+* ADDED: Support to the `lgtunit` tool to write or export unit test results
+in the TAP (Test Anything Protocol) output.
 
 * ADDED: Support to the `lgtunit` tool to export unit test results in the
 xUnit XML format.
@@ -60,14 +60,14 @@ sub-directories.
 * ADDED: Definitions for library nodes and library relations to the `diagrams`
 tool support for the DOT language.
 
+* UPDATED: The `lgt2md.*` scripts to also generate an index file.
+
 * FIXED: Paths used in the Windows documenting batch files and scripts of the
 `lgtdoc` tool.
 
 * FIXED: Documenting of predicate aliases by the `lgtdoc` tool.
 
 * FIXED: Added missing Windows `lgt2md.bat` file to the `lgtdoc` tool.
-
-* FIXED: The `lgt2md.*` scripts to also generate an index file.
 
 * FIXED: Bug in the `diagrams::all_files/1` predicate that resulted in a
 predicate declaration existence error.

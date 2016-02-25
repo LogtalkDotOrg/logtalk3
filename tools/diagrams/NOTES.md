@@ -17,7 +17,7 @@ limitations under the License.
 ________________________________________________________________________
 
 
-This tool generates entity diagrams and file diagrams for source files
+This tool generates library, file, and entity diagrams for source files
 and for libraries of source files using the Logtalk reflection features
 to collect the relevant information and a graph language for representing
 the diagrams. Limited support is also available for generating diagrams
@@ -50,9 +50,18 @@ File dependency diagrams are specially useful in revealing dependencies
 that are not represented in file loading diagrams due to files being
 loaded indirectly by files external to the libraries being documented. 
 
+The following library diagrams are supported:
+
+- library dependency diagrams showing which libraries contain entities with
+references to entities defined in other libraries
+
+Library dependency diagrams are specially useful for large applications
+where file diagrams would be too large and complex to be useful.
+
 An utility object, `diagrams`, is provided for generating all supported
 diagrams in one step. This object provides an interface common to all
-diagrams.
+diagrams but note that some of the predicates that generate diagrams only
+make sense for some types of diagrams.
 
 Limitations in both the graph language and UML forces the invention of a
 modeling language that can represent all kinds of Logtalk entities and
