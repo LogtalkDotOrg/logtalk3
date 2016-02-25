@@ -63,8 +63,9 @@ sub-directories.
 * ADDED: Definitions for library nodes and library relations to the `diagrams`
 tool support for the DOT language.
 
-* ADDED: File loading diagrams support for the cases where Logtalk source
-files are loaded from Prolog files.
+* ADDED: File loading diagrams support for the cases where Logtalk or Prolog
+source files are loaded from Prolog source files. Requires a backend Prolog
+compiler that tracks loading dependencies between files such as SWI-Prolog.
 
 * UPDATED: The `lgt2md.*` scripts to also generate an index file.
 

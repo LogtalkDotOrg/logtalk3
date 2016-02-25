@@ -54,10 +54,16 @@
 	output_file(Path, _, _, Options) :-
 		modules_diagram_support::loaded_file_property(Other, parent(Path)),
 			(	logtalk::loaded_file_property(Original, target(Other)) ->
+				% Prolog file loading a Logtalk generated intermediate Prolog file
 				^^remember_referenced_logtalk_file(Original)
-			;	Original = Other,
+			;	% Prolog file loading a non-Logtalk generated Prolog file
+				Original = Other,
 				^^remember_referenced_prolog_file(Original)
 			),
+			% make sure we don't get circular references as Path can be a Logtalk
+			% file and the generated intermediate Prolog file may have a link to
+			% it depending on the backend Prolog compiler
+			Original \== Path,
 			^^save_edge(Path, Original, [loads], loads_file, [tooltip(loads)| Options]),
 		fail.
 	output_file(_, _, _, _).
