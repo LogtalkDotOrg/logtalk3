@@ -56,7 +56,7 @@
 		fail.
 	output_externals(Options) :-
 		^^format_object(Format),
-		Format::graph_header(output_file, other, '(external files)', external, [tooltip('(external files)')| Options]),
+		Format::graph_header(diagram_output_file, other, '(external files)', external, [tooltip('(external files)')| Options]),
 		::retract(referenced_logtalk_file_(Path)),
 		logtalk::loaded_file_property(Path, directory(Directory)),
 		logtalk::loaded_file_property(Path, basename(Basename)),
@@ -82,6 +82,6 @@
 		fail.
 	output_externals(Options) :-
 		^^format_object(Format),
-		Format::graph_footer(output_file, other, '(external files)', external, [tooltip('(external files)')| Options]).
+		Format::graph_footer(diagram_output_file, other, '(external files)', external, [tooltip('(external files)')| Options]).
 
 :- end_category.

@@ -64,17 +64,17 @@
 		^^merge_options(UserOptions, Options),
 		reset,
 		^^output_file_path(Identifier, Options, Format, OutputPath),
-		open(OutputPath, write, Stream, [alias(output_file)]),
-		Format::file_header(output_file, Identifier, Options),
+		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
+		Format::file_header(diagram_output_file, Identifier, Options),
 		entity_property(Kind, Entity, file(Basename, Directory)),
 		atom_concat(Directory, Basename, Path),
 		^^add_link_options(Path, Options, GraphOptions),
-		Format::graph_header(output_file, Identifier, GroundEntity, entity, GraphOptions),
+		Format::graph_header(diagram_output_file, Identifier, GroundEntity, entity, GraphOptions),
 		process(Kind, Entity, Options),
 		output_external_predicates(Options),
 		^^output_edges(Options),
-		Format::graph_footer(output_file, Identifier, GroundEntity, entity, GraphOptions),
-		Format::file_footer(output_file, Identifier, Options),
+		Format::graph_footer(diagram_output_file, Identifier, GroundEntity, entity, GraphOptions),
+		Format::file_footer(diagram_output_file, Identifier, Options),
 		close(Stream).
 
 	entity(Entity) :-
@@ -300,7 +300,7 @@
 
 	output_external_predicates(Options) :-
 		^^format_object(Format),
-		Format::graph_header(output_file, other, '(external predicates)', external, [tooltip('(external predicates)')| Options]),
+		Format::graph_header(diagram_output_file, other, '(external predicates)', external, [tooltip('(external predicates)')| Options]),
 		retract(external_predicate_(Object::Predicate)),
 		^^ground_entity_identifier(object, Object, Name),
 		^^output_node(Name::Predicate, Name::Predicate, external, [], external_predicate, Options),
@@ -315,7 +315,7 @@
 		fail.
 	output_external_predicates(Options) :-
 		^^format_object(Format),
-		Format::graph_footer(output_file, other, '(external predicates)', external, [tooltip('(external predicates)')| Options]).
+		Format::graph_footer(diagram_output_file, other, '(external predicates)', external, [tooltip('(external predicates)')| Options]).
 
 	% by default, diagram layout is top to bottom:
 	default_option(layout(top_to_bottom)).

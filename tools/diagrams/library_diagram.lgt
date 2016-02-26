@@ -56,7 +56,7 @@
 		fail.
 	output_externals(Options) :-
 		^^format_object(Format),
-		Format::graph_header(output_file, other, '(external libraries)', external, [tooltip('(external libraries)')| Options]),
+		Format::graph_header(diagram_output_file, other, '(external libraries)', external, [tooltip('(external libraries)')| Options]),
 		::retract(referenced_logtalk_library_(Library, Directory)),
 		memberchk(omit_path_prefixes(Prefixes), Options),
 		^^add_link_options(Directory, Options, LinkingOptions),
@@ -78,6 +78,6 @@
 		fail.
 	output_externals(Options) :-
 		^^format_object(Format),
-		Format::graph_footer(output_file, other, '(external libraries)', external, [tooltip('(external libraries)')| Options]).
+		Format::graph_footer(diagram_output_file, other, '(external libraries)', external, [tooltip('(external libraries)')| Options]).
 
 :- end_category.

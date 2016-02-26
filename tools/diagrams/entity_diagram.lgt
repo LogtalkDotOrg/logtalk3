@@ -63,11 +63,11 @@
 		^^merge_options(UserOptions, Options),
 		reset,
 		^^output_file_path(Name, Options, Format, OutputPath),
-		open(OutputPath, write, Stream, [alias(output_file)]),
-		Format::file_header(output_file, Basename, Options),
+		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
+		Format::file_header(diagram_output_file, Basename, Options),
 		atom_concat(file_, Path, Identifier),
 		^^add_link_options(Path, Options, GraphOptions),
-		Format::graph_header(output_file, Identifier, Basename, file, GraphOptions),
+		Format::graph_header(diagram_output_file, Identifier, Basename, file, GraphOptions),
 		process(Basename, Directory, GraphOptions),
 		% as externals can be defined in several places, use the file
 		% prefix, if defined, for file URL links
@@ -77,8 +77,8 @@
 		),
 		output_externals(ExternalsOptions),
 		^^output_edges(Options),
-		Format::graph_footer(output_file, Identifier, Basename, file, GraphOptions),
-		Format::file_footer(output_file, Basename, Options),
+		Format::graph_footer(diagram_output_file, Identifier, Basename, file, GraphOptions),
+		Format::file_footer(diagram_output_file, Basename, Options),
 		close(Stream).
 
 	file(Source) :-
@@ -91,9 +91,9 @@
 			% can have more than file with the same basename
 			atom_concat(file_, File, Identifier),
 			^^add_link_options(File, Options, GraphOptions),
-			Format::graph_header(output_file, Identifier, Basename, file, GraphOptions),
+			Format::graph_header(diagram_output_file, Identifier, Basename, file, GraphOptions),
 			process(Basename, Directory, Options),
-			Format::graph_footer(output_file, Identifier, Basename, file, GraphOptions)
+			Format::graph_footer(diagram_output_file, Identifier, Basename, file, GraphOptions)
 		;	process(Basename, Directory, Options)
 		).
 
@@ -122,7 +122,7 @@
 		fail.
 	output_externals(Options) :-
 		^^format_object(Format),
-		Format::graph_header(output_file, other, '(external entities)', external, [tooltip('(external entities)')| Options]),
+		Format::graph_header(diagram_output_file, other, '(external entities)', external, [tooltip('(external entities)')| Options]),
 		retract(referenced_entity_(Entity)),
 		add_entity_documentation_url(Options, logtalk, Entity, EntityOptions),
 		entity_name_kind_caption(external, Entity, Name, Kind, Caption),
@@ -135,7 +135,7 @@
 		fail.
 	output_externals(Options) :-
 		^^format_object(Format),
-		Format::graph_footer(output_file, other, '(external entities)', external, [tooltip('(external entities)')| Options]).
+		Format::graph_footer(diagram_output_file, other, '(external entities)', external, [tooltip('(external entities)')| Options]).
 
 	process(Basename, Directory, Options) :-
 		memberchk(exclude_entities(ExcludedEntities), Options),

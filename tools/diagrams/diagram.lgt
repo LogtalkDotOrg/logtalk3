@@ -43,15 +43,15 @@
 		merge_options(UserOptions, Options),
 		::reset,
 		::output_file_path(Project, Options, Format, OutputPath),
-		open(OutputPath, write, Stream, [alias(output_file)]),
-		Format::file_header(output_file, Project, Options),
+		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
+		Format::file_header(diagram_output_file, Project, Options),
 		atom_concat(libraries_, Project, Identifier),
-		Format::graph_header(output_file, Identifier, Project, libraries, [tooltip(Project)| Options]),
+		Format::graph_header(diagram_output_file, Identifier, Project, libraries, [tooltip(Project)| Options]),
 		output_libraries(Libraries, Format, Options),
 		output_externals(Options),
 		::output_edges(Options),
-		Format::graph_footer(output_file, Identifier, Project, libraries, [tooltip(Project)| Options]),
-		Format::file_footer(output_file, Project, Options),
+		Format::graph_footer(diagram_output_file, Identifier, Project, libraries, [tooltip(Project)| Options]),
+		Format::file_footer(diagram_output_file, Project, Options),
 		close(Stream).
 
 	output_libraries([], _Format, _Options).
@@ -60,9 +60,9 @@
 		logtalk::expand_library_path(Library, Directory),
 		atom_concat(library_, Library, Identifier),
 		add_link_options(Directory, Options, GraphOptions),
-		Format::graph_header(output_file, Identifier, Library, library, GraphOptions),
+		Format::graph_header(diagram_output_file, Identifier, Library, library, GraphOptions),
 		::output_library(Library, Directory, GraphOptions),
-		Format::graph_footer(output_file, Identifier, Library, library, GraphOptions),
+		Format::graph_footer(diagram_output_file, Identifier, Library, library, GraphOptions),
 		output_libraries(Libraries, Format, Options).
 
 	:- public(libraries/2).
@@ -86,11 +86,11 @@
 		format_object(Format),
 		merge_options(UserOptions, Options),
 		::output_file_path(all_libraries, Options, Format, OutputPath),
-		open(OutputPath, write, Stream, [alias(output_file)]),
-		Format::file_header(output_file, libraries, Options),
+		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
+		Format::file_header(diagram_output_file, libraries, Options),
 		output_all_libraries(Options),
 		::output_edges(Options),
-		Format::file_footer(output_file, libraries, Options),
+		Format::file_footer(diagram_output_file, libraries, Options),
 		close(Stream).
 
 	output_all_libraries(Options) :-
@@ -102,9 +102,9 @@
 		\+ \+ logtalk::loaded_file_property(_, directory(Directory)),
 		atom_concat(library_, Library, Identifier),
 		add_link_options(Directory, Options, GraphOptions),
-		Format::graph_header(output_file, Identifier, Library, library, GraphOptions),
+		Format::graph_header(diagram_output_file, Identifier, Library, library, GraphOptions),
 		::output_library(Library, Directory, GraphOptions),
-		Format::graph_footer(output_file, Identifier, Library, library, GraphOptions),
+		Format::graph_footer(diagram_output_file, Identifier, Library, library, GraphOptions),
 		fail.
 	output_all_libraries(_).
 
@@ -130,16 +130,16 @@
 		::reset,
 		logtalk::expand_library_path(Library, Path),
 		::output_file_path(Library, Options, Format, OutputPath),
-		open(OutputPath, write, Stream, [alias(output_file)]),
-		Format::file_header(output_file, Library, Options),
+		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
+		Format::file_header(diagram_output_file, Library, Options),
 		atom_concat(rlibrary_, Library, Identifier),
 		add_link_options(Path, Options, GraphOptions),
-		Format::graph_header(output_file, Identifier, Library, rlibrary, GraphOptions),
+		Format::graph_header(diagram_output_file, Identifier, Library, rlibrary, GraphOptions),
 		::output_rlibrary(Library, Path, GraphOptions),
 		output_externals(Options),
 		::output_edges(Options),
-		Format::graph_footer(output_file, Identifier, Library, rlibrary, GraphOptions),
-		Format::file_footer(output_file, Library, Options),
+		Format::graph_footer(diagram_output_file, Identifier, Library, rlibrary, GraphOptions),
+		Format::file_footer(diagram_output_file, Library, Options),
 		close(Stream).
 
 	:- public(rlibrary/1).
@@ -165,16 +165,16 @@
 		::reset,
 		logtalk::expand_library_path(Library, Path),
 		::output_file_path(Library, Options, Format, OutputPath),
-		open(OutputPath, write, Stream, [alias(output_file)]),
-		Format::file_header(output_file, Library, Options),
+		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
+		Format::file_header(diagram_output_file, Library, Options),
 		atom_concat(library_, Library, Identifier),
 		add_link_options(Path, Options, GraphOptions),
-		Format::graph_header(output_file, Identifier, Library, library, GraphOptions),
+		Format::graph_header(diagram_output_file, Identifier, Library, library, GraphOptions),
 		::output_library(Library, Path, GraphOptions),
 		output_externals(Options),
 		::output_edges(Options),
-		Format::graph_footer(output_file, Identifier, Library, library, GraphOptions),
-		Format::file_footer(output_file, Library, Options),
+		Format::graph_footer(diagram_output_file, Identifier, Library, library, GraphOptions),
+		Format::file_footer(diagram_output_file, Library, Options),
 		close(Stream).
 
 	output_library(_Library, Directory, Options) :-
@@ -218,16 +218,16 @@
 		merge_options(UserOptions, Options),
 		::reset,
 		::output_file_path(Project, Options, Format, OutputPath),
-		open(OutputPath, write, Stream, [alias(output_file)]),
-		Format::file_header(output_file, Project, Options),
+		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
+		Format::file_header(diagram_output_file, Project, Options),
 		atom_concat(directories_, Project, Identifier),
-		Format::graph_header(output_file, Identifier, Project, directories, [tooltip(Project)| Options]),
+		Format::graph_header(diagram_output_file, Identifier, Project, directories, [tooltip(Project)| Options]),
 		normalize_directory_paths(Directories, NormalizedDirectories),
 		output_directories(NormalizedDirectories, Format, Options),
 		output_externals(Options),
 		::output_edges(Options),
-		Format::graph_footer(output_file, Identifier, Project, directories, [tooltip(Project)| Options]),
-		Format::file_footer(output_file, Project, Options),
+		Format::graph_footer(diagram_output_file, Identifier, Project, directories, [tooltip(Project)| Options]),
+		Format::file_footer(diagram_output_file, Project, Options),
 		close(Stream).
 
 	normalize_directory_paths([], []).
@@ -243,9 +243,9 @@
 	output_directories([Directory| Directories], Format, Options) :-
 		atom_concat(directory_, Directory, Identifier),
 		add_link_options(Directory, Options, GraphOptions),
-		Format::graph_header(output_file, Identifier, Directory, directory, GraphOptions),
+		Format::graph_header(diagram_output_file, Identifier, Directory, directory, GraphOptions),
 		::output_library(Directory, Directory, GraphOptions),
-		Format::graph_footer(output_file, Identifier, Directory, directory, GraphOptions),
+		Format::graph_footer(diagram_output_file, Identifier, Directory, directory, GraphOptions),
 		output_directories(Directories, Format, Options).
 
 	:- public(directories/2).
@@ -270,17 +270,17 @@
 		merge_options(UserOptions, Options),
 		::reset,
 		::output_file_path(Project, Options, Format, OutputPath),
-		open(OutputPath, write, Stream, [alias(output_file)]),
-		Format::file_header(output_file, Project, Options),
+		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
+		Format::file_header(diagram_output_file, Project, Options),
 		atom_concat(directory_, Project, Identifier),
 		add_link_options(Directory, Options, GraphOptions),
-		Format::graph_header(output_file, Identifier, Project, directory, GraphOptions),
+		Format::graph_header(diagram_output_file, Identifier, Project, directory, GraphOptions),
 		normalize_directory_paths([Directory], [NormalizedDirectory]),
 		::output_library(Project, NormalizedDirectory, GraphOptions),
 		output_externals(Options),
 		::output_edges(Options),
-		Format::graph_footer(output_file, Identifier, Project, directory, GraphOptions),
-		Format::file_footer(output_file, Project, Options),
+		Format::graph_footer(diagram_output_file, Identifier, Project, directory, GraphOptions),
+		Format::file_footer(diagram_output_file, Project, Options),
 		close(Stream).
 
 	:- public(directory/2).
@@ -305,15 +305,15 @@
 		merge_options(UserOptions, Options),
 		::reset,
 		::output_file_path(Project, Options, Format, OutputPath),
-		open(OutputPath, write, Stream, [alias(output_file)]),
-		Format::file_header(output_file, Project, Options),
+		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
+		Format::file_header(diagram_output_file, Project, Options),
 		atom_concat(files_, Project, Identifier),
-		Format::graph_header(output_file, Identifier, Project, files, [tooltip(Project)| Options]),
+		Format::graph_header(diagram_output_file, Identifier, Project, files, [tooltip(Project)| Options]),
 		::output_files(Files, Options),
 		output_externals(Options),
 		::output_edges(Options),
-		Format::graph_footer(output_file, Identifier, Project, files, [tooltip(Project)| Options]),
-		Format::file_footer(output_file, Project, Options),
+		Format::graph_footer(diagram_output_file, Identifier, Project, files, [tooltip(Project)| Options]),
+		Format::file_footer(diagram_output_file, Project, Options),
 		close(Stream).
 
 	output_files([], _Options).
@@ -344,12 +344,12 @@
 		format_object(Format),
 		merge_options(UserOptions, Options),
 		::output_file_path(all_files, Options, Format, OutputPath),
-		open(OutputPath, write, Stream, [alias(output_file)]),
-		Format::file_header(output_file, files, Options),
+		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
+		Format::file_header(diagram_output_file, files, Options),
 		output_all_files(Options),
 		output_externals(Options),
 		::output_edges(Options),
-		Format::file_footer(output_file, files, Options),
+		Format::file_footer(diagram_output_file, files, Options),
 		close(Stream).
 
 	output_all_files(Options) :-
@@ -456,16 +456,16 @@
 		memberchk(exclude_libraries(ExcludedLibraries), Options),
 		atom_concat(library_, TopLibrary, TopIdentifier),
 		add_link_options(TopPath, Options, TopGraphOptions),
-		Format::graph_header(output_file, TopIdentifier, TopLibrary, library, TopGraphOptions),
+		Format::graph_header(diagram_output_file, TopIdentifier, TopLibrary, library, TopGraphOptions),
 		::output_library(TopLibrary, TopPath, TopGraphOptions),
-		Format::graph_footer(output_file, TopIdentifier, TopLibrary, library, TopGraphOptions),
+		Format::graph_footer(diagram_output_file, TopIdentifier, TopLibrary, library, TopGraphOptions),
 		forall(
 			sub_library(TopLibrary, TopPath, ExcludedLibraries, Library, Path),
 			(	atom_concat(library_, Library, Identifier),
 				add_link_options(Path, Options, GraphOptions),
-				Format::graph_header(output_file, Identifier, Library, library, GraphOptions),
+				Format::graph_header(diagram_output_file, Identifier, Library, library, GraphOptions),
 				::output_library(Library, Path, GraphOptions),
-				Format::graph_footer(output_file, Identifier, Library, library, GraphOptions)
+				Format::graph_footer(diagram_output_file, Identifier, Library, library, GraphOptions)
 			)
 		).
 
@@ -532,7 +532,7 @@
 
 	output_node(Identifier, Label, Caption, Lines, Kind, Options) :-
 		format_object(Format),
-		Format::node(output_file, Identifier, Label, Caption, Lines, Kind, Options).
+		Format::node(diagram_output_file, Identifier, Label, Caption, Lines, Kind, Options).
 
 	:- protected(edge/5).
 	:- mode(edge(?nonvar, ?nonvar, ?list(nonvar), ?atom, ?list(compound)), zero_or_more).
@@ -562,7 +562,7 @@
 	output_edges(_Options) :-
 		format_object(Format),
 		::retract(edge_(From, To, Labels, Kind, EdgeOptions)),
-		Format::edge(output_file, From, To, Labels, Kind, EdgeOptions),
+		Format::edge(diagram_output_file, From, To, Labels, Kind, EdgeOptions),
 		fail.
 	output_edges(_).
 
