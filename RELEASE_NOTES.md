@@ -21,11 +21,14 @@ RELEASE NOTES
 =============
 
 
-3.03.1 - February ??, 2016
-==========================
+3.03.1 - March ??, 2016
+=======================
 
 Logtalk compiler and runtime
 ----------------------------
+
+* FIXED: Bug in the `logtalk_load/2` built-in predicate when called with the
+`clean/1` option with a loader file where the option would be ignored.
 
 * FIXED: Property `alias/2` is also valid for protocols.
 

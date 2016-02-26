@@ -5494,7 +5494,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compile_file'(SourceFile, ObjectFile, Flags, loading, Current),
 	% compile and load the intermediate Prolog file
 	asserta('$lgt_file_loading_stack_'(SourceFile)),
-	'$lgt_load_compiled_file'(SourceFile, ObjectFile),
+	'$lgt_load_compiled_file'(SourceFile, Flags, ObjectFile),
 	retractall('$lgt_file_loading_stack_'(SourceFile)),
 	retractall('$lgt_pp_file_paths_flags_'(_, _, _, _, _)).
 
@@ -5510,7 +5510,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 
-'$lgt_load_compiled_file'(SourceFile, ObjectFile) :-
+'$lgt_load_compiled_file'(SourceFile, Flags, ObjectFile) :-
 	% retrieve the backend Prolog specific file loading options
 	'$lgt_compiler_flag'(prolog_loader, DefaultOptions),
 	% loading a file can result in the redefinition of existing
@@ -5542,7 +5542,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_propagate_failure_to_parent_files'(SourceFile)
 	),
 	% cleanup intermediate files if necessary
-	(	'$lgt_compiler_flag'(clean, on) ->
+	(	'$lgt_member'(clean(on), Flags) ->
+		'$lgt_delete_intermediate_files'(ObjectFile)
+	;	'$lgt_compiler_flag'(clean, on) ->
 		'$lgt_delete_intermediate_files'(ObjectFile)
 	;	true
 	).
