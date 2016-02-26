@@ -11,7 +11,7 @@
       <p class="type">object</p>
       <h1 class="code">diagrams(Format)</h1>
       <blockquote>
-        <p class="comment">Predicates for generating all supported diagrams for libraries and files in one step using the specified format.</p>
+        <p class="comment">Predicates for generating all supported diagrams for libraries, directories, or files in one step using the specified format.</p>
       </blockquote>
     </div>
     <div class="entity">
@@ -27,7 +27,7 @@
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2016/2/22</code>
+            <code>2016/2/26</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -380,6 +380,10 @@
         <dl class="remarks">
           <dt class="comment">Common options</dt>
           <dd class="text">title/1, date/1, output_directory/1, relation_labels/1, node_type_captions/1, exclude_files/1, exclude_libraries/1, url_prefixes/1, omit_path_prefix/1, entity_url_suffix_target/2, and layout/1.</dd>
+        </dl>
+        <dl class="remarks">
+          <dt class="comment">Limitations</dt>
+          <dd class="text">Some of the provided predicates only make sense for some types of diagrams. Also, fine tuning may require generating individual diagrams directly instead of as a batch using this utility object.</dd>
         </dl>
       </div>
     </div>
