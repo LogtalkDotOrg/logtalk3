@@ -24,7 +24,7 @@
 	:- info([
 		version is 2.1,
 		author is 'Paulo Moura',
-		date is 2016/02/25,
+		date is 2016/02/26,
 		comment is 'Predicates for generating file loading dependency diagrams.',
 		parnames is ['Format']
 	]).
@@ -54,17 +54,19 @@
 	output_file(Path, _, _, Options) :-
 		modules_diagram_support::loaded_file_property(Other, parent(Path)),
 			(	logtalk::loaded_file_property(Original, target(Other)) ->
-				% Prolog file loading a Logtalk generated intermediate Prolog file
-				^^remember_referenced_logtalk_file(Original)
+				(	% make sure we don't get circular references as Path can be a Logtalk
+					% file and the generated intermediate Prolog file may have a link to
+					% it depending on the backend Prolog compiler
+					Original \== Path ->
+					% Prolog file loading a Logtalk generated intermediate Prolog file
+					^^remember_referenced_logtalk_file(Original),
+					^^save_edge(Path, Original, [loads], loads_file, [tooltip(loads)| Options])
+				;	true
+				)
 			;	% Prolog file loading a non-Logtalk generated Prolog file
-				Original = Other,
-				^^remember_referenced_prolog_file(Original)
+				^^remember_referenced_prolog_file(Other),
+				^^save_edge(Path, Other, [loads], loads_file, [tooltip(loads)| Options])
 			),
-			% make sure we don't get circular references as Path can be a Logtalk
-			% file and the generated intermediate Prolog file may have a link to
-			% it depending on the backend Prolog compiler
-			Original \== Path,
-			^^save_edge(Path, Original, [loads], loads_file, [tooltip(loads)| Options]),
 		fail.
 	output_file(_, _, _, _).
 

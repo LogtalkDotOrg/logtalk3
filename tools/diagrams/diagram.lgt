@@ -23,7 +23,7 @@
 	:- info([
 		version is 2.1,
 		author is 'Paulo Moura',
-		date is 2016/02/24,
+		date is 2016/02/26,
 		comment is 'Common predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
@@ -187,6 +187,9 @@
 	output_library(_Library, Directory, Options) :-
 		memberchk(exclude_files(ExcludedFiles), Options),
 		modules_diagram_support::loaded_file_property(Path, directory(Directory)),
+		% Logtalk source files may also be loaded from Prolog source files but
+		% then the file was already enumerated by the previous clause
+		\+ logtalk::loaded_file_property(Path, directory(Directory)),
 		modules_diagram_support::loaded_file_property(Path, basename(Basename)),
 		::not_excluded_file(ExcludedFiles, Path, Basename),
 		::output_file(Path, Basename, Directory, Options),

@@ -4,7 +4,7 @@
 	:- info([
 		version is 0.12,
 		author is 'Paulo Moura',
-		date is 2016/02/25,
+		date is 2016/02/26,
 		comment is 'Utility predicates for supporting Prolog modules in diagrams.'
 	]).
 
@@ -203,9 +203,7 @@
 			).
 
 		loaded_file_property(File, Property) :-
-			property_source_file(Property, File),
-			\+ sub_atom(File, _, 4, 0, '.lgt'),
-			\+ sub_atom(File, _, 8, 0, '.logtalk').
+			property_source_file(Property, File).
 
 		property_source_file(parent(Parent), File) :-
 			{source_file_property(File, load_context(user, Parent:_, _))}.
