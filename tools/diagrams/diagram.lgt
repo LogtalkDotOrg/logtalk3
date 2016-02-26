@@ -189,7 +189,7 @@
 		modules_diagram_support::loaded_file_property(Path, directory(Directory)),
 		% Logtalk source files may also be loaded from Prolog source files but
 		% then the file was already enumerated by the previous clause
-		\+ logtalk::loaded_file_property(Path, directory(Directory)),
+		\+ logtalk::loaded_file(Path),
 		modules_diagram_support::loaded_file_property(Path, basename(Basename)),
 		::not_excluded_file(ExcludedFiles, Path, Basename),
 		::output_file(Path, Basename, Directory, Options),
@@ -356,6 +356,19 @@
 		logtalk::loaded_file(Path),
 		logtalk::loaded_file_property(Path, basename(Basename)),
 		logtalk::loaded_file_property(Path, directory(Directory)),
+		::output_file(Path, Basename, Directory, Options),
+		fail.
+	output_all_files(Options) :-
+		modules_diagram_support::loaded_file_property(Path, basename(Basename)),
+		% Logtalk source files may also be loaded from Prolog source files but
+		% then the file was already enumerated by the previous clause
+		\+ logtalk::loaded_file(Path),
+		% only output Prolog files that are parents of Logtalk source files
+		once((
+			modules_diagram_support::loaded_file_property(Other, parent(Path)),
+			logtalk::loaded_file(Other)
+		)),
+		modules_diagram_support::loaded_file_property(Path, directory(Directory)),
 		::output_file(Path, Basename, Directory, Options),
 		fail.
 	output_all_files(_).
