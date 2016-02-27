@@ -38,6 +38,7 @@
 		file_load_diagram,
 		file_dependency_diagram,
 		library_diagram,
+		library_load_diagram,
 		library_dependency_diagram,
 		diagrams
 		], [optimize(on)])

@@ -63,6 +63,9 @@ the `lgtdoc` tool.
 for generating documentation for a directory or for a directory and all its
 sub-directories.
 
+* ADDED: Support for generating library loading and library dependency
+diagrams to the `diagrams` tool.
+
 * ADDED: Definitions for library nodes and library relations to the `diagrams`
 tool support for the DOT language.
 
