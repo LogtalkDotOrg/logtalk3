@@ -49,48 +49,13 @@ Currently, the following tools are available, each one with its own
 - lgtunit
 - ports
 - profiler
+- wrapper
 
 All source files are formatted using tabs (the recommended setting is a tab
 width equivalent to 4 spaces).
 
 Specific notes about each tool can be found in the corresponding `NOTES.md`
 files. Basic XHTML documentation about each tool can be found on the `docs`
-directory (open the `docs/tools.html` file with your web browser). To regenerate
-this documentation, start Logtalk with your favorite back-end Prolog compiler
-and follow these steps:
-
-(1) If the `source_data` flag is not `on` by default, type the query:
-
-	| ?- set_logtalk_flag(source_data, on).
-
-(2) Load all the tools using the query:
-
-	| ?- {tools(loader), ports(loader), profiler(loader)}.
-
-(3) Generate the XML documenting files for all loaded tools using the query:
-
-	| ?- lgtdoc::library(assertions, [xml_docs_directory('$LOGTALKUSER/docs/tmp_assertions')]),
-		 lgtdoc::library(debugger, [xml_docs_directory('$LOGTALKUSER/docs/tmp_debugger')]),
-		 lgtdoc::library(diagrams, [xml_docs_directory('$LOGTALKUSER/docs/tmp_diagrams')]),
-		 lgtdoc::library(help, [xml_docs_directory('$LOGTALKUSER/docs/tmp_help')]),
-		 lgtdoc::library(lgtdoc, [xml_docs_directory('$LOGTALKUSER/docs/tmp_lgtdoc')]),
-		 lgtdoc::library(lgtunit, [xml_docs_directory('$LOGTALKUSER/docs/tmp_lgtunit')]),
-		 lgtdoc::library(ports, [xml_docs_directory('$LOGTALKUSER/docs/tmp_ports')]),
-		 lgtdoc::library(profiler, [xml_docs_directory('$LOGTALKUSER/docs/tmp_profiler')]).
-
-(4) Run the command `lgt2html` on the temporary directories to generate the
-(X)HTML documentation or the command `lgt2pdf` to generate PDF documentation:
-
-	$ cd $LOGTALKUSER/docs/tmp_assertions && lgt2html -i assertions_tool.html -t "Assertions tool" && mv *.html ..
-	$ cd ../tmp_debugger && lgt2html -i debugger_tool.html -t "Debugger tool" && mv *.html ..
-	$ cd ../tmp_diagrams && lgt2html -i diagrams_tool.html -t "Diagrams tool" && mv *.html ..
-	$ cd ../tmp_help && lgt2html -i help_tool.html -t "Help tool" && mv *.html ..
-	$ cd ../tmp_lgtdoc && lgt2html -i lgtdoc_tool.html -t "Logtalk documenting tool" && mv *.html ..
-	$ cd ../tmp_lgtunit && lgt2html -i lgtunit_tool.html -t "Logtalk unit testing tool" && mv *.html ..
-	$ cd ../tmp_ports && lgt2html -i ports_tool.html -t "Port profiler tool" && mv *.html ..
-	$ cd ../tmp_profiler && lgt2html -i profiler_tool.html -t "Profiler tool" && mv *.html ..
-
-After generating the (X)HTML and/or PDF documentation, you can delete the
-temporary directories:
-
-	$ rm -rf $LOGTALKUSER/docs/tmp_*
+directory (open the `docs/index.html` file with your web browser). The
+documentation for these tools can be regenerated using the shell script
+`../scripts/update_html_docs.sh`.

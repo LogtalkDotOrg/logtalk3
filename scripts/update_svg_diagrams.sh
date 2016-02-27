@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk script for updating the HTML library and tools documentation
-##   Last updated on October 8, 2015
+##   Last updated on February 27, 2015
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -47,11 +47,11 @@ core_goal="logtalk_load(diagrams(loader)), set_logtalk_flag(source_data,on), inh
 
 library_goal="logtalk_load(diagrams(loader)), set_logtalk_flag(source_data,on), logtalk_load(library(all_loader)), inheritance_diagram::library(library, [title('Logtalk library'),node_type_captions(true),url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/','http://logtalk.org/library/'),omit_path_prefixes(['/Users/pmoura/logtalk/','/opt/local/share/logtalk/'])]), halt."
 
-tools_goal="logtalk_load(diagrams(loader)), set_logtalk_flag(source_data,on),logtalk_load(tools(loader)), inheritance_diagram::rlibrary(tools, [title('Logtalk development tools'),node_type_captions(true),url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/','http://logtalk.org/library/'),omit_path_prefixes(['/Users/pmoura/logtalk/','/opt/local/share/logtalk/'])]), halt."
+tools_goal="logtalk_load(diagrams(loader)), set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),tools(loader),ports(loader),wrapper(loader),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_xml_report)]), inheritance_diagram::rlibrary(tools, [title('Logtalk development tools'),node_type_captions(true),url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/','http://logtalk.org/library/'),omit_path_prefixes(['/Users/pmoura/logtalk/','/opt/local/share/logtalk/'])]), halt."
 
 
 print_version() {
-	echo "`basename $0` 0.1"
+	echo "`basename $0` 0.2"
 	exit 0
 }
 
@@ -137,12 +137,10 @@ $logtalk "$core_goal"
 $logtalk "$library_goal"
 $logtalk "$tools_goal"
 
-dot -Tsvg core_inheritance_diagram.dot > core_inheritance_diagram.svg
-dot -Tsvg library_inheritance_diagram.dot > library_inheritance_diagram.svg
-dot -Tsvg tools_inheritance_diagram.dot > tools_inheritance_diagram.svg
+for f in *.dot; do
+	dot -Tsvg "$f" > "${f%.*}.svg"
+done
 
-rm core_inheritance_diagram.dot
-rm library_inheritance_diagram.dot
-rm tools_inheritance_diagram.dot
+rm *.dot
 
 exit 0
