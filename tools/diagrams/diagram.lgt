@@ -23,7 +23,7 @@
 	:- info([
 		version is 2.1,
 		author is 'Paulo Moura',
-		date is 2016/02/26,
+		date is 2016/02/29,
 		comment is 'Common predicates for generating diagrams.',
 		parnames is ['Format']
 	]).
@@ -506,10 +506,10 @@
 	]).
 
 	output_externals(Options) :-
-		% as externals can be defined in several places, use the file
-		% prefix, if defined, for file URL links
-		(	memberchk(url_prefixes(FilePrefix, DocPrefix), Options) ->
-			ExternalsOptions = [urls(FilePrefix,DocPrefix)| Options]
+		% as externals can be defined in several places, use the code
+		% prefix, if defined, for code URL links
+		(	memberchk(url_prefixes(CodePrefix, DocPrefix), Options) ->
+			ExternalsOptions = [urls(CodePrefix,DocPrefix)| Options]
 		;	ExternalsOptions = Options
 		),
 		::output_externals(ExternalsOptions).
@@ -783,13 +783,13 @@
 
 	add_link_options(Path, Options, LinkingOptions) :-
 		memberchk(omit_path_prefixes(Prefixes), Options),
-		memberchk(url_prefixes(FilePrefix, DocPrefix), Options),
+		memberchk(url_prefixes(CodePrefix, DocPrefix), Options),
 		(	member(Prefix, Prefixes),
 			atom_concat(Prefix, Suffix, Path) ->
-			atom_concat(FilePrefix, Suffix, FileURL)
+			atom_concat(CodePrefix, Suffix, CodeURL)
 		;	Suffix = Path,
-			FileURL = FilePrefix
+			CodeURL = CodePrefix
 		),
-		LinkingOptions = [urls(FileURL,DocPrefix), tooltip(Suffix)| Options].
+		LinkingOptions = [urls(CodeURL,DocPrefix), tooltip(Suffix)| Options].
 
 :- end_category.

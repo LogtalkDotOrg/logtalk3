@@ -22,9 +22,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2.0,
+		version is 2.1,
 		author is 'Paulo Moura',
-		date is 2015/01/02,
+		date is 2016/02/29,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parnames is ['Format']
 	]).
@@ -203,7 +203,7 @@
 		add_predicate_documentation_url(Options, Entity, Functor//Arity, PredicateOptions).
 	add_predicate_documentation_url(Options, Entity, Predicate, PredicateOptions) :-
 		!,
-		(	member(url_prefixes(FilePrefix, DocPrefix), Options) ->
+		(	member(url_prefixes(CodePrefix, DocPrefix), Options) ->
 			functor(Entity, EntityFunctor, EntityArity),
 			atom_concat(DocPrefix, EntityFunctor, URL0),
 			atom_concat(URL0, '_', URL1),
@@ -226,7 +226,7 @@
 				atom_codes(ArityAtom, ArityCodes),
 				atom_concat(URL6, ArityAtom, URL)
 			),
-			PredicateOptions = [urls(FilePrefix, URL)| Options]
+			PredicateOptions = [urls(CodePrefix, URL)| Options]
 		;	PredicateOptions = Options
 		).
 	add_predicate_documentation_url(Options, _, Options).

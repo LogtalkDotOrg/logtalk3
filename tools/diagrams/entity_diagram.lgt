@@ -22,9 +22,9 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2.0,
+		version is 2.1,
 		author is 'Paulo Moura',
-		date is 2014/12/30,
+		date is 2016/02/29,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parnames is ['Format']
 	]).
@@ -69,10 +69,10 @@
 		^^add_link_options(Path, Options, GraphOptions),
 		Format::graph_header(diagram_output_file, Identifier, Basename, file, GraphOptions),
 		process(Basename, Directory, GraphOptions),
-		% as externals can be defined in several places, use the file
-		% prefix, if defined, for file URL links
-		(	member(url_prefixes(FilePrefix, DocPrefix), Options) ->
-			ExternalsOptions = [urls(FilePrefix,DocPrefix)| Options]
+		% as externals can be defined in several places, use the code
+		% prefix, if defined, for code URL links
+		(	member(url_prefixes(CodePrefix, DocPrefix), Options) ->
+			ExternalsOptions = [urls(CodePrefix,DocPrefix)| Options]
 		;	ExternalsOptions = Options
 		),
 		output_externals(ExternalsOptions),
@@ -174,15 +174,15 @@
 
 	add_entity_documentation_url(Options, module, Entity, EntityOptions) :-
 		!,
-		(	member(urls(FilePrefix, DocPrefix), Options) ->
+		(	member(urls(CodePrefix, DocPrefix), Options) ->
 			atom_concat(DocPrefix, Entity, URL0),
 			memberchk(entity_url_suffix_target(Suffix, _), Options),
 			atom_concat(URL0, Suffix, URL),
-			EntityOptions = [urls(FilePrefix, URL)| Options]
+			EntityOptions = [urls(CodePrefix, URL)| Options]
 		;	EntityOptions = Options
 		).
 	add_entity_documentation_url(Options, _, Entity, EntityOptions) :-
-		(	member(urls(FilePrefix, DocPrefix), Options) ->
+		(	member(urls(CodePrefix, DocPrefix), Options) ->
 			functor(Entity, Functor, Arity),
 			atom_concat(DocPrefix, Functor, URL0),
 			atom_concat(URL0, '_', URL1),
@@ -191,7 +191,7 @@
 			atom_concat(URL1, ArityAtom, URL2),
 			memberchk(entity_url_suffix_target(Suffix, _), Options),
 			atom_concat(URL2, Suffix, URL),
-			EntityOptions = [urls(FilePrefix, URL)| Options]
+			EntityOptions = [urls(CodePrefix, URL)| Options]
 		;	EntityOptions = Options
 		).
 

@@ -194,8 +194,8 @@ generated diagrams. For entity diagrams the options are:
 	list of entities to exclude (default is `[]`)
 - `omit_path_prefixes(Prefixes)`  
 	omit common path prefixes when printing directory paths (a list of atoms; default is `[]`)
-- `url_prefixes(FilePrefix, DocPrefix)`  
-	URL file and entity documenting URL prefixes used when generating cluster, file, and entity links (atoms; defaults are `''`)
+- `url_prefixes(CodePrefix, DocPrefix)`  
+	code and documenting URL prefixes used when generating cluster, library, file, and entity links (atoms; defaults are `''`)
 - `entity_url_suffix_target(Suffix, Target)`  
 	extension for entity documenting URLs (an atom; default is `'.html'`) and target separating symbols (an atom; default is `'#'`)
 
