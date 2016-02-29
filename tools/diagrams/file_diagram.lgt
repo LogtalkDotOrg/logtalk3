@@ -3,9 +3,9 @@
 	extends(diagram(Format))).
 
 	:- info([
-		version is 2.0,
+		version is 2.1,
 		author is 'Paulo Moura',
-		date is 2014/12/30,
+		date is 2016/02/29,
 		comment is 'Common predicates for generating file diagrams.',
 		parnames is ['Format']
 	]).
@@ -58,26 +58,22 @@
 		^^format_object(Format),
 		Format::graph_header(diagram_output_file, other, '(external files)', external, [tooltip('(external files)')| Options]),
 		::retract(referenced_logtalk_file_(Path)),
-		logtalk::loaded_file_property(Path, directory(Directory)),
 		logtalk::loaded_file_property(Path, basename(Basename)),
-		memberchk(omit_path_prefixes(Prefixes), Options),
 		^^add_link_options(Path, Options, LinkingOptions),
-		(	member(Prefix, Prefixes),
-			atom_concat(Prefix, Relative, Directory) ->
-			^^output_node(Path, Basename, file, [Relative], external_file, LinkingOptions)
-		;	^^output_node(Path, Basename, file, [Directory], external_file, LinkingOptions)
+		^^omit_path_prefix(Path, Options, Relative),
+		(	memberchk(directory_paths(true), Options) ->
+			^^output_node(Relative, Basename, file, [Relative], external_file, LinkingOptions)
+		;	^^output_node(Relative, Basename, file, [], external_file, LinkingOptions)
 		),
 		fail.
 	output_externals(Options) :-
 		::retract(referenced_prolog_file_(Path)),
-		modules_diagram_support::loaded_file_property(Path, directory(Directory)),
 		modules_diagram_support::loaded_file_property(Path, basename(Basename)),
-		memberchk(omit_path_prefixes(Prefixes), Options),
 		^^add_link_options(Path, Options, LinkingOptions),
-		(	member(Prefix, Prefixes),
-			atom_concat(Prefix, Relative, Directory) ->
-			^^output_node(Path, Basename, file, [Relative], external_file, LinkingOptions)
-		;	^^output_node(Path, Basename, file, [Directory], external_file, LinkingOptions)
+		^^omit_path_prefix(Path, Options, Relative),
+		(	memberchk(directory_paths(true), Options) ->
+			^^output_node(Relative, Basename, file, [Relative], external_file, LinkingOptions)
+		;	^^output_node(Relative, Basename, file, [], external_file, LinkingOptions)
 		),
 		fail.
 	output_externals(Options) :-

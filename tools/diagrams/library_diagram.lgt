@@ -3,9 +3,9 @@
 	extends(diagram(Format))).
 
 	:- info([
-		version is 2.0,
+		version is 2.1,
 		author is 'Paulo Moura',
-		date is 2016/02/24,
+		date is 2016/02/29,
 		comment is 'Common predicates for generating library diagrams.',
 		parnames is ['Format']
 	]).
@@ -58,22 +58,20 @@
 		^^format_object(Format),
 		Format::graph_header(diagram_output_file, other, '(external libraries)', external, [tooltip('(external libraries)')| Options]),
 		::retract(referenced_logtalk_library_(Library, Directory)),
-		memberchk(omit_path_prefixes(Prefixes), Options),
 		^^add_link_options(Directory, Options, LinkingOptions),
-		(	member(Prefix, Prefixes),
-			atom_concat(Prefix, Relative, Directory) ->
-			^^output_node(Directory, Library, library, [Relative], external_library, LinkingOptions)
-		;	^^output_node(Directory, Library, library, [Directory], external_library, LinkingOptions)
+		^^omit_path_prefix(Directory, Options, Relative),
+		(	memberchk(directory_paths(true), Options) ->
+			^^output_node(Relative, Library, library, [Relative], external_library, LinkingOptions)
+		;	^^output_node(Relative, Library, library, [], external_library, LinkingOptions)
 		),
 		fail.
 	output_externals(Options) :-
 		::retract(referenced_prolog_library_(Library, Directory)),
-		memberchk(omit_path_prefixes(Prefixes), Options),
 		^^add_link_options(Directory, Options, LinkingOptions),
-		(	member(Prefix, Prefixes),
-			atom_concat(Prefix, Relative, Directory) ->
-			^^output_node(Directory, Library, library, [Relative], external_library, LinkingOptions)
-		;	^^output_node(Directory, Library, library, [Directory], external_library, LinkingOptions)
+		^^omit_path_prefix(Directory, Options, Relative),
+		(	memberchk(directory_paths(true), Options) ->
+			^^output_node(Relative, Library, library, [Relative], external_library, LinkingOptions)
+		;	^^output_node(Relative, Library, library, [], external_library, LinkingOptions)
 		),
 		fail.
 	output_externals(Options) :-

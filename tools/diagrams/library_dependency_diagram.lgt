@@ -24,7 +24,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2016/02/24,
+		date is 2016/02/29,
 		comment is 'Predicates for generating library dependency diagrams. A dependency exists when an entity in one library makes a reference to an entity in another library.',
 		parnames is ['Format']
 	]).
@@ -36,32 +36,30 @@
 	% first, output the library node
 	output_library(Library, Directory, Options) :-
 		^^add_link_options(Directory, Options, LinkingOptions),
+		^^omit_path_prefix(Directory, Options, Relative),
 		(	memberchk(directory_paths(true), Options) ->
-			memberchk(omit_path_prefixes(Prefixes), Options),
-			(	member(Prefix, Prefixes),
-				atom_concat(Prefix, Relative, Directory) ->
-				^^output_node(Directory, Library, library, [Relative], library, LinkingOptions)
-			;	^^output_node(Directory, Library, library, [Directory], library, LinkingOptions)
-			)
-		;	^^output_node(Directory, Library, library, [], library, LinkingOptions)
+			^^output_node(Relative, Library, library, [Relative], library, LinkingOptions)
+		;	^^output_node(Relative, Library, library, [], library, LinkingOptions)
 		),
 		^^remember_included_library(Library, Directory),
 		fail.
 	% second, output edges for all libraries that this library refers to
 	output_library(Library, Directory, Options) :-
-		depends_library(Library, Directory, OtherLibrary, OtherDirectory, Kind, Options),
+		depends_library(Library, Directory, OtherLibrary, OtherDirectory, Kind),
+		^^omit_path_prefix(Directory, Options, Relative),
+		^^omit_path_prefix(OtherDirectory, Options, OtherRelative),
 		% ensure that this dependency is not already recorded
-		\+ ^^edge(Directory, OtherDirectory, _, _, _),
+		\+ ^^edge(Relative, OtherRelative, _, _, _),
 			(	Kind == module ->
 				^^remember_referenced_prolog_library(OtherLibrary, OtherDirectory),
-				^^save_edge(Directory, OtherDirectory, [depends], depends_on_library, [tooltip(depends)| Options])
+				^^save_edge(Relative, OtherRelative, [depends], depends_on_library, [tooltip(depends)| Options])
 			;	^^remember_referenced_logtalk_library(OtherLibrary, OtherDirectory),
-				^^save_edge(Directory, OtherDirectory, [depends], depends_on_library, [tooltip(depends)| Options])
+				^^save_edge(Relative, OtherRelative, [depends], depends_on_library, [tooltip(depends)| Options])
 			),
 		fail.
 	output_library(_, _, _).
 
-	depends_library(Library, Directory, OtherLibrary, OtherDirectory, Kind, _) :-
+	depends_library(Library, Directory, OtherLibrary, OtherDirectory, Kind) :-
 		(	object_property(Object, file(Basename, Directory)),
 			depends_object(Object, Kind, Other)
 		;	protocol_property(Protocol, file(Basename, Directory)),
@@ -85,7 +83,7 @@
 
 	% sometimes a library is a wrapper for its sub-libraries without source files
 	% on its own; use the relative paths to check for sub-libraries
-	depends_library(Library, Directory, OtherLibrary, OtherDirectory, object, Options) :-
+	depends_library(Library, Directory, OtherLibrary, OtherDirectory, object) :-
 		logtalk_library_path(OtherLibrary, _),
 		OtherLibrary \== Library,
 		logtalk::expand_library_path(OtherLibrary, OtherDirectory),
@@ -146,7 +144,7 @@
 	% by default, don't omit any path prefixes when printing paths:
 	default_option(omit_path_prefixes([])).
 	% by default, don't print directory paths:
-	default_option(directory_paths(true)).
+	default_option(directory_paths(false)).
 	% by default, print relation labels:
 	default_option(relation_labels(true)).
 	% by default, don't print node type captions

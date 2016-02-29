@@ -32,40 +32,41 @@
 	:- uses(list, [member/2, memberchk/2]).
 
 	% first, output the file node
-	output_file(Path, Basename, Directory, Options) :-
+	output_file(Path, Basename, _Directory, Options) :-
 		^^add_link_options(Path, Options, LinkingOptions),
+		^^omit_path_prefix(Path, Options, Relative),
 		(	memberchk(directory_paths(true), Options) ->
-			memberchk(omit_path_prefixes(Prefixes), Options),
-			(	member(Prefix, Prefixes),
-				atom_concat(Prefix, Relative, Directory) ->
-				^^output_node(Path, Basename, file, [Relative], file, LinkingOptions)
-			;	^^output_node(Path, Basename, file, [Directory], file, LinkingOptions)
-			)
-		;	^^output_node(Path, Basename, file, [], file, LinkingOptions)
+			^^output_node(Relative, Basename, file, [Relative], file, LinkingOptions)
+		;	^^output_node(Relative, Basename, file, [], file, LinkingOptions)
 		),
 		^^remember_included_file(Path),
 		fail.
 	% second, output edges for all files loaded by this file
 	output_file(Path, _, _, Options) :-
-		logtalk::loaded_file_property(Other, parent(Path)),
-			^^remember_referenced_logtalk_file(Other),
-			^^save_edge(Path, Other, [loads], loads_file, [tooltip(loads)| Options]),
+		^^omit_path_prefix(Path, Options, Relative),
+		logtalk::loaded_file_property(OtherPath, parent(Path)),
+			^^remember_referenced_logtalk_file(OtherPath),
+			^^omit_path_prefix(OtherPath, Options, OtherRelative),
+			^^save_edge(Relative, OtherRelative, [loads], loads_file, [tooltip(loads)| Options]),
 		fail.
 	output_file(Path, _, _, Options) :-
-		modules_diagram_support::loaded_file_property(Other, parent(Path)),
-			(	logtalk::loaded_file_property(Original, target(Other)) ->
+		^^omit_path_prefix(Path, Options, Relative),
+		modules_diagram_support::loaded_file_property(OtherPath, parent(Path)),
+			(	logtalk::loaded_file_property(OriginalPath, target(OtherPath)) ->
 				(	% make sure we don't get circular references as Path can be a Logtalk
 					% file and the generated intermediate Prolog file may have a link to
 					% it depending on the backend Prolog compiler
-					Original \== Path ->
+					OriginalPath \== Path ->
 					% Prolog file loading a Logtalk generated intermediate Prolog file
-					^^remember_referenced_logtalk_file(Original),
-					^^save_edge(Path, Original, [loads], loads_file, [tooltip(loads)| Options])
+					^^remember_referenced_logtalk_file(OriginalPath),
+					^^omit_path_prefix(OriginalPath, Options, OriginalRelative),
+					^^save_edge(Relative, OriginalRelative, [loads], loads_file, [tooltip(loads)| Options])
 				;	true
 				)
 			;	% Prolog file loading a non-Logtalk generated Prolog file
-				^^remember_referenced_prolog_file(Other),
-				^^save_edge(Path, Other, [loads], loads_file, [tooltip(loads)| Options])
+				^^remember_referenced_prolog_file(OtherPath),
+				^^omit_path_prefix(OtherPath, Options, OtherRelative),
+				^^save_edge(Relative, OtherRelative, [loads], loads_file, [tooltip(loads)| Options])
 			),
 		fail.
 	output_file(_, _, _, _).

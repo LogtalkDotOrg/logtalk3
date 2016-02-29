@@ -459,15 +459,14 @@
 		Format::graph_header(diagram_output_file, TopIdentifier, TopLibrary, library, TopGraphOptions),
 		::output_library(TopLibrary, TopPath, TopGraphOptions),
 		Format::graph_footer(diagram_output_file, TopIdentifier, TopLibrary, library, TopGraphOptions),
-		forall(
-			sub_library(TopLibrary, TopPath, ExcludedLibraries, Library, Path),
-			(	atom_concat(library_, Library, Identifier),
-				add_link_options(Path, Options, GraphOptions),
-				Format::graph_header(diagram_output_file, Identifier, Library, library, GraphOptions),
-				::output_library(Library, Path, GraphOptions),
-				Format::graph_footer(diagram_output_file, Identifier, Library, library, GraphOptions)
-			)
-		).
+		sub_library(TopLibrary, TopPath, ExcludedLibraries, Library, Path),
+			atom_concat(library_, Library, Identifier),
+			add_link_options(Path, Options, GraphOptions),
+			Format::graph_header(diagram_output_file, Identifier, Library, library, GraphOptions),
+			::output_library(Library, Path, GraphOptions),
+			Format::graph_footer(diagram_output_file, Identifier, Library, library, GraphOptions),
+		fail.
+	output_rlibrary(_, _, _).
 
 	sub_library(TopLibrary, TopPath, ExcludedLibraries, Library, Path) :-
 		logtalk_library_path(Library, _),
@@ -791,5 +790,20 @@
 			CodeURL = CodePrefix
 		),
 		LinkingOptions = [urls(CodeURL,DocPrefix), tooltip(Suffix)| Options].
+
+	:- protected(omit_path_prefix/3).
+	:- mode(omit_path_prefix(+atom, +list(compound), -atom), one).
+	:- info(omit_path_prefix/3, [
+		comment is 'Removes a prefix from a path, returning the relative path, when using the option omit_path_prefixes/1. Use mainly for contructing node identitifers.',
+		argnames is ['Path', 'Options', 'Relative']
+	]).
+
+	omit_path_prefix(Path, Options, Relative) :-
+		memberchk(omit_path_prefixes(Prefixes), Options),
+		(	member(Prefix, Prefixes),
+			atom_concat(Prefix, Relative, Path) ->
+			true
+		;	Relative = Path
+		).
 
 :- end_category.

@@ -24,7 +24,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2016/02/26,
+		date is 2016/02/29,
 		comment is 'Predicates for generating library loading dependency diagrams.',
 		parnames is ['Format']
 	]).
@@ -36,14 +36,10 @@
 	% first, output the library node
 	output_library(Library, Directory, Options) :-
 		^^add_link_options(Directory, Options, LinkingOptions),
+		^^omit_path_prefix(Directory, Options, Relative),
 		(	memberchk(directory_paths(true), Options) ->
-			memberchk(omit_path_prefixes(Prefixes), Options),
-			(	member(Prefix, Prefixes),
-				atom_concat(Prefix, Relative, Directory) ->
-				^^output_node(Directory, Library, library, [Relative], library, LinkingOptions)
-			;	^^output_node(Directory, Library, library, [Directory], library, LinkingOptions)
-			)
-		;	^^output_node(Directory, Library, library, [], library, LinkingOptions)
+			^^output_node(Relative, Library, library, [Relative], library, LinkingOptions)
+		;	^^output_node(Relative, Library, library, [], library, LinkingOptions)
 		),
 		^^remember_included_library(Library, Directory),
 		fail.
@@ -63,8 +59,10 @@
 			% not a Logtalk generated intermediate Prolog file
 			\+ logtalk::loaded_file_property(_, target(Other))
 		),
+		^^omit_path_prefix(Directory, Options, Relative),
+		^^omit_path_prefix(OtherDirectory, Options, OtherRelative),
 		% edge not previously recorded
-		\+ ^^edge(Directory, OtherDirectory, _, _, _),
+		\+ ^^edge(Relative, OtherRelative, _, _, _),
 		(	logtalk::loaded_file_property(Other, library(OtherLibrary)) ->
 			^^remember_referenced_logtalk_library(OtherLibrary, OtherDirectory)
 		;	modules_diagram_support::loaded_file_property(Other, directory(OtherDirectory)),
@@ -79,7 +77,7 @@
 			modules_diagram_support::loaded_file_property(Other, directory(OtherDirectory)),
 			modules_diagram_support::loaded_file_property(Other, basename(OtherLibrary))
 		),
-		^^save_edge(Directory, OtherDirectory, [loads], loads_library, [tooltip(loads)| Options]),
+		^^save_edge(Relative, OtherRelative, [loads], loads_library, [tooltip(loads)| Options]),
 		fail.
 	output_library(_, _, _).
 
@@ -118,7 +116,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2016/02/26,
+		date is 2016/02/29,
 		comment is 'Predicates for generating library loading dependency diagrams in DOT format.'
 	]).
 

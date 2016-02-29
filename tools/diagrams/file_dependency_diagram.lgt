@@ -22,9 +22,9 @@
 	imports(file_diagram(Format))).
 
 	:- info([
-		version is 2.0,
+		version is 2.1,
 		author is 'Paulo Moura',
-		date is 2014/12/30,
+		date is 2016/02/29,
 		comment is 'Predicates for generating file contents dependency diagrams. A dependency exists when an entity in one file makes a reference to an entity in another file.',
 		parnames is ['Format']
 	]).
@@ -34,29 +34,27 @@
 	]).
 
 	% first, output the file node
-	output_file(Path, Basename, Directory, Options) :-
+	output_file(Path, Basename, _Directory, Options) :-
 		^^add_link_options(Path, Options, LinkingOptions),
+		^^omit_path_prefix(Path, Options, Relative),
 		(	memberchk(directory_paths(true), Options) ->
-			memberchk(omit_path_prefixes(Prefixes), Options),
-			(	member(Prefix, Prefixes),
-				atom_concat(Prefix, Relative, Directory) ->
-				^^output_node(Path, Basename, file, [Relative], file, LinkingOptions)
-			;	^^output_node(Path, Basename, file, [Directory], file, LinkingOptions)
-			)
-		;	^^output_node(Path, Basename, file, [], file, LinkingOptions)
+			^^output_node(Relative, Basename, file, [Relative], file, LinkingOptions)
+		;	^^output_node(Relative, Basename, file, [], file, LinkingOptions)
 		),
 		^^remember_included_file(Path),
 		fail.
 	% second, output edges for all files that this file refers to
 	output_file(Path, Basename, Directory, Options) :-
 		depends_file(Basename, Directory, OtherPath, Kind),
+		^^omit_path_prefix(Path, Options, Relative),
+		^^omit_path_prefix(OtherPath, Options, OtherRelative),
 		% ensure that this dependency is not already recorded
-		\+ ^^edge(Path, OtherPath, _, _, _),
+		\+ ^^edge(Relative, OtherRelative, _, _, _),
 			(	Kind == module ->
 				^^remember_referenced_prolog_file(OtherPath),
-				^^save_edge(Path, OtherPath, [depends], depends_on_file, [tooltip(depends)| Options])
+				^^save_edge(Relative, OtherRelative, [depends], depends_on_file, [tooltip(depends)| Options])
 			;	^^remember_referenced_logtalk_file(OtherPath),
-				^^save_edge(Path, OtherPath, [depends], depends_on_file, [tooltip(depends)| Options])
+				^^save_edge(Relative, OtherRelative, [depends], depends_on_file, [tooltip(depends)| Options])
 			),
 		fail.
 	output_file(_, _, _, _).
