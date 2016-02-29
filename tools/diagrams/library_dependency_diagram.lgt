@@ -90,9 +90,7 @@
 		OtherLibrary \== Library,
 		logtalk::expand_library_path(OtherLibrary, OtherDirectory),
 		atom_concat(Directory, Relative, OtherDirectory),
-		Relative \== '',
-		% we have a sub-library
-		output_library(OtherLibrary, OtherDirectory, Options).
+		Relative \== ''.
 
 	depends_object(Object, object, Other) :-
 		object_property(Object, calls(Other::_,_)), nonvar(Other).
@@ -170,7 +168,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2014/01/14,
+		date is 2016/02/29,
 		comment is 'Predicates for generating library dependency diagrams in DOT format.'
 	]).
 
