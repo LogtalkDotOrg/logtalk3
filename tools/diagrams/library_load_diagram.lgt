@@ -24,7 +24,7 @@
 	:- info([
 		version is 2.0,
 		author is 'Paulo Moura',
-		date is 2016/02/29,
+		date is 2016/03/01,
 		comment is 'Predicates for generating library loading dependency diagrams.',
 		parnames is ['Format']
 	]).
@@ -37,9 +37,10 @@
 	output_library(Library, Directory, Options) :-
 		^^add_link_options(Directory, Options, LinkingOptions),
 		^^omit_path_prefix(Directory, Options, Relative),
+		^^add_library_documentation_url(logtalk, LinkingOptions, Relative, NodeOptions),
 		(	memberchk(directory_paths(true), Options) ->
-			^^output_node(Relative, Library, library, [Relative], library, LinkingOptions)
-		;	^^output_node(Relative, Library, library, [], library, LinkingOptions)
+			^^output_node(Relative, Library, library, [Relative], library, NodeOptions)
+		;	^^output_node(Relative, Library, library, [], library, NodeOptions)
 		),
 		^^remember_included_library(Library, Directory),
 		fail.
@@ -103,6 +104,8 @@
 	default_option(exclude_files([])).
 	% by default, don't exclude any library sub-directories:
 	default_option(exclude_libraries([])).
+	% by default, use a 'directory_index.html' suffix for entity documentation URLs:
+	default_option(entity_url_suffix_target('directory_index.html', '#')).
 
 	diagram_name_suffix('_library_load_diagram').
 
