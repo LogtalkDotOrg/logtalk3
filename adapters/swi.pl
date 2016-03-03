@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on February 12, 2016
+%  Last updated on March 3, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -545,15 +545,27 @@
 
 
 % '$lgt_open'(+atom, +atom, -stream, @list)
-
-'$lgt_open'(File, Mode, Stream, Options) :-
-	open(File, Mode, Stream, Options).
-
-
 % '$lgt_close'(@stream)
 
-'$lgt_close'(Stream) :-
-	close(Stream).
+:- if(predicate_property('$push_input_context'(_), built_in)).
+
+	'$lgt_open'(File, Mode, Stream, Options) :-
+		open(File, Mode, Stream, Options),
+		'$push_input_context'(logtalk).
+
+	'$lgt_close'(Stream) :-
+		'$pop_input_context',
+		close(Stream).
+
+:- else.
+
+	'$lgt_open'(File, Mode, Stream, Options) :-
+		open(File, Mode, Stream, Options).
+
+	'$lgt_close'(Stream) :-
+		close(Stream).
+
+:- endif.
 
 
 

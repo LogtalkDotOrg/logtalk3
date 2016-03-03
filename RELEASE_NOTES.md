@@ -38,6 +38,12 @@ Prolog adapter and integration files
 * UPDATED: YAP adapter file for the new text encodings supported in its
 current git version.
 
+* UPDATED: SWI-Prolog adapter file to enable a solution for registering
+file loading dependencies when a Prolog file is used to load a Logtalk
+file using the `consult/1` or `load_files/1-2` predicates (requires the
+`swihooks.pl` file to be loaded as done by default by the integration
+scripts). With the help of Jan Wielemaker.
+
 Library
 -------
 
