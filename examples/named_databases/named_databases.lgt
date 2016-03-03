@@ -25,13 +25,17 @@
 	db_load(Database, File) :-
 		db_reconsult(File, Database).
 
+	db_once(Database, Goal) :-
+		db_call(Database:Goal),
+		!.
+
 	% the other predicate are built-in predicates in Lean Prolog
 
 :- elif(current_logtalk_flag(prolog_dialect, eclipse)).
 
 	db_create(Database) :-
 		(	current_module(Database) ->
-			true
+			db_clear(Database)
 		;	create_module(Database, [], eclipse_language)
 		).
 
@@ -59,6 +63,18 @@
 	db_call(Database, Goal) :-
 		'@'(Goal, Database).
 
+	db_once(Database, Goal) :-
+		once('@'(Goal, Database)).
+
+	db_listing(Database) :-
+		(	'@'(current_predicate(Predicate), Database),
+			'@'(is_dynamic(Predicate), Database),
+			writeq((:- dynamic(Predicate))), write('.'), nl,
+			'@'(listing(Predicate), Database),
+			fail
+		;	true
+		).
+
 	db_load(Database, File) :-
 		'@'(compile(File), Database).
 
@@ -66,13 +82,7 @@
 		open(File, write, Stream),
 		current_output(Current),
 		set_output(Stream),
-		(	'@'(current_predicate(Predicate), Database),
-			'@'(is_dynamic(Predicate), Database),
-			writeq((:- dynamic(Predicate))), write('.'), nl,
-			'@'(listing, Database),
-			fail
-		;	true
-		),
+		db_listing(Database),
 		close(Stream),
 		set_output(Current).
 
@@ -85,7 +95,11 @@
 
 :- elif(current_logtalk_flag(prolog_dialect, sicstus)).
 
-	db_create(_).
+	db_create(Database) :-
+		(	current_module(Database) ->
+			db_clear(Database)
+		;	true
+		).
 
 	db_dynamic(Database, Functor/Arity) :-
 		functor(Clause, Functor, Arity),
@@ -113,13 +127,10 @@
 	db_call(Database, Goal) :-
 		Database:Goal.
 
-	db_load(Database, File) :-
-		Database:reconsult(File).
+	db_once(Database, Goal) :-
+		once(Database:Goal).
 
-	db_save(Database, File) :-
-		open(File, write, Stream),
-		current_output(Current),
-		set_output(Stream),
+	db_listing(Database) :-
 		(	current_predicate(Database:Functor/Arity),
 			functor(Template, Functor, Arity),
 			predicate_property(Database:Template, (dynamic)),
@@ -131,7 +142,16 @@
 			),
 			fail
 		;	true
-		),
+		).		
+
+	db_load(Database, File) :-
+		Database:reconsult(File).
+
+	db_save(Database, File) :-
+		open(File, write, Stream),
+		current_output(Current),
+		set_output(Stream),
+		db_listing(Database),
 		close(Stream),
 		set_output(Current).
 
@@ -145,7 +165,11 @@
 
 :- elif((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == swi; Dialect == yap))).
 
-	db_create(_).
+	db_create(Database) :-
+		(	current_module(Database) ->
+			db_clear(Database)
+		;	true
+		).
 
 	db_dynamic(Database, Predicate) :-
 		dynamic(Database:Predicate).
@@ -170,6 +194,12 @@
 
 	db_call(Database, Goal) :-
 		Database:Goal.
+
+	db_once(Database, Goal) :-
+		once(Database:Goal).
+
+	db_listing(Database) :-
+		listing(Database:_).
 
 	db_load(Database, File) :-
 		Database:reconsult(File).

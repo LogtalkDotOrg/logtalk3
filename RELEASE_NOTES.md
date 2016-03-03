@@ -111,6 +111,9 @@ Examples
 * UPDATED: The `encodings` example to also load and test UTF-32 files when
 using YAP as the backend compiler.
 
+* UPDATED: The `named_databases` example with `db_once/2` and `db_listing/1`
+predicates.
+
 
 3.03.0 - February 16, 2016
 ==========================

@@ -22,15 +22,15 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2012/11/05,
+		date is 2016/03/03,
 		comment is 'Unit tests for the "named_databases" example.'
 	]).
 
 	:- uses(user, [
 		db_create/1, db_clear/1, db_load/2, db_save/2,
-		db_call/2,
+		db_call/2, db_once/2,
 		db_dynamic/2, db_abolish/2,
 		db_asserta/2, db_assertz/2, db_clause/2, db_retract/2, db_retractall/2
 	]).
@@ -82,6 +82,16 @@
 	test(named_databases_6) :-
 		db_create(named_database),
 		db_dynamic(named_database, d/1),
+		db_assertz(named_database, d(2)),
+		db_assertz(named_database, d(3)),
+		db_asserta(named_database, d(1)),
+		bagof(X, db_once(named_database, d(X)), Xs),
+		Xs == [1],
+		db_clear(named_database).
+
+	test(named_databases_7) :-
+		db_create(named_database),
+		db_dynamic(named_database, d/1),
 		db_assertz(named_database, d(1)),
 		db_assertz(named_database, d(2)),
 		db_assertz(named_database, d(3)),
@@ -91,7 +101,7 @@
 		\+ db_call(named_database, d(_)),
 		db_clear(named_database).
 
-	test(named_databases_7) :-
+	test(named_databases_8) :-
 		db_create(named_database),
 		db_dynamic(named_database, d/1),
 		db_assertz(named_database, d(1)),

@@ -22,9 +22,9 @@
 	implements(expanding)).
 
 	:- info([
-		version is 1.0,
+		version is 1.1,
 		author is 'Paulo Moura',
-		date is 2012/10/26,
+		date is 2016/03/03,
 		comment is 'Hook object for the named database predicates.'
 	]).
 
@@ -45,6 +45,7 @@
 		goal_expansion(db_retractall(Database, Head), '@'(retractall(Head), Database)).
 		goal_expansion(db_clause(Database, Head, Body), '@'(clause(Head, Body), Database)).
 		goal_expansion(db_call(Database, Goal), '@'(Goal, Database)).
+		goal_expansion(db_once(Database, Goal), once('@'(Goal, Database))).
 		goal_expansion(db_load(Database, File), '@'(compile(File), Database)).
 
 	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
@@ -57,6 +58,7 @@
 		goal_expansion(db_retractall(Database, Head), retractall(Database:Head)).
 		goal_expansion(db_clause(Database, Head, Body), clause(Database:Head, Body)).
 		goal_expansion(db_call(Database, Goal), Database:Goal).
+		goal_expansion(db_once(Database, Goal), once(Database:Goal)).
 		goal_expansion(db_load(Database, File), Database:reconsult(File)).
 
 	:- elif((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == swi; Dialect == yap))).
@@ -70,6 +72,8 @@
 		goal_expansion(db_retractall(Database, Head), retractall(Database:Head)).
 		goal_expansion(db_clause(Database, Head, Body), clause(Database:Head, Body)).
 		goal_expansion(db_call(Database, Goal), Database:Goal).
+		goal_expansion(db_once(Database, Goal), once(Database:Goal)).
+		goal_expansion(db_listing(Database), listing(Database:_)).
 		goal_expansion(db_load(Database, File), Database:reconsult(File)).
 
 	:- else.
