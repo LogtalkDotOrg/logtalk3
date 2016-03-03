@@ -46,6 +46,10 @@ X = 2 ;
 X = 3
 yes
 
+| ?- db_once(my_db, foo(X)).
+X = 1
+yes
+
 
 % save all dynamic predicates in the database to a file:
 
