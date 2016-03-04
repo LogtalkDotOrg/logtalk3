@@ -55,19 +55,18 @@ using the `apropos logtalk` command.
 
 - `logtalk_tester.sh`  
 	shell script for automating running unit tests e.g. in the `examples` and
-	`tests` directories; it assumes that the tests are to be found in the
-	sub-directories and in the sub-sub-directories of the current directory
-	and that the loader files for unit tests in each directory are named
-	`tester.lgt`; besides test results, this script also reports compilation
-	warnings and errors (please note that, depending on the tests and on the
-	compilation mode, these warnings and errors might be expected); know issue:
-	the output of some of the multi-threading examples may interfere with the
-	computation of the test/skipped/passed/failed totals; you can use this script
-	on Windows operating-systems by installing Git for Windows (which provides a
-	Bash shell implementation and is available from <http://msysgit.github.io>)
-	and by adding the `$LOGTALKHOME/scripts` and `$LOGTALKHOME/integration`
-	directories plus the backend Prolog compiler executable directories to the
-	system path environment variable
+	`tests` directories; it recurses through all sub-directories of the current
+	directory looking for either `tester.lgt` or `tester.logtalk` files;
+	besides test results, this script also reports compilation warnings and
+	errors (please note that, depending on the tests and on the compilation
+	mode, these warnings and errors might be expected);
+	know issue: the output of some of the multi-threading examples may interfere
+	with the computation of the test/skipped/passed/failed totals;
+	you can use this script on Windows operating-systems by installing Git for
+	Windows (which provides a Bash shell implementation and is available from
+	<http://msysgit.github.io>) and by adding the `$LOGTALKHOME/scripts` and
+	`$LOGTALKHOME/integration` directories plus the backend Prolog compiler
+	executable directories to the system path environment variable
 
 - `logtalk_version_select.sh`  
 	shell script for switching between installed Logtalk versions for POSIX
