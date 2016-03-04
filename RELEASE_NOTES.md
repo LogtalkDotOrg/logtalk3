@@ -105,6 +105,9 @@ Tests
 
 * ADDED: Tests for the validity of explicit property queries to entities.
 
+* UPDATED: The `logtalk_tester.sh` POSIX shell script now recurses into all
+sub-directories of the current directory.
+
 Examples
 --------
 

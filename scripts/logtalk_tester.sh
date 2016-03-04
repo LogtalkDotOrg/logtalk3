@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on May 23, 2015
+##   Last updated on March 4, 2016
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "`basename $0` 0.18"
+	echo "`basename $0` 0.19"
 	exit 0
 }
 
@@ -61,6 +61,27 @@ tester_normal_goal_dot="logtalk_load(tester),halt."
 
 tester_debug_goal="set_logtalk_flag(debug,on),logtalk_load(tester),halt"
 tester_debug_goal_dot="set_logtalk_flag(debug,on),logtalk_load(tester),halt."
+
+run_tests() {
+	unit=`dirname "$1"`
+	cd "$unit"
+	echo '*******************************************************************************'
+	echo "***** Testing $unit"
+	name=$(echo "$unit"|sed 's|/|__|g')
+	if [ $mode == 'optimal' ] || [ $mode == 'all' ] ; then
+		$logtalk_call $tester_optimal_goal > "$results/$name.results" 2> "$results/$name.errors"
+		grep -a 'tests:' "$results/$name.results" | LC_ALL=C sed 's/%/***** (opt)  /'
+	elif [ $mode == 'normal' ] || [ $mode == 'all' ] ; then
+		$logtalk_call $tester_normal_goal > "$results/$name.results" 2> "$results/$name.errors"
+		grep -a 'tests:' "$results/$name.results" | LC_ALL=C sed 's/%/*****        /'
+	elif [ $mode == 'debug' ] || [ $mode == 'all' ] ; then
+		$logtalk_call $tester_debug_goal > "$results/$name.results" 2> "$results/$name.errors"
+		grep -a 'tests:' "$results/$name.results" | LC_ALL=C sed 's/%/***** (debug)/'
+	fi
+	grep -a 'out of' "$results/$name.results" | LC_ALL=C sed 's/%/*****        /'
+	grep -a 'no code coverage information collected' "$results/$name.results" | LC_ALL=C sed 's/%/*****        /'
+	grep -a '(not applicable)' "$results/$name.results" | LC_ALL=C sed 's/(/*****         (/'
+}
 
 usage_help()
 {
@@ -206,59 +227,10 @@ echo "***** Batch testing started @ $date"
 $logtalk_call $versions_goal > "$results"/tester_versions.txt 2> /dev/null
 grep -a "Logtalk version:" "$results"/tester_versions.txt
 grep -a "Prolog version:" "$results"/tester_versions.txt | sed "s/Prolog/$prolog/"
-for unit in *
-do
-	if [ -d $unit ] ; then
-		cd $unit
-		if [ -e "./tester.lgt" ] || [ -e "./tester.logtalk" ] ; then
-			echo '*******************************************************************************'
-			echo "***** Testing $unit"
-			name=$(echo $unit|sed 's|/|__|g')
-			if [ $mode == 'optimal' ] || [ $mode == 'all' ] ; then
-				$logtalk_call $tester_optimal_goal > "$results/$name.results" 2> "$results/$name.errors"
-				grep -a 'tests:' "$results/$name.results" | LC_ALL=C sed 's/%/***** (opt)  /'
-			elif [ $mode == 'normal' ] || [ $mode == 'all' ] ; then
-				$logtalk_call $tester_normal_goal > "$results/$name.results" 2> "$results/$name.errors"
-				grep -a 'tests:' "$results/$name.results" | LC_ALL=C sed 's/%/*****        /'
-			elif [ $mode == 'debug' ] || [ $mode == 'all' ] ; then
-				$logtalk_call $tester_debug_goal > "$results/$name.results" 2> "$results/$name.errors"
-				grep -a 'tests:' "$results/$name.results" | LC_ALL=C sed 's/%/***** (debug)/'
-			fi
-			grep -a 'out of' "$results/$name.results" | LC_ALL=C sed 's/%/*****        /'
-			grep -a 'no code coverage information collected' "$results/$name.results" | LC_ALL=C sed 's/%/*****        /'
-			grep -a '(not applicable)' "$results/$name.results" | LC_ALL=C sed 's/(/*****         (/'
-		fi
-		for subunit in *
-		do
-			if [ -d $subunit ] ; then
-				cd $subunit
-				if [ -e "./tester.lgt" ] || [ -e "./tester.logtalk" ] ; then
-					echo '*******************************************************************************'
-					echo "***** Testing $unit/$subunit"
-					subname=$(echo $unit/$subunit|sed 's|/|__|g')
-					if [ $mode == 'optimal' ] || [ $mode == 'all' ] ; then
-						$logtalk_call $tester_optimal_goal > "$results/$subname.results" 2> "$results/$subname.errors"
-						grep -a 'tests:' "$results/$subname.results" | LC_ALL=C sed 's/%/***** (opt)  /'
-					elif [ $mode == 'normal' ] || [ $mode == 'all' ] ; then
-						$logtalk_call $tester_normal_goal > "$results/$subname.results" 2> "$results/$subname.errors"
-						grep -a 'tests:' "$results/$subname.results" | LC_ALL=C sed 's/%/*****        /'
-					elif [ $mode == 'debug' ] || [ $mode == 'all' ] ; then
-						$logtalk_call $tester_debug_goal > "$results/$subname.results" 2> "$results/$subname.errors"
-						grep -a 'tests:' "$results/$subname.results" | LC_ALL=C sed 's/%/***** (debug)/'
-					fi
-					grep -a 'out of' "$results/$subname.results" | LC_ALL=C sed 's/%/*****        /'
-					grep -a 'no code coverage information collected' "$results/$subname.results" | LC_ALL=C sed 's/%/*****        /'
-					grep -a '(not applicable)' "$results/$subname.results" | LC_ALL=C sed 's/(/*****         (/'
-				fi
-				cd ..
-			fi
-		done
-		cd "$base"
-	fi
-done
+
+find "$base" -name "tester.lgt" -or -name "tester.logtalk" | while read file; do run_tests "$file"; done
 
 cd "$results"
-
 skipped=`grep -a ': skipped' *.results | wc -l`
 passed=`grep -a ': success' *.results | wc -l`
 failed=`grep -a ': failure' *.results | wc -l`
