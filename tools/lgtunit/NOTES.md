@@ -21,12 +21,16 @@ ________________________________________________________________________
 Overview
 --------
 
-The `lgtunit.lgt` source file contains a simple framework for defining and
-running unit tests in Logtalk. The `lgtunit_messages.lgt` source file defines
-the default translations for the messages printed when running unit tests.
-These messages can be intercepted to customize output, e.g. to make it less
-verbose, or to integrate this tool with e.g. GUI IDEs. For more information
-on these entities, open the `docs/tools.html` file in a web browser.
+The `lgtunit.lgt` source file implements a framework for defining and running
+unit tests in Logtalk. The `lgtunit_messages.lgt` source file defines the
+default translations for the messages printed when running unit tests. These
+messages can be intercepted to customize output, e.g. to make it less verbose,
+or to integrate this tool with e.g. GUI IDEs. For more information on these
+entities, open the `docs/tools.html` file in a web browser.
+
+This framework can be used for testing both Logtalk and Prolog code. However,
+some features (notably, code coverage) are only available when testing Logtalk
+code.
 
 All source files are formatted using tabs (the recommended setting is a tab
 width equivalent to 4 spaces).
@@ -325,25 +329,29 @@ details on these predicates.
 Exporting unit test results in xUnit XML format
 -----------------------------------------------
 
-To export unit test results in xUnit XML format, simply load the
-`xunit_xml_report.lgt` file before running the tests. A file named
-`xunit_report.xml` will be created in the same directory as the object
-defining the tests.
+To output test results in the xUnit XML format, simply load the
+`xunit_xml_output.lgt` file before running the tests. This file defines
+an object, `xunit_xml_output`, that intercepts and replaces unit test
+execution messages, converting them to the xUnit XML format.
+
+To write the test results to a file using the xUnit XML format, simply
+load the `xunit_xml_report.lgt` file before running the tests. A file
+named `xunit_report.xml` will be created in the same directory as the
+object defining the tests.
 
 
 Writing unit test results in the TAP output format
 --------------------------------------------------
 
-To output test results in the TAP (Test Anything Protocol) output format,
-simply load the `tap_output.lgt` file before running the tests. This file
-defines an object, `tap_output`, that intercepts and replaces unit test
-execution messages, converting them to the TAP output format.
+To output test results in the TAP (Test Anything Protocol) format, simply
+load the `tap_output.lgt` file before running the tests. This file defines
+an object, `tap_output`, that intercepts and replaces unit test execution
+messages, converting them to the TAP output format.
 
 To write the test results to a file using the TAP (Test Anything Protocol)
-output format, simply load the `tap_report.lgt` file before running the tests.
-This file defines an object, `tap_report`, that intercepts unit test execution
-messages and converts them to the TAP output format, generating a
-`tap_report.txt` file in the same directory as the object defining the tests.
+output format, load instead the `tap_report.lgt` file before running the
+tests. A file named `tap_report.txt` will be created in the same directory
+as the object defining the tests.
 
 
 Known issues
