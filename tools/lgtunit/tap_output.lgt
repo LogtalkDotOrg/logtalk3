@@ -23,8 +23,8 @@
 	:- info([
 		version is 0.1,
 		author is 'Paulo Moura',
-		date is 2016/02/23,
-		comment is 'Intercepts and replaces unit test execution messages, converting them to the TAP output format.'
+		date is 2016/03/05,
+		comment is 'Intercepts unit test execution messages and outputs a report using the TAP format to the current output stream.'
 	]).
 
 	% intercept all messages from the "lgtunit" object while running tests
@@ -36,7 +36,7 @@
 		ignore(message_hook(Message)).
 
 	% start
-	message_hook(tests_start_date_time(_, _, _, _, _, _)) :-
+	message_hook(running_tests_from_object_file(_, _)) :-
 		write('TAP version 13'), nl.
 	% stop
 	message_hook(tests_results_summary(Total, _, _, _, _)) :-
