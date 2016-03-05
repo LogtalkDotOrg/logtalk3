@@ -23,7 +23,7 @@
 	:- info([
 		version is 0.1,
 		author is 'Paulo Moura',
-		date is 2016/02/23,
+		date is 2016/03/05,
 		comment is 'Intercepts unit test execution messages and generates a xunit_report.xml file using the xUnit XML format.'
 	]).
 
@@ -61,7 +61,7 @@
 	generate_xml_report :-
 		message_cache_(running_tests_from_object_file(_, File)),
 		logtalk::loaded_file_property(File, directory(Directory)),
-		atom_concat(Directory, 'report.xml', ReportFile),
+		atom_concat(Directory, 'xunit_report.xml', ReportFile),
 		open(ReportFile, write, Stream),
 		generate_report(Stream),
 		close(Stream).
