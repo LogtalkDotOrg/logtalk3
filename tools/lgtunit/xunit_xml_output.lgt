@@ -24,7 +24,7 @@
 		version is 0.2,
 		author is 'Paulo Moura',
 		date is 2016/03/05,
-		comment is 'Intercepts unit test execution messages and generates a xunit_report.xml file using the xUnit XML format.'
+		comment is 'Intercepts unit test execution messages and outputs a report using the xUnit XML format to the current output stream.'
 	]).
 
 	:- private(message_cache_/1).
