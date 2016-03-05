@@ -84,6 +84,8 @@
 		foo(2, Foo),
 		{_X is xor(Foo, 3)}.
 
+	% auxiliary predicates used to delay errors to runtime
+
 	variable(_).
 
 	foo(0, foo).

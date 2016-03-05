@@ -87,6 +87,8 @@
 		foo(2, Foo),
 		{_X is atan2(Foo, 0)}.
 
+	% auxiliary predicates used to delay errors to runtime
+
 	variable(_).
 
 	foo(0, foo).

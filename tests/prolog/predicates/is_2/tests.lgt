@@ -365,6 +365,8 @@
 	succeeds(eclipse_is_2_73) :-
 		{X = log(9.9), _ is X + 1}.
 
+	% auxiliary predicates used to delay errors to runtime
+
 	variable(_).
 
 	foo(0, foo).

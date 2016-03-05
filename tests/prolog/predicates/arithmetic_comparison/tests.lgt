@@ -118,6 +118,8 @@
 		variable(X),
 		{'=<'(X, 5)}.
 
+	% auxiliary predicate used to delay errors to runtime
+
 	variable(_).
 
 :- end_object.

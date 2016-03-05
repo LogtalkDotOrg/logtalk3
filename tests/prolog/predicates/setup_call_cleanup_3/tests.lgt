@@ -103,7 +103,7 @@ test_error_choice :-
 		{catch(test_error_choice, E, true), findall(X, retract(v(X)), Xs)},
 		subsumes_term(E+Xs, x+[x(1,_,_)]), subsumes_term(x+[x(1,_,_)], E+Xs).
 
-	% auxiliary predicates
+	% auxiliary predicate used to delay errors to runtime
 
 	variable(_).
 

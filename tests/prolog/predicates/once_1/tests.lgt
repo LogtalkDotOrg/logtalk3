@@ -67,7 +67,7 @@
 		variable(X),
 		{once(X)}.
 
-	% auxiliary predicates
+	% auxiliary predicate used to delay errors to runtime
 
 	variable(_).
 

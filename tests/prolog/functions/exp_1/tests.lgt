@@ -72,6 +72,8 @@
 		foo(2, Foo),
 		{_X is exp(Foo)}.
 
+	% auxiliary predicates used to delay errors to runtime
+
 	variable(_).
 
 	foo(0, foo).

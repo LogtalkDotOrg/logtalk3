@@ -194,7 +194,7 @@ call_n_maplist(Cont, [E|Es]) :-
 		findall(X, {call(','(C=!), (X=1,C;X=2))}, L),
 		L == [1, 2].
 
-	% auxiliary predicates
+	% auxiliary predicate used to delay errors to runtime
 
 	variable(_).
 
