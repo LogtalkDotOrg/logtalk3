@@ -238,10 +238,10 @@ grep -a "Prolog version:" "$results"/tester_versions.txt | sed "s/Prolog/$prolog
 find "$base" -name "tester.lgt" -or -name "tester.logtalk" | while read file; do run_tests "$file"; done
 
 cd "$results"
-crashes=`grep -a 'crash' *.results | wc -l`
-skipped=`grep -a ': skipped' *.results | wc -l`
-passed=`grep -a ': success' *.results | wc -l`
-failed=`grep -a ': failure' *.results | wc -l`
+crashes=`grep -a 'crash' *.errors | wc -l | sed 's/ //g'`
+skipped=`grep -a ': skipped' *.results | wc -l | sed 's/ //g'`
+passed=`grep -a ': success' *.results | wc -l | sed 's/ //g'`
+failed=`grep -a ': failure' *.results | wc -l | sed 's/ //g'`
 total=$(($skipped+$passed+$failed))
 
 echo "*******************************************************************************"
@@ -267,6 +267,7 @@ echo "***** Failed tests"
 echo "*******************************************************************************"
 grep -a ': failure' *.results | LC_ALL=C sed 's/: failure//' | LC_ALL=C sed 's/.results:!     / - /' | LC_ALL=C sed 's|__|/|g'
 echo "*******************************************************************************"
+echo "***** $crashes test set crashes"
 echo "***** $total tests: $skipped skipped, $passed passed, $failed failed"
 echo "*******************************************************************************"
 
