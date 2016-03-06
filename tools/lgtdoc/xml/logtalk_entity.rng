@@ -389,6 +389,9 @@
 			<optional>
 				<ref name="exceptions"/>
 			</optional>
+			<optional>
+				<ref name="remarks"/>
+			</optional>
 			<zeroOrMore>
 				<ref name="info"/>
 			</zeroOrMore>

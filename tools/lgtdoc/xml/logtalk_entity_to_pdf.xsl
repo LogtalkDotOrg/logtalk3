@@ -9,7 +9,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for converting XML documenting files into PDF files
-%  Last updated on February 18, 2016
+%  Last updated on March 6, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -131,8 +131,7 @@
 		<fo:block
 				margin-left="10mm"
 				font-size="10pt"
-				font-family="serif" 
-				font-style="italic">
+				font-family="serif">
 			<xsl:value-of select="comment"/>
 		</fo:block>
 	</xsl:if>
@@ -536,7 +535,6 @@
 				margin-left="10mm"
 				font-size="10pt" 
 				font-family="serif" 
-				font-style="italic"
 				space-before="4pt" 
 				space-after="8pt">
 			<xsl:value-of select="comment"/>
@@ -660,6 +658,24 @@
 					margin-left="20mm">
 				<xsl:value-of select="term" />
 			</fo:block>
+		</xsl:for-each>
+	</xsl:if>
+
+	<xsl:if test="remarks">
+       	<fo:block
+				font-size="10pt"
+				font-family="serif" 
+				keep-with-next="always"
+				space-before="4pt">
+     		remarks:
+     	</fo:block>
+		<xsl:for-each select="remarks/remark">
+       		<fo:block
+					font-size="10pt"
+					font-family="serif"
+					margin-left="10mm">
+     			<xsl:value-of select="topic" />: <xsl:value-of select="text" />
+     		</fo:block>
 		</xsl:for-each>
 	</xsl:if>
 

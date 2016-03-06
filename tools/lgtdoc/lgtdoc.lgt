@@ -24,7 +24,7 @@
 	:- info([
 		version is 3.0,
 		author is 'Paulo Moura',
-		date is 2016/02/19,
+		date is 2016/03/06,
 		comment is 'Documenting tool.'
 	]).
 
@@ -470,7 +470,8 @@
 				(write_xml_open_tag(Stream, parameter, []),
 				 write_xml_cdata_element(Stream, name, [], Parname),
 				 write_xml_cdata_element(Stream, description, [], Description),
-				 write_xml_close_tag(Stream, parameter))),
+				 write_xml_close_tag(Stream, parameter))
+			),
 			write_xml_close_tag(Stream, parameters)
 		;	true
 		),
@@ -518,7 +519,8 @@
 			(write_xml_open_tag(Stream, info, []),
 			 write_xml_element(Stream, key, [], Key),
 			 write_xml_cdata_element(Stream, value, [], Value),
-			 write_xml_close_tag(Stream, info))).
+			 write_xml_close_tag(Stream, info))
+		).
 
 	% entity_name_to_xml_entity(+nonvar, -atom)
 	%
@@ -818,7 +820,8 @@
 			(write_xml_open_tag(Stream, (mode), []),
 			 write_xml_cdata_element(Stream, template, [], Template),
 			 write_xml_element(Stream, proofs, [], Proofs),
-			 write_xml_close_tag(Stream, (mode)))
+			 write_xml_close_tag(Stream, (mode))
+		)
 		),
 		(	member(info(Info), Properties) ->
 			write_xml_predicate_info(Stream, Entity, Functor, Arity, Info)
@@ -865,7 +868,8 @@
 				(write_xml_open_tag(Stream, argument, []),
 				 write_xml_cdata_element(Stream, name, [], Name),
 				 write_xml_cdata_element(Stream, description, [], Description),
-				 write_xml_close_tag(Stream, argument))),
+				 write_xml_close_tag(Stream, argument))
+			),
 			write_xml_close_tag(Stream, arguments)
 		;	true
 		),
@@ -881,18 +885,32 @@
 				(write_xml_open_tag(Stream, exception, []),
 				 write_xml_cdata_element(Stream, condition, [], Cond),
 				 write_xml_cdata_element(Stream, term, [], Term),
-				 write_xml_close_tag(Stream, exception))),
+				 write_xml_close_tag(Stream, exception))
+			),
 			write_xml_close_tag(Stream, exceptions)
+		;	true
+		),
+		(	member(remarks(Remarks), Info) ->
+			write_xml_open_tag(Stream, remarks, []),
+			forall(
+				member((Topic-Text), Remarks),
+				(write_xml_open_tag(Stream, remark, []),
+				 write_xml_cdata_element(Stream, topic, [], Topic),
+				 write_xml_cdata_element(Stream, text, [], Text),
+				 write_xml_close_tag(Stream, remark))
+			),
+			write_xml_close_tag(Stream, remarks)
 		;	true
 		),
 		forall(
 			(member(KeyValue, Info),
 			 KeyValue =.. [Key, Value],
-			 \+ member(Key, [comment, arguments, argnames, exceptions, examples])),
+			 \+ member(Key, [comment, arguments, argnames, exceptions, examples, remarks])),
 			(write_xml_open_tag(Stream, info, []),
 			 write_xml_element(Stream, key, [], Key),
 			 write_xml_cdata_element(Stream, value, [], Value),
-			 write_xml_close_tag(Stream, info))),
+			 write_xml_close_tag(Stream, info))
+		),
 		(	member(examples(Examples), Info) ->
 			write_xml_open_tag(Stream, examples, []),
 			forall(
@@ -902,7 +920,8 @@
 				 write_xml_cdata_element(Stream, description, [], Description),
 				 write_xml_cdata_element(Stream, call, [], QCall),
 				 write_xml_cdata_element(Stream, bindings, [], QBindings),
-				 write_xml_close_tag(Stream, example))),
+				 write_xml_close_tag(Stream, example))
+			),
 			write_xml_close_tag(Stream, examples)
 		;	true
 		).
@@ -1025,21 +1044,24 @@
 			(write_xml_open_tag(Stream, operator, []),
 			 write_xml_cdata_element(Stream, term, [], op(Priority, Specifier, Operator)),
 			 write_xml_cdata_element(Stream, scope, [], (public)),
-			 write_xml_close_tag(Stream, operator))),
+			 write_xml_close_tag(Stream, operator))
+		),
 		entity_property(Entity, protected(ProtectedResources)),
 		forall(
 			member(op(Priority, Specifier, Operator), ProtectedResources),
 			(write_xml_open_tag(Stream, operator, []),
 			 write_xml_cdata_element(Stream, term, [], op(Priority, Specifier, Operator)),
 			 write_xml_cdata_element(Stream, scope, [], protected),
-			 write_xml_close_tag(Stream, operator))),
+			 write_xml_close_tag(Stream, operator))
+		),
 		entity_property(Entity, private(PrivateResources)),
 		forall(
 			member(op(Priority, Specifier, Operator), PrivateResources),
 			(write_xml_open_tag(Stream, operator, []),
 			 write_xml_cdata_element(Stream, term, [], op(Priority, Specifier, Operator)),
 			 write_xml_cdata_element(Stream, scope, [], (private)),
-			 write_xml_close_tag(Stream, operator))),
+			 write_xml_close_tag(Stream, operator))
+		),
 		write_xml_close_tag(Stream, operators).
 
 	write_entity_xml_remarks(Stream, Entity) :-
@@ -1050,7 +1072,8 @@
 				(write_xml_open_tag(Stream, remark, []),
 				 write_xml_cdata_element(Stream, topic, [], Topic),
 				 write_xml_cdata_element(Stream, text, [], Text),
-				 write_xml_close_tag(Stream, remark)))
+				 write_xml_close_tag(Stream, remark))
+			)
 		;	true
 		),
 		write_xml_close_tag(Stream, remarks).

@@ -27,6 +27,12 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: A `info/2` documenting directive key, `remarks`, allowing grouping
+of general remarks about a predicate.
+
+* FIXED: The correcteness of `info/1` documenting directive `remarks` element
+were not checked.
+
 * FIXED: Bug in the `logtalk_load/2` built-in predicate when called with the
 `clean/1` option with a loader file where the option would be ignored.
 

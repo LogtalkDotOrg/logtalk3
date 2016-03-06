@@ -9310,6 +9310,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	functor(Entity, _, Arity),
 	'$lgt_check_entity_info_parnames'(Parnames, Parnames, 0, Arity).
 
+'$lgt_compile_entity_info_directive_pair'(remarks, Remarks, remarks(Remarks)) :-
+	!,
+	'$lgt_must_be'(list, Remarks),
+	(	'$lgt_member'(Remark, Remarks), \+ '$lgt_valid_remark'(Remark) ->
+		throw(type_error(remark, Remark))
+	;	true
+	).
+
 '$lgt_compile_entity_info_directive_pair'(version, Version, version(Version)) :-
 	!,
 	'$lgt_must_be'(atomic_or_string, Version).
@@ -9417,6 +9425,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_must_be'(list, Exceptions),
 	(	'$lgt_member'(Exception, Exceptions), \+ '$lgt_valid_predicate_exception'(Exception) ->
 		throw(type_error(exception, Exception))
+	;	true
+	).
+
+'$lgt_compile_predicate_info_directive_pair'(remarks, Remarks, _, _, remarks(Remarks)) :-
+	!,
+	'$lgt_must_be'(list, Remarks),
+	(	'$lgt_member'(Remark, Remarks), \+ '$lgt_valid_remark'(Remark) ->
+		throw(type_error(remark, Remark))
 	;	true
 	).
 
@@ -17600,6 +17616,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 		)
 	;	true
 	).
+
+
+
+% '$lgt_valid_remark'(@term)
+%
+% valid predicate remark documentation on info/1-2 directives
+
+'$lgt_valid_remark'(Topic - Text) :-
+	atom(Topic),
+	atom(Text).
 
 
 

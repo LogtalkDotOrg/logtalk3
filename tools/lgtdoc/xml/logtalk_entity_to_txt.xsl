@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for converting XML documenting files into text files
-%  Last updated on February 18, 2016
+%  Last updated on March 6, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -62,8 +62,10 @@
 
 <xsl:template match="/">
 	<xsl:value-of select="$hr1" />
-	<xsl:value-of select="logtalk_entity/entity/type" /><xsl:text>: </xsl:text><xsl:value-of select="logtalk_entity/entity/name" /><xsl:value-of select="$nl" />
+	<xsl:value-of select="logtalk_entity/entity/type" /><xsl:text>: </xsl:text><xsl:value-of select="logtalk_entity/entity/name" />
+	<xsl:value-of select="$nl" />
 	<xsl:if test="logtalk_entity/entity/comment">
+		<xsl:value-of select="$nl" />
 		<xsl:value-of select="$tab" /><xsl:value-of select="logtalk_entity/entity/comment" /><xsl:value-of select="$nl2" />
 	</xsl:if>
 	<xsl:if test="logtalk_entity/entity/parameters">
@@ -82,24 +84,26 @@
 
 <xsl:template match="logtalk_entity/entity">
 	<xsl:if test="author">
-		<xsl:value-of select="$tab" /><xsl:text>author: </xsl:text><xsl:value-of select="author" /><xsl:value-of select="$nl" />
+		<xsl:text>author: </xsl:text><xsl:value-of select="author" /><xsl:value-of select="$nl" />
 	</xsl:if>
 	<xsl:if test="version">
-		<xsl:value-of select="$tab" /><xsl:text>version: </xsl:text><xsl:value-of select="version" /><xsl:value-of select="$nl" />
+		<xsl:text>version: </xsl:text><xsl:value-of select="version" /><xsl:value-of select="$nl" />
 	</xsl:if>
 	<xsl:if test="date">
-		<xsl:value-of select="$tab" /><xsl:text>date: </xsl:text><xsl:value-of select="date" /><xsl:value-of select="$nl" />
+		<xsl:text>date: </xsl:text><xsl:value-of select="date" /><xsl:value-of select="$nl" />
 	</xsl:if>
 	<xsl:if test="copyright">
-		<xsl:value-of select="$tab" /><xsl:text>copyright: </xsl:text><xsl:value-of select="copyright" /><xsl:value-of select="$nl" />
+		<xsl:text>copyright: </xsl:text><xsl:value-of select="copyright" /><xsl:value-of select="$nl" />
 	</xsl:if>
 	<xsl:if test="license">
-		<xsl:value-of select="$tab" /><xsl:text>license: </xsl:text><xsl:value-of select="license" /><xsl:value-of select="$nl" />
+		<xsl:text>license: </xsl:text><xsl:value-of select="license" /><xsl:value-of select="$nl" />
 	</xsl:if>
-	<xsl:value-of select="$tab" /><xsl:text>compilation flags: </xsl:text><xsl:value-of select="compilation" /><xsl:value-of select="$nl" />
+	<xsl:value-of select="$nl" />
+	<xsl:text>compilation flags: </xsl:text><xsl:value-of select="compilation" /><xsl:value-of select="$nl" />
+	<xsl:value-of select="$nl" />
 	<xsl:if test="info">
 		<xsl:for-each select="info">
-			<xsl:value-of select="$tab" /><xsl:value-of select="key" /><xsl:text>: </xsl:text><xsl:value-of select="value" /><xsl:value-of select="$nl" />
+			<xsl:value-of select="key" /><xsl:text>: </xsl:text><xsl:value-of select="value" /><xsl:value-of select="$nl" />
 		</xsl:for-each>
 	</xsl:if>
 	<xsl:value-of select="$nl" />
@@ -223,9 +227,10 @@
 
 
 <xsl:template match="*/predicate">
-	<xsl:value-of select="name" /><xsl:value-of select="$nl" />
+	<xsl:value-of select="name" />
+	<xsl:value-of select="$nl2" />
 	<xsl:if test="comment">
-		<xsl:value-of select="$tab" /><xsl:value-of select="comment" /><xsl:value-of select="$nl" />
+		<xsl:value-of select="$tab" /><xsl:value-of select="comment" /><xsl:value-of select="$nl2" />
 	</xsl:if>
 	<xsl:text>compilation flags: </xsl:text><xsl:value-of select="$nl" />
 	<xsl:value-of select="$tab" /><xsl:value-of select="compilation" /><xsl:value-of select="$nl" />
@@ -256,6 +261,12 @@
 		<xsl:text>exceptions:</xsl:text><xsl:value-of select="$nl" />
 		<xsl:for-each select="exceptions/exception">
 			<xsl:value-of select="$tab" /><xsl:value-of select="condition" /><xsl:text>: </xsl:text><xsl:value-of select="term" /><xsl:value-of select="$nl" />
+		</xsl:for-each>
+	</xsl:if>
+	<xsl:if test="remarks">
+		<xsl:text>remarks:</xsl:text><xsl:value-of select="$nl" />
+		<xsl:for-each select="remarks/remark">
+			<xsl:value-of select="$tab" /><xsl:value-of select="topic" /><xsl:text>: </xsl:text><xsl:value-of select="text" /><xsl:value-of select="$nl" />
 		</xsl:for-each>
 	</xsl:if>
 	<xsl:if test="examples">
@@ -306,7 +317,7 @@
 </xsl:template>
 
 <xsl:template match="logtalk_entity/remarks/remark">
-	<xsl:value-of select="topic" /><xsl:text> </xsl:text><xsl:value-of select="text" /><xsl:value-of select="$nl2" />
+	<xsl:value-of select="topic" /><xsl:text>: </xsl:text><xsl:value-of select="text" /><xsl:value-of select="$nl2" />
 </xsl:template>
 
 

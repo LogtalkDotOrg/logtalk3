@@ -16,7 +16,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for converting XML documenting files into HTML files
-%  Last updated on February 18, 2016
+%  Last updated on March 6, 2016
 %
 %  This file is part of Logtalk <http://logtalk.org/>  
 %  Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -289,6 +289,12 @@
 		<dt class ="key">exceptions:</dt>
 		<xsl:for-each select="exceptions/exception">
 			<dd class ="value"><xsl:value-of select="condition" />: <code><xsl:value-of select="term" /></code></dd>
+		</xsl:for-each>
+		</xsl:if>
+		<xsl:if test="remarks">
+		<dt class ="key">remarks:</dt>
+		<xsl:for-each select="remarks/remark">
+			<dd class ="value"><xsl:value-of select="topic" />: <xsl:value-of select="text" /></dd>
 		</xsl:for-each>
 		</xsl:if>
 		<xsl:if test="examples">
