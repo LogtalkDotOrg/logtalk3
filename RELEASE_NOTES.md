@@ -113,10 +113,13 @@ for proper sub-libraries.
 Tests
 -----
 
-* ADDED: Tests for the validity of explicit property queries to entities.
-
-* UPDATED: The `logtalk_tester.sh` POSIX shell script now recurses into all
+* CHANGED: The `logtalk_tester.sh` POSIX shell script now recurses into all
 sub-directories of the current directory.
+
+* FIXED: The `logtalk_tester.sh` POSIX shell script now reports any crashes
+that occur when running a set of tests.
+
+* ADDED: Tests for the validity of explicit property queries to entities.
 
 Examples
 --------

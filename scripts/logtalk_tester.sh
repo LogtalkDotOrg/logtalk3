@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on March 4, 2016
+##   Last updated on March 6, 2016
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "`basename $0` 0.19"
+	echo "`basename $0` 0.20"
 	exit 0
 }
 
@@ -70,17 +70,24 @@ run_tests() {
 	name=$(echo "$unit"|sed 's|/|__|g')
 	if [ $mode == 'optimal' ] || [ $mode == 'all' ] ; then
 		$logtalk_call $tester_optimal_goal > "$results/$name.results" 2> "$results/$name.errors"
+		tests_exit=$?
 		grep -a 'tests:' "$results/$name.results" | LC_ALL=C sed 's/%/***** (opt)  /'
 	elif [ $mode == 'normal' ] || [ $mode == 'all' ] ; then
 		$logtalk_call $tester_normal_goal > "$results/$name.results" 2> "$results/$name.errors"
+		tests_exit=$?
 		grep -a 'tests:' "$results/$name.results" | LC_ALL=C sed 's/%/*****        /'
 	elif [ $mode == 'debug' ] || [ $mode == 'all' ] ; then
 		$logtalk_call $tester_debug_goal > "$results/$name.results" 2> "$results/$name.errors"
 		grep -a 'tests:' "$results/$name.results" | LC_ALL=C sed 's/%/***** (debug)/'
 	fi
-	grep -a 'out of' "$results/$name.results" | LC_ALL=C sed 's/%/*****        /'
-	grep -a 'no code coverage information collected' "$results/$name.results" | LC_ALL=C sed 's/%/*****        /'
-	grep -a '(not applicable)' "$results/$name.results" | LC_ALL=C sed 's/(/*****         (/'
+	if [ $tests_exit -eq 0 ] ; then
+		grep -a 'out of' "$results/$name.results" | LC_ALL=C sed 's/%/*****        /'
+		grep -a 'no code coverage information collected' "$results/$name.results" | LC_ALL=C sed 's/%/*****        /'
+		grep -a '(not applicable)' "$results/$name.results" | LC_ALL=C sed 's/(/*****         (/'
+	else
+		echo "*****         crash"
+		echo "crash" > "$results/$name.errors"
+	fi
 }
 
 usage_help()
@@ -231,6 +238,7 @@ grep -a "Prolog version:" "$results"/tester_versions.txt | sed "s/Prolog/$prolog
 find "$base" -name "tester.lgt" -or -name "tester.logtalk" | while read file; do run_tests "$file"; done
 
 cd "$results"
+crashes=`grep -a 'crash' *.results | wc -l`
 skipped=`grep -a ': skipped' *.results | wc -l`
 passed=`grep -a ': success' *.results | wc -l`
 failed=`grep -a ': failure' *.results | wc -l`
@@ -246,6 +254,10 @@ grep -a -h '!     ' *.errors | LC_ALL=C sed 's/.errors//' | tee -a errors.all
 grep -a -h '!     ' *.results | LC_ALL=C sed 's/.results//' | tee -a errors.all
 grep -a -h '*     ' *.errors | LC_ALL=C sed 's/.errors//' | tee -a errors.all
 grep -a -h '*     ' *.results | LC_ALL=C sed 's/.results//' | tee -a errors.all
+echo "*******************************************************************************"
+echo "***** Crashes"
+echo "*******************************************************************************"
+grep -a 'crash' *.errors | LC_ALL=C sed 's/crash//' | LC_ALL=C sed 's/.errors://' | LC_ALL=C sed 's|__|/|g'
 echo "*******************************************************************************"
 echo "***** Skipped tests"
 echo "*******************************************************************************"
@@ -263,7 +275,7 @@ date=`eval date \"+%Y-%m-%d %H:%M:%S\"`
 echo "***** Batch testing ended @ $date"
 echo '*******************************************************************************'
 
-if [ $failed -eq 0 ] ; then
+if [ $failed -eq 0 ] && [ $crashes -eq 0 ] ; then
 	exit 0
 else
 	exit 1
