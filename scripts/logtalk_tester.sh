@@ -227,10 +227,10 @@ rm -f "$results"/*.errors
 rm -f "$results"/errors.all
 rm -f "$results"/tester_versions.txt
 
-date=`eval date \"+%Y-%m-%d %H:%M:%S\"`
+start_date=`eval date \"+%Y-%m-%d %H:%M:%S\"`
 
 echo '*******************************************************************************'
-echo "***** Batch testing started @ $date"
+echo "***** Batch testing started @ $start_date"
 $logtalk_call $versions_goal > "$results"/tester_versions.txt 2> /dev/null
 grep -a "Logtalk version:" "$results"/tester_versions.txt
 grep -a "Prolog version:" "$results"/tester_versions.txt | sed "s/Prolog/$prolog/"
@@ -271,9 +271,9 @@ echo "***** $crashes test set crashes"
 echo "***** $total tests: $skipped skipped, $passed passed, $failed failed"
 echo "*******************************************************************************"
 
-date=`eval date \"+%Y-%m-%d %H:%M:%S\"`
+end_date=`eval date \"+%Y-%m-%d %H:%M:%S\"`
 
-echo "***** Batch testing ended @ $date"
+echo "***** Batch testing ended @ $end_date"
 echo '*******************************************************************************'
 
 if [ $failed -eq 0 ] && [ $crashes -eq 0 ] ; then
