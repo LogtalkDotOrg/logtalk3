@@ -59,7 +59,7 @@ The <a title="Consult reference manual" href="../refman/directives/threaded_0.ht
 </p>
 <pre>:- threaded.</pre>
 <p>
-This directive results in the automatic creation and set up an object message queue when the object is loaded or created at runtime. Object message queues are used for exchanging thread notifications and for storing concurrent goal solutions and replies to the <em>multi-threading calls</em> made within the object. The message queue for the pseudo-object <code>user</code> is automatically created when Logtalk is loaded (provided that multi-threading programming is supported and enabled for the chosen Prolog compiler).
+This directive results in the automatic creation and set up of an object message queue when the object is loaded or created at runtime. Object message queues are used for exchanging thread notifications and for storing concurrent goal solutions and replies to the <em>multi-threading calls</em> made within the object. The message queue for the pseudo-object <code>user</code> is automatically created at Logtalk startup (provided that multi-threading programming is supported and enabled for the chosen Prolog compiler).
 </p>
 
 <h2 id="threads_predicates">Multi-threading built-in predicates</h2>
@@ -74,7 +74,7 @@ Logtalk provides a small set of built-in predicates for multi-threading programm
 A set of goals may be proved concurrently by calling the Logtalk built-in predicate <a title="Consult reference manual" href="../refman/predicates/threaded_1.html"><code>threaded/1</code></a>. Each goal in the set runs in its own thread. 
 </p>
 <p>
-When the <code>threaded/1</code> predicate argument is a conjunction of goals, the predicate call is akin to <em>and-parallelism</em>. For example, assume that we want to find all the prime numbers in a given interval, <code>[N, M]</code>. We can split the interval in two parts and then span two threads to compute the primes numbers in each sub-interval:
+When the <code>threaded/1</code> predicate argument is a <em>conjunction</em> of goals, the predicate call is akin to <em>and-parallelism</em>. For example, assume that we want to find all the prime numbers in a given interval, <code>[N, M]</code>. We can split the interval in two parts and then span two threads to compute the primes numbers in each sub-interval:
 </p>
 <pre>prime_numbers(N, M, Primes) :-
     M &gt; N,
@@ -92,7 +92,7 @@ prime_numbers(N, M, Acc, Primes) :-
 The <code>threaded/1</code> call terminates when the two implicit threads terminate. In a computer with two or more processors (or with a processor with two or more cores) the code above can be expected to provide better computation times when compared with single-threaded code for sufficiently large intervals.
 </p>
 <p>
-When the <code>threaded/1</code> predicate argument is a disjunction of goals, the predicate call is akin to <em>or-parallelism</em>, here reinterpreted as a set of goal <em>competing</em> for providing a solution. For example, assume that we have several different methods to find the roots of real functions. Depending on the real function, some methods will faster than others. Some methods will converge into the solution while others may diverge and never find it. We can try all the methods at one by writing:
+When the <code>threaded/1</code> predicate argument is a <em>disjunction</em> of goals, the predicate call is akin to <em>or-parallelism</em>, here reinterpreted as a set of goals <em>competing</em> to find a solution. For example, consider the different methods that we can use to find the roots of real functions. Depending on the function, some methods will faster than others. Some methods will converge into the solution while others may diverge and never find it. We can try all the methods simultaneously by writing:
 </p>
 <pre>find_root(Function, A, B, Error, Zero, Algorithm) :-
     threaded((
@@ -102,7 +102,7 @@ When the <code>threaded/1</code> predicate argument is a disjunction of goals, t
     )).
 </pre>
 <p>
-The <code>threaded/1</code> call succeeds when one of the implicit threads succeeds in finding the function root, leading to the termination of all the remaining competing threads.
+The above <code>threaded/1</code> goal succeeds when one of the implicit threads succeeds in finding the function root, leading to the termination of all the remaining competing threads.
 </p>
 <p>
 The <code>threaded/1</code> built-in predicate is most useful for lengthy, independent deterministic computations where the computational costs of each goal outweigh the overhead of the implicit thread creation and management.
@@ -111,10 +111,10 @@ The <code>threaded/1</code> built-in predicate is most useful for lengthy, indep
 <h3 id="threads_call">Proving goals asynchronously using threads</h3>
 
 <p>
-A goal may be proved asynchronously using a new thread by calling the Logtalk built-in predicate <a title="Consult reference manual" href="../refman/predicates/threaded_call_1_2.html"><code>threaded_call/1</code></a>. Calls to this predicate are always true and return immediately (assuming a callable argument). The term representing the goal is copied, not shared with the thread.
+A goal may be proved asynchronously using a new thread by calling the Logtalk built-in predicate <a title="Consult reference manual" href="../refman/predicates/threaded_call_1_2.html"><code>threaded_call/1</code></a>. Calls to this predicate are always true and return immediately (assuming a callable argument). The term representing the goal is copied, not shared with the thread. The thread computes the first solution to the goal, posts it to the message queue of the object from where the <code>threaded_call/1</code> predicate was called, and suspends waiting for either a request for an alternative solution or for the program to commit to the current solution.
 </p>
 <p>
-The results of proving a goal asynchronously in a new thread may be later retrieved by calling the Logtalk built-in predicate <a title="Consult reference manual" href="../refman/predicates/threaded_exit_1_2.html"><code>threaded_exit/1</code></a> within the same object where the call to the <code>threaded_call/1</code> predicate was made. The <code>threaded_exit/1</code> calls block execution until the results of the <code>threaded_call/1</code> calls are sent back to the object message queue.
+The results of proving a goal asynchronously in a new thread may be later retrieved by calling the Logtalk built-in predicate <a title="Consult reference manual" href="../refman/predicates/threaded_exit_1_2.html"><code>threaded_exit/1</code></a> within the same object where the call to the <code>threaded_call/1</code> predicate was made. The <code>threaded_exit/1</code> calls suspend execution until the results of the <code>threaded_call/1</code> calls are sent back to the object message queue.
 </p>
 <p>
 The <code>threaded_exit/1</code> predicate allow us to retrieve alternative solutions through backtracking (if you want to commit to the first solution, you may use the <a title="Consult reference manual" href="../refman/predicates/threaded_once_1_2.html"><code>threaded_once/1</code></a> predicate instead of the <code>threaded_call/1</code> predicate). For example, assuming a <code>lists</code> object implementing the usual <code>member/2</code> predicate, we could write:
@@ -156,7 +156,7 @@ prime_numbers(N, M, Acc, Primes) :-
     ...
 </pre>
 <p>
-When using asynchronous calls, the link between a <code>threaded_exit/1</code> call and the corresponding <code>threaded_call/1</code> call is made using unification. If there are several <code>threaded_call/1</code> calls for a matching <code>threaded_exit/1</code> call, the connection can potentially be established with any of them. Nevertheless, you can easily use a tag the calls by using the extended <a title="Consult reference manual" href="../refman/predicates/threaded_call_1_2.html"><code>threaded_call/2</code></a> and <a title="Consult reference manual" href="../refman/predicates/threaded_exit_1_2.html"><code>threaded_exit/2</code></a> built-in predicates. For example:
+When using asynchronous calls, the link between a <code>threaded_exit/1</code> call and the corresponding <code>threaded_call/1</code> call is established using unification. If there are multiple <code>threaded_call/1</code> calls for a matching <code>threaded_exit/1</code> call, the connection can potentially be established with any of them. Nevertheless, you can easily use a tag the calls by using the extended <a title="Consult reference manual" href="../refman/predicates/threaded_call_1_2.html"><code>threaded_call/2</code></a> and <a title="Consult reference manual" href="../refman/predicates/threaded_exit_1_2.html"><code>threaded_exit/2</code></a> built-in predicates. For example:
 </p>
 <pre>
 ?- threaded_call(member(X, [1,2,3]), Tag).
@@ -185,7 +185,7 @@ When using these predicates, the tags shall be considered as an opaque term; use
 <p>
 Sometimes we want to prove a goal in a new thread without caring about the results. This may be accomplished by using the built-in predicate <a title="Consult reference manual" href="../refman/predicates/threaded_ignore_1.html"><code>threaded_ignore/1</code></a>. For example, assume that we are developing a multi-agent application where an agent may send an "happy birthday" message to another agent. We could write:
 </p>
-<pre>threaded_ignore(agent::happy_birthday), ...
+<pre>..., threaded_ignore(agent::happy_birthday), ...
 </pre>
 <p>
 The call succeeds with no reply of the goal success, failure, or even exception ever being sent back to the object making the call. Note that this predicate implicitly performs a deterministic call of its argument.
@@ -267,7 +267,7 @@ The performance of multi-threading applications is highly dependent on the back-
 <div class="footer">
 	<div class="copyright">
 		<span>Copyright &copy; <a href="mailto:pmoura@logtalk.org">Paulo Moura</a> &mdash; <a href="http://logtalk.org">Logtalk.org</a></span><br/>
-		<span>Last updated on: Octobers 9, 2014</span>
+		<span>Last updated on: March 8, 2016</span>
 	</div>
 	<div class="navbottom">
 		<span><a href="events.html">previous</a> | <a href="../glossary.html">glossary</a> | <a href="errors.html">next</a></span><br/>
