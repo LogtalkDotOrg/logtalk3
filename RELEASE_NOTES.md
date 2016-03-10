@@ -30,6 +30,10 @@ Tools
 * CHANGED: The `tap_output` object in the `lgtunit` tool no longer prints a
 dash between the test result and the test name.
 
+* UPDATED: The `logtalk_tester.sh` script to accept a format option to allow
+writing test result files in either TAP or xUnit XML formats for use with
+continuous integration servers.
+
 
 3.04.0 - March 7, 2016
 ======================

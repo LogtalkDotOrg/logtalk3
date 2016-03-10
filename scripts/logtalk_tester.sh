@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on March 6, 2016
+##   Last updated on March 10, 2016
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -49,6 +49,7 @@ prolog='YAP'
 logtalk=yaplgt$extension
 logtalk_call="$logtalk -g"
 mode='normal'
+format='default'
 
 versions_goal="logtalk_load(library(tester_versions)),halt"
 versions_goal_dot="logtalk_load(library(tester_versions)),halt."
@@ -62,6 +63,14 @@ tester_normal_goal_dot="logtalk_load(tester),halt."
 tester_debug_goal="set_logtalk_flag(debug,on),logtalk_load(tester),halt"
 tester_debug_goal_dot="set_logtalk_flag(debug,on),logtalk_load(tester),halt."
 
+format_default_goal="true"
+format_tap_output_goal="logtalk_load(lgtunit(tap_output))"
+format_tap_report_goal="logtalk_load(lgtunit(tap_report))"
+format_xunit_xml_output_goal="logtalk_load(lgtunit(xunit_xml_output))"
+format_xunit_xml_report_goal="logtalk_load(lgtunit(xunit_xml_report))"
+
+format_goal=$format_default_goal
+
 run_tests() {
 	unit=`dirname "$1"`
 	cd "$unit"
@@ -69,15 +78,15 @@ run_tests() {
 	echo "***** Testing $unit"
 	name=$(echo "$unit"|sed 's|/|__|g')
 	if [ $mode == 'optimal' ] || [ $mode == 'all' ] ; then
-		$logtalk_call $tester_optimal_goal > "$results/$name.results" 2> "$results/$name.errors"
+		$logtalk_call "$format_goal,$tester_optimal_goal" > "$results/$name.results" 2> "$results/$name.errors"
 		tests_exit=$?
 		grep -a 'tests:' "$results/$name.results" | LC_ALL=C sed 's/%/***** (opt)  /'
 	elif [ $mode == 'normal' ] || [ $mode == 'all' ] ; then
-		$logtalk_call $tester_normal_goal > "$results/$name.results" 2> "$results/$name.errors"
+		$logtalk_call "$format_goal,$tester_normal_goal" > "$results/$name.results" 2> "$results/$name.errors"
 		tests_exit=$?
 		grep -a 'tests:' "$results/$name.results" | LC_ALL=C sed 's/%/*****        /'
 	elif [ $mode == 'debug' ] || [ $mode == 'all' ] ; then
-		$logtalk_call $tester_debug_goal > "$results/$name.results" 2> "$results/$name.errors"
+		$logtalk_call "$format_goal,$tester_debug_goal" > "$results/$name.results" 2> "$results/$name.errors"
 		grep -a 'tests:' "$results/$name.results" | LC_ALL=C sed 's/%/***** (debug)/'
 	fi
 	if [ $tests_exit -eq 0 ] ; then
@@ -97,7 +106,7 @@ usage_help()
 	echo "of the directory containing this script."
 	echo
 	echo "Usage:"
-	echo "  `basename $0` [-p prolog] [-m mode] [-d results]"
+	echo "  `basename $0` [-p prolog] [-m mode] [-f format] [-d results]"
 	echo "  `basename $0` -v"
 	echo "  `basename $0` -h"
 	echo
@@ -107,18 +116,21 @@ usage_help()
 	echo "     (possible values are b, cx, eclipse, gnu, ji, lean, qp, sicstus, swi, xsb, xsbmt, and yap)"
 	echo "  -m compilation mode (default is $mode)"
 	echo "     (possible values are optimal, normal, debug, and all)"
+	echo "  -f format for writing the test results (default is $format)"
+	echo "     (possible values are default, tap_output, tap_report, xunit_xml_output, and xunit_xml_report)"
 	echo "  -d directory to store the test results (default is ./tester_results)"
 	echo "  -h help"
 	echo
 	exit 0
 }
 
-while getopts "vp:m:d:h" option
+while getopts "vp:m:f:d:h" option
 do
 	case $option in
 		v) print_version;;
 		p) p_arg="$OPTARG";;
 		m) m_arg="$OPTARG";;
+		f) f_arg="$OPTARG";;
 		d) d_arg="$OPTARG";;
 		h) usage_help;;
 		*) usage_help;;
@@ -217,6 +229,27 @@ elif [ "$m_arg" != "" ] ; then
 	exit 1
 fi
 
+if [ "$f_arg" == "default" ] ; then
+	format='default'
+	format_goal=$format_default_goal
+elif [ "$f_arg" == "tap_output" ] ; then
+	format='tap_output'
+	format_goal=$format_tap_output_goal
+elif [ "$f_arg" == "tap_report" ] ; then
+	format='tap_report'
+	format_goal=$format_tap_report_goal
+elif [ "$f_arg" == "xunit_xml_output" ] ; then
+	format='xunit_xml_output'
+	format_goal=$format_xunit_xml_output_goal
+elif [ "$f_arg" == "xunit_xml_report" ] ; then
+	format='xunit_xml_report'
+	format_goal=$format_xunit_xml_report_goal
+elif [ "$f_arg" != "" ] ; then
+	echo "Error! Unknow format: $f_arg"
+	usage_help
+	exit 1
+fi
+
 if [ "$d_arg" != "" ] ; then
 	results="$d_arg"
 fi
@@ -244,32 +277,36 @@ passed=`grep -a ': success' *.results | wc -l | sed 's/ //g'`
 failed=`grep -a ': failure' *.results | wc -l | sed 's/ //g'`
 total=$(($skipped+$passed+$failed))
 
-echo "*******************************************************************************"
-echo "***** Compilation errors/warnings and failed unit tests"
-echo "***** (compilation errors/warnings might be expected depending on the test)"
-echo "*******************************************************************************"
-grep -a -A2 'syntax_error' *.results | LC_ALL=C sed 's/.results//' | tee errors.all
-grep -a -A2 'syntax_error' *.errors | LC_ALL=C sed 's/.errors//' | tee -a errors.all
-grep -a -h '!     ' *.errors | LC_ALL=C sed 's/.errors//' | tee -a errors.all
-grep -a -h '!     ' *.results | LC_ALL=C sed 's/.results//' | tee -a errors.all
-grep -a -h '*     ' *.errors | LC_ALL=C sed 's/.errors//' | tee -a errors.all
-grep -a -h '*     ' *.results | LC_ALL=C sed 's/.results//' | tee -a errors.all
-echo "*******************************************************************************"
-echo "***** Crashes"
-echo "*******************************************************************************"
-grep -a 'crash' *.errors | LC_ALL=C sed 's/crash//' | LC_ALL=C sed 's/.errors://' | LC_ALL=C sed 's|__|/|g'
-echo "*******************************************************************************"
-echo "***** Skipped tests"
-echo "*******************************************************************************"
-grep -a ': skipped' *.results | LC_ALL=C sed 's/: skipped//' | LC_ALL=C sed 's/.results:% / - /' | LC_ALL=C sed 's|__|/|g'
-echo "*******************************************************************************"
-echo "***** Failed tests"
-echo "*******************************************************************************"
-grep -a ': failure' *.results | LC_ALL=C sed 's/: failure//' | LC_ALL=C sed 's/.results:!     / - /' | LC_ALL=C sed 's|__|/|g'
-echo "*******************************************************************************"
-echo "***** $crashes test set crashes"
-echo "***** $total tests: $skipped skipped, $passed passed, $failed failed"
-echo "*******************************************************************************"
+if [ format == "default" ] ; then
+	echo "*******************************************************************************"
+	echo "***** Compilation errors/warnings and failed unit tests"
+	echo "***** (compilation errors/warnings might be expected depending on the test)"
+	echo "*******************************************************************************"
+	grep -a -A2 'syntax_error' *.results | LC_ALL=C sed 's/.results//' | tee errors.all
+	grep -a -A2 'syntax_error' *.errors | LC_ALL=C sed 's/.errors//' | tee -a errors.all
+	grep -a -h '!     ' *.errors | LC_ALL=C sed 's/.errors//' | tee -a errors.all
+	grep -a -h '!     ' *.results | LC_ALL=C sed 's/.results//' | tee -a errors.all
+	grep -a -h '*     ' *.errors | LC_ALL=C sed 's/.errors//' | tee -a errors.all
+	grep -a -h '*     ' *.results | LC_ALL=C sed 's/.results//' | tee -a errors.all
+	echo "*******************************************************************************"
+	echo "***** Crashes"
+	echo "*******************************************************************************"
+	grep -a 'crash' *.errors | LC_ALL=C sed 's/crash//' | LC_ALL=C sed 's/.errors://' | LC_ALL=C sed 's|__|/|g'
+	echo "*******************************************************************************"
+	echo "***** Skipped tests"
+	echo "*******************************************************************************"
+	grep -a ': skipped' *.results | LC_ALL=C sed 's/: skipped//' | LC_ALL=C sed 's/.results:% / - /' | LC_ALL=C sed 's|__|/|g'
+	echo "*******************************************************************************"
+	echo "***** Failed tests"
+	echo "*******************************************************************************"
+	grep -a ': failure' *.results | LC_ALL=C sed 's/: failure//' | LC_ALL=C sed 's/.results:!     / - /' | LC_ALL=C sed 's|__|/|g'
+	echo "*******************************************************************************"
+	echo "***** $crashes test set crashes"
+	echo "***** $total tests: $skipped skipped, $passed passed, $failed failed"
+	echo "*******************************************************************************"
+else
+	echo "*******************************************************************************"
+fi
 
 end_date=`eval date \"+%Y-%m-%d %H:%M:%S\"`
 
