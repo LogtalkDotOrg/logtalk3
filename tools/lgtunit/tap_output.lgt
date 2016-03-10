@@ -21,9 +21,9 @@
 :- object(tap_output).
 
 	:- info([
-		version is 0.1,
+		version is 0.2,
 		author is 'Paulo Moura',
-		date is 2016/03/05,
+		date is 2016/03/10,
 		comment is 'Intercepts unit test execution messages and outputs a report using the TAP format to the current output stream.'
 	]).
 
@@ -61,7 +61,7 @@
 		nl.
 	% passed test
 	message_hook(passed_test(Test, _, _, Note)) :-
-		write('ok - '), write(Test),
+		write('ok '), write(Test),
 		(	Note == '' ->
 			true
 		;	write(' ('), write(Note), write(')')
@@ -69,7 +69,7 @@
 		nl.
 	% failed test
 	message_hook(failed_test(Test, _, _, Reason, Note)) :-
-		write('not ok - '), write(Test),
+		write('not ok '), write(Test),
 		(	Note == '' ->
 			true
 		;	write(' ('), write(Note), write(')')
@@ -78,7 +78,7 @@
 		write_failed_reason_message(Reason).
 	% skipped test
 	message_hook(skipped_test(Test, _, _, Note)) :-
-		write('ok - # skip '), write(Test),
+		write('ok # skip '), write(Test),
 		(	Note == '' ->
 			true
 		;	write(' ('), write(Note), write(')')

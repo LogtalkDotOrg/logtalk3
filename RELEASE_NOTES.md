@@ -24,6 +24,11 @@ RELEASE NOTES
 3.04.1 - March ??, 2016
 =======================
 
+Tools
+-----
+
+* CHANGED: The `tap_output` object in the `lgtunit` tool no longer prints a
+dash between the test result and the test name.
 
 
 3.04.0 - March 7, 2016
