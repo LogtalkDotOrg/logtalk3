@@ -277,7 +277,7 @@ passed=`grep -a ': success' *.results | wc -l | sed 's/ //g'`
 failed=`grep -a ': failure' *.results | wc -l | sed 's/ //g'`
 total=$(($skipped+$passed+$failed))
 
-if [ format == "default" ] ; then
+if [ $format == "default" ] ; then
 	echo "*******************************************************************************"
 	echo "***** Compilation errors/warnings and failed unit tests"
 	echo "***** (compilation errors/warnings might be expected depending on the test)"
