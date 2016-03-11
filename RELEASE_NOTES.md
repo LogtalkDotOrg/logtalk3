@@ -34,6 +34,10 @@ dash between the test result and the test name.
 writing test result files in either TAP or xUnit XML formats for use with
 continuous integration servers.
 
+* FIXED: Bug in the `lgtunit` tool when tests results are redirected using
+the `set_output/1` predicate and the a test uses the tool `set_text_output/1`
+and `check_text_output/1` predicates to check its output.
+
 
 3.04.0 - March 7, 2016
 ======================
