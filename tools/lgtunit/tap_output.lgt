@@ -21,9 +21,9 @@
 :- object(tap_output).
 
 	:- info([
-		version is 0.2,
+		version is 0.3,
 		author is 'Paulo Moura',
-		date is 2016/03/10,
+		date is 2016/03/11,
 		comment is 'Intercepts unit test execution messages and outputs a report using the TAP format to the current output stream.'
 	]).
 
@@ -86,42 +86,42 @@
 		nl.
 	% code coverage results
 	message_hook(covered_clause_numbers(_, _, Percentage)) :-
-		write(' ---'), nl,
-		write(' coverage: '), write(Percentage), write('%'), nl,
-		write(' ...'), nl, nl.
+		write('  ---'), nl,
+		write('  coverage: '), write(Percentage), write('%'), nl,
+		write('  ...'), nl, nl.
 	message_hook(no_code_coverage_information_collected) :-
-		write(' ---'), nl,
-		write(' coverage: n/a'), nl,
-		write(' ...'), nl, nl.
+		write('  ---'), nl,
+		write('  coverage: n/a'), nl,
+		write('  ...'), nl, nl.
 
 	write_failed_reason_message(Reason) :-
-		write(' ---'), nl,
+		write('  ---'), nl,
 		write_failed_reason_message_data(Reason),
-		write(' ...'), nl.
+		write('  ...'), nl.
 
 	write_failed_reason_message_data(success_instead_of_failure) :-
-		write(' message: "test goal succeeded but should have failed"'), nl.
+		write('  message: "test goal succeeded but should have failed"'), nl.
 	write_failed_reason_message_data(success_instead_of_error) :-
-		write(' message: "test goal succeeded but should have throw an error"'), nl.
+		write('  message: "test goal succeeded but should have throw an error"'), nl.
 	write_failed_reason_message_data(failure_instead_of_success) :-
-		write(' message: "test goal failed but should have succeeded"'), nl.
+		write('  message: "test goal failed but should have succeeded"'), nl.
 	write_failed_reason_message_data(failure_instead_of_error) :-
-		write(' message: "test goal failed but should have throw an error"'), nl.
+		write('  message: "test goal failed but should have throw an error"'), nl.
 	write_failed_reason_message_data(error_instead_of_failure(Error)) :-
-		write(' message: "test goal throws an error but should have failed"'), nl,
-		write(' got: '), pretty_print_term(Error), nl.
+		write('  message: "test goal throws an error but should have failed"'), nl,
+		write('  got: '), pretty_print_term(Error), nl.
 	write_failed_reason_message_data(error_instead_of_success(Error)) :-
-		write(' message: "test goal throws an error but should have succeeded"'), nl,
-		write(' got: '), pretty_print_term(Error), nl.
+		write('  message: "test goal throws an error but should have succeeded"'), nl,
+		write('  got: '), pretty_print_term(Error), nl.
 	write_failed_reason_message_data(wrong_error(ExpectedError, Error)) :-
-		write(' message: "test goal throws the wrong error"'), nl,
-		write(' got: '), pretty_print_term(Error), nl,
-		write(' expected: '), pretty_print_term(ExpectedError), nl.
+		write('  message: "test goal throws the wrong error"'), nl,
+		write('  got: '), pretty_print_term(Error), nl,
+		write('  expected: '), pretty_print_term(ExpectedError), nl.
 	write_failed_reason_message_data(step_error(Step, Error)) :-
-		write(' message: "'), write(Step), write(' goal throws an error but should have succeeded"'), nl,
-		write(' got: '), pretty_print_term(Error), nl.
+		write('  message: "'), write(Step), write(' goal throws an error but should have succeeded"'), nl,
+		write('  got: '), pretty_print_term(Error), nl.
 	write_failed_reason_message_data(step_failure(Step)) :-
-		write(' message: "'), write(Step), write(' goal failed but should have succeeded"'), nl.
+		write('  message: "'), write(Step), write(' goal failed but should have succeeded"'), nl.
 
 	pretty_print_term(Term) :-
 		\+ \+ (
