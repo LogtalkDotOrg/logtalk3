@@ -22,9 +22,9 @@
 	implements(lgtdocp)).
 
 	:- info([
-		version is 3.0,
+		version is 3.1,
 		author is 'Paulo Moura',
-		date is 2016/03/06,
+		date is 2016/03/11,
 		comment is 'Documenting tool.'
 	]).
 
@@ -36,28 +36,28 @@
 		argnames is ['Option', 'Value']
 	]).
 
-	:- private(directory_entity_/2).
-	:- dynamic(directory_entity_/2).
-	:- mode(directory_entity_(?atom, ?atom), zero_or_more).
-	:- info(directory_entity_/2, [
+	:- private(directory_entity_/4).
+	:- dynamic(directory_entity_/4).
+	:- mode(directory_entity_(?atom, ?nonvar, ?nonvar, ?atom), zero_or_more).
+	:- info(directory_entity_/4, [
 		comment is 'Table of documented entities per directory.',
-		argnames is ['Directory', 'Entity']
+		argnames is ['Directory', 'PrimarySortKey', 'SecondarySortKey', 'Entity']
 	]).
 
-	:- private(type_entity_/2).
-	:- dynamic(type_entity_/2).
-	:- mode(type_entity_(?atom, ?atom), zero_or_more).
-	:- info(type_entity_/2, [
+	:- private(type_entity_/4).
+	:- dynamic(type_entity_/4).
+	:- mode(type_entity_(?atom, ?nonvar, ?nonvar, ?atom), zero_or_more).
+	:- info(type_entity_/4, [
 		comment is 'Table of documented entities per type.',
-		argnames is ['Type', 'Entity']
+		argnames is ['Type', 'PrimarySortKey', 'SecondarySortKey', 'Entity']
 	]).
 
-	:- private(predicate_entity_/2).
-	:- dynamic(predicate_entity_/2).
-	:- mode(predicate_entity_(?predicate_indicator, ?entity_identifier), zero_or_more).
-	:- info(predicate_entity_/2, [
+	:- private(predicate_entity_/4).
+	:- dynamic(predicate_entity_/4).
+	:- mode(predicate_entity_(?predicate_indicator, ?nonvar, ?nonvar, ?entity_identifier), zero_or_more).
+	:- info(predicate_entity_/4, [
 		comment is 'Table of public predicates for all documented entities.',
-		argnames is ['Predicate', 'Entity']
+		argnames is ['Predicate', 'PrimarySortKey', 'SecondarySortKey', 'Entity']
 	]).
 
 	rlibrary(Library, UserOptions) :-
@@ -255,13 +255,14 @@
 		memberchk(omit_path_prefixes(Prefixes), Options),
 		entity_property(Entity, file(File, Path)),
 		\+ member(Entity, ExcludedEntities),
+		functor(Entity, Functor, _),
 		(	member(Prefix, Prefixes),
 			atom_concat(Prefix, Relative, Path) ->
-			assertz(directory_entity_(Relative, Entity))
-		;	assertz(directory_entity_(Path, Entity))
+			assertz(directory_entity_(Relative, Relative, Functor, Entity))
+		;	assertz(directory_entity_(Path, Path, Functor, Entity))
 		),
 		entity_type(Entity, Type),
-		assertz(type_entity_(Type, Entity)),
+		assertz(type_entity_(Type, Type, Functor, Entity)),
 		write_entity_doc(Entity, Options, StreamOptions),
 		fail.
 	process(_, _, _, _).
@@ -731,11 +732,13 @@
 		write_xml_open_tag(Stream, (public), []),
 		entity_property(Entity, public(Predicates)),
 		member(Functor/Arity, Predicates),
-		assertz(predicate_entity_(Functor/Arity, Entity)),
 		entity_property(Entity, declares(Functor/Arity, Properties)),
+		functor(Entity, EntityFunctor, _),
 		(	member(non_terminal(Functor//Args), Properties) ->
+			assertz(predicate_entity_(Functor//Args, Functor, EntityFunctor, Entity)),
 			write_xml_predicate(Stream, Entity, Functor//Args, Functor, Arity, (public))
-		;	write_xml_predicate(Stream, Entity, Functor/Arity, Functor, Arity, (public))
+		;	assertz(predicate_entity_(Functor/Arity, Functor, EntityFunctor, Entity)),
+			write_xml_predicate(Stream, Entity, Functor/Arity, Functor, Arity, (public))
 		),
 		fail.
 	write_xml_public_predicates(Stream, _) :-
@@ -1209,7 +1212,8 @@
 		once(kind_ref_doctype_xsd(index, XMLSRef, DocTypeURL, XSDURL)),
 		write_xml_header(XMLSRef, Encoding, XMLSpec, DocTypeURL, XSL, XSDURL, Stream),
 		write_xml_element(Stream, type, [], Type),
-		setof(Key, Entity^call(Functor, Key, Entity), Keys),
+		setof(PrimarySortKey-Key, SecondarySortKey^Entity^call(Functor, Key, PrimarySortKey, SecondarySortKey, Entity), SortedKeys),
+		sorted_keys_to_keys(SortedKeys, Keys),
 		write_xml_open_tag(Stream, entries, []),
 		write_index_keys(Keys, Functor, Stream),
 		write_xml_close_tag(Stream, entries),
@@ -1224,13 +1228,21 @@
 	kind_ref_doctype_xsd(index, web, logtalk_index-'http://logtalk.org/xml/4.0/logtalk_index.dtd', 'http://logtalk.org/xml/4.0/logtalk_index.xsd').
 	kind_ref_doctype_xsd(index, standalone, logtalk_index-none, none).
 
+	sorted_keys_to_keys([], []).
+	sorted_keys_to_keys([_-Key, _-Key| SortedKeys], Keys) :-
+		!,
+		sorted_keys_to_keys([_-Key| SortedKeys], Keys).
+	sorted_keys_to_keys([_-Key| SortedKeys], [Key| Keys]) :-
+		sorted_keys_to_keys(SortedKeys, Keys).
+
 	write_index_keys([], _, _).
 	write_index_keys([Key| Keys], Functor, Stream) :-
 		write_index_key(Key, Functor, Stream),
 		write_index_keys(Keys, Functor, Stream).
 
 	write_index_key(Key, Functor, Stream) :-
-		setof(Entity, call(Functor, Key, Entity), Entities),
+		setof(SecondarySortKey-Entity, PrimarySortKey^call(Functor, Key, PrimarySortKey, SecondarySortKey, Entity), SortedEntities),
+		sorted_keys_to_keys(SortedEntities, Entities),
 		write_xml_open_tag(Stream, entry, []),
 		write_xml_cdata_element(Stream, key, [], Key),
 		write_xml_open_tag(Stream, entities, []),
@@ -1335,9 +1347,9 @@
 
 	reset :-
 		retractall(option_(_, _)),
-		retractall(directory_entity_(_, _)),
-		retractall(type_entity_(_, _)),
-		retractall(predicate_entity_(_, _)).
+		retractall(directory_entity_(_, _, _, _)),
+		retractall(type_entity_(_, _, _, _)),
+		retractall(predicate_entity_(_, _, _, _)).
 
 	% we want to minimize any dependencies on other entities, including library objects
 

@@ -23,11 +23,11 @@
           </dd>
           <dt class="key">version:</dt>
           <dd class="value">
-            <code>3.0</code>
+            <code>3.1</code>
           </dd>
           <dt class="key">date:</dt>
           <dd class="value">
-            <code>2016/3/6</code>
+            <code>2016/3/11</code>
           </dd>
         </dl>
         <dl class="properties">
@@ -80,7 +80,7 @@
           </dl>
         </div>
         <div class="section">
-          <h3 id="directory_entity_/2" class="code">directory_entity_/2</h3>
+          <h3 id="directory_entity_/4" class="code">directory_entity_/4</h3>
           <blockquote>
             <p class="comment">Table of documented entities per directory.</p>
           </blockquote>
@@ -91,16 +91,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>directory_entity_(Directory,Entity)</code>
+              <code>directory_entity_(Directory,PrimarySortKey,SecondarySortKey,Entity)</code>
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
-              <code>directory_entity_(?atom,?atom) &ndash; zero_or_more</code>
+              <code>directory_entity_(?atom,?nonvar,?nonvar,?atom) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="type_entity_/2" class="code">type_entity_/2</h3>
+          <h3 id="type_entity_/4" class="code">type_entity_/4</h3>
           <blockquote>
             <p class="comment">Table of documented entities per type.</p>
           </blockquote>
@@ -111,16 +111,16 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>type_entity_(Type,Entity)</code>
+              <code>type_entity_(Type,PrimarySortKey,SecondarySortKey,Entity)</code>
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
-              <code>type_entity_(?atom,?atom) &ndash; zero_or_more</code>
+              <code>type_entity_(?atom,?nonvar,?nonvar,?atom) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
         <div class="section">
-          <h3 id="predicate_entity_/2" class="code">predicate_entity_/2</h3>
+          <h3 id="predicate_entity_/4" class="code">predicate_entity_/4</h3>
           <blockquote>
             <p class="comment">Table of public predicates for all documented entities.</p>
           </blockquote>
@@ -131,11 +131,11 @@
             </dd>
             <dt class="key">template:</dt>
             <dd class="value">
-              <code>predicate_entity_(Predicate,Entity)</code>
+              <code>predicate_entity_(Predicate,PrimarySortKey,SecondarySortKey,Entity)</code>
             </dd>
             <dt class="key">mode &ndash; number of proofs:</dt>
             <dd class="value">
-              <code>predicate_entity_(?predicate_indicator,?entity_identifier) &ndash; zero_or_more</code>
+              <code>predicate_entity_(?predicate_indicator,?nonvar,?nonvar,?entity_identifier) &ndash; zero_or_more</code>
             </dd>
           </dl>
         </div>
