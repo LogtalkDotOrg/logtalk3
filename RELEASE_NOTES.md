@@ -27,10 +27,14 @@ RELEASE NOTES
 Tools
 -----
 
+* CHANGED: The `lgtunit` objects `tap_report` and `xunit_xml_report`no longer
+redirect the standard output stream to prevent tests output to corrupt the
+contents of generated TAP and XML files.
+
 * CHANGED: The `tap_output` object in the `lgtunit` tool no longer prints a
 dash between the test result and the test name.
 
-* IMPROVED: The `logtalk_tester.sh` script now accepta a format option to
+* IMPROVED: The `logtalk_tester.sh` script now accepts a format option to
 allow writing test result files in either TAP or xUnit XML formats for use
 with continuous integration servers.
 

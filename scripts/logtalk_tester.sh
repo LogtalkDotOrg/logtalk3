@@ -25,7 +25,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "`basename $0` 0.30"
+	echo "`basename $0` 0.40"
 	exit 0
 }
 
@@ -271,36 +271,32 @@ passed=`grep -a ': success' *.results | wc -l | sed 's/ //g'`
 failed=`grep -a ': failure' *.results | wc -l | sed 's/ //g'`
 total=$(($skipped+$passed+$failed))
 
-if [ $format == "default" ] ; then
-	echo "*******************************************************************************"
-	echo "***** Compilation errors/warnings and failed unit tests"
-	echo "***** (compilation errors/warnings might be expected depending on the test)"
-	echo "*******************************************************************************"
-	grep -a -A2 'syntax_error' *.results | LC_ALL=C sed 's/.results//' | tee errors.all
-	grep -a -A2 'syntax_error' *.errors | LC_ALL=C sed 's/.errors//' | tee -a errors.all
-	grep -a -h '!     ' *.errors | LC_ALL=C sed 's/.errors//' | tee -a errors.all
-	grep -a -h '!     ' *.results | LC_ALL=C sed 's/.results//' | tee -a errors.all
-	grep -a -h '*     ' *.errors | LC_ALL=C sed 's/.errors//' | tee -a errors.all
-	grep -a -h '*     ' *.results | LC_ALL=C sed 's/.results//' | tee -a errors.all
-	echo "*******************************************************************************"
-	echo "***** Crashes"
-	echo "*******************************************************************************"
-	grep -a 'crash' *.errors | LC_ALL=C sed 's/crash//' | LC_ALL=C sed 's/.errors://' | LC_ALL=C sed 's|__|/|g'
-	echo "*******************************************************************************"
-	echo "***** Skipped tests"
-	echo "*******************************************************************************"
-	grep -a ': skipped' *.results | LC_ALL=C sed 's/: skipped//' | LC_ALL=C sed 's/.results:% / - /' | LC_ALL=C sed 's|__|/|g'
-	echo "*******************************************************************************"
-	echo "***** Failed tests"
-	echo "*******************************************************************************"
-	grep -a ': failure' *.results | LC_ALL=C sed 's/: failure//' | LC_ALL=C sed 's/.results:!     / - /' | LC_ALL=C sed 's|__|/|g'
-	echo "*******************************************************************************"
-	echo "***** $crashes test set crashes"
-	echo "***** $total tests: $skipped skipped, $passed passed, $failed failed"
-	echo "*******************************************************************************"
-else
-	echo "*******************************************************************************"
-fi
+echo "*******************************************************************************"
+echo "***** Compilation errors/warnings and failed unit tests"
+echo "***** (compilation errors/warnings might be expected depending on the test)"
+echo "*******************************************************************************"
+grep -a -A2 'syntax_error' *.results | LC_ALL=C sed 's/.results//' | tee errors.all
+grep -a -A2 'syntax_error' *.errors | LC_ALL=C sed 's/.errors//' | tee -a errors.all
+grep -a -h '!     ' *.errors | LC_ALL=C sed 's/.errors//' | tee -a errors.all
+grep -a -h '!     ' *.results | LC_ALL=C sed 's/.results//' | tee -a errors.all
+grep -a -h '*     ' *.errors | LC_ALL=C sed 's/.errors//' | tee -a errors.all
+grep -a -h '*     ' *.results | LC_ALL=C sed 's/.results//' | tee -a errors.all
+echo "*******************************************************************************"
+echo "***** Crashes"
+echo "*******************************************************************************"
+grep -a 'crash' *.errors | LC_ALL=C sed 's/crash//' | LC_ALL=C sed 's/.errors://' | LC_ALL=C sed 's|__|/|g'
+echo "*******************************************************************************"
+echo "***** Skipped tests"
+echo "*******************************************************************************"
+grep -a ': skipped' *.results | LC_ALL=C sed 's/: skipped//' | LC_ALL=C sed 's/.results:% / - /' | LC_ALL=C sed 's|__|/|g'
+echo "*******************************************************************************"
+echo "***** Failed tests"
+echo "*******************************************************************************"
+grep -a ': failure' *.results | LC_ALL=C sed 's/: failure//' | LC_ALL=C sed 's/.results:!     / - /' | LC_ALL=C sed 's|__|/|g'
+echo "*******************************************************************************"
+echo "***** $crashes test set crashes"
+echo "***** $total tests: $skipped skipped, $passed passed, $failed failed"
+echo "*******************************************************************************"
 
 end_date=`eval date \"+%Y-%m-%d %H:%M:%S\"`
 
