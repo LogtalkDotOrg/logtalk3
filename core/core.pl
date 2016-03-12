@@ -1873,7 +1873,6 @@ threaded_notify(Message) :-
 	throw(error(resource_error(threads), logtalk(threaded_notify(Message), _))).
 
 threaded_notify(Message) :-
-	'$lgt_must_be'(nonvar, Message, logtalk(threaded_notify(Message), _)),
 	'$lgt_current_object_'(user, Prefix, _, _, _, _, _, _, _, _, _),
 	'$lgt_threaded_notify'(Message, Prefix).
 

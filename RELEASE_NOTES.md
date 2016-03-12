@@ -24,6 +24,12 @@ RELEASE NOTES
 3.04.1 - March ??, 2016
 =======================
 
+Logtalk compiler and runtime
+----------------------------
+
+FIXED: Calls to the `threaded_notify/1` built-in predicate from within the
+`user` pseudo-object must not require a bound argument as per documentation.
+
 Tools
 -----
 
