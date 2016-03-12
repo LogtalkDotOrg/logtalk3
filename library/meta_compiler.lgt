@@ -524,9 +524,7 @@
 		length(Parameters, MetaArity),
 		gensym('lambda_', Functor),
 		Head =.. [Functor| Parameters],
-		writeq(logtalk::compile_aux_clauses([(Head :- Goal)])), nl,
-		logtalk::compile_aux_clauses([(Head :- Goal)]),
-		writeq(logtalk::compile_aux_clauses([(Head :- Goal)])), nl.
+		logtalk::compile_aux_clauses([(Head :- Goal)]).
 	decompose_closure(Object::Closure, MetaArity, Object::Functor, Arity, Args, GArgs) :-
 		!,
 		nonvar(Closure),
