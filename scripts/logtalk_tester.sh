@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on March 10, 2016
+##   Last updated on March 12, 2016
 ## 
 ##   This file is part of Logtalk <http://logtalk.org/>  
 ##   Copyright 1998-2016 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "`basename $0` 0.20"
+	echo "`basename $0` 0.30"
 	exit 0
 }
 
@@ -41,15 +41,7 @@ else
 	extension=''
 fi
 
-# default argument values
-base="$PWD"
-results="$base/tester_results"
-backend=yap
-prolog='YAP'
-logtalk=yaplgt$extension
-logtalk_call="$logtalk -g"
-mode='normal'
-format='default'
+# testing goals
 
 versions_goal="logtalk_load(library(tester_versions)),halt"
 versions_goal_dot="logtalk_load(library(tester_versions)),halt."
@@ -64,11 +56,19 @@ tester_debug_goal="set_logtalk_flag(debug,on),logtalk_load(tester),halt"
 tester_debug_goal_dot="set_logtalk_flag(debug,on),logtalk_load(tester),halt."
 
 format_default_goal="true"
-format_tap_output_goal="logtalk_load(lgtunit(tap_output))"
-format_tap_report_goal="logtalk_load(lgtunit(tap_report))"
-format_xunit_xml_output_goal="logtalk_load(lgtunit(xunit_xml_output))"
-format_xunit_xml_report_goal="logtalk_load(lgtunit(xunit_xml_report))"
+format_tap_goal="logtalk_load(lgtunit(tap_report))"
+format_xunit_goal="logtalk_load(lgtunit(xunit_xml_report))"
 
+# default argument values
+
+base="$PWD"
+results="$base/logtalk_tester_logs"
+backend=yap
+prolog='YAP'
+logtalk=yaplgt$extension
+logtalk_call="$logtalk -g"
+mode='normal'
+format='default'
 format_goal=$format_default_goal
 
 run_tests() {
@@ -117,8 +117,8 @@ usage_help()
 	echo "  -m compilation mode (default is $mode)"
 	echo "     (possible values are optimal, normal, debug, and all)"
 	echo "  -f format for writing the test results (default is $format)"
-	echo "     (possible values are default, tap_output, tap_report, xunit_xml_output, and xunit_xml_report)"
-	echo "  -d directory to store the test results (default is ./tester_results)"
+	echo "     (possible values are default, tap, and xunit)"
+	echo "  -d directory to store the test logs (default is ./logtalk_tester_logs)"
 	echo "  -h help"
 	echo
 	exit 0
@@ -232,18 +232,12 @@ fi
 if [ "$f_arg" == "default" ] ; then
 	format='default'
 	format_goal=$format_default_goal
-elif [ "$f_arg" == "tap_output" ] ; then
-	format='tap_output'
-	format_goal=$format_tap_output_goal
-elif [ "$f_arg" == "tap_report" ] ; then
-	format='tap_report'
-	format_goal=$format_tap_report_goal
-elif [ "$f_arg" == "xunit_xml_output" ] ; then
-	format='xunit_xml_output'
-	format_goal=$format_xunit_xml_output_goal
-elif [ "$f_arg" == "xunit_xml_report" ] ; then
+elif [ "$f_arg" == "tap" ] ; then
+	format='tap'
+	format_goal=$format_tap_goal
+elif [ "$f_arg" == "xunit" ] ; then
 	format='xunit_xml_report'
-	format_goal=$format_xunit_xml_report_goal
+	format_goal=$format_xunit_goal
 elif [ "$f_arg" != "" ] ; then
 	echo "Error! Unknow format: $f_arg"
 	usage_help

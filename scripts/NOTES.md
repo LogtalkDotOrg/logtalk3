@@ -57,9 +57,11 @@ using the `apropos logtalk` command.
 	shell script for automating running unit tests e.g. in the `examples` and
 	`tests` directories; it recurses through all sub-directories of the current
 	directory looking for either `tester.lgt` or `tester.logtalk` files;
-	besides test results, this script also reports compilation warnings and
-	errors (please note that, depending on the tests and on the compilation
-	mode, these warnings and errors might be expected);
+	in its default output format, it reports, besides test results, compilation
+	warnings and errors (please note that, depending on the tests and on the
+	compilation mode, these warnings and errors might be expected);
+	it can also write test results in the TAP and xUnit formats, generating files
+	that can then be processed by continuous integration servers; 
 	know issue: the output of some of the multi-threading examples may interfere
 	with the computation of the test/skipped/passed/failed totals;
 	you can use this script on Windows operating-systems by installing Git for
