@@ -25,7 +25,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "`basename $0` 0.40"
+	echo "`basename $0` 0.50"
 	exit 0
 }
 
@@ -57,7 +57,7 @@ tester_debug_goal_dot="set_logtalk_flag(debug,on),logtalk_load(tester),halt."
 
 format_default_goal="true"
 format_tap_goal="logtalk_load(lgtunit(tap_report))"
-format_xunit_goal="logtalk_load(lgtunit(xunit_xml_report))"
+format_xunit_goal="logtalk_load(lgtunit(xunit_report))"
 
 # default argument values
 
@@ -236,7 +236,7 @@ elif [ "$f_arg" == "tap" ] ; then
 	format='tap'
 	format_goal=$format_tap_goal
 elif [ "$f_arg" == "xunit" ] ; then
-	format='xunit_xml_report'
+	format='xunit'
 	format_goal=$format_xunit_goal
 elif [ "$f_arg" != "" ] ; then
 	echo "Error! Unknow format: $f_arg"

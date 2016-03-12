@@ -18,10 +18,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(xunit_xml_report).
+:- object(xunit_report).
 
 	:- info([
-		version is 0.3,
+		version is 0.4,
 		author is 'Paulo Moura',
 		date is 2016/03/12,
 		comment is 'Intercepts unit test execution messages and generates a xunit_report.xml file using the xUnit XML format in the same directory as the tests object file.'
@@ -124,7 +124,8 @@
 		write_xml_close_tag(testcase).
 	write_testcase_element_tags(skipped_test(_Test, _File, _Position, _Note), ClassName, Name, Time) :-
 		write_xml_open_tag(testcase, [classname-ClassName,name-Name,time-Time]),
-		write_xml_empty_tag(skipped, []).
+		write_xml_empty_tag(skipped, []),
+		write_xml_close_tag(testcase).
 
 	% "testsuites" tag attributes
 

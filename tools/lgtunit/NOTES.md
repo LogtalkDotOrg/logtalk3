@@ -330,12 +330,12 @@ Exporting unit test results in xUnit XML format
 -----------------------------------------------
 
 To output test results in the xUnit XML format, simply load the
-`xunit_xml_output.lgt` file before running the tests. This file defines
-an object, `xunit_xml_output`, that intercepts and replaces unit test
+`xunit_output.lgt` file before running the tests. This file defines
+an object, `xunit_output`, that intercepts and replaces unit test
 execution messages, converting them to the xUnit XML format.
 
 To write the test results to a file using the xUnit XML format, simply
-load the `xunit_xml_report.lgt` file before running the tests. A file
+load the `xunit_report.lgt` file before running the tests. A file
 named `xunit_report.xml` will be created in the same directory as the
 object defining the tests.
 
