@@ -44,6 +44,12 @@ and `check_text_output/1` predicates to check its output.
 * FIXED: Bug in the `lgtdoc` tool when displaying and linking to public
 non-terminals.
 
+Tests
+-----
+
+* ADDED: Unit tests for the `iso8601` library contribution taken from its
+documentation examples.
+
 
 3.04.0 - March 7, 2016
 ======================
