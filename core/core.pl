@@ -373,8 +373,8 @@
 :- dynamic('$lgt_pp_missing_dynamic_directive_'/2).
 % '$lgt_pp_missing_discontiguous_directive_'(Head, Lines)
 :- dynamic('$lgt_pp_missing_discontiguous_directive_'/2).
-% '$lgt_pp_previous_predicate_'(Head)
-:- dynamic('$lgt_pp_previous_predicate_'/1).
+% '$lgt_pp_previous_predicate_'(Head, Mode)
+:- dynamic('$lgt_pp_previous_predicate_'/2).
 
 % '$lgt_pp_defines_non_terminal_'(Functor, Arity)
 :- dynamic('$lgt_pp_defines_non_terminal_'/2).
@@ -6790,7 +6790,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_non_portable_function_'(_, _)),
 	retractall('$lgt_pp_missing_dynamic_directive_'(_, _)),
 	retractall('$lgt_pp_missing_discontiguous_directive_'(_, _)),
-	retractall('$lgt_pp_previous_predicate_'(_)),
+	retractall('$lgt_pp_previous_predicate_'(_, _)),
 	retractall('$lgt_pp_defines_non_terminal_'(_, _)),
 	retractall('$lgt_pp_calls_non_terminal_'(_, _, _)),
 	retractall('$lgt_pp_referenced_object_'(_, _)),
@@ -9712,7 +9712,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_defines_predicate_'(Head, Functor/Arity, ExCtx, THead, _, user),
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	(	'$lgt_pp_previous_predicate_'(Head) ->
+	(	'$lgt_pp_previous_predicate_'(Head, user) ->
 		true
 	;	% clauses for the predicate are discontiguous
 		'$lgt_check_discontiguous_directive'(Head, Ctx)
@@ -12209,11 +12209,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	'$lgt_pp_missing_discontiguous_directive_'(Head, _) ->
 		% discontiguous directive missing already recorded
 		true
-	;	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(_), _, Lines) ->
-		% compiling a source file; record missing discontiguous directive
+	;	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, compile(user), _, Lines) ->
+		% compiling a source file clause; record missing discontiguous directive
 		'$lgt_term_template'(Head, Template),
 		assertz('$lgt_pp_missing_discontiguous_directive_'(Template, Lines))
-	;	% runtime compilation
+	;	% runtime compilation or compiling an auxiliary predicate clause
 		true
 	).
 
@@ -14214,11 +14214,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_remember_defined_predicate'(Head, PI, ExCtx, THead, Mode) :-
 	(	Mode == compile(aux) ->
-		assertz('$lgt_pp_defines_predicate_'(Head, PI, ExCtx, THead, Mode, aux))
-	;	assertz('$lgt_pp_defines_predicate_'(Head, PI, ExCtx, THead, Mode, user))
-	),
-	retractall('$lgt_pp_previous_predicate_'(_)),
-	assertz('$lgt_pp_previous_predicate_'(Head)).
+		assertz('$lgt_pp_defines_predicate_'(Head, PI, ExCtx, THead, Mode, aux)),
+		retractall('$lgt_pp_previous_predicate_'(_, aux)),
+		assertz('$lgt_pp_previous_predicate_'(Head, aux))
+	;	assertz('$lgt_pp_defines_predicate_'(Head, PI, ExCtx, THead, Mode, user)),
+		retractall('$lgt_pp_previous_predicate_'(_, user)),
+		assertz('$lgt_pp_previous_predicate_'(Head, user))
+	).
 
 
 

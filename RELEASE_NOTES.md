@@ -27,7 +27,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-FIXED: Calls to the `threaded_notify/1` built-in predicate from within the
+* FIXED: Compiler bug where a predicate that is term-expanded by calling the
+`compile_aux_clauses/1` method could be misreported as discontiguous.
+
+* FIXED: Calls to the `threaded_notify/1` built-in predicate from within the
 `user` pseudo-object must not require a bound argument as per documentation.
 
 Tools
